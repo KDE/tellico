@@ -35,6 +35,8 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testFightClub();
+  void testCatan();
+  void test1632();
 };
 
 #endif

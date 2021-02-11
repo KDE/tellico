@@ -871,6 +871,7 @@ TARGET_LINK_LIBRARIES(tvmazefetchertest fetcherstest translatorstest ${TELLICO_T
 
 add_executable(upcitemdbfetchertest upcitemdbfetchertest.cpp abstractfetchertest.cpp
   ../fetch/upcitemdbfetcher.cpp
+  ../translators/bibteximporter.cpp
 )
 ecm_mark_nongui_executable(upcitemdbfetchertest)
 add_test(upcitemdbfetchertest upcitemdbfetchertest)

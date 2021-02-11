@@ -25,7 +25,10 @@
 #include "upcitemdbfetchertest.h"
 
 #include "../fetch/upcitemdbfetcher.h"
+#include "../collectionfactory.h"
+#include "../collections/bookcollection.h"
 #include "../collections/videocollection.h"
+#include "../collections/boardgamecollection.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
@@ -40,6 +43,9 @@ UPCItemDbFetcherTest::UPCItemDbFetcherTest() : AbstractFetcherTest() {
 }
 
 void UPCItemDbFetcherTest::initTestCase() {
+  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
+  Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
+  Tellico::RegisterCollection<Tellico::Data::BoardGameCollection> registerBoardGame(Tellico::Data::Collection::BoardGame, "boardgame");
   Tellico::ImageFactory::init();
 }
 
@@ -61,9 +67,50 @@ void UPCItemDbFetcherTest::testFightClub() {
 
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Fight Club"));
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1999"));
+  QCOMPARE(entry->field(QStringLiteral("barcode")), QStringLiteral("024543617907"));
   QCOMPARE(entry->field(QStringLiteral("medium")), QStringLiteral("Blu-ray"));
   QCOMPARE(entry->field(QStringLiteral("studio")), QStringLiteral("20th Century Studios"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
+}
+
+void UPCItemDbFetcherTest::testCatan() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::BoardGame, Tellico::Fetch::UPC,
+                                       QStringLiteral("029877030712"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::UPCItemDbFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Settlers of Catan Board Game"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Catan Studio"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+}
+
+void UPCItemDbFetcherTest::test1632() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
+                                       QStringLiteral("0671319728"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::UPCItemDbFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("1632 - (Ring of Fire) by Eric Flint"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("9780671319724"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Baen"));
+  QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("Paperback"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+//  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
 }

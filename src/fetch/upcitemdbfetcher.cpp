@@ -23,12 +23,13 @@
  ***************************************************************************/
 
 #include "upcitemdbfetcher.h"
-#include "../collections/videocollection.h"
+#include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 #include "../gui/combobox.h"
 #include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
+#include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -69,11 +70,13 @@ QString UPCItemDbFetcher::source() const {
 }
 
 bool UPCItemDbFetcher::canSearch(FetchKey k) const {
-  return k == UPC;
+  return k == UPC || k == ISBN;
 }
 
 bool UPCItemDbFetcher::canFetch(int type) const {
-  return type == Data::Collection::Video;
+  return type == Data::Collection::Video ||
+         type == Data::Collection::Book ||
+         type == Data::Collection::BoardGame;
 }
 
 void UPCItemDbFetcher::readConfigHook(const KConfigGroup& config_) {
@@ -93,16 +96,23 @@ void UPCItemDbFetcher::continueSearch() {
 
 
   QUrl u(QString::fromLatin1(UPCITEMDB_API_URL));
-
+  u = u.adjusted(QUrl::StripTrailingSlash);
+  u.setPath(u.path() + QLatin1String("/lookup"));
+  QUrlQuery q;
   switch(request().key) {
-    case UPC:
-      u = u.adjusted(QUrl::StripTrailingSlash);
-      u.setPath(u.path() + QLatin1String("/lookup"));
+    case ISBN:
+      // do a upc search by 13-digit isbn
       {
-        QUrlQuery q;
-        q.addQueryItem(QStringLiteral("upc"), request().value);
-        u.setQuery(q);
+        // only grab first value
+        QString isbn = request().value.section(QLatin1Char(';'), 0);
+        isbn = ISBNValidator::isbn13(isbn);
+        isbn.remove(QLatin1Char('-'));
+        q.addQueryItem(QStringLiteral("upc"), isbn);
       }
+      break;
+
+    case UPC:
+      q.addQueryItem(QStringLiteral("upc"), request().value);
       break;
 
     default:
@@ -110,6 +120,7 @@ void UPCItemDbFetcher::continueSearch() {
       stop();
       return;
   }
+  u.setQuery(q);
 
 //  myDebug() << u;
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -180,7 +191,12 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  Data::CollPtr coll(new Data::VideoCollection(true));
+  Data::CollPtr coll = CollectionFactory::collection(collectionType(), true);
+  if(!coll) {
+    stop();
+    return;
+  }
+
   if(optionalFields().contains(QStringLiteral("barcode"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("barcode"), i18n("Barcode")));
     field->setCategory(i18n("General"));
@@ -240,16 +256,34 @@ void UPCItemDbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
 //  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "premiered").left(4));
   const QString barcode = QStringLiteral("barcode");
   if(optionalFields().contains(barcode)) {
-    entry_->setField(barcode, mapValue(resultMap_, "ean"));
+    entry_->setField(barcode, mapValue(resultMap_, "upc"));
   }
 
-  entry_->setField(QStringLiteral("studio"), mapValue(resultMap_, "brand"));
   // take the first cover
   const auto imageList = resultMap_.value(QLatin1String("images")).toList();
   if(!imageList.isEmpty()) {
     entry_->setField(QStringLiteral("cover"), imageList.first().toString());
   }
-  entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "description"));
+
+  switch(collectionType()) {
+    case Data::Collection::Video:
+      entry_->setField(QStringLiteral("studio"), mapValue(resultMap_, "brand"));
+      entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "description"));
+      break;
+
+    case Data::Collection::Book:
+      entry_->setField(QStringLiteral("publisher"), mapValue(resultMap_, "publisher"));
+      entry_->setField(QStringLiteral("isbn"), mapValue(resultMap_, "isbn"));
+      break;
+
+    case Data::Collection::BoardGame:
+      entry_->setField(QStringLiteral("publisher"), mapValue(resultMap_, "brand"));
+      entry_->setField(QStringLiteral("description"), mapValue(resultMap_, "description"));
+      break;
+
+    default:
+      break;
+  }
 
   // do this after all other parsing
   parseTitle(entry_);
@@ -272,7 +306,7 @@ void UPCItemDbFetcher::parseTitle(Tellico::Data::EntryPtr entry_) {
   entry_->setField(QStringLiteral("title"), title.simplified());
 }
 
-// taken from amazonfetcher
+// mostly taken from amazonfetcher
 bool UPCItemDbFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QString& token_) {
 //  myDebug() << "title token:" << token_;
   // if res = true, then the token gets removed from the title
@@ -331,6 +365,15 @@ bool UPCItemDbFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QSt
   if(entry_->collection()->type() == Data::Collection::Game) {
     Data::FieldPtr f = entry_->collection()->fieldByName(QStringLiteral("platform"));
     if(f && f->allowed().contains(token_)) {
+      res = true;
+    }
+  } else if(entry_->collection()->type() == Data::Collection::Book) {
+    // TODO: look for regexp "by author" ?
+    const QString binding = QStringLiteral("binding");
+    Data::FieldPtr f = entry_->collection()->fieldByName(binding);
+    const QString maybe = i18n(token_.toUtf8().constData());
+    if(f && f->allowed().contains(maybe)) {
+      entry_->setField(binding, maybe);
       res = true;
     }
   }
