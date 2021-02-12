@@ -112,14 +112,14 @@ private Q_SLOTS:
   void slotReloadEntry();
 
 protected:
-  void changeEvent(QEvent* event);
+  void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
   void slotPrint();
 
 private:
   void resetColors();
-  void contextMenuEvent(QContextMenuEvent* event);
+  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
 
   Data::EntryPtr m_entry;
   XSLTHandler* m_handler;

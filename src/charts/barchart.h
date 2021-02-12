@@ -30,15 +30,12 @@
 namespace Tellico {
 
 /**
- * The ChartReport class is a widget showing one or more charts as a report.
- *
  * @author Robby Stephenson
  */
 class BarChart : public QtCharts::QChart {
 
 public:
   BarChart(const QStringList& names, const QList<qreal>& values);
-
 };
 
 } // end namespace
