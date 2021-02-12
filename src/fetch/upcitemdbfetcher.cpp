@@ -76,6 +76,8 @@ bool UPCItemDbFetcher::canSearch(FetchKey k) const {
 bool UPCItemDbFetcher::canFetch(int type) const {
   return type == Data::Collection::Video ||
          type == Data::Collection::Book ||
+         type == Data::Collection::Album ||
+         type == Data::Collection::Game ||
          type == Data::Collection::BoardGame;
 }
 
@@ -276,6 +278,17 @@ void UPCItemDbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
       entry_->setField(QStringLiteral("isbn"), mapValue(resultMap_, "isbn"));
       break;
 
+    case Data::Collection::Album:
+      entry_->setField(QStringLiteral("label"), mapValue(resultMap_, "brand"));
+      {
+        const QString cat = mapValue(resultMap_, "category");
+        if(cat.contains(QStringLiteral("Music CDs"))) {
+          entry_->setField(QStringLiteral("medium"), i18n("Compact Disc"));
+        }
+      }
+      break;
+
+    case Data::Collection::Game:
     case Data::Collection::BoardGame:
       entry_->setField(QStringLiteral("publisher"), mapValue(resultMap_, "brand"));
       entry_->setField(QStringLiteral("description"), mapValue(resultMap_, "description"));
@@ -303,6 +316,40 @@ void UPCItemDbFetcher::parseTitle(Tellico::Data::EntryPtr entry_) {
     }
     match = rx.match(title, pos+1);
   }
+  // look for "word1 - word2"
+  static const QRegularExpression dashWords(QLatin1String("(.+) - (.+)"));
+  QRegularExpressionMatch dashMatch = dashWords.match(title);
+  if(dashMatch.hasMatch()) {
+    switch(collectionType()) {
+      case Data::Collection::Book:
+        title = dashMatch.captured(1);
+        {
+          QRegularExpression byAuthor(QLatin1String("by (.+)"));
+          QRegularExpressionMatch authorMatch = byAuthor.match(dashMatch.captured(2));
+          if(authorMatch.hasMatch()) {
+            entry_->setField(QStringLiteral("author"), authorMatch.captured(1).simplified());
+          }
+        }
+        break;
+
+      case Data::Collection::Album:
+        entry_->setField(QStringLiteral("artist"), dashMatch.captured(1).simplified());
+        title = dashMatch.captured(2);
+        break;
+
+      case Data::Collection::Game:
+        title = dashMatch.captured(1);
+        {
+          const QString platform = QStringLiteral("platform");
+          const QString maybe = i18n(dashMatch.captured(2).simplified().toUtf8().constData());
+          Data::FieldPtr f = entry_->collection()->fieldByName(platform);
+          if(f && f->allowed().contains(maybe)) {
+            entry_->setField(platform, maybe);
+          }
+        }
+        break;
+    }
+  }
   entry_->setField(QStringLiteral("title"), title.simplified());
 }
 
@@ -322,6 +369,9 @@ bool UPCItemDbFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QSt
     entry_->setField(QStringLiteral("widescreen"), QStringLiteral("true"));
     // res = true; leave it in the title
   } else if(token_.indexOf(QLatin1String("full screen"), 0, Qt::CaseInsensitive) > -1) {
+    // skip, but go ahead and remove from title
+    res = true;
+  } else if(token_.indexOf(QLatin1String("standard edition"), 0, Qt::CaseInsensitive) > -1) {
     // skip, but go ahead and remove from title
     res = true;
   } else if(token_.indexOf(QLatin1String("import"), 0, Qt::CaseInsensitive) > -1) {
@@ -352,6 +402,14 @@ bool UPCItemDbFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QSt
     entry_->setField(QStringLiteral("medium"), i18n("DVD"));
     res = true;
   }
+  if(tokenLower == QLatin1String("cd") && collectionType() == Data::Collection::Album) {
+    entry_->setField(QStringLiteral("medium"), i18n("Compact Disc"));
+    res = true;
+  }
+  if(tokenLower == QLatin1String("dvd")) {
+    entry_->setField(QStringLiteral("medium"), i18n("DVD"));
+    res = true;
+  }
   if(token_.indexOf(QLatin1String("series"), 0, Qt::CaseInsensitive) > -1) {
     entry_->setField(QStringLiteral("series"), token_);
     res = true;
@@ -362,13 +420,12 @@ bool UPCItemDbFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QSt
     entry_->setField(QStringLiteral("region"), i18n(match.captured().toUtf8().constData()));
     res = true;
   }
-  if(entry_->collection()->type() == Data::Collection::Game) {
+  if(collectionType() == Data::Collection::Game) {
     Data::FieldPtr f = entry_->collection()->fieldByName(QStringLiteral("platform"));
     if(f && f->allowed().contains(token_)) {
       res = true;
     }
-  } else if(entry_->collection()->type() == Data::Collection::Book) {
-    // TODO: look for regexp "by author" ?
+  } else if(collectionType() == Data::Collection::Book) {
     const QString binding = QStringLiteral("binding");
     Data::FieldPtr f = entry_->collection()->fieldByName(binding);
     const QString maybe = i18n(token_.toUtf8().constData());

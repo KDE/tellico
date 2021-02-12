@@ -37,6 +37,8 @@ private Q_SLOTS:
   void testFightClub();
   void testCatan();
   void test1632();
+  void testBurningEdge();
+  void testGTA4();
 };
 
 #endif
