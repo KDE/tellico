@@ -143,7 +143,12 @@ void UPCItemDbFetcher::stop() {
 }
 
 Tellico::Fetch::FetchRequest UPCItemDbFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString upc = entry_->field(QStringLiteral("upc"));
+  const QString isbn = entry_->field(QStringLiteral("isbn"));
+  if(!isbn.isEmpty()) {
+    return FetchRequest(ISBN, isbn);
+  }
+
+  const QString upc = entry_->field(QStringLiteral("upc"));
   if(!upc.isEmpty()) {
     return FetchRequest(UPC, upc);
   }
