@@ -876,7 +876,7 @@ add_executable(upcitemdbfetchertest upcitemdbfetchertest.cpp abstractfetchertest
 ecm_mark_nongui_executable(upcitemdbfetchertest)
 add_test(upcitemdbfetchertest upcitemdbfetchertest)
 ecm_mark_as_test(upcitemdbfetchertest)
-TARGET_LINK_LIBRARIES(upcitemdbfetchertest fetcherstest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(upcitemdbfetchertest fetcherstest ${TELLICO_BTPARSE_LIBS} ${TELLICO_TEST_LIBS})
 
 add_executable(videogamegeekfetchertest videogamegeekfetchertest.cpp abstractfetchertest.cpp
   ../fetch/videogamegeekfetcher.cpp
