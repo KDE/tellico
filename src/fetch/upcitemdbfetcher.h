@@ -62,7 +62,7 @@ public:
   virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
   virtual void stop() Q_DECL_OVERRIDE;
   virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
-  virtual Type type() const Q_DECL_OVERRIDE { return TVmaze; }
+  virtual Type type() const Q_DECL_OVERRIDE { return UPCItemDb; }
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
   virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
   virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
