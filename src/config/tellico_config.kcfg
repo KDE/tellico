@@ -59,7 +59,7 @@
       <default>ListView</default>
     </entry>
     <entry key="Lock Layout" type="Bool">
-        <default>false</default>
+        <default>true</default>
     </entry>
     <entry key="Image Location" type="Enum">
       <choices>
