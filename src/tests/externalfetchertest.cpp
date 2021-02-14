@@ -54,7 +54,7 @@ void ExternalFetcherTest::testMods() {
                                        QFINDTESTDATA("data/example_mods.xml"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
-  KSharedConfig::Ptr config = KSharedConfig::openConfig(QFINDTESTDATA("data/cat_mods.spec"), KConfig::SimpleConfig);
+  KSharedConfig::Ptr config = KSharedConfig::openConfig(QFINDTESTDATA("data/exec_cat.spec"), KConfig::SimpleConfig);
   KConfigGroup cg = config->group(QStringLiteral("<default>"));
   fetcher->readConfig(cg);
 
