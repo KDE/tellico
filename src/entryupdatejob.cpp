@@ -66,7 +66,7 @@ void EntryUpdateJob::slotResult(Tellico::Fetch::FetchResult* result_) {
     m_bestMatchEntry = entry;
   }
   // if perfect match, go ahead and top
-  if(match > EntryComparison::ENTRY_PERFECT_MATCH) {
+  if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
     doKill();
   }
 }

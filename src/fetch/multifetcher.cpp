@@ -137,13 +137,13 @@ void MultiFetcher::slotDone() {
         bestScore = score;
         bestIndex = idx;
       }
-      if(score > EntryComparison::ENTRY_PERFECT_MATCH) {
+      if(score >= EntryComparison::ENTRY_PERFECT_MATCH) {
         // no need to compare further
         break;
       }
     }
 //    myDebug() << "best score" << bestScore  << "; index:" << bestIndex;
-    if(bestIndex > -1 && bestScore > EntryComparison::ENTRY_GOOD_MATCH) {
+    if(bestIndex > -1 && bestScore >= EntryComparison::ENTRY_GOOD_MATCH) {
       auto newEntry = m_matches.at(bestIndex);
 //      myDebug() << "...merging from" << newEntry->title() << "into" << entry->title();
       Data::Document::mergeEntry(entry, newEntry);
