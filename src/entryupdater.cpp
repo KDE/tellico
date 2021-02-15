@@ -115,7 +115,7 @@ void EntryUpdater::slotStartNext() {
   ProgressManager::self()->setProgress(this, m_fetchers.count() * (m_origEntryCount - m_entriesToUpdate.count()) + m_fetchIndex);
 
   Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
-//  myDebug() << "starting " << f->source();
+//  myDebug() << "starting update from" << f->source();
   f->startUpdate(m_entriesToUpdate.front());
 }
 
@@ -153,7 +153,7 @@ void EntryUpdater::slotResult(Tellico::Fetch::FetchResult* result_) {
     return;
   }
 
-//  myDebug() << result_->title << " [" << result_->fetcher->source() << "]";
+//  myDebug() << "update result:" << result_->title << " [" << result_->fetcher->source() << "]";
   m_results.append(UpdateResult(result_, m_fetchers[m_fetchIndex]->updateOverwrite()));
   Data::EntryPtr e = result_->fetchEntry();
   if(e && !m_entriesToUpdate.isEmpty()) {
@@ -206,6 +206,13 @@ void EntryUpdater::handleResults() {
     } else if(match > best) {
       best = match;
       matches.clear();
+      matches.append(res);
+    } else if(m_results.count() == 1 && best == 0 && entry->title().isEmpty()) {
+      // special case for updates which may backfire, but let's go with it
+      // if there is a single result AND the best match is zero AND title is empty
+      // let's assume it's a case where an entry with a single url or link was updated
+      myLog() << "Updating entry with 0 score and empty title:" << e->title();
+      best = EntryComparison::ENTRY_PERFECT_MATCH;
       matches.append(res);
     }
   }

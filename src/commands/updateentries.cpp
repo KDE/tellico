@@ -135,6 +135,6 @@ void UpdateEntries::redo() {
     // the first one is not owned by current collection
     new ModifyEntries(this, m_coll, Data::EntryList() << cmd->orphanEntry(), Data::EntryList() << m_oldEntry, updatedFields);
   }
-  // calls redo() on all child command
+  // calls redo() on all child commands
   QUndoCommand::redo();
 }
