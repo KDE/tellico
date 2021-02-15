@@ -75,9 +75,8 @@ QWidget* CollectionSizeReport::createWidget() {
     momentInTime.setDate(QDate::fromString(date, Qt::ISODate));
     if(momentInTime.isValid()) {
       auto msecs = momentInTime.toMSecsSinceEpoch();
-      if(totalCount > 0) {
-        series->append(msecs-1, totalCount);
-      }
+      // for a step chart, add a point just before this one with the previous total
+      series->append(msecs-1, totalCount);
       totalCount += entryDateCounts.value(date);
       series->append(msecs, totalCount);
     }
