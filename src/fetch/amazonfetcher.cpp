@@ -468,8 +468,9 @@ void AmazonFetcher::slotComplete(KJob*) {
     doSearch();
   } else if(request().value().count(QLatin1Char(';')) > 9) {
     // start new request after cutting off first 10 isbn values
-    FetchRequest newRequest = request();
-    newRequest.setValue(request().value().section(QLatin1Char(';'), 10));
+    FetchRequest newRequest(request().collectionType(),
+                            request().key(),
+                            request().value().section(QLatin1Char(';'), 10));
     startSearch(newRequest);
   } else {
     m_countOffset = m_entries.count() % AMAZON_RETURNS_PER_REQUEST;

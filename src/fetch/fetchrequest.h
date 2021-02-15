@@ -44,9 +44,7 @@ public:
   void setCollectionType(int type) { m_collectionType = type; }
 
   FetchKey key() const { return m_key; }
-
   QString value() const { return m_value; }
-  void setValue(const QString& value) { m_value = value; }
 
 private:
   int m_collectionType;
