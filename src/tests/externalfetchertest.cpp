@@ -50,6 +50,7 @@ void ExternalFetcherTest::initTestCase() {
 
 void ExternalFetcherTest::testMods() {
   // fake the fetcher by 'cat'ting the MODS file
+  // the config passes the title search word as first argument to the cat command
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
                                        QFINDTESTDATA("data/example_mods.xml"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));

@@ -26,20 +26,21 @@
 #include "fetchmanager.h"
 #include "../utils/guiproxy.h"
 #include "../utils/cursorsaver.h"
+#include "../tellico_debug.h"
 
 #include <KMessageBox>
 
 using Tellico::Fetch::ManagerMessage;
 
-// default: all messages go to manager
+// default: all messages other than errors and warnings go to manager
 void ManagerMessage::send(const QString& message_, Type type_) {
   GUI::CursorSaver cs(Qt::ArrowCursor);
-  // plus errors get a message box
-  if(type_ == Error) {
+  // errors and warnings get a message box
+  if(type_ == Error && GUI::Proxy::widget()) {
     KMessageBox::sorry(GUI::Proxy::widget(), message_);
 //                       QString(), // caption
 //                       KMessageBox::Options(KMessageBox::Notify | KMessageBox::AllowLink));
-  } else if(type_ == Warning) {
+  } else if(type_ == Warning && GUI::Proxy::widget()) {
     KMessageBox::information(GUI::Proxy::widget(), message_);
   } else {
     Fetch::Manager::self()->updateStatus(message_);
@@ -47,6 +48,10 @@ void ManagerMessage::send(const QString& message_, Type type_) {
 }
 
 void ManagerMessage::infoList(const QString& message_, const QStringList& list_) {
-  GUI::CursorSaver cs(Qt::ArrowCursor);
-  KMessageBox::informationList(GUI::Proxy::widget(), message_, list_);
+  if(GUI::Proxy::widget()) {
+    GUI::CursorSaver cs(Qt::ArrowCursor);
+    KMessageBox::informationList(GUI::Proxy::widget(), message_, list_);
+  } else {
+    myDebug() << "ManagerMessage::infoList() - no widget";
+  }
 }

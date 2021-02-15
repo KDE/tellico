@@ -89,7 +89,7 @@ void Fetcher::startSearch(const FetchRequest& request_) {
                                                                        QStringLiteral("SendUserAgent")).toLower();
     if(sendUserAgent == QLatin1String("false")) {
       myDebug() << "Fetcher - Need user agent for" << source();
-      // TODO: I'd like to link to kcmshell5 useragent as th eKonqueror about page does
+      // TODO: I'd like to link to kcmshell5 useragent as the Konqueror about page does
       // but KIO complains about unable to open exec links
 //      message(i18n("<html>%1 requires the network request to include identification.\n"
 //                   "Check the network configuration in <a href=\"%2\">KDE System Settings</a>.</html>", source(), QStringLiteral("exec:/kcmshell5 useragent")),
@@ -174,6 +174,10 @@ Tellico::Data::EntryPtr Fetcher::fetchEntry(uint uid_) {
   }
   m_entries.insert(uid_, entry);
   return entry;
+}
+
+void Fetcher::setMessageHandler(MessageHandler* handler) {
+  m_messager = handler;
 }
 
 void Fetcher::message(const QString& message_, int type_) const {

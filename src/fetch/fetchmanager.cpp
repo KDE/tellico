@@ -96,15 +96,24 @@ void Manager::loadFetchers() {
       QString group = QStringLiteral("Data Source %1").arg(i);
       Fetcher::Ptr f = createFetcher(config, group);
       if(f) {
-        m_fetchers.append(f);
-        f->setMessageHandler(m_messager);
-        m_uuidHash.insert(f->uuid(), f);
+        addFetcher(f);
       }
     }
     m_loadDefaults = false;
   } else { // add default sources
     m_fetchers = defaultFetchers();
     m_loadDefaults = true;
+  }
+}
+
+void Manager::addFetcher(Fetcher::Ptr fetcher_) {
+  Q_ASSERT(fetcher_);
+  if(fetcher_) {
+    m_fetchers.append(fetcher_);
+    if(!fetcher_->messageHandler()) {
+      fetcher_->setMessageHandler(m_messager);
+    }
+    m_uuidHash.insert(fetcher_->uuid(), fetcher_);
   }
 }
 

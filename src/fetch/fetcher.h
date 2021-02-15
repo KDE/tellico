@@ -120,7 +120,7 @@ public:
    */
   Data::EntryPtr fetchEntry(uint uid);
 
-  void setMessageHandler(MessageHandler* handler) { m_messager = handler; }
+  void setMessageHandler(MessageHandler* handler);
   MessageHandler* messageHandler() const { return m_messager; }
   /**
    */
