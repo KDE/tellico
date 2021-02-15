@@ -112,13 +112,13 @@ void IGDBFetcher::continueSearch() {
   u.setPath(u.path() + QStringLiteral("/games"));
 
   QStringList clauseList;
-  switch(request().key) {
+  switch(request().key()) {
     case Keyword:
-      clauseList += QString(QStringLiteral("search \"%1\";")).arg(request().value);
+      clauseList += QString(QStringLiteral("search \"%1\";")).arg(request().value());
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       stop();
       return;
   }

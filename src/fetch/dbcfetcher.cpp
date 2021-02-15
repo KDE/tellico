@@ -67,22 +67,22 @@ QUrl DBCFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(DBC_API_URL));
 
   QUrlQuery query;
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
-      query.addQueryItem(QStringLiteral("query"), QLatin1String("dkcclterm.ti=\"") + request().value + QLatin1Char('"'));
+      query.addQueryItem(QStringLiteral("query"), QLatin1String("dkcclterm.ti=\"") + request().value() + QLatin1Char('"'));
       break;
 
     case Keyword:
-      query.addQueryItem(QStringLiteral("query"), QLatin1String("cql.keywords=\"") + request().value + QLatin1Char('"'));
+      query.addQueryItem(QStringLiteral("query"), QLatin1String("cql.keywords=\"") + request().value() + QLatin1Char('"'));
       break;
 
     case Person:
-      query.addQueryItem(QStringLiteral("query"), QLatin1String("term.mainCreator=\"") + request().value + QLatin1Char('"'));
+      query.addQueryItem(QStringLiteral("query"), QLatin1String("term.mainCreator=\"") + request().value() + QLatin1Char('"'));
       break;
 
     case ISBN:
       {
-        QString s = request().value;
+        QString s = request().value();
         s.remove(QLatin1Char('-'));
         QStringList isbnList = FieldFormat::splitValue(s);
         // only search for first ISBN for now
@@ -92,7 +92,7 @@ QUrl DBCFetcher::searchUrl() {
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       return QUrl();
   }
   query.addQueryItem(QStringLiteral("action"), QStringLiteral("search"));

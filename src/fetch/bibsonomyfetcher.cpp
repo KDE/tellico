@@ -76,17 +76,17 @@ void BibsonomyFetcher::search() {
   QUrl u(QString::fromLatin1(BIBSONOMY_BASE_URL));
   u.setPath(QStringLiteral("/bib/"));
 
-  switch(request().key) {
+  switch(request().key()) {
     case Person:
-      u.setPath(u.path() + QStringLiteral("author/%1").arg(request().value));
+      u.setPath(u.path() + QStringLiteral("author/%1").arg(request().value()));
       break;
 
     case Keyword:
-      u.setPath(u.path() + QStringLiteral("search/%1").arg(request().value));
+      u.setPath(u.path() + QStringLiteral("search/%1").arg(request().value()));
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       stop();
       return;
   }

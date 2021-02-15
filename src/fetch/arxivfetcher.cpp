@@ -90,7 +90,7 @@ void ArxivFetcher::continueSearch() {
 }
 
 void ArxivFetcher::doSearch() {
-  QUrl u = searchURL(request().key, request().value);
+  QUrl u = searchURL(request().key(), request().value());
   if(u.isEmpty()) {
     stop();
     return;
@@ -217,7 +217,7 @@ Tellico::Data::EntryPtr ArxivFetcher::fetchEntryHook(uint uid_) {
   }
   QRegularExpression versionRx(QLatin1String("v\\d+$"));
   // if the original search was not for a versioned ID, remove it
-  if(request().key != ArxivID || !request().value.contains(versionRx)) {
+  if(request().key() != ArxivID || !request().value().contains(versionRx)) {
     QString arxiv = entry->field(QStringLiteral("arxiv"));
     arxiv.remove(versionRx);
     entry->setField(QStringLiteral("arxiv"), arxiv);
@@ -282,7 +282,7 @@ QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       return QUrl();
   }
   q.addQueryItem(QStringLiteral("search_query"), query);

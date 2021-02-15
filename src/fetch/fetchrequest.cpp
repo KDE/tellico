@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2021 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,39 +22,19 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_FETCHREQUEST_H
-#define TELLICO_FETCH_FETCHREQUEST_H
+#include "fetchrequest.h"
 
-#include "fetch.h"
+using Tellico::Fetch::FetchRequest;
 
-#include <QString>
+FetchRequest::FetchRequest() : m_collectionType(0), m_key(FetchFirst) {
+}
 
-namespace Tellico {
-  namespace Fetch {
+FetchRequest::FetchRequest(FetchKey key_, const QString& value_) : m_collectionType(0), m_key(key_), m_value(value_) {
+}
 
-class FetchRequest {
-public:
-  FetchRequest();
-  FetchRequest(FetchKey key, const QString& value);
-  FetchRequest(int type, FetchKey key, const QString& value);
+FetchRequest::FetchRequest(int type_, FetchKey key_, const QString& value_) : m_collectionType(type_), m_key(key_), m_value(value_) {
+}
 
-  bool isNull() const;
-
-  int collectionType() const { return m_collectionType; }
-  void setCollectionType(int type) { m_collectionType = type; }
-
-  FetchKey key() const { return m_key; }
-
-  QString value() const { return m_value; }
-  void setValue(const QString& value) { m_value = value; }
-
-private:
-  int m_collectionType;
-  FetchKey m_key;
-  QString m_value;
-};
-
-  } // end namespace
-} // end namespace
-
-#endif
+bool FetchRequest::isNull() const {
+  return m_key == FetchFirst || m_value.isEmpty();
+}

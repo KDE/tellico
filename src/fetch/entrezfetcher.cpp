@@ -112,8 +112,8 @@ void EntrezFetcher::search() {
   q.addQueryItem(QStringLiteral("usehistory"), QStringLiteral("y"));
   q.addQueryItem(QStringLiteral("retmax"),     QStringLiteral("1")); // we're just getting the count
   q.addQueryItem(QStringLiteral("db"),         m_dbname);
-  q.addQueryItem(QStringLiteral("term"),       request().value);
-  switch(request().key) {
+  q.addQueryItem(QStringLiteral("term"),       request().value());
+  switch(request().key()) {
     case Title:
       q.addQueryItem(QStringLiteral("field"), QStringLiteral("titl"));
       break;
@@ -134,11 +134,11 @@ void EntrezFetcher::search() {
     case DOI:
     case Raw:
       // for DOI, enough to match any field to DOI value
-      //q.setQuery(u.query() + QLatin1Char('&') + request().value);
+      //q.setQuery(u.query() + QLatin1Char('&') + request().value());
       break;
 
     default:
-      myWarning() << "key not supported:" << request().key;
+      myWarning() << "key not supported:" << request().key();
       stop();
       return;
   }

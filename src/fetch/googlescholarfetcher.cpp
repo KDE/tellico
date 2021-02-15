@@ -96,28 +96,28 @@ void GoogleScholarFetcher::doSearch() {
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("start"), QString::number(m_start));
 
-  QString value = request().value;
+  QString value = request().value();
   if(!value.startsWith(QLatin1Char('"'))) {
     value = QLatin1Char('"') + value;
   }
   if(!value.endsWith(QLatin1Char('"'))) {
     value += QLatin1Char('"');
   }
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
-      q.addQueryItem(QStringLiteral("q"), QStringLiteral("allintitle:%1").arg(request().value));
+      q.addQueryItem(QStringLiteral("q"), QStringLiteral("allintitle:%1").arg(request().value()));
       break;
 
     case Keyword:
-      q.addQueryItem(QStringLiteral("q"), request().value);
+      q.addQueryItem(QStringLiteral("q"), request().value());
       break;
 
     case Person:
-      q.addQueryItem(QStringLiteral("q"), QStringLiteral("author:%1").arg(request().value));
+      q.addQueryItem(QStringLiteral("q"), QStringLiteral("author:%1").arg(request().value()));
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       stop();
       return;
   }

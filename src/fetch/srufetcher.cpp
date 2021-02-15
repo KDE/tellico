@@ -152,8 +152,8 @@ void SRUFetcher::search() {
   }
 
   const int type = collectionType();
-  QString str = QLatin1Char('"') + request().value + QLatin1Char('"');
-  switch(request().key) {
+  QString str = QLatin1Char('"') + request().value() + QLatin1Char('"');
+  switch(request().key()) {
     case Title:
       query.addQueryItem(QStringLiteral("query"), QLatin1String("dc.title=") + str);
       break;
@@ -172,7 +172,7 @@ void SRUFetcher::search() {
 
     case ISBN:
       {
-        QString s = request().value;
+        QString s = request().value();
         s.remove(QLatin1Char('-'));
         QStringList isbnList = FieldFormat::splitValue(s);
         // also search for isbn10 values
@@ -203,7 +203,7 @@ void SRUFetcher::search() {
 
     case LCCN:
       {
-        QString s = request().value;
+        QString s = request().value();
         QStringList lccnList = FieldFormat::splitValue(s);
         QString q;
         for(int i = 0; i < lccnList.count(); ++i) {
@@ -223,14 +223,14 @@ void SRUFetcher::search() {
 
     case Raw:
       {
-        QString key = request().value.section(QLatin1Char('='), 0, 0).trimmed();
-        QString str = request().value.section(QLatin1Char('='), 1).trimmed();
+        QString key = request().value().section(QLatin1Char('='), 0, 0).trimmed();
+        QString str = request().value().section(QLatin1Char('='), 1).trimmed();
         query.addQueryItem(key, str);
       }
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       stop();
       break;
   }

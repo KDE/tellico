@@ -87,15 +87,15 @@ void KinoPoiskFetcher::search() {
   QUrl u(QString::fromLatin1(KINOPOISK_SEARCH_URL));
   QUrlQuery q;
 
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       // first means return first result only
       //q.addQueryItem(QStringLiteral("first"), QStringLiteral("yes"));
-      q.addQueryItem(QStringLiteral("kp_query"), request().value);
+      q.addQueryItem(QStringLiteral("kp_query"), request().value());
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       stop();
       return;
   }

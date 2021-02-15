@@ -90,7 +90,7 @@ void DoubanFetcher::search() {
   m_started = true;
   QUrl u(QString::fromLatin1(DOUBAN_API_URL));
 
-  switch(request().collectionType) {
+  switch(request().collectionType()) {
     case Data::Collection::Book:
     case Data::Collection::Bibtex:
       u.setPath(u.path() + QLatin1String("book/"));
@@ -105,15 +105,15 @@ void DoubanFetcher::search() {
       break;
 
     default:
-      myWarning() << "bad collection type:" << request().collectionType;
+      myWarning() << "bad collection type:" << request().collectionType();
   }
 
   QUrlQuery q;
-  switch(request().key) {
+  switch(request().key()) {
     case ISBN:
       u.setPath(u.path() + QLatin1String("isbn/"));
       {
-        QStringList isbns = FieldFormat::splitValue(request().value);
+        QStringList isbns = FieldFormat::splitValue(request().value());
         if(!isbns.isEmpty()) {
           u.setPath(u.path() + ISBNValidator::cleanValue(isbns.front()));
         }
@@ -122,12 +122,12 @@ void DoubanFetcher::search() {
 
     case Keyword:
       u.setPath(u.path() + QLatin1String("search"));
-      q.addQueryItem(QStringLiteral("q"), request().value);
+      q.addQueryItem(QStringLiteral("q"), request().value());
       q.addQueryItem(QStringLiteral("count"), QString::number(DOUBAN_MAX_RETURNS_TOTAL));
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
   }
 
 //  q.addQueryItem(QLatin1String("start"), QString::number(0));
@@ -136,7 +136,7 @@ void DoubanFetcher::search() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  if(request().key == ISBN) {
+  if(request().key() == ISBN) {
     connect(m_job.data(), &KJob::result, this, &DoubanFetcher::slotCompleteISBN);
   } else {
     connect(m_job.data(), &KJob::result, this, &DoubanFetcher::slotComplete);
@@ -224,7 +224,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
   QJsonDocument doc = QJsonDocument::fromJson(data);
   const QVariantMap resultsMap = doc.object().toVariantMap();
 
-  switch(request().collectionType) {
+  switch(request().collectionType()) {
     case Data::Collection::Book:
     case Data::Collection::Bibtex:
       foreach(const QVariant& v, resultsMap.value(QLatin1String("books")).toList()) {
@@ -305,7 +305,7 @@ Tellico::Data::EntryPtr DoubanFetcher::fetchEntryHook(uint uid_) {
 Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_) {
   Data::CollPtr coll;
   Data::EntryPtr entry;
-  switch(request().collectionType) {
+  switch(request().collectionType()) {
     case Data::Collection::Book:
     case Data::Collection::Bibtex:
       coll = new Data::BookCollection(true);

@@ -466,10 +466,10 @@ void AmazonFetcher::slotComplete(KJob*) {
     ++m_page;
     m_countOffset = 0;
     doSearch();
-  } else if(request().value.count(QLatin1Char(';')) > 9) {
+  } else if(request().value().count(QLatin1Char(';')) > 9) {
     // start new request after cutting off first 10 isbn values
     FetchRequest newRequest = request();
-    newRequest.value = request().value.section(QLatin1Char(';'), 10);
+    newRequest.setValue(request().value().section(QLatin1Char(';'), 10));
     startSearch(newRequest);
   } else {
     m_countOffset = m_entries.count() % AMAZON_RETURNS_PER_REQUEST;
@@ -687,7 +687,7 @@ QByteArray AmazonFetcher::requestPayload(FetchRequest request_) {
   resources.append(QLatin1String("ItemInfo.ByLineInfo"));
   resources.append(QLatin1String("ItemInfo.TechnicalInfo"));
 
-  const int type = request_.collectionType;
+  const int type = request_.collectionType();
   switch(type) {
     case Data::Collection::Book:
     case Data::Collection::ComicBook:
@@ -732,27 +732,27 @@ QByteArray AmazonFetcher::requestPayload(FetchRequest request_) {
       return QByteArray();
   }
 
-  switch(request_.key) {
+  switch(request_.key()) {
     case Title:
-      payload.insert(QLatin1String("Title"), request_.value);
+      payload.insert(QLatin1String("Title"), request_.value());
       break;
 
     case Person:
       if(type == Data::Collection::Video) {
-        payload.insert(QStringLiteral("Actor"), request_.value);
-//        payload.insert(QStringLiteral("Director"), request_.value);
+        payload.insert(QStringLiteral("Actor"), request_.value());
+//        payload.insert(QStringLiteral("Director"), request_.value());
       } else if(type == Data::Collection::Album) {
-        payload.insert(QStringLiteral("Artist"), request_.value);
+        payload.insert(QStringLiteral("Artist"), request_.value());
       } else if(type == Data::Collection::Book) {
-        payload.insert(QLatin1String("Author"), request_.value);
+        payload.insert(QLatin1String("Author"), request_.value());
       } else {
-        payload.insert(QLatin1String("Keywords"), request_.value);
+        payload.insert(QLatin1String("Keywords"), request_.value());
       }
       break;
 
     case ISBN:
       {
-        QString cleanValue = request_.value;
+        QString cleanValue = request_.value();
         cleanValue.remove(QLatin1Char('-'));
         // ISBN only get digits or 'X'
         QStringList isbns = FieldFormat::splitValue(cleanValue);
@@ -789,7 +789,7 @@ QByteArray AmazonFetcher::requestPayload(FetchRequest request_) {
 
     case UPC:
       {
-        QString cleanValue = request_.value;
+        QString cleanValue = request_.value();
         cleanValue.remove(QLatin1Char('-'));
         // for EAN values, add 0 to beginning if not 13 characters
         // in order to assume US country code from UPC value
@@ -811,19 +811,19 @@ QByteArray AmazonFetcher::requestPayload(FetchRequest request_) {
       break;
 
     case Keyword:
-      payload.insert(QLatin1String("Keywords"), request_.value);
+      payload.insert(QLatin1String("Keywords"), request_.value());
       break;
 
     case Raw:
       {
-        QString key = request_.value.section(QLatin1Char('='), 0, 0).trimmed();
-        QString str = request_.value.section(QLatin1Char('='), 1).trimmed();
+        QString key = request_.value().section(QLatin1Char('='), 0, 0).trimmed();
+        QString str = request_.value().section(QLatin1Char('='), 1).trimmed();
         payload.insert(key, str);
       }
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       return QByteArray();
   }
 

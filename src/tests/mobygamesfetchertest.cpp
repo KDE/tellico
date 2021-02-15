@@ -181,8 +181,8 @@ void MobyGamesFetcherTest::testUpdateRequest() {
   entry->setField(QStringLiteral("title"), QStringLiteral("T"));
 
   Tellico::Fetch::FetchRequest req = fetcher.updateRequest(entry);
-  QCOMPARE(req.key, Tellico::Fetch::Title);
-  QCOMPARE(req.value, entry->title());
+  QCOMPARE(req.key(), Tellico::Fetch::Title);
+  QCOMPARE(req.value(), entry->title());
 
   // test having a user customized platform
   QString p(QStringLiteral("playstation 4")); // pId = 141
@@ -194,8 +194,8 @@ void MobyGamesFetcherTest::testUpdateRequest() {
 
   entry->setField(QStringLiteral("platform"), p);
   req = fetcher.updateRequest(entry);
-  QCOMPARE(req.key, Tellico::Fetch::Raw);
-  QCOMPARE(req.value, QStringLiteral("title=T&platform=141"));
+  QCOMPARE(req.key(), Tellico::Fetch::Raw);
+  QCOMPARE(req.value(), QStringLiteral("title=T&platform=141"));
 
   // test having an unknown platform
   p = QStringLiteral("Atari 2600"); // pId = 28
@@ -205,6 +205,6 @@ void MobyGamesFetcherTest::testUpdateRequest() {
 
   entry->setField(QStringLiteral("platform"), p);
   req = fetcher.updateRequest(entry);
-  QCOMPARE(req.key, Tellico::Fetch::Raw);
-  QCOMPARE(req.value, QStringLiteral("title=T&platform=28"));
+  QCOMPARE(req.key(), Tellico::Fetch::Raw);
+  QCOMPARE(req.value(), QStringLiteral("title=T&platform=28"));
 }

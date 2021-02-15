@@ -115,8 +115,8 @@ void ColnectFetcher::search() {
       return;
   }
 
-  QString value = request().value;
-  switch(request().key) {
+  QString value = request().value();
+  switch(request().key()) {
     case Title:
       {
         query += QStringLiteral("/list/cat/") + m_category;
@@ -164,7 +164,7 @@ void ColnectFetcher::search() {
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       stop();
       return;
   }

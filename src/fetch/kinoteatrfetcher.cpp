@@ -81,15 +81,15 @@ void KinoTeatrFetcher::search() {
   QUrl u(QString::fromLatin1(KINOTEATR_SEARCH_URL));
   QUrlQuery q;
 
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       // TODO: allow year in search query and parse it out?
       //q.addQueryItem(QStringLiteral("year"), QStringLiteral("yes"));
-      q.addQueryItem(QStringLiteral("title"), request().value);
+      q.addQueryItem(QStringLiteral("title"), request().value());
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       stop();
       return;
   }

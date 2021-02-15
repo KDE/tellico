@@ -397,6 +397,7 @@ TARGET_LINK_LIBRARIES(vinoxmltest translatorstest ${TELLICO_TEST_LIBS})
 SET(fetcherstest_SRCS
   ../fetch/fetcher.cpp
   ../fetch/fetcherjob.cpp
+  ../fetch/fetchrequest.cpp
   ../fetch/fetchresult.cpp
   ../fetch/fetchmanager.cpp
   ../fetch/messagehandler.cpp

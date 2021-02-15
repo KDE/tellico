@@ -105,20 +105,20 @@ void AbstractAllocineFetcher::search() {
 
   // I can't figure out how to encode accent marks, but they don't
   // seem to be necessary
-  QString q = removeAccents(request().value);
+  QString q = removeAccents(request().value());
   // should I just remove all non alphabetical characters?
   // see https://bugs.kde.org/show_bug.cgi?id=337432
   q.remove(QRegularExpression(QStringLiteral("[,:!?;\\(\\)]")));
   q.replace(QLatin1Char('\''), QLatin1Char('+'));
   q.replace(QLatin1Char(' '), QLatin1Char('+'));
 
-  switch(request().key) {
+  switch(request().key()) {
     case Keyword:
       params.append(qMakePair(QStringLiteral("q"), q));
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       return;
   }
 

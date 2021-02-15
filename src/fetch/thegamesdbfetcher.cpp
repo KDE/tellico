@@ -114,7 +114,7 @@ void TheGamesDBFetcher::search() {
   QUrl u(QString::fromLatin1(THEGAMESDB_API_URL));
   u.setPath(QLatin1String("/v") + QLatin1String(THEGAMESDB_API_VERSION));
 
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       u = u.adjusted(QUrl::StripTrailingSlash);
       u.setPath(u.path() + QLatin1String("/Games/ByGameName"));
@@ -127,13 +127,13 @@ void TheGamesDBFetcher::search() {
           q.addQueryItem(QStringLiteral("fields"), QStringLiteral("rating,publishers,genres,overview,platform"));
         }
         q.addQueryItem(QStringLiteral("include"), QStringLiteral("platform,boxart"));
-        q.addQueryItem(QStringLiteral("name"), request().value);
+        q.addQueryItem(QStringLiteral("name"), request().value());
         u.setQuery(q);
       }
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       stop();
       return;
   }

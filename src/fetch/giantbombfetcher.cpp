@@ -85,15 +85,15 @@ QUrl GiantBombFetcher::searchUrl() {
   q.addQueryItem(QStringLiteral("format"), QStringLiteral("xml"));
   q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
 
-  switch(request().key) {
+  switch(request().key()) {
     case Keyword:
       u.setPath(u.path() + QStringLiteral("/search"));
-      q.addQueryItem(QStringLiteral("query"), request().value);
+      q.addQueryItem(QStringLiteral("query"), request().value());
       q.addQueryItem(QStringLiteral("resources"), QStringLiteral("game"));
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       return QUrl();
   }
   u.setQuery(q);

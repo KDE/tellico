@@ -96,7 +96,7 @@ void CrossRefFetcher::search() {
 
 //  myDebug() << "value = " << value_;
 
-  QUrl u = searchURL(request().key, request().value);
+  QUrl u = searchURL(request().key(), request().value());
   if(u.isEmpty()) {
     stop();
     return;

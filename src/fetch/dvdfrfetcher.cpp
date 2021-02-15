@@ -69,22 +69,22 @@ QUrl DVDFrFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(DVDFR_SEARCH_API_URL));
 
   QUrlQuery q;
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       // DVDfr requires the title string to be in iso-8859-15
       {
         QTextCodec* codec = QTextCodec::codecForName("iso-8859-15");
         Q_ASSERT(codec);
-        q.addQueryItem(QStringLiteral("title"), QString::fromUtf8(codec->fromUnicode(request().value)));
+        q.addQueryItem(QStringLiteral("title"), QString::fromUtf8(codec->fromUnicode(request().value())));
       }
       break;
 
     case UPC:
-      q.addQueryItem(QStringLiteral("gencode"), request().value);
+      q.addQueryItem(QStringLiteral("gencode"), request().value());
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       return QUrl();
   }
   u.setQuery(q);

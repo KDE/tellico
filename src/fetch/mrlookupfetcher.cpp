@@ -77,17 +77,17 @@ void MRLookupFetcher::search() {
 
   QUrl u(QString::fromLatin1(MRLOOKUP_URL));
   QUrlQuery q;
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
-      q.addQueryItem(QStringLiteral("ti"), request().value);
+      q.addQueryItem(QStringLiteral("ti"), request().value());
       break;
 
     case Person:
-      q.addQueryItem(QStringLiteral("au"), request().value);
+      q.addQueryItem(QStringLiteral("au"), request().value());
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       stop();
       return;
   }

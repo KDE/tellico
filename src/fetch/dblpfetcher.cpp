@@ -63,15 +63,15 @@ QUrl DBLPFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(DBLP_API_URL));
 
   QUrlQuery q;
-  switch(request().key) {
+  switch(request().key()) {
     case Keyword:
-      q.addQueryItem(QStringLiteral("q"), request().value);
+      q.addQueryItem(QStringLiteral("q"), request().value());
       q.addQueryItem(QStringLiteral("h"), QString::number(DBLP_MAX_RETURNS_TOTAL));
       q.addQueryItem(QStringLiteral("c"), QString::number(0));
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       return QUrl();
   }
   // has to be after query

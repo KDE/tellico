@@ -140,15 +140,15 @@ void ExecExternalFetcher::readConfigHook(const KConfigGroup& config_) {
 void ExecExternalFetcher::search() {
   m_started = true;
 
-  if(request().key != ExecUpdate && !m_args.contains(request().key)) {
+  if(request().key() != ExecUpdate && !m_args.contains(request().key())) {
     myDebug() << "stopping: not an update and no matching argument for search key";
     stop();
     return;
   }
 
-  if(request().key == ExecUpdate) {
+  if(request().key() == ExecUpdate) {
     // because the rowDelimiterString() is used below
-    QStringList args = FieldFormat::splitTable(request().value);
+    QStringList args = FieldFormat::splitTable(request().value());
     startSearch(args);
     return;
   }
@@ -158,8 +158,8 @@ void ExecExternalFetcher::search() {
   // the search value needs to be enclosed in quotation marks
   // but first check to make sure the user didn't do that already
   // AND the "%1" wasn't used in the settings
-  QString value = request().value;
-  if(request().key == ISBN) {
+  QString value = request().value();
+  if(request().key() == ISBN) {
     value.remove(QLatin1Char('-')); // remove hyphens from isbn values
     // shouldn't hurt and might keep from confusing stupid search sources
   }
@@ -167,7 +167,7 @@ void ExecExternalFetcher::search() {
   if(!rx1.exactMatch(value)) {
     value = QLatin1Char('"') + value + QLatin1Char('"');
   }
-  QString args = m_args.value(request().key);
+  QString args = m_args.value(request().key());
   QRegExp rx2(QLatin1String("['\"]%1\\1"));
   args.replace(rx2, QStringLiteral("%1"));
   startSearch(parseArguments(args.arg(value))); // replace %1 with search value

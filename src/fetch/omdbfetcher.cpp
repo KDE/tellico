@@ -106,15 +106,15 @@ void OMDBFetcher::continueSearch() {
   QUrl u(QString::fromLatin1(OMDB_API_URL));
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("apikey"), m_apiKey);
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       q.addQueryItem(QStringLiteral("type"), QStringLiteral("movie"));
       q.addQueryItem(QStringLiteral("r"), QStringLiteral("json"));
-      q.addQueryItem(QStringLiteral("s"), request().value);
+      q.addQueryItem(QStringLiteral("s"), request().value());
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       stop();
       return;
   }

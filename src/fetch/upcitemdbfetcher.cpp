@@ -101,12 +101,12 @@ void UPCItemDbFetcher::continueSearch() {
   u = u.adjusted(QUrl::StripTrailingSlash);
   u.setPath(u.path() + QLatin1String("/lookup"));
   QUrlQuery q;
-  switch(request().key) {
+  switch(request().key()) {
     case ISBN:
       // do a upc search by 13-digit isbn
       {
         // only grab first value
-        QString isbn = request().value.section(QLatin1Char(';'), 0);
+        QString isbn = request().value().section(QLatin1Char(';'), 0);
         isbn = ISBNValidator::isbn13(isbn);
         isbn.remove(QLatin1Char('-'));
         q.addQueryItem(QStringLiteral("upc"), isbn);
@@ -114,11 +114,11 @@ void UPCItemDbFetcher::continueSearch() {
       break;
 
     case UPC:
-      q.addQueryItem(QStringLiteral("upc"), request().value);
+      q.addQueryItem(QStringLiteral("upc"), request().value());
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       stop();
       return;
   }

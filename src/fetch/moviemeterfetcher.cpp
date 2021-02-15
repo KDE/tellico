@@ -87,18 +87,18 @@ void MovieMeterFetcher::search() {
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("api_key"), QLatin1String(MOVIEMETER_API_KEY));
 
-  switch(request().key) {
+  switch(request().key()) {
     case Keyword:
-      q.addQueryItem(QStringLiteral("q"), request().value);
+      q.addQueryItem(QStringLiteral("q"), request().value());
       //u.addQueryItem(QLatin1String("type"), QLatin1String("all"));
       break;
 
     case Raw:
-      q.setQuery(request().value);
+      q.setQuery(request().value());
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       stop();
       return;
   }

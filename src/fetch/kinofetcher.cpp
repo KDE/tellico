@@ -82,13 +82,13 @@ void KinoFetcher::search() {
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("sp_search_filter"), QStringLiteral("movie"));
 
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
-      q.addQueryItem(QStringLiteral("searchterm"), request().value);
+      q.addQueryItem(QStringLiteral("searchterm"), request().value());
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       stop();
       return;
   }

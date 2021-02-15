@@ -89,9 +89,9 @@ void HathiTrustFetcher::doSearch() {
 
   QStringList searchValues;
   // we split ISBN and LCCN values, which are the only ones we accept anyway
-  const QStringList searchTerms = FieldFormat::splitValue(request().value);
+  const QStringList searchTerms = FieldFormat::splitValue(request().value());
   foreach(const QString& searchTerm, searchTerms) {
-    if(request().key == ISBN) {
+    if(request().key() == ISBN) {
       searchValues += QStringLiteral("isbn:%1").arg(ISBNValidator::cleanValue(searchTerm));
     } else {
       searchValues += QStringLiteral("lccn:%1").arg(LCCNValidator::formalize(searchTerm));

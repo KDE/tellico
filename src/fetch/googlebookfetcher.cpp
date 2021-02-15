@@ -95,10 +95,10 @@ void GoogleBookFetcher::continueSearch() {
   m_started = true;
   // we only split ISBN and LCCN values
   QStringList searchTerms;
-  if(request().key == ISBN) {
-    searchTerms = FieldFormat::splitValue(request().value);
+  if(request().key() == ISBN) {
+    searchTerms = FieldFormat::splitValue(request().value());
   } else  {
-    searchTerms += request().value;
+    searchTerms += request().value();
   }
   foreach(const QString& searchTerm, searchTerms) {
     doSearch(searchTerm);
@@ -119,7 +119,7 @@ void GoogleBookFetcher::doSearch(const QString& term_) {
     q.addQueryItem(QStringLiteral("key"), m_apiKey);
   }
 
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       q.addQueryItem(QStringLiteral("q"), QLatin1String("intitle:") + term_);
       break;
@@ -140,7 +140,7 @@ void GoogleBookFetcher::doSearch(const QString& term_) {
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       return;
   }
   u.setQuery(q);
@@ -282,7 +282,7 @@ void GoogleBookFetcher::slotComplete(KJob* job_) {
   }
 
   m_start = m_entries.count();
-  m_hasMoreResults = request().key != ISBN && m_start <= m_total;
+  m_hasMoreResults = request().key() != ISBN && m_start <= m_total;
   endJob(job);
 }
 

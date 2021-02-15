@@ -132,7 +132,7 @@ void TheMovieDBFetcher::continueSearch() {
   QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
   u.setPath(QLatin1Char('/') + QLatin1String(THEMOVIEDB_API_VERSION));
 
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       u = u.adjusted(QUrl::StripTrailingSlash);
       u.setPath(u.path() + QLatin1String("/search/movie"));
@@ -140,13 +140,13 @@ void TheMovieDBFetcher::continueSearch() {
         QUrlQuery q;
         q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
         q.addQueryItem(QStringLiteral("language"), m_locale);
-        q.addQueryItem(QStringLiteral("query"), request().value);
+        q.addQueryItem(QStringLiteral("query"), request().value());
         u.setQuery(q);
       }
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       stop();
       return;
   }

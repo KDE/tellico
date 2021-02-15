@@ -117,19 +117,19 @@ void NumistaFetcher::doSearch() {
 
   // pull out year, keep the regexp a little loose
   QRegularExpression yearRX(QStringLiteral("[0-9]{4}"));
-  QRegularExpressionMatch match = yearRX.match(request().value);
+  QRegularExpressionMatch match = yearRX.match(request().value());
   if(match.hasMatch()) {
     m_year = match.captured(0);
   }
 
   QString queryString;
-  switch(request().key) {
+  switch(request().key()) {
     case Keyword:
-      queryString = request().value;
+      queryString = request().value();
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       stop();
       return;
   }

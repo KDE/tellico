@@ -91,10 +91,10 @@ void ISBNdbFetcher::search() {
 
   // we only split ISBN when not doing batch searching
   QStringList searchTerms;
-  if(request().key == ISBN && !m_batchIsbn) {
-    searchTerms = FieldFormat::splitValue(request().value);
+  if(request().key() == ISBN && !m_batchIsbn) {
+    searchTerms = FieldFormat::splitValue(request().value());
   } else  {
-    searchTerms += request().value;
+    searchTerms += request().value();
   }
   foreach(const QString& searchTerm, searchTerms) {
     doSearch(searchTerm);
@@ -116,14 +116,14 @@ void ISBNdbFetcher::continueSearch() {
     return;
   }
 
-  doSearch(request().value);
+  doSearch(request().value());
 }
 
 void ISBNdbFetcher::doSearch(const QString& term_) {
-  const bool multipleIsbn = request().key == ISBN && term_.contains(QLatin1Char(';'));
+  const bool multipleIsbn = request().key() == ISBN && term_.contains(QLatin1Char(';'));
 
   QUrl u(QString::fromLatin1(ISBNDB_BASE_URL));
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       u.setPath(QStringLiteral("/books/") + term_);
       break;
@@ -161,7 +161,7 @@ void ISBNdbFetcher::doSearch(const QString& term_) {
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       stop();
       return;
   }
@@ -169,7 +169,7 @@ void ISBNdbFetcher::doSearch(const QString& term_) {
 
   QPointer<KIO::StoredTransferJob> job;
   if(multipleIsbn) {
-    QString postData = request().value;
+    QString postData = request().value();
     postData = postData.replace(QLatin1Char(';'), QLatin1Char(','))
                        .remove(QLatin1Char('-'))
                        .remove(QLatin1Char(' '));

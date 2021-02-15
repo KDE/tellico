@@ -124,13 +124,13 @@ void VNDBFetcher::search() {
   }
 
   QByteArray get("get vn basic,details ");
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
-      get += "(search ~ \"" + request().value.toUtf8() + "\")";
+      get += "(search ~ \"" + request().value().toUtf8() + "\")";
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       return;
   }
 

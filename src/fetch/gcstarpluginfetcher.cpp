@@ -243,7 +243,7 @@ void GCstarPluginFetcher::search() {
        << QStringLiteral("--export")      << QStringLiteral("TarGz")
        << QStringLiteral("--exportprefs") << QStringLiteral("collection=>/tmp/test.gcs,file=>/tmp/test1.tar.gz")
        << QStringLiteral("--website")     << m_plugin
-       << QStringLiteral("--download")    << KShell::quoteArg(request().value);
+       << QStringLiteral("--download")    << KShell::quoteArg(request().value());
   myLog() << args;
 
   m_thread = new GCstarThread(this);

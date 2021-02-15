@@ -344,20 +344,20 @@ void IMDBFetcher::search() {
 
   // as far as I can tell, the url encoding should always be iso-8859-1?
   QUrlQuery q;
-  q.addQueryItem(QStringLiteral("q"), request().value);
+  q.addQueryItem(QStringLiteral("q"), request().value());
 
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       q.addQueryItem(QStringLiteral("s"), QStringLiteral("tt"));
       m_url.setQuery(q);
       break;
 
     case Raw:
-      m_url = QUrl(request().value);
+      m_url = QUrl(request().value());
       break;
 
     default:
-      myWarning() << "not supported:" << request().key;
+      myWarning() << "not supported:" << request().key();
       stop();
       return;
   }
@@ -452,7 +452,7 @@ void IMDBFetcher::slotComplete(KJob*) {
 #endif
 
   // a single result was found if we got redirected
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       if(m_redirected) {
         parseSingleTitleResult();

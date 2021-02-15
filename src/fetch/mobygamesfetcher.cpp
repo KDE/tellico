@@ -120,25 +120,25 @@ void MobyGamesFetcher::continueSearch() {
   u.setPath(u.path() + QStringLiteral("/games"));
 
   QUrlQuery q;
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
-      q.addQueryItem(QStringLiteral("title"), request().value);
+      q.addQueryItem(QStringLiteral("title"), request().value());
       break;
 
     case Keyword:
       {
       // figure out if the platform is part of the search string
       int pId = 0;
-      QString value = request().value; // resulting value
+      QString value = request().value(); // resulting value
       QString matchedPlatform;
       // iterate over all known platforms; this doesn't seem to be too much of a performance hit
       QHash<int, QString>::const_iterator i = m_platforms.constBegin();
       while(i != m_platforms.constEnd()) {
         // don't forget that some platform names are substrings of others, like Wii and WiiU
-        if(i.value().length() > matchedPlatform.length() && request().value.contains(i.value())) {
+        if(i.value().length() > matchedPlatform.length() && request().value().contains(i.value())) {
           pId = i.key();
           matchedPlatform = i.value();
-          QString v = request().value; // reset search value
+          QString v = request().value(); // reset search value
           v.remove(matchedPlatform); // remove platform from search value
           value = v.simplified();
           // can't break, because of potential substring platform name
@@ -154,11 +154,11 @@ void MobyGamesFetcher::continueSearch() {
       break;
 
     case Raw:
-      q.setQuery(request().value);
+      q.setQuery(request().value());
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       stop();
       return;
   }
@@ -474,9 +474,9 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
 
   // for efficiency, check if the search includes a platform
   // since the results will include all the platforms, not just the searched one
-  if(request().key == Raw &&
-     request().value.contains(platformS)) {
-    QUrlQuery q(request().value);
+  if(request().key() == Raw &&
+     request().value().contains(platformS)) {
+    QUrlQuery q(request().value());
     m_requestPlatformId = q.queryItemValue(platformS).toInt();
   }
 

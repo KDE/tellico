@@ -86,34 +86,34 @@ QUrl SpringerFetcher::searchUrl() {
   q.addQueryItem(QStringLiteral("s"), QString::number(m_start + 1));
   q.addQueryItem(QStringLiteral("p"), QString::number(SPRINGER_QUERY_COUNT));
 
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
-      q.addQueryItem(QStringLiteral("q"), QStringLiteral("title:\"%1\" OR book:\"%1\"").arg(request().value));
+      q.addQueryItem(QStringLiteral("q"), QStringLiteral("title:\"%1\" OR book:\"%1\"").arg(request().value()));
       break;
 
     case Person:
-      q.addQueryItem(QStringLiteral("q"), QStringLiteral("name:%1").arg(request().value));
+      q.addQueryItem(QStringLiteral("q"), QStringLiteral("name:%1").arg(request().value()));
       break;
 
     case Keyword:
-      q.addQueryItem(QStringLiteral("q"), QStringLiteral("\"%1\"").arg(request().value));
+      q.addQueryItem(QStringLiteral("q"), QStringLiteral("\"%1\"").arg(request().value()));
       break;
 
     case ISBN:
       {
         // only grab first value
-        QString v = request().value.section(QLatin1Char(';'), 0);
+        QString v = request().value().section(QLatin1Char(';'), 0);
         v = ISBNValidator::isbn13(v);
         q.addQueryItem(QStringLiteral("q"), QStringLiteral("isbn:%1").arg(v));
       }
       break;
 
     case DOI:
-      q.addQueryItem(QStringLiteral("q"), QStringLiteral("doi:%1").arg(request().value));
+      q.addQueryItem(QStringLiteral("q"), QStringLiteral("doi:%1").arg(request().value()));
       break;
 
     case Raw:
-      q.addQueryItem(QStringLiteral("q"), request().value);
+      q.addQueryItem(QStringLiteral("q"), request().value());
       break;
 
     default:

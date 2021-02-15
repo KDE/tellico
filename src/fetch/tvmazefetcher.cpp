@@ -100,19 +100,19 @@ void TVmazeFetcher::continueSearch() {
 
   QUrl u(QString::fromLatin1(TVMAZE_API_URL));
 
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       u = u.adjusted(QUrl::StripTrailingSlash);
       u.setPath(u.path() + QLatin1String("/search/shows"));
       {
         QUrlQuery q;
-        q.addQueryItem(QStringLiteral("q"), request().value);
+        q.addQueryItem(QStringLiteral("q"), request().value());
         u.setQuery(q);
       }
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       stop();
       return;
   }

@@ -28,6 +28,7 @@ SET(fetch_STAT_SRCS
    fetcherinitializer.cpp
    fetcherjob.cpp
    fetchmanager.cpp
+   fetchrequest.cpp
    fetchresult.cpp
    filmasterfetcher.cpp
    gcstarpluginfetcher.cpp

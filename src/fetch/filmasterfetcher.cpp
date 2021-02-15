@@ -85,7 +85,7 @@ void FilmasterFetcher::search() {
 
   QUrl u(QString::fromLatin1(FILMASTER_QUERY_URL));
 
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       u.setPath(u.path() + QLatin1String("film/"));
       break;
@@ -98,7 +98,7 @@ void FilmasterFetcher::search() {
       break;
   }
   QUrlQuery q;
-  q.addQueryItem(QStringLiteral("phrase"), request().value);
+  q.addQueryItem(QStringLiteral("phrase"), request().value());
   u.setQuery(q);
 
 //  myDebug() << "url:" << u;
@@ -189,7 +189,7 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
   QJsonDocument doc = QJsonDocument::fromJson(data);
   QVariantMap resultsMap = doc.object().toVariantMap();
   QVariantList resultList;
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       resultList = resultsMap.value(QStringLiteral("best_results")).toList()
                  + resultsMap.value(QStringLiteral("results")).toList();

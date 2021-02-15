@@ -85,8 +85,8 @@ void BedethequeFetcher::search() {
   m_matches.clear();
 
   // special case for updates which include the BD link as Raw request
-  if(request().key == Raw) {
-    QUrl u(request().value);
+  if(request().key() == Raw) {
+    QUrl u(request().value());
     u.setHost(QStringLiteral("m.bedetheque.com")); // use mobile site for easier parsing
     m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
     m_job->addMetaData(QStringLiteral("referrer"), QString::fromLatin1(BD_BASE_URL));
@@ -108,21 +108,21 @@ void BedethequeFetcher::search() {
 */
 
   QUrlQuery q;
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
-      q.addQueryItem(QStringLiteral("RechTitre"), request().value);
+      q.addQueryItem(QStringLiteral("RechTitre"), request().value());
       break;
 
     case Keyword:
-      q.addQueryItem(QStringLiteral("RechSerie"), request().value);
+      q.addQueryItem(QStringLiteral("RechSerie"), request().value());
       break;
 
     case ISBN:
-      q.addQueryItem(QStringLiteral("RechISBN"), ISBNValidator::cleanValue(request().value));
+      q.addQueryItem(QStringLiteral("RechISBN"), ISBNValidator::cleanValue(request().value()));
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       stop();
       return;
   }
@@ -256,7 +256,7 @@ void BedethequeFetcher::slotLinkComplete(KJob*) {
   }
 
   FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
-  m_matches.insert(r->uid, QUrl(request().value));
+  m_matches.insert(r->uid, QUrl(request().value()));
   m_entries.insert(r->uid, entry); // keep for later
 
   emit signalResultFound(r);

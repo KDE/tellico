@@ -87,11 +87,11 @@ void IBSFetcher::search() {
   q.addQueryItem(QStringLiteral("ts"), QStringLiteral("as"));
   q.addQueryItem(QStringLiteral("filterProduct_type"), QStringLiteral("ITBOOK"));
 
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       {
         // can't have ampersands
-        QString s = request().value;
+        QString s = request().value();
         s.remove(QLatin1Char('&'));
         q.addQueryItem(QStringLiteral("query"), s.simplified());
       }
@@ -99,7 +99,7 @@ void IBSFetcher::search() {
 
     case ISBN:
       {
-        QString s = request().value;
+        QString s = request().value();
         // limit to first isbn
         s = s.section(QLatin1Char(';'), 0, 0);
         // isbn13 search doesn't work?
@@ -111,11 +111,11 @@ void IBSFetcher::search() {
       break;
 
     case Keyword:
-      q.addQueryItem(QStringLiteral("query"), request().value);
+      q.addQueryItem(QStringLiteral("query"), request().value());
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       stop();
       return;
   }

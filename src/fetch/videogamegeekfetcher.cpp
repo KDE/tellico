@@ -75,26 +75,26 @@ QUrl VideoGameGeekFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(BGG_SEARCH_URL));
 
   QUrlQuery q;
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
-      q.addQueryItem(QStringLiteral("query"), request().value);
+      q.addQueryItem(QStringLiteral("query"), request().value());
       q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame,videogameexpansion"));
       q.addQueryItem(QStringLiteral("exact"), QStringLiteral("1"));
       break;
 
     case Keyword:
-      q.addQueryItem(QStringLiteral("query"), request().value);
+      q.addQueryItem(QStringLiteral("query"), request().value());
       q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame,videogameexpansion"));
       break;
 
     case Raw:
       u.setUrl(QLatin1String(BGG_THING_URL));
-      q.addQueryItem(QStringLiteral("id"), request().value);
+      q.addQueryItem(QStringLiteral("id"), request().value());
       q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame,videogameexpansion"));
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       return QUrl();
   }
   u.setQuery(q);

@@ -102,32 +102,32 @@ void DiscogsFetcher::search() {
   QUrl u(QString::fromLatin1(DISCOGS_API_URL));
 
   QUrlQuery q;
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
       u.setPath(QStringLiteral("/database/search"));
-      q.addQueryItem(QStringLiteral("release_title"), request().value);
+      q.addQueryItem(QStringLiteral("release_title"), request().value());
       q.addQueryItem(QStringLiteral("type"), QStringLiteral("release"));
       break;
 
     case Person:
       u.setPath(QStringLiteral("/database/search"));
-      q.addQueryItem(QStringLiteral("artist"), request().value);
+      q.addQueryItem(QStringLiteral("artist"), request().value());
       q.addQueryItem(QStringLiteral("type"), QStringLiteral("release"));
       break;
 
     case Keyword:
     case UPC:
       u.setPath(QStringLiteral("/database/search"));
-      q.addQueryItem(QStringLiteral("q"), request().value);
+      q.addQueryItem(QStringLiteral("q"), request().value());
       break;
 
     case Raw:
       u.setPath(QStringLiteral("/database/search"));
-      q.setQuery(request().value);
+      q.setQuery(request().value());
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key;
+      myWarning() << "key not recognized:" << request().key();
       stop();
       return;
   }

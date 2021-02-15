@@ -107,26 +107,26 @@ void MusicBrainzFetcher::doSearch() {
   u.setPath(u.path() + QStringLiteral("release"));
 
   QString queryString;
-  switch(request().key) {
+  switch(request().key()) {
     case Title:
-      queryString = QStringLiteral("release:\"%1\"").arg(request().value);
+      queryString = QStringLiteral("release:\"%1\"").arg(request().value());
       break;
 
     case Person:
-      queryString = QStringLiteral("artist:\"%1\"").arg(request().value);
+      queryString = QStringLiteral("artist:\"%1\"").arg(request().value());
       break;
 
     case UPC:
-      queryString = QStringLiteral("barcode:\"%1\"").arg(request().value);
+      queryString = QStringLiteral("barcode:\"%1\"").arg(request().value());
       break;
 
     case Keyword:
     case Raw:
-      queryString = request().value;
+      queryString = request().value();
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized: " << request().key();
       stop();
       return;
   }
