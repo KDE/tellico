@@ -1,7 +1,6 @@
 ArgumentKeys=1
 Arguments=%1
 CollectionType=2
-ExecPath=/usr/bin/cat
 FormatType=6
 Name=Cat File
 Type=data-source
