@@ -40,7 +40,7 @@ using namespace Tellico;
 using Tellico::Fetch::MultiFetcher;
 
 MultiFetcher::MultiFetcher(QObject* parent_)
-    : Fetcher(parent_), m_collType(0), m_started(false) {
+    : Fetcher(parent_), m_collType(0), m_fetcherIndex(0), m_started(false) {
 }
 
 MultiFetcher::~MultiFetcher() {
@@ -55,8 +55,8 @@ bool MultiFetcher::canFetch(int type) const {
 }
 
 bool MultiFetcher::canSearch(FetchKey k) const {
-  return k == Title ||
-         (k == ISBN && m_collType == Data::Collection::Book);
+  // can fetch anything supported by the first data source
+  return m_fetchers.isEmpty() || m_fetchers.front()->canSearch(k);;
 }
 
 void MultiFetcher::readConfigHook(const KConfigGroup& config_) {
@@ -71,11 +71,15 @@ void MultiFetcher::readSources() const {
   foreach(const QString& uuid, m_uuids) {
     Fetcher::Ptr fetcher = Manager::self()->fetcherByUuid(uuid);
     if(fetcher) {
+//      myDebug() << "Adding fetcher:" << fetcher->source();
       m_fetchers.append(fetcher);
-      connect(fetcher.data(), &Fetcher::signalResultFound,
-              this, &MultiFetcher::slotResult);
-      connect(fetcher.data(), &Fetcher::signalDone,
-              this, &MultiFetcher::slotDone);
+      // in the event we have multiple instances of same fetcher, only need to connect once
+      if(m_fetchers.count(fetcher) == 1) {
+        connect(fetcher.data(), &Fetcher::signalResultFound,
+                this, &MultiFetcher::slotResult);
+        connect(fetcher.data(), &Fetcher::signalDone,
+                this, &MultiFetcher::slotDone);
+      }
     }
   }
 }
@@ -83,17 +87,14 @@ void MultiFetcher::readSources() const {
 void MultiFetcher::search() {
   m_started = true;
   readSources();
-  foreach(Fetcher::Ptr fetcher, m_fetchers) {
-    fetcher->startSearch(request());
+  if(m_fetchers.isEmpty()) {
+//    myDebug() << source() << "has no sources";
+    slotDone();
+    return;
   }
-}
-
-void MultiFetcher::continueSearch() {
-  m_started = true;
-  readSources();
-  foreach(Fetcher::Ptr fetcher, m_fetchers) {
-    fetcher->continueSearch();
-  }
+  m_matches.clear();
+//  myDebug() << "Starting" << m_fetchers.front()->source();
+  m_fetchers.front()->startSearch(request());
 }
 
 void MultiFetcher::stop() {
@@ -109,30 +110,64 @@ void MultiFetcher::stop() {
 
 void MultiFetcher::slotResult(Tellico::Fetch::FetchResult* result) {
   Data::EntryPtr newEntry = result->fetchEntry();
-  // first check if we've already received this entry result from another fetcher
-  bool alreadyFound = false;
-  foreach(Data::EntryPtr entry, m_entries) {
-    if(entry->collection()->sameEntry(entry, newEntry) > EntryComparison::ENTRY_GOOD_MATCH) {
-      // same entry, so instead of adding a new result, just merge it
-      Data::Document::mergeEntry(entry, newEntry);
-      alreadyFound = true;
-      break;
-    }
+  // if fetcher index is 0, this is the first set of results, save them all
+  if(m_fetcherIndex == 0) {
+//    myDebug() << "...found new result:" << newEntry->title();
+    m_entries.append(newEntry);
+    return;
   }
 
-  if(!alreadyFound) {
-    m_entries.append(newEntry);
-  }
+  // otherwise, keep the entry to compare later
+  m_matches.append(newEntry);
 }
 
 void MultiFetcher::slotDone() {
-  //keep it simple, if a little slow
-  // iterate over all fetchers, if they are still running, do not emit done
-  foreach(Fetcher::Ptr fetcher, m_fetchers) {
-    if(fetcher->isSearching())  {
-      return;
+  if(m_fetcherIndex == 0) {
+    m_fetcherIndex++;
+    m_resultIndex = 0;
+  } else {
+    // iterate over all the matches from this data source and figure out which one is the best match to the existing result
+    Data::EntryPtr entry = m_entries.at(m_resultIndex);
+    int bestScore = -1;
+    int bestIndex = -1;
+    for(int idx = 0; idx < m_matches.count(); ++idx) {
+      auto match = m_matches.at(idx);
+      const int score = entry->collection()->sameEntry(entry, match);
+      if(score > bestScore) {
+        bestScore = score;
+        bestIndex = idx;
+      }
+      if(score > EntryComparison::ENTRY_PERFECT_MATCH) {
+        // no need to compare further
+        break;
+      }
+    }
+//    myDebug() << "best score" << bestScore  << "; index:" << bestIndex;
+    if(bestIndex > -1 && bestScore > EntryComparison::ENTRY_GOOD_MATCH) {
+      auto newEntry = m_matches.at(bestIndex);
+//      myDebug() << "...merging from" << newEntry->title() << "into" << entry->title();
+      Data::Document::mergeEntry(entry, newEntry);
+    } else {
+//      myDebug() << "___no match for" << entry->title();
+    }
+
+    // now, bump to next result and continue trying to match
+    m_resultIndex++;
+    if(m_resultIndex >= m_entries.count()) {
+      m_fetcherIndex++;
+      m_resultIndex = 0;
     }
   }
+
+  if(m_fetcherIndex < m_fetchers.count() && m_resultIndex < m_entries.count()) {
+    Fetcher::Ptr fetcher = m_fetchers.at(m_fetcherIndex);
+    Q_ASSERT(fetcher);
+//    myDebug() << "updating entry#" << m_resultIndex << "from" << fetcher->source();
+    fetcher->startUpdate(m_entries.at(m_resultIndex));
+    return;
+  }
+
+  // at this point, all the fetchers have run through all the results, so we're
   // done so emit all results
   foreach(Data::EntryPtr entry, m_entries) {
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
@@ -152,12 +187,11 @@ Tellico::Data::EntryPtr MultiFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Fetch::FetchRequest MultiFetcher::updateRequest(Data::EntryPtr entry_) {
-//  myDebug();
-  QString isbn = entry_->field(QStringLiteral("isbn"));
+  const QString isbn = entry_->field(QStringLiteral("isbn"));
   if(!isbn.isEmpty()) {
     return FetchRequest(ISBN, isbn);
   }
-  QString title = entry_->field(QStringLiteral("title"));
+  const QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }

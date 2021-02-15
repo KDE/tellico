@@ -794,6 +794,20 @@ add_test(mrlookupfetchertest mrlookupfetchertest)
 ecm_mark_as_test(mrlookupfetchertest)
 TARGET_LINK_LIBRARIES(mrlookupfetchertest fetcherstest ${TELLICO_BTPARSE_LIBS} ${TELLICO_TEST_LIBS})
 
+add_executable(multifetchertest multifetchertest.cpp abstractfetchertest.cpp
+  ../fetch/multifetcher.cpp
+  ../fetch/execexternalfetcher.cpp
+  ../fetch/messagelogger.cpp
+  ../translators/bibteximporter.cpp
+  ../translators/risimporter.cpp
+  ../gui/collectiontypecombo.cpp
+  ../gui/kwidgetlister.cpp
+)
+ecm_mark_nongui_executable(multifetchertest)
+add_test(multifetchertest multifetchertest)
+ecm_mark_as_test(multifetchertest)
+TARGET_LINK_LIBRARIES(multifetchertest fetcherstest newstuff ${TELLICO_BTPARSE_LIBS} ${TELLICO_TEST_LIBS})
+
 add_executable(musicbrainzfetchertest musicbrainzfetchertest.cpp abstractfetchertest.cpp
   ../fetch/musicbrainzfetcher.cpp
 )

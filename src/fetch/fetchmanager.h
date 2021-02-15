@@ -36,6 +36,7 @@
 #include <QPixmap>
 
 class QUrl;
+class MultiFetcherTest;
 
 namespace Tellico {
   namespace Fetch {
@@ -121,6 +122,7 @@ private Q_SLOTS:
 private:
   friend class ManagerMessage;
   friend class FetcherInitializer;
+  friend class ::MultiFetcherTest;
   static Manager* s_self;
 
   Manager();

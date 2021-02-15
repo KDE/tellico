@@ -536,7 +536,7 @@ For updating entries already in the collection, the final check box and edit box
 <sect2 id="multiple-sources">
 <title>Multiple Combined Data Sources</title>
 <para>
-Combinations of up to eight existing data sources can be used as a single source, where the search results from all the sources are merged. The collection type to be used must be set before adding sources.
+Combinations of up to eight existing data sources can be used as a single source, where each search result from the first source is updated from the subsequent sources. The collection type to be used must be set before adding sources.
 </para>
 
 <screenshot>
@@ -546,7 +546,7 @@ Combinations of up to eight existing data sources can be used as a single source
 </screenshot>
 
 <para>
-Only existing data sources can be used in combination. The search request is sent to each source, and the results are combined. Since the merged results depend on the order of the search results, the combined set may be different depending on network and source speed.
+Only existing data sources can be used in combination. Only the search type for the first source can be used in this source since the results come from the first data source. For example, a UPCitemDb search may first be done, with each result then updated from the TheMovieDB.
 </para>
 </sect2>
 

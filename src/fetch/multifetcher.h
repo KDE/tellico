@@ -61,7 +61,6 @@ public:
    */
   virtual QString source() const Q_DECL_OVERRIDE;
   virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
-  virtual void continueSearch() Q_DECL_OVERRIDE;
   virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
   virtual void stop() Q_DECL_OVERRIDE;
   virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
@@ -93,10 +92,13 @@ private:
   void readSources() const;
 
   Data::EntryList m_entries;
+  Data::EntryList m_matches;
   QHash<uint, Data::EntryPtr> m_entryHash;
   int m_collType;
   QStringList m_uuids;
   mutable QList<Fetcher::Ptr> m_fetchers;
+  int m_fetcherIndex;
+  int m_resultIndex;
 
   bool m_started;
 };

@@ -1,3 +1,7 @@
+2021-02-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved MultiFetcher to chain data source searches in order.
+
 2021-02-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Added UPCItemDB.com data source.
