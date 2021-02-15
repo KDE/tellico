@@ -105,7 +105,6 @@ void OMDBFetcher::continueSearch() {
 
   QUrl u(QString::fromLatin1(OMDB_API_URL));
   QUrlQuery q;
-  q.addQueryItem(QStringLiteral("apikey"), m_apiKey);
   switch(request().key()) {
     case Title:
       q.addQueryItem(QStringLiteral("type"), QStringLiteral("movie"));
@@ -113,12 +112,18 @@ void OMDBFetcher::continueSearch() {
       q.addQueryItem(QStringLiteral("s"), request().value());
       break;
 
+    case Raw:
+      q.setQuery(request().value());
+      break;
+
     default:
       myWarning() << "key not recognized:" << request().key();
       stop();
       return;
   }
+  q.addQueryItem(QStringLiteral("apikey"), m_apiKey);
   u.setQuery(q);
+//  myDebug() << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -187,9 +192,26 @@ Tellico::Data::EntryPtr OMDBFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Fetch::FetchRequest OMDBFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QStringLiteral("title"));
+  QString imdb = entry_->field(QStringLiteral("imdb"));
+  if(imdb.isEmpty()) {
+    imdb = entry_->field(QStringLiteral("imdb-id"));
+  }
+  if(!imdb.isEmpty()) {
+    QRegularExpression ttRx(QStringLiteral("tt\\d+"));
+    auto ttMatch = ttRx.match(imdb);
+    if(ttMatch.hasMatch()) {
+      return FetchRequest(Raw, QStringLiteral("type=movie&r=json&i=") + ttMatch.captured());
+    }
+  }
+
+  const QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
-    return FetchRequest(Title, title);
+    const QString year = entry_->field(QStringLiteral("year"));
+    if(year.isEmpty()) {
+      return FetchRequest(Title, title);
+    } else {
+      return FetchRequest(Raw, QStringLiteral("type=movie&r=json&s=\"%1\"&y=%2").arg(title, year));
+    }
   }
   return FetchRequest();
 }
@@ -256,19 +278,34 @@ void OMDBFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  QVariantList resultList = result.value(QStringLiteral("Search")).toList();
+  const QString search = QStringLiteral("Search");
+  QVariantList resultList = result.value(search).toList();
   if(resultList.isEmpty()) {
-    myDebug() << "no results";
-    stop();
-    return;
+    // might be a single result
+    if(result.contains(QLatin1String("Title"))) {
+      resultList << result;
+    } else {
+      myDebug() << "no results";
+      stop();
+      return;
+    }
   }
+
+  // if the search was a Raw update, then fully populate it
+  // and wipe the imdb-id value
+  const bool fullResult = request().key() == Fetch::Raw &&
+                          !result.contains(search);
 
   int count = 0;
   foreach(const QVariant& result, resultList) {
 //    myDebug() << "found result:" << result;
 
     Data::EntryPtr entry(new Data::Entry(coll));
-    populateEntry(entry, result.toMap(), false);
+    populateEntry(entry, result.toMap(), fullResult);
+    if(fullResult) {
+      // indicate it's already fully populated
+      entry->setField(QStringLiteral("imdb-id"), QString());
+    }
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);

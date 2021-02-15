@@ -74,7 +74,7 @@ void OMDBFetcherTest::testTitle() {
            set("Michael Dougherty; Dan Harris; Bryan Singer; Michael Dougherty; Dan Harris; Jerry Siegel; Joe Shuster"));
 //  QCOMPARE(entry->field(QStringLiteral("producer")), QStringLiteral("Bryan Singer; Jon Peters; Gilbert Adler"));
   QCOMPARE(entry->field(QStringLiteral("running-time")), QStringLiteral("154"));
-  QCOMPARE(entry->field(QStringLiteral("nationality")), QStringLiteral("USA"));
+  QCOMPARE(entry->field(QStringLiteral("nationality")), QStringLiteral("USA; Australia"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QStringLiteral("Brandon Routh"));
@@ -103,4 +103,26 @@ void OMDBFetcherTest::testBabel() {
   QCOMPARE(entry->field("title"), QStringLiteral("Babel"));
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro G. Iñárritu"));
+}
+
+void OMDBFetcherTest::testUpdate() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::VideoCollection(true));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("imdb"),
+                                                         QStringLiteral("IMDB"),
+                                                         Tellico::Data::Field::URL));
+  QCOMPARE(coll->addField(field), true);
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry);
+  entry->setField(QStringLiteral("title"), QStringLiteral("The Man From Snowy River"));
+  entry->setField(QStringLiteral("year"), QStringLiteral("1982"));
+
+  Tellico::Fetch::OMDBFetcher fetcher(this);
+  auto request = fetcher.updateRequest(entry);
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QVERIFY(request.value().contains(QStringLiteral("y=1982")));
+
+  entry->setField(QStringLiteral("imdb"), QStringLiteral("https://www.imdb.com/title/tt0084296/?ref_=nv_sr_srsg_0"));
+  request = fetcher.updateRequest(entry);
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QVERIFY(request.value().contains(QStringLiteral("i=tt0084296")));
 }
