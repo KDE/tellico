@@ -126,3 +126,26 @@ void TheMovieDBFetcherTest::testBabel() {
   QCOMPARE(set(entry, "director"), set(QString::fromUtf8("Alejandro González Iñárritu")));
   QCOMPARE(set(entry, "producer"), set(QString::fromUtf8("Alejandro González Iñárritu; Steve Golin; Jon Kilik; Ann Ruark; Corinne Golden Weber")));
 }
+
+void TheMovieDBFetcherTest::testUpdate() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::VideoCollection(true));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("imdb"),
+                                                         QStringLiteral("IMDB"),
+                                                         Tellico::Data::Field::URL));
+  QCOMPARE(coll->addField(field), true);
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry);
+  entry->setField(QStringLiteral("title"), QStringLiteral("The Man From Snowy River"));
+  entry->setField(QStringLiteral("year"), QStringLiteral("1982"));
+
+  Tellico::Fetch::TheMovieDBFetcher fetcher(this);
+  auto request = fetcher.updateRequest(entry);
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QVERIFY(request.value().contains(QStringLiteral("year=1982")));
+
+  entry->setField(QStringLiteral("imdb"), QStringLiteral("https://www.imdb.com/title/tt0084296/?ref_=nv_sr_srsg_0"));
+  request = fetcher.updateRequest(entry);
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QCOMPARE(request.value(), QStringLiteral("external_source=imdb_id"));
+  QCOMPARE(request.data(), QStringLiteral("/find/tt0084296"));
+}

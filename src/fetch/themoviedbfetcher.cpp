@@ -131,18 +131,22 @@ void TheMovieDBFetcher::continueSearch() {
 
   QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
   u.setPath(QLatin1Char('/') + QLatin1String(THEMOVIEDB_API_VERSION));
+  u = u.adjusted(QUrl::StripTrailingSlash);
 
+  QUrlQuery q;
   switch(request().key()) {
     case Title:
-      u = u.adjusted(QUrl::StripTrailingSlash);
       u.setPath(u.path() + QLatin1String("/search/movie"));
-      {
-        QUrlQuery q;
-        q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
-        q.addQueryItem(QStringLiteral("language"), m_locale);
-        q.addQueryItem(QStringLiteral("query"), request().value());
-        u.setQuery(q);
+      q.addQueryItem(QStringLiteral("query"), request().value());
+      break;
+
+    case Raw:
+      if(request().data().isEmpty()) {
+        u.setPath(u.path() + QLatin1String("/search/movie"));
+      } else {
+        u.setPath(u.path() + request().data());
       }
+      q.setQuery(request().value());
       break;
 
     default:
@@ -150,6 +154,10 @@ void TheMovieDBFetcher::continueSearch() {
       stop();
       return;
   }
+  q.addQueryItem(QStringLiteral("language"), m_locale);
+  q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
+  u.setQuery(q);
+//  myDebug() << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -220,9 +228,28 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Fetch::FetchRequest TheMovieDBFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QStringLiteral("title"));
+  QString imdb = entry_->field(QStringLiteral("imdb"));
+  if(imdb.isEmpty()) {
+    imdb = entry_->field(QStringLiteral("imdb-id"));
+  }
+  if(!imdb.isEmpty()) {
+    QRegularExpression ttRx(QStringLiteral("tt\\d+"));
+    auto ttMatch = ttRx.match(imdb);
+    if(ttMatch.hasMatch()) {
+      FetchRequest req(Raw, QStringLiteral("external_source=imdb_id"));
+      req.setData(QLatin1String("/find/") + ttMatch.captured()); // tell the request to use a different endpoint
+      return req;
+    }
+  }
+
+  const QString title = entry_->field(QStringLiteral("title"));
+  const QString year = entry_->field(QStringLiteral("year"));
   if(!title.isEmpty()) {
-    return FetchRequest(Title, title);
+    if(year.isEmpty()) {
+      return FetchRequest(Title, title);
+    } else {
+      return FetchRequest(Raw, QStringLiteral("query=\"%1\"&year=%2").arg(title, year));
+    }
   }
   return FetchRequest();
 }
@@ -286,6 +313,10 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
   QVariantMap result = doc.object().toVariantMap();
 
   QVariantList resultList = result.value(QStringLiteral("results")).toList();
+  if(resultList.isEmpty()) {
+    resultList = result.value(QStringLiteral("movie_results")).toList();
+  }
+
   if(resultList.isEmpty()) {
     myDebug() << "no results";
     stop();

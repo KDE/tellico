@@ -45,11 +45,14 @@ public:
 
   FetchKey key() const { return m_key; }
   QString value() const { return m_value; }
+  QString data() const { return m_data; }
+  void setData(const QString& data) { m_data = data; }
 
 private:
   int m_collectionType;
   FetchKey m_key;
   QString m_value;
+  QString m_data;
 };
 
   } // end namespace

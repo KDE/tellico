@@ -1453,7 +1453,6 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
 }
 
 Tellico::Fetch::FetchRequest IMDBFetcher::updateRequest(Data::EntryPtr entry_) {
-  const QString t = entry_->field(QStringLiteral("title"));
   QUrl link = QUrl::fromUserInput(entry_->field(QStringLiteral("imdb")));
 
   if(!link.isEmpty() && link.isValid()) {
@@ -1465,6 +1464,7 @@ Tellico::Fetch::FetchRequest IMDBFetcher::updateRequest(Data::EntryPtr entry_) {
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
+  const QString t = entry_->field(QStringLiteral("title"));
   if(!t.isEmpty()) {
     return FetchRequest(Fetch::Title, t);
   }
