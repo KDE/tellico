@@ -105,7 +105,7 @@
      <tc:field flags="6" title="Soil" category="General" format="4" type="1" name="soil" i18n="true"/>
      <tc:field flags="6" title="Alcohol" category="General" format="4" type="1" name="alcohol" i18n="true"/>
      <tc:field flags="6" title="Volume" category="General" format="4" type="1" name="volume" i18n="true"/>
-     <tc:field title="Type" flags="2" category="General" format="4" type="3" name="type" i18n="yes">
+     <tc:field title="Type" flags="2" category="General" format="4" type="3" name="type" i18n="true">
       <xsl:attribute name="allowed">
        <xsl:text>Red Wine;White Wine;Sparkling Wine</xsl:text>
        <xsl:for-each select="item[not(@type=preceding-sibling::item/@type)]/@type">

@@ -30,7 +30,7 @@
   <tc:collection title="Griffith Import" type="3">
    <tc:fields>
     <tc:field name="_default"/>
-    <tc:field flags="0" title="Original Title" category="General" format="1" type="1" name="origtitle" i18n="yes"/>
+    <tc:field flags="0" title="Original Title" category="General" format="1" type="1" name="origtitle" i18n="true"/>
     <tc:field flags="0" title="Seen" category="Personal" format="4" type="4" name="seen" i18n="true"/>
    </tc:fields>
    <xsl:apply-templates select="root/movie"/>
@@ -76,7 +76,7 @@
                                  normalize-space(../country),
                                  ')'
                                  )"/>
-    
+
    </xsl:when>
    <xsl:otherwise>
     <!-- just assume USA -->
