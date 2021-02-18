@@ -64,6 +64,12 @@ QString GiantBombFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+QString GiantBombFetcher::attribution() const {
+  // TODO: i18n after string freeze
+  return QStringLiteral("This information was freely provided by <a href=\"%1\">%2</a>.")
+                   .arg(QLatin1String("https://giantbomb.com"), QLatin1String("Giant Bomb"));
+}
+
 bool GiantBombFetcher::canFetch(int type) const {
   return type == Data::Collection::Game;
 }
