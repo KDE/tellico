@@ -167,7 +167,6 @@ while the full list is <ulink url="https://tellico-project.org/data-sources">ava
 <listitem><simpara><link linkend="allocine">AlloCiné</link>,</simpara></listitem>
 <listitem><simpara><link linkend="tmdb">TheMovieDB.org</link>,</simpara></listitem>
 <listitem><simpara>the <link linkend="omdb">Open Movie Database</link>,</simpara></listitem>
-<listitem><simpara><link linkend="animenfo">AnimeNfo.com</link>,</simpara></listitem>
 <!-- comics -->
 <listitem><simpara><link linkend="bedetheque">BDGest</link>,</simpara></listitem>
 <listitem><simpara><link linkend="comicvine">Comic Vine</link>,</simpara></listitem>
@@ -366,12 +365,6 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 </para>
 </sect3>
 
-<sect3 id="animenfo">
-<title>AnimeNfo.com</title>
-<para>
-<ulink url="http://www.animenfo.com">AnimeNfo</ulink> is a popular site for information on anime, or Japanese animation.
-</para>
-</sect3>
 </sect2>
 
 <!-- start of music sources -->
