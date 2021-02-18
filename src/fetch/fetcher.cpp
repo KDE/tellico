@@ -201,8 +201,13 @@ QString Fetcher::favIcon(const QUrl& url_) {
   if(!url_.isValid()) {
     return QString();
   }
+
 #if KIO_VERSION >= QT_VERSION_CHECK(5,19,0)
   KIO::FavIconRequestJob* job = new KIO::FavIconRequestJob(url_);
+  // if the url has a meaningful path, then use it as the icon url
+  if(url_.path().size() > 4 && url_.path().contains(QLatin1Char('.'))) {
+    job->setIconUrl(url_);
+  }
   Q_UNUSED(job);
 #endif
   QString name = KIO::favIconForUrl(url_);

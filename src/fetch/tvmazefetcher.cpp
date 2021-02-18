@@ -59,7 +59,6 @@ using Tellico::Fetch::TVmazeFetcher;
 TVmazeFetcher::TVmazeFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false) {
-  //  setLimit(THEMOVIEDB_MAX_RETURNS_TOTAL);
 }
 
 TVmazeFetcher::~TVmazeFetcher() {
@@ -380,7 +379,7 @@ QString TVmazeFetcher::defaultName() {
 }
 
 QString TVmazeFetcher::defaultIcon() {
-  return favIcon("https://tvmaze.com");
+  return favIcon("https://static.tvmaze.com/images/favico/favicon.ico");
 }
 
 Tellico::StringHash TVmazeFetcher::allOptionalFields() {

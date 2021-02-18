@@ -115,7 +115,7 @@ QString DBLPFetcher::defaultName() {
 }
 
 QString DBLPFetcher::defaultIcon() {
-  return favIcon("http://dblp.uni-trier.de");
+  return favIcon("https://dblp.org");
 }
 
 Tellico::StringHash DBLPFetcher::allOptionalFields() {

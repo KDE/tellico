@@ -158,7 +158,7 @@ QString BiblioShareFetcher::defaultName() {
 }
 
 QString BiblioShareFetcher::defaultIcon() {
-  return favIcon("https://www.booknetcanada.ca/biblioshare");
+  return favIcon("https://www.booknetcanada.ca");
 }
 
 BiblioShareFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BiblioShareFetcher* fetcher_)
