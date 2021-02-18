@@ -33,6 +33,9 @@
 #include "../images/imagefactory.h"
 #include "../utils/datafileregistry.h"
 
+#include <KSharedConfig>
+#include <KConfigGroup>
+
 #include <QTest>
 
 QTEST_GUILESS_MAIN( DVDFrFetcherTest )
@@ -91,9 +94,12 @@ void DVDFrFetcherTest::testTitleAccented() {
 }
 
 void DVDFrFetcherTest::testUPC() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("upcitemdb"));
+  cg.writeEntry("Custom Fields", QStringLiteral("dvdfr,barcode"));
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::UPC,
                                        QStringLiteral("3259119636120"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DVDFrFetcher(this));
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -106,6 +112,8 @@ void DVDFrFetcherTest::testUPC() {
     QString result = entry->field(i.key()).toLower();
     QCOMPARE(result, i.value().toLower());
   }
+  QCOMPARE(entry->field(QStringLiteral("dvdfr")), QStringLiteral("https://www.dvdfr.com/dvd/f4329-pacte-des-loups.html"));
+  QCOMPARE(entry->field(QStringLiteral("barcode")), QStringLiteral("3259119636120"));
   QCOMPARE(entry->field(QStringLiteral("medium")), QStringLiteral("DVD"));
   QVERIFY(!entry->field(QStringLiteral("cast")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());

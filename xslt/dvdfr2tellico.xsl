@@ -24,12 +24,13 @@
   <collection title="Search Results" type="3"> <!-- 11 is video -->
    <fields>
     <field name="_default"/>
-    <field flags="0" title="Original Title" category="General" format="1" type="1" name="origtitle" i18n="yes"/>
+    <field flags="0" title="Original Title" category="General" format="1" type="1" name="origtitle" i18n="true"/>
     <field flags="0" title="DVDFr ID" category="General" format="4" type="1" name="dvdfr-id"/>
-    <field flags="0" title="DVDFr Link" category="General" format="4" type="7" name="dvdfr"/>
+    <field flags="0" title="DVDFr Link" category="General" format="4" type="7" name="dvdfr" i18n="true"/>
     <field title="Alternative Titles" flags="1" category="Alternative Titles" format="1" type="8" name="alttitle" i18n="true">
      <prop name="columns">1</prop>
     </field>
+    <field flags="0" title="Barcode" category="General" format="4" type="1" name="barcode" i18n="true"/>
    </fields>
    <!-- initial search has dvds/dvd elements, final detailed is only dvd -->
    <xsl:apply-templates select="/dvds/dvd | /dvd"/>
@@ -46,6 +47,10 @@
   <dvdfr-id>
    <xsl:value-of select="id"/>
   </dvdfr-id>
+
+  <barcode>
+   <xsl:value-of select="ean"/>
+  </barcode>
 
   <title>
    <xsl:value-of select="titres/fr"/>

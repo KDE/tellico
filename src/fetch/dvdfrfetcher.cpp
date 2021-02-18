@@ -108,11 +108,11 @@ Tellico::Data::EntryPtr DVDFrFetcher::fetchEntryHookData(Data::EntryPtr entry_) 
 //  myDebug() << "url: " << u;
 
   // quiet
-  QString output = FileHandler::readXMLFile(u, true);
+  const QString output = FileHandler::readXMLFile(u, true);
 
 #if 0
   myWarning() << "Remove output debug from dvdfrfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test.xml"));
+  QFile f(QLatin1String("/tmp/test-dvdfr-details.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
@@ -125,7 +125,6 @@ Tellico::Data::EntryPtr DVDFrFetcher::fetchEntryHookData(Data::EntryPtr entry_) 
   // be quiet when loading images
   imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   Data::CollPtr coll = imp.collection();
-//  getTracks(entry);
   if(!coll) {
     myWarning() << "no collection pointer";
     return entry_;
@@ -145,7 +144,15 @@ Tellico::Data::EntryPtr DVDFrFetcher::fetchEntryHookData(Data::EntryPtr entry_) 
 }
 
 Tellico::Fetch::FetchRequest DVDFrFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QStringLiteral("title"));
+  QString barcode = entry_->field(QStringLiteral("barcode"));
+  if(barcode.isEmpty()) {
+    barcode = entry_->field(QStringLiteral("upc"));
+  }
+  if(!barcode.isEmpty()) {
+    return FetchRequest(UPC, barcode);
+  }
+
+  const QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -161,7 +168,7 @@ QString DVDFrFetcher::defaultName() {
 }
 
 QString DVDFrFetcher::defaultIcon() {
-  return favIcon("http://www.dvdfr.com");
+  return favIcon("https://www.dvdfr.com");
 }
 
 Tellico::StringHash DVDFrFetcher::allOptionalFields() {
@@ -169,6 +176,7 @@ Tellico::StringHash DVDFrFetcher::allOptionalFields() {
   hash[QStringLiteral("origtitle")] = i18n("Original Title");
   hash[QStringLiteral("dvdfr")]     = i18n("DVDFr Link");
   hash[QStringLiteral("alttitle")]  = i18n("Alternative Titles");
+  hash[QStringLiteral("barcode")]   = i18n("Barcode");
   return hash;
 }
 
