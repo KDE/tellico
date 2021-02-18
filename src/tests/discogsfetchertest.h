@@ -42,6 +42,7 @@ private Q_SLOTS:
   void testBarcode();
   void testRawData();
   void testRawDataVinyl();
+  void testUpdate();
 
 private:
   bool m_hasConfigFile;

@@ -27,6 +27,7 @@
 #include "discogsfetchertest.h"
 #include "../fetch/discogsfetcher.h"
 #include "../entry.h"
+#include "../collections/musiccollection.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 
@@ -255,4 +256,20 @@ void DiscogsFetcherTest::testRawDataVinyl() {
   QCOMPARE(trackList.count(), 14);
   QCOMPARE(trackList.at(0), QStringLiteral("Janie Jones::The Clash::2:05"));
   m_needToWait = true;
+}
+
+void DiscogsFetcherTest::testUpdate() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::MusicCollection(true));
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  entry->setField(QStringLiteral("title"), QStringLiteral("Nevermind"));
+  entry->setField(QStringLiteral("artist"), QStringLiteral("Nirvana"));
+  entry->setField(QStringLiteral("year"), QStringLiteral("1991"));
+  coll->addEntries(entry);
+
+  Tellico::Fetch::DiscogsFetcher fetcher(this);
+  auto request = fetcher.updateRequest(entry);
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QVERIFY(request.value().contains(QStringLiteral("title=Nevermind")));
+  QVERIFY(request.value().contains(QStringLiteral("artist=Nirvana")));
+  QVERIFY(request.value().contains(QStringLiteral("year=1991")));
 }
