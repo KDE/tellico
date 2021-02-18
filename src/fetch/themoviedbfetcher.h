@@ -33,6 +33,7 @@
 #include <QDate>
 
 class QLineEdit;
+class QSpinBox;
 
 class KJob;
 namespace KIO {
@@ -106,6 +107,7 @@ private:
   QDate m_serverConfigDate;
   QString m_apiKey;
   QString m_imageBase;
+  int m_numCast;
 
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
@@ -125,6 +127,7 @@ private Q_SLOTS:
 private:
   QLineEdit* m_apiKeyEdit;
   GUI::ComboBox* m_langCombo;
+  QSpinBox* m_numCast;
 };
 
   } // end namespace

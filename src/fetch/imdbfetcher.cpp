@@ -52,6 +52,7 @@
 
 namespace {
   static const uint IMDB_MAX_RESULTS = 20;
+  static const uint IMDB_DEFAULT_CAST_SIZE = 10;
 }
 
 using namespace Tellico;
@@ -280,7 +281,7 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
 
 IMDBFetcher::IMDBFetcher(QObject* parent_) : Fetcher(parent_),
     m_job(nullptr), m_started(false), m_fetchImages(true),
-    m_numCast(10), m_redirected(false), m_limit(IMDB_MAX_RESULTS), m_lang(EN),
+    m_numCast(IMDB_DEFAULT_CAST_SIZE), m_redirected(false), m_limit(IMDB_MAX_RESULTS), m_lang(EN),
     m_currentTitleBlock(Unknown), m_countOffset(0) {
   if(!s_instanceCount++) {
     initRegExps();
@@ -321,7 +322,7 @@ void IMDBFetcher::readConfigHook(const KConfigGroup& config_) {
   } else {
     m_host = h;
   }
-  m_numCast = config_.readEntry("Max Cast", 10);
+  m_numCast = config_.readEntry("Max Cast", IMDB_DEFAULT_CAST_SIZE);
   m_fetchImages = config_.readEntry("Fetch Images", true);
 }
 
@@ -1501,33 +1502,13 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   l->setColumnStretch(1, 10);
 
   int row = -1;
-  /*
-  IMDB.fr and others now redirects to imdb.com
-  QLabel* label = new QLabel(i18n("Country: "), optionsWidget());
-  l->addWidget(label, ++row, 0);
-  m_langCombo = new GUI::ComboBox(optionsWidget());
-  m_langCombo->addItem(i18n("United States"), EN);
-  m_langCombo->addItem(i18n("France"), FR);
-  m_langCombo->addItem(i18n("Spain"), ES);
-  m_langCombo->addItem(i18n("Germany"), DE);
-  m_langCombo->addItem(i18n("Italy"), IT);
-  m_langCombo->addItem(i18n("Portugal"), PT);
-  connect(m_langCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
-  connect(m_langCombo, SIGNAL(activated(int)), SLOT(slotSiteChanged()));
-  l->addWidget(m_langCombo, row, 1);
-  QString w = i18n("The Internet Movie Database provides data from several different localized sites. "
-                   "Choose the one you wish to use for this data source.");
-  label->setWhatsThis(w);
-  m_langCombo->setWhatsThis(w);
-  label->setBuddy(m_langCombo);
-  */
 
   QLabel* label = new QLabel(i18n("&Maximum cast: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_numCast = new QSpinBox(optionsWidget());
   m_numCast->setMaximum(99);
   m_numCast->setMinimum(0);
-  m_numCast->setValue(10);
+  m_numCast->setValue(IMDB_DEFAULT_CAST_SIZE);
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::valueChanged;
 #else
@@ -1555,26 +1536,20 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   KAcceleratorManager::manage(optionsWidget());
 
   if(fetcher_) {
-    // m_langCombo->setCurrentData(fetcher_->m_lang);
     m_numCast->setValue(fetcher_->m_numCast);
     m_fetchImageCheck->setChecked(fetcher_->m_fetchImages);
   } else { //defaults
-    // m_langCombo->setCurrentData(EN);
-    m_numCast->setValue(10);
     m_fetchImageCheck->setChecked(true);
   }
 }
 
 void IMDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
-  // int n = m_langCombo->currentData().toInt();
-  // config_.writeEntry("Lang", n);
   config_.writeEntry("Host", QString()); // clear old host entry
   config_.writeEntry("Max Cast", m_numCast->value());
   config_.writeEntry("Fetch Images", m_fetchImageCheck->isChecked());
 }
 
 QString IMDBFetcher::ConfigWidget::preferredName() const {
-  // return IMDBFetcher::langData(m_langCombo->currentData().toInt()).siteTitle;
   return IMDBFetcher::langData(EN).siteTitle;
 }
 

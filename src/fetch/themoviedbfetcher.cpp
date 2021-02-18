@@ -48,12 +48,14 @@
 #include <QJsonObject>
 #include <QUrlQuery>
 #include <QStandardPaths>
+#include <QSpinBox>
 
 namespace {
   static const int THEMOVIEDB_MAX_RETURNS_TOTAL = 20;
   static const char* THEMOVIEDB_API_URL = "https://api.themoviedb.org";
   static const char* THEMOVIEDB_API_VERSION = "3"; // krazy:exclude=doublequote_chars
   static const char* THEMOVIEDB_API_KEY = "919890b4128d33c729dc368209ece555";
+  static const uint THEMOVIEDB_DEFAULT_CAST_SIZE = 10;
 }
 
 using namespace Tellico;
@@ -63,7 +65,8 @@ TheMovieDBFetcher::TheMovieDBFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false)
     , m_locale(QStringLiteral("en"))
-    , m_apiKey(QLatin1String(THEMOVIEDB_API_KEY)) {
+    , m_apiKey(QLatin1String(THEMOVIEDB_API_KEY))
+    , m_numCast(THEMOVIEDB_DEFAULT_CAST_SIZE) {
   //  setLimit(THEMOVIEDB_MAX_RETURNS_TOTAL);
 }
 
@@ -101,6 +104,7 @@ void TheMovieDBFetcher::readConfigHook(const KConfigGroup& config_) {
     m_imageBase = k;
   }
   m_serverConfigDate = config_.readEntry("ServerConfigDate", QDate());
+  m_numCast = config_.readEntry("Max Cast", THEMOVIEDB_DEFAULT_CAST_SIZE);
 }
 
 void TheMovieDBFetcher::saveConfigHook(KConfigGroup& config_) {
@@ -395,8 +399,11 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   QVariantList castList = resultMap_.value(QStringLiteral("credits")).toMap()
                                     .value(QStringLiteral("cast")).toList();
   foreach(const QVariant& cast, castList) {
-    QVariantMap castMap = cast.toMap();
+    const QVariantMap castMap = cast.toMap();
     actors << mapValue(castMap, "name") + FieldFormat::columnDelimiterString() + mapValue(castMap, "character");
+    if(actors.count() >= m_numCast) {
+      break;
+    }
   }
   entry_->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
 
@@ -509,6 +516,24 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   m_apiKeyEdit->setWhatsThis(w);
   label->setBuddy(m_apiKeyEdit);
 
+  label = new QLabel(i18n("&Maximum cast: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_numCast = new QSpinBox(optionsWidget());
+  m_numCast->setMaximum(99);
+  m_numCast->setMinimum(0);
+  m_numCast->setValue(THEMOVIEDB_DEFAULT_CAST_SIZE);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+  void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::valueChanged;
+#else
+  void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::textChanged;
+#endif
+  connect(m_numCast, textChanged, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_numCast, row, 1);
+  w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
+  label->setWhatsThis(w);
+  m_numCast->setWhatsThis(w);
+  label->setBuddy(m_numCast);
+
   label = new QLabel(i18n("Language: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_langCombo = new GUI::ComboBox(optionsWidget());
@@ -542,6 +567,7 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
       m_apiKeyEdit->setText(fetcher_->m_apiKey);
     }
     m_langCombo->setCurrentData(fetcher_->m_locale);
+    m_numCast->setValue(fetcher_->m_numCast);
   }
 }
 
@@ -552,6 +578,7 @@ void TheMovieDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   }
   const QString lang = m_langCombo->currentData().toString();
   config_.writeEntry("Locale", lang);
+  config_.writeEntry("Max Cast", m_numCast->value());
 }
 
 QString TheMovieDBFetcher::ConfigWidget::preferredName() const {
