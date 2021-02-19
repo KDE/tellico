@@ -49,6 +49,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QUrlQuery>
+#include <QTimer>
 
 namespace {
   static const int THEGAMESDB_MAX_RETURNS_TOTAL = 20;
@@ -63,12 +64,15 @@ using Tellico::Fetch::TheGamesDBFetcher;
 TheGamesDBFetcher::TheGamesDBFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false)
-    , m_needToLoadData(true)
     , m_imageSize(SmallImage) {
   m_apiKey = Tellico::reverseObfuscate(THEGAMESDB_MAGIC_TOKEN);
+  // delay reading the platform names from the cache file
+  QTimer::singleShot(0, this, &TheGamesDBFetcher::loadCachedData);
+  myDebug() << "TheGamesDBFetcher()";
 }
 
 TheGamesDBFetcher::~TheGamesDBFetcher() {
+  myDebug() << "~TheGamesDBFetcher()" << uuid();
 }
 
 QString TheGamesDBFetcher::source() const {
@@ -106,11 +110,6 @@ void TheGamesDBFetcher::search() {
     return;
   }
 
-  if(m_needToLoadData) {
-    m_needToLoadData = false;
-    loadCachedData();
-  }
-
   QUrl u(QString::fromLatin1(THEGAMESDB_API_URL));
   u.setPath(QLatin1String("/v") + QLatin1String(THEGAMESDB_API_VERSION));
 
@@ -128,6 +127,9 @@ void TheGamesDBFetcher::search() {
         }
         q.addQueryItem(QStringLiteral("include"), QStringLiteral("platform,boxart"));
         q.addQueryItem(QStringLiteral("name"), request().value());
+        if(!request().data().isEmpty()) {
+          q.addQueryItem(QStringLiteral("filter[platform]"), request().data());
+        }
         u.setQuery(q);
       }
       break;
@@ -182,9 +184,25 @@ Tellico::Data::EntryPtr TheGamesDBFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Fetch::FetchRequest TheGamesDBFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QStringLiteral("title"));
+  const QString platform = entry_->field(QStringLiteral("platform"));
+  int platformId = -1;
+  // if the platform id is available, it can be used to filter the update search
+  if(!platform.isEmpty()) {
+    for(auto i = m_platforms.constBegin(); i != m_platforms.constEnd(); ++i) {
+      if(i.value() == platform) {
+        platformId = i.key();
+        break;
+      }
+    }
+  }
+
+  const QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
-    return FetchRequest(Title, title);
+    FetchRequest req(Title, title);
+    if(platformId > -1) {
+      req.setData(QString::number(platformId));
+    }
+    return req;
   }
   return FetchRequest();
 }
@@ -272,7 +290,7 @@ void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "release_date").left(4));
   entry_->setField(QStringLiteral("description"), mapValue(resultMap_, "overview"));
 
-  const QString platformId = mapValue(resultMap_, "platform");
+  const int platformId = mapValue(resultMap_, "platform").toInt();
   if(m_platforms.contains(platformId)) {
     const QString platform = m_platforms[platformId];
     // make the assumption that if the platform name isn't already in the allowed list, it should be added
@@ -348,10 +366,28 @@ void TheGamesDBFetcher::readPlatformList(const QVariantMap& platformMap_) {
   QMapIterator<QString, QVariant> i(platformMap_);
   while(i.hasNext()) {
     i.next();
-    QVariantMap map = i.value().toMap();
-    QString name = map.value(QStringLiteral("name")).toString();
-    m_platforms.insert(i.key(), Data::GameCollection::normalizePlatform(name));
+    const QVariantMap map = i.value().toMap();
+    const QString name = map.value(QStringLiteral("name")).toString();
+    m_platforms.insert(i.key().toInt(), Data::GameCollection::normalizePlatform(name));
   }
+
+  // now write it to cache again
+  const QString id = QStringLiteral("id");
+  const QString name = QStringLiteral("name");
+  QJsonObject platformObj;
+  for(auto ii = m_platforms.constBegin(); ii != m_platforms.constEnd(); ++ii) {
+    QJsonObject iObj;
+    iObj.insert(id, ii.key());
+    iObj.insert(name, ii.value());
+    platformObj.insert(QString::number(ii.key()), iObj);
+  }
+  QJsonObject dataObj;
+  dataObj.insert(QStringLiteral("platforms"), platformObj);
+  QJsonObject docObj;
+  docObj.insert(QStringLiteral("data"), dataObj);
+  QJsonDocument doc;
+  doc.setObject(docObj);
+  writeDataList(Platform, doc.toJson());
 }
 
 void TheGamesDBFetcher::readCoverList(const QVariantMap& coverDataMap_) {
@@ -396,6 +432,8 @@ void TheGamesDBFetcher::loadCachedData() {
   // The lists of genres, publishers, and developers are separate, with TGDB requesting that
   // the data be cached heavily and only updated when necessary
   // read the three cached JSON data file for genres, publishers, and developers
+  // the platform info is sent with each request response, so it doesn't necessarily need
+  // to be cache. But if an update request is used, having the cached platform id is helpful
 
   QFile genreFile(dataFileName(Genre));
   if(genreFile.open(QIODevice::ReadOnly)) {
@@ -411,6 +449,11 @@ void TheGamesDBFetcher::loadCachedData() {
   if(developerFile.open(QIODevice::ReadOnly)) {
     updateData(Developer, developerFile.readAll());
   }
+
+  QFile platformFile(dataFileName(Platform));
+  if(platformFile.open(QIODevice::ReadOnly)) {
+    updateData(Platform, platformFile.readAll());
+  }
 }
 
 void TheGamesDBFetcher::updateData(TgdbDataType dataType_, const QByteArray& jsonData_) {
@@ -424,6 +467,9 @@ void TheGamesDBFetcher::updateData(TgdbDataType dataType_, const QByteArray& jso
       break;
     case Developer:
       dataName = QStringLiteral("developers");
+      break;
+    case Platform:
+      dataName = QStringLiteral("platforms");
       break;
   }
 
@@ -448,6 +494,9 @@ void TheGamesDBFetcher::updateData(TgdbDataType dataType_, const QByteArray& jso
     case Developer:
       m_developers = dataHash;
       break;
+    case Platform:
+      m_platforms = dataHash;
+      break;
   }
 }
 
@@ -464,6 +513,10 @@ void TheGamesDBFetcher::readDataList(TgdbDataType dataType_) {
     case Developer:
       u.setPath(u.path() + QLatin1String("/Developers"));
       break;
+    case Platform:
+      myDebug() << "not trying to read platforms";
+      // platforms are not read independently, and are only cached
+      return;
   }
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("apikey"), m_apiKey);
@@ -472,13 +525,17 @@ void TheGamesDBFetcher::readDataList(TgdbDataType dataType_) {
 //  u = QUrl::fromLocalFile(dataFileName(dataType_)); // for testing
 //  myDebug() << "Reading" << u;
   const QByteArray data = FileHandler::readDataFile(u, true);
+  writeDataList(dataType_, data);
+  updateData(dataType_, data);
+}
+
+void TheGamesDBFetcher::writeDataList(TgdbDataType dataType_, const QByteArray& data_) {
   QFile file(dataFileName(dataType_));
-  if(!file.open(QIODevice::WriteOnly) || file.write(data) == -1) {
+  if(!file.open(QIODevice::WriteOnly) || file.write(data_) == -1) {
     myDebug() << "unable to write to" << file.fileName() << file.errorString();
     return;
   }
   file.close();
-  updateData(dataType_, data);
 }
 
 Tellico::Fetch::ConfigWidget* TheGamesDBFetcher::configWidget(QWidget* parent_) const {
@@ -511,6 +568,9 @@ QString TheGamesDBFetcher::dataFileName(TgdbDataType dataType_) {
       break;
     case Developer:
       fileName = dataDir + QLatin1String("developers.json");
+      break;
+    case Platform:
+      fileName = dataDir + QLatin1String("platforms.json");
       break;
   }
   return fileName;

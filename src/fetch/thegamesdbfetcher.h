@@ -98,6 +98,8 @@ public:
 
 private Q_SLOTS:
   void slotComplete(KJob* job);
+  // read all cached data
+  void loadCachedData();
 
 private:
   virtual void search() Q_DECL_OVERRIDE;
@@ -107,15 +109,15 @@ private:
   void readCoverList(const QVariantMap& platformMap);
 
   // right now, Tgdb has three data types for which the whole list must be read at once
-  enum TgdbDataType { Genre, Publisher, Developer };
+  // caching the platforms in addition, helps the UpdateRequest
+  enum TgdbDataType { Genre, Publisher, Developer, Platform };
   static QString dataFileName(TgdbDataType dataType);
 
-  // read all cached data
-  void loadCachedData();
   // update cached data
   void updateData(TgdbDataType dataType, const QByteArray& data);
   // download data list from Tgdb and update cache
   void readDataList(TgdbDataType dataType);
+  void writeDataList(TgdbDataType dataType, const QByteArray& data);
 
   enum ImageSize {
     SmallImage=0, // small is really the thumb size
@@ -125,18 +127,16 @@ private:
   };
 
   bool m_started;
-  bool m_needToLoadData;
   QString m_apiKey;
   ImageSize m_imageSize;
 
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
-  // key is an int as a string
-  QHash<QString, QString> m_platforms;
   QHash<QString, QString> m_covers;
   QHash<int, QString> m_genres;
   QHash<int, QString> m_publishers;
   QHash<int, QString> m_developers;
+  QHash<int, QString> m_platforms;
 };
 
   } // end namespace
