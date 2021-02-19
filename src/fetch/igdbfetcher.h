@@ -100,8 +100,6 @@ private:
   enum IgdbDataType { Genre, Platform, Company };
   static QString dataFileName(IgdbDataType dataType);
 
-  // read all cached data
-  void loadCachedData();
   // update cached data
   void updateData(IgdbDataType dataType, const QByteArray& data);
   // download data list from Tgdb and update cache
