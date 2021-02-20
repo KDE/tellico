@@ -34,7 +34,7 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
-#include <QExplicitlySharedDataPointer>
+#include <QSharedPointer>
 #include <QUrl>
 
 #include <KConfigGroup>
@@ -49,11 +49,11 @@ class ConfigWidget;
  *
  * @author Robby Stephenson
  */
-class Fetcher : public QObject, public QSharedData {
+class Fetcher : public QObject {
 Q_OBJECT
 
 public:
-  typedef QExplicitlySharedDataPointer<Fetcher> Ptr;
+  typedef QSharedPointer<Fetcher> Ptr;
 
   /**
    */

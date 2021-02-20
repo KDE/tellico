@@ -24,10 +24,12 @@
 
 #include "fetchresult.h"
 #include "fetcher.h"
+#include "fetchmanager.h"
 #include "../entry.h"
 #include "../collection.h"
 #include "../tellico_debug.h"
 
+#include <QPixmap>
 #if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
 #include <KRandom>
 #else
@@ -52,32 +54,40 @@ using namespace Tellico;
 using namespace Tellico::Fetch;
 using Tellico::Fetch::FetchResult;
 
-FetchResult::FetchResult(Fetcher::Ptr fetcher_, Data::EntryPtr entry_)
+FetchResult::FetchResult(Fetcher* fetcher_, Data::EntryPtr entry_)
 #if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
    : uid(KRandom::random())
 #else
    : uid(QRandomGenerator::global()->generate())
 #endif
-   , fetcher(fetcher_)
    , title(entry_->title())
    , desc(makeDescription(entry_))
-   , isbn(entry_->field(QStringLiteral("isbn"))) {
+   , isbn(entry_->field(QStringLiteral("isbn")))
+   , m_fetcher(fetcher_) {
+  Q_ASSERT(fetcher_);
 }
 
-FetchResult::FetchResult(Fetcher::Ptr fetcher_, const QString& title_, const QString& desc_, const QString& isbn_)
+FetchResult::FetchResult(Fetcher* fetcher_, const QString& title_, const QString& desc_, const QString& isbn_)
 #if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
    : uid(KRandom::random())
 #else
    : uid(QRandomGenerator::global()->generate())
 #endif
-   , fetcher(fetcher_)
    , title(title_)
    , desc(desc_)
-   , isbn(isbn_) {
+   , isbn(isbn_)
+   , m_fetcher(fetcher_) {
+  Q_ASSERT(fetcher_);
 }
 
 Tellico::Data::EntryPtr FetchResult::fetchEntry() {
-  return fetcher->fetchEntry(uid);
+  return m_fetcher ? m_fetcher->fetchEntry(uid) : Data::EntryPtr();
+}
+
+Tellico::Fetch::Fetcher* FetchResult::fetcher() {
+  Q_ASSERT(m_fetcher);
+  if(!m_fetcher) myLog() << "FetchResult::fetcher() - null pointer";
+  return m_fetcher;
 }
 
 QString FetchResult::makeDescription(Data::EntryPtr entry) {

@@ -53,13 +53,14 @@
   KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group), size_)
 
 using Tellico::Fetch::Manager;
-Manager* Manager::s_self = nullptr;
+
+Tellico::Fetch::Manager* Tellico::Fetch::Manager::self() {
+  static Manager self;
+  return &self;
+}
 
 Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new ManagerMessage()),
                      m_count(0), m_loadDefaults(false) {
-  // must create static pointer first
-  Q_ASSERT(!s_self);
-  s_self = this;
   // no need to load fetchers since the initializer does it for us
 
 //  m_keyMap.insert(FetchFirst, QString());
@@ -217,7 +218,6 @@ bool Manager::hasMoreResults() const {
 }
 
 void Manager::stop() {
-//  DEBUG_LINE;
   foreach(Fetcher::Ptr fetcher, m_fetchers) {
     if(fetcher->isSearching()) {
       fetcher->stop();
@@ -490,10 +490,14 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
   return QString();
 }
 
-QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, int size_) {
+QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher* fetcher_, int group_, int size_) {
+  Q_ASSERT(fetcher_);
+  if(!fetcher_) {
+    return QPixmap();
+  }
   if(fetcher_->type() == Fetch::Z3950) {
 #ifdef HAVE_YAZ
-    const Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_.data());
+    const Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_);
     QUrl u;
     u.setScheme(QStringLiteral("http"));
     u.setHost(f->host());
@@ -504,7 +508,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
 #endif
   } else
   if(fetcher_->type() == Fetch::ExecExternal) {
-    const Fetch::ExecExternalFetcher* f = static_cast<const Fetch::ExecExternalFetcher*>(fetcher_.data());
+    const Fetch::ExecExternalFetcher* f = static_cast<const Fetch::ExecExternalFetcher*>(fetcher_);
     const QString p = f->execPath();
     QUrl u;
     if(p.contains(QStringLiteral("allocine"))) {

@@ -68,11 +68,9 @@ TheGamesDBFetcher::TheGamesDBFetcher(QObject* parent_)
   m_apiKey = Tellico::reverseObfuscate(THEGAMESDB_MAGIC_TOKEN);
   // delay reading the platform names from the cache file
   QTimer::singleShot(0, this, &TheGamesDBFetcher::loadCachedData);
-  myDebug() << "TheGamesDBFetcher()";
 }
 
 TheGamesDBFetcher::~TheGamesDBFetcher() {
-  myDebug() << "~TheGamesDBFetcher()" << uuid();
 }
 
 QString TheGamesDBFetcher::source() const {
@@ -272,7 +270,7 @@ void TheGamesDBFetcher::slotComplete(KJob* job_) {
     Data::EntryPtr entry(new Data::Entry(coll));
     populateEntry(entry, result.toMap());
 
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
     ++count;

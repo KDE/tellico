@@ -302,7 +302,7 @@ void AbstractAllocineFetcher::slotComplete(KJob*) {
     Data::EntryPtr entry(new Data::Entry(createCollection()));
     populateEntry(entry, result.toMap());
 
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

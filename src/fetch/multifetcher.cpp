@@ -170,7 +170,7 @@ void MultiFetcher::slotDone() {
   // at this point, all the fetchers have run through all the results, so we're
   // done so emit all results
   foreach(Data::EntryPtr entry, m_entries) {
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entryHash.insert(r->uid, entry);
     emit signalResultFound(r);
   }
@@ -292,7 +292,7 @@ void MultiFetcher::FetcherItemWidget::setFetchers(const QList<Fetcher::Ptr>& fet
     if(fetcher->type() == Multiple) {
       continue;
     }
-    m_fetcherCombo->addItem(Manager::self()->fetcherIcon(fetcher), fetcher->source(), fetcher->uuid());
+    m_fetcherCombo->addItem(Manager::self()->fetcherIcon(fetcher.data()), fetcher->source(), fetcher->uuid());
   }
 }
 

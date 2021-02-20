@@ -315,7 +315,7 @@ void VNDBFetcher::parseVNResults() {
       entry->setField(QStringLiteral("alias"), aliases.split(QStringLiteral("\n")).join(FieldFormat::delimiterString()));
     }
 
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

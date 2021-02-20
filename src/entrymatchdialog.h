@@ -27,7 +27,6 @@
 
 #include "datavectors.h"
 #include "entryupdater.h"
-#include "fetch/fetcher.h"
 
 #include <QDialog>
 #include <QHash>
@@ -40,6 +39,9 @@ class QTreeWidget;
 class QTreeWidgetItem;
 
 namespace Tellico {
+  namespace Fetcher {
+    class Fetcher;
+  }
 
 /**
  * @author Robby Stephenson
@@ -52,7 +54,7 @@ public:
    * Constructor
    */
   EntryMatchDialog(QWidget* parent, Data::EntryPtr entryToUpdate,
-                   Fetch::Fetcher::Ptr fetcher, const EntryUpdater::ResultList& matchResults);
+                   Fetch::Fetcher* fetcher, const EntryUpdater::ResultList& matchResults);
 
   EntryUpdater::UpdateResult updateResult() const;
 

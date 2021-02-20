@@ -76,7 +76,7 @@ public:
     FETCHER_OPTIONALFIELDS_FN optionalFields;
     FETCHER_CONFIGWIDGET_FN configWidget;
   };
-  static Manager* self() { if(!s_self) s_self = new Manager(); return s_self; }
+  static Manager* self();
 
   ~Manager();
 
@@ -105,7 +105,7 @@ public:
 
   static QString typeName(Type type);
   static QPixmap fetcherIcon(Type type, int iconGroup=3 /*Small*/, int size=0 /* default */);
-  static QPixmap fetcherIcon(Fetcher::Ptr ptr, int iconGroup=3 /*Small*/, int size=0 /* default*/);
+  static QPixmap fetcherIcon(Fetcher* ptr, int iconGroup=3 /*Small*/, int size=0 /* default*/);
   static StringHash optionalFields(Type type);
 
 Q_SIGNALS:
@@ -123,7 +123,6 @@ private:
   friend class ManagerMessage;
   friend class FetcherInitializer;
   friend class ::MultiFetcherTest;
-  static Manager* s_self;
 
   Manager();
   void addFetcher(Fetcher::Ptr fetcher);

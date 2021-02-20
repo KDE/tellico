@@ -27,7 +27,7 @@
 
 #include "../datavectors.h"
 
-#include <QExplicitlySharedDataPointer>
+#include <QPointer>
 #include <QString>
 
 namespace Tellico {
@@ -37,19 +37,21 @@ class Fetcher;
 
 class FetchResult {
 public:
-  FetchResult(QExplicitlySharedDataPointer<Fetcher> f, Data::EntryPtr entry);
-  FetchResult(QExplicitlySharedDataPointer<Fetcher> f, const QString& t, const QString& d, const QString& i = QString());
+  FetchResult(Fetcher* fetcher_, Data::EntryPtr entry_);
+  FetchResult(Fetcher* f, const QString& t, const QString& d, const QString& i = QString());
 
   Data::EntryPtr fetchEntry();
+  Fetcher* fetcher();
 
   quint32 uid;
-  QExplicitlySharedDataPointer<Fetcher> fetcher;
   QString title;
   QString desc;
   QString isbn;
 
 private:
   static QString makeDescription(Data::EntryPtr entry);
+
+  QPointer<Fetcher> m_fetcher;
 };
 
   } // end namespace

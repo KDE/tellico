@@ -485,7 +485,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 
   Data::EntryList entries = coll->entries();
   foreach(Data::EntryPtr entry, entries) {
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

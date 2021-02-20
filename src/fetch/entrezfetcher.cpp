@@ -320,7 +320,7 @@ void EntrezFetcher::summaryResults(const QByteArray& data_) {
         break; // done now
       }
     }
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), title, pubdate + QLatin1Char('/') + authors);
+    FetchResult* r = new FetchResult(this, title, pubdate + QLatin1Char('/') + authors);
     m_matches.insert(r->uid, id);
     emit signalResultFound(r);
   }

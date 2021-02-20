@@ -756,7 +756,7 @@ void ConfigDialog::readFetchConfig() {
     Fetch::FetcherInfo info(fetcher->type(), fetcher->source(),
                             fetcher->updateOverwrite(), fetcher->uuid());
     FetcherInfoListItem* item = new FetcherInfoListItem(m_sourceListWidget, info);
-    item->setFetcher(fetcher);
+    item->setFetcher(fetcher.data());
   }
   m_sourceListWidget->setUpdatesEnabled(true);
 
@@ -927,7 +927,7 @@ void ConfigDialog::slotNewSourceClicked() {
 
 void ConfigDialog::slotModifySourceClicked() {
   FetcherInfoListItem* item = static_cast<FetcherInfoListItem*>(m_sourceListWidget->currentItem());
-  if(!item) {
+  if(!item || !item->fetcher()) {
     return;
   }
 
@@ -1047,7 +1047,7 @@ Tellico::FetcherInfoListItem* ConfigDialog::findItem(const QString& path_) const
     if(item->fetchType() != Fetch::ExecExternal) {
       continue;
     }
-    Fetch::ExecExternalFetcher* f = dynamic_cast<Fetch::ExecExternalFetcher*>(item->fetcher().data());
+    Fetch::ExecExternalFetcher* f = dynamic_cast<Fetch::ExecExternalFetcher*>(item->fetcher());
     if(f && f->execPath() == path_) {
       return item;
     }
@@ -1163,7 +1163,7 @@ void ConfigDialog::slotCreateConfigWidgets() {
   for(int count = 0; count < m_sourceListWidget->count(); ++count) {
     FetcherInfoListItem* item = static_cast<FetcherInfoListItem*>(m_sourceListWidget->item(count));
     // only create a new config widget if we don't have one already
-    if(!m_configWidgets.contains(item)) {
+    if(!m_configWidgets.contains(item) && item->fetcher()) {
       Fetch::ConfigWidget* cw = item->fetcher()->configWidget(this);
       if(cw) { // might return 0 when no widget available for fetcher type
         m_configWidgets.insert(item, cw);

@@ -224,7 +224,7 @@ void NumistaFetcher::slotComplete(KJob* ) {
     if(!minYear.isEmpty()) {
       desc += minYear + QLatin1Char('-') + result.value(QLatin1String("maxYear")).toString();
     }
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this),
+    FetchResult* r = new FetchResult(this,
                                      result.value(QLatin1String("title")).toString(),
                                      desc);
     m_matches.insert(r->uid, result.value(QLatin1String("id")).toInt());

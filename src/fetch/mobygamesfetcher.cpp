@@ -442,7 +442,7 @@ void MobyGamesFetcher::slotComplete(KJob* job_) {
     QVariantMap resultMap = result.toMap();
     Data::EntryList entries = createEntries(coll, resultMap);
     foreach(const Data::EntryPtr& entry, entries) {
-      FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+      FetchResult* r = new FetchResult(this, entry);
       m_entries.insert(r->uid, entry);
       emit signalResultFound(r);
     }

@@ -190,7 +190,7 @@ void IBSFetcher::slotComplete(KJob*) {
       // the url probable contains &amp; so be careful
       QUrl u = m_job->url();
       u = u.resolved(QUrl(url.replace(QLatin1String("&amp;"), QLatin1String("&"))));
-      FetchResult* r = new FetchResult(Fetcher::Ptr(this), title, year);
+      FetchResult* r = new FetchResult(this, title, year);
       m_matches.insert(r->uid, u);
       emit signalResultFound(r);
     }

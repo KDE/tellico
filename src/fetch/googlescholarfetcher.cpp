@@ -206,7 +206,7 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
       break;
     }
 
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
     ++count;

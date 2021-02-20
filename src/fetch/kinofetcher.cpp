@@ -174,7 +174,7 @@ void KinoFetcher::slotComplete(KJob*) {
     }
     entry->setField(QStringLiteral("year"), y);
 
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     QUrl url = QUrl(QString::fromLatin1(KINO_BASE_URL)).resolved(QUrl(u));
     m_matches.insert(r->uid, url);
     m_entries.insert(r->uid, entry);

@@ -173,7 +173,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
 
   for(int pos = infoRx.indexIn(s); m_started && pos > -1; pos = infoRx.indexIn(s, pos+1)) {
     if(n == 0 && !u.isEmpty()) {
-      FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, y);
+      FetchResult* r = new FetchResult(this, t, y);
       QUrl url = QUrl(QString::fromLatin1(ANIMENFO_BASE_URL)).resolved(QUrl(u));
       url.setQuery(QString());
       m_matches.insert(r->uid, url);
@@ -208,7 +208,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
 
   // grab last response
   if(!u.isEmpty()) {
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, y, QString());
+    FetchResult* r = new FetchResult(this, t, y, QString());
     QUrl url = QUrl(QString::fromLatin1(ANIMENFO_BASE_URL)).resolved(QUrl(u));
     url.setQuery(QString());
     m_matches.insert(r->uid, url);

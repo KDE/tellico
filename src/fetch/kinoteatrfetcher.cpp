@@ -166,7 +166,7 @@ void KinoTeatrFetcher::slotComplete(KJob*) {
       QUrl url(QString::fromLatin1(KINOTEATR_SEARCH_URL));
       url = url.resolved(QUrl(href));
 //      myDebug() << url << title << year;
-      FetchResult* r = new FetchResult(Fetcher::Ptr(this), title, year);
+      FetchResult* r = new FetchResult(this, title, year);
       m_matches.insert(r->uid, url);
       emit signalResultFound(r);
     }

@@ -110,7 +110,7 @@ public:
 
 int Z3950Connection::resultsLeft = 0;
 
-Z3950Connection::Z3950Connection(Tellico::Fetch::Z3950Fetcher* fetcher,
+Z3950Connection::Z3950Connection(Fetcher* fetcher,
                                  const QString& host,
                                  uint port,
                                  const QString& dbname,
@@ -129,6 +129,8 @@ Z3950Connection::Z3950Connection(Tellico::Fetch::Z3950Fetcher* fetcher,
     , m_start(0)
     , m_limit(Z3950_DEFAULT_MAX_RECORDS)
     , m_hasMore(false) {
+  Q_ASSERT(fetcher);
+  Q_ASSERT(fetcher->type() == Fetch::Z3950);
 }
 
 Z3950Connection::~Z3950Connection() {
@@ -160,7 +162,6 @@ void Z3950Connection::setCharacterSet(const QString& queryCharSet_, const QStrin
 }
 
 void Z3950Connection::run() {
-//  myDebug() << m_fetcher->source();
   m_aborted = false;
   m_hasMore = false;
   resultsLeft = 0;
@@ -316,7 +317,9 @@ void Z3950Connection::run() {
   }
   // save syntax change for next time
   if(m_syntax != newSyntax) {
-    qApp->postEvent(m_fetcher.data(), new Z3950SyntaxChange(newSyntax));
+    if(m_fetcher) {
+      qApp->postEvent(m_fetcher.data(), new Z3950SyntaxChange(newSyntax));
+    }
     m_syntax = newSyntax;
   }
 
@@ -377,7 +380,9 @@ void Z3950Connection::run() {
       data = toXML(ZOOM_record_get(rec, "raw", &len), m_responseCharSet);
     }
     Z3950ResultFound* ev = new Z3950ResultFound(data);
-    QApplication::postEvent(m_fetcher.data(), ev);
+    if(m_fetcher) {
+      QApplication::postEvent(m_fetcher.data(), ev);
+    }
   }
 
   m_hasMore = m_limit < numResults;
@@ -393,7 +398,6 @@ bool Z3950Connection::makeConnection() {
   if(m_connected) {
     return true;
   }
-//  myDebug() << m_fetcher->source();
 // I don't know what to do except assume database, user, and password are in locale encoding
 #ifdef HAVE_YAZ
   d->conn_opt = ZOOM_options_create();
@@ -434,11 +438,16 @@ bool Z3950Connection::makeConnection() {
 
 void Z3950Connection::done() {
   checkPendingEvents();
-  qApp->postEvent(m_fetcher.data(), new Z3950ConnectionDone(m_hasMore));
+  if(m_fetcher) {
+    qApp->postEvent(m_fetcher.data(), new Z3950ConnectionDone(m_hasMore));
+  }
 }
 
 void Z3950Connection::done(const QString& msg_, int type_) {
   checkPendingEvents();
+  if(!m_fetcher) {
+    return;
+  }
   if(m_aborted) {
     qApp->postEvent(m_fetcher.data(), new Z3950ConnectionDone(m_hasMore));
   } else {

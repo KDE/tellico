@@ -2271,7 +2271,7 @@ void MainWindow::updateEntrySources() {
 
   Fetch::FetcherVec vec = Fetch::Manager::self()->fetchers(Kernel::self()->collectionType());
   foreach(Fetch::Fetcher::Ptr fetcher, vec) {
-    QAction* action = new QAction(Fetch::Manager::fetcherIcon(fetcher), fetcher->source(), actionCollection());
+    QAction* action = new QAction(Fetch::Manager::fetcherIcon(fetcher.data()), fetcher->source(), actionCollection());
     action->setToolTip(i18n("Update entry data from %1", fetcher->source()));
     void (QAction::* triggeredBool)(bool) = &QAction::triggered;
     void (QSignalMapper::* mapVoid)() = &QSignalMapper::map;

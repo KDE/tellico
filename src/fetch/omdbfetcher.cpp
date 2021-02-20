@@ -307,7 +307,7 @@ void OMDBFetcher::slotComplete(KJob* job_) {
       entry->setField(QStringLiteral("imdb-id"), QString());
     }
 
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
     ++count;

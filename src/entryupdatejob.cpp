@@ -36,11 +36,11 @@ using Tellico::EntryUpdateJob;
 
 EntryUpdateJob::EntryUpdateJob(QObject* parent_, Data::EntryPtr entry_, Fetch::Fetcher::Ptr fetcher_, Mode mode_)
     : KJob(parent_), m_entry(entry_), m_fetcher(fetcher_), m_mode(mode_), m_bestMatchScore(-1) {
- setCapabilities(KJob::Killable);
- connect(m_fetcher.data(), &Fetch::Fetcher::signalResultFound,
-         this, &EntryUpdateJob::slotResult);
- connect(m_fetcher.data(), &Fetch::Fetcher::signalDone,
-         this, &EntryUpdateJob::slotDone);
+  setCapabilities(KJob::Killable);
+  connect(m_fetcher.data(), &Fetch::Fetcher::signalResultFound,
+          this, &EntryUpdateJob::slotResult);
+  connect(m_fetcher.data(), &Fetch::Fetcher::signalDone,
+          this, &EntryUpdateJob::slotDone);
 }
 
 void EntryUpdateJob::start() {

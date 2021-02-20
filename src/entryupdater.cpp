@@ -149,18 +149,22 @@ void EntryUpdater::slotDone() {
 }
 
 void EntryUpdater::slotResult(Tellico::Fetch::FetchResult* result_) {
-  if(!result_ || m_cancelled || !result_->fetcher->isSearching()) {
+  if(!result_ || m_cancelled) {
+    return;
+  }
+  auto fetcher = m_fetchers[m_fetchIndex];
+  if(!fetcher || !fetcher->isSearching()) {
     return;
   }
 
-//  myDebug() << "update result:" << result_->title << " [" << result_->fetcher->source() << "]";
-  m_results.append(UpdateResult(result_, m_fetchers[m_fetchIndex]->updateOverwrite()));
+//  myDebug() << "update result:" << result_->title << " [" << fetcher->source() << "]";
+  m_results.append(UpdateResult(result_, fetcher->updateOverwrite()));
   Data::EntryPtr e = result_->fetchEntry();
   if(e && !m_entriesToUpdate.isEmpty()) {
     m_fetchedEntries.append(e);
     const int match = m_coll->sameEntry(m_entriesToUpdate.front(), e);
     if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
-      result_->fetcher->stop();
+      fetcher->stop();
     }
   }
   qApp->processEvents();
@@ -237,7 +241,7 @@ void EntryUpdater::handleResults() {
 
 Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(const ResultList& results) {
   EntryMatchDialog dlg(Kernel::self()->widget(), m_entriesToUpdate.front(),
-                       m_fetchers[m_fetchIndex], results);
+                       m_fetchers[m_fetchIndex].data(), results);
 
   if(dlg.exec() != QDialog::Accepted) {
     return UpdateResult(nullptr, false);

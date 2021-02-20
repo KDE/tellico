@@ -217,7 +217,7 @@ void TVmazeFetcher::slotComplete(KJob* job_) {
     populateEntry(entry, result.toObject().value(QLatin1String("show"))
                                .toObject().toVariantMap(), false);
 
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
     ++count;

@@ -221,7 +221,7 @@ void BedethequeFetcher::slotComplete(KJob*) {
     }
 
     if(!title.isEmpty() && !url.isEmpty()) {
-      FetchResult* r = new FetchResult(Fetcher::Ptr(this), title, desc.join(QLatin1String(" ")));
+      FetchResult* r = new FetchResult(this, title, desc.join(QLatin1String(" ")));
       m_matches.insert(r->uid, QUrl(url));
       emit signalResultFound(r);
     }
@@ -255,7 +255,7 @@ void BedethequeFetcher::slotLinkComplete(KJob*) {
     return;
   }
 
-  FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+  FetchResult* r = new FetchResult(this, entry);
   m_matches.insert(r->uid, QUrl(request().value()));
   m_entries.insert(r->uid, entry); // keep for later
 

@@ -382,7 +382,7 @@ void SRUFetcher::slotComplete(KJob*) {
   }
 
   foreach(Data::EntryPtr entry, coll->entries()) {
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

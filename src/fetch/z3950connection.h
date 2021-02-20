@@ -27,11 +27,11 @@
 
 #include <QThread>
 #include <QEvent>
-#include <QExplicitlySharedDataPointer>
+#include <QPointer>
 
 namespace Tellico {
   namespace Fetch {
-    class Z3950Fetcher;
+    class Fetcher;
 
 class Z3950ResultFound : public QEvent {
 public:
@@ -81,7 +81,7 @@ private:
  */
 class Z3950Connection : public QThread {
 public:
-  Z3950Connection(Z3950Fetcher* fetcher,
+  Z3950Connection(Fetcher* fetcher,
                   const QString& host,
                   uint port,
                   const QString& dbname,
@@ -114,7 +114,7 @@ private:
   bool m_connected;
   bool m_aborted;
 
-  QExplicitlySharedDataPointer<Z3950Fetcher> m_fetcher;
+  QPointer<Fetcher> m_fetcher;
   QString m_host;
   uint m_port;
   QString m_dbname;

@@ -246,14 +246,14 @@ void IGDBFetcher::slotComplete(KJob* job_) {
         f->setAllowed(QStringList(f->allowed()) << platform);
       }
       entry->setField(QStringLiteral("platform"), platform);
-      FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+      FetchResult* r = new FetchResult(this, entry);
       m_entries.insert(r->uid, entry);
       emit signalResultFound(r);
     }
 
     // also allow case of no platform
     if(platforms.isEmpty()) {
-      FetchResult* r = new FetchResult(Fetcher::Ptr(this), baseEntry);
+      FetchResult* r = new FetchResult(this, baseEntry);
       m_entries.insert(r->uid, baseEntry);
       emit signalResultFound(r);
     }

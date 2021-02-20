@@ -47,7 +47,7 @@ using namespace Tellico;
 using Tellico::EntryMatchDialog;
 
 EntryMatchDialog::EntryMatchDialog(QWidget* parent_, Data::EntryPtr entryToUpdate_,
-                                   Fetch::Fetcher::Ptr fetcher_, const EntryUpdater::ResultList& matchResults_)
+                                   Fetch::Fetcher* fetcher_, const EntryUpdater::ResultList& matchResults_)
     : QDialog(parent_) {
   Q_ASSERT(entryToUpdate_);
   Q_ASSERT(fetcher_);

@@ -183,7 +183,7 @@ void ArxivFetcher::slotComplete(KJob*) {
       // might get aborted
       break;
     }
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

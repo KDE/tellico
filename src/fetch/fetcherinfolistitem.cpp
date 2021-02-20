@@ -70,14 +70,15 @@ QString FetcherInfoListItem::uuid() const {
   return m_info.uuid;
 }
 
-void FetcherInfoListItem::setFetcher(Tellico::Fetch::Fetcher::Ptr fetcher) {
-  m_fetcher = fetcher;
-  QPixmap pix = Fetch::Manager::fetcherIcon(fetcher);
+void FetcherInfoListItem::setFetcher(Fetch::Fetcher* fetcher_) {
+  Q_ASSERT(fetcher_);
+  m_fetcher = fetcher_;
+  QPixmap pix = Fetch::Manager::fetcherIcon(fetcher_);
   if(!pix.isNull()) {
     setData(Qt::DecorationRole, pix);
   }
 }
 
-Tellico::Fetch::Fetcher::Ptr FetcherInfoListItem::fetcher() const {
+Tellico::Fetch::Fetcher* FetcherInfoListItem::fetcher() const {
   return m_fetcher;
 }

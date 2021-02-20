@@ -350,7 +350,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
       entry->setField(QStringLiteral("language"), langs.join(FieldFormat::delimiterString()));
     }
 
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

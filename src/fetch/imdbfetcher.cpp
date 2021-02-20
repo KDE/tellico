@@ -478,7 +478,7 @@ void IMDBFetcher::parseSingleTitleResult() {
   const QString cap1 = s_titleRx->cap(1);
   int pPos = cap1.indexOf(QLatin1Char('('));
   // FIXME: maybe remove parentheses here?
-  FetchResult* r = new FetchResult(Fetcher::Ptr(this),
+  FetchResult* r = new FetchResult(this,
                                    pPos == -1 ? cap1 : cap1.left(pPos),
                                    pPos == -1 ? QString() : cap1.mid(pPos));
   // IMDB returns different HTML for single title results and has a query in the url
@@ -635,7 +635,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
       break;
     }
 
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), pPos == -1 ? cap2 : cap2.left(pPos), desc);
+    FetchResult* r = new FetchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc);
     QUrl u = QUrl(m_url).resolved(QUrl(cap1));
     u.setQuery(QString());
     m_matches.insert(r->uid, u);

@@ -266,7 +266,7 @@ void ISBNdbFetcher::slotComplete(KJob* job_) {
     Data::EntryPtr entry(new Data::Entry(coll));
     populateEntry(entry, result.toMap());
 
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
     ++count;

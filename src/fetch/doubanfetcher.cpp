@@ -182,7 +182,7 @@ void DoubanFetcher::slotCompleteISBN(KJob* job_) {
     message(mapValue(resultMap, "msg"), MessageHandler::Error);
   } else {
     Data::EntryPtr entry = createEntry(resultMap);
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     m_matches.insert(r->uid, QUrl(mapValue(resultMap, "url")));
     emit signalResultFound(r);
@@ -229,7 +229,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
     case Data::Collection::Bibtex:
       foreach(const QVariant& v, resultsMap.value(QLatin1String("books")).toList()) {
         const QVariantMap resultMap = v.toMap();
-        FetchResult* r = new FetchResult(Fetcher::Ptr(this), mapValue(resultMap, "title"),
+        FetchResult* r = new FetchResult(this, mapValue(resultMap, "title"),
                                          mapValue(resultMap, "author") + QLatin1Char('/') +
                                          mapValue(resultMap, "publisher") + QLatin1Char('/') +
                                          mapValue(resultMap, "pubdate").left(4));
@@ -241,7 +241,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
     case Data::Collection::Video:
       foreach(const QVariant& v, resultsMap.value(QLatin1String("subjects")).toList()) {
         const QVariantMap resultMap = v.toMap();
-        FetchResult* r = new FetchResult(Fetcher::Ptr(this), mapValue(resultMap, "title"),
+        FetchResult* r = new FetchResult(this, mapValue(resultMap, "title"),
                                          mapValue(resultMap, "directors", "name") + QLatin1Char('/') +
                                          mapValue(resultMap, "year"));
         // movie results don't appear to have a url field
@@ -255,7 +255,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
     case Data::Collection::Album:
       foreach(const QVariant& v, resultsMap.value(QLatin1String("musics")).toList()) {
         const QVariantMap resultMap = v.toMap();
-        FetchResult* r = new FetchResult(Fetcher::Ptr(this), mapValue(resultMap, "title"),
+        FetchResult* r = new FetchResult(this, mapValue(resultMap, "title"),
                                          mapValue(resultMap, "attrs", "singer") + QLatin1Char('/') +
                                          mapValue(resultMap, "attrs", "publisher") + QLatin1Char('/') +
                                          mapValue(resultMap, "attrs", "pubdate").left(4));
