@@ -42,7 +42,7 @@ extern "C" {
 }
 
 // I don't want any network I/O at all
-static const int xml_options = XML_PARSE_NOENT | XML_PARSE_NONET | XML_PARSE_NOCDATA;
+static const int xml_options = XML_PARSE_NONET | XML_PARSE_NOCDATA;
 static const int xslt_options = xml_options;
 
 /* some functions to pass to the XSLT libs */
