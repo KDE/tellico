@@ -111,7 +111,6 @@
 #include <QMetaMethod>
 
 namespace {
-  static const int MAIN_WINDOW_MIN_WIDTH = 600;
   static const int MAX_IMAGES_WARN_PERFORMANCE = 200;
 
 QIcon mimeIcon(const char* s) {
@@ -876,9 +875,9 @@ void MainWindow::initView() {
                                                              this);
   m_iconView->setSelectionModel(proxySelect);
 
-  setMinimumWidth(MAIN_WINDOW_MIN_WIDTH);
   // setting up GUI now rather than in initActions
-  setupGUI(Keys | ToolBar);
+  // initial parameter is default window size
+  setupGUI(QSize(1280,800), Keys | ToolBar);
   createGUI();
 }
 
