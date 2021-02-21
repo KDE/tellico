@@ -313,7 +313,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(OpenLibrary);
   FETCHER_ADD(GoogleBook);
 // comic books
-  FETCHER_ADD(AnimeNfo);
+//  FETCHER_ADD(AnimeNfo);
   FETCHER_ADD(Bedetheque);
   FETCHER_ADD(ComicVine);
 // bibliographic
