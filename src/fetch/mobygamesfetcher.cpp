@@ -62,7 +62,8 @@ using Tellico::Fetch::MobyGamesFetcher;
 MobyGamesFetcher::MobyGamesFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false)
-    , m_imageSize(SmallImage) {
+    , m_imageSize(SmallImage)
+    , m_requestPlatformId(0) {
   //  setLimit(MOBYGAMES_MAX_RETURNS_TOTAL);
   m_idleTime.start();
   // delay reading the platform names from the cache file

@@ -186,7 +186,7 @@ Tellico::Data::EntryPtr VNDBFetcher::fetchEntryHook(uint uid_) {
   // clear the placeholder fields
   entry->setField(QStringLiteral("vn-id"), QString());
 
-  if(m_socket && m_socket->isValid()) {
+  if(m_socket->isValid()) {
     m_socket->disconnectFromHost();
     m_state = PreLogin;
   }
