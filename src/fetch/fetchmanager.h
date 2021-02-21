@@ -80,13 +80,13 @@ public:
 
   ~Manager();
 
-  KeyMap keyMap(const QString& source = QString()) const;
+  KeyMap keyMap(const QString& source = QString());
   void startSearch(const QString& source, FetchKey key, const QString& value);
   void continueSearch();
   bool canFetch() const;
   bool hasMoreResults() const;
   void loadFetchers();
-  const FetcherVec& fetchers() const;
+  const FetcherVec& fetchers();
   FetcherVec fetchers(int type);
   Fetcher::Ptr fetcherByUuid(const QString& uuid);
   NameTypeMap nameTypeMap();

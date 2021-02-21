@@ -118,13 +118,16 @@ void Manager::addFetcher(Fetcher::Ptr fetcher_) {
   }
 }
 
-const Tellico::Fetch::FetcherVec& Manager::fetchers() const {
+const Tellico::Fetch::FetcherVec& Manager::fetchers() {
+  if(m_fetchers.isEmpty()) {
+    loadFetchers();
+  }
   return m_fetchers;
 }
 
 Tellico::Fetch::FetcherVec Manager::fetchers(int type_) {
   FetcherVec vec;
-  foreach(Fetcher::Ptr fetcher, m_fetchers) {
+  foreach(Fetcher::Ptr fetcher, fetchers()) {
     if(fetcher->canFetch(type_)) {
       vec.append(fetcher);
     }
@@ -136,7 +139,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::fetcherByUuid(const QString& uuid_) {
   return m_uuidHash.contains(uuid_) ? m_uuidHash[uuid_] : Fetcher::Ptr();
 }
 
-Tellico::Fetch::KeyMap Manager::keyMap(const QString& source_) const {
+Tellico::Fetch::KeyMap Manager::keyMap(const QString& source_) {
   // an empty string means return all
   if(source_.isEmpty()) {
     return m_keyMap;
@@ -144,7 +147,7 @@ Tellico::Fetch::KeyMap Manager::keyMap(const QString& source_) const {
 
   // assume there's only one fetcher match
   Fetcher::Ptr foundFetcher;
-  foreach(Fetcher::Ptr fetcher, m_fetchers) {
+  foreach(Fetcher::Ptr fetcher, fetchers()) {
     if(source_ == fetcher->source()) {
       foundFetcher = fetcher;
       break;
@@ -175,7 +178,7 @@ void Manager::startSearch(const QString& source_, Tellico::Fetch::FetchKey key_,
   // assume there's only one fetcher match
   int i = 0;
   m_currentFetcherIndex = -1;
-  foreach(Fetcher::Ptr fetcher, m_fetchers) {
+  foreach(Fetcher::Ptr fetcher, fetchers()) {
     if(source_ == fetcher->source()) {
       ++m_count; // Fetcher::search() might emit done(), so increment before calling search()
       connect(fetcher.data(), &Fetcher::signalResultFound,

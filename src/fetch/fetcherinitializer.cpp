@@ -135,6 +135,4 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::GoogleScholarFetcher> registerGoogle(GoogleScholar);
   RegisterFetcher<Fetch::BibsonomyFetcher> registerBibsonomy(Bibsonomy);
 #endif
-
-  Fetch::Manager::self()->loadFetchers();
 }
