@@ -49,9 +49,9 @@ void VideoGameGeekFetcherTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/boardgamegeek2tellico.xsl"));
 }
 
-void VideoGameGeekFetcherTest::testTitle() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
-                                       QStringLiteral("Mass Effect 3: Citadel"));
+void VideoGameGeekFetcherTest::testKeyword() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
+                                       QStringLiteral("Mass Effect 3 Citadel"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::VideoGameGeekFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -60,7 +60,7 @@ void VideoGameGeekFetcherTest::testTitle() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Game);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Mass Effect 3: Citadel"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Mass Effect 3 - Citadel"));
   QCOMPARE(entry->field(QStringLiteral("developer")), QStringLiteral("BioWare"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Electronic Arts Inc. (EA)"));
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2013"));
