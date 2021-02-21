@@ -174,7 +174,7 @@ QString SpringerFetcher::defaultName() {
 }
 
 QString SpringerFetcher::defaultIcon() {
-  return favIcon("http://www.springerlink.com");
+  return favIcon("https://link.springer.com/static/sites/link/images/favicon-32x32.png");
 }
 
 SpringerFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SpringerFetcher* fetcher_)

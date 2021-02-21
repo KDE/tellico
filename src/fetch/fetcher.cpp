@@ -207,7 +207,13 @@ QString Fetcher::favIcon(const QUrl& url_) {
   if(url_.path().size() > 4 && url_.path().contains(QLatin1Char('.'))) {
     job->setIconUrl(url_);
   }
-  Q_UNUSED(job);
+/*
+  connect(job, &KIO::FavIconRequestJob::result, [job](KJob *) {
+         if(job->error()) {
+           myDebug() << "error:" << job->errorString();
+         }
+     });
+*/
 #endif
   QString name = KIO::favIconForUrl(url_);
 

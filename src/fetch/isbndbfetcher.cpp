@@ -374,7 +374,7 @@ QString ISBNdbFetcher::defaultName() {
 }
 
 QString ISBNdbFetcher::defaultIcon() {
-  return favIcon("http://isbndb.com");
+  return favIcon("https://isbndb.com/sites/default/files/favicon_0.ico");
 }
 
 Tellico::StringHash ISBNdbFetcher::allOptionalFields() {

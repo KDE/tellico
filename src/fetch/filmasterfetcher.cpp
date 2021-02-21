@@ -302,7 +302,7 @@ QString FilmasterFetcher::defaultName() {
 }
 
 QString FilmasterFetcher::defaultIcon() {
-  return favIcon("http://www.filmaster.com");
+  return favIcon("https://filmaster.com/static/favicon.ico");
 }
 
 Tellico::StringHash FilmasterFetcher::allOptionalFields() {
