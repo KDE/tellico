@@ -372,7 +372,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
 
 Tellico::Fetch::FetcherVec Manager::createUpdateFetchers(int collType_) {
   if(m_loadDefaults) {
-    return defaultFetchers();
+    return fetchers(collType_);
   }
 
   FetcherVec vec;
