@@ -1,0 +1,177 @@
+{"190140345": {
+  "books_id": "190140345",
+  "title": "Feels Like Home: How Rediscovering the Church as Family Changes Everything",
+  "sortcharacter": "1",
+  "public": "1",
+  "primaryauthor": "Eclov, Lee",
+  "primaryauthorrole": "Author",
+  "secondaryauthor": "Hansen, Collin",
+  "secondaryauthorroles": "Foreword",
+  "authors": [{
+    "lf": "Eclov, Lee",
+    "fl": "Lee Eclov",
+    "role": "Author"
+  },
+  {
+    "lf": "Hansen, Collin",
+    "fl": "Collin Hansen",
+    "role": "Foreword"
+  }],
+  "collections_idA": [1],
+  "collections": ["Your library"],
+  "originalisbn": "0802418864",
+  "isbn": {
+    "0": "0802418864",
+    "2": "9780802418869"
+  },
+  "asin": "0802418864",
+  "ean": ["0802418864"],
+  "publication": "Moody Publishers (2019), 192 pages",
+  "date": "2019",
+  "summary": "Feels Like Home: How Rediscovering the Church as Family Changes Everything by Lee Eclov (2019)",
+  "language": ["English"],
+  "language_codeA": ["eng"],
+  "originallanguage": ["English"],
+  "originallanguage_codeA": ["eng"],
+  "lcc": [],
+  "source": "amazon.com books",
+  "workcode": "22689473",
+  "entrydate": "2020-09-27",
+  "format": [{
+    "code": "1.1.1",
+    "text": "Paperback"
+  }],
+  "copies": "1",
+  "physical_description": "8 inches",
+  "height": "7.999984 inches",
+  "thickness": "0.42291254 inches",
+  "length": "5.2499895 inches",
+  "dimensions": "7.999984 x 5.2499895 x 0.42291254 inches",
+  "weight": "0.5 pounds"
+},
+"190140349": {
+  "books_id": "190140349",
+  "title": "The Beautiful Community: Unity, Diversity, and the Church at Its Best",
+  "sortcharacter": "5",
+  "public": "1",
+  "primaryauthor": "Ince Jr., Irwyn L.",
+  "primaryauthorrole": "Author",
+  "secondaryauthor": "Keller, Timothy",
+  "secondaryauthorroles": "Foreword",
+  "authors": [{
+    "lf": "Ince Jr., Irwyn L.",
+    "fl": "Irwyn L. Ince Jr.",
+    "role": "Author"
+  },
+  {
+    "lf": "Keller, Timothy",
+    "fl": "Timothy Keller",
+    "role": "Foreword"
+  }],
+  "collections_idA": [1],
+  "collections": ["Your library"],
+  "originalisbn": "0830848312",
+  "isbn": {
+    "0": "0830848312",
+    "2": "9780830848317"
+  },
+  "asin": "0830848312",
+  "ean": ["0830848312"],
+  "publication": "IVP (2020), 176 pages",
+  "date": "2020",
+  "summary": "The Beautiful Community: Unity, Diversity, and the Church at Its Best by Irwyn L. Ince Jr. (2020)",
+  "language": ["English"],
+  "language_codeA": ["eng"],
+  "originallanguage": ["English"],
+  "originallanguage_codeA": ["eng"],
+  "lcc": [],
+  "source": "amazon.com books",
+  "workcode": "24936554",
+  "entrydate": "2020-09-27",
+  "format": [{
+    "code": "1.1.1",
+    "text": "Paperback"
+  }],
+  "copies": "1",
+  "physical_description": "8.1 inches",
+  "height": "8.1 inches",
+  "thickness": "0.6 inches",
+  "length": "5.4 inches",
+  "dimensions": "8.1 x 5.4 x 0.6 inches",
+  "weight": "0.46076612758 pounds"
+},
+"190140351": {
+  "books_id": "190140351",
+  "title": "Training Hearts, Teaching Minds: Family Devotions Based on the Shorter Catechism",
+  "sortcharacter": "1",
+  "public": "1",
+  "primaryauthor": "Meade, Starr",
+  "primaryauthorrole": "Author",
+  "authors": [{
+    "lf": "Meade, Starr",
+    "fl": "Starr Meade",
+    "role": "Author"
+  }],
+  "collections_idA": [1],
+  "collections": ["Your library"],
+  "originalisbn": "0875523927",
+  "isbn": {
+    "0": "0875523927",
+    "2": "9780875523927"
+  },
+  "asin": "0875523927",
+  "ean": ["0875523927"],
+  "publication": "P & R Publishing (2000), Edition: First Edition, 360 pages",
+  "date": "2000",
+  "summary": "Training Hearts, Teaching Minds: Family Devotions Based on the Shorter Catechism by Starr Meade (2000)",
+  "language": ["English"],
+  "language_codeA": ["eng"],
+  "originallanguage": ["English"],
+  "originallanguage_codeA": ["eng"],
+  "ddc": {
+    "code": ["248.845"],
+    "wording": ["Christian Life",
+    "Christian Living for Adults",
+    "Christian Living for specific groups",
+    "Christian practice and observance",
+    "Parenting",
+    "Religions"]
+  },
+  "lcc": {
+    "code": "BX9184 .A5"
+  },
+  "subject": {
+    "0": ["Christian education of children"],
+    "2": ["Devotional calendars"],
+    "4": ["Presbyterian Church",
+    "Catechisms",
+    "English"],
+    "5": ["Presbyterian Church",
+    "English.",
+    "Catechisms"],
+    "6": ["Reformed Church",
+    "Catechisms",
+    "English"],
+    "7": ["Reformed Church",
+    "English.",
+    "Catechisms"],
+    "8": ["Westminster Assembly (1643-1652). Shorter catechism"]
+  },
+  "genre": ["Religion & Spirituality"],
+  "genre_id": ["1944"],
+  "source": "amazon.com books",
+  "workcode": "67516",
+  "entrydate": "2020-09-27",
+  "format": [{
+    "code": "1.1.1",
+    "text": "Paperback"
+  }],
+  "copies": "1",
+  "physical_description": "9.14 inches",
+  "height": "9.14 inches",
+  "thickness": "0.79 inches",
+  "length": "6 inches",
+  "dimensions": "9.14 x 6 x 0.79 inches",
+  "weight": "1.10010668738 pounds",
+  "pages": "349 "
+}}

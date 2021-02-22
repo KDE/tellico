@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,42 +22,16 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_IMPORT_LIBRARYTHINGIMPORTER_H
-#define TELLICO_IMPORT_LIBRARYTHINGIMPORTER_H
+#ifndef LIBRARYTHINGTEST_H
+#define LIBRARYTHINGTEST_H
 
-#include "importer.h"
+#include <QObject>
 
-class KUrlRequester;
-
-namespace Tellico {
-  namespace Import {
-
-/**
- * @author Robby Stephenson
-*/
-class LibraryThingImporter : public Importer {
+class LibraryThingTest : public QObject {
 Q_OBJECT
 
-public:
-  /**
-   */
-  LibraryThingImporter();
-  LibraryThingImporter(const QUrl& url);
-
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
-  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
-
-  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
-
-public Q_SLOTS:
-  void slotCancel() Q_DECL_OVERRIDE {}
-
-private:
-  Data::CollPtr m_coll;
-  QWidget* m_widget;
-  KUrlRequester* m_URLRequester;
+private Q_SLOTS:
+  void testImport();
 };
 
-  } // end namespace
-} // end namespace
 #endif

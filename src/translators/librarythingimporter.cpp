@@ -48,6 +48,11 @@ LibraryThingImporter::LibraryThingImporter() : Import::Importer()
   , m_URLRequester(nullptr) {
 }
 
+LibraryThingImporter::LibraryThingImporter(const QUrl& url) : Import::Importer(url)
+  , m_widget(nullptr)
+  , m_URLRequester(nullptr) {
+}
+
 bool LibraryThingImporter::canImport(int type) const {
   return type == Data::Collection::Book;
 }
@@ -57,20 +62,22 @@ Tellico::Data::CollPtr LibraryThingImporter::collection() {
     return m_coll;
   }
 
-  if(!m_widget) {
+  QUrl jsonUrl;
+  if(m_widget && m_URLRequester) {
+    jsonUrl = m_URLRequester->url();
+  } else if(!url().isEmpty()) {
+    jsonUrl = url();
+  } else {
     myWarning() << "no widget!";
     return Data::CollPtr();
   }
-
-  QUrl jsonUrl = m_URLRequester->url();
 
   if(jsonUrl.isEmpty() || !jsonUrl.isValid()) {
     myDebug() << "Bad jsonUrl:" << jsonUrl;
     return Data::CollPtr();
   }
 
-
-  QByteArray data = Tellico::FileHandler::readDataFile(jsonUrl, false /* quiet */);
+  const QByteArray data = Tellico::FileHandler::readDataFile(jsonUrl, false /* quiet */);
   QJsonParseError parseError;
   QJsonDocument doc = QJsonDocument::fromJson(data, &parseError);
   if(doc.isNull()) {
@@ -79,8 +86,10 @@ Tellico::Data::CollPtr LibraryThingImporter::collection() {
   }
 
   QRegularExpression digits(QStringLiteral("\\d+"));
+  QRegularExpression pubRx(QStringLiteral("^(.+?)[\\(,]"));
 
   m_coll = new Data::BookCollection(true);
+  bool defaultTitle = true;
   Data::EntryList entries;
   QVariantMap map = doc.object().toVariantMap();
   QMapIterator<QString, QVariant> i(map);
@@ -95,13 +104,36 @@ Tellico::Data::CollPtr LibraryThingImporter::collection() {
     entry->setField(QStringLiteral("series"), mapValue(valueMap, "series"));
     entry->setField(QStringLiteral("language"), mapValue(valueMap, "language"));
 
+    const QString collName = mapValue(valueMap, "collections");
+    // default to using a collection title based on the first entry
+    if(defaultTitle && !collName.isEmpty()) {
+      defaultTitle = false;
+      m_coll->setTitle(collName);
+    }
+
+    const QString cdate = mapValue(valueMap, "entrydate");
+    if(!cdate.isEmpty()) {
+      entry->setField(QStringLiteral("cdate"), cdate);
+    }
+
+    QString pub = mapValue(valueMap, "publication");
+    // try to clean up the publisher
+    QRegularExpressionMatch pubMatch = pubRx.match(pub);
+    if(pubMatch.hasMatch()) {
+      pub = pubMatch.captured(1).simplified();
+    }
+    entry->setField(QStringLiteral("publisher"), pub);
+
     QJsonArray authorArray = valueMap.value(QStringLiteral("authors")).toJsonArray();
     QStringList authors;
     for(int i = 0; i < authorArray.size(); ++i) {
       QVariantMap m = authorArray.at(i).toObject().toVariantMap();
       // TODO: read config option for author formatting?
       // use first-lastname for now
-      authors += mapValue(m, "fl");
+      const QString role = mapValue(m, "role");
+      if(role.isEmpty() || role == QLatin1String("Author")) {
+        authors += mapValue(m, "fl");
+      }
     }
     entry->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
 

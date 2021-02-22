@@ -302,6 +302,13 @@ ecm_add_test(htmlexportertest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
 )
 
+ecm_add_test(librarythingtest.cpp
+             ../translators/librarythingimporter.cpp
+             ../translators/importer.cpp
+    TEST_NAME librarythingtest
+    LINK_LIBRARIES ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(modstest.cpp
     TEST_NAME modstest
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
