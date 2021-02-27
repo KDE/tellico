@@ -106,7 +106,8 @@
 <xsl:template match="tc:tellico">
  <html>
   <head>
-   <style type="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style type="text/css">
    body {
         font-family: sans-serif;
         <xsl:if test="count($columns) &gt; 3">

@@ -53,6 +53,7 @@
 <xsl:template match="tc:tellico">
  <html>
   <head>
+   <meta name="viewport" content="width=device-width, initial-scale=1"/>
    <style type="text/css">
    body {
         font-family: sans-serif;

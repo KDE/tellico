@@ -68,6 +68,7 @@
 
  <html>
   <head>
+  <meta nameE="viewport" content="width=device-width, initial-scale=1"/>
   <style type="text/css">
   body {
     margin: 0px;
