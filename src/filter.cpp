@@ -271,7 +271,7 @@ bool FilterRule::numberCompare(Tellico::Data::EntryPtr entry_, Func func) const 
   // the equal compare is assumed to use the pattern string and the variant will be empty
   // TODO: switch to using the variant for everything
   return ok && func(value, m_patternVariant.isNull() ? m_pattern.toDouble()
-                                                  : m_patternVariant.toDouble());
+                                                     : m_patternVariant.toDouble());
 }
 
 /*******************************************************/
