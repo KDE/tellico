@@ -184,7 +184,7 @@ QString Entry::formattedField(Tellico::Data::FieldPtr field_, FieldFormat::Reque
       formattedValue = formattedValues.join(FieldFormat::delimiterString());
     }
     if(!formattedValue.isEmpty()) {
-      m_formattedFields.insert(field_->name(), formattedValue);
+      m_formattedFields.insert(field_->name(), Tellico::shareString(formattedValue));
     }
     return formattedValue;
   }

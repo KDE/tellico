@@ -35,7 +35,7 @@ using Tellico::Data::Field;
 
 // this constructor is for anything but Choice type
 Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
-    : QSharedData(), m_name(name_), m_title(title_),  m_category(i18n("General")), m_desc(title_),
+    : QSharedData(), m_name(Tellico::shareString(name_)), m_title(title_),  m_category(i18n("General")), m_desc(title_),
       m_type(type_), m_flags(0), m_formatType(FieldFormat::FormatNone) {
 
   Q_ASSERT(m_type != Choice);
@@ -76,7 +76,7 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
 
 // if this constructor is called, the type is necessarily Choice
 Field::Field(const QString& name_, const QString& title_, const QStringList& allowed_)
-    : QSharedData(), m_name(name_), m_title(title_), m_category(i18n("General")), m_desc(title_),
+    : QSharedData(), m_name(Tellico::shareString(name_)), m_title(title_), m_category(i18n("General")), m_desc(title_),
       m_type(Field::Choice), m_allowed(allowed_), m_flags(0), m_formatType(FieldFormat::FormatNone) {
 }
 
