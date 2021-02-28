@@ -212,7 +212,7 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
 
   QJsonArray results = doc.object().value(QLatin1String("items")).toArray();
   if(results.isEmpty()) {
-    myDebug() << "no results";
+    myDebug() << "UPCItemdb: no results";
     stop();
     return;
   }

@@ -110,13 +110,12 @@ void Fetcher::startUpdate(Tellico::Data::EntryPtr entry_) {
   Q_ASSERT(entry_->collection());
   m_request = updateRequest(entry_);
   m_request.setCollectionType(entry_->collection()->type());
-  if(!m_request.isNull()) {
-    search();
-  } else {
-    myDebug() << "insufficient info to search";
+  if(m_request.isNull()) {
+    myLog() << "insufficient info to update" << entry_->title();
     emit signalDone(this); // always need to emit this if not continuing with the search
+    return;
   }
-//  updateEntry(entry_);
+  search();
 }
 
 void Fetcher::readConfig(const KConfigGroup& config_) {
