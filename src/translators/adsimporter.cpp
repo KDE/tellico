@@ -202,8 +202,8 @@ void ADSImporter::readText(const QString& text_, int n) {
     needToAdd = true;
 
     // if the field can have multiple values, append current values to new value
-    if(f->hasFlag(Data::Field::AllowMultiple) && !entry->field(f->name()).isEmpty()) {
-      value.prepend(entry->field(f->name()) + FieldFormat::delimiterString());
+    if(f->hasFlag(Data::Field::AllowMultiple) && !entry->field(f).isEmpty()) {
+      value.prepend(entry->field(f) + FieldFormat::delimiterString());
     }
     entry->setField(f, value);
 

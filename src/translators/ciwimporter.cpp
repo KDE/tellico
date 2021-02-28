@@ -220,10 +220,6 @@ void CIWImporter::readText(const QString& text_, int n) {
     // harmless for non-choice fields
     // for entry-type, want it in lower case
     f->addAllowed(value);
-    // if the field can have multiple values, append current values to new value
-//    if(f->hasFlag(Data::Field::AllowMultiple) && !entry->field(f->name()).isEmpty()) {
-//      value.prepend(entry->field(f->name()) + FieldFormat::delimiterString());
-//    }
     entry->setField(f, value);
 
     if(showProgress && j%stepSize == 0) {

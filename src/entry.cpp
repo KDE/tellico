@@ -158,7 +158,7 @@ QString Entry::formattedField(Tellico::Data::FieldPtr field_, FieldFormat::Reque
     if(field_->type() == Field::Table) {
       QStringList rows;
       // we only format the first column
-      foreach(const QString& row, FieldFormat::splitTable(field(field_->name()))) {
+      foreach(const QString& row, FieldFormat::splitTable(field(field_))) {
         QStringList columns = FieldFormat::splitRow(row);
         QStringList newValues;
         if(!columns.isEmpty()) {
@@ -173,9 +173,9 @@ QString Entry::formattedField(Tellico::Data::FieldPtr field_, FieldFormat::Reque
     } else {
       QStringList values;
       if(field_->hasFlag(Field::AllowMultiple)) {
-        values = FieldFormat::splitValue(field(field_->name()));
+        values = FieldFormat::splitValue(field(field_));
       } else {
-        values << field(field_->name());
+        values << field(field_);
       }
       QStringList formattedValues;
       foreach(const QString& value, values) {

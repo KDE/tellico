@@ -62,7 +62,7 @@ QString BibtexHandler::bibtexKey(Tellico::Data::EntryPtr entry_) {
   const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(entry_->collection().data());
   Data::FieldPtr f = c->fieldByBibtexName(QStringLiteral("key"));
   if(f) {
-    QString key = entry_->field(f->name());
+    const QString key = entry_->field(f);
     if(!key.isEmpty()) {
       return key;
     }
@@ -73,23 +73,23 @@ QString BibtexHandler::bibtexKey(Tellico::Data::EntryPtr entry_) {
   if(authorField) {
     if(authorField->hasFlag(Data::Field::AllowMultiple)) {
       // grab first author only;
-      QString tmp = entry_->field(authorField->name());
+      QString tmp = entry_->field(authorField);
       author = tmp.section(QLatin1Char(';'), 0, 0);
     } else {
-      author = entry_->field(authorField->name());
+      author = entry_->field(authorField);
     }
   }
 
   Data::FieldPtr titleField = c->fieldByBibtexName(QStringLiteral("title"));
   QString title;
   if(titleField) {
-    title = entry_->field(titleField->name());
+    title = entry_->field(titleField);
   }
 
   Data::FieldPtr yearField = c->fieldByBibtexName(QStringLiteral("year"));
   QString year;
   if(yearField) {
-    year = entry_->field(yearField->name());
+    year = entry_->field(yearField);
   }
   if(year.isEmpty()) {
     year = entry_->field(QStringLiteral("pub_year"));
