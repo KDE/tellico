@@ -247,7 +247,7 @@ QString FilterRule::pattern() const {
 }
 
 template <typename Func>
-bool FilterRule::numberCompare(Tellico::Data::EntryPtr entry_, Func f) const {
+bool FilterRule::numberCompare(Tellico::Data::EntryPtr entry_, Func func) const {
   // empty field name means search all
   // but the rule widget should limit this function to number fields only
   if(m_fieldName.isEmpty()) {
@@ -259,17 +259,18 @@ bool FilterRule::numberCompare(Tellico::Data::EntryPtr entry_, Func f) const {
   double value;
   if(entry_->collection()->hasField(m_fieldName) &&
      entry_->collection()->fieldByName(m_fieldName)->type() == Data::Field::Image) {
+    ok = true;
     const Data::ImageInfo info = ImageFactory::imageInfo(valueString);
-    ok = !info.isNull();
     // image size comparison presumes "fitting inside a box" so
     // consider the pattern value to be the size of the square and compare against biggest dimension
-    value = qMax(info.width(), info.height());
+    // an empty empty (null info) should match against 0 size
+    value = info.isNull() ? 0 : qMax(info.width(), info.height());
   } else {
     value = valueString.toDouble(&ok);
   }
   // the equal compare is assumed to use the pattern string and the variant will be empty
   // TODO: switch to using the variant for everything
-  return ok && f(value, m_patternVariant.isNull() ? m_pattern.toDouble()
+  return ok && func(value, m_patternVariant.isNull() ? m_pattern.toDouble()
                                                   : m_patternVariant.toDouble());
 }
 

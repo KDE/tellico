@@ -38,6 +38,7 @@
 QTEST_GUILESS_MAIN( FilterTest )
 
 void FilterTest::initTestCase() {
+  Tellico::ImageFactory::init();
 }
 
 void FilterTest::testFilter() {
@@ -243,8 +244,12 @@ void FilterTest::testFilter() {
   QVERIFY(!filter.matches(entry));
   rule9->setFunction(Tellico::FilterRule::FuncEquals);
   QVERIFY(filter.matches(entry));
+  // an empty image should also match less than size
+  entry->setField(QStringLiteral("image"), QString());
+  rule9->setFunction(Tellico::FilterRule::FuncLess);
+  QVERIFY(filter.matches(entry));
 
-  // test a filter for matchign against an empty string
+  // test a filter for matching against an empty string
   Tellico::Data::FieldPtr testField(new Tellico::Data::Field(QStringLiteral("test"),
                                                              QStringLiteral("Test")));
   coll->addField(testField);
