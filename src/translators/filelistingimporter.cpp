@@ -177,7 +177,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     foreach(KFileMetaData::Extractor* ex, exList) {
 // initializing exempi can cause a crash in Exiv for files with XMP data
 // crude workaround is to avoid using the exivextractor and the only apparent way is to
-// matach against the mimetypes
+// match against the mimetypes. Here, we use image/x-exv as the canary in the coal mine
 // see https://bugs.kde.org/show_bug.cgi?id=390744
 #ifdef HAVE_EXEMPI
       if(!ex->mimetypes().contains(QStringLiteral("image/x-exv"))) {
