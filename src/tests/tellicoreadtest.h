@@ -41,6 +41,7 @@ private Q_SLOTS:
   void testEntries();
   void testEntries_data();
   void testCoinCollection();
+  void testBibtexCollection();
   void testTableData();
   void testDuplicateLoans();
   void testDuplicateBorrowers();

@@ -26,6 +26,7 @@
 
 #include "../translators/tellicoimporter.h"
 #include "../collections/bookcollection.h"
+#include "../collections/bibtexcollection.h"
 #include "../collections/coincollection.h"
 #include "../collections/musiccollection.h"
 #include "../collectionfactory.h"
@@ -59,6 +60,7 @@ static bool hasNetwork() {
 void TellicoReadTest::initTestCase() {
   // need to register this first
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
+  Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
   Tellico::RegisterCollection<Tellico::Data::CoinCollection> registerCoin(Tellico::Data::Collection::Coin, "coin");
   Tellico::RegisterCollection<Tellico::Data::Collection> registerBase(Tellico::Data::Collection::Base, "entry");
   Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerAlbum(Tellico::Data::Collection::Album, "album");
@@ -151,6 +153,68 @@ void TellicoReadTest::testCoinCollection() {
   Tellico::Data::EntryPtr entry = coll->entries().at(0);
   // test creating the derived title
   QCOMPARE(entry->title(), QSL("1974D Jefferson Nickel 0.05"));
+}
+
+void TellicoReadTest::testBibtexCollection() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/bibtex-format11.tc"));
+
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+  Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
+  QVERIFY(bColl);
+  QVERIFY(!bColl->preamble().isEmpty());
+
+  auto macroList = bColl->macroList();
+  QCOMPARE(macroList.count(), 13); // includes 12 months plus the one in the file
+  QVERIFY(!macroList.value(QLatin1String("SPE")).isEmpty());
+
+  auto borrowerList = coll->borrowers();
+  QCOMPARE(borrowerList.count(), 1);
+  auto borr1 = borrowerList.front();
+  QCOMPARE(borr1->count(), 1);
+  QCOMPARE(borr1->name(), QStringLiteral("кириллица"));
+
+  auto filterList = coll->filters();
+  QCOMPARE(filterList.count(), 1);
+  auto filter1 = filterList.front();
+  QCOMPARE(filter1->name(), QStringLiteral("1990"));
+
+  Tellico::Export::TellicoXMLExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  exporter.setOptions(exporter.options() | Tellico::Export::ExportComplete);
+  Tellico::Import::TellicoImporter importer2(exporter.text());
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+  Tellico::Data::BibtexCollection* bColl2 = dynamic_cast<Tellico::Data::BibtexCollection*>(coll2.data());
+
+  QVERIFY(coll2);
+  QCOMPARE(coll2->type(), coll->type());
+  QCOMPARE(coll2->entryCount(), coll->entryCount());
+  QVERIFY(bColl2);
+  QCOMPARE(bColl2->preamble(), bColl->preamble());
+  QCOMPARE(bColl2->macroList(), bColl->macroList());
+
+  QCOMPARE(coll2->filters().count(), coll->filters().count());
+  auto filter2 = coll->filters().front();
+  QCOMPARE(filter1->name(), filter2->name());
+  QCOMPARE(filter1->count(), filter2->count());
+  QCOMPARE(filter1->op(), filter2->op());
+
+  QCOMPARE(coll2->borrowers().count(), coll->borrowers().count());
+  auto borr2 = coll2->borrowers().front();
+  QCOMPARE(borr1->name(), borr2->name());
+  QCOMPARE(borr1->uid(), borr2->uid());
+  QCOMPARE(borr1->count(), borr2->count());
+  auto loan1 = borr1->loans().front();
+  auto loan2 = borr2->loans().front();
+  QCOMPARE(loan1->loanDate(), loan2->loanDate());
+  QCOMPARE(loan1->borrower()->name(), borr1->name());
+  QCOMPARE(loan1->dueDate(), loan2->dueDate());
+  QCOMPARE(loan1->note(), loan2->note());
+  QCOMPARE(loan1->uid(), loan2->uid());
+  QCOMPARE(loan1->entry()->title(), loan2->entry()->title());
 }
 
 void TellicoReadTest::testTableData() {
