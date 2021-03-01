@@ -86,3 +86,18 @@ void ModsTest::testDNBMARCXML() {
   QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
   QCOMPARE(coll->entryCount(), 25);
 }
+
+void ModsTest::testLocaleEncoding() {
+  const auto xslt = QByteArray( \
+    "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">" \
+    "  <xsl:output method=\"xml\" version=\"1.0\" encoding=\"windows-1251\"/>" \
+    "  <xsl:template match=\"/\"/>" \
+    "</xsl:stylesheet>" \
+  );
+  QDomDocument dom;
+  dom.setContent(xslt);
+  QVERIFY(!dom.isNull());
+  QVERIFY(dom.toString().contains(QLatin1String("windows-1251")));
+  XSLTHandler::setLocaleEncoding(dom);
+  QVERIFY(dom.toString().contains(QTextCodec::codecForLocale()->name()));
+}

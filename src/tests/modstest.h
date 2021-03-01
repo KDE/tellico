@@ -34,6 +34,7 @@ private Q_SLOTS:
   void initTestCase();
   void testBook();
   void testDNBMARCXML();
+  void testLocaleEncoding();
 };
 
 #endif
