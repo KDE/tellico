@@ -114,7 +114,7 @@ QString CSVExporter::text() const {
   foreach(Data::EntryPtr entryIt, entries()) {
     QStringList values;
     foreach(Data::FieldPtr fIt, fields()) {
-      QString value = entryIt->formattedField(fIt->name(), format);
+      QString value = entryIt->formattedField(fIt, format);
       if(replaceColDelimiter) {
         value.replace(FieldFormat::columnDelimiterString(), m_colDelimiter);
       }

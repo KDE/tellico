@@ -145,7 +145,7 @@ QString BibtexmlExporter::text() {
 
     // now iterate over attributes
     foreach(Data::FieldPtr field, fields) {
-      value = entryIt->formattedField(field->name(), format);
+      value = entryIt->formattedField(field, format);
       if(value.isEmpty()) {
         continue;
       }
@@ -171,7 +171,7 @@ QString BibtexmlExporter::text() {
         }
 
         parentElem = dom.createElement(parElemName);
-        const QStringList values = FieldFormat::splitValue(entryIt->formattedField(field->name(), format));
+        const QStringList values = FieldFormat::splitValue(entryIt->formattedField(field, format));
         foreach(const QString& value, values) {
           fieldElem = dom.createElement(elemName);
           fieldElem.appendChild(dom.createTextNode(value));

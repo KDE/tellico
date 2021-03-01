@@ -308,7 +308,7 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
                                                 FieldFormat::AsIsFormat);
   QRegularExpression stripHTML(QLatin1String("<.*?>"));
   foreach(Data::FieldPtr fIt, fields_) {
-    value = entry_.formattedField(fIt->name(), format);
+    value = entry_.formattedField(fIt, format);
     if(value.isEmpty()) {
       continue;
     }
