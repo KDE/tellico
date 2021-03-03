@@ -72,6 +72,11 @@ ecm_add_test(iso5426test.cpp
     LINK_LIBRARIES Qt5::Test utils
 )
 
+ecm_add_test(newstufftest.cpp ../fieldformat.cpp
+    TEST_NAME newstufftest
+    LINK_LIBRARIES Qt5::Test newstuff config
+)
+
 set(tellicotest_SRCS
     ../collection.cpp
     ../entry.cpp
