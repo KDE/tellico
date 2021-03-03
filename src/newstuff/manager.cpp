@@ -75,7 +75,11 @@ Manager::Manager() : QObject(nullptr) {
 
 Manager::~Manager() {
   QDBusConnection::sessionBus().unregisterObject(QStringLiteral("/NewStuff"));
-  QDBusConnection::sessionBus().unregisterService(QStringLiteral("org.kde.tellico"));
+  auto interface = QDBusConnection::sessionBus().interface();
+  if(interface) {
+    // the windows build was crashing here when the interface was null
+    interface->unregisterService(QStringLiteral("org.kde.tellico"));
+  }
 }
 
 Manager* Manager::self() {
