@@ -24,6 +24,7 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
+#include <config.h>
 #include "bibtextest.h"
 
 #include "../collections/bibtexcollection.h"
@@ -47,6 +48,7 @@ void BibtexTest::initTestCase() {
 }
 
 void BibtexTest::testImport() {
+#ifdef ENABLE_BTPARSE
   KSharedConfigPtr config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig);
   KConfigGroup cg = config->group(QStringLiteral("ExportOptions - Bibtex"));
   cg.writeEntry("URL Package", true);
@@ -103,6 +105,7 @@ void BibtexTest::testImport() {
       }
     }
   }
+#endif
 }
 
 void BibtexTest::testPages() {
