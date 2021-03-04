@@ -60,7 +60,7 @@ Tellico::Data::CollPtr CollectorzImporter::collection() {
     return coll;
   }
 
-  const QString baseDir = url().adjusted(QUrl::RemoveFilename).path();
+  const QString baseDir = url().adjusted(QUrl::RemoveFilename).toLocalFile();
   const QString coverField(QStringLiteral("cover"));
   const QString coverStringField(QStringLiteral("coverstring"));
 

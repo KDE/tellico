@@ -84,7 +84,7 @@ bool AlexandriaExporter::exec() {
     libraryDir = QDir::home();
   } else {
     if(u.isLocalFile()) {
-      if(!libraryDir.cd(u.path())) {
+      if(!libraryDir.cd(u.toLocalFile())) {
         myWarning() << "can't change to directory:" << u.path();
         return false;
       }

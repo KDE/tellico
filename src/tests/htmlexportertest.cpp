@@ -185,8 +185,13 @@ void HtmlExporterTest::testReportHtml() {
 
   QString output2 = exporter2.text();
   QVERIFY(!output2.isEmpty());
-  // the rating pic image needs to be an absolute local path, starting with "/"
-  QVERIFY(output2.contains(QRegularExpression(QStringLiteral("src=\"/[^\"]+stars3.png"))));
+  // the rating pic image needs to be an absolute local path
+  QRegularExpression starsPathRx(QStringLiteral("src=\"(.+stars3.png)\""));
+  auto starsMatch = starsPathRx.match(output2);
+  QVERIFY(starsMatch.hasMatch());
+  QFileInfo starsInfo(starsMatch.captured(1));
+  QVERIFY(starsInfo.exists());
+  QVERIFY(starsInfo.isAbsolute());
 }
 
 void HtmlExporterTest::testDirectoryNames() {

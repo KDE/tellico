@@ -707,7 +707,7 @@ QString ImageFactory::localDirectory(const QUrl& url_) {
     myWarning() << "unable to save to " << url_;
     return QString();
   }
-  QString dir = url_.adjusted(QUrl::RemoveFilename).path();
+  QString dir = url_.adjusted(QUrl::RemoveFilename).toLocalFile();
   // could have already been set once
   if(!dir.contains(QLatin1String("_files"))) {
     QFileInfo fi(url_.fileName());
