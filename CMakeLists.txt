@@ -140,17 +140,16 @@ if(KDEPIMLIBS_FOUND)
     include_directories(${KDEPIMLIBS_INCLUDE_DIRS})
 endif(KDEPIMLIBS_FOUND)
 
-# There is a port of libkcddb to use KF5 style linking and headers
 find_package(KF5Cddb)
 set_package_properties(KF5Cddb PROPERTIES
     DESCRIPTION "Support for CDDB searches"
-    URL "https://cgit.kde.org/libkcddb.git"
+    URL "https://invent.kde.org/multimedia/libkcddb"
     TYPE OPTIONAL)
 
 find_package(Taglib)
 set_package_properties(Taglib PROPERTIES
     DESCRIPTION "Support for reading multimedia files"
-    URL "https://taglib.org/"
+    URL "https://taglib.org"
     TYPE OPTIONAL)
 if(TAGLIB_FOUND)
     if(TAGLIB_LIBRARIES)
