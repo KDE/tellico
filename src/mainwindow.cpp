@@ -2170,15 +2170,11 @@ void MainWindow::updateCaption(bool modified_) {
        caption += QLatin1String(" - ");
     }
     QUrl u = Data::Document::self()->URL();
-    if(u.isLocalFile()) {
+    if(u.isLocalFile() && u.fileName() == i18n(Tellico::untitledFilename)) {
       // for new files, the filename is set to Untitled in Data::Document
-      if(u.fileName() == i18n(Tellico::untitledFilename)) {
-        caption += u.fileName();
-      } else {
-        caption += u.path();
-      }
+      caption += u.fileName();
     } else {
-      caption += u.toDisplayString();
+      caption += u.toDisplayString(QUrl::PreferLocalFile);
     }
   }
   setCaption(caption, modified_);
