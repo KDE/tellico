@@ -86,7 +86,7 @@ bool Borrower::removeLoan(Tellico::Data::LoanPtr loan_) {
   return true;
 }
 
-bool Borrower::hasEntry(Data::EntryPtr entry_) {
+bool Borrower::hasEntry(Tellico::Data::EntryPtr entry_) {
   foreach(const LoanPtr loan, m_loans) {
     if(loan->entry() == entry_) {
       return true;
