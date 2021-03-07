@@ -31,8 +31,6 @@
 #include <QStringList>
 #include <QHash>
 
-#include <functional>
-
 namespace Tellico {
 
   namespace Data {
@@ -198,7 +196,7 @@ private:
   QList<EntryGroup*> m_groups;
 };
 
-class EntryCmp : public std::binary_function<EntryPtr, EntryPtr, bool> {
+class EntryCmp {
 
 public:
   EntryCmp(const QString& field) : m_field(field) {}

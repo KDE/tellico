@@ -27,8 +27,6 @@
 
 #include <QValidator>
 
-#include <functional>
-
 namespace Tellico {
 
 /**
@@ -163,9 +161,8 @@ private:
   static QChar checkSum13(const QString& input);
 };
 
-class ISBNComparison : public std::binary_function<const QString&, const QString&, bool> {
+class ISBNComparison {
 public:
-  ISBNComparison() {}
   bool operator()(const QString& value1, const QString& value2) const;
 };
 
