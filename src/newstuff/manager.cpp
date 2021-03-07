@@ -78,6 +78,7 @@ Manager::~Manager() {
   auto interface = QDBusConnection::sessionBus().interface();
   if(interface) {
     // the windows build was crashing here when the interface was null
+    // see https://bugs.kde.org/show_bug.cgi?id=422468
     interface->unregisterService(QStringLiteral("org.kde.tellico"));
   }
 }
