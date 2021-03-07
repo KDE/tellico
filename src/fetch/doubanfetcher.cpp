@@ -51,9 +51,9 @@
 
 namespace {
   static const int DOUBAN_MAX_RETURNS_TOTAL = 20;
-  static const char* DOUBAN_API_URL = "https://api.douban.com/v2/";
+  static const char* DOUBAN_API_URL = "https://frodo.douban.com/api/v2/";
   // old and unused
-  //static const char* DOUBAN_API_KEY = "0bd1672394eb1ebf2374356abec15c3d";
+  static const char* DOUBAN_API_KEY = "054022eaeae0b00e0fc068c0c0a2102a";
 }
 
 using namespace Tellico;
@@ -113,7 +113,7 @@ void DoubanFetcher::search() {
     case ISBN:
       u.setPath(u.path() + QLatin1String("isbn/"));
       {
-        QStringList isbns = FieldFormat::splitValue(request().value());
+        const QStringList isbns = FieldFormat::splitValue(request().value());
         if(!isbns.isEmpty()) {
           u.setPath(u.path() + ISBNValidator::cleanValue(isbns.front()));
         }
@@ -131,6 +131,7 @@ void DoubanFetcher::search() {
   }
 
 //  q.addQueryItem(QLatin1String("start"), QString::number(0));
+  q.addQueryItem(QLatin1String("apiKey"), QString::fromLatin1(DOUBAN_API_KEY));
   u.setQuery(q);
 //  myDebug() << "url:" << u.url();
 
@@ -317,7 +318,6 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
         coll->addField(f);
       }
       if(optionalFields().contains(QStringLiteral("douban")) &&
-        !mapValue(resultMap_, "alt").isEmpty() &&
         !coll->hasField(QStringLiteral("douban"))) {
         Data::FieldPtr f(new Data::Field(QStringLiteral("douban"), i18n("Douban Link"), Data::Field::URL));
         f->setCategory(i18n("General"));
@@ -336,7 +336,6 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
         coll->addField(f);
       }
       if(optionalFields().contains(QStringLiteral("douban")) &&
-        !mapValue(resultMap_, "alt").isEmpty() &&
         !coll->hasField(QStringLiteral("douban"))) {
         Data::FieldPtr f(new Data::Field(QStringLiteral("douban"), i18n("Douban Link"), Data::Field::URL));
         f->setCategory(i18n("General"));
@@ -355,7 +354,6 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
         coll->addField(f);
       }
       if(optionalFields().contains(QStringLiteral("douban")) &&
-        !mapValue(resultMap_, "alt").isEmpty() &&
         !coll->hasField(QStringLiteral("douban"))) {
         Data::FieldPtr f(new Data::Field(QStringLiteral("douban"), i18n("Douban Link"), Data::Field::URL));
         f->setCategory(i18n("General"));
@@ -368,6 +366,17 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
       break;
   }
 
+  const QString image_id = entry->field(QStringLiteral("cover"));
+  // if it's still a url, we need to load it
+  if(image_id.startsWith(QLatin1String("http"))) {
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true);
+    if(id.isEmpty()) {
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+      entry->setField(QStringLiteral("cover"), QString());
+    } else {
+      entry->setField(QStringLiteral("cover"), id);
+    }
+  }
   return entry;
 }
 
@@ -376,7 +385,11 @@ void DoubanFetcher::populateBookEntry(Data::EntryPtr entry, const QVariantMap& r
   entry->setField(QStringLiteral("subtitle"), mapValue(resultMap_, "subtitle"));
   entry->setField(QStringLiteral("author"), mapValue(resultMap_, "author"));
   entry->setField(QStringLiteral("translator"), mapValue(resultMap_, "translator"));
-  entry->setField(QStringLiteral("publisher"), mapValue(resultMap_, "publisher"));
+  if(resultMap_.contains(QLatin1String("publisher"))) {
+    entry->setField(QStringLiteral("publisher"), mapValue(resultMap_, "publisher"));
+  } else {
+    entry->setField(QStringLiteral("publisher"), mapValue(resultMap_, "press"));
+  }
 
   const QString binding = mapValue(resultMap_, "binding");
   if(binding == QStringLiteral("精装")) {
@@ -386,19 +399,42 @@ void DoubanFetcher::populateBookEntry(Data::EntryPtr entry, const QVariantMap& r
   }
 
   entry->setField(QStringLiteral("pub_year"), mapValue(resultMap_, "pubdate").left(4));
-  entry->setField(QStringLiteral("isbn"), mapValue(resultMap_, "isbn10"));
+  QString isbn;
+  if(resultMap_.contains(QLatin1String("isbn10"))) {
+    isbn = mapValue(resultMap_, "isbn10");
+  } else if(request().key() == ISBN && !request().value().contains(QLatin1Char(';'))) {
+    isbn = request().value();
+  }
+  entry->setField(QStringLiteral("isbn"), ISBNValidator::isbn10(isbn));
   entry->setField(QStringLiteral("pages"), mapValue(resultMap_, "pages"));
-  entry->setField(QStringLiteral("cover"), mapValue(resultMap_, "image"));
-  entry->setField(QStringLiteral("keyword"), mapValue(resultMap_, "tags", "title"));
+  if(resultMap_.contains(QLatin1String("cover_url"))) {
+    entry->setField(QStringLiteral("cover"), mapValue(resultMap_, "cover_url"));
+  } else {
+    entry->setField(QStringLiteral("cover"), mapValue(resultMap_, "image"));
+  }
 
-  if(optionalFields().contains(QStringLiteral("origtitle")) &&
+  QString keyword = mapValue(resultMap_, "tags", "title");
+  if(keyword.isEmpty()) {
+    keyword = mapValue(resultMap_, "tags", "name");
+  }
+  entry->setField(QStringLiteral("keyword"), keyword);
+
+  if(entry->collection()->hasField(QStringLiteral("origtitle")) &&
      !mapValue(resultMap_, "origin_title").isEmpty()) {
     entry->setField(QStringLiteral("origtitle"), mapValue(resultMap_, "origin_title"));
   }
-  if(optionalFields().contains(QStringLiteral("douban"))) {
-    entry->setField(QStringLiteral("douban"), mapValue(resultMap_, "alt"));
+  if(entry->collection()->hasField(QStringLiteral("douban"))) {
+    if(resultMap_.contains(QLatin1String("alt"))) {
+      entry->setField(QStringLiteral("douban"), mapValue(resultMap_, "alt"));
+    } else {
+      entry->setField(QStringLiteral("douban"), mapValue(resultMap_, "url"));
+    }
   }
-  entry->setField(QStringLiteral("plot"), mapValue(resultMap_, "summary"));
+  if(resultMap_.contains(QLatin1String("summary"))) {
+    entry->setField(QStringLiteral("plot"), mapValue(resultMap_, "summary"));
+  } else {
+    entry->setField(QStringLiteral("plot"), mapValue(resultMap_, "intro"));
+  }
 }
 
 void DoubanFetcher::populateVideoEntry(Data::EntryPtr entry, const QVariantMap& resultMap_) {
@@ -407,7 +443,11 @@ void DoubanFetcher::populateVideoEntry(Data::EntryPtr entry, const QVariantMap& 
   entry->setField(QStringLiteral("director"), mapValue(resultMap_, "directors", "name"));
   entry->setField(QStringLiteral("writer"), mapValue(resultMap_, "writers", "name"));
   entry->setField(QStringLiteral("year"), mapValue(resultMap_, "year"));
-  entry->setField(QStringLiteral("cover"), mapValue(resultMap_, "images", "medium"));
+  if(resultMap_.contains(QLatin1String("cover_url"))) {
+    entry->setField(QStringLiteral("cover"), mapValue(resultMap_, "cover_url"));
+  } else {
+    entry->setField(QStringLiteral("cover"), mapValue(resultMap_, "images", "medium"));
+  }
   entry->setField(QStringLiteral("plot"), mapValue(resultMap_, "summary"));
 
   QStringList actors;
@@ -427,7 +467,11 @@ void DoubanFetcher::populateVideoEntry(Data::EntryPtr entry, const QVariantMap& 
 
 void DoubanFetcher::populateMusicEntry(Data::EntryPtr entry, const QVariantMap& resultMap_) {
   entry->setField(QStringLiteral("title"), mapValue(resultMap_, "title"));
-  entry->setField(QStringLiteral("cover"), mapValue(resultMap_, "image"));
+  if(resultMap_.contains(QLatin1String("cover_url"))) {
+    entry->setField(QStringLiteral("cover"), mapValue(resultMap_, "cover_url"));
+  } else {
+    entry->setField(QStringLiteral("cover"), mapValue(resultMap_, "image"));
+  }
   entry->setField(QStringLiteral("artist"), mapValue(resultMap_, "attrs", "singer"));
   entry->setField(QStringLiteral("label"), mapValue(resultMap_, "attrs", "publisher"));
   entry->setField(QStringLiteral("year"), mapValue(resultMap_, "attrs", "pubdate").left(4));
