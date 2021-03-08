@@ -100,11 +100,11 @@ void DoubanFetcherTest::testISBN() {
   QCOMPARE(entry->field("author"), QString::fromUtf8("[英] 斯蒂芬·霍金; 列纳德·蒙洛迪诺"));
   QCOMPARE(entry->field("translator"), QString::fromUtf8("吴忠超"));
   QCOMPARE(entry->field("publisher"), QString::fromUtf8("湖南科学技术出版社"));
-//  QCOMPARE(entry->field("binding"), QStringLiteral("Hardback"));
+  QCOMPARE(entry->field("binding"), QStringLiteral("Hardback"));
   QCOMPARE(entry->field("pub_year"), QStringLiteral("2011"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("7-53576544-0"));
   QCOMPARE(entry->field("pages"), QStringLiteral("176"));
-//  QCOMPARE(entry->field("origtitle"), QStringLiteral("The Grand Design"));
+  QCOMPARE(entry->field("origtitle"), QStringLiteral("The Grand Design"));
   QCOMPARE(entry->field("douban"), QStringLiteral("https://book.douban.com/subject/5422665/"));
   QVERIFY(!entry->field(QStringLiteral("keyword")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
@@ -131,7 +131,8 @@ void DoubanFetcherTest::testVideo() {
   QCOMPARE(entry->field("origtitle"), QStringLiteral("Iron Man 2"));
   QCOMPARE(entry->field("year"), QStringLiteral("2010"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("乔恩·费儒"));
-//  QCOMPARE(entry->field("running-time"), QStringLiteral("124"));
+  QCOMPARE(entry->field("writer"), QString::fromUtf8("贾斯汀·塞洛克斯"));
+  QCOMPARE(entry->field("running-time"), QStringLiteral("124"));
   QVERIFY(!entry->field(QStringLiteral("genre")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cast")).isEmpty());
 //  QVERIFY(!entry->field(QStringLiteral("nationality")).isEmpty());
@@ -156,11 +157,11 @@ void DoubanFetcherTest::testMusic() {
 
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Album);
 
-  QCOMPARE(entry->field("title"), QStringLiteral("Top Gun: Original Motion Picture Soundtrack"));
-  QCOMPARE(entry->field("year"), QStringLiteral("1990"));
-  QCOMPARE(entry->field("artist"), QStringLiteral("Various Artists"));
-  QCOMPARE(entry->field("label"), QStringLiteral("Sony"));
-  QCOMPARE(entry->field("medium"), QStringLiteral("Compact Disc"));
+  QCOMPARE(entry->field("title"), QStringLiteral("TOP GUN/SOUNDTRACK"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2013"));
+  QCOMPARE(entry->field("artist"), QStringLiteral("Original Motion Picture Soundtrack"));
+  QCOMPARE(entry->field("label"), QString::fromUtf8("索尼音乐"));
+//  QCOMPARE(entry->field("medium"), QStringLiteral("Compact Disc"));
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
   QCOMPARE(trackList.count(), 10);
   QCOMPARE(trackList.front(), QStringLiteral("Danger Zone::Kenny Loggins"));
@@ -171,7 +172,7 @@ void DoubanFetcherTest::testMusic() {
 
 void DoubanFetcherTest::testMusicAdele() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
-                                       QLatin1String("Adele"));
+                                       QLatin1String("Adele 21"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -188,8 +189,8 @@ void DoubanFetcherTest::testMusicAdele() {
   QCOMPARE(entry->field("artist"), QStringLiteral("Adele"));
   QCOMPARE(entry->field("medium"), QStringLiteral("Compact Disc"));
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
-  QCOMPARE(trackList.count(), 15);
-  QCOMPARE(trackList.front(), QStringLiteral("Rolling in the Deep"));
+  QCOMPARE(trackList.count(), 12);
+  QCOMPARE(trackList.front(), QStringLiteral("Rolling In the Deep::Adele::3:48"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
@@ -215,7 +216,8 @@ void DoubanFetcherTest::testMusicArtPepper() {
   QCOMPARE(entry->field("medium"), QStringLiteral("Compact Disc"));
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
   QCOMPARE(trackList.count(), 9);
-  QCOMPARE(trackList.front(), QStringLiteral("You'd Be So Nice To Come Home To::Art Pepper::5:25"));
+  // doesn't seem to have the duration
+  QVERIFY(trackList.front().startsWith(QStringLiteral("You'd Be So Nice To Come Home To::Art Pepper")));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }

@@ -1,3 +1,8 @@
+2021-03-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Douban data source.
+	* Fixed crashing bug on Windows (Bug 422468).
+
 2021-02-23  Robby Stephenson  <robby@periapsis.org>
 
         * Released Tellico 3.3.5.

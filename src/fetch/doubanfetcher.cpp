@@ -90,28 +90,10 @@ void DoubanFetcher::search() {
   m_started = true;
   QUrl u(QString::fromLatin1(DOUBAN_API_URL));
 
-  switch(request().collectionType()) {
-    case Data::Collection::Book:
-    case Data::Collection::Bibtex:
-      u.setPath(u.path() + QLatin1String("book/"));
-      break;
-
-    case Data::Collection::Video:
-      u.setPath(u.path() + QLatin1String("movie/"));
-      break;
-
-    case Data::Collection::Album:
-      u.setPath(u.path() + QLatin1String("music/"));
-      break;
-
-    default:
-      myWarning() << "bad collection type:" << request().collectionType();
-  }
-
   QUrlQuery q;
   switch(request().key()) {
     case ISBN:
-      u.setPath(u.path() + QLatin1String("isbn/"));
+      u.setPath(u.path() + QLatin1String("book/isbn/"));
       {
         const QStringList isbns = FieldFormat::splitValue(request().value());
         if(!isbns.isEmpty()) {
@@ -130,7 +112,7 @@ void DoubanFetcher::search() {
       myWarning() << "key not recognized:" << request().key();
   }
 
-//  q.addQueryItem(QLatin1String("start"), QString::number(0));
+  q.addQueryItem(QLatin1String("start"), QString::number(0));
   q.addQueryItem(QLatin1String("apiKey"), QString::fromLatin1(DOUBAN_API_KEY));
   u.setQuery(q);
 //  myDebug() << "url:" << u.url();
@@ -224,52 +206,39 @@ void DoubanFetcher::slotComplete(KJob* job_) {
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
   const QVariantMap resultsMap = doc.object().toVariantMap();
-
-  switch(request().collectionType()) {
-    case Data::Collection::Book:
-    case Data::Collection::Bibtex:
-      foreach(const QVariant& v, resultsMap.value(QLatin1String("books")).toList()) {
-        const QVariantMap resultMap = v.toMap();
-        FetchResult* r = new FetchResult(this, mapValue(resultMap, "title"),
-                                         mapValue(resultMap, "author") + QLatin1Char('/') +
-                                         mapValue(resultMap, "publisher") + QLatin1Char('/') +
-                                         mapValue(resultMap, "pubdate").left(4));
-        m_matches.insert(r->uid, QUrl(mapValue(resultMap, "url")));
-        emit signalResultFound(r);
-      }
-      break;
-
-    case Data::Collection::Video:
-      foreach(const QVariant& v, resultsMap.value(QLatin1String("subjects")).toList()) {
-        const QVariantMap resultMap = v.toMap();
-        FetchResult* r = new FetchResult(this, mapValue(resultMap, "title"),
-                                         mapValue(resultMap, "directors", "name") + QLatin1Char('/') +
-                                         mapValue(resultMap, "year"));
-        // movie results don't appear to have a url field
-        m_matches.insert(r->uid, QUrl(QLatin1String(DOUBAN_API_URL) +
-                                      QLatin1String("movie/subject/") +
-                                      mapValue(resultMap, "id")));
-        emit signalResultFound(r);
-      }
-      break;
-
-    case Data::Collection::Album:
-      foreach(const QVariant& v, resultsMap.value(QLatin1String("musics")).toList()) {
-        const QVariantMap resultMap = v.toMap();
-        FetchResult* r = new FetchResult(this, mapValue(resultMap, "title"),
-                                         mapValue(resultMap, "attrs", "singer") + QLatin1Char('/') +
-                                         mapValue(resultMap, "attrs", "publisher") + QLatin1Char('/') +
-                                         mapValue(resultMap, "attrs", "pubdate").left(4));
-        // movie results don't appear to have a url field
-        m_matches.insert(r->uid, QUrl(QLatin1String(DOUBAN_API_URL) +
-                                      QLatin1String("music/") +
-                                      mapValue(resultMap, "id")));
-        emit signalResultFound(r);
-      }
-      break;
-
-    default:
-      break;
+  foreach(const QVariant& v, resultsMap.value(QLatin1String("subjects")).toList()) {
+    const QVariantMap resultMap = v.toMap();
+    const QString resultType = mapValue(resultMap, "type");
+    const QString resultId = mapValue(resultMap, "id");
+    FetchResult* r = nullptr;
+    if(request().collectionType() == Data::Collection::Book && resultType == QLatin1String("book")) {
+      r = new FetchResult(this, mapValue(resultMap, "title"),
+                                        mapValue(resultMap, "author") + QLatin1Char('/') +
+                                        mapValue(resultMap, "publisher") + QLatin1Char('/') +
+                                        mapValue(resultMap, "pubdate").left(4));
+      m_matches.insert(r->uid, QUrl(QLatin1String(DOUBAN_API_URL) +
+                                    QLatin1String("book/") +
+                                    resultId));
+      emit signalResultFound(r);
+    } else if(request().collectionType() == Data::Collection::Video &&
+              (resultType == QLatin1String("movie") || resultType == QLatin1String("tv"))) {
+      r = new FetchResult(this, mapValue(resultMap, "title"),
+                                        mapValue(resultMap, "directors", "name") + QLatin1Char('/') +
+                                        mapValue(resultMap, "year"));
+      m_matches.insert(r->uid, QUrl(QLatin1String(DOUBAN_API_URL) +
+                                    QLatin1String("movie/") +
+                                    resultId));
+      emit signalResultFound(r);
+    } else if(request().collectionType() == Data::Collection::Album && resultType == QLatin1String("music")) {
+      r = new FetchResult(this, mapValue(resultMap, "title"),
+                                        mapValue(resultMap, "attrs", "singer") + QLatin1Char('/') +
+                                        mapValue(resultMap, "attrs", "publisher") + QLatin1Char('/') +
+                                        mapValue(resultMap, "attrs", "pubdate").left(4));
+      m_matches.insert(r->uid, QUrl(QLatin1String(DOUBAN_API_URL) +
+                                    QLatin1String("music/") +
+                                    resultId));
+      emit signalResultFound(r);
+    }
   }
 
   stop();
@@ -282,6 +251,9 @@ Tellico::Data::EntryPtr DoubanFetcher::fetchEntryHook(uint uid_) {
   }
 
   QUrl url = m_matches.value(uid_);
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("apiKey"), QString::fromLatin1(DOUBAN_API_KEY));
+  url.setQuery(q);
   QByteArray data = FileHandler::readDataFile(url, true);
 #if 0
   myWarning() << "Remove output debug from doubanfetcher.cpp";
@@ -308,7 +280,6 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
   Data::EntryPtr entry;
   switch(request().collectionType()) {
     case Data::Collection::Book:
-    case Data::Collection::Bibtex:
       coll = new Data::BookCollection(true);
       if(optionalFields().contains(QStringLiteral("origtitle")) &&
         !mapValue(resultMap_, "origin_title").isEmpty() &&
@@ -364,6 +335,52 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
       break;
     default:
       break;
+  }
+
+  // Now read the info_url which is a table with additional info like binding and ISBN
+  QString info_url = mapValue(resultMap_, "info_url");
+  if(info_url.isEmpty()) {
+    info_url = mapValue(resultMap_, "intro_url");
+  }
+  if(!info_url.isEmpty()) {
+    const QString infoHtml = FileHandler::readTextFile(QUrl::fromUserInput(info_url), true /* quiet */);
+    QRegularExpression tableRowRx(QStringLiteral("<tr>.*?<td>(.+?)</td>.*?<td>(.+?)</td>.*?</tr>"),
+                                  QRegularExpression::DotMatchesEverythingOption);
+    QRegularExpressionMatchIterator i = tableRowRx.globalMatch(infoHtml);
+    while(i.hasNext()) {
+      QRegularExpressionMatch match = i.next();
+      const QString m1 = match.captured(1).simplified();
+      const QString m2 = match.captured(2).simplified();
+      if(m1 == QString::fromUtf8("原作名")) {
+        const QString origtitle = QStringLiteral("origtitle");
+        if(entry->collection()->hasField(origtitle) && entry->field(origtitle).isEmpty()) {
+          entry->setField(origtitle, m2);
+        }
+      } else if(m1 == QString::fromUtf8("装帧")) {
+        if(m2 == QStringLiteral("精装")) {
+          entry->setField(QStringLiteral("binding"), i18n("Hardback"));
+        } else if(m2 == QStringLiteral("平装")) {
+          entry->setField(QStringLiteral("binding"), i18n("Paperback"));
+        }
+      } else if(m1 == QLatin1String("ISBN")) {
+        entry->setField(QStringLiteral("isbn"), m2);
+      } else if(m1 == QString::fromUtf8("介质")) {
+        if(m2.contains(QLatin1String("CD"))) {
+          entry->setField(QStringLiteral("medium"), i18n("Compact Disc"));
+        }
+      } else if(m1 == QString::fromUtf8("流派")) {
+        const QStringList genres = m2.split(QRegularExpression(QLatin1String("\\s*/\\s*")));
+        entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::rowDelimiterString()));
+      } else if(m1 == QString::fromUtf8("片长")) {
+        QRegularExpression digits(QLatin1String("\\d+"));
+        QRegularExpressionMatch digitsMatch = digits.match(m2);
+        if(digitsMatch.hasMatch()) {
+          entry->setField(QStringLiteral("running-time"), digitsMatch.captured());
+        }
+      } else if(m1 == QString::fromUtf8("编剧")) {
+        entry->setField(QStringLiteral("writer"), m2);
+      }
+    }
   }
 
   const QString image_id = entry->field(QStringLiteral("cover"));
@@ -448,10 +465,14 @@ void DoubanFetcher::populateVideoEntry(Data::EntryPtr entry, const QVariantMap& 
   } else {
     entry->setField(QStringLiteral("cover"), mapValue(resultMap_, "images", "medium"));
   }
-  entry->setField(QStringLiteral("plot"), mapValue(resultMap_, "summary"));
+  if(resultMap_.contains(QLatin1String("summary"))) {
+    entry->setField(QStringLiteral("plot"), mapValue(resultMap_, "summary"));
+  } else {
+    entry->setField(QStringLiteral("plot"), mapValue(resultMap_, "intro"));
+  }
 
   QStringList actors;
-  foreach(const QVariant& v, resultMap_.value(QLatin1String("casts")).toList()) {
+  foreach(const QVariant& v, resultMap_.value(QLatin1String("actors")).toList()) {
     actors << v.toMap().value(QStringLiteral("name")).toString();
   }
   entry->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
@@ -472,45 +493,25 @@ void DoubanFetcher::populateMusicEntry(Data::EntryPtr entry, const QVariantMap& 
   } else {
     entry->setField(QStringLiteral("cover"), mapValue(resultMap_, "image"));
   }
-  entry->setField(QStringLiteral("artist"), mapValue(resultMap_, "attrs", "singer"));
-  entry->setField(QStringLiteral("label"), mapValue(resultMap_, "attrs", "publisher"));
-  entry->setField(QStringLiteral("year"), mapValue(resultMap_, "attrs", "pubdate").left(4));
+  entry->setField(QStringLiteral("artist"), mapValue(resultMap_, "singer", "name"));
+  entry->setField(QStringLiteral("label"), mapValue(resultMap_, "publisher"));
+  entry->setField(QStringLiteral("year"), mapValue(resultMap_, "pubdate").left(4));
 
-  if(mapValue(resultMap_, "attrs", "media") == QLatin1String("Audio CD") ||
-     mapValue(resultMap_, "attrs", "media") == QLatin1String("CD")) {
+  if(mapValue(resultMap_, "media") == QLatin1String("Audio CD") ||
+     mapValue(resultMap_, "media") == QLatin1String("CD")) {
     entry->setField(QStringLiteral("medium"), i18n("Compact Disc"));
   }
 
   QStringList values, tracks;
-  foreach(const QVariant& v, resultMap_.value(QLatin1String("attrs"))
-                               .toMap().value(QLatin1String("tracks")).toList()) {
-    // some cases have all the tracks in one item, separated by "\n" and using 01. track numbers
-    if(v.toString().contains(QLatin1Char('\n'))) {
-      values << v.toString().split(QStringLiteral("\n"));
-    } else {
-      values << v.toString();
-    }
-  }
-  QRegularExpression trackNumRx(QLatin1String("^\\d+[.\\s]{2}"));
-  QRegularExpression trackDurRx(QLatin1String("^\\d+:\\d{2}$"));
-  QRegularExpression tabRx(QLatin1String("[\t\n]+"));
-  foreach(QString value, values) { // can't be const
-    // might starts with track number
-    QStringList l = value.remove(trackNumRx).split(QStringLiteral(" - "));
-    if(l.size() == 1) {
-      // might be split by tab characters and have track length at end
-      l = value.remove(trackNumRx).split(tabRx);
-      if(l.last().contains(trackDurRx)) {
-        tracks << l.first() + FieldFormat::columnDelimiterString() +
-                  entry->field(QStringLiteral("artist")) + FieldFormat::columnDelimiterString() +
-                  l.last();
-      } else {
-        tracks << l.first();
-      }
-    } else if(l.size() > 1) {
-      const QString last = l.takeLast();
-      tracks << l.join(QLatin1String(" - ")) + FieldFormat::columnDelimiterString() + last;
-    }
+  foreach(const QVariant& v, resultMap_.value(QLatin1String("songs")).toList()) {
+    const QVariantMap trackMap = v.toMap();
+    QString title = mapValue(trackMap, "title");
+    QString artists = mapValue(trackMap, "artist_names");
+    if(artists.isEmpty()) artists = entry->field(QStringLiteral("artist"));
+    QString duration = mapValue(trackMap, "duration");
+    tracks << title + FieldFormat::columnDelimiterString() +
+              artists + FieldFormat::columnDelimiterString() +
+              Tellico::minutes(duration.toInt());
   }
   entry->setField(QStringLiteral("track"), tracks.join(FieldFormat::rowDelimiterString()));
 
