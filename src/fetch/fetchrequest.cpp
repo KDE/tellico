@@ -26,13 +26,21 @@
 
 using Tellico::Fetch::FetchRequest;
 
-FetchRequest::FetchRequest() : m_collectionType(0), m_key(FetchFirst) {
+FetchRequest::FetchRequest()
+    : m_collectionType(0)
+    , m_key(FetchFirst) {
 }
 
-FetchRequest::FetchRequest(FetchKey key_, const QString& value_) : m_collectionType(0), m_key(key_), m_value(value_) {
+FetchRequest::FetchRequest(FetchKey key_, const QString& value_)
+    : m_collectionType(0)
+    , m_key(key_)
+    , m_value(value_) {
 }
 
-FetchRequest::FetchRequest(int type_, FetchKey key_, const QString& value_) : m_collectionType(type_), m_key(key_), m_value(value_) {
+FetchRequest::FetchRequest(int type_, FetchKey key_, const QString& value_)
+    : m_collectionType(type_)
+    , m_key(key_)
+    , m_value(value_) {
 }
 
 bool FetchRequest::isNull() const {
