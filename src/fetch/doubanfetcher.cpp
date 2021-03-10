@@ -342,7 +342,7 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
     info_url = mapValue(resultMap_, "intro_url");
   }
   if(!info_url.isEmpty()) {
-    const QString infoHtml = FileHandler::readTextFile(QUrl::fromUserInput(info_url), true /* quiet */);
+    const QString infoHtml = Tellico::decodeHTML(FileHandler::readTextFile(QUrl::fromUserInput(info_url), true));
     QRegularExpression tableRowRx(QStringLiteral("<tr>.*?<td>(.+?)</td>.*?<td>(.+?)</td>.*?</tr>"),
                                   QRegularExpression::DotMatchesEverythingOption);
     QRegularExpressionMatchIterator i = tableRowRx.globalMatch(infoHtml);
