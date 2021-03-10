@@ -191,7 +191,6 @@ void HtmlExporterTest::testReportHtml() {
   QVERIFY(starsMatch.hasMatch());
   QFileInfo starsInfo(starsMatch.captured(1));
   qDebug() << "Looking for absolute path:" << starsInfo.filePath();
-  QVERIFY(starsInfo.exists());
   QVERIFY(starsInfo.isAbsolute());
 }
 

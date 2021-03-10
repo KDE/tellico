@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "datafileregistry.h"
+#include "../tellico_debug.h"
 
 #include <QFileInfo>
 #include <QStandardPaths>
@@ -74,5 +75,5 @@ QString DataFileRegistry::locate(const QString& fileName_) {
       return dataDir + fileName_;
     }
   }
-  return QStandardPaths::locate(QStandardPaths::DataLocation, fileName_);
+  return QStandardPaths::locate(QStandardPaths::AppDataLocation, fileName_);
 }

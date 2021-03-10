@@ -83,7 +83,7 @@ QString Tellico::installationDir() {
   // look for a file that gets installed to know the installation directory
   static QString appdir;
   if(appdir.isEmpty()) {
-    appdir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("tellico/pics/tellico.png"));
+    appdir = QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("pics/tellico.png"));
     // remove the file name string. Important to keep trailing slash
     appdir.chop(QStringLiteral("pics/tellico.png").length());
     myDebug() << "InstallationDir:" << appdir;
