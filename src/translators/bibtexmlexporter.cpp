@@ -37,7 +37,6 @@
 #include <QDomDocument>
 #include <QTextCodec>
 
-using namespace Tellico;
 using Tellico::Export::BibtexmlExporter;
 
 BibtexmlExporter::BibtexmlExporter(Data::CollPtr coll_) : Exporter(coll_) {

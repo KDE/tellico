@@ -44,7 +44,6 @@ namespace {
   static const int ALEXANDRIA_MAX_SIZE_MEDIUM = 140;
 }
 
-using namespace Tellico;
 using Tellico::Export::AlexandriaExporter;
 
 AlexandriaExporter::AlexandriaExporter(Data::CollPtr coll_) : Exporter(coll_) {

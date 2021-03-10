@@ -42,7 +42,6 @@
 #include <QUuid>
 #include <QPointer>
 
-using namespace Tellico::Fetch;
 using Tellico::Fetch::Fetcher;
 
 Fetcher::Fetcher(QObject* parent) : QObject(parent)

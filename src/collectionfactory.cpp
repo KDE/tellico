@@ -28,7 +28,6 @@
 
 #include <KLocalizedString>
 
-using namespace Tellico;
 using Tellico::CollectionFactory;
 
 CollectionFactory::CollectionFactory() {

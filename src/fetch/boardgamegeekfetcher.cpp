@@ -45,7 +45,6 @@ namespace {
   static const char* BGG_THING_URL  = "http://boardgamegeek.com/xmlapi2/thing";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::BoardGameGeekFetcher;
 
 BoardGameGeekFetcher::BoardGameGeekFetcher(QObject* parent_)

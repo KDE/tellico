@@ -57,7 +57,6 @@ namespace {
   static const char* ALLOCINE_PARTNER_KEY = "1a1ed8c1bed24d60ae3472eed1da33eb";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::AbstractAllocineFetcher;
 using Tellico::Fetch::AllocineFetcher;
 

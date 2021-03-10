@@ -33,8 +33,6 @@
 
 #include <KLocalizedString>
 
-using namespace Tellico;
-using namespace Tellico::Data;
 using Tellico::Data::Entry;
 
 Entry::Entry(Tellico::Data::CollPtr coll_) : QSharedData(), m_coll(coll_), m_id(-1) {

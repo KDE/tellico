@@ -52,7 +52,6 @@ namespace {
   static const char* KINO_BASE_URL = "https://www.kino.de/se/";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::KinoFetcher;
 
 KinoFetcher::KinoFetcher(QObject* parent_)

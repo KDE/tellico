@@ -42,7 +42,6 @@ namespace {
   static const int SPRINGER_QUERY_COUNT = 10;
 }
 
-using namespace Tellico;
 using Tellico::Fetch::SpringerFetcher;
 
 SpringerFetcher::SpringerFetcher(QObject* parent_)

@@ -45,7 +45,6 @@ namespace {
   static const char* DVDFR_DETAIL_API_URL = "http://www.dvdfr.com/api/dvd.php";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::DVDFrFetcher;
 
 DVDFrFetcher::DVDFrFetcher(QObject* parent_)

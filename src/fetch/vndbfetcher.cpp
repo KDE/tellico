@@ -52,7 +52,6 @@ namespace {
   static const int VNDB_PORT = 19534;
 }
 
-using namespace Tellico;
 using Tellico::Fetch::VNDBFetcher;
 
 VNDBFetcher::VNDBFetcher(QObject* parent_)

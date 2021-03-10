@@ -56,7 +56,6 @@ namespace {
   static const char* MOBYGAMES_API_URL = "https://api.mobygames.com/v1";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::MobyGamesFetcher;
 
 MobyGamesFetcher::MobyGamesFetcher(QObject* parent_)

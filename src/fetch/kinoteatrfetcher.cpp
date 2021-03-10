@@ -48,7 +48,6 @@ namespace {
   static const char* KINOTEATR_SEARCH_URL = "https://kino-teatr.ua/uk/main/films.phtml";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::KinoTeatrFetcher;
 
 KinoTeatrFetcher::KinoTeatrFetcher(QObject* parent_)

@@ -52,7 +52,6 @@
 
 #include <algorithm>
 
-using namespace Tellico;
 using Tellico::Export::TellicoXMLExporter;
 
 TellicoXMLExporter::TellicoXMLExporter(Tellico::Data::CollPtr coll) : Exporter(coll),

@@ -56,7 +56,6 @@ namespace {
   static const char* MUSICBRAINZ_API_URL = "https://musicbrainz.org/ws/2/";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::MusicBrainzFetcher;
 
 MusicBrainzFetcher::MusicBrainzFetcher(QObject* parent_)

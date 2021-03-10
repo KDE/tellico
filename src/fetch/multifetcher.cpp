@@ -36,7 +36,6 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
-using namespace Tellico;
 using Tellico::Fetch::MultiFetcher;
 
 MultiFetcher::MultiFetcher(QObject* parent_)

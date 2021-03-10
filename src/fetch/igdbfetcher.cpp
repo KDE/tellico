@@ -58,7 +58,6 @@ namespace {
   static const char* IGDB_TOKEN_URL = "https://api.tellico-project.org/igdb/";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::IGDBFetcher;
 
 IGDBFetcher::IGDBFetcher(QObject* parent_)

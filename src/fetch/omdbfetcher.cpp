@@ -53,7 +53,6 @@ namespace {
   static const char* OMDB_API_URL = "https://www.omdbapi.com";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::OMDBFetcher;
 
 OMDBFetcher::OMDBFetcher(QObject* parent_)

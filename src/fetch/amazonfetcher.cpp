@@ -67,7 +67,6 @@ namespace {
   static const char* AMAZON_ASSOC_TOKEN = "tellico-20";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::AmazonFetcher;
 
 // static

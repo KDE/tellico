@@ -50,7 +50,6 @@ namespace {
   static const char* FILMASTER_QUERY_URL = "http://api.filmaster.com/1.1/search/";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::FilmasterFetcher;
 
 FilmasterFetcher::FilmasterFetcher(QObject* parent_)

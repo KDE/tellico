@@ -58,7 +58,6 @@ namespace {
   static const char* THEGAMESDB_MAGIC_TOKEN = "f7c4fd9c5d6d4a2fcefe3157192f87e260038abe86b0f3977716596edaebdbb82315586e98fc88b0fb9ff4c01576e4d47b4e556d487a4325221abbddfac36f59d7e114753b5fa6c77a1e73423d5f72460f3b526bcbae4f2be0d86a5854600436784e3a5c5d6bc1a3e2d395f798fb35073051f2c232014023e9dda99edfea5767";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::TheGamesDBFetcher;
 
 TheGamesDBFetcher::TheGamesDBFetcher(QObject* parent_)

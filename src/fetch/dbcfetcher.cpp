@@ -37,7 +37,6 @@ namespace {
   static const int DBC_MAX_RETURNS_TOTAL = 20;
 }
 
-using namespace Tellico;
 using Tellico::Fetch::DBCFetcher;
 
 DBCFetcher::DBCFetcher(QObject* parent_) : XMLFetcher(parent_) {

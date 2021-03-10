@@ -50,8 +50,6 @@ namespace {
   }
 }
 
-using namespace Tellico;
-using namespace Tellico::Fetch;
 using Tellico::Fetch::FetchResult;
 
 FetchResult::FetchResult(Fetcher* fetcher_, Data::EntryPtr entry_)

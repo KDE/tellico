@@ -55,7 +55,6 @@ namespace {
   static const uint IMDB_DEFAULT_CAST_SIZE = 10;
 }
 
-using namespace Tellico;
 using Tellico::Fetch::IMDBFetcher;
 
 QRegExp* IMDBFetcher::s_tagRx = nullptr;

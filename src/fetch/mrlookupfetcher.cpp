@@ -45,7 +45,6 @@ namespace {
   static const char* MRLOOKUP_URL = "http://www.ams.org/mrlookup";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::MRLookupFetcher;
 
 MRLookupFetcher::MRLookupFetcher(QObject* parent_)

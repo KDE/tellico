@@ -50,7 +50,6 @@ namespace {
   static const char* MOVIEMETER_API_URL = "http://www.moviemeter.nl/api/film/";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::MovieMeterFetcher;
 
 MovieMeterFetcher::MovieMeterFetcher(QObject* parent_)

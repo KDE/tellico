@@ -31,7 +31,6 @@
 #include <KLocalizedString>
 #include <KStringHandler>
 
-using namespace Tellico;
 using Tellico::Data::BibtexCollection;
 
 namespace {

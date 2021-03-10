@@ -43,7 +43,6 @@ namespace {
   static const int DIALOG_MIN_WIDTH = 600;
 }
 
-using namespace Tellico;
 using Tellico::EntryMatchDialog;
 
 EntryMatchDialog::EntryMatchDialog(QWidget* parent_, Data::EntryPtr entryToUpdate_,

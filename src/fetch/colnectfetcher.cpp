@@ -58,7 +58,6 @@ namespace {
   static const char* COLNECT_IMAGE_URL = "https://i.colnect.net";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::ColnectFetcher;
 
 ColnectFetcher::ColnectFetcher(QObject* parent_)

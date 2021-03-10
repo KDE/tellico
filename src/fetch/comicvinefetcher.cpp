@@ -48,7 +48,6 @@ namespace {
   static const char* COMICVINE_API_KEY = "6e4b19eeb8ccec8e2f026169d19adf57850d378e";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::ComicVineFetcher;
 
 ComicVineFetcher::ComicVineFetcher(QObject* parent_)

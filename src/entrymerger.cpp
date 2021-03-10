@@ -36,7 +36,6 @@
 
 #include <QTimer>
 
-using namespace Tellico;
 using Tellico::AskUserResolver;
 using Tellico::EntryMerger;
 

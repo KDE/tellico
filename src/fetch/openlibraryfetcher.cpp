@@ -51,7 +51,6 @@ namespace {
   static const char* OPENLIBRARY_QUERY_URL = "http://openlibrary.org/query.json";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::OpenLibraryFetcher;
 
 OpenLibraryFetcher::OpenLibraryFetcher(QObject* parent_)

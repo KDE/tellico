@@ -46,7 +46,6 @@ namespace {
   static const char* GIANTBOMB_API_KEY = "291bfe4b2d77a460e67dd8f90c1e7e56c3e4f05a";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::GiantBombFetcher;
 
 GiantBombFetcher::GiantBombFetcher(QObject* parent_)

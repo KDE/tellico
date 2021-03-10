@@ -53,8 +53,6 @@ namespace {
   static const char* ARXIV_BASE_URL = "http://export.arxiv.org/api/query";
 }
 
-using namespace Tellico;
-using namespace Tellico::Fetch;
 using Tellico::Fetch::ArxivFetcher;
 
 ArxivFetcher::ArxivFetcher(QObject* parent_)

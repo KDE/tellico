@@ -42,7 +42,6 @@ namespace {
   static const char* BIBLIOSHARE_TOKEN = "nsnqwebh87kstlty";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::BiblioShareFetcher;
 
 BiblioShareFetcher::BiblioShareFetcher(QObject* parent_)

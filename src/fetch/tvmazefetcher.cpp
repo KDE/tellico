@@ -53,7 +53,6 @@ namespace {
   static const char* TVMAZE_API_URL = "https://api.tvmaze.com";
 }
 
-using namespace Tellico;
 using Tellico::Fetch::TVmazeFetcher;
 
 TVmazeFetcher::TVmazeFetcher(QObject* parent_)

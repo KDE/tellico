@@ -58,7 +58,6 @@ namespace {
   static const uint THEMOVIEDB_DEFAULT_CAST_SIZE = 10;
 }
 
-using namespace Tellico;
 using Tellico::Fetch::TheMovieDBFetcher;
 
 TheMovieDBFetcher::TheMovieDBFetcher(QObject* parent_)

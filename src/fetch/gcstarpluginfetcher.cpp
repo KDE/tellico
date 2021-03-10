@@ -52,7 +52,6 @@
 #include <QBuffer>
 #include <QStandardPaths>
 
-using namespace Tellico;
 using Tellico::Fetch::GCstarPluginFetcher;
 
 GCstarPluginFetcher::CollectionPlugins GCstarPluginFetcher::collectionPlugins;

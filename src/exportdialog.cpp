@@ -55,7 +55,6 @@
 #include <QPushButton>
 #include <QScopedPointer>
 
-using namespace Tellico;
 using Tellico::ExportDialog;
 
 ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollPtr coll_, QWidget* parent_)
