@@ -34,6 +34,7 @@
 #include <KLocalizedString>
 #include <QIcon>
 
+using namespace Tellico;
 using Tellico::FilterModel;
 
 class FilterModel::Node {

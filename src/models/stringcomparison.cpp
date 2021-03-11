@@ -28,6 +28,8 @@
 
 #include <QDateTime>
 
+using namespace Tellico;
+
 namespace {
   int compareFloat(const QString& s1, const QString& s2) {
     bool ok1, ok2;

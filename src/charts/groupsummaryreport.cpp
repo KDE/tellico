@@ -72,7 +72,7 @@ GroupSummaryWidget::GroupSummaryWidget(const QString& title_, int count_, QWidge
   m_layout->addItem(new QSpacerItem(1, 10), 2, 0, 1, -1);
 }
 
-void GroupSummaryWidget::addChart(Data::FieldPtr field_) {
+void GroupSummaryWidget::addChart(Tellico::Data::FieldPtr field_) {
   // first populate a model with the entry groups for this field
   Data::CollPtr coll = Data::Document::self()->collection();
   Data::EntryGroupDict* dict = coll->entryGroupDictByName(field_->name());

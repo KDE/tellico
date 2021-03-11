@@ -30,6 +30,7 @@
 #include "../entrygroup.h"
 #include "../tellico_debug.h"
 
+using namespace Tellico;
 using Tellico::GroupSortModel;
 
 GroupSortModel::GroupSortModel(QObject* parent) : AbstractSortModel(parent)

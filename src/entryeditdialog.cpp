@@ -749,7 +749,7 @@ void EntryEditDialog::modifyEntries(Tellico::Data::EntryList entries_) {
   }
 }
 
-void EntryEditDialog::fieldValueChanged(Data::FieldPtr field_) {
+void EntryEditDialog::fieldValueChanged(Tellico::Data::FieldPtr field_) {
   if(!m_modifiedFields.contains(field_)) {
     m_modifiedFields.append(field_);
   }

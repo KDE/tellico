@@ -31,6 +31,7 @@
 #include <QIcon>
 #include <QPixmap>
 
+using namespace Tellico;
 using Tellico::EntryIconModel;
 
 EntryIconModel::EntryIconModel(QObject* parent_) : QIdentityProxyModel(parent_) {

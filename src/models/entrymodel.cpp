@@ -40,6 +40,7 @@ namespace {
   static const int SMALL_OPERATION_ENTRY_SIZE = 10;
 }
 
+using namespace Tellico;
 using Tellico::EntryModel;
 
 EntryModel::EntryModel(QObject* parent) : QAbstractItemModel(parent),
