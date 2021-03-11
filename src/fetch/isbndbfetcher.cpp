@@ -72,7 +72,7 @@ bool ISBNdbFetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }
 
-bool ISBNdbFetcher::canSearch(FetchKey k) const {
+bool ISBNdbFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person || k == ISBN || k == Keyword;
 }
 

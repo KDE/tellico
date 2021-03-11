@@ -73,7 +73,7 @@ QString TVmazeFetcher::attribution() const {
   return i18n("This information was freely provided by <a href=\"https://tvmaze.com\">TVmaze</a>.");
 }
 
-bool TVmazeFetcher::canSearch(FetchKey k) const {
+bool TVmazeFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title;
 }
 

@@ -77,7 +77,7 @@ QString TheGamesDBFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool TheGamesDBFetcher::canSearch(FetchKey k) const {
+bool TheGamesDBFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title;
 }
 

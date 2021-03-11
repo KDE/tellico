@@ -72,7 +72,7 @@ QString GoogleBookFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool GoogleBookFetcher::canSearch(FetchKey k) const {
+bool GoogleBookFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person || k == ISBN || k == Keyword;
 }
 

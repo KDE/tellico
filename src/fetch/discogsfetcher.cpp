@@ -68,7 +68,7 @@ QString DiscogsFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool DiscogsFetcher::canSearch(FetchKey k) const {
+bool DiscogsFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person || k == Keyword || k == UPC;
 }
 

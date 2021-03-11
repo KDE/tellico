@@ -78,7 +78,7 @@ QString ColnectFetcher::attribution() const {
   return QStringLiteral("Catalog information courtesy of Colnect, an online collectors community.");
 }
 
-bool ColnectFetcher::canSearch(FetchKey k) const {
+bool ColnectFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Keyword;
 }
 

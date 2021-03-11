@@ -54,7 +54,7 @@ bool MultiFetcher::canFetch(int type) const {
   return type == m_collType;
 }
 
-bool MultiFetcher::canSearch(FetchKey k) const {
+bool MultiFetcher::canSearch(Fetch::FetchKey k) const {
   // can fetch anything supported by the first data source
   return m_fetchers.isEmpty() || m_fetchers.front()->canSearch(k);;
 }

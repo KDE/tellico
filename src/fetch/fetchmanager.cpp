@@ -52,6 +52,7 @@
 #define LOAD_ICON(name, group, size) \
   KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group), size_)
 
+using namespace Tellico;
 using Tellico::Fetch::Manager;
 
 Tellico::Fetch::Manager* Tellico::Fetch::Manager::self() {
@@ -107,7 +108,7 @@ void Manager::loadFetchers() {
   }
 }
 
-void Manager::addFetcher(Fetcher::Ptr fetcher_) {
+void Manager::addFetcher(Fetch::Fetcher::Ptr fetcher_) {
   Q_ASSERT(fetcher_);
   if(fetcher_) {
     m_fetchers.append(fetcher_);
@@ -565,7 +566,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
   return pix;
 }
 
-Tellico::StringHash Manager::optionalFields(Type type_) {
+Tellico::StringHash Manager::optionalFields(Fetch::Type type_) {
   if(self()->functionRegistry.contains(type_)) {
     return self()->functionRegistry.value(type_).optionalFields();
   }

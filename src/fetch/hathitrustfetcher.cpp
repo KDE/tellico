@@ -68,7 +68,7 @@ QString HathiTrustFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool HathiTrustFetcher::canSearch(FetchKey k) const {
+bool HathiTrustFetcher::canSearch(Fetch::FetchKey k) const {
   return k == ISBN || k == LCCN;
 }
 

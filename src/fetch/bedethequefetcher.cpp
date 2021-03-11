@@ -72,7 +72,7 @@ bool BedethequeFetcher::canFetch(int type) const {
 }
 
 // No UPC or Raw for now.
-bool BedethequeFetcher::canSearch(FetchKey k) const {
+bool BedethequeFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Keyword || k == ISBN;
 }
 

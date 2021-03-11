@@ -80,7 +80,7 @@ QString IGDBFetcher::attribution() const {
   return i18n("This information was freely provided by <a href=\"https://igdb.com\">IGDB.com</a>.");
 }
 
-bool IGDBFetcher::canSearch(FetchKey k) const {
+bool IGDBFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Keyword;
 }
 

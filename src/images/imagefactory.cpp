@@ -41,6 +41,7 @@
 
 #define RELEASE_IMAGES
 
+using namespace Tellico;
 using Tellico::ImageFactory;
 
 // this image info map is primarily for big images that don't fit

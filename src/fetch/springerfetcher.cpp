@@ -63,7 +63,7 @@ QString SpringerFetcher::attribution() const {
               QLatin1String("https://dev.springernature.com/"));
 }
 
-bool SpringerFetcher::canSearch(FetchKey k) const  {
+bool SpringerFetcher::canSearch(Fetch::FetchKey k) const  {
   return k == Title || k == Person || k == Keyword || k == ISBN || k == DOI || k == Raw;
 }
 

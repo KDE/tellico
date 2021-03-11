@@ -67,7 +67,7 @@ QString VideoGameGeekFetcher::attribution() const {
   return i18n("This information was freely provided by <a href=\"https://boardgamegeek.com\">BoardGameGeek</a>.");
 }
 
-bool VideoGameGeekFetcher::canSearch(FetchKey k) const {
+bool VideoGameGeekFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Keyword;
 }
 

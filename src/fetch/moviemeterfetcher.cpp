@@ -69,7 +69,7 @@ QString MovieMeterFetcher::attribution() const {
   return QStringLiteral("<a href=\"http://www.moviemeter.nl\">MovieMeter</a>");
 }
 
-bool MovieMeterFetcher::canSearch(FetchKey k) const {
+bool MovieMeterFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Keyword;
 }
 

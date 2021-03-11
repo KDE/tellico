@@ -73,7 +73,7 @@ AbstractAllocineFetcher::AbstractAllocineFetcher(QObject* parent_, const QString
 AbstractAllocineFetcher::~AbstractAllocineFetcher() {
 }
 
-bool AbstractAllocineFetcher::canSearch(FetchKey k) const {
+bool AbstractAllocineFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Keyword;
 }
 

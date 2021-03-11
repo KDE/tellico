@@ -304,7 +304,7 @@ bool IMDBFetcher::canFetch(int type) const {
 }
 
 // imdb can search title only
-bool IMDBFetcher::canSearch(FetchKey k) const {
+bool IMDBFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title;
 }
 

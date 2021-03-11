@@ -82,7 +82,7 @@ QString TheMovieDBFetcher::attribution() const {
   return QStringLiteral("This product uses the TMDb API but is not endorsed or certified by TMDb.");
 }
 
-bool TheMovieDBFetcher::canSearch(FetchKey k) const {
+bool TheMovieDBFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title;
 }
 

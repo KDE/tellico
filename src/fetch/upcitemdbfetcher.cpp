@@ -69,7 +69,7 @@ QString UPCItemDbFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool UPCItemDbFetcher::canSearch(FetchKey k) const {
+bool UPCItemDbFetcher::canSearch(Fetch::FetchKey k) const {
   return k == UPC || k == ISBN;
 }
 

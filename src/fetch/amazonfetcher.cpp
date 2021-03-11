@@ -211,7 +211,7 @@ bool AmazonFetcher::canFetch(int type) const {
          || type == Data::Collection::BoardGame;
 }
 
-bool AmazonFetcher::canSearch(FetchKey k) const {
+bool AmazonFetcher::canSearch(Fetch::FetchKey k) const {
   // no UPC in Canada
   return k == Title
       || k == Person

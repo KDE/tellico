@@ -81,7 +81,7 @@ QString MobyGamesFetcher::attribution() const {
   return i18n("This information was freely provided by <a href=\"https://mobygames.com\">MobyGames</a>.");
 }
 
-bool MobyGamesFetcher::canSearch(FetchKey k) const {
+bool MobyGamesFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Keyword;
 }
 

@@ -71,7 +71,7 @@ QString DoubanFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool DoubanFetcher::canSearch(FetchKey k) const {
+bool DoubanFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Keyword || k == ISBN;
 }
 

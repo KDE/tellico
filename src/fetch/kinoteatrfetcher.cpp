@@ -66,7 +66,7 @@ bool KinoTeatrFetcher::canFetch(int type) const {
   return type == Data::Collection::Video;
 }
 
-bool KinoTeatrFetcher::canSearch(FetchKey k) const {
+bool KinoTeatrFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title;
 }
 

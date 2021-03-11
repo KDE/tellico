@@ -72,7 +72,7 @@ bool KinoPoiskFetcher::canFetch(int type) const {
   return type == Data::Collection::Video;
 }
 
-bool KinoPoiskFetcher::canSearch(FetchKey k) const {
+bool KinoPoiskFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title;
 }
 

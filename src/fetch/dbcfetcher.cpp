@@ -52,7 +52,7 @@ QString DBCFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool DBCFetcher::canSearch(FetchKey k) const {
+bool DBCFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person || k == Keyword || k == ISBN;
 }
 

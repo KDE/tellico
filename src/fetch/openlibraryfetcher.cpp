@@ -65,7 +65,7 @@ QString OpenLibraryFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool OpenLibraryFetcher::canSearch(FetchKey k) const {
+bool OpenLibraryFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person || k == ISBN || k == LCCN || k == Keyword;
 }
 

@@ -69,7 +69,7 @@ QString FilmasterFetcher::attribution() const {
               QLatin1String("http://filmaster.com/license/"));
 }
 
-bool FilmasterFetcher::canSearch(FetchKey k) const {
+bool FilmasterFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person || k == Keyword;
 }
 

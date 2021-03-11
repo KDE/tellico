@@ -71,7 +71,7 @@ QString VNDBFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool VNDBFetcher::canSearch(FetchKey k) const {
+bool VNDBFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title;
 }
 

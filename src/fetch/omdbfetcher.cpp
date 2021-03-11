@@ -69,7 +69,7 @@ QString OMDBFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool OMDBFetcher::canSearch(FetchKey k) const {
+bool OMDBFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title;
 }
 

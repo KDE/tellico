@@ -70,7 +70,7 @@ bool IBSFetcher::canFetch(int type) const {
 }
 
 // No UPC or Raw for now.
-bool IBSFetcher::canSearch(FetchKey k) const {
+bool IBSFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person || k == ISBN;
 }
 

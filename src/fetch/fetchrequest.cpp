@@ -24,20 +24,21 @@
 
 #include "fetchrequest.h"
 
+using namespace Tellico;
 using Tellico::Fetch::FetchRequest;
 
 FetchRequest::FetchRequest()
     : m_collectionType(0)
-    , m_key(FetchFirst) {
+    , m_key(Fetch::FetchFirst) {
 }
 
-FetchRequest::FetchRequest(FetchKey key_, const QString& value_)
+FetchRequest::FetchRequest(Fetch::FetchKey key_, const QString& value_)
     : m_collectionType(0)
     , m_key(key_)
     , m_value(value_) {
 }
 
-FetchRequest::FetchRequest(int type_, FetchKey key_, const QString& value_)
+FetchRequest::FetchRequest(int type_, Fetch::FetchKey key_, const QString& value_)
     : m_collectionType(type_)
     , m_key(key_)
     , m_value(value_) {

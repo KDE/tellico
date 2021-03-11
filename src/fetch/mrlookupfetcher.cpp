@@ -60,7 +60,7 @@ QString MRLookupFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool MRLookupFetcher::canSearch(FetchKey k) const {
+bool MRLookupFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person;
 }
 

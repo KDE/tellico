@@ -74,7 +74,7 @@ QString MusicBrainzFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool MusicBrainzFetcher::canSearch(FetchKey k) const {
+bool MusicBrainzFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person || k == Keyword || k == UPC;
 }
 

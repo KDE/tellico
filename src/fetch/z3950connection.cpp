@@ -80,6 +80,7 @@ namespace {
 #endif
 }
 
+using namespace Tellico;
 using Tellico::Fetch::Z3950ResultFound;
 using Tellico::Fetch::Z3950Connection;
 
@@ -110,7 +111,7 @@ public:
 
 int Z3950Connection::resultsLeft = 0;
 
-Z3950Connection::Z3950Connection(Fetcher* fetcher,
+Z3950Connection::Z3950Connection(Fetch::Fetcher* fetcher,
                                  const QString& host,
                                  uint port,
                                  const QString& dbname,
