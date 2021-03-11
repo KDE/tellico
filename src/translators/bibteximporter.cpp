@@ -44,6 +44,7 @@
 #include <QFile>
 #include <QApplication>
 
+using namespace Tellico;
 using Tellico::Import::BibtexImporter;
 
 #ifndef ENABLE_BTPARSE

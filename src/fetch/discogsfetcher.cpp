@@ -52,6 +52,7 @@ namespace {
   static const char* DISCOGS_API_URL = "https://api.discogs.com";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::DiscogsFetcher;
 
 DiscogsFetcher::DiscogsFetcher(QObject* parent_)

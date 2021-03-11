@@ -46,6 +46,7 @@
 #include <QHeaderView>
 #include <QContextMenuEvent>
 
+using namespace Tellico;
 using Tellico::DetailedListView;
 
 DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_)

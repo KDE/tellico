@@ -49,6 +49,7 @@ namespace {
   static const char* BD_BASE_URL = "https://m.bedetheque.com/album";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::BedethequeFetcher;
 
 BedethequeFetcher::BedethequeFetcher(QObject* parent_)
@@ -62,7 +63,7 @@ QString BedethequeFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-Tellico::Fetch::Type BedethequeFetcher::type() const {
+Fetch::Type BedethequeFetcher::type() const {
   return Bedetheque;
 }
 

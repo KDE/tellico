@@ -51,6 +51,7 @@ namespace {
   static const char* IBS_BASE_URL = "https://www.ibs.it/search/";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::IBSFetcher;
 
 IBSFetcher::IBSFetcher(QObject* parent_)

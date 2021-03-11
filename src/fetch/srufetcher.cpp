@@ -60,6 +60,7 @@ namespace {
   static const int SRU_MAX_RECORDS = 25;
 }
 
+using namespace Tellico;
 using Tellico::Fetch::SRUFetcher;
 
 SRUFetcher::SRUFetcher(QObject* parent_)

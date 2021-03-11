@@ -26,6 +26,7 @@
 #include "image.h"
 #include "imagefactory.h"
 
+using namespace Tellico;
 using Tellico::Data::ImageInfo;
 
 ImageInfo::ImageInfo(const Data::Image& img_)

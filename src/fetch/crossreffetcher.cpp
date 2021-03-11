@@ -56,6 +56,8 @@ namespace {
   static const char* CROSSREF_BASE_URL = "http://www.crossref.org/openurl/";
 }
 
+using namespace Tellico;
+using namespace Tellico::Fetch;
 using Tellico::Fetch::CrossRefFetcher;
 
 CrossRefFetcher::CrossRefFetcher(QObject* parent_)

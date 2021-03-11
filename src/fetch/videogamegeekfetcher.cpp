@@ -46,6 +46,7 @@ namespace {
   static const char* BGG_THING_URL  = "http://videogamegeek.com/xmlapi2/thing";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::VideoGameGeekFetcher;
 
 VideoGameGeekFetcher::VideoGameGeekFetcher(QObject* parent_)

@@ -31,6 +31,7 @@
 
 #include <QTimer>
 
+using namespace Tellico;
 using Tellico::EntryUpdateJob;
 
 EntryUpdateJob::EntryUpdateJob(QObject* parent_, Data::EntryPtr entry_, Fetch::Fetcher::Ptr fetcher_, Mode mode_)

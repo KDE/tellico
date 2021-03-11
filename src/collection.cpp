@@ -35,6 +35,7 @@
 
 #include <KLocalizedString>
 
+using namespace Tellico;
 using Tellico::Data::Collection;
 
 const QString Collection::s_peopleGroupName = QStringLiteral("_people");
@@ -877,6 +878,6 @@ Tellico::Data::ID Collection::getID() {
   return ++id;
 }
 
-Tellico::Data::FieldPtr Collection::primaryImageField() const {
+Data::FieldPtr Collection::primaryImageField() const {
   return m_imageFields.isEmpty() ? Data::FieldPtr() : fieldByName(m_imageFields.front()->name());
 }

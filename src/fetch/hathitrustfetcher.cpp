@@ -50,6 +50,7 @@ namespace {
   static const char* HATHITRUST_QUERY_URL = "http://catalog.hathitrust.org/api/volumes/full/json/";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::HathiTrustFetcher;
 
 HathiTrustFetcher::HathiTrustFetcher(QObject* parent_)

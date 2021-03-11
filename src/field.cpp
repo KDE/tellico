@@ -30,6 +30,7 @@
 
 #include <algorithm>
 
+using namespace Tellico;
 using Tellico::Data::Field;
 
 // this constructor is for anything but Choice type

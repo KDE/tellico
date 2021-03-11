@@ -28,6 +28,8 @@
 
 #include <QTimer>
 
+using namespace Tellico;
+using namespace Tellico::Fetch;
 using Tellico::Fetch::FetcherJob;
 
 FetcherJob::FetcherJob(QObject* parent_, Fetcher::Ptr fetcher_, const FetchRequest& request_)

@@ -54,6 +54,7 @@ namespace {
   static const char* KINOPOISK_IMAGE_SIZE = "300x450";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::KinoPoiskFetcher;
 
 KinoPoiskFetcher::KinoPoiskFetcher(QObject* parent_)

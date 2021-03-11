@@ -54,6 +54,7 @@ namespace {
   static const char* UPCITEMDB_API_URL = "https://api.upcitemdb.com/prod/trial";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::UPCItemDbFetcher;
 
 UPCItemDbFetcher::UPCItemDbFetcher(QObject* parent_)

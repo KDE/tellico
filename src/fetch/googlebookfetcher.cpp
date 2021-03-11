@@ -54,6 +54,7 @@ namespace {
   static const char* GOOGLEBOOK_API_KEY = "AIzaSyBdsa_DEGpDQ6PzZyYHHHokRIBY8thOdUQ";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::GoogleBookFetcher;
 
 GoogleBookFetcher::GoogleBookFetcher(QObject* parent_)

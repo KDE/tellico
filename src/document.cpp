@@ -48,6 +48,7 @@
 
 #include <QApplication>
 
+using namespace Tellico;
 using Tellico::Data::Document;
 Document* Document::s_self = nullptr;
 

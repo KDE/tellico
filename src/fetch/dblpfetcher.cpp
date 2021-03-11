@@ -37,6 +37,7 @@ namespace {
   static const int DBLP_MAX_RETURNS_TOTAL = 20;
 }
 
+using namespace Tellico;
 using Tellico::Fetch::DBLPFetcher;
 
 DBLPFetcher::DBLPFetcher(QObject* parent_) : XMLFetcher(parent_) {

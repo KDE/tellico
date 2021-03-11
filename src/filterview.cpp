@@ -40,6 +40,7 @@
 #include <QHeaderView>
 #include <QContextMenuEvent>
 
+using namespace Tellico;
 using Tellico::FilterView;
 
 FilterView::FilterView(QWidget* parent_)

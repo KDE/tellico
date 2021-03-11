@@ -39,6 +39,7 @@
 #include <QBuffer>
 #include <QApplication>
 
+using namespace Tellico;
 using Tellico::Export::TellicoZipExporter;
 
 TellicoZipExporter::TellicoZipExporter(Data::CollPtr coll) : Exporter(coll)

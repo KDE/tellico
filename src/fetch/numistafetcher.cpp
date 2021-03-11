@@ -54,6 +54,7 @@ namespace {
   static const char* NUMISTA_MAGIC_TOKEN = "2e19b8f32c5e8fbd96aeb2c0590d70458ef81d5b0657b1f6741685e1f9cf7a0983d7d0e0a2c69bcca7cfb4c08fde1c5a562e083e2d44a492a5e4b9c3d2a42a7c536a99f8511bfdbca9fb6d29f587fbbf";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::NumistaFetcher;
 
 NumistaFetcher::NumistaFetcher(QObject* parent_)

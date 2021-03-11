@@ -56,6 +56,7 @@ namespace {
   static const char* DOUBAN_API_KEY = "054022eaeae0b00e0fc068c0c0a2102a";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::DoubanFetcher;
 
 DoubanFetcher::DoubanFetcher(QObject* parent_)

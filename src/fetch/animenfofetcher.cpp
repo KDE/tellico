@@ -50,6 +50,7 @@ namespace {
   static const char* ANIMENFO_BASE_URL = "http://www.animenfo.com/search.php";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::AnimeNfoFetcher;
 
 AnimeNfoFetcher::AnimeNfoFetcher(QObject* parent_)

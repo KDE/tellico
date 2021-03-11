@@ -26,6 +26,7 @@
 #include "../models/models.h"
 #include "../tellico_debug.h"
 
+using namespace Tellico;
 using Tellico::DetailedEntryItemDelegate;
 
 DetailedEntryItemDelegate::DetailedEntryItemDelegate(QObject* parent_) : QStyledItemDelegate(parent_) {

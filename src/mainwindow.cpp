@@ -136,6 +136,7 @@ QIcon mimeIcon(const char* s1, const char* s2) {
 
 }
 
+using namespace Tellico;
 using Tellico::MainWindow;
 
 MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),

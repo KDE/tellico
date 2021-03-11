@@ -54,6 +54,7 @@
 #include <QListWidget>
 #include <QDialogButtonBox>
 
+using namespace Tellico;
 using Tellico::FieldListItem;
 using Tellico::CollectionFieldsDialog;
 

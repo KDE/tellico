@@ -51,6 +51,7 @@ namespace {
   static const char* ISBNDB_BASE_URL = "https://api2.isbndb.com";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::ISBNdbFetcher;
 
 ISBNdbFetcher::ISBNdbFetcher(QObject* parent_)
