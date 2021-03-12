@@ -66,7 +66,7 @@ QStringList Tellico::locateAllFiles(const QString& fileName_) {
   QString dirPart = fileName_.section(QLatin1Char('/'), 0, -2);
   QString filePart = fileName_.section(QLatin1Char('/'), -1);
 
-  const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, dirPart, QStandardPaths::LocateDirectory);
+  const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, dirPart, QStandardPaths::LocateDirectory);
   foreach(const QString& dir, dirs) {
     const QStringList fileNames = QDir(dir).entryList(QStringList() << filePart);
     foreach(const QString& file, fileNames) {
@@ -96,7 +96,7 @@ QString Tellico::saveLocation(const QString& dir_) {
   QDir dir;
   bool success = dir.mkpath(path);
   if(!success) {
-//    myWarning() << "Failed to mkPath:" << path;
+    myWarning() << "Failed to make path:" << path;
   }
   return path;
 }
@@ -129,11 +129,11 @@ bool Tellico::checkCommonXSLFile() {
   if(QFile::exists(userCommonFile)) {
     // check timestamps
     // pics/tellico.png is not likely to be in a user directory
-    QString installDir = QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("pics/tellico.png"));
+    QString installDir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("pics/tellico.png"));
     installDir = QFileInfo(installDir).absolutePath();
     QString installCommonFile = installDir + QDir::separator() + QLatin1String("tellico-common.xsl");
     if(userCommonFile == installCommonFile) {
-//      myWarning() << "install location is same as user location";
+      myWarning() << "install location is same as user location";
     }
     QFileInfo installInfo(installCommonFile);
     QFileInfo userInfo(userCommonFile);
@@ -147,7 +147,7 @@ bool Tellico::checkCommonXSLFile() {
       return true;
     }
   }
-  QUrl src = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("tellico-common.xsl")));
+  QUrl src = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("tellico-common.xsl")));
   QUrl dest = QUrl::fromLocalFile(userCommonFile);
   return KIO::file_copy(src, dest)->exec();
 }
