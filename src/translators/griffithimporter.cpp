@@ -46,7 +46,7 @@ GriffithImporter::GriffithImporter(const QUrl& url_) : XSLTImporter(url_) {
 GriffithImporter::~GriffithImporter() {
 }
 
-void GriffithImporter::beginXSLTHandler(XSLTHandler* handler_) {
+void GriffithImporter::beginXSLTHandler(Tellico::XSLTHandler* handler_) {
   Q_ASSERT(handler_);
   handler_->addStringParam("imgdir", QFile::encodeName(QDir::homePath() + QLatin1String("/.griffith/")));
 }
