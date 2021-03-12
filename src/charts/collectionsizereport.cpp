@@ -84,11 +84,11 @@ QWidget* CollectionSizeReport::createWidget() {
   // add current date
   QDateTime now = QDateTime::currentDateTimeUtc();
   series->append(now.toMSecsSinceEpoch(), coll->entryCount());
+  series->setName(i18n("Total entries: %1", coll->entryCount()));
 
   auto chart = new QChart;
   chart->addSeries(series);
   chart->setTitle(i18n("Collection Size Over Time"));
-  chart->legend()->hide();
   chart->setTheme(qApp->palette().color(QPalette::Window).lightnessF() < 0.25 ? QChart::ChartThemeDark
                                                                               : QChart::ChartThemeLight);
   QFont f = chart->titleFont();
