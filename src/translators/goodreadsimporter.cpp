@@ -27,6 +27,7 @@
 #include "tellicoimporter.h"
 #include "../core/filehandler.h"
 #include "../utils/datafileregistry.h"
+#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
 #include <KConfigGroup>
@@ -44,7 +45,7 @@
 namespace {
   static const char* GOODREADS_LIST_URL = "https://www.goodreads.com/review/list.xml";
   static const char* GOODREADS_USER_URL = "https://www.goodreads.com/user/show.xml";
-  static const char* GOODREADS_API_KEY = "dpgbQvOWk0n4cwL32jQRA";
+  static const char* GOODREADS_API_KEY = "23626735f5a498f2f2c003300549c0b73f5caa9e87e9faca81eac394eaa5a0d66b3a6d0f563182f29efa";
 }
 
 using Tellico::Import::GoodreadsImporter;
@@ -79,7 +80,7 @@ Tellico::Data::CollPtr GoodreadsImporter::collection() {
   m_user = cg.readEntry("User ID");
   m_key = cg.readEntry("Developer Key");
   if(m_key.isEmpty()) {
-    m_key = QLatin1String(GOODREADS_API_KEY);
+    m_key = Tellico::reverseObfuscate(GOODREADS_API_KEY);
   }
 
   if(m_xsltURL.isEmpty() || !m_xsltURL.isValid()) {

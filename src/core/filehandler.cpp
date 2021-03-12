@@ -57,7 +57,7 @@ FileHandler::FileRef::FileRef(const QUrl& url_, bool quiet_) : m_device(nullptr)
   }
 
   if(!Tellico::NetAccess::download(url_, m_filename, GUI::Proxy::widget(), quiet_)) {
-    myDebug() << "can't download" << url_;
+    myDebug() << "can't download" << url_.toDisplayString(QUrl::RemoveQuery);
     QString s = Tellico::NetAccess::lastErrorString();
     if(!s.isEmpty()) {
       myDebug() << s;
