@@ -53,7 +53,7 @@ namespace {
   static const int DOUBAN_MAX_RETURNS_TOTAL = 20;
   static const char* DOUBAN_API_URL = "https://frodo.douban.com/api/v2/";
   // old and unused
-  static const char* DOUBAN_API_KEY = "054022eaeae0b00e0fc068c0c0a2102a";
+  static const char* DOUBAN_API_KEY = "e3828ebc93a3d7e6794bbedfbc8c395a0232bcdf5c647345c4f4fb983a5c1b2b5237daea8dbd99fb20101f7a9afba7c20c6da1c4d5e7e4d60535685c44716555";
 }
 
 using namespace Tellico;
@@ -113,7 +113,7 @@ void DoubanFetcher::search() {
   }
 
   q.addQueryItem(QLatin1String("start"), QString::number(0));
-  q.addQueryItem(QLatin1String("apiKey"), QString::fromLatin1(DOUBAN_API_KEY));
+  q.addQueryItem(QLatin1String("apiKey"), Tellico::reverseObfuscate(DOUBAN_API_KEY));
   u.setQuery(q);
 //  myDebug() << "url:" << u.url();
 

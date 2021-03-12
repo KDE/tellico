@@ -102,7 +102,7 @@ void DoubanFetcherTest::testISBN() {
   QCOMPARE(entry->field("publisher"), QString::fromUtf8("湖南科学技术出版社"));
   QCOMPARE(entry->field("binding"), QStringLiteral("Hardback"));
   QCOMPARE(entry->field("pub_year"), QStringLiteral("2011"));
-  QCOMPARE(entry->field("isbn"), QStringLiteral("7-53576544-0"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("7535765440"));
   QCOMPARE(entry->field("pages"), QStringLiteral("176"));
   QCOMPARE(entry->field("origtitle"), QStringLiteral("The Grand Design"));
   QCOMPARE(entry->field("douban"), QStringLiteral("https://book.douban.com/subject/5422665/"));

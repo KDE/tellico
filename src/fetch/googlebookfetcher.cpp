@@ -51,7 +51,7 @@
 namespace {
   static const int GOOGLEBOOK_MAX_RETURNS = 20;
   static const char* GOOGLEBOOK_API_URL = "https://www.googleapis.com/books/v1/volumes";
-  static const char* GOOGLEBOOK_API_KEY = "AIzaSyBdsa_DEGpDQ6PzZyYHHHokRIBY8thOdUQ";
+  static const char* GOOGLEBOOK_API_KEY = "b0e1702513773b743b53b1c5566ea0f93e7c3b720351bad197f801491951d29afca54b32712ba6dc4e1e4c7a5b0ad99d9dedfdbab4f10642b7e821403340fc98692bcdb4dc8fd0b14339236ae4a5";
 }
 
 using namespace Tellico;
@@ -61,8 +61,8 @@ GoogleBookFetcher::GoogleBookFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false)
     , m_start(0)
-    , m_total(0)
-    , m_apiKey(QLatin1String(GOOGLEBOOK_API_KEY)) {
+    , m_total(0) {
+  m_apiKey = Tellico::reverseObfuscate(GOOGLEBOOK_API_KEY);
 }
 
 GoogleBookFetcher::~GoogleBookFetcher() {
