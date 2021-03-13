@@ -219,14 +219,14 @@ void NumistaFetcher::slotComplete(KJob* ) {
 
     QString desc = result.value(QLatin1String("issuer")).toObject()
                          .value(QLatin1String("name")).toString();
-    desc += QLatin1Char('/');
     const QString minYear = result.value(QLatin1String("minYear")).toString();
     if(!minYear.isEmpty()) {
-      desc += minYear + QLatin1Char('-') + result.value(QLatin1String("maxYear")).toString();
+      desc += QLatin1Char('/') + minYear + QLatin1Char('-') + result.value(QLatin1String("maxYear")).toString();
     }
-    FetchResult* r = new FetchResult(this,
-                                     result.value(QLatin1String("title")).toString(),
-                                     desc);
+    QString title = result.value(QLatin1String("title")).toString();
+    // some results include &quot;
+    title.replace(QLatin1String("&quot;"), QLatin1String("\""));
+    FetchResult* r = new FetchResult(this, title, desc);
     m_matches.insert(r->uid, result.value(QLatin1String("id")).toInt());
     emit signalResultFound(r);
     ++count;
