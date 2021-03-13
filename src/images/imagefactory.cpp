@@ -617,7 +617,7 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
 
   const QString bgname(QStringLiteral("gradient_bg.png"));
   const QColor& bgc1 = KColorUtils::mix(baseColor, highColor, 0.3);
-  QImage bgImage = Tellico::gradient(QSize(400, 1), bgc1, baseColor,
+  QImage bgImage = Tellico::gradient(QSize(600, 1), bgc1, baseColor,
                                      Tellico::PipeCrossGradient);
   bgImage = bgImage.transformed(QTransform().rotate(90));
 
