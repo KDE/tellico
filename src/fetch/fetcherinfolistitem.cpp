@@ -70,7 +70,7 @@ QString FetcherInfoListItem::uuid() const {
   return m_info.uuid;
 }
 
-void FetcherInfoListItem::setFetcher(Fetch::Fetcher* fetcher_) {
+void FetcherInfoListItem::setFetcher(Tellico::Fetch::Fetcher* fetcher_) {
   Q_ASSERT(fetcher_);
   m_fetcher = fetcher_;
   QPixmap pix = Fetch::Manager::fetcherIcon(fetcher_);
