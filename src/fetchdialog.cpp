@@ -286,7 +286,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_addButton = new QPushButton(i18n("&Add Entry"), box3);
   box3HBoxLayout->addWidget(m_addButton);
   m_addButton->setEnabled(false);
-  m_addButton->setIcon(QIcon::fromTheme(QLatin1String(":/icons/") + Kernel::self()->collectionTypeName()));
+  m_addButton->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
   connect(m_addButton, &QAbstractButton::clicked, this, &FetchDialog::slotAddEntry);
   m_addButton->setWhatsThis(i18n("Add the selected entry to the current collection"));
 
@@ -880,8 +880,6 @@ void FetchDialog::slotResetCollection() {
   foreach(Fetch::Fetcher::Ptr fetcher, sources) {
     m_sourceCombo->addItem(Fetch::Manager::self()->fetcherIcon(fetcher.data()), fetcher->source());
   }
-
-  m_addButton->setIcon(QIcon(QLatin1String(":/icons/") + Kernel::self()->collectionTypeName()));
 
   if(Fetch::Manager::self()->canFetch()) {
     m_searchButton->setEnabled(true);
