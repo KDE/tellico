@@ -66,7 +66,6 @@ public:
   virtual QString source() const Q_DECL_OVERRIDE;
   virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
   virtual void continueSearch() Q_DECL_OVERRIDE;
-  // amazon can search title or person
   virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == Keyword; }
   virtual void stop() Q_DECL_OVERRIDE;
   virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
