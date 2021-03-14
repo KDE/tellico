@@ -78,7 +78,7 @@ PrintHandler::PrintHandler(QObject* parent_) : QObject(parent_)
 PrintHandler::~PrintHandler() {
 }
 
-void PrintHandler::setEntries(const Data::EntryList& entries_) {
+void PrintHandler::setEntries(const Tellico::Data::EntryList& entries_) {
   m_entries = entries_;
   m_html.clear();
 }

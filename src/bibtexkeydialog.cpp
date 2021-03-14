@@ -42,7 +42,7 @@
 using Tellico::BibtexKeyDialog;
 
 // default button is going to be used as a print button, so it's separated
-BibtexKeyDialog::BibtexKeyDialog(Data::CollPtr coll_, QWidget* parent_)
+BibtexKeyDialog::BibtexKeyDialog(Tellico::Data::CollPtr coll_, QWidget* parent_)
     : QDialog(parent_), m_coll(coll_) {
   Q_ASSERT(m_coll);
   setModal(false);
