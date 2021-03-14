@@ -41,7 +41,7 @@ Change date/releaseinfo only if
 Don't forget to include this last date.
 Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
 -->
-<date>2019-05-12</date>
+<date>2021-03-14</date>
 
 <!--version information of Frameworks/Plasma/Applications this documentation is valid for.
 Example:
@@ -51,7 +51,7 @@ Applications xx.yy for docbooks released as Applications
 xx.yy (Applications xx.yy) for docbooks with own version released as Applications
 $applicationname xx.yy for applications with independent release schedule (extragear/playground)
 -->
-<releaseinfo>Tellico 3.2</releaseinfo>
+<releaseinfo>Tellico 3.4</releaseinfo>
 
 <title>The &tellico; Handbook</title>
 
@@ -67,7 +67,7 @@ $applicationname xx.yy for applications with independent release schedule (extra
 </authorgroup>
 
 <copyright>
-<year>2001-2019</year>
+<year>2001-2021</year>
 <holder>&robby;</holder>
 </copyright>
 
