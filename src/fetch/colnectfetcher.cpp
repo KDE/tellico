@@ -456,12 +456,24 @@ void ColnectFetcher::populateEntry(Data::EntryPtr entry_, const QVariantList& re
   idx = m_colnectFields.value(QStringLiteral("Description"), -1);
   static const QString desc(QStringLiteral("description"));
   if(idx > -1 && optionalFields().contains(desc)) {
-    QString s = resultList_.at(idx).toString();
-    // if description is empty, just use the name
-    if(s.isEmpty()) {
-      s = resultList_.at(m_colnectFields.value(QStringLiteral("Name"))).toString();
+    static const QString name(QStringLiteral("Name"));
+    auto idxName = m_colnectFields.value(name, -1);
+    QString s = resultList_.at(idx).toString().trimmed();
+    // use the name as the description for stamps since the title includes it
+    // put the description text into the comments
+    if(collectionType() == Data::Collection::Stamp) {
+      if(idxName > -1) {
+        entry_->setField(desc, resultList_.at(idxName).toString());
+      }
+      entry_->setField(QStringLiteral("comments"), s);
+    } else {
+      // if description is empty, just use the name
+      if(s.isEmpty() && idxName > -1) {
+        entry_->setField(desc, resultList_.at(idxName).toString());
+      } else {
+        entry_->setField(desc, s);
+      }
     }
-    entry_->setField(desc, s);
   }
 
   // catalog codes
