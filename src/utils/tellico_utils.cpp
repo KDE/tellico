@@ -86,7 +86,7 @@ QString Tellico::installationDir() {
     appdir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("tellico/pics/tellico.png"));
     // remove the file name string. Important to keep trailing slash
     appdir.chop(QStringLiteral("pics/tellico.png").length());
-    myDebug() << "InstallationDir:" << appdir;
+//    myDebug() << "InstallationDir:" << appdir;
   }
   return appdir;
 }
