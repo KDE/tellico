@@ -27,6 +27,7 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 #include "../images/imageinfo.h"
+#include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -61,7 +62,7 @@ QString BiblioShareFetcher::source() const {
 
 // https://www.booknetcanada.ca/get-a-token
 QString BiblioShareFetcher::attribution() const {
-  return i18n("Data provided by <a href=\"https://www.booknetcanada.ca/biblioshare\">BNC BiblioShare</a>.");
+  return i18n(providedBy).arg(QLatin1String("https://www.booknetcanada.ca/biblioshare"), QLatin1String("BNC BiblioShare"));
 }
 
 bool BiblioShareFetcher::canFetch(int type) const {

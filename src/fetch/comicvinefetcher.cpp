@@ -27,6 +27,7 @@
 #include "../translators/tellicoimporter.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
+#include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -67,7 +68,7 @@ QString ComicVineFetcher::source() const {
 }
 
 QString ComicVineFetcher::attribution() const {
-  return i18n("This information was freely provided by <a href=\"https://comicvine.gamespot.com/\">Comic Vine</a>.");
+  return i18n(providedBy).arg(QLatin1String("https://comicvine.gamespot.com"), QLatin1String("Comic Vine"));
 }
 
 bool ComicVineFetcher::canFetch(int type) const {

@@ -30,6 +30,7 @@
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
 #include "../utils/tellico_utils.h"
+#include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -78,7 +79,7 @@ QString MobyGamesFetcher::source() const {
 }
 
 QString MobyGamesFetcher::attribution() const {
-  return i18n("This information was freely provided by <a href=\"https://mobygames.com\">MobyGames</a>.");
+  return i18n(providedBy).arg(QLatin1String("https://mobygames.com"), QLatin1String("MobyGames"));
 }
 
 bool MobyGamesFetcher::canSearch(Fetch::FetchKey k) const {

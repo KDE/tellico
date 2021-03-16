@@ -29,6 +29,7 @@
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
 #include "../utils/tellico_utils.h"
+#include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -77,7 +78,7 @@ QString IGDBFetcher::source() const {
 }
 
 QString IGDBFetcher::attribution() const {
-  return i18n("This information was freely provided by <a href=\"https://igdb.com\">IGDB.com</a>.");
+  return i18n(providedBy).arg(QLatin1String("https://igdb.com"), QLatin1String("IGDB.com"));
 }
 
 bool IGDBFetcher::canSearch(Fetch::FetchKey k) const {

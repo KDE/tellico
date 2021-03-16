@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -39,3 +39,4 @@ const char* Tellico::errorMergeType = I18N_NOOP("Only collections with the same 
 const char* Tellico::errorImageLoad = I18N_NOOP("Tellico is unable to load an image from the file - %1.");
 
 const char* Tellico::untitledFilename = I18N_NOOP("Untitled");
+const char* Tellico::providedBy = I18N_NOOP("This information was freely provided by <a href=\"%1\">%2</a>.");

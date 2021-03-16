@@ -26,6 +26,7 @@
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../utils/string_utils.h"
+#include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -63,7 +64,7 @@ QString BoardGameGeekFetcher::source() const {
 
 // https://boardgamegeek.com/wiki/page/XML_API_Terms_of_Use
 QString BoardGameGeekFetcher::attribution() const {
-  return i18n("This information was freely provided by <a href=\"https://boardgamegeek.com\">BoardGameGeek</a>.");
+  return i18n(providedBy).arg(QLatin1String("https://boardgamegeek.com"), QLatin1String("BoardGameGeek"));
 }
 
 bool BoardGameGeekFetcher::canFetch(int type) const {

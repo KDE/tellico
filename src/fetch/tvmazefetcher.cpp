@@ -29,6 +29,7 @@
 #include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
+#include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -70,7 +71,7 @@ QString TVmazeFetcher::source() const {
 
 // https://www.tvmaze.com/api#licensing
 QString TVmazeFetcher::attribution() const {
-  return i18n("This information was freely provided by <a href=\"https://tvmaze.com\">TVmaze</a>.");
+  return i18n(providedBy).arg(QLatin1String("https://tvmaze.com"), QLatin1String("TVmaze"));
 }
 
 bool TVmazeFetcher::canSearch(Fetch::FetchKey k) const {

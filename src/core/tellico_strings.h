@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -34,6 +34,7 @@ namespace Tellico {
   extern const char* errorMergeType;
   extern const char* errorImageLoad;
   extern const char* untitledFilename;
+  extern const char* providedBy;
 }
 
 #endif
