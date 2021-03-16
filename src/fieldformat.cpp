@@ -66,9 +66,9 @@ QString FieldFormat::matchValueRegularExpression(const QString& value_) {
                                   + QLatin1String("|")
                                   + FieldFormat::rowDelimiterString();
   static const QString endChars = QLatin1String("[")
-                                + FieldFormat::delimiterString().front()
-                                + FieldFormat::columnDelimiterString().front()
-                                + FieldFormat::rowDelimiterString().front()
+                                + FieldFormat::delimiterString().at(0)
+                                + FieldFormat::columnDelimiterString().at(0)
+                                + FieldFormat::rowDelimiterString().at(0)
                                 + QLatin1String("]");
   return QLatin1String("(^|") + beginChars + QLatin1String(")") +
          QRegularExpression::escape(value_) +
