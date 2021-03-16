@@ -207,7 +207,7 @@ The type of field is given in the type attribute of the field element. The value
 <row><entry>Checkbox</entry><entry>4</entry></row>
 <row><entry>Number</entry><entry>6</entry></row>
 <row><entry>&URL;</entry><entry>7</entry></row>
-<row><entry>Single-Column Table</entry><entry>8</entry></row>
+<row><entry>Table</entry><entry>8</entry></row>
 <row><entry>Image</entry><entry>10</entry></row>
 <row><entry>Date</entry><entry>12</entry></row>
 <row><entry>Rating</entry><entry>14</entry></row>
