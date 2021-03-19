@@ -127,6 +127,40 @@ void TheMovieDBFetcherTest::testBabel() {
   QCOMPARE(set(entry, "producer"), set(QString::fromUtf8("Alejandro González Iñárritu; Steve Golin; Jon Kilik; Ann Ruark; Corinne Golden Weber")));
 }
 
+void TheMovieDBFetcherTest::testAllMankind() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("upcitemdb"));
+  cg.writeEntry("Custom Fields", QStringLiteral("origtitle,alttitle,network,episode,tmdb,imdb"));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
+                                       QStringLiteral("for all mankind"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheMovieDBFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field("title"), QStringLiteral("For All Mankind"));
+  QCOMPARE(entry->field("origtitle"), QStringLiteral("For All Mankind"));
+  QCOMPARE(entry->field("alttitle"), QStringLiteral("Para toda la humanidad"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2019"));
+  QCOMPARE(entry->field("network"), QStringLiteral("Apple TV+"));
+  QCOMPARE(entry->field("language"), QStringLiteral("English"));
+  QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
+  QCOMPARE(set(entry, "producer"), set(QStringLiteral("Seth Edelstein")));
+  QVERIFY(entry->field("cast").startsWith(QStringLiteral("Joel Kinnaman::Ed Baldwin")));
+  QStringList episodeList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("episode")));
+  QVERIFY(!episodeList.isEmpty());
+  QCOMPARE(episodeList.at(0), QStringLiteral("Red Moon::1::1"));
+  // imdb should be empty
+  QVERIFY(entry->field(QStringLiteral("imdb")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("tmdb")), QStringLiteral("https://www.themoviedb.org/tv/87917"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
+}
+
 void TheMovieDBFetcherTest::testUpdate() {
   Tellico::Data::CollPtr coll(new Tellico::Data::VideoCollection(true));
   Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("imdb"),

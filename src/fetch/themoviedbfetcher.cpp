@@ -37,6 +37,10 @@
 #include <KJobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
 #include <KIO/StoredTransferJob>
+#include <kwidgetsaddons_version.h>
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,55,0)
+#include <KLanguageName>
+#endif
 
 #include <QLabel>
 #include <QLineEdit>
@@ -56,6 +60,7 @@ namespace {
   static const char* THEMOVIEDB_API_VERSION = "3"; // krazy:exclude=doublequote_chars
   static const char* THEMOVIEDB_API_KEY = "919890b4128d33c729dc368209ece555";
   static const uint THEMOVIEDB_DEFAULT_CAST_SIZE = 10;
+  static const uint THEMOVIEDB_MAX_SEASON_COUNT = 10;
 }
 
 using namespace Tellico;
@@ -140,13 +145,13 @@ void TheMovieDBFetcher::continueSearch() {
   QUrlQuery q;
   switch(request().key()) {
     case Title:
-      u.setPath(u.path() + QLatin1String("/search/movie"));
+      u.setPath(u.path() + QLatin1String("/search/multi"));
       q.addQueryItem(QStringLiteral("query"), request().value());
       break;
 
     case Raw:
       if(request().data().isEmpty()) {
-        u.setPath(u.path() + QLatin1String("/search/movie"));
+        u.setPath(u.path() + QLatin1String("/search/multi"));
       } else {
         u.setPath(u.path() + request().data());
       }
@@ -189,19 +194,31 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
 
   QString id = entry->field(QStringLiteral("tmdb-id"));
   if(!id.isEmpty()) {
+    const QString mediaType = entry->field(QStringLiteral("tmdb-type"));
     // quiet
     QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
-    u.setPath(QStringLiteral("/%1/movie/%2")
-              .arg(QLatin1String(THEMOVIEDB_API_VERSION), id));
+    u.setPath(QStringLiteral("/%1/%2/%3")
+              .arg(QLatin1String(THEMOVIEDB_API_VERSION),
+                   mediaType.isEmpty() ? QLatin1String("movie") : mediaType,
+                   id));
     QUrlQuery q;
     q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
     q.addQueryItem(QStringLiteral("language"), m_locale);
-    q.addQueryItem(QStringLiteral("append_to_response"),
-                   QStringLiteral("alternative_titles,credits"));
+    QString append;
+    if(optionalFields().contains(QStringLiteral("episode"))) {
+      // can only do one season at a time?
+      append = QLatin1String("alternative_titles,credits");
+      for(uint snum = 1; snum <= THEMOVIEDB_MAX_SEASON_COUNT; ++snum) {
+        append += QLatin1String(",season/") + QString::number(snum);
+      }
+    } else {
+      append = QLatin1String("alternative_titles,credits");
+    }
+    q.addQueryItem(QStringLiteral("append_to_response"), append);
     u.setQuery(q);
     QByteArray data = FileHandler::readDataFile(u, true);
 #if 0
-    myWarning() << "Remove debug2 from themoviedbfetcher.cpp";
+    myWarning() << "Remove debug2 from themoviedbfetcher.cpp" << u.url();
     QFile f(QStringLiteral("/tmp/test2.json"));
     if(f.open(QIODevice::WriteOnly)) {
       QTextStream t(&f);
@@ -227,6 +244,7 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
 
   // don't want to include TMDb ID field
   entry->setField(QStringLiteral("tmdb-id"), QString());
+  entry->setField(QStringLiteral("tmdb-type"), QString());
 
   return entry;
 }
@@ -293,6 +311,9 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
   Data::FieldPtr field(new Data::Field(QStringLiteral("tmdb-id"), QStringLiteral("TMDb ID"), Data::Field::Line));
   field->setCategory(i18n("General"));
   coll->addField(field);
+  field = new Data::Field(QStringLiteral("tmdb-type"), QStringLiteral("TMDb Type"), Data::Field::Line);
+  field->setCategory(i18n("General"));
+  coll->addField(field);
 
   if(optionalFields().contains(QStringLiteral("tmdb"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("tmdb"), i18n("TMDb Link"), Data::Field::URL));
@@ -312,6 +333,20 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);
   }
+  if(optionalFields().contains(QStringLiteral("network"))) {
+    Data::FieldPtr field(new Data::Field(QStringLiteral("network"), i18n("Network"), Data::Field::Line));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
+  if(optionalFields().contains(QStringLiteral("episode"))) {
+    Data::FieldPtr field(new Data::Field(QStringLiteral("episode"), i18n("Episodes"), Data::Field::Table));
+    field->setFormatType(FieldFormat::FormatTitle);
+    field->setProperty(QStringLiteral("columns"), QStringLiteral("3"));
+    field->setProperty(QStringLiteral("column1"), i18n("Title"));
+    field->setProperty(QStringLiteral("column2"), i18nc("TV Season", "Season"));
+    field->setProperty(QStringLiteral("column3"), i18nc("TV Episode", "Episode"));
+    coll->addField(field);
+  }
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
   QVariantMap result = doc.object().toVariantMap();
@@ -319,6 +354,9 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
   QVariantList resultList = result.value(QStringLiteral("results")).toList();
   if(resultList.isEmpty()) {
     resultList = result.value(QStringLiteral("movie_results")).toList();
+  }
+  if(resultList.isEmpty()) {
+    resultList = result.value(QStringLiteral("tv_results")).toList();
   }
 
   if(resultList.isEmpty()) {
@@ -348,8 +386,19 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
 
 void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
   entry_->setField(QStringLiteral("tmdb-id"), mapValue(resultMap_, "id"));
+  const QString tmdbType = QStringLiteral("tmdb-type");
+  if(entry_->field(tmdbType).isEmpty()) {
+    entry_->setField(tmdbType, mapValue(resultMap_, "media_type"));
+  }
   entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "title"));
-  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "release_date").left(4));
+  if(entry_->title().isEmpty()) {
+    entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "name"));
+  }
+  if(resultMap_.contains(QLatin1String("release_date"))) {
+    entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "release_date").left(4));
+  } else {
+    entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "first_air_date").left(4));
+  }
 
   QStringList directors, producers, writers, composers;
   QVariantList crewList = resultMap_.value(QStringLiteral("credits")).toMap()
@@ -378,13 +427,20 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   }
 
   if(entry_->collection()->hasField(QStringLiteral("tmdb"))) {
-    entry_->setField(QStringLiteral("tmdb"), QLatin1String("https://www.themoviedb.org/movie/") + mapValue(resultMap_, "id"));
+    QString mediaType = entry_->field(tmdbType);
+    if(mediaType.isEmpty()) mediaType = QLatin1String("movie");
+    entry_->setField(QStringLiteral("tmdb"), QStringLiteral("https://www.themoviedb.org/%1/%2").arg(mediaType, mapValue(resultMap_, "id")));
   }
   if(entry_->collection()->hasField(QStringLiteral("imdb"))) {
-    entry_->setField(QStringLiteral("imdb"), QLatin1String("https://www.imdb.com/title/") + mapValue(resultMap_, "imdb_id"));
+    const QString imdbId = mapValue(resultMap_, "imdb_id");
+    if(!imdbId.isEmpty()) {
+      entry_->setField(QStringLiteral("imdb"), QLatin1String("https://www.imdb.com/title/") + imdbId);
+    }
   }
   if(entry_->collection()->hasField(QStringLiteral("origtitle"))) {
-    entry_->setField(QStringLiteral("origtitle"), mapValue(resultMap_, "original_title"));
+    QString otitle = mapValue(resultMap_, "original_title");
+    if(otitle.isEmpty()) otitle = mapValue(resultMap_, "original_name");
+    entry_->setField(QStringLiteral("origtitle"), otitle);
   }
   if(entry_->collection()->hasField(QStringLiteral("alttitle"))) {
     QStringList atitles;
@@ -392,7 +448,32 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
                                                .value(QLatin1String("titles")).toList()) {
       atitles << mapValue(atitle.toMap(), "title");
     }
+    if(atitles.isEmpty()) {
+      atitles += mapValue(resultMap_, "alternative_titles", "results", "title");
+    }
     entry_->setField(QStringLiteral("alttitle"), atitles.join(FieldFormat::rowDelimiterString()));
+  }
+  if(entry_->collection()->hasField(QStringLiteral("network"))) {
+    entry_->setField(QStringLiteral("network"), mapValue(resultMap_, "networks", "name"));
+  }
+  if(optionalFields().contains(QStringLiteral("episode"))) {
+    QStringList episodes;
+    for(uint snum = 1; snum <= THEMOVIEDB_MAX_SEASON_COUNT; ++snum) {
+      const QString seasonString = QLatin1String("season/") + QString::number(snum);
+      if(!resultMap_.contains(seasonString)) {
+        break; // no more seasons
+      }
+      const auto episodeList = resultMap_.value(seasonString).toMap()
+                                         .value(QStringLiteral("episodes")).toList();
+      foreach(const QVariant& row, episodeList) {
+        // episode title, season, episode number
+        const auto map = row.toMap();
+        episodes << mapValue(map, "name") + FieldFormat::columnDelimiterString() +
+                    mapValue(map, "season_number") + FieldFormat::columnDelimiterString() +
+                    mapValue(map, "episode_number");
+      }
+    }
+    entry_->setField(QStringLiteral("episode"), episodes.join(FieldFormat::rowDelimiterString()));
   }
 
   QStringList actors;
@@ -421,6 +502,15 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
     }
     countries << name;
   }
+  if(countries.isEmpty()) {
+    foreach(const QVariant& country, resultMap_.value(QLatin1String("origin_country")).toList()) {
+      QString name = country.toString();
+      if(name == QLatin1String("United States of America") || name == QLatin1String("US")) {
+        name = QStringLiteral("USA");
+      }
+      if(!name.isEmpty()) countries << name;
+    }
+  }
   entry_->setField(QStringLiteral("nationality"), countries.join(FieldFormat::delimiterString()));
 
   QStringList genres;
@@ -430,10 +520,20 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
 
   // hard-coded poster size for now
-  QString cover = m_imageBase + QLatin1String("w342") + mapValue(resultMap_, "poster_path");
+  const QString cover = m_imageBase + QLatin1String("w342") + mapValue(resultMap_, "poster_path");
   entry_->setField(QStringLiteral("cover"), cover);
 
   entry_->setField(QStringLiteral("running-time"), mapValue(resultMap_, "runtime"));
+  QString lang = mapValue(resultMap_, "original_language");
+  if(lang == QLatin1String("en")) {
+    lang = QStringLiteral("English");
+  } else {
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,55,0)
+    auto langName = KLanguageName::nameForCode(lang);
+    if(!langName.isEmpty()) lang = langName;
+#endif
+  }
+  entry_->setField(QStringLiteral("language"), lang);
   entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "overview"));
 }
 
@@ -481,6 +581,8 @@ Tellico::StringHash TheMovieDBFetcher::allOptionalFields() {
   hash[QStringLiteral("imdb")] = i18n("IMDb Link");
   hash[QStringLiteral("alttitle")] = i18n("Alternative Titles");
   hash[QStringLiteral("origtitle")] = i18n("Original Title");
+  hash[QStringLiteral("network")] = i18n("Network");
+  hash[QStringLiteral("episode")] = i18n("Episodes");
   return hash;
 }
 

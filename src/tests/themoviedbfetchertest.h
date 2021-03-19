@@ -39,6 +39,7 @@ private Q_SLOTS:
   void testTitle();
   void testTitleFr();
   void testBabel();
+  void testAllMankind();
   void testUpdate();
 
 private:
