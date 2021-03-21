@@ -25,7 +25,7 @@
 #include "multifetcher.h"
 #include "fetchmanager.h"
 #include "../entrycomparison.h"
-#include "../document.h"
+#include "../utils/mergeconflictresolver.h"
 #include "../gui/collectiontypecombo.h"
 #include "../tellico_debug.h"
 
@@ -146,7 +146,7 @@ void MultiFetcher::slotDone() {
     if(bestIndex > -1 && bestScore >= EntryComparison::ENTRY_GOOD_MATCH) {
       auto newEntry = m_matches.at(bestIndex);
 //      myDebug() << "...merging from" << newEntry->title() << "into" << entry->title();
-      Data::Document::mergeEntry(entry, newEntry);
+      Merge::mergeEntry(entry, newEntry);
     } else {
 //      myDebug() << "___no match for" << entry->title();
     }

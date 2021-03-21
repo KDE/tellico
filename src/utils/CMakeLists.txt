@@ -10,6 +10,7 @@ SET(utils_STAT_SRCS
    iso6937converter.cpp
    isbnvalidator.cpp
    lccnvalidator.cpp
+   mergeconflictresolver.cpp
    string_utils.cpp
    tellico_utils.cpp
    upcvalidator.cpp

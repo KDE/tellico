@@ -37,12 +37,12 @@
 #include <QTimer>
 
 using namespace Tellico;
-using Tellico::AskUserResolver;
+using Tellico::Merge::AskUserResolver;
 using Tellico::EntryMerger;
 
-Tellico::MergeConflictResolver::Result AskUserResolver::resolve(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
-                                                                const QString& value1, const QString& value2) {
-  return static_cast<MergeConflictResolver::Result>(Kernel::self()->askAndMerge(entry1, entry2, field, value1, value2));
+Merge::ConflictResolver::Result AskUserResolver::resolve(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
+                                                         const QString& value1, const QString& value2) {
+  return static_cast<Merge::ConflictResolver::Result>(Kernel::self()->askAndMerge(entry1, entry2, field, value1, value2));
 }
 
 EntryMerger::EntryMerger(Tellico::Data::EntryList entries_, QObject* parent_)
@@ -86,7 +86,7 @@ void EntryMerger::slotStartNext() {
       match = score >= EntryComparison::ENTRY_GOOD_MATCH;
     }
     if(match) {
-      bool merge_ok = Data::Document::mergeEntry(baseEntry, it, m_resolver);
+      bool merge_ok = Merge::mergeEntry(baseEntry, it, m_resolver);
       if(merge_ok) {
         m_entriesToRemove.append(it);
         m_entriesLeft.removeAll(it);

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2007-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,56 +22,38 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_ENTRYMERGER_H
-#define TELLICO_ENTRYMERGER_H
+#ifndef MERGECONFLICTRESOLVER_H
+#define MERGECONFLICTRESOLVER_H
 
-#include "datavectors.h"
-#include "utils/mergeconflictresolver.h"
-
-#include <QObject>
-
-namespace Tellico {
-  namespace Merge {
-
-class AskUserResolver : public ConflictResolver {
-public:
-  AskUserResolver()  {};
-  ~AskUserResolver() {};
-  virtual ConflictResolver::Result resolve(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
-                                           const QString& value1 = QString(), const QString& value2 = QString()) Q_DECL_OVERRIDE;
-
-};
-
-} // end namespace Merge
+#include "../datavectors.h"
 
 /**
+ * This file contains merging functions.
+ *
  * @author Robby Stephenson
  */
-class EntryMerger : public QObject {
-Q_OBJECT
-public:
-  EntryMerger(Data::EntryList entries, QObject* parent);
-  ~EntryMerger();
+namespace Tellico {
+  namespace Merge {
+    class ConflictResolver {
+    public:
+      enum Result { KeepFirst, KeepSecond, CancelMerge };
 
-public Q_SLOTS:
-  void slotCancel();
+      ConflictResolver() {}
+      virtual ~ConflictResolver() {}
+      virtual Result resolve(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
+                            const QString& value1 = QString(), const QString& value2 = QString()) = 0;
 
-private Q_SLOTS:
-  void slotStartNext();
-  void slotCleanup();
+    private:
+      Q_DISABLE_COPY(ConflictResolver)
+    };
 
-private:
-  // if a clean merge is possible
-  bool cleanMerge(Data::EntryPtr entry1, Data::EntryPtr entry2) const;
-
-  Data::EntryList m_entriesToCheck;
-  Data::EntryList m_entriesToRemove;
-  Data::EntryList m_entriesLeft;
-  int m_origCount;
-  bool m_cancelled;
-  Merge::ConflictResolver* m_resolver;
-};
-
-} // end namespace
+    bool mergeEntry(Data::EntryPtr entry1, Data::EntryPtr entry2, ConflictResolver* resolver=nullptr);
+    // adds new fields into collection if any values in entries are not empty
+    // first object is modified fields, second is new fields
+    QPair<Data::FieldList, Data::FieldList> mergeFields(Data::CollPtr coll,
+                                                        Data::FieldList fields,
+                                                        Data::EntryList entries);
+  }
+}
 
 #endif

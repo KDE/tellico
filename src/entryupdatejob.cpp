@@ -24,9 +24,9 @@
 
 #include "entryupdatejob.h"
 #include "entrycomparison.h"
-#include "document.h"
 #include "entry.h"
 #include "collection.h"
+#include "utils/mergeconflictresolver.h"
 #include "tellico_debug.h"
 
 #include <QTimer>
@@ -76,7 +76,7 @@ void EntryUpdateJob::slotDone() {
     const int matchToBeat = (m_mode == PerfectMatchOnly ? EntryComparison::ENTRY_PERFECT_MATCH
                                                         : EntryComparison::ENTRY_GOOD_MATCH);
     if(m_bestMatchScore > matchToBeat) {
-      Data::Document::mergeEntry(m_entry, m_bestMatchEntry);
+      Merge::mergeEntry(m_entry, m_bestMatchEntry);
     }
   }
   emitResult();

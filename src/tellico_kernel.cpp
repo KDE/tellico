@@ -42,6 +42,7 @@
 #include "collectionfactory.h"
 #include "utils/stringset.h"
 #include "utils/cursorsaver.h"
+#include "utils/mergeconflictresolver.h"
 
 #include <KMessageBox>
 #include <KLocalizedString>
@@ -158,7 +159,7 @@ void Kernel::addEntries(Tellico::Data::EntryList entries_, bool checkFields_) {
     Tellico::Data::CollPtr c = Data::Document::self()->collection();
     Tellico::Data::FieldList fields = entries_[0]->collection()->fields();
 
-    QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> p = Data::Document::mergeFields(c, fields, entries_);
+    auto p = Merge::mergeFields(c, fields, entries_);
     Data::FieldList modifiedFields = p.first;
     Data::FieldList addedFields = p.second;
 
@@ -358,9 +359,9 @@ int Kernel::askAndMerge(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr
                                             KGuiItem(i18n("Select value from %1", title1)),
                                             KGuiItem(i18n("Select value from %1", title2)));
   switch(ret) {
-    case KMessageBox::Cancel: return MergeConflictResolver::CancelMerge;
-    case KMessageBox::Yes: return MergeConflictResolver::KeepFirst; // keep original value
-    case KMessageBox::No: return MergeConflictResolver::KeepSecond; // use newer value
+    case KMessageBox::Cancel: return Merge::ConflictResolver::CancelMerge;
+    case KMessageBox::Yes: return Merge::ConflictResolver::KeepFirst; // keep original value
+    case KMessageBox::No: return Merge::ConflictResolver::KeepSecond; // use newer value
   }
-  return MergeConflictResolver::CancelMerge;
+  return Merge::ConflictResolver::CancelMerge;
 }

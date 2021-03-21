@@ -137,6 +137,7 @@ set(TELLICO_TEST_LIBS
 
 ecm_add_test(collectiontest.cpp
              ../document.cpp
+             ../utils/mergeconflictresolver.cpp
              ../translators/tellicoxmlexporter.cpp
              ../translators/tellicozipexporter.cpp
              ../translators/exporter.cpp

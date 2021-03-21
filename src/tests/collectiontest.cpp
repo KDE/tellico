@@ -35,6 +35,7 @@
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
 #include "../document.h"
+#include "../utils/mergeconflictresolver.h"
 #include "../entrycomparison.h"
 
 #include <KProcess>
@@ -47,10 +48,10 @@ QTEST_GUILESS_MAIN( CollectionTest )
 
 Q_DECLARE_METATYPE(Tellico::EntryComparison::MatchValue)
 
-class TestResolver : public Tellico::MergeConflictResolver {
+class TestResolver : public Tellico::Merge::ConflictResolver {
 public:
-  TestResolver(Tellico::MergeConflictResolver::Result ret) : m_ret(ret) {};
-  Tellico::MergeConflictResolver::Result resolve(Tellico::Data::EntryPtr,
+  TestResolver(Tellico::Merge::ConflictResolver::Result ret) : m_ret(ret) {};
+  Tellico::Merge::ConflictResolver::Result resolve(Tellico::Data::EntryPtr,
                                                  Tellico::Data::EntryPtr,
                                                  Tellico::Data::FieldPtr,
                                                  const QString& value1 = QString(),
@@ -61,7 +62,7 @@ public:
   }
 
 private:
-  Tellico::MergeConflictResolver::Result m_ret;
+  Tellico::Merge::ConflictResolver::Result m_ret;
 };
 
 void CollectionTest::initTestCase() {
@@ -479,22 +480,22 @@ void CollectionTest::testDuplicate() {
   QVERIFY(entry1->field(QStringLiteral("cdate")) != entry3->field(QStringLiteral("cdate")));
   QCOMPARE(entry3->field(QStringLiteral("cdate")), QDate::currentDate().toString(Qt::ISODate));
 
-  bool ret = Tellico::Data::Document::mergeEntry(entry1, entry2);
+  bool ret = Tellico::Merge::mergeEntry(entry1, entry2);
   QCOMPARE(ret, true);
 
-  TestResolver cancelMerge(Tellico::MergeConflictResolver::CancelMerge);
-  ret = Tellico::Data::Document::mergeEntry(entry1, entry2, &cancelMerge);
+  TestResolver cancelMerge(Tellico::Merge::ConflictResolver::CancelMerge);
+  ret = Tellico::Merge::mergeEntry(entry1, entry2, &cancelMerge);
   QCOMPARE(ret, true);
 
   entry2->setField(QStringLiteral("title"), QStringLiteral("title2"));
 
-  ret = Tellico::Data::Document::mergeEntry(entry1, entry2, &cancelMerge);
+  ret = Tellico::Merge::mergeEntry(entry1, entry2, &cancelMerge);
   QCOMPARE(ret, false);
   QCOMPARE(entry1->title(), QStringLiteral("title1"));
   QCOMPARE(entry2->title(), QStringLiteral("title2"));
 
-  TestResolver keepFirst(Tellico::MergeConflictResolver::KeepFirst);
-  ret = Tellico::Data::Document::mergeEntry(entry1, entry2, &keepFirst);
+  TestResolver keepFirst(Tellico::Merge::ConflictResolver::KeepFirst);
+  ret = Tellico::Merge::mergeEntry(entry1, entry2, &keepFirst);
   QCOMPARE(ret, true);
   QCOMPARE(entry1->title(), QStringLiteral("title1"));
   // the second entry never gets changed
@@ -502,8 +503,8 @@ void CollectionTest::testDuplicate() {
 
   entry2->setField(QStringLiteral("title"), QStringLiteral("title2"));
 
-  TestResolver keepSecond(Tellico::MergeConflictResolver::KeepSecond);
-  ret = Tellico::Data::Document::mergeEntry(entry1, entry2, &keepSecond);
+  TestResolver keepSecond(Tellico::Merge::ConflictResolver::KeepSecond);
+  ret = Tellico::Merge::mergeEntry(entry1, entry2, &keepSecond);
   QCOMPARE(ret, true);
   QCOMPARE(entry1->title(), QStringLiteral("title2"));
   QCOMPARE(entry2->title(), QStringLiteral("title2"));
@@ -511,7 +512,7 @@ void CollectionTest::testDuplicate() {
   entry1->setField(QStringLiteral("title"), QStringLiteral("title1"));
 
   // returns true, ("merge successful") even if values were not merged
-  ret = Tellico::Data::Document::mergeEntry(entry1, entry2);
+  ret = Tellico::Merge::mergeEntry(entry1, entry2);
   QCOMPARE(ret, true);
   QCOMPARE(entry1->title(), QStringLiteral("title1"));
   QCOMPARE(entry2->title(), QStringLiteral("title2"));
@@ -537,7 +538,7 @@ void CollectionTest::testMergeFields() {
   QCOMPARE(entry2->field(QStringLiteral("platform")), QStringLiteral("PlayStation"));
   coll2->addEntries(entry2);
 
-  QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> p = Tellico::Data::Document::mergeFields(coll1,
+  auto p = Tellico::Merge::mergeFields(coll1,
                                        Tellico::Data::FieldList() << coll2->fieldByName(QStringLiteral("platform")),
                                        Tellico::Data::EntryList() << entry2);
 

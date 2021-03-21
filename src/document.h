@@ -39,19 +39,6 @@ namespace Tellico {
     class TellicoSaxImporter;
   }
 
-class MergeConflictResolver {
-public:
-  enum Result { KeepFirst, KeepSecond, CancelMerge };
-
-  MergeConflictResolver() {}
-  virtual ~MergeConflictResolver() {}
-  virtual Result resolve(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
-                         const QString& value1 = QString(), const QString& value2 = QString()) = 0;
-
-private:
-  Q_DISABLE_COPY(MergeConflictResolver)
-};
-
   namespace Data {
 
 /**
@@ -183,13 +170,6 @@ public:
    */
   void removeImagesNotInCollection(EntryList entries, EntryList entriesToKeep);
   void cancelImageWriting() { m_cancelImageWriting = true; }
-
-  static bool mergeEntry(EntryPtr entry1, EntryPtr entry2, MergeConflictResolver* resolver=nullptr);
-  // adds new fields into collection if any values in entries are not empty
-  // first object is modified fields, second is new fields
-  static QPair<Data::FieldList, Data::FieldList> mergeFields(Data::CollPtr coll,
-                                                             Data::FieldList fields,
-                                                             Data::EntryList entries);
 
 public Q_SLOTS:
   /**

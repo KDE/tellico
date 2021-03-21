@@ -27,23 +27,23 @@
 #include "modifyentries.h"
 #include "../collection.h"
 #include "../tellico_kernel.h"
-#include "../document.h"
+#include "../utils/mergeconflictresolver.h"
 
 #include <KLocalizedString>
 
 namespace {
 
-class OverWriteResolver : public Tellico::MergeConflictResolver {
+class OverWriteResolver : public Tellico::Merge::ConflictResolver {
 public:
   OverWriteResolver(bool overwrite_) : m_overWrite(overwrite_) {};
-  Tellico::MergeConflictResolver::Result resolve(Tellico::Data::EntryPtr,
-                                                 Tellico::Data::EntryPtr,
-                                                 Tellico::Data::FieldPtr,
-                                                 const QString& value1 = QString(),
-                                                 const QString& value2 = QString()) Q_DECL_OVERRIDE {
+  Tellico::Merge::ConflictResolver::Result resolve(Tellico::Data::EntryPtr,
+                                                   Tellico::Data::EntryPtr,
+                                                   Tellico::Data::FieldPtr,
+                                                   const QString& value1 = QString(),
+                                                   const QString& value2 = QString()) Q_DECL_OVERRIDE {
     Q_UNUSED(value1);
     Q_UNUSED(value2);
-    return m_overWrite ? Tellico::MergeConflictResolver::KeepSecond : Tellico::MergeConflictResolver::KeepFirst;
+    return m_overWrite ? Tellico::Merge::ConflictResolver::KeepSecond : Tellico::Merge::ConflictResolver::KeepFirst;
   }
 
 private:
@@ -74,7 +74,7 @@ public:
 
   virtual void redo() Q_DECL_OVERRIDE {
     OverWriteResolver res(m_overWrite);
-    Data::Document::mergeEntry(m_currEntry, m_newEntry, &res);
+    Tellico::Merge::mergeEntry(m_currEntry, m_newEntry, &res);
   }
   virtual void undo() Q_DECL_OVERRIDE {} // does nothing
   Data::EntryPtr orphanEntry() const { return m_orphanEntry; }
@@ -103,9 +103,9 @@ void UpdateEntries::redo() {
     // do this here instead of the constructor because several UpdateEntries may be in one command
     // and I don't want to add new fields multiple times
 
-    QPair<Data::FieldList, Data::FieldList> p = Data::Document::mergeFields(m_coll,
-                                                                            m_newEntry->collection()->fields(),
-                                                                            Data::EntryList() << m_newEntry);
+    auto p = Tellico::Merge::mergeFields(m_coll,
+                                         m_newEntry->collection()->fields(),
+                                         Data::EntryList() << m_newEntry);
     Data::FieldList modifiedFields = p.first;
     Data::FieldList addedFields = p.second;
 
