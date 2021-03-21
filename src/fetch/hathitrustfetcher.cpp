@@ -85,10 +85,15 @@ void HathiTrustFetcher::search() {
 }
 
 void HathiTrustFetcher::doSearch() {
+  if(request().key() != ISBN && request().key() != LCCN) {
+    stop();
+    return;
+  }
+
   QUrl u(QString::fromLatin1(HATHITRUST_QUERY_URL));
 
   QStringList searchValues;
-  // we split ISBN and LCCN values, which are the only ones we accept anyway
+  // we split ISBN and LCCN values, which are the only ones we accept
   const QStringList searchTerms = FieldFormat::splitValue(request().value());
   foreach(const QString& searchTerm, searchTerms) {
     if(request().key() == ISBN) {

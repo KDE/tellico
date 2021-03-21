@@ -118,13 +118,12 @@ void SRUFetcher::readConfigHook(const KConfigGroup& config_) {
 }
 
 void SRUFetcher::search() {
+  m_started = true;
   if(m_host.isEmpty() || m_path.isEmpty() || m_format.isEmpty()) {
     myDebug() << "settings are not set!";
     stop();
     return;
   }
-
-  m_started = true;
 
   QUrl u;
   u.setScheme(QStringLiteral("http"));

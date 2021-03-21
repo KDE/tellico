@@ -110,6 +110,8 @@ void DoubanFetcher::search() {
 
     default:
       myWarning() << "key not recognized:" << request().key();
+      stop();
+      return;
   }
 
   q.addQueryItem(QLatin1String("start"), QString::number(0));

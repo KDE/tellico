@@ -95,7 +95,8 @@ void FilmasterFetcher::search() {
       break;
 
     default:
-      break;
+      stop();
+      return;
   }
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("phrase"), request().value());

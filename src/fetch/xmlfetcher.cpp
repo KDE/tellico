@@ -65,8 +65,8 @@ void XMLFetcher::continueSearch() {
 
 void XMLFetcher::doSearch() {
   const QUrl u = searchUrl();
-  Q_ASSERT(!u.isEmpty());
   if(u.isEmpty()) {
+    myDebug() << source() << "- empty search url";
     stop();
     return;
   }

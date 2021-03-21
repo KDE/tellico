@@ -399,6 +399,25 @@ if(${KF5KIO_VERSION} VERSION_GREATER "5.18.0")
   target_link_libraries(fetcherstest KF5::KIOGui)
 endif(${KF5KIO_VERSION} VERSION_GREATER "5.18.0")
 
+# the fetch library really depends on the GUI static library
+# but rather than linking all of that in, selectively choose the
+# specific classes used
+ecm_add_test(fetchertest.cpp
+             ../fetch/fetcherinitializer.cpp
+             ../gui/collectiontypecombo.cpp
+             ../gui/combobox.cpp
+             ../gui/kwidgetlister.cpp
+             ../gui/lineedit.cpp
+             ../gui/stringmapwidget.cpp
+             ../translators/adsimporter.cpp
+             ../translators/bibteximporter.cpp
+             ../translators/gcstarimporter.cpp
+             ../translators/grs1importer.cpp
+             ../translators/risimporter.cpp
+    TEST_NAME fetchertest
+    LINK_LIBRARIES fetch translatorstest ${TELLICO_TEST_LIBS} KF5::XmlGui KF5::SonnetCore KF5::SonnetUi
+)
+
 # the PDF importer uses CrossRefFetcher, so include the test near the fetchers section
 ecm_add_test(pdftest.cpp
              ../translators/pdfimporter.cpp

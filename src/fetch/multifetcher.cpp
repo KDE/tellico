@@ -56,7 +56,7 @@ bool MultiFetcher::canFetch(int type) const {
 
 bool MultiFetcher::canSearch(Fetch::FetchKey k) const {
   // can fetch anything supported by the first data source
-  return m_fetchers.isEmpty() || m_fetchers.front()->canSearch(k);;
+  return !m_fetchers.isEmpty() && m_fetchers.front()->canSearch(k);
 }
 
 void MultiFetcher::readConfigHook(const KConfigGroup& config_) {

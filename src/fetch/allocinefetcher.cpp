@@ -119,6 +119,7 @@ void AbstractAllocineFetcher::search() {
 
     default:
       myWarning() << "key not recognized: " << request().key();
+      stop();
       return;
   }
 
