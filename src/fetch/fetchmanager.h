@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -81,9 +81,9 @@ public:
   ~Manager();
 
   KeyMap keyMap(const QString& source = QString());
-  void startSearch(const QString& source, FetchKey key, const QString& value);
+  void startSearch(const QString& source, FetchKey key, const QString& value, Data::Collection::Type collType);
   void continueSearch();
-  bool canFetch() const;
+  bool canFetch(Data::Collection::Type collType) const;
   bool hasMoreResults() const;
   void loadFetchers();
   const FetcherVec& fetchers();

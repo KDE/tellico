@@ -409,7 +409,8 @@ void FetchDialog::slotSearchClicked() {
     qApp->processEvents();
     Fetch::Manager::self()->startSearch(m_sourceCombo->currentText(),
                                         static_cast<Fetch::FetchKey>(m_keyCombo->currentData().toInt()),
-                                        value);
+                                        value,
+                                        Data::Document::self()->collection()->type());
   }
 }
 
@@ -659,7 +660,7 @@ void FetchDialog::slotInit() {
   KConfigGroup config(KSharedConfig::openConfig(), "Fetch Dialog Options");
   KWindowConfig::restoreWindowSize(windowHandle(), config);
 
-  if(!Fetch::Manager::self()->canFetch()) {
+  if(!Fetch::Manager::self()->canFetch(Data::Document::self()->collection()->type())) {
     m_searchButton->setEnabled(false);
     Kernel::self()->sorry(i18n("No Internet sources are available for your current collection type."), this);
   }
@@ -881,7 +882,7 @@ void FetchDialog::slotResetCollection() {
     m_sourceCombo->addItem(Fetch::Manager::self()->fetcherIcon(fetcher.data()), fetcher->source());
   }
 
-  if(Fetch::Manager::self()->canFetch()) {
+  if(Fetch::Manager::self()->canFetch(Data::Document::self()->collection()->type())) {
     m_searchButton->setEnabled(true);
   } else {
     m_searchButton->setEnabled(false);

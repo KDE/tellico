@@ -36,7 +36,6 @@ class QUndoCommand;
 class QUrl;
 
 namespace Tellico {
-  class MainWindow;
   class Filter;
   namespace Data {
     class Collection;
@@ -52,7 +51,7 @@ public:
   /**
    * Initializes the singleton. Should just be called once, from Tellico::MainWindow
    */
-  static void init(MainWindow* parent) { if(!s_self) s_self = new Kernel(parent); }
+  static void init(QWidget* parent) { if(!s_self) s_self = new Kernel(parent); }
 
   /**
    * Returns a pointer to the parent widget. This is mainly used for error dialogs and the like.
@@ -131,9 +130,8 @@ private:
   static Kernel* s_self;
 
   // all constructors are private
-  Kernel(MainWindow* parent);
-  Kernel(const Kernel&);
-  Kernel& operator=(const Kernel&);
+  Kernel(QWidget* parent);
+  Q_DISABLE_COPY(Kernel);
   ~Kernel();
 
   void doCommand(QUndoCommand* command);

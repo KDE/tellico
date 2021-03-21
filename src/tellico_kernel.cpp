@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "tellico_kernel.h"
-#include "mainwindow.h"
 #include "document.h"
 #include "collection.h"
 #include "controller.h"
@@ -53,7 +52,7 @@
 using Tellico::Kernel;
 Kernel* Kernel::s_self = nullptr;
 
-Kernel::Kernel(Tellico::MainWindow* parent) : m_widget(parent)
+Kernel::Kernel(QWidget* parent) : m_widget(parent)
     , m_commandHistory(new QUndoStack(parent)) {
 }
 
@@ -90,7 +89,7 @@ QString Kernel::collectionTypeName() const {
   return CollectionFactory::typeName(collectionType());
 }
 
-void Kernel::sorry(const QString& text_, QWidget* widget_/* =0 */) {
+void Kernel::sorry(const QString& text_, QWidget* widget_/* =nullptr */) {
   if(text_.isEmpty()) {
     return;
   }

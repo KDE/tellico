@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -29,7 +29,6 @@
 #include "messagehandler.h"
 #include "../entry.h"
 #include "../collection.h"
-#include "../document.h"
 #include "../utils/string_utils.h"
 #include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
@@ -168,13 +167,13 @@ Tellico::Fetch::KeyMap Manager::keyMap(const QString& source_) {
   return map;
 }
 
-void Manager::startSearch(const QString& source_, Tellico::Fetch::FetchKey key_, const QString& value_) {
+void Manager::startSearch(const QString& source_, Tellico::Fetch::FetchKey key_, const QString& value_, Tellico::Data::Collection::Type collType_) {
   if(value_.isEmpty()) {
     emit signalDone();
     return;
   }
 
-  FetchRequest request(Data::Document::self()->collection()->type(), key_, value_);
+  FetchRequest request(collType_, key_, value_);
 
   // assume there's only one fetcher match
   int i = 0;
@@ -244,9 +243,9 @@ void Manager::slotFetcherDone(Tellico::Fetch::Fetcher* fetcher_) {
   }
 }
 
-bool Manager::canFetch() const {
+bool Manager::canFetch(Tellico::Data::Collection::Type collType_) const {
   foreach(Fetcher::Ptr fetcher, m_fetchers) {
-    if(fetcher->canFetch(Data::Document::self()->collection()->type())) {
+    if(fetcher->canFetch(collType_)) {
       return true;
     }
   }
@@ -308,11 +307,13 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
 // static
 Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FetcherVec vec;
-  vec.append(SRUFetcher::libraryOfCongress(this));
 // books
   FETCHER_ADD(ISBNdb);
   FETCHER_ADD(OpenLibrary);
   FETCHER_ADD(GoogleBook);
+  if(functionRegistry.contains(SRU)) {
+    vec.append(SRUFetcher::libraryOfCongress(this));
+  }
 // comic books
 //  FETCHER_ADD(AnimeNfo);
   FETCHER_ADD(Bedetheque);
