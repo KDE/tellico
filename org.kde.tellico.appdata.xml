@@ -558,6 +558,7 @@
       <caption xml:lang="pt-BR">A janela principal mostrando uma coleção de filmes</caption>
       <caption xml:lang="ru">Главное окно с коллекцией фильмов</caption>
       <caption xml:lang="sk">Hlavné okno zobrazujúce kolekciu filmov</caption>
+      <caption xml:lang="sl">Glavno okno, ki prikazuje zbirko filmov</caption>
       <caption xml:lang="sv">Huvudfönstret som visar en filmsamling</caption>
       <caption xml:lang="uk">Головне вікно програми зі збіркою фільмів</caption>
       <caption xml:lang="x-test">xxThe main window showing a movie collectionxx</caption>
@@ -587,6 +588,7 @@
       <caption xml:lang="pt-BR">A janela principal a mostrar um único item em uma coleção de livros</caption>
       <caption xml:lang="ru">Главное окно с простым элементом из коллекции книг</caption>
       <caption xml:lang="sk">Hlavné okno zobrazujúce jednoduchú položku v kolekcii kníh</caption>
+      <caption xml:lang="sl">Glavno okno, ki prikazuje preprost predmet v knjižni zbirki</caption>
       <caption xml:lang="sv">Huvudfönstret som visar ett enkelt objekt i en boksamling</caption>
       <caption xml:lang="uk">Головне вікно програми із простим записом у збірці книжок</caption>
       <caption xml:lang="x-test">xxThe main window showing a simple item in a book collectionxx</caption>
@@ -617,6 +619,7 @@
       <caption xml:lang="pt-BR">A janela principal mostrando visões lado a lado de uma coleção de jogos</caption>
       <caption xml:lang="ru">Главное окно с параллельным представлением коллекции игр</caption>
       <caption xml:lang="sk">Hlavné okno zobrazujúce pohľady vedľa seba kolekcie hier</caption>
+      <caption xml:lang="sl">Glavno okno, ki prikazuje dva vzporedna pogleda zbirke iger</caption>
       <caption xml:lang="sv">Huvudfönstret som visar en spelsamling med visning sida vid sida</caption>
       <caption xml:lang="uk">Головне вікно програми із панелями паралельного перегляду збірки ігор</caption>
       <caption xml:lang="x-test">xxThe main window showing side-by-side views of a game collectionxx</caption>
