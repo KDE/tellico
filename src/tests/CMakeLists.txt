@@ -731,6 +731,12 @@ ecm_add_test(themoviedbfetchertest.cpp
     LINK_LIBRARIES fetcherstest translatorstest translatorstest ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(thetvdbfetchertest.cpp
+             ../fetch/thetvdbfetcher.cpp
+    TEST_NAME thetvdbfetchertest
+    LINK_LIBRARIES fetcherstest translatorstest ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(tvmazefetchertest.cpp
              ../fetch/tvmazefetcher.cpp
     TEST_NAME tvmazefetchertest

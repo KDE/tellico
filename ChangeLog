@@ -1,3 +1,7 @@
+2021-03-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Added TheTVDB data source (Bug 428430).
+
 2021-03-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Added TV series to TMDb data source (Bug 357128).
