@@ -88,29 +88,38 @@ void DoubanFetcher::readConfigHook(const KConfigGroup& config_) {
 
 void DoubanFetcher::search() {
   m_started = true;
+  // split ISBN values
+  QStringList searchTerms;
+  if(request().key() == ISBN) {
+    searchTerms = FieldFormat::splitValue(request().value());
+  } else  {
+    searchTerms += request().value();
+  }
+  foreach(const QString& searchTerm, searchTerms) {
+    doSearch(searchTerm);
+  }
+  if(m_jobs.isEmpty()) {
+    stop();
+  }
+}
+
+void DoubanFetcher::doSearch(const QString& term_) {
   QUrl u(QString::fromLatin1(DOUBAN_API_URL));
 
   QUrlQuery q;
   switch(request().key()) {
     case ISBN:
-      u.setPath(u.path() + QLatin1String("book/isbn/"));
-      {
-        const QStringList isbns = FieldFormat::splitValue(request().value());
-        if(!isbns.isEmpty()) {
-          u.setPath(u.path() + ISBNValidator::cleanValue(isbns.front()));
-        }
-      }
+      u.setPath(u.path() + QLatin1String("book/isbn/") + ISBNValidator::cleanValue(term_));
       break;
 
     case Keyword:
       u.setPath(u.path() + QLatin1String("search"));
-      q.addQueryItem(QStringLiteral("q"), request().value());
+      q.addQueryItem(QStringLiteral("q"), term_);
       q.addQueryItem(QStringLiteral("count"), QString::number(DOUBAN_MAX_RETURNS_TOTAL));
       break;
 
     default:
       myWarning() << "key not recognized:" << request().key();
-      stop();
       return;
   }
 
@@ -119,12 +128,20 @@ void DoubanFetcher::search() {
   u.setQuery(q);
 //  myDebug() << "url:" << u.url();
 
-  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
+  QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  KJobWidgets::setWindow(job, GUI::Proxy::widget());
   if(request().key() == ISBN) {
-    connect(m_job.data(), &KJob::result, this, &DoubanFetcher::slotCompleteISBN);
+    connect(job.data(), &KJob::result, this, &DoubanFetcher::slotCompleteISBN);
   } else {
-    connect(m_job.data(), &KJob::result, this, &DoubanFetcher::slotComplete);
+    connect(job.data(), &KJob::result, this, &DoubanFetcher::slotComplete);
+  }
+  m_jobs << job;
+}
+
+void DoubanFetcher::endJob(KIO::StoredTransferJob* job_) {
+  m_jobs.removeAll(job_);
+  if(m_jobs.isEmpty())  {
+    stop();
   }
 }
 
@@ -132,10 +149,12 @@ void DoubanFetcher::stop() {
   if(!m_started) {
     return;
   }
-  if(m_job) {
-    m_job->kill();
-    m_job = nullptr;
+  foreach(auto job, m_jobs) {
+    if(job) {
+      job->kill();
+    }
   }
+  m_jobs.clear();
   m_started = false;
   emit signalDone(this);
 }
@@ -145,25 +164,23 @@ void DoubanFetcher::slotCompleteISBN(KJob* job_) {
 
   if(job->error()) {
     job->uiDelegate()->showErrorMessage();
-    stop();
+    endJob(job);
     return;
   }
 
   QByteArray data = job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
-    stop();
+    endJob(job);
     return;
   }
-  // see bug 319662. If fetcher is cancelled, job is killed
-  // if the pointer is retained, it gets double-deleted
-  m_job = nullptr;
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
   const QVariantMap resultMap = doc.object().toVariantMap();
 
-  // code == 6000 for no result
-  if(mapValue(resultMap, "code") == QLatin1String("6000")) {
+  // code == 6000 for no result, 997 for provisioning error
+  const auto code = mapValue(resultMap, "code");
+  if(code == QLatin1String("6000") || code == QLatin1String("997")) {
     message(mapValue(resultMap, "msg"), MessageHandler::Error);
   } else {
     Data::EntryPtr entry = createEntry(resultMap);
@@ -173,7 +190,7 @@ void DoubanFetcher::slotCompleteISBN(KJob* job_) {
     emit signalResultFound(r);
   }
 
-  stop();
+  endJob(job);
 }
 
 void DoubanFetcher::slotComplete(KJob* job_) {
@@ -181,19 +198,16 @@ void DoubanFetcher::slotComplete(KJob* job_) {
 
   if(job->error()) {
     job->uiDelegate()->showErrorMessage();
-    stop();
+    endJob(job);
     return;
   }
 
   QByteArray data = job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
-    stop();
+    endJob(job);
     return;
   }
-  // see bug 319662. If fetcher is cancelled, job is killed
-  // if the pointer is retained, it gets double-deleted
-  m_job = nullptr;
 
 #if 0
   myWarning() << "Remove debug from doubanfetcher.cpp";
@@ -243,7 +257,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
     }
   }
 
-  stop();
+  endJob(job);
 }
 
 Tellico::Data::EntryPtr DoubanFetcher::fetchEntryHook(uint uid_) {

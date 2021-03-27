@@ -83,13 +83,13 @@ void DoubanFetcherTest::testBookTitle() {
 
 void DoubanFetcherTest::testISBN() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       QStringLiteral("9787535765444"));
+                                       QStringLiteral("9787535765444; 9787208104235"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
   fetcher->readConfig(m_config);
 
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  QCOMPARE(results.size(), 1);
+  QCOMPARE(results.size(), 2);
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
@@ -110,6 +110,11 @@ void DoubanFetcherTest::testISBN() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
+
+  entry = results.at(1);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QString::fromUtf8("太空漫游"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("7535765440"));
 }
 
 void DoubanFetcherTest::testVideo() {

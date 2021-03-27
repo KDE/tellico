@@ -90,16 +90,18 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   virtual void resetSearch() {}
+  void doSearch(const QString& term);
   Data::EntryPtr createEntry(const QVariantMap& resultMap);
   void populateBookEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
   void populateVideoEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
   void populateMusicEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+  void endJob(KIO::StoredTransferJob* job);
 
   bool m_started;
 
   QHash<uint, QUrl> m_matches;
   QHash<uint, Data::EntryPtr> m_entries;
-  QPointer<KIO::StoredTransferJob> m_job;
+  QList< QPointer<KIO::StoredTransferJob> > m_jobs;
 };
 
   } // end namespace
