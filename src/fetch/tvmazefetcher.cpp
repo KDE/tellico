@@ -187,13 +187,7 @@ void TVmazeFetcher::slotComplete(KJob* job_) {
     coll->addField(Data::Field::createDefaultField(Data::Field::ImdbField));
   }
   if(optionalFields().contains(QStringLiteral("episode"))) {
-    Data::FieldPtr field(new Data::Field(QStringLiteral("episode"), i18n("Episodes"), Data::Field::Table));
-    field->setFormatType(FieldFormat::FormatTitle);
-    field->setProperty(QStringLiteral("columns"), QStringLiteral("3"));
-    field->setProperty(QStringLiteral("column1"), i18n("Title"));
-    field->setProperty(QStringLiteral("column2"), i18nc("TV Season", "Season"));
-    field->setProperty(QStringLiteral("column3"), i18nc("TV Episode", "Episode"));
-    coll->addField(field);
+    coll->addField(Data::Field::createDefaultField(Data::Field::EpisodeField));
   }
   if(optionalFields().contains(QStringLiteral("alttitle"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("alttitle"), i18n("Alternative Titles"), Data::Field::Table));

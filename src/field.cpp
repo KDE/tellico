@@ -331,6 +331,14 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
       field = new Field(QStringLiteral("imdb"), i18n("IMDb Link"), Field::URL);
       field->setCategory(i18n("General"));
       break;
+    case EpisodeField:
+      field = new Data::Field(QStringLiteral("episode"), i18n("Episodes"), Data::Field::Table);
+      field->setFormatType(FieldFormat::FormatTitle);
+      field->setProperty(QStringLiteral("columns"), QStringLiteral("3"));
+      field->setProperty(QStringLiteral("column1"), i18n("Title"));
+      field->setProperty(QStringLiteral("column2"), i18nc("TV Season", "Season"));
+      field->setProperty(QStringLiteral("column3"), i18nc("TV Episode", "Episode"));
+      break;
   }
   Q_ASSERT(field);
   return field;

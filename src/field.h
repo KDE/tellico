@@ -317,7 +317,8 @@ public:
     ModifiedDateField,
     IsbnField,
     PegiField,
-    ImdbField
+    ImdbField,
+    EpisodeField
   };
 
   static FieldPtr createDefaultField(DefaultField field);
