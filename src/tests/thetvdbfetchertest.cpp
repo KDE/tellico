@@ -79,3 +79,44 @@ void TheTVDBFetcherTest::testTitle() {
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
+
+void TheTVDBFetcherTest::testUpdate() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::VideoCollection(true));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("imdb"),
+                                                         QStringLiteral("IMDB"),
+                                                         Tellico::Data::Field::URL));
+  QCOMPARE(coll->addField(field), true);
+  Tellico::Data::EntryPtr oldEntry(new Tellico::Data::Entry(coll));
+  coll->addEntries(oldEntry);
+  oldEntry->setField(QStringLiteral("imdb"), QStringLiteral("https://www.imdb.com/title/tt0303461/?ref_=nv_sr_srsg_0"));
+
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheTVDBFetcher(this));
+  auto f = static_cast<Tellico::Fetch::TheTVDBFetcher*>(fetcher.data());
+  auto request = f->updateRequest(oldEntry);
+  request.setCollectionType(coll->type());
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QCOMPARE(request.value(), QStringLiteral("tt0303461"));
+  QCOMPARE(request.data(), QStringLiteral("imdb"));
+
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("thetvdb"));
+  cg.writeEntry("Custom Fields", QStringLiteral("imdb,episode,network"));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Firefly"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2002"));
+  QCOMPARE(entry->field(QStringLiteral("network")), QStringLiteral("FOX"));
+  QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("English"));
+  QCOMPARE(entry->field(QStringLiteral("certification")), QStringLiteral("TV-14"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Drama; Science Fiction"));
+  QCOMPARE(entry->field(QStringLiteral("imdb")), QStringLiteral("https://www.imdb.com/title/tt0303461"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
+}

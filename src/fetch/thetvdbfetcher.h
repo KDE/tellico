@@ -36,6 +36,7 @@ class KJob;
 namespace KIO {
   class StoredTransferJob;
 }
+class TheTVDBFetcherTest;
 
 namespace Tellico {
   namespace Fetch {
@@ -86,6 +87,7 @@ private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
+  friend class ::TheTVDBFetcherTest;
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);

@@ -130,6 +130,21 @@ void TheTVDBFetcher::continueSearch() {
       }
       break;
 
+    case Raw:
+      if(request().data() != QLatin1String("imdb")) {
+        myDebug() << source() << "raw data not recognized";
+        stop();
+        return;
+      }
+      u = u.adjusted(QUrl::StripTrailingSlash);
+      u.setPath(u.path() + QLatin1String("/search/series"));
+      {
+        QUrlQuery q;
+        q.addQueryItem(QStringLiteral("imdbId"), request().value());
+        u.setQuery(q);
+      }
+      break;
+
     default:
       myWarning() << "key not recognized:" << request().key();
       stop();
@@ -154,7 +169,21 @@ void TheTVDBFetcher::stop() {
 }
 
 Tellico::Fetch::FetchRequest TheTVDBFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QStringLiteral("title"));
+  QString imdb = entry_->field(QStringLiteral("imdb"));
+  if(imdb.isEmpty()) {
+    imdb = entry_->field(QStringLiteral("imdb-id"));
+  }
+  if(!imdb.isEmpty()) {
+    QRegularExpression ttRx(QStringLiteral("tt\\d+"));
+    auto ttMatch = ttRx.match(imdb);
+    if(ttMatch.hasMatch()) {
+      FetchRequest req(Raw, ttMatch.captured());
+      req.setData(QLatin1String("imdb")); // tell the request to use imdb criteria
+      return req;
+    }
+  }
+
+  const QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
