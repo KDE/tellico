@@ -476,10 +476,9 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   l->setColumnStretch(1, 10);
 
   int row = -1;
-  QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
-                               "If you agree to the terms and conditions, <a href='%2'>sign "
+  QLabel* al = new QLabel(i18n("Registration is required for accessing this data source. "
+                               "If you agree to the terms and conditions, <a href='%1'>sign "
                                "up for an account</a>, and enter your information below.",
-                                preferredName(),
                                 QLatin1String("https://www.discogs.com/developers/#page:authentication")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
