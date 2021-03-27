@@ -131,16 +131,19 @@ void TheTVDBFetcher::continueSearch() {
       break;
 
     case Raw:
-      if(request().data() != QLatin1String("imdb")) {
-        myDebug() << source() << "raw data not recognized";
-        stop();
-        return;
-      }
       u = u.adjusted(QUrl::StripTrailingSlash);
       u.setPath(u.path() + QLatin1String("/search/series"));
       {
         QUrlQuery q;
-        q.addQueryItem(QStringLiteral("imdbId"), request().value());
+        if(request().data() == QLatin1String("imdb")) {
+          q.addQueryItem(QStringLiteral("imdbId"), request().value());
+        } else if(request().data() == QLatin1String("slug")) {
+          q.addQueryItem(QStringLiteral("slug"), request().value());
+        } else {
+          myDebug() << source() << "raw data not recognized";
+          stop();
+          return;
+        }
         u.setQuery(q);
       }
       break;
@@ -179,6 +182,17 @@ Tellico::Fetch::FetchRequest TheTVDBFetcher::updateRequest(Data::EntryPtr entry_
     if(ttMatch.hasMatch()) {
       FetchRequest req(Raw, ttMatch.captured());
       req.setData(QLatin1String("imdb")); // tell the request to use imdb criteria
+      return req;
+    }
+  }
+
+  const QString thetvdb = entry_->field(QStringLiteral("thetvdb"));
+  if(!thetvdb.isEmpty()) {
+    QRegularExpression slugRx(QStringLiteral("series/(\\w+)"));
+    auto slugMatch = slugRx.match(thetvdb);
+    if(slugMatch.hasMatch()) {
+      FetchRequest req(Raw, slugMatch.captured(1));
+      req.setData(QLatin1String("slug")); // tell the request to use this as the slug
       return req;
     }
   }
@@ -228,6 +242,11 @@ void TheTVDBFetcher::slotComplete(KJob* job_) {
 
   if(optionalFields().contains(QStringLiteral("network"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("network"), i18n("Network"), Data::Field::Line));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
+  if(optionalFields().contains(QStringLiteral("thetvdb"))) {
+    Data::FieldPtr field(new Data::Field(QStringLiteral("thetvdb"), i18n("TheTVDB Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
@@ -378,6 +397,11 @@ void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
     entry_->setField(network, mapValue(resultMap_, "network"));
   }
 
+  const QString thetvdb(QStringLiteral("thetvdb"));
+  if(entry_->collection()->hasField(thetvdb)) {
+    entry_->setField(thetvdb, QLatin1String("https://thetvdb.com/series/") + mapValue(resultMap_, "slug"));
+  }
+
   const QString imdb(QStringLiteral("imdb"));
   if(entry_->collection()->hasField(imdb)) {
     entry_->setField(imdb, QLatin1String("https://www.imdb.com/title/") + mapValue(resultMap_, "imdbId"));
@@ -470,7 +494,7 @@ void TheTVDBFetcher::requestToken() {
     return;
   }
 
-  myDebug() << job->data();
+//  myDebug() << job->data();
   QJsonDocument doc = QJsonDocument::fromJson(job->data());
   if(doc.isNull()) {
     myDebug() << "TheTVDB: Invalid JSON in login response";
@@ -535,6 +559,7 @@ QString TheTVDBFetcher::defaultIcon() {
 
 Tellico::StringHash TheTVDBFetcher::allOptionalFields() {
   StringHash hash;
+  hash[QStringLiteral("thetvdb")] = i18n("TheTVDB Link");
   hash[QStringLiteral("imdb")] = i18n("IMDb Link");
   hash[QStringLiteral("episode")] = i18n("Episodes");
   hash[QStringLiteral("network")] = i18n("Network");

@@ -45,7 +45,7 @@ void TheTVDBFetcherTest::initTestCase() {
 
 void TheTVDBFetcherTest::testTitle() {
   KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("thetvdb"));
-  cg.writeEntry("Custom Fields", QStringLiteral("imdb,episode,network"));
+  cg.writeEntry("Custom Fields", QStringLiteral("thetvdb,imdb,episode,network"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
                                        QStringLiteral("Firefly"));
@@ -64,6 +64,7 @@ void TheTVDBFetcherTest::testTitle() {
   QCOMPARE(entry->field(QStringLiteral("network")), QStringLiteral("FOX"));
   QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("English"));
   QCOMPARE(entry->field(QStringLiteral("certification")), QStringLiteral("TV-14"));
+  QCOMPARE(entry->field(QStringLiteral("thetvdb")), QStringLiteral("https://thetvdb.com/series/firefly"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Drama; Science Fiction"));
   QVERIFY(entry->field(QStringLiteral("director")).startsWith(QStringLiteral("Joss Whedon; ")));
   QCOMPARE(entry->field(QStringLiteral("writer")), QStringLiteral("Joss Whedon; Tim Minear; Ben Edlund; Jane Espenson; Drew Z. Greenberg; Jose Molina; Cheryl Cain; Brett Matthews"));
@@ -82,18 +83,27 @@ void TheTVDBFetcherTest::testTitle() {
 
 void TheTVDBFetcherTest::testUpdate() {
   Tellico::Data::CollPtr coll(new Tellico::Data::VideoCollection(true));
-  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("imdb"),
-                                                         QStringLiteral("IMDB"),
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("thetvdb"),
+                                                         QStringLiteral("TheTVDB"),
                                                          Tellico::Data::Field::URL));
+  QCOMPARE(coll->addField(field), true);
+  field = new Tellico::Data::Field(QStringLiteral("imdb"),
+                                   QStringLiteral("IMDB"),
+                                   Tellico::Data::Field::URL);
   QCOMPARE(coll->addField(field), true);
   Tellico::Data::EntryPtr oldEntry(new Tellico::Data::Entry(coll));
   coll->addEntries(oldEntry);
-  oldEntry->setField(QStringLiteral("imdb"), QStringLiteral("https://www.imdb.com/title/tt0303461/?ref_=nv_sr_srsg_0"));
-
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheTVDBFetcher(this));
   auto f = static_cast<Tellico::Fetch::TheTVDBFetcher*>(fetcher.data());
+
+  oldEntry->setField(QStringLiteral("thetvdb"), QStringLiteral("https://thetvdb.com/series/firefly"));
   auto request = f->updateRequest(oldEntry);
-  request.setCollectionType(coll->type());
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QCOMPARE(request.value(), QStringLiteral("firefly"));
+  QCOMPARE(request.data(), QStringLiteral("slug"));
+
+  oldEntry->setField(QStringLiteral("imdb"), QStringLiteral("https://www.imdb.com/title/tt0303461/?ref_=nv_sr_srsg_0"));
+  request = f->updateRequest(oldEntry);
   QCOMPARE(request.key(), Tellico::Fetch::Raw);
   QCOMPARE(request.value(), QStringLiteral("tt0303461"));
   QCOMPARE(request.data(), QStringLiteral("imdb"));
@@ -102,6 +112,7 @@ void TheTVDBFetcherTest::testUpdate() {
   cg.writeEntry("Custom Fields", QStringLiteral("imdb,episode,network"));
   fetcher->readConfig(cg);
 
+  request.setCollectionType(coll->type());
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
