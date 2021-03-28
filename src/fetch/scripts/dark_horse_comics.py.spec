@@ -24,6 +24,7 @@ Name[nn]=Dark Horse Comics
 Name[pl]=Dark Horse Comics
 Name[pt]=Dark Horse Comics
 Name[pt_BR]=Quadrinhos Dark Horse
+Name[ru]=Dark Horse Comics
 Name[sk]=Komiksy Dark Horse
 Name[sl]=Dark Horse Comics
 Name[sv]=Dark Horse Comics
