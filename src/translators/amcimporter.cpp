@@ -37,7 +37,7 @@
 #include <QByteArray>
 #include <QApplication>
 
-#include <limits.h>
+#include <limits>
 #include <algorithm>
 
 #define AMC_FILE_ID " AMC_X.Y Ant Movie Catalog 3.5.x   www.buypin.com    www.antp.be "
@@ -123,7 +123,7 @@ quint32 AMCImporter::readInt() {
   }
   quint32 i;
   m_ds >> i;
-  if(i >= UINT_MAX) {
+  if(i >= std::numeric_limits<uint>::max()) {
     i = 0;
   }
   return i;
