@@ -12,7 +12,6 @@
 
 === User Interface
 * Replace most of the toggle actions in the view settings with KDualAction
-* Use KRatingWidget
 * When adding new default value to a field, offer to insert value in existing entries
 * Centralize all the optional fields inside CollectionManager so the names are ensured to stay consistent. Add UI for adding to collection outside of fetcher results.
 * Save the group view sorting in the config file and reload
