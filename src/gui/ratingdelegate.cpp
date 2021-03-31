@@ -43,7 +43,7 @@ void RatingDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
 
   //Paint rating
   const int rating = qRound(index.data(Qt::DisplayRole).toFloat());
-  StarRating starRating = StarRating(rating, StarRating::Medium);
+  StarRating starRating(rating, StarRating::Medium);
   starRating.setMaxRating(m_maxRating);
   QSize ratingSize = starRating.sizeHint();
   int ratingLeft = left + 2;
