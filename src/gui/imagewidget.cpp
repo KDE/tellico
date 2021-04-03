@@ -34,7 +34,7 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KProcess>
-#include <KMimeTypeTrader>
+#include <KApplicationTrader>
 #include <KIO/DesktopExecParser>
 #include <KSharedConfig>
 #include <KConfigGroup>
@@ -124,8 +124,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(nullpt
   QActionGroup* grp = new QActionGroup(this);
   grp->setExclusive(true);
   QAction* selectedAction = nullptr;
-  KService::List offers = KMimeTypeTrader::self()->query(QStringLiteral("image/png"),
-                                                         QStringLiteral("Application"));
+  KService::List offers = KApplicationTrader::queryByMimeType(QStringLiteral("image/png"));
   QSet<QString> offerNames;
   foreach(KService::Ptr service, offers) {
     if(offerNames.contains(service->name())) {
