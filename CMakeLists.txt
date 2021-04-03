@@ -5,9 +5,10 @@ project(Tellico)
 set(TELLICO_VERSION "3.4.1+git")
 
 set(QT_MIN_VERSION "5.4.0")
+set(KF5_MIN_VERSION "5.68.0")
 
 # FindPoppler was added to ECM in 5.19
-find_package(ECM 5.19 REQUIRED NO_MODULE)
+find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 
 if(POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW)
@@ -61,7 +62,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     PrintSupport
 )
 
-find_package(KF5 REQUIRED COMPONENTS
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Archive
     Codecs
     Config
@@ -108,13 +109,13 @@ find_package(Gettext REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
 
-find_package(KF5FileMetaData)
+find_package(KF5FileMetaData ${KF5_MIN_VERSION})
 set_package_properties(KF5FileMetaData PROPERTIES
     DESCRIPTION "Support for reading file metadata"
     URL "https://www.kde.org"
     TYPE OPTIONAL)
 
-find_package(KF5NewStuff)
+find_package(KF5NewStuff ${KF5_MIN_VERSION})
 set_package_properties(KF5NewStuff PROPERTIES
     DESCRIPTION "Support for fetching new templates and scripts"
     URL "https://www.kde.org"
