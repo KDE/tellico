@@ -22,36 +22,24 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "chartmanager.h"
-#include "collectionsizereport.h"
-#include "groupsummaryreport.h"
-#include "yeardistributionreport.h"
+#ifndef TELLICO_YEARDISTRIBUTIONREPORT_H
+#define TELLICO_YEARDISTRIBUTIONREPORT_H
 
-using Tellico::ChartManager;
+#include "chartreport.h"
 
-ChartManager* ChartManager::self() {
-  static ChartManager manager;
-  return &manager;
-}
+namespace Tellico {
 
-ChartManager::ChartManager() {
-  ChartReport* report = new CollectionSizeReport;
-  m_chartReports.insert(report->uuid(), report);
-  report = new GroupSummaryReport;
-  m_chartReports.insert(report->uuid(), report);
-  report = new YearDistributionReport;
-  m_chartReports.insert(report->uuid(), report);
-}
+class YearDistributionReport : public ChartReport {
 
-ChartManager::~ChartManager() {
-  qDeleteAll(m_chartReports);
-  m_chartReports.clear();
-}
+public:
+  YearDistributionReport();
 
-QList<Tellico::ChartReport*> ChartManager::allReports() {
-  return m_chartReports.values();
-}
+  virtual QString title() const Q_DECL_OVERRIDE;
+  virtual QWidget* createWidget()  Q_DECL_OVERRIDE;
 
-Tellico::ChartReport* ChartManager::report(const QUuid& uuid_) {
-  return m_chartReports.value(uuid_);
-}
+private:
+  class View;
+};
+
+} // end namespace
+#endif

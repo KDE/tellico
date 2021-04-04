@@ -5,6 +5,7 @@ SET(charts_STAT_SRCS
    chartmanager.cpp
    collectionsizereport.cpp
    groupsummaryreport.cpp
+   yeardistributionreport.cpp
 )
 
 add_library(charts STATIC ${charts_STAT_SRCS})
