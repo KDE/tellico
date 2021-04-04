@@ -336,30 +336,47 @@ void ReportDialog::slotPrint() {
 }
 
 void ReportDialog::slotSaveAs() {
-  QString filter = i18n("HTML Files") + QLatin1String(" (*.html)")
-                 + QLatin1String(";;")
-                 + i18n("All Files") + QLatin1String(" (*)");
-  QUrl u = QFileDialog::getSaveFileUrl(this, QString(), QUrl(), filter);
-  if(!u.isEmpty() && u.isValid()) {
-    KConfigGroup config(KSharedConfig::openConfig(), "ExportOptions");
-    bool encode = config.readEntry("EncodeUTF8", true);
-    long oldOpt = m_exporter->options();
-
-    // turn utf8 off
-    long options = oldOpt & ~Export::ExportUTF8;
-    // now turn it on if true
-    if(encode) {
-      options |= Export::ExportUTF8;
+  if(m_reportView->currentIndex() == INDEX_CHART) {
+    QString filter = i18n("PNG Files") + QLatin1String(" (*.png)")
+                  + QLatin1String(";;")
+                  + i18n("All Files") + QLatin1String(" (*)");
+    QUrl u = QFileDialog::getSaveFileUrl(this, QString(), QUrl(), filter);
+    if(!u.isEmpty() && u.isValid()) {
+      QWidget* widget = m_reportView->currentWidget();
+      // there might be a widget inside a scroll area
+      if(QScrollArea* scrollArea = qobject_cast<QScrollArea*>(widget)) {
+        widget = scrollArea->widget();
+      }
+      QPixmap pixmap(widget->size());
+      widget->render(&pixmap);
+      pixmap.save(u.toLocalFile());
     }
+  } else if(m_exporter) {
+    QString filter = i18n("HTML Files") + QLatin1String(" (*.html)")
+                  + QLatin1String(";;")
+                  + i18n("All Files") + QLatin1String(" (*)");
+    QUrl u = QFileDialog::getSaveFileUrl(this, QString(), QUrl(), filter);
+    if(!u.isEmpty() && u.isValid()) {
+      KConfigGroup config(KSharedConfig::openConfig(), "ExportOptions");
+      bool encode = config.readEntry("EncodeUTF8", true);
+      long oldOpt = m_exporter->options();
 
-    QUrl oldURL = m_exporter->url();
-    m_exporter->setOptions(options);
-    m_exporter->setURL(u);
+      // turn utf8 off
+      long options = oldOpt & ~Export::ExportUTF8;
+      // now turn it on if true
+      if(encode) {
+        options |= Export::ExportUTF8;
+      }
 
-    m_exporter->exec();
+      QUrl oldURL = m_exporter->url();
+      m_exporter->setOptions(options);
+      m_exporter->setURL(u);
 
-    m_exporter->setURL(oldURL);
-    m_exporter->setOptions(oldOpt);
+      m_exporter->exec();
+
+      m_exporter->setURL(oldURL);
+      m_exporter->setOptions(oldOpt);
+    }
   }
 }
 

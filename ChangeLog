@@ -1,5 +1,6 @@
 2021-04-04  Robby Stephenson  <robby@periapsis.org>
 
+	* Added capability to save charts as PNG files.
 	* Added Year Distribution chart report.
 
 2021-03-26  Robby Stephenson  <robby@periapsis.org>
