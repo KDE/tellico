@@ -131,6 +131,11 @@ QString Z3950Fetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+// No UPC or Raw for now.
+bool Z3950Fetcher::canSearch(Fetch::FetchKey k) const {
+  return k == Title || k == Person || k == ISBN || k == Keyword || k == LCCN;
+}
+
 bool Z3950Fetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }

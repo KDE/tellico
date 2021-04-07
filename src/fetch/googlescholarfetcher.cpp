@@ -66,6 +66,10 @@ QString GoogleScholarFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+bool GoogleScholarFetcher::canSearch(Fetch::FetchKey k) const {
+  return k == Title || k == Person || k == Keyword;
+}
+
 bool GoogleScholarFetcher::canFetch(int type) const {
   return type == Data::Collection::Bibtex;
 }

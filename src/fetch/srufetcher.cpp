@@ -90,6 +90,11 @@ QString SRUFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+// No Raw for now.
+bool SRUFetcher::canSearch(Fetch::FetchKey k) const {
+  return k == Title || k == Person || k == ISBN || k == Keyword || k == LCCN;
+}
+
 bool SRUFetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }

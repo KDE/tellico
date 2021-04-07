@@ -101,6 +101,10 @@ QString ExecExternalFetcher::source() const {
   return m_name;
 }
 
+bool ExecExternalFetcher::canSearch(Fetch::FetchKey k) const {
+  return m_args.contains(k) || (m_canUpdate && k == ExecUpdate);
+}
+
 bool ExecExternalFetcher::canFetch(int type_) const {
   return m_collType == -1 ? false : m_collType == type_;
 }

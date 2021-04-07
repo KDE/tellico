@@ -61,6 +61,10 @@ QString BibsonomyFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+bool BibsonomyFetcher::canSearch(Fetch::FetchKey k) const {
+  return k == Person || k == Keyword;
+}
+
 bool BibsonomyFetcher::canFetch(int type) const {
   return type == Data::Collection::Bibtex;
 }

@@ -61,6 +61,10 @@ QString DVDFrFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+bool DVDFrFetcher::canSearch(Fetch::FetchKey k) const {
+  return k == Title || k == UPC;
+}
+
 bool DVDFrFetcher::canFetch(int type) const {
   return type == Data::Collection::Video;
 }
