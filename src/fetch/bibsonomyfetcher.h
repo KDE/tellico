@@ -52,8 +52,7 @@ public:
 
   virtual QString source() const Q_DECL_OVERRIDE;
   virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
-
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == Person || k == Keyword; }
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
   virtual void stop() Q_DECL_OVERRIDE;
   virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
   virtual Type type() const Q_DECL_OVERRIDE { return Bibsonomy; }

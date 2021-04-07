@@ -70,6 +70,10 @@ QString ArxivFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+bool ArxivFetcher::canSearch(Fetch::FetchKey k) const {
+  return k == Title || k == Person || k == Keyword || k == ArxivID;
+}
+
 bool ArxivFetcher::canFetch(int type) const {
   return type == Data::Collection::Bibtex;
 }

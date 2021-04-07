@@ -61,7 +61,7 @@ public:
 
   virtual QString source() const Q_DECL_OVERRIDE;
   virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return m_args.contains(k) || (m_canUpdate && k == ExecUpdate); }
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
   virtual bool canUpdate() const Q_DECL_OVERRIDE { return m_canUpdate; }
   virtual void stop() Q_DECL_OVERRIDE;
   virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;

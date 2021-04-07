@@ -70,8 +70,7 @@ public:
   virtual QString source() const Q_DECL_OVERRIDE;
   virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
   virtual void continueSearch() Q_DECL_OVERRIDE;
-  // can search title, person, isbn, or keyword. No UPC or Raw for now.
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == Title || k == Person || k == ISBN || k == Keyword || k == LCCN; }
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
   virtual void stop() Q_DECL_OVERRIDE;
   virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
   virtual Type type() const Q_DECL_OVERRIDE { return Z3950; }
