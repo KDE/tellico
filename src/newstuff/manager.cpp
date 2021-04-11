@@ -119,7 +119,7 @@ bool Manager::installTemplate(const QString& file_) {
     if(QFile::exists(name)) {
       QFile::remove(name);
     }
-    KIO::Job* job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(name));
+    auto job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(name));
     if(job->exec()) {
       xslFile = QFileInfo(name).fileName();
       allFiles << xslFile;
@@ -162,7 +162,7 @@ bool Manager::removeTemplateByName(const QString& name_) {
     KConfigGroup config(KSharedConfig::openConfig(), "KNewStuffFiles");
     QString file = config.readEntry(xslFile, QString());
     if(!file.isEmpty()) {
-      return removeTemplate(file, true);
+      return removeTemplate(file);
     }
     // At least remove xsl file
     QFile::remove(Tellico::saveLocation(QStringLiteral("entry-templates/")) + xslFile);
@@ -171,7 +171,7 @@ bool Manager::removeTemplateByName(const QString& name_) {
   return false;
 }
 
-bool Manager::removeTemplate(const QString& file_, bool manual_) {
+bool Manager::removeTemplate(const QString& file_) {
   if(file_.isEmpty()) {
     return false;
   }
@@ -203,43 +203,10 @@ bool Manager::removeTemplate(const QString& file_, bool manual_) {
   fileGroup.deleteEntry(file_);
   QString key = fileGroup.entryMap().key(file_);
   fileGroup.deleteEntry(key);
-
-  if(manual_) {
-    removeNewStuffFile(file_);
-  }
   return success;
 }
 
-void Manager::removeNewStuffFile(const QString& file_) {
-//TODO KF5
-  Q_UNUSED(file_);
-#if 0
-  DEBUG_BLOCK;
-  if(file_.isEmpty()) {
-    return;
-  }
-  // remove newstuff meta file if that exists
-  QString newStuffDir = dirs.writableLocation("data", QLatin1String("knewstuff2-entries.registry/"));
-  QStringList metaFiles = QDir(newStuffDir).entryList(QStringList() << QLatin1String("*.meta"), QDir::Files);
-  QByteArray start = QString::fromLatin1(" <ghnsinstall payloadfile=\"%1\"").arg(file_).toUtf8();
-  foreach(const QString& meta, metaFiles) {
-    QFile f(newStuffDir + meta);
-    if(f.open(QIODevice::ReadOnly)) {
-      QByteArray firstLine = f.readLine();
-      if(firstLine.startsWith(start)) {
-        f.remove();
-        // It was newstuff file so remove payload also
-        QFile::remove(file_);
-        break;
-      }
-      f.close();
-    }
-  }
-#endif
-}
-
 bool Manager::installScript(const QString& file_) {
-  DEBUG_BLOCK;
   if(file_.isEmpty()) {
     return false;
   }
@@ -292,7 +259,7 @@ bool Manager::installScript(const QString& file_) {
     copyTarget += sourceName;
     scriptFolder = copyTarget + QDir::separator();
     QDir().mkpath(scriptFolder);
-    KIO::Job* job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(scriptFolder + exeFile));
+    auto job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(scriptFolder + exeFile));
     if(!job->exec()) {
       myDebug() << "Copy failed";
       return false;
@@ -339,7 +306,6 @@ bool Manager::installScript(const QString& file_) {
 }
 
 bool Manager::removeScriptByName(const QString& name_) {
-//  DEBUG_BLOCK;
   if(name_.isEmpty()) {
     return false;
   }
@@ -347,13 +313,12 @@ bool Manager::removeScriptByName(const QString& name_) {
   KConfigGroup config(KSharedConfig::openConfig(), "KNewStuffFiles");
   QString file = config.readEntry(name_, QString());
   if(!file.isEmpty()) {
-    return removeScript(file, true);
+    return removeScript(file);
   }
   return false;
 }
 
-bool Manager::removeScript(const QString& file_, bool manual_) {
-  DEBUG_BLOCK;
+bool Manager::removeScript(const QString& file_) {
   if(file_.isEmpty()) {
     return false;
   }
@@ -365,7 +330,7 @@ bool Manager::removeScript(const QString& file_, bool manual_) {
   int source = fileGroup.readEntry(file_ + QLatin1String("_nbr"), -1);
 
   if(!scriptFolder.isEmpty()) {
-    KIO::del(QUrl::fromLocalFile(scriptFolder));
+    KIO::del(QUrl::fromLocalFile(scriptFolder))->exec();
   }
   if(source != -1) {
     KConfigGroup configGroup(KSharedConfig::openConfig(), QStringLiteral("Data Sources"));
@@ -378,9 +343,6 @@ bool Manager::removeScript(const QString& file_, bool manual_) {
   fileGroup.deleteEntry(file_);
   QString key = fileGroup.entryMap().key(file_);
   fileGroup.deleteEntry(key);
-  if(manual_) {
-    removeNewStuffFile(file_);
-  }
   return success;
 }
 

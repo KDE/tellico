@@ -41,11 +41,11 @@ public:
   QMap<QString, QString> userTemplates();
   bool installTemplate(const QString& file);
   bool removeTemplateByName(const QString& name);
-  bool removeTemplate(const QString& file, bool manual = false);
+  bool removeTemplate(const QString& file);
 
   bool installScript(const QString& file);
   bool removeScriptByName(const QString& name);
-  bool removeScript(const QString& file, bool manual = false);
+  bool removeScript(const QString& file);
 
 private:
   friend class ManagerSingleton;

@@ -24,14 +24,22 @@
 
 #include "newstufftest.h"
 #include "../newstuff/manager.h"
+#include "../utils/tellico_utils.h"
 
 #include <QTest>
+#include <QStandardPaths>
 #include <QDBusConnection>
 #include <QDBusMessage>
 
 QTEST_MAIN( NewStuffTest )
 
 void NewStuffTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
+  // start with a clean test directory
+  QDir dir(Tellico::saveLocation(QStringLiteral("entry-templates/")));
+  QVERIFY(dir.removeRecursively());
+  dir.setPath(Tellico::saveLocation(QStringLiteral("data-sources/")));
+  QVERIFY(dir.removeRecursively());
   Tellico::NewStuff::Manager::self();
 }
 
@@ -54,4 +62,35 @@ void NewStuffTest::testConnection() {
 void NewStuffTest::testNewStuff() {
   auto list = Tellico::NewStuff::Manager::self()->userTemplates();
   QVERIFY(list.isEmpty());
+}
+
+void NewStuffTest::testInstallTemplate() {
+  auto startList = Tellico::NewStuff::Manager::self()->userTemplates();
+
+  const QString templateFile = QFINDTESTDATA("../../xslt/entry-templates/Compact.xsl");
+  QVERIFY(Tellico::NewStuff::Manager::self()->installTemplate(templateFile));
+  auto listAfterInstall = Tellico::NewStuff::Manager::self()->userTemplates();
+  QCOMPARE(startList.count(), listAfterInstall.count()-1); // one more file got installed
+  QVERIFY(listAfterInstall.contains(QStringLiteral("Compact")));
+
+  QVERIFY(Tellico::NewStuff::Manager::self()->removeTemplate(templateFile));
+  auto listAfterDelete = Tellico::NewStuff::Manager::self()->userTemplates();
+  QCOMPARE(startList.count(), listAfterDelete.count()); // one more file got installed
+  QVERIFY(!listAfterDelete.contains(QStringLiteral("Compact")));
+
+  QVERIFY(Tellico::NewStuff::Manager::self()->installTemplate(templateFile));
+  listAfterInstall = Tellico::NewStuff::Manager::self()->userTemplates();
+  QVERIFY(Tellico::NewStuff::Manager::self()->removeTemplateByName(QStringLiteral("Compact")));
+}
+
+void NewStuffTest::testInstallScript() {
+  QDir dir(Tellico::saveLocation(QStringLiteral("data-sources/dark_horse_comics/")));
+  QVERIFY(!dir.exists(QStringLiteral("dark_horse_comics.py")));
+
+  const QString scriptFile = QFINDTESTDATA("../fetch/scripts/dark_horse_comics.py");
+  QVERIFY(Tellico::NewStuff::Manager::self()->installScript(scriptFile));
+  QVERIFY(dir.exists(QStringLiteral("dark_horse_comics.py")));
+
+  QVERIFY(Tellico::NewStuff::Manager::self()->removeScriptByName(QStringLiteral("dark_horse_comics")));
+  QVERIFY(!dir.exists()); // complete directory should not exist
 }

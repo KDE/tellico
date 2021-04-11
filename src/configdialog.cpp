@@ -1111,7 +1111,7 @@ void ConfigDialog::loadTemplateList() {
 
   QString s = m_templateCombo->currentText();
   m_templateCombo->clear();
-  for(QMap<QString, QString>::ConstIterator it2 = templates.constBegin(); it2 != templates.constEnd(); ++it2) {
+  for(auto it2 = templates.constBegin(); it2 != templates.constEnd(); ++it2) {
     m_templateCombo->addItem(it2.key(), it2.value());
   }
   m_templateCombo->setCurrentItem(s);

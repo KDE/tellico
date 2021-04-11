@@ -34,6 +34,8 @@ private Q_SLOTS:
   void initTestCase();
   void testConnection();
   void testNewStuff();
+  void testInstallTemplate();
+  void testInstallScript();
 };
 
 #endif
