@@ -39,10 +39,12 @@
 #include <QRegularExpression>
 #include <QTemporaryDir>
 #include <QFile>
+#include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( HtmlExporterTest )
 
 void HtmlExporterTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/tellico2html.xsl"));

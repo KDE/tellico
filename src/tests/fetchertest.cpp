@@ -29,10 +29,12 @@
 
 #include <QTest>
 #include <QSignalSpy>
+#include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( FetcherTest )
 
 void FetcherTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::Fetch::FetcherInitializer initFetchers;
 }
 

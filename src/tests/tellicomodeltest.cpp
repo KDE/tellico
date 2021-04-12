@@ -42,10 +42,12 @@
 
 #include <QTest>
 #include <QSignalSpy>
+#include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( TellicoModelTest )
 
 void TellicoModelTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 }

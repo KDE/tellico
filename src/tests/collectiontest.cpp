@@ -66,6 +66,7 @@ private:
 };
 
 void CollectionTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   qRegisterMetaType<Tellico::EntryComparison::MatchValue>();
   Tellico::ImageFactory::init();
   // need to register the collection types

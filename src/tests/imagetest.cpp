@@ -29,10 +29,12 @@
 #include "../images/imagefactory.h"
 
 #include <QTest>
+#include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( ImageTest )
 
 void ImageTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::ImageFactory::init();
 }
 

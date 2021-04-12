@@ -32,6 +32,7 @@
 #include "../utils/datafileregistry.h"
 
 #include <QTest>
+#include <QStandardPaths>
 
 #define QSL(x) QStringLiteral(x)
 #define ROWS(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(QStringLiteral(fieldName)))
@@ -39,6 +40,7 @@
 QTEST_GUILESS_MAIN( GriffithTest )
 
 void GriffithTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/griffith2tellico.xsl"));
   Tellico::ImageFactory::init();
   // need to register the collection type

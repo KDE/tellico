@@ -33,6 +33,7 @@
 #include <QTemporaryFile>
 #include <QNetworkInterface>
 #include <QSignalSpy>
+#include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( ImageJobTest )
 
@@ -46,6 +47,7 @@ static bool hasNetwork() {
 }
 
 void ImageJobTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::ImageFactory::init();
 }
 

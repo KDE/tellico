@@ -35,10 +35,12 @@
 #include "../utils/datafileregistry.h"
 
 #include <QTest>
+#include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( VinoXMLTest )
 
 void VinoXMLTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/vinoxml2tellico.xsl"));
   // need to register the collection type
   Tellico::RegisterCollection<Tellico::Data::WineCollection> registerWine(Tellico::Data::Collection::Wine, "wine");
