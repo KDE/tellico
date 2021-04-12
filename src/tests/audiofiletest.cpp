@@ -33,10 +33,12 @@
 #include "../images/image.h"
 
 #include <QTest>
+#include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( AudioFileTest )
 
 void AudioFileTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::ImageFactory::init();
 }
 

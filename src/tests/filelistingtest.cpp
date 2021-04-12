@@ -32,11 +32,13 @@
 #include "../images/imagefactory.h"
 
 #include <QTest>
+#include <QStandardPaths>
 
 // KIO::listDir in FileListingImporter seems to require a GUI Application
 QTEST_MAIN( FileListingTest )
 
 void FileListingTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::ImageFactory::init();
 }
 

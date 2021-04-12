@@ -36,10 +36,12 @@
 #include "../utils/datafileregistry.h"
 
 #include <QTest>
+#include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( CollectorzTest )
 
 void CollectorzTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/collectorz2tellico.xsl"));
   // need to register the collection type
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");

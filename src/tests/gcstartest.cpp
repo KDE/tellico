@@ -35,6 +35,7 @@
 #include "../fieldformat.h"
 
 #include <QTest>
+#include <QStandardPaths>
 
 #define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(QStringLiteral(fieldName)))
 #define TABLES(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(QStringLiteral(fieldName)))
@@ -42,6 +43,7 @@
 QTEST_GUILESS_MAIN( GCstarTest )
 
 void GCstarTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::ImageFactory::init();
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/gcstar2tellico.xsl"));
   // need to register the collection types

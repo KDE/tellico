@@ -35,11 +35,13 @@
 #include "../utils/datafileregistry.h"
 
 #include <QTest>
+#include <QStandardPaths>
 
 // needs a GUI for QPixmaps
 QTEST_MAIN( PdfTest )
 
 void PdfTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBook(Tellico::Data::Collection::Bibtex, "bibliography");
   // since we use the XMP importer
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/xmp2tellico.xsl"));

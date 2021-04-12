@@ -31,12 +31,14 @@
 
 #include <QTest>
 #include <QTemporaryDir>
+#include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( AlexandriaTest )
 
 #define QSL(x) QStringLiteral(x)
 
 void AlexandriaTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::ImageFactory::init();
 }
 
