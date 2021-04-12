@@ -148,6 +148,10 @@ bool Tellico::checkCommonXSLFile() {
     }
   }
   QUrl src = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("tellico-common.xsl")));
+  if(src.isEmpty()) {
+    myDebug() << "checkCommonXSLFile() - could not locate tellico-common.xsl";
+    return false;
+  }
   QUrl dest = QUrl::fromLocalFile(userCommonFile);
   return KIO::file_copy(src, dest)->exec();
 }
