@@ -108,4 +108,15 @@ void NewStuffTest::testInstallScript() {
 
   QVERIFY(Tellico::NewStuff::Manager::self()->removeScriptByName(QStringLiteral("dark_horse_comics")));
   QVERIFY(!dir.exists()); // complete directory should not exist
+
+  QDBusInterface iface(QStringLiteral("org.kde.tellico"), QStringLiteral("/NewStuff"), QStringLiteral("org.kde.tellico.newstuff"));
+  QDBusReply<bool> reply = iface.call(QStringLiteral("installScript"), scriptFile);
+  QVERIFY(reply.isValid());
+  QCOMPARE(reply.value(), true);
+  QVERIFY(dir.exists(QStringLiteral("dark_horse_comics.py")));
+
+  reply = iface.call(QStringLiteral("removeScript"), scriptFile);
+  QVERIFY(reply.isValid());
+  QCOMPARE(reply.value(), true);
+  QVERIFY(!dir.exists()); // complete directory should not exist
 }
