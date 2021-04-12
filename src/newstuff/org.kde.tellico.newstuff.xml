@@ -4,15 +4,19 @@
     <interface name="org.kde.tellico.newstuff">
         <method name="installTemplate">
             <arg name="file" type="s" direction="in"/>
+            <arg name="result" type="b" direction="out"/>
         </method>
         <method name="removeTemplate">
             <arg name="file" type="s" direction="in"/>
+            <arg name="result" type="b" direction="out"/>
         </method>
         <method name="installScript">
             <arg name="file" type="s" direction="in"/>
+            <arg name="result" type="b" direction="out"/>
         </method>
         <method name="removeScript">
             <arg name="file" type="s" direction="in"/>
+            <arg name="result" type="b" direction="out"/>
         </method>
     </interface>
 </node>
