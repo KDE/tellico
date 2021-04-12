@@ -203,6 +203,7 @@ bool Manager::removeTemplate(const QString& file_) {
   fileGroup.deleteEntry(file_);
   QString key = fileGroup.entryMap().key(file_);
   fileGroup.deleteEntry(key);
+  KSharedConfig::openConfig()->sync();
   return success;
 }
 
@@ -294,7 +295,7 @@ bool Manager::installScript(const QString& file_) {
   //  myDebug() << "specFile = " << info->specFile;
   KConfigGroup configGroup(KSharedConfig::openConfig(), QStringLiteral("Data Sources"));
   int nSources = configGroup.readEntry("Sources Count", 0);
-  config.writeEntry(file_ + QLatin1String("_nbr"), nSources);
+  config.writeEntry(sourceName + QLatin1String("_nbr"), nSources);
   configGroup.writeEntry("Sources Count", nSources + 1);
   KConfigGroup sourceGroup(KSharedConfig::openConfig(), QStringLiteral("Data Source %1").arg(nSources));
   sourceGroup.writeEntry("Name", sourceName);
@@ -324,10 +325,20 @@ bool Manager::removeScript(const QString& file_) {
   }
   GUI::CursorSaver cs;
 
+  QFileInfo fi(file_);
+  const QString realFile = fi.fileName();
+  const QString sourceName = fi.completeBaseName();
+
   bool success = true;
   KConfigGroup fileGroup(KSharedConfig::openConfig(), "KNewStuffFiles");
   QString scriptFolder = fileGroup.readEntry(file_, QString());
+  if(scriptFolder.isEmpty()) {
+    scriptFolder = fileGroup.readEntry(realFile, QString());
+  }
   int source = fileGroup.readEntry(file_ + QLatin1String("_nbr"), -1);
+  if(source == -1) {
+    source = fileGroup.readEntry(sourceName + QLatin1String("_nbr"), -1);
+  }
 
   if(!scriptFolder.isEmpty()) {
     KIO::del(QUrl::fromLocalFile(scriptFolder))->exec();
@@ -339,10 +350,17 @@ bool Manager::removeScript(const QString& file_) {
     KConfigGroup sourceGroup(KSharedConfig::openConfig(), QStringLiteral("Data Source %1").arg(source));
     sourceGroup.deleteGroup();
   }
+
   // remove config entries even if unsuccessful
   fileGroup.deleteEntry(file_);
   QString key = fileGroup.entryMap().key(file_);
-  fileGroup.deleteEntry(key);
+  if(!key.isEmpty()) fileGroup.deleteEntry(key);
+  fileGroup.deleteEntry(realFile);
+  key = fileGroup.entryMap().key(realFile);
+  if(!key.isEmpty()) fileGroup.deleteEntry(key);
+  fileGroup.deleteEntry(file_ + QLatin1String("_nbr"));
+  fileGroup.deleteEntry(sourceName + QLatin1String("_nbr"));
+  KSharedConfig::openConfig()->sync();
   return success;
 }
 

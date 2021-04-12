@@ -1,3 +1,7 @@
+2021-04-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Added DBUS reply for install templates and scripts.
+
 2021-04-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Added capability to save charts as PNG files.

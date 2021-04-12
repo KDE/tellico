@@ -29,7 +29,8 @@
 #include <QTest>
 #include <QStandardPaths>
 #include <QDBusConnection>
-#include <QDBusMessage>
+#include <QDBusReply>
+#include <QDBusInterface>
 
 QTEST_MAIN( NewStuffTest )
 
@@ -55,8 +56,9 @@ void NewStuffTest::testConnection() {
                                             QStringLiteral("installTemplate")           // Method
                                            );
   msg.setArguments(QVariantList() << QString()); // one arg, file to install
-  auto reply = conn.call(msg);
-  QVERIFY(reply.type() == QDBusMessage::ReplyMessage);
+  QDBusReply<bool> reply = conn.call(msg);
+  QVERIFY(reply.isValid());
+  QCOMPARE(reply.value(), false); // false because of empty installation file
 }
 
 void NewStuffTest::testNewStuff() {
@@ -81,6 +83,19 @@ void NewStuffTest::testInstallTemplate() {
   QVERIFY(Tellico::NewStuff::Manager::self()->installTemplate(templateFile));
   listAfterInstall = Tellico::NewStuff::Manager::self()->userTemplates();
   QVERIFY(Tellico::NewStuff::Manager::self()->removeTemplateByName(QStringLiteral("Compact")));
+
+  QDBusInterface iface(QStringLiteral("org.kde.tellico"), QStringLiteral("/NewStuff"), QStringLiteral("org.kde.tellico.newstuff"));
+  QDBusReply<bool> reply = iface.call(QStringLiteral("installTemplate"), templateFile);
+  QVERIFY(reply.isValid());
+  QCOMPARE(reply.value(), true);
+  listAfterInstall = Tellico::NewStuff::Manager::self()->userTemplates();
+  QVERIFY(listAfterInstall.contains(QStringLiteral("Compact")));
+
+  reply = iface.call(QStringLiteral("removeTemplate"), templateFile);
+  QVERIFY(reply.isValid());
+  QCOMPARE(reply.value(), true);
+  listAfterDelete = Tellico::NewStuff::Manager::self()->userTemplates();
+  QVERIFY(!listAfterDelete.contains(QStringLiteral("Compact")));
 }
 
 void NewStuffTest::testInstallScript() {
@@ -92,5 +107,16 @@ void NewStuffTest::testInstallScript() {
   QVERIFY(dir.exists(QStringLiteral("dark_horse_comics.py")));
 
   QVERIFY(Tellico::NewStuff::Manager::self()->removeScriptByName(QStringLiteral("dark_horse_comics")));
+  QVERIFY(!dir.exists()); // complete directory should not exist
+
+  QDBusInterface iface(QStringLiteral("org.kde.tellico"), QStringLiteral("/NewStuff"), QStringLiteral("org.kde.tellico.newstuff"));
+  QDBusReply<bool> reply = iface.call(QStringLiteral("installScript"), scriptFile);
+  QVERIFY(reply.isValid());
+  QCOMPARE(reply.value(), true);
+  QVERIFY(dir.exists(QStringLiteral("dark_horse_comics.py")));
+
+  reply = iface.call(QStringLiteral("removeScript"), scriptFile);
+  QVERIFY(reply.isValid());
+  QCOMPARE(reply.value(), true);
   QVERIFY(!dir.exists()); // complete directory should not exist
 }
