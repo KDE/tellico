@@ -33,7 +33,7 @@
 #include <QUrlQuery>
 
 namespace {
-  static const char* DBC_API_URL = "https://oss-services.dbc.dk/opensearch/5.2/";
+  static const char* DBC_API_URL = "https://opensearch.addi.dk/test_5.2/";
   static const int DBC_MAX_RETURNS_TOTAL = 20;
 }
 
@@ -125,7 +125,12 @@ Tellico::Data::EntryPtr DBCFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
 }
 
 Tellico::Fetch::FetchRequest DBCFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QStringLiteral("title"));
+  const QString isbn = entry_->field(QStringLiteral("isbn"));
+  if(!isbn.isEmpty()) {
+    return FetchRequest(ISBN, isbn);
+  }
+
+  const QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Keyword, title);
   }
