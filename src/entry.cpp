@@ -229,8 +229,7 @@ bool Entry::setField(const QString& name_, const QString& value_, bool updateMDa
 bool Entry::setFieldImpl(const QString& name_, const QString& value_) {
   // an empty value means remove the field
   if(value_.isEmpty()) {
-    if(m_fieldValues.contains(name_)) {
-      m_fieldValues.remove(name_);
+    if(m_fieldValues.remove(name_)) {
       invalidateFormattedFieldValue(name_);
     }
     return true;
