@@ -346,12 +346,25 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
           e.appendChild(dom_.createTextNode(s[2]));
         }
       } else if(fIt->type() == Data::Field::URL &&
-                fIt->property(QStringLiteral("relative")) == QLatin1String("true") &&
-                !url().isEmpty()) {
+                fIt->property(QStringLiteral("relative")) == QLatin1String("true")) {
         // if a relative URL and url() is not empty, change the value!
         QUrl old_url = Data::Document::self()->URL().resolved(QUrl(fieldValue));
-        QString relPath = QDir(url().toLocalFile()).relativeFilePath(old_url.path());
-        fieldElem.appendChild(dom_.createTextNode(relPath));
+        if(options() & Export::ExportAbsoluteLinks) {
+          fieldElem.appendChild(dom_.createTextNode(old_url.url()));
+        } else if(!url().isEmpty()) {
+          QUrl new_url(url());
+          if(new_url.scheme() == old_url.scheme() &&
+             new_url.host() == old_url.host()) {
+            // try to calculate a new relative url
+            QString relPath = QDir(new_url.path()).relativeFilePath(old_url.path());
+            fieldElem.appendChild(dom_.createTextNode(relPath));
+          } else {
+            // use the absolute url here
+            fieldElem.appendChild(dom_.createTextNode(old_url.url()));
+          }
+        } else {
+          fieldElem.appendChild(dom_.createTextNode(fieldValue));
+        }
       } else {
         fieldElem.appendChild(dom_.createTextNode(fieldValue));
       }

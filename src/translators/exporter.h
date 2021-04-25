@@ -42,15 +42,16 @@ class QString;
 namespace Tellico {
   namespace Export {
     enum Options {
-      ExportFormatted   = 1 << 0,   // format entries when exported
-      ExportUTF8        = 1 << 1,   // valid for some text files, export as utf-8
-      ExportImages      = 1 << 2,   // should the images be included?
-      ExportForce       = 1 << 3,   // force the export, no confirmation of overwriting
-      ExportComplete    = 1 << 4,   // export complete document, including loans, etc.
-      ExportProgress    = 1 << 5,   // show progress bar
-      ExportClean       = 1 << 6,   // specifically for bibliographies, remove latex commands
-      ExportVerifyImages= 1 << 7,   // don't put in an image link that's not in the cache
-      ExportImageSize   = 1 << 8    // include image size in the generated XML
+      ExportFormatted     = 1 << 0,   // format entries when exported
+      ExportUTF8          = 1 << 1,   // valid for some text files, export as utf-8
+      ExportImages        = 1 << 2,   // should the images be included?
+      ExportForce         = 1 << 3,   // force the export, no confirmation of overwriting
+      ExportComplete      = 1 << 4,   // export complete document, including loans, etc.
+      ExportProgress      = 1 << 5,   // show progress bar
+      ExportClean         = 1 << 6,   // specifically for bibliographies, remove latex commands
+      ExportVerifyImages  = 1 << 7,   // don't put in an image link that's not in the cache
+      ExportImageSize     = 1 << 8,   // include image size in the generated XML
+      ExportAbsoluteLinks = 1 << 9    // convert relative Url links to absolute
     };
 
 /**

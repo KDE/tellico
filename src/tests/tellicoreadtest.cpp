@@ -32,10 +32,12 @@
 #include "../collectionfactory.h"
 #include "../translators/tellicoxmlexporter.h"
 #include "../translators/tellico_xml.h"
+#include "../translators/xslthandler.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../fieldformat.h"
 #include "../entry.h"
+#include "../document.h"
 #include "../utils/xmlhandler.h"
 
 #include <QTest>
@@ -500,4 +502,34 @@ void TellicoReadTest::testFutureVersion() {
 
   QVERIFY(!coll);
   QVERIFY(!importer.statusMessage().isEmpty());
+}
+
+void TellicoReadTest::testRelativeLink() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QSL("data/relative-link.xml")));
+
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QVERIFY(coll->hasField(QStringLiteral("url")));
+  Tellico::Data::EntryPtr entry = coll->entries().at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QStringLiteral("url")), QLatin1String("collectorz/image.png"));
+
+  Tellico::XSLTHandler handler(QFile::encodeName(QFINDTESTDATA("../../xslt/entry-templates/Compact.xsl")));
+  QVERIFY(handler.isValid());
+
+  Tellico::Data::Document::self()->setURL(url); // set the base url
+  QUrl expected = url.resolved(QUrl(QLatin1String("collectorz/image.png")));
+
+  Tellico::Export::TellicoXMLExporter exp(coll);
+  exp.setEntries(coll->entries());
+  QString output = handler.applyStylesheet(exp.text());
+  // first, the link should remain completely relative
+  QVERIFY(output.contains(QLatin1String("href=\"collectorz/image.png")));
+
+  exp.setOptions(exp.options() | Tellico::Export::ExportAbsoluteLinks);
+  output = handler.applyStylesheet(exp.text());
+  // now, the link should be absolute
+  QVERIFY(output.contains(expected.url()));
 }
