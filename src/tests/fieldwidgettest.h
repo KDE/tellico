@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,33 +22,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "urlfieldlogic.h"
+#ifndef FIELDWIDGETTEST_H
+#define FIELDWIDGETTEST_H
 
-#include <QDir>
+#include <QObject>
 
-using Tellico::UrlFieldLogic;
+class FieldWidgetTest : public QObject {
+Q_OBJECT
 
-UrlFieldLogic::UrlFieldLogic()
-  : m_isRelative(false) {
-}
+private Q_SLOTS:
+  void initTestCase();
+  void testUrl();
+};
 
-void UrlFieldLogic::setRelative(bool relative_) {
-  m_isRelative = relative_;
-}
-
-void UrlFieldLogic::setBaseUrl(const QUrl& baseUrl_) {
-  m_baseUrl = baseUrl_;
-}
-
-QString UrlFieldLogic::urlText(const QUrl& url_) const {
-  // if it's not relative or if the base URL is not set,
-  // then there's nothing to do. Return the URL as-is.
-  // Also, if the base URL is not a local file, then ignore it
-  if(url_.isEmpty() || !m_isRelative || m_baseUrl.isEmpty() || !m_baseUrl.isLocalFile()) {
-    // normalize the url
-    return url_.url(QUrl::PrettyDecoded | QUrl::NormalizePathSegments);
-  }
-  // BUG 410551: use the directory of the base url, not the file itself, in the QDir c'tor
-  return QDir(m_baseUrl.adjusted(QUrl::RemoveFilename).path())
-             .relativeFilePath(url_.path());
-}
+#endif

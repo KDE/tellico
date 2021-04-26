@@ -33,6 +33,7 @@
 #include <QPointer>
 
 class KUrlRequester;
+class FieldWidgetTest;
 
 namespace Tellico {
   namespace GUI {
@@ -42,6 +43,8 @@ namespace Tellico {
  */
 class URLFieldWidget : public FieldWidget {
 Q_OBJECT
+
+friend class ::FieldWidgetTest;
 
 public:
   URLFieldWidget(Data::FieldPtr field, QWidget* parent);

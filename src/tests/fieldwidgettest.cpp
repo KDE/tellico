@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,33 +22,37 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "urlfieldlogic.h"
 
-#include <QDir>
+#include "fieldwidgettest.h"
+#include "../gui/urlfieldwidget.h"
+#include "../document.h"
+#include "../images/imagefactory.h"
 
-using Tellico::UrlFieldLogic;
+#include <KUrlRequester>
 
-UrlFieldLogic::UrlFieldLogic()
-  : m_isRelative(false) {
+#include <QTest>
+
+// needs a GUI
+QTEST_MAIN( FieldWidgetTest )
+
+void FieldWidgetTest::initTestCase() {
+  Tellico::ImageFactory::init();
 }
 
-void UrlFieldLogic::setRelative(bool relative_) {
-  m_isRelative = relative_;
-}
+void FieldWidgetTest::testUrl() {
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("url"),
+                                                         QStringLiteral("url"),
+                                                         Tellico::Data::Field::URL));
+  Tellico::GUI::URLFieldWidget w(field, nullptr);
 
-void UrlFieldLogic::setBaseUrl(const QUrl& baseUrl_) {
-  m_baseUrl = baseUrl_;
-}
+  QUrl base = QUrl::fromLocalFile(QFINDTESTDATA("data/relative-link.xml"));
+  Tellico::Data::Document::self()->setURL(base); // set the base url
+  QUrl link = QUrl::fromLocalFile(QFINDTESTDATA("fieldwidgettest.cpp"));
+  w.m_requester->setUrl(link);
+  QCOMPARE(w.text(), link.url());
 
-QString UrlFieldLogic::urlText(const QUrl& url_) const {
-  // if it's not relative or if the base URL is not set,
-  // then there's nothing to do. Return the URL as-is.
-  // Also, if the base URL is not a local file, then ignore it
-  if(url_.isEmpty() || !m_isRelative || m_baseUrl.isEmpty() || !m_baseUrl.isLocalFile()) {
-    // normalize the url
-    return url_.url(QUrl::PrettyDecoded | QUrl::NormalizePathSegments);
-  }
-  // BUG 410551: use the directory of the base url, not the file itself, in the QDir c'tor
-  return QDir(m_baseUrl.adjusted(QUrl::RemoveFilename).path())
-             .relativeFilePath(url_.path());
+  field->setProperty(QStringLiteral("relative"), QStringLiteral("true"));
+  w.updateFieldHook(field, field);
+  // will be exactly up one level
+  QCOMPARE(w.text(), QStringLiteral("../fieldwidgettest.cpp"));
 }
