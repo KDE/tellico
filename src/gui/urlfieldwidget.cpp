@@ -24,7 +24,7 @@
 
 #include "urlfieldwidget.h"
 #include "../field.h"
-#include "../tellico_kernel.h"
+#include "../document.h"
 
 #include <KLineEdit>
 #include <KUrlRequester>
@@ -42,7 +42,7 @@ using Tellico::GUI::URLFieldWidget;
 QString URLFieldWidget::URLCompletion::makeCompletion(const QString& text_) {
   // KUrlCompletion::makeCompletion() uses an internal variable instead
   // of calling KUrlCompletion::dir() so need to set the base dir before completing
-  setDir(Kernel::self()->URL().adjusted(QUrl::PreferLocalFile | QUrl::RemoveFilename));
+  setDir(Data::Document::self()->URL().adjusted(QUrl::PreferLocalFile | QUrl::RemoveFilename));
   return KUrlCompletion::makeCompletion(text_);
 }
 
@@ -76,7 +76,7 @@ URLFieldWidget::~URLFieldWidget() {
 QString URLFieldWidget::text() const {
   // for comparison purposes and to be consistent with the file listing importer
   // I want the full url here, including the protocol
-  m_logic.setBaseUrl(Kernel::self()->URL());
+  m_logic.setBaseUrl(Data::Document::self()->URL());
   return m_logic.urlText(m_requester->url());
 }
 
@@ -100,7 +100,7 @@ void URLFieldWidget::slotOpenURL() {
     return;
   }
   QDesktopServices::openUrl(m_logic.isRelative() ?
-                            Kernel::self()->URL().resolved(QUrl::fromUserInput(url)) :
+                            Data::Document::self()->URL().resolved(QUrl::fromUserInput(url)) :
                             QUrl::fromUserInput(url));
 }
 

@@ -121,10 +121,7 @@ QString Entry::field(Tellico::Data::FieldPtr field_) const {
     return dv.value(EntryPtr(const_cast<Entry*>(this)), false);
   }
 
-  if(m_fieldValues.contains(field_->name())) {
-    return m_fieldValues.value(field_->name());
-  }
-  return QString();
+  return m_fieldValues.value(field_->name());
 }
 
 QString Entry::formattedField(const QString& fieldName_, FieldFormat::Request request_) const {
@@ -229,8 +226,7 @@ bool Entry::setField(const QString& name_, const QString& value_, bool updateMDa
 bool Entry::setFieldImpl(const QString& name_, const QString& value_) {
   // an empty value means remove the field
   if(value_.isEmpty()) {
-    if(m_fieldValues.contains(name_)) {
-      m_fieldValues.remove(name_);
+    if(m_fieldValues.remove(name_)) {
       invalidateFormattedFieldValue(name_);
     }
     return true;
@@ -330,7 +326,7 @@ bool Entry::isOwned() {
 void Entry::invalidateFormattedFieldValue(const QString& name_) {
   if(name_.isEmpty()) {
     m_formattedFields.clear();
-  } else if(!m_formattedFields.isEmpty() && m_formattedFields.contains(name_)) {
+  } else if(!m_formattedFields.isEmpty()) {
     m_formattedFields.remove(name_);
   }
 }

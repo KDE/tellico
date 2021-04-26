@@ -1,3 +1,11 @@
+2021-04-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed relative links in the Entry View (Bug 436071).
+
+2021-04-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated DBC data source.
+
 2021-04-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Added DBUS reply for install templates and scripts.

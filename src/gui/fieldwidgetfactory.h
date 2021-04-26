@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,44 +22,25 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICOREADTEST_H
-#define TELLICOREADTEST_H
+#ifndef TELLICO_FIELDWIDGETFACTORY_H
+#define TELLICO_FIELDWIDGETFACTORY_H
 
-#include <QObject>
-#include <QList>
+#include "../datavectors.h"
 
-#include "../collection.h"
+class QWidget;
 
-class TellicoReadTest : public QObject {
-Q_OBJECT
+namespace Tellico {
+  namespace GUI {
 
-private Q_SLOTS:
-  void initTestCase();
-  void init();
+class FieldWidget;
 
-  void testBookCollection();
-  void testEntries();
-  void testEntries_data();
-  void testCoinCollection();
-  void testBibtexCollection();
-  void testTableData();
-  void testDuplicateLoans();
-  void testDuplicateBorrowers();
-  void testLocalImage();
-  void testRemoteImage();
-  void testXMLHandler();
-  void testXMLHandler_data();
-  void testXmlName();
-  void testXmlName_data();
-  void testRecoverXmlName();
-  void testRecoverXmlName_data();
-  void testBug418067();
-  void testNoCreationDate();
-  void testFutureVersion();
-  void testRelativeLink();
+class FieldWidgetFactory {
+public:
+  // factory function
+  static Tellico::GUI::FieldWidget* create(Data::FieldPtr field_, QWidget* parent_);
 
-private:
-  QList<Tellico::Data::CollPtr> m_collections;
 };
 
+  } // end GUI namespace
+} // end namespace
 #endif

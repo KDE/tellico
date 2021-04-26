@@ -27,13 +27,15 @@
 #include "modstest.h"
 
 #include "../translators/xsltimporter.h"
-#include "../translators/xslthandler.cpp"
+#include "../translators/xslthandler.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../fieldformat.h"
 #include "../utils/datafileregistry.h"
 
 #include <QTest>
+#include <QDomDocument>
+#include <QTextCodec>
 
 QTEST_APPLESS_MAIN( ModsTest )
 
@@ -98,6 +100,6 @@ void ModsTest::testLocaleEncoding() {
   dom.setContent(xslt);
   QVERIFY(!dom.isNull());
   QVERIFY(dom.toString().contains(QLatin1String("windows-1251")));
-  XSLTHandler::setLocaleEncoding(dom);
+  Tellico::XSLTHandler::setLocaleEncoding(dom);
   QVERIFY(dom.toString().contains(QTextCodec::codecForLocale()->name()));
 }

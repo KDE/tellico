@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,44 +22,37 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICOREADTEST_H
-#define TELLICOREADTEST_H
 
-#include <QObject>
-#include <QList>
+#include "fieldwidgettest.h"
+#include "../gui/urlfieldwidget.h"
+#include "../document.h"
+#include "../images/imagefactory.h"
 
-#include "../collection.h"
+#include <KUrlRequester>
 
-class TellicoReadTest : public QObject {
-Q_OBJECT
+#include <QTest>
 
-private Q_SLOTS:
-  void initTestCase();
-  void init();
+// needs a GUI
+QTEST_MAIN( FieldWidgetTest )
 
-  void testBookCollection();
-  void testEntries();
-  void testEntries_data();
-  void testCoinCollection();
-  void testBibtexCollection();
-  void testTableData();
-  void testDuplicateLoans();
-  void testDuplicateBorrowers();
-  void testLocalImage();
-  void testRemoteImage();
-  void testXMLHandler();
-  void testXMLHandler_data();
-  void testXmlName();
-  void testXmlName_data();
-  void testRecoverXmlName();
-  void testRecoverXmlName_data();
-  void testBug418067();
-  void testNoCreationDate();
-  void testFutureVersion();
-  void testRelativeLink();
+void FieldWidgetTest::initTestCase() {
+  Tellico::ImageFactory::init();
+}
 
-private:
-  QList<Tellico::Data::CollPtr> m_collections;
-};
+void FieldWidgetTest::testUrl() {
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("url"),
+                                                         QStringLiteral("url"),
+                                                         Tellico::Data::Field::URL));
+  Tellico::GUI::URLFieldWidget w(field, nullptr);
 
-#endif
+  QUrl base = QUrl::fromLocalFile(QFINDTESTDATA("data/relative-link.xml"));
+  Tellico::Data::Document::self()->setURL(base); // set the base url
+  QUrl link = QUrl::fromLocalFile(QFINDTESTDATA("fieldwidgettest.cpp"));
+  w.m_requester->setUrl(link);
+  QCOMPARE(w.text(), link.url());
+
+  field->setProperty(QStringLiteral("relative"), QStringLiteral("true"));
+  w.updateFieldHook(field, field);
+  // will be exactly up one level
+  QCOMPARE(w.text(), QStringLiteral("../fieldwidgettest.cpp"));
+}

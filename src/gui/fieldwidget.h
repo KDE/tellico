@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -67,9 +67,6 @@ public:
 
   // only used by LineFieldWidget, really
   virtual void addCompletionObjectItem(const QString&) {}
-
-  // factory function
-  static FieldWidget* create(Data::FieldPtr field, QWidget* parent);
 
 public Q_SLOTS:
   virtual void insertDefault();

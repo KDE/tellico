@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,44 +22,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICOREADTEST_H
-#define TELLICOREADTEST_H
+#ifndef FIELDWIDGETTEST_H
+#define FIELDWIDGETTEST_H
 
 #include <QObject>
-#include <QList>
 
-#include "../collection.h"
-
-class TellicoReadTest : public QObject {
+class FieldWidgetTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
   void initTestCase();
-  void init();
-
-  void testBookCollection();
-  void testEntries();
-  void testEntries_data();
-  void testCoinCollection();
-  void testBibtexCollection();
-  void testTableData();
-  void testDuplicateLoans();
-  void testDuplicateBorrowers();
-  void testLocalImage();
-  void testRemoteImage();
-  void testXMLHandler();
-  void testXMLHandler_data();
-  void testXmlName();
-  void testXmlName_data();
-  void testRecoverXmlName();
-  void testRecoverXmlName_data();
-  void testBug418067();
-  void testNoCreationDate();
-  void testFutureVersion();
-  void testRelativeLink();
-
-private:
-  QList<Tellico::Data::CollPtr> m_collections;
+  void testUrl();
 };
 
 #endif

@@ -45,7 +45,8 @@ QString UrlFieldLogic::urlText(const QUrl& url_) const {
   // then there's nothing to do. Return the URL as-is.
   // Also, if the base URL is not a local file, then ignore it
   if(url_.isEmpty() || !m_isRelative || m_baseUrl.isEmpty() || !m_baseUrl.isLocalFile()) {
-    return url_.url();
+    // normalize the url
+    return url_.url(QUrl::PrettyDecoded | QUrl::NormalizePathSegments);
   }
   // BUG 410551: use the directory of the base url, not the file itself, in the QDir c'tor
   return QDir(m_baseUrl.adjusted(QUrl::RemoveFilename).path())

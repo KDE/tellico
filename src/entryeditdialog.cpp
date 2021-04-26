@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "entryeditdialog.h"
+#include "gui/fieldwidgetfactory.h"
 #include "gui/tabwidget.h"
 #include "collection.h"
 #include "controller.h"
@@ -207,7 +208,7 @@ void EntryEditDialog::resetLayout(Tellico::Data::CollPtr coll_) {
         noChoices = false;
       }
 
-      GUI::FieldWidget* widget = GUI::FieldWidget::create(field, grid);
+      GUI::FieldWidget* widget = GUI::FieldWidgetFactory::create(field, grid);
       if(!widget) {
         continue;
       }

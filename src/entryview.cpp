@@ -217,6 +217,8 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   long opt = exporter.options();
   // verify images for the view
   opt |= Export::ExportVerifyImages;
+  // use absolute links
+  opt |= Export::ExportAbsoluteLinks;
   // on second thought, don't auto-format everything, just clean it
   if(m_entry->collection()->type() == Data::Collection::Bibtex) {
     opt |= Export::ExportClean;

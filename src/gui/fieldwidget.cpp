@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,16 +23,6 @@
  ***************************************************************************/
 
 #include "fieldwidget.h"
-#include "linefieldwidget.h"
-#include "parafieldwidget.h"
-#include "boolfieldwidget.h"
-#include "choicefieldwidget.h"
-#include "numberfieldwidget.h"
-#include "urlfieldwidget.h"
-#include "imagefieldwidget.h"
-#include "datefieldwidget.h"
-#include "tablefieldwidget.h"
-#include "ratingfieldwidget.h"
 #include "../field.h"
 #include "../tellico_debug.h"
 
@@ -52,50 +42,6 @@ namespace {
 
 using Tellico::GUI::FieldWidget;
 
-FieldWidget* FieldWidget::create(Tellico::Data::FieldPtr field_, QWidget* parent_) {
-  if(field_->hasFlag(Data::Field::NoEdit) ||
-     field_->hasFlag(Data::Field::Derived)) {
-    myWarning() << "read-only/dependent field, this shouldn't have been called";
-    return nullptr;
-  }
-  switch(field_->type()) {
-    case Data::Field::Line:
-      return new GUI::LineFieldWidget(field_, parent_);
-
-    case Data::Field::Para:
-      return new GUI::ParaFieldWidget(field_, parent_);
-
-    case Data::Field::Bool:
-      return new GUI::BoolFieldWidget(field_, parent_);
-
-    case Data::Field::Number:
-      return new GUI::NumberFieldWidget(field_, parent_);
-
-    case Data::Field::Choice:
-      return new GUI::ChoiceFieldWidget(field_, parent_);
-
-    case Data::Field::Table:
-    case Data::Field::Table2:
-      return new GUI::TableFieldWidget(field_, parent_);
-
-    case Data::Field::Date:
-      return new GUI::DateFieldWidget(field_, parent_);
-
-    case Data::Field::URL:
-      return new GUI::URLFieldWidget(field_, parent_);
-
-    case Data::Field::Image:
-      return new GUI::ImageFieldWidget(field_, parent_);
-
-    case Data::Field::Rating:
-      return new GUI::RatingFieldWidget(field_, parent_);
-
-    default:
-      myWarning() << "unknown field type = " << field_->type();
-      return nullptr;
-  }
-}
-
 FieldWidget::FieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
     : QWidget(parent_), m_field(field_), m_settingText(false) {
   QHBoxLayout* l = new QHBoxLayout(this);
@@ -103,6 +49,7 @@ FieldWidget::FieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   l->setSpacing(2);
   l->addSpacing(4); // add some more space in the columns between widgets
 
+  Q_ASSERT(field_);
   Data::Field::Type type = field_->type();
   QString s = i18nc("Edit Label", "%1:", field_->title());
   if(type == Data::Field::URL) {

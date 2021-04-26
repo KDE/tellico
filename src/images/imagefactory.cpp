@@ -718,6 +718,7 @@ QString ImageFactory::localDirectory(const QUrl& url_) {
 }
 
 void ImageFactory::setLocalDirectory(const QUrl& url_) {
+  Q_ASSERT(factory && "ImageFactory is not initialized!");
   const QString localDirName = localDirectory(url_);
   if(!localDirName.isEmpty()) {
     factory->d->localImageDir.setPath(localDirName);
