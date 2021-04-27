@@ -55,4 +55,13 @@ void FieldWidgetTest::testUrl() {
   w.updateFieldHook(field, field);
   // will be exactly up one level
   QCOMPARE(w.text(), QStringLiteral("../fieldwidgettest.cpp"));
+
+// verify value after setting the relative link explicitly
+  w.setTextImpl(QStringLiteral("../fieldwidgettest.cpp"));
+  QCOMPARE(w.text(), QStringLiteral("../fieldwidgettest.cpp"));
+
+  field->setProperty(QStringLiteral("relative"), QStringLiteral("false"));
+  w.updateFieldHook(field, field);
+  // will be exactly up one level
+  QCOMPARE(w.text(), link.url());
 }
