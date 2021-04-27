@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2019 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2005-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -81,8 +81,16 @@ QString URLFieldWidget::text() const {
 }
 
 void URLFieldWidget::setTextImpl(const QString& text_) {
-  m_requester->setUrl(QUrl::fromUserInput(text_));
-  static_cast<KUrlLabel*>(label())->setUrl(text_);
+  if(text_.isEmpty()) {
+    m_requester->clear();
+    return;
+  }
+
+  QUrl url = m_logic.isRelative() ?
+             Data::Document::self()->URL().resolved(QUrl(text_)) :
+             QUrl::fromUserInput(text_);
+  m_requester->setUrl(url);
+  static_cast<KUrlLabel*>(label())->setUrl(url.url());
 }
 
 void URLFieldWidget::clearImpl() {
@@ -100,7 +108,7 @@ void URLFieldWidget::slotOpenURL() {
     return;
   }
   QDesktopServices::openUrl(m_logic.isRelative() ?
-                            Data::Document::self()->URL().resolved(QUrl::fromUserInput(url)) :
+                            Data::Document::self()->URL().resolved(QUrl(url)) :
                             QUrl::fromUserInput(url));
 }
 
