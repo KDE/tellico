@@ -530,8 +530,6 @@ void TellicoReadTest::testRelativeLink() {
 
   exp.setOptions(exp.options() | Tellico::Export::ExportAbsoluteLinks);
   output = handler.applyStylesheet(exp.text());
-  qDebug() << output;
-  qDebug() << "looking for" << expected.url();
   // now, the link should be absolute
   QVERIFY(output.contains(expected.url()));
 }
