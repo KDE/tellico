@@ -24,6 +24,7 @@
 
 
 #include "fieldwidgettest.h"
+#include "../gui/boolfieldwidget.h"
 #include "../gui/urlfieldwidget.h"
 #include "../document.h"
 #include "../images/imagefactory.h"
@@ -31,12 +32,35 @@
 #include <KUrlRequester>
 
 #include <QTest>
+#include <QCheckBox>
 
 // needs a GUI
 QTEST_MAIN( FieldWidgetTest )
 
 void FieldWidgetTest::initTestCase() {
   Tellico::ImageFactory::init();
+}
+
+void FieldWidgetTest::testBool() {
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("bool"),
+                                                         QStringLiteral("bool"),
+                                                         Tellico::Data::Field::Bool));
+  Tellico::GUI::BoolFieldWidget w(field, nullptr);
+  QVERIFY(w.text().isEmpty());
+  w.setTextImpl(QStringLiteral("true"));
+  QCOMPARE(w.text(), QStringLiteral("true"));
+  QCheckBox* cb = dynamic_cast<QCheckBox*>(w.widget());
+  QVERIFY(cb);
+  QVERIFY(cb->isChecked());
+
+  // any non-empty text is interpreted as true (for better or worse)
+  w.setTextImpl(QStringLiteral("false"));
+  QCOMPARE(w.text(), QStringLiteral("true"));
+  QVERIFY(cb->isChecked());
+
+  w.clearImpl();
+  QVERIFY(w.text().isEmpty());
+  QVERIFY(!cb->isChecked());
 }
 
 void FieldWidgetTest::testUrl() {

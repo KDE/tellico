@@ -262,7 +262,8 @@ ecm_add_test(delicioustest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest rtf2html-tellico
 )
 
-ecm_add_test(fieldwidgettest.cpp ../fieldformat.cpp
+ecm_add_test(fieldwidgettest.cpp
+             ../gui/boolfieldwidget.cpp
              ../gui/urlfieldwidget.cpp
              ../gui/urlfieldlogic.cpp
              ../gui/fieldwidget.cpp
