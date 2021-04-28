@@ -28,6 +28,8 @@
 #include "fieldwidget.h"
 #include "../datavectors.h"
 
+class FieldWidgetTest;
+
 namespace Tellico {
   namespace GUI {
     class LineEdit;
@@ -37,6 +39,8 @@ namespace Tellico {
  */
 class LineFieldWidget : public FieldWidget {
 Q_OBJECT
+
+friend class ::FieldWidgetTest;
 
 public:
   LineFieldWidget(Data::FieldPtr field, QWidget* parent);

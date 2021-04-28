@@ -98,8 +98,10 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
     m_monthCombo->addItem(str);
   }
 
-  m_yearSpin = new SpinBox(QDate::fromJulianDay(0).year(),
-                           9999, this);
+  // the min year is the value when the year is empty
+  const int minYear = QDate::fromJulianDay(0).year() - 1;
+  m_yearSpin = new SpinBox(minYear, 9999, this);
+  m_yearSpin->setValue(minYear);
   l->addWidget(m_yearSpin, 1);
   l->setStretchFactor(m_yearSpin, 1);
 
@@ -197,7 +199,7 @@ QString DateWidget::text() const {
   return empty ? QString() : s;
 }
 
-void DateWidget::setDate(QDate date_) {
+void DateWidget::setDate(const QDate& date_) {
   m_daySpin->blockSignals(true);
   m_monthCombo->blockSignals(true);
   m_yearSpin->blockSignals(true);

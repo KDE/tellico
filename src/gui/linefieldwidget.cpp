@@ -26,7 +26,7 @@
 #include "../field.h"
 #include "../fieldformat.h"
 #include "../fieldcompletion.h"
-#include "../tellico_kernel.h"
+#include "../document.h"
 #include "../gui/lineedit.h"
 #include "../utils/isbnvalidator.h"
 
@@ -44,7 +44,7 @@ LineFieldWidget::LineFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
 
   if(field_->hasFlag(Data::Field::AllowCompletion)) {
     FieldCompletion* completion = new FieldCompletion(field_->hasFlag(Data::Field::AllowMultiple));
-    completion->setItems(Kernel::self()->valuesByFieldName(field_->name()));
+    completion->setItems(Data::Document::self()->collection()->valuesByFieldName(field_->name()));
     completion->setIgnoreCase(true);
     m_lineEdit->setCompletionObject(completion);
     m_lineEdit->setAutoDeleteCompletionObject(true);
@@ -81,7 +81,7 @@ void LineFieldWidget::updateFieldHook(Tellico::Data::FieldPtr oldField_, Tellico
   bool isComplete = (newField_->hasFlag(Data::Field::AllowCompletion));
   if(!wasComplete && isComplete) {
     FieldCompletion* completion = new FieldCompletion(isComplete);
-    completion->setItems(Kernel::self()->valuesByFieldName(newField_->name()));
+    completion->setItems(Data::Document::self()->collection()->valuesByFieldName(newField_->name()));
     completion->setIgnoreCase(true);
     m_lineEdit->setCompletionObject(completion);
     m_lineEdit->setAutoDeleteCompletionObject(true);

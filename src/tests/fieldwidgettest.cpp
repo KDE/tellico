@@ -25,6 +25,11 @@
 
 #include "fieldwidgettest.h"
 #include "../gui/boolfieldwidget.h"
+#include "../gui/choicefieldwidget.h"
+#include "../gui/datefieldwidget.h"
+#include "../gui/datewidget.h"
+#include "../gui/linefieldwidget.h"
+#include "../gui/lineedit.h"
 #include "../gui/urlfieldwidget.h"
 #include "../document.h"
 #include "../images/imagefactory.h"
@@ -33,6 +38,7 @@
 
 #include <QTest>
 #include <QCheckBox>
+#include <QComboBox>
 
 // needs a GUI
 QTEST_MAIN( FieldWidgetTest )
@@ -45,22 +51,113 @@ void FieldWidgetTest::testBool() {
   Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("bool"),
                                                          QStringLiteral("bool"),
                                                          Tellico::Data::Field::Bool));
+  field->setDefaultValue(QStringLiteral("true"));
   Tellico::GUI::BoolFieldWidget w(field, nullptr);
   QVERIFY(w.text().isEmpty());
-  w.setTextImpl(QStringLiteral("true"));
+  w.setText(QStringLiteral("true"));
   QCOMPARE(w.text(), QStringLiteral("true"));
   QCheckBox* cb = dynamic_cast<QCheckBox*>(w.widget());
   QVERIFY(cb);
   QVERIFY(cb->isChecked());
 
   // any non-empty text is interpreted as true (for better or worse)
-  w.setTextImpl(QStringLiteral("false"));
+  w.setText(QStringLiteral("false"));
   QCOMPARE(w.text(), QStringLiteral("true"));
   QVERIFY(cb->isChecked());
 
-  w.clearImpl();
+  w.clear();
   QVERIFY(w.text().isEmpty());
   QVERIFY(!cb->isChecked());
+
+  w.insertDefault();
+  QCOMPARE(w.text(), QStringLiteral("true"));
+  QVERIFY(cb->isChecked());
+}
+
+void FieldWidgetTest::testChoice() {
+  // create a Choice field
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("f"),
+                                                         QStringLiteral("f"),
+                                                         QStringList()));
+  Tellico::GUI::ChoiceFieldWidget w(field, nullptr);
+  QVERIFY(w.text().isEmpty());
+  QComboBox* cb = dynamic_cast<QComboBox*>(w.widget());
+  QVERIFY(cb);
+  QCOMPARE(cb->count(), 1); // one empty value
+
+  field->setAllowed(QStringList() << QStringLiteral("choice1") << QStringLiteral("choice2"));
+  w.updateFieldHook(field, field);
+  QVERIFY(w.text().isEmpty());
+
+  w.setText(QStringLiteral("choice2"));
+  QCOMPARE(w.text(), QStringLiteral("choice2"));
+  QCOMPARE(cb->count(), 3);
+
+  field->setAllowed(QStringList() << QStringLiteral("choice1") << QStringLiteral("choice2") << QStringLiteral("choice3"));
+  w.updateFieldHook(field, field);
+  // selected value should remain same
+  QCOMPARE(w.text(), QStringLiteral("choice2"));
+
+  // set value to something not in the list
+  w.setText(QStringLiteral("choice4"));
+  QCOMPARE(w.text(), QStringLiteral("choice4"));
+  QCOMPARE(cb->count(), 5);
+
+  w.insertDefault();
+  QVERIFY(w.text().isEmpty());
+}
+
+void FieldWidgetTest::testDate() {
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("d"),
+                                                         QStringLiteral("d"),
+                                                         Tellico::Data::Field::Date));
+  Tellico::GUI::DateFieldWidget w(field, nullptr);
+  auto dw = dynamic_cast<Tellico::GUI::DateWidget*>(w.widget());
+  QVERIFY(dw);
+  QVERIFY(w.text().isEmpty());
+  QVERIFY(dw->date().isNull());
+
+  QDate moon(1969, 7, 20);
+  w.setText(QStringLiteral("1969-07-20"));
+  QCOMPARE(w.text(), QStringLiteral("1969-07-20"));
+  QCOMPARE(dw->date(), moon);
+  // test without leading zero
+  w.setText(QStringLiteral("1969-7-20"));
+  QCOMPARE(w.text(), QStringLiteral("1969-07-20"));
+  QCOMPARE(dw->date(), moon);
+
+  w.setText(QString());
+  QVERIFY(w.text().isEmpty());
+  QVERIFY(dw->date().isNull());
+
+  w.setText(QStringLiteral("1969"));
+  // adds dashes
+  QCOMPARE(w.text(), QStringLiteral("1969--"));
+  QVERIFY(dw->date().isNull());
+
+  QDate sputnik(1957, 10, 4);
+  dw->setDate(sputnik);
+  QCOMPARE(w.text(), QStringLiteral("1957-10-04"));
+  QCOMPARE(dw->date(), sputnik);
+
+  w.clear();
+  QVERIFY(w.text().isEmpty());
+  QVERIFY(dw->date().isNull());
+}
+
+void FieldWidgetTest::testLine() {
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("f"),
+                                                         QStringLiteral("f")));
+  Tellico::GUI::LineFieldWidget w(field, nullptr);
+  QVERIFY(w.text().isEmpty());
+  w.setText(QStringLiteral("true"));
+  QCOMPARE(w.text(), QStringLiteral("true"));
+  auto le = dynamic_cast<Tellico::GUI::LineEdit*>(w.widget());
+  QVERIFY(le);
+  QVERIFY(!le->validator());
+
+  w.clear();
+  QVERIFY(w.text().isEmpty());
 }
 
 void FieldWidgetTest::testUrl() {
@@ -81,7 +178,7 @@ void FieldWidgetTest::testUrl() {
   QCOMPARE(w.text(), QStringLiteral("../fieldwidgettest.cpp"));
 
 // verify value after setting the relative link explicitly
-  w.setTextImpl(QStringLiteral("../fieldwidgettest.cpp"));
+  w.setText(QStringLiteral("../fieldwidgettest.cpp"));
   QCOMPARE(w.text(), QStringLiteral("../fieldwidgettest.cpp"));
 
   field->setProperty(QStringLiteral("relative"), QStringLiteral("false"));
