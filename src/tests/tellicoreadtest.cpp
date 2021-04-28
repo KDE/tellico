@@ -516,7 +516,7 @@ void TellicoReadTest::testRelativeLink() {
   QVERIFY(entry);
   QCOMPARE(entry->field(QStringLiteral("url")), QLatin1String("collectorz/image.png"));
 
-  Tellico::XSLTHandler handler(QFile::encodeName(QFINDTESTDATA("../../xslt/entry-templates/Compact.xsl")));
+  Tellico::XSLTHandler handler(QFile::encodeName(QFINDTESTDATA("data/output-url.xsl")));
   QVERIFY(handler.isValid());
 
   Tellico::Data::Document::self()->setURL(url); // set the base url
@@ -530,6 +530,8 @@ void TellicoReadTest::testRelativeLink() {
 
   exp.setOptions(exp.options() | Tellico::Export::ExportAbsoluteLinks);
   output = handler.applyStylesheet(exp.text());
+  qDebug() << output;
+  qDebug() << "looking for" << expected.url();
   // now, the link should be absolute
   QVERIFY(output.contains(expected.url()));
 }
