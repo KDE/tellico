@@ -64,4 +64,8 @@ void FieldWidgetTest::testUrl() {
   w.updateFieldHook(field, field);
   // will be exactly up one level
   QCOMPARE(w.text(), link.url());
+
+  w.clear();
+  QVERIFY(w.text().isEmpty());
+  QVERIFY(w.m_requester->url().isEmpty());
 }
