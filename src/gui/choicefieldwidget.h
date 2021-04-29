@@ -29,6 +29,7 @@
 #include "../datavectors.h"
 
 class QComboBox;
+class FieldWidgetTest;
 
 namespace Tellico {
   namespace GUI {
@@ -38,6 +39,8 @@ namespace Tellico {
  */
 class ChoiceFieldWidget : public FieldWidget {
 Q_OBJECT
+
+friend class ::FieldWidgetTest;
 
 public:
   ChoiceFieldWidget(Data::FieldPtr field, QWidget* parent);

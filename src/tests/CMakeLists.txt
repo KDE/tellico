@@ -262,16 +262,24 @@ ecm_add_test(delicioustest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest rtf2html-tellico
 )
 
-ecm_add_test(fieldwidgettest.cpp ../fieldformat.cpp
+ecm_add_test(fieldwidgettest.cpp
+             ../gui/boolfieldwidget.cpp
+             ../gui/choicefieldwidget.cpp
+             ../gui/datefieldwidget.cpp
+             ../gui/datewidget.cpp
+             ../gui/spinbox.cpp
+             ../gui/linefieldwidget.cpp
+             ../gui/lineedit.cpp
              ../gui/urlfieldwidget.cpp
              ../gui/urlfieldlogic.cpp
              ../gui/fieldwidget.cpp
              ../document.cpp
+             ../fieldcompletion.cpp
              ../translators/tellicoxmlexporter.cpp
              ../translators/tellicozipexporter.cpp
              ../translators/exporter.cpp
     TEST_NAME fieldwidgettest
-    LINK_LIBRARIES translatorstest ${TELLICO_TEST_LIBS}
+    LINK_LIBRARIES translatorstest ${TELLICO_TEST_LIBS} KF5::XmlGui KF5::SonnetCore KF5::SonnetUi
 )
 
 ecm_add_test(filelistingtest.cpp

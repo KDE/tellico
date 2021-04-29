@@ -30,6 +30,7 @@
 
 class QCheckBox;
 class QString;
+class FieldWidgetTest;
 
 namespace Tellico {
   namespace GUI {
@@ -39,6 +40,8 @@ namespace Tellico {
  */
 class BoolFieldWidget : public FieldWidget {
 Q_OBJECT
+
+friend class ::FieldWidgetTest;
 
 public:
   BoolFieldWidget(Data::FieldPtr field, QWidget* parent);

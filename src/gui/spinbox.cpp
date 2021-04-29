@@ -32,7 +32,7 @@ SpinBox::SpinBox(int min_, int max_, QWidget * parent_) : QSpinBox(parent_) {
   setMinimum(min_);
   setMaximum(max_);
   setAlignment(Qt::AlignRight);
-  // I want to be able to have an empty value
+  // I want to be able to have an empty value at the minimum
   // an empty string just removes the special value, so set white space
   setSpecialValueText(QStringLiteral(" "));
   connect(lineEdit(), &QLineEdit::textChanged, this, &SpinBox::checkValue);

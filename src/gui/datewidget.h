@@ -51,7 +51,7 @@ public:
 
   QDate date() const;
   QString text() const;
-  void setDate(QDate date);
+  void setDate(const QDate& date);
   void setDate(const QString& date);
   void clear();
 

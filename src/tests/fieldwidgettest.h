@@ -32,6 +32,10 @@ Q_OBJECT
 
 private Q_SLOTS:
   void initTestCase();
+  void testBool();
+  void testChoice();
+  void testDate();
+  void testLine();
   void testUrl();
 };
 
