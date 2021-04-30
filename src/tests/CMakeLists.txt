@@ -270,6 +270,7 @@ ecm_add_test(fieldwidgettest.cpp
              ../gui/spinbox.cpp
              ../gui/linefieldwidget.cpp
              ../gui/lineedit.cpp
+             ../gui/numberfieldwidget.cpp
              ../gui/urlfieldwidget.cpp
              ../gui/urlfieldlogic.cpp
              ../gui/fieldwidget.cpp

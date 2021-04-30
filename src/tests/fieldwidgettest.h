@@ -36,6 +36,7 @@ private Q_SLOTS:
   void testChoice();
   void testDate();
   void testLine();
+  void testNumber();
   void testUrl();
 };
 
