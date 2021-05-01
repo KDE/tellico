@@ -28,6 +28,8 @@
 #include "fieldwidget.h"
 #include "../datavectors.h"
 
+class FieldWidgetTest;
+
 namespace Tellico {
   namespace GUI {
     class RatingWidget;
@@ -37,6 +39,8 @@ namespace Tellico {
  */
 class RatingFieldWidget : public FieldWidget {
 Q_OBJECT
+
+friend class ::FieldWidgetTest;
 
 public:
   RatingFieldWidget(Data::FieldPtr field, QWidget* parent);

@@ -33,6 +33,8 @@
 #include "../gui/numberfieldwidget.h"
 #include "../gui/spinbox.h"
 #include "../gui/parafieldwidget.h"
+#include "../gui/ratingwidget.h"
+#include "../gui/ratingfieldwidget.h"
 #include "../gui/urlfieldwidget.h"
 #include "../document.h"
 #include "../images/imagefactory.h"
@@ -187,7 +189,6 @@ void FieldWidgetTest::testPara() {
 }
 
 void FieldWidgetTest::testNumber() {
-  // create a Choice field
   Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("f"),
                                                          QStringLiteral("f"),
                                                          Tellico::Data::Field::Number));
@@ -217,6 +218,31 @@ void FieldWidgetTest::testNumber() {
   w.setText(QStringLiteral("1;2"));
   QCOMPARE(w.text(), QStringLiteral("1; 2"));
   w.clear();
+  QVERIFY(w.text().isEmpty());
+}
+
+void FieldWidgetTest::testRating() {
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("f"),
+                                                         QStringLiteral("f"),
+                                                         Tellico::Data::Field::Rating));
+  Tellico::GUI::RatingFieldWidget w(field, nullptr);
+  QVERIFY(w.text().isEmpty());
+  auto rating = dynamic_cast<Tellico::GUI::RatingWidget*>(w.widget());
+  QVERIFY(rating);
+
+  w.setText(QStringLiteral("1"));
+  QCOMPARE(w.text(), QStringLiteral("1"));
+  w.setText(QStringLiteral("1; 2"));
+  QCOMPARE(w.text(), QStringLiteral("1"));
+  w.clear();
+  QVERIFY(w.text().isEmpty());
+
+  field->setProperty(QStringLiteral("minimum"), QStringLiteral("5"));
+  field->setProperty(QStringLiteral("maximum"), QStringLiteral("7"));
+  w.setText(QStringLiteral("4"));
+  w.updateField(field, field);
+  QVERIFY(w.text().isEmpty()); // empty since 4 is less than minimum
+  w.setText(QStringLiteral("8"));
   QVERIFY(w.text().isEmpty());
 }
 
