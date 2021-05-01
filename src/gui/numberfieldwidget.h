@@ -29,6 +29,7 @@
 #include "../datavectors.h"
 
 class QLineEdit;
+class FieldWidgetTest;
 
 namespace Tellico {
   namespace GUI {
@@ -40,6 +41,8 @@ class SpinBox;
  */
 class NumberFieldWidget : public FieldWidget {
 Q_OBJECT
+
+friend class ::FieldWidgetTest;
 
 public:
   NumberFieldWidget(Data::FieldPtr field, QWidget* parent);

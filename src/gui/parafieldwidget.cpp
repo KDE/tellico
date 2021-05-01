@@ -27,8 +27,6 @@
 
 #include <KTextEdit>
 
-#include <QRegularExpression>
-
 using Tellico::GUI::ParaFieldWidget;
 
 ParaFieldWidget::ParaFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
@@ -41,6 +39,8 @@ ParaFieldWidget::ParaFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
   }
   void (KTextEdit::* textChanged)() = &KTextEdit::textChanged;
   connect(m_textEdit, textChanged, this, &ParaFieldWidget::checkModified);
+
+  m_brRx = QRegularExpression(QLatin1String("<br/?>"), QRegularExpression::CaseInsensitiveOption);
 
   registerWidget();
 }
@@ -59,9 +59,8 @@ QString ParaFieldWidget::text() const {
 }
 
 void ParaFieldWidget::setTextImpl(const QString& text_) {
-  QRegularExpression rx(QLatin1String("<br/?>"), QRegularExpression::CaseInsensitiveOption);
   QString s = text_;
-  s.replace(rx, QStringLiteral("\n"));
+  s.replace(m_brRx, QStringLiteral("\n"));
   m_textEdit->setPlainText(s);
 }
 

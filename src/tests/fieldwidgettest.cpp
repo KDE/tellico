@@ -30,10 +30,14 @@
 #include "../gui/datewidget.h"
 #include "../gui/linefieldwidget.h"
 #include "../gui/lineedit.h"
+#include "../gui/numberfieldwidget.h"
+#include "../gui/spinbox.h"
+#include "../gui/parafieldwidget.h"
 #include "../gui/urlfieldwidget.h"
 #include "../document.h"
 #include "../images/imagefactory.h"
 
+#include <KTextEdit>
 #include <KUrlRequester>
 
 #include <QTest>
@@ -56,7 +60,7 @@ void FieldWidgetTest::testBool() {
   QVERIFY(w.text().isEmpty());
   w.setText(QStringLiteral("true"));
   QCOMPARE(w.text(), QStringLiteral("true"));
-  QCheckBox* cb = dynamic_cast<QCheckBox*>(w.widget());
+  auto cb = dynamic_cast<QCheckBox*>(w.widget());
   QVERIFY(cb);
   QVERIFY(cb->isChecked());
 
@@ -81,7 +85,7 @@ void FieldWidgetTest::testChoice() {
                                                          QStringList()));
   Tellico::GUI::ChoiceFieldWidget w(field, nullptr);
   QVERIFY(w.text().isEmpty());
-  QComboBox* cb = dynamic_cast<QComboBox*>(w.widget());
+  auto cb = dynamic_cast<QComboBox*>(w.widget());
   QVERIFY(cb);
   QCOMPARE(cb->count(), 1); // one empty value
 
@@ -156,6 +160,62 @@ void FieldWidgetTest::testLine() {
   QVERIFY(le);
   QVERIFY(!le->validator());
 
+  w.clear();
+  QVERIFY(w.text().isEmpty());
+}
+
+void FieldWidgetTest::testPara() {
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("f"),
+                                                         QStringLiteral("f"),
+                                                         Tellico::Data::Field::Para));
+  Tellico::GUI::ParaFieldWidget w(field, nullptr);
+  QVERIFY(w.text().isEmpty());
+  w.setText(QStringLiteral("true"));
+  QCOMPARE(w.text(), QStringLiteral("true"));
+  auto edit = dynamic_cast<KTextEdit*>(w.widget());
+  QVERIFY(edit);
+  // test replacing EOL
+  edit->setText(QLatin1String("test1\ntest2"));
+  QCOMPARE(w.text(), QStringLiteral("test1<br/>test2"));
+
+  w.setText(QLatin1String("test1<br>test2"));
+  QCOMPARE(edit->toPlainText(), QStringLiteral("test1\ntest2"));
+  QCOMPARE(w.text(), QStringLiteral("test1<br/>test2"));
+
+  w.clear();
+  QVERIFY(w.text().isEmpty());
+}
+
+void FieldWidgetTest::testNumber() {
+  // create a Choice field
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("f"),
+                                                         QStringLiteral("f"),
+                                                         Tellico::Data::Field::Number));
+  Tellico::GUI::NumberFieldWidget w(field, nullptr);
+  QVERIFY(w.text().isEmpty());
+  // spin box since AllowMultiple is not set
+  QVERIFY(w.isSpinBox());
+  auto sb = dynamic_cast<Tellico::GUI::SpinBox*>(w.widget());
+  QVERIFY(sb);
+  w.setText(QStringLiteral("1"));
+  QCOMPARE(w.text(), QStringLiteral("1"));
+  QCOMPARE(sb->value(), 1);
+  w.setText(QStringLiteral("1; 2"));
+  QCOMPARE(w.text(), QStringLiteral("1"));
+  w.clear();
+  QVERIFY(w.text().isEmpty());
+
+  // now set AllowMultiple and check that the spinbox is deleted and a line edit is used
+  field->setFlags(Tellico::Data::Field::AllowMultiple);
+  w.setText(QStringLiteral("1"));
+  w.updateField(field, field);
+  QVERIFY(!w.isSpinBox());
+  auto le = dynamic_cast<QLineEdit*>(w.widget());
+  QVERIFY(le);
+  // value should be unchanged
+  QCOMPARE(w.text(), QStringLiteral("1"));
+  w.setText(QStringLiteral("1;2"));
+  QCOMPARE(w.text(), QStringLiteral("1; 2"));
   w.clear();
   QVERIFY(w.text().isEmpty());
 }

@@ -270,6 +270,8 @@ ecm_add_test(fieldwidgettest.cpp
              ../gui/spinbox.cpp
              ../gui/linefieldwidget.cpp
              ../gui/lineedit.cpp
+             ../gui/numberfieldwidget.cpp
+             ../gui/parafieldwidget.cpp
              ../gui/urlfieldwidget.cpp
              ../gui/urlfieldlogic.cpp
              ../gui/fieldwidget.cpp
@@ -279,7 +281,7 @@ ecm_add_test(fieldwidgettest.cpp
              ../translators/tellicozipexporter.cpp
              ../translators/exporter.cpp
     TEST_NAME fieldwidgettest
-    LINK_LIBRARIES translatorstest ${TELLICO_TEST_LIBS} KF5::XmlGui KF5::SonnetCore KF5::SonnetUi
+    LINK_LIBRARIES translatorstest ${TELLICO_TEST_LIBS} KF5::XmlGui KF5::SonnetCore KF5::SonnetUi KF5::TextWidgets
 )
 
 ecm_add_test(filelistingtest.cpp
