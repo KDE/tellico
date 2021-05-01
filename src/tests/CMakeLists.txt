@@ -272,6 +272,8 @@ ecm_add_test(fieldwidgettest.cpp
              ../gui/lineedit.cpp
              ../gui/numberfieldwidget.cpp
              ../gui/parafieldwidget.cpp
+             ../gui/ratingwidget.cpp
+             ../gui/ratingfieldwidget.cpp
              ../gui/urlfieldwidget.cpp
              ../gui/urlfieldlogic.cpp
              ../gui/fieldwidget.cpp
