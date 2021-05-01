@@ -32,10 +32,12 @@
 #include "../gui/lineedit.h"
 #include "../gui/numberfieldwidget.h"
 #include "../gui/spinbox.h"
+#include "../gui/parafieldwidget.h"
 #include "../gui/urlfieldwidget.h"
 #include "../document.h"
 #include "../images/imagefactory.h"
 
+#include <KTextEdit>
 #include <KUrlRequester>
 
 #include <QTest>
@@ -157,6 +159,28 @@ void FieldWidgetTest::testLine() {
   auto le = dynamic_cast<Tellico::GUI::LineEdit*>(w.widget());
   QVERIFY(le);
   QVERIFY(!le->validator());
+
+  w.clear();
+  QVERIFY(w.text().isEmpty());
+}
+
+void FieldWidgetTest::testPara() {
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("f"),
+                                                         QStringLiteral("f"),
+                                                         Tellico::Data::Field::Para));
+  Tellico::GUI::ParaFieldWidget w(field, nullptr);
+  QVERIFY(w.text().isEmpty());
+  w.setText(QStringLiteral("true"));
+  QCOMPARE(w.text(), QStringLiteral("true"));
+  auto edit = dynamic_cast<KTextEdit*>(w.widget());
+  QVERIFY(edit);
+  // test replacing EOL
+  edit->setText(QLatin1String("test1\ntest2"));
+  QCOMPARE(w.text(), QStringLiteral("test1<br/>test2"));
+
+  w.setText(QLatin1String("test1<br>test2"));
+  QCOMPARE(edit->toPlainText(), QStringLiteral("test1\ntest2"));
+  QCOMPARE(w.text(), QStringLiteral("test1<br/>test2"));
 
   w.clear();
   QVERIFY(w.text().isEmpty());

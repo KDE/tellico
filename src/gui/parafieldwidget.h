@@ -28,7 +28,10 @@
 #include "fieldwidget.h"
 #include "../datavectors.h"
 
+#include <QRegularExpression>
+
 class KTextEdit;
+class FieldWidgetTest;
 
 namespace Tellico {
   namespace GUI {
@@ -38,6 +41,8 @@ namespace Tellico {
  */
 class ParaFieldWidget : public FieldWidget {
 Q_OBJECT
+
+friend class ::FieldWidgetTest;
 
 public:
   ParaFieldWidget(Data::FieldPtr field, QWidget* parent);
@@ -54,6 +59,7 @@ protected:
 
 private:
   KTextEdit* m_textEdit;
+  QRegularExpression m_brRx;
 };
 
   } // end GUI namespace
