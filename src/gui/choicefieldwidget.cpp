@@ -39,8 +39,8 @@ ChoiceFieldWidget::ChoiceFieldWidget(Tellico::Data::FieldPtr field_, QWidget* pa
     : FieldWidget(field_, parent_), m_comboBox(nullptr) {
 
   m_comboBox = new QComboBox(this);
-  void (QComboBox::* activatedInt)(int) = &QComboBox::activated;
-  connect(m_comboBox, activatedInt, this, &ChoiceFieldWidget::checkModified);
+  void (QComboBox::* indexChanged)(int) = &QComboBox::currentIndexChanged;
+  connect(m_comboBox, indexChanged, this, &ChoiceFieldWidget::checkModified);
   m_maxTextWidth = MAX_FRACTION_SCREEN_WIDTH * QGuiApplication::primaryScreen()->size().width();
 
   QStringList values = field_->allowed();
@@ -62,7 +62,7 @@ QString ChoiceFieldWidget::text() const {
 }
 
 void ChoiceFieldWidget::setTextImpl(const QString& text_) {
-  int idx = m_comboBox->findText(text_);
+  int idx = m_comboBox->findData(text_);
   if(idx < 0) {
     m_comboBox->addItem(fontMetrics().elidedText(text_, Qt::ElideMiddle, m_maxTextWidth), text_);
     m_comboBox->setCurrentIndex(m_comboBox->count()-1);
@@ -77,7 +77,9 @@ void ChoiceFieldWidget::clearImpl() {
 }
 
 void ChoiceFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
+  const QString oldValue = text();
   int idx = m_comboBox->currentIndex();
+  m_comboBox->blockSignals(true);
   m_comboBox->clear();
 
   QStringList values = newField_->allowed();
@@ -90,6 +92,8 @@ void ChoiceFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::
     m_comboBox->addItem(fm.elidedText(value, Qt::ElideMiddle, m_maxTextWidth), value);
   }
   m_comboBox->setCurrentIndex(idx);
+  m_comboBox->blockSignals(false);
+  setTextImpl(oldValue); // set back to previous value
 }
 
 QWidget* ChoiceFieldWidget::widget() {

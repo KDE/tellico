@@ -106,9 +106,9 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   l->setStretchFactor(m_yearSpin, 1);
 
   void (SpinBox::* valueChangedInt)(int) = &SpinBox::valueChanged;
-  void (KComboBox::* activatedInt)(int) = &KComboBox::activated;
+  void (KComboBox::* indexChanged)(int) = &KComboBox::currentIndexChanged;
   connect(m_daySpin, valueChangedInt, this, &DateWidget::slotDateChanged);
-  connect(m_monthCombo, activatedInt, this, &DateWidget::slotDateChanged);
+  connect(m_monthCombo, indexChanged, this, &DateWidget::slotDateChanged);
   connect(m_yearSpin, valueChangedInt, this, &DateWidget::slotDateChanged);
 
   m_dateButton = new QPushButton(this);
@@ -200,6 +200,8 @@ QString DateWidget::text() const {
 }
 
 void DateWidget::setDate(const QDate& date_) {
+  const QDate oldDate = date();
+
   m_daySpin->blockSignals(true);
   m_monthCombo->blockSignals(true);
   m_yearSpin->blockSignals(true);
@@ -212,6 +214,10 @@ void DateWidget::setDate(const QDate& date_) {
   m_daySpin->blockSignals(false);
   m_monthCombo->blockSignals(false);
   m_yearSpin->blockSignals(false);
+
+  if(oldDate != date_) {
+    emit signalModified();
+  }
 }
 
 void DateWidget::setDate(const QString& date_) {
@@ -240,9 +246,7 @@ void DateWidget::setDate(const QString& date_) {
   // need to update number of days in month
   // for now set date to 1
   QDate date(y, (m == 0 ? 1 : m), 1);
-  m_daySpin->blockSignals(true);
   m_daySpin->setMaximum(date.daysInMonth());
-  m_daySpin->blockSignals(false);
 
   int day = s.count() > 2 ? s[2].toInt(&ok) : m_daySpin->minimum();
   if(!ok) {
@@ -316,7 +320,6 @@ void DateWidget::slotShowPicker() {
 void DateWidget::slotDateSelected(QDate date_) {
   if(date_.isValid()) {
     setDate(date_);
-    emit signalModified();
     m_menu->hide();
   }
 }
@@ -324,7 +327,6 @@ void DateWidget::slotDateSelected(QDate date_) {
 void DateWidget::slotDateEntered(QDate date_) {
   if(date_.isValid()) {
     setDate(date_);
-    emit signalModified();
   }
 }
 

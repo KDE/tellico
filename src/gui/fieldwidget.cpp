@@ -105,6 +105,7 @@ void FieldWidget::setText(const QString& text_) {
   m_oldValue = text_;
   m_settingText = true;
   setTextImpl(text_);
+  m_oldValue = text(); // the widget might have clean-up the text after being set
   m_settingText = false;
   // now check to see if the widget modified the text
   checkModified();
