@@ -45,6 +45,7 @@
 #include <QTest>
 #include <QCheckBox>
 #include <QComboBox>
+#include <QSignalSpy>
 
 // needs a GUI
 QTEST_MAIN( FieldWidgetTest )
@@ -59,9 +60,14 @@ void FieldWidgetTest::testBool() {
                                                          Tellico::Data::Field::Bool));
   field->setDefaultValue(QStringLiteral("true"));
   Tellico::GUI::BoolFieldWidget w(field, nullptr);
+  QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
+  QVERIFY(!w.expands());
   QVERIFY(w.text().isEmpty());
+  QCOMPARE(spy.count(), 0);
+
   w.setText(QStringLiteral("true"));
   QCOMPARE(w.text(), QStringLiteral("true"));
+  QCOMPARE(spy.count(), 0); // since the value was set explicitly, no valueChanged signal is made
   auto cb = dynamic_cast<QCheckBox*>(w.widget());
   QVERIFY(cb);
   QVERIFY(cb->isChecked());
@@ -70,6 +76,15 @@ void FieldWidgetTest::testBool() {
   w.setText(QStringLiteral("false"));
   QCOMPARE(w.text(), QStringLiteral("true"));
   QVERIFY(cb->isChecked());
+
+  w.clear();
+  QVERIFY(w.text().isEmpty());
+  QVERIFY(!cb->isChecked());
+  QCOMPARE(spy.count(), 0);
+
+  cb->setChecked(true);
+  QCOMPARE(w.text(), QStringLiteral("true"));
+  QCOMPARE(spy.count(), 1);
 
   w.clear();
   QVERIFY(w.text().isEmpty());
@@ -86,23 +101,31 @@ void FieldWidgetTest::testChoice() {
                                                          QStringLiteral("f"),
                                                          QStringList()));
   Tellico::GUI::ChoiceFieldWidget w(field, nullptr);
+  QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
+  QVERIFY(!w.expands());
   QVERIFY(w.text().isEmpty());
   auto cb = dynamic_cast<QComboBox*>(w.widget());
   QVERIFY(cb);
   QCOMPARE(cb->count(), 1); // one empty value
 
   field->setAllowed(QStringList() << QStringLiteral("choice1") << QStringLiteral("choice2"));
-  w.updateFieldHook(field, field);
+  w.updateField(field, field);
   QVERIFY(w.text().isEmpty());
+  QCOMPARE(spy.count(), 0);
 
   w.setText(QStringLiteral("choice2"));
   QCOMPARE(w.text(), QStringLiteral("choice2"));
   QCOMPARE(cb->count(), 3);
 
   field->setAllowed(QStringList() << QStringLiteral("choice1") << QStringLiteral("choice2") << QStringLiteral("choice3"));
-  w.updateFieldHook(field, field);
+  w.updateField(field, field);
   // selected value should remain same
   QCOMPARE(w.text(), QStringLiteral("choice2"));
+  QCOMPARE(spy.count(), 0);
+
+  cb->setCurrentIndex(1);
+  QCOMPARE(w.text(), QStringLiteral("choice1"));
+  QCOMPARE(spy.count(), 1);
 
   // set value to something not in the list
   w.setText(QStringLiteral("choice4"));
@@ -118,10 +141,13 @@ void FieldWidgetTest::testDate() {
                                                          QStringLiteral("d"),
                                                          Tellico::Data::Field::Date));
   Tellico::GUI::DateFieldWidget w(field, nullptr);
+  QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
+  QVERIFY(w.expands());
   auto dw = dynamic_cast<Tellico::GUI::DateWidget*>(w.widget());
   QVERIFY(dw);
   QVERIFY(w.text().isEmpty());
   QVERIFY(dw->date().isNull());
+  QCOMPARE(spy.count(), 0);
 
   QDate moon(1969, 7, 20);
   w.setText(QStringLiteral("1969-07-20"));
@@ -131,20 +157,24 @@ void FieldWidgetTest::testDate() {
   w.setText(QStringLiteral("1969-7-20"));
   QCOMPARE(w.text(), QStringLiteral("1969-07-20"));
   QCOMPARE(dw->date(), moon);
+  QCOMPARE(spy.count(), 0);
 
   w.setText(QString());
   QVERIFY(w.text().isEmpty());
   QVERIFY(dw->date().isNull());
+  QCOMPARE(spy.count(), 0);
 
   w.setText(QStringLiteral("1969"));
   // adds dashes
   QCOMPARE(w.text(), QStringLiteral("1969--"));
   QVERIFY(dw->date().isNull());
+  QCOMPARE(spy.count(), 0);
 
   QDate sputnik(1957, 10, 4);
   dw->setDate(sputnik);
   QCOMPARE(w.text(), QStringLiteral("1957-10-04"));
   QCOMPARE(dw->date(), sputnik);
+  QCOMPARE(spy.count(), 1);
 
   w.clear();
   QVERIFY(w.text().isEmpty());
@@ -155,12 +185,20 @@ void FieldWidgetTest::testLine() {
   Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("f"),
                                                          QStringLiteral("f")));
   Tellico::GUI::LineFieldWidget w(field, nullptr);
+  QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
+  QVERIFY(w.expands());
   QVERIFY(w.text().isEmpty());
+
   w.setText(QStringLiteral("true"));
   QCOMPARE(w.text(), QStringLiteral("true"));
   auto le = dynamic_cast<Tellico::GUI::LineEdit*>(w.widget());
   QVERIFY(le);
   QVERIFY(!le->validator());
+  QCOMPARE(spy.count(), 0);
+
+  le->setText(QStringLiteral("new text"));
+  QCOMPARE(w.text(), QStringLiteral("new text"));
+  QCOMPARE(spy.count(), 1);
 
   w.clear();
   QVERIFY(w.text().isEmpty());
@@ -171,14 +209,20 @@ void FieldWidgetTest::testPara() {
                                                          QStringLiteral("f"),
                                                          Tellico::Data::Field::Para));
   Tellico::GUI::ParaFieldWidget w(field, nullptr);
+  QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
+  QVERIFY(w.expands());
   QVERIFY(w.text().isEmpty());
+
   w.setText(QStringLiteral("true"));
   QCOMPARE(w.text(), QStringLiteral("true"));
   auto edit = dynamic_cast<KTextEdit*>(w.widget());
   QVERIFY(edit);
+  QCOMPARE(spy.count(), 0);
+
   // test replacing EOL
   edit->setText(QLatin1String("test1\ntest2"));
   QCOMPARE(w.text(), QStringLiteral("test1<br/>test2"));
+  QCOMPARE(spy.count(), 1);
 
   w.setText(QLatin1String("test1<br>test2"));
   QCOMPARE(edit->toPlainText(), QStringLiteral("test1\ntest2"));
@@ -193,6 +237,8 @@ void FieldWidgetTest::testNumber() {
                                                          QStringLiteral("f"),
                                                          Tellico::Data::Field::Number));
   Tellico::GUI::NumberFieldWidget w(field, nullptr);
+  QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
+  QVERIFY(w.expands());
   QVERIFY(w.text().isEmpty());
   // spin box since AllowMultiple is not set
   QVERIFY(w.isSpinBox());
@@ -205,6 +251,11 @@ void FieldWidgetTest::testNumber() {
   QCOMPARE(w.text(), QStringLiteral("1"));
   w.clear();
   QVERIFY(w.text().isEmpty());
+  QCOMPARE(spy.count(), 0);
+
+  sb->setValue(3);
+  QCOMPARE(w.text(), QStringLiteral("3"));
+  QCOMPARE(spy.count(), 1);
 
   // now set AllowMultiple and check that the spinbox is deleted and a line edit is used
   field->setFlags(Tellico::Data::Field::AllowMultiple);
@@ -215,8 +266,15 @@ void FieldWidgetTest::testNumber() {
   QVERIFY(le);
   // value should be unchanged
   QCOMPARE(w.text(), QStringLiteral("1"));
+  QCOMPARE(spy.count(), 1);
   w.setText(QStringLiteral("1;2"));
   QCOMPARE(w.text(), QStringLiteral("1; 2"));
+  QCOMPARE(spy.count(), 1);
+
+  le->setText(QStringLiteral("2"));
+  QCOMPARE(w.text(), QStringLiteral("2"));
+  QCOMPARE(spy.count(), 2);
+
   w.clear();
   QVERIFY(w.text().isEmpty());
 }
@@ -226,6 +284,8 @@ void FieldWidgetTest::testRating() {
                                                          QStringLiteral("f"),
                                                          Tellico::Data::Field::Rating));
   Tellico::GUI::RatingFieldWidget w(field, nullptr);
+  QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
+  QVERIFY(!w.expands());
   QVERIFY(w.text().isEmpty());
   auto rating = dynamic_cast<Tellico::GUI::RatingWidget*>(w.widget());
   QVERIFY(rating);
@@ -236,14 +296,21 @@ void FieldWidgetTest::testRating() {
   QCOMPARE(w.text(), QStringLiteral("1"));
   w.clear();
   QVERIFY(w.text().isEmpty());
+  QCOMPARE(spy.count(), 0);
 
   field->setProperty(QStringLiteral("minimum"), QStringLiteral("5"));
   field->setProperty(QStringLiteral("maximum"), QStringLiteral("7"));
   w.setText(QStringLiteral("4"));
   w.updateField(field, field);
   QVERIFY(w.text().isEmpty()); // empty since 4 is less than minimum
+  QCOMPARE(spy.count(), 0);
   w.setText(QStringLiteral("8"));
   QVERIFY(w.text().isEmpty());
+  QCOMPARE(spy.count(), 0);
+
+  rating->setText(QStringLiteral("6"));
+  QCOMPARE(w.text(), QStringLiteral("6"));
+  QCOMPARE(spy.count(), 0);
 }
 
 void FieldWidgetTest::testUrl() {
@@ -251,24 +318,28 @@ void FieldWidgetTest::testUrl() {
                                                          QStringLiteral("url"),
                                                          Tellico::Data::Field::URL));
   Tellico::GUI::URLFieldWidget w(field, nullptr);
+  QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
+  QVERIFY(w.expands());
 
   QUrl base = QUrl::fromLocalFile(QFINDTESTDATA("data/relative-link.xml"));
   Tellico::Data::Document::self()->setURL(base); // set the base url
   QUrl link = QUrl::fromLocalFile(QFINDTESTDATA("fieldwidgettest.cpp"));
   w.m_requester->setUrl(link);
   QCOMPARE(w.text(), link.url());
+  QCOMPARE(spy.count(), 1);
 
   field->setProperty(QStringLiteral("relative"), QStringLiteral("true"));
-  w.updateFieldHook(field, field);
+  w.updateField(field, field);
   // will be exactly up one level
   QCOMPARE(w.text(), QStringLiteral("../fieldwidgettest.cpp"));
 
 // verify value after setting the relative link explicitly
   w.setText(QStringLiteral("../fieldwidgettest.cpp"));
   QCOMPARE(w.text(), QStringLiteral("../fieldwidgettest.cpp"));
+  QCOMPARE(spy.count(), 1);
 
   field->setProperty(QStringLiteral("relative"), QStringLiteral("false"));
-  w.updateFieldHook(field, field);
+  w.updateField(field, field);
   // will be exactly up one level
   QCOMPARE(w.text(), link.url());
 
