@@ -31,6 +31,7 @@
 class QTableWidget;
 class QTableWidgetItem;
 class QEvent;
+class FieldWidgetTest;
 
 namespace Tellico {
   namespace GUI {
@@ -40,6 +41,8 @@ namespace Tellico {
  */
 class TableFieldWidget : public FieldWidget {
 Q_OBJECT
+
+friend class ::FieldWidgetTest;
 
 public:
   TableFieldWidget(Data::FieldPtr field, QWidget* parent);
@@ -72,10 +75,10 @@ private:
   void makeRowContextMenu(QPoint point);
   bool emptyRow(int row) const;
   void labelColumns(Data::FieldPtr field);
+  void renameColumn(const QString& newName);
 
   QTableWidget* m_table;
   int m_columns;
-  Data::FieldPtr m_field;
   int m_row;
   int m_col;
 };

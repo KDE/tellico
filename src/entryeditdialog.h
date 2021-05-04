@@ -130,6 +130,7 @@ protected Q_SLOTS:
 
 private Q_SLOTS:
   void fieldValueChanged(Tellico::Data::FieldPtr field);
+  void fieldChanged(Tellico::Data::FieldPtr field);
   void slotUpdateSize();
 
 private:

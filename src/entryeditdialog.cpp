@@ -214,6 +214,7 @@ void EntryEditDialog::resetLayout(Tellico::Data::CollPtr coll_) {
       }
       widget->insertDefault();
       connect(widget, &GUI::FieldWidget::valueChanged, this, &EntryEditDialog::fieldValueChanged);
+      connect(widget, &GUI::FieldWidget::fieldChanged, this, &EntryEditDialog::fieldChanged);
       if(!focusedFirst && widget->focusPolicy() != Qt::NoFocus) {
         widget->setFocus();
         focusedFirst = true;
@@ -755,6 +756,10 @@ void EntryEditDialog::fieldValueChanged(Tellico::Data::FieldPtr field_) {
     m_modifiedFields.append(field_);
   }
   slotSetModified(true);
+}
+
+void EntryEditDialog::fieldChanged(Tellico::Data::FieldPtr field_) {
+  Kernel::self()->modifyField(field_);
 }
 
 void EntryEditDialog::showEvent(QShowEvent* event_) {

@@ -160,6 +160,10 @@ void FieldWidget::registerWidget() {
   updateGeometry();
 }
 
+void FieldWidget::setField(Tellico::Data::FieldPtr field_) {
+  m_field = field_;
+}
+
 void FieldWidget::updateField(Tellico::Data::FieldPtr oldField_, Tellico::Data::FieldPtr newField_) {
   m_field = newField_;
   m_label->setText(i18nc("Edit Label", "%1:", newField_->title()));
