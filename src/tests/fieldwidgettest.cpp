@@ -35,6 +35,7 @@
 #include "../gui/parafieldwidget.h"
 #include "../gui/ratingwidget.h"
 #include "../gui/ratingfieldwidget.h"
+#include "../gui/tablefieldwidget.h"
 #include "../gui/urlfieldwidget.h"
 #include "../document.h"
 #include "../images/imagefactory.h"
@@ -45,6 +46,7 @@
 #include <QTest>
 #include <QCheckBox>
 #include <QComboBox>
+#include <QTableWidget>
 #include <QSignalSpy>
 
 // needs a GUI
@@ -313,6 +315,45 @@ void FieldWidgetTest::testRating() {
   QCOMPARE(spy.count(), 0);
 }
 
+void FieldWidgetTest::testTable() {
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("url"),
+                                                         QStringLiteral("url"),
+                                                         Tellico::Data::Field::Table));
+  field->setProperty(QStringLiteral("columns"), QStringLiteral("2"));
+  Tellico::GUI::TableFieldWidget w(field, nullptr);
+  QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
+  QSignalSpy fieldSpy(&w, &Tellico::GUI::FieldWidget::fieldChanged);
+  QVERIFY(w.expands());
+  QVERIFY(w.text().isEmpty());
+  QCOMPARE(w.m_columns, 2);
+
+  auto tw = dynamic_cast<QTableWidget*>(w.widget());
+  Q_ASSERT(tw);
+
+  w.setText(QStringLiteral("true"));
+  QCOMPARE(w.text(), QStringLiteral("true"));
+  QCOMPARE(spy.count(), 0);
+
+  w.slotInsertRow();
+  tw->setItem(0, 1, new QTableWidgetItem(QStringLiteral("new text")));
+  QCOMPARE(w.text(), QStringLiteral("true::new text"));
+  QCOMPARE(spy.count(), 1);
+  QVERIFY(!w.emptyRow(0));
+
+  w.m_col = 0;
+  w.renameColumn(QStringLiteral("col name"));
+  QCOMPARE(tw->horizontalHeaderItem(0)->text(), QStringLiteral("col name"));
+
+  field->setProperty(QStringLiteral("columns"), QStringLiteral("4"));
+  w.updateField(field, field);
+  QCOMPARE(tw->columnCount(), 4);
+  QCOMPARE(w.text(), QStringLiteral("true::new text"));
+  QCOMPARE(spy.count(), 1);
+
+  w.clear();
+  QVERIFY(w.text().isEmpty());
+}
+
 void FieldWidgetTest::testUrl() {
   Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("url"),
                                                          QStringLiteral("url"),
@@ -321,10 +362,13 @@ void FieldWidgetTest::testUrl() {
   QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
   QVERIFY(w.expands());
 
+  auto requester = dynamic_cast<KUrlRequester*>(w.widget());
+  Q_ASSERT(requester);
+
   QUrl base = QUrl::fromLocalFile(QFINDTESTDATA("data/relative-link.xml"));
   Tellico::Data::Document::self()->setURL(base); // set the base url
   QUrl link = QUrl::fromLocalFile(QFINDTESTDATA("fieldwidgettest.cpp"));
-  w.m_requester->setUrl(link);
+  requester->setUrl(link);
   QCOMPARE(w.text(), link.url());
   QCOMPARE(spy.count(), 1);
 
@@ -345,5 +389,5 @@ void FieldWidgetTest::testUrl() {
 
   w.clear();
   QVERIFY(w.text().isEmpty());
-  QVERIFY(w.m_requester->url().isEmpty());
+  QVERIFY(requester->url().isEmpty());
 }
