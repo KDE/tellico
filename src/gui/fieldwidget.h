@@ -74,6 +74,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
   void valueChanged(Tellico::Data::FieldPtr field);
+  void fieldChanged(Tellico::Data::FieldPtr field);
 
 protected Q_SLOTS:
   void checkModified();
@@ -82,6 +83,7 @@ protected:
   QLabel* label() { return m_label; } // needed so the URLField can handle clicks on the label
   virtual QWidget* widget() = 0;
   void registerWidget();
+  void setField(Tellico::Data::FieldPtr field);
   virtual void setTextImpl(const QString& text) = 0;
   virtual void clearImpl() = 0;
 
