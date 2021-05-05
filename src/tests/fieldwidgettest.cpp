@@ -329,16 +329,40 @@ void FieldWidgetTest::testTable() {
 
   auto tw = dynamic_cast<QTableWidget*>(w.widget());
   Q_ASSERT(tw);
+  QCOMPARE(tw->columnCount(), 2);
+  QCOMPARE(tw->rowCount(), 5); // minimum row count is 5
 
   w.setText(QStringLiteral("true"));
   QCOMPARE(w.text(), QStringLiteral("true"));
   QCOMPARE(spy.count(), 0);
+  QCOMPARE(tw->rowCount(), 5);
 
   w.slotInsertRow();
   tw->setItem(0, 1, new QTableWidgetItem(QStringLiteral("new text")));
   QCOMPARE(w.text(), QStringLiteral("true::new text"));
   QCOMPARE(spy.count(), 1);
   QVERIFY(!w.emptyRow(0));
+  QCOMPARE(tw->rowCount(), 5);
+
+  w.m_row = 1;
+  w.slotInsertRow();
+  QCOMPARE(tw->rowCount(), 6);
+  w.slotRemoveRow();
+  QCOMPARE(w.text(), QStringLiteral("true::new text"));
+  QCOMPARE(tw->rowCount(), 5);
+  QCOMPARE(spy.count(), 1);
+  QVERIFY(w.emptyRow(1));
+  QVERIFY(!w.emptyRow(0));
+
+  QCOMPARE(w.text(), QStringLiteral("true::new text"));
+  w.m_row = 0;
+  w.slotMoveRowDown();
+  QCOMPARE(spy.count(), 2);
+  QCOMPARE(w.text(), Tellico::FieldFormat::rowDelimiterString() + QStringLiteral("true::new text"));
+  w.m_row = 1;
+  w.slotMoveRowUp();
+  QCOMPARE(spy.count(), 3);
+  QCOMPARE(w.text(), QStringLiteral("true::new text"));
 
   w.m_col = 0;
   w.renameColumn(QStringLiteral("col name"));
@@ -348,7 +372,7 @@ void FieldWidgetTest::testTable() {
   w.updateField(field, field);
   QCOMPARE(tw->columnCount(), 4);
   QCOMPARE(w.text(), QStringLiteral("true::new text"));
-  QCOMPARE(spy.count(), 1);
+  QCOMPARE(spy.count(), 3);
 
   w.clear();
   QVERIFY(w.text().isEmpty());
