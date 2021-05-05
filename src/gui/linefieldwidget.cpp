@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2005-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -43,11 +43,7 @@ LineFieldWidget::LineFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
   registerWidget();
 
   if(field_->hasFlag(Data::Field::AllowCompletion)) {
-    FieldCompletion* completion = new FieldCompletion(field_->hasFlag(Data::Field::AllowMultiple));
-    completion->setItems(Data::Document::self()->collection()->valuesByFieldName(field_->name()));
-    completion->setIgnoreCase(true);
-    m_lineEdit->setCompletionObject(completion);
-    m_lineEdit->setAutoDeleteCompletionObject(true);
+    createCompletionObject(field_->name());
   }
 
   if(field_->name() == QLatin1String("isbn")) {
@@ -76,20 +72,26 @@ void LineFieldWidget::addCompletionObjectItem(const QString& text_) {
   m_lineEdit->completionObject()->addItem(text_);
 }
 
-void LineFieldWidget::updateFieldHook(Tellico::Data::FieldPtr oldField_, Tellico::Data::FieldPtr newField_) {
-  bool wasComplete = (oldField_->hasFlag(Data::Field::AllowCompletion));
+void LineFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
+  bool wasComplete = m_lineEdit->compObj(); // don't call completionObject() since it recreates it
   bool isComplete = (newField_->hasFlag(Data::Field::AllowCompletion));
   if(!wasComplete && isComplete) {
-    FieldCompletion* completion = new FieldCompletion(isComplete);
-    completion->setItems(Data::Document::self()->collection()->valuesByFieldName(newField_->name()));
-    completion->setIgnoreCase(true);
-    m_lineEdit->setCompletionObject(completion);
-    m_lineEdit->setAutoDeleteCompletionObject(true);
+    createCompletionObject(newField_->name());
   } else if(wasComplete && !isComplete) {
-    m_lineEdit->completionObject()->clear();
+    // auto-deleted (but re-created if completionObject() is called again)
+    m_lineEdit->setCompletionObject(nullptr);
   }
 }
 
 QWidget* LineFieldWidget::widget() {
   return m_lineEdit;
+}
+
+void LineFieldWidget::createCompletionObject(const QString& fieldName_) {
+  Q_ASSERT(m_lineEdit);
+  FieldCompletion* completion = new FieldCompletion(true);
+  completion->setItems(Data::Document::self()->collection()->valuesByFieldName(fieldName_));
+  completion->setIgnoreCase(true);
+  m_lineEdit->setCompletionObject(completion);
+  m_lineEdit->setAutoDeleteCompletionObject(true);
 }

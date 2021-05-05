@@ -58,6 +58,8 @@ protected:
   virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
 
 private:
+  void createCompletionObject(const QString& fieldName);
+
   GUI::LineEdit* m_lineEdit;
 };
 

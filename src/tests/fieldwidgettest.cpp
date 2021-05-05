@@ -39,6 +39,8 @@
 #include "../gui/urlfieldwidget.h"
 #include "../document.h"
 #include "../images/imagefactory.h"
+#include "../collections/bookcollection.h"
+#include "../collectionfactory.h"
 
 #include <KTextEdit>
 #include <KUrlRequester>
@@ -53,6 +55,7 @@
 QTEST_MAIN( FieldWidgetTest )
 
 void FieldWidgetTest::initTestCase() {
+  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::ImageFactory::init();
 }
 
@@ -102,22 +105,23 @@ void FieldWidgetTest::testChoice() {
   Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("f"),
                                                          QStringLiteral("f"),
                                                          QStringList()));
+  field->setAllowed(QStringList() << QStringLiteral("choice1"));
   Tellico::GUI::ChoiceFieldWidget w(field, nullptr);
   QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
   QVERIFY(!w.expands());
   QVERIFY(w.text().isEmpty());
   auto cb = dynamic_cast<QComboBox*>(w.widget());
   QVERIFY(cb);
-  QCOMPARE(cb->count(), 1); // one empty value
+  QCOMPARE(cb->count(), 2); // one empty value
 
   field->setAllowed(QStringList() << QStringLiteral("choice1") << QStringLiteral("choice2"));
   w.updateField(field, field);
   QVERIFY(w.text().isEmpty());
   QCOMPARE(spy.count(), 0);
+  QCOMPARE(cb->count(), 3);
 
   w.setText(QStringLiteral("choice2"));
   QCOMPARE(w.text(), QStringLiteral("choice2"));
-  QCOMPARE(cb->count(), 3);
 
   field->setAllowed(QStringList() << QStringLiteral("choice1") << QStringLiteral("choice2") << QStringLiteral("choice3"));
   w.updateField(field, field);
@@ -128,6 +132,9 @@ void FieldWidgetTest::testChoice() {
   cb->setCurrentIndex(1);
   QCOMPARE(w.text(), QStringLiteral("choice1"));
   QCOMPARE(spy.count(), 1);
+
+  w.clear();
+  QVERIFY(w.text().isEmpty());
 
   // set value to something not in the list
   w.setText(QStringLiteral("choice4"));
@@ -186,6 +193,7 @@ void FieldWidgetTest::testDate() {
 void FieldWidgetTest::testLine() {
   Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("f"),
                                                          QStringLiteral("f")));
+  field->setFlags(Tellico::Data::Field::AllowMultiple | Tellico::Data::Field::AllowCompletion);
   Tellico::GUI::LineFieldWidget w(field, nullptr);
   QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
   QVERIFY(w.expands());
@@ -198,9 +206,23 @@ void FieldWidgetTest::testLine() {
   QVERIFY(!le->validator());
   QCOMPARE(spy.count(), 0);
 
+  w.addCompletionObjectItem(QStringLiteral("new text"));
+  le->setText(QStringLiteral("new"));
+  QCOMPARE(spy.count(), 1);
+  QCOMPARE(le->completionObject()->makeCompletion(le->text()), QStringLiteral("new text"));
+
   le->setText(QStringLiteral("new text"));
   QCOMPARE(w.text(), QStringLiteral("new text"));
-  QCOMPARE(spy.count(), 1);
+  QCOMPARE(spy.count(), 2);
+
+  le->setText(QStringLiteral("text1;text2"));
+  QCOMPARE(w.text(), QStringLiteral("text1; text2"));
+  QCOMPARE(spy.count(), 3);
+
+  field->setFlags(Tellico::Data::Field::AllowMultiple);
+  w.updateField(field, field);
+  // verify completion object is removed
+  QVERIFY(!le->compObj()); // don't call completionObject() since it recreates it
 
   w.clear();
   QVERIFY(w.text().isEmpty());
@@ -400,6 +422,10 @@ void FieldWidgetTest::testUrl() {
   w.updateField(field, field);
   // will be exactly up one level
   QCOMPARE(w.text(), QStringLiteral("../fieldwidgettest.cpp"));
+
+  // check completion
+  QCOMPARE(requester->lineEdit()->completionObject()->makeCompletion(QStringLiteral("../fieldwidgettest.c")),
+           QStringLiteral("../fieldwidgettest.cpp"));
 
 // verify value after setting the relative link explicitly
   w.setText(QStringLiteral("../fieldwidgettest.cpp"));
