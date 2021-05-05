@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC '-//Robby Stephenson/DTD Tellico V11.0//EN' 'http://periapsis.org/tellico/dtd/v11/tellico.dtd'>
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection type="2" title="My Books">
+  <fields>
+   <field category="General" type="1" title="Title" description="" format="1" flags="8" name="title"/>
+   <field category="table" type="8" title="table" description="New Field 1" format="4" flags="1" name="table">
+    <prop name="columns">2</prop>
+   </field>
+  </fields>
+  <entry id="1">
+   <title>t</title>
+   <id>1</id>
+   <tables>
+    <table>
+     <column>r1c1</column>
+     <column>r1c2</column>
+    </table>
+   </tables>
+  </entry>
+ </collection>
+</tellico>
