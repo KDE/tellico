@@ -12,10 +12,12 @@
    <title>t</title>
    <id>1</id>
    <tables>
+    <table/>
     <table>
      <column>r1c1</column>
      <column>r1c2</column>
     </table>
+    <table/>
    </tables>
   </entry>
  </collection>

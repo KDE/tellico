@@ -505,6 +505,19 @@ bool FieldValueContainerHandler::start(const QStringRef&, const QStringRef&, con
 }
 
 bool FieldValueContainerHandler::end(const QStringRef&, const QStringRef&) {
+  Data::FieldPtr f = d->currentField;
+  if(f && f->type() == Data::Field::Table) {
+    Data::EntryPtr entry = d->entries.back();
+    Q_ASSERT(entry);
+    QString fieldValue = entry->field(f->name());
+    // don't allow table value to end with empty row
+    while(fieldValue.endsWith(FieldFormat::rowDelimiterString())) {
+      fieldValue.chop(FieldFormat::rowDelimiterString().length());
+      // no need to update the modified date when setting the entry's field value
+      entry->setField(f->name(), fieldValue, false /* no modified date update */);
+    }
+  }
+
   return true;
 }
 
@@ -532,7 +545,6 @@ bool FieldValueHandler::end(const QStringRef&, const QStringRef& localName_) {
   Data::EntryPtr entry = d->entries.back();
   Q_ASSERT(entry);
   QString fieldName = d->currentField ? d->currentField->name() : realFieldName(d->syntaxVersion, localName_);
-  QString fieldValue = d->text;
 
   Data::FieldPtr f = d->currentField;
   if(!f) {
@@ -544,6 +556,7 @@ bool FieldValueHandler::end(const QStringRef&, const QStringRef& localName_) {
     return true;
   }
 
+  QString fieldValue = d->text;
   if(d->syntaxVersion < 4 && f->type() == Data::Field::Bool) {
     // in version 3 and prior, checkbox attributes had no text(), set it to "true"
     fieldValue = QStringLiteral("true");
@@ -556,17 +569,18 @@ bool FieldValueHandler::end(const QStringRef&, const QStringRef& localName_) {
     }
   } else if(!d->textBuffer.isEmpty()) {
     // for dates and tables, the value is built up from child elements
-#ifndef NDEBUG
     if(!d->text.isEmpty()) {
       myWarning() << "ignoring value for field" << localName_ << ":" << d->text;
     }
-#endif
     fieldValue = d->textBuffer;
     // the text buffer has the column delimiter at the end, remove it
     if(f->type() == Data::Field::Table) {
       fieldValue.chop(FieldFormat::columnDelimiterString().length());
     }
     d->textBuffer.clear();
+  } else if(fieldValue.isEmpty() && f->type() == Data::Field::Table) {
+    // allow for empty table rows
+    fieldValue = FieldFormat::rowDelimiterString();
   }
   // this is not an else branch, the data may be in the textBuffer
   if(d->syntaxVersion < 9 && d->coll->type() == Data::Collection::Album && fieldName == QLatin1String("track")) {
@@ -577,6 +591,7 @@ bool FieldValueHandler::end(const QStringRef&, const QStringRef& localName_) {
   if(fieldValue.isEmpty()) {
     return true;
   }
+
   // special case: if the i18n attribute equals true, then translate the title, description, and category
   if(m_i18n) {
     fieldValue = i18n(fieldValue.toUtf8().constData());
@@ -586,17 +601,22 @@ bool FieldValueHandler::end(const QStringRef&, const QStringRef& localName_) {
     ISBNValidator val(nullptr);
     val.fixup(fieldValue);
   }
-  // for fields with multiple values, we need to add on the new value
-  if(f->type() == Data::Field::Table || f->hasFlag(Data::Field::AllowMultiple)) {
+  if(f->type() == Data::Field::Table) {
     QString oldValue = entry->field(fieldName);
     if(!oldValue.isEmpty()) {
-      if(f->type() == Data::Field::Table) {
-        fieldValue = oldValue + FieldFormat::rowDelimiterString() + fieldValue;
-      } else {
-        fieldValue = oldValue + FieldFormat::delimiterString() + fieldValue;
+      if(!oldValue.endsWith(FieldFormat::rowDelimiterString())) {
+        oldValue += FieldFormat::rowDelimiterString();
       }
+      fieldValue.prepend(oldValue);
+    }
+  } else if(f->hasFlag(Data::Field::AllowMultiple)) {
+    // for fields with multiple values, we need to add on the new value
+    const QString oldValue = entry->field(fieldName);
+    if(!oldValue.isEmpty()) {
+      fieldValue = oldValue + FieldFormat::delimiterString() + fieldValue;
     }
   }
+
   // since the modified date value in the entry gets changed every time we set a new value
   // we have to save it and set it after changing all the others
   if(fieldName == QLatin1String("mdate")) {
