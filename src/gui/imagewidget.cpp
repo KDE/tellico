@@ -34,7 +34,12 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KProcess>
+#include <kservice_version.h>
+#if KSERVICE_VERSION >= QT_VERSION_CHECK(5, 68, 0)
+#include <KApplicationTrader>
+#else
 #include <KMimeTypeTrader>
+#endif
 #include <KIO/DesktopExecParser>
 #include <KSharedConfig>
 #include <KConfigGroup>
@@ -124,8 +129,12 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(nullpt
   QActionGroup* grp = new QActionGroup(this);
   grp->setExclusive(true);
   QAction* selectedAction = nullptr;
-  KService::List offers = KMimeTypeTrader::self()->query(QStringLiteral("image/png"),
-                                                         QStringLiteral("Application"));
+#if KSERVICE_VERSION >= QT_VERSION_CHECK(5, 68, 0)
+  auto offers = KApplicationTrader::queryByMimeType(QStringLiteral("image/png"));
+#else
+  auto offers = KMimeTypeTrader::self()->query(QStringLiteral("image/png"),
+                                               QStringLiteral("Application"));
+#endif
   QSet<QString> offerNames;
   foreach(KService::Ptr service, offers) {
     if(offerNames.contains(service->name())) {
