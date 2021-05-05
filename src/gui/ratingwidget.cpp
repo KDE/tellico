@@ -191,7 +191,7 @@ void RatingWidget::setText(const QString& text_) {
     if(m_currIndex > m_total-1) {
       m_currIndex = -1;
     } else if(m_currIndex < m_min-1) {
-      myDebug() << "RatingWidget:: Trying to set value to" << text_ << "but min is" << m_min;
+      myWarning() << "RatingWidget:: Trying to set value to" << text_ << "but min is" << m_min;
       m_currIndex = -1; // trying to set a value outside the bounds results in no value
     }
   } else {
