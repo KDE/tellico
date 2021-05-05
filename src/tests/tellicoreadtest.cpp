@@ -533,3 +533,27 @@ void TellicoReadTest::testRelativeLink() {
   // now, the link should be absolute
   QVERIFY(output.contains(expected.url()));
 }
+
+void TellicoReadTest::testEmptyFirstTableRow() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QSL("data/table-empty-first-row.xml")));
+
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QVERIFY(coll->hasField(QStringLiteral("table")));
+  Tellico::Data::EntryPtr entry = coll->entries().at(0);
+  QVERIFY(entry);
+  const QStringList rows = Tellico::FieldFormat::splitTable(entry->field(QSL("table")));
+  QCOMPARE(rows.count(), 2);
+
+  Tellico::Export::TellicoXMLExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  Tellico::Import::TellicoImporter importer2(exporter.text());
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+  QVERIFY(coll2);
+  Tellico::Data::EntryPtr entry2 = coll2->entries().at(0);
+  QVERIFY(entry2);
+  const QStringList rows2 = Tellico::FieldFormat::splitTable(entry2->field(QSL("table")));
+  QCOMPARE(rows2.count(), 2);
+}

@@ -1,3 +1,7 @@
+2021-05-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed allowing empty beginning rows in table fields.
+
 2021-04-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed relative links in the Entry View (Bug 436071).

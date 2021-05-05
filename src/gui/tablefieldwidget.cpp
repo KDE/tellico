@@ -301,6 +301,7 @@ void TableFieldWidget::slotMoveRowUp() {
   if(m_row < 1 || m_row > m_table->rowCount()-1) {
     return;
   }
+  m_table->blockSignals(true);
   for(int col = 0; col < m_table->columnCount(); ++col) {
     QTableWidgetItem* item1 = m_table->takeItem(m_row-1, col);
     QTableWidgetItem* item2 = m_table->takeItem(m_row  , col);
@@ -311,6 +312,7 @@ void TableFieldWidget::slotMoveRowUp() {
       m_table->setItem(m_row-1, col, item2);
     }
   }
+  m_table->blockSignals(false);
   checkModified();
 }
 
@@ -318,14 +320,18 @@ void TableFieldWidget::slotMoveRowDown() {
   if(m_row < 0 || m_row > m_table->rowCount()-2) {
     return;
   }
+  m_table->blockSignals(true);
   for(int col = 0; col < m_table->columnCount(); ++col) {
     QTableWidgetItem* item1 = m_table->takeItem(m_row  , col);
     QTableWidgetItem* item2 = m_table->takeItem(m_row+1, col);
-    if(item1 && item2) {
+    if(item1) {
       m_table->setItem(m_row+1, col, item1);
+    }
+    if(item2) {
       m_table->setItem(m_row  , col, item2);
     }
   }
+  m_table->blockSignals(false);
   checkModified();
 }
 

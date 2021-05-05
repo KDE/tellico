@@ -57,6 +57,7 @@ private Q_SLOTS:
   void testNoCreationDate();
   void testFutureVersion();
   void testRelativeLink();
+  void testEmptyFirstTableRow();
 
 private:
   QList<Tellico::Data::CollPtr> m_collections;
