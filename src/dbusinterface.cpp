@@ -23,13 +23,13 @@
  ***************************************************************************/
 
 #include "dbusinterface.h"
-#include "../controller.h"
-#include "../tellico_kernel.h"
-#include "../document.h"
-#include "../collection.h"
-#include "../fieldformat.h"
-#include "../utils/bibtexhandler.h"
-#include "../mainwindow.h"
+#include "controller.h"
+#include "tellico_kernel.h"
+#include "document.h"
+#include "collection.h"
+#include "fieldformat.h"
+#include "utils/bibtexhandler.h"
+#include "mainwindow.h"
 
 #include <QDBusConnection>
 
