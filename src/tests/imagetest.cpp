@@ -22,8 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#undef QT_NO_CAST_FROM_ASCII
-
 #include "imagetest.h"
 
 #include "../images/imagefactory.h"
@@ -39,7 +37,7 @@ void ImageTest::initTestCase() {
 }
 
 void ImageTest::testLinkOnly() {
-  QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/hi128-app-tellico.png"));
+  QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/128-apps-tellico.png"));
   // addImage(url, quiet, referer, link)
   QString id = Tellico::ImageFactory::addImage(u, false, QUrl(), true);
   QCOMPARE(id, u.url());
