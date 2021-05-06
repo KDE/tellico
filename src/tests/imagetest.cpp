@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,6 +25,7 @@
 #include "imagetest.h"
 
 #include "../images/imagefactory.h"
+#include "../images/image.h"
 
 #include <QTest>
 #include <QStandardPaths>
@@ -41,4 +42,18 @@ void ImageTest::testLinkOnly() {
   // addImage(url, quiet, referer, link)
   QString id = Tellico::ImageFactory::addImage(u, false, QUrl(), true);
   QCOMPARE(id, u.url());
+}
+
+void ImageTest::testOrientation() {
+  QUrl u1 = QUrl::fromLocalFile(QFINDTESTDATA("data/img1.jpg"));
+  QString id1 = Tellico::ImageFactory::addImage(u1);
+  const Tellico::Data::Image& img1 = Tellico::ImageFactory::imageById(id1);
+  QRgb px = img1.pixel(0, 0);
+  QVERIFY(qRed(px) > 250 && qGreen(px) < 5 && qBlue(px) < 5);
+
+  QUrl u2 = QUrl::fromLocalFile(QFINDTESTDATA("data/img2.jpg"));
+  QString id2 = Tellico::ImageFactory::addImage(u2);
+  const Tellico::Data::Image& img2 = Tellico::ImageFactory::imageById(id2);
+  px = img2.pixel(0, 0);
+  QVERIFY(qRed(px) > 250 && qGreen(px) < 5 && qBlue(px) < 5);
 }

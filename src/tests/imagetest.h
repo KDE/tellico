@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -33,6 +33,7 @@ Q_OBJECT
 private Q_SLOTS:
   void initTestCase();
   void testLinkOnly();
+  void testOrientation();
 };
 
 #endif
