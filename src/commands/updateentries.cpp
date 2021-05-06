@@ -26,7 +26,6 @@
 #include "fieldcommand.h"
 #include "modifyentries.h"
 #include "../collection.h"
-#include "../tellico_kernel.h"
 #include "../utils/mergeconflictresolver.h"
 
 #include <KLocalizedString>

@@ -27,7 +27,6 @@
 #include "../core/filehandler.h"
 #include "../utils/cursorsaver.h"
 #include "../utils/tellico_utils.h"
-#include "../tellico_kernel.h"
 #include "../tellico_debug.h"
 
 #include <KTar>

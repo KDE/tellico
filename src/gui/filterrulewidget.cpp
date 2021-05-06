@@ -29,7 +29,6 @@
 #include "combobox.h"
 #include "../document.h"
 #include "../fieldcompletion.h"
-#include "../tellico_kernel.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -67,7 +66,7 @@ void FilterRuleWidget::initLists() {
   //---------- initialize list of filter fields
   if(m_ruleFieldList.isEmpty()) {
     m_ruleFieldList.append(QLatin1Char('<') + i18n("Any Field") + QLatin1Char('>'));
-    QStringList titles = Kernel::self()->fieldTitles();
+    QStringList titles = Data::Document::self()->collection()->fieldTitles();
     titles.sort();
     m_ruleFieldList += titles;
   }
@@ -139,7 +138,7 @@ void FilterRuleWidget::slotRuleFieldChanged(int which_) {
   Data::FieldPtr field = Data::Document::self()->collection()->fieldByTitle(fieldTitle);
   if(field && field->hasFlag(Data::Field::AllowCompletion)) {
     FieldCompletion* completion = new FieldCompletion(field->hasFlag(Data::Field::AllowMultiple));
-    completion->setItems(Kernel::self()->valuesByFieldName(field->name()));
+    completion->setItems(Data::Document::self()->collection()->valuesByFieldName(field->name()));
     completion->setIgnoreCase(true);
     m_ruleValue->setCompletionObject(completion);
     m_ruleValue->setAutoDeleteCompletionObject(true);
@@ -219,7 +218,7 @@ void FilterRuleWidget::setRule(const Tellico::FilterRule* rule_) {
 Tellico::FilterRule* FilterRuleWidget::rule() const {
   QString fieldName; // empty string
   if(m_ruleField->currentIndex() > 0) { // 0 is "All Fields", field is empty
-    fieldName = Kernel::self()->fieldNameByTitle(m_ruleField->currentText());
+    fieldName = Data::Document::self()->collection()->fieldNameByTitle(m_ruleField->currentText());
   }
 
   QString ruleValue;

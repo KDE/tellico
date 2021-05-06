@@ -64,22 +64,6 @@ QUrl Kernel::URL() const {
   return Data::Document::self()->URL();
 }
 
-QStringList Kernel::fieldTitles() const {
-  return Data::Document::self()->collection()->fieldTitles();
-}
-
-QString Kernel::fieldNameByTitle(const QString& title_) const {
-  return Data::Document::self()->collection()->fieldNameByTitle(title_);
-}
-
-QString Kernel::fieldTitleByName(const QString& name_) const {
-  return Data::Document::self()->collection()->fieldTitleByName(name_);
-}
-
-QStringList Kernel::valuesByFieldName(const QString& name_) const {
-  return Data::Document::self()->collection()->valuesByFieldName(name_);
-}
-
 int Kernel::collectionType() const {
   return Data::Document::self()->collection() ?
          Data::Document::self()->collection()->type() :

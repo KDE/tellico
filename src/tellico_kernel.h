@@ -66,27 +66,6 @@ public:
    * @return The URL
    */
   QUrl URL() const;
-  /**
-   * Returns a list of the field titles, wraps the call to the collection itself.
-   *
-   * @return the field titles
-   */
-  QStringList fieldTitles() const;
-  /**
-   * Returns the name of an field, given its title. Wraps the call to the collection itself.
-   *
-   * @param title The field title
-   * @return The field name
-   */
-  QString fieldNameByTitle(const QString& title) const;
-  /**
-   * Returns the title of an field, given its name. Wraps the call to the collection itself.
-   *
-   * @param name The field name
-   * @return The field title
-   */
-  QString fieldTitleByName(const QString& name) const;
-  QStringList valuesByFieldName(const QString& name) const;
 
   int collectionType() const;
   QString collectionTypeName() const;

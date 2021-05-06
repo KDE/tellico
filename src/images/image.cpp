@@ -59,13 +59,18 @@ Image& Image::operator=(const Image& other) {
 // I'm using the MD5 hash as the id. I consider it rather unlikely that two images in one
 // collection could ever have the same hash, and this lets me do a fast comparison of two images
 // simply by comparing their ids.
-Image::Image(const QString& filename_, const QString& id_) : QImage(filename_), m_id(idClean(id_)), m_linkOnly(false) {
-  m_format = QImageReader::imageFormat(filename_);
-  if(isNull()) {
+Image::Image(const QString& filename_, const QString& id_) : QImage(), m_id(idClean(id_)), m_linkOnly(false) {
+  QImageReader reader;
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 5, 0))
+  reader.setAutoTransform(true);
+#endif
+  reader.setFileName(filename_);
+  m_format = reader.format();
+  if(!reader.read(this)) {
     // Tellico had an earlier bug where images were written in PNG format with a GIF extension
     // and for some reason, qt doesn't recognize the file then, so fall back and try to load as PNG
-    load(filename_, "PNG");
-    if(!isNull()) {
+    reader.setFormat("PNG");
+    if(reader.read(this)) {
       myWarning() << filename_ << "loaded as PNG image";
       m_format = "PNG";
     }
