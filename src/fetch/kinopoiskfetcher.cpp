@@ -250,7 +250,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
-  QRegularExpression jsonRx(QStringLiteral("<script.*?type=\"application/json\">(.+?)</script>"));
+  static const QRegularExpression jsonRx(QStringLiteral("<script.*?type=\"application/json\".*?>(.+?)</script>"));
   QRegularExpressionMatch jsonMatch = jsonRx.match(str_);
   if(!jsonMatch.hasMatch()) {
     myDebug() << "No JSON data";
@@ -323,7 +323,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
 }
 
 Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntryLinkedData(const QString& str_) {
-  QRegularExpression jsonRx(QStringLiteral("<script.*?type=\"application/ld\\+json\">(.+?)</script>"));
+  QRegularExpression jsonRx(QStringLiteral("<script.*?type=\"application/ld\\+json\".*?>(.+?)</script>"));
   QRegularExpressionMatch jsonMatch = jsonRx.match(str_);
   if(!jsonMatch.hasMatch()) {
     myDebug() << "No JSON data";
@@ -422,7 +422,11 @@ QString KinoPoiskFetcher::fieldValueFromObject(const QJsonObject& obj_, const QS
     return value_.toString();
   }
 
-  QJsonObject valueObj = obj_.value(value_.toObject().value(QStringLiteral("id")).toString()).toObject();
+  QJsonObject valueObj = value_.toObject();
+  // if there's a reference to another object, need to pull it from the higher level data object
+  if(valueObj.contains(QStringLiteral("__ref"))) {
+    valueObj = obj_.value(valueObj.value(QStringLiteral("__ref")).toString()).toObject();
+  }
 
   // if it has a 'person' field, gotta grab the person name
   if(valueObj.contains(QLatin1String("person"))) {
@@ -430,7 +434,7 @@ QString KinoPoiskFetcher::fieldValueFromObject(const QJsonObject& obj_, const QS
   }
 
   if(field_ == QLatin1String("title")) {
-    QString title = valueObj.value(QStringLiteral("russian")).toString();
+    const QString title = valueObj.value(QStringLiteral("russian")).toString();
     // return original if russian is not available
     return title.isEmpty() ? valueObj.value(QStringLiteral("original")).toString() : title;
   } else if(field_ == QLatin1String("origtitle")) {
