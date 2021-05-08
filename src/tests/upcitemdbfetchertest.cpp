@@ -91,7 +91,7 @@ void UPCItemDbFetcherTest::testCatan() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Settlers of Catan Board Game"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Catan Studio - Catan Board Game"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Catan Studio"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
@@ -134,7 +134,7 @@ void UPCItemDbFetcherTest::testBurningEdge() {
 
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Burning Edge Of Dawn"));
   QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Andrew Peterson"));
-  QCOMPARE(entry->field(QStringLiteral("label")), QStringLiteral("Centricity Music"));
+  QCOMPARE(entry->field(QStringLiteral("label")), QStringLiteral("UMGD"));
   QCOMPARE(entry->field(QStringLiteral("medium")), QStringLiteral("Compact Disc"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));

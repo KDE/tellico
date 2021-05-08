@@ -37,7 +37,6 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testSuperman();
-  void testTop();
   void testBug403185();
 
 private:

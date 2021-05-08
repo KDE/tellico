@@ -34,7 +34,7 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
-#include <QSharedPointer>
+#include <QPointer>
 #include <QUrl>
 
 #include <KConfigGroup>
@@ -53,7 +53,7 @@ class Fetcher : public QObject {
 Q_OBJECT
 
 public:
-  typedef QSharedPointer<Fetcher> Ptr;
+  typedef QPointer<Fetcher> Ptr;
 
   /**
    */

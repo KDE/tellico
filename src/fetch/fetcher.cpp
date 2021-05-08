@@ -49,6 +49,7 @@ Fetcher::Fetcher(QObject* parent) : QObject(parent)
     , m_updateOverwrite(false)
     , m_hasMoreResults(false)
     , m_messager(nullptr) {
+  Q_ASSERT(parent);
 }
 
 Fetcher::~Fetcher() {

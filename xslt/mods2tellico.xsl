@@ -71,7 +71,7 @@
 </xsl:variable>
 
 <xsl:variable name="npubs">
- <xsl:value-of select="count(//mods:originInfo[count(mods:publisher) &gt; 1])"/>
+ <xsl:value-of select="count(//mods:originInfo[count(mods:publisher) &gt; 1 and not(ancestor::mods:extension)])"/>
 </xsl:variable>
 
 <!-- disable default behavior -->
@@ -95,7 +95,7 @@
     <!-- the default collection does not have multiple publishers -->
     <xsl:if test="$npubs &gt; 1">
      <field flags="7" title="Publisher" category="Publishing" format="0" type="1" name="publisher" i18n="true">
-      <prop name="bibtex">publisher</prop>
+      <prop name="bibtex">publisher<xsl:value-of select="$npubs"/></prop>
      </field>
     </xsl:if>
     <!-- default book collection does not include an abstract -->
@@ -285,13 +285,24 @@
    </xsl:for-each>
   </languages>
 
-  <comments>
-   <xsl:for-each select="mods:note | mods:physicalDescription/*">
-    <xsl:value-of select="."/>
-    <!-- add separating line, Tellico understands HTML now -->
-    <xsl:text>&lt;br/&gt;&lt;br/&gt;</xsl:text>
-   </xsl:for-each>
-  </comments>
+  <xsl:if test="$type='book'">
+   <comments>
+    <xsl:for-each select="mods:note | mods:physicalDescription/*">
+     <xsl:value-of select="."/>
+     <!-- add separating line, Tellico understands HTML now -->
+     <xsl:text>&lt;br/&gt;&lt;br/&gt;</xsl:text>
+    </xsl:for-each>
+   </comments>
+  </xsl:if>
+  <xsl:if test="$type='bibtex'">
+   <note>
+    <xsl:for-each select="mods:note | mods:physicalDescription/*">
+     <xsl:value-of select="."/>
+     <!-- add separating line, Tellico understands HTML now -->
+     <xsl:text>&lt;br/&gt;&lt;br/&gt;</xsl:text>
+    </xsl:for-each>
+   </note>
+  </xsl:if>
 
   <keywords i18n="true">
    <xsl:for-each select="mods:subject/mods:topic">
@@ -307,7 +318,6 @@
                                mods:identifier |
                                mods:classification |
                                mods:subTitle |
-                               mods:note |
                                mods:abstract |
                                mods:originInfo/mods:place |
                                mods:originInfo/mods:copyrightDate |
@@ -496,12 +506,6 @@
  <url>
   <xsl:value-of select="."/>
  </url>
-</xsl:template>
-
-<xsl:template match="mods:note">
- <note>
-  <xsl:value-of select="."/>
- </note>
 </xsl:template>
 
 <xsl:template match="mods:place">
