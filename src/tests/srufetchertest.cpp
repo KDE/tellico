@@ -142,9 +142,9 @@ void SRUFetcherTest::testKBIsbn() {
 void SRUFetcherTest::testCopacIsbn() {
   KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("Copac"));
   cg.writeEntry("Format", QStringLiteral("mods"));
-  cg.writeEntry("Host", QStringLiteral("copac.jisc.ac.uk"));
-  cg.writeEntry("Path", QStringLiteral("/copac"));
-  cg.writeEntry("Port", 3000);
+  cg.writeEntry("Host", QStringLiteral("discover.libraryhub.jisc.ac.uk"));
+  cg.writeEntry("Path", QStringLiteral("/discover"));
+  cg.writeEntry("Port", 210);
   cg.writeEntry("Custom Fields", QStringLiteral("lcc"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
@@ -157,11 +157,12 @@ void SRUFetcherTest::testCopacIsbn() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Foundations of Qt development"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Foundations of Qt Development"));
   QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Thelin, Johan."));
   // the mods2tellico.xsl file returns the last ISBN value in the response, which is different in this case. Ignore for now
 //  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("1-43020-251-3"));
-  QCOMPARE(entry->field(QStringLiteral("lcc")), QStringLiteral("QA76.6 .T4457 2007eb"));
+  QCOMPARE(entry->field(QStringLiteral("lcc")), QStringLiteral("T385"));
+  QCOMPARE(entry->field(QStringLiteral("lccn")), QStringLiteral("2008295709"));
   QCOMPARE(entry->field(QStringLiteral("doi")), QStringLiteral("10.1007/978-1-4302-0251-6"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2007"));
   QVERIFY(entry->field(QStringLiteral("publisher")).contains(QStringLiteral("Apress")));
