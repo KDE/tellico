@@ -143,7 +143,9 @@ void TheMovieDBFetcherTest::testAllMankind() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field("title"), QStringLiteral("For All Mankind"));
   QCOMPARE(entry->field("origtitle"), QStringLiteral("For All Mankind"));
-  QCOMPARE(entry->field("alttitle"), QStringLiteral("Para toda la humanidad"));
+  QStringList titleList = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("alttitle")));
+  QVERIFY(!titleList.isEmpty());
+  QVERIFY(titleList.contains(QStringLiteral("Para toda la humanidad")));
   QCOMPARE(entry->field("year"), QStringLiteral("2019"));
   QCOMPARE(entry->field("network"), QStringLiteral("Apple TV+"));
   QCOMPARE(entry->field("language"), QStringLiteral("English"));
