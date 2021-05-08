@@ -145,7 +145,7 @@ private:
   StringMap m_scriptMap;
   ManagerMessage* m_messager;
   uint m_count;
-  bool m_loadDefaults : 1;
+  bool m_loadDefaults;
 };
 
   } // end namespace
