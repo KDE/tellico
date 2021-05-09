@@ -34,7 +34,7 @@
 
 #include <QTest>
 
-QTEST_GUILESS_MAIN( FilmasterFetcherTest )
+QTEST_MAIN( FilmasterFetcherTest )
 
 FilmasterFetcherTest::FilmasterFetcherTest() : AbstractFetcherTest() {
 }

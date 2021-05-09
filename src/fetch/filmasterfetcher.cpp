@@ -94,6 +94,9 @@ void FilmasterFetcher::search() {
       u.setPath(u.path() + QLatin1String("person/"));
       break;
 
+    case Keyword:
+      break;
+
     default:
       stop();
       return;
@@ -131,7 +134,9 @@ Tellico::Data::EntryPtr FilmasterFetcher::fetchEntryHook(uint uid_) {
   const QString image = entry->field(QStringLiteral("cover"));
   if(image.contains(QLatin1Char('/'))) {
     QUrl imageUrl;
-    if(image.startsWith(QLatin1String("//"))) {
+    if(image.startsWith(QLatin1String("http"))) {
+      imageUrl = QUrl(image);
+    } else if(image.startsWith(QLatin1String("//"))) {
       imageUrl = QUrl(QLatin1String("http:") + image);
     } else {
       imageUrl = QUrl(QString::fromLatin1(FILMASTER_API_URL));
@@ -237,7 +242,7 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
   }
 
   foreach(const QVariant& result, resultList) {
-  //  myDebug() << "found result:" << result;
+//    myDebug() << "found result:" << result;
     Data::EntryPtr entry(new Data::Entry(coll));
     populateEntry(entry, result.toMap());
 

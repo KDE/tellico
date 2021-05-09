@@ -288,6 +288,7 @@ macro_bool_to_01(Csv_FOUND HAVE_LIBCSV)
 macro_bool_to_01(KF5FileMetaData_FOUND HAVE_KFILEMETADATA)
 macro_bool_to_01(Qt5Charts_FOUND HAVE_QCHARTS)
 macro_bool_to_01(ENABLE_BTPARSE ENABLE_BTPARSE)
+macro_bool_to_01(BUILD_FETCHER_TESTS ENABLE_NETWORK_TESTS)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 

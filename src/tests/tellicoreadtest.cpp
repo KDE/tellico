@@ -22,6 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
 #include "tellicoreadtest.h"
 
 #include "../translators/tellicoimporter.h"
@@ -52,11 +53,13 @@ QTEST_GUILESS_MAIN( TellicoReadTest )
 #define TELLICOREAD_NUMBER_OF_CASES 11
 
 static bool hasNetwork() {
+#ifdef ENABLE_NETWORK_TESTS
   foreach(const QNetworkInterface& net, QNetworkInterface::allInterfaces()) {
     if(net.flags().testFlag(QNetworkInterface::IsUp) && !net.flags().testFlag(QNetworkInterface::IsLoopBack)) {
       return true;
     }
   }
+#endif
   return false;
 }
 
