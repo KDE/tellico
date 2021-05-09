@@ -95,7 +95,7 @@
     <!-- the default collection does not have multiple publishers -->
     <xsl:if test="$npubs &gt; 1">
      <field flags="7" title="Publisher" category="Publishing" format="0" type="1" name="publisher" i18n="true">
-      <prop name="bibtex">publisher<xsl:value-of select="$npubs"/></prop>
+      <prop name="bibtex">publisher</prop>
      </field>
     </xsl:if>
     <!-- default book collection does not include an abstract -->
