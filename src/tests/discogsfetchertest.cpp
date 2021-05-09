@@ -206,7 +206,7 @@ void DiscogsFetcherTest::testRawData() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Anywhere But Home"));
+  QVERIFY(entry->field(QStringLiteral("title")).contains(QStringLiteral("Anywhere But Home")));
   QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Evanescence"));
   QCOMPARE(entry->field(QStringLiteral("label")), QStringLiteral("Wind-Up"));
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2004"));
@@ -243,7 +243,7 @@ void DiscogsFetcherTest::testRawDataVinyl() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("The Clash"));
+  QVERIFY(entry->field(QStringLiteral("title")).contains(QStringLiteral("The Clash")));
   QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("The Clash"));
   QCOMPARE(entry->field(QStringLiteral("label")), QStringLiteral("CBS; CBS"));
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1977"));
