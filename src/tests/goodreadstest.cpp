@@ -22,6 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
 #include "goodreadstest.h"
 
 #include "../translators/goodreadsimporter.h"
@@ -41,11 +42,13 @@
 QTEST_GUILESS_MAIN( GoodreadsTest )
 
 static bool hasNetwork() {
+#ifdef ENABLE_NETWORK_TESTS
   foreach(const QNetworkInterface& net, QNetworkInterface::allInterfaces()) {
     if(net.flags().testFlag(QNetworkInterface::IsUp) && !net.flags().testFlag(QNetworkInterface::IsLoopBack)) {
       return true;
     }
   }
+#endif
   return false;
 }
 

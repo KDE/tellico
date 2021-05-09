@@ -39,3 +39,5 @@
 #cmakedefine HAVE_KFILEMETADATA
 
 #cmakedefine HAVE_QCHARTS
+
+#cmakedefine ENABLE_NETWORK_TESTS
