@@ -277,7 +277,7 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
     return false;
   }
 //  myLog() << "dir =" << (dir_ == DataDir ? "DataDir" : "TmpDir" ) << "; id =" << id_;
-  ImageDirectory* imgDir;
+  ImageDirectory* imgDir = nullptr;
   switch(dir_) {
     case DataDir:
       imgDir = &factory->d->dataImageDir;
