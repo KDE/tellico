@@ -110,7 +110,7 @@ private:
 
   // all constructors are private
   Kernel(QWidget* parent);
-  Q_DISABLE_COPY(Kernel);
+  Q_DISABLE_COPY(Kernel)
   ~Kernel();
 
   void doCommand(QUndoCommand* command);
