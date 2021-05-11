@@ -76,7 +76,10 @@ void GroupSummaryWidget::addChart(Tellico::Data::FieldPtr field_) {
   // first populate a model with the entry groups for this field
   Data::CollPtr coll = Data::Document::self()->collection();
   Data::EntryGroupDict* dict = coll->entryGroupDictByName(field_->name());
-  Q_ASSERT(dict);
+  // dict will be null for a field with no values
+  if(!dict) {
+    return;
+  }
 
   EntryGroupModel* groupModel = new EntryGroupModel(this);
   groupModel->addGroups(dict->values(), QString()); // TODO: make second value optional
