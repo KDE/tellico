@@ -33,7 +33,7 @@ ecm_add_test(isbntest.cpp
 )
 
 ecm_add_test(lccntest.cpp
-    TEST_NAME lccntest.cpp
+    TEST_NAME lccntest
     LINK_LIBRARIES Qt5::Test utils
 )
 
