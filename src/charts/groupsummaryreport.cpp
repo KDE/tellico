@@ -57,13 +57,13 @@ GroupSummaryWidget::GroupSummaryWidget(const QString& title_, int count_, QWidge
   m_layout->setSpacing(0);
   widget->setLayout(m_layout);
 
-  auto titleLabel = new QLabel(i18n("Group Summary: %1").arg(title_), widget);
+  auto titleLabel = new QLabel(i18n("Group Summary: %1", title_), widget);
   titleLabel->setAlignment(Qt::AlignCenter);
   int fontSize = qRound(QApplication::font().pointSize() * 2.0);
   titleLabel->setStyleSheet(QStringLiteral("QLabel { font-size: %1pt }").arg(QString::number(fontSize)));
   m_layout->addWidget(titleLabel, 0, 0, 1, -1);
 
-  auto countLabel = new QLabel(i18n("Total number of entries: %1").arg(count_), widget);
+  auto countLabel = new QLabel(i18n("Total number of entries: %1", count_), widget);
   countLabel->setAlignment(Qt::AlignCenter);
   fontSize = qRound(QApplication::font().pointSize() * 1.2);
   countLabel->setStyleSheet(QStringLiteral("QLabel { font-size: %1pt; font-style: italic }").arg(QString::number(fontSize)));
@@ -117,7 +117,7 @@ void GroupSummaryWidget::addChart(Tellico::Data::FieldPtr field_) {
 
   auto chart = new BarChart(groupNames, groupCounts);
   m_charts << chart;
-  chart->setTitle(i18n("Top Values: %1").arg(field_->title()));
+  chart->setTitle(i18n("Top Values: %1", field_->title()));
   chart->setTheme(qApp->palette().color(QPalette::Window).lightnessF() < 0.25 ? QtCharts::QChart::ChartThemeDark
                                                                               : QtCharts::QChart::ChartThemeLight);
 
