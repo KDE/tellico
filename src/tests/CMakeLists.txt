@@ -27,7 +27,7 @@ ecm_add_test(cuecattest.cpp
     LINK_LIBRARIES Qt5::Test utils
 )
 
-ecm_add_test(isbntest
+ecm_add_test(isbntest.cpp
     TEST_NAME isbntest
     LINK_LIBRARIES Qt5::Test utils
 )
