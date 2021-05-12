@@ -78,7 +78,7 @@ QString IGDBFetcher::source() const {
 }
 
 QString IGDBFetcher::attribution() const {
-  return i18n(providedBy).arg(QLatin1String("https://igdb.com"), QLatin1String("IGDB.com"));
+  return i18n(providedBy, QLatin1String("https://igdb.com"), QLatin1String("IGDB.com"));
 }
 
 bool IGDBFetcher::canSearch(Fetch::FetchKey k) const {
