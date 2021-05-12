@@ -315,7 +315,6 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
     vec.append(SRUFetcher::libraryOfCongress(this));
   }
 // comic books
-//  FETCHER_ADD(AnimeNfo);
   FETCHER_ADD(Bedetheque);
   FETCHER_ADD(ComicVine);
 // bibliographic
@@ -335,6 +334,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(BoardGameGeek);
 // movies
   FETCHER_ADD(TheMovieDB);
+  FETCHER_ADD(TVmaze);
   FETCHER_ADD(IMDB);
 // coins and stamps
   FETCHER_ADD(Colnect);
