@@ -79,7 +79,7 @@ QString MobyGamesFetcher::source() const {
 }
 
 QString MobyGamesFetcher::attribution() const {
-  return i18n(providedBy).arg(QLatin1String("https://mobygames.com"), QLatin1String("MobyGames"));
+  return i18n(providedBy, QLatin1String("https://mobygames.com"), QLatin1String("MobyGames"));
 }
 
 bool MobyGamesFetcher::canSearch(Fetch::FetchKey k) const {
