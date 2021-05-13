@@ -307,7 +307,7 @@ Comma-separated values (CSV) are a common way of importing and exporting tabular
 <title>Exporting Alexandria</title>
 
 <para>
-<application><ulink url="http://alexandria.rubyforge.net">Alexandria</ulink></application> is a book collection manager for the <ulink url="http://www.gnome.org">GNOME</ulink> desktop environment. &appname; is able to export a limited subset of book collection fields to the default Alexandria data location.
+<application><ulink url="https://github.com/mvz/alexandria-book-collection-manager">Alexandria</ulink></application> is a book collection manager for the <ulink url="http://www.gnome.org">GNOME</ulink> desktop environment. &appname; is able to export a limited subset of book collection fields to the default Alexandria data location.
 </para>
 
 </sect2>
