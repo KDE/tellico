@@ -631,6 +631,10 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   label = new QLabel(i18n("Language: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_langCombo = new GUI::ComboBox(optionsWidget());
+  // check https://www.themoviedb.org/contribute occasionally for top languages
+  QIcon iconCN(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                      QStringLiteral("kf5/locale/countries/cn/flag.png")));
+  m_langCombo->addItem(iconCN, i18nc("Language", "Chinese"), QLatin1String("cn"));
   QIcon iconUS(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
                                       QStringLiteral("kf5/locale/countries/us/flag.png")));
   m_langCombo->addItem(iconUS, i18nc("Language", "English"), QLatin1String("en"));
@@ -643,6 +647,10 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   QIcon iconES(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
                                       QStringLiteral("kf5/locale/countries/es/flag.png")));
   m_langCombo->addItem(iconES, i18nc("Language", "Spanish"), QLatin1String("es"));
+  QIcon iconRU(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                      QStringLiteral("kf5/locale/countries/ru/flag.png")));
+  m_langCombo->addItem(iconRU, i18nc("Language", "Russian"), QLatin1String("ru"));
+  m_langCombo->setCurrentData(QLatin1String("en"));
   void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
   connect(m_langCombo, activatedInt, this, &ConfigWidget::slotSetModified);
   connect(m_langCombo, activatedInt, this, &ConfigWidget::slotLangChanged);
