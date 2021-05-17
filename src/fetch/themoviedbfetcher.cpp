@@ -650,6 +650,7 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   QIcon iconRU(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
                                       QStringLiteral("kf5/locale/countries/ru/flag.png")));
   m_langCombo->addItem(iconRU, i18nc("Language", "Russian"), QLatin1String("ru"));
+  m_langCombo->setEditable(true);
   m_langCombo->setCurrentData(QLatin1String("en"));
   void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
   connect(m_langCombo, activatedInt, this, &ConfigWidget::slotSetModified);
@@ -668,6 +669,9 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
     if(fetcher_->m_apiKey != QLatin1String(THEMOVIEDB_API_KEY)) {
       m_apiKeyEdit->setText(fetcher_->m_apiKey);
     }
+    if(m_langCombo->findData(fetcher_->m_locale) == -1) {
+      m_langCombo->addItem(fetcher_->m_locale, fetcher_->m_locale);
+    }
     m_langCombo->setCurrentData(fetcher_->m_locale);
     m_numCast->setValue(fetcher_->m_numCast);
   }
@@ -678,7 +682,11 @@ void TheMovieDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   if(!apiKey.isEmpty()) {
     config_.writeEntry("API Key", apiKey);
   }
-  const QString lang = m_langCombo->currentData().toString();
+  QString lang = m_langCombo->currentData().toString();
+  if(lang.isEmpty()) {
+    // user-entered format will not have data set for the item. Just use the text itself
+    lang = m_langCombo->currentText().trimmed();
+  }
   config_.writeEntry("Locale", lang);
   config_.writeEntry("Max Cast", m_numCast->value());
 }
