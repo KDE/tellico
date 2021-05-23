@@ -150,7 +150,7 @@
     font-size: 1.0em;
     top: -1px;
     font-style: normal;
-    text-align: right;
+    text-align: center;
   }
   table {
     border-collapse: collapse;
@@ -182,7 +182,6 @@
     font-style: italic;
     text-align: left;
     padding: 0px 10px 0px 10px;
-/*    width: 90%;  nowrap is set on the fieldName column, so just want enough width to take the rest */
   }
   p {
     margin: 2px 10px 2px 0;
@@ -374,15 +373,17 @@
      <!-- look at number of columns -->
      <xsl:choose>
       <xsl:when test="$fields[1]/tc:prop[@name = 'columns'] &gt; 1">
-       <table width="100%">
+       <table>
         <xsl:if test="$fields[1]/tc:prop[@name = 'column1']">
          <thead>
           <tr class="table-columns">
-           <th width="50%">
+           <th>
             <xsl:value-of select="$fields[1]/tc:prop[@name = 'column1']"/>
+            <xsl:text>&#160;</xsl:text>
            </th>
-           <th width="50%">
+           <th>
             <xsl:value-of select="$fields[1]/tc:prop[@name = 'column2']"/>
+            <xsl:text>&#160;</xsl:text>
            </th>
            <xsl:call-template name="columnTitle">
             <xsl:with-param name="index" select="3"/>
@@ -406,6 +407,10 @@
              </xsl:when>
              <xsl:otherwise>
               <td class="column2">
+               <!-- special-case the tv episode table -->
+               <xsl:if test="$fields[1]/@name = 'episode'">
+                <xsl:attribute name="style">text-align:center</xsl:attribute>
+               </xsl:if>
                <xsl:value-of select="."/>
                <xsl:text>&#160;</xsl:text>
               </td>
