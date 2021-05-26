@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC '-//Robby Stephenson/DTD Tellico V11.0//EN' 'http://periapsis.org/tellico/dtd/v11/tellico.dtd'>
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection type="3" title="My Videos">
+  <fields>
+   <field name="title" category="General" flags="8" type="1" format="1" title="Title"/>
+   <field allowed="DVD;VHS;VCD;DivX;Blu-ray;HD DVD" name="medium" category="General" flags="2" type="3" format="4" title="Medium"/>
+   <field name="year" category="General" flags="2" type="6" format="4" title="Production Year"/>
+   <field allowed="G (USA);PG (USA);PG-13 (USA);R (USA);U (USA);TV-MA" name="certification" category="General" flags="2" type="3" format="4" title="Certification"/>
+   <field name="genre" category="General" flags="7" type="1" format="0" title="Genre"/>
+   <field allowed="Region 0;Region 1;Region 2;Region 3;Region 4;Region 5;Region 6;Region 7;Region 8" name="region" category="General" flags="2" type="3" format="4" title="Region"/>
+   <field name="nationality" category="General" flags="7" type="1" format="0" title="Nationality"/>
+   <field allowed="NTSC;PAL;SECAM" name="format" category="General" flags="2" type="3" format="4" title="Format"/>
+   <field name="cast" category="Cast" flags="3" description="A table for the cast members, along with the roles they play" type="8" format="2" title="Cast">
+    <prop name="column1">Actor/Actress</prop>
+    <prop name="column2">Role</prop>
+    <prop name="columns">2</prop>
+   </field>
+   <field name="director" category="Other People" flags="7" type="1" format="2" title="Director"/>
+   <field name="producer" category="Other People" flags="7" type="1" format="2" title="Producer"/>
+   <field name="writer" category="Other People" flags="7" type="1" format="2" title="Writer"/>
+   <field name="composer" category="Other People" flags="7" type="1" format="2" title="Composer"/>
+   <field name="studio" category="Other People" flags="7" type="1" format="0" title="Studio"/>
+   <field name="language" category="Features" flags="7" type="1" format="0" title="Language Tracks"/>
+   <field name="subtitle" category="Features" flags="7" type="1" format="0" title="Subtitle Languages"/>
+   <field name="audio-track" category="Features" flags="7" type="1" format="0" title="Audio Tracks"/>
+   <field name="running-time" category="Features" flags="0" description="The running time of the video (in minutes)" type="6" format="4" title="Running Time"/>
+   <field name="aspect-ratio" category="Features" flags="7" type="1" format="4" title="Aspect Ratio"/>
+   <field name="widescreen" category="Features" flags="0" type="4" format="4" title="Widescreen"/>
+   <field allowed="Color;Black &amp; White" name="color" category="Features" flags="2" type="3" format="4" title="Color Mode"/>
+   <field name="directors-cut" category="Features" flags="0" type="4" format="4" title="Director's Cut"/>
+   <field name="plot" category="Plot Summary" flags="0" type="2" format="4" title="Plot Summary"/>
+   <field name="rating" category="Personal" flags="2" type="14" format="4" title="Personal Rating">
+    <prop name="maximum">5</prop>
+    <prop name="minimum">1</prop>
+   </field>
+   <field name="pur_date" category="Personal" flags="0" type="1" format="3" title="Purchase Date"/>
+   <field name="gift" category="Personal" flags="0" type="4" format="4" title="Gift"/>
+   <field name="pur_price" category="Personal" flags="0" type="1" format="4" title="Purchase Price"/>
+   <field name="loaned" category="Personal" flags="0" type="4" format="4" title="Loaned"/>
+   <field name="keyword" category="Personal" flags="7" type="1" format="4" title="Keywords"/>
+   <field name="cover" category="Cover" flags="0" type="10" format="4" title="Cover"/>
+   <field name="comments" category="Comments" flags="0" type="2" format="4" title="Comments"/>
+   <field name="id" category="Personal" flags="32" type="6" format="4" title="ID">
+    <prop name="template">%{@id}</prop>
+   </field>
+   <field name="cdate" category="Personal" flags="16" type="12" format="3" title="Date Created"/>
+   <field name="mdate" category="Personal" flags="16" type="12" format="3" title="Date Modified"/>
+   <field name="network" category="General" flags="0" type="1" format="4" title="Network"/>
+   <field name="imdb" category="General" flags="0" type="7" format="4" title="IMDb Link"/>
+   <field name="episode" category="Episodes" flags="1" type="8" format="1" title="Episodes">
+    <prop name="column1">Title</prop>
+    <prop name="column2">Season</prop>
+    <prop name="column3">Episode</prop>
+    <prop name="columns">3</prop>
+   </field>
+  </fields>
+  <entry id="1">
+   <title>Ted Lasso</title>
+   <year>2013</year>
+   <certification>TV-MA</certification>
+   <genres>
+    <genre>Comedy</genre>
+    <genre>Sport</genre>
+   </genres>
+   <casts>
+    <cast>
+     <column>Jason Sudeikis</column>
+     <column>Ted Lasso</column>
+    </cast>
+    <cast>
+     <column>Hannah Waddingham</column>
+     <column>Rebecca Welton</column>
+    </cast>
+    <cast>
+     <column>Juno Temple</column>
+     <column>Keeley Jones</column>
+    </cast>
+    <cast>
+     <column>Jeremy Swift</column>
+     <column>Leslie Higgins</column>
+    </cast>
+    <cast>
+     <column>Phil Dunster</column>
+     <column>Jamie Tartt</column>
+    </cast>
+    <cast>
+     <column>Brett Goldstein</column>
+     <column>Roy Kent</column>
+    </cast>
+    <cast>
+     <column>Brendan Hunt</column>
+     <column>Coach Beard</column>
+    </cast>
+    <cast>
+     <column>Nick Mohammed</column>
+     <column>Nathan Shelley</column>
+    </cast>
+    <cast>
+     <column>Sarah Niles</column>
+     <column>Sharon</column>
+    </cast>
+    <cast>
+     <column>Toheeb Jimoh</column>
+     <column>Sam Obisanya</column>
+    </cast>
+    <cast>
+     <column>Kola Bokinni</column>
+     <column>Isaac McAdoo</column>
+    </cast>
+    <cast>
+     <column>Stephen Manas</column>
+     <column>Richard Montlaur</column>
+    </cast>
+    <cast>
+     <column>Billy Harris</column>
+     <column>Colin Hughes</column>
+    </cast>
+    <cast>
+     <column>Adam Colborne</column>
+     <column>Baz</column>
+    </cast>
+    <cast>
+     <column>Kevin Garry</column>
+     <column>Paul</column>
+    </cast>
+    <cast>
+     <column>Bronson Webb</column>
+     <column>Jeremy</column>
+    </cast>
+    <cast>
+     <column>Annette Badland</column>
+     <column>Mae</column>
+    </cast>
+    <cast>
+     <column>James Lance</column>
+     <column>Trent Crimm</column>
+    </cast>
+    <cast>
+     <column>Cristo Fernández</column>
+     <column>Dani Rojas</column>
+    </cast>
+    <cast>
+     <column>Moe Jeudy-Lamour</column>
+     <column>Thierry Zoreaux</column>
+    </cast>
+   </casts>
+   <directors>
+    <director>Tom Marshall</director>
+    <director>Zach Braff</director>
+    <director>Elliot Hegarty</director>
+    <director>Declan Lowney</director>
+    <director>M.J. Delaney</director>
+   </directors>
+   <writers>
+    <writer>Bill Lawrence</writer>
+    <writer>Brendan Hunt</writer>
+    <writer>Jason Sudeikis</writer>
+    <writer>Joe Kelly</writer>
+    <writer>Jane Becker</writer>
+    <writer>Jamie Lee</writer>
+    <writer>Brett Goldstein</writer>
+    <writer>Bill Wrubel</writer>
+    <writer>Leann Bowen</writer>
+    <writer>Phoebe Walsh</writer>
+   </writers>
+   <languages>
+    <language>English</language>
+   </languages>
+   <plot>Ted Lasso, an American football coach, moves to England when he’s hired to manage a soccer team—despite having no experience. With cynical players and a doubtful town, will he get them to see the Ted Lasso Way?</plot>
+   <id>1</id>
+   <cdate calendar="gregorian">
+    <year>2021</year>
+    <month>05</month>
+    <day>25</day>
+   </cdate>
+   <mdate calendar="gregorian">
+    <year>2021</year>
+    <month>05</month>
+    <day>25</day>
+   </mdate>
+   <network>Apple TV+</network>
+   <imdb>https://www.imdb.com/title/tt10986410</imdb>
+   <episodes>
+    <episode>
+     <column>Pilot</column>
+     <column>1</column>
+     <column>1</column>
+    </episode>
+    <episode>
+     <column>Biscuits</column>
+     <column>1</column>
+     <column>2</column>
+    </episode>
+    <episode>
+     <column>Trent Crimm: The Independent</column>
+     <column>1</column>
+     <column>3</column>
+    </episode>
+    <episode>
+     <column>For the Children</column>
+     <column>1</column>
+     <column>4</column>
+    </episode>
+    <episode>
+     <column>Tan Lines</column>
+     <column>1</column>
+     <column>5</column>
+    </episode>
+    <episode>
+     <column>Two Aces</column>
+     <column>1</column>
+     <column>6</column>
+    </episode>
+    <episode>
+     <column>Make Rebecca Great Again</column>
+     <column>1</column>
+     <column>7</column>
+    </episode>
+    <episode>
+     <column>The Diamond Dogs</column>
+     <column>1</column>
+     <column>8</column>
+    </episode>
+    <episode>
+     <column>All Apologies</column>
+     <column>1</column>
+     <column>9</column>
+    </episode>
+    <episode>
+     <column>The Hope That Kills You</column>
+     <column>1</column>
+     <column>10</column>
+    </episode>
+    <episode>
+     <column>An American Coach in London: NBC Sports Premier League Film featuring Jason Sudeikis</column>
+     <column>0</column>
+     <column>1</column>
+    </episode>
+    <episode>
+     <column>The Return of Coach Lasso: NBC Sports Premier League Film featuring Jason Sudeikis</column>
+     <column>0</column>
+     <column>2</column>
+    </episode>
+    <episode>
+     <column>Behind-the-scenes with Coach Ted Lasso</column>
+     <column>0</column>
+     <column>3</column>
+    </episode>
+    <episode>
+     <column>Ted Lasso — A Conversation with José Mourinho</column>
+     <column>0</column>
+     <column>4</column>
+    </episode>
+    <episode>
+     <column>TBA</column>
+     <column>2</column>
+     <column>1</column>
+    </episode>
+    <episode>
+     <column>TBA</column>
+     <column>2</column>
+     <column>2</column>
+    </episode>
+    <episode>
+     <column>TBA</column>
+     <column>2</column>
+     <column>3</column>
+    </episode>
+    <episode>
+     <column>SAG Awards: Ted Lasso Team on the Greatest Ensembles of All Time</column>
+     <column>0</column>
+     <column>5</column>
+    </episode>
+   </episodes>
+  </entry>
+ </collection>
+</tellico>

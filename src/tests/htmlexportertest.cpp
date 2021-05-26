@@ -27,7 +27,9 @@
 #include "htmlexportertest.h"
 
 #include "../translators/htmlexporter.h"
+#include "../translators/tellicoimporter.h"
 #include "../collections/bookcollection.h"
+#include "../collections/videocollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../document.h"
@@ -40,6 +42,7 @@
 #include <QTemporaryDir>
 #include <QFile>
 #include <QStandardPaths>
+#include <QProcess>
 
 QTEST_GUILESS_MAIN( HtmlExporterTest )
 
@@ -47,6 +50,7 @@ void HtmlExporterTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
+  Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/tellico2html.xsl"));
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/entry-templates/Fancy.xsl"));
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/report-templates/Column_View.xsl"));
@@ -207,4 +211,66 @@ void HtmlExporterTest::testDirectoryNames() {
   // setCollectionUrl used when exporting entry files only
   exp.setCollectionURL(QUrl::fromLocalFile(QDir::homePath()));
   QCOMPARE(exp.fileDirName(), QStringLiteral("/"));
+}
+
+void HtmlExporterTest::testEntryTemplates() {
+  const QString tidy = QStandardPaths::findExecutable(QStringLiteral("tidy"));
+  if(tidy.isEmpty()) {
+    QSKIP("This test requires tidy", SkipAll);
+  }
+
+  QFETCH(QString, xsltFile);
+
+  QStringList tidyArgs = { QStringLiteral("-errors"),
+                           QStringLiteral("-quiet"),
+                           QStringLiteral("--show-warnings"),
+                           QStringLiteral("no"),
+                           QStringLiteral("--strict-tags-attributes"),
+                           QStringLiteral("yes") };
+  QProcessEnvironment tidyEnv;
+  // suppress warning about no tidyrc file
+  tidyEnv.insert("HTML_TIDY", "/dev/null");
+
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QStringLiteral("data/ted_lasso.xml")));
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  Tellico::Export::HTMLExporter exporter(coll);
+  exporter.setParseDOM(false); // shows error for <wbr> tags and is not necessary for check
+  exporter.setEntries(coll->entries());
+  exporter.setXSLTFile(xsltFile);
+
+  const QString output = exporter.text();
+  QProcess tidyProc;
+  tidyProc.setProcessEnvironment(tidyEnv);
+  tidyProc.setProcessChannelMode(QProcess::SeparateChannels);
+  tidyProc.setReadChannel(QProcess::StandardError);
+  tidyProc.start(tidy, tidyArgs);
+  QVERIFY(tidyProc.waitForStarted());
+
+  tidyProc.write(output.toUtf8() + '\n');
+  QVERIFY(tidyProc.waitForBytesWritten());
+  tidyProc.closeWriteChannel();
+  QVERIFY(tidyProc.waitForFinished());
+
+  QTextStream ts(&tidyProc);
+  QString errorOutput = ts.readLine();
+  while(!errorOutput.isEmpty()) {
+    qDebug() << errorOutput;
+    errorOutput = ts.readLine();
+  }
+
+  tidyProc.close();
+  QCOMPARE(tidyProc.exitStatus(), QProcess::NormalExit);
+  // tidy exit codes are 0 for none, 1 for warnings only, 2 for errors
+  QCOMPARE(tidyProc.exitCode(), 0);
+}
+
+void HtmlExporterTest::testEntryTemplates_data() {
+  QTest::addColumn<QString>("xsltFile");
+
+  QTest::newRow("Default") << QStringLiteral("Default.xsl");
+  QTest::newRow("Fancy") << QStringLiteral("Fancy.xsl");
+  QTest::newRow("Compact") << QStringLiteral("Compact.xsl");
+  QTest::newRow("Video") << QStringLiteral("Video.xsl");
 }
