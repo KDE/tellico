@@ -18,8 +18,6 @@
 
 <xsl:output method="html"
             indent="yes"
-            doctype-public="-//W3C//DTD HTML 4.01//EN"
-            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
             encoding="utf-8"/>
 
 <!-- Template for checking syntax version -->
@@ -336,7 +334,7 @@
     <xsl:with-param name="url" select="$first" />
    </xsl:call-template>
    <xsl:text>/</xsl:text>
-   <wbr />
+   <xsl:text disable-output-escaping="yes">&lt;wbr&gt;</xsl:text>
    <xsl:call-template name="break-url-slash">
     <xsl:with-param name="url" select="$next" />
    </xsl:call-template>
@@ -359,7 +357,7 @@
   <xsl:when test="$first or $next">
    <xsl:value-of select="$first" />
    <xsl:text>-</xsl:text>
-   <wbr />
+   <xsl:text disable-output-escaping="yes">&lt;wbr&gt;</xsl:text>
    <xsl:call-template name="break-url-hyphen">
     <xsl:with-param name="url" select="$next" />
    </xsl:call-template>

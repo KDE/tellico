@@ -25,8 +25,7 @@
 
 <xsl:output method="html"
             indent="yes"
-            doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
-            doctype-system="http://www.w3.org/TR/html4/loose.dtd"
+            doctype-system="about:legacy-compat"
             encoding="utf-8"/>
 
 <xsl:param name="datadir"/> <!-- dir where Tellico data are located -->
@@ -68,7 +67,7 @@
  <html>
   <head>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <style type="text/css">
+  <style>
    body {
         margin: 4px;
         padding: 0px;
@@ -92,7 +91,8 @@
    }
    table.category {
         margin-bottom: 1em;
-	float: left;
+        float: left;
+        width: 50%;
    }
    tr.category {
         font-weight: bold;
@@ -164,11 +164,11 @@
 
  <!-- put the general category and all images in top table, one cell for each -->
  <xsl:variable name="cat1" select="key('fieldsByName','title')/@category"/>
- <table width="100%">
+ <table style="width:100%">
   <tr>
-   <td valign="top">
+   <td style="vertical-align:top">
     <!-- show the general group, or more accurately, the title's group -->
-    <table class="category" width="100%">
+    <table class="category" style="width=100%">
      <tr class="category">
       <td colspan="2">
        <xsl:value-of select="$cat1"/>
@@ -180,7 +180,7 @@
         <th>
          <xsl:value-of select="@title"/>
         </th>
-        <td width="75%">
+        <td style="width:75%">
          <xsl:call-template name="simple-field-value">
           <xsl:with-param name="entry" select="$entry"/>
           <xsl:with-param name="field" select="@name"/>
@@ -202,7 +202,7 @@
      <xsl:variable name="image" select="$entry/*[local-name(.) = current()/@name]"/>
      <!-- check if the value is not empty -->
      <xsl:if test="$image">
-      <td valign="top">
+      <td style="vertical-align:top">
        <table class="category">
         <tr class="category">
          <td>
@@ -255,7 +255,7 @@
  <xsl:for-each select="$categories[. != $cat1 and
                        key('fieldsByCat',.)[1]/@type!=10]">
   <xsl:if test="key('fieldsByCat', .)[@name != 'id' and @name != 'cdate' and @name != 'mdate']">
-  <table width="50%" class="category">
+  <table class="category">
    <tr class="category">
     <td colspan="2">
      <xsl:value-of select="."/>
@@ -267,9 +267,12 @@
       <!-- paragraphs -->
       <xsl:when test="@type = 2">
        <td>
-        <p>
-         <xsl:value-of select="$entry/*[local-name(.)=current()/@name]" disable-output-escaping="yes"/>
-        </p>
+        <xsl:variable name="output" select="$entry/*[local-name(.)=current()/@name]"/>
+        <xsl:if test="string-length($output)">
+         <p>
+          <xsl:value-of select="$output" disable-output-escaping="yes"/>
+         </p>
+        </xsl:if>
        </td>
       </xsl:when>
 
@@ -280,14 +283,14 @@
         <!-- look at number of columns -->
         <xsl:choose>
          <xsl:when test="tc:prop[@name = 'columns'] &gt; 1">
-          <table width="100%">
+          <table style="width:100%">
            <xsl:if test="tc:prop[@name = 'column1']">
             <thead>
              <tr>
-              <th width="50%">
+              <th style="width:50%">
                <xsl:value-of select="tc:prop[@name = 'column1']"/>
               </th>
-              <th width="50%">
+              <th style="width:50%">
                <xsl:value-of select="tc:prop[@name = 'column2']"/>
               </th>
               <xsl:call-template name="columnTitle">
@@ -303,7 +306,7 @@
             <xsl:for-each select="$entry//*[local-name(.) = current()/@name]">
              <tr>
               <xsl:for-each select="tc:column">
-               <td width="{floor(100 div count(../tc:column))}%">
+               <td style="width:{floor(100 div count(../tc:column))}%">
                 <xsl:value-of select="."/>
                 <xsl:text>&#160;</xsl:text>
                </td>

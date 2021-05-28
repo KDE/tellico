@@ -2,7 +2,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:tc="http://periapsis.org/tellico/"
                 xmlns:str="http://exslt.org/strings"
-                xmlns:exsl="http://exslt.org/common"
                 extension-element-prefixes="str"
                 exclude-result-prefixes="tc"
                 version="1.0">
@@ -25,8 +24,7 @@
 
 <xsl:output method="html"
             indent="yes"
-            doctype-public="-//W3C//DTD HTML 4.01//EN"
-            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            doctype-system="about:legacy-compat"
             encoding="utf-8"/>
 
 <xsl:param name="filename"/>
@@ -142,7 +140,7 @@
   <div class="r{position() mod 2}">
    <xsl:variable name="id" select="./*[local-name() = $image-field]"/>
    <xsl:if test="$id">
-    <img class="float">
+    <img class="float" alt="{./tc:title}">
      <xsl:attribute name="src">
       <xsl:call-template name="image-link">
        <xsl:with-param name="image" select="key('imagesById', $id)"/>

@@ -25,8 +25,7 @@
 
 <xsl:output method="html"
             indent="yes"
-            doctype-public="-//W3C//DTD HTML 4.01//EN"
-            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            doctype-system="about:legacy-compat"
             encoding="utf-8"/>
 
 <xsl:param name="filename"/>
@@ -142,10 +141,10 @@
  <!-- needed for key context -->
  <xsl:variable name="coll" select="."/>
 
- <table class="tablelist" cellpadding="0" cellspacing="0" width="100%">
-   <colgroup width="33%"/>
-   <colgroup width="34%"/>
-   <colgroup width="33%"/>
+ <table class="tablelist" style="border-spacing:0; width:100%">
+   <colgroup style="width:33%"/>
+   <colgroup style="width:34%"/>
+   <colgroup style="width:33%"/>
   <tbody>
    <!-- three columns -->
    <!-- have to pass in image width and height because
@@ -161,7 +160,6 @@
 
      <!-- switch context back to document -->
      <xsl:for-each select="$coll">
-
       <td>
        <xsl:apply-templates select="$e1">
         <xsl:with-param name="img" select="key('imagesById', $e1/*[local-name() = $image-field])"/>
