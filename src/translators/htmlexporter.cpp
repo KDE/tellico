@@ -374,7 +374,9 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   foreach(const QString& column, m_columns) {
     showFields << coll->fieldNameByTitle(column);
   }
-  m_handler->addStringParam("column-names", showFields.join(QLatin1String(" ")).toUtf8());
+  if(!showFields.isEmpty()) {
+    m_handler->addStringParam("column-names", showFields.join(QLatin1String(" ")).toUtf8());
+  }
 
   if(m_imageWidth > 0 && m_imageHeight > 0) {
     m_handler->addParam("image-width", QByteArray().setNum(m_imageWidth));

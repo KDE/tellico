@@ -25,8 +25,7 @@
 
 <xsl:output method="html"
             indent="yes"
-            doctype-public="-//W3C//DTD HTML 4.01//EN"
-            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            doctype-system="about:legacy-compat"
             encoding="utf-8"/>
 
 <xsl:param name="datadir"/> <!-- dir where Tellico data are located -->
@@ -118,6 +117,7 @@
         float: left;
         border-collapse: collapse;
         border-spacing: 0px;
+        width: 49%;
    }
    tr.category {
         font-weight: bold;
@@ -283,10 +283,10 @@
  </div>
 
  <!-- the images and the rest of the categories are each in a table in a table cell -->
- <table class="category" width="100%">
+ <table class="category" style="width:100%">
   <tbody>
    <tr>
-    <td valign="top">
+    <td style="vertical-align:top">
 
      <!-- now, show all the images in the entry, field type 10 -->
      <xsl:variable name="images" select="../tc:fields/tc:field[@type=10]"/>
@@ -342,10 +342,10 @@
      </xsl:if>
     </td>
 
-    <td valign="top">
+    <td style="vertical-align:top">
 
      <!-- show the general group, or more accurately, the title's group -->
-     <table width="49%" class="category">
+     <table class="category">
       <thead>
        <tr class="category">
         <th colspan="2">
@@ -377,7 +377,7 @@
      <!-- now for the cast -->
      <xsl:if test="tc:casts">
       <xsl:variable name="castField" select="key('fieldsByName', 'cast')"/>
-      <table width="49%" class="category">
+      <table class="category">
        <thead>
         <tr class="category">
          <th colspan="2">
@@ -427,7 +427,7 @@
                                       @name != 'id' and
                                       @name != 'cdate' and
                                       @name != 'mdate']">
-  <table width="49%" class="category">
+  <table class="category">
    <thead>
     <tr class="category">
      <th colspan="2">
@@ -446,9 +446,12 @@
        <!-- paragraphs -->
        <xsl:when test="@type=2">
         <td colspan="2">
-         <p>
-          <xsl:value-of select="$entry/*[local-name(.)=current()/@name]" disable-output-escaping="yes"/>
-         </p>
+         <xsl:variable name="output" select="$entry/*[local-name(.)=current()/@name]"/>
+         <xsl:if test="string-length($output)">
+          <p>
+           <xsl:value-of select="$output" disable-output-escaping="yes"/>
+          </p>
+         </xsl:if>
         </td>
        </xsl:when>
 
@@ -476,7 +479,7 @@
              <xsl:for-each select="$entry//*[local-name(.) = current()/@name]">
               <tr>
                <xsl:for-each select="tc:column">
-                <td width="{100 div count(../tc:column)}%">
+                <td style="width:{100 div count(../tc:column)}%">
                  <xsl:value-of select="."/>
                  <xsl:text>&#160;</xsl:text>
                 </td>

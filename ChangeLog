@@ -1,10 +1,14 @@
+2021-05-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated all templates to HTML5.
+
 2021-05-23  Robby Stephenson  <robby@periapsis.org>
 
-	* Improve some entry templates for table layout.
+	* Improved some entry templates for table layout.
 
 2021-05-16  Robby Stephenson  <robby@periapsis.org>
 
-	* Allow user-entered language selection for TheMovieDB.
+	* Allowed user-entered language selection for TheMovieDB.
 
 2021-05-09  Robby Stephenson  <robby@periapsis.org>
 

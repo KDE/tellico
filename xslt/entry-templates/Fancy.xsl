@@ -24,8 +24,7 @@
 
 <xsl:output method="html"
             indent="yes"
-            doctype-public="-//W3C//DTD HTML 4.01//EN"
-            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            doctype-system="about:legacy-compat"
             encoding="utf-8"/>
 
 <xsl:param name="datadir"/> <!-- dir where Tellico data are located -->
@@ -71,7 +70,7 @@
  <html>
   <head>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <style type="text/css">
+  <style>
   body {
     margin: 0px;
     padding: 0px;
@@ -165,6 +164,7 @@
     text-align: left;
     padding: 0px 4px 0px 2px;
     white-space: nowrap;
+    vertical-align: top;
   }
   td.fieldValue {
     text-align: left;
@@ -441,7 +441,7 @@
        <!-- don't show id or internal dates either -->
        <xsl:for-each select="$fields[@name != 'title' and @name != 'id' and @name != 'cdate' and @name != 'mdate']">
         <tr>
-         <th class="fieldName" valign="top">
+         <th class="fieldName">
           <xsl:value-of select="@title"/>
           <xsl:text>:</xsl:text>
          </th>

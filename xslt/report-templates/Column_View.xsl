@@ -25,8 +25,7 @@
 
 <xsl:output method="html"
             indent="yes"
-            doctype-public="-//W3C//DTD HTML 4.01//EN"
-            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            doctype-system="about:legacy-compat"
             encoding="utf-8"/>
 
 <xsl:param name="filename"/>

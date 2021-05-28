@@ -28,8 +28,7 @@
 
 <xsl:output method="html"
             indent="yes"
-            doctype-public="-//W3C//DTD HTML 4.01//EN"
-            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            doctype-system="about:legacy-compat"
             encoding="utf-8"/>
 
 <xsl:param name="datadir"/> <!-- dir where Tellico data are located -->
@@ -106,6 +105,7 @@
     text-align: left;
     padding: 0px 4px 0px 2px;
     white-space: nowrap;
+    vertical-align: top;
   }
   td.fieldValue {
     text-align: left;
@@ -221,7 +221,7 @@
      <xsl:if test="$entry/*[local-name(.) = $field/@name] or
                    $entry//*[local-name(.) = $field/@name and starts-with(local-name(..), $field/@name)]">
       <tr>
-      <th class="fieldName" valign="top">
+      <th class="fieldName">
        <xsl:value-of select="@title"/>
        <xsl:text>:</xsl:text>
       </th>

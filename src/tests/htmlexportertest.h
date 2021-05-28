@@ -38,8 +38,8 @@ private Q_SLOTS:
   void testHtmlTitle();
   void testReportHtml();
   void testDirectoryNames();
-  void testEntryTemplates();
-  void testEntryTemplates_data();
+  void testTemplates();
+  void testTemplates_data();
 };
 
 #endif
