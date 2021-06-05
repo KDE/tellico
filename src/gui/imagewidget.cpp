@@ -283,7 +283,7 @@ void ImageWidget::slotScanImage() {
     m_saneDlg->addPage(m_saneWidget, QString());
     m_saneDlg->setStandardButtons(QDialogButtonBox::Cancel);
     m_saneDlg->setAttribute(Qt::WA_DeleteOnClose, false);
-    connect(m_saneWidget.data(), &KSaneIface::KSaneWidget::imageReady,
+    connect(m_saneWidget.data(), &KSaneIface::KSaneWidget::scannedImageReady,
             this, &ImageWidget::imageReady);
     connect(m_saneDlg.data(), &QDialog::rejected,
             this, &ImageWidget::cancelScan);
@@ -305,13 +305,12 @@ void ImageWidget::slotScanImage() {
 #endif
 }
 
-void ImageWidget::imageReady(QByteArray& data, int w, int h, int bpl, int f) {
+void ImageWidget::imageReady(const QImage &scannedImage) {
 #ifdef HAVE_KSANE
   if(!m_saneWidget) {
     return;
   }
-  QImage scannedImage = m_saneWidget->toQImage(data, w, h, bpl,
-                                               static_cast<KSaneIface::KSaneWidget::ImageFormat>(f));
+
   QTemporaryFile temp(QDir::tempPath() + QLatin1String("/tellico_XXXXXX") + QLatin1String(".png"));
   if(temp.open()) {
     scannedImage.save(temp.fileName(), "PNG");
@@ -321,11 +320,7 @@ void ImageWidget::imageReady(QByteArray& data, int w, int h, int bpl, int f) {
   }
   QTimer::singleShot(100, m_saneDlg.data(), &QDialog::accept);
 #else
-  Q_UNUSED(data);
-  Q_UNUSED(w);
-  Q_UNUSED(h);
-  Q_UNUSED(bpl);
-  Q_UNUSED(f);
+  Q_UNUSED(image);
 #endif
 }
 

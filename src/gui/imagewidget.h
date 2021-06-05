@@ -29,6 +29,7 @@
 
 #include <QWidget>
 #include <QPixmap>
+#include <QImage>
 #include <QPoint>
 #include <QDateTime>
 #include <QPointer>
@@ -86,7 +87,7 @@ private Q_SLOTS:
   void slotGetImage();
   void slotLinkOnlyClicked();
   void slotScanImage();
-  void imageReady(QByteArray &data, int w, int h, int bpl, int f);
+  void imageReady(const QImage &scannedImage);
   void slotEditImage();
   void slotEditMenu(QAction* action);
   void slotFinished();
