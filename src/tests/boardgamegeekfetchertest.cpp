@@ -26,7 +26,6 @@
 
 #include "boardgamegeekfetchertest.h"
 
-#include "../fetch/execexternalfetcher.h"
 #include "../fetch/boardgamegeekfetcher.h"
 #include "../collections/boardgamecollection.h"
 #include "../collectionfactory.h"
