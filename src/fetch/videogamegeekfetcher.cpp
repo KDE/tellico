@@ -142,7 +142,6 @@ Tellico::Data::EntryPtr VideoGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
   // be quiet when loading images
   imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   Data::CollPtr coll = imp.collection();
-//  getTracks(entry);
   if(!coll) {
     myWarning() << "no collection pointer";
     return entry_;
