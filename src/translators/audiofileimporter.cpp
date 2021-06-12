@@ -65,7 +65,7 @@ AudioFileImporter::AudioFileImporter(const QUrl& url_) : Tellico::Import::Import
     , m_addFilePath(nullptr)
     , m_addBitrate(nullptr)
     , m_cancelled(false)
-    , m_options(0){
+    , m_options(0) {
 }
 
 bool AudioFileImporter::canImport(int type) const {
@@ -76,7 +76,7 @@ void AudioFileImporter::setRecursive(bool recursive_) {
   if(recursive_) {
     m_options |= Recursive;
   } else {
-    m_options ^= Recursive;
+    m_options &= ~Recursive;
   }
 }
 
@@ -84,7 +84,7 @@ void AudioFileImporter::setAddFilePath(bool addFilePath_) {
   if(addFilePath_) {
     m_options |= AddFilePath;
   } else {
-    m_options ^= AddFilePath;
+    m_options &= ~AddFilePath;
   }
 }
 
@@ -92,7 +92,7 @@ void AudioFileImporter::setAddBitrate(bool addBitrate_) {
   if(addBitrate_) {
     m_options |= AddBitrate;
   } else {
-    m_options ^= AddBitrate;
+    m_options &= ~AddBitrate;
   }
 }
 
