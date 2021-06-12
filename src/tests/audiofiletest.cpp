@@ -119,3 +119,16 @@ void AudioFileTest::testMp3() {
   QCOMPARE(entry->field("year"), QStringLiteral("2020"));
   QCOMPARE(entry->field("genre"), QStringLiteral("mp3 genre"));
 }
+
+void AudioFileTest::testNonRecursive() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/"));
+  QVERIFY(!url.isEmpty());
+  Tellico::Import::AudioFileImporter importer(url);
+  importer.setOptions(importer.options() ^ Tellico::Import::ImportProgress);
+  importer.setRecursive(false);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
+  QCOMPARE(coll->entryCount(), 0);
+}
