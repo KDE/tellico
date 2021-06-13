@@ -153,6 +153,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   const QString title    = QStringLiteral("title");
   const QString artist   = QStringLiteral("artist");
   const QString year     = QStringLiteral("year");
+  const QString label    = QStringLiteral("label");
   const QString genre    = QStringLiteral("genre");
   const QString track    = QStringLiteral("track");
   const QString comments = QStringLiteral("comments");
@@ -196,6 +197,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       continue;
     }
 
+    const TagLib::PropertyMap pmap = f.file()->properties();
     TagLib::Tag* tag = f.tag();
     QString album = TStringToQString(tag->album()).trimmed();
     if(album.isEmpty()) {
@@ -259,8 +261,11 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     if(mpegFile && mpegFile->ID3v2Tag() && !mpegFile->ID3v2Tag()->frameListMap()["TPE2"].isEmpty()) {
       albumArtist = TStringToQString(mpegFile->ID3v2Tag()->frameListMap()["TPE2"].front()->toString()).trimmed();
     }
-    if(albumArtist.isEmpty() && !f.file()->properties()["ALBUMARTIST"].isEmpty()) {
-      albumArtist = TStringToQString(f.file()->properties()["ALBUMARTIST"].front()).trimmed();
+    if(albumArtist.isEmpty() && pmap.contains("ALBUMARTIST")) {
+      albumArtist = TStringToQString(pmap["ALBUMARTIST"].front()).trimmed();
+    }
+    if(albumArtist.isEmpty() && pmap.contains("ALBUMARTISTSORT")) {
+      albumArtist = TStringToQString(pmap["ALBUMARTISTSORT"].front()).trimmed();
     }
     if(!albumArtist.isEmpty()) {
       albumKey += FieldFormat::columnDelimiterString() + albumArtist.toLower();
@@ -275,11 +280,18 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     // album entries use the album name as the title
     entry->setField(title, album);
     QString a = TStringToQString(tag->artist()).trimmed();
+    if(a.isEmpty() && pmap.contains("ArtistSort")) {
+      a = TStringToQString(pmap["ArtistSort"].front()).trimmed();
+    }
+    if(a.isEmpty() && pmap.contains("Artists")) {
+      a = TStringToQString(pmap["Artists"].front()).trimmed();
+    }
     // If no album artist identified, we use track artist as album artist, or "(Various)" if tracks have various artists.
     if(!albumArtist.isEmpty()) {
       entry->setField(artist, albumArtist);
     } else if(!a.isEmpty()) {
-      if(exists && entry->field(artist).toLower() != a.toLower()) {
+      if(exists && entry->field(artist).compare(a, Qt::CaseInsensitive) != 0) {
+        // track artist is different than the album artist
         entry->setField(artist, i18n("(Various)"));
       } else {
         entry->setField(artist, a);
@@ -287,9 +299,23 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     }
     if(tag->year() > 0) {
       entry->setField(year, QString::number(tag->year()));
+    } else if(pmap.contains("OriginalYear")) {
+      entry->setField(year, TStringToQString(pmap["OriginalYear"].front()));
     }
+
     if(!tag->genre().isEmpty()) {
       entry->setField(genre, TStringToQString(tag->genre()).trimmed());
+    }
+    if(pmap.contains("Label")) {
+      entry->setField(label, TStringToQString(pmap["Label"].front()));
+    }
+    if(pmap.contains("Media")) {
+      const QString media = TStringToQString(pmap["Media"].front());
+      if(media == QLatin1String("CD")) {
+        entry->setField(QLatin1String("medium"), i18n("Compact Disc"));
+      } else {
+        entry->setField(QLatin1String("medium"), media);
+      }
     }
 
     QFileInfo fi(*it);
@@ -377,13 +403,13 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     }
 
 /*    myDebug() << "-- TAG --";
-    myDebug() << "title   - \"" << tag->title().to8Bit()   << "\"";
-    myDebug() << "artist  - \"" << tag->artist().to8Bit()  << "\"";
-    myDebug() << "album   - \"" << tag->album().to8Bit()   << "\"";
-    myDebug() << "year    - \"" << tag->year()             << "\"";
-    myDebug() << "comment - \"" << tag->comment().to8Bit() << "\"";
-    myDebug() << "track   - \"" << tag->track()            << "\"";
-    myDebug() << "genre   - \"" << tag->genre().to8Bit()   << "\"";*/
+    myDebug() << "title   - \"" << TStringToQString(tag->title())   << "\"";
+    myDebug() << "artist  - \"" << TStringToQString(tag->artist())  << "\"";
+    myDebug() << "album   - \"" << TStringToQString(tag->album())   << "\"";
+    myDebug() << "year    - \"" << tag->year()                      << "\"";
+    myDebug() << "comment - \"" << TStringToQString(tag->comment()) << "\"";
+    myDebug() << "track   - \"" << tag->track()                     << "\"";
+    myDebug() << "genre   - \"" << TStringToQString(tag->genre())   << "\"";*/
   }
 
   if(m_cancelled) {

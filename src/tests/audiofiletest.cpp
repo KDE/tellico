@@ -97,6 +97,7 @@ void AudioFileTest::testOgg() {
   QCOMPARE(entry->field("track"), QStringLiteral("Test OGG::The Artist::0:03"));
   QCOMPARE(entry->field("year"), QStringLiteral("2020"));
   QCOMPARE(entry->field("genre"), QStringLiteral("The Genre"));
+  QCOMPARE(entry->field("label"), QStringLiteral("Label"));
   QVERIFY(entry->field("file").contains(QStringLiteral("::160"))); // bitrate
 }
 
@@ -125,6 +126,8 @@ void AudioFileTest::testNonRecursive() {
   QVERIFY(!url.isEmpty());
   Tellico::Import::AudioFileImporter importer(url);
   importer.setOptions(importer.options() ^ Tellico::Import::ImportProgress);
+  importer.setRecursive(false);
+  importer.setRecursive(true); // check that the bit flipping is correct
   importer.setRecursive(false);
   Tellico::Data::CollPtr coll = importer.collection();
 
