@@ -193,6 +193,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     if(f.isNull() || !f.tag()) {
       if((*it).endsWith(QLatin1String("/.directory"))) {
         directoryFiles += *it;
+        if(showProgress) ProgressManager::self()->setTotalSteps(this, files.count() + directoryFiles.count());
       }
       continue;
     }
@@ -397,7 +398,6 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       m_coll->addEntries(entry);
     }
     if(showProgress && j%stepSize == 0) {
-      ProgressManager::self()->setTotalSteps(this, files.count() + directoryFiles.count());
       ProgressManager::self()->setProgress(this, j);
       qApp->processEvents();
     }
