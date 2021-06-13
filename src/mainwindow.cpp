@@ -1849,8 +1849,9 @@ void MainWindow::slotFileImport(int format_) {
         if(dirName.isEmpty()) {
           dirName = KRecentDirs::dir(fileClass);
         }
-        url = QUrl::fromLocalFile(QFileDialog::getExistingDirectory(this, i18n("Import Directory"), dirName));
-        KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
+        QString chosenDir = QFileDialog::getExistingDirectory(this, i18n("Import Directory"), dirName);
+        url = QUrl::fromLocalFile(chosenDir);
+        KRecentDirs::add(fileClass, chosenDir);
       }
       break;
 
