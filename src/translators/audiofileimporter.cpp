@@ -148,6 +148,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     return Data::CollPtr();
   }
 
+  myLog() << "audiofileimporter: total number of files:" << files.count();
   item.setTotalSteps(files.count());
 
   const QString title    = QStringLiteral("title");
@@ -182,6 +183,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
 
   QHash<QString, Data::EntryPtr> albumMap;
   QHash<QString, QString> directoryAlbumHash;
+  Data::EntryList entriesToAdd;
 
   QStringList directoryFiles;
   const uint stepSize = qMax(1, files.count() / 100);
@@ -395,7 +397,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     }
 
     if(!exists) {
-      m_coll->addEntries(entry);
+      entriesToAdd << entry;
     }
     if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
@@ -416,6 +418,8 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     m_coll = Data::CollPtr();
     return m_coll;
   }
+  myLog() << "++ Adding" << entriesToAdd.count() << "entries";
+  m_coll->addEntries(entriesToAdd);
 
   QTextStream ts;
   QRegularExpression iconRx(QLatin1String("^Icon\\s*=\\s*(.*?)\\s*$"));
@@ -435,6 +439,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       QFileInfo fi(thisDir, m.captured(1));
       Data::EntryPtr entry = albumMap.value(directoryAlbumHash.value(thisDir.canonicalPath()));
       if(!entry) {
+        myDebug() << "AudioFileImporter: No entry found for" << thisDir.canonicalPath();
         continue;
       }
       const QUrl u = QUrl::fromLocalFile(fi.absoluteFilePath());
