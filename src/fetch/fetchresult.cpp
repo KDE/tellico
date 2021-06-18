@@ -146,8 +146,14 @@ QString FetchResult::makeDescription(Data::EntryPtr entry) {
       append(desc, entry, "country");
       break;
 
+    case Data::Collection::Base:
+      // some guesses for custom collections
+      append(desc, entry, "publisher");
+      append(desc, entry, "year");
+      break;
+
     default:
-      myDebug() << "no description for collection type =" << entry->collection()->type();
+      myDebug() << "no result description for collection type =" << entry->collection()->type();
       break;
   }
 

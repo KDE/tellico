@@ -732,6 +732,12 @@ ecm_add_test(omdbfetchertest.cpp
     LINK_LIBRARIES fetcherstest translatorstest ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(rpggeekfetchertest.cpp
+             ../fetch/rpggeekfetcher.cpp
+    TEST_NAME rpggeekfetchertest
+    LINK_LIBRARIES fetcherstest translatorstest ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(springerfetchertest.cpp
              ../fetch/springerfetcher.cpp
     TEST_NAME springerfetchertest

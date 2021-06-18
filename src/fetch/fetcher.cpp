@@ -76,7 +76,7 @@ const Tellico::Fetch::FetchRequest& Fetcher::request() const {
 void Fetcher::startSearch(const FetchRequest& request_) {
   m_request = request_;
   if(!canFetch(m_request.collectionType())) {
-    myDebug() << "Bad collection type for search:" << source() << m_request.collectionType();
+    myDebug() << "Bad collection request type for search:" << source() << m_request.collectionType();
     message(i18n("%1 does not allow searching for this collection type.", source()),
             MessageHandler::Warning);
     emit signalDone(this);

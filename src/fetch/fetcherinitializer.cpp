@@ -75,6 +75,7 @@
 #include "tvmazefetcher.h"
 #include "upcitemdbfetcher.h"
 #include "thetvdbfetcher.h"
+#include "rpggeekfetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -128,6 +129,7 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::TVmazeFetcher> registerTVmaze(TVmaze);
   RegisterFetcher<Fetch::UPCItemDbFetcher> registerUPCItemDb(UPCItemDb);
   RegisterFetcher<Fetch::TheTVDBFetcher> registerTheTVDB(TheTVDB);
+  RegisterFetcher<Fetch::RPGGeekFetcher> registerRPGGeek(RPGGeek);
 
 // these data sources depend on being able to import bibtex
 #ifdef ENABLE_BTPARSE
