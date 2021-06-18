@@ -66,7 +66,8 @@ void VideoGameGeekFetcherTest::testKeyword() {
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2013"));
 //  QCOMPARE(entry->field(QStringLiteral("platform")), QStringLiteral("PlayStation3"));
   QCOMPARE(set(entry, "genre"), set("Action RPG; Shooter"));
-  // the cover image got removed for some reason
-//  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("videogamegeek-link")), QStringLiteral("https://www.videogamegeek.com/videogame/139806"));
 }

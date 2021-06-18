@@ -43,8 +43,8 @@ namespace {
   // a lot of overlap with boardgamegeekimporter.h
   static const int BGG_MAX_RETURNS_TOTAL = 10;
   // interchangeable with boardgamegeek.com
-  static const char* BGG_SEARCH_URL  = "http://videogamegeek.com/xmlapi2/search";
-  static const char* BGG_THING_URL  = "http://videogamegeek.com/xmlapi2/thing";
+  static const char* BGG_SEARCH_URL  = "https://videogamegeek.com/xmlapi2/search";
+  static const char* BGG_THING_URL  = "https://videogamegeek.com/xmlapi2/thing";
 }
 
 using namespace Tellico;
