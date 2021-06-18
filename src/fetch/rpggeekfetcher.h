@@ -30,6 +30,9 @@
 #include "../datavectors.h"
 
 namespace Tellico {
+  namespace GUI {
+    class ComboBox;
+  }
 
   namespace Fetch {
 
@@ -56,7 +59,6 @@ public:
   virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
   virtual Type type() const Q_DECL_OVERRIDE { return RPGGeek; }
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
-  virtual void readConfigHook(const KConfigGroup&) Q_DECL_OVERRIDE {}
 
   /**
    * Returns a widget for modifying the fetcher's config.
@@ -68,6 +70,8 @@ public:
     explicit ConfigWidget(QWidget* parent_, const RPGGeekFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
     virtual QString preferredName() const Q_DECL_OVERRIDE;
+  private:
+    GUI::ComboBox* m_imageCombo;
   };
   friend class ConfigWidget;
 
@@ -76,11 +80,19 @@ public:
   static StringHash allOptionalFields();
 
 private:
+  virtual void readConfigHook(const KConfigGroup& cg) Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   virtual void resetSearch() Q_DECL_OVERRIDE {}
   virtual QUrl searchUrl() Q_DECL_OVERRIDE;
   virtual void parseData(QByteArray&) Q_DECL_OVERRIDE {}
   virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+
+  enum ImageSize {
+    NoImage=0,
+    SmallImage=1, // small is really the thumb size
+    LargeImage=2
+  };
+  ImageSize m_imageSize;
 };
 
   } // end namespace

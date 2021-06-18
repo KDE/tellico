@@ -7,7 +7,7 @@
    ===================================================================
    Tellico XSLT file - used for importing data from boardgamegeek.com
 
-   Copyright (C) 2014-2017 Robby Stephenson <robby@periapsis.org>
+   Copyright (C) 2014-2021 Robby Stephenson <robby@periapsis.org>
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://tellico-project.org
@@ -18,6 +18,9 @@
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
             doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
             doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
+
+<!-- '1' = thumbnail, '2' = image, otherwise no image -->
+<xsl:param name="image-size" select="'1'"/>
 
 <xsl:template match="/">
  <xsl:variable name="type">
@@ -137,12 +140,10 @@
    </xsl:for-each>
   </mechanisms>
 
-  <cover>
-   <xsl:if test="starts-with(thumbnail, '//')">
-    <xsl:text>https:</xsl:text>
-   </xsl:if>
-   <xsl:value-of select="thumbnail"/>
-  </cover>
+  <xsl:call-template name="coverimage">
+   <xsl:with-param name="image" select="image"/>
+   <xsl:with-param name="thumb" select="thumbnail"/>
+  </xsl:call-template>
 
   <description>
    <xsl:value-of select="description"/>
@@ -221,12 +222,10 @@
   </genres>
   <!-- ignore videogametheme right now, could be keyword? -->
 
-  <cover>
-   <xsl:if test="starts-with(thumbnail, '//')">
-    <xsl:text>https:</xsl:text>
-   </xsl:if>
-   <xsl:value-of select="thumbnail"/>
-  </cover>
+  <xsl:call-template name="coverimage">
+   <xsl:with-param name="image" select="image"/>
+   <xsl:with-param name="thumb" select="thumbnail"/>
+  </xsl:call-template>
 
   <description>
    <xsl:value-of select="description"/>
@@ -298,12 +297,10 @@
    </xsl:for-each>
   </mechanisms>
 
-  <cover>
-   <xsl:if test="starts-with(thumbnail, '//')">
-    <xsl:text>https:</xsl:text>
-   </xsl:if>
-   <xsl:value-of select="thumbnail"/>
-  </cover>
+  <xsl:call-template name="coverimage">
+   <xsl:with-param name="image" select="image"/>
+   <xsl:with-param name="thumb" select="thumbnail"/>
+  </xsl:call-template>
 
   <description>
    <xsl:value-of select="description"/>
@@ -326,6 +323,28 @@
    <xsl:with-param name="max" select="$max"/>
   </xsl:call-template>
  </xsl:if>
+</xsl:template>
+
+<xsl:template name="coverimage">
+ <xsl:param name="image"/>
+ <xsl:param name="thumb"/>
+ 
+ <xsl:variable name="imagestring">
+  <xsl:choose>
+   <xsl:when test="$image-size = '2'">
+    <xsl:value-of select="$image"/>
+   </xsl:when>
+   <xsl:when test="$image-size = '1'">
+    <xsl:value-of select="$thumb"/>
+   </xsl:when>
+  </xsl:choose>
+ </xsl:variable>
+ <cover>
+  <xsl:if test="starts-with($imagestring, '//')">
+   <xsl:text>https:</xsl:text>
+  </xsl:if>
+  <xsl:value-of select="$imagestring"/>
+ </cover>
 </xsl:template>
 
 </xsl:stylesheet>
