@@ -1,3 +1,7 @@
+2021-06-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Added RPGGeek.com data source.
+
 2021-06-13  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated audio file metadata import for a few more fields.

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -24,60 +24,61 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "boardgamegeekfetchertest.h"
+#include "rpggeekfetchertest.h"
 
-#include "../fetch/boardgamegeekfetcher.h"
-#include "../collections/boardgamecollection.h"
+#include "../fetch/rpggeekfetcher.h"
+#include "../collection.h"
+#include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 #include "../utils/datafileregistry.h"
 
+#include <KSharedConfig>
 #include <KConfigGroup>
 
 #include <QTest>
 
-QTEST_GUILESS_MAIN( BoardGameGeekFetcherTest )
+QTEST_GUILESS_MAIN( RPGGeekFetcherTest )
 
-BoardGameGeekFetcherTest::BoardGameGeekFetcherTest() : AbstractFetcherTest() {
+RPGGeekFetcherTest::RPGGeekFetcherTest() : AbstractFetcherTest() {
 }
 
-void BoardGameGeekFetcherTest::initTestCase() {
-  Tellico::RegisterCollection<Tellico::Data::BoardGameCollection> registerBoard(Tellico::Data::Collection::BoardGame, "boardgame");
+void RPGGeekFetcherTest::initTestCase() {
+  Tellico::RegisterCollection<Tellico::Data::Collection> registerColl(Tellico::Data::Collection::Base, "entry");
   Tellico::ImageFactory::init();
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/boardgamegeek2tellico.xsl"));
 }
 
-void BoardGameGeekFetcherTest::testTitle() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::BoardGame, Tellico::Fetch::Title,
-                                       QStringLiteral("Catan"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BoardGameGeekFetcher(this));
+void RPGGeekFetcherTest::testKeyword() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("rpggeek"));
+  cg.writeEntry("Custom Fields", QStringLiteral("genre,year,publisher,artist,designer,producer,mechanism,description,rpggeek-link"));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Base, Tellico::Fetch::Keyword,
+                                       QStringLiteral("Winds of the North"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::RPGGeekFetcher(this));
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::BoardGame);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Catan"));
-  QCOMPARE(entry->field(QStringLiteral("designer")), QStringLiteral("Klaus Teuber"));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("publisher"))).at(0), QStringLiteral("KOSMOS"));
-  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1995"));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("genre"))).at(0), QStringLiteral("Economic"));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("mechanism"))).at(0), QStringLiteral("Dice Rolling"));
-  QCOMPARE(entry->field(QStringLiteral("num-player")), QStringLiteral("3; 4"));
+  QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Base);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Winds of the North"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("(Self-Published)"));
+  QCOMPARE(entry->field(QStringLiteral("designer")), QStringLiteral("Thomas King"));
+  QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Nils Bergslien"));
+  QCOMPARE(entry->field(QStringLiteral("producer")), QStringLiteral("Thomas King"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Culture; History; History (Medieval); History (Vikings); Mythology / Folklore"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("0"));
+  auto genres = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("genre")));
+  QVERIFY(genres.count() > 2);
+  QVERIFY(genres.contains(QStringLiteral("Culture")));
+  auto mechs = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("mechanism")));
+  QVERIFY(mechs.count() > 2);
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
-  QCOMPARE(entry->field(QStringLiteral("boardgamegeek-link")), QStringLiteral("https://www.boardgamegeek.com/boardgame/13"));
-}
-
-void BoardGameGeekFetcherTest::testKeyword() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::BoardGame, Tellico::Fetch::Keyword,
-                                       QStringLiteral("The Settlers of Catan"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BoardGameGeekFetcher(this));
-
-  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
-
-  QCOMPARE(results.size(), 10);
+  QCOMPARE(entry->field(QStringLiteral("rpggeek-link")), QStringLiteral("https://rpggeek.com/rpgitem/338762"));
 }

@@ -54,6 +54,7 @@ SET(fetch_STAT_SRCS
    numistafetcher.cpp
    omdbfetcher.cpp
    openlibraryfetcher.cpp
+   rpggeekfetcher.cpp
    springerfetcher.cpp
    srufetcher.cpp
    thegamesdbfetcher.cpp

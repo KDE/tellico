@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2014 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2014-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,6 +27,7 @@
 #include "../translators/tellicoimporter.h"
 #include "../utils/string_utils.h"
 #include "../core/tellico_strings.h"
+#include "../gui/combobox.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -35,22 +36,22 @@
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
-#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QTextCodec>
 #include <QUrlQuery>
 
 namespace {
   // a lot of overlap with boardgamegeekimporter.h
   static const int BGG_MAX_RETURNS_TOTAL = 10;
-  static const char* BGG_SEARCH_URL  = "http://boardgamegeek.com/xmlapi2/search";
-  static const char* BGG_THING_URL  = "http://boardgamegeek.com/xmlapi2/thing";
+  static const char* BGG_SEARCH_URL  = "https://boardgamegeek.com/xmlapi2/search";
+  static const char* BGG_THING_URL  = "https://boardgamegeek.com/xmlapi2/thing";
 }
 
 using namespace Tellico;
 using Tellico::Fetch::BoardGameGeekFetcher;
 
 BoardGameGeekFetcher::BoardGameGeekFetcher(QObject* parent_)
-    : XMLFetcher(parent_) {
+    : XMLFetcher(parent_), m_imageSize(SmallImage) {
   setLimit(BGG_MAX_RETURNS_TOTAL);
   setXSLTFilename(QStringLiteral("boardgamegeek2tellico.xsl"));
 }
@@ -73,6 +74,13 @@ QString BoardGameGeekFetcher::attribution() const {
 
 bool BoardGameGeekFetcher::canFetch(int type) const {
   return type == Data::Collection::BoardGame;
+}
+
+void BoardGameGeekFetcher::readConfigHook(const KConfigGroup& config_) {
+  const int imageSize = config_.readEntry("Image Size", -1);
+  if(imageSize > -1) {
+    m_imageSize = static_cast<ImageSize>(imageSize);
+  }
 }
 
 QUrl BoardGameGeekFetcher::searchUrl() {
@@ -137,7 +145,10 @@ Tellico::Data::EntryPtr BoardGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
   f.close();
 #endif
 
-  Import::TellicoImporter imp(xsltHandler()->applyStylesheet(output));
+  auto handler = xsltHandler();
+  handler->addStringParam("image-size", QByteArray::number(m_imageSize));
+
+  Import::TellicoImporter imp(handler->applyStylesheet(output));
   // be quiet when loading images
   imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   Data::CollPtr coll = imp.collection();
@@ -193,15 +204,38 @@ Tellico::StringHash BoardGameGeekFetcher::allOptionalFields() {
 
 BoardGameGeekFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BoardGameGeekFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+  QGridLayout* l = new QGridLayout(optionsWidget());
+  l->setSpacing(4);
+  l->setColumnStretch(1, 10);
+
+  int row = -1;
+
+  QLabel* label = new QLabel(i18n("&Image size: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_imageCombo = new GUI::ComboBox(optionsWidget());
+  m_imageCombo->addItem(i18n("No Image"), NoImage);
+  m_imageCombo->addItem(i18n("Small Image"), SmallImage);
+  m_imageCombo->addItem(i18n("Large Image"), LargeImage);
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_imageCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_imageCombo, row, 1);
+  label->setBuddy(m_imageCombo);
+
+  l->setRowStretch(++row, 10);
 
   // now add additional fields widget
   addFieldsWidget(BoardGameGeekFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+
+  if(fetcher_) {
+    m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+  } else { // defaults
+    m_imageCombo->setCurrentData(SmallImage);
+  }
 }
 
-void BoardGameGeekFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
+void BoardGameGeekFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  const int n = m_imageCombo->currentData().toInt();
+  config_.writeEntry("Image Size", n);
 }
 
 QString BoardGameGeekFetcher::ConfigWidget::preferredName() const {

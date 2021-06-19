@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2017-2021 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,7 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "videogamegeekfetcher.h"
+#include "rpggeekfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../utils/string_utils.h"
@@ -44,66 +44,67 @@ namespace {
   // a lot of overlap with boardgamegeekimporter.h
   static const int BGG_MAX_RETURNS_TOTAL = 10;
   // interchangeable with boardgamegeek.com
-  static const char* BGG_SEARCH_URL  = "https://videogamegeek.com/xmlapi2/search";
-  static const char* BGG_THING_URL  = "https://videogamegeek.com/xmlapi2/thing";
+  static const char* BGG_SEARCH_URL  = "https://rpggeek.com/xmlapi2/search";
+  static const char* BGG_THING_URL  = "https://rpggeek.com/xmlapi2/thing";
 }
 
 using namespace Tellico;
-using Tellico::Fetch::VideoGameGeekFetcher;
+using Tellico::Fetch::RPGGeekFetcher;
 
-VideoGameGeekFetcher::VideoGameGeekFetcher(QObject* parent_)
+RPGGeekFetcher::RPGGeekFetcher(QObject* parent_)
     : XMLFetcher(parent_), m_imageSize(SmallImage) {
   setLimit(BGG_MAX_RETURNS_TOTAL);
   setXSLTFilename(QStringLiteral("boardgamegeek2tellico.xsl"));
 }
 
-VideoGameGeekFetcher::~VideoGameGeekFetcher() {
+RPGGeekFetcher::~RPGGeekFetcher() {
 }
 
-QString VideoGameGeekFetcher::source() const {
+QString RPGGeekFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
 // https://boardgamegeek.com/wiki/page/XML_API_Terms_of_Use
-QString VideoGameGeekFetcher::attribution() const {
+QString RPGGeekFetcher::attribution() const {
   return i18n(providedBy, QLatin1String("https://boardgamegeek.com"), QLatin1String("BoardGameGeek"));
 }
 
-bool VideoGameGeekFetcher::canSearch(Fetch::FetchKey k) const {
+bool RPGGeekFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Keyword;
 }
 
-bool VideoGameGeekFetcher::canFetch(int type) const {
-  return type == Data::Collection::Game;
+bool RPGGeekFetcher::canFetch(int type) const {
+  // it's a custom collection
+  return type == Data::Collection::Base;
 }
 
-void VideoGameGeekFetcher::readConfigHook(const KConfigGroup& config_) {
+void RPGGeekFetcher::readConfigHook(const KConfigGroup& config_) {
   const int imageSize = config_.readEntry("Image Size", -1);
   if(imageSize > -1) {
     m_imageSize = static_cast<ImageSize>(imageSize);
   }
 }
 
-QUrl VideoGameGeekFetcher::searchUrl() {
+QUrl RPGGeekFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(BGG_SEARCH_URL));
 
   QUrlQuery q;
   switch(request().key()) {
     case Title:
       q.addQueryItem(QStringLiteral("query"), request().value());
-      q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame,videogameexpansion"));
+      q.addQueryItem(QStringLiteral("type"), QStringLiteral("rpgitem"));
       q.addQueryItem(QStringLiteral("exact"), QStringLiteral("1"));
       break;
 
     case Keyword:
       q.addQueryItem(QStringLiteral("query"), request().value());
-      q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame,videogameexpansion"));
+      q.addQueryItem(QStringLiteral("type"), QStringLiteral("rpgitem"));
       break;
 
     case Raw:
       u.setUrl(QLatin1String(BGG_THING_URL));
       q.addQueryItem(QStringLiteral("id"), request().value());
-      q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame,videogameexpansion"));
+      q.addQueryItem(QStringLiteral("type"), QStringLiteral("rpgitem"));
       break;
 
     default:
@@ -116,7 +117,7 @@ QUrl VideoGameGeekFetcher::searchUrl() {
   return u;
 }
 
-Tellico::Data::EntryPtr VideoGameGeekFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
+Tellico::Data::EntryPtr RPGGeekFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
   Q_ASSERT(entry_);
 
   const QString id = entry_->field(QStringLiteral("bggid"));
@@ -128,7 +129,7 @@ Tellico::Data::EntryPtr VideoGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
   QUrl u(QString::fromLatin1(BGG_THING_URL));
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("id"), id);
-  q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame,videogameexpansion"));
+  q.addQueryItem(QStringLiteral("type"), QStringLiteral("rpgitem"));
   u.setQuery(q);
 //  myDebug() << "url: " << u;
 
@@ -136,8 +137,8 @@ Tellico::Data::EntryPtr VideoGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
   QString output = FileHandler::readXMLFile(u, true);
 
 #if 0
-  myWarning() << "Remove output debug from videogamegeekfetcher.cpp";
-  QFile f(QStringLiteral("/tmp/test-videogamegeek.xml"));
+  myWarning() << "Remove output debug from rpggeekfetcher.cpp";
+  QFile f(QStringLiteral("/tmp/test-rpggeek.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
@@ -171,7 +172,7 @@ Tellico::Data::EntryPtr VideoGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
   return coll->entries().front();
 }
 
-Tellico::Fetch::FetchRequest VideoGameGeekFetcher::updateRequest(Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest RPGGeekFetcher::updateRequest(Data::EntryPtr entry_) {
   QString bggid = entry_->field(QStringLiteral("bggid"));
   if(!bggid.isEmpty()) {
     return FetchRequest(Raw, bggid);
@@ -184,25 +185,33 @@ Tellico::Fetch::FetchRequest VideoGameGeekFetcher::updateRequest(Data::EntryPtr 
   return FetchRequest();
 }
 
-Tellico::Fetch::ConfigWidget* VideoGameGeekFetcher::configWidget(QWidget* parent_) const {
-  return new VideoGameGeekFetcher::ConfigWidget(parent_, this);
+Tellico::Fetch::ConfigWidget* RPGGeekFetcher::configWidget(QWidget* parent_) const {
+  return new RPGGeekFetcher::ConfigWidget(parent_, this);
 }
 
-QString VideoGameGeekFetcher::defaultName() {
-  return QStringLiteral("VideoGameGeek");
+QString RPGGeekFetcher::defaultName() {
+  return QStringLiteral("RPGGeek");
 }
 
-QString VideoGameGeekFetcher::defaultIcon() {
+QString RPGGeekFetcher::defaultIcon() {
   return favIcon("https://cf.geekdo-static.com/icons/favicon2.ico");
 }
 
-Tellico::StringHash VideoGameGeekFetcher::allOptionalFields() {
+Tellico::StringHash RPGGeekFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QStringLiteral("videogamegeek-link")] = i18n("VideoGameGeek Link");
+  hash[QStringLiteral("genre")] = i18n("Genre");
+  hash[QStringLiteral("year")] = i18n("Release Year");
+  hash[QStringLiteral("publisher")] = i18n("Publisher");
+  hash[QStringLiteral("artist")]  = i18nc("Comic Book Illustrator", "Artist");
+  hash[QStringLiteral("designer")] = i18n("Designer");
+  hash[QStringLiteral("producer")] = i18n("Producer");
+  hash[QStringLiteral("mechanism")] = i18n("Mechanism");
+  hash[QStringLiteral("description")] = i18n("Description");
+  hash[QStringLiteral("rpggeek-link")] = i18n("RPGGeek Link");
   return hash;
 }
 
-VideoGameGeekFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const VideoGameGeekFetcher* fetcher_)
+RPGGeekFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const RPGGeekFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(optionsWidget());
   l->setSpacing(4);
@@ -224,7 +233,7 @@ VideoGameGeekFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const VideoGa
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
-  addFieldsWidget(VideoGameGeekFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+  addFieldsWidget(RPGGeekFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 
   if(fetcher_) {
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
@@ -233,11 +242,11 @@ VideoGameGeekFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const VideoGa
   }
 }
 
-void VideoGameGeekFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+void RPGGeekFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   const int n = m_imageCombo->currentData().toInt();
   config_.writeEntry("Image Size", n);
 }
 
-QString VideoGameGeekFetcher::ConfigWidget::preferredName() const {
-  return VideoGameGeekFetcher::defaultName();
+QString RPGGeekFetcher::ConfigWidget::preferredName() const {
+  return RPGGeekFetcher::defaultName();
 }

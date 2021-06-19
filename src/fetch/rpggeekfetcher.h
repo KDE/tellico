@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2014-2021 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,8 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_BOARDGAMEGEEKFETCHER_H
-#define TELLICO_BOARDGAMEGEEKFETCHER_H
+#ifndef TELLICO_RPGGEEKFETCHER_H
+#define TELLICO_RPGGEEKFETCHER_H
 
 #include "xmlfetcher.h"
 #include "configwidget.h"
@@ -37,27 +37,27 @@ namespace Tellico {
   namespace Fetch {
 
 /**
- * A fetcher for boardgamegeek.com
+ * A fetcher for rpggeek.com
  *
  * @author Robby Stephenson
  */
-class BoardGameGeekFetcher : public XMLFetcher {
+class RPGGeekFetcher : public XMLFetcher {
 Q_OBJECT
 
 public:
   /**
    */
-  BoardGameGeekFetcher(QObject* parent);
+  RPGGeekFetcher(QObject* parent);
   /**
    */
-  virtual ~BoardGameGeekFetcher();
+  virtual ~RPGGeekFetcher();
 
   /**
    */
   virtual QString source() const Q_DECL_OVERRIDE;
   virtual QString attribution() const Q_DECL_OVERRIDE;
   virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
-  virtual Type type() const Q_DECL_OVERRIDE { return BoardGameGeek; }
+  virtual Type type() const Q_DECL_OVERRIDE { return RPGGeek; }
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
 
   /**
@@ -67,7 +67,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_, const BoardGameGeekFetcher* fetcher = nullptr);
+    explicit ConfigWidget(QWidget* parent_, const RPGGeekFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
     virtual QString preferredName() const Q_DECL_OVERRIDE;
   private:
