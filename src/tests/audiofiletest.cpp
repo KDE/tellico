@@ -122,7 +122,9 @@ void AudioFileTest::testMp3() {
 }
 
 void AudioFileTest::testNonRecursive() {
-  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/"));
+  // we want the source directory, not the build directory, so look for a source file first
+  QFileInfo fi(QFINDTESTDATA("data/test.ogg"));
+  QUrl url = QUrl::fromLocalFile(fi.dir().absolutePath());
   QVERIFY(!url.isEmpty());
   Tellico::Import::AudioFileImporter importer(url);
   importer.setOptions(importer.options() ^ Tellico::Import::ImportProgress);
@@ -133,5 +135,5 @@ void AudioFileTest::testNonRecursive() {
 
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
-  QCOMPARE(coll->entryCount(), 0);
+  QCOMPARE(coll->entryCount(), 1);
 }
