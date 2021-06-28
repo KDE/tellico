@@ -83,7 +83,7 @@ private:
   QCheckBox* m_addFilePath;
   QCheckBox* m_addBitrate;
   bool m_cancelled;
-  int m_options;
+  int m_audioOptions;
 };
 
   } // end namespace

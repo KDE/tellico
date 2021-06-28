@@ -65,7 +65,7 @@ AudioFileImporter::AudioFileImporter(const QUrl& url_) : Tellico::Import::Import
     , m_addFilePath(nullptr)
     , m_addBitrate(nullptr)
     , m_cancelled(false)
-    , m_options(0) {
+    , m_audioOptions(0) {
 }
 
 bool AudioFileImporter::canImport(int type) const {
@@ -74,25 +74,25 @@ bool AudioFileImporter::canImport(int type) const {
 
 void AudioFileImporter::setRecursive(bool recursive_) {
   if(recursive_) {
-    m_options |= Recursive;
+    m_audioOptions |= Recursive;
   } else {
-    m_options &= ~Recursive;
+    m_audioOptions &= ~Recursive;
   }
 }
 
 void AudioFileImporter::setAddFilePath(bool addFilePath_) {
   if(addFilePath_) {
-    m_options |= AddFilePath;
+    m_audioOptions |= AddFilePath;
   } else {
-    m_options &= ~AddFilePath;
+    m_audioOptions &= ~AddFilePath;
   }
 }
 
 void AudioFileImporter::setAddBitrate(bool addBitrate_) {
   if(addBitrate_) {
-    m_options |= AddBitrate;
+    m_audioOptions |= AddBitrate;
   } else {
-    m_options &= ~AddBitrate;
+    m_audioOptions &= ~AddBitrate;
   }
 }
 
@@ -121,7 +121,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   if(urlInfo.isDir()) {
     // url is a directory
     QStringList dirs = QStringList() << url().toLocalFile();
-    if(m_options & Recursive) {
+    if(m_audioOptions & Recursive) {
       myDebug() << "...reading recursively...";
       dirs += Tellico::findAllSubDirs(dirs[0]);
     }
@@ -163,8 +163,8 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
 
   m_coll = new Data::MusicCollection(true);
 
-  const bool addFile = m_options & AddFilePath;
-  const bool addBitrate = m_options & AddBitrate;
+  const bool addFile = m_audioOptions & AddFilePath;
+  const bool addBitrate = m_audioOptions & AddBitrate;
 
   Data::FieldPtr f;
   if(addFile) {
