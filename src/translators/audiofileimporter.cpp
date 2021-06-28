@@ -122,7 +122,6 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     // url is a directory
     QStringList dirs = QStringList() << url().toLocalFile();
     if(m_audioOptions & Recursive) {
-      myDebug() << "...reading recursively...";
       dirs += Tellico::findAllSubDirs(dirs[0]);
     }
 
@@ -149,7 +148,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     return Data::CollPtr();
   }
 
-  myLog() << "audiofileimporter: total number of files:" << files.count();
+//  myLog() << "audiofileimporter: total number of files:" << files.count();
   item.setTotalSteps(files.count());
 
   const QString title    = QStringLiteral("title");
@@ -283,7 +282,6 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     }
     // album entries use the album name as the title
     entry->setField(title, album);
-    myDebug() << "...title:" << album;
     QString a = TStringToQString(tag->artist()).trimmed();
     if(a.isEmpty() && pmap.contains("ArtistSort")) {
       a = TStringToQString(pmap["ArtistSort"].front()).trimmed();
@@ -420,7 +418,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     m_coll = Data::CollPtr();
     return m_coll;
   }
-  myLog() << "++ Adding" << entriesToAdd.count() << "entries";
+//  myLog() << "++ Adding" << entriesToAdd.count() << "entries";
   m_coll->addEntries(entriesToAdd);
 
   QTextStream ts;
