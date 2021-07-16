@@ -22,17 +22,13 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
                       ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules
                       ${ECM_MODULE_PATH})
 
-#include(ECMAddTests)
-#include(ECMMarkNonGuiExecutable)
-#include(ECMInstallIcons)
 include(ECMAddAppIcon)
 include(ECMUninstallTarget)
 include(FeatureSummary)
 
 include(KDEInstallDirs)
-#include(KDECompilerSettings)
-include(KDEFrameworkCompilerSettings)
 include(KDECMakeSettings)
+include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 
 ############# Options #################
 
