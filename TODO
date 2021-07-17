@@ -20,7 +20,3 @@
 * Make sure all usages of FileRef* delete the pointer
 * Use FileRef for template installation to support network install
 
-=== Miscellaneous
-* Supercat script: url is now 
-  http://gapines.org/opac/extras/opensearch/1.1/-/mods3/title/bible
-
