@@ -339,7 +339,10 @@ void DiscogsFetcher::slotComplete(KJob*) {
 void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
   entry_->setField(QStringLiteral("discogs-id"), mapValue(resultMap_, "id"));
   entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "title"));
-  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "year"));
+  const QString year = mapValue(resultMap_, "year");
+  if(year != QLatin1String("0")) {
+    entry_->setField(QStringLiteral("year"), year);
+  }
   entry_->setField(QStringLiteral("genre"),  mapValue(resultMap_, "genres"));
 
   QStringList artists;
