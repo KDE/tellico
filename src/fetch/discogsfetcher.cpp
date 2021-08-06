@@ -259,6 +259,19 @@ void DiscogsFetcher::slotComplete(KJob*) {
     stop();
     return;
   }
+
+#if 0 // checking remaining discogs rate limit allocation
+  const QStringList allHeaders = m_job->queryMetaData(QStringLiteral("HTTP-Headers")).split(QLatin1Char('\n'));
+  foreach(const QString& header, allHeaders) {
+    if(header.startsWith(QStringLiteral("x-discogs-ratelimit-remaining"))) {
+      const int index = header.indexOf(QLatin1Char(':'));
+      if(index > 0) {
+        myDebug() << "DiscogsFetcher: rate limit remaining:" << header.mid(index + 1);
+      }
+      break;
+    }
+  }
+#endif
   // see bug 319662. If fetcher is cancelled, job is killed
   // if the pointer is retained, it gets double-deleted
   m_job = nullptr;
@@ -339,7 +352,10 @@ void DiscogsFetcher::slotComplete(KJob*) {
 void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
   entry_->setField(QStringLiteral("discogs-id"), mapValue(resultMap_, "id"));
   entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "title"));
-  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "year"));
+  const QString year = mapValue(resultMap_, "year");
+  if(year != QLatin1String("0")) {
+    entry_->setField(QStringLiteral("year"), year);
+  }
   entry_->setField(QStringLiteral("genre"),  mapValue(resultMap_, "genres"));
 
   QStringList artists;

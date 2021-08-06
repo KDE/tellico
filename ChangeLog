@@ -1,3 +1,7 @@
+2021-08-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that failed to add string macros for importing bibtex (Bug 440652).
+
 2021-06-17  Robby Stephenson  <robby@periapsis.org>
 
 	* Added RPGGeek.com data source.
