@@ -25,6 +25,7 @@
 
 #include "collectioncommand.h"
 #include "../collection.h"
+#include "../collections/bibtexcollection.h"
 #include "../document.h"
 #include "../controller.h"
 #include "../tellico_debug.h"
@@ -80,12 +81,14 @@ void CollectionCommand::redo() {
   switch(m_mode) {
     case Append:
       copyFields();
+      copyMacros();
       Data::Document::self()->appendCollection(m_newColl);
       Controller::self()->slotCollectionModified(m_origColl);
       break;
 
     case Merge:
       copyFields();
+      copyMacros();
       m_mergePair = Data::Document::self()->mergeCollection(m_newColl);
       Controller::self()->slotCollectionModified(m_origColl);
       break;
@@ -108,11 +111,13 @@ void CollectionCommand::undo() {
 
   switch(m_mode) {
     case Append:
+      unCopyMacros();
       Data::Document::self()->unAppendCollection(m_newColl, m_origFields);
       Controller::self()->slotCollectionModified(m_origColl);
       break;
 
     case Merge:
+      unCopyMacros();
       Data::Document::self()->unMergeCollection(m_newColl, m_origFields, m_mergePair);
       Controller::self()->slotCollectionModified(m_origColl);
       break;
@@ -131,5 +136,43 @@ void CollectionCommand::copyFields() {
   m_origFields.clear();
   foreach(Data::FieldPtr field, m_origColl->fields()) {
     m_origFields.append(Data::FieldPtr(new Data::Field(*field)));
+  }
+}
+
+void CollectionCommand::copyMacros() {
+  // only applies to bibliographies
+  if(m_origColl->type() != Data::Collection::Bibtex ||
+     m_newColl->type() != Data::Collection::Bibtex) {
+    return;
+  }
+  m_addedMacros.clear();
+  // iterate over all macros in the new collection, check if they exist in the orig, add them if not
+  // do not over write them
+  // TODO: what to do if they clash?
+  auto origColl = static_cast<Data::BibtexCollection*>(m_origColl.data());
+  const QMap<QString, QString> origMacros = origColl->macroList();
+  const QMap<QString, QString> newMacros = static_cast<Data::BibtexCollection*>(m_newColl.data())->macroList();
+
+  auto i = newMacros.constBegin();
+  while(i != newMacros.constEnd()) {
+    if(!origMacros.contains(i.key())) {
+      origColl->addMacro(i.key(), i.value());
+      m_addedMacros.insert(i.key(), i.value());
+    }
+    ++i;
+  }
+}
+
+void CollectionCommand::unCopyMacros() {
+  // only applies to bibliographies
+  if(m_origColl->type() != Data::Collection::Bibtex) {
+    return;
+  }
+  auto origColl = static_cast<Data::BibtexCollection*>(m_origColl.data());
+  // remove the macros added by the append/merge
+  auto i = m_addedMacros.constBegin();
+  while(i != m_addedMacros.constEnd()) {
+    origColl->removeMacro(i.key());
+    ++i;
   }
 }

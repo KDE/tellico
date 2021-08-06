@@ -64,6 +64,7 @@ public:
   const StringMap& macroList() const { return m_macros; }
   void setMacroList(const StringMap& map) { m_macros = map; }
   void addMacro(const QString& key, const QString& value) { m_macros.insert(key, value); }
+  void removeMacro(const QString& key) { m_macros.remove(key); }
 
   virtual QString prepareText(const QString& text) const Q_DECL_OVERRIDE;
   virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const Q_DECL_OVERRIDE;
