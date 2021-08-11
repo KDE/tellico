@@ -145,6 +145,17 @@ ecm_add_test(collectiontest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
 )
 
+ecm_add_test(commandtest.cpp
+             ../commands/collectioncommand.cpp
+             ../document.cpp
+             ../translators/tellicoxmlexporter.cpp
+             ../translators/tellicozipexporter.cpp
+             ../translators/exporter.cpp
+    TEST_NAME commandtest
+    LINK_LIBRARIES translatorstest ${TELLICO_TEST_LIBS}
+    # order of library linking here apparently matters
+)
+
 ecm_add_test(documenttest.cpp
              ../document.cpp
              ../translators/tellicoxmlexporter.cpp
@@ -172,7 +183,7 @@ ecm_add_test(tellicomodeltest.cpp
              ../translators/tellico_xml.cpp
              ../translators/xmlstatehandler.cpp
     TEST_NAME tellicomodeltest
-    LINK_LIBRARIES ${TELLICO_TEST_LIBS}  ${LIBXML2_LIBRARIES}
+    LINK_LIBRARIES ${TELLICO_TEST_LIBS} ${LIBXML2_LIBRARIES}
 )
 
 ######################################################
