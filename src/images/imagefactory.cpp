@@ -726,6 +726,7 @@ void ImageFactory::setLocalDirectory(const QUrl& url_) {
 }
 
 void ImageFactory::setZipArchive(std::unique_ptr<KZip> zip_) {
+  Q_ASSERT(factory && "ImageFactory is not initialized!");
   if(!zip_) {
     return;
   }
