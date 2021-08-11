@@ -802,6 +802,8 @@ void MainWindow::initDocument() {
           Controller::self(), &Controller::slotCollectionAdded);
   connect(doc, &Data::Document::signalCollectionDeleted,
           Controller::self(), &Controller::slotCollectionDeleted);
+  connect(doc, &Data::Document::signalCollectionModified,
+          Controller::self(), &Controller::slotCollectionModified);
 
   connect(Kernel::self()->commandHistory(), &QUndoStack::cleanChanged,
           doc, &Data::Document::slotSetClean);

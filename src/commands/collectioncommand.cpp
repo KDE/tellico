@@ -27,7 +27,6 @@
 #include "../collection.h"
 #include "../collections/bibtexcollection.h"
 #include "../document.h"
-#include "../controller.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -41,12 +40,13 @@ CollectionCommand::CollectionCommand(Mode mode_, Tellico::Data::CollPtr origColl
     , m_newColl(newColl_)
     , m_cleanup(DoNothing)
 {
-#ifndef NDEBUG
 // just some sanity checking
   if(!m_origColl || !m_newColl) {
-    myDebug() << "null collection pointer";
+    myDebug() << "CommandTest: null collection pointer";
   }
-#endif
+  if(m_origColl != Data::Document::self()->collection()) {
+    myDebug() << "CollectionCommand: original collection is different than the current document";
+  }
   switch(m_mode) {
     case Append:
       setText(i18n("Append Collection"));
@@ -83,22 +83,18 @@ void CollectionCommand::redo() {
       copyFields();
       copyMacros();
       Data::Document::self()->appendCollection(m_newColl);
-      Controller::self()->slotCollectionModified(m_origColl);
       break;
 
     case Merge:
       copyFields();
       copyMacros();
       m_mergePair = Data::Document::self()->mergeCollection(m_newColl);
-      Controller::self()->slotCollectionModified(m_origColl);
       break;
 
     case Replace:
       // replaceCollection() makes the URL = "Unknown"
       m_origURL = Data::Document::self()->URL();
       Data::Document::self()->replaceCollection(m_newColl);
-      Controller::self()->slotCollectionDeleted(m_origColl);
-      Controller::self()->slotCollectionAdded(m_newColl);
       m_cleanup = ClearOriginal;
       break;
   }
@@ -113,20 +109,16 @@ void CollectionCommand::undo() {
     case Append:
       unCopyMacros();
       Data::Document::self()->unAppendCollection(m_newColl, m_origFields);
-      Controller::self()->slotCollectionModified(m_origColl);
       break;
 
     case Merge:
       unCopyMacros();
       Data::Document::self()->unMergeCollection(m_newColl, m_origFields, m_mergePair);
-      Controller::self()->slotCollectionModified(m_origColl);
       break;
 
     case Replace:
       Data::Document::self()->replaceCollection(m_origColl);
       Data::Document::self()->setURL(m_origURL);
-      Controller::self()->slotCollectionDeleted(m_newColl);
-      Controller::self()->slotCollectionAdded(m_origColl);
       m_cleanup = ClearNew;
       break;
   }

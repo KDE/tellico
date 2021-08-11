@@ -197,6 +197,7 @@ Q_SIGNALS:
   void signalCollectionImagesLoaded(Tellico::Data::CollPtr coll);
   void signalCollectionAdded(Tellico::Data::CollPtr coll);
   void signalCollectionDeleted(Tellico::Data::CollPtr coll);
+  void signalCollectionModified(Tellico::Data::CollPtr coll);
 
 private Q_SLOTS:
   /**

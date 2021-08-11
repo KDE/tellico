@@ -281,6 +281,7 @@ void Document::deleteContents() {
 
 void Document::appendCollection(Tellico::Data::CollPtr coll_) {
   appendCollection(m_coll, coll_);
+  emit signalCollectionModified(m_coll);
 }
 
 void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_) {
@@ -306,7 +307,9 @@ void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::Co
 }
 
 Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_) {
-  return mergeCollection(m_coll, coll_);
+  const auto mergeResult = mergeCollection(m_coll, coll_);
+  emit signalCollectionModified(m_coll);
+  return mergeResult;
 }
 
 Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_) {
@@ -383,13 +386,11 @@ void Document::replaceCollection(Tellico::Data::CollPtr coll_) {
   setURL(url);
   m_validFile = false;
 
-  // the collection gets cleared by the CollectionCommand that called this function
-  // no need to do it here
-
+  emit signalCollectionDeleted(m_coll);
   m_coll = coll_;
   m_coll->setTrackGroups(true);
   m_cancelImageWriting = true;
-  // CollectionCommand takes care of calling Controller signals
+  emit signalCollectionAdded(m_coll);
 }
 
 void Document::unAppendCollection(Tellico::Data::CollPtr coll_, Tellico::Data::FieldList origFields_) {
@@ -421,6 +422,7 @@ void Document::unAppendCollection(Tellico::Data::CollPtr coll_, Tellico::Data::F
     }
   }
   m_coll->blockSignals(false);
+  emit signalCollectionModified(m_coll);
 }
 
 void Document::unMergeCollection(Tellico::Data::CollPtr coll_, Tellico::Data::FieldList origFields_, Tellico::Data::MergePair entryPair_) {
@@ -459,6 +461,7 @@ void Document::unMergeCollection(Tellico::Data::CollPtr coll_, Tellico::Data::Fi
     }
   }
   m_coll->blockSignals(false);
+  emit signalCollectionModified(m_coll);
 }
 
 bool Document::isEmpty() const {
