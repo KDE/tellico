@@ -56,8 +56,22 @@ void CommandTest::testCollectionReplace() {
 
   Tellico::Data::Document* doc = Tellico::Data::Document::self();
   QVERIFY(doc->openDocument(QUrl::fromLocalFile(fileName)));
+  auto docUrl = Tellico::Data::Document::self()->URL();
+  QCOMPARE(QUrl::fromLocalFile(fileName), docUrl);
 
-  Tellico::Command::CollectionCommand cmd(Tellico::Command::CollectionCommand::Replace,
-                                         Tellico::Data::Document::self()->collection(),
-                                         Tellico::Data::CollPtr());
+  auto newBookCollection = new Tellico::Data::BookCollection(true);
+  {
+    Tellico::Command::CollectionCommand cmd(Tellico::Command::CollectionCommand::Replace,
+                                            Tellico::Data::Document::self()->collection(),
+                                            Tellico::Data::CollPtr(newBookCollection));
+    cmd.redo();
+    // doc url was erased
+    QVERIFY(Tellico::Data::Document::self()->URL() != docUrl);
+
+    // now undo it and check that everythign returns to what it should be
+    cmd.undo();
+    QCOMPARE(Tellico::Data::Document::self()->URL(), docUrl);
+  }
+  //  the d'tor should clear the new collection (since the replace was undone)
+  QVERIFY(newBookCollection->fields().isEmpty());
 }
