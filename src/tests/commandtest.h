@@ -26,13 +26,21 @@
 #define COMMANDTEST_H
 
 #include <QObject>
+#include <QTemporaryDir>
 
 class CommandTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
   void initTestCase();
+
   void testCollectionReplace();
+  void testCollectionAppend();
+  void testCollectionMerge();
+
+private:
+  QTemporaryDir m_tempDir;
+  QString m_fileName;
 };
 
 #endif

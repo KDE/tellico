@@ -32,7 +32,6 @@
 
 #include <QTest>
 #include <QStandardPaths>
-#include <QTemporaryDir>
 #include <QFile>
 
 QTEST_GUILESS_MAIN( CommandTest )
@@ -41,38 +40,134 @@ void CommandTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
+
+  QVERIFY(m_tempDir.isValid());
+  m_tempDir.setAutoRemove(true);
+  auto tempDirName = m_tempDir.path();
+  m_fileName = tempDirName + QStringLiteral("/with-image.tc");
+  // copy a collection file that includes an image into the temporary directory
+  QFile::copy(QFINDTESTDATA("data/with-image.tc"), m_fileName);
 }
 
 void CommandTest::testCollectionReplace() {
-  QString tempDirName;
-  QTemporaryDir tempDir;
-  QVERIFY(tempDir.isValid());
-  tempDir.setAutoRemove(true);
-  tempDirName = tempDir.path();
-  QString fileName = tempDirName + QStringLiteral("/with-image.tc");
-
-  // copy a collection file that includes an image into the temporary directory
-  QVERIFY(QFile::copy(QFINDTESTDATA("data/with-image.tc"), fileName));
-
   Tellico::Data::Document* doc = Tellico::Data::Document::self();
-  QVERIFY(doc->openDocument(QUrl::fromLocalFile(fileName)));
-  auto docUrl = Tellico::Data::Document::self()->URL();
-  QCOMPARE(QUrl::fromLocalFile(fileName), docUrl);
+  QVERIFY(doc->openDocument(QUrl::fromLocalFile(m_fileName)));
+  auto docUrl = doc->URL();
+  QCOMPARE(QUrl::fromLocalFile(m_fileName), docUrl);
 
-  auto collPtr = new Tellico::Data::BookCollection(true);
-  Tellico::Data::CollPtr newColl(collPtr);
+  Tellico::Data::CollPtr newColl(new Tellico::Data::BookCollection(true));
+
   {
+    auto oldColl = doc->collection();
     Tellico::Command::CollectionCommand cmd(Tellico::Command::CollectionCommand::Replace,
-                                            Tellico::Data::Document::self()->collection(),
+                                            doc->collection(),
                                             newColl);
     cmd.redo();
     // doc url was erased
-    QVERIFY(Tellico::Data::Document::self()->URL() != docUrl);
+    QVERIFY(doc->URL() != docUrl);
+    QCOMPARE(doc->collection(), newColl);
 
-    // now undo it and check that everythign returns to what it should be
+    // now undo it and check that everything returns to what it should be
     cmd.undo();
     QCOMPARE(Tellico::Data::Document::self()->URL(), docUrl);
+    QCOMPARE(doc->collection(), oldColl);
   }
   //  the d'tor should clear the new collection (since the replace was undone)
   QVERIFY(newColl->fields().isEmpty());
+}
+
+void CommandTest::testCollectionAppend() {
+  Tellico::Data::Document* doc = Tellico::Data::Document::self();
+  QVERIFY(doc->openDocument(QUrl::fromLocalFile(m_fileName)));
+  auto docUrl = doc->URL();
+  QCOMPARE(QUrl::fromLocalFile(m_fileName), docUrl);
+
+  auto test = QStringLiteral("test");
+
+  Tellico::Data::CollPtr newColl(new Tellico::Data::BookCollection(true));
+  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(test, test));
+  newColl->addField(field1);
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(newColl));
+  newColl->addEntries(entry1);
+
+  {
+    auto oldColl = doc->collection();
+    QCOMPARE(oldColl->entryCount(), 1);
+    QVERIFY(!oldColl->hasField(test));
+
+    Tellico::Command::CollectionCommand cmd(Tellico::Command::CollectionCommand::Append,
+                                            doc->collection(),
+                                            newColl);
+    cmd.redo();
+    // collection pointer did not change
+    QCOMPARE(doc->collection(), oldColl);
+    QCOMPARE(oldColl->entryCount(), 2);
+    QVERIFY(oldColl->hasField(test));
+
+    // now undo it and check that everything returns to what it should be
+    cmd.undo();
+    QCOMPARE(Tellico::Data::Document::self()->URL(), docUrl);
+    QCOMPARE(doc->collection(), oldColl);
+    QCOMPARE(oldColl->entryCount(), 1);
+    QVERIFY(!oldColl->hasField(test));
+
+    cmd.redo();
+    QCOMPARE(doc->collection(), oldColl);
+    QCOMPARE(oldColl->entryCount(), 2);
+    QVERIFY(oldColl->hasField(test));
+
+    cmd.undo();
+    QCOMPARE(Tellico::Data::Document::self()->URL(), docUrl);
+    QCOMPARE(doc->collection(), oldColl);
+    QCOMPARE(oldColl->entryCount(), 1);
+    QVERIFY(!oldColl->hasField(test));
+  }
+}
+
+void CommandTest::testCollectionMerge() {
+  Tellico::Data::Document* doc = Tellico::Data::Document::self();
+  QVERIFY(doc->openDocument(QUrl::fromLocalFile(m_fileName)));
+  auto docUrl = doc->URL();
+  QCOMPARE(QUrl::fromLocalFile(m_fileName), docUrl);
+
+  auto test = QStringLiteral("test");
+
+  Tellico::Data::CollPtr newColl(new Tellico::Data::BookCollection(true));
+  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(test, test));
+  newColl->addField(field1);
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(newColl));
+  newColl->addEntries(entry1);
+
+  {
+    auto oldColl = doc->collection();
+    QCOMPARE(oldColl->entryCount(), 1);
+    QVERIFY(!oldColl->hasField(test));
+
+    Tellico::Command::CollectionCommand cmd(Tellico::Command::CollectionCommand::Merge,
+                                            doc->collection(),
+                                            newColl);
+    cmd.redo();
+    // collection pointer did not change
+    QCOMPARE(doc->collection(), oldColl);
+    QCOMPARE(oldColl->entryCount(), 2);
+    QVERIFY(oldColl->hasField(test));
+
+    // now undo it and check that everything returns to what it should be
+    cmd.undo();
+    QCOMPARE(Tellico::Data::Document::self()->URL(), docUrl);
+    QCOMPARE(doc->collection(), oldColl);
+    QCOMPARE(oldColl->entryCount(), 1);
+    QVERIFY(!oldColl->hasField(test));
+
+    cmd.redo();
+    QCOMPARE(doc->collection(), oldColl);
+    QCOMPARE(oldColl->entryCount(), 2);
+    QVERIFY(oldColl->hasField(test));
+
+    cmd.undo();
+    QCOMPARE(Tellico::Data::Document::self()->URL(), docUrl);
+    QCOMPARE(doc->collection(), oldColl);
+    QCOMPARE(oldColl->entryCount(), 1);
+    QVERIFY(!oldColl->hasField(test));
+  }
 }
