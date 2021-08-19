@@ -187,6 +187,7 @@ public:
    * @return A boolean indicating if the entry was in the collection and was deleted
    */
   bool removeEntries(const EntryList& entries);
+  QList<int> entryIdList() const { return m_entryById.keys(); }
   /**
    * Adds a whole list of fields. It calls
    * @ref addField, which is virtual.

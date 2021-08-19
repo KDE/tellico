@@ -1,3 +1,7 @@
+2021-08-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with being able to undo appending a collection.
+
 2021-08-05  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug that failed to add string macros for importing bibtex (Bug 440652).

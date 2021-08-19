@@ -393,11 +393,7 @@ void Document::replaceCollection(Tellico::Data::CollPtr coll_) {
   emit signalCollectionAdded(m_coll);
 }
 
-void Document::unAppendCollection(Tellico::Data::CollPtr coll_, Tellico::Data::FieldList origFields_) {
-  if(!coll_) {
-    return;
-  }
-
+void Document::unAppendCollection(Tellico::Data::FieldList origFields_, QList<int> addedEntries_) {
   m_coll->blockSignals(true);
 
   StringSet origFieldNames;
@@ -406,12 +402,12 @@ void Document::unAppendCollection(Tellico::Data::CollPtr coll_, Tellico::Data::F
     origFieldNames.add(field->name());
   }
 
-  EntryList entries = coll_->entries();
-  foreach(EntryPtr entry, entries) {
-    // probably don't need to do this, but on the safe side...
-    entry->setCollection(coll_);
+  EntryList entriesToRemove;
+  foreach(int id, addedEntries_) {
+    auto e = m_coll->entryById(id);
+    if(e) entriesToRemove << e;
   }
-  m_coll->removeEntries(entries);
+  m_coll->removeEntries(entriesToRemove);
 
   // since Collection::removeField() iterates over all entries to reset the value of the field
   // don't removeField() until after removeEntry() is done
@@ -425,11 +421,7 @@ void Document::unAppendCollection(Tellico::Data::CollPtr coll_, Tellico::Data::F
   emit signalCollectionModified(m_coll);
 }
 
-void Document::unMergeCollection(Tellico::Data::CollPtr coll_, Tellico::Data::FieldList origFields_, Tellico::Data::MergePair entryPair_) {
-  if(!coll_) {
-    return;
-  }
-
+void Document::unMergeCollection(Tellico::Data::FieldList origFields_, Tellico::Data::MergePair entryPair_) {
   m_coll->blockSignals(true);
 
   QStringList origFieldNames;

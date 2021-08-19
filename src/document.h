@@ -152,8 +152,8 @@ public:
    * @param coll A Pointer to the new collection, the document takes ownership.
    */
   void replaceCollection(CollPtr coll);
-  void unAppendCollection(CollPtr coll, FieldList origFields);
-  void unMergeCollection(CollPtr coll, FieldList origFields_, MergePair entryPair);
+  void unAppendCollection(FieldList origFields, QList<int> addedEntries);
+  void unMergeCollection(FieldList origFields_, MergePair entryPair);
   bool loadAllImagesNow() const;
   bool allImagesOnDisk() const { return m_allImagesOnDisk; }
   int imageCount() const;
