@@ -32,6 +32,8 @@
 
 #include <KLocalizedString>
 
+#include <algorithm>
+
 using Tellico::Command::CollectionCommand;
 
 CollectionCommand::CollectionCommand(Mode mode_, Tellico::Data::CollPtr origColl_, Tellico::Data::CollPtr newColl_)
@@ -82,7 +84,20 @@ void CollectionCommand::redo() {
     case Append:
       copyFields();
       copyMacros();
-      Data::Document::self()->appendCollection(m_newColl);
+      {
+        auto existingEntries = m_origColl->entryIdList();
+        Data::Document::self()->appendCollection(m_newColl);
+        auto allEntries = m_origColl->entryIdList();
+
+        // keep track of which entries were added by the append operation
+        // by taking difference of the entry id lists
+        m_addedEntries.clear();
+        std::sort(existingEntries.begin(), existingEntries.end());
+        std::sort(allEntries.begin(), allEntries.end());
+        std::set_difference(allEntries.begin(), allEntries.end(),
+                            existingEntries.begin(), existingEntries.end(),
+                            std::back_inserter(m_addedEntries));
+      }
       Controller::self()->slotCollectionModified(m_origColl);
       break;
 
@@ -112,13 +127,13 @@ void CollectionCommand::undo() {
   switch(m_mode) {
     case Append:
       unCopyMacros();
-      Data::Document::self()->unAppendCollection(m_newColl, m_origFields);
+      Data::Document::self()->unAppendCollection(m_origFields, m_addedEntries);
       Controller::self()->slotCollectionModified(m_origColl);
       break;
 
     case Merge:
       unCopyMacros();
-      Data::Document::self()->unMergeCollection(m_newColl, m_origFields, m_mergePair);
+      Data::Document::self()->unMergeCollection(m_origFields, m_mergePair);
       Controller::self()->slotCollectionModified(m_origColl);
       break;
 
