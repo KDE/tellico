@@ -27,6 +27,7 @@
 #include "../document.h"
 #include "../translators/tellicoimporter.h"
 #include "../collections/bookcollection.h"
+#include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 
@@ -169,5 +170,55 @@ void CommandTest::testCollectionMerge() {
     QCOMPARE(doc->collection(), oldColl);
     QCOMPARE(oldColl->entryCount(), 1);
     QVERIFY(!oldColl->hasField(test));
+  }
+}
+
+void CommandTest::testBibtexCollectionAppend() {
+  auto bibtexColl1 = new Tellico::Data::BibtexCollection(true);
+  // by default includes 12 months
+  QCOMPARE(bibtexColl1->macroList().count(), 12);
+  QVERIFY(bibtexColl1->preamble().isEmpty());
+  Tellico::Data::CollPtr oldColl(bibtexColl1);
+
+  Tellico::Data::Document* doc = Tellico::Data::Document::self();
+  doc->replaceCollection(oldColl);
+
+  auto test = QStringLiteral("test");
+
+  auto bibtexColl2 = new Tellico::Data::BibtexCollection(true);
+  bibtexColl2->addMacro(test, test);
+  bibtexColl2->setPreamble(test);
+  QCOMPARE(bibtexColl2->macroList().count(), 13);
+  QCOMPARE(bibtexColl2->preamble(), test);
+  Tellico::Data::CollPtr newColl(bibtexColl2);
+  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(test, test));
+  newColl->addField(field1);
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(newColl));
+  newColl->addEntries(entry1);
+
+  {
+    auto oldColl = doc->collection();
+    QCOMPARE(oldColl->entryCount(), 0);
+    QVERIFY(!oldColl->hasField(test));
+    QVERIFY(bibtexColl1->preamble().isEmpty());
+
+    Tellico::Command::CollectionCommand cmd(Tellico::Command::CollectionCommand::Append,
+                                            doc->collection(),
+                                            newColl);
+    cmd.redo();
+    // collection pointer did not change
+    QCOMPARE(doc->collection(), oldColl);
+    QCOMPARE(oldColl->entryCount(), 1);
+    QVERIFY(oldColl->hasField(test));
+    QCOMPARE(bibtexColl1->macroList().count(), 13);
+    QCOMPARE(bibtexColl1->preamble(), test);
+
+    // now undo it and check that everything returns to what it should be
+    cmd.undo();
+    QCOMPARE(doc->collection(), oldColl);
+    QCOMPARE(oldColl->entryCount(), 0);
+    QVERIFY(!oldColl->hasField(test));
+    QCOMPARE(bibtexColl1->macroList().count(), 12);
+    QVERIFY(bibtexColl1->preamble().isEmpty());
   }
 }

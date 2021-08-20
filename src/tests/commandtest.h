@@ -37,6 +37,7 @@ private Q_SLOTS:
   void testCollectionReplace();
   void testCollectionAppend();
   void testCollectionMerge();
+  void testBibtexCollectionAppend();
 
 private:
   QTemporaryDir m_tempDir;
