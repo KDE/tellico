@@ -47,7 +47,7 @@ CollectionCommand::CollectionCommand(Mode mode_, Tellico::Data::CollPtr origColl
     myDebug() << "CommandTest: null collection pointer";
   }
   if(m_origColl != Data::Document::self()->collection()) {
-    myDebug() << "CollectionCommand: original collection is different than the current document";
+    myWarning() << "CollectionCommand: original collection is different than the current document";
   }
   switch(m_mode) {
     case Append:
@@ -168,6 +168,11 @@ void CollectionCommand::copyMacros() {
     }
     ++i;
   }
+
+  m_origPreamble = origColl->preamble();
+  if(m_origPreamble.isEmpty()) {
+    origColl->setPreamble(static_cast<Data::BibtexCollection*>(m_newColl.data())->preamble());
+  }
 }
 
 void CollectionCommand::unCopyMacros() {
@@ -182,4 +187,5 @@ void CollectionCommand::unCopyMacros() {
     origColl->removeMacro(i.key());
     ++i;
   }
+  origColl->setPreamble(m_origPreamble);
 }

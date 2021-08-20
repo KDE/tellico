@@ -65,6 +65,7 @@ private:
   QList<int> m_addedEntries;
   // BibtexCollection has string macros which might get added
   QMap<QString, QString> m_addedMacros;
+  QString m_origPreamble; // for bibtex collections
   // for the Replace case, the collection that got replaced needs to be cleared
   enum CleanupMode {
     DoNothing, ClearOriginal, ClearNew
