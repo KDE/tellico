@@ -46,7 +46,10 @@ CollectionCommand::CollectionCommand(Mode mode_, Tellico::Data::CollPtr origColl
 #ifndef NDEBUG
 // just some sanity checking
   if(!m_origColl || !m_newColl) {
-    myDebug() << "null collection pointer";
+    myDebug() << "CommandTest: null collection pointer";
+  }
+  if(m_origColl != Data::Document::self()->collection()) {
+    myWarning() << "CollectionCommand: original collection is different than the current document";
   }
 #endif
   switch(m_mode) {
@@ -176,6 +179,11 @@ void CollectionCommand::copyMacros() {
     }
     ++i;
   }
+
+  m_origPreamble = origColl->preamble();
+  if(m_origPreamble.isEmpty()) {
+    origColl->setPreamble(static_cast<Data::BibtexCollection*>(m_newColl.data())->preamble());
+  }
 }
 
 void CollectionCommand::unCopyMacros() {
@@ -190,4 +198,5 @@ void CollectionCommand::unCopyMacros() {
     origColl->removeMacro(i.key());
     ++i;
   }
+  origColl->setPreamble(m_origPreamble);
 }
