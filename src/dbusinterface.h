@@ -53,6 +53,8 @@ public Q_SLOTS:
     { return importFile(Import::MODS, QUrl::fromUserInput(file), actionType(action)); }
   Q_SCRIPTABLE bool importRIS(const QString& file, const QString& action)
     { return importFile(Import::RIS, QUrl::fromUserInput(file), actionType(action)); }
+  Q_SCRIPTABLE bool importPDF(const QString& file, const QString& action)
+    { return importFile(Import::PDF, QUrl::fromUserInput(file), actionType(action)); }
 
   Q_SCRIPTABLE bool exportXML(const QString& file, bool filtered=false)
     { return exportCollection(Export::TellicoXML, QUrl::fromUserInput(file), filtered); }

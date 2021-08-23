@@ -1,3 +1,7 @@
+2021-08-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Added DBUS command to import PDF files.
+
 2021-08-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with being able to undo appending a collection.
