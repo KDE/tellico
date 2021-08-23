@@ -46,6 +46,7 @@ Arguments:
 bool importTellico(QString file, QString action)
 bool importBibtex(QString file, QString action)
 bool importMODS(QString file, QString action)
+bool importPDF(QString file, QString action)
 bool importRIS(QString file, QString action)
 bool exportXML(QString file, bool filtered)
 bool exportZip(QString file, bool filtered)
