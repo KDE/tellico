@@ -460,24 +460,27 @@ void ImportDialog::slotUpdateAction() {
 
 // static
 Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, const QUrl& url_) {
-  Import::Importer* imp = importer(format_, QList<QUrl>() << url_);
+  QScopedPointer<Import::Importer> imp(importer(format_, QList<QUrl>() << url_));
   if(!imp) {
     return Data::CollPtr();
   }
 
-  ProgressItem& item = ProgressManager::self()->newProgressItem(imp, imp->progressLabel(), true);
-  connect(imp, &Import::Importer::signalTotalSteps,
-          ProgressManager::self(), &ProgressManager::setTotalSteps);
-  connect(imp, &Import::Importer::signalProgress,
-          ProgressManager::self(), &ProgressManager::setProgress);
-  connect(&item, &ProgressItem::signalCancelled, imp, &Import::Importer::slotCancel);
-  ProgressItem::Done done(imp);
+  Data::CollPtr c;
+  {
+    // do this in a block to ensure the progress item is deleted before the importer
+    ProgressItem& item = ProgressManager::self()->newProgressItem(imp.data(), imp->progressLabel(), true);
+    connect(imp.data(), &Import::Importer::signalTotalSteps,
+            ProgressManager::self(), &ProgressManager::setTotalSteps);
+    connect(imp.data(), &Import::Importer::signalProgress,
+            ProgressManager::self(), &ProgressManager::setProgress);
+    connect(&item, &ProgressItem::signalCancelled, imp.data(), &Import::Importer::slotCancel);
+    ProgressItem::Done done(imp.data());
 
-  Data::CollPtr c = imp->collection();
+    c = imp->collection();
+  }
   if(!c && !imp->statusMessage().isEmpty()) {
     GUI::Proxy::sorry(imp->statusMessage());
   }
-  delete imp;
   return c;
 }
 
