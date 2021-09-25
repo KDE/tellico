@@ -18,6 +18,7 @@ Options:
   --bibtex                  Import &lt;filename&gt; as a bibtex file
   --mods                    Import &lt;filename&gt; as a MODS file
   --ris                     Import &lt;filename&gt; as a RIS file
+  --pdf                     Import &lt;filename&gt; as a PDF file
 
 Arguments:
   [filename]                File to open

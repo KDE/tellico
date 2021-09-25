@@ -143,6 +143,7 @@ int main(int argc, char* argv[]) {
   parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("bibtex"), i18n("Import <filename> as a bibtex file")));
   parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("mods"), i18n("Import <filename> as a MODS file")));
   parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("ris"), i18n("Import <filename> as a RIS file")));
+  parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("pdf"), i18n("Import <filename> as a PDF file")));
   parser.addPositionalArgument(QStringLiteral("[filename]"), i18n("File to open"));
 
   aboutData.setupCommandLine(&parser);
@@ -170,6 +171,8 @@ int main(int argc, char* argv[]) {
         tellico->importFile(Tellico::Import::MODS, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
       } else if(parser.isSet(QStringLiteral("ris"))) {
         tellico->importFile(Tellico::Import::RIS, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
+      } else if(parser.isSet(QStringLiteral("pdf"))) {
+        tellico->importFile(Tellico::Import::PDF, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
       } else {
         tellico->slotFileOpen(QUrl::fromUserInput(args.at(0), QDir::currentPath()));
       }

@@ -1,3 +1,7 @@
+2021-09-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Added command-line option to import PDF file.
+
 2021-08-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Added DBUS command to import PDF files.
