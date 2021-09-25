@@ -58,6 +58,7 @@ XMPHandler::~XMPHandler() {
   --s_initCount;
   if(s_initCount == 0 && !s_needInit) {
     xmp_terminate();
+    s_needInit = true;
   }
 #endif
 }

@@ -1,5 +1,6 @@
 2021-09-24  Robby Stephenson  <robby@periapsis.org>
 
+	* Fixed bug that caused crashes when importing PDF files.
 	* Added command-line option to import PDF file.
 
 2021-08-22  Robby Stephenson  <robby@periapsis.org>

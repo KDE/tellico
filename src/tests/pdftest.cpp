@@ -75,3 +75,12 @@ void PdfTest::testScienceDirect() {
 //  QVERIFY(!entry->field("cover").isEmpty());
 #endif
 }
+
+void PdfTest::testMultiple() {
+  const QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-sciencedirect.pdf"));
+  for (int i = 0; i < 5; ++i) {
+    Tellico::Import::PDFImporter importer(url);
+    Tellico::Data::CollPtr coll = importer.collection();
+    QVERIFY(coll);
+  }
+}
