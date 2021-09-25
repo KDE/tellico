@@ -164,14 +164,21 @@ int main(int argc, char* argv[]) {
 
     QStringList args = parser.positionalArguments();
     if(args.count() > 0) {
+      Tellico::Import::Format format = Tellico::Import::TellicoXML;
       if(parser.isSet(QStringLiteral("bibtex"))) {
-        tellico->importFile(Tellico::Import::Bibtex, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
+        format = Tellico::Import::Bibtex;
       } else if(parser.isSet(QStringLiteral("mods"))) {
-        tellico->importFile(Tellico::Import::MODS, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
+        format = Tellico::Import::MODS;
       } else if(parser.isSet(QStringLiteral("ris"))) {
-        tellico->importFile(Tellico::Import::RIS, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
-      } else {
+        format = Tellico::Import::RIS;
+      };
+      if(format == Tellico::Import::TellicoXML) {
         tellico->slotFileOpen(QUrl::fromUserInput(args.at(0), QDir::currentPath()));
+      } else {
+        tellico->importFile(format, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
+        for(int i = 1; i < args.count(); ++i) {
+          tellico->importFile(format, QUrl::fromUserInput(args.at(i)), Tellico::Import::Append);
+        }
       }
     } else {
       // bit of a hack, I just want the --nofile option
