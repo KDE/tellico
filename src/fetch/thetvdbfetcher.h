@@ -91,7 +91,7 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
-  void populateCast(Data::EntryPtr entry, const QJsonArray& castArray);
+  void populatePeople(Data::EntryPtr entry, const QJsonArray& castArray);
   void populateEpisodes(Data::EntryPtr entry, const QJsonArray& castArray);
   void checkAccessToken();
   void requestToken();
@@ -102,6 +102,7 @@ private:
   bool m_started;
 
   QString m_apiKey;
+  QString m_apiPin;
   QString m_accessToken;
   QDateTime m_accessTokenExpires;
   QHash<uint, Data::EntryPtr> m_entries;
