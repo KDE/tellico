@@ -1,4 +1,7 @@
-=======
+2021-10-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated TheTVDB data source to API v4.
+
 2021-09-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug that caused crashes when importing PDF files.

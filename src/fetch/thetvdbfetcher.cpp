@@ -58,8 +58,8 @@
 
 namespace {
   static const int THETVDB_MAX_RETURNS_TOTAL = 20;
-  static const char* THETVDB_API_URL = "https://api.thetvdb.com";
-  static const char* THETVDB_API_KEY = "6656bb823a0dd79390a4efd91725dfee00373b0d4f7ed4e36d549aae59183405";
+  static const char* THETVDB_API_URL = "https://api4.thetvdb.com/v4";
+  static const char* THETVDB_API_KEY = "c0a67445dded5036291dc8fb9ca5d6b33350c1f5610784e0604dc8fcb0d35a3c9bf94a673f5988bcea8cebdf6f423a036c5deedfd6b2b994a8ca9bf9dcbf83e147761023e081ab9f";
   static const int THETVDB_TOKEN_EXPIRES = 24*60*60; // expires in 24 hours
   static const char* THETVDB_ART_PREFIX = "https://thetvdb.com/banners/";
 }
@@ -95,7 +95,10 @@ bool TheTVDBFetcher::canFetch(int type) const {
 void TheTVDBFetcher::readConfigHook(const KConfigGroup& config_) {
   QString k = config_.readEntry("API Key");
   if(!k.isEmpty()) {
-    m_apiKey = k;
+    // the API key used to be saved in the config
+    // now in API v4, the API Key is unique to the application and the API PIN is user-specific
+    // the name of the config option was kept the same
+    m_apiPin = k;
   }
   k = config_.readEntry("Access Token");
   if(!k.isEmpty()) {
@@ -118,23 +121,34 @@ void TheTVDBFetcher::search() {
 void TheTVDBFetcher::continueSearch() {
   m_started = true;
 
+  if(m_apiPin.isEmpty()) {
+    myDebug() << "TheTVDBFetcher:: empty API PIN";
+    message(i18n("An access key is required to use this data source.")
+            + QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
+    stop();
+    return;
+  }
+
   QUrl u(QString::fromLatin1(THETVDB_API_URL));
   switch(request().key()) {
     case Title:
       u = u.adjusted(QUrl::StripTrailingSlash);
-      u.setPath(u.path() + QLatin1String("/search/series"));
+      u.setPath(u.path() + QLatin1String("/search"));
       {
         QUrlQuery q;
-        q.addQueryItem(QStringLiteral("name"), request().value());
+        q.addQueryItem(QStringLiteral("type"), QStringLiteral("series"));
+        q.addQueryItem(QStringLiteral("q"), request().value());
         u.setQuery(q);
       }
       break;
 
     case Raw:
       u = u.adjusted(QUrl::StripTrailingSlash);
-      u.setPath(u.path() + QLatin1String("/search/series"));
+      u.setPath(u.path() + QLatin1String("/search"));
       {
         QUrlQuery q;
+        q.addQueryItem(QStringLiteral("type"), QStringLiteral("series"));
         if(request().data() == QLatin1String("imdb")) {
           q.addQueryItem(QStringLiteral("imdbId"), request().value());
         } else if(request().data() == QLatin1String("slug")) {
@@ -153,7 +167,9 @@ void TheTVDBFetcher::continueSearch() {
       stop();
       return;
   }
-//  myDebug() << u;
+#if THETVDB_LOG
+  myDebug() << u;
+#endif
 
   m_job = getJob(u);
   connect(m_job.data(), &KJob::result, this, &TheTVDBFetcher::slotComplete);
@@ -224,7 +240,7 @@ void TheTVDBFetcher::slotComplete(KJob* job_) {
   m_job = nullptr;
 
 #if THETVDB_LOG
-  myWarning() << "Remove debug from tvtvdbfetcher..cpp";
+  myWarning() << "Remove debug from tvtvdbfetcher.cpp";
   QFile f(QStringLiteral("/tmp/test-thetvdb.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -293,8 +309,10 @@ Tellico::Data::EntryPtr TheTVDBFetcher::fetchEntryHook(uint uid_) {
   const QString id = entry->field(QStringLiteral("thetvdb-id"));
   if(!id.isEmpty()) {
     QUrl url(QString::fromLatin1(THETVDB_API_URL));
-    url.setPath(QStringLiteral("/series/%1").arg(id));
-//    myDebug() << url;
+    url.setPath(url.path() + QStringLiteral("/series/%1/extended").arg(id));
+    QUrlQuery q;
+    q.addQueryItem(QStringLiteral("meta"), QStringLiteral("episodes"));
+    url.setQuery(q);
     auto job = getJob(url);
     if(!job->exec()) {
       myDebug() << job->errorString() << url;
@@ -316,52 +334,13 @@ Tellico::Data::EntryPtr TheTVDBFetcher::fetchEntryHook(uint uid_) {
     f.close();
 #endif
     QJsonDocument doc = QJsonDocument::fromJson(data);
-    populateEntry(entry, doc.object().value(QLatin1String("data")).toObject().toVariantMap(), true);
-
-    // now grab cast info
-    url.setPath(QStringLiteral("/series/%1/actors").arg(id));
-    job = getJob(url);
-    if(job->exec()) {
-      data = job->data();
-      if(!data.isEmpty()) {
-#if THETVDB_LOG
-        myWarning() << "Remove debug3 from thetvdbfetcher.cpp";
-        QFile f(QStringLiteral("/tmp/test3-thetvdb.json"));
-        if(f.open(QIODevice::WriteOnly)) {
-          QTextStream t(&f);
-          t.setCodec("UTF-8");
-          t << data;
-        }
-        f.close();
-#endif
-        doc = QJsonDocument::fromJson(data);
-        populateCast(entry, doc.object().value(QLatin1String("data")).toArray());
-      }
-    } else {
-      myDebug() << job->errorString() << url;
-    }
+    const QJsonObject dataObject = doc.object().value(QLatin1String("data")).toObject();
+    populateEntry(entry, dataObject.toVariantMap(), true);
+    populatePeople(entry, dataObject.value(QLatin1String("characters")).toArray());
 
     // now episode info
     if(optionalFields().contains(QStringLiteral("episode"))) {
-      url.setPath(QStringLiteral("/series/%1/episodes").arg(id));
-      job = getJob(url);
-      if(job->exec()) {
-        data = job->data();
-        if(!data.isEmpty()) {
-#if THETVDB_LOG
-          myWarning() << "Remove debug4 from thetvdbfetcher.cpp";
-          QFile f(QStringLiteral("/tmp/test4-thetvdb.json"));
-          if(f.open(QIODevice::WriteOnly)) {
-            QTextStream t(&f);
-            t.setCodec("UTF-8");
-            t << data;
-          }
-          f.close();
-#endif
-          doc = QJsonDocument::fromJson(data);
-          populateEpisodes(entry, doc.object().value(QLatin1String("data")).toArray());
-        }
-      }
+      populateEpisodes(entry, dataObject.value(QLatin1String("episodes")).toArray());
     }
   }
 
@@ -383,18 +362,28 @@ Tellico::Data::EntryPtr TheTVDBFetcher::fetchEntryHook(uint uid_) {
 }
 
 void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
-  entry_->setField(QStringLiteral("thetvdb-id"), mapValue(resultMap_, "id"));
-  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "seriesName"));
-  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "firstAired").left(4));
+  entry_->setField(QStringLiteral("thetvdb-id"), mapValue(resultMap_, "tvdb_id"));
+  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "name"));
+  const QString yearString = QStringLiteral("year");
+  if(entry_->field(yearString).isEmpty()) {
+    entry_->setField(yearString,  mapValue(resultMap_, "year").left(4));
+  }
+  if(entry_->field(yearString).isEmpty()) {
+    entry_->setField(yearString,  mapValue(resultMap_, "firstAired").left(4));
+  }
+
+  const QString network(QStringLiteral("network"));
+  if(entry_->collection()->hasField(network) && entry_->field(network).isEmpty()) {
+    entry_->setField(network, mapValue(resultMap_, "network"));
+  }
+  const QString plot(QStringLiteral("plot"));
+  if(entry_->field(plot).isEmpty()) {
+    entry_->setField(plot, mapValue(resultMap_, "overview"));
+  }
 
   // if we only need cursory data, then we're done
   if(!fullData_) {
     return;
-  }
-
-  const QString network(QStringLiteral("network"));
-  if(entry_->collection()->hasField(network)) {
-    entry_->setField(network, mapValue(resultMap_, "network"));
   }
 
   const QString thetvdb(QStringLiteral("thetvdb"));
@@ -404,12 +393,18 @@ void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
 
   const QString imdb(QStringLiteral("imdb"));
   if(entry_->collection()->hasField(imdb)) {
-    entry_->setField(imdb, QLatin1String("https://www.imdb.com/title/") + mapValue(resultMap_, "imdbId"));
+    auto remoteList = resultMap_.value(QLatin1String("remoteIds")).toList();
+    foreach(const auto& remoteId, remoteList) {
+      const QVariantMap remoteMap = remoteId.toMap();
+      if(remoteMap.value(QLatin1String("sourceName")) == QLatin1String("IMDB")) {
+        entry_->setField(imdb, QLatin1String("https://www.imdb.com/title/") + mapValue(remoteMap, "id"));
+      }
+    }
   }
 
   QStringList genres;
-  foreach(const QVariant& genre, resultMap_.value(QLatin1String("genre")).toList()) {
-    genres << genre.toString();
+  foreach(const QVariant& genre, resultMap_.value(QLatin1String("genres")).toList()) {
+    genres << mapValue(genre.toMap(), "name");
   }
   entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
 
@@ -422,49 +417,56 @@ void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
     entry_->setField(cert, rating);
   }
 
-  entry_->setField(QStringLiteral("cover"), QLatin1String(THETVDB_ART_PREFIX) + mapValue(resultMap_, "poster"));
+  QString cover = mapValue(resultMap_, "image");
+  if(cover.isEmpty()) cover = QLatin1String(THETVDB_ART_PREFIX) + mapValue(resultMap_, "poster");
+  if(!cover.isEmpty()) entry_->setField(QStringLiteral("cover"), cover);
 
-  QString lang = mapValue(resultMap_, "language");
+  QString lang = mapValue(resultMap_, "originalLanguage");
 #if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,55,0)
   const QString langName = KLanguageName::nameForCode(lang);
   if(!langName.isEmpty()) lang = langName;
-  if(lang == QLatin1String("US English")) lang = QLatin1String("English");
-#else
-  if(lang == QLatin1String("en")) lang = QStringLiteral("English");
 #endif
-  entry_->setField(QStringLiteral("language"), lang);
-  entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "overview"));
-}
-
-void TheTVDBFetcher::populateCast(Data::EntryPtr entry_, const QJsonArray& castArray_) {
-  QStringList actors;
-  foreach(const QJsonValue& cast, castArray_) {
-    const QVariantMap castMap = cast.toObject().toVariantMap();
-    actors << mapValue(castMap, "name") + FieldFormat::columnDelimiterString() + mapValue(castMap, "role");
+  if(lang == QLatin1String("US English") ||
+     lang == QLatin1String("en") ||
+     lang == QLatin1String("eng")) {
+    lang = QLatin1String("English");
   }
-  entry_->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
+  if(!lang.isEmpty()) entry_->setField(QStringLiteral("language"), lang);
 }
 
-void TheTVDBFetcher::populateEpisodes(Data::EntryPtr entry_, const QJsonArray& episodeArray_) {
-  QStringList episodes, directors, writers;
-  foreach(const QJsonValue& episode, episodeArray_) {
-    const QVariantMap map = episode.toObject().toVariantMap();
-    episodes << mapValue(map, "episodeName") + FieldFormat::columnDelimiterString() +
-                mapValue(map, "airedSeason") + FieldFormat::columnDelimiterString() +
-                mapValue(map, "airedEpisodeNumber");
-
-    foreach(const auto& director, map.value(QStringLiteral("directors")).toList()) {
-      directors << director.toString();
-    }
-    foreach(const auto& writer, map.value(QStringLiteral("writers")).toList()) {
-      writers << writer.toString();
+void TheTVDBFetcher::populatePeople(Data::EntryPtr entry_, const QJsonArray& peopleArray_) {
+  QStringList actors, directors, writers;
+  foreach(const QJsonValue& person, peopleArray_) {
+    const QVariantMap personMap = person.toObject().toVariantMap();
+    const QString personType = mapValue(personMap, "peopleType");
+    if(personType == QLatin1String("Actor")) {
+      actors << mapValue(personMap, "personName") + FieldFormat::columnDelimiterString() + mapValue(personMap, "name");
+    } else if(personType == QLatin1String("Director")) {
+      directors << mapValue(personMap, "personName");
+    } else if(personType == QLatin1String("Writer")) {
+      writers << mapValue(personMap, "personName");
     }
   }
   directors.removeDuplicates();
   writers.removeDuplicates();
-  entry_->setField(QStringLiteral("episode"), episodes.join(FieldFormat::rowDelimiterString()));
+  entry_->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
   entry_->setField(QStringLiteral("director"), directors.join(FieldFormat::delimiterString()));
   entry_->setField(QStringLiteral("writer"), writers.join(FieldFormat::delimiterString()));
+}
+
+void TheTVDBFetcher::populateEpisodes(Data::EntryPtr entry_, const QJsonArray& episodeArray_) {
+  QStringList episodes;
+  foreach(const QJsonValue& episode, episodeArray_) {
+    const QVariantMap map = episode.toObject().toVariantMap();
+    QString seasonString = mapValue(map, "seasonNumber");
+    // skip season 0, they're extras or specials
+    if(seasonString == QLatin1String("0")) continue;
+    if(seasonString.isEmpty()) seasonString = QLatin1String("1");
+    episodes << mapValue(map, "name") + FieldFormat::columnDelimiterString() +
+                seasonString + FieldFormat::columnDelimiterString() +
+                mapValue(map, "number");
+  }
+  entry_->setField(QStringLiteral("episode"), episodes.join(FieldFormat::rowDelimiterString()));
 }
 
 void TheTVDBFetcher::checkAccessToken() {
@@ -482,6 +484,7 @@ void TheTVDBFetcher::requestToken() {
   u.setPath(u.path() + QLatin1String("/login"));
   QJsonObject obj;
   obj.insert(QLatin1String("apikey"), m_apiKey);
+  obj.insert(QLatin1String("pin"), m_apiPin);
   const QByteArray loginPayload = QJsonDocument(obj).toJson();
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedHttpPost(loginPayload, u, KIO::HideProgressInfo);
@@ -494,7 +497,6 @@ void TheTVDBFetcher::requestToken() {
     return;
   }
 
-//  myDebug() << job->data();
   QJsonDocument doc = QJsonDocument::fromJson(job->data());
   if(doc.isNull()) {
     myDebug() << "TheTVDB: Invalid JSON in login response";
@@ -503,8 +505,14 @@ void TheTVDBFetcher::requestToken() {
   QJsonObject response = doc.object();
   if(response.contains(QLatin1String("Error"))) {
     myDebug() << "TheTVDB:" << response.value(QLatin1String("Error")).toString();
+  } else if(response.value(QLatin1String("status")) == QLatin1String("failure")) {
+    myDebug() << "TheTVDB:" << response.value(QLatin1String("message")).toString();
   }
-  m_accessToken = response.value(QLatin1String("token")).toString();
+  m_accessToken = response.value(QLatin1String("data")).toObject()
+                          .value(QLatin1String("token")).toString();
+  if(m_accessToken.isEmpty()) {
+    m_accessToken = response.value(QLatin1String("token")).toString();
+  }
   if(!m_accessToken.isEmpty()) {
     m_accessTokenExpires = QDateTime::currentDateTimeUtc().addSecs(THETVDB_TOKEN_EXPIRES);
   }
@@ -530,7 +538,11 @@ void TheTVDBFetcher::refreshToken() {
   if(response.contains(QLatin1String("Error"))) {
     myDebug() << "TheTVDB:" << response.value(QLatin1String("Error")).toString();
   }
-  m_accessToken = response.value(QLatin1String("token")).toString();
+  m_accessToken = response.value(QLatin1String("data")).toObject()
+                          .value(QLatin1String("token")).toString();
+  if(m_accessToken.isEmpty()) {
+    m_accessToken = response.value(QLatin1String("token")).toString();
+  }
   if(!m_accessToken.isEmpty()) {
     m_accessTokenExpires = QDateTime::currentDateTimeUtc().addSecs(THETVDB_TOKEN_EXPIRES);
   }
@@ -616,6 +628,7 @@ QString TheTVDBFetcher::ConfigWidget::preferredName() const {
 }
 
 void TheTVDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  // This is the API v4 subscribe PIN
   const QString apiKey = m_apiKeyEdit->text().trimmed();
   if(!apiKey.isEmpty()) {
     config_.writeEntry("API Key", apiKey);

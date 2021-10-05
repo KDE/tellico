@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KSharedConfig>
+
 class TheTVDBFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -36,6 +38,10 @@ private Q_SLOTS:
   void initTestCase();
   void testTitle();
   void testUpdate();
+
+private:
+  bool m_hasConfigFile;
+  KSharedConfig::Ptr m_config;
 };
 
 #endif
