@@ -615,11 +615,7 @@ TheTVDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheTVDBFetche
   addFieldsWidget(TheTVDBFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 
   if(fetcher_) {
-    // only show the key if it is not the default Tellico one...
-    // that way the user is prompted to apply for their own
-    if(fetcher_->m_apiKey != Tellico::reverseObfuscate(THETVDB_API_KEY)) {
-      m_apiKeyEdit->setText(fetcher_->m_apiKey);
-    }
+    m_apiKeyEdit->setText(fetcher_->m_apiPin);
   }
 }
 
