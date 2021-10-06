@@ -117,7 +117,7 @@ public:
   virtual QString preferredName() const Q_DECL_OVERRIDE;
 
 private:
-  QLineEdit* m_apiKeyEdit;
+  QLineEdit* m_apiPinEdit;
 };
 
   } // end namespace

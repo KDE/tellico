@@ -598,16 +598,16 @@ TheTVDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheTVDBFetche
   // richtext gets weird with size
   al->setMinimumWidth(al->sizeHint().width());
 
-  QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
+  QLabel* label = new QLabel(i18n("Subscriber PIN: "), optionsWidget());
   l->addWidget(label, ++row, 0);
 
-  m_apiKeyEdit = new QLineEdit(optionsWidget());
-  connect(m_apiKeyEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
-  l->addWidget(m_apiKeyEdit, row, 1);
+  m_apiPinEdit = new QLineEdit(optionsWidget());
+  connect(m_apiPinEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_apiPinEdit, row, 1);
   QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
   label->setWhatsThis(w);
-  m_apiKeyEdit->setWhatsThis(w);
-  label->setBuddy(m_apiKeyEdit);
+  m_apiPinEdit->setWhatsThis(w);
+  label->setBuddy(m_apiPinEdit);
 
   l->setRowStretch(++row, 10);
 
@@ -615,11 +615,7 @@ TheTVDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheTVDBFetche
   addFieldsWidget(TheTVDBFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 
   if(fetcher_) {
-    // only show the key if it is not the default Tellico one...
-    // that way the user is prompted to apply for their own
-    if(fetcher_->m_apiKey != Tellico::reverseObfuscate(THETVDB_API_KEY)) {
-      m_apiKeyEdit->setText(fetcher_->m_apiKey);
-    }
+    m_apiPinEdit->setText(fetcher_->m_apiPin);
   }
 }
 
@@ -629,8 +625,8 @@ QString TheTVDBFetcher::ConfigWidget::preferredName() const {
 
 void TheTVDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   // This is the API v4 subscribe PIN
-  const QString apiKey = m_apiKeyEdit->text().trimmed();
-  if(!apiKey.isEmpty()) {
-    config_.writeEntry("API Key", apiKey);
+  const QString apiPin = m_apiPinEdit->text().trimmed();
+  if(!apiPin.isEmpty()) {
+    config_.writeEntry("API Key", apiPin);
   }
 }
