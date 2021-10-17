@@ -118,7 +118,7 @@ set_package_properties(KF5NewStuff PROPERTIES
     URL "https://www.kde.org"
     TYPE OPTIONAL)
 
-find_package(KF5Sane "21.08.0")
+find_package(KF5Sane)
 set_package_properties(KF5Sane PROPERTIES
     DESCRIPTION "Support for adding scanned images to a collection"
     URL "https://www.kde.org"

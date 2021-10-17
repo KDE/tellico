@@ -36,6 +36,9 @@
 #include <QUrl>
 
 #include <config.h>
+#ifdef HAVE_KSANE
+#include <ksane_version.h>
+#endif
 
 class QLabel;
 class QResizeEvent;
@@ -87,7 +90,13 @@ private Q_SLOTS:
   void slotGetImage();
   void slotLinkOnlyClicked();
   void slotScanImage();
-  void imageReady(const QImage &scannedImage);
+#ifdef HAVE_KSANE
+#if KSANE_VERSION < QT_VERSION_CHECK(21,8,0)
+  void imageReady(QByteArray &data, int w, int h, int bpl, int f);
+#else
+  void imageReady(const QImage& scannedImage);
+#endif
+#endif
   void slotEditImage();
   void slotEditMenu(QAction* action);
   void slotFinished();
