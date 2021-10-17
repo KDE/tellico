@@ -283,11 +283,11 @@ void ImageWidget::slotScanImage() {
     m_saneDlg->addPage(m_saneWidget, QString());
     m_saneDlg->setStandardButtons(QDialogButtonBox::Cancel);
     m_saneDlg->setAttribute(Qt::WA_DeleteOnClose, false);
-+#if KSANE_VERSION < QT_VERSION_CHECK(21,8,0)
+#if KSANE_VERSION < QT_VERSION_CHECK(21,8,0)
      connect(m_saneWidget.data(), &KSaneIface::KSaneWidget::imageReady,
-+#else
-+    connect(m_saneWidget.data(), &KSaneIface::KSaneWidget::scannedImageReady,
-+#endif
+#else
+    connect(m_saneWidget.data(), &KSaneIface::KSaneWidget::scannedImageReady,
+#endif
             this, &ImageWidget::imageReady);
     connect(m_saneDlg.data(), &QDialog::rejected,
             this, &ImageWidget::cancelScan);
@@ -310,17 +310,17 @@ void ImageWidget::slotScanImage() {
 }
 
  #ifdef HAVE_KSANE
-+#if KSANE_VERSION < QT_VERSION_CHECK(21,8,0)
-+void ImageWidget::imageReady(QByteArray& data, int w, int h, int bpl, int f) {
-+#else
-+void ImageWidget::imageReady(const QImage& scannedImage) {
-+#endif
+#if KSANE_VERSION < QT_VERSION_CHECK(21,8,0)
+void ImageWidget::imageReady(QByteArray& data, int w, int h, int bpl, int f) {
+#else
+void ImageWidget::imageReady(const QImage& scannedImage) {
+#endif
    if(!m_saneWidget) {
      return;
    }
-+#if KSANE_VERSION < QT_VERSION_CHECK(21,8,0)
+#if KSANE_VERSION < QT_VERSION_CHECK(21,8,0)
    QImage scannedImage = m_saneWidget->toQImage(data, w, h, bpl, static_cast<KSaneIface::KSaneWidget::ImageFormat>(f));
-+#endif
+#endif
  
   QTemporaryFile temp(QDir::tempPath() + QLatin1String("/tellico_XXXXXX") + QLatin1String(".png"));
   if(temp.open()) {
