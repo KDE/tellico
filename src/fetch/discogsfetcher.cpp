@@ -58,7 +58,8 @@ using Tellico::Fetch::DiscogsFetcher;
 DiscogsFetcher::DiscogsFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_limit(DISCOGS_MAX_RETURNS_TOTAL)
-    , m_started(false) {
+    , m_started(false)
+    , m_page(1) {
 }
 
 DiscogsFetcher::~DiscogsFetcher() {
@@ -88,6 +89,11 @@ void DiscogsFetcher::setLimit(int limit_) {
 }
 
 void DiscogsFetcher::search() {
+  m_page = 1;
+  continueSearch();
+}
+
+void DiscogsFetcher::continueSearch() {
   m_started = true;
 
   if(m_apiKey.isEmpty()) {
@@ -131,6 +137,8 @@ void DiscogsFetcher::search() {
       stop();
       return;
   }
+  q.addQueryItem(QStringLiteral("page"), QString::number(m_page));
+  q.addQueryItem(QStringLiteral("per_page"), QString::number(m_limit));
   q.addQueryItem(QStringLiteral("token"), m_apiKey);
   u.setQuery(q);
 
@@ -170,7 +178,7 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
     QByteArray data = FileHandler::readDataFile(u, true);
 
 #if 0
-    myWarning() << "Remove debug from discogsfetcher.cpp";
+    myWarning() << "Remove data debug from discogsfetcher.cpp";
     QFile f(QString::fromLatin1("/tmp/test-discogs-data.json"));
     if(f.open(QIODevice::WriteOnly)) {
       QTextStream t(&f);
@@ -328,6 +336,10 @@ void DiscogsFetcher::slotComplete(KJob*) {
     stop();
     return;
   }
+
+  const int totalPages = mapValue(resultMap, "pagination", "pages").toInt();
+  m_hasMoreResults = m_page < totalPages;
+  ++m_page;
 
   int count = 0;
   foreach(const QVariant& result, resultMap.value(QLatin1String("results")).toList()) {

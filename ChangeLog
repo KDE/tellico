@@ -1,3 +1,7 @@
+2021-10-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved Discogs search to fetch more results when available.
+
 2021-10-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated TheTVDB data source to API v4.
