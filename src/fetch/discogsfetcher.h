@@ -70,6 +70,7 @@ public:
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
   virtual bool needsUserAgent() const Q_DECL_OVERRIDE { return true; }
   virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
+  virtual void continueSearch() Q_DECL_OVERRIDE;
   void setLimit(int limit);
 
   /**
@@ -104,6 +105,7 @@ private:
   bool m_started;
 
   QString m_apiKey;
+  int m_page;
 
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
