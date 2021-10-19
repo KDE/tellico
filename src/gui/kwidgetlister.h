@@ -138,8 +138,6 @@ class KWidgetLister : public QWidget
 
   Q_SIGNALS:
     /** This signal is emitted whenever a widget was added */
-    void widgetAdded();
-    /** This signal is emitted whenever a widget was added */
     void widgetAdded(QWidget *);
     /** This signal is emitted whenever a widget was removed */
     void widgetRemoved();

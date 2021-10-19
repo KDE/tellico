@@ -146,7 +146,6 @@ void KWidgetLister::addWidgetAtEnd( QWidget *w )
   mWidgetList.append( w );
   w->show();
   enableControls();
-  emit widgetAdded();
   emit widgetAdded( w );
 }
 
