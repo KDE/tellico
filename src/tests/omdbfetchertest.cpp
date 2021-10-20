@@ -71,10 +71,10 @@ void OMDBFetcherTest::testTitle() {
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Action; Sci-Fi"));
   QCOMPARE(entry->field(QStringLiteral("director")), QStringLiteral("Bryan Singer"));
   QCOMPARE(set(entry, "writer"),
-           set("Michael Dougherty; Dan Harris; Bryan Singer; Michael Dougherty; Dan Harris; Jerry Siegel; Joe Shuster"));
+           set("Bryan Singer; Dan Harris; Michael Dougherty"));
 //  QCOMPARE(entry->field(QStringLiteral("producer")), QStringLiteral("Bryan Singer; Jon Peters; Gilbert Adler"));
   QCOMPARE(entry->field(QStringLiteral("running-time")), QStringLiteral("154"));
-  QCOMPARE(entry->field(QStringLiteral("nationality")), QStringLiteral("USA; Australia"));
+  QCOMPARE(entry->field(QStringLiteral("nationality")), QStringLiteral("United States; Australia"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QStringLiteral("Brandon Routh"));
