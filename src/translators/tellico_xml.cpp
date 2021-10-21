@@ -173,3 +173,18 @@ QByteArray Tellico::XML::recoverFromBadXMLName(const QByteArray& data_) {
   }
   return newData;
 }
+
+QByteArray Tellico::XML::removeInvalidXml(const QByteArray& data_) {
+  const uint len = data_.length();
+  QByteArray result;
+  result.reserve(len);
+  for(uint i = 0; i < len; ++i) {
+    auto c = data_.at(i);
+    // for now, stick with anything below #x20 except for #x9 | #xA | #xD
+    if(c >= 0x20 || c == 0x09 || c == 0x0A || c == 0x0D) {
+      result.append(c);
+    }
+  }
+  result.squeeze();
+  return result;
+}

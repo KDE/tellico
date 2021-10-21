@@ -93,6 +93,11 @@ QDomDocument TellicoXMLExporter::exportXML() const {
   }
 
   QDomImplementation impl;
+  // Silently drop invalid XML characters when saving the document
+  // the default setting would allow invalid characters in the exported XML
+  // which might then fail to load or validate
+  // Bug 443845
+  impl.setInvalidDataPolicy(QDomImplementation::DropInvalidChars);
   QDomDocumentType doctype = impl.createDocumentType(QStringLiteral("tellico"),
                                                      XML::pubTellico(exportVersion),
                                                      XML::dtdTellico(exportVersion));

@@ -47,6 +47,7 @@ namespace Tellico {
     bool validXMLElementName(const QString& name);
     QString elementName(const QString& name);
     QByteArray recoverFromBadXMLName(const QByteArray& data);
+    QByteArray removeInvalidXml(const QByteArray& data);
   }
 }
 
