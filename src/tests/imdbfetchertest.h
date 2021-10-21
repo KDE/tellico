@@ -43,6 +43,7 @@ private Q_SLOTS:
   void testOkunen();
   void testFetchResultEncoding();
   void testBabel();
+  void testFirefly();
 
 private:
   KConfigGroup m_config;

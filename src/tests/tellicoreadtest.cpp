@@ -560,3 +560,29 @@ void TellicoReadTest::testEmptyFirstTableRow() {
   const QStringList rows2 = Tellico::FieldFormat::splitTable(entry2->field(QSL("table")));
   QCOMPARE(rows2.count(), 2);
 }
+
+void TellicoReadTest::testBug443845() {
+  // Tellico allowed data in a paragraph field that included an invalid control character
+  // and Tellico 3.3 could load the resulting file, but Tellico 3.4 couldn't
+  // first verify that we don't write an invalid character to the XML
+  QString badTitle = QStringLiteral("title with control") + QChar(0x0C);
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default fields
+  QVERIFY(coll->hasField(QStringLiteral("title")));
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  entry1->setField(QStringLiteral("title"), badTitle);
+  coll->addEntries(entry1);
+  Tellico::Export::TellicoXMLExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  // exported XML should not contain the illegal control character
+  QVERIFY(!exporter.text().contains(QChar(0x0C)));
+
+  // now since we used to allow these characters, need to make the parser robust for them
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QSL("data/bug443845.xml")));
+
+  Tellico::Import::TellicoImporter importer(url);
+  coll = importer.collection();
+
+  QVERIFY(coll);
+  Tellico::Data::EntryPtr entry = coll->entries().at(0);
+  QVERIFY(entry);
+}

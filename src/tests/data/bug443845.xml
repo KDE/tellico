@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC '-//Robby Stephenson/DTD Tellico V11.0//EN' 'http://periapsis.org/tellico/dtd/v11/tellico.dtd'>
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="Book Collection" type="2">
+  <fields>
+   <field title="Title" flags="6" name="title" category="General" format="1" type="1"/>
+   <field title="Description" description="Description" flags="0" name="description" category="Description" format="4" type="2"/>
+  </fields>
+  <entry id="21215">
+   <title>Control Character</title>
+   <description>This has a controol character in it&lt;br/>&lt;br/>&lt;br/>&lt;br/></description>
+  </entry>
+ </collection>
+</tellico>

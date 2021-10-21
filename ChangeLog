@@ -1,3 +1,7 @@
+2021-10-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed XML error when loading invalid characters (Bug 443845).
+
 2021-10-17  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved Discogs search to fetch more results when available.

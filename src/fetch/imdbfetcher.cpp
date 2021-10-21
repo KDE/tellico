@@ -759,33 +759,50 @@ void IMDBFetcher::doTitle(const QString& str_, Tellico::Data::EntryPtr entry_) {
 
     // now for movies with original non-english titles, the <title> is english
     // but the page header is the original title. Grab the orig title
-    QRegExp h3TitleRx(QStringLiteral("<h3[^>]+itemprop=\"name\"\\s*>(.*)<"), Qt::CaseInsensitive);
+    static QRegExp h3TitleRx(QStringLiteral("<h3[^>]+itemprop=\"name\"\\s*>(.*)<"), Qt::CaseInsensitive);
     h3TitleRx.setMinimal(true);
     if(h3TitleRx.indexIn(str_) > -1) {
+      QString possibleOrigTitle;
       const QString h3Title = h3TitleRx.cap(1).trimmed();
-      if(h3Title != title) {
+      if(h3Title == title) {
+        // some tv series have a original title label
+        static const QRegularExpression origTitleRx(QLatin1String("/h3>(.*)<span class=\"titlereference-original-title-label"),
+                                                    QRegularExpression::DotMatchesEverythingOption);
+        auto origTitleMatch = origTitleRx.match(str_);
+        if(origTitleMatch.hasMatch()) {
+          possibleOrigTitle = origTitleMatch.captured(1).trimmed();
+        }
+      } else {
         // mis-matching titles. If the user has requested original title,
         // put it in origtitle field and keep english as title
         // otherwise replace
         if(optionalFields().contains(QStringLiteral("origtitle"))) {
-          Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
-          f->setFormatType(FieldFormat::FormatTitle);
-          entry_->collection()->addField(f);
-          entry_->setField(QStringLiteral("origtitle"), h3Title);
+          possibleOrigTitle = h3Title;
         } else {
           entry_->setField(QStringLiteral("title"), h3Title);
         }
       }
+      if(!possibleOrigTitle.isEmpty() && optionalFields().contains(QStringLiteral("origtitle"))) {
+        Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
+        f->setFormatType(FieldFormat::FormatTitle);
+        entry_->collection()->addField(f);
+        entry_->setField(QStringLiteral("origtitle"), possibleOrigTitle);
+      }
     }
 
-    // remove parentheses and extract year
+    // remove parentheses and extract year, tv shows can have (TV Series 2002-2003) for example
     int pPos2 = pPos+1;
-    while(pPos2 < cap1.length() && cap1[pPos2].isDigit()) {
+    // find the closing parenthesis
+    while(pPos2 < cap1.length() && cap1[pPos2] != QLatin1Char(')')) {
       ++pPos2;
     }
-    QString year = cap1.mid(pPos+1, pPos2-pPos-1);
-    if(!year.isEmpty()) {
-      entry_->setField(QStringLiteral("year"), year);
+    const auto inParentheses = cap1.midRef(pPos+1, pPos2-pPos-1);
+    if(!inParentheses.isEmpty()) {
+      static const QRegularExpression yearRx(QLatin1String("\\d{4}")); // ignore ending year for tv series
+      auto match = yearRx.match(inParentheses);
+      if(match.hasMatch()) {
+        entry_->setField(QStringLiteral("year"), match.captured());
+      }
     }
   }
 }

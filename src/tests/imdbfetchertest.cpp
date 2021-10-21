@@ -225,3 +225,18 @@ void ImdbFetcherTest::testBabel() {
   // I can't figure out why this test has to use fromLocal8Bit instead of fromUtf8. The actual Tellico output is the same.
   QCOMPARE(set(entry, "producer"), set(QString::fromLocal8Bit("Steve Golin; Alejandro G. Iñárritu; Jon Kilik; Ann Ruark; Corinne Golden Weber")));
 }
+
+void ImdbFetcherTest::testFirefly() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Firefly"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  // the first entry had better be the right one
+  Tellico::Data::EntryPtr entry = results.at(0);
+
+  QCOMPARE(entry->field("title"), QStringLiteral("Firefly"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2002"));
+}

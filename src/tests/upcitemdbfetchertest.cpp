@@ -91,7 +91,7 @@ void UPCItemDbFetcherTest::testCatan() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Catan Studio - Catan Board Game"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Settlers of Catan Board Game"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Catan Studio"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
@@ -110,7 +110,7 @@ void UPCItemDbFetcherTest::test1632() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("1632"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Ring of Fire: 1632"));
   QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Eric Flint"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("9780671319724"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Baen"));
