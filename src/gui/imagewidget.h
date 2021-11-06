@@ -101,8 +101,11 @@ private Q_SLOTS:
   void slotEditMenu(QAction* action);
   void slotFinished();
   void cancelScan();
+  void copyImage();
+  void saveImageAs();
 
 private:
+  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
   void scale();
   void loadImage(const QUrl& url);
 

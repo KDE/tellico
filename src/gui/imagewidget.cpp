@@ -45,6 +45,7 @@
 #include <KConfigGroup>
 #include <KFileWidget>
 #include <KRecentDirs>
+#include <KStandardAction>
 
 #include <QPushButton>
 #include <QMenu>
@@ -67,6 +68,7 @@
 #include <QProgressDialog>
 #include <QFileDialog>
 #include <QImageReader>
+#include <QClipboard>
 
 #ifdef HAVE_KSANE
 #include <KSaneWidget>
@@ -219,6 +221,24 @@ void ImageWidget::slotClear() {
   if(!wasEmpty) {
     emit signalModified();
   }
+}
+
+void ImageWidget::contextMenuEvent(QContextMenuEvent* event_) {
+  if(m_imageID.isEmpty() || m_pixmap.isNull()) {
+    return;
+  }
+
+  QMenu menu(this);
+
+  auto standardCopy = KStandardAction::copy(this, &ImageWidget::copyImage, &menu);
+  standardCopy->setToolTip(QString()); // standard tool tip is
+  menu.addAction(standardCopy);
+
+  auto saveAs = KStandardAction::saveAs(this, &ImageWidget::saveImageAs, &menu);
+  saveAs->setToolTip(QString());
+  menu.addAction(saveAs);
+
+  menu.exec(event_->globalPos());
 }
 
 void ImageWidget::scale() {
@@ -484,4 +504,36 @@ void ImageWidget::cancelScan() {
     m_saneWidget->scanCancel();
   }
 #endif
+}
+
+void ImageWidget::copyImage() {
+  const Data::Image& img = ImageFactory::imageById(m_imageID);
+  if(img.isNull()) {
+    return;
+  }
+
+  QApplication::clipboard()->setImage(img, QClipboard::Clipboard);
+  QApplication::clipboard()->setImage(img, QClipboard::Selection);
+}
+
+void ImageWidget::saveImageAs() {
+  const Data::Image& img = ImageFactory::imageById(m_imageID);
+  if(img.isNull()) {
+    return;
+  }
+
+  QByteArray outputFormat = Data::Image::outputFormat(img.format());
+  const QString filter = i18n("All Images (%1)", QLatin1String("*.") + QString::fromLatin1(outputFormat));
+  const QUrl target = QFileDialog::getSaveFileUrl(this, QString(), QUrl(), filter);
+  if(!target.isEmpty() && target.isValid()) {
+    QString suffix = QFileInfo(target.fileName()).suffix();
+    if(suffix.toLower().toUtf8() != outputFormat.toLower()) {
+      outputFormat = Data::Image::outputFormat(suffix.toUtf8());
+      myDebug() << "Writing image data as" << outputFormat;
+    }
+    const bool success = FileHandler::writeDataURL(target, Data::Image::byteArray(img, outputFormat));
+    if(!success) {
+      myDebug() << "Failed to write image to" << target.toDisplayString();
+    }
+  }
 }
