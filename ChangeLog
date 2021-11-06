@@ -1,3 +1,7 @@
+2021-11-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Added menu actions to copy and save images (Bug 443897).
+
 2021-10-20  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed XML error when loading invalid characters (Bug 443845).
