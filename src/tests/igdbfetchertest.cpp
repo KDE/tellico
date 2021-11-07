@@ -31,7 +31,6 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <KConfig>
 #include <KConfigGroup>
 
 #include <QTest>
@@ -56,10 +55,10 @@ void IGDBFetcherTest::testKeyword() {
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
                                        QStringLiteral("Zelda Twilight Princess"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IGDBFetcher(this));
+  QScopedPointer<Tellico::Fetch::Fetcher> fetcher(new Tellico::Fetch::IGDBFetcher(this));
   fetcher->readConfig(cg);
 
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 5);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher.data(), request, 5);
   fetcher->saveConfig(); // to save the access token
 
   QVERIFY(!results.isEmpty());
