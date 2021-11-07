@@ -198,7 +198,7 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::fetchEntryHook(uint uid_) {
 
 #if 0
   myDebug() << url.url();
-  myWarning() << "Remove debug from kinoteatrfetcher.cpp";
+  myWarning() << "Remove debug2 from kinoteatrfetcher.cpp";
   QFile f(QStringLiteral("/tmp/test-kinoteatr.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -271,7 +271,8 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  QRegularExpression yearRx(QStringLiteral("Рік:.*?([12]\\d\\d\\d).*?</a"));
+  QRegularExpression yearRx(QStringLiteral("Рік:.*?([12]\\d\\d\\d).*?</a"),
+                            QRegularExpression::DotMatchesEverythingOption);
   match = yearRx.match(str_);
   if(match.hasMatch()) {
     entry->setField(QStringLiteral("year"), match.captured(1));
