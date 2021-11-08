@@ -166,30 +166,33 @@ void IBSFetcher::slotComplete(KJob*) {
 #endif
 
   QString s = Tellico::decodeHTML(data);
-  // really specific regexp
-  QRegExp itemRx(QLatin1String("class=\"info\">(.*)class=\"clearfix"));
-  itemRx.setMinimal(true);
-  QRegExp titleRx(QLatin1String("<div class=\"title\">\\s*<a [^>]*href=\"(.*)\"[^>]*>(.*)</div"));
-  titleRx.setMinimal(true);
-  QRegExp yearRx(QLatin1String("<span class=\"publication_date\">(.*)</"));
-  yearRx.setMinimal(true);
-  QRegExp tagRx(QLatin1String("<.*>"));
-  tagRx.setMinimal(true);
+  QRegularExpression itemRx(QLatin1String("<div class=\"cc-product-list-item.*?>(.+?)<!--"),
+                            QRegularExpression::DotMatchesEverythingOption);
+  QRegularExpression titleRx(QStringLiteral("<div class=\"cc-content-title\">\\s*<a [^>]*href=\"(.+?)\"[^>]*?>(.+?)</a"),
+                             QRegularExpression::DotMatchesEverythingOption);
+  QRegularExpression yearRx(QLatin1String("<span class=\"cc-owner\">.*?([12]\\d{3}).*?</"),
+                            QRegularExpression::DotMatchesEverythingOption);
+  QRegularExpression tagRx(QLatin1String("<.*?>"));
 
   QString url, title, year;
-  for(int pos = itemRx.indexIn(s); m_started && pos > -1; pos = itemRx.indexIn(s, pos+itemRx.matchedLength())) {
-    const QString s = itemRx.cap(1);
-    if(s.contains(titleRx)) {
-      url = titleRx.cap(1);
-      title = titleRx.cap(2).remove(tagRx).simplified();
+  auto matchIterator = itemRx.globalMatch(s);
+  while(matchIterator.hasNext() && m_started) {
+    auto itemMatch = matchIterator.next();
+    const QString s = itemMatch.captured(1);
+    auto titleMatch = titleRx.match(s);
+    if(titleMatch.hasMatch()) {
+      url = titleMatch.captured(1);
+      title = titleMatch.captured(2).remove(tagRx).simplified();
     }
-    if(s.contains(yearRx)) {
-      year = yearRx.cap(1).remove(tagRx).simplified();
+    auto yearMatch = yearRx.match(s);
+    if(yearMatch.hasMatch()) {
+      year = yearMatch.captured(1).remove(tagRx).simplified();
     }
     if(!url.isEmpty() && !title.isEmpty()) {
       // the url probable contains &amp; so be careful
       QUrl u = m_job->url();
       u = u.resolved(QUrl(url.replace(QLatin1String("&amp;"), QLatin1String("&"))));
+//      myDebug() << u << title << year;
       FetchResult* r = new FetchResult(this, title, year);
       m_matches.insert(r->uid, u);
       emit signalResultFound(r);
@@ -222,7 +225,7 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntryHook(uint uid_) {
 
 #if 0
   myDebug() << url.url();
-  myWarning() << "Remove debug from ibsfetcher.cpp";
+  myWarning() << "Remove debug2 from ibsfetcher.cpp";
   QFile f(QLatin1String("/tmp/test-ibs2.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -281,11 +284,11 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   entry->setField(QStringLiteral("author"), mapValue(resultMap, "author"));
 
   const QString bookFormat = mapValue(resultMap, "bookFormat");
-  if(bookFormat == QLatin1String("http://schema.org/Paperback")) {
+  if(bookFormat == QLatin1String("https://schema.org/Paperback")) {
     entry->setField(QStringLiteral("binding"), i18n("Paperback"));
-  } else if(bookFormat == QLatin1String("http://schema.org/Hardcover")) {
+  } else if(bookFormat == QLatin1String("https://schema.org/Hardcover")) {
     entry->setField(QStringLiteral("binding"), i18n("Hardback"));
-  } else if(bookFormat == QLatin1String("http://schema.org/EBook")) {
+  } else if(bookFormat == QLatin1String("https://schema.org/EBook")) {
     entry->setField(QStringLiteral("binding"), i18n("E-Book"));
   }
 
@@ -333,28 +336,28 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   tagRx.setMinimal(true);
 
   // editor is not in embedded json
-  QRegExp editorRx(QLatin1String("<b>Curatore:</b>(.*)</div"));
+  QRegExp editorRx(QLatin1String("Curatore:.*>(.*)</a"));
   editorRx.setMinimal(true);
   if(str_.contains(editorRx)) {
     entry->setField(QStringLiteral("editor"), editorRx.cap(1).remove(tagRx).simplified());
   }
 
   // translator is not in embedded json
-  QRegExp translatorRx(QLatin1String("<b>Traduttore:</b>(.*)</div"));
+  QRegExp translatorRx(QLatin1String("Traduttore:.*>(.*)</a"));
   translatorRx.setMinimal(true);
   if(str_.contains(translatorRx)) {
     entry->setField(QStringLiteral("translator"), translatorRx.cap(1).remove(tagRx).simplified());
   }
 
   // edition is not in embedded json
-  QRegExp editionRx(QLatin1String("<b>Editore:</b>(.*)</div"));
+  QRegExp editionRx(QLatin1String("Editore:.*>(.*)</a"));
   editionRx.setMinimal(true);
   if(str_.contains(editionRx)) {
     entry->setField(QStringLiteral("edition"), editionRx.cap(1).remove(tagRx).simplified());
   }
 
   // series is not in embedded json
-  QRegExp seriesRx(QLatin1String("<b>Collana:</b>(.*)</div"));
+  QRegExp seriesRx(QLatin1String("Collana:.*>(.*)</a"));
   seriesRx.setMinimal(true);
   if(str_.contains(seriesRx)) {
     entry->setField(QStringLiteral("series"), seriesRx.cap(1).remove(tagRx).simplified());
