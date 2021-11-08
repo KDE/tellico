@@ -86,7 +86,7 @@ void IBSFetcherTest::testTranslator() {
   QCOMPARE(entry->field("title"), QString::fromUtf8("città sepolta"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("8842914975"));
   QCOMPARE(entry->field("pages"), QStringLiteral("528"));
-  QCOMPARE(entry->field("genre"), QStringLiteral("Thriller"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Avventura"));
   QCOMPARE(entry->field("language"), QStringLiteral("italiano"));
   QCOMPARE(entry->field("author"), QStringLiteral("James Rollins"));
   QCOMPARE(entry->field("translator"), QStringLiteral("Marco Zonetti"));

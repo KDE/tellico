@@ -74,7 +74,7 @@ void DBCFetcherTest::testIsbn() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp. 1. bog"));
   QCOMPARE(entry->field(QStringLiteral("author")), QString::fromUtf8("Karl Ove Knausgård"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Lindhardt og Ringhof"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2012"));
@@ -96,7 +96,7 @@ void DBCFetcherTest::testKeyword() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp. 1. bog"));
   QCOMPARE(entry->field(QStringLiteral("author")), QString::fromUtf8("Karl Ove Knausgård"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Lindhardt og Ringhof"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2012"));

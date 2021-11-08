@@ -204,7 +204,7 @@ Tellico::Data::EntryPtr KinoFetcher::fetchEntryHook(uint uid_) {
   }
 
 #if 0
-  myWarning() << "Remove debug from kinofetcher.cpp";
+  myWarning() << "Remove debug2 from kinofetcher.cpp";
   QFile f(QStringLiteral("/tmp/test2.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -246,21 +246,27 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
       coverLink.prepend(QLatin1String("https:"));
     }
     entry->setField(QStringLiteral("cover"), coverLink);
+
+    QString genreString = mapValue(objectMap, "genre");
+    if(!genreString.isEmpty()) {
+      QStringList genres = genreString.split(QRegularExpression(QLatin1String(",\\s+")));
+      entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
+    }
   }
 
   QRegularExpression tagRx(QStringLiteral("<.+?>"));
 
-  QRegularExpression nationalityRx(QStringLiteral("<dt.*?>Produktionsland</dt><dd.*?>(.*?)</dd>"));
+  QRegularExpression nationalityRx(QStringLiteral(">Produktionsland:(.*?)</a>"));
   QRegularExpressionMatch nationalityMatch = nationalityRx.match(str_);
   if(nationalityMatch.hasMatch()) {
-    const QString n = nationalityMatch.captured(1).remove(tagRx);
+    const QString n = nationalityMatch.captured(1).remove(tagRx).trimmed();
     entry->setField(QStringLiteral("nationality"), n);
   }
 
-  QRegularExpression lengthRx(QStringLiteral("<dt.*?>Dauer</dt><dd.*?>(.*?)</dd>"));
+  QRegularExpression lengthRx(QStringLiteral(">Dauer:(.*?)</li"));
   QRegularExpressionMatch lengthMatch = lengthRx.match(str_);
   if(lengthMatch.hasMatch()) {
-    const QString l = lengthMatch.captured(1).remove(tagRx).remove(QStringLiteral(" Min"));
+    const QString l = lengthMatch.captured(1).remove(tagRx).remove(QStringLiteral(" Min")).trimmed();
     entry->setField(QStringLiteral("running-time"), l);
   }
 
@@ -276,7 +282,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
   }
 
-  QRegularExpression certRx(QStringLiteral("<dt.*?>FSK</dt><dd.*?>(.*?)</dd>"));
+  QRegularExpression certRx(QStringLiteral(">FSK:(.*?)</a"));
   QRegularExpressionMatch certMatch = certRx.match(str_);
   if(certMatch.hasMatch()) {
     // need to translate? Let's just add FSK ratings to the allowed values
@@ -291,7 +297,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
               << QStringLiteral("FSK 18 (DE)");
       entry->collection()->fieldByName(QStringLiteral("certification"))->setAllowed(allowed);
     }
-    QString c = certMatch.captured(1).remove(tagRx);
+    QString c = certMatch.captured(1).remove(tagRx).trimmed();
     if(c == QStringLiteral("ab 0")) {
       c = QStringLiteral("FSK 0 (DE)");
     } else if(c == QLatin1String("ab 6")) {
@@ -306,10 +312,10 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("certification"), c);
   }
 
-  QRegularExpression studioRx(QStringLiteral("<dt.*?>Filmverleih</dt><dd.*?>(.*?)</dd>"));
+  QRegularExpression studioRx(QStringLiteral(">Filmverleih:(.*?)</li"));
   QRegularExpressionMatch studioMatch = studioRx.match(str_);
   if(studioMatch.hasMatch()) {
-    QString s = studioMatch.captured(1).remove(tagRx).remove(QStringLiteral(" Min"));
+    QString s = studioMatch.captured(1).remove(tagRx).trimmed();
     entry->setField(QStringLiteral("studio"), s);
   }
 
