@@ -238,6 +238,7 @@ void HtmlExporterTest::testTemplates() {
   QUrl url = QUrl::fromLocalFile(tellicoFile);
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
 
   Tellico::Export::HTMLExporter exporter(coll);
   exporter.setParseDOM(false); // shows error for <wbr> tags and is not necessary for check
