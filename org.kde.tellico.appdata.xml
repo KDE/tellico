@@ -260,7 +260,7 @@
       <li xml:lang="x-test">xxHandles entries with multiple authors, genres, keywords, etcxx</li>
       <li>Automatically formats titles and names</li>
       <li xml:lang="bs">Automatski formatira naslove i imena</li>
-      <li xml:lang="ca">Formata automàticament els títols i els noms</li>
+      <li xml:lang="ca">Dona format als títols i als noms automàticament</li>
       <li xml:lang="ca-valencia">Formata automàticament els títols i els noms</li>
       <li xml:lang="da">Formaterer titler og navne automatisk</li>
       <li xml:lang="de">Automatische Formatierung von Titeln und Namen</li>
