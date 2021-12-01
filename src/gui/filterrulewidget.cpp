@@ -62,10 +62,15 @@ FilterRuleWidget::FilterRuleWidget(Tellico::FilterRule* rule_, QWidget* parent_)
   }
 }
 
+QString FilterRuleWidget::anyFieldString() {
+  static const QString anyField = QLatin1Char('<') + i18n("Any Field") + QLatin1Char('>');
+  return anyField;
+}
+
 void FilterRuleWidget::initLists() {
   //---------- initialize list of filter fields
   if(m_ruleFieldList.isEmpty()) {
-    m_ruleFieldList.append(QLatin1Char('<') + i18n("Any Field") + QLatin1Char('>'));
+    m_ruleFieldList.append(anyFieldString());
     QStringList titles = Data::Document::self()->collection()->fieldTitles();
     titles.sort();
     m_ruleFieldList += titles;
@@ -129,8 +134,8 @@ void FilterRuleWidget::slotEditRegExp() {
 void FilterRuleWidget::slotRuleFieldChanged(int which_) {
   Q_UNUSED(which_);
   m_ruleType = General;
-  QString fieldTitle = m_ruleField->currentText();
-  if(fieldTitle.isEmpty() || fieldTitle[0] == QLatin1Char('<')) {
+  const QString fieldTitle = m_ruleField->currentText();
+  if(fieldTitle.isEmpty() || fieldTitle == anyFieldString()) {
     m_ruleValue->setCompletionObject(nullptr);
     updateFunctionList();
     return;

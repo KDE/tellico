@@ -94,6 +94,7 @@ protected Q_SLOTS:
   void slotRuleFunctionChanged(int which);
 
 private:
+  static QString anyFieldString();
   void initLists();
   void initWidget();
   void updateFunctionList();
