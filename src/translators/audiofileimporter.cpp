@@ -192,7 +192,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   uint j = 0;
   for(QStringList::ConstIterator it = files.constBegin(); !m_cancelled && it != files.constEnd(); ++it, ++j) {
     TagLib::FileRef f(QFile::encodeName(*it).data());
-    if(f.isNull() || !f.tag()) {
+    if(f.isNull() || !f.tag() || !f.file()) {
       if((*it).endsWith(QLatin1String("/.directory"))) {
         directoryFiles += *it;
         if(showProgress) ProgressManager::self()->setTotalSteps(this, files.count() + directoryFiles.count());
