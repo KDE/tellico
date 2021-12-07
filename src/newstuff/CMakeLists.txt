@@ -12,6 +12,7 @@ TARGET_LINK_LIBRARIES(newstuff
     utils
     Qt5::Core
     Qt5::Gui
+    Qt5::DBus
     KF5::ConfigCore
     KF5::KIOCore
     KF5::Archive
