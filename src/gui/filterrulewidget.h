@@ -111,7 +111,8 @@ private:
     General,
     Date,
     Number,
-    Image
+    Image,
+    Bool
   };
   RuleType m_ruleType;
 };

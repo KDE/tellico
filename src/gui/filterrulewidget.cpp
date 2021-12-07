@@ -158,6 +158,8 @@ void FilterRuleWidget::slotRuleFieldChanged(int which_) {
       m_ruleType = Number;
     } else if(field->type() == Data::Field::Image) {
       m_ruleType = Image;
+    } else if(field->type() == Data::Field::Bool) {
+      m_ruleType = Bool;
     }
   }
   updateFunctionList();
@@ -175,13 +177,15 @@ void FilterRuleWidget::slotRuleFunctionChanged(int which_) {
     m_valueStack->setCurrentWidget(m_ruleDate);
   } else {
     m_valueStack->setCurrentWidget(m_ruleValue);
-    m_ruleValue->setPlaceholderText(QString());
+    m_ruleValue->setPlaceholderText(m_ruleType == Bool ? QChar(0x2611): QString());
     if(m_ruleType == Number &&
       (data != FilterRule::FuncRegExp && data != FilterRule::FuncNotRegExp)) {
       m_ruleValue->setValidator(new QIntValidator(this));
     } else {
       m_ruleValue->setValidator(nullptr);
     }
+    // Bool rules don't use a value
+    m_ruleValue->setEnabled(m_ruleType != Bool);
   }
 }
 
@@ -209,12 +213,12 @@ void FilterRuleWidget::setRule(const Tellico::FilterRule* rule_) {
     m_ruleField->setCurrentIndex(idx);
   }
 
-  // update the rulle fields first, before possible values
+  // update the rule fields first, before possible values
   slotRuleFieldChanged(m_ruleField->currentIndex());
 
   //--------------set function and contents
   m_ruleFunc->setCurrentData(rule_->function());
-  m_ruleValue->setText(rule_->pattern());
+  m_ruleValue->setText(m_ruleType == Bool ? QString() : rule_->pattern());
 
   slotRuleFunctionChanged(m_ruleFunc->currentIndex());
   blockSignals(false);
@@ -230,7 +234,8 @@ Tellico::FilterRule* FilterRuleWidget::rule() const {
   if(m_valueStack->currentWidget() == m_ruleDate) {
     ruleValue = m_ruleDate->date().toString(Qt::ISODate);
   } else {
-    ruleValue = m_ruleValue->text().trimmed();
+    // bool values only get checked against true
+    ruleValue = m_ruleType == Bool ? QStringLiteral("true") : m_ruleValue->text().trimmed();
   }
 
   return new FilterRule(fieldName, ruleValue,
@@ -238,7 +243,6 @@ Tellico::FilterRule* FilterRuleWidget::rule() const {
 }
 
 void FilterRuleWidget::reset() {
-//  myDebug();
   blockSignals(true);
 
   m_ruleField->setCurrentIndex(0);
@@ -282,6 +286,10 @@ void FilterRuleWidget::updateFunctionList() {
       m_ruleFunc->addItem(i18n("image size does not equal"), FilterRule::FuncNotEquals);
       m_ruleFunc->addItem(i18nc("image size is less than a number", "image size is less than"), FilterRule::FuncLess);
       m_ruleFunc->addItem(i18nc("image size is greater than a number", "image size is greater than"), FilterRule::FuncGreater);
+      break;
+    case Bool:
+      m_ruleFunc->addItem(i18n("equals"), FilterRule::FuncEquals);
+      m_ruleFunc->addItem(i18n("does not equal"), FilterRule::FuncNotEquals);
       break;
     case General:
       m_ruleFunc->addItem(i18n("contains"), FilterRule::FuncContains);

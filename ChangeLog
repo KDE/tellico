@@ -1,3 +1,7 @@
+2021-12-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Added explicit filter rule for Bool fields.
+
 2021-11-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 3.4.2.
