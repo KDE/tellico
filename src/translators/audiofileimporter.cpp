@@ -57,6 +57,20 @@
 #include <QVBoxLayout>
 #include <QApplication>
 
+namespace {
+  bool hasValue(const TagLib::PropertyMap& pmap, const char* key) {
+    const TagLib::String keyString(key);
+    return pmap.contains(keyString) && !pmap[keyString].isEmpty();
+  }
+
+  QString tagValue(const TagLib::PropertyMap& pmap, const char* key) {
+    const TagLib::String keyString(key);
+    return (pmap.contains(keyString) && !pmap[keyString].isEmpty()) ?
+            TStringToQString(pmap[keyString].front()).trimmed() :
+            QString();
+  }
+}
+
 using Tellico::Import::AudioFileImporter;
 
 AudioFileImporter::AudioFileImporter(const QUrl& url_) : Tellico::Import::Importer(url_)
@@ -200,7 +214,8 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       continue;
     }
 
-    const TagLib::PropertyMap pmap = f.file()->properties();
+    TagLib::PropertyMap pmap = f.file()->properties();
+    pmap.removeEmpty();
     TagLib::Tag* tag = f.tag();
     QString album = TStringToQString(tag->album()).trimmed();
     if(album.isEmpty()) {
@@ -264,11 +279,11 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     if(mpegFile && mpegFile->ID3v2Tag() && !mpegFile->ID3v2Tag()->frameListMap()["TPE2"].isEmpty()) {
       albumArtist = TStringToQString(mpegFile->ID3v2Tag()->frameListMap()["TPE2"].front()->toString()).trimmed();
     }
-    if(albumArtist.isEmpty() && pmap.contains("ALBUMARTIST")) {
-      albumArtist = TStringToQString(pmap["ALBUMARTIST"].front()).trimmed();
+    if(albumArtist.isEmpty()) {
+      albumArtist = tagValue(pmap, "ALBUMARTIST");
     }
-    if(albumArtist.isEmpty() && pmap.contains("ALBUMARTISTSORT")) {
-      albumArtist = TStringToQString(pmap["ALBUMARTISTSORT"].front()).trimmed();
+    if(albumArtist.isEmpty()) {
+      albumArtist = tagValue(pmap, "ALBUMARTISTSORT");
     }
     if(!albumArtist.isEmpty()) {
       albumKey += FieldFormat::columnDelimiterString() + albumArtist.toLower();
@@ -283,11 +298,11 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     // album entries use the album name as the title
     entry->setField(title, album);
     QString a = TStringToQString(tag->artist()).trimmed();
-    if(a.isEmpty() && pmap.contains("ArtistSort")) {
-      a = TStringToQString(pmap["ArtistSort"].front()).trimmed();
+    if(a.isEmpty()) {
+      a = tagValue(pmap, "ArtistSort");
     }
-    if(a.isEmpty() && pmap.contains("Artists")) {
-      a = TStringToQString(pmap["Artists"].front()).trimmed();
+    if(a.isEmpty()) {
+      a = tagValue(pmap, "Artists");
     }
     // If no album artist identified, we use track artist as album artist, or "(Various)" if tracks have various artists.
     if(!albumArtist.isEmpty()) {
@@ -302,17 +317,17 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     }
     if(tag->year() > 0) {
       entry->setField(year, QString::number(tag->year()));
-    } else if(pmap.contains("OriginalYear")) {
+    } else if(hasValue(pmap, "OriginalYear")) {
       entry->setField(year, TStringToQString(pmap["OriginalYear"].front()));
     }
 
     if(!tag->genre().isEmpty()) {
       entry->setField(genre, TStringToQString(tag->genre()).trimmed());
     }
-    if(pmap.contains("Label")) {
+    if(hasValue(pmap, "Label")) {
       entry->setField(label, TStringToQString(pmap["Label"].front()));
     }
-    if(pmap.contains("Media")) {
+    if(hasValue(pmap, "Media")) {
       const QString media = TStringToQString(pmap["Media"].front());
       if(media == QLatin1String("CD")) {
         entry->setField(QLatin1String("medium"), i18n("Compact Disc"));
