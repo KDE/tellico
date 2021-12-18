@@ -1,3 +1,7 @@
+2021-12-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with opening target=_blank links (Bug 445871).
+
 2021-12-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug in audio file importer (Bug 446551).

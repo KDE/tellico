@@ -27,7 +27,6 @@
 
 #include "datavectors.h"
 
-
 #ifdef USE_KHTML
 #include <KHTMLPart>
 #include <KHTMLView>
@@ -165,6 +164,10 @@ Q_SIGNALS:
 
 protected:
   virtual bool acceptNavigationRequest(const QUrl& url, QWebEnginePage::NavigationType type, bool isMainFrame) Q_DECL_OVERRIDE;
+  virtual QWebEnginePage* createWindow(QWebEnginePage::WebWindowType type) Q_DECL_OVERRIDE;
+
+private:
+  void openExternalLink(const QUrl& url);
 };
 #endif
 
