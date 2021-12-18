@@ -124,12 +124,31 @@ bool EntryViewPage::acceptNavigationRequest(const QUrl& url_, QWebEnginePage::Na
   }
 
   if(type_ == QWebEnginePage::NavigationTypeLinkClicked) {
-    const QUrl u = Kernel::self()->URL().resolved(url_);
-    QDesktopServices::openUrl(u);
+    // do not load this new url inside the entry view, return false
+    openExternalLink(url_);
     return false;
   }
 
   return true;
+}
+
+// intercept window open commands, including target=_blank
+// see https://bugs.kde.org/show_bug.cgi?id=445871
+QWebEnginePage* EntryViewPage::createWindow(QWebEnginePage::WebWindowType type_) {
+  Q_UNUSED(type_);
+  auto page = new QWebEnginePage(this);
+  connect(page, &QWebEnginePage::urlChanged, this, [this](const QUrl& u) {
+    openExternalLink(u);
+    auto page = static_cast<QWebEnginePage*>(sender());
+    page->action(QWebEnginePage::Stop)->trigger(); // stop the loading, further is unneccesary
+    page->deleteLater();
+  });
+  return page;
+}
+
+void EntryViewPage::openExternalLink(const QUrl& url_) {
+  const QUrl finalUrl = Kernel::self()->URL().resolved(url_);
+  QDesktopServices::openUrl(finalUrl);
 }
 
 EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_),
@@ -256,7 +275,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   }
 
 #if 0
-  myWarning() << "turn me off!";
+  myWarning() << "EntryView::showEntry() - turn me off!";
   QFile f2(QLatin1String("/tmp/test.html"));
   if(f2.open(QIODevice::WriteOnly)) {
     QTextStream t(&f2);
