@@ -639,4 +639,5 @@
       <url>https://tellico-project.org/tellico-3-3-released</url>
     </release>
   </releases>
+  <content_rating type="oars-1.1"/>
 </component>
