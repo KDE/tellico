@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2017-2020 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -52,6 +52,10 @@
 namespace {
   static const char* KINOPOISK_SEARCH_URL = "https://www.kinopoisk.ru/index.php";
   static const char* KINOPOISK_IMAGE_SIZE = "300x450";
+  static const char* KINOPOISK_API_FILM_URL  = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
+  static const char* KINOPOISK_API_STAFF_URL = "https://kinopoiskapiunofficial.tech/api/v1/staff";
+  static const char* KINOPOISK_API_KEY = "f0c67d1f1a2feb8dfc9d5e694a7397a75c689bac90a90337476aaa9a3909e785bddf8ca101358befddedcefa4d60deecb0d22544ebd90f22dee9c7f3e581b3d70a3f9bf885b4b483";
+  static const int KINOPOISK_DEFAULT_CAST_SIZE = 10;
 }
 
 using namespace Tellico;
@@ -59,6 +63,7 @@ using Tellico::Fetch::KinoPoiskFetcher;
 
 KinoPoiskFetcher::KinoPoiskFetcher(QObject* parent_)
     : Fetcher(parent_), m_started(false) {
+  m_apiKey = Tellico::reverseObfuscate(KINOPOISK_API_KEY);
 }
 
 KinoPoiskFetcher::~KinoPoiskFetcher() {
@@ -100,7 +105,7 @@ void KinoPoiskFetcher::search() {
       return;
   }
   u.setQuery(q);
-//  myDebug() << "url: " << u.url();
+  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -200,7 +205,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
   const QByteArray data = getJob->data();
   const QString results = Tellico::decodeHTML(Tellico::fromHtmlData(data, "UTF-8"));
   if(results.isEmpty()) {
-    myDebug() << "no text results";
+    myDebug() << "KinoPoiskFetcher: no text results";
     return Data::EntryPtr();
   }
 
@@ -216,14 +221,23 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
   f.close();
 #endif
 
-  entry = parseEntry(results);
-  if(!entry) {
-    // might want to check LD+JSON format
-    myDebug() << "...trying Linked Data";
-    entry = parseEntryLinkedData(results);
+  if(results.contains(QStringLiteral("captcha"))) {
+//    myDebug() << "KinoPoiskFetcher: captcha triggered";
+    static const QRegularExpression re(QLatin1String("/(\\d+)"));
+    QRegularExpressionMatch match = re.match(url.url());
+    if(match.hasMatch()) {
+      entry = requestEntry(match.captured(1));
+    }
+  } else {
+    entry = parseEntry(results);
+    if(!entry) {
+      // might want to check LD+JSON format
+//      myDebug() << "...trying Linked Data";
+      entry = parseEntryLinkedData(results);
+    }
   }
   if(!entry) {
-    myDebug() << "No discernible entry data";
+//    myDebug() << "No discernible entry data";
     return Data::EntryPtr();
   }
 
@@ -246,6 +260,125 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
   }
 
   m_entries.insert(uid_, entry); // keep for later
+  return entry;
+}
+
+Tellico::Data::EntryPtr KinoPoiskFetcher::requestEntry(const QString& filmId_) {
+  QUrl url(QLatin1String(KINOPOISK_API_FILM_URL) + filmId_);
+//  myDebug() << url;
+
+  QPointer<KIO::StoredTransferJob> getJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+  getJob->addMetaData(QStringLiteral("content-type"), QStringLiteral("application/json"));
+  getJob->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("X-API-KEY: ") + m_apiKey);
+  KJobWidgets::setWindow(getJob, GUI::Proxy::widget());
+  if(!getJob->exec()) {
+    myWarning() << "unable to read" << url;
+    return Data::EntryPtr();
+  }
+
+  QByteArray data = getJob->data();
+#if 0
+  myWarning() << "Remove json debug from kinopoiskfetcher.cpp";
+  QFile file(QString::fromLatin1("/tmp/test-kinopoisk.json"));
+  if(file.open(QIODevice::WriteOnly)) {
+    QTextStream t(&file);
+    t.setCodec("UTF-8");
+    t << data;
+  }
+  file.close();
+#endif
+
+  Data::CollPtr coll(new Data::VideoCollection(true));
+  Data::EntryPtr entry(new Data::Entry(coll));
+  coll->addEntries(entry);
+
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  const QVariantMap resultMap = doc.object().toVariantMap();
+
+  entry->setField(QStringLiteral("title"), mapValue(resultMap, "nameRu"));
+  entry->setField(QStringLiteral("year"), mapValue(resultMap, "year"));
+  entry->setField(QStringLiteral("nationality"), mapValue(resultMap, "countries", "country"));
+  entry->setField(QStringLiteral("genre"), mapValue(resultMap, "genres", "genre"));
+  entry->setField(QStringLiteral("running-time"), mapValue(resultMap, "filmLength"));
+  entry->setField(QStringLiteral("plot"), mapValue(resultMap, "description"));
+  entry->setField(QStringLiteral("cover"), mapValue(resultMap, "posterUrl"));
+
+  const QString cert(QStringLiteral("certification"));
+  auto certField = coll->fieldByName(cert);
+  if(certField) {
+    entry->setField(cert, mpaaRating(mapValue(resultMap, "ratingMpaa"), certField->allowed()));
+  }
+
+  const QString origTitle(QStringLiteral("origtitle"));
+  if(optionalFields().contains(origTitle)) {
+    if(!coll->hasField(origTitle)) {
+      Data::FieldPtr f(new Data::Field(origTitle, i18n("Original Title")));
+      f->setFormatType(FieldFormat::FormatTitle);
+      coll->addField(f);
+    }
+    entry->setField(origTitle, mapValue(resultMap, "nameOriginal"));
+  }
+
+  url = QUrl(QLatin1String(KINOPOISK_API_STAFF_URL));
+  QUrlQuery q;
+  q.addQueryItem(QStringLiteral("filmId"), filmId_);
+  url.setQuery(q);
+//  myDebug() << url;
+
+  getJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+  getJob->addMetaData(QStringLiteral("content-type"), QStringLiteral("application/json"));
+  getJob->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("X-API-KEY: ") + m_apiKey);
+  KJobWidgets::setWindow(getJob, GUI::Proxy::widget());
+  if(!getJob->exec()) {
+    myWarning() << "unable to read" << url;
+    return Data::EntryPtr();
+  }
+
+  data = getJob->data();
+#if 0
+  myWarning() << "Remove json2 debug from kinopoiskfetcher.cpp";
+  QFile file2(QString::fromLatin1("/tmp/test-kinopoisk-staff.json"));
+  if(file2.open(QIODevice::WriteOnly)) {
+    QTextStream t(&file2);
+    t.setCodec("UTF-8");
+    t << data;
+  }
+  file2.close();
+#endif
+
+  QStringList directors, writers, actors, producers, composers;
+
+  const auto staffArray = QJsonDocument::fromJson(data).array();
+  const int sz = staffArray.size();
+  for(int i = 0; i < sz; ++i) {
+    const auto obj = staffArray.at(i).toObject().toVariantMap();
+    const QString key = mapValue(obj, "professionKey");
+    QString name = mapValue(obj, "nameRu");
+    if(name.isEmpty()) name = mapValue(obj, "nameEn");
+    if(name.isEmpty()) continue;
+    if(key == QLatin1String("DIRECTOR")) {
+      directors += name;
+    } else if(key == QLatin1String("ACTOR")) {
+      if(actors.size() < KINOPOISK_DEFAULT_CAST_SIZE) {
+        actors += (name + FieldFormat::columnDelimiterString() + mapValue(obj, "description"));
+      }
+    } else if(key == QLatin1String("WRITER")) {
+      writers += name;
+    } else if(key == QLatin1String("PRODUCER")) {
+      producers += name;
+    } else if(key == QLatin1String("COMPOSER")) {
+      composers += name;
+    } else {
+//      myDebug() << "...skipping" << key;
+    }
+  }
+
+  entry->setField(QStringLiteral("director"), directors.join(Tellico::FieldFormat::delimiterString()));
+  entry->setField(QStringLiteral("writer"), writers.join(Tellico::FieldFormat::delimiterString()));
+  entry->setField(QStringLiteral("producer"), producers.join(Tellico::FieldFormat::delimiterString()));
+  entry->setField(QStringLiteral("composer"), composers.join(Tellico::FieldFormat::delimiterString()));
+  entry->setField(QStringLiteral("cast"), actors.join(Tellico::FieldFormat::rowDelimiterString()));
+
   return entry;
 }
 
@@ -448,21 +581,7 @@ QString KinoPoiskFetcher::fieldValueFromObject(const QJsonObject& obj_, const QS
     url.append(QLatin1Char('/') + QLatin1String(KINOPOISK_IMAGE_SIZE));
     return url;
   } else if(field_ == QLatin1String("certification")) {
-    Q_ASSERT(allowed_.size() == 5);
-    // default collection has 5 MPAA values
-    if(allowed_.size() != 5) return QString();
-    const QString mpaa = valueObj.value(QLatin1String("mpaa")).toString();
-    if(mpaa == QLatin1String("g")) {
-      return allowed_.at(0);
-    } else if(mpaa == QLatin1String("pg")) {
-      return allowed_.at(1);
-    } else if(mpaa == QLatin1String("pg13")) {
-      return allowed_.at(2);
-    } else if(mpaa == QLatin1String("r")) {
-      return allowed_.at(3);
-    } else {
-      return allowed_.at(4);
-    }
+    return mpaaRating(valueObj.value(QLatin1String("mpaa")).toString(), allowed_);
   // with an 'originalName' or 'name' field return that
   // and check this before comparing against field names for people, like 'director'
   } else if(valueObj.contains(QLatin1String("originalName")) || valueObj.contains(QLatin1String("name"))) {
@@ -483,6 +602,22 @@ QString KinoPoiskFetcher::fieldValueFromObject(const QJsonObject& obj_, const QS
   }
 
   return QString();
+}
+
+QString KinoPoiskFetcher::mpaaRating(const QString& value_, const QStringList& allowed_) {
+  // default collection has 5 MPAA values
+  if(allowed_.size() != 5) return value_;
+  if(value_ == QLatin1String("g")) {
+    return allowed_.at(0);
+  } else if(value_ == QLatin1String("pg")) {
+    return allowed_.at(1);
+  } else if(value_ == QLatin1String("pg13")) {
+    return allowed_.at(2);
+  } else if(value_ == QLatin1String("r")) {
+    return allowed_.at(3);
+  } else {
+    return allowed_.at(4);
+  }
 }
 
 Tellico::Fetch::FetchRequest KinoPoiskFetcher::updateRequest(Data::EntryPtr entry_) {

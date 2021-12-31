@@ -1,3 +1,7 @@
+2021-12-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated kinopoisk.ru data source (Bug 447435)
+
 2021-12-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with opening target=_blank links (Bug 445871).

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2017-2020 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -83,9 +83,11 @@ private:
   static QString fieldNameFromKey(const QString& key);
   static QString fieldValueFromObject(const QJsonObject& obj, const QString& field,
                                       const QJsonValue& value, const QStringList& allowed);
+  static QString mpaaRating(const QString& value, const QStringList& allowed);
 
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+  Data::EntryPtr requestEntry(const QString& filmId);
   Data::EntryPtr parseEntry(const QString& str);
   Data::EntryPtr parseEntryLinkedData(const QString& str);
 
@@ -94,6 +96,7 @@ private:
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
+  QString m_apiKey;
 };
 
   } // end namespace
