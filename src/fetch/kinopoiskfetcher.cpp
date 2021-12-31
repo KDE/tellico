@@ -62,7 +62,7 @@ using namespace Tellico;
 using Tellico::Fetch::KinoPoiskFetcher;
 
 KinoPoiskFetcher::KinoPoiskFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false) {
+    : Fetcher(parent_), m_started(false), m_redirected(false) {
   m_apiKey = Tellico::reverseObfuscate(KINOPOISK_API_KEY);
 }
 
@@ -87,6 +87,8 @@ void KinoPoiskFetcher::readConfigHook(const KConfigGroup& config_) {
 
 void KinoPoiskFetcher::search() {
   m_started = true;
+  m_redirected = false;
+  m_redirectUrl.clear();
   m_matches.clear();
 
   QUrl u(QString::fromLatin1(KINOPOISK_SEARCH_URL));
@@ -105,11 +107,13 @@ void KinoPoiskFetcher::search() {
       return;
   }
   u.setQuery(q);
-  myDebug() << "url: " << u.url();
+//  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &KinoPoiskFetcher::slotComplete);
+  connect(m_job.data(), &KIO::TransferJob::redirection,
+          this, &KinoPoiskFetcher::slotRedirection);
 }
 
 void KinoPoiskFetcher::stop() {
@@ -123,6 +127,14 @@ void KinoPoiskFetcher::stop() {
   }
   m_started = false;
   emit signalDone(this);
+}
+
+void KinoPoiskFetcher::slotRedirection(KIO::Job*, const QUrl& toUrl_) {
+  if(m_redirectUrl.isEmpty()) {
+    myDebug() << "Redirected to" << toUrl_;
+    m_redirectUrl = toUrl_;
+  }
+  m_redirected = true;
 }
 
 void KinoPoiskFetcher::slotComplete(KJob*) {
@@ -151,6 +163,13 @@ void KinoPoiskFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
+  if(m_started && m_redirected) {
+    // don't pull the data here, just add it to a single response
+    auto res = new FetchResult(this, request().value(), QString());
+    m_matches.insert(res->uid, m_redirectUrl);
+    emit signalResultFound(res);
+  }
+
   // look for a paragraph, class=",", with an internal /ink to "/level/1/film..."
   QRegularExpression resultRx(QStringLiteral("<p class=\"name\">\\s*"
                                              "<a href=\"/film[^\"]+\".*? data-url=\"([^\"]*)\".*?>(.*?)</a>\\s*"
@@ -158,7 +177,7 @@ void KinoPoiskFetcher::slotComplete(KJob*) {
 
   QString href, title, year;
   QRegularExpressionMatchIterator i = resultRx.globalMatch(output);
-  while(m_started && i.hasNext()) {
+  while(m_started && !m_redirected && i.hasNext()) {
     QRegularExpressionMatch match = i.next();
     href = match.captured(1);
     title = match.captured(2);
@@ -167,9 +186,9 @@ void KinoPoiskFetcher::slotComplete(KJob*) {
       QUrl url(QString::fromLatin1(KINOPOISK_SEARCH_URL));
       url = url.resolved(QUrl(href));
 //      myDebug() << url << title << year;
-      FetchResult* r = new FetchResult(this, title, year);
-      m_matches.insert(r->uid, url);
-      emit signalResultFound(r);
+      auto res = new FetchResult(this, title, year);
+      m_matches.insert(res->uid, url);
+      emit signalResultFound(res);
     }
   }
 

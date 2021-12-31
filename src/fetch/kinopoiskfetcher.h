@@ -35,6 +35,7 @@
 class QUrl;
 class KJob;
 namespace KIO {
+  class Job;
   class StoredTransferJob;
 }
 
@@ -78,6 +79,7 @@ public:
 
 private Q_SLOTS:
   void slotComplete(KJob* job);
+  void slotRedirection(KIO::Job* job, const QUrl& toUrl);
 
 private:
   static QString fieldNameFromKey(const QString& key);
@@ -96,6 +98,8 @@ private:
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
+  bool m_redirected;
+  QUrl m_redirectUrl;
   QString m_apiKey;
 };
 
