@@ -55,7 +55,7 @@ namespace {
   static const char* KINOPOISK_IMAGE_SIZE = "300x450";
   static const char* KINOPOISK_API_FILM_URL  = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
   static const char* KINOPOISK_API_STAFF_URL = "https://kinopoiskapiunofficial.tech/api/v1/staff";
-  static const char* KINOPOISK_API_KEY = "f0c67d1f1a2feb8dfc9d5e694a7397a75c689bac90a90337476aaa9a3909e785bddf8ca101358befddedcefa4d60deecb0d22544ebd90f22dee9c7f3e581b3d70a3f9bf885b4b483";
+  static const char* KINOPOISK_API_KEY = "9ca8395a794fb28b82e01120a6968bbf03651271fd9ce5d5371a096d4f7dc7a3caa8361ba8914425a1c5c0f4f5d88dbd3d0fccaa781ca18cd4b2b587ebdeaac89cfa771622162a12";
   static const int KINOPOISK_DEFAULT_CAST_SIZE = 10;
 }
 
