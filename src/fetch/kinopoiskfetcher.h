@@ -33,6 +33,8 @@
 #include <QJsonObject>
 
 class QUrl;
+class QSpinBox;
+
 class KJob;
 namespace KIO {
   class Job;
@@ -68,8 +70,10 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const KinoPoiskFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE {}
+    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
     virtual QString preferredName() const Q_DECL_OVERRIDE;
+  private:
+    QSpinBox* m_numCast;
   };
   friend class ConfigWidget;
 
@@ -101,6 +105,7 @@ private:
   bool m_redirected;
   QUrl m_redirectUrl;
   QString m_apiKey;
+  int m_numCast;
 };
 
   } // end namespace

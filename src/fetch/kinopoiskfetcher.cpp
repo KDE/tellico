@@ -42,7 +42,8 @@
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
-#include <QVBoxLayout>
+#include <QGridLayout>
+#include <QSpinBox>
 #include <QUrlQuery>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -62,7 +63,7 @@ using namespace Tellico;
 using Tellico::Fetch::KinoPoiskFetcher;
 
 KinoPoiskFetcher::KinoPoiskFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false), m_redirected(false) {
+    : Fetcher(parent_), m_started(false), m_redirected(false), m_numCast(KINOPOISK_DEFAULT_CAST_SIZE) {
   m_apiKey = Tellico::reverseObfuscate(KINOPOISK_API_KEY);
 }
 
@@ -82,7 +83,7 @@ bool KinoPoiskFetcher::canSearch(Fetch::FetchKey k) const {
 }
 
 void KinoPoiskFetcher::readConfigHook(const KConfigGroup& config_) {
-  Q_UNUSED(config_);
+  m_numCast = config_.readEntry("Max Cast", KINOPOISK_DEFAULT_CAST_SIZE);
 }
 
 void KinoPoiskFetcher::search() {
@@ -378,7 +379,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::requestEntry(const QString& filmId_) {
     if(key == QLatin1String("DIRECTOR")) {
       directors += name;
     } else if(key == QLatin1String("ACTOR")) {
-      if(actors.size() < KINOPOISK_DEFAULT_CAST_SIZE) {
+      if(actors.size() < m_numCast) {
         actors += (name + FieldFormat::columnDelimiterString() + mapValue(obj, "description"));
       }
     } else if(key == QLatin1String("WRITER")) {
@@ -668,13 +669,42 @@ Tellico::StringHash KinoPoiskFetcher::allOptionalFields() {
 
 KinoPoiskFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const KinoPoiskFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+  QGridLayout* l = new QGridLayout(optionsWidget());
+  l->setSpacing(4);
+  l->setColumnStretch(1, 10);
+
+  int row = -1;
+
+  QLabel* label = new QLabel(i18n("&Maximum cast: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_numCast = new QSpinBox(optionsWidget());
+  m_numCast->setMaximum(99);
+  m_numCast->setMinimum(0);
+  m_numCast->setValue(KINOPOISK_DEFAULT_CAST_SIZE);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+  void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::valueChanged;
+#else
+  void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::textChanged;
+#endif
+  connect(m_numCast, textChanged, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_numCast, row, 1);
+  QString w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
+  label->setWhatsThis(w);
+  m_numCast->setWhatsThis(w);
+  label->setBuddy(m_numCast);
+
+  l->setRowStretch(++row, 10);
 
   addFieldsWidget(KinoPoiskFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+  if(fetcher_) {
+    m_numCast->setValue(fetcher_->m_numCast);
+  }
 }
 
 QString KinoPoiskFetcher::ConfigWidget::preferredName() const {
   return KinoPoiskFetcher::defaultName();
+}
+
+void KinoPoiskFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  config_.writeEntry("Max Cast", m_numCast->value());
 }
