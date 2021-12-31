@@ -285,7 +285,6 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
 
 Tellico::Data::EntryPtr KinoPoiskFetcher::requestEntry(const QString& filmId_) {
   QUrl url(QLatin1String(KINOPOISK_API_FILM_URL) + filmId_);
-//  myDebug() << url;
 
   QPointer<KIO::StoredTransferJob> getJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
   getJob->addMetaData(QStringLiteral("content-type"), QStringLiteral("application/json"));
@@ -298,6 +297,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::requestEntry(const QString& filmId_) {
 
   QByteArray data = getJob->data();
 #if 0
+  myDebug() << url;
   myWarning() << "Remove json debug from kinopoiskfetcher.cpp";
   QFile file(QString::fromLatin1("/tmp/test-kinopoisk.json"));
   if(file.open(QIODevice::WriteOnly)) {
@@ -349,7 +349,6 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::requestEntry(const QString& filmId_) {
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("filmId"), filmId_);
   url.setQuery(q);
-//  myDebug() << url;
 
   getJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
   getJob->addMetaData(QStringLiteral("content-type"), QStringLiteral("application/json"));
@@ -362,6 +361,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::requestEntry(const QString& filmId_) {
 
   data = getJob->data();
 #if 0
+  myDebug() << url;
   myWarning() << "Remove json2 debug from kinopoiskfetcher.cpp";
   QFile file2(QString::fromLatin1("/tmp/test-kinopoisk-staff.json"));
   if(file2.open(QIODevice::WriteOnly)) {
