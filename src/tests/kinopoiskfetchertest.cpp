@@ -48,7 +48,7 @@ void KinoPoiskFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
 
   m_config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("kinopoisk"));
-  m_config.writeEntry("Custom Fields", QStringLiteral("origtitle,kinopoisk"));
+  m_config.writeEntry("Custom Fields", QStringLiteral("origtitle,kinopoisk,imdb"));
 }
 
 void KinoPoiskFetcherTest::testSuperman() {
@@ -76,6 +76,7 @@ void KinoPoiskFetcherTest::testSuperman() {
   QCOMPARE(entry->field("certification"), QStringLiteral("PG-13 (USA)"));
   QCOMPARE(entry->field("running-time"), QStringLiteral("154"));
   QCOMPARE(entry->field("kinopoisk"), QStringLiteral("https://www.kinopoisk.ru/film/38472"));
+  QCOMPARE(entry->field("imdb"), QStringLiteral("https://www.imdb.com/title/tt0348150"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
   QVERIFY(castList.at(0).startsWith(QString::fromUtf8("Брэндон Рут")));

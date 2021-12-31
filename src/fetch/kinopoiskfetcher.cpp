@@ -329,6 +329,12 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::requestEntry(const QString& filmId_) {
     entry->setField(cert, mpaaRating(mapValue(resultMap, "ratingMpaa"), certField->allowed()));
   }
 
+  const QString imdb(QStringLiteral("imdb"));
+  const QString imdbId = mapValue(resultMap, "imdbId");
+  if(optionalFields().contains(imdb) && !imdbId.isEmpty()) {
+    coll->addField(Data::Field::createDefaultField(Data::Field::ImdbField));
+    entry->setField(imdb, QStringLiteral("https://www.imdb.com/title/") + imdbId);
+  }
   const QString origTitle(QStringLiteral("origtitle"));
   if(optionalFields().contains(origTitle)) {
     if(!coll->hasField(origTitle)) {
@@ -662,8 +668,9 @@ QString KinoPoiskFetcher::defaultIcon() {
 
 Tellico::StringHash KinoPoiskFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QStringLiteral("origtitle")] = i18n("Original Title");
   hash[QStringLiteral("kinopoisk")] = i18n("KinoPoisk Link");
+  hash[QStringLiteral("imdb")] = i18n("IMDb Link");
+  hash[QStringLiteral("origtitle")] = i18n("Original Title");
   return hash;
 }
 
