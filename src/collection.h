@@ -204,11 +204,17 @@ public:
    * @return A boolean indicating if the field was added or not
    */
   virtual bool addField(FieldPtr field);
-  virtual bool mergeField(FieldPtr field);
   virtual bool modifyField(FieldPtr field);
   virtual bool removeField(FieldPtr field, bool force=false);
   virtual bool removeField(const QString& name, bool force=false);
   void reorderFields(const FieldList& list);
+  /**
+   * Merges a field into a collection
+   *
+   * @param field A pointer to the field
+   * @return A boolean indicating if structural changes were made to the collection
+   */
+  bool mergeField(FieldPtr field);
 
   // the reason this is not static is so I can call it from a collection pointer
   // it also gets overridden for different collection types

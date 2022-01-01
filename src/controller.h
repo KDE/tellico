@@ -122,7 +122,7 @@ public Q_SLOTS:
    * @param coll A pointer to the collection being added
    */
   void slotCollectionAdded(Tellico::Data::CollPtr coll);
-  void slotCollectionModified(Tellico::Data::CollPtr coll);
+  void slotCollectionModified(Tellico::Data::CollPtr coll, bool structuralChange);
   /**
    * Removes a collection from all the widgets
    *
