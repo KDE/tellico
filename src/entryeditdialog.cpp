@@ -407,7 +407,6 @@ void EntryEditDialog::slotHandleSave() {
 
   m_isWorking = false;
   slotSetModified(false);
-//  slotHandleNew();
 }
 
 void EntryEditDialog::clear() {

@@ -123,7 +123,6 @@ void Controller::slotCollectionAdded(Tellico::Data::CollPtr coll_) {
   m_mainWindow->updateEntrySources(); // has to be called before all the addCollection()
   // calls in the widgets since they may want menu updates
 
-//  blockAllSignals(true);
   m_mainWindow->m_detailedView->addCollection(coll_);
   m_mainWindow->m_groupView->addCollection(coll_);
   m_mainWindow->m_editDialog->resetLayout(coll_);
@@ -137,7 +136,6 @@ void Controller::slotCollectionAdded(Tellico::Data::CollPtr coll_) {
     m_mainWindow->m_loanView->addCollection(coll_);
     m_mainWindow->m_viewTabs->setTabBarHidden(false);
   }
-//  blockAllSignals(false);
 
   m_mainWindow->slotStatusMsg(i18n("Ready."));
 
@@ -160,6 +158,7 @@ void Controller::slotCollectionAdded(Tellico::Data::CollPtr coll_) {
 }
 
 void Controller::slotCollectionModified(Tellico::Data::CollPtr coll_, bool structuralChange_) {
+  Data::EntryList prevSelection = m_selectedEntries;
   blockAllSignals(true);
   m_mainWindow->m_groupView->removeCollection(coll_);
   if(m_mainWindow->m_filterView) {
@@ -176,6 +175,9 @@ void Controller::slotCollectionModified(Tellico::Data::CollPtr coll_, bool struc
   if(structuralChange_) {
     m_mainWindow->m_editDialog->resetLayout(coll_);
   }
+  // the selected entries list gets cleared when the detailed list view removes the collection
+  m_selectedEntries = prevSelection;
+  m_mainWindow->m_editDialog->setContents(m_selectedEntries);
   m_mainWindow->m_detailedView->addCollection(coll_);
   m_mainWindow->m_groupView->addCollection(coll_);
   if(!coll_->filters().isEmpty()) {
