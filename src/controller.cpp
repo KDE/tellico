@@ -168,7 +168,7 @@ void Controller::slotCollectionModified(Tellico::Data::CollPtr coll_, bool struc
   if(m_mainWindow->m_loanView) {
     m_mainWindow->m_loanView->slotReset();
   }
-  // TODO:: removing and adding the collection in the detailed view is overkill
+  // TODO: removing and adding the collection in the detailed view is overkill
   // find a more elegant way to refresh the view
   m_mainWindow->m_detailedView->removeCollection(coll_);
   blockAllSignals(false);
