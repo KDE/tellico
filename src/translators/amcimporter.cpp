@@ -170,7 +170,13 @@ QString AMCImporter::readImage(const QString& format_) {
   std::copy(buffer.data(), buffer.data() + l, bytes.begin());
   QImage img = QImage::fromData(bytes);
   if(img.isNull()) {
-    myDebug() << "null image";
+    static uint count = 0;
+    ++count;
+    if(count < 5) {
+      myDebug() << "AMCImporter::readImage() - null image, expected" << format_ << "from" << l << "bytes";
+    } else if(count == 6) {
+      myDebug() << "AMCImporter::readImage() - skipping further errors for null images";
+    }
     return QString();
   }
   QString format = QStringLiteral("PNG");
