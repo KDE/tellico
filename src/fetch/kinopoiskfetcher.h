@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2017-2020 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017-2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -33,8 +33,11 @@
 #include <QJsonObject>
 
 class QUrl;
+class QSpinBox;
+
 class KJob;
 namespace KIO {
+  class Job;
   class StoredTransferJob;
 }
 
@@ -67,8 +70,10 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const KinoPoiskFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE {}
+    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
     virtual QString preferredName() const Q_DECL_OVERRIDE;
+  private:
+    QSpinBox* m_numCast;
   };
   friend class ConfigWidget;
 
@@ -78,14 +83,17 @@ public:
 
 private Q_SLOTS:
   void slotComplete(KJob* job);
+  void slotRedirection(KIO::Job* job, const QUrl& toUrl);
 
 private:
   static QString fieldNameFromKey(const QString& key);
   static QString fieldValueFromObject(const QJsonObject& obj, const QString& field,
                                       const QJsonValue& value, const QStringList& allowed);
+  static QString mpaaRating(const QString& value, const QStringList& allowed);
 
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+  Data::EntryPtr requestEntry(const QString& filmId);
   Data::EntryPtr parseEntry(const QString& str);
   Data::EntryPtr parseEntryLinkedData(const QString& str);
 
@@ -94,6 +102,10 @@ private:
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
+  bool m_redirected;
+  QUrl m_redirectUrl;
+  QString m_apiKey;
+  int m_numCast;
 };
 
   } // end namespace

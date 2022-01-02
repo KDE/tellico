@@ -132,19 +132,21 @@ public:
    * are added to the current one.
    *
    * @param coll A pointer to the appended collection.
+   * @param structuralChange A flag indicating a structural change was made to the database
    */
   void appendCollection(CollPtr coll);
-  static void appendCollection(CollPtr targetColl, CollPtr sourceColl);
+  static void appendCollection(CollPtr targetColl, CollPtr sourceColl, bool* structuralChange);
   /**
    * Merges another collection into this one. The collections must be the same type. Fields in the
    * current collection are left alone. Fields not in the current are added. The merging is slow
    * since each entry in @p coll must be compared to every entry in the current collection.
    *
    * @param coll A pointer to the collection to be merged.
+   * @param structuralChange A flag indicating a structural change was made to the database
    * @return A QPair of the merged entries, see note in datavectors.h
    */
   MergePair mergeCollection(CollPtr coll);
-  static MergePair mergeCollection(CollPtr targetColl, CollPtr sourceColl);
+  static MergePair mergeCollection(CollPtr targetColl, CollPtr sourceColl, bool* structuralChange);
   /**
    * Replace the current collection with a new one. Effectively, this is equivalent to opening
    * a new file containing this collection.
@@ -197,7 +199,7 @@ Q_SIGNALS:
   void signalCollectionImagesLoaded(Tellico::Data::CollPtr coll);
   void signalCollectionAdded(Tellico::Data::CollPtr coll);
   void signalCollectionDeleted(Tellico::Data::CollPtr coll);
-  void signalCollectionModified(Tellico::Data::CollPtr coll);
+  void signalCollectionModified(Tellico::Data::CollPtr coll, bool structuralChange);
 
 private Q_SLOTS:
   /**

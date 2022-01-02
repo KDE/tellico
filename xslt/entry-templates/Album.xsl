@@ -467,6 +467,10 @@
         <td class="fieldValue" style="text-align: right; padding-right: 10px">
          <em><xsl:value-of select="tc:column[3]"/></em>
         </td>
+        <!-- in case there are more then 3 columns -->
+        <xsl:for-each select="tc:column[position() &gt; 3]">
+         <td class="fieldValue"><xsl:value-of select="."/></td>
+        </xsl:for-each>
        </xsl:when>
        <xsl:otherwise>
         <td class="fieldValue">
@@ -483,7 +487,7 @@
    <xsl:if test="$cols &gt; 1 and
                  count($values/*[contains(tc:column[number($cols)], ':')])">
     <tr>
-     <th colspan="2" style="text-align: right; padding-right: 10px;">
+     <th colspan="{number($cols)-1}" style="text-align: right; padding-right: 10px;">
       <strong><i18n>Total:</i18n> </strong>
      </th>
      <td class="fieldValue" style="text-align: right; padding-right: 10px">

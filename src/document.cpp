@@ -280,11 +280,12 @@ void Document::deleteContents() {
 }
 
 void Document::appendCollection(Tellico::Data::CollPtr coll_) {
-  appendCollection(m_coll, coll_);
-  emit signalCollectionModified(m_coll);
+  bool structuralChange = false;
+  appendCollection(m_coll, coll_, &structuralChange);
+  emit signalCollectionModified(m_coll, structuralChange);
 }
 
-void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_) {
+void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_, bool* structuralChange_) {
   if(!coll1_ || !coll2_) {
     return;
   }
@@ -292,7 +293,8 @@ void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::Co
   coll1_->blockSignals(true);
 
   foreach(FieldPtr field, coll2_->fields()) {
-    coll1_->mergeField(field);
+    bool collChange = coll1_->mergeField(field);
+    if(collChange && structuralChange_) *structuralChange_ = true;
   }
 
   Data::EntryList newEntries;
@@ -307,12 +309,13 @@ void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::Co
 }
 
 Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_) {
-  const auto mergeResult = mergeCollection(m_coll, coll_);
-  emit signalCollectionModified(m_coll);
+  bool structuralChange = false;
+  const auto mergeResult = mergeCollection(m_coll, coll_, &structuralChange);
+  emit signalCollectionModified(m_coll, structuralChange);
   return mergeResult;
 }
 
-Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_) {
+Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_, bool* structuralChange_) {
   MergePair pair;
   if(!coll1_ || !coll2_) {
     return pair;
@@ -321,7 +324,8 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_
   coll1_->blockSignals(true);
   Data::FieldList fields = coll2_->fields();
   foreach(FieldPtr field, fields) {
-    coll1_->mergeField(field);
+    bool collChange = coll1_->mergeField(field);
+    if(collChange && structuralChange_) *structuralChange_ = true;
   }
 
   EntryList currEntries = coll1_->entries();
@@ -395,11 +399,13 @@ void Document::replaceCollection(Tellico::Data::CollPtr coll_) {
 
 void Document::unAppendCollection(Tellico::Data::FieldList origFields_, QList<int> addedEntries_) {
   m_coll->blockSignals(true);
+  bool structuralChange = false;
 
   StringSet origFieldNames;
   foreach(FieldPtr field, origFields_) {
     m_coll->modifyField(field);
     origFieldNames.add(field->name());
+    structuralChange = true;
   }
 
   EntryList entriesToRemove;
@@ -415,19 +421,22 @@ void Document::unAppendCollection(Tellico::Data::FieldList origFields_, QList<in
   foreach(FieldPtr field, currFields) {
     if(!origFieldNames.has(field->name())) {
       m_coll->removeField(field);
+      structuralChange = true;
     }
   }
   m_coll->blockSignals(false);
-  emit signalCollectionModified(m_coll);
+  emit signalCollectionModified(m_coll, structuralChange);
 }
 
 void Document::unMergeCollection(Tellico::Data::FieldList origFields_, Tellico::Data::MergePair entryPair_) {
   m_coll->blockSignals(true);
+  bool structuralChange = false;
 
   QStringList origFieldNames;
   foreach(FieldPtr field, origFields_) {
     m_coll->modifyField(field);
     origFieldNames << field->name();
+    structuralChange = true;
   }
 
   // first item in pair are the entries added by the operation, remove them
@@ -450,10 +459,11 @@ void Document::unMergeCollection(Tellico::Data::FieldList origFields_, Tellico::
   foreach(FieldPtr field, currFields) {
     if(origFieldNames.indexOf(field->name()) == -1) {
       m_coll->removeField(field);
+      structuralChange = true;
     }
   }
   m_coll->blockSignals(false);
-  emit signalCollectionModified(m_coll);
+  emit signalCollectionModified(m_coll, structuralChange);
 }
 
 bool Document::isEmpty() const {

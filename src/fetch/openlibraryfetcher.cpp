@@ -98,7 +98,6 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
   QUrlQuery q;
   // books are type/edition
   q.addQueryItem(QStringLiteral("type"), QStringLiteral("/type/edition"));
-  q.addQueryItem(QStringLiteral("*"), QString());
 
   switch(request().key()) {
     case Title:
@@ -131,6 +130,16 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
       q.addQueryItem(QStringLiteral("lccn"), term_);
       break;
 
+    case Raw:
+      {
+        // raw query comes in as a query string, combine it
+        QUrlQuery newQuery(term_);
+        foreach(auto item, newQuery.queryItems()) {
+          q.addQueryItem(item.first, item.second);
+        }
+      }
+      break;
+
     case Keyword:
       myWarning() << "not supported";
       return;
@@ -139,6 +148,7 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
       myWarning() << "key not recognized:" << request().key();
       return;
   }
+  q.addQueryItem(QStringLiteral("*"), QString());
   u.setQuery(q);
 //  myDebug() << "url:" << u;
 
@@ -201,10 +211,24 @@ Tellico::Fetch::FetchRequest OpenLibraryFetcher::updateRequest(Data::EntryPtr en
     return FetchRequest(LCCN, lccn);
   }
   const QString title = entry_->field(QStringLiteral("title"));
-  if(!title.isEmpty()) {
-    return FetchRequest(Title, title);
+  if(title.isEmpty()) {
+    return FetchRequest();
   }
-  return FetchRequest();
+
+  // can't search by authors, for now, since the author value is a key reference
+  // can't search by pub year since many of the publish_date fields are a full month, day, year
+
+  const QString pub = entry_->field(QStringLiteral("publisher"));
+  auto publishers = FieldFormat::splitValue(pub);
+  if(!publishers.isEmpty()) {
+    QUrlQuery q;
+    q.addQueryItem(QStringLiteral("title"), title);
+    q.addQueryItem(QStringLiteral("publishers"), publishers.first());
+    return FetchRequest(Raw, q.query());
+  }
+
+  // fallback to just title search
+  return FetchRequest(Title, title);
 }
 
 void OpenLibraryFetcher::slotComplete(KJob* job_) {

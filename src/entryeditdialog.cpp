@@ -124,6 +124,7 @@ void EntryEditDialog::slotReset() {
   if(m_isWorking) {
     return;
   }
+  m_isWorking = true;
 
   slotSetModified(false);
   m_saveButton->setEnabled(false);
@@ -137,6 +138,7 @@ void EntryEditDialog::slotReset() {
     delete widget;
   }
   m_widgetDict.clear();
+  m_isWorking = false;
 }
 
 void EntryEditDialog::resetLayout(Tellico::Data::CollPtr coll_) {
@@ -405,7 +407,6 @@ void EntryEditDialog::slotHandleSave() {
 
   m_isWorking = false;
   slotSetModified(false);
-//  slotHandleNew();
 }
 
 void EntryEditDialog::clear() {

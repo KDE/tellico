@@ -55,6 +55,7 @@ void FormatTest::testCapitalization_data() {
   QTest::newRow("test3") << "the return of the king" << "The Return of the King";
   QTest::newRow("test4") << QStringLiteral("école nationale supérieure de l'aéronautique et de l'espace")
                          << QStringLiteral("École Nationale Supérieure de l'Aéronautique et de l'Espace");
+  QTest::newRow("test5") << "Appartement, L'" << "Appartement, L'";
 }
 
 void FormatTest::testTitle() {
