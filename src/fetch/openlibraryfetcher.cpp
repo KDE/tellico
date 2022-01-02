@@ -98,7 +98,6 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
   QUrlQuery q;
   // books are type/edition
   q.addQueryItem(QStringLiteral("type"), QStringLiteral("/type/edition"));
-  q.addQueryItem(QStringLiteral("*"), QString());
 
   switch(request().key()) {
     case Title:
@@ -139,6 +138,7 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
       myWarning() << "key not recognized:" << request().key();
       return;
   }
+  q.addQueryItem(QStringLiteral("*"), QString());
   u.setQuery(q);
 //  myDebug() << "url:" << u;
 

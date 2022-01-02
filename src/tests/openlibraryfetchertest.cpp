@@ -41,6 +41,19 @@ void OpenLibraryFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 }
 
+void OpenLibraryFetcherTest::testTitle() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
+                                       QStringLiteral("Barrayar"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Barrayar"));
+}
+
 void OpenLibraryFetcherTest::testIsbn() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
                                        QStringLiteral("0789312239"));
