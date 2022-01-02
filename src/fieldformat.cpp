@@ -346,7 +346,10 @@ QString FieldFormat::capitalize(QString str_) {
     foreach(const QString& aposArticle, Config::articleAposList()) {
       if(word.startsWith(aposArticle, Qt::CaseInsensitive)) {
         const uint l = aposArticle.length();
-        str_.replace(pos+l+1, 1, str_.at(pos+l+1).toUpper());
+        // if the word is not the end of the string, capitalize the letter after it
+        if(int(pos+l+1) < str_.length()) {
+          str_.replace(pos+l+1, 1, str_.at(pos+l+1).toUpper());
+        }
         aposMatch = true;
         break;
       }
