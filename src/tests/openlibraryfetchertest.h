@@ -38,6 +38,7 @@ private Q_SLOTS:
   void testIsbn();
   void testIsbn13();
   void testMultipleIsbn();
+  void testUpdate();
 };
 
 #endif

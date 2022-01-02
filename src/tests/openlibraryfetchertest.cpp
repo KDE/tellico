@@ -28,6 +28,7 @@
 
 #include "../fetch/openlibraryfetcher.h"
 #include "../entry.h"
+#include "../collections/bookcollection.h"
 #include "../images/imagefactory.h"
 
 #include <QTest>
@@ -100,4 +101,30 @@ void OpenLibraryFetcherTest::testMultipleIsbn() {
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
   QCOMPARE(results.size(), 2);
+}
+
+void OpenLibraryFetcherTest::testUpdate() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
+  Tellico::Data::EntryPtr oldEntry(new Tellico::Data::Entry(coll));
+  coll->addEntries(oldEntry);
+
+  oldEntry->setField(QStringLiteral("title"), QStringLiteral("The Great Hunt"));
+  oldEntry->setField(QStringLiteral("publisher"), QStringLiteral("Orbit"));
+
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+  auto f = static_cast<Tellico::Fetch::OpenLibraryFetcher*>(fetcher.data());
+
+  auto request = f->updateRequest(oldEntry);
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  request.setCollectionType(coll->type());
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("The Great Hunt"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2014"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Orbit"));
 }
