@@ -83,13 +83,14 @@ void CollectionCommand::redo() {
     return;
   }
 
+  m_structuralChange = false;
   switch(m_mode) {
     case Append:
       copyFields();
       copyMacros();
       {
         auto existingEntries = m_origColl->entryIdList();
-        Data::Document::self()->appendCollection(m_newColl);
+        Data::Document::self()->appendCollection(m_newColl, &m_structuralChange);
         auto allEntries = m_origColl->entryIdList();
 
         // keep track of which entries were added by the append operation
@@ -101,14 +102,14 @@ void CollectionCommand::redo() {
                             existingEntries.begin(), existingEntries.end(),
                             std::back_inserter(m_addedEntries));
       }
-      Controller::self()->slotCollectionModified(m_origColl);
+      Controller::self()->slotCollectionModified(m_origColl, m_structuralChange);
       break;
 
     case Merge:
       copyFields();
       copyMacros();
-      m_mergePair = Data::Document::self()->mergeCollection(m_newColl);
-      Controller::self()->slotCollectionModified(m_origColl);
+      m_mergePair = Data::Document::self()->mergeCollection(m_newColl, &m_structuralChange);
+      Controller::self()->slotCollectionModified(m_origColl, m_structuralChange);
       break;
 
     case Replace:
@@ -131,13 +132,13 @@ void CollectionCommand::undo() {
     case Append:
       unCopyMacros();
       Data::Document::self()->unAppendCollection(m_origFields, m_addedEntries);
-      Controller::self()->slotCollectionModified(m_origColl);
+      Controller::self()->slotCollectionModified(m_origColl, m_structuralChange);
       break;
 
     case Merge:
       unCopyMacros();
       Data::Document::self()->unMergeCollection(m_origFields, m_mergePair);
-      Controller::self()->slotCollectionModified(m_origColl);
+      Controller::self()->slotCollectionModified(m_origColl, m_structuralChange);
       break;
 
     case Replace:

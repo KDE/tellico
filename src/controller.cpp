@@ -123,7 +123,6 @@ void Controller::slotCollectionAdded(Tellico::Data::CollPtr coll_) {
   m_mainWindow->updateEntrySources(); // has to be called before all the addCollection()
   // calls in the widgets since they may want menu updates
 
-//  blockAllSignals(true);
   m_mainWindow->m_detailedView->addCollection(coll_);
   m_mainWindow->m_groupView->addCollection(coll_);
   m_mainWindow->m_editDialog->resetLayout(coll_);
@@ -137,7 +136,6 @@ void Controller::slotCollectionAdded(Tellico::Data::CollPtr coll_) {
     m_mainWindow->m_loanView->addCollection(coll_);
     m_mainWindow->m_viewTabs->setTabBarHidden(false);
   }
-//  blockAllSignals(false);
 
   m_mainWindow->slotStatusMsg(i18n("Ready."));
 
@@ -159,11 +157,43 @@ void Controller::slotCollectionAdded(Tellico::Data::CollPtr coll_) {
           this, &Controller::slotRefreshField);
 }
 
-void Controller::slotCollectionModified(Tellico::Data::CollPtr coll_) {
-  // easiest thing is to signal collection deleted, then added?
-  // FIXME: Signals for delete collection and then added are yucky
-  slotCollectionDeleted(coll_);
-  slotCollectionAdded(coll_);
+void Controller::slotCollectionModified(Tellico::Data::CollPtr coll_, bool structuralChange_) {
+  Data::EntryList prevSelection = m_selectedEntries;
+  blockAllSignals(true);
+  m_mainWindow->m_groupView->removeCollection(coll_);
+  if(m_mainWindow->m_filterView) {
+    m_mainWindow->m_filterView->slotReset();
+  }
+  if(m_mainWindow->m_loanView) {
+    m_mainWindow->m_loanView->slotReset();
+  }
+  // TODO: removing and adding the collection in the detailed view is overkill
+  // find a more elegant way to refresh the view
+  m_mainWindow->m_detailedView->removeCollection(coll_);
+  blockAllSignals(false);
+
+  if(structuralChange_) {
+    m_mainWindow->m_editDialog->resetLayout(coll_);
+  }
+  // the selected entries list gets cleared when the detailed list view removes the collection
+  m_selectedEntries = prevSelection;
+  m_mainWindow->m_editDialog->setContents(m_selectedEntries);
+  m_mainWindow->m_detailedView->addCollection(coll_);
+  m_mainWindow->m_groupView->addCollection(coll_);
+  if(!coll_->filters().isEmpty()) {
+    m_mainWindow->addFilterView();
+    m_mainWindow->m_filterView->addCollection(coll_);
+    m_mainWindow->m_viewTabs->setTabBarHidden(false);
+  }
+  if(!coll_->borrowers().isEmpty()) {
+    m_mainWindow->addLoanView();
+    m_mainWindow->m_loanView->addCollection(coll_);
+    m_mainWindow->m_viewTabs->setTabBarHidden(false);
+  }
+
+  m_mainWindow->slotStatusMsg(i18n("Ready."));
+  m_mainWindow->slotEntryCount();
+
   // https://bugs.kde.org/show_bug.cgi?id=386549
   // at some point, I need to revisit the ::setImagesAreAvailable() methodology
   // there are too many workarounds in the code for that

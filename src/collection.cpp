@@ -142,8 +142,9 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
 }
 
 bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
+  bool structuralChange = false;
   if(!newField_) {
-    return false;
+    return structuralChange;
   }
 
   FieldPtr currField = fieldByName(newField_->name());
@@ -151,7 +152,12 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
     // does not exist in current collection, add it
     Data::FieldPtr f(new Field(*newField_));
     bool success = addField(f);
-    emit mergeAddedField(CollPtr(this), f);
+    if(success) {
+      emit mergeAddedField(CollPtr(this), f);
+    } else {
+      myDebug() << "Failed to add field:" << f->name();
+    }
+    // adding a new field is a structural change to the collection
     return success;
   }
 
@@ -163,7 +169,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
   // the original field type is kept
   if(currField->type() != newField_->type()) {
     myDebug() << "skipping, field type mismatch for " << currField->title();
-    return false;
+    return structuralChange;
   }
 
   // if field is a Choice, then make sure all values are there
@@ -173,6 +179,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
     for(QStringList::ConstIterator it = newAllowed.begin(); it != newAllowed.end(); ++it) {
       if(!allowed.contains(*it)) {
         allowed.append(*it);
+        structuralChange = true;
       }
     }
     currField->setAllowed(allowed);
@@ -191,6 +198,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
     const QString currValue = currField->property(propName);
     if(currValue.isEmpty()) {
       currField->setProperty(propName, it.value());
+      structuralChange = true;
     } else if (it.value() != currValue) {
       if(currField->type() == Field::URL && propName == QLatin1String("relative")) {
         myWarning() << "relative URL property does not match for " << currField->name();
@@ -201,6 +209,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
         uint newNum = Tellico::toUInt(it.value(), &ok);
         if(newNum > currNum) { // bigger values
           currField->setProperty(propName, QString::number(newNum));
+          structuralChange = true;
         }
       } else if(currField->type() == Field::Rating && propName == QLatin1String("minimum")) {
         bool ok;
@@ -208,6 +217,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
         uint newNum = Tellico::toUInt(it.value(), &ok);
         if(newNum < currNum) { // smaller values
           currField->setProperty(propName, QString::number(newNum));
+          structuralChange = true;
         }
       }
     }
@@ -221,7 +231,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
 
   // combine flags
   currField->setFlags(currField->flags() | newField_->flags());
-  return true;
+  return structuralChange;
 }
 
 // be really careful with these field pointers, try not to call too many other functions

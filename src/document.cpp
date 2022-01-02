@@ -279,11 +279,11 @@ void Document::deleteContents() {
   m_cancelImageWriting = true;
 }
 
-void Document::appendCollection(Tellico::Data::CollPtr coll_) {
-  appendCollection(m_coll, coll_);
+void Document::appendCollection(Tellico::Data::CollPtr coll_, bool* structuralChange_) {
+  appendCollection(m_coll, coll_, structuralChange_);
 }
 
-void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_) {
+void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_, bool* structuralChange_) {
   if(!coll1_ || !coll2_) {
     return;
   }
@@ -291,7 +291,8 @@ void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::Co
   coll1_->blockSignals(true);
 
   foreach(FieldPtr field, coll2_->fields()) {
-    coll1_->mergeField(field);
+    bool collChange = coll1_->mergeField(field);
+    if(collChange && structuralChange_) *structuralChange_ = true;
   }
 
   Data::EntryList newEntries;
@@ -305,11 +306,11 @@ void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::Co
   coll1_->blockSignals(false);
 }
 
-Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_) {
-  return mergeCollection(m_coll, coll_);
+Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_, bool* structuralChange_) {
+  return mergeCollection(m_coll, coll_, structuralChange_);
 }
 
-Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_) {
+Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_, bool* structuralChange_) {
   MergePair pair;
   if(!coll1_ || !coll2_) {
     return pair;
@@ -318,7 +319,8 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_
   coll1_->blockSignals(true);
   Data::FieldList fields = coll2_->fields();
   foreach(FieldPtr field, fields) {
-    coll1_->mergeField(field);
+    bool collChange = coll1_->mergeField(field);
+    if(collChange && structuralChange_) *structuralChange_ = true;
   }
 
   EntryList currEntries = coll1_->entries();
