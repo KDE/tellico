@@ -631,6 +631,9 @@
     <binary>tellico</binary>
   </provides>
   <releases>
+    <release version="3.4.3" date="2022-01-02">
+      <url>https://tellico-project.org/tellico-3-4-3-released</url>
+    </release>
     <release version="3.4.2" date="2021-11-08">
       <url>https://tellico-project.org/tellico-3-4-2-released</url>
     </release>
