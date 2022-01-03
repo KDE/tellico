@@ -594,7 +594,9 @@ void CollectionTest::testAppendCollection() {
   coll2->addEntries(entry2);
 
   // append coll1 into coll2
-  Tellico::Data::Document::appendCollection(coll2, coll1);
+  bool structuralChange;
+  Tellico::Data::Document::appendCollection(coll2, coll1, &structuralChange);
+  QVERIFY(structuralChange);
   // verify that the test field was added
   QVERIFY(coll2->hasField(QStringLiteral("test")));
   // verified that the modified field was merged
@@ -635,7 +637,9 @@ void CollectionTest::testMergeCollection() {
   // second item is a pair of entries that had their table field modified
   // typedef QVector< QPair<EntryPtr, QString> > PairVector;
   // typedef QPair<Data::EntryList, PairVector> MergePair;
-  Tellico::Data::MergePair mergePair = Tellico::Data::Document::mergeCollection(coll1, coll2);
+  bool structuralChange;
+  Tellico::Data::MergePair mergePair = Tellico::Data::Document::mergeCollection(coll1, coll2, &structuralChange);
+  QCOMPARE(structuralChange, false);
 
   // one new entry was added
   QCOMPARE(mergePair.first.count(), 1);
@@ -681,6 +685,7 @@ void CollectionTest::testBookMatch() {
 void CollectionTest::testMergeBenchmark() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/movies-many.tc"));
 
+  bool structuralChange;
   Tellico::Data::EntryList entriesToAdd;
   QBENCHMARK {
     Tellico::Import::TellicoImporter importer1(url, false /* load all images */);
@@ -700,7 +705,7 @@ void CollectionTest::testMergeBenchmark() {
     }
     coll2->addEntries(entriesToAdd);
 
-    Tellico::Data::Document::mergeCollection(coll1, coll2);
+    Tellico::Data::Document::mergeCollection(coll1, coll2, &structuralChange);
   }
 }
 
