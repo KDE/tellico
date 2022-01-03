@@ -152,7 +152,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     m_format = Error;
     QString error;
     if(!url().isEmpty()) {
-      error = i18n(errorLoad).arg(url().fileName());
+      error = i18n(errorLoad, url().fileName());
     }
     const QString errorString = reader.errorString();
     if(!errorString.isEmpty()) {
