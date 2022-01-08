@@ -57,6 +57,7 @@
 #include <QVBoxLayout>
 #include <QApplication>
 
+#ifdef HAVE_TAGLIB
 namespace {
   bool hasValue(const TagLib::PropertyMap& pmap, const char* key) {
     const TagLib::String keyString(key);
@@ -70,6 +71,7 @@ namespace {
             QString();
   }
 }
+#endif
 
 using Tellico::Import::AudioFileImporter;
 
