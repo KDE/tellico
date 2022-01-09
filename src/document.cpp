@@ -286,6 +286,7 @@ void Document::appendCollection(Tellico::Data::CollPtr coll_) {
 }
 
 void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_, bool* structuralChange_) {
+  if(structuralChange_) *structuralChange_ = false;
   if(!coll1_ || !coll2_) {
     return;
   }
@@ -316,6 +317,7 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_)
 }
 
 Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_, bool* structuralChange_) {
+  if(structuralChange_) *structuralChange_ = false;
   MergePair pair;
   if(!coll1_ || !coll2_) {
     return pair;
