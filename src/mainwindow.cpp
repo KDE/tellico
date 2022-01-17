@@ -1810,6 +1810,19 @@ void MainWindow::setFilter(const QString& text_) {
 void MainWindow::slotShowCollectionFieldsDialog() {
   if(!m_collFieldsDlg) {
     m_collFieldsDlg = new CollectionFieldsDialog(Data::Document::self()->collection(), this);
+    m_collFieldsDlg->setNotifyKernel(true);
+    connect(m_collFieldsDlg, &CollectionFieldsDialog::beginCommandGroup,
+            Kernel::self(), &Kernel::beginCommandGroup);
+    connect(m_collFieldsDlg, &CollectionFieldsDialog::endCommandGroup,
+            Kernel::self(), &Kernel::endCommandGroup);
+    connect(m_collFieldsDlg, &CollectionFieldsDialog::addField,
+            Kernel::self(), &Kernel::addField);
+    connect(m_collFieldsDlg, &CollectionFieldsDialog::modifyField,
+            Kernel::self(), &Kernel::modifyField);
+    connect(m_collFieldsDlg, &CollectionFieldsDialog::removeField,
+            Kernel::self(), &Kernel::removeField);
+    connect(m_collFieldsDlg, &CollectionFieldsDialog::reorderFields,
+            Kernel::self(), &Kernel::reorderFields);
     connect(m_collFieldsDlg, &QDialog::finished,
             this, &MainWindow::slotHideCollectionFieldsDialog);
   } else {

@@ -44,7 +44,8 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class Kernel {
+class Kernel : public QObject {
+Q_OBJECT
 
 public:
   static Kernel* self() { return s_self; }
@@ -72,13 +73,7 @@ public:
 
   void sorry(const QString& text, QWidget* widget=nullptr);
 
-  void beginCommandGroup(const QString& name);
-  void endCommandGroup();
   void resetHistory();
-
-  bool addField(Data::FieldPtr field);
-  bool modifyField(Data::FieldPtr field);
-  bool removeField(Data::FieldPtr field);
 
   void addEntries(Data::EntryList entries, bool checkFields);
   void modifyEntries(Data::EntryList oldEntries, Data::EntryList newEntries, const QStringList& modifiedFields);
@@ -93,8 +88,6 @@ public:
   bool modifyFilter(FilterPtr filter);
   bool removeFilter(FilterPtr filter);
 
-  void reorderFields(const Data::FieldList& fields);
-
   void appendCollection(Data::CollPtr coll);
   void mergeCollection(Data::CollPtr coll);
   void replaceCollection(Data::CollPtr coll);
@@ -104,6 +97,15 @@ public:
 
   int askAndMerge(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
                   QString value1 = QString(), QString value2 = QString());
+
+public Q_SLOTS:
+  void beginCommandGroup(const QString& name);
+  void endCommandGroup();
+
+  bool addField(Data::FieldPtr field);
+  bool modifyField(Data::FieldPtr field);
+  bool removeField(Data::FieldPtr field);
+  void reorderFields(const Data::FieldList& fields);
 
 private:
   static Kernel* s_self;

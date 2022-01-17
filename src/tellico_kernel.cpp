@@ -53,7 +53,8 @@
 using Tellico::Kernel;
 Kernel* Kernel::s_self = nullptr;
 
-Kernel::Kernel(QWidget* parent) : m_widget(parent)
+Kernel::Kernel(QWidget* parent) : QObject()
+    , m_widget(parent)
     , m_commandHistory(new QUndoStack(parent)) {
 }
 

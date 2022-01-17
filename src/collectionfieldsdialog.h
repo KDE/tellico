@@ -68,6 +68,12 @@ public:
 
 Q_SIGNALS:
   void signalCollectionModified();
+  void beginCommandGroup(const QString& name);
+  void endCommandGroup();
+  void addField(Tellico::Data::FieldPtr field);
+  void modifyField(Tellico::Data::FieldPtr field);
+  void removeField(Tellico::Data::FieldPtr field);
+  void reorderFields(Tellico::Data::FieldList fields);
 
 protected Q_SLOTS:
   void slotOk();

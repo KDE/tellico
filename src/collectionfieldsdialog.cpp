@@ -30,7 +30,6 @@
 #include "gui/listwidgetitem.h"
 #include "gui/stringmapdialog.h"
 #include "gui/combobox.h"
-#include "tellico_kernel.h"
 #include "translators/tellico_xml.h"
 #include "utils/string_utils.h"
 #include "tellico_debug.h"
@@ -396,7 +395,7 @@ void CollectionFieldsDialog::slotApply() {
 void CollectionFieldsDialog::applyChanges() {
   // start a command group, "Modify" is a generic term here since the commands could be add, modify, or delete
   if(m_notifyMode == NotifyKernel) {
-    Kernel::self()->beginCommandGroup(i18n("Modify Fields"));
+    emit beginCommandGroup(i18n("Modify Fields"));
   }
 
   foreach(Data::FieldPtr field, m_copiedFields) {
@@ -428,7 +427,7 @@ void CollectionFieldsDialog::applyChanges() {
       }
     }
     if(m_notifyMode == NotifyKernel) {
-      Kernel::self()->modifyField(field);
+      emit modifyField(field);
     } else {
       m_coll->modifyField(field);
     }
@@ -436,7 +435,7 @@ void CollectionFieldsDialog::applyChanges() {
 
   foreach(Data::FieldPtr field, m_newFields) {
     if(m_notifyMode == NotifyKernel) {
-      Kernel::self()->addField(field);
+      emit addField(field);
     } else {
       m_coll->addField(field);
     }
@@ -467,7 +466,7 @@ void CollectionFieldsDialog::applyChanges() {
 
   if(fields.count() > 0) {
     if(m_notifyMode == NotifyKernel) {
-      Kernel::self()->reorderFields(fields);
+      emit reorderFields(fields);
     } else {
       m_coll->reorderFields(fields);
     }
@@ -475,7 +474,7 @@ void CollectionFieldsDialog::applyChanges() {
 
   // commit command group
   if(m_notifyMode == NotifyKernel) {
-    Kernel::self()->endCommandGroup();
+    emit endCommandGroup();
   }
 
   // now clear copied fields
@@ -544,9 +543,7 @@ void CollectionFieldsDialog::slotDelete() {
     m_newFields.removeAll(m_currentField);
   } else {
     if(m_notifyMode == NotifyKernel) {
-      if(!Kernel::self()->removeField(m_currentField)) {
-        return;
-      }
+      emit removeField(m_currentField);
     } else {
       m_coll->removeField(m_currentField);
     }
