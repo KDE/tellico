@@ -31,12 +31,14 @@
 #include "../collections/bookcollection.h"
 
 #include <QTest>
+#include <QStandardPaths>
 
 QTEST_MAIN( CsvTest )
 
 #define QL1(x) QStringLiteral(x)
 
 void CsvTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 }
 
