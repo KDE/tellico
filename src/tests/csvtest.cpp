@@ -25,7 +25,10 @@
 #include "csvtest.h"
 
 #include "../translators/csvparser.h"
+#include "../translators/csvimporter.h"
 #include "../translators/csvexporter.h"
+#include "../collectionfactory.h"
+#include "../collections/bookcollection.h"
 
 #include <QTest>
 
@@ -34,12 +37,13 @@ QTEST_MAIN( CsvTest )
 #define QL1(x) QStringLiteral(x)
 
 void CsvTest::initTestCase() {
+  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 }
 
 void CsvTest::cleanupTestCase() {
 }
 
-void CsvTest::testAll() {
+void CsvTest::testTokens() {
   QFETCH(QString, line);
   QFETCH(QStringList, tokens);
   QFETCH(QString, delim);
@@ -52,7 +56,7 @@ void CsvTest::testAll() {
   QCOMPARE(tokensNew, tokens);
 }
 
-void CsvTest::testAll_data() {
+void CsvTest::testTokens_data() {
   QTest::addColumn<QString>("line");
   QTest::addColumn<QString>("delim");
   QTest::addColumn<QStringList>("tokens");
@@ -85,4 +89,24 @@ void CsvTest::testEntry() {
   output = output.section(QLatin1Char('\n'), 1);
   output.chop(1);
   QCOMPARE(output, QStringLiteral("\"title, with comma\""));
+}
+
+void CsvTest::testImportBook() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-book.csv"));
+  Tellico::Import::CSVImporter importer(url);
+  importer.setCollectionType(Tellico::Data::Collection::Book);
+  importer.setImportColumns({0, 1, 3},
+                            {QStringLiteral("title"), QStringLiteral("author"), QStringLiteral("isbn")});
+  importer.slotFirstRowHeader(true);
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
+
+  Tellico::Data::EntryList entries = coll->entries();
+  QCOMPARE(entries.size(), 1);
+  Tellico::Data::EntryPtr entry = entries.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Cruel as the Grave"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Penman, Sharon"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0140270760"));
 }

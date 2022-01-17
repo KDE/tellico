@@ -57,6 +57,7 @@
 using Tellico::Import::CSVImporter;
 
 CSVImporter::CSVImporter(const QUrl& url_) : Tellico::Import::TextImporter(url_),
+    m_collType(-1),
     m_existingCollection(nullptr),
     m_firstRowHeader(false),
     m_delimiter(QStringLiteral(",")),
@@ -98,19 +99,17 @@ Tellico::Data::CollPtr CSVImporter::collection() {
 
   const QStringList existingNames = m_coll->fieldNames();
 
-  QList<int> cols;
-  cols.reserve(m_table->columnCount());
-  QStringList names;
-  names.reserve(m_table->columnCount());
-  for(int col = 0; col < m_table->columnCount(); ++col) {
-    QString t = m_table->horizontalHeaderItem(col)->text();
-    if(m_coll->fieldByTitle(t)) {
-      cols << col;
-      names << m_coll->fieldNameByTitle(t);
+  if(m_fieldsToImport.isEmpty() && m_table) {
+    for(int col = 0; col < m_table->columnCount(); ++col) {
+      QString t = m_table->horizontalHeaderItem(col)->text();
+      if(m_coll->fieldByTitle(t)) {
+        m_columnsToImport << col;
+        m_fieldsToImport << m_coll->fieldNameByTitle(t);
+      }
     }
   }
 
-  if(names.isEmpty()) {
+  if(m_fieldsToImport.isEmpty()) {
     myDebug() << "no fields assigned";
     return Data::CollPtr();
   }
@@ -135,43 +134,44 @@ Tellico::Data::CollPtr CSVImporter::collection() {
     bool empty = true;
     Data::EntryPtr entry(new Data::Entry(m_coll));
     QStringList values = m_parser->nextTokens();
-    for(int i = 0; i < names.size(); ++i) {
-      if(cols[i] >= values.size()) {
+    for(int i = 0; i < m_fieldsToImport.size(); ++i) {
+      if(m_columnsToImport.at(i) >= values.size()) {
         break;
       }
-      QString value = values[cols[i]].trimmed();
+      const QString currentFieldName = m_fieldsToImport.at(i);
+      QString value = values[m_columnsToImport.at(i)].trimmed();
       // only replace delimiters for tables
       // see https://forum.kde.org/viewtopic.php?f=200&t=142712
-      if(replaceColDelimiter && m_coll->fieldByName(names[i])->type() == Data::Field::Table) {
+      if(replaceColDelimiter && m_coll->fieldByName(currentFieldName)->type() == Data::Field::Table) {
         value.replace(m_colDelimiter, FieldFormat::columnDelimiterString());
       }
-      if(replaceRowDelimiter && m_coll->fieldByName(names[i])->type() == Data::Field::Table) {
+      if(replaceRowDelimiter && m_coll->fieldByName(currentFieldName)->type() == Data::Field::Table) {
         value.replace(m_rowDelimiter, FieldFormat::rowDelimiterString());
       }
       if(m_isLibraryThing) {
         // special cases for LibraryThing import
-        if(names[i] == QLatin1String("isbn")) {
+        if(currentFieldName == QLatin1String("isbn")) {
           // ISBN values are enclosed by brackets
           value.remove(QLatin1Char('[')).remove(QLatin1Char(']'));
-        } else if(names[i] == QLatin1String("keyword")) {
+        } else if(currentFieldName == QLatin1String("keyword")) {
           // LT values are comma-separated
           value.replace(QLatin1String(","), FieldFormat::delimiterString());
-        } else if(names[i] == QLatin1String("cdate")) {
+        } else if(currentFieldName == QLatin1String("cdate")) {
           // only want date, not time. 10 characters since it's zero-padded
           value.truncate(10);
         }
       }
-      bool success = entry->setField(names[i], value);
+      bool success = entry->setField(currentFieldName, value);
       // we might need to add a new allowed value
       // assume that if the user is importing the value, it should be allowed
-      if(!success && m_coll->fieldByName(names[i])->type() == Data::Field::Choice) {
-        Data::FieldPtr f = m_coll->fieldByName(names[i]);
+      if(!success && m_coll->fieldByName(currentFieldName)->type() == Data::Field::Choice) {
+        Data::FieldPtr f = m_coll->fieldByName(currentFieldName);
         StringSet allow;
         allow.add(f->allowed());
         allow.add(value);
         f->setAllowed(allow.values());
         m_coll->modifyField(f);
-        success = entry->setField(names[i], value);
+        success = entry->setField(currentFieldName, value);
       }
       if(empty && success) {
         empty = false;
@@ -398,6 +398,16 @@ bool CSVImporter::validImport() const {
                                       "Only assigned columns will be imported."));
   }
   return m_hasAssignedFields;
+}
+
+void CSVImporter::setCollectionType(int collType_) {
+  m_collType = collType_;
+}
+
+void CSVImporter::setImportColumns(QList<int> columns_, QStringList fieldNames_) {
+  Q_ASSERT(columns_.size() == fieldNames_.size());
+  m_columnsToImport = columns_;
+  m_fieldsToImport = fieldNames_;
 }
 
 void CSVImporter::fillTable() {
@@ -642,7 +652,8 @@ void CSVImporter::slotCancel() {
 }
 
 void CSVImporter::createCollection() {
-  Data::Collection::Type type = static_cast<Data::Collection::Type>(m_comboColl->currentType());
+  Q_ASSERT(m_collType > -1 || m_comboColl);
+  Data::Collection::Type type = static_cast<Data::Collection::Type>(m_collType > -1 ? m_collType : m_comboColl->currentType());
   m_coll = CollectionFactory::collection(type, true);
   if(m_existingCollection) {
     // if we're using the existing collection, then we

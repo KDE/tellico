@@ -38,6 +38,7 @@ class QPushButton;
 class QCheckBox;
 class QRadioButton;
 class QTableWidget;
+class CsvTest;
 
 namespace Tellico {
   namespace GUI {
@@ -51,6 +52,8 @@ namespace Tellico {
  */
 class CSVImporter : public TextImporter {
 Q_OBJECT
+
+friend class ::CsvTest;
 
 public:
   /**
@@ -72,6 +75,9 @@ public:
 
   virtual bool validImport() const Q_DECL_OVERRIDE;
 
+  void setCollectionType(int collType);
+  void setImportColumns(QList<int> columns, QStringList fieldNames);
+
 public Q_SLOTS:
   void slotActionChanged(int action) Q_DECL_OVERRIDE;
   void slotCancel() Q_DECL_OVERRIDE;
@@ -92,8 +98,11 @@ private:
   void createCollection();
   void updateFieldCombo();
 
+  int m_collType;
   Data::CollPtr m_coll;
   Data::CollPtr m_existingCollection; // used to grab fields from current collection in window
+  QList<int> m_columnsToImport;
+  QStringList m_fieldsToImport;
   bool m_firstRowHeader;
   QString m_delimiter;
   QString m_colDelimiter;

@@ -261,8 +261,15 @@ ecm_add_test(collectorztest.cpp
 
 ecm_add_test(csvtest.cpp
              ../translators/csvparser.cpp
+             ../translators/csvimporter.cpp
              ../translators/csvexporter.cpp
              ../translators/exporter.cpp
+             ../gui/collectiontypecombo.cpp
+             ../gui/combobox.cpp
+             ../gui/listwidgetitem.cpp
+             ../gui/stringmapwidget.cpp
+             ../gui/stringmapdialog.cpp
+             ../collectionfieldsdialog.cpp
     TEST_NAME csvtest
     LINK_LIBRARIES ${TELLICO_CSV_LIBS} ${TELLICO_TEST_LIBS} translatorstest
 )

@@ -34,9 +34,10 @@ private Q_SLOTS:
   void initTestCase();
   void cleanupTestCase();
 
-  void testAll();
-  void testAll_data();
+  void testTokens();
+  void testTokens_data();
   void testEntry();
+  void testImportBook();
 };
 
 #endif
