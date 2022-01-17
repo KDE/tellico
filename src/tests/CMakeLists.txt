@@ -271,7 +271,7 @@ ecm_add_test(csvtest.cpp
              ../gui/stringmapdialog.cpp
              ../collectionfieldsdialog.cpp
     TEST_NAME csvtest
-    LINK_LIBRARIES ${TELLICO_CSV_LIBS} ${TELLICO_TEST_LIBS} translatorstest
+    LINK_LIBRARIES ${TELLICO_CSV_LIBS} ${TELLICO_TEST_LIBS} translatorstest KF5::SonnetCore KF5::SonnetUi
 )
 
 ecm_add_test(delicioustest.cpp
