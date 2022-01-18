@@ -139,6 +139,10 @@ Tellico::Data::CollPtr CSVImporter::collection() {
         break;
       }
       const QString currentFieldName = m_fieldsToImport.at(i);
+      if(!m_coll->hasField(currentFieldName)) {
+        myDebug() << "No field in collection named" << currentFieldName;
+        continue;
+      }
       QString value = values[m_columnsToImport.at(i)].trimmed();
       // only replace delimiters for tables
       // see https://forum.kde.org/viewtopic.php?f=200&t=142712
@@ -408,6 +412,18 @@ void CSVImporter::setImportColumns(QList<int> columns_, QStringList fieldNames_)
   Q_ASSERT(columns_.size() == fieldNames_.size());
   m_columnsToImport = columns_;
   m_fieldsToImport = fieldNames_;
+}
+
+void CSVImporter::setDelimiter(const QString& delimiter_) {
+  m_delimiter = delimiter_;
+}
+
+void CSVImporter::setColumnDelimiter(const QString& delimiter_) {
+  m_colDelimiter = delimiter_;
+}
+
+void CSVImporter::setRowDelimiter(const QString& delimiter_) {
+  m_rowDelimiter = delimiter_;
 }
 
 void CSVImporter::fillTable() {

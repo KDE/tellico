@@ -29,6 +29,7 @@
 #include "../translators/csvexporter.h"
 #include "../collectionfactory.h"
 #include "../collections/bookcollection.h"
+#include "../collections/musiccollection.h"
 
 #include <QTest>
 #include <QStandardPaths>
@@ -40,6 +41,7 @@ QTEST_MAIN( CsvTest )
 void CsvTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
+  Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerAlbum(Tellico::Data::Collection::Album, "album");
 }
 
 void CsvTest::cleanupTestCase() {
@@ -97,8 +99,8 @@ void CsvTest::testImportBook() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-book.csv"));
   Tellico::Import::CSVImporter importer(url);
   importer.setCollectionType(Tellico::Data::Collection::Book);
-  importer.setImportColumns({0, 1, 3},
-                            {QStringLiteral("title"), QStringLiteral("author"), QStringLiteral("isbn")});
+  importer.setImportColumns({0, 1, 3, 4},
+                            {QStringLiteral("title"), QStringLiteral("author"), QStringLiteral("isbn"), QStringLiteral("binding")});
   importer.slotFirstRowHeader(true);
   Tellico::Data::CollPtr coll = importer.collection();
   QVERIFY(coll);
@@ -111,4 +113,36 @@ void CsvTest::testImportBook() {
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Cruel as the Grave"));
   QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Penman, Sharon"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0140270760"));
+  QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("square"));
+}
+
+void CsvTest::testBug386483() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-bug386483.csv"));
+  Tellico::Import::CSVImporter importer(url);
+  importer.setCollectionType(Tellico::Data::Collection::Album);
+  importer.setImportColumns({0, 1, 2, 3, 6},
+                            {QStringLiteral("title"), QStringLiteral("label"), QStringLiteral("year"),
+                             QStringLiteral("track"), QStringLiteral("keyword")});
+  importer.slotFirstRowHeader(false);
+  importer.setDelimiter(QStringLiteral(","));
+  importer.setColumnDelimiter(QStringLiteral("::"));
+  importer.setRowDelimiter(QStringLiteral("|"));
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
+
+  Tellico::Data::EntryList entries = coll->entries();
+  QCOMPARE(entries.size(), 1);
+  Tellico::Data::EntryPtr entry = entries.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("album"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2022"));
+  QCOMPARE(entry->field(QStringLiteral("keyword")), QStringLiteral("https://tellico-project.org"));
+  QStringList trackList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
+  QCOMPARE(trackList.size(), 2);
+  QStringList cols = Tellico::FieldFormat::splitRow(trackList.at(1));
+  QCOMPARE(cols.size(), 3);
+  QCOMPARE(cols.at(0), QStringLiteral("track2"));
+  QCOMPARE(cols.at(1), QStringLiteral("artist2"));
+  QCOMPARE(cols.at(2), QStringLiteral("0:34"));
 }

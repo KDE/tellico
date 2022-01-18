@@ -77,6 +77,9 @@ public:
 
   void setCollectionType(int collType);
   void setImportColumns(QList<int> columns, QStringList fieldNames);
+  void setDelimiter(const QString& delimeter);
+  void setColumnDelimiter(const QString& delimeter);
+  void setRowDelimiter(const QString& delimeter);
 
 public Q_SLOTS:
   void slotActionChanged(int action) Q_DECL_OVERRIDE;
