@@ -38,7 +38,7 @@ SET(gui_STAT_SRCS
    treeview.cpp
    urlfieldlogic.cpp
    urlfieldwidget.cpp
-   )
+)
 
 add_library(gui STATIC ${gui_STAT_SRCS})
 
