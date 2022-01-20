@@ -76,7 +76,7 @@ public:
   virtual bool validImport() const Q_DECL_OVERRIDE;
 
   void setCollectionType(int collType);
-  void setImportColumns(QList<int> columns, QStringList fieldNames);
+  void setImportColumns(const QList<int>& columns, const QStringList& fieldNames);
   void setDelimiter(const QString& delimeter);
   void setColumnDelimiter(const QString& delimeter);
   void setRowDelimiter(const QString& delimeter);

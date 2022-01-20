@@ -408,7 +408,7 @@ void CSVImporter::setCollectionType(int collType_) {
   m_collType = collType_;
 }
 
-void CSVImporter::setImportColumns(QList<int> columns_, QStringList fieldNames_) {
+void CSVImporter::setImportColumns(const QList<int>& columns_, const QStringList& fieldNames_) {
   Q_ASSERT(columns_.size() == fieldNames_.size());
   m_columnsToImport = columns_;
   m_fieldsToImport = fieldNames_;
