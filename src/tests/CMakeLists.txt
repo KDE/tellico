@@ -259,7 +259,6 @@ ecm_add_test(collectorztest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
 )
 
-if (FALSE)
 ecm_add_test(csvtest.cpp
              ../translators/csvparser.cpp
              ../translators/csvimporter.cpp
@@ -274,7 +273,6 @@ ecm_add_test(csvtest.cpp
     TEST_NAME csvtest
     LINK_LIBRARIES ${TELLICO_CSV_LIBS} ${TELLICO_TEST_LIBS} translatorstest
 )
-endif()
 
 ecm_add_test(delicioustest.cpp
              ../translators/deliciousimporter.cpp
