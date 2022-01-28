@@ -152,7 +152,7 @@
       <li xml:lang="fi">Tukee kirjojen, lähdeluettelotietueiden, videoiden, musiikin, videopelien, sarjakuvien, kolikoiden, postimerkkien, keräilykuvien, viinien, lautapelien ja tiedostoluettelojen oletuskokoelmia</li>
       <li xml:lang="fr">Prends en charge par défaut des collections de livres, d'entrées bibliographiques, de vidéos, de musique, de jeux vidéo, de bandes dessinées, de monnaies, de timbres,de cartes à collectionner, de vins, de jeux de plateau et de catalogues de fichiers.</li>
       <li xml:lang="gl">Compatíbel con coleccións predeterminadas de libros, entradas bibliográficas, vídeos, música, videoxogos, banda deseñada, moedas, selos, cartas de colección, viños, xogos de taboleiro e catálogos de ficheiros.</li>
-      <li xml:lang="hu">Alapértelmezett gyűjtemények a következőkhöz: könyvek, irodalomjegyzék bejegyzések, videók, zenék, videojátékok, képregények, érmék, bélyegek, gyűjtőkártyák, borok, társasjátékok és fájlkatalógusok</li>
+      <li xml:lang="hu">Alapértelmezett gyűjtemények támogatása a következőkhöz: könyvek, irodalomjegyzék bejegyzések, videók, zenék, videojátékok, képregények, érmék, bélyegek, gyűjtőkártyák, borok, társasjátékok és fájlkatalógusok</li>
       <li xml:lang="ia">Il supporta collectiones predefinite de libros, entratas bibliographic, videos, musica, video jocos, libros in designo, numisma, timbros, cartas de commerciar, vinos, jocos de tabula e catalogos de files</li>
       <li xml:lang="id">Mendukung koleksi buku, entri bibliografi, video, musik, video game, buku komik, koin, perangko, kartu perdagangan, wine, permainan papan, dan katalog file standar yang didukung</li>
       <li xml:lang="it">Supporta collezioni standard di libri, voci bibliografiche, video, musica, videogiochi, fumetti, monete, francobolli, carte da gioco, vini, giochi da tavolo e collezioni di file</li>
@@ -182,7 +182,7 @@
       <li xml:lang="fi">Tukee käyttäjän mukauttamia kokoelmia</li>
       <li xml:lang="fr">Prends en charge les collections personnalisées par l'utilisateur</li>
       <li xml:lang="gl">Permite aos usuarios definir coleccións personalizadas.</li>
-      <li xml:lang="hu">Egyedileg definiált, saját gyűjtemények</li>
+      <li xml:lang="hu">Egyedileg definiált, saját gyűjtemények támogatása</li>
       <li xml:lang="ia">Il supporta collectiones personalisate definite per le usator</li>
       <li xml:lang="id">Dukungan koleksi kustom yang ditentukan pengguna</li>
       <li xml:lang="it">Supporta collezioni personalizzate definite dall'utente</li>
@@ -212,7 +212,7 @@
       <li xml:lang="fi">Tukee rajattomasti käyttäjän määrittämiä useamman tyypin kenttiä (teksti, kappale, luettelo, valintaruutu, luku-, verkko-osoite, päiväys, kuvat ja niiden yhdistelmät)</li>
       <li xml:lang="fr">Prend en charge n'importe quel nombre de champs définis par l'utilisateur, de plusieurs types différents : texte, paragraphe, liste, case à cocher, nombre, URL, date, images et combinaisons</li>
       <li xml:lang="gl">Permite ao usuario definir campos de varios tipos: texto, parágrafo, lista, lista con caixas para marcar, número, URL, data, imaxes, e combinacións.</li>
-      <li xml:lang="hu">Tetszőleges számú, különböző típusú mező: szöveg, bekezdés, lista, jelölőnégyzet, szám, URL, dátum, képek és ezek kombinációi</li>
+      <li xml:lang="hu">Tetszőleges számú, különböző típusú mező támogatása: szöveg, bekezdés, lista, jelölőnégyzet, szám, URL, dátum, képek és ezek kombinációi</li>
       <li xml:lang="ia">Il supporta qualcunque numero de campos definite per le usator, de plure typos differente: texto, paragrapho, lista, quadrato de selection, numero, URL, data, imagines e combinationes</li>
       <li xml:lang="id">Mendukung angka apa pun dari bidang yang ditentukan, beberapa tipe yang berbeda: teks, paragraf, daftar, kotak centang, nomor, URL, tanggal, gambar, dan kombinasi</li>
       <li xml:lang="it">Supporta un qualsiasi numero di campi definiti dall'utente, di molti tipi differenti: testo, paragrafi, liste, caselle, numeri, URL, dati, immagini e combinazioni</li>
