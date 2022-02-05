@@ -215,7 +215,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   connect(m_editISBN, &QAbstractButton::clicked, this, &FetchDialog::slotEditMultipleISBN);
 
   // add for spacing
-  box2HBoxLayout->setStretchFactor(new QWidget(box2), 10);
+  box2HBoxLayout->addStretch(10);
 
   label = new QLabel(i18n("Search s&ource:"), box2);
   box2HBoxLayout->addWidget(label);
