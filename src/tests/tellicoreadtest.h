@@ -59,6 +59,7 @@ private Q_SLOTS:
   void testRelativeLink();
   void testEmptyFirstTableRow();
   void testBug443845();
+  void testEmoji();
 
 private:
   QList<Tellico::Data::CollPtr> m_collections;
