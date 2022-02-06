@@ -254,6 +254,10 @@ void FieldWidgetTest::testPara() {
 
   w.clear();
   QVERIFY(w.text().isEmpty());
+
+  QString textWithEmoji = QString::fromUtf8("Title 🏡️");
+  w.setText(textWithEmoji);
+  QCOMPARE(w.text(), textWithEmoji);
 }
 
 void FieldWidgetTest::testNumber() {

@@ -586,3 +586,22 @@ void TellicoReadTest::testBug443845() {
   Tellico::Data::EntryPtr entry = coll->entries().at(0);
   QVERIFY(entry);
 }
+
+void TellicoReadTest::testEmoji() {
+  QString textWithEmoji = QString::fromUtf8("Title 🏡️");
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default fields
+  QVERIFY(coll->hasField(QStringLiteral("title")));
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  entry1->setField(QStringLiteral("title"), textWithEmoji);
+  coll->addEntries(entry1);
+  Tellico::Export::TellicoXMLExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+
+  Tellico::Import::TellicoImporter importer(exporter.text());
+  Tellico::Data::CollPtr coll2 = importer.collection();
+  QVERIFY(coll2);
+  Tellico::Data::EntryPtr entry2 = coll2->entries().at(0);
+  QVERIFY(entry2);
+
+  QCOMPARE(entry2->title(), textWithEmoji);
+}
