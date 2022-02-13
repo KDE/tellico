@@ -39,6 +39,28 @@
 
 namespace {
   static const int STRING_STORE_SIZE = 4999; // too big, too small?
+
+  class StringIterator {
+    QString::const_iterator pos, e;
+  public:
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+    explicit StringIterator(QStringView string)
+#else
+    explicit StringIterator(const QString& string)
+#endif
+    : pos(string.begin()), e(string.end()) {}
+    inline bool hasNext() const { return pos < e; }
+    inline uint next() {
+      Q_ASSERT(hasNext());
+      const QChar uc = *pos++;
+      if(uc.isSurrogate()) {
+        if(uc.isHighSurrogate() && pos < e && pos->isLowSurrogate())
+          return QChar::surrogateToUcs4(uc, *pos++);
+        return QChar::ReplacementCharacter;
+      }
+      return uc.unicode();
+    }
+  };
 }
 
 QString Tellico::decodeHTML(const QByteArray& data_) {
@@ -229,12 +251,14 @@ QString Tellico::reverseObfuscate(const QByteArray& bytes) {
 QString Tellico::removeControlCodes(const QString& string) {
   QString result;
   result.reserve(string.size());
-  for(int i = 0; i < string.size(); ++i) {
-    const ushort c = string.at(i).unicode();
+  StringIterator it(string);
+  while(it.hasNext()) {
+    const auto c = it.next();
     // legal control codes in XML 1.0 are U+0009, U+000A, U+000D
     // https://www.w3.org/TR/xml/#charsets
     if(c > 0x1F || c == 0x9 || c == 0xA || c == 0xD) {
-      result += string.at(i);
+      if(c < 0xd800) result += QChar(c);
+      else result += QString::fromUcs4(&c, 1);
     }
   }
   return result;

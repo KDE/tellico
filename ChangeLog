@@ -1,3 +1,7 @@
+2022-02-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with saving and viewing surrogate code points (Bug 449244).
+
 2022-02-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with fetchdialog layout preventing clicking (Bug 449636).

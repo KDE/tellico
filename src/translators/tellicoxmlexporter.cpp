@@ -93,11 +93,11 @@ QDomDocument TellicoXMLExporter::exportXML() const {
   }
 
   QDomImplementation impl;
-  // Silently drop invalid XML characters when saving the document
-  // the default setting would allow invalid characters in the exported XML
-  // which might then fail to load or validate
-  // Bug 443845
-  impl.setInvalidDataPolicy(QDomImplementation::DropInvalidChars);
+  // Bug 443845 - but do not just silent drop the invalid characters
+  // since that drops emojis and unicode points with surrogate encoding
+  // instead Tellico::removeControlCodes is used everywhere that
+  // QDomDocument::createTextNode() is called
+//  impl.setInvalidDataPolicy(QDomImplementation::DropInvalidChars);
   QDomDocumentType doctype = impl.createDocumentType(QStringLiteral("tellico"),
                                                      XML::pubTellico(exportVersion),
                                                      XML::dtdTellico(exportVersion));
@@ -156,7 +156,7 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
     const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(coll.data());
     if(!c->preamble().isEmpty()) {
       QDomElement preElem = dom_.createElement(QStringLiteral("bibtex-preamble"));
-      preElem.appendChild(dom_.createTextNode(c->preamble()));
+      preElem.appendChild(dom_.createTextNode(removeControlCodes(c->preamble())));
       collElem.appendChild(preElem);
     }
 
@@ -165,7 +165,7 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
       if(!macroIt.value().isEmpty()) {
         QDomElement macroElem = dom_.createElement(QStringLiteral("macro"));
         macroElem.setAttribute(QStringLiteral("name"), macroIt.key());
-        macroElem.appendChild(dom_.createTextNode(macroIt.value()));
+        macroElem.appendChild(dom_.createTextNode(removeControlCodes(macroIt.value())));
         macrosElem.appendChild(macroElem);
       }
     }
@@ -241,7 +241,7 @@ void TellicoXMLExporter::exportFieldXML(QDomDocument& dom_, QDomElement& parent_
     }
     QDomElement e = dom_.createElement(QStringLiteral("prop"));
     e.setAttribute(QStringLiteral("name"), it.key());
-    e.appendChild(dom_.createTextNode(it.value()));
+    e.appendChild(dom_.createTextNode(removeControlCodes(it.value())));
     elem.appendChild(e);
   }
 
@@ -301,7 +301,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
         }
         for(int col = 0; col < columnValues.count(); ++col) {
           QDomElement elem = dom_.createElement(QStringLiteral("column"));
-          elem.appendChild(dom_.createTextNode(columnValues.at(col)));
+          elem.appendChild(dom_.createTextNode(removeControlCodes(columnValues.at(col))));
           fieldElem.appendChild(elem);
         }
       }
@@ -320,7 +320,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       for(QStringList::ConstIterator it = fields.constBegin(); it != fields.constEnd(); ++it) {
         // element for field value, child of either entryElem or ParentElem
         QDomElement fieldElem = dom_.createElement(fieldName);
-        fieldElem.appendChild(dom_.createTextNode(*it));
+        fieldElem.appendChild(dom_.createTextNode(removeControlCodes(*it)));
         parElem.appendChild(fieldElem);
       }
     } else {
@@ -368,10 +368,10 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
             fieldElem.appendChild(dom_.createTextNode(old_url.url()));
           }
         } else {
-          fieldElem.appendChild(dom_.createTextNode(fieldValue));
+          fieldElem.appendChild(dom_.createTextNode(removeControlCodes(fieldValue)));
         }
       } else {
-        fieldElem.appendChild(dom_.createTextNode(fieldValue));
+        fieldElem.appendChild(dom_.createTextNode(removeControlCodes(fieldValue)));
       }
     }
 
