@@ -40,6 +40,7 @@
 #include "../entry.h"
 #include "../document.h"
 #include "../utils/xmlhandler.h"
+#include "../utils/string_utils.h"
 
 #include <QTest>
 #include <QNetworkInterface>
@@ -588,11 +589,19 @@ void TellicoReadTest::testBug443845() {
 }
 
 void TellicoReadTest::testEmoji() {
+  // https://www.fileformat.info/info/unicode/char/1f3e1/index.htm
   QString textWithEmoji = QString::fromUtf8("Title 🏡️");
+  // stripping control codes should not affect the emoji
+  QCOMPARE(Tellico::removeControlCodes(textWithEmoji), textWithEmoji);
+
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default fields
   QVERIFY(coll->hasField(QStringLiteral("title")));
+  Tellico::Data::FieldPtr field = coll->fieldByName(QStringLiteral("title"));
+  QVERIFY(field);
+  field->setTitle(textWithEmoji);
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
   entry1->setField(QStringLiteral("title"), textWithEmoji);
+  QCOMPARE(entry1->title(), textWithEmoji);
   coll->addEntries(entry1);
   Tellico::Export::TellicoXMLExporter exporter(coll);
   exporter.setEntries(coll->entries());
@@ -600,8 +609,12 @@ void TellicoReadTest::testEmoji() {
   Tellico::Import::TellicoImporter importer(exporter.text());
   Tellico::Data::CollPtr coll2 = importer.collection();
   QVERIFY(coll2);
+
+  Tellico::Data::FieldPtr field2 = coll2->fieldByName(QStringLiteral("title"));
+  QVERIFY(field2);
+  QCOMPARE(field2->title(), textWithEmoji);
+
   Tellico::Data::EntryPtr entry2 = coll2->entries().at(0);
   QVERIFY(entry2);
-
   QCOMPARE(entry2->title(), textWithEmoji);
 }
