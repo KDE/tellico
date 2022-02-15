@@ -1,6 +1,7 @@
 2022-02-14  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with taskbar icon on wayland (Bug 450180).
+	* Updated Discogs keyword search to limit results to releases.
 
 2022-02-13  Robby Stephenson  <robby@periapsis.org>
 
