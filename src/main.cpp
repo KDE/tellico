@@ -137,6 +137,8 @@ int main(int argc, char* argv[]) {
   aboutData.addCredit(QStringLiteral("Valentin Lavrinenko"), i18n("Author of rtf2html library"));
 
   aboutData.addLicense(KAboutLicense::GPL_V3);
+  aboutData.setOrganizationDomain("kde.org");
+  aboutData.setDesktopFileName(QStringLiteral("org.kde.tellico.desktop"));
 
   QCommandLineParser parser;
   parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("nofile"), i18n("Do not reopen the last open file")));
