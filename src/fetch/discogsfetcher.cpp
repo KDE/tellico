@@ -122,6 +122,7 @@ void DiscogsFetcher::continueSearch() {
 
     case Keyword:
       q.addQueryItem(QStringLiteral("q"), request().value());
+      q.addQueryItem(QStringLiteral("type"), QStringLiteral("release"));
       break;
 
     case UPC:
