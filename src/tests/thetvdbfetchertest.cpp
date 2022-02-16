@@ -70,10 +70,10 @@ void TheTVDBFetcherTest::testTitle() {
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2002"));
   QCOMPARE(entry->field(QStringLiteral("network")), QStringLiteral("FOX"));
   QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("English"));
-  // 2021-10-04 - content ratign didn't seem to be returned in the data
+  // 2021-10-04 - content rating didn't seem to be returned in the data
 //  QCOMPARE(entry->field(QStringLiteral("certification")), QStringLiteral("TV-14"));
   QCOMPARE(entry->field(QStringLiteral("thetvdb")), QStringLiteral("https://thetvdb.com/series/firefly"));
-  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Science Fiction; Drama"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Science Fiction; Drama; Adventure"));
   QVERIFY(entry->field(QStringLiteral("director")).startsWith(QStringLiteral("Joss Whedon; ")));
   QVERIFY(entry->field(QStringLiteral("writer")).contains(QStringLiteral("Joss Whedon")));
   QVERIFY(entry->field(QStringLiteral("writer")).contains(QStringLiteral("Tim Minear")));
