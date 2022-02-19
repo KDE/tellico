@@ -34,6 +34,7 @@ private Q_SLOTS:
   void initTestCase();
   void testFilter();
   void testGroupViewFilter();
+  void testQuickFilter();
 };
 
 #endif

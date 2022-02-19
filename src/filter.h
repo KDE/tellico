@@ -142,6 +142,8 @@ public:
 
   bool operator==(const Filter& other) const;
 
+  static void populateQuickFilter(FilterPtr filter, const QString& fieldName, const QString& text);
+
 private:
   Filter& operator=(const Filter& other);
 

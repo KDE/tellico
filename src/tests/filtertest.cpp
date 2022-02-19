@@ -331,3 +331,15 @@ void FilterTest::testGroupViewFilter() {
   // multiple table row with value second
   QVERIFY(castFilter.matches(movie));
 }
+
+void FilterTest::testQuickFilter() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true, QStringLiteral("TestCollection")));
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  entry->setField(QStringLiteral("title"), QStringLiteral("C++ Coding Standards"));
+
+  Tellico::FilterPtr filter(new Tellico::Filter(Tellico::Filter::MatchAll));
+  QString fieldName; // empty means any field
+
+  Tellico::Filter::populateQuickFilter(filter, fieldName, QStringLiteral("C++"));
+  QVERIFY(filter->matches(entry));
+}

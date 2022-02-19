@@ -1771,29 +1771,7 @@ void MainWindow::setFilter(const QString& text_) {
         fieldName = Data::Document::self()->collection()->fieldNameByTitle(fieldName);
       }
     }
-    // if the text contains any non-word characters, assume it's a regexp
-    // but \W in qt is letter, number, or '_', I want to be a bit less strict
-    QRegularExpression rx(QLatin1String("[^\\w\\s\\-']"));
-    if(!rx.match(text).hasMatch()) {
-      // split by whitespace, and add rules for each word
-      const QStringList tokens = text.split(QRegularExpression(QLatin1String("\\s")));
-      foreach(const QString& token, tokens) {
-        // an empty field string means check every field
-        filter->append(new FilterRule(fieldName, token, FilterRule::FuncContains));
-      }
-    } else {
-      // if it isn't valid, hold off on applying the filter
-      QRegularExpression tx(text);
-      if(!tx.isValid()) {
-        text = QRegularExpression::escape(text);
-        tx.setPattern(text);
-      }
-      if(!tx.isValid()) {
-        myDebug() << "invalid regular expression:" << text;
-        return;
-      }
-      filter->append(new FilterRule(fieldName, text, FilterRule::FuncRegExp));
-    }
+    Filter::populateQuickFilter(filter, fieldName, text);
     // also want to update the line edit in case the filter was set by DBUS
     if(m_quickFilter->text() != text_) {
       m_quickFilter->setText(text_);
