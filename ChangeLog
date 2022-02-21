@@ -1,3 +1,7 @@
+2022-02-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated IMDb data source to include composer (Bug 450618).
+
 2022-02-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 3.4.4.
