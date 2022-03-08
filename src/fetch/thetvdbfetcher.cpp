@@ -418,7 +418,8 @@ void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   }
 
   QString cover = mapValue(resultMap_, "image");
-  if(cover.isEmpty()) cover = QLatin1String(THETVDB_ART_PREFIX) + mapValue(resultMap_, "poster");
+  if(cover.isEmpty()) cover = mapValue(resultMap_, "poster");
+  if(!cover.startsWith(QLatin1String("http"))) cover.prepend(QLatin1String(THETVDB_ART_PREFIX));
   if(!cover.isEmpty()) entry_->setField(QStringLiteral("cover"), cover);
 
   QString lang = mapValue(resultMap_, "originalLanguage");

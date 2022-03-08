@@ -76,6 +76,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   QCOMPARE(entry->field("certification"), QStringLiteral("PG (USA)"));
   QCOMPARE(entry->field("director"), QStringLiteral("George Miller"));
   QCOMPARE(entry->field("producer"), QStringLiteral("Geoff Burrowes"));
+  QCOMPARE(entry->field("composer"), QStringLiteral("Bruce Rowland"));
   QCOMPARE(set(entry, "writer"), set("Cul Cullen; A.B. 'Banjo' Paterson;John Dixon"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());

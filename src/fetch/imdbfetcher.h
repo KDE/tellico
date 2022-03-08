@@ -107,6 +107,7 @@ public:
     QString certification;
     QString country;
     QString plot;
+    QString composer;
   };
   static const LangData& langData(int lang);
 

@@ -132,7 +132,8 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QStringLiteral("Language"),
       QStringLiteral("Certification"),
       QStringLiteral("Country"),
-      QStringLiteral("plot\\s+(outline|summary)(?!/)")
+      QStringLiteral("plot\\s+(outline|summary)(?!/)"),
+      QStringLiteral("Music by")
     }, {
       i18n("Internet Movie Database (French)"),
       QStringLiteral("www.imdb.fr"),
@@ -160,7 +161,8 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QStringLiteral("Langue"),
       QStringLiteral("Classification"),
       QStringLiteral("Pays"),
-      QStringLiteral("Intrigue\\s*")
+      QStringLiteral("Intrigue\\s*"),
+      QString() // reference page doesn't seem to have localized composer
     }, {
       i18n("Internet Movie Database (Spanish)"),
       QStringLiteral("www.imdb.es"),
@@ -188,7 +190,8 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QStringLiteral("Idioma"),
       QStringLiteral("Clasificación"),
       QStringLiteral("País"),
-      QStringLiteral("Trama\\s*")
+      QStringLiteral("Trama\\s*"),
+      QString() // reference page doesn't seem to have localized composer
     }, {
       i18n("Internet Movie Database (German)"),
       QStringLiteral("www.imdb.de"),
@@ -216,7 +219,8 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QStringLiteral("Sprache"),
       QStringLiteral("Altersfreigabe"),
       QStringLiteral("Land"),
-      QStringLiteral("Handlung\\s*")
+      QStringLiteral("Handlung\\s*"),
+      QString() // reference page doesn't seem to have localized composer
     }, {
       i18n("Internet Movie Database (Italian)"),
       QStringLiteral("www.imdb.it"),
@@ -244,7 +248,8 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QStringLiteral("Lingua"),
       QStringLiteral("Divieti"),
       QStringLiteral("Nazionalità"),
-      QStringLiteral("Trama\\s*")
+      QStringLiteral("Trama\\s*"),
+      QString() // reference page doesn't seem to have localized composer
     }, {
       i18n("Internet Movie Database (Portuguese)"),
       QStringLiteral("www.imdb.pt"),
@@ -272,7 +277,8 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QStringLiteral("Lingua"),
       QStringLiteral("Certificação"),
       QStringLiteral("País"),
-      QStringLiteral("Argumento\\s*")
+      QStringLiteral("Argumento\\s*"),
+      QString() // reference page doesn't seem to have localized composer
     }
   };
 
@@ -722,6 +728,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
   doStudio(str_, entry);
   doPerson(str_, entry, langData(m_lang).director, QStringLiteral("director"));
   doPerson(str_, entry, langData(m_lang).writer, QStringLiteral("writer"));
+  doPerson(str_, entry, langData(m_lang).composer, QStringLiteral("composer"));
   doRating(str_, entry);
   doCast(str_, entry, m_url);
   if(m_fetchImages) {
