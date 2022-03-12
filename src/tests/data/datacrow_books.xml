@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-crow-objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="datacrow_books.xsd">
+  <book>
+    <item>Books</item>
+    <authors>
+      <author>
+        <name>Eric Flint</name>
+      </author>
+    </authors>
+    <authors-list>Eric Flint</authors-list>
+    <available>true</available>
+    <binding>Hardcover</binding>
+    <category>Fiction</category>
+    <container>
+        </container>
+    <container-list/>
+    <countries>
+      <country>
+        <name>United States</name>
+      </country>
+    </countries>
+    <countries-list>United States</countries-list>
+    <created>2022-03-10</created>
+    <days/>
+    <days-loaned/>
+    <description>Now with a new Afterword by Eric Flint The Ultimate Y2K Glitch.... 1632 In the year 1632 in northern Germany a reasonable person might conclude that things couldn't get much worse. There was no food. Disease was rampant. For over a decade religious war had ravaged the land and the people. Catholic and Protestant armies marched and countermarched across the northern plains, laying waste the cities and slaughtering everywhere. In many rural areas population plummeted toward zero. Only the aristocrats remained relatively unscathed; for the peasants, death was a mercy. 2000 Things are going OK in Grantville, West Virginia. The mines are working, the buck are plentiful (it's deer season) and everybody attending the wedding of Mike Stearn's sister (including the entire membership of the local chapter of the United Mine Workers of America, which Mike leads) is having a good time. THEN, EVERYTHING CHANGED.... When the dust settles, Mike leads a small group of armed miners to find out what's going on. Out past the edge of town Grantville's asphalt road is cut, as with a sword. On the other side, a scene out of Hell; a man nailed to a farmhouse door, his wife and daughter Iying screaming in muck at the center of a ring of attentive men in steel vests. Faced with this, Mike and his friends don't have to ask who to shoot. At that moment Freedom and Justice, American style, are introduced to the middle of The Thirty Years War. At the publisher's request, this title is sold without DRM (Digital Rights Management).</description>
+    <due-date/>
+    <edition-comment/>
+    <edition-type>First Edition</edition-type>
+    <filehash/>
+    <filehash-type/>
+    <filename/>
+    <filesize/>
+    <id>8817fb77-db09-4b70-96b1-12d4adbac294</id>
+    <isbn-10>1625790708</isbn-10>
+    <isbn-13>9781625790705</isbn-13>
+    <item>Books</item>
+    <item-value/>
+    <label>1632</label>
+    <languages>
+      <language>
+        <name>English</name>
+      </language>
+    </languages>
+    <languages-list>English</languages-list>
+    <lend-by/>
+    <loan-end-date/>
+    <loan-start-date/>
+    <loan-status>Available</loan-status>
+    <modified>2022-03-10</modified>
+    <pages>329</pages>
+    <picture-front>datacrow_books_images/8817fb77-db09-4b70-96b1-12d4adbac294_PictureFront.jpg</picture-front>
+    <publishers>
+      <publisher>
+        <name>Baen Publishing</name>
+      </publisher>
+    </publishers>
+    <publishers-list>Baen Publishing</publishers-list>
+    <rating>7 / 10</rating>
+    <series>Ring of Fire</series>
+    <service>Google Books / none / none / value=[1632]</service>
+    <service-url>https://www.googleapis.com/books/v1/volumes/IpV0CwAAQBAJ</service-url>
+    <state>Read</state>
+    <storage-medium/>
+    <tags>
+      <tag>
+        <name>favorite</name>
+      </tag>
+    </tags>
+    <tags-list>favorite</tags-list>
+    <title>1632</title>
+    <user-long-text-field/>
+    <user-numeric-field-1/>
+    <user-numeric-field-2/>
+    <user-short-text-field-1/>
+    <user-short-text-field-2/>
+    <volume-nr/>
+    <volume-name/>
+    <webpage>http://books.google.com/books?id=IpV0CwAAQBAJ</webpage>
+    <year>2013</year>
+  </book>
+</data-crow-objects>

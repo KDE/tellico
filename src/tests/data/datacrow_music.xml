@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-crow-objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="datacrow_music.xsd">
+  <music-album>
+    <item>Music Albums</item>
+    <artists>
+      <artist>
+        <name>Andrew Peterson</name>
+      </artist>
+    </artists>
+    <artists-list>Andrew Peterson</artists-list>
+    <available>true</available>
+    <container>
+      <container>
+        <name>container1</name>
+      </container>
+    </container>
+    <container-list>container1</container-list>
+    <countries>
+        </countries>
+    <countries-list/>
+    <created>2022-03-11</created>
+    <days/>
+    <days-loaned/>
+    <description/>
+    <due-date/>
+    <ean/>
+    <genres>
+      <music-genre>
+        <name>Christian</name>
+      </music-genre>
+    </genres>
+    <genres-list>Christian</genres-list>
+    <id>628b272a-3c0c-4eff-8c99-67d4bd3c4b95</id>
+    <item>Music Albums</item>
+    <item-value/>
+    <label>Love and Thunder</label>
+    <languages>
+        </languages>
+    <languages-list/>
+    <lend-by/>
+    <loan-end-date/>
+    <loan-start-date/>
+    <loan-status>Available</loan-status>
+    <modified>2022-03-11</modified>
+    <picture-back/>
+    <picture-cd/>
+    <picture-front>file:////home/robby/kde/src/tellico/src/tests/data/datacrow_music_images/628b272a-3c0c-4eff-8c99-67d4bd3c4b95_PictureFront.jpg</picture-front>
+    <rating>8 / 10</rating>
+    <record-label>Essential</record-label>
+    <service/>
+    <service-url/>
+    <state/>
+    <storage-medium/>
+    <tags>
+        </tags>
+    <tags-list/>
+    <title>Love and Thunder</title>
+    <user-long-text-field/>
+    <user-numeric-field-1/>
+    <user-numeric-field-2/>
+    <user-short-text-field-1/>
+    <user-short-text-field-2/>
+    <webpage/>
+    <year>2003</year>
+    <music-tracks>
+      <music-track>
+        <item>Music Tracks</item>
+        <track>01</track>
+        <title>Canaan Bound</title>
+        <artists>
+                </artists>
+        <artists-list/>
+        <description/>
+        <genres>
+                </genres>
+        <genres-list/>
+        <countries>
+                </countries>
+        <countries-list/>
+        <languages>
+                </languages>
+        <languages-list/>
+        <lyrics/>
+        <playlength>0:03:27</playlength>
+        <quality/>
+        <rating/>
+        <state/>
+        <year/>
+        <created>2022-03-11</created>
+        <encoding/>
+        <filehash/>
+        <filehash-type/>
+        <filename/>
+        <filesize/>
+        <modified>2022-03-11</modified>
+        <album-id>628b272a-3c0c-4eff-8c99-67d4bd3c4b95</album-id>
+        <artists_persist/>
+        <countries_persist/>
+        <genres_persist/>
+        <id>452735f9-e04a-469b-a515-f4d0df648927</id>
+        <item>Music Tracks</item>
+        <label>Canaan Bound</label>
+        <languages_persist/>
+        <user-long-text-field/>
+        <user-numeric-field-1/>
+        <user-numeric-field-2/>
+        <user-short-text-field-1/>
+        <user-short-text-field-2/>
+      </music-track>
+      <music-track>
+        <item>Music Tracks</item>
+        <track>02</track>
+        <title>Let There Be Light</title>
+        <artists>
+          <artist>
+            <name>Andrew Peterson</name>
+          </artist>
+        </artists>
+        <artists-list>Andrew Peterson</artists-list>
+        <description/>
+        <genres>
+                </genres>
+        <genres-list/>
+        <countries>
+                </countries>
+        <countries-list/>
+        <languages>
+                </languages>
+        <languages-list/>
+        <lyrics/>
+        <playlength>0:03:56</playlength>
+        <quality/>
+        <rating/>
+        <state/>
+        <year/>
+        <created>2022-03-11</created>
+        <encoding/>
+        <filehash/>
+        <filehash-type/>
+        <filename/>
+        <filesize/>
+        <modified>2022-03-11</modified>
+        <album-id>628b272a-3c0c-4eff-8c99-67d4bd3c4b95</album-id>
+        <artists_persist>99c6b3b5-916c-4e07-9d64-d9d5f7f14394</artists_persist>
+        <countries_persist/>
+        <genres_persist/>
+        <id>ac89b398-7e45-41c9-bfdf-48d445e40828</id>
+        <item>Music Tracks</item>
+        <label>Let There Be Light</label>
+        <languages_persist/>
+        <user-long-text-field/>
+        <user-numeric-field-1/>
+        <user-numeric-field-2/>
+        <user-short-text-field-1/>
+        <user-short-text-field-2/>
+      </music-track>
+    </music-tracks>
+  </music-album>
+</data-crow-objects>

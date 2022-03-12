@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="40" name="tellico">
+<kpartgui version="41" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -27,6 +27,7 @@
     <Action name="file_import_gcstar"/>
     <Action name="file_import_delicious"/>
     <Action name="file_import_collectorz"/>
+    <Action name="file_import_datacrow"/>
     <Separator/>
     <Action name="file_import_alexandria"/>
     <Action name="file_import_bibtex"/>

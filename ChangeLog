@@ -1,3 +1,7 @@
+2022-03-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Data Crow importer (Bug 451138).
+
 2022-02-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated IMDb data source to include composer (Bug 450618).

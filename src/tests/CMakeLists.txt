@@ -274,6 +274,13 @@ ecm_add_test(csvtest.cpp
     LINK_LIBRARIES ${TELLICO_CSV_LIBS} ${TELLICO_TEST_LIBS} translatorstest
 )
 
+ecm_add_test(datacrowtest.cpp
+             ../translators/datacrowimporter.cpp
+    TEST_NAME datacrowtest
+    LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
+)
+
+
 ecm_add_test(delicioustest.cpp
              ../translators/deliciousimporter.cpp
     TEST_NAME delicioustest

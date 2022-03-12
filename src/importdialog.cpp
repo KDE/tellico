@@ -53,6 +53,7 @@
 #include "translators/boardgamegeekimporter.h"
 #include "translators/librarythingimporter.h"
 #include "translators/collectorzimporter.h"
+#include "translators/datacrowimporter.h"
 #include "utils/datafileregistry.h"
 
 #include <KLocalizedString>
@@ -316,6 +317,11 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       CHECK_SIZE;
       importer = new Import::CollectorzImporter(firstURL);
       break;
+
+    case Import::DataCrow:
+      CHECK_SIZE;
+      importer = new Import::DataCrowImporter(firstURL);
+      break;
   }
   if(!importer) {
     myWarning() << "importer not created!";
@@ -369,6 +375,7 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
     case Import::Delicious:
     case Import::Griffith:
     case Import::Collectorz:
+    case Import::DataCrow:
       text = i18n("XML Files") + QLatin1String(" (*.xml)") + QLatin1String(";;");
       break;
 

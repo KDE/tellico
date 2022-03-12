@@ -399,6 +399,10 @@ void MainWindow::initActions() {
                 i18n("Import data from Collectorz"),
                 QIcon::fromTheme(QStringLiteral("collectorz"), QIcon(QLatin1String(":/icons/collectorz"))));
 
+  IMPORT_ACTION(Import::DataCrow, "file_import_datacrow", i18n("Import Data Crow Data..."),
+                i18n("Import data from Data Crow"),
+                QIcon::fromTheme(QStringLiteral("datacrow"), QIcon(QLatin1String(":/icons/datacrow"))));
+
   IMPORT_ACTION(Import::Referencer, "file_import_referencer", i18n("Import Referencer Data..."),
                 i18n("Import data from Referencer"),
                 QIcon::fromTheme(QStringLiteral("referencer"), QIcon(QLatin1String(":/icons/referencer"))));

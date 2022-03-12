@@ -16,6 +16,7 @@ SET(translators_STAT_SRCS
    csvexporter.cpp
    csvimporter.cpp
    csvparser.cpp
+   datacrowimporter.cpp
    dataimporter.cpp
    deliciousimporter.cpp
    exporter.cpp

@@ -14,6 +14,7 @@ set(PIC_FILES
     coin.png
     collectorz.png
     comic.png
+    datacrow.png
     deliciouslibrary.png
     file.png
     game.png

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2022 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,74 +22,40 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TRANSLATORS_H
-#define TRANSLATORS_H
+#ifndef TELLICO_IMPORT_DATACROWIMPORTER_H
+#define TELLICO_IMPORT_DATACROWIMPORTER_H
+
+#include "xsltimporter.h"
+#include "../datavectors.h"
 
 namespace Tellico {
   namespace Import {
-    enum Format {
-      TellicoXML = 0,
-      Bibtex,
-      Bibtexml,
-      CSV,
-      XSLT,
-      AudioFile,
-      MODS,
-      Alexandria,
-      FreeDB,
-      RIS,
-      GCstar,
-      FileListing,
-      GRS1,
-      AMC,
-      Griffith,
-      PDF,
-      Referencer,
-      Delicious,
-      Goodreads,
-      CIW,
-      VinoXML,
-      BoardGameGeek,
-      LibraryThing,
-      Collectorz,
-      DataCrow
-    };
 
-    enum Action {
-      Replace,
-      Append,
-      Merge
-    };
+/**
+ * @author Robby Stephenson
+*/
+class DataCrowImporter : public XSLTImporter {
+Q_OBJECT
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
+public:
+  /**
+   */
+  DataCrowImporter(const QUrl& url);
 
-  namespace Export {
-    enum Format {
-      TellicoXML = 0,
-      TellicoZip,
-      Bibtex,
-      Bibtexml,
-      HTML,
-      CSV,
-      XSLT,
-      Text,
-      PilotDB, // Deprecated
-      Alexandria,
-      ONIX,
-      GCstar
-    };
+  /**
+   */
+  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  /**
+   */
+  virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE { return nullptr; }
+  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
+  virtual void beginXSLTHandler(XSLTHandler* handler) Q_DECL_OVERRIDE;
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
-}
+private:
+  // private so it can't be changed accidentally
+  void setXSLTURL(const QUrl& url);
+};
 
+  } // end namespace
+} // end namespace
 #endif
