@@ -31,6 +31,7 @@ SET(fetch_STAT_SRCS
    fetchrequest.cpp
    fetchresult.cpp
    filmasterfetcher.cpp
+   gaminghistoryfetcher.cpp
    gcstarpluginfetcher.cpp
    gcstarthread.cpp
    giantbombfetcher.cpp

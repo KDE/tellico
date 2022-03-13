@@ -623,6 +623,12 @@ ecm_add_test(filmasterfetchertest.cpp
     LINK_LIBRARIES fetcherstest translatorstest ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(gaminghistoryfetchertest.cpp
+             ../fetch/gaminghistoryfetcher.cpp
+    TEST_NAME gaminghistoryfetchertest
+    LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
+)
+
 # running gcstar in the fetcher is really unreliable
 #ecm_add_test(gcstarfetchertest.cpp
 #             ../fetch/gcstarpluginfetcher.cpp
