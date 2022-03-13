@@ -72,7 +72,7 @@ public:
     File = 12,
     BoardGame = 13
     // if you want to add custom collection types, use a number sure to be unique like 101
-    // don't forget to update macros in core/tellico_config_addons.cpp
+    // don't forget to update macros in core/tellico_config_addons.cpp tests/fetchertest.cpp
   };
 
   /**
