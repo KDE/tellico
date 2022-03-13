@@ -34,6 +34,8 @@
 #include "../fieldformat.h"
 #include "../fetch/fetcherjob.h"
 
+#include <KSharedConfig>
+
 #include <QTest>
 
 QTEST_GUILESS_MAIN( GamingHistoryFetcherTest )
@@ -47,8 +49,12 @@ void GamingHistoryFetcherTest::initTestCase() {
 }
 
 void GamingHistoryFetcherTest::testKeyword() {
+  auto config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("vndb"));
+  config.writeEntry("Custom Fields", QStringLiteral("gaming-history"));
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword, QStringLiteral("Ikari Warriors 1986"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GamingHistoryFetcher(this));
+  fetcher->readConfig(config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -63,6 +69,7 @@ void GamingHistoryFetcherTest::testKeyword() {
   QCOMPARE(entry->field("platform"), QStringLiteral("Arcade Video"));
   QVERIFY(entry->field("description").startsWith(QLatin1String("Export release")));
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field("gaming-history").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
@@ -78,4 +85,5 @@ void GamingHistoryFetcherTest::testSingleResult() {
   Tellico::Data::EntryPtr entry = results.at(0);
 
   QCOMPARE(entry->field("title"), QStringLiteral("'96 Flag Rally"));
+  QCOMPARE(entry->field("platform"), QStringLiteral("Arcade Video"));
 }

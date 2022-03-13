@@ -185,23 +185,7 @@ void GamingHistoryFetcher::slotComplete(KJob*) {
         dataValue = dataValue.remove(emRx).remove(tagRx).simplified();
         entry->setField(QStringLiteral("publisher"), dataValue);
       } else if(dataType == QLatin1String("Type")) {
-        if(dataValue.endsWith(QLatin1String(" game")) ||
-           dataValue.endsWith(QLatin1String(" disc"))) {
-          dataValue.chop(5);
-        } else if(dataValue.endsWith(QLatin1String(" disk.")) ||
-                  dataValue.endsWith(QLatin1String(" cass.")) ||
-                  dataValue.endsWith(QLatin1String(" cart."))) {
-          dataValue.chop(6);
-        } else if(dataValue.endsWith(QLatin1String(" CD"))) {
-          dataValue.chop(3);
-        }
-        Data::FieldPtr platformField = coll->fieldByName(QStringLiteral("platform"));
-        if(platformField && !platformField->allowed().contains(dataValue)) {
-          QStringList allowed = platformField->allowed();
-          allowed.append(dataValue);
-          platformField->setAllowed(allowed);
-        }
-        entry->setField(QStringLiteral("platform"), dataValue);
+        populatePlatform(entry, dataValue);
       }
     }
 
@@ -218,6 +202,7 @@ void GamingHistoryFetcher::slotComplete(KJob*) {
     // don't emit signal until after putting url in matches hash
     emit signalResultFound(r);
   }
+
   if(m_matches.isEmpty()) {
     // an exact match is handled by returning a page with <script> at the top
     if(s.startsWith(QLatin1String("<script>"))) {
@@ -227,15 +212,9 @@ void GamingHistoryFetcher::slotComplete(KJob*) {
         Data::CollPtr coll(new Data::GameCollection(true));
         Data::EntryPtr entry(new Data::Entry(coll));
         coll->addEntries(entry);
+
         QUrl u(locationMatch.captured(1));
-        QString results = Tellico::decodeHTML(FileHandler::readTextFile(u, true, true));
-        parseEntry(entry, results);
-        if(optionalFields().contains(QStringLiteral("gaming-history"))) {
-          Data::FieldPtr field(new Data::Field(QStringLiteral("gaming-history"), i18n("Gaming History Link"), Data::Field::URL));
-          field->setCategory(i18n("General"));
-          coll->addField(field);
-          entry->setField(QStringLiteral("gaming-history"), u.url());
-        }
+        parseSingleResult(entry, u);
 
         FetchResult* r = new FetchResult(this, entry);
         m_entries.insert(r->uid, entry);
@@ -308,6 +287,15 @@ void GamingHistoryFetcher::parseEntry(Data::EntryPtr entry, const QString& str_)
     entry->setField(QStringLiteral("description"), desc);
   }
 
+  // if the platform is empty, grab it from the html title
+  if(entry->field(QStringLiteral("platform")).isEmpty()) {
+    static const QRegularExpression titleRx(QLatin1String("<title>.+?, (.+?) by .+?</title>"));
+    auto titleMatch = titleRx.match(str_);
+    if(titleMatch.hasMatch()) {
+      populatePlatform(entry, titleMatch.captured(1));
+    }
+  }
+
   static const QRegularExpression coverRx(QLatin1String("<img [^>]*?id='kukulcan'[^>]*?src='([^>]+?)'"));
   auto coverMatch = coverRx.match(str_);
   if(coverMatch.hasMatch()) {
@@ -322,6 +310,42 @@ void GamingHistoryFetcher::parseEntry(Data::EntryPtr entry, const QString& str_)
     // empty image ID is ok
     entry->setField(QStringLiteral("cover"), id);
   }
+}
+
+void GamingHistoryFetcher::parseSingleResult(Data::EntryPtr entry, const QUrl& url_) {
+  QString results = Tellico::decodeHTML(FileHandler::readTextFile(url_, true, true));
+  parseEntry(entry, results);
+  if(optionalFields().contains(QStringLiteral("gaming-history"))) {
+    Data::FieldPtr field(new Data::Field(QStringLiteral("gaming-history"), i18n("Gaming History Link"), Data::Field::URL));
+    field->setCategory(i18n("General"));
+    entry->collection()->addField(field);
+    entry->setField(QStringLiteral("gaming-history"), url_.url());
+  }
+}
+
+void GamingHistoryFetcher::populatePlatform(Data::EntryPtr entry, const QString& platform_) {
+  static const QString platformString(QStringLiteral("platform"));
+
+  QString platform = platform_;
+  if(platform.endsWith(QLatin1String(" game")) ||
+     platform.endsWith(QLatin1String(" disc"))) {
+    platform.chop(5);
+  } else if(platform.endsWith(QLatin1String(" disk.")) ||
+            platform.endsWith(QLatin1String(" cass.")) ||
+            platform.endsWith(QLatin1String(" cart."))) {
+    platform.chop(6);
+  } else if(platform.endsWith(QLatin1String(" CD"))) {
+    platform.chop(3);
+  }
+
+  Data::FieldPtr platformField = entry->collection()->fieldByName(platformString);
+  if(platformField && !platformField->allowed().contains(platform)) {
+    QStringList allowed = platformField->allowed();
+    allowed.append(platform);
+    platformField->setAllowed(allowed);
+  }
+
+   entry->setField(platformString, platform);
 }
 
 Tellico::Fetch::FetchRequest GamingHistoryFetcher::updateRequest(Data::EntryPtr entry_) {

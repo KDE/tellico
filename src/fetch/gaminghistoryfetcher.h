@@ -78,6 +78,8 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void parseEntry(Data::EntryPtr entry, const QString& str);
+  void parseSingleResult(Data::EntryPtr entry, const QUrl& url);
+  void populatePlatform(Data::EntryPtr entry, const QString& platform);
   void populateYearIndex();
 
   QHash<uint, Data::EntryPtr> m_entries;
