@@ -206,9 +206,15 @@ void GamingHistoryFetcher::slotComplete(KJob*) {
     }
 
     FetchResult* r = new FetchResult(this, entry);
-    QUrl url = QUrl(QString::fromLatin1(GAMINGHISTORY_BASE_URL)).resolved(QUrl(u));
-    m_matches.insert(r->uid, url);
     m_entries.insert(r->uid, entry);
+    QUrl url = QUrl(QString::fromLatin1(GAMINGHISTORY_BASE_URL)).resolved(QUrl(u));
+    if(optionalFields().contains(QStringLiteral("gaming-history"))) {
+      Data::FieldPtr field(new Data::Field(QStringLiteral("gaming-history"), i18n("Gaming History Link"), Data::Field::URL));
+      field->setCategory(i18n("General"));
+      coll->addField(field);
+      entry->setField(QStringLiteral("gaming-history"), url.url());
+    }
+    m_matches.insert(r->uid, url);
     // don't emit signal until after putting url in matches hash
     emit signalResultFound(r);
   }
@@ -224,6 +230,12 @@ void GamingHistoryFetcher::slotComplete(KJob*) {
         QUrl u(locationMatch.captured(1));
         QString results = Tellico::decodeHTML(FileHandler::readTextFile(u, true, true));
         parseEntry(entry, results);
+        if(optionalFields().contains(QStringLiteral("gaming-history"))) {
+          Data::FieldPtr field(new Data::Field(QStringLiteral("gaming-history"), i18n("Gaming History Link"), Data::Field::URL));
+          field->setCategory(i18n("General"));
+          coll->addField(field);
+          entry->setField(QStringLiteral("gaming-history"), u.url());
+        }
 
         FetchResult* r = new FetchResult(this, entry);
         m_entries.insert(r->uid, entry);
@@ -325,7 +337,7 @@ Tellico::Fetch::ConfigWidget* GamingHistoryFetcher::configWidget(QWidget* parent
 }
 
 QString GamingHistoryFetcher::defaultName() {
-  return QStringLiteral("Gaming-History");
+  return QStringLiteral("Gaming History");
 }
 
 QString GamingHistoryFetcher::defaultIcon() {
@@ -335,6 +347,7 @@ QString GamingHistoryFetcher::defaultIcon() {
 //static
 Tellico::StringHash GamingHistoryFetcher::allOptionalFields() {
   StringHash hash;
+  hash.insert(QStringLiteral("gaming-history"), i18n("Gaming History Link"));
   return hash;
 }
 
