@@ -8,6 +8,7 @@ Dependencies:
     'frameworks/kxmlgui': '@stable'
     'frameworks/kio': '@stable'
     'frameworks/kiconthemes': '@stable'
+    'frameworks/kitemmodels': '@stable'
     'frameworks/kparts': '@stable'
     'frameworks/kcoreaddons': '@stable'
     'frameworks/ktexteditor': '@stable'
@@ -15,3 +16,10 @@ Dependencies:
     'frameworks/kwallet': '@stable'
     'frameworks/kcrash': '@stable'
     'frameworks/extra-cmake-modules': '@stable'
+
+Options:
+  run-tests: True
+  run-cppcheck: True
+  cppcheck-arguments: '--enable=warning,style,performance'
+  cppcheck-ignore-files:
+    - src/3rdparty/
