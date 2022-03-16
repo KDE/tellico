@@ -7,6 +7,7 @@ Dependencies:
     'frameworks/ki18n': '@stable'
     'frameworks/kxmlgui': '@stable'
     'frameworks/kio': '@stable'
+    'frameworks/kfilemetadata': '@stable'
     'frameworks/kiconthemes': '@stable'
     'frameworks/kitemmodels': '@stable'
     'frameworks/kparts': '@stable'
@@ -14,8 +15,10 @@ Dependencies:
     'frameworks/ktexteditor': '@stable'
     'frameworks/kdoctools': '@stable'
     'frameworks/kwallet': '@stable'
+    'frameworks/knewstuff': '@stable'
     'frameworks/kcrash': '@stable'
     'frameworks/extra-cmake-modules': '@stable'
+    'multimedia/libkcddb': '@stable'
 
 Options:
   run-tests: True
