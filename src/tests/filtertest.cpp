@@ -340,6 +340,18 @@ void FilterTest::testQuickFilter() {
   Tellico::FilterPtr filter(new Tellico::Filter(Tellico::Filter::MatchAll));
   QString fieldName; // empty means any field
 
-  Tellico::Filter::populateQuickFilter(filter, fieldName, QStringLiteral("C++"));
+  Tellico::Filter::populateQuickFilter(filter, fieldName, QStringLiteral("C++"), true /* allow regexps */);
   QVERIFY(filter->matches(entry));
+
+  entry->setField(QStringLiteral("title"), QStringLiteral("Coding Standards"));
+  QVERIFY(filter->matches(entry)); // still matches due to c++ being interpreted as a regexp
+
+  Tellico::FilterPtr filter2(new Tellico::Filter(Tellico::Filter::MatchAll));
+
+  Tellico::Filter::populateQuickFilter(filter2, fieldName, QStringLiteral("C++"), false /* allow regexps */);
+  entry->setField(QStringLiteral("title"), QStringLiteral("C++ Coding Standards"));
+  QVERIFY(filter2->matches(entry));
+
+  entry->setField(QStringLiteral("title"), QStringLiteral("Coding Standards"));
+  QVERIFY(!filter2->matches(entry)); // no longer matches
 }

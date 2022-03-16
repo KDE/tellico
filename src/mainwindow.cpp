@@ -1777,7 +1777,7 @@ void MainWindow::setFilter(const QString& text_) {
         fieldName = Data::Document::self()->collection()->fieldNameByTitle(fieldName);
       }
     }
-    Filter::populateQuickFilter(filter, fieldName, text);
+    Filter::populateQuickFilter(filter, fieldName, text, Config::quickFilterRegExp());
     // also want to update the line edit in case the filter was set by DBUS
     if(m_quickFilter->text() != text_) {
       m_quickFilter->setText(text_);

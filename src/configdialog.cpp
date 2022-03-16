@@ -215,6 +215,12 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
   l->addWidget(m_cbOpenLastFile);
   connect(m_cbOpenLastFile, &QAbstractButton::clicked, this, &ConfigDialog::slotModified);
 
+  m_cbQuickFilterRegExp = new QCheckBox(i18n("&Enable regular expressions in quick filter"), frame);
+  m_cbQuickFilterRegExp->setWhatsThis(i18n("If checked, the quick filter will "
+                                           "interpret text as a regular expression."));
+  l->addWidget(m_cbQuickFilterRegExp);
+  connect(m_cbQuickFilterRegExp, &QAbstractButton::clicked, this, &ConfigDialog::slotModified);
+
   m_cbShowTipDay = new QCheckBox(i18n("&Show \"Tip of the Day\" at startup"), frame);
   m_cbShowTipDay->setWhatsThis(i18n("If checked, the \"Tip of the Day\" will be "
                                     "shown at program start-up."));
@@ -683,6 +689,7 @@ void ConfigDialog::readGeneralConfig() {
   m_modifying = true;
 
   m_cbShowTipDay->setChecked(Config::showTipOfDay());
+  m_cbQuickFilterRegExp->setChecked(Config::quickFilterRegExp());
   m_cbOpenLastFile->setChecked(Config::reopenLastFile());
 #ifdef ENABLE_WEBCAM
   m_cbEnableWebcam->setChecked(Config::enableWebcam());
@@ -781,6 +788,7 @@ void ConfigDialog::saveConfiguration() {
 
 void ConfigDialog::saveGeneralConfig() {
   Config::setShowTipOfDay(m_cbShowTipDay->isChecked());
+  Config::setQuickFilterRegExp(m_cbQuickFilterRegExp->isChecked());
   Config::setEnableWebcam(m_cbEnableWebcam->isChecked());
 
   int imageLocation;

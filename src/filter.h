@@ -142,7 +142,7 @@ public:
 
   bool operator==(const Filter& other) const;
 
-  static void populateQuickFilter(FilterPtr filter, const QString& fieldName, const QString& text);
+  static void populateQuickFilter(FilterPtr filter, const QString& fieldName, const QString& text, bool allowRegExp);
 
 private:
   Filter& operator=(const Filter& other);

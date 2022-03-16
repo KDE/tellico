@@ -317,14 +317,14 @@ bool Filter::operator==(const Filter& other) const {
          *static_cast<const QList<FilterRule*>*>(this) == static_cast<const QList<FilterRule*>&>(other);
 }
 
-void Filter::populateQuickFilter(FilterPtr filter_, const QString& fieldName_, const QString& text_) {
+void Filter::populateQuickFilter(FilterPtr filter_, const QString& fieldName_, const QString& text_, bool allowRegExp_) {
   Q_ASSERT(filter_);
   if(text_.isEmpty()) return;
 
   // if the text contains any non-word characters, assume it's a regexp
   // but \W in qt is letter, number, or '_', I want to be a bit less strict
   static const QRegularExpression rx(QLatin1String("[^\\w\\s\\-']"));
-  if(rx.match(text_).hasMatch()) {
+  if(allowRegExp_ && rx.match(text_).hasMatch()) {
     QString text = text_;
     QRegularExpression tx(text);
     if(!tx.isValid()) {
