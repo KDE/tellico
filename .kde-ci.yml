@@ -18,6 +18,7 @@ Dependencies:
     'frameworks/knewstuff': '@stable'
     'frameworks/kcrash': '@stable'
     'frameworks/extra-cmake-modules': '@stable'
+    'multimedia/libkcddb': 'master'
 
 Options:
   run-tests: True
