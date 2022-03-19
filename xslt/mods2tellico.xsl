@@ -192,17 +192,9 @@
    </xsl:for-each>
   </xsl:if>
 
-  <title>
-   <xsl:value-of select="mods:titleInfo/mods:nonSort"/>
-   <xsl:choose>
-    <xsl:when test="mods:titleInfo[not(@type)]">
-     <xsl:value-of select="mods:titleInfo[not(@type)]/mods:title"/>
-    </xsl:when>
-    <xsl:otherwise>
-     <xsl:value-of select="mods:titleInfo/mods:title"/>
-    </xsl:otherwise>
-   </xsl:choose>
-  </title>
+  <!-- prefer the titles without a type specified, but ensure a non-empty value -->
+  <xsl:apply-templates select="(mods:titleInfo[string-length(mods:title) &gt; 0 and not(@type)] |
+                                mods:titleInfo[string-length(mods:title) &gt; 0])[1]"/>
 
   <subtitle>
    <xsl:value-of select="mods:titleInfo/mods:subTitle"/>
@@ -325,6 +317,13 @@
                                mods:location/mods:url"/>
 
  </entry>
+</xsl:template>
+
+<xsl:template match="mods:titleInfo">
+ <title>
+  <xsl:value-of select="mods:nonSort"/>
+  <xsl:value-of select="mods:title"/>
+ </title>
 </xsl:template>
 
 <xsl:template match="mods:relatedItem">
