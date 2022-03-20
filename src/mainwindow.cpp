@@ -419,6 +419,14 @@ void MainWindow::initActions() {
   IMPORT_ACTION(Import::RIS, "file_import_ris", i18n("Import RIS Data..."),
                 i18n("Import an RIS reference file"), QIcon::fromTheme(QStringLiteral(":/icons/cite")));
 
+  IMPORT_ACTION(Import::MARC, "file_import_marc", i18n("Import MARC Data..."),
+                i18n("Import MARC data"), QIcon::fromTheme(QStringLiteral(":/icons/cite")));
+  // disable this import action if the necessary executable is not available
+  QTimer::singleShot(1000, [action]() {
+    const QString ymd = QStandardPaths::findExecutable(QStringLiteral("yaz-marcdump"));
+    action->setEnabled(!ymd.isEmpty());
+  });
+
   IMPORT_ACTION(Import::Goodreads, "file_import_goodreads", i18n("Import Goodreads Collection..."),
                 i18n("Import a collection from Goodreads.com"), QIcon::fromTheme(QStringLiteral(":/icons/goodreads")));
 

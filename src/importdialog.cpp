@@ -54,6 +54,7 @@
 #include "translators/librarythingimporter.h"
 #include "translators/collectorzimporter.h"
 #include "translators/datacrowimporter.h"
+#include "translators/marcimporter.h"
 #include "utils/datafileregistry.h"
 
 #include <KLocalizedString>
@@ -322,6 +323,11 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       CHECK_SIZE;
       importer = new Import::DataCrowImporter(firstURL);
       break;
+
+    case Import::MARC:
+      CHECK_SIZE;
+      importer = new Import::MarcImporter(firstURL);
+      break;
   }
   if(!importer) {
     myWarning() << "importer not created!";
@@ -416,6 +422,7 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
     case Import::Goodreads:
     case Import::BoardGameGeek:
     case Import::LibraryThing:
+    case Import::MARC:
       break;
   }
 

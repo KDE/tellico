@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2022 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,75 +22,61 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TRANSLATORS_H
-#define TRANSLATORS_H
+#ifndef TELLICO_MARCIMPORTER_H
+#define TELLICO_MARCIMPORTER_H
+
+#include "importer.h"
+#include "../datavectors.h"
+
+#include <QString>
+
+class KComboBox;
 
 namespace Tellico {
+  class XSLTHandler;
   namespace Import {
-    enum Format {
-      TellicoXML = 0,
-      Bibtex,
-      Bibtexml,
-      CSV,
-      XSLT,
-      AudioFile,
-      MODS,
-      Alexandria,
-      FreeDB,
-      RIS,
-      GCstar,
-      FileListing,
-      GRS1,
-      AMC,
-      Griffith,
-      PDF,
-      Referencer,
-      Delicious,
-      Goodreads,
-      CIW,
-      VinoXML,
-      BoardGameGeek,
-      LibraryThing,
-      Collectorz,
-      DataCrow,
-      MARC
-    };
 
-    enum Action {
-      Replace,
-      Append,
-      Merge
-    };
+/**
+ * @author Robby Stephenson
+ */
+class MarcImporter : public Importer {
+Q_OBJECT
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
+public:
+  /**
+   */
+  MarcImporter(const QUrl& url_);
+  ~MarcImporter();
 
-  namespace Export {
-    enum Format {
-      TellicoXML = 0,
-      TellicoZip,
-      Bibtex,
-      Bibtexml,
-      HTML,
-      CSV,
-      XSLT,
-      Text,
-      PilotDB, // Deprecated
-      Alexandria,
-      ONIX,
-      GCstar
-    };
+  /**
+   * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
+   */
+  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  /**
+   */
+  virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE;
+  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
+  void setCharacterSet(const QString& charSet);
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
-}
+public Q_SLOTS:
+  void slotCancel() Q_DECL_OVERRIDE;
 
+private:
+  bool initMARCHandler();
+  bool initMODSHandler();
+
+  Data::CollPtr m_coll;
+  bool m_cancelled;
+
+  QString m_marcdump;
+  QString m_marcCharSet;
+  XSLTHandler* m_MARCHandler;
+  XSLTHandler* m_MODSHandler;
+
+  QWidget* m_widget;
+  KComboBox* m_charSetCombo;
+};
+
+  } // end namespace
+} // end namespace
 #endif

@@ -365,6 +365,12 @@ ecm_add_test(librarythingtest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(marctest.cpp
+             ../translators/marcimporter.cpp
+    TEST_NAME marctest
+    LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
+)
+
 ecm_add_test(modstest.cpp
     TEST_NAME modstest
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest

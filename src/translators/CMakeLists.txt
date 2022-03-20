@@ -31,6 +31,7 @@ SET(translators_STAT_SRCS
    htmlexporter.cpp
    importer.cpp
    librarythingimporter.cpp
+   marcimporter.cpp
    onixexporter.cpp
    pdfimporter.cpp
    referencerimporter.cpp
