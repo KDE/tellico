@@ -70,11 +70,13 @@ private:
 
   QString m_marcdump;
   QString m_marcCharSet;
+  bool m_isUnimarc;
   XSLTHandler* m_MARCHandler;
   XSLTHandler* m_MODSHandler;
 
   QWidget* m_widget;
   KComboBox* m_charSetCombo;
+  KComboBox* m_marcFormatCombo;
 };
 
   } // end namespace

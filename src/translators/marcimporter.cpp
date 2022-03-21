@@ -45,6 +45,7 @@ using Tellico::Import::MarcImporter;
 MarcImporter::MarcImporter(const QUrl& url_) : Tellico::Import::Importer(url_)
     , m_coll(nullptr)
     , m_cancelled(false)
+    , m_isUnimarc(false)
     , m_MARCHandler(nullptr)
     , m_MODSHandler(nullptr)
     , m_widget(nullptr) {
@@ -93,6 +94,10 @@ Tellico::Data::CollPtr MarcImporter::collection() {
     KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - MARC"));
     config.writeEntry("CharacterSets", charSets);
     config.writeEntry("Last Character Set", m_marcCharSet);
+
+    const QString format = m_marcFormatCombo->currentText();
+    m_isUnimarc = format == QLatin1String("UNIMARC");
+    config.writeEntry("Format", format);
   }
   if(m_marcCharSet.isEmpty()) {
     m_marcCharSet = QStringLiteral("UTF-8");
@@ -146,8 +151,12 @@ QWidget* MarcImporter::widget(QWidget* parent_) {
 
   m_charSetCombo = new KComboBox(gbox);
   m_charSetCombo->setEditable(true);
-
   lay->addRow(i18n("Character set:"), m_charSetCombo);
+
+  m_marcFormatCombo = new KComboBox(gbox);
+  m_marcFormatCombo->addItem(QStringLiteral("MARC21"));
+  m_marcFormatCombo->addItem(QStringLiteral("UNIMARC"));
+  lay->addRow(i18n("MARC Format:"), m_marcFormatCombo);
 
   l->addWidget(gbox);
   l->addStretch(1);
@@ -164,13 +173,17 @@ QWidget* MarcImporter::widget(QWidget* parent_) {
 #else
   auto textWidth = parent_->fontMetrics().horizontalAdvance(charSets.last());
 #endif
-  m_charSetCombo->setMinimumWidth(1.2*textWidth);
+  m_charSetCombo->setMinimumWidth(1.5*textWidth);
   QString lastCharSet = config.readEntry("Last Character Set");
   if(!lastCharSet.isEmpty()) {
     if(!charSets.contains(lastCharSet)) charSets += lastCharSet;
     m_charSetCombo->setCurrentText(lastCharSet);
   }
   m_charSetCombo->addItems(charSets);
+  const QString marcFormat = config.readEntry("Format");
+  if(!marcFormat.isEmpty()) {
+    m_marcFormatCombo->setCurrentText(marcFormat);
+  }
   return m_widget;
 }
 
@@ -190,9 +203,11 @@ bool MarcImporter::initMARCHandler() {
     return true;
   }
 
-  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("MARC21slim2MODS3.xsl"));
+  QString xsltName = m_isUnimarc ? QStringLiteral("UNIMARC2MODS3.xsl")
+                                 : QStringLiteral("MARC21slim2MODS3.xsl");
+  QString xsltfile = DataFileRegistry::self()->locate(xsltName);
   if(xsltfile.isEmpty()) {
-    myWarning() << "can not locate MARC21slim2MODS3.xsl.";
+    myWarning() << "can not locate" << xsltName;
     return false;
   }
 
