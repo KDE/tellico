@@ -30,12 +30,10 @@
 #include "../collections/bibtexcollection.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
-#include "../fieldformat.h"
 #include "../utils/datafileregistry.h"
 
 #include <QTest>
-#include <QDomDocument>
-#include <QTextCodec>
+#include <QStandardPaths>
 
 QTEST_APPLESS_MAIN( MarcTest )
 
@@ -46,6 +44,10 @@ void MarcTest::initTestCase() {
 }
 
 void MarcTest::testMarc() {
+  const QString marcdump = QStandardPaths::findExecutable(QStringLiteral("yaz-marcdump"));
+  if(marcdump.isEmpty()) {
+    QSKIP("This test requires yaz-marcdump", SkipAll);
+  }
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.mrc"));
   Tellico::Import::MarcImporter importer(url);
   importer.setCharacterSet(QStringLiteral("iso-8859-1"));
