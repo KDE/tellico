@@ -83,10 +83,10 @@ Tellico::Data::CollPtr MarcImporter::collection() {
   }
 
   if(m_widget) {
-    m_marcCharSet = m_charSetCombo->currentText().toLower();
+    m_marcCharSet = m_charSetCombo->currentText().toUpper();
     QStringList charSets;
     for(int i = 0; i < m_charSetCombo->count(); ++i) {
-      charSets += m_charSetCombo->itemText(i).toLower();
+      charSets += m_charSetCombo->itemText(i).toUpper();
     }
     charSets += m_marcCharSet;
     charSets.removeDuplicates();
