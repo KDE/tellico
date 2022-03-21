@@ -321,8 +321,7 @@
 
 <xsl:template match="mods:titleInfo">
  <title>
-  <xsl:value-of select="mods:nonSort"/>
-  <xsl:value-of select="mods:title"/>
+  <xsl:value-of select="normalize-space(concat(mods:nonSort, mods:title))"/>
  </title>
 </xsl:template>
 
@@ -416,7 +415,15 @@
 </xsl:template>
 
 <xsl:template match="mods:namePart">
- <xsl:value-of select="."/>
+ <!-- MARC2MODS v3.7 started added a comma at end of some names -->
+ <xsl:choose>
+  <xsl:when test="substring(., string-length(.)) = ','">
+   <xsl:value-of select="substring(., 1, string-length(.)-1)"/>
+  </xsl:when>
+  <xsl:otherwise>
+   <xsl:value-of select="."/>
+  </xsl:otherwise>
+ </xsl:choose>
  <!-- assume single-character name parts are initials -->
  <xsl:if test="string-length()=1">
   <xsl:text>.</xsl:text>
