@@ -1,3 +1,7 @@
+2022-03-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Added screenshot field for TheGamesDB source.
+
 2022-03-15  Robby Stephenson  <robby@periapsis.org>
 
 	* Added option for using regular expressions in quick filter (Bug 450517).

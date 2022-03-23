@@ -76,7 +76,7 @@ void TheGamesDBFetcherTest::testTitle() {
   }
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
-                                       QStringLiteral("Goldeneye"));
+                                       QStringLiteral("Goldeneye 007"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheGamesDBFetcher(this));
   fetcher->readConfig(m_config);
 
@@ -94,4 +94,6 @@ void TheGamesDBFetcherTest::testTitle() {
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("screenshot")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("screenshot")).contains(QLatin1Char('/')));
 }
