@@ -318,7 +318,8 @@ public:
     IsbnField,
     PegiField,
     ImdbField,
-    EpisodeField
+    EpisodeField,
+    ScreenshotField
   };
 
   static FieldPtr createDefaultField(DefaultField field);

@@ -179,8 +179,7 @@ Tellico::Data::EntryPtr TheGamesDBFetcher::fetchEntryHook(uint uid_) {
   const QString screenshot = QStringLiteral("screenshot");
   if(optionalFields().contains(screenshot)) {
     if(!entry->collection()->hasField(screenshot)) {
-      Data::FieldPtr field(new Data::Field(screenshot, i18n("Screenshot"), Data::Field::Image));
-      entry->collection()->addField(field);
+      entry->collection()->addField(Data::Field::createDefaultField(Data::Field::ScreenshotField));
     }
     QUrl u(QString::fromLatin1(THEGAMESDB_API_URL));
     u.setPath(QLatin1String("/v") + QLatin1String(THEGAMESDB_API_VERSION) + QLatin1String("/Games/Images"));

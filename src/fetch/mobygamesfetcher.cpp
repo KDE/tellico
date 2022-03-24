@@ -348,6 +348,47 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
     entry->setField(QStringLiteral("cover"), id);
   }
 
+  const QString screenshot = QStringLiteral("screenshot");
+  if(optionalFields().contains(screenshot)) {
+    if(!entry->collection()->hasField(screenshot)) {
+      entry->collection()->addField(Data::Field::createDefaultField(Data::Field::ScreenshotField));
+    }
+    u = QUrl(QString::fromLatin1(MOBYGAMES_API_URL));
+    u.setPath(u.path() + QStringLiteral("/games/%1/platforms/%2/screenshots")
+                         .arg(entry->field(QStringLiteral("moby-id")),
+                              entry->field(QStringLiteral("platform-id"))));
+    u.setQuery(q);
+    markTime();
+    job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+    KJobWidgets::setWindow(job, GUI::Proxy::widget());
+    if(!job->exec()) {
+      myDebug() << job->errorString() << u;
+      return entry;
+    }
+#if 0
+    myWarning() << "Remove screenshots debug from mobygamesfetcher.cpp";
+    QFile file3(QStringLiteral("/tmp/moby-screenshots.json"));
+    if(file3.open(QIODevice::WriteOnly)) {
+      QTextStream t(&file3);
+      t.setCodec("UTF-8");
+      t << job->data();
+    }
+    file3.close();
+#endif
+    QString screenshotUrl;
+    doc = QJsonDocument::fromJson(job->data());
+    map = doc.object().toVariantMap();
+    auto list = map.value(QStringLiteral("screenshots")).toList();
+    if(!list.isEmpty()) {
+      screenshotUrl = mapValue(list.at(0).toMap(), "image");
+    }
+    if(!screenshotUrl.isEmpty()) {
+//      myDebug() << screenshotUrl;
+      const QString id = ImageFactory::addImage(QUrl::fromUserInput(screenshotUrl), true /* quiet */);
+      entry->setField(screenshot, id);
+    }
+  }
+
   // clear the placeholder fields
   entry->setField(QStringLiteral("moby-id"), QString());
   entry->setField(QStringLiteral("platform-id"), QString());
@@ -595,6 +636,7 @@ Tellico::StringHash MobyGamesFetcher::allOptionalFields() {
   StringHash hash;
   hash[QStringLiteral("pegi")] = i18n("PEGI Rating");
   hash[QStringLiteral("mobygames")] = i18n("MobyGames Link");
+  hash[QStringLiteral("screenshot")] = i18n("Screenshot");
   return hash;
 }
 

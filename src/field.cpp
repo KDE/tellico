@@ -339,6 +339,9 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
       field->setProperty(QStringLiteral("column2"), i18nc("TV Season", "Season"));
       field->setProperty(QStringLiteral("column3"), i18nc("TV Episode", "Episode"));
       break;
+    case ScreenshotField:
+      field = new Field(QStringLiteral("screenshot"), i18n("Screenshot"), Field::Image);
+      break;
   }
   Q_ASSERT(field);
   return field;
