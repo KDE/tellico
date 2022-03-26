@@ -123,9 +123,9 @@ void IGDBFetcher::continueSearch() {
       stop();
       return;
   }
-  clauseList += QStringLiteral("fields *,cover.url,age_ratings.*,involved_companies.*;");
+  clauseList += QStringLiteral("fields *,cover.url,screenshots.url,age_ratings.*,involved_companies.*;");
   // exclude some of the bigger unused fields
-  clauseList += QStringLiteral("exclude keywords,screenshots,tags;");
+  clauseList += QStringLiteral("exclude keywords,tags;");
   clauseList += QString(QStringLiteral("limit %1;")).arg(QString::number(IGDB_MAX_RETURNS_TOTAL));
 //  myDebug() << u << clauseList.join(QStringLiteral(" "));
 
@@ -155,14 +155,22 @@ Tellico::Data::EntryPtr IGDBFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries.value(uid_);
 
   // image might still be a URL
-  const QString image_id = entry->field(QStringLiteral("cover"));
+  const QString coverString = QStringLiteral("cover");
+  const QString image_id = entry->field(coverString);
   if(image_id.contains(QLatin1Char('/'))) {
     const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true /* quiet */);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
     // empty image ID is ok
-    entry->setField(QStringLiteral("cover"), id);
+    entry->setField(coverString, id);
+  }
+
+  const QString screenshotString = QStringLiteral("screenshot");
+  const QString screenshot_id = entry->field(screenshotString);
+  if(screenshot_id.contains(QLatin1Char('/'))) {
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(screenshot_id), true /* quiet */);
+    entry->setField(screenshotString, id);
   }
 
   return entry;
@@ -218,14 +226,6 @@ void IGDBFetcher::slotComplete(KJob* job_) {
   }
 
   Data::CollPtr coll(new Data::GameCollection(true));
-  if(optionalFields().contains(QStringLiteral("pegi"))) {
-    coll->addField(Data::Field::createDefaultField(Data::Field::PegiField));
-  }
-  if(optionalFields().contains(QStringLiteral("igdb"))) {
-    Data::FieldPtr field(new Data::Field(QStringLiteral("igdb"), i18n("IGDB Link"), Data::Field::URL));
-    field->setCategory(i18n("General"));
-    coll->addField(field);
-  }
 
   foreach(const QVariant& result, doc.array().toVariantList()) {
     QVariantMap resultMap = result.toMap();
@@ -273,6 +273,21 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   }
   entry_->setField(QStringLiteral("cover"), cover);
 
+  const QString screenshotString = QStringLiteral("screenshot");
+  if(optionalFields().contains(screenshotString)) {
+    if(!entry_->collection()->hasField(screenshotString)) {
+      entry_->collection()->addField(Data::Field::createDefaultField(Data::Field::ScreenshotField));
+    }
+    auto screenshotList = resultMap_.value(QStringLiteral("screenshots")).toList();
+    if(!screenshotList.isEmpty()) {
+      QString screenshot = mapValue(screenshotList.at(0).toMap(), "url");
+      if(screenshot.startsWith(QLatin1Char('/'))) {
+        screenshot.prepend(QStringLiteral("https:"));
+      }
+      entry_->setField(screenshotString, screenshot);
+    }
+  }
+
   QVariantList genreIDs = resultMap_.value(QStringLiteral("genres")).toList();
   QStringList genres;
   foreach(const QVariant& id, genreIDs) {
@@ -295,6 +310,7 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
     entry_->setField(QStringLiteral("year"), QString::number(dt.date().year()));
   }
 
+  const QString pegiString = QStringLiteral("pegi");
   const QVariantList ageRatingList = resultMap_.value(QStringLiteral("age_ratings")).toList();
   foreach(const QVariant& ageRating, ageRatingList) {
     const QVariantMap ratingMap = ageRating.toMap();
@@ -307,8 +323,11 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
       } else {
         myDebug() << "No ESRB rating for value =" << rating;
       }
-    } else if(category == 2 && optionalFields().contains(QStringLiteral("pegi"))) {
-      entry_->setField(QStringLiteral("pegi"), m_pegiHash.value(rating));
+    } else if(category == 2 && optionalFields().contains(pegiString)) {
+      if(!entry_->collection()->hasField(pegiString)) {
+        entry_->collection()->addField(Data::Field::createDefaultField(Data::Field::PegiField));
+      }
+      entry_->setField(pegiString, m_pegiHash.value(rating));
     }
   }
 
@@ -343,8 +362,14 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   entry_->setField(QStringLiteral("publisher"), pubs.join(FieldFormat::delimiterString()));
   entry_->setField(QStringLiteral("developer"), devs.join(FieldFormat::delimiterString()));
 
-  if(optionalFields().contains(QStringLiteral("igdb"))) {
-    entry_->setField(QStringLiteral("igdb"), mapValue(resultMap_, "url"));
+  const QString igdbString = QStringLiteral("igdb");
+  if(optionalFields().contains(igdbString)) {
+    if(!entry_->collection()->hasField(igdbString)) {
+      Data::FieldPtr field(new Data::Field(igdbString, i18n("IGDB Link"), Data::Field::URL));
+      field->setCategory(i18n("General"));
+      entry_->collection()->addField(field);
+    }
+    entry_->setField(igdbString, mapValue(resultMap_, "url"));
   }
 }
 
@@ -550,6 +575,7 @@ Tellico::StringHash IGDBFetcher::allOptionalFields() {
   StringHash hash;
   hash[QStringLiteral("pegi")] = i18n("PEGI Rating");
   hash[QStringLiteral("igdb")] = i18n("IGDB Link");
+  hash[QStringLiteral("screenshot")] = i18n("Screenshot");
   return hash;
 }
 

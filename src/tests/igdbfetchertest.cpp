@@ -84,4 +84,6 @@ void IGDBFetcherTest::testKeyword() {
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("screenshot")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("screenshot")).contains(QLatin1Char('/')));
 }
