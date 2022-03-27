@@ -328,7 +328,7 @@ void MainWindow::initActions() {
   action = KStandardAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
   action->setToolTip(i18n("Save the document as a different file..."));
   action = KStandardAction::print(this, SLOT(slotFilePrint()), actionCollection());
-  action->setToolTip(i18n("Print the contents of the document..."));
+  action->setToolTip(i18n("Print the contents of the collection..."));
 #ifdef USE_KHTML
   {
     KHTMLPart w;
@@ -344,7 +344,7 @@ void MainWindow::initActions() {
 #else
   // print preview is only available with QWebEngine
   action = KStandardAction::printPreview(this, SLOT(slotFilePrintPreview()), actionCollection());
-  action->setToolTip(i18n("Preview the contents of the document..."));
+  action->setToolTip(i18n("Preview the contents of the collection..."));
 #endif
 
   action = KStandardAction::quit(this, SLOT(slotFileQuit()), actionCollection());
@@ -1178,7 +1178,7 @@ bool MainWindow::queryClose() {
 }
 
 void MainWindow::slotFileNew(int type_) {
-  slotStatusMsg(i18n("Creating new document..."));
+  slotStatusMsg(i18n("Creating new collection..."));
 
   // close the fields dialog
   slotHideCollectionFieldsDialog();
