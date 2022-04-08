@@ -386,6 +386,9 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
     m_editOther->setEnabled(true);
     m_editOther->setText(m_delimiter);
   }
+  m_editColDelimiter->setText(m_colDelimiter);
+  m_editRowDelimiter->setText(m_rowDelimiter);
+
   slotDelimiter(); // initialize the parser and then load the text
 
   return m_widget;
