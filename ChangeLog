@@ -1,3 +1,7 @@
+2022-04-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated CSV importer to remember column and row delimiter.
+
 2022-03-26  Robby Stephenson  <robby@periapsis.org>
 
 	* Added screenshot field for IGDB source.
