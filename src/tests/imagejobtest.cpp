@@ -70,6 +70,7 @@ void ImageJobTest::enterLoop() {
 
 void ImageJobTest::slotGetResult(KJob* job) {
   m_result = job->error();
+  if(m_result > 1) qDebug() << job->errorString();
   emit exitLoop();
 }
 
@@ -104,6 +105,7 @@ void ImageJobTest::testNonexistant() {
 void ImageJobTest::testUnreadable() {
   QTemporaryFile tmpFile;
   QVERIFY(tmpFile.open());
+  tmpFile.close();
   QVERIFY(tmpFile.setPermissions(QFileDevice::Permissions()));
   QUrl u = QUrl::fromLocalFile(tmpFile.fileName());
 
