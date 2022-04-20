@@ -66,12 +66,15 @@ void ImageJob::slotStart() {
     emitResult();
   } else if(m_url.isLocalFile()) {
     const QString fileName = m_url.toLocalFile();
+    myDebug() << "ImageJob:trying to read:" << fileName << "(" << m_url << ")";
     if(!QFileInfo(fileName).isReadable()) {
       setError(KIO::ERR_CANNOT_OPEN_FOR_READING);
       setErrorText(i18n("Tellico is unable to load the image - %1.", fileName));
     } else {
+      myDebug() << "...permissions:" << QFileInfo(fileName).permissions();
       m_image = Data::Image(fileName, m_id);
       if(m_image.isNull()) {
+        myDebug() << "...null image";
         setError(KIO::ERR_UNKNOWN);
         m_image = Data::Image::null;
       }
