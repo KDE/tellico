@@ -105,7 +105,7 @@ void ImageJobTest::testNonexistant() {
 void ImageJobTest::testUnreadable() {
   QTemporaryFile tmpFile;
   QVERIFY(tmpFile.open());
-  tmpFile.close();
+  QVERIFY(!tmpFile.fileName().isEmpty());
   QVERIFY(tmpFile.setPermissions(QFileDevice::Permissions()));
   QUrl u = QUrl::fromLocalFile(tmpFile.fileName());
 
