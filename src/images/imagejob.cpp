@@ -74,7 +74,6 @@ void ImageJob::slotStart() {
       myDebug() << "...permissions:" << QFileInfo(fileName).permissions();
       m_image = Data::Image(fileName, m_id);
       if(m_image.isNull()) {
-        myDebug() << "...null image";
         setError(KIO::ERR_UNKNOWN);
         m_image = Data::Image::null;
       }
