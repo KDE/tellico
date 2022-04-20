@@ -120,7 +120,6 @@ void ImageJobTest::testUnreadable() {
   // so check for either result code
   QVERIFY(m_result == KIO::ERR_CANNOT_OPEN_FOR_READING ||
           m_result == KIO::ERR_UNKNOWN);
-  QCOMPARE(m_result, int(KIO::ERR_CANNOT_OPEN_FOR_READING));
 
   const Tellico::Data::Image& img = job->image();
   QVERIFY(img.isNull());
