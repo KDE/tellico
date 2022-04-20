@@ -106,10 +106,12 @@ void ImageJobTest::testUnreadable() {
   QTemporaryFile tmpFile;
   QVERIFY(tmpFile.open());
   QVERIFY(!tmpFile.fileName().isEmpty());
+  qDebug() << "Temp file name is" << tmpFile.fileName();
+  QVERIFY(tmpFile.setPermissions(QFileDevice::Permissions()));
+  qDebug() << "...permissions are" << tmpFile.permissions();
   tmpFile.close();
-  QVERIFY(tmpFile.setPermissions(QFileDevice::WriteOwner));
-  qDebug() << tmpFile.permissions();
   QVERIFY(!tmpFile.isReadable());
+  QVERIFY(!QFileInfo(tmpFile.fileName()).isReadable());
   QUrl u = QUrl::fromLocalFile(tmpFile.fileName());
 
   Tellico::ImageJob* job = new Tellico::ImageJob(u);
