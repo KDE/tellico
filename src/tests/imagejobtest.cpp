@@ -70,7 +70,7 @@ void ImageJobTest::enterLoop() {
 
 void ImageJobTest::slotGetResult(KJob* job) {
   m_result = job->error();
-  if(m_result > 1) qDebug() << job->errorString();
+  if(m_result > 1 && !job->errorString().isEmpty()) qDebug() << job->errorString();
   emit exitLoop();
 }
 
@@ -107,7 +107,7 @@ void ImageJobTest::testUnreadable() {
   QVERIFY(tmpFile.open());
   QVERIFY(!tmpFile.fileName().isEmpty());
   tmpFile.close();
-  QVERIFY(tmpFile.setPermissions(QFileDevice::Permissions()));
+  QVERIFY(tmpFile.setPermissions(QFileDevice::WriteOwner));
   qDebug() << tmpFile.permissions();
   QVERIFY(!tmpFile.isReadable());
   QUrl u = QUrl::fromLocalFile(tmpFile.fileName());
