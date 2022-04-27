@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<collection type="GCwines" items="1" version="1.6.0">
+<collection type="GCwines" items="1" version="1.7.2">
  <information>
   <maxId>2</maxId>
  </information>
@@ -19,18 +19,13 @@
   volume="750"
   alcohol="12"
   medal="distinction"
-  location=""
-  shelfindex=""
   quantity="1"
   purchasedate="28/08/2010"
   purchaseprice="12.99"
   gift="yes"
-  bottlelabel=""
-  website=""
+  bottlelabel="fb23724a101bd7100cd0360b8ad368bc.jpeg"
   tasted="1"
   rating="6"
-  favourite="0"
-  tags=""
  >
   <comments>comments</comments>
   <serving></serving>

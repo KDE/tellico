@@ -44,6 +44,9 @@ QTEST_GUILESS_MAIN( GCstarTest )
 
 void GCstarTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  // remove the test image directory
+  QDir gcstarImageDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/gcstar/"));
+  gcstarImageDir.removeRecursively();
   Tellico::ImageFactory::init();
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/gcstar2tellico.xsl"));
   // need to register the collection types
@@ -374,6 +377,7 @@ void GCstarTest::testBoardGame() {
 void GCstarTest::testWine() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-wine.gcs"));
   Tellico::Import::GCstarImporter importer(url);
+  importer.setHasRelativeImageLinks(true);
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
@@ -401,9 +405,12 @@ void GCstarTest::testWine() {
   QCOMPARE(entry->field("tasted"), QStringLiteral("true"));
   QVERIFY(!entry->field("description").isEmpty());
   QVERIFY(!entry->field("comments").isEmpty());
+  QVERIFY(!entry->field("label").isEmpty());
 
   Tellico::Export::GCstarExporter exporter(coll);
+  exporter.setOptions(exporter.options() | Tellico::Export::ExportImages);
   exporter.setEntries(coll->entries());
+
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
 
@@ -416,10 +423,7 @@ void GCstarTest::testWine() {
     Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
     QVERIFY(e2);
     foreach(Tellico::Data::FieldPtr f, coll->fields()) {
-      // skip images
-      if(f->type() != Tellico::Data::Field::Image) {
-        QCOMPARE(f->name() + e2->field(f), f->name() + e1->field(f));
-      }
+      QCOMPARE(f->name() + e2->field(f), f->name() + e1->field(f));
     }
   }
 }

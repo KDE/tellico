@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2005-2022 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -266,7 +266,7 @@ void GCstarImporter::readGCstar(const QString& text_) {
   }
 
   if(m_relativeImageLinks) {
-    handler.addStringParam("baseDir", url().adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path().toLocal8Bit());
+    handler.addStringParam("baseDir", url().adjusted(QUrl::RemoveFilename).path().toLocal8Bit());
   }
 
   const QString str = handler.applyStylesheet(text_);
