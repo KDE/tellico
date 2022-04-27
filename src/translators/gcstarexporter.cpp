@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2022 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -37,6 +37,7 @@
 
 #include <QDomDocument>
 #include <QFile>
+#include <QDir>
 #include <QTextStream>
 #include <QStandardPaths>
 #include <QApplication>
@@ -66,37 +67,7 @@ bool GCstarExporter::exec() {
 
   bool success = true;
   if(options() & ExportImages) {
-    const QString imgDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("gcstar/images/");
-    ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString(), false);
-    item.setTotalSteps(entries().count());
-    ProgressItem::Done done(this);
-    const uint stepSize = qMax(1, entries().count()/100);
-    const bool showProgress = options() & ExportProgress;
-
-    uint j = 0;
-    foreach(const Data::EntryPtr& entry, entries()) {
-      foreach(Data::FieldPtr field, entry->collection()->imageFields()) {
-        if(entry->field(field).isEmpty()) {
-          break;
-        }
-
-        const Data::Image& img = ImageFactory::self()->imageById(entry->field(field));
-        if(img.isNull()) {
-          break;
-        }
-
-        QUrl target = QUrl::fromLocalFile(imgDir);
-        target = target.adjusted(QUrl::RemoveFilename);
-        target.setPath(target.path() + img.id());
-//        myDebug() << "Writing" << target.url();
-        success &= FileHandler::writeDataURL(target, img.byteArray(), true /* force */);
-      }
-      if(showProgress && j%stepSize == 0) {
-        item.setProgress(j);
-        qApp->processEvents();
-      }
-      ++j;
-    }
+    writeImages();
   }
   return !text.isEmpty() &&
          FileHandler::writeTextURL(url(), text, options() & ExportUTF8, options() & Export::ExportForce) &&
@@ -139,12 +110,12 @@ QString GCstarExporter::text() {
   delete m_handler;
   m_handler = new XSLTHandler(dom, QFile::encodeName(xsltFile));
   if(!m_handler || !m_handler->isValid()) {
-    myDebug() << "bad handler";
     return QString();
   }
 
   if(options() & ExportImages) {
-    m_handler->addStringParam("imageDir", QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation).toLocal8Bit() + "gcstar/images/");
+    m_handler->addStringParam("imageDir", QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation).toLocal8Bit() + "/gcstar/images/");
+    writeImages();
   }
 
   // now grab the XML
@@ -160,4 +131,41 @@ QString GCstarExporter::text() {
 QWidget* GCstarExporter::widget(QWidget* parent_) {
   Q_UNUSED(parent_);
   return nullptr;
+}
+
+bool GCstarExporter::writeImages() {
+  const QString imgDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/gcstar/images/");
+  QDir dir(imgDir);
+  if(!dir.exists() && !dir.mkpath(QLatin1String("."))) return false;
+
+  ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString(), false);
+  item.setTotalSteps(entries().count());
+  ProgressItem::Done done(this);
+  const uint stepSize = qMax(1, entries().count()/100);
+  const bool showProgress = options() & ExportProgress;
+
+  bool success = true;
+  uint j = 0;
+  foreach(const Data::EntryPtr& entry, entries()) {
+    foreach(Data::FieldPtr field, entry->collection()->imageFields()) {
+      if(entry->field(field).isEmpty()) {
+        break;
+      }
+
+      const Data::Image& img = ImageFactory::self()->imageById(entry->field(field));
+      if(img.isNull()) {
+        break;
+      }
+
+      QUrl target = QUrl::fromLocalFile(imgDir);
+      target.setPath(target.path() + img.id());
+      success &= FileHandler::writeDataURL(target, img.byteArray(), true /* force */);
+    }
+    if(showProgress && j%stepSize == 0) {
+      item.setProgress(j);
+      qApp->processEvents();
+    }
+    ++j;
+  }
+  return success;
 }

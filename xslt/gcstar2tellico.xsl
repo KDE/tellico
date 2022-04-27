@@ -437,21 +437,18 @@
  <tc:location><xsl:value-of select="."/></tc:location>
 </xsl:template>
 
-<xsl:template match="image|boxpic">
- <tc:cover>
-  <xsl:choose>
-   <!-- no.png means no image -->
-   <xsl:when test=". = 'images/no.png'">
-   </xsl:when>
-   <!-- is the image location relative or not? -->
-   <xsl:when test="starts-with(., 'file://') or starts-with(., 'http') or starts-with(., '/')">
-    <xsl:value-of select="."/>
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:value-of select="concat($baseDir,.)"/>
-   </xsl:otherwise>
-  </xsl:choose>
- </tc:cover>
+<xsl:template match="image|boxpic|cover">
+ <xsl:call-template name="image-element">
+  <xsl:with-param name="elem" select="'tc:cover'"/>
+  <xsl:with-param name="value" select="."/>
+ </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="bottlelabel">
+ <xsl:call-template name="image-element">
+  <xsl:with-param name="elem" select="'tc:label'"/>
+  <xsl:with-param name="value" select="."/>
+ </xsl:call-template>
 </xsl:template>
 
 <xsl:template match="web|webPage">
@@ -670,12 +667,18 @@
  <tc:pur_price><xsl:value-of select="."/></tc:pur_price>
 </xsl:template>
 
-<xsl:template match="front">
- <tc:obverse><xsl:value-of select="."/></tc:obverse>
+<xsl:template match="front|picture">
+ <xsl:call-template name="image-element">
+  <xsl:with-param name="elem" select="'tc:obverse'"/>
+  <xsl:with-param name="value" select="."/>
+ </xsl:call-template>
 </xsl:template>
 
 <xsl:template match="back">
- <tc:reverse><xsl:value-of select="."/></tc:reverse>
+ <xsl:call-template name="image-element">
+  <xsl:with-param name="elem" select="'tc:reverse'"/>
+  <xsl:with-param name="value" select="."/>
+ </xsl:call-template>
 </xsl:template>
 
 <xsl:template match="designedby">
@@ -787,10 +790,6 @@
  <tc:distinction><xsl:value-of select="."/></tc:distinction>
 </xsl:template>
 
-<xsl:template match="bottlelabel">
- <tc:label><xsl:value-of select="."/></tc:label>
-</xsl:template>
-
 <xsl:template match="gift">
  <xsl:if test="string-length(.) &gt; 0 and . != 'false' and . != '0'">
   <tc:gift>true</tc:gift>
@@ -807,14 +806,6 @@
  <xsl:if test="string-length(.) &gt; 0 and . != 'false' and . != '0'">
   <tc:signed>true</tc:signed>
  </xsl:if>
-</xsl:template>
-
-<xsl:template match="front">
- <tc:obverse><xsl:value-of select="."/></tc:obverse>
-</xsl:template>
-
-<xsl:template match="back">
- <tc:reverse><xsl:value-of select="."/></tc:reverse>
 </xsl:template>
 
 <xsl:template match="*[starts-with(local-name(), 'gcsfield')]">
@@ -836,6 +827,27 @@
     </xsl:element>
    </xsl:otherwise>
   </xsl:choose>
+ </xsl:template>
+ 
+<xsl:template name="image-element">
+ <xsl:param name="elem"/>
+ <xsl:param name="value"/>
+ <xsl:element name="{$elem}">
+  <xsl:choose>
+   <!-- no.png means no image -->
+   <xsl:when test="$value = 'images/no.png'">
+   </xsl:when>
+   <!-- is the image location relative or not? -->
+   <xsl:when test="starts-with($value, 'file://') or
+                   starts-with($value, 'http') or
+                   starts-with($value, '/')">
+    <xsl:value-of select="$value"/>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:value-of select="concat($baseDir,$value)"/>
+   </xsl:otherwise>
+  </xsl:choose>
+ </xsl:element>
 </xsl:template>
 
 <xsl:template name="substring-before-last">

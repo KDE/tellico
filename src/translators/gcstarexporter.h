@@ -53,6 +53,8 @@ public:
   QString text();
 
 private:
+  bool writeImages();
+
   XSLTHandler* m_handler;
   QString m_xsltFile;
 };

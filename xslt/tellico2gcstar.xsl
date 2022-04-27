@@ -52,7 +52,7 @@
   <a:attribute name="read" format="bool" type="GCbooks">read</a:attribute>
   <a:attribute name="seen" format="bool" type="GCfilms">seen</a:attribute>
   <a:attribute name="favourite" format="bool">favorite</a:attribute>
-  <a:attribute name="label">label</a:attribute>
+  <a:attribute name="label" skip="GCwines">label</a:attribute>
   <a:attribute name="release" type="GCfilms">year</a:attribute>
   <a:attribute name="composer">composer</a:attribute>
   <a:attribute name="producer">producer</a:attribute>
@@ -84,10 +84,13 @@
   <a:attribute name="currency">currency</a:attribute>
   <a:attribute name="diameter">diameter</a:attribute>
   <a:attribute name="value">denomination</a:attribute>
-  <a:attribute name="cover"   format="image" type="GCbooks, GCmusics">cover</a:attribute>
-  <a:attribute name="image"   format="image" type="GCfilms, GCcomics">cover</a:attribute>
-  <a:attribute name="boxpic"  format="image" type="GCgames, GCboardgames">cover</a:attribute>
+  <a:attribute name="cover" format="image" type="GCbooks, GCmusics">cover</a:attribute>
+  <a:attribute name="image" format="image" type="GCfilms, GCcomics">cover</a:attribute>
+  <a:attribute name="boxpic" format="image" type="GCgames, GCboardgames">cover</a:attribute>
   <a:attribute name="picture" format="image" type="GCcoins">obverse</a:attribute>
+  <a:attribute name="front" format="image" type="GCcoins">obverse</a:attribute>
+  <a:attribute name="back" format="image" type="GCcoins">reverse</a:attribute>
+  <a:attribute name="bottlelabel" format="image" type="GCwines">label</a:attribute>
 </a:attributes>
 <xsl:variable name="collType">
  <xsl:choose>
