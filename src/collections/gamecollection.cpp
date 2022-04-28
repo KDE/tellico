@@ -86,15 +86,7 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  QStringList cert = i18nc("Video game ratings - "
-                           "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending",
-                           "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending")
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-                     .split(QRegularExpression(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
-#else
-                     .split(QRegularExpression(QLatin1String("\\s*,\\s*")), Qt::SkipEmptyParts);
-#endif
-  field = new Field(QStringLiteral("certification"), i18n("ESRB Rating"), cert);
+  field = new Field(QStringLiteral("certification"), i18n("ESRB Rating"), esrbRatings());
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
@@ -277,4 +269,38 @@ QString GameCollection::platformName(GamePlatform platform_) {
   }
   myDebug() << "Failed to return platform name for" << platform_;
   return QString();
+}
+
+QStringList GameCollection::esrbRatings() {
+  static const QRegularExpression rx(QLatin1String("\\s*,\\s*"));
+  QStringList cert = i18nc("Video game ratings - "
+                           "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending",
+                           "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending")
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+                     .split(rx), QString::SkipEmptyParts);
+#else
+                     .split(rx, Qt::SkipEmptyParts);
+#endif
+  return cert;
+}
+
+QString GameCollection::esrbRating(EsrbRating rating_) {
+  static const QStringList ratings = esrbRatings();
+  Q_ASSERT(ratings.size() == 8);
+  if(ratings.size() < 8) {
+    myWarning() << "ESRB rating list is badly translated, return empty string";
+    return QString();
+  }
+  switch(rating_) {
+    case Unrated:        return ratings.at(0);
+    case Adults:         return ratings.at(1);
+    case Mature:         return ratings.at(2);
+    case Teen:           return ratings.at(3);
+    case Everyone10:     return ratings.at(4);
+    case Everyone:       return ratings.at(5);
+    case EarlyChildhood: return ratings.at(6);
+    case Pending:        return ratings.at(7);
+    default:
+      return QString();
+  }
 }

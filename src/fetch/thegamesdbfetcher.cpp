@@ -326,11 +326,21 @@ void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   }
 
   const QString esrb = mapValue(resultMap_, "rating")
-                       .section(QLatin1Char('-'), 1, 1)
+                       .section(QLatin1Char('-'), 0, 0)
                        .trimmed(); // value is like "T - Teen"
-  if(!esrb.isEmpty()) {
-    entry_->setField(QStringLiteral("certification"), i18n(esrb.toUtf8().constData()));
+  Data::GameCollection::EsrbRating rating = Data::GameCollection::UnknownEsrb;
+  if(esrb == QLatin1String("U"))         rating = Data::GameCollection::Unrated;
+  else if(esrb == QLatin1String("T"))    rating = Data::GameCollection::Teen;
+  else if(esrb == QLatin1String("E"))    rating = Data::GameCollection::Everyone;
+  else if(esrb == QLatin1String("E10+")) rating = Data::GameCollection::Everyone10;
+  else if(esrb == QLatin1String("EC"))   rating = Data::GameCollection::EarlyChildhood;
+  else if(esrb == QLatin1String("A"))    rating = Data::GameCollection::Adults;
+  else if(esrb == QLatin1String("M"))    rating = Data::GameCollection::Mature;
+  else if(esrb == QLatin1String("RP"))   rating = Data::GameCollection::Pending;
+  if(rating != Data::GameCollection::UnknownEsrb) {
+    entry_->setField(QStringLiteral("certification"), Data::GameCollection::esrbRating(rating));
   }
+
   const QString coverUrl = m_covers.value(mapValue(resultMap_, "id"));
   if(m_imageSize != NoImage) {
     entry_->setField(QStringLiteral("cover"), coverUrl);
