@@ -1,5 +1,6 @@
 2022-04-27  Robby Stephenson  <robby@periapsis.org>
 
+	* Updated ESRB rating for TheGamesDB data source.
 	* Fixed image path for exporting GCstar files (Bug 453075).
 
 2022-04-08  Robby Stephenson  <robby@periapsis.org>

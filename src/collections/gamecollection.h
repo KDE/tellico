@@ -86,6 +86,20 @@ public:
   static QString normalizePlatform(const QString& platformName);
   static GamePlatform guessPlatform(const QString& platformName);
   static QString platformName(GamePlatform platform);
+
+  enum EsrbRating {
+    UnknownEsrb = 0,
+    Unrated,
+    Adults,
+    Mature,
+    Teen,
+    Everyone10,
+    Everyone,
+    EarlyChildhood,
+    Pending
+  };
+  static QStringList esrbRatings();
+  static QString esrbRating(EsrbRating rating);
 };
 
   } // end namespace
