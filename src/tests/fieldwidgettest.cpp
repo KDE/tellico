@@ -50,11 +50,13 @@
 #include <QComboBox>
 #include <QTableWidget>
 #include <QSignalSpy>
+#include <QStandardPaths>
 
 // needs a GUI
 QTEST_MAIN( FieldWidgetTest )
 
 void FieldWidgetTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::ImageFactory::init();
 }
