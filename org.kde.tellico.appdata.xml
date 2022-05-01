@@ -390,7 +390,7 @@
       <li>Imports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formats</li>
       <li xml:lang="bs">Uvozi iz MODS, Bibtex, RIS, CSV, PDF metapodatke, i mnogih drugih formata</li>
       <li xml:lang="ca">Importa MODS, Bibtex, RIS, CSV, metadades de PDF, i molts altres formats</li>
-      <li xml:lang="ca-valencia">Importa MODS, Bibtex, RIS, CSV, metadades de PDF, i molts altres formats</li>
+      <li xml:lang="ca-valencia">Importa MODS, Bibtex, RIS, CSV, metadades de PDF, i molts atres formats</li>
       <li xml:lang="da">Importerer MODS, Bibtex, RIS, CSV, PDF-metadata og mange andre formater</li>
       <li xml:lang="de">Import von MODS-, Bibtex-, RIS-, CSV-, PDF-Metadaten und vielen anderen Formaten</li>
       <li xml:lang="el">Εισάγει μεταδεδομένα από MODS, Bibtex, RIS, CSV, PDF και πολλούς άλλους τύπους αποθήκευσης</li>
@@ -420,7 +420,7 @@
       <li xml:lang="x-test">xxImports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formatsxx</li>
       <li>Exports to Bibtex, ONIX, CSV, HTML, and other formats</li>
       <li xml:lang="ca">Exporta a Bibtex, ONIX, CSV, HTML i altres formats</li>
-      <li xml:lang="ca-valencia">Exporta a Bibtex, ONIX, CSV, HTML i altres formats</li>
+      <li xml:lang="ca-valencia">Exporta a Bibtex, ONIX, CSV, HTML i atres formats</li>
       <li xml:lang="da">Eksporterer til Bibtex, ONIX, CSV, HTML og andre formater</li>
       <li xml:lang="de">Export zu Bibtex, ONIX, CSV, HTML, und andere Formate</li>
       <li xml:lang="el">Εξάγει σε Bibtex, ONIX, CSV, HTML και άλλους τύπους αποθήκευσης</li>
@@ -451,7 +451,7 @@
       <li>Imports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scripts</li>
       <li xml:lang="bs">Uvozi informacije direktno sa Amazon.com, IMDb, z39.50 servera, PubMed, SRU servera, CrossRef.org, različitih drugih web stranica, i iz vanjskih skripti</li>
       <li xml:lang="ca">Importa informació directament des d'Amazon.com, IMDb, servidors z39.50, PubMed, servidors SRU, CrossRef.org, altres llocs web, i des de scripts externs</li>
-      <li xml:lang="ca-valencia">Importa informació directament des d'Amazon.com, IMDb, servidors z39.50, PubMed, servidors SRU, CrossRef.org, altres llocs web, i des de scripts externs</li>
+      <li xml:lang="ca-valencia">Importa informació directament des d'Amazon.com, IMDb, servidors z39.50, PubMed, servidors SRU, CrossRef.org, atres llocs web, i des de scripts externs</li>
       <li xml:lang="da">Importerer information direkte fra Amazon.com, IMDb, z39.50 servers, PubMed, SRU-servere, CrossRef.org, diverse andre websider og fra eksterne scripts</li>
       <li xml:lang="de">Importiert Informationen direkt von Amazon.com, IMDb, z39.50-Servern, PubMed, SRU-Servern, CrossRef.org, verschiedenen anderen Webseiten und von externen Skripten</li>
       <li xml:lang="el">Εισάγει πληροφορίες απευθείας από Amazon.com, IMDb, z39.50 διακομιστές, PubMed, SRU εξυπηρετητές, CrossRef.org, πολλούς άλλους ιστοτόπους και από εξωτερικά σενάρια</li>
@@ -613,7 +613,7 @@
     <screenshot width="1396" height="883">
       <caption>The main window showing side-by-side views of a game collection</caption>
       <caption xml:lang="ca">La finestra principal mostra les vistes, una al costat de l'altra, d'una col·lecció de jocs</caption>
-      <caption xml:lang="ca-valencia">La finestra principal mostra les vistes, una al costat de l'altra, d'una col·lecció de jocs</caption>
+      <caption xml:lang="ca-valencia">La finestra principal mostra les vistes, una al costat de l'atra, d'una col·lecció de jocs</caption>
       <caption xml:lang="cs">Hlavní okno zobrazující vedle sebe sbírku her</caption>
       <caption xml:lang="da">Hovedvinduet som viser side-om-side-visninger af en spilsamling</caption>
       <caption xml:lang="de">Das Hauptfenster mit einer zweispaltigen Ansicht einer Spiele-Sammlung</caption>
