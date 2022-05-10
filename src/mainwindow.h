@@ -484,6 +484,7 @@ private:
   QAction* m_checkOutEntry;
   KToggleAction* m_toggleEntryEditor;
   KDualAction* m_lockLayout;
+  KActionMenu* m_newCollectionMenu;
 
   KSelectAction* m_entryGrouping;
   GUI::LineEdit* m_quickFilter;

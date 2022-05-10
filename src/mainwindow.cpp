@@ -73,6 +73,7 @@
 #include "gui/dockwidget.h"
 #include "utils/cursorsaver.h"
 #include "utils/guiproxy.h"
+#include "utils/tellico_utils.h"
 #include "tellico_debug.h"
 
 #include <KComboBox>
@@ -250,15 +251,15 @@ void MainWindow::initActions() {
   connect(collectionMapper, &QSignalMapper::mappedInt, this, &MainWindow::slotFileNew);
 #endif
 
-  KActionMenu* fileNewMenu = new KActionMenu(i18n("New Collection"), this);
-  fileNewMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
-  fileNewMenu->setToolTip(i18n("Create a new collection"));
+  m_newCollectionMenu = new KActionMenu(i18n("New Collection"), this);
+  m_newCollectionMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
+  m_newCollectionMenu->setToolTip(i18n("Create a new collection"));
 #if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,77,0)
-  fileNewMenu->setPopupMode(QToolButton::InstantPopup);
+  m_newCollectionMenu->setPopupMode(QToolButton::InstantPopup);
 #else
-  fileNewMenu->setDelayed(false);
+  m_newCollectionMenu->setDelayed(false);
 #endif
-  actionCollection()->addAction(QStringLiteral("file_new_collection"), fileNewMenu);
+  actionCollection()->addAction(QStringLiteral("file_new_collection"), m_newCollectionMenu);
 
   QAction* action;
 
@@ -268,7 +269,7 @@ void MainWindow::initActions() {
   action->setText(TEXT); \
   action->setToolTip(TIP); \
   action->setIcon(QIcon(QStringLiteral(":/icons/" ICON))); \
-  fileNewMenu->addAction(action); \
+  m_newCollectionMenu->addAction(action); \
   collectionMapper->setMapping(action, Data::Collection::TYPE);
 
   COLL_ACTION(Book, "new_book_collection", i18n("New &Book Collection"),
@@ -311,7 +312,7 @@ void MainWindow::initActions() {
   action->setText(i18n("New C&ustom Collection"));
   action->setToolTip(i18n("Create a new custom collection"));
   action->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
-  fileNewMenu->addAction(action);
+  m_newCollectionMenu->addAction(action);
   collectionMapper->setMapping(action, Data::Collection::Base);
 
 #undef COLL_ACTION
@@ -2260,7 +2261,8 @@ void MainWindow::updateCollectionActions() {
 }
 
 void MainWindow::updateEntrySources() {
-  unplugActionList(QStringLiteral("update_entry_actions"));
+  const QString actionListName = QStringLiteral("update_entry_actions");
+  unplugActionList(actionListName);
   foreach(QAction* action, m_fetchActions) {
     foreach(QWidget* widget, action->associatedWidgets()) {
       widget->removeAction(action);
@@ -2270,18 +2272,18 @@ void MainWindow::updateEntrySources() {
   qDeleteAll(m_fetchActions);
   m_fetchActions.clear();
 
+  void (QAction::* triggeredBool)(bool) = &QAction::triggered;
+  void (QSignalMapper::* mapVoid)() = &QSignalMapper::map;
   Fetch::FetcherVec vec = Fetch::Manager::self()->fetchers(Kernel::self()->collectionType());
   foreach(Fetch::Fetcher::Ptr fetcher, vec) {
     QAction* action = new QAction(Fetch::Manager::fetcherIcon(fetcher.data()), fetcher->source(), actionCollection());
     action->setToolTip(i18n("Update entry data from %1", fetcher->source()));
-    void (QAction::* triggeredBool)(bool) = &QAction::triggered;
-    void (QSignalMapper::* mapVoid)() = &QSignalMapper::map;
     connect(action, triggeredBool, m_updateMapper, mapVoid);
     m_updateMapper->setMapping(action, fetcher->source());
     m_fetchActions.append(action);
   }
 
-  plugActionList(QStringLiteral("update_entry_actions"), m_fetchActions);
+  plugActionList(actionListName, m_fetchActions);
 }
 
 void MainWindow::importFile(Tellico::Import::Format format_, const QList<QUrl>& urls_) {
