@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2015-2022 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2022 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,20 +22,50 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef DOCUMENTTEST_H
-#define DOCUMENTTEST_H
+#include "collectiontemplatedialog.h"
+#include "ui_collectiontemplatedialog.h"
 
-#include <QObject>
+#include <KLocalizedString>
+#include <KIconButton>
 
-class DocumentTest : public QObject {
-Q_OBJECT
+using Tellico::CollectionTemplateDialog;
 
-private Q_SLOTS:
-  void initTestCase();
-  void cleanupTestCase();
+class CollectionTemplateDialog::Private {
+public:
+  Private(CollectionTemplateDialog* parent) : q(parent) { }
+  void init();
 
-  void testImageLocalDirectory();
-  void testSaveTemplate();
+  CollectionTemplateDialog* const q;
+  QString templateName;
+  Ui::CollectionTemplateDialog ui;
 };
 
-#endif
+void CollectionTemplateDialog::Private::init() {
+  ui.setupUi(q);
+}
+
+CollectionTemplateDialog::CollectionTemplateDialog(QWidget* parent_)
+    : QDialog(parent_)
+    , d(new Private(this)) {
+  d->init();
+  d->ui.labelName->setText(i18n("Template Name:"));
+  d->ui.labelComment->setText(i18n("Comment:"));
+  d->ui.labelIcon->setText(i18n("Icon:"));
+  d->ui.editIcon->setIconSize(KIconLoader::SizeMedium);
+  d->ui.editIcon->setIconType(KIconLoader::NoGroup, KIconLoader::Any);
+  setWindowTitle(i18n("Save As Collection Template"));
+}
+
+CollectionTemplateDialog::~CollectionTemplateDialog() = default;
+
+QString CollectionTemplateDialog::templateName() const {
+  return d->ui.editName->text().trimmed();
+}
+
+QString CollectionTemplateDialog::templateComment() const {
+  return d->ui.editComment->text().trimmed();
+}
+
+QString CollectionTemplateDialog::templateIcon() const {
+  return d->ui.editIcon->icon();
+}

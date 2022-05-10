@@ -254,6 +254,23 @@ bool Document::saveDocument(const QUrl& url_, bool force_) {
   return success;
 }
 
+bool Document::saveDocumentTemplate(const QUrl& url_, const QString& title_) {
+  Data::CollPtr collTemplate = CollectionFactory::collection(m_coll->type(), false /* no default fields */);
+  collTemplate->setTitle(title_);
+  // add the fields from the current collection
+  foreach(auto field, m_coll->fields()) {
+    collTemplate->addField(field);
+  }
+  foreach(auto filter, m_coll->filters()) {
+    collTemplate->addFilter(filter);
+  }
+  QScopedPointer<Export::Exporter> exporter(new Export::TellicoXMLExporter(collTemplate));
+  exporter->setURL(url_);
+  // since we already asked about overwriting the file, force the save
+  exporter->setOptions(exporter->options() | Export::ExportForce | Export::ExportComplete);
+  return exporter->exec();
+}
+
 bool Document::closeDocument() {
   if(m_importer) {
     m_importer->deleteLater();

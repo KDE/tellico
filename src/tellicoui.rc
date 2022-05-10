@@ -1,10 +1,10 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="42" name="tellico">
+<kpartgui version="43" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
-   <Menu append="new_merge" name="file_new_collection" >
+   <Menu append="new_merge" name="file_new_collection">
     <text>&amp;New Collection</text>
     <Action name="new_book_collection"/>
     <Action name="new_bibtex_collection"/>
@@ -19,7 +19,10 @@
     <Action name="new_boardgame_collection"/>
     <Action name="new_file_catalog"/>
     <Action name="new_custom_collection"/>
+    <Separator/>
+    <ActionList name="collection_template_list"/>
    </Menu>
+   <Action name="file_save_template" append="save_merge"/>
    <Menu name="file_import">
     <text context="@title:menu">&amp;Import</text>
     <Action name="file_import_tellico"/>

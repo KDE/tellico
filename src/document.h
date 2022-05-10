@@ -104,6 +104,7 @@ public:
    * @return A boolean indicating success
    */
   bool saveDocument(const QUrl& url, bool force = false);
+  bool saveDocumentTemplate(const QUrl& url, const QString& collTitle);
   /**
    * Closes the document, deleting the contents. The return value is presently always true.
    *

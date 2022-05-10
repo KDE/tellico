@@ -1,3 +1,7 @@
+2022-05-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Added capability to save empty collection as new template (Bug 450043).
+
 2022-04-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated ESRB rating for TheGamesDB data source.

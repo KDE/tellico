@@ -150,6 +150,7 @@ public Q_SLOTS:
    * @param type Type of collection to add
    */
   void slotFileNew(int type);
+  void slotFileNewByTemplate(const QString& collectionTemplate);
   /**
    * Opens a file and loads it into the document
    */
@@ -174,6 +175,7 @@ public Q_SLOTS:
    * Saves a document by a new filename
    */
   void slotFileSaveAs();
+  void slotFileSaveAsTemplate();
   /**
    * Prints the current document.
    */

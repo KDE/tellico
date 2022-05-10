@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2015-2022 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2022 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,20 +22,33 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef DOCUMENTTEST_H
-#define DOCUMENTTEST_H
+#ifndef TELLICO_COLLECTIONTEMPLATEDIALOG_H
+#define TELLICO_COLLECTIONTEMPLATEDIALOG_H
 
-#include <QObject>
+#include <QDialog>
 
-class DocumentTest : public QObject {
+#include <memory>
+
+namespace Tellico {
+
+/**
+ * @author Robby Stephenson
+ */
+class CollectionTemplateDialog : public QDialog {
 Q_OBJECT
 
-private Q_SLOTS:
-  void initTestCase();
-  void cleanupTestCase();
+public:
+  explicit CollectionTemplateDialog(QWidget* parent = nullptr);
+  ~CollectionTemplateDialog();
 
-  void testImageLocalDirectory();
-  void testSaveTemplate();
+  QString templateName() const;
+  QString templateComment() const;
+  QString templateIcon() const;
+
+private:
+  class Private;
+  std::unique_ptr<Private> const d;
 };
 
+} // end namespace
 #endif

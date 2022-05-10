@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2015 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2015-2022 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -34,6 +34,7 @@
 
 #include <QTest>
 #include <QTemporaryDir>
+#include <QTemporaryFile>
 #include <QFile>
 #include <QStandardPaths>
 
@@ -140,4 +141,41 @@ void DocumentTest::testImageLocalDirectory() {
   // sanity check, the directory should not exists after QTemporaryDir destruction
   tempDir.remove();
   QVERIFY(!QDir(tempDirName).exists());
+}
+
+void DocumentTest::testSaveTemplate() {
+  auto doc = Tellico::Data::Document::self();
+  QVERIFY(doc);
+  QVERIFY(doc->newDocument(Tellico::Data::Collection::Book));
+  auto coll = doc->collection();
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry1);
+  entry1->setField(QStringLiteral("title"), QStringLiteral("new title"));
+  // modify a field too, to check that the template saves the modified field
+  auto field = coll->fieldByName(QStringLiteral("publisher"));
+  field->setTitle(QStringLiteral("batman"));
+
+  Tellico::FilterRule* rule1 = new Tellico::FilterRule(QStringLiteral("title"),
+                                                       QStringLiteral("Star Wars"),
+                                                       Tellico::FilterRule::FuncEquals);
+  Tellico::FilterPtr filter(new Tellico::Filter(Tellico::Filter::MatchAny));
+  filter->append(rule1);
+  coll->addFilter(filter);
+
+  QString templateName(QStringLiteral("my new template"));
+  QTemporaryFile templateFile(QStringLiteral("documenttest-template.XXXXXX.xml"));
+  QVERIFY(templateFile.open());
+  QUrl templateUrl = QUrl::fromLocalFile(templateFile.fileName());
+  QVERIFY(doc->saveDocumentTemplate(templateUrl, templateName));
+
+  QVERIFY(doc->openDocument(templateUrl));
+  auto new_coll = doc->collection();
+  QVERIFY(new_coll);
+  QCOMPARE(new_coll->title(), templateName);
+  QCOMPARE(new_coll->entryCount(), 0);
+
+  auto new_field = new_coll->fieldByName(QStringLiteral("publisher"));
+  QCOMPARE(new_field->title(), QStringLiteral("batman"));
+
+  QCOMPARE(new_coll->filters().count(), 1);
 }

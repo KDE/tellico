@@ -71,6 +71,7 @@
 #include "gui/statusbar.h"
 #include "gui/tabwidget.h"
 #include "gui/dockwidget.h"
+#include "gui/collectiontemplatedialog.h"
 #include "utils/cursorsaver.h"
 #include "utils/guiproxy.h"
 #include "utils/tellico_utils.h"
@@ -328,6 +329,13 @@ void MainWindow::initActions() {
   m_fileSave->setToolTip(i18n("Save the document"));
   action = KStandardAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
   action->setToolTip(i18n("Save the document as a different file..."));
+
+  action = actionCollection()->addAction(QStringLiteral("file_save_template"),
+                                         this, SLOT(slotFileSaveAsTemplate()));
+  action->setText(i18n("Save As Template..."));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("document-save-as-template")));
+  action->setToolTip(i18n("Save as a collection template"));
+
   action = KStandardAction::print(this, SLOT(slotFilePrint()), actionCollection());
   action->setToolTip(i18n("Print the contents of the collection..."));
 #ifdef USE_KHTML
@@ -1211,6 +1219,26 @@ void MainWindow::slotFileNew(int type_) {
   StatusBar::self()->clearStatus();
 }
 
+void MainWindow::slotFileNewByTemplate(const QString& collectionTemplate_) {
+  slotStatusMsg(i18n("Creating new collection..."));
+
+  // close the fields dialog
+  slotHideCollectionFieldsDialog();
+
+  if(m_editDialog->queryModified() && querySaveModified()) {
+    openURL(QUrl::fromLocalFile(collectionTemplate_));
+    Data::Document::self()->setURL(QUrl::fromLocalFile(i18n(Tellico::untitledFilename)));
+    Kernel::self()->resetHistory();
+    m_fileOpenRecent->setCurrentItem(-1);
+    slotEnableOpenedActions();
+    slotEnableModifiedActions(false);
+    m_newDocument = true;
+    ImageFactory::clean(false);
+  }
+
+  StatusBar::self()->clearStatus();
+}
+
 void MainWindow::slotFileOpen() {
   slotStatusMsg(i18n("Opening file..."));
 
@@ -1425,6 +1453,30 @@ bool MainWindow::fileSaveAs() {
 
   StatusBar::self()->clearStatus();
   return ret;
+}
+
+void MainWindow::slotFileSaveAsTemplate() {
+  QScopedPointer<CollectionTemplateDialog> dlg(new CollectionTemplateDialog(this));
+  if(dlg->exec() != QDialog::Accepted) {
+    return;
+  }
+
+  const QString templateName = dlg->templateName();
+  if(templateName.isEmpty()) {
+    return;
+  }
+  const QString baseName = Tellico::saveLocation(QStringLiteral("collection-templates/")) + templateName;
+
+  // first, save the collection template, which copies the collection fields and filters, but nothing else
+  const QString collFile = baseName + QLatin1String(".tc");
+  Data::Document::self()->saveDocumentTemplate(QUrl::fromLocalFile(collFile), templateName);
+
+  // next, save the template descriptions in a config file
+  const QString specFile = baseName + QLatin1String(".spec");
+  auto spec = KSharedConfig::openConfig(specFile, KConfig::SimpleConfig)->group(QString());
+  spec.writeEntry("Name", templateName);
+  spec.writeEntry("Comment", dlg->templateComment());
+  spec.writeEntry("Icon", dlg->templateIcon());
 }
 
 void MainWindow::slotFilePrint() {
@@ -2429,4 +2481,44 @@ void MainWindow::guiFactoryReset() {
   guiFactory()->removeClient(this);
   guiFactory()->reset();
   guiFactory()->addClient(this);
+
+  // set up custom actions for collection templates, have to do this AFTER createGUI() or factory() reset
+  const QString actionListName = QStringLiteral("collection_template_list");
+  unplugActionList(actionListName);
+  QSignalMapper* collectionTemplateMapper = new QSignalMapper(this);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+  void (QSignalMapper::* mappedString)(QString) = &QSignalMapper::mapped;
+  connect(collectionTemplateMapper, mappedString, this, &MainWindow::slotFileNewByTemplate);
+#else
+  connect(collectionTemplateMapper, &QSignalMapper::mappedString, this, &MainWindow::slotFileNewByTemplate);
+#endif
+
+  void (QAction::* triggeredBool)(bool) = &QAction::triggered;
+  void (QSignalMapper::* mapVoid)() = &QSignalMapper::map;
+  QList<QAction*> coll_actions;
+  const QStringList customCollections = Tellico::locateAllFiles(QStringLiteral("tellico/collection-templates/*.tc"));
+  if(!customCollections.isEmpty()) {
+    m_newCollectionMenu->addSeparator();
+  }
+  foreach(const QString& collectionFile, customCollections) {
+    QFileInfo info(collectionFile);
+    auto action = new QAction(info.completeBaseName(), actionCollection());
+    connect(action, triggeredBool, collectionTemplateMapper, mapVoid);
+    const QString specFile = info.canonicalPath() + QDir::separator() + info.completeBaseName() + QLatin1String(".spec");
+    if(QFileInfo::exists(specFile)) {
+      KConfig config(specFile, KConfig::SimpleConfig);
+      const KConfigGroup cg = config.group(QString());
+      action->setText(cg.readEntry("Name", info.completeBaseName()));
+      action->setToolTip(cg.readEntry("Comment"));
+      action->setIcon(QIcon::fromTheme(cg.readEntry("Icon"), QIcon::fromTheme(QStringLiteral("document-new"))));
+    } else {
+      myDebug() << "No spec file for" << info.completeBaseName();
+      action->setText(info.completeBaseName());
+      action->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
+    }
+    collectionTemplateMapper->setMapping(action, collectionFile);
+    coll_actions.append(action);
+    m_newCollectionMenu->addAction(action);
+  }
+  plugActionList(actionListName, coll_actions);
 }
