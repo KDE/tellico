@@ -26,8 +26,6 @@
 #include "tellicoxmlreader.h"
 #include "tellico_xml.h"
 #include "../collectionfactory.h"
-#include "../entry.h"
-#include "../field.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../utils/isbnvalidator.h"
