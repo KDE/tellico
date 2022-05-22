@@ -125,7 +125,9 @@ void GoogleBookFetcher::doSearch(const QString& term_) {
       break;
 
     case Person:
-      q.addQueryItem(QStringLiteral("q"), QLatin1String("inauthor:") + term_);
+      // for people, go ahead and enclose in quotes
+      // risk of missing middle initials, etc. balanced by google splitting front and last name
+      q.addQueryItem(QStringLiteral("q"), QLatin1String("inauthor:\"") + term_ + QLatin1Char('"'));
       break;
 
     case ISBN:
