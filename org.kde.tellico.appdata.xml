@@ -142,7 +142,7 @@
       <li>Supports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogs</li>
       <li xml:lang="bs">Podržava početne kolekcije knjiga, bibliografskih ulaza, videa, muzike, video igrica, stripova, kovanica, markica, kartica za razmjenu, vina, društvenih igara i datotečnih kataloga.</li>
       <li xml:lang="ca">Funciona amb col·leccions per defecte de catàlegs de llibres, entrades de bibliografia, vídeos, música, videojocs, còmics, monedes, segells, cromos, vins, jocs de taula i fitxers</li>
-      <li xml:lang="ca-valencia">Funciona amb coleccions per defecte de catàlegs de llibres, entrades de bibliografia, vídeos, música, videojocs, còmics, monedes, segells, cromos, vins, jocs de taula i fichers</li>
+      <li xml:lang="ca-valencia">Funciona amb coleccions per defecte de catàlegs de llibres, entrades de bibliografia, vídeos, música, videojocs, còmics, monedes, segells, cromos, vins, jocs de taula i fitxers</li>
       <li xml:lang="da">Understøtter standardsamlinger til bøger, bibliografier, video, musik, computerspil, mønter, frimærker, byttekort, tegneserier, vine, brætspil og filkataloger</li>
       <li xml:lang="de">Unterstützt Standardsammlungen für Bücher, Literaturverzeichnisse, Videos, Musik, Videospiele, Comicbücher, Münzen, Briefmarken, Karten, Wein, Brettspiele und Dateikataloge</li>
       <li xml:lang="el">Υποστηρίζει προκαθορισμένες συλλογές από βιβλίά, βιβλιογραφικώές εγγραφές, βίντεο, μουσική, βιντεοπαιχνίδια. βιβλία κόμικ, νομίσματα, γραμματόσημα, εμπορικές κάρτες, οίνους, επιτραπέζια παιχνίδια και καταλόγους αρχείων</li>
@@ -513,7 +513,7 @@
       <li>Scans and imports audio file collections, such as mp3 or ogg</li>
       <li xml:lang="bs">Pretražuje i uvozi kolekcije muzičkih datoteka kao što su mp3 ili ogg</li>
       <li xml:lang="ca">Explora i importa col·leccions de fitxers d'àudio, com MP3 o OGG</li>
-      <li xml:lang="ca-valencia">Explora i importa coleccions de fichers d'àudio, com MP3 o OGG</li>
+      <li xml:lang="ca-valencia">Explora i importa coleccions de fitxers d'àudio, com MP3 o OGG</li>
       <li xml:lang="da">Scanner og importerer lydfilsamlinger såsom mp3 eller ogg</li>
       <li xml:lang="de">Durchsucht und importiert Sammlungen von Audio-Dateien wie zum Beispiel mp3 oder ogg</li>
       <li xml:lang="el">Σαρώνει και εισάγει συλλογές αρχείων ήχου, όπως mp3 ή ogg</li>
