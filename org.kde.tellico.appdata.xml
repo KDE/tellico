@@ -102,7 +102,7 @@
     <p xml:lang="sk">Tellico je aplikácia na organizáciu vašich zbierok. Poskytuje predvolené šablóny pre knihy, bibliografie, videá, hudbu, videohry, mince, známky, zberateľské karty, komiksy a vína. Umožní vám zadať vašu kolekciu do databázy katalógu, uložiť mnoho rozličných vlastností ako titul, autor atď.</p>
     <p xml:lang="sl">Tellico je program za upravljanje vaših zbirk. Ponuja privzete predloge za knjige, bibliografije, videe, glasbo, igre, kovance, znamke, karte, stripe in vino. Omogoča vam, da vašo zbirko katalogizirate in shranite z različnimi lastnostmi kot so naslov, avtor, itd.</p>
     <p xml:lang="sv">Tellico är ett program för att organisera samlingar. Det tillhandahåller standardmallar för böcker, bibliografier, videor, musik, videospel, mynt, frimärken, samlarbilder, serier och viner. Det låter dig mata in samlingen i en katalogdatabas, och spara många olika egenskaper som titel, författare, etc.</p>
-    <p xml:lang="tr">Tellico koleksiyonlarınızı yönetmek için bir programdır. Kitaplar, kaynakçalar, videolar, müzikler, video oyunları, paralar, pullar, kartlar, çizgi romanlar ve şaraplar için öntanımlı şablonlar içerir. Koleksiyonunuzu bir katalog veritabanına girmenize ve başlık, yazar gibi pek çok özelliğe göre kaydetmenize imkan tanır.</p>
+    <p xml:lang="tr">Tellico koleksiyonlarınızı yönetmek için bir programdır. Kitaplar, kaynakçalar, videolar, müzikler, video oyunları, paralar, pullar, kartlar, çizgi romanlar ve şaraplar için öntanımlı şablonlar içerir. Koleksiyonunuzu bir katalog veritabanına girmenize ve başlık, yazar gibi pek çok özelliğe göre kaydetmenize olanak tanır.</p>
     <p xml:lang="uk">Tellico — програма для упорядковування ваших збірок. У ній передбачено типові шаблони для збірок книг, бібліографій, відео, музичних творів, відеоігор, нумізматики, марок, карток, коміксів та вин. За її допомогою ви зможете вести записи у форматі бази даних, зберігаючи різноманітні дані щодо елементів збірки, зокрема дані щодо назви, автора тощо.</p>
     <p xml:lang="x-test">xxTellico is an application for organizing your collections. It provides default templates for books, bibliographies, videos, music, video games, coins, stamps, trading cards, comic books, and wines. It allows you to enter your collection in a catalogue database, saving many different properties like title, author, etc.xx</p>
     <p>Features:</p>
@@ -134,7 +134,7 @@
     <p xml:lang="sk">Funkcie:</p>
     <p xml:lang="sl">Zmožnosti:</p>
     <p xml:lang="sv">Funktioner:</p>
-    <p xml:lang="tr">Özellikleri:</p>
+    <p xml:lang="tr">Özellikler:</p>
     <p xml:lang="uk">Можливості:</p>
     <p xml:lang="x-test">xxFeatures:xx</p>
     <p xml:lang="zh-CN">功能：</p>
@@ -229,7 +229,7 @@
       <li xml:lang="sk">Podporuje ľubovoľný počet používateľom definovaných polí rôznych typov: text, odstavec, zoznam, checkbox, číslo, URL, dátum, obrázky a kombinácie</li>
       <li xml:lang="sl">Podpira poljubno število uporabniško določenih polj različnih vrst: besedilo, odstavek, seznam, označno polje, številka, naslov URL, datum, slike in njihove poljubne kombinacije</li>
       <li xml:lang="sv">Stöder hur många användardefinierade fält som helst av flera olika typer: text, stycke, lista, kryssruta, tal, webbadress, datum, bilder och kombinationer</li>
-      <li xml:lang="tr">Çok farklı türlerde kullanıcı tanımlı alanları destekler: metin, paragraf, liste, işaret kutusu, sayı, URL, tarih, resim ve bunların bileşimleri</li>
+      <li xml:lang="tr">Çok farklı türlerde kullanıcı tanımlı alanları destekler: metin, paragraf, liste, işaret kutusu, sayı, URL, tarih, görseller ve bunların bileşimleri</li>
       <li xml:lang="uk">Підтримка довільної кількості визначених користувачем полів записів: текст, абзац, список, поле для позначки, номер, адреса, дата, зображення та будь-які інші комбінації.</li>
       <li xml:lang="x-test">xxSupports any number of user-defined fields, of several different types: text, paragraph, list, checkbox, number, URL, date, images, and combinationsxx</li>
       <li>Handles entries with multiple authors, genres, keywords, etc</li>
@@ -260,7 +260,7 @@
       <li xml:lang="sk">Spracúva položky s viacerými autormi, žánrami, kľúčovými slovami atď.</li>
       <li xml:lang="sl">Zna ravnati z vnosi z več avtorji, zvrstmi, ključnimi besedami, itd.</li>
       <li xml:lang="sv">Hanterar poster med flera författare, genrer, nyckelord, etc.</li>
-      <li xml:lang="tr">Birden çok yazarı, türü ve anahtar kelimeyi işleyebilir</li>
+      <li xml:lang="tr">Birden çok yazarı, türü ve anahtar sözcüğü işleyebilir</li>
       <li xml:lang="uk">Обробка записів з декількома авторами, жанрами, ключовими словами тощо.</li>
       <li xml:lang="x-test">xxHandles entries with multiple authors, genres, keywords, etcxx</li>
       <li>Automatically formats titles and names</li>
@@ -291,7 +291,7 @@
       <li xml:lang="sk">Automaticky formátuje tituly a názvy</li>
       <li xml:lang="sl">Samodejno oblikuje naslove in imena</li>
       <li xml:lang="sv">Formaterar automatiskt titlar och namn</li>
-      <li xml:lang="tr">Başlık ve isimleri otomatik biçimlendirir</li>
+      <li xml:lang="tr">Başlık ve adları otomatik biçimlendirir</li>
       <li xml:lang="uk">Автоматичне форматування заголовків та назв.</li>
       <li xml:lang="x-test">xxAutomatically formats titles and namesxx</li>
       <li>Supports collection searching and view filtering</li>
@@ -322,7 +322,7 @@
       <li xml:lang="sk">Podporuje hľadanie kolekcií a filtrovanie zobrazenia</li>
       <li xml:lang="sl">Podpira iskanje po zbirkah in filtriranje prikaza</li>
       <li xml:lang="sv">Stöder sökning i samlingen och filtrering av visningen</li>
-      <li xml:lang="tr">Koleksiyon araması ve filtreleyerek görüntülemeyi destekler</li>
+      <li xml:lang="tr">Koleksiyon araması ve süzerek görüntülemeyi destekler</li>
       <li xml:lang="uk">Підтримка пошуку у збірці та фільтрування даних для перегляду.</li>
       <li xml:lang="x-test">xxSupports collection searching and view filteringxx</li>
       <li>Sorts and groups collection by various properties</li>
@@ -576,6 +576,7 @@
       <caption xml:lang="sk">Hlavné okno zobrazujúce kolekciu filmov</caption>
       <caption xml:lang="sl">Glavno okno, ki prikazuje zbirko filmov</caption>
       <caption xml:lang="sv">Huvudfönstret som visar en filmsamling</caption>
+      <caption xml:lang="tr">Bir film koleksiyonunu gösteren ana pencere</caption>
       <caption xml:lang="uk">Головне вікно програми зі збіркою фільмів</caption>
       <caption xml:lang="x-test">xxThe main window showing a movie collectionxx</caption>
       <image>https://cdn.kde.org/screenshots/tellico/tellico-movies.png</image>
@@ -608,6 +609,7 @@
       <caption xml:lang="sk">Hlavné okno zobrazujúce jednoduchú položku v kolekcii kníh</caption>
       <caption xml:lang="sl">Glavno okno, ki prikazuje preprost predmet v knjižni zbirki</caption>
       <caption xml:lang="sv">Huvudfönstret som visar ett enkelt objekt i en boksamling</caption>
+      <caption xml:lang="tr">Bir kitap koleksiyonundaki tek bir ögeyi gösteren ana pencere</caption>
       <caption xml:lang="uk">Головне вікно програми із простим записом у збірці книжок</caption>
       <caption xml:lang="x-test">xxThe main window showing a simple item in a book collectionxx</caption>
       <image>https://cdn.kde.org/screenshots/tellico/tellico.png</image>
@@ -641,6 +643,7 @@
       <caption xml:lang="sk">Hlavné okno zobrazujúce pohľady vedľa seba kolekcie hier</caption>
       <caption xml:lang="sl">Glavno okno, ki prikazuje dva vzporedna pogleda zbirke iger</caption>
       <caption xml:lang="sv">Huvudfönstret som visar en spelsamling med visning sida vid sida</caption>
+      <caption xml:lang="tr">Bir oyun koleksiyonunun yan yana görünümlerini gösteren ana pencere</caption>
       <caption xml:lang="uk">Головне вікно програми із панелями паралельного перегляду збірки ігор</caption>
       <caption xml:lang="x-test">xxThe main window showing side-by-side views of a game collectionxx</caption>
       <image>https://cdn.kde.org/screenshots/tellico/tellico-games.png</image>
