@@ -81,7 +81,6 @@ public:
 
   struct LangData {
     QString siteTitle;
-    QString siteHost;
     QString title_popular;
     QString match_exact;
     QString match_partial;
@@ -136,6 +135,7 @@ private:
   static QRegExp* s_titleRx;
   static int s_instanceCount;
 
+  void doJson(const QString& s, Data::EntryPtr e);
   void doTitle(const QString& s, Data::EntryPtr e);
   void doRunningTime(const QString& s, Data::EntryPtr e);
   void doAspectRatio(const QString& s, Data::EntryPtr e);
@@ -154,6 +154,7 @@ private:
   void parseMultipleTitleResults();
   void parseTitleBlock(const QString& str);
   Data::EntryPtr parseEntry(const QString& str);
+  void configureJob(QPointer<KIO::StoredTransferJob> job);
 
   QString m_text;
   QHash<uint, Data::EntryPtr> m_entries;

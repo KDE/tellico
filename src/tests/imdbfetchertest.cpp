@@ -51,6 +51,11 @@ void ImdbFetcherTest::initTestCase() {
   m_config.writeEntry("Custom Fields", QStringLiteral("alttitle,imdb,imdb-rating,origtitle"));
 }
 
+void ImdbFetcherTest::init() {
+  // reset to english every time
+  m_config.writeEntry("Lang", QStringLiteral("0"));
+}
+
 void ImdbFetcherTest::testSnowyRiver() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("The Man From Snowy River"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
@@ -90,6 +95,45 @@ void ImdbFetcherTest::testSnowyRiver() {
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("alttitle")));
   QVERIFY(altTitleList.contains(QStringLiteral("Herencia de un valiente")));
   QVERIFY(!entry->field("alttitle").contains(QStringLiteral("See more")));
+}
+
+void ImdbFetcherTest::testSnowyRiverFr() {
+  m_config.writeEntry("Lang", QStringLiteral("1")); // french
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "The Man From Snowy River");
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+  fetcher->readConfig(m_config);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  // the first entry had better be the right one
+  Tellico::Data::EntryPtr entry = results.at(0);
+
+  QCOMPARE(entry->field("title"), QString::fromUtf8("L'homme de la rivière d'argent"));
+  QCOMPARE(entry->field("year"), QLatin1String("1982"));
+  QCOMPARE(set(entry->field("genre")), set(QLatin1String("Aventure; Drame; Romantique")));
+  QCOMPARE(entry->field("nationality"), QLatin1String("Australie"));
+  QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
+  QCOMPARE(entry->field("running-time"), QLatin1String("102"));
+  QCOMPARE(entry->field("audio-track"), QLatin1String("Dolby"));
+  QCOMPARE(entry->field("aspect-ratio"), QLatin1String("2.35 : 1"));
+//  QCOMPARE(entry->field("color"), QLatin1String("Color"));
+  QCOMPARE(entry->field("language"), QLatin1String("Anglais"));
+  QCOMPARE(entry->field("director"), QLatin1String("George Miller"));
+  QCOMPARE(entry->field("certification"), QLatin1String("PG (USA)"));
+  QCOMPARE(set(entry->field("writer")), set(QLatin1String("Cul Cullen; A.B. 'Banjo' Paterson; John Dixon")));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
+  QCOMPARE(entry->field("imdb"), QLatin1String("https://www.imdb.com/title/tt0084296/"));
+  QVERIFY(!entry->field("imdb-rating").isEmpty());
+  QVERIFY(!entry->field("plot").isEmpty());
+  QVERIFY(!entry->field("plot").contains(QStringLiteral("apos")));
+  QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
+
+  m_config.writeEntry("Lang", QStringLiteral("0")); // back to english
 }
 
 void ImdbFetcherTest::testAsterix() {
@@ -223,8 +267,7 @@ void ImdbFetcherTest::testBabel() {
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro G. Iñárritu"));
   QCOMPARE(set(entry, "writer"), set(QString::fromUtf8("Alejandro G. Iñárritu; Guillermo Arriaga")));
-  // I can't figure out why this test has to use fromLocal8Bit instead of fromUtf8. The actual Tellico output is the same.
-  QCOMPARE(set(entry, "producer"), set(QString::fromLocal8Bit("Steve Golin; Alejandro G. Iñárritu; Jon Kilik; Ann Ruark; Corinne Golden Weber")));
+  QCOMPARE(set(entry, "producer"), set(QString::fromUtf8("Steve Golin; Alejandro G. Iñárritu; Jon Kilik; Ann Ruark; Corinne Golden Weber")));
 }
 
 void ImdbFetcherTest::testFirefly() {
