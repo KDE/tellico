@@ -393,6 +393,7 @@ void IMDBFetcher::continueSearch() {
     m_currentTitleBlock = m_countOffset == 0 ? Unknown : Approx;
   }
 
+  m_hasMoreResults = false;
   stop();
 }
 
