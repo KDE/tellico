@@ -583,6 +583,8 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
     } else {
       // parenthesis might be outside anchor tag
       int end = s_anchorTitleRx->indexIn(str_, start);
+      const int end2 = str_.indexOf(QStringLiteral("<img"), start);
+      if(end2 > -1) end = qMin(end, end2);
       if(end == -1) {
         end = str_.length();
       }
@@ -603,6 +605,12 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
           }
         }
         pPos = -1;
+      } else {
+        static const QRegularExpression digitsRs(QStringLiteral(">([-–\\d]+)<"));
+        QRegularExpressionMatch digitsMatch = digitsRs.match(text);
+        if(digitsMatch.hasMatch()) {
+          desc = digitsMatch.captured(1);
+        }
       }
     }
     // multiple matches might have 'aka' info
