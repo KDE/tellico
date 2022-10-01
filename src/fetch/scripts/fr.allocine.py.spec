@@ -15,6 +15,7 @@ Name[gl]=Allocine.fr
 Name[hu]=Allocine.fr
 Name[ia]=Allocine.fr
 Name[it]=Allocine.fr
+Name[ka]=Allocine.fr
 Name[ko]=알로시네(프랑스)
 Name[nl]=Allocine.fr
 Name[nn]=Allocine.fr
