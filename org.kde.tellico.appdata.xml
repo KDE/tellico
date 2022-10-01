@@ -22,6 +22,7 @@
   <name xml:lang="ia">Tellico</name>
   <name xml:lang="id">Tellico</name>
   <name xml:lang="it">Tellico</name>
+  <name xml:lang="ka">Tellico</name>
   <name xml:lang="ko">Tellico</name>
   <name xml:lang="nl">Tellico</name>
   <name xml:lang="nn">Tellico</name>
@@ -55,6 +56,7 @@
   <summary xml:lang="ia">Gerente de collection</summary>
   <summary xml:lang="id">Pengelola Koleksi</summary>
   <summary xml:lang="it">Gestore della collezione</summary>
+  <summary xml:lang="ka">კოლექციის მმართველი</summary>
   <summary xml:lang="ko">소장품 관리 도구</summary>
   <summary xml:lang="nl">Collectiebeheer</summary>
   <summary xml:lang="nn">Samlingsdatabase</summary>
@@ -124,6 +126,7 @@
     <p xml:lang="ia">Characteristicas:</p>
     <p xml:lang="id">Fitur:</p>
     <p xml:lang="it">Funzionalità:</p>
+    <p xml:lang="ka">თვისებები:</p>
     <p xml:lang="ko">기능:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
     <p xml:lang="nn">Funksjonar:</p>
@@ -157,6 +160,7 @@
       <li xml:lang="ia">Il supporta collectiones predefinite de libros, entratas bibliographic, videos, musica, video jocos, libros in designo, numisma, timbros, cartas de commerciar, vinos, jocos de tabula e catalogos de files</li>
       <li xml:lang="id">Mendukung koleksi buku, entri bibliografi, video, musik, video game, buku komik, koin, perangko, kartu perdagangan, wine, permainan papan, dan katalog file standar yang didukung</li>
       <li xml:lang="it">Supporta collezioni standard di libri, voci bibliografiche, video, musica, videogiochi, fumetti, monete, francobolli, carte da gioco, vini, giochi da tavolo e collezioni di file</li>
+      <li xml:lang="ka">აქვს ნაგულისხმები მხარდაჭერა წიგნების, ბიბლიოგრაფიული ჩანაწერების, ვიდეოს, მუსიკის, თამაშების, კომიქსების, მონეტების, საფოსტო მარკების, სავაჭრო ნიშნებს, ღვინოების, სამაგიდო თამაშებისა და ფაილების კატალოგების</li>
       <li xml:lang="ko">서적, 서지 정보 항목, 비디오, 음악, 비디오 게임, 만화책, 동전, 우표, 트레이딩 카드, 와인, 보드 게임 및 파일 카탈로그의 기본 소장품 지원</li>
       <li xml:lang="nl">Ondersteunt standaard verzamelingen van boeken, bibliografie-items, video's, muziek, videogames, strips, munten, postzegels, visitekaartjes, wijnen, bordspellen en catalogs van bestanden</li>
       <li xml:lang="nn">Støttar samlingar av bøker, litteraturlister, filmar, musikk, spel, teikneseriar, myntar, frimerke, samlekort, vin, brettspel og filkatalogar</li>
@@ -188,6 +192,7 @@
       <li xml:lang="ia">Il supporta collectiones personalisate definite per le usator</li>
       <li xml:lang="id">Dukungan koleksi kustom yang ditentukan pengguna</li>
       <li xml:lang="it">Supporta collezioni personalizzate definite dall'utente</li>
+      <li xml:lang="ka">აქვს მომხმარებლს მიერ აღწერილი კოლექციების მხარდაჭერა</li>
       <li xml:lang="ko">사용자 정의 맞춤 소장품 지원</li>
       <li xml:lang="nl">Ondersteunt gebruikergedefinieerde eigen verzamelingen</li>
       <li xml:lang="nn">Støttar eigendefinerte samlingstypar</li>
@@ -281,6 +286,7 @@
       <li xml:lang="ia">Automaticamente da forma a titulos e nomines</li>
       <li xml:lang="id">Format secara otomatis judul-judul dan nama-nama</li>
       <li xml:lang="it">Formatta automaticamente titoli e nomi</li>
+      <li xml:lang="ka">სათაურებისა და სახელების ავტომატური ფორმატირება</li>
       <li xml:lang="ko">제목과 이름의 자동 서식 지정</li>
       <li xml:lang="nl">Deelt automatisch titels en namen in</li>
       <li xml:lang="nn">Automatisk formatering av titlar og namn</li>
