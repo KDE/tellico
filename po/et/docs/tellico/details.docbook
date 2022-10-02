@@ -1,0 +1,852 @@
+<chapter id="details">
+<title
+>&appname; üksikasjad</title>
+
+<sect1 id="field-types">
+<title
+>Väljade tüübid</title>
+
+<para
+>Igas kogus võib olla piiramatul hulgal välju. &appname; toetab ühtteist väljatüüpi, mis võimaldavad kasutada väga erinevaid andmeid. </para>
+
+<sect2 id="line">
+<title
+>Tavaline tekst</title>
+
+<para
+>Kõige elementaarsem väljatüüp kannab nime <emphasis
+>Tavaline tekst</emphasis
+>. Välja väärtustele ei rakendu mingeid piiranguid ning andmesisestuse vidin on tavaline tekstiväli. See tüüp sobib väljadele, mille puhul pole vajalikud pikad väärtused, näiteks autor või žanr. </para>
+
+</sect2>
+<sect2 id="number">
+<title
+>Arv</title>
+
+<para
+>Tüüp <emphasis
+>Arv</emphasis
+> on sarnane tüübiga <emphasis
+>Tavaline tekst</emphasis
+>, ainult et andmed peavad olema arvud. Kirjed sorditakse veeruvaates arvude järgi, kui klõpsata välja <emphasis
+>Arv</emphasis
+> veerule. Andmete sisestamiseks on mõeldud standardne tekstikast koos väikeste noolenuppudega väärtuse suurendamiseks või vähendamiseks. Vormindust selle tüübi puhul ei kasutata.</para>
+
+</sect2>
+
+<sect2 id="url">
+<title
+>&URL;</title>
+
+<para
+>Tüüp <emphasis
+>&URL;</emphasis
+> võimaldab kasutada linke teistele dokumentidele, pruukides lingitud dokumendi avamiseks &kde; standardseid failiseoseid. Välja <emphasis
+>&URL;</emphasis
+> tegeliku väärtuse õigsust ei kontrollida, aga mittekorrektseid linke mõistagi ei avata. Andmete sisestamiseks on mõeldud tekstikast nupuga, mis avab standardse faili avamise dialoogi, kuid kasutada võib mis tahes &URL;-e. Suhtelisi &URL;-e tõlgendatakse suhtelisema andmefaili asukoha suhtes, kui see on salvestatud. </para>
+
+<para
+><link linkend="entry-editor"
+><interface
+>Kirjeredaktoris</interface
+></link
+> muutub pealdis lingiks, <link linkend="entry-view"
+><interface
+>kirjevaates</interface
+></link
+> kasutatakse aga tegelikku hüperlinki. See väljatüüp sobib hästi näiteks bibliokirjete <acronym
+>PDF</acronym
+>-failide või filmiülevaadete linkimiseks. Kunagi ei rakendata vormindust.</para>
+
+<para
+>Kasutada võib ka suhtelisi &URL;-e. Neid tõlgendatakse suhtelisena &appname; andmefaili asukoha suhtes. <link linkend="entry-editor"
+><interface
+>Kirjeredaktoris</interface
+></link
+> on tekstikastis võimalik kohalike failide asukohti automaatselt lõpetada. Kui soovid, et &URL;-i &kde; faili valimise dialoogikastist tõlgendataks suhtelisena dokumendi asukoha suhtes, peab &URL;-i välja omaduseks olema määratud <emphasis
+>relative</emphasis
+> : <emphasis
+>true</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="para">
+<title
+>Lõik</title>
+
+<para
+>Pikemate tekstiväljade jaoks pakub tüüp <emphasis
+>Lõik</emphasis
+> suuremat tekstiredaktorikasti ning on alati omaette kategooria. Väljal <emphasis
+>Lõik</emphasis
+> ei saa olla mitut väärtust ning seda ei vormindata automaatselt. Seda ei saa kasutada rühmitamiseks. Selle väljatüübi vahendusel saab sisestada näiteks kokkuvõtteid või ülevaateid.</para>
+
+</sect2>
+
+<sect2 id="choice">
+<title
+>Valik</title>
+
+<para
+>Kui väli peab olema piiratud mõne etteantud väärtusega, tuleb kasutada tüüpi <emphasis
+>Valik</emphasis
+>. Lubatud väärtused esitatakse rippmenüüs. Mõistagi ei saa kasutada mitut väärtust. Väljadeks tüübiga <emphasis
+>Valik</emphasis
+> on näiteks bibliograafia tüüp või isiklik hinnang.</para>
+
+<para
+>Lubatud väärtuste eraldamiseks tuleb kasutada semikooloneid.</para>
+
+</sect2>
+
+<sect2 id="bool">
+<title
+>Märkeruut</title>
+
+<para
+>Väljade jaoks, mille puhul tuleb kasutada väärtust "ei" või "jah", on olemas tüüp <emphasis
+>Märkeruut</emphasis
+>. Vaikimisi on väli märkimata. Välju <emphasis
+>Märkeruut</emphasis
+> ei vormindata ning neis võib kasutada ainult üht väärtust. Seesmiselt on välja väärtused jas <emphasis
+><constant
+>true</constant
+></emphasis
+> või <emphasis
+><constant
+>false</constant
+></emphasis
+>. Näiteks võib tuua kingituse või laenamise väljad.</para>
+
+</sect2>
+
+<sect2 id="date">
+<title
+>Kuupäev</title>
+
+<para
+>Väli <emphasis
+>Kuupäev</emphasis
+> võib sisaldada päeva, kuud ja aastat. Kuupäeva näidatakse standardsel kujul AAAA-KK-PP, mis võimaldab hõlpsat sortimist. Kuupäeva valimiseks hiirega võib kasutada standardset &kde; kuupäevavalijat, aga selle võib ka käsitsi sisestada. Välja puhul ei ole nõutav mittetühja väärtuse olemasolu aasta, kuu või päeva juures, nii võib näiteks sisestada ainult aasta. Mitu väärtust ei ole lubatud. </para>
+
+</sect2>
+
+<sect2 id="table">
+<title
+>Tabel</title>
+
+<para
+>Väljades <emphasis
+>Tabel</emphasis
+> on üks või rohkem veergu väärtusi. <link linkend="entry-editor"
+><interface
+>Kirjeredaktoris</interface
+></link
+> kajastub väli arvutustabeli laadselt nummerdatud ridadega. Kui valida viimane rida, lisatakse täiendavalt üks rida. Automaatne lõpetamine ei ole võimalik. See väli on kasulik näiteks raamatu peatükkide, filmi stseenide või albumi laulude jaoks. Väljad <emphasis
+>Tabel</emphasis
+> on alati omaette kategooria. </para>
+
+<para
+>Veergude arv - maksimaalselt kümme - defineeritakse välja definitsiooni omaduse <emphasis
+>columns</emphasis
+> lisamisega. Veergudele võib nime anda paremklõpsuga päisel või määrates välja omaduse nimeks <emphasis
+>veerg1</emphasis
+> jne. </para>
+
+<para
+><interface
+>Kirjeredaktoris</interface
+> väljade <emphasis
+>Tabel</emphasis
+> kasutamisel saab ridu ümber seada neid hiirega lohistades, hoides samal ajal all klahvi &Ctrl;. Samuti võib tarvitada tabelile paremklõpsu tehes avanevat kontekstimenüüd, mis võimaldab ridu lisada või eemaldada. </para>
+
+</sect2>
+
+<sect2 id="image">
+<title
+>Pilt</title>
+
+<para
+>Väljad <emphasis
+>Pilt</emphasis
+> sisaldavad pilti mis tahes &kde; toetatud vormingus. Tüüpilised on näiteks <acronym
+>PNG</acronym
+> või <acronym
+>JPEG</acronym
+>. Pilte võib salvestada &appname; andmefaili või rakenduse andmetakaloogi. Kasutatakse standardset &kde; failivalijat, nii et tarvitada võib &URL;-i või kohalikku faili. Pilte võib ka lohistada failihaldurist või brauserist. </para>
+
+</sect2>
+
+<sect2 id="rating">
+<title
+>Hinnang</title>
+
+<para
+>Väljad <emphasis
+>Hinnang</emphasis
+> näitavad teatava arvu tärne, mis tähistavad antud kirje arvulist hinnangut. Vaikimisi saab hinnang olla maksimaalselt viis. Miimimumi ja maksimumi saab muuta omaduste määramisega välja definitsioonis <interface
+>kogu väljade dialoogis</interface
+>, mille nimed on vastavalt <emphasis
+>minimum</emphasis
+> ja <emphasis
+>maximum</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="derived">
+<title
+>Tuletatud väärtusega väljad</title>
+
+<para
+>Tuletatud väärtusega väljad on erijuhtum. Välja tüüp vastab tavalisele väljas sisalduvale väärtusetüübile, kuid välja väärtus luuakse teiste väljade põhjal, kasutades välja kirjelduses antud vormindusstringi. Kui näiteks väljal on väärtuse mall <userinput
+>%{title} %{year}</userinput
+>, siis on selle välja väärtuseks pealkiri, millele järgneb aasta. Seda väljatüüpi kasutatakse peamiselt pealkirjavälja jaoks mündi-, margi-, kogumiskaartide ja veinikogude puhul. Kirjelduses võib vormindamiseks kasutada kas sisemist väljanime või välja pealkirja. </para>
+
+<para
+>Ainult ühe väärtuse valimiseks mitme väärtusega väljale lisa malli positsiooniindeks, näiteks <userinput
+>%{author:1}</userinput
+> esimese autori jaoks. Positsioon võib olla ka negatiivne, millisel juhul arvestatakse lõpust, nii et <userinput
+>%{author:-1}</userinput
+> on viimane autor. Suur- ja väiketähelisi väärtusi võib kasutada mallile lippe määrates, näiteks <userinput
+>%{author:1/l}</userinput
+> väiketähelise esimese autori ja <userinput
+>%{author:1/u}</userinput
+> suuretähelise jaoks. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-types">
+<title
+>Kogude tüübid</title>
+
+<para
+>&appname; toetab vaikimisi kahtteist erinevat kogutüüpi: raamatud, bibliograafia, koomiksid, videod, muusika, videomängud, kogumiskaardid, mündid, margid, veinid, lauamängud ja failikataloogid. Lisaks on mis tahes muud laadi kogutavate esemete jaoks mõeldud tühi üldine kogumall. Vaikimisi kogud sisaldavad üldist väljadevalikut. Soovi korral saab neid lisada, muuta või kustutada. Ainus tingimus on, et alati peab kogul olema väli <emphasis
+>Pealkiri</emphasis
+>, sest ainult siis toimib <link linkend="group-view"
+><interface
+>rühmavaade</interface
+></link
+> korrektselt. Mõne kogutüübi puhul on see lihtsalt <link linkend="derived"
+>tuletatud väärtusega</link
+> väli, mis ühendab kaht või rohkemat välja. </para>
+
+<para
+>Üldiselt ei ole kogutüüpidel põhimõttelist vahet. Vaikimisi raamatute kogu asemel võib sama hästi luua oma raamatutele kohandatud kogu. Kuid &appname; valib ikoonid vastavalt kogutüübile ning teatava kogu puhul võib eksisteerida mõningaid spetsiaalseid funktsioone, nii et võimaluse korral tasuks siiski kasutada vaikimisi kogutüüpe. Kui soovid näiteks luua veinikogu, aga sulle ei meeldi vaikimisi väljad, siis loo ikkagi vaikimisi veinikogu ja seejärel kustuta kõik vaikeväärtused. Sel moel oskab &appname; arvestada, et tegemist on just veinikoguga. </para>
+
+<para
+>Vaikimisi on kõigil kogutüüpidel <emphasis
+>ID</emphasis
+> väli, mis näitab kirje ID-numbrit. Lisaks - erandiks on siin failikataloog - on igal kogul väljad,. mis näitavad kuupäevi, mil kirje kogusse loodi ja mil seda viimati muudeti. </para>
+
+<sect2 id="book-collection">
+<title
+>Raamatute kogud</title>
+<para
+>Raamatute kogudel on 26 vaikevälja: <emphasis
+>Pealkiri</emphasis
+>, <emphasis
+>Alapealkiri</emphasis
+>, <emphasis
+>Autor</emphasis
+>, <emphasis
+>Köide</emphasis
+>, <emphasis
+>Ostmisaeg</emphasis
+>, <emphasis
+>Ostuhind</emphasis
+>, <emphasis
+>Kirjastaja</emphasis
+>, <emphasis
+>Väljaanne</emphasis
+>, <emphasis
+>Valmimisaasta</emphasis
+>, <emphasis
+>Väljaandmisaasta</emphasis
+>, <emphasis
+>ISBN nr</emphasis
+>, <emphasis
+>LCCN nr</emphasis
+>, <emphasis
+>Lehekülgede arv</emphasis
+>, <emphasis
+>Keel</emphasis
+>, <emphasis
+>Žanr</emphasis
+>, <emphasis
+>Märksõnad</emphasis
+>, <emphasis
+>Sari</emphasis
+>, <emphasis
+>Sarja nr</emphasis
+>, <emphasis
+>Seisukord</emphasis
+>, <emphasis
+>Pühendusega</emphasis
+>, <emphasis
+>Loetud</emphasis
+>, <emphasis
+>Kingitus</emphasis
+>, <emphasis
+>Laenatud</emphasis
+>, <emphasis
+>Hinnang</emphasis
+>, <emphasis
+>Esikaas</emphasis
+> ja <emphasis
+>Kommentaarid</emphasis
+>. </para>
+
+<para
+><emphasis
+>ISBN nr</emphasis
+> väli on eriline, sest <acronym
+>ISBN</acronym
+> numbrid vormindatakse automaatselt ja arvutatakse kontrollarv. &appname; tunneb <acronym
+>ISBN</acronym
+> välja ära, kui selle sisemine väljanimi on <emphasis
+>isbn</emphasis
+>. Kui oled selle kustutanud või sul on vaja lisada see teist tüüpi kogusse, loo väli pealkirjaga <emphasis
+>ISBN</emphasis
+> ja rakenda muudatus, misjärel võid naasta ja muuta pealkirja juba enda vajaduste kohaselt. &appname; loob sisemise nime algse pealkirja põhjal ja ei muuda seda enam, kui pealkirja hiljem muudetakse. </para>
+
+</sect2>
+
+<sect2 id="bibliography">
+<title
+>Bibliograafiad</title>
+<para
+>Bibliograafiatel on 25 vaikevälja: <emphasis
+>Pealkiri</emphasis
+>, <emphasis
+>Kirje tüüp</emphasis
+>, <emphasis
+>Autor</emphasis
+>, <emphasis
+>Bibtexi võti</emphasis
+>, <emphasis
+>Raamatu pealkiri</emphasis
+>, <emphasis
+>Toimetaja</emphasis
+>, <emphasis
+>Organisatsioon</emphasis
+>, <emphasis
+>Kirjastaja</emphasis
+>, <emphasis
+>ISBN nr</emphasis
+>, <emphasis
+>Aadress</emphasis
+>, <emphasis
+>Väljaanne</emphasis
+>, <emphasis
+>Lehekülgede arv</emphasis
+>, <emphasis
+>Aasta</emphasis
+>, <emphasis
+>Ajakiri</emphasis
+>, <emphasis
+>Kuu</emphasis
+>, <emphasis
+>Number</emphasis
+>, <emphasis
+>Väljaandmise viis</emphasis
+>, <emphasis
+>Peatükk</emphasis
+>, <emphasis
+>Sari</emphasis
+>, <emphasis
+>Sarja nr</emphasis
+>, <emphasis
+>Köide</emphasis
+>, <emphasis
+>Ristviide</emphasis
+>, <emphasis
+>Võtmesõnad</emphasis
+>, <emphasis
+>Kokkuvõte</emphasis
+> ja <emphasis
+>Märkused</emphasis
+>. </para>
+
+<para
+>Kuigi bibliograafiakogud ei ole otseselt seotud bibtexiga, lähtub vaikimisi väljade kogum tüüpilisest bibtexi väljade kogumist. Eksportimisel bibtexi kasutatakse iga välja puhul omadust <emphasis
+>bibtex</emphasis
+> vastava bibtexi välja defineerimiseks. Kui lisad bibliograariasse täiendavaid välju ja soovid neid bibtexi eksportida, määra kindlasti ka omadust <emphasis
+>bibtex</emphasis
+>. </para>
+
+<para
+>&appname; võimaldab bibliograafiate puhul tarvitada mõningaid erifunktsioone. Bibtexi stringimakrosid saab lisada, muuta ja kustutada otse &appname;s ning bibtexi eksportimine annab võimaluse makrosid laiendada. Bibtexi viiteid saab suunata välistesse rakendustesse, näiteks <application
+> LyX</application
+> või <application
+>Kile</application
+>, kasutades niinimetatud <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe'i</link
+></emphasis
+>. </para>
+
+<para
+>Raamatute kogusid saab teisendada bibliograafiaks. Lisatakse vaikimisi bibtexi väljad ning määratakse bibtexi omadused. See võimalus on mõeldud peamiselt vanade kogude teisendamiseks, mis olid olemas veel enne seda, kui bibliograafiakogu eraldati raamatute kogu tüübist. </para>
+</sect2>
+
+<sect2 id="comic-book-collection">
+<title
+>Koomiksikogud</title>
+<para
+>Koomiksikogudel on 22 vaikevälja: <emphasis
+>Pealkiri</emphasis
+>, <emphasis
+>Alapealkiri</emphasis
+>, <emphasis
+>Kirjutaja/stsenarist</emphasis
+>, <emphasis
+>Kunstnik</emphasis
+>, <emphasis
+>Sari</emphasis
+>, <emphasis
+>Anne</emphasis
+>, <emphasis
+>Kirjastaja</emphasis
+>, <emphasis
+>Väljaanne</emphasis
+>, <emphasis
+>Väljaandmisaasta</emphasis
+>, <emphasis
+>Lehekülgede arv</emphasis
+>, <emphasis
+>Riik</emphasis
+>, <emphasis
+>Keel</emphasis
+>, <emphasis
+>Žanr</emphasis
+>, <emphasis
+>Võtmesõnad</emphasis
+>, <emphasis
+>Seisukord</emphasis
+>, <emphasis
+>Ostmisaeg</emphasis
+>, <emphasis
+>Ostuhind</emphasis
+>, <emphasis
+>Pühendusega</emphasis
+>, <emphasis
+>Kingitus</emphasis
+>, <emphasis
+>Laenatud</emphasis
+>, <emphasis
+>Esikaas</emphasis
+> ja <emphasis
+>Kommentaarid</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="video-collection">
+<title
+>Videokogud</title>
+<para
+>Videokogudel on 30 vaikevälja: <emphasis
+>Pealkiri</emphasis
+>, <emphasis
+>Andmekandja</emphasis
+>, <emphasis
+>Väljalaskeaasta</emphasis
+>, <emphasis
+>Piirang</emphasis
+>, <emphasis
+>Žanr</emphasis
+>, <emphasis
+>Regioon</emphasis
+>, <emphasis
+>Riik</emphasis
+>, <emphasis
+>Formaat</emphasis
+>, <emphasis
+>Osatäitjad</emphasis
+>, <emphasis
+>Režissöör</emphasis
+>, <emphasis
+>Produtsent</emphasis
+>, <emphasis
+>Kirjutaja/stsenarist</emphasis
+>, <emphasis
+>Helilooja</emphasis
+>, <emphasis
+>Stuudio</emphasis
+>, <emphasis
+>Keeled</emphasis
+>, <emphasis
+>Subtiitrite keeled</emphasis
+>, <emphasis
+>Helirajad</emphasis
+>, <emphasis
+>Kestus</emphasis
+>, <emphasis
+>Mastaap</emphasis
+>, <emphasis
+>Laiekraan</emphasis
+>, <emphasis
+>Värviline</emphasis
+>, <emphasis
+>Režissööri variant</emphasis
+>, <emphasis
+>Süžee kokkuvõte</emphasis
+>, <emphasis
+>Isiklik hinnang</emphasis
+>, <emphasis
+>Ostmisaeg</emphasis
+>, <emphasis
+>Ostuhind</emphasis
+>, <emphasis
+>Kingitus</emphasis
+>, <emphasis
+>Laenatud</emphasis
+>, <emphasis
+>Kaas</emphasis
+> ja <emphasis
+>Kommentaarid</emphasis
+>. </para>
+
+<para
+>Väli <emphasis
+>Osatäitjad</emphasis
+> on kahe veeruga <link linkend="table"
+>tabel</link
+>, kusjuures näitleja nimi peaks olema esimeses ja tema roll teises veerus. <emphasis
+>Kestus</emphasis
+> peaks olema minutites, kuigi seda võib loomulikult muuta. </para>
+</sect2>
+
+<sect2 id="music-collection">
+<title
+>Muusikakogud</title>
+<para
+>Muusikakogudel on 15 vaikevälja: <emphasis
+>Pealkiri</emphasis
+>, <emphasis
+>Andmekandja</emphasis
+>, <emphasis
+>Esitaja</emphasis
+>, <emphasis
+>Firma</emphasis
+>, <emphasis
+>Aasta</emphasis
+>, <emphasis
+>Žanr</emphasis
+>, <emphasis
+>Rajad</emphasis
+>, <emphasis
+>Hinnang</emphasis
+>, <emphasis
+>Ostmisaeg</emphasis
+>, <emphasis
+>Ostuhind</emphasis
+>, <emphasis
+>Kingitus</emphasis
+>, <emphasis
+>Laenatud</emphasis
+>, <emphasis
+>Võtmesõnad</emphasis
+>, <emphasis
+>Kaas</emphasis
+> ja <emphasis
+>Kommentaarid</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="game-collection">
+<title
+>Mängude kogud</title>
+<para
+>Videomängudel on 16 vaikevälja: <emphasis
+>Pealkiri</emphasis
+>, <emphasis
+>Platvorm</emphasis
+>, <emphasis
+>Žanr</emphasis
+>, <emphasis
+>Väljalaskeaasta</emphasis
+>, <emphasis
+>Väljaandja</emphasis
+>, <emphasis
+>Arendaja</emphasis
+>, <emphasis
+>ESRB hinnang</emphasis
+>, <emphasis
+>Kirjeldus</emphasis
+>, <emphasis
+>Isiklik hinnang</emphasis
+>, <emphasis
+>Läbi mängitud</emphasis
+>, <emphasis
+>Ostmisaeg</emphasis
+>, <emphasis
+>Ostuhind</emphasis
+>, <emphasis
+>Kingitus</emphasis
+>, <emphasis
+>Laenatud</emphasis
+>, <emphasis
+>Kaas</emphasis
+> ja <emphasis
+>Kommentaarid</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="card-collection">
+<title
+>Kaartide kogud</title>
+<para
+>Kogumiskaartide kogudel on 17 vaikevälja: <emphasis
+>Pealkiri</emphasis
+>, <emphasis
+>Mängija</emphasis
+>, <emphasis
+>Meeskond</emphasis
+>, <emphasis
+>Bränd</emphasis
+>, <emphasis
+>Kaardi number</emphasis
+>, <emphasis
+>Aasta</emphasis
+>, <emphasis
+>Sari</emphasis
+>, <emphasis
+>Kaardi tüüp</emphasis
+>, <emphasis
+>Ostmisaeg</emphasis
+>, <emphasis
+>Ostuhind</emphasis
+>, <emphasis
+>Asukoht</emphasis
+>, <emphasis
+>Kingitus</emphasis
+>, <emphasis
+>Võtmesõnad</emphasis
+>, <emphasis
+>Kogus</emphasis
+>, <emphasis
+>Esikülje pilt</emphasis
+>, <emphasis
+>Tagakülje pilt</emphasis
+> ja <emphasis
+>Kommentaarid</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="coin-collection">
+<title
+>Mündikogud</title>
+<para
+>Mündikogudel on 16 vaikevälja: <emphasis
+>Pealkiri</emphasis
+>, <emphasis
+>Tüüp</emphasis
+>, <emphasis
+>Vääring</emphasis
+>, <emphasis
+>Aasta</emphasis
+>, <emphasis
+>Rahapajamärk</emphasis
+>, <emphasis
+>Riik</emphasis
+>, <emphasis
+>Mündikogu</emphasis
+>, <emphasis
+>Kvaliteet</emphasis
+>, <emphasis
+>Kvaliteedihindaja</emphasis
+>, <emphasis
+>Ostmisaeg</emphasis
+>, <emphasis
+>Ostuhind</emphasis
+>, <emphasis
+>Asukoht</emphasis
+>, <emphasis
+>Kingitus</emphasis
+>, <emphasis
+>Esikülg</emphasis
+>, <emphasis
+>Tagakülg</emphasis
+> ja <emphasis
+>Kommentaarid</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="stamp-collection">
+<title
+>Margikogud</title>
+<para
+>Margikogudel on 18 vaikevälja: <emphasis
+>Pealkiri</emphasis
+>, <emphasis
+>Kirjeldus</emphasis
+>, <emphasis
+>Vääring</emphasis
+>, <emphasis
+>Riik</emphasis
+>, <emphasis
+>Väljalaskeaasta</emphasis
+>, <emphasis
+>Värviline</emphasis
+>, <emphasis
+>Scotti nr</emphasis
+>, <emphasis
+>Kvaliteet</emphasis
+>, <emphasis
+>Lõpetatud</emphasis
+>, <emphasis
+>Liimipadi</emphasis
+>, <emphasis
+>Tsentreeritus</emphasis
+>, <emphasis
+>Liimkiht</emphasis
+>, <emphasis
+>Ostmisaeg</emphasis
+>, <emphasis
+>Ostuhind</emphasis
+>, <emphasis
+>Asukoht</emphasis
+>, <emphasis
+>Kingitus</emphasis
+>, <emphasis
+>Pilt</emphasis
+> ja <emphasis
+>Kommentaarid</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="wine-collection">
+<title
+>Veinikogud</title>
+<para
+>Veinikogudel on 15 vaikevälja: <emphasis
+>Pealkiri</emphasis
+>, <emphasis
+>Valmistaja</emphasis
+>, <emphasis
+>Apellatsioon</emphasis
+>, <emphasis
+>Sort</emphasis
+>, <emphasis
+>Tüüp</emphasis
+>, <emphasis
+>Riik</emphasis
+>, <emphasis
+>Ostmisaeg</emphasis
+>, <emphasis
+>Ostuhind</emphasis
+>, <emphasis
+>Asukoht</emphasis
+>, <emphasis
+>Kogus</emphasis
+>, <emphasis
+>Joomisaeg</emphasis
+>, <emphasis
+>Hinnang</emphasis
+>, <emphasis
+>Kingitus</emphasis
+>, <emphasis
+>Sildipilt</emphasis
+> ja <emphasis
+>Kommentaarid</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title
+>Lauamängude kogud</title>
+<para
+>Lauamängude kogudel on 15 vaikevälja: <emphasis
+>Pealkiri</emphasis
+>, <emphasis
+>Žanr</emphasis
+>, <emphasis
+>Mänguviis</emphasis
+>, <emphasis
+>Väljalaskeaasta</emphasis
+>, <emphasis
+>Kirjastaja</emphasis
+>, <emphasis
+>Kunstnik</emphasis
+>, <emphasis
+>Mängijate arv</emphasis
+>, <emphasis
+>Kirjeldus</emphasis
+>, <emphasis
+>Hinnang</emphasis
+>, <emphasis
+>Ostmisaeg</emphasis
+>, <emphasis
+>Ostuhind</emphasis
+>, <emphasis
+>Kingitus</emphasis
+>, <emphasis
+>Laenatud</emphasis
+>, <emphasis
+>Kaas</emphasis
+> ja <emphasis
+>Kommentaarid</emphasis
+>, </para>
+
+</sect2>
+
+<sect2 id="file-catalog">
+<title
+>Failikataloogid</title>
+<para
+>Failikataloogidel on 14 vaikevälja: <emphasis
+>Nimi</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Kirjeldus</emphasis
+>, <emphasis
+>Köide</emphasis
+>, <emphasis
+>Kataloog</emphasis
+>, <emphasis
+>MIME tüüp</emphasis
+>, <emphasis
+>Suurus</emphasis
+>, <emphasis
+>Õigused</emphasis
+>, <emphasis
+>Omanik</emphasis
+>, <emphasis
+>Grupp</emphasis
+>, <emphasis
+>Loomise aeg</emphasis
+>, <emphasis
+>Muutmise aeg</emphasis
+>, <emphasis
+>Metainfo</emphasis
+> ja <emphasis
+>Ikoon</emphasis
+>, </para>
+
+</sect2>
+
+<sect2 id="custom-collection">
+<title
+>Kohandatud kogud</title>
+<para
+>Kohandatud kogudel on ainult üks vaikeväli: <emphasis
+>Pealkiri</emphasis
+>. Neid kogusid võiks kasutada siis, kui kogutavad esemed ei mahu ühegi vaiketüübi alla. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>

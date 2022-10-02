@@ -1,0 +1,285 @@
+<chapter id="faqs">
+<title
+>Domande e risposte</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+
+<qandaentry>
+<question>
+<para
+>Come si inseriscono autori multipli?</para>
+</question>
+<answer>
+
+<para
+>I nomi degli autori vanno separati da un punto e virgola, come ad esempio <userinput
+>Brian W. Kernighan; Dennis M. Ritchie</userinput
+>. Non includere la parola "e" o nulla di simile anche se vi sono 20 autori. Se l'opzione formatta automaticamente è attiva il cognome verrà automaticamente mostrato per primo per ogni autore.</para>
+
+<para
+>Altri campi che permettono valori multipli, come "genere" e "parole chiave", vanno inserite allo stesso modo, con un punto e virgola (;) che separa ogni valore.</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Si può modificare l'aspetto della pagina stampata?</para>
+</question>
+<answer>
+
+<para
+>Sì, quasi certamente. Cerca il file <filename
+>tellico-printing.xsl</filename
+> che dovrebbe trovarsi nella cartella $<envar
+>KDEDIR</envar
+>/share/apps/tellico/. Puoi copiare il file in $<envar
+>KDEHOME</envar
+>/share/apps/tellico/ per effettuare modifiche che si applichino solo al tuo utente. Per modificare il file è necessario conoscere <ulink url="http://www.w3.org/TR/xslt"
+>&xslt;</ulink
+> e la modifica ti consente di cambiare l'impaginazione di stampa. Il codice &HTML; viene generato da questo file, ed il modo più facile di modificare l'aspetto della stampa è modificare il CSS nella parte superiore.</para>
+
+<para
+>Va ricordato che <filename
+>tellico-printing.xsl</filename
+> fa riferimento ad un altro file, <filename
+>tellico-common.xsl</filename
+>, che contiene alcuni dei modelli &xslt; comuni. Copiando <filename
+>tellico-printing.xsl</filename
+> in $<envar
+>KDEHOME</envar
+> si dovrà modificare anche &lt;xsl:import&gt; per fare riferimento alla giusta posizione del file <filename
+>tellico-common.xsl</filename
+>, o in alternativa copiare entrambi i file. </para>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para
+>Come si può raggruppare gli elementi secondo criteri non presenti nella barra degli strumenti?</para>
+</question>
+<answer>
+<para
+>Per permetter il raggruppamento per un campo che non lo permette in modo predefinito, spuntare la casella "permetti raggruppamento" per quel campo nella finestra di dialogo "campi della collezione". </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Cosa sono quei messaggi incomprensibili all'apertura di &appname;?</para
+></question>
+<answer>
+<para
+>Cose come: <screen width="40">
+<computeroutput
+>Tellico::updateCollectionToolBar</computeroutput>
+<computeroutput
+>GroupView::setGroupAttribute - author</computeroutput>
+<computeroutput
+>GroupView::slotAddCollection</computeroutput>
+<computeroutput
+>QCheckBox::property( "title" ) failed: property invalid
+or does not exist</computeroutput>
+</screen
+> sono informazioni di debug. Quando si compila l'applicazione si può decidere di non includerle usando il flag <userinput
+><option
+>--disable-debug</option
+></userinput
+>. Si potrebbe anche volere utilizzare <userinput
+><option
+>--enable-final</option
+></userinput
+>, che richiede un po' più di memoria al momento della compilazione, ma la rende più efficiente quando eseguita.</para>
+
+<para
+>L'ultimo messaggio è leggermente diverso, indica semplicemente che l'istallazione di &Qt; è stata compilata con alcune informazioni di debug.</para>
+
+<para
+>Oppure, se &appname; è già stato installato, eseguire <userinput
+><command
+>kdebugdialog</command
+></userinput
+> e assicurarsi che "0 (generic)" non sia selezionato. Questo disattiva i messaggi di debug per tutte le applicazioni generiche &kde;, cioè quelle non distribuite ufficialmente da &kde;.</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Come faccio a decidere quali colonne visualizzare?</para
+></question>
+<answer>
+<para
+>Fai clic destro sulla barra dell'intestazione. Si possono anche trascinare le intestazioni per riordinare le colonne, e cliccarci per ordinare secondo quel campo.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Come faccio a filtrare secondo campi come "letto"?</para
+></question>
+<answer>
+<para
+>Internamente i campi casella di spunta in &appname; sono salvati come "true". Per questo se per esempio si vuole creare un filtro in modo che visualizzi solo i libri di fantascienza che non abbiamo letto si avranno due regole: la prima va impostata in modo che "Genere" "contiene" "fantascienza" (senza virgolette) e la seconda come "letto" "non contiene" "true" (senza virgolette).</para>
+
+<para
+>Inoltre il filtro veloce nella barra degli strumenti interrogherà tutti i campi, e se viene inserito un carattere non alfanumerico il testo verrà interpretato come espressione regolare. Se volete filtrare rapidamente i vostri libri per mostrare quelli di Weber o Bujold digitate "weber|bujold" (senza virgolette) nella barra degli strumenti.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Come si fa ad aggiungere un nuovo modello di immissione?</para
+></question>
+
+<answer>
+<para
+>I modelli di immissione vanno salvati in <filename class="directory"
+>$<envar
+> KDEHOME</envar
+>/share/apps/tellico/entry-templates/</filename
+> per utilizzarli a seconda degli utenti, o in <filename class="directory"
+>$<envar
+>KDEDIR</envar
+>/share/apps/tellico/entry-templates/</filename
+> per renderli accessibili a chiunque. I modelli in $<envar
+>KDEHOME</envar
+> avranno precedenza ai file con lo stesso nome in $<envar
+>KDEDIRS</envar
+>. I modelli di immissione possono essere selezionati a seconda del tipo di collezione nella finestra di dialogo opzioni.</para>
+
+<para
+>I modelli per la finestra di dialogo <interface
+>Resoconto</interface
+> sono salvati in <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>La compilazione e l'installazione sono andate a buon fine, ma quando &appname; si avvia la finestra è vuota. Come mai?</para
+></question>
+
+<answer>
+<para
+>I programmi &kde; cercano i dati nelle posizioni definite nella variabile ambientale $<envar
+>KDEDIRS</envar
+>. Se ad esempio si installa il programma in <filename class="directory"
+>/usr/local</filename
+>, ma $<envar
+>KDEDIRS</envar
+> è vuota oppure impostata a <filename class="directory"
+>/usr</filename
+>, &appname; non sarà in grado di trovare i file di cui necessita. Questo è particolarmente vero per &SuSE;, per la quale si dovrà compilare con <userinput
+><option
+>--prefix</option
+>=<filename class="directory"
+>/opt/kde3</filename
+></userinput
+>. In alternativa si può aggiungere una linea al file <filename
+>.profile</filename
+> per impostare $<envar
+>KDEDIRS</envar
+>. Controlla la documentazione della shell.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Come si fa ad esportare altri campi bibtex?</para
+></question>
+<answer>
+<para
+>&appname; usa la proprietà <emphasis
+>bibtex</emphasis
+> per stabilire come eseguire l'esportazione dei campi bibtex. Se desideri aggiungere ulteriori campi da esportare, come ad esempio un riassunto, apri la finestra di dialogo <interface
+>Campi della collezione</interface
+>e fa' clic sul pulsante <guibutton
+>Proprietà estese</guibutton
+>. Quindi aggiungi una proprietà <emphasis
+>bibtex</emphasis
+> con valore <emphasis
+>riassunto</emphasis
+>. In questo modo, quando esegui un esportazione in bibtex o bibtexml, quella proprietà verrà usata come nome del campo bibtex.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Cosa è successo a Bookcase?</para>
+</question>
+
+<answer>
+<para
+>A causa di un problemi di licenza, Bookcase è stato rinominato in Tellico a settembre del 2004. Tellico 0.12 è stato quindi rilasciato, ed era identico a Bookcase 0.11 salvo che per il diverso nome.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Con che sorta di roba dovrebbe avere a che fare il nome Tellico?</para>
+</question>
+
+<answer>
+<para
+>Ho pensato a <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
+>diversi altri nomi</ulink
+>, alcuni dei quali erano connessi con collezioni di libri. Tuttavia Tellico può gestire altre collezioni oltre a quelle di libri, e inoltre è un passatempo, così ho scelto in nome che suonasse piacevole (al mio orecchio), preso in prestito da una città vicina a dove sono cresciuto.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Perché includere questi collegamenti ad Amazon.com nei risultati di ricerca?</para>
+</question>
+
+<answer>
+<para
+>I <ulink url="http://www.amazon.com/gp/browse.html/002-0927720-5265623?node=3440661"
+>termini d'accordo per accedere ai servizi web di Amazon.com</ulink
+> richiedono che tutte le immagini tratte da loro servizio debbano essere ricollegate ad Amazon.com, oltre ad un ulteriore collegamento. L'ID utente Amazon.com va obbligatoriamente incluso cosicché ogni relativo pagamento sarà debitamente ricevuto. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Perché non usare un vero database?</para>
+</question>
+
+<answer>
+<para
+>In parte il motivo per cui ho cominciato a sviluppare &appname; era per imparare il C++. Non conoscevo SQL allora, come non lo conosco ora, ma ho solo una vaga idea di come si usi. In parole povere &appname; non è stato progettato come database relazionale, e le cose non cambieranno finché un giorno, in futuro, non mi metterò ad imparare SQL e avrò tempo e motivazioni per cambiare la struttura dei dati. Se questo non vi piace, beh, non usate &appname; allora. </para>
+
+<para
+>Ovviamente ognuno è libero di effettuare le modifiche che preferisce al codice sorgente. </para>
+</answer>
+</qandaentry>
+
+</qandaset>
+
+</chapter>

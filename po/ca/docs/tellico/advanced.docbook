@@ -1,0 +1,238 @@
+<chapter id="advanced">
+<title
+>Ús avançat</title>
+
+<sect1 id="command-line">
+<title
+>Opcions de la línia d'ordres</title>
+
+<para
+>Quan s'executa el &appname; des de la línia d'ordres, hi ha diverses opcions per a obrir els fitxers de dades. Es poden veure executant <userinput
+>tellico --help</userinput
+>. </para>
+
+<programlisting
+>Ús: tellico [opcions] [nom_fitxer]
+
+Tellico - un programari per a la gestió de col·leccions, lliure i senzill
+
+Opcions:
+  --nofile         No obris l'últim fitxer obert
+  --bibtex         Importa &lt;nom_fitxer&gt; com un fitxer bibtex
+  --mods           Importa &lt;nom_fitxer&gt; com un fitxer MODS
+  --ris            Importa &lt;nom_fitxer&gt; com un fitxer RIS
+  --pdf            Importa &lt;nom_fitxer&gt; com un fitxer PDF
+
+Arguments:
+  [nom_fitxer]         Fitxer a obrir
+</programlisting>
+
+</sect1>
+
+<sect1 id="dbus-interface">
+<title
+>Interfície de &DBus;</title>
+
+<para
+>El &appname; té una interfície de &DBus; mínima, la qual pot ser útil per a crear scripts o interactuar amb una aplicació en execució des de la línia d'ordres. Igual que amb totes les crides de &DBus;, cal que especifiqueu el servei amb el qual voleu interactuar, i la interfície en particular. El nom del servei de &DBus; és <constant
+>org.kde.tellico</constant
+>. </para>
+
+<sect2 id="dbus-commands">
+<title
+>Ordres de &DBus;</title>
+
+<para
+>Els dos objectes primaris de &DBus; estan disponibles a la interfície tellico: <constant
+>Tellico</constant
+> i <constant
+>Collections</constant
+>.</para>
+
+<sect3 id="dbus-tellico">
+<title
+>L'objecte <constant
+>Tellico</constant
+></title>
+
+<para
+>A continuació es mostra la llista completa d'ordres de &DBus; a l'objecte <constant
+>tellico</constant
+>:</para>
+
+<programlisting
+>bool importTellico(QString fitxer, QString acció)
+bool importBibtex(QString fitxer, QString acció)
+bool importMODS(QString fitxer, QString acció)
+bool importPDF(QString fitxer, QString acció)
+bool importRIS(QString fitxer, QString acció)
+bool exportXML(QString fitxer, booleà filtrat)
+bool exportZip(QString fitxer, booleà filtrat)
+bool exportBibtex(QString fitxer, booleà filtrat)
+bool exportHTML(QString fitxer, booleà filtrat)
+bool exportCSV(QString fitxer, booleà filtrat)
+QList&lt;int&gt; selectedEntries()
+QList&lt;int&gt; filteredEntries()
+void openFile(QString fitxer)
+void setFilter(QString text)
+bool showEntry(int id)
+</programlisting>
+
+<para
+>Per a les quatre ordres d'importació, el primer argument és el fitxer a importar, i el segon és l'acció d'importació. Disposeu de tres accions: <emphasis
+>replace</emphasis
+>, <emphasis
+>append</emphasis
+> i <emphasis
+>merge</emphasis
+>. Hi ha implementats quatre formats de fitxer per a importar: Fitxers &XML; de Tellico, Fitxers de Bibtex, Fitxers de MODS i Fitxers de RIS. </para>
+
+<para
+>La col·lecció oberta al &appname; es pot exportar a un fitxer, ja sigui en el format &XML; del Tellico, format ZIP del Tellico, Bibtex, &HTML;, o a valors separats per comes (CSV). Les ordres d'exportació prenen un argument opcional per a especificar si la col·lecció s'ha de limitar o no al filtre actual. </para>
+
+<para
+>Una llista dels identificadors d'entrada seleccionats o filtrada poden mostrar o actualitzar les entrades a la vista.</para>
+
+<para
+>Podeu obrir un nou fitxer de dades amb l'ordre <command
+>openFile()</command
+>. Heu d'especificar el camí complet.</para>
+
+<para
+>Es pot ajustar un nou filtre utilitzant l'ordre <command
+>setFilter()</command
+>, el qual és l'equivalent a escriure al quadre de filtre a la finestra principal.</para>
+
+<para
+>Donant un identificador d'entrada, <command
+>showEntry()</command
+> seleccionarà aquesta entrada i mostrarà els detalls de l'entrada a la finestra principal.</para>
+</sect3>
+
+<sect3 id="dbus-collection">
+<title
+>L'objecte <constant
+>Collections</constant
+></title>
+
+<para
+>A continuació es mostra la llista completa d'ordres de &DBus; a l'objecte <constant
+>Collections</constant
+>:</para>
+
+<programlisting
+>int addEntry()
+bool removeEntry(int entryID)
+QStringList allValues(QString fieldName)
+QStringList entryValues(int entryID, QString fieldName)
+QStringList selectedBibtexKeys()
+QString entryBibtexKey(int entryID)
+bool setEntryValue(int entryID, QString fieldName, QString valor)
+bool addEntryValue(int entryID, QString fieldName, QString valor)
+</programlisting>
+
+<para
+>Es pot crear una entrada buida nova a la col·lecció actual utilitzant l'ordre <command
+>addEntry()</command
+>. El valor retornat és l'identificador de l'entrada, el qual després es pot utilitzar per a ajustar els valors de camp a l'entrada. Una entrada es pot suprimir de la col·lecció cridant <command
+>removeEntry()</command
+>. </para>
+
+<para
+>Cridant <command
+>allValues()</command
+> utilitzant un nom de camp retornarà tots els valors per a aquest camp per a les entrades seleccionades. Si no hi ha entrades seleccionades, la llista retornada estarà buida. Si s'inclou un identificador d'entrada a l'ordre, es retornaran els valors de camp per a aquesta entrada específica. </para>
+
+<para
+>Si la col·lecció actual és una bibliografia, cridar <command
+>selectedBibtexKeys()</command
+> retornarà la clau de cita de «Bibtex» per a totes les entrades seleccionades. La bibtexKey per a una entrada específica es pot trobar utilitzant l'ordre <command
+>entryBibtexKey()</command
+>. </para>
+
+<para
+>Les entrades es poden editar directament amb la interfície de &DBus;. Donant un identificador d'entrada, <command
+>setEntryValue()</command
+> establirà el valor del camp directament. Per a afegir un valor sense afectar els ja existents, utilitzeu <command
+>addEntryValue()</command
+>. El nou valor apareixerà afegit al final de la llista existent. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="dbus-examples">
+<title
+>Exemples de &DBus;</title>
+
+<para
+>Aquests són alguns exemples de scripts creats per al &appname; utilitzant la interfície de &DBus;. </para>
+
+<screen width="40"
+><emphasis
+>Obre un fitxer de Bibtex</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.importBibtex "/home/usuari/referència.bib" "replace"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Exporta un fitxer de Bibtex</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/referència.bib</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Exporta un fitxer de Bibtex emprant el filtre actual</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/referència.bib true</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Mostra la clau de cita de la selecció actual</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.selectedBibtexKeys</userinput>
+<computeroutput
+>stephenson2004</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Afegeix una nova entrada i estableix el títol</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>myid=`qdbus org.kde.tellico /Collections org.kde.tellico.addEntry`</userinput>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.setEntryValue $myid title "El meu nou llibre"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+</sect2>
+
+</sect1>
+
+</chapter>

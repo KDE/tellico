@@ -1,0 +1,860 @@
+<chapter id="details">
+<title
+>Detalhes do &appname;</title>
+
+<sect1 id="field-types">
+<title
+>Tipos de Campos</title>
+
+<para
+>Cada coleção poderá ter um número ilimitado de campos. O &appname; suporta onze tipos de campos, os quais permitem gamas de dados diferentes. </para>
+
+<sect2 id="line">
+<title
+>Texto simples</title>
+
+<para
+>O tipo de campo mais básico é o <emphasis
+>Texto Simples</emphasis
+>. Não são colocadas restrições sobre os valores do campo e o elemento de inserção de dados é um campo de texto normal. Este tipo é apropriado para os campos que supostamente não terão dados muito extensos, como o autor ou o gênero. </para>
+
+</sect2>
+<sect2 id="number">
+<title
+>Número</title>
+
+<para
+>O tipo <emphasis
+>Número</emphasis
+> é idêntico ao <emphasis
+>Texto Simples</emphasis
+>, excetuando que os dados estão restritos a serem numéricos. Os itens serão ordenados de forma numérica na área das colunas, caso seja clicada a coluna de um campo <emphasis
+>Número</emphasis
+>. O campo de edição, em conjunto com pequenas setas para aumentar ou diminuir o valor, é usado para a inserção de dados. Não é aplicada nenhuma formatação.</para>
+
+</sect2>
+
+<sect2 id="url">
+<title
+>&URL;</title>
+
+<para
+>O tipo <emphasis
+>&URL;</emphasis
+> permite ter referências para outros documentos, usando as associações-padrão de tipos de arquivos do &kde; para abrir os documentos referenciados. Não é feita nenhuma validação sobre o valor atual de um campo <emphasis
+>&URL;</emphasis
+>, mas as referências inválidas não são abertas. A inserção de dados é feita através de um campo de texto com um botão para abrir a janela normal da opção 'Arquivo'->'Abrir', se bem que você poderá usar qualquer &URL;. Os &URL;s relativos são interpretados em relação à localização do arquivo de dados, uma vez estando ela salva. </para>
+
+<para
+>No <link linkend="entry-editor"
+><interface
+>Editor de Itens</interface
+></link
+>, a legenda torna-se a hiperligação, enquanto na <link linkend="entry-view"
+><interface
+>Área de Itens</interface
+></link
+> é usada uma hiperligação de fato. Este tipo de dados é conveniente para referenciar arquivos <acronym
+>PDF</acronym
+> de elementos bibliográficos ou para resenhas de filmes, por exemplo. Não é aplicada nenhuma formatação.</para>
+
+<para
+>Você poderá usar também &URL;s relativas. Eles são interpretados em relação à localização do arquivo de dados do &appname;. No <link linkend="entry-editor"
+><interface
+>Editor de Itens</interface
+></link
+>, o campo de texto oferece o completamento automático para as localizações de arquivos locais. Se você quiser que a &URL; da Janela de Seleção de Arquivos do &kde; seja interpretada em relação à localização do documento, então deverá definir a propriedade estendida do campo &URL; como <emphasis
+>relative</emphasis
+> : <emphasis
+>true</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="para">
+<title
+>Parágrafo</title>
+
+<para
+>Para os campos de texto mais extensos, o tipo <emphasis
+>Parágrafo</emphasis
+> oferece uma área de texto mais alargada, correspondente a uma categoria própria. O campo <emphasis
+>Parágrafo</emphasis
+> não poderá ter vários valores, nem é formatado automaticamente. Não poderá ser usado para agrupamentos. Os resumos, descrições ou resenhas deverão ser inseridos com este tipo de dados.</para>
+
+</sect2>
+
+<sect2 id="choice">
+<title
+>Escolha</title>
+
+<para
+>Quando um campo tiver que ser limitado a alguns valores predefinidos, é usado um campo de <emphasis
+>Escolha</emphasis
+>. Os valores aceitáveis são apresentados numa lista para posterior seleção. Obviamente, não são aplicáveis vários valores. Os campos como os tipos bibliográficos ou as classificações pessoais são campos do tipo <emphasis
+>Escolha</emphasis
+>.</para>
+
+<para
+>Você deverá usar ponto e vírgula (;) para separar os valores permitidos.</para>
+
+</sect2>
+
+<sect2 id="bool">
+<title
+>Opção</title>
+
+<para
+>Para os campos que aceitam um valor 'sim' ou 'não', está disponível o campo <emphasis
+>Opção</emphasis
+> [de marcação]. Por padrão, o campo está desligado. Os campos <emphasis
+>Opção</emphasis
+> não são formatados e estão limitados a valores simples. Internamente, os valores dos campos são armazenados como valores <emphasis
+><constant
+>true</constant
+></emphasis
+> (verdadeiro) ou <emphasis
+><constant
+>false</constant
+></emphasis
+> (falso). Alguns exemplos são 'presente' ou 'emprestado'.</para>
+
+</sect2>
+
+<sect2 id="date">
+<title
+>Data</title>
+
+<para
+>Um campo de <emphasis
+>Data</emphasis
+> poderá incluir um dia, um mês e um ano. A data é apresentada segundo o formato-padrão AAAA-MM-DD, o qual permite uma ordenação simples. A janela normal de Seleção de Datas do &kde; poderá ser usada para escolher a data com o mouse, assim como poderá ser inserida diretamente. O campo não é obrigatório ter o ano, o mês e o dia todos preenchidos; você poderá preencher apenas o ano, por exemplo. Não são permitidos valores múltiplos. </para>
+
+</sect2>
+
+<sect2 id="table">
+<title
+>Tabela</title>
+
+<para
+>Os campos <emphasis
+>Tabela</emphasis
+> contém uma ou mais colunas de valores. No <link linkend="entry-editor"
+><interface
+>Editor de Itens</interface
+></link
+>, o campo é apresentado com uma vista semelhante a uma planilha, com linhas numeradas. Quando for selecionada a última linha, é adicionada uma nova. O completamento automático não está disponível. Este campo é útil para uma lista de capítulos de um livro, as cenas de um filme ou as músicas de um álbum. Os campos <emphasis
+>Tabela</emphasis
+> são sempre uma categoria por si só. </para>
+
+<para
+>O número de colunas, até um máximo de dez, é definido ao adicionar uma propriedade <emphasis
+>columns</emphasis
+> à definição do campo. As colunas poderão ser legendadas se clicar com o botão direito no cabeçalho, ou definindo uma propriedade do campo chamada <emphasis
+>column1</emphasis
+>, etc. </para>
+
+<para
+>Ao usar o <interface
+>Editor de Itens</interface
+> para os campos <emphasis
+>Tabela</emphasis
+>, você poderá reorganizar as linhas, arrastando o mouse enquanto pressiona a tecla &Ctrl;. Está disponível também um menu de contexto se clicar com o botão direito na tabela, o que permitirá inserir ou remover linhas. </para>
+
+</sect2>
+
+<sect2 id="image">
+<title
+>Imagem</title>
+
+<para
+>Os campos <emphasis
+>Imagem</emphasis
+> guardam uma imagem em qualquer formato suportado pelo &kde;. Alguns dos formato típicos incluem o <acronym
+>PNG</acronym
+> ou o <acronym
+>JPEG</acronym
+>. A imagem poderá ser salva dentro do arquivo de dados do &appname; propriamente dito ou na pasta de dados da aplicação. O Seletor de Arquivos do &kde; pode ser usado tanto para uma &URL; qualquer ou para um arquivo local. As imagens poderão ser arrastadas a partir de um gerenciador de arquivos ou um navegador. </para>
+
+</sect2>
+
+<sect2 id="rating">
+<title
+>Classificação</title>
+
+<para
+>Os campos de <emphasis
+>Classificação</emphasis
+> mostram um número de estrelas que representam uma classificação numérica para um item. Por padrão, a classificação pode ter como valor máximo o 5. Você pode contudo definir o valor mínimo e máximo se definir as propriedades <emphasis
+>minimum</emphasis
+> e <emphasis
+>maximum</emphasis
+> na definição do campo na <interface
+>Janela dos Campos da Coleção</interface
+>. </para>
+
+</sect2>
+
+<sect2 id="derived">
+<title
+>Campos de Valores Derivados</title>
+
+<para
+>Os campos com valores derivados são um caso especial. O tipo de campo corresponde ao tipo típico do valor contido no campo, se bem que o valor do campo é construído a partir dos valores de outros campos, usando um texto de formato na descrição do campo. Por exemplo, se um campo tiver um valor de modelo igual a <userinput
+>%{título} %{ano}</userinput
+>, então o valor do campo será o título, seguido do ano. Esse tipo de campo é usado, por exemplo, para o título das coleções de moedas, selos, cartões e vinhos. Tanto o nome interno do campo como o seu título poderão ser usados na descrição para a formatação. </para>
+
+<para
+>Para selecionar apenas um único valor para um campo de múltiplos valores adicione um índice de posição ao modelo, como por exemplo <userinput
+>%{autor:1}</userinput
+> para o primeiro autor. A posição poderá ser negativa, onde nesse caso irá contar a partir do fim, assim o <userinput
+>%{autor:-1}</userinput
+> seria o último autor. Você poderá usar valores em maiúsculas e minúsculas ao definir as opções do modelo, como por exemplo <userinput
+>%{autor:1/l}</userinput
+> para o primeiro autor em minúsculas e <userinput
+>%{autor:1/u}</userinput
+> para maiúsculas. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-types">
+<title
+>Tipos de Coleções</title>
+
+<para
+>O &appname; suporta doze tipos de coleções específicos por padrão: livros, itens bibliográficos, quadrinhos, vídeos, músicas, jogos de computador, cartas para troca, moedas, selos, vinhos, jogos de tabuleiro e catálogos de arquivos. Além disso, está disponível um modelo genérico de coleções para quaisquer outros itens de coleção. As coleções padrão só existem para incluir um conjunto geral de campos. Você poderá adicionar, modificar ou apagar os campos de acordo com as suas necessidades. O único requisito é que uma coleção deverá ter sempre um campo de <emphasis
+>Título</emphasis
+>, para que a <link linkend="group-view"
+><interface
+>Área de Grupos</interface
+></link
+> funcione corretamente. Para alguns tipos de coleção, esse é apenas um campo de <link linkend="derived"
+>valor derivado</link
+> que combina dois ou mais dos outros campos. </para>
+
+<para
+>De um modo geral, não existe nenhuma diferença funcional entre os tipos de coleções. Você poderá criar uma coleção personalizada para os seus livros de forma tão fácil como ao utilizar a coleção de livros padrão. Todavia, o &appname; escolhe os ícones com base no tipo de coleção, assim poderá existir alguma funcionalidade especializada que seja única para uma determinada coleção; por isso, se puder, use a versão padrão. Deste modo, se quiser criar uma coleção de vinhos, mas não gostar dos campos padrão, siga e crie uma coleção de vinhos padrão, apagando depois todas as predefinições. Deste modo, o &appname; continua sabendo que é uma coleção de vinhos. </para>
+
+<para
+>Por padrão, todos os tipos de coleções incluem um campo <emphasis
+>ID</emphasis
+>, que mostra o número identificador do registro. Além disso, excetuando o catálogo de arquivos, cada coleção inclui campos que mostram a data em que o registro foi criado na coleção, bem como o último momento em que foi modificado. </para>
+
+<sect2 id="book-collection">
+<title
+>Coleções de Livros</title>
+<para
+>As coleções de livros possuem 27 campos padrão: <emphasis
+>Título</emphasis
+>, <emphasis
+>Subtítulo</emphasis
+>, <emphasis
+>Autor</emphasis
+>, <emphasis
+>Encadernação</emphasis
+>, <emphasis
+>Data de Compra</emphasis
+>, <emphasis
+>Preço de Compra</emphasis
+>, <emphasis
+>Publicador</emphasis
+>, <emphasis
+>Edição</emphasis
+>, <emphasis
+>Ano de 'Copyright'</emphasis
+>, <emphasis
+>Ano de Publicação</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>LCCN#</emphasis
+>, <emphasis
+>Páginas</emphasis
+>, <emphasis
+>Língua</emphasis
+>, <emphasis
+>Gênero</emphasis
+>, <emphasis
+>Palavras-chave</emphasis
+>, <emphasis
+>Série</emphasis
+>, <emphasis
+>Número de série</emphasis
+>, <emphasis
+>Condição</emphasis
+>, <emphasis
+>Assinado</emphasis
+>, <emphasis
+>Lido</emphasis
+>, <emphasis
+>Presente</emphasis
+>, <emphasis
+>Emprestado</emphasis
+>, <emphasis
+>Classificação</emphasis
+>, <emphasis
+>Capa Frontal</emphasis
+>, <emphasis
+>Resumo da Ação</emphasis
+> e <emphasis
+>Comentários</emphasis
+>. </para>
+
+<para
+>O campo <emphasis
+>ISBN#</emphasis
+> é especial, uma vez que os números <acronym
+>ISBN</acronym
+> são formatados automaticamente e é calculado o dígito de verificação. O &appname; reconhece o campo <acronym
+>ISBN</acronym
+> se o seu nome interno de campo for <emphasis
+>isbn</emphasis
+>. Se apagá-lo, ou necessitar adicioná-lo a outro tipo de coleção, crie o campo com o título <emphasis
+>ISBN</emphasis
+> e aplique a alteração, para que possa depois regressar e modificar o título ao seu gosto. O &appname; cria o nome interno com base no título inicial, mas nunca o altera se o título for atualizado posteriormente. </para>
+
+</sect2>
+
+<sect2 id="bibliography">
+<title
+>Bibliografias</title>
+<para
+>As bibliografias têm 25 campos padrão: <emphasis
+>Título</emphasis
+>, <emphasis
+>Tipo de Item</emphasis
+>, <emphasis
+>Autor</emphasis
+>, <emphasis
+>Chave do Bibtex</emphasis
+>, <emphasis
+>Título do Livro</emphasis
+>, <emphasis
+>Editor</emphasis
+>, <emphasis
+>Organização</emphasis
+>, <emphasis
+>Publicador</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>Endereço</emphasis
+>, <emphasis
+>Edição</emphasis
+>, <emphasis
+>Páginas</emphasis
+>, <emphasis
+>Ano</emphasis
+>, <emphasis
+>Jornal</emphasis
+>, <emphasis
+>Mês</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>Modo de Publicação</emphasis
+>, <emphasis
+>Capítulo</emphasis
+>, <emphasis
+>Série</emphasis
+>, <emphasis
+>Número de Série</emphasis
+>, <emphasis
+>Volume</emphasis
+>, <emphasis
+>Referência Cruzada</emphasis
+>, <emphasis
+>Palavras-Chave</emphasis
+>, <emphasis
+>Resumo</emphasis
+> e <emphasis
+>Notas</emphasis
+>. </para>
+
+<para
+>Ainda que as coleções bibliográficas não estejam ligadas especificamente ao bibtex, o conjunto padrão de campos é definido a partir um conjunto típico de campos do bibtex. Ao exportar para esse formato, é usada uma propriedade estendida chamada <emphasis
+>bibtex</emphasis
+> para definir o campo correspondente do 'bibtex' de cada campo. Se adicionar um campo extra a uma bibliografia e quiser exportá-la para o bibtex, certifique-se de que definiu a propriedade estendida <emphasis
+>bibtex</emphasis
+>. </para>
+
+<para
+>O &appname; tem de fato algumas funções especializadas para bibliografias. Você pode adicionar, modificar ou apagar macros do texto do Bibtex dentro do &appname;; do mesmo modo, poderá expandir as macros na exportação para o Bibtex. As citações poderão ser enviadas para uma aplicação externa, como o <application
+>LyX</application
+> ou o <application
+>Kile</application
+>, usando o <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+<para
+>As coleções de livros poderão ser convertidas para bibliografias. São adicionados os campos padrão do 'bibtex', assim como são definidas as propriedades estendidas. Esta funcionalidade existe, a nível primário, para converter as coleções antigas, antes de o tipo 'bibliografia' ter sido dissociado da coleção de livros. </para>
+</sect2>
+
+<sect2 id="comic-book-collection">
+<title
+>Coleções de Quadrinhos</title>
+<para
+>As coleções de quadrinhos têm 23 campos padrão: <emphasis
+>Título</emphasis
+>, <emphasis
+>Subtítulo</emphasis
+>, <emphasis
+>Escritor</emphasis
+>, <emphasis
+>Artista</emphasis
+>, <emphasis
+>Série</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>Publicador</emphasis
+>, <emphasis
+>Edição</emphasis
+>, <emphasis
+>Ano de Publicação</emphasis
+>, <emphasis
+>Páginas</emphasis
+>, <emphasis
+>País</emphasis
+>, <emphasis
+>Língua</emphasis
+>, <emphasis
+>Gênero</emphasis
+>, <emphasis
+>Palavras-chave</emphasis
+>, <emphasis
+>Condição</emphasis
+>, <emphasis
+>Data de compra</emphasis
+>, <emphasis
+>Preço de compra</emphasis
+>, <emphasis
+>Assinado</emphasis
+>, <emphasis
+>Presente</emphasis
+>, <emphasis
+>Emprestado</emphasis
+>, <emphasis
+>Capa frontal</emphasis
+>, <emphasis
+>Resumo da ação</emphasis
+> e <emphasis
+>Comentários</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="video-collection">
+<title
+>Coleções de Vídeos</title>
+<para
+>As coleções de vídeo têm 30 campos padrão: <emphasis
+>Título</emphasis
+>, <emphasis
+>Disco</emphasis
+>, <emphasis
+>Ano de Produção</emphasis
+>, <emphasis
+>Certificação</emphasis
+>, <emphasis
+>Gênero</emphasis
+>, <emphasis
+>Região</emphasis
+>, <emphasis
+>Nacionalidade</emphasis
+>, <emphasis
+>Formato</emphasis
+>, <emphasis
+>Elenco</emphasis
+>, <emphasis
+>Realizador</emphasis
+>, <emphasis
+>Produtor</emphasis
+>, <emphasis
+>Argumento</emphasis
+>, <emphasis
+>Compositor</emphasis
+>, <emphasis
+>Estúdio</emphasis
+>, <emphasis
+>Faixas de Línguas</emphasis
+>, <emphasis
+>Línguas das Legendas</emphasis
+>, <emphasis
+>Faixas de Áudio</emphasis
+>, <emphasis
+>Duração</emphasis
+>, <emphasis
+>Proporções</emphasis
+>, <emphasis
+>Panorâmico</emphasis
+>, <emphasis
+>Modo de Cor</emphasis
+>, <emphasis
+>Versão do Realizador</emphasis
+>, <emphasis
+>Resumo da Ação</emphasis
+>, <emphasis
+>Classificação Pessoal</emphasis
+>, <emphasis
+>Data de Compra</emphasis
+>, <emphasis
+>Preço de Compra</emphasis
+>, <emphasis
+>Presente</emphasis
+>, <emphasis
+>Emprestado</emphasis
+>, <emphasis
+>Capa</emphasis
+> e <emphasis
+>Comentários</emphasis
+>. </para>
+
+<para
+>O campo do <emphasis
+>Elenco</emphasis
+> é uma <link linkend="table"
+>tabela</link
+> com duas colunas, em que o nome do ator se encontra na primeira coluna e a sua personagem na segunda. A <emphasis
+>Duração</emphasis
+> pretende ser em minutos, ainda que você possa mudar isso, obviamente. </para>
+</sect2>
+
+<sect2 id="music-collection">
+<title
+>Coleções de Músicas</title>
+<para
+>As coleções de músicas têm 15 campos padrão: <emphasis
+>Título</emphasis
+>, <emphasis
+>Disco</emphasis
+>, <emphasis
+>Artista</emphasis
+>, <emphasis
+>Editor</emphasis
+>, <emphasis
+>Ano</emphasis
+>, <emphasis
+>Gênero</emphasis
+>, <emphasis
+>Faixas</emphasis
+>, <emphasis
+>Classificação</emphasis
+>, <emphasis
+>Data de Compra</emphasis
+>, <emphasis
+>Preço de Compra</emphasis
+>, <emphasis
+>Presente</emphasis
+>, <emphasis
+>Emprestado</emphasis
+>, <emphasis
+>Palavras-Chave</emphasis
+>, <emphasis
+>Capa</emphasis
+> e <emphasis
+>Comentários</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="game-collection">
+<title
+>Coleções de Jogos</title>
+<para
+>As coleções de jogos têm 16 campos padrão: <emphasis
+>Título</emphasis
+>, <emphasis
+>Plataforma</emphasis
+>, <emphasis
+>Gênero</emphasis
+>, <emphasis
+>Ano de Lançamento</emphasis
+>, <emphasis
+>Publicador</emphasis
+>, <emphasis
+>Desenvolvimento</emphasis
+>, <emphasis
+>Classificação do ESRB</emphasis
+>, <emphasis
+>Descrição</emphasis
+>, <emphasis
+>Classificação Pessoal</emphasis
+>, <emphasis
+>Completo</emphasis
+>, <emphasis
+>Data de Compra</emphasis
+>, <emphasis
+>Preço de Compra</emphasis
+>, <emphasis
+>Presente</emphasis
+>, <emphasis
+>Emprestado</emphasis
+>, <emphasis
+>Capa</emphasis
+> e <emphasis
+>Comentários</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="card-collection">
+<title
+>Coleções de Cartas</title>
+<para
+>As coleções de cartas para troca têm 17 campos padrões: <emphasis
+>Título</emphasis
+>, <emphasis
+>Jogador</emphasis
+>, <emphasis
+>Equipe</emphasis
+>, <emphasis
+>Marca</emphasis
+>, <emphasis
+>Número do Cartão</emphasis
+>, <emphasis
+>Ano</emphasis
+>, <emphasis
+>Série</emphasis
+>, <emphasis
+>Tipo de Cartão</emphasis
+>, <emphasis
+>Data de Compra</emphasis
+>, <emphasis
+>Preço de Compra</emphasis
+>, <emphasis
+>Localização</emphasis
+>, <emphasis
+>Presente</emphasis
+>, <emphasis
+>Palavras-Chave</emphasis
+>, <emphasis
+>Quantidade</emphasis
+>, <emphasis
+>Imagem Frontal</emphasis
+>, <emphasis
+>Imagem Traseira</emphasis
+> e <emphasis
+>Comentários</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="coin-collection">
+<title
+>Coleções de Moedas</title>
+<para
+>As coleções de moedas têm 16 campos predefinidos: <emphasis
+>Título</emphasis
+>, <emphasis
+>Tipo</emphasis
+>, <emphasis
+>Denominação</emphasis
+>, <emphasis
+>Ano</emphasis
+>, <emphasis
+>Marca da Casa Emissora</emphasis
+>, <emphasis
+>País</emphasis
+>, <emphasis
+>Conjunto de Moedas</emphasis
+>, <emphasis
+>Classificação</emphasis
+>, <emphasis
+>Tipo de Classificação</emphasis
+>, <emphasis
+>Data de Compra</emphasis
+>, <emphasis
+>Preço de Compra</emphasis
+>, <emphasis
+>Localização</emphasis
+>, <emphasis
+>Presente</emphasis
+>, <emphasis
+>Face</emphasis
+>, <emphasis
+>Reverso</emphasis
+> e <emphasis
+>Comentários</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="stamp-collection">
+<title
+>Coleções de Selos</title>
+<para
+>As coleções de selos têm 18 campos padrões: <emphasis
+>Título</emphasis
+>, <emphasis
+>Descrição</emphasis
+>, <emphasis
+>Denominação</emphasis
+>, <emphasis
+>País</emphasis
+>, <emphasis
+>Ano de Emissão</emphasis
+>, <emphasis
+>Cor</emphasis
+>, <emphasis
+>Scott#</emphasis
+>, <emphasis
+>Classificação</emphasis
+>, <emphasis
+>Cancelado</emphasis
+>, <emphasis
+>Articulado</emphasis
+>, <emphasis
+>Centrado</emphasis
+>, <emphasis
+>Colado</emphasis
+>, <emphasis
+>Data de Compra</emphasis
+>, <emphasis
+>Preço de Compra</emphasis
+>, <emphasis
+>Localização</emphasis
+>, <emphasis
+>Presente</emphasis
+>, <emphasis
+>Imagem</emphasis
+> e <emphasis
+>Comentários</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="wine-collection">
+<title
+>Coleções de Vinhos</title>
+<para
+>As coleções de vinhos têm 15 campos padrão: <emphasis
+>Título</emphasis
+>, <emphasis
+>Produtor</emphasis
+>, <emphasis
+>Apelação</emphasis
+>, <emphasis
+>Variedade</emphasis
+>, <emphasis
+>Tipo</emphasis
+>, <emphasis
+>País</emphasis
+>, <emphasis
+>Data de Compra</emphasis
+>, <emphasis
+>Preço de Compra</emphasis
+>, <emphasis
+>Localização</emphasis
+>, <emphasis
+>Quantidade</emphasis
+>, <emphasis
+>Bebido Por</emphasis
+>, <emphasis
+>Classificação</emphasis
+>, <emphasis
+>Presente</emphasis
+>, <emphasis
+>Etiqueta</emphasis
+> e <emphasis
+>Comentários</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title
+>Coleções de Jogos de Tabuleiro</title>
+<para
+>As coleções de jogos de tabuleiro têm 15 campos padrão. <emphasis
+>Título</emphasis
+>, <emphasis
+>Gênero</emphasis
+>, <emphasis
+>Mecanismo</emphasis
+>, <emphasis
+>Ano de Lançamento</emphasis
+>, <emphasis
+>Publicador</emphasis
+>, <emphasis
+>Desenhador</emphasis
+>, <emphasis
+>Número de Jogadores</emphasis
+>, <emphasis
+>Tempo de Jogo</emphasis
+>, <emphasis
+>Idade Mínima</emphasis
+>, <emphasis
+>Descrição</emphasis
+>, <emphasis
+>Classificação</emphasis
+>, <emphasis
+>Ano de Compra</emphasis
+>, <emphasis
+>Preço de Compra</emphasis
+>, <emphasis
+>Presente</emphasis
+>, <emphasis
+>Emprestado</emphasis
+>, <emphasis
+>Capa</emphasis
+> e <emphasis
+>Comentários</emphasis
+>, </para>
+
+</sect2>
+
+<sect2 id="file-catalog">
+<title
+>Catálogos de Arquivos</title>
+<para
+>Os catálogos de arquivos têm 14 campos padrão: <emphasis
+>Nome</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Descrição</emphasis
+>, <emphasis
+>Volume</emphasis
+>, <emphasis
+>Pasta</emphasis
+>, <emphasis
+>Tipo MIME</emphasis
+>, <emphasis
+>Tamanho</emphasis
+>, <emphasis
+>Permissões</emphasis
+>, <emphasis
+>Dono</emphasis
+>, <emphasis
+>Grupo</emphasis
+>, <emphasis
+>Criado</emphasis
+>, <emphasis
+>Modificado</emphasis
+>, <emphasis
+>Metadados</emphasis
+> e <emphasis
+>Ícone</emphasis
+>, </para>
+
+</sect2>
+
+<sect2 id="custom-collection">
+<title
+>Coleções Personalizadas</title>
+<para
+>As coleções personalizadas têm um campo predefinido, o <emphasis
+>Título</emphasis
+>. Elas devem ser usadas quando o item colecionável não é um dos tipos padrão. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>

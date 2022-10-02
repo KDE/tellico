@@ -1,0 +1,238 @@
+<chapter id="advanced">
+<title
+>Gevorderd gebruik</title>
+
+<sect1 id="command-line">
+<title
+>Commandoregelopties</title>
+
+<para
+>Bij het gebruiken van &appname; vanaf de commandoregel zijn er verschillende opties voor het openen van gegevensbestanden. Deze worden zichtbaar door het commando <userinput
+>tellico --help</userinput
+>. </para>
+
+<programlisting
+>Gebruik: tellico [opties] [bestandsnaam]
+
+Tellico - software voor beheer van verzamelingen, vtij en eenvoudig
+
+Opties:
+  --nofile                  Het laatst geopende bestand niet opnieuw openen
+  --bibtex                  &lt;bestandsnaam&gt; importeren als een bibtex-bestand
+  --mods                    &lt;bestandsnaam&gt; importeren als een MODS-bestand
+  --ris                     &lt;bestandsnaam&gt; importeren als een RIS-bestand
+  --pdf                     &lt;filename&gt; importeren als een PDF-bestand
+
+Argumenten:
+  bestandsnaam              Te openen bestand
+</programlisting>
+
+</sect1>
+
+<sect1 id="dbus-interface">
+<title
+>&DBus;-interface</title>
+
+<para
+>&appname; heeft een minimale &DBus;-interface, die bruikbaar kan zijn voor het werken met scripts of samen te werken met een actieve toepassing vanaf de commandoregel. Zoals met alle &DBus;-oproepen, moet u de service specificeren waarmee u wilt samenwerken en het specifieke interface. De naam van de &DBus;-service is <constant
+>org.kde.tellico</constant
+>. </para>
+
+<sect2 id="dbus-commands">
+<title
+>&DBus;-commando's</title>
+
+<para
+>Er zijn twee &DBus; primaire objecten beschikbaar in het interface van tellico: <constant
+>Tellico</constant
+> en <constant
+>Collections</constant
+>.</para>
+
+<sect3 id="dbus-tellico">
+<title
+>Het <constant
+>Tellico</constant
+>-object</title>
+
+<para
+>De volledige lijst et &DBus;-commando's in het <constant
+>tellico</constant
+>-object staat hieronder:</para>
+
+<programlisting
+>bool importTellico(QString file, QString action)
+bool importBibtex(QString file, QString action)
+bool importMODS(QString file, QString action)
+bool importPDF(QString file, QString action)
+bool importRIS(QString file, QString action)
+bool exportXML(QString file, bool filtered)
+bool exportZip(QString file, bool filtered)
+bool exportBibtex(QString file, bool filtered)
+bool exportHTML(QString file, bool filtered)
+bool exportCSV(QString file, bool filtered)
+QList&lt;int&gt; selectedEntries()
+QList&lt;int&gt; filteredEntries()
+void openFile(QString file)
+void setFilter(QString text)
+bool showEntry(int id)
+</programlisting>
+
+<para
+>Voor de vier importcommando's is het eerste argument het te importeren bestand en het tweede is de importactie. Er zijn drie acties beschikbaar: <emphasis
+>replace</emphasis
+>, <emphasis
+>append</emphasis
+>, and <emphasis
+>merge</emphasis
+>. Vier bestandsformaten worden voor importeren ondersteund: Tellico-&XML;-bestanden, Bibtex-bestanden, MODS-bestanden en RIS-bestanden. </para>
+
+<para
+>De huidige geopende verzameling in &appname; kan naar een bestand worden geëxporteerd in ofwel Tellico-&XML;-formaat, Tellico-ZIP-formaat, Bibtex, &HTML; of komma-gescheiden-waarden (CSV). De exportcommando's kunnen een optioneel argument hebben om te specificeren of de verzameling beperkt wordt tot het huidige filter of niet. </para>
+
+<para
+>Een lijst van de nu geselecteerde of gefilterde item-ID's is in staat om getoonde items te tonen of bij te werken.</para>
+
+<para
+>Een nieuw gegevensbestand kan worden geopend met het commando <command
+>openFile()</command
+>. Het volledige pad moet worden gespecificeerd.</para>
+
+<para
+>Een nieuw filter kan worden ingesteld met het commando <command
+>setFilter()</command
+>, wat gelijk is aan het invoeren in het filtervak in het hoofdvenster.</para>
+
+<para
+>Gegeven een item-ID, zal <command
+>showEntry()</command
+> dat item selecteren en de details van het item in het hoofdvenster tonen.</para>
+</sect3>
+
+<sect3 id="dbus-collection">
+<title
+>Het object <constant
+>Collections</constant
+></title>
+
+<para
+>De volledige lijst van &DBus;-commando's in het object <constant
+>Collections</constant
+> wordt onderstaand getoond:</para>
+
+<programlisting
+>int addEntry()
+bool removeEntry(int entryID)
+QStringList allValues(QString fieldName)
+QStringList entryValues(int entryID, QString fieldName)
+QStringList selectedBibtexKeys()
+QString entryBibtexKey(int entryID)
+bool setEntryValue(int entryID, QString fieldName, QString value)
+bool addEntryValue(int entryID, QString fieldName, QString value)
+</programlisting>
+
+<para
+>Een nieuw leeg item kan aangemaakt worden in de huidige verzameling met het commando <command
+>addEntry()</command
+>. De teruggegeven waarde is het item-ID, dat dan gebruikt kan worden om waarden van velden van het item in te stellen. Een item kan verwijderd worden uit de verzameling door <command
+>removeEntry()</command
+> aan te roepen. </para>
+
+<para
+>Aanroepen van <command
+>allValues()</command
+> met alleen een veldnaam zal alle waarden voor dat veld voor de nu geselecteerde items teruggeven. Als geen items geselecteerd zijn, zal de teruggegeven lijst leeg zijn. Als een item-ID in het commando wordt meegegeven, zullen de veldwaarden voor dat specifieke item worden teruggegeven. </para>
+
+<para
+>Als de huidige verzameling een bibliografie is, zal aanroepen van <command
+>selectedBibtexKeys()</command
+> de Bibtex citatiesleutel voor alle geselecteerde items teruggeven. De bibtexKey voor een specifiek item kan gevonden worden door het commando <command
+>entryBibtexKey()</command
+> te gebruiken. </para>
+
+<para
+>Items kunnen direct bewerkt worden met het &DBus;-interface. Gegeven een item-ID, zal <command
+>setEntryValue()</command
+> de veldwaarde direct instellen. Om een waarde in te stellen, zonder de bestaande waarden aan te tasten, gebruik <command
+>addEntryValue()</command
+>. De nieuwe waarde wordt toegevoegd aan het eind van de bestaande lijst. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="dbus-examples">
+<title
+>Voorbeelden met &DBus;</title>
+
+<para
+>Hier zijn enige voorbeelden van scripts voor &appname; met gebruik van het &DBus;-interface. </para>
+
+<screen width="40"
+><emphasis
+>Open een Bibtex-bestand</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.importBibtex "/home/robby/reference.bib" "replace"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Exporteer een Bibtex-bestand</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Exporteer een Bibtex-bestand met het huidige filter</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib true</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Echo de citatiesleutel van de huidige selectie</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.selectedBibtexKeys</userinput>
+<computeroutput
+>stephenson2004</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Voeg een nieuw item toe en stel de titel in</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>myid=`qdbus org.kde.tellico /Collections org.kde.tellico.addEntry`</userinput>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.setEntryValue $myid title "Mijn nieuwe boek"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+</sect2>
+
+</sect1>
+
+</chapter>

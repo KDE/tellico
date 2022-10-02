@@ -1,0 +1,238 @@
+<chapter id="advanced">
+<title
+>Avancerad användning</title>
+
+<sect1 id="command-line">
+<title
+>Kommandoradsväljare</title>
+
+<para
+>När &appname; körs från kommandoraden finns det flera alternativ för att öppna datafiler. De visas genom att köra <userinput
+>tellico --help</userinput
+>. </para>
+
+<programlisting
+>Användning: tellico [väljare] [filnamn]
+
+Tellico - ett samlingshanteringsprogram, fritt och enkelt
+
+Väljare:
+  --nofile                  Öppna inte den senast öppnade filen igen
+  --bibtex                  Importera &lt;filnamn&gt; som en bibtex-fil
+  --mods                    Importera &lt;filnamn&gt; som en MODS-fil
+  --ris                     Importera &lt;filnamn&gt; som en RIS-fil
+  --pdf                     Importera &lt;filnamn&gt; som en PDF-fil
+
+Argument:
+  [filnamn]                 Fil att öppna
+</programlisting>
+
+</sect1>
+
+<sect1 id="dbus-interface">
+<title
+>&DBus;-gränssnitt</title>
+
+<para
+>&appname; har ett minimalt &DBus;-gränssnitt, som kan vara användbart för skript eller för att kommunicera med ett program som kör från kommandoraden. Som med alla &DBus;-anrop måste du ange programmet du vill kommunicera med, och det specifika gränssnittet. Namnet på &DBus;-tjänsten är <constant
+>org.kde.tellico</constant
+>. </para>
+
+<sect2 id="dbus-commands">
+<title
+>&DBus;-kommandon</title>
+
+<para
+>Två &DBus;-objekt är tillgängliga i gränssnittet tellico: <constant
+>Tellico</constant
+> och <constant
+>Collections</constant
+>.</para>
+
+<sect3 id="dbus-tellico">
+<title
+>Objektet <constant
+>Tellico</constant
+></title>
+
+<para
+>Den fullständiga listan med &DBus;-kommandon i objektet <constant
+>tellico</constant
+> visas nedan:</para>
+
+<programlisting
+>bool importTellico(QString file, QString action)
+bool importBibtex(QString file, QString action)
+bool importMODS(QString file, QString action)
+bool importPDF(QString file, QString action)
+bool importRIS(QString file, QString action)
+bool exportXML(QString file, bool filtered)
+bool exportZip(QString file, bool filtered)
+bool exportBibtex(QString file, bool filtered)
+bool exportHTML(QString file, bool filtered)
+bool exportCSV(QString file, bool filtered)
+QList&lt;int&gt; selectedEntries()
+QList&lt;int&gt; filteredEntries()
+void openFile(QString file)
+void setFilter(QString text)
+bool showEntry(int id)
+</programlisting>
+
+<para
+>För de fyra importkommandona är det första argumentet filen att importera, och det andra är importåtgärden. Tre åtgärder är tillgängliga: <emphasis
+>replace</emphasis
+> (ersätt), <emphasis
+>append</emphasis
+> (lägg till) och <emphasis
+>merge</emphasis
+> (sammanfoga). Fyra filformat för import stöds: Tellico &XML;-filer, Bibtex-filer, MODS-filer och RIS-filer. </para>
+
+<para
+>Samlingen som för närvarande är öppen i &appname; kan exporteras till en fil, antingen med Tellico &XML;-format, Tellico ZIP-format, Bibtex, &HTML; eller CSV (värden åtskilda med kommatecken). Exportkommandot har en valfri väljare för att ange om samlingen ska begränsas till nuvarande filtrering eller inte. </para>
+
+<para
+>En lista med postidentifierarna som för närvarande är markerade eller filtreras ger möjlighet att visa eller uppdatera posterna i vyn.</para>
+
+<para
+>En ny datafil kan öppnas genom att använda kommandot <command
+>openFile()</command
+>. Den fullständiga sökvägen måste anges.</para>
+
+<para
+>Ett nytt filter kan anges med kommandot <command
+>setFilter()</command
+>, vilket är ekvivalent med att skriva i huvudfönstrets filterruta.</para>
+
+<para
+>Givet en postidentifierare, markerar <command
+>showEntry()</command
+> den posten och visar postens detaljinformation i huvudfönstret.</para>
+</sect3>
+
+<sect3 id="dbus-collection">
+<title
+>Objektet <constant
+>Collections</constant
+></title>
+
+<para
+>Den fullständiga listan med &DBus;-kommandon i objektet <constant
+>Collections</constant
+> visas nedan:</para>
+
+<programlisting
+>int addEntry()
+bool removeEntry(int entryID)
+QStringList allValues(QString fieldName)
+QStringList entryValues(int entryID, QString fieldName)
+QStringList selectedBibtexKeys()
+QString entryBibtexKey(int entryID)
+bool setEntryValue(int entryID, QString fieldName, QString value)
+bool addEntryValue(int entryID, QString fieldName, QString value)
+</programlisting>
+
+<para
+>En ny tom post kan skapas i den nuvarande samlingen genom att använda kommandot <command
+>addEntry()</command
+>. Returvärdet är postidentifieraren, som därefter kan användas för att tilldela postens fältvärden. En post kan tas bort från samlingen genom att anropa <command
+>removeEntry()</command
+>. </para>
+
+<para
+>Att bara använda ett fältnamn för att anropa <command
+>allValues()</command
+> returnerar alla värden i fältet för posterna som för närvarande är markerade. Om inga poster är markerade är den returnerade listan tom. Om en postidentifierare ingår i kommandot, returneras fältvärden för den specifika posten. </para>
+
+<para
+>Om den nuvarande samlingen är en bibliografi, returneras Bibtex hänvisningsnyckel för alla markerade poster genom att anropa kommandot <command
+>selectedBibtexKeys()</command
+>. Hänvisningsnyckeln för en specifik post kan hittas genom att använda kommandot <command
+>entryBibtexKey()</command
+>. </para>
+
+<para
+>Poster kan redigeras direkt med &DBus;-gränssnittet. Givet en postidentifierare, tilldelar <command
+>setEntryValue()</command
+> fältvärdet direkt. För att lägga till ett värde utan att påverka befintliga värden, använd <command
+>addEntryValue()</command
+>. Det nya värdet läggs till sist i den befintliga listan. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="dbus-examples">
+<title
+>&DBus;-exempel</title>
+
+<para
+>Här är några exempel på att använda skript för &appname; med användning av &DBus;-gränssnittet. </para>
+
+<screen width="40"
+><emphasis
+>Öppna en Bibtex-fil</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.importBibtex "~/documents/reference.bib" "replace"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Exportera en Bibtex-fil</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Exportera en Bibtex-fil med användning av nuvarande filtrering</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib true</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Visa den nuvarande markeringens hänvisningsnyckel</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.selectedBibtexKeys</userinput>
+<computeroutput
+>stephenson2004</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Lägg till en ny post och ange titel</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>myid=`qdbus org.kde.tellico /Collections org.kde.tellico.addEntry`</userinput>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.setEntryValue $myid title "Min nya bok"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+</sect2>
+
+</sect1>
+
+</chapter>

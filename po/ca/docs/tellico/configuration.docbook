@@ -1,0 +1,827 @@
+<chapter id="configuration">
+<title
+>Configuració</title>
+
+<para
+>El <interface
+>diàleg de configuració</interface
+> conté totes les opcions per a canviar alguns dels comportaments predeterminats del &appname;. </para>
+
+<para
+>En fer clic al botó <guibutton
+>Aplica</guibutton
+> <action
+>fareu que els canvis tinguin efecte immediatament</action
+> sense tancar el diàleg, mentre que <guibutton
+>D'acord</guibutton
+> <action
+>els aplicarà i tancarà el diàleg</action
+>. <guibutton
+>Cancel·la</guibutton
+> tancarà el diàleg, però els canvis ja fets i aplicats romandran. El botó <guibutton
+>Omissió</guibutton
+> <action
+>reverteix les opcions</action
+> a la pàgina actual del diàleg als seus valors predeterminats, mentre que <guibutton
+>Ajuda</guibutton
+> <action
+>obrirà el &khelpcenter;</action
+> a la secció relativa del manual del &appname;. </para>
+
+<para
+>Algunes opcions secundàries només es poden canviar editant el fitxer de configuració. Veure <link linkend="hidden-options"
+>Opcions ocultes</link
+>. </para>
+
+<sect1 id="general-options">
+<title
+><guilabel
+>Opcions generals</guilabel
+></title>
+
+<screenshot>
+<!-- <screeninfo
+>The General Options Dialog</screeninfo
+> -->
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="general-options.png"/></imageobject>
+<textobject
+><phrase
+>El diàleg Opcions generals</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Les <guilabel
+>Opcions generals</guilabel
+> controlen el comportament general. Les imatges es poden incloure als fitxers de dades, o es desen per separat a la carpeta de l'aplicació &appname;. A més, quan s'inicia el &appname;, pot tornar a obrir automàticament el fitxer de dades que estava obert. El diàleg <guilabel
+>Consell del dia</guilabel
+> conté consells útils sobre l'ús del &appname; i apareix en iniciar el programa. Potser voldreu llegir alguns dels consells i després desactivar el diàleg. El <interface
+>Filtre ràpid</interface
+> de la barra d'eines és útil per a filtrar fàcilment la col·lecció i poder utilitzar expressions regulars. </para>
+
+<para
+>Les <guilabel
+>Opcions de format</guilabel
+> controlen el nivell de format automàtic que fa el &appname;. Per a exemples, veure la <link linkend="field-formatting"
+>secció Donar format al camp</link
+>. La primera lletra en majúscula i el format són opcions diferents, ja que un camp es pot posar en majúscula la primera lletra sense canviar l'ordre de les paraules, i viceversa. La primera lletra en majúscula automàtica es pot canviar per a ignorar certes paraules. El format automàtic inclou articles gramaticals en els títols, juntament amb prefixos i sufixos per als noms propis. Els valors distingeixen entre majúscules i minúscules, i han d'estar separats per un punt i coma. </para>
+
+<para
+>Les regles de format segueixen l'ús general de l'anglès, el qual potser no funciona per a altres idiomes. Els articles s'afegeixen al final del títol, amb una coma. Els noms propis es disposen per a tenir primer el cognom, seguit d'una coma i després el nom. Els sufixos personals, com ara Jr, es mantenen amb el cognom. Els prefixos, com ara <emphasis
+>von</emphasis
+>, es mantenen amb el cognom, però s'ignoren quan s'ordenen els valors.</para>
+
+<informalexample
+><para
+><emphasis
+>John Q. von Public, III</emphasis
+> es convertiria en <emphasis
+>von Public, III, John Q.</emphasis
+> i <emphasis
+>Public</emphasis
+> s'utilitzarà com a clau d'ordenació.</para
+></informalexample>
+
+<para
+>Sols s'admeten els prefixos d'una sola paraula. Si un nom inclou <emphasis
+>van der</emphasis
+>, per exemple, tant <emphasis
+>van</emphasis
+> com <emphasis
+>der</emphasis
+> s'inclouran a la llista de prefixos del cognom. També s'admeten els articles que acaben amb un apòstrof per a l'ordenació. </para>
+
+<note
+><para
+>Els valors reals de la col·lecció <emphasis
+>no</emphasis
+> es canvien, sols el text visible utilitzat per a la interfície. De manera que les opcions de format es poden canviar cap enrere i endavant sense afectar a cap de les dades de la col·lecció.</para
+></note>
+
+</sect1>
+
+<sect1 id="printing-options">
+<title
+><guilabel
+>Opcions d'impressió</guilabel
+></title>
+
+<para
+>El &appname; utilitza una plantilla &xslt; per a crear &HTML; i després el passa al servei d'impressió del &kde;. Sols s'imprimeixen els camps visibles a la <link linkend="detailed-view"
+><interface
+>Vista de columna</interface
+></link
+>. A més, si la col·lecció ha estat filtrada, sols s'imprimiran les entrades visibles. Inicialment, apareixerà un missatge d'avís si el filtratge està actiu. </para>
+
+<screenshot>
+<screeninfo
+>El diàleg Opcions d'impressió</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="print-options.png"/></imageobject>
+<textobject
+><phrase
+>El diàleg Opcions d'impressió</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Les <guilabel
+>Opcions d'impressió</guilabel
+> permeten canviar algun format per a imprimir una col·lecció. Si <guilabel
+>Dona format als títols i als noms</guilabel
+> està marcada, els camps seran <link linkend="field-formatting"
+>automàticament amb format</link
+> quan s'imprimeixin. En cas contrari, s'imprimiran exactament com es van introduir. </para>
+
+<para
+>El full d'estil d'impressió predeterminat imprimeix la col·lecció amb els valors de camp en columnes. <guilabel
+>Imprimeix les capçaleres dels camps</guilabel
+> controla si el títol del camp s'imprimirà a la part superior de la columna. </para>
+
+<para
+>A la impressió, les entrades s'ordenaran tal com estan a la <link linkend="detailed-view"
+><interface
+>Vista de columna</interface
+></link
+>. A més, es poden agrupar com a la <link linkend="group-view"
+><interface
+>Vista de grup</interface
+></link
+>. </para>
+
+<para
+>Finalment, quan els camps d'imatge s'inclouen en la impressió, les imatges es poden canviar de mida, mentre es manté la seva relació d'aspecte. L'amplada i l'alçada màximes defineixen la mida més gran possible de la imatge, si bé mai serà augmentada. </para>
+</sect1>
+
+<sect1 id="template-options">
+<title
+><guilabel
+>Opcions de plantilla</guilabel
+></title>
+
+<para
+>La <link linkend="entry-view"
+><interface
+>Vista d'entrada</interface
+></link
+> utilitza plantilles per a mostrar els valors de camp. Podeu especificar una plantilla diferent per a cada tipus de col·lecció. Algunes plantilles, com ara les plantilles <emphasis
+>Àlbum</emphasis
+> o <emphasis
+>Vídeo</emphasis
+> són d'un tipus de col·lecció específic, i apareixerà un curt missatge d'error a la <interface
+>Vista d'entrada</interface
+> si s'utilitzen per a altres tipus. El botó <guilabel
+>Vista prèvia</guilabel
+> fa aparèixer una finestra per a mostrar una vista prèvia de l'aspecte de la plantilla. Els tipus de lletra i colors personalitzats es poden passar a la plantilla, i totes les plantilles predeterminades faran honor a aquestes opcions de configuració. No obstant això, les plantilles personalitzades podran optar per ignorar-los.</para>
+
+<para
+>Es poden instal·lar directament plantilles addicionals, o descarregar-les des de <ulink url="https://store.kde.org/"
+>store.kde.org</ulink
+> fent clic al botó <guilabel
+>Baixa</guilabel
+>. Qualsevol plantilla instal·lada per l'usuari també es pot suprimir. Les plantilles d'entrada es desen a <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/entry-templates/</filename
+>. </para>
+
+<para
+>Si creeu una nova plantilla, si us plau, considereu enviar-la a <ulink url="https://store.kde.org/"
+>store.kde.org</ulink
+>!</para>
+
+<screenshot>
+<screeninfo
+>El diàleg Opcions de plantilla</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="template-options.png"/></imageobject>
+<textobject
+><phrase
+>El diàleg Opcions de plantilla</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="data-sources-options">
+<title
+><guilabel
+>Opcions de les fonts de dades</guilabel
+></title>
+
+<para
+>El &appname; pot utilitzar diverses fonts per a importar les dades, el qual es pot configurar en el diàleg Fonts de dades. Hi ha disponibles molts tipus i fonts. Alguns d'ells es llisten a continuació, mentre que la llista completa està <ulink url="https://tellico-project.org/data-sources"
+>disponible al lloc web del &appname;</ulink
+>.</para>
+
+<itemizedlist>
+<!-- books -->
+<listitem
+><simpara
+><link linkend="amazon-web-services"
+>Serveis web Amazon.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="isbndb"
+>ISBNdb.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="openlibrary"
+>OpenLibrary.org</link
+>,</simpara
+></listitem>
+<!-- movies -->
+<listitem
+><simpara
+>la <link linkend="imdb"
+>base de dades de pel·lícules d'Internet</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="allocine"
+>AlloCiné</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="tmdb"
+>TheMovieDB.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+>la <link linkend="omdb"
+>base de dades oberta de pel·lícules</link
+>,</simpara
+></listitem>
+<!-- comics -->
+<listitem
+><simpara
+><link linkend="bedetheque"
+>BDGest</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="comicvine"
+>Comic Vine</link
+>,</simpara
+></listitem>
+<!-- music -->
+<listitem
+><simpara
+><link linkend="discogs"
+>Discogs.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="musicbrainz"
+>MusicBrainz.org</link
+>,</simpara
+></listitem>
+<!-- video games -->
+<listitem
+><simpara
+><link linkend="tgdb"
+>TheGamesDB.net</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="giantbomb"
+>GiantBomb.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="mobygames"
+>MobyGames.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="igdb"
+>IGDB.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="videogamegeek"
+>VideoGameGeek</link
+>,</simpara
+></listitem>
+<!-- board games -->
+<listitem
+><simpara
+><link linkend="boardgamegeek"
+>BoardGameGeek</link
+>,</simpara
+></listitem>
+<!-- bibliographic -->
+<listitem
+><simpara
+><link linkend="bib-sources"
+>arxiv.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="entrez"
+>bases de dades Entrez (PubMed)</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="z3950"
+>servidors z39.50</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="sru"
+>servidors SRU</link
+>,</simpara
+></listitem>
+<!-- coins -->
+<listitem
+><simpara
+><link linkend="colnect"
+>Colnect</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="numista"
+>Numista</link
+>,</simpara
+></listitem>
+<!-- others -->
+<listitem
+><simpara
+><link linkend="externalexec"
+>altres scripts externs o aplicacions</link
+> i</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="multiple-sources"
+>combinacions de qualsevol de les fonts esmentades anteriorment</link
+>.</simpara
+></listitem>
+</itemizedlist>
+
+<screenshot>
+<screeninfo
+>El diàleg Opcions de les fonts de dades</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="source-options.png"/></imageobject>
+<textobject
+><phrase
+>El diàleg Opcions de les fonts de dades</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Les noves fonts es poden afegir fent clic al botó <guibutton
+>Nova...</guibutton
+>, mentre que els ja existents es poden modificar o suprimir, utilitzant el .<guibutton
+>Modifica...</guibutton
+> o <guibutton
+>Suprimeix</guibutton
+>. L'ordre de les fonts, el qual es mostra en els menús d'actualització de les entrades, també es pot canviar. </para>
+
+<warning>
+<para
+>Mai instal·leu i executeu un script des d'una font no fiable. Doncs s'executen amb els mateixos permisos que l'usuari, i com a resultat, podrien modificar o suprimir fitxers o perjudicar el vostre sistema de qualsevol altra forma. </para>
+</warning>
+
+<para
+>Moltes de les fonts de dades ofereixen més informació que els camps predeterminats del &appname;. Aquests altres camps es mostren a la dreta del quadre de configuració. Si es marca qualsevol d'aquests camps, s'afegiran a la col·lecció quan s'afegeixi una entrada des d'aquesta font. </para>
+
+<!-- start book sources -->
+
+<sect2 id="book-sources">
+<title
+>Fonts de dades de llibres i bibliogràfiques</title>
+
+<sect3 id="z3950">
+<title
+>Servidors z39.50</title>
+
+<para
+>El <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html"
+>protocol z39.50</ulink
+> s'utilitza per a accedir a les biblioteques i als proveïdors d'informació bibliogràfica de tot el món. Les llistes de servidors z39.50 públics estan <ulink url="http://www.indexdata.dk/targettest/"
+>disponibles a indexdata.dk</ulink
+>, entre d'altres. El &appname; ve amb diverses configuracions preestablertes per a les biblioteques més importants, o pot especificar la informació de connexió de forma manual.</para>
+
+<para
+>El &appname; és capaç de llegir les dades en els formats <acronym
+>MODS</acronym
+>, <acronym
+>USMARC</acronym
+>/<acronym
+>MARC21</acronym
+> o <acronym
+>UNIMARC</acronym
+>, utilitzant la <ulink url="http://www.indexdata.dk/yaz/"
+>biblioteca yaz</ulink
+>. A més, es disposa d'una implementació limitada per al format <acronym
+>GRS-1</acronym
+>. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="z3950-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Per a utilitzar una de les biblioteques preestablertes, marqueu la casella i seleccioneu la biblioteca. Les altres entrades de configuració es desactivaran. Si necessiteu ajustar la informació manualment, desmarqueu la casella preestablerta. </para>
+
+<para
+>El port predeterminat per a l'accés a z39.50 és el 210, però alguns servidors poden utilitzar un de diferent. El &appname; assumeix que el servidor utilitza la codificació de caràcters MARC-8, llevat que es configuri una altra. Si s'utilitza una codificació de caràcters incorrecta, podrà aparèixer un missatge d'error a la sortida del programa, o potser no s'obtenen entrades. </para>
+
+<para
+>Alguns servidors requereixen un nom d'usuari i contrasenya d'accés. El &appname; pot utilitzar i desar aquesta contrasenya, però cal tenir en compte que s'escriurà al fitxer de configuració del &appname; en text net i que no és segur. Per a la majoria dels servidors públics, els camps de nom d'usuari i contrasenya es poden deixar buits. </para>
+
+</sect3>
+
+<sect3 id="sru">
+<title
+>Servidors SRU</title>
+
+<para
+>SRU significa <ulink url="http://www.loc.gov/standards/sru/"
+>Search/Retrieve via &URL; (Cerca i obtén via &URL;)</ulink
+> i és un protocol de cerca estàndard per a les cerques a Internet. Algunes biblioteques l'utilitzen per a proporcionar accés als seus catàlegs de dades. Entre elles, la <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
+>Biblioteca del Congrés dels EUA</ulink
+> probablement és la més coneguda. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="sru-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect3>
+
+<sect3 id="entrez">
+<title
+>Bases de dades Entrez</title>
+<para
+><ulink url="http://www.ncbi.nlm.nih.gov/Entrez/"
+>Entrez</ulink
+> és el sistema integrat de cerca i obtenció basat en text utilitzat en el Centre nacional d'informació sobre biotecnologia (Center for Biotechnology Information -NCBI-). La base de dades Entrez més coneguda és <ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed"
+>PubMed</ulink
+>, la base de dades per a articles de ciències de la vida de moltes revistes sobre biologia. De moment, l'única base de dades Entrez implementada pel &appname; és PubMed.</para>
+</sect3>
+
+<sect3 id="bib-sources">
+<title
+>Bases de dades bibliogràfiques</title>
+<para
+><ulink url="http://arxiv.org"
+>arXiv.org</ulink
+>, <ulink url="http://bibsonomy.org"
+>Bibsonomy</ulink
+> i <ulink url="http://crossref.org"
+>CrossRef</ulink
+> són bases de dades en línia per a articles acadèmics i informació bibliogràfica. Per a accedir a la font de CrossRef, haureu de <ulink url="http://www.crossref.org/requestaccount/"
+>sol·licitar un compte</ulink
+> i afegir la informació del vostre compte en la configuració de les fonts de dades.</para>
+</sect3>
+
+<sect3 id="isbndb">
+<title
+>ISBNdb.com</title>
+<para
+><ulink url="http://isbndb.com"
+>ISBNdb.com</ulink
+> és una base de dades de llibres en línia, des de biblioteques a tot el món. </para>
+</sect3>
+
+<sect3 id="openlibrary">
+<title
+>OpenLibrary.org</title>
+<para
+><ulink url="http://openlibrary.org"
+>OpenLibrary.org</ulink
+> és una base de dades de llibres en línia que aspira a tenir una pàgina per a cada llibre. </para>
+</sect3>
+
+</sect2>
+<!-- end of books -->
+
+<!-- start of movie sources -->
+<sect2 id="comicbook-sources">
+<title
+>Fonts de dades de còmics</title>
+
+<sect3 id="bedetheque">
+<title
+>Bedetheque</title>
+<para
+><ulink url="http://www.bedetheque.com"
+>Bedetheque</ulink
+> és una base de dades de còmics francesa, gestionada per BDGest. </para>
+</sect3>
+
+<sect3 id="comicvine">
+<title
+>Comic Vine</title>
+<para
+><ulink url="https://comicvine.gamespot.com/"
+>Comic Vine</ulink
+> es manifesta com la wiki de còmics més gran de l'univers. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of movie sources -->
+<sect2 id="movie-sources">
+<title
+>Fonts de dades de pel·lícules</title>
+
+<sect3 id="imdb">
+<title
+>Base de dades de pel·lícules d'Internet</title>
+
+<para
+>La <ulink url="http://www.imdb.com"
+>base de dades de pel·lícules d'Internet</ulink
+> proporciona informació sobre les pel·lícules i vídeos. Quan es fa la cerca d'una <emphasis
+>persona</emphasis
+>, si hi ha més d'un resultat possible, s'obrirà un diàleg que us permetrà triar la persona correcta. Les opcions de configuració inclouen seleccionar la nacionalitat IMDb a utilitzar i si es prendran o no les imatges. Com IMDb pot retornar un gran nombre de membres del repartiment, els podeu limitar a un nombre determinat. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="imdb-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect3>
+
+<sect3 id="tmdb">
+<title
+>TheMovieDB.org</title>
+<para
+><ulink url="http://themoviedb.org"
+>TheMovieDB.org</ulink
+> és una base de dades de pel·lícules en línia lliure i oberta. Us podeu registrar per a obtenir un compte gratuït. </para>
+</sect3>
+
+<sect3 id="omdb">
+<title
+>La base de dades oberta de pel·lícules</title>
+<para
+><ulink url="http://omdbapi.com"
+>La base de dades oberta de pel·lícules (OMDBAPI.com)</ulink
+> és un servei web gratuït per a obtenir informació sobre les pel·lícules. </para>
+</sect3>
+
+<sect3 id="allocine">
+<title
+>AlloCiné</title>
+<para
+><ulink url="http://allocine.fr"
+>AlloCiné</ulink
+> és un servei en línia d'informació de pel·lícules, amb seu a França. S'hauria d'habilitar la identificació del navegador a l'&systemsettings;. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of music sources -->
+<sect2 id="music-sources">
+<title
+>Fonts de dades de música</title>
+
+<sect3 id="discogs">
+<title
+>Discogs.com</title>
+<para
+><ulink url="http://discogs.com"
+>Discogs.com</ulink
+> és una base de dades de música construïda pels usuaris que conté informació sobre els artistes, segells i les seves gravacions. Es requereix registre per a obtenir un compte gratuït. S'hauria d'habilitar la identificació del navegador a l'&systemsettings;. </para>
+</sect3>
+
+<sect3 id="musicbrainz">
+<title
+>MusicBrainz.org</title>
+<para
+><ulink url="http://musicbrainz.org"
+>MusicBrainz.org</ulink
+> és una base de dades de metadades comunitària de música que intenta crear un lloc d'informació de música exhaustiu. S'hauria d'habilitar la identificació del navegador a l'&systemsettings;. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of wine sources -->
+<!--<sect2 id="wine-sources">
+<title
+>Wine Data Sources</title>
+
+</sect2
+>-->
+
+<!-- start of video game sources -->
+<sect2 id="videogame-sources">
+<title
+>Fonts de dades de videojocs</title>
+
+<sect3 id="giantbomb">
+<title
+>GiantBomb.com</title>
+<para
+><ulink url="http://giantbomb.com"
+>GiantBomb.com</ulink
+> és una gran base de dades de videojocs impulsada per la comunitat. Es requereix registre per a obtenir un compte gratuït. </para>
+</sect3>
+
+<sect3 id="tgdb">
+<title
+>TheGamesDB.net</title>
+<para
+><ulink url="http://thegamesdb.net"
+>TheGamesDB.net</ulink
+> és una base de dades oberta que està en línia per als aficionats a videojocs. </para>
+</sect3>
+
+<sect3 id="mobygames">
+<title
+>MobyGames</title>
+<para
+><ulink url="https://www.mobygames.com"
+>MobyGames.com</ulink
+> es descriu a si mateixa com la base de dades de videojocs més antiga, més gran i precisa. </para>
+</sect3>
+
+<sect3 id="igdb">
+<title
+>IGDB.com</title>
+<para
+><ulink url="https://www.igdb.com"
+>IGDB.com</ulink
+> es descriu a si mateixa com un lloc web de jocs per a tots els amants dels jocs. </para>
+</sect3>
+
+<sect3 id="videogamegeek">
+<title
+>VideoGameGeek</title>
+<para
+><ulink url="https://videogamegeek.com"
+>VideoGameGeek</ulink
+> és un recurs i comunitat en línia de videojocs. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of board game sources -->
+<sect2 id="boardgame-sources">
+<title
+>Fonts de dades de jocs de taula</title>
+
+<sect3 id="boardgamegeek">
+<title
+>BoardGameGeek</title>
+<para
+><ulink url="https://boardgamegeek.com"
+>BoardGameGeek</ulink
+> és un recurs i comunitat en línia de jocs de taula. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of coin sources -->
+<sect2 id="coin-sources">
+<title
+>Fonts de dades de monedes i segells</title>
+
+<sect3 id="colnect">
+<title
+>Colnect</title>
+<para
+><ulink url="https://colnect.com"
+>Colnect</ulink
+> és una comunitat en línia per a col·leccionistes que proporciona gestió de les col·leccions personals. El &tellico; pot cercar informació a Colnect sobre les monedes i segells. </para>
+</sect3>
+
+<sect3 id="numista">
+<title
+>Numista</title>
+<para
+><ulink url="https://numista.com"
+>Numista</ulink
+> és un catàleg mundial de monedes que creix gràcies a les contribucions dels membres, el qual ofereix gestió de col·leccions en línia, eines per a intercanviar fàcilment amb altres col·leccionistes i un fòrum. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="variety-type-sources">
+<title
+>Fonts de dades per a múltiples tipus de col·leccions</title>
+
+<sect3 id="amazon-web-services">
+<title
+>Amazon.com</title>
+
+<para
+>Utilitzant els serveis web d'Amazon, el &appname; pot cercar informació a qualsevol dels 14 diferents llocs internacionals operats per <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>: els Estats Units, Regne Unit, Alemanya, Japó, França, Canadà, Xina, Espanya, Itàlia, Brasil, Austràlia, Índia, Mèxic i Turquia. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="amazon-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>La configuració de cada font d'Amazon.com implica tres opcions: la ubicació del servidor, la mida de la imatge i l'identificador de l'associat. Part de la informació d'<ulink url="http://amazon.com"
+>Amazon.com</ulink
+> pot incloure una imatge, com la coberta d'un llibre o d'un vídeo. Aquesta imatge es pot descarregar en tres mides diferents, segons l'element. La identificació de l'associat s'utilitzarà per a accedir als serveis web d'Amazon.com, i s'inclourà als enllaços cap a l'element, tal com es dicta a l'acord de llicència per a l'ús dels serveis web d'Amazon.com. </para>
+
+<para
+>L'accés a l'<ulink url="https://docs.aws.amazon.com/AWSECommerceService/latest/DG/Welcome.html"
+>API de publicitat dels productes d'Amazon</ulink
+> pot tenir restriccions relacionades amb les referències de vendes o la publicitat. Consulteu la documentació d'Amazon per a obtenir més informació en registrar-vos per a accedir a l'API. </para>
+
+</sect3>
+
+<sect3 id="externalexec">
+<title
+>Scripts o aplicacions externes</title>
+<para
+>Com una manera més fàcil perquè el &appname; s'integri amb connectors de tercers, es poden utilitzar scripts o aplicacions externes com una interfície per a la cerca a altres fonts d'informació. El &appname; executarà una ordre, i passarà els termes de cerca com a opcions de la línia d'ordres. </para>
+
+<para
+>Alguns scripts es distribueixen amb l'aplicació &appname;. El <ulink url="http://python.org"
+>Python</ulink
+> és requerit per a cercar a <ulink url="http://darkhorse.com"
+>Dark Horse Comics</ulink
+>, un editor de còmics, per exemple. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="externalexec-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Haureu d'establir el tipus de col·lecció retornat per l'script, juntament amb el format de les dades. El &appname; no només pot importar dades des de scripts que utilitzen el <link linkend="file-format"
+>format &XML; predeterminat del &appname;</link
+>, sinó que també pot importar altres formats, així com «bibtex». </para>
+
+<para
+>El camí complet a l'aplicació s'ha d'introduir a les opcions de la font. Cal tenir en compte que l'aplicació s'executa en el sistema amb els mateixos permisos que l'usuari actual, de manera que no utilitzeu scripts de fonts no fiables. Marqueu les caselles al costat de les claus de cerca admeses per l'aplicació, i introduïu les opcions de la línia d'ordres requerides al quadre d'edició. El valor de cerca s'insereix on apareix <userinput
+>%1</userinput
+>. </para>
+
+<para
+>Per a actualitzar les entrades que ja estan a la col·lecció, s'utilitzen les caselles de selecció finals i el quadre d'edició per a determinar les opcions de la línia d'ordres. Els camps d'entrada s'utilitzen per a trobar una actualització, en el mateix format a l'utilitzat per als camps de <link linkend="derived"
+>valor derivat</link
+>. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="multiple-sources">
+<title
+>Combinar múltiples fonts de dades</title>
+<para
+>Es poden utilitzar combinacions de fins a vuit fonts de dades existents com una font única, on cada resultat de la cerca des de la primera font serà actualitzat a partir de les fonts posteriors. Abans d'afegir les fonts s'haurà d'establir el tipus de col·lecció que s'utilitzarà. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="multiple-sources-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>En la combinació només es poden utilitzar fonts de dades existents. Només es pot utilitzar el tipus de cerca per a la primera font, ja que els resultats provenen de la primera font de dades. Per exemple, primer es pot realitzar una cerca d'UPCitemDb i després s'actualitzarà cada resultat des de TheMovieDB. </para>
+</sect2>
+
+</sect1>
+
+</chapter>

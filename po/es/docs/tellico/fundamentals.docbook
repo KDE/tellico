@@ -1,0 +1,1074 @@
+<chapter id="fundamentals">
+<title
+>Uso de &appname;</title>
+
+<sect1 id="quick-start">
+<title
+>Inicio rápido</title>
+
+<para
+>De forma predeterminada, &appname; empieza con una colección de libros vacía. Para trabajar con cualquier otro tipo de colección, créelo usando la opción de menú <menuchoice
+><guimenu
+>Archivo</guimenu
+><guimenuitem
+>Nuevo</guimenuitem
+> </menuchoice
+>, o el botón de la barra de herramientas. Las colecciones se van rellenando con algunos de los campos más comunes, aunque puede añadirlos, modificarlos o eliminarlos según sus necesidades. </para>
+
+<para
+>Las nuevas entradas se pueden añadir usando el <link linkend="entry-editor"
+> <interface
+>Editor de entradas</interface
+></link
+>. La opción de menú <menuchoice
+><guimenu
+>Colección</guimenu
+><guimenuitem
+>Nueva entrada</guimenuitem
+></menuchoice
+> abrirá el <interface
+>Editor de entradas</interface
+> con una entrada vacía lista para editar. El <interface
+>Editor de entradas</interface
+> también se puede abrir usando la opción de menú <menuchoice
+><guimenu
+>Preferencias</guimenu
+><guimenuitem
+>Mostrar editor de entradas</guimenuitem
+></menuchoice
+>. Una vez ha introducido los valores para la entrada, puede guardarla en la colección usando el botón <guibutton
+>Guardar entrada</guibutton
+> en el diálogo <interface
+>Editor de entradas</interface
+>, que permanece abierto in caso de que desee continuar añadiendo nuevas entradas. Una vez haya guardado una entrada en la colección, puede modificarla haciendo clic sobre ella en la ventana principal. Si el <interface
+>Editor de entradas</interface
+> no está abierto, puede hacer doble clic sobre una entrada para abrir el editor y empezar a editarla. </para>
+
+<para
+>Si desea incluir una imagen en la entrada, puede usar el selector de archivos estándar de &kde; haciendo clic en el botón <guibutton
+>Seleccionar imagen...</guibutton
+> en el <link linkend="entry-editor"
+><interface
+>Editor de entradas</interface
+> </link
+>, o puede arrastrar una imagen desde el gestor de archivos o navegador web al <interface
+>Editor de entradas</interface
+>. </para>
+
+<para
+>Cuando selecciona una entrada, la <link linkend="entry-view"
+> <interface
+>Vista de entrada</interface
+></link
+> muestra una vista formateada del contenido de la entrada. Puede cambiar la plantilla usada para mostrar la entrada en el <link linkend="configuration"
+><interface
+>Diálogo de configuración</interface
+></link
+>. </para>
+
+<para
+>Las entradas de la colección se agrupan cuando comparten los mismos valores para determinados campos, como el autor o el director. Puede cambiar el campo usado para agrupar usando la lista desplegable de la barra de herramientas, o la opción de menú <menuchoice
+><guimenu
+>Configuración</guimenu
+> <guimenuitem
+>Selección de grupo</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Puede usar el  <interface
+>Filtro rápido</interface
+> de la barra de herramientas para limitar rápidamente las entradas visibles a solo las que contengan la palabra que escriba. El filtro también es útil cuando quiere encontrar rápidamente una entrada. Puede teclear el título o cualquier otra palabra única que identifique la entrada y la <link linkend="detailed-view"
+><interface
+>Vista de columnas</interface
+> </link
+> mostrará solo las entradas que coincidan con el filtro. La barra de estado muestra cuántas entradas hay en la colección, y cuántas están siendo filtradas actualmente. </para>
+
+</sect1>
+
+<sect1 id="main-window">
+<title
+>Uso general</title>
+
+<para
+>La ventana principal tiene tres áreas distintas, todas las cuales muestran información sobre la colección de maneras diferentes. La vista primaria es la <link linkend="detailed-view"
+><interface
+>Vista de columnas</interface
+> </link
+> en el área superior derecha, donde se puede mostrar el valor de cada campo para cada entrada. A la izquierda, las pestañas contienen la <link linkend="group-view"
+><interface
+>Vista de grupo</interface
+></link
+>, que se peude usar para ordenar las entradas en grupos en una estructura de árbol, la <link linkend="filter-view"
+><interface
+>Vista de filtro</interface
+> </link
+>, que se usa para rastrear las entradas que cumplan ciertos criterios, y la <link linkend="loan-view"
+><interface
+> Vista de préstamo</interface
+></link
+>, donde se listan todos los préstamos. Finalmente, la <link linkend="entry-view"
+> <interface
+>Vista de entrada</interface
+></link
+> muestra una vista con formato de los datos para una sola entrada, o un icono de un grupo de entradas, en la parte inferior derecha. </para>
+
+<screenshot>
+<screeninfo
+>La ventana principal de &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="main-window.png"/></imageobject>
+<textobject
+><phrase
+>La ventana principal de &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="detailed-view">
+<title
+><interface
+>Vista de columna</interface
+></title>
+
+<para
+>Cualquiera de los campos de las colecciones se pueden mostrar en la <interface
+>Vista de columna</interface
+>, aunque los campos de  <emphasis
+><link linkend="para"
+>Párrafo</link
+></emphasis
+>, <emphasis
+><link linkend="image"
+>Imagen</link
+></emphasis
+>, y <emphasis
+><link linkend="table"
+>Tabla</link
+></emphasis
+> probablemente no serán útiles. Hacer clic derecho sobre el encabezado de la vista abre un menú para seleccionar los campos visibles. Se puede cambiar el tamaño y el orden de las columnas de cualquier forma, y la configuración se guardará entre sesiones. </para>
+</sect2>
+
+<sect2 id="group-view">
+<title
+><interface
+>Vista de grupo</interface
+></title>
+
+<para
+>La <interface
+>Vista de grupo</interface
+> agrupa las entradas en una vista de árbol según cualquier campo que <link linkend="field-options"
+>permita el agrupamiento</link
+>. El número de entradas de cada grupo se muestra al lado del nombre del grupo. Los grupos se pueden expandir o contraer haciendo clic sobre el signo con forma de flecha, o haciendo doble clic sobre el elemento. Expandir y contraer todos los grupos son opciones que aparecen en el menú contextual al hacer clic con el botón derecho del ratón. El árbol se puede ordenar tanto por nombre de grupo como por la cuenta, haciendo clic en el encabezado. Un grupo también se puede usar como filtro para la <link linkend="detailed-view"
+><interface
+>Vista de columna</interface
+></link
+>, haciendo clic con el botón derecho sobre el elemento grupo. </para>
+
+<para id="people-group"
+>Cuando más de un campo de la colección tiene la opción <emphasis
+><link linkend="fields-dialog"
+><guilabel
+>Formatear como nombre</guilabel
+></link
+></emphasis
+> habilitada, se añade un grupo adicional para combinar todos esos campos en un solo pseudo-grupo llamado <emphasis
+>Personas</emphasis
+>. </para>
+
+<para
+>Si una entrada no contiene ningún valor para el campo que se está usando para formar los grupos, se coloca en el grupo <emphasis
+>(Vacío)</emphasis
+>, que usa una carpeta roja. </para>
+</sect2>
+
+<sect2 id="filter-view">
+<title
+><interface
+>Vista de filtro</interface
+></title>
+
+<para
+>Si hay filtros guardados para la colección, la <interface
+>Vista de filtro</interface
+> estará activa. A medida que añada y modifique entradas, estas se compararán con los filtros y se añadirán o eliminarán, según sea el caso. Puede modificar el filtro haciendo doble clic en el elemento para abrir el <link linkend="filter-dialog"
+><interface
+>Diálogo de filtro avanzado</interface
+></link
+>. Haga clic con el botón derecho para poder eliminarlo de todas formas. </para>
+
+<screenshot>
+<screeninfo
+>La <interface
+>Vista de filtro</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-view.png"/></imageobject>
+<textobject
+><phrase
+>La <interface
+>Vista de filtro</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="loan-view">
+<title
+><interface
+>Vista de préstamo</interface
+></title>
+
+<para
+>Una vez las entradas se han dado en préstamo, la <interface
+>Vista de préstamo</interface
+> se añade a la ventana, de forma que se puedan rastrear las entradas dadas en préstamo. Los préstamos se registran por entrada, así que hacer un clic derecho sobre un elemento de la entrada tiene una opción para modificar el préstamo utilizando el <interface
+>Diálogo de préstamo</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>La <interface
+>Vista de préstamo</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-view.png"/></imageobject>
+<textobject
+><phrase
+>La <interface
+>Vista de préstamo</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="entry-view">
+<title
+><interface
+>Vista de entrada</interface
+></title>
+
+<para
+>En la <interface
+>Vista de entrada</interface
+> se muestra una representación con formato de los valores de la entrada. Se usan plantillas para la distribución y cualquier gráfico adicional. Se pueden especificar plantillas separadas para cada tipo de colección en el <link linkend="template-options"
+><interface
+>Diálogo de configuración</interface
+></link
+>, junto con colores y tipos de letra personalizados.</para>
+
+<para
+>Todas las plantillas predeterminadas reflejan el color y la selección del tipo de letra, pero puede que otras plantillas personalizadas no lo hagan. Las plantillas por defecto también tienen campos &URL; activos, que se abrirán con la asociación de archivo predeterminada de &kde;. Cuando exporte a &HTML;, la plantilla actual se usará para exportar los archivos de entrada individuales. </para>
+
+</sect2>
+
+<sect2 id="status-bar">
+<title
+>Barra de estado</title>
+
+<para
+>La barra de estado se utiliza para mostrarle lo que &appname; está haciendo. También incluye un recuento total de las entradas de la colección y, si se está usando un filtro, cuántas son actualmente visibles. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="entry-editor">
+<title
+>Editar entradas</title>
+
+<para
+>El <interface
+>Editor de entradas</interface
+> se utiliza para añadir y modificar entradas de la colección. Hacer doble clic en una entrada en la <interface
+>Vista de grupo</interface
+> o en la <interface
+>Vista de columna</interface
+> abre el <interface
+>Editor de entradas</interface
+> con esa entrada. Las nuevas entradas se pueden crear usando el menú <menuchoice
+><guimenu
+>Colección</guimenu
+></menuchoice
+>, el icono de la barra de herramientas o el botón en el propio <interface
+>Editor de entradas</interface
+>.</para>
+
+<para
+>Cerrar el <interface
+>Editor de entradas</interface
+> cuando se han hecho cambios pero no se han guardado hará que aparezca un mensaje de advertencia. Los campos se agrupan por categoría, y aparecen en el orden en que lo hacen en el <link linkend="fields-dialog"
+> <interface
+>Diálogo de campos de la colección</interface
+></link
+>. También se pueden reordenar. </para>
+
+<screenshot>
+<screeninfo
+>El <interface
+>Editor de entradas</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor1.png"/></imageobject>
+<textobject
+><phrase
+>El <interface
+>Editor de entradas</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Hacer clic en el título de un campo de <link linkend="url"
+><emphasis
+>&URL;</emphasis
+></link
+> abrirá el enlace usando la asociación de archivos por defecto de &kde;. El botón <guiicon
+>selector de &URL;</guiicon
+> junto al texto de la entrada abrirá el diálogo de abrir archivo predeterminado de &kde;, pero el campo no está limitado a archivos locales. </para>
+
+<para
+>Para campos de <link linkend="image"
+><emphasis
+>Imagen</emphasis
+></link
+>, el botón <guibutton
+>Seleccionar imagen...</guibutton
+> abre el selector de archivos de imágenes de &kde;. La imagen se guarda en la colección en su formato original, y una versión a escala se muestra en el <interface
+>Editor de entradas</interface
+>. La imagen se puede borrar usando el botón <guibutton
+>Limpiar</guibutton
+>. Las imágenes borradas son eliminadas de la colección. </para>
+
+<screenshot>
+<screeninfo
+>El <interface
+>Editor de entradas</interface
+>para campos de <emphasis
+>Imagen</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor3.png"/></imageobject>
+<textobject
+><phrase
+>El <interface
+>Editor de entradas</interface
+>para campos de <emphasis
+>Imagen</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>El widget de edición también admite arrastrar y soltar. Arrastrar un archivo de imagen desde el gestor de archivos o la ventana del navegador hace lo mismo que seleccionar la imagen en el selector de archivos. Arrastrar la imagen desde el widget de edición a una ventana de gestión de archivos de &konqueror; guardará la imagen en esa carpeta. </para>
+
+<warning>
+<para
+>Por defecto, las imágenes se guardan en el archivo de datos de la colección, manteniendo todo contenido en una sola ubicación. Sin embargo, demasiadas imágenes harán que &appname; se ralentice significativamente  y en que se forme un archivo de datos muy grande. Alternativamente, &appname; puede guardar las imágenes de forma separada, tanto en la carpeta <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/data/</filename
+> como en una carpeta en la misma ubicación del archivo de datos. Cargar y guardar archivos de datos es mucho más rápido si las imágenes se almacenan separadamente. pero los archivos de datos ya no serán trasladables a otros formatos o archivables. Los archivos de datos autocontenidos siempre se podrán crear usando el elemento de menú <menuchoice
+><guimenu
+>Archivo</guimenu
+><guimenu
+>Exportar</guimenu
+><guimenuitem
+>Exportar a Zip...</guimenuitem
+></menuchoice
+>. </para>
+</warning>
+
+<para
+>Los campos de <link linkend="table"
+><emphasis
+>Tabla</emphasis
+></link
+> empiezan con cinco filas, pero al mover el cursor a la última fila se añade otra automáticamente. Para tablas con varias columnas, solo la primera se utiliza para agrupar o para dar formato. </para>
+
+<screenshot>
+<screeninfo
+>El <interface
+>Editor de entradas</interface
+> para campos de <emphasis
+>Tabla</emphasis
+> fields</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor4.png"/></imageobject>
+<textobject
+><phrase
+>El <interface
+>Editor de entradas</interface
+> para campos de <emphasis
+>Tabla</emphasis
+> fields</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="edit-multiple">
+<title
+>Editar varias entradas</title>
+<para
+>Se pueden editar al mismo tiempo múltiples entradas seleccionando más de una tanto en la <interface
+>Vista de grupo</interface
+> como en la <interface
+>Vista de columnas</interface
+>. Si están seleccionadas varias entradas, los campos que contentan el mismo valor en cada entrada estarán habilitados. Si las entradas tienen diferentes valores, los campos estarán deshabilitados. Se añaden a la derecha de cada campo unas casillas de verificación que controlan si el campo está habilitado o no, tal como se muestra en la captura de pantalla de abajo. </para>
+
+<para
+>Solo se modificarán los campos habilitados cuando se guarden las entradas, lo que hace la edición a gran escala mucho más fácil. Por ejemplo, para establecer el «Medio» de todas las entradas de video de la colección, asegúrese de que el campo «Medio»  está habilitado. Cámbielo a <acronym
+>DVD</acronym
+>, y después guarde las entradas. Solo se modificará el campo «Medio», preservando los valores de todos los demás campos de las entradas. </para>
+
+<screenshot>
+<screeninfo
+>El <interface
+>Editor de entradas</interface
+> para entradas múltiples</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor5.png"/></imageobject>
+<textobject
+><phrase
+>El <interface
+>Editor de entradas</interface
+> para entradas múltiples</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="updating-entries">
+<title
+>Actualizando los datos de las entradas</title>
+
+<para
+>Las entradas se pueden actualizar automáticamente consultando las fuentes de datos disponibles para el tipo actual de colección, lo cual es muy útil para información combinada de diferentes fuentes. Por ejemplo, puede añadir una película a su colección usando el <link linkend="amazon-web-services"
+>servicio web de Amazon.com</link
+>, y después actualizar la entrada con información adicional de <link linkend="imdb"
+>Internet Movie Database</link
+>. </para>
+
+<para
+>Solo se actualizan los campos vacíos a menos que <link linkend="data-sources-options"
+>la configuración para esa fuente</link
+> permita que los resultados sobrescriban la información existente. Para los <link linkend="externalexec"
+>scripts externos</link
+>, se debe especificar un campo de actualización en las opciones de la fuente. </para>
+
+<para
+>La actualización de las entradas se puede iniciar mediante el menú contextual (clic derecho) de una entrada, o usando el elemento de menú <menuchoice
+><guimenu
+>Colección</guimenu
+><guimenuitem
+>Actualizar entrada </guimenuitem
+></menuchoice
+>. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="fields-dialog">
+<title
+>Editar campos</title>
+
+<para
+>El <interface
+>Diálogo de campos de la colección</interface
+> le permite añadir nuevos campos a la colección, modificar los existentes o eliminarlos. </para>
+
+<screenshot>
+<screeninfo
+>El <interface
+>Diálogo de campos de la colección</interface
+> de &appname; </screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
+<textobject
+><phrase
+>El <interface
+>Diálogo de campos de la colección</interface
+> de &appname; </phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="field-list">
+<title
+>Lista de campos</title>
+
+<para
+>A la izquierda del diálogo está la lista de los campos actuales. Los campos modificados se muestran en negrita cursiva. Los botones de debajo de la lista añaden o eliminan un campo, y las flechas se pueden usar para cambiarlos de orden. El orden de los campos de la lista es importante, porque el <interface
+>Editor de entradas</interface
+> utiliza ese orden para su distribución. Para cada categoría, los campos se disponen de izquierda a derecha, según el orden de arriba hacia abajo de los campos de la lista. </para>
+</sect2>
+
+<sect2 id="field-properties">
+<title
+>Propiedades del campo</title>
+
+<para
+>Un campo se define por su título, tipo, categoría, descripción y posiblemente un valor predeterminado o algunos valores permitidos. El título se usa en todas partes para referirse al campo en el interfaz de usuario. El <interface
+>Editor de entradas</interface
+> lo utiliza para pedir valores. La <interface
+>Vista de columnas</interface
+> lo usa como encabezado de columna. Los diferentes tipos de campos están <link linkend="field-types"
+>explicados en la sección Tipos de campos</link
+>. La descripción se usa como pista en el <interface
+>Editor de entradas</interface
+> para dar una explicación de los contenidos del campo. Además, para <link linkend="derived"
+>campos con valores <emphasis
+>derivados</emphasis
+></link
+>, se utiliza una plantilla de valor para darle formato al valor del campo. El valor por defecto se añade automáticamente cuando se crea una nueva entrada. la lista de valores permitidos para los campos de <link linkend="choice"
+> <emphasis
+>Elección</emphasis
+></link
+> deben separarse por un punto y coma. </para>
+
+<para
+>Los nuevos campos pueden ser de cualquier tipo, pero cambiar el tipo de los campos ya existentes está restringido a los tipos compatibles, tal como se muestra en la tabla de abajo: </para>
+
+<table>
+<title
+>Cambios de tipo de campo permitidos</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tipo actual</entry>
+<entry
+>Nuevo tipo permitido</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Texto sencillo</emphasis
+></entry>
+<entry
+><emphasis
+>Texto simple</emphasis
+>, <emphasis
+>Párrafo</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabla</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Párrafo</emphasis
+></entry>
+<entry
+><emphasis
+>Texto simple</emphasis
+>, <emphasis
+>Párrafo</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Elección</emphasis
+></entry>
+<entry
+><emphasis
+>Texto sencillo</emphasis
+>, <emphasis
+>Párrafo</emphasis
+>, <emphasis
+>Elección</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabla</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Casilla de verificación</emphasis
+></entry>
+<entry
+><emphasis
+>Texto sencillo</emphasis
+>, <emphasis
+>Párrafo</emphasis
+>, <emphasis
+>Casilla de verificación</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabla</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Número</emphasis
+></entry>
+<entry
+><emphasis
+>Texto simple</emphasis
+>, <emphasis
+>Párrafo</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabla</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>&URL;</emphasis
+></entry>
+<entry
+><emphasis
+>Texto simple</emphasis
+>, <emphasis
+>Párrafo</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabla</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Fecha</emphasis
+></entry>
+<entry
+><emphasis
+>Texto simple</emphasis
+>, <emphasis
+>Fecha</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Tabla</emphasis
+></entry>
+<entry
+><emphasis
+>Texto sencillo</emphasis
+>, <emphasis
+>Párrafo</emphasis
+>, <emphasis
+>Tabla</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Imagen</emphasis
+></entry>
+<entry
+><emphasis
+>Imagen</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Clasificación</emphasis
+></entry>
+<entry
+><emphasis
+>Elección</emphasis
+>, <emphasis
+>Clasificación</emphasis
+></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+
+<sect2 id="field-formatting">
+<title
+>Formateo de campos</title>
+
+<para
+>&appname; proporciona alguna capacidad para el formateo automático de valores de campo. La más sencilla es la autocapitalización, que capitaliza todas las palabras excepto los artículos. El formateo del título mueve algunos artículos del principio al final del campo; por ejemplo, cambia «El Retorno del Rey» por «Retorno del Rey, El». Los artículos del título son configurables. Finalmente, el formateo de los nombres intenta romper la cadena de forma que el apellido de la persona se muestre al principio. Los prefijos y sufijos del nombre también son configurables. Además, el grupo especial <emphasis
+><link linkend="people-group"
+>Personas</link
+></emphasis
+> usa todos los campos con formateo del nombre, incluso si esto está deshabilitado en las preferencias globales. </para>
+
+<para
+>Todo el formateo automático se puede deshabilitar cambiando las opciones globales en el <link linkend="general-options"
+> <interface
+>Diálogo de configuración</interface
+></link
+>. Globalmente, la capitalización es una opción más dentro del formateo, así que a un título se le puede dar formato automático sin ser capitalizado. No todos los tipos de campo permiten el autoformateo. </para>
+
+<table>
+<title
+>Ejemplos de formateo</title>
+<tgroup cols="5">
+<thead>
+<row>
+<entry
+>Tipo de formato</entry>
+<entry
+>Valor del campo</entry>
+<entry
+>Auto-capitalizado</entry>
+<entry
+>Auto-formateado</entry>
+<entry
+>Auto-capitalizado y auto-formateado</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Título</emphasis
+></entry>
+<entry
+>el retorno del rey</entry>
+<entry
+>El Retorno del Rey</entry>
+<entry
+>retorno del rey, el</entry>
+<entry
+>Retorno del Rey, El</entry>
+</row>
+<row>
+<entry
+><emphasis
+>Nombre</emphasis
+></entry>
+<entry
+>tom swift, jr.</entry>
+<entry
+>Tom Swift, Jr.</entry>
+<entry
+>swift, jr., tom</entry>
+<entry
+>Swift, Jr., Tom</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+<sect2 id="field-options">
+<title
+>Opciones de campo</title>
+
+<para
+>Los campos también tienen tres opciones generales. Si el autocompletado está habilitado, &appname; almacena los valores de cada campo, y el <interface
+>Editor de entradas</interface
+> ofrece el completado automático, usando las preferencias estándar de &kde;. No todos los campos permiten el autocompletado. &appname; también necesita saber si un campo puede tener múltiples valores o puede usarse para agrupar las entradas. Para separar los valores múltiples cuando se edite una entrada, se usa un punto y coma. </para>
+
+<para
+>Para una mayor eficiencia, no habilite el autocompletado a menos que lo necesite. Mientras más campos con autocompletado haya en la colección, más tiempo tardará &appname; en cargar el archivo. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="filter-dialog">
+<title
+>Filtrado de entradas</title>
+<para
+>El <interface
+>Diálogo de filtro avanzado</interface
+> le permite limitar las entradas visibles en la <link linkend="detailed-view"
+><interface
+>Vista de columnas</interface
+></link
+>a aquellas que coincidan con una o más reglas de filtrado. El filtro se puede usar para encontrar las entradas que cumplan todas las reglas del diálogo, o solo para encontrar las que cumplen cualquiera de ellos. El <interface
+>Diálogo de filtro avanzado</interface
+> también es útil para la búsqueda avanzada dentro de la colección. </para>
+
+<screenshot>
+<screeninfo
+>El &appname; <interface
+>Diálogo de filtro avanzado</interface
+> </screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
+<textobject
+><phrase
+>El &appname; <interface
+>Diálogo de filtro avanzado</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Cada fila contiene una sola regla de filtrado. Seleccione el campo que quiera hacer coincidir con la primera casilla de la fila, y seleccione la regla de coincidencia en el centro. Las reglas pueden hacer coincidir valores que contengan una determinada palabra, o que sean exactamente iguales. También se puede usar una expresión regular para emparejar entradas, en cuyo caso el botón <guibutton
+>Editar...</guibutton
+> se vuelve activo para editar la expresión, si &kregexpeditor; está instalado en su equipo. Finalmente, la palabra o cadena que emparejar se debe introducir en el cuadro de texto. Para los campos de imagen, puede usar el tamaño de la imagen para filtrar donde el valor del filtro se compara con la dimensión más grande de la imagen, ya sea su anchura o su altura. </para>
+
+<para
+>Se pueden usar hasta ocho (8) reglas en el filtrado. Los botones <guibutton
+>Más</guibutton
+> y <guibutton
+>Menos</guibutton
+> se pueden usar para añadir o eliminar reglas. </para>
+
+<para
+>Los filtros se pueden guardar, de forma que todas las entradas que coincidan se agrupan juntas en la <interface
+>Vista de filtro</interface
+>. La vista es dinámica, así que a medida que las entradas se van añadiendo o modificando, el grupo se actualiza automáticamente. Para guardar el filtro, introduzca un nombre en el cuadro de texto y haga clic en el botón <guibutton
+>Guardar Filtro</guibutton
+>. </para>
+
+<para
+>Los filtros guardados anteriormente se pueden modificar haciendo clic derecho sobre el elemento del filtro en la <interface
+>Vista de filtro</interface
+> y seleccionando <guilabel
+>Modificar filtro</guilabel
+>. Se abrirá el <interface
+>Diálogo de filtro avanzado</interface
+>, y se  podrán hacer cambios el nombre o las reglas del filtro. </para>
+
+<informalexample>
+<para
+>Para encontrar los libros de ciencia-ficción que no ha leído, marque el botón <guilabel
+>Hacer coincidir todos los siguientes</guilabel
+>, establezca la primera regla a <emphasis
+>Género contiene Ciencia-ficción</emphasis
+> y la segunda a <emphasis
+>Leído no contiene verdadero</emphasis
+>. Para los campos de <link linkend="bool"
+>Casilla de verificación</link
+>, el valor interno es <emphasis
+>verdadero</emphasis
+>). </para>
+
+<para
+>Para encontrar libros de Bujold o Weber, marque el botón <guilabel
+>Hacer coincidir cualquiera de los siguientes</guilabel
+>, establezca la primera regla en <emphasis
+>El autor contiene Bujold</emphasis
+> y el segundo a <emphasis
+>El autor contiene Weber</emphasis
+>. </para>
+</informalexample>
+
+</sect1>
+
+<sect1 id="report-dialog">
+<title
+>Generar informes</title>
+<para
+>&appname; puede generar varios informes sobre su colección actual. el <interface
+>Diálogo de informes</interface
+> comprueba todas las plantillas &xslt; de la ruta de instalación y en <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>. Así puede crear otras nuevas, y se encuentran automáticamente y se incluyen como opciones en el <interface
+>Diálogo de informes</interface
+>. Algunos informes complejos pueden tardar más tiempo en generarse para colecciones grandes. </para>
+
+<para
+>Las plantillas que están instaladas con &appname; incluyen una lista de solo títulos, la vista de columna predeterminada, una vista de grupo, un resumen de todos los grupos y los valores más populares de esos grupos, un informe de préstamos, y un gran informe con imágenes de portada. Seleccione la plantilla deseada y haga clic en el botón <guibutton
+>Generar</guibutton
+>. Cualquier informe se puede también imprimir o guardar en un archivo &HTML;. </para>
+
+<screenshot>
+<screeninfo
+>El <interface
+>Diálogo de informes</interface
+> de &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="report-dialog.png"/></imageobject>
+<textobject
+><phrase
+>El <interface
+>Diálogo de informes</interface
+> de &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Las entradas incluidas en este informe se limitarán a las de la <interface
+>Vista de columna</interface
+>, así que si tiene algún filtro activo, el <interface
+>Diálogo de informes</interface
+> lo utilizará. </para>
+</sect1>
+
+<sect1 id="loan-dialog">
+<title
+>Rastreo de préstamos</title>
+<para
+>&appname; admite el rastreo de los préstamos de cualquier entrada de la colección. El <interface
+>Diálogo de préstamo</interface
+> se puede abrir usando el elemento de menú <guilabel
+>Salida</guilabel
+>, o haciendo clic derecho sobre una entrada. Se puede dar salida a múltiples entradas a la vez. </para>
+
+<para
+>El nombre del prestatario se puede introducir directamente, o se puede sacar de la libreta de direcciones predeterminada de &kde; haciendo clic en el botón junto a la entrada del nombre. Se asume que la fecha de salida es la actual, pero se puede cambiar. La fecha límite es opcional, y se pueden añadir otras notas sobre el préstamo. </para>
+
+<para
+>Si se introduce una fecha pasada, y &appname; está compilado con implementación libkcal, se podrá añadir un recordatorio de préstamos al calendario predeterminado de &kde; como un objeto «para hacer». Se puede usar &korganizer; para ver esos elementos. </para>
+
+<para
+>Cuando una entrada se marca como salida, el campo <emphasis
+>Prestado</emphasis
+> se establece en <emphasis
+>verdadero</emphasis
+>. Si no existen campos prestados en la colección, se añade uno. ¡No modifique el campo directamente! Las entradas en préstamo se pueden establecer como ingresadas usando el elemento de menú, o haciendo clic derecho sobre la entrada en la <interface
+>Vista de préstamo</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>El <interface
+>Diálogo de préstamo</interface
+> de &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-dialog.png"/></imageobject>
+<textobject
+><phrase
+>El <interface
+>Diálogo de préstamo</interface
+> de &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="tips">
+<title
+>Consejos generales</title>
+
+<para
+>Esta es la lista de consejos contenidos en la lista «Consejo del día» para &appname;. </para>
+
+<tip>
+<para
+>Si un libro tiene más de un autor, debería separar los nombres por un punto y coma, de forma que Tellico sepa cómo dividirlos y usarlos separadamente. Se debe hacer lo mismo con cualquier otro campo que permita múltiples valores, con un punto y coma (;) separando cada valor. </para>
+</tip>
+
+<tip>
+<para
+>Puede cambiar qué campos se muestran en la vista de lista haciendo clic derecho sobre la cabecera de columna. </para>
+</tip>
+
+<tip>
+<para
+>Puede añadir, editar o modificar los campos de la colección usando el <interface
+>Diálogo de campos de la colección</interface
+>. Los botones de flecha debajo de la lista de campos se pueden usar para cambiar la posición del campo en la lista, lo que afecta a la ubicación en el editor de entradas. </para>
+</tip>
+
+<tip>
+<para
+>Si desea filtrar según un campo de <link linkend="bool"
+><emphasis
+>Casilla de verificación</emphasis
+></link
+>, se debería usar un valor «verdadero». Si desea filtrar para que solo se muestren los libros de ciencia-ficción que no ha leído, por ejemplo, marque el botón <guilabel
+>Hacer coincidir todos los siguientes</guilabel
+>, establezca la primera regla para que «Género» contenga «Ciencia-ficción» (sin comillas) y la segunda para que «Leído» no contenga «verdadero» (sin comillas). </para>
+</tip>
+
+<tip>
+<para
+>Si un carácter que no sea una palabra se usa en el filtro rápido, el texto se interpreta como una expresión regular. para mostrar solo los libros que son de Weber o de Bujold, por ejemplo, teclee «weber|bujold» (sin las comillas) en el cuadro de filtro. </para>
+</tip>
+
+<tip>
+<para
+>Puede editar más de una entrada a la vez manteniendo pulsada la tecla &Shift; o &Ctrl; y seleccionando múltiples entradas. </para>
+</tip>
+
+<tip>
+<para
+>Puede convertir una colección de libros existente en una bibliografía, que se podrá exportar a formato bibtex o Bibtexml. </para>
+</tip>
+
+<tip>
+<para
+>Si más de un campo está formateado como nombre, entonces se añade un grupo adicional llamado «Personas» a la colección, permitiendo que los autores y los editores se ordenen o se impriman juntos, por ejemplo. </para>
+</tip>
+
+<tip>
+<para
+>Puede modificar la salida impresa modificando el archivo <filename
+>tellico-printing.xsl</filename
+>. El archivo genera &HTML;, y el &CSS; dentro de la hoja de estilo gestiona cosas como el tipo de letra, los márgenes, etc. </para>
+</tip>
+
+<tip>
+<para
+>Hacer doble clic en un elemento de la entrada abre el <interface
+>Editor de entradas</interface
+>. </para>
+</tip>
+
+<tip>
+<para
+>Puede añadir etiquetas &HTML; a cualquier campo de <link linkend="para"
+> <emphasis
+>Párrafo</emphasis
+></link
+> para darle formato, como &lt;b&gt;<emphasis role="bold"
+>negrita</emphasis
+>&lt;/b&gt; o &lt;i&gt;<emphasis
+>cursiva</emphasis
+>&lt;/i&gt;. </para>
+</tip>
+
+<tip>
+<para
+>En la <interface
+>Vista de columnas</interface
+>, puede presionar una letra del teclado para saltar hasta la siguiente entrada que comience con esa letra. </para>
+</tip>
+
+<tip>
+<para
+>Puede usar valores derivados para combinar valores desde múltiples campos en un solo valor sencillo. Marque la casilla de valor derivado y utilice una plantilla de valor similar a «<userinput
+>Value: %{fielda}%{fieldb}</userinput
+>», donde %{...}se reemplaza con el valor de campo apropiado. Esto es útil para recoger múltiples valores dentro de uno solo, p.ej. para un mejor agrupamiento, y para combinar campos de diferentes tipos respetando el orden adecuado al mismo tiempo. Considere, por ejemplo, un campo numérico seguido de un subcampo de texto con entradas 3b, 14a. </para>
+</tip>
+
+</sect1>
+
+</chapter>

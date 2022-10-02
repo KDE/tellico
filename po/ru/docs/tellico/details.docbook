@@ -1,0 +1,860 @@
+<chapter id="details">
+<title
+>Описание &appname;</title>
+
+<sect1 id="field-types">
+<title
+>Типы полей</title>
+
+<para
+>Каждая коллекция может включать неограниченное количество полей. &appname; поддерживает одиннадцать типов полей, что позволяет вводить в них самые разные данные. </para>
+
+<sect2 id="line">
+<title
+>Простой текст</title>
+
+<para
+>Базовый тип поля называется <emphasis
+>Простой текст</emphasis
+>. Значения полей этого типа могут быть любыми, а средство ввода данных — это обычная строка ввода. Этот тип подходит для полей, в которых не планируются длинные значения (например, для полей с автором или жанром). </para>
+
+</sect2>
+<sect2 id="number">
+<title
+>Номер</title>
+
+<para
+>Тип <emphasis
+>Номер</emphasis
+> идентичен типу <emphasis
+>Простой текст</emphasis
+>, но вводимые данные могут быть только числовыми. Если в табличном представлении щёлкнуть по столбцу поля <emphasis
+>Номер</emphasis
+>, записи будут упорядочены по номерам. Для ввода данных используется обычная строка ввода, с маленькими кнопками стрелок для увеличения или уменьшения значения. Какое-либо форматирование не применяется.</para>
+
+</sect2>
+
+<sect2 id="url">
+<title
+>&URL;-адрес</title>
+
+<para
+>Тип <emphasis
+>&URL;-адрес</emphasis
+> позволяет создавать ссылки на другие документы: для открытия этих документов используются стандартные сопоставления типов файлов &kde;. Проверка фактического значения поля <emphasis
+>&URL;-адрес</emphasis
+> не выполняется, но при этом недействительные ссылки не будут открыты. Ввод данных выполняется с помощью строки ввода с кнопкой вызова стандартного диалога открытия файла, но возможно использовать любой &URL;-адрес. Относительные &URL;-адреса интерпретируются относительно расположения сохранённого файла данных. </para>
+
+<para
+>В <link linkend="entry-editor"
+><interface
+>редакторе записей</interface
+></link
+>, подпись становится ссылкой, в то время как в области <link linkend="entry-view"
+><interface
+>информации о записи</interface
+></link
+> используется настоящая гиперссылка. Этот тип поля подходит, например, для ссылок на <acronym
+>PDF</acronym
+>-файлы библиографических записей или на обзоры фильмов. Какое-либо форматирование не применяется.</para>
+
+<para
+>Также возможно использовать относительные &URL;-адреса. Они интерпретируются относительно расположения файла данных &appname;. В <link linkend="entry-editor"
+><interface
+>редакторе записей</interface
+></link
+> строка ввода поддерживает автодополнение расположений локальных файлов. Если &URL;-адрес, указанный в диалоговом окне выбора файла &kde;, необходимо интерпретировать относительно расположения документа, следует установить свойство поля &URL;-адреса <emphasis
+>relative</emphasis
+> в значение <emphasis
+>true</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="para">
+<title
+>Большой текст</title>
+
+<para
+>Тип <emphasis
+>Большой текст</emphasis
+> позволяет ввести в поле больше текста, при этом поле будет являться самостоятельной категорией. Поле <emphasis
+>Большой текст</emphasis
+> не может иметь несколько значений, автоматическое форматирование также не поддерживается. Поле этого типа нельзя использовать для группировки записей. Оно предназначено для ввода аннотаций, кратких описаний сюжета или рецензий.</para>
+
+</sect2>
+
+<sect2 id="choice">
+<title
+>Выбор</title>
+
+<para
+>Тип <emphasis
+>Выбор</emphasis
+> позволяет ограничить поле несколькими предварительно заданными значениями. Допустимые значения представлены в раскрывающемся списке. Выбрать возможно только одно из них. Тип <emphasis
+>Выбор</emphasis
+> используется, например, для полей библиографии и личного рейтинга.</para>
+
+<para
+>Допустимые значения необходимо разделять точкой с запятой.</para>
+
+</sect2>
+
+<sect2 id="bool">
+<title
+>Выбор да/нет</title>
+
+<para
+>Для полей, которые принимают значение «да» или «нет», следует использовать тип  <emphasis
+>Выбор да/нет</emphasis
+>. По умолчанию будет выбрано значение «нет». Поля типа <emphasis
+>Выбор да/нет</emphasis
+> не поддерживают форматирование и могут иметь только одно значение. Внутри программы значения таких полей передаются как <emphasis
+><constant
+>true</constant
+></emphasis
+> или <emphasis
+><constant
+>false</constant
+></emphasis
+>. Примеры полей этого типа: «Подарок» и «Одолжено».</para>
+
+</sect2>
+
+<sect2 id="date">
+<title
+>Дата</title>
+
+<para
+>Поле типа <emphasis
+>Дата</emphasis
+> может содержать день, месяц и год. Дата показана в стандартном формате ГГГГ-ММ-ДД, что позволяет упростить упорядочение записей. Дату возможно как ввести напрямую, так и выбрать с помощью мыши в окне стандартного средства выбора дат &kde;. Значения года, месяца или дня могут быть пустыми: например, возможно ввести только год. Использование нескольких значений не поддерживается. </para>
+
+</sect2>
+
+<sect2 id="table">
+<title
+>Таблица</title>
+
+<para
+>Поля типа <emphasis
+>Таблица</emphasis
+> содержат один или несколько столбцов со значениями. В <link linkend="entry-editor"
+><interface
+>редакторе записей</interface
+></link
+> поле такого типа представлено как электронная таблица с пронумерованными строками. При выборе последней строки будет добавлена дополнительная строка. Автодополнение не поддерживается. Поле такого типа подходит для перечня глав в книге, сцен в фильме или песен в альбоме. Поля типа <emphasis
+>Таблица</emphasis
+> всегда являются самостоятельными категориями. </para>
+
+<para
+>Чтобы указать количество столбцов (максимальное количество — не более десяти), в определение поля следует добавить свойство <emphasis
+>columns</emphasis
+>. Для добавления подписей столбцов необходимо щёлкнуть по заголовку правой кнопкой мыши или указать свойство поля <emphasis
+>column1</emphasis
+> и так далее. </para>
+
+<para
+>Когда <interface
+>редактор записей</interface
+> используется для полей типа <emphasis
+>Таблица</emphasis
+>, возможно изменять порядок строк, перетаскивая их с помощью мыши с зажатой клавишей &Ctrl;. Чтобы вставить или удалить строки, щёлкните по таблице правой кнопкой мыши для вызова соответствующего контекстного меню. </para>
+
+</sect2>
+
+<sect2 id="image">
+<title
+>Изображение</title>
+
+<para
+>Поля типа <emphasis
+>Изображение</emphasis
+> содержат изображения любого формата, который поддерживается &kde;. Например, <acronym
+>PNG</acronym
+> или <acronym
+>JPEG</acronym
+>. Изображение возможно сохранить как внутри самого файла данных &appname;, так и в каталоге данных приложения. Для сохранения используется стандартное диалоговое окно выбора файла &kde;, поэтому возможно указать &URL;-адрес или просто выбрать локальный файл. Также возможно перетащить изображения из диспетчера файлов или браузера. </para>
+
+</sect2>
+
+<sect2 id="rating">
+<title
+>Рейтинг</title>
+
+<para
+>Поля типа <emphasis
+>Рейтинг</emphasis
+> содержат определённое количество звёзд, представляющих числовой рейтинг записи. По умолчанию максимальное значение рейтинга равняется пяти. Минимальное и максимальное значения возможно изменить с помощью параметров определения поля в <interface
+>диалоге «Поля коллекции»</interface
+> (параметры <emphasis
+>minimum</emphasis
+> и <emphasis
+>maximum</emphasis
+>). </para>
+
+</sect2>
+
+<sect2 id="derived">
+<title
+>Зависимые значения полей</title>
+
+<para
+>Поля с зависимыми значениями — это особый случай. Тип поля соответствует обычному типу значения, которое содержится в поле, но это значение формируется путём получения из других полей с помощью строки форматирования в описании поля. Например, если поле имеет шаблон значения <userinput
+>%{title} %{year}</userinput
+>, то значением этого поля будет заголовок, за которым следует год. Этот тип поля используется в основном для полей заголовков в коллекциях монет, марок, коллекционных карточек и вин. В описании для форматирования возможно использовать либо внутреннее название поля, либо заголовок поля. </para>
+
+<para
+>Чтобы выбрать для поле с несколькими значениями только одно, добавьте в шаблон индекс положения (например, <userinput
+>%{author:1}</userinput
+> для выбора первого автора). Положение может иметь отрицательное значение при счёте с конца, поэтому <userinput
+>%{author:-1}</userinput
+> будет означать последнего автора. С помощью флагов шаблона возможно использовать значения в верхнем и нижнем регистре (например, <userinput
+>%{author:1/l}</userinput
+> будет означать первого автора в нижнем регистре, а <userinput
+>%{author:1/u}</userinput
+> — в верхнем регистре). </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-types">
+<title
+>Типы коллекций</title>
+
+<para
+>По умолчанию &appname; поддерживает двенадцать типов коллекций: книги, библиографические записи, комиксы, видео, музыка, видеоигры, коллекционные карточки, монеты, марки, вина, настольные игры и каталоги файлов. Кроме того, в программе доступен пустой базовый шаблон коллекции для других предметов коллекционирования. В коллекциях по умолчанию предусмотрен только основной набор полей. Поля возможно добавлять, изменять или удалять для обеспечения лучшего соответствия коллекции потребностям пользователя. Обязательное условие только одно: в коллекции должно иметься поле <emphasis
+>Название</emphasis
+>, это необходимо для корректной работы области <link linkend="group-view"
+><interface
+>Группы</interface
+></link
+>. В коллекциях некоторых типов это поле просто содержит <link linkend="derived"
+>зависимое значение</link
+>, сочетая два или больше других значений. </para>
+
+<para
+>В целом, все типы коллекций работают одинаково. Для книг возможно использовать соответствующую коллекцию по умолчанию или же легко создать пользовательскую. Но выбор значков, которые будут использоваться в &appname;, выполняется на основе типа коллекции. Некоторые из них могут иметь специализированный функционал, доступный только для определённых коллекций, поэтому рекомендуется по возможности выбирать коллекции по умолчанию. Например, если требуется создать коллекцию вин, но поля по умолчанию не подходят, следует создать коллекцию вин по умолчанию, а затем удалить все поля по умолчанию. Тогда &appname; всё равно будет работать с этой коллекцией как с коллекцией вин. </para>
+
+<para
+>По умолчанию все типы коллекций включают поле <emphasis
+>Номер</emphasis
+>, которое содержит идентификационный номер записи. Кроме того, каждая коллекция (за исключением каталога файлов) включает поля с датой создания записи в коллекции и временем её последнего изменения. </para>
+
+<sect2 id="book-collection">
+<title
+>Коллекции книг</title>
+<para
+>Коллекции книг содержат 27 полей по умолчанию: <emphasis
+>Название</emphasis
+>, <emphasis
+>Подзаголовок</emphasis
+>, <emphasis
+>Автор</emphasis
+>, <emphasis
+>Переплёт</emphasis
+>, <emphasis
+>Дата приобретения</emphasis
+>, <emphasis
+>Цена покупки</emphasis
+>, <emphasis
+>Издательство</emphasis
+>, <emphasis
+>Редакция</emphasis
+>, <emphasis
+>Год сдачи в печать</emphasis
+>, <emphasis
+>Год издания</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>LCCN#</emphasis
+>, <emphasis
+>Количество страниц</emphasis
+>, <emphasis
+>Язык</emphasis
+>, <emphasis
+>Жанр</emphasis
+>, <emphasis
+>Ключевые слова</emphasis
+>, <emphasis
+>Серия</emphasis
+>, <emphasis
+>Номер серии</emphasis
+>, <emphasis
+>Состояние</emphasis
+>, <emphasis
+>Подписано</emphasis
+>, <emphasis
+>Прочитано</emphasis
+>, <emphasis
+>Подарок</emphasis
+>, <emphasis
+>Одолжено</emphasis
+>, <emphasis
+>Рейтинг</emphasis
+>, <emphasis
+>Лицевая сторона обложки</emphasis
+>, <emphasis
+>Сюжет</emphasis
+> и <emphasis
+>Комментарии</emphasis
+>. </para>
+
+<para
+>Поле <emphasis
+>ISBN#</emphasis
+> является особым, так как цифры номера <acronym
+>ISBN</acronym
+> форматируются автоматически и вычисляется контрольный разряд. Поле <acronym
+>ISBN</acronym
+> будет распознано &appname;, если его внутренним названием является <emphasis
+>isbn</emphasis
+>. Если это поле было удалено или его требуется добавить в коллекцию другого типа, следует создать поле с названием <emphasis
+>ISBN</emphasis
+> и применить изменение (затем к полю будет можно вернуться и изменить название необходимым образом). В &appname; создание внутреннего названия выполняется на основе исходного названия, но в случае его последующего обновления созданное внутреннее название не будет изменено. </para>
+
+</sect2>
+
+<sect2 id="bibliography">
+<title
+>Библиографии</title>
+<para
+>Библиографии содержат 25 полей по умолчанию: <emphasis
+>Название</emphasis
+>, <emphasis
+>Тип записи</emphasis
+>, <emphasis
+>Автор</emphasis
+>, <emphasis
+>Ключ BibTeX</emphasis
+>, <emphasis
+>Название книги</emphasis
+>, <emphasis
+>Редактор</emphasis
+>, <emphasis
+>Организация</emphasis
+>, <emphasis
+>Издательство</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>Адрес</emphasis
+>, <emphasis
+>Редакция</emphasis
+>, <emphasis
+>Количество страниц</emphasis
+>, <emphasis
+>Год</emphasis
+>, <emphasis
+>Научный журнал</emphasis
+>, <emphasis
+>Месяц</emphasis
+>, <emphasis
+>Номер</emphasis
+>, <emphasis
+>Как издавалась</emphasis
+>, <emphasis
+>Глава</emphasis
+>, <emphasis
+>Серия</emphasis
+>, <emphasis
+>Номер серии</emphasis
+>, <emphasis
+>Том</emphasis
+>, <emphasis
+>Перекрёстная ссылка</emphasis
+>, <emphasis
+>Ключевые слова</emphasis
+>, <emphasis
+>Аннотация</emphasis
+> и <emphasis
+>Заметки</emphasis
+>. </para>
+
+<para
+>Хотя библиографические коллекции не связаны именно с BibTeX, набор полей по умолчанию соответствует стандартному набору полей BibTeX. При экспорте в формат BibTeX для каждого поля используется свойство <emphasis
+>bibtex</emphasis
+>, чтобы определить соответствующее поле BibTeX. Если в библиографию добавляется дополнительное поле, которое следует экспортировать в BibTeX, обязательно укажите свойство <emphasis
+>bibtex</emphasis
+>. </para>
+
+<para
+>&appname; предоставляет несколько специализированных функций для работы с библиографиями. &appname; позволяет добавлять, изменять или удалять строковые макросы BibTeX, а при экспорте в формате BibTeX макросы возможно развернуть. Цитаты BibTeX могут быть переданы во внешнее приложение, например <application
+>LyX</application
+> или <application
+>Kile</application
+>, с помощью <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+<para
+>Коллекции книг возможно преобразовывать в библиографии. При этом будут добавлены поля BibTeX по умолчанию и установлены свойства BibTeX. Эта возможность полезна главным образом для старых коллекций, созданных до отделения типа библиографической коллекции от типа коллекции книг. </para>
+</sect2>
+
+<sect2 id="comic-book-collection">
+<title
+>Коллекции комиксов</title>
+<para
+>Коллекции комиксов содержат 23 поля по умолчанию: <emphasis
+>Название</emphasis
+>, <emphasis
+>Подзаголовок</emphasis
+>, <emphasis
+>Писатель</emphasis
+>, <emphasis
+>Художник</emphasis
+>, <emphasis
+>Серия</emphasis
+>, <emphasis
+>Издание</emphasis
+>, <emphasis
+>Издательство</emphasis
+>, <emphasis
+>Редация</emphasis
+>, <emphasis
+>Год издания</emphasis
+>, <emphasis
+>Количество страниц</emphasis
+>, <emphasis
+>Страна</emphasis
+>, <emphasis
+>Язык</emphasis
+>, <emphasis
+>Жанр</emphasis
+>, <emphasis
+>Ключевые слова</emphasis
+>, <emphasis
+>Состояние</emphasis
+>, <emphasis
+>Дата приобретения</emphasis
+>, <emphasis
+>Цена покупки</emphasis
+>, <emphasis
+>Подписано</emphasis
+>, <emphasis
+>Подарок</emphasis
+>, <emphasis
+>Одолжено</emphasis
+>, <emphasis
+>Лицевая сторона обложки</emphasis
+>, <emphasis
+>Сюжет</emphasis
+> и <emphasis
+>Комментарии</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="video-collection">
+<title
+>Коллекции видео</title>
+<para
+>Коллекции видео содержат 30 полей по умолчанию: <emphasis
+>Название</emphasis
+>, <emphasis
+>Носитель</emphasis
+>, <emphasis
+>Год записи</emphasis
+>, <emphasis
+>Сертификация</emphasis
+>, <emphasis
+>Жанр</emphasis
+>, <emphasis
+>Регион</emphasis
+>, <emphasis
+>Страна</emphasis
+>, <emphasis
+>Формат</emphasis
+>, <emphasis
+>В ролях</emphasis
+>, <emphasis
+>Режиссёр</emphasis
+>, <emphasis
+>Продюсер</emphasis
+>, <emphasis
+>Писатель</emphasis
+>, <emphasis
+>Композитор</emphasis
+>, <emphasis
+>Студия</emphasis
+>, <emphasis
+>Языки звукового сопровождения</emphasis
+>, <emphasis
+>Языки субтитров</emphasis
+>, <emphasis
+>Аудиодорожки</emphasis
+>, <emphasis
+>Продолжительность</emphasis
+>, <emphasis
+>Соотношение сторон</emphasis
+>, <emphasis
+>Широкоэкранное</emphasis
+>, <emphasis
+>Цветность</emphasis
+>, <emphasis
+>Режиссёрская версия</emphasis
+>, <emphasis
+>Сюжет</emphasis
+>, <emphasis
+>Личный рейтинг</emphasis
+>, <emphasis
+>Дата приобретения</emphasis
+>, <emphasis
+>Цена покупки</emphasis
+>, <emphasis
+>Подарок</emphasis
+>, <emphasis
+>Одолжено</emphasis
+>, <emphasis
+>Обложка</emphasis
+> и <emphasis
+>Комментарии</emphasis
+>. </para>
+
+<para
+>Поле <emphasis
+>В ролях</emphasis
+> представляет собой <link linkend="table"
+>таблицу</link
+> с двумя столбцами: первый предназначается для имён актёров, второй — для их ролей. Поле <emphasis
+>Продолжительность</emphasis
+> изначально предусматривает указание продолжительности в минутах, но при необходимости это возможно изменить. </para>
+</sect2>
+
+<sect2 id="music-collection">
+<title
+>Коллекции музыки</title>
+<para
+>Коллекции музыки содержат 15 полей по умолчанию: <emphasis
+>Название</emphasis
+>, <emphasis
+>Носитель</emphasis
+>, <emphasis
+>Исполнитель</emphasis
+>, <emphasis
+>Лейбл</emphasis
+>, <emphasis
+>Год</emphasis
+>, <emphasis
+>Жанр</emphasis
+>, <emphasis
+>Дорожки</emphasis
+>, <emphasis
+>Рейтинг</emphasis
+>, <emphasis
+>Дата приобретения</emphasis
+>, <emphasis
+>Цена покупки</emphasis
+>, <emphasis
+>Подарок</emphasis
+>, <emphasis
+>Одолжено</emphasis
+>, <emphasis
+>Ключевые слова</emphasis
+>, <emphasis
+>Обложка</emphasis
+> и <emphasis
+>Комментарии</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="game-collection">
+<title
+>Коллекции видеоигр</title>
+<para
+>Коллекции видеоигр содержат 16 полей по умолчанию: <emphasis
+>Название</emphasis
+>, <emphasis
+>Платформа</emphasis
+>, <emphasis
+>Жанр</emphasis
+>, <emphasis
+>Год выпуска</emphasis
+>, <emphasis
+>Издатель</emphasis
+>, <emphasis
+>Разработчик</emphasis
+>, <emphasis
+>Возрастной рейтинг</emphasis
+>, <emphasis
+>Описание</emphasis
+>, <emphasis
+>Личный рейтинг</emphasis
+>, <emphasis
+>Пройдено</emphasis
+>, <emphasis
+>Дата приобретения</emphasis
+>, <emphasis
+>Цена покупки</emphasis
+>, <emphasis
+>Подарок</emphasis
+>, <emphasis
+>Одолжено</emphasis
+>, <emphasis
+>Обложка</emphasis
+> и <emphasis
+>Комментарии</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="card-collection">
+<title
+>Коллекции карточек</title>
+<para
+>Коллекции карточек содержат 17 полей по умолчанию: <emphasis
+>Название</emphasis
+>, <emphasis
+>Игрок</emphasis
+>, <emphasis
+>Команда</emphasis
+>, <emphasis
+>Бренд</emphasis
+>, <emphasis
+>Номер карточки</emphasis
+>, <emphasis
+>Год</emphasis
+>, <emphasis
+>Серия</emphasis
+>, <emphasis
+>Тип карточки</emphasis
+>, <emphasis
+>Дата приобретения</emphasis
+>, <emphasis
+>Цена покупки</emphasis
+>, <emphasis
+>Место</emphasis
+>, <emphasis
+>Подарок</emphasis
+>, <emphasis
+>Ключевые слова</emphasis
+>, <emphasis
+>Количество</emphasis
+>, <emphasis
+>Лицевая сторона</emphasis
+>, <emphasis
+>Обратная сторона</emphasis
+> и <emphasis
+>Комментарии</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="coin-collection">
+<title
+>Коллекции монет</title>
+<para
+>Коллекции монет содержат 16 полей по умолчанию: <emphasis
+>Название</emphasis
+>, <emphasis
+>Тип</emphasis
+>, <emphasis
+>Номинал</emphasis
+>, <emphasis
+>Год</emphasis
+>, <emphasis
+>Монетный двор</emphasis
+>, <emphasis
+>Страна</emphasis
+>, <emphasis
+>Набор монет</emphasis
+>, <emphasis
+>Оценка</emphasis
+>, <emphasis
+>Служба оценки</emphasis
+>, <emphasis
+>Дата приобретения</emphasis
+>, <emphasis
+>Цена покупки</emphasis
+>, <emphasis
+>Место</emphasis
+>, <emphasis
+>Подарок</emphasis
+>, <emphasis
+>Аверс</emphasis
+>, <emphasis
+>Реверс</emphasis
+> и <emphasis
+>Комментарии</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="stamp-collection">
+<title
+>Коллекции марок</title>
+<para
+>Коллекции марок содержат 16 полей по умолчанию: <emphasis
+>Название</emphasis
+>, <emphasis
+>Описание</emphasis
+>, <emphasis
+>Наименование</emphasis
+>, <emphasis
+>Страна</emphasis
+>, <emphasis
+>Год выпуска</emphasis
+>, <emphasis
+>Цвет</emphasis
+>, <emphasis
+>Номер по каталогу Scott</emphasis
+>, <emphasis
+>Оценка</emphasis
+>, <emphasis
+>Погашена</emphasis
+>, <emphasis
+>Со следами наклейки</emphasis
+>, <emphasis
+>Центровка</emphasis
+>, <emphasis
+>С клеевой основой</emphasis
+>, <emphasis
+>Дата приобретения</emphasis
+>, <emphasis
+>Цена покупки</emphasis
+>, <emphasis
+>Место</emphasis
+>, <emphasis
+>Подарок</emphasis
+>, <emphasis
+>Изображение</emphasis
+> и <emphasis
+>Комментарии</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="wine-collection">
+<title
+>Коллекции вин</title>
+<para
+>Коллекции вин содержат 15 полей по умолчанию: <emphasis
+>Название</emphasis
+>, <emphasis
+>Производитель</emphasis
+>, <emphasis
+>Аппелласьон</emphasis
+>, <emphasis
+>Сорт</emphasis
+>, <emphasis
+>Тип</emphasis
+>, <emphasis
+>Страна</emphasis
+>, <emphasis
+>Дата приобретения</emphasis
+>, <emphasis
+>Цена покупки</emphasis
+>, <emphasis
+>Место</emphasis
+>, <emphasis
+>Количество</emphasis
+>, <emphasis
+>Срок годности</emphasis
+>, <emphasis
+>Рейтинг</emphasis
+>, <emphasis
+>Подарок</emphasis
+>, <emphasis
+>Изображение этикетки</emphasis
+> и <emphasis
+>Комментарии</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title
+>Коллекции настольных игр</title>
+<para
+>Коллекции настольных игр содержат 17 полей по умолчанию. <emphasis
+>Название</emphasis
+>, <emphasis
+>Жанр</emphasis
+>, <emphasis
+>Механизм</emphasis
+>, <emphasis
+>Год выпуска</emphasis
+>, <emphasis
+>Издательство</emphasis
+>, <emphasis
+>Дизайнер</emphasis
+>, <emphasis
+>Число игроков</emphasis
+>, <emphasis
+>Продолжительность игры</emphasis
+>, <emphasis
+>Минимальный возраст</emphasis
+>, <emphasis
+>Описание</emphasis
+>, <emphasis
+>Рейтинг</emphasis
+>, <emphasis
+>Дата приобретения</emphasis
+>, <emphasis
+>Цена покупки</emphasis
+>, <emphasis
+>Подарок</emphasis
+>, <emphasis
+>Одолжено</emphasis
+>, <emphasis
+>Обложка</emphasis
+> и <emphasis
+>Комментарии</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="file-catalog">
+<title
+>Каталоги файлов</title>
+<para
+>Каталоги файлов содержат 14 полей по умолчанию: <emphasis
+>Имя</emphasis
+>, <emphasis
+>&URL;-адрес</emphasis
+>, <emphasis
+>Описание</emphasis
+>, <emphasis
+>Том</emphasis
+>, <emphasis
+>Папка</emphasis
+>, <emphasis
+>Тип MIME</emphasis
+>, <emphasis
+>Размер</emphasis
+>, <emphasis
+>Права</emphasis
+>, <emphasis
+>Владелец</emphasis
+>, <emphasis
+>Группа</emphasis
+>, <emphasis
+>Создано</emphasis
+>, <emphasis
+>Изменено</emphasis
+>, <emphasis
+>Метаданные</emphasis
+> и <emphasis
+>Значок</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="custom-collection">
+<title
+>Коллекции прочего</title>
+<para
+>Пользовательские коллекции содержат одно поле по умолчанию — поле <emphasis
+>Название</emphasis
+>. Такие коллекции следует создавать в том случае, если предметы коллекционирования не подходят ни под один из типов коллекций по умолчанию. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>

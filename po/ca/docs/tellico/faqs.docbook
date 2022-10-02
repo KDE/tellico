@@ -1,0 +1,285 @@
+<chapter id="faqs">
+<title
+>Preguntes i respostes</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+
+<qandaentry>
+<question>
+<para
+>Com introdueixo diversos autors?</para>
+</question>
+<answer>
+
+<para
+>Els noms dels autors hauran d'anar separats per un punt i coma, així: <userinput
+>Brian W. Kernighan; Dennis M. Ritchie</userinput
+>. No incloure les paraules «i» o alguna cosa semblant, fins i tot si teniu 20 autors. Si teniu marcada l'opció de format automàtic, llavors es mostrarà automàticament el primer cognom per a cada autor.</para>
+
+<para
+>Altres propietats que permeten múltiples valors, com «gènere» i «paraules clau», s'introdueixen de la mateixa manera, amb un punt i coma (;) separant cada valor.</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Puc modificar l'aspecte de la pàgina impresa?</para>
+</question>
+<answer>
+
+<para
+>Sí, sens dubte. Cerqueu el fitxer <filename
+>tellico-printing.xsl</filename
+> que hauria d'estar al directori $<envar
+>KDEDIR</envar
+>/share/apps/tellico/. Podeu copiar-lo que a $<envar
+>KDEHOME</envar
+>/share/apps/tellico/ per a les modificacions de caràcter personal. Haureu de conèixer <ulink url="http://www.w3.org/TR/xslt"
+>&xslt;</ulink
+>, però modificar aquest fitxer és com canviar el disseny de la impressió. L'&HTML; es genera a partir d'aquest fitxer, i la millor manera de canviar l'aparença de la impressió és modificar el &CSS; a la part superior.</para>
+
+<para
+>Cal tenir en compte que el <filename
+>tellico-printing.xsl</filename
+> fa referència a un altre fitxer, <filename
+>tellico-common.xsl</filename
+>, que conté algunes plantilles &xslt; comuns. Si copieu <filename
+>tellico-printing.xsl</filename
+> a $<envar
+>KDEHOME</envar
+>, haureu de modificar l'element &lt;xsl:import&gt; perquè apunti a la ubicació real del fitxer <filename
+>tellico-common.xsl</filename
+> o copieu també el fitxer comú. </para>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para
+>Com agrupo per una propietat diferent de les que apareixen a la barra d'eines?</para>
+</question>
+<answer>
+<para
+>Per a permetre l'agrupació per a un camp que no ho permet de manera predeterminada, marqueu la casella «Permet agrupament» per a aquest camp en particular en el diàleg «Camps de la col·lecció». </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Què vol dir tot el text que apareix quan executo el &appname;?</para
+></question>
+<answer>
+<para
+>Coses com:<screen width="40">
+<computeroutput
+>&appname;::updateCollectionToolBar</computeroutput>
+<computeroutput
+>GroupView::setGroupAttribute - author</computeroutput>
+<computeroutput
+>GroupView::slotAddCollection</computeroutput>
+<computeroutput
+>QCheckBox::property( "title" ) failed: property invalid
+or does not exist</computeroutput>
+</screen
+> és informació de depuració. Durant la compilació, això es pot ometre amb l'indicador <userinput
+><option
+>--disable-debug</option
+></userinput
+>. També podeu utilitzar <userinput
+><option
+>--enable-final</option
+></userinput
+>, el qual prendrà una mica més de memòria en compilar, però és més eficaç quan s'executa l'aplicació.</para>
+
+<para
+>L'últim missatge és una mica diferent, i sols significa que la vostra instal·lació de les &Qt; s'ha compilat amb alguna informació de depuració.</para>
+
+<para
+>O, si el &appname; ja està instal·lat, executeu <userinput
+><command
+>kdebugdialog</command
+></userinput
+> i assegureu-vos que «0 (generic)» no està marcada. Això desactivarà els missatges de depuració per a totes les aplicacions del &kde; genèriques, &ead;, aquelles que no són distribuïdes oficialment pel &kde;.</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Com puc canviar les columnes que es mostren?</para
+></question>
+<answer>
+<para
+>Feu clic dret sobre la barra del títol. També podeu arrossegar les capçaleres per a tornar a ordenar les columnes, i fer clic sobre seu per a ordenar-les per aquest camp.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Com puc filtrar per quelcom com el camp «Llegit»?</para
+></question>
+<answer>
+<para
+>Internament, els camps de casella de selecció al &appname; es desen com a «verdader», de manera que si sols voleu filtrar els llibres de ciència-ficció que no heu llegit, per exemple, llavors tindreu dues regles. Assegureu-vos que el botó «Coincideix amb tots els següents» està marcat. Establint la primera regla per a tenir «Gènere» «conté» «ciència-ficció» (sense les cometes) i la segona «Llegit» «no conté» «verdader» (sense les cometes).</para>
+
+<para
+>A més, el filtre ràpid a la barra d'eines coincidirà amb qualsevol camp, i si hi ha un caràcter que no sigui una paraula, el text s'interpretarà amb una expressió regular. De manera que si voleu filtrar els llibres per a mostrar els de Weber o Bujold, llavors escriviu «weber|bujold» (sense les cometes) a la barra d'eines.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Com puc afegir noves entrades de plantilles?</para
+></question>
+
+<answer>
+<para
+>Les plantilles d'entrada s'haurien de desar a <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/entry-templates/</filename
+> per a l'accés d'un sol usuari o <filename class="directory"
+>$<envar
+>KDEDIR</envar
+>/share/apps/tellico/entry-templates/</filename
+> per a l'accés de tothom. Les plantilles a $<envar
+>KDEHOME</envar
+> substituiran qualsevol fitxer amb el mateix nom a $<envar
+>KDEDIRS</envar
+>. Les plantilles d'entrada es poden establir per a cada tipus de col·lecció al diàleg de configuració.</para>
+
+<para
+>Les plantilles per al <interface
+>diàleg Informes</interface
+> es desaran a <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>La compilació i instal·lació van anar bé, però quan s'inicia el &appname;, la finestra està en blanc. Què ha passat?</para
+></question>
+
+<answer>
+<para
+>Els programes &kde; cerquen les dades a les ubicacions definides a la variable d'entorn $<envar
+>KDEDIRS</envar
+>. Si per exemple instal·leu a <filename class="directory"
+>/usr/local</filename
+>, però $<envar
+>KDEDIRS</envar
+> està buida o sols especifica <filename class="directory"
+>/usr</filename
+>, llavors el &appname; no serà capaç de trobar els fitxers que necessita. Això és particularment cert per a &SuSE;, per això haureu de compilar amb <userinput
+><option
+>--prefix</option
+>=<filename class="directory"
+>/opt/kde3</filename
+></userinput
+>. També podeu afegir una línia al vostre fitxer <filename
+>.profile</filename
+> per a configurar $<envar
+>KDEDIRS</envar
+>. Consulteu la documentació per al vostre intèrpret d'ordres (shell).</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Com puc exportar camps addicionals de «bibtex»?</para
+></question>
+<answer>
+<para
+>El &appname; utilitza la propietat «<emphasis
+>bibtex</emphasis
+>» per a saber com exportar camps de «bibtex». Si voleu afegir camps addicionals a l'exportació, com ara un resum, obriu el <interface
+>diàleg Camps de la col·lecció</interface
+> i feu clic al botó <guibutton
+>Estableix les propietats</guibutton
+>. Afegiu una propietat «<emphasis
+>bibtex</emphasis
+>» amb el valor <emphasis
+>resum</emphasis
+>. Després, quan exporteu a «bibtex» o «bibtexml», s'utilitzarà aquesta propietat per al nom del camp «bibtex».</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Què ha passat amb Bookcase?</para>
+</question>
+
+<answer>
+<para
+>A causa d'un conflicte de marca, va passar a anomenar-se &appname; el setembre de 2004. El &appname; 0.12 es va alliberar a continuació, el qual era idèntic a Bookcase 0.11, excepte per al canvi de nom.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Què vol dir el nom &appname;?</para>
+</question>
+
+<answer>
+<para
+>Vaig pensar en <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
+>diversos altres noms</ulink
+>, alguns dels quals estaven relacionats amb les col·leccions de llibres. No obstant això, el &appname; pot gestionar alguna cosa més que llibres, i a més, això és una afició, de manera que vaig triar un nom que sonés bé (per a mi), agafat d'un poble a prop d'on jo vaig créixer.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Perquè s'inclouen tots aquests enllaços a Amazon.com en els resultats de cerca?</para>
+</question>
+
+<answer>
+<para
+>Els <ulink url="http://www.amazon.com/gp/browse.html/002-0927720-5265623?node=3440661"
+>termes d'acord per a accedir als serveis web a Amazon.com</ulink
+> requereixen totes les imatges que s'obtinguin del servei tinguin un enllaç a Amazon.com, a més d'un enllaç addicional. L'identificador associat a Amazon.com està necessàriament inclòs, de manera que els pagaments per referència estan degudament recollits. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Per què no utilitzar una base de dades real?</para>
+</question>
+
+<answer>
+<para
+>Part de la raó per la qual vaig començar el &appname; era aprendre C++. Jo no coneixia SQL en aquell moment, i de moment, sols tinc un coneixement feble de com usar-lo. En poques paraules, el &appname; no va començar com una base de dades relacional, i això no canviarà fins que en algun moment en el futur arribi a aprendre SQL i disposi del temps i la motivació per a canviar el model de dades. Si això us molesta, bé, no utilitzeu el &appname;. </para>
+
+<para
+>Per descomptat, tothom hi és benvingut a fer qualsevol canvi que vulgui amb el codi font. </para>
+</answer>
+</qandaentry>
+
+</qandaset>
+
+</chapter>

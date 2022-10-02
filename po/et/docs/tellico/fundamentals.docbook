@@ -1,0 +1,1080 @@
+<chapter id="fundamentals">
+<title
+>&appname; kasutamine</title>
+
+<sect1 id="quick-start">
+<title
+>Kiirstart</title>
+
+<para
+>Vaikimisi käivitub &appname; tühja raamatukollektsiooniga. Mõnda muud laadi kogu kasutamiseks loo see menüükäsuga <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Uus</guimenuitem
+></menuchoice
+> või nupuga tööriistaribal. Kogud täidetakse teatavate levinumate väljadega, kuid sa võib neid lisada, muuta või kustutada just vastavalt oma vajadustele. </para>
+
+<para
+>Uusi kirjeid saab lisada <link linkend="entry-editor"
+><interface
+>kirjeredaktori</interface
+></link
+> abil. Menüükirje <menuchoice
+><guimenu
+>Kogu</guimenu
+><guimenuitem
+>Uus kirje</guimenuitem
+></menuchoice
+> avab <interface
+>kirjeredaktori</interface
+> redigeerimisvalmi tühja kirjega. <interface
+>Kirjeredaktori</interface
+> saab avada ka menüükäsuga <menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>Kirjeredaktori näitamine</guimenuitem
+></menuchoice
+>. Kui oled sisestanud kirje väärtused, saad selle kogusse salvestada nupuga <guibutton
+>Salvesta kirje</guibutton
+> <interface
+>kirjeredaktoris</interface
+>, mis jääb avatuks, kui peaksid soovima veel kirjeid lisada. Kui oled kirje kogusse salvestanud, võib seda edaspidi muuta sellel peaaknas klõpsates. Kui <interface
+>kirjeredaktor</interface
+> pole veel avatud, võib teha kirjel topeltklõpsu, mis avab redaktori ja võimaldab kirjet muutma asuda. </para>
+
+<para
+>Kui soovid kirjesse lisada pilti, saad kasutada tavapärast &kde; failivalijat, kui klõpsad nupule <guibutton
+>Vali pilt...</guibutton
+> <link linkend="entry-editor"
+><interface
+>kirjeredaktoris</interface
+></link
+> või lohistad pildi failihaldurist või veebibrauserist <interface
+>kirjeredaktorisse</interface
+>. </para>
+
+<para
+>Kirje valimisel näitab <link linkend="entry-view"
+><interface
+>kirjeredaktor</interface
+></link
+> kirje sisu vormindatud kujul. Kirje näitamiseks kasutatavat malli saab muuta <link linkend="configuration"
+><interface
+>seadistustedialoogis</interface
+></link
+>. </para>
+
+<para
+>Kogu kirjed rühmitatakse, kui neil on teatud väljadel ühine väärtus, näiteks autor või lavastaja. Rühmitamiseks kasutatavat välja saab muuta liitkastis tööriistaribal või menüükäsuga <menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>Rühmitamisalus</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Tööriistariba <interface
+>kiirfiltriga</interface
+> saab hõlpsasti piirata nähtavaid kirjeid nendega, mis sisaldavad sinu kirjutatud sõna. Filter on kasulik ka siis, kui tahad kiiresti mõnda kirjet leida. Võid kirjutada näiteks pealkirja või mõne unikaalse sõna, mis kirje üheselt tuvastab, ning <link linkend="detailed-view"
+><interface
+>veeruvaade</interface
+></link
+> näitabki ainult filtriga sobivaid kirjeid. Olekuriba näitab, kui palju kirjeid on kogus ja kui paljud on parajasti filtreeritud. </para>
+
+</sect1>
+
+<sect1 id="main-window">
+<title
+>Üldine kasutamine</title>
+
+<para
+>Peaaknal on kolm eristuvat osa, mis kõik näitavad eri viisil teavet kogu kohta. Põhivaade on ülal paremal asuv <link linkend="detailed-view"
+><interface
+>veeruvaade</interface
+></link
+>, kus näeb iga kirje kõigi väljade väärtusi. Vasakul on kaartidel <link linkend="group-view"
+><interface
+>rühmavaade</interface
+></link
+>, millega saab kirjeid rühmitada puukujuliselt gruppidesse, <link linkend="filter-view"
+><interface
+>filtrivaade</interface
+></link
+>, mida saab kasutada teatavatele tingimustele vastavate kirjete tuvastamiseks, ja <link linkend="loan-view"
+><interface
+>laenamisvaade</interface
+></link
+>, kus on kirjas kõik laenutused. Lõpuks näitab <link linkend="entry-view"
+><interface
+>kirjevaade</interface
+></link
+> all paremal iga kirje andmete vormindatud vaadet või kirjerühmade ikoonivaadet. </para>
+
+<screenshot>
+<screeninfo
+>&appname; peaaken</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="main-window.png"/></imageobject>
+<textobject
+><phrase
+>&appname; peaaken</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="detailed-view">
+<title
+><interface
+>Veeruvaade</interface
+></title>
+
+<para
+>Mis tahes kogu välju võib lasta näidata <interface
+>veeruvaates</interface
+>, ehkki väljad <emphasis
+><link linkend="para"
+>Lõik</link
+></emphasis
+>, <emphasis
+><link linkend="image"
+>Pilt</link
+></emphasis
+> ja <emphasis
+><link linkend="table"
+>Tabel</link
+></emphasis
+> pole ehk kõige mõttekamad. Paremklõpsuga vaate päisel saab avada menüü, mis võimaldab valida nähtavaid välju. Veergude suurust ja paiknemist saab täiesti oma tahtmist mööda muuta, kusjuures seadistused salvestatakse, nii et need kehtivad ka järgmise seansi ajal. </para>
+</sect2>
+
+<sect2 id="group-view">
+<title
+><interface
+>Rühmavaade</interface
+></title>
+
+<para
+><interface
+>Rühmavaade</interface
+> rühmitab kirjed puukujuliselt mis tahes välja jälgi, mis <link linkend="field-options"
+>võimaldab rühmitamist</link
+>. Iga rühma kirjete arvu näeb rühma nime kõrval. Rühmi saab avada ja sulgeda noolemärgile klõpsates või rühma nimel topeltklõpsu tehes. Kõigi rühmade avamise ja sulgemise käsud leiab paremklõpsuga avanevast kontekstimenüüst. Puud võib sortida ka rühma nime või kirjete arvu järgi, klõpsates päisele. Rühma saab kasutada ka filtrina <link linkend="detailed-view"
+><interface
+>veeruvaate</interface
+></link
+> jaoks, milleks tuleb rühma nimel teha paremklõps. </para>
+
+<para id="people-group"
+>Kui enam kui ühel kogu välja puhul on valitud <emphasis
+><link linkend="fields-dialog"
+><guilabel
+>Nimena vormindamine</guilabel
+></link
+></emphasis
+>, lisatakse täiendavad rühmad, mis kombineerivad kõik need väljad üheks pseudorühmaks <emphasis
+>Inimesed</emphasis
+>. </para>
+
+<para
+>Kui kirjes puudub väärtus välja puhul, mida kasutatakse rühma moodustamiseks, asetatakse see rühma <emphasis
+>(Tühi)</emphasis
+>, mida tähistab punane kataloogiikoon. </para>
+</sect2>
+
+<sect2 id="filter-view">
+<title
+><interface
+>Filtrivaade</interface
+></title>
+
+<para
+>Kui kogusse on salvestatud filtreid, muutub aktiivseks ka <interface
+>filtrivaade</interface
+>. Kirjeid lisades või muutes kontrollitakse neid automaatselt filtrite suhtes ning vajaduse korral lisatakse või eemaldatakse. Filtrit saab muuta, kui teha sellel topeltklõps, mis avab <interface
+>täiustatud filtreerimise dialoogi</interface
+>. Paremklõps annab võimaluse filter üldse kustutada. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Filtrivaade</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-view.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Filtrivaade</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="loan-view">
+<title
+><interface
+>Laenamisvaade</interface
+></title>
+
+<para
+>Kui mõni kirje on märgitud väljalaenatuks, lisatakase aknasse <interface
+>laenamisvaade</interface
+>, mis annab hea võimaluse jälgida laenatud esemete saatust. Laenutusi jälgitakse kjrjepõhiselt, nii et paremklõpsuga kirjel leiab ka võimaluse muuta laenutust <interface
+>laenamisdialoogi</interface
+> vahendusel. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Laenamisvaade</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-view.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Laenamisvaade</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="entry-view">
+<title
+><interface
+>Kirjevaade</interface
+></title>
+
+<para
+>Kirje väärtusi vormindatud kujul näeb <interface
+>kirjevaates</interface
+>. Paigutuse ja graafika jaoks kasutatakse malle. Igale kogutüübile saab määrata omaette malli konkreetsete värvide ja fontidega <link linkend="template-options"
+><interface
+>seadistustedialoogis</interface
+></link
+>.</para>
+
+<para
+>Kõik vaikemallid järgivad valitud värve ja fonte, kohandatud mallid aga seda teha ei pruugi. Vaikemallides on ka aktiivsed &URL;-idega väljad, millele klõpsamise järel avamisel kasutatakse &kde; vaikimisi failiseoseid. Eksportimisel &HTML;-i kasutatakse konkreetsete kirjefailide ekspordil parajasti aktiivset malli. </para>
+
+<para
+>Kui aga valida mitu kirjet, näeb ikoonivaadet, kusjuures kasutatakse kogu esimest <link linkend="image"
+>pildi</link
+>välja. Kirjeid saab valida samamoodi nagu <interface
+>veeruvaates</interface
+>. Paremklõps ikoonivaates avab menüü, milles saab muuta kirjete sorteerimise aluseid. </para>
+
+</sect2>
+
+<sect2 id="status-bar">
+<title
+>Olekuriba</title>
+
+<para
+>Olekuribal näeb, mida &appname; parajasti teeb. Samuti on seal näha kogu kirjete koguarv ja filtri kasutamise korral ka see, kui paljud kirjed on parajasti näha. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="entry-editor">
+<title
+>Kirjete muutmine</title>
+
+<para
+>Kogu kirjete lisamiseks ja muutmiseks on mõeldud <interface
+>kirjeredaktor</interface
+>. Topeltklõps mõnel kirjel <interface
+>rühmavaates</interface
+> või <interface
+>veeruvaates</interface
+> avab vastava kirje <interface
+>kirjeredaktoris</interface
+>. Uusi kirjeid saab luua kas menüü <menuchoice
+><guimenu
+>Kogu</guimenu
+></menuchoice
+>, tööriistariba ikooni või nupu abil <interface
+>kirjeredaktoris</interface
+> endas.</para>
+
+<para
+><interface
+>Kirjeredaktori</interface
+> sulgemisel, kui selles on tehtud muudatusi, aga neid pole salvestatud, ilmub nähtavale hoiatus. Välju rühmitatakse kategooriate kaupa ning nad on näha samas järjekorras, milles nad esinevad <link linkend="fields-dialog"
+><interface
+>kogu väljade dialoogis</interface
+></link
+>. Neid saab küll ka ümber paigutada. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Kirjeredaktor</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor1.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Kirjeredaktor</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+><link linkend="url"
+><emphasis
+>&URL;</emphasis
+></link
+>-välja puhul välja nimel klõpsamine avab lingi &kde; vaikimisi failiseoseid kasutades. <guiicon
+>&URL;-i valija</guiicon
+> nupp tekstikirje kõrval avab &kde; vaikimisi faili avamise dialoogi, kuid see väli ei ole piiratud ainult kohalike failidega. </para>
+
+<para
+><link linkend="image"
+><emphasis
+>Pildi</emphasis
+></link
+>välja puhul avab nupp <guibutton
+>Vali pilt...</guibutton
+> &kde; pildifaili valimise dialoogi. Pilt salvestatakse kogusse originaalvormingus ning selle skaleeritud versiooni näeb <interface
+>kirjeredaktoris</interface
+>. Pildi saab kõrvaldada nupuga <guibutton
+>Puhasta</guibutton
+>. Kõrvaldatud pildid eemaldatakse kogust. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Kirjeredaktor</interface
+> <emphasis
+>pildi</emphasis
+>väljaga</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor3.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Kirjeredaktor</interface
+> <emphasis
+>pildi</emphasis
+>väljaga</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Redigeerimisvidin toetab ka lohistamist. Failivalija kasutamise asemel võib sama hästi pildi kohale lohistada failihaldurist või brauseriaknast. Pildi lohistamine redigeerimisvidinast &konqueror;i failihalduriaknasse salvestab pildi kausta, kuhu see lohistati. </para>
+
+<warning>
+<para
+>Vaikimisi salvestatakse pildid kogu andmefaili, mis hoiab kõike vajalikku ühes kohas. Kuid liiga suur piltide hulk aeglustab märgatavalt &appname; tööd ning tekitab mõistagi ka väga suure andmefaili. &appname; võib seepärast salvestada pildid eraldi kas kataloogi <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/data/</filename
+> või kataloogi samas kohas, kus asub andmefail. Andmefailide laadimine ja salvestamine on palju kiirem, kui pildid on eraldi salvestatud, kuid andmed ei ole sel juhul enam porditavad ega arhiveeritavad. Eneseküllaseid andmefaile saab alati luua menüükäsuga <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenu
+> Eksportimine</guimenu
+><guimenuitem
+>Ekspordi Zip-ina...</guimenuitem
+></menuchoice
+> </para>
+</warning>
+
+<para
+>Väljad <link linkend="table"
+><emphasis
+>Tabel</emphasis
+></link
+> algavad viie reaga, kuid kursori viimine viimasesse ritta lisab automaatselt uue rea. Mitmeveerulise tabeli korral arvestatakse rühmitamisel või vormindamisel ainult esimest veergu. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Kirjeredaktor</interface
+> <emphasis
+>tabeli</emphasis
+>väljaga</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor4.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Kirjeredaktor</interface
+> <emphasis
+>tabeli</emphasis
+>väljaga</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="edit-multiple">
+<title
+>Mitme kirje muutmine</title>
+<para
+>Mitut kirjet korraga saab muuta, kui valida rohkem kui üks kirje <interface
+>rühmavaates</interface
+> või <interface
+>veeruvaates</interface
+>. Mitme kirje valimisel on aktiveeritud väljad, mis sisaldavad kõigis kirjetes ühesugust väärtust. Kui kirjetel on väärtused erinevad, on need välja mitteaktiivsed. Iga väljakirje paremasse serva on lisatud märkekastid, millega saab määrata, kas väli on aktiivne või mitte, nagu näha ka siinsel pildil. </para>
+
+<para
+>Kirjete salvestamisel muudetakse ainult aktiivseid välju, mis muudab ulatusliku redigeerimise palju hõlpsamaks. Näiteks selleks, et määrata kõigile kogu videokirjetele andmekandja, tuleb muuta aktiivseks väli Andmekandja. Anna väärtuseks <acronym
+>DVD</acronym
+> ja salvesta kirjed. Muudetakse ainult välja Andmekandja, kõigi kirjete kõigi muude väljade väärtused jäävad endiseks. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Kirjeredaktor</interface
+> mitme kirje korral</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor5.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Kirjeredaktor</interface
+> mitme kirje korral</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="updating-entries">
+<title
+>Kirje andmete uuendamine</title>
+
+<para
+>Kirjeid saab automaatselt uuendada, kui esitada päring antud kogutüübi korral saadaolevatele andmeallikatele, mis on kasulik mitme allika teabe ühendamiseks. Nii võib näiteks lisada oma kogusse filmi <link linkend="amazon-web-services"
+>Amazon.com-i veebiteenuste</link
+> abil ning seejärel uuendada kirjete lisateabega, mida pakub <link linkend="imdb"
+>Internet Movie Database</link
+>. </para>
+
+<para
+>Uuendatakse ainult tühje välju, kui just <link linkend="data-sources-options"
+>konkreetse allika seadistused</link
+> ei luba olemasolevat teavet üle kirjutada. <link linkend="externalexec"
+>Välise skripti</link
+> korral peab allika valikutes olema määratud uuendusväli. </para>
+
+<para
+>Kirjet saab uuendada kas paremklõpsuga kirjel avanevast menüüst või menüükäsuga <menuchoice
+><guimenu
+>Kogu</guimenu
+><guimenuitem
+>Uuenda kirjet</guimenuitem
+></menuchoice
+>. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="fields-dialog">
+<title
+>Väljade muutmine</title>
+
+<para
+><interface
+>Kogu väljade dialoogi</interface
+> võimaldab lisada kogusse uusi välju, muuta olemasolevaid või neid hoopis kustutada. </para>
+
+<screenshot>
+<screeninfo
+>&appname; <interface
+>kogu väljade dialoog</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
+<textobject
+><phrase
+>&appname; <interface
+>kogu väljade dialoog</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="field-list">
+<title
+>Väljade loend</title>
+
+<para
+>Dialoogi vasakus servas on näha aktiivsete väljade loend. Muudetud välju näidatakse rasvases kaldkirjas. Loendi all olevate nuppudega saab välju lisada või kustutada, nooltega nende järjekorda muuta. Väljade järjekord loendis on oluline, sest just seda järjekorda kasutab <interface
+>kirjeredaktor</interface
+> oma paigutuse juures. Iga kategooria korral paigutatakse väljad vasakult paremale vastavalt sellele, kuidas nad esinevad loendis ülalt alla. </para>
+</sect2>
+
+<sect2 id="field-properties">
+<title
+>Välja omadused</title>
+
+<para
+>Välja defineerib selle pealkiri, tüüp, kategooria, kirjeldus, samuti vaikimisi väärtus või mitu lubatud väärtust. Pealkirja kasutatakse kogu kasutajaliideses välja tähistamiseks. <interface
+>Kirjeredaktor</interface
+> pruugib seda väärtuste jaoks. <interface
+>Veeruvaade</interface
+> tarvitab seda veerupäisena. Väljade eri tüüpe selgitab <link linkend="field-types"
+>väljatüüpide sektsioon</link
+>. Kirjeldust kasutatakse <interface
+>kirjeredaktoris</interface
+> kohtspikrina, näiteks välja sisu selgitamiseks. Lisaks kasutatakse <link linkend="derived"
+><emphasis
+>tuletatud</emphasis
+> väärtustega väljade</link
+> korral väärtusemalli välja väärtuse vormindamiseks. Uue kirje loomisel lisatakse automaatselt vaikeväärtus. Lubatud väärtuste loendis <link linkend="choice"
+><emphasis
+>valiku</emphasis
+></link
+>väljadel tuleb väärtuste eraldamiseks tarvitada semikoolonit. </para>
+
+<para
+>Uued väljad võivad olla mis tahes tüüpi, kuid olemasolevate väljade tüübi muutmisel saab kasutada ainult sobivaid tüüpe, nagu näha ka siinsel pildil. </para>
+
+<table>
+<title
+>Lubatud väljatüübi muutused</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Aktiivne tüüp</entry>
+<entry
+>Lubatud uus tüüp</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Tavaline tekst</emphasis
+></entry>
+<entry
+><emphasis
+>Tavaline tekst</emphasis
+>, <emphasis
+>Lõik</emphasis
+>, <emphasis
+>Arv</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabel</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Lõik</emphasis
+></entry>
+<entry
+><emphasis
+>Tavaline tekst</emphasis
+>, <emphasis
+>Lõik</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Valik</emphasis
+></entry>
+<entry
+><emphasis
+>Tavaline tekst</emphasis
+>, <emphasis
+>Lõik</emphasis
+>, <emphasis
+>Valik</emphasis
+>, <emphasis
+>Arv</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabel</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Märkeruut</emphasis
+></entry>
+<entry
+><emphasis
+>Tavaline tekst</emphasis
+>, <emphasis
+>Lõik</emphasis
+>, <emphasis
+>Märkeruut</emphasis
+>, <emphasis
+>Arv</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabel</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Arv</emphasis
+></entry>
+<entry
+><emphasis
+>Tavaline tekst</emphasis
+>, <emphasis
+>Lõik</emphasis
+>, <emphasis
+>Arv</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabel</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>&URL;</emphasis
+></entry>
+<entry
+><emphasis
+>Tavaline tekst</emphasis
+>, <emphasis
+>Lõik</emphasis
+>, <emphasis
+>Arv</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabel</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Kuupäev</emphasis
+></entry>
+<entry
+><emphasis
+>Tavaline tekst</emphasis
+>, <emphasis
+>Kuupäev</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Tabel</emphasis
+></entry>
+<entry
+><emphasis
+>Tavaline tekst</emphasis
+>, <emphasis
+>Lõik</emphasis
+>, <emphasis
+>Tabel</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Pilt</emphasis
+></entry>
+<entry
+><emphasis
+>Pilt</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Hinnang</emphasis
+></entry>
+<entry
+><emphasis
+>Valik</emphasis
+>, <emphasis
+>Hinnang</emphasis
+></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+
+<sect2 id="field-formatting">
+<title
+>Välja vormindamine</title>
+
+<para
+>&appname; lubab teataval määral väljade väärtusi automaatselt vormindada. Lihtsaim võimalus on automaatne suurtähtedeks muutmine, mis muudab suurtähega algavaks kõik sõnad peale artiklite. Pealkirjana vormindamine liigutab teatavad artiklid algusest lõppu, näiteks "The Return of the King" asemele tekib "Return of the King, The". Pealkirja artiklid on seadistatavad. Nimena vormindamine aga üritab stringi sel moel jagada, et isiku viimast ehk perekonnanime näidataks esimesena. Ka nime ees. ja järelelemendid on seadistatavad. Lisaks võtab spetsiaalne rühm <emphasis
+><link linkend="people-group"
+>Inimesed</link
+></emphasis
+> arvesse kõik nimena vormindatud välja ka siis, kui globaalne seadistus on välja lülitatud. </para>
+
+<para
+>Kogu automaatset vormindamist saab globaalselt keelata <link linkend="general-options"
+><interface
+>seadistustedialoogis</interface
+></link
+>. Globaalsel tasandil on tähesuuruse muutmine vormindamisest erinev, nii et pealkirja on võimalik automaatselt vormindada ka ilma seda suurtäheliseks muutmata. Automaatset vormindamist ei võimalda sugugi kõik väljatüübid. </para>
+
+<table>
+<title
+>Vormindamise näited</title>
+<tgroup cols="5">
+<thead>
+<row>
+<entry
+>Vormindustüüp</entry>
+<entry
+>Välja väärtus</entry>
+<entry
+>Automaatne muutmine suurtäheliseks</entry>
+<entry
+>Automaatne vormindamine</entry>
+<entry
+>Automaatne muutmine suurtäheliseks ja automaatne vormindamine</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Pealkiri</emphasis
+></entry>
+<entry
+>the return of the king</entry>
+<entry
+>The Return of the King</entry>
+<entry
+>return of the king, the</entry>
+<entry
+>Return of the King, The</entry>
+</row>
+<row>
+<entry
+><emphasis
+>Nimi</emphasis
+></entry>
+<entry
+>tom swift, jr.</entry>
+<entry
+>Tom Swift, Jr.</entry>
+<entry
+>swift, jr., tom</entry>
+<entry
+>Swift, Jr., Tom</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+<sect2 id="field-options">
+<title
+>Välja valikud</title>
+
+<para
+>Väljadel on samuti kolm üldist valikut. Kui automaatne lõpetamine on sisse lülitatud, puhverdab &appname; kõigi väljade väärtused ning <interface
+>kirjeredaktor</interface
+> pakub &kde; standardseid seadistusi tarvitades automaatset lõpetamist. Sugugi kõik väljatüübid ei võimalda automaatset lõpetamist. Samuti peab &appname; teadma, kas väljal võib olla mitu väärtust või kas seda saab kasutada kirjete rühmitamiseks. Kirje muutmisel tuleb eri väärtuste eraldamiseks kasutada semikoolonit. </para>
+
+<para
+>Jõudluse huvides ei tasu automaatset lõpetamist sisse lülitada, kui sul ei lähe seda just väljade juures tarvis. Mida rohkem on automaatse lõpetamisega välju kogus, seda aeglasemalt &appname; faili laadib. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="filter-dialog">
+<title
+>Kirjete filtreerimine</title>
+<para
+><interface
+>Täiustatud filtreerimise dialoog</interface
+> võimaldab piirata kirjeid, mida näeb <link linkend="detailed-view"
+><interface
+>veeruvaates</interface
+></link
+>, nendega, mis vastavad ühele või enamale filtrireeglile. Filtrit võib kasutada nii kirjete leidmiseks, mis vastavad kõigile reeglitele, kui ka kirjete leidmiseks, mis vastavad vähemalt ühele reeglile. <interface
+>Täiustatud filtreerimise dialoogist</interface
+> on abi ka põhjalikumal otsingul kogus. </para>
+
+<screenshot>
+<screeninfo
+>&appname; <interface
+>täiustatud filtreerimise dialoog</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
+<textobject
+><phrase
+>&appname; <interface
+>täiustatud filtreerimise dialoog</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Iga rida sisaldab üht filtrireeglit. Vali rea esimeses kastis väli, millelt sobivust otsitakse, ning seejärel keskel sobivuse reegel. Reeglid võivad vastata väärtustele, mis sisaldavad teatavat sõna, või on täpselt samad. Samuti saab kasutada regulaaravaldisi, millisel juhul avaldise redigeerimiseks muutub aktiivseks nupp <guibutton
+>Muuda...</guibutton
+> (ainult juhul, kui masinasse on paigaldatud &kregexpeditor;). Lõpuks tuleb tekstikasti sisestada vajalik sõna või string. </para>
+
+<para
+>Filtris võib kasutada kuni kaheksat (8) rida. Nuppudega <guibutton
+>Rohkem</guibutton
+> ja <guibutton
+>Vähem</guibutton
+> saab reegleid lisada või eemaldada. </para>
+
+<para
+>Filtreid saab salvestada, et kõik sobivad kirjed rühmitataks <interface
+>filtrivaates</interface
+> kokku. Vaade on dünaamiline, nii et kui kirjeid lisatakse või muudetakse, uuendatakse automaatselt ka gruppi. Filtri salvestamiseks sisesa selle nimi testikasti ja klõpsa nupule <guibutton
+>Salvesta filter</guibutton
+>. </para>
+
+<para
+>Varem salvestatud filtreid saab muuta, kui teha <interface
+>filtrivaates</interface
+> vastaval kirjel paremklõps ja valida <guilabel
+>Muuda filtrit</guilabel
+>, Seepeale avatakse <interface
+>täiustatud filtreerimise dialoog</interface
+>, kus saab muuta filtri nime või reegleid. </para>
+
+<informalexample>
+<para
+>Lugemata ulmeraamatute leidmiseks märgi <guilabel
+>Vastab kõigele järgnevale</guilabel
+>, määra esimeseks reegliks <emphasis
+>Žanr sisaldab Science Fiction</emphasis
+> ja teiseks <emphasis
+>Loetud ei võrdu true</emphasis
+> (väljade <link linkend="bool"
+>Märkeruut</link
+> sisemine väärtus on <emphasis
+>true</emphasis
+>). </para>
+
+<para
+>Bujoldi või Weberi raamatute leidmiseks märgi ruuduke <guilabel
+>Vastab millelegi järgnevast</guilabel
+> ning määra esimeseks reegliks <emphasis
+>Autor sisaldab Bujold</emphasis
+> ja teiseks reegliks <emphasis
+>Autor sisaldab Weber</emphasis
+>. </para>
+</informalexample>
+
+</sect1>
+
+<sect1 id="report-dialog">
+<title
+>Aruannete loomine</title>
+<para
+>&appname; võib luua aktiivse kogu kohta mitmesuguseid aruandeid. <interface
+>Aruandedialoog</interface
+> kontrollib kõiki &xslt; malle paigalduse asukohas ja kataloogis <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>.  Nii võib luua ka uusi malle ning need leitakse automaatselt ja kaasatakse võimalustena <interface
+>aruandedialoogi</interface
+>. Mõne keerukama aruande loomine võib suure kogu puhul natuke aega võtta. </para>
+
+<para
+>&appname; sisaldab kohe järgmisi malle: ainult pealkirjade loend, vaikimisi veeruvaade, grupivaade, kõigi gruppide kokkuvõte ja nende gruppide populaarseimad väärtused, laenutuste aruanne ja suur aruanne koos kaanepiltidega. Vali vajalik mall ja klõpsa nupule <guibutton
+>Loo</guibutton
+>. Kõiki aruandeid võib ka trükkida või salvestada &HTML;-failina. </para>
+
+<screenshot>
+<screeninfo
+>&appname; <interface
+>aruandedialoog</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="report-dialog.png"/></imageobject>
+<textobject
+><phrase
+>&appname; <interface
+>aruandedialoog</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Aruandesse võetavad kirjed on piiratud nendega, mis on näha <interface
+>veeruvaates</interface
+>, nii et kui parajasti on aktiivne mõni filter, siis arvestab <interface
+>aruandedialoog</interface
+> sellega. </para>
+</sect1>
+
+<sect1 id="loan-dialog">
+<title
+>Laenutuste jälgimine</title>
+<para
+>&appname; toetab kõigi kogu kirjete laenutuste jälgimist. <interface
+>Laenamisdialoogi</interface
+> saab avada kas menüükäsuga <guilabel
+>Laena välja...</guilabel
+> või sama käsuga kirje kontekstimenüüs. Korraga võib välja laenata ka mitu kirjet. </para>
+
+<para
+>Laenaja nime võib ise kirjutada või valida vaikimisi &kde; aadressiraamatust, mille avab klõps nupule nimevälja kõrval. Väljalaenamise ajaks on vaikimisi aktiivne kuupäev, aga seda saab soovi korral muuta. Tähtaeg pole kohustuslik ning vajaduse korral saab laenutusele lisada muidki märkusi. </para>
+
+<para
+>Kui tähtaeg on määratud ning &appname; on kompileeritud libkcal'i toetusega, saab laenutuse meeldetuletuse lisada ülesandena &kde; vaikekalendrisse. Nende nägemiseks võib kasutada rakendust &korganizer;. </para>
+
+<para
+>Kui kirje on välja laenatud, määratakse väljale <emphasis
+>Laenatud</emphasis
+> väärtuseks <emphasis
+>true</emphasis
+>. Kui kogus puudub selline väli, see lisatakse. Ära muuda seda välja käsitsi! Väljalaenatud kirjeid saab tagastatuks määrata kas menüü abil või <interface
+>laenutusvaates</interface
+> kirjel paremklõpsu tehes. </para>
+
+<screenshot>
+<screeninfo
+>&appname; <interface
+>laenutusdialoog</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-dialog.png"/></imageobject>
+<textobject
+><phrase
+>&appname; <interface
+>laenutusdialoog</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="tips">
+<title
+>Üldised vihjed</title>
+
+<para
+>Alljärgnev kujutab endast &appname; "päeva nõuannete" sekka arvatud vihjeid. </para>
+
+<tip>
+<para
+>Kui raamatul on enam kui üks autor, tuleks nende nimed eraldada semikooloniga, mis annab Tellicole teada, et need tuleb eraldada. Ka kõigil teistel väljadel, kus saab kasutada mitut väärtust, tuleks need eristada semikooloniga. </para>
+</tip>
+
+<tip>
+<para
+>Seda, milliseid välju näeb nimekirjavaates, saab muuta paremklõpsuga veeru päisele. </para>
+</tip>
+
+<tip>
+<para
+>Kogusse saab välju lisada, eemaldada või neid muuta <interface
+>kogu väljade dialoogi</interface
+> abil. Noolenuppudega väljaloendi all saab muuta välja asukohta loendis, mis mõjutab selle asendit kirjeredaktoris. </para>
+</tip>
+
+<tip>
+<para
+>Kui soovid filtreerida välja <link linkend="bool"
+><emphasis
+>Märkeruut</emphasis
+></link
+> kasutades, tuleb kasutada väärtust "true". Kui soovid, et filtri rakendamise järel näidatakse ainult neid ulmeraamatuid, mida sa ei ole lugenud, siis märgi ruuduke <guilabel
+>Vastab kõigele järgnevale</guilabel
+> ning määra esimeseks reegliks "Žanr" "sisaldab" "Science Fiction" (muidugi ilma jutumärkideta) ja teiseks reegliks "Loetud" "ei sisalda" "true" (samuti ilma jutumärkideta). </para>
+</tip>
+
+<tip>
+<para
+>Kui kiirfiltris kasutatakse muud märki kui tähte või arvu, tõlgendatakse teksti regulaaravaldisena. Et näha näiteks ainult Weberi või Bujoldi raamatuid, kirjuta filtrikasti "weber|bujold" (ilma jutumärkideta). </para>
+</tip>
+
+<tip>
+<para
+>Korraga võib muuta ka enam kui üht kirjet, kui hoida all klahvi &Shift; või &Ctrl; ja valida mitu kirjet. </para>
+</tip>
+
+<tip>
+<para
+>Raamatute kogu võib teisendada bibliograafiaks, mida saab seejärel eksportida bibtex- või Bibtexml-vormingusse. </para>
+</tip>
+
+
+<tip>
+<para
+>Kui rohkem kui üks väli on vormindatud nimena, lisatakse kogusse lisagrupp "Inimesed", mis võimaldab näiteks autoreid ja toimetajaid ühiselt sortida või trükkida. </para>
+</tip>
+
+<tip>
+<para
+>Trükkimisväljundi välimust võib muuta faili <filename
+>tellico-printing.xsl</filename
+> muutes. See fail genereerib &HTML;-i ning laaditabeli &CSS; määrab selliseid asju nagu font, äärised jne. </para>
+</tip>
+
+<tip>
+<para
+>Topeltklõps kirjel avab <interface
+>kirjeredaktori</interface
+>. </para>
+</tip>
+
+<tip>
+<para
+>&HTML;-silte saab vormindamiseks lisada kõigile väljadele <link linkend="para"
+><emphasis
+>Lõik</emphasis
+></link
+>, näiteks &lt;b&gt;<emphasis role="bold"
+>bold</emphasis
+>&lt;/b&gt; või &lt;i&gt;<emphasis
+>italic</emphasis
+>&lt;/i&gt;. </para>
+</tip>
+
+<tip>
+<para
+><interface
+>Veeruvaates</interface
+> olles võib vajutada klaviatuuril klahvile, et liikuda järgmise selle tähega algava kirje juurde. </para>
+</tip>
+
+<tip>
+<para
+>Tuletatud väärtuste abil võib ühendada mitme välja väärtused üheks väärtuseks. Märgi lihtsalt tuletatud väärtuse ruuduke ja kasuta väärtuse malli, näiteks <userinput
+>Value: %{fielda}%{fieldb}</userinput
+>, kus %{...} asendatakse vastava välja väärtusega. See on kasulik mitme väärtuse koondamiseks ühele väljale, näiteks paremaks rühmitamiseks, ning eri tüüpi väljade ühendamiseks, mis järgiks samal ajal korralikku sortimist. Näiteks võib tuua numbrivälja, millele järgneb teksti alamväli (3b, 14a). </para>
+</tip>
+
+</sect1>
+
+</chapter>

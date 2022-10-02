@@ -1,0 +1,697 @@
+<chapter id="hacking">
+<title
+>&appname; varjatumad võimalused</title>
+
+<para
+>Vaba tarkvara vaimus oled kutsutud &appname;t just sel moel muutma, nagu sa seda ise soovid. Väga lihtne on kirjutada skripte andmete importimiseks, eksportimiseks või muutmiseks. Käesolevas peatükis seda ja muud tutvustataksegi. </para>
+
+<sect1 id="file-format">
+<title
+>Failivorming</title>
+
+<para
+>&appname; vaikimisi andmefail on zip-arhiiv, tavaliselt faililaiendiga <literal role="extension"
+>.tc</literal
+>. Arhiivis asub tipptasemel fail <filename
+>tellico.xml</filename
+>. Pildid võib panna arhiivi kataloogi <filename
+>images/</filename
+>, kuid need võib ka lisada base64 kodeeringus otse &XML;-andmetesse. Samuti võib pildid salvestada rakenduse andmekataloogi, millisel juhul neid ei leidu üldse andmefailis. &appname; võib laadida ka tihendamata &XML;-faili. </para>
+
+<sect2 id="xml-format">
+<title
+>&XML;-andmed</title>
+
+ 
+
+<sect3 id="coll-xml-data">
+<title
+>Kogu</title>
+<programlisting
+><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V11.0//EN" "http://periapsis.org/tellico/dtd/v11/tellico.dtd">
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="Minu raamatud" type="2">
+ </collection>
+</tellico>
+]]>
+</programlisting>
+
+<para
+>Fail algab nõutava &XML;-deklaratsiooni ja kodeeringuga, millele järgneb doctype. Kui lisatakse uus väljatüüp või vaikeväljadele määratakse lisaomadusi, suurendatakse doctype DTD versiooni. &appname; võib alati avada ja lugeda varasemaid DTD versioone, kuid salvestab failid aktiivsesse versiooni. DTD asukoht viitab tegelikule DTD-failile. </para>
+
+<para
+>Tipptaseme element on <markup
+>&lt;tellico&gt;</markup
+>, mis sisaldab vaikimisi nimeruumi deklaratsiooni ja faili süntaksi versiooni, mis peab alati klappima DTD-ga. </para>
+
+<para
+>Element <markup
+>&lt;tellico&gt;</markup
+> sisaldab üht elementi <markup
+>&lt;collection&gt;</markup
+>. Praegu eiratakse mitut kogu. Atribuut <markup
+>title</markup
+> sisaldab kogu pealkirja, <markup
+>type</markup
+> aga määrab, millist laadi kirjed sisalduvad kogus. Lubatud tüübid on <link linkend="collection-type-values"
+>ära toodud allpool</link
+>. Atribuuti <markup
+>entryTitle</markup
+> võib soovi korral kasutada kohandatud kogu kirjete pealkirja määramiseks ning see peab olema mitmuses. </para>
+</sect3>
+
+<sect3 id="fields-xml-data">
+<title
+>Väljad</title>
+
+<programlisting
+><![CDATA[
+  <fields>
+   <field flags="8" title="Title" category="General" format="1" type="1" name="title" />
+   <field flags="7" title="Author" category="General" format="2" type="1" name="author" />
+   <field flags="2" title="Binding" category="General" allowed="Hardback;Paperback;Trade Paperback;E-Book;Magazine;Journal" format="4" type="3" name="binding" >
+    <prop name="default"
+>Paperback</prop>
+   </field>
+   <field flags="6" title="Publisher" category="Publishing" format="0" type="1" name="publisher" />
+   <field flags="4" title="Edition" category="Publishing" format="0" type="1" name="edition" />
+   <field flags="3" title="Copyright Year" category="Publishing" format="4" type="6" name="cr_year" />
+   <field flags="2" title="Publication Year" category="Publishing" format="4" type="6" name="pub_year" />
+   <field flags="0" title="ISBN#" category="Publishing" format="4" type="1" name="isbn" description="International Standard Book Number" />
+   <field flags="7" title="Genre" category="Classification" format="0" type="1" name="genre" />
+   <field flags="7" title="Keywords" category="Classification" format="0" type="1" name="keyword" />
+   <field flags="0" title="Front Cover" category="Front Cover" format="4" type="10" name="cover" />
+   <field flags="0" title="Comments" category="Personal" format="4" type="1" name="comments" />
+   <field title="Rating" flags="2" category="Personal" format="4" type="14" name="rating">
+    <prop name="maximum"
+>5</prop>
+    <prop name="minimum"
+>1</prop>
+   </field>
+   <field title="ID" flags="32" category="Personal" format="4" type="6" name="id">
+    <prop name="template"
+>%{@id}</prop>
+   </field>
+
+  </fields>
+]]>
+</programlisting>
+
+<para
+>Kõik väljad on defineeritud elemendis <markup
+>&lt;fields&gt;</markup
+>, mida tohib olla ainult üks. Kogu välja teave, välja arvatud omadused, sisaldub atribuutidena elemendis <markup
+>&lt;fields&gt;</markup
+>. Atribuutide <markup
+>flags</markup
+>, <markup
+>format</markup
+> ja <markup
+>type</markup
+> lubatud väärtused on ära toodud <link linkend="field-type-values"
+>allpool</link
+>. </para>
+
+<para
+>Väljade omadustega määratakse kndlaks vaikimisi väljade väärtused, hinnanguväärtuste vahemikud, tuletatud väärtustega mallid jms. Ülal toodud näidetes leiab vaikeväärtuse, maksimaalne hindamisväärtuse ja malli tuletatud ID väljale. </para>
+
+ 
+
+</sect3>
+
+<sect3 id="entries-xml-data">
+<title
+>Kirjed</title>
+
+<programlisting
+><![CDATA[
+  <entry>
+   <title
+>C++ Programming Language, The</title>
+   <authors>
+    <author
+>Stroustrup, Bjarne</author>
+   </authors>
+   <publisher
+>Addison-Wesley Pub Co</publisher>
+   <edition
+>3rd</edition>
+   <pub_year
+>1997</pub_year>
+   <isbn
+>0-201-88954-4</isbn>
+   <genres>
+    <genre
+>Non-Fiction</genre>
+   </genres>
+   <keywords>
+    <keyword
+>Programming</keyword>
+    <keyword
+>Computers</keyword>
+   </keywords>
+   <cover
+>cf65a2f023b6cb9e9233323dca10ac7c.jpeg</cover>
+  </entry>
+]]>
+</programlisting>
+
+<para
+>Kogu iga välja puhul võib <markup
+>&lt;entry&gt;</markup
+> sisaldada elementi, mille nimi langeb kokku välja nimega. Kui välja puhul on lubatud mitu väärtust, lisatakse elemendi loomiseks välja nimele täht <emphasis
+>s</emphasis
+> ning iga väärtus lisatakse elemendi järglasna, nagu ülal toodud näites autori, žanri ja võtmesõna väljad. </para>
+
+<para
+>Kui kogusse lisatakse täiendavaid välju, ei vasta andmefail enam DTD-le. Kuid &appname; kasutab mittevalideerivat &XML;-o parserit, mistõttu lisaväljad ei tekita probleeme. </para>
+</sect3>
+
+<sect3 id="images-xml-data">
+<title
+>Pildid</title>
+<programlisting
+><![CDATA[
+  <images>
+   <image width="111" format="JPEG" height="140" id="cf65a2f023b6cb9e9233323dca10ac7c.jpeg" />
+  </images>
+]]>
+</programlisting>
+
+<para
+>Elemendis <markup
+>&lt;images&gt;</markup
+> on kirjas kõik kirjes mainitud pildid koos atribuutidega, mis kirjeldavad pildi suurust, vormingut ja ID-d. Kui pilt sisaldub zip-failis, on element tühi. Vastasel juhul võib pildiandmed lisada &XML;-voogu base64 kodeeringus tekstina. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-type-values">
+<title
+>Kogutüüpide väärtused</title>
+
+<para
+>Kogu tüüpi näitab kogu elemendis tüübi atribuut. Väärtus võrdub <type
+>Type</type
+> loendi väärtusega päisefailis <filename
+>src/collection.h</filename
+>. </para>
+
+<table>
+<title
+>Kogutüüpide väärtused</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Kogu tüüp</entry>
+<entry
+>Väärtus</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Kohandatud kogu</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Raamatute kogu</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Videokogu</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Muusikakogu</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Bibliograafia</entry
+><entry
+>5</entry
+></row>
+<row
+><entry
+>Koomiksikogu</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>Veinikogu</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Mündikogu</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Margikogu</entry
+><entry
+>9</entry
+></row>
+<row
+><entry
+>Kogumiskaartide kogu</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Videomängude kogu</entry
+><entry
+>11</entry
+></row>
+<row
+><entry
+>Failikataloog</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Lauamängude kogu</entry
+><entry
+>13</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+
+</sect1>
+
+<sect1 id="field-type-values">
+<title
+>Väljatüüpide väärtused</title>
+
+<para
+>&appname; lisab kõik kogu vaikimisi väljad, kui esimese väljaelemendi nimi on <emphasis
+>_default</emphasis
+>. Väljade <emphasis
+>Lõik</emphasis
+>, <emphasis
+>Tabel</emphasis
+> ja <emphasis
+>Pilt</emphasis
+> puhul peab välja kategooria kattuma välja pealkirjaga. </para>
+
+<para
+>Välja tüübi määrab elemendis field antud välja atribuut. Väärtus on võrdne <type
+>FieldType</type
+> loendi väärtusega päisefailis <filename
+>src/field.h</filename
+>. </para>
+
+<table>
+<title
+>Väljatüüpide väärtused</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Välja tüüp</entry>
+<entry
+>Väärtus</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Tavaline tekst</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Lõik</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Valik</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Märkeruut</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Arv</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>&URL;</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Üheveeruline tabel</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Pilt</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Kuupäev</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Hinnang</entry
+><entry
+>14</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>Väljale võib määrata erinevaid lippe, mis on antud loogilise OR väärtusena elemendi field atribuudis flags. Lipp, mis takistab kasutajal välja kustutamast, on mõeldud näiteks viitevõtmele või bibliokirjele. </para>
+
+<table>
+<title
+>Väljade lippude väärtused</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Välja lipud</entry>
+<entry
+>Väärtus</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Mitme väärtuse lubamine</entry
+><entry
+><constant
+>0x01</constant
+></entry
+></row>
+<row
+><entry
+>Rühmitamise lubamine</entry
+><entry
+><constant
+>0x02</constant
+></entry
+></row>
+<row
+><entry
+>Sõnalõpetuse lubamine</entry
+><entry
+><constant
+>0x04</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>Kustutamise keelamine</emphasis
+></entry
+><entry
+><constant
+>0x08</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>Muutmise keelamine</emphasis
+></entry
+><entry
+><constant
+>0x10</constant
+></entry
+></row>
+<row
+><entry
+>Tuletatud väärtus</entry
+><entry
+><constant
+>0x20</constant
+></entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>Välja vorming on määratud elemendi field atribuudiga format. <emphasis
+> Kuupäevavormingut</emphasis
+> praegu ei kasutata. Rühmitamisel <emphasis
+>isikute</emphasis
+> järgi kasutatakse kõki välju, mille puhul on määratud <emphasis
+>Nimena vormindamine</emphasis
+>. Lipu <emphasis
+>Tuletatud väärtus</emphasis
+> määramisel genereeritakse välja väärtus teiste väljade väärtuste malli omadustest. </para>
+
+<table>
+<title
+>Välja vormindamise väärtused</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Välja vormindus</entry>
+<entry
+>Väärtus</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Ainult suurtäheliseks muutmine</entry
+><entry
+>0</entry
+></row>
+<row
+><entry
+>Pealkirjana vormindamine</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Nimena vormindamine</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+><emphasis
+>Kuupäevana vormindamine</emphasis
+></entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Vormindus puudub</entry
+><entry
+>4</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="hidden-options">
+<title
+>Peidetud seadistusvalikud</title>
+
+<para
+>&appname;l on ka mõned seadistusvalikud, mida ei ole näha <interface
+>seadistustedialoogis</interface
+>. Need ei ole nii tähtsad, et muuta nendega niigi rohkete valikutega dialooge veel keerulisemaks, aga et nad võivad siiski olla teatavatele kasutajatele vajalikud või tulusad, annab rakendus võimaluse muuta neid otse seadistustefailis ja neid seejärel ka ära kasutada. </para>
+
+<para
+>&appname; seadistused salvestatakse kasutaja kodukataloogi, täpsemalt faili <filename
+>$<envar
+>KDEHOME</envar
+>/share/config/tellicorc</filename
+>. Failis on seadistused jagatud rühmadesse, mille nimetused on nurksulgudes, näiteks [General Options]. Seadistuse lisamiseks mainitud <emphasis
+>üldiste valikute</emphasis
+> rühma otsi kõigepealt seadistusfailist üles vastava rühma nimega rida. Kui seda ei ole, lisa ise rida, millele seisab [General Options]. Seejärel saab vajaliku seadistuse lisada rühma nime alla. </para>
+
+<sect2 id="hidden-general-options">
+<title
+>[General Options]</title>
+
+<para
+>Järgnevad seadistused tuleks paigutada <emphasis
+>üldiste valikute</emphasis
+> rühma. </para>
+
+<sect3>
+<title
+>Max Icon Size (ikooni maksimumsuurus)</title>
+
+<para
+>Selle seadistusega saab muuta <interface
+>ikoonivaate</interface
+> ikoonide maksimaalset suurust. Vaikeväärtus on 96. Suurus peab jääma vahemikku 32 kuni 512. </para>
+</sect3>
+
+<sect3>
+<title
+>Näide</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Icon Cache Size (ikoonipuhvri suurus)</title>
+
+<para
+>Selle seadistusega saab muuta maksimaalset ikoonide arvu, mida hoitakse mälus. Vaikeväärtus on 1000. </para>
+</sect3>
+
+<sect3>
+<title
+>Näide</title>
+<informalexample>
+<para
+><userinput
+>Icon Cache Size=100</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Näide</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Image Cache Size (pildipuhvri suurus)</title>
+
+<para
+>Selle seadistusega saab muuta mälu maksimaalset kogust baitides, mida kasutatakse kõigi piltide hoidmisel mälus. Vaikeväärtus on 67108864. </para>
+</sect3>
+
+<sect3>
+<title
+>Näide</title>
+<informalexample>
+<para
+><userinput
+>Image Cache Size=256000000</userinput
+></para>
+</informalexample>
+</sect3>
+
+</sect2>
+
+<sect2 id="hidden-bibtex-options">
+<title
+>[Options - bibtex]</title>
+
+<para
+>Järgmised seadistused tuleks paigutada <emphasis
+>bibtexi valikute</emphasis
+> rühma. </para>
+
+<sect3>
+<title
+>lyxpipe</title>
+
+<para
+>See seadistus määrab kindlaks lyxpipe'i asukoha, mida kasutatakse bibliograafiliste viidete saatmiseks. See ei tohi sisaldada faililaiendit <literal role="extension"
+>.in</literal
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Näide</title>
+<informalexample>
+<para
+><userinput
+>lyxpipe=$HOME/.lyx/lyxpipe</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
+
+</sect1>
+
+<sect1 id="bibtex-translation">
+<title
+>Bibtexi märgiteisendus</title>
+
+<para
+>Bibtex-failide importimisel või eksportimisel teisendatakse teatavad TeXi ja Unicode'i märgid. Vastavad seosed on kirjas failis <filename
+>bibtex-translation.xml</filename
+>, mis asub paigalduse andmekataloogis (data). Neid seoseid võib vastavalt vajadusele või soovile muuta. Element key sisaldab Unicode'i märki ning element string selle TeXi vasteid; tegemist võib olla ka üks-mitmele-seosega. Bibtexi eksportimisel kasutatakse esimest seost. </para>
+
+<programlisting
+><![CDATA[
+  <key char="À">
+    <string
+>{\`A}</string>
+    <string
+>\`{A}</string>
+  </key>
+]]>
+</programlisting>
+
+</sect1>
+
+<sect1 id="xslt-tricks">
+<title
+>XSLT nipid</title>
+
+<para
+>Siin on mõned nipid XSLT kirjutamiseks, millega parsida &appname; &XML;-andmeid (veel kirjutamata). </para>
+</sect1>
+
+</chapter>

@@ -1,0 +1,860 @@
+<chapter id="details">
+<title
+>Detaljinformation om &appname;</title>
+
+<sect1 id="field-types">
+<title
+>Fälttyper</title>
+
+<para
+>Varje samling kan ha ett obegränsat antal fält. &appname; stöder elva fälttyper, vilka tillåter ett antal olika data. </para>
+
+<sect2 id="line">
+<title
+>Enkel text</title>
+
+<para
+>Den enklaste fältttypen kallas <emphasis
+>Enkel text</emphasis
+>. Inga begränsningar gäller för fältvärden, och den grafiska datainmatningskomponenten är den vanliga radeditorn. Typen är lämplig för fält som inte förväntas ha långa värden, som författaren och genren. </para>
+
+</sect2>
+<sect2 id="number">
+<title
+>Nummer</title>
+
+<para
+>Typen <emphasis
+>Nummer</emphasis
+> är identiska med <emphasis
+>Enkel text</emphasis
+>, utom att data är begränsat till att vara numeriskt. Poster sorteras numeriskt i kolumnvyn om en fältkolumn med <emphasis
+>Nummer</emphasis
+> klickas. Den vanliga radeditorn, med små pilknappar för att öka och minska värdet, används för datainmatning. Ingen formatering utförs någonsin.</para>
+
+</sect2>
+
+<sect2 id="url">
+<title
+>Webbadress</title>
+
+<para
+>Typen <emphasis
+>webbadress</emphasis
+> möjliggör länkar till andra dokument, med &kde;:s vanliga filtypsbindningar för att öppna de länkade dokumenten. Ingen validering görs av själva värdet i ett <emphasis
+>webbadress</emphasis
+>-fält, men ogiltiga länkar öppnas inte. Datainmatning görs med en radeditor med en knapp för att öppna den vanliga dialogrutan för att öppna filer, men vilken webbadress som helst kan användas. Relativa webbadresser tolkas relativt till datafilens plats, när den väl har sparats. </para>
+
+<para
+>I <link linkend="entry-editor"
+><interface
+>Posteditorn</interface
+></link
+> blir etiketten länken, medan i <link linkend="entry-view"
+><interface
+>Postvyn</interface
+></link
+> används en riktig hyperlänk. Fältttypen är praktisk för att exempelvis skapa länkar till <acronym
+>PDF</acronym
+>-filer i bibliografiska poster, eller till filmrecensioner. Ingen formatering görs någonsin.</para>
+
+<para
+>Relativa webbadresser kan också användas. De tolkas relativt till platsen för &appname;s datafil. I <link linkend="entry-editor"
+><interface
+>posteditorn</interface
+></link
+>, tillhandahåller radeditorn automatisk komplettering för lokala filplatser. Om du vill att webbadressen från &kde;:s filvalsdialogruta ska tolkas relativt till dokumentets plats, ska en utökad egenskap för webbadressfältet ställas in till <emphasis
+>relative</emphasis
+> : <emphasis
+>true</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="para">
+<title
+>Stycke</title>
+
+<para
+>För längre textfält, erbjuder typen <emphasis
+>Stycke</emphasis
+> ett större textredigeringsområde, och har alltid sin egen kategori. Fältet <emphasis
+>Stycke</emphasis
+> kan inte ha flera värden, och inte heller formateras det. Det kan inte användas för gruppering. Sammandrag, referat eller recensioner bör matas in med den här fälttypen.</para>
+
+</sect2>
+
+<sect2 id="choice">
+<title
+>Val</title>
+
+<para
+>När ett fält ska begränsas till några få förinställda värden, används typen <emphasis
+>Val</emphasis
+>. De tillåtna värdena finns att väljas i en kombinationsruta. Uppenbarligen är inte flera värden tillämpliga. Fält som bibliografityp eller personligt betyg har typen <emphasis
+>Val</emphasis
+>.</para>
+
+<para
+>Semikolon ska användas för att skilja tillåtna värden åt.</para>
+
+</sect2>
+
+<sect2 id="bool">
+<title
+>Kryssruta</title>
+
+<para
+>Typen <emphasis
+>Kryssruta</emphasis
+> är tillgänglig för fält som har värdena ja eller nej. Normalt är fältet avstängt. Fältet <emphasis
+>Kryssruta</emphasis
+> är inte formaterat, och är begränsat till enstaka värden. Internt hanteras fältvärdet som <emphasis
+><constant
+>sant</constant
+></emphasis
+> eller <emphasis
+><constant
+>falskt</constant
+></emphasis
+>. Några exempel är gåvefält eller utlåningsfält.</para>
+
+</sect2>
+
+<sect2 id="date">
+<title
+>Datum</title>
+
+<para
+>Fältet <emphasis
+>Datum</emphasis
+> kan innehålla dag, månad och år. Datumet visas med standardformatet ÅÅÅÅ-MM-DD, vilket tillåter enkel sortering. &kde;:s vanliga datumväljare kan användas för att välja datum med musen, eller så kan det matas in direkt. Det krävs inte att fältet har värden för år, månad och dag, till exempel kan bara året matas in. Flera värden tillåts inte. </para>
+
+</sect2>
+
+<sect2 id="table">
+<title
+>Tabell</title>
+
+<para
+>Fältet <emphasis
+>Tabell</emphasis
+> innehåller en eller flera kolumner med värden. I <link linkend="entry-editor"
+><interface
+>Posteditorn</interface
+></link
+> visas fältet med en kalkylarksliknande vy, med numrerade rader. När den sista raden markeras, läggs en ytterligare rad till. Automatisk komplettering är inte tillgänglig. Fältet är användbart för en lista med kapitel i en bok, filmscener, eller sånger i ett album. Fältet <emphasis
+>Tabell</emphasis
+> är alltid en egen kategori. </para>
+
+<para
+>Antal kolumner, upp till maximalt tio, definieras genom att lägga till en egenskap i fältdefinitionen med namnet <emphasis
+>columns</emphasis
+>. Kolumner kan namnges genom att högerklicka på rubriken, eller genom att lägga till en fältegenskap kallad <emphasis
+>column1</emphasis
+>, etc. </para>
+
+<para
+>När <interface
+>Posteditorn</interface
+> används för <emphasis
+>Tabell</emphasis
+>-fält, kan rader arrangeras om genom att dra med musen medan &Ctrl;-knappen hålls nere. En sammanhangsberoende meny är också tillgänglig genom att högerklicka på tabellen, vilket tillåter att rader infogas eller tas bort. </para>
+
+</sect2>
+
+<sect2 id="image">
+<title
+>Bild</title>
+
+<para
+>Fältet <emphasis
+>Bild</emphasis
+> innehåller en bild, med något av de format som stöds av &kde;. Några typiska som ingår är <acronym
+>PNG</acronym
+> och <acronym
+>JPEG</acronym
+>. Bilden kan sparas inne i själva &appname;s datafil, eller i programdatakatalogen. &kde;:s vanliga filvalsdialogruta används, så du kan använda en webbadress eller bara en lokalt tillgänglig fil. Bilder kan också dras från en filhanterare eller webbläsare. </para>
+
+</sect2>
+
+<sect2 id="rating">
+<title
+>Betyg</title>
+
+<para
+>Fältet <emphasis
+>Betyg</emphasis
+> visar ett antal stjärnor som representerar ett numeriskt betyg för en post. Normalt har betyget maxvärdet fem. Minimum och maximum kan ändras genom att ställa in egenskaperna i fältdefinitionen med <interface
+>Samlingsfältdialogrutan</interface
+>, kallade respektive <emphasis
+>minimum</emphasis
+> och <emphasis
+>maximum</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="derived">
+<title
+>Fält med beroende värden</title>
+
+<para
+>Fält med beroende värden är ett specialfall. Fälttypen motsvarar den typiska typen för värdet som finns i fältet, men värdet i fältet skapas från andra fält med en formatsträng i fältbeskrivningen. Om fältet exempelvis har värdemallen <userinput
+>%{title} %{year}</userinput
+>, blir fältets värde titeln följt av året. Fälttypen används i huvudsak för titelfältet i myntsamlingar, frimärkssamlingar, kortsamlingar och vinsamlingar. Antingen det interna fältnamnet eller fälttiteln kan användas i formateringsbeskrivningen. </para>
+
+<para
+>För att bara välja ett enstaka värde i ett fält med flera värden, lägg till ett positionsindex i mallen, som <userinput
+>%{author:1}</userinput
+> för den första författaren. Positionen kan vara negativ, vilket räknar från slutet, så att <userinput
+>%{author:-1}</userinput
+> skulle vara den sista författaren. Värden med små eller stora bokstäver kan användas genom att ställa in mallflaggor, såsom <userinput
+>%{author:1/l}</userinput
+> för första författare med små bokstäver, och <userinput
+>%{author:1/u}</userinput
+> för stora bokstäver. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-types">
+<title
+>Samlingstyper</title>
+
+<para
+>&appname; stöder tolv specifika fördefinierade samlingstyper: böcker, bibliografiska poster, serier, videor, musik, videospel, kort, mynt, frimärken, viner, brädspel och filkataloger. Dessutom är en tom generell samlingsmall tillgänglig för vilken annan typ av samlingsobjekt som helst. De fördefinierade samlingstyperna är bara avsedda att innehålla en allmän uppsättning fält. Du bör lägga till, ändra, eller ta bort dem för att passa dina behov. Det enda kravet är att en samling alltid ska ha fältet <emphasis
+>Titel</emphasis
+>, så att <link linkend="group-view"
+><interface
+>Gruppvyn</interface
+></link
+> fungerar riktigt. För vissa samlingstyper är det bara ett fält med <link linkend="derived"
+>beroende värden</link
+> som kombinerar två eller flera av de övriga. </para>
+
+<para
+>I allmänhet finns det inte någon funktionell skillnad mellan samlingstyperna. Du skulle lika lätt kunna skapa en egen samling för böcker, som att använda den fördefinierade boksamlingen. Men &appname; väljer ikoner baserat på samlingstyp, och det kan finnas vissa specialiserade funktioner som är unika för en viss samling, så om du kan, bör du använda de fördefinierade. Om du vill skapa en vinsamling, men inte gillar några av de fördefinierade fälten, gå ändå vidare genom att skapa en fördefinierad vinsamling, och ta sedan bort alla fördefinierade fält. På det sättet vet &appname; ändå att det är en vinsamling. </para>
+
+<para
+>Normalt inkluderar alla samlingstyper fältet <emphasis
+>ID</emphasis
+>, som visar postens identifikationsnummer. Dessutom, förutom filkatalogen innehåller varje samling fält som visar datum posten skapades i samlingen och den senaste gången den ändrades. </para>
+
+<sect2 id="book-collection">
+<title
+>Boksamlingar</title>
+<para
+>Boksamlingar har 27 fördefinierade fält: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Undertitel</emphasis
+>, <emphasis
+>Författare</emphasis
+>, <emphasis
+>Inbindning</emphasis
+>, <emphasis
+>Inköpsdatum</emphasis
+>, <emphasis
+>Inköpspris</emphasis
+>, <emphasis
+>Förlag</emphasis
+>, <emphasis
+>Utgåva</emphasis
+>, <emphasis
+>Copyrightår</emphasis
+>, <emphasis
+>Publiceringsår</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>LCCN#</emphasis
+>, <emphasis
+>Sidor</emphasis
+>, <emphasis
+>Språk</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Nyckelord</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Serienummer</emphasis
+>, <emphasis
+>Skick</emphasis
+>, <emphasis
+>Signerad</emphasis
+>, <emphasis
+>Läst</emphasis
+>, <emphasis
+>Gåva</emphasis
+>, <emphasis
+>Utlånad</emphasis
+>, <emphasis
+>Betyg</emphasis
+>, <emphasis
+>Omslag</emphasis
+>, <emphasis
+>Handlingen i sammanfattning</emphasis
+> och <emphasis
+>Kommentarer</emphasis
+>. </para>
+
+<para
+>Fältet <emphasis
+>ISBN#</emphasis
+> är speciellt, eftersom <acronym
+>ISBN</acronym
+>-nummer automatiskt formateras och kontrollsiffran beräknas. &appname; känner igen <acronym
+>ISBN</acronym
+>-fältet om dess interna fältnamn är <emphasis
+>isbn</emphasis
+>. Om du tar bort det, eller behöver lägga till det i en annan typ av samling, skapa fältet med titeln <emphasis
+>ISBN</emphasis
+> och verkställ ändringen, därefter kan du återkomma och ändra titeln som du vill. &appname; skapar det interna namnet baserat på den ursprungliga titeln, men ändrar det aldrig om titeln senare uppdateras. </para>
+
+</sect2>
+
+<sect2 id="bibliography">
+<title
+>Bibliografier</title>
+<para
+>Bibliografier har 25 fördefinierade fält: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Posttyp</emphasis
+>, <emphasis
+>Författare</emphasis
+>, <emphasis
+>Bibtexnyckel</emphasis
+>, <emphasis
+>Boktitel</emphasis
+>, <emphasis
+>Redaktör</emphasis
+>, <emphasis
+>Organisation</emphasis
+>, <emphasis
+>Förlag</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>Adress</emphasis
+>, <emphasis
+>Utgåva</emphasis
+>, <emphasis
+>Sidor</emphasis
+>, <emphasis
+>År</emphasis
+>, <emphasis
+>Tidskrift</emphasis
+>, <emphasis
+>Månad</emphasis
+>, <emphasis
+>Nummer</emphasis
+>, <emphasis
+>Hur publicerad</emphasis
+>, <emphasis
+>Kapitel</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Volym</emphasis
+>, <emphasis
+>Korsreferens</emphasis
+>, <emphasis
+>Nyckelord</emphasis
+>, <emphasis
+>Sammandrag</emphasis
+> och <emphasis
+>Anmärkning</emphasis
+>. </para>
+
+<para
+>Även om bibliografiska samlingar inte är specifikt länkade till bibtex, är den fördefinierade uppsättningen fält tagen från en typisk uppsättning av bibtex-fält. Vid export till bibtex, används en egenskap kallad <emphasis
+>bibtex</emphasis
+> i varje fält för att definiera motsvarande bibtex-fält. Om du lägger till ett ytterligare fält i en bibliografi och vill exportera det till bibtex, försäkra dig om att den egenskapen <emphasis
+>bibtex</emphasis
+> ställs in. </para>
+
+<para
+>&appname; har vissa specialiserade funktioner för bibliografier. Bibtex strängmakron kan läggas till, ändras eller tas bort inne i &appname; och bibtex-export ger dig möjlighet att expandera dessa makron. Bibtex hänvisningar kan skickas till ett externt program såsom <application
+>Lyx</application
+> eller <application
+>Kile</application
+> genom att använda en så kallad <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+<para
+>Boksamlingar kan konverteras till bibliografier. Bibtex-standardfält läggs till, och de bibtex-egenskaperna ställs in. Funktionen finns i huvudsak för att konvertera gamla samlingar, innan bibliografitypen skildes från boksamlingstypen. </para>
+</sect2>
+
+<sect2 id="comic-book-collection">
+<title
+>Seriesamlingar</title>
+<para
+>Seriesamlingar har 23 fördefinierade fält: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Undertitel</emphasis
+>, <emphasis
+>Författare</emphasis
+>, <emphasis
+>Artist</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Utgåva</emphasis
+>, <emphasis
+>Förlag</emphasis
+>, <emphasis
+>Upplaga</emphasis
+>, <emphasis
+>Publiceringsår</emphasis
+>, <emphasis
+>Sidor</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Språk</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Nyckelord</emphasis
+>, <emphasis
+>Skick</emphasis
+>, <emphasis
+>Inköpsdatum</emphasis
+>, <emphasis
+>Inköpspris</emphasis
+>, <emphasis
+>Signerad</emphasis
+>, <emphasis
+>Gåva</emphasis
+>, <emphasis
+>Utlånad</emphasis
+>, <emphasis
+>Omslag</emphasis
+>, <emphasis
+>Handlingen i sammanfattning</emphasis
+> och <emphasis
+>Kommentarer</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="video-collection">
+<title
+>Videosamlingar</title>
+<para
+>Videosamlingar har 30 fördefinierade fält: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Media</emphasis
+>, <emphasis
+>Produktionsår</emphasis
+>, <emphasis
+>Åldersgräns</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Region</emphasis
+>, <emphasis
+>Nationalitet</emphasis
+>, <emphasis
+>Format</emphasis
+>, <emphasis
+>Rollista</emphasis
+>, <emphasis
+>Regissör</emphasis
+>, <emphasis
+>Producent</emphasis
+>, <emphasis
+>Författare</emphasis
+>, <emphasis
+>Kompositör</emphasis
+>, <emphasis
+>Studio</emphasis
+>, <emphasis
+>Språkspår</emphasis
+>, <emphasis
+>Textningsspråk</emphasis
+>, <emphasis
+>Ljudspår</emphasis
+>, <emphasis
+>Längd</emphasis
+>, <emphasis
+>Bildformat</emphasis
+>, <emphasis
+>Bredformat</emphasis
+>, <emphasis
+>Färgläge</emphasis
+>, <emphasis
+>Regissörens klippning</emphasis
+>, <emphasis
+>Handlingen i sammanfattning</emphasis
+>, <emphasis
+>Personligt betyg</emphasis
+>, <emphasis
+>Inköpsdatum</emphasis
+>, <emphasis
+>Inköpspris</emphasis
+>, <emphasis
+>Gåva</emphasis
+>, <emphasis
+>Utlånad</emphasis
+>, <emphasis
+>Omslag</emphasis
+> och <emphasis
+>Kommentarer</emphasis
+>. </para>
+
+<para
+>Fältet <emphasis
+>Rollista</emphasis
+> är en <link linkend="table"
+>tabell</link
+> med två kolumner, och skådespelarens namn är avsett vara i den första kolumnen, med deras roll i den andra. <emphasis
+>Speltiden</emphasis
+> är avsedd att vara i minuter, även om du naturligtvis kan ändra den. </para>
+</sect2>
+
+<sect2 id="music-collection">
+<title
+>Musiksamlingar</title>
+<para
+>Musiksamlingar har 15 fördefinierade fält: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Media</emphasis
+>, <emphasis
+>Artist</emphasis
+>, <emphasis
+>Skivmärke</emphasis
+>, <emphasis
+>År</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Spår</emphasis
+>, <emphasis
+>Betyg</emphasis
+>, <emphasis
+>Inköpsdatum</emphasis
+>, <emphasis
+>Inköpspris</emphasis
+>, <emphasis
+>Gåva</emphasis
+>, <emphasis
+>Utlånad</emphasis
+>, <emphasis
+>Nyckelord</emphasis
+>, <emphasis
+>Omslag</emphasis
+> och <emphasis
+>Kommentarer</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="game-collection">
+<title
+>Spelsamlingar</title>
+<para
+>Videospelsamlingar har 16 fördefinierade fält: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Plattform</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Utgivningsår</emphasis
+>, <emphasis
+>Förlag</emphasis
+>, <emphasis
+>Utvecklare</emphasis
+>, <emphasis
+>ESRB-omdöme</emphasis
+>, <emphasis
+>Beskrivning</emphasis
+>, <emphasis
+>Personligt betyg</emphasis
+>, <emphasis
+>Färdig</emphasis
+>, <emphasis
+>Inköpsdatum</emphasis
+>, <emphasis
+>Inköpspris</emphasis
+>, <emphasis
+>Gåva</emphasis
+>, <emphasis
+>Utlånad</emphasis
+>, <emphasis
+>Omslag</emphasis
+> och <emphasis
+>Kommentarer</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="card-collection">
+<title
+>Kortsamlingar</title>
+<para
+>Kortsamlingar har 17 fördefinierade fält: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Spelare</emphasis
+>, <emphasis
+>Lag</emphasis
+>, <emphasis
+>Märke</emphasis
+>, <emphasis
+>Kortnummer</emphasis
+>, <emphasis
+>År</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Korttyp</emphasis
+>, <emphasis
+>Inköpsdatum</emphasis
+>, <emphasis
+>Inköpspris</emphasis
+>, <emphasis
+>Plats</emphasis
+>, <emphasis
+>Gåva</emphasis
+>, <emphasis
+>Nyckelord</emphasis
+>, <emphasis
+>Mängd</emphasis
+>, <emphasis
+>Framsidesbild</emphasis
+>, <emphasis
+>Baksidesbild</emphasis
+> och <emphasis
+>Kommentarer</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="coin-collection">
+<title
+>Myntsamlingar</title>
+<para
+>Myntsamlingar har 16 fördefinierade fält: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Typ</emphasis
+>, <emphasis
+>Valör</emphasis
+>, <emphasis
+>År</emphasis
+>, <emphasis
+>Präglingsmärke</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Myntsamling</emphasis
+>, <emphasis
+>Kvalitet</emphasis
+>, <emphasis
+>Klassningstjänst</emphasis
+>, <emphasis
+>Inköpsdatum</emphasis
+>, <emphasis
+>Inköpspris</emphasis
+>, <emphasis
+>Plats</emphasis
+>, <emphasis
+>Gåva</emphasis
+>, <emphasis
+>Framsida</emphasis
+>, <emphasis
+>Baksida</emphasis
+> och <emphasis
+>Kommentarer</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="stamp-collection">
+<title
+>Frimärkssamlingar</title>
+<para
+>Frimärkssamlingar har 18 fördefinierade fält: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Beskrivning</emphasis
+>, <emphasis
+>Valör</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Utgivningsår</emphasis
+>, <emphasis
+>Färg</emphasis
+>, <emphasis
+>Scott/FACIT-nummer</emphasis
+>, <emphasis
+>Kvalitet</emphasis
+>, <emphasis
+>Stämplat</emphasis
+>, <emphasis
+>Monterat</emphasis
+>, <emphasis
+>Placering</emphasis
+>, <emphasis
+>Gummerat</emphasis
+>, <emphasis
+>Inköpsdatum</emphasis
+>, <emphasis
+>Inköpspris</emphasis
+>, <emphasis
+>Plats</emphasis
+>, <emphasis
+>Gåva</emphasis
+>, <emphasis
+>Bild</emphasis
+> och <emphasis
+>Kommentarer</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="wine-collection">
+<title
+>Vinsamlingar</title>
+<para
+>Vinsamlingar har 15 fördefinierade fält. <emphasis
+>Titel</emphasis
+>, <emphasis
+>Producent</emphasis
+>, <emphasis
+>Beteckning</emphasis
+>, <emphasis
+>Druvsort</emphasis
+>, <emphasis
+>Typ</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Inköpsdatum</emphasis
+>, <emphasis
+>Inköpspris</emphasis
+>, <emphasis
+>Plats</emphasis
+>, <emphasis
+>Mängd</emphasis
+>, <emphasis
+>Dricks senast</emphasis
+>, <emphasis
+>Betyg</emphasis
+>, <emphasis
+>Gåva</emphasis
+>, <emphasis
+>Etikettbild</emphasis
+> och <emphasis
+>Kommentarer</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title
+>Brädspelssamlingar</title>
+<para
+>Brädspelssamlingar har 17 fördefinierade fält. <emphasis
+>Titel</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Mekanism</emphasis
+>, <emphasis
+>Utgivningsår</emphasis
+>, <emphasis
+>Förlag</emphasis
+>, <emphasis
+>Utvecklare</emphasis
+>, <emphasis
+>Antal spelare</emphasis
+>, <emphasis
+>Speltid</emphasis
+>, <emphasis
+>Lägsta ålder</emphasis
+>, <emphasis
+>Beskrivning</emphasis
+>, <emphasis
+>Betyg</emphasis
+>, <emphasis
+>Inköpsdatum</emphasis
+>, <emphasis
+>Inköpspris</emphasis
+>, <emphasis
+>Gåva</emphasis
+>, <emphasis
+>Utlånad</emphasis
+>, <emphasis
+>Omslag</emphasis
+> och <emphasis
+>Kommentarer</emphasis
+>, </para>
+
+</sect2>
+
+<sect2 id="file-catalog">
+<title
+>Filkataloger</title>
+<para
+>Filkataloger har 14 fördefinierade fält. <emphasis
+>Namn</emphasis
+>, <emphasis
+>webbadress</emphasis
+>, <emphasis
+>Beskrivning</emphasis
+>, <emphasis
+>Volym</emphasis
+>, <emphasis
+>Katalog</emphasis
+>, <emphasis
+>Mime-typ</emphasis
+>, <emphasis
+>Storlek</emphasis
+>, <emphasis
+>Skydd</emphasis
+>, <emphasis
+>Ägare</emphasis
+>, <emphasis
+>Grupp</emphasis
+>, <emphasis
+>Skapad</emphasis
+>, <emphasis
+>Ändrad</emphasis
+>, <emphasis
+>Metainformation</emphasis
+> och <emphasis
+>Ikon</emphasis
+>, </para>
+
+</sect2>
+
+<sect2 id="custom-collection">
+<title
+>Egna samlingar</title>
+<para
+>Egna samlingar har ett standardfält, <emphasis
+>Titel</emphasis
+>. De ska användas när samlingsobjektet inte har en av de fördefinierade typerna. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>

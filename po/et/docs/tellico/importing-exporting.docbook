@@ -1,0 +1,608 @@
+<chapter id="importing-exporting">
+<title
+>Andmete import ja eksport</title>
+
+<para
+>&appname; suudab importida ja eksportida väga mitmesuguseid andmefaile, samuti otsida teavet paljudelt internetisaitidelt. </para>
+
+<sect1 id="internet-search">
+<title
+>Import internetist</title>
+<para
+>&appname; võib otsida mitmesugustelt internetisaitidelt teavet <interface
+>internetiotsingu dialoogi</interface
+> vahendusel. Kirjeid võib otse importida ja lisada oma aktiivsesse kogusse. Eri teabepakkujaid saab seadistada <link linkend="data-sources-options"
+>andmeallikate valikutega</link
+>. </para>
+
+<para
+>Otsingutes saab kasutada eri kriteeriume: <guilabel
+>Pealkiri</guilabel
+>, <guilabel
+>Isik</guilabel
+>, <guilabel
+>ISBN</guilabel
+>, <guilabel
+>UPC/EAN</guilabel
+>, <guilabel
+>LCCN</guilabel
+> või <guilabel
+>Võtmesõna</guilabel
+>. Kõigi andmeallikate puhul ei saa kõiki kriteeriume kasutada. <acronym
+>ISBN</acronym
+> ja <acronym
+>LCCN</acronym
+> väärtused on mõeldud ainult raamatutele, <acronym
+>UPC</acronym
+> või <acronym
+>EAN</acronym
+> väärtused aga suvalistele esemetele.</para>
+
+<para
+>Otsingu käivitamisel asendub nupp <guibutton
+>Otsi</guibutton
+> nupuga <guibutton
+>Peata</guibutton
+>, millele vajutamisel otsing lõpetatakse. Tulemuste leidmisel lisatakse need nimekirja otse otsingukasti all, kus kirje valimisel näeb tulemust, ilma et seda veel lisataks kogusse. Klõps nupule <guibutton
+>Lisa kirje</guibutton
+> lisab kõik valitud elemendid kogusse. Kui andmeallikal on rohkem tulemusi, kui esialgu sooviti, muutub aktiivseks nupp <guibutton
+>Rohkem tulemusi</guibutton
+>. Nupuga <guibutton
+>Puhasta</guibutton
+> saab eemaldada kõik aktiivsed tulemused ja otsingu lähtestada. </para>
+
+<screenshot>
+<screeninfo
+>&appname; <interface
+>internetiotsingu dialoog</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fetch-dialog.png"/></imageobject>
+<textobject
+><phrase
+>&appname; <interface
+>internetiotsingu dialoog</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Ositakse ainult kirjeid, mis sobivad aktiivse kogu tüübiga. Veerg <guilabel
+>Kirjeldus</guilabel
+> annab kirje kohta lisateavet, et teha vahet näiteks eri formaadis videodel või eri köites raamatutel. Kui kirje on edukalt kogusse lisatud, lisatakse nimekirja esimesse veergu linnuke. </para>
+
+<para
+>Korraga saab lisada ka mitu kirjet, kasutades &kde; tavapärast viisi mitme elemendi valimiseks, milleks tavaliselt on kirjetele klõpsamise ajal klahvi &Shift; või &Ctrl; allhoidmine. </para>
+
+<para
+>Ribakoodilugejate kasutamise lihtsustamiseks võib otsing hõlmata mitut ISBN/UPC väärtust. Ruudukese <guilabel
+>Mitme ISBN/UPC otsing</guilabel
+> märkimisel muutub otsisõnakast mitteaktiivseks ning aktiivseks muutub nupp <guibutton
+>Muuda ISBN/UPC väärtusi</guibutton
+>, millega saab avada mitmerealist sisestust võimaldava tekstikasti. IGA ISBN peab olema eraldi real. Kasti sulgemise järel kontrollitakse iga ISBN-i vorminduse korrektsust. ISBN-i kontrollimisel saab nii 13-arvulised EAN väärtused kui ka täielikud <acronym
+>UPC</acronym
+> koodid teisendada vajalikku vormingusse. ISBN-ide nimekirja võib sisse lugeda ka tekstifailist. </para>
+
+</sect1>
+
+<sect1 id="importing">
+<title
+>Andmete import</title>
+
+<para
+>&appname; pakub andmete importimisel kolme toimimisviisi. <guilabel
+>Aktiivse kogu asendamine</guilabel
+> sulgeb aktiivse kogu ja loob uue imporditud failist pärit andmetega. <guilabel
+>Aktiivsele kogule lisamine</guilabel
+> sunnib &appname; lisama imporditava kogu kõik kirjed aktiivsesse kogusse ning lisama ka kõik väljad, mida seni ei eksisteerinud. <guilabel
+>Aktiivse koguga liitmine</guilabel
+> on sarnane lisamisele, ainult et kõiki imporditavaid kirjeid võrreldakse senistega ning kõik identsed kirjed jäetakse vahele. Edaspidi on kavas parandada samaste kirjete tuvastamist, aga praegu peavad need olema identsed kõigi väljade poolest, välja arvatud muusikakogude puhul, mille korral võrreldakse ainult esitajat ja albumit ning kattuvate kirjete puhul palad liidetakse. <link linkend="importing-audio-files"
+>Helifailide importija</link
+> suudab kirjeid liites luua korrektsed palade nimekirjad. </para>
+
+<sect2 id="importing-tellico">
+<title
+>&appname; andmete import</title>
+
+<para
+>Importida saab ka teisi &appname; andmefaile. Aktiivse kogu asendamine &appname; faili importides on samaväärne faili avamisega. &appname; andmete importimine on eelkõige mõttekas andmete lisamiseks või kahe kogu ühendamiseks. </para>
+</sect2>
+
+<sect2 id="importing-csv">
+<title
+>CSV-andmete import</title>
+
+<para
+>Komadega eraldatud väärtuste (<acronym
+>CSV</acronym
+>) kasutamine on levinud viis tabelisse korraldatud andmete importimiseks ja eksportimiseks. Iga välja väärtus on eraldatud komaga, üks kirje rea kohta. Väljade nimed võivad olla esimesel real. CSV importija ei ole aga piiratud komaga: eraldajaks võib kasutada mis tahes tähte või stringi. </para>
+
+<screenshot>
+<screeninfo
+>CSV importimise dialoog</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="csv-dialog.png"/></imageobject>
+<textobject
+><phrase
+>CSV importimise dialoog</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Kõigepealt vali imporditava kogu tüüp. Kui tegemist on aktiivsele kogule lisamise või sellega liitmisega, siis on tüübiks juba ette valitud aktiivse kogu tüüp. Kui CSV-faili esimene rida sisaldab väljade pealkirju, märgista vastav ruuduke ning importija võrdleb automaatselt pealkirju aktiivse kogu väljadega. Kui välja pealkiri kattub, muutub selle veeru päis näitamaks, et veerg on omistatud sellele väljale. Kui fail kasutab mõnda muud eraldajat kui koma, märgi kindlasti ka vastav valik. </para>
+
+<para
+>Et &appname; saaks faili korrektselt importida, peab ta teadma, milline väli vastab millisele veerule. <emphasis
+>Kui veeru päises on ainult number, selle veeru andmeid ei impordita.</emphasis
+> Sa peaksid omistama väljad igale veerule, valides veeru kas sellele klõpsates või muutes veeru numbrit ennast ning siis valides omistatava välja rippmenüüst ja klõpsates nupule <guibutton
+>Omista väli</guibutton
+>. Kui on vaja lisada kogusse uus väli, avab rippmenüü viimane käsk <link linkend="fields-dialog"
+><interface
+>kogu väljade dialoogi</interface
+></link
+>. </para>
+
+<para
+>Dialoogis näidatakse ainult imporditava CSV-faili esimest viit rida. </para>
+
+</sect2>
+
+<sect2 id="importing-audio">
+<title
+>Heli-&CD; andmete import</title>
+
+<para
+>&appname; võib kasutada <ulink url="http://freedb.org"
+>freedb.org-i</ulink
+> teenust teabe hankimiseks &CD; kohta, kaasa arvatud selle radade nimekiri. Sõltuvalt distributsioonist võib olla vajalik määrata teenuse kasutamise seadistusi &kde; Süsteemi seadistustes. Lisatakse nii &CD; esitaja, pealkiri, žanr, aasta kui ka radade nimekiri. </para>
+
+<para
+>Kui plaat peaks sisaldama &CD;-teksti, loetakse sisse ka see teave ning lisatakse imporditavale kirjele. </para>
+</sect2>
+
+<sect2 id="importing-audio-files">
+<title
+>Helifaili metaandmete import</title>
+
+<para
+>&appname; võib läbi uurida kataloogi ning lugeda sealt välja levinumate helifailivormingute, näiteks <literal role="extension"
+>mp3</literal
+>- ja <literal role="extension"
+>ogg</literal
+>-failide sildid. Laulud sisestatakse muusikalogusse, kus iga kirje on album. Kui laulufailid sisaldavad raja numbrit, lisatakse laulu nimi radade nimekirjas õigesse kohta. Kirjele lisatakse ka teave esitaja ja žanri kohta. Kui laulu sildid sisaldavad kommentaare, lisatakse need kirje kommentaariväljale, mille ees seisab failinimi. </para>
+
+<para
+>Kui kataloog peaks sisaldama faili <filename
+>.directory</filename
+> ja kataloogi nimi kattub albumi pealkirjaga, kasutatakse desktop-faili kirjet <literal
+>Icon</literal
+> albumi kaanepildina. </para>
+
+<para
+>Helifaili metaandmete importija võib rekursiivselt läbi uurida kataloogi, et leida kõik helifailid kõigis alamkataloogides, ehkki nimeviitasid sel puhul ei järgita. &appname; kasutab helifaili metaandmete lugemiseks <ulink url="http://developer.kde.org/~wheeler/taglib.html"
+>TagLibi teeki</ulink
+>, mistõttu ta võib importida kõigi failitüüpide andmeid, mida TagLib vähegi tunnustab. </para>
+
+</sect2>
+
+<sect2 id="importing-alexandria">
+<title
+>Alexandria raamatukogude import</title>
+
+<para
+><application
+><ulink url="http://alexandria.rubyforge.org"
+>Alexandria</ulink
+></application
+> on alternatiivne raamatute kogude haldur <ulink url="http://www.gnome.org"
+>GNOME</ulink
+> töökeskkonnale. Importija pakub võimalust importida kõik raamatukogud, mis leiduvad kataloogis <filename class="directory"
+>$<envar
+>HOME</envar
+>/.alexandria/</filename
+>. </para>
+
+</sect2>
+
+<sect2 id="importing-amc">
+<title
+>Anti filmikataloogi andmete import</title>
+
+<para
+><application
+><ulink url="http://www.antp.be/software/moviecatalog/"
+>Anti filmikataloog</ulink
+></application
+> on alternatiivne filmikogude haldur. </para>
+
+</sect2>
+
+<sect2 id="importing-bibtex">
+<title
+>Bibtexi andmete import</title>
+
+<para
+><ulink url="http://en.wikipedia.org/wiki/Bibtex"
+>Bibtex</ulink
+> on bibliograafiavorming, mida kasutab LaTeXi dokumentide ettevalmistamise süsteem. Failis võivad sisalduda eri tüüpi bibliograafilised viited. &appname; impordib bibtex-failid bibliograafiakoguna. </para>
+
+<para
+>Kui bibtexi importija kohtab failis välju, mida ei leidu vaikimisi bibliograafiakogus, lisatakse need väljatüübina <link linkend="line"
+>Tavaline tekst</link
+>, välja arvatud kaks erandit. Kui välja väärtus sisaldab üle 100 märgi, lisatakse see väljatüübina <link linkend="para"
+>Lõik</link
+>. Kui välja väärtus paistab sisaldavat &URL;-i või failiviidet, lisatakse see väljatüübina <link linkend="url"
+>&URL;</link
+>. &appname; kasutab bibtex-failide parsimiseks sisemist <ulink url="http://www.gerg.ca/software/btOOL/"
+>btparse teegi</ulink
+> koopiat. </para>
+</sect2>
+
+<sect2 id="importing-bibtexml">
+<title
+>Bibtexml-andmete import</title>
+
+<para
+><ulink url="http://bibtexml.sf.net"
+>Bibtexml</ulink
+> on bibtex-andmed &XML;-i kujul ning bibtexml-failist imporditavaid andmeid koheldakse samamoodi nagu bibtex-andmeid. </para>
+</sect2>
+
+<sect2 id="importing-delicious-library">
+<title
+>Deliciouse raamatukogu andmete import</title>
+
+<para
+><application
+><ulink url="http://www.delicious-monster.com/"
+>Delicious Library</ulink
+></application
+> on alternatiivne kogude haldur &Mac; OS X töökeskkonnas. &appname; impordib osa Delicious Library kasutatavaid andmeid. </para>
+</sect2>
+
+<sect2 id="importing-gcstar">
+<title
+>GCstari andmete import</title>
+
+<para
+><application
+><ulink url="http://www.gcstar.org"
+>GCstar</ulink
+></application
+> on alternatiivne kogude haldur. Praegu on toetatud raamatute, filmi-, muusika-, mündi-, mängude, lauamängude ja veinikogude importimine. </para>
+
+<para
+>&appname; võib importida ka <application
+>GCfilmsi</application
+> andmefaile. <application
+><ulink url="http://home.gna.org/gcfilms/"
+>GCfilms</ulink
+></application
+> on <application
+>GCstari</application
+> eelkäija ja kujutas endast alternatiivset filmikogude haldurit. Tavaliselt leiab <application
+>GCfilmsi</application
+> andmefailid kataloogist <filename class="directory"
+>$<envar
+>HOME</envar
+>/.local/share/gcfilms/</filename
+>. </para>
+
+</sect2>
+
+<sect2 id="importing-griffith">
+<title
+>Griffithi andmete import</title>
+
+<para
+><application
+><ulink url="http://griffith.berlios.de/"
+>Griffith</ulink
+></application
+> on alternatiivne videokogude haldur. &appname; suudab importida enamiku Griffithi andmebaasi andmeid. </para>
+</sect2>
+
+<sect2 id="importing-mods">
+<title
+>MODS-i andmete import</title>
+
+<para
+><acronym
+><ulink url="http://www.loc.gov/standards/mods/"
+>MODS</ulink
+></acronym
+> on mitut tüüpi meediakogusid esindav vorming. Praegu impordib &appname; ainult raamatuid bibliograafiakogu kujul. </para>
+
+</sect2>
+
+<sect2 id="importing-pdf">
+<title
+>PDF-i andmete import</title>
+<para
+>Kui &appname; on kompileeritud <emphasis
+>exempi</emphasis
+> või <emphasis
+>poppleri</emphasis
+> toetusega, saab importida metaandmeid PDF-failidest. Metaandmed võivad sisaldada pealkirja, autorit ja kuupäeva, samuti bibliograafiaidentifikaatoreid, mida seejärel kasutatakse muu teabe uuendamiseks. </para>
+</sect2>
+
+<sect2 id="importing-referencer">
+<title
+>Referenceri andmete import</title>
+<para
+><application
+><ulink url="http://icculus.org/referencer/"
+>Referencer</ulink
+></application
+> on GNOME töökeskkonna dokumentide korraldaja ja bibliograafiahaldur. &appname; suudab importida enamiku Referenceri andmebaasi andmetest. </para>
+</sect2>
+
+<sect2 id="importing-ris">
+<title
+>RIS-i andmete import</title>
+<para
+><ulink url="http://www.adeptscience.co.uk/kb/article/A626"
+><acronym
+>RIS</acronym
+>-i vorming</ulink
+> bibliograafiafaili vorming, mida kasutavad <application
+>Reference Manager</application
+> ja veel mitmed rakendused. &appname; impordib RIS-failid bibliograafiakoguna. </para>
+</sect2>
+
+<sect2 id="importing-goodreads">
+<title
+>Goodreadsi kogu import</title>
+<para
+><ulink url="http://www.goodreads.com"
+>Goodreads</ulink
+> on lugejate sotsiaalvõrgustik raamatute kogude jälgimiseks. &appname; suudab importida kasutaja kogu raamatute nimekirja kas kasutaja nime või ID järgi, kui kogu on avalikult kättesaadav. </para>
+</sect2>
+
+<sect2 id="importing-file-listing">
+<title
+>Failinimekirjade import</title>
+
+<para
+>Parim viis <link linkend="file-catalog"
+>failikataloogi</link
+> loomiseks on kataloogi sisu importimine. Kataloogi võib rekursiivselt läbi uurida, et lisatakse kõik selles leitavad failid. See importija on eelkõige kasulik tagavarakoopiate ning andmekandjate, näiteks &CD;-de või <acronym
+>DVD</acronym
+>-de sisu kataloogimiseks. Lisaks võib genereerida failisisu eelvaatlused, kuigi suurema hulga failide korral võtab nende lugemine omajagu aega. Failide eelvaatlused on samasugused nagu &kde; failihalduris. </para>
+</sect2>
+
+<sect2 id="importing-xslt">
+<title
+>&XML;-andmete import XSLT vahendusel</title>
+
+<para
+>Mis tahes &XML;-faili saab importida &appname;sse, kui &XSL;-laaditabel on vähegi suuteline teisendama faili &appname; vormingusse. &appname; laadib laaditabeli automaatselt ning sooritab faili laadimiseks vajaliku &xslt; töötluse. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="drag-n-drop">
+<title
+>Lohistamine</title>
+
+<para
+>Andmefailide lohistamisega &appname; peaaknasse saab neid samamoodi importida nagu menüü <link linkend="importing"
+>importimiskäskudega</link
+>. Lohistamine toimib järgmiste failivormingute puhul: Tellico, Bibtex, RIS ja PDF. Toetatud on ka mitme faili importimine korraga.</para>
+
+<para
+>Kui näiteks soovid kataloogida mitu <link linkend="importing-pdf"
+>PDF-faili</link
+>, vali need failihalduris ja lohista &appname; aknasse. &appname; impordib failidest nii palju metaandmeid kui võimalik ning hangib seejärel lisateavet erinevatest seadistatud internetiallikatest.</para>
+
+</sect1>
+
+<sect1 id="exporting">
+<title
+>Andmete eksport</title>
+
+<para
+>Kogu andmete eksportimisel võidakse kirjete väärtused eksportida sellisena, nagu need on sisestatud, või kasutades &appname; pakutavat <link linkend="field-formatting"
+>automaatset vormindamist</link
+>. Lisaks võib eksporti piirata ka kogus parajasti valitud kirjetega, mille puhul valitud kirjete arvu võib näha <link linkend="status-bar"
+>olekuribal</link
+>. </para>
+
+<para
+>Tekstifailide, näiteks Bibtex- või CSV-failide eksportimisel võib kasutada nii Unicode'i (UTF-8) kodeeringut kui ka operatsioonisüsteemi aktiivset lokaati. </para>
+
+<screenshot>
+<screeninfo
+>Üldised eksportimisvalikud</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-options.png"/></imageobject>
+<textobject
+><phrase
+>Üldised eksportimisvalikud</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="exporting-xml">
+<title
+>Eksport &XML;-ina</title>
+
+<para
+>&appname; andmete failivorming on zip-pakendusega on &XML;-fail. Eksport &XML;-ina tähendab lihtsalt &XML;-faili loomist ilma seda zip-pakendamata. Pildid saab &XML;-faili kaasata base64 kodeeringus andmetena elemendis image, kuid sel moel tekivad väga suured tekstifailid. </para>
+</sect2>
+
+<sect2 id="exporting-zip">
+<title
+>Eksport Zipina</title>
+
+<para
+>&appname; standardne failivorming on zip-pakendusega fail, mis sisaldab &XML;-kogufaili ja lisavõimalusega kõiki pilte, millele kogus viidatakse. Kui pildid on salvestatud rakenduse kataloogi, luuakse eksportimisel Zipina autonoomne andmefail, mis sisaldab kõiki kogus leiduvaid pilte. </para>
+</sect2>
+
+<sect2 id="exporting-html">
+<title
+>Eksport &HTML;-ina</title>
+
+<para
+>Eksportimisel &HTML;-ina kasutatakse laaditabelit <filename
+>tellico2html.xsl</filename
+>. Pildid eksporditakse kataloogi sama nimega nagu eksporditav &HTML;-fail, lisades <emphasis
+><filename
+>_files</filename
+></emphasis
+>. </para>
+
+<para
+>Vaikevorming on sarnane trükkimisväljundile ning võimaldab mitmesuguseid &HTML;-i modifitseerivaid valikuid. Väljade päiseid saab lasta näidata iga veeru kohal, kuid paraku ei võimalda &kde; veel korrata tabeli päiseid igal leheküljel. Kirjeid saab rühmitada samamoodi nagu <interface
+>rühmavaates</interface
+>. </para>
+
+<para
+>Lisaks võib igale kogu kirjele luua eraldi faili, mille lingid sisalduvad tipptaseme &HTML;-failis. Kirjefailid luuakse piltidega samasse kataloogi. Kirjete &HTML;-failid kasutavad aktiivset laaditabeli malli, nagu seda näeb <interface
+>kirjevaates</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>&HTML;-ina eksportimise valikud</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-html.png"/></imageobject>
+<textobject
+><phrase
+>&HTML;-ina eksportimise valikud</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-csv">
+<title
+>Eksport CSV-na</title>
+
+<para
+>Komadega eraldatud väärtused (CSV) on tavapärane tabelisse korraldatud andmete importimis- ja eksportimisviis. Kõigi väljade väärtused on eraldatud komaga, igal real on üks kirje. Väljade pealkirjad võivad olla esitatud päistena esimesel real. Väljade eraldamiseks võib kasutada ka mis tahes muid märke või stringe peale komade. </para>
+
+<screenshot>
+<screeninfo
+>CSV-na eksportimise valikud</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-csv.png"/></imageobject>
+<textobject
+><phrase
+>CSV-na eksportimise valikud</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-alexandria">
+<title
+>Eksport Alexandriana</title>
+
+<para
+><application
+><ulink url="http://alexandria.rubyforge.net"
+>Alexandria</ulink
+></application
+> on raamatute kogude haldur <ulink url="http://www.gnome.org"
+>GNOME</ulink
+> töökeskkonnas. &appname; on suuteline eksportima piiratud hulgal raamatute kogu välju Alexandria vaikimisi andmete asukohta. </para>
+
+</sect2>
+
+<sect2 id="exporting-onix">
+<title
+>Eksport ONIX-ina</title>
+
+<para
+><ulink url="http://www.editeur.org/onix.html"
+>ONIX</ulink
+> on &XML;-vorming raamatutööstuse tooteteabe väljendamiseks ja vahetamiseks, mis on peamiselt välja töötatud raamatukaupmeeste huvides. &appname; võib eksportida raamatute kogusid, kasutades vähesel hulgal ONIX-i võimalusi. </para>
+
+</sect2>
+
+<sect2 id="exporting-bibtex">
+<title
+>Eksport Bibtexina</title>
+
+<para
+>Eksportimisel <ulink url="http://en.wikipedia.org/wiki/Bibtex"
+>Bibtexina</ulink
+> võib väljade väärtusi varjestada sulgude või jutumärkidega. Kui kogus on kasutatud stringimakrosid, võib neid eksportida nii makrodena kui ka laiendatult. &URL;-väljade korral võib &appname; sulustada väljade väärtused sildiga <literal
+>\url{...}</literal
+>. Kirjed, millel puudub viitevõti, võib lasta vahele jätta, kuid võib lasta ka &appname;l neile automaatselt võtme genereerida. </para>
+
+<screenshot>
+<screeninfo
+>Bibtexina eksportimise valikud</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-bibtex.png"/></imageobject>
+<textobject
+><phrase
+>Bibtexina eksportimise valikud</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-bibtexml">
+<title
+>Eksport Bibtexmlina</title>
+
+<para
+><ulink url="http://bibtexml.sourceforge.net"
+>Bibtexml</ulink
+> on vorming bibtex-andmete esitamiseks &XML;-ina. </para>
+
+</sect2>
+
+<sect2 id="exporting-gcstar">
+<title
+>GCstari eksport</title>
+
+<para
+><application
+><ulink url="http://www.gcstar.org"
+>GCstar</ulink
+></application
+> on veel üks filmikogude haldur. &appname; suudab eksportida piiratud hulgal videokogu välju GCstari andmefaili. </para>
+
+</sect2>
+
+<sect2 id="exporting-xslt">
+<title
+>Eksport &XML;-ina &xslt; vahendusel</title>
+
+<para
+>Lõpuks võib &appname; töödelda oma kogu andmete sisemist esitust &XML;ina välise &XSL;-laaditabeli abil, enne kui see eksportida. Seda laadi eksportimine võib olla kasulik tekstiaruannete või muud tüüpi failide genereerimiseks. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="citations">
+<title
+>Viidete kasutamine</title>
+<para
+><link linkend="bibliography"
+>Bibliograafia</link
+> puhul võib genereerida parajasti valitud kirjete viited ning neid kasutada mitmes muus rakenduses. Bibtexi vormingus viite võib kopeerida lõikepuhvrisse ja asetada sealt LaTeXi faili. Bibtexi viiteid võib läkitada ka sellistesse välistesse rakendustesse, nagu <application
+>LyX</application
+> või <application
+>Kile</application
+>, kasutades selleks niinimetatud <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe'i</link
+></emphasis
+>. </para>
+
+</sect1>
+
+</chapter>

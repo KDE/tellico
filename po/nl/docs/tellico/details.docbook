@@ -1,0 +1,856 @@
+<chapter id="details">
+<title
+>&appname; details</title>
+
+<sect1 id="field-types">
+<title
+>Veldtypen</title>
+
+<para
+>Elke verzameling kan een ongelimiteerd aantal velden hebben. &appname; ondersteunt elf typen velden, wat mogelijkheden biedt voor een reeks van verschillende gegevens. </para>
+
+<sect2 id="line">
+<title
+>Eenvoudige tekst</title>
+
+<para
+>Het meest eenvoudige veldtype is <emphasis
+>Eenvoudige tekst</emphasis
+>. Er zijn geen beperkingen op de waarden van de velden en het invoerwidget is de standaard regelbewerking. Dit type is van toepassing op velden waarvan niet verwacht wordt om lange waarden te bevatten, dus zoiets als de auteur of het genre. </para>
+
+</sect2>
+<sect2 id="number">
+<title
+>Cijfers</title>
+
+<para
+>Het type <emphasis
+>Getal</emphasis
+> is identiek aan het type <emphasis
+>eenvoudige tekst</emphasis
+>, behalve dat het gegevens beperkt is tot iets numerieks. Items zullen numeriek gesorteerd worden in de kolomweergave als <emphasis
+>Getal</emphasis
+> als veldkolom wordt aangeklikt. De standaard regelbewerking, met kleine pijlknoppen voor het verhogen of verlagen van de waarde, wordt gebruikt voor invoer. Er zal nooit formattering worden gebruikt.</para>
+
+</sect2>
+
+<sect2 id="url">
+<title
+>&URL;</title>
+
+<para
+>Het type <emphasis
+>&URL;</emphasis
+> stelt in staat koppelingen naar andere documenten in te voeren met de standaard bestandstypeassociaties van &kde; voor het openen van de gekoppelde documenten. Er wordt geen validatie gedaan op de actuele waarde van een veld met <emphasis
+>&URL;</emphasis
+>, maar ongeldige koppelingen worden niet geopend. De gegevensitem is een bewerking van een regel met een knop voor het openen van de standaard dialoog voor openen van een bestand, maar elke &URL; mag gebruikt worden. Relatieve &URL;'s worden geïnterpreteerd relatief tot de locatie van het gegevensbestand, nadat het is opgeslagen. </para>
+
+<para
+>In de <link linkend="entry-editor"
+><interface
+>Itembewerker</interface
+></link
+> wordt het label de koppeling, terwijl in de <link linkend="entry-view"
+><interface
+>Itemweergave</interface
+></link
+>, een actuele hyperlink wordt gebruikt. Dit veldtype is gemakkelijk voor koppelingen naar <acronym
+>PDF</acronym
+> bestanden van bibliografische items of bijvoorbeeld naar commentaar op films. Er wordt geen formattering toegepast.</para>
+
+<para
+>Relatieve &URL;'s kunnen ook gebruikt worden. Ze worden geïnterpreteerd relatief tot de locatie van het gegevensbestand van &appname;. In de <link linkend="entry-editor"
+><interface
+>Itembewerker</interface
+></link
+> levert de regelbewerking automatische aanvulling voor lokale bestandslocaties. Als u de &URL; van het dialoogvak van de bestandenkiezer van &kde; wilt interpreteren relatief tot de locatie van het document, dan moet een eigenschap voor het veld met &URL; ingesteld worden op <emphasis
+>relative</emphasis
+> : <emphasis
+>true</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="para">
+<title
+>Paragraaf</title>
+
+<para
+>Voor langere tekstvelden biedt het type <emphasis
+>Paragraaf</emphasis
+> een groter tekstbewerkingsgebied en is altijd zijn eigen categorie. Een veld <emphasis
+>Paragraaf</emphasis
+> mag geen meerdere waarden hebben en ook wordt het niet automatisch geformatteerd. Het kan niet gebruikt worden voor groepering. Overzichten, samenvatting van de plot of reviews zouden ingevoerd moeten worden in dit type veld.</para>
+
+</sect2>
+
+<sect2 id="choice">
+<title
+>Keuze</title>
+
+<para
+>Wanneer een veld beperkt moet worden tot een paar vooraf ingestelde waarden, wordt een type <emphasis
+>Keuze</emphasis
+> gebruikt. De te accepteren waarden worden getoond in een keuzevak voor selectie. Natuurlijk zijn meerdere waarden niet toegestaan. Velden zoals het type bibliografie of persoonlijke waardering zijn velden van het type <emphasis
+>Keuze</emphasis
+>.</para>
+
+<para
+>Puntkomma's moeten worden gebruikt om de toegestane waarden te scheiden.</para>
+
+</sect2>
+
+<sect2 id="bool">
+<title
+>Keuzevakje</title>
+
+<para
+>Voor velden die geen waarde of een yes aannemen is het type <emphasis
+>Keuzevakje</emphasis
+> beschikbaar. Standaard staat het veld dan op off. Velden van het type <emphasis
+>Keuzevakje</emphasis
+> worden niet geformatteerd en zijn beperkt tot enkele waarden. Intern worden de waarden van de velden doorgegeven als <emphasis
+><constant
+>true</constant
+></emphasis
+> of <emphasis
+><constant
+>false</constant
+></emphasis
+>. Sommige voorbeelden zijn de velden gift of geleend.</para>
+
+</sect2>
+
+<sect2 id="date">
+<title
+>Datum</title>
+
+<para
+>Een veld <emphasis
+>Datum</emphasis
+> kan een dag, maand en jaar bevatten. De datum wordt getoond in het standaard formaat YYYY-MM-DD, wat gemakkelijke sortering mogelijk maakt. De standaard datumselectie van &kde; kan gebruikt worden om de datum met de muis te kiezen of deze kan direct ingevoerd worden. Het veld vereist niet dat alle velden voor het jaar, maand en dag zijn ingevuld; alleen het jaar kan bijvoorbeeld ingevoerd worden. Meerdere waarden zijn niet toegestaan. </para>
+
+</sect2>
+
+<sect2 id="table">
+<title
+>Tabel</title>
+
+<para
+>Het veld <emphasis
+>Tabel</emphasis
+> bevat één of meer kolommen met waarden. In de <link linkend="entry-editor"
+><interface
+>Itembewerker</interface
+></link
+> wordt het veld gepresenteerd door een rekenbladachtige weeergave, met genummerde rijen. Wanneer de laatste rij is geselecteerd wordt een extra rij toegevoegd. Automatisch aanvullen is niet beschikbaar. Dit veld is nuttig voor een lijst met hoofdstukken in een boek, scènes in een film of liederen in een album. Velden met type <emphasis
+>Tabel</emphasis
+> zijn altijd een categorie op zichzelf. </para>
+
+<para
+>Het aantal kolommen, tot een maximum van tien, worden gedefineerd door een eigenschap aan de velddefinitie toe te voegen met de naam <emphasis
+>columns</emphasis
+>. De kolommen kunnen gelabeld zijn door rechts te klikken op de kopregel of door een veldeigenschap genaamd <emphasis
+>column1</emphasis
+>, etc. </para>
+
+<para
+>Bij gebruik van de <interface
+>Itembewerker</interface
+> voor velden in de <emphasis
+>Tabel</emphasis
+>, kunnen rijen verplaatst worden door ze met de muis te verslepen met indrukken van de &Ctrl;-toets. Er is ook een pop-upmenu beschikbaar door rechts te klikken op de tabel, waarmee rijen kunnen worden ingevoegd of verwijderd. </para>
+
+</sect2>
+
+<sect2 id="image">
+<title
+>Afbeelding</title>
+
+<para
+><emphasis
+>Afbeelding</emphasis
+>svelden bevatten een afbeelding van elk formaat ondersteund door &kde;. Enige typische omvatten <acronym
+>PNG</acronym
+> of <acronym
+>JPEG</acronym
+>. De afbeelding kann opgeslagen worden in het gegevensbestand van &appname; zelf of in de gegevensmap van de toepassing. De standaard bestandenkiezer van &kde; wordt gebruikt, u kunt dus een &URL; gebruiken of gewoon een lokaal beschikbaar bestand. Afbeeldingen kunnen ook versleept worden uit een bestandsbeheerder of browser. </para>
+
+</sect2>
+
+<sect2 id="rating">
+<title
+>Waardering</title>
+
+<para
+>Velden voor <emphasis
+>Waardering</emphasis
+> tonen een aantal sterren om een numerieke waardering voor een item aan te geven. Standaard heeft de waardering een maximum van vijf. Het minimum en maximum kan gewijzigd worden door eigenschappen in te stellen in de velddefinitie in de <interface
+>Veldendialoog voor eigenschappen</interface
+>, respectievelijk genaamd <emphasis
+>minimum</emphasis
+> en <emphasis
+>maximum</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="derived">
+<title
+>Velden voor afgeleide waarde</title>
+
+<para
+>Velden met afgeleide waarden zijn een speciaal geval. Het veldtype komt overeen met het typische type van de waarde die het veld bevat, maar de waarde van het veld wordt gemaakt uit andere velden met behulp van een tekenreeksformat in de beschrijving van het veld. Als het veld bijvoorbeeld een waardesjabloon heeft <userinput
+>%{title} %{year}</userinput
+>, dan zal de waarde van dat veld de titel zijn gevolgd door het jaar. Dit veldtype wordt primair gebruikt voor het titelveld in de verzameling van munten, postzegels, visitekaartjes en wijnen. Ofwel de interne veldnaam of de veld titel kan gebruikt worden in de beschrijving voor het formatteren. </para>
+
+<para
+>Om slechts een enkele waarde voor een veld met meerdere waarden te selecteren, voegt u een positie-index toe aan het sjabloon, zoals <userinput
+>%{author:1}</userinput
+> voor de eerste auteur. De positie mag negatief zijn, tellend vanaf het einde, dus <userinput
+>%{author:-1}</userinput
+> zou de laatste auteur zijn. Waarden met hoofd- en kleine letters kunnen gebruikt worden door instellen van sjabloonvlaggen, zoals <userinput
+>%{author:1/l}</userinput
+> for lower-case first author and <userinput
+>%{author:1/u}</userinput
+> voor hoofdletters. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-types">
+<title
+>Typen verzamelingen</title>
+
+<para
+>&appname; ondersteunt standaard twaalf specifieke typen verzamelingen: boeken, bibliografische items, stripboeken, video's, muziek, videospellen, visitekaartjes, munten, postzegels, wijnen, bordspellen en bestandscatalogi. Daarnaast is er een algemeen leeg sjabloon voor verzamelingen beschikbaar voor elke ander verzamelobject. De standaard verzamelingen zijn alleen bedoeld om een algemene set velden te bevatten. U kunt er naar behoefte velden aan toevoegen, wijzigen of verwijderen. Het enige vereiste is dat een verzameling altijd een veld <emphasis
+>Titel</emphasis
+> moet hebben, zodat de <link linkend="group-view"
+><interface
+>Groepsweergave</interface
+></link
+> op de juiste manier werkt. Voor sommige typen verzamelingen is dat eenvoudig een veld <link linkend="derived"
+>afgeleide waarde</link
+>, dat twee of meer van de anderen combineren. </para>
+
+<para
+>In het algemeen is er geen functioneel verschil tussen de typen verzamelingen. U zou een eigen verzameling voor uw boeken kunnen maken net zo gemakkelijk als de standaard boekverzameling. Maar &appname; kiest pictogrammen gebaseerd on type verzameling en ere kunnen enige gespecialiseerde functies zijn die uniek zijn bij een zekere verzameling, dus als u kunt dan zou u de standaarden moeten gebruiken. Dus als u een wijnverzameling wilt maken, maar geen van de standaard velden wilt gebruiken, ga uw gang, en maak de standaard wijnverzameling, verwijder daarna alle standaarden. Op die manier weet &appname; dat het een wijnverzameling is. </para>
+
+<para
+>Standaard bevatten alle typen verzamelingen een veld <emphasis
+>ID</emphasis
+>, die het ID-nummer van het item toont. Bovendien, behalve voor de bestandencatalogus, bevat elke verzameling velden met de datum dat het item is gemaakt in de verzameling en de laatste tijd dat het is gewijzigd. </para>
+
+<sect2 id="book-collection">
+<title
+>Verzamelingen van boeken</title>
+<para
+>Boekverzamelingen hebben 27 standaard velden: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Ondertiteling</emphasis
+>, <emphasis
+>Auteur</emphasis
+>, <emphasis
+>Aankoopbedrag</emphasis
+>, <emphasis
+>Uitgever</emphasis
+>, <emphasis
+>Editie</emphasis
+>, <emphasis
+>Jaar van copyright</emphasis
+>, <emphasis
+>Jaar van publicatie</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>LCCN#</emphasis
+>, <emphasis
+>Pagina's</emphasis
+>, <emphasis
+>Taal</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Trefwoorden</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Serienummer</emphasis
+>, <emphasis
+>Conditie</emphasis
+>, <emphasis
+>Getekend</emphasis
+>, <emphasis
+>Gelezen</emphasis
+>, <emphasis
+>Gift</emphasis
+>, <emphasis
+>Geleend</emphasis
+>, <emphasis
+>Waardering</emphasis
+>, <emphasis
+>Voorkant</emphasis
+>, <emphasis
+>Samenvatting van plot</emphasis
+> en <emphasis
+>Notities</emphasis
+>. </para>
+
+<para
+>Het veld <emphasis
+>ISBN#</emphasis
+> is speciaal, omdat <acronym
+>ISBN</acronym
+>-nummers automatisch geformatteerd worden en het controlecijfer wordt berekend. &appname; herkent het veld <acronym
+>ISBN</acronym
+> als zijn interne veldnaam <emphasis
+>isbn</emphasis
+> is. Als u het hebt verwijderd of het is nodig om het toe te voegen aan een ander type verzameling, maak het veld dan met de titel <emphasis
+>ISBN</emphasis
+> en pas de wijziging toe, u kunt dan terugkeren en de titel wijzigen zoals u dat wilt. &appname; maakt de interne naam gebaseerd op de initiële titel, maar wijzigt het nooit als de titel later wordt bijgewerkt. </para>
+
+</sect2>
+
+<sect2 id="bibliography">
+<title
+>Bibliografieën</title>
+<para
+>Bibliografieën hebben 25 standaard velden: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Itemtype </emphasis
+>, <emphasis
+>Auteur</emphasis
+>, <emphasis
+>Bibtex-sleutel</emphasis
+>, <emphasis
+>Boektitel</emphasis
+>, <emphasis
+>Editor</emphasis
+>, <emphasis
+>Organisatie</emphasis
+>, <emphasis
+>Uitgever</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>Adres</emphasis
+>, <emphasis
+>Editie</emphasis
+>, <emphasis
+>Pagina's</emphasis
+>, <emphasis
+>Jaar</emphasis
+>, <emphasis
+>Tijdschrift</emphasis
+>, <emphasis
+>Maand</emphasis
+>, <emphasis
+>Nummer</emphasis
+>, <emphasis
+>Hoe gepubliceerd</emphasis
+>, <emphasis
+>Hoofdstuk</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Serienummer</emphasis
+>, <emphasis
+>Volume</emphasis
+>, <emphasis
+>Kruisverwijzing</emphasis
+>, <emphasis
+>Trefwoorden</emphasis
+>, <emphasis
+>Samenvatting</emphasis
+> en <emphasis
+>Notities</emphasis
+>. </para>
+
+<para
+>Hoewel bibliografische verzamelingen niet specifiek gekoppeld zijn aan bibtex, is de standaard set velden genomen uit een typische set van bibtex velden. Bij exporteren naar bibtex wordt een eigenschap genaamd <emphasis
+>bibtex</emphasis
+> voor elk veld gebruikt om het overeenkomstige bibtex veld te definiëren. Als u een extra veld aan een bibliografie wilt toevoegen en u wilt het exporteren naar bibtex, ga dan na dat de eigenschap <emphasis
+>bibtex</emphasis
+> is ingesteld. </para>
+
+<para
+>&appname; heeft enige gespecialiseerde functies voor bibliografieën. Bibtex macro's voor tekenreeksen kunnen toegevoegd, gewijzigd of verwijderd worden vanuit &appname; en het exporteren naar bibtex geeft u de optie om de macro's. Bibtex citaten kunnen naar een externe toepassingen zoals <application
+>LyX</application
+> of <application
+>Kile</application
+> worden overgedragen met de zogenaamde <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+<para
+>Verzamelingen van boeken kunnen geconverteerd worden naar bibliografieën. Standaard bibtex-velden worden toegevoegd en de bibtex-eigenschappen worden ingesteld. Deze functionaliteit bestaat primair om oude verzamelingen te converteren, eerder was het type bibliografie gescheiden van het type verzameling van boeken. </para>
+</sect2>
+
+<sect2 id="comic-book-collection">
+<title
+>Verzamelingen van stripboeken</title>
+<para
+>Stripboekverzamelingen hebben 23 standaard velden: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Ondertiteling</emphasis
+>, <emphasis
+>Schrijver</emphasis
+>, <emphasis
+>Artiest</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Uitgaven</emphasis
+>, <emphasis
+>Uitgever</emphasis
+>, <emphasis
+>Editie</emphasis
+>, <emphasis
+>Jaar van publicatie</emphasis
+>, <emphasis
+>Pagina's</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Taal</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Trefwoorden</emphasis
+>, <emphasis
+>Conditie</emphasis
+>, <emphasis
+>Aankoopdatum</emphasis
+>, <emphasis
+>Aankoopprijs</emphasis
+>, <emphasis
+>Ondertekend</emphasis
+>, <emphasis
+>Gift</emphasis
+>, <emphasis
+>Geleend</emphasis
+>, <emphasis
+>Voorkant</emphasis
+>, <emphasis
+>Samenvatting plot</emphasis
+> and <emphasis
+>Notities</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="video-collection">
+<title
+>Verzamelingen van video's</title>
+<para
+>Videoverzamelingen hebben 30 standaard velden: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Medium</emphasis
+>, <emphasis
+>Jaar productie</emphasis
+>, <emphasis
+>Certificering</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Regio</emphasis
+>, <emphasis
+>Nationaliteit</emphasis
+>, <emphasis
+>Formaat</emphasis
+>, <emphasis
+>Cast</emphasis
+>, <emphasis
+>Director</emphasis
+>, <emphasis
+>Producer</emphasis
+>, <emphasis
+>Schrijver</emphasis
+>, <emphasis
+>Componist</emphasis
+>, <emphasis
+>Studio</emphasis
+>, <emphasis
+>Taaltracks</emphasis
+>, <emphasis
+>Taal ondertiteling</emphasis
+>, <emphasis
+>Audio-tracks</emphasis
+>, <emphasis
+>Afspeelduur</emphasis
+>, <emphasis
+>Beeldverhouding</emphasis
+>, <emphasis
+>Breed scherm</emphasis
+>, <emphasis
+>Kleurmodus</emphasis
+>, <emphasis
+>Director's Cut</emphasis
+>, <emphasis
+>Samenvatting plot</emphasis
+>, <emphasis
+>Persoonlijke rating</emphasis
+>, <emphasis
+>Aankoopdatum</emphasis
+>, <emphasis
+>Aankoopprijs</emphasis
+>, <emphasis
+>Gift</emphasis
+>, <emphasis
+>Geleend</emphasis
+>, <emphasis
+>Cover</emphasis
+> en <emphasis
+>Toelichting</emphasis
+>. </para>
+
+<para
+>Het veld <emphasis
+>Cast</emphasis
+> is een <link linkend="table"
+>tabel</link
+> met twee kolommen en de naam van de acteur is bedoeld voor de eerste kolom, met de rol in de tweede. The <emphasis
+>Afspeelduur</emphasis
+> is bedoeld te zijn in minuten, maar u kunt dat natuurlijk wijzigen. </para>
+</sect2>
+
+<sect2 id="music-collection">
+<title
+>Muziekverzamelingen</title>
+<para
+>Muziekverzamelingen hebben 15 standaard velden: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Medium</emphasis
+>, <emphasis
+>Artiest</emphasis
+>, <emphasis
+>Label</emphasis
+>, <emphasis
+>Jaar</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Tracks</emphasis
+>, <emphasis
+>Waardering</emphasis
+>, <emphasis
+>Koopdatum</emphasis
+>, <emphasis
+>Aankoopprijs</emphasis
+>, <emphasis
+>Gift</emphasis
+>, <emphasis
+>Geleend</emphasis
+>, <emphasis
+>Sleutelwoorden</emphasis
+>, <emphasis
+>Hoes</emphasis
+> en <emphasis
+>Opmerkingen</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="game-collection">
+<title
+>Verzameling van spellen</title>
+<para
+>Videospelenverzamelingen hebben 16 standaard velden: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Platform</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Jaar uitgave</emphasis
+>, <emphasis
+>Publisher</emphasis
+>, <emphasis
+>Ontwikkelaar</emphasis
+>, <emphasis
+>ESRB-rating</emphasis
+>, <emphasis
+>Beschrijving</emphasis
+>, <emphasis
+>Persoonlijke rating</emphasis
+>, <emphasis
+>Voltooid</emphasis
+>, <emphasis
+>Aankoopdatum</emphasis
+>, <emphasis
+>Aankoopprijs</emphasis
+>, <emphasis
+>Gift</emphasis
+>, <emphasis
+>Geleend</emphasis
+>, <emphasis
+>Cover</emphasis
+> en <emphasis
+>Toelichting</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="card-collection">
+<title
+>Kaartverzamelingen</title>
+<para
+>Trading card-verzamelingen hebben 17 standaard velden: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Speler</emphasis
+>, <emphasis
+>Team</emphasis
+>, <emphasis
+>Merk</emphasis
+>, <emphasis
+>Kaartnummer</emphasis
+>, <emphasis
+>Jaar</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Kaarttype</emphasis
+>, <emphasis
+>Aankoopdatum</emphasis
+>, <emphasis
+>Aankoopprijs</emphasis
+>, <emphasis
+>Locatie</emphasis
+>, <emphasis
+>Gift</emphasis
+>, <emphasis
+>Sleutelwoorden</emphasis
+>, <emphasis
+>Hoeveelheid</emphasis
+>, <emphasis
+>Plaatje voorkant</emphasis
+>, <emphasis
+>Plaatje achterkant</emphasis
+> en <emphasis
+>Toelichting</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="coin-collection">
+<title
+>Muntenverzamelingen</title>
+<para
+>Muntenverzamelingen hebben 16 standaard velden: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Type</emphasis
+>, <emphasis
+>Denominatie</emphasis
+>, <emphasis
+>Jaar</emphasis
+>, <emphasis
+>Muntmerk</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Muntset</emphasis
+>, <emphasis
+>Gehalte</emphasis
+>, <emphasis
+>Keuringsdienst</emphasis
+>, <emphasis
+>Aankoopdatum</emphasis
+>, <emphasis
+>Aankoopprijs</emphasis
+>, <emphasis
+>Locatie</emphasis
+>, <emphasis
+>Gift</emphasis
+>, <emphasis
+>Voorkant</emphasis
+>, <emphasis
+>Achterkant</emphasis
+> en <emphasis
+>Opmerkingen</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="stamp-collection">
+<title
+>Postzegelverzamelingen</title>
+<para
+>Postzegelverzamelingen hebben 18 standaard velden: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Beschrijving</emphasis
+>, <emphasis
+>Denominatie</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Jaar van uitgifte</emphasis
+>, <emphasis
+>Kleur</emphasis
+>, <emphasis
+>Scott#</emphasis
+>, <emphasis
+>Waardering</emphasis
+>, <emphasis
+>Vervallen</emphasis
+>, <emphasis
+>Vertanding</emphasis
+>, <emphasis
+>Centerring</emphasis
+>, <emphasis
+>Met gom</emphasis
+>, <emphasis
+>Aankoopdatum</emphasis
+>, <emphasis
+>Aankoopprijs</emphasis
+>, <emphasis
+>Locatie</emphasis
+>, <emphasis
+>Gift</emphasis
+>, <emphasis
+>Afbeelding</emphasis
+> en <emphasis
+>Opmerkingen</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="wine-collection">
+<title
+>Wijnverzamelingen</title>
+<para
+>Wijnverzamelingen hebben 15 standaard velden. <emphasis
+>Titel</emphasis
+>, <emphasis
+>Producent</emphasis
+>, <emphasis
+>Appellation</emphasis
+>, <emphasis
+>Wijndruivenras</emphasis
+>, <emphasis
+>Type</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Aankoopdatum</emphasis
+>, <emphasis
+>Aankoopprijs</emphasis
+>, <emphasis
+>Locatie</emphasis
+>, <emphasis
+>Hoeveelheid</emphasis
+>, <emphasis
+>Drinken bij</emphasis
+>, <emphasis
+>Waardering</emphasis
+>, <emphasis
+>Gift</emphasis
+>, <emphasis
+>Afbeelding etiket</emphasis
+> en <emphasis
+>Notities</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title
+>Bordspelenverzameling</title>
+<para
+>Bordspelenverzamelingen hebben 17 standaard velden: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Mechanismen</emphasis
+>, <emphasis
+>Jaar uitgave</emphasis
+>, <emphasis
+>Publisher</emphasis
+>, <emphasis
+>Ontwerper</emphasis
+>, <emphasis
+>Aantal spelers</emphasis
+>, <emphasis
+>Speeltijd</emphasis
+>, <emphasis
+>Minimum leeftijd</emphasis
+>, <emphasis
+>Beschrijving</emphasis
+>, <emphasis
+>Waardering</emphasis
+>, <emphasis
+>Aankoopdatum</emphasis
+>, <emphasis
+>Aankoopprijs</emphasis
+>, <emphasis
+>Gift</emphasis
+>, <emphasis
+>Geleend</emphasis
+>, <emphasis
+>Hoes</emphasis
+> en <emphasis
+>Toelichting</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="file-catalog">
+<title
+>Catalogus-bestand</title>
+<para
+>Catalogus-bestanden hebben 14 standaard velden. <emphasis
+>Naam</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Beschrijving</emphasis
+>, <emphasis
+>Volume</emphasis
+>, <emphasis
+>Map</emphasis
+>, <emphasis
+>Mimetype</emphasis
+>, <emphasis
+>Grootte</emphasis
+>, <emphasis
+>Rechten</emphasis
+>, <emphasis
+>Eigenaar</emphasis
+>, <emphasis
+>Groep</emphasis
+>, <emphasis
+>Aangemaakt</emphasis
+>, <emphasis
+>Gewijzigd</emphasis
+>, <emphasis
+>Meta-informatie</emphasis
+> en <emphasis
+>Pictogram</emphasis
+>, </para>
+
+</sect2>
+
+<sect2 id="custom-collection">
+<title
+>Eigen verzamelingen</title>
+<para
+>Eigen verzamelingen hebben één standaard veld, de <emphasis
+>Titel</emphasis
+>. Deze zouden gebruikt moeten worden wanneer het te verzamelen item niet een van de standaard types is. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>

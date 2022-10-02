@@ -1,0 +1,919 @@
+<chapter id="menus">
+<title
+>Overzicht van de opdrachten</title>
+
+<!--
+(OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
+application windows and their menubar and toolbar commands for easy reference.
+Also include any keys that have a special function but have no equivalent in the
+menus or toolbars. This may not be necessary for small apps or apps with no tool
+or menu bars.
+-->
+
+<sect1 id="main-window-menus">
+<title
+>Het hoofdvenster van &tellico;</title>
+
+<para
+>Alle functies in het menu worden hieronder beschreven. Wanneer voor een bepaalde functie een sneltoets beschikbaar is, zal de standaard sneltoets vermeld worden. </para>
+
+<sect2>
+<title
+>Het menu Bestand</title>
+
+<para>
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Nieuw</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>maakt een nieuwe verzameling</action
+>. &tellico; ondersteunt <link linkend="collection-types"
+>12 standaard typen verzamelingen</link
+> naast een lege gebruikergedefinieerde aangepaste verzameling.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Openen...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Dit commando <action
+>opent een &tellico;-bestand</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Recent geopend</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>opene een bestand</action
+> uit een submenu die een lijst met recent geopende bestanden bevat.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Opslaan</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>slaat de verzameling op</action
+>. Als het bestand <emphasis
+>geen titel</emphasis
+> heeft dan is <guimenuitem
+>Opslaan...</guimenuitem
+> gelijk aan <guimenuitem
+>Opslaan als</guimenuitem
+>. Het is alleen ingeschakeld wanneer de verzameling is gewijzigd.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Opslaan als...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Dit commando <action
+>slaat de verzameling in een nieuw bestand op</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Afdrukken...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>drukt de verzameling af</action
+>. Afdrukopties kunnen ingesteld worden in de <interface
+>Instellingendialoog</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Importeren</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>importeert gegevens uit een ander bestand</action
+>. &tellico; kan gegevens importeren uit een aantal <link linkend="importing"
+>andere formaten</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Exporteren</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>exporteert gegevens naar een ander formaat</action
+> &tellico; kan gegevens exporteren naar een aantal <link linkend="exporting"
+>andere formaten</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Afsluiten</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>sluit het venster van &tellico;</action
+>. Als de verzameling niet opgeslagen wijzigingen bevat zult u worden gevraagd om ze op te slaan alvorens door te gaan.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Het menu Bewerken</title>
+
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Ongedaan maken</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>maakt de vorige actie ongedaan</action
+>. Niet alle acties worden door Ongedaan maken ondersteund.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Opnieuw</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>draait de vorige Ongedaan maken weer terug</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Knippen</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>verwijdert de geselecteerde tekst</action
+>, indien aanwezig, en <action
+>plaats een kopie van de verwijderde tekst in het klembord</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Kopiëren</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>kopieert de geselecteerde tekst</action
+>, indien aanwezig, naar het klembord.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Plakken</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>plakt de tekst in het klembord</action
+>, indien aanwezig, naar de editor op de positie van de cursor.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Alles selecteren</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>selecteert alle items</action
+> in de verzameling, in de <interface
+>Kolomweergave</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Selecteren ongedaan maken</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>maakt de selectie van alle items</action
+> in de verzameling ongedaan</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Zoeken in het internet...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>opent de <interface
+>Internet zoekdialoog</interface
+></action
+> om te zoeken naar items uit verschillende internetsites en ze te importeren, inclusief <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>J</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Uitgebreid filter...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>opent de <interface
+>uitgebreide filterdialoog</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Het menu Verzameling</title>
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Verzameling</guimenu
+> <guimenuitem
+>Nieuw item</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>opent de <interface
+>Itembewerker</interface
+> om een nieuw item te bewerken</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Verzameling</guimenu
+> <guimenuitem
+>Item bewerken</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>opent de <interface
+>Itembewerker</interface
+> om de geselecteerde items te bewerken</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Verzameling</guimenu
+> <guimenuitem
+>Item dupliceren</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>kopieert of dupliceert de geselecteerde items</action
+> als nieuwe items in de verzameling.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Verzameling</guimenu
+> <guimenuitem
+>Item verwijderen</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>verwijdert de geselecteerde items</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Verzameling</guimenu
+> <guimenuitem
+>Items samenvoegen</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>voegt de geselecteerde items samen</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Verzameling</guimenu
+> <guimenuitem
+>Item bijwerken</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Dit menu bevat een lijst met alle beschikbare gegevensbronnen en kan gebruikt worden om automatisch de bron af te vragen en <action
+>de geselecteerde items bij te werken</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collectie</guimenu
+> <guimenuitem
+>Check-out</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>opent een dialoogvak voor lenen van de geselecteerde items.</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collection</guimenu
+> <guimenuitem
+>Check-in</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>checkt elk van de geselecteerde items in die nu geleend zijn</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Collectie</guimenu
+> <guimenuitem
+>Collectie hernoemen</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>opent een dialoogvak voor hernoemen van de collectie</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Collectie</guimenu
+> <guimenuitem
+>Collectievelden...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>opent de <interface
+>Dialoog voor Collectievelden</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collectie</guimenu
+> <guimenuitem
+>Rapporten genereren...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>opent de <interface
+>Rapportdialoog</interface
+></action
+> voor het genereren van rapporten over de collectie.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Verzameling</guimenu
+> <guisubmenu
+>Bibliografie</guisubmenu
+> <guimenuitem
+>Naar bibliografie converteren</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>converteert een boekenverzameling naar een bibliografie</action
+> door bepaalde velden noodzakelijk voor exporteren naar Bibtex en deze is alleen ingeschakeld wanneer een boekenverzameling is geopend.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Verzameling</guimenu
+> <guisubmenu
+>Bibliografie</guisubmenu
+> <guimenuitem
+>Macro's voor tekenreeksen...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>opent een dialoogvak voor bewerken van de Bibtex tekenreeksmacro's</action
+> in de verzameling. Het is alleen ingeschakeld wanneer een bibliografie wordt bewerkt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Verzameling</guimenu
+> <guisubmenu
+>Bibliografie</guisubmenu
+> <guimenuitem
+>Op dubbele sleutelwoorden controleren</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>controleert op duplicaten van Bibtex-sleutels</action
+> en kan de verzameling filteren om de items met dubbele sleutels te tonen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Verzameling</guimenu
+> <guisubmenu
+>Bibliografie</guisubmenu
+> <guimenuitem
+>Bibtex naar klembord kopiëren</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>kopieert een Bibtex citatie</action
+> naar het klembord zodat het in een LaTeX-document kan worden geplakt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Verzameling</guimenu
+> <guisubmenu
+>Bibliografie</guisubmenu
+> <guimenuitem
+>Item in Lyx citeren</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>stuurt een citaat voor de geselecteerde items</action
+> naar de zogenaamde <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+> voor gebruik in <application
+>LyX</application
+>, <application
+>Kile</application
+> of een andere LaTeX toepassing. Het is alleen ingeschakeld bij bewerken van een bibliografie.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>De menu's Instellingen en Help</title>
+
+<para
+>Naast de standaard &kde;-menu's <guimenu
+>Instellingen</guimenu
+> en <guimenu
+>Help</guimenu
+> zoals beschreven in het hoofdstuk <ulink url="help:/fundamentals/menus.html"
+>Menu</ulink
+> van de documentatie in &kde; Fundamentals heeft &tellico; specifieke menu-items van het programma: </para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Groepsweergave tonen</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Dit commando <action
+>schakelt het tonen van de <interface
+>Groepsweergave</interface
+> om</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Itembewerker tonen</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Dit commando <action
+>schakelt het tonen van de <interface
+>Itembewerker</interface
+> om</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Selectie van groepen</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>wijzigt het veld gebruikt voor het groeperen van de items</action
+> in de collectie.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>

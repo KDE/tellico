@@ -1,0 +1,856 @@
+<chapter id="details">
+<title
+>Detalls del &appname;</title>
+
+<sect1 id="field-types">
+<title
+>Tipus de camp</title>
+
+<para
+>Cada col·lecció pot tenir un nombre il·limitat de camps. El &appname; admet onze tipus de camps, els quals permeten una àmplia gamma de dades diferents. </para>
+
+<sect2 id="line">
+<title
+>Text pla</title>
+
+<para
+>El tipus de camp més bàsic s'anomena <emphasis
+>Text pla</emphasis
+>. No hi ha restriccions sobre els valors dels camps, i el giny d'entrada de dades és l'editor de línia estàndard. Aquest tipus és apropiat per als camps que no s'espera que tinguin valors llargs, com ara l'autor o el gènere. </para>
+
+</sect2>
+<sect2 id="number">
+<title
+>Número</title>
+
+<para
+>El tipus <emphasis
+>Número</emphasis
+> és idèntic a <emphasis
+>Text pla</emphasis
+>, llevat que les dades es limiten a ser numèriques. Les entrades seran ordenades numèricament a la vista de columna si es fa clic al camp <emphasis
+>Número</emphasis
+> de la columna. L'editor de línia estàndard, amb petits botons de fletxa per a augmentar o disminuir el valor, s'utilitzen per a l'entrada de dades. No s'aplicarà cap format.</para>
+
+</sect2>
+
+<sect2 id="url">
+<title
+>&URL;</title>
+
+<para
+>El tipus <emphasis
+>&URL;</emphasis
+> permet enllaços a altres documents, utilitzant les associacions de tipus de fitxer estàndards del &kde; per a obrir els documents enllaçats. No es realitza validació sobre el valor real d'un camp <emphasis
+>&URL;</emphasis
+>, però els enllaços no vàlids no s'obriran. L'entrada de dades és un editor de línia amb un botó per a obrir el diàleg de fitxers estàndard, però es pot utilitzar qualsevol &URL;. Els &URL; relatius s'interpretaran en relació amb la ubicació del fitxer de dades, un cop s'ha desat. </para>
+
+<para
+>A l'<link linkend="entry-editor"
+><interface
+>Editor d'entrades</interface
+></link
+>, l'etiqueta esdevé en l'enllaç, mentre que a la <link linkend="entry-view"
+><interface
+>Vista d'entrada</interface
+></link
+>, s'utilitza un hiper-enllaç real. Aquest tipus de camp és útil per a enllaçar amb fitxers <acronym
+>PDF</acronym
+> de les entrades bibliogràfiques, o crítiques de pel·lícules, per exemple. No s'aplicarà cap format.</para>
+
+<para
+>També es poden utilitzar &URL; relatives. S'interpretaran en relació amb la ubicació del fitxer de dades del &appname;. A l'<link linkend="entry-editor"
+><interface
+>editor d'entrades</interface
+></link
+>, l'editor de línia proporciona autocompleció per a les ubicacions de fitxer local. Si voleu l'&URL; del diàleg selector de fitxers del &kde; l'interpreti en relació amb la ubicació del document, llavors hauríeu d'ajustar una propietat en el camp &URL; a <emphasis
+>relative</emphasis
+> : <emphasis
+>true</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="para">
+<title
+>Paràgraf</title>
+
+<para
+>Per als camps de text més llargs, el tipus <emphasis
+>Paràgraf</emphasis
+> ofereix una àrea per a l'edició de text més gran, i sempre està en la seva pròpia categoria. Un camp <emphasis
+>Paràgraf</emphasis
+> no pot tenir múltiples valors, ni es dona format automàticament. No es pot utilitzar per a agrupar. Els resums, resums de la trama, o revisions s'han d'introduir utilitzant aquest tipus de camp.</para>
+
+</sect2>
+
+<sect2 id="choice">
+<title
+>Opció</title>
+
+<para
+>Quan un camp ha d'estar limitat a uns pocs valors preestablerts, s'utilitza un tipus <emphasis
+>Opció</emphasis
+>. Els valors acceptables es presenten en una llista desplegable per a la selecció. Òbviament, múltiples valors no són aplicables. Els camps com el tipus de bibliografia o la puntuació personal són camps <emphasis
+>Opció</emphasis
+>.</para>
+
+<para
+>S'ha d'utilitzar punt i coma per a separar els valors permesos.</para>
+
+</sect2>
+
+<sect2 id="bool">
+<title
+>Casella de selecció</title>
+
+<para
+>Per als camps que tenen un valor de sí o no, està disponible el tipus de <emphasis
+>Casella de selecció</emphasis
+>. De manera predeterminada, el camp està desactivat. Els camps <emphasis
+>Casella de selecció</emphasis
+> no tenen format i es limiten a valors individuals. Internament, els valors de camp es tracten com a <emphasis
+>verdader<constant
+> o </constant
+>fals</emphasis
+>. Alguns exemples són camps com «Regal» o «Prestat».</para>
+
+</sect2>
+
+<sect2 id="date">
+<title
+>Data</title>
+
+<para
+>Un camp <emphasis
+>Data</emphasis
+> pot incloure un dia, un mes i un any. La data es mostra en el format estàndard d'AAAA-MM-DD, el qual permet una classificació més fàcil. El selector de data estàndard del &kde; es pot utilitzar per a triar la data amb el ratolí, o es pot introduir directament. El camp no requereix tenir valors no buits per a l'any, mes i dia. Sols es pot introduir l'any, per exemple. No es permeten valors múltiples. </para>
+
+</sect2>
+
+<sect2 id="table">
+<title
+>Taula</title>
+
+<para
+>Els camps <emphasis
+>Taula</emphasis
+> contenen una o més columnes de valors. A l'<link linkend="entry-editor"
+><interface
+>editor d'entrades</interface
+></link
+>, el camp es presenta utilitzant una vista similar a un full de càlcul, amb files numerades. Quan se selecciona l'última fila, llavors s'afegirà una fila addicional. L'autocompleció no està disponible. Aquest camp és útil per a obtenir una llista dels capítols d'un llibre, les escenes d'una pel·lícula o cançons en un àlbum. Els camps <emphasis
+>Taula</emphasis
+> sempre estaran per si mateixos dins d'una categoria. </para>
+
+<para
+>El nombre de columnes, fins a un màxim de deu, es defineix afegint una propietat a la definició del camp amb el nom <emphasis
+>columnes</emphasis
+>. Les columnes es poden etiquetar fent clic dret sobre la capçalera, o establint una propietat de camp anomenada <emphasis
+>columna1</emphasis
+>, &etc; </para>
+
+<para
+>Quan s'utilitza l'<interface
+>editor d'entrades</interface
+> per als camps <emphasis
+>Taula</emphasis
+>, les files es poden reorganitzar arrossegant el ratolí mentre es manté premut el botó &Ctrl;. També està disponible un menú emergent fent clic dret sobre la taula, el qual permet inserir o eliminar files. </para>
+
+</sect2>
+
+<sect2 id="image">
+<title
+>Imatge</title>
+
+<para
+>Els camps <emphasis
+>Imatge</emphasis
+> contenen una imatge en qualsevol format admès pel &kde;. Alguns dels més típics són <acronym
+>PNG</acronym
+> o <acronym
+>JPEG</acronym
+>. La imatge es pot desar al fitxer de dades del &appname; o al directori de dades de l'aplicació. S'utilitza el selector de fitxers estàndard del &kde;, de manera que podeu utilitzar un &URL; o un fitxer local. Les imatges també es poden arrossegar des d'un gestor de fitxers o un navegador. </para>
+
+</sect2>
+
+<sect2 id="rating">
+<title
+>Puntuació</title>
+
+<para
+>Els camps <emphasis
+>Puntuació</emphasis
+> mostren un nombre d'estrelles per a representar una valoració numèrica per a una entrada. De manera predeterminada, la puntuació és d'un màxim de cinc. El mínim i el màxim es poden canviar ajustant les propietats en la definició del camp en el diàleg <interface
+>Camps de la col·lecció</interface
+>, anomenades <emphasis
+>mínim</emphasis
+> i <emphasis
+>màxim</emphasis
+>, respectivament. </para>
+
+</sect2>
+
+<sect2 id="derived">
+<title
+>Camps de valor derivat</title>
+
+<para
+>Els camps amb valors derivats són un cas especial. El tipus de camp es correspon amb el tipus típic de valor contingut en aquest camp, però el valor del camp és construït a partir d'altres camps utilitzant una cadena de format en la descripció del camp. Per exemple, si el camp té una plantilla de valor <userinput
+>%{title} %{year}</userinput
+>, llavors el valor d'aquest camp serà el títol, seguit de l'any. Aquest tipus de camp sobretot s'utilitza per al camp de títol en la moneda, segell, targetes comercials i col·leccions de vins. Tant el nom del camp intern o el títol del camp es poden utilitzar en la descripció per al format. </para>
+
+<para
+>Per a seleccionar un únic valor per a un camp amb valors múltiples, afegiu un índex de posició a la plantilla, com <userinput
+>%{author:1}</userinput
+> per al primer autor. La posició pot ser negativa, comptant des del final, de manera que <userinput
+>%{author:-1}</userinput
+> seria l'últim autor. Es poden utilitzar valors en majúscules i minúscules establint etiquetes de plantilla, com <userinput
+>%{author:1/l}</userinput
+> per a posar el primer autor en minúscules i <userinput
+>%{author:1/u}</userinput
+> per a posar-lo en majúscules. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-types">
+<title
+>Tipus de col·leccions</title>
+
+<para
+>De manera predeterminada, el &appname; admet dotze tipus de col·leccions específiques: llibres, entrades bibliogràfiques, còmics, vídeos, música, videojocs, targetes comercials, monedes, segells, vins, jocs de taula, i els catàlegs de fitxers. A més, hi ha disponible una plantilla de col·lecció genèrica buida per a qualsevol altre objecte col·leccionable. Les col·leccions predeterminades inclouen un conjunt general de camps. Haureu d'afegir, modificar o suprimir perquè s'ajustin a les vostres necessitats. L'únic requisit és que una col·lecció ha de tenir sempre un camp <emphasis
+>Títol</emphasis
+>, de manera que la <link linkend="group-view"
+><interface
+>Vista de grup</interface
+></link
+> funcioni correctament. Per a alguns tipus de col·lecció, això sols és un camp de <link linkend="derived"
+>valor derivat</link
+> que combina dos o més dels altres. </para>
+
+<para
+>En general, no hi ha diferències funcionals entre els tipus de col·leccions. Podeu crear una col·lecció personalitzada per als vostres llibres amb la mateixa facilitat com si utilitzeu la col·lecció predeterminada de llibres. Però el &appname; tria les icones segons el tipus de col·lecció, i pot haver-hi alguna característica especialitzada que és única per a una col·lecció determinada, pel que si podeu, hauríeu d'utilitzar els valors predeterminats. Per tant, si voleu crear una col·lecció de vins, però no us agrada cap dels camps predeterminats, seguiu endavant i creeu una col·lecció predeterminada de vins, a continuació suprimiu totes les predeterminades. D'aquesta manera, el &appname; encara sap que és una col·lecció de vins. </para>
+
+<para
+>De manera predeterminada, tots els tipus de col·leccions inclouen un camp <emphasis
+>ID</emphasis
+>, el qual mostra el número d'identificació de l'entrada. A més, excepte per al catàleg de fitxers, cada col·lecció inclou camps que mostren la data en què es va crear l'entrada en la col·lecció i l'última vegada que es va modificar. </para>
+
+<sect2 id="book-collection">
+<title
+>Col·leccions de llibres</title>
+<para
+>Les col·leccions de llibres tenen 27 camps predeterminats: <emphasis
+>Títol</emphasis
+>, <emphasis
+>Subtítol</emphasis
+>, <emphasis
+>Autor</emphasis
+>, <emphasis
+>Enquadernació</emphasis
+>, <emphasis
+>Data de compra</emphasis
+>, <emphasis
+>Preu de compra</emphasis
+>, <emphasis
+>Editor</emphasis
+>, <emphasis
+>Edició</emphasis
+>, <emphasis
+>Any del Copyright</emphasis
+>, <emphasis
+>Any de publicació</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>LCCN#</emphasis
+>, <emphasis
+>Pàgines</emphasis
+>, <emphasis
+>Idioma</emphasis
+>, <emphasis
+>Gènere</emphasis
+>, <emphasis
+>Paraules clau</emphasis
+>, <emphasis
+>Sèrie</emphasis
+>, <emphasis
+>Número de sèrie</emphasis
+>, <emphasis
+>Condició</emphasis
+>, <emphasis
+>Dedicat</emphasis
+>, <emphasis
+>Llegit</emphasis
+>, <emphasis
+>Regal</emphasis
+>, <emphasis
+>Prestat</emphasis
+>, <emphasis
+>Puntuació</emphasis
+>, <emphasis
+>Portada</emphasis
+>, <emphasis
+>Resum de la trama</emphasis
+> i <emphasis
+>Comentaris</emphasis
+>. </para>
+
+<para
+>El camp <emphasis
+>ISBN#</emphasis
+> és especial, ja que els números <acronym
+>ISBN</acronym
+> es formaten automàticament i es calcula el dígit de control. El &appname; reconeix el camp <acronym
+>ISBN</acronym
+> si el seu nom de camp intern és <emphasis
+>isbn</emphasis
+>. Si l'heu suprimit o cal afegir-lo a un altre tipus de col·lecció, creeu el camp amb el títol <emphasis
+>ISBN</emphasis
+> i apliqueu els canvis, llavors podreu tornar i modificar el títol com vulgueu. El &appname; crea el nom intern basant-se en el títol inicial, però mai canvia si el títol es modifica més tard. </para>
+
+</sect2>
+
+<sect2 id="bibliography">
+<title
+>Bibliografies</title>
+<para
+>Les bibliografies tenen 25 camps predeterminats: <emphasis
+>Títol</emphasis
+>, <emphasis
+>Tipus d'entrada</emphasis
+>, <emphasis
+>Autor</emphasis
+>, <emphasis
+>Clau Bibtex</emphasis
+>, <emphasis
+>Títol del llibre</emphasis
+>, <emphasis
+>Editorial</emphasis
+>, <emphasis
+>Organització</emphasis
+>, <emphasis
+>Editor</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>Adreça</emphasis
+>, <emphasis
+>Edició</emphasis
+>, <emphasis
+>Pàgines</emphasis
+>, <emphasis
+>Any</emphasis
+>, <emphasis
+>Diari</emphasis
+>, <emphasis
+>Mes</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>Data de publicació</emphasis
+>, <emphasis
+>Capítol</emphasis
+>, <emphasis
+>Sèrie</emphasis
+>, <emphasis
+>Número de sèrie</emphasis
+>, <emphasis
+>Volum</emphasis
+>, <emphasis
+>Referència creuada</emphasis
+>, <emphasis
+>Paraules clau</emphasis
+>, <emphasis
+>Resum</emphasis
+> i <emphasis
+>Notes</emphasis
+>. </para>
+
+<para
+>Encara que les col·leccions bibliogràfiques no estan específicament relacionades amb «bibtex», el conjunt predeterminat de camps es pren d'un conjunt típic de camps de «bibtex». En exportar a «bibtex», s'utilitzarà una propietat anomenada «<emphasis
+>bibtex</emphasis
+>» perquè cada camp defineixi el seu camp «bibtex» corresponent. Si afegiu un camp addicional per a una bibliografia i voleu exportar a «bibtex», assegureu-vos d'establir la propietat «<emphasis
+>bibtex</emphasis
+>». </para>
+
+<para
+>El &appname; té algunes característiques especialitzades per a les bibliografies. Les macros de «bibtex» es poden afegir, modificar o suprimir des de dins del &appname;, i l'exportació de «bibtex» us ofereix l'opció d'expandir les macros. Les cites de «bibtex» es poden enviar a una aplicació externa, com ara <application
+>LyX</application
+> o <application
+>Kile</application
+> utilitzant l'anomenat <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+<para
+>Les col·leccions de llibres es poden convertir en bibliografies. De manera predeterminada s'afegeixen camps de «bibtex», i s'estableixen les propietats de «bibtex». Aquesta característica existeix principalment per a convertir col·leccions antigues, abans que el tipus de bibliografia fos separat del tipus col·lecció de llibres. </para>
+</sect2>
+
+<sect2 id="comic-book-collection">
+<title
+>Col·leccions de còmics</title>
+<para
+>Les col·leccions de còmics tenen 23 camps predeterminats: <emphasis
+>Títol</emphasis
+>, <emphasis
+>Subtítol</emphasis
+>, <emphasis
+>Escriptor</emphasis
+>, <emphasis
+>Artista</emphasis
+>, <emphasis
+>Sèrie</emphasis
+>, <emphasis
+>Edició</emphasis
+>, <emphasis
+>Editor</emphasis
+>, <emphasis
+>Edició</emphasis
+>, <emphasis
+>Any de publicació</emphasis
+>, <emphasis
+>Pàgines</emphasis
+>, <emphasis
+>País</emphasis
+>, <emphasis
+>Idioma</emphasis
+>, <emphasis
+>Gènere</emphasis
+>, <emphasis
+>Paraules clau</emphasis
+>, <emphasis
+>Condició</emphasis
+>, <emphasis
+>Data de compra</emphasis
+>, <emphasis
+>Preu de compra</emphasis
+>, <emphasis
+>Dedicat</emphasis
+>, <emphasis
+>Regal</emphasis
+>, <emphasis
+>Prestat</emphasis
+>, <emphasis
+>Portada</emphasis
+>, <emphasis
+>Resum de la trama</emphasis
+> i <emphasis
+>Comentaris</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="video-collection">
+<title
+>Col·leccions de vídeos</title>
+<para
+>Les col·leccions de vídeo tenen 30 camps predeterminats: <emphasis
+>Títol</emphasis
+>, <emphasis
+>Suport</emphasis
+>, <emphasis
+>Any de producció</emphasis
+>, <emphasis
+>Certificació</emphasis
+>, <emphasis
+>Gènere</emphasis
+>, <emphasis
+>Regió</emphasis
+>, <emphasis
+>Nacionalitat</emphasis
+>, <emphasis
+>Format</emphasis
+>, <emphasis
+>Repartiment</emphasis
+>, <emphasis
+>Director</emphasis
+>, <emphasis
+>Productor</emphasis
+>, <emphasis
+>Escriptor</emphasis
+>, <emphasis
+>Editor</emphasis
+>, <emphasis
+>Estudi</emphasis
+>, <emphasis
+>Pistes d'idioma</emphasis
+>, <emphasis
+>Idiomes dels Subtítols</emphasis
+>, <emphasis
+>Pistes d'àudio</emphasis
+>, <emphasis
+>Temps d'execució</emphasis
+>, <emphasis
+>Relació d'aspecte</emphasis
+>, <emphasis
+>Pantalla ampla</emphasis
+>, <emphasis
+>Mode de color</emphasis
+>, <emphasis
+>Edició del director</emphasis
+>, <emphasis
+>Resum de la trama</emphasis
+>, <emphasis
+>Puntuació personal</emphasis
+>, <emphasis
+>Data de compra</emphasis
+>, <emphasis
+>Preu de compra</emphasis
+>, <emphasis
+>Regal</emphasis
+>, <emphasis
+>Prestat</emphasis
+>, <emphasis
+>Caràtula</emphasis
+> i <emphasis
+>Comentaris</emphasis
+>. </para>
+
+<para
+>El camp <emphasis
+>Repartiment</emphasis
+> és una <link linkend="table"
+>taula</link
+> amb dues columnes; el nom de l'actor està a la primera i el seu paper a la segona. El <emphasis
+>Temps d'execució</emphasis
+> s'estableix en minuts, tot i que ho podeu canviar, és clar. </para>
+</sect2>
+
+<sect2 id="music-collection">
+<title
+>Col·leccions de música</title>
+<para
+>Les col·leccions de música tenen 15 camps predeterminats: <emphasis
+>Títol</emphasis
+>, <emphasis
+>Suport</emphasis
+>, <emphasis
+>Artista</emphasis
+>, <emphasis
+>Etiqueta</emphasis
+>, <emphasis
+>Any</emphasis
+>, <emphasis
+>Gènere</emphasis
+>, <emphasis
+>Pistes</emphasis
+>, <emphasis
+>Puntuació</emphasis
+>, <emphasis
+>Data de compra</emphasis
+>, <emphasis
+>Preu de compra</emphasis
+>, <emphasis
+>Regal</emphasis
+>, <emphasis
+>Prestat</emphasis
+>, <emphasis
+>Paraules clau</emphasis
+>, <emphasis
+>Caràtula</emphasis
+> i <emphasis
+>Comentaris</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="game-collection">
+<title
+>Col·leccions de jocs</title>
+<para
+>Les col·leccions de videojocs tenen 16 camps predeterminats: <emphasis
+>Títol</emphasis
+>, <emphasis
+>Plataforma</emphasis
+>, <emphasis
+>Gènere</emphasis
+>, <emphasis
+>Any d'edició</emphasis
+>, <emphasis
+>Editor</emphasis
+>, <emphasis
+>Desenvolupador</emphasis
+>, <emphasis
+>Puntuació ESRB</emphasis
+>, <emphasis
+>Descripció</emphasis
+>, <emphasis
+>Puntuació personal</emphasis
+>, <emphasis
+>Completat</emphasis
+>, <emphasis
+>Data de compra</emphasis
+>, <emphasis
+>Preu de compra</emphasis
+>, <emphasis
+>Regal</emphasis
+>, <emphasis
+>Prestat</emphasis
+>, <emphasis
+>Caràtula</emphasis
+> i <emphasis
+>Comentaris</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="card-collection">
+<title
+>Col·leccions de targetes</title>
+<para
+>Les col·leccions de targetes comercials tenen 17 camps predeterminats: <emphasis
+>Títol</emphasis
+>, <emphasis
+>Jugador</emphasis
+>, <emphasis
+>Equip</emphasis
+>, <emphasis
+>Marca</emphasis
+>, <emphasis
+>Número de targeta</emphasis
+>, <emphasis
+>Any</emphasis
+>, <emphasis
+>Sèrie</emphasis
+>, <emphasis
+>Tipus de targeta</emphasis
+>, <emphasis
+>Data de compra</emphasis
+>, <emphasis
+>Preu de compra</emphasis
+>, <emphasis
+>Localitat</emphasis
+>, <emphasis
+>Regal</emphasis
+>, <emphasis
+>Paraules clau</emphasis
+>, <emphasis
+>Quantitat</emphasis
+>, <emphasis
+>Imatge frontal</emphasis
+>, <emphasis
+>Imatge dorsal</emphasis
+> i <emphasis
+>Comentaris</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="coin-collection">
+<title
+>Col·leccions de monedes</title>
+<para
+>Les col·leccions de monedes tenen 16 camps predeterminats: <emphasis
+>Títol</emphasis
+>, <emphasis
+>Tipus</emphasis
+>, <emphasis
+>Denominació</emphasis
+>, <emphasis
+>Any</emphasis
+>, <emphasis
+>Botiga de la casa de la moneda</emphasis
+>, <emphasis
+>País</emphasis
+>, <emphasis
+>Joc de monedes</emphasis
+>, <emphasis
+>Puntuació</emphasis
+>, <emphasis
+>Servei de puntuació</emphasis
+>, <emphasis
+>Data de compra</emphasis
+>, <emphasis
+>Preu de compra</emphasis
+>, <emphasis
+>Localitat</emphasis
+>, <emphasis
+>Regal</emphasis
+>, <emphasis
+>Anvers</emphasis
+>, <emphasis
+>Revers</emphasis
+> i <emphasis
+>Comentaris</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="stamp-collection">
+<title
+>Col·leccions de segells</title>
+<para
+>Les col·leccions de segells tenen 18 camps predeterminats: <emphasis
+>Títol</emphasis
+>, <emphasis
+>Descripció</emphasis
+>, <emphasis
+>Denominació</emphasis
+>, <emphasis
+>País</emphasis
+>, <emphasis
+>Any de llançament</emphasis
+>, <emphasis
+>Color</emphasis
+>, <emphasis
+>Scott#</emphasis
+>, <emphasis
+>Puntuació</emphasis
+>, <emphasis
+>Cancel·lat</emphasis
+>, <emphasis
+>Articulat</emphasis
+>, <emphasis
+>Centrat</emphasis
+>, <emphasis
+>Engomat</emphasis
+>, <emphasis
+>Data de compra</emphasis
+>, <emphasis
+>Preu de compra</emphasis
+>, <emphasis
+>Localitat</emphasis
+>, <emphasis
+>Regal</emphasis
+>, <emphasis
+>Image</emphasis
+> i <emphasis
+>Comentaris</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="wine-collection">
+<title
+>Col·leccions de vins</title>
+<para
+>Les col·leccions de vins tenen 15 camps predeterminats: <emphasis
+>Títol</emphasis
+>, <emphasis
+>Productor</emphasis
+>, <emphasis
+>Denominació</emphasis
+>, <emphasis
+>Varietat</emphasis
+>, <emphasis
+>Tipus</emphasis
+>, <emphasis
+>País</emphasis
+>, <emphasis
+>Data de compra</emphasis
+>, <emphasis
+>Preu de compra</emphasis
+>, <emphasis
+>Localitat</emphasis
+>, <emphasis
+>Quantitat</emphasis
+>, <emphasis
+>Begut per</emphasis
+>, <emphasis
+>Puntuació</emphasis
+>, <emphasis
+>Regal</emphasis
+>, <emphasis
+>Imatge de l'etiqueta</emphasis
+> i <emphasis
+>Comentaris</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title
+>Col·leccions de jocs de taula</title>
+<para
+>Les col·leccions de jocs de taula tenen 17 camps predeterminats: <emphasis
+>Títol</emphasis
+>, <emphasis
+>Gènere</emphasis
+>, <emphasis
+>Mecanisme</emphasis
+>, <emphasis
+>Any d'edició</emphasis
+>, <emphasis
+>Editor</emphasis
+>, <emphasis
+>Dissenyador</emphasis
+>, <emphasis
+>Nombre de jugadors</emphasis
+>, <emphasis
+>Temps de joc</emphasis
+>, <emphasis
+>Edat mínima</emphasis
+>, <emphasis
+>Descripció</emphasis
+>, <emphasis
+>Puntuació</emphasis
+>, <emphasis
+>Data de compra</emphasis
+>, <emphasis
+>Preu de compra</emphasis
+>, <emphasis
+>Regal</emphasis
+>, <emphasis
+>Prestat</emphasis
+>, <emphasis
+>Caràtula</emphasis
+> i <emphasis
+>Comentaris</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="file-catalog">
+<title
+>Catàlegs de fitxers</title>
+<para
+>Els catàlegs de fitxers tenen 14 camps predeterminats: <emphasis
+>Nom</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Descripció</emphasis
+>, <emphasis
+>Volum</emphasis
+>, <emphasis
+>Carpeta</emphasis
+>, <emphasis
+>Tipus MIME</emphasis
+>, <emphasis
+>Mida</emphasis
+>, <emphasis
+>Permisos</emphasis
+>, <emphasis
+>Propietari</emphasis
+>, <emphasis
+>Grup</emphasis
+>, <emphasis
+>Creat</emphasis
+>, <emphasis
+>Modificat</emphasis
+>, <emphasis
+>Meta Info</emphasis
+> i <emphasis
+>Icona</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="custom-collection">
+<title
+>Col·leccions personalitzades</title>
+<para
+>Les col·leccions personalitzades tenen un camp predeterminat, el <emphasis
+>Títol</emphasis
+>. S'han d'utilitzar quan l'element col·leccionable no és un dels tipus predeterminats. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>

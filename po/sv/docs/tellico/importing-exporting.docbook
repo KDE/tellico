@@ -1,0 +1,586 @@
+<chapter id="importing-exporting">
+<title
+>Importera och exportera data</title>
+
+<para
+>&appname; klarar av att importera och exportera ett stort antal olika datafiler, samt söka efter information på diverse platser på Internet. </para>
+
+<sect1 id="internet-search">
+<title
+>Importera från Internet</title>
+<para
+>&appname; klarar av att söka på diverse platser på Internet med dialogrutan <interface
+>Internetsökning</interface
+>. Poster kan importeras direkt och läggas till i din nuvarande samling. De olika leverantörerna anpassas via <link linkend="data-sources-options"
+>Alternativ för datakällor</link
+>. </para>
+
+<para
+>Sökningar kan använda olika kriterier: <guilabel
+>Titel</guilabel
+>, <guilabel
+>Person</guilabel
+>, <guilabel
+>ISBN</guilabel
+>, <guilabel
+>UPC/EAN</guilabel
+>, <guilabel
+>LCCN</guilabel
+> eller <guilabel
+>Nyckelord</guilabel
+>. Alla kriterier är inte tillgängliga för vissa datakällor. <acronym
+>ISBN</acronym
+> och <acronym
+>LCCN</acronym
+> är bara till för böcker, medan <acronym
+>UPC</acronym
+> eller <acronym
+>EAN</acronym
+> kan gälla för alla sorters objekt.</para>
+
+<para
+>När en sökning väl har inletts, ändras knappen <guibutton
+>Sök</guibutton
+> till <guibutton
+>Stanna</guibutton
+> som avslutar en sökning. När resultat hittas, läggs de till i listan direkt under sökrutan, där markering av ett objekt visar resultatet utan att lägga till det i samlingen. Genom att klicka på knappen <guibutton
+>Lägg till post</guibutton
+> läggs alla markerade objekt till i samlingen. Om datakällan har fler resultat än de som ursprungligen begärdes, aktiveras knappen <guibutton
+>Hämta fler resultat</guibutton
+>. Att klicka på <guibutton
+>Rensa</guibutton
+> tar bort alla aktuella resultat och återställer sökningen. </para>
+
+<screenshot>
+<screeninfo
+>Dialogrutan <interface
+>Internetsökning</interface
+> i &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fetch-dialog.png"/></imageobject>
+<textobject
+><phrase
+>Dialogrutan <interface
+>Internetsökning</interface
+> i &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Bara poster som motsvarar den nuvarande samlingstypen hittas. Kolumnen <guilabel
+>Beskrivning</guilabel
+> tillhandahåller ytterligare information om posten, för att exempelvis skilja på videor i olika format, eller böcker med olika inbindning. När en post väl har lagts till i samlingen med lyckat resultat, läggs en bock till i listans första kolumn. </para>
+
+<para
+>Flera poster kan läggas till på en gång genom att använda den vanliga metoden i &kde; för att välja flera poster, som oftast innebär att skift- eller &Ctrl;-tangenten hålls nere när ett objekt klickas. </para>
+
+<para
+>För att förenkla användningen av streckkodsläsare, kan sökningar omfatta fler ISBN/UPC-värden. Att markera kryssrutan <guilabel
+>Sökning med flera ISBN/UPC</guilabel
+> inaktiverar sökrutan och aktiverar knappen <guibutton
+>Redigera ISBN/UPC-värden</guibutton
+>, som öppnar en textinmatningsruta med flera rader. Varje ISBN ska matas in på en egen rad. Efter rutan har stängts, valideras varje ISBN för att kontrollera att det är riktigt formaterat. ISBN-valideringen kan konvertera 13-siffrors EAN-värden, samt fullständiga <acronym
+>UPC</acronym
+>-koder, till riktig formatering. ISBN-listan kan också läsas från en textfil. </para>
+
+</sect1>
+
+<sect1 id="importing">
+<title
+>Importera data</title>
+
+<para
+>&appname; erbjuder tre olika åtgärder vid import av data. <guilabel
+>Byt ut nuvarande samling</guilabel
+> stänger den nuvarande samlingen och skapar en ny med data från den importerade filen. <guilabel
+>Lägg till i slutet av nuvarande samling</guilabel
+> talar om för &appname; att alla poster i den importerade samlingen ska läggas till i den nuvarande, och eventuella fält som för närvarande inte finns ska läggas till. Åtgärden <guilabel
+>Sammanfoga samling</guilabel
+> är samma som att lägga till, förutom att varje importerad post jämförs med de nuvarande, och alla identiska poster hoppas över. &appname; försöker identifiera motsvarande poster som inte är helt identiska genom att jämföra signifikanta fält, och sammanfogar därefter posterna. För musiksamlingar jämförs exempelvis artist och album, och spåren sammanfogas för poster som motsvarar varandra. <link linkend="importing-audio-files"
+>Verktyget för ljudfilimport</link
+> klarar av att skapa riktiga spårlistor genom att sammanfoga poster. </para>
+
+<sect2 id="alternate-software">
+<title
+>Importera data från annan programvara</title>
+
+<para
+>&appname; kan direkt importera data från en mängd andra samlingshanteringsprogram, inklusive <application
+><ulink url="http://www.gcstar.org"
+>GCstar</ulink
+></application
+>, <application
+><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
+>Alexandria</ulink
+></application
+>, <application
+><ulink url="https://www.delicious-monster.com"
+>Delicious Library</ulink
+></application
+>, <application
+><ulink url="https://www.collectorz.com"
+>Collectorz</ulink
+></application
+>, <application
+><ulink url="http://www.antp.be/software/moviecatalog/"
+>Ant Movie Catalog</ulink
+></application
+>, <application
+><ulink url="https://en.wikipedia.org/wiki/Referencer"
+>Referencer</ulink
+></application
+> och <application
+><ulink url="https://launchpad.net/griffith"
+>Griffith</ulink
+></application
+>.</para>
+
+</sect2>
+
+<sect2 id="import-data-files">
+<title
+>Importera andra dataformat</title>
+<para
+>&appname; kan importera data från en mängd andra filformat, inklusive <acronym
+>CSV</acronym
+>, bibtex, ljudskivor och filer, <acronym
+>MODS</acronym
+>, &PDF; och <acronym
+>RIS</acronym
+>.</para>
+
+<sect3 id="importing-tellico">
+<title
+>Importera &appname;-data</title>
+
+<para
+>Andra &appname; datafiler kan importeras. Att ersätta den nuvarande samlingen genom att importera en &appname;-fil är samma sak som att bara öppna filen själv. Värdet av att importera &appname;-data är i huvudsak att lägga till eller sammanfoga två samlingar. </para>
+</sect3>
+
+<sect3 id="importing-csv">
+<title
+>Importerar CSV-data</title>
+
+<para
+>Värden avskilda med kommatecken (<acronym
+>CSV</acronym
+>) är ett vanligt sätt att importera och exportera tabelldata. Varje fältvärde åtskiljs av ett kommatecken, med en post per rad. Fältrubrikerna kan ingå på första raden. CSV-importverktyget är inte begränsat till att använda kommatecken som avskiljare. Vilket tecken eller sträng som helst kan användas. </para>
+
+<screenshot>
+<screeninfo
+>CSV-importdialogrutan</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="csv-dialog.png"/></imageobject>
+<textobject
+><phrase
+>CSV-importdialogrutan</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Välj först samlingstyp som du ska importera. Om du lägger till eller sammanfogar med den öppnade samlingen, begränsas typen till den nuvarande samlingstypen. Om den första raden i CSV-filen innehåller fältrubriker, klicka på kryssrutan så jämför importverktyget automatiskt rubrikerna med fälten i den nuvarande samlingen. Om en fältrubrik stämmer, ändras rubriken i den kolumnen för att visa att kolumnen har blivit tilldelad till det fältet. Om filen använder andra skiljetecken än kommatecken, försäkra dig om att du ändrar det alternativet i enlighet med det. </para>
+
+<para
+>För att &appname; ska kunna importera filen riktigt, måste vilket fält som motsvarar vilken kolumn vara känt. <emphasis
+>Om en kolumn bara har ett nummer i rubriken, importeras inte data från den kolumnen.</emphasis
+> Du måste tilldela varje kolumn ett fält genom att markera kolumnen, antingen genom att klicka i den eller själv ändra kolumnnumret, och därefter välja fältet som ska tilldelas till den i kombinationsrutan och klicka på knappen <guibutton
+>Tilldela fält</guibutton
+>. Om du behöver lägga till ett nytt fält i samlingen, öppnar det sista värdet i kombinationsrutans lista <link linkend="fields-dialog"
+><interface
+>Samlingsfältsdialogrutan</interface
+></link
+>. </para>
+
+<para
+>Av utrymmesskäl visas bara de fem första raderna av den importerade CSV-filen i dialogrutan. Dock importeras alla rader i filen. </para>
+
+</sect3>
+
+<sect3 id="importing-audio">
+<title
+>Importera data från ljud-cd</title>
+
+<para
+>&appname; kan använda tjänsten <ulink url="http://freedb.org"
+>freedb.org</ulink
+> för att slå upp information om en <acronym
+>cd</acronym
+>, inklusive spårlistan. Beroende på distribution, kan inställningar för att komma åt tjänsten vara inställda i &kde;:s systeminställningar. Artist, titel, genre, år och spårlistningar på cd:n läggs alla till. </para>
+
+<para
+>Om skivan dessutom innehåller cd-text, läses den informationen och läggs till i den importerade posten. </para>
+</sect3>
+
+<sect3 id="importing-audio-files">
+<title
+>Importera metadata från ljudfiler</title>
+
+<para
+>&appname; klarar av att söka igenom en katalog och läsa taggar för vanliga ljudfilformat, såsom <literal role="extension"
+>mp3</literal
+> och <literal role="extension"
+>ogg</literal
+>. Sångerna läggs till i en musiksamling, där varje post är ett album. Om sångfilerna innehåller spårnumret, infogas sångnamnet på rätt plats i spårlistan. Information om artist och genre läggs också till i posten. Om sångtaggarna innehåller kommentarer, läggs de till i postens kommentarfält, inledda med filnamnet. </para>
+
+<para
+>Om en katalog dessutom innehåller filen <filename
+>.directory</filename
+> och katalognamnet motsvarar en albumtitel, används posten <literal
+>Icon</literal
+> i skrivbordsfilen som omslagsbild för albumet. </para>
+
+<para
+>Importverktyget för metadata i ljudfiler kan söka igenom en katalog rekursivt för att hitta alla ljudfiler i vilken underkatalog som helst, även om symboliska länkar inte följs. &appname; använder <ulink url="https://taglib.org"
+>biblioteket Taglib</ulink
+> för att läsa ljudfilens metadata, och kan alltså importera data från alla filtyper som Taglib förstår. </para>
+
+</sect3>
+
+<sect3 id="importing-bibtex">
+<title
+>Importera Bibtex-data</title>
+
+<para
+><ulink url="http://en.wikipedia.org/wiki/Bibtex"
+>Bibtex</ulink
+> är ett bibliografiskt format som används med Latex dokumentframställningssystemet. Diverse typer av bibliografiska referenser kan inkluderas i filen. &appname; importerar bibtex-filer som en <link linkend="bibliography"
+>bibliografisk samling</link
+>. </para>
+
+<para
+>Om Bibtex-importverktyget stöter på fält i filen som inte finns i den bibliografiska standardsamlingen, läggs de till som fält med <link linkend="line"
+>enkel text</link
+>, med två undantag. Om fältvärdet innehåller mer än 100 tecken, används fältet <link linkend="para"
+>stycke</link
+>. Om fältvärdet verkar innehålla en webbadress eller en filreferens, används fältet <link linkend="url"
+>webbadress</link
+>. &appname; använder en intern kopia av <ulink url="http://www.gerg.ca/software/btOOL/"
+>biblioteket btparse</ulink
+> för att tolka Bibtex-filer. </para>
+
+<para
+><ulink url="http://bibtexml.sf.net"
+>Bibtexml</ulink
+> är en &XML;-representation av Bibtex-data, och data från den importerade bibtexml-filen behandlas på samma sätt som Bibtex-data skulle göras. </para>
+</sect3>
+
+<sect3 id="importing-mods">
+<title
+>Importera MODS-data</title>
+
+<para
+><acronym
+><ulink url="http://www.loc.gov/standards/mods/"
+>MODS</ulink
+></acronym
+> är ett format för att representera olika typer av mediasamlingar. För närvarande importeras bara böcker av &appname;, som en <link linkend="bibliography"
+>bibliografisk samling</link
+>. </para>
+
+</sect3>
+
+<sect3 id="importing-pdf">
+<title
+>Importera &PDF;-data</title>
+<para
+>Om &appname; kompilerades med stöd för <emphasis
+>exempi</emphasis
+> eller <emphasis
+>poppler</emphasis
+>, kan metadata från &PDF;-filer importeras. Metadata kan innehålla titel, författare och datuminformation, samt bibliografiska identifierare som sedan används för att uppdatera annan information. </para>
+</sect3>
+
+<sect3 id="importing-ris">
+<title
+>Importera RIS-data</title>
+<para
+><ulink url="https://en.wikipedia.org/wiki/RIS_(file_format)"
+>Formatet <acronym
+>RIS</acronym
+></ulink
+> är ett bibliografiskt filformat använt av <application
+>EndNote</application
+>, <application
+>Reference Manager</application
+> och andra program. &appname; importerar RIS-filer som en <link linkend="bibliography"
+>bibliografisk samling</link
+>. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="import-online-collection">
+<title
+>Importera samlingar på nätet</title>
+<para
+>&appname; kan ansluta till och importera från webbplatser som hanterar personliga samlingar.</para>
+
+<sect3 id="importing-boardgamegeek">
+<title
+>Importera samling från BoardGameGeek</title>
+<para
+><ulink url="https://boardgamegeek.com"
+>BoardGameGeek</ulink
+> är en resurs och gemenskap för brädspel på nätet. &appname; kan importera brädspelen i en användares samling, under förutsättning att samlingen är inställd att vara öppet tillgänglig. Den importerade samlingen kan vara begränsad till de objekt som är markerade som ägda. </para>
+</sect3>
+
+<sect3 id="importing-goodreads">
+<title
+>Importera samling från Goodreads</title>
+<para
+><ulink url="https://www.goodreads.com"
+>Goodreads</ulink
+> är ett socialt nätverk på Internet där läsare kan hålla reda på boksamlingar. &appname; kan importera listan av böcker i en användares samling, om antingen användarnamnet eller användaridentiteten anges, under förutsättning att samlingen är inställd att vara öppet tillgänglig. </para>
+</sect3>
+
+<sect3 id="importing-librarything">
+<title
+>Importera samling från LibraryThing</title>
+<para
+><ulink url="https://www.librarything.com"
+>LibraryThing</ulink
+> är en nättjänst för att hjälpa till att enkelt katalogisera böcker. &appname; kan importera boklistan i en användares samling, <ulink url="https://www.librarything.com/export.php?export_type=json"
+>exporterad med JSON-format</ulink
+>. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="importing-file-listing">
+<title
+>Importera fillistor</title>
+
+<para
+>Det bästa sättet att skapa en <link linkend="file-catalog"
+>filkatalog</link
+> är att importera innehållet i en katalog. Katalogen kan sökas igenom rekursivt, för att lägga till alla filer som hittas i den. Importverktyget är mest användbart för säkerhetskopieringslistor och katalogisering av media, som <acronym
+>cd</acronym
+>- eller <acronym
+>dvd</acronym
+>-listor. Dessutom kan förhandsgranskningsbilder av filinnehållet skapas, även om det kan ta en viss tid att läsa ett stort antal filer. Förhandsgranskningarna av filer är likadana som de som visas av &kde;:s filhanterare. </para>
+</sect2>
+
+<sect2 id="importing-xslt">
+<title
+>Importera &XML;-data via XSLT</title>
+
+<para
+>Vilken &XML;-fil som helst kan importeras till &appname; under förutsättning att en &XSL;-stilmall är tillgänglig för att konvertera filen till &appname;s format. &appname; laddar automatiskt stilmallen och utför &xslt;-behandlingen som behövs för att ladda filen. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="drag-n-drop">
+<title
+>Drag och släpp</title>
+
+<para
+>Att dra datafiler till &appname;s huvudfönster och släppa dem importerar filerna, precis som om <link linkend="importing"
+>importkommandot</link
+> användes från menyerna. Drag och släpp fungerar för följande filformat: Tellico, Bibtex, RIS och &PDF;. Att importera flera filer på en gång stöds också.</para>
+
+<para
+>Om du till exempel vill katalogisera flera <link linkend="importing-pdf"
+>&PDF;-filer</link
+>, markera dem i filhanteraren och dra dem till &appname;s fönster. &appname; importerar så mycket metadata från filerna som klaras av, och hämtar därefter ytterligare information från diverse inställda källor på Internet.</para>
+
+</sect1>
+
+<sect1 id="exporting">
+<title
+>Exportera data</title>
+
+<para
+>Vid export av data i samlingen, kan posternas värde exporteras som de skrevs in, eller med <link linkend="field-formatting"
+>automatisk formatering</link
+> utförd av &appname;. Dessutom kan exporten begränsas till de poster som för närvarande är markerade i samlingen, där <link linkend="status-bar"
+>statusraden</link
+> visar antal markerade poster. </para>
+
+<para
+>Exporterade textfiler, som Bibtex eller CSV, kan använda Unicode teckenkodning (UTF-8), eller operativsystemets nuvarande landsinställningar. </para>
+
+<screenshot>
+<screeninfo
+>Allmänna exportalternativ</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-options.png"/></imageobject>
+<textobject
+><phrase
+>Allmänna exportalternativ</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="exporting-xml">
+<title
+>Exportera &XML;</title>
+
+<para
+>Filformatet för &appname;-data är en &XML;-fil komprimerad med zip. Att exportera till &XML; skapar enbart &XML;-filen utan att komprimera den. Bilder kan inkluderas i &XML;-filen som base64-kodad data i ett bildelement, med att göra det kan skapa mycket stora textfiler. </para>
+</sect2>
+
+<sect2 id="exporting-zip">
+<title
+>Exportera Zip</title>
+
+<para
+>Standardfilformatet i &appname; är en fil komprimerad med zip, som innehåller &XML;-samlingsfilen, och valfritt, alla bilder som hänvisas till i samlingen. Om bilderna istället lagras i programkatalogen, skapas en självständig datafil, som innehåller alla bilderna i samlingen. </para>
+</sect2>
+
+<sect2 id="exporting-html">
+<title
+>Exportera &HTML;</title>
+
+<para
+>&HTML;-export använder stilmallen <filename
+>tellico2html.xsl</filename
+>. Bilder exporteras till en katalog med samma namn som den exporterade &HTML;-filen med <emphasis
+><filename
+>_files</filename
+></emphasis
+> tillagt. </para>
+
+<para
+>Standardformatet liknar det utskrivna formatet, och erbjuder diverse alternativ för att ändra &HTML;-data. Fältrubriker kan skrivas ut längst upp i varje kolumn, men tyvärr tillåter inte &kde; ännu att tabellrubrikerna upprepas på varje sida. Posterna kan också grupperas som i <interface
+>Gruppvyn</interface
+>. </para>
+
+<para
+>Dessutom kan enskilda filer skapas för varje post i samlingen, med länkar skapade i &HTML;-filen på toppnivån. Postfilerna skapas i samma katalog som bilderna. &HTML;-postfilerna använder aktuell stilmall, som visas i <interface
+>Postvyn</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>&HTML;-exportalternativ</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-html.png"/></imageobject>
+<textobject
+><phrase
+>&HTML;-exportalternativ</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-csv">
+<title
+>Exportera CSV</title>
+
+<para
+>Värden avskilda med kommatecken (CSV) är ett vanligt sätt att importera och exportera tabelldata. Varje fältvärde åtskiljs av ett kommatecken, med en post per rad. Fältrubrikerna kan ingå på första raden. Vilket tecken eller sträng som helst förutom kommatecknet kan användas för att skilja fälten åt. </para>
+
+<screenshot>
+<screeninfo
+>CSV-exportalternativ</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-csv.png"/></imageobject>
+<textobject
+><phrase
+>CSV-exportalternativ</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-alexandria">
+<title
+>Exportera Alexandria</title>
+
+<para
+><application
+><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
+>Alexandria</ulink
+></application
+> är en boksamlingshanterare för  skrivbordsmiljön <ulink url="http://www.gnome.org"
+>GNOME</ulink
+>. &appname; klarar av att exportera en begränsad delmängd av fälten i boksamlingen till Alexandrias standardplats för data. </para>
+
+</sect2>
+
+<sect2 id="exporting-onix">
+<title
+>Exportera ONIX</title>
+
+<para
+><ulink url="http://www.editeur.org/onix.html"
+>ONIX</ulink
+> är ett &XML;-format för att representera och kommunicera produktinformation från bokförlag, i huvudsak för bokhandlar. &appname; kan exportera boksamlingar med användning av en liten delmängd av ONIX. </para>
+
+</sect2>
+
+<sect2 id="exporting-bibtex">
+<title
+>Exportera Bibtex</title>
+
+<para
+>Vid export till <ulink url="http://en.wikipedia.org/wiki/Bibtex"
+>Bibtex</ulink
+> kan fältvärden skyddas med krullparenteser eller citationstecken. Om några strängmakron används i samlingen kan de valfritt exporteras som makron eller expanderas. För webbadressfält, kan &appname; omsluta fältvärdena med taggen <literal
+>\url{...}</literal
+>. Till sist kan poster utan någon hänvisningsnyckel hoppas över, istället för att låta &appname; skapa nyckeln automatiskt. </para>
+
+<screenshot>
+<screeninfo
+>Bibtex-exportalternativ</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-bibtex.png"/></imageobject>
+<textobject
+><phrase
+>Bibtex-exportalternativ</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-gcstar">
+<title
+>Exportera GCstar</title>
+
+<para
+><application
+><ulink url="http://home.gna.org/gcfilms/"
+>GCstar</ulink
+></application
+> är en annan filmsamlingshanterare. &appname; klarar av att exportera begränsad delmängd av videosamlingens fält till en GCstar datafil. </para>
+
+</sect2>
+
+<sect2 id="exporting-xslt">
+<title
+>Exportera &XML; via &xslt;</title>
+
+<para
+>Till sist kan &appname; behandla den interna &XML;-representationen av samlingsdata via en extern &XSL;-stilmall innan export. Denna typ av export kan vara användbar för att skapa textrapporter eller andra filtyper. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="citations">
+<title
+>Arbeta med hänvisningar</title>
+<para
+>Vid arbete med en <link linkend="bibliography"
+>bibliografi</link
+>, kan hänvisningar för posterna som för närvarande är markerade skapas och användas i diverse andra program. En hänvisning med bibtex-format kan kopieras till klippbordet och därefter klistras in i en Latex-fil. Bibtex-hänvisningar kan också skickas iväg till ett externt program såsom <application
+>Lyx</application
+> eller <application
+>Kile</application
+> med en så kallad <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+</sect1>
+
+</chapter>

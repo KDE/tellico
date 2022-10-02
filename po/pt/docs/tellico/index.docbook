@@ -1,0 +1,312 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY appname "&tellico;">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Portuguese "INCLUDE"
+><!-- change language only here -->
+
+  <!ENTITY robby "Robby Stephenson">
+  <!ENTITY email "robby@periapsis.org">
+  <!ENTITY homepage "http://tellico-project.org">
+  <!ENTITY maillist "http://tellico-project.org/mailing-list">
+  <!ENTITY xslt "<acronym
+>XSLT</acronym
+>">
+
+  <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
+  <!ENTITY importing-exporting-chapter SYSTEM "importing-exporting.docbook">
+  <!ENTITY configuration-chapter SYSTEM "configuration.docbook">
+  <!ENTITY fields-chapter SYSTEM "fields.docbook">
+  <!ENTITY menus-chapter SYSTEM "menus.docbook">
+  <!ENTITY advanced-chapter SYSTEM "advanced.docbook">
+  <!ENTITY hacking-chapter SYSTEM "hacking.docbook">
+  <!ENTITY faqs-chapter SYSTEM "faqs.docbook">
+  <!ENTITY details-chapter SYSTEM "details.docbook">
+
+]>
+
+<!-- ................................................................ -->
+
+<!-- The language must NOT be changed here. -->
+
+<book id="tellico" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+
+<!-- Date and version information of the documentation
+Don't forget to include this last date and this last revision number, we
+need them for translation coordination !
+Please respect the format of the date (DD/MM/YYYY) and of the version
+(V.MM.LL), it could be used by automation scripts.
+Do NOT change these in the translation. -->
+<date
+>28/08/2009</date>
+<releaseinfo
+>2.0</releaseinfo>
+
+<title
+>O Manual do &tellico;</title>
+
+<authorgroup>
+<author
+><firstname
+>Robby</firstname
+> <surname
+>Stephenson</surname
+> <affiliation
+> <address
+><email
+>&email;</email
+></address>
+</affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>José</firstname
+><surname
+>Pires</surname
+><affiliation
+><address
+><email
+>zepires@gmail.com</email
+></address
+></affiliation
+><contrib
+>Tradução</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2001</year>
+<year
+>2002</year>
+<year
+>2003</year>
+<year
+>2004</year>
+<year
+>2005</year>
+<year
+>2006</year>
+<year
+>2007</year>
+<year
+>2008</year>
+<year
+>2009</year>
+<year
+>2010</year>
+<year
+>2011</year>
+<holder
+>&robby;</holder>
+</copyright>
+
+<!-- Translators: put here the copyright notice of the translation -->
+
+<legalnotice>
+<para
+>Por questões de licenças, tanto da aplicação como desta documentação, por favor veja a <link linkend="credits"
+>secção final</link
+>. </para>
+</legalnotice>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>Este documento é um manual para usar o &tellico;, uma aplicação de gestão de colecções. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>tellico</keyword>
+<keyword
+>livro</keyword>
+<keyword
+>bibliografia</keyword>
+<keyword
+>filme</keyword>
+<keyword
+>colecção</keyword>
+<keyword
+>base de dados</keyword>
+<keyword
+>catálogo</keyword>
+<keyword
+>extragear</keyword>
+</keywordset>
+
+</bookinfo>
+
+<!-- The contents of the documentation begin here.  Label each chapter
+so with the id attribute. This is necessary for two reasons: it allows
+you to easily reference the chapter from other chapters of your
+document, and if there is no ID, the name of the generated HTML files
+will vary from time to time making it hard to manage for maintainers
+and for the CVS system. Any chapter labelled (OPTIONAL) may be left
+out at the author's discretion. Other chapters should not be left out
+in order to maintain a consistent documentation style across all KDE
+apps. -->
+
+<chapter id="introduction">
+<title
+>Introdução</title>
+
+<!-- The introduction chapter contains a brief introduction for the
+application that explains what it does and where to report
+problems. Basically a long version of the abstract.  Don't include a
+revision history. (see installation appendix comment) -->
+
+<sect1 id="tellico-intro">
+<title
+>&tellico;</title>
+
+<para
+>O &tellico; é um programa para gerir colecções. Começou com um gestor de colecções de livros simples, expandindo-se para incluir modelos de colecções predefinidos para bibliografias, bandas desenhadas, vídeos, música, moedas, selos, cartões, jogos de vídeo, vinhos, jogos de tabuleiro e listagens de ficheiros. Para além disso, poderá criar colecções personalizadas para qualquer outro tipo de item coleccionável. </para>
+
+<sect2 id="what-tellico-is">
+<title
+>O Que é o &tellico;</title>
+
+<para
+>O &tellico; mantém um registo dos itens numa colecção, oferecendo uma forma simples de introduzir dados para cada item. Oferece diversos tipos de campos, permitindo um número ilimitado de campos definidos pelo utilizador. Os itens de uma colecção poderão ser agrupados por qualquer campo, para uma organização simples, e poderá personalizar vistas que mostram tanta informação quanta desejar. </para>
+
+<para
+>Poderá registar os empréstimos, com uma integração opcional com o &korganizer;. Poderá importar ou exportar as colecções numa variedade de formatos, para permitir um intercâmbio ou publicação simples de dados. </para>
+
+</sect2>
+
+<sect2 id="what-tellico-is-not">
+<title
+>O Que o &tellico; Não É</title>
+
+<para
+>O &tellico; não é um leitor de áudio ou vídeo. Não oferece capacidades de ler ou modificar ficheiros multimédia. Também não oferece nenhuma capacidade de edição de imagens. Ainda que o &tellico; tenha alguma funcionalidade para gerir listas bibliográficas, não é um gestor de referências bibliográficas completo. O &tellico; também não pretende ter todas as potencialidades de uma base de dados relacional completa. </para>
+
+<para
+>Como uma espécie de nota final, o &tellico; é um passatempo do autor, e não são dadas quaisquer garantias sobre a sua funcionalidade, utilidade, etc. Está muito longe de ser um pacote profissional de 'software'. Poderá encontrar mais informações na <link linkend="credits"
+>declaração da licença</link
+>. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="terminology">
+<title
+>Terminologia</title>
+
+<sect2 id="collections">
+<title
+>Colecções</title>
+<para
+>No &tellico;, uma colecção é o documento. Só poderá existir uma colecção em cada ficheiro do &tellico;. Uma colecção contém um número qualquer de <link linkend="fields"
+>campos</link
+> e <link linkend="entries"
+>itens</link
+>. O &tellico; suporta 12 tipos de colecções específicos por omissão: livros, itens bibliográficos, banda desenhada, vídeos, música, cartões para troca, moedas, selos, jogos de vídeo, vinhos, jogos de tabuleiro e listagens de ficheiros. Para além disso, está disponível um modelo de colecção genérico e vazio para outros tipos de itens coleccionáveis. </para>
+</sect2>
+
+<sect2 id="fields">
+<title
+>Campos da Colecção</title>
+<para
+>Cada colecção poderá ter um número ilimitado de campos. O &tellico; suporta onze tipos de campos, que permitem uma gama de dados diferente. Os campos poderão ser editados com o <link linkend="fields-dialog"
+><interface
+>Janela dos Campos da Colecção</interface
+></link
+> e são explicados mais à frente na secção de <link linkend="field-types"
+>Tipos de Campos</link
+>. </para>
+</sect2>
+
+<sect2 id="entries">
+<title
+>Itens da Colecção</title>
+
+<para
+>Um item é o registo básico no &tellico;. Cada item contém um único valor para cada campo da colecção. Uma colecção poderá ter um número ilimitado de itens, em teoria, se bem que a colecção completa está sempre residente em memória, o que poderá contribuir para abrandar a aplicação, no caso de ter demasiados itens. </para>
+
+<para
+>O &tellico; foi testado com uma colecção de 10 000 itens, e a velocidade foi considerada satisfatória. Contudo, se incluir muitas imagens grandes na colecção, o tempo de carregamento e processamento poderão aumentar drasticamente. A performance poderá ser melhorada se o &tellico; guardar as imagens em separado do ficheiro de dados, seja na pasta da aplicação ou numa pasta relativa ao ficheiro de dados. Poderá obter mais informações na <link linkend="configuration"
+>secção de configuração</link
+>. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+&fundamentals-chapter;
+
+&details-chapter;
+
+&importing-exporting-chapter;
+
+&advanced-chapter;
+
+&configuration-chapter;
+
+&hacking-chapter;
+
+&faqs-chapter;
+
+&menus-chapter;
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be
+included below the credits with a reference to the appropriate license
+file included in the KDE distribution. -->
+
+<title
+>Créditos e Licença</title>
+
+<para
+>&tellico; </para>
+<para
+>Programa com 'copyright' 2001-2011 de &robby; <email
+>&email;</email
+> </para>
+<para
+>Documentação com 'copyright' 2001-2011 de &robby; <email
+>&email;</email
+> </para>
+
+<para
+>Tradução de José Nuno Pires <email
+>zepires@gmail.com</email
+></para
+> 
+&underGPL; &underFDL; <para
+>O autor desta documentação também lhe concedeu permissão de usar o conteúdo segundo os termos da <ulink url="http://www.freebsd.org/copyright/freebsd-doc-license.html"
+>FreeBSD Documentation License</ulink
+>, se assim o escolher. Se optar por permitir o uso da sua versão para este conteúdo apenas segundos os termos da Licença de Documentação do FreeBSD, e não permitir que os outros usem a sua versão deste ficheiro segundo os termos da GFDL, indique a sua decisão, apagando o aviso da GFDL e substituindo-a pelo aviso e pelas outras notas necessárias pelas Licença de Documentação do FreeBSD. Se não apagar o aviso da GFDL acima, um destinatário poderá usar a sua versão deste ficheiro segundo os termos da GFDL ou da Licença de Documentação do FreeBSD.</para>
+
+</chapter>
+
+&documentation.index;
+
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->

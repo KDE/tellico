@@ -1,0 +1,919 @@
+<chapter id="menus">
+<title
+>Довідка щодо команд</title>
+
+<!--
+(OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
+application windows and their menubar and toolbar commands for easy reference.
+Also include any keys that have a special function but have no equivalent in the
+menus or toolbars. This may not be necessary for small apps or apps with no tool
+or menu bars.
+-->
+
+<sect1 id="main-window-menus">
+<title
+>Головне вікно &tellico;</title>
+
+<para
+>Далі за текстом докладно обговорено кожен з пунктів меню. Якщо існує клавіатурне скорочення, яке виконує ту саму дію, що і пункт меню, поряд з пунктом меню буде вказано це скорочення. </para>
+
+<sect2>
+<title
+>Меню «Файл»</title>
+
+<para>
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Створити</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>створити нову збірку</action
+>. У &tellico; передбачено <link linkend="collection-types"
+>12 типових видів збірок</link
+>, а також порожню нетипову збірку, параметри якої визначає користувач.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Відкрити...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту можна <action
+>відкрити файл &tellico;</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Відкрити недавній</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту можна <action
+>відкрити файл</action
+> з підменю, у якому міститься список нещодавно відкритих файлів.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Зберегти...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>зберегти збірку</action
+>. Якщо файл має назву <emphasis
+>Без назви</emphasis
+>, використання пункту <guimenuitem
+>Зберегти...</guimenuitem
+> рівноцінне використанню пункту меню <guimenuitem
+>Зберегти як</guimenuitem
+>. Цей пункт меню буде доступним лише у разі, якщо дані збірки було змінено.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Зберегти як...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту можна <action
+>зберегти збірку до нового файла</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Друкувати...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>надрукувати збірку</action
+>. Параметри друку можна налаштувати у <interface
+>діалоговому вікні налаштування</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Імпортувати</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту можна наказати програмі <action
+>імпортувати дані з зовнішнього файла</action
+>. &tellico; може імпортувати дані у багатьох <link linkend="importing"
+>форматах</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Експортувати</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна наказати програмі <action
+>експортувати збірку у іншому форматі</action
+>. &tellico; може експортувати дані у багатьох <link linkend="exporting"
+>форматах</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Вийти</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цієї команди можна <action
+>закрити вікно &tellico;</action
+>. Якщо у збірці залишалися незбережені зміни, програма запитає вас про те, чи слід їх зберегти, перш ніж завершити роботу.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Меню «Зміни»</title>
+
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Вернути</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>скасувати попередню дію</action
+>. Не всі дії підтримують скасування.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Повторити</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>повернути результати раніше скасованої дії</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Вирізати</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>вилучити з тексту будь-який виділений фрагмент</action
+> і <action
+>розмістити копію вилученого тексту у буфері обміну даними</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Копіювати</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>скопіювати будь-який виділений фрагмент тексту</action
+> до буфера обміну даними.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Вставити</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>вставити текст з буфера обміну даними</action
+> до редактора у поточну позицію курсора.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Вибрати все</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цієї команди можна <action
+>вибрати всі записи</action
+> у збірці під час <interface
+>перегляду стовпцями</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Скасувати вибір</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту можна <action
+>скасувати вибір всіх записів</action
+> у збірці.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Пошук у інтернеті...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту можна <action
+>відкрити <interface
+>діалогове вікно пошуку у інтернеті</interface
+></action
+> для пошуку і імпорту записів з різноманітних сайтів у мережі Інтернет, зокрема <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>J</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Додаткове фільтрування...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту можна <action
+>відкрити <interface
+>діалогове вікно налаштування фільтрів</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Меню «Збірка»</title>
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Збірка</guimenu
+> <guimenuitem
+>Створити запис</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту можна <action
+>відкрити вікно <interface
+>редактора записів</interface
+> для створення нового запису</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Збірка</guimenu
+> <guimenuitem
+>Редагувати запис</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту можна <action
+>відкрити вікно <interface
+>редактора записів</interface
+> для зміни вибраного запису</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Збірка</guimenu
+> <guimenuitem
+>Здублювати запис</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>скопіювати або здублювати вибрані записи</action
+> у збірці.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Збірка</guimenu
+> <guimenuitem
+>Вилучити запис</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>вилучити вибрані записи</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Збірка</guimenu
+> <guimenuitem
+>Об’єднати записи</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>об’єднати вибрані записи</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Збірка</guimenu
+> <guimenuitem
+>Оновити запис</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна отримати доступ до списку всіх можливих джерел даних, ним можна скористатися для автоматичного опитування джерела і <action
+>оновлення вибраних записів</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Збірка</guimenu
+> <guimenuitem
+>Віддати у борг</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цієї команди можна <action
+>відкрити діалогове вікно позичання вибраних записів.</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Збірка</guimenu
+> <guimenuitem
+>Повернути з боргу</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>повернути до збірки вибрані записи, які позначено як віддані у борг</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Збірка</guimenu
+> <guimenuitem
+>Перейменувати збірку</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>відкрити діалогове вікно, призначене для перейменування збірки</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Збірка</guimenu
+> <guimenuitem
+>Поля збірки...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>відкрити <interface
+>діалогове вікно редагування полів</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Збірка</guimenu
+> <guimenuitem
+>Створити звіт...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>відкрити <interface
+>діалогове вікно звітів</interface
+></action
+>, за допомогою якого можна створювати звіти щодо збірки.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Збірка</guimenu
+> <guisubmenu
+>Бібліографія</guisubmenu
+> <guimenuitem
+>Перетворити на бібліографію</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню ви можете <action
+>перетворити книжкову збірку на бібліографію</action
+> додаванням певних полів, потрібних для експорту до Bibtex. Цей пункт меню буде увімкнено, лише якщо відкрито книжкову збірку.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Збірка</guimenu
+> <guisubmenu
+>Бібліографія</guisubmenu
+> <guimenuitem
+>Макрос обробки рядків...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню ви можете <action
+>відкрити діалогове вікно для редагування рядкових макросів Bibtex</action
+> у збірці. Цей пункт буде увімкнено, лише якщо ви редагуєте бібліографію.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Збірка</guimenu
+> <guisubmenu
+>Бібліографія</guisubmenu
+> <guimenuitem
+>Перевірити на дублікати ключів…</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>виконати пошук дублікатів ключів bibtex</action
+> і фільтрування збірки з метою показу записів дублікатів таких ключів.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Збірка</guimenu
+> <guisubmenu
+>Бібліографія</guisubmenu
+> <guimenuitem
+>Копіювати дані Bibtex до буфера обміну</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню ви можете <action
+>копіювати посилання Bibtex</action
+> до буфера обміну даним так, що посилання можна вставити до документа LaTeX.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Збірка</guimenu
+> <guisubmenu
+>Бібліографія</guisubmenu
+> <guimenuitem
+>Зробити посилання в LyX</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню ви можете <action
+>надіслати посилання на вибрані записи</action
+> до так званої <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+> для наступного використання у <application
+>LyX</application
+>, <application
+>Kile</application
+> або іншій програмі LaTeX. Цей пункт буде увімкнено, лише якщо ви редагуєте бібліографію.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Меню «Параметри» і «Довідка»</title>
+
+<para
+>Окрім типових для &kde; пунктів меню <guimenu
+>Параметри</guimenu
+> і <guimenu
+>Довідка</guimenu
+>, описаних у <ulink url="help:/fundamentals/menus.html"
+>розділі щодо меню</ulink
+> підручника з основ роботи у &kde;, у &tellico; передбачено такі додаткові пункти: </para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Показувати групи</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню ви можете <action
+>увімкнути або вимкнути показ <interface
+>перегляду груп</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Показувати редактор записів</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню ви можете <action
+>увімкнути або вимкнути показ <interface
+>редактора записів</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Групувати вибране</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>змінити поле, яке буде використано для групування записів</action
+> у збірці.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>

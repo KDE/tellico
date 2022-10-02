@@ -1,0 +1,827 @@
+<chapter id="configuration">
+<title
+>Configuración</title>
+
+<para
+>El <interface
+>Diálogo de configuración</interface
+> contiene todas las opciones para cambiar algunos comportamientos predeterminados de &appname;. </para>
+
+<para
+>Hacer clic en el botón <guibutton
+>Aplicar</guibutton
+> <action
+>causará que los cambios tengan efecto inmediatamente</action
+> sin cerrar el diálogo, mientras que <guibutton
+>Aceptar</guibutton
+> <action
+>aplica los cambios y cierra el diálogo</action
+>. <guibutton
+>Cancelar</guibutton
+> cierra el diálogo, pero cualquier cambio ya hecho y aplicado permanecerá. El botón <guibutton
+>Predeterminado</guibutton
+> <action
+>revierte las opciones</action
+> de la página actual del diálogo a sus valores por defecto, mientras que el botón <guibutton
+>Ayuda</guibutton
+> <action
+>abre el &khelpcenter;</action
+> de la sección correspondiente en el manual de &appname;. </para>
+
+<para
+>Algunos ajustes menores solo se pueden cambiar editando el archivo de configuración. Consulte <link linkend="hidden-options"
+>Opciones ocultas</link
+>. </para>
+
+<sect1 id="general-options">
+<title
+><guilabel
+>Opciones generales</guilabel
+></title>
+
+<screenshot>
+<!-- <screeninfo
+>The General Options Dialog</screeninfo
+> -->
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="general-options.png"/></imageobject>
+<textobject
+><phrase
+>El diálogo de opciones generales</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Las <guilabel
+>Opciones generales</guilabel
+> controlan el comportamiento general. Las imágenes pueden estar incluidas en los archivos de datos, o guardadas por separado en la carpeta de la aplicación &appname;. Además, cuando se inicia &appname;, puede abrir automáticamente el último archivo de datos que ha sido abierto. El diálogo <guilabel
+>Consejo del día</guilabel
+> contiene pistas útiles para usar &appname;, y aparece al inicio del programa. Puede querer leer algunas de estas pistas y después deshabilitar el diálogo. El <interface
+>Filtrado rápido</interface
+> de la barra de herramientas resulta de utilidad para filtrar rápidamente la colección y permite el uso de expresiones regulares. </para>
+
+<para
+>Las <guilabel
+>Opciones de formato</guilabel
+> controlan el nivel de formato automático que hace &appname;. Por ejemplo, consulte la sección <link linkend="field-formatting"
+>Formato de campos</link
+>. La capitalización y el formato son opciones destacadas, ya que un campo puede estar capitalizado sin tener el orden de las palabras alterado, y viceversa. La capitalización automática puede cambiarse para ignorar algunas palabras. El formato automático incluye artículos gramaticales en los títulos, junto con prefijos y sufijos para los nombres propios. Los valores no distinguen entre mayúsculas y minúsculas, y deberían estar separados por punto y coma. </para>
+
+<para
+>Las reglas de formato siguen el uso general del inglés, lo que puede no funcionar para otros idiomas. Los artículos se adjuntan al final del título, con una coma. Los nombres propios se alteran para que tengan el apellido al principio, seguido por una coma, y después el nombre. Los sufijos personales, como Jr., se mantienen con el apellido. Los prefijos, como por ejemplo <emphasis
+>von</emphasis
+>, se mantienen con el apellido, pero se ignoran cuando se ordenan los valores.</para>
+
+<informalexample
+><para
+><emphasis
+>John Q. von Public, III</emphasis
+> se convertiría en <emphasis
+>von Public, III, John Q.</emphasis
+>, y <emphasis
+>Public</emphasis
+> sería usado como clave para la ordenación.</para
+></informalexample>
+
+<para
+>Solo se admiten prefijos de una sola palabra. Si un nombre incluye <emphasis
+>van der</emphasis
+>, por ejemplo, tanto <emphasis
+>van</emphasis
+> como <emphasis
+>der</emphasis
+> se incluirían en la lista de prefijos del apellido. Los artículos que terminan con un apóstrofe también se admiten para la ordenación. </para>
+
+<note
+><para
+>Los valores reales de la colección <emphasis
+>no</emphasis
+> se cambian, solo el texto visible usado para la interfaz. Así, las opciones de formato se pueden cambiar una y otra vez sin afectar a ninguno de los datos de la colección.</para
+></note>
+
+</sect1>
+
+<sect1 id="printing-options">
+<title
+><guilabel
+>Opciones de impresión</guilabel
+></title>
+
+<para
+>&appname; usa una plantilla &xslt; para crear &HTML;, y se la transifere al servicio de impresión de &kde;. Solo se imprimen los campos visibles en la <link linkend="detailed-view"
+><interface
+>Vista de columna</interface
+></link
+>. Más aún, si la colección ha sido filtrada, solo se imprimirán las entradas visibles. Al inicio aparecerá un mensaje diciendo que el filtro está activado. </para>
+
+<screenshot>
+<screeninfo
+>El diálogo de opciones de impresión</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="print-options.png"/></imageobject>
+<textobject
+><phrase
+>El diálogo de opciones de impresión</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Las <guilabel
+>Opciones de impresión</guilabel
+> le permiten cambiar algunas opciones de formato cuando imprima una colección. Si la opción <guilabel
+>Dar formato a títulos y nombres</guilabel
+> está marcada, a los campos se les dará  <link linkend="field-formatting"
+>formato automático</link
+> cuando se impriman. De otro modo, se imprimirán exactamente igual que fueron introducidos. </para>
+
+<para
+>La hoja de estilo de impresión predeterminada imprime la colección con los valores de los campos en columnas. <guilabel
+>Imprimir cabeceras de campo</guilabel
+> controla si el título del campo se imprime en la parte superior de la columna. </para>
+
+<para
+>En el listado, las entradas se ordenarán tal como están en la <link linkend="detailed-view"
+><interface
+>Vista de columna</interface
+></link
+>. Además, podrán estar agrupadas tal como están en la <link linkend="group-view"
+><interface
+>Vista de grupo</interface
+></link
+>. </para>
+
+<para
+>Finalmente, cuando los campos de imagen se incluyen en el listado, las imágenes pueden estar cambiadas de tamaño, manteniendo la relación de aspecto. El ancho y el alto máximos de la imagen definen el tamaño más grande posible de esta, aunque nunca será incrementado. </para>
+</sect1>
+
+<sect1 id="template-options">
+<title
+><guilabel
+>Opciones de plantilla</guilabel
+></title>
+
+<para
+>La <link linkend="entry-view"
+><interface
+>Vista de entrada</interface
+></link
+> utiliza plantillas para mostrar los valores de los campos. Puede especificar una plantilla diferente para cada tipo de colección. Algunas plantillas, como la de <emphasis
+>Álbum</emphasis
+> o <emphasis
+>Vídeo</emphasis
+>, son para un tipo determinado de colección, y aparecerá un breve mensaje de error en la <interface
+>Vista de entrada</interface
+> si se utilizan para otros tipos. El botón <guilabel
+>Vista previa</guilabel
+> hace aparecer una ventana para mostrarle una vista preliminar del aspecto de la plantilla. Los tipos de letra y colores personalizados pueden transmitirse a la plantilla, y todas las plantillas predeterminadas reflejarán esos ajustes. Sin embargo, las plantillas personalizadas pueden ignorarlos.</para>
+
+<para
+>Se pueden instalar plantillas adicionales directamente, o descargarlas desde <ulink url="https://store.kde.org/"
+>store.kde.org</ulink
+> haciendo clic en el botón <guilabel
+>Descargar</guilabel
+>. Cualquier plantilla instalada por el usuario se puede borrar. Las plantillas de entrada se guardan en <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/entry-templates/</filename
+>. </para>
+
+<para
+>Si crea una nueva plantilla, considere la opción de enviarla a <ulink url="https://store.kde.org"
+>store.kde.org</ulink
+>.</para>
+
+<screenshot>
+<screeninfo
+>El diálogo de opciones de plantilla</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="template-options.png"/></imageobject>
+<textobject
+><phrase
+>El diálogo de opciones de plantilla</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="data-sources-options">
+<title
+><guilabel
+>Opciones de fuentes de datos</guilabel
+></title>
+
+<para
+>&appname; puede usar varias fuentes para importar datos, que se pueden configurar en el diálogo de fuentes de datos. Existen muchos tipos y fuentes disponibles. A continuación se listan algunos de ellos, aunque la lista completa está <ulink url="https://tellico-project.org/data-sources"
+>dispoible en el sitio web de Tellico</ulink
+>.</para>
+
+<itemizedlist>
+<!-- books -->
+<listitem
+><simpara
+><link linkend="amazon-web-services"
+>Servicios web de Amazon.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="isbndb"
+>ISBNdb.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="openlibrary"
+>OpenLibrary.org</link
+>,</simpara
+></listitem>
+<!-- movies -->
+<listitem
+><simpara
+>la <link linkend="imdb"
+>Internet Movie Database</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="allocine"
+>AlloCiné</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="tmdb"
+>TheMovieDB.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+>la <link linkend="omdb"
+>Open Movie Database</link
+>,</simpara
+></listitem>
+<!-- comics -->
+<listitem
+><simpara
+><link linkend="bedetheque"
+>BDGest</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="comicvine"
+>Comic Vine</link
+>,</simpara
+></listitem>
+<!-- music -->
+<listitem
+><simpara
+><link linkend="discogs"
+>Discogs.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="musicbrainz"
+>MusicBrainz.org</link
+>,</simpara
+></listitem>
+<!-- video games -->
+<listitem
+><simpara
+><link linkend="tgdb"
+>TheGamesDB.net</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="giantbomb"
+>GiantBomb.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="mobygames"
+>MobyGames.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="igdb"
+>IGDB.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="videogamegeek"
+>VideoGameGeek</link
+>,</simpara
+></listitem>
+<!-- board games -->
+<listitem
+><simpara
+><link linkend="boardgamegeek"
+>BoardGameGeek</link
+>,</simpara
+></listitem>
+<!-- bibliographic -->
+<listitem
+><simpara
+><link linkend="bib-sources"
+>arxiv.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="entrez"
+>Bases de datos Entrez (PubMed)</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="z3950"
+>z39.50 servers</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="sru"
+>servidores SRU</link
+>,</simpara
+></listitem>
+<!-- coins -->
+<listitem
+><simpara
+><link linkend="colnect"
+>Colnect</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="numista"
+>Numista</link
+>,</simpara
+></listitem>
+<!-- others -->
+<listitem
+><simpara
+><link linkend="externalexec"
+>otras aplicaciones o guiones externos</link
+> y</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="multiple-sources"
+>una combinación de cualquiera de las fuentes de arriba</link
+>.</simpara
+></listitem>
+</itemizedlist>
+
+<screenshot>
+<screeninfo
+>El diálogo de opciones de fuentes de datos</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="source-options.png"/></imageobject>
+<textobject
+><phrase
+>El diálogo de opciones de fuentes de datos</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Se pueden añadir nuevas fuentes haciendo clic en el botón <guibutton
+>Nuevo...</guibutton
+>, mientras que las ya existentes se pueden modificar o eliminar usando los botones <guibutton
+>Modificar...</guibutton
+> o <guibutton
+>Eliminar</guibutton
+>. El orden de las fuentes, que se muestra en los menús de actualización de entradas, también se puede cambiar. </para>
+
+<warning>
+<para
+>Nunca instale o ejecute un script de una fuente que no sea de confianza. Se ejecutan con los mismos permisos del usuario, y como resultado podrían modificar o eliminar archivos, o perjudicar su sistema de cualquier otra forma. </para>
+</warning>
+
+<para
+>Muchas de las fuentes de datos ofrecen más información que los campos predeterminados de &appname;. Esos campos se muestran a la derecha del cuadro de configuración. Si alguno de esos campos está marcado, se añadirá a la colección cuando se añada una entrada desde esa fuente. </para>
+
+<!-- start book sources -->
+
+<sect2 id="book-sources">
+<title
+>Fuentes de datos de libros y bibliográficas</title>
+
+<sect3 id="z3950">
+<title
+>Servidores z39.50</title>
+
+<para
+>El <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html"
+>protocolo z39.50</ulink
+> se utiliza para acceder a proveedores de información sobre bibliotecas y bibliografía de todo el mundo. Las listas de servidores z39.50 públicos están <ulink url="http://www.indexdata.dk/targettest/"
+>disponibles en indexdata.dk</ulink
+>, entre otras. &appname; viene con varias configuraciones preestablecidas para las principales bibliotecas, y también puede especificar la información de conexión manualmente.</para>
+
+<para
+>&appname; puede leer datos en los formatos <acronym
+>MODS</acronym
+>, <acronym
+>USMARC</acronym
+>/<acronym
+>MARC21</acronym
+>, o <acronym
+>UNIMARC</acronym
+>, usando la <ulink url="http://www.indexdata.dk/yaz/"
+>biblioteca yaz</ulink
+>. Además, hay apoyo limitado para el formato <acronym
+>GRS-1</acronym
+>. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="z3950-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Para usar una de las bibliotecas preestablecidas, marque la casilla y seleccione la biblioteca. Las otras entradas de configuración se deshabilitarán. Si necesita configurar la información manualmente, desmarque la casilla. </para>
+
+<para
+>El puerto predeterminado para el acceso a z39.50 es el 210, pero algunos servidores pueden utilizar uno diferente. &appname; supone que el servidor utiliza la codificación MARC-8, a menos que esté configurado de otra forma. Si se utiliza una codificación de caracteres incorrecta, aparecerá un mensaje de error en la salida del programa o posiblemente no se obtengan entradas. </para>
+
+<para
+>Algunos servidores requieren un nombre de usuario y una contraseña de acceso. &appname; puede usar y guardar esa contraseña, pero tenga en cuenta que estará escrita en el archivo de configuración de &appname; en texto sencillo y no es segura. Para la mayoría de servidores públicos, los campos de nombre de usuario y contraseña pueden dejarse vacíos. </para>
+
+</sect3>
+
+<sect3 id="sru">
+<title
+>Servidores SRU</title>
+
+<para
+>SRU significa <ulink url="http://www.loc.gov/standards/sru/"
+>Search/Retrieve via &URL; (Buscar y Obtener vía URL)</ulink
+>, y es un protocolo de búsqueda estándar para internet. Algunas bibliotecas lo usan para dar acceso a sus catálogos. Entre ellas, la <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
+>Biblioteca del Congreso de EE.UU.</ulink
+> es probablemente la más conocida. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="sru-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect3>
+
+<sect3 id="entrez">
+<title
+>Bases de datos Entrez</title>
+<para
+><ulink url="http://www.ncbi.nlm.nih.gov/Entrez/"
+>Entrez</ulink
+> es el sistema integrado de búsqueda y obtención basado en texto usado en el Centro Nacional de Información Biotecnológica (NCBI). La base de datos Entrez más conocida es <ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed"
+>PubMed</ulink
+>, de artículos de ciencias de la vida de varias revistas de biología. Por el momento, la única base de datos Entrez admitida por &appname; es PubMed.</para>
+</sect3>
+
+<sect3 id="bib-sources">
+<title
+>Bases de datos bibliográficas</title>
+<para
+><ulink url="http://arxiv.org"
+>arXiv.org</ulink
+>, <ulink url="http://bibsonomy.org"
+>Bibsonomy</ulink
+> y <ulink url="http://crossref.org"
+>CrossRef</ulink
+> son bases de datos en línea para artículos académicos e información bibliográfica. Para acceder a la fuente CrossRef, debe <ulink url="http://www.crossref.org/requestaccount/"
+>solicitar una cuenta</ulink
+> y añadir la información de su cuenta a la configuración de las fuentes de datos.</para>
+</sect3>
+
+<sect3 id="isbndb">
+<title
+>ISBNdb.com</title>
+<para
+><ulink url="http://isbndb.com"
+>ISBNdb.com</ulink
+> es una base de datos de libros en línea de bibliotecas de todo el mundo. </para>
+</sect3>
+
+<sect3 id="openlibrary">
+<title
+>OpenLibrary.org</title>
+<para
+><ulink url="http://openlibrary.org"
+>OpenLibrary.org</ulink
+> es una base de datos de libros que espera tener una página para cada libro. </para>
+</sect3>
+
+</sect2>
+<!-- end of books -->
+
+<!-- start of movie sources -->
+<sect2 id="comicbook-sources">
+<title
+>Fuentes de datos de Comics</title>
+
+<sect3 id="bedetheque">
+<title
+>Bedetheque</title>
+<para
+><ulink url="http://www.bedetheque.com"
+>Bedetheque</ulink
+> es una base de datos francesa de libros de cómics gestionada por BDGest. </para>
+</sect3>
+
+<sect3 id="comicvine">
+<title
+>Comic Vine</title>
+<para
+><ulink url="https://comicvine.gamespot.com/"
+>Comic Vine</ulink
+> se promociona como la wiki de cómics más grande del universo. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of movie sources -->
+<sect2 id="movie-sources">
+<title
+>Fuentes de datos de películas</title>
+
+<sect3 id="imdb">
+<title
+>Internet Movie Database</title>
+
+<para
+>La <ulink url="http://www.imdb.com"
+>Internet Movie Database</ulink
+> (Base de datos de películas de Internet) proporciona información sobre películas y videos. Cuando se hace una búsqueda de una <emphasis
+>persona</emphasis
+>, si se obtiene más de un resultado posible, se abre un cuadro de diálogo para permitirle seleccionar la persona correcta. Las opciones de configuración incluyen seleccionar la nacionalidad de IMBb a usar, y si se obtienen las imágenes o no. Como IMDb puede devolver un gran número de miembros del reparto, puede limitarlos a una determinada cantidad. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="imdb-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect3>
+
+<sect3 id="tmdb">
+<title
+>TheMovieDB.org</title>
+<para
+><ulink url="http://themoviedb.org"
+>TheMovieDB.org</ulink
+> es una base de datos abierta. Se requiere registrarse para obtener una cuenta gratuita. </para>
+</sect3>
+
+<sect3 id="omdb">
+<title
+>La Open Movie Database</title>
+<para
+>La <ulink url="http://omdbapi.com"
+>Open Movie Database (OMDBAPI.com)</ulink
+> es un servicio web gratuito para obtener información sobre películas. </para>
+</sect3>
+
+<sect3 id="allocine">
+<title
+>AlloCiné</title>
+<para
+><ulink url="http://allocine.fr"
+>AlloCiné</ulink
+> es un servicio de información de películas en línea con sede en Francia. La identificación del navegador debe estar activada en &systemsettings;. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of music sources -->
+<sect2 id="music-sources">
+<title
+>Fuentes de datos de música</title>
+
+<sect3 id="discogs">
+<title
+>Discogs.com</title>
+<para
+><ulink url="http://discogs.com"
+>Discogs.com</ulink
+> es una base de datos de música construida por los usuarios que contiene información sobre artistas, sellos y sus grabaciones. Se requiere registrarse para obtener una cuenta gratuita. La identificación del navegador debe estar activada en &systemsettings;. </para>
+</sect3>
+
+<sect3 id="musicbrainz">
+<title
+>MusicBrainz.org</title>
+<para
+><ulink url="http://musicbrainz.org"
+>MusicBrainz.org</ulink
+> es una metabase de datos que intenta crear un sitio de información exhaustiva sobre música. La identificación del navegador debe estar activada en &systemsettings;. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of wine sources -->
+<!--<sect2 id="wine-sources">
+<title
+>Wine Data Sources</title>
+
+</sect2
+>-->
+
+<!-- start of video game sources -->
+<sect2 id="videogame-sources">
+<title
+>Fuentes de datos de videojuegos</title>
+
+<sect3 id="giantbomb">
+<title
+>GiantBomb.com</title>
+<para
+><ulink url="http://giantbomb.com"
+>GiantBomb.com</ulink
+> es una gran base de datos de juegos mantenida por la comunidad. Se requiere registro para obtener una cuenta gratuita. </para>
+</sect3>
+
+<sect3 id="tgdb">
+<title
+>TheGamesDB.net</title>
+<para
+><ulink url="http://thegamesdb.net"
+>TheGamesDB.net</ulink
+> es una base de datos en línea y abierta para los aficionados a los videojuegos. </para>
+</sect3>
+
+<sect3 id="mobygames">
+<title
+>MobyGames</title>
+<para
+><ulink url="https://www.mobygames.com"
+>MobyGames.com</ulink
+> se define a sí misma como la base de datos de videojuegos más antigua, más grande y más rigurosa. </para>
+</sect3>
+
+<sect3 id="igdb">
+<title
+>IGDB.com</title>
+<para
+><ulink url="https://www.igdb.com"
+>IGDB.com</ulink
+> se define a sí misma como un sitio web de juego para los amantes de los juegos. </para>
+</sect3>
+
+<sect3 id="videogamegeek">
+<title
+>VideoGameGeek</title>
+<para
+><ulink url="https://videogamegeek.com"
+>VideoGameGeek</ulink
+> es un recurso y una comunidad de videojuegos en línea. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of board game sources -->
+<sect2 id="boardgame-sources">
+<title
+>Fuentes de datos de juegos de mesa</title>
+
+<sect3 id="boardgamegeek">
+<title
+>BoardGameGeek</title>
+<para
+><ulink url="https://boardgamegeek.com"
+>BoardGameGeek</ulink
+> es un recurso y una comunidad de juegos de mesa en línea. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of coin sources -->
+<sect2 id="coin-sources">
+<title
+>Fuentes de datos de monedas y sellos</title>
+
+<sect3 id="colnect">
+<title
+>Colnect</title>
+<para
+><ulink url="https://colnect.com"
+>Colnect</ulink
+> es una comunidad en línea para artículos coleccionables que proporciona gestión de colecciones personales. &tellico; puede buscar información de monedas y sellos en Colnect. </para>
+</sect3>
+
+<sect3 id="numista">
+<title
+>Numista</title>
+<para
+><ulink url="https://numista.com"
+>Numista</ulink
+> es un catálogo de monedas del mundo que crece gracias a la contribución de sus miembros y que ofrece gestión de colecciones en línea, herramientas para realizar intercambios de forma fácil con otros coleccionistas y un foro. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="variety-type-sources">
+<title
+>Fuentes de datos para múltiples tipos de colecciones</title>
+
+<sect3 id="amazon-web-services">
+<title
+>Amazon.com</title>
+
+<para
+>Utilizando los servicios web de Amazon, &appname; puede buscar información en cualquiera de 14 sitios internacionales diferentes gestionados por <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>: Estados Unidos, Reino Unido, Alemania, Japón, Francia, Canadá, China, España, Italia, Brasil, Australia, India, México y Turquía. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="amazon-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Configurar cada fuente de Amazon.com implica tres ajustes: la localización del servidor, el tamaño de la imagen y la ID del asociado. Alguna información de <ulink url="http://amazon.com"
+>Amazon.com</ulink
+> puede incluir una imagen, como la portada de un libro o un video. Esa imagen puede descargarse en tres tamaños diferentes, dependiendo del objeto. La ID del asociado debe utilizarse para acceder a los servicios web de amazon, y se incluye en los enlaces al objeto, tal como se requiere en el acuerdo de licencia para el uso de los servicios web de Amazon. </para>
+
+<para
+>El acceso a la <ulink url="https://docs.aws.amazon.com/AWSECommerceService/latest/DG/Welcome.html"
+>API de Publicidad de Productos de Amazon</ulink
+> puede tener restricciones relacionadas con referencias de ventas o de publicidad. Consulte la documentación de Amazon para obtener más información cuando se inscriba para acceder a la API. </para>
+
+</sect3>
+
+<sect3 id="externalexec">
+<title
+>Scripts o aplicaciones externas</title>
+<para
+>Como forma más fácil de que &appname; integre complementos de terceros, se pueden utilizar scripts o aplicaciones externas como interfaz para buscar en otras fuentes de información. &appname; ejecutará una orden y transmitirá los términos de búsqueda como opciones de línea de órdenes. </para>
+
+<para
+>Algunos scripts se distribuyen con el propio  &appname;. <ulink url="http://python.org"
+>Python</ulink
+> es necesario para buscar en <ulink url="http://darkhorse.com"
+>Dark Horse Comics</ulink
+>, un editor de libros de cómics, por ejemplo. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="externalexec-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Debe establecerse el tipo de colección devuelto por el script, junto con el formato de datos. &appname; no solo puede importar datos de los scripts que usen el <link linkend="file-format"
+>formato &XML; predeterminado de &appname;</link
+>, sino que también puede importar otros formatos, como bibtex. </para>
+
+<para
+>La ruta completa a la aplicación debería introducirse en las opciones de la fuente. Tenga en cuenta que la aplicación se ejecuta en un sistema con los mismos permisos que el usuario actual, así que no use scripts de fuentes que no sean de confianza. Marque las casillas junto a las claves de búsqueda admitidas por la aplicación, e introduzca las opciones de línea de órdenes requeridas en la caja de edición. El valor de búsqueda será insertado donde aparezca <userinput
+>%1</userinput
+>. </para>
+
+<para
+>Para actualizar entradas que ya estén en la colección, las casillas de comprobación final y de edición se utilizan para determinar las opciones de la línea de órdenes. Deben introducirse los campos de entrada usados para encontrar una actualización, en el mismo formato que se utilizó para los campos de <link linkend="derived"
+>valor derivado</link
+>. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="multiple-sources">
+<title
+>Múltiples fuentes de datos combinadas</title>
+<para
+>Se pueden usar combinaciones de hasta ocho fuentes de datos existentes como una fuente única, donde cada resultado de la búsqueda de la primera fuente se actualiza desde las siguientes fuentes. Debe establecerse el tipo de colección que se utilizará antes de añadir fuentes. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="multiple-sources-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Solo se pueden usar en combinación las fuentes de datos existentes. Solo el tipo de búsqueda de la primera fuente se puede usar en esta fuente, ya que el resultado procede de la primera fuente de datos. Por ejemplo, se puede hacer primero una búsqueda en UPCitemDb, con la que cada resultado se actualiza después desde TheMovieDB. </para>
+</sect2>
+
+</sect1>
+
+</chapter>

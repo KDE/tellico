@@ -1,0 +1,696 @@
+<chapter id="hacking">
+<title
+>Hacking del &appname;</title>
+
+<para
+>En l'esperit del programari lliure, us convidem a fer hacking del &appname; tant com vulgueu. Haureu de ser capaç d'escriure scripts per a importar, exportar o modificar les dades amb molta facilitat. Aquest capítol us donarà més informació sobre com fer-ho. </para>
+
+<sect1 id="file-format">
+<title
+>Format de fitxer</title>
+
+<para
+>El fitxer de dades predeterminat del &appname; és un arxiu zip, normalment amb una extensió de fitxer <literal role="extension"
+>.tc</literal
+>. Dins del fitxer hi haurà un fitxer <filename
+>tellico.xml</filename
+> de nivell superior. Les imatges es poden incloure dins de la carpeta <filename
+>images/</filename
+> a l'arxiu, o es poden incloure directament a les dades &XML; en una codificació base64. Les imatges també es poden desar dins de la carpeta de dades de l'aplicació, en aquest cas, no restaran al fitxer de dades. El &appname; també pot carregar el fitxer &XML;, sense comprimir. </para>
+
+<sect2 id="xml-format">
+<title
+>Dades &XML;</title>
+
+ 
+
+<sect3 id="coll-xml-data">
+<title
+>Col·lecció</title>
+<programlisting
+><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V11.0//EN" "http://periapsis.org/tellico/dtd/v11/tellico.dtd">
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="Els meus llibres" type="2">
+ </collection>
+</tellico>
+]]>
+</programlisting>
+
+<para
+>El fitxer comença amb la declaració i la codificació &XML; requerides, seguides pel tipus de document. Quan s'afegeix un nou tipus de camp o s'estableixen propietats addicionals en els camps predeterminats, s'incrementarà la versió del tipus de document DTD. El &appname; sempre és capaç d'obrir i llegir qualsevol versió anterior de DTD, però desarà els fitxers en la versió actual. La ubicació de DTD apunta a un fitxer DTD real. </para>
+
+<para
+>L'element de nivell superior és un element <markup
+>&lt;tellico&gt;</markup
+>, que conté la declaració predeterminada d'espai de noms i la versió de la sintaxi del fitxer, el qual sempre haurà de coincidir amb el DTD. </para>
+
+<para
+>L'element <markup
+>&lt;tellico&gt;</markup
+> conté un element <markup
+>&lt;collection&gt;</markup
+>. Les col·leccions múltiples seran ignorades, per ara. L'atribut <markup
+>title</markup
+> conté el títol de la col·lecció, mentre que <markup
+>type</markup
+> especifica quin tipus d'entrades es troben a la col·lecció. Els tipus permesos estan <link linkend="collection-type-values"
+>llistats en una secció posterior</link
+>. Un atribut opcional <markup
+>entryTitle</markup
+> es pot utilitzar per a especificar el títol de les entrades per a una col·lecció personalitzada, i hauria de ser plural. </para>
+</sect3>
+
+<sect3 id="fields-xml-data">
+<title
+>Camps</title>
+
+<programlisting
+><![CDATA[
+  <fields>
+   <field flags="8" title="Title" category="General" format="1" type="1" name="title" />
+   <field flags="7" title="Author" category="General" format="2" type="1" name="author" />
+   <field flags="2" title="Binding" category="General" allowed="Hardback;Paperback;Trade Paperback;E-Book;Magazine;Journal" format="4" type="3" name="binding" >
+    <prop name="default"
+>Revista</prop>
+   </field>
+   <field flags="6" title="Publisher" category="Publishing" format="0" type="1" name="publisher" />
+   <field flags="4" title="Edition" category="Publishing" format="0" type="1" name="edition" />
+   <field flags="3" title="Copyright Year" category="Publishing" format="4" type="6" name="cr_year" />
+   <field flags="2" title="Publication Year" category="Publishing" format="4" type="6" name="pub_year" />
+   <field flags="0" title="ISBN#" category="Publishing" format="4" type="1" name="isbn" description="International Standard Book Number" />
+   <field flags="7" title="Genre" category="Classification" format="0" type="1" name="genre" />
+   <field flags="7" title="Keywords" category="Classification" format="0" type="1" name="keyword" />
+   <field flags="0" title="Front Cover" category="Front Cover" format="4" type="10" name="cover" />
+   <field flags="0" title="Comments" category="Personal" format="4" type="1" name="comments" />
+   <field title="Rating" flags="2" category="Personal" format="4" type="14" name="rating">
+    <prop name="maximum"
+>5</prop>
+    <prop name="minimum"
+>1</prop>
+   </field>
+   <field title="ID" flags="32" category="Personal" format="4" type="6" name="id">
+    <prop name="template"
+>%{@id}</prop>
+   </field>
+
+  </fields>
+]]>
+</programlisting>
+
+<para
+>Tots els camps es defineixen dins d'un element <markup
+>&lt;fields&gt;</markup
+>, del qual sols n'hi pot haver un. Tota la informació per a un camp, amb excepció de les propietats, s'inclou com a atributs de l'element <markup
+>&lt;field&gt;</markup
+>. Els valors permesos per als atributs <markup
+>flags</markup
+>, <markup
+>format</markup
+> i <markup
+>type</markup
+> es donen en una <link linkend="field-type-values"
+>secció següent</link
+>. </para>
+
+<para
+>Les propietats del camp s'utilitzen per a establir els valors predeterminats per al camp, els intervals dels valors de puntuació, plantilles dels valors derivats, &etc; Els exemples anteriors inclouen un valor predeterminat, un valor de puntuació màxim, i una plantilla per a un camp ID derivat. </para>
+
+ 
+
+</sect3>
+
+<sect3 id="entries-xml-data">
+<title
+>Entrades</title>
+
+<programlisting
+><![CDATA[
+  <entry>
+   <title
+>El llenguatge de programació C++</title>
+   <authors>
+    <author
+>Stroustrup, Bjarne</author>
+   </authors>
+   <publisher
+>Addison-Wesley Pub Co</publisher>
+   <edition
+>3a</edition>
+   <pub_year
+>1997</pub_year>
+   <isbn
+>0-201-88954-4</isbn>
+   <genres>
+    <genre
+>No ficció</genre>
+   </genres>
+   <keywords>
+    <keyword
+>Programming</keyword>
+    <keyword
+>Computers</keyword>
+   </keywords>
+   <cover
+>cf65a2f023b6cb9e9233323dca10ac7c.jpeg</cover>
+  </entry>
+]]>
+</programlisting>
+
+<para
+>Per a cada camp a la col·lecció, una <markup
+>&lt;entrada&gt;</markup
+> pot contenir un element que el seu nom és idèntic al nom del camp. Si es permeten múltiples valors per al camp, llavors la lletra <emphasis
+>s</emphasis
+> serà afegida al nom del camp per a crear un element, i cada valor serà afegit com un fill de l'element, com en el cas dels camps autor, gènere i paraules clau anteriors. </para>
+
+<para
+>Com a resultat, si s'afegeixen camps addicionals a la col·lecció, el fitxer de dades ja no restarà conforme al DTD. No obstant això, el &appname;utilitza un analitzador &XML; sense validar, de manera que els camps addicionals no causaran problemes. </para>
+</sect3>
+
+<sect3 id="images-xml-data">
+<title
+>Imatges</title>
+<programlisting
+><![CDATA[
+  <images>
+   <image width="111" format="JPEG" height="140" id="cf65a2f023b6cb9e9233323dca10ac7c.jpeg" />
+  </images>
+]]>
+</programlisting>
+
+<para
+>Dins de l'element <markup
+>&lt;images&gt;</markup
+>, cada imatge farà referència a una entrada a la llista, juntament amb els atributs que descriuen la mida, format, i ID de la imatge. Si la imatge està continguda dins del fitxer Zip, l'element restarà buit. En cas contrari, les dades d'imatge podran estar contingudes a l'XML com a text codificat en base64. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-type-values">
+<title
+>Els valors de Tipus de col·lecció</title>
+
+<para
+>El tipus de col·lecció ve donat en l'atribut «type» de l'element de la col·lecció. El valor és igual que el valor d'enumeració de <type
+>Type</type
+> a <filename
+>src/collection.h</filename
+>. </para>
+
+<table>
+<title
+>Els valors de Tipus de col·lecció</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tipus de col·lecció</entry>
+<entry
+>Valor</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Col·lecció personalitzada</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Col·lecció de llibres</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Col·lecció de vídeos</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Col·lecció de música</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Bibliografia</entry
+><entry
+>5</entry
+></row>
+<row
+><entry
+>Col·lecció de còmics</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>Col·lecció de vins</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Col·lecció de monedes</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Col·lecció de segells</entry
+><entry
+>9</entry
+></row>
+<row
+><entry
+>Col·lecció de targetes comercials</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Col·lecció de videojocs</entry
+><entry
+>11</entry
+></row>
+<row
+><entry
+>Catàleg de fitxers</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Col·lecció de jocs de taula</entry
+><entry
+>13</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="field-type-values">
+<title
+>Els valors de Tipus de camp</title>
+
+<para
+>El &appname; inclourà tots els camps predeterminats per a una col·lecció si el primer element del camp s'anomena <emphasis
+>_default</emphasis
+>. Per als camps <emphasis
+>Paràgraf</emphasis
+>, <emphasis
+>Taula</emphasis
+> o <emphasis
+>Imatge</emphasis
+>, la categoria de camp haurà de ser idèntica al títol del camp. </para>
+
+<para
+>El tipus de camp es dona en l'atribut «type» de l'element del camp. El valor serà igual que el valor d'enumeració <type
+>FieldType</type
+> a <filename
+>src/field.h</filename
+>. </para>
+
+<table>
+<title
+>Els valors de Tipus de camp</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tipus de camp</entry>
+<entry
+>Valor</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Text pla</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Paràgraf</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Opció</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Casella de selecció</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Número</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>&URL;</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Taula</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Imatge</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Data</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Puntuació</entry
+><entry
+>14</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>El camp pot tenir establertes diferents etiquetes, donades com a un valor de bit amb OR a l'atribut «flags» en l'element «field». L'etiqueta per a prevenir que l'usuari suprimeixi un camp està destinada a coses com la clau de cita per a registres bibliogràfics. </para>
+
+<table>
+<title
+>Els valors de l'etiqueta de camp</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Etiquetes de camp</entry>
+<entry
+>Valor</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Permet múltiples valors</entry
+><entry
+><constant
+>0x01</constant
+></entry
+></row>
+<row
+><entry
+>Permet agrupament</entry
+><entry
+><constant
+>0x02</constant
+></entry
+></row>
+<row
+><entry
+>Permet compleció</entry
+><entry
+><constant
+>0x04</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>No permetre eliminar</emphasis
+></entry
+><entry
+><constant
+>0x08</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>No permetre editar</emphasis
+></entry
+><entry
+><constant
+>0x10</constant
+></entry
+></row>
+<row
+><entry
+>Valor derivat</entry
+><entry
+><constant
+>0x20</constant
+></entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>El format del camp es dona en l'atribut «format» en l'element «field». El <emphasis
+>format de la data</emphasis
+> no s'utilitza actualment. Agrupar per <emphasis
+>persones</emphasis
+> utilitza tots els camps que utilitzen el <emphasis
+>format del nom</emphasis
+>. Establir l'etiqueta <emphasis
+>Valor derivat</emphasis
+> implica que el valor per al camp és generat a partir de la propietat de la plantilla a partir d'altres valors de camp. </para>
+
+<table>
+<title
+>Els valors de Format del camp</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Format del camp</entry>
+<entry
+>Valor</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Només posar en majúscula la primera lletra</entry
+><entry
+>0</entry
+></row>
+<row
+><entry
+>Format del títol</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Format del nom</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+><emphasis
+>Format de la data</emphasis
+></entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Sense format</entry
+><entry
+>4</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="hidden-options">
+<title
+>Opcions ocultes de la configuració</title>
+
+<para
+>El &appname; té algunes opcions de configuració addicionals que no són visibles en el <interface
+>diàleg de configuració</interface
+>. No són prou importants per a justificar que saturin el diàleg amb més opcions, però ja que representen opcions que poden resultar interessants per a diversos usuaris, l'aplicació les llegeix des del fitxer de configuració. </para>
+
+<para
+>Les opcions del &appname; es desen en un fitxer a la carpeta d'inici de l'usuari, anomenada <filename
+>$<envar
+>KDEHOME</envar
+>/share/config/tellicorc</filename
+>. Dins d'aquest fitxer, les opcions es posen en grups, els quals apareixen amb els noms entre claudàtors, com [General Options]. Per a afegir una opció al grup <emphasis
+>General Options</emphasis
+>, trobeu la línia al fitxer de configuració amb aquest nom de grup. Si no apareix, llavors creu-la afegint una línia que digui [General Options]. Llavors, podreu afegir l'opció a sota del nom de grup. </para>
+
+<sect2 id="hidden-general-options">
+<title
+>[General Options]</title>
+
+<para
+>Aquestes opcions s'han de col·locar al grup <emphasis
+>General Options</emphasis
+>. </para>
+
+<sect3>
+<title
+>Mida màxima de les icones</title>
+
+<para
+>La mida màxima de les icones en la <interface
+>Vista d'icones</interface
+> es poden canviar amb aquesta opció. El valor per omissió és 96. La mida haurà d'estar a l'interval de 32 a 512. </para>
+</sect3>
+
+<sect3>
+<title
+>Exemple</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Mida de la memòria cau de les icones</title>
+
+<para
+>El nombre màxim d'icones en la memòria cau es pot canviar amb aquesta opció. Per omissió és 1000. </para>
+</sect3>
+
+<sect3>
+<title
+>Exemple</title>
+<informalexample>
+<para
+><userinput
+>Icon Cache Size=100</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Exemple</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Mida de la memòria cau de les imatges</title>
+
+<para
+>La quantitat màxima de memòria en bytes utilitzada per a emmagatzemar en memòria cau totes les imatges es pot canviar amb aquesta opció. El valor per omissió és 67108864. </para>
+</sect3>
+
+<sect3>
+<title
+>Exemple</title>
+<informalexample>
+<para
+><userinput
+>Image Cache Size=256000000</userinput
+></para>
+</informalexample>
+</sect3>
+
+</sect2>
+
+<sect2 id="hidden-bibtex-options">
+<title
+>[Options - bibtex]</title>
+
+<para
+>Aquestes opcions s'han de col·locar al grup <emphasis
+>Options - bibtex</emphasis
+>. </para>
+
+<sect3>
+<title
+>lyxpipe</title>
+
+<para
+>Aquesta opció és per a la ubicació de la lyxpipe per a l'enviament de cites bibliogràfiques. No ha d'incloure el sufix <literal role="extension"
+>.in</literal
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Exemple</title>
+<informalexample>
+<para
+><userinput
+>lyxpipe=$HOME/.lyx/lyxpipe</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
+
+</sect1>
+
+<sect1 id="bibtex-translation">
+<title
+>Traducció de caràcters «bibtex»</title>
+
+<para
+>Quan s'importin o exportin els fitxers de «bibtex», alguns caràcters es traduiran entre els seus equivalents TeX i els caràcters Unicode. Aquestes assignacions de caràcters estan contingudes en el fitxer <filename
+>bibtex-translation.xml</filename
+>, ubicat al directori d'instal·lació de les dades. Les assignacions es poden modificar, com vulgueu. L'element «key» contindrà el caràcter Unicode, i els elements «string» contindran els equivalents TeX, els quals podran ser una combinació d'un-a-molts. La primera serà la que s'utilitzi per a exportar a «bibtex». </para>
+
+<programlisting
+><![CDATA[
+  <key char="À">
+    <string
+>{\`A}</string>
+    <string
+>\`{A}</string>
+  </key>
+]]>
+</programlisting>
+
+</sect1>
+
+<sect1 id="xslt-tricks">
+<title
+>Consells XSLT</title>
+
+<para
+>Aquests són alguns consells per a escriure XSLT per a analitzar les dades en &XML; del &appname;: (encara s'ha d'escriure). </para>
+</sect1>
+
+</chapter>

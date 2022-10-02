@@ -1,0 +1,576 @@
+<chapter id="importing-exporting">
+<title
+>Importar i exportar dades</title>
+
+<para
+>El &appname; és capaç d'importar i exportar una gran varietat de fitxers de dades, així com cercar informació a diversos llocs de cerca d'Internet. </para>
+
+<sect1 id="internet-search">
+<title
+>Importar des d'Internet</title>
+<para
+>El &appname; és capaç de cercar a diversos llocs d'Internet utilitzant el <interface
+>diàleg Cerca a Internet</interface
+>. Les entrades es poden importar i afegir directament a la vostra col·lecció actual. Els diferents proveïdors es configuren mitjançant les <link linkend="data-sources-options"
+>Opcions de les fonts de dades</link
+>. </para>
+
+<para
+>Les cerques poden utilitzar diferents criteris: .<guilabel
+>Títol</guilabel
+>, <guilabel
+>Persona</guilabel
+>, <guilabel
+>ISBN</guilabel
+>, <guilabel
+>UPC/EAN</guilabel
+>, <guilabel
+>LCCN</guilabel
+> o <guilabel
+>Paraula clau</guilabel
+>. No tots els criteris estaran disponibles per a certes fonts de dades. Els valors <acronym
+>ISBN</acronym
+> i <acronym
+>LCCN</acronym
+> sols serveixen per a un llibre, mentre que els valors <acronym
+>UPC</acronym
+> o <acronym
+>EAN</acronym
+> poden aplicar-se a qualsevol tipus d'element.</para>
+
+<para
+>Una vegada s'ha iniciat una cerca, el botó <guibutton
+>Cerca</guibutton
+> es convertirà en <guibutton
+>Atura</guibutton
+> per a aturar una cerca. A mesura que es trobin resultats, s'afegiran a la llista directament sota el quadre de cerca, on la selecció d'un element mostrarà el resultat sense necessitat d'afegir-lo a la col·lecció. Fent clic al botó <guibutton
+>Afegeix una entrada</guibutton
+> s'afegiran tots els elements seleccionats a la vostra col·lecció. Si la font de dades té més resultats dels que es van sol·licitar inicialment, el botó <guibutton
+>Obtén més resultats</guibutton
+> esdevindrà actiu. Fent clic a <guibutton
+>Neteja</guibutton
+> s'eliminaran tots els resultats actuals i es tornarà a iniciar la cerca. </para>
+
+<screenshot>
+<screeninfo
+>El <interface
+>diàleg Cerca a Internet</interface
+> del &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fetch-dialog.png"/></imageobject>
+<textobject
+><phrase
+>El <interface
+>diàleg Cerca a Internet</interface
+> del &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Sols es trobaran les entrades que coincideixin amb el tipus de la col·lecció actual. La columna <guilabel
+>Descripció</guilabel
+> proporciona informació addicional sobre l'entrada, per tal de diferenciar entre els vídeos en diferents formats o llibres en enquadernacions diferents, per exemple. Una vegada s'ha afegit amb èxit una entrada a la col·lecció, s'afegirà una marca de selecció a la primera columna de la llista. </para>
+
+<para
+>Es poden afegir entrades múltiples utilitzant el mètode estàndard del &kde; per a la selecció múltiple, el qual normalment implica mantenir premuda la tecla &Maj; o &Ctrl; quan es fa clic sobre un element. </para>
+
+<para
+>Per a facilitar l'ús d'escàners de codi de barres, les cerques poden incloure múltiples valors d'ISBN/UPC. Seleccionar la casella de selecció <guilabel
+>Cerca múltiple ISBN/UPC</guilabel
+> es desactivarà el quadre de cerca i s'activarà el botó <guibutton
+>Edita els valors ISBN/UPC...</guibutton
+>, el qual obrirà un quadre d'entrada de text multilínia. Cada valor ISBN s'ha d'introduir en una mateixa línia. Després de tancar el quadre, cada valor ISBN serà validat per a un format correcte. La validació ISBN és capaç de convertir valors EAN de 13 dígits, així com codis <acronym
+>UPC</acronym
+> complets per al format correcte. La llista ISBN també es pot llegir des d'un fitxer de text. </para>
+
+</sect1>
+
+<sect1 id="importing">
+<title
+>Importar dades</title>
+
+<para
+>El &appname; ofereix tres accions diferents quan s'importen dades. <guilabel
+>Substitueix la col·lecció actual</guilabel
+> tancarà la col·lecció actual i en crearà una de nova amb les dades del fitxer importat. <guilabel
+>Annexa a la col·lecció actual</guilabel
+> li diu al &appname; que afegeixi totes les entrades de la col·lecció importada a l'actual i que afegeixi els camps que actualment no existeixen. L'acció <guilabel
+>Fusiona la col·lecció</guilabel
+> és la mateixa que afegir, excepte que cada entrada importada es compara amb les actuals, i les entrades idèntiques seran omeses. El &appname; intenta identificar les entrades coincidents que no són completament idèntiques comparant camps significatius i, a continuació, combinarà les entrades. Per exemple, en les col·leccions de música es comparen l'artista i l'àlbum, i les pistes es fusionaran per a les entrades coincidents. L'<link linkend="importing-audio-files"
+>importador de fitxers d'àudio</link
+> és capaç de construir correctament les llistes de pistes mitjançant la fusió de les entrades. </para>
+
+<sect2 id="alternate-software">
+<title
+>Importar des d'un altre programari</title>
+
+<para
+>El &appname; pot importar dades directament des d'una varietat d'altres programes de gestió de col·leccions, incloent-hi el <application
+><ulink url="http://www.gcstar.org"
+>GCstar</ulink
+></application
+>, <application
+><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
+>Alexandria</ulink
+></application
+>, <application
+><ulink url="https://www.delicious-monster.com"
+>Delicious Library</ulink
+></application
+>, <application
+><ulink url="https://www.collectorz.com"
+>Collectorz</ulink
+></application
+>, <application
+><ulink url="http://www.antp.be/software/moviecatalog/"
+>Ant Movie Catalog</ulink
+></application
+>, <application
+><ulink url="https://en.wikipedia.org/wiki/Referencer"
+>Referencer</ulink
+></application
+> i <application
+><ulink url="https://launchpad.net/griffith"
+>Griffith</ulink
+></application
+>.</para>
+
+</sect2>
+
+<sect2 id="import-data-files">
+<title
+>Importar dades d'altres formats de dades</title>
+<para
+>El &appname; pot importar dades des d'altres formats de fitxer, inclosos el <acronym
+>CSV</acronym
+>, bibtex, discs i fitxers d'àudio, <acronym
+>MODS</acronym
+>, &PDF; i <acronym
+>RIS</acronym
+>.</para>
+
+<sect3 id="importing-tellico">
+<title
+>Importar dades del &appname;</title>
+
+<para
+>Es poden importar altres fitxers de dades directament des del &appname;. Substituir la col·lecció actual important un fitxer del &appname; és el mateix que obrir el fitxer en si. El valor de la importació de dades del &appname; és principalment per a afegir o fusionar dues col·leccions. </para>
+</sect3>
+
+<sect3 id="importing-csv">
+<title
+>Importar dades CSV</title>
+
+<para
+>Els valors separats per comes (<acronym
+>CSV</acronym
+>) són una forma comuna d'importació i exportació de dades tabulars. Cada valor de camp està separat per una coma, amb una entrada per línia. Els títols dels camps es poden incloure a la primera línia. L'importador CSV no es limita a utilitzar una coma com a separador. Es pot utilitzar qualsevol caràcter o cadena. </para>
+
+<screenshot>
+<screeninfo
+>El diàleg d'importació CSV</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="csv-dialog.png"/></imageobject>
+<textobject
+><phrase
+>El diàleg d'importació CSV</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Primer, seleccioneu el tipus de col·lecció que importareu. Si l'esteu afegint o fusionant a la vostra col·lecció oberta, el tipus es limita al vostre tipus de col·lecció actual. Si la primera línia del fitxer CSV conté els títols dels camps, feu clic a la casella de selecció i l'importador els compararà automàticament contra els camps a la col·lecció actual. Si un títol de camp coincideix, la capçalera per a aquesta columna canviarà per a mostrar que la columna ha estat assignada a aquest camp. Si el fitxer utilitza un delimitador diferent de la coma, assegureu-vos de canviar aquesta opció en conseqüència. </para>
+
+<para
+>Perquè el &appname; importi correctament el fitxer, haurà de saber quin camp correspon a cada columna. <emphasis
+>Si la columna sols té un número a la capçalera, les dades en aquesta columna no s'importaran.</emphasis
+> Haureu d'assignar camps a cada columna seleccionant una columna fent clic sobre seu o canviant el número de la columna en si, llavors seleccioneu el camp a assignar-li des de la llista desplegable i feu clic al botó <guibutton
+>Assigna camp</guibutton
+>. Si cal afegir un nou camp a la col·lecció, l'últim element de la llista desplegable obre el <link linkend="fields-dialog"
+><interface
+>diàleg Camps de la col·lecció</interface
+></link
+>. </para>
+
+<para
+>Perquè sigui compacte, en el diàleg només es mostraran les primeres cinc línies del fitxer CSV importat. No obstant això, s'importaran totes les línies que hi hagi al fitxer. </para>
+
+</sect3>
+
+<sect3 id="importing-audio">
+<title
+>Importar dades d'un &CD; d'àudio</title>
+
+<para
+>El &appname; és capaç d'utilitzar el servei <ulink url="http://freedb.org"
+>freedb.org</ulink
+> per a cercar informació sobre un &CD;, incloent-hi la llista de les pistes. Depenent de la vostra distribució, l'arranjament per a accedir al servei es pot establir en &systemsettings; del &kde;. S'afegiran l'artista, el títol, el gènere, l'any i llista de les pistes del &CD;. </para>
+
+<para
+>A més, si el disc conté &CD;-Text, aquesta informació serà llegida i afegida a l'entrada importada. </para>
+</sect3>
+
+<sect3 id="importing-audio-files">
+<title
+>Importar metadades dels fitxers d'àudio</title>
+
+<para
+>El &appname; és capaç d'escanejar una carpeta i llegir les etiquetes per als formats de fitxer d'àudio més comuns, com <literal role="extension"
+>mp3</literal
+> i <literal role="extension"
+>ogg</literal
+>. Les cançons s'introdueixen en una col·lecció de música, on cada entrada és un àlbum. Si els fitxers de música contenen el número de pista, el nom de la cançó serà inserit al lloc correcte a la llista de pistes. La informació sobre l'artista i el gènere també s'afegiran a l'entrada. Si les etiquetes de les cançons contenen comentaris, aquests seran afegits al camp de comentaris de l'entrada, precedida pel nom del fitxer. </para>
+
+<para
+>A més, si una carpeta conté un fitxer <filename
+>.directory</filename
+> i el nom de la carpeta coincideix amb un títol de l'àlbum, l'entrada <literal
+>Icon</literal
+> al fitxer d'escriptori s'utilitzarà com a imatge de portada per a l'àlbum. </para>
+
+<para
+>L'importador de metadades dels fitxers d'àudio pot explorar de forma recursiva una carpeta per a trobar tots els fitxers d'àudio en qualsevol subcarpeta, no se seguiran els enllaços simbòlics. El &appname; utilitza la <ulink url="https://taglib.org"
+>biblioteca TagLib</ulink
+> per a llegir les metadades dels fitxers d'àudio, de manera que podreu importar dades de qualsevol tipus de fitxer que entengui TagLib. </para>
+
+</sect3>
+
+<sect3 id="importing-bibtex">
+<title
+>Importar dades de «bibtex»</title>
+
+<para
+>«<ulink url="http://en.wikipedia.org/wiki/Bibtex"
+>Bibtex</ulink
+>» és un format de bibliografia utilitzat amb el sistema de preparació de documents LaTeX. Es poden incloure diferents tipus de referències bibliogràfiques en el fitxer. El &appname; importarà els fitxers «bibtex» com a una col·lecció bibliogràfica. </para>
+
+<para
+>Si l'importador «bibtex» troba camps en el fitxer que no es troben a la col·lecció bibliogràfica predeterminada, llavors seran afegits com a camps <link linkend="line"
+>Text pla</link
+>, amb dues excepcions. Si el valor del camp conté més de 100 caràcters, es convertirà en un camp <link linkend="para"
+>Paràgraf</link
+>. Si el valor del camp sembla contenir un &URL; o una referència de fitxer, llavors es crearà un camp <link linkend="url"
+>&URL;</link
+>. El &appname; utilitza una còpia interna de la <ulink url="http://www.gerg.ca/software/btOOL/"
+>biblioteca btparse</ulink
+> per a analitzar els fitxers «bibtex». </para>
+
+<para
+>«<ulink url="http://bibtexml.sf.net"
+>Bibtexml</ulink
+>» és una representació &XML; de les dades «bibtex», i les dades del fitxer «bibtexml» importat es tracten de la mateixa manera com ho serien les dades de «bibtex». </para>
+</sect3>
+
+<sect3 id="importing-mods">
+<title
+>Importar dades de «MODS»</title>
+
+<para
+><acronym
+><ulink url="http://www.loc.gov/standards/mods/"
+>MODS</ulink
+></acronym
+> és un format per a la representació de diferents tipus de col·leccions multimèdia. Actualment, sols s'importen els llibres per al &appname;, com una <link linkend="bibliography"
+>col·lecció bibliogràfica</link
+>. </para>
+
+</sect3>
+
+<sect3 id="importing-pdf">
+<title
+>Importar dades de &PDF;</title>
+<para
+>Si el &appname; es va compilar amb suport <emphasis
+>exempi</emphasis
+> o <emphasis
+>poppler</emphasis
+>, les metadades dels fitxers &PDF; es podran importar. Les metadades poden incloure informació sobre el títol, l'autor, i la data, així com identificadors bibliogràfics que després s'utilitzaran per a actualitzar d'altra informació. </para>
+</sect3>
+
+<sect3 id="importing-ris">
+<title
+>Importar dades de «RIS»</title>
+<para
+>El <ulink url="https://en.wikipedia.org/wiki/RIS_(file_format)"
+>format <acronym
+>RIS</acronym
+></ulink
+> és un format de fitxer bibliogràfic utilitzat per <application
+>Reference Manager</application
+> i altres. El &appname; importa fitxers RIS com a una col·lecció bibliogràfica. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="import-online-collection">
+<title
+>Importar col·leccions en línia</title>
+<para
+>El &appname; es pot connectar i importar des de llocs web que gestionen col·leccions personals.</para>
+
+<sect3 id="importing-boardgamegeek">
+<title
+>Importar col·leccions de BoardGameGeek</title>
+<para
+><ulink url="https://boardgamegeek.com"
+>BoardGameGeek</ulink
+> és un recurs en línia i comunitat de jocs de taula. El &appname; pot importar els jocs de taula a la col·lecció de l'usuari, sempre que la col·lecció estigui establerta com d'accés públic. La col·lecció importada podrà limitar-se als elements marcats com en propietat. </para>
+</sect3>
+
+<sect3 id="importing-goodreads">
+<title
+>Importar col·leccions de «Goodreads»</title>
+<para
+><ulink url="https://www.goodreads.com"
+>Goodreads</ulink
+> és una xarxa social en línia perquè els lectors segueixin les seves col·leccions de llibres. El &appname; pot importar la llista de llibres a la col·lecció d'un usuari, ja sigui el nom com la identificació d'usuari, sempre que la col·lecció resti ajustada de manera que sigui accessible públicament. </para>
+</sect3>
+
+<sect3 id="importing-librarything">
+<title
+>Importar col·leccions de «LibraryThing»</title>
+<para
+><ulink url="https://www.librarything.com"
+>LibraryThing</ulink
+> és un servei en línia per a ajudar les persones a catalogar els seus llibres amb facilitat. El &appname; pot importar la llista de llibres que hi ha a la col·lecció d'un usuari, <ulink url="https://www.librarything.com/export.php?export_type=json"
+>exportada en el format JSON</ulink
+>. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="importing-file-listing">
+<title
+>Importar llistes de fitxers</title>
+
+<para
+>La millor manera de crear un <link linkend="file-catalog"
+>catàleg de fitxers</link
+> és importar el contingut d'una carpeta. La carpeta es pot cercar de manera recursiva, per a afegir tots els fitxers que es trobin al seu interior. Aquest importador és més útil per a les llistes de còpia de seguretat i suports de catalogació, com llistats de &CD; o <acronym
+>DVD</acronym
+>. A més, es poden generar les vistes prèvies de les imatges contingudes al fitxer, tot i que podria portar el seu temps llegir un gran nombre de fitxers. Les vistes prèvies de fitxers són les mateixes que es mostren al gestor de fitxers del &kde;. </para>
+</sect2>
+
+<sect2 id="importing-xslt">
+<title
+>Importar dades &XML; mitjançant &xslt;</title>
+
+<para
+>Es pot importar qualsevol fitxer &XML; al &appname; proporcionant un full d'estil &XSL; disponible per a convertir el fitxer al format del &appname;. El &appname; carregarà automàticament el full d'estil i realitzarà el processament &xslt; necessari per a carregar el fitxer. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="drag-n-drop">
+<title
+>Arrossegar i deixar anar</title>
+
+<para
+>Arrossegar fitxers de dades a la finestra principal del &appname; i deixar-los anar importarà aquests fitxers, com si se seleccionés l'<link linkend="importing"
+>ordre importa</link
+> des dels menús. Arrossegar i deixar anar funciona per als següents formats de fitxer: Tellico, Bibtex, RIS i &PDF;. També està implementada la importació des de múltiples fitxers alhora.</para>
+
+<para
+>De manera que si voleu catalogar diversos <link linkend="importing-pdf"
+>fitxers &PDF;</link
+>, seleccioneu-los al gestor de fitxers i arrossegueu-los a la finestra del &appname;. El &appname; importarà tantes metadades dels fitxers com pugui, i després cercarà informació addicional des de diverses fonts d'Internet configurades.</para>
+
+</sect1>
+
+<sect1 id="exporting">
+<title
+>Exportar les dades</title>
+
+<para
+>En exportar les dades de la col·lecció, els valors d'entrada es poden exportar com es van introduir, o amb el <link linkend="field-formatting"
+>format automàtic</link
+> proporcionat pel &appname;. A més, l'exportació es pot limitar a les entrades seleccionades de la col·lecció, on la <link linkend="status-bar"
+>barra d'estat</link
+> indicarà el nombre d'entrades seleccionades. </para>
+
+<para
+>Els fitxers de text exportats, com Bibtex o CSV, poden utilitzar la codificació de caràcters Unicode (UTF-8), o la configuració regional actual del sistema operatiu. </para>
+
+<screenshot>
+<screeninfo
+>Opcions generales de l'exportació</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-options.png"/></imageobject>
+<textobject
+><phrase
+>Opcions generales de l'exportació</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="exporting-xml">
+<title
+>Exportar a &XML;</title>
+
+<para
+>El format de fitxer per a les dades del &appname; és un fitxer &XML; comprimit. L'exportació a &XML; es limita a crear el fitxer &XML; sense comprimir-lo. Les imatges es poden incloure en el fitxer &XML; com a dades codificades en base64 en un element d'imatge, però això pot crear fitxers de text molt grans. </para>
+</sect2>
+
+<sect2 id="exporting-zip">
+<title
+>Exportar a Zip</title>
+
+<para
+>El format de fitxer estàndard per al &appname; és un fitxer comprimit, que contindrà el fitxer de col·lecció &XML;, i de manera opcional, totes les imatges referenciades a la col·lecció. Si les imatges s'emmagatzemen a la carpeta de l'aplicació, exportar a un fitxer Zip crearà un fitxer de dades independent, el qual inclourà totes les imatges de la col·lecció. </para>
+</sect2>
+
+<sect2 id="exporting-html">
+<title
+>Exportar a &HTML;</title>
+
+<para
+>L'exportació &HTML; utilitza el full d'estil <filename
+>tellico2html.xsl</filename
+>. Les imatges s'exporten a una carpeta amb el mateix nom que el fitxer &HTML; exportat amb <emphasis
+><filename
+>_files</filename
+></emphasis
+> adjuntat. </para>
+
+<para
+>El format predeterminat és similar a la sortida impresa, i permet diverses opcions per a modificar el codi &HTML;. Les capçaleres dels camps es poden imprimir a la part superior de cada columna, però malauradament, el &kde; no permet encara que es repeteixi cap capçalera de taula a cada pàgina. Les entrades també es poden agrupar com a la <interface
+>Vista de grup</interface
+>. </para>
+
+<para
+>A més, els fitxers individuals es poden crear per a cada entrada de la col·lecció, amb enllaços creats al fitxer &HTML; de nivell superior. Els fitxers d'entrada seran creats a la mateixa carpeta que les imatges. Els fitxers &HTML; d'entrada utilitzaran la plantilla de full d'estil actual, com es mostra en la <interface
+>Vista d'entrada</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>Opcions de l'exportació a &HTML;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-html.png"/></imageobject>
+<textobject
+><phrase
+>Opcions de l'exportació a &HTML;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-csv">
+<title
+>Exportar a CSV</title>
+
+<para
+>Els valors separats per comes (CSV) són una manera comuna d'importació i exportació de dades tabulars. Cada valor de camp està separat per una coma, amb una entrada per línia. Els títols dels camps es poden incloure com a capçaleres en la primera línia. Per a delimitar els camps també es pot utilitzar qualsevol caràcter o cadena que no sigui una coma. </para>
+
+<screenshot>
+<screeninfo
+>Opcions de l'exportació a CSV</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-csv.png"/></imageobject>
+<textobject
+><phrase
+>Opcions de l'exportació a CSV</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-alexandria">
+<title
+>Exportar a «Alexandria»</title>
+
+<para
+><application
+><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
+>Alexandria</ulink
+></application
+> és un gestor de col·lecció de llibres per a l'entorn d'escriptori <ulink url="https://www.gnome.org"
+>GNOME</ulink
+>. El &appname; és capaç d'exportar un subconjunt limitat de camps de col·lecció de llibres a la ubicació predeterminada de les dades d'Alexandria. </para>
+
+</sect2>
+
+<sect2 id="exporting-onix">
+<title
+>Exportar a «ONIX»</title>
+
+<para
+><ulink url="http://www.editeur.org/onix.html"
+>ONIX</ulink
+> és un format &XML; per a representar i comunicar informació sobre productes de la indústria del llibre, principalment per als venedors de llibres. El &appname; pot exportar col·leccions de llibres utilitzant un petit subconjunt d'ONIX. </para>
+
+</sect2>
+
+<sect2 id="exporting-bibtex">
+<title
+>Exportar a «bibtex»</title>
+
+<para
+>Quan s'exporta a <ulink url="http://en.wikipedia.org/wiki/Bibtex"
+>Bibtex</ulink
+>, els valors dels camps es poden tancar amb marques de claus o cometes. Si s'utilitzen macros de cadena a la col·lecció, de manera opcional es poden exportar com a macros o expandir-se. Per als camps d'&URL;, el &appname; pot tancar els valors de camp amb l'etiqueta <literal
+>\url{...}</literal
+>. Finalment, les entrades sense clau de cita es poden ometre en lloc que el &appname; generi la clau automàticament. </para>
+
+<screenshot>
+<screeninfo
+>Opcions de l'exportació a «bibtex»</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-bibtex.png"/></imageobject>
+<textobject
+><phrase
+>Opcions de l'exportació a «bibtex»</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-gcstar">
+<title
+>Exportar a GCstar</title>
+
+<para
+><application
+><ulink url="http://www.gcstar.org"
+>GCstar</ulink
+></application
+> és un altre gestor de col·lecció de pel·lícules. El &appname; és capaç d'exportar la majoria dels tipus de col·lecció a un fitxer de dades de GCstar. </para>
+
+</sect2>
+
+<sect2 id="exporting-xslt">
+<title
+>Exportar a &XML; mitjançant &xslt;</title>
+
+<para
+>Finalment, el &appname; és capaç de processar la seva representació &XML; interna de les dades de la col·lecció a través d'un full d'estil &XSL; extern abans d'exportar. Aquest tipus d'exportació pot ser útil per a la generació d'informes de text o altres tipus de fitxer. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="citations">
+<title
+>Treballar amb cites</title>
+<para
+>Quan es treballa amb una <link linkend="bibliography"
+>bibliografia</link
+>, es poden generar cites a partir de les entrades seleccionades i utilitzar-les en altres aplicacions. Una cita en el format «bibtex» es pot copiar al porta-retalls, i després enganxar-la a un fitxer de LaTeX. Les cites «bibtex» també es poden incloure a una aplicació externa, com ara <application
+>LyX</application
+> o <application
+>Kile</application
+> utilitzant l'anomenada <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+</sect1>
+
+</chapter>

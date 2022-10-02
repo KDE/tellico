@@ -1,0 +1,1074 @@
+<chapter id="fundamentals">
+<title
+>Använda &appname;</title>
+
+<sect1 id="quick-start">
+<title
+>Snabbstart</title>
+
+<para
+>Normalt börjar &appname; med en tom boksamling. För att arbeta med någon annan samlingstyp, skapa den med menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Ny</guimenuitem
+></menuchoice
+>, eller knappen i verktygsraden. Samlingar skapas med några av de vanligare fälten, men du kan lägga till, ändra eller ta bort dem för att passa dina behov. </para>
+
+<para
+>Nya poster kan läggas till genom att använda <link linkend="entry-editor"
+><interface
+>Posteditorn</interface
+></link
+>. Menyalternativet <menuchoice
+><guimenu
+>Samling</guimenu
+><guimenuitem
+>Ny post</guimenuitem
+></menuchoice
+> öppnar <interface
+>Posteditorn</interface
+> med en tom post klar att redigera. <interface
+>Posteditorn</interface
+> kan också öppnas genom att använda menyalternativet <menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Visa posteditor</guimenuitem
+></menuchoice
+>. När du väl har matat in postens värden, kan du spara den i samlingen genom att använda knappen <guibutton
+>Spara post</guibutton
+> i <interface
+>Posteditorns</interface
+> dialogruta, som förblir öppen om du vill fortsätta lägga till nya poster. När du väl har sparat en post i samlingen kan du ändra den genom att klicka på den i huvudfönstret. Om <interface
+>Posteditorn</interface
+> inte redan är öppen, kan du dubbelklicka på en post för att öppna editorn och börja redigera. </para>
+
+<para
+>Om du vill inkludera en bild i posten, kan du använda &kde;:s vanliga filväljare genom att klicka på knappen <guibutton
+>Välj bild...</guibutton
+> i <link linkend="entry-editor"
+><interface
+>Posteditorn</interface
+></link
+>, eller dra och släppa en bild från filhanteraren eller webbläsaren i <interface
+>posteditorn</interface
+>. </para>
+
+<para
+>När du markerar en post visar <link linkend="entry-view"
+><interface
+>Postvyn</interface
+></link
+> en formaterad vy av postens innehåll. Du kan ändra mallen som används för att visa posten i <link linkend="configuration"
+><interface
+>Inställningsdialogrutan</interface
+></link
+>. </para>
+
+<para
+>Posterna i samlingen grupperas tillsammans när de delar samma värde för vissa fält, som författare eller regissör. Du kan ändra fältet använt för gruppering genom att använda kombinationsrutan i verktygsraden eller menyalternativet <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Gruppurval</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Du kan använda <interface
+>Snabbfiltret</interface
+> i verktygsraden för att snabbt begränsa de synliga posterna till de som innehåller ordet du skriver. Filtret är också användbart när du snabbt vill hitta en post. Du kan skriva in titel eller något annat unikt ord som identifierar posten, så visar <link linkend="detailed-view"
+><interface
+>Kolumnvyn</interface
+></link
+> bara posterna som motsvarar filtret. Statusraden visar hur många poster som finns i samlingen, och hur många som för närvarande filtreras. </para>
+
+</sect1>
+
+<sect1 id="main-window">
+<title
+>Allmän användning</title>
+
+<para
+>Huvudfönstret har tre särskilda områden, som alla visar information om samlingen på olika sätt. Huvudvyn är <link linkend="detailed-view"
+><interface
+>Kolumnvyn</interface
+></link
+> i det övre högra området, där värden för alla fält i varje post kan visas. På vänster sida innehåller flikar <link linkend="group-view"
+><interface
+>Gruppvyn</interface
+></link
+>, som kan användas för att sortera poster i grupper med en trädliknande struktur, <link linkend="filter-view"
+><interface
+>Filtervyn</interface
+></link
+>, som används för att avgöra vilka poster som uppfyller vissa kriterier, och <link linkend="loan-view"
+><interface
+>Lånevyn</interface
+></link
+>, där eventuella lån listas. Till sist visar <link linkend="entry-view"
+><interface
+>Postvyn</interface
+></link
+> en formaterad vy av data för en enskild post, eller en ikonvy av en grupp av poster, längst ner till höger. </para>
+
+<screenshot>
+<screeninfo
+>Huvudfönstret i &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="main-window.png"/></imageobject>
+<textobject
+><phrase
+>Huvuddfönstret i &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="detailed-view">
+<title
+><interface
+>Kolumnvy</interface
+></title>
+
+<para
+>Vilket som helst av fälten i samlingen kan visas i <interface
+>Kolumnvyn</interface
+>, även om fälten <emphasis
+><link linkend="para"
+>Stycke</link
+></emphasis
+>, <emphasis
+><link linkend="image"
+>Bild</link
+></emphasis
+> och <emphasis
+><link linkend="table"
+>Tabell</link
+></emphasis
+> förmodligen inte är användbara. Att högerklicka på rubriken i vyn visar en meny för att välja synliga fält. Kolumnernas storlek kan ändras och de kan ordnas om hur som helst, och inställningarna sparas mellan sessioner. </para>
+</sect2>
+
+<sect2 id="group-view">
+<title
+><interface
+>Gruppvy</interface
+></title>
+
+<para
+><interface
+>Gruppvyn</interface
+> grupperar posterna i en trädvy enligt alla fält som <link linkend="field-options"
+>tillåter gruppering</link
+>. Antal poster i varje grupp visas intill gruppnamnet. Grupper kan expanderas eller dras ihop genom att klicka på piltecknet, eller genom att dubbelklicka på objektet. Att expandera eller dra ihop alla grupper är alternativ i den sammanhangsberoende högerklicksmenyn. Trädet kan antingen sorteras enligt gruppnamnet, eller antalet, genom att klicka på rubriken. En grupp kan också användas som ett filter för <link linkend="detailed-view"
+><interface
+>Kolumnvyn</interface
+></link
+>, genom att högerklicka på gruppobjektet. </para>
+
+<para id="people-group"
+>När mer än ett fält i samlingen har alternativet <emphasis
+><link linkend="fields-dialog"
+><guilabel
+>Formatera som ett namn</guilabel
+></link
+></emphasis
+> aktiverat, läggs en ytterligare grupp till för att kombinera alla sådana fält till en enda pseudogrupp benämnd <emphasis
+>Personer</emphasis
+>. </para>
+
+<para
+>Om en post inte innehåller ett värde för fältet som används för att skapa gruppen, placeras den i gruppen <emphasis
+>(tom)</emphasis
+>, vilken använder en röd katalog. </para>
+</sect2>
+
+<sect2 id="filter-view">
+<title
+><interface
+>Filtervy</interface
+></title>
+
+<para
+>Om några filter för samlingen sparas, aktiveras <interface
+>Filtervyn</interface
+>. Medan du lägger till eller ändrar poster, kontrolleras de automatiskt med filtren och läggs till eller tas bort i enlighet med det. Filtret kan ändras genom att dubbelklicka på objektet för att öppna <link linkend="filter-dialog"
+><interface
+>Avancerad filterdialogruta</interface
+></link
+>. Att högerklicka ger dig alternativet att ta bort det fullständigt. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Filtervyn</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-view.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Filtervyn</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="loan-view">
+<title
+><interface
+>Lånevy</interface
+></title>
+
+<para
+>När poster lånas ut, läggs <interface
+>Lånevyn</interface
+> till i fönstret, så att de utlånade posterna kan övervakas. Lån övervakas baserat på poster, så ett högerklick på en post visar ett alternativ för att ändra lånet med <interface
+>Lånedialogrutan</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Lånevyn</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-view.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Lånevyn</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="entry-view">
+<title
+><interface
+>Postvy</interface
+></title>
+
+<para
+>En formaterad representation av postens värden visas i <interface
+>Postvyn</interface
+>. Mallar används för layout och ytterligare grafik. Särskilda mallar för varje samlingstyp kan anges i <link linkend="template-options"
+><interface
+>Inställningsdialogrutan</interface
+></link
+>, tillsammans med egna färger och teckensnitt.</para>
+
+<para
+>Alla standardmallar tar hänsyn till färg- och teckensnittsval, men andra egna mallar kanske inte gör det. Standardmallarna aktiverar också webbadressfält, vilka öppnas med &kde;:s standardfilbindning. Vid export till &HTML;, används aktuell mall för att exportera de enskilda postfilerna. </para>
+
+</sect2>
+
+<sect2 id="status-bar">
+<title
+>Statusrad</title>
+
+<para
+>Statusraden används för att visa dig vad &appname; för närvarande gör. Den innehåller också totalt antal poster i samlingen, och om ett filter används, hur många som för närvarande är synliga. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="entry-editor">
+<title
+>Redigera poster</title>
+
+<para
+><interface
+>Posteditorn</interface
+> används för att lägga till och ändra poster i samlingen. Att dubbelklicka på en post antingen i <interface
+>Gruppvyn</interface
+> eller <interface
+>Kolumnvyn</interface
+> öppnar <interface
+>Posteditorn</interface
+> med den posten. Nya poster kan skapas med menyn <menuchoice
+><guimenu
+>Samling</guimenu
+></menuchoice
+>, ikonen i verktygsraden eller knappen i själva <interface
+>Posteditorn</interface
+>.</para>
+
+<para
+>Att stänga <interface
+>Posteditorn</interface
+> när ändringar har gjorts men inte sparats gör att ett varningsmeddelande visas. Fälten grupperas enligt kategori och visas i ordningen de syns i <link linkend="fields-dialog"
+><interface
+>Samlingsfältsdialogrutan</interface
+></link
+>. De kan också ordnas om. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Posteditorn</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor1.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Posteditorn</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Att klicka på fälttiteln för ett <link linkend="url"
+><emphasis
+>webbadressfält</emphasis
+></link
+> öppnar länken med &kde;:s förvalda filbindning. Knappen <guiicon
+>webbadressval</guiicon
+> intill textrutan öppnar &kde;:s vanliga filöppningsdialogruta, men fältet är inte begränsat till lokala filer. </para>
+
+<para
+>För <link linkend="image"
+><emphasis
+>bildfält</emphasis
+></link
+>, öppnar knappen <guibutton
+>Välj bild...</guibutton
+> &kde;:s dialogruta för att välja bildfiler. Bilden sparas i samlingen med originalformatet, och en skalad version visas i <interface
+>Posteditorn</interface
+>. Bilden kan rensas bort genom att använda knappen <guibutton
+>Rensa</guibutton
+>. Rensade bilder tas bort från samlingen. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Posteditorn</interface
+> med <emphasis
+>bildfält</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor3.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Posteditorn</interface
+> med <emphasis
+>bildfält</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Den grafiska redigeringskomponenten stöder drag och släpp. Att dra en bildfil från en filhanterare eller webbläsarfönster gör samma sak som att välja bilden i filväljaren. Att dra en bild från redigeringskomponenten till ett &konqueror; filhanteringsfönster sparar bilden i den visade katalogen. </para>
+
+<warning>
+<para
+>Normalt lagras bilder i samlingens datafil, vilket behåller allting på en plats. Dock orsakar för många bilder att &appname; blir märkbart långsammare, samt orsakar en mycket stor datafil. Alternativt kan &appname; lagra bilderna separat, antingen i katalogen <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/data/</filename
+> eller en katalog på samma plats som datafilen. Att ladda och spara datafiler går mycket snabbare om bilder lagras separat, men datafilerna är inte längra flyttbara eller arkiveringsbara. Självständiga datafiler kan alltid skapas genom att använda menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenu
+>Exportera</guimenu
+><guimenuitem
+>Exportera till Zip...</guimenuitem
+></menuchoice
+>. </para>
+</warning>
+
+<para
+><link linkend="table"
+><emphasis
+>Tabellfält</emphasis
+></link
+> börjar med fem rader, men flyttas markören till den sista raden läggs ytterligare en till automatiskt. För tabeller med flera kolumner används bara den första kolumnen för gruppering och formatering. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Posteditorn</interface
+> med <emphasis
+>tabellfält</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor4.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Posteditorn</interface
+> med <emphasis
+>tabellfält</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="edit-multiple">
+<title
+>Redigera flera poster</title>
+<para
+>Flera poster kan redigeras samtidigt genom att markera mer än en antingen i <interface
+>Gruppvyn</interface
+> eller <interface
+>Kolumnvyn</interface
+>. Om flera poster markeras, är fälten som innehåller samma värde i alla poster aktiverade. Om poster har olika värden är fälten inaktiverade. Kryssrutor som styr om fältet är aktiverat eller inte läggs till längst till höger vid varje fält , som syns på skärmbilden nedan. </para>
+
+<para
+>Bara aktiverade fält ändras när posterna sparas, vilket gör det mycket enklare att utföra storskaliga redigeringar. För att exempelvis ställa in medium för alla videoposter i samlingen, försäkra dig om att mediumfältet är aktiverat. Ändra det till <acronym
+>dvd</acronym
+>, och spara därefter posterna. Bara mediumfältet ändras, och alla andra fältvärden i posterna bevaras. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Posteditorn</interface
+> med flera poster</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor5.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Posteditorn</interface
+> med flera poster</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="updating-entries">
+<title
+>Uppdatera postdata</title>
+
+<para
+>Poster kan uppdateras automatiskt genom att skicka en förfrågan till datakällorna som är tillgängliga för den nuvarande samlingstypen, vilket är mycket användbart för att kombinera information från flera källor. Du kan till exempel lägga till en fil i samlingen genom att använda <link linkend="amazon-web-services"
+>webbtjänsten från Amazon.com</link
+>, och därefter uppdatera posten med ytterligare information från <link linkend="imdb"
+>Internet Movie Database</link
+>. </para>
+
+<para
+>Bara tomma fält uppdateras om inte <link linkend="data-sources-options"
+>inställningarna för den källan</link
+> tillåter att resultat skriver över befintlig information. För <link linkend="externalexec"
+>externa skript</link
+> måste ett uppdateringsfält anges i källalternativen. </para>
+
+<para
+>Uppdateringen av poster kan startas via menyn för en post som visas med ett högerklick, eller genom att använda menyalternativet <menuchoice
+><guimenu
+>Samling</guimenu
+> <guimenuitem
+>Uppdatera post</guimenuitem
+></menuchoice
+>. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="fields-dialog">
+<title
+>Redigera fält</title>
+
+<para
+><interface
+>Samlingsfältsdialogrutan</interface
+> låter dig lägga till nya fält i samlingen, ändra de befintliga, eller ta bort fält helt och hållet. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Samlingsfältsdialogrutan</interface
+> i &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Samlingsfältsdialogrutan</interface
+> i &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="field-list">
+<title
+>Fältlista</title>
+
+<para
+>Till vänster i dialogrutan finns listan med nuvarande fält. Ändrade fält visas med kursiv fetstil. Knapparna under listan lägger till eller tar bort ett fält, och pilarna kan användas för att ändra deras ordning. Fältens ordning i listan är viktig, eftersom <interface
+>Posteditorn</interface
+> använder ordningen för sin layout. För varje kategori, läggs fälten ut från vänster till höger, enligt fältens ordning i listan uppifrån och ner. </para>
+</sect2>
+
+<sect2 id="field-properties">
+<title
+>Fältegenskaper</title>
+
+<para
+>Ett fält definieras av sin titel, typ, kategori, beskrivning, och möjligen ett standardvärde eller vissa tillåtna värden. Titeln används överallt för att referera till fältet i användargränssnittet. <interface
+>Posteditorn</interface
+> använder det för att fråga efter värden. <interface
+>Kolumnvyn</interface
+> använder det som kolumnrubrik. De olika fälttyperna <link linkend="field-types"
+>förklaras i avsnittet om fälttyper</link
+>. Beskrivningen används som ett verktygstips i <interface
+>Posteditorn</interface
+>, kanske för att tillhandahålla en förklaring av fältets innehåll. Dessutom används beskrivningen för att formatera fältets värde för <link linkend="derived"
+>fält med <emphasis
+>beroende</emphasis
+> värden</link
+>. Standardvärdet läggs automatiskt till när en ny post skapas. Listan med tillåtna värden för <link linkend="choice"
+><emphasis
+>Valfält</emphasis
+></link
+> ska skiljas åt med semikolon. </para>
+
+<para
+>Nya fält kan ha vilken typ som helst, men att ändra typ för befintliga fält är begränsat till kompatibla typer, som visas i tabellen nedan: </para>
+
+<table>
+<title
+>Tillåtna ändringar av fälttyp</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Aktuell typ</entry>
+<entry
+>Ny typ tillåten</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Enkel text</emphasis
+></entry>
+<entry
+><emphasis
+>Enkel text</emphasis
+>, <emphasis
+>Stycke</emphasis
+>, <emphasis
+>Nummer</emphasis
+>, <emphasis
+>Webbadress</emphasis
+>, <emphasis
+>Tabell</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Stycke</emphasis
+></entry>
+<entry
+><emphasis
+>Enkel text</emphasis
+>, <emphasis
+>Stycke</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Val</emphasis
+></entry>
+<entry
+><emphasis
+>Enkel text</emphasis
+>, <emphasis
+>Stycke</emphasis
+>, <emphasis
+>Val</emphasis
+>, <emphasis
+>Nummer</emphasis
+>, <emphasis
+>Webbadress</emphasis
+>, <emphasis
+>Tabell</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Kryssruta</emphasis
+></entry>
+<entry
+><emphasis
+>Enkel text</emphasis
+>, <emphasis
+>Stycke</emphasis
+>, <emphasis
+>Kryssruta</emphasis
+>, <emphasis
+>Nummer</emphasis
+>, <emphasis
+>Webbadress</emphasis
+>, <emphasis
+>Tabell</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Nummer</emphasis
+></entry>
+<entry
+><emphasis
+>Enkel text</emphasis
+>, <emphasis
+>Stycke</emphasis
+>, <emphasis
+>Nummer</emphasis
+>, <emphasis
+>Webbadress</emphasis
+>, <emphasis
+>Tabell</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Webbadress</emphasis
+></entry>
+<entry
+><emphasis
+>Enkel text</emphasis
+>, <emphasis
+>Stycke</emphasis
+>, <emphasis
+>Nummer</emphasis
+>, <emphasis
+>Webbadress</emphasis
+>, <emphasis
+>Tabell</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Datum</emphasis
+></entry>
+<entry
+><emphasis
+>Enkel text</emphasis
+>, <emphasis
+>Datum</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Tabell</emphasis
+></entry>
+<entry
+><emphasis
+>Enkel text</emphasis
+>, <emphasis
+>Stycke</emphasis
+>, <emphasis
+>Tabell</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Bild</emphasis
+></entry>
+<entry
+><emphasis
+>Bild</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Omdöme</emphasis
+></entry>
+<entry
+><emphasis
+>Val</emphasis
+>, <emphasis
+>Omdöme</emphasis
+></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+
+<sect2 id="field-formatting">
+<title
+>Fältformatering</title>
+
+<para
+>&appname; tillhandahåller vissa möjligheter att formatera fältvärden automatiskt. Den enklaste är automatisk stor bokstav, som inleder alla ord utom artiklar med stor bokstav. Titelformatering flyttar vissa artiklar från fältets början till dess slut, vilket exempelvis kan ändra "Ett drömspel" till "Drömspel, Ett". Titelartiklarna kan ställas in. Till sist försöker namnformatering dela upp strängen så att personens efternamn eller familjenamn visas först. Namnprefix och suffix kan ställas in. Dessutom använder den speciella gruppen <emphasis
+><link linkend="people-group"
+>Personer</link
+></emphasis
+> alla fält med namnformatering, även om den allmänna inställningen är avstängd. </para>
+
+<para
+>All automatisk formatering kan inaktiveras genom att ändra de allmänna inställningarna i <link linkend="general-options"
+><interface
+>Inställningsdialogrutan</interface
+></link
+>. Allmänt är stora bokstäver ett separat alternativ från formatering, så en titel kan formateras automatiskt utan att bokstäver ändras. Alla fälttyper tillåter inte automatisk formatering. </para>
+
+<table>
+<title
+>Formateringsexempel</title>
+<tgroup cols="5">
+<thead>
+<row>
+<entry
+>Formattyp</entry>
+<entry
+>Fältvärde</entry>
+<entry
+>Automatisk stor bokstav</entry>
+<entry
+>Automatisk formatering</entry>
+<entry
+>Automatisk stor bokstav och automatisk formatering</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Titel</emphasis
+></entry>
+<entry
+>ett drömspel</entry>
+<entry
+>Ett drömspel</entry>
+<entry
+>drömspel, ett</entry>
+<entry
+>Drömspel, Ett</entry>
+</row>
+<row>
+<entry
+><emphasis
+>Namn</emphasis
+></entry>
+<entry
+>tom swift, jr.</entry>
+<entry
+>Tom Swift, Jr.</entry>
+<entry
+>swift, jr., tom</entry>
+<entry
+>Swift, Jr., Tom</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+<sect2 id="field-options">
+<title
+>Fältalternativ</title>
+
+<para
+>Fält har också tre allmänna alternativ.Om automatisk komplettering är aktiverad, lagrar &appname; värdena i alla fält i en cache, och <interface
+>Posteditorn</interface
+> tillhandahåller automatisk komplettering, med &kde;:s vanliga inställningar. Alla fälttyper tillåter inte automatisk komplettering. &appname; behöver också veta om ett fält kan ha flera värden, eller kan användas för att gruppera posterna. Ett semikolon används för att skilja flera värden åt när en post redigeras. </para>
+
+<para
+>Av effektivitetsskäl, aktivera inte automatisk komplettering för fältet om du inte behöver det. Ju fler fält med automatisk komplettering i samlingen, desto långsammare går det för &appname; att ladda filen. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="filter-dialog">
+<title
+>Filtrera poster</title>
+<para
+>Den avancerade <interface
+>Filterdialogrutan</interface
+> låter dig begränsa de synliga posterna i <link linkend="detailed-view"
+><interface
+>Kolumnvyn</interface
+></link
+> till de som matchar en eller flera filterregler. Filtret kan användas för att hitta posterna som motsvarar alla reglerna i dialogrutan, eller bara hitta de som motsvarar någon av dem. Den avancerade <interface
+>Filterdialogrutan</interface
+> är också användbar för avancerad sökning inom en samling. </para>
+
+<screenshot>
+<screeninfo
+>Den avancerade <interface
+>Filterdialogrutan</interface
+> i &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
+<textobject
+><phrase
+>Den avancerade <interface
+>Filterdialogrutan</interface
+> i &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Varje rad innehåller en enda filterregel. Välj fält att matcha i den första rutan på en rad, välj därefter en matchningsregel i mitten. Regler kan matcha värden som innehåller ett visst ord, eller är exakt lika. Ett reguljärt uttryck kan också användas för att matcha poster, i vilket fall knappen <guibutton
+>Redigera...</guibutton
+> aktiveras för att redigera uttrycket, om &kregexpeditor; är installerad på datorn. Till sist ska ordet eller strängen att matcha skrivas in i textrutan. För bildfält kan bildstorleken användas för filtrering, och filtervärdet jämförs med den större bilddimensionen, var sig det är bredden eller höjden. </para>
+
+<para
+>Upp till åtta (8) regler kan användas i filtret. Knapparna <guibutton
+>Fler</guibutton
+> och <guibutton
+>Färre</guibutton
+> kan användas för att lägga till eller ta bort regler. </para>
+
+<para
+>Filter kan sparas, så att alla poster som matchar grupperas tillsammans i <interface
+>Filtervyn</interface
+>. Vyn är dynamisk, så när poster läggs till eller ändras uppdateras gruppen automatiskt. Skriv in ett namn i textrutan och klicka på knappen <guibutton
+>Spara filter</guibutton
+>, för att spara filtret. </para>
+
+<para
+>Filter som tidigare sparats kan ändras genom att högerklicka på filterobjektet i <interface
+>Filtervyn</interface
+> och välja <guilabel
+>Ändra filter</guilabel
+>. Den avancerade <interface
+>Filterdialogrutan</interface
+> öppnas, och ändringar kan göras av filtrets namn eller regler. </para>
+
+<informalexample>
+<para
+>För att hitta science-fiction böcker du inte har läst, markera knappen <guilabel
+>Matcha alla följande</guilabel
+>, ställ in den första regeln till <emphasis
+>Genre innehåller science-fiction</emphasis
+> och den andra till <emphasis
+>Läst innehåller inte true</emphasis
+>. (för fält med <link linkend="bool"
+>kryssrutor</link
+>, är det interna värdet <emphasis
+>true</emphasis
+>). </para>
+
+<para
+>För att hitta böcker av Bujold eller Weber, markera knappen <guilabel
+>Matcha någon av följande</guilabel
+>, ställ in den första regeln till <emphasis
+>Författare innehåller Bujold</emphasis
+> och den andra till <emphasis
+>Författare innehåller Weber</emphasis
+>. </para>
+</informalexample>
+
+</sect1>
+
+<sect1 id="report-dialog">
+<title
+>Skapa rapporter</title>
+<para
+>&appname; kan skapa diverse rapporter om den nuvarande samlingen. <interface
+>Rapportdialogrutan</interface
+> letar efter alla &xslt;-mallar i installationssökvägen och i <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>. Du kan alltså skapa nya, och de hittas automatiskt och inkluderas som alternativ i <interface
+>Rapportdialogrutan</interface
+>. Vissa komplexa rapporter kan ta en stund att skapa för stora samlingar. </para>
+
+<para
+>Mallarna som installeras med &appname; inkluderar en lista med bara titlar, standardkolumnvyn, en gruppvy, en sammanfattning av alla grupper och de mest populära värdena i dessa grupper, en lånerapport och en stor rapport med omslagsbilder. Välj önskad mall och klicka på knappen <guibutton
+>Generera</guibutton
+>. Vilken rapport som helst kan också skrivas ut eller sparas i en &HTML;-fil. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Rapportdialogrutan</interface
+> i &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="report-dialog.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Rapportdialogrutan</interface
+> i &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Posterna som ingår i rapporten begränsas till de i <interface
+>Kolumnvyn</interface
+>, så om du har ett aktivt filter kommer <interface
+>Rapportdialogrutan</interface
+> att använda det. </para>
+</sect1>
+
+<sect1 id="loan-dialog">
+<title
+>Hålla reda på lån</title>
+<para
+>&appname; stöder övervakning av lån för vilken post som helst i samlingen. <interface
+>Lånedialogrutan</interface
+> kan öppnas genom att använda menyalternativet <guilabel
+>Låna ut</guilabel
+>, eller högerklicka på en post. Flera poster kan lånas ut samtidigt. </para>
+
+<para
+>Låntagarens namn kan skrivas in direkt, eller hämtas från &kde;:s standardadressbok genom att klicka på knappen intill namninmatningsrutan. Lånedatum antas vara aktuellt datum, men kan ändras. Återlämningsdatum är frivilligt, och andra anmärkningar om lånet kan läggas till. </para>
+
+<para
+>Om ett återlämningsdatum skrivs in, och &appname; kompilerades med stöd för libkcal, kan en påminnelse om lånet läggas till i &kde;:s standardkalender som en uppgift. &korganizer; kan användas för att visa uppgifterna. </para>
+
+<para
+>När en post lånas ut, sätts fältet <emphasis
+>Utlånad</emphasis
+> till <emphasis
+>true</emphasis
+>. Om fältet utlånad inte finns i samlingen, läggs det till. Ändra inte fältet direkt! Utlånade poster kan lämnas tillbaka med menyalternativet, eller genom att högerklicka på en post i <interface
+>Lånevyn</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Filterdialogrutan</interface
+> i &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-dialog.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Filterdialogrutan</interface
+> i &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="tips">
+<title
+>Allmänna tips</title>
+
+<para
+>Här är listan med tips som finns i "Dagens tips" för &appname;. </para>
+
+<tip>
+<para
+>Om en bok har mer än en författare ska du separera de olika författarnamnen med semikolon, så att Tellico kan förstå namnen och använda dem separat. Vilket annat fält som tillåter multipla värden ska matas in på samma sätt, med semikolon (;) som separerar mellan värdena. </para>
+</tip>
+
+<tip>
+<para
+>Du kan ändra vilka fält som visas i listan genom att högerklicka på kolumnrubriken. </para>
+</tip>
+
+<tip>
+<para
+>Du kan lägga till, redigera eller ändra fält i samlingen genom att använda <interface
+>Samlingsfältsdialogrutan</interface
+>. Piltangenterna nedanför fältlistan kan användas för att ändra positionen på fälten i listan, vilket ändrar placeringen i posteditorn. </para>
+</tip>
+
+<tip>
+<para
+>Om du vill filtrera på värdet i en <link linkend="bool"
+><emphasis
+>kryssruta</emphasis
+></link
+> ska du använda värdet "true". Om du till exempel vill filtrera för att visa endast science-fiction böcker som du inte har läst, ska du markera knappen <guilabel
+>Matcha alla följande</guilabel
+>, sätta första rutan till "Genre" "innehåller" "Science fiction" (inga citationstecken) och den andra regeln till "Läst" "innehåller inte" "true" (inga citationstecken). </para>
+</tip>
+
+<tip>
+<para
+>Om något annat än en bokstav används i Snabbfiltret, kommer texten att tolkas som ett reguljärt uttryck. För att visa böcker som är av Weber eller Bujold, till exempel, kan man söka på "weber|bujold" (inga citationstecken) i filterrutan. </para>
+</tip>
+
+<tip>
+<para
+>Du kan redigera mer än en post samtidigt, genom att trycka ner &Shift;- eller &Ctrl;-tangenten och välja flera poster. </para>
+</tip>
+
+<tip>
+<para
+>Du kan konvertera en existerande boksamling till en bibliografi, som sedan kan exporteras till Bibtex eller Bibtexml-format. </para>
+</tip>
+
+<tip>
+<para
+>Om mer än ett fält är formaterad som ett namn, kommer en extra grupp med namnet "Personer" att läggas till samlingen, vilket tillåter att exempelvis författare och redaktörer sorteras och skrivs ut tillsammans. </para>
+</tip>
+
+<tip>
+<para
+>Du kan ändra utseendet på utskriften genom att ändra filen <filename
+>tellico-printing.xsl</filename
+>. Filen genererar &HTML; och &CSS; i stilmallen bestämmer saker som teckensnitt, marginaler etc. </para>
+</tip>
+
+<tip>
+<para
+>Dubbelklick på en post öppnar <interface
+>Posteditorn</interface
+>. </para>
+</tip>
+
+<tip>
+<para
+>Du kan lägga till &HTML;-taggar till godtyckligt <link linkend="para"
+><emphasis
+>styckefält</emphasis
+></link
+> för formatering, såsom &lt;b&gt;<emphasis role="bold"
+>bold</emphasis
+>&lt;/b&gt; eller &lt;i&gt;<emphasis
+>italic</emphasis
+>&lt;/i&gt;. </para>
+</tip>
+
+<tip>
+<para
+>I <interface
+>Kolumnvyn</interface
+> kan du trycka på en bokstav på tangentbordet för att hoppa till nästa post som börjar med den bokstaven. </para>
+</tip>
+
+<tip>
+<para
+>Du kan använda beroende värden för att kombinera flera åtskilda fält till ett enda värde. Markera bara rutan för beroende värde och använd en värdebeskrivning som liknar "<userinput
+>Värde: %{fält-a}%{fält-b}</userinput
+>" där %{...} byts ut mot riktiga fältvärden. Det är användbart för att samla flera värden i ett enda fält, t. ex. för bättre gruppering och för att kombinera fält av olika typer genom att samtidigt följa riktig sortering. Betrakta till exempel ett numeriskt fält följt av ett textdelfält med posterna 3b, 14a. </para>
+</tip>
+
+</sect1>
+
+</chapter>
