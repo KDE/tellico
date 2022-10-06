@@ -748,7 +748,7 @@ msgstr "Publicació"
 #: src/translators/risimporter.cpp:337
 #, kde-format
 msgid "Miscellaneous"
-msgstr "Miscelànea"
+msgstr "Miscel·lània"
 
 #: src/collections/bibtexcollection.cpp:86
 #, kde-format
@@ -2874,7 +2874,7 @@ msgstr "D&uplica l'entrada"
 #: src/controller.cpp:591 src/mainwindow.cpp:706
 #, kde-format
 msgid "&Update Entry"
-msgstr "Act&ualisa l'entrada"
+msgstr "Act&ualitza l'entrada"
 
 #: src/controller.cpp:592 src/mainwindow.cpp:619
 #, kde-format
@@ -2894,7 +2894,7 @@ msgstr "D&uplica les entrades"
 #: src/controller.cpp:597
 #, kde-format
 msgid "&Update Entries"
-msgstr "Act&ualisa les entrades"
+msgstr "Act&ualitza les entrades"
 
 #: src/controller.cpp:598
 #, kde-format
@@ -4535,7 +4535,7 @@ msgstr ""
 #: src/fetchdialog.cpp:286
 #, kde-format
 msgid "&Add Entry"
-msgstr "&Afig una entrada"
+msgstr "Afi&g una entrada"
 
 #: src/fetchdialog.cpp:291
 #, kde-format
@@ -5239,7 +5239,7 @@ msgstr "Podeu afegir notes quant al préstec."
 #: src/loandialog.cpp:200
 #, kde-format
 msgid "&Add a reminder to the active calendar"
-msgstr "&Afig un recordatori al calendari actiu"
+msgstr "Afi&g un recordatori al calendari actiu"
 
 #: src/loandialog.cpp:204
 #, kde-format
@@ -5465,7 +5465,7 @@ msgstr "Crea una nova col·lecció de jocs de taula"
 #: src/mainwindow.cpp:309
 #, kde-format
 msgid "New &File Catalog"
-msgstr "Catàleg nou de &fitxers"
+msgstr "Catàleg nou de fi&txers"
 
 #: src/mainwindow.cpp:310
 #, kde-format
@@ -5995,7 +5995,7 @@ msgstr "Marca els elements seleccionats"
 #: src/mainwindow.cpp:644
 #, kde-format
 msgid "&Rename Collection..."
-msgstr "&Canvia el nom la col·lecció..."
+msgstr "Ca&nvia el nom de la col·lecció..."
 
 #: src/mainwindow.cpp:647
 #, kde-format
@@ -6499,7 +6499,7 @@ msgstr "Seleccioneu el valor des de %1"
 #: src/tellicoui.rc:6
 #, kde-format
 msgid "&File"
-msgstr "&Fitxer"
+msgstr "Fi&txer"
 
 #. i18n: ectx: Menu (file_new_collection)
 #: src/tellicoui.rc:8
@@ -6533,7 +6533,7 @@ msgstr "&Col·lecció"
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Update Entry"
-msgstr "Act&ualisa l'entrada"
+msgstr "Act&ualitza l'entrada"
 
 #. i18n: ectx: Menu (coll_bibliography)
 #: src/tellicoui.rc:102
