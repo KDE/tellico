@@ -548,6 +548,15 @@ void IMDBFetcher::parseMultipleTitleResults() {
     m_currentTitleBlock = m_countOffset == 0 ? Unknown : Approx;
   }
 
+  // last resort
+  if(m_matches.size() < m_limit) {
+    const int pos_header = output.indexOf(QStringLiteral("ipc-page-content-container"));
+    const int end_header = output.indexOf(QStringLiteral("cornerstone"), qMax(0, pos_header));
+    if(pos_header > -1) {
+      parseTitleBlock(output.mid(pos_header, end_header == -1 ? output.length() : end_header));
+    }
+  }
+
   if(m_matches.size() == 0) {
     myLog() << "no matches found.";
   }
