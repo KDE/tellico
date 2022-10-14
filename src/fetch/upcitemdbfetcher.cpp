@@ -329,7 +329,7 @@ void UPCItemDbFetcher::parseTitle(Tellico::Data::EntryPtr entry_) {
       case Data::Collection::Book:
         title = dashMatch.captured(1);
         {
-          QRegularExpression byAuthor(QLatin1String("by (.+)"));
+          static const QRegularExpression byAuthor(QLatin1String("by (.+)"));
           QRegularExpressionMatch authorMatch = byAuthor.match(dashMatch.captured(2));
           if(authorMatch.hasMatch()) {
             entry_->setField(QStringLiteral("author"), authorMatch.captured(1).simplified());

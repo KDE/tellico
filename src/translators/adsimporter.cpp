@@ -121,7 +121,7 @@ void ADSImporter::readText(const QString& text_, int n) {
   // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
   // so just strip the white space later
   // also be gracious and allow any amount of space before hyphen
-  QRegularExpression rx(QLatin1String("^\\s*%(\\w)\\s+(.*)$"));
+  static const QRegularExpression rx(QLatin1String("^\\s*%(\\w)\\s+(.*)$"));
   QString currLine, nextLine;
   for(currLine = t.readLine(); !m_cancelled && !currLine.isNull(); currLine = nextLine, j += currLine.length()) {
     nextLine = t.readLine();
@@ -183,10 +183,12 @@ void ADSImporter::readText(const QString& text_, int n) {
     } else if(tag == QLatin1String("K")) {  // split the keywords
       value = value.split(QLatin1Char(',')).join(FieldFormat::delimiterString());
     } else if(tag == QLatin1String("Y")) {  // clean-up DOI
-      value.remove(QRegularExpression(QLatin1String("^\\s*DOI[\\s:]*"), QRegularExpression::CaseInsensitiveOption));
+      static const QRegularExpression doiRx(QLatin1String("^\\s*DOI[\\s:]*"), QRegularExpression::CaseInsensitiveOption);
+      value.remove(doiRx);
       value = value.section(QLatin1Char(';'), 0, 0);
     } else if(tag == QLatin1String("J")) {  // clean-up journal
-      QStringList tokens = value.split(QRegularExpression(QLatin1String("\\s*,\\s*")));
+      static const QRegularExpression commaRx(QLatin1String("\\s*,\\s*"));
+      QStringList tokens = value.split(commaRx);
       if(!tokens.isEmpty()) {
         value = tokens.first();
       }

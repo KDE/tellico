@@ -97,7 +97,8 @@ Tellico::Data::CollPtr GoodreadsImporter::collection() {
 
   // if the user is not all digits, assume it's a user name and
   // convert it to a user id
-  if(!QRegularExpression(QLatin1String("^\\d+$")).match(m_user).hasMatch()) {
+  static const QRegularExpression digitsRx(QLatin1String("^\\d+$"));
+  if(!digitsRx.match(m_user).hasMatch()) {
     m_user = idFromName(m_user);
   }
   if(m_user.isEmpty()) {

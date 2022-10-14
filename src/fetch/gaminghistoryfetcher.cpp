@@ -154,11 +154,11 @@ void GamingHistoryFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
-  QRegularExpression rowRx(QStringLiteral("<tr class='big-box'>(.+?)</tr"));
-  QRegularExpression dataRx(QStringLiteral("<td data-title='(.+?)'>(.+?)</td"));
-  QRegularExpression tagRx(QLatin1String("<.*?>"));
-  QRegularExpression emRx(QLatin1String("<em.*?>[^<]+?</em>"));
-  QRegularExpression anchorRx(QStringLiteral("<a[^>]+?href='(.+?)'"));
+  static const QRegularExpression rowRx(QStringLiteral("<tr class='big-box'>(.+?)</tr"));
+  static const QRegularExpression dataRx(QStringLiteral("<td data-title='(.+?)'>(.+?)</td"));
+  static const QRegularExpression tagRx(QLatin1String("<.*?>"));
+  static const QRegularExpression emRx(QLatin1String("<em.*?>[^<]+?</em>"));
+  static const QRegularExpression anchorRx(QStringLiteral("<a[^>]+?href='(.+?)'"));
 
   QRegularExpressionMatchIterator i = rowRx.globalMatch(s);
   while(i.hasNext()) {
@@ -206,7 +206,7 @@ void GamingHistoryFetcher::slotComplete(KJob*) {
   if(m_matches.isEmpty()) {
     // an exact match is handled by returning a page with <script> at the top
     if(s.startsWith(QLatin1String("<script>"))) {
-      QRegularExpression locationRx(QLatin1String("'([^']+?)'</script>"));
+      static const QRegularExpression locationRx(QLatin1String("'([^']+?)'</script>"));
       auto locationMatch = locationRx.match(s);
       if(locationMatch.hasMatch()) {
         Data::CollPtr coll(new Data::GameCollection(true));

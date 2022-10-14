@@ -385,10 +385,11 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
           entry->setField(QStringLiteral("medium"), i18n("Compact Disc"));
         }
       } else if(m1 == QString::fromUtf8("流派")) {
-        const QStringList genres = m2.split(QRegularExpression(QLatin1String("\\s*/\\s*")));
+        static const QRegularExpression slashRx(QLatin1String("\\s*/\\s*"));
+        const QStringList genres = m2.split(slashRx);
         entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::rowDelimiterString()));
       } else if(m1 == QString::fromUtf8("片长")) {
-        QRegularExpression digits(QLatin1String("\\d+"));
+        static const QRegularExpression digits(QLatin1String("\\d+"));
         QRegularExpressionMatch digitsMatch = digits.match(m2);
         if(digitsMatch.hasMatch()) {
           entry->setField(QStringLiteral("running-time"), digitsMatch.captured());

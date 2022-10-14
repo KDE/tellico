@@ -132,7 +132,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
         entry = newColl->entries().front();
         hasDOI |= !entry->field(QStringLiteral("doi")).isEmpty();
         // the XMP handler has a habit of inserting empty values surrounded by parentheses
-        QRegularExpression rx(QLatin1String("^\\(\\s*\\)$"));
+        static const QRegularExpression rx(QLatin1String("^\\(\\s*\\)$"));
         foreach(Data::FieldPtr field, newColl->fields()) {
           QString value = entry->field(field);
           if(value.contains(rx)) {

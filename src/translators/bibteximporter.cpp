@@ -200,7 +200,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
 //    myDebug() << "entry key: " << str;
     Data::BibtexCollection::setFieldValue(entry, QStringLiteral("key"), str, currentColl);
 
-    QRegularExpression andRx(QLatin1String("\\sand\\s"));
+    static const QRegularExpression andRx(QLatin1String("\\sand\\s"));
     char* name;
     AST* field = nullptr;
     while((field = bt_next_field(node, field, &name))) {
@@ -281,8 +281,8 @@ void BibtexImporter::parseText(const QString& text) {
 //  bt_set_stringopts(BTE_PREAMBLE, BTO_CONVERT | BTO_EXPAND);
 
   QString entry;
-  QRegularExpression rx(QLatin1String("[{}]"));
-  QRegularExpression macroName(QLatin1String("@string\\s*\\{\\s*(.*?)="), QRegularExpression::CaseInsensitiveOption);
+  static const QRegularExpression rx(QLatin1String("[{}]"));
+  static const QRegularExpression macroName(QLatin1String("@string\\s*\\{\\s*(.*?)="), QRegularExpression::CaseInsensitiveOption);
 
   int line = 1;
   bool needsCleanup = false;
@@ -382,7 +382,7 @@ bool BibtexImporter::maybeBibtex(const QString& text, const QUrl& url_) {
   bool foundOne = false;
 #ifdef ENABLE_BTPARSE
   bt_initialize();
-  QRegularExpression rx(QLatin1String("[{}]"));
+  static const QRegularExpression rx(QLatin1String("[{}]"));
 
   ushort bt_options = 0; // ushort is defined in btparse.h
   boolean ok; // boolean is defined in btparse.h as an int

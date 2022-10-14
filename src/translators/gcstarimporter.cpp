@@ -93,10 +93,10 @@ void GCstarImporter::readGCfilms(const QString& text_) {
 
   bool convertUTF8 = false;
   QHash<QString, Data::BorrowerPtr> borrowers;
-  QRegularExpression rx(QLatin1String("\\s*,\\s*"));
-  QRegularExpression year(QLatin1String("\\d{4}"));
-  QRegularExpression runTimeHr(QLatin1String("(\\d+)\\s?hr?"));
-  QRegularExpression runTimeMin(QLatin1String("(\\d+)\\s?mi?n?"));
+  static const QRegularExpression rx(QLatin1String("\\s*,\\s*"));
+  static const QRegularExpression year(QLatin1String("\\d{4}"));
+  static const QRegularExpression runTimeHr(QLatin1String("(\\d+)\\s?hr?"));
+  static const QRegularExpression runTimeMin(QLatin1String("(\\d+)\\s?mi?n?"));
 
   bool gotFirstLine = false;
 

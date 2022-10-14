@@ -306,7 +306,7 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
   FieldFormat::Request format = (options() & Export::ExportFormatted ?
                                                 FieldFormat::ForceFormat :
                                                 FieldFormat::AsIsFormat);
-  QRegularExpression stripHTML(QLatin1String("<.*?>"));
+  static const QRegularExpression stripHTML(QLatin1String("<.*?>"));
   foreach(Data::FieldPtr fIt, fields_) {
     value = entry_.formattedField(fIt, format);
     if(value.isEmpty()) {
@@ -327,7 +327,7 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
       // strip HTML from bibtex export
       value.remove(stripHTML);
     } else if(fIt->property(bibtex) == QLatin1String("pages")) {
-      QRegularExpression rx(QLatin1String("(\\d)-(\\d)"));
+      static const QRegularExpression rx(QLatin1String("(\\d)-(\\d)"));
       QRegularExpressionMatch m = rx.match(value);
       for(int pos = m.capturedStart(); pos > -1; pos = m.capturedStart()) {
         value.replace(pos, 3, m.captured(1) + QLatin1String("--") + m.captured(2));

@@ -331,7 +331,8 @@ void SRUFetcher::slotComplete(KJob*) {
     // brute force marcxchange conversion. This is probably wrong at some level
     QString newResult = result;
     if(m_format.startsWith(QLatin1String("marcxchange"), Qt::CaseInsensitive)) {
-      newResult.replace(QRegularExpression(QLatin1String("xmlns:marc=\"info:lc/xmlns/marcxchange-v[12]\"")),
+      static const QRegularExpression marcRx(QLatin1String("xmlns:marc=\"info:lc/xmlns/marcxchange-v[12]\""));
+      newResult.replace(marcRx,
                         QStringLiteral("xmlns:marc=\"http://www.loc.gov/MARC21/slim\""));
     }
     modsResult = m_MARCXMLHandler->applyStylesheet(newResult);

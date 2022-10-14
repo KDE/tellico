@@ -338,8 +338,9 @@ void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
       }
     }
   }
+  static const QRegularExpression nondigitsRx(QLatin1String("[^\\d]"));
   entry_->setField(QStringLiteral("running-time"),
-                   mapValue(resultMap_, "Runtime").remove(QRegularExpression(QLatin1String("[^\\d]"))));
+                   mapValue(resultMap_, "Runtime").remove(nondigitsRx));
 
   const QStringList genres = mapValue(resultMap_, "Genre").split(QStringLiteral(", "));
   entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
@@ -348,9 +349,10 @@ void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   entry_->setField(QStringLiteral("director"), directors.join(FieldFormat::delimiterString()));
 
   QStringList writers = mapValue(resultMap_, "Writer").split(QStringLiteral(", "));
-  // some wrtiers have parentheticals, remove those
+  // some writers have parentheticals, remove those
+  static const QRegularExpression parenRx(QLatin1String("\\s*\\(.+\\)\\s*"));
   entry_->setField(QStringLiteral("writer"),
-                   writers.replaceInStrings(QRegularExpression(QLatin1String("\\s*\\(.+\\)\\s*")), QString())
+                   writers.replaceInStrings(parenRx, QString())
                           .join(FieldFormat::delimiterString()));
 
   const QStringList producers = mapValue(resultMap_, "Producer").split(QStringLiteral(", "));

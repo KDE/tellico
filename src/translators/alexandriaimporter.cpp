@@ -91,8 +91,8 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
          << QStringLiteral("_medium.jpg")
          << QStringLiteral("_small.jpg");
 
-  const QRegularExpression begin(QLatin1String("^\\s*-\\s+"));
-  const QRegularExpression spaces(QLatin1String("^ +"));
+  static const QRegularExpression begin(QLatin1String("^\\s*-\\s+"));
+  static const QRegularExpression spaces(QLatin1String("^ +"));
 
   QTextStream ts;
   ts.setCodec("UTF-8"); // YAML is always utf8?

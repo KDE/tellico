@@ -219,7 +219,7 @@ Tellico::Data::EntryPtr ArxivFetcher::fetchEntryHook(uint uid_) {
       }
     }
   }
-  QRegularExpression versionRx(QLatin1String("v\\d+$"));
+  static const QRegularExpression versionRx(QLatin1String("v\\d+$"));
   // if the original search was not for a versioned ID, remove it
   if(request().key() != ArxivID || !request().value().contains(versionRx)) {
     QString arxiv = entry->field(QStringLiteral("arxiv"));
@@ -279,8 +279,10 @@ QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
       {
       // remove prefix and/or version number
       QString value = value_;
-      value.remove(QRegularExpression(QLatin1String("^arxiv:"), QRegularExpression::CaseInsensitiveOption));
-      value.remove(QRegularExpression(QLatin1String("v\\d+$")));
+      static const QRegularExpression arxivRx(QLatin1String("^arxiv:"), QRegularExpression::CaseInsensitiveOption);
+      static const QRegularExpression vRx(QLatin1String("v\\d+$"));
+      value.remove(arxivRx);
+      value.remove(vRx);
       query = QStringLiteral("id:%1").arg(value);
       }
       break;
@@ -300,8 +302,10 @@ Tellico::Fetch::FetchRequest ArxivFetcher::updateRequest(Data::EntryPtr entry_) 
   QString id = entry_->field(QStringLiteral("arxiv"));
   if(!id.isEmpty()) {
     // remove prefix and/or version number
-    id.remove(QRegularExpression(QLatin1String("^arxiv:"), QRegularExpression::CaseInsensitiveOption));
-    id.remove(QRegularExpression(QLatin1String("v\\d+$")));
+    static const QRegularExpression arxivRx(QLatin1String("^arxiv:"), QRegularExpression::CaseInsensitiveOption);
+    static const QRegularExpression vRx(QLatin1String("v\\d+$"));
+    id.remove(arxivRx);
+    id.remove(vRx);
     return FetchRequest(Fetch::ArxivID, id);
   }
 
