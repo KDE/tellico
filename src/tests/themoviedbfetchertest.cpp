@@ -145,12 +145,12 @@ void TheMovieDBFetcherTest::testAllMankind() {
   QCOMPARE(entry->field("origtitle"), QStringLiteral("For All Mankind"));
   QStringList titleList = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("alttitle")));
   QVERIFY(!titleList.isEmpty());
-  QVERIFY(titleList.contains(QStringLiteral("Para toda la humanidad")));
+  QVERIFY(titleList.contains(QStringLiteral("为全人类")));
   QCOMPARE(entry->field("year"), QStringLiteral("2019"));
   QCOMPARE(entry->field("network"), QStringLiteral("Apple TV+"));
   QCOMPARE(entry->field("language"), QStringLiteral("English"));
   QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
-  QCOMPARE(set(entry, "producer"), set(QStringLiteral("Seth Edelstein")));
+  QCOMPARE(set(entry, "producer"), set(QStringLiteral("Huey M. Park")));
   QVERIFY(entry->field("cast").startsWith(QStringLiteral("Joel Kinnaman::Ed Baldwin")));
   QStringList episodeList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("episode")));
   QVERIFY(!episodeList.isEmpty());
