@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-22 00:45+0000\n"
+"POT-Creation-Date: 2022-10-01 00:48+0000\n"
 "PO-Revision-Date: 2021-04-09 23:48+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -707,7 +707,7 @@ msgstr "Eit felt for ein avleidd verdi må ha ein tilhøyrande mal."
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
-#: src/fetch/imdbfetcher.cpp:803 src/fetch/imdbfetcher.cpp:1283
+#: src/fetch/imdbfetcher.cpp:812 src/fetch/imdbfetcher.cpp:1292
 #: src/fetch/kinopoiskfetcher.cpp:277 src/fetch/kinoteatrfetcher.cpp:240
 #: src/fetch/mobygamesfetcher.cpp:459 src/fetch/moviemeterfetcher.cpp:216
 #: src/fetch/moviemeterfetcher.cpp:221 src/fetch/numistafetcher.cpp:343
@@ -1728,7 +1728,7 @@ msgstr "Utgjevingsår"
 
 #: src/collections/stampcollection.cpp:83
 #: src/collections/videocollection.cpp:184 src/fetch/allocinefetcher.cpp:403
-#: src/fetch/imdbfetcher.cpp:1428
+#: src/fetch/imdbfetcher.cpp:1437
 #, kde-format
 msgid "Color"
 msgstr "Farge"
@@ -3242,8 +3242,8 @@ msgstr "Allocine-lenkje"
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
 #: src/fetch/doubanfetcher.cpp:303 src/fetch/doubanfetcher.cpp:321
 #: src/fetch/doubanfetcher.cpp:339 src/fetch/doubanfetcher.cpp:570
-#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/imdbfetcher.cpp:858
-#: src/fetch/imdbfetcher.cpp:1626 src/fetch/kinopoiskfetcher.cpp:341
+#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/imdbfetcher.cpp:867
+#: src/fetch/imdbfetcher.cpp:1635 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:263 src/fetch/kinoteatrfetcher.cpp:507
 #: src/fetch/omdbfetcher.cpp:262 src/fetch/themoviedbfetcher.cpp:332
@@ -3253,13 +3253,13 @@ msgstr "Allocine-lenkje"
 msgid "Original Title"
 msgstr "Opphavleg tittel"
 
-#: src/fetch/allocinefetcher.cpp:429 src/fetch/imdbfetcher.cpp:1642
+#: src/fetch/allocinefetcher.cpp:429 src/fetch/imdbfetcher.cpp:1651
 #: src/fetch/kinopoiskfetcher.cpp:685 src/fetch/themoviedbfetcher.cpp:613
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Ikkje fleire enn: "
 
-#: src/fetch/allocinefetcher.cpp:442 src/fetch/imdbfetcher.cpp:1655
+#: src/fetch/allocinefetcher.cpp:442 src/fetch/imdbfetcher.cpp:1664
 #: src/fetch/kinopoiskfetcher.cpp:698 src/fetch/themoviedbfetcher.cpp:626
 #, kde-format
 msgid ""
@@ -3547,7 +3547,7 @@ msgstr "Stort bilete"
 msgid "No Image"
 msgstr "Inkje bilete"
 
-#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:1664
+#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:1673
 #: src/fetch/mobygamesfetcher.cpp:681 src/fetch/thegamesdbfetcher.cpp:665
 #, kde-format
 msgid ""
@@ -3572,8 +3572,8 @@ msgstr ""
 "og følgjer med alle lenkjer til Amazon.com-nettstaden."
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
-#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:923
-#: src/fetch/imdbfetcher.cpp:1624 src/fetch/moviemeterfetcher.cpp:225
+#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:932
+#: src/fetch/imdbfetcher.cpp:1633 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:257
 #: src/fetch/themoviedbfetcher.cpp:327 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/tvmazefetcher.cpp:193 src/fetch/tvmazefetcher.cpp:385
@@ -4006,7 +4006,7 @@ msgstr "Internet Game Database (IGDB.com)"
 msgid "Screenshot"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:111 src/fetch/imdbfetcher.cpp:1612
+#: src/fetch/imdbfetcher.cpp:111 src/fetch/imdbfetcher.cpp:1621
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
@@ -4036,19 +4036,19 @@ msgstr "Internet Movie Database (italiensk)"
 msgid "Internet Movie Database (Portuguese)"
 msgstr "Internet Movie Database (portugisisk)"
 
-#: src/fetch/imdbfetcher.cpp:802 src/fetch/imdbfetcher.cpp:1282
-#: src/fetch/imdbfetcher.cpp:1623
+#: src/fetch/imdbfetcher.cpp:811 src/fetch/imdbfetcher.cpp:1291
+#: src/fetch/imdbfetcher.cpp:1632
 #, kde-format
 msgid "IMDb Rating"
 msgstr "IMDb-karakter"
 
-#: src/fetch/imdbfetcher.cpp:1468 src/fetch/imdbfetcher.cpp:1565
-#: src/fetch/imdbfetcher.cpp:1625
+#: src/fetch/imdbfetcher.cpp:1477 src/fetch/imdbfetcher.cpp:1574
+#: src/fetch/imdbfetcher.cpp:1634
 #, kde-format
 msgid "Certifications"
 msgstr "Aldersgrenser"
 
-#: src/fetch/imdbfetcher.cpp:1622 src/fetch/kinopoiskfetcher.cpp:672
+#: src/fetch/imdbfetcher.cpp:1631 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:397 src/fetch/themoviedbfetcher.cpp:574
 #: src/fetch/thetvdbfetcher.cpp:576 src/fetch/tvmazefetcher.cpp:382
 #: src/field.cpp:331
@@ -4056,7 +4056,7 @@ msgstr "Aldersgrenser"
 msgid "IMDb Link"
 msgstr "IMDb-lenkje"
 
-#: src/fetch/imdbfetcher.cpp:1660
+#: src/fetch/imdbfetcher.cpp:1669
 #, kde-format
 msgid "Download cover &image"
 msgstr "Last ned &omslag"
