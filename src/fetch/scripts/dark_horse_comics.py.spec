@@ -19,6 +19,7 @@ Name[gl]=Dark Horse Comics
 Name[hu]=Dark Horse Comics
 Name[ia]=Dark Horse Comics
 Name[it]=Dark Horse Comics
+Name[ka]=Dark Horse კომიქსები
 Name[ko]=다크호스 코믹스
 Name[nl]=Dark Horse Comics
 Name[nn]=Dark Horse Comics
