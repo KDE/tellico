@@ -2827,7 +2827,7 @@ msgstr "Suprimix la plantilla"
 #: src/configdialog.cpp:1161
 #, kde-format
 msgid "Select template to delete:"
-msgstr "Seleccioneu la plantilla a suprimir:"
+msgstr "Seleccioneu la plantilla que s'ha de suprimir:"
 
 #: src/controller.cpp:140 src/controller.cpp:194 src/fetchdialog.cpp:330
 #: src/fetchdialog.cpp:429 src/fetchdialog.cpp:563 src/fetchdialog.cpp:624
@@ -5340,7 +5340,7 @@ msgstr "Importa <filename> com un fitxer PDF"
 #: src/main.cpp:149
 #, kde-format
 msgid "File to open"
-msgstr "Fitxer que s'obrirà"
+msgstr "Fitxer que s'ha d'obrir"
 
 #: src/mainwindow.cpp:255
 #, kde-format
@@ -6488,7 +6488,7 @@ msgstr "S'han trobat valors conflictius per a %1 en fusionar les entrades."
 #: src/tellico_kernel.cpp:338
 #, kde-format
 msgid "Please choose which value to keep."
-msgstr "Seleccioneu el valor a conservar."
+msgstr "Seleccioneu el valor que es conservarà."
 
 #: src/tellico_kernel.cpp:344 src/tellico_kernel.cpp:345
 #, kde-format
