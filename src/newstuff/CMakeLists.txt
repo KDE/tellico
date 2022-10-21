@@ -19,7 +19,7 @@ TARGET_LINK_LIBRARIES(newstuff
     )
 
 IF( KF5NewStuff_FOUND )
-  if(${ECM_VERSION} STRGREATER "5.57.0")
+  if(${ECM_VERSION} VERSION_GREATER "5.57.0")
     INSTALL(FILES tellico-template.knsrc tellico-script.knsrc DESTINATION ${KDE_INSTALL_KNSRCDIR})
   else()
     INSTALL(FILES tellico-template.knsrc tellico-script.knsrc DESTINATION ${KDE_INSTALL_CONFDIR})
