@@ -3840,7 +3840,7 @@ msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
 msgstr ""
-"Establix el camí de l'aplicació a executar que ha de generar un fitxer de "
+"Establix el camí de l'aplicació que s'executarà per a generar un fitxer de "
 "dades vàlid de Tellico."
 
 #: src/fetch/execexternalfetcher.cpp:398
@@ -5194,8 +5194,8 @@ msgid ""
 "Enter the name of the person borrowing the items from you. Clicking the "
 "button allows you to select from your address book."
 msgstr ""
-"Introduïu el nom de la persona a qui presteu elements. Clicant els botons se "
-"us permetrà de seleccionar-la des de la llibreta d'adreces."
+"Introduïu el nom de la persona a qui presteu elements. Clicant en els botons "
+"se us permetrà de seleccionar-la des de la llibreta d'adreces."
 
 #: src/loandialog.cpp:159
 #, kde-format
@@ -6956,7 +6956,7 @@ msgid ""
 "qt>"
 msgstr ""
 "<qt>Establiu cada columna perquè corresponga a un camp en la col·lecció "
-"triant una columna, seleccionant el camp i a continuació clicant el botó "
+"triant una columna, seleccionant el camp i a continuació clicant en el botó "
 "<i>Assigna camp</i>.</qt>"
 
 #: src/translators/csvimporter.cpp:338
