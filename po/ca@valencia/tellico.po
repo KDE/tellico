@@ -2175,7 +2175,7 @@ msgstr "Marca %1"
 #: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:306
 #, kde-format
 msgid "Rename Collection"
-msgstr "Canvia el nom la col·lecció"
+msgstr "Canvia el nom de la col·lecció"
 
 #: src/commands/reorderfields.cpp:36
 #, kde-format
@@ -5014,7 +5014,7 @@ msgstr "Sup&rimix"
 #: src/gui/tablefieldwidget.cpp:167
 #, kde-format
 msgid "Rename Column"
-msgstr "Canvia el nom la columna"
+msgstr "Canvia el nom de la columna"
 
 #: src/gui/tablefieldwidget.cpp:167
 #, kde-format
@@ -5029,7 +5029,7 @@ msgstr "Columna %1"
 #: src/gui/tablefieldwidget.cpp:240 src/gui/tablefieldwidget.cpp:274
 #, kde-format
 msgid "Rename Column..."
-msgstr "Canvia el nom la columna..."
+msgstr "Canvia el nom de la columna..."
 
 #: src/gui/tablefieldwidget.cpp:242 src/gui/tablefieldwidget.cpp:280
 #, kde-format
@@ -6000,7 +6000,7 @@ msgstr "Ca&nvia el nom de la col·lecció..."
 #: src/mainwindow.cpp:647
 #, kde-format
 msgid "Rename the collection"
-msgstr "Canvia el nom la col·lecció"
+msgstr "Canvia el nom de la col·lecció"
 
 #: src/mainwindow.cpp:650
 #, kde-format
