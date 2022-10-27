@@ -2910,7 +2910,7 @@ msgid ""
 msgstr ""
 "Els següents elements ja estan prestats, però Tellico no admet actualment el "
 "préstec d'un element múltiples vegades. Seran eliminats de la llista "
-"d'elements a prestar."
+"d'elements que es presten."
 
 #: src/core/filehandler.cpp:150
 #, kde-format
@@ -3253,7 +3253,7 @@ msgstr "No s'ha pogut carregar la imatge de la coberta."
 #: src/fetch/allocinefetcher.cpp:324 src/fetch/allocinefetcher.cpp:501
 #, kde-format
 msgid "Allocine Link"
-msgstr "Enllaç a Allocine"
+msgstr "Enllaç cap a Allocine"
 
 #: src/fetch/allocinefetcher.cpp:329 src/fetch/allocinefetcher.cpp:500
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
@@ -3615,7 +3615,7 @@ msgstr "Capítols"
 #: src/fetch/animenfofetcher.cpp:309 src/fetch/animenfofetcher.cpp:498
 #, kde-format
 msgid "AnimeNfo Link"
-msgstr "Enllaç a AnimeNfo"
+msgstr "Enllaç cap a AnimeNfo"
 
 #: src/fetch/animenfofetcher.cpp:313 src/fetch/animenfofetcher.cpp:497
 #, kde-format
@@ -3646,7 +3646,7 @@ msgstr "Colorist"
 #: src/fetch/bedethequefetcher.cpp:338 src/fetch/bedethequefetcher.cpp:458
 #, kde-format
 msgid "Bedetheque Link"
-msgstr "Enllaç a Bedetheque"
+msgstr "Enllaç cap a Bedetheque"
 
 #: src/fetch/bedethequefetcher.cpp:456 src/field.cpp:313
 #, kde-format
@@ -3668,7 +3668,7 @@ msgstr ""
 #: src/fetch/boardgamegeekfetcher.cpp:201
 #, kde-format
 msgid "BoardGameGeek Link"
-msgstr "Enllaç a BoardGameGeek"
+msgstr "Enllaç cap a BoardGameGeek"
 
 #: src/fetch/colnectfetcher.cpp:329 src/fetch/colnectfetcher.cpp:553
 #, kde-format
@@ -3697,7 +3697,7 @@ msgstr "Idioma: "
 #: src/fetch/comicvinefetcher.cpp:220
 #, kde-format
 msgid "Comic Vine Link"
-msgstr "Enllaç a Comic Vine"
+msgstr "Enllaç cap a Comic Vine"
 
 #: src/fetch/configwidget.cpp:41
 #, kde-format
@@ -3787,12 +3787,12 @@ msgstr "Testimoni de l'usuari: "
 #: src/fetch/doubanfetcher.cpp:345 src/fetch/doubanfetcher.cpp:572
 #, kde-format
 msgid "Douban Link"
-msgstr "Enllaç a Douban"
+msgstr "Enllaç cap a Douban"
 
 #: src/fetch/dvdfrfetcher.cpp:181
 #, kde-format
 msgid "DVDFr Link"
-msgstr "Enllaç a DVDFr"
+msgstr "Enllaç cap a DVDFr"
 
 #: src/fetch/entrezfetcher.cpp:503
 #, kde-format
@@ -3941,14 +3941,14 @@ msgstr "Consulta en cru"
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
 msgid "Filmaster Link"
-msgstr "Enllaç a Filmaster"
+msgstr "Enllaç cap a Filmaster"
 
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
 #: src/fetch/gaminghistoryfetcher.cpp:374
 #, kde-format
 msgid "Gaming History Link"
-msgstr "Enllaç a la història dels videojocs"
+msgstr "Enllaç cap a la història dels videojocs"
 
 #: src/fetch/gcstarpluginfetcher.cpp:386
 #, kde-format
@@ -3979,7 +3979,7 @@ msgstr "Autoria: "
 #: src/fetch/giantbombfetcher.cpp:206
 #, kde-format
 msgid "GiantBomb Link"
-msgstr "Enllaç a GiantBomb"
+msgstr "Enllaç cap a GiantBomb"
 
 #: src/fetch/giantbombfetcher.cpp:207 src/fetch/igdbfetcher.cpp:576
 #: src/fetch/mobygamesfetcher.cpp:637 src/field.cpp:325
@@ -3990,7 +3990,7 @@ msgstr "Classificació PEGI"
 #: src/fetch/googlebookfetcher.cpp:258 src/fetch/googlebookfetcher.cpp:371
 #, kde-format
 msgid "Google Book Link"
-msgstr "Enllaç a Google Book"
+msgstr "Enllaç cap a Google Book"
 
 #: src/fetch/googlebookfetcher.cpp:362
 #, kde-format
@@ -4024,7 +4024,7 @@ msgstr "Tenda de llibres d'Internet (ibs.it)"
 #: src/fetch/igdbfetcher.cpp:368 src/fetch/igdbfetcher.cpp:577
 #, kde-format
 msgid "IGDB Link"
-msgstr "Enllaç a IGDB"
+msgstr "Enllaç cap a IGDB"
 
 #: src/fetch/igdbfetcher.cpp:567
 #, kde-format
@@ -4085,7 +4085,7 @@ msgstr "Certificacions"
 #: src/field.cpp:331
 #, kde-format
 msgid "IMDb Link"
-msgstr "Enllaç a IMDb"
+msgstr "Enllaç cap a IMDb"
 
 #: src/fetch/imdbfetcher.cpp:1678
 #, kde-format
@@ -4120,22 +4120,22 @@ msgstr ""
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
 msgid "KinoPoisk Link"
-msgstr "Enllaç a KinoPoisk"
+msgstr "Enllaç cap a KinoPoisk"
 
 #: src/fetch/kinoteatrfetcher.cpp:239 src/fetch/kinoteatrfetcher.cpp:508
 #, kde-format
 msgid "Kino-Teatr Link"
-msgstr "Enllaç a Kino-Teatr"
+msgstr "Enllaç cap a Kino-Teatr"
 
 #: src/fetch/mobygamesfetcher.cpp:458 src/fetch/mobygamesfetcher.cpp:638
 #, kde-format
 msgid "MobyGames Link"
-msgstr "Enllaç a MobyGames"
+msgstr "Enllaç cap a MobyGames"
 
 #: src/fetch/moviemeterfetcher.cpp:220 src/fetch/moviemeterfetcher.cpp:293
 #, kde-format
 msgid "MovieMeter Link"
-msgstr "Enllaç a MovieMeter"
+msgstr "Enllaç cap a MovieMeter"
 
 #: src/fetch/multifetcher.cpp:206
 #, kde-format
@@ -4150,7 +4150,7 @@ msgstr "Font de les dades:"
 #: src/fetch/numistafetcher.cpp:342 src/fetch/numistafetcher.cpp:397
 #, kde-format
 msgid "Numista Link"
-msgstr "Enllaç a Numista"
+msgstr "Enllaç cap a Numista"
 
 #: src/fetch/numistafetcher.cpp:402
 #, kde-format
@@ -4178,12 +4178,12 @@ msgstr "Numista (%1)"
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
 msgid "OpenLibrary Link"
-msgstr "Enllaç a OpenLibrary"
+msgstr "Enllaç cap a OpenLibrary"
 
 #: src/fetch/rpggeekfetcher.cpp:210
 #, kde-format
 msgid "RPGGeek Link"
-msgstr "Enllaç a RPGGeek"
+msgstr "Enllaç cap a RPGGeek"
 
 #: src/fetch/srufetcher.cpp:491
 #, kde-format
@@ -4244,7 +4244,7 @@ msgstr "Camp"
 #: src/fetch/themoviedbfetcher.cpp:319 src/fetch/themoviedbfetcher.cpp:573
 #, kde-format
 msgid "TMDb Link"
-msgstr "Enllaç a TMDb"
+msgstr "Enllaç cap a TMDb"
 
 #: src/fetch/themoviedbfetcher.cpp:337 src/fetch/themoviedbfetcher.cpp:577
 #: src/fetch/thetvdbfetcher.cpp:260 src/fetch/thetvdbfetcher.cpp:578
@@ -4295,7 +4295,7 @@ msgstr "PIN de subscriptor: "
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
 msgid "VideoGameGeek Link"
-msgstr "Enllaç a VideoGameGeek"
+msgstr "Enllaç cap a VideoGameGeek"
 
 #: src/fetch/vndbfetcher.cpp:289 src/fetch/vndbfetcher.cpp:433
 #, kde-format
