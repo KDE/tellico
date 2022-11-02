@@ -321,7 +321,7 @@ msgid ""
 "of the entry editor."
 msgstr ""
 "Mou este camp amunt en la llista. Este ordre de llista és important per a la "
-"disposició a l'editor d'entrades."
+"disposició en l'editor d'entrades."
 
 #: src/collectionfieldsdialog.cpp:137
 #, kde-format
@@ -330,7 +330,7 @@ msgid ""
 "of the entry editor."
 msgstr ""
 "Mou este camp avall en la llista. Este ordre de llista és important per a la "
-"disposició a l'editor d'entrades."
+"disposició en l'editor d'entrades."
 
 #: src/collectionfieldsdialog.cpp:148
 #, kde-format
@@ -7471,7 +7471,7 @@ msgstr ""
 #, kde-format
 msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
 msgstr ""
-"<p>...que fent doble clic sobre un element d'una entrada s'obrirà\n"
+"<p>...que fent doble clic damunt d'un element d'entrada s'obrirà\n"
 "l'editor d'entrades.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday

@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-15 00:47+0000\n"
-"PO-Revision-Date: 2022-10-28 13:31+0300\n"
+"PO-Revision-Date: 2022-11-01 13:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -5604,7 +5604,7 @@ msgstr "Delicious Kütüphane Verisi İçe Aktar..."
 #: src/mainwindow.cpp:404
 #, kde-format
 msgid "Import data from Delicious Library"
-msgstr "Delicious Kütüphanesinden veriyi içe aktar"
+msgstr "Delicious kütüphanesinden veri içe aktar"
 
 #: src/mainwindow.cpp:407
 #, fuzzy, kde-format
@@ -6617,7 +6617,7 @@ msgid ""
 "books in that library could be overwritten.</qt>"
 msgstr ""
 "<qt><i>%1</i> olarak adlandırılan bir Alexandria Kütüphanesi zaten var. Bu "
-"kütüphanede mevcut olan herhangi bir kitabın üzerine yazılabilir.</qt>"
+"kütüphanede var olan herhangi bir kitabın üzerine yazılabilir.</qt>"
 
 #: src/translators/alexandriaimporter.cpp:234
 #, kde-format
