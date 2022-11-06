@@ -1,3 +1,7 @@
+2022-11-05  Robby  <robby@periapsis.org>
+
+	* Fixed loading for large reports (Bug 461391).
+
 2022-05-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Added capability to save empty collection as new template (Bug 450043).
