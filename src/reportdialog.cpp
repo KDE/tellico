@@ -62,6 +62,7 @@
 #include <QPainter>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QTemporaryFile>
 
 #ifdef USE_KHTML
 #include <KHTMLPart>
@@ -84,7 +85,7 @@ using Tellico::ReportDialog;
 
 // default button is going to be used as a print button, so it's separated
 ReportDialog::ReportDialog(QWidget* parent_)
-    : QDialog(parent_), m_exporter(nullptr) {
+    : QDialog(parent_), m_exporter(nullptr), m_tempFile(nullptr) {
   setModal(false);
   setWindowTitle(i18n("Collection Report"));
 
@@ -173,6 +174,9 @@ ReportDialog::ReportDialog(QWidget* parent_)
   m_reportView->insertWidget(INDEX_HTML, m_HTMLPart->view());
 #else
   m_webView = new QWebEngineView(m_reportView);
+  connect(m_webView, &QWebEngineView::loadFinished, this, [](bool b) {
+    if(!b) myDebug() << "ReportDialog - failed to load view";
+  });
   QWebEngineSettings* settings = m_webView->page()->settings();
   settings->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
   settings->setAttribute(QWebEngineSettings::PluginsEnabled, false);
@@ -198,6 +202,8 @@ ReportDialog::ReportDialog(QWidget* parent_)
 ReportDialog::~ReportDialog() {
   delete m_exporter;
   m_exporter = nullptr;
+  delete m_tempFile;
+  m_tempFile = nullptr;
 
   KConfigGroup config(KSharedConfig::openConfig(), QLatin1String(dialogOptionsString));
   KWindowConfig::saveWindowSize(windowHandle(), config);
@@ -281,7 +287,19 @@ void ReportDialog::slotRefresh() {
   m_HTMLPart->write(m_exporter->text());
   m_HTMLPart->end();
 #else
-  m_webView->setHtml(m_exporter->text(), u);
+  const auto exporterText = m_exporter->text();
+  // limit is 2 MB after percent encoding, etc., so give some padding
+  if(exporterText.size() > 1200000) {
+    delete m_tempFile;
+    m_tempFile = new QTemporaryFile(QDir::tempPath() + QLatin1String("/tellicoreport_XXXXXX") + QLatin1String(".html"));
+    m_tempFile->open();
+    QTextStream stream(m_tempFile);
+    stream << exporterText;
+    // TODO: need to handle relative links
+    m_webView->load(QUrl::fromLocalFile(m_tempFile->fileName()));
+  } else {
+    m_webView->setHtml(exporterText, u);
+  }
 #endif
 #if 0
   myDebug() << "Remove debug from reportdialog.cpp";

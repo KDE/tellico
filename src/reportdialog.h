@@ -33,6 +33,7 @@ class KHTMLPart;
 #else
 class QWebEngineView;
 #endif
+class QTemporaryFile;
 
 namespace Tellico {
   namespace Export {
@@ -82,6 +83,7 @@ private:
   GUI::ComboBox* m_templateCombo;
   Export::HTMLExporter* m_exporter;
   QString m_xsltFile;
+  QTemporaryFile* m_tempFile;
 };
 
 } // end namespace

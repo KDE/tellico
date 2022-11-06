@@ -1,3 +1,7 @@
+2022-11-05  Robby  <robby@periapsis.org>
+
+	* Fixed loading for large reports (Bug 461391).
+
 2022-04-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated ESRB rating for TheGamesDB data source.
