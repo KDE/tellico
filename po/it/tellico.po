@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-15 00:47+0000\n"
+"POT-Creation-Date: 2022-11-07 00:45+0000\n"
 "PO-Revision-Date: 2022-05-15 07:58+0200\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -2800,7 +2800,7 @@ msgid "Template Packages"
 msgstr "Pacchetti di modelli"
 
 #: src/configdialog.cpp:1131 src/importdialog.cpp:429 src/mainwindow.cpp:1250
-#: src/mainwindow.cpp:1420 src/reportdialog.cpp:342 src/reportdialog.cpp:357
+#: src/mainwindow.cpp:1420 src/reportdialog.cpp:360 src/reportdialog.cpp:375
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -6412,27 +6412,27 @@ msgstr ""
 "Tellico può importare un solo file alla volta di questo tipo. Solo %1 verrà "
 "importato."
 
-#: src/reportdialog.cpp:89
+#: src/reportdialog.cpp:90
 #, kde-format
 msgid "Collection Report"
 msgstr "Resoconto sulla collezione"
 
-#: src/reportdialog.cpp:100
+#: src/reportdialog.cpp:101
 #, kde-format
 msgid "&Report template:"
 msgstr "Modello del &resoconto:"
 
-#: src/reportdialog.cpp:136
+#: src/reportdialog.cpp:137
 #, kde-format
 msgid "&Generate"
 msgstr "&Genera"
 
-#: src/reportdialog.cpp:156
+#: src/reportdialog.cpp:157
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr "Seleziona un modello per il resoconto e fai clic su <em>Genera</em>."
 
-#: src/reportdialog.cpp:157
+#: src/reportdialog.cpp:158
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
@@ -6440,12 +6440,12 @@ msgstr ""
 "Per generare i resoconti di grandi collezioni possono essere necessari "
 "alcuni secondi."
 
-#: src/reportdialog.cpp:340
+#: src/reportdialog.cpp:358
 #, kde-format
 msgid "PNG Files"
 msgstr "File PNG"
 
-#: src/reportdialog.cpp:355 src/translators/htmlexporter.cpp:100
+#: src/reportdialog.cpp:373 src/translators/htmlexporter.cpp:100
 #, kde-format
 msgid "HTML Files"
 msgstr "File HTML"

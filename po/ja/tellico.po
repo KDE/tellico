@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-15 00:47+0000\n"
+"POT-Creation-Date: 2022-11-07 00:45+0000\n"
 "PO-Revision-Date: 2009-02-23 19:53+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -2708,7 +2708,7 @@ msgid "Template Packages"
 msgstr ""
 
 #: src/configdialog.cpp:1131 src/importdialog.cpp:429 src/mainwindow.cpp:1250
-#: src/mainwindow.cpp:1420 src/reportdialog.cpp:342 src/reportdialog.cpp:357
+#: src/mainwindow.cpp:1420 src/reportdialog.cpp:360 src/reportdialog.cpp:375
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -6192,38 +6192,38 @@ msgid ""
 "imported."
 msgstr ""
 
-#: src/reportdialog.cpp:89
+#: src/reportdialog.cpp:90
 #, kde-format
 msgid "Collection Report"
 msgstr ""
 
-#: src/reportdialog.cpp:100
+#: src/reportdialog.cpp:101
 #, kde-format
 msgid "&Report template:"
 msgstr ""
 
-#: src/reportdialog.cpp:136
+#: src/reportdialog.cpp:137
 #, kde-format
 msgid "&Generate"
 msgstr ""
 
-#: src/reportdialog.cpp:156
+#: src/reportdialog.cpp:157
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr ""
 
-#: src/reportdialog.cpp:157
+#: src/reportdialog.cpp:158
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr ""
 
-#: src/reportdialog.cpp:340
+#: src/reportdialog.cpp:358
 #, kde-format
 msgid "PNG Files"
 msgstr ""
 
-#: src/reportdialog.cpp:355 src/translators/htmlexporter.cpp:100
+#: src/reportdialog.cpp:373 src/translators/htmlexporter.cpp:100
 #, kde-format
 msgid "HTML Files"
 msgstr ""

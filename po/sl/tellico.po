@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-15 00:47+0000\n"
+"POT-Creation-Date: 2022-11-07 00:45+0000\n"
 "PO-Revision-Date: 2022-05-12 09:38+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -2773,7 +2773,7 @@ msgid "Template Packages"
 msgstr "Paketi s predlogami"
 
 #: src/configdialog.cpp:1131 src/importdialog.cpp:429 src/mainwindow.cpp:1250
-#: src/mainwindow.cpp:1420 src/reportdialog.cpp:342 src/reportdialog.cpp:357
+#: src/mainwindow.cpp:1420 src/reportdialog.cpp:360 src/reportdialog.cpp:375
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -6363,39 +6363,39 @@ msgid ""
 msgstr ""
 "Tellico lahko uvozi le eno vrsto te datoteke naenkrat. Uvožena bo samo %1."
 
-#: src/reportdialog.cpp:89
+#: src/reportdialog.cpp:90
 #, kde-format
 msgid "Collection Report"
 msgstr "Poročilo o zbirki"
 
-#: src/reportdialog.cpp:100
+#: src/reportdialog.cpp:101
 #, kde-format
 msgid "&Report template:"
 msgstr "Predloga po&ročila:"
 
-#: src/reportdialog.cpp:136
+#: src/reportdialog.cpp:137
 #, kde-format
 msgid "&Generate"
 msgstr "&Ustvari"
 
-#: src/reportdialog.cpp:156
+#: src/reportdialog.cpp:157
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr "Izberite predlogo poročila in kliknite <em>Ustvari</em>."
 
-#: src/reportdialog.cpp:157
+#: src/reportdialog.cpp:158
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr ""
 "Za velike zbirke bodo morda trajalo par sekund, da se ustvari poročilo."
 
-#: src/reportdialog.cpp:340
+#: src/reportdialog.cpp:358
 #, kde-format
 msgid "PNG Files"
 msgstr "Datoteke PNG"
 
-#: src/reportdialog.cpp:355 src/translators/htmlexporter.cpp:100
+#: src/reportdialog.cpp:373 src/translators/htmlexporter.cpp:100
 #, kde-format
 msgid "HTML Files"
 msgstr "Datoteke HTML"

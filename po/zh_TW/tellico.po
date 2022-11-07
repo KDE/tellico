@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-15 00:47+0000\n"
+"POT-Creation-Date: 2022-11-07 00:45+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -2764,7 +2764,7 @@ msgid "Template Packages"
 msgstr "樣本"
 
 #: src/configdialog.cpp:1131 src/importdialog.cpp:429 src/mainwindow.cpp:1250
-#: src/mainwindow.cpp:1420 src/reportdialog.cpp:342 src/reportdialog.cpp:357
+#: src/mainwindow.cpp:1420 src/reportdialog.cpp:360 src/reportdialog.cpp:375
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -6378,39 +6378,39 @@ msgid ""
 "imported."
 msgstr "Tellico 此種型態一次只能匯入一個檔案。將只有 %1 會被匯出。"
 
-#: src/reportdialog.cpp:89
+#: src/reportdialog.cpp:90
 #, kde-format
 msgid "Collection Report"
 msgstr "收藏報告"
 
-#: src/reportdialog.cpp:100
+#: src/reportdialog.cpp:101
 #, kde-format
 msgid "&Report template:"
 msgstr "報告樣本(&R)："
 
-#: src/reportdialog.cpp:136
+#: src/reportdialog.cpp:137
 #, kde-format
 msgid "&Generate"
 msgstr "產生(&G)"
 
-#: src/reportdialog.cpp:156
+#: src/reportdialog.cpp:157
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr "請選擇報告樣本並點擊「產生」。"
 
-#: src/reportdialog.cpp:157
+#: src/reportdialog.cpp:158
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "有些較大的收藏，產生報告可能會花上一些時間。"
 
-#: src/reportdialog.cpp:340
+#: src/reportdialog.cpp:358
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "PNG Files"
 msgstr "檔案"
 
-#: src/reportdialog.cpp:355 src/translators/htmlexporter.cpp:100
+#: src/reportdialog.cpp:373 src/translators/htmlexporter.cpp:100
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "HTML Files"

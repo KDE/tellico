@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-15 00:47+0000\n"
+"POT-Creation-Date: 2022-11-07 00:45+0000\n"
 "PO-Revision-Date: 2022-01-05 12:27+0100\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -2773,7 +2773,7 @@ msgid "Template Packages"
 msgstr "Balíčky šablon"
 
 #: src/configdialog.cpp:1131 src/importdialog.cpp:429 src/mainwindow.cpp:1250
-#: src/mainwindow.cpp:1420 src/reportdialog.cpp:342 src/reportdialog.cpp:357
+#: src/mainwindow.cpp:1420 src/reportdialog.cpp:360 src/reportdialog.cpp:375
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -6352,39 +6352,39 @@ msgstr ""
 "Tellico nemůže najednou importovat více souborů tohoto druhu. Bude "
 "importován pouze %1."
 
-#: src/reportdialog.cpp:89
+#: src/reportdialog.cpp:90
 #, kde-format
 msgid "Collection Report"
 msgstr "Zpráva o sbírce"
 
-#: src/reportdialog.cpp:100
+#: src/reportdialog.cpp:101
 #, kde-format
 msgid "&Report template:"
 msgstr "Ša&blona zprávy:"
 
-#: src/reportdialog.cpp:136
+#: src/reportdialog.cpp:137
 #, kde-format
 msgid "&Generate"
 msgstr "&Generovat"
 
-#: src/reportdialog.cpp:156
+#: src/reportdialog.cpp:157
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr "Vyberte šablonu a klikněte na <em>Generovat</em>."
 
-#: src/reportdialog.cpp:157
+#: src/reportdialog.cpp:158
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr ""
 "Některé zprávy mohou být v případě velkých sbírek generovány několik sekund."
 
-#: src/reportdialog.cpp:340
+#: src/reportdialog.cpp:358
 #, kde-format
 msgid "PNG Files"
 msgstr "Soubory PNG"
 
-#: src/reportdialog.cpp:355 src/translators/htmlexporter.cpp:100
+#: src/reportdialog.cpp:373 src/translators/htmlexporter.cpp:100
 #, kde-format
 msgid "HTML Files"
 msgstr "Soubory HTML"
