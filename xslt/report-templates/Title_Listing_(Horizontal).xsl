@@ -32,6 +32,7 @@
 
 <!-- Sort using user's preferred language -->
 <xsl:param name="lang"/>
+<xsl:param name="basedir"/> <!-- relative dir for template -->
 
 <xsl:param name="num-columns" select="3"/>
 
@@ -42,6 +43,7 @@
 <xsl:template match="tc:tellico">
  <html>
   <head>
+   <base href="file://{$basedir}"/>
    <meta name="viewport" content="width=device-width, initial-scale=1"/>
    <style type="text/css">
    body {

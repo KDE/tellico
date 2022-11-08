@@ -183,6 +183,7 @@ bool HTMLExporter::loadXSLTFile() {
   m_handler->addStringParam("date", QDate::currentDate().toString(Qt::ISODate).toLatin1());
   m_handler->addStringParam("time", QTime::currentTime().toString(Qt::ISODate).toLatin1());
   m_handler->addStringParam("user", KUser(KUser::UseRealUserID).loginName().toLatin1());
+  m_handler->addStringParam("basedir", u.adjusted(QUrl::RemoveFilename).path().toLocal8Bit());
 
   if(m_exportEntryFiles) {
     // export entries to same place as all the other date files

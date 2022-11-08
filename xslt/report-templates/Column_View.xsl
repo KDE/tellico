@@ -54,6 +54,7 @@
 
 <xsl:param name="datadir"/> <!-- dir where Tellico data files are located -->
 <xsl:param name="imgdir"/> <!-- dir where field images are located -->
+<xsl:param name="basedir"/> <!-- relative dir for template -->
 
 <xsl:key name="fieldsByName" match="tc:field" use="@name"/>
 <xsl:key name="imagesById" match="tc:image" use="@id"/>
@@ -105,6 +106,7 @@
 <xsl:template match="tc:tellico">
  <html>
   <head>
+  <base href="file://{$basedir}"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <style type="text/css">
    body {

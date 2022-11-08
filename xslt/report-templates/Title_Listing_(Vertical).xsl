@@ -29,6 +29,7 @@
 
 <xsl:param name="filename"/>
 <xsl:param name="cdate"/>
+<xsl:param name="basedir"/> <!-- relative dir for template -->
 
 <!-- Sort using user's preferred language -->
 <xsl:param name="lang"/>
@@ -42,6 +43,7 @@
 <xsl:template match="tc:tellico">
  <html>
   <head>
+   <base href="file://{$basedir}"/>
    <meta name="viewport" content="width=device-width, initial-scale=1"/>
    <style type="text/css">
    body {
