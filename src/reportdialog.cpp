@@ -294,8 +294,8 @@ void ReportDialog::slotRefresh() {
     m_tempFile = new QTemporaryFile(QDir::tempPath() + QLatin1String("/tellicoreport_XXXXXX") + QLatin1String(".html"));
     m_tempFile->open();
     QTextStream stream(m_tempFile);
+    stream.setCodec("UTF-8");
     stream << exporterText;
-    // TODO: need to handle relative links
     m_webView->load(QUrl::fromLocalFile(m_tempFile->fileName()));
   } else {
     m_webView->setHtml(exporterText, u);

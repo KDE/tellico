@@ -32,6 +32,7 @@
 
 <xsl:param name="filename"/>
 <xsl:param name="cdate"/>
+<xsl:param name="basedir"/> <!-- relative dir for template -->
 
 <xsl:variable name="apos">'</xsl:variable>
 
@@ -44,6 +45,7 @@
 <xsl:template match="tc:tellico">
  <html>
   <head>
+   <base href="file://{$basedir}"/>
    <script language="javascript" type="text/javascript" src="jquery.min.js"></script>
    <script language="javascript" type="text/javascript" src="jquery.flot.js"></script>
    <script language="javascript" type="text/javascript" src="jquery.flot.pie.js"></script>
