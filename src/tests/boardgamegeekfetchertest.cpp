@@ -59,7 +59,7 @@ void BoardGameGeekFetcherTest::testTitle() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::BoardGame);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Catan"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("CATAN"));
   QCOMPARE(entry->field(QStringLiteral("designer")), QStringLiteral("Klaus Teuber"));
   QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("publisher"))).at(0), QStringLiteral("KOSMOS"));
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1995"));
