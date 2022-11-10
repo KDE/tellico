@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-15 00:47+0000\n"
+"POT-Creation-Date: 2022-11-09 00:48+0000\n"
 "PO-Revision-Date: 2021-04-09 23:48+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -610,8 +610,8 @@ msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr ""
-"<qt><p>Er du sikker på at du vil tilbakestilla eigenskapane for feltet <em>"
-"%1</em> til standardverdiane?</p></qt>"
+"<qt><p>Er du sikker på at du vil tilbakestilla eigenskapane for feltet "
+"<em>%1</em> til standardverdiane?</p></qt>"
 
 #: src/collectionfieldsdialog.cpp:808
 #, kde-format
@@ -2534,7 +2534,7 @@ msgstr "&Formater titlar og namn"
 msgid "&Print field headers"
 msgstr "&Skriv ut feltoverskrifter"
 
-#: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:499
+#: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:500
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Kryss av her for å visa feltnamn som kolonneoverskrifter."
@@ -2549,7 +2549,7 @@ msgstr "Grupperingsval"
 msgid "&Group the entries"
 msgstr "&Grupper oppføringane"
 
-#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:504
+#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:505
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Kryss av her for å gruppera oppføringane etter det valde feltet."
@@ -2790,7 +2790,7 @@ msgid "Template Packages"
 msgstr "Malpakkar"
 
 #: src/configdialog.cpp:1131 src/importdialog.cpp:429 src/mainwindow.cpp:1250
-#: src/mainwindow.cpp:1420 src/reportdialog.cpp:342 src/reportdialog.cpp:357
+#: src/mainwindow.cpp:1420 src/reportdialog.cpp:360 src/reportdialog.cpp:375
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -4766,7 +4766,7 @@ msgid "Group"
 msgstr "Gruppe"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1084 src/mainwindow.cpp:1705
-#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:329
+#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:330
 #, kde-format
 msgid "People"
 msgstr "Personar"
@@ -5224,7 +5224,7 @@ msgstr "Lever inn"
 msgid "Modify Loan..."
 msgstr "Endra lån …"
 
-#: src/loanview.cpp:200 xslt/report-templates/Loan_View.xsl:133
+#: src/loanview.cpp:200 xslt/report-templates/Loan_View.xsl:135
 #, kde-format
 msgid "Borrower"
 msgstr "Lånar"
@@ -6181,8 +6181,8 @@ msgstr ""
 "<h3>Tellico er eit verktøy for å halda oversikt i samlingar med bøker, "
 "filmar, musikk og alt anna du måtte ønskja.</h3><h3>Du kan leggja nye "
 "oppføringar til samlinga di ved å <a href=\"tc:///coll_new_entry\">skriva "
-"inn data manuelt</a> eller ved å <a href=\"tc:///edit_search_internet"
-"\">lasta ned data</a> frå ulike Internett-kjelder.</h3>"
+"inn data manuelt</a> eller ved å <a href=\"tc:///"
+"edit_search_internet\">lasta ned data</a> frå ulike Internett-kjelder.</h3>"
 
 #: src/mainwindow.cpp:1154
 #, kde-format
@@ -6379,38 +6379,38 @@ msgstr ""
 "Tellico kan berre importera éi fil av denne typen om gongen. Berre %1 vert "
 "importert."
 
-#: src/reportdialog.cpp:89
+#: src/reportdialog.cpp:90
 #, kde-format
 msgid "Collection Report"
 msgstr "Samlingsrapport"
 
-#: src/reportdialog.cpp:100
+#: src/reportdialog.cpp:101
 #, kde-format
 msgid "&Report template:"
 msgstr "&Rapportmal:"
 
-#: src/reportdialog.cpp:136
+#: src/reportdialog.cpp:137
 #, kde-format
 msgid "&Generate"
 msgstr "&Lag"
 
-#: src/reportdialog.cpp:156
+#: src/reportdialog.cpp:157
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr "Vel ein rapportmal og trykk <em>Lag</em>."
 
-#: src/reportdialog.cpp:157
+#: src/reportdialog.cpp:158
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "Er samlinga stor, kan det ta fleire sekund å laga klar rapporten."
 
-#: src/reportdialog.cpp:340
+#: src/reportdialog.cpp:358
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG-filer"
 
-#: src/reportdialog.cpp:355 src/translators/htmlexporter.cpp:100
+#: src/reportdialog.cpp:373 src/translators/htmlexporter.cpp:100
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML-filer"
@@ -6820,7 +6820,7 @@ msgid "Use a tab as the delimiter."
 msgstr "Bruk tabulatorteikn som skiljeteikn."
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:73
+#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "Anna"
@@ -7059,32 +7059,32 @@ msgstr "Goodreads-val"
 msgid "HTML"
 msgstr "HTML"
 
-#: src/translators/htmlexporter.cpp:333
+#: src/translators/htmlexporter.cpp:334
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(gruppert etter %1)"
 
-#: src/translators/htmlexporter.cpp:495
+#: src/translators/htmlexporter.cpp:496
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML-val"
 
-#: src/translators/htmlexporter.cpp:498
+#: src/translators/htmlexporter.cpp:499
 #, kde-format
 msgid "Print field headers"
 msgstr "Skriv ut feltoverskrifter"
 
-#: src/translators/htmlexporter.cpp:503
+#: src/translators/htmlexporter.cpp:504
 #, kde-format
 msgid "Group the entries"
 msgstr "Grupper oppføringane"
 
-#: src/translators/htmlexporter.cpp:508
+#: src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Eksporter oppføringar til einskildfiler"
 
-#: src/translators/htmlexporter.cpp:509
+#: src/translators/htmlexporter.cpp:510
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr ""
@@ -7479,50 +7479,50 @@ msgstr "Denne malen er berre meint for musikksamlingar."
 msgid "Total:"
 msgstr "Totalt:"
 
-#: xslt/entry-templates/Video.xsl:200 xslt/report-templates/Tri-Column.xsl:122
+#: xslt/entry-templates/Video.xsl:200 xslt/report-templates/Tri-Column.xsl:124
 #, kde-format
 msgid "This template is meant for video collections only."
 msgstr "Denne malen er berre meint for filmsamlingar."
 
-#: xslt/report-templates/Group_Summary.xsl:161
+#: xslt/report-templates/Group_Summary.xsl:163
 #, kde-format
 msgid ": Group Summary"
 msgstr ": Gruppesamandrag"
 
-#: xslt/report-templates/Group_Summary.xsl:169
+#: xslt/report-templates/Group_Summary.xsl:171
 #, kde-format
 msgid "Total number of fields:"
 msgstr "Talet på felt totalt:"
 
-#: xslt/report-templates/Group_Summary.xsl:173
+#: xslt/report-templates/Group_Summary.xsl:175
 #, kde-format
 msgid "Total number of entries:"
 msgstr "Talet på oppføringar totalt:"
 
-#: xslt/report-templates/Group_Summary.xsl:189
-#: xslt/report-templates/Loan_View.xsl:195 xslt/tellico2html.xsl:413
+#: xslt/report-templates/Group_Summary.xsl:191
+#: xslt/report-templates/Loan_View.xsl:197 xslt/tellico2html.xsl:413
 #, kde-format
 msgid "Generated by Tellico"
 msgstr "Laga av Tellico"
 
-#: xslt/report-templates/Group_Summary.xsl:287
+#: xslt/report-templates/Group_Summary.xsl:289
 #, kde-format
 msgid "Distinct values: "
 msgstr "Unike verdiar: "
 
-#: xslt/report-templates/Loan_View.xsl:134
-#: xslt/report-templates/Loan_View.xsl:168
+#: xslt/report-templates/Loan_View.xsl:136
+#: xslt/report-templates/Loan_View.xsl:170
 #, kde-format
 msgid "Loan Date"
 msgstr "Lånedato"
 
-#: xslt/report-templates/Loan_View.xsl:135
-#: xslt/report-templates/Loan_View.xsl:170
+#: xslt/report-templates/Loan_View.xsl:137
+#: xslt/report-templates/Loan_View.xsl:172
 #, kde-format
 msgid "Note"
 msgstr "Merknad"
 
-#: xslt/report-templates/Loan_View.xsl:169
+#: xslt/report-templates/Loan_View.xsl:171
 #, kde-format
 msgid "Due Date"
 msgstr "Innleveringsfrist"
