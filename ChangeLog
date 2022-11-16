@@ -1,4 +1,8 @@
-2022-11-05  Robby  <robby@periapsis.org>
+2022-11-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 3.4.5.
+
+2022-11-05  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed loading for large reports (Bug 461391).
 
