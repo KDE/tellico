@@ -297,5 +297,6 @@ install(FILES tellico.dtd tellico.tips DESTINATION ${TELLICO_DATA_INSTALL_DIR})
 install(FILES tellico.xml DESTINATION  ${KDE_INSTALL_MIMEDIR})
 install(FILES org.kde.tellico.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR} )
 ki18n_install(po)
+kdoctools_install(po)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
