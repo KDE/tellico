@@ -313,8 +313,9 @@ void FreeDBImporter::readCache() {
   KCDDB::Config cfg;
   cfg.load();
 
-  QStringList dirs = cfg.cacheLocations();
-  foreach(const QString& dirName, dirs) {
+  const QStringList cacheDirs = cfg.cacheLocations();
+  QStringList dirs = cacheDirs;
+  foreach(const QString& dirName, cacheDirs) {
     dirs += Tellico::findAllSubDirs(dirName);
   }
 
