@@ -342,10 +342,8 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   } else if(isGrouped) {
     EntryGroupDict* d = new EntryGroupDict();
     m_entryGroupDicts.insert(fieldName, d);
-    if(!wasGrouped) {
-      // cache the possible groups of entries
-      m_entryGroups << fieldName;
-    }
+    // cache the possible groups of entries
+    m_entryGroups << fieldName;
     resetGroups = true;
   }
 
