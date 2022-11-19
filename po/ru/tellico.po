@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:48+0000\n"
+"POT-Creation-Date: 2022-11-19 00:46+0000\n"
 "PO-Revision-Date: 2022-03-21 17:12+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -1672,8 +1672,8 @@ msgstr "Альбом"
 #: src/fetch/upcitemdbfetcher.cpp:291 src/fetch/upcitemdbfetcher.cpp:411
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/freedbimporter.cpp:275
-#: src/translators/freedbimporter.cpp:392
-#: src/translators/freedbimporter.cpp:459
+#: src/translators/freedbimporter.cpp:393
+#: src/translators/freedbimporter.cpp:460
 #, kde-format
 msgid "Compact Disc"
 msgstr "Компакт-диск"
@@ -7038,32 +7038,32 @@ msgstr "<qt>Записи, соответствующие этому CD, не н�
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
 msgstr "<qt>Tellico не удалось завершить сканирование CD.</qt>"
 
-#: src/translators/freedbimporter.cpp:484
+#: src/translators/freedbimporter.cpp:485
 #, kde-format
 msgid "Various"
 msgstr "Различ."
 
-#: src/translators/freedbimporter.cpp:504
+#: src/translators/freedbimporter.cpp:505
 #, kde-format
 msgid "Audio CD Options"
 msgstr "Параметры Audio CD"
 
-#: src/translators/freedbimporter.cpp:511
+#: src/translators/freedbimporter.cpp:512
 #, kde-format
 msgid "Read data from CD-ROM device"
 msgstr "Прочитать данные с CD-ROM"
 
-#: src/translators/freedbimporter.cpp:514
+#: src/translators/freedbimporter.cpp:515
 #, kde-format
 msgid "Select or input the CD-ROM device location."
 msgstr "Выберите или введите адрес устройства CD-ROM."
 
-#: src/translators/freedbimporter.cpp:523
+#: src/translators/freedbimporter.cpp:524
 #, kde-format
 msgid "Read all CDDB cache files only"
 msgstr "Читать только кэшированные файлы CDDB"
 
-#: src/translators/freedbimporter.cpp:524
+#: src/translators/freedbimporter.cpp:525
 #, kde-format
 msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "

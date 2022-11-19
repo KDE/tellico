@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:48+0000\n"
+"POT-Creation-Date: 2022-11-19 00:46+0000\n"
 "PO-Revision-Date: 2022-03-13 09:29+0100\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -1693,8 +1693,8 @@ msgstr "Album"
 #: src/fetch/upcitemdbfetcher.cpp:291 src/fetch/upcitemdbfetcher.cpp:411
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/freedbimporter.cpp:275
-#: src/translators/freedbimporter.cpp:392
-#: src/translators/freedbimporter.cpp:459
+#: src/translators/freedbimporter.cpp:393
+#: src/translators/freedbimporter.cpp:460
 #, kde-format
 msgid "Compact Disc"
 msgstr "Compact Disc"
@@ -7169,32 +7169,32 @@ msgstr ""
 "<qt>Tellico war nicht in der Lage, das Nachschlagen der CD abzuschließen.</"
 "qt> "
 
-#: src/translators/freedbimporter.cpp:484
+#: src/translators/freedbimporter.cpp:485
 #, kde-format
 msgid "Various"
 msgstr "Verschiedene"
 
-#: src/translators/freedbimporter.cpp:504
+#: src/translators/freedbimporter.cpp:505
 #, kde-format
 msgid "Audio CD Options"
 msgstr "Audio-CD-Optionen"
 
-#: src/translators/freedbimporter.cpp:511
+#: src/translators/freedbimporter.cpp:512
 #, kde-format
 msgid "Read data from CD-ROM device"
 msgstr "Daten vom CD-Laufwerk lesen"
 
-#: src/translators/freedbimporter.cpp:514
+#: src/translators/freedbimporter.cpp:515
 #, kde-format
 msgid "Select or input the CD-ROM device location."
 msgstr "Wählen Sie das CD-Laufwerk aus oder geben Sie die Position ein."
 
-#: src/translators/freedbimporter.cpp:523
+#: src/translators/freedbimporter.cpp:524
 #, kde-format
 msgid "Read all CDDB cache files only"
 msgstr "Nur die Dateien aus dem CDDB-Cache lesen"
 
-#: src/translators/freedbimporter.cpp:524
+#: src/translators/freedbimporter.cpp:525
 #, kde-format
 msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "

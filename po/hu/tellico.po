@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:48+0000\n"
+"POT-Creation-Date: 2022-11-19 00:46+0000\n"
 "PO-Revision-Date: 2022-02-01 11:21+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1654,8 +1654,8 @@ msgstr "Album"
 #: src/fetch/upcitemdbfetcher.cpp:291 src/fetch/upcitemdbfetcher.cpp:411
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/freedbimporter.cpp:275
-#: src/translators/freedbimporter.cpp:392
-#: src/translators/freedbimporter.cpp:459
+#: src/translators/freedbimporter.cpp:393
+#: src/translators/freedbimporter.cpp:460
 #, kde-format
 msgid "Compact Disc"
 msgstr "CD lemez"
@@ -7013,32 +7013,32 @@ msgstr "<qt>A CD-hez nem található megfelelő rekord.</qt>"
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
 msgstr "<qt>A Tellico nem tudta befejezni a CD keresését.</qt>"
 
-#: src/translators/freedbimporter.cpp:484
+#: src/translators/freedbimporter.cpp:485
 #, kde-format
 msgid "Various"
 msgstr "Különböző"
 
-#: src/translators/freedbimporter.cpp:504
+#: src/translators/freedbimporter.cpp:505
 #, kde-format
 msgid "Audio CD Options"
 msgstr "Hang CD beállítások"
 
-#: src/translators/freedbimporter.cpp:511
+#: src/translators/freedbimporter.cpp:512
 #, kde-format
 msgid "Read data from CD-ROM device"
 msgstr "Adatok olvasása a CD-ROM-ról"
 
-#: src/translators/freedbimporter.cpp:514
+#: src/translators/freedbimporter.cpp:515
 #, kde-format
 msgid "Select or input the CD-ROM device location."
 msgstr "Válassza ki, vagy adja meg a CD-ROM elérését."
 
-#: src/translators/freedbimporter.cpp:523
+#: src/translators/freedbimporter.cpp:524
 #, kde-format
 msgid "Read all CDDB cache files only"
 msgstr "Csak a CDDB fájlok olvasása"
 
-#: src/translators/freedbimporter.cpp:524
+#: src/translators/freedbimporter.cpp:525
 #, kde-format
 msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
