@@ -148,6 +148,7 @@ QString FetchResult::makeDescription(Data::EntryPtr entry) {
 
     case Data::Collection::Base:
       // some guesses for custom collections
+      append(desc, entry, "description");
       append(desc, entry, "publisher");
       append(desc, entry, "year");
       break;
