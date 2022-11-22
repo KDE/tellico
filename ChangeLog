@@ -1,3 +1,7 @@
+2022-11-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Use transparent background in initial entry view (Bug 461777).
+
 2022-11-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 3.4.5.

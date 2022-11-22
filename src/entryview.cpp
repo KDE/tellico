@@ -108,6 +108,7 @@ using Tellico::EntryViewPage;
 
 EntryViewPage::EntryViewPage(QWidget* parent)
     : QWebEnginePage(parent) {
+  setBackgroundColor(Qt::transparent);
   settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
   settings()->setAttribute(QWebEngineSettings::PluginsEnabled, false);
   settings()->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, true);
