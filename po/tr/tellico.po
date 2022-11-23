@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-19 00:46+0000\n"
-"PO-Revision-Date: 2022-11-21 22:00+0300\n"
+"POT-Creation-Date: 2022-11-23 00:48+0000\n"
+"PO-Revision-Date: 2022-11-22 17:25+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3148,12 +3148,12 @@ msgstr "Girdileri Güncelle"
 msgid "Updating <b>%1</b>..."
 msgstr "Güncelleniyor <b>%1</b>..."
 
-#: src/entryview.cpp:330
+#: src/entryview.cpp:331
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico, öntanımlı girdi stilini konumlandıramıyor."
 
-#: src/entryview.cpp:332 src/mainwindow.cpp:1770
+#: src/entryview.cpp:333 src/mainwindow.cpp:1770
 #, kde-format
 msgid "Please check your installation."
 msgstr "Lütfen kurulumunuzu gözden geçirin."
@@ -3542,7 +3542,7 @@ msgstr ""
 #: src/fetch/thegamesdbfetcher.cpp:655 src/fetch/videogamegeekfetcher.cpp:213
 #, kde-format
 msgid "&Image size: "
-msgstr "Gör&sel boyutu: "
+msgstr "Gö&rsel boyutu: "
 
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:217
 #: src/fetch/mobygamesfetcher.cpp:674 src/fetch/rpggeekfetcher.cpp:226
@@ -4087,7 +4087,7 @@ msgstr "IMDb Bağlantısı"
 #: src/fetch/imdbfetcher.cpp:1678
 #, kde-format
 msgid "Download cover &image"
-msgstr "Kapak resm&ini indir"
+msgstr "Kapak gö&rselini indir"
 
 #: src/fetch/isbndbfetcher.cpp:360
 #, fuzzy, kde-format
@@ -4747,7 +4747,7 @@ msgstr "Bölümler"
 #: src/filterdialog.cpp:62
 #, kde-format
 msgid "Advanced Filter"
-msgstr "İleri Seviye Filtre"
+msgstr "İleri Düzey Süzgeç"
 
 #: src/filterdialog.cpp:83
 #, kde-format
@@ -5942,7 +5942,7 @@ msgstr "Koleksiyondaki bütün girdileri geri bırak"
 #: src/mainwindow.cpp:567
 #, kde-format
 msgid "Advanced &Filter..."
-msgstr "İleri Se&viye Süzgeç..."
+msgstr "İleri Düzey S&üzgeç..."
 
 #: src/mainwindow.cpp:571 src/mainwindow.cpp:797
 #, kde-format
