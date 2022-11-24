@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-23 00:48+0000\n"
-"PO-Revision-Date: 2022-09-30 14:42+0200\n"
+"PO-Revision-Date: 2022-11-23 06:41+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -98,19 +98,19 @@ msgstr "გამოსახულების სია"
 #, kde-format
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
-msgstr ""
+msgstr "სამსვეტიანი"
 
 #. i18n: file: xslt/report-templates/Group_Statistics.xsl
 #, kde-format
 msgctxt "Group Statistics XSL Template"
 msgid "Group Statistics"
-msgstr ""
+msgstr "ჯგუფის სტატისტიკა"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
 msgctxt "Column View XSL Template"
 msgid "Column View"
-msgstr ""
+msgstr "სვეტის ხედი"
 
 #: src/bibtexkeydialog.cpp:49
 #, kde-format
@@ -125,12 +125,12 @@ msgstr ""
 #: src/bibtexkeydialog.cpp:73
 #, kde-format
 msgid "Check for duplicates"
-msgstr ""
+msgstr "დუბლიკატებზე შემოწმება"
 
 #: src/bibtexkeydialog.cpp:76
 #, kde-format
 msgid "Filter for duplicates"
-msgstr ""
+msgstr "დუბლიკატების გაფილტვრა"
 
 #: src/bibtexkeydialog.cpp:111
 #, kde-format
@@ -147,7 +147,7 @@ msgstr[1] ""
 #: src/borrowerdialog.cpp:74
 #, kde-format
 msgid "Select Borrower"
-msgstr ""
+msgstr "აირჩიეთ მსესხებელი"
 
 #: src/borrowerdialog.cpp:91 src/collections/filecatalog.cpp:49
 #, kde-format
@@ -158,43 +158,43 @@ msgstr "სახელი"
 #: src/charts/collectionsizereport.cpp:116
 #, kde-format
 msgid "Collection Size"
-msgstr ""
+msgstr "კოლექციის ზომა"
 
 #: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1617
 #, kde-format
 msgid "Total entries: %1"
-msgstr ""
+msgstr "სულ ჩანაწერები: %1"
 
 #: src/charts/collectionsizereport.cpp:91
 #, kde-format
 msgid "Collection Size Over Time"
-msgstr ""
+msgstr "კოლექციის ზომა დროის მიხედვით"
 
 #: src/charts/groupsummaryreport.cpp:60
 #, kde-format
 msgid "Group Summary: %1"
-msgstr ""
+msgstr "ჯგუფის შეჯამება: %1"
 
 #: src/charts/groupsummaryreport.cpp:66
 #, kde-format
 msgid "Total number of entries: %1"
-msgstr ""
+msgstr "ჩანაწერების ჯამური რაოდენობა: %1"
 
 #: src/charts/groupsummaryreport.cpp:120
 #, kde-format
 msgid "Top Values: %1"
-msgstr ""
+msgstr "საუკეთესო მნიშვნელობებ: %1"
 
 #: src/charts/groupsummaryreport.cpp:192
 #, kde-format
 msgid "Group Summary Report"
-msgstr ""
+msgstr "ჯგუფის მიმოხილვის ანგარიში"
 
 #: src/charts/yeardistributionreport.cpp:69
 #: src/charts/yeardistributionreport.cpp:133
 #, kde-format
 msgid "Year Distribution"
-msgstr ""
+msgstr "დისტრიბუციის წელი"
 
 #: src/charts/yeardistributionreport.cpp:158
 #, kde-format
@@ -210,12 +210,12 @@ msgstr ""
 #: src/collection.cpp:51
 #, kde-format
 msgid "My Collection"
-msgstr ""
+msgstr "ჩემი კოლექცია"
 
 #: src/collectionfactory.cpp:85
 #, kde-format
 msgid "Book Collection"
-msgstr ""
+msgstr "წიგნების კოლექცია"
 
 #: src/collectionfactory.cpp:86 src/collections/bibtexcollection.cpp:44
 #, kde-format
@@ -225,67 +225,67 @@ msgstr "ბიბლიოგრაფია"
 #: src/collectionfactory.cpp:87
 #, kde-format
 msgid "Comic Book Collection"
-msgstr ""
+msgstr "კომიქსების კოლექცია"
 
 #: src/collectionfactory.cpp:88
 #, kde-format
 msgid "Video Collection"
-msgstr ""
+msgstr "ვიდეო კოლექცია"
 
 #: src/collectionfactory.cpp:89
 #, kde-format
 msgid "Music Collection"
-msgstr ""
+msgstr "მუსიკის კოლექცია"
 
 #: src/collectionfactory.cpp:90
 #, kde-format
 msgid "Coin Collection"
-msgstr ""
+msgstr "მონეტების კოლექცია"
 
 #: src/collectionfactory.cpp:91
 #, kde-format
 msgid "Stamp Collection"
-msgstr ""
+msgstr "მარკების კოლექცია"
 
 #: src/collectionfactory.cpp:92
 #, kde-format
 msgid "Wine Collection"
-msgstr ""
+msgstr "ღვინოების კოლექცია"
 
 #: src/collectionfactory.cpp:93
 #, kde-format
 msgid "Card Collection"
-msgstr ""
+msgstr "ბარათების კოლექცია"
 
 #: src/collectionfactory.cpp:94
 #, kde-format
 msgid "Game Collection"
-msgstr ""
+msgstr "თამაშების კოლექცია"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
 msgid "File Catalog"
-msgstr ""
+msgstr "ფაილების კატალოგი"
 
 #: src/collectionfactory.cpp:96
 #, kde-format
 msgid "Board Game Collection"
-msgstr ""
+msgstr "სამაგიდო თამაშების კოლექცია"
 
 #: src/collectionfactory.cpp:97
 #, kde-format
 msgid "Custom Collection"
-msgstr ""
+msgstr "მითითებული კოლექცია"
 
 #: src/collectionfieldsdialog.cpp:82
 #, kde-format
 msgid "Collection Fields"
-msgstr ""
+msgstr "კოლექციის ველები"
 
 #: src/collectionfieldsdialog.cpp:92
 #, kde-format
 msgid "Current Fields"
-msgstr ""
+msgstr "მიმდინარე ველები"
 
 #: src/collectionfieldsdialog.cpp:113
 #, kde-format
@@ -296,7 +296,7 @@ msgstr "&ახალი"
 #: src/collectionfieldsdialog.cpp:116
 #, kde-format
 msgid "Add a new field to the collection"
-msgstr ""
+msgstr "კოლექციაში ახალი ველის ჩამატება"
 
 #: src/collectionfieldsdialog.cpp:117
 #, kde-format
@@ -307,7 +307,7 @@ msgstr "წაშლა"
 #: src/collectionfieldsdialog.cpp:120
 #, kde-format
 msgid "Remove a field from the collection"
-msgstr ""
+msgstr "კოლექციიდან ველის წაშლა"
 
 #: src/collectionfieldsdialog.cpp:132
 #, kde-format
@@ -404,7 +404,7 @@ msgstr ""
 #: src/collectionfieldsdialog.cpp:198
 #, kde-format
 msgid "Cate&gory:"
-msgstr ""
+msgstr "&კატეგორია:"
 
 #: src/collectionfieldsdialog.cpp:203
 #, kde-format
@@ -414,7 +414,7 @@ msgstr ""
 #: src/collectionfieldsdialog.cpp:220
 #, kde-format
 msgid "Set &properties..."
-msgstr ""
+msgstr "&თვისებების დაყენება..."
 
 #: src/collectionfieldsdialog.cpp:224
 #, kde-format
@@ -471,7 +471,7 @@ msgstr ""
 #: src/collectionfieldsdialog.cpp:276
 #, kde-format
 msgid "A&llowed values:"
-msgstr ""
+msgstr "&ნებადართული მნიშვნელობები:"
 
 #: src/collectionfieldsdialog.cpp:281
 #, kde-format
@@ -489,7 +489,7 @@ msgstr "ფორმატის მორგება:"
 #: src/collectionfieldsdialog.cpp:294
 #, kde-format
 msgid "No formatting"
-msgstr ""
+msgstr "ფორმატირების გარეშე"
 
 #: src/collectionfieldsdialog.cpp:295
 #, kde-format
@@ -499,17 +499,17 @@ msgstr ""
 #: src/collectionfieldsdialog.cpp:296
 #, kde-format
 msgid "Format as a title"
-msgstr ""
+msgstr "სათაურად ფორმატირება"
 
 #: src/collectionfieldsdialog.cpp:297
 #, kde-format
 msgid "Format as a name"
-msgstr ""
+msgstr "სახელად ფორმატირება"
 
 #: src/collectionfieldsdialog.cpp:301
 #, kde-format
 msgid "Field Options"
-msgstr ""
+msgstr "ველის პარამეტრები"
 
 #: src/collectionfieldsdialog.cpp:304
 #, kde-format
@@ -554,7 +554,7 @@ msgstr ""
 #: src/collectionfieldsdialog.cpp:398
 #, kde-format
 msgid "Modify Fields"
-msgstr ""
+msgstr "ველების შეცვლა"
 
 #: src/collectionfieldsdialog.cpp:411
 #, kde-format
@@ -567,17 +567,17 @@ msgstr ""
 #: src/collectionfieldsdialog.cpp:416
 #, kde-format
 msgid "Keep modified values"
-msgstr ""
+msgstr "შეცვლილი მნიშვნელობების შენარჩუნება"
 
 #: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:518
 #, kde-format
 msgid "New Field %1"
-msgstr ""
+msgstr "ახალი ველი %1"
 
 #: src/collectionfieldsdialog.cpp:804
 #, kde-format
 msgid "Revert Field Properties"
-msgstr ""
+msgstr "ველის თვისებების დაბრუნება"
 
 #: src/collectionfieldsdialog.cpp:805
 #, kde-format
@@ -731,7 +731,7 @@ msgstr ""
 #: src/collections/bibtexcollection.cpp:106
 #, kde-format
 msgid "Book Title"
-msgstr ""
+msgstr "წიგნის სათაური"
 
 #: src/collections/bibtexcollection.cpp:112
 #: src/collections/bookcollection.cpp:64
@@ -937,12 +937,12 @@ msgstr "მოთამაშეების რაოდენობა"
 #: src/collections/boardgamecollection.cpp:85
 #, kde-format
 msgid "Playing Time"
-msgstr ""
+msgstr "თამაშის დრო"
 
 #: src/collections/boardgamecollection.cpp:90
 #, kde-format
 msgid "Minimum Age"
-msgstr ""
+msgstr "მინიმალური ასაკი"
 
 #: src/collections/boardgamecollection.cpp:95
 #: src/collections/filecatalog.cpp:57 src/collections/gamecollection.cpp:94
@@ -975,7 +975,7 @@ msgstr "შეფასება"
 #: src/collections/winecollection.cpp:90
 #, kde-format
 msgid "Purchase Date"
-msgstr ""
+msgstr "შეძენის თარიღი"
 
 #: src/collections/boardgamecollection.cpp:108
 #: src/collections/bookcollection.cpp:166
@@ -1002,7 +1002,7 @@ msgstr "საჩუქრები"
 #: src/collections/winecollection.cpp:95
 #, kde-format
 msgid "Purchase Price"
-msgstr ""
+msgstr "შეძენის ფასი"
 
 #: src/collections/boardgamecollection.cpp:116
 #: src/collections/bookcollection.cpp:170
@@ -1091,13 +1091,13 @@ msgstr ""
 #: src/collections/bookcollection.cpp:99
 #, kde-format
 msgid "Copyright Year"
-msgstr ""
+msgstr "საავტორო უფლების წელი"
 
 #: src/collections/bookcollection.cpp:104
 #: src/collections/comicbookcollection.cpp:93
 #, kde-format
 msgid "Publication Year"
-msgstr ""
+msgstr "გამოცემის თარიღი"
 
 #: src/collections/bookcollection.cpp:111
 #, kde-format
@@ -1124,7 +1124,7 @@ msgstr "ენა"
 #: src/collections/bookcollection.cpp:148
 #, kde-format
 msgid "Series Number"
-msgstr ""
+msgstr "სერიის ნომერი"
 
 #: src/collections/bookcollection.cpp:153
 #, kde-format
@@ -1147,7 +1147,7 @@ msgstr "მდგომარეობა"
 #: src/collections/comicbookcollection.cpp:146
 #, kde-format
 msgid "Signed"
-msgstr ""
+msgstr "ხელმოწერილი"
 
 #: src/collections/bookcollection.cpp:162
 #, kde-format
@@ -1311,7 +1311,7 @@ msgstr ""
 #: src/collections/videocollection.cpp:133
 #, kde-format
 msgid "Writer"
-msgstr ""
+msgstr "მწერალი"
 
 #: src/collections/comicbookcollection.cpp:64
 #: src/fetch/boardgamegeekfetcher.cpp:200 src/fetch/rpggeekfetcher.cpp:205
@@ -1600,7 +1600,7 @@ msgstr ""
 #: src/collections/musiccollection.cpp:38
 #, kde-format
 msgid "My Music"
-msgstr ""
+msgstr "ჩემი მუსიკა"
 
 #: src/collections/musiccollection.cpp:50
 #, kde-format
@@ -1842,7 +1842,7 @@ msgstr "რეგიონი"
 #: src/fetch/discogsfetcher.cpp:495
 #, kde-format
 msgid "Nationality"
-msgstr ""
+msgstr "ეროვნება"
 
 #: src/collections/videocollection.cpp:106 src/fetch/amazonfetcher.cpp:1041
 #: src/fetch/upcitemdbfetcher.cpp:403
@@ -1921,7 +1921,7 @@ msgstr ""
 #: src/collections/videocollection.cpp:163
 #, kde-format
 msgid "Audio Tracks"
-msgstr ""
+msgstr "აუდიობილიკები"
 
 #: src/collections/videocollection.cpp:169
 #, kde-format
@@ -2031,7 +2031,7 @@ msgstr ""
 #, kde-format
 msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
-msgstr ""
+msgstr "ჩეკაუტი: %1"
 
 #: src/commands/collectioncommand.cpp:54
 #, kde-format
@@ -2295,7 +2295,7 @@ msgstr "შაბლონები"
 #: src/configdialog.cpp:148 src/configdialog.cpp:189 src/configdialog.cpp:598
 #, kde-format
 msgid "Data Sources"
-msgstr ""
+msgstr "მონაცემთა წყაროები"
 
 #: src/configdialog.cpp:201
 #, kde-format
@@ -2931,7 +2931,7 @@ msgstr "ჩანაწერის რედაქტირება"
 #: src/entryeditdialog.cpp:85
 #, kde-format
 msgid "&New Entry"
-msgstr ""
+msgstr "&ახალი ჩანაწერი"
 
 #: src/entryeditdialog.cpp:90 src/entryeditdialog.cpp:131
 #: src/entryeditdialog.cpp:436 src/entryeditdialog.cpp:542
@@ -3059,7 +3059,7 @@ msgstr ""
 #: src/exportdialog.cpp:65
 #, kde-format
 msgid "Export Options"
-msgstr ""
+msgstr "გატანის მორგება"
 
 #: src/exportdialog.cpp:72
 #, kde-format
@@ -3486,7 +3486,7 @@ msgstr "დისტრიბუტორი"
 #: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
-msgstr ""
+msgstr "ეპიზოდები"
 
 #: src/fetch/animenfofetcher.cpp:309 src/fetch/animenfofetcher.cpp:498
 #, kde-format
@@ -3637,7 +3637,7 @@ msgstr ""
 #: src/fetch/upcitemdbfetcher.cpp:208 src/fetch/upcitemdbfetcher.cpp:459
 #, kde-format
 msgid "Barcode"
-msgstr ""
+msgstr "შტრიხკოდი"
 
 #: src/fetch/discogsfetcher.cpp:335
 #, kde-format
@@ -3673,7 +3673,7 @@ msgstr ""
 #: src/fetch/entrezfetcher.cpp:513
 #, kde-format
 msgid "Institution"
-msgstr ""
+msgstr "ორგანიზაცია"
 
 #: src/fetch/execexternalfetcher.cpp:339
 #, kde-format
@@ -3762,7 +3762,7 @@ msgstr "პიროვნება"
 #: src/fetch/fetchmanager.cpp:69
 #, kde-format
 msgid "ISBN"
-msgstr ""
+msgstr "ISBN"
 
 #: src/fetch/fetchmanager.cpp:70
 #, kde-format
@@ -4582,7 +4582,7 @@ msgstr ""
 #: src/filterdialog.cpp:113
 #, kde-format
 msgid "Filter name:"
-msgstr ""
+msgstr "ფილტრის სახელი:"
 
 #: src/filterdialog.cpp:122
 #, kde-format
@@ -4678,13 +4678,13 @@ msgstr ""
 #: src/gui/filterrulewidget.cpp:291 src/gui/filterrulewidget.cpp:297
 #, kde-format
 msgid "equals"
-msgstr ""
+msgstr "უდრის"
 
 #: src/gui/filterrulewidget.cpp:270 src/gui/filterrulewidget.cpp:278
 #: src/gui/filterrulewidget.cpp:292 src/gui/filterrulewidget.cpp:298
 #, kde-format
 msgid "does not equal"
-msgstr ""
+msgstr "არ უდრის"
 
 #: src/gui/filterrulewidget.cpp:271 src/gui/filterrulewidget.cpp:279
 #: src/gui/filterrulewidget.cpp:299
@@ -4702,13 +4702,13 @@ msgstr ""
 #, kde-format
 msgctxt "is before a date"
 msgid "is before"
-msgstr ""
+msgstr "არის მანამდე"
 
 #: src/gui/filterrulewidget.cpp:274
 #, kde-format
 msgctxt "is after a date"
 msgid "is after"
-msgstr ""
+msgstr "არის შემდეგ"
 
 #: src/gui/filterrulewidget.cpp:281
 #, kde-format
@@ -4752,7 +4752,7 @@ msgstr "შეიცავს"
 #: src/gui/filterrulewidget.cpp:296
 #, kde-format
 msgid "does not contain"
-msgstr ""
+msgstr "არ შეიცავს"
 
 #: src/gui/imagewidget.cpp:108
 #, kde-format
@@ -4788,7 +4788,7 @@ msgstr ""
 #: src/gui/imagewidget.cpp:321
 #, kde-format
 msgid "Opening the selected scanner failed."
-msgstr ""
+msgstr "მონიშნული სკანერის გახსნის შეცდომა."
 
 #: src/gui/imagewidget.cpp:380
 #, kde-format
@@ -4927,7 +4927,7 @@ msgstr ""
 #: src/importdialog.cpp:148 src/mainwindow.cpp:371
 #, kde-format
 msgid "&Import"
-msgstr ""
+msgstr "&შემოტანა"
 
 #: src/importdialog.cpp:366 src/mainwindow.cpp:1246 src/mainwindow.cpp:1418
 #: src/translators/tellicozipexporter.cpp:54
@@ -4939,7 +4939,7 @@ msgstr ""
 #: src/mainwindow.cpp:1248 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
-msgstr ""
+msgstr "XML ფაილები"
 
 #: src/importdialog.cpp:371 src/translators/bibtexexporter.cpp:65
 #, kde-format
@@ -4949,7 +4949,7 @@ msgstr ""
 #: src/importdialog.cpp:375 src/translators/csvexporter.cpp:64
 #, kde-format
 msgid "CSV Files"
-msgstr ""
+msgstr "CSV ფაილები"
 
 #: src/importdialog.cpp:389
 #, kde-format
@@ -5063,7 +5063,7 @@ msgstr ""
 #: src/loanview.cpp:119
 #, kde-format
 msgid "Check-in"
-msgstr ""
+msgstr "ჩეკინი"
 
 #: src/loanview.cpp:121
 #, kde-format
@@ -5583,7 +5583,7 @@ msgstr ""
 #: src/mainwindow.cpp:495
 #, kde-format
 msgid "&Export"
-msgstr ""
+msgstr "გატანა"
 
 #: src/mainwindow.cpp:497
 #, kde-format
@@ -5733,7 +5733,7 @@ msgstr ""
 #: src/mainwindow.cpp:580
 #, kde-format
 msgid "New Entry"
-msgstr ""
+msgstr "ახალი ჩანაწერი"
 
 #: src/mainwindow.cpp:582
 #, kde-format
@@ -6289,14 +6289,14 @@ msgstr ""
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Import"
-msgstr ""
+msgstr "&შემოტანა"
 
 #. i18n: ectx: Menu (file_export)
 #: src/tellicoui.rc:61
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Export"
-msgstr ""
+msgstr "გატანა"
 
 #. i18n: ectx: Menu (collection)
 #: src/tellicoui.rc:81
@@ -6887,7 +6887,7 @@ msgstr ""
 #: src/translators/importer.cpp:58
 #, kde-format
 msgid "Loading %1..."
-msgstr ""
+msgstr "%1-ის ჩატვირთვა..."
 
 #: src/translators/librarythingimporter.cpp:177
 #, kde-format
