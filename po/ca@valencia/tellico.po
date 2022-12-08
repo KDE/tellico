@@ -5102,7 +5102,7 @@ msgid ""
 "only possible when the collection types match. Entries must match exactly in "
 "order to be merged."
 msgstr ""
-"Fusiona el contingut del fitxer importat a la col·lecció actual. Açò només "
+"Fusiona el contingut del fitxer importat amb la col·lecció actual. Açò només "
 "és possible quan coincidixen els tipus de col·lecció. Les entrades han de "
 "coincidir exactament per a ser fusionades."
 
@@ -5530,7 +5530,7 @@ msgstr "Ix de l'aplicació"
 #: src/mainwindow.cpp:373
 #, kde-format
 msgid "Import the collection data from other formats"
-msgstr "Importa les dades a la col·lecció des d'altres formats"
+msgstr "Importa les dades cap a la col·lecció des d'altres formats"
 
 #: src/mainwindow.cpp:389
 #, kde-format
