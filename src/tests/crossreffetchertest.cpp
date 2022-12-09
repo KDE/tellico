@@ -64,9 +64,6 @@ void CrossRefFetcherTest::testDOI() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::CrossRefFetcher(this));
   fetcher->readConfig(m_config);
 
-  // easy place to check whether the user agent setting is correct
-  QCOMPARE(fetcher->needsUserAgent(), false);
-
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);

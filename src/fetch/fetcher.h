@@ -71,10 +71,6 @@ public:
    */
   virtual bool canSearch(FetchKey key) const = 0;
   virtual bool canUpdate() const;
-  /**
-   * Returns true if the fetcher requires a user agent to be sent
-   */
-  virtual bool needsUserAgent() const { return false; }
 
   /**
    * Returns the type of the data source.

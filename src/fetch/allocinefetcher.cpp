@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2012-2013 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2012-2022 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -139,6 +139,7 @@ void AbstractAllocineFetcher::search() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   // 10/8/17: UserAgent appears necessary to receive data
+  m_job->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
   m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1")
                                                                 .arg(QStringLiteral(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -196,6 +197,7 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
   // 10/8/17: UserAgent appears necessary to receive data
 //  QByteArray data = FileHandler::readDataFile(u, true);
   KIO::StoredTransferJob* dataJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  dataJob->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
   dataJob->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1")
                                                                   .arg(QStringLiteral(TELLICO_VERSION)));
   if(!dataJob->exec()) {

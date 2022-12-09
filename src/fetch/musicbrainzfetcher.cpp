@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2020 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2022 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -141,6 +141,7 @@ void MusicBrainzFetcher::doSearch() {
   m_requestTimer.start();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   // see https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#Provide_meaningful_User-Agent_strings
+  m_job->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
   m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1 ( http://tellico-project.org )")
                                                                 .arg(QStringLiteral(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -274,6 +275,7 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   m_requestTimer.start();
 
   KIO::StoredTransferJob* dataJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  dataJob->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
   dataJob->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1 ( http://tellico-project.org )")
                                                                 .arg(QStringLiteral(TELLICO_VERSION)));
   if(!dataJob->exec()) {

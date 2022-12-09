@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2020 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2008-2022 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -147,6 +147,7 @@ void DiscogsFetcher::continueSearch() {
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
   m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1")
                                                                 .arg(QStringLiteral(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
