@@ -46,6 +46,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QUrlQuery>
+#include <QThread>
 
 namespace {
   static const int DISCOGS_MAX_RETURNS_TOTAL = 20;
@@ -193,8 +194,12 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
     QJsonDocument doc = QJsonDocument::fromJson(data, &error);
     const QVariantMap resultMap = doc.object().toVariantMap();
     if(resultMap.contains(QStringLiteral("message")) && mapValue(resultMap, "id").isEmpty()) {
-      message(mapValue(resultMap, "message"), MessageHandler::Error);
-      myLog() << "DiscogsFetcher -" << mapValue(resultMap, "message");
+      const auto& msg = mapValue(resultMap, "message");
+      message(msg, MessageHandler::Error);
+      myLog() << "DiscogsFetcher -" << msg;
+      if(msg.startsWith(QLatin1String("You are making requests too quickly"))) {
+        QThread::msleep(2000);
+      }
     } else if(error.error == QJsonParseError::NoError) {
       populateEntry(entry, resultMap, true);
     } else {
