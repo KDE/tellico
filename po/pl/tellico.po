@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-23 00:48+0000\n"
+"POT-Creation-Date: 2022-12-10 00:46+0000\n"
 "PO-Revision-Date: 2022-09-28 20:47+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -708,15 +708,15 @@ msgstr "Pole z wartością pochodną musi posiadać wartość wzorca."
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
 #: src/configdialog.cpp:142 src/configdialog.cpp:169 src/configdialog.cpp:183
-#: src/configdialog.cpp:200 src/fetch/allocinefetcher.cpp:319
-#: src/fetch/allocinefetcher.cpp:325 src/fetch/amazonfetcher.cpp:863
+#: src/configdialog.cpp:200 src/fetch/allocinefetcher.cpp:321
+#: src/fetch/allocinefetcher.cpp:327 src/fetch/amazonfetcher.cpp:863
 #: src/fetch/animenfofetcher.cpp:310 src/fetch/animenfofetcher.cpp:314
 #: src/fetch/bedethequefetcher.cpp:331 src/fetch/bedethequefetcher.cpp:339
 #: src/fetch/colnectfetcher.cpp:317 src/fetch/colnectfetcher.cpp:330
 #: src/fetch/colnectfetcher.cpp:337 src/fetch/colnectfetcher.cpp:344
-#: src/fetch/discogsfetcher.cpp:302 src/fetch/discogsfetcher.cpp:307
-#: src/fetch/discogsfetcher.cpp:312 src/fetch/discogsfetcher.cpp:319
-#: src/fetch/discogsfetcher.cpp:326 src/fetch/doubanfetcher.cpp:310
+#: src/fetch/discogsfetcher.cpp:308 src/fetch/discogsfetcher.cpp:313
+#: src/fetch/discogsfetcher.cpp:318 src/fetch/discogsfetcher.cpp:325
+#: src/fetch/discogsfetcher.cpp:332 src/fetch/doubanfetcher.cpp:310
 #: src/fetch/doubanfetcher.cpp:328 src/fetch/doubanfetcher.cpp:346
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
@@ -1662,7 +1662,7 @@ msgstr "Moja muzyka"
 msgid "Album"
 msgstr "Album"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:407
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:413
 #: src/fetch/doubanfetcher.cpp:385 src/fetch/doubanfetcher.cpp:519
 #: src/fetch/upcitemdbfetcher.cpp:291 src/fetch/upcitemdbfetcher.cpp:411
 #: src/translators/audiofileimporter.cpp:335
@@ -1675,18 +1675,18 @@ msgstr "Płyta CD"
 
 #: src/collections/musiccollection.cpp:54
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:415 src/fetch/upcitemdbfetcher.cpp:407
+#: src/fetch/discogsfetcher.cpp:421 src/fetch/upcitemdbfetcher.cpp:407
 #: src/fetch/upcitemdbfetcher.cpp:415
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:412
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:418
 #, kde-format
 msgid "Cassette"
 msgstr "Kaseta magnetofonowa"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:410
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:416
 #, kde-format
 msgid "Vinyl"
 msgstr "Płyta winylowa"
@@ -1741,7 +1741,7 @@ msgid "Issue Year"
 msgstr "Rok emisji"
 
 #: src/collections/stampcollection.cpp:83
-#: src/collections/videocollection.cpp:184 src/fetch/allocinefetcher.cpp:403
+#: src/collections/videocollection.cpp:184 src/fetch/allocinefetcher.cpp:405
 #: src/fetch/imdbfetcher.cpp:1446
 #, kde-format
 msgid "Color"
@@ -1893,8 +1893,8 @@ msgstr "Region 8"
 msgid "Region"
 msgstr "Region"
 
-#: src/collections/videocollection.cpp:99 src/fetch/discogsfetcher.cpp:311
-#: src/fetch/discogsfetcher.cpp:495
+#: src/collections/videocollection.cpp:99 src/fetch/discogsfetcher.cpp:317
+#: src/fetch/discogsfetcher.cpp:501
 #, kde-format
 msgid "Nationality"
 msgstr "Kraj"
@@ -1947,8 +1947,8 @@ msgstr "Tabela z występującymi aktorami oraz ich rolami"
 msgid "Director"
 msgstr "Reżyser"
 
-#: src/collections/videocollection.cpp:127 src/fetch/discogsfetcher.cpp:318
-#: src/fetch/discogsfetcher.cpp:494 src/fetch/rpggeekfetcher.cpp:207
+#: src/collections/videocollection.cpp:127 src/fetch/discogsfetcher.cpp:324
+#: src/fetch/discogsfetcher.cpp:500 src/fetch/rpggeekfetcher.cpp:207
 #, kde-format
 msgid "Producer"
 msgstr "Producent"
@@ -3221,8 +3221,8 @@ msgstr "Koduj używając ustawień użytkownika (%1)"
 msgid "Encode the exported file in the local encoding."
 msgstr "Zakoduj eksportowany plik w lokalnym formacie kodowania."
 
-#: src/fetch/allocinefetcher.cpp:242 src/fetch/amazonfetcher.cpp:633
-#: src/fetch/colnectfetcher.cpp:527 src/fetch/discogsfetcher.cpp:211
+#: src/fetch/allocinefetcher.cpp:244 src/fetch/amazonfetcher.cpp:633
+#: src/fetch/colnectfetcher.cpp:527 src/fetch/discogsfetcher.cpp:217
 #: src/fetch/doubanfetcher.cpp:408 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:308 src/fetch/googlebookfetcher.cpp:198
 #: src/fetch/ibsfetcher.cpp:301 src/fetch/igdbfetcher.cpp:163
@@ -3238,12 +3238,12 @@ msgstr "Zakoduj eksportowany plik w lokalnym formacie kodowania."
 msgid "The cover image could not be loaded."
 msgstr "Obraz okładki nie mógł zostać pobrany."
 
-#: src/fetch/allocinefetcher.cpp:324 src/fetch/allocinefetcher.cpp:501
+#: src/fetch/allocinefetcher.cpp:326 src/fetch/allocinefetcher.cpp:503
 #, kde-format
 msgid "Allocine Link"
 msgstr "Odnośnik Allocine"
 
-#: src/fetch/allocinefetcher.cpp:329 src/fetch/allocinefetcher.cpp:500
+#: src/fetch/allocinefetcher.cpp:331 src/fetch/allocinefetcher.cpp:502
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
 #: src/fetch/doubanfetcher.cpp:303 src/fetch/doubanfetcher.cpp:321
 #: src/fetch/doubanfetcher.cpp:339 src/fetch/doubanfetcher.cpp:571
@@ -3258,13 +3258,13 @@ msgstr "Odnośnik Allocine"
 msgid "Original Title"
 msgstr "Tytuł oryginalny"
 
-#: src/fetch/allocinefetcher.cpp:429 src/fetch/imdbfetcher.cpp:1660
+#: src/fetch/allocinefetcher.cpp:431 src/fetch/imdbfetcher.cpp:1660
 #: src/fetch/kinopoiskfetcher.cpp:685 src/fetch/themoviedbfetcher.cpp:613
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Maksymalna liczba obsady: "
 
-#: src/fetch/allocinefetcher.cpp:442 src/fetch/imdbfetcher.cpp:1673
+#: src/fetch/allocinefetcher.cpp:444 src/fetch/imdbfetcher.cpp:1673
 #: src/fetch/kinopoiskfetcher.cpp:698 src/fetch/themoviedbfetcher.cpp:626
 #, kde-format
 msgid ""
@@ -3449,7 +3449,7 @@ msgid ""
 msgstr ""
 "Dostęp do danych z Amazon.com wymaga Identyfikatora AWS oraz Tajnego Klucza."
 
-#: src/fetch/amazonfetcher.cpp:272 src/fetch/discogsfetcher.cpp:103
+#: src/fetch/amazonfetcher.cpp:272 src/fetch/discogsfetcher.cpp:104
 #: src/fetch/isbndbfetcher.cpp:114 src/fetch/mobygamesfetcher.cpp:116
 #: src/fetch/omdbfetcher.cpp:101 src/fetch/thegamesdbfetcher.cpp:106
 #: src/fetch/themoviedbfetcher.cpp:136 src/fetch/thetvdbfetcher.cpp:128
@@ -3474,7 +3474,7 @@ msgstr "Amazon.com Web Services"
 
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:172
 #: src/fetch/comicvinefetcher.cpp:232 src/fetch/crossreffetcher.cpp:313
-#: src/fetch/discogsfetcher.cpp:508 src/fetch/giantbombfetcher.cpp:219
+#: src/fetch/discogsfetcher.cpp:514 src/fetch/giantbombfetcher.cpp:219
 #: src/fetch/googlebookfetcher.cpp:382 src/fetch/isbndbfetcher.cpp:394
 #: src/fetch/mobygamesfetcher.cpp:651 src/fetch/omdbfetcher.cpp:410
 #: src/fetch/thegamesdbfetcher.cpp:635 src/fetch/themoviedbfetcher.cpp:590
@@ -3618,7 +3618,7 @@ msgstr "Ocena AnimeNfo"
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:614
 #: src/fetch/kinofetcher.cpp:380 src/fetch/kinoteatrfetcher.cpp:515
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:223
-#: src/fetch/musicbrainzfetcher.cpp:376 src/fetch/openlibraryfetcher.cpp:424
+#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
 #: src/fetch/upcitemdbfetcher.cpp:466 src/fetch/vndbfetcher.cpp:440
 #, kde-format
@@ -3732,7 +3732,7 @@ msgstr "E-mail:"
 msgid "Danish Bibliographic Center (DBC.dk)"
 msgstr "Duński Ośrodek Bibliograficzny (DBC.dk)"
 
-#: src/fetch/discogsfetcher.cpp:101 src/fetch/isbndbfetcher.cpp:112
+#: src/fetch/discogsfetcher.cpp:102 src/fetch/isbndbfetcher.cpp:112
 #: src/fetch/mobygamesfetcher.cpp:114 src/fetch/omdbfetcher.cpp:99
 #: src/fetch/thegamesdbfetcher.cpp:104 src/fetch/themoviedbfetcher.cpp:134
 #: src/fetch/thetvdbfetcher.cpp:126
@@ -3740,30 +3740,30 @@ msgstr "Duński Ośrodek Bibliograficzny (DBC.dk)"
 msgid "An access key is required to use this data source."
 msgstr "Aby używać tego źródła danych wymagany jest klucz dostępu."
 
-#: src/fetch/discogsfetcher.cpp:306 src/fetch/discogsfetcher.cpp:496
+#: src/fetch/discogsfetcher.cpp:312 src/fetch/discogsfetcher.cpp:502
 #, kde-format
 msgid "Discogs Link"
 msgstr "Odsyłacz Discogs"
 
 #. i18n("Nationality");
-#: src/fetch/discogsfetcher.cpp:325 src/fetch/discogsfetcher.cpp:497
-#: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:369
+#: src/fetch/discogsfetcher.cpp:331 src/fetch/discogsfetcher.cpp:503
+#: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:208 src/fetch/upcitemdbfetcher.cpp:459
 #, kde-format
 msgid "Barcode"
 msgstr "Kod paskowy"
 
-#: src/fetch/discogsfetcher.cpp:335
+#: src/fetch/discogsfetcher.cpp:341
 #, kde-format
 msgid "The Discogs.com server reports a token error."
 msgstr "Serwer Discogs.com zgłasza błąd tokena."
 
-#: src/fetch/discogsfetcher.cpp:485
+#: src/fetch/discogsfetcher.cpp:491
 #, kde-format
 msgid "Discogs Audio Search"
 msgstr "Wyszukiwarka audio Discogs"
 
-#: src/fetch/discogsfetcher.cpp:520
+#: src/fetch/discogsfetcher.cpp:526
 #, kde-format
 msgid "User token: "
 msgstr "Token użytkownika: "
@@ -3862,21 +3862,10 @@ msgstr ""
 "pochodnych, gdzie nazwa pola wpisana jest w klamry, na przykład <i>%{author}"
 "</i>. Więcej informacji można znaleźć w dokumentacji programu.</p>"
 
-#: src/fetch/fetcher.cpp:80
+#: src/fetch/fetcher.cpp:79
 #, kde-format
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 nie umożliwia wyszukiwania dla tego rodzaju zbioru."
-
-#. i18n("<html>%1 requires the network request to include identification.\n"
-#. "Check the network configuration in <a href=\"%2\">KDE System Settings</a>.</html>", source(), QStringLiteral("exec:/kcmshell5 useragent")),
-#: src/fetch/fetcher.cpp:97
-#, kde-format
-msgid ""
-"%1 requires the network request to include identification.\n"
-"Check the network configuration in KDE System Settings."
-msgstr ""
-"%1 wymaga żądania sieciowego, aby uwzględnić uwierzytelnienie.\n"
-"Sprawdź ustawienia sieciowe w ustawieniach systemu KDE."
 
 #: src/fetch/fetchmanager.cpp:68
 #, kde-format
@@ -7561,6 +7550,13 @@ msgstr "Wyszukaj"
 #, kde-format
 msgid "Clear"
 msgstr "Wyczyść"
+
+#~ msgid ""
+#~ "%1 requires the network request to include identification.\n"
+#~ "Check the network configuration in KDE System Settings."
+#~ msgstr ""
+#~ "%1 wymaga żądania sieciowego, aby uwzględnić uwierzytelnienie.\n"
+#~ "Sprawdź ustawienia sieciowe w ustawieniach systemu KDE."
 
 #~ msgid "Creating new document..."
 #~ msgstr "Tworzenie nowego dokumentu..."
