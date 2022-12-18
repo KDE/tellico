@@ -6381,7 +6381,7 @@ msgid ""
 "items from your collection.</qt>"
 msgstr ""
 "<qt>La <i>vista de préstec</i> mostra una llista de totes les persones que "
-"han manllevat elements prestats de la col·lecció.</qt>"
+"han amprat elements prestats de la col·lecció.</qt>"
 
 #: src/mainwindow.cpp:2291
 #, kde-format
@@ -7576,10 +7576,3 @@ msgstr "Busca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
-
-#~ msgid ""
-#~ "%1 requires the network request to include identification.\n"
-#~ "Check the network configuration in KDE System Settings."
-#~ msgstr ""
-#~ "%1 requerix la sol·licitud de xarxa per a incloure la identificació.\n"
-#~ "Comproveu la configuració de la xarxa a Configuració del sistema KDE."
