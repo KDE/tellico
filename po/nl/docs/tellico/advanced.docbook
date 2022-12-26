@@ -4,7 +4,7 @@
 
 <sect1 id="command-line">
 <title
->Commandoregelopties</title>
+>Opdrachtregel-opties</title>
 
 <para
 >Bij het gebruiken van &appname; vanaf de commandoregel zijn er verschillende opties voor het openen van gegevensbestanden. Deze worden zichtbaar door het commando <userinput
