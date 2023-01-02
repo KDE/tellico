@@ -167,3 +167,27 @@ void SRUFetcherTest::testCopacIsbn() {
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2007"));
   QVERIFY(entry->field(QStringLiteral("publisher")).contains(QStringLiteral("Apress")));
 }
+
+// https://bugs.kde.org/show_bug.cgi?id=463438
+void SRUFetcherTest::testHttpFallback() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("DNB"));
+  cg.writeEntry("Format", QStringLiteral("MARC21-xml"));
+  cg.writeEntry("Host", QStringLiteral("services.dnb.de"));
+  cg.writeEntry("Path", QStringLiteral("/sru/dnb"));
+  cg.writeEntry("Port", 443); // port 443 forces https for this test. Port 80 seems to fallback on the server side
+  cg.writeEntry("QueryFields", QStringLiteral("maximumRecords"));
+  cg.writeEntry("QueryValues", QStringLiteral("1"));
+
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
+                                       QStringLiteral("Goethe"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Briefe an Goethe"));
+}

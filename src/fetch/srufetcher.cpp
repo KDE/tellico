@@ -239,9 +239,14 @@ void SRUFetcher::search() {
       break;
   }
   u.setQuery(query);
-//  myDebug() << u.url();
+  runJob(u);
+}
 
-  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+void SRUFetcher::runJob(const QUrl& url_) {
+//  myDebug() << url_.url();
+  m_lastUrl = url_;
+
+  m_job = KIO::storedGet(url_, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &SRUFetcher::slotComplete);
@@ -296,7 +301,15 @@ void SRUFetcher::slotComplete(KJob*) {
   QDomDocument dom;
   if(!dom.setContent(result, true /*namespace*/)) {
     myWarning() << "server did not return valid XML.";
-    stop();
+    // possible that server wants https protocol
+    if(m_lastUrl.scheme() == QLatin1String("http") &&
+       result.contains(QLatin1String("https"), Qt::CaseInsensitive)) {
+      QUrl newUrl = m_lastUrl;
+      newUrl.setScheme(QLatin1String("https"));
+      runJob(newUrl);
+    } else {
+      stop();
+    }
     return;
   }
 
