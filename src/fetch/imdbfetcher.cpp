@@ -347,7 +347,7 @@ void IMDBFetcher::search() {
   m_url = QUrl();
   m_url.setScheme(QStringLiteral("https"));
   m_url.setHost(m_host);
-  m_url.setPath(QStringLiteral("/find"));
+  m_url.setPath(QStringLiteral("/find/"));
 
   // as far as I can tell, the url encoding should always be iso-8859-1?
   QUrlQuery q;
