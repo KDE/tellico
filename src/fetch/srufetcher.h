@@ -98,11 +98,13 @@ private:
   bool initMODSHandler();
   bool initSRWHandler();
 
+  QString m_scheme;
   QString m_host;
   uint m_port;
   QString m_path;
   QString m_format;
   StringMap m_queryMap;
+  QUrl m_lastUrl;
 
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
@@ -124,6 +126,7 @@ private Q_SLOTS:
   void slotCheckHost();
 
 private:
+  GUI::ComboBox* m_schemeCombo;
   GUI::LineEdit* m_hostEdit;
   QSpinBox* m_portSpinBox;
   GUI::LineEdit* m_pathEdit;
