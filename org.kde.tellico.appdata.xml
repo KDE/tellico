@@ -94,6 +94,7 @@
     <p xml:lang="ia">Tellico es un application pro organisar tu collectiones. Il forni patronos predefinite pro libros, bibliographias, videos, musica, video jocos, numisma, timbros, cartas de commercio, libros in designos e vinos. Il permitte te insertar tu collection inn un base de datos de catalogo, salveguardante multe proprietates como titulo, autor, etc.</p>
     <p xml:lang="id">Tellico adalah aplikasi untuk mengatur koleksi Anda. Ini menyediakan template baku untuk buku, bibliografi, video, musik, video game, koin, perangko, kartu perdagangan, buku komik, dan wine. Ini memungkinkan Anda untuk memasukkan koleksi Anda di database katalog, menyimpan banyak properti berbeda seperti judul, penulis, dll.</p>
     <p xml:lang="it">Tellico è un'applicazione per organizzare le tue collezioni. Fornisce modelli predefiniti per libri, bibliografie, video, musica, videogiochi, monete, francobolli, carte da gioco, fumetti e vini. Ti permette di inserire la tua collezione in una base di dati, salvando molte proprietà differenti come titolo, autore, ecc.</p>
+    <p xml:lang="ka">Tellico აპლიკაციაა კოლექციების ორგანიზებისათვის. ის წარმოგიდგენთ ნაგულისხმებ შაბლონებს წიგნების, ბიბლიოგრაფიების, ბიდეოების, მუსიკის, ვიდეოთამაშების, მონეტების, ბეჭდების, სავაჭრო ბარათების, კომიქსებისა და ღვინოებისთვის. ის საშუალებას გაძლევთ დაამატოთ თქვენი კოლექცია კატალოგების ბაზაში და მიაწეროთ ისეთი თვისებები, როგორიცაა სათაური, ავტორი და სხვა.</p>
     <p xml:lang="ko">Tellico는 내 소장품을 관리하는 프로그램입니다. 책, 서지, 비디오, 음악, 비디오 게임, 동전, 우표, 트레이드 카드, 만화 및 와인에 대한 기본 템플릿을 제공합니다. 카탈로그 데이터베이스에 소장품을 입력하여 제목, 작성자 등과 같은 다양한 속성을 저장할 수 있습니다.</p>
     <p xml:lang="nl">Tellico is een toepassing voor het organiseren van uw verzamelingen. Het biedt standaard sjablonen voor boeken, bibliografieën, video's, muziek, videogames, munten, postzegels, visitekaartjes, strips en wijnen. Het stelt u in staat om uw verzameling in een catalogusdatabase in te voeren, waarin veel verschillende eigenschappen, zoals titel, auteur, etc. opgeslagen kunnen worden.</p>
     <p xml:lang="nn">Tellico er eit program for å halda oversikt over samlingane dine. Det kjem med malar for bøker, litteraturlister, filmar, musikk, spel, myntar, frimerke, samlekort, teikneseriar og vin. Du kan katalogisera samlinga di i ein database og lagra mykje ulik informasjon, for eksempel tittel og forfattar.</p>
@@ -224,6 +225,7 @@
       <li xml:lang="ia">Il supporta qualcunque numero de campos definite per le usator, de plure typos differente: texto, paragrapho, lista, quadrato de selection, numero, URL, data, imagines e combinationes</li>
       <li xml:lang="id">Mendukung angka apa pun dari bidang yang ditentukan, beberapa tipe yang berbeda: teks, paragraf, daftar, kotak centang, nomor, URL, tanggal, gambar, dan kombinasi</li>
       <li xml:lang="it">Supporta un qualsiasi numero di campi definiti dall'utente, di molti tipi differenti: testo, paragrafi, liste, caselle, numeri, URL, dati, immagini e combinazioni</li>
+      <li xml:lang="ka">აქვს მომხმარებლის მიერ აღწერილი ველებს განუსაზღვრელი რაოდენობის მხარდაჭერა. მათი ტიპები შეიძლება იყოს: ტექსტი, პარაგრაფი, ჩამონათვალი, ჩასართავი, რიცხვი, ბმული, თარიღი, გამოსახულებები და კომბინაციები</li>
       <li xml:lang="ko">텍스트, 단락, 목록, 체크 상자, 번호, URL, 날짜, 이미지 및 조합 등 다양한 형식의 사용자 정의 필드 지원</li>
       <li xml:lang="nl">Ondersteunt elk aantal gebruikergedefinieerde velden met verscheidene verschillende types: tekst, paragraaf, lijst, keuzevakje, aantal, URL, datum, afbeelding en combinaties</li>
       <li xml:lang="nn">Støttar vilkårleg mange eigendefinerte felt i ulike variantar: tekst, avsnitt, liste, avkryssingsboks, tal, nettadresse, dato, bilete og kombinasjonar av desse variantane</li>
@@ -255,6 +257,7 @@
       <li xml:lang="ia">Il manea entratas con multiple autores, generes, parolas clave, etc.</li>
       <li xml:lang="id">Menangani entri-entri dengan beberapa penulis, genre, kata kunci, dll.</li>
       <li xml:lang="it">Gestisce voci con autori multipli, generi, parole chiave, ecc.</li>
+      <li xml:lang="ka">აქვს მრავალ-ავტორიანი, მრავალ-ჟანრიანი და მრავალი საკვანძო სიტყვის მქონე ჩანაწერების მხარდაჭერა</li>
       <li xml:lang="ko">여러 저자, 장르, 키워드 등으로 항목 처리</li>
       <li xml:lang="nl">Behandelt items met meerdere auteurs, genres, zoektermen, etc.</li>
       <li xml:lang="nn">Kan handtera oppføringar som inneheld fleire forfattarar, sjangrar, nøkkelord, …</li>
@@ -318,6 +321,7 @@
       <li xml:lang="ia">Il supporta cerca de collection e filtro de vista</li>
       <li xml:lang="id">Dukungan pencarian koleksi dan pemfilteran tampilan</li>
       <li xml:lang="it">Supporta ricerche nella collezione e filtraggio della vista</li>
+      <li xml:lang="ka">აქვს კოლექციაში ძებნისა და ხედის ფილტრის საშუალება</li>
       <li xml:lang="ko">소장품 검색 및 보기 필터링 지원</li>
       <li xml:lang="nl">Ondersteunt zoeken in verzamelingen en filtering op weergave</li>
       <li xml:lang="nn">Støttar søk og filtrering i samlingar</li>
@@ -349,6 +353,7 @@
       <li xml:lang="ia">Il ordina e gruppa per varie proprietates</li>
       <li xml:lang="id">Mengurutkan dan mengelompokkan koleksi dengan berbagai properti</li>
       <li xml:lang="it">Ordina e raggruppa la collezione in base a varie proprietà</li>
+      <li xml:lang="ka">შეუძლია კოლექციის დალაგება და ბევრი პირობით დაჯგუფება</li>
       <li xml:lang="ko">다양한 속성별 소장품 정렬 및 그룹</li>
       <li xml:lang="nl">Sorteert en groepeert verzameling door verschillende eigenschappen</li>
       <li xml:lang="nn">Sorterer og grupperer automatisk samlingane</li>
@@ -380,6 +385,7 @@
       <li xml:lang="ia">Il permitte patronos de entratas personalisate per XSLT</li>
       <li xml:lang="id">Kemungkinan men-template-kan entri yang dapat dikustomisasi melalui XSLT</li>
       <li xml:lang="it">Permette modelli di immissione personalizzabili attraverso XSLT</li>
+      <li xml:lang="ka">XSLT-ის საშუალებით შეგიძლიათ შაბლონები მოირგოთ</li>
       <li xml:lang="ko">XSLT를 통해 사용자 정의 가능한 항목 템플릿 허용</li>
       <li xml:lang="nl">Staat aanpasbare sjablonen van items toe via XSLT</li>
       <li xml:lang="nn">Kan tilpassa oppføringsmalar ved hjelp av XSLT-stilsett</li>
@@ -411,6 +417,7 @@
       <li xml:lang="ia">Il importa metadatos MODS, Bibtex, RIS, CSV, PDF e plure altere formatos</li>
       <li xml:lang="id">Mengimporkan format MODS, Bibtex, RIS, CSV, PDF metadata, dan banyak format lain</li>
       <li xml:lang="it">Importa MODS, Bibtex, RIS, CSV, metadati dei PDF, e molti altri formati</li>
+      <li xml:lang="ka">შეუძლია MODS, Bibtex, RIS, CSV, PDF-ის და ბევრი სხვა ფორმატის მეტამონაცემების შემოტანა</li>
       <li xml:lang="ko">MODS, Bibtex, RIS, CSV, PDF 메타데이터 및 기타 다양한 형식 가져오기</li>
       <li xml:lang="nl">Importeert MODS, Bibtex, RIS, CSV, PDF metadata en vele andere formaten</li>
       <li xml:lang="nn">Kan importera metadata frå blant anna MODS-, BibTeX-, RIS-, CSV- og PDF-filer</li>
@@ -441,6 +448,7 @@
       <li xml:lang="ia">Il exporta a Bibtex, ONIX, CSV, HTML, e altere formatos</li>
       <li xml:lang="id">Pengeksporan ke format Bibtex, ONIX, CSV, HTML, dan format lain</li>
       <li xml:lang="it">Esporta in formato Bibtex, ONIX, CSV, HTML e altri</li>
+      <li xml:lang="ka">შეუძლია Bibtex, ONIX, CSV, HTML და სხვა ფორმატებში გატანა</li>
       <li xml:lang="ko">Bibtex, ONIX, CSV, HTML 및 기타 형식으로 내보내기</li>
       <li xml:lang="nl">Exporteert naar Bibtex, ONIX, CSV, HTML en andere formaten</li>
       <li xml:lang="nn">Kan eksportera til BibTeX, ONIX, CSV, HTML og andre format</li>
@@ -472,6 +480,7 @@
       <li xml:lang="ia">Il importa information directemente ab Amazon.com, IMDb,  servitores z39.50, PubMed, seritores SRU, CrossRef.org, varie altere sitios web e ab external scripts</li>
       <li xml:lang="id">Pengimporkan informasi secara langsung dari situs Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, berbagai situs lain, dan dari skrip eksternal</li>
       <li xml:lang="it">Importa informazioni direttamente da Amazon.com, IMDb, server z39.50, PubMed, server SRU, CrossRef.org, svariati altri siti web, e da script esterni</li>
+      <li xml:lang="ka">შეუძლია ინფორმაციის პირდაპირ Amazon.com, IMDb, z39.50, PubMed, SRU, CrossRef.org და სხვა ვებგვერდებიდან ასევე გარე დამატებებიდან შემოტანა</li>
       <li xml:lang="ko">Amazon.com, IMDb, z39.50 서버, PubMed, SRU 서버, CrossRef.org, 기타 여러 웹사이트 및 외부 스크립트에서 직접 정보 가져오기</li>
       <li xml:lang="nl">Importeert informatie direct uit Amazon.com, IMDb, z39.50-servers, PubMed, SRU-servers, CrossRef.org, verschillende andere websites en uit externe scripts</li>
       <li xml:lang="nn">Kan henta informasjon frå Amazon.com, IMDb, z39.50-tenarar, PubMed, SRU-tenarar, CrossRef.org, ymse andre nettstadar og eksterne skript</li>
@@ -503,6 +512,7 @@
       <li xml:lang="ia">Il importa datos de CDDB pro catalogar CDs audio</li>
       <li xml:lang="id">Pengimporan data CDDB untuk pengkatalogan CD-CD audio</li>
       <li xml:lang="it">Importa dati CDDB per catalogare cd audio</li>
+      <li xml:lang="ka">CDDB მონაცემების შემოტანა აუდიო დისკების კატალოგირებისათვის</li>
       <li xml:lang="ko">오디오 CD 카탈로그를 작성할 수 있도록 CDDB 데이터 가져오기</li>
       <li xml:lang="nl">Importeert CDDB-gegevens voor catalogiseren van audio-cd's</li>
       <li xml:lang="nn">Kan importera CDDB-data for lyd-CD-ar</li>
@@ -534,6 +544,7 @@
       <li xml:lang="ia">Il scande e importa collectiones de file audio, tal como mp3 o ogg</li>
       <li xml:lang="id">Pemindaian dan pengimporan koleksi file audio, sepertihalnya mp3 atau ogg</li>
       <li xml:lang="it">Cerca e importa collezioni di file audio, come mp3 oppure ogg</li>
+      <li xml:lang="ka">აუდიო ფაილის კოლექციების, როგორიცაა მაგალითად mp3 და ogg, შემოტანა და სკანირება</li>
       <li xml:lang="ko">MP3 또는 OGG 같은 오디오 파일 소장품 검색 및 가져오기</li>
       <li xml:lang="nl">Scant en importeert verzamelingen van audio-bestanden, zoals mp3 of ogg</li>
       <li xml:lang="nn">Søkjer etter og importerer lydfilsamlingar, som MP3 og OGG</li>
@@ -572,6 +583,7 @@
       <caption xml:lang="ia">Le fenestra principale monstrante uncollection de filmes</caption>
       <caption xml:lang="id">Jendela utama menampilkan sebuah koleksi filem</caption>
       <caption xml:lang="it">La finestra principale che mostra una collezione di film</caption>
+      <caption xml:lang="ka">მთავარი ფანჯარა ფილმების კოლექციას აჩვენებს</caption>
       <caption xml:lang="ko">영화 소장품의 간단한 항목을 표시하는 주 창</caption>
       <caption xml:lang="nl">Het hoofdvenster dat een filmverzameling toont</caption>
       <caption xml:lang="nn">Hovudvindauget som viser ei filmsamling</caption>
@@ -605,6 +617,7 @@
       <caption xml:lang="ia">Le fenestra principale monstrante un simple elemento in un collection de libros</caption>
       <caption xml:lang="id">Jendela utama menampilkan butir sederhana dalam koleksi buku</caption>
       <caption xml:lang="it">La finestra principale che mostra un semplice elemento in una collezione di libri</caption>
+      <caption xml:lang="ka">მთავარი ფანჯარა წიგნების კოლექციაში მარტივ ელემენტს აჩვენებს</caption>
       <caption xml:lang="ko">도서 소장품의 간단한 항목을 표시하는 주 창</caption>
       <caption xml:lang="nl">Het hoofdvenster die een eenvoudig item in een boekenverzameling toont</caption>
       <caption xml:lang="nn">Hovudvindauget som viser ei enkel oppføring i ei boksamling</caption>
@@ -639,6 +652,7 @@
       <caption xml:lang="ia">Le fenestra principale monstrante vistas flancate de un collection de joco</caption>
       <caption xml:lang="id">Jendela utama menampilkan tampilan sisi ke sisi dari sebuah koleksi permainan</caption>
       <caption xml:lang="it">La finestra principale che mostra le viste affiancate di una collezione di libri</caption>
+      <caption xml:lang="ka">მთავარი ფანჯარა თამაშების კოლექციას გვერდიგვერდ აჩვენებს</caption>
       <caption xml:lang="ko">게임 소장품을 나란히 표시하는 주 창</caption>
       <caption xml:lang="nl">Het hoofdvenster die een spellenverzameling naast elkaar toont</caption>
       <caption xml:lang="nn">Hovudvindauget som viser side-ved-side-visingaar av ei spelsamling</caption>
