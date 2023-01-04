@@ -4136,10 +4136,9 @@ msgid "SRU Server"
 msgstr "SRU server"
 
 #: src/fetch/srufetcher.cpp:526
-#, fuzzy, kde-format
-#| msgid "&Source name: "
+#, kde-format
 msgid "Scheme: "
-msgstr "&Název zdroje: "
+msgstr ""
 
 #: src/fetch/srufetcher.cpp:535 src/fetch/srufetcher.cpp:571
 #, kde-format
