@@ -1,6 +1,5 @@
 <chapter id="faqs">
-<title
->Fragen und Antworten</title>
+<title>Questions and Answers</title>
 
 <!-- (OPTIONAL but recommended) This chapter should include all of the silly
 (and not-so-silly) newbie questions that fill up your mailbox. This chapter
@@ -16,283 +15,215 @@ application work. -->
 
 <qandaentry>
 <question>
-<para
->Wie können mehrere Autoren eingegeben werden?</para>
+<para>How do I enter multiple authors?</para>
 </question>
 <answer>
 
-<para
->Namen von Autoren sollten durch Semikolon getrennt werden, wie zum Beispiel <userinput
->Brian W. Kernighan; Dennis M. Ritchie</userinput
->. Benutzten Sie kein "und" oder ähnliche Konstruktionen, auch wenn es sich um 20 Autoren handelt. Ist die Einstellung zur automatischen Formatierung aktiviert, wird automatisch der Nachname jedes Autors zuerst angeführt.</para>
+<para>Author names should be separated by a semi-colon, like so:
+<userinput>Brian W. Kernighan; Dennis M. Ritchie</userinput>. Don't
+include the word "and" or anything similar, even if you have 20
+authors. If you have the auto-format option checked, then the last
+name will automatically be shown first for each author.</para>
 
-<para
->Andere Eigenschaften, die mehrere Werte enthalten können, wie zum Beispiel „Gattung“ und „Schlüsselwort“, sollten ebenfalls mit einem Semikolon als Trennzeichen zwischen den einzelnen Werten eingegeben werden.</para>
+<para>Other properties which allow multiple values, like "genre" and
+"keywords", are entered in the same way, with a semi-colon (;)
+separating each value.</para>
 
 </answer>
 </qandaentry>
 
 <qandaentry>
 <question>
-<para
->Kann ich das Erscheinungsbild von gedruckten Seiten einstellen?</para>
+<para>Can I modify what the printed page looks like?</para>
 </question>
 <answer>
 
-<para
->Ja, das ist möglich. Suchen Sie die Datei <filename
->tellico-printing.xsl</filename
->, die im Ordner $<envar
->KDEDIR</envar
->/share/apps/tellico/ gespeichert sein sollte. Kopieren Sie diese Datei in den Ordner $<envar
->KDEHOME</envar
->/share/apps/tellico/ und ändern Sie sei dort. Sie müssen sich mit <ulink url="http://www.w3.org/TR/xslt"
->&xslt;</ulink
-> auskennen, da damit das Erscheinungsbild des Drucks eingestellt wird. Die &HTML;-Ausgabe wird mit dieser Datei generiert. Es ist am einfachsten, die &CSS;-Werte am Anfang der Datei zu bearbeiten, um das Aussehen der Druckseiten zu ändern</para>
+<para>Yes, most certainly. Find the file <filename>tellico-printing.xsl</filename> which
+ should be in the $<envar>KDEDIR</envar>/share/apps/tellico/ directory. You can copy
+ that to $<envar>KDEHOME</envar>/share/apps/tellico/ for personal modifications.
+ You'll have to know <ulink
+ url="http://www.w3.org/TR/xslt">&xslt;</ulink>, but modifying that file
+ is how you change the printing layout. &HTML; is generated from the
+ file, and the easiest way to change the appearance of the printout is
+ to modify the &CSS; in the top portion.</para>
 
-<para
->Beachten Sie, dass die Datei <filename
->tellico-printing.xsl</filename
-> eine weitere Datei namens <filename
->tellico-common.xsl</filename
-> verwendet, die einige allgemeine Vorlagen enthält. Wenn Sie die Datei <filename
->tellico-printing.xsl</filename
-> in den Ordner $<envar
->KDEHOME</envar
-> kopieren, müssen Sie entweder das Element &lt;xsl:import&gt; an den neuen Speicherort anpassen oder die Datei <filename
->tellico-common.xsl</filename
-> ebenso mit kopieren. </para>
+<para>Be aware that the <filename>tellico-printing.xsl</filename> references another file, <filename>tellico-common.xsl</filename>, that contains some common &xslt; templates. If you copy
+<filename>tellico-printing.xsl</filename> to $<envar>KDEHOME</envar>, you must either modify the &lt;xsl:import&gt; element to point to the actual location of the <filename>tellico-common.xsl</filename> file or copy the common file as well.
+</para>
 </answer>
 </qandaentry>
 <qandaentry>
 <question>
-<para
->Wie kann ich nach Feldern gruppieren, die in der Voreinstellung nicht in der Werkzeugleiste enthalten sind?</para>
+<para>How do I group by a property other than the ones listed in the toolbar?</para>
 </question>
 <answer>
-<para
->Um die Gruppierung nach anderen Feldern als in der Voreinstellung zu ermöglichen, aktivieren Sie „Gruppierung erlauben“ für das betreffende Feld im Dialog „Sammlungsfelder“. </para>
+<para>
+To allow grouping by a field which doesn't allow grouping by default, check the
+"Allow Grouping" box for that particular field in the "Collection Fields" dialog.
+</para>
 </answer>
 </qandaentry>
 
 <qandaentry>
-<question
-><para
->Warum werden diese merkwürdigen Ausgaben angezeigt, wenn ich &appname; in einer Konsole starte?</para
-></question>
+<question><para>Why does all that gobbledy-gook show up when I run &appname;?</para></question>
 <answer>
-<para
->Ausgaben auf der Konsole wie <screen width="40">
-<computeroutput
->Tellico::updateCollectionToolBar</computeroutput>
-<computeroutput
->GroupView::setGroupAttribute - author</computeroutput>
-<computeroutput
->GroupView::slotAddCollection</computeroutput>
-<computeroutput
->QCheckBox::property( "title" ) failed: property invalid
+<para>Stuff like:
+<screen width="40">
+<computeroutput>Tellico::updateCollectionToolBar</computeroutput>
+<computeroutput>GroupView::setGroupAttribute - author</computeroutput>
+<computeroutput>GroupView::slotAddCollection</computeroutput>
+<computeroutput>QCheckBox::property( "title" ) failed: property invalid
 or does not exist</computeroutput>
-</screen
-> sind Informationen zur Fehlersuche. Diese Ausgaben können beim Kompilieren mit der Einstellung <userinput
-><option
->--disable-debug</option
-></userinput
-> abgeschaltet werden. Sie können auch <userinput
-><option
->--enable-final</option
-></userinput
-> verwenden, dann werden die ausführbaren Dateien etwas größer, laufen aber auch schneller.</para>
+</screen>
 
-<para
->Die letzte Ausgabe besagt, das die installierte &Qt;-Version mit einigen Informationen zur Fehlersuche kompiliert wurde.</para>
+is debug info. At compile time, this can be stopped by compiling with
+the <userinput><option>--disable-debug</option></userinput> flag. You
+might also want to use
+<userinput><option>--enable-final</option></userinput>, too, which
+takes a bit more memory when compiling, but is more efficient when
+running the application.</para>
 
-<para
->Wenn &appname; bereits installiert ist, starten Sie das Programm <userinput
-><command
->kdebugdialog</command
-></userinput
-> und überprüfen, ob alle Ausgaben zur Fehlersuche abgeschaltet sind. Damit werden alle Ausgaben für &kde;-Programme unterdrückt.</para>
+<para>The last message is slightly different, it just means your &Qt;
+ installation was compiled with some debugging information.</para>
+
+<para>Or, if &appname; is already installed, run
+<userinput><command>kdebugdialog</command></userinput> and make sure
+that "0 (generic)" is unchecked. That turns off debug messages from
+all generic &kde; apps &ie; those not distributed officially by
+&kde;.</para>
 
 </answer>
 </qandaentry>
 
 <qandaentry>
-<question
-><para
->Wie kann ich die angezeigten Spalten ändern?</para
-></question>
+<question><para>How do I change which columns are shown?</para></question>
 <answer>
-<para
->Klicken Sie mit der &RMB; auf die Kopfzeile. Dann wird ein Kontextmenü geöffnet, in dem Sie die angezeigten Spalten auswählen können. Die Anordnung der Elemente in der Kopfzeile kann durch verschieben mit gedrückter linker Maustaste angepasst werden. Klicken Sie auf ein Feld im der Kopfzeile, um die Anzeige nach diesem Feld zu sortieren.</para>
+<para>Right-click on the header bar. You can also drag the headers to re-order
+the columns, and click on them to sort by that field.</para>
 </answer>
 </qandaentry>
 
 <qandaentry>
-<question
-><para
->Wie kann ich nach Feldern wie „Gelesen“ filtern?</para
-></question>
+<question><para>How do I filter by something like the "Read"
+field?</para></question>
 <answer>
-<para
->Intern werden Ankreuzfelder in &appname; als Boolescher Wert  "true" (wahr) gespeichert. Möchten Sie zum Beispiel einen Filter definieren, der nur die bisher noch nicht gelesenen Science-Fiction-Bücher anzeigt. müssen Sie zwei Regeln eingeben. Wählen Sie <guilabel
->Trifft auf alle der folgenden zu</guilabel
->. Als erste Regel geben Sie <guilabel
->Gattung</guilabel
-> <guilabel
->enthält</guilabel
-> <guilabel
->Science-Fiction</guilabel
-> an, die zweite Regel lautet <guilabel
->Gelesen</guilabel
-> <guilabel
->enthält nicht</guilabel
-> <guilabel
->true</guilabel
->.</para>
+<para>Internally, the checkbox
+fields in &appname; are saved as "true", so if you'd like to filter
+to show only the science fiction books which you've not read, for
+example, then you have two rules. Make sure the "Match all of the
+following" button is checked. Set the first rule to have "Genre"
+"contains" "Science Fiction" (no quotes) and the second rule to have
+"Read" "does not contain" "true" (no quotes).</para>
 
-<para
->Sie können außerdem die Filterleiste verwenden, die passende Einträge in allen Feldern findet. Diese Filterleiste verarbeitet auch reguläre Ausdrücke. Möchten Sie zum Beispiel nach Büchern der Autoren Weber oder Bujold filtern, geben Sie <userinput
->weber|bujold</userinput
-> in der Werkzeugleiste ein.</para>
+<para>Also, the quick filter in the toolbar will match any field,
+and if there is a non-word character, the text is interpreted as a
+regular expression. So if you quickly want to filter your books to
+show those by Weber or Bujold, then type "weber|bujold" (no quotes) in
+the toolbar.</para>
 </answer>
 </qandaentry>
 
 <qandaentry>
-<question
-><para
->Wie werden neue Vorlagen für Einträge hinzugefügt?</para
-></question>
+<question><para>How do I add new entry templates?</para></question>
 
 <answer>
-<para
->Vorlagen für Einträge sollten für einen einzelnen Benutzer <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/entry-templates/</filename
-> oder für alle Benutzer des Systems in <filename class="directory"
->$<envar
->KDEDIR</envar
->/share/apps/tellico/entry-templates/</filename
-> gespeichert werden. Vorlagen in $<envar
->KDEHOME</envar
-> überschreiben alle Dateien mit dem gleichen Namen in $<envar
->KDEDIRS</envar
->. Im Einrichtungsdialog können Vorlagen für Einträge für jede Art von Sammlung getrennt definiert werden.</para>
+<para>Entry templates should be saved in
+<filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/entry-templates/</filename>
+for access for a single user or
+<filename class="directory">$<envar>KDEDIR</envar>/share/apps/tellico/entry-templates/</filename>
+for access by everyone. Templates in $<envar>KDEHOME</envar> will
+override any files by the same name in $<envar>KDEDIRS</envar>. The
+entry templates can be set on a per collection-type basis in the
+settings dialog.</para>
 
-<para
->Vorlagen für den <interface
->Bericht-Dialog</interface
-> werden in <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/report-templates/</filename
-> gespeichert. </para>
+<para>Templates for the <interface>Report Dialog</interface> are saved in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/report-templates/</filename>.
+</para>
 </answer>
 </qandaentry>
 
 <qandaentry>
-<question
-><para
->Kompilierung und Installation funktionierte ohne Probleme, aber beim Start von &appname; wird nur ein leeres Fenster angezeigt. Was ist die Ursache dafür?</para
-></question>
+<question><para>Compiling and installing went
+fine, but when &appname; starts up, the window is blank. What's
+wrong?</para></question>
 
 <answer>
-<para
->&kde;-Programme suchen Ihre Daten an Orten, die durch die Umgebungsvariable $<envar
->KDEDIRS</envar
-> bestimmt werden. Wenn Sie zum Beispiel in den Ordner <filename class="directory"
->/usr/local</filename
-> installieren, aber für die Umgebungsvariable $<envar
->KDEDIRS</envar
-> kein Wert gesetzt ist oder diese den Wert <filename class="directory"
->/usr</filename
-> enthält, kann &appname; die erforderlichen Daten nicht finden. Dies betrifft vor allem &SuSE;, dafür müssen Sie mit der Einstellung <userinput
-><option
->--prefix</option
->=<filename class="directory"
->/opt/kde3</filename
-></userinput
-> kompilieren. Alternativ können Sie eine Zeile mit dem richtigen Wert für $<envar
->KDEDIRS</envar
-> in die Datei <filename
->.profile</filename
->. Lesen Sie dazu die Dokumentation der verwendeten Shell.</para>
+<para>&kde; programs look for data in the locations defined in the
+ $<envar>KDEDIRS</envar> environmental variable. If you install in
+ <filename class="directory">/usr/local</filename> for example, but
+ $<envar>KDEDIRS</envar> is empty or just <filename class="directory">/usr</filename>,
+ then &appname; won't be able to find the files it needs. This is
+ particularly true for &SuSE;, for which you should compile with
+ <userinput><option>--prefix</option>=<filename class="directory">/opt/kde3</filename></userinput>. Alternatively,
+ you could add a line to your <filename>.profile</filename> file to
+ set $<envar>KDEDIRS</envar>. Check the documentation for your
+ shell.</para>
 </answer>
 </qandaentry>
 
 <qandaentry>
-<question
-><para
->Wie exportiere ich zusätzliche Bibtex-Felder?</para
-></question>
+<question><para>How do I export additional bibtex fields?</para></question>
 <answer>
-<para
->&appname; verwendet die Eigenschaft <emphasis
->bibtex</emphasis
->, um die zu exportierenden bibtex-Felder zu bestimmen. Möchten Sie zusätzliche Felder für den Export wie zum Beispiel eine Zusammenfassung hinzufügen, öffnen Sie den Dialog <interface
->Sammlungsfelder</interface
->. Klicken Sie auf den Knopf <guibutton
->Eigenschaften festlegen ...</guibutton
->. Fügen Sie dann eine Eigenschaft <emphasis
->bibtex</emphasis
-> mit dem Wert <emphasis
->Zusammenfassung</emphasis
-> hinzu. Wenn Sie dann nach  bibtex oder bibtexml exportieren, wird diese Eigenschaft dann für den Namen des bibtex-Feldes verwendet.</para>
+<para>&appname; uses the <emphasis>bibtex</emphasis> property to know how to export
+ bibtex fields. If you want to add additional fields to export, such
+ as an abstract, open up the <interface>Collection Fields Dialog</interface>, and click the <guibutton>Set
+ Properties</guibutton> button. Add a <emphasis>bibtex</emphasis> property with value
+ <emphasis>abstract</emphasis>. Then, when you export to bibtex or bibtexml, that
+ property will be used for the bibtex field name.</para>
 </answer>
 </qandaentry>
 
 <qandaentry>
 <question>
-<para
->Was passierte mit dem Namen „Bookcase“?</para>
+<para>What happened to Bookcase?</para>
 </question>
 
 <answer>
-<para
->Wegen Problemen mit einem Markennamen wurde Bookcase im September 2004 in Tellico umbenannt. Damals wurde Tellico Version 0.12 veröffentlicht. Diese Version war bis auf den geänderten Namen identisch mit Bookcase 0.11.</para>
+<para>Due to a trademark conflict, Bookcase was renamed Tellico in September 2004.
+Tellico 0.12 was then released, which was identical to
+Bookcase 0.11, except for the name change.</para>
 </answer>
 </qandaentry>
 
 <qandaentry>
 <question>
-<para
->Welche Bedeutung hat der Name Tellico?</para>
+<para>What does the name Tellico have to do with anything?</para>
 </question>
 
 <answer>
-<para
->Einige Überlegungen zur Namenswahl finden Sie <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
->hier</ulink
->, Einige angedachte Namen hatten Bezug zu Buchsammlungen. Da Tellico jedoch verschiedene Arten von Sammlungen verwalten kann, hat der Autor einen gut klingenden Namen gewählt. Tellico ist der Name einer Stadt, in deren Umgebung der Autor aufwachsen ist.</para>
+<para>I thought about <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html">several
+other names</ulink>, a few of which were connected with book collections. However,
+Tellico can handle more than just books, and besides, this is a hobby, so I chose
+a neat-sounding (to me) name, one taken from a town close to where I grew up.</para>
 </answer>
 </qandaentry>
 
 <qandaentry>
 <question>
-<para
->Warum sind in den Suchergebnissen diese Verknüpfungen zu Amazon.com enthalten?</para>
+<para>What do you include those links to Amazon.com in the search results?</para>
 </question>
 
 <answer>
-<para
->Die <ulink url="http://www.amazon.com/gp/browse.html/002-0927720-5265623?node=3440661"
->Bedingungen für die Nutzung der Webdienste von Amazon.com</ulink
-> legen fest, dass alle von diesem Dienst bezogenen Bilder wieder zurück zu Amazon.com verknüpft werden müssen, ebenso als zusätzliche Verknüpfung. Die Partner-ID von Amazon.com ist notwendigerweise darin enthalten, so dass alle Zahlungen per Überweisung ordnungsgemäß gesammelt werden. </para>
+<para>
+The <ulink url="http://www.amazon.com/gp/browse.html/002-0927720-5265623?node=3440661">terms of agreement for accessing the Amazon.com Web Services</ulink> require all images pulled from the service to be linked back to Amazon.com, as well as an additional link. The Amazon.com associate's ID is necessarily included, so any referral payments are duly collected.
+</para>
 </answer>
 </qandaentry>
 
 <qandaentry>
 <question>
-<para
->Warum wird keine richtige Datenbank verwendet?</para>
+<para>Why don't you use a real database?</para>
 </question>
 
 <answer>
-<para
->Die Entwicklung von &appname; wurde mit dem Ziel begonnen, C++ zu lernen. Der Autor kannte damals SQL noch nicht und hat heute nur begrenzte Kenntnisse darüber. Daher wurde &appname; nicht mit einer relationale Datenbank, entwickelt, und das wird sich wahrscheinlich nicht ändern. Finden Sie das nicht gut, benutzen Sie &appname; einfach nicht. </para>
+<para>
+Part of the reason I started &appname; was to learn C++. I didn't know SQL at the time, and at the moment, I only have a faint knowledge
+of how to use it. Simply put, &appname; didn't start out as a relational database, and that won't change until sometime in the future when
+I get around to learning SQL and have the time and motivation to change the data model. If that bothers you, well, don't use &appname; then.
+</para>
 
-<para
->Natürlich kann der Quelltext von jedermann nach seinen Wünschen verändert werden. </para>
+<para>
+Of course, anyone is welcome to make any changes they want to with the source code.
+</para>
 </answer>
 </qandaentry>
 

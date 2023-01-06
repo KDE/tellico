@@ -1,532 +1,306 @@
 <chapter id="configuration">
-<title
->Einrichtung</title>
+<title>Configuration</title>
 
-<para
->Der <interface
->Einrichtungsdialog</interface
-> enthält alle Einstellungen, um das Standardverhalten von &appname; zu ändern. </para>
+<para>
+The <interface>Configuration Dialog</interface> contains all the options for
+changing some of the default behaviour of &appname;.
+</para>
 
-<para
->Klicken Sie auf den Knopf <guibutton
->Anwenden</guibutton
->, dann werden die <action
->Änderungen sofort übernommen</action
-> ohne den Dialog zu schließen. Mit dem Knopf <guibutton
->OK</guibutton
-> <action
->wenden Sie alle Änderungen an</action
-> und schließen den Dialog. <guibutton
->Abbrechen</guibutton
-> schließt den Dialog, alle mit <guibutton
->Anwenden</guibutton
-> übernommenen Änderungen bleiben erhalten, die Übrigen werden verworfen. <guibutton
->Voreinstellungen</guibutton
-> <action
->setzt</action
-> die Einstellungen auf der angezeigten Seite des Dialogs wieder auf die Standardwerte zurück. Mit dem Knopf <guibutton
->Hilfe</guibutton
-> wird <action
->das &khelpcenter; mit dem zugehörigen Abschnitt des Handbuchs zu &appname; geöffnet</action
->. </para>
+<para>
+Clicking the <guibutton>Apply</guibutton> button <action>causes the changes to
+take effect immediately</action> without closing the dialog, while
+<guibutton>OK</guibutton> <action>applies the changes and closes the dialog</action>. <guibutton>Cancel</guibutton> closes the dialog, but any changes already made
+and applied will remain. The <guibutton>Defaults</guibutton> button <action>reverts
+the options</action> on the current page of the dialog to their default values,
+while <guibutton>Help</guibutton> <action>opens the &khelpcenter;</action> to
+the relative section of the &appname; manual.
+</para>
 
-<para
->Einige weniger wichtige Einstellungen können nur durch direktes Bearbeiten der Einrichtungsdatei geändert werden. Weitere Informationen dazu unter <link linkend="hidden-options"
->Versteckte Einstellungen</link
->. </para>
+<para>
+Some minor settings can only be changed by editing the configuration file itself. See <link linkend="hidden-options">Hidden Options</link>.
+</para>
 
 <sect1 id="general-options">
-<title
-><guilabel
->Allgemeine Einstellungen</guilabel
-></title>
+<title><guilabel>General Options</guilabel></title>
 
 <screenshot>
-<!-- <screeninfo
->The General Options Dialog</screeninfo
-> -->
+<!-- <screeninfo>The General Options Dialog</screeninfo> -->
 <mediaobject>
-<imageobject
-><imagedata format="PNG" fileref="general-options.png"/></imageobject>
-<textobject
-><phrase
->Der Dialog „Allgemeine Optionen“</phrase
-></textobject>
+<imageobject><imagedata format="PNG" fileref="general-options.png"/></imageobject>
+<textobject><phrase>The General Options Dialog</phrase></textobject>
 </mediaobject>
 </screenshot>
 
-<para
->Hier können <guilabel
->Allgemeine Optionen</guilabel
-> für das Verhalten des Programms eingestellt werden. Bilder können in der Datendatei oder getrennt im Anwendungsverzeichnis von &appname; gespeichert werden. Bei Start kann &appname; automatisch wieder die zuletzt geöffnete Datei laden. im Dialog <guilabel
->Tipp des Tages</guilabel
-> werden hilfreiche Informationen zum Arbeiten mit &appname; angezeigt, er kann beim Start angezeigt werden. Sie sollten diese Tipps einmal lesen und dann den Dialog deaktivieren. </para>
+<para>
+The <guilabel>General Options</guilabel> control the general behavior. Images may be included
+in the data files, or saved separately in the &appname; application folder. Also, when &appname;
+is started, it can automatically reopen the last data file that was open. The
+<guilabel>Tip of the Day</guilabel> dialog contains helpful hints on using &appname;
+and appears at program startup. You may want to read through some of the hints and
+then disable the dialog. The <interface>Quick Filter</interface> in the toolbar is useful
+for easily filtering through your collection and can utilize regular expressions.
+</para>
 
-<para
->In den <guilabel
->Formatierungseinstellungen</guilabel
-> geben Sie die automatisch von &appname; verwendeten Formatierungen. Beispiele dazu finden Sie im Abschnitt <link linkend="field-formatting"
->Feldformatierung</link
->. Großschreibung und Formatierung lassen sich getrennt einstellen, da zum Beispiel ein Feldinhalt großgeschrieben werden soll, ohne die Reihenfolge der Wörter zu ändern und umgekehrt. Die automatische Formatierung behandelt Grammatik-Artikel in Titeln und Vor- und Nachsilben für Personennamen. Bei diesen Einträgen Wird die Groß- und Kleinschreibung beachtet, die Werte sollten durch ein Semikolon getrennt werden. </para>
+<para>
+The <guilabel>Formatting Options</guilabel> control the level of automatic formatting
+that &appname; does. For examples, see the <link linkend="field-formatting">Field
+Formatting section</link>. Capitalization and formatting are distinct options, since
+a field may be capitalized without having the order of the words changed, and
+vice-versa. The auto-capitalization can be changed to ignore certain words.
+The automatic formatting includes grammatical articles in titles,
+along with prefixes and suffixes for personal names. The values are case-insensitive,
+and should be separated by a semi-colon.
+</para>
 
-<para
->Die Formatierungsregeln sind für den normalen englischen Sprachgebrauch ausgelegt, das ist aber nicht unbedingt für andere Sprachen geeignet. Artikel werden an das Ende eines Titels gestellt, bei Personennamen wird zuerst der Nachname aufgeführt und dann der Vorname durch Komma getrennt. Nachsilben von Personennamen wie „jr.“ werden beim Nachnamen aufgeführt, bei der Sortierung aber außer Acht gelassen.</para>
+<para>
+The formatting rules follow general English usage, which may not work for other languages.
+Articles are appended to the end of the title, with a comma. Personal names are formatted
+to have the last name first, followed by a comma, then the first name. Personal suffixes,
+such as Jr., are kept with the last name. Prefixes, such as <emphasis>von</emphasis>,
+are kept with the last name, but are ignored when the values are being sorted.</para>
 
-<informalexample
-><para
-><emphasis
->John Q. von Public, III</emphasis
-> wird zu <emphasis
->von Public, III, John Q.</emphasis
-> geändert und <emphasis
->Public</emphasis
-> wird als Sortierschlüssel verwendet.</para
-></informalexample>
+<informalexample><para><emphasis>John Q. von Public, III</emphasis> would become
+<emphasis>von Public, III, John Q.</emphasis> and <emphasis>Public</emphasis> would
+be used as the sort key.</para></informalexample>
 
-<para
->Nur einzelne Vorsilben des Nachnamens werden berücksichtigt. Wenn ein Name zum Beispiel <emphasis
->van der</emphasis
-> enthält, sollten beide Vorsilben <emphasis
->van</emphasis
-> und <emphasis
->der</emphasis
-> in der Liste mit Vorsilben des Nachnamens eingefügt werden. Artikel, die mit einem Apostroph enden, werden bei der Reihenfolge der Sortierung ebenfalls berücksichtigt. </para>
+<para>
+Only single word prefixes are supported. If a name includes <emphasis>van der</emphasis>,
+for example, both <emphasis>van</emphasis> and <emphasis>der</emphasis> should be included
+in the surname prefix list. Articles ending with an apostrophe are supported for sorting
+order, as well.
+</para>
 
-<note
-><para
->Die tatsächlichen Werte in der Sammlung werden <emphasis
->nicht</emphasis
-> geändert, nur der in der Benutzeroberfläche angezeigte Text. Daher können Sie die Formatierungseinstellungen beliebig ohne Datenverlust in der Sammlung ändern.</para
-></note>
+<note><para>The actual values in the collection are <emphasis>not</emphasis> changed,
+only the visible text used for the interface. So the formatting options can be
+changed back and forth without affecting any of the data in the collection.</para></note>
 
 </sect1>
 
 <sect1 id="printing-options">
-<title
-><guilabel
->Druckoptionen</guilabel
-></title>
+<title><guilabel>Printing Options</guilabel></title>
 
-<para
->&appname; benutzt eine &xslt;-Vorlage zur Erzeugung der &HTML;-Seiten und übergibt sie dann dem &kde;-Drucksystem. Nur die in der <link linkend="detailed-view"
-><interface
->Spaltenansicht</interface
-></link
-> gezeigten Felder werden gedruckt. Haben Sie für die Sammlung einen Filter aufgerufen, werden nur die gefilterten Einträge gedruckt. In diesem Fall wird ein Dialog mit dem Hinweis auf die Filterung angezeigt. </para>
+<para>
+&appname; uses an &xslt; template for creating &HTML;
+and then passes that to the &kde; printing service. Only the fields visible in the <link linkend="detailed-view"><interface>Column View</interface></link> are printed. Furthermore, if the collection
+is being filtered, only the visible entries will be printed. Initially, a warning message
+is shown if filtering is active.
+</para>
 
 <screenshot>
-<screeninfo
->Die Seite Druckoptionen</screeninfo>
+<screeninfo>The Print Options Dialog</screeninfo>
 <mediaobject>
-<imageobject
-><imagedata format="PNG" fileref="print-options.png"/></imageobject>
-<textobject
-><phrase
->Die Seite Druckoptionen</phrase
-></textobject>
+<imageobject><imagedata format="PNG" fileref="print-options.png"/></imageobject>
+<textobject><phrase>The Print Options Dialog</phrase></textobject>
 </mediaobject>
 </screenshot>
 
-<para
->Auf der Seite <guilabel
->Druckoptionen</guilabel
-> können Sie einige Formatierungen für den Druck einer Sammlung einstellen. Wenn <guilabel
->Titel und Namen formatieren</guilabel
-> aktiviert ist, werden die Felder beim Druck <link linkend="field-formatting"
->automatisch formatiert</link
->. Ansonsten werden Sie genauso wie gedruckt wie sie eingegeben wurden. </para>
+<para>
+The <guilabel>Printing Options</guilabel> allow you to change some formatting when
+printing a collection. If <guilabel>Format titles and names</guilabel> is checked,
+then the fields are <link linkend="field-formatting">auto-formatted</link> when they
+are printed. Otherwise, they are printed exactly as they were entered.
+</para>
 
-<para
->Die Standardvorlage druckt die Sammlung mit den Feldwerten in Spalten. Aktivieren Sie <guilabel
->Feld-Kopfzeilen drucken</guilabel
->, damit der Titel des Feldes über der Spalte auf dem Ausdruck erscheint. </para>
+<para>
+The default printing stylesheet prints the collection with the field values in columns.
+<guilabel>Print field headers</guilabel> controls whether the field title is printed
+at the top of the column.
+</para>
 
-<para
->In der Druckausgabe werden die Einträge wie in der <link linkend="detailed-view"
-><interface
->Spaltenansicht</interface
-></link
-> sortiert. Zusätzlich können die Einträge wie in der <link linkend="group-view"
-><interface
->Gruppen</interface
-></link
-> angeordnet werden. </para>
+<para>
+In the printout, the entries will be sorted as they are in the <link linkend="detailed-view"><interface>Column View</interface></link>. Additionally, they may be grouped as they are in the <link linkend="group-view"><interface>Group View</interface></link>.
+</para>
 
-<para
->Wenn Bilder in der Druckausgabe enthalten Sind, kann ihre Größe unter Beibehaltung des Seitenverhältnisses angepasst werden. Die größte Bildbreite und -höhe bestimmt die maximale Größe des Bildes, darüber hinaus wird es nie vergrößert. </para>
+<para>
+Finally, when image fields are included in the printout, the images may be resized,
+while maintaining their aspect ratio. The maximum image width and height define the
+largest possible size of the image, though it will never be increased.
+</para>
 </sect1>
 
 <sect1 id="template-options">
-<title
-><guilabel
->Vorlagen-Optionen</guilabel
-></title>
+<title><guilabel>Template Options</guilabel></title>
 
-<para
->Die <link linkend="entry-view"
-><interface
->Eintragsansicht</interface
-></link
-> verwendet Vorlagen zur Anzeige der Feldwerte. Für jede Art von Sammlung können verschiedene Vorlagen angegeben werden. Einige Vorlagen wie <emphasis
->Album</emphasis
-> oder <emphasis
->Video</emphasis
-> sind nur für bestimmte Sammlungen geeignet. Wenn Sie sie für andere Sammlungen benutzen, wird eine Fehlermeldung in der <interface
->Eintragsansicht</interface
-> angezeigt. Durch Klicken auf <guilabel
->Vorschau</guilabel
-> öffnen Sie ein Fenster mit dem Erscheinungsbild der ausgewählten Vorlage. Benutzerdefinierte Schriften und Farben können für eine Vorlage angegeben werden, alle Standardvorlagen berücksichtigen diese Einstellungen. Verwenden Sie benutzerdefinierte Vorlagen, können diese Einstellungen aber auch ignoriert werden.</para>
+<para>
+The <link linkend="entry-view"><interface>Entry View</interface></link> uses templates to show the field
+values. You can specify a different template for each collection type. Some templates,
+such as the <emphasis>Album</emphasis> or <emphasis>Video</emphasis> templates are
+for a specific collection type, and a short error message will appear in the
+<interface>Entry View</interface> if they are used for other types. The
+<guilabel>Preview</guilabel> button pops up a window to show you a preview of what the template looks like.
+Custom fonts and colors may be passed to the template, and all of the default templates
+will honor those settings. However, custom template may choose to ignore them.</para>
 
-<para
->Zusätzliche Vorlagen können Sie direkt installieren oder von <ulink url="https://store.kde.org/"
->store.kde.org</ulink
-> erhalten, indem Sie auf <guilabel
->Herunterladen</guilabel
-> klicken. Vom Benutzer installierte Vorlagen können gelöscht werden. Vorlagen für Einträge werden im Ordner <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/entry-templates/</filename
-> gespeichert. </para>
+<para>
+Additional templates may be installed directly, or downloaded from
+<ulink url="https://store.kde.org/">store.kde.org</ulink> by clicking
+the <guilabel>Download</guilabel> button. Any templates installed by the user may also be deleted.
+Entry templates are saved in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/entry-templates/</filename>.
+</para>
 
-<para
->Wenn Sie eine neue Vorlage erstellt haben, laden Sie sie bitte auf <ulink url="https://store.kde.org/"
->store.kde.org</ulink
-> hoch.</para>
+<para>If you create a new template, please consider submitting it at <ulink url="https://store.kde.org/">store.kde.org</ulink>!</para>
 
 <screenshot>
-<screeninfo
->Die Seite Vorlagen-Optionen</screeninfo>
+<screeninfo>The Template Options Dialog</screeninfo>
 <mediaobject>
-<imageobject
-><imagedata format="PNG" fileref="template-options.png"/></imageobject>
-<textobject
-><phrase
->Die Seite Vorlagen-Optionen</phrase
-></textobject>
+<imageobject><imagedata format="PNG" fileref="template-options.png"/></imageobject>
+<textobject><phrase>The Template Options Dialog</phrase></textobject>
 </mediaobject>
 </screenshot>
 
 </sect1>
 
 <sect1 id="data-sources-options">
-<title
-><guilabel
->Einstellungen für Datenquellen</guilabel
-></title>
+<title><guilabel>Data Sources Options</guilabel></title>
 
-<para
->&appname; kann verschiedene Quellen für den Import von Daten nutzen, Einstellungen dazu finden Sie auf der Seite „Datenquellen“ im Einstellungsdialog. Es gibt viele mögliche Arten und Quellen. Einige werden auf dieser Seite aufgeführt, die vollständige Liste finden Sie auf der <ulink url="https://tellico-project.org/data-sources"
->Tellico-Webseite</ulink
->.</para>
+<para>
+&appname; can use various sources for importing data, which can be configured
+in the Data Sources Dialog. There are many available types and sources. A few of them are listed below,
+while the full list is <ulink url="https://tellico-project.org/data-sources">available on the Tellico web site</ulink>.</para>
 
 <itemizedlist>
 <!-- books -->
-<listitem
-><simpara
-><link linkend="amazon-web-services"
->Amazon.com-Web-Dienste</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="isbndb"
->ISBNdb.com</link
->.</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="openlibrary"
->OpenLibrary.org</link
->,</simpara
-></listitem>
+<listitem><simpara><link linkend="amazon-web-services">Amazon.com Web Services</link>,</simpara></listitem>
+<listitem><simpara><link linkend="isbndb">ISBNdb.com</link>,</simpara></listitem>
+<listitem><simpara><link linkend="openlibrary">OpenLibrary.org</link>,</simpara></listitem>
 <!-- movies -->
-<listitem
-><simpara
-><link linkend="imdb"
->Internet-Filmdatenbank</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="allocine"
->AlloCiné</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="tmdb"
->TheMovieDB.org</link
->,</simpara
-></listitem>
-<listitem
-><simpara
->the <link linkend="omdb"
->Open Movie Database</link
->,</simpara
-></listitem>
+<listitem><simpara>the <link linkend="imdb">Internet Movie Database</link>,</simpara></listitem>
+<listitem><simpara><link linkend="allocine">AlloCiné</link>,</simpara></listitem>
+<listitem><simpara><link linkend="tmdb">TheMovieDB.org</link>,</simpara></listitem>
+<listitem><simpara>the <link linkend="omdb">Open Movie Database</link>,</simpara></listitem>
 <!-- comics -->
-<listitem
-><simpara
-><link linkend="bedetheque"
->BDGest</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="comicvine"
->Comic Vine</link
->,</simpara
-></listitem>
+<listitem><simpara><link linkend="bedetheque">BDGest</link>,</simpara></listitem>
+<listitem><simpara><link linkend="comicvine">Comic Vine</link>,</simpara></listitem>
 <!-- music -->
-<listitem
-><simpara
-><link linkend="discogs"
->Discogs.com</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="musicbrainz"
->MusicBrainz.org</link
->,</simpara
-></listitem>
+<listitem><simpara><link linkend="discogs">Discogs.com</link>,</simpara></listitem>
+<listitem><simpara><link linkend="musicbrainz">MusicBrainz.org</link>,</simpara></listitem>
 <!-- video games -->
-<listitem
-><simpara
-><link linkend="tgdb"
->TheGamesDB.net</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="giantbomb"
->GiantBomb.com</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="mobygames"
->MobyGames.com</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="igdb"
->IGDB.com</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="videogamegeek"
->VideoGameGeek</link
->,</simpara
-></listitem>
+<listitem><simpara><link linkend="tgdb">TheGamesDB.net</link>,</simpara></listitem>
+<listitem><simpara><link linkend="giantbomb">GiantBomb.com</link>,</simpara></listitem>
+<listitem><simpara><link linkend="mobygames">MobyGames.com</link>,</simpara></listitem>
+<listitem><simpara><link linkend="igdb">IGDB.com</link>,</simpara></listitem>
+<listitem><simpara><link linkend="videogamegeek">VideoGameGeek</link>,</simpara></listitem>
 <!-- board games -->
-<listitem
-><simpara
-><link linkend="boardgamegeek"
->BoardGameGeek</link
->,</simpara
-></listitem>
+<listitem><simpara><link linkend="boardgamegeek">BoardGameGeek</link>,</simpara></listitem>
 <!-- bibliographic -->
-<listitem
-><simpara
-><link linkend="bib-sources"
->arxiv.org</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="entrez"
->Entrez-(PubMed)-Datenbanken</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="z3950"
->z39.50-Server</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="sru"
->SRU-Server</link
->,</simpara
-></listitem>
+<listitem><simpara><link linkend="bib-sources">arxiv.org</link>,</simpara></listitem>
+<listitem><simpara><link linkend="entrez">Entrez (PubMed) databases</link>,</simpara></listitem>
+<listitem><simpara><link linkend="z3950">z39.50 servers</link>,</simpara></listitem>
+<listitem><simpara><link linkend="sru">SRU servers</link>,</simpara></listitem>
 <!-- coins -->
-<listitem
-><simpara
-><link linkend="colnect"
->Colnect</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="numista"
->Numista</link
->,</simpara
-></listitem>
+<listitem><simpara><link linkend="colnect">Colnect</link>,</simpara></listitem>
+<listitem><simpara><link linkend="numista">Numista</link>,</simpara></listitem>
 <!-- others -->
-<listitem
-><simpara
-><link linkend="externalexec"
->andere externe Skripte oder Programme</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="multiple-sources"
->Kombinationen jeder der oben genannten Quellen</link
-></simpara
-></listitem>
+<listitem><simpara><link linkend="externalexec">other external scripts or applications</link>, and</simpara></listitem>
+<listitem><simpara><link linkend="multiple-sources">combinations of any of the above sources</link>.</simpara></listitem>
 </itemizedlist>
 
 <screenshot>
-<screeninfo
->Die Seite „Einstellungen für Datenquellen“</screeninfo>
+<screeninfo>The Data Sources Options Dialog</screeninfo>
 <mediaobject>
-<imageobject
-><imagedata format="PNG" fileref="source-options.png"/></imageobject>
-<textobject
-><phrase
->Die Seite „Einstellungen für Datenquellen“</phrase
-></textobject>
+<imageobject><imagedata format="PNG" fileref="source-options.png"/></imageobject>
+<textobject><phrase>The Data Sources Options Dialog</phrase></textobject>
 </mediaobject>
 </screenshot>
 
-<para
->Quellen können hinzugefügt werden, indem Sie auf den Knopf <guibutton
->Neu ...</guibutton
-> drücken, während vorhandene Quellen mit den Knöpfen <guibutton
->Ändern ...</guibutton
-> oder <guibutton
->Löschen</guibutton
-> geändert oder gelöscht werden können. Die Reihenfolge der Quellen, die im Untermenü <guisubmenu
->Eintrag aktualisieren</guisubmenu
-> angezeigt werden, kann hier ebenfalls geändert werden. </para>
+<para>
+New sources may be added by clicking the <guibutton>New...</guibutton> button, while
+existing ones may be modified or deleted, using the <guibutton>Modify...</guibutton> or
+<guibutton>Delete</guibutton> buttons. The order of the sources, which shows up in the
+entry updating menus, can also be changed.
+</para>
 
 <warning>
-<para
->Installieren Sie niemals ein Skript aus einer nicht vertrauenswürdigen Quell und führen es aus. Diese Skripte werden mit den Berechtigungen des Benutzers ausgeführt und könnten daher Dateien ändern und löschen oder auf andere Art Ihr System beschädigen. </para>
+<para>
+Never install and run a script from an untrusted source. They are executed with the same permissions as the user,
+and as a result, could modify or delete files or otherwise mess up your system.
+</para>
 </warning>
 
-<para
->Viele Datenquellen bieten mehr Informationen als die Standardfelder in &appname;. Diese zusätzlichen Felder werden im Dialog rechts angezeigt. Aktivieren Sie einige dieser Felder, dann werden sie zur Sammlung hinzugefügt, wenn ein Eintrag aus dieser Quelle abgerufen wird. </para>
+<para>
+Many of the data sources offer more information than the default fields in &appname;. Those other fields are
+shown on the right of the configuration box. If any of those fields are checked, they will be added
+to the collection when an entry is added from that source.
+</para>
 
 <!-- start book sources -->
 
 <sect2 id="book-sources">
-<title
->Buch- und Literaturnachweis-Datenquellen</title>
+<title>Book and Bibliographic Data Sources</title>
 
 <sect3 id="z3950">
-<title
->z39.50-Server</title>
+<title>z39.50 Servers</title>
 
-<para
->Das <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html"
->z39.50-Protokoll</ulink
-> wird benutzt, um auf Daten von Bibliotheken und Anbietern von Literaturnachweisen in aller Welt zuzugreifen. Eine Liste der öffentlichen z39.50-Server finden Sie auf <ulink url="http://www.indexdata.dk/targettest/"
->indexdata.dk</ulink
->. &appname; enthält mehrere vorbereitete Einstellungen für große Bibliotheken, Sie können außerdem die Daten einer Verbindung selbst eintragen.</para>
+<para>
+The <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html">z39.50 protocol</ulink> is used to access libraries and bibliographic information providers around the world. Lists of public z39.50 servers are <ulink url="http://www.indexdata.dk/targettest/">available from indexdata.dk</ulink>, among others. &appname; comes with
+several preset configurations for major libraries, or you can specify the connection information manually.</para>
 
-<para
->&appname; kann Daten im <acronym
->MODS</acronym
->-, <acronym
->USMARC</acronym
->-/<acronym
->MARC21</acronym
->- oder <acronym
->UNIMARC</acronym
->-Format lesen. Dazu wird die <ulink url="http://www.indexdata.dk/yaz/"
->yaz-Bibliothek</ulink
-> benutzt. Zusätzlich gibt es eingeschränkte Unterstützung für das <acronym
->GRS-1</acronym
->-Format. </para>
+<para>&appname;
+is able to read data in the <acronym>MODS</acronym>, <acronym>USMARC</acronym>/<acronym>MARC21</acronym>, or <acronym>UNIMARC</acronym> format, using the <ulink url="http://www.indexdata.dk/yaz/">yaz library</ulink>.
+In addition, there is limited support for the <acronym>GRS-1</acronym> format.
+</para>
 
 <screenshot>
 <mediaobject>
-<imageobject
-><imagedata format="PNG" fileref="z3950-options.png"/></imageobject>
+<imageobject><imagedata format="PNG" fileref="z3950-options.png"/></imageobject>
 </mediaobject>
 </screenshot>
 
-<para
->Um einen der vordefinierten Bibliotheken zu benutzen, aktivieren Sie das Ankreuzfeld <guilabel
->Voreingestellten Server verwenden</guilabel
-> und wählen dann eine Bibliothek im Auswahlfeld. Die anderen Einstellungen sind dann deaktiviert. Möchten sie die Daten manuell einstellen, wählen Sie das Ankreuzfeld ab. </para>
+<para>
+To use one of the preset libraries, check the box and then select the library. The other configuration entries will be disabled. If you need to set the information manually, uncheck the preset box.
+</para>
 
-<para
->Als Standardport für z39.50-Server wird 210 benutzt, einige Server haben einen anderen Port. &appname; unterstellt eine Zeichenkodierung im Format MARC-8, sofern nicht anders angegeben. Wird der falsche Zeichensatz verwendet, kann entweder eine Fehlermeldung in der Ausgabe des Programms erscheinen oder es werden keine Informationen erhalten. </para>
+<para>
+The default port for z39.50 access is 210, but some servers may use a different one. &appname; assumes the server uses the MARC-8 character encoding, unless configured otherwise. If an incorrect character encoding is used, an error message may appear on the program output, or possibly no entries are retrieved.
+</para>
 
-<para
->Für den Zugriff auf einige Server müssen Sie einen Benutzernamen und ein Passwort angeben. Diese Daten können in der Einrichtungsdatei für &appname; gespeichert werden. Die Speicherung erfolgt als Klartext und ist nicht sicher. Für die meisten öffentlichen Server benötigen Sie keinen Benutzernamen oder Passwort. </para>
+<para>
+Some servers require a username and password for access. &appname; can use and save that password, but be aware that is written to the &appname; configuration file in plain text and is not secure. For most public servers, the username and password fields may be left empty.
+</para>
 
 </sect3>
 
 <sect3 id="sru">
-<title
->SRU-Server</title>
+<title>SRU Servers</title>
 
-<para
->SRU bedeutet <ulink url="http://www.loc.gov/standards/sru/"
->Search/Retrieve via &URL; (Suchen/Abfragen über &URL;)</ulink
->. Es ist ein Standardprotokoll zur Internetsuche. Einige Bibliotheken stellen darüber einen Zugriff auf ihre Datenkataloge zur Verfügung. Die bekannteste darunter ist wahrscheinlich die  <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
->US Library of Congress (Bibliothek des amerikanischen Kongresses)</ulink
->. </para>
+<para>
+SRU stands for <ulink url="http://www.loc.gov/standards/sru/">Search/Retrieve via &URL;</ulink> and is a standard search protocol for
+Internet searches. Some libraries use it for providing access to their data catalogs. Among them, the <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr">US Library of Congress</ulink> is probably
+the best known.
+</para>
 
 <screenshot>
 <mediaobject>
-<imageobject
-><imagedata format="PNG" fileref="sru-options.png"/></imageobject>
+<imageobject><imagedata format="PNG" fileref="sru-options.png"/></imageobject>
 </mediaobject>
 </screenshot>
 
 </sect3>
 
 <sect3 id="entrez">
-<title
->Entrez-Datenbanken</title>
-<para
-><ulink url="http://www.ncbi.nlm.nih.gov/Entrez/"
->Entrez</ulink
-> ist das textbasierte Such- und Abfragesystem des National Center for Biotechnology Information (NCBI). Die bekannteste Entrez-Datenbank ist <ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed"
->PubMed</ulink
->, eine Datenbank mit wissenschaftlichen Artikeln über Biowissenschaft von vielen verschiedenen Biologie-Zeitschriften. Zur Zeit wird als einzige Entrez-Datenbank nur PubMed von &appname; unterstützt.</para>
+<title>Entrez Databases</title>
+<para>
+<ulink url="http://www.ncbi.nlm.nih.gov/Entrez/">Entrez</ulink> is the integrated, text-based search and retrieval system used at the National Center for Biotechnology Information (NCBI). The most well-known Entrez database is <ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed">PubMed</ulink>, the database for life science articles from many biological journals. At the moment, the only Entrez database supported by &appname; is PubMed.</para>
 </sect3>
 
 <sect3 id="bib-sources">
-<title
->Literaturnachweis-Datenbanken</title>
-<para
-><ulink url="http://arxiv.org"
->arXiv.org</ulink
->, <ulink url="http://bibsonomy.org"
->Bibsonomy</ulink
-> und <ulink url="http://crossref.org"
->CrossRef</ulink
-> sind Online-Datenbanken für wissenschaftliche Artikel und Literaturverzeichnisse. Für die Nutzung der „CrossRef“-Datenquelle ist eine <ulink url="http://www.crossref.org/requestaccount/"
->Anmeldung</ulink
-> erforderlich. Tragen Sie die Daten der Anmeldung in den Einstellungen für diese Datenquelle ein.</para>
+<title>Bibliographic Databases</title>
+<para>
+<ulink url="http://arxiv.org">arXiv.org</ulink>, <ulink url="http://bibsonomy.org">Bibsonomy</ulink>, and <ulink url="http://crossref.org">CrossRef</ulink> are online databases for academic articles and bibliographic information. For access to the CrossRef source, you must <ulink url="http://www.crossref.org/requestaccount/">request an account</ulink> and add your account information to the data source configuration.</para>
 </sect3>
 
 <sect3 id="isbndb">
-<title
->ISBNdb.com</title>
-<para
-><ulink url="http://isbndb.com"
->ISBNdb.com</ulink
-> ist eine Internet-Buchdatenbank von Büchereien aus aller Welt. </para>
+<title>ISBNdb.com</title>
+<para>
+<ulink url="http://isbndb.com">ISBNdb.com</ulink> is an online book database, from libraries around the world.
+</para>
 </sect3>
 
 <sect3 id="openlibrary">
-<title
->OpenLibrary.org</title>
-<para
-><ulink url="http://openlibrary.org"
->OpenLibrary.org</ulink
-> ist eine Internet-Buchdatenbank mit dem Ziel, mindestens eine Seite für jedes Buch zur Verfügung zu stellen. </para>
+<title>OpenLibrary.org</title>
+<para>
+<ulink url="http://openlibrary.org">OpenLibrary.org</ulink> is an online book database that aims to have one page for every book.
+</para>
 </sect3>
 
 </sect2>
@@ -534,294 +308,240 @@
 
 <!-- start of movie sources -->
 <sect2 id="comicbook-sources">
-<title
->Comicbuch-Datenquellen</title>
+<title>Comic Book Data Sources</title>
 
 <sect3 id="bedetheque">
-<title
->Bedetheque</title>
-<para
-><ulink url="http://www.bedetheque.com"
->Bedetheque</ulink
-> ist eine französische Datenbank für Comoc-Bücher, verwaltet von BDGest. </para>
+<title>Bedetheque</title>
+<para>
+<ulink url="http://www.bedetheque.com">Bedetheque</ulink> is a French comic book database, managed by BDGest.
+</para>
 </sect3>
 
 <sect3 id="comicvine">
-<title
->Comic Vine</title>
-<para
-><ulink url="https://comicvine.gamespot.com/"
->Comic Vine</ulink
-> ist das weltweit größte Comicbuch-Wiki. </para>
+<title>Comic Vine</title>
+<para>
+<ulink url="https://comicvine.gamespot.com/">Comic Vine</ulink> is billed as the largest comic book wiki in the universe.
+</para>
 </sect3>
 
 </sect2>
 
 <!-- start of movie sources -->
 <sect2 id="movie-sources">
-<title
->Film-Datenquellen</title>
+<title>Movie Data Sources</title>
 
 <sect3 id="imdb">
-<title
->Internet-Filmdatenbank</title>
+<title>Internet Movie Database</title>
 
-<para
->Die <ulink url="http://www.imdb.com"
->Internet-Filmdatenbank</ulink
-> enthält Informationen zu Filmen und Videos. Wird nach einer <emphasis
->Person</emphasis
-> gesucht, aber der Suchbegriff auf mehrere Personen zutrifft, dann können Sie in einem Dialog die richtige Person auswählen. Es kann hier die Sprache der IMDb-Datenbank eingegeben und ausgewählt werden, ob Bilder heruntergeladen werden sollen. Da eine Abfrage bei der Internet-Filmdatenbank eine große Anzahl an Rollen liefern kann, lässt sich dieser Wert begrenzen. </para>
+<para>
+The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides information about movies and videos. When a search is conducted for a <emphasis>Person</emphasis>, if more than one possible result is returned, a dialog box is opened to allow you to select the correct person. The configuration options include selecting which IMDb nationality to use and whether images are fetched or not. Since IMDb can return a large number of cast members, you can limit that to a certain number.
+</para>
 
 <screenshot>
 <mediaobject>
-<imageobject
-><imagedata format="PNG" fileref="imdb-options.png"/></imageobject>
+<imageobject><imagedata format="PNG" fileref="imdb-options.png"/></imageobject>
 </mediaobject>
 </screenshot>
 
 </sect3>
 
 <sect3 id="tmdb">
-<title
->TheMovieDB.org</title>
-<para
-><ulink url="http://themoviedb.org"
->TheMovieDB.org</ulink
-> ist eine freie und offene Online-Datenbank für Filme. Die Anmeldung ist für einen freien Zugriff auf die Daten erforderlich. </para>
+<title>TheMovieDB.org</title>
+<para>
+<ulink url="http://themoviedb.org">TheMovieDB.org</ulink> is a free and open online movie database. Registration for a free account is required.
+</para>
 </sect3>
 
 <sect3 id="omdb">
-<title
->Die „Open Movie“-Datenbank</title>
-<para
-><ulink url="http://omdbapi.com"
->The Open Movie Database (OMDBAPI.com)</ulink
-> ist eine freier Web-Dienst mit Informationen über Filme. </para>
+<title>The Open Movie Database</title>
+<para>
+<ulink url="http://omdbapi.com">The Open Movie Database (OMDBAPI.com)</ulink> is a free web service to obtain movie information.
+</para>
 </sect3>
 
 <sect3 id="allocine">
-<title
->AlloCiné</title>
-<para
-><ulink url="http://allocine.fr"
->AlloCiné</ulink
-> ist ein Online-Informationsdienste über Filme aus Frankreich. Die Browserkennung muss in den &systemsettings; aktiviert sein. </para>
+<title>AlloCiné</title>
+<para>
+<ulink url="http://allocine.fr">AlloCiné</ulink> is an online movie information service, based in France. Browser Identification must be enabled in &systemsettings;
+</para>
 </sect3>
 
 </sect2>
 
 <!-- start of music sources -->
 <sect2 id="music-sources">
-<title
->Musik-Datenquellen</title>
+<title>Music Data Sources</title>
 
 <sect3 id="discogs">
-<title
->Discogs.com</title>
-<para
-><ulink url="http://discogs.com"
->Discogs.com</ulink
-> ist eine von Freiwilligen erstellte Musikdatenbank mit Informationen über Künstler, Labels und Aufnahmen. Die Anmeldung ist für einen freien Zugriff auf die Daten erforderlich. Die Browserkennung muss in den &systemsettings; aktiviert sein. </para>
+<title>Discogs.com</title>
+<para>
+<ulink url="http://discogs.com">Discogs.com</ulink> is a user-built music database containing information on artists, labels, and their recordings. Registration for a free account is required. Browser Identification must be enabled in &systemsettings;
+</para>
 </sect3>
 
 <sect3 id="musicbrainz">
-<title
->MusicBrainz.org</title>
-<para
-><ulink url="http://musicbrainz.org"
->MusicBrainz.org</ulink
-> ist eine von Benutzern gemeinsam erstellte Datenbank für Musik-Metadaten die umfassende Informationen über Musik zur Verfügung stellt. Die Browserkennung muss in den &systemsettings; aktiviert sein. </para>
+<title>MusicBrainz.org</title>
+<para>
+<ulink url="http://musicbrainz.org">MusicBrainz.org</ulink> is a community music metadatabase that attempts to create a comprehensive music information site. Browser Identification must be enabled in &systemsettings;
+</para>
 </sect3>
 
 </sect2>
 
 <!-- start of wine sources -->
 <!--<sect2 id="wine-sources">
-<title
->Wine Data Sources</title>
+<title>Wine Data Sources</title>
 
-</sect2
->-->
+</sect2>-->
 
 <!-- start of video game sources -->
 <sect2 id="videogame-sources">
-<title
->Videospiel-Datenquellen</title>
+<title>Video Game Data Sources</title>
 
 <sect3 id="giantbomb">
-<title
->GiantBomb.com</title>
-<para
-><ulink url="http://giantbomb.com"
->GiantBomb.com</ulink
-> ist eine große von Freiwilligen gemeinsam erstellte Datenbank über Videospiele. Die Anmeldung ist für einen freien Zugriff auf die Daten erforderlich. </para>
+<title>GiantBomb.com</title>
+<para>
+<ulink url="http://giantbomb.com">GiantBomb.com</ulink> is a large community-driven video game database. Registration for a free account is required.
+</para>
 </sect3>
 
 <sect3 id="tgdb">
-<title
->TheGamesDB.net</title>
-<para
-><ulink url="http://thegamesdb.net"
->TheGamesDB.net</ulink
-> ist eine freie und offene Online-Datenbank für Videospiele. </para>
+<title>TheGamesDB.net</title>
+<para>
+<ulink url="http://thegamesdb.net">TheGamesDB.net</ulink> is an open, online database for video game fans.
+</para>
 </sect3>
 
 <sect3 id="mobygames">
-<title
->MobyGames</title>
-<para
-><ulink url="https://www.mobygames.com"
->MobyGames.com</ulink
-> bezeichnet sich selbst als älteste, größte und genaueste Datenbank für Videospiele. </para>
+<title>MobyGames</title>
+<para>
+<ulink url="https://www.mobygames.com">MobyGames.com</ulink> is self-described as the oldest, largest and most accurate video game database.
+</para>
 </sect3>
 
 <sect3 id="igdb">
-<title
->IGDB.com</title>
-<para
-><ulink url="https://www.igdb.com"
->IGDB.com</ulink
-> ist eine Webseite für alle Liebhaber von Spielen. </para>
+<title>IGDB.com</title>
+<para>
+<ulink url="https://www.igdb.com">IGDB.com</ulink> calls itself a gaming website for everyone that loves game.
+</para>
 </sect3>
 
 <sect3 id="videogamegeek">
-<title
->VideoGameGeek</title>
-<para
-><ulink url="https://videogamegeek.com"
->VideoGameGeek</ulink
-> ist eine Online-Ressource und -Gemeinschaft für Videospiele. </para>
+<title>VideoGameGeek</title>
+<para>
+<ulink url="https://videogamegeek.com">VideoGameGeek</ulink> is an online video gaming resource and community.
+</para>
 </sect3>
 
 </sect2>
 
 <!-- start of board game sources -->
 <sect2 id="boardgame-sources">
-<title
->„Board Game“-Datenquellen</title>
+<title>Board Game Data Sources</title>
 
 <sect3 id="boardgamegeek">
-<title
->BoardGameGeek</title>
-<para
-><ulink url="https://boardgamegeek.com"
->BoardGameGeek</ulink
-> ist eine Online-Ressource und -Gemeinschaft für Brettspiele. </para>
+<title>BoardGameGeek</title>
+<para>
+<ulink url="https://boardgamegeek.com">BoardGameGeek</ulink> is an online board gaming resource and community.
+</para>
 </sect3>
 
 </sect2>
 
 <!-- start of coin sources -->
 <sect2 id="coin-sources">
-<title
->Datenquellen für Münzen &amp; Briefmarken</title>
+<title>Coin &amp; Stamp Data Sources</title>
 
 <sect3 id="colnect">
-<title
->Colnect</title>
-<para
-><ulink url="https://colnect.com"
->Colnect</ulink
-> ist eine Online-Gemeinschaft für Sammlerstücke mit Verwaltung persönlicher Sammlungen. &tellico; kann Colnect nach Informationen über Münzen und Briefmarken durchsuchen. </para>
+<title>Colnect</title>
+<para>
+<ulink url="https://colnect.com">Colnect</ulink> is an online community for collectibles providing personal collection management.
+&tellico; can search Colnect for coin and stamp information.
+</para>
 </sect3>
 
 <sect3 id="numista">
-<title
->Numista</title>
-<para
-><ulink url="https://numista.com"
->Numista</ulink
-> ist eine weltweiter Katalog mit großer Nutzerbeteiligung mit Online-Sammlungsverwaltung und einfachen Möglichkeiten zum Tauschen mit anderen Sammlern sowie einem Forum. </para>
+<title>Numista</title>
+<para>
+<ulink url="https://numista.com">Numista</ulink> is a world coin catalog which grows thanks to member contributions, offering
+online collection management, tools to easily exchange with other collectors, and a forum.
+</para>
 </sect3>
 
 </sect2>
 
 <sect2 id="variety-type-sources">
-<title
->Datenquellen für mehrere Sammlungsarten</title>
+<title>Data Sources for Multiple Collection Types</title>
 
 <sect3 id="amazon-web-services">
-<title
->Amazon.com</title>
+<title>Amazon.com</title>
 
-<para
->Mit den Amazon-Web-Diensten kann &appname; in jeder der 14 internationalen Internetseiten nach Informationen suchen, die von <ulink url="http://amazon.com"
->Amazon.com</ulink
-> betrieben werden: USA. Vereinigtes Königreich von Großbritannien und Nordirland, Deutschland, Japan, Frankreich, Kanada, China, Spanien, Italien, Brasilien, Australien, Indien, Mexico und Türkei. </para>
+<para>
+Using the Amazon Web Services, &appname; can search any of 14 different international sites operated by <ulink url="http://amazon.com">Amazon.com</ulink> for information: United States, United Kingdom, Germany, Japan,
+France, Canada, China, Spain, Italy, Brazil, Australia, India, Mexico, and Turkey.
+</para>
 
 <screenshot>
 <mediaobject>
-<imageobject
-><imagedata format="PNG" fileref="amazon-options.png"/></imageobject>
+<imageobject><imagedata format="PNG" fileref="amazon-options.png"/></imageobject>
 </mediaobject>
 </screenshot>
 
-<para
->Für jede „Amazon.com“-Datenquelle sind drei Einstellungen nötig: Der Serverort, die Bildgröße und die Mitglieds-ID. Einige Informationen von <ulink url="http://amazon.com"
->Amazon.com</ulink
-> können Bilder enthalten, wie zum Beispiel von einem Buch oder einem Video. Das Bild kann je nach ausgewähltem Element in drei verschiedenen Größen heruntergeladen werden. Die Mitglieds-ID ist für den Zugriff auf Amazon-Web-Dienste erforderlich. Die wird in den Verknüpfung zurück zum Element eingeschlossen und wird durch die Nutzungsbedingungen der Amazon-Web-Dienste gefordert. </para>
+<para>
+Configuring each Amazon.com source involves three settings: the server location, image size, and associate's ID. Some information
+from <ulink url="http://amazon.com">Amazon.com</ulink> may include an image, such as a book or video cover. That image may be downloaded in three different sizes, depending on the item. The associate's ID must be used to access the Amazon.com Web Services, and is included in the links back to the item, as dictated by the license agreement for the use of the Amazon.com Web Services.
+</para>
 
-<para
->Der Zugriff auf die <ulink url="https://docs.aws.amazon.com/AWSECommerceService/latest/DG/Welcome.html"
->Amazon Product Advertising API</ulink
-> kann in Bezug auf Verkaufsempfehlungen oder Werbung eingeschränkt sein. Weitere Informationen finden in der Amazon-Dokumentation, wenn Sie sich für den API-Zugang anmelden. </para>
+<para>Access to the <ulink url="https://docs.aws.amazon.com/AWSECommerceService/latest/DG/Welcome.html">Amazon Product Advertising API</ulink> may have restrictions related to sales referrals or advertising. Refer to the Amazon documentation for further information when signing up for API access.
+</para>
 
 </sect3>
 
 <sect3 id="externalexec">
-<title
->Externe Skripte oder Programme</title>
-<para
->Als weitere einfache Möglichkeit zur Integration von Module Dritter in &appname; können externe Skripte oder Programme als Schnittstelle zur Suche in weiteren Informationsquellen benutzt werden. &appname; führt einen Befehl aus und übergibt die Suchbegriffe als Befehlszeilenoptionen. </para>
+<title>External Scripts or Applications</title>
+<para>
+As an easier way for &appname; to integrate with third-party plugins, external scripts or applications may be used as an interface for searching other information sources. &appname; will execute a command, and pass the search terms as command-line options.
+</para>
 
-<para
->Einige Skripte sind in &appname; bereits enthalten. <ulink url="http://python.org"
->Python</ulink
-> wird benötigt, um zum Beispiel <ulink url="http://darkhorse.com"
->Dark Horse Comics</ulink
-> zu durchsuchen. </para>
+<para>Some scripts are distributed with &appname; itself. <ulink url="http://python.org">Python</ulink> is required to search <ulink url="http://darkhorse.com">Dark Horse Comics</ulink>, a comic book publisher, for example.
+</para>
 
 <screenshot>
 <mediaobject>
-<imageobject
-><imagedata format="PNG" fileref="externalexec-options.png"/></imageobject>
+<imageobject><imagedata format="PNG" fileref="externalexec-options.png"/></imageobject>
 </mediaobject>
 </screenshot>
 
-<para
->Die vom Skript zurückgegebene Art der Sammlung und das Datenformat muss eingestellt werden. &appname; kann nicht nur Daten im <link linkend="file-format"
->Standard-&XML;-Format von &appname;</link
->, sondern auch andere Formate wie Bibtex importieren. </para>
+<para>
+The collection type returned by the script must be set, along with the data format. Not only can &appname; import data from scripts that
+use the <link linkend="file-format">default &appname; &XML; format</link>, but it can also import other formats as well, such as bibtex.
+</para>
 
-<para
->Der vollständige Pfad zum Skript oder zum Programm muss in den Einstellungen angegeben werden. Beachten Sie, dass das Skript oder Programm mit den Rechten des aktuellen Benutzers ausgeführt wird, benutzen Sie daher keine Skripte aus nicht vertrauenswürdigen Quellen. Aktivieren Sie die Ankreuzfelder neben den Suchschlüsseln, die vom Skript unterstützt werden, und tragen Sie die erforderlichen Befehlszeilenoptionen in das Eingabefeld ein. Die Platzhalter <userinput
->%1</userinput
-> werden durch das Suchergebnis ersetzt. </para>
+<para>The full path to the application should be entered in the source options. Be aware that the application is executed on the system with the same permissions as the current user, so do not use scripts from untrusted sources. Check the boxes next to the search keys supported by the application, and enter the required command line options in the edit box. The search value will be inserted where <userinput>%1</userinput> appears.
+</para>
 
-<para
->Zur Aktualisierung bereits in der Sammlung vorhandener Einträge aktivieren Sie das letzte Ankreuzfeld und geben die Befehlszeilenoptionen in das Eingabefeld ein. Die Felder der Einträge, die für die Suche nach Aktualisierungen benutzt werden, müssen das gleiche Format wie die <link linkend="derived"
->abgeleiteten Werte</link
-> haben. </para>
+<para>
+For updating entries already in the collection, the final check box and edit box are used to determine the command-line options. The entry fields used to find an update must be entered, in the same format as used for <link linkend="derived">derived value</link> fields.
+</para>
 </sect3>
 
 </sect2>
 
 <sect2 id="multiple-sources">
-<title
->Mehrere kombinierte Datenquellen</title>
-<para
->Kombinationen von bis zu acht vorhandenen Datenquellen können als eine einzelne Datenquelle genutzt werden. Jedes Suchergebnis der ersten Quelle wird durch die Ergebnisse der anderen Quellen aktualisiert. Ehe Quellen hinzugefügt werden können, muss der Typ der Sammlung festgelegt werden. </para>
+<title>Multiple Combined Data Sources</title>
+<para>
+Combinations of up to eight existing data sources can be used as a single source, where each search result from the first source is updated from the subsequent sources. The collection type to be used must be set before adding sources.
+</para>
 
 <screenshot>
 <mediaobject>
-<imageobject
-><imagedata format="PNG" fileref="multiple-sources-options.png"/></imageobject>
+<imageobject><imagedata format="PNG" fileref="multiple-sources-options.png"/></imageobject>
 </mediaobject>
 </screenshot>
 
-<para
->Nur bereits vorhandene Datenquellen können als Kombination benutzt werden. Es können nur Sucharten der ersten Quelle benutzt werden, da die Ergebnisse von der ersten Datenquelle kommen. Es kann zum Beispiel zuerst eine Suche auf „UPCitemDb“ durchgeführt werden, jedes Ergebnis dieser Suche wird dann mit Ergebnissen von der Datenquelle „TheMovieDB“ aktualisiert. </para>
+<para>
+Only existing data sources can be used in combination. Only the search type for the first source can be used in this source since the results come from the first data source. For example, a UPCitemDb search may first be done, with each result then updated from the TheMovieDB.
+</para>
 </sect2>
 
 </sect1>

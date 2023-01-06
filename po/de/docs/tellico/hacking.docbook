@@ -1,34 +1,27 @@
 <chapter id="hacking">
-<title
->&appname; weiter entwickeln und programmieren</title>
+<title>Hacking &appname;</title>
 
-<para
->&appname; ist freie Software, daher ist erwünscht, dass Sie das Programm weiterentwickeln und verbessern. Es ist relativ einfach, Skripte für den Import oder Export zu schreiben oder um Daten zu verändern. In diesem Kapitel finden Sie dazu viele Informationen. </para>
+<para>
+In the spirit of Free Software, you are welcome to hack on &appname; as much as you like. You should be able to write scripts to import, export, or modify data very easily. This chapter gives you more information about doing that.
+</para>
 
 <sect1 id="file-format">
-<title
->Dateiformat</title>
+<title>File Format</title>
 
-<para
->&appname; benutzt als Datendatei ein Zip-Archiv, normalerweise mit der Dateierweiterung <literal role="extension"
->.tc</literal
->. In diesem Archiv befindet sich im obersten Ordner die Datei <filename
->tellico.xml</filename
->. Bilder können im Ordner <filename
->images/</filename
-> im Archiv sein oder direkt als Base64-kodiert in den &XML;-Daten enthalten sein. Bilder können außerdem noch im Datenordner des Programms gespeichert werden, dann fehlen sie in der Datendatei. &appname; kann die &XML;-Datei unkomprimiert laden. </para>
+<para>
+The default &appname; data file is a zip archive, normally with a <literal role="extension">.tc</literal> file extension. Inside the archive is a top-level <filename>tellico.xml</filename> file. Images may be included inside the <filename>images/</filename> folder in the archive, or they may be included in the &XML; data directly in a base64 encoding. Images may also be saved inside the application data folder, in which case, they are not in the data file at all. &appname; can also load the &XML; file, by itself, uncompressed.
+</para>
 
 <sect2 id="xml-format">
-<title
->&XML;-Daten</title>
+<title>&XML; Data</title>
 
- 
+<para>
+</para>
 
 <sect3 id="coll-xml-data">
-<title
->Sammlung</title>
-<programlisting
-><![CDATA[
+<title>Collection</title>
+<programlisting>
+<![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V11.0//EN" "http://periapsis.org/tellico/dtd/v11/tellico.dtd">
 <tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
@@ -38,44 +31,29 @@
 ]]>
 </programlisting>
 
-<para
->Die Datei beginnt mit der erforderlichen &XML;-Deklaration und Kodierung, gefolgt vom DOCTYPE. Wenn ein Feldtypen oder zusätzliche Eigenschaften für die Standardfelder hinzugefügt werden, wird die Versionsnummer der DOCTYPE-DTD erhöht. &appname; kann alle vorherigen DTD-Versionen öffnen und lesen, speichert aber immer in der neuesten Version. Der Speicherort der DTD verweist immer auf die aktuelle DTD. </para>
+<para>
+The file begins with the required &XML; declaration and encoding, followed by the doctype. When a new field type is added or additional properties are set on the default fields, the doctype DTD version is incremented. &appname; is always able to open and read any previous DTD version, but will save files in the current version. The DTD location does point to an actual DTD file.
+</para>
 
-<para
->Das oberste Element ist ein <markup
->&lt;tellico&gt;</markup
->-Element, das den Standard-Namensbereich und die Syntaxversion enthält, die immer zur DTD passen sollte. </para>
+<para>
+The top-level element is a <markup>&lt;tellico&gt;</markup> element, containing the default namespace declaration and the syntax version of the file, which should always match the DTD.
+</para>
 
-<para
->Das <markup
->&lt;tellico&gt;</markup
->-Element enthält ein <markup
->&lt;collection&gt;</markup
->-Element. Weitere <markup
->&lt;collection&gt;</markup
->-Elemente werden zurzeit ignoriert. Das Attribut <markup
->title</markup
-> enthält den Titel der Sammlung. Das Attribut <markup
->type</markup
-> bestimmt, welche Art von Einträgen in der Sammlung vorhanden sind. Die erlaubten Typen werden in einem <link linkend="collection-type-values"
->späteren Abschnitt</link
-> aufgezählt. Das optionale Attribut <markup
->entryTitle</markup
-> kann benutzt werden, um den Titel der Einträge für eine benutzerdefinierte Sammlung anzugeben, der Titel sollte im Plural eingeben werden. </para>
+<para>
+The <markup>&lt;tellico&gt;</markup> element contains one <markup>&lt;collection&gt;</markup> element. Multiple collections are ignored, for now. The <markup>title</markup> attribute contains the collection title, while the <markup>type</markup> specifies what kinds of entries are contained in the collection. The allowable types are in <link linkend="collection-type-values">listed in a later section</link>. An optional <markup>entryTitle</markup> attribute may be used to specify the title of the entries for a custom collection, and should be plural.
+</para>
 </sect3>
 
 <sect3 id="fields-xml-data">
-<title
->Felder</title>
+<title>Fields</title>
 
-<programlisting
-><![CDATA[
+<programlisting>
+<![CDATA[
   <fields>
    <field flags="8" title="Title" category="General" format="1" type="1" name="title" />
    <field flags="7" title="Author" category="General" format="2" type="1" name="author" />
    <field flags="2" title="Binding" category="General" allowed="Hardback;Paperback;Trade Paperback;E-Book;Magazine;Journal" format="4" type="3" name="binding" >
-    <prop name="default"
->Paperback</prop>
+    <prop name="default">Paperback</prop>
    </field>
    <field flags="6" title="Publisher" category="Publishing" format="0" type="1" name="publisher" />
    <field flags="4" title="Edition" category="Publishing" format="0" type="1" name="edition" />
@@ -87,103 +65,79 @@
    <field flags="0" title="Front Cover" category="Front Cover" format="4" type="10" name="cover" />
    <field flags="0" title="Comments" category="Personal" format="4" type="1" name="comments" />
    <field title="Rating" flags="2" category="Personal" format="4" type="14" name="rating">
-    <prop name="maximum"
->5</prop>
-    <prop name="minimum"
->1</prop>
+    <prop name="maximum">5</prop>
+    <prop name="minimum">1</prop>
    </field>
    <field title="ID" flags="32" category="Personal" format="4" type="6" name="id">
-    <prop name="template"
->%{@id}</prop>
+    <prop name="template">%{@id}</prop>
    </field>
 
   </fields>
 ]]>
 </programlisting>
 
-<para
->Alle Felder werden innerhalb eines Elements <markup
->&lt;fields&gt;</markup
-> definiert, das nur einmal vorkommen darf. Alle Informationen über ein Feld mit Ausnahme der Eigenschaften werden als Attribute des Elements <markup
->&lt;fields&gt;</markup
-> eingefügt. Die erlaubten Werte für die Attribute <markup
->flags</markup
->, <markup
->format</markup
-> und <markup
->type</markup
-> werden im nächsten Abschnitt angegeben. </para>
+<para>
+All of the fields are defined inside a <markup>&lt;fields&gt;</markup> element, of which there can be only one. All of the information for a field, except for any properties, are included as attributes of the <markup>&lt;field&gt;</markup> element. The allowable values for the <markup>flags</markup>, <markup>format</markup>, and <markup>type</markup> attributes are given in a <link linkend="field-type-values">following section</link>.
+</para>
 
-<para
->Mit Eigenschaften von Feldern können Voreinstellung der Feldwerte, Wertebereiche für die Bewertung, abgeleitete Wertvorlagen usw. festgelegt werden. Das Beispiel oben enthält einen Standardwert, einen Maximum für eine Bewertung und eine Vorlage für ein angeleitetes ID-Feld. </para>
+<para>
+Field properties are used for setting default field values, rating value ranges, derived value templates, etc. The examples above include a default value, a maximum rating value, and a template for a derived ID field.
+</para>
 
- 
+<para>
+
+</para>
 
 </sect3>
 
 <sect3 id="entries-xml-data">
-<title
->Einträge</title>
+<title>Entries</title>
 
-<programlisting
-><![CDATA[
+<programlisting>
+<![CDATA[
   <entry>
-   <title
->C++ Programming Language, The</title>
+   <title>C++ Programming Language, The</title>
    <authors>
-    <author
->Stroustrup, Bjarne</author>
+    <author>Stroustrup, Bjarne</author>
    </authors>
-   <publisher
->Addison-Wesley Pub Co</publisher>
-   <edition
->3rd</edition>
-   <pub_year
->1997</pub_year>
-   <isbn
->0-201-88954-4</isbn>
+   <publisher>Addison-Wesley Pub Co</publisher>
+   <edition>3rd</edition>
+   <pub_year>1997</pub_year>
+   <isbn>0-201-88954-4</isbn>
    <genres>
-    <genre
->Non-Fiction</genre>
+    <genre>Non-Fiction</genre>
    </genres>
    <keywords>
-    <keyword
->Programming</keyword>
-    <keyword
->Computers</keyword>
+    <keyword>Programming</keyword>
+    <keyword>Computers</keyword>
    </keywords>
-   <cover
->cf65a2f023b6cb9e9233323dca10ac7c.jpeg</cover>
+   <cover>cf65a2f023b6cb9e9233323dca10ac7c.jpeg</cover>
   </entry>
 ]]>
 </programlisting>
 
-<para
->Für jedes Feld einer Sammlung kann das Element <markup
->&lt;entry&gt;</markup
-> ein Element mit der gleichen Bezeichnung wie der Name des Feldes enthalten. Wenn mehrere Werte für das Feld erlaubt sind, dann wird der Buchstabe <emphasis
->s</emphasis
-> an den Feldnamen angefügt,um ein Element zu erstellen. Jeder neue Wert wird als untergeordnetes Element eingefügt, wie bei den Feldern Autor, Gattung und Schlüsselwort im vorher genannten Beispiel. </para>
+<para>
+For every field in the collection, an <markup>&lt;entry&gt;</markup> may contain an element whose name is identical to the field name. If multiple values are allowed for the field, then the letter <emphasis>s</emphasis> is added to the field name to create an element, and each value is added as a child of the element, as in the case of the author, genre, and keyword fields above.
+</para>
 
-<para
->Daraus folgt, dass die Datendatei nach dem Einfügen zusätzlicher Felder zur Sammlung nicht mehr der DTD entspricht. &appname; benutzt jedoch ein &XML;-Parser, der die Gültigkeit nicht überprüft, daher gibt es keine Probleme mit zusätzlichen Feldern, </para>
+<para>
+As a result, if additional fields are added to the collection, the data file will no longer conform to the DTD. However, &appname; uses a non-validating &XML; parser, so additional fields do not cause problems.
+</para>
 </sect3>
 
 <sect3 id="images-xml-data">
-<title
->Bilder</title>
-<programlisting
-><![CDATA[
+<title>Images</title>
+<programlisting>
+<![CDATA[
   <images>
    <image width="111" format="JPEG" height="140" id="cf65a2f023b6cb9e9233323dca10ac7c.jpeg" />
   </images>
 ]]>
 </programlisting>
 
-<para
->Innerhalb des Elements <markup
->&lt;images&gt;</markup
-> wird jedes Bild mit Attributen für die Bildgröße durch einen Eintrag zur Verknüpfung aufgelistet. Ist das Bild in der Zip-Datei enthalten, ist dieses Element leer. Ansonsten können die Bilddaten im &XML;-Datenstrom als Text in Base64-Kodierung eingefügt werden. </para>
+<para>
+Inside the <markup>&lt;images&gt;</markup> element, each image referenced by an entry is listed, along with attributes describing the image's size, format, and id. If the image is contained inside the Zip file, the element is empty. Otherwise, the image data may be contained in the &XML; stream as base64-encoded text.
+</para>
 </sect3>
 
 </sect2>
@@ -191,107 +145,35 @@
 </sect1>
 
 <sect1 id="collection-type-values">
-<title
->Werte für Sammlungsarten</title>
+<title>Collection Type Values</title>
 
-<para
->Die Art der Sammlung wird im Typ-Attribute festgelegt. Der Wert entspricht dem Aufzählungswert <type
->Type</type
-> in <filename
->src/collection.h</filename
->. </para>
+<para>
+The type of collection is given in the type attribute of the collection element. The value is equal to the <type>Type</type> enum value in <filename>src/collection.h</filename>.
+</para>
 
 <table>
-<title
->Werte für Sammlungsarten</title>
+<title>Collection Type Values</title>
 <tgroup cols="2">
 <thead>
 <row>
-<entry
->Sammlungsarten</entry>
-<entry
->Wert</entry>
+<entry>Collection Type</entry>
+<entry>Value</entry>
 </row>
 </thead>
 <tbody>
-<row
-><entry
->Benutzerdefinierte Sammlung</entry
-><entry
->1</entry
-></row>
-<row
-><entry
->Bücher-Sammlung</entry
-><entry
->2</entry
-></row>
-<row
-><entry
->Video-Sammlung</entry
-><entry
->3</entry
-></row>
-<row
-><entry
->Musik-Sammlung</entry
-><entry
->4</entry
-></row>
-<row
-><entry
->Literaturverzeichnis</entry
-><entry
->5</entry
-></row>
-<row
-><entry
->Comic-Bücher-Sammlung</entry
-><entry
->6</entry
-></row>
-<row
-><entry
->Wein-Sammlung</entry
-><entry
->7</entry
-></row>
-<row
-><entry
->Münzen-Sammlung</entry
-><entry
->8</entry
-></row>
-<row
-><entry
->Briefmarken-Sammlung</entry
-><entry
->9</entry
-></row>
-<row
-><entry
->Sammelkarten-Sammlung</entry
-><entry
->10</entry
-></row>
-<row
-><entry
->Videospiel-Sammlung</entry
-><entry
->11</entry
-></row>
-<row
-><entry
->Dateikatalog</entry
-><entry
->12</entry
-></row>
-<row
-><entry
->Brettspiel-Sammlung</entry
-><entry
->13</entry
-></row>
+<row><entry>Custom Collection</entry><entry>1</entry></row>
+<row><entry>Book Collection</entry><entry>2</entry></row>
+<row><entry>Video Collection</entry><entry>3</entry></row>
+<row><entry>Music Collection</entry><entry>4</entry></row>
+<row><entry>Bibliography</entry><entry>5</entry></row>
+<row><entry>Comic Book Collection</entry><entry>6</entry></row>
+<row><entry>Wine Collection</entry><entry>7</entry></row>
+<row><entry>Coin Collection</entry><entry>8</entry></row>
+<row><entry>Stamp Collection</entry><entry>9</entry></row>
+<row><entry>Trading Card Collection</entry><entry>10</entry></row>
+<row><entry>Video Game Collection</entry><entry>11</entry></row>
+<row><entry>File Catalog</entry><entry>12</entry></row>
+<row><entry>Board Game Collection</entry><entry>13</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -299,232 +181,83 @@
 </sect1>
 
 <sect1 id="field-type-values">
-<title
->Werte der Feldtypen</title>
+<title>Field Type Values</title>
 
-<para
->&appname; fügt alle Standardfelder einer Sammlung ein, wenn des erste Feldelement den Namen <emphasis
->default</emphasis
-> hat. Bei den Feldtypen <emphasis
->Absatz</emphasis
->, <emphasis
->Tabelle</emphasis
-> oder <emphasis
->Bild</emphasis
-> sollte die Kategorie die gleiche Bezeichnung wie der Feldname haben. </para>
+<para>
+&appname; will include all the default fields for a collection if the first field element has the name <emphasis>_default</emphasis>. For <emphasis>Paragraph</emphasis>, <emphasis>Table</emphasis>, or <emphasis>Image</emphasis> fields, the field category should be identical to the field title.
+</para>
 
-<para
->Die Art des Feldes wird im Typ-Attribute des Feld-Elements festgelegt Der Wert entspricht dem Aufzählungswert <type
->FieldType</type
-> in <filename
->src/field.h</filename
->. </para>
+<para>
+The type of field is given in the type attribute of the field element. The value is equal to the <type>FieldType</type> enum value in <filename>src/field.h</filename>.
+</para>
 
 <table>
-<title
->Werte der Feldtypen</title>
+<title>Field Type Values</title>
 <tgroup cols="2">
 <thead>
 <row>
-<entry
->Feldtyp</entry>
-<entry
->Wert</entry>
+<entry>Field Type</entry>
+<entry>Value</entry>
 </row>
 </thead>
 <tbody>
-<row
-><entry
->Einfacher Text</entry
-><entry
->1</entry
-></row>
-<row
-><entry
->Absatz</entry
-><entry
->2</entry
-></row>
-<row
-><entry
->Auswahl</entry
-><entry
->3</entry
-></row>
-<row
-><entry
->Ankreuzfeld</entry
-><entry
->4</entry
-></row>
-<row
-><entry
->Zahl</entry
-><entry
->6</entry
-></row>
-<row
-><entry
->&URL;</entry
-><entry
->7</entry
-></row>
-<row
-><entry
->Tabelle</entry
-><entry
->8</entry
-></row>
-<row
-><entry
->Bild</entry
-><entry
->10</entry
-></row>
-<row
-><entry
->Datum</entry
-><entry
->12</entry
-></row>
-<row
-><entry
->Bewertung</entry
-><entry
->14</entry
-></row>
+<row><entry>Simple Text</entry><entry>1</entry></row>
+<row><entry>Paragraph</entry><entry>2</entry></row>
+<row><entry>Choice</entry><entry>3</entry></row>
+<row><entry>Checkbox</entry><entry>4</entry></row>
+<row><entry>Number</entry><entry>6</entry></row>
+<row><entry>&URL;</entry><entry>7</entry></row>
+<row><entry>Table</entry><entry>8</entry></row>
+<row><entry>Image</entry><entry>10</entry></row>
+<row><entry>Date</entry><entry>12</entry></row>
+<row><entry>Rating</entry><entry>14</entry></row>
 </tbody>
 </tgroup>
 </table>
 
-<para
->Für ein Feld können verschiedene Bitschalter gesetzt werden, die bitweise als Wert der Operation OR im Schalterattribut des Feldelements gespeichert werden. Der Schalter, der das Löschen eines Feldes durch den Benutzer verhindert, ist unter anderem für den Zitatschlüssel von Einträgen in Literaturverzeichnissen vorgesehen. </para>
+<para>
+The field may have different flags set, given as a bitwise OR'd value in the flags attribute on the field element. The flag for preventing the user from deleting a field is intended for such things as the citation key for bibliographic entries.
+</para>
 
 <table>
-<title
->Bitschalter für Feldwerte</title>
+<title>Field Flag Values</title>
 <tgroup cols="2">
 <thead>
 <row>
-<entry
->Feld-Bitschalter</entry>
-<entry
->Wert</entry>
+<entry>Field Flags</entry>
+<entry>Value</entry>
 </row>
 </thead>
 <tbody>
-<row
-><entry
->Mehrere Einträge erlauben</entry
-><entry
-><constant
->0x01</constant
-></entry
-></row>
-<row
-><entry
->Gruppierung erlauben</entry
-><entry
-><constant
->0x02</constant
-></entry
-></row>
-<row
-><entry
->Vervollständigung erlauben</entry
-><entry
-><constant
->0x04</constant
-></entry
-></row>
-<row
-><entry
-><emphasis
->Löschen nicht zulassen</emphasis
-></entry
-><entry
-><constant
->0x08</constant
-></entry
-></row>
-<row
-><entry
-><emphasis
->Bearbeitung nicht zulassen</emphasis
-></entry
-><entry
-><constant
->0x10</constant
-></entry
-></row>
-<row
-><entry
->Abgeleiteter Wert</entry
-><entry
-><constant
->0x20</constant
-></entry
-></row>
+<row><entry>Allow Multiple Values</entry><entry><constant>0x01</constant></entry></row>
+<row><entry>Allow Grouping</entry><entry><constant>0x02</constant></entry></row>
+<row><entry>Allow Completion</entry><entry><constant>0x04</constant></entry></row>
+<row><entry><emphasis>Disallow Deleting</emphasis></entry><entry><constant>0x08</constant></entry></row>
+<row><entry><emphasis>Disallow Editing</emphasis></entry><entry><constant>0x10</constant></entry></row>
+<row><entry>Derived Value</entry><entry><constant>0x20</constant></entry></row>
 </tbody>
 </tgroup>
 </table>
 
-<para
->Das Format des Felds wird im gleichnamigen Attribut des Feldelements angegeben. <emphasis
->Datumsformatierung</emphasis
-> wird zurzeit nicht benutzt. Die Gruppierung nach <emphasis
->Personen</emphasis
-> verwendet alle Felder mit <emphasis
->Namensformatierung</emphasis
->. Die Angabe des Schalters <emphasis
->Abgeleiteter Wert</emphasis
-> setzt voraus, dass der Wert für das Feld korrekt mit dem Formattext aus anderen Feldwerten generiert wird. </para>
+<para>
+The format of the field is given in the format attribute on the field element. <emphasis>Date Formatting</emphasis> is not currently used. Grouping by <emphasis>People</emphasis> uses all the fields which use <emphasis>Name Formatting</emphasis>. Setting the <emphasis>Derived Value</emphasis> flag implies the value for the field is generated from the template property from other field values.
+</para>
 
 <table>
-<title
->Feldformat-Werte</title>
+<title>Field Format Values</title>
 <tgroup cols="2">
 <thead>
 <row>
-<entry
->Feldformat</entry>
-<entry
->Wert</entry>
+<entry>Field Format</entry>
+<entry>Value</entry>
 </row>
 </thead>
 <tbody>
-<row
-><entry
->Nur Großschreibung</entry
-><entry
->0</entry
-></row>
-<row
-><entry
->Titelformatierung</entry
-><entry
->1</entry
-></row>
-<row
-><entry
->Namensformatierung</entry
-><entry
->2</entry
-></row>
-<row
-><entry
-><emphasis
->Datumsformatierung</emphasis
-></entry
-><entry
->3</entry
-></row>
-<row
-><entry
->Keine Formatierung</entry
-><entry
->4</entry
-></row>
+<row><entry>Capitalization Only</entry><entry>0</entry></row>
+<row><entry>Title Formatting</entry><entry>1</entry></row>
+<row><entry>Name Formatting</entry><entry>2</entry></row>
+<row><entry><emphasis>Date Formatting</emphasis></entry><entry>3</entry></row>
+<row><entry>No Formatting</entry><entry>4</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -532,131 +265,96 @@
 </sect1>
 
 <sect1 id="hidden-options">
-<title
->Versteckte Einstellungsmöglichkeiten</title>
+<title>Hidden Configuration Options</title>
 
-<para
->&appname; hat einige weitere Einstellungsmöglichkeiten, die im <interface
->Einrichtungsdialog</interface
-> nicht aufgeführt werden. Sie sind nicht wichtig genug, um den Dialog mit noch mehr Optionen zu überladen. Für einige Benutzer könnten diese Einstellungen bedeutsam sein, daher werden diese Einstellungen aus der Einrichtungsdatei gelesen. </para>
+<para>
+&appname; has some additional configuration options that are not visible in the <interface>Configuration Dialog</interface>. They are not important enough to warrant cluttering the dialog with more settings, but as they represent options which may appeal to various users, the application does read them from the configuration file.
+</para>
 
-<para
->Die Einstellungen für &appname; werden in einer Datei namens <filename
->$<envar
->KDEHOME</envar
->/share/config/tellicorc</filename
-> im persönlichen Ordner des Benutzers gespeichert. In dieser Datei sind Einstellungen in Gruppen angeordnet, die wie zum Beispiel [General Options] in eckigen Klammern eingeschlossen sind. Um eine Einstellung zur Gruppe <emphasis
->General Options</emphasis
-> hinzuzufügen, suchen Sie die Zeile mit diesem Gruppennamen in der Einrichtungsdatei. Existiert die Gruppe noch nicht, dann erstellen Sie sie, indem Sie die Zeile [General Options] einfügen. Dann können die Einstellungen unterhalb des Gruppennamens angegeben werden. </para>
+<para>
+The settings for &appname; are saved in a file in the user's home folder, namely <filename>$<envar>KDEHOME</envar>/share/config/tellicorc</filename>. Within that file, settings are put in groups, which appear with bracketed names, such as [General Options]. To add a setting to the <emphasis>General Options</emphasis> group, find the line in the settings file with that group name. If it does not appear, then create it yourself by adding a line saying [General Options]. Then, the setting can be added underneath the group name.
+</para>
 
 <sect2 id="hidden-general-options">
-<title
->[General Options]</title>
+<title>[General Options]</title>
 
-<para
->Diese Einstellungen sollten in die Gruppe <emphasis
->General Options</emphasis
-> eingefügt werden. </para>
+<para>
+These settings should be placed in the <emphasis>General Options</emphasis> group.
+</para>
 
 <sect3>
-<title
->Maximale Symbolgröße</title>
+<title>Max Icon Size</title>
 
-<para
->Die maximale Größe der Symbole in der <interface
->Symbolansicht</interface
-> kann mit dieser Einstellung geändert werden. Der Standardwert beträgt 96. Erlaubt sind Werte von 32 bis 512. </para>
+<para>
+The maximum size of the icons in the <interface>Icon View</interface> may be changed with this setting. The default value is 96. The size must be in the range of 32 to 512.
+</para>
 </sect3>
 
 <sect3>
-<title
->Beispiel</title>
+<title>Example</title>
 <informalexample>
-<para
-><userinput
->Max Icon Size=128</userinput
-></para>
+<para><userinput>Max Icon Size=128</userinput></para>
 </informalexample>
 </sect3>
 
 <sect3>
-<title
->Größe des Symbol-Zwischenspeichers</title>
+<title>Icon Cache Size</title>
 
-<para
->Die maximale Anzahl der Symbole, die im Arbeitsspeicher vorgehalten werden, kann mit dieser Einstellung geändert werden. Der Standardwert beträgt 1000. </para>
+<para>
+The maximum numbers of icons cached in memory may be changed with this setting. The default value is 1000.
+</para>
 </sect3>
 
 <sect3>
-<title
->Beispiel</title>
+<title>Example</title>
 <informalexample>
-<para
-><userinput
->Icon Cache Size=100</userinput
-></para>
+<para><userinput>Icon Cache Size=100</userinput></para>
 </informalexample>
 </sect3>
 
 <sect3>
-<title
->Beispiel</title>
+<title>Example</title>
 <informalexample>
-<para
-><userinput
->Max Icon Size=128</userinput
-></para>
+<para><userinput>Max Icon Size=128</userinput></para>
 </informalexample>
 </sect3>
 
 <sect3>
-<title
->Größe des Bildzwischenspeichers</title>
+<title>Image Cache Size</title>
 
-<para
->Der maximale Arbeitsspeicher in Byte für das Zwischenspeichern aller Bilder, kann mit dieser Einstellung geändert werden. Der Standardwert beträgt 67108864. </para>
+<para>
+The maximum amount of memory in bytes used for caching all the images may be changed with this setting. The default value is 67108864.
+</para>
 </sect3>
 
 <sect3>
-<title
->Beispiel</title>
+<title>Example</title>
 <informalexample>
-<para
-><userinput
->Image Cache Size=256000000</userinput
-></para>
+<para><userinput>Image Cache Size=256000000</userinput></para>
 </informalexample>
 </sect3>
 
 </sect2>
 
 <sect2 id="hidden-bibtex-options">
-<title
->[Options - bibtex]</title>
+<title>[Options - bibtex]</title>
 
-<para
->Diese Einstellungen sollten in die Gruppe <emphasis
->Options - bibtex</emphasis
-> eingefügt werden. </para>
+<para>
+These settings should be placed in the <emphasis>Options - bibtex</emphasis> group.
+</para>
 
 <sect3>
-<title
->lyxpipe</title>
+<title>lyxpipe</title>
 
-<para
->Diese Einstellung gibt den Speicherort der „lyxpipe“ für das Senden von bibliografischen Zitaten an. Die Dateierweiterung <literal role="extension"
->.in</literal
-> darf nicht enthalten sein. </para>
+<para>
+This setting is for the location of the lyxpipe for sending bibliographic citations. It should not include the <literal role="extension">.in</literal> suffix.
+</para>
 </sect3>
 
 <sect3>
-<title
->Beispiel</title>
+<title>Example</title>
 <informalexample>
-<para
-><userinput
->lyxpipe=$HOME/.lyx/lyxpipe</userinput
-></para>
+<para><userinput>lyxpipe=$HOME/.lyx/lyxpipe</userinput></para>
 </informalexample>
 </sect3>
 </sect2>
@@ -664,21 +362,17 @@
 </sect1>
 
 <sect1 id="bibtex-translation">
-<title
->Bibtex-Zeichenumwandlung</title>
+<title>Bibtex Character Translation</title>
 
-<para
->Wenn Bibtex-Dateien importiert oder exportiert werden, müssen einige Zeichen von der Schreibweise in TeX in Unicode umgewandelt werden. Diese Zuordnung der Zeichen ist in der Datei <filename
->bibtex-translation.xml</filename
-> definiert, die sich im Installations-Datenordner befindet. Die Zuordnung kann geändert werden, falls das nötig ist. Das Element „key“ enthält das Unicodezeichen und die Zeichenfolgen mit der zugehörigen TeX-Schreibweise. Eine Zuordnung von einem Unicodezeichen zu mehreren TeX-Zeichenfolgen ist erlaubt. Die erste Zuordnung wird beim Export in Bibtex benutzt. </para>
+<para>
+When bibtex files are imported or exported, certain characters are translated between their TeX equivalents and the Unicode characters. Those character mappings are contained in the <filename>bibtex-translation.xml</filename> file, located in the installation data directory. The mappings can be modified, as desired. The key element contains the Unicode character, and the string elements within contain the TeX equivalents, which may be a one-to-many mapping. The first one is the one used when exporting to bibtex.
+</para>
 
-<programlisting
-><![CDATA[
+<programlisting>
+<![CDATA[
   <key char="À">
-    <string
->{\`A}</string>
-    <string
->\`{A}</string>
+    <string>{\`A}</string>
+    <string>\`{A}</string>
   </key>
 ]]>
 </programlisting>
@@ -686,11 +380,11 @@
 </sect1>
 
 <sect1 id="xslt-tricks">
-<title
->XSLT-Tricks</title>
+<title>XSLT Tricks</title>
 
-<para
->Hier werden in einer der nächsten Versionen dieses Dokuments Tipps für das Schreiben von XSLT zum Bearbeiten von &appname;-&XML;-Daten eingefügt. </para>
+<para>
+Here are some tips for writing XSLT to parse &appname; &XML; data: (TBD).
+</para>
 </sect1>
 
 </chapter>

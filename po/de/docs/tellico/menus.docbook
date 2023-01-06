@@ -1,6 +1,5 @@
 <chapter id="menus">
-<title
->Befehlsreferenz</title>
+<title>Command Reference</title>
 
 <!--
 (OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
@@ -11,218 +10,151 @@ or menu bars.
 -->
 
 <sect1 id="main-window-menus">
-<title
->Das Hauptfenster von &tellico;</title>
+<title>The Main &tellico; Window</title>
 
-<para
->Die einzelnen Menüeinträge sind unten beschrieben. Falls eine Tastenkombination existiert, die die entsprechende Funktion ausführt, wird die Standardkombination neben dem Menüeintrag aufgeführt. </para>
+<para>Each menu item is discussed below. When there is a keyboard shortcut that
+performs a menu item function, the default shortcut is listed with the menu item.
+</para>
 
 <sect2>
-<title
->Das Menü Datei</title>
+<title>The File Menu</title>
 
 <para>
 <variablelist>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Datei</guimenu
-> <guimenuitem
->Neu</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>File</guimenu>
+  <guimenuitem>New</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->erzeugt eine neue Sammlung</action
->. In &tellico; gibt es <link linkend="collection-types"
->12 Standardsammlungen</link
->, dazu noch eine leere benutzerdefinierte Sammlung.</para>
+<para>This command <action>creates a new collection</action>. &tellico; supports <link linkend="collection-types">12 default collection types</link> along with an empty user-defined custom collection.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo action="simul"
->&Ctrl;<keycap
->O</keycap
-></keycombo
-></shortcut
-><guimenu
->Datei</guimenu
-><guimenuitem
->Öffnen ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>O</keycap></keycombo>
+  </shortcut>
+  <guimenu>File</guimenu>
+  <guimenuitem>Open...</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->öffnet eine &tellico;-Datei</action
->.</para>
+<para>This command <action>opens a &tellico; file</action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Datei</guimenu
-> <guimenuitem
->Zuletzt geöffnete Dateien</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>File</guimenu>
+  <guimenuitem>Open Recent</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
-><action
->Öffnet eine Datei</action
-> aus einem Untermenü mit einer Liste zuletzt geöffneter Dateien.</para>
+<para>This command <action>opens a file</action> from a submenu
+that contains a list of recently opened files.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl; <keycap
->S</keycap
-></keycombo
-></shortcut
-> <guimenu
->Datei</guimenu
-> <guimenuitem
->Speichern ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>S</keycap></keycombo>
+  </shortcut>
+  <guimenu>File</guimenu>
+  <guimenuitem>Save...</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->speichert eine Sammlung</action
->. Ist die Datei bisher noch nicht gespeichert worden und hat daher keinen Namen, entspricht dieser Befehl <guimenuitem
->Speichern unter ...</guimenuitem
->. Dieser Menüeintrag ist nur aktiviert, wenn die Sammlung geändert wurde.</para>
+<para>This command <action>saves the collection</action>. If the file is
+<emphasis>Untitled</emphasis> then <guimenuitem>Save...</guimenuitem> is equivalent to
+<guimenuitem>Save As</guimenuitem>. It is only enabled when the collection has been
+modified.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Shift;<keycap
->S</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Datei</guimenu
-> <guimenuitem
->Speichern unter ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;&Shift;<keycap>S</keycap></keycombo>
+  </shortcut>
+  <guimenu>File</guimenu>
+  <guimenuitem>Save As...</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->speichert die Sammlung</action
-> unter einem anderen Namen.</para>
+<para>This command <action>saves the collection to a new file</action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->P</keycap
-></keycombo
-></shortcut
-> <guimenu
->Datei</guimenu
-><guimenuitem
->Drucken ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>P</keycap></keycombo>
+  </shortcut>
+  <guimenu>File</guimenu>
+  <guimenuitem>Print...</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->druckt eine Sammlung</action
->. Die Einstellungen zum Druck können im <interface
->Einrichtungsdialog</interface
-> angepasst werden.</para>
+<para>This command <action>prints the collection</action>. Printing options may be set in the <interface>Configuration Dialog</interface>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Datei</guimenu
-> <guimenuitem
->Importieren ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>File</guimenu>
+  <guimenuitem>Import</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->importiert Daten aus einer anderen Datei</action
->. &tellico; kann Daten aus vielen <link linkend="importing"
->anderen Formaten</link
-> importieren.</para>
+<para>This command <action>imports data from another file</action>. &tellico; can import data from a number of <link linkend="importing">other formats</link>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Datei</guimenu
-> <guimenuitem
->Exportieren ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>File</guimenu>
+  <guimenuitem>Export</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->exportiert Daten in ein anderes Format</action
->. &tellico; kann Daten in viele <link linkend="exporting"
->andere Formate</link
-> exportieren.</para>
+<para>This command <action>exports the collection to another format</action>. &tellico; can export data to a number of <link linkend="exporting">other formats</link>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->Q</keycap
-></keycombo
-> </shortcut
-><guimenu
->Datei</guimenu
-><guimenuitem
->Beenden</guimenuitem
->  </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>Q</keycap></keycombo>
+  </shortcut>
+  <guimenu>File</guimenu>
+  <guimenuitem>Quit</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
-><action
->Beendet &tellico;</action
-> und schließt das Hauptfenster. Gibt es nicht gespeicherte Änderungen in der Sammlung, können Sie die Änderungen vor dem Beenden speichern oder verwerfen.</para>
+<para>This command <action>closes the &tellico; window</action>. If the collection has unsaved changes, you will be prompted to save them before continuing.</para>
 </listitem>
 </varlistentry>
 
@@ -232,8 +164,7 @@ or menu bars.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
 <sect2>
-<title
->Das Menü Bearbeiten</title>
+<title>The Edit Menu</title>
 
 <para>
 
@@ -241,227 +172,145 @@ or menu bars.
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->Z</keycap
-></keycombo
-></shortcut
-> <guimenu
->Bearbeiten</guimenu
-> <guimenuitem
->Rückgängig</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>Z</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Undo</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->macht die vorherige Aktion wieder rückgängig</action
->. Diese Funktion ist nicht für alle Aktionen verfügbar.</para>
+<para>This command <action>undoes the previous action</action>. Not all actions are supported by Undo.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->Z</keycap
-></keycombo
-></shortcut
-> <guimenu
->Bearbeiten</guimenu
-> <guimenuitem
->Wiederherstellen</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;&Shift;<keycap>Z</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Redo</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->stellt eine vorher rückgängig gemachte Aktion wieder her</action
->.</para>
+<para>This command <action>reverts a previous Undo</action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->X</keycap
-></keycombo
-></shortcut
-> <guimenu
->Bearbeiten</guimenu
-> <guimenuitem
->Ausschneiden</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>X</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Cut</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->entfernt einen ausgewählten Text</action
-> und <action
->kopiert diesen Text in die Zwischenablage</action
->.</para>
+<para>This command <action>removes the selected text</action>, if any, and <action>places a copy of the removed text in the clipboard</action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo action="simul"
->&Ctrl;<keycap
->C</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Bearbeiten</guimenu
-><guimenuitem
->Kopieren</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>C</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Copy</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
-><action
->Kopiert</action
-> den markierten Text in die Zwischenablage.</para>
+<para>This command <action>copies the selected text</action>, if any, to the clipboard.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo action="simul"
->&Ctrl;<keycap
->V</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Bearbeiten</guimenu
-><guimenuitem
->Einfügen</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>V</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Paste</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->fügt einen Text aus der Zwischenablage</action
-> an der aktuellen Cursor-Position im Editor ein.</para>
+<para>This command <action>pastes the text in the clipboard</action>, if any, into the editor at the cursor position.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo action="simul"
->&Ctrl;<keycap
->A</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Bearbeiten</guimenu
-><guimenuitem
->Alles auswählen</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>A</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Select All</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->wählt alle Einträge</action
-> einer Sammlung in der <interface
->Spaltenansicht</interface
-> aus.</para>
+<para>This command <action>selects all the entries</action> in the collection, in the <interface>Column View</interface>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-><keycombo action="simul"
-> &Ctrl;&Shift;<keycap
->A</keycap
-></keycombo
-></shortcut
-><guimenu
->Bearbeiten</guimenu
-> <guimenuitem
->Auswahl aufheben</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;&Shift;<keycap>A</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Deselect</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->hebt die Auswahl der Einträge</action
-> in der Sammlung wieder auf.</para>
+<para>This command <action>deselects all the entries</action> in the collection.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo
->&Ctrl;<keycap
->I</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Bearbeiten</guimenu
-> <guimenuitem
->Internet-Suche ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>I</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Internet Search...</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->öffnet den Dialog <interface
->Internet-Suche</interface
-></action
->, in dem Sie auf mehreren Internetseiten einschließlich <ulink url="http://amazon.com"
->Amazon.com</ulink
-> nach Einträgen suchen und diese importieren können.</para>
+<para>This command <action>opens the <interface>Internet Search Dialog</interface></action> to search for and import entries from various Internet sites, including <ulink url="http://amazon.com">Amazon.com</ulink>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo
->&Ctrl;<keycap
->J</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Bearbeiten</guimenu
-> <guimenuitem
->Erweiterter Filter ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>J</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Advanced Filter...</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->öffnet den Dialog <interface
->Erweiterter Filter</interface
-></action
->.</para>
+<para>This command <action>opens the <interface>Advanced Filter Dialog</interface></action>.</para>
 </listitem>
 </varlistentry>
 
@@ -472,359 +321,245 @@ or menu bars.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
 <sect2>
-<title
->Das Menü Sammlung</title>
+<title>The Collection Menu</title>
 <para>
 
 <variablelist>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo action="simul"
->&Ctrl;<keycap
->N</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Sammlung</guimenu
-> <guimenuitem
->Neuer Eintrag ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>N</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>New Entry</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->öffnet den <interface
->Eintrags-Editor</interface
->, um einen neuen Eintrag zu erstellen</action
->.</para>
+<para>This command <action>opens the <interface>Entry Editor</interface> to edit a new entry</action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo action="simul"
->&Ctrl;<keycap
->E</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Sammlung</guimenu
-> <guimenuitem
->Eintrag bearbeiten ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>E</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Edit Entry</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->öffnet den <interface
->Eintrags-Editor</interface
->, um einen ausgewählten Eintrag zu bearbeiten</action
->.</para>
+<para>This command <action>opens the <interface>Entry Editor</interface> to edit the selected entries</action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo action="simul"
->&Ctrl;<keycap
->Y</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Sammlung</guimenu
-> <guimenuitem
->Eintrag duplizieren ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>Y</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Duplicate Entry</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->kopiert oder dupliziert den gewählten Eintrag</action
-> als neuen Eintrag der Sammlung.</para>
+<para>This command <action>copies, or duplicates, the selected entries</action> as new entries in the collection.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo action="simul"
->&Ctrl;<keycap
->D</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Sammlung</guimenu
-><guimenuitem
->Eintrag löschen</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>D</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Delete Entry</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->löscht den ausgewählten Eintrag</action
->.</para>
+<para>This command <action>deletes the selected entries</action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Sammlung</guimenu
-> <guimenuitem
->Einträge zusammenfügen ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+<!--
+<shortcut>
+   <keycombo>&Ctrl;<keycap>G</keycap></keycombo>
+  </shortcut>
+-->
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Merge Entries</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->fügt die ausgewählten Eintrag zusammen</action
->.</para>
+<para>This command <action>merges the selected entries</action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Sammlung</guimenu
-> <guimenuitem
->Einträge aktualisieren</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Update Entry</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dies Menü enthält eine Liste aller verfügbaren Datenquellen. Damit können automatisch Quellen abgefragt und die <action
->ausgewählten Einträge aktualisiert werden</action
->.</para>
+<para>This menu contains a list of all available data sources, and can be used to automatically query the
+source and <action>update the selected entries</action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Sammlung</guimenu
-> <guimenuitem
->Ausleihen ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Check-out</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->öffnet einen Dialog für die Ausleihe der ausgewählten Einträge</action
->.</para>
+<para>This command <action>opens a dialog box for loaning the selected entries.</action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Sammlung</guimenu
-> <guimenuitem
->Zurückgeben ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Check-in</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->verarbeitet die Rückgabe von ausgewählten Einträgen, die zurzeit ausgeliehen sind</action
->.</para>
+<para>This command <action>checks-in any of the selected entries which are currently on-loan</action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo action="simul"
->&Ctrl;<keycap
->R</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Sammlung</guimenu
-><guimenuitem
->Sammlung umbenennen ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>R</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Rename Collection</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->öffnet einen Dialog zum Umbenennen der Sammlung</action
->.</para>
+<para>This command <action>opens a dialog box for renaming the collection</action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><shortcut
-> <keycombo action="simul"
->&Ctrl;<keycap
->U</keycap
-></keycombo
-></shortcut
-><guimenu
->Sammlung</guimenu
-><guimenuitem
->Datenfelder der Sammlung ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>U</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Collection Fields...</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->öffnet den Dialog <interface
->Sammlungsfelder</interface
-></action
->.</para>
+<para>This command <action>opens the <interface>Collection Fields Dialog</interface></action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Sammlung</guimenu
-> <guimenuitem
->Berichte erzeugen ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Generate Reports...</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->öffnet den Dialog <interface
->Sammlungsbericht</interface
-></action
->, mit dem Sie Berichte über Ihre Sammlung erstellen können.</para>
+<para>This command <action>opens the <interface>Report Dialog</interface></action> for generating reports about the collection.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Sammlung</guimenu
-> <guisubmenu
->Literaturverzeichnis</guisubmenu
-> <guimenuitem
->In Literaturverzeichnis umwandeln ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guisubmenu>Bibliography</guisubmenu>
+  <guimenuitem>Convert to Bibliography</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->wandelt eine Buch-Sammlung in ein Literaturverzeichnis um</action
->, indem die notwendigen Felder für den Bibtex-Export hinzugefügt werden. Die Aktion ist nur bei einer geöffneten Buch-Sammlung aktiviert.</para>
+<para>This command <action>converts a book collection to a bibliography</action> by adding certain fields necessary for Bibtex export, and it is only enabled when a book collection is open.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Sammlung</guimenu
-> <guisubmenu
->Literaturverzeichnis</guisubmenu
-> <guimenuitem
->Zeichenfolgen-Makros ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guisubmenu>Bibliography</guisubmenu>
+  <guimenuitem>String Macros...</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->öffnet einen Dialog zur Bearbeitung der Bibtex-Zeichenfolgen-Makros</action
-> in einer Sammlung. Dieser Menüeintrag ist nur bei der Bearbeitung von Literaturverzeichnissen aktiviert.</para>
+<para>This command <action>opens a dialog box for editing the Bibtex string macros</action> in the collection. It is only enabled when editing a bibliography.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Sammlung</guimenu
-> <guisubmenu
->Literaturverzeichnis</guisubmenu
-> <guimenuitem
->Nach doppelten Schlüsseln suchen ...</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guisubmenu>Bibliography</guisubmenu>
+  <guimenuitem>Check for Duplicate Keys</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->sucht nach doppelten Bibtex-Schlüsseln</action
->, filtert alle doppelten Schlüssel in der Sammlung und zeigt sie an.</para>
+<para>This command <action>checks for duplicate Bibtex keys</action> and can filter the collection to show the entries with duplicated keys.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Sammlung</guimenu
-> <guisubmenu
->Literaturverzeichnis</guisubmenu
-> <guimenuitem
->Bibtex in die Zwischenablage kopieren</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guisubmenu>Bibliography</guisubmenu>
+  <guimenuitem>Copy Bibtex to Clipboard</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->kopiert ein Bibtex-Zitat</action
-> in die Zwischenablage, so dass sie in ein LaTeX-Dokument eingefügt werden kann.</para>
+<para>This command <action>copies a Bibtex citation</action> to the clipboard so that it can pasted in a LaTeX document.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Sammlung</guimenu
-> <guisubmenu
->Literaturverzeichnis</guisubmenu
-> <guimenuitem
->Zitat-Eintrag in Lyx</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guisubmenu>Bibliography</guisubmenu>
+  <guimenuitem>Cite Entry in Lyx</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->sendet ein Zitat für die ausgewählten Einträge</action
-> an die sogenannte <emphasis
-><link linkend="hidden-bibtex-options"
->lyxpipe</link
-></emphasis
->, um es in <application
->LyX</application
->, <application
->Kile</application
->, oder anderen LaTeX-Programmen weiter zu verarbeiten. Dieser Menüeintrag ist nur bei der Bearbeitung von Literaturverzeichnissen aktiviert.</para>
+<para>This command <action>sends a citation for the selected entries</action> to the so-called <emphasis><link linkend="hidden-bibtex-options">lyxpipe</link></emphasis> for use in <application>LyX</application>, <application>Kile</application>, or other LaTeX applications. It is only enabled when editing a bibliography.</para>
 </listitem>
 </varlistentry>
 
@@ -835,71 +570,50 @@ or menu bars.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
 <sect2>
-<title
->Die Menüs Einstellungen und Hilfe</title>
+<title>The Settings and Help Menu</title>
 
-<para
->Außer den bekannten &kde;-Menüeinträgen Einstellungen und Hilfe, die im Kapitel <ulink url="help:/fundamentals/menus.html"
->Menüs</ulink
-> der &kde;-Grundlagen beschrieben werden, gibt es folgende spezielle Menüeinträge für &tellico;: </para>
+<para>Apart from the common &kde; Settings and Help menus described in the <ulink url="help:/fundamentals/menus.html">Menu</ulink>
+chapter of the &kde; Fundamentals documentation &tellico; has these application specific menu entries:
+</para>
 
 <variablelist>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Einstellungen</guimenu
-> <guimenuitem
->Gruppenansicht anzeigen</guimenuitem
->  </menuchoice>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Show Group View</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->schaltet die Anzeige der <interface
->Gruppenansicht</interface
-> an bzw. aus</action
->.</para>
+<para>This command <action>toggles the display of the <interface>Group View</interface></action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Einstellungen</guimenu
-> <guimenuitem
->Eintrags-Editor anzeigen</guimenuitem
->  </menuchoice>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Show Entry Editor</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->schaltet die Anzeige des <interface
->Eintrags-Editors</interface
-> an bzw. aus</action
->.</para>
+<para>This command <action>toggles the display of the <interface>Entry Editor</interface></action>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>
- <menuchoice
-><guimenu
->Einstellungen</guimenu
-> <guimenuitem
->Gruppen-Auswahl</guimenuitem
-> </menuchoice>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Group Selection</guimenuitem>
+ </menuchoice>
 </term>
 
 <listitem>
-<para
->Dieser Befehl <action
->ändert das zur Gruppierung der Einträge</action
-> benutzte Feld in der Sammlung.</para>
+<para>This command <action>changes the field used to group the entries</action> in the collection.</para>
 </listitem>
 </varlistentry>
 

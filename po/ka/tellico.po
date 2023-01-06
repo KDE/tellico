@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-03 00:48+0000\n"
-"PO-Revision-Date: 2023-01-03 06:36+0100\n"
+"PO-Revision-Date: 2023-01-05 03:54+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2323,7 +2323,7 @@ msgstr ""
 #: src/configdialog.cpp:218
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
-msgstr ""
+msgstr "&სწრაფ ფილტრში რეგულარული გამოსახულებების ჩართვა"
 
 #: src/configdialog.cpp:219
 #, kde-format
@@ -2334,7 +2334,7 @@ msgstr ""
 #: src/configdialog.cpp:224
 #, kde-format
 msgid "&Show \"Tip of the Day\" at startup"
-msgstr ""
+msgstr "&გაშვებისას \"დღის რჩევის\" ჩვენება"
 
 #: src/configdialog.cpp:225
 #, kde-format
@@ -2344,7 +2344,7 @@ msgstr ""
 #: src/configdialog.cpp:230
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
-msgstr ""
+msgstr "შტრიხკოდისთვის &ვებკამერის გამოყენება"
 
 #: src/configdialog.cpp:231
 #, kde-format
@@ -2446,7 +2446,7 @@ msgstr ""
 #: src/configdialog.cpp:318
 #, kde-format
 msgid "Surname &prefixes:"
-msgstr ""
+msgstr "გვარის &პრეფიქსები:"
 
 #: src/configdialog.cpp:323
 #, kde-format
@@ -2463,12 +2463,12 @@ msgstr "ბეჭდვის მორგება"
 #: src/configdialog.cpp:351
 #, kde-format
 msgid "&Format titles and names"
-msgstr ""
+msgstr "&ფორმატის სათაურები და სახელები"
 
 #: src/configdialog.cpp:356
 #, kde-format
 msgid "&Print field headers"
-msgstr ""
+msgstr "ველის მნიშვნელობების დაბეჭდვა"
 
 #: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:500
 #, kde-format
@@ -2478,7 +2478,7 @@ msgstr ""
 #: src/configdialog.cpp:361
 #, kde-format
 msgid "Grouping Options"
-msgstr ""
+msgstr "დაჯგუფების პარამეტრები"
 
 #: src/configdialog.cpp:366
 #, kde-format
@@ -2552,7 +2552,7 @@ msgstr "&მიმოხილვა..."
 #: src/configdialog.cpp:449
 #, kde-format
 msgid "Show a preview of the template"
-msgstr ""
+msgstr "შაბლონის გადახედვის ჩვენება"
 
 #. i18n("The options below will be passed to the template, but not "
 #. "all templates will use them. Some fonts and colors may be "
@@ -2830,7 +2830,7 @@ msgstr ""
 #: src/core/filehandler.cpp:152
 #, kde-format
 msgid "The error message from Qt is:"
-msgstr ""
+msgstr "Qt-ის შეცდომის შეტყობინება:"
 
 #: src/core/filehandler.cpp:184
 #, kde-format
@@ -3113,7 +3113,7 @@ msgstr "კოდირება"
 #: src/exportdialog.cpp:99
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
-msgstr ""
+msgstr "უნიკოდში კოდირება (UTF-8)"
 
 #: src/exportdialog.cpp:101
 #, kde-format
@@ -3123,7 +3123,7 @@ msgstr ""
 #: src/exportdialog.cpp:104
 #, kde-format
 msgid "Encode in user locale (%1)"
-msgstr ""
+msgstr "მომხმარებლის ენაში კოდირება (%1)"
 
 #: src/exportdialog.cpp:107
 #, kde-format
@@ -3816,7 +3816,7 @@ msgstr ""
 #: src/fetch/gcstarpluginfetcher.cpp:413
 #, kde-format
 msgid "&Plugin: "
-msgstr ""
+msgstr "&დამატება: "
 
 #: src/fetch/gcstarpluginfetcher.cpp:419
 #, kde-format
@@ -3826,7 +3826,7 @@ msgstr ""
 #: src/fetch/gcstarpluginfetcher.cpp:424
 #, kde-format
 msgid "Author: "
-msgstr ""
+msgstr "ავტორი: "
 
 #: src/fetch/giantbombfetcher.cpp:206
 #, kde-format
@@ -3923,13 +3923,13 @@ msgstr ""
 #: src/fetch/imdbfetcher.cpp:1641
 #, kde-format
 msgid "IMDb Rating"
-msgstr ""
+msgstr "IMDb რეიტინგი"
 
 #: src/fetch/imdbfetcher.cpp:1486 src/fetch/imdbfetcher.cpp:1583
 #: src/fetch/imdbfetcher.cpp:1643
 #, kde-format
 msgid "Certifications"
-msgstr ""
+msgstr "სერთიფიკატები"
 
 #: src/fetch/imdbfetcher.cpp:1640 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:399 src/fetch/themoviedbfetcher.cpp:574
@@ -3937,7 +3937,7 @@ msgstr ""
 #: src/field.cpp:331
 #, kde-format
 msgid "IMDb Link"
-msgstr ""
+msgstr "IMDb ბმული"
 
 #: src/fetch/imdbfetcher.cpp:1678
 #, kde-format
@@ -3952,7 +3952,7 @@ msgstr ""
 #: src/fetch/isbndbfetcher.cpp:373
 #, kde-format
 msgid "ISBNdb.com"
-msgstr ""
+msgstr "ISBNdb.com"
 
 #: src/fetch/isbndbfetcher.cpp:414
 #, kde-format
@@ -3969,43 +3969,43 @@ msgstr ""
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
 msgid "KinoPoisk Link"
-msgstr ""
+msgstr "KinoPoisk ბმული"
 
 #: src/fetch/kinoteatrfetcher.cpp:239 src/fetch/kinoteatrfetcher.cpp:508
 #, kde-format
 msgid "Kino-Teatr Link"
-msgstr ""
+msgstr "Kino-Teatr ბმული"
 
 #: src/fetch/mobygamesfetcher.cpp:458 src/fetch/mobygamesfetcher.cpp:638
 #, kde-format
 msgid "MobyGames Link"
-msgstr ""
+msgstr "MobyGames ბმული"
 
 #: src/fetch/moviemeterfetcher.cpp:220 src/fetch/moviemeterfetcher.cpp:293
 #, kde-format
 msgid "MovieMeter Link"
-msgstr ""
+msgstr "MovieMeter Link"
 
 #: src/fetch/multifetcher.cpp:206
 #, kde-format
 msgid "Multiple Sources"
-msgstr ""
+msgstr "მრავალი წყარო"
 
 #: src/fetch/multifetcher.cpp:278
 #, kde-format
 msgid "Data source:"
-msgstr ""
+msgstr "მონაცემების წყარო:"
 
 #: src/fetch/numistafetcher.cpp:342 src/fetch/numistafetcher.cpp:397
 #, kde-format
 msgid "Numista Link"
-msgstr ""
+msgstr "Numista ბმული"
 
 #: src/fetch/numistafetcher.cpp:402
 #, kde-format
 msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
-msgstr ""
+msgstr "კრაუს-მიშლერი"
 
 #: src/fetch/numistafetcher.cpp:427 src/fetch/themoviedbfetcher.cpp:640
 #, kde-format
@@ -4022,17 +4022,17 @@ msgstr "ფრანგული"
 #: src/fetch/numistafetcher.cpp:461
 #, kde-format
 msgid "Numista (%1)"
-msgstr ""
+msgstr "Numista ბმული (%1)"
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
 msgid "OpenLibrary Link"
-msgstr ""
+msgstr "OpenLibrary ბმული"
 
 #: src/fetch/rpggeekfetcher.cpp:210
 #, kde-format
 msgid "RPGGeek Link"
-msgstr ""
+msgstr "RPGGeek ბმული"
 
 #: src/fetch/srufetcher.cpp:492
 #, kde-format
@@ -4042,12 +4042,12 @@ msgstr "კონგრესის ბიბლიოთეკა (US)"
 #: src/fetch/srufetcher.cpp:497
 #, kde-format
 msgid "SRU Server"
-msgstr ""
+msgstr "SRU სერვერი"
 
 #: src/fetch/srufetcher.cpp:526
 #, kde-format
 msgid "Scheme: "
-msgstr ""
+msgstr "სქემა: "
 
 #: src/fetch/srufetcher.cpp:535 src/fetch/srufetcher.cpp:571
 #, kde-format
@@ -4057,7 +4057,7 @@ msgstr ""
 #: src/fetch/srufetcher.cpp:540 src/fetch/z3950fetcher.cpp:604
 #, kde-format
 msgid "Hos&t: "
-msgstr ""
+msgstr "&ჰოსტი: "
 
 #: src/fetch/srufetcher.cpp:547 src/fetch/z3950fetcher.cpp:610
 #, kde-format
@@ -4067,7 +4067,7 @@ msgstr ""
 #: src/fetch/srufetcher.cpp:552 src/fetch/z3950fetcher.cpp:615
 #, kde-format
 msgid "&Port: "
-msgstr ""
+msgstr "&პორტი: "
 
 #: src/fetch/srufetcher.cpp:561 src/fetch/z3950fetcher.cpp:624
 #, kde-format
@@ -4077,7 +4077,7 @@ msgstr ""
 #: src/fetch/srufetcher.cpp:566
 #, kde-format
 msgid "Path: "
-msgstr ""
+msgstr "ბილიკი: "
 
 #: src/fetch/srufetcher.cpp:576
 #, kde-format
@@ -4097,7 +4097,7 @@ msgstr "ველი"
 #: src/fetch/themoviedbfetcher.cpp:319 src/fetch/themoviedbfetcher.cpp:573
 #, kde-format
 msgid "TMDb Link"
-msgstr ""
+msgstr "TMDb ბმული"
 
 #: src/fetch/themoviedbfetcher.cpp:337 src/fetch/themoviedbfetcher.cpp:577
 #: src/fetch/thetvdbfetcher.cpp:260 src/fetch/thetvdbfetcher.cpp:578
@@ -4133,22 +4133,22 @@ msgstr "რუსული"
 #: src/fetch/themoviedbfetcher.cpp:695
 #, kde-format
 msgid "TheMovieDB (%1)"
-msgstr ""
+msgstr "TheMovieDB (%1)"
 
 #: src/fetch/thetvdbfetcher.cpp:265 src/fetch/thetvdbfetcher.cpp:575
 #, kde-format
 msgid "TheTVDB Link"
-msgstr ""
+msgstr "TheTVDB ბმული"
 
 #: src/fetch/thetvdbfetcher.cpp:602
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr ""
+msgstr "გამომწერის PIN: "
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
 msgid "VideoGameGeek Link"
-msgstr ""
+msgstr "VideoGameGeek ბმული"
 
 #: src/fetch/vndbfetcher.cpp:289 src/fetch/vndbfetcher.cpp:433
 #, kde-format
@@ -4158,12 +4158,12 @@ msgstr "სინონიმი"
 #: src/fetch/vndbfetcher.cpp:308
 #, kde-format
 msgid "Visual Novel"
-msgstr ""
+msgstr "ვიზუალური ნოველა"
 
 #: src/fetch/z3950connection.cpp:183
 #, kde-format
 msgid "Query error!"
-msgstr ""
+msgstr "მოთხოვნის შეცდომა!"
 
 #: src/fetch/z3950connection.cpp:223 src/fetch/z3950connection.cpp:344
 #, kde-format
@@ -4173,17 +4173,17 @@ msgstr ""
 #: src/fetch/z3950connection.cpp:305
 #, kde-format
 msgid "Record syntax error"
-msgstr ""
+msgstr "ჩანაწერის სნტაქსის შეცდომა"
 
 #: src/fetch/z3950connection.cpp:425
 #, kde-format
 msgid "Connection error %1: %2"
-msgstr ""
+msgstr "მიერთების შეცდომა %1: %2"
 
 #: src/fetch/z3950fetcher.cpp:566 src/fetch/z3950fetcher.cpp:882
 #, kde-format
 msgid "z39.50 Server"
-msgstr ""
+msgstr "z39.50 სერვერი"
 
 #: src/fetch/z3950fetcher.cpp:593
 #, kde-format
@@ -4193,7 +4193,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:629
 #, kde-format
 msgid "&Database: "
-msgstr ""
+msgstr "&მონაცემთა ბაზა: "
 
 #: src/fetch/z3950fetcher.cpp:634
 #, kde-format
@@ -4227,12 +4227,12 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:669
 #, kde-format
 msgid "&Format: "
-msgstr ""
+msgstr "&ფორმატი: "
 
 #: src/fetch/z3950fetcher.cpp:672
 #, kde-format
 msgid "Auto-detect"
-msgstr ""
+msgstr "ავტომატური გამოცნობა"
 
 #: src/fetch/z3950fetcher.cpp:681
 #, kde-format
@@ -4244,7 +4244,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:687
 #, kde-format
 msgid "&User: "
-msgstr ""
+msgstr "&მომხმარებელი: "
 
 #: src/fetch/z3950fetcher.cpp:690 src/fetch/z3950fetcher.cpp:702
 #, kde-format
@@ -4261,7 +4261,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:699
 #, kde-format
 msgid "Pass&word: "
-msgstr ""
+msgstr "&პაროლი: "
 
 #: src/fetch/z3950fetcher.cpp:706
 #, kde-format
@@ -4274,7 +4274,7 @@ msgstr ""
 #: src/fetchdialog.cpp:82
 #, kde-format
 msgid "&Search"
-msgstr ""
+msgstr "&ძებნა"
 
 #: src/fetchdialog.cpp:83
 #, kde-format
@@ -6312,7 +6312,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Update Entry"
-msgstr ""
+msgstr "ჩანაწერის &განახლება"
 
 #. i18n: ectx: Menu (coll_bibliography)
 #: src/tellicoui.rc:102
