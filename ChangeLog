@@ -2,9 +2,17 @@
 
 	* Fixed active filter when entry is selected (Bug 462337).
 
+2023-01-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Added user option for https scheme in SRU data source (Bug 463438).
+
 2022-11-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Use transparent background in initial entry view (Bug 461777).
+
+2022-11-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Increased maximum icon size to 512.
 
 2022-11-16  Robby Stephenson  <robby@periapsis.org>
 
