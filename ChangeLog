@@ -1,3 +1,7 @@
+2023-01-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed active filter when entry is selected (Bug 462337).
+
 2022-11-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Use transparent background in initial entry view (Bug 461777).

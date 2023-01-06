@@ -1818,12 +1818,27 @@ void MainWindow::slotCheckFilterQueue() {
 void MainWindow::slotUpdateFilter(FilterPtr filter_) {
   // Can't just block signals because clear button won't show then
   m_dontQueueFilter = true;
-  m_quickFilter->setText(QStringLiteral(" ")); // To be able to clear custom filter
+  if(filter_) {
+    // for a saved filter, show the filter name and a leading icon
+    if(m_quickFilter->actions().isEmpty()) {
+      m_quickFilter->addAction(QIcon::fromTheme(QStringLiteral("view-filter")), QLineEdit::LeadingPosition);
+    }
+    m_quickFilter->setText(QLatin1Char('<') + filter_->name() + QLatin1Char('>'));
+  } else {
+    m_quickFilter->setText(QStringLiteral(" ")); // To be able to clear custom filter
+  }
   Controller::self()->slotUpdateFilter(filter_);
   m_dontQueueFilter = false;
 }
 
 void MainWindow::setFilter(const QString& text_) {
+  // might have an "action" associated if a saved filter was displayed
+  auto actions = m_quickFilter->actions();
+  if(!actions.isEmpty()) {
+    // clear all of the saved filter name
+    slotClearFilter();
+    return;
+  }
   QString text = text_.trimmed();
   FilterPtr filter;
   if(!text.isEmpty()) {
@@ -2268,6 +2283,10 @@ void MainWindow::slotFilterLabelActivated() {
 }
 
 void MainWindow::slotClearFilter() {
+  auto actions = m_quickFilter->actions();
+  if(!actions.isEmpty()) {
+    m_quickFilter->removeAction(actions.first());
+  }
   m_quickFilter->clear();
   slotQueueFilter();
 }

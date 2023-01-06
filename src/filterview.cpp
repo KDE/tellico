@@ -142,7 +142,6 @@ void FilterView::contextMenuEvent(QContextMenuEvent* event_) {
 void FilterView::selectionChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
 //  DEBUG_BLOCK;
   // in Controller::slotUpdateFilter(), filterView->clearSelection() gets called when the filter is empty
-  // which happens when only entries are selected here
   GUI::TreeView::selectionChanged(selected_, deselected_);
   FilterPtr filter;
   foreach(const QModelIndex& index, selectionModel()->selectedIndexes()) {
@@ -153,8 +152,10 @@ void FilterView::selectionChanged(const QItemSelection& selected_, const QItemSe
       break;
     }
   }
-  // emitting signal with a null filter is ok and accounts for clearing the selection
-  emit signalUpdateFilter(filter);
+  // emit the signal with a null filter if there is nothing selected, also clearing any active filter as well
+  if(filter || selectionModel()->selectedIndexes().isEmpty()) {
+    emit signalUpdateFilter(filter);
+  }
 }
 
 void FilterView::slotDoubleClicked(const QModelIndex& index_) {
