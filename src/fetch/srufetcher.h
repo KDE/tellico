@@ -104,7 +104,6 @@ private:
   QString m_path;
   QString m_format;
   StringMap m_queryMap;
-  QUrl m_lastUrl;
 
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
