@@ -6,13 +6,13 @@
 # Kunter Kutlu <kunterkutlu@gmail.com>, 2007.
 # obsoleteman <tulliana@gmail.com>, 2009,2012.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014, 2017.
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 00:48+0000\n"
-"PO-Revision-Date: 2022-12-17 18:44+0300\n"
+"POT-Creation-Date: 2023-01-07 00:50+0000\n"
+"PO-Revision-Date: 2023-01-06 22:55+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -145,8 +145,8 @@ msgstr "Yinelenmiş alıntı anahtarı yok."
 #, kde-format
 msgid "There is %1 duplicate citation key."
 msgid_plural "There are %1 duplicate citation keys."
-msgstr[0] "%1 tekrarlı atıf anahtarı var."
-msgstr[1] "%1 tekrarlı atıf anahtarı var."
+msgstr[0] "%1 yinelenmiş atıf anahtarı var."
+msgstr[1] "%1 yinelenmiş atıf anahtarı var."
 
 #: src/borrowerdialog.cpp:74
 #, kde-format
@@ -160,10 +160,9 @@ msgstr "Ad"
 
 #: src/charts/collectionsizereport.cpp:45
 #: src/charts/collectionsizereport.cpp:116
-#, fuzzy, kde-format
-#| msgid "Collection Fields"
+#, kde-format
 msgid "Collection Size"
-msgstr "Koleksiyon Alanları"
+msgstr "Koleksiyon Boyutu"
 
 #: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1617
 #, kde-format
@@ -171,55 +170,46 @@ msgid "Total entries: %1"
 msgstr "Toplam girdi: %1"
 
 #: src/charts/collectionsizereport.cpp:91
-#, fuzzy, kde-format
-#| msgid "Collection Fields"
+#, kde-format
 msgid "Collection Size Over Time"
-msgstr "Koleksiyon Alanları"
+msgstr "Zaman İçinde Koleksiyon Boyutu"
 
 #: src/charts/groupsummaryreport.cpp:60
-#, fuzzy, kde-format
-#| msgctxt "Group Summary XSL Template"
-#| msgid "Group Summary"
+#, kde-format
 msgid "Group Summary: %1"
-msgstr "Grup Özeti"
+msgstr "Grup Özeti: %1"
 
 #: src/charts/groupsummaryreport.cpp:66
-#, fuzzy, kde-format
-#| msgid "Total number of entries:"
+#, kde-format
 msgid "Total number of entries: %1"
-msgstr "Toplam girdi sayısı:"
+msgstr "Toplam girdi sayısı: %1"
 
 #: src/charts/groupsummaryreport.cpp:120
-#, fuzzy, kde-format
-#| msgid "Total entries: %1"
+#, kde-format
 msgid "Top Values: %1"
-msgstr "Toplam girdi: %1"
+msgstr "En Yüksek Değerler: %1"
 
 #: src/charts/groupsummaryreport.cpp:192
-#, fuzzy, kde-format
-#| msgctxt "Group Summary XSL Template"
-#| msgid "Group Summary"
+#, kde-format
 msgid "Group Summary Report"
-msgstr "Grup Özeti"
+msgstr "Grup Özeti Raporu"
 
 #: src/charts/yeardistributionreport.cpp:69
 #: src/charts/yeardistributionreport.cpp:133
-#, fuzzy, kde-format
-#| msgid "Distributor"
+#, kde-format
 msgid "Year Distribution"
-msgstr "Dağıtıcı"
+msgstr "Yıl Dağılımı"
 
 #: src/charts/yeardistributionreport.cpp:158
-#, fuzzy, kde-format
-#| msgid "Country"
+#, kde-format
 msgctxt "Distinct number of items"
 msgid "Count"
-msgstr "Ülke"
+msgstr "Sayı"
 
 #: src/cite/lyxpipe.cpp:57
 #, kde-format
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
-msgstr "<qt>Tellico, sunucu soketi <b>%1</b> iken yazamaz</qt>"
+msgstr "<qt>Tellico, <b>%1</b> konumundaki sunucu veriyoluna yazamıyor.</qt>"
 
 #: src/collection.cpp:51
 #, kde-format
@@ -284,12 +274,12 @@ msgstr "Dosya Kataloğu"
 #: src/collectionfactory.cpp:96
 #, kde-format
 msgid "Board Game Collection"
-msgstr "Oyun Koleksiyonu"
+msgstr "Masa Oyunu Koleksiyonu"
 
 #: src/collectionfactory.cpp:97
 #, kde-format
 msgid "Custom Collection"
-msgstr "Size Özel Koleksiyon"
+msgstr "Özel Koleksiyon"
 
 #: src/collectionfieldsdialog.cpp:82
 #, kde-format
@@ -299,7 +289,7 @@ msgstr "Koleksiyon Alanları"
 #: src/collectionfieldsdialog.cpp:92
 #, kde-format
 msgid "Current Fields"
-msgstr "Şu Anda Geçerli Alanlar"
+msgstr "Geçerli Alanlar"
 
 #: src/collectionfieldsdialog.cpp:113
 #, kde-format
@@ -321,7 +311,7 @@ msgstr "Sil"
 #: src/collectionfieldsdialog.cpp:120
 #, kde-format
 msgid "Remove a field from the collection"
-msgstr "Koleksiyondan bir alan çıkar"
+msgstr "Koleksiyondan bir alanı kaldır"
 
 #: src/collectionfieldsdialog.cpp:132
 #, kde-format
@@ -329,7 +319,7 @@ msgid ""
 "Move this field up in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr ""
-"Bu alanı listede yukarı taşı. Bu liste sıralaması, giriş düzenleyicisinin "
+"Bu alanı listede yukarı taşı. Bu listenin sıralaması, giriş düzenleyicisinin "
 "düzeni için önemlidir."
 
 #: src/collectionfieldsdialog.cpp:137
@@ -338,7 +328,7 @@ msgid ""
 "Move this field down in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr ""
-"Bu alanı listede aşağı taşı. Bu liste sıralaması, giriş düzenleyicisinin "
+"Bu alanı listede aşağı taşı. Bu listenin sıralaması, giriş düzenleyicisinin "
 "düzeni için önemlidir."
 
 #: src/collectionfieldsdialog.cpp:148
@@ -354,7 +344,7 @@ msgstr "&Başlık:"
 #: src/collectionfieldsdialog.cpp:162
 #, kde-format
 msgid "The title of the field"
-msgstr "Alan başlığı"
+msgstr "Alanın başlığı"
 
 #: src/collectionfieldsdialog.cpp:167
 #, kde-format
@@ -374,7 +364,7 @@ msgstr "Çoğu alanlarda <i>Basit Metin</i> kullanılır. "
 #: src/collectionfieldsdialog.cpp:175
 #, kde-format
 msgid "<i>Paragraph</i> is for large text blocks. "
-msgstr "Büyük metin blokları için <i>Paragraf</i>. "
+msgstr "<i>Paragraf</i>, büyük metin blokları içindir. "
 
 #: src/collectionfieldsdialog.cpp:176
 #, kde-format
@@ -384,7 +374,7 @@ msgstr "<i>Seçim</i> bazı kesin değerler için alanı sınırlar. "
 #: src/collectionfieldsdialog.cpp:177
 #, kde-format
 msgid "<i>Checkbox</i> is for a simple yes/no value. "
-msgstr "<i>Seçme Kutusu</i> basit evet/hayır değeri içindir. "
+msgstr "<i>Onay Kutusu</i> basit evet/hayır değeri içindir. "
 
 #: src/collectionfieldsdialog.cpp:178
 #, kde-format
@@ -896,7 +886,7 @@ msgstr "Ses"
 #: src/collections/bibtexcollection.cpp:225
 #, kde-format
 msgid "Cross-Reference"
-msgstr "Çapraz-Referans"
+msgstr "Çapraz Başvuru"
 
 #. i18n("Annotation"));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("annote"));
@@ -910,7 +900,7 @@ msgstr "Çapraz-Referans"
 #: src/collections/videocollection.cpp:219 src/fetch/amazonfetcher.cpp:1078
 #, kde-format
 msgid "Keywords"
-msgstr "Anahtar Kelime"
+msgstr "Anahtar Sözcükler"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
@@ -2367,7 +2357,7 @@ msgstr "Genel Seçenekler"
 #: src/configdialog.cpp:212
 #, kde-format
 msgid "&Reopen file at startup"
-msgstr "Dosyayı başlangıçta tek&rar aç"
+msgstr "Dosyayı başlangıçta &yeniden aç"
 
 #: src/configdialog.cpp:213
 #, kde-format
@@ -2480,7 +2470,7 @@ msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
 "be separated by a semi-colon.</qt>"
 msgstr ""
-"<qt>Büyük küçük harf değiştirilmesine uğramaması gereken kelimelerin bir "
+"<qt>BÜYÜK/küçük harf değiştirilmesine uğramaması gereken sözcüklerin bir "
 "listesi. Çoklu değerler, noktalı virgül ile ayrılmalıdır.</qt>"
 
 #: src/configdialog.cpp:295
@@ -2495,9 +2485,8 @@ msgid ""
 "first word in a title. Multiple values should be separated by a semi-colon.</"
 "qt>"
 msgstr ""
-"<qt>Eğer başlıktaki ilk kelimeyse, makale olarak düşünülmesi gereken "
-"kelimelerin bir listesi. Çoklu değerler, noktalı virgül ile ayrılmalıdır.</"
-"qt>"
+"<qt>Eğer başlıktaki ilk sözcükse yazı olarak düşünülmesi gereken sözcüklerin "
+"bir listesi. Çoklu değerler, noktalı virgül ile ayrılmalıdır.</qt>"
 
 #: src/configdialog.cpp:307
 #, kde-format
@@ -3905,7 +3894,7 @@ msgstr "UPC/EAN"
 #: src/fetch/fetchmanager.cpp:71
 #, kde-format
 msgid "Keyword"
-msgstr "Anahtar kelime"
+msgstr "Anahtar Sözcük"
 
 #: src/fetch/fetchmanager.cpp:73 src/translators/pdfimporter.cpp:213
 #, kde-format
@@ -4772,13 +4761,13 @@ msgstr "Filtre adı:"
 msgid "&Save Filter"
 msgstr "&Filtreyi Kaydet"
 
-#: src/filterview.cpp:190 src/mainwindow.cpp:568 src/mainwindow.cpp:778
+#: src/filterview.cpp:191 src/mainwindow.cpp:568 src/mainwindow.cpp:778
 #: src/mainwindow.cpp:796
 #, kde-format
 msgid "Filter"
 msgstr "Filtre"
 
-#: src/filterview.cpp:192
+#: src/filterview.cpp:193
 #, kde-format
 msgid "Filter (Sort by Count)"
 msgstr "Filtre (Hesaba Göre Sırala)"
@@ -5332,7 +5321,7 @@ msgstr "Rtf2html kitaplığının yazarı"
 #: src/main.cpp:144
 #, kde-format
 msgid "Do not reopen the last open file"
-msgstr "Son açılan dosyayı tekrar açmayın"
+msgstr "Son açılan dosyayı yeniden açma"
 
 #: src/main.cpp:145
 #, kde-format
@@ -6354,57 +6343,57 @@ msgstr "(%1 seçildi)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico, XSLT çalışmasında bir hataya rastladı."
 
-#: src/mainwindow.cpp:1886
+#: src/mainwindow.cpp:1901
 #, kde-format
 msgid "Importing data..."
 msgstr "Veri içeri aktarılıyor..."
 
-#: src/mainwindow.cpp:1897
+#: src/mainwindow.cpp:1912
 #, kde-format
 msgid "Import File"
 msgstr "Dosya İçeri Aktar"
 
-#: src/mainwindow.cpp:1910
+#: src/mainwindow.cpp:1925
 #, kde-format
 msgid "Import Directory"
 msgstr "Dizin İçeri Aktar"
 
-#: src/mainwindow.cpp:1934
+#: src/mainwindow.cpp:1949
 #, kde-format
 msgid "Exporting data..."
 msgstr "Veri dışarı aktarılıyor..."
 
-#: src/mainwindow.cpp:1957
+#: src/mainwindow.cpp:1972
 #, kde-format
 msgid "Export As"
 msgstr "Farklı Dışarı Aktar"
 
-#: src/mainwindow.cpp:1985
+#: src/mainwindow.cpp:2000
 #, kde-format
 msgid "String Macros"
 msgstr "Karakter Dizisi Makroları"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:2001
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:2001
 #, kde-format
 msgid "String"
 msgstr "Karakter Dizisi"
 
-#: src/mainwindow.cpp:2073
+#: src/mainwindow.cpp:2088
 #, kde-format
 msgid "Creating citations..."
 msgstr "Alıntılar Oluşturuluyor..."
 
-#: src/mainwindow.cpp:2183
+#: src/mainwindow.cpp:2198
 #, kde-format
 msgid "Filters"
 msgstr "Filtreler"
 
-#: src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2199
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6413,12 +6402,12 @@ msgstr ""
 "<qt><i>Filtre Görünümü</i>, girdilerin belli filtre kurallarına uğramış "
 "haliyle gösterilmesidir.</qt>"
 
-#: src/mainwindow.cpp:2207
+#: src/mainwindow.cpp:2222
 #, kde-format
 msgid "Loans"
 msgstr "Kiralamalar"
 
-#: src/mainwindow.cpp:2208
+#: src/mainwindow.cpp:2223
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6427,7 +6416,7 @@ msgstr ""
 "<qt><i>Kiralama Görünümü</i>, sizin koleksiyonunuzdan parçalar kiralayan "
 "kişilerin bir listesini gösterir.</qt>"
 
-#: src/mainwindow.cpp:2291
+#: src/mainwindow.cpp:2310
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6436,12 +6425,12 @@ msgstr ""
 "Bazı görseller yapılandırılan konuma kaydedilmedi. Geçerli dosya "
 "kaydedilmelidir ve görseller yeni konuma taşınacaktır."
 
-#: src/mainwindow.cpp:2332
+#: src/mainwindow.cpp:2351
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Veri girdisini %1 den güncelle"
 
-#: src/mainwindow.cpp:2351
+#: src/mainwindow.cpp:2370
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -7430,10 +7419,10 @@ msgid ""
 "<p>To show only books which are by Weber or Bujold, for example, then\n"
 "type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
 msgstr ""
-"<p>...Çabuk Süz de kelime olmayan karakterler kullanılırsa, metin,\n"
-"düzenli açıklama olarak tercüme edilir.</p>\n"
-" <p>Mesela, yalnızca Weber veya Bujold'dan kitapları göstermek isterseniz,\n"
-"filtreleme kutusuna \"weber|bujold\" (tırnaksız) yazınız.</p>\n"
+"<p>...Hızlı Süz de sözcükler olmayan karakterler kullanılırsa metin,\n"
+"düzenli ifade olarak çevrilir.</p>\n"
+" <p>Örneğin, yalnızca Weber veya Bujold'dan kitapları göstermek isterseniz\n"
+"süzme kutusuna \"weber|bujold\" (tırnaksız) yazın.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:44

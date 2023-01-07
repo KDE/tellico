@@ -2,13 +2,16 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
   <!ENTITY appname "&tellico;">
   <!ENTITY % addindex "IGNORE">
-  <!ENTITY % English "INCLUDE"><!-- change language only here -->
+  <!ENTITY % German "INCLUDE"
+><!-- change language only here -->
 
   <!ENTITY robby "Robby Stephenson">
   <!ENTITY email "robby@periapsis.org">
   <!ENTITY homepage "https://tellico-project.org">
   <!ENTITY maillist "https://tellico-project.org/mailing-list">
-  <!ENTITY xslt "<acronym>XSLT</acronym>">
+  <!ENTITY xslt "<acronym
+>XSLT</acronym
+>">
 
   <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
   <!ENTITY importing-exporting-chapter SYSTEM "importing-exporting.docbook">
@@ -41,7 +44,8 @@ Change date/releaseinfo only if
 Don't forget to include this last date.
 Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
 -->
-<date>2021-03-14</date>
+<date
+>2021-03-14</date>
 
 <!--version information of Frameworks/Plasma/Applications this documentation is valid for.
 Example:
@@ -51,41 +55,63 @@ Applications xx.yy for docbooks released as Applications
 xx.yy (Applications xx.yy) for docbooks with own version released as Applications
 $applicationname xx.yy for applications with independent release schedule (extragear/playground)
 -->
-<releaseinfo>Tellico 3.4</releaseinfo>
+<releaseinfo
+>Tellico 3.4</releaseinfo>
 
-<title>The &tellico; Handbook</title>
+<title
+>Das Handbuch zu &tellico;</title>
 
 <authorgroup>
-<author>
-<firstname>Robby</firstname>
-<surname>Stephenson</surname>
-<affiliation>
-<address><email>&email;</email></address>
+<author
+><firstname
+>Robby</firstname
+> <surname
+>Stephenson</surname
+> <affiliation
+> <address
+><email
+>&email;</email
+></address>
 </affiliation>
 </author>
-<!-- TRANS:ROLES_OF_TRANSLATORS -->
+<othercredit role="translator"
+><firstname
+>Burkhard</firstname
+><surname
+>Lück</surname
+><affiliation
+><address
+><email
+>lueck@hube-lueck.de</email
+></address
+></affiliation
+><contrib
+>Übersetzung</contrib
+></othercredit
+> 
 </authorgroup>
 
 <copyright>
-<year>2001-2022</year>
-<holder>&robby;</holder>
+<year
+>2001-2022</year>
+<holder
+>&robby;</holder>
 </copyright>
 
 <!-- Translators: put here the copyright notice of the translation -->
 
 <legalnotice>
-<para>
-For licensing information of both the software and this documentation, please refer to the
-<link linkend="credits">final section</link>.
-</para>
+<para
+>Informationen über die Lizenz des Programms und der Dokumentation finden Sie im Kapitel <link linkend="credits"
+>Danksagungen und Lizenz</link
+>. </para>
 </legalnotice>
 
 <!-- Abstract about this handbook -->
 
 <abstract>
-<para>
-This document is a handbook for using &tellico;, a collection manager software application.
-</para>
+<para
+>Dieses Dokument ist eine Anleitung für &tellico;, ein Programm zur Verwaltung von Sammlungen. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -93,15 +119,24 @@ Please at least include KDE, the KDE package it is in, the name
  of your application, and a few relevant keywords. -->
 
 <keywordset>
-<keyword>KDE</keyword>
-<keyword>tellico</keyword>
-<keyword>book</keyword>
-<keyword>bibliography</keyword>
-<keyword>movie</keyword>
-<keyword>collection</keyword>
-<keyword>database</keyword>
-<keyword>catalog</keyword>
-<keyword>extragear</keyword>
+<keyword
+>KDE</keyword>
+<keyword
+>tellico</keyword>
+<keyword
+>Buch</keyword>
+<keyword
+>Literaturverzeichnis</keyword>
+<keyword
+>Film</keyword>
+<keyword
+>Sammlung</keyword>
+<keyword
+>Datenbank</keyword>
+<keyword
+>Katalog</keyword>
+<keyword
+>extragear</keyword>
 </keywordset>
 
 </bookinfo>
@@ -117,7 +152,8 @@ in order to maintain a consistent documentation style across all KDE
 apps. -->
 
 <chapter id="introduction">
-<title>Introduction</title>
+<title
+>Einführung</title>
 
 <!-- The introduction chapter contains a brief introduction for the
 application that explains what it does and where to report
@@ -125,100 +161,78 @@ problems. Basically a long version of the abstract.  Don't include a
 revision history. (see installation appendix comment) -->
 
 <sect1 id="tellico-intro">
-<title>&tellico;</title>
+<title
+>&tellico;</title>
 
-<para>
-&tellico; is a program for managing collections. It began as a simple
-book collection manager, and has expanded to include default
-collection templates for bibliographies, comic books, videos, music,
-coins, stamps, trading cards, video games, wines, board games, and file listings.
-In addition, custom collections can be built for any other type of collectibles.
-</para>
+<para
+>&tellico; ist ein Programm zur Verwaltung von Sammlungen. Es entstand als einfaches Programm für Büchersammlungen. Es wurde erweitert und enthält Standardvorlagen für Sammlungen wie Literaturverzeichnisse, Comicbücher, Videos, Musik, Karten, Münzen, Briefmarken, Videospiele, Wein, Brettspiele und Dateikataloge. Zusätzlich können benutzerdefinierte Sammlungen für beliebige andere Arten von Sammlerstücken erstellt werden. </para>
 
 <sect2 id="what-tellico-is">
-<title>What &tellico; Is</title>
+<title
+>Was ist &tellico;</title>
 
-<para>
-&tellico; keeps track of the items in a collection, and offers
-an easy way to enter data for each entry. It provides several
-field types, and allows for an unlimited number of
-user-defined fields. The entries in a collection may be grouped by any
-field for easy organization, and customizable views show as much or as
-little information as you like.
-</para>
+<para
+>&tellico; ermöglicht die Verwaltung von Elementen einer Sammlung und erlaubt die einfache Eingabe von Daten für jeden Eintrag. Es gibt verschiedene Arten von Feldern für Einträge, außerdem kann eine unbegrenzte Anzahl von benutzerdefinierten Feldern hinzugefügt werden. Die Einträge einer Sammlung können zur einfacheren Verwaltung nach jedem Feld gruppiert werden. Die Ansichten können vom Benutzer so angepasst werden, dass immer die gewünschte Information angezeigt wird. </para>
 
-<para>
-Loans of items in your collection may be tracked, including a due date. Collections may be
-imported or exported using a variety of formats, to allow for easy exchange
-or publication of data.
-</para>
+<para
+>Ausleihen in Ihrer Sammlung können einschließlich Fälligkeitsdatum verwaltet werden. Sammlungen können in verschiedenen Formaten importiert und exportiert werden, damit Daten problemlos auszutauschen oder zu veröffentlichen sind. </para>
 
 </sect2>
 
 <sect2 id="what-tellico-is-not">
-<title>What &tellico; Is Not</title>
+<title
+>Was &tellico; nicht ist</title>
 
-<para>
-&tellico; is not an audio or video player. It does not provide
-facilities for reading or modifying multimedia files. It also does
-not provide any image-editing functionality. Although &tellico; has some
-functionality for managing bibliography lists, it is not a full-blown
-bibliographic reference manager. &tellico; also does not pretend to have
-all the capabilities of a full-fledged relational database.
-</para>
+<para
+>&tellico; ist kein Programm zum Abspielen von Audio- oder Videodateien. Es kann keine Multimediadateien lesen oder bearbeiten. Es kann auch keine Grafikdateien bearbeiten. Obwohl &tellico; einige Funktionen zur Verwaltung von Literaturverzeichnissen enthält, ist es kein vollständiges Programm für diese Aufgabe. &tellico; hat auch nicht alle Fähigkeiten einer richtigen relationalen Datenbank. </para>
 
-<para>
-As somewhat of a disclaimer, &tellico; is a hobby for the author, and no
-guarantees are made about its functionality, usefullness, or otherwise.
-More information is included in the
-<link linkend="credits">license declaration</link>.
-</para>
+<para
+>Als eine Art von Ausschlussklausel soll hier festgestellt werden, dass &tellico; ein Hobby des Autors ist, es gibt keine Garantien über die Funktionalität, Gebrauchsfähigkeit und so weiter. Weitere Informationen finden Sie im Abschnitt <link linkend="credits"
+>Lizenzen</link
+>. </para>
 
 </sect2>
 </sect1>
 
 <sect1 id="terminology">
-<title>Terminology</title>
+<title
+>Fachbegriffe</title>
 
 <sect2 id="collections">
-<title>Collections</title>
-<para>
-In &tellico;, a collection is the document. Only one collection exists in each &tellico;
-file. A collection contains any number of <link linkend="fields">fields</link> and
-<link linkend="entries">entries</link>. &tellico; supports 12 specific collection types by
-default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps,
-video games, wines, board games, and file listings. In addition, an empty generic collection
-template is available for any other type of collectibles or lists.
-</para>
+<title
+>Sammlungen</title>
+<para
+>In &tellico; ist jede Sammlung ein Dokument. Jede &tellico;-Datei enthält nur eine Sammlung. Eine Sammlung besteht aus einer beliebigen Anzahl von <link linkend="fields"
+>Feldern</link
+> und <link linkend="entries"
+>Einträgen</link
+>. &tellico; unterstützt als Voreinstellung 12 besondere Arten von Sammlungen: Bücher, Literaturverzeichnisse, Comicbücher, Videos, Musik, Karten, Münzen, Briefmarken, Videospiele, Wein, Brettspiele und Dateikataloge. Zusätzlich gibt es noch eine Vorlage für allgemeine Sammlungen für beliebige andere Arten von Sammlerstücken oder Listen. </para>
 </sect2>
 
 <sect2 id="fields">
-<title>Collection Fields</title>
-<para>
-Each collection may have an unlimited number of fields. &tellico; supports eleven types of fields,
-which allow for a range of different data. The fields can be edited with the
-<link linkend="fields-dialog"><interface>Collection Fields Dialog</interface></link> and are explained further in the
-<link linkend="field-types">Field Types</link> section.
-</para>
+<title
+>Sammlungsfelder</title>
+<para
+>Jede Sammlung kann eine unbegrenzte Anzahl von Feldern enthalten. In &tellico; gibt es elf Feldtypen, die für einen großen Bereich von unterschiedlichen Daten geeignet ist. Die Felder können mit dem Dialog <link linkend="fields-dialog"
+><interface
+>Sammlungsfelder</interface
+></link
+> bearbeitet werden. Weitere Informationen dazu finden Sie im Kapitel <link linkend="field-types"
+>Feldtypen</link
+>. </para>
 </sect2>
 
 <sect2 id="entries">
-<title>Collection Entries</title>
+<title
+>Sammlungseinträge</title>
 
-<para>
-An entry is the basic record in &tellico;. Each entry contains a single value for each field in
-the collection. A collection may have an unlimited number of entries, in theory, although since
-the whole collection is always resident in memory, too many entries could slow down the application.
-</para>
+<para
+>Ein Eintrag ist der grundlegende Datensatz in &tellico;. Jeder Eintrag enthält einen einzelnen Wert für jedes Feld in der Sammlung. Eine Sammlung kann theoretisch eine unbegrenzte Anzahl von Einträgen enthalten. Da jedoch die gesamte Sammlung immer vollständig in den Arbeitsspeicher geladen wird, können zu viele Einträge das Programm verlangsamen. </para>
 
-<para>
-&tellico; has been tested with a collection of 10,000 entries, and the speed was satisfactory.
-However, if many large images are included in the collection, the loading and processing time
-does slow down greatly. Performance can be improved by having &tellico; store images separate from
-the data file itself, either in the application-specific folder or a folder relative to
-the data file. More information can be found in the
-<link linkend="configuration">configuration section</link>.
-</para>
+<para
+>&tellico; wurde mit Sammlungen mit etwa 10.000 Einträgen getestet und die Arbeitsgeschwindigkeit war zufriedenstellend. Wenn jedoch viele große Bilder in der Sammlung enthalten sind, steigt die Zeit zum Laden der Sammlung und die Reaktionszeit des Programms stark an. Dies lässt sich vermeiden, wenn in &tellico; die Bilder getrennt von den Daten der Sammlung gespeichert werden, entweder in einem Ordner des Programms oder der Sammlung. Weitere Informationen dazu finden Sie im Abschnitt <link linkend="configuration"
+>Einstellungen</link
+>. </para>
 
 </sect2>
 
@@ -249,25 +263,28 @@ contributors here. The license for your software should then be
 included below the credits with a reference to the appropriate license
 file included in the KDE distribution. -->
 
-<title>Credits and License</title>
+<title
+>Danksagungen und Lizenz</title>
 
-<para>
-&tellico;
-</para>
-<para>
-Program copyright 2001-2019 &robby; <email>&email;</email>
-</para>
-<para>
-Documentation copyright 2001-2019 &robby; <email>&email;</email>
-</para>
+<para
+>&tellico; </para>
+<para
+>Programm Copyright 2001-2019 &robby; <email
+>&email;</email
+> </para>
+<para
+>Dokumentation Copyright 2001-2019 &robby; <email
+>&email;</email
+> </para>
 
-<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
-
-&underGPL;
-&underFDL;
-
-<para>The author of this documentation has also granted you permission to use the content under the terms of the <ulink
-url="http://www.freebsd.org/copyright/freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so choose. If you wish to allow use of your version of this content only under the terms of the FreeBSD Documentation License, and not to allow others to use your version of this file under the terms of the GFDL, indicate your decision by deleting the GFDL notice and replacing it with the notice and other provisions required by the FreeBSD Documentation License. If you do not delete the GFDL notice above, a recipient may use your version of this file under the terms of either the GFDL or the FreeBSD Documentation License.</para>
+<para
+>Übersetzung Burkhard Lück<email
+>lueck@hube-lueck.de</email
+></para
+> &underFDL; &underGPL; <para
+>Der Autor dieser Dokumentation gibt Ihnen auch die Erlaubnis, den Inhalt auf Wunsch unter den Bedingungen der <ulink url="http://www.freebsd.org/copyright/freebsd-doc-license.html"
+>FreeBSD Documentation License</ulink
+> zu verwenden. Möchten Sie, dass Ihre Version dieses Inhalts nur unter den Bedingungen der „FreeBSD Documentation License“, aber nicht unter den Bedingungen der GFDL benutzt wird, löschen Sie den Hinweis auf die GFDL-Lizenz und ersetzen Sie ihn durch die erforderlichen Angaben für die „FreeBSD Documentation License“. Wenn Sie den Hinweis auf die GFDL-Lizenz beibehalten, kann jede Person Ihre Version dieser Datei entweder unter den Bedingungen der GFDL-Lizenz oder der „FreeBSD Documentation License“ verwenden.</para>
 
 </chapter>
 

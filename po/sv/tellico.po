@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 00:48+0000\n"
+"POT-Creation-Date: 2023-01-07 00:50+0000\n"
 "PO-Revision-Date: 2022-05-11 16:49+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -4729,13 +4729,13 @@ msgstr "Filternamn:"
 msgid "&Save Filter"
 msgstr "&Spara filter"
 
-#: src/filterview.cpp:190 src/mainwindow.cpp:568 src/mainwindow.cpp:778
+#: src/filterview.cpp:191 src/mainwindow.cpp:568 src/mainwindow.cpp:778
 #: src/mainwindow.cpp:796
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
 
-#: src/filterview.cpp:192
+#: src/filterview.cpp:193
 #, kde-format
 msgid "Filter (Sort by Count)"
 msgstr "Filter (sortera enligt antal)"
@@ -6278,57 +6278,57 @@ msgstr "(%1 valda)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico upptäckte ett fel vid behandlingen av XSLT."
 
-#: src/mainwindow.cpp:1886
+#: src/mainwindow.cpp:1901
 #, kde-format
 msgid "Importing data..."
 msgstr "Importera data..."
 
-#: src/mainwindow.cpp:1897
+#: src/mainwindow.cpp:1912
 #, kde-format
 msgid "Import File"
 msgstr "Importera fil"
 
-#: src/mainwindow.cpp:1910
+#: src/mainwindow.cpp:1925
 #, kde-format
 msgid "Import Directory"
 msgstr "Importkatalog"
 
-#: src/mainwindow.cpp:1934
+#: src/mainwindow.cpp:1949
 #, kde-format
 msgid "Exporting data..."
 msgstr "Exporterar data..."
 
-#: src/mainwindow.cpp:1957
+#: src/mainwindow.cpp:1972
 #, kde-format
 msgid "Export As"
 msgstr "Exportera som"
 
-#: src/mainwindow.cpp:1985
+#: src/mainwindow.cpp:2000
 #, kde-format
 msgid "String Macros"
 msgstr "Strängmakron"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:2001
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:2001
 #, kde-format
 msgid "String"
 msgstr "Sträng"
 
-#: src/mainwindow.cpp:2073
+#: src/mainwindow.cpp:2088
 #, kde-format
 msgid "Creating citations..."
 msgstr "Skapar hänvisningar..."
 
-#: src/mainwindow.cpp:2183
+#: src/mainwindow.cpp:2198
 #, kde-format
 msgid "Filters"
 msgstr "Filter"
 
-#: src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2199
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6336,12 +6336,12 @@ msgid ""
 msgstr ""
 "<qt> <i>Filtervyn</i> visar de poster som motsvarar vissa filterregler.</qt>"
 
-#: src/mainwindow.cpp:2207
+#: src/mainwindow.cpp:2222
 #, kde-format
 msgid "Loans"
 msgstr "Lån"
 
-#: src/mainwindow.cpp:2208
+#: src/mainwindow.cpp:2223
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6350,7 +6350,7 @@ msgstr ""
 "<qt> <i>Lånevyn</i> visar en lista på alla personer, som har lånat från din "
 "samling.</qt>"
 
-#: src/mainwindow.cpp:2291
+#: src/mainwindow.cpp:2310
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6359,12 +6359,12 @@ msgstr ""
 "Vissa bilder har inte sparats på den inställda platsen. Den aktuella filen "
 "måste sparas och bilderna kommer att överföras till den nya platsen."
 
-#: src/mainwindow.cpp:2332
+#: src/mainwindow.cpp:2351
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Uppdatera postdata från %1"
 
-#: src/mainwindow.cpp:2351
+#: src/mainwindow.cpp:2370
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "

@@ -1,561 +1,865 @@
 <chapter id="details">
-<title>&appname; Details</title>
+<title
+>Weitergehende Informationen zu &appname;</title>
 
 <sect1 id="field-types">
-<title>Field Types</title>
+<title
+>Feldtypen</title>
 
-<para>
-Each collection may have an unlimited number of fields. &appname; supports
-eleven types of fields, which allow for a range of different data.
-</para>
+<para
+>Jede Sammlung kann eine unbegrenzte Anzahl von Feldern enthalten. In &appname; gibt es elf Feldtypen, die für einen großen Bereich von unterschiedlichen Daten geeignet ist. </para>
 
 <sect2 id="line">
-<title>Simple Text</title>
+<title
+>Einfacher Text</title>
 
-<para>
-The most basic field type is called <emphasis>Simple Text</emphasis>.
-No restrictions are placed on the field values, and the data entry
-widget is the standard line edit. This type is appropriate for fields
-which aren't expected to have long values, such as the author or the genre.
-</para>
+<para
+>Der grundlegende Feldtyp ist <emphasis
+>Einfacher Text</emphasis
+>. Es kann beliebige Werte enthalten, als Eingabeelement wird das Standard-Eingabefeld verwendet. Dieser Typ ist für kurze Werte wie Autor oder Gattung geeignet. </para>
 
 </sect2>
 <sect2 id="number">
-<title>Number</title>
+<title
+>Nummer</title>
 
-<para>
-The <emphasis>Number</emphasis> type is identical to the
-<emphasis>Simple Text</emphasis>, except that the data is restricted
-to being numerical. Entries will be sorted numerically in the column
-view if a <emphasis>Number</emphasis> field column is clicked. The
-standard line edit, with small arrow buttons for increasing or decreasing
-the value, is used for data entry. No formatting is ever
-applied.</para>
+<para
+>Der Typ <emphasis
+>Nummer</emphasis
+> entspricht dem Typ <emphasis
+>Einfacher Text</emphasis
+>, es können aber nur Zahlen eingegeben werden. Die Einträge werden numerisch sortiert, wenn Sie auf das Feld <emphasis
+>Nummer</emphasis
+> in der Spaltenansicht klicken. Es wird das Standardeingabefeld mit kleinen Pfeilen für das Vergrößern oder Verkleinern der Zahl zur Eingabe benutzt. Die Werte werden nicht formatiert.</para>
 
 </sect2>
 
 <sect2 id="url">
-<title>&URL;</title>
+<title
+>&URL;</title>
 
-<para>
-The <emphasis>&URL;</emphasis> type allows for links to other documents,
-using the standard &kde; file type associations for opening the linked
-documents. No validation is done on the actual value of a
-<emphasis>&URL;</emphasis> field, but non-valid links are not
-opened. The data entry is a line edit with a button for opening the
-standard File-Open dialog, but any &URL; may be used. Relative &URL;s are
-interpreted relative to the location of the data file, once it has been saved.
-</para>
+<para
+>Mit dem Typ <emphasis
+>&URL;</emphasis
+> können Verknüpfung zu anderen Dokumenten erstellt werden. Der Typ verwendet die Standard-Dateizuordnung in &kde;, um die verknüpften Dokumente zu öffnen. Die Gültigkeit de aktuellen Wertes einer <emphasis
+>&URL;</emphasis
+> wird nicht überprüft, ungültige Verknüpfungen werden nicht geöffnet. Als Eingabeelement wird ein Eingabefeld mit einem Knopf zum Öffnen des Standarddateidialogs benutzt, es können aber beliebige &URL;s eingegeben werden. Relative &URL;s werden relativ zum Pfad der Datendatei interpretiert, wenn die Datendatei gespeichert wurde. </para>
 
-<para>
-In the <link linkend="entry-editor"><interface>Entry Editor</interface></link>,
-the label becomes the link, while in the <link linkend="entry-view"><interface>Entry View</interface></link>, an actual
-hyperlink is used. This field type is convenient for linking to <acronym>PDF</acronym>
-files of bibliographic entries, or to movie reviews, for example. No
-formatting is ever applied.</para>
+<para
+>Im <link linkend="entry-editor"
+><interface
+>Eintrags-Editor</interface
+></link
+> erscheinen die Beschriftungen als Verknüpfung, in der <link linkend="entry-view"
+><interface
+>Eintragsansicht</interface
+></link
+> als tatsächliche Verknüpfung. Dieser Feldtyp wird zum Beispiel für eine Verknüpfung zu <acronym
+>PDF</acronym
+>-Dateien von Einträgen in Literaturverzeichnissen oder für Verknüpfungen zu Filmkritiken vorgesehen. Der Eintrag wird nicht formatiert.</para>
 
-<para>
-Relative &URL;s may also be used. They are interpreted relative to the location of the
-&appname; data file. In the <link linkend="entry-editor"><interface>Entry Editor</interface></link>, the line
-edit provides auto-completion for local file locations. If you want the &URL; from the &kde;
-File Selector Dialog Box to be interpreted relative to the document location, then a
-property for the &URL; field should be set to <emphasis>relative</emphasis> : <emphasis>true</emphasis>.
-</para>
+<para
+>Relative &URL;s können auch benutzt werden. Sie werden relativ zum Speicherort der &appname;-Datendatei interpretiert. im <link linkend="entry-editor"
+><interface
+>Eintrags-Editor</interface
+></link
+> werden die Eingaben für eine lokale Datei automatisch vervollständigt. Soll eine mit dem &kde;-Dateidialog ausgewählte &URL; relativ zum Speicherort der Datendatei interpretiert werden, dann muss für das Feld &URL; die Eigenschaft <emphasis
+>relative</emphasis
+> auf den Wert <emphasis
+>true</emphasis
+> gesetzt werden. </para>
 
 </sect2>
 
 <sect2 id="para">
-<title>Paragraph</title>
+<title
+>Absatz</title>
 
-<para>
-For longer text fields, the <emphasis>Paragraph</emphasis> type offers
-a larger text edit area, and is always in its own category. A
-<emphasis>Paragraph</emphasis> field may not have multiple values, nor
-is it automatically formatted. It cannot be used for grouping. Abstracts, plot
-summaries, or reviews should be entered using this field type.</para>
+<para
+>Für längere Texte ist der Typ <emphasis
+>Absatz</emphasis
+> als eigene Kategorie vorgesehen. Ein <emphasis
+>Absatz</emphasis
+> kann nicht mehrere Werte enthalten und wird nicht automatisch formatiert. Ein <emphasis
+>Absatz</emphasis
+> kann nicht zur Gruppierung verwendet werden. Zusammenfassungen von Artikeln, Bücher oder der Handlung eines Films und Besprechungen sollten diesen Typ benutzen.</para>
 
 </sect2>
 
 <sect2 id="choice">
-<title>Choice</title>
+<title
+>Auswahl</title>
 
-<para>
-When a field should be limited to a few preset values, a
-<emphasis>Choice</emphasis> type is used. The acceptable values are
-presented in a drop down box for selection. Obviously, multiple values
-are not applicable. Fields such as bibliography type or personal rating
-are <emphasis>Choice</emphasis>-type fields.</para>
+<para
+>Für ein Feld mit nur wenigen vorgegebenen Werten ist der Typ <emphasis
+>Auswahl</emphasis
+> vorgesehen. Die vorgegebenen Werte können aus  einem Auswahlfeld gewählt werden. Mehrere Werte können selbstverständlich nicht eingegeben werden. Dieser Feldtyp wird zum Beispiel für den Typ des Literaturverzeichnisses oder eine persönliche Bewertung benutzt.</para>
 
-<para>Semi-colons should be used to separated the allowed values.</para>
+<para
+>Die erlaubten Werte müssen durch Semikolons getrennt werden.</para>
 
 </sect2>
 
 <sect2 id="bool">
-<title>Checkbox</title>
+<title
+>Ankreuzfeld</title>
 
-<para>
-For fields which take a yes or no value, the
-<emphasis>Checkbox</emphasis> type is available. By default, the field
-is toggled off. <emphasis>Checkbox</emphasis> fields are not formatted
-and are limited to single values. Internally, the field values are
-carried as <emphasis><constant>true</constant></emphasis> or
-<emphasis><constant>false</constant></emphasis>. Some examples are gift or loaned
-fields.</para>
+<para
+>Für Felder mit nur zwei möglichen Werten gibt es den Typ <emphasis
+>Ankreuzfeld</emphasis
+>. Als Voreinstellung ist das Feld abgeschaltet. Ein <emphasis
+>Ankreuzfeld</emphasis
+> wird nicht formatiert und kann nur für einzelne Werte benutzt werden. Intern werden die Feldwerte als Boolesche Werte <emphasis
+><constant
+>true</constant
+></emphasis
+> oder <emphasis
+><constant
+>false</constant
+></emphasis
+> gespeichert. Beispiele für diesen Typ sind die Felder <emphasis
+>Geschenk</emphasis
+> und <emphasis
+>Verliehen</emphasis
+>.</para>
 
 </sect2>
 
 <sect2 id="date">
-<title>Date</title>
+<title
+>Datum</title>
 
-<para>
-A <emphasis>Date</emphasis> field can include a day, month, and year. The date is shown in the standard format of YYYY-MM-DD, which allows for easy sorting. The standard &kde; Date Selector may be used to choose the date with the mouse, or it may be entered directly. The field is not required to have non-empty values for the year, month, and day; only the year may be entered, for example. Multiple values are not allowed.
-</para>
+<para
+>Ein <emphasis
+>Datum</emphasis
+>sfeld kann einen Tag, einen Monat oder ein Jahr enthalten. Das Datum wird im Standardformat YYYY-MM-DD angezeigt, das ermöglicht eine einfache Sortierung. Der &kde;-Standarddialog zur Datumsauswahl kann benutzt werden, um ein Datum mit der Maus einzugeben. Eine direkte Eingabe des Wertes ist ebenfalls möglich. Es müssen nicht alle Werte für Tag, Monat und Jahr eingegeben werden, nur die Angabe eines Jahres ist zum Beispiel auch erlaubt. Die Eingabe mehrerer Werte ist nicht möglich. </para>
 
 </sect2>
 
 <sect2 id="table">
-<title>Table</title>
+<title
+>Tabelle</title>
 
-<para>
-<emphasis>Table</emphasis> fields hold a one or more columns of values.
-In the <link linkend="entry-editor"><interface>Entry Editor</interface></link>, the field is presented using a
-spreadsheet-like view, with numbered rows. When the last row is selected, an additional
-row is then added.  Auto-completion is not available.
-This field is useful for a list of chapters in a book, scenes in a movie, or songs in an album.
-<emphasis>Table</emphasis> fields are always a category by themselves.
-</para>
+<para
+>Eine <emphasis
+>Tabelle</emphasis
+> enthält eine oder mehrere Spalten mit Werten. Im <link linkend="entry-editor"
+><interface
+>Eintrags-Editor</interface
+></link
+> wird das Feld wie in einer Tabellenkalkulation mit nummerierten Zeilen angezeigt. Ist die letzte Zeile auswählt, wird eine weitere Zeile hinzugefügt. Es gibt keine automatische Vervollständigung bei der Werteeingabe. Dieser Typ sollte für die Liste der Kapitel in einem Buch, die Szenen eines Films oder die Titel eines Albums benutzt werden. Die Felder einer <emphasis
+>Tabelle</emphasis
+> sind immer eine eigene Kategorie. </para>
 
-<para>
-The number of columns, up to a maximum of ten, is defined by adding a property to the field
-definition with the name <emphasis>columns</emphasis>. The columns may be labeled by right-clicking
-on the header, or by setting a field property named <emphasis>column1</emphasis>, etc.
-</para>
+<para
+>Die Anzahl der Spalten beträgt als Vorgabe maximal fünf. Dieser Wert kann geändert werden, indem in der Felddefinition die Eigenschaft <emphasis
+>columns</emphasis
+> hinzugefügt wird. Die Beschriftung von Spalten können durch Klicken mit der &RMBn; auf der Spaltenkopf im Kontextmenü oder durch Eingabe der Eigenschaft <emphasis
+>column1</emphasis
+>, <emphasis
+>column2</emphasis
+> usw. festgelegt werden. </para>
 
-<para>
-When using the <interface>Entry Editor</interface> for <emphasis>Table</emphasis> fields, rows may be rearranged by dragging
-the mouse while holding the &Ctrl; button. A popup menu is also available by right-clicking on the table,
-which allows rows to be inserted or removed.
-</para>
+<para
+>Im <interface
+>Eintrags-Editor</interface
+> für <emphasis
+>Tabellen</emphasis
+>-Felder können Zeilen durch Ziehen mit der Maus bei gedrückter Taste &Ctrl; anders angeordnet werden. Durch Klicken mit der &RMBn; öffnen Sie ein Kontextmenü mit Einträgen zum Einfügen oder Entfernen von Zeilen. </para>
 
 </sect2>
 
 <sect2 id="image">
-<title>Image</title>
+<title
+>Bild</title>
 
-<para>
-<emphasis>Image</emphasis> fields hold an image, of any format supported by &kde;.
-Some of the typical ones include <acronym>PNG</acronym> or <acronym>JPEG</acronym>.
-The image can be saved inside the &appname; data file itself or in the application data
-directory. The standard &kde; File Selector is used, so you can use a &URL; or just a
-file available locally. Images can also be dragged from a file manager or browser.
-</para>
+<para
+>Das Feld <emphasis
+>Bild</emphasis
+> enthält eine Grafik in jedem von &kde; unterstützten Format, zum Beispiel  <acronym
+>PNG</acronym
+> oder <acronym
+>JPEG</acronym
+>. Das Bild kann direkt in der &appname;-Datendatei oder im Datenordner des Programms gespeichert werden. Der Standard-&kde;-Dateidialog wird zur Eingabe des Wertes benutzt, so können Sie eine &URL; oder eine lokale Datei eingeben. Bilder können ebenfalls von der Dateiverwaltung oder aus dem Browser in das Eingabefeld gezogen werden. </para>
 
 </sect2>
 
 <sect2 id="rating">
-<title>Rating</title>
+<title
+>Bewertung</title>
 
-<para>
-<emphasis>Rating</emphasis> fields show a number of stars to represent a numerical rating
-for an entry. By default, the rating is a maximum of five. The minimum and maximum may be
-changed by setting properties in the field definition in the <interface>Collection Fields Dialog</interface>, named
-<emphasis>minimum</emphasis> and <emphasis>maximum</emphasis>, respectively.
-</para>
+<para
+>Das Feld <emphasis
+>Bewertung</emphasis
+> zeigt eine Reihe von Sternen für die Darstellung einer numerischen Bewertung eines Eintrags an. Als Voreinstellung sind maximal fünf Sterne vorgegeben. Diese Einstellung kann im Dialog <interface
+>Sammlungsfelder</interface
+> geändert werden, indem für die Felddefinition die Eigenschaften <emphasis
+>minimum</emphasis
+> and <emphasis
+>maximum</emphasis
+> festgelegt werden. </para>
 
 </sect2>
 
 <sect2 id="derived">
-<title>Derived Value Fields</title>
+<title
+>Felder mit abgeleiteten Werten</title>
 
-<para>
-Fields with derived values are a special case. The field type corresponds to the typical type of value
-contained in the field, but the value of the field is constructed from other fields using a format
-string in the field description. For example, if the field has
-a value template of <userinput>%{title} %{year}</userinput>, then the value of that field will
-be the title, followed by the year. This field type is used primarily for the title field in
-the coin, stamp, trading card, and wine collections. Either the internal field name or the field title
-may be used in the description for formatting.
-</para>
+<para
+>Felder mit abgeleiteten Werten sind ein Sonderfall. Die Feldtypen entsprechen den normalen Wertetypen des Feldes, aber der tatsächliche Wert des Feldes wird aus anderen Feldern durch einen Formattext in der Beschreibung des Feldes abgeleitet. Hat zum Beispiel ein Feld das Wertformat <userinput
+>%{title} %{year}</userinput
+>, dann ergibt sich der Feldwert aus dem Titel, gefolgt vom Jahr. Dieser Feldtyp wird vor allem für das Titelfeld von Münz-, Briefmarken-, Karten- und Wein-Sammlungen verwendet. Es kann entweder der interne Feldname oder der Titel des Feldes für den Formattext benutzt werden. </para>
 
-<para>
-To select only a single value for a field with multiple values, add a position index to the template,
-such as <userinput>%{author:1}</userinput> for the first author. The position may be negative,
-counting from the end, so <userinput>%{author:-1}</userinput> would be the last author. Upper and
-lower-case values may be used by setting template flags, such as <userinput>%{author:1/l}</userinput>
-for lower-case first author and <userinput>%{author:1/u}</userinput> for upper-case.
-</para>
+<para
+>Um nur einen einzelnen Wert aus einem Feld mit mehreren möglichen Werten auszuwählen, kann der Index der Position im Formattext angegeben werden, wie zum Beispiel <userinput
+>%{author:1}</userinput
+> für den ersten Autor. Der Index darf auch negativ sein und zählt dann vom Ende, <userinput
+>%{author:-1}</userinput
+> ergibt dann den letzten Autor. Groß- und Kleinschreibung kann durch Schalte zum Formattext bestimmt werden, wie zum Beispiel <userinput
+>%{author:1/l}</userinput
+> für den ersten Autor in Klein- und <userinput
+>%{author:1/u}</userinput
+> in Großschreibung. </para>
 
 </sect2>
 
 </sect1>
 
 <sect1 id="collection-types">
-<title>Collection Types</title>
+<title
+>Sammlungsarten</title>
 
-<para>
-&appname; supports twelve specific collection types by default: books, bibliographic entries, comic books, videos, music, video games, trading cards, coins, stamps, wines, board games, and file catalogs. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view"><interface>Group View</interface></link> works correctly. For some collection types, that is just a <link linkend="derived">derived value</link> field combining two or more of the others.
-</para>
+<para
+> &appname; unterstützt als Voreinstellung 12 besondere Arten von Sammlungen: Bücher, Literaturverzeichnisse, Comicbücher, Videos, Musik, Karten, Münzen, Briefmarken, Videospiele, Wein, Brettspiele und Dateikataloge. Zusätzlich gibt es noch eine Vorlage für allgemeine Sammlungen für beliebige andere Arten von Sammlerstücken. Die Standardsammlung enthalten nur einen allgemeinen Satz an Feldern. Sie können eine Sammlung an Ihre Anforderungen anpassen, indem Sie Felder hinzufügen, verändern oder entfernen. Jede Sammlung muss mindestens nur ein Feld <emphasis
+>Title</emphasis
+> enthalten, damit die <link linkend="group-view"
+><interface
+>Gruppenansicht</interface
+></link
+> möglich ist. Bei einigen Sammlungsarten ist das nur ein Feld mit einem <link linkend="derived"
+>abgeleiteten Wert</link
+>, der aus mindestens zwei anderen zusammengesetzt ist. </para>
 
-<para>
-In general, there's no functional difference between the collection types. You could create a custom collection for your books just as easily as using the default book collection. But &appname; chooses icons based on collection type, and there may be some specialized functionality that is unique to a certain collection, so if you can, you should use the defaults. So, if you want to create a wine collection, but don't like any of the default fields, go ahead and create a default wine collection, then delete all the defaults. That way, &appname; still knows that it's a wine collection.
-</para>
+<para
+>Im Allgemeinen gibt es keinen Unterschied in den Funktionen für die verschiedenen Sammlungsarten. Sie können eine benutzerdefinierte Sammlung für Bücher genauso wie die Standard-Buch-Sammlung verwenden. Aber &appname; verwendet für die Sammlungsarten definierte Symbole. Außerdem gibt es möglicherweise besondere Funktionen für bestimmte Sammlungsarten, daher sollten Sie möglichst eine der mitgelieferten Sammlungen verwenden. Wenn Sie zum Beispiel eine neue Wein-Sammlung ohne die vorgegebenen Standardfelder benutzen möchten, erstellen Sie zuerst eine Standard-Wein-Sammlung und löschen dann alle Felder und ersetzen Sie sie durch Ihre eigenen Felder. Dann ist das für &appname; immer noch eine Weinsammlung. </para>
 
-<para>
-By default, all the collection types include an <emphasis>ID</emphasis> field, which shows the ID number of the entry. In addition, except for the file catalog, each collection includes fields showing the date that the entry was created in the collection and the last time that it was modified.
-</para>
+<para
+>Als Standard benutzen alle Sammlungen ein Feld <emphasis
+>ID</emphasis
+>, das die numerische Kennung der Einträge enthält. Mit Ausnahme des Dateikatalogs enthält jede Sammlungsart Felder, die das Datum der Erstellung und das Datum der letzten Änderung eines Eintrags angeben. </para>
 
 <sect2 id="book-collection">
-<title>Book Collections</title>
-<para>
-Book collections have 27 default fields:
-<emphasis>Title</emphasis>,
-<emphasis>Subtitle</emphasis>,
-<emphasis>Author</emphasis>,
-<emphasis>Binding</emphasis>,
-<emphasis>Purchase Date</emphasis>,
-<emphasis>Purchase Price</emphasis>,
-<emphasis>Publisher</emphasis>,
-<emphasis>Edition</emphasis>,
-<emphasis>Copyright Year</emphasis>,
-<emphasis>Publication Year</emphasis>,
-<emphasis>ISBN#</emphasis>,
-<emphasis>LCCN#</emphasis>,
-<emphasis>Pages</emphasis>,
-<emphasis>Language</emphasis>,
-<emphasis>Genre</emphasis>,
-<emphasis>Keywords</emphasis>,
-<emphasis>Series</emphasis>,
-<emphasis>Series Number</emphasis>,
-<emphasis>Condition</emphasis>,
-<emphasis>Signed</emphasis>,
-<emphasis>Read</emphasis>,
-<emphasis>Gift</emphasis>,
-<emphasis>Loaned</emphasis>,
-<emphasis>Rating</emphasis>,
-<emphasis>Front Cover</emphasis>,
-<emphasis>Plot Summary</emphasis>, and
-<emphasis>Comments</emphasis>.
-</para>
+<title
+>Buch-Sammlungen</title>
+<para
+>Buch-Sammlungen haben 27 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Untertitel</emphasis
+>, <emphasis
+>Autor</emphasis
+>, <emphasis
+>Einband</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Herausgeber</emphasis
+>, <emphasis
+>Edition</emphasis
+>, <emphasis
+>Copyright-Jahr</emphasis
+>, <emphasis
+>Veröffentlichungsjahr</emphasis
+>, <emphasis
+>ISBN</emphasis
+>, <emphasis
+>LCCN</emphasis
+>, <emphasis
+>Seiten</emphasis
+>, <emphasis
+>Sprache</emphasis
+>, <emphasis
+>Gattung</emphasis
+>, <emphasis
+>Schlüsselwörter</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Seriennummer</emphasis
+>, <emphasis
+>Zustand</emphasis
+>, <emphasis
+>Signiert</emphasis
+>, <emphasis
+>Gelesen</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Verliehen</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Vorderseite der Hülle</emphasis
+>, <emphasis
+>Zusammenfassung der Handlung</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
 
-<para>
-The <emphasis>ISBN#</emphasis> field is special, since <acronym>ISBN</acronym> numbers are automatically formatted and the check-digit is calculated. &appname; recognizes the <acronym>ISBN</acronym> field if its internal field name is <emphasis>isbn</emphasis>. If you have deleted it, or need to add it to another type of collection, create the field with the title as <emphasis>ISBN</emphasis> and apply the change, then you can return and modify the title as you want. &appname; creates the internal name based on the initial title, but never changes it if the title is later updated.
-</para>
+<para
+>Die <emphasis
+>ISBN</emphasis
+>-Nummer ist ein besonderes Feld, da die  <acronym
+>ISBN</acronym
+>-Nummer automatisch formatiert und eine Prüfsumme dafür berechnet wird. &appname; erkennt ein <acronym
+>ISBN</acronym
+>-Feld am intern verwendeten Feldnamen <emphasis
+>isbn</emphasis
+>. Haben Sie dieses Feld gelöscht möchten es zu eines anderen Art von Sammlung hinzufügen, erstellen Sie zuerst ein Feld mit dem Titel <emphasis
+>ISBN</emphasis
+> und wenden diese Änderung an. Dann können Sie den Titel beliebig ändern. &appname; leitet den internen aus den ursprünglichen Titel ab, ändert ihn später aber nicht mehr, auch wenn der Titel bearbeitet wird. </para>
 
 </sect2>
 
 <sect2 id="bibliography">
-<title>Bibliographies</title>
-<para>
-Bibliographies have 25 default fields:
-<emphasis>Title</emphasis>,
-<emphasis>Entry Type</emphasis>,
-<emphasis>Author</emphasis>,
-<emphasis>Bibtex Key</emphasis>,
-<emphasis>Book Title</emphasis>,
-<emphasis>Editor</emphasis>,
-<emphasis>Organization</emphasis>,
-<emphasis>Publisher</emphasis>,
-<emphasis>ISBN#</emphasis>,
-<emphasis>Address</emphasis>,
-<emphasis>Edition</emphasis>,
-<emphasis>Pages</emphasis>,
-<emphasis>Year</emphasis>,
-<emphasis>Journal</emphasis>,
-<emphasis>Month</emphasis>,
-<emphasis>Number</emphasis>,
-<emphasis>How Published</emphasis>,
-<emphasis>Chapter</emphasis>,
-<emphasis>Series</emphasis>,
-<emphasis>Series Number</emphasis>,
-<emphasis>Volume</emphasis>,
-<emphasis>Cross-Reference</emphasis>,
-<emphasis>Keywords</emphasis>,
-<emphasis>Abstract</emphasis>, and
-<emphasis>Notes</emphasis>.
-</para>
+<title
+>Literaturverzeichnisse</title>
+<para
+>Literaturverzeichnisse haben 25 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Art des Eintrags</emphasis
+>, <emphasis
+>Autor</emphasis
+>, <emphasis
+>Bibtex-Schlüssel</emphasis
+>, <emphasis
+>Buch-Titel</emphasis
+>, <emphasis
+>Herausgeber</emphasis
+>, <emphasis
+>Organisation</emphasis
+>, <emphasis
+>Verlag</emphasis
+>, <emphasis
+>ISBN</emphasis
+>, <emphasis
+>Adresse</emphasis
+>, <emphasis
+>Auflage</emphasis
+>, <emphasis
+>Seiten</emphasis
+>, <emphasis
+>Jahr</emphasis
+>, <emphasis
+>Zeitschrift</emphasis
+>, <emphasis
+>Monat</emphasis
+>, <emphasis
+>Nummer</emphasis
+>, <emphasis
+>Art der Veröffentlichung</emphasis
+>, <emphasis
+>Kapitel</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Seriennummer</emphasis
+>, <emphasis
+>Band</emphasis
+>, <emphasis
+>Querverweis</emphasis
+>, <emphasis
+>Schlüsselwörter</emphasis
+>, <emphasis
+>Zusammenfassung</emphasis
+> und <emphasis
+>Notizen</emphasis
+>. </para>
 
-<para>
-Although bibliographic collections are not specifically linked to bibtex, the default set of fields is taken from a typical set of bibtex fields. When exporting to bibtex, a property called <emphasis>bibtex</emphasis> is used for each field to define the corresponding bibtex field. If you add an additional field to a bibliography and want to export it to bibtex, be sure to set the <emphasis>bibtex</emphasis> property.
-</para>
+<para
+>Obwohl Literaturverzeichnisse keine besondere programmiertechnische Verknüpfung zu Bibtex haben, werden die Standardfelder eines typischen Bibtex-Datensatzes benutzt. Beim Export zu Bibtex wird eine Eigenschaft namens <emphasis
+>bibtex</emphasis
+> für jedes Feld verwendet, um das zugehörige Bibtex-Feld zu definieren. Möchten Sie ein zusätzlichen Feld zu einem Literaturverzeichnis hinzufügen und dann zu Bibtex exportieren, geben Sie die Eigenschaft <emphasis
+>bibtex</emphasis
+> passend ein. </para>
 
-<para>
-&appname; does have some specialized functions for bibliographies. Bibtex string macros can be added, modified, or deleted from within &appname; and the bibtex export gives you the option of expanding the macros. Bibtex citations can be pushed to an external application such as <application>LyX</application> or <application>Kile</application> using the so-called <emphasis><link linkend="hidden-bibtex-options">lyxpipe</link></emphasis>.
-</para>
+<para
+>&appname; enthält keine besonderen Funktionen für Literaturverzeichnisse. Zeichenfolgen-Makros für Bibtex können in &appname; hinzugefügt, geändert oder gelöscht werden. Beim Bibtex-Export haben Sie die Möglichkeit, Optionen für das Erweitern der Makros anzugeben. Bibtex-Zitate können zu externen Programmen wie <application
+>LyX</application
+> oder <application
+>Kile</application
+> unter Verwendung der sogenannten <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+> exportiert werden. </para>
 
-<para>
-Book collections can be converted to bibliographies. Default bibtex fields are added, and the bibtex properties are set. This functionality exists primarily to convert old collections, before the bibliography type was separated from the book collection type.
-</para>
+<para
+>Buch-Sammlungen können in Literaturverzeichnis umgewandelt werden. Standard-Bibtex-Felder werden dann hinzugefügt und die Bibtex-Eigenschaften gesetzt. Diese Funktion ist deshalb vorhanden. um alte Sammlungen umzuwandeln, die entstanden sind, bevor der Typ Literaturverzeichnis vom Typ Buch-Sammlung abgetrennt wurde, </para>
 </sect2>
 
 <sect2 id="comic-book-collection">
-<title>Comic Book Collections</title>
-<para>
-Comic book collections have 23 default fields:
-<emphasis>Title</emphasis>,
-<emphasis>Subtitle</emphasis>,
-<emphasis>Writer</emphasis>,
-<emphasis>Artist</emphasis>,
-<emphasis>Series</emphasis>,
-<emphasis>Issues</emphasis>,
-<emphasis>Publisher</emphasis>,
-<emphasis>Edition</emphasis>,
-<emphasis>Publication Year</emphasis>,
-<emphasis>Pages</emphasis>,
-<emphasis>Country</emphasis>,
-<emphasis>Language</emphasis>,
-<emphasis>Genre</emphasis>,
-<emphasis>Keywords</emphasis>,
-<emphasis>Condition</emphasis>,
-<emphasis>Purchase Date</emphasis>,
-<emphasis>Purchase Price</emphasis>,
-<emphasis>Signed</emphasis>,
-<emphasis>Gift</emphasis>,
-<emphasis>Loaned</emphasis>,
-<emphasis>Front Cover</emphasis>,
-<emphasis>Plot Summary</emphasis>, and
-<emphasis>Comments</emphasis>.
-</para>
+<title
+>Comicbuch-Sammlungen</title>
+<para
+>Comicbuch-Sammlungen haben 23 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Untertitel</emphasis
+>, <emphasis
+>Schreiber</emphasis
+>, <emphasis
+>Zeichner</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Ausgabe</emphasis
+>, <emphasis
+>Verlag</emphasis
+>, <emphasis
+>Auflage</emphasis
+>, <emphasis
+>Veröffentlichungsjahr</emphasis
+>, <emphasis
+>Seiten</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Sprache</emphasis
+>, <emphasis
+>Gattung</emphasis
+>, <emphasis
+>Schlüsselwörter</emphasis
+>, <emphasis
+>Zustand</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Signiert</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Verliehen</emphasis
+>, <emphasis
+>Vorderseite der Hülle</emphasis
+>, <emphasis
+>Zusammenfassung der Handlung</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
 
 </sect2>
 
 <sect2 id="video-collection">
-<title>Video Collections</title>
-<para>
-Video collections have 30 default fields:
-<emphasis>Title</emphasis>,
-<emphasis>Medium</emphasis>,
-<emphasis>Production Year</emphasis>,
-<emphasis>Certification</emphasis>,
-<emphasis>Genre</emphasis>,
-<emphasis>Region</emphasis>,
-<emphasis>Nationality</emphasis>,
-<emphasis>Format</emphasis>,
-<emphasis>Cast</emphasis>,
-<emphasis>Director</emphasis>,
-<emphasis>Producer</emphasis>,
-<emphasis>Writer</emphasis>,
-<emphasis>Composer</emphasis>,
-<emphasis>Studio</emphasis>,
-<emphasis>Language Tracks</emphasis>,
-<emphasis>Subtitle Languages</emphasis>,
-<emphasis>Audio Tracks</emphasis>,
-<emphasis>Running Time</emphasis>,
-<emphasis>Aspect Ratio</emphasis>,
-<emphasis>Widescreen</emphasis>,
-<emphasis>Color Mode</emphasis>,
-<emphasis>Director's Cut</emphasis>,
-<emphasis>Plot Summary</emphasis>,
-<emphasis>Personal Rating</emphasis>,
-<emphasis>Purchase Date</emphasis>,
-<emphasis>Purchase Price</emphasis>,
-<emphasis>Gift</emphasis>,
-<emphasis>Loaned</emphasis>,
-<emphasis>Cover</emphasis>, and
-<emphasis>Comments</emphasis>.
-</para>
+<title
+>Video-Sammlungen</title>
+<para
+>Video-Sammlungen haben 30 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Medium</emphasis
+>, <emphasis
+>Produktionsjahr</emphasis
+>, <emphasis
+>Klassifizierung</emphasis
+>, <emphasis
+>Gattung</emphasis
+>, <emphasis
+>Regionalbereich</emphasis
+>, <emphasis
+>Nationalität</emphasis
+>, <emphasis
+>Format</emphasis
+>, <emphasis
+>Besetzung</emphasis
+>, <emphasis
+>Regisseur</emphasis
+>, <emphasis
+>Produzent</emphasis
+>, <emphasis
+>Schreiber</emphasis
+>, <emphasis
+>Komponist</emphasis
+>, <emphasis
+>Studio</emphasis
+>, <emphasis
+>Sprach-Spuren</emphasis
+>, <emphasis
+>Untertitel-Sprachen</emphasis
+>, <emphasis
+>Ton-Spuren</emphasis
+>, <emphasis
+>Laufzeit</emphasis
+>, <emphasis
+>Bildseitenformat</emphasis
+>, <emphasis
+>Breitbild</emphasis
+>, <emphasis
+>Farbmodus</emphasis
+>, <emphasis
+>Director's Cut</emphasis
+>, <emphasis
+>Zusammenfassung der Handlung</emphasis
+>, <emphasis
+>Persönliche Beurteilung</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Verliehen</emphasis
+>, <emphasis
+>Cover</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
 
-<para>
-The <emphasis>Cast</emphasis> field is a <link linkend="table">table</link> with two columns, and the name of the actor is intended to be in the first column, with their role in the second. The <emphasis>Running Time</emphasis> is meant to be in minutes, though you can change that, of course.
-</para>
+<para
+>Das Feld <emphasis
+>Besetzung</emphasis
+> ist eine <link linkend="table"
+>Tabelle</link
+> mit zwei Spalten. Der Name des Schauspielers wird in die erste Spalte eingetragen, die Rolle in die Zweite. Die <emphasis
+>Laufzeit</emphasis
+> wird üblicherweise in Minuten angegeben, das kann aber auch geändert werden. </para>
 </sect2>
 
 <sect2 id="music-collection">
-<title>Music Collections</title>
-<para>
-Music collections have 15 default fields:
-<emphasis>Title</emphasis>,
-<emphasis>Medium</emphasis>,
-<emphasis>Artist</emphasis>,
-<emphasis>Label</emphasis>,
-<emphasis>Year</emphasis>,
-<emphasis>Genre</emphasis>,
-<emphasis>Tracks</emphasis>,
-<emphasis>Rating</emphasis>,
-<emphasis>Purchase Date</emphasis>,
-<emphasis>Purchase Price</emphasis>,
-<emphasis>Gift</emphasis>,
-<emphasis>Loaned</emphasis>,
-<emphasis>Keywords</emphasis>,
-<emphasis>Cover</emphasis>, and
-<emphasis>Comments</emphasis>.
-</para>
+<title
+>Musik-Sammlungen</title>
+<para
+>Musik-Sammlungen haben 15 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Medium</emphasis
+>, <emphasis
+>Künstler</emphasis
+>, <emphasis
+>Herausgeber</emphasis
+>, <emphasis
+>Jahr</emphasis
+>, <emphasis
+>Gattung</emphasis
+>, <emphasis
+>Stücke</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Verliehen</emphasis
+>, <emphasis
+>Schlüsselwörter</emphasis
+>, <emphasis
+>Cover</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
 
 </sect2>
 
 <sect2 id="game-collection">
-<title>Game Collections</title>
-<para>
-Video game collections have 16 default fields:
-<emphasis>Title</emphasis>,
-<emphasis>Platform</emphasis>,
-<emphasis>Genre</emphasis>,
-<emphasis>Release Year</emphasis>,
-<emphasis>Publisher</emphasis>,
-<emphasis>Developer</emphasis>,
-<emphasis>ESRB Rating</emphasis>,
-<emphasis>Description</emphasis>,
-<emphasis>Personal Rating</emphasis>,
-<emphasis>Completed</emphasis>,
-<emphasis>Purchase Date</emphasis>,
-<emphasis>Purchase Price</emphasis>,
-<emphasis>Gift</emphasis>,
-<emphasis>Loaned</emphasis>,
-<emphasis>Cover</emphasis>, and
-<emphasis>Comments</emphasis>.
-</para>
+<title
+>Spiele-Sammlungen</title>
+<para
+>Videospiel-Sammlungen haben 16 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Plattform</emphasis
+>, <emphasis
+>Gattung</emphasis
+>, <emphasis
+>Jahr der Veröffentlichung</emphasis
+>, <emphasis
+>Verlag</emphasis
+>, <emphasis
+>Entwickler</emphasis
+>, <emphasis
+>ESRB-Bewertung</emphasis
+>, <emphasis
+>Beschreibung</emphasis
+>, <emphasis
+>Persönliche Beurteilung</emphasis
+>, <emphasis
+>Vollständig</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Verliehen</emphasis
+>, <emphasis
+>Cover</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
 
 </sect2>
 
 <sect2 id="card-collection">
-<title>Card Collections</title>
-<para>
-Trading card collections have 17 default fields:
-<emphasis>Title</emphasis>,
-<emphasis>Player</emphasis>,
-<emphasis>Team</emphasis>,
-<emphasis>Brand</emphasis>,
-<emphasis>Card Number</emphasis>,
-<emphasis>Year</emphasis>,
-<emphasis>Series</emphasis>,
-<emphasis>Card Type</emphasis>,
-<emphasis>Purchase Date</emphasis>,
-<emphasis>Purchase Price</emphasis>,
-<emphasis>Location</emphasis>,
-<emphasis>Gift</emphasis>,
-<emphasis>Keywords</emphasis>,
-<emphasis>Quantity</emphasis>,
-<emphasis>Front Image</emphasis>,
-<emphasis>Back Image</emphasis>, and
-<emphasis>Comments</emphasis>.
-</para>
+<title
+>Karten-Sammlungen</title>
+<para
+>Karten-Sammlungen haben 16 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Spieler</emphasis
+>, <emphasis
+>Team</emphasis
+>, <emphasis
+>Marke</emphasis
+>, <emphasis
+>Karten-Nummer</emphasis
+>, <emphasis
+>Jahr</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Karten-Typ</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Ort</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Schlüsselwörter</emphasis
+>, <emphasis
+>Menge</emphasis
+>, <emphasis
+>Bild der Vorderseite</emphasis
+>, <emphasis
+>Bild der Rückseite</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
 
 </sect2>
 
 <sect2 id="coin-collection">
-<title>Coin Collections</title>
-<para>
-Coin collections have 16 default fields:
-<emphasis>Title</emphasis>,
-<emphasis>Type</emphasis>,
-<emphasis>Denomination</emphasis>,
-<emphasis>Year</emphasis>,
-<emphasis>Mint Mark</emphasis>,
-<emphasis>Country</emphasis>,
-<emphasis>Coin Set</emphasis>,
-<emphasis>Grade</emphasis>,
-<emphasis>Grading Service</emphasis>,
-<emphasis>Purchase Date</emphasis>,
-<emphasis>Purchase Price</emphasis>,
-<emphasis>Location</emphasis>,
-<emphasis>Gift</emphasis>,
-<emphasis>Obverse</emphasis>,
-<emphasis>Reverse</emphasis>, and
-<emphasis>Comments</emphasis>.
-</para>
+<title
+>Münz-Sammlungen</title>
+<para
+>Münz-Sammlungen haben 16 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Type</emphasis
+>, <emphasis
+>Nennwert</emphasis
+>, <emphasis
+>Jahr</emphasis
+>, <emphasis
+>Prägung</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Münzen-Satz</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Bewertungs-Dienstleister</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Ort</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Vorderseite</emphasis
+>, <emphasis
+>Rückseite</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
 
 </sect2>
 
 <sect2 id="stamp-collection">
-<title>Stamp Collections</title>
-<para>
-Stamp collections have 18 default fields:
-<emphasis>Title</emphasis>,
-<emphasis>Description</emphasis>,
-<emphasis>Denomination</emphasis>,
-<emphasis>Country</emphasis>,
-<emphasis>Issue Year</emphasis>,
-<emphasis>Color</emphasis>,
-<emphasis>Scott#</emphasis>,
-<emphasis>Grade</emphasis>,
-<emphasis>Cancelled</emphasis>,
-<emphasis>Hinged</emphasis>,
-<emphasis>Centering</emphasis>,
-<emphasis>Gummed</emphasis>,
-<emphasis>Purchase Date</emphasis>,
-<emphasis>Purchase Price</emphasis>,
-<emphasis>Location</emphasis>,
-<emphasis>Gift</emphasis>,
-<emphasis>Image</emphasis>, and
-<emphasis>Comments</emphasis>.
-</para>
+<title
+>Briefmarken-Sammlungen</title>
+<para
+>Briefmarken-Sammlungen haben 18 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Beschreibung</emphasis
+>, <emphasis
+>Nennwert</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Ausgabejahr</emphasis
+>, <emphasis
+>Farbe</emphasis
+>, <emphasis
+>Katalognr.</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Gestempelt</emphasis
+>, <emphasis
+>Falz</emphasis
+>, <emphasis
+>Zentrierung</emphasis
+>, <emphasis
+>Gummiert</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Ort</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Bild</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
 
 </sect2>
 
 <sect2 id="wine-collection">
-<title>Wine Collections</title>
-<para>
-Wine collections have 15 default fields.
-<emphasis>Title</emphasis>,
-<emphasis>Producer</emphasis>,
-<emphasis>Appellation</emphasis>,
-<emphasis>Varietal</emphasis>,
-<emphasis>Type</emphasis>,
-<emphasis>Country</emphasis>,
-<emphasis>Purchase Date</emphasis>,
-<emphasis>Purchase Price</emphasis>,
-<emphasis>Location</emphasis>,
-<emphasis>Quantity</emphasis>,
-<emphasis>Drink By</emphasis>,
-<emphasis>Rating</emphasis>,
-<emphasis>Gift</emphasis>,
-<emphasis>Label Image</emphasis>, and
-<emphasis>Comments</emphasis>.
-</para>
+<title
+>Wein-Sammlungen</title>
+<para
+>Wein-Sammlungen haben 15 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Erzeuger</emphasis
+>, <emphasis
+>Benennung</emphasis
+>, <emphasis
+>Rebsorte</emphasis
+>, <emphasis
+>Typ</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Ort</emphasis
+>, <emphasis
+>Menge</emphasis
+>, <emphasis
+>Trinken zu</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Etikett</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
 
 </sect2>
 
 <sect2 id="board-game-collection">
-<title>Board Game Collections</title>
-<para>
-Board game collections have 17 default fields.
-<emphasis>Title</emphasis>,
-<emphasis>Genre</emphasis>,
-<emphasis>Mechanism</emphasis>,
-<emphasis>Release Year</emphasis>,
-<emphasis>Publisher</emphasis>,
-<emphasis>Designer</emphasis>,
-<emphasis>Number of Players</emphasis>,
-<emphasis>Playing Time</emphasis>,
-<emphasis>Minimum Age</emphasis>,
-<emphasis>Description</emphasis>,
-<emphasis>Rating</emphasis>,
-<emphasis>Purchase Date</emphasis>,
-<emphasis>Purchase Price</emphasis>,
-<emphasis>Gift</emphasis>,
-<emphasis>Loaned</emphasis>,
-<emphasis>Cover</emphasis>, and
-<emphasis>Comments</emphasis>,
-</para>
+<title
+>Brettspiel-Sammlungen</title>
+<para
+>Brettspiel-Sammlungen haben 17 Standardfelder:  <emphasis
+>Titel</emphasis
+>, <emphasis
+>Gattung</emphasis
+>, <emphasis
+>Mechanismus</emphasis
+>, <emphasis
+>Jahr der Veröffentlichung</emphasis
+>, <emphasis
+>Verlag</emphasis
+>, <emphasis
+>Designer</emphasis
+>, <emphasis
+>Anzahl der Spieler</emphasis
+>, <emphasis
+>Spielzeit</emphasis
+>, <emphasis
+>Mindestalter</emphasis
+>, <emphasis
+>Beschreibung</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>,  <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Verliehen</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Cover</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
 
 </sect2>
 
 <sect2 id="file-catalog">
-<title>File Catalogs</title>
-<para>
-File catalogs have 14 default fields.
-<emphasis>Name</emphasis>,
-<emphasis>&URL;</emphasis>,
-<emphasis>Description</emphasis>,
-<emphasis>Volume</emphasis>,
-<emphasis>Folder</emphasis>,
-<emphasis>Mimetype</emphasis>,
-<emphasis>Size</emphasis>,
-<emphasis>Permissions</emphasis>,
-<emphasis>Owner</emphasis>,
-<emphasis>Group</emphasis>,
-<emphasis>Created</emphasis>,
-<emphasis>Modified</emphasis>,
-<emphasis>Meta Info</emphasis>, and
-<emphasis>Icon</emphasis>,
-</para>
+<title
+>Dateikataloge</title>
+<para
+>Dateikataloge haben 14 Standardfelder <emphasis
+>Name</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Beschreibung</emphasis
+>, <emphasis
+>Volume</emphasis
+><emphasis
+>Ordner</emphasis
+>, <emphasis
+>Dateityp</emphasis
+>, <emphasis
+>Größe</emphasis
+>, <emphasis
+>Berechtigungen</emphasis
+>, <emphasis
+>Eigentümer</emphasis
+>, <emphasis
+>Gruppe</emphasis
+>, <emphasis
+>Erstellt</emphasis
+>, <emphasis
+>Geändert</emphasis
+>, <emphasis
+>Meta-Information</emphasis
+> und <emphasis
+>Symbol</emphasis
+>, </para>
 
 </sect2>
 
 <sect2 id="custom-collection">
-<title>Custom Collections</title>
-<para>
-Custom collections have one default field, the <emphasis>Title</emphasis>. They should be used when the collectible item is not one of the default types.
-</para>
+<title
+>Benutzerdefinierte Sammlungen</title>
+<para
+>Benutzerdefinierte Sammlungen haben nur ein Standardfeld, den <emphasis
+>Titel</emphasis
+>. Sie sollten benutzt werden, wenn es keine Standardsammlung für die Objekte gibt. </para>
 
 </sect2>
 

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 00:48+0000\n"
+"POT-Creation-Date: 2023-01-07 00:50+0000\n"
 "PO-Revision-Date: 2020-03-07 08:05+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -4765,13 +4765,13 @@ msgstr "Nome do filtro:"
 msgid "&Save Filter"
 msgstr "&Gardar o filtro"
 
-#: src/filterview.cpp:190 src/mainwindow.cpp:568 src/mainwindow.cpp:778
+#: src/filterview.cpp:191 src/mainwindow.cpp:568 src/mainwindow.cpp:778
 #: src/mainwindow.cpp:796
 #, kde-format
 msgid "Filter"
 msgstr "Filtrar"
 
-#: src/filterview.cpp:192
+#: src/filterview.cpp:193
 #, kde-format
 msgid "Filter (Sort by Count)"
 msgstr "Filtrar (Ordenar pola cantidade)"
@@ -6346,57 +6346,57 @@ msgstr "(%1 escollidas)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico atopouse cun erro ao procesar o XSLT."
 
-#: src/mainwindow.cpp:1886
+#: src/mainwindow.cpp:1901
 #, kde-format
 msgid "Importing data..."
 msgstr "Estanse a importar os datos…"
 
-#: src/mainwindow.cpp:1897
+#: src/mainwindow.cpp:1912
 #, kde-format
 msgid "Import File"
 msgstr "Importar un ficheiro"
 
-#: src/mainwindow.cpp:1910
+#: src/mainwindow.cpp:1925
 #, kde-format
 msgid "Import Directory"
 msgstr "Importar un directorio"
 
-#: src/mainwindow.cpp:1934
+#: src/mainwindow.cpp:1949
 #, kde-format
 msgid "Exporting data..."
 msgstr "Estanse a exportar os datos…"
 
-#: src/mainwindow.cpp:1957
+#: src/mainwindow.cpp:1972
 #, kde-format
 msgid "Export As"
 msgstr "Exportar como"
 
-#: src/mainwindow.cpp:1985
+#: src/mainwindow.cpp:2000
 #, kde-format
 msgid "String Macros"
 msgstr "Macros de cadeas"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:2001
 #, kde-format
 msgid "Macro"
 msgstr "Macro"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:2001
 #, kde-format
 msgid "String"
 msgstr "Cadea"
 
-#: src/mainwindow.cpp:2073
+#: src/mainwindow.cpp:2088
 #, kde-format
 msgid "Creating citations..."
 msgstr "Estanse a crear as citas…"
 
-#: src/mainwindow.cpp:2183
+#: src/mainwindow.cpp:2198
 #, kde-format
 msgid "Filters"
 msgstr "Filtros"
 
-#: src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2199
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6405,12 +6405,12 @@ msgstr ""
 "<qt>A <i>Vista do filtro</i> mostra as entradas que casan coas condicións de "
 "filtrado.</qt>"
 
-#: src/mainwindow.cpp:2207
+#: src/mainwindow.cpp:2222
 #, kde-format
 msgid "Loans"
 msgstr "Empréstitos"
 
-#: src/mainwindow.cpp:2208
+#: src/mainwindow.cpp:2223
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6419,7 +6419,7 @@ msgstr ""
 "<qt>A <i>Vista dos empréstitos</i> mostra unha lista de toda a xente que ten "
 "emprestados elementos da súa colección.</qt>"
 
-#: src/mainwindow.cpp:2291
+#: src/mainwindow.cpp:2310
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6429,12 +6429,12 @@ msgstr ""
 "ficheiro actual ten que gardalo e as imaxes transferiranse á nova "
 "localización."
 
-#: src/mainwindow.cpp:2332
+#: src/mainwindow.cpp:2351
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Actualizar os datos da entrada desde %1"
 
-#: src/mainwindow.cpp:2351
+#: src/mainwindow.cpp:2370
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "

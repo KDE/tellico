@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 00:48+0000\n"
+"POT-Creation-Date: 2023-01-07 00:50+0000\n"
 "PO-Revision-Date: 2009-09-18 16:56+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -4600,13 +4600,13 @@ msgstr "Изтрий книга"
 msgid "&Save Filter"
 msgstr "Разширен филтър"
 
-#: src/filterview.cpp:190 src/mainwindow.cpp:568 src/mainwindow.cpp:778
+#: src/filterview.cpp:191 src/mainwindow.cpp:568 src/mainwindow.cpp:778
 #: src/mainwindow.cpp:796
 #, fuzzy, kde-format
 msgid "Filter"
 msgstr "Изтрий книга"
 
-#: src/filterview.cpp:192
+#: src/filterview.cpp:193
 #, kde-format
 msgid "Filter (Sort by Count)"
 msgstr ""
@@ -6121,88 +6121,88 @@ msgstr ""
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Програмата се натъкна на грешка при XSLT процедирането.\n"
 
-#: src/mainwindow.cpp:1886
+#: src/mainwindow.cpp:1901
 #, fuzzy, kde-format
 msgid "Importing data..."
 msgstr "Експортирам..."
 
-#: src/mainwindow.cpp:1897
+#: src/mainwindow.cpp:1912
 #, fuzzy, kde-format
 msgid "Import File"
 msgstr "Импортира Bibtex файл..."
 
-#: src/mainwindow.cpp:1910
+#: src/mainwindow.cpp:1925
 #, fuzzy, kde-format
 msgid "Import Directory"
 msgstr "И&мпортиране"
 
-#: src/mainwindow.cpp:1934
+#: src/mainwindow.cpp:1949
 #, fuzzy, kde-format
 msgid "Exporting data..."
 msgstr "Експортирам..."
 
-#: src/mainwindow.cpp:1957
+#: src/mainwindow.cpp:1972
 #, fuzzy, kde-format
 msgid "Export As"
 msgstr "Е&кспортиране"
 
-#: src/mainwindow.cpp:1985
+#: src/mainwindow.cpp:2000
 #, fuzzy, kde-format
 msgid "String Macros"
 msgstr "Оценка"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:2001
 #, kde-format
 msgid "Macro"
 msgstr "Макрос"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:2001
 #, fuzzy, kde-format
 msgid "String"
 msgstr "Оценка"
 
-#: src/mainwindow.cpp:2073
+#: src/mainwindow.cpp:2088
 #, fuzzy, kde-format
 msgid "Creating citations..."
 msgstr "Отрязване на избраното..."
 
-#: src/mainwindow.cpp:2183
+#: src/mainwindow.cpp:2198
 #, fuzzy, kde-format
 msgid "Filters"
 msgstr "Изтрий книга"
 
-#: src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2199
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2207
+#: src/mainwindow.cpp:2222
 #, fuzzy, kde-format
 msgid "Loans"
 msgstr "Дадена"
 
-#: src/mainwindow.cpp:2208
+#: src/mainwindow.cpp:2223
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2291
+#: src/mainwindow.cpp:2310
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
 "be saved and the images will be transferred to the new location."
 msgstr ""
 
-#: src/mainwindow.cpp:2332
+#: src/mainwindow.cpp:2351
 #, kde-format
 msgid "Update entry data from %1"
 msgstr ""
 
-#: src/mainwindow.cpp:2351
+#: src/mainwindow.cpp:2370
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
