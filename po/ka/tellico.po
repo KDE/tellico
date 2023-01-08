@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-07 00:50+0000\n"
-"PO-Revision-Date: 2023-01-05 03:54+0100\n"
+"PO-Revision-Date: 2023-01-07 06:49+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -3876,7 +3876,7 @@ msgstr ""
 #: src/fetch/igdbfetcher.cpp:368 src/fetch/igdbfetcher.cpp:577
 #, kde-format
 msgid "IGDB Link"
-msgstr ""
+msgstr "IGDB ბმული"
 
 #: src/fetch/igdbfetcher.cpp:567
 #, kde-format
@@ -4337,7 +4337,7 @@ msgstr ""
 #: src/fetchdialog.cpp:220
 #, kde-format
 msgid "Search s&ource:"
-msgstr ""
+msgstr "&წყაროს მოძებნა:"
 
 #: src/fetchdialog.cpp:235
 #, kde-format
@@ -4366,7 +4366,7 @@ msgstr ""
 #: src/fetchdialog.cpp:286
 #, kde-format
 msgid "&Add Entry"
-msgstr ""
+msgstr "&ჩანაწერის დამატება"
 
 #: src/fetchdialog.cpp:291
 #, kde-format
@@ -4376,7 +4376,7 @@ msgstr ""
 #: src/fetchdialog.cpp:294
 #, kde-format
 msgid "Get More Results"
-msgstr ""
+msgstr "მეტი შედეგის მიღება"
 
 #: src/fetchdialog.cpp:298
 #, kde-format
@@ -4423,7 +4423,7 @@ msgstr "შედეგების გარეშე"
 #: src/fetchdialog.cpp:555 src/fetchdialog.cpp:611
 #, kde-format
 msgid "Fetching %1..."
-msgstr ""
+msgstr "%1-ის გამოთხოვა..."
 
 #: src/fetchdialog.cpp:628
 #, kde-format
@@ -4448,7 +4448,7 @@ msgstr ""
 #: src/fetchdialog.cpp:773
 #, kde-format
 msgid "&Load From File..."
-msgstr ""
+msgstr "&ფაილიდან ჩატვირთვა..."
 
 #: src/fetchdialog.cpp:774
 #, kde-format
@@ -4481,7 +4481,7 @@ msgstr ""
 #: src/fetcherconfigdialog.cpp:117 src/fetcherconfigdialog.cpp:121
 #, kde-format
 msgid "Source &type: "
-msgstr ""
+msgstr "&წყაროს ტიპი: "
 
 #: src/fetcherconfigdialog.cpp:124
 #, kde-format
@@ -4501,7 +4501,7 @@ msgstr ""
 #: src/field.cpp:196
 #, kde-format
 msgid "Simple Text"
-msgstr ""
+msgstr "უბრალო ტექსტი"
 
 #: src/field.cpp:197
 #, kde-format
@@ -4526,7 +4526,7 @@ msgstr "ცხრილი"
 #: src/field.cpp:204
 #, kde-format
 msgid "Date"
-msgstr ""
+msgstr "თარიღი"
 
 #: src/field.cpp:290
 #, kde-format
@@ -4547,29 +4547,29 @@ msgstr "შეცვლის თარიღი"
 #: src/field.cpp:315
 #, kde-format
 msgid "International Standard Book Number"
-msgstr ""
+msgstr "წიგნის საერთაშორისო სტანდარტული ნომერი"
 
 #: src/field.cpp:339
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
-msgstr ""
+msgstr "სეზონი"
 
 #: src/field.cpp:340
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
-msgstr ""
+msgstr "ეპიზოდი"
 
 #: src/filterdialog.cpp:62
 #, kde-format
 msgid "Advanced Filter"
-msgstr ""
+msgstr "დამატებითი ფილტრი"
 
 #: src/filterdialog.cpp:83
 #, kde-format
 msgid "Filter Criteria"
-msgstr ""
+msgstr "ფილტრის პირობა"
 
 #: src/filterdialog.cpp:88
 #, kde-format
@@ -4589,13 +4589,13 @@ msgstr "ფილტრის სახელი:"
 #: src/filterdialog.cpp:122
 #, kde-format
 msgid "&Save Filter"
-msgstr ""
+msgstr "&ფილტრის შენახვა"
 
 #: src/filterview.cpp:191 src/mainwindow.cpp:568 src/mainwindow.cpp:778
 #: src/mainwindow.cpp:796
 #, kde-format
 msgid "Filter"
-msgstr ""
+msgstr "ფილტრი"
 
 #: src/filterview.cpp:193
 #, kde-format
@@ -4615,12 +4615,12 @@ msgstr "ყველა ჯგუფის ჩაკეცვა"
 #: src/groupview.cpp:266
 #, kde-format
 msgid "Filter by Group"
-msgstr ""
+msgstr "ჯგუფით გაფილტვრა"
 
 #: src/groupview.cpp:412
 #, kde-format
 msgid "%1 (Sort by Count)"
-msgstr ""
+msgstr "%1 (რაოდენობით დალაგება)"
 
 #: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:68
 #, kde-format
@@ -4692,13 +4692,13 @@ msgstr "არ უდრის"
 #: src/gui/filterrulewidget.cpp:299
 #, kde-format
 msgid "matches regular expression"
-msgstr ""
+msgstr "ემთხვევა რეგულარულ გამოსახულებას"
 
 #: src/gui/filterrulewidget.cpp:272 src/gui/filterrulewidget.cpp:280
 #: src/gui/filterrulewidget.cpp:300
 #, kde-format
 msgid "does not match regular expression"
-msgstr ""
+msgstr "არ ემთხვევა რეგულარულ გამოსახულებას"
 
 #: src/gui/filterrulewidget.cpp:273
 #, kde-format
@@ -4727,24 +4727,24 @@ msgstr "მეტი, ვიდრე"
 #: src/gui/filterrulewidget.cpp:285
 #, kde-format
 msgid "image size equals"
-msgstr ""
+msgstr "გამოსახულების ზომა უდრის"
 
 #: src/gui/filterrulewidget.cpp:286
 #, kde-format
 msgid "image size does not equal"
-msgstr ""
+msgstr "გამოსახულების ზომა არ უდრის"
 
 #: src/gui/filterrulewidget.cpp:287
 #, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
-msgstr ""
+msgstr "გამოსახულების ზომა ნაკლებია, ვიდრე"
 
 #: src/gui/filterrulewidget.cpp:288
 #, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
-msgstr ""
+msgstr "გამოსახულების ზომა მეტია, ვიდრე"
 
 #: src/gui/filterrulewidget.cpp:295
 #, kde-format
@@ -5042,7 +5042,7 @@ msgstr ""
 #: src/loandialog.cpp:188
 #, kde-format
 msgid "&Note:"
-msgstr ""
+msgstr "&შენიშვნა:"
 
 #: src/loandialog.cpp:196
 #, kde-format
@@ -5070,7 +5070,7 @@ msgstr "ჩეკინი"
 #: src/loanview.cpp:121
 #, kde-format
 msgid "Modify Loan..."
-msgstr ""
+msgstr "სესხის ჩასწორება..."
 
 #: src/loanview.cpp:200 xslt/report-templates/Loan_View.xsl:135
 #, kde-format
@@ -5445,7 +5445,7 @@ msgstr ""
 #: src/mainwindow.cpp:428
 #, kde-format
 msgid "Import RIS Data..."
-msgstr ""
+msgstr "RIS მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:429
 #, kde-format
@@ -5455,62 +5455,62 @@ msgstr ""
 #: src/mainwindow.cpp:431
 #, kde-format
 msgid "Import MARC Data..."
-msgstr ""
+msgstr "MARC მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:432
 #, kde-format
 msgid "Import MARC data"
-msgstr ""
+msgstr "MARC მონაცემების შემოტანა"
 
 #: src/mainwindow.cpp:439
 #, kde-format
 msgid "Import Goodreads Collection..."
-msgstr ""
+msgstr "Goodreads-ის კოლექციის შემოტანა..."
 
 #: src/mainwindow.cpp:440
 #, kde-format
 msgid "Import a collection from Goodreads.com"
-msgstr ""
+msgstr "Goodreads.com-დან კოლექციის შემოტანა"
 
 #: src/mainwindow.cpp:442
 #, kde-format
 msgid "Import LibraryThing Collection..."
-msgstr ""
+msgstr "LibraryThing -ის კოლექციის შემოტანა..."
 
 #: src/mainwindow.cpp:443
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
-msgstr ""
+msgstr "LibraryThing.com-დან კოლექციის შემოტანა"
 
 #: src/mainwindow.cpp:445
 #, kde-format
 msgid "Import PDF File..."
-msgstr ""
+msgstr "PDF ფაილის შემოტანა..."
 
 #: src/mainwindow.cpp:446
 #, kde-format
 msgid "Import a PDF file"
-msgstr ""
+msgstr "PDF ფაილის შემოტანა"
 
 #: src/mainwindow.cpp:448
 #, kde-format
 msgid "Import Audio File Metadata..."
-msgstr ""
+msgstr "აუდიო ფაილის მეტამონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:449
 #, kde-format
 msgid "Import meta-data from audio files"
-msgstr ""
+msgstr "აუდიო ფაილებიდან მეტამონაცემბის შემოტანა"
 
 #: src/mainwindow.cpp:454
 #, kde-format
 msgid "Import Audio CD Data..."
-msgstr ""
+msgstr "აუდიო CD-ის მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:455
 #, kde-format
 msgid "Import audio CD information"
-msgstr ""
+msgstr "აუდიო CD-ის ინფორმაციის შემოტანა"
 
 #: src/mainwindow.cpp:460
 #, kde-format
