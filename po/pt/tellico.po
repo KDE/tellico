@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-07 00:50+0000\n"
-"PO-Revision-Date: 2022-05-16 14:31+0100\n"
+"PO-Revision-Date: 2023-01-09 09:56+0000\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
 "Language: pt\n"
@@ -4226,10 +4226,9 @@ msgid "SRU Server"
 msgstr "Servidor SRU"
 
 #: src/fetch/srufetcher.cpp:526
-#, fuzzy, kde-format
-#| msgid "&Source name: "
+#, kde-format
 msgid "Scheme: "
-msgstr "Nome da &fonte: "
+msgstr "Esquema: "
 
 #: src/fetch/srufetcher.cpp:535 src/fetch/srufetcher.cpp:571
 #, kde-format
@@ -7626,10 +7625,3 @@ msgstr "Procurar"
 #, kde-format
 msgid "Clear"
 msgstr "Limpar"
-
-#~ msgid ""
-#~ "%1 requires the network request to include identification.\n"
-#~ "Check the network configuration in KDE System Settings."
-#~ msgstr ""
-#~ "O %1 precisa que o pedido da rede incluam a identificação.\n"
-#~ "Verifique a configuração da rede na Configuração do Sistema do KDE."
