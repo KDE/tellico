@@ -211,9 +211,10 @@ void DiscogsFetcherTest::testRawData() {
   QCOMPARE(entry->field(QStringLiteral("label")), QStringLiteral("Wind-Up"));
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2004"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Rock"));
-  QCOMPARE(entry->field(QStringLiteral("discogs")), QStringLiteral("https://www.discogs.com/Evanescence-Anywhere-But-Home/release/1588789"));
+  QCOMPARE(entry->field(QStringLiteral("discogs")), QStringLiteral("https://www.discogs.com/release/1588789-Evanescence-Anywhere-But-Home"));
   QCOMPARE(entry->field(QStringLiteral("nationality")), QStringLiteral("Australia & New Zealand"));
   QCOMPARE(entry->field(QStringLiteral("medium")), QStringLiteral("Compact Disc"));
+  QCOMPARE(entry->field(QStringLiteral("catno")), QStringLiteral("5192073000"));
 
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
   QCOMPARE(trackList.count(), 14);

@@ -332,6 +332,11 @@ void DiscogsFetcher::slotComplete(KJob*) {
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
+  if(optionalFields().contains(QStringLiteral("catno"))) {
+    Data::FieldPtr field(new Data::Field(QStringLiteral("catno"), i18n("Catalog Number")));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
 //  const QVariantMap resultMap = doc.object().toVariantMap().value(QStringLiteral("feed")).toMap();
@@ -384,11 +389,15 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   artists.removeDuplicates(); // sometimes the same value is repeated
   entry_->setField(QStringLiteral("artist"), artists.join(FieldFormat::delimiterString()));
 
-  QStringList labels;
+  QStringList labels, catnos;
   foreach(const QVariant& label, resultMap_.value(QLatin1String("labels")).toList()) {
     labels << mapValue(label.toMap(), "name");
+    catnos << mapValue(label.toMap(), "catno");
   }
   entry_->setField(QStringLiteral("label"), labels.join(FieldFormat::delimiterString()));
+  if(entry_->collection()->hasField(QStringLiteral("catno"))) {
+    entry_->setField(QStringLiteral("catno"), catnos.join(FieldFormat::delimiterString()));
+  }
 
   /* cover value is not always in the full data, so go ahead and set it now */
   QString coverUrl = mapValue(resultMap_, "cover_image");
@@ -501,6 +510,7 @@ Tellico::StringHash DiscogsFetcher::allOptionalFields() {
   hash[QStringLiteral("nationality")] = i18n("Nationality");
   hash[QStringLiteral("discogs")] = i18n("Discogs Link");
   hash[QStringLiteral("barcode")] = i18n("Barcode");
+  hash[QStringLiteral("catno")] = i18n("Catalog Number");
   return hash;
 }
 
