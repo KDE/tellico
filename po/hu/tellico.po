@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:50+0000\n"
+"POT-Creation-Date: 2023-01-12 00:55+0000\n"
 "PO-Revision-Date: 2022-02-01 11:21+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -705,9 +705,10 @@ msgstr "A származott értéket tartalmazó mezőnek érték sablonnak kell lenn
 #: src/fetch/colnectfetcher.cpp:337 src/fetch/colnectfetcher.cpp:344
 #: src/fetch/discogsfetcher.cpp:308 src/fetch/discogsfetcher.cpp:313
 #: src/fetch/discogsfetcher.cpp:318 src/fetch/discogsfetcher.cpp:325
-#: src/fetch/discogsfetcher.cpp:332 src/fetch/doubanfetcher.cpp:310
-#: src/fetch/doubanfetcher.cpp:328 src/fetch/doubanfetcher.cpp:346
-#: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
+#: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:337
+#: src/fetch/doubanfetcher.cpp:310 src/fetch/doubanfetcher.cpp:328
+#: src/fetch/doubanfetcher.cpp:346 src/fetch/filmasterfetcher.cpp:240
+#: src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
 #: src/fetch/imdbfetcher.cpp:821 src/fetch/imdbfetcher.cpp:1301
@@ -1649,7 +1650,7 @@ msgstr "Zenéim"
 msgid "Album"
 msgstr "Album"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:413
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:422
 #: src/fetch/doubanfetcher.cpp:385 src/fetch/doubanfetcher.cpp:519
 #: src/fetch/upcitemdbfetcher.cpp:291 src/fetch/upcitemdbfetcher.cpp:411
 #: src/translators/audiofileimporter.cpp:335
@@ -1662,18 +1663,18 @@ msgstr "CD lemez"
 
 #: src/collections/musiccollection.cpp:54
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:421 src/fetch/upcitemdbfetcher.cpp:407
+#: src/fetch/discogsfetcher.cpp:430 src/fetch/upcitemdbfetcher.cpp:407
 #: src/fetch/upcitemdbfetcher.cpp:415
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:418
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:427
 #, kde-format
 msgid "Cassette"
 msgstr "Kazetta"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:416
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:425
 #, kde-format
 msgid "Vinyl"
 msgstr "LP"
@@ -1881,7 +1882,7 @@ msgid "Region"
 msgstr "Régió"
 
 #: src/collections/videocollection.cpp:99 src/fetch/discogsfetcher.cpp:317
-#: src/fetch/discogsfetcher.cpp:501
+#: src/fetch/discogsfetcher.cpp:510
 #, kde-format
 msgid "Nationality"
 msgstr "Nemzetiség"
@@ -1935,7 +1936,7 @@ msgid "Director"
 msgstr "Rendező"
 
 #: src/collections/videocollection.cpp:127 src/fetch/discogsfetcher.cpp:324
-#: src/fetch/discogsfetcher.cpp:500 src/fetch/rpggeekfetcher.cpp:207
+#: src/fetch/discogsfetcher.cpp:509 src/fetch/rpggeekfetcher.cpp:207
 #, kde-format
 msgid "Producer"
 msgstr "Producer"
@@ -3459,7 +3460,7 @@ msgstr "Amazon.com Web Szervízek"
 
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:172
 #: src/fetch/comicvinefetcher.cpp:232 src/fetch/crossreffetcher.cpp:313
-#: src/fetch/discogsfetcher.cpp:514 src/fetch/giantbombfetcher.cpp:219
+#: src/fetch/discogsfetcher.cpp:524 src/fetch/giantbombfetcher.cpp:219
 #: src/fetch/googlebookfetcher.cpp:382 src/fetch/isbndbfetcher.cpp:394
 #: src/fetch/mobygamesfetcher.cpp:651 src/fetch/omdbfetcher.cpp:410
 #: src/fetch/thegamesdbfetcher.cpp:635 src/fetch/themoviedbfetcher.cpp:590
@@ -3723,30 +3724,36 @@ msgstr "Dán Bibliográfiai Központ (DBC.dk)"
 msgid "An access key is required to use this data source."
 msgstr "Hozzáférési kulcs szükséges az adatforrás használatához."
 
-#: src/fetch/discogsfetcher.cpp:312 src/fetch/discogsfetcher.cpp:502
+#: src/fetch/discogsfetcher.cpp:312 src/fetch/discogsfetcher.cpp:511
 #, kde-format
 msgid "Discogs Link"
 msgstr "Discogs kapcsolat"
 
 #. i18n("Nationality");
-#: src/fetch/discogsfetcher.cpp:331 src/fetch/discogsfetcher.cpp:503
+#: src/fetch/discogsfetcher.cpp:331 src/fetch/discogsfetcher.cpp:512
 #: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:208 src/fetch/upcitemdbfetcher.cpp:459
 #, kde-format
 msgid "Barcode"
 msgstr "Vonalkód"
 
-#: src/fetch/discogsfetcher.cpp:341
+#: src/fetch/discogsfetcher.cpp:336 src/fetch/discogsfetcher.cpp:513
+#, fuzzy, kde-format
+#| msgid "Card Number"
+msgid "Catalog Number"
+msgstr "Kártya szám"
+
+#: src/fetch/discogsfetcher.cpp:346
 #, kde-format
 msgid "The Discogs.com server reports a token error."
 msgstr "A Discogs.com kiszolgáló tokenhibát jelez."
 
-#: src/fetch/discogsfetcher.cpp:491
+#: src/fetch/discogsfetcher.cpp:500
 #, kde-format
 msgid "Discogs Audio Search"
 msgstr "Discogs Audió keresés"
 
-#: src/fetch/discogsfetcher.cpp:526
+#: src/fetch/discogsfetcher.cpp:536
 #, kde-format
 msgid "User token: "
 msgstr "Felhasználó token: "
