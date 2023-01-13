@@ -56,6 +56,8 @@ bool MultiFetcher::canFetch(int type) const {
 
 bool MultiFetcher::canSearch(Fetch::FetchKey k) const {
   // can fetch anything supported by the first data source
+  // ensure we populate the child fetcher list before querying
+  readSources();
   return !m_fetchers.isEmpty() && m_fetchers.front()->canSearch(k);
 }
 
