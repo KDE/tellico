@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-12 00:55+0000\n"
+"POT-Creation-Date: 2023-01-14 00:57+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -2551,7 +2551,7 @@ msgstr "Opțiuni generale"
 
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:354
-#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:227
+#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, fuzzy, kde-format
 msgid "Collection &type:"
@@ -4030,12 +4030,12 @@ msgstr "Calificativ"
 msgid "MovieMeter Link"
 msgstr "Șterge carte"
 
-#: src/fetch/multifetcher.cpp:206
+#: src/fetch/multifetcher.cpp:208
 #, fuzzy, kde-format
 msgid "Multiple Sources"
 msgstr "Modifică carte"
 
-#: src/fetch/multifetcher.cpp:278
+#: src/fetch/multifetcher.cpp:280
 #, fuzzy, kde-format
 msgid "Data source:"
 msgstr "Opțiuni generale"

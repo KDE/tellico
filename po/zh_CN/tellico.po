@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-12 00:55+0000\n"
-"PO-Revision-Date: 2023-01-02 07:12\n"
+"POT-Creation-Date: 2023-01-14 00:57+0000\n"
+"PO-Revision-Date: 2023-01-12 10:31\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2521,7 +2521,7 @@ msgstr "模板选项"
 
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:354
-#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:227
+#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
@@ -3992,12 +3992,12 @@ msgstr ""
 msgid "MovieMeter Link"
 msgstr ""
 
-#: src/fetch/multifetcher.cpp:206
+#: src/fetch/multifetcher.cpp:208
 #, kde-format
 msgid "Multiple Sources"
 msgstr ""
 
-#: src/fetch/multifetcher.cpp:278
+#: src/fetch/multifetcher.cpp:280
 #, kde-format
 msgid "Data source:"
 msgstr ""
@@ -4051,10 +4051,9 @@ msgid "SRU Server"
 msgstr "SRU 服务器"
 
 #: src/fetch/srufetcher.cpp:526
-#, fuzzy, kde-format
-#| msgid "&Source name: "
+#, kde-format
 msgid "Scheme: "
-msgstr "源名称(&S)："
+msgstr ""
 
 #: src/fetch/srufetcher.cpp:535 src/fetch/srufetcher.cpp:571
 #, kde-format

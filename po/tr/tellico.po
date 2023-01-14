@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-12 00:55+0000\n"
+"POT-Creation-Date: 2023-01-14 00:57+0000\n"
 "PO-Revision-Date: 2023-01-10 21:06+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -2588,7 +2588,7 @@ msgstr "Şablon Seçenekleri"
 
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:354
-#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:227
+#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
@@ -4123,12 +4123,12 @@ msgstr "Douban Bağlantısı"
 msgid "MovieMeter Link"
 msgstr "MovieMeter Bağlantısı"
 
-#: src/fetch/multifetcher.cpp:206
+#: src/fetch/multifetcher.cpp:208
 #, kde-format
 msgid "Multiple Sources"
 msgstr "Çoklu Kaynaklar"
 
-#: src/fetch/multifetcher.cpp:278
+#: src/fetch/multifetcher.cpp:280
 #, fuzzy, kde-format
 #| msgid "Data Sources"
 msgid "Data source:"

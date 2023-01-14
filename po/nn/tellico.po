@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:50+0000\n"
+"POT-Creation-Date: 2023-01-12 00:55+0000\n"
 "PO-Revision-Date: 2021-04-09 23:48+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -702,9 +702,10 @@ msgstr "Eit felt for ein avleidd verdi må ha ein tilhøyrande mal."
 #: src/fetch/colnectfetcher.cpp:337 src/fetch/colnectfetcher.cpp:344
 #: src/fetch/discogsfetcher.cpp:308 src/fetch/discogsfetcher.cpp:313
 #: src/fetch/discogsfetcher.cpp:318 src/fetch/discogsfetcher.cpp:325
-#: src/fetch/discogsfetcher.cpp:332 src/fetch/doubanfetcher.cpp:310
-#: src/fetch/doubanfetcher.cpp:328 src/fetch/doubanfetcher.cpp:346
-#: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
+#: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:337
+#: src/fetch/doubanfetcher.cpp:310 src/fetch/doubanfetcher.cpp:328
+#: src/fetch/doubanfetcher.cpp:346 src/fetch/filmasterfetcher.cpp:240
+#: src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
 #: src/fetch/imdbfetcher.cpp:821 src/fetch/imdbfetcher.cpp:1301
@@ -1648,7 +1649,7 @@ msgstr "Musikken min"
 msgid "Album"
 msgstr "Album"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:413
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:422
 #: src/fetch/doubanfetcher.cpp:385 src/fetch/doubanfetcher.cpp:519
 #: src/fetch/upcitemdbfetcher.cpp:291 src/fetch/upcitemdbfetcher.cpp:411
 #: src/translators/audiofileimporter.cpp:335
@@ -1661,18 +1662,18 @@ msgstr "CD"
 
 #: src/collections/musiccollection.cpp:54
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:421 src/fetch/upcitemdbfetcher.cpp:407
+#: src/fetch/discogsfetcher.cpp:430 src/fetch/upcitemdbfetcher.cpp:407
 #: src/fetch/upcitemdbfetcher.cpp:415
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:418
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:427
 #, kde-format
 msgid "Cassette"
 msgstr "Kassett"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:416
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:425
 #, kde-format
 msgid "Vinyl"
 msgstr "Vinyl"
@@ -1886,7 +1887,7 @@ msgid "Region"
 msgstr "Sone"
 
 #: src/collections/videocollection.cpp:99 src/fetch/discogsfetcher.cpp:317
-#: src/fetch/discogsfetcher.cpp:501
+#: src/fetch/discogsfetcher.cpp:510
 #, kde-format
 msgid "Nationality"
 msgstr "Nasjonalitet"
@@ -1940,7 +1941,7 @@ msgid "Director"
 msgstr "Regissør"
 
 #: src/collections/videocollection.cpp:127 src/fetch/discogsfetcher.cpp:324
-#: src/fetch/discogsfetcher.cpp:500 src/fetch/rpggeekfetcher.cpp:207
+#: src/fetch/discogsfetcher.cpp:509 src/fetch/rpggeekfetcher.cpp:207
 #, kde-format
 msgid "Producer"
 msgstr "Produsent"
@@ -3469,7 +3470,7 @@ msgstr "Amazon.com-vevtenester"
 
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:172
 #: src/fetch/comicvinefetcher.cpp:232 src/fetch/crossreffetcher.cpp:313
-#: src/fetch/discogsfetcher.cpp:514 src/fetch/giantbombfetcher.cpp:219
+#: src/fetch/discogsfetcher.cpp:524 src/fetch/giantbombfetcher.cpp:219
 #: src/fetch/googlebookfetcher.cpp:382 src/fetch/isbndbfetcher.cpp:394
 #: src/fetch/mobygamesfetcher.cpp:651 src/fetch/omdbfetcher.cpp:410
 #: src/fetch/thegamesdbfetcher.cpp:635 src/fetch/themoviedbfetcher.cpp:590
@@ -3733,30 +3734,35 @@ msgstr "Dansk BiblioteksCenter (dbc.dk)"
 msgid "An access key is required to use this data source."
 msgstr "Du treng ein tilgangsnøkkel for å kunna bruka denne datakjelda."
 
-#: src/fetch/discogsfetcher.cpp:312 src/fetch/discogsfetcher.cpp:502
+#: src/fetch/discogsfetcher.cpp:312 src/fetch/discogsfetcher.cpp:511
 #, kde-format
 msgid "Discogs Link"
 msgstr "Discogs-lenkje"
 
 #. i18n("Nationality");
-#: src/fetch/discogsfetcher.cpp:331 src/fetch/discogsfetcher.cpp:503
+#: src/fetch/discogsfetcher.cpp:331 src/fetch/discogsfetcher.cpp:512
 #: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:208 src/fetch/upcitemdbfetcher.cpp:459
 #, kde-format
 msgid "Barcode"
 msgstr "Strekkode"
 
-#: src/fetch/discogsfetcher.cpp:341
+#: src/fetch/discogsfetcher.cpp:336 src/fetch/discogsfetcher.cpp:513
+#, kde-format
+msgid "Catalog Number"
+msgstr ""
+
+#: src/fetch/discogsfetcher.cpp:346
 #, kde-format
 msgid "The Discogs.com server reports a token error."
 msgstr "Discogs.com-tenaren gav feilmelding på koden du brukar."
 
-#: src/fetch/discogsfetcher.cpp:491
+#: src/fetch/discogsfetcher.cpp:500
 #, kde-format
 msgid "Discogs Audio Search"
 msgstr "Discogs-lydsøk"
 
-#: src/fetch/discogsfetcher.cpp:526
+#: src/fetch/discogsfetcher.cpp:536
 #, kde-format
 msgid "User token: "
 msgstr "Brukarkode: "

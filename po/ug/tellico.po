@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-12 00:55+0000\n"
+"POT-Creation-Date: 2023-01-14 00:57+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -2528,7 +2528,7 @@ msgstr ""
 
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:354
-#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:227
+#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
@@ -4007,12 +4007,12 @@ msgstr "ئادەتتىكى تاللانمىلار"
 msgid "MovieMeter Link"
 msgstr ""
 
-#: src/fetch/multifetcher.cpp:206
+#: src/fetch/multifetcher.cpp:208
 #, kde-format
 msgid "Multiple Sources"
 msgstr ""
 
-#: src/fetch/multifetcher.cpp:278
+#: src/fetch/multifetcher.cpp:280
 #, fuzzy, kde-format
 #| msgid "Data Sources"
 msgid "Data source:"

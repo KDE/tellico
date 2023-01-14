@@ -14,15 +14,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-12 00:55+0000\n"
-"PO-Revision-Date: 2023-01-03 04:58+0100\n"
+"POT-Creation-Date: 2023-01-14 00:57+0000\n"
+"PO-Revision-Date: 2023-01-13 01:00+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -2606,7 +2606,7 @@ msgstr "Opciones de las plantillas"
 
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:354
-#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:227
+#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
@@ -3768,10 +3768,9 @@ msgid "Barcode"
 msgstr "Código de barras"
 
 #: src/fetch/discogsfetcher.cpp:336 src/fetch/discogsfetcher.cpp:513
-#, fuzzy, kde-format
-#| msgid "Card Number"
+#, kde-format
 msgid "Catalog Number"
-msgstr "Número de la tarjeta"
+msgstr "Número de catálogo"
 
 #: src/fetch/discogsfetcher.cpp:346
 #, kde-format
@@ -4130,12 +4129,12 @@ msgstr "Enlace a MobyGames"
 msgid "MovieMeter Link"
 msgstr "Enlace a MovieMeter"
 
-#: src/fetch/multifetcher.cpp:206
+#: src/fetch/multifetcher.cpp:208
 #, kde-format
 msgid "Multiple Sources"
 msgstr "Múltiples fuentes"
 
-#: src/fetch/multifetcher.cpp:278
+#: src/fetch/multifetcher.cpp:280
 #, kde-format
 msgid "Data source:"
 msgstr "Fuente de datos:"

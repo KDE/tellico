@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-12 00:55+0000\n"
-"PO-Revision-Date: 2023-01-11 19:19+0100\n"
+"POT-Creation-Date: 2023-01-14 00:57+0000\n"
+"PO-Revision-Date: 2023-01-13 08:37+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -467,7 +467,7 @@ msgstr ""
 #: src/collectionfieldsdialog.cpp:270
 #, kde-format
 msgid "Use derived value"
-msgstr ""
+msgstr "მიღებული მნიშვნელობის გამოყენება"
 
 #: src/collectionfieldsdialog.cpp:276
 #, kde-format
@@ -2527,7 +2527,7 @@ msgstr "შაბლონის მორგება"
 
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:354
-#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:227
+#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
@@ -2847,22 +2847,22 @@ msgstr "ჩავანაცვლო ფაილი?"
 #: src/core/tellico_strings.cpp:29
 #, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr ""
+msgstr "Tellico -ის შეცდომა ფაილის გახსნისას - %1."
 
 #: src/core/tellico_strings.cpp:30
 #, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr ""
+msgstr "Tellico -ის შეცდომა ფაილის ჩატვირთვისას - %1."
 
 #: src/core/tellico_strings.cpp:31
 #, kde-format
 msgid "Tellico is unable to write the file - %1."
-msgstr ""
+msgstr "Tellico -ის შეცდომა ფაილის ჩაწერისას - %1."
 
 #: src/core/tellico_strings.cpp:32
 #, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr ""
+msgstr "Tellico -ის შეცდომა ფაილის ატვირთვისას - %1."
 
 #: src/core/tellico_strings.cpp:33
 #, kde-format
@@ -3088,7 +3088,7 @@ msgstr ""
 #: src/exportdialog.cpp:82
 #, kde-format
 msgid "Export selected entries only"
-msgstr ""
+msgstr "მხოლოდ მონიშნული ჩანაწერების გატანა"
 
 #: src/exportdialog.cpp:84
 #, kde-format
@@ -3098,7 +3098,7 @@ msgstr ""
 #: src/exportdialog.cpp:88
 #, kde-format
 msgid "Export visible fields only"
-msgstr ""
+msgstr "მხოლოდ ხილული ველების გატანა"
 
 #: src/exportdialog.cpp:90
 #, kde-format
@@ -3647,10 +3647,9 @@ msgid "Barcode"
 msgstr "შტრიხკოდი"
 
 #: src/fetch/discogsfetcher.cpp:336 src/fetch/discogsfetcher.cpp:513
-#, fuzzy, kde-format
-#| msgid "Card Number"
+#, kde-format
 msgid "Catalog Number"
-msgstr "ბარათის ნომერი"
+msgstr "კატალოგის ნომერი"
 
 #: src/fetch/discogsfetcher.cpp:346
 #, kde-format
@@ -3796,7 +3795,7 @@ msgstr "LCCN"
 #: src/fetch/fetchmanager.cpp:76
 #, kde-format
 msgid "Raw Query"
-msgstr ""
+msgstr "დაუმუშავებელი მოთხოვნა"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -3813,7 +3812,7 @@ msgstr ""
 #: src/fetch/gcstarpluginfetcher.cpp:386
 #, kde-format
 msgid "GCstar Plugin"
-msgstr ""
+msgstr "GCstar -ის დამატება"
 
 #: src/fetch/gcstarpluginfetcher.cpp:408
 #, kde-format
@@ -3993,12 +3992,12 @@ msgstr "MobyGames ბმული"
 msgid "MovieMeter Link"
 msgstr "MovieMeter Link"
 
-#: src/fetch/multifetcher.cpp:206
+#: src/fetch/multifetcher.cpp:208
 #, kde-format
 msgid "Multiple Sources"
 msgstr "მრავალი წყარო"
 
-#: src/fetch/multifetcher.cpp:278
+#: src/fetch/multifetcher.cpp:280
 #, kde-format
 msgid "Data source:"
 msgstr "მონაცემების წყარო:"
@@ -4210,7 +4209,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:639
 #, kde-format
 msgid "Query character set: "
-msgstr "მოთხოვნის სიმბოლოების კოდირება:"
+msgstr "მოთხოვნის სიმბოლოების კოდირება: "
 
 #: src/fetch/z3950fetcher.cpp:648
 #, kde-format
@@ -4222,7 +4221,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:654
 #, kde-format
 msgid "Results character set: "
-msgstr "შედეგის სიმბოლოების კოდირება:"
+msgstr "შედეგის სიმბოლოების კოდირება: "
 
 #: src/fetch/z3950fetcher.cpp:663
 #, kde-format
@@ -4312,17 +4311,17 @@ msgstr ""
 #: src/fetchdialog.cpp:178
 #, kde-format
 msgid "Choose the type of search"
-msgstr ""
+msgstr "აირჩიეთ ძებნის ტიპი"
 
 #: src/fetchdialog.cpp:185
 #, kde-format
 msgid "Click to start or stop the search"
-msgstr ""
+msgstr "დააწკაპუნეთ ძებნის დასაწყებად ან დასასრულებლად"
 
 #: src/fetchdialog.cpp:204
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
-msgstr ""
+msgstr "&მრავალი ISBN/UPC ძებნა"
 
 #: src/fetchdialog.cpp:206
 #, kde-format
@@ -4332,7 +4331,7 @@ msgstr ""
 #: src/fetchdialog.cpp:210
 #, kde-format
 msgid "Edit ISBN/UPC values..."
-msgstr ""
+msgstr "ISBN/UPC -ს მნიშვნელობების ჩასწორება..."
 
 #: src/fetchdialog.cpp:214
 #, kde-format
@@ -4349,7 +4348,7 @@ msgstr "&წყაროს მოძებნა:"
 #: src/fetchdialog.cpp:235
 #, kde-format
 msgid "Select the database to search"
-msgstr ""
+msgstr "აირჩიეთ მოსაძებნი ბაზა"
 
 #: src/fetchdialog.cpp:254
 #, kde-format
@@ -4398,7 +4397,7 @@ msgstr ""
 #: src/fetchdialog.cpp:395
 #, kde-format
 msgid "Cancelling the search..."
-msgstr ""
+msgstr "ძებნის გაუქმენა..."
 
 #: src/fetchdialog.cpp:408 src/fetchdialog.cpp:588
 #, kde-format
@@ -4408,14 +4407,14 @@ msgstr "ძებნა..."
 #: src/fetchdialog.cpp:468
 #, kde-format
 msgid "The search returned no items."
-msgstr ""
+msgstr "ძებნამ შედეგები არ დააბრუნა."
 
 #: src/fetchdialog.cpp:471
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ძებნამ 1 შედეგი დააბრუნა."
+msgstr[1] "ძებნამ %1 შედეგი დააბრუნა."
 
 #: src/fetchdialog.cpp:500
 #, kde-format
@@ -4445,7 +4444,7 @@ msgstr ""
 #: src/fetchdialog.cpp:746
 #, kde-format
 msgid "Edit ISBN/UPC Values"
-msgstr ""
+msgstr "ISBN/UPC -ს მნიშვნელობების ჩასწორება"
 
 #: src/fetchdialog.cpp:757
 #, kde-format
@@ -4472,12 +4471,12 @@ msgstr ""
 #: src/fetcherconfigdialog.cpp:75
 #, kde-format
 msgid "Data Source Properties"
-msgstr ""
+msgstr "მონაცემების წყაროს თვისებები"
 
 #: src/fetcherconfigdialog.cpp:104
 #, kde-format
 msgid "&Source name: "
-msgstr ""
+msgstr "&წყაროს სახელი: "
 
 #: src/fetcherconfigdialog.cpp:106
 #, kde-format
@@ -5382,7 +5381,7 @@ msgstr "MODS მონაცემების ფაილის შემო�
 #: src/mainwindow.cpp:399
 #, kde-format
 msgid "Import Alexandria Data..."
-msgstr "Alexandria-ის მონაცემების შემოტანა"
+msgstr "Alexandria-ის მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:400
 #, kde-format
@@ -6285,7 +6284,7 @@ msgstr ""
 #: src/tellicoui.rc:6
 #, kde-format
 msgid "&File"
-msgstr ""
+msgstr "&ფაილი"
 
 #. i18n: ectx: Menu (file_new_collection)
 #: src/tellicoui.rc:8
@@ -6378,7 +6377,7 @@ msgstr ""
 #: src/translators/audiofileimporter.cpp:191
 #, kde-format
 msgid "Files"
-msgstr ""
+msgstr "ფაილები"
 
 #: src/translators/audiofileimporter.cpp:194
 #, kde-format
@@ -6399,7 +6398,7 @@ msgstr ""
 #: src/translators/audiofileimporter.cpp:492
 #, kde-format
 msgid "Audio File Options"
-msgstr ""
+msgstr "აუდიო ფაილის პარამეტრები"
 
 #: src/translators/audiofileimporter.cpp:495
 #, kde-format
