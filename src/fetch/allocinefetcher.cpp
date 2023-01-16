@@ -97,7 +97,6 @@ void AbstractAllocineFetcher::search() {
   QUrl u(m_baseUrl);
   u = u.adjusted(QUrl::StripTrailingSlash);
   u.setPath(u.path() + QLatin1Char('/') + method);
-//  myDebug() << u;
 
   // the order of the parameters appears to matter
   QList<QPair<QString, QString> > params;
@@ -138,10 +137,7 @@ void AbstractAllocineFetcher::search() {
 //  myDebug() << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  // 10/8/17: UserAgent appears necessary to receive data
-  m_job->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
-  m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1")
-                                                                .arg(QStringLiteral(TELLICO_VERSION)));
+  configureJob(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &AbstractAllocineFetcher::slotComplete);
 }
@@ -194,12 +190,9 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
   query.addQueryItem(QStringLiteral("sig"), QLatin1String(sig));
   u.setQuery(query);
 //  myDebug() << "url: " << u;
-  // 10/8/17: UserAgent appears necessary to receive data
 //  QByteArray data = FileHandler::readDataFile(u, true);
   KIO::StoredTransferJob* dataJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  dataJob->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
-  dataJob->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1")
-                                                                  .arg(QStringLiteral(TELLICO_VERSION)));
+  configureJob(dataJob);
   if(!dataJob->exec()) {
     myDebug() << "Failed to load" << u;
     return entry;
@@ -418,6 +411,14 @@ Tellico::Fetch::FetchRequest AbstractAllocineFetcher::updateRequest(Data::EntryP
     return FetchRequest(Keyword, title);
   }
   return FetchRequest();
+}
+
+void AbstractAllocineFetcher::configureJob(KIO::StoredTransferJob* job_) {
+  // 10/8/17: UserAgent appears necessary to receive data
+  job_->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
+  job_->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1")
+                                                                .arg(QStringLiteral(TELLICO_VERSION)));
+  job_->addMetaData(QLatin1String("Languages"), QLatin1String("fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3"));
 }
 
 AbstractAllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)

@@ -85,6 +85,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   Data::CollPtr createCollection() const;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+  void configureJob(KIO::StoredTransferJob* job);
 
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
