@@ -168,6 +168,7 @@ while the full list is <ulink url="https://tellico-project.org/data-sources">ava
 <listitem><simpara><link linkend="allocine">AlloCiné</link>,</simpara></listitem>
 <listitem><simpara><link linkend="tmdb">TheMovieDB.org</link>,</simpara></listitem>
 <listitem><simpara>the <link linkend="omdb">Open Movie Database</link>,</simpara></listitem>
+<listitem><simpara><link linkend="filmaffinity">FilmAffinity</link>,</simpara></listitem>
 <!-- comics -->
 <listitem><simpara><link linkend="bedetheque">BDGest</link>,</simpara></listitem>
 <listitem><simpara><link linkend="comicvine">Comic Vine</link>,</simpara></listitem>
@@ -363,6 +364,13 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 <title>AlloCiné</title>
 <para>
 <ulink url="http://allocine.fr">AlloCiné</ulink> is an online movie information service, based in France. Browser Identification must be enabled in &systemsettings;
+</para>
+</sect3>
+
+<sect3 id="filmaffinity">
+<title>FilmAffinity</title>
+<para>
+<ulink url="https://filmaffinity.com">FilmAffinity</ulink> is an independent film site.
 </para>
 </sect3>
 

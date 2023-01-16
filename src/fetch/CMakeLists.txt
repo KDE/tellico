@@ -30,6 +30,7 @@ SET(fetch_STAT_SRCS
    fetchmanager.cpp
    fetchrequest.cpp
    fetchresult.cpp
+   filmaffinityfetcher.cpp
    filmasterfetcher.cpp
    gaminghistoryfetcher.cpp
    gcstarpluginfetcher.cpp

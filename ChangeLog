@@ -1,3 +1,7 @@
+2023-01-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source for FilmAffinity.
+
 2023-01-12  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with timing of multisource config read (Bug 461861).

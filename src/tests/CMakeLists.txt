@@ -623,6 +623,12 @@ ecm_add_test(externalfetchertest.cpp
                    KF5::XmlGui
 )
 
+ecm_add_test(filmaffinityfetchertest.cpp
+             ../fetch/filmaffinityfetcher.cpp
+    TEST_NAME filmaffinityfetchertest
+    LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(filmasterfetchertest.cpp
              ../fetch/filmasterfetcher.cpp
     TEST_NAME filmasterfetchertest
