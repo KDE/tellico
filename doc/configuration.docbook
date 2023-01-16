@@ -363,7 +363,7 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 <sect3 id="allocine">
 <title>AlloCiné</title>
 <para>
-<ulink url="http://allocine.fr">AlloCiné</ulink> is an online movie information service, based in France. Browser Identification must be enabled in &systemsettings;
+<ulink url="http://allocine.fr">AlloCiné</ulink> is an online movie information service, based in France.
 </para>
 </sect3>
 
@@ -383,14 +383,14 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 <sect3 id="discogs">
 <title>Discogs.com</title>
 <para>
-<ulink url="http://discogs.com">Discogs.com</ulink> is a user-built music database containing information on artists, labels, and their recordings. Registration for a free account is required. Browser Identification must be enabled in &systemsettings;
+<ulink url="http://discogs.com">Discogs.com</ulink> is a user-built music database containing information on artists, labels, and their recordings. Registration for a free account is required.
 </para>
 </sect3>
 
 <sect3 id="musicbrainz">
 <title>MusicBrainz.org</title>
 <para>
-<ulink url="http://musicbrainz.org">MusicBrainz.org</ulink> is a community music metadatabase that attempts to create a comprehensive music information site. Browser Identification must be enabled in &systemsettings;
+<ulink url="http://musicbrainz.org">MusicBrainz.org</ulink> is a community music metadatabase that attempts to create a comprehensive music information site.
 </para>
 </sect3>
 
