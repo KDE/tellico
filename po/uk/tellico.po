@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 00:57+0000\n"
+"POT-Creation-Date: 2023-01-17 00:58+0000\n"
 "PO-Revision-Date: 2023-01-12 08:59+0200\n"
 "Last-Translator: Fracture dept <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -702,8 +702,8 @@ msgstr "Для поля з похідним значенням слід вказ
 #: src/fetch/discogsfetcher.cpp:318 src/fetch/discogsfetcher.cpp:325
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:337
 #: src/fetch/doubanfetcher.cpp:310 src/fetch/doubanfetcher.cpp:328
-#: src/fetch/doubanfetcher.cpp:346 src/fetch/filmasterfetcher.cpp:240
-#: src/fetch/gaminghistoryfetcher.cpp:197
+#: src/fetch/doubanfetcher.cpp:346 src/fetch/filmaffinityfetcher.cpp:282
+#: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
 #: src/fetch/imdbfetcher.cpp:821 src/fetch/imdbfetcher.cpp:1301
@@ -3130,13 +3130,13 @@ msgstr "Оновити записи"
 msgid "Updating <b>%1</b>..."
 msgstr "Оновлення <b>%1</b>…"
 
-#: src/entryview.cpp:331
+#: src/entryview.cpp:332
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr ""
 "Tellico не вдається встановити розташування типової таблиці стилів записів."
 
-#: src/entryview.cpp:333 src/mainwindow.cpp:1770
+#: src/entryview.cpp:334 src/mainwindow.cpp:1770
 #, kde-format
 msgid "Please check your installation."
 msgstr "Будь ласка, перевірте, чи належним чином встановлено програму."
@@ -3215,17 +3215,17 @@ msgstr "Змінити кодування експортованого файл�
 
 #: src/fetch/allocinefetcher.cpp:244 src/fetch/amazonfetcher.cpp:633
 #: src/fetch/colnectfetcher.cpp:527 src/fetch/discogsfetcher.cpp:217
-#: src/fetch/doubanfetcher.cpp:408 src/fetch/filmasterfetcher.cpp:148
-#: src/fetch/gaminghistoryfetcher.cpp:308 src/fetch/googlebookfetcher.cpp:198
-#: src/fetch/ibsfetcher.cpp:301 src/fetch/igdbfetcher.cpp:163
-#: src/fetch/isbndbfetcher.cpp:295 src/fetch/kinofetcher.cpp:342
-#: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:376
-#: src/fetch/mobygamesfetcher.cpp:345 src/fetch/moviemeterfetcher.cpp:162
-#: src/fetch/numistafetcher.cpp:285 src/fetch/numistafetcher.cpp:293
-#: src/fetch/omdbfetcher.cpp:182 src/fetch/thegamesdbfetcher.cpp:172
-#: src/fetch/themoviedbfetcher.cpp:239 src/fetch/thetvdbfetcher.cpp:352
-#: src/fetch/tvmazefetcher.cpp:269 src/fetch/upcitemdbfetcher.cpp:251
-#: src/fetch/vndbfetcher.cpp:182
+#: src/fetch/doubanfetcher.cpp:408 src/fetch/filmaffinityfetcher.cpp:425
+#: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
+#: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
+#: src/fetch/igdbfetcher.cpp:163 src/fetch/isbndbfetcher.cpp:295
+#: src/fetch/kinofetcher.cpp:342 src/fetch/kinopoiskfetcher.cpp:269
+#: src/fetch/kinoteatrfetcher.cpp:376 src/fetch/mobygamesfetcher.cpp:345
+#: src/fetch/moviemeterfetcher.cpp:162 src/fetch/numistafetcher.cpp:285
+#: src/fetch/numistafetcher.cpp:293 src/fetch/omdbfetcher.cpp:182
+#: src/fetch/thegamesdbfetcher.cpp:172 src/fetch/themoviedbfetcher.cpp:239
+#: src/fetch/thetvdbfetcher.cpp:352 src/fetch/tvmazefetcher.cpp:269
+#: src/fetch/upcitemdbfetcher.cpp:251 src/fetch/vndbfetcher.cpp:182
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "Не виходить завантажити зображення обкладинки"
@@ -3239,7 +3239,8 @@ msgstr "Посилання Allocine"
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
 #: src/fetch/doubanfetcher.cpp:303 src/fetch/doubanfetcher.cpp:321
 #: src/fetch/doubanfetcher.cpp:339 src/fetch/doubanfetcher.cpp:571
-#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/imdbfetcher.cpp:876
+#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:321
+#: src/fetch/filmaffinityfetcher.cpp:456 src/fetch/imdbfetcher.cpp:876
 #: src/fetch/imdbfetcher.cpp:1644 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:263 src/fetch/kinoteatrfetcher.cpp:507
@@ -3250,14 +3251,16 @@ msgstr "Посилання Allocine"
 msgid "Original Title"
 msgstr "Початкова назва"
 
-#: src/fetch/allocinefetcher.cpp:431 src/fetch/imdbfetcher.cpp:1660
-#: src/fetch/kinopoiskfetcher.cpp:685 src/fetch/themoviedbfetcher.cpp:613
+#: src/fetch/allocinefetcher.cpp:431 src/fetch/filmaffinityfetcher.cpp:469
+#: src/fetch/imdbfetcher.cpp:1660 src/fetch/kinopoiskfetcher.cpp:685
+#: src/fetch/themoviedbfetcher.cpp:613
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Максимальна к-ть акторів: "
 
-#: src/fetch/allocinefetcher.cpp:444 src/fetch/imdbfetcher.cpp:1673
-#: src/fetch/kinopoiskfetcher.cpp:698 src/fetch/themoviedbfetcher.cpp:626
+#: src/fetch/allocinefetcher.cpp:444 src/fetch/filmaffinityfetcher.cpp:482
+#: src/fetch/imdbfetcher.cpp:1673 src/fetch/kinopoiskfetcher.cpp:698
+#: src/fetch/themoviedbfetcher.cpp:626
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -3665,8 +3668,8 @@ msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "Michel"
 
-#: src/fetch/colnectfetcher.cpp:658 src/fetch/numistafetcher.cpp:422
-#: src/fetch/themoviedbfetcher.cpp:631
+#: src/fetch/colnectfetcher.cpp:658 src/fetch/filmaffinityfetcher.cpp:487
+#: src/fetch/numistafetcher.cpp:422 src/fetch/themoviedbfetcher.cpp:631
 #, kde-format
 msgid "Language: "
 msgstr "Мова: "
@@ -3899,6 +3902,25 @@ msgstr "LCCN"
 #, kde-format
 msgid "Raw Query"
 msgstr "Необроблений запит"
+
+#: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
+#, fuzzy, kde-format
+#| msgid "Filmaster Link"
+msgid "FilmAffinity Link"
+msgstr "Посилання Filmaster"
+
+#: src/fetch/filmaffinityfetcher.cpp:492
+#, fuzzy, kde-format
+#| msgid "Spain"
+msgctxt "Country"
+msgid "Spain"
+msgstr "Іспанія"
+
+#: src/fetch/filmaffinityfetcher.cpp:495
+#, kde-format
+msgctxt "Country"
+msgid "USA"
+msgstr ""
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
