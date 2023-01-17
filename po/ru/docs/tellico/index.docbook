@@ -1,0 +1,302 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY appname "&tellico;">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Russian "INCLUDE"
+><!-- change language only here -->
+
+  <!ENTITY robby "Robby Stephenson">
+  <!ENTITY email "robby@periapsis.org">
+  <!ENTITY homepage "https://tellico-project.org">
+  <!ENTITY maillist "https://tellico-project.org/mailing-list">
+  <!ENTITY xslt "<acronym
+>XSLT</acronym
+>">
+
+  <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
+  <!ENTITY importing-exporting-chapter SYSTEM "importing-exporting.docbook">
+  <!ENTITY configuration-chapter SYSTEM "configuration.docbook">
+  <!ENTITY fields-chapter SYSTEM "fields.docbook">
+  <!ENTITY menus-chapter SYSTEM "menus.docbook">
+  <!ENTITY advanced-chapter SYSTEM "advanced.docbook">
+  <!ENTITY hacking-chapter SYSTEM "hacking.docbook">
+  <!ENTITY faqs-chapter SYSTEM "faqs.docbook">
+  <!ENTITY details-chapter SYSTEM "details.docbook">
+
+]>
+
+<!-- ................................................................ -->
+
+<!-- The language must NOT be changed here. -->
+
+<book id="tellico" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+
+<!-- Date of the documentation
+Change date/releaseinfo only if
+   docbook is updated and verified to be valid for the current app version
+   or
+   docbook is proofread and verified to be valid for the current app version
+Don't forget to include this last date.
+Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
+-->
+<date
+>14 марта 2021 г.</date>
+
+<!--version information of Frameworks/Plasma/Applications this documentation is valid for.
+Example:
+Frameworks xx.yy for docbooks in frameworks
+Plasma xx.yy for docbooks in plasma workspace
+Applications xx.yy for docbooks released as Applications
+xx.yy (Applications xx.yy) for docbooks with own version released as Applications
+$applicationname xx.yy for applications with independent release schedule (extragear/playground)
+-->
+<releaseinfo
+>Tellico 3.4</releaseinfo>
+
+<title
+>Руководство пользователя &tellico;</title>
+
+<authorgroup>
+<author
+><firstname
+>Robby</firstname
+> <surname
+>Stephenson</surname
+> <affiliation
+> <address
+><email
+>&email;</email
+></address>
+</affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Олеся</firstname
+><surname
+>Герасименко</surname
+><affiliation
+><address
+><email
+>translation-team@basealt.ru</email
+></address
+></affiliation
+><contrib
+>Перевод на русский язык</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2001-2022</year>
+<holder
+>&robby;</holder>
+</copyright>
+
+<!-- Translators: put here the copyright notice of the translation -->
+
+<legalnotice>
+<para
+>Сведения о лицензировании этого программного обеспечения и этой документации доступны в <link linkend="credits"
+>последнем разделе</link
+>. </para>
+</legalnotice>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>Этот документ представляет собой руководство по использованию программного приложения &tellico;, которое предназначено для управления коллекциями. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>tellico</keyword>
+<keyword
+>книга</keyword>
+<keyword
+>библиография</keyword>
+<keyword
+>фильм</keyword>
+<keyword
+>коллекция</keyword>
+<keyword
+>база данных</keyword>
+<keyword
+>каталог</keyword>
+<keyword
+>extragear</keyword>
+</keywordset>
+
+</bookinfo>
+
+<!-- The contents of the documentation begin here.  Label each chapter
+so with the id attribute. This is necessary for two reasons: it allows
+you to easily reference the chapter from other chapters of your
+document, and if there is no ID, the name of the generated HTML files
+will vary from time to time making it hard to manage for maintainers
+and for the CVS system. Any chapter labelled (OPTIONAL) may be left
+out at the author's discretion. Other chapters should not be left out
+in order to maintain a consistent documentation style across all KDE
+apps. -->
+
+<chapter id="introduction">
+<title
+>Введение</title>
+
+<!-- The introduction chapter contains a brief introduction for the
+application that explains what it does and where to report
+problems. Basically a long version of the abstract.  Don't include a
+revision history. (see installation appendix comment) -->
+
+<sect1 id="tellico-intro">
+<title
+>&tellico;</title>
+
+<para
+>&tellico; — это программа для управления коллекциями. Изначально созданная как простой диспетчер коллекций книг, в настоящее время программа содержит шаблоны по умолчанию для библиографий, коллекций комиксов, видео, музыки, монет, марок, карточек, видеоигр, вин, настольных игр и каталогов файлов. Кроме того, возможно создавать пользовательские коллекции для других предметов коллекционирования. </para>
+
+<sect2 id="what-tellico-is">
+<title
+>Что может &tellico;?</title>
+
+<para
+>&tellico; позволяет вести учёт предметов в коллекции и предоставляет удобный способ ввода данных для каждой записи. Приложение поддерживает несколько типов полей, а также позволяет создавать неограниченное количество пользовательских полей. Записи коллекции возможно сгруппировать по любому полю, а настраиваемые представления позволяют управлять количеством отображаемых сведений. </para>
+
+<para
+>Возможно отслеживать отданные на время предметы коллекции, в том числе по дате возврата. Поддерживается импорт и экспорт коллекций в различных форматах, что позволяет легко обмениваться данными или выполнять их публикацию. </para>
+
+</sect2>
+
+<sect2 id="what-tellico-is-not">
+<title
+>Чего не может &tellico;?</title>
+
+<para
+>&tellico; не является средством воспроизведения аудио- или видеозаписей. Приложение не поддерживает чтение или изменение файлов мультимедиа. Редактирование изображений также не поддерживается. Несмотря на то, что &tellico; в некоторой мере поддерживает управление библиографическими списками, приложение не является полнофункциональным диспетчером библиографических ссылок. А также &tellico; ни в коей мере не претендует на наличие всех возможностей полнофункциональной реляционной базы данных. </para>
+
+<para
+>В качестве своего рода оговорки об отказе от ответственности: &tellico; — это авторский хобби-проект, для которого не предоставляются какие-либо гарантии работоспособности, пригодности и так далее. Дополнительные сведения доступны в <link linkend="credits"
+>заявлении о лицензировании</link
+>. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="terminology">
+<title
+>Терминология</title>
+
+<sect2 id="collections">
+<title
+>Коллекции</title>
+<para
+>В &tellico; коллекция является документом. Один файл &tellico; может содержать только одну коллекцию. Коллекция может содержать любое количество <link linkend="fields"
+>полей</link
+> и <link linkend="entries"
+>записей</link
+>. По умолчанию &tellico; поддерживает 12 специализированных типов коллекций: книги, библиографические записи, комиксы, видео, музыка, коллекционные карточки, монеты, марки, видеоигры, настольные игры и каталоги файлов. Кроме того, для создания коллекции предметов или каталогов другого типа имеется пустой общий шаблон. </para>
+</sect2>
+
+<sect2 id="fields">
+<title
+>Поля коллекции</title>
+<para
+>Каждая коллекция может содержать неограниченное количество полей. &tellico; поддерживает одиннадцать типов полей, что позволяет вводить различные данные. Поля возможно редактировать с помощью <link linkend="fields-dialog"
+><interface
+>диалога «Поля коллекции»</interface
+></link
+>. Более подробные сведения о полях доступны в разделе <link linkend="field-types"
+>Типы полей</link
+>. </para>
+</sect2>
+
+<sect2 id="entries">
+<title
+>Записи коллекции</title>
+
+<para
+>Запись — это базовая запись в &tellico;. Каждая запись содержит одно значение для каждого поля коллекции. Теоретически, количество записей коллекции не ограничено, но так как вся коллекция всегда находится в памяти, слишком большое количество записей может привести к снижению скорости работы приложения. </para>
+
+<para
+>По результатам тестирования работы &tellico; с коллекцией, состоящей из 10 000 записей, скорость была удовлетворительной. Но в том случае, если коллекция содержит много больших изображений, на загрузку и обработку потребуется гораздо больше времени. Для повышения производительности возможно настроить &tellico; на хранение изображений отдельно от самого файла данных: либо в папке приложения, либо в папке, связанной с файлом данных. Дополнительные сведения доступны в <link linkend="configuration"
+>разделе о настройке</link
+>. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+&fundamentals-chapter;
+
+&details-chapter;
+
+&importing-exporting-chapter;
+
+&advanced-chapter;
+
+&configuration-chapter;
+
+&hacking-chapter;
+
+&faqs-chapter;
+
+&menus-chapter;
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be
+included below the credits with a reference to the appropriate license
+file included in the KDE distribution. -->
+
+<title
+>Авторские права и лицензия</title>
+
+<para
+>&tellico; </para>
+<para
+>Авторские права на программу: &robby; <email
+>&email;</email
+>, 2001—2019 </para>
+<para
+>Авторские права на документацию: &robby; <email
+>&email;</email
+>, 2001—2019 </para>
+
+<para
+>Олеся Герасименко<email
+>translation-team@basealt.ru</email
+></para
+> &underGPL; &underFDL; <para
+>Автор этой документации также предоставляет разрешение на её использование согласно условиям лицензии <ulink url="http://www.freebsd.org/copyright/freebsd-doc-license.html"
+>FreeBSD Documentation License</ulink
+> (лицензия на документацию FreeBSD). Если требуется разрешить использование вашей версии этой документации только согласно условиям лицензии FreeBSD Documentation License и запретить другим пользователям использовать вашу версию этого файла согласно условиям лицензии GFDL, обозначьте это решение: удалите сведения о лицензии GFDL, заменив их на сведения о лицензии FreeBSD Documentation License и другие необходимые согласно этой лицензии сведения. Если приведённые выше сведения о лицензии GFDL не будут удалены, получатель сможет использовать вашу версию этого файла согласно условиям либо лицензии GFDL, либо лицензии FreeBSD Documentation License.</para>
+
+</chapter>
+
+&documentation.index;
+
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->

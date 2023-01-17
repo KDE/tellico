@@ -1,0 +1,285 @@
+<chapter id="faqs">
+<title
+>Vragen en antwoorden</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+
+<qandaentry>
+<question>
+<para
+>Hoe voer ik meervoudige auteurs in?</para>
+</question>
+<answer>
+
+<para
+>Namen van auteurs zouden door een puntkomma moeten worden gescheiden, zoals: <userinput
+>Brian W. Kernighan; Dennis M. Ritchie</userinput
+>. Voeg het woord "en", of iets soortgelijks, niet toe, zelfs als u 20 auteurs hebt. Als u de optie Automatische opmaak hebt geactiveerd, wordt de achternaam automatisch als eerste getoond voor elke auteur.</para>
+
+<para
+>Andere eigenschappen die meervoudige waarden toestaan, zoals "genre" en "sleutelwoorden", worden op dezelfde manier ingevoerd, met een puntkomma (;) die elke waarde scheidt.</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Kan ik, hoe de afgedrukte pagina er uitziet, wijzigen?</para>
+</question>
+<answer>
+
+<para
+>Zeker. Zoek het bestand <filename
+>tellico-printing.xsl</filename
+>, die zich in de map $<envar
+>KDEDIR</envar
+>/share/apps/tellico/ zou moeten bevinden. U kunt die kopiëren naar $<envar
+>KDEHOME</envar
+>/share/apps/tellico/ voor persoonlijke wijzigingen. U moet kennis hebben van <ulink url="http://www.w3.org/TR/xslt"
+>&xslt;</ulink
+>, maar dat bestand wijzigen is nodig om de opmaak van het afdrukken te wijzigen. Er wordt &HTML; gegenereerd uit het bestand en de gemakkelijkste manier om het uiterlijk van de afdruk te wijzigen is de &CSS; aan het begin te wijzigen.</para>
+
+<para
+>Let erop dat het bestand <filename
+>tellico-printing.xsl</filename
+> refereert naar een ander bestand, <filename
+>tellico-common.xsl</filename
+>, die enkele gemeenschappelijke &xslt;-sjablonen bevat. Als u <filename
+>tellico-printing.xsl</filename
+> kopieert naar $<envar
+>KDEHOME</envar
+>, dan moet u ofwel het &lt;xsl:import&gt; element laten wijzen naar de actuele locatie van het bestand <filename
+>tellico-common.xsl</filename
+> of ook het gemeenschappelijke bestand kopiëren. </para>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para
+>Hoe groepeer ik per eigenschap anders dan die in de werkbalk staan?</para>
+</question>
+<answer>
+<para
+>Om groepering per veld toe te staan, die standaard geen groepering toestaat, activeer dan het vakje "Groepering toestaan" voor dat specifieke veld in de dialoog "Velden in de verzameling". </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Waarom verschijnt niet al dat 'gobbledy-gook' wanneer ik &appname; start?</para
+></question>
+<answer>
+<para
+>Dingen zoals: <screen width="40">
+<computeroutput
+>Tellico::updateCollectionToolBar</computeroutput>
+<computeroutput
+>GroupView::setGroupAttribute - author</computeroutput>
+<computeroutput
+>GroupView::slotAddCollection</computeroutput>
+<computeroutput
+>QCheckBox::property( "title" ) failed: property invalid
+or does not exist</computeroutput>
+</screen
+> is debug-informatie. Bij het compileren, kan dit worden gestopt door te compileren met de valag <userinput
+><option
+>--disable-debug</option
+></userinput
+>. U zou ook <userinput
+><option
+>--enable-final</option
+></userinput
+> kunnen gebruiken, die iets meer geheugen gebruikt bij compileren, maar efficiënter is bij het uitvoeren van de toepassing.</para>
+
+<para
+>Het laatste bericht is enigszins verschillend, het betekent gewoon dat uw &Qt;-installatie gecompileerd is met enige debugging-informatie.</para>
+
+<para
+>Of, als &appname; al is geïnstalleerd, voer <userinput
+><command
+>kdebugdialog</command
+></userinput
+> uit en ga na dat "0 (algemeen)" niet is geactiveerd. Dat schakelt debugberichten uit van alle algemene &kde; toepassingen &ie; die niet officieel door &kde; worden gedistribueerd.</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Hoe wijzig ik welke kolommen getoond worden?</para
+></question>
+<answer>
+<para
+>Klik rechts op de kopbalk. U kunt de koppen ook verslepen om de volgorde van de kolommen te wijzigen en klik op deze om dat veld te sorteren.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Hoe filter ik op zoiets als het veld "Gelezen"?</para
+></question>
+<answer>
+<para
+>Intern worden de keuzevakjes in &appname; opgeslagen als "geactiveerd", dus als u, bijvoorbeeld, wilt filteren op alleen de science fiction boeken die u nog niet hebt gelezen, dan moet u twee regels maken. Ga na dat knop "Alle volgenden moeten overeenkomen" is geactiveerd. Stel de eerste regel on op "Genre" "bevat" "Science Fiction" (geen aanhalingstekens) en de tweede regel op "Gelezen" "bevat geen" "waar" (geen aanhalingstekens) ).</para>
+
+<para
+>Het snelfilter in de werkbalk zal overeenkomen met elk veld en, als er een niet-woord teken inzit, zal de tekst geïnterpreteerd worden als een reguliere expressie. Dus als u snel wilt filteren op boeken om alleen diegenen te tonen door Weber of Bujold, typ dan "weber|bujold" (zonder aanhalingstekens) in de werkbalk.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Hoe voeg ik nieuwe invoersjablonen toe?</para
+></question>
+
+<answer>
+<para
+>Invoersjablonen moeten opgeslagen worden in <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/entry-templates/</filename
+> voor toegang voor een enkele gebruiker of <filename class="directory"
+>$<envar
+>KDEDIR</envar
+>/share/apps/tellico/entry-templates/</filename
+> voor toegang door iedereen. Sjablonen in $<envar
+>KDEHOME</envar
+> gaan boven elk bestand met dezelfde naam in $<envar
+>KDEDIRS</envar
+>. De invoersjablonen kunnen ingesteld worden op basis van per type verzameling de instellingendialoog.</para>
+
+<para
+>Sjablonen voor de <interface
+>Reportagedialoog</interface
+> worden opgeslagen in <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Compileren en installeren gingen goed, maar wanneer &appname; opstart is het venster blanco. Wat is er fout?</para
+></question>
+
+<answer>
+<para
+>&kde; programma's kijken naar gegevens in de locaties gedefinieerd in de omgevingsvariabele $<envar
+>KDEDIRS</envar
+>. Als u bijvoorbeeld installeert in <filename class="directory"
+>/usr/local</filename
+>, maar $<envar
+>KDEDIRS</envar
+> is leeg of alleen <filename class="directory"
+>/usr</filename
+>, dan is &appname; niet in staat de benodigde bestanden te vinden. Dit is speciaal het geval voor &SuSE;, waarvoor u het zou moeten compileren met <userinput
+><option
+>--prefix</option
+>=<filename class="directory"
+>/opt/kde3</filename
+></userinput
+>. Als alternatief kunt u een regel toevoegen aan uw bestand <filename
+>.profile</filename
+> om $<envar
+>KDEDIRS</envar
+> in te stellen. Controleer de documentatie voor uw shell.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Hoe exporteer ik extra bibtex-velden?</para
+></question>
+<answer>
+<para
+>&appname; gebruikt de eigenschap <emphasis
+>bibtex</emphasis
+> om te weten hoe bibtex-velden te exporteren. Als u extra velden om te exporteren wilt toevoegen, zoals een samenvatting, open dan de <interface
+>Dialoog voor velden in de verzameling</interface
+> en klik op de knop <guibutton
+>Eigenschappen instellen</guibutton
+>. Voeg een eigenschap <emphasis
+>bibtex</emphasis
+> toe met de waarde <emphasis
+>abstract</emphasis
+>. Die eigenschap zal, bij exporteren naar bibtex of bibtexml, gebruikt worden voor de bibtex-veldnaam.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Wat is er gebeurt met Bookcase?</para>
+</question>
+
+<answer>
+<para
+>Vanwege een conflict met een handelsmerk, is Bookcase hernoemd tot Tellico in september 2004. Tellico 0.12 is toen vrijgegeven, die identiek is aan Bookcase 0.11, behalve voor de wijziging in de naam.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Wat heeft de naam Tellico hiermee te maken?</para>
+</question>
+
+<answer>
+<para
+>Ik heb nagedacht over <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
+>verschillende andere namen</ulink
+>, waarvan een paar verbonden waren met boekverzamelingen. Tellico kan echter meer behandelen dan alleen boeken en terzijde, dit is een hobby, dus koos ik een (voor mij) mooi klinkende naam, genomen van een plaats dichtbij waar ik opgegroeid ben.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Waarom voegt u die koppelingen naar Amazon.com in in de zoekresultaten?</para>
+</question>
+
+<answer>
+<para
+>De <ulink url="http://www.amazon.com/gp/browse.html/002-0927720-5265623?node=3440661"
+>bepalingen van de overeenkomst voor toegang tot de webservices van Amazon.com </ulink
+> vereisen dat alle afbeeldingen opgehaald vanaf de service teruggekoppeld moeten zijn naar Amazon.com, evenals een extra koppeling. Het associatie-ID van Amazon.com moet ook worden ingevoegd, zodat elke betaling voor verwijzing eerlijk worden verzameld. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Waarom gebruikt u geen echte database?</para>
+</question>
+
+<answer>
+<para
+>Deel van de reden dat ik begon met &appname; was om C++ te leren. Op dat moment kende ik SQL nog niet en op dit moment heb ik alleen nog maar een flauw begrip van hoe het te gebruiken. Eenvoudig gezegd, &appname; is niet begonnen als een relationele database en dat zal niet veranderen tot enig moment in de toekomst wanneer ik me SQL heb eigen gemaakt en de tijd en de motivatie om het gegevensmodel te wijzigen. Als u daar last van hebt, gebruik &appname; dan niet. </para>
+
+<para
+>Natuurlijk is iedereen welkom om elke wijziging die ze willen aan te brengen in de broncode. </para>
+</answer>
+</qandaentry>
+
+</qandaset>
+
+</chapter>

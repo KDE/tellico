@@ -1,0 +1,285 @@
+<chapter id="faqs">
+<title
+>Küsimused ja vastused</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+
+<qandaentry>
+<question>
+<para
+>Kuidas sisestada mitu autorit?</para>
+</question>
+<answer>
+
+<para
+>Autorite nimed tuleb eraldada semikooloniga, näiteks <userinput
+>Brian W. Kernighan; Dennis M. Ritchie</userinput
+>. Ära kasuta sõnu "and", "ja" või midagi muud sellist, isegi kui autoreid peaks olema kakskümmend. Kui automaatne vormindamine on lubatud, näidatakse iga autori puhul automaatselt kõigepealt perekonnanime.</para>
+
+<para
+>Samamoodi semikooloniga eraldatult tuleb sisestada ka teised omadused, mille puhul on lubatud mitu väärtust, näiteks žanr või võtmesõnad.</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Kas saab kuidagi muuta trükitud lehekülgede välimust?</para>
+</question>
+<answer>
+
+<para
+>Aga loomulikult! Otsi üles fail <filename
+>tellico-printing.xsl</filename
+>, mis peaks paiknema kataloogis $<envar
+>KDEDIR</envar
+>/share/apps/tellico/. Isiklike muutuste jaoks võid kopeerida selle asukohta $<envar
+>KDEHOME</envar
+>/share/apps/tellico/. Sa pead tundma <ulink url="http://www.w3.org/TR/xslt"
+>&xslt;</ulink
+> süntaksit, aga igal juhul just seda faili muutes saab muuta väljatrükki. &HTML; genereeritakse sellest failist ning lihtsaim viis väljatrüki välimust muuta on muuta kohe alguses asuvat &CSS;-i.</para>
+
+<para
+>Arvesta, et <filename
+>tellico-printing.xsl</filename
+> viitab ka failile <filename
+>tellico-common.xsl</filename
+>, mis sisaldab mõningaid levinumaid &xslt; malle. Kui kopeerid <filename
+>tellico-printing.xsl</filename
+> asukohta $<envar
+>KDEHOME</envar
+>,, tuleb muuta kas elementi &lt;xsl:import&gt; ja panna see viitama faili <filename
+>tellico-common.xsl</filename
+> tegelikule asukohale, või kopeerida ka viimati mainitud fail. </para>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para
+>Kuidas rühmitada mõne muu omaduse järgi kui need, mida leiab tööriistaribalt?</para>
+</question>
+<answer>
+<para
+>Rühmitamise võimaldamiseks välja järgi, mida vaikimisi rühmitamiseks ei kasutata, tuleb "Kogu väljade" dialoogis konkreetse välja juures ära märkida ruuduke "Rühmitamise lubamine". </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Miks &appname; käivitamisel näeb igasugust jama?</para
+></question>
+<answer>
+<para
+>Selline teksti nagu <screen width="40">
+<computeroutput
+>Tellico::updateCollectionToolBar</computeroutput>
+<computeroutput
+>GroupView::setGroupAttribute - author</computeroutput>
+<computeroutput
+>GroupView::slotAddCollection</computeroutput>
+<computeroutput
+>QCheckBox::property( "title" ) failed: property invalid
+or does not exist</computeroutput>
+</screen
+> on silumisinfo. Seda saab kompileerimise ajal kõrvaldada, kui sooritada kompileerimine lipuga <userinput
+><option
+>--disable-debug</option
+></userinput
+> flag. Samuti võib kasutada võtit <userinput
+><option
+>--enable-final</option
+></userinput
+>, mis võtab küll kompileerimise ajal rohkem mälu, aga tuleb kasuks rakenduse töötamise ajal.</para>
+
+<para
+>Viimane sõnum on veidi teistsugune ja tähendab lihtsalt, et &Qt; paigaldus on kompileeritud mõningat silumisinfot lubades.</para>
+
+<para
+>Kui &appname; on juba paigaldatud, käivita <userinput
+><command
+>kdebugdialog</command
+></userinput
+> ja kontrolli, et "0 (generic)" on märkimata. See lülitab välja kõik üldiste &kde; rakenduste, &ie; rakenduste, mida &kde; ametlikult ei levita, silumisteated.</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Kuidas muuta seda, milliseid veerge näidatakse?</para
+></question>
+<answer>
+<para
+>Tee päiseribal paremklõps. Päiseid võib ka veergude järjestuse muutmiseks vajalikku kohta lohistada ning neil klõpsates sorditakse just selle välja järgi.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Kuidas filtreerida näiteks välja "Loetud" järgi?</para
+></question>
+<answer>
+<para
+>Sisemiselt salvestatakse &appname; märkeruuduväljad väärtusega "true", nii et kui soovid näiteks filtreerida välja ainult ulmeraamatud, mida sa pole lugenud, tuleb kasutada kaht reeglit. Kõigepealt tuleb märkida "Vastab kõigele järgnevale". Esimene reegel peab olema "Žanr" "sisaldab" "Science Fiction" (ilma jutumärkideta muidugi) ja teine reegel "Loetud" "sisaldab" "true" (samuti jutumärkideta).</para>
+
+<para
+>Tööriistariba kiirfilter kasutab kõiki välju ja kui seal esineb mittetärgist märk, siis tõlgendatakse teksti regulaaravaldisena. Kui näiteks soovid kiiresti välja filtreerida Weberi ja Bujoldi raamatud, siis kirjuta kirjuta tööriistaribale "weber|bujold" (ilma jutumärkideta).</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Kuidas lisada uusi kirjemalle?</para
+></question>
+
+<answer>
+<para
+>Kirjemallid tuleks salvestada asukohta <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/entry-templates/</filename
+> (konkreetse kasutaja jaoks) või  <filename class="directory"
+>$<envar
+>KDEDIR</envar
+>/share/apps/tellico/entry-templates/</filename
+> (kõigile kasutajatele). $<envar
+>KDEHOME</envar
+> mallid tühistavad kõik samanimelised a$<envar
+>KDEDIRS</envar
+> mallid. Kirjemalle saab kehtestada kogutüüpide kaupa seadistustedialoogis.</para>
+
+<para
+><interface
+>Aruandedialoogi</interface
+> mallid on salvestatud kataloogi <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Kompileerimine ja paigaldamine läks edukalt, aga &appname; käivitamisel on aken tühi. Mis on valesti?</para
+></question>
+
+<answer>
+<para
+>&kde; programmid otsivad andmeid asukohtadest, mille määrab kindlaks keskkonnamuutuja $<envar
+>KDEDIRS</envar
+>. Kui paigaldada näiteks asukohta <filename class="directory"
+>/usr/local</filename
+>, aga $<envar
+>KDEDIRS</envar
+> on tühi või sisaldab lihtsalt asukohta <filename class="directory"
+>/usr</filename
+>, siis &appname; ei leia vajalikke faile. See kehtib eriti &SuSE; puhul, millisel juhul tuleks kompileerimisel kasutada <userinput
+><option
+>--prefix</option
+>=<filename class="directory"
+>/opt/kde3</filename
+></userinput
+>.  Teine võimalus on lisada rida failile <filename
+>.profile</filename
+>, mis määrab kindlaks  $<envar
+>KDEDIRS</envar
+>. Täpsemalt tuleks seda uurida shelli dokumentatsioonist.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Kuidas eksportida täiendavad bibtexi välju?</para
+></question>
+<answer>
+<para
+>&appname; kasutab omadust <emphasis
+>bibtex</emphasis
+>, millega määratakse, kuidas eksportida bibtexi välju. Kui soovid lisada eksportimiseks täiendavaid välju, näiteks kokkuvõte, ava <interface
+>kogu väljade dialoogi</interface
+> ja klõpsa nupule <guibutton
+>Määra omadused</guibutton
+>. Lisa omadus <emphasis
+>bibtex</emphasis
+> väärtusega <emphasis
+>abstract</emphasis
+>. Kui nüüd ekspordid bibtex- või bibtexml-vormingusse kasutatakse seda omadust bibtexi välja nime jaoks.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Mis sai Bookcase'ist?</para>
+</question>
+
+<answer>
+<para
+>Kaubamärgikonflikti tõttu nimetati Bookcase 2004. aasta septembris Tellicoks. Toona anti välja Tellico 0.12, mis oli samane Bookcase 0.11-ga, välja arvatud nimemuutus.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Mida Tellico üldse tähendab?</para>
+</question>
+
+<answer>
+<para
+>Ma mõtlesin <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
+>veel mitme nime</ulink
+> peale, millest mõned olid seotud ka raamatutega. Kuid Tellico suudab käidelda palju rohkem kui ainult raamatuid ning pealegi on see hobi, nii et ma valisin enda meelest kenasti kõlava nime, mis on tuletatud linna nimest, mille lähedal ma üles kasvasin.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Miks on otsingutulemustes nood lingid Amazon.com-ile?</para>
+</question>
+
+<answer>
+<para
+><ulink url="http://www.amazon.com/gp/browse.html/002-0927720-5265623?node=3440661"
+>Amazon.com-i veebiteenuste kasutamise lepingutingimused</ulink
+> nõuavad kõigi teenuselt hangitud piltide tagasilinkimist Amazon.com-ile, samuti lisalinki. Amazon.com-i kaastöötaja ID lisamine on kohustuslik, et oleks võimalik koguda kõik vajalikud tasud. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Miks ei kasutata tõelist andmebaasi?</para>
+</question>
+
+<answer>
+<para
+>Osaliselt seepärast, et &appname;ga alustamise taga seisis soov õppida tundma C++ keelt. Ma ei tundnud toona SQL-i ja ka praegu on sul sellest ainult põgus aimdus. Niisiis, &appname;ga ei alustatud kui relatsioonilise andmebaasiga ja see ei muutu enne seda, kui ma kunagi ei õpi tundma SQL-i ja mul ei teki põhjust ja aega muuta andmemudelit. Kui see sulle probleemiks on, siis ära lihtsalt kasuta &appname;t. </para>
+
+<para
+>Aga loomulikult ei takista miski sul endal lähtekoodis vajalikke muudatusi tegemast. </para>
+</answer>
+</qandaentry>
+
+</qandaset>
+
+</chapter>

@@ -1,0 +1,224 @@
+<chapter id="advanced">
+<title
+>Utilização Avançada</title>
+
+<sect1 id="command-line">
+<title
+>Opções da Linha de Comandos</title>
+
+<para
+>Ao executar o &appname; a partir da linha de comandos, existem várias opções para abrir os ficheiros de dados. Estas poderão ser consultadas com o comando <userinput
+>tellico --help</userinput
+>. </para>
+
+<programlisting
+>Utilização: tellico [opções] [ficheiro]
+
+Tellico - um gestor de colecções do KDE
+
+Opções:
+  --nofile                  Não reabrir o último ficheiro aberto
+  --bibtex                  Importar o &lt;ficheiro&gt; como um ficheiro bibtex
+  --mods                    Importar o &lt;ficheiro&gt; como um ficheiro MODS
+  --ris                     Importar o &lt;ficheiro&gt; como um ficheiro RIS
+
+Argumentos:
+  ficheiro                  O ficheiro a abrir
+</programlisting>
+
+</sect1>
+
+<sect1 id="dbus-interface">
+<title
+>A Interface de &DBus;</title>
+
+<para
+>O &appname; tem uma interface mínima de &DBus;, que pode ser usada para programar ou interagir com uma aplicação em execução, a partir da linha de comandos. Como acontece com todas as chamadas de &DBus;, terá de indicar a aplicação com que deseja interagir, assim como a interface em particular. O nome do serviço de &DBus; é <constant
+>org.kde.tellico</constant
+>. </para>
+
+<sect2 id="dbus-commands">
+<title
+>Comandos de &DBus;</title>
+
+<para
+>Estão disponíveis dois objectos &DBus; na interface do Tellico: <constant
+>Tellico</constant
+> e <constant
+>Collections</constant
+>.</para>
+
+<sect3 id="dbus-tellico">
+<title
+>O Objecto <constant
+>Tellico</constant
+></title>
+
+<para
+>A lista completa de comandos de &DBus; do objecto <constant
+>tellico</constant
+> encontra-se disponível abaixo:</para>
+
+<programlisting
+>bool importTellico(QString ficheiro, QString acção)
+bool importBibtex(QString ficheiro, QString acção)
+bool importMODS(QString ficheiro, QString acção)
+bool importRIS(QString ficheiro, QString acção)
+bool exportXML(QString ficheiro)
+bool exportZip(QString ficheiro)
+bool exportBibtex(QString ficheiro)
+bool exportHTML(QString ficheiro)
+bool exportCSV(QString ficheiro)
+QList&lt;int&gt; selectedEntries()
+QList&lt;int&gt; filteredEntries()
+void openFile(QString ficheiro)
+void setFilter(QString texto)
+bool showEntry(int id)
+</programlisting>
+
+<para
+>Para os quatro comandos de importação, o primeiro argumento é o ficheiro a importar, enquanto o segundo é a acção de importação. Estão disponíveis três acções:  <emphasis
+>replace</emphasis
+> (substituição), <emphasis
+>append</emphasis
+> (adição) e <emphasis
+>merge</emphasis
+> (reunião). São suportados quatro formatos de ficheiros na importação: ficheiros &XML; do Tellico, ficheiros Bibtex, ficheiros MODS e ficheiros RIS. </para>
+
+<para
+>A colecção aberta de momento no &appname; poderá ser exportada para um ficheiro, sendo no formato &XML; do Tellico, no formato ZIP do mesmo, em Bibtex, &HTML; ou em valores separados por vírgulas (CSV). </para>
+
+<para
+>Uma lista dos ID's dos elemento seleccionados ou filtrados de momento permite facilitar a apresentação ou actualização dos itens na janela.</para>
+
+<para
+>Poderá abrir um novo ficheiro de dados com o comando <command
+>openFile()</command
+>. Deverá indicar a localização completa.</para>
+
+<para
+>Poderá definir um novo filtro com o comando <command
+>setFilter()</command
+>, o qual é o equivalente de escrever o mesmo filtro no campo respectivo da janela principal.</para>
+
+<para
+>Dado um ID de um elemento, o <command
+>showEntry()</command
+> irá seleccionar esse item e mostrar os seus detalhes na janela principal.</para>
+</sect3>
+
+<sect3 id="dbus-collection">
+<title
+>O Objecto <constant
+>Collections</constant
+></title>
+
+<para
+>A lista completa de comandos &DBus; do objecto <constant
+>Collections</constant
+> encontra-se descrita abaixo:</para>
+
+<programlisting
+>int addEntry()
+bool removeEntry(int idItem)
+QStringList allValues(QString nomeCampo)
+QStringList entryValues(int idItem, QString nomeCampo)
+QStringList selectedBibtexKeys()
+QString entryBibtexKey(int idItem)
+bool setEntryValue(int idItem, QString nomeCampo, QString valor)
+bool addEntryValue(int idItem, QString nomeCampo, QString valor)
+</programlisting>
+
+<para
+>Poderá criar um novo elemento vazio na colecção actual, usando o comando <command
+>addEntry()</command
+>. O valor devolvido é o ID do elemento, que poderá ser usado para definir os valores dos campos do mesmo elemento. Poderá apagar um elemento da colecção com o comando <command
+>removeEntry()</command
+>. </para>
+
+<para
+>Se invocar o <command
+>allValues()</command
+> com apenas um nome de campo, irá devolver todos os valores desse campo, para os itens seleccionados de momento. Se não forem seleccionados nenhuns elementos, é devolvida uma lista vazia. Se for incluído num ID de elemento no comando, são devolvidos os valores dos campos para esse elemento em particular. </para>
+
+<para
+>Se a colecção actual for uma bibliografia, a invocação do <command
+>selectedBibtexKeys()</command
+> irá devolver a citação do Bibtex para todos os itens seleccionados. A 'bibtexKey' de um item específico poderá ser obtida com o comando <command
+>entryBibtexKey()</command
+>. </para>
+
+<para
+>Poderá editar os elementos directamente com a interface &DBus;. Dado um ID de elemento, o <command
+>setEntryValue()</command
+> irá configurar o valor do campo directamente. Para adicionar um valor, sem afectar os valores existentes, use o <command
+>addEntryValue()</command
+>. O novo valor é adicionado ao fim da lista existente. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="dbus-examples">
+<title
+>Exemplos de &DBus;</title>
+
+<para
+>Aqui estão alguns exemplos de programação do &appname; com a interface de &DBus;. </para>
+
+<screen width="40"
+><emphasis
+>Abrir um ficheiro do Bibtex</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.importBibtex "/home/ze/referência.bib" "replace"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Exportar um ficheiro do Bibtex</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documentos/referência.bib</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Apresentar a chave de citação da selecção actual</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.selectedBibtexKeys</userinput>
+<computeroutput
+>stephenson2004</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Adicionar um novo elemento e modificar o título</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>o_meu_id=`qdbus org.kde.tellico /Collections org.kde.tellico.addEntry`</userinput>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.setEntryValue $o_meu_id título "O Meu Livro Novo"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+</sect2>
+
+</sect1>
+
+</chapter>

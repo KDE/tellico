@@ -1,0 +1,696 @@
+<chapter id="hacking">
+<title
+>Улучшение &appname;</title>
+
+<para
+>Как и в случае других свободных программ, &appname; полностью открыта для улучшения. Написание сценариев для импорта, экспорта или изменения данных не представляет особой сложности. В этой главе рассказывается о том, как это сделать. </para>
+
+<sect1 id="file-format">
+<title
+>Формат файла</title>
+
+<para
+>По умолчанию файл данных &appname; представляет собой zip-архив, обычно с расширением <literal role="extension"
+>.tc</literal
+>. Внутри архива находится файл верхнего уровня <filename
+>tellico.xml</filename
+>. Изображения могут либо содержаться в папке <filename
+>images/</filename
+> архива, либо включаться в данные &XML; напрямую в кодировке Base64. Изображения также могут храниться внутри папки данных приложения: в этом случае они отсутствуют в файле данных. &appname; также позволяет загрузить отдельно сам файл &XML; в несжатом виде. </para>
+
+<sect2 id="xml-format">
+<title
+>Данные &XML;</title>
+
+ 
+
+<sect3 id="coll-xml-data">
+<title
+>Коллекция</title>
+<programlisting
+><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V11.0//EN" "http://periapsis.org/tellico/dtd/v11/tellico.dtd">
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="My Books" type="2">
+ </collection>
+</tellico>
+]]>
+</programlisting>
+
+<para
+>Файл начинается с обязательного объявления &XML; и кодировки, за которыми следует описание типа документа (doctype). DТD-версия типа документа увеличивается при добавлении нового типа поля или указании дополнительных свойств для полей по умолчанию. &appname; позволяет открыть и прочитать любые предыдущие DTD-версии, но сохранение файлов выполняется в текущей версии. Расположение DTD указывает на сам файл DTD. </para>
+
+<para
+>Элемент верхнего уровня — <markup
+>&lt;tellico&gt;</markup
+>. Он содержит объявление пространства имён и версию синтаксиса файла по умолчанию (они всегда должны соответствовать DTD). </para>
+
+<para
+>Элемент <markup
+>&lt;tellico&gt;</markup
+> содержит один элемент <markup
+>&lt;collection&gt;</markup
+>. Указание нескольких коллекций будет проигнорировано. Атрибут <markup
+>title</markup
+> содержит название коллекции, а <markup
+>type</markup
+> определяет содержащиеся в коллекции типы записей. Допустимые типы <link linkend="collection-type-values"
+>перечислены в следующем разделе</link
+>. Необязательный атрибут <markup
+>entryTitle</markup
+> позволяет указать название записей для пользовательской коллекции и является множественным. </para>
+</sect3>
+
+<sect3 id="fields-xml-data">
+<title
+>Поля</title>
+
+<programlisting
+><![CDATA[
+  <fields>
+   <field flags="8" title="Title" category="General" format="1" type="1" name="title" />
+   <field flags="7" title="Author" category="General" format="2" type="1" name="author" />
+   <field flags="2" title="Binding" category="General" allowed="Hardback;Paperback;Trade Paperback;E-Book;Magazine;Journal" format="4" type="3" name="binding" >
+    <prop name="default"
+>Мягкий переплёт</prop>
+   </field>
+   <field flags="6" title="Publisher" category="Publishing" format="0" type="1" name="publisher" />
+   <field flags="4" title="Edition" category="Publishing" format="0" type="1" name="edition" />
+   <field flags="3" title="Copyright Year" category="Publishing" format="4" type="6" name="cr_year" />
+   <field flags="2" title="Publication Year" category="Publishing" format="4" type="6" name="pub_year" />
+   <field flags="0" title="ISBN#" category="Publishing" format="4" type="1" name="isbn" description="International Standard Book Number" />
+   <field flags="7" title="Genre" category="Classification" format="0" type="1" name="genre" />
+   <field flags="7" title="Keywords" category="Classification" format="0" type="1" name="keyword" />
+   <field flags="0" title="Front Cover" category="Front Cover" format="4" type="10" name="cover" />
+   <field flags="0" title="Comments" category="Personal" format="4" type="1" name="comments" />
+   <field title="Rating" flags="2" category="Personal" format="4" type="14" name="rating">
+    <prop name="maximum"
+>5</prop>
+    <prop name="minimum"
+>1</prop>
+   </field>
+   <field title="ID" flags="32" category="Personal" format="4" type="6" name="id">
+    <prop name="template"
+>%{@id}</prop>
+   </field>
+
+  </fields>
+]]>
+</programlisting>
+
+<para
+>Все поля определяются внутри элемента <markup
+>&lt;fields&gt;</markup
+> (допустимо указывать только один такой элемент). Все сведения о поле, за исключением свойств, указываются в виде атрибутов элемента <markup
+>&lt;field&gt;</markup
+>. Допустимые значения атрибутов <markup
+>flags</markup
+>, <markup
+>format</markup
+> и <markup
+>type</markup
+> указаны в <link linkend="field-type-values"
+>следующем разделе</link
+>. </para>
+
+<para
+>Свойства поля позволяют указать значения поля по умолчанию, диапазоны значений рейтингов, шаблоны зависимых значений и так далее. Выше приведены примеры указания значения по умолчанию, максимального значения рейтинга и шаблона для поля с зависимым идентификатором.  </para>
+
+ 
+
+</sect3>
+
+<sect3 id="entries-xml-data">
+<title
+>Записи</title>
+
+<programlisting
+><![CDATA[
+  <entry>
+   <title
+>C++ Programming Language, The</title>
+   <authors>
+    <author
+>Stroustrup, Bjarne</author>
+   </authors>
+   <publisher
+>Addison-Wesley Pub Co</publisher>
+   <edition
+>3rd</edition>
+   <pub_year
+>1997</pub_year>
+   <isbn
+>0-201-88954-4</isbn>
+   <genres>
+    <genre
+>Non-Fiction</genre>
+   </genres>
+   <keywords>
+    <keyword
+>Programming</keyword>
+    <keyword
+>Computers</keyword>
+   </keywords>
+   <cover
+>cf65a2f023b6cb9e9233323dca10ac7c.jpeg</cover>
+  </entry>
+]]>
+</programlisting>
+
+<para
+>Элемент, название которого совпадает с названием поля, возможно указать в <markup
+>&lt;entry&gt;</markup
+>. Если поле позволяет указывать несколько значений, для создания элемента к названию поля добавляется буква <emphasis
+>s</emphasis
+>, и каждое значение добавляется как потомок этого элемента (как в приведённом выше примере с полями автора, жанра и ключевого слова). </para>
+
+<para
+>Когда в коллекцию будут добавлены дополнительные поля, файл данных перестанет соответствовать DTD. Но в &appname; используется обработчик &XML;, который не выполняет проверку, поэтому проблем в работе приложения не возникнет. </para>
+</sect3>
+
+<sect3 id="images-xml-data">
+<title
+>Изображения</title>
+<programlisting
+><![CDATA[
+  <images>
+   <image width="111" format="JPEG" height="140" id="cf65a2f023b6cb9e9233323dca10ac7c.jpeg" />
+  </images>
+]]>
+</programlisting>
+
+<para
+>Внутри элемента <markup
+>&lt;images&gt;</markup
+> перечислены все изображения, на которые ссылается запись, а также указаны атрибуты, которые описывают размер, формат и идентификатор изображения. Если изображение содержится в файле ZIP, элемент будет пустым. Если элемент не пуст, данные изображения могут содержаться в &XML;-потоке в виде текста в кодировке Base64. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-type-values">
+<title
+>Значения типов коллекций</title>
+
+<para
+>Тип коллекции указывается в атрибуте типа элемента коллекции. Значение совпадает со значением перечисления <type
+>Type</type
+> в файле <filename
+>src/collection.h</filename
+>. </para>
+
+<table>
+<title
+>Значения типов коллекций</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Тип коллекции</entry>
+<entry
+>Значение</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Пользовательская коллекция</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Коллекция книг</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Коллекция фильмов</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Коллекция музыки</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Библиография</entry
+><entry
+>5</entry
+></row>
+<row
+><entry
+>Коллекция комиксов</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>Коллекция вин</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Коллекция монет</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Коллекция марок</entry
+><entry
+>9</entry
+></row>
+<row
+><entry
+>Коллекция карточек</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Коллекция видеоигр</entry
+><entry
+>11</entry
+></row>
+<row
+><entry
+>Каталог файлов</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Коллекция настольных игр</entry
+><entry
+>13</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="field-type-values">
+<title
+>Значения типов полей</title>
+
+<para
+>&appname; включит в коллекцию все поля по умолчанию, если первый элемент поля называется <emphasis
+>_default</emphasis
+>. Для полей типа <emphasis
+>Большой текст</emphasis
+>, <emphasis
+>Таблица</emphasis
+> и <emphasis
+>Изображение</emphasis
+> категория поля должна совпадать с названием поля. </para>
+
+<para
+>Тип поля указывается в атрибуте типа элемента поля. Значение совпадает со значением перечисления <type
+>FieldType</type
+> в файле <filename
+>src/field.h</filename
+>. </para>
+
+<table>
+<title
+>Значения типов полей</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Тип поля</entry>
+<entry
+>Значение</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Простой текст</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Большой текст</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Выбор</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Выбор да/нет</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Номер</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>&URL;-адрес</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Таблица</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Изображение</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Дата</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Рейтинг</entry
+><entry
+>14</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>Для поля возможно установить различные флаги, указав их как побитовое ИЛИ в атрибуте флага элемента поля. Флаг, запрещающий пользователю удалять поле, следует использовать, например, для ключей цитирования библиографических записей. </para>
+
+<table>
+<title
+>Значения флагов полей</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Флаги полей</entry>
+<entry
+>Значение</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Разрешить несколько значений</entry
+><entry
+><constant
+>0x01</constant
+></entry
+></row>
+<row
+><entry
+>Разрешить группировку</entry
+><entry
+><constant
+>0x02</constant
+></entry
+></row>
+<row
+><entry
+>Разрешить дополнение</entry
+><entry
+><constant
+>0x04</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>Запретить удаление</emphasis
+></entry
+><entry
+><constant
+>0x08</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>Запретить редактирование</emphasis
+></entry
+><entry
+><constant
+>0x10</constant
+></entry
+></row>
+<row
+><entry
+>Зависимое значение</entry
+><entry
+><constant
+>0x20</constant
+></entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>Формат поля указывается в атрибуте формата элемента поля. <emphasis
+>Форматирование дат</emphasis
+> в настоящее время не используется. При группировке по <emphasis
+>Людям</emphasis
+> используются все поля с <emphasis
+>Форматированием имён</emphasis
+>. Установка флага <emphasis
+>Зависимое значение</emphasis
+> означает, что значение этого поля создаётся из значений других полей с помощью шаблона. </para>
+
+<table>
+<title
+>Значения формата поля</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Формат поля</entry>
+<entry
+>Значение</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Только повышение регистра</entry
+><entry
+>0</entry
+></row>
+<row
+><entry
+>Форматирование названия</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Форматирование имени</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+><emphasis
+>Форматирование даты</emphasis
+></entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Без форматирования</entry
+><entry
+>4</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="hidden-options">
+<title
+>Скрытые параметры настройки</title>
+
+<para
+>В &appname; имеется несколько дополнительных параметров настройки, которые не отображаются в <interface
+>диалоге конфигурации</interface
+>. Они не настолько важны, чтобы их стоило включать в этот диалог, но, тем не менее, могут быть прочитаны приложением из файла конфигурации (так как эти параметры могут быть полезны некоторым пользователям). </para>
+
+<para
+>Параметры &appname; сохраняются в файле, который находится в домашней папке пользователя, а именно: <filename
+>$<envar
+>KDEHOME</envar
+>/share/config/tellicorc</filename
+>. В этом файле параметры распределены по группам. Названия групп заключены в квадратные скобки, например: [General Options]. Чтобы добавить параметр в группу <emphasis
+>General Options</emphasis
+>, найдите в файле параметров строку с названием этой группы. Если такой строки нет, создайте её, добавив строку с текстом [General Options]. После этого под названием группы будет возможно добавить параметр. </para>
+
+<sect2 id="hidden-general-options">
+<title
+>[General Options]</title>
+
+<para
+>Эти параметры следует поместить в группу <emphasis
+>General Options</emphasis
+>. </para>
+
+<sect3>
+<title
+>Максимальный размер значка</title>
+
+<para
+>Этот параметр позволяет изменить максимальный размер значков, которые отображаются в режиме <interface
+>представления значков</interface
+>. Значение по умолчанию: 96. Размер должен находиться в диапазоне от 32 до 512. </para>
+</sect3>
+
+<sect3>
+<title
+>Пример</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Размер кэша значков</title>
+
+<para
+>Этот параметр позволяет изменить максимальное количество значков для кэширования в памяти. Значение по умолчанию: 1000. </para>
+</sect3>
+
+<sect3>
+<title
+>Пример</title>
+<informalexample>
+<para
+><userinput
+>Icon Cache Size=100</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Пример</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Размер кэша изображений</title>
+
+<para
+>Этот параметр позволяет изменить максимальное количество памяти (в байтах), которое используется для кэширования всех изображений. Значение по умолчанию: 67108864. </para>
+</sect3>
+
+<sect3>
+<title
+>Пример</title>
+<informalexample>
+<para
+><userinput
+>Image Cache Size=256000000</userinput
+></para>
+</informalexample>
+</sect3>
+
+</sect2>
+
+<sect2 id="hidden-bibtex-options">
+<title
+>[Options - bibtex]</title>
+
+<para
+>Эти параметры следует поместить в группу <emphasis
+>Options - bibtex</emphasis
+>. </para>
+
+<sect3>
+<title
+>lyxpipe</title>
+
+<para
+>Этот параметр позволяет указать расположение lyxpipe для отправки библиографических цитат. Оно не должно содержать суффикс <literal role="extension"
+>.in</literal
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Пример</title>
+<informalexample>
+<para
+><userinput
+>lyxpipe=$HOME/.lyx/lyxpipe</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
+
+</sect1>
+
+<sect1 id="bibtex-translation">
+<title
+>Преобразование символов BibTeX</title>
+
+<para
+>При импорте или экспорте файлов BibTeX выполняется преобразование определённых символов из формата TeX в Юникод и обратно. Эти соответствия символов содержатся в файле <filename
+>bibtex-translation.xml</filename
+>, который расположен в каталоге установочных данных. Соответствия возможно изменить любым необходимым образом. Элемент ключа содержит символ Юникода, а находящиеся внутри элементы строк содержат эквиваленты TeX (соответствие может быть типа «один-ко-многим»). Первый из них используется при экспорте в BibTeX. </para>
+
+<programlisting
+><![CDATA[
+  <key char="À">
+    <string
+>{\`A}</string>
+    <string
+>\`{A}</string>
+  </key>
+]]>
+</programlisting>
+
+</sect1>
+
+<sect1 id="xslt-tricks">
+<title
+>Советы по работе с XSLT</title>
+
+<para
+>Далее приводятся советы по написанию XSLT для обработки данных &XML; &appname;: (появятся позднее). </para>
+</sect1>
+
+</chapter>

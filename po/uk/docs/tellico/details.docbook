@@ -1,0 +1,860 @@
+<chapter id="details">
+<title
+>Подробиці щодо &appname;</title>
+
+<sect1 id="field-types">
+<title
+>Типи полів</title>
+
+<para
+>У кожній з колекцій може бути довільна кількість полів. &appname; підтримує одинадцять типів полів, за допомогою яких можна вказати найрізноманітніші дані. </para>
+
+<sect2 id="line">
+<title
+>Простий текст</title>
+
+<para
+>Найпростіший тип полів називається <emphasis
+>Простий текст</emphasis
+>. На значення цього типу полів не накладається ніяких обмежень, віджетом для введення даних є просте рядкове поле для введення тексту. Цей тип полів пасує до тих полів, у яких годі очікувати довгих значень, зокрема полів автора і жанру. </para>
+
+</sect2>
+<sect2 id="number">
+<title
+>Число</title>
+
+<para
+>Тип <emphasis
+>Число</emphasis
+> ідентичний до типу <emphasis
+>Простий текст</emphasis
+>, але значення поля такого типу може бути лише числовим. Якщо ви натиснете заголовок стовпчика <emphasis
+>Число</emphasis
+>, записи буде впорядковано за зростанням або спаданням чисел. Для введення даних цього типу використовується стандартне рядкове поле вводу з маленькими стрілочками, призначеними для збільшення або зменшення значення. Форматування до полів цього типу не застосовується.</para>
+
+</sect2>
+
+<sect2 id="url">
+<title
+>&URL;</title>
+
+<para
+>У полях типу <emphasis
+>&URL;</emphasis
+> можна зберігати посилання на інші документи. Для відкриття таких документів буде використано стандартні прив’язки типів файлів до програм, які визначено у &kde;. Програма не виконує перевірки коректності даних, введених у поле <emphasis
+>&URL;</emphasis
+>, але ви не зможете перейти за некоректними посиланнями. Для введення записів цього типу використовується стандартне рядкове поле введення з кнопкою, натискання якої відкриває стандартне діалогове вікно відкриття файлів, але ви можете ввести довільну адресу &URL;. Відносні адреси &URL; визначатимуться за адресою файла даних після його збереження. </para>
+
+<para
+>У вікні <link linkend="entry-editor"
+><interface
+>Редактора записів</interface
+></link
+> мітка стане посиланням, а у <link linkend="entry-view"
+><interface
+>Перегляді записів</interface
+></link
+> буде використано справжнє гіперпосилання. Поля цього типу зручно використовувати для посилання на файли <acronym
+>PDF</acronym
+> записів бібліографії або, наприклад, на файли рецензій на фільми. До вмісту поля не буде застосовуватися форматування.</para>
+
+<para
+>Ви також можете використовувати відносні адреси &URL;. Програма оброблятиме такі адреси відносно адреси файла даних &appname;. Рядок адреси у <link linkend="entry-editor"
+><interface
+>редакторі записів</interface
+></link
+> надає можливість автоматичного доповнення для локальних адрес файлів. Якщо ви бажаєте, щоб адреса &URL; з діалогового вікна вибору файлів &kde; вважалася відносною щодо адреси документа, ви маєте встановити властивість поля &URL; <emphasis
+>relative</emphasis
+> у значення <emphasis
+>true</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="para">
+<title
+>Стаття</title>
+
+<para
+>Для довших текстових фрагментів можна скористатися типом <emphasis
+>Стаття</emphasis
+>, за якого програма використовуватиме більше поле редагування. У полі <emphasis
+>Стаття</emphasis
+> не можна вказувати декілька значень, це поле не буде автоматично відформатовано. Це поле не можна використовувати для групування. До полів цього типу можна вводити резюме, сюжет або рецензії.</para>
+
+</sect2>
+
+<sect2 id="choice">
+<title
+>Вибір</title>
+
+<para
+>Якщо значення поля можна звести до декількох варіантів, можна скористатися типом <emphasis
+>Вибір</emphasis
+>. Прийнятні значення буде показано у спадному списку. Очевидно, що декілька значень використовувати не можна. Полями типу <emphasis
+>Вибір</emphasis
+> можуть бути поля типу бібліографії або особистих оцінок.</para>
+
+<para
+>Для відокремлення значень слід використовувати крапки з комою.</para>
+
+</sect2>
+
+<sect2 id="bool">
+<title
+>Вибір так/ні</title>
+
+<para
+>Для полів, які можуть приймати лише значення «так» і «ні», призначено тип <emphasis
+>Вибір так/ні</emphasis
+>. Типово у полі буде значення «ні». Поля <emphasis
+>Вибір так/ні</emphasis
+> не форматуються, їх обмежено одним значенням. Для внутрішньої обробки програмою значення поля зберігатиметься як <emphasis
+><constant
+>true</constant
+></emphasis
+> (так) або <emphasis
+><constant
+>false</constant
+></emphasis
+> (ні). Прикладами таких полів є поле подарунку або позичання.</para>
+
+</sect2>
+
+<sect2 id="date">
+<title
+>Дата</title>
+
+<para
+>У полі <emphasis
+>Дата</emphasis
+> можна вказати день, місяць і рік. Дату буде показано у стандартному форматі РРРР-ММ-ДД, за використання якого спрощується впорядкування. Для вибору дати за допомогою вказівника миші можна скористатися стандартним інструментом вибору дати &kde;, дату також можна ввести і напряму. Значення року, місяця і дня, вказані у полі не обов’язково мають бути непорожніми, — ви, наприклад, можете ввести лише рік. Використовувати декілька значень не можна. </para>
+
+</sect2>
+
+<sect2 id="table">
+<title
+>Таблиця</title>
+
+<para
+>У полях <emphasis
+>Таблиця</emphasis
+> можна зберігати один або декілька стовпчиків значень. У <link linkend="entry-editor"
+><interface
+>редакторі записів</interface
+></link
+> поля такого типу буде показано як електронну таблицю з пронумерованими рядками. Якщо ви оберете останній з рядків, програма додасть ще один рядок до таблиці. Автоматичне доповнення не працюватиме. Поля такого типу можна використовувати для списків глав книги, серій фільму або пісень з альбому. Поля <emphasis
+>Таблиця</emphasis
+> завжди є категорією самих себе. </para>
+
+<para
+>Кількість стовпчиків, яка не може перевищувати десяти, визначається додаванням властивості <emphasis
+>columns</emphasis
+> до визначення поля. Змінити заголовок стовпчика можна наведенням вказівника миші на його заголовок з наступним клацанням правою кнопкою миші і вибором нової назви з контекстного меню або встановленням значення властивості поля з назвою <emphasis
+>column1</emphasis
+> тощо. </para>
+
+<para
+>За використання <interface
+>редактора записів</interface
+> для полів <emphasis
+>Таблиця</emphasis
+> ви можете перевпорядкувати рядки: просто натисніть клавішу &Ctrl; і перетягніть рядок на нове місце. Крім того, ви можете клацанням лівою кнопкою миші викликати контекстне меню, за допомогою якого до таблиці можна додавати рядки або вилучати рядки. </para>
+
+</sect2>
+
+<sect2 id="image">
+<title
+>Зображення</title>
+
+<para
+>У полях типу <emphasis
+>Зображення</emphasis
+> зберігаються зображення у будь-якому з форматів, що підтримуються &kde;. Серед типових форматів <acronym
+>PNG</acronym
+> та <acronym
+>JPEG</acronym
+>. Зображення може бути збережено у самому файлі даних &appname; або у каталозі даних програми. Для визначення назви файла використовується стандартне діалогове вікно вибору файла &kde;, отже ви можете вказати адресу &URL; або адресу якогось локального файла. Крім того, ви можете просто перетягнути зображення з програми для керування файлами або переглядача. </para>
+
+</sect2>
+
+<sect2 id="rating">
+<title
+>Рейтинг</title>
+
+<para
+>Поля <emphasis
+>Рейтинг</emphasis
+> призначено для показу кількості зірочок, які визначають числовий рейтинг запису. Типово, максимальним рейтингом є «п’ять». Мінімальне і максимальне значення рейтингу можна змінити встановленням властивостей у полі визначення <interface
+>діалогового вікна полів збірки</interface
+>, ці поля називаються <emphasis
+>minimum</emphasis
+> і <emphasis
+>maximum</emphasis
+>, відповідно. </para>
+
+</sect2>
+
+<sect2 id="derived">
+<title
+>Поля похідних значень</title>
+
+<para
+>Окремим випадком є поля з похідними значеннями. Тип такого поля відповідає типовому типу значення, що міститься у полі, але саме значення будується на основі інших полів за допомогою рядка формату у описі поля. Наприклад, якщо у такому полі вказано опис <userinput
+>%{title} %{year}</userinput
+>, значенням цього поля буде назва, за якою буде вказано рік. Поля подібного типу використовуються в основному для полів назв у збірках монет, марок, карток та вин. Для форматування у описі можна використовувати або внутрішню назву поля або заголовок поля. </para>
+
+<para
+>Щоб обрати окреме значення для поля з багатьма значеннями, додайте до шаблону номер позиції, наприклад <userinput
+>%{author:1}</userinput
+>, щоб отримати лише запис першого автора. Номер позиції може бути від’ємним, тоді відлік виконуватиметься з кінця, отже <userinput
+>%{author:-1}</userinput
+> відповідає запису останнього автора. Можна отримувати значення у верхньому або нижньому регістрі шляхом встановлення прапорців шаблону, наприклад <userinput
+>%{author:1/l}</userinput
+> — запис першого автора у нижньому регістрі, а <userinput
+>%{author:1/u}</userinput
+> — у верхньому. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-types">
+<title
+>Типи збірок</title>
+
+<para
+>&appname; типово підтримує дванадцять окремих типів збірок: книги, бібліографічні записи, книги коміксів, відео, музика, відеоігри, videos, music, video games, картки, монети, марки, ігри на дошці і каталоги файлів. Крім того, для всіх інших елементів колекціювання передбачено порожній загальний шаблон збірки. До типових шаблонів збірок включено лише загальний набір полів. Ви можете додавати, змінювати або вилучати ці поля у разі потреби. Єдиною вимогою є наявність у збірці поля <emphasis
+>Назва</emphasis
+>, за допомогою якого зможе працювати належним чином <link linkend="group-view"
+><interface
+>перегляд груп</interface
+></link
+>. Для збірок певних типів роль цього поля може виконувати поле <link linkend="derived"
+>похідного значення</link
+>, яке містить комбінацію значень одного або декількох інших полів. </para>
+
+<para
+>Загалом кажучи, не існує функціональних відмінностей між збірками різних типів. Створити нетипову збірку для ваших книг так само просто, як і скористатися типовою збіркою книг. Але &appname; обирає піктограми за типом збірки, крім того, у певної збірки може бути певні спеціалізовані функціональні можливості, отже, за можливості, скористайтеся типовою збіркою. Отже, якщо ви бажаєте створити збірку вин, але вам не подобаються типові поля для цієї збірки, створіть типову збірку вин, а потім вилучіть всі типові поля. Таким чином, ви дасте зрозуміти &appname;, що створена вами збірка залишається збіркою вин. </para>
+
+<para
+>Типово, у збірках всіх типів міститься поле <emphasis
+>Ід.</emphasis
+> (ідентифікатор), у якому міститиметься ідентифікаційний номер запису. Крім того, за винятком каталогу файлів, у кожній збірці містяться поля, що відповідають часу створення запису у збірці і часу, коли цей запис було востаннє змінено. </para>
+
+<sect2 id="book-collection">
+<title
+>Збірки книг</title>
+<para
+>У збірках книг передбачено 26 типових полів: <emphasis
+>Назва</emphasis
+>, <emphasis
+>Підзаголовок</emphasis
+>, <emphasis
+>Автор</emphasis
+>, <emphasis
+>Палітурка</emphasis
+>, <emphasis
+>Дата покупки</emphasis
+>, <emphasis
+>Ціна</emphasis
+>, <emphasis
+>Видавець</emphasis
+>, <emphasis
+>Видання</emphasis
+>, <emphasis
+>Рік здачі до друку</emphasis
+>, <emphasis
+>Рік видання</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>LCCN#</emphasis
+>, <emphasis
+>Кількість сторінок</emphasis
+>, <emphasis
+>Мова</emphasis
+>, <emphasis
+>Жанр</emphasis
+>, <emphasis
+>Ключові слова</emphasis
+>, <emphasis
+>Серія</emphasis
+>, <emphasis
+>Номер у серії</emphasis
+>, <emphasis
+>Стан</emphasis
+>, <emphasis
+>Підписано</emphasis
+>, <emphasis
+>Прочитано</emphasis
+>, <emphasis
+>Дарований</emphasis
+>, <emphasis
+>Даний у борг</emphasis
+>, <emphasis
+>Рейтинг</emphasis
+>, <emphasis
+>Обкладинка</emphasis
+>, <emphasis
+>Сюжет</emphasis
+> і <emphasis
+>Коментарі</emphasis
+>. </para>
+
+<para
+>Поле <emphasis
+>ISBN#</emphasis
+> є особливим, оскільки номери <acronym
+>ISBN</acronym
+> автоматично форматуються, обчислюється також і шифр перевірки. &appname; розпізнає поле <acronym
+>ISBN</acronym
+>, якщо внутрішньою назвою поля є <emphasis
+>isbn</emphasis
+>. Якщо ви вилучили це поле або вам потрібно додати його до збірки іншого типу, створіть поле з назвою <emphasis
+>ISBN</emphasis
+> і застосуйте зміну, після цього поверніться до цього поля і змініть його назву бажаним чином. &appname; створює внутрішню назву на основі початкової назви, але ніколи не змінює внутрішню назву після зміни видимої назви. </para>
+
+</sect2>
+
+<sect2 id="bibliography">
+<title
+>Бібліографії</title>
+<para
+>Для бібліографій передбачено 25 типових полів: <emphasis
+>Назва</emphasis
+>, <emphasis
+>Тип запису</emphasis
+>, <emphasis
+>Автор</emphasis
+>, <emphasis
+>Ключ Bibtex</emphasis
+>, <emphasis
+>Назва книги</emphasis
+>, <emphasis
+>Редактор</emphasis
+>, <emphasis
+>Організація</emphasis
+>, <emphasis
+>Видавець</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>Адреса</emphasis
+>, <emphasis
+>Видання</emphasis
+>, <emphasis
+>Кількість сторінок</emphasis
+>, <emphasis
+>Рік</emphasis
+>, <emphasis
+>Журнал</emphasis
+>, <emphasis
+>Місяць</emphasis
+>, <emphasis
+>Число</emphasis
+>, <emphasis
+>Як видавалася</emphasis
+>, <emphasis
+>Глава</emphasis
+>, <emphasis
+>Серія</emphasis
+>, <emphasis
+>Номер у серії</emphasis
+>, <emphasis
+>Том</emphasis
+>, <emphasis
+>Рекомендації</emphasis
+>, <emphasis
+>Ключові слова</emphasis
+>, <emphasis
+>Резюме</emphasis
+> і <emphasis
+>Замітки</emphasis
+>. </para>
+
+<para
+>Хоча бібліографічні збірки і не пов’язано напряму з bibtex, типовий набір полів було запозичено з типового набору полів bibtex. Під час експорту до bibtex для визначення відповідності полям bibtex кожного з полів буде використано властивість, яка називається <emphasis
+>bibtex</emphasis
+>. Якщо ви додали поле до бібліографії, а потім бажаєте експортувати це поле до bibtex, не забудьте встановити властивість <emphasis
+>bibtex</emphasis
+> для цього поля. </para>
+
+<para
+>У &appname; передбачено декілька особливих функцій для бібліографій. Ви можете додавати, змінювати і вилучати рядкові макроси Bibtex не виходячи з &appname;, згодом під час експорту до bibtex вам буде запропоновано варіант експорту з розгортанням макросів. Посилання Bibtex  може бути передано до зовнішньої програми, зокрема <application
+>LyX</application
+> або <application
+>Kile</application
+>, за допомогою так званого <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+<para
+>Збірки книг можна перетворювати на бібліографії. До збірки буде додано типові поля bibtex, крім того, буде встановлено властивості bibtex. Цю функціональну можливість передбачено в основному для перетворення старих збірок, створених до розподілу на типи «бібліографія» і «збірка книг». </para>
+</sect2>
+
+<sect2 id="comic-book-collection">
+<title
+>Збірки коміксів</title>
+<para
+>Для книг коміксів передбачено 23 типових поля: <emphasis
+>Назва</emphasis
+>, <emphasis
+>Підзаголовок</emphasis
+>, <emphasis
+>Письменник</emphasis
+>, <emphasis
+>Художник</emphasis
+>, <emphasis
+>Серія</emphasis
+>, <emphasis
+>Випуски</emphasis
+>, <emphasis
+>Видавець</emphasis
+>, <emphasis
+>Видання</emphasis
+>, <emphasis
+>Рік видання</emphasis
+>, <emphasis
+>Кількість сторінок</emphasis
+>, <emphasis
+>Країна</emphasis
+>, <emphasis
+>Мова</emphasis
+>, <emphasis
+>Жанр</emphasis
+>, <emphasis
+>Ключові слова</emphasis
+>, <emphasis
+>Стан</emphasis
+>, <emphasis
+>Дата покупки</emphasis
+>, <emphasis
+>Ціна</emphasis
+>, <emphasis
+>Підписано</emphasis
+>, <emphasis
+>Дарований</emphasis
+>, <emphasis
+>Даний у борг</emphasis
+>, <emphasis
+>Обкладинка</emphasis
+>, <emphasis
+>Сюжет</emphasis
+>, і <emphasis
+>Коментарі</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="video-collection">
+<title
+>Збірки фільмів</title>
+<para
+>Для збірок відео передбачено 30 типових полів: <emphasis
+>Назва</emphasis
+>, <emphasis
+>Носій</emphasis
+>, <emphasis
+>Рік запису</emphasis
+>, <emphasis
+>Віковий рейтинг</emphasis
+>, <emphasis
+>Жанр</emphasis
+>, <emphasis
+>Регіон</emphasis
+>, <emphasis
+>Країна</emphasis
+>, <emphasis
+>Формат</emphasis
+>, <emphasis
+>Ролі</emphasis
+>, <emphasis
+>Режисер</emphasis
+>, <emphasis
+>Виробник</emphasis
+>, <emphasis
+>Сценарист</emphasis
+>, <emphasis
+>Композитор</emphasis
+>, <emphasis
+>Студія</emphasis
+>, <emphasis
+>Мови</emphasis
+>, <emphasis
+>Мова субтитрів</emphasis
+>, <emphasis
+>Звукові доріжки</emphasis
+>, <emphasis
+>Тривалість</emphasis
+>, <emphasis
+>Співвідношення сторін</emphasis
+>, <emphasis
+>Широкоекранний</emphasis
+>, <emphasis
+>Кольоровий</emphasis
+>, <emphasis
+>Режисерська версія</emphasis
+>, <emphasis
+>Сюжет фільму</emphasis
+>, <emphasis
+>Особистий рейтинг</emphasis
+>, <emphasis
+>Дата покупки</emphasis
+>, <emphasis
+>Ціна</emphasis
+>, <emphasis
+>Дарований</emphasis
+>, <emphasis
+>Даний у борг</emphasis
+>, <emphasis
+>Рімейк</emphasis
+> і <emphasis
+>Коментарі</emphasis
+>. </para>
+
+<para
+>Поле <emphasis
+>Ролі</emphasis
+> — це <link linkend="table"
+>таблиця</link
+>, що складається з двох стовпчиків, у першому стовпчику слід вказувати ім’я актора чи акторки, а у другому — роль, яку було зіграно. Значення поля <emphasis
+>Тривалість</emphasis
+> слід вказувати у хвилинах, хоча ви, звичайно ж, можете змінити одиницю виміру. </para>
+</sect2>
+
+<sect2 id="music-collection">
+<title
+>Збірки музики</title>
+<para
+>Для збірок музики передбачено 15 типових полів: <emphasis
+>Назва</emphasis
+>, <emphasis
+>Носій</emphasis
+>, <emphasis
+>Виконавець</emphasis
+>, <emphasis
+>Лейбл</emphasis
+>, <emphasis
+>Рік</emphasis
+>, <emphasis
+>Жанр</emphasis
+>, <emphasis
+>Композиції</emphasis
+>, <emphasis
+>Рейтинг</emphasis
+>, <emphasis
+>Дата покупки</emphasis
+>, <emphasis
+>Ціна</emphasis
+>, <emphasis
+>Дарований</emphasis
+>, <emphasis
+>Взятий у борг</emphasis
+>, <emphasis
+>Ключові слова</emphasis
+>, <emphasis
+>Рімейк</emphasis
+> і <emphasis
+>Коментарі</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="game-collection">
+<title
+>Збірки ігор</title>
+<para
+>Для збірок відеоігор передбачено 16 типових полів: <emphasis
+>Назва</emphasis
+>, <emphasis
+>Платформа</emphasis
+>, <emphasis
+>Жанр</emphasis
+>, <emphasis
+>Рік випуску</emphasis
+>, <emphasis
+>Видавець</emphasis
+>, <emphasis
+>Розробник</emphasis
+>, <emphasis
+>Рейтинг ESRB</emphasis
+>, <emphasis
+>Опис</emphasis
+>, <emphasis
+>Особистий рейтинг</emphasis
+>, <emphasis
+>Пройдена</emphasis
+>, <emphasis
+>Дата покупки</emphasis
+>, <emphasis
+>Ціна</emphasis
+>, <emphasis
+>Дарований</emphasis
+>, <emphasis
+>Взятий у борг</emphasis
+>, <emphasis
+>Рімейк</emphasis
+> і <emphasis
+>Коментарі</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="card-collection">
+<title
+>Збірки поштових карток</title>
+<para
+>Для збірок карток передбачено 17 типових полів: <emphasis
+>Назва</emphasis
+>, <emphasis
+>Гравець</emphasis
+>, <emphasis
+>Команда</emphasis
+>, <emphasis
+>Фірма</emphasis
+>, <emphasis
+>Номер картки</emphasis
+>, <emphasis
+>Рік</emphasis
+>, <emphasis
+>Серія</emphasis
+>, <emphasis
+>Тип картки</emphasis
+>, <emphasis
+>Дата покупки</emphasis
+>, <emphasis
+>Ціна</emphasis
+>, <emphasis
+>Місце</emphasis
+>, <emphasis
+>Дарований</emphasis
+>, <emphasis
+>Ключові слова</emphasis
+>, <emphasis
+>Кількість</emphasis
+>, <emphasis
+>Зображення передньої сторони</emphasis
+>, <emphasis
+>Зображення задньої сторони</emphasis
+> і <emphasis
+>Коментарі</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="coin-collection">
+<title
+>Збірки монет</title>
+<para
+>Для збірок монет передбачено 16 типових полів: <emphasis
+>Назва</emphasis
+>, <emphasis
+>Тип</emphasis
+>, <emphasis
+>Номінал</emphasis
+>, <emphasis
+>Рік</emphasis
+>, <emphasis
+>Клеймо монетного двору</emphasis
+>, <emphasis
+>Країна</emphasis
+>, <emphasis
+>Набір монет</emphasis
+>, <emphasis
+>Якість</emphasis
+>, <emphasis
+>Служба оцінки</emphasis
+>, <emphasis
+>Дата покупки</emphasis
+>, <emphasis
+>Ціна</emphasis
+>, <emphasis
+>Місце</emphasis
+>, <emphasis
+>Дарований</emphasis
+>, <emphasis
+>Аверс</emphasis
+>, <emphasis
+>Реверс</emphasis
+> і <emphasis
+>Коментарі</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="stamp-collection">
+<title
+>Збірки марок</title>
+<para
+>Для збірок марок передбачено 18 типових полів: <emphasis
+>Назва</emphasis
+>, <emphasis
+>Опис</emphasis
+>, <emphasis
+>Номінал</emphasis
+>, <emphasis
+>Країна</emphasis
+>, <emphasis
+>Рік видання</emphasis
+>, <emphasis
+>Колір</emphasis
+>, <emphasis
+>Scott#</emphasis
+>, <emphasis
+>Якість</emphasis
+>, <emphasis
+>Погашено</emphasis
+>, <emphasis
+>Наклейка</emphasis
+>, <emphasis
+>Центрування</emphasis
+>, <emphasis
+>Приклеєна</emphasis
+>, <emphasis
+>Дата покупки</emphasis
+>, <emphasis
+>Ціна</emphasis
+>, <emphasis
+>Місце</emphasis
+>, <emphasis
+>Дарований</emphasis
+>, <emphasis
+>Зображення</emphasis
+> і <emphasis
+>Коментарі</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="wine-collection">
+<title
+>Збірки вин</title>
+<para
+>Для збірок вин передбачено 15 типових полів: <emphasis
+>Назва</emphasis
+>, <emphasis
+>Виробник</emphasis
+>, <emphasis
+>Найменування</emphasis
+>, <emphasis
+>Сорт</emphasis
+>, <emphasis
+>Тип</emphasis
+>, <emphasis
+>Країна</emphasis
+>, <emphasis
+>Дата покупки</emphasis
+>, <emphasis
+>Ціна</emphasis
+>, <emphasis
+>Місце</emphasis
+>, <emphasis
+>Кількість</emphasis
+>, <emphasis
+>Було випито</emphasis
+>, <emphasis
+>Рейтинг</emphasis
+>, <emphasis
+>Дарований</emphasis
+>, <emphasis
+>Зображення етикетки</emphasis
+> і <emphasis
+>Коментарі</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title
+>Збірки ігор на дошці</title>
+<para
+>Для збірок ігор на дошці передбачено 17 типових полів. <emphasis
+>Назва</emphasis
+>, <emphasis
+>Жанр</emphasis
+>, <emphasis
+>Механізм</emphasis
+>, <emphasis
+>Рік випуску</emphasis
+>, <emphasis
+>Видавець</emphasis
+>, <emphasis
+>Дизайнер</emphasis
+>, <emphasis
+>Кількість гравців</emphasis
+>,  <emphasis
+>Тривалість гри</emphasis
+>, <emphasis
+>Мінімальний вік</emphasis
+>,<emphasis
+>Опис</emphasis
+>, <emphasis
+>Рейтинг</emphasis
+>, <emphasis
+>Дата покупки</emphasis
+>, <emphasis
+>Ціна</emphasis
+>, <emphasis
+>Дарований</emphasis
+>, <emphasis
+>Взятий у борг</emphasis
+>, <emphasis
+>Рімейк</emphasis
+> і <emphasis
+>Коментарі</emphasis
+>, </para>
+
+</sect2>
+
+<sect2 id="file-catalog">
+<title
+>Каталоги файлів</title>
+<para
+>Для каталогів файлів передбачено 14 типових полів: <emphasis
+>Назва</emphasis
+>, <emphasis
+>URL</emphasis
+>, <emphasis
+>Опис</emphasis
+>, <emphasis
+>Том</emphasis
+>, <emphasis
+>Тека</emphasis
+>, <emphasis
+>Тип MIME</emphasis
+>, <emphasis
+>Розмір</emphasis
+>, <emphasis
+>Права</emphasis
+>, <emphasis
+>Власник</emphasis
+>, <emphasis
+>Група</emphasis
+>, <emphasis
+>Створено</emphasis
+>, <emphasis
+>Змінено</emphasis
+>, <emphasis
+>Метаінформація</emphasis
+> і <emphasis
+>Піктограма</emphasis
+>, </para>
+
+</sect2>
+
+<sect2 id="custom-collection">
+<title
+>Нетипові збірки</title>
+<para
+>У нетипових збірках передбачено лише одне типове поле <emphasis
+>Заголовок</emphasis
+>. Такі збірки слід використовувати, якщо елементи збірок не належать до елементів типових типів збірок. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>

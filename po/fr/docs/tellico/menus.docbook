@@ -1,0 +1,1048 @@
+<chapter id="menus">
+<title
+>Référence des commandes</title>
+
+<!--
+(OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
+application windows and their menubar and toolbar commands for easy reference.
+Also include any keys that have a special function but have no equivalent in the
+menus or toolbars. This may not be necessary for small apps or apps with no tool
+or menu bars.
+-->
+
+<sect1 id="main-window-menus">
+<title
+>La fenêtre principale de &appname;</title>
+
+<para
+>Chaque élément des menus est détaillé ci-dessous. Quand un raccourci clavier lance une fonctionnalité du menu, celui-ci accompagne l'élément décrit. </para>
+
+<sect2>
+<title
+>Le menu <guimenu
+>Fichier</guimenu
+></title>
+
+<para>
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Nouveau</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>crée une nouvelle collection</action
+>. &appname; gère <link linkend="collection-types"
+>douze types de collections par défaut</link
+> en plus d'une collection vide, personnalisable, définie par l'utilisateur.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Ouvrir...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre un fichier dans &appname;</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Récemment ouvert(s)</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre un fichier</action
+> depuis un sous-menu contenant une liste des fichiers récemment ouverts.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Enregistrer...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>enregistre la collection</action
+>. Si le fichier est <emphasis
+>Sans titre</emphasis
+>, <guimenuitem
+>Enregistrer...</guimenuitem
+> est équivalent à <guimenuitem
+>Enregistrer sous</guimenuitem
+>. Activé uniquement lorsque la collection a été modifiée.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Enregistrer sous...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>enregistre la collection dans un nouveau fichier</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Imprimer...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>imprime la collection</action
+>. Les options d'impression peuvent être définies dans la boîte de dialogue de <interface
+>Configuration</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Importer</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>importe des données depuis un autre fichier</action
+>. &appname; peut importer des données depuis <link linkend="importing"
+>d'autres formats</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Exporter</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>exporte la collection vers un autre format</action
+>. &appname; peut exporter des données dans <link linkend="exporting"
+>d'autres formats</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Quitter</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ferme la fenêtre de &appname;</action
+>, si la collection a des modifications non enregistrées, vous serez invité à les enregistrer avant de continuer.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Le menu <guimenu
+>Édition</guimenu
+></title>
+
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Édition</guimenu
+> <guimenuitem
+>Annuler</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>annule l'action précédente</action
+>. Toutes les actions ne sont pas gérées par la commande d'annulation.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Maj;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Édition</guimenu
+> <guimenuitem
+>Refaire</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>rétablie l'action annulée</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Édition</guimenu
+> <guimenuitem
+>Couper</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>supprime le texte sélectionné</action
+> et <action
+>le copie dans le presse-papiers</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Édition</guimenu
+> <guimenuitem
+>Copier</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>copie le texte sélectionné</action
+> vers le presse-papiers.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Édition</guimenu
+> <guimenuitem
+>Coller</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>colle le texte du presse-papiers</action
+>, si présent, dans l'éditeur à la position du curseur.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Édition</guimenu
+> <guimenuitem
+>Tout sélectionner</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>sélectionne toutes les entrées</action
+> de la collection, dans la <interface
+>Vue en colonnes</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Maj;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Édition</guimenu
+> <guimenuitem
+>Désélectionner</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>désélectionne toutes les entrées</action
+> de la collection.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Édition</guimenu
+> <guimenuitem
+>Chercher sur Internet...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre la boîte de dialogue des <interface
+>Recherche Internet</interface
+></action
+> pour rechercher et importer des entrées depuis des sites web, comme <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>J</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Édition</guimenu
+> <guimenuitem
+>Filtre avancé...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre la boîte de dialogue <interface
+>Filtre avancée</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Le menu <guimenu
+>Collection</guimenu
+></title>
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Collection</guimenu
+> <guimenuitem
+>Nouvelle entrée</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre l'<interface
+>éditeur d'entrée</interface
+> pour en créer une nouvelle</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Collection</guimenu
+> <guimenuitem
+>Éditer l'entrée</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre l'<interface
+>éditeur d'entrée</interface
+> pour modifier celles sélectionnées</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Collection</guimenu
+> <guimenuitem
+>Dupliquer l'entrée</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>copie ou duplique les entrées sélectionnées</action
+> en nouvelles entrées de la collection.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Collection</guimenu
+> <guimenuitem
+>Supprimer l'entrée</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>supprime les entrées sélectionnées</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collection</guimenu
+> <guimenuitem
+>Fusionner les entrées</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>fusionne les entrées sélectionnées</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collection</guimenu
+> <guimenuitem
+>Mettre l'entrée à jour</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ce menu contient une liste de toutes les sources disponibles. Il peut être utilisé pour interroger automatiquement une source et <action
+>mettre à jour les entrées sélectionnées</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collection</guimenu
+> <guimenuitem
+>Gestion des prêts...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre une boîte de dialogue gérant les prêts des entrées sélectionnées</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collection</guimenu
+> <guimenuitem
+>Récupérer</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>vérifie si les entrées sélectionnées sont toujours en prêt</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Collection</guimenu
+> <guimenuitem
+>Renommer la collection</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre une boîte de dialogue pour renommer la collection</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Collection</guimenu
+> <guimenuitem
+>Champs de la collection...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre la boîte de dialogue des <interface
+>Champs de la collection</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collection</guimenu
+> <guimenuitem
+>Générer des rapports...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre la boîte de dialogue <interface
+>Rapport</interface
+></action
+> pour générer des rapports à propos de la collection.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collection</guimenu
+> <guisubmenu
+>Bibliographie</guisubmenu
+> <guimenuitem
+>Convertir en bibliographie</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>convertit une collection de livres en bibliographie</action
+> en ajoutant certains champs nécessaires à l'exportation vers BibTeX. Elle n'est disponible que pour les collections de livres.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collection</guimenu
+> <guisubmenu
+>Bibliographie</guisubmenu
+> <guimenuitem
+>Ligne de Macros...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre une boîte de dialogue pour modifier les macros BibTeX</action
+> de la collection. Celle-ci n'est accessible que lors de l'édition d'une bibliographie.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collection</guimenu
+> <guisubmenu
+>Bibliographie</guisubmenu
+> <guimenuitem
+>Vérifier les doublons</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>recherche les clés BibTeX en double</action
+> et peut filtrer la collection pour afficher les entrées ayant des clés en double.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collection</guimenu
+> <guisubmenu
+>Bibliographie</guisubmenu
+> <guimenuitem
+>Copier au format BibTeX vers le presse-papiers</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>copie une citation BibTeX</action
+> vers le presse-papiers pour être collée dans un document LaTeX.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Collection</guimenu
+> <guisubmenu
+>Bibliographie</guisubmenu
+> <guimenuitem
+>Citer l'entrée dans LyX</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>envoie une citation pour les entrées sélectionnées</action
+> vers <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+> pour servir dans <application
+>LyX</application
+>, <application
+>Kile</application
+> ou d'autres applications LaTeX. Celle-ci est activée seulement lors de l'édition d'une bibliographie.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Le menu <guimenu
+>Configuration</guimenu
+></title>
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configuration</guimenu
+> <guimenuitem
+>Barre d'outils affichées</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>permute l'affichage des barres d'outils</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configuration</guimenu
+> <guimenuitem
+>Afficher la barre d'état</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>permute l'affichage de la barre d'état</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configuration</guimenu
+> <guimenuitem
+>Afficher la vue par groupe</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>permute l'affichage de la <interface
+>Vue par groupe</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configuration</guimenu
+> <guimenuitem
+>Afficher l'éditeur d'entrée</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>permute l'affichage de <interface
+>l'éditeur d'entrée</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configuration</guimenu
+> <guimenuitem
+>Options de regroupement</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>modifie le champ utilisé pour grouper les entrées</action
+> de la collection.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configuration</guimenu
+> <guimenuitem
+>Configurer les raccourcis clavier...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre la boîte de dialogue de <interface
+>Configuration des raccourcis clavier</interface
+> de &kde;</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configuration</guimenu
+> <guimenuitem
+>Configurer les barre d'outils...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre la boîte de dialogue de <interface
+>Configuration de la barre d'outils</interface
+> de &kde;</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configuration</guimenu
+> <guimenuitem
+>Configurer &appname;...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre la boîte de dialogue de <interface
+>Configuration</interface
+> de &appname;</action
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<sect2>
+<title
+>Le menu <guimenu
+>Aide</guimenu
+></title>
+
+<para
+>Voici les éléments standards du menu <guimenu
+>Aide</guimenu
+> de &kde; : </para>
+&help.menu.documentation; <para
+>En plus des éléments standards du menu <guimenu
+>Aide</guimenu
+> de &kde;, décris ci-dessus, &appname; propose une entrée supplémentaire : </para>
+
+<variablelist>
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Aide</guimenu
+> <guimenuitem
+>Astuce du jour</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Cette commande <action
+>ouvre la boîte de dialogue des astuces du jour</action
+>. Vous pouvez consulter toutes les astuces en utilisant les boutons de la boîte de dialogue.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>

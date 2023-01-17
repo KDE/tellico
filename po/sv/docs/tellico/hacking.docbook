@@ -1,0 +1,696 @@
+<chapter id="hacking">
+<title
+>Programmera &appname;</title>
+
+<para
+>I enlighet med avsikten hos fri programvara, är du välkommen att programmera &appname; så mycket du vill. Du bör enkelt kunna skriva skript för att importera, exportera eller ändra data. Det här kapitlet ger dig mer information om hur man gör det. </para>
+
+<sect1 id="file-format">
+<title
+>Filformat</title>
+
+<para
+>&appname;s standarddatafil är ett zip-arkiv, normalt med filändelsen <literal role="extension"
+>.tc</literal
+>. Inne i arkivet finns toppnivåfilen <filename
+>tellico.xml</filename
+>. Bilder kan inkluderas i katalogen <filename
+>images/</filename
+> i arkivet, eller kan inkluderas direkt i &XML;-data kodade med base64. I detta fall finns de inte alls i datafilen. &appname; kan också ladda &XML;-filen själv, utan komprimering. </para>
+
+<sect2 id="xml-format">
+<title
+>&XML;-data</title>
+
+ 
+
+<sect3 id="coll-xml-data">
+<title
+>Samling</title>
+<programlisting
+><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V11.0//EN" "http://periapsis.org/tellico/dtd/v11/tellico.dtd">
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="My Books" type="2">
+ </collection>
+</tellico>
+]]>
+</programlisting>
+
+<para
+>Filen börjar med den nödvändiga &XML;-deklarationen och kodningen, följt av dokumenttypen. När en ny fälttyp läggs till eller ytterligare egenskaper läggs till i standardfälten, inkrementeras dokumenttypens DTD-version. &appname; kan alltid öppna och läsa alla tidigare DTD-versioner, men sparar filer med den nuvarande versionen. DTD-platsen pekar på en verklig DTD-fil. </para>
+
+<para
+>Toppnivåelementet är elementet <markup
+>&lt;tellico&gt;</markup
+>, som innehåller deklarationen av standardnamnrymden och filens syntaxversion, som alltid ska stämma med DTD:n. </para>
+
+<para
+>Elementet <markup
+>&lt;tellico&gt;</markup
+> innehåller ett element: <markup
+>&lt;collection&gt;</markup
+> (samling). Flera samlingar ignoreras för närvarande. Attributet <markup
+>title</markup
+> innehåller samlingens titel. medan <markup
+>type</markup
+> anger vilka typer av poster som finns i samlingen. De tillåtna typerna <link linkend="collection-type-values"
+>listas i ett senare avsnitt</link
+>. Den valfria egenskapen <markup
+>entryTitle</markup
+> kan användas för att ange posternas titel i en egen samling, och ska vara pluralis. </para>
+</sect3>
+
+<sect3 id="fields-xml-data">
+<title
+>Fält</title>
+
+<programlisting
+><![CDATA[
+  <fields>
+   <field flags="8" title="Title" category="General" format="1" type="1" name="title" />
+   <field flags="7" title="Author" category="General" format="2" type="1" name="author" />
+   <field flags="2" title="Binding" category="General" allowed="Hardback;Paperback;Trade Paperback;E-Book;Magazine;Journal" format="4" type="3" name="binding" >
+    <prop name="default"
+>Paperback</prop>
+   </field>
+   <field flags="6" title="Publisher" category="Publishing" format="0" type="1" name="publisher" />
+   <field flags="4" title="Edition" category="Publishing" format="0" type="1" name="edition" />
+   <field flags="3" title="Copyright Year" category="Publishing" format="4" type="6" name="cr_year" />
+   <field flags="2" title="Publication Year" category="Publishing" format="4" type="6" name="pub_year" />
+   <field flags="0" title="ISBN#" category="Publishing" format="4" type="1" name="isbn" description="International Standard Book Number" />
+   <field flags="7" title="Genre" category="Classification" format="0" type="1" name="genre" />
+   <field flags="7" title="Keywords" category="Classification" format="0" type="1" name="keyword" />
+   <field flags="0" title="Front Cover" category="Front Cover" format="4" type="10" name="cover" />
+   <field flags="0" title="Comments" category="Personal" format="4" type="1" name="comments" />
+   <field title="Rating" flags="2" category="Personal" format="4" type="14" name="rating">
+    <prop name="maximum"
+>5</prop>
+    <prop name="minimum"
+>1</prop>
+   </field>
+   <field title="ID" flags="32" category="Personal" format="4" type="6" name="id">
+    <prop name="template"
+>%{@id}</prop>
+   </field>
+
+  </fields>
+]]>
+</programlisting>
+
+<para
+>Alla fälten definieras inne i elementet <markup
+>&lt;fields&gt;</markup
+>, som det bara får finnas ett av. All information i ett fält, förutom eventuella egenskaper, ingår som attribut i elementet <markup
+>&lt;field&gt;</markup
+>. De tillåtna värdena för attributen <markup
+>flags</markup
+>, <markup
+>format</markup
+> och <markup
+>type</markup
+> anges i ett <link linkend="field-type-values"
+>senare avsnitt</link
+>. </para>
+
+<para
+>Fältegenskaper används för att ställa in förvalda fältvärden, intervall för betygsvärde, mallar för beroende värden, etc. Exemplen ovan inkluderar ett förvalt värde, ett maximalt betygsvärde, och en mall för ett beroende identifikationsfält. </para>
+
+ 
+
+</sect3>
+
+<sect3 id="entries-xml-data">
+<title
+>Poster</title>
+
+<programlisting
+><![CDATA[
+  <entry>
+   <title
+>C++ Programming Language, The</title>
+   <authors>
+    <author
+>Stroustrup, Bjarne</author>
+   </authors>
+   <publisher
+>Addison-Wesley Pub Co</publisher>
+   <edition
+>3rd</edition>
+   <pub_year
+>1997</pub_year>
+   <isbn
+>0-201-88954-4</isbn>
+   <genres>
+    <genre
+>Fakta</genre>
+   </genres>
+   <keywords>
+    <keyword
+>Programmering</keyword>
+    <keyword
+>Datorer</keyword>
+   </keywords>
+   <cover
+>cf65a2f023b6cb9e9233323dca10ac7c.jpeg</cover>
+  </entry>
+]]>
+</programlisting>
+
+<para
+>För varje fält i samlingen, kan en <markup
+>&lt;entry&gt;</markup
+> innehålla ett element vars namn är identiskt med fältnamnet.Om flera värden tillåts för fältet, läggs bokstaven <emphasis
+>s</emphasis
+> till i fältnamnet för att skapa ett element, och varje värde läggs till som ett underliggande objekt till elementet, som är fallet för fälten author (författare), genre och keyword (nyckelord) ovan. </para>
+
+<para
+>Som ett resultat, om ytterligare fält läggs till i samlingen, följer inte datafilen längre DTD:n. Dock använder &appname; en &XML;-tolk som inte validerar, alltså orsakar inte ytterligare fält några problem. </para>
+</sect3>
+
+<sect3 id="images-xml-data">
+<title
+>Bilder</title>
+<programlisting
+><![CDATA[
+  <images>
+   <image width="111" format="JPEG" height="140" id="cf65a2f023b6cb9e9233323dca10ac7c.jpeg" />
+  </images>
+]]>
+</programlisting>
+
+<para
+>Inne i elementet <markup
+>&lt;images&gt;</markup
+> listas varje bild som refereras till av en post, tillsammans med attribut som beskriver bildens storlek, format och identifierare. Om en bild finns inne i zip-filen, är elementet tomt. Annars kan bilddata finnas i &XML; data som text kodad med base64. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-type-values">
+<title
+>Samlingstypsvärden</title>
+
+<para
+>Samlingstypen anges i samlingselementets typattribut. Värdet är lika med uppräkningsvärdet <type
+>Type</type
+> i <filename
+>src/collection.h</filename
+>. </para>
+
+<table>
+<title
+>Samlingstypsvärden</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Samlingstyp</entry>
+<entry
+>Värde</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Egen samling</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Boksamling</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Videosamling</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Musiksamling</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Bibliografi</entry
+><entry
+>5</entry
+></row>
+<row
+><entry
+>Seriesamling</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>Vinsamling</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Myntsamling</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Frimärkssamling</entry
+><entry
+>9</entry
+></row>
+<row
+><entry
+>Kortsamling</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Videospelsamling</entry
+><entry
+>11</entry
+></row>
+<row
+><entry
+>Filkatalog</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Spelsamling</entry
+><entry
+>13</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="field-type-values">
+<title
+>Fälttypvärden</title>
+
+<para
+>&appname; inkluderar de förvalda fälten för en samling om det första fältelementet har namnet <emphasis
+>_default</emphasis
+>. För fälten <emphasis
+>Paragraph</emphasis
+> (stycke), <emphasis
+>Table</emphasis
+> (tabell) eller <emphasis
+>Image</emphasis
+> (bild), ska fältkategorierna vara identiska med fälttiteln. </para>
+
+<para
+>Fältets typ anges i fältelementets typattribut. Värdet är lika med uppräkningsvärdet <type
+>FieldType</type
+> i <filename
+>src/field.h</filename
+>. </para>
+
+<table>
+<title
+>Fälttypvärden</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Fälttyp</entry>
+<entry
+>Värde</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Enkel text</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Stycke</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Val</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Kryssruta</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Nummer</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>Webbadress</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Tabell</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Bild</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Datum</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Betyg</entry
+><entry
+>14</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>Fältet kan ha olika flaggor satta, givna som ett bitbaserat värde kombinerat med ELLER i fältelementets attribut flags. Flaggan för att förhindra användaren från att ta bort ett fält är avsett för sådana saker som hänvisningsnyckeln i bibliografiska poster. </para>
+
+<table>
+<title
+>Fältflaggornas värden</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Fältflaggor</entry>
+<entry
+>Värde</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Tillåt flera värden</entry
+><entry
+><constant
+>0x01</constant
+></entry
+></row>
+<row
+><entry
+>Tillåt gruppering</entry
+><entry
+><constant
+>0x02</constant
+></entry
+></row>
+<row
+><entry
+>Tillåt komplettering</entry
+><entry
+><constant
+>0x04</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>Tillåt inte borttagning</emphasis
+></entry
+><entry
+><constant
+>0x08</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>Tillåt inte redigering</emphasis
+></entry
+><entry
+><constant
+>0x10</constant
+></entry
+></row>
+<row
+><entry
+>Beroende värde</entry
+><entry
+><constant
+>0x20</constant
+></entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>Fältets format anges i fältelementets formatattribut. <emphasis
+>Date Formatting</emphasis
+> används för närvarande inte. Gruppering enligt personer med <emphasis
+>People</emphasis
+> använder alla fält som har <emphasis
+>Name Formatting</emphasis
+> (namnformatering). Att ange flaggan <emphasis
+>Derived Value</emphasis
+> (beroende värde) innebär att fältets värde skapas från mallegenskapen från andra fältvärden. </para>
+
+<table>
+<title
+>Fältformatvärden</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Fältformat</entry>
+<entry
+>Värde</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Bara kapitalisering</entry
+><entry
+>0</entry
+></row>
+<row
+><entry
+>Titelformatering</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Namnformatering</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+><emphasis
+>Datumformatering</emphasis
+></entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Ingen formatering</entry
+><entry
+>4</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="hidden-options">
+<title
+>Dolda inställningsalternativ</title>
+
+<para
+>&appname; har några ytterligare inställningsalternativ som inte är synliga i <interface
+>inställningsdialogrutan</interface
+>. De är inte viktiga nog för att motivera att dialogrutan stökas till med fler inställningar, men eftersom de representerar alternativ som kan tilltala diverse användare, läser programmet dem från inställningsfilen. </para>
+
+<para
+>&appname;s inställningar sparas i en fil i användarens hemkatalog, nämligen <filename
+>$<envar
+>KDEHOME</envar
+>/share/config/tellicorc</filename
+>. Inne i filen placeras inställningar i grupper, som visas med namn inom hakparenteser, såsom [General Options]. För att lägga till en inställning i gruppen <emphasis
+>[General Options]</emphasis
+>, leta rätt på raden i inställningsfilen med det gruppnamnet. Om den inte finns, skapa den själv genom att lägga till en rad som lyder [General Options]. Därefter kan inställningen läggas till under gruppnamnet. </para>
+
+<sect2 id="hidden-general-options">
+<title
+>[General Options]</title>
+
+<para
+>Inställningarna ska placeras i gruppen <emphasis
+>General Options</emphasis
+>. </para>
+
+<sect3>
+<title
+>Max Icon Size</title>
+
+<para
+>Den maximala storleken av ikonerna i <interface
+>ikonvyn</interface
+> kan ändras med den här inställningen. Förvalt värde är 96. Storleken måste vara i intervallet 32 till 512. </para>
+</sect3>
+
+<sect3>
+<title
+>Exempel</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Icon Cache Size</title>
+
+<para
+>Det maximala antalet ikoner lagrade i minnet kan ändras med den här inställningen. Förvalt värde är 1000. </para>
+</sect3>
+
+<sect3>
+<title
+>Exempel</title>
+<informalexample>
+<para
+><userinput
+>Icon Cache Size=100</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Exempel</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Image Cache Size</title>
+
+<para
+>Det maximala minnesstorleken i byte använd för att lagra alla bilder kan ändras med den här inställningen. Förvalt värde är 67108864. </para>
+</sect3>
+
+<sect3>
+<title
+>Exempel</title>
+<informalexample>
+<para
+><userinput
+>Image Cache Size=256000000</userinput
+></para>
+</informalexample>
+</sect3>
+
+</sect2>
+
+<sect2 id="hidden-bibtex-options">
+<title
+>[Options - bibtex]</title>
+
+<para
+>Inställningarna ska placeras i gruppen <emphasis
+>Options - bibtex</emphasis
+>. </para>
+
+<sect3>
+<title
+>lyxpipe</title>
+
+<para
+>Den här inställningen anger platsen för lyxpipe för att skicka bibliografiska hänvisningar. Den ska inte inkludera filändelsen <literal role="extension"
+>.in</literal
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Exempel</title>
+<informalexample>
+<para
+><userinput
+>lyxpipe=$HOME/.lyx/lyxpipe</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
+
+</sect1>
+
+<sect1 id="bibtex-translation">
+<title
+>Bibtex teckenöversättning</title>
+
+<para
+>När Bibtex-filer importeras eller exporteras, översätts vissa tecken mellan sina motsvarande värden i Tex och tecken i Unicode. Dessa teckenavbildningar finnd i filen <filename
+>bibtex-translation.xml</filename
+>, som finns i installationens datakatalog. Avbildningarna kan ändras som önskas. Nyckelelementet innehåller tecknet i Unicode, och strängelementen inuti innehåller motsvarigheten i Tex, vilket kan vara en avbildning av ett värde till flera. Det första är det som används vid export till Bibtex. </para>
+
+<programlisting
+><![CDATA[
+  <key char="À">
+    <string
+>{\`A}</string>
+    <string
+>\`{A}</string>
+  </key>
+]]>
+</programlisting>
+
+</sect1>
+
+<sect1 id="xslt-tricks">
+<title
+>Trick med XSLT</title>
+
+<para
+>Här är några tips för att skriva XSLT för att tolka &XML;-data från &appname;: (TBD). </para>
+</sect1>
+
+</chapter>

@@ -1,0 +1,237 @@
+<chapter id="advanced">
+<title
+>Додаткові можливості</title>
+
+<sect1 id="command-line">
+<title
+>Параметри командного рядка</title>
+
+<para
+>Під час запуску &appname; за допомогою командного рядка ви можете вказати параметри, пов’язані з відкриттям файлів даних. Переглянути список цих параметрів можна за допомогою команди <userinput
+>tellico --help</userinput
+>. </para>
+
+<programlisting
+>Користування: tellico [параметри Qt] [параметри KDE] [параметри] [назва файла]
+
+Tellico — інструмент керування збірками, вільний і простий
+
+Параметри:
+  --nofile                  Не відкривати повторно останній відкритий файл
+  --bibtex                  Імпортувати файл &lt;назва файла&gt; як файл bibtex
+  --mods                    Імпортувати файл &lt;назва файла&gt; як файл MODS
+  --ris                     Імпортувати файл &lt;назва файла&gt; як файл RIS
+
+Аргументи:
+  назва файла                  Назва файла, який слід відкрити
+</programlisting>
+
+</sect1>
+
+<sect1 id="dbus-interface">
+<title
+>Інтерфейс &DBus;</title>
+
+<para
+>У &appname; передбачено мінімальний інтерфейс &DBus;, яким можна скористатися для керування програмою за допомогою скриптів або взаємодії з запущеною програмою за посередництвом командного рядка. Як і для всіх інших викликів &DBus;, вам доведеться вказати програму, з якою ви бажаєте працювати і певний інтерфейс. Назвою служби для &DBus; буде <constant
+>org.kde.tellico</constant
+>. </para>
+
+<sect2 id="dbus-commands">
+<title
+>Команди &DBus;</title>
+
+<para
+>Tellico надає вам доступ до двох основних об’єктів &DBus;: <constant
+>Tellico</constant
+> і <constant
+>Collection</constant
+>.</para>
+
+<sect3 id="dbus-tellico">
+<title
+>Об’єкт <constant
+>Tellico</constant
+></title>
+
+<para
+>Нижче наведено повний список команд &DBus; для об’єкта <constant
+>tellico</constant
+>:</para>
+
+<programlisting
+>bool importTellico(QString file, QString action)
+bool importBibtex(QString file, QString action)
+bool importMODS(QString file, QString action)
+bool importPDF(QString file, QString action)
+bool importRIS(QString file, QString action)
+bool exportXML(QString file, bool filtered)
+bool exportZip(QString file, bool filtered)
+bool exportBibtex(QString file, bool filtered)
+bool exportHTML(QString file, bool filtered)
+bool exportCSV(QString file, bool filtered)
+QList&lt;int&gt; selectedEntries()
+QList&lt;int&gt; filteredEntries()
+void openFile(QString file)
+void setFilter(QString text)
+bool showEntry(int id)
+</programlisting>
+
+<para
+>Для чотирьох найважливіших команд першим аргументом є назва файла, який слід імпортувати, а другим — дія з імпортування. Можна використовувати одну з трьох дій: <emphasis
+>replace</emphasis
+>, <emphasis
+>append</emphasis
+> або <emphasis
+>merge</emphasis
+>. Підтримується імпорт файлів у чотирьох форматах: файли XML Tellico, файли Bibtex, файли MODS і файли RIS. </para>
+
+<para
+>Поточну відкриту у &appname; збірку можна експортувати до файла у одному з таких форматів: формат XML Tellico, формат ZIP Tellico, Bibtex, HTML, формат відокремлених комами значень (CSV). Для команд експортування можна додавати необов’язковий аргумент, який визначає, чи буде обмежено збірку поточний фільтром. </para>
+
+<para
+>Список ідентифікаторів записів, які зараз обрано або відфільтровано може допомогти у показі і оновлення записі у області перегляду.</para>
+
+<para
+>Новий файл даних можна відкрити за допомогою команди <command
+>openFile()</command
+>. Вам слід вказати шлях до файла повністю.</para>
+
+<para
+>Новий фільтр можна встановити за допомогою команди <command
+>setFilter()</command
+>, яка є еквівалентом введення відповідного рядка у поле фільтрування головного вікна.</para>
+
+<para
+>За вказаним ідентифікатором запису <command
+>showEntry()</command
+> обере запис і покаже відомості про нього у головному вікні.</para>
+</sect3>
+
+<sect3 id="dbus-collection">
+<title
+>Об’єкт <constant
+>Collection</constant
+></title>
+
+<para
+>Нижче наведено повний список команд &DBus; у об’єкті <constant
+>Collection</constant
+>:</para>
+
+<programlisting
+>int addEntry()
+bool removeEntry(int entryID)
+QStringList allValues(QString fieldName)
+QStringList entryValues(int entryID, QString fieldName)
+QStringList selectedBibtexKeys()
+QString entryBibtexKey(int entryID)
+bool setEntryValue(int entryID, QString fieldName, QString value)
+bool addEntryValue(int entryID, QString fieldName, QString value)
+</programlisting>
+
+<para
+>Новий порожній запис у поточній збірці можна створити за допомогою команди <command
+>addEntry()</command
+>. Ця команда поверне значення ідентифікатора запису, яким потім можна скористатися для встановлення значень полів запису. Вилучити запис зі збірки можна за допомогою виклику команди <command
+>removeEntry()</command
+>. </para>
+
+<para
+>Виклик команди <command
+>allValues()</command
+> з зазначенням лише назви поля поверне всі значення для цього поля у поточних вибраних записах. Якщо не було обрано жодного запису, повернутий список буде порожнім. Якщо до параметрів команди буде додано ідентифікатор запису, буде повернуто значення полів вказаного запису. </para>
+
+<para
+>Якщо поточна збірка є бібліографією, виклик команди <command
+>selectedBibtexKeys()</command
+> поверне ключі цитування Bibtex для всіх вибраних записів. Ключ Bibtex (значення bibtexKey) для окремого запису можна визначити за допомогою команди <command
+>entryBibtexKey()</command
+>. </para>
+
+<para
+>Записи можна змінювати безпосередньо за допомогою інтерфейсу &DBus;. За вказаним ідентифікатором запису команда <command
+>setEntryValue()</command
+> встановить значення поля. Щоб додати значення, не змінюючи існуючих значень, скористайтеся командою <command
+>addEntryValue()</command
+>. Нове значення буде додано в кінець існуючого списку. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="dbus-examples">
+<title
+>Приклади &DBus;</title>
+
+<para
+>Нижче наведено декілька прикладів керування &appname; за допомогою скриптів та інтерфейсу &DBus;. </para>
+
+<screen width="40"
+><emphasis
+>Відкриття файла Bibtex</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.importBibtex "/home/robby/reference.bib" "replace"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Експорт до файла Bibtex</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Експорт до файла Bibtex із використанням поточного фільтра</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib true</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Повернути ключ цитування поточного вибраного пункту</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.selectedBibtexKeys</userinput>
+<computeroutput
+>stephenson2004</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Додати новий запис і вказати його заголовок</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>myid=`qdbus org.kde.tellico /Collections org.kde.tellico.addEntry`</userinput>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.setEntryValue $myid title "My New Book"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+</sect2>
+
+</sect1>
+
+</chapter>

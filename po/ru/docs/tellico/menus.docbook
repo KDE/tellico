@@ -1,0 +1,923 @@
+<chapter id="menus">
+<title
+>Список команд</title>
+
+<!--
+(OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
+application windows and their menubar and toolbar commands for easy reference.
+Also include any keys that have a special function but have no equivalent in the
+menus or toolbars. This may not be necessary for small apps or apps with no tool
+or menu bars.
+-->
+
+<sect1 id="main-window-menus">
+<title
+>Главное окно &tellico;</title>
+
+<para
+>Далее приводится описание каждого элемента меню. Рядом с элементом указана комбинация клавиш по умолчанию, которая выполняет ту же функцию, что и этот элемент (при наличии). </para>
+
+<sect2>
+<title
+>Меню «Файл»</title>
+
+<para>
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Новая</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>создать новую коллекцию</action
+>. &tellico; поддерживает <link linkend="collection-types"
+>12 типов коллекций по умолчанию</link
+>, а также пустой шаблон пользовательской коллекции.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Открыть...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>открыть файл &tellico;</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Последние файлы</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>открыть файл</action
+> из подменю, которое содержит перечень последних открытых файлов.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Сохранить</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>сохранить коллекцию</action
+>. Если сохраняется <emphasis
+>Безымянный</emphasis
+> файл, то команда <guimenuitem
+>Сохранить</guimenuitem
+> эквивалентна команде <guimenuitem
+>Сохранить как...</guimenuitem
+>. Она доступна только в том случае, если коллекция была изменена.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Сохранить как...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>сохранить коллекцию в новый файл</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Печать...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>распечатать коллекцию</action
+>. Параметры печати возможно указать в <interface
+>диалоге конфигурации</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Импорт</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>импортировать данные из другого файла</action
+>. &tellico; поддерживает импорт данных из файлов нескольких <link linkend="importing"
+>других форматов</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Экспорт</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>экспортировать коллекцию в другой формат</action
+>. &tellico; поддерживает экспорт данных в файлы нескольких <link linkend="exporting"
+>других форматов</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Выход</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>закрыть окно &tellico;</action
+>. Если имеются несохранённые изменения коллекции, перед продолжением их будет предложено сохранить.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Меню «Правка»</title>
+
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Правка</guimenu
+> <guimenuitem
+>Отменить действие</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>отменить предыдущее действие</action
+>. Применение этой команды поддерживается не для всех действий.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Правка</guimenu
+> <guimenuitem
+>Повторить</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>повторно выполнить отменённое ранее действие</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Правка</guimenu
+> <guimenuitem
+>Вырезать</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>удалить выбранный текст</action
+> и <action
+>поместить его копию в буфер обмена</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Правка</guimenu
+> <guimenuitem
+>Копировать</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>скопировать выбранный текст</action
+> в буфер обмена.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Правка</guimenu
+> <guimenuitem
+>Вставить</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>вставить текст из буфера обмена</action
+> (если он там имеется) в позиции курсора в редакторе.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Правка</guimenu
+> <guimenuitem
+>Выделить все</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>выделить все записи</action
+> коллекции в области <interface
+>таблицы записей</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Правка</guimenu
+> <guimenuitem
+>Снять выделение</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>отменить выделение всех записей</action
+> коллекции.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Правка</guimenu
+> <guimenuitem
+>Поиск в Интернете...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>открыть <interface
+>диалог «Поиск в Интернете»</interface
+></action
+> для поиска и импорта записей с различных интернет-сайтов, в том числе <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>J</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Правка</guimenu
+> <guimenuitem
+>Расширенный фильтр...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>открыть <interface
+>диалог «Расширенный фильтр»</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Меню «Коллекция»</title>
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Коллекция</guimenu
+> <guimenuitem
+>Новая запись...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>открыть <interface
+>редактор записей</interface
+> для изменения новой записи</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Коллекция</guimenu
+> <guimenuitem
+>Изменить запись...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>открыть <interface
+>редактор записей</interface
+> для изменения выбранных записей</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Коллекция</guimenu
+> <guimenuitem
+>Дублировать запись</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет создавать новые записи коллекции с помощью <action
+>копирования (дублирования) выбранных записей</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Коллекция</guimenu
+> <guimenuitem
+>Удалить запись</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>удалить выбранные записи</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Коллекция</guimenu
+> <guimenuitem
+>Объединить записи</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>объединить выбранные записи</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Коллекция</guimenu
+> <guimenuitem
+>Обновить запись</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Это меню содержит перечень всех доступных источников данных. Его возможно использовать для автоматического запроса к источнику и <action
+>обновления выбранных записей</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Коллекция</guimenu
+> <guimenuitem
+>Отдать в долг...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>открыть диалог выдачи на руки предметов из выбранных записей</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Коллекция</guimenu
+> <guimenuitem
+>Отметить возврат</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>отметить возврат для выбранных записей с теми предметами коллекционирования, которые в настоящее время выданы на руки</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Коллекция</guimenu
+> <guimenuitem
+>Переименовать коллекцию</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>открыть диалог переименования коллекции</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Коллекция</guimenu
+> <guimenuitem
+>Поля коллекции...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>открыть <interface
+>диалог «Поля коллекции»</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Коллекция</guimenu
+> <guimenuitem
+>Построение отчётов...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>открыть <interface
+>диалог построения отчётов</interface
+></action
+>, с помощью которого возможно создавать отчёты о коллекции.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Коллекция</guimenu
+> <guisubmenu
+>Библиография</guisubmenu
+> <guimenuitem
+>Преобразовать в библиографию</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>преобразовать коллекцию книг в библиографию</action
+>. Она добавляет определённые поля, которые необходимы для экспорта в BibTeX. Эта команда доступна только тогда, когда открыта коллекция книг.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Коллекция</guimenu
+> <guisubmenu
+>Библиография</guisubmenu
+> <guimenuitem
+>Строковые макросы...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>открыть диалог редактирования строковых макросов BibTeX</action
+> коллекции. Она доступна только при редактировании библиографии.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Коллекция</guimenu
+> <guisubmenu
+>Библиография</guisubmenu
+> <guimenuitem
+>Найти повторяющиеся ключи</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>проверить наличие повторяющихся ключей BibTeX</action
+> и применить к коллекции фильтр для отображения записей с повторяющимися ключами.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Коллекция</guimenu
+> <guisubmenu
+>Библиография</guisubmenu
+> <guimenuitem
+>Копировать данные BibTeX</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>скопировать цитату BibTeX</action
+> в буфер обмена для последующей вставки в документ LaTeX.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Коллекция</guimenu
+> <guisubmenu
+>Библиография</guisubmenu
+> <guimenuitem
+>Упомянуть запись в LyX</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>отправить цитату для выбранных записей</action
+> в <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+> для использования в <application
+>LyX</application
+>, <application
+>Kile</application
+> или других приложениях LaTeX. Она доступна только при редактировании библиографии.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Меню «Настройка» и «Справка»</title>
+
+<para
+>Стандартные меню программ &kde; <guimenu
+>Настройка</guimenu
+> и <guimenu
+>Справка</guimenu
+> (их описание содержится доступно в разделе <ulink url="help:/fundamentals/menus.html"
+>Меню</ulink
+> «Основ &kde;») содержат следующие специфичные для &tellico; пункты: </para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Настройка</guimenu
+> <guimenuitem
+>Показать представления</guimenuitem
+> <guimenuitem
+>Группы</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>включать и отключать отображение <interface
+>групп</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Настройка</guimenu
+> <guimenuitem
+>Показать представления</guimenuitem
+> <guimenuitem
+>Редактор записей</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>включать и отключать отображение <interface
+>редактора записей</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Настройка</guimenu
+> <guimenuitem
+>Группировать</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>изменить поле, которое используется для группировки записей</action
+> коллекции.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>

@@ -1,0 +1,692 @@
+<chapter id="hacking">
+<title
+>Programar para &appname;</title>
+
+<para
+>En el espíritu del Software Libre, se le anima a programar &appname; tanto como quiera. Debería poder escribir scripts para importar, exportar o modificar datos muy fácilmente. Este capítulo le da más información sobre cómo hacer eso. </para>
+
+<sect1 id="file-format">
+<title
+>Formato de archivos</title>
+
+<para
+>El archivo de datos por defecto de &appname; es un archivo zip, normalmente con una extensión de archivo <literal role="extension"
+>.tc</literal
+>. Dentro del archivo hay un archivo de nivel superior <filename
+>tellico.xml</filename
+>. Las imágenes se pueden incluir dentro de la carpeta <filename
+>images/</filename
+> del archivo, o pueden incluirse en los datos &XML; directamente con una codificación base64. Las imágenes también pueden guardarse dentro de la carpeta de datos de la aplicación, en cuyo caso no estarán en el propio archivo de datos. &appname; puede también cargar el archivo &XML; tal cual, descomprimido. </para>
+
+<sect2 id="xml-format">
+<title
+>Datos &XML;</title>
+
+ 
+
+<sect3 id="coll-xml-data">
+<title
+>Colección</title>
+<programlisting
+><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V11.0//EN" "http://periapsis.org/tellico/dtd/v11/tellico.dtd">
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="My Books" type="2">
+ </collection>
+</tellico>
+]]>
+</programlisting>
+
+<para
+>El archivo comienza con la declaración y la codificación &XML; requerida, seguida por el tipo de documento. Cuando se añade un nuevo tipo de campo o se establecen propiedades adicionales en los campos predeterminados, la versión DTD se incrementa. &appname; siempre puede abrir y leer cualquier versión anterior de DTD, pero guardará los archivos en la versión actual. La localización de DTD apunta a un archivo DTD real. </para>
+
+<para
+>El elemento de nivel superior es un elemento <markup
+>&lt;tellico&gt;</markup
+> que contiene la declaración por defecto namespace y la versión de la sintaxis del archivo, que siempre debe coincidir con la de DTD. </para>
+
+<para
+>El elemento <markup
+>&lt;tellico&gt;</markup
+> contiene un elemento de <markup
+>&lt;collection&gt;</markup
+>. Las colecciones múltiples son ignoradas por ahora. El atributo <markup
+>title</markup
+> contiene el título de la colección, mientras que <markup
+>type</markup
+> especifica qué tipo de entradas están contenidas en la colección. Los tipos permitidos se <link linkend="collection-type-values"
+>listan en una sección posterior</link
+>. Un atributo opcional <markup
+>entryTitle</markup
+> se puede usar para especificar el título de las entradas para una colección personalizada, y debería ir en plural. </para>
+</sect3>
+
+<sect3 id="fields-xml-data">
+<title
+>Campos</title>
+
+<programlisting
+><![CDATA[
+  <fields>
+   <field flags="8" title="Title" category="General" format="1" type="1" name="title" />
+   <field flags="7" title="Author" category="General" format="2" type="1" name="author" />
+   <field flags="2" title="Binding" category="General" allowed="Hardback;Paperback;Trade Paperback;E-Book;Magazine;Journal" format="4" type="3" name="binding" >
+    <prop name="default"
+>Paperback</prop>
+   </field>
+   <field flags="6" title="Publisher" category="Publishing" format="0" type="1" name="publisher" />
+   <field flags="4" title="Edition" category="Publishing" format="0" type="1" name="edition" />
+   <field flags="3" title="Copyright Year" category="Publishing" format="4" type="6" name="cr_year" />
+   <field flags="2" title="Publication Year" category="Publishing" format="4" type="6" name="pub_year" />
+   <field flags="0" title="ISBN#" category="Publishing" format="4" type="1" name="isbn" description="International Standard Book Number" />
+   <field flags="7" title="Genre" category="Classification" format="0" type="1" name="genre" />
+   <field flags="7" title="Keywords" category="Classification" format="0" type="1" name="keyword" />
+   <field flags="0" title="Front Cover" category="Front Cover" format="4" type="10" name="cover" />
+   <field flags="0" title="Comments" category="Personal" format="4" type="1" name="comments" />
+   <field title="Rating" flags="2" category="Personal" format="4" type="14" name="rating">
+    <prop name="maximum"
+>5</prop>
+    <prop name="minimum"
+>1</prop>
+   </field>
+   <field title="ID" flags="32" category="Personal" format="4" type="6" name="id">
+    <prop name="template"
+>%{@id}</prop>
+   </field>
+
+  </fields>
+]]>
+</programlisting>
+
+<para
+>Todos los campos están definidos dentro de un elemento <markup
+>&lt;fields&gt;</markup
+>, del cual solo puede existir uno. toda la información sobre un campo, excepto de las propiedades, está incluida como atributos en el elemento <markup
+>&lt;field&gt;</markup
+>. Los valores permitidos para los atributos <markup
+>flags</markup
+>, <markup
+>format</markup
+>, y <markup
+>type</markup
+> vienen dados en la <link linkend="field-type-values"
+>sección siguiente</link
+>. </para>
+
+<para
+>Las propiedades del campo se usan para establecer valores predeterminados para el campo, intervalos de valores de clasificación, plantillas de valores derivados, etc. Los ejemplos de arriba incluyen un valor por defecto, un valor máximo de clasificación  y una plantilla por un campo ID derivado. </para>
+
+ 
+
+</sect3>
+
+<sect3 id="entries-xml-data">
+<title
+>Entradas</title>
+
+<programlisting
+><![CDATA[
+  <entry>
+   <title
+>Lenguaje de programación C++, El</title>
+   <authors>
+    <author
+>Stroustrup, Bjarne</author>
+   </authors>
+   <publisher
+>Addison-Wesley Pub Co</publisher>
+   <edition
+>3ª</edition>
+   <pub_year
+>1997</pub_year>
+   <isbn
+>0-201-88954-4</isbn>
+   <genres>
+    <genre
+>No ficción</genre>
+   </genres>
+   <keywords>
+    <keyword
+>Programación</keyword>
+    <keyword
+>Informática</keyword>
+   </keywords>
+   <cover
+>cf65a2f023b6cb9e9233323dca10ac7c.jpeg</cover>
+  </entry>
+]]>
+</programlisting>
+
+<para
+>Para cada campo de la colección, una <markup
+>&lt;entrada&gt;</markup
+> puede contener un elemento cuyo nombre sea idéntico al nombre del campo. Si se permiten valores múltiples para ese campo, entonces se añade la letra <emphasis
+>s</emphasis
+> al nombre del campo para crear un elemento, y cada valor se añade como un hijo de ese elemento, como en el caso de los campos de autor, género y palabra clave de arriba. </para>
+
+<para
+>Como resultado, si se añaden campos adicionales a la colección, el archivo de datos ya no se ajustará al DTD. Sin embargo, &appname; usa un analizador &XML; no validante, de forma que los campos adicionales no causen problemas. </para>
+</sect3>
+
+<sect3 id="images-xml-data">
+<title
+>Imágenes</title>
+<programlisting
+><![CDATA[
+  <images>
+   <image width="111" format="JPEG" height="140" id="cf65a2f023b6cb9e9233323dca10ac7c.jpeg" />
+  </images>
+]]>
+</programlisting>
+
+<para
+>Dentro del elemento <markup
+>&lt;imágenes&gt;</markup
+>, cada imagen referenciada por una entrada se lista junto con los atributos que describen el tamaño de la imagen, su formato y su id. Si la imagen está contenida dentro de un archivo Zip, el elemento estará vacío. De otro modo, los datos de la imagen pueden estar contenidos en el &XML; como un texto codificado en base64. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-type-values">
+<title
+>Valores de tipo de colección</title>
+
+<para
+>El tipo de la colección viene dado por el atributo tipo del elemento de la colección. El valor es igual al valor de enumeración de <type
+>Type</type
+> en <filename
+>src/collection.h</filename
+>. </para>
+
+<table>
+<title
+>Valores de tipo de colección</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tipo de colección</entry>
+<entry
+>Valor</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Colección personalizada</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Colección de libros</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Colección de vídeo</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Colección de música</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Bibliografía</entry
+><entry
+>5</entry
+></row>
+<row
+><entry
+>Colección de comics</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>Colección de vinos</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Colección de monedas</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Colección de sellos</entry
+><entry
+>9</entry
+></row>
+<row
+><entry
+>Colección de cromos</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Colección de videojuegos</entry
+><entry
+>11</entry
+></row>
+<row
+><entry
+>Catálogo de archivos</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Colección de juegos de tablero</entry
+><entry
+>13</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="field-type-values">
+<title
+>Valores de tipo de campo</title>
+
+<para
+>&appname; incluirá todos los campos predeterminados para una colección si el primer elemento del campo tiene el nombre <emphasis
+>_default</emphasis
+>. Para los campos <emphasis
+>Párrafo</emphasis
+>, <emphasis
+>Tabla</emphasis
+>, o <emphasis
+>Imagen</emphasis
+>, la categoría del campo debería ser idéntica al título del campo. </para>
+
+<para
+>El tipo de campo viene dado por el atributo tipo del elemento del campo. El valor es igual al valor de enumeración de <type
+>FieldType</type
+> </para>
+
+<table>
+<title
+>Valores de tipo de campo</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tipo de campo</entry>
+<entry
+>Valor</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Texto sencillo</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Párrafo</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Elección</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Casilla de verificación</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Número</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>&URL;</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Single-Column Table</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Imagen</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Fecha</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Clasificación</entry
+><entry
+>14</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>El campo puede tener establecidos diferentes indicadores, dados como un valor de bit con OR en el atributo «indicador» del elemento del campo. El indicador para evitar que el usuario borre un campo está dirigido a esas cosas como la clave de cita para las entradas bibliográficas. </para>
+
+<table>
+<title
+>Valores del indicador de campo</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Indicadores de campo</entry>
+<entry
+>Valor</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Permitir múltiples valores</entry
+><entry
+><constant
+>0x01</constant
+></entry
+></row>
+<row
+><entry
+>Permitir agrupamiento</entry
+><entry
+><constant
+>0x02</constant
+></entry
+></row>
+<row
+><entry
+>Permitir completado</entry
+><entry
+><constant
+>0x04</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>No permitir el borrado</emphasis
+></entry
+><entry
+><constant
+>0x08</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>No permitir la edición</emphasis
+></entry
+><entry
+><constant
+>0x10</constant
+></entry
+></row>
+<row
+><entry
+>Valor derivado</entry
+><entry
+><constant
+>0x20</constant
+></entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>El formato del campo viene dado por el atributo «formato» del elemento del campo. El <emphasis
+>formato de fecha</emphasis
+> no se usa actualmente. Agrupar por <emphasis
+>personas</emphasis
+> usa todos los campos que utilizan <emphasis
+>formateo de nombres</emphasis
+>. Establecer el marcador de <emphasis
+>Valor derivado</emphasis
+> implica que el valor de ese campo se genera desde la propiedad de plantilla de otros valores de campo. </para>
+
+<table>
+<title
+>Valores del formato de campo</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Formato de campo</entry>
+<entry
+>Valor</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Solo capitalización</entry
+><entry
+>0</entry
+></row>
+<row
+><entry
+>Formateo de título</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Formateo de nombres</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+><emphasis
+>Formateo de fecha</emphasis
+></entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Sin formateo</entry
+><entry
+>4</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="hidden-options">
+<title
+>Opciones ocultas de configuración</title>
+
+<para
+>&appname; tiene algunas opciones de configuración adicionales que no son visibles en el <interface
+>Diálogo de configuración</interface
+>. No son lo suficientemente importantes para garantizar masificar el diálogo con más opciones, pero como representan opciones que pueden ser interesantes para varios usuarios, la aplicación las lee desde el archivo de configuración. </para>
+
+<para
+>Los ajustes para &appname; se guardan en un archivo del directorio local del usuario, <filename
+>$<envar
+>KDEHOME</envar
+>/share/config/tellicorc</filename
+>. Dentro de ese archivo, los ajustes se ponen en grupos, que aparecen con nombres entre corchetes, como en [Opciones generales]. Para añadir un ajuste al grupo <emphasis
+>Opciones generales</emphasis
+>, encuentre la línea en el archivo de ajustes que contenga el nombre del grupo. Si no aparece, créelo usted mismo añadiendo una línea que diga [Opciones generales]. Entonces, el ajuste se puede añadir bajo el nombre del grupo. </para>
+
+<sect2 id="hidden-general-options">
+<title
+>[Opciones generales]</title>
+
+<para
+>Estos ajustes deberían colocarse en el grupo <emphasis
+>Opciones generales</emphasis
+>. </para>
+
+<sect3>
+<title
+>Máx. tamaño de icono</title>
+
+<para
+>El tamaño máximo de los iconos en la <interface
+>Vista de iconos</interface
+> se puede cambiar mediante este ajuste. El valor por defecto es de 96. El tamaño debe estar entre 32 y 256. </para>
+</sect3>
+
+<sect3>
+<title
+>Ejemplo</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Tamaño de la caché de iconos</title>
+
+<para
+>El número máximo de iconos almacenados en la memoria se puede cambiar mediante este ajuste. El valor por defecto es 1000. </para>
+</sect3>
+
+<sect3>
+<title
+>Ejemplo</title>
+<informalexample>
+<para
+><userinput
+>Icon Cache Size=100</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Ejemplo</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Tamaño de la caché de imágenes</title>
+
+<para
+>La cantidad máxima de memoria en bytes usada para almacenar todas las imágenes se puede cambiar con este ajuste. El valor por defecto es 67108864. </para>
+</sect3>
+
+<sect3>
+<title
+>Ejemplo</title>
+<informalexample>
+<para
+><userinput
+>Image Cache Size=256000000</userinput
+></para>
+</informalexample>
+</sect3>
+
+</sect2>
+
+<sect2 id="hidden-bibtex-options">
+<title
+>[Opciones - bibtex]</title>
+
+<para
+>Estos ajustes deberían colocarse en el grupo <emphasis
+>Opciones - bibtex</emphasis
+>. </para>
+
+<sect3>
+<title
+>lyxpipe</title>
+
+<para
+>Este ajuste es para la localización de lyxpipe para enviar citas bibliográficas. No debería incluir el sufijo <literal role="extension"
+>.in</literal
+> </para>
+</sect3>
+
+<sect3>
+<title
+>Ejemplo</title>
+<informalexample>
+<para
+><userinput
+>lyxpipe=$HOME/.lyx/lyxpipe</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
+
+</sect1>
+
+<sect1 id="bibtex-translation">
+<title
+>Traducción de caracteres Bibtex</title>
+
+<para
+>Cuando se importan o exportan archivos de bibtex, ciertos caracteres  </para>
+
+<programlisting
+><![CDATA[
+  <key char="À">
+    <string
+>{\`A}</string>
+    <string
+>\`{A}</string>
+  </key>
+]]>
+</programlisting>
+
+</sect1>
+
+<sect1 id="xslt-tricks">
+<title
+>Trucos XSLT</title>
+
+<para
+>Aquí tiene algunos trucos para escribir XSLT para analizar sintácticamente los datos &XML; de &appname; (TBD). </para>
+</sect1>
+
+</chapter>

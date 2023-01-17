@@ -1,0 +1,1074 @@
+<chapter id="fundamentals">
+<title
+>Usar el &appname;</title>
+
+<sect1 id="quick-start">
+<title
+>Inici ràpid</title>
+
+<para
+>De manera predeterminada, el &appname; comença amb una col·lecció de llibres buida. Per a treballar amb algun altre tipus de col·lecció, creueu-la utilitzant l'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Nova</guimenuitem
+></menuchoice
+> o el botó de la barra d'eines. Les col·leccions s'ompliran amb alguns dels camps més comuns, però podeu afegir, modificar o suprimir de manera que s'adaptin a les vostres necessitats. </para>
+
+<para
+>Es poden afegir entrades noves utilitzant l'<link linkend="entry-editor"
+><interface
+>Editor d'entrades</interface
+></link
+>. L'element de menú <menuchoice
+><guimenu
+>Col·lecció</guimenu
+><guimenuitem
+>Nova entrada</guimenuitem
+></menuchoice
+> obrirà l'<interface
+>Editor d'entrades</interface
+> amb una entrada buida llesta per a editar. L'<interface
+>Editor d'entrades</interface
+> també es pot obrir utilitzant l'element de menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Mostra l'editor d'entrades</guimenuitem
+></menuchoice
+>. Una vegada introduïts els valors per a l'entrada, podeu desar-los a la col·lecció utilitzant el botó <guibutton
+>Desa l'entrada</guibutton
+> en el diàleg <interface
+>Editor d'entrades</interface
+>, el qual es romandrà obert en cas que vulgueu continuar afegint entrades noves. Una vegada deseu una entrada a la col·lecció, la podreu modificar fent clic sobre seu a la finestra principal. Si l'<interface
+>Editor d'entrades</interface
+> no està obert, podeu fer doble clic sobre una entrada per a obrir l'editor i començar a editar. </para>
+
+<para
+>Si voleu incloure una imatge a l'entrada, podeu utilitzar l'eina de selecció de fitxers estàndard del &kde; fent clic al botó <guibutton
+></guibutton
+> a l'<link linkend="entry-editor"
+><interface
+>Editor d'entrades</interface
+></link
+>, o podeu arrossegar una imatge des del gestor de fitxers o navegador web cap a dins de l'<interface
+>Editor d'entrades</interface
+>. </para>
+
+<para
+>Quan seleccioneu una entrada, la <link linkend="entry-view"
+><interface
+>Vista d'entrada</interface
+></link
+> mostra una vista amb format dels continguts de l'entrada. Podeu canviar la plantilla que s'utilitza per a mostrar l'entrada al <link linkend="configuration"
+><interface
+>diàleg de configuració</interface
+></link
+>. </para>
+
+<para
+>Les entrades en la col·lecció estan agrupades juntes quan comparteixen els mateixos valors per a certs camps, com l'autor o el director. Podeu canviar el camp utilitzat per a agrupar utilitzant el quadre combinat de la barra d'eines o l'element de menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Selecció de grup</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Podeu utilitzar el <interface
+>Filtre ràpid</interface
+> a la barra d'eines per a limitar ràpidament les entrades visibles a aquelles que contenen la paraula escrita. El filtre també és útil quan voleu trobar ràpidament una entrada. Podeu escriure el títol o alguna altra paraula única que identifiqui l'entrada i la <link linkend="detailed-view"
+><interface
+>Vista de columna</interface
+></link
+> sols mostrarà les entrades que coincideixin amb el filtre. La barra d'estat mostra quantes entrades hi ha a la col·lecció, i quantes s'estan filtrant. </para>
+
+</sect1>
+
+<sect1 id="main-window">
+<title
+>Ús general</title>
+
+<para
+>La finestra principal conté tres àrees diferents, totes mostren informació sobre la col·lecció d'una manera diferent. La vista primària és la <link linkend="detailed-view"
+><interface
+>Vista de columna</interface
+></link
+> a la part superior dreta, on es pot mostrar el valor de cada camp de cada entrada. Al costat esquerre, hi ha les pestanyes <link linkend="group-view"
+><interface
+>Vista de grup</interface
+></link
+>, que es pot utilitzar per a ordenar les entrades en grups en una estructura en arbre, la <link linkend="filter-view"
+><interface
+>Vista de filtre</interface
+></link
+>, que s'utilitza per a seguir quines entrades compleixen un cert criteri, i la <link linkend="loan-view"
+><interface
+>Vista de préstecs</interface
+></link
+>, on s'enumeren els préstecs. Finalment, la <link linkend="entry-view"
+><interface
+>Vista d'entrada</interface
+></link
+> mostra una vista amb format de les dades per a una única entrada, o una vista d'icona d'un grup d'entrades, al costat inferior dret. </para>
+
+<screenshot>
+<screeninfo
+>La finestra principal del &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="main-window.png"/></imageobject>
+<textobject
+><phrase
+>La finestra principal del &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="detailed-view">
+<title
+><interface
+>Vista de columna</interface
+></title>
+
+<para
+>Qualsevol dels camps en les col·leccions es poden mostrar a la <interface
+>Vista de columna</interface
+>, tot i que els camps <emphasis
+><link linkend="para"
+>Paràgraf</link
+></emphasis
+>, <emphasis
+><link linkend="image"
+>Imatge</link
+></emphasis
+> i <emphasis
+><link linkend="table"
+>Taula</link
+></emphasis
+> probablement no seran d'utilitat. Fer clic dret sobre la capçalera de la vista obrirà un menú per a seleccionar els camps visibles. Les columnes es poden canviar de mida i tornar a ordenar de qualsevol manera, i les opcions es desaran entre sessions. </para>
+</sect2>
+
+<sect2 id="group-view">
+<title
+><interface
+>Vista de grup</interface
+></title>
+
+<para
+>La <interface
+>Vista de grup</interface
+> agrupa les entrades en una vista en arbre per a qualsevol camp que <link linkend="field-options"
+>permeti agrupament</link
+>. El nombre d'entrades en cada grup es mostra al costat del nom del grup. Els grups poden expandir o contraure fent clic al signe de fletxa, o fent doble clic sobre l'element. Expandir i contraure tots els grups són les opcions al menú contextual del clic dret. L'arbre es pot ordenar sigui per nom del grup o per compte, fent clic sobre la capçalera. Un grup també es pot utilitzar com un filtre per a la <link linkend="detailed-view"
+><interface
+>Vista de columna</interface
+></link
+>, fent clic dret sobre l'element de grup. </para>
+
+<para id="people-group"
+>Quan més d'un camp a la col·lecció té l'opció <emphasis
+><link linkend="fields-dialog"
+><guilabel
+>Format com a nom</guilabel
+></link
+></emphasis
+> activada, s'afegirà un grup addicional per a combinar tots aquests camps en un sol pseudogrup anomenat <emphasis
+>Persones</emphasis
+>. </para>
+
+<para
+>Si una entrada no conté un valor per al camp que està utilitzant per a formar els grups, situeu-la en el grup <emphasis
+>(Buit)</emphasis
+>, el qual utilitza una carpeta vermella. </para>
+</sect2>
+
+<sect2 id="filter-view">
+<title
+><interface
+>Vista de filtre</interface
+></title>
+
+<para
+>Si hi ha desats filtres per a la col·lecció, la <interface
+>Vista de ​​filtre</interface
+> romandrà activa. A mesura que afegiu o modifiqueu les entrades, aquestes es compararan automàticament amb els filtres i s'afegiran o eliminaran segons correspongui. El filtre es pot modificar fent doble clic sobre l'element per a obrir el <link linkend="filter-dialog"
+><interface
+>diàleg Filtre avançat</interface
+></link
+>. En fer clic dret obtindreu l'opció de suprimir-lo del tot. </para>
+
+<screenshot>
+<screeninfo
+>La <interface
+>Vista de filtre</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-view.png"/></imageobject>
+<textobject
+><phrase
+>La <interface
+>Vista de filtre</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="loan-view">
+<title
+><interface
+>Vista de préstecs</interface
+></title>
+
+<para
+>Quan les entrades s'han donat en préstec, la <interface
+>Vista de préstec</interface
+> serà afegida a la finestra, de manera que es puguin seguir les entrades corresponents a préstecs. Els préstecs se segueixen en funció de cada entrada, de manera que si feu clic sobre un element d'entrada, tindreu una opció per a modificar el préstec utilitzant el <interface
+>Diàleg de préstec</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>La <interface
+>Vista de préstecs</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-view.png"/></imageobject>
+<textobject
+><phrase
+>La <interface
+>Vista de préstecs</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="entry-view">
+<title
+><interface
+>Vista d'entrada</interface
+></title>
+
+<para
+>A la <interface
+>Vista d'entrada</interface
+> es mostra una representació amb format dels valors de l'entrada. Les plantilles s'utilitzen per al disseny i qualsevol gràfic addicional. Es poden especificar plantilles separades per a cada tipus de col·lecció en el <link linkend="template-options"
+><interface
+>diàleg de configuració</interface
+></link
+>, juntament amb colors i tipus de lletra personalitzats.</para>
+
+<para
+>Totes les plantilles predeterminades enalteixen el color i la selecció del tipus de lletra, però altres plantilles personalitzades potser no. Les plantilles predeterminades també tenen camps d'&URL; actius, les quals s'obriran amb l'associació de fitxer predeterminada del &kde;. Quan s'exporti a &HTML;, s'utilitzarà la plantilla actual per a exportar els fitxers d'entrada individuals. </para>
+
+</sect2>
+
+<sect2 id="status-bar">
+<title
+>Barra d'estat</title>
+
+<para
+>La barra d'estat s'utilitza per a mostrar què està fent actualment el &appname;. També inclou un recompte total de les entrades a la col·lecció, i si un filtre està en ús, quantes entrades estan visibles actualment. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="entry-editor">
+<title
+>Editor d'entrades</title>
+
+<para
+>L'<interface
+>Editor d'entrades</interface
+> s'utilitza per a afegir i modificar les entrades a la col·lecció. Fent doble clic sobre una entrada en la <interface
+>Vista de grup</interface
+> o en la <interface
+>Vista de columna</interface
+> s'obrirà l'<interface
+>Editor d'entrades</interface
+> amb aquesta entrada. Les entrades noves es poden crear utilitzant el menú <menuchoice
+><guimenu
+>Col·lecció</guimenu
+></menuchoice
+>, la icona de la barra d'eines o el botó al mateix <interface
+>Editor d'entrades</interface
+>.</para>
+
+<para
+>Tancar l'<interface
+>Editor d'entrades</interface
+> quan s'han realitzat canvis, però no s'han desat farà que aparegui un missatge d'avís. Els camps s'agrupen per categories i apareixen en l'ordre en què apareixen en el <link linkend="fields-dialog"
+><interface
+>diàleg Camps de la col·lecció</interface
+></link
+>. També es poden tornar a ordenar. </para>
+
+<screenshot>
+<screeninfo
+>L'<interface
+>Editor d'entrades</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor1.png"/></imageobject>
+<textobject
+><phrase
+>L'<interface
+>Editor d'entrades</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>En fer clic sobre el títol d'un camp d'<link linkend="url"
+><emphasis
+>&URL;</emphasis
+></link
+> s'obrirà l'enllaç utilitzant l'associació de fitxer predeterminada del &kde;. El botó <guiicon
+>selector d'&URL;</guiicon
+> al costat de l'entrada de text obrirà el diàleg estàndard d'obrir fitxer del &kde;, però el camp no es limita als fitxers locals. </para>
+
+<para
+>Per als camps d'<link linkend="image"
+><emphasis
+>Imatge</emphasis
+></link
+>, el botó <guibutton
+>Selecció d'imatge...</guibutton
+> obre el diàleg de selecció d'imatges del &kde;. La imatge es desarà a la col·lecció en el format original, i es mostrarà una versió reduïda a l'<interface
+>Editor d'entrades</interface
+>. La imatge es pot esborrar utilitzant el botó <guibutton
+>Neteja</guibutton
+>. Aquestes imatges seran eliminades de la col·lecció. </para>
+
+<screenshot>
+<screeninfo
+>L'<interface
+>Editor d'entrades</interface
+> per als camps <emphasis
+>Imatge</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor3.png"/></imageobject>
+<textobject
+><phrase
+>L'<interface
+>Editor d'entrades</interface
+> per als camps <emphasis
+>Imatge</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>El giny d'edició també implementa arrossegar i deixar anar. En arrossegar un fitxer d'imatge des d'una finestra de gestor de fitxers o navegador es farà el mateix que en seleccionar la imatge al selector de fitxers. En arrossegar una imatge des del giny d'edició cap a una finestra del gestor de fitxers &konqueror; es desarà la imatge en aquesta carpeta. </para>
+
+<warning>
+<para
+>De manera predeterminada, les imatges es desen al fitxer de dades de la col·lecció, mantenint tot el contingut en una sola ubicació. No obstant això, massa imatges faran que el &appname; s'alenteixi de manera significativa i que creï un fitxer de dades molt gran. Alternativament, el &appname; pot desar les imatges per separat, sigui a la carpeta <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/data/</filename
+> o en una carpeta a la mateixa ubicació que el fitxer de dades. Carregar i desar fitxers de dades és molt més ràpid si les imatges s'emmagatzemen per separat, però els fitxers de dades ja no seran portables o es podran arxivar. Els fitxers de dades que ho contenen tot sempre es poden crear utilitzant l'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenu
+>Exporta</guimenu
+><guimenuitem
+>Exporta a Zip...</guimenuitem
+></menuchoice
+>. </para>
+</warning>
+
+<para
+>Els camps <link linkend="table"
+><emphasis
+>Taula</emphasis
+></link
+> comencen amb cinc files, però movent el cursor a l'última fila afegeix una altra automàticament. Per a taules amb múltiples columnes, sols s'utilitzarà la primera columna per a agrupar o donar format. </para>
+
+<screenshot>
+<screeninfo
+>L'<interface
+>Editor d'entrades</interface
+> per als camps <emphasis
+>Taula</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor4.png"/></imageobject>
+<textobject
+><phrase
+>L'<interface
+>Editor d'entrades</interface
+> per als camps <emphasis
+>Taula</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="edit-multiple">
+<title
+>Editar múltiples entrades</title>
+<para
+>Es poden editar múltiples entrades alhora seleccionant-ne de més d'una a la <interface
+>Vista de grup</interface
+> o a la <interface
+>Vista de columna</interface
+>. Si hi ha seleccionades múltiples entrades, els camps que contenen el mateix valor a totes les entrades estaran habilitats. Si les entrades tenen valors diferents, llavors els camps estaran inhabilitats. S'afegeixen caselles de selecció a l'extrem dret de cada entrada que controlen si el camp està habilitat o no, com es mostra en la següent captura de pantalla. </para>
+
+<para
+>Quan es desin les entrades sols es modificaran els camps habilitats, el qual fa l'edició a gran escala molt més fàcil. Per exemple, per a establir el «Suport» de totes les entrades de vídeo a la col·lecció, assegureu-vos que el camp «Suport» està habilitat. Canvieu-lo a <acronym
+>DVD</acronym
+>, i després deseu les entrades. Sols es modificarà el camp «Suport», mantenint tots els altres valors de camp de les entrades. </para>
+
+<screenshot>
+<screeninfo
+>L'<interface
+>Editor d'entrades</interface
+> per a múltiples entrades</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor5.png"/></imageobject>
+<textobject
+><phrase
+>L'<interface
+>Editor d'entrades</interface
+> per a múltiples entrades</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="updating-entries">
+<title
+>Actualitzar les dades de les entrades</title>
+
+<para
+>Les entrades es poden ser actualitzar automàticament consultant les fonts de dades disponibles per al tipus de col·lecció actual, el qual és molt útil per a combinar informació des de múltiples fonts. Per exemple, podeu afegir una pel·lícula a la vostra col·lecció utilitzant els <link linkend="amazon-web-services"
+>Serveis web d'Amazon.com</link
+>, i després actualitzar l'entrada amb informació addicional des de la <link linkend="imdb"
+>Base de dades de pel·lícules d'Internet</link
+>. </para>
+
+<para
+>Sols s'actualitzaran els camps buits si l'<link linkend="data-sources-options"
+>opció per a aquesta font</link
+> permet que els resultats sobreescriguin la informació existent. Per als <link linkend="externalexec"
+>scripts externs</link
+>, s'haurà d'especificar un camp d'actualització en les opcions de la font. </para>
+
+<para
+>L'actualització de les entrades es pot iniciar amb un menú del clic dret per a una entrada, o utilitzant l'element de menú <menuchoice
+><guimenu
+>Col·lecció</guimenu
+><guimenuitem
+>Actualitza l'entrada</guimenuitem
+></menuchoice
+>. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="fields-dialog">
+<title
+>Editar els camps</title>
+
+<para
+>El <interface
+>diàleg Camps de la col·lecció</interface
+> permet afegir nous camps a la col·lecció, modificar els ja existents, o suprimir-los. </para>
+
+<screenshot>
+<screeninfo
+>El <interface
+>diàleg Camps de la col·lecció</interface
+> del &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
+<textobject
+><phrase
+>El <interface
+>diàleg Camps de la col·lecció</interface
+> del &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="field-list">
+<title
+>Llista de camps</title>
+
+<para
+>Al costat esquerre del diàleg hi ha la llista dels camps actuals. Els camps modificats es mostren en negreta cursiva. Els botons a sota de la llista agreixen o suprimeixen un camp, i les fletxes es poden utilitzar per a canviar l'ordre. L'ordre dels camps en la llista és important perquè l'<interface
+>Editor d'entrades</interface
+> l'utilitza per a la seva disposició. Per a cada categoria, els camps queden disposats d'esquerra a dreta, d'acord amb l'ordre de dalt a baix dels camps a la llista. </para>
+</sect2>
+
+<sect2 id="field-properties">
+<title
+>Propietats del camp</title>
+
+<para
+>Un camp es defineix pel seu títol, tipus, categoria, descripció i possiblement un valor predeterminat o alguns valors permesos. El títol s'utilitza arreu per a fer referència al camp a la interfície d'usuari. L'<interface
+>Editor d'entrades</interface
+> l'utilitza per a sol·licitar valors. La <interface
+>Vista de columna</interface
+> l'utilitza com a capçalera de la columna. Els diferents tipus de camps <link linkend="field-types"
+>s'expliquen a la secció Tipus de camp</link
+>. La descripció s'utilitza com a consell d'eina a l'<interface
+>Editor d'entrades</interface
+>, potser per a proveir una explicació del contingut del camp. A més, per als <link linkend="derived"
+>camps amb valors <emphasis
+>derivats</emphasis
+></link
+>, s'utilitza una plantilla per a donar format al valor del camp. S'afegirà automàticament el valor predeterminat quan es creï una entrada nova. La llista de valors permesos per als camps <link linkend="choice"
+><emphasis
+>Opció</emphasis
+></link
+> hauran d'estar separats per un punt i coma. </para>
+
+<para
+>Els nous camps poden ser de qualsevol tipus, però canviar el tipus dels camps existents es limita als tipus compatibles, com es mostra en la següent taula: </para>
+
+<table>
+<title
+>Canvis de tipus de camp permesos</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tipus actual</entry>
+<entry
+>Nou tipus permès</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Text pla</emphasis
+></entry>
+<entry
+><emphasis
+>Text pla</emphasis
+>, <emphasis
+>Paràgraf</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Taula</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Paràgraf</emphasis
+></entry>
+<entry
+><emphasis
+>Text pla</emphasis
+>, <emphasis
+>Paràgraf</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Opció</emphasis
+></entry>
+<entry
+><emphasis
+>Text pla</emphasis
+>, <emphasis
+>Paràgraf</emphasis
+>, <emphasis
+>Opció</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Taula</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Casella de selecció</emphasis
+></entry>
+<entry
+><emphasis
+>Text pla</emphasis
+>, <emphasis
+>Paràgraf</emphasis
+>, <emphasis
+>Casella de selecció</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Taula</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Número</emphasis
+></entry>
+<entry
+><emphasis
+>Text pla</emphasis
+>, <emphasis
+>Paràgraf</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Taula</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>&URL;</emphasis
+></entry>
+<entry
+><emphasis
+>Text pla</emphasis
+>, <emphasis
+>Paràgraf</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Taula</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Data</emphasis
+></entry>
+<entry
+><emphasis
+>Text pla</emphasis
+>, <emphasis
+>Data</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Taula</emphasis
+></entry>
+<entry
+><emphasis
+>Text pla</emphasis
+>, <emphasis
+>Paràgraf</emphasis
+>, <emphasis
+>Taula</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Imatge</emphasis
+></entry>
+<entry
+><emphasis
+>Imatge</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Puntuació</emphasis
+></entry>
+<entry
+><emphasis
+>Opció</emphasis
+>, <emphasis
+>Puntuació</emphasis
+></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+
+<sect2 id="field-formatting">
+<title
+>Donar format al camp</title>
+
+<para
+>El &appname; proporciona alguna capacitat per a donar format automàtic als valors de camp. La més simple és posar automàticament en majúscula la primera lletra de cada paraula excepte els articles. El format del títol mou alguns articles del començament fins al final del camp. Per exemple, canviant «El retorn del rei» a «El retorn del rei, El». Els articles del títol són configurables. Finalment, el format dels noms intenta trencar la cadena de manera que el cognom, o la família, de la persona apareguin en primer lloc. Nom prefixos i sufixos són configurables. A més, el grup especial <emphasis
+><link linkend="people-group"
+>Persones</link
+></emphasis
+> utilitza tots els camps amb format de nom, fins i tot quan està desactivat a la configuració global. </para>
+
+<para
+>Tot el format automàtic es pot desactivar canviant les opcions globals al <link linkend="general-options"
+><interface
+>diàleg de configuració</interface
+></link
+>. Globalment, posar en majúscula la primera lletra és una opció diferent de donar format, de manera que un títol es pot donar format automàticament sense posar en majúscula. No tots els tipus de camp permeten el format automàtic. </para>
+
+<table>
+<title
+>Exemples de format</title>
+<tgroup cols="5">
+<thead>
+<row>
+<entry
+>Tipus de format</entry>
+<entry
+>Valor del camp</entry>
+<entry
+>Posar automàticament en majúscula la primera lletra</entry>
+<entry
+>Format automàtic</entry>
+<entry
+>Posar automàticament en majúscula la primera lletra i Format automàtic</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Títol</emphasis
+></entry>
+<entry
+>el retorn del rei</entry>
+<entry
+>El retorn del rei</entry>
+<entry
+>el retorn del rei, el</entry>
+<entry
+>El retorn del rei, El</entry>
+</row>
+<row>
+<entry
+><emphasis
+>Nom</emphasis
+></entry>
+<entry
+>tom swift, jr.</entry>
+<entry
+>Tom Swift, Jr.</entry>
+<entry
+>swift, jr., tom</entry>
+<entry
+>Swift, Jr., Tom</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+<sect2 id="field-options">
+<title
+>Opcions del camp</title>
+
+<para
+>Els camps també tenen tres opcions generals. Si l'autocompleció està activada, el &appname; emmagatzemarà en memòria cau els valors de cada camp, i l'<interface
+>Editor d'entrades</interface
+> oferirà la compleció automàtica, utilitzant la configuració estàndard del &kde;. No tots els tipus de camp permeten autocompleció. El &appname; també necessita saber si un camp pot tenir múltiples valors o si es pot utilitzar per a agrupar les entrades. S'utilitza un punt i coma per a separar múltiples valors en editar una entrada. </para>
+
+<para
+>Per a més eficiència, no activeu l'autocompleció llevat que la necessiteu. Com més camps amb autocompleció a la col·lecció, més lent serà el &appname; per a carregar el fitxer. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="filter-dialog">
+<title
+>Filtrar les entrades</title>
+<para
+>El <interface
+>diàleg Filtre avançat</interface
+> us permet limitar les entrades visibles a la <link linkend="detailed-view"
+><interface
+>Vista de columna</interface
+></link
+> a les que coincideixen amb una o diverses regles de filtratge. El filtre es pot utilitzar per a trobar les entrades que compleixen amb totes les regles en el diàleg, o simplement per a trobar les que compleixin qualsevol d'elles. El <interface
+>diàleg Filtre avançat</interface
+> també és útil per a cerques avançades dins d'una col·lecció. </para>
+
+<screenshot>
+<screeninfo
+>El <interface
+>diàleg Filtre avançat</interface
+> del &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
+<textobject
+><phrase
+>El <interface
+>diàleg Filtre avançat</interface
+> del &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Cada fila conté una regla de filtre única. Seleccioneu el camp a coincidir al primer quadre de la fila, i seleccioneu una regla de coincidència en el centre. Les regles poden fer coincidir valors que continguin una paraula determinada, o que siguin exactament iguals. També es pot utilitzar una expressió regular per a fer coincidir les entrades, en aquest cas el botó <guibutton
+>Edita...</guibutton
+> s'activarà per a editar l'expressió, si &kregexpeditor; està en el vostre ordinador. Finalment, la paraula o cadena a coincidir s'haurà d'introduir al quadre de text. Per als camps d'imatge, la mida de la imatge es pot utilitzar per a filtrar on el valor del filtre es compara amb la mida de la imatge més gran, sigui amplada o alçada. </para>
+
+<para
+>Es poden utilitzar fins a vuit (8) regles en el filtre. Els botons <guibutton
+>Més</guibutton
+> i <guibutton
+>Menys</guibutton
+> es poden utilitzar per a afegir o eliminar regles. </para>
+
+<para
+>Els filtres es poden desar, de manera que totes les entrades que coincideixin s'agruparan en la <interface
+>Vista de filtre</interface
+>. La vista és dinàmica, de manera que a mesura que s'afegeixen o modifiquen les entrades, el grup s'actualitzarà automàticament. Per a desar el filtre, introduïu un nom al quadre de text i feu clic al botó <guibutton
+>Desa el filtre</guibutton
+>. </para>
+
+<para
+>Els filtres desats amb anterioritat es poden modificar fent clic dret sobre l'element del filtre a la <interface
+>Vista de filtre</interface
+> i seleccionant <guilabel
+>Modifica el filtre</guilabel
+>. S'obrirà el <interface
+>diàleg Filtre avançat</interface
+>, i podreu fer canvis al nom o a les regles del filtre. </para>
+
+<informalexample>
+<para
+>Per a trobar els llibres de ciència-ficció que no heu llegit, marqueu el botó <guilabel
+>Coincideix amb tots els següents</guilabel
+>, establiu la primera regla a <emphasis
+>Gènere conté ciència-ficció</emphasis
+> i la segona a <emphasis
+>Llegit no conté verdader</emphasis
+>. (Per als camps <link linkend="bool"
+>Casella de selecció</link
+>, el valor intern és <emphasis
+>verdader</emphasis
+>). </para>
+
+<para
+>Per a trobar els llibres de «Bujold» o «Weber», marqueu el botó <guilabel
+>Coincideix amb qualsevol dels següents</guilabel
+>, establiu la primera regla a <emphasis
+>Autor conté Bujold</emphasis
+> i la segona a <emphasis
+>Autor conté Weber</emphasis
+>. </para>
+</informalexample>
+
+</sect1>
+
+<sect1 id="report-dialog">
+<title
+>Generar els informes</title>
+<para
+>El &appname; pot generar diversos informes sobre la vostra col·lecció actual. El <interface
+>diàleg Informes</interface
+> comprova totes les plantilles &xslt; en el camí de la instal·lació i a <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>. De manera que si en creeu de noves, i es troben automàticament, seran incloses com a opcions en el <interface
+>diàleg Informes</interface
+>. Alguns informes complexos poden trigar una mica més de temps a generar-se per a col·leccions grans. </para>
+
+<para
+>Les plantilles que s'instal·len amb el &appname; inclouen una llista de sols títols, la vista predeterminada de columna, una vista de grup, un resum de tots els grups i els valors més populars en aquests grups, un informe de préstecs, i un ampli informe amb les imatges de la portada. Seleccioneu la plantilla desitjada i feu clic al botó <guibutton
+>Genera</guibutton
+>. Qualsevol informe també es pot imprimir o desar en un fitxer &HTML;. </para>
+
+<screenshot>
+<screeninfo
+>El <interface
+>diàleg Informes</interface
+> del &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="report-dialog.png"/></imageobject>
+<textobject
+><phrase
+>El <interface
+>diàleg Informes</interface
+> del &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Les entrades incloses a l'informe es limitaran a les de la <interface
+>Vista de columna</interface
+>, de manera que si teniu un filtre actiu, el <interface
+>diàleg Informes</interface
+> l'utilitzarà. </para>
+</sect1>
+
+<sect1 id="loan-dialog">
+<title
+>Seguir els préstecs</title>
+<para
+>El &appname; implementa el seguiment dels préstecs de qualsevol entrada a la col·lecció. El <interface
+>Diàleg de préstec</interface
+> es pot obrir utilitzant l'element de menú <guilabel
+>Desmarca</guilabel
+>, o fent clic dret sobre una entrada. Es poden desmarcar entrades múltiples alhora. </para>
+
+<para
+>El nom del prestatari es pot introduir directament, o es pot extreure de la llibreta d'adreces predeterminada del &kde; fent clic sobre el botó al costat de l'entrada del nom. S'assumirà que la data de marcatge és la data actual, però es pot canviar. La data de venciment és opcional, i es poden afegir altres notes sobre el préstec. </para>
+
+<para
+>Si s'introdueix una data de venciment, i el &appname; està compilat amb suport de la «libkcal», es podrà afegir un recordatori de préstec al calendari predeterminat del &kde; com a un element de tasca pendent. Es pot utilitzar &korganizer; per a veure aquests elements. </para>
+
+<para
+>Quan una entrada és marca de sortida, el camp <emphasis
+>Préstec</emphasis
+> s'establirà a <emphasis
+>verdader</emphasis
+>. Si no hi ha cap camp de préstec a la col·lecció, se n'afegirà un. No modifiqueu aquest camp directament! Les entrades en préstec es poden desmarcar utilitzant l'element de menú, o fent clic dret sobre una entrada a la <interface
+>Vista de préstecs</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>El <interface
+>Diàleg de préstec</interface
+> del &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-dialog.png"/></imageobject>
+<textobject
+><phrase
+>El <interface
+>Diàleg de préstec</interface
+> del &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="tips">
+<title
+>Consells generals</title>
+
+<para
+>Es tracta de la llista de recomanacions contingudes en la llista «Consell del dia» per al &appname;. </para>
+
+<tip>
+<para
+>Si un llibre té més d'un autor, hauríeu de separar els seus noms per un punt i coma, de manera que el &appname; sabrà que ha de separar-los i utilitzar-los per separat. Haureu de fer el mateix per a qualsevol altre camp que permeti múltiples valors. Amb un punt i coma (;) separant cada valor. </para>
+</tip>
+
+<tip>
+<para
+>Podeu canviar quins camps es mostren a la vista de llista fent clic dret sobre la capçalera de la columna. </para>
+</tip>
+
+<tip>
+<para
+>Podeu afegir, editar o modificar els camps de la col·lecció utilitzant <interface
+>diàleg Camps de la col·lecció</interface
+>. Els botons de fletxa sota la llista de camps es poden utilitzar per a canviar la posició del camp a la llista, el qual afectarà la ubicació a l'editor d'entrades. </para>
+</tip>
+
+<tip>
+<para
+>Si voleu filtrar segons un camp de <link linkend="bool"
+><emphasis
+>Casella de selecció</emphasis
+></link
+>, s'haurà d'utilitzar un valor de «verdader». Per a només filtrar els llibres de ciència-ficció que no heu llegit, per exemple, marqueu el botó <guilabel
+>Coincideix amb tots els següents</guilabel
+> i establiu la primera regla a «Gènere» «conté» «ciència-ficció» (sense les cometes) i la segona a «Llegit» «no conté» «verdader» (sense les cometes). </para>
+</tip>
+
+<tip>
+<para
+>Si s'utilitza un caràcter que no sigui una paraula en el filtre ràpid, el text s'interpretarà com una expressió regular. Per a mostrar només els llibres que són d'en Weber o Bujold, per exemple, escriviu «weber|bujold» (sense les cometes) al quadre de filtre. </para>
+</tip>
+
+<tip>
+<para
+>Podeu editar més d'una entrada alhora, mantenint premuda la tecla &Maj; o &Ctrl; i seleccionant múltiples entrades. </para>
+</tip>
+
+<tip>
+<para
+>Podeu convertir una col·lecció de llibres existents en una bibliografia, la qual després es podrà exportar a format «bibtex» o «Bibtexml». </para>
+</tip>
+
+<tip>
+<para
+>Si hi ha més d'un camp amb format com un nom, després s'afegirà a la col·lecció un grup addicional anomenat «Persones», permetent que els autors i editors s'ordenin o imprimeixin junts, per exemple. </para>
+</tip>
+
+<tip>
+<para
+>Podeu modificar l'aparença de la sortida impresa modificant el fitxer <filename
+>tellico-printing.xsl</filename
+>. El fitxer genera &HTML;, i el &CSS; dins del full d'estil que governa coses com el tipus de lletra, els marges, &etc; </para>
+</tip>
+
+<tip>
+<para
+>Fent doble clic sobre un element de l'entrada s'obrirà l'<interface
+>Editor d'entrades</interface
+>. </para>
+</tip>
+
+<tip>
+<para
+>Podeu afegir etiquetes &HTML; a qualsevol camp <link linkend="para"
+><emphasis
+>Paràgraf</emphasis
+></link
+> per a donar format, com &lt;b&gt;<emphasis role="bold"
+>negreta</emphasis
+>&lt;/b&gt; o &lt;i&gt;<emphasis
+>cursiva</emphasis
+>&lt;/i&gt;. </para>
+</tip>
+
+<tip>
+<para
+>A la <interface
+>Vista de columna</interface
+>, podeu prémer una lletra al teclat per a passar a la següent entrada que comenci per aquesta lletra. </para>
+</tip>
+
+<tip>
+<para
+>Podeu utilitzar valors derivats per a combinar els valors des de múltiples camps en un únic valor. Simplement marqueu la casella de valor derivat i utilitzeu una plantilla de valor similar a «<userinput
+>Valor: %{fielda}%{fieldb}</userinput
+>» on %{...} se substituirà amb el valor del camp corresponent. Això és útil per a recollir múltiples valors en un únic camp, per exemple, per a un millor agrupament, i per a combinar camps de diferents tipus respectant alhora l'ordre adequat. Considereu, per exemple, un camp numèric seguit d'un subcamp de text amb les entrades 3b, 14a. </para>
+</tip>
+
+</sect1>
+
+</chapter>

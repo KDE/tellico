@@ -1,0 +1,1072 @@
+<chapter id="fundamentals">
+<title
+>&appname; verwenden</title>
+
+<sect1 id="quick-start">
+<title
+>Kurzeinführung</title>
+
+<para
+>In der Voreinstellung startet &appname; mit einer leeren Bücher-Sammlung. Um andere Sammlungen zu benutzen, erstellen Sie sie mit dem passenden Menüeintrag in <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Neu</guimenuitem
+></menuchoice
+> oder mit dem passenden Knopf in der Menüleiste. Sammlungen enthalten als Standard einen allgemeine Felder. Sie können beliebige Felder hinzufügen, ändern oder löschen, um die Sammlung an Ihre Wünsche anzupassen. </para>
+
+<para
+>Neue Einträge können mit dem <link linkend="entry-editor"
+><interface
+>Eintrags-Editor</interface
+></link
+> hinzugefügt werden. Mit <menuchoice
+><guimenu
+>Sammlung</guimenu
+><guimenuitem
+>Neuer Eintrag</guimenuitem
+></menuchoice
+> aus dem Menü öffnen Sie diesen Dialog mit einem neuen leeren Eintrag zur Bearbeitung. Den Dialog <interface
+>Eintrags-Editor</interface
+> können Sie auch mit <menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Eintrags-Editor anzeigen</guimenuitem
+></menuchoice
+> öffnen. Haben Sie alle gewünschten Werte eingeben, benutzen Sie den Knopf <guibutton
+>Eintrag speichern</guibutton
+>, um ihn zur Sammlung hinzuzufügen. Der Dialog bleibt geöffnet, damit Sie noch weiter Einträge einfügen können. Ist ein Eintrag in der Sammlung gespeichert, klicken Sie im Hauptfenster zur Bearbeitung darauf. Ist der Dialog <interface
+>Eintrags-Editor</interface
+> noch nicht geöffnet, müssen Sie zweimal darauf klicken. </para>
+
+<para
+>Möchten Sie für einen Eintrag ein Bild einfügen, benutzen Sie den &kde;-Dateiauswahldialog, indem Sie im <interface
+>Eintrags-Editor</interface
+> auf <guibutton
+>Bild auswählen</guibutton
+> drücken. Es ist weiterhin auch möglich, ein Bild aus dem Dateiverwaltungsprogramm oder dem Webbrowser in den <interface
+>Eintrags-Editor</interface
+> zu ziehen. </para>
+
+<para
+>Wenn Sie einen Eintrag auswählen, wird in der <link linkend="entry-view"
+><interface
+>Eintragsansicht</interface
+></link
+> der Inhalt formatiert angezeigt. Die Vorlagen für die Anzeige der Einträge kann im <link linkend="configuration"
+><interface
+>Einrichtungsdialog</interface
+></link
+> angepasst werden. </para>
+
+<para
+>Die Einträge in der Sammlung werden gruppiert angezeigt, wenn sie gemeinsame Werte für bestimmte Felder wie zum Beispiel Autor oder Regisseur haben. Das für die Gruppierung verwendete Feld kann mit dem Kombinationsfeld in der Werkzeugleiste oder dem Menüeintrag <menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Gruppen-Auswahl</guimenuitem
+></menuchoice
+> geändert werden. </para>
+
+<para
+>Mit dem <interface
+>Schnellfilter</interface
+> in der Werkzeugleiste können Sie die Anzeige auf die Einträge beschränken, die das von Ihnen eingegebene Wort enthalten. Auch zur schnellen Suche eines bestimmten Eintrags ist dieser Filter geeignet. Sie können den Titel oder ein anderes eindeutiges Wort für einen Eintrag verwenden. In der <link linkend="detailed-view"
+><interface
+>Spaltenansicht</interface
+></link
+> werden dann nur die gefilterten Einträge angezeigt. Die Statusleiste zeigt die Gesamtzahl der Einträge in der Sammlung und die Anzahl der gerade gefilterten Einträge an. </para>
+
+</sect1>
+
+<sect1 id="main-window">
+<title
+>Allgemeine Anwendung</title>
+
+<para
+>Das Hauptfenster besteht aus drei getrennten Bereichen, die Informationen in der geöffneten Sammlung auf verschiedene Art anzeigen. Am wichtigsten ist die <link linkend="detailed-view"
+><interface
+>Spaltenansicht</interface
+></link
+> oben rechts, die die Werte beliebiger Felder eines Eintrags anzeigt. Links wird in einem Unterfenster die <link linkend="group-view"
+><interface
+>Gruppenansicht</interface
+></link
+> mit allen Einträgen in Gruppen, die sortiert werden können, als Baumstruktur angezeigt. Hier kann in einem weiteren Unterfenster eine <link linkend="filter-view"
+><interface
+>Filteransicht</interface
+></link
+> mit den Einträgen gezeigt werden, die auf den eingegeben Filter passen. Haben Sie Einträge der geöffneten Sammlung verliehen, werden Sie im Unterfenster mit der <link linkend="loan-view"
+><interface
+>Ausleihansicht</interface
+></link
+> aufgeführt. In der <link linkend="entry-view"
+><interface
+>Eintragsansicht</interface
+></link
+> rechts unten im Hauptfenster sehen Sie einen einzelnen Eintrag in formatierter Anzeige oder eine Symbolansicht einer Gruppe von Einträgen. </para>
+
+<screenshot>
+<screeninfo
+>Das Hauptfenster von &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="main-window.png"/></imageobject>
+<textobject
+><phrase
+>Das Hauptfenster von &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="detailed-view">
+<title
+><interface
+>Spaltenansicht</interface
+></title>
+
+<para
+>Jedes beliebige Feld einer Sammlung kann in der <interface
+>Spaltenansicht</interface
+> angezeigt werden, obwohl die Anzeige der Felder <emphasis
+><link linkend="para"
+>Absatz</link
+></emphasis
+>, <emphasis
+><link linkend="image"
+>Bild</link
+></emphasis
+> und and <emphasis
+><link linkend="table"
+>Tabelle</link
+></emphasis
+> nicht sinnvoll. Klicken Sie mit der &RMBn; auf die Kopfzeile dieser Ansicht, um ein Kontextmenü zur Auswahl der sichtbaren Felder zu öffnen. Die Spalten können beliebig in der Größe geändert und umsortiert werden, diese Einstellung wird beim Beenden des Programms gespeichert und beim nächsten Mal wieder benutzt. </para>
+</sect2>
+
+<sect2 id="group-view">
+<title
+><interface
+>Gruppenansicht</interface
+></title>
+
+<para
+>In der <interface
+>Gruppenansicht</interface
+> werden die Einträge in einer Baumstruktur angezeigt, dabei kann jedes Feld, das die <link linkend="field-options"
+>Gruppierung erlaubt</link
+>, als oberstes Element benutzt werden. Die Anzahl der Einträge jeder Gruppe wird rechts neben dem Gruppennamen angezeigt. Gruppen können ein- und ausgeklappt werden, indem Sie auf das Pfeil-Symbol oder zweimal auf den Eintrag klicken. Das Ein- und Ausklappen aller Gruppen kann über Einträge im Kontextmenü erfolgen. Die Baumansicht kann entweder nach dem Gruppenname oder nach der Anzahl der Einträge je Gruppe durch Klicken auf die Kopfzeile sortiert werden. Eine Gruppe kann auch als Filter für die <link linkend="detailed-view"
+><interface
+>Spaltenansicht</interface
+></link
+>benutzt werden, wählen Sie diese Aktion aus dem Kontextmenü. </para>
+
+<para id="people-group"
+>Wenn für mehr als ein Feld in der Sammlung die Eigenschaft <emphasis
+><link linkend="fields-dialog"
+><guilabel
+>Als Name formatieren</guilabel
+></link
+></emphasis
+> aktiviert ist, wird eine zusätzliche Pseudo-Gruppe <emphasis
+>Personen</emphasis
+> hinzugefügt, in der alle diese Felder zusammengefasst sind. </para>
+
+<para
+>Enthält ein Eintrag keinen Wert für das Feld zur Gruppierung, wird er in der Gruppe <emphasis
+>(Leer)</emphasis
+> in roter Farbe angezeigt. </para>
+</sect2>
+
+<sect2 id="filter-view">
+<title
+><interface
+>Filteransicht</interface
+></title>
+
+<para
+>Wurden bereits Filter für die Sammlung gespeichert, wird das Unterfenster <interface
+>Filteransicht</interface
+> eingeblendet. Wenn Sie Einträge hinzufügen oder ändern, werden sie automatisch nach den Filterkriterien überprüft und je nach Ergebnis hinzugefügt oder entfernt. Ein Filter kann bearbeitet werden, indem Sie auf den Eintrag doppelklicken. Dann wird der Dialog <link linkend="filter-dialog"
+><interface
+>Erweiterter Filter</interface
+></link
+> geöffnet. Im Kontextmenü, das durch Klicken mit der &RMBn; auf einen Eintrag geöffnet wird, können Sie einen Filter auch löschen. </para>
+
+<screenshot>
+<screeninfo
+>Die <interface
+>Filteransicht</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-view.png"/></imageobject>
+<textobject
+><phrase
+>Die <interface
+>Filteransicht</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="loan-view">
+<title
+><interface
+>Ausleihansicht</interface
+></title>
+
+<para
+>Haben Sie Einträge der Sammlung verleihen, dann erscheint das zusätzliche Unterfenster <interface
+>Ausleihansicht</interface
+>, damit Sie den Status aller ausgeliehenen Einträge verfolgen können. Ausleihen werden für jeden Eintrag einzeln behandelt, daher können Sie im Kontextmenü eines Eintrags den Dialog <interface
+>Ausleihe ändern</interface
+> zur Bearbeitung der Daten aufrufen. </para>
+
+<screenshot>
+<screeninfo
+>Die <interface
+>Ausleihansicht</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-view.png"/></imageobject>
+<textobject
+><phrase
+>Die <interface
+>Ausleihansicht</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="entry-view">
+<title
+><interface
+>Eintragsansicht</interface
+></title>
+
+<para
+>Eine formatierte Darstellung der Feldwerte eines Eintrags wird in der <interface
+>Eintragsansicht</interface
+> angezeigt. Für die Anordnung und zusätzliche Grafiken werden Vorlagen verwendet. Für jede einzelne Sammlungsart können eigene Vorlagen mit benutzerdefinierten Farben und Schriften im <link linkend="template-options"
+><interface
+>Einrichtungsdialog</interface
+></link
+> festgelegt werden.</para>
+
+<para
+>Alle Standardvorlagen verwenden die ausgewählten Farben und Schriftarten, bei benutzerdefinierten Vorlagen trifft das nicht immer zu. in den Standardvorlagen werden beim Klicken auf &URL;-Felder die zugeordneten &kde;-Programme aufgerufen. Beim Export in &HTML;-Dateien wird die aktuelle Vorlage für die einzelnen Dateien mit den Einträgen verwendet. </para>
+
+</sect2>
+
+<sect2 id="status-bar">
+<title
+>Statusleiste</title>
+
+<para
+>In der Statusleiste erscheinen Meldung von &appname;. Zusätzlich wird die Gesamtsumme der Einträge in der Sammlung und die Anzahl der aktuell angezeigten Einträge angegeben, wenn Sie einen Filter benutzen. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="entry-editor">
+<title
+>Einträge bearbeiten</title>
+
+<para
+>Mit dem <interface
+>Eintrags-Editor</interface
+> können Sie Einträge bearbeiten und zur Sammlung hinzufügen. Doppelklicken auf einen Eintrag in der <interface
+>Gruppenansicht</interface
+> oder in der <interface
+>Spaltenansicht</interface
+> öffnet den <interface
+>Eintrags-Editor</interface
+> mit den Daten dieses Eintrags. Sie können neue Einträge hinzufügen, indem Sie das Menü <menuchoice
+><guimenu
+>Sammlung</guimenu
+></menuchoice
+>, das Symbol in der Werkzeugleiste oder den Knopf im <interface
+>Eintrags-Editor</interface
+> direkt benutzen.</para>
+
+<para
+>Schließen Sie den <interface
+>Eintrags-Editor</interface
+> mit nicht gespeicherten Änderungen, dann erscheint ein Dialog, in den Sie Ihre Änderungen verwerfen oder speichern können. Die Felder werden nach Kategorie gruppiert und in der Reihenfolge wie im Dialog <link linkend="fields-dialog"
+><interface
+>Sammlungsfelder</interface
+></link
+> angezeigt. Diese Reihenfolgen kann angepasst werden. </para>
+
+<screenshot>
+<screeninfo
+>Der <interface
+>Eintrags-Editor</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor1.png"/></imageobject>
+<textobject
+><phrase
+>Der <interface
+>Eintrags-Editor</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Klicken auf den Titel eines <link linkend="url"
+><emphasis
+>&URL;</emphasis
+></link
+>-Felds öffnet diese Verknüpfung mit dem zugeordneten &kde;-Standardprogramm. Mit dem Symbol <guiicon
+>Dateiauswahl</guiicon
+> rechts neben dem Texteingabefeld öffnen Sie den &kde;-Dateidialog. Im Eingabefeld können aber auch entfernte Dateien angegeben werden. </para>
+
+<para
+>Bei <link linkend="image"
+><emphasis
+>Bild</emphasis
+></link
+>-Feldern öffnen Sie mit dem Knopf <guibutton
+>Bild auswählen ...</guibutton
+> den &kde;-Dateiauswahldialog mit einem Filter für alle bekannten Grafikformate. Das Bild wird in der Sammlung im ursprünglichen Format gespeichert, im <interface
+>Eintrags-Editor</interface
+> wird eine verkleinerte Vorschau angezeigt. Bilder können mit dem Knopf <guibutton
+>Löschen</guibutton
+> aus dem Eintrags-Editor und damit aus der Sammlung entfernt werden. </para>
+
+<screenshot>
+<screeninfo
+>Der <interface
+>Eintrags-Editor</interface
+> für <emphasis
+>Bild</emphasis
+>-Felder</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor3.png"/></imageobject>
+<textobject
+><phrase
+>Der <interface
+>Eintrags-Editor</interface
+> für <emphasis
+>Bild</emphasis
+>-Felder</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Das Bearbeitungsfenster unterstützt ebenso Ziehen und Ablegen. Ziehen Sie ein Bild aus dem Dateiverwaltungsprogramm oder dem Webbrowser in das Dialogfenster, dann wird das wird wie bei der Auswahl im Dateidialog eingefügt. Ziehen Sie ein Bild aus Bearbeitungsfenster in ein Fenster des Dateiverwaltungsprogramms &konqueror;, dann wird dieses Bild im dem Ordner gespeichert. </para>
+
+<warning>
+<para
+>In der Voreinstellung werden Bilder in der Sammlungsdatei gespeichert. Dann sind alle Informationen in einer Datei enthalten. Haben Sie viele Bilder in einer Sammlung, dann arbeitet &appname; spürbar langsamer und die Datendatei wird sehr groß. Alternativ kann &appname; die Bilder getrennt speichern, entweder im Ordner <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/data/</filename
+> oder im Ordner der Datendatei. Das Laden und Speichern von Bilder erfolgt erheblich schneller, wenn die Bilder getrennt gespeichert werden. Dann ist reicht es aber nicht mehr aus, nur die Datendatei zu übertragen oder zu archivieren. Um in diesem Fall eine eigenständige Datendatei mit allen Bildern zu erzeugen, benutzen Sie <menuchoice
+><guimenu
+>Datei</guimenu
+><guisubmenu
+>Exportieren</guisubmenu
+><guimenuitem
+>Als Zip-Archiv exportieren ...</guimenuitem
+></menuchoice
+> aus dem Menü. </para>
+</warning>
+
+<para
+>Für <link linkend="table"
+><emphasis
+>Tabellen</emphasis
+></link
+>-felder werden zuerst nur fünf Zeilen angezeigt. Bewegen Sie den Cursor jedoch in die letzte Zeile, dann werden automatisch zusätzliche Zeilen angefügt. Bei Tabellen mit mehreren Spalten wird die erste Spalte für die Gruppierung oder Formatierung verwendet. </para>
+
+<screenshot>
+<screeninfo
+>Der <interface
+>Eintrags-Editor</interface
+> für <emphasis
+>Tabellen</emphasis
+>-Felder</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor4.png"/></imageobject>
+<textobject
+><phrase
+>Der <interface
+>Eintrags-Editor</interface
+> für <emphasis
+>Tabellen</emphasis
+>-Felder</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="edit-multiple">
+<title
+>Mehrere Einträge bearbeiten</title>
+<para
+>Mehrere Einträge können gleichzeitig bearbeitet werden, indem Sie sie entweder in der <interface
+>Gruppenansicht</interface
+> oder in der <interface
+>Spaltenansicht</interface
+> auswählen. Dann werden alle Felder mit dem gleichen Wert aktiviert. Felder mit verschieden Werten können nicht geändert werden. Das nächste Bildschirmfoto zeigt, dass Ankreuzfelder rechts neben den Einträgen der Felder hinzugefügt werden. Damit wird festgelegt, ob ein Feld zur Bearbeitung aktiviert ist.  </para>
+
+<para
+>Nur aktivierte Felder werden geändert, wenn die Einträge gespeichert werden, damit ist die gleichzeitige Änderung von Feldwerten viel einfacher. Um zu Beispiel das Medium aller Einträge in einer Video-Sammlung zu ändern, aktivieren Sie dieses Feld zur Bearbeitung. Ändern Sie den Inhalt des Felds zu <acronym
+>DVD</acronym
+> und speichern Sie die Einträge. Nur die Änderungen des Feldes Medium werden dann geändert, die Werte aller anderen Felder werden beibehalten. </para>
+
+<screenshot>
+<screeninfo
+>Der <interface
+>Eintrags-Editor</interface
+> für mehrere Einträge</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor5.png"/></imageobject>
+<textobject
+><phrase
+>Der <interface
+>Eintrags-Editor</interface
+> für mehrere Einträge</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="updating-entries">
+<title
+>Eingabedaten aktualisieren</title>
+
+<para
+>Einträge können durch Abfrage der für die geöffnete Sammlungsart verfügbaren Datenquellen automatisch aktualisiert werden. Das ist besonders nützlich, um Informationen aus mehreren Quellen zusammenzuführen. Sie können zum Beispiel mit dem Internetservice <link linkend="amazon-web-services"
+>Amazon.com</link
+> einen Film in Ihre Sammlung einfügen und dann diesen Eintrag mit zusätzlichen Informationen aus der <link linkend="imdb"
+>Internet Movie Database (Internet-Filmdatenbank)</link
+> ergänzen. </para>
+
+<para
+>Nur leere Felder werden aktualisiert. Um das Verhalten zu ändern, erlauben Sie in den <link linkend="data-sources-options"
+>Einstellungen für diese Quelle</link
+> das Überschreiben vorhandener Informationen. Für <link linkend="externalexec"
+>externe Skripte</link
+> muss ein Aktualisierungsfeld in den Einstellungen der Quelle festgelegt werden. </para>
+
+<para
+>Ein Eintrag kann über das mit der &RMBn; geöffnete Kontextmenü oder mit <menuchoice
+><guimenu
+>Sammlung</guimenu
+><guimenuitem
+>Eintrag aktualisieren</guimenuitem
+></menuchoice
+> aus dem Menü aktualisiert werden. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="fields-dialog">
+<title
+>Felder bearbeiten</title>
+
+<para
+>Im Dialog <interface
+>Sammlungsfelder</interface
+> können Sie neue Felder zur Sammlung hinzufügen, vorhandene Felder bearbeiten oder Felder löschen. </para>
+
+<screenshot>
+<screeninfo
+>Der Dialog <interface
+>Sammlungsfelder</interface
+> in &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
+<textobject
+><phrase
+>Der Dialog <interface
+>Sammlungsfelder</interface
+> in &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="field-list">
+<title
+>Feldliste</title>
+
+<para
+>Auf der linken Seite des Dialogs wird eine Liste aller vorhandenen Felder angezeigt, geänderte Felder in fetter Kursivschrift. Mit den Knöpfen unterhalb der Liste können Felder gelöscht und hinzugefügt werden, mit den Pfeilen ändern Sie die Reihenfolge der Felder. Die Reihenfolge ist deshalb wichtig, da sie im <interface
+>Eintrags-Editor</interface
+> für die Anordnung der Elemente benutzt wird. In jeder Kategorie werden die Felder von links nach rechts entsprechend der Reihenfolge in dieser Liste angeordnet. </para>
+</sect2>
+
+<sect2 id="field-properties">
+<title
+>Feld-Eigenschaften</title>
+
+<para
+>Ein Feld wird durch Titel, Typ, Kategorie, Beschreibung und eventuell einen Standardwert oder einige zulässige Werte definiert. Der Titel wird in der Benutzeroberfläche zur Bezeichnung des Felds benutzt, sowohl im <interface
+>Eintrags-Editor</interface
+> wie auch in der <interface
+>Spaltenansicht</interface
+> für die Titel der Spalten. Die unterschiedlichen Feldtypen werden im Abschnitt <link linkend="field-types"
+>Feldtypen</link
+> ausführlich erläutert. Die Beschreibung wird als Kurzinfo im <interface
+>Eintrags-Editor</interface
+> zum Beispiel mit Informationen zum Format des Feldes angezeigt. Außerdem wird für <link linkend="derived"
+>Felder mit <emphasis
+>abgeleiteten</emphasis
+> Werten</link
+> eine Vorlage zur Formatierung des Feldwertes verwendet. Der Standardwert erscheint als Voreinstellung, wenn ein neuer Eintrag erzeugt wird. In der Liste der zulässigen Werte für <link linkend="choice"
+><emphasis
+>Auswahl</emphasis
+></link
+>-Felder sollte das Semikolon als Trennzeichen benutzt werden. </para>
+
+<para
+>Neue Felder können jeden beliebigen Typ haben, aber bereits vorhandene Felder können nur zu kompatiblen Typen geändert werden, die in der folgenden Tabelle angezeigt werden: </para>
+
+<table>
+<title
+>Zulässige Änderungen des Feldtyps</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Aktueller Typ</entry>
+<entry
+>Neuer zulässiger Typ</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Einfacher Text</emphasis
+></entry>
+<entry
+><emphasis
+>Einfacher Text</emphasis
+>, <emphasis
+>Absatz</emphasis
+>, <emphasis
+>Zahl</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabelle</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Absatz</emphasis
+></entry>
+<entry
+><emphasis
+>Einfacher Text</emphasis
+>, <emphasis
+>Absatz</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Auswahl</emphasis
+></entry>
+<entry
+><emphasis
+>Einfacher Text</emphasis
+>, <emphasis
+>Absatz</emphasis
+>, <emphasis
+>Auswahl</emphasis
+>, <emphasis
+>Zahl</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabelle</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Ankreuzfeld</emphasis
+></entry>
+<entry
+><emphasis
+>Einfacher Text</emphasis
+>, <emphasis
+>Absatz</emphasis
+>, <emphasis
+>Ankreuzfeld</emphasis
+>, <emphasis
+>Zahl</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabelle</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Zahl</emphasis
+></entry>
+<entry
+><emphasis
+>Einfacher Text</emphasis
+>, <emphasis
+>Absatz</emphasis
+>, <emphasis
+>Zahl</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabelle</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>&URL;</emphasis
+></entry>
+<entry
+><emphasis
+>Einfacher Text</emphasis
+>, <emphasis
+>Absatz</emphasis
+>, <emphasis
+>Zahl</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabelle</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Datum</emphasis
+></entry>
+<entry
+><emphasis
+>Einfacher Text</emphasis
+>, <emphasis
+>Datum</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Tabelle</emphasis
+></entry>
+<entry
+><emphasis
+>Einfacher Text</emphasis
+>, <emphasis
+>Absatz</emphasis
+>, <emphasis
+>Tabelle</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Bild</emphasis
+></entry>
+<entry
+><emphasis
+>Bild</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Bewertung</emphasis
+></entry>
+<entry
+><emphasis
+>Auswahl</emphasis
+>, <emphasis
+>Bewertung</emphasis
+></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+
+<sect2 id="field-formatting">
+<title
+>Formatierung der Felder</title>
+
+<para
+>&appname; bietet einige Möglichkeiten zur automatischen Formatierung von Feldwerten. Die einfachste Formatierung ist die automatische Großschreibung, dabei werden alle Wörter bis auf die Artikel großgeschrieben. Bei der Formatierung als Titel werden bestimmte Artikel vom Anfang des Titels zum Ende verschoben. Damit wird "Die Rückkehr des Königs" zu "Rückkehr des Königs, Die" geändert. Die zu ändernden Artikel können eingestellt werden. Auch bei der Formatierung von Namen wird versucht, den Familien- oder Nachnamen als erstes anzuzeigen. Dazu können die Vor- und Nachsilben von Namen eingestellt werden. Außerdem benutzt die besondere Gruppe <emphasis
+><link linkend="people-group"
+>Personen</link
+></emphasis
+> alle Felder mit Namensformatierung, auch wenn die globale Einstellung ausgeschaltet ist. </para>
+
+<para
+>Die automatische Formatierung kann durch Änderung der globalen Einstellung im <link linkend="general-options"
+><interface
+>Einrichtungsdialog</interface
+></link
+> ausgeschaltet werden. Global sind Großschreibung und Formatierung getrennte Einstellungen, daher kann ein Titel automatisch formatiert werden, ohne ihn groß zu schreiben. Die automatische Formatierung ist nicht bei allen Feldtypen möglich. </para>
+
+<table>
+<title
+>Formatbeispiele</title>
+<tgroup cols="5">
+<thead>
+<row>
+<entry
+>Formattypen</entry>
+<entry
+>Feldwerte</entry>
+<entry
+>Automatische Großschreibung</entry>
+<entry
+>Automatisch formatiert</entry>
+<entry
+>Automatische Großschreibung &amp; Automatisch formatiert</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Titel</emphasis
+></entry>
+<entry
+>die rückkehr des königs</entry>
+<entry
+>Die Rückkehr des Königs</entry>
+<entry
+>rückkehr des königs, die</entry>
+<entry
+>Rückkehr des Königs, Die</entry>
+</row>
+<row>
+<entry
+><emphasis
+>Name</emphasis
+></entry>
+<entry
+>tom swift, jr.</entry>
+<entry
+>Tom Swift, Jr.</entry>
+<entry
+>swift, jr., tom</entry>
+<entry
+>Swift, Jr., Tom</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+<sect2 id="field-options">
+<title
+>Feld-Optionen</title>
+
+<para
+>Für Felder gibt es drei allgemeine Einstellungen. Wenn die automatische Vervollständigung aktiviert ist, speichert &appname; die Werte alle Felder in einem Zwischenspeicher und im <interface
+>Eintrags-Editor</interface
+> werden bei der Eingabe Vorschläge zur Vervollständigung mit den &kde;-Standardeinstellungen angeboten. Die automatische Vervollständigung ist nicht für alle Feldtypen möglich. Auch für Felder mit mehreren erlaubten Werten oder für Felder, die zur Gruppierung verwendet werden, gibt es keine automatische Vervollständigung. Zur Trennung mehrerer Werte eines Feldes wird das Semikolon bei der Eingabe benutzt. </para>
+
+<para
+>Aktivieren Sie die automatische Vervollständigung nur, wenn Sie sie tatsächlich für die Felder benötigen, da diese Funktion die Arbeitsgeschwindigkeit herabsetzt. Je mehr Felder mit automatischer Vervollständigung in der Sammlung vorhanden sind, desto länger dauert das Laden der Daten. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="filter-dialog">
+<title
+>Einträge filtern</title>
+<para
+>Im Dialog <interface
+>Erweiterter Filter</interface
+> können Sie die angezeigten Einträge in der <link linkend="detailed-view"
+><interface
+>Spaltenansicht</interface
+></link
+> mit Regeln filtern. Ein Filter kann benutzt werden, um Einträge zu finden, auf die alle oder nur einzelne Regeln zutreffen. Diesen Dialog können Sie außerdem auch zur erweiterten Suche in einer Sammlung benutzen.  </para>
+
+<screenshot>
+<screeninfo
+>Der Dialog <interface
+>Erweiterter Filter</interface
+> in &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
+<textobject
+><phrase
+>Der Dialog <interface
+>Erweiterter Filter</interface
+> in &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Jede Zeile enthält eine einzelne Filterregel. Wählen Sie das passende Feld in der ersten Element in der Zeile, dann eine zugehörige Regel in der Mitte. In Regeln können Werte mit einem bestimmten Word oder dem gesamten Feldinhalt verglichen werden. Auch reguläre Ausdrücken lassen sich beim Vergleich mit Feldinhalten benutzen. Dann wird der Knopf <guibutton
+>Bearbeiten ...</guibutton
+> zur Änderung der Ausdrücke aktiviert, wenn das Programm &kregexpeditor; auf dem Rechner installiert ist. Dann müssen Sie zum Schluss noch das Wort oder den Text zum Vergleichen eingeben. Bei Feldern für Bilder kann die Bildgröße zum Filtern verwendet werden, dabei wird der Filterwert mit der größeren Bilddimension, entweder Breite oder Höhe, verglichen. </para>
+
+<para
+>Bis zu acht Regeln können als Filter benutzt werden. Mit den Knöpfen <guibutton
+>Mehr</guibutton
+> und <guibutton
+>Weniger</guibutton
+> können Regeln hinzugefügt oder entfernt werden. </para>
+
+<para
+>Filter können gespeichert werden, so dass alle zutreffenden Einträge zusammen in der <interface
+>Filteransicht</interface
+> gruppiert werden. Diese Ansicht wird immer automatisch aktualisiert, wenn Einträge hinzugefügt oder geändert werden. Um einen Filter zu speichern, geben Sie einen Namen in das Texteingabefeld ein und drücken den Knopf <guibutton
+>Filter speichern</guibutton
+>. </para>
+
+<para
+>Bereits gespeicherte Filter können geändert werden, indem Sie mit der &RMBn; auf den Eintrag in der <interface
+>Filteransicht</interface
+> klicken und dann im Kontextmenü <guilabel
+>Filter ändern</guilabel
+> wählen. Dann wird er Dialog <interface
+>Filter ändern</interface
+> geöffnet. Es können nun der Filtername oder die Filterregeln geändert werden. </para>
+
+<informalexample>
+<para
+>Um alle noch nicht gelesenen Science-Fiction-Bücher zu finden, wählen Sie <guilabel
+>Trifft auf alle der folgenden zu</guilabel
+>. Stellen Sie für die erste Regel <emphasis
+>Gattung enthält Science-Fiction</emphasis
+> ein und für die zweite Regel <emphasis
+>Gelesen enthält nicht true</emphasis
+>. Für Ankreuzfelder wird ein interner Wert von <emphasis
+>true</emphasis
+> benutzt. </para>
+
+<para
+>Um alle Bücher von Bujold oder Weber zu finden, aktivieren Sie die Einstellung <guilabel
+>Trifft auf eines der folgenden zu</guilabel
+>. Als erste Regel stellen Sie <emphasis
+>Autor enthält Bujold</emphasis
+> und als zweite Regel <emphasis
+>Autor enthält Weber</emphasis
+> ein. </para>
+</informalexample>
+
+</sect1>
+
+<sect1 id="report-dialog">
+<title
+>Berichte erstellen</title>
+<para
+>&appname; kann verschiedene Berichte über Ihre geöffnete Sammlung erzeugen. Beim Öffnen des Dialogs <interface
+>Sammlungsbericht</interface
+> werden &xslt;-Vorlagen im Installationsordner und in <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+> gesucht. Daher können Sie eigene Vorlagen erstellen und in diesen Ordner speichern. Sie werden dann automatisch gefunden und stehen im Dialog <interface
+>Sammlungsbericht</interface
+> zu Auswahl. Das Generieren einiger komplexer Berichte kann bei großen Sammlungen viel Zeit in Anspruch nehmen. </para>
+
+<para
+>In den mit &appname; installierten Vorlagen ist eine Liste nur der Titel, die Standard-Spaltenansicht, eine Gruppenansicht, eine Zusammenfassung aller Gruppen, eine Ausleihansicht und ein ausführlicher Bericht mit Bildern enthalten. Wählen Sie die gewünschte Vorlage und drücken Sie den Knopf <guibutton
+>Erstellen</guibutton
+>. ein Bericht kann zusätzlich auch als &HTML;-Datei gespeichert werden. </para>
+
+<screenshot>
+<screeninfo
+>Der Dialog <interface
+>Sammlungsbericht</interface
+> in &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="report-dialog.png"/></imageobject>
+<textobject
+><phrase
+>Der Dialog <interface
+>Sammlungsbericht</interface
+> in &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Die Einträge im Bericht entsprechen denen in der <interface
+>Spaltenansicht</interface
+>. Haben Sie hier einen Filter aktiviert, wird er auch vom <interface
+>Berichtsdialog</interface
+> benutzt. </para>
+</sect1>
+
+<sect1 id="loan-dialog">
+<title
+>Ausleihe verfolgen</title>
+<para
+>Mit &appname; können Sie die Ausleihe jedes Eintrags in der Sammlung überwachen. Der Dialog <interface
+>Ausleihe</interface
+> kann mit dem Menüeintrag <guilabel
+>Ausleihen</guilabel
+> aus dem Menü <guimenu
+>Sammlung</guimenu
+> oder aus dem Kontextmenü aufgerufen werden. Dabei können mehrere Einträge auf einmal ausgeliehen werden. </para>
+
+<para
+>Der Name des Ausleihers kann direkt eingegeben oder aus dem &kde;-Adressbuch entnommen werden, wenn Sie auf den Kopf neben dem Eingabefeld drücken. Als Leihdatum ist das aktuelle Datum voreingestellt, es kann aber auch geändert werden. Das Fälligkeitsdatum muss nicht angegeben werden. Weitere Angaben können im Feld <guilabel
+>Notiz</guilabel
+> eingetragen werden. </para>
+
+<para
+>Wird ein Fälligkeitsdatum angegeben und wurde &appname; mit der Bibliothek „libkcal“ kompiliert, kann eine Erinnerung zum &kde;-Standardkalender hinzugefügt werden. Zur Anzeige dieser Einträge benutzen Sie &korganizer;. </para>
+
+<para
+>Wenn ein Eintrag verliehen ist, wird das Feld <emphasis
+>Verliehen</emphasis
+> auf den Wert <emphasis
+>true</emphasis
+>. Gibt es dieses Feld in der Sammlung noch nicht, wird es automatisch erstellt. Ändern Sie dieses Feld nie direkt. Ausgeliehene Einträge sollten mit dem Menüeintrag <menuchoice
+><guimenu
+>Sammlung</guimenu
+><guimenuitem
+>Zurückgeben</guimenuitem
+></menuchoice
+> oder mit dem Kontexmenü der <interface
+>Ausleihansicht</interface
+> wieder aus der Ausleihe entfernt werden. </para>
+
+<screenshot>
+<screeninfo
+>Der Dialog <interface
+>Ausleihe</interface
+> in &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-dialog.png"/></imageobject>
+<textobject
+><phrase
+>Der Dialog <interface
+>Ausleihe</interface
+> in &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="tips">
+<title
+>Allgemeine Hinweise</title>
+
+<para
+>Dies ist die Liste der „Tipps des Tages“ für &appname;: </para>
+
+<tip>
+<para
+>Falls ein Buch mehr als einen Autor hat, sollten Sie deren Namen mit einem Semikolon trennen, sodass Tellico weiss, wie sie getrennt benutzt werden können. Jedes andere Feld, welches mehrere Werte erlaubt, sollte in der gleichen Art und Weise mit einem die Werte trennenden Semikolon (;) eingegeben werden. </para>
+</tip>
+
+<tip>
+<para
+>Sie können die Anzeige der Felder in der Listenansicht durch Anklicken der Spalten-Titel mit der rechten Maustaste ändern. </para>
+</tip>
+
+<tip>
+<para
+>Sie können die Felder der Sammlung im Dialog <interface
+>Sammlungsfelder</interface
+> bearbeiten. Die Pfeil-Schaltflächen unter der Feldliste können dazu benutzt werden, die Position der Felder in der Liste zu verändern. Das beeinflusst die Positionierung im Eintrags-Editor. </para>
+</tip>
+
+<tip>
+<para
+>Wenn Sie nach einem <link linkend="bool"
+><emphasis
+>Ankreuzfeld</emphasis
+></link
+> filtern möchten, sollte ein Wert von „true“ benutzt werden. Falls Sie beispielsweise nur die noch ungelesenen Science-Fiction-Bücher anzeigen möchten, wählen Sie <guilabel
+>Trifft auf alle der folgenden zu</guilabel
+>. Stellen Sie für die erste Regel „Gattung“ „enthält“ „Science-Fiction“ (ohne Anführungszeichen) ein und für die zweite Regel „Gelesen“ „enthält nicht“ „true“ (ohne Anführungszeichen). </para>
+</tip>
+
+<tip>
+<para
+>Wenn Sie ein Nicht-Textzeichen im Schnell-Filter benutzen, wird der Text als ein regulärer Ausdruck interpretiert wird. Um zum Beispiel nur Bücher anzuzeigen, welche von „Weber“ oder „Bujold“ geschrieben wurden, geben Sie „weber|bujold“ (ohne Anführungszeichen) in das Filterfeld ein. </para>
+</tip>
+
+<tip>
+<para
+>Sie können mehr als einen Datensatz auf einmal bearbeiten, indem Sie die &Shift;- oder &Ctrl;-Taste gedrückt halten und mehrere Einträge auswählen. </para>
+</tip>
+
+<tip>
+<para
+>Sie können eine existierende Bücher-Sammlung in ein Literaturverzeichnis umwandeln, das anschließend ins Bibtex- oder Bibtexml-Format exportiert werden kann. </para>
+</tip>
+
+<tip>
+<para
+>Wenn mehr als ein Feld als Name formatiert wird, kann eine zusätzliche Gruppe mit dem Namen „Personen“ zur Sammlung hinzugefügt werden, die es beispielsweise erlaubt, Autoren und Verfasser zusammen zu sortieren und auszudrucken. </para>
+</tip>
+
+<tip>
+<para
+>Sie können das Aussehen der gedruckten Ausgabe verändern, indem Sie die Datei <filename
+>tellico-printing.xsl</filename
+> anpassen. Die Datei erzeugt &HTML; und die &CSS;-Anweisungen in Stilvorlagen bestimmen zum Beispiel Schriftart und Ränder. </para>
+</tip>
+
+<tip>
+<para
+>Doppelklick auf einen Eintrag öffnet den <interface
+>Eintrags-Editor</interface
+>. </para>
+</tip>
+
+<tip>
+<para
+>Sie können &HTML;-Tags zu jedem <link linkend="para"
+><emphasis
+>Absatz</emphasis
+></link
+>-Feld zur Formatierung einfügen wie zum Beispiel &lt;b&gt;<emphasis role="bold"
+>bold</emphasis
+>&lt;/b&gt; oder &lt;i&gt;<emphasis
+>italic</emphasis
+>&lt;/i&gt;. </para>
+</tip>
+
+<tip>
+<para
+>In der <interface
+>Spaltenansicht</interface
+> können Sie einen beliebigen Buchstaben auf der Tastatur drücken, um zum nächsten Eintrag zu gehen, der mit diesem Buchstaben beginnt. </para>
+</tip>
+
+<tip>
+<para
+>Sie können ein Feld mit einem abgeleiteten Wert dazu verwenden, um mehrere getrennte Felder in einem einzelnen Feld zusammenzufügen. Aktivieren Sie die Einstellung abgeleitetes Feld und benutzen Sie eine Vorlage für einen abgeleiteten Wert wie „Wert: %{Feld1}%{Feld2}“. Dabei wird %{...} durch den entsprechenden Feldwert ersetzt. Dies ist sinnvoll zum Zusammenfassen von mehreren Werten in einem einzelnen Feld, z. B. für bessere Gruppierung und zum Zusammenfassen von Feldern verschiedener Typen unter gleichzeitiger Berücksichtigung korrekter Sortierung. Eine Anwendung ist zum Beispiel ein Nummern-Feld gefolgt von einem Textunterfeld mit Einträgen wie 3b, 14a. </para>
+</tip>
+
+</sect1>
+
+</chapter>

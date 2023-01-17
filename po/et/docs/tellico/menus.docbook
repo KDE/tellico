@@ -1,0 +1,1048 @@
+<chapter id="menus">
+<title
+>Käskude seletused</title>
+
+<!--
+(OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
+application windows and their menubar and toolbar commands for easy reference.
+Also include any keys that have a special function but have no equivalent in the
+menus or toolbars. This may not be necessary for small apps or apps with no tool
+or menu bars.
+-->
+
+<sect1 id="main-window-menus">
+<title
+>&appname; peaaken</title>
+
+<para
+>Allpool kirjeldatakse kõiki menüükirjeid. Kui vastava menüükirjega on seotud seda sooritada suutev klahvikombinatsioon, tuuakse vaikimisi kiirklahv samuti ära. </para>
+
+<sect2>
+<title
+>Menüü <guimenu
+>Fail</guimenu
+></title>
+
+<para>
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fail</guimenu
+> <guimenuitem
+>Uus</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Selle käsuga <action
+>luuakse uus kogu</action
+>. &appname; toetab vaikimisi <link linkend="collection-types"
+>12 kogude tüüpi</link
+> ning lisaks tühja, kasutaja enda määratavat kohandatud kogu.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Ava...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab &appname; faili</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fail</guimenu
+> <guimenuitem
+>Ava viimati kasutatud</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab faili</action
+> alammenüüst, mis sisaldab viimati avatud faile.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Salvesta...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>salvestab kogu</action
+>. Kui fail on <emphasis
+>Nimetu</emphasis
+>, on käsk <guimenuitem
+>Salvesta...</guimenuitem
+> samaväärne käsuga <guimenuitem
+>Salvesta kui</guimenuitem
+>. Seda käsku saab kasutada ainult siis, kui kogu on muudetud.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fail</guimenu
+> <guimenuitem
+>Salvesta kui...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>salvestab kogu uue failina</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Trüki...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>trükib kogu</action
+>. Trükkimise valikuid saab määrata <interface
+>seadistustedialoogis</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fail</guimenu
+> <guimenuitem
+>Importimine</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>impordib andmed mõnest teisest failist</action
+>. &appname; võib importida andmeid <link linkend="importing"
+>paljudest vormingutest</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fail</guimenu
+> <guimenuitem
+>Eksportimine</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>ekspordib andmed mõnda teise vormingusse</action
+>. &appname; võib andmeid eksportida <link linkend="exporting"
+>paljudesse vormingutesse</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Välju</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>sulgeb &appname; akna</action
+>. Kui kogus on salvestamata muutusi, küsitakse enne jätkamist, kas soovid need salvestada.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Menüü <guimenu
+>Redigeerimine</guimenu
+></title>
+
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigeerimine</guimenu
+> <guimenuitem
+>Võta tagasi</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>tühistab eelmise toimingu</action
+>. Mitte kõiki käske ei saa siiski tagasi võtta.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigeerimine</guimenu
+> <guimenuitem
+>Tee uuesti</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>tühistab eelneva tagasivõtmise</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigeerimine</guimenu
+> <guimenuitem
+>Lõika</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>eemaldab valitud teksti</action
+> ja <action
+>asetab eemaldatud teksti koopia lõikepuhvrisse</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigeerimine</guimenu
+> <guimenuitem
+>Kopeeri</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>kopeerib valitud teksti</action
+> lõikepuhvrisse.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigeerimine</guimenu
+> <guimenuitem
+>Aseta</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>asetab lõikepuhvris oleva teksti</action
+> redaktorisse kursori asukohta.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigeerimine</guimenu
+> <guimenuitem
+>Vali kõik</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>valib kõik kogu kirjed</action
+>, mis on näha <interface
+>veeruvaates</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigeerimine</guimenu
+> <guimenuitem
+>Tühista valik</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>tühistab kõigi kirjete valimise</action
+> kogus.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigeerimine</guimenu
+> <guimenuitem
+>Internetiotsing...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab <interface
+>internetiotsingu dialoogi</interface
+></action
+> kirjete otsimiseks ja importimiseks mitmesugustest internetisaitidelt, sealhulgas <ulink url="http://amazon.com"
+>Amazon.com-ist</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>J</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigeerimine</guimenu
+> <guimenuitem
+>Täiustatud filtreerimine...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab <interface
+>täiustatud filtreerimise dialoogi</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Menüü <guimenu
+>Kogu</guimenu
+></title>
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Kogu</guimenu
+> <guimenuitem
+>Uus kirje</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab <interface
+>kirjeredaktori</interface
+> uue kirje sisestamiseks</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Kogu</guimenu
+> <guimenuitem
+>Muuda kirjet</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab <interface
+>kirjeredaktori</interface
+> valitud kirje(te) muutmiseks</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Kogu</guimenu
+> <guimenuitem
+>Klooni kirje</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>kopeerib ehk kloonib valitud kirjed</action
+> kogusse uute kirjetena.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Kogu</guimenu
+> <guimenuitem
+>Kustuta kirje</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>kustutab valitud kirje(d)</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Kogu</guimenu
+> <guimenuitem
+>Ühenda kirjed</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>ühendab valitud kirjed</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Kogu</guimenu
+> <guimenuitem
+>Kirje uuendamine</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Selle käsu alammenüü sisaldab kõiki saadaolevaid andmeallikaid ning selle abil saab automaatselt esitada allikale päringu ja <action
+>uuendada valitud kirjet</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Kogu</guimenu
+> <guimenuitem
+>Laena välja</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab dialoogi valitud kirjete väljalaenamiseks</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Kogu</guimenu
+> <guimenuitem
+>Tagasta</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>võimaldab märkida tagastatuks parajasti välja laenatud objekti</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Kogu</guimenu
+> <guimenuitem
+>Muuda kogu nime</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab dialoogi kogu nime muutmiseks</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Kogu</guimenu
+> <guimenuitem
+>Kogu väljad...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab <interface
+>kogu väljade dialoogi</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Kogu</guimenu
+> <guimenuitem
+>Genereeri aruanded...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab <interface
+>aruandedialoogi</interface
+></action
+> aruannete loomiseks kogu kohta.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Kogu</guimenu
+> <guisubmenu
+>Bibliograafia</guisubmenu
+>  <guimenuitem
+>Teisenda bibliograafiaks</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>teisendab raamatute kogu bibliograafiaks</action
+>, lisades teatavad väljad, mida on vaja Bibtexi ekspordiks. Seda käsku saab kasutada ainult siis, kui avatud on raamatute kogu.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Kogu</guimenu
+> <guisubmenu
+>Bibliograafia</guisubmenu
+>  <guimenuitem
+>Stringimakrod...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab dialoogi Bibtexi stringimakrode muutmiseks</action
+>. Seda saab kasutada ainult siis, kui tegemist on bibliograafiaga.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Kogu</guimenu
+> <guisubmenu
+>Bibliograafia</guisubmenu
+>  <guimenuitem
+>Otsi topelttsitaadivõtmeid</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>kontrollib Bibtexi topeltvõtmeid</action
+> ja võib filtreerida kogu, et näidata topeltvõtmetega kirjeid.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Kogu</guimenu
+> <guisubmenu
+>Bibliograafia</guisubmenu
+>  <guimenuitem
+>Kopeeri Bibtex lõikepuhvrisse</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>kopeerib Bibtexi viite </action
+> lõikepuhvrisse, kust seda saab asetada näiteks LaTeXi dokumenti.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Kogu</guimenu
+> <guisubmenu
+>Bibliograafia</guisubmenu
+>  <guimenuitem
+>Viide Lyxi</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>saadab valitud kirjete viite</action
+> niinimetatud <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe'i</link
+></emphasis
+>, et seda saaksid kasutada <application
+>LyX</application
+>, <application
+>Kile</application
+> või muud LaTeXi rakendused. Seda käsku saab kasutada ainult siis, kui tegemist on bibliograafiaga.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Menüü <guimenu
+>Seadistused</guimenu
+></title>
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Seadistused</guimenu
+> <guimenuitem
+>Näidatavad tööriistaribad</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>võimaldab tööriistaribade näitamist sisse ja välja lülitada</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Seadistused</guimenu
+> <guimenuitem
+>Olekuriba näitamine</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>võimaldab olekuriba näitamise sisse ja välja lülitada</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Seadistused</guimenu
+> <guimenuitem
+>Rühmavaate näitamine</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>võimaldab <interface
+>rühmavaate</interface
+> näitamise sisse ja välja lülitada</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Seadistused</guimenu
+> <guimenuitem
+>Kirjeredaktori näitamine</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>võimaldab <interface
+>kirjeredaktori</interface
+> näitamise sisse ja välja lülitada</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Seadistused</guimenu
+> <guimenuitem
+>Rühmitamisalus</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>võimaldab muuta välja, mille alusel rühmitatakse kogu kirjeid</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Seadistused</guimenu
+> <guimenuitem
+>Kiirklahvide seadistamine...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab &kde; <interface
+>kiirlahvide seadistamise dialoogi</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Seadistused</guimenu
+> <guimenuitem
+>Tööriistaribade seadistamine...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab &kde; <interface
+>tööriistaribade seadistamise dialoogi</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Seadistused</guimenu
+> <guimenuitem
+>&appname; seadistamine...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab &appname; <interface
+>seadistustedialoogi</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<sect2>
+<title
+>Menüü <guimenu
+>Abi</guimenu
+></title>
+
+<para
+>Menüüs <guimenu
+>Abi</guimenu
+> leiduvad järgmised &kde; standardsed kirjed:</para>
+&help.menu.documentation; <para
+>Lisaks &kde; standardsetele menüü <guimenu
+>Abi</guimenu
+> kirjetele, millest oli juttu ülal, on &appname;l siin veel üks menüükirje:</para>
+
+<variablelist>
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Abi</guimenu
+> <guimenuitem
+>Päeva nõuanne</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>See käsk <action
+>avab päeva nõuande dialoogi</action
+>. Dialoogi nuppude abil saab läbi sirvida kõik nõuanded.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>

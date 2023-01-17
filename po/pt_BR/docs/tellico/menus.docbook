@@ -1,0 +1,915 @@
+<chapter id="menus">
+<title
+>Referência de comandos</title>
+
+<!--
+(OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
+application windows and their menubar and toolbar commands for easy reference.
+Also include any keys that have a special function but have no equivalent in the
+menus or toolbars. This may not be necessary for small apps or apps with no tool
+or menu bars.
+-->
+
+<sect1 id="main-window-menus">
+<title
+>A janela principal do &tellico;</title>
+
+<para
+>Cada item do menu é discutido abaixo. Quando existir um atalho de teclado que efetue a função de um determinado item do menu, é mostrada a combinação de teclas padrão em conjunto com o item do menu. </para>
+
+<sect2>
+<title
+>Menu Arquivo</title>
+
+<para>
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Novo</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>cria uma coleção nova</action
+>. O &tellico; suporta <link linkend="collection-types"
+>12 tipos de coleções padrão</link
+>, em conjunto com uma coleção personalizada vazia definida pelo usuário.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Abrir...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>abre um arquivo do &tellico;</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Abrir recente</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>abre um arquivo</action
+> a partir de um submenu que contém uma lista com os arquivos abertos recentemente.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Salvar...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>salva a coleção</action
+>. Se o arquivo for <emphasis
+>Sem Título</emphasis
+>, então o <guimenuitem
+>Salvar...</guimenuitem
+> será equivalente ao <guimenuitem
+>Salvar Como</guimenuitem
+>. Só ficará ativo quando a coleção tiver sido modificada.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Salvar como...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>salva a coleção num arquivo novo</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Imprimir...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>imprime a coleção</action
+>. As opções de impressão poderão ser definidas na <interface
+>Janela de Configuração</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Importar</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>importa os dados de outro arquivo</action
+>. O &tellico; pode importar dados a partir de um conjunto de <link linkend="importing"
+>outros formatos</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Exportar</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>exporta a coleção para outro formato</action
+>. O &tellico; pode exportar os dados para um conjunto de <link linkend="exporting"
+>outros formatos</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Sair</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>fecha a janela do &tellico;</action
+>. Se a coleção tiver alterações não salvas, será questionado se deseja salvá-las antes de continuar.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Menu Editar</title>
+
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Desfazer</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>anula a ação anterior</action
+>. Nem todas as ações são suportadas por esta opção.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Refazer</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>reverte uma ação Desfazer anterior</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Recortar</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>remove o texto selecionado</action
+>, se existir, e <action
+>coloca uma cópia do texto removido na área de transferência</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Copiar</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>copia o texto selecionado</action
+>, se existir, para a área de transferência.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Colar</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>cola o texto na área de transferência</action
+>, se existir, na posição do cursor no editor.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Selecionar tudo</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>seleciona todos os itens</action
+> da coleção na <interface
+>Área de Colunas</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Desmarcar</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>desmarca todos os itens</action
+> na coleção.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Pesquisa na Internet...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>abre a <interface
+>Janela de Pesquisa na Internet</interface
+></action
+> para procurar e importar itens de várias fontes na Internet, incluindo a <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>J</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Filtro Avançado...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>abre a <interface
+>Janela de Filtros Avançados</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Menu Coleção</title>
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Coleção</guimenu
+> <guimenuitem
+>Novo Item</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>abre o <interface
+>Editor de Itens</interface
+> para editar um novo item</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Coleção</guimenu
+> <guimenuitem
+>Editar o Item</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>abre o <interface
+>Editor de Itens</interface
+> para editar os itens selecionados</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Coleção</guimenu
+> <guimenuitem
+>Duplicar o Item</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>copia ou duplica os itens selecionados</action
+> como itens novos da coleção.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Coleção</guimenu
+> <guimenuitem
+>Apagar o Item</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>apaga os itens selecionados</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Coleção</guimenu
+> <guimenuitem
+>Mesclar os Itens</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>mescla os itens selecionados</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Coleção</guimenu
+> <guimenuitem
+>Atualizar o Item</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este menu contém uma lista com todas as fontes de dados disponíveis, podendo ser usada para consultar automaticamente a fonte e <action
+>atualizar os itens selecionados</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Coleção</guimenu
+> <guimenuitem
+>Dar Saída</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>abre uma janela para marcar a saída dos itens selecionados.</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Coleção</guimenu
+> <guimenuitem
+>Dar Entrada</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>dá entrada a todos os itens selecionados que estiverem emprestados ou alugados</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Coleção</guimenu
+> <guimenuitem
+>Renomear a Coleção</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>abre uma janela para renomear a coleção</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Coleção</guimenu
+> <guimenuitem
+>Campos da Coleção...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>abre a <interface
+>Janela de Campos da Coleção</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Coleção</guimenu
+> <guimenuitem
+>Gerar Relatórios...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>abre a <interface
+>Janela de Relatórios</interface
+></action
+> para gerar relatórios sobre a coleção.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Coleção</guimenu
+> <guisubmenu
+>Bibliografia</guisubmenu
+> <guimenuitem
+>Converter para uma Bibliografia</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>converte uma coleção de livros para uma bibliografia</action
+>, adicionando certos campos necessários na exportação para o Bibtex, só estando ativo quando tiver aberta uma coleção de livros.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Coleção</guimenu
+> <guisubmenu
+>Bibliografia</guisubmenu
+> <guimenuitem
+>Macros de String...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>abre uma janela para editar as macros de texto do Bibtex</action
+> na coleção. Só está ativa quando editar uma bibliografia.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Coleção</guimenu
+> <guisubmenu
+>Bibliografia</guisubmenu
+> <guimenuitem
+>Procurar chaves duplicadas</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>procura por chaves duplicadas do Bibtex</action
+> e pode filtrar a coleção para mostrar os itens com chaves duplicadas.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Coleção</guimenu
+> <guisubmenu
+>Bibliografia</guisubmenu
+> <guimenuitem
+>Copiar o Bibtex para a área de transferência</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>copia uma citação do Bibtex</action
+> para a área de transferência, de modo que possa ser colada num documento em LaTeX.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Coleção</guimenu
+> <guisubmenu
+>Bibliografia</guisubmenu
+> <guimenuitem
+>Citar um item no Lyx</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>envia uma citação dos itens selecionados</action
+> para o <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>, para que possa ser usado no <application
+>LyX</application
+>, <application
+>Kile</application
+> ou em outros aplicativos de LaTeX. Só ficará ativo ao editar uma bibliografia.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Menus Configurações e Ajuda</title>
+
+<para
+>Além dos menus Configurações e Ajuda normais do &kde;, descritos no capítulo <ulink url="help:/fundamentals/ui.html#menus"
+>Menu</ulink
+> dos Fundamentos do &kde;, o &tellico; tem estes itens de menu específicos do aplicativo: </para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configurações</guimenu
+> <guimenuitem
+>Mostrar a Área de Grupos</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>ativa/desativa a visibilidade da <interface
+>Área de Grupos</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configurações</guimenu
+> <guimenuitem
+>Mostrar o Editor de Itens</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>ativa/desativa a visibilidade do <interface
+>Editor de Itens</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configurações</guimenu
+> <guimenuitem
+>Seleção do Grupo</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>altera o campo usado para agrupar os itens</action
+> na coleção.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>

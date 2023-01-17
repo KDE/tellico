@@ -1,0 +1,825 @@
+<chapter id="configuration">
+<title
+>Anpassning</title>
+
+<para
+><interface
+>Inställningsdialogrutan</interface
+> innehåller alla alternativ för att ändra några standardbeteenden i &appname;. </para>
+
+<para
+>Att klicka på knappen <guibutton
+>Verkställ</guibutton
+> <action
+>gör att ändringarna omedelbart får effekt</action
+> utan att dialogrutan stängs, medan <guibutton
+>Ok</guibutton
+> <action
+>verkställer ändringarna och stänger dialogrutan</action
+>. <guibutton
+>Avbryt</guibutton
+> stänger dialogrutan, men alla ändringar som redan har gjorts och verkställts förblir kvar. Knappen <guibutton
+>Förval</guibutton
+> <action
+>återställer alla alternativ</action
+> på dialogrutans nuvarande sida till sina förvalda värden, medan <guibutton
+>Hjälp</guibutton
+> <action
+>öppnar Hjälpcentralen</action
+> på ungefärligt avsnitt i &appname;s handbok. </para>
+
+<para
+>Vissa mindre viktiga inställningar kan bara ändras genom att redigera själva inställningsfilen. Se <link linkend="hidden-options"
+>Dolda alternativ</link
+>. </para>
+
+<sect1 id="general-options">
+<title
+><guilabel
+>Allmänna inställningar</guilabel
+></title>
+
+<screenshot>
+<!-- <screeninfo
+>The General Options Dialog</screeninfo
+> -->
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="general-options.png"/></imageobject>
+<textobject
+><phrase
+>Dialogrutan Allmänna alternativ</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>The <guilabel
+>General Options</guilabel
+> control the general behavior. Images may be included in the data files, or saved separately in the &appname; application folder. Also, when &appname; is started, it can automatically reopen the last data file that was open. The <guilabel
+>Tip of the Day</guilabel
+> dialog contains helpful hints on using &appname; and appears at program startup. You may want to read through some of the hints and then disable the dialog. The <interface
+>Quick Filter</interface
+> in the toolbar is useful for easily filtering through your collection and can utilize regular expressions. </para>
+
+<para
+><guilabel
+>Formateringsalternativ</guilabel
+> styr nivån av automatisk formatering som &appname; utför. För exempel, se <link linkend="field-formatting"
+>avsnittet om fältformatering</link
+>. Kapitalisering och formatering är skilda alternativ, eftersom ett fält kan kapitaliseras utan att låta ändra ordens ordning, och tvärtom. Automatisk kapitalisering kan ändras så att vissa ord ignoreras. Den automatiska formateringen omfattar grammatiska artiklar i titlar, samt prefix och suffix i personnamn.Värdena är inte skiftlägeskänsliga, och ska åtskiljas med semikolon. </para>
+
+<para
+>Formateringsreglerna följer allmän engelsk användning, vilket kanske inte fungerar med andra språk. Artiklar läggs till i slutet av titeln, med ett kommatecken. Personnamn formateras så att efternamnet är först, följt av ett komma, och därefter förnamnet. Personliga suffix som Jr., behålls med efternamnet. Prefix, som <emphasis
+>von</emphasis
+>, behålls med efternamnet, men ignoreras när värdet sorteras.</para>
+
+<informalexample
+><para
+><emphasis
+>John Q. von Public, III</emphasis
+> skulle bli <emphasis
+>von Public, III, John Q.</emphasis
+> och <emphasis
+>Public</emphasis
+> skulle användas som sorteringsbegrepp.</para
+></informalexample>
+
+<para
+>Bara prefix med ett enda ord stöds. Om ett namn till exempel innehåller <emphasis
+>van der</emphasis
+>, måste både <emphasis
+>van</emphasis
+> och <emphasis
+>der</emphasis
+> ingå i listan med efternamnsprefix. Artiklar som slutar med en apostrof stöds också i sorteringsordningen. </para>
+
+<note
+><para
+>De verkliga värdena i samlingen ändras <emphasis
+>inte</emphasis
+>, bara den synliga texten använd av gränssnittet. Formateringsalternativen kan alltså ändras fram och tillbaka utan att påverka någon information i samlingen.</para
+></note>
+
+</sect1>
+
+<sect1 id="printing-options">
+<title
+><guilabel
+>Utskriftsalternativ</guilabel
+></title>
+
+<para
+>&appname; använder en &xslt;-mall för att skapa &HTML;, och skickar därefter den till &kde;:s utskriftstjänst. Bara fält synliga i <link linkend="detailed-view"
+><interface
+>Kolumnvyn</interface
+></link
+> skrivs ut. Om samlingen dessutom är filtrerad, skrivs bara de synliga posterna ut. Inledningsvis visas ett varningsmeddelande om filtrering är aktiv. </para>
+
+<screenshot>
+<screeninfo
+>Dialogrutan Utskriftsalternativ</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="print-options.png"/></imageobject>
+<textobject
+><phrase
+>Dialogrutan Utskriftsalternativ</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+><guilabel
+>Utskriftsalternativ</guilabel
+> låter dig ändra viss formatering när en samling skrivs ut. Om <guilabel
+>Formatera titlar och namn</guilabel
+> är markerad, så <link linkend="field-formatting"
+>formateras fälten automatiskt</link
+> när de skrivs ut. Annars skrivs de ut exakt som de skrevs in. </para>
+
+<para
+>Standardstilmallen för utskrift skriver ut samlingen med fältvärden i kolumner. <guilabel
+>Skriv ut fältöverskrifter</guilabel
+> styr om fältöverskriften skrivs ut längst upp i kolumnen. </para>
+
+<para
+>I utskriften sorteras posterna som de syns i <link linkend="detailed-view"
+><interface
+>Kolumnvyn</interface
+></link
+>. Dessutom kan de grupperas som de är i <link linkend="group-view"
+><interface
+>Gruppvyn</interface
+></link
+>. </para>
+
+<para
+>Till sist, när bildfält ingår i utskriften, kan bildernas storlek ändras, medan deras proportion behålls. Bildens maximala bredd och höjd definierar bildens största möjliga storlek, även om den aldrig kommer att ökas. </para>
+</sect1>
+
+<sect1 id="template-options">
+<title
+><guilabel
+>Mallalternativ</guilabel
+></title>
+
+<para
+><link linkend="entry-view"
+><interface
+>Postvyn</interface
+></link
+> använder mallar för att visa fältvärden. Du kan ange olika mallar för varje samlingstyp. Vissa mallar, som mallarna <emphasis
+>Album</emphasis
+> eller <emphasis
+>Video</emphasis
+> är för en specifik samlingstyp, och ett kort felmeddelande visas i postvyn om de används för andra typer. Knappen <guilabel
+>Granskning</guilabel
+> gör att ett fönster dyker upp som visar en förhandsgranskning av hur mallen ser ut. Egna teckensnitt och färger kan överföras till mallen, och alla standardmallar följer dessa inställningar. Egna mallar kan dock välja att ignorera dem.</para>
+
+<para
+>Ytterligare mallar kan installeras direkt, eller laddas ner från <ulink url="https://store.kde.org/"
+>store.kde.org</ulink
+> genom att klicka på knappen <guilabel
+>Ladda ner</guilabel
+>. Alla mallar som installerats av användaren kan också tas bort. Postmallar sparas i <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/entry-templates/</filename
+>. </para>
+
+<para
+>Om du skapar en ny mall, skicka gärna in den till <ulink url="https://store.kde.org/"
+>store.kde.org</ulink
+>.</para>
+
+<screenshot>
+<screeninfo
+>Dialogrutan Mallalternativ</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="template-options.png"/></imageobject>
+<textobject
+><phrase
+>Dialogrutan Mallalternativ</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="data-sources-options">
+<title
+><guilabel
+>Alternativ för datakällor</guilabel
+></title>
+
+<para
+>&appname; kan använda olika källor för att importera data, som kan ställas in i dialogrutan Alternativ för datakällor. Det finns många olika typer och källor. Några av dem listas nedan, medan den fullständiga listan är tillgänglig på <ulink url="https://tellico-project.org/data-sources"
+>Tellicos webbplats</ulink
+>.</para>
+
+<itemizedlist>
+<!-- books -->
+<listitem
+><simpara
+><link linkend="amazon-web-services"
+>Amazon.com webbtjänster</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="isbndb"
+>ISBNdb.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="openlibrary"
+>OpenLibrary.org</link
+>,</simpara
+></listitem>
+<!-- movies -->
+<listitem
+><simpara
+><link linkend="imdb"
+>Internet Movie Database</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="allocine"
+>AlloCiné</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="tmdb"
+>TheMovieDB.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+>the <link linkend="omdb"
+>Open Movie Database</link
+>,</simpara
+></listitem>
+<!-- comics -->
+<listitem
+><simpara
+><link linkend="bedetheque"
+>BDGest</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="comicvine"
+>Comic Vine</link
+>,</simpara
+></listitem>
+<!-- music -->
+<listitem
+><simpara
+><link linkend="discogs"
+>Discogs.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="musicbrainz"
+>MusicBrainz.org</link
+>,</simpara
+></listitem>
+<!-- video games -->
+<listitem
+><simpara
+><link linkend="tgdb"
+>TheGamesDB.net</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="giantbomb"
+>GiantBomb.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="mobygames"
+>MobyGames.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="igdb"
+>IGDB.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="videogamegeek"
+>VideoGameGeek</link
+>,</simpara
+></listitem>
+<!-- board games -->
+<listitem
+><simpara
+><link linkend="boardgamegeek"
+>BoardGameGeek</link
+>,</simpara
+></listitem>
+<!-- bibliographic -->
+<listitem
+><simpara
+><link linkend="bib-sources"
+>arxiv.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="entrez"
+>Entrez (PubMed)-databaser</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="z3950"
+>z39.50-servrar</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="sru"
+>SRU-servrar</link
+>,</simpara
+></listitem>
+<!-- coins -->
+<listitem
+><simpara
+><link linkend="colnect"
+>Colnect</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="numista"
+>Numista</link
+>,</simpara
+></listitem>
+<!-- others -->
+<listitem
+><simpara
+><link linkend="externalexec"
+>andra externa skript eller program</link
+>, och</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="multiple-sources"
+>kombinationer med vilka som helst av ovanstående källor</link
+>.</simpara
+></listitem>
+</itemizedlist>
+
+<screenshot>
+<screeninfo
+>Dialogrutan Alternativ för datakällor</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="source-options.png"/></imageobject>
+<textobject
+><phrase
+>Dialogrutan Alternativ för datakällor</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Nya källor kan läggas till genom att klicka på knappen <guibutton
+>Ny...</guibutton
+>, medan befintliga kan ändras eller tas bort, med knapparna <guibutton
+>Ändra...</guibutton
+> eller <guibutton
+>Ta bort</guibutton
+>. Källornas ordning, som visas i menyerna för postuppdatering, kan också ändras. </para>
+
+<warning>
+<para
+>Installera och kör aldrig ett skript från en källa du inte litar på. De körs med samma behörighet som användaren, och på grund av det kan de ändra eller ta bort filer, eller ställa till datorn på annat sätt. </para>
+</warning>
+
+<para
+>Många av datakällorna erbjuder mer information än standardfälten i &appname;. De övriga fälten visas till höger i inställningsrutan. Om något av dessa fält är markerade, läggs de till i samlingen när en post läggs till från den källan. </para>
+
+<!-- start book sources -->
+
+<sect2 id="book-sources">
+<title
+>Bok- och bibliografiska datakällor</title>
+
+<sect3 id="z3950">
+<title
+>z39.50-servrar</title>
+
+<para
+>Protokollet <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html"
+>z39.50</ulink
+> används för att komma åt bibliotek och leverantörer av bibliografisk information i hela världen. Listor med öppna z39.50-servrar är bland annat tillgängliga från <ulink url="http://www.indexdata.dk/targettest/"
+>indexdata.dk</ulink
+>. &appname; levereras med flera förinställda inställningar för större bibliotek, eller annars kan du ange anslutningsinformation för hand.</para>
+
+<para
+>&appname; kan läsa data med formaten <acronym
+>MODS</acronym
+>, <acronym
+>USMARC</acronym
+>/<acronym
+>MARC21</acronym
+> eller <acronym
+>UNIMARC</acronym
+>, genom att använda <ulink url="http://www.indexdata.dk/yaz/"
+>biblioteket yaz</ulink
+>. Dessutom finns begränsat stöd för formatet <acronym
+>GRS-1</acronym
+>. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="z3950-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Markera rutan och välj därefter bibliotek för att använda ett av de förinställda biblioteken. Övriga inställningsalternativ kommer att inaktiveras. Om du behöver ställa in informationen manuellt, avmarkera förinställningsrutan. </para>
+
+<para
+>Standardporten för åtkomst av z39.50 är 210, men vissa servrar kan använda en annan. &appname; antar att servern använder teckenkodningen MARC-8, om det inte ställs in till något annat. Om en felaktig teckenkodning används, kan ett felmeddelande visas i programmets utmatning, eller kanske inga poster hämtas. </para>
+
+<para
+>Vissa servrar kräver ett användarnamn och lösenord för åtkomst. &appname; kan använda och spara lösenordet, men var medveten om att det skrivs till &appname;s inställningsfil som vanlig text och inte är säkert. För de flesta öppna servrar, kan fälten för användarnamn och lösenord lämnas tomma. </para>
+
+</sect3>
+
+<sect3 id="sru">
+<title
+>SRU-servrar</title>
+
+<para
+>SRU står för <ulink url="http://www.loc.gov/standards/sru/"
+>Search/Retrieve via &URL;</ulink
+> (sök/hämta via webbadress) och är ett standardiserat sökprotokoll för Internetsökningar. Vissa bibliotek använder det för att ge tillgång till sina datakataloger. Bland dem är troligen <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
+>Förenta staternas kongressbibliotek</ulink
+> det mest kända. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="sru-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect3>
+
+<sect3 id="entrez">
+<title
+>Entrez-databaser</title>
+<para
+><ulink url="http://www.ncbi.nlm.nih.gov/Entrez/"
+>Entrez</ulink
+> är det integrerade, textbaserade sök- och återvinningssystemet som används av Nationellt centrum för bioteknologisk information (National Center for Biotechnology Information, NCBI). Den mest välkända Entrez-databasen är <ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed"
+>Pubmed</ulink
+>, databasen med artiklar från många biologiska tidskrifter. För närvarande är Pubmed den enda Entrez-databasen som stöds av &appname;.</para>
+</sect3>
+
+<sect3 id="bib-sources">
+<title
+>Bibliografiska databaser</title>
+<para
+>Databaserna <ulink url="http://arxiv.org"
+>arxiv.org</ulink
+>, <ulink url="http://bibsonomy.org"
+>Bibsonomy</ulink
+> och <ulink url="http://crossref.org"
+>Crossref</ulink
+> är nätdatabaser för akademiska artiklar och bibliografisk information. För att komma åt Crossref-källan, måste du <ulink url="http://www.crossref.org/requestaccount/"
+>begära ett konto</ulink
+> och lägga till din kontoinformation i inställningen av datakällan.</para>
+</sect3>
+
+<sect3 id="isbndb">
+<title
+>ISBNdb.com</title>
+<para
+><ulink url="http://isbndb.com"
+>ISBNdb.com</ulink
+> är en bokdatabas på nätet, från bibliotek över hela världen. </para>
+</sect3>
+
+<sect3 id="openlibrary">
+<title
+>OpenLibrary.org</title>
+<para
+><ulink url="http://openlibrary.org"
+>OpenLibrary.org</ulink
+> är en bokdatabas på nätet, med målet att ha en sida för varje bok. </para>
+</sect3>
+
+</sect2>
+<!-- end of books -->
+
+<!-- start of movie sources -->
+<sect2 id="comicbook-sources">
+<title
+>Seriedatakällor</title>
+
+<sect3 id="bedetheque">
+<title
+>Bedetheque</title>
+<para
+><ulink url="http://www.bedetheque.com"
+>Bedetheque</ulink
+> är en fransk seriedatabas som hanteras av BDGest. </para>
+</sect3>
+
+<sect3 id="comicvine">
+<title
+>Comic Vine</title>
+<para
+><ulink url="https://comicvine.gamespot.com/"
+>Comic Vine</ulink
+> beskriver sig som universums största seriewiki. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of movie sources -->
+<sect2 id="movie-sources">
+<title
+>Filmdatakällor</title>
+
+<sect3 id="imdb">
+<title
+>Internet filmdatabas</title>
+
+<para
+><ulink url="http://www.imdb.com"
+>Internet filmdatabas</ulink
+> tillhandahåller information om filmer och videor. När en sökning utförs efter en <emphasis
+>person</emphasis
+>, om mer än ett möjligt resultat returneras, visas en dialogruta som låter dig välja rätt person. Inställningsalternativen omfattar inställning av webbserverns adress och om bilder hämtas eller inte. Eftersom IMDb kan returnera ett stort antal skådespelare, kan du begränsa det till ett visst antal. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="imdb-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect3>
+
+<sect3 id="tmdb">
+<title
+>TheMovieDB.org</title>
+<para
+><ulink url="http://themoviedb.org"
+>TheMovieDB.org</ulink
+> är en gratis och öppen filmdatabas på nätet. Registrering för att få ett gratis konto krävs. </para>
+</sect3>
+
+<sect3 id="omdb">
+<title
+>Open Movie Database</title>
+<para
+><ulink url="http://omdbapi.com"
+>Open Movie Database (OMDBAPI.com)</ulink
+> är en fri webbtjänst för att erhålla information om filmer. </para>
+</sect3>
+
+<sect3 id="allocine">
+<title
+>AlloCiné</title>
+<para
+><ulink url="http://allocine.fr"
+>AlloCiné</ulink
+> är en filminformationstjänst på nätet, baserad i Frankrike. Webbläsaridentifikation måste vara aktiverat i systeminställningarna. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of music sources -->
+<sect2 id="music-sources">
+<title
+>Musikdatakällor</title>
+
+<sect3 id="discogs">
+<title
+>Discogs.com</title>
+<para
+><ulink url="http://discogs.com"
+>Discogs.com</ulink
+> är en användarframtagen musikdatabas som innehåller information om artister, skivbolag och deras inspelningar. Registrering för att få ett gratis konto krävs. Webbläsaridentifikation måste vara aktiverat i systeminställningarna. </para>
+</sect3>
+
+<sect3 id="musicbrainz">
+<title
+>MusicBrainz.org</title>
+<para
+><ulink url="http://musicbrainz.org"
+>MusicBrainz.org</ulink
+> är en gemensam metadatabas för musik som försöker skapa en innehållsrik musikinformationsplats. Webbläsaridentifikation måste vara aktiverat i systeminställningarna. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of wine sources -->
+<!--<sect2 id="wine-sources">
+<title
+>Wine Data Sources</title>
+
+</sect2
+>-->
+
+<!-- start of video game sources -->
+<sect2 id="videogame-sources">
+<title
+>Datakällor för videospel</title>
+
+<sect3 id="giantbomb">
+<title
+>GiantBomb.com</title>
+<para
+><ulink url="http://giantbomb.com"
+>GiantBomb.com</ulink
+> är en stor gemensam databas över videospel. Registrering för att få ett gratis konto krävs. </para>
+</sect3>
+
+<sect3 id="tgdb">
+<title
+>TheGamesDB.net</title>
+<para
+><ulink url="http://themoviedb.org"
+>TheGamesDB.net</ulink
+> är en gratis och öppen filmdatabas på nätet för videospel. </para>
+</sect3>
+
+<sect3 id="mobygames">
+<title
+>MobyGames</title>
+<para
+><ulink url="https://www.mobygames.com"
+>MobyGames.com</ulink
+> beskriver sig själv som den äldsta, största och mest exakta databasen över videospel. </para>
+</sect3>
+
+<sect3 id="igdb">
+<title
+>IGDB.com</title>
+<para
+><ulink url="https://www.igdb.com"
+>IGDB.com</ulink
+> kallar sig själv en spelwebbplats för alla som älskar spel. </para>
+</sect3>
+
+<sect3 id="videogamegeek">
+<title
+>VideoGameGeek</title>
+<para
+><ulink url="https://videogamegeek.com"
+>VideoGameGeek</ulink
+> är en resurs och gemenskap på nätet för videospel. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of board game sources -->
+<sect2 id="boardgame-sources">
+<title
+>Datakällor för brädspel</title>
+
+<sect3 id="boardgamegeek">
+<title
+>BoardGameGeek</title>
+<para
+><ulink url="https://boardgamegeek.com"
+>BoardGameGeek</ulink
+> är en resurs och gemenskap på nätet för brädspel. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of coin sources -->
+<sect2 id="coin-sources">
+<title
+>Mynt- och frimärksdatakällor</title>
+
+<sect3 id="colnect">
+<title
+>Colnect</title>
+<para
+><ulink url="https://colnect.com"
+>Colnect</ulink
+> är en nätgemenskap för samlingar som tillhandahåller personlig samlingshantering. &tellico; kan sök i Colnect efter mynt- och frimärksinformation. </para>
+</sect3>
+
+<sect3 id="numista">
+<title
+>Numista</title>
+<para
+><ulink url="https://numista.com"
+>Numista</ulink
+> är en världsomfattande myntkatalog som växer tack vara medlemsbidrag, som erbjuder samlingshantering på nätet, verktyg för enkelt utbyte med andra samlare, och ett forum. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="variety-type-sources">
+<title
+>Datakällor för samlingar med flera typer</title>
+
+<sect3 id="amazon-web-services">
+<title
+>Amazon.com</title>
+
+<para
+>Genom att använda Amazons webbtjänst, kan &appname; söka efter information i vilken som helst av 14 internationella platser som bedrivs av <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>: Förenta staterna, Storbritannien, Tyskland, Japan, Frankrike, Kanada, Kina, Spanien, Italien, Brasilien, Australien, Indien, Mexiko och Turkiet. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="amazon-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Inställning av varje källa från Amazon.com omfattar tre alternativ: serverplatsen, bildstorlek, och partneridentifikation. Viss information från <ulink url="http://amazon.com"
+>Amazon.com</ulink
+> kan inkludera en bild, som omslaget till en bok eller videofilm. Bilden kan laddas ner med tre olika storlekar, beroende på objektet. Partneridentifikationen måste användas för att komma åt Amazon.com webbtjänst, och inkluderas i återlänkarna till objektet, som krävs av licensavtalet för att använda Amazon.com webbtjänst. </para>
+
+<para
+>Åtkomst till <ulink url="https://docs.aws.amazon.com/AWSECommerceService/latest/DG/Welcome.html"
+>Amazon Product Advertising API</ulink
+> kan ha begränsningar som rör försäljningshänvisningar eller reklam. Se Amazons dokumentation för ytterligare information när du anmäler dig för åtkomst till programmeringsgränssnittet. </para>
+
+</sect3>
+
+<sect3 id="externalexec">
+<title
+>Externa skript eller program</title>
+<para
+>Som ett enklare sätt att integrera &appname; med insticksprogram från tredjepart, kan externa skript eller program användas som ett gränssnitt för att söka i andra informationskällor. &appname; kör ett kommando, och skickar sökbegreppen som väljare på kommandoraden. </para>
+
+<para
+>Vissa skript distribueras tillsammans med själva &appname;. <ulink url="http://python.org"
+>Python</ulink
+> krävs för att exempelvis söka i <ulink url="http://darkhorse.com"
+>Dark Horse Comics</ulink
+>, ett serieboksförlag. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="externalexec-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Samlingstypen som skriptet returnerar måste vara inställd, tillsammans med dataformatet. &appname; kan inte bara importera data från skript som använder <link linkend="file-format"
+>&appname;s &XML;-standardformat</link
+>, utan kan också importera andra format, såsom Bibtex. </para>
+
+<para
+>Den fullständiga sökvägen till programmet ska skrivas in i källalternativen. Var medveten om att programmet körs på datorn med samma behörighet som nuvarande användare, så använd inte skript från källor du inte litar på. Markera rutorna intill söknycklarna som stöds av programmet, och skriv in kommandoradsväljarna som krävs i redigeringsrutan. Sökvärden infogas där <userinput
+>%1</userinput
+> uppträder. </para>
+
+<para
+>Den sista kryssrutan och redigeringsrutan används för att bestämma kommandoradsväljarna för att uppdatera poster som redan finns i samlingen. Postfälten som används för att hitta en uppdatering måste matas in, med samma format som används för fält med <link linkend="derived"
+>beroende värden</link
+>. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="multiple-sources">
+<title
+>Flera kombinerade datakällor</title>
+<para
+>Kombinationer av upp till åtta befintliga datakällor kan användas som en enda källa, där varje sökresultat från den första källan uppdateras från de följande källorna. Samlingstypen som ska användas måste anges innan källor läggs till. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="multiple-sources-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Bara befintliga datakällor kan användas i kombination. Bara söktypen för den första källan kan användas i den här källan eftersom resultaten kommer från den första datakällan. Exempelvis kan en sökning först göras på UPCitemDb, där varje resultat sedan uppdateras från TheMovieDB. </para>
+</sect2>
+
+</sect1>
+
+</chapter>

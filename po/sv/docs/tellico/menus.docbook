@@ -1,0 +1,915 @@
+<chapter id="menus">
+<title
+>Kommandoreferens</title>
+
+<!--
+(OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
+application windows and their menubar and toolbar commands for easy reference.
+Also include any keys that have a special function but have no equivalent in the
+menus or toolbars. This may not be necessary for small apps or apps with no tool
+or menu bars.
+-->
+
+<sect1 id="main-window-menus">
+<title
+>Huvudfönstret i &tellico;</title>
+
+<para
+>Varje menyalternativ beskrivs nedan. Om det finns en snabbtangent som utför en menyfunktion, så listas den tillsammans med menyalternativet. </para>
+
+<sect2>
+<title
+>Menyn Arkiv</title>
+
+<para>
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Ny</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>skapar en ny samling</action
+>. &tellico; stöder <link linkend="collection-types"
+>12 standardsamlingstyper</link
+> liksom en tom användardefinierad egensamling.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Öppna...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>öppnar en &tellico;-fil</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Öppna senaste</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>öppnar en fil</action
+> från en undermeny som innehåller en lista med senast öppnade filer.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Spara...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>sparar samlingen</action
+>. Om filen är <emphasis
+>Namnlös</emphasis
+> är <guimenuitem
+>Spara...</guimenuitem
+> samma sak som <guimenuitem
+>Spara som</guimenuitem
+>. Det är bara aktiverat när samlingen har ändrats.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Spara som...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>sparar samlingen i en ny fil</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Skriv ut...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>skriver ut samlingen</action
+>. Utskriftsalternativ kan ställas in i <interface
+>Inställningsdialogrutan</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Importera</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>importerar data från en annan fil</action
+>. &tellico; kan importera data från ett antal <link linkend="importing"
+>andra format</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Exportera</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>exporterar samlingen till ett annat format</action
+>. &tellico; kan exportera data till ett antal <link linkend="exporting"
+>andra format</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Avsluta</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>stänger &tellico;s fönster</action
+>. Om samlingen har osparade ändringar, blir du tillfrågad om att spara dem innan kommandot utförs.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Menyn Redigera</title>
+
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Ångra</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>ångra den föregående åtgärden</action
+>. Alla åtgärder stöder inte att ångras.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Ångra</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>gör om en tidigare ångrad åtgärd</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Klipp ut</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>tar bort markerad text</action
+>, om det finns någon, och <action
+>placerar en kopia av den borttagna texten på klippbordet</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Kopiera</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>kopierar markerad text</action
+>, om det finns någon, till klippbordet.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Klistra in</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>klistrar in texten på klippbordet</action
+>, om det finns någon, till editorn på markörens position.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Markera alla</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>markerar alla poster</action
+> i samlingen, i <interface
+>Kolumnvyn</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Avmarkera</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>avmarkerar alla poster</action
+> i samlingen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Internetsökning...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>visar <interface
+>dialogrutan Internetsökning</interface
+></action
+> för att söka efter och importera poster från diverse platser på Internet, inklusive <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>J</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Avancerat filter...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>visar den avancerade <interface
+>Filterdialogrutan</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Menyn Samling</title>
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Samling</guimenu
+> <guimenuitem
+>Ny post</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>visar <interface
+>Posteditorn</interface
+> för att redigera en ny post</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Samling</guimenu
+> <guimenuitem
+>Redigera post</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>visar <interface
+>Posteditorn</interface
+> för att redigera de markerade posterna</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Samling</guimenu
+> <guimenuitem
+>Duplicera post</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>kopierar, eller duplicerar, de markerade posterna</action
+> som nya poster i samlingen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Samling</guimenu
+> <guimenuitem
+>Ta bort post</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>tar bort markerade poster</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Samling</guimenu
+> <guimenuitem
+>Sammanfoga poster</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>sammanfogar de markerade posterna</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Samling</guimenu
+> <guimenuitem
+>Uppdatera post</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Menyn innehåller en lista av alla tillgängliga datakällor, och kan användas för att automatiskt fråga källan och <action
+>uppdatera markerade poster</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Samling</guimenu
+> <guimenuitem
+>Låna ut</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>visar en dialogruta för att låna ut markerade poster</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Samling</guimenu
+> <guimenuitem
+>Lämna tillbaka</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>lämnar tillbaks alla markerade poster som för närvarande är utlånade</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Samling</guimenu
+> <guimenuitem
+>Byt namn på samling</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>visar en dialogruta för att byta namn på samlingen</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Samling</guimenu
+> <guimenuitem
+>Samlingsfält...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>visar <interface
+>Samlingsfältdialogrutan</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Samling</guimenu
+> <guimenuitem
+>Skapa rapporter...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>visar <interface
+>Rapportdialogrutan</interface
+></action
+> för att skapa rapporter om samlingen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Samling</guimenu
+> <guisubmenu
+>Bibliografi</guisubmenu
+> <guimenuitem
+>Konvertera till bibliografi</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>konverterar en boksamling till en bibliografi</action
+> genom att lägga till vissa fält nödvändiga för export till Bibtex, och är bara aktiverat när en boksamling är öppen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Samling</guimenu
+> <guisubmenu
+>Bibliografi</guisubmenu
+> <guimenuitem
+>Strängmakron...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>visar en dialogruta för att redigera Bibtex strängmakron</action
+> i samlingen. Det är bara aktiverat när en bibliografi redigeras.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Samling</guimenu
+> <guisubmenu
+>Bibliografi</guisubmenu
+> <guimenuitem
+>Kontrollera duplicerade nycklar...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>kontrollerar om det finns duplicerade Bibtex-nycklar</action
+> och kan filtrera samlingen för att visa posterna med duplicerade nycklar.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Samling</guimenu
+> <guisubmenu
+>Bibliografi</guisubmenu
+> <guimenuitem
+>Kopiera Bibtex till klippbord</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>kopierar en Bibtex hänvisning</action
+> till klippbordet så att den kan klistras in i ett Latex-dokument.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Samling</guimenu
+> <guisubmenu
+>Bibliografi</guisubmenu
+> <guimenuitem
+>Hänvisa till post i Lyx</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>skickar en hänvisning till markerade poster</action
+> till en så kallad <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+> för användning i <application
+>Lyx</application
+>, <application
+>Kile</application
+>, eller andra Latex-program. Det är bara aktiverat när en bibliografi redigeras.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Menyerna Inställningar och Hjälp</title>
+
+<para
+>Förutom de vanliga inställnings- och hjälpmenyerna i &kde; som beskrivs i kapitlet <ulink url="help:/fundamentals/menus.html"
+>Meny</ulink
+> i dokumentet &kde;:s grunder, har &tellico; följande programspecifika menyalternativ: </para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Visa gruppvy</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>växlar visning av <interface
+>Gruppvyn</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Visa posteditor</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>växlar visning av <interface
+>Posteditorn</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Gruppurval</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>ändrar fältet som används för att gruppera posterna </action
+> i samlingen.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>

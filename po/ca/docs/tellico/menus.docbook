@@ -1,0 +1,923 @@
+<chapter id="menus">
+<title
+>Referència d'ordres</title>
+
+<!--
+(OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
+application windows and their menubar and toolbar commands for easy reference.
+Also include any keys that have a special function but have no equivalent in the
+menus or toolbars. This may not be necessary for small apps or apps with no tool
+or menu bars.
+-->
+
+<sect1 id="main-window-menus">
+<title
+>La finestra principal del &tellico;</title>
+
+<para
+>Cada element del menú es discuteix a continuació. Quan existeix una drecera del teclat que realitza la funció d'un element del menú, aquesta drecera és llista junt amb l'element del menú. </para>
+
+<sect2>
+<title
+>El menú Fitxer</title>
+
+<para>
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Nova</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>crea una nova col·lecció</action
+>. El &tellico; implementa <link linkend="collection-types"
+>12 tipus predeterminats de col·leccions</link
+> juntament amb una col·lecció personalitzada buida definida per l'usuari.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Obre...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>obre un fitxer del &tellico;</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guisubmenu
+>Obre recent</guisubmenu
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>obre un fitxer</action
+> des d'un submenú que conté una llista dels fitxers oberts recentment.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Desa...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>desa la col·lecció</action
+>. Si el fitxer és <emphasis
+>Sense títol</emphasis
+> després <guimenuitem
+>Desa...</guimenuitem
+> serà equivalent <guimenuitem
+>Desa com a</guimenuitem
+>. Només s'activa quan s'ha modificat la col·lecció.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Maj;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Desa com a...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>desa la col·lecció a un nou fitxer</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Imprimeix...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>imprimeix la col·lecció</action
+>. Les opcions d'impressió es pot establir en el <interface
+>diàleg de configuració</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Importa</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>importa les dades des d'un altre fitxer</action
+>. El &tellico; pot importar dades d'un nombre d'<link linkend="importing"
+>altres formats</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Exporta</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>exporta la col·lecció a un altre format</action
+>. El &tellico; pot exportar dades a un nombre d'<link linkend="exporting"
+>altres formats</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Surt</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>tanca la finestra del &tellico;</action
+>. Si la col·lecció té canvis sense desar, se us demanarà que els deseu abans de continuar.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>El menú Edita</title>
+
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Desfés</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>desfà l'acció anterior</action
+>. No totes les accions estan suportades per <guimenu
+>Desfés</guimenu
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Maj; <keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Refés</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>reverteix un <guimenu
+>Desfés</guimenu
+> previ</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Retalla</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>elimina el text seleccionat</action
+>, si n'hi ha, i <action
+>col·loca una còpia en el porta-retalls</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Copia</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>copia el text seleccionat</action
+>, si n'hi ha, al porta-retalls.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Enganxa</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>enganxa el text en el porta-retalls</action
+>, si n'hi ha, dins l'editor a la posició del cursor.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Selecciona-ho tot</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>selecciona totes les entrades</action
+> en la col·lecció, a la <interface
+>Vista de columna</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Desselecciona</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>desselecciona totes les entrades</action
+> en la col·lecció.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Cerca d'Internet...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>obre el <interface
+>diàleg Cerca a Internet</interface
+></action
+> per a cercar i importar entrades des de diversos llocs d'Internet, inclòs <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>J</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Filtre avançat...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>obre el <interface
+>diàleg Filtre avançat</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>El menú Col·lecció</title>
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Col·lecció</guimenu
+> <guimenuitem
+>Nova entrada</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>obre l'<interface
+>Editor d'entrada</interface
+> per a editar una entrada nova</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Col·lecció</guimenu
+> <guimenuitem
+>Edita l'entrada</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>obre l'<interface
+>Editor d'entrada</interface
+> per a editar les entrades seleccionades</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Col·lecció</guimenu
+> <guimenuitem
+>Duplica l'entrada</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>copia o duplica les entrades seleccionades</action
+> com a entrades noves a la col·lecció.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Col·lecció</guimenu
+> <guimenuitem
+>Suprimeix l'entrada</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>suprimeix les entrades seleccionades</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Col·lecció</guimenu
+> <guimenuitem
+>Fusiona les entrades</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>fusiona les entrades seleccionades</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Col·lecció</guimenu
+> <guimenuitem
+>Actualitza l'entrada</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquest menú conté una llista de totes les fonts de dades disponibles, i es pot utilitzar per a consultar automàticament la font i <action
+>actualitzar les entrades seleccionades</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Col·lecció</guimenu
+> <guimenuitem
+>Desmarca</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>obre un diàleg per al préstec de les entrades seleccionades</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Col·lecció</guimenu
+> <guimenuitem
+>Marca</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>marca qualsevol de les entrades seleccionades que es troben actualment en préstec</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Col·lecció</guimenu
+> <guimenuitem
+>Reanomena la col·lecció</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>obre un diàleg per a canviar el nom de la col·lecció</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Col·lecció</guimenu
+> <guimenuitem
+>Camps de la col·lecció...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>obre el diàleg <interface
+>Camps de la col·lecció</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Col·lecció</guimenu
+> <guimenuitem
+>Genera informes...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>obre el <interface
+>diàleg Informes</interface
+></action
+> per a la generació d'informes sobre la col·lecció.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Col·lecció</guimenu
+> <guisubmenu
+>Bibliografia</guisubmenu
+> <guimenuitem
+>Converteix a bibliografia</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>converteix una col·lecció de llibres en una bibliografia</action
+> afegint certs camps necessaris per a l'exportació Bibtex, i només s'activa quan està oberta una col·lecció de llibres.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Col·lecció</guimenu
+> <guisubmenu
+>Bibliografia</guisubmenu
+> <guimenuitem
+>Macros de cadena...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>obre un diàleg per a editar les macros de cadena Bibtex</action
+> en la col·lecció. Sols s'activa quan s'edita una bibliografia.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Col·lecció</guimenu
+> <guisubmenu
+>Bibliografia</guisubmenu
+> <guimenuitem
+>Cerca claus duplicades</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>comprova els duplicats de les claus Bibtex</action
+> i pot filtrar la col·lecció per a mostrar les entrades amb claus duplicades.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Col·lecció</guimenu
+> <guisubmenu
+>Bibliografia</guisubmenu
+> <guimenuitem
+>Copia Bibtex al porta-retalls</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>copia una cita BibTeX</action
+> al porta-retalls perquè es pugui enganxar en un document LaTeX.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Col·lecció</guimenu
+> <guisubmenu
+>Bibliografia</guisubmenu
+> <guimenuitem
+>Cita entrada en LyX</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>envia una cita per a les entrades seleccionades</action
+> a la crida <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+> per al seu ús en <application
+>LyX</application
+>, <application
+>Kile</application
+> o altres aplicacions de LaTeX. Sols s'activa quan s'edita una bibliografia.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Els menús Arranjament i Ajuda</title>
+
+<para
+>A part dels menús <guimenu
+>Arranjament</guimenu
+> i <guimenu
+>Ajuda</guimenu
+> comuns al &kde; que es descriuen en el capítol <ulink url="help:/fundamentals/menus.html"
+>Menús comuns</ulink
+> de la documentació Fonaments del &kde;, el &tellico; té aquestes entrades de menú específiques de l'aplicació: </para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Mostra la vista de grup</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>activa o desactiva la visualització de la <interface
+>Vista de grup</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Mostra l'editor d'entrades</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>activa o desactiva la visualització de l'<interface
+>Editor d'entrades</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Selecció de grup</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>canvia el camp utilitzat per a agrupar les entrades</action
+> en la col·lecció.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>

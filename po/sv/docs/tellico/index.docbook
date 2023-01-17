@@ -1,0 +1,302 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY appname "&tellico;">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Swedish "INCLUDE"
+><!-- change language only here -->
+
+  <!ENTITY robby "Robby Stephenson">
+  <!ENTITY email "robby@periapsis.org">
+  <!ENTITY homepage "https://tellico-project.org">
+  <!ENTITY maillist "https://tellico-project.org/mailing-list">
+  <!ENTITY xslt "<acronym
+>XSLT</acronym
+>">
+
+  <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
+  <!ENTITY importing-exporting-chapter SYSTEM "importing-exporting.docbook">
+  <!ENTITY configuration-chapter SYSTEM "configuration.docbook">
+  <!ENTITY fields-chapter SYSTEM "fields.docbook">
+  <!ENTITY menus-chapter SYSTEM "menus.docbook">
+  <!ENTITY advanced-chapter SYSTEM "advanced.docbook">
+  <!ENTITY hacking-chapter SYSTEM "hacking.docbook">
+  <!ENTITY faqs-chapter SYSTEM "faqs.docbook">
+  <!ENTITY details-chapter SYSTEM "details.docbook">
+
+]>
+
+<!-- ................................................................ -->
+
+<!-- The language must NOT be changed here. -->
+
+<book id="tellico" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+
+<!-- Date of the documentation
+Change date/releaseinfo only if
+   docbook is updated and verified to be valid for the current app version
+   or
+   docbook is proofread and verified to be valid for the current app version
+Don't forget to include this last date.
+Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
+-->
+<date
+>2021-03-14</date>
+
+<!--version information of Frameworks/Plasma/Applications this documentation is valid for.
+Example:
+Frameworks xx.yy for docbooks in frameworks
+Plasma xx.yy for docbooks in plasma workspace
+Applications xx.yy for docbooks released as Applications
+xx.yy (Applications xx.yy) for docbooks with own version released as Applications
+$applicationname xx.yy for applications with independent release schedule (extragear/playground)
+-->
+<releaseinfo
+>Tellico 3.4</releaseinfo>
+
+<title
+>Handbok &tellico;</title>
+
+<authorgroup>
+<author
+><firstname
+>Robby</firstname
+> <surname
+>Stephenson</surname
+> <affiliation
+> <address
+><email
+>&email;</email
+></address>
+</affiliation>
+</author>
+<othercredit role="translator"
+> <firstname
+>Stefan</firstname
+> <surname
+>Asserhäll</surname
+> <affiliation
+><address
+><email
+>stefan.asserhall@bredband.net</email
+></address
+></affiliation
+> <contrib
+>Översättare</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2001-2022</year>
+<holder
+>&robby;</holder>
+</copyright>
+
+<!-- Translators: put here the copyright notice of the translation -->
+
+<legalnotice>
+<para
+>För licensinformation för både programvaran och den här dokumentationen, se <link linkend="credits"
+>det sista avsnittet</link
+>. </para>
+</legalnotice>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>Detta dokument är en handbok om användning av &tellico;, en programvara för samlingshantering. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>tellico</keyword>
+<keyword
+>bok</keyword>
+<keyword
+>bibliografi</keyword>
+<keyword
+>film</keyword>
+<keyword
+>samling</keyword>
+<keyword
+>databas</keyword>
+<keyword
+>katalog</keyword>
+<keyword
+>extragear</keyword>
+</keywordset>
+
+</bookinfo>
+
+<!-- The contents of the documentation begin here.  Label each chapter
+so with the id attribute. This is necessary for two reasons: it allows
+you to easily reference the chapter from other chapters of your
+document, and if there is no ID, the name of the generated HTML files
+will vary from time to time making it hard to manage for maintainers
+and for the CVS system. Any chapter labelled (OPTIONAL) may be left
+out at the author's discretion. Other chapters should not be left out
+in order to maintain a consistent documentation style across all KDE
+apps. -->
+
+<chapter id="introduction">
+<title
+>Inledning</title>
+
+<!-- The introduction chapter contains a brief introduction for the
+application that explains what it does and where to report
+problems. Basically a long version of the abstract.  Don't include a
+revision history. (see installation appendix comment) -->
+
+<sect1 id="tellico-intro">
+<title
+>&tellico;</title>
+
+<para
+>&tellico; är ett program för att hantera samlingar. Det började som en enkel hantering av boksamlingar, och har expanderat att omfatta standardmallar för bibliografier, serietidningar, videor, musik, mynt, frimärken, kort, videospel, viner, spel och fillistningar. Dessutom kan egna samlingar skapas för vilken sorts samlingsobjekt som helst. </para>
+
+<sect2 id="what-tellico-is">
+<title
+>Vad &tellico; är</title>
+
+<para
+>&tellico; håller reda på objekten i en samling, och erbjuder ett enkelt sätt att mata in information om varje post. Det tillhandahåller flera fälttyper, och tillåter ett obegränsat antal användardefinierade fält. Posterna i en samling kan grupperas enligt vilket fält som helst, för att enkelt kunna organisera dem, och användarändringsbara vyer visar så stor eller liten mängd information som önskas. </para>
+
+<para
+>Lån av objekt i din samling kan följas, inklusive ett återlämningsdatum. Samlingar kan importeras och exporteras med ett antal olika format, för att tillåta enkelt utbyte eller publicering av information. </para>
+
+</sect2>
+
+<sect2 id="what-tellico-is-not">
+<title
+>Vad &tellico; inte är</title>
+
+<para
+>&tellico; är inte en ljud- eller videospelare. Det tillhandahåller inga funktioner för att läsa eller ändra multimediafiler. Det tillhandahåller heller inte några bildredigeringsfunktioner. Även om &tellico; har vissa funktioner för att hantera bibliografilistor, är det inte ett fullständigt bibliografiskt referensprogram. &tellico; påstår sig inte heller ha alla möjligheter som tillhandahålls av en fullständig relationsdatabas. </para>
+
+<para
+>Som något av en friskrivning, är &tellico; en hobby för upphovsmannen, och inga garantier ges om dess funktion, användbarhet, eller liknande. Mer information ingår i <link linkend="credits"
+>licensdeklarationen</link
+>. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="terminology">
+<title
+>Terminologi</title>
+
+<sect2 id="collections">
+<title
+>Samlingar</title>
+<para
+>I &tellico; är samlingen dokumentet. Det finns bara en samling i varje &tellico;-fil. En samling innehåller ett godtyckligt antal <link linkend="fields"
+>fält</link
+> och <link linkend="entries"
+>poster</link
+>. &tellico; stöder 12 specifika samlingstyper som standard: böcker, bibliografiska poster, serier, videor, musik, kort, mynt, frimärken, videospel, viner, brädspel och fillistningar. Dessutom finns en generell tom samlingsmall tillgänglig för vilken annan typ av samlingsobjekt eller listor som helst. </para>
+</sect2>
+
+<sect2 id="fields">
+<title
+>Samlingsfält</title>
+<para
+>Varje samling kan ha ett obegränsat antal fält. &tellico; stöder elva fälttyper, som tillåter en mängd olika information. Fälten kan redigeras från <link linkend="fields-dialog"
+><interface
+>samlingsfältdialogrutan</interface
+></link
+> och förklaras vidare i avsnittet <link linkend="field-types"
+>Fälttyper</link
+>. </para>
+</sect2>
+
+<sect2 id="entries">
+<title
+>Samlingsposter</title>
+
+<para
+>En post är grunden i &tellico;. Varje post innehåller ett enda värde för varje fält i samlingen. Teoretiskt kan en samling ha ett obegränsat antal poster, även om alltför många poster skulle kunna slöa ner programmet, eftersom hela samlingen alltid finns inläst i minnet. </para>
+
+<para
+>&tellico; har provats med en samling av 10 000 poster, och hastigheten var tillfredsställande. Om många stora bilder ingår i samling blir inläsnings- och behandlingstiden dock mycket längre. Prestanda kan förbättras genom att låta &tellico; lagra bilder separat från själva datafilen, antingen i den programspecifika katalogen eller i en katalog relativ till datafilen. Mer information finns i <link linkend="configuration"
+>inställningsavsnittet</link
+>. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+&fundamentals-chapter;
+
+&details-chapter;
+
+&importing-exporting-chapter;
+
+&advanced-chapter;
+
+&configuration-chapter;
+
+&hacking-chapter;
+
+&faqs-chapter;
+
+&menus-chapter;
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be
+included below the credits with a reference to the appropriate license
+file included in the KDE distribution. -->
+
+<title
+>Tack till och licens</title>
+
+<para
+>&tellico; </para>
+<para
+>Program copyright 2001-2019 &robby; <email
+>&email;</email
+> </para>
+<para
+>Dokumentation copyright 2001-2019 &robby; <email
+>&email;</email
+> </para>
+
+<para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> &underGPL; &underFDL; <para
+>Författaren av detta dokument har också beviljat dig rättighet att använda innehållet under villkoren i <ulink url="http://www.freebsd.org/copyright/freebsd-doc-license.html"
+>FreeBSD Documentation License</ulink
+>, om du så önskar. Om du enbart önskar tillåta användning av din version av detta innehåll under villkoren i FreeBSD Documentation License, och inte tillåta andra att använda din version av filen under villkoren i GFDL, indikera ditt beslut genom att ta bort GFDL notisen och ersätt den med notisen och andra bestämmelser som krävs av FreeBSD Documentation License. Om du inte tar bort GFDL notisen ovan, kan en mottagare av filen antingen använda din version av filen under villkoren i GFDL eller FreeBSD Documentation License.</para>
+
+</chapter>
+
+&documentation.index;
+
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->

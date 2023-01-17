@@ -1,0 +1,298 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY appname "&tellico;">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Dutch "INCLUDE"
+><!-- change language only here -->
+
+  <!ENTITY robby "Robby Stephenson">
+  <!ENTITY email "robby@periapsis.org">
+  <!ENTITY homepage "https://tellico-project.org">
+  <!ENTITY maillist "https://tellico-project.org/mailing-list">
+  <!ENTITY xslt "<acronym
+>XSLT</acronym
+>">
+
+  <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
+  <!ENTITY importing-exporting-chapter SYSTEM "importing-exporting.docbook">
+  <!ENTITY configuration-chapter SYSTEM "configuration.docbook">
+  <!ENTITY fields-chapter SYSTEM "fields.docbook">
+  <!ENTITY menus-chapter SYSTEM "menus.docbook">
+  <!ENTITY advanced-chapter SYSTEM "advanced.docbook">
+  <!ENTITY hacking-chapter SYSTEM "hacking.docbook">
+  <!ENTITY faqs-chapter SYSTEM "faqs.docbook">
+  <!ENTITY details-chapter SYSTEM "details.docbook">
+
+]>
+
+<!-- ................................................................ -->
+
+<!-- The language must NOT be changed here. -->
+
+<book id="tellico" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+
+<!-- Date of the documentation
+Change date/releaseinfo only if
+   docbook is updated and verified to be valid for the current app version
+   or
+   docbook is proofread and verified to be valid for the current app version
+Don't forget to include this last date.
+Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
+-->
+<date
+>2021-03-14</date>
+
+<!--version information of Frameworks/Plasma/Applications this documentation is valid for.
+Example:
+Frameworks xx.yy for docbooks in frameworks
+Plasma xx.yy for docbooks in plasma workspace
+Applications xx.yy for docbooks released as Applications
+xx.yy (Applications xx.yy) for docbooks with own version released as Applications
+$applicationname xx.yy for applications with independent release schedule (extragear/playground)
+-->
+<releaseinfo
+>Tellico 3.4</releaseinfo>
+
+<title
+>Het handboek van &tellico;</title>
+
+<authorgroup>
+<author
+><firstname
+>Robby</firstname
+> <surname
+>Stephenson</surname
+> <affiliation
+> <address
+><email
+>&email;</email
+></address>
+</affiliation>
+</author>
+&Freek.de.Kruijf;<othercredit role="translator"
+><firstname
+>Dit document is nog maar gedeeltelijk vertaald.</firstname
+> <surname
+>Wilt u meehelpen, stuur een bericht naar:</surname
+><affiliation
+><address
+> <email
+>kde-i18n-nl@kde.org</email
+></address
+></affiliation
+> <contrib
+>Nieuwe vertaler</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2001-2022</year>
+<holder
+>&robby;</holder>
+</copyright>
+
+<!-- Translators: put here the copyright notice of the translation -->
+
+<legalnotice>
+<para
+>Voor informatie over licenties van zowel de software als deze documentatie gaat u naar <link linkend="credits"
+>laatste sectie</link
+>. </para>
+</legalnotice>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>Dit document is een handboek voor het gebruiken van &tellico;, een beheerder voor verzamelingen van software toepassingen. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>tellico</keyword>
+<keyword
+>boek</keyword>
+<keyword
+>bibliografie</keyword>
+<keyword
+>film</keyword>
+<keyword
+>collectie</keyword>
+<keyword
+>database</keyword>
+<keyword
+>catalogus</keyword>
+<keyword
+>extragear</keyword>
+</keywordset>
+
+</bookinfo>
+
+<!-- The contents of the documentation begin here.  Label each chapter
+so with the id attribute. This is necessary for two reasons: it allows
+you to easily reference the chapter from other chapters of your
+document, and if there is no ID, the name of the generated HTML files
+will vary from time to time making it hard to manage for maintainers
+and for the CVS system. Any chapter labelled (OPTIONAL) may be left
+out at the author's discretion. Other chapters should not be left out
+in order to maintain a consistent documentation style across all KDE
+apps. -->
+
+<chapter id="introduction">
+<title
+>Inleiding</title>
+
+<!-- The introduction chapter contains a brief introduction for the
+application that explains what it does and where to report
+problems. Basically a long version of the abstract.  Don't include a
+revision history. (see installation appendix comment) -->
+
+<sect1 id="tellico-intro">
+<title
+>&tellico;</title>
+
+<para
+>&tellico; is een programma voor het beheren van verzamelingen. Het begon als een eenvoudige beheerder voor een boekenverzameling en is uitgebreid met standaard verzamelingensjablonen voor bibliografieën, stripboeken, video's, muziek, penningen, stempels, visitekaartjes, videospellen, wijnen, bordspelen en lijsten van bestanden. Bovendien kunnen er eigen verzamelingen mee worden gebouwd voor iets anders om te verzamelen. </para>
+
+<sect2 id="what-tellico-is">
+<title
+>Wat &tellico; is</title>
+
+<para
+>&tellico; houdt de items in een verzameling bij en biedt een gemakkelijke manier om gegevens voor elk item it te voeren. Het biedt verschillende veldtypen en staat een ongelimiteerd aantal gebruikergedefineerde velden toe. De items in een verzameling kunnen worden gegroepeerd op elk veld om het organiseren gemakkelijk te maken en weergaven aanpasbaar zodat u zo weinig of zoveel als u wilt te zien. </para>
+
+<para
+>Uitleningen van items in uw verzameling kunnen worden gevolgd, inclusief verloopdatum. Verzamelingen kunnen worden geïmporteerd of geëxporteerd met een verscheidenheid aan formaten, om gemakkelijke uitwisseling of publicatie van gegevens mogelijk te maken. </para>
+
+</sect2>
+
+<sect2 id="what-tellico-is-not">
+<title
+>Wat &tellico; niet is</title>
+
+<para
+>&tellico; is geen geluid- of videospeler. Het biedt geen faciliteiten voor het lezen of wijzigen van multimedia-bestanden. Het biedt ook geen bewerking van afbeeldingen. Hoewel &tellico; enige functionaliteit heeft voor beheer van bibliografische lijsten, is het geen volledige bibliografische beheerder van verwijzingen. &tellico; heeft ook niet de pretentie van het hebben van alle mogelijkheden van een volledige relationele database. </para>
+
+<para
+>Bij wijze van waarschuwing, &tellico; is een hobby van de auteur en er worden geen garanties gegeven over zijn functionaliteit, nut of anderszins. Meer informatie is beschikbaar in de <link linkend="credits"
+>licentieverklaring</link
+>. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="terminology">
+<title
+>Terminologie</title>
+
+<sect2 id="collections">
+<title
+>Verzamelingen</title>
+<para
+>In &tellico;, is een verzameling het document. Er is slechts één verzameling in elk bestand van &tellico;. Een verzameling bevat elk aantal <link linkend="fields"
+>velden</link
+> en <link linkend="entries"
+>items</link
+>. &tellico; ondersteunt standaard 12 specifieke verzamelingtypen: boeken, bibliografische items, stripboeken, video's, muziek, visitekaartjes, munten, postzegels, videospellen, wijnen, bordspellen en lijsten met bestanden. Daar naast is een leeg generiek sjabloon voor een verzameling beschikbaar voor elk ander type verzameling of lijst. </para>
+</sect2>
+
+<sect2 id="fields">
+<title
+>Verzamelingsvelden</title>
+<para
+>Elke verzameling kan een ongelimiteerd aantal velden hebben. &tellico; ondersteunt elf typen velden, wat mogelijkheden biedt voor een reeks van verschillende gegevens. De velden kunnen bewerkt worden met de <link linkend="fields-dialog"
+><interface
+>Dialoog voor velden in de verzameling</interface
+>"</link
+> en worden verder verklaart in de sectie <link linkend="field-types"
+>Typen velden</link
+>. </para>
+</sect2>
+
+<sect2 id="entries">
+<title
+>Items in de verzameling</title>
+
+<para
+>Een item is het basis record in &tellico;. Elk item bevat een enkele waarde voor elk veld in de verzameling. Een verzameling kan een ongelimiteerd aantal items bevatten, althans in theorie, omdat de gehele verzameling zich altijd in geheugen bevindt, te veel items zou de toepassing kunnen vertragen. </para>
+
+<para
+>&tellico; is getest met een verzameling van 10.000 items en de snelheid voldeed. Als er echter veel grote afbeeldingen in de verzameling zitten, dan kan het laden en verwerken aanzienlijk vertraagd worden. De prestatie kan verbeterd worden door &tellico; afbeeldingen apart van het gegevensbestand zelf op te slaan, ofwel in de specifieke map van de toepassing of een map relatief tot het gegevensbestand. Meer informatie kan worden gevonden in de <link linkend="configuration"
+>instellingen-sectie</link
+>. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+&fundamentals-chapter;
+
+&details-chapter;
+
+&importing-exporting-chapter;
+
+&advanced-chapter;
+
+&configuration-chapter;
+
+&hacking-chapter;
+
+&faqs-chapter;
+
+&menus-chapter;
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be
+included below the credits with a reference to the appropriate license
+file included in the KDE distribution. -->
+
+<title
+>Dankbetuigingen en licentie</title>
+
+<para
+>&tellico; </para>
+<para
+>Programma copyright 2001-2019 &robby; <email
+>&email;</email
+> </para>
+<para
+>Documentatie copyright 2001-2019 &robby; <email
+>&email;</email
+> </para>
+
+&meld.fouten;&vertaling.freek; &underGPL; &underFDL; <para
+>De auteur van deze documentatie heeft ook toestemming gegeven om de inhoud onder de termen van de <ulink url="http://www.freebsd.org/copyright/freebsd-doc-license.html"
+>FreeBSD Documentatielicentie</ulink
+> te gebruiken, als u dat kiest. Als u uw versie van deze inhoud alleen onder de termen van de FreeBSD Documentatielicentie wilt gebruiken en u anderen niet wilt toestaan om uw versie van dit bestand onder de termen van de GFDL wordt gebruikt, geef dat dan aan in uw beslissing door de GFDL notitie te verwijderen en deze te vervangen door de notitie en andere voorwaarden die worden vereist door de FreeBSD Documentatielicentie. Als u de GFDL notitie hierboven niet verwijdert, dan mag een ontvanger uw versie van dit bestand gebruiken onder de termen van ofwel de GFDL of de FreeBSD Documentatielicentie.</para>
+
+</chapter>
+
+&documentation.index;
+
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->

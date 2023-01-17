@@ -1,0 +1,696 @@
+<chapter id="hacking">
+<title
+>Hacking &appname;</title>
+
+<para
+>In de geest van Vrije Software bent u welkom om &appname; te hacken zoveel u wilt. U zou in staat moeten zijn om scripts te schrijven om gegevens gemakkelijk te importeren, te exporteren of te wijzigen. Dit hoofdstuk geeft u meer informatie over hoe dat te doen. </para>
+
+<sect1 id="file-format">
+<title
+>Bestandsformaat</title>
+
+<para
+>Het standaard gegevensbestand van &appname; is een zip-archief, normaal met een <literal role="extension"
+>.tc</literal
+> bestandsextensie. In het archief is een bestand op top-niveau <filename
+>tellico.xml</filename
+>. Afbeeldingen kunnen meegenomen worden in de map <filename
+>images/</filename
+> in het archief of ze kunnen direct ingevoegd zijn in de &XML;-gegevens in een base64-codering. Afbeeldingen kunnen ook opgeslagen worden in de gegevensmap van de toepassing, in welk geval, ze helemaal niet in het gegevensbestand zelf zitten. &appname; kan ook het &XML;-bestand, op zichzelf, laden, niet gecomprimeerd. </para>
+
+<sect2 id="xml-format">
+<title
+>&XML;-gegevens</title>
+
+ 
+
+<sect3 id="coll-xml-data">
+<title
+>Collectie</title>
+<programlisting
+><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V11.0//EN" "http://periapsis.org/tellico/dtd/v11/tellico.dtd">
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="My Books" type="2">
+ </collection>
+</tellico>
+]]>
+</programlisting>
+
+<para
+>Het bestand begint met de vereiste &XML;-declaratie en codering, gevolgd door het doctype. Wanneer een nieuw veldtype is toegevoegd of extra eigenschappen zijn ingesteld op de standaard velden, the zal de versie van het doctype-DTD verhoogt worden. &appname; is altijd in staat om elke vorige DTD-versie te openen en te lezen, maar zal bestanden opslaan in de huidige versie. De DTD-locatie wijst naar een actueel DTD-bestand. </para>
+
+<para
+>Het hoogste element is een <markup
+>&lt;tellico&gt;</markup
+> element, die de standaard naamruimte declaratie bevat en de syntaxisversie van het bestand, die altijd overeen zou moeten komen met de DTD. </para>
+
+<para
+>Het element <markup
+>&lt;tellico&gt;</markup
+> bevat één element <markup
+>&lt;collection&gt;</markup
+>. Meerdere verzamelingen worden voor nu genegeerd. Het <markup
+>title</markup
+> attribuut bevat de verzamelingtitel, terwijl het <markup
+>type</markup
+> specificeert welk soort items de verzameling bevat. De toegestane typen staan in een <link linkend="collection-type-values"
+>lijst in een latere sectie</link
+>. Een optioneel attribuut <markup
+>entryTitle</markup
+> kan gebruikt worden om de titel van de items te specificeren voor een aangepaste verzameling en zou een meervoud moeten zijn. </para>
+</sect3>
+
+<sect3 id="fields-xml-data">
+<title
+>Velden</title>
+
+<programlisting
+><![CDATA[
+  <fields>
+   <field flags="8" title="Title" category="General" format="1" type="1" name="title" />
+   <field flags="7" title="Author" category="General" format="2" type="1" name="author" />
+   <field flags="2" title="Binding" category="General" allowed="Hardback;Paperback;Trade Paperback;E-Book;Magazine;Journal" format="4" type="3" name="binding" >
+    <prop name="default"
+>Paperback</prop>
+   </field>
+   <field flags="6" title="Publisher" category="Publishing" format="0" type="1" name="publisher" />
+   <field flags="4" title="Edition" category="Publishing" format="0" type="1" name="edition" />
+   <field flags="3" title="Copyright Year" category="Publishing" format="4" type="6" name="cr_year" />
+   <field flags="2" title="Publication Year" category="Publishing" format="4" type="6" name="pub_year" />
+   <field flags="0" title="ISBN#" category="Publishing" format="4" type="1" name="isbn" description="International Standard Book Number" />
+   <field flags="7" title="Genre" category="Classification" format="0" type="1" name="genre" />
+   <field flags="7" title="Keywords" category="Classification" format="0" type="1" name="keyword" />
+   <field flags="0" title="Front Cover" category="Front Cover" format="4" type="10" name="cover" />
+   <field flags="0" title="Comments" category="Personal" format="4" type="1" name="comments" />
+   <field title="Rating" flags="2" category="Personal" format="4" type="14" name="rating">
+    <prop name="maximum"
+>5</prop>
+    <prop name="minimum"
+>1</prop>
+   </field>
+   <field title="ID" flags="32" category="Personal" format="4" type="6" name="id">
+    <prop name="template"
+>%{@id}</prop>
+   </field>
+
+  </fields>
+]]>
+</programlisting>
+
+<para
+>Alle velden worden binnen een <markup
+>&lt;fields&gt;</markup
+> element gedefinieerd, waarvan er slechts één kan zijn. Alle informatie voor een veld, behalve voor eigenschappen, zijn meegenomen als attributen van het <markup
+>&lt;field&gt;</markup
+> element. De toegestane waarden voor de attributen <markup
+>flags</markup
+>, <markup
+>format</markup
+> en <markup
+>type</markup
+> zijn gegeven in een <link linkend="field-type-values"
+>volgende sectie</link
+>. </para>
+
+<para
+>Veldeigenschappen worden gebruikt voor instelling van standaard veldwaarden, reeksen waarderingswaarden, afgeleide waardesjablonen, etc. Het bovenstaande voorbeeld bevat een standaard waarde, een maximale waarderingswaarde en een sjabloon voor een afleid ID-veld. </para>
+
+ 
+
+</sect3>
+
+<sect3 id="entries-xml-data">
+<title
+>Items</title>
+
+<programlisting
+><![CDATA[
+  <entry>
+   <title
+>C++ Programming Language, The</title>
+   <authors>
+    <author
+>Stroustrup, Bjarne</author>
+   </authors>
+   <publisher
+>Addison-Wesley Pub Co</publisher>
+   <edition
+>3rd</edition>
+   <pub_year
+>1997</pub_year>
+   <isbn
+>0-201-88954-4</isbn>
+   <genres>
+    <genre
+>Non-Fiction</genre>
+   </genres>
+   <keywords>
+    <keyword
+>Programming</keyword>
+    <keyword
+>Computers</keyword>
+   </keywords>
+   <cover
+>cf65a2f023b6cb9e9233323dca10ac7c.jpeg</cover>
+  </entry>
+]]>
+</programlisting>
+
+<para
+>Voor elk veld in de verzameling kan een <markup
+>&lt;item&gt;</markup
+> een element bevatten wiens naam identiek is aan de veldnaam. Als meerdere waarden voor het veld zijn toegestaan, zal de letter <emphasis
+>s</emphasis
+> toegevoegd moeten worden aan de veldnaam om een element aam te maken en elke waarde wordt toegevoegd als een kind van het element, zoals bovenstaand in het geval van de velden auteur, genre en keyword. </para>
+
+<para
+>Als resultaat, als extra velden zijn toegevoegd aan de verzameling, zal het gegevensbestand niet langer overeenstemmen met de DTD. &appname; gebruikt echter een niet-validerende &XML;-parser, dus extra velden veroorzaken geen problemen. </para>
+</sect3>
+
+<sect3 id="images-xml-data">
+<title
+>Afbeeldingen</title>
+<programlisting
+><![CDATA[
+  <images>
+   <image width="111" format="JPEG" height="140" id="cf65a2f023b6cb9e9233323dca10ac7c.jpeg" />
+  </images>
+]]>
+</programlisting>
+
+<para
+>Binnen het element <markup
+>&lt;images&gt;</markup
+> wordt elke afbeelding waarnaar verwezen wordt door een item in een lijst gezet, samen met attributen die de grootte, formaat en id van de afbeelding beschrijven. Als de afbeelding zich in het zip-bestand bevindt, is het element leeg. Anders kunnen de afbeeldingsgegevens zich bevinden in de &XML;-stream als base64 gecodeerde tekst. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-type-values">
+<title
+>Waarden van typen van verzamelingen</title>
+
+<para
+>Het type verzameling is gegeven in het type-attribuut van het verzamelingselement. De waarde is gelijk aan het <type
+>Type</type
+> enum-waarde in <filename
+>src/collection.h</filename
+>. </para>
+
+<table>
+<title
+>Waarden van typen van verzamelingen</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Type collectie</entry>
+<entry
+>Waarde</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Eigen verzameling</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Boekenverzameling</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Filmverzameling</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Muziekverzameling</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Bibliografie</entry
+><entry
+>5</entry
+></row>
+<row
+><entry
+>Stripverzameling</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>Wijnverzameling</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Muntverzameling</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Postverzameling</entry
+><entry
+>9</entry
+></row>
+<row
+><entry
+>Ruilkaartenverzameling</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Videospellenverzameling</entry
+><entry
+>11</entry
+></row>
+<row
+><entry
+>Bestandencatalogus</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Bordspellenverzameling</entry
+><entry
+>13</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="field-type-values">
+<title
+>Waarden van typen velden</title>
+
+<para
+>&appname; zal alle standaard velden bevatten voor een verzameling als het eerste veldelement de naam <emphasis
+>_default</emphasis
+> heeft. Voor velden <emphasis
+>Paragraaf</emphasis
+>, <emphasis
+>Tabel</emphasis
+> of <emphasis
+>Afbeelding</emphasis
+> zou de veldcategorie identiek moeten zijn aan de veldtitel. </para>
+
+<para
+>Het type veld is gegeven in het type-attribuut van het veldelement. De waarde is gelijk aan het <type
+>FieldType</type
+> enum-waarde in <filename
+>src/field.h</filename
+>. </para>
+
+<table>
+<title
+>Waarden van typen velden</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Veldtype</entry>
+<entry
+>Waarde</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Eenvoudige tekst</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Paragraaf</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Keuze</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Keuzevakje</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Cijfers</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>&URL;</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Tabel</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Afbeelding</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Datum</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Waardering</entry
+><entry
+>14</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>Het veld kan verschillende vlaggen hebben ingesteld, gegeven als een bitsgewijs met OF behandelde waarde in het attribuut vlaggen op het veldelement. De vlag om te voorkomen dat de gebruiker een veld verwijdert is bedoeld voor zulke dingen als de citatiesleutel voor bibliografische items. </para>
+
+<table>
+<title
+>Waarden van veldvlaggen</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Veldvlaggen</entry>
+<entry
+>Waarde</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Meerdere waarden toestaan</entry
+><entry
+><constant
+>0x01</constant
+></entry
+></row>
+<row
+><entry
+>Groepering toestaan</entry
+><entry
+><constant
+>0x02</constant
+></entry
+></row>
+<row
+><entry
+>Aanvulling toestaan</entry
+><entry
+><constant
+>0x04</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>Verwijderen weigeren</emphasis
+></entry
+><entry
+><constant
+>0x08</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>Bewerken weigeren</emphasis
+></entry
+><entry
+><constant
+>0x10</constant
+></entry
+></row>
+<row
+><entry
+>Afgeleide waarde</entry
+><entry
+><constant
+>0x20</constant
+></entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>Het formaat van het veld is gegeven in het formaatattribuut op het veldelement. <emphasis
+>Datumformattering</emphasis
+> wordt nu niet gebruikt. Groepering door <emphasis
+>Mensen</emphasis
+> gebruikt alle velden die <emphasis
+>Naamformattering</emphasis
+> gebruiken. Zetten van de vlag <emphasis
+>Afgeleide waarde</emphasis
+> impliceert de waarde voor het veld is gegenereerd uit de sjablooneigenschap uit andere veldwaarden. </para>
+
+<table>
+<title
+>Waarden van veldformaten</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Veldformaat</entry>
+<entry
+>Waarde</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Alleen hoofdletters</entry
+><entry
+>0</entry
+></row>
+<row
+><entry
+>Opmaak van titel</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Naamformattering</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+><emphasis
+>Datumformattering</emphasis
+></entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Geen opmaak</entry
+><entry
+>4</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="hidden-options">
+<title
+>Verborgen configuratieopties</title>
+
+<para
+>&appname; heeft enige extra configuratieopties die niet zichtbaar zijn in de <interface
+>Configuratiedialoog</interface
+>. Ze zijn niet belangrijk genoeg om de dialoog met meer instellingen te overvoeren, maar omdat ze opties representeren die verschillende gebruikers aanspreken, leest de toepassing ze uit het configuratiebestand. </para>
+
+<para
+>De instellingen voor &appname; worden opgeslagen in een bestand in de hoofdmap van de gebruiker, namenlijk <filename
+>$<envar
+>KDEHOME</envar
+>/share/config/tellicorc</filename
+>. Binnen dat bestand worden instellingen in groepen gezet, die van in haakjes gezette namen zijn voorzien, zoals [General Options]. Om een insellting toe te voegen aan de groep <emphasis
+>General Options</emphasis
+>, zoek de regel in het instellingenbestand met die groepsnaam. Als deze niet aanwezig is, maak deze dan zelf door een regel met [General Options] toe te voegen. Daarna kan de instelling toegevoegd worden onder de groepsnaam. </para>
+
+<sect2 id="hidden-general-options">
+<title
+>[Algemene opties]</title>
+
+<para
+>Deze instellingen kunnen geplaatst worden in de groe <emphasis
+>General Options</emphasis
+>. </para>
+
+<sect3>
+<title
+>Max Icon Size</title>
+
+<para
+>De maximum grootte van de pictogrammen in de <interface
+>Pictogramweergave</interface
+> kan gewijzigd worden met deze instelling. De standaard waarde is 96. De grootte moet in de reeks 32 tot 512 liggen. </para>
+</sect3>
+
+<sect3>
+<title
+>Voorbeeld</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Icon Cache Size</title>
+
+<para
+>Het maximum aantal pictogrammen gebufferd in geheugen kan gewijzigd worden met deze instelling. De standaard waarde is 1000. </para>
+</sect3>
+
+<sect3>
+<title
+>Voorbeeld</title>
+<informalexample>
+<para
+><userinput
+>Icon Cache Size=100</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Voorbeeld</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Image Cache Size</title>
+
+<para
+>De maximum hoeveelheid geheugen in bytes gebruikt voor buffering van alle afbeeldingen kan gewijzigd worden met deze instelling. De standaard waarde is 67108864. </para>
+</sect3>
+
+<sect3>
+<title
+>Voorbeeld</title>
+<informalexample>
+<para
+><userinput
+>Image Cache Size=256000000</userinput
+></para>
+</informalexample>
+</sect3>
+
+</sect2>
+
+<sect2 id="hidden-bibtex-options">
+<title
+>[Options - bibtex]</title>
+
+<para
+>Deze instellingen zouden geplaatst kunnen worden in de groep <emphasis
+>Options - bibtex</emphasis
+>. </para>
+
+<sect3>
+<title
+>lyxpipe</title>
+
+<para
+>Deze instelling is voor de locatie van de lyxpipe voor verzenden van bibliografische citaten. Het zou niet het achtervoegsel <literal role="extension"
+>.in</literal
+> moeten bevatten. </para>
+</sect3>
+
+<sect3>
+<title
+>Voorbeeld</title>
+<informalexample>
+<para
+><userinput
+>lyxpipe=$HOME/.lyx/lyxpipe</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
+
+</sect1>
+
+<sect1 id="bibtex-translation">
+<title
+>Bibtex Character Translation</title>
+
+<para
+>Wanneer bibtex-bestanden geïmporteerd of geëxporteerd worden, worden bepaalde tekens vertaald tussen hun TeX-equivalenten en de Unicode tekens. Deze koppelingen tussen tekens zitten in het bestand <filename
+>bibtex-translation.xml</filename
+>, gelokaliseerd in de gegevens voor installatie. De koppelingen kunnen, indien gewenst, gewijzigd worden. Het sleutelelement bevat het Unicode-teken en de tekenreekselementen erin bevatten de TeX-equivalenten, die een een-naar-meer koppeling kunnen hebben. De eerste is degene die wordt gebruikt bij exporteren naar bibtex. </para>
+
+<programlisting
+><![CDATA[
+  <key char="À">
+    <string
+>{\`A}</string>
+    <string
+>\`{A}</string>
+  </key>
+]]>
+</programlisting>
+
+</sect1>
+
+<sect1 id="xslt-tricks">
+<title
+>XSLT-trucs</title>
+
+<para
+>Hier zijn enige tips voor het schrijven van XSLT om &XML;-gegevens van &appname; te ontleden: (TBD). </para>
+</sect1>
+
+</chapter>

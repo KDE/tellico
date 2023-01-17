@@ -1,0 +1,846 @@
+<chapter id="details">
+<title
+>Détails de &appname;</title>
+
+<sect1 id="field-types">
+<title
+>Types de champs</title>
+
+<para
+>Chaque collection peut avoir un nombre illimité de champs. &appname; en gère onze types permettant une large gamme de données différentes. </para>
+
+<sect2 id="line">
+<title
+>Texte simple</title>
+
+<para
+>Le type de champ le plus basique est appelé <emphasis
+>Texte simple</emphasis
+>. Aucune restriction n'est placée sur les valeurs du champ et le composant graphique de saisie des données sert à saisir une ligne standard. Ce type est adapté aux champs ne nécessitant pas de valeurs longues, tel que l'auteur ou le genre. </para>
+
+</sect2>
+<sect2 id="number">
+<title
+>Nombre</title>
+
+<para
+>Le type <emphasis
+>Nombre</emphasis
+> est identique au <emphasis
+>Texte simple</emphasis
+>, excepté que les données doivent être numérique. Les entrées seront triées numériquement dans la vue en colonne si une colonne de champ <emphasis
+>Nombre</emphasis
+> est sélectionnée. Un champ texte standard, avec de petits boutons en forme de flèches pour augmenter ou diminuer la valeur, est utilisé pour la saisie des données. Aucun formatage n'est appliqué.</para>
+
+</sect2>
+
+<sect2 id="url">
+<title
+>&URL;</title>
+
+<para
+>Le type <emphasis
+>&URL;</emphasis
+> permet de lier vers d'autres documents, en utilisant les associations de type de fichiers standard de &kde; pour ouvrir ces documents. Aucune validation n'est faite sur la valeur d'un champ <emphasis
+>&URL;</emphasis
+> mais les liens non valables ne seront pas ouverts. La saisie de donnée se fait dans un champ texte possédant un bouton pour afficher une boîte de dialogue d'ouverture de fichiers standard mais n'importe quels &URL; peuvent être utilisés. Les &URL; relatifs sont interprétés par rapport à l'emplacement du fichier de données, une fois qu'il a été enregistré. </para>
+
+<para
+>Dans l'<link linkend="entry-editor"
+>éditeur d'entrée</link
+>, la légende devient le lien, tandis que dans la <link linkend="entry-view"
+>Vue des entrées</link
+>, un lien hypertexte réel est utilisé. Ce type de champ est pratique pour lier les fichiers <acronym
+>PDF</acronym
+> des entrées bibliographiques ou pour des critiques de films par exemple. Aucun formatage n'est appliqué.</para>
+
+<para
+>Les &URL; relatifs peuvent aussi être utilisés. Ils sont interprétés relativement à l'emplacement du fichier de données de &appname;. Dans <link linkend="entry-editor"
+><interface
+>L'éditeur d'entrée</interface
+></link
+>, le champ de saisi dispose d'un complètement automatique pour les emplacements de fichiers locaux. Si vous souhaitez que l'&URL; de la boîte de dialogue du sélecteur de fichiers de &kde; soit interprété relativement à l'emplacement du document, alors une propriété du champ d'&URL; doit être définie comme <emphasis
+>relatif</emphasis
+> : <emphasis
+>true</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="para">
+<title
+>Paragraphe</title>
+
+<para
+>Pour les longs champs de texte, le type <emphasis
+>Paragraphe</emphasis
+> offre une zone texte large, toujours dans sa propre catégorie. Un champ <emphasis
+>Paragraphe</emphasis
+> ne peut pas avoir de valeurs multiples, ni être automatiquement formaté. Il ne peut pas être utilisé pour grouper. Il est conseillé de saisir les résumés, intrigues ou critiques dans ce type de champ.</para>
+
+</sect2>
+
+<sect2 id="choice">
+<title
+>Choix</title>
+
+<para
+>Quand un champ doit être limité à quelques valeurs prédéfinies, le type <emphasis
+>Choix</emphasis
+> est utilisé. Les valeurs acceptables sont présentées à l'aide d'un menu déroulant. Évidemment, plusieurs valeurs ne sont pas acceptées. Les champs tels que le type bibliographique ou note personnelle sont des champs de type <emphasis
+>Choix</emphasis
+>.</para>
+
+<para
+>Les points-virgules doivent être utilisés pour séparer les valeurs autorisées.</para>
+
+</sect2>
+
+<sect2 id="bool">
+<title
+>Case à cocher</title>
+
+<para
+>Pour les champs qui indiquent une valeur « oui » ou « non », le type <emphasis
+>Case à cocher</emphasis
+> est disponible. Par défaut, la case n'est pas cochée. Les champs <emphasis
+>Case à cocher</emphasis
+> ne sont pas formatés et sont limités à des valeurs uniques. En interne, les valeurs de champ interprétées comme <emphasis
+><constant
+>true</constant
+></emphasis
+> (vrai) ou <emphasis
+><constant
+>false</constant
+></emphasis
+> (faux). Exemples : les champs cadeau ou prêt.</para>
+
+</sect2>
+
+<sect2 id="date">
+<title
+>Date</title>
+
+<para
+>Un champ <emphasis
+>Date</emphasis
+> peut inclure un jour, un mois et une année. La date est affichée au format standard AAAA-MM-JJ, facilitant le tri. Le sélecteur de date standard de &kde; peut être utilisé pour choisir la date avec la souris ou saisie directement. Le champ ne requière une date complète ; seule l'année peut être saisie, par exemple. Les valeurs multiples ne sont pas permises. </para>
+
+</sect2>
+
+<sect2 id="table">
+<title
+>Tableau</title>
+
+<para
+>Les champs <emphasis
+>Tableau</emphasis
+> contiennent une ou plusieurs colonnes de valeurs. Dans <link linkend="entry-editor"
+>L'éditeur d'entrée</link
+>, le champ est présenté en utilisant une vue en cascade, avec des lignes numérotées. Quand la dernière ligne est sélectionnée, une ligne additionnelle est ajoutée. Le complètement automatique n'est pas disponible. Ce champ est utile pour lister les chapitres d'un livre, les scènes dans un film ou les morceaux d'un album. Les champs <emphasis
+>Tableau</emphasis
+> sont toujours dans une catégorie à part. </para>
+
+<para
+>Le nombre de colonnes, au maximum de dix, est défini en ajoutant une propriété nommée <emphasis
+>columns</emphasis
+> (colonnes) à la définition du champ. Les colonnes peuvent être intitulées par un clic-droit sur l'en-tête ou en définissant des propriétés de champ appelées <emphasis
+>columns1</emphasis
+> (colonnes1), etc. </para>
+
+<para
+>Quand vous utilisez <interface
+>L'éditeur d'entrée</interface
+> pour les champs <emphasis
+>Tableau</emphasis
+>, les lignes peuvent être réarrangées en glissant la souris tout en maintenant appuyée la touche &Ctrl;. Un menu contextuel permettant d'insérer ou supprimer des lignes est également disponible par un clic-droit sur le tableau. </para>
+
+</sect2>
+
+<sect2 id="image">
+<title
+>Image</title>
+
+<para
+>Les champs <emphasis
+>Image</emphasis
+> contiennent une image, de n'importe quel format géré par &kde; ; plus couramment aux formats <acronym
+>PNG</acronym
+> ou <acronym
+>JPEG</acronym
+>. L'image peut être enregistrée directement dans le fichier de données de &appname; ou dans le dossier de données de l'application. Le sélecteur de fichier standard de &kde; est utilisé pour permettre la saisie d'un &URL; ou la sélection d'un fichier disponible localement. Les images peuvent être glissées depuis un gestionnaire de fichiers ou un navigateur. </para>
+
+</sect2>
+
+<sect2 id="rating">
+<title
+>Note</title>
+
+<para
+>Les champs <emphasis
+>Note</emphasis
+> affichent un nombre d'étoiles représentant la note numérique d'une entrée. Par défaut, la note maximum est de cinq. Les minimum et maximum peuvent être modifiée par les propriétés de définition du champ dans la boîte de dialogue des <interface
+>Champs de la collection</interface
+>, intitulée <emphasis
+>minimum</emphasis
+> et <emphasis
+>maximum</emphasis
+>, respectivement. </para>
+
+</sect2>
+
+<sect2 id="derived">
+<title
+>Champs de valeur dérivée</title>
+
+<para
+>Les champs utilisant des valeurs dérivées sont un cas à part. Le type de champ correspond au type de valeur habituellement renseignée dans le champ, sauf que cette valeur est construite à partir d'autres champs en utilisant un format de chaîne dans la description du champ. Par exemple, si un champ à comme valeur modèle <userinput
+>%{title} %{year}</userinput
+> (titre et année), alors la valeur de ce champ deviendra le titre, suivi de l'année. Ce type de champ est principalement utilisé pour le champ de titre des collections de pièces, timbres, cartes à échanger et vins. Le nom du champ interne ou le titre du champ peut être utilisé dans la description pour le formatage. </para>
+
+<para
+>Pour sélectionner une seule valeur d'un champ en contenant plusieurs, ajoutez un index de position au modèle, tel que <userinput
+>%{author:1}</userinput
+> pour le premier auteur. La position peut être négative, décomptée à partir de la fin : <userinput
+>%{author:-1}</userinput
+> serait alors le dernier auteur. Des valeurs de majuscule ou minuscule peuvent être employé dans la définition du modèle, tels que <userinput
+>%{author:1/l}</userinput
+> affiche le premier auteur en minuscule ou <userinput
+>%{author:1/u}</userinput
+> en majuscule. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-types">
+<title
+>Types de collection</title>
+
+<para
+>&appname; gère douze types de collections spécifiques par défaut : livres, entrées bibliographiques, bandes dessinées, films, musiques, jeux, cartes, pièces, timbres, vins, jeux de plateau et catalogue de fichiers. En plus, un modèle de collection générique vide est disponible pour toute autre collection. Les collections par défaut intègre un ensemble générique de champs. Vous pourrez en ajouter, modifier ou supprimer pour correspondre à vos besoins. La seule condition nécessaire est qu'une collection doit toujours avoir un champ <emphasis
+>Titre</emphasis
+> pour que la <link linkend="group-view"
+><interface
+>Vue par groupe</interface
+></link
+> fonctionne correctement. Pour certains types de collection, il s'agira simplement d'un champ à <link linkend="derived"
+>valeur dérivée</link
+> combinant au moins deux autres champs. </para>
+
+<para
+>En général, il n'y pas de différences fonctionnelles entre les types de collection. Vous pouvez créer une collection personnalisée pour vos livres aussi simplement qu'en utilisant la collection de livres par défaut. Mais &appname; choisit des icônes en fonction du type de collection et il peut y avoir des fonctionnalités spécialisées propres à un type de collection. Donc, si vous le pouvez, utiliser les collections par défaut. Si vous souhaitez créer une collection de vins, mais que vous n'aimez pas les champs par défaut, créez une collection de vins par défaut et supprimez ensuite tous les champs par défaut. De cette façon, &appname; identifiera quand même une collection de vins. </para>
+
+<para
+>Par défaut, tous les types de collection inclus un champ <emphasis
+>ID</emphasis
+> affichant le numéro d'indexation de l'entrée. En plus, à l'exception des catalogues de fichiers, chaque collection inclut des champs affichant la date à laquelle l'entrée a été créée dans la collection ainsi que la date de la dernière modification. </para>
+
+<sect2 id="book-collection">
+<title
+>Collection de livres</title>
+<para
+>Les collections de livres ont vingt-six champs par défaut : <emphasis
+>Titre</emphasis
+>, <emphasis
+>Sous-titre</emphasis
+>, <emphasis
+>Auteur</emphasis
+>, <emphasis
+>Format</emphasis
+>, <emphasis
+>Date d'achat</emphasis
+>, <emphasis
+>Prix d'achat</emphasis
+>, <emphasis
+>Éditeur</emphasis
+>, <emphasis
+>Édition</emphasis
+>, <emphasis
+>Année du copyright</emphasis
+>, <emphasis
+>Année de publication</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>LCCN#</emphasis
+>, <emphasis
+>Pages</emphasis
+>, <emphasis
+>Langue</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Mots clés</emphasis
+>, <emphasis
+>Série</emphasis
+>, <emphasis
+>N° dans la série</emphasis
+>, <emphasis
+>Condition</emphasis
+>, <emphasis
+>Signé</emphasis
+>, <emphasis
+>Lu</emphasis
+>, <emphasis
+>Cadeau</emphasis
+>, <emphasis
+>Prêté</emphasis
+>, <emphasis
+>Note</emphasis
+>, <emphasis
+>Couverture</emphasis
+> et <emphasis
+>Commentaires</emphasis
+>. </para>
+
+<para
+>Le champ <emphasis
+>ISBN#</emphasis
+> est spécial puisque les numéros <acronym
+>ISBN</acronym
+> sont automatiquement formatés et qu'une vérification est appliquée. &appname; reconnaît le champ <acronym
+>ISBN</acronym
+> si son nom de champ interne est <emphasis
+>isbn</emphasis
+>. Si vous l'avez supprimé ou si vous avez besoin de l'ajouter à un autre type de collection, créez le champ avec le titre <emphasis
+>ISBN</emphasis
+> et appliquez la modification, vous pourrez ensuite revenir et modifier le titre comme bon vous semble. &appname; créé un nom interne à partir du titre initial mais ne le modifie jamais si le titre est plus tard mis à jour. </para>
+
+</sect2>
+
+<sect2 id="bibliography">
+<title
+>Bibliographies</title>
+<para
+>Les bibliographies ont vingt-cinq champs par défaut : <emphasis
+>Titre</emphasis
+>, <emphasis
+>Type d'entrée</emphasis
+>, <emphasis
+>Auteur</emphasis
+>, <emphasis
+>Clé BibTeX</emphasis
+>, <emphasis
+>Titre du livre</emphasis
+>, <emphasis
+>Éditeur</emphasis
+>, <emphasis
+>Organisation</emphasis
+>, <emphasis
+>Maison d'édition</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>Adresse</emphasis
+>, <emphasis
+>Édition</emphasis
+>, <emphasis
+>Pages</emphasis
+>, <emphasis
+>Année</emphasis
+>, <emphasis
+>Journal</emphasis
+>, <emphasis
+>Mois</emphasis
+>, <emphasis
+>Nombre</emphasis
+>, <emphasis
+>Mode de publication</emphasis
+>, <emphasis
+>Chapitre</emphasis
+>, <emphasis
+>Série</emphasis
+>, <emphasis
+>N° dans la série</emphasis
+>, <emphasis
+>Volume</emphasis
+>, <emphasis
+>Référence croisée</emphasis
+>, <emphasis
+>Mots clés</emphasis
+>, <emphasis
+>Résumé</emphasis
+> et <emphasis
+>Notes</emphasis
+>. </para>
+
+<para
+>Bien que les collections bibliographiques ne soient pas liées spécifiquement à BibTeX, les champs par défauts sont ceux habituellement utilisés par BibTeX. À l'exportation en BibTeX, une propriété étendue appelée <emphasis
+>bibtex</emphasis
+> est utilisée pour chaque champ afin de définir le champ BibTeX correspondant. Si vous ajoutez un champ à une bibliographie et que vous l'exportez au format BibTeX, n'oubliez pas de définir la propriété étendue <emphasis
+>bibtex</emphasis
+>. </para>
+
+<para
+>&appname; a des fonctionnalités spécialisées pour les bibliographies. Les macros de saisie BibTeX peuvent être ajoutées, modifiées ou supprimées depuis &appname; et l'exportation BibTeX vous donne l'option d'étendre les macros. Les citations BibTeX peuvent être envoyées vers une application externe tel que <application
+>LyX</application
+> ou <application
+>Kile</application
+> en utilisant l'option dénommée <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+<para
+>Les collections de livres peuvent être converties en bibliographies. Les champs BibTeX par défaut sont ajoutés et les propriétés étendues définies. Cette fonctionnalité existe surtout pour convertir d'anciennes collections ; avant que le type bibliographie ai été séparé des collections de livres. </para>
+</sect2>
+
+<sect2 id="comic-book-collection">
+<title
+>Collections de bandes dessinées</title>
+<para
+>Les collections de bandes dessinées ont vingt-deux champs par défaut : <emphasis
+>Titre</emphasis
+>, <emphasis
+>Sous-titre</emphasis
+>, <emphasis
+>Scénariste</emphasis
+>, <emphasis
+>Artiste</emphasis
+>, <emphasis
+>Série</emphasis
+>, <emphasis
+>Numéro</emphasis
+>, <emphasis
+>Maison d'édition</emphasis
+>, <emphasis
+>Édition</emphasis
+>, <emphasis
+>Année de publication</emphasis
+>, <emphasis
+>Pages</emphasis
+>, <emphasis
+>Pays</emphasis
+>, <emphasis
+>Langue</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Mots clés</emphasis
+>, <emphasis
+>Condition</emphasis
+>, <emphasis
+>Date d'achat</emphasis
+>, <emphasis
+>Prix d'achat</emphasis
+>, <emphasis
+>Signé</emphasis
+>, <emphasis
+>Cadeau</emphasis
+>, <emphasis
+>Prêté</emphasis
+>, <emphasis
+>Couverture</emphasis
+> et <emphasis
+>Commentaires</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="video-collection">
+<title
+>Collection de vidéos</title>
+<para
+>Les collections de vidéos ont trente champs par défaut : <emphasis
+>Titre</emphasis
+>, <emphasis
+>Médium</emphasis
+>, <emphasis
+>Année de production</emphasis
+>, <emphasis
+>Certification</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Région</emphasis
+>, <emphasis
+>Nationalité</emphasis
+>, <emphasis
+>Format</emphasis
+>, <emphasis
+>Distribution</emphasis
+>, <emphasis
+>Réalisateur</emphasis
+>, <emphasis
+>Producteur</emphasis
+>, <emphasis
+>Scénariste</emphasis
+>, <emphasis
+>Compositeur</emphasis
+>, <emphasis
+>Studio</emphasis
+>, <emphasis
+>Langues disponibles</emphasis
+>, <emphasis
+>Langues des sous-titres</emphasis
+>, <emphasis
+>Plages audio</emphasis
+>, <emphasis
+>Durée</emphasis
+>, <emphasis
+>Format d'image</emphasis
+>, <emphasis
+>Écran large</emphasis
+>, <emphasis
+>Format couleur</emphasis
+>, <emphasis
+>Version du réalisateur</emphasis
+>, <emphasis
+>Résumé de l'action</emphasis
+>, <emphasis
+>Note personnelle</emphasis
+>, <emphasis
+>Date d'achat</emphasis
+>, <emphasis
+>Prix d'achat</emphasis
+>, <emphasis
+>Cadeau</emphasis
+>, <emphasis
+>Prêté</emphasis
+>, <emphasis
+>Couverture</emphasis
+> et <emphasis
+>Commentaires</emphasis
+>. </para>
+
+<para
+>Le champ <emphasis
+>Distribution</emphasis
+> est un <link linkend="table"
+>tableau</link
+> à deux colonnes et les noms des acteurs sont prévus pour être dans la première colonne, avec leurs rôles dans la deuxième. La <emphasis
+>Durée</emphasis
+> est affichée en minutes, bien que vous puissiez modifier cela. </para>
+</sect2>
+
+<sect2 id="music-collection">
+<title
+>Collections musicales</title>
+<para
+>Les collections musicales ont quinze champs par défaut : <emphasis
+>Titre</emphasis
+>, <emphasis
+>Médium</emphasis
+>, <emphasis
+>Artiste</emphasis
+>, <emphasis
+>Label</emphasis
+>, <emphasis
+>Année</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Pistes</emphasis
+>, <emphasis
+>Note</emphasis
+>, <emphasis
+>Date d'achat</emphasis
+>, <emphasis
+>Prix d'achat</emphasis
+>, <emphasis
+>Cadeau</emphasis
+>, <emphasis
+>Prêté</emphasis
+>, <emphasis
+>Mots clés</emphasis
+>, <emphasis
+>Couverture</emphasis
+> et <emphasis
+>Commentaires</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="game-collection">
+<title
+>Collection de jeux</title>
+<para
+>Les collections de jeux ont seize champs par défaut : <emphasis
+>Titre</emphasis
+>, <emphasis
+>Plate-forme</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Année de parution</emphasis
+>, <emphasis
+>Éditeur</emphasis
+>, <emphasis
+>Développeur</emphasis
+>, <emphasis
+>Classement ESRB</emphasis
+>, <emphasis
+>Description</emphasis
+>, <emphasis
+>Note personnelle</emphasis
+>, <emphasis
+>Terminé</emphasis
+>, <emphasis
+>Date d'achat</emphasis
+>, <emphasis
+>Prix d'achat</emphasis
+>, <emphasis
+>Cadeau</emphasis
+>, <emphasis
+>Prêté</emphasis
+>, <emphasis
+>Couverture</emphasis
+> et <emphasis
+>Commentaires</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="card-collection">
+<title
+>Collection de cartes</title>
+<para
+>Les collections de cartes ont dix-sept champs par défaut : <emphasis
+>Titre</emphasis
+>, <emphasis
+>Joueur</emphasis
+>, <emphasis
+>Équipe</emphasis
+>, <emphasis
+>Marque</emphasis
+>, <emphasis
+>Numéro de carte</emphasis
+>, <emphasis
+>Année</emphasis
+>, <emphasis
+>Série</emphasis
+>, <emphasis
+>Type de carte</emphasis
+>, <emphasis
+>Date d'achat</emphasis
+>, <emphasis
+>Prix d'achat</emphasis
+>, <emphasis
+>Lieu</emphasis
+>, <emphasis
+>Cadeau</emphasis
+>, <emphasis
+>Mots clés</emphasis
+>, <emphasis
+>Quantité</emphasis
+>, <emphasis
+>Image recto</emphasis
+>, <emphasis
+>Image verso</emphasis
+> et <emphasis
+>Commentaires</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="coin-collection">
+<title
+>Collection de pièces</title>
+<para
+>Les collections de pièces ont seize champs par défaut : <emphasis
+>Titre</emphasis
+>, <emphasis
+>Type</emphasis
+>, <emphasis
+>Dénomination</emphasis
+>, <emphasis
+>Année</emphasis
+>, <emphasis
+>Monnaie</emphasis
+>, <emphasis
+>Pays</emphasis
+>, <emphasis
+>Pièce</emphasis
+>, <emphasis
+>État de conservation</emphasis
+>, <emphasis
+>Service d'évaluation</emphasis
+>, <emphasis
+>Date d'achat</emphasis
+>, <emphasis
+>Prix d'achat</emphasis
+>, <emphasis
+>Lieu</emphasis
+>, <emphasis
+>Cadeau</emphasis
+>, <emphasis
+>Observation</emphasis
+>, <emphasis
+>Verso</emphasis
+> et <emphasis
+>Commentaires</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="stamp-collection">
+<title
+>Collection de timbres</title>
+<para
+>Les collections de timbres ont dix-huit champs par défaut : <emphasis
+>Titre</emphasis
+>, <emphasis
+>Description</emphasis
+>, <emphasis
+>Dénomination</emphasis
+>, <emphasis
+>Pays</emphasis
+>, <emphasis
+>Année</emphasis
+>, <emphasis
+>Couleur</emphasis
+>, <emphasis
+>Scott#</emphasis
+>, <emphasis
+>État de conservation</emphasis
+>, <emphasis
+>Annulé</emphasis
+>, <emphasis
+>Articulé</emphasis
+>, <emphasis
+>Centrée</emphasis
+>, <emphasis
+>Gommé</emphasis
+>, <emphasis
+>Date d'achat</emphasis
+>, <emphasis
+>Prix d'achat</emphasis
+>, <emphasis
+>Lieu</emphasis
+>, <emphasis
+>Cadeau</emphasis
+>, <emphasis
+>Image</emphasis
+> et <emphasis
+>Commentaires</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="wine-collection">
+<title
+>Collection de vins</title>
+<para
+>Les collections de vins ont quinze entrées par défaut : <emphasis
+>Titre</emphasis
+>, <emphasis
+>Producteur</emphasis
+>, <emphasis
+>Appellation</emphasis
+>, <emphasis
+>Variété</emphasis
+>, <emphasis
+>Type</emphasis
+>, <emphasis
+>Pays</emphasis
+>, <emphasis
+>Date d'achat</emphasis
+>, <emphasis
+>Prix d'achat</emphasis
+>, <emphasis
+>Lieu</emphasis
+>, <emphasis
+>Quantité</emphasis
+>, <emphasis
+>Bu par</emphasis
+>, <emphasis
+>Note</emphasis
+>, <emphasis
+>Cadeau</emphasis
+>, <emphasis
+>Étiquette</emphasis
+> et <emphasis
+>Commentaires</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title
+>Collection de jeux de plateau</title>
+<para
+>Les collections de jeux de plateau ont quinze champs par défaut : <emphasis
+>Titre</emphasis
+>, <emphasis
+>Genre</emphasis
+>, <emphasis
+>Mécanisme</emphasis
+>, <emphasis
+>Année de parution</emphasis
+>, <emphasis
+>Maison d'édition</emphasis
+>, <emphasis
+>Concepteur</emphasis
+>, <emphasis
+>Nombre de joueurs</emphasis
+>, <emphasis
+>Description</emphasis
+>, <emphasis
+>Note</emphasis
+>, <emphasis
+>Date d'achat</emphasis
+>, <emphasis
+>Prix d'achat</emphasis
+>, <emphasis
+>Cadeau</emphasis
+>, <emphasis
+>Prêté</emphasis
+>, <emphasis
+>Couverture</emphasis
+> et <emphasis
+>Commentaires</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="file-catalog">
+<title
+>Catalogues de fichiers</title>
+<para
+>Les catalogues de fichiers ont quatorze champs par défaut : <emphasis
+>Nom</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Description</emphasis
+>, <emphasis
+>Volume</emphasis
+>, <emphasis
+>Dossier</emphasis
+>, <emphasis
+>Type MIME</emphasis
+>, <emphasis
+>Taille</emphasis
+>, <emphasis
+>Permissions</emphasis
+>, <emphasis
+>Propriétaire</emphasis
+>, <emphasis
+>Groupe</emphasis
+>, <emphasis
+>Créé le</emphasis
+>, <emphasis
+>Modifié le</emphasis
+>, <emphasis
+>Informations additionnelles</emphasis
+> et <emphasis
+>Icône</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="custom-collection">
+<title
+>Collections personnalisées</title>
+<para
+>Les collections personnalisées ont un champ par défaut, le <emphasis
+>Titre</emphasis
+>. Elles devraient être utilisées lorsqu'un objet à collectionner n'est pas proposé parmi les types par défaut. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>

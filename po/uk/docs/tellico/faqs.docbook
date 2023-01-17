@@ -1,0 +1,285 @@
+<chapter id="faqs">
+<title
+>Запитання і відповіді</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+
+<qandaentry>
+<question>
+<para
+>Як мені ввести записи декількох авторів?</para>
+</question>
+<answer>
+
+<para
+>Імена авторів слід відокремлювати крапками з комою, ось так: <userinput
+>Brian W. Kernighan; Dennis M. Ritchie</userinput
+>. Не додавайте слів на зразок «and» (або «і») між іменами, навіть якщо у книги 20 авторів. Якщо було позначено пункт налаштувань щодо автоматичного форматування, першим завжди буде показано прізвище автора.</para>
+
+<para
+>Всі інші властивості, які можуть складатися з декількох значень, наприклад «жанр» та «ключові слова», вводяться подібним же чином, окремі значення має бути розділено крапкою з комою (;).</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Чи можна змінити вигляд надрукованої сторінки?</para>
+</question>
+<answer>
+
+<para
+>Так, звичайно. Знайдіть файл <filename
+>tellico-printing.xsl</filename
+>, який має зберігатися у каталозі $<envar
+>KDEDIR</envar
+>/share/apps/tellico/. Для внесення ваших змін ви можете скопіювати цей файл до каталогу $<envar
+>KDEHOME</envar
+>/share/apps/tellico/. Вам доведеться ознайомитися з <ulink url="http://www.w3.org/TR/xslt"
+>&xslt;</ulink
+>, — ви зможете змінити компонування сторінки для друку, якщо навчитеся змінювати потрібний файл. За цим файлом буде створено &HTML;, отже найпростішим способом змінити вигляд відбитка є зміна таблиці стилів CSS у початковій частині цього файла.</para>
+
+<para
+>Не забувайте, що <filename
+>tellico-printing.xsl</filename
+> посилається на інший файл, <filename
+>tellico-common.xsl</filename
+>, у якому містяться декілька типових шаблонів &xslt;. Якщо ви скопіюєте <filename
+>tellico-printing.xsl</filename
+> до теки $<envar
+>KDEHOME</envar
+>, вам доведеться або змінити елемент &lt;xsl:import&gt; так, щоб він вказував на справжнє розташування файла <filename
+>tellico-common.xsl</filename
+> або скопіювати до відповідної теки і цей файл. </para>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para
+>Як впорядкувати записи за властивістю, яку не показано на панелі інструментів?</para>
+</question>
+<answer>
+<para
+>Щоб дозволити групування за полем, яке типово для групування не використовується, позначте пункт «Дозволити групування» для відповідного поля у діалоговому вікні «Поля збірки». </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Навіщо &appname; показує всі ці незрозумілі повідомлення?</para
+></question>
+<answer>
+<para
+>Повідомлення на зразок: <screen width="40">
+<computeroutput
+>Tellico::updateCollectionToolBar</computeroutput>
+<computeroutput
+>GroupView::setGroupAttribute - author</computeroutput>
+<computeroutput
+>GroupView::slotAddCollection</computeroutput>
+<computeroutput
+>QCheckBox::property( "title" ) failed: property invalid
+or does not exist</computeroutput>
+</screen
+> призначено для усування вад. Ви можете придушити появу таких повідомлень за допомогою параметра  <userinput
+><option
+>--disable-debug</option
+></userinput
+>, вказаного під час налаштування збирання програми. Крім того, ви можете скористатися параметром <userinput
+><option
+>--enable-final</option
+></userinput
+>, у такому випадку під час збирання буде використано більше оперативної пам’яті, але програма працюватиме ефективніше.</para>
+
+<para
+>Останнє повідомлення дещо відрізняється від інших, воно означає, що вашу бібліотеку Qt було зібрано з підтримкою певних даних, призначених для усування вад.</para>
+
+<para
+>Крім того, якщо &appname; вже встановлено, запустіть <userinput
+><command
+>kdebugdialog</command
+></userinput
+> і переконайтеся, що для програми знято позначку з пункту «0 (generic)». Таким чином, буде вимкнено всі повідомлення для усування вад, які надходять від всіх загальних програм KDE, тобто тих програм, які не постачаються у офіційних пакунках KDE.</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Як можна змінити перелік показаних стовпчиків даних?</para
+></question>
+<answer>
+<para
+>Наведіть вказівник на панель заголовка і клацніть правою кнопкою миші. Крім того, ви можете перетягувати заголовки для перевпорядкування стовпчиків, або клацнути на заголовку стовпчика, щоб впорядкувати записи за вмістом цього стовпчика.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Як відфільтрувати записи за полем на зразок «Прочитана»?</para
+></question>
+<answer>
+<para
+>На внутрішньому рівні позначені поля у &appname; зберігаються у вигляді значень «true», отже, якщо ви, наприклад, бажаєте застосувати такий фільтр, за якого буде показано лише ті книжки з науковою фантастикою, які ви ще не читали, вам слід встановити два правила фільтрування. Позначте пункт «Відповідає всім наступним». Для першого правила вкажіть «Жанр» «містить» «Наукова фантастика» (без лапок) і друге правило «Прочитана» «не містить» «true» (без лапок).</para>
+
+<para
+>Крім того, ви можете скористатися для пошуку тексту у будь-якому з полів записів панеллю швидкого пошуку. Якщо у введеному вами у це поле рядку буде небуквенний символ, програма вважатиме цей рядок формальним виразом. Отже, якщо вам хочеться швидко побачити всі записи книжок Вебера або Буджолд, введіть у рядок панелі інструментів «вебер|буджолд» (без лапок).</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Якщо мені додати нові шаблони записів?</para
+></question>
+
+<answer>
+<para
+>Шаблони записів користувача зберігаються у каталозі <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/entry-templates/</filename
+>, загальносистемні шаблони зберігаються у каталозі <filename class="directory"
+>$<envar
+>KDEDIR</envar
+>/share/apps/tellico/entry-templates/</filename
+>. Шаблони, що зберігаються у $<envar
+>KDEHOME</envar
+> мають перевагу над будь-якими шаблонами з тією ж назвою, які зберігаються у каталозі $<envar
+>KDEDIRS</envar
+>. Шаблони записів можна пов’язати з певною збіркою за допомогою діалогового вікна параметрів програми.</para>
+
+<para
+>Шаблони <interface
+>діалогового вікна звітів</interface
+> зберігаються у каталозі <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Збирання і встановлення пройшло у звичайному режимі, але після запуску програми &appname; я бачу порожнє вікно. Що не так?</para
+></question>
+
+<answer>
+<para
+>Програми KDE шукають дані за адресами, вказаними у змінній середовища $<envar
+>KDEDIRS</envar
+>. Якщо ви, наприклад, встановили програму до каталогу <filename class="directory"
+>/usr/local</filename
+>, а змінна середовища $<envar
+>KDEDIRS</envar
+> має порожнє значення або лише значення <filename class="directory"
+>/usr</filename
+>, &appname; не зможе знайти потрібні файли. Така ситуація часто виникає у SuSE, у цій системі вам слід налаштувати збирання з параметром <userinput
+><option
+>--prefix</option
+>=<filename class="directory"
+>/opt/kde3</filename
+></userinput
+>. Іншим варіантом вирішення проблеми є додавання відповідного рядка до файла <filename
+>.profile</filename
+> для визначення потрібного значення змінної середовища $<envar
+>KDEDIRS</envar
+>. Зверніться до документації з вашого командної оболонки.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Як експортувати додаткові поля bibtex?</para
+></question>
+<answer>
+<para
+>&appname; використовує властивість <emphasis
+>bibtex</emphasis
+> для визначення способу експортування полів bibtex. Якщо ви бажаєте вказати додаткові поля для експортування, наприклад abstract, відкрийте <interface
+>діалогове вікно редагування полів</interface
+> і натисніть кнопку <guibutton
+>Встановити властивості</guibutton
+>. Додайте властивість <emphasis
+>bibtex</emphasis
+> зі значенням <emphasis
+>abstract</emphasis
+>. Тепер, коли ви експортуватимете дані до bibtex або bibtexml, цю властивість буде використано для назви поля bibtex.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Що трапилося з програмою Bookcase?</para>
+</question>
+
+<answer>
+<para
+>Через конфлікт торговельних марок Bookcase було перейменовано на Tellico у вересні 2004 року. Було випущено Tellico 0.12, програму, яка повністю збігалася з Bookcase 0.11 у всьому, окрім назви.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Що означає назва Tellico?</para>
+</question>
+
+<answer>
+<para
+>У автора програми було <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
+>декілька інших варіантів назви програми</ulink
+>, частина з яких була пов’язана з збірками книжок. Але Tellico може працювати не лише зі збірками книжок, і, крім того, ця програма є хобі автора, отже він обрав назву, яка, на його думку, звучала найкраще: так називається одне з міст, розташованих поряд з містом, де виріс автор програми.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Навіщо програма показує посилання на Amazon.com у результатах пошуку?</para>
+</question>
+
+<answer>
+<para
+>Відповідно до <ulink url="http://www.amazon.com/gp/browse.html/002-0927720-5265623?node=3440661"
+>умов угоди, яка регламентує доступ до вебслужб Amazon.com</ulink
+>, всі зображення, отримані за допомогою служби, мають супроводжуватися посиланням на Amazon.com, а також додатковим текстом посилання. Слід обов’язково вказувати пов’язаний з зображенням ідентифікатор Amazon.com, інакше довелося б сплачувати переспрямування. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Чому програма не використовує справжні бази даних?</para>
+</question>
+
+<answer>
+<para
+>Частково, причиною написання &appname; стало зацікавлення автора програми у вивченні C++. На той час йому не було нічого відомо про SQL. Зараз у нього лише приблизне уявлення щодо того, як користуватися цим інструментом керування базами даних. Отже, від початку &appname; не планувався як інструмент керування реляційною базою даних, такий стан справ зберігатиметься до того часу, коли у майбутньому автор краще вивчить SQL і матиме час і натхнення, щоб змінити модель даних. Якщо вас це не влаштовує, добре, не користуйтеся &appname;. </para>
+
+<para
+>Звичайно ж, автор буде радий, якщо ви візьмете реалізацію потрібних вам функцій на себе. </para>
+</answer>
+</qandaentry>
+
+</qandaset>
+
+</chapter>

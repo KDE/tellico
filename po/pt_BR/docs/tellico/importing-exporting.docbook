@@ -1,0 +1,566 @@
+<chapter id="importing-exporting">
+<title
+>Importar e Exportar Dados</title>
+
+<para
+>O &appname; é capaz de importar e exportar uma grande variedade de arquivos de dados, assim como pesquisar em vários serviços da Internet para obter informações. </para>
+
+<sect1 id="internet-search">
+<title
+>Importando da Internet</title>
+<para
+>O &appname; é capaz de pesquisar em vários serviços da Internet com a <interface
+>Janela de Pesquisa na Internet</interface
+>. Os itens poderão ser importados e adicionados diretamente à sua coleção atual. Os vários fornecedores são configurados com as <link linkend="data-sources-options"
+>Opções das Fontes de Dados</link
+>. </para>
+
+<para
+>As pesquisas poderão usar critérios diferentes: o <guilabel
+>Título</guilabel
+>, a <guilabel
+>Pessoa</guilabel
+>, o <guilabel
+>ISBN</guilabel
+>, o <guilabel
+>UPC/EAN</guilabel
+> o <guilabel
+>LCCN</guilabel
+> ou a <guilabel
+>Palavra-Chave</guilabel
+>. Nem todos os critérios estão disponíveis para todas as fontes de dados. Os valores do <acronym
+>ISBN</acronym
+> e do <acronym
+>LCCN</acronym
+> são somente para livros, enquanto os valores do <acronym
+>UPC</acronym
+> e do <acronym
+>EAN</acronym
+> podem ser aplicados a qualquer tipo de item.</para>
+
+<para
+>Logo que inicie uma pesquisa, o botão <guibutton
+>Procurar</guibutton
+> tornar-se-á <guibutton
+>Parar</guibutton
+>, de modo a interromper uma pesquisa. À medida que forem encontrados resultados, eles são adicionados diretamente à lista sob o campo de pesquisa; a seleção de um item irá mostrar o resultado sem o adicionar à coleção. Se clicar no botão <guibutton
+>Adicionar um Item</guibutton
+>, irá adicionar todos os itens selecionados à sua coleção. Se a fonte de dados tiver mais resultados do que os pedidos inicialmente, o botão <guibutton
+>Obter Mais Resultados</guibutton
+> ficará ativo. Clicar em <guibutton
+>Limpar</guibutton
+>, irá remover todos os resultados atuais e limpar a pesquisa. </para>
+
+<screenshot>
+<screeninfo
+>A <interface
+>Janela de Pesquisa na Internet</interface
+> do &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fetch-dialog.png"/></imageobject>
+<textobject
+><phrase
+>A <interface
+>Janela de Pesquisa na Internet</interface
+> do &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Somente os itens correspondentes ao tipo de coleção atual serão encontrados. A coluna da <guilabel
+>Descrição</guilabel
+> oferece informações adicionais sobre o item, de modo a diferenciar entre os vídeos com diferentes formatos ou os livros com diferentes encadernações, por exemplo. Assim que um item for adicionado com sucesso à coleção, é feita uma marcação na primeira coluna na lista. </para>
+
+<para
+>Você poderá adicionar vários itens de uma vez, usando o método-padrão do &kde; de seleção múltipla, que envolve normalmente a utilização das teclas &Shift; ou &Ctrl; enquanto clica num item. </para>
+
+<para
+>Para facilitar a utilização de leitores de códigos de barras, as pesquisas poderão incluir vários valores de ISBN/UPC. A seleção da opção <guilabel
+>Pesquisa por ISBN/UPC múltipla</guilabel
+> irá desativar o campo de pesquisa e ativar o botão <guibutton
+>Editar os valores de ISBN/UPC...</guibutton
+>, que irá abrir um campo de inserção de texto multi-linhas. Cada ISBN deverá ser inserido numa linha própria. Depois de fechar a janela, cada um dos ISBNs será validado à procura da formatação correta. A validação do ISBN é capaz de converter os valores de 13 algarismos do EAN, assim como os códigos completos do <acronym
+>UPC</acronym
+>, para uma formatação correta. A lista de ISBNs poderá também ser lida a partir de um arquivo de texto. </para>
+
+</sect1>
+
+<sect1 id="importing">
+<title
+>Importar Dados</title>
+
+<para
+>O &appname; oferece três ações diferentes quando importa os dados. A <guilabel
+>Substituir a coleção atual</guilabel
+> irá fechar a coleção atual, criando uma nova com os dados do arquivo importado. A <guilabel
+>Adicionar à coleção atual</guilabel
+> diz ao &appname; para adicionar todos os itens na coleção importada à atual, assim como para adicionar os campos que atualmente não existam. A ação <guilabel
+>Mesclar a coleção</guilabel
+> é a mesma que a adição, exceto que cada item importado é comparado com os atuais, sendo que os itens idênticos são descartados. O &appname; tenta identificar entradas correspondentes que não são completamente idênticas, comparando campos significativos e, em seguida, fará a mesclagem das entradas. Por exemplo, as coleções de músicas comparam o artista e o álbum, sendo que as faixas deveriam ser mescladas para os itens correspondentes. O módulo de <link linkend="importing-audio-files"
+>importação de arquivos de áudio</link
+> é capaz de construir corretamente as listagens de faixas ao mesclar os itens. </para>
+
+<sect2 id="alternate-software">
+<title
+>Importação de dados a partir de outro software</title>
+
+<para
+>O &appname; consegue importar dados diretamente de uma variedade de outros programas de gerenciamento de coleções, como <application
+><ulink url="http://www.gcstar.org"
+>GCstar</ulink
+></application
+>, <application
+><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
+>Alexandria</ulink
+></application
+>, <application
+><ulink url="https://www.delicious-monster.com"
+>Delicious Library</ulink
+></application
+>, <application
+><ulink url="http://www.antp.be/software/moviecatalog/"
+>Ant Movie Catalog</ulink
+></application
+>, <application
+><ulink url="https://en.wikipedia.org/wiki/Referencer"
+>Referencer</ulink
+></application
+> e <application
+><ulink url="https://launchpad.net/griffith"
+>Griffith</ulink
+></application
+>.</para>
+
+</sect2>
+
+<sect2 id="import-data-files">
+<title
+>Importação de outros formatos de dados</title>
+<para
+>O &appname; pode importar os dados de uma variedade de outros formatos de arquivo, incluindo <acronym
+>CSV</acronym
+>, Bibtex, discos de áudio e arquivos, <acronym
+>MODS</acronym
+>, &PDF; e <acronym
+>RIS</acronym
+>.</para>
+
+<sect3 id="importing-tellico">
+<title
+>Importar Dados do &appname;</title>
+
+<para
+>Poderão ser importados diretamente outros arquivos de dados do &appname;. A substituição da coleção atual, através da importação de um arquivo de dados do &appname;, é a mesma coisa que abrir o próprio arquivo. O valor da importação dos dados do &appname; é apenas para adicionar ou mesclar duas coleções. </para>
+</sect3>
+
+<sect3 id="importing-csv">
+<title
+>Importando os Dados em CSV</title>
+
+<para
+>Os valores separados por vírgulas (<acronym
+>CSV</acronym
+>) são uma forma comum de importar e exportar dados em tabelas. Cada valor do campo é separado por uma vírgula, com um item por linha. Os títulos dos campos podem ser incluídos na primeira linha. O módulo de importação de CSV não está limitado apenas a usar uma vírgula como separador. Você poderá usar qualquer caractere ou sequência de texto. </para>
+
+<screenshot>
+<screeninfo
+>A Janela de Importação de CSV</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="csv-dialog.png"/></imageobject>
+<textobject
+><phrase
+>A Janela de Importação de CSV</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Primeiro, selecione o tipo de coleção que está importando. Se estiver adicionando ou mesclando à coleção atualmente aberta, o tipo é limitado ao tipo da sua coleção atual. Se a primeira linha do arquivo CSV tiver os títulos dos campos, clique na opção para que o módulo de importação compare automaticamente os títulos com os campos da coleção atual. Se o título de um campo corresponder, o cabeçalho dessa coluna muda para mostrar que a coluna foi associada a esse campo. Se o arquivo usar um separador que não seja uma vírgula, certifique-se de alterar a opção de acordo com isso. </para>
+
+<para
+>Para que o &appname; importe convenientemente o arquivo, ele deverá saber qual o campo que corresponde a cada coluna. <emphasis
+>Se a coluna só tiver um número no cabeçalho, os dados nessa coluna não serão importados.</emphasis
+> Você deverá atribuir os campos a cada coluna, selecionando uma coluna com o mouse ou alterando número da coluna em si, e depois selecionando o campo a atribuir a partir da lista e, finalmente, clicando no botão <guibutton
+>Atribuir o Campo</guibutton
+>. Se quiser adicionar um campo novo à coleção, o último item na lista abre a <link linkend="fields-dialog"
+><interface
+>Janela de Campos da Coleção</interface
+></link
+>. </para>
+
+<para
+>Por questões de compactação, apenas as primeiras cinco linhas do arquivo CSV importado serão mostradas na caixa de diálogo. Contudo, serão importadas todas as linhas do arquivo. </para>
+
+</sect3>
+
+<sect3 id="importing-audio">
+<title
+>Importar Dados de &CD;'s de Áudio</title>
+
+<para
+>O &appname; é capaz de usar o serviço do <ulink url="http://freedb.org"
+>freedb.org</ulink
+> para consultar informações sobre um &CD;, incluindo a lista de faixas. Dependendo da sua distribuição, a configuração do acesso ao serviço poderá ser definida nas &systemsettings; do &kde;. O artista do &CD;, o título, o gênero, o ano e a lista das faixas são todos adicionados. </para>
+
+<para
+>Além disso, se o disco tiver &CD;-Text, essa informação é lida e adicionada ao item importado. </para>
+</sect3>
+
+<sect3 id="importing-audio-files">
+<title
+>Importar os metadados dos arquivos de áudio</title>
+
+<para
+>O &appname; é capaz de percorrer uma pasta e ler as marcas dos formatos de arquivos de áudio comuns, como o <literal role="extension"
+>mp3</literal
+> e o <literal role="extension"
+>ogg</literal
+>. As músicas são inseridas numa coleção de músicas, onde cada item é um álbum. Se os arquivos de música tiverem o número de faixa, o nome da música é inserido no local correto da lista de faixas. A informação do artista e do gênero também é adicionada ao item. Se as marcas da música tiverem comentários, estes serão adicionados ao campo de 'comentários' do item, antecedido pelo nome do arquivo. </para>
+
+<para
+>Além disso, se uma pasta tiver um arquivo <filename
+>.directory</filename
+> e o nome da pasta corresponder ao título de um álbum, o item <literal
+>Ícone</literal
+> no arquivo '.desktop' é usado como imagem de capa para o álbum. </para>
+
+<para
+>O módulo de importação de metadados de arquivos de áudio pode percorrer uma pasta de forma recursiva, de modo a encontrar todos os arquivos de áudio em qualquer subpasta, ainda que as ligações simbólicas não sejam seguidas. O &appname; usa a <ulink url="https://taglib.org"
+>biblioteca TagLib</ulink
+> para ler os metadados do arquivo de áudio, para que possa importar os dados de qualquer tipo de arquivo que esta biblioteca reconheça. </para>
+
+</sect3>
+
+<sect3 id="importing-bibtex">
+<title
+>Importar Dados do Bibtex</title>
+
+<para
+><ulink url="http://en.wikipedia.org/wiki/Bibtex"
+>Bibtex</ulink
+> é um formato bibliográfico usado com o sistema de preparação de documentos LaTeX. Você poderá incluir diversos tipos de referências bibliográficas no arquivo. O &appname; importa os arquivos do 'bibtex' como uma <link linkend="bibliography"
+>coleção bibliográfica</link
+>. </para>
+
+<para
+>Se o módulo de importação do 'bibtex' encontrar campos no arquivo que não estejam na coleção bibliográfica padrão, eles serão adicionados como campos de <link linkend="line"
+>Texto Simples</link
+>, com duas exceções. Se o valor do campo tiver mais de 100 caracteres, tornar-se-á um campo de <link linkend="para"
+>Parágrafo</link
+>. Se o valor do campo parecer ter um &URL; ou uma referência de arquivos, então será criado um campo de <link linkend="url"
+>&URL;</link
+>. O &appname; usa uma cópia interna da <ulink url="http://www.gerg.ca/software/btOOL/"
+>biblioteca do 'btparse'</ulink
+> para processar os arquivos do bibtex. </para>
+
+<para
+><ulink url="http://bibtexml.sf.net"
+>Bibtexml</ulink
+> é uma representação em &XML; dos dados do 'bibtex', onde os dados do arquivo 'bibtexml' são tratados da mesma forma que seriam os dados do 'bibtex'. </para>
+</sect3>
+
+<sect3 id="importing-mods">
+<title
+>Importar Dados do MODS</title>
+
+<para
+>O <acronym
+><ulink url="http://www.loc.gov/standards/mods/"
+>MODS</ulink
+></acronym
+> é um formato para representar diversos tipos de coleções de conteúdos. Atualmente, só são importados livros pelo &appname;, como uma <link linkend="bibliography"
+>coleção bibliográfica</link
+>. </para>
+
+</sect3>
+
+<sect3 id="importing-pdf">
+<title
+>Importar Dados em &PDF;</title>
+<para
+>Se o &appname; foi compilado com o suporte para o <emphasis
+>exempi</emphasis
+> ou o <emphasis
+>poppler</emphasis
+>, os metadados dos arquivos &PDF; poderão ser importados. Os metadados poderão incluir o título, o autor e a informação da data, assim como alguns identificadores bibliográficos que são então usados para atualizar outros dados. </para>
+</sect3>
+
+<sect3 id="importing-ris">
+<title
+>Importar Dados do RIS</title>
+<para
+>O <ulink url="https://en.wikipedia.org/wiki/RIS_(file_format)"
+><acronym
+>RIS</acronym
+> </ulink
+> é um formato de arquivos bibliográficos usado pelo <application
+>EndNote</application
+>, <application
+>Reference Manager</application
+>, entre outros. O &appname; importa arquivos RIS como uma <link linkend="bibliography"
+>coleção bibliográfica</link
+>. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="import-online-collection">
+<title
+>Importação de coleções online</title>
+<para
+>O &appname; consegue-se conectar e importar dados de páginas Web que gerenciam coleções pessoais.</para>
+
+<sect3 id="importing-boardgamegeek">
+<title
+>Importar coleção do BoardGameGeek</title>
+<para
+>O <ulink url="https://www.boardgamegeek.com"
+>BoardGameGeek</ulink
+> é um recurso online de jogo de tabuleiro e comunidade. O &appname; pode importar os jogos de computador na coleção do usuário, desde que a coleção esteja definida para ser publicamente acessível. A coleção importada pode ser limitada a esses itens marcados como seus. </para>
+</sect3>
+
+<sect3 id="importing-goodreads">
+<title
+>Importar coleção do Goodreads</title>
+<para
+>O <ulink url="https://www.goodreads.com"
+>Goodreads</ulink
+> é uma rede social online de leitores para procurar por coleções de livros. O &appname; pode importar a lista de livros em uma coleção de usuário, fornecendo-se o nome do usuário ou sua ID, caso a coleção esteja configurada como pública. </para>
+</sect3>
+</sect2>
+
+<sect2 id="importing-file-listing">
+<title
+>Importar Listagens de Arquivos</title>
+
+<para
+>A melhor forma de criar um <link linkend="file-catalog"
+>Catálogo de arquivos</link
+> é importar o conteúdo de uma pasta. A mesma pasta poderá ser percorrida de forma recursiva, para adicionar todos os arquivos encontrados dentro dela. Esta importação é mais útil para as listagens de cópias de segurança e para o catálogo de conteúdos, como as listagens de &CD;s ou <acronym
+>DVD</acronym
+>s. Além disso, as previsões das imagens do conteúdo do arquivo poderão ser geradas, ainda que isso leve algum tempo para ler uma grande quantidade de arquivos. As previsões dos arquivos são as mesmas que aparecem no gerenciador de arquivos do &kde;. </para>
+</sect2>
+
+<sect2 id="importing-xslt">
+<title
+>Importar Dados em &XML; com XSLT</title>
+
+<para
+>Qualquer arquivo &XML; poderá ser importado para o &appname;, desde que exista uma folha de estilo &XSL; disponível para converter o arquivo para o formato do &appname;. O &appname; carrega automaticamente essa folha de estilo e aplica o processamento de &xslt; necessário para carregar o arquivo. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="drag-n-drop">
+<title
+>Arrastar e Soltar</title>
+
+<para
+>O arrastamento de arquivos de dados para a janela principal do &appname; e a posterior soltura dos mesmos irá importá-los, como se fosse invocado o <link linkend="importing"
+>comando de importação</link
+> a partir dos menu. O processo de 'arrastar e soltar' funciona para os seguintes formatos de arquivos: Tellico, Bibtex, RIS e &PDF;. A importação de vários arquivos de uma vez também é suportada.</para>
+
+<para
+>Por isso, por exemplo, se quiser catalogar diversos <link linkend="importing-pdf"
+>arquivos &PDF;</link
+>, selecione-os no gerenciador de arquivos e arraste-os para a janela do &appname;. O &appname; irá importar tantos metadados dos arquivos quanto conseguir, obtendo depois a informação adicional a partir das diversas fontes na Internet configuradas.</para>
+
+</sect1>
+
+<sect1 id="exporting">
+<title
+>Exportar Dados</title>
+
+<para
+>Ao exportar os dados na coleção, os valores dos itens poderão ser exportados tal como foram inseridos, ou então com a <link linkend="field-formatting"
+>formatação automática</link
+> oferecida pelo &appname;. Adicionalmente, a exportação poderá estar limitada aos itens selecionados atualmente na coleção, onde a <link linkend="status-bar"
+>barra de estado</link
+> mostra o número de itens selecionados. </para>
+
+<para
+>Os arquivos de texto exportados, como o Bibtex ou o CSV, poderão usar a codificação de caracteres Unicode (UTF-8) ou ainda a codificação local do sistema operacional. </para>
+
+<screenshot>
+<screeninfo
+>Opções Gerais de Exportação</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-options.png"/></imageobject>
+<textobject
+><phrase
+>Opções Gerais de Exportação</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="exporting-xml">
+<title
+>Exportar para &XML;</title>
+
+<para
+>O formato do arquivo de dados do &appname; é um arquivos &XML; comprimido com o ZIP. A exportação para &XML; simplesmente cria o arquivo &XML; sem o comprimir. As imagens poderão ser incluídas no arquivo &XML; como dados codificados em 'base64' num elemento de imagem; porém, ao fazê-lo, poderá criar arquivos de dados muito grandes. </para>
+</sect2>
+
+<sect2 id="exporting-zip">
+<title
+>Exportar para ZIP</title>
+
+<para
+>O formato de arquivo padrão para o &appname; é um arquivo comprimido com o ZIP, contendo o arquivo de coleção em &XML; e, opcionalmente, todas as imagens referenciadas na coleção. Se as imagens forem guardadas na pasta da aplicação, a exportação para um arquivo ZIP irá criar um arquivo de dados autônomo, que contém todas as imagens na coleção. </para>
+</sect2>
+
+<sect2 id="exporting-html">
+<title
+>Exportar para &HTML;</title>
+
+<para
+>A exportação para &HTML; usa a folha de estilo <filename
+>tellico2html.xsl</filename
+>. As imagens são exportadas para uma pasta com o mesmo nome que o arquivo &HTML; exportado, adicionando o texto <emphasis
+><filename
+>_files</filename
+></emphasis
+>. </para>
+
+<para
+>O formato padrão é similar ao resultado impresso, permitindo várias opções para modificar o &HTML;. Os cabeçalhos dos campos poderão ser impressos no topo de cada coluna; porém, infelizmente, o &kde; não permite ainda a repetição dos cabeçalhos das tabelas em cada página. Os itens também poderão ser agrupados, como acontece na <interface
+>Área de Grupos</interface
+>. </para>
+
+<para
+>Além disso, você poderá criar arquivos individuais para cada item na coleção, com as referências criadas no arquivo &HTML; de topo. Os arquivos dos itens serão criados na mesma pasta que as imagens. Os arquivos &HTML; dos itens irão usar o modelo da folha de estilo atual, tal como aparece na <interface
+>Área de Itens</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>Opções de Exportação para &HTML;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-html.png"/></imageobject>
+<textobject
+><phrase
+>Opções de Exportação para &HTML;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-csv">
+<title
+>Exportar para CSV</title>
+
+<para
+>Os valores separados por vírgulas (CSV) são uma forma comum de importar e exportar dados em formato de tabela. Cada valor do campo é separado por uma vírgula, existindo um item por cada linha. Os títulos dos campos poderão ser incluídos como cabeçalhos na primeira linha. Todos os caracteres ou sequências de texto que não sejam uma vírgula também poderão ser usados para delimitar os campos. </para>
+
+<screenshot>
+<screeninfo
+>Opções de Exportação para CSV</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-csv.png"/></imageobject>
+<textobject
+><phrase
+>Opções de Exportação para CSV</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-alexandria">
+<title
+>Exportar para o Alexandria</title>
+
+<para
+><application
+><ulink url="http://alexandria.rubyforge.net"
+>Alexandria</ulink
+></application
+> é um gerenciador de coleção de livros alternativo para o ambiente de trabalho <ulink url="http://www.gnome.org"
+>GNOME</ulink
+>. O &appname; é capaz de exportar um subconjunto limitado dos campos das coleções de livros para a localização padrão do Alexandria. </para>
+
+</sect2>
+
+<sect2 id="exporting-onix">
+<title
+>Exportar para o ONIX</title>
+
+<para
+><ulink url="http://www.editeur.org/onix.html"
+>ONIX</ulink
+> é um formato em &XML; para representar e comunicar informações de produtos da indústria de livros, principalmente para os vendedores de livros. O &appname; consegue exportar as coleções de livros com um subconjunto do ONIX. </para>
+
+</sect2>
+
+<sect2 id="exporting-bibtex">
+<title
+>Exportar para o Bibtex</title>
+
+<para
+>Ao exportar para o <ulink url="http://en.wikipedia.org/wiki/Bibtex"
+>Bibtex</ulink
+>, os valores dos campos poderão ser marcados com parênteses ou marcas de citação. Se forem usadas algumas macros de texto na coleção, elas poderão ser exportadas opcionalmente como macros ou expandidas. Para os campos &URL;, o &appname; poderá envolver os valores dos campos com a marca <literal
+>\url{...}</literal
+>. Finalmente, os itens sem chave de citação poderão ser ignorados em vez de ter o &appname; gerando automaticamente a chave. </para>
+
+<screenshot>
+<screeninfo
+>Opções de Exportação para Bibtex</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-bibtex.png"/></imageobject>
+<textobject
+><phrase
+>Opções de Exportação para Bibtex</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-gcstar">
+<title
+>Exportar para GCstar</title>
+
+<para
+>O <application
+><ulink url="http://www.gcstar.org"
+>GCstar</ulink
+></application
+> é outro gerenciador de coleções de filmes. O &appname; é capaz de exportar a maioria dos tipos de coleção para um arquivo de dados GCstar. </para>
+
+</sect2>
+
+<sect2 id="exporting-xslt">
+<title
+>Exportar para &XML; com o &xslt;</title>
+
+<para
+>Finalmente, o &appname; consegue processar a sua representação interna em &XML; dos dados da coleção, através de uma folha de estilo &XSL; externa, antes da exportação. Este tipo de exportação poderá ser útil para gerar relatórios de texto ou outros tipos de arquivos. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="citations">
+<title
+>Trabalhar com Citações</title>
+<para
+>Ao trabalhar numa <link linkend="bibliography"
+>bibliografia</link
+>, as citações para os itens selecionados poderão ser geradas e usadas em muitos outros aplicativos. Uma citação no formato 'bibtex' poderá ser copiada para a área de transferência e depois colada num arquivo em LaTeX. As citações do Bibtex poderão também ser enviadas para um aplicativo externo, como o <application
+>LyX</application
+> ou o <application
+>Kile</application
+>, usando o mecanismo conhecido do <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+</sect1>
+
+</chapter>

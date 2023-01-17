@@ -1,0 +1,868 @@
+<chapter id="details">
+<title
+>Weitergehende Informationen zu &appname;</title>
+
+<sect1 id="field-types">
+<title
+>Feldtypen</title>
+
+<para
+>Jede Sammlung kann eine unbegrenzte Anzahl von Feldern enthalten. In &appname; gibt es elf Feldtypen, die für einen großen Bereich von unterschiedlichen Daten geeignet ist. </para>
+
+<sect2 id="line">
+<title
+>Einfacher Text</title>
+
+<para
+>Der grundlegende Feldtyp ist <emphasis
+>Einfacher Text</emphasis
+>. Es kann beliebige Werte enthalten, als Eingabeelement wird das Standard-Eingabefeld verwendet. Dieser Typ ist für kurze Werte wie Autor oder Gattung geeignet. </para>
+
+</sect2>
+<sect2 id="number">
+<title
+>Nummer</title>
+
+<para
+>Der Typ <emphasis
+>Nummer</emphasis
+> entspricht dem Typ <emphasis
+>Einfacher Text</emphasis
+>, es können aber nur Zahlen eingegeben werden. Die Einträge werden numerisch sortiert, wenn Sie auf das Feld <emphasis
+>Nummer</emphasis
+> in der Spaltenansicht klicken. Es wird das Standardeingabefeld mit kleinen Pfeilen für das Vergrößern oder Verkleinern der Zahl zur Eingabe benutzt. Die Werte werden nicht formatiert.</para>
+
+</sect2>
+
+<sect2 id="url">
+<title
+>&URL;</title>
+
+<para
+>Mit dem Typ <emphasis
+>&URL;</emphasis
+> können Verknüpfung zu anderen Dokumenten erstellt werden. Der Typ verwendet die Standard-Dateizuordnung in &kde;, um die verknüpften Dokumente zu öffnen. Die Gültigkeit de aktuellen Wertes einer <emphasis
+>&URL;</emphasis
+> wird nicht überprüft, ungültige Verknüpfungen werden nicht geöffnet. Als Eingabeelement wird ein Eingabefeld mit einem Knopf zum Öffnen des Standarddateidialogs benutzt, es können aber beliebige &URL;s eingegeben werden. Relative &URL;s werden relativ zum Pfad der Datendatei interpretiert, wenn die Datendatei gespeichert wurde. </para>
+
+<para
+>Im <link linkend="entry-editor"
+><interface
+>Eintrags-Editor</interface
+></link
+> erscheinen die Beschriftungen als Verknüpfung, in der <link linkend="entry-view"
+><interface
+>Eintragsansicht</interface
+></link
+> als tatsächliche Verknüpfung. Dieser Feldtyp wird zum Beispiel für eine Verknüpfung zu <acronym
+>PDF</acronym
+>-Dateien von Einträgen in Literaturverzeichnissen oder für Verknüpfungen zu Filmkritiken vorgesehen. Der Eintrag wird nicht formatiert.</para>
+
+<para
+>Relative &URL;s können auch benutzt werden. Sie werden relativ zum Speicherort der &appname;-Datendatei interpretiert. im <link linkend="entry-editor"
+><interface
+>Eintrags-Editor</interface
+></link
+> werden die Eingaben für eine lokale Datei automatisch vervollständigt. Soll eine mit dem &kde;-Dateidialog ausgewählte &URL; relativ zum Speicherort der Datendatei interpretiert werden, dann muss für das Feld &URL; die Eigenschaft <emphasis
+>relative</emphasis
+> auf den Wert <emphasis
+>true</emphasis
+> gesetzt werden. </para>
+
+</sect2>
+
+<sect2 id="para">
+<title
+>Absatz</title>
+
+<para
+>Für längere Texte ist der Typ <emphasis
+>Absatz</emphasis
+> als eigene Kategorie vorgesehen. Ein <emphasis
+>Absatz</emphasis
+> kann nicht mehrere Werte enthalten und wird nicht automatisch formatiert. Ein <emphasis
+>Absatz</emphasis
+> kann nicht zur Gruppierung verwendet werden. Zusammenfassungen von Artikeln, Bücher oder der Handlung eines Films und Besprechungen sollten diesen Typ benutzen.</para>
+
+</sect2>
+
+<sect2 id="choice">
+<title
+>Auswahl</title>
+
+<para
+>Für ein Feld mit nur wenigen vorgegebenen Werten ist der Typ <emphasis
+>Auswahl</emphasis
+> vorgesehen. Die vorgegebenen Werte können aus  einem Auswahlfeld gewählt werden. Mehrere Werte können selbstverständlich nicht eingegeben werden. Dieser Feldtyp wird zum Beispiel für den Typ des Literaturverzeichnisses oder eine persönliche Bewertung benutzt.</para>
+
+<para
+>Die erlaubten Werte müssen durch Semikolons getrennt werden.</para>
+
+</sect2>
+
+<sect2 id="bool">
+<title
+>Ankreuzfeld</title>
+
+<para
+>Für Felder mit nur zwei möglichen Werten gibt es den Typ <emphasis
+>Ankreuzfeld</emphasis
+>. Als Voreinstellung ist das Feld abgeschaltet. Ein <emphasis
+>Ankreuzfeld</emphasis
+> wird nicht formatiert und kann nur für einzelne Werte benutzt werden. Intern werden die Feldwerte als Boolesche Werte <emphasis
+><constant
+>true</constant
+></emphasis
+> oder <emphasis
+><constant
+>false</constant
+></emphasis
+> gespeichert. Beispiele für diesen Typ sind die Felder <emphasis
+>Geschenk</emphasis
+> und <emphasis
+>Verliehen</emphasis
+>.</para>
+
+</sect2>
+
+<sect2 id="date">
+<title
+>Datum</title>
+
+<para
+>Ein <emphasis
+>Datum</emphasis
+>sfeld kann einen Tag, einen Monat oder ein Jahr enthalten. Das Datum wird im Standardformat YYYY-MM-DD angezeigt, das ermöglicht eine einfache Sortierung. Der &kde;-Standarddialog zur Datumsauswahl kann benutzt werden, um ein Datum mit der Maus einzugeben. Eine direkte Eingabe des Wertes ist ebenfalls möglich. Es müssen nicht alle Werte für Tag, Monat und Jahr eingegeben werden, nur die Angabe eines Jahres ist zum Beispiel auch erlaubt. Die Eingabe mehrerer Werte ist nicht möglich. </para>
+
+</sect2>
+
+<sect2 id="table">
+<title
+>Tabelle</title>
+
+<para
+>Eine <emphasis
+>Tabelle</emphasis
+> enthält eine oder mehrere Spalten mit Werten. Im <link linkend="entry-editor"
+><interface
+>Eintrags-Editor</interface
+></link
+> wird das Feld wie in einer Tabellenkalkulation mit nummerierten Zeilen angezeigt. Ist die letzte Zeile auswählt, wird eine weitere Zeile hinzugefügt. Es gibt keine automatische Vervollständigung bei der Werteeingabe. Dieser Typ sollte für die Liste der Kapitel in einem Buch, die Szenen eines Films oder die Titel eines Albums benutzt werden. Die Felder einer <emphasis
+>Tabelle</emphasis
+> sind immer eine eigene Kategorie. </para>
+
+<para
+>Die Anzahl der Spalten beträgt als Vorgabe maximal fünf. Dieser Wert kann geändert werden, indem in der Felddefinition die Eigenschaft <emphasis
+>columns</emphasis
+> hinzugefügt wird. Die Beschriftung von Spalten können durch Klicken mit der &RMBn; auf der Spaltenkopf im Kontextmenü oder durch Eingabe der Eigenschaft <emphasis
+>column1</emphasis
+>, <emphasis
+>column2</emphasis
+> usw. festgelegt werden. </para>
+
+<para
+>Im <interface
+>Eintrags-Editor</interface
+> für <emphasis
+>Tabellen</emphasis
+>-Felder können Zeilen durch Ziehen mit der Maus bei gedrückter Taste &Ctrl; anders angeordnet werden. Durch Klicken mit der &RMBn; öffnen Sie ein Kontextmenü mit Einträgen zum Einfügen oder Entfernen von Zeilen. </para>
+
+</sect2>
+
+<sect2 id="image">
+<title
+>Bild</title>
+
+<para
+>Das Feld <emphasis
+>Bild</emphasis
+> enthält eine Grafik in jedem von &kde; unterstützten Format, zum Beispiel  <acronym
+>PNG</acronym
+> oder <acronym
+>JPEG</acronym
+>. Das Bild kann direkt in der &appname;-Datendatei oder im Datenordner des Programms gespeichert werden. Der Standard-&kde;-Dateidialog wird zur Eingabe des Wertes benutzt, so können Sie eine &URL; oder eine lokale Datei eingeben. Bilder können ebenfalls von der Dateiverwaltung oder aus dem Browser in das Eingabefeld gezogen werden. </para>
+
+</sect2>
+
+<sect2 id="rating">
+<title
+>Bewertung</title>
+
+<para
+>Das Feld <emphasis
+>Bewertung</emphasis
+> zeigt eine Reihe von Sternen für die Darstellung einer numerischen Bewertung eines Eintrags an. Als Voreinstellung sind maximal fünf Sterne vorgegeben. Diese Einstellung kann im Dialog <interface
+>Sammlungsfelder</interface
+> geändert werden, indem für die Felddefinition die Eigenschaften <emphasis
+>minimum</emphasis
+> and <emphasis
+>maximum</emphasis
+> festgelegt werden. </para>
+
+</sect2>
+
+<sect2 id="derived">
+<title
+>Felder mit abgeleiteten Werten</title>
+
+<para
+>Felder mit abgeleiteten Werten sind ein Sonderfall. Die Feldtypen entsprechen den normalen Wertetypen des Feldes, aber der tatsächliche Wert des Feldes wird aus anderen Feldern durch einen Formattext in der Beschreibung des Feldes abgeleitet. Hat zum Beispiel ein Feld das Wertformat <userinput
+>%{title} %{year}</userinput
+>, dann ergibt sich der Feldwert aus dem Titel, gefolgt vom Jahr. Dieser Feldtyp wird vor allem für das Titelfeld von Münz-, Briefmarken-, Karten- und Wein-Sammlungen verwendet. Es kann entweder der interne Feldname oder der Titel des Feldes für den Formattext benutzt werden. </para>
+
+<para
+>Um nur einen einzelnen Wert aus einem Feld mit mehreren möglichen Werten auszuwählen, kann der Index der Position im Formattext angegeben werden, wie zum Beispiel <userinput
+>%{author:1}</userinput
+> für den ersten Autor. Der Index darf auch negativ sein und zählt dann vom Ende, <userinput
+>%{author:-1}</userinput
+> ergibt dann den letzten Autor. Groß- und Kleinschreibung kann durch Schalte zum Formattext bestimmt werden, wie zum Beispiel <userinput
+>%{author:1/l}</userinput
+> für den ersten Autor in Klein- und <userinput
+>%{author:1/u}</userinput
+> in Großschreibung. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-types">
+<title
+>Sammlungsarten</title>
+
+<para
+> &appname; unterstützt als Voreinstellung 12 besondere Arten von Sammlungen: Bücher, Literaturverzeichnisse, Comicbücher, Videos, Musik, Karten, Münzen, Briefmarken, Videospiele, Wein, Brettspiele und Dateikataloge. Zusätzlich gibt es noch eine Vorlage für allgemeine Sammlungen für beliebige andere Arten von Sammlerstücken. Die Standardsammlung enthalten nur einen allgemeinen Satz an Feldern. Sie können eine Sammlung an Ihre Anforderungen anpassen, indem Sie Felder hinzufügen, verändern oder entfernen. Jede Sammlung muss mindestens nur ein Feld <emphasis
+>Title</emphasis
+> enthalten, damit die <link linkend="group-view"
+><interface
+>Gruppenansicht</interface
+></link
+> möglich ist. Bei einigen Sammlungsarten ist das nur ein Feld mit einem <link linkend="derived"
+>abgeleiteten Wert</link
+>, der aus mindestens zwei anderen zusammengesetzt ist. </para>
+
+<para
+>Im Allgemeinen gibt es keinen Unterschied in den Funktionen für die verschiedenen Sammlungsarten. Sie können eine benutzerdefinierte Sammlung für Bücher genauso wie die Standard-Buch-Sammlung verwenden. Aber &appname; verwendet für die Sammlungsarten definierte Symbole. Außerdem gibt es möglicherweise besondere Funktionen für bestimmte Sammlungsarten, daher sollten Sie möglichst eine der mitgelieferten Sammlungen verwenden. Wenn Sie zum Beispiel eine neue Wein-Sammlung ohne die vorgegebenen Standardfelder benutzen möchten, erstellen Sie zuerst eine Standard-Wein-Sammlung und löschen dann alle Felder und ersetzen Sie sie durch Ihre eigenen Felder. Dann ist das für &appname; immer noch eine Weinsammlung. </para>
+
+<para
+>Als Standard benutzen alle Sammlungen ein Feld <emphasis
+>ID</emphasis
+>, das die numerische Kennung der Einträge enthält. Mit Ausnahme des Dateikatalogs enthält jede Sammlungsart Felder, die das Datum der Erstellung und das Datum der letzten Änderung eines Eintrags angeben. </para>
+
+<sect2 id="book-collection">
+<title
+>Buch-Sammlungen</title>
+<para
+>Buch-Sammlungen haben 27 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Untertitel</emphasis
+>, <emphasis
+>Autor</emphasis
+>, <emphasis
+>Einband</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Herausgeber</emphasis
+>, <emphasis
+>Edition</emphasis
+>, <emphasis
+>Copyright-Jahr</emphasis
+>, <emphasis
+>Veröffentlichungsjahr</emphasis
+>, <emphasis
+>ISBN</emphasis
+>, <emphasis
+>LCCN</emphasis
+>, <emphasis
+>Seiten</emphasis
+>, <emphasis
+>Sprache</emphasis
+>, <emphasis
+>Gattung</emphasis
+>, <emphasis
+>Schlüsselwörter</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Seriennummer</emphasis
+>, <emphasis
+>Zustand</emphasis
+>, <emphasis
+>Signiert</emphasis
+>, <emphasis
+>Gelesen</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Verliehen</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Vorderseite der Hülle</emphasis
+>, <emphasis
+>Zusammenfassung der Handlung</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
+
+<para
+>Die <emphasis
+>ISBN</emphasis
+>-Nummer ist ein besonderes Feld, da die  <acronym
+>ISBN</acronym
+>-Nummer automatisch formatiert und eine Prüfsumme dafür berechnet wird. &appname; erkennt ein <acronym
+>ISBN</acronym
+>-Feld am intern verwendeten Feldnamen <emphasis
+>isbn</emphasis
+>. Haben Sie dieses Feld gelöscht möchten es zu eines anderen Art von Sammlung hinzufügen, erstellen Sie zuerst ein Feld mit dem Titel <emphasis
+>ISBN</emphasis
+> und wenden diese Änderung an. Dann können Sie den Titel beliebig ändern. &appname; leitet den internen aus den ursprünglichen Titel ab, ändert ihn später aber nicht mehr, auch wenn der Titel bearbeitet wird. </para>
+
+</sect2>
+
+<sect2 id="bibliography">
+<title
+>Literaturverzeichnisse</title>
+<para
+>Literaturverzeichnisse haben 25 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Art des Eintrags</emphasis
+>, <emphasis
+>Autor</emphasis
+>, <emphasis
+>Bibtex-Schlüssel</emphasis
+>, <emphasis
+>Buch-Titel</emphasis
+>, <emphasis
+>Herausgeber</emphasis
+>, <emphasis
+>Organisation</emphasis
+>, <emphasis
+>Verlag</emphasis
+>, <emphasis
+>ISBN</emphasis
+>, <emphasis
+>Adresse</emphasis
+>, <emphasis
+>Auflage</emphasis
+>, <emphasis
+>Seiten</emphasis
+>, <emphasis
+>Jahr</emphasis
+>, <emphasis
+>Zeitschrift</emphasis
+>, <emphasis
+>Monat</emphasis
+>, <emphasis
+>Nummer</emphasis
+>, <emphasis
+>Art der Veröffentlichung</emphasis
+>, <emphasis
+>Kapitel</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Seriennummer</emphasis
+>, <emphasis
+>Band</emphasis
+>, <emphasis
+>Querverweis</emphasis
+>, <emphasis
+>Schlüsselwörter</emphasis
+>, <emphasis
+>Zusammenfassung</emphasis
+> und <emphasis
+>Notizen</emphasis
+>. </para>
+
+<para
+>Obwohl Literaturverzeichnisse keine besondere programmiertechnische Verknüpfung zu Bibtex haben, werden die Standardfelder eines typischen Bibtex-Datensatzes benutzt. Beim Export zu Bibtex wird eine Eigenschaft namens <emphasis
+>bibtex</emphasis
+> für jedes Feld verwendet, um das zugehörige Bibtex-Feld zu definieren. Möchten Sie ein zusätzlichen Feld zu einem Literaturverzeichnis hinzufügen und dann zu Bibtex exportieren, geben Sie die Eigenschaft <emphasis
+>bibtex</emphasis
+> passend ein. </para>
+
+<para
+>&appname; enthält keine besonderen Funktionen für Literaturverzeichnisse. Zeichenfolgen-Makros für Bibtex können in &appname; hinzugefügt, geändert oder gelöscht werden. Beim Bibtex-Export haben Sie die Möglichkeit, Optionen für das Erweitern der Makros anzugeben. Bibtex-Zitate können zu externen Programmen wie <application
+>LyX</application
+> oder <application
+>Kile</application
+> unter Verwendung der sogenannten <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+> exportiert werden. </para>
+
+<para
+>Buch-Sammlungen können in Literaturverzeichnis umgewandelt werden. Standard-Bibtex-Felder werden dann hinzugefügt und die Bibtex-Eigenschaften gesetzt. Diese Funktion ist deshalb vorhanden. um alte Sammlungen umzuwandeln, die entstanden sind, bevor der Typ Literaturverzeichnis vom Typ Buch-Sammlung abgetrennt wurde, </para>
+</sect2>
+
+<sect2 id="comic-book-collection">
+<title
+>Comicbuch-Sammlungen</title>
+<para
+>Comicbuch-Sammlungen haben 23 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Untertitel</emphasis
+>, <emphasis
+>Schreiber</emphasis
+>, <emphasis
+>Zeichner</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Ausgabe</emphasis
+>, <emphasis
+>Verlag</emphasis
+>, <emphasis
+>Auflage</emphasis
+>, <emphasis
+>Veröffentlichungsjahr</emphasis
+>, <emphasis
+>Seiten</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Sprache</emphasis
+>, <emphasis
+>Gattung</emphasis
+>, <emphasis
+>Schlüsselwörter</emphasis
+>, <emphasis
+>Zustand</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Signiert</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Verliehen</emphasis
+>, <emphasis
+>Vorderseite der Hülle</emphasis
+>, <emphasis
+>Zusammenfassung der Handlung</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="video-collection">
+<title
+>Video-Sammlungen</title>
+<para
+>Video-Sammlungen haben 30 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Medium</emphasis
+>, <emphasis
+>Produktionsjahr</emphasis
+>, <emphasis
+>Klassifizierung</emphasis
+>, <emphasis
+>Gattung</emphasis
+>, <emphasis
+>Regionalbereich</emphasis
+>, <emphasis
+>Nationalität</emphasis
+>, <emphasis
+>Format</emphasis
+>, <emphasis
+>Besetzung</emphasis
+>, <emphasis
+>Regisseur</emphasis
+>, <emphasis
+>Produzent</emphasis
+>, <emphasis
+>Schreiber</emphasis
+>, <emphasis
+>Komponist</emphasis
+>, <emphasis
+>Studio</emphasis
+>, <emphasis
+>Sprach-Spuren</emphasis
+>, <emphasis
+>Untertitel-Sprachen</emphasis
+>, <emphasis
+>Ton-Spuren</emphasis
+>, <emphasis
+>Laufzeit</emphasis
+>, <emphasis
+>Bildseitenformat</emphasis
+>, <emphasis
+>Breitbild</emphasis
+>, <emphasis
+>Farbmodus</emphasis
+>, <emphasis
+>Director's Cut</emphasis
+>, <emphasis
+>Zusammenfassung der Handlung</emphasis
+>, <emphasis
+>Persönliche Beurteilung</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Verliehen</emphasis
+>, <emphasis
+>Cover</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
+
+<para
+>Das Feld <emphasis
+>Besetzung</emphasis
+> ist eine <link linkend="table"
+>Tabelle</link
+> mit zwei Spalten. Der Name des Schauspielers wird in die erste Spalte eingetragen, die Rolle in die Zweite. Die <emphasis
+>Laufzeit</emphasis
+> wird üblicherweise in Minuten angegeben, das kann aber auch geändert werden. </para>
+</sect2>
+
+<sect2 id="music-collection">
+<title
+>Musik-Sammlungen</title>
+<para
+>Musik-Sammlungen haben 15 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Medium</emphasis
+>, <emphasis
+>Künstler</emphasis
+>, <emphasis
+>Herausgeber</emphasis
+>, <emphasis
+>Jahr</emphasis
+>, <emphasis
+>Gattung</emphasis
+>, <emphasis
+>Stücke</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Verliehen</emphasis
+>, <emphasis
+>Schlüsselwörter</emphasis
+>, <emphasis
+>Cover</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="game-collection">
+<title
+>Spiele-Sammlungen</title>
+<para
+>Videospiel-Sammlungen haben 16 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Plattform</emphasis
+>, <emphasis
+>Gattung</emphasis
+>, <emphasis
+>Jahr der Veröffentlichung</emphasis
+>, <emphasis
+>Verlag</emphasis
+>, <emphasis
+>Entwickler</emphasis
+>, <emphasis
+>ESRB-Bewertung</emphasis
+>, <emphasis
+>Beschreibung</emphasis
+>, <emphasis
+>Persönliche Beurteilung</emphasis
+>, <emphasis
+>Vollständig</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Verliehen</emphasis
+>, <emphasis
+>Cover</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="card-collection">
+<title
+>Karten-Sammlungen</title>
+<para
+>Karten-Sammlungen haben 16 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Spieler</emphasis
+>, <emphasis
+>Team</emphasis
+>, <emphasis
+>Marke</emphasis
+>, <emphasis
+>Karten-Nummer</emphasis
+>, <emphasis
+>Jahr</emphasis
+>, <emphasis
+>Serie</emphasis
+>, <emphasis
+>Karten-Typ</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Ort</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Schlüsselwörter</emphasis
+>, <emphasis
+>Menge</emphasis
+>, <emphasis
+>Bild der Vorderseite</emphasis
+>, <emphasis
+>Bild der Rückseite</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="coin-collection">
+<title
+>Münz-Sammlungen</title>
+<para
+>Münz-Sammlungen haben 16 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Type</emphasis
+>, <emphasis
+>Nennwert</emphasis
+>, <emphasis
+>Jahr</emphasis
+>, <emphasis
+>Prägung</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Münzen-Satz</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Bewertungs-Dienstleister</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Ort</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Vorderseite</emphasis
+>, <emphasis
+>Rückseite</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="stamp-collection">
+<title
+>Briefmarken-Sammlungen</title>
+<para
+>Briefmarken-Sammlungen haben 18 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Beschreibung</emphasis
+>, <emphasis
+>Nennwert</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Ausgabejahr</emphasis
+>, <emphasis
+>Farbe</emphasis
+>, <emphasis
+>Katalognr.</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Gestempelt</emphasis
+>, <emphasis
+>Falz</emphasis
+>, <emphasis
+>Zentrierung</emphasis
+>, <emphasis
+>Gummiert</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Ort</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Bild</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="wine-collection">
+<title
+>Wein-Sammlungen</title>
+<para
+>Wein-Sammlungen haben 15 Standardfelder: <emphasis
+>Titel</emphasis
+>, <emphasis
+>Erzeuger</emphasis
+>, <emphasis
+>Benennung</emphasis
+>, <emphasis
+>Rebsorte</emphasis
+>, <emphasis
+>Typ</emphasis
+>, <emphasis
+>Land</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>, <emphasis
+>Ort</emphasis
+>, <emphasis
+>Menge</emphasis
+>, <emphasis
+>Trinken zu</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Etikett</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title
+>Brettspiel-Sammlungen</title>
+<para
+>Brettspiel-Sammlungen haben 17 Standardfelder:  <emphasis
+>Titel</emphasis
+>, <emphasis
+>Gattung</emphasis
+>, <emphasis
+>Mechanismus</emphasis
+>, <emphasis
+>Jahr der Veröffentlichung</emphasis
+>, <emphasis
+>Verlag</emphasis
+>, <emphasis
+>Designer</emphasis
+>, <emphasis
+>Anzahl der Spieler</emphasis
+>, <emphasis
+>Spielzeit</emphasis
+>, <emphasis
+>Mindestalter</emphasis
+>, <emphasis
+>Beschreibung</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Kaufdatum</emphasis
+>, <emphasis
+>Kaufpreis</emphasis
+>,  <emphasis
+>Geschenk</emphasis
+>, <emphasis
+>Verliehen</emphasis
+>, <emphasis
+>Bewertung</emphasis
+>, <emphasis
+>Cover</emphasis
+> und <emphasis
+>Kommentare</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="file-catalog">
+<title
+>Dateikataloge</title>
+<para
+>Dateikataloge haben 14 Standardfelder <emphasis
+>Name</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Beschreibung</emphasis
+>, <emphasis
+>Volume</emphasis
+><emphasis
+>Ordner</emphasis
+>, <emphasis
+>Dateityp</emphasis
+>, <emphasis
+>Größe</emphasis
+>, <emphasis
+>Berechtigungen</emphasis
+>, <emphasis
+>Eigentümer</emphasis
+>, <emphasis
+>Gruppe</emphasis
+>, <emphasis
+>Erstellt</emphasis
+>, <emphasis
+>Geändert</emphasis
+>, <emphasis
+>Meta-Information</emphasis
+> und <emphasis
+>Symbol</emphasis
+>, </para>
+
+</sect2>
+
+<sect2 id="custom-collection">
+<title
+>Benutzerdefinierte Sammlungen</title>
+<para
+>Benutzerdefinierte Sammlungen haben nur ein Standardfeld, den <emphasis
+>Titel</emphasis
+>. Sie sollten benutzt werden, wenn es keine Standardsammlung für die Objekte gibt. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>

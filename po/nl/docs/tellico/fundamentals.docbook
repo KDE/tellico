@@ -1,0 +1,1074 @@
+<chapter id="fundamentals">
+<title
+>&appname; gebruiken</title>
+
+<sect1 id="quick-start">
+<title
+>Snelstart</title>
+
+<para
+>Standaard begint &appname; met een lege boekverzameling. Om met een ander type verzameling te werken, maakt u het met het menuitem <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Nieuw</guimenuitem
+></menuchoice
+> of de knop op de werkbalk. Verzamelingen worden voorzien van enige van de meer algemene velden, maar u kunt ze naar behoefte toevoegen, wijzigen of verwijderen. </para>
+
+<para
+>Nieuwe items kunnen toegevoegd worden door het gebruik van de <link linkend="entry-editor"
+><interface
+>Itembewerker</interface
+></link
+>. Het menu-item <menuchoice
+><guimenu
+>Verzameling</guimenu
+><guimenuitem
+>Nieuw item</guimenuitem
+></menuchoice
+> zal de <interface
+>Itembewerker</interface
+> openen met een leeg item gereed voor bewerking. De <interface
+>Itembewerker</interface
+> kan ook geopend worden door het menu-item <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Itembewerker tonen</guimenuitem
+></menuchoice
+>. Nadat u de waarden van het item hebt ingevoerd, kunt u het opslaan in de verzameling door de knop <guibutton
+>Item opslaan</guibutton
+> in de dialoog van de <interface
+>Itembewerker</interface
+> te gebruiken, die open blijft in het geval u door wilt gaan met het toevoegen van nieuwe items. Nadat u een item aan de verzameling hebt toegevoegd, kunt u het wijzigen door er op te klikken in het hoofdvenster. Als de <interface
+>Itembewerker</interface
+> niet al open is, kunt u dubbel klikken op een item om de bewerker te openen en te beginnen met de bewerking. </para>
+
+<para
+>Als u een afbeelding in het item wilt invoegen, dan kunt u de standaard &kde; Bestandsselectie gebruiken door te klikken op de knop <guibutton
+>Afbeelding selecteren...</guibutton
+> in de <link linkend="entry-editor"
+><interface
+>Itembewerker</interface
+></link
+> of u kunt een afbeelding vanuit de bestandsbeheeder of webbrowser naar de <interface
+>Itembewerker</interface
+>. </para>
+
+<para
+>Wanneer u een item selecteert, toont de <link linkend="entry-view"
+><interface
+>Itemweergave</interface
+></link
+> een geformatteerde weergave van de inhoud van het item. U kunt het gebruikte sjabloon wijzigen voor het weergeven van het item in de <link linkend="configuration"
+><interface
+>Instellingendialoog</interface
+></link
+>. </para>
+
+<para
+>De items in de verzameling worden gegroepeerd wanneer ze dezelfde waarden in bepaalde velden delen, zoals de auteur of dirigent. U kunt het veld dat wordt gebruikt voor groepering wijzigen door het afrolvak in de werkbalk te gebruiken of het menu-item <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Groepsselectie</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>U kunt het veld <interface
+>Snelfilter</interface
+> in de werkbalk gebruiken om snel het aantal zichtbare items te beperken tot diegenen die het woord dat u invoerde bevat. Het filter is ook nuttig wanneer u snel een item wilt vinden. U kunt de titel invoeren of een ander uniek woord dat het item identificeert en de <link linkend="detailed-view"
+><interface
+>Kolomweergave</interface
+></link
+> zal alleen de items tonen die overeenkomen met het filter. De statusbalk toont u hoeveel items er in de verzameling zijn en hoeveel er nu worden gefilterd. </para>
+
+</sect1>
+
+<sect1 id="main-window">
+<title
+>Algemeen gebruik</title>
+
+<para
+>Het hoofdvenster heeft drie aparte gebieden, die allemaal op een verschillende manier informatie tonen over de verzameling. De primaire weergave is de <link linkend="detailed-view"
+><interface
+>Kolomweergave</interface
+></link
+> in het gebied rechtsboven, waar de waarde van elk veld voor elk item getoond kan worden. Aan de linker kant, bevatten tabbladen de <link linkend="group-view"
+><interface
+>Groepsweergave</interface
+></link
+>, die gebruikt kan worden om de items te groeperen in een boomstructuur, de <link linkend="filter-view"
+><interface
+>Filterweergave</interface
+></link
+>, die wordt gebruikt om items te volgen die aan bepaalde criteria voldoen en de <link linkend="loan-view"
+><interface
+>Leningweergave</interface
+></link
+>, waar lijst van leningen wordt weergegeven. Tenslotte, de <link linkend="entry-view"
+><interface
+>Itemweergave</interface
+></link
+> toont een ingedeelde weergave van de gegevens van een enkel item of rechtsonder een pictogramweergave van een groep items. </para>
+
+<screenshot>
+<screeninfo
+>Het hoofdvenster van &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="main-window.png"/></imageobject>
+<textobject
+><phrase
+>Het hoofdvenster van &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="detailed-view">
+<title
+><interface
+>Kolomweergave</interface
+></title>
+
+<para
+>Elk van de velden in de verzamelingen kan getoond worden in de <interface
+>Kolomweergave</interface
+>, hoewel de velden <emphasis
+><link linkend="para"
+>Paragraaf</link
+></emphasis
+>, <emphasis
+><link linkend="image"
+>Afbeelding</link
+></emphasis
+> en <emphasis
+><link linkend="table"
+>Tabel</link
+></emphasis
+> waarschijnlijk niet nuttig zijn. Rechts klikken op de kop van de weergave opent een menu voor de selectie van zichtbare velden. De kolommen kunnen andere afmetingen krijgen en op elke manier gesorteerd worden en de instellingen zullen tussen sessies opgeslagen worden. </para>
+</sect2>
+
+<sect2 id="group-view">
+<title
+><interface
+>Groepsweergave</interface
+></title>
+
+<para
+>De <interface
+>Groepsweergave</interface
+> groepeert de items in een boomstructuurweergave door elk veld dat <link linkend="field-options"
+>groepering toestaat</link
+>. Het aantal items in elke groep wordt getoond naast de groepsnaam. Groepen kunnen uit- of ingevouwen worden door op het pijlteken te klikken of door dubbelklikken op het item. Uit en invouwen van alle groepen zijn opties in het contextmenu na rechtsklikken. De boomstructuur kan gesorteerd worden ofwel op de groepsnaam of op het aantal, door te klikken op de koptekst. Een groep kan ook gebruikt worden als een filter voor de <link linkend="detailed-view"
+><interface
+>Kolomweergave</interface
+></link
+> door rechtsklikken op het groepsitem. </para>
+
+<para id="people-group"
+>Wanneer meer dan één veld in de verzameling de optie <emphasis
+><link linkend="fields-dialog"
+><guilabel
+>Formatteren als een naam</guilabel
+></link
+></emphasis
+> heeft ingeschakeld, wordt een extra groep toegevoegd om al die velden te combineren in één enkele pseudo-groep <emphasis
+>Mensen</emphasis
+>. </para>
+
+<para
+>Als een item geen waarde bevat voor het veld dat gebruikt wordt om de groepen te vormen, dan wordt het geplaatst in de <emphasis
+>(Lege)</emphasis
+> groep, die een rode map gebruikt. </para>
+</sect2>
+
+<sect2 id="filter-view">
+<title
+><interface
+>Filterweergave</interface
+></title>
+
+<para
+>Als een een filter is opgeslagen voor de verzameling, dan wordt de <interface
+>Filterweergave</interface
+> actief. Als u items toevoegt of wijzigt, worden ze automatisch gecontroleerd tegen de filters en toegevoegd of verwijderd indien van toepassing. Het filter kan worden gewijzigd door dubbel te klikken op het item om de <link linkend="filter-dialog"
+><interface
+>Dialoog voor geavanceerd filteren</interface
+></link
+> te openen. Rechts klikken geeft u de optie om het geheel te verwijderen. </para>
+
+<screenshot>
+<screeninfo
+>De <interface
+>Filterweergave</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-view.png"/></imageobject>
+<textobject
+><phrase
+>De <interface
+>Filterweergave</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="loan-view">
+<title
+><interface
+>Uitleenweergave</interface
+></title>
+
+<para
+>Nadat items zijn aangemerkt als uitgeleend, wordt de <interface
+>Weergave uitgeleend</interface
+> toegevoegd aan het venster, die geleende items dan gevold worden. Uitleningen worden per item gevolgd, dus rechts klikken op een item heeft een optie voor wijzigen van de uitlening met de <interface
+>Uitleendialoog</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>De <interface
+>Uitleenweergave</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-view.png"/></imageobject>
+<textobject
+><phrase
+>De <interface
+>Uitleenweergave</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="entry-view">
+<title
+><interface
+>Itemweergave</interface
+></title>
+
+<para
+>Een geformatteerde representatie van de waarden van een item wordt getoond in de <interface
+>Itemweergave</interface
+>. Sjablonen worden gebruikt voor de indeling en elke extra illustraties. Aparte sjablonen voor elk type verzameling kunnen gespecificeerd worden in de <link linkend="template-options"
+><interface
+>Configuratiedialoog</interface
+></link
+>, samen met aangepaste kleuren en lettertypen.</para>
+
+<para
+>Alle standaard sjablonen gebruiken de selectie voor kleur en lettertype, maar andere aangepaste sjablonen mogelijk niet. De standaard sjablonen maken ook &URL;-velden actief, die de standaard bestandsassociaties van &kde; volgen. Bij exporteren naar &HTML; worden het huidige sjabloon gebruikt voor het exporteren van de individuele itembestanden. </para>
+
+</sect2>
+
+<sect2 id="status-bar">
+<title
+>Statusbalk</title>
+
+<para
+>De statusbalk wordt gebruikt om u te tonen wat &appname; nu aan het doen is. Het bevat ook het totaal aantal items in de verzameling en als er een filter wordt gebruikt, hoeveel er nu zichtbaar zijn. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="entry-editor">
+<title
+>Items bewerken</title>
+
+<para
+>De <interface
+>Itembewerker</interface
+> wordt gebruikt om items in de verzameling toe te voegen of te wijzigen. Dubbelklikken op een item in ofwel de <interface
+>Groepsweergave</interface
+> of de <interface
+>Kolomweergave</interface
+> opent de <interface
+>Itembewerker</interface
+> met dat item. Nieuwe items kunnen gemaakt worden met het menu <menuchoice
+><guimenu
+>Verzameling</guimenu
+></menuchoice
+>, het werkbalkpictogram of de knop in de <interface
+>Itembewerker</interface
+> zelf.</para>
+
+<para
+>De <interface
+>Itembewerker</interface
+> sluiten wanneer wijzigen zijn gemaakt maar niet opgeslagen laten een waarschuwingsbericht verschijnen. De velden zijn gegroepeerd op categorie en verschijnen in de volgorde waarin ze verschijnen in de <link linkend="fields-dialog"
+><interface
+>Dialoog voor verzamelingsvelden</interface
+></link
+>. Ze kunnen ook opnieuw geordend worden. </para>
+
+<screenshot>
+<screeninfo
+>De <interface
+>Itembewerker</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor1.png"/></imageobject>
+<textobject
+><phrase
+>De <interface
+>Itembewerker</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Op de veldtitel klikken voor een <link linkend="url"
+><emphasis
+>&URL;</emphasis
+></link
+>-veld zal de koppeling openen met de standaard &kde; bestandsassociatie. De knop <guiicon
+>&URL; selectie</guiicon
+> naast het tekstitem zal de standaard dialoog van &kde; voor openen van bestanden openen, maar het veld is niet beperkt tot lokale bestanden. </para>
+
+<para
+>Voor <link linkend="image"
+><emphasis
+>Afbeeldings</emphasis
+></link
+>velden, opent de knop <guibutton
+>Afbeelding selecteren...</guibutton
+> de &kde; dialoog voor selectie van afbeeldingsbestanden. De afbeelding wordt opgeslagen in de verzameling in het originele formaat en een geschaalde versie wordt getoond in de <interface
+>Itembewerker</interface
+>. De afbeelding kan gewit worden dor de knop <guibutton
+>Wissen</guibutton
+> te gebruiken. Gewiste afbeeldingen worden verwijderd uit de verzameling. </para>
+
+<screenshot>
+<screeninfo
+>De <interface
+>Itembewerker</interface
+> voor velden <emphasis
+>Afbeelding</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor3.png"/></imageobject>
+<textobject
+><phrase
+>De <interface
+>Itembewerker</interface
+> voor velden <emphasis
+>Afbeelding</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Het bewerkingswidget ondersteunt ook slepen en laten vallen. Een afbeeldingsbestand uit een bestandsbeheeder of browservenster doet hetzelfde als de afbeelding selecteren in de bestandsselectie. Een afbeelding uit de bewerkingswidget naar een &konqueror; bestandsbeheedervenster slepen zal de afbeelding in die map opslaan. </para>
+
+<warning>
+<para
+>Standaard worden de afbeeldingen opgeslagen in het gegevensbestand van de verzameling, waarmee alles op een locatie zit. Te veel afbeeldingen zullen er echter voor zorgen dat &appname; aanzienlijk langzamer wordt, evenals dat het resulteert in een erg groot gegevensbestand. Als alternatief kan &appname; de afbeeldingen apart opslaan, ofwel in de map <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/data/</filename
+> of in een map op dezelfde locatie als het gegevensbestand. Laden en opslaan van gegevensbestanden is veel sneller als afbeeldingen apart worden opgeslagen, maar de gegevensbestanden zijn niet langer overdraagbaar of te archiveren. Zelf-bevattende gegevensbestanden kunnen altijd aangemaakt worden door het menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenu
+>Exporteren</guimenu
+><guimenuitem
+>Exporteren naar zip...</guimenuitem
+></menuchoice
+> te gebruiken. </para>
+</warning>
+
+<para
+><link linkend="table"
+><emphasis
+>Tabel</emphasis
+></link
+>velden beginnen met vijf rijen, maar de cursor naar de laatste rij verplaatsen voegt automatisch een andere toe. Voor multi-kolomtabellen wordt alleen de eerste kolom gebruikt voor groepering of formattering. </para>
+
+<screenshot>
+<screeninfo
+>De <interface
+>Itembewerker</interface
+> voor velden <emphasis
+>Tabel</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor4.png"/></imageobject>
+<textobject
+><phrase
+>De <interface
+>Itembewerker</interface
+> voor velden <emphasis
+>Tabel</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="edit-multiple">
+<title
+>Meerdere items bewerken</title>
+<para
+>Meerdere items kunnen op hetzelfde moment bewerkt worden door er meer dan één in ofwel de <interface
+>Groepsweergave</interface
+> of de <interface
+>Kolomweergave</interface
+>. Als meerdere items geselecteerd zijn, zijn de velden die dezelfde waarde in elk item bevatten, ingeschakeld. Als items verschillende waarden hebben, dan zijn de velden uitgeschakeld. Keuzevakjes zijn helemaal rechts toegevoegd voor elk velditem die besturen of het veld is ingeschakeld of niet, zoals getoond in de onderstaande schermafdruk. </para>
+
+<para
+>Alleen ingeschakelde velden zullen gewijzigd worden wanneer de items opgeslagen worden, wat bewerken op grote schaal veel gemakkelijker maakt. Om bijvoorbeeld het Medium van alle video-items in de verzameling in te stellen, zorg er dan voor dat het veld Medium is ingeschakeld. Wijzig het naar <acronym
+>DVD</acronym
+>, sla daarna de items op. Alleen het veld Medium zal gewijzigd worden, waarmee alle andere veldwaarden voor de items behouden blijven. </para>
+
+<screenshot>
+<screeninfo
+>De <interface
+>Itembewerker</interface
+> voor meerdere items</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor5.png"/></imageobject>
+<textobject
+><phrase
+>De <interface
+>Itembewerker</interface
+> voor meerdere items</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="updating-entries">
+<title
+>Itemgegevens bijwerken</title>
+
+<para
+>Items kunnen automatisch bijgewerkt worden door de gegevensbronnen beschikbaar voor het huidige type verzameling te bevragen, wat erg nuttig is voor het combineren van informatie uit meerdere bronnen. U zou bijvoorbeeld een film aan uw verzameling kunnen toevoegen met de <link linkend="amazon-web-services"
+>Amazon.com webservices</link
+> en dan het item bijwerken met extra informatie uit de <link linkend="imdb"
+>Internet filmdatabase</link
+>. </para>
+
+<para
+>Alleen lege velden worden bijgewerkt tenzij de instelling <link linkend="data-sources-options"
+> voor die bron</link
+> toestaat resultaten bestaande informatie te overschrijven. Voor <link linkend="externalexec"
+>externe scripts</link
+> moet een bijwerkveld gespecificeerd worden in de bronopties. </para>
+
+<para
+>Het bijwerken van items kan gestart worden via het contextmenu bij rechts klikken op een item of door het menu-item <menuchoice
+><guimenu
+>Verzameling</guimenu
+><guimenuitem
+>Item bijwerken</guimenuitem
+></menuchoice
+> te gebruiken. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="fields-dialog">
+<title
+>Velden bewerken</title>
+
+<para
+>De  <interface
+>Dialoog voor verzamelingvelden</interface
+> stelt u in staat om nieuwe velden aan uw verzameling toe te voegen, bestaande te wijzigen of al met al te verwijderen. </para>
+
+<screenshot>
+<screeninfo
+>De &appname; <interface
+>Dialoog voor Verzamelingvelden</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
+<textobject
+><phrase
+>De &appname; <interface
+>Veldendialoog van verzameling</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="field-list">
+<title
+>Lijst met velden</title>
+
+<para
+>Links in de dialoog is de lijst met de huidige velden. gewijzigde velden worden getoond in vet cursief. De knoppen onderaan de lijst zullen een veld toevoegen of verwijderen en de pijlen kunnen gebruikt worden om hun volgorde te wijzigen. De volgorde van de velden in de lijst is belangrijk omdat de <interface
+>Itembewerker</interface
+> de volgorde gebruikt voor zijn indeling. Voor elke categorie zullen de velden ingedeeld worden van links naar rechts, volgens de van-boven-naar-onder volgorde van de velden in de lijst. </para>
+</sect2>
+
+<sect2 id="field-properties">
+<title
+>Veldeigenschappen</title>
+
+<para
+>Een veld is gedefineerd door zijn titel, type, categorie, beschrijving en mogelijk een standaard waarde of enige toegestane waarden. De titel wordt overal gebruikt om naar het veld te refereren in het gebruikersinterface. De <interface
+>Itembewerker</interface
+> gebruikt het om te vragen om waarden. De <interface
+>Kolomweergave</interface
+> gebruikt het als een kolomkop. De verschillende typen velden worden <link linkend="field-types"
+>uitgelegd in de sectie Veldtypen</link
+>. De deschrijving wordt gebruikt als een tekstballon in de <interface
+>Itembewerker</interface
+>, misschien om een uitleg te geven over de inhoud van de velden. Bovendien wordt voor <link linkend="derived"
+>velden met <emphasis
+>afgeleide</emphasis
+> waarden</link
+>, een waardesjabloon gebruikt om de waarde van het veld te formatteren. De standaard waarde wordt automatisch toegevoegd bij aanmaken van een nieuw item. De lijst met toegestane waarden voor <link linkend="choice"
+><emphasis
+>Keuze</emphasis
+></link
+>velden moet gescheiden worden door een puntkomma. </para>
+
+<para
+>Nieuwe velden kunnen elk type zijn, maar het type van bestaande velden wijzigen is beperkt tot compatibele typen, zoals te zien in de onderstaande tabel: </para>
+
+<table>
+<title
+>Toegestane wijzigingen van veldtypen</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Huidige type</entry>
+<entry
+>Toegestane nieuwe type</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Eenvoudige tekst</emphasis
+></entry>
+<entry
+><emphasis
+>Eenvoudige tekst</emphasis
+>, <emphasis
+>Paragraaf</emphasis
+>, <emphasis
+>Aantal</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabel</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Paragraaf</emphasis
+></entry>
+<entry
+><emphasis
+>Eenvoudige tekst</emphasis
+>, <emphasis
+>Paragraaf</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Keuze</emphasis
+></entry>
+<entry
+><emphasis
+>Eenvoudige tekst</emphasis
+>, <emphasis
+>Paragraaf</emphasis
+>, <emphasis
+>Keuze</emphasis
+>, <emphasis
+>Aantal</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabel</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Keuzevakje</emphasis
+></entry>
+<entry
+><emphasis
+>Eenvoudige tekst</emphasis
+>, <emphasis
+>Paragraaf</emphasis
+>, <emphasis
+>Keuzevakje</emphasis
+>, <emphasis
+>Aantal</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabel</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Cijfers</emphasis
+></entry>
+<entry
+><emphasis
+>Eenvoudige tekst</emphasis
+>, <emphasis
+>Paragraaf</emphasis
+>, <emphasis
+>Aantal</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabel</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>&URL;</emphasis
+></entry>
+<entry
+><emphasis
+>Eenvoudige tekst</emphasis
+>, <emphasis
+>Paragraaf</emphasis
+>, <emphasis
+>Aantal</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabel</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Datum</emphasis
+></entry>
+<entry
+><emphasis
+>Eenvoudige tekst</emphasis
+>, <emphasis
+>Datum</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Tabel</emphasis
+></entry>
+<entry
+><emphasis
+>Eenvoudige tekst</emphasis
+>, <emphasis
+>Paragraaf</emphasis
+>, <emphasis
+>, Tabel</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Afbeelding</emphasis
+></entry>
+<entry
+><emphasis
+>Afbeelding</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Waardering</emphasis
+></entry>
+<entry
+><emphasis
+>Keuze</emphasis
+>, <emphasis
+>Waardering</emphasis
+></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+
+<sect2 id="field-formatting">
+<title
+>Opmaak van veld</title>
+
+<para
+>&appname; biedt enige mogelijkheden voor automatisch formatteren ven veldwaarden. de eenvoudiste is automatisch hoofdletters, die elk woord behalve de artikelen hoofdletters maakt. Formatteren van titels verplaatst bepaalde artikelen van het begin naar het eind van het veld, bijvoorbeeld, wijzigen van "The Return of the King" naar "Return of the King, The". De titel van artikelen zijn te configureren. Tenslotte probeert formatteren van namen de tekenreeks op te breken zodat de achternaam of familienaam van de persoon eerst wordt getoond. Voor- en achtervoegsels van namen zijn ook te configureren. Ook de speciale <emphasis
+><link linkend="people-group"
+>Mensen</link
+></emphasis
+>groep gebruikt alle velden met naam formatteren, zelfs als de globale instelling is uitgeschakeld. </para>
+
+<para
+>Alle automatische formattering kan uitgeschakeld worden door de globale opties in de <link linkend="general-options"
+><interface
+>Configuratiedialoog</interface
+></link
+> te wijzigen. Globaal is hoofdletters maken een specifieke optie voor formattering, dus een titel kan be automatisch geformatteerd worden zonder naar hoofdletters te gaan. Niet alle veldtypen staan automatische formattering toe. </para>
+
+<table>
+<title
+>Voorbeelden van opmaak</title>
+<tgroup cols="5">
+<thead>
+<row>
+<entry
+>Formaattype</entry>
+<entry
+>Veldwaarde</entry>
+<entry
+>Automatisch hoofdletter</entry>
+<entry
+>Automatisch opgemaakt</entry>
+<entry
+>Automatisch hoofdletter &amp; Automatisch opgemaakt</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Titel</emphasis
+></entry>
+<entry
+>de terugkeer van de koning</entry>
+<entry
+>De Terugkeer van de Koning</entry>
+<entry
+>terugkeer van de koning, de</entry>
+<entry
+>Terugkeer van de Koning, De</entry>
+</row>
+<row>
+<entry
+><emphasis
+>Naam</emphasis
+></entry>
+<entry
+>tom swift, jr.</entry>
+<entry
+>Tom Swift, Jr.</entry>
+<entry
+>swift, jr., tom</entry>
+<entry
+>Swift, Jr., Tom</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+<sect2 id="field-options">
+<title
+>Veld Opties</title>
+
+<para
+>Velden hebben ook drie algemene opties. Als automatisch aanvullen is ingeschakeld, zal &appname; de waarden voor elk veld in een cache zetten en de <interface
+>Itembewerker</interface
+> biedt automatisch aanvullen met de standaard instellingen van &kde;. Niet alle veldtypen staan automatisch aanvullen toe. &appname; moet ook weten of een veld meerdere waarden mag hebben of gebruikt kan worden om de items te groeperen. A puntkomma wordt gebruikt om meerdere waarden te scheiden bij bewerken van een item. </para>
+
+<para
+>Voor efficiency moet u niet automatisch aanvullen inschakelen tenzij u het nodug hebt voor de velden. Hoe meer velden met automatisch aanvullen in de verzameling, hoe langzamer het wordt voor &appname; om het bestand te laden. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="filter-dialog">
+<title
+>Items folteren</title>
+<para
+>De <interface
+>Dialoog geavanceerd filter</interface
+> stelt u in staat om de zichtbare items in de <link linkend="detailed-view"
+><interface
+>Kolomweergave</interface
+></link
+> te beperken tot diegenen die overeenkomen met filterregels. Het filter kan gebruikt worden om de items te zoeken die aan alle regels in de dialoog voldoen of die te vinden die overeenkomen met één van hen. De <interface
+>Dialoog geavanceerd filter</interface
+> is ook nuttig voor geavanceerd zoeken binnen een verzameling. </para>
+
+<screenshot>
+<screeninfo
+>De &appname; <interface
+>Geavanceerde filterdialoog</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
+<textobject
+><phrase
+>De &appname; <interface
+>Geavanceerde filterdialoog</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Elke rij bevat een enkele filterregel. Selecteer het overeen te komen veld in het eerste vakje in de rij, selecteer daarna een overeenkomstregel in het centrum. Regels kunnen overeenkomen met waarden die een bepaald woord bevatten of exact gelijk zijn. Een reguliere expressie kan ook gebruikt worden om items overeen te laten komen, in welk geval de knop <guibutton
+>Bewerken...</guibutton
+> actief wordt voor bewerking van de expressie, als &kregexpeditor; is geïnstalleerd op uw computer. Het overeen te komen woord of tekenreeks zou tenslotte ingevoerd moeten worden in het tekstvak. Voor afbeeldingsvelden kan de afbeeldingsgrootte gebruikt worden voor filtering waar de filterwaarde vergeleken wordt met de grotere afbeeldingsafmetingen, zowel breedte als hoogte. </para>
+
+<para
+>Tot acht (8) regels kunnen in het filter gebruikt worden. De knoppen <guibutton
+>Meer</guibutton
+> en <guibutton
+>Minder</guibutton
+> kunnen gebruikt worden om regels toe te voegen of te verwijderen. </para>
+
+<para
+>Filters kunnen opgeslagen worden, zodat alle items die overeenkomen gegroepeerd kunnen worden in de <interface
+>Filterweergave</interface
+>. De weergave is dynamisch, zodat toegevoegde of gewijzigde items, automatisch in de groepering worden bijgewerkt. Om het filter op te slaan, voer een naam in in het tekstvak en klik op de knop <guibutton
+>Filter opslaan</guibutton
+>. </para>
+
+<para
+>Eerder opgeslagen filters kunnen gewijzigd worden door rechtsklikken op het filteritem in de <interface
+>Filterweergave</interface
+> en selectie van <guilabel
+>Filter wijzigen</guilabel
+>. De <interface
+>Geavanceerde filterdialoog</interface
+> wordt geopend en wijzigingen kunnen gemaakt worden aan de filternaam of regels. </para>
+
+<informalexample>
+<para
+>Om de science fiction boeken te vinden, die u niet hebt gelezen, activeer de knop <guilabel
+>Alle volgenden overeen laten komen</guilabel
+>, stel de eerste regele in op <emphasis
+>Genre bevat Science Fiction</emphasis
+> en de tweede op <emphasis
+>Gelezen bevat geen waar</emphasis
+>. (Voor <link linkend="bool"
+>Keuzevak</link
+>velden, is de interne waarde <emphasis
+>waar</emphasis
+>). </para>
+
+<para
+>Om de boeken te vinden van Bujold of Weber, activeer de knop <guilabel
+>Elk van de volgende overeen laten komen</guilabel
+>, stel de eerste regel in op <emphasis
+>Auteur bevat Bujold</emphasis
+> en de tweede op <emphasis
+>Auteur bevat Weber</emphasis
+>. </para>
+</informalexample>
+
+</sect1>
+
+<sect1 id="report-dialog">
+<title
+>Rapporten genereren</title>
+<para
+>&appname; kan verschillende rapporten over uw huidige verzameling genereren. De <interface
+>Rapportdialoog</interface
+> controleert op alle &xslt;-sjablonen in het installatiepad en in <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>. U kunt dus nieuwe aanmaken en ze worden automatisch gevonden en als opties meegenomen in de <interface
+>Rapportendialoog</interface
+>. Sommige complexe rapporten kunnen even duren om gegenereerd te worden voor grote verzamelingen. </para>
+
+<para
+>De sjablonen die geïnstalleerd zijn met &appname; bevatten een lijst met alleen titels, de standaard kolomweergave, een groepsweergave, een samenvatting van alle groepen en de meest populaire waarden in die groepen, een uitleenrapport en een groot rapport met afbeeldingen van covers. Selecteer het gewenste sjabloon en klik op de knop <guibutton
+>Genereren</guibutton
+>. Elk rapport kan ook afgedrukt worden of opgeslagen in een &HTML;-bestand. </para>
+
+<screenshot>
+<screeninfo
+>De <interface
+>Dialoog rapporten</interface
+> van &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="report-dialog.png"/></imageobject>
+<textobject
+><phrase
+>De <interface
+>Dialoog rapporten</interface
+> van &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>De in te voegen items in het rapport zullen beperkt worden tot diegenen in de <interface
+>Kolomweergave</interface
+> dus als u een actief filter hebt, zal de <interface
+>Dialoog rapport</interface
+> deze gebruiken. </para>
+</sect1>
+
+<sect1 id="loan-dialog">
+<title
+>Volgen van uitleningen</title>
+<para
+>&appname; ondersteunt het volgen van uitlenen van een item in de verzameling. De <interface
+>Leningendialoog</interface
+> kan geopend worden door het menu=item <guilabel
+>Uitchecken</guilabel
+> te gebruiken of rechtsklikken op een item. Meerdere items kunnen in één keer uitgecheckt worden. </para>
+
+<para
+>De naam van de lener kan direct ingevoerd worden of gehaald worden uit het standaard adres boek van &kde; door te klikken op de knop naast de naam van het item. De uitcheckdatum wordt genomen uit de huidige datum, naar kan gewijzigd worden. De verloopdatum is optioneel en andere notities kunnen toegevoegd worden aan de uitlening. </para>
+
+<para
+>Als een verloopdatum is ingevoerd en &appname; is gecompileerd met ondersteuning van libkcal, dan kan een uitleenherinnering toegevoerd worden aan de standaard &kde; agenda als een taakitem. &korganizer; kan gebruikt worden om deze items te bekijken. </para>
+
+<para
+>Wanneer een item is uitgecheckt, wordt het veld <emphasis
+>Uitgeleend</emphasis
+> gezet op <emphasis
+>waar</emphasis
+>. Als er geen uitleenveld bestaat in de verzameling, dan wordt er een toegevoegd. Wijzig dat veld niet direct! Uitgeleende items kunnen ingecheckt worden met het menu-item of door rechtsklikken op een item in de <interface
+>Uitleenweergave</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>De <interface
+>Dialoog Uitlenen</interface
+> van &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-dialog.png"/></imageobject>
+<textobject
+><phrase
+>De <interface
+>Dialoog Uitlenen</interface
+> van &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="tips">
+<title
+>Algemene tips</title>
+
+<para
+>Dit is de lijst met tips in de lijst "Tip van de dag" voor &appname;. </para>
+
+<tip>
+<para
+>Als een boek meer dan een auteur heeft, zou u de namen moeten scheiden door een puntkomma, zodat Tellico weet dan dat deze gescheiden moeten worden en apart gebruikt. Elk ander veld waar meerdere waardes zijn toegestaan moeten worden ingevuld op dezelfde manier met een puntkomma (;) die iedere waarde scheidt. </para>
+</tip>
+
+<tip>
+<para
+>U kunt wijzigen welke velden in de lijstweergave getoond worden door rechts te klikken op de kolomkop. </para>
+</tip>
+
+<tip>
+<para
+>U kunt velden toevoegen, bewerken of veranderen in de verzameling met behulp van <interface
+>Dialoog voor velden in verzameling</interface
+>. De pijlknoppen onder de veldlijst kunnen gebruikt worden om de positie van het veld in de lijst te veranderen waardoor de plaats in de item-editor wordt gewijzigd. </para>
+</tip>
+
+<tip>
+<para
+>Als u wilt filteren op een veld <link linkend="bool"
+><emphasis
+>Keuzevak</emphasis
+></link
+>, zou een waarde "waar" moeten worden gebruikt. Als u bijvoorbeeld alle science fiction boeken die u nog niet hebt gelezen wilt tonen, kies dan de knop <guilabel
+>Voldoe aan alle van de volgende</guilabel
+> en stel als eerste regel in dat "Genre" bevat "Science Fiction" (geen aanhalingtekens) en de tweede regel dat "Gelezen" "bevat niet" "waar" (geen aanhalingstekens). </para>
+</tip>
+
+<tip>
+<para
+>Wanneer een speciaal teken wordt gebruikt in het snelfilter, zal de tekst geïnterpreteerd worden als een reguliere expressie. Om alleen boeken die bijvoorbeeld door Weber of Bujold zijn geschreven te tonen, type dan "weber|bujold" (geen aanhalingstekens) in het filtervak. </para>
+</tip>
+
+<tip>
+<para
+>U kunt meer dan een item tegelijk bewerken door de &Shift;- of &Ctrl;-toets in te drukken en meerdere items te selecteren. </para>
+</tip>
+
+<tip>
+<para
+>U kunt een bestaande boekenverzameling kunt omzetten naar een bibliografie, die vervolgens kan worden geëxporteerd naar het formaat BibTeX of BibTeXML. </para>
+</tip>
+
+<tip>
+<para
+>Als meer dan één veld is opgemaakt als een naam, dan wordt een extra groep genaamd "Mensen" toegevoegd aan de verzameling, zodat auteurs en editors gesorteerd kunnen worden of bijvoorbeeld samen afgedrukt. </para>
+</tip>
+
+<tip>
+<para
+>U kunt het uiterlijk van de afdruk aanpassen door het bestand <filename
+>tellico-printing.xsl</filename
+> te wijzigen. Het bestand geneert &HTML; en de &CSS; binnen het stylesheet regelt dingen als het lettertype, de marges, etc. </para>
+</tip>
+
+<tip>
+<para
+>Dubbelklikken op een item opent de <interface
+>Itembewerker</interface
+>. </para>
+</tip>
+
+<tip>
+<para
+>U kunt &HTML;-tags aan elke <link linkend="para"
+><emphasis
+>Paragraaf</emphasis
+></link
+>-veld voor formattering toevoegen, zoals &lt;b&gt;<emphasis role="bold"
+>bold</emphasis
+>&lt;/b&gt; of &lt;i&gt;<emphasis
+>italic</emphasis
+>&lt;/i&gt;. </para>
+</tip>
+
+<tip>
+<para
+>In de <interface
+>Kolomweergave</interface
+> kunt u op een letter op het toetsenbord drukken om naar het volgende item te springen dat met die letter begint. </para>
+</tip>
+
+<tip>
+<para
+>U kunt verkregen waarden combineren met waarden uit meerdere velden in een enkele waarde. Activeer eenvoudig het afgeleide waardevakje en gebruik een waardesjabloon gelijkend op "<userinput
+>Waarde: %{fielda}%{fieldb}</userinput
+>" waar %{...} vervangen wordt door de van toepassing zijnde veldwaarde. Dit is nuttig om meerdere waarden in een enkel veld te verzamelen, &eg; Voor betere groepering en om velden met verschillende typen te combineren door respect te tonen voor juiste sortering op hetzelfde moment. Beschouw bijvoorbeeld een nummerveld gevolgd door een text subveld met items b, 14a. </para>
+</tip>
+
+</sect1>
+
+</chapter>
