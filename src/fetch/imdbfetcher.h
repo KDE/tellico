@@ -41,6 +41,7 @@ namespace KIO {
 
 class QCheckBox;
 class QRegExpr;
+class QRegularExpression;
 
 namespace Tellico {
   namespace GUI {
@@ -134,6 +135,7 @@ private:
   static QRegExp* s_anchorTitleRx;
   static QRegExp* s_anchorNameRx;
   static QRegExp* s_titleRx;
+  static const QRegularExpression* s_titleIdRx;
   static int s_instanceCount;
 
   void doTitle(const QString& s, Data::EntryPtr e);
@@ -149,6 +151,7 @@ private:
   void doLists2(const QString& s, Data::EntryPtr e);
   void doRating(const QString& s, Data::EntryPtr e);
   void doCover(const QString& s, Data::EntryPtr e, const QUrl& baseURL);
+  void doEpisodes(const QString& s, Data::EntryPtr e, const QUrl& baseURL);
 
   void parseSingleTitleResult();
   void parseMultipleTitleResults();
