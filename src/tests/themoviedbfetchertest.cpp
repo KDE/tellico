@@ -128,7 +128,7 @@ void TheMovieDBFetcherTest::testBabel() {
 }
 
 void TheMovieDBFetcherTest::testAllMankind() {
-  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("upcitemdb"));
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("TMDB"));
   cg.writeEntry("Custom Fields", QStringLiteral("origtitle,alttitle,network,episode,tmdb,imdb"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
