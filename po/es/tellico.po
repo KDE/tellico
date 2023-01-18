@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-17 00:58+0000\n"
-"PO-Revision-Date: 2023-01-13 01:00+0100\n"
+"PO-Revision-Date: 2023-01-18 01:55+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -3935,14 +3935,12 @@ msgid "Raw Query"
 msgstr "Búsqueda sin formato"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Enlace a Filmaster"
+msgstr "Enlace a FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "España"
@@ -3951,7 +3949,7 @@ msgstr "España"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "Estados Unidos"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format

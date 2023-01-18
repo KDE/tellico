@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-17 00:58+0000\n"
-"PO-Revision-Date: 2023-01-15 22:39+0300\n"
+"PO-Revision-Date: 2023-01-17 21:54+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3900,14 +3900,12 @@ msgid "Raw Query"
 msgstr "İşlenmemiş Sorgu"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Filmaster Bağlantısı"
+msgstr "FilmAffinity Bağlantısı"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "İspanya"
@@ -3916,7 +3914,7 @@ msgstr "İspanya"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "ABD"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format

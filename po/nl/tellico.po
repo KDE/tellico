@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-17 00:58+0000\n"
-"PO-Revision-Date: 2023-01-12 11:16+0100\n"
+"PO-Revision-Date: 2023-01-17 11:16+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -3928,14 +3928,12 @@ msgid "Raw Query"
 msgstr "Ruwe zoekopdracht"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Koppeling naar Filmaster"
+msgstr "Koppeling naar FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "Spanje"
@@ -3944,7 +3942,7 @@ msgstr "Spanje"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "VS"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format

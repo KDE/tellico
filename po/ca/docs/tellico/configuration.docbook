@@ -266,6 +266,12 @@
 >base de dades oberta de pel·lícules</link
 >,</simpara
 ></listitem>
+<listitem
+><simpara
+><link linkend="filmaffinity"
+>FilmAffinity</link
+>,</simpara
+></listitem>
 <!-- comics -->
 <listitem
 ><simpara
@@ -604,7 +610,16 @@
 <para
 ><ulink url="http://allocine.fr"
 >AlloCiné</ulink
-> és un servei en línia d'informació de pel·lícules, amb seu a França. S'hauria d'habilitar la identificació del navegador a l'&systemsettings;. </para>
+> és un servei en línia d'informació de pel·lícules, amb seu a França. </para>
+</sect3>
+
+<sect3 id="filmaffinity">
+<title
+>FilmAffinity</title>
+<para
+><ulink url="https://filmaffinity.com"
+>FilmAffinity</ulink
+> és un lloc independent de pel·lícules. </para>
 </sect3>
 
 </sect2>
@@ -620,7 +635,7 @@
 <para
 ><ulink url="http://discogs.com"
 >Discogs.com</ulink
-> és una base de dades de música construïda pels usuaris que conté informació sobre els artistes, segells i les seves gravacions. Es requereix registre per a obtenir un compte gratuït. S'hauria d'habilitar la identificació del navegador a l'&systemsettings;. </para>
+> és una base de dades de música construïda pels usuaris que conté informació sobre els artistes, segells i les seves gravacions. Es requereix registre per a obtenir un compte gratuït. </para>
 </sect3>
 
 <sect3 id="musicbrainz">
@@ -629,7 +644,7 @@
 <para
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
-> és una base de dades de metadades comunitària de música que intenta crear un lloc d'informació de música exhaustiu. S'hauria d'habilitar la identificació del navegador a l'&systemsettings;. </para>
+> és una base de dades de metadades comunitària de música que intenta crear un lloc d'informació de música exhaustiu. </para>
 </sect3>
 
 </sect2>
