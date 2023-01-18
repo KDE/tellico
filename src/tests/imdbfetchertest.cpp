@@ -271,8 +271,10 @@ void ImdbFetcherTest::testBabel() {
 }
 
 void ImdbFetcherTest::testFirefly() {
+  m_config.writeEntry("Custom Fields", QStringLiteral("imdb,episode"));
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Firefly 2002"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -283,4 +285,15 @@ void ImdbFetcherTest::testFirefly() {
 
   QCOMPARE(entry->field("title"), QStringLiteral("Firefly"));
   QCOMPARE(entry->field("year"), QStringLiteral("2002"));
+  QCOMPARE(entry->field("producer"), QStringLiteral("Gareth Davies; Lisa Lassek; Brian Wankum; Ben Edlund"));
+  QVERIFY(entry->field("director").startsWith(QStringLiteral("Joss Whedon; Vern Gillum; Tim Minear")));
+  QVERIFY(entry->field("writer").startsWith(QStringLiteral("Joss Whedon; Cheryl Cain")));
+  QCOMPARE(entry->field("composer"), QStringLiteral("Greg Edmonson"));
+  QCOMPARE(set(entry->field("genre")), set(QStringLiteral("Adventure; Drama; Sci-Fi")));
+  QVERIFY(entry->field("cast").startsWith(QStringLiteral("Nathan Fillion::Captain Malcolm 'Mal' Reynolds")));
+  QVERIFY(!entry->field("cast").contains(QStringLiteral("episodes")));
+  QStringList episodeList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("episode")));
+  QVERIFY(!episodeList.isEmpty());
+  QCOMPARE(episodeList.at(0), QStringLiteral("The Train Job::1::1"));
+  QVERIFY(entry->field("plot").startsWith(QStringLiteral("Captain Malcolm")));
 }
