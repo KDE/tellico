@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-13 03:55+0000\n"
+"POT-Creation-Date: 2023-01-19 02:58+0000\n"
 "PO-Revision-Date: 2021-07-10 09:35+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -727,19 +727,20 @@ msgstr "Ένα πεδίο με μια παράγωγη τιμή πρέπει ν�
 #: src/fetch/doubanfetcher.cpp:328 src/fetch/doubanfetcher.cpp:346
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:226
-#: src/fetch/imdbfetcher.cpp:1218 src/fetch/kinopoiskfetcher.cpp:277
-#: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:418
-#: src/fetch/moviemeterfetcher.cpp:216 src/fetch/moviemeterfetcher.cpp:221
-#: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:359
-#: src/fetch/omdbfetcher.cpp:252 src/fetch/openlibraryfetcher.cpp:272
-#: src/fetch/thegamesdbfetcher.cpp:241 src/fetch/thegamesdbfetcher.cpp:246
-#: src/fetch/themoviedbfetcher.cpp:312 src/fetch/themoviedbfetcher.cpp:315
-#: src/fetch/themoviedbfetcher.cpp:320 src/fetch/themoviedbfetcher.cpp:338
-#: src/fetch/thetvdbfetcher.cpp:256 src/fetch/thetvdbfetcher.cpp:261
-#: src/fetch/thetvdbfetcher.cpp:266 src/fetch/tvmazefetcher.cpp:178
-#: src/fetch/tvmazefetcher.cpp:183 src/fetch/upcitemdbfetcher.cpp:209
-#: src/field.cpp:38 src/field.cpp:79 src/field.cpp:298 src/field.cpp:327
-#: src/field.cpp:332 src/translators/gcstarimporter.cpp:89
+#: src/fetch/imdbfetcher.cpp:833 src/fetch/imdbfetcher.cpp:1372
+#: src/fetch/kinopoiskfetcher.cpp:277 src/fetch/kinoteatrfetcher.cpp:240
+#: src/fetch/mobygamesfetcher.cpp:418 src/fetch/moviemeterfetcher.cpp:216
+#: src/fetch/moviemeterfetcher.cpp:221 src/fetch/numistafetcher.cpp:343
+#: src/fetch/numistafetcher.cpp:359 src/fetch/omdbfetcher.cpp:252
+#: src/fetch/openlibraryfetcher.cpp:272 src/fetch/thegamesdbfetcher.cpp:241
+#: src/fetch/thegamesdbfetcher.cpp:246 src/fetch/themoviedbfetcher.cpp:312
+#: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:320
+#: src/fetch/themoviedbfetcher.cpp:338 src/fetch/thetvdbfetcher.cpp:256
+#: src/fetch/thetvdbfetcher.cpp:261 src/fetch/thetvdbfetcher.cpp:266
+#: src/fetch/tvmazefetcher.cpp:178 src/fetch/tvmazefetcher.cpp:183
+#: src/fetch/upcitemdbfetcher.cpp:209 src/field.cpp:38 src/field.cpp:79
+#: src/field.cpp:298 src/field.cpp:327 src/field.cpp:332
+#: src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "General"
 msgstr "Γενικά"
@@ -1748,7 +1749,7 @@ msgstr "Έτος διάθεσης"
 
 #: src/collections/stampcollection.cpp:83
 #: src/collections/videocollection.cpp:184 src/fetch/allocinefetcher.cpp:403
-#: src/fetch/imdbfetcher.cpp:1360
+#: src/fetch/imdbfetcher.cpp:1517
 #, kde-format
 msgid "Color"
 msgstr "Χρώμα"
@@ -3256,8 +3257,8 @@ msgstr "Δεσμός Allocine"
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
 #: src/fetch/doubanfetcher.cpp:303 src/fetch/doubanfetcher.cpp:321
 #: src/fetch/doubanfetcher.cpp:339 src/fetch/doubanfetcher.cpp:570
-#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/imdbfetcher.cpp:811
-#: src/fetch/imdbfetcher.cpp:1532 src/fetch/kinopoiskfetcher.cpp:341
+#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/imdbfetcher.cpp:888
+#: src/fetch/imdbfetcher.cpp:1793 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:263 src/fetch/kinoteatrfetcher.cpp:507
 #: src/fetch/omdbfetcher.cpp:262 src/fetch/themoviedbfetcher.cpp:332
@@ -3267,13 +3268,13 @@ msgstr "Δεσμός Allocine"
 msgid "Original Title"
 msgstr "Αυθεντικός τίτλος"
 
-#: src/fetch/allocinefetcher.cpp:429 src/fetch/imdbfetcher.cpp:1548
+#: src/fetch/allocinefetcher.cpp:429 src/fetch/imdbfetcher.cpp:1810
 #: src/fetch/kinopoiskfetcher.cpp:685 src/fetch/themoviedbfetcher.cpp:613
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Μέγιστη διανομή ρόλων: "
 
-#: src/fetch/allocinefetcher.cpp:442 src/fetch/imdbfetcher.cpp:1561
+#: src/fetch/allocinefetcher.cpp:442 src/fetch/imdbfetcher.cpp:1823
 #: src/fetch/kinopoiskfetcher.cpp:698 src/fetch/themoviedbfetcher.cpp:626
 #, kde-format
 msgid ""
@@ -3564,7 +3565,7 @@ msgstr "Μεγάλη εικόνα"
 msgid "No Image"
 msgstr "Χωρίς εικόνα"
 
-#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:1570
+#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:1832
 #: src/fetch/mobygamesfetcher.cpp:639 src/fetch/thegamesdbfetcher.cpp:624
 #, kde-format
 msgid ""
@@ -3588,8 +3589,8 @@ msgstr ""
 "ιστοσελίδα Amazon.com "
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
-#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:867
-#: src/fetch/imdbfetcher.cpp:1530 src/fetch/moviemeterfetcher.cpp:225
+#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:953
+#: src/fetch/imdbfetcher.cpp:1791 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:257
 #: src/fetch/themoviedbfetcher.cpp:327 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/tvmazefetcher.cpp:193 src/fetch/tvmazefetcher.cpp:385
@@ -3603,8 +3604,9 @@ msgid "Distributor"
 msgstr "Διανομέας"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
-#: src/fetch/themoviedbfetcher.cpp:578 src/fetch/thetvdbfetcher.cpp:577
-#: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:335
+#: src/fetch/imdbfetcher.cpp:1794 src/fetch/themoviedbfetcher.cpp:578
+#: src/fetch/thetvdbfetcher.cpp:577 src/fetch/tvmazefetcher.cpp:383
+#: src/field.cpp:335
 #, kde-format
 msgid "Episodes"
 msgstr "Επεισόδια"
@@ -4025,48 +4027,49 @@ msgstr "Δεσμός IGDB"
 msgid "Internet Game Database (IGDB.com)"
 msgstr "Βάση δεδομένων παιχνιδιών διαδικτύου (IGDB.com)"
 
-#: src/fetch/imdbfetcher.cpp:109 src/fetch/imdbfetcher.cpp:1518
+#: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1779
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "Βάση δεδομένων ταινιών διαδικτύου"
 
-#: src/fetch/imdbfetcher.cpp:138
+#: src/fetch/imdbfetcher.cpp:148
 #, kde-format
 msgid "Internet Movie Database (French)"
 msgstr "Βάση δεδομένων ταινιών διαδικτύου (Γαλλικά)"
 
-#: src/fetch/imdbfetcher.cpp:167
+#: src/fetch/imdbfetcher.cpp:176
 #, kde-format
 msgid "Internet Movie Database (Spanish)"
 msgstr "Βάση δεδομένων ταινιών διαδικτύου (Ισπανικά)"
 
-#: src/fetch/imdbfetcher.cpp:196
+#: src/fetch/imdbfetcher.cpp:204
 #, kde-format
 msgid "Internet Movie Database (German)"
 msgstr "Βάση δεδομένων ταινιών διαδικτύου (Γερμανικά"
 
-#: src/fetch/imdbfetcher.cpp:225
+#: src/fetch/imdbfetcher.cpp:232
 #, kde-format
 msgid "Internet Movie Database (Italian)"
 msgstr "Βάση δεδομένων ταινιών διαδικτύου (Ιταλικά)"
 
-#: src/fetch/imdbfetcher.cpp:254
+#: src/fetch/imdbfetcher.cpp:260
 #, kde-format
 msgid "Internet Movie Database (Portuguese)"
 msgstr "Βάση δεδομένων ταινιών διαδικτύου (Πορτογαλικά)"
 
-#: src/fetch/imdbfetcher.cpp:1217 src/fetch/imdbfetcher.cpp:1529
+#: src/fetch/imdbfetcher.cpp:832 src/fetch/imdbfetcher.cpp:1371
+#: src/fetch/imdbfetcher.cpp:1790
 #, kde-format
 msgid "IMDb Rating"
 msgstr "Βαθμολογία IMDb"
 
-#: src/fetch/imdbfetcher.cpp:1392 src/fetch/imdbfetcher.cpp:1489
-#: src/fetch/imdbfetcher.cpp:1531
+#: src/fetch/imdbfetcher.cpp:1557 src/fetch/imdbfetcher.cpp:1654
+#: src/fetch/imdbfetcher.cpp:1792
 #, kde-format
 msgid "Certifications"
 msgstr "Πιστοποιήσεις"
 
-#: src/fetch/imdbfetcher.cpp:1528 src/fetch/kinopoiskfetcher.cpp:672
+#: src/fetch/imdbfetcher.cpp:1789 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:397 src/fetch/themoviedbfetcher.cpp:574
 #: src/fetch/thetvdbfetcher.cpp:576 src/fetch/tvmazefetcher.cpp:382
 #: src/field.cpp:331
@@ -4074,7 +4077,7 @@ msgstr "Πιστοποιήσεις"
 msgid "IMDb Link"
 msgstr "Δεσμός IMDb "
 
-#: src/fetch/imdbfetcher.cpp:1566
+#: src/fetch/imdbfetcher.cpp:1828
 #, kde-format
 msgid "Download cover &image"
 msgstr "Λήψη &εικόνας εξώφυλλου "
