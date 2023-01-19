@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-17 00:58+0000\n"
-"PO-Revision-Date: 2023-01-13 01:25+0000\n"
+"PO-Revision-Date: 2023-01-18 13:34+0000\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
 "Language: pt\n"
@@ -63,7 +63,7 @@ msgstr ""
 "X-POFile-SpellExtra: BNC BiblioShare Kino Android iOS WiiU Teatr JSON\n"
 "X-POFile-SpellExtra: LibraryThing Mintage EAU Gibbons Michel Collectorz\n"
 "X-POFile-SpellExtra: Premium Numista Mishler Krause TVmaze TheTVDB RPGGeek\n"
-"X-POFile-SpellExtra: PIN Gaming History Crow\n"
+"X-POFile-SpellExtra: PIN Gaming History Crow FilmAffinity\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3978,14 +3978,12 @@ msgid "Raw Query"
 msgstr "Pesquisa não Refinada"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Referência à Filmaster"
+msgstr "Ligação da FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "Espanha"
@@ -3994,7 +3992,7 @@ msgstr "Espanha"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "EUA"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
