@@ -422,8 +422,9 @@ void IMDBFetcher::stop() {
 }
 
 void IMDBFetcher::slotRedirection(KIO::Job*, const QUrl& toURL_) {
+  static const QRegularExpression ttEndRx(QStringLiteral("/tt\\d+/$"));
   m_url = toURL_;
-  if(m_url.path().contains(QRegExp(QStringLiteral("/tt\\d+/$"))))  {
+  if(m_url.path().contains(ttEndRx)) {
     m_url.setPath(m_url.path() + QStringLiteral("reference"));
   }
   m_redirected = true;
@@ -579,9 +580,8 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
     return;
   }
 
-  QRegExp akaRx(QStringLiteral("%1 (.*)(</li>|</td>|<br)").arg(langData(m_lang).aka), Qt::CaseInsensitive);
-  akaRx.setMinimal(true);
-
+  static const QRegularExpression akaRx(QStringLiteral("%1 (.*?)(</li>|</td>|<br)").arg(langData(m_lang).aka),
+                                        QRegularExpression::CaseInsensitiveOption);
   m_hasMoreResults = false;
 
   int count = 0;
@@ -631,15 +631,10 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
         }
       }
     }
-    // multiple matches might have 'aka' info
-    int end = s_anchorTitleRx->indexIn(str_, start+1);
-    if(end == -1) {
-      end = str_.length();
-    }
-    int akaPos = akaRx.indexIn(str_, start+1);
-    if(akaPos > -1 && akaPos < end) {
+    auto akaMatch = akaRx.match(str_, start+1, QRegularExpression::NormalMatch);
+    if(akaMatch.hasMatch()) {
       // limit to 50 chars
-      desc += QLatin1Char(' ') + akaRx.cap(1).trimmed().remove(*s_tagRx);
+      desc += QLatin1Char(' ') + akaMatch.captured(1).trimmed().remove(*s_tagRx);
       if(desc.length() > 50) {
         desc = desc.left(50) + QStringLiteral("...");
       }
@@ -685,7 +680,8 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntryHook(uint uid_) {
   }
   QUrl url = m_matches.contains(uid_) ? m_matches[uid_]
                                       : m_allMatches[uid_];
-  if(m_lang == EN && url.path().contains(QRegExp(QStringLiteral("/tt\\d+/$"))))  {
+  static const QRegularExpression ttEndRx(QStringLiteral("/tt\\d+/$"));
+  if(m_lang == EN && url.path().contains(ttEndRx))  {
     url.setPath(url.path() + QStringLiteral("reference"));
   }
 
@@ -780,7 +776,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
 }
 
 void IMDBFetcher::doJson(const QString& str_, Tellico::Data::EntryPtr entry_) {
-  static const QRegularExpression jsonRx(QStringLiteral("<script.*?type=\"application/ld\\+json\".*?>(.+?)</script>"));
+  static const QRegularExpression jsonRx(QStringLiteral("<script[^>]+?type=\"application/ld\\+json\".*?>(.+?)</script>"));
   QRegularExpressionMatch jsonMatch = jsonRx.match(str_);
   if(!jsonMatch.hasMatch()) {
     return;
@@ -861,14 +857,15 @@ void IMDBFetcher::doTitle(const QString& str_, Tellico::Data::EntryPtr entry_) {
 
     // now for movies with original non-english titles, the <title> is english
     // but the page header is the original title. Grab the orig title
-    static QRegExp h3TitleRx(QStringLiteral("<h3[^>]+itemprop=\"name\"\\s*>(.*)<"), Qt::CaseInsensitive);
-    h3TitleRx.setMinimal(true);
-    if(h3TitleRx.indexIn(str_) > -1) {
+    static const QRegularExpression h3TitleRx(QStringLiteral("<h3[^>]+itemprop=\"name\"\\s*>(.*?)<"),
+                                              QRegularExpression::DotMatchesEverythingOption);
+    auto h3Match = h3TitleRx.match(str_);
+    if(h3Match.hasMatch()) {
       QString possibleOrigTitle;
-      const QString h3Title = h3TitleRx.cap(1).trimmed();
+      const QString h3Title = h3Match.captured(1).trimmed();
       if(h3Title == title) {
         // some tv series have a original title label
-        static const QRegularExpression origTitleRx(QLatin1String("/h3>(.*)<span class=\"titlereference-original-title-label"),
+        static const QRegularExpression origTitleRx(QLatin1String("/h3>(.*?)<span class=\"titlereference-original-title-label"),
                                                     QRegularExpression::DotMatchesEverythingOption);
         auto origTitleMatch = origTitleRx.match(str_);
         if(origTitleMatch.hasMatch()) {
@@ -963,7 +960,9 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
     const QRegExp countryRx(QStringLiteral("\\s*\\(.+\\)\\s*$"));
     QStringList values;
     for(QStringList::Iterator it = list.begin(); it != list.end(); ++it) {
-      QString s = *it;
+      // sometimes the regexp doesn't work and grabs too much text
+      // limit to reasonable length
+      QString s = (*it).left(1000);
       // sometimes, the word "more" gets linked to the releaseinfo page, check that
       if(s.contains(QStringLiteral("releaseinfo"))) {
         continue;
@@ -993,17 +992,31 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
 }
 
 void IMDBFetcher::doPlot(const QString& str_, Tellico::Data::EntryPtr entry_, const QUrl& baseURL_) {
+  if(!entry_->field(QStringLiteral("plot")).isEmpty()) return;
+  // before using localized plot string, look for DOM component
+  const QRegularExpression sectionRx(QStringLiteral("<section class=\"titlereference-section-overview\">(.+?)</div"),
+                                     QRegularExpression::DotMatchesEverythingOption);
+  auto sectionMatch = sectionRx.match(str_);
+  if(sectionMatch.hasMatch()) {
+    QString thisPlot = sectionMatch.captured(1);
+    // TV Series include the episode link first, before the plot, so don't be fooled
+    if(!thisPlot.contains(QLatin1String("<a href"))) {
+      thisPlot.remove(*s_tagRx); // remove HTML tags
+      entry_->setField(QStringLiteral("plot"), thisPlot.simplified());
+      return;
+    }
+  }
+
   // plot summaries provided by users are on a separate page
   // should those be preferred?
-
   bool useUserSummary = false;
 
   // match until next <p> tag
   QString plotRxStr = langData(m_lang).plot + QStringLiteral("(.*)</(p|div|li)");
   QRegExp plotRx(plotRxStr, Qt::CaseInsensitive);
   plotRx.setMinimal(true);
-  QRegExp plotURLRx(QStringLiteral("<a\\s+.*href\\s*=\\s*\".*/title/.*/plotsummary\""), Qt::CaseInsensitive);
-  plotURLRx.setMinimal(true);
+  const QRegularExpression plotUrlRx(QStringLiteral("<a\\s+?[^>]*href\\s*=\\s*\"[^\"]*?/title/[^\"]*?/plotsummary\""),
+                                     QRegularExpression::CaseInsensitiveOption);
   if(plotRx.indexIn(str_) > -1) {
     QString thisPlot = plotRx.cap(2);
     // if ends with "Written by", remove it. It has an em tag
@@ -1012,9 +1025,9 @@ void IMDBFetcher::doPlot(const QString& str_, Tellico::Data::EntryPtr entry_, co
     thisPlot = thisPlot.simplified();
     // if thisPlot ends with (more) or contains
     // a url that ends with plotsummary, then we'll grab it, otherwise not
-    if(plotRx.cap(0).endsWith(QStringLiteral("(more)</")) ||
-       plotURLRx.indexIn(plotRx.cap(0)) > -1 ||
-       thisPlot.isEmpty()) {
+    if(thisPlot.isEmpty() ||
+       plotRx.cap(0).endsWith(QStringLiteral("(more)</")) ||
+       plotRx.cap(0).contains(plotUrlRx)) {
       useUserSummary = true;
     } else {
       entry_->setField(QStringLiteral("plot"), thisPlot);
@@ -1067,16 +1080,13 @@ void IMDBFetcher::doStudio(const QString& str_, Tellico::Data::EntryPtr entry_) 
   QRegExp productionRx(langData(m_lang).studio);
   productionRx.setMinimal(true);
 
-  QRegExp blackcatRx(QStringLiteral("blackcatheader"), Qt::CaseInsensitive);
-  blackcatRx.setMinimal(true);
-
   const int pos1 = str_.indexOf(productionRx);
   if(pos1 == -1) {
 //    myLog() << "No studio found";
     return;
   }
 
-  int pos2 = str_.indexOf(blackcatRx, pos1);
+  int pos2 = str_.indexOf(QStringLiteral("blackcatheader"), pos1, Qt::CaseInsensitive);
   if(pos2 == -1) {
     pos2 = str_.length();
   }
@@ -1101,6 +1111,8 @@ void IMDBFetcher::doStudio(const QString& str_, Tellico::Data::EntryPtr entry_) 
 
 void IMDBFetcher::doPerson(const QString& str_, Tellico::Data::EntryPtr entry_,
                            const QString& imdbHeader_, const QString& fieldName_) {
+  // only read if the field value is currently empty
+  if(!entry_->field(fieldName_).isEmpty()) return;
   QRegExp br2Rx(QStringLiteral("<br[\\s/]*>\\s*<br[\\s/]*>"), Qt::CaseInsensitive);
   br2Rx.setMinimal(true);
   QRegExp divRx(QStringLiteral("<div\\s[^>]*class\\s*=\\s*\"(?:ipl-header__content|info|txt-block)\"[^>]*>(.*)</table"), Qt::CaseInsensitive);
@@ -1414,18 +1426,18 @@ void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, c
   }
 
   // <link rel='image_src'
-  QRegExp linkRx(QStringLiteral("<link (.*)>"), Qt::CaseInsensitive);
-  linkRx.setMinimal(true);
+  const QRegularExpression linkRx(QStringLiteral("<link (.+?)>"));
+  const QRegularExpression hrefRx(QStringLiteral("href=['\"](.+?)['\"]"));
 
   const QString src = QStringLiteral("image_src");
-  pos = linkRx.indexIn(str_);
-  while(pos > -1) {
-    const QString tag = linkRx.cap(1);
+  auto i = linkRx.globalMatch(str_);
+  while(i.hasNext()) {
+    auto match = i.next();
+    const auto tag = match.capturedRef(1);
     if(tag.contains(src, Qt::CaseInsensitive)) {
-      QRegExp hrefRx(QStringLiteral("href=['\"](.*)['\"]"), Qt::CaseInsensitive);
-      hrefRx.setMinimal(true);
-      if(hrefRx.indexIn(tag) > -1) {
-        QUrl u = QUrl(baseURL_).resolved(QUrl(hrefRx.cap(1)));
+      auto hrefMatch = hrefRx.match(tag);
+      if(hrefMatch.hasMatch()) {
+        QUrl u = QUrl(baseURL_).resolved(QUrl(hrefMatch.captured(1)));
         // imdb uses amazon media image, where the img src "encodes" requests for image sizing and cropping
         // strip everything after the "@." and add UY64 to limit the max image dimension to 640
         int n = u.url().indexOf(QStringLiteral("@."));
@@ -1444,7 +1456,6 @@ void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, c
         }
       }
     }
-    pos = linkRx.indexIn(str_, pos+linkRx.matchedLength());
   }
 
   // <img alt="poster"
