@@ -602,7 +602,9 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
       // parenthesis might be outside anchor tag
       int end = s_anchorTitleRx->indexIn(str_, start);
       const int end2 = str_.indexOf(QStringLiteral("<img"), start);
+      const int end3 = str_.indexOf(QStringLiteral("</ul"), start);
       if(end2 > -1) end = qMin(end, end2);
+      if(end3 > -1) end = qMin(end, end3);
       if(end == -1) {
         end = str_.length();
       }
@@ -624,8 +626,8 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
         }
         pPos = -1;
       } else {
-        static const QRegularExpression digitsRs(QStringLiteral(">([-–\\d]+)<"));
-        QRegularExpressionMatch digitsMatch = digitsRs.match(text);
+        static const QRegularExpression digitsRx(QStringLiteral(">([-–\\d]+)\\s*<"));
+        QRegularExpressionMatch digitsMatch = digitsRx.match(text);
         if(digitsMatch.hasMatch()) {
           desc = digitsMatch.captured(1);
         }
