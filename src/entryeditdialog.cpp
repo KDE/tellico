@@ -770,8 +770,9 @@ void EntryEditDialog::showEvent(QShowEvent* event_) {
   I discovered that I had to put it in a timer. Somewhere, the resize event or something
   was overriding any size changes I did here. Calling this->resize() would work but
   windowHandle()->resize() would not (as KWindowConfig::restoreWindowSize uses)
+  Bug 462237 - timer can not be 0
 */
-  QTimer::singleShot(0, this, &EntryEditDialog::slotUpdateSize);
+  QTimer::singleShot(1, this, &EntryEditDialog::slotUpdateSize);
 }
 
 void EntryEditDialog::slotUpdateSize() {
