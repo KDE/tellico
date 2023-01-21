@@ -2,7 +2,7 @@
 
 ![Screenshot of Tellico](https://cdn.kde.org/screenshots/tellico/tellico-movies.png)
 
-Copyright: 2001-2022 Robby Stephenson <robby@periapsis.org>
+Copyright: 2001-2023 Robby Stephenson <robby@periapsis.org>
 
 Author/Maintainer: Robby Stephenson <robby@periapsis.org>
 
