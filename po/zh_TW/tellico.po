@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-19 02:58+0000\n"
+"POT-Creation-Date: 2023-01-22 02:52+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -694,7 +694,7 @@ msgstr "含有衍生數值的欄位必須定義數值樣本。"
 #: src/fetch/doubanfetcher.cpp:328 src/fetch/doubanfetcher.cpp:346
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:226
-#: src/fetch/imdbfetcher.cpp:833 src/fetch/imdbfetcher.cpp:1372
+#: src/fetch/imdbfetcher.cpp:831 src/fetch/imdbfetcher.cpp:1386
 #: src/fetch/kinopoiskfetcher.cpp:277 src/fetch/kinoteatrfetcher.cpp:240
 #: src/fetch/mobygamesfetcher.cpp:418 src/fetch/moviemeterfetcher.cpp:216
 #: src/fetch/moviemeterfetcher.cpp:221 src/fetch/numistafetcher.cpp:343
@@ -1727,7 +1727,7 @@ msgstr "發行年份"
 
 #: src/collections/stampcollection.cpp:83
 #: src/collections/videocollection.cpp:184 src/fetch/allocinefetcher.cpp:403
-#: src/fetch/imdbfetcher.cpp:1517
+#: src/fetch/imdbfetcher.cpp:1530
 #, kde-format
 msgid "Color"
 msgstr "顏色"
@@ -3197,8 +3197,8 @@ msgstr "Allocine 連結"
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
 #: src/fetch/doubanfetcher.cpp:303 src/fetch/doubanfetcher.cpp:321
 #: src/fetch/doubanfetcher.cpp:339 src/fetch/doubanfetcher.cpp:570
-#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/imdbfetcher.cpp:888
-#: src/fetch/imdbfetcher.cpp:1793 src/fetch/kinopoiskfetcher.cpp:341
+#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/imdbfetcher.cpp:887
+#: src/fetch/imdbfetcher.cpp:1806 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:263 src/fetch/kinoteatrfetcher.cpp:507
 #: src/fetch/omdbfetcher.cpp:262 src/fetch/themoviedbfetcher.cpp:332
@@ -3208,13 +3208,13 @@ msgstr "Allocine 連結"
 msgid "Original Title"
 msgstr "原始標題"
 
-#: src/fetch/allocinefetcher.cpp:429 src/fetch/imdbfetcher.cpp:1810
+#: src/fetch/allocinefetcher.cpp:429 src/fetch/imdbfetcher.cpp:1823
 #: src/fetch/kinopoiskfetcher.cpp:685 src/fetch/themoviedbfetcher.cpp:613
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "最大演員數量(&M)："
 
-#: src/fetch/allocinefetcher.cpp:442 src/fetch/imdbfetcher.cpp:1823
+#: src/fetch/allocinefetcher.cpp:442 src/fetch/imdbfetcher.cpp:1836
 #: src/fetch/kinopoiskfetcher.cpp:698 src/fetch/themoviedbfetcher.cpp:626
 #, kde-format
 msgid ""
@@ -3508,7 +3508,7 @@ msgstr "大"
 msgid "No Image"
 msgstr "沒有影像"
 
-#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:1832
+#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:1845
 #: src/fetch/mobygamesfetcher.cpp:639 src/fetch/thegamesdbfetcher.cpp:624
 #, kde-format
 msgid ""
@@ -3532,8 +3532,8 @@ msgstr ""
 "會被含在所有存取 Amazon.com 站台的連結中。"
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
-#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:953
-#: src/fetch/imdbfetcher.cpp:1791 src/fetch/moviemeterfetcher.cpp:225
+#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:952
+#: src/fetch/imdbfetcher.cpp:1804 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:257
 #: src/fetch/themoviedbfetcher.cpp:327 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/tvmazefetcher.cpp:193 src/fetch/tvmazefetcher.cpp:385
@@ -3547,7 +3547,7 @@ msgid "Distributor"
 msgstr "發布器"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
-#: src/fetch/imdbfetcher.cpp:1794 src/fetch/themoviedbfetcher.cpp:578
+#: src/fetch/imdbfetcher.cpp:1807 src/fetch/themoviedbfetcher.cpp:578
 #: src/fetch/thetvdbfetcher.cpp:577 src/fetch/tvmazefetcher.cpp:383
 #: src/field.cpp:335
 #, kde-format
@@ -3956,7 +3956,7 @@ msgstr "IMDb 連結"
 msgid "Internet Game Database (IGDB.com)"
 msgstr "網際網路電影資料庫（德文）"
 
-#: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1779
+#: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "網際網路電影資料庫 (imdb)"
@@ -3986,19 +3986,19 @@ msgstr "網際網路電影資料庫（義大利文）"
 msgid "Internet Movie Database (Portuguese)"
 msgstr "網際網路電影資料庫（葡萄牙文）"
 
-#: src/fetch/imdbfetcher.cpp:832 src/fetch/imdbfetcher.cpp:1371
-#: src/fetch/imdbfetcher.cpp:1790
+#: src/fetch/imdbfetcher.cpp:830 src/fetch/imdbfetcher.cpp:1385
+#: src/fetch/imdbfetcher.cpp:1803
 #, kde-format
 msgid "IMDb Rating"
 msgstr "IMDb 評分"
 
-#: src/fetch/imdbfetcher.cpp:1557 src/fetch/imdbfetcher.cpp:1654
-#: src/fetch/imdbfetcher.cpp:1792
+#: src/fetch/imdbfetcher.cpp:1570 src/fetch/imdbfetcher.cpp:1667
+#: src/fetch/imdbfetcher.cpp:1805
 #, kde-format
 msgid "Certifications"
 msgstr "憑證"
 
-#: src/fetch/imdbfetcher.cpp:1789 src/fetch/kinopoiskfetcher.cpp:672
+#: src/fetch/imdbfetcher.cpp:1802 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:397 src/fetch/themoviedbfetcher.cpp:574
 #: src/fetch/thetvdbfetcher.cpp:576 src/fetch/tvmazefetcher.cpp:382
 #: src/field.cpp:331
@@ -4006,7 +4006,7 @@ msgstr "憑證"
 msgid "IMDb Link"
 msgstr "IMDb 連結"
 
-#: src/fetch/imdbfetcher.cpp:1828
+#: src/fetch/imdbfetcher.cpp:1841
 #, kde-format
 msgid "Download cover &image"
 msgstr "下載封面影像(&I)"
@@ -5174,7 +5174,7 @@ msgstr "Tellico - KDE 上的收藏管理員"
 #: src/main.cpp:123
 #, fuzzy, kde-format
 #| msgid "(c) 2001-2013, Robby Stephenson"
-msgid "(c) 2001-2022, Robby Stephenson"
+msgid "(c) 2001-2023, Robby Stephenson"
 msgstr "(c) 2001-2013, Robby Stephenson"
 
 #: src/main.cpp:127

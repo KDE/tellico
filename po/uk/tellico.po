@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-19 02:58+0000\n"
+"POT-Creation-Date: 2023-01-22 02:52+0000\n"
 "PO-Revision-Date: 2022-05-11 09:11+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -704,7 +704,7 @@ msgstr "Для поля з похідним значенням слід вказ
 #: src/fetch/doubanfetcher.cpp:328 src/fetch/doubanfetcher.cpp:346
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:226
-#: src/fetch/imdbfetcher.cpp:833 src/fetch/imdbfetcher.cpp:1372
+#: src/fetch/imdbfetcher.cpp:831 src/fetch/imdbfetcher.cpp:1386
 #: src/fetch/kinopoiskfetcher.cpp:277 src/fetch/kinoteatrfetcher.cpp:240
 #: src/fetch/mobygamesfetcher.cpp:418 src/fetch/moviemeterfetcher.cpp:216
 #: src/fetch/moviemeterfetcher.cpp:221 src/fetch/numistafetcher.cpp:343
@@ -1724,7 +1724,7 @@ msgstr "Рік видання"
 
 #: src/collections/stampcollection.cpp:83
 #: src/collections/videocollection.cpp:184 src/fetch/allocinefetcher.cpp:403
-#: src/fetch/imdbfetcher.cpp:1517
+#: src/fetch/imdbfetcher.cpp:1530
 #, kde-format
 msgid "Color"
 msgstr "Колір"
@@ -3223,8 +3223,8 @@ msgstr "Посилання Allocine"
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
 #: src/fetch/doubanfetcher.cpp:303 src/fetch/doubanfetcher.cpp:321
 #: src/fetch/doubanfetcher.cpp:339 src/fetch/doubanfetcher.cpp:570
-#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/imdbfetcher.cpp:888
-#: src/fetch/imdbfetcher.cpp:1793 src/fetch/kinopoiskfetcher.cpp:341
+#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/imdbfetcher.cpp:887
+#: src/fetch/imdbfetcher.cpp:1806 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:263 src/fetch/kinoteatrfetcher.cpp:507
 #: src/fetch/omdbfetcher.cpp:262 src/fetch/themoviedbfetcher.cpp:332
@@ -3234,13 +3234,13 @@ msgstr "Посилання Allocine"
 msgid "Original Title"
 msgstr "Початкова назва"
 
-#: src/fetch/allocinefetcher.cpp:429 src/fetch/imdbfetcher.cpp:1810
+#: src/fetch/allocinefetcher.cpp:429 src/fetch/imdbfetcher.cpp:1823
 #: src/fetch/kinopoiskfetcher.cpp:685 src/fetch/themoviedbfetcher.cpp:613
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Максимальна к-ть акторів: "
 
-#: src/fetch/allocinefetcher.cpp:442 src/fetch/imdbfetcher.cpp:1823
+#: src/fetch/allocinefetcher.cpp:442 src/fetch/imdbfetcher.cpp:1836
 #: src/fetch/kinopoiskfetcher.cpp:698 src/fetch/themoviedbfetcher.cpp:626
 #, kde-format
 msgid ""
@@ -3529,7 +3529,7 @@ msgstr "Велике зображення"
 msgid "No Image"
 msgstr "Немає зображення"
 
-#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:1832
+#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:1845
 #: src/fetch/mobygamesfetcher.cpp:639 src/fetch/thegamesdbfetcher.cpp:624
 #, kde-format
 msgid ""
@@ -3554,8 +3554,8 @@ msgstr ""
 "служб Amazon.com"
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
-#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:953
-#: src/fetch/imdbfetcher.cpp:1791 src/fetch/moviemeterfetcher.cpp:225
+#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:952
+#: src/fetch/imdbfetcher.cpp:1804 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:257
 #: src/fetch/themoviedbfetcher.cpp:327 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/tvmazefetcher.cpp:193 src/fetch/tvmazefetcher.cpp:385
@@ -3569,7 +3569,7 @@ msgid "Distributor"
 msgstr "Розповсюджувач"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
-#: src/fetch/imdbfetcher.cpp:1794 src/fetch/themoviedbfetcher.cpp:578
+#: src/fetch/imdbfetcher.cpp:1807 src/fetch/themoviedbfetcher.cpp:578
 #: src/fetch/thetvdbfetcher.cpp:577 src/fetch/tvmazefetcher.cpp:383
 #: src/field.cpp:335
 #, kde-format
@@ -3977,7 +3977,7 @@ msgstr "Посилання IGDB"
 msgid "Internet Game Database (IGDB.com)"
 msgstr "База даних ігор у інтернеті (IGDB.com)"
 
-#: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1779
+#: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "База даних фільмів у інтернеті (IMDB)"
@@ -4007,19 +4007,19 @@ msgstr "База даних фільмів у інтернеті (італійс
 msgid "Internet Movie Database (Portuguese)"
 msgstr "База даних фільмів у інтернеті (португальською)"
 
-#: src/fetch/imdbfetcher.cpp:832 src/fetch/imdbfetcher.cpp:1371
-#: src/fetch/imdbfetcher.cpp:1790
+#: src/fetch/imdbfetcher.cpp:830 src/fetch/imdbfetcher.cpp:1385
+#: src/fetch/imdbfetcher.cpp:1803
 #, kde-format
 msgid "IMDb Rating"
 msgstr "Рейтинг IMDb"
 
-#: src/fetch/imdbfetcher.cpp:1557 src/fetch/imdbfetcher.cpp:1654
-#: src/fetch/imdbfetcher.cpp:1792
+#: src/fetch/imdbfetcher.cpp:1570 src/fetch/imdbfetcher.cpp:1667
+#: src/fetch/imdbfetcher.cpp:1805
 #, kde-format
 msgid "Certifications"
 msgstr "Сертифікації"
 
-#: src/fetch/imdbfetcher.cpp:1789 src/fetch/kinopoiskfetcher.cpp:672
+#: src/fetch/imdbfetcher.cpp:1802 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:397 src/fetch/themoviedbfetcher.cpp:574
 #: src/fetch/thetvdbfetcher.cpp:576 src/fetch/tvmazefetcher.cpp:382
 #: src/field.cpp:331
@@ -4027,7 +4027,7 @@ msgstr "Сертифікації"
 msgid "IMDb Link"
 msgstr "Посилання IMDb"
 
-#: src/fetch/imdbfetcher.cpp:1828
+#: src/fetch/imdbfetcher.cpp:1841
 #, kde-format
 msgid "Download cover &image"
 msgstr "Отримати зо&браження обкладинки"
@@ -5178,8 +5178,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico — програма для керування збірками, вільна і проста"
 
 #: src/main.cpp:123
-#, kde-format
-msgid "(c) 2001-2022, Robby Stephenson"
+#, fuzzy, kde-format
+#| msgid "(c) 2001-2022, Robby Stephenson"
+msgid "(c) 2001-2023, Robby Stephenson"
 msgstr "© Robby Stephenson, 2001–2022"
 
 #: src/main.cpp:127
