@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-22 00:57+0000\n"
-"PO-Revision-Date: 2023-01-19 07:32+0100\n"
+"PO-Revision-Date: 2023-01-23 07:25+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -5121,10 +5121,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr ""
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2022, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2023, Robby Stephenson"
-msgstr "(c) 2001-2022, Robby Stephenson"
+msgstr "(c) 2001-2023, Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
@@ -5734,7 +5733,7 @@ msgstr ""
 #: src/mainwindow.cpp:558
 #, kde-format
 msgid "Copy the selected text to the clipboard"
-msgstr ""
+msgstr "მონიშნული ტექსტის გაცვლის ბუფერში კოპირება"
 
 #: src/mainwindow.cpp:560
 #, kde-format
@@ -6301,12 +6300,12 @@ msgstr ""
 #: src/tellico_kernel.cpp:338
 #, kde-format
 msgid "Please choose which value to keep."
-msgstr ""
+msgstr "აირჩეთ, რომელი მნიშვნელობა შევნარჩუნო"
 
 #: src/tellico_kernel.cpp:344 src/tellico_kernel.cpp:345
 #, kde-format
 msgid "Select value from %1"
-msgstr ""
+msgstr "აირჩიეთ მნიშვნელობა  %1-დან"
 
 #. i18n: ectx: Menu (file)
 #: src/tellicoui.rc:6
@@ -6389,7 +6388,7 @@ msgstr ""
 #: src/translators/alexandriaimporter.cpp:234
 #, kde-format
 msgid "Alexandria Options"
-msgstr ""
+msgstr "Alexandria -ის მორგება"
 
 #: src/translators/alexandriaimporter.cpp:237
 #, kde-format
@@ -6441,7 +6440,7 @@ msgstr ""
 #: src/translators/audiofileimporter.cpp:500
 #, kde-format
 msgid "Include file &location"
-msgstr ""
+msgstr "&ფაილის მდებარეობის ჩასმა"
 
 #: src/translators/audiofileimporter.cpp:501
 #, kde-format
