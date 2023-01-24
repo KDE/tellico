@@ -439,7 +439,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   m_coll->addEntries(entriesToAdd);
 
   QTextStream ts;
-  QRegularExpression iconRx(QLatin1String("^Icon\\s*=\\s*(.*?)\\s*$"));
+  static const QRegularExpression iconRx(QLatin1String("^Icon\\s*=\\s*(.*?)\\s*$"));
   for(QStringList::ConstIterator it = directoryFiles.constBegin(); !m_cancelled && it != directoryFiles.constEnd(); ++it, ++j) {
     QFile file(*it);
     if(!file.open(QIODevice::ReadOnly)) {

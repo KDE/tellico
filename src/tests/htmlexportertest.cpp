@@ -157,7 +157,7 @@ void HtmlExporterTest::testHtmlTitle() {
   QVERIFY(!output.isEmpty());
 
   // check https://bugs.kde.org/show_bug.cgi?id=348381
-  QRegularExpression rx("<title>.*</title>");
+  static const QRegularExpression rx("<title>.*</title>");
   QRegularExpressionMatch match = rx.match(output);
   QVERIFY(match.hasMatch());
   QCOMPARE(match.captured(), QStringLiteral("<title>Robby's Books</title>"));
@@ -180,7 +180,7 @@ void HtmlExporterTest::testReportHtml() {
   QVERIFY(!output.isEmpty());
 
   // check that cdate is passed correctly
-  QRegularExpression rx("<p id=\"header-right\">(.*)</p>");
+  static const QRegularExpression rx("<p id=\"header-right\">(.*)</p>");
   QRegularExpressionMatch match = rx.match(output);
   QVERIFY(match.hasMatch());
   QCOMPARE(match.captured(1), QLocale().toString(QDate::currentDate()));

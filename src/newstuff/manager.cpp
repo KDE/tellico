@@ -97,6 +97,7 @@ bool Manager::installTemplate(const QString& file_) {
 
   bool success = true;
 
+  static const QRegularExpression digitsDashRx(QLatin1String("^\\d+-"));
   // is there a better way to figure out if the url points to a XSL file or a tar archive
   // than just trying to open it?
   KTar archive(file_);
@@ -112,7 +113,7 @@ bool Manager::installTemplate(const QString& file_) {
     if(!name.endsWith(QLatin1String(".xsl"))) {
       name += QLatin1String(".xsl");
     }
-    name.remove(QRegularExpression(QLatin1String("^\\d+-"))); // Remove possible kde-files.org id
+    name.remove(digitsDashRx); // Remove possible kde-files.org id
     name = Tellico::saveLocation(QStringLiteral("entry-templates/")) + name;
     // Should overwrite since we might be upgrading
     if(QFile::exists(name)) {
@@ -220,6 +221,7 @@ bool Manager::installScript(const QString& file_) {
   QString exeFile;
   QString sourceName;
 
+  static const QRegularExpression digitsDashRx(QLatin1String("^\\d+-"));
   if(archive.open(QIODevice::ReadOnly)) {
     const KArchiveDirectory* archiveDir = archive.directory();
     exeFile = findEXE(archiveDir);
@@ -250,7 +252,7 @@ bool Manager::installScript(const QString& file_) {
   } else { // assume it's an script file
     exeFile = QFileInfo(file_).fileName();
 
-    exeFile.remove(QRegularExpression(QLatin1String("^\\d+-"))); // Remove possible kde-files.org id
+    exeFile.remove(digitsDashRx); // Remove possible kde-files.org id
     sourceName = QFileInfo(exeFile).completeBaseName();
     if(sourceName.isEmpty()) {
       myDebug() << "Invalid packet name";
