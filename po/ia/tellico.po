@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# g.sora <g.sora@tiscali.it>, 2010, 2011, 2012, 2013, 2014, 2015, 2020, 2021, 2022.
+# g.sora <g.sora@tiscali.it>, 2010, 2011, 2012, 2013, 2014, 2015, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-22 00:57+0000\n"
-"PO-Revision-Date: 2022-06-29 14:55+0200\n"
+"PO-Revision-Date: 2023-01-24 15:56+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -3769,10 +3769,9 @@ msgid "Barcode"
 msgstr "Codice a barras"
 
 #: src/fetch/discogsfetcher.cpp:336 src/fetch/discogsfetcher.cpp:513
-#, fuzzy, kde-format
-#| msgid "Card Number"
+#, kde-format
 msgid "Catalog Number"
-msgstr "Numero de carta"
+msgstr "Numero de Catalogo"
 
 #: src/fetch/discogsfetcher.cpp:346
 #, kde-format
@@ -3931,14 +3930,12 @@ msgid "Raw Query"
 msgstr "Requesta crude"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Ligamine de Filmaster"
+msgstr "Ligamine de FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "Espania"
@@ -3947,7 +3944,7 @@ msgstr "Espania"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "USA"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -4205,10 +4202,9 @@ msgid "SRU Server"
 msgstr "Servitor SRU"
 
 #: src/fetch/srufetcher.cpp:526
-#, fuzzy, kde-format
-#| msgid "&Source name: "
+#, kde-format
 msgid "Scheme: "
-msgstr "Nomine de &fonte: "
+msgstr "Schema: "
 
 #: src/fetch/srufetcher.cpp:535 src/fetch/srufetcher.cpp:571
 #, kde-format
@@ -5291,10 +5287,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - un software gerente de collection, libere e simplice"
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2022, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2023, Robby Stephenson"
-msgstr "(c) 2001-2022, Robby Stephenson"
+msgstr "(c) 2001-2023, Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
