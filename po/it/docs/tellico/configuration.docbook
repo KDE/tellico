@@ -266,6 +266,12 @@
 >Open Movie Database</link
 >,</simpara
 ></listitem>
+<listitem
+><simpara
+><link linkend="filmaffinity"
+>FilmAffinity</link
+>,</simpara
+></listitem>
 <!-- comics -->
 <listitem
 ><simpara
@@ -602,7 +608,16 @@
 <para
 ><ulink url="http://allocine.fr"
 >AlloCiné</ulink
-> è un servizio online di informazioni sui film, con sede in Francia. L'identificazione del browser deve essere abilitata nelle &systemsettings; </para>
+> è un servizio online di informazioni sui film, con sede in Francia. </para>
+</sect3>
+
+<sect3 id="filmaffinity">
+<title
+>FilmAffinity</title>
+<para
+><ulink url="https://filmaffinity.com"
+>FilmAffinity</ulink
+> è un sito di film indipendente. </para>
 </sect3>
 
 </sect2>
@@ -618,7 +633,7 @@
 <para
 ><ulink url="http://discogs.com"
 >Discogs.com</ulink
-> è un database musicale costruito dagli utenti e contenente informazioni sugli artisti, le etichette e le loro registrazioni. È richiesta la registrazione per un account gratuito. L'identificazione del browser deve essere abilitata nelle &systemsettings; </para>
+> è un database musicale costruito dagli utenti e contenente informazioni sugli artisti, le etichette e le loro registrazioni. È richiesta la registrazione per un account gratuito. </para>
 </sect3>
 
 <sect3 id="musicbrainz">
@@ -627,7 +642,7 @@
 <para
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
-> è un metadatabase musicale comunitario che tenta di creare un sito di informazione completa sulla musica. L'identificazione del browser deve essere abilitata nelle &systemsettings; </para>
+> è un metadatabase musicale comunitario che tenta di creare un sito di informazione completa sulla musica. </para>
 </sect3>
 
 </sect2>
