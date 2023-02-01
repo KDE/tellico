@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-22 02:52+0000\n"
-"PO-Revision-Date: 2023-01-23 08:49+0100\n"
+"PO-Revision-Date: 2023-01-31 08:45+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -3049,7 +3049,7 @@ msgstr "<b>%1</b>-ის განახლება..."
 #: src/entryview.cpp:330
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
-msgstr ""
+msgstr "Tellico-მა ნაგულისხმები ჩანაწერის სტილების ფურცელი ვერ იპოვა."
 
 #: src/entryview.cpp:332 src/mainwindow.cpp:1703
 #, kde-format
@@ -3112,7 +3112,7 @@ msgstr "უნიკოდში კოდირება (UTF-8)"
 #: src/exportdialog.cpp:101
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
-msgstr ""
+msgstr "გასატანი ფაილის უნიკოდში (UTF-8) კოდირება."
 
 #: src/exportdialog.cpp:104
 #, kde-format
@@ -3122,7 +3122,7 @@ msgstr "მომხმარებლის ენაში კოდირე�
 #: src/exportdialog.cpp:107
 #, kde-format
 msgid "Encode the exported file in the local encoding."
-msgstr ""
+msgstr "ფაილის ლოკალურ კოდირებაში კოდირება."
 
 #: src/fetch/allocinefetcher.cpp:242 src/fetch/amazonfetcher.cpp:633
 #: src/fetch/colnectfetcher.cpp:527 src/fetch/discogsfetcher.cpp:211
@@ -3138,7 +3138,7 @@ msgstr ""
 #: src/fetch/upcitemdbfetcher.cpp:251 src/fetch/vndbfetcher.cpp:182
 #, kde-format
 msgid "The cover image could not be loaded."
-msgstr ""
+msgstr "ყდის სურათის ჩატვირთვის შეცდომა."
 
 #: src/fetch/allocinefetcher.cpp:324 src/fetch/allocinefetcher.cpp:501
 #, kde-format
@@ -3338,7 +3338,7 @@ msgstr "არაბეთის გაერთიანებული ემ�
 #: src/fetch/springerfetcher.cpp:62
 #, kde-format
 msgid "This data is licensed under <a href=%1>specific terms</a>."
-msgstr ""
+msgstr "მონაცემები ლიცენზირებულია <a href=%1>მითითებული პირობებით</a>."
 
 #: src/fetch/amazonfetcher.cpp:270 src/fetch/amazonfetcher.cpp:1112
 #, kde-format
@@ -3353,7 +3353,7 @@ msgstr ""
 #: src/fetch/themoviedbfetcher.cpp:136 src/fetch/thetvdbfetcher.cpp:128
 #, kde-format
 msgid "Those values must be entered in the data source settings."
-msgstr ""
+msgstr "ეს მნიშვნელობები მონაცემების წყაროს პარამეტრებში უნდა შეიყვანოთ."
 
 #: src/fetch/amazonfetcher.cpp:465
 #, kde-format
@@ -3607,7 +3607,7 @@ msgstr "&პაროლი: "
 #: src/fetch/crossreffetcher.cpp:344
 #, kde-format
 msgid "For some accounts, only an email address is required."
-msgstr ""
+msgstr "ზოგიერთი ანგარიშისთვის მხოლოდ ელფოსტის მისამართია საჭირო."
 
 #: src/fetch/crossreffetcher.cpp:347
 #, kde-format
@@ -3744,7 +3744,7 @@ msgstr ""
 #: src/fetch/fetcher.cpp:80
 #, kde-format
 msgid "%1 does not allow searching for this collection type."
-msgstr ""
+msgstr "%1 კოლექციის ამ ტიპის მოძებნის საშუალებას არ იძლევა."
 
 #. i18n("<html>%1 requires the network request to include identification.\n"
 #. "Check the network configuration in <a href=\"%2\">KDE System Settings</a>.</html>", source(), QStringLiteral("exec:/kcmshell5 useragent")),
@@ -3818,7 +3818,7 @@ msgstr "&დამატება: "
 #: src/fetch/gcstarpluginfetcher.cpp:419
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
-msgstr ""
+msgstr "აირჩიეთ მონაცემების წყაროსთვის გამოყენებული GCstar დამატება."
 
 #: src/fetch/gcstarpluginfetcher.cpp:424
 #, kde-format
@@ -4434,7 +4434,7 @@ msgstr "&ფაილიდან ჩატვირთვა..."
 #: src/fetchdialog.cpp:774
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
-msgstr ""
+msgstr "<qt>ჩამონათვალის ტექსტური ფაილიდან ჩატვირთვა.</qt>"
 
 #: src/fetchdialog.cpp:798
 #, kde-format
@@ -4581,7 +4581,7 @@ msgstr "ფილტრი"
 #: src/filterview.cpp:192
 #, kde-format
 msgid "Filter (Sort by Count)"
-msgstr ""
+msgstr "ფილტრი (რაოდენობით დალაგება)"
 
 #: src/groupview.cpp:262
 #, kde-format
@@ -4859,7 +4859,7 @@ msgstr ""
 #: src/importdialog.cpp:92
 #, kde-format
 msgid "A&ppend to current collection"
-msgstr ""
+msgstr "მიმდინარე კოლექციის ბოლოში &მიწერა"
 
 #: src/importdialog.cpp:93
 #, kde-format
@@ -4871,7 +4871,7 @@ msgstr ""
 #: src/importdialog.cpp:96
 #, kde-format
 msgid "&Merge with current collection"
-msgstr ""
+msgstr "მიმდინარე კოლექციაში &შერწყმა"
 
 #: src/importdialog.cpp:97
 #, kde-format
@@ -5345,32 +5345,32 @@ msgstr "Collectorz -დან მონაცემების შემოტ�
 #: src/mainwindow.cpp:402
 #, kde-format
 msgid "Import Referencer Data..."
-msgstr ""
+msgstr "მიმართვის მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:403
 #, kde-format
 msgid "Import data from Referencer"
-msgstr ""
+msgstr "მონაცემების მიმმართველიდან შემოტანა"
 
 #: src/mainwindow.cpp:406
 #, kde-format
 msgid "Import Bibtex Data..."
-msgstr ""
+msgstr "Bibtex-ის მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:407
 #, kde-format
 msgid "Import a bibtex bibliography file"
-msgstr ""
+msgstr "Bibtex-ის ბიბლიოგრაფიის ფაილის შემოტანა"
 
 #: src/mainwindow.cpp:412
 #, kde-format
 msgid "Import Bibtexml Data..."
-msgstr ""
+msgstr "Bibtexml-ის მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:413
 #, kde-format
 msgid "Import a Bibtexml bibliography file"
-msgstr ""
+msgstr "Bibtexml-ის ბიბლიოგრაფიის ფაილის შემოტანა"
 
 #: src/mainwindow.cpp:415
 #, kde-format
@@ -5380,7 +5380,7 @@ msgstr "RIS მონაცემების შემოტანა..."
 #: src/mainwindow.cpp:416
 #, kde-format
 msgid "Import an RIS reference file"
-msgstr ""
+msgstr "RIS მიმართვის ფაილის შემოტანა"
 
 #: src/mainwindow.cpp:418
 #, kde-format
@@ -5435,22 +5435,22 @@ msgstr "აუდიო CD-ის ინფორმაციის შემო
 #: src/mainwindow.cpp:439
 #, kde-format
 msgid "Import GCstar Data..."
-msgstr ""
+msgstr "GCstar-ის მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:440
 #, kde-format
 msgid "Import a GCstar data file"
-msgstr ""
+msgstr "GCstar-ის მონაცემების ფაილის შემოტნა"
 
 #: src/mainwindow.cpp:443
 #, kde-format
 msgid "Import Griffith Data..."
-msgstr ""
+msgstr "Griffith-ის მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:444
 #, kde-format
 msgid "Import a Griffith database"
-msgstr ""
+msgstr "Griffith-ის ბაზის შემოტანა"
 
 #: src/mainwindow.cpp:447
 #, kde-format
@@ -5475,17 +5475,17 @@ msgstr ""
 #: src/mainwindow.cpp:454
 #, kde-format
 msgid "Import VinoXML..."
-msgstr ""
+msgstr "VinoXML-ის შემოტანა..."
 
 #: src/mainwindow.cpp:455
 #, kde-format
 msgid "Import VinoXML data"
-msgstr ""
+msgstr "VinoXML-ის მონაცემების შემოტანა"
 
 #: src/mainwindow.cpp:457
 #, kde-format
 msgid "Import File Listing..."
-msgstr ""
+msgstr "ფაილების ჩამონათვალის შემოტანა..."
 
 #: src/mainwindow.cpp:458
 #, kde-format
@@ -5495,12 +5495,12 @@ msgstr ""
 #: src/mainwindow.cpp:460
 #, kde-format
 msgid "Import XSL Transform..."
-msgstr ""
+msgstr "XSL გარდაქმნის შემოტანა..."
 
 #: src/mainwindow.cpp:461
 #, kde-format
 msgid "Import using an XSL Transform"
-msgstr ""
+msgstr "XSL გარდაქმნით შემოტანა"
 
 #: src/mainwindow.cpp:474
 #, kde-format
@@ -5555,62 +5555,62 @@ msgstr ""
 #: src/mainwindow.cpp:506
 #, kde-format
 msgid "Export to Alexandria..."
-msgstr ""
+msgstr "Alexandria-ში გატანა..."
 
 #: src/mainwindow.cpp:507
 #, kde-format
 msgid "Export to an Alexandria library"
-msgstr ""
+msgstr "Alexandria-ის ბიბლიოთეკაში გატანა"
 
 #: src/mainwindow.cpp:510
 #, kde-format
 msgid "Export to Bibtex..."
-msgstr ""
+msgstr "Bibtex-ში გატანა..."
 
 #: src/mainwindow.cpp:511
 #, kde-format
 msgid "Export to a bibtex file"
-msgstr ""
+msgstr "Bibtex ფაილში გატანა"
 
 #: src/mainwindow.cpp:513
 #, kde-format
 msgid "Export to Bibtexml..."
-msgstr ""
+msgstr "Bibtexml-ში გატანა..."
 
 #: src/mainwindow.cpp:514
 #, kde-format
 msgid "Export to a Bibtexml file"
-msgstr ""
+msgstr "Bibtexml ფალში გატანა"
 
 #: src/mainwindow.cpp:516
 #, kde-format
 msgid "Export to ONIX..."
-msgstr ""
+msgstr "ONIX-ში გატანა..."
 
 #: src/mainwindow.cpp:517
 #, kde-format
 msgid "Export to an ONIX file"
-msgstr ""
+msgstr "ONIX ფაილში გატანა"
 
 #: src/mainwindow.cpp:519
 #, kde-format
 msgid "Export to GCstar..."
-msgstr ""
+msgstr "GCstar-ში გატანა..."
 
 #: src/mainwindow.cpp:520
 #, kde-format
 msgid "Export to a GCstar data file"
-msgstr ""
+msgstr "GCstar-ის მონაცემებს ფაილში გატანა"
 
 #: src/mainwindow.cpp:523
 #, kde-format
 msgid "Export XSL Transform..."
-msgstr ""
+msgstr "XSL გარდაქმნაში გატანა..."
 
 #: src/mainwindow.cpp:524
 #, kde-format
 msgid "Export using an XSL Transform"
-msgstr ""
+msgstr "XSL გარდაქმნის გამოყენებით გატანა"
 
 #: src/mainwindow.cpp:535
 #, kde-format
@@ -6337,7 +6337,7 @@ msgstr ""
 #: src/translators/audiofileimporter.cpp:505
 #, kde-format
 msgid "Include &bitrate"
-msgstr ""
+msgstr "ბიტური &სიჩქარის ჩათვლა"
 
 #: src/translators/audiofileimporter.cpp:506
 #, kde-format
@@ -6358,7 +6358,7 @@ msgstr "Bibtex -ის მორგება"
 #: src/translators/bibtexexporter.cpp:221
 #, kde-format
 msgid "Expand string macros"
-msgstr ""
+msgstr "სტრიქონის მაკროების გაშლა"
 
 #: src/translators/bibtexexporter.cpp:223
 #, kde-format
@@ -6370,7 +6370,7 @@ msgstr ""
 #: src/translators/bibtexexporter.cpp:226
 #, kde-format
 msgid "Use URL package"
-msgstr ""
+msgstr "URL პაკეტის გამოყენება"
 
 #: src/translators/bibtexexporter.cpp:228
 #, kde-format
@@ -6390,7 +6390,7 @@ msgstr ""
 #: src/translators/bibtexexporter.cpp:239
 #, kde-format
 msgid "Bibtex quotation style:"
-msgstr ""
+msgstr "Bibtex ციტატის სტილი:"
 
 #: src/translators/bibtexexporter.cpp:241
 #: src/translators/bibtexexporter.cpp:248
@@ -6430,12 +6430,12 @@ msgstr "უნიკოდის (UTF-8) გამოყენება"
 #: src/translators/bibteximporter.cpp:346
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
-msgstr ""
+msgstr "შემოტანილი ფაილის უნიკოდით (UTF-8) წაკითხვა."
 
 #: src/translators/bibteximporter.cpp:347
 #, kde-format
 msgid "Use user locale (%1) encoding"
-msgstr ""
+msgstr "კოდირებისთვის მომხმარებლის ლოკალის (%1) გამოყენება"
 
 #: src/translators/bibteximporter.cpp:351
 #, kde-format
@@ -6463,17 +6463,17 @@ msgstr ""
 #: src/translators/goodreadsimporter.cpp:104
 #, kde-format
 msgid "A valid user ID must be entered."
-msgstr ""
+msgstr "საჭიროა შეიყვანოთ სწორი მომხმარებლის ID."
 
 #: src/translators/boardgamegeekimporter.cpp:246
 #, kde-format
 msgid "BoardGameGeek Options"
-msgstr ""
+msgstr "BoardGameGeek-ის მორგება"
 
 #: src/translators/boardgamegeekimporter.cpp:252
 #, kde-format
 msgid "Import owned items only"
-msgstr ""
+msgstr "მხოლოდ საკუთარი ჩანაწერების შემოტანა"
 
 #: src/translators/boardgamegeekimporter.cpp:255
 #: src/translators/goodreadsimporter.cpp:153
@@ -6588,7 +6588,7 @@ msgstr ""
 #: src/translators/csvimporter.cpp:224
 #, kde-format
 msgid "&First row contains field titles"
-msgstr ""
+msgstr "&პირველი მწკრივი ველის სახელებს შეიცავს"
 
 #: src/translators/csvimporter.cpp:225
 #, kde-format
@@ -6673,12 +6673,12 @@ msgstr "ფაილების სკანირება…"
 #: src/translators/filelistingimporter.cpp:259
 #, kde-format
 msgid "File Listing Options"
-msgstr ""
+msgstr "ფაილების ჩამონათვლის მორგება"
 
 #: src/translators/filelistingimporter.cpp:262
 #, kde-format
 msgid "Recursive folder search"
-msgstr ""
+msgstr "საქაღალდეში რეკურსიული ძებნა"
 
 #: src/translators/filelistingimporter.cpp:263
 #, kde-format
@@ -6688,7 +6688,7 @@ msgstr ""
 #: src/translators/filelistingimporter.cpp:267
 #, kde-format
 msgid "Generate file previews"
-msgstr ""
+msgstr "ფაილების მინიატურების გენერაცია"
 
 #: src/translators/filelistingimporter.cpp:268
 #, kde-format
@@ -6731,17 +6731,17 @@ msgstr "სხვადასხვა"
 #: src/translators/freedbimporter.cpp:504
 #, kde-format
 msgid "Audio CD Options"
-msgstr ""
+msgstr "აუდიო CD-ის პარამეტრები"
 
 #: src/translators/freedbimporter.cpp:511
 #, kde-format
 msgid "Read data from CD-ROM device"
-msgstr ""
+msgstr "მონაცემების წაკითხვა CD-ROM-დან"
 
 #: src/translators/freedbimporter.cpp:514
 #, kde-format
 msgid "Select or input the CD-ROM device location."
-msgstr ""
+msgstr "აირჩიეთ ან შეიყვანეთ CD-ROM-ის მოწყობილობა."
 
 #: src/translators/freedbimporter.cpp:523
 #, kde-format
@@ -6764,7 +6764,7 @@ msgstr ""
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
 msgid "Goodreads Options"
-msgstr ""
+msgstr "Goodreads-ის მორგება"
 
 #: src/translators/htmlexporter.cpp:96
 #, kde-format
@@ -6774,7 +6774,7 @@ msgstr "HTML"
 #: src/translators/htmlexporter.cpp:334
 #, kde-format
 msgid "(grouped by %1)"
-msgstr ""
+msgstr "(დაჯგუფებულია %1-ით)"
 
 #: src/translators/htmlexporter.cpp:496
 #, kde-format
@@ -6784,12 +6784,12 @@ msgstr "HTML"
 #: src/translators/htmlexporter.cpp:499
 #, kde-format
 msgid "Print field headers"
-msgstr ""
+msgstr "ველის თავსართების დაბეჭდვა"
 
 #: src/translators/htmlexporter.cpp:504
 #, kde-format
 msgid "Group the entries"
-msgstr ""
+msgstr "ჩანაწერების დაჯგუფება"
 
 #: src/translators/htmlexporter.cpp:509
 #, kde-format
@@ -6814,7 +6814,7 @@ msgstr "%1-ის ჩატვირთვა..."
 #: src/translators/librarythingimporter.cpp:177
 #, kde-format
 msgid "LibraryThing Options"
-msgstr ""
+msgstr "LibraryThing-ის მორგება"
 
 #: src/translators/librarythingimporter.cpp:180
 #, kde-format
@@ -6851,7 +6851,7 @@ msgstr "ONIX არქივის მორგება"
 #: src/translators/onixexporter.cpp:182
 #, kde-format
 msgid "Include images in archive"
-msgstr ""
+msgstr "არქივში გამოსახულებებიც ჩაისმება"
 
 #: src/translators/onixexporter.cpp:184
 #, kde-format
@@ -6886,7 +6886,7 @@ msgstr "ფაილი ცარიელია."
 #: src/translators/tellicoimporter.cpp:205
 #, kde-format
 msgid "The file contains no collection data."
-msgstr ""
+msgstr "ეს ფაილი კოლექციის მონაცემებს არ შეიცავს."
 
 #: src/translators/tellicoxmlexporter.cpp:67
 #, kde-format
@@ -6901,7 +6901,7 @@ msgstr "Tellico XML -ის მორგება"
 #: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Include images in XML document"
-msgstr ""
+msgstr "XML დოკუმენტში გამოსახულებებიც ჩაისმება"
 
 #: src/translators/tellicoxmlexporter.cpp:545
 #, kde-format
@@ -6918,7 +6918,7 @@ msgstr "Tellico Zip ფაილი"
 #: src/translators/xmlstatehandler.cpp:127
 #, kde-format
 msgid "It is from a future version of Tellico."
-msgstr ""
+msgstr "ეს Tellico-ის მომავალი ვერსიიდანაა."
 
 #: src/translators/xsltexporter.cpp:50
 #, kde-format
