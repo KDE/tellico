@@ -43,6 +43,7 @@
 #include <KCompressionDevice>
 #include <KTar>
 #include <KLocalizedString>
+#include <karchive_version.h>
 
 #include <QTemporaryDir>
 #include <QDir>
@@ -301,7 +302,11 @@ void GCstarPluginFetcher::slotProcessExited() {
   }
 
   QBuffer filterBuffer(&m_data);
-  KCompressionDevice::CompressionType compressionType = KFilterDev::compressionTypeForMimeType(QStringLiteral("application/x-gzip"));
+#if KARCHIVE_VERSION >= QT_VERSION_CHECK(5,85,0)
+  auto compressionType = KCompressionDevice::compressionTypeForMimeType(QStringLiteral("application/x-gzip"));
+#else
+  auto compressionType = KFilterDev::compressionTypeForMimeType(QStringLiteral("application/x-gzip"));
+#endif
   KCompressionDevice filter(&filterBuffer, false, compressionType);
   if(!filter.open(QIODevice::ReadOnly)) {
     myWarning() << "unable to open gzip filter";
