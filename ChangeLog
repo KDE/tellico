@@ -1,3 +1,7 @@
+2023-02-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug when UI languages are empty (Bug 464102).
+
 2023-01-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 3.4.6.
