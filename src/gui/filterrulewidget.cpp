@@ -34,8 +34,6 @@
 #include <KLocalizedString>
 #include <KComboBox>
 #include <KLineEdit>
-#include <KServiceTypeTrader>
-#include <KRegExpEditorInterface>
 #include <KDateComboBox>
 
 #include <QDialog>
@@ -46,7 +44,7 @@
 using Tellico::FilterRuleWidget;
 
 FilterRuleWidget::FilterRuleWidget(Tellico::FilterRule* rule_, QWidget* parent_)
-    : QWidget(parent_), m_ruleDate(nullptr), m_editRegExp(nullptr), m_editRegExpDialog(nullptr), m_ruleType(General) {
+    : QWidget(parent_), m_ruleDate(nullptr), m_ruleType(General) {
   QHBoxLayout* l = new QHBoxLayout(this);
   l->setMargin(0);
 //  l->setSizeConstraint(QLayout::SetFixedSize);
@@ -101,34 +99,9 @@ void FilterRuleWidget::initWidget() {
   connect(m_ruleDate, &KDateComboBox::dateChanged, this, &FilterRuleWidget::signalModified);
   m_valueStack->addWidget(m_ruleDate);
 
-  if(!KServiceTypeTrader::self()->query(QStringLiteral("KRegExpEditor/KRegExpEditor")).isEmpty()) {
-    m_editRegExp = new QPushButton(i18n("Edit..."), this);
-    connect(m_editRegExp, &QAbstractButton::clicked, this, &FilterRuleWidget::slotEditRegExp);
-  }
-
   m_ruleField->addItems(m_ruleFieldList);
   updateFunctionList();
   slotRuleFunctionChanged(m_ruleFunc->currentIndex());
-}
-
-void FilterRuleWidget::slotEditRegExp() {
-  if(!m_editRegExpDialog) {
-    m_editRegExpDialog = KServiceTypeTrader::createInstanceFromQuery<QDialog>(QStringLiteral("KRegExpEditor/KRegExpEditor"),
-                                                                              QString(), this);  //krazy:exclude=qclasses
-  }
-
-  if(!m_editRegExpDialog) {
-    myWarning() << "no dialog";
-    return;
-  }
-
-  KRegExpEditorInterface* iface = ::qobject_cast<KRegExpEditorInterface*>(m_editRegExpDialog);
-  if(iface) {
-    iface->setRegExp(m_ruleValue->text());
-    if(m_editRegExpDialog->exec() == QDialog::Accepted) {
-      m_ruleValue->setText(iface->regExp());
-    }
-  }
 }
 
 void FilterRuleWidget::slotRuleFieldChanged(int which_) {
@@ -167,10 +140,6 @@ void FilterRuleWidget::slotRuleFieldChanged(int which_) {
 
 void FilterRuleWidget::slotRuleFunctionChanged(int which_) {
   const QVariant data = m_ruleFunc->itemData(which_);
-  if(m_editRegExp) {
-    m_editRegExp->setEnabled(data == FilterRule::FuncRegExp ||
-                             data == FilterRule::FuncNotRegExp);
-  }
 
   // don't show the date picker if we're using regular expressions
   if(m_ruleType == Date && data != FilterRule::FuncRegExp && data != FilterRule::FuncNotRegExp) {
@@ -248,10 +217,6 @@ void FilterRuleWidget::reset() {
   m_ruleField->setCurrentIndex(0);
   m_ruleFunc->setCurrentIndex(0);
   m_ruleValue->clear();
-
-  if(m_editRegExp) {
-    m_editRegExp->setEnabled(false);
-  }
 
   blockSignals(false);
 }
