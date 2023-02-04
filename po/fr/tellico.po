@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-22 02:52+0000\n"
+"POT-Creation-Date: 2023-02-04 03:16+0000\n"
 "PO-Revision-Date: 2023-01-23 16:33+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -1030,7 +1030,7 @@ msgstr "Description"
 
 #: src/collections/boardgamecollection.cpp:98
 #: src/collections/bookcollection.cpp:174
-#: src/collections/comicbookcollection.cpp:158
+#: src/collections/comicbookcollection.cpp:159
 #: src/collections/musiccollection.cpp:91
 #: src/collections/winecollection.cpp:113 src/field.cpp:205
 #, kde-format
@@ -1040,7 +1040,7 @@ msgstr "Note"
 #: src/collections/boardgamecollection.cpp:103
 #: src/collections/bookcollection.cpp:78 src/collections/cardcollection.cpp:93
 #: src/collections/coincollection.cpp:125
-#: src/collections/comicbookcollection.cpp:137
+#: src/collections/comicbookcollection.cpp:138
 #: src/collections/gamecollection.cpp:106
 #: src/collections/musiccollection.cpp:96
 #: src/collections/stampcollection.cpp:125
@@ -1054,7 +1054,7 @@ msgstr "Date d'achat"
 #: src/collections/bookcollection.cpp:166
 #: src/collections/cardcollection.cpp:107
 #: src/collections/coincollection.cpp:140
-#: src/collections/comicbookcollection.cpp:150
+#: src/collections/comicbookcollection.cpp:151
 #: src/collections/gamecollection.cpp:111
 #: src/collections/musiccollection.cpp:101
 #: src/collections/stampcollection.cpp:140
@@ -1067,7 +1067,7 @@ msgstr "Cadeau"
 #: src/collections/boardgamecollection.cpp:112
 #: src/collections/bookcollection.cpp:83 src/collections/cardcollection.cpp:98
 #: src/collections/coincollection.cpp:130
-#: src/collections/comicbookcollection.cpp:142
+#: src/collections/comicbookcollection.cpp:143
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
 #: src/collections/stampcollection.cpp:130
@@ -1079,7 +1079,7 @@ msgstr "Prix d'achat"
 
 #: src/collections/boardgamecollection.cpp:116
 #: src/collections/bookcollection.cpp:170
-#: src/collections/comicbookcollection.cpp:154
+#: src/collections/comicbookcollection.cpp:155
 #: src/collections/gamecollection.cpp:119
 #: src/collections/musiccollection.cpp:109
 #: src/collections/videocollection.cpp:215 src/document.cpp:495
@@ -1099,7 +1099,7 @@ msgstr "Couverture"
 #: src/collections/bookcollection.cpp:185
 #: src/collections/cardcollection.cpp:126
 #: src/collections/coincollection.cpp:150
-#: src/collections/comicbookcollection.cpp:169
+#: src/collections/comicbookcollection.cpp:170
 #: src/collections/gamecollection.cpp:126
 #: src/collections/musiccollection.cpp:121
 #: src/collections/stampcollection.cpp:147
@@ -1217,7 +1217,7 @@ msgid "Condition"
 msgstr "Condition"
 
 #: src/collections/bookcollection.cpp:158
-#: src/collections/comicbookcollection.cpp:146
+#: src/collections/comicbookcollection.cpp:147
 #, kde-format
 msgid "Signed"
 msgstr "Signé"
@@ -1228,7 +1228,7 @@ msgid "Read"
 msgstr "Lu"
 
 #: src/collections/bookcollection.cpp:179
-#: src/collections/comicbookcollection.cpp:163 src/fetch/arxivfetcher.cpp:209
+#: src/collections/comicbookcollection.cpp:164 src/fetch/arxivfetcher.cpp:209
 #: src/fetch/crossreffetcher.cpp:196 src/translators/pdfimporter.cpp:244
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
@@ -1236,7 +1236,7 @@ msgid "Front Cover"
 msgstr "Couverture"
 
 #: src/collections/bookcollection.cpp:182
-#: src/collections/comicbookcollection.cpp:166
+#: src/collections/comicbookcollection.cpp:167
 #: src/collections/videocollection.cpp:194
 #, kde-format
 msgid "Plot Summary"
