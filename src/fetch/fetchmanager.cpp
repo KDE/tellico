@@ -340,7 +340,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(Colnect);
   FETCHER_ADD(Numista);
   QStringList langs = QLocale().uiLanguages();
-  if(langs.first().contains(QLatin1Char('-'))) {
+  if(!langs.isEmpty() && langs.first().contains(QLatin1Char('-'))) {
     // I'm not sure QT always include two-letter locale codes
     langs << langs.first().section(QLatin1Char('-'), 0, 0);
   }
