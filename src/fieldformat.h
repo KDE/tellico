@@ -66,7 +66,7 @@ public:
    *
    * @param string The string to be split
    */
-  enum SplitParsing { StringSplit, RegExpSplit };
+  enum SplitParsing { StringSplit, RegExpSplit, CommaRegExpSplit };
   static QStringList splitValue(const QString& string,
                                 SplitParsing parsing = RegExpSplit);
   static QStringList splitRow(const QString& string);

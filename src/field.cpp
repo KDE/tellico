@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "field.h"
+#include "fieldformat.h"
 #include "utils/string_utils.h"
 #include "tellico_debug.h"
 
@@ -318,9 +319,9 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
       {
       QStringList pegi = QStringLiteral("PEGI 3, PEGI 7, PEGI 12, PEGI 16, PEGI 18")
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-                         .split(QRegularExpression(QStringLiteral("\\s*,\\s*")), QString::SkipEmptyParts);
+                         .split(FieldFormat::commaSplitRegularExpression(), QString::SkipEmptyParts);
 #else
-                         .split(QRegularExpression(QStringLiteral("\\s*,\\s*")), Qt::SkipEmptyParts);
+                         .split(FieldFormat::commaSplitRegularExpression(), Qt::SkipEmptyParts);
 #endif
       field = new Field(QStringLiteral("pegi"), i18n("PEGI Rating"), pegi);
       }

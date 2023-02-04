@@ -80,12 +80,18 @@ QStringList FieldFormat::splitValue(const QString& string_, SplitParsing parsing
     return QStringList();
   }
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  return parsing_ == StringSplit ? string_.split(delimiterString(), QString::KeepEmptyParts)
-                                 : string_.split(delimiterRegularExpression(), QString::KeepEmptyParts);
+  const auto keepFlag = QString::KeepEmptyParts;
 #else
-  return parsing_ == StringSplit ? string_.split(delimiterString(), Qt::KeepEmptyParts)
-                                 : string_.split(delimiterRegularExpression(), Qt::KeepEmptyParts);
+  const auto keepFlag = Qt::KeepEmptyParts;
 #endif
+  switch(parsing_) {
+    case StringSplit:
+      return string_.split(delimiterString(), keepFlag);
+    case RegExpSplit:
+      return string_.split(delimiterRegularExpression(), keepFlag);
+    case CommaRegExpSplit:
+      return string_.split(commaSplitRegularExpression(), keepFlag);
+  }
 }
 
 QStringList FieldFormat::splitRow(const QString& string_) {

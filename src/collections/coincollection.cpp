@@ -90,33 +90,25 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   field->setCategory(i18n(coin_general));
   list.append(field);
 
-  QStringList grade = i18nc("Coin grade levels - "
-                            "Proof-65,Proof-60,Mint State-65,Mint State-60,"
-                            "Almost Uncirculated-55,Almost Uncirculated-50,"
-                            "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
-                            "Very Good-8,Good-4,Fair",
-                            "Proof-65,Proof-60,Mint State-65,Mint State-60,"
-                            "Almost Uncirculated-55,Almost Uncirculated-50,"
-                            "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
-                            "Very Good-8,Good-4,Fair")
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-                      .split(QRegularExpression(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
-#else
-                      .split(QRegularExpression(QLatin1String("\\s*,\\s*")), Qt::SkipEmptyParts);
-#endif
+  auto grade = FieldFormat::splitValue(i18nc("Coin grade levels - "
+                                             "Proof-65,Proof-60,Mint State-65,Mint State-60,"
+                                             "Almost Uncirculated-55,Almost Uncirculated-50,"
+                                             "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
+                                             "Very Good-8,Good-4,Fair",
+                                             "Proof-65,Proof-60,Mint State-65,Mint State-60,"
+                                             "Almost Uncirculated-55,Almost Uncirculated-50,"
+                                             "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
+                                             "Very Good-8,Good-4,Fair"),
+                                       FieldFormat::CommaRegExpSplit);
   field = new Field(QStringLiteral("grade"), i18n("Grade"), grade);
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  QStringList service = i18nc("Coin grading services - "
-                              "PCGS,NGC,ANACS,ICG,ASA,PCI",
-                              "PCGS,NGC,ANACS,ICG,ASA,PCI")
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-                        .split(QRegularExpression(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
-#else
-                        .split(QRegularExpression(QLatin1String("\\s*,\\s*")), Qt::SkipEmptyParts);
-#endif
+  auto service = FieldFormat::splitValue(i18nc("Coin grading services - "
+                                               "PCGS,NGC,ANACS,ICG,ASA,PCI",
+                                               "PCGS,NGC,ANACS,ICG,ASA,PCI"),
+                                         FieldFormat::CommaRegExpSplit);
   field = new Field(QStringLiteral("service"), i18n("Grading Service"), service);
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowGrouped);

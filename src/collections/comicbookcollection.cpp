@@ -122,14 +122,10 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  QStringList cond = i18nc("Comic book grade levels - "
-                           "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor",
-                           "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor")
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-                     .split(QRegularExpression(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
-#else
-                     .split(QRegularExpression(QLatin1String("\\s*,\\s*")), Qt::SkipEmptyParts);
-#endif
+  auto cond = FieldFormat::splitValue(i18nc("Comic book grade levels - "
+                                            "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor",
+                                            "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"),
+                                      FieldFormat::CommaRegExpSplit);
   field = new Field(QStringLiteral("condition"), i18n("Condition"), cond);
   field->setCategory(i18n(comic_classification));
   field->setFlags(Field::AllowGrouped);

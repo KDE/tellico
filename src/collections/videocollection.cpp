@@ -62,14 +62,10 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  QStringList cert = i18nc("Movie ratings - "
-                           "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)",
-                           "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)")
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-                     .split(QRegularExpression(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
-#else
-                     .split(QRegularExpression(QLatin1String("\\s*,\\s*")), Qt::SkipEmptyParts);
-#endif
+  auto cert = FieldFormat::splitValue(i18nc("Movie ratings - "
+                                            "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)",
+                                            "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"),
+                                      FieldFormat::CommaRegExpSplit);
   field = new Field(QStringLiteral("certification"), i18n("Certification"), cert);
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowGrouped);

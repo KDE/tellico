@@ -89,14 +89,10 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
   field->setCategory(i18n(stamp_general));
   list.append(field);
 
-  QStringList grade = i18nc("Stamp grade levels - "
-                            "Superb,Extremely Fine,Very Fine,Fine,Average,Poor",
-                            "Superb,Extremely Fine,Very Fine,Fine,Average,Poor")
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-                      .split(QRegularExpression(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
-#else
-                      .split(QRegularExpression(QLatin1String("\\s*,\\s*")), Qt::SkipEmptyParts);
-#endif
+  auto grade = FieldFormat::splitValue(i18nc("Stamp grade levels - "
+                                             "Superb,Extremely Fine,Very Fine,Fine,Average,Poor",
+                                             "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"),
+                                       FieldFormat::CommaRegExpSplit);
   field = new Field(QStringLiteral("grade"), i18n("Grade"), grade);
   field->setCategory(i18n(stamp_condition));
   field->setFlags(Field::AllowGrouped);
