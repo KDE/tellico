@@ -46,12 +46,3 @@ void ManagerMessage::send(const QString& message_, Type type_) {
     Fetch::Manager::self()->updateStatus(message_);
   }
 }
-
-void ManagerMessage::infoList(const QString& message_, const QStringList& list_) {
-  if(GUI::Proxy::widget()) {
-    GUI::CursorSaver cs(Qt::ArrowCursor);
-    KMessageBox::informationList(GUI::Proxy::widget(), message_, list_);
-  } else {
-    myDebug() << "ManagerMessage::infoList() - no widget";
-  }
-}

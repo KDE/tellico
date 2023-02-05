@@ -166,12 +166,6 @@ void Fetcher::message(const QString& message_, int type_) const {
   }
 }
 
-void Fetcher::infoList(const QString& message_, const QStringList& list_) const {
-  if(m_messager) {
-    m_messager->infoList(message_, list_);
-  }
-}
-
 QString Fetcher::favIcon(const char* url_) {
   return favIcon(QUrl(QString::fromLatin1(url_)));
 }

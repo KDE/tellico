@@ -121,7 +121,6 @@ public:
   /**
    */
   void message(const QString& message, int type) const;
-  void infoList(const QString& message, const QStringList& list) const;
 
   /**
    * Reads the config for the widget, given a config group.

@@ -43,7 +43,6 @@ public:
   virtual ~MessageHandler() {}
 
   virtual void send(const QString& message, Type type) = 0;
-  virtual void infoList(const QString& message, const QStringList& list) = 0;
 
 private:
   Q_DISABLE_COPY(MessageHandler)
@@ -55,7 +54,6 @@ public:
   virtual ~ManagerMessage() {}
 
   virtual void send(const QString& message, Type type) Q_DECL_OVERRIDE;
-  virtual void infoList(const QString& message, const QStringList& list) Q_DECL_OVERRIDE;
 };
 
   } // end namespace

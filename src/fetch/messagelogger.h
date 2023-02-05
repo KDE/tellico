@@ -42,7 +42,6 @@ public:
   virtual ~MessageLogger() {}
 
   virtual void send(const QString& message, Type type) Q_DECL_OVERRIDE;
-  virtual void infoList(const QString& message, const QStringList& list) Q_DECL_OVERRIDE;
 
   QStringList statusList;
   QStringList warningList;

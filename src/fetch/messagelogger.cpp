@@ -35,8 +35,3 @@ void MessageLogger::send(const QString& message_, Type type_) {
     statusList += message_;
   }
 }
-
-void MessageLogger::infoList(const QString& message_, const QStringList& list_) {
-  Q_UNUSED(message_);
-  Q_UNUSED(list_);
-}
