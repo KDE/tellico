@@ -65,6 +65,10 @@ void ItunesFetcherTest::testBurningEdge() {
   QCOMPARE(entry->field(QStringLiteral("itunes")), QStringLiteral("https://music.apple.com/us/album/the-burning-edge-of-dawn/1560397363?uo=4"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+
+  QStringList trackList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
+  QCOMPARE(trackList.count(), 10);
+  QCOMPARE(trackList.at(0), QStringLiteral("The Dark Before the Dawn::Andrew Peterson::4:09"));
 }
 
 void ItunesFetcherTest::testUpc() {

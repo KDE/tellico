@@ -189,13 +189,16 @@ void ItunesFetcher::slotComplete(KJob* job_) {
   }
 
   Data::CollPtr coll(new Data::MusicCollection(true));
+  // placeholder for collection id, to be removed later
+  Data::FieldPtr f1(new Data::Field(QStringLiteral("collectionId"), QString(), Data::Field::Number));
+  coll->addField(f1);
   if(optionalFields().contains(QStringLiteral("itunes"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("itunes"), i18n("iTunes Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
 
-  QHash<int, QStringList> trackList;
+  QList<FetchResult*> fetchResults;
   foreach(const QJsonValue& result, results) {
     // result kind must be an album
     auto obj = result.toObject();
@@ -205,25 +208,14 @@ void ItunesFetcher::slotComplete(KJob* job_) {
 
       FetchResult* r = new FetchResult(this, entry);
       m_entries.insert(r->uid, entry);
-      emit signalResultFound(r);
+      fetchResults.append(r);
     } else if(obj.value(QLatin1String("wrapperType")) == QLatin1String("track")) {
-      QStringList trackInfo;
-      const auto resultMap = obj.toVariantMap();
-      trackInfo << mapValue(resultMap, "trackName")
-                << mapValue(resultMap, "artistName")
-                << Tellico::minutes(mapValue(resultMap, "trackTimeMillis").toInt() / 1000);
-
-      const int collectionId = obj.value(QLatin1String("collectionId")).toInt();
-      const int idx = mapValue(resultMap, "trackNumber").toInt();
-      QStringList tracks = trackList.value(collectionId);
-      while(tracks.size() < idx) tracks << QString();
-      tracks[idx-1] = trackInfo.join(FieldFormat::columnDelimiterString());
-      trackList.insert(collectionId, tracks);
+      readTrackInfo(obj.toVariantMap());
     }
   }
 
-  // check for tracks to add
-  QHashIterator<int, QStringList> i(trackList);
+  // check for tracks to add by iterating over all known track lists
+  QHashIterator<int, QStringList> i(m_trackList);
   while(i.hasNext()) {
     i.next();
     Data::EntryPtr entry = m_collectionHash.value(i.key());
@@ -231,6 +223,10 @@ void ItunesFetcher::slotComplete(KJob* job_) {
     entry->setField(QStringLiteral("track"), i.value().join(FieldFormat::rowDelimiterString()));
   }
 
+  // don't emit result until after adding tracks
+  for(auto fetchResult : fetchResults) {
+    emit signalResultFound(fetchResult);
+  }
   stop();
 }
 
@@ -241,6 +237,30 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
+  // check if tracks need to be downloaded
+  const QString collectionId = entry->field(QLatin1String("collectionId"));
+  if(!collectionId.isEmpty() && entry->field(QLatin1String("track")).isEmpty()) {
+    QUrl u(QString::fromLatin1(ITUNES_API_URL));
+    u = u.adjusted(QUrl::StripTrailingSlash);
+    u.setPath(u.path() + QLatin1String("/lookup"));
+    QUrlQuery q;
+    q.addQueryItem(QStringLiteral("entity"), QLatin1String("song"));
+    q.addQueryItem(QStringLiteral("id"), collectionId);
+    u.setQuery(q);
+    auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+    if(job->exec()) {
+      QJsonDocument doc = QJsonDocument::fromJson(job->data());
+      QJsonArray results = doc.object().value(QLatin1String("results")).toArray();
+      foreach(const QJsonValue& result, results) {
+        auto obj = result.toObject();
+        if(obj.value(QLatin1String("wrapperType")) == QLatin1String("track")) {
+          readTrackInfo(obj.toVariantMap());
+        }
+      }
+      entry->setField(QStringLiteral("track"),
+                      m_trackList.value(collectionId.toInt()).join(FieldFormat::rowDelimiterString()));
+    }
+  }
 
   // image might still be a URL
   const QString image_id = entry->field(QStringLiteral("cover"));
@@ -253,10 +273,14 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
     entry->setField(QStringLiteral("cover"), id);
   }
 
+  // clear the placeholder field
+  entry->setField(QStringLiteral("collectionId"), QString());
+
   return entry;
 }
 
 void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
+  entry_->setField(QStringLiteral("collectionId"), mapValue(resultMap_, "collectionId"));
   entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "collectionName"));
   entry_->setField(QStringLiteral("artist"), mapValue(resultMap_, "artistName"));
   entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "releaseDate").left(4));
@@ -266,6 +290,20 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
     entry_->setField(QStringLiteral("itunes"), mapValue(resultMap_, "collectionViewUrl"));
   }
   m_collectionHash.insert(resultMap_.value(QLatin1String("collectionId")).toInt(), entry_);
+}
+
+void ItunesFetcher::readTrackInfo(const QVariantMap& resultMap_) {
+  QStringList trackInfo;
+  trackInfo << mapValue(resultMap_, "trackName")
+            << mapValue(resultMap_, "artistName")
+            << Tellico::minutes(mapValue(resultMap_, "trackTimeMillis").toInt() / 1000);
+
+  const int collectionId = mapValue(resultMap_, "collectionId").toInt();
+  const int idx = mapValue(resultMap_, "trackNumber").toInt();
+  QStringList tracks = m_trackList.value(collectionId);
+  while(tracks.size() < idx) tracks << QString();
+  tracks[idx-1] = trackInfo.join(FieldFormat::columnDelimiterString());
+  m_trackList.insert(collectionId, tracks);
 }
 
 Tellico::Fetch::ConfigWidget* ItunesFetcher::configWidget(QWidget* parent_) const {

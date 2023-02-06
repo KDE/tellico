@@ -91,11 +91,13 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+  void readTrackInfo(const QVariantMap& resultMap);
 
   bool m_started;
 
   QHash<uint, Data::EntryPtr> m_entries;
   QHash<int, Data::EntryPtr> m_collectionHash;
+  QHash<int, QStringList> m_trackList;
   QPointer<KIO::StoredTransferJob> m_job;
 };
 
