@@ -92,6 +92,8 @@ QStringList FieldFormat::splitValue(const QString& string_, SplitParsing parsing
     case CommaRegExpSplit:
       return string_.split(commaSplitRegularExpression(), keepFlag);
   }
+  // not needed, but stops warning messages
+  return QStringList();
 }
 
 QStringList FieldFormat::splitRow(const QString& string_) {
