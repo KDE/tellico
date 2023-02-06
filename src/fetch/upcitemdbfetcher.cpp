@@ -96,7 +96,6 @@ void UPCItemDbFetcher::search() {
 void UPCItemDbFetcher::continueSearch() {
   m_started = true;
 
-
   QUrl u(QString::fromLatin1(UPCITEMDB_API_URL));
   u = u.adjusted(QUrl::StripTrailingSlash);
   u.setPath(u.path() + QLatin1String("/lookup"));

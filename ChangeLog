@@ -1,3 +1,7 @@
+2023-02-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source for iTunes music.
+
 2023-02-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug when UI languages are empty (Bug 464102).
