@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-04 00:59+0000\n"
+"POT-Creation-Date: 2023-02-07 01:00+0000\n"
 "PO-Revision-Date: 2023-01-23 16:33+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -750,19 +750,19 @@ msgstr "Un champ avec une valeur dérivée doit avoir une valeur de modèle."
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
 #: src/fetch/imdbfetcher.cpp:831 src/fetch/imdbfetcher.cpp:1386
-#: src/fetch/kinopoiskfetcher.cpp:277 src/fetch/kinoteatrfetcher.cpp:240
-#: src/fetch/mobygamesfetcher.cpp:459 src/fetch/moviemeterfetcher.cpp:216
-#: src/fetch/moviemeterfetcher.cpp:221 src/fetch/numistafetcher.cpp:343
-#: src/fetch/numistafetcher.cpp:359 src/fetch/omdbfetcher.cpp:252
-#: src/fetch/openlibraryfetcher.cpp:272 src/fetch/thegamesdbfetcher.cpp:267
-#: src/fetch/thegamesdbfetcher.cpp:272 src/fetch/themoviedbfetcher.cpp:312
-#: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:320
-#: src/fetch/themoviedbfetcher.cpp:338 src/fetch/thetvdbfetcher.cpp:256
-#: src/fetch/thetvdbfetcher.cpp:261 src/fetch/thetvdbfetcher.cpp:266
-#: src/fetch/tvmazefetcher.cpp:178 src/fetch/tvmazefetcher.cpp:183
-#: src/fetch/upcitemdbfetcher.cpp:209 src/field.cpp:38 src/field.cpp:79
-#: src/field.cpp:298 src/field.cpp:327 src/field.cpp:332
-#: src/translators/gcstarimporter.cpp:89
+#: src/fetch/itunesfetcher.cpp:197 src/fetch/kinopoiskfetcher.cpp:277
+#: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:459
+#: src/fetch/moviemeterfetcher.cpp:216 src/fetch/moviemeterfetcher.cpp:221
+#: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:359
+#: src/fetch/omdbfetcher.cpp:252 src/fetch/openlibraryfetcher.cpp:272
+#: src/fetch/thegamesdbfetcher.cpp:267 src/fetch/thegamesdbfetcher.cpp:272
+#: src/fetch/themoviedbfetcher.cpp:312 src/fetch/themoviedbfetcher.cpp:315
+#: src/fetch/themoviedbfetcher.cpp:320 src/fetch/themoviedbfetcher.cpp:338
+#: src/fetch/thetvdbfetcher.cpp:256 src/fetch/thetvdbfetcher.cpp:261
+#: src/fetch/thetvdbfetcher.cpp:266 src/fetch/tvmazefetcher.cpp:178
+#: src/fetch/tvmazefetcher.cpp:183 src/fetch/upcitemdbfetcher.cpp:208
+#: src/field.cpp:39 src/field.cpp:80 src/field.cpp:299 src/field.cpp:328
+#: src/field.cpp:333 src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "General"
 msgstr "Général"
@@ -770,7 +770,7 @@ msgstr "Général"
 #: src/collections/bibtexcollection.cpp:39
 #: src/collections/bookcollection.cpp:32
 #: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:361
-#: src/field.cpp:314 src/translators/grs1importer.cpp:75
+#: src/field.cpp:315 src/translators/grs1importer.cpp:75
 #: src/translators/pdfimporter.cpp:214
 #, kde-format
 msgid "Publishing"
@@ -882,7 +882,7 @@ msgstr "Digital Object Identifier"
 msgid "Month"
 msgstr "Mois"
 
-#: src/collections/bibtexcollection.cpp:191 src/field.cpp:200
+#: src/collections/bibtexcollection.cpp:191 src/field.cpp:201
 #, kde-format
 msgid "Number"
 msgstr "Nombre"
@@ -931,14 +931,14 @@ msgstr "Référence croisée"
 #: src/collections/cardcollection.cpp:111
 #: src/collections/comicbookcollection.cpp:120
 #: src/collections/musiccollection.cpp:113
-#: src/collections/videocollection.cpp:219 src/fetch/amazonfetcher.cpp:1078
+#: src/collections/videocollection.cpp:215 src/fetch/amazonfetcher.cpp:1078
 #, kde-format
 msgid "Keywords"
 msgstr "Mots clés"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
-#: src/field.cpp:201 src/translators/gcstarimporter.cpp:88
+#: src/field.cpp:202 src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
 msgstr "URL"
@@ -968,7 +968,7 @@ msgstr "Inconnu"
 #: src/collections/gamecollection.cpp:33 src/collections/musiccollection.cpp:32
 #: src/collections/stampcollection.cpp:32
 #: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
-#: src/document.cpp:525 src/field.cpp:291 src/field.cpp:304 src/field.cpp:309
+#: src/document.cpp:525 src/field.cpp:292 src/field.cpp:305 src/field.cpp:310
 #, kde-format
 msgid "Personal"
 msgstr "Personnel"
@@ -982,7 +982,7 @@ msgstr "Mes jeux de plateau"
 #: src/collections/bookcollection.cpp:131
 #: src/collections/comicbookcollection.cpp:114
 #: src/collections/gamecollection.cpp:66 src/collections/musiccollection.cpp:77
-#: src/collections/videocollection.cpp:78 src/fetch/rpggeekfetcher.cpp:202
+#: src/collections/videocollection.cpp:74 src/fetch/rpggeekfetcher.cpp:202
 #, kde-format
 msgid "Genre"
 msgstr "Genre"
@@ -1032,21 +1032,21 @@ msgstr "Description"
 
 #: src/collections/boardgamecollection.cpp:98
 #: src/collections/bookcollection.cpp:174
-#: src/collections/comicbookcollection.cpp:159
+#: src/collections/comicbookcollection.cpp:155
 #: src/collections/musiccollection.cpp:91
-#: src/collections/winecollection.cpp:113 src/field.cpp:205
+#: src/collections/winecollection.cpp:113 src/field.cpp:206
 #, kde-format
 msgid "Rating"
 msgstr "Note"
 
 #: src/collections/boardgamecollection.cpp:103
 #: src/collections/bookcollection.cpp:78 src/collections/cardcollection.cpp:93
-#: src/collections/coincollection.cpp:125
-#: src/collections/comicbookcollection.cpp:138
+#: src/collections/coincollection.cpp:117
+#: src/collections/comicbookcollection.cpp:134
 #: src/collections/gamecollection.cpp:106
 #: src/collections/musiccollection.cpp:96
-#: src/collections/stampcollection.cpp:125
-#: src/collections/videocollection.cpp:202
+#: src/collections/stampcollection.cpp:121
+#: src/collections/videocollection.cpp:198
 #: src/collections/winecollection.cpp:90
 #, kde-format
 msgid "Purchase Date"
@@ -1055,12 +1055,12 @@ msgstr "Date d'achat"
 #: src/collections/boardgamecollection.cpp:108
 #: src/collections/bookcollection.cpp:166
 #: src/collections/cardcollection.cpp:107
-#: src/collections/coincollection.cpp:140
-#: src/collections/comicbookcollection.cpp:151
+#: src/collections/coincollection.cpp:132
+#: src/collections/comicbookcollection.cpp:147
 #: src/collections/gamecollection.cpp:111
 #: src/collections/musiccollection.cpp:101
-#: src/collections/stampcollection.cpp:140
-#: src/collections/videocollection.cpp:207
+#: src/collections/stampcollection.cpp:136
+#: src/collections/videocollection.cpp:203
 #: src/collections/winecollection.cpp:118
 #, kde-format
 msgid "Gift"
@@ -1068,12 +1068,12 @@ msgstr "Cadeau"
 
 #: src/collections/boardgamecollection.cpp:112
 #: src/collections/bookcollection.cpp:83 src/collections/cardcollection.cpp:98
-#: src/collections/coincollection.cpp:130
-#: src/collections/comicbookcollection.cpp:143
+#: src/collections/coincollection.cpp:122
+#: src/collections/comicbookcollection.cpp:139
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/stampcollection.cpp:130
-#: src/collections/videocollection.cpp:211
+#: src/collections/stampcollection.cpp:126
+#: src/collections/videocollection.cpp:207
 #: src/collections/winecollection.cpp:95
 #, kde-format
 msgid "Purchase Price"
@@ -1081,10 +1081,10 @@ msgstr "Prix d'achat"
 
 #: src/collections/boardgamecollection.cpp:116
 #: src/collections/bookcollection.cpp:170
-#: src/collections/comicbookcollection.cpp:155
+#: src/collections/comicbookcollection.cpp:151
 #: src/collections/gamecollection.cpp:119
 #: src/collections/musiccollection.cpp:109
-#: src/collections/videocollection.cpp:215 src/document.cpp:523
+#: src/collections/videocollection.cpp:211 src/document.cpp:523
 #, kde-format
 msgid "Loaned"
 msgstr "Prêté"
@@ -1092,7 +1092,7 @@ msgstr "Prêté"
 #: src/collections/boardgamecollection.cpp:120
 #: src/collections/gamecollection.cpp:123
 #: src/collections/musiccollection.cpp:118
-#: src/collections/videocollection.cpp:224
+#: src/collections/videocollection.cpp:220
 #, kde-format
 msgid "Cover"
 msgstr "Couverture"
@@ -1100,12 +1100,12 @@ msgstr "Couverture"
 #: src/collections/boardgamecollection.cpp:123
 #: src/collections/bookcollection.cpp:185
 #: src/collections/cardcollection.cpp:126
-#: src/collections/coincollection.cpp:150
-#: src/collections/comicbookcollection.cpp:170
+#: src/collections/coincollection.cpp:142
+#: src/collections/comicbookcollection.cpp:166
 #: src/collections/gamecollection.cpp:126
 #: src/collections/musiccollection.cpp:121
-#: src/collections/stampcollection.cpp:147
-#: src/collections/videocollection.cpp:227
+#: src/collections/stampcollection.cpp:143
+#: src/collections/videocollection.cpp:223
 #: src/collections/winecollection.cpp:128 src/fetch/bedethequefetcher.cpp:455
 #, kde-format
 msgid "Comments"
@@ -1212,14 +1212,14 @@ msgid "Used"
 msgstr "Usé"
 
 #: src/collections/bookcollection.cpp:154
-#: src/collections/comicbookcollection.cpp:133
+#: src/collections/comicbookcollection.cpp:129
 #: src/collections/stampcollection.cpp:31
 #, kde-format
 msgid "Condition"
 msgstr "Condition"
 
 #: src/collections/bookcollection.cpp:158
-#: src/collections/comicbookcollection.cpp:147
+#: src/collections/comicbookcollection.cpp:143
 #, kde-format
 msgid "Signed"
 msgstr "Signé"
@@ -1230,7 +1230,7 @@ msgid "Read"
 msgstr "Lu"
 
 #: src/collections/bookcollection.cpp:179
-#: src/collections/comicbookcollection.cpp:164 src/fetch/arxivfetcher.cpp:209
+#: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:209
 #: src/fetch/crossreffetcher.cpp:196 src/translators/pdfimporter.cpp:244
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
@@ -1238,8 +1238,8 @@ msgid "Front Cover"
 msgstr "Couverture"
 
 #: src/collections/bookcollection.cpp:182
-#: src/collections/comicbookcollection.cpp:167
-#: src/collections/videocollection.cpp:194
+#: src/collections/comicbookcollection.cpp:163
+#: src/collections/videocollection.cpp:190
 #, kde-format
 msgid "Plot Summary"
 msgstr "Résumé de l'action"
@@ -1275,8 +1275,8 @@ msgid "Card Type"
 msgstr "Type de carte"
 
 #: src/collections/cardcollection.cpp:102
-#: src/collections/coincollection.cpp:134
-#: src/collections/stampcollection.cpp:134
+#: src/collections/coincollection.cpp:126
+#: src/collections/stampcollection.cpp:130
 #: src/collections/winecollection.cpp:99
 #, kde-format
 msgid "Location"
@@ -1351,30 +1351,30 @@ msgstr ""
 "Superbe-50,Superbe-40,Très très beau-30,Très très beau-20,Très beau-12,"
 "Beau-8,Bon-4,Moyen"
 
-#: src/collections/coincollection.cpp:107
-#: src/collections/stampcollection.cpp:100
+#: src/collections/coincollection.cpp:103
+#: src/collections/stampcollection.cpp:96
 #, kde-format
 msgid "Grade"
 msgstr "État de conservation"
 
-#: src/collections/coincollection.cpp:114
+#: src/collections/coincollection.cpp:110
 #, kde-format
 msgctxt "Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 
-#: src/collections/coincollection.cpp:120
+#: src/collections/coincollection.cpp:112
 #, kde-format
 msgid "Grading Service"
 msgstr "Service d'évaluation"
 
-#: src/collections/coincollection.cpp:144 src/fetch/colnectfetcher.cpp:549
+#: src/collections/coincollection.cpp:136 src/fetch/colnectfetcher.cpp:549
 #: src/fetch/numistafetcher.cpp:400
 #, kde-format
 msgid "Obverse"
 msgstr "Observation"
 
-#: src/collections/coincollection.cpp:147 src/fetch/colnectfetcher.cpp:550
+#: src/collections/coincollection.cpp:139 src/fetch/colnectfetcher.cpp:550
 #: src/fetch/numistafetcher.cpp:401
 #, kde-format
 msgid "Reverse"
@@ -1386,7 +1386,7 @@ msgid "My Comic Books"
 msgstr "Mes bandes dessinées"
 
 #: src/collections/comicbookcollection.cpp:58
-#: src/collections/videocollection.cpp:133
+#: src/collections/videocollection.cpp:129
 #, kde-format
 msgid "Writer"
 msgstr "Scénariste"
@@ -1502,7 +1502,7 @@ msgid "ESRB Rating"
 msgstr "Classement ESRB"
 
 #: src/collections/gamecollection.cpp:97
-#: src/collections/videocollection.cpp:197
+#: src/collections/videocollection.cpp:193
 #, kde-format
 msgid "Personal Rating"
 msgstr "Note personnelle"
@@ -1691,7 +1691,7 @@ msgstr "Album"
 
 #: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:422
 #: src/fetch/doubanfetcher.cpp:385 src/fetch/doubanfetcher.cpp:519
-#: src/fetch/upcitemdbfetcher.cpp:291 src/fetch/upcitemdbfetcher.cpp:411
+#: src/fetch/upcitemdbfetcher.cpp:290 src/fetch/upcitemdbfetcher.cpp:410
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/freedbimporter.cpp:275
 #: src/translators/freedbimporter.cpp:393
@@ -1702,8 +1702,8 @@ msgstr "Compact Disc"
 
 #: src/collections/musiccollection.cpp:54
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:430 src/fetch/upcitemdbfetcher.cpp:407
-#: src/fetch/upcitemdbfetcher.cpp:415
+#: src/fetch/discogsfetcher.cpp:430 src/fetch/upcitemdbfetcher.cpp:406
+#: src/fetch/upcitemdbfetcher.cpp:414
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
@@ -1743,8 +1743,8 @@ msgid "Tracks"
 msgstr "Pistes"
 
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
-#: src/fetch/fetchmanager.cpp:67 src/fetchdialog.cpp:252 src/field.cpp:297
-#: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
+#: src/fetch/fetchmanager.cpp:67 src/fetchdialog.cpp:252 src/field.cpp:298
+#: src/field.cpp:339 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:395
 #, kde-format
 msgid "Title"
@@ -1768,7 +1768,7 @@ msgid "Issue Year"
 msgstr "Année"
 
 #: src/collections/stampcollection.cpp:83
-#: src/collections/videocollection.cpp:184 src/fetch/allocinefetcher.cpp:398
+#: src/collections/videocollection.cpp:180 src/fetch/allocinefetcher.cpp:398
 #: src/fetch/imdbfetcher.cpp:1530
 #, kde-format
 msgid "Color"
@@ -1786,27 +1786,27 @@ msgctxt ""
 msgid "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgstr "Superbe,Excellent,Très bon,Bon,Moyen,Mauvais"
 
-#: src/collections/stampcollection.cpp:105
+#: src/collections/stampcollection.cpp:101
 #, kde-format
 msgid "Cancelled"
 msgstr "Annulé"
 
-#: src/collections/stampcollection.cpp:110
+#: src/collections/stampcollection.cpp:106
 #, kde-format
 msgid "Hinged"
 msgstr "Articulé"
 
-#: src/collections/stampcollection.cpp:115
+#: src/collections/stampcollection.cpp:111
 #, kde-format
 msgid "Centering"
 msgstr "Centrée"
 
-#: src/collections/stampcollection.cpp:120
+#: src/collections/stampcollection.cpp:116
 #, kde-format
 msgid "Gummed"
 msgstr "Gommé"
 
-#: src/collections/stampcollection.cpp:144 src/field.cpp:203
+#: src/collections/stampcollection.cpp:140 src/field.cpp:204
 #, kde-format
 msgid "Image"
 msgstr "Image"
@@ -1827,7 +1827,7 @@ msgid "My Videos"
 msgstr "Mes vidéos"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1031
-#: src/fetch/upcitemdbfetcher.cpp:393
+#: src/fetch/upcitemdbfetcher.cpp:392
 #, kde-format
 msgid "VHS"
 msgstr "VHS"
@@ -1843,13 +1843,13 @@ msgid "DivX"
 msgstr "DivX"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1025
-#: src/fetch/upcitemdbfetcher.cpp:387
+#: src/fetch/upcitemdbfetcher.cpp:386
 #, kde-format
 msgid "Blu-ray"
 msgstr "Blu-ray"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1028
-#: src/fetch/upcitemdbfetcher.cpp:390
+#: src/fetch/upcitemdbfetcher.cpp:389
 #, kde-format
 msgid "HD DVD"
 msgstr "HD DVD"
@@ -1865,179 +1865,179 @@ msgctxt "Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 msgid "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 msgstr "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 
-#: src/collections/videocollection.cpp:73
+#: src/collections/videocollection.cpp:69
 #, kde-format
 msgid "Certification"
 msgstr "Certification"
 
-#: src/collections/videocollection.cpp:85
+#: src/collections/videocollection.cpp:81
 #, kde-format
 msgid "Region 0"
 msgstr "Région 0"
 
-#: src/collections/videocollection.cpp:86
+#: src/collections/videocollection.cpp:82
 #, kde-format
 msgid "Region 1"
 msgstr "Région 1"
 
-#: src/collections/videocollection.cpp:87
+#: src/collections/videocollection.cpp:83
 #, kde-format
 msgid "Region 2"
 msgstr "Région 2"
 
-#: src/collections/videocollection.cpp:88
+#: src/collections/videocollection.cpp:84
 #, kde-format
 msgid "Region 3"
 msgstr "Région 3"
 
-#: src/collections/videocollection.cpp:89
+#: src/collections/videocollection.cpp:85
 #, kde-format
 msgid "Region 4"
 msgstr "Région 4"
 
-#: src/collections/videocollection.cpp:90
+#: src/collections/videocollection.cpp:86
 #, kde-format
 msgid "Region 5"
 msgstr "Région 5"
 
-#: src/collections/videocollection.cpp:91
+#: src/collections/videocollection.cpp:87
 #, kde-format
 msgid "Region 6"
 msgstr "Région 6"
 
-#: src/collections/videocollection.cpp:92
+#: src/collections/videocollection.cpp:88
 #, kde-format
 msgid "Region 7"
 msgstr "Région 7"
 
-#: src/collections/videocollection.cpp:93
+#: src/collections/videocollection.cpp:89
 #, kde-format
 msgid "Region 8"
 msgstr "Région 8"
 
-#: src/collections/videocollection.cpp:94
+#: src/collections/videocollection.cpp:90
 #, kde-format
 msgid "Region"
 msgstr "Région"
 
-#: src/collections/videocollection.cpp:99 src/fetch/discogsfetcher.cpp:317
+#: src/collections/videocollection.cpp:95 src/fetch/discogsfetcher.cpp:317
 #: src/fetch/discogsfetcher.cpp:510
 #, kde-format
 msgid "Nationality"
 msgstr "Nationalité"
 
-#: src/collections/videocollection.cpp:106 src/fetch/amazonfetcher.cpp:1041
-#: src/fetch/upcitemdbfetcher.cpp:403
+#: src/collections/videocollection.cpp:102 src/fetch/amazonfetcher.cpp:1041
+#: src/fetch/upcitemdbfetcher.cpp:402
 #, kde-format
 msgid "NTSC"
 msgstr "NTSC"
 
-#: src/collections/videocollection.cpp:106
+#: src/collections/videocollection.cpp:102
 #, kde-format
 msgid "PAL"
 msgstr "PAL"
 
-#: src/collections/videocollection.cpp:106
+#: src/collections/videocollection.cpp:102
 #, kde-format
 msgid "SECAM"
 msgstr "SECAM"
 
-#: src/collections/videocollection.cpp:107
+#: src/collections/videocollection.cpp:103
 #, kde-format
 msgid "Format"
 msgstr "Format"
 
-#: src/collections/videocollection.cpp:112
+#: src/collections/videocollection.cpp:108
 #, kde-format
 msgid "Cast"
 msgstr "Distribution"
 
-#: src/collections/videocollection.cpp:114
+#: src/collections/videocollection.cpp:110
 #: src/translators/xmlstatehandler.cpp:399
 #, kde-format
 msgid "Actor/Actress"
 msgstr "Acteur/Actrice"
 
-#: src/collections/videocollection.cpp:115
+#: src/collections/videocollection.cpp:111
 #: src/translators/xmlstatehandler.cpp:400
 #, kde-format
 msgid "Role"
 msgstr "Rôle"
 
-#: src/collections/videocollection.cpp:118
+#: src/collections/videocollection.cpp:114
 #, kde-format
 msgid "A table for the cast members, along with the roles they play"
 msgstr "Un tableau pour la distribution du film, avec le rôle joué"
 
-#: src/collections/videocollection.cpp:121
+#: src/collections/videocollection.cpp:117
 #, kde-format
 msgid "Director"
 msgstr "Réalisateur"
 
-#: src/collections/videocollection.cpp:127 src/fetch/discogsfetcher.cpp:324
+#: src/collections/videocollection.cpp:123 src/fetch/discogsfetcher.cpp:324
 #: src/fetch/discogsfetcher.cpp:509 src/fetch/rpggeekfetcher.cpp:207
 #, kde-format
 msgid "Producer"
 msgstr "Producteur"
 
-#: src/collections/videocollection.cpp:139
+#: src/collections/videocollection.cpp:135
 #, kde-format
 msgid "Composer"
 msgstr "Compositeur"
 
-#: src/collections/videocollection.cpp:145
+#: src/collections/videocollection.cpp:141
 #, kde-format
 msgid "Studio"
 msgstr "Studio"
 
-#: src/collections/videocollection.cpp:151
+#: src/collections/videocollection.cpp:147
 #, kde-format
 msgid "Language Tracks"
 msgstr "Langues disponibles"
 
-#: src/collections/videocollection.cpp:157
+#: src/collections/videocollection.cpp:153
 #, kde-format
 msgid "Subtitle Languages"
 msgstr "Langues des sous-titres"
 
-#: src/collections/videocollection.cpp:163
+#: src/collections/videocollection.cpp:159
 #, kde-format
 msgid "Audio Tracks"
 msgstr "Plages audio"
 
-#: src/collections/videocollection.cpp:169
+#: src/collections/videocollection.cpp:165
 #, kde-format
 msgid "Running Time"
 msgstr "Durée"
 
-#: src/collections/videocollection.cpp:171
+#: src/collections/videocollection.cpp:167
 #, kde-format
 msgid "The running time of the video (in minutes)"
 msgstr "Durée de la vidéo (en minutes)"
 
-#: src/collections/videocollection.cpp:174
+#: src/collections/videocollection.cpp:170
 #, kde-format
 msgid "Aspect Ratio"
 msgstr "Format d'image"
 
-#: src/collections/videocollection.cpp:179 src/fetch/amazonfetcher.cpp:1014
-#: src/fetch/upcitemdbfetcher.cpp:373
+#: src/collections/videocollection.cpp:175 src/fetch/amazonfetcher.cpp:1014
+#: src/fetch/upcitemdbfetcher.cpp:372
 #, kde-format
 msgid "Widescreen"
 msgstr "Écran large"
 
-#: src/collections/videocollection.cpp:184
+#: src/collections/videocollection.cpp:180
 #, kde-format
 msgid "Black & White"
 msgstr "Noir & blanc"
 
-#: src/collections/videocollection.cpp:185
+#: src/collections/videocollection.cpp:181
 #, kde-format
 msgid "Color Mode"
 msgstr "Format couleur"
 
-#: src/collections/videocollection.cpp:190 src/fetch/amazonfetcher.cpp:1035
-#: src/fetch/upcitemdbfetcher.cpp:397
+#: src/collections/videocollection.cpp:186 src/fetch/amazonfetcher.cpp:1035
+#: src/fetch/upcitemdbfetcher.cpp:396
 #, kde-format
 msgid "Director's Cut"
 msgstr "Version du réalisateur"
@@ -2636,7 +2636,7 @@ msgstr "Options du modèle"
 # unreviewed-context
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:354
-#: src/fetch/gcstarpluginfetcher.cpp:401 src/fetch/multifetcher.cpp:229
+#: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
@@ -3285,13 +3285,14 @@ msgstr "Encoder le fichier exporté au format local."
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
 #: src/fetch/igdbfetcher.cpp:163 src/fetch/isbndbfetcher.cpp:295
-#: src/fetch/kinofetcher.cpp:342 src/fetch/kinopoiskfetcher.cpp:269
-#: src/fetch/kinoteatrfetcher.cpp:376 src/fetch/mobygamesfetcher.cpp:345
-#: src/fetch/moviemeterfetcher.cpp:162 src/fetch/numistafetcher.cpp:285
-#: src/fetch/numistafetcher.cpp:293 src/fetch/omdbfetcher.cpp:182
-#: src/fetch/thegamesdbfetcher.cpp:172 src/fetch/themoviedbfetcher.cpp:239
-#: src/fetch/thetvdbfetcher.cpp:352 src/fetch/tvmazefetcher.cpp:269
-#: src/fetch/upcitemdbfetcher.cpp:251 src/fetch/vndbfetcher.cpp:182
+#: src/fetch/itunesfetcher.cpp:270 src/fetch/kinofetcher.cpp:342
+#: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:376
+#: src/fetch/mobygamesfetcher.cpp:345 src/fetch/moviemeterfetcher.cpp:162
+#: src/fetch/numistafetcher.cpp:285 src/fetch/numistafetcher.cpp:293
+#: src/fetch/omdbfetcher.cpp:182 src/fetch/thegamesdbfetcher.cpp:172
+#: src/fetch/themoviedbfetcher.cpp:239 src/fetch/thetvdbfetcher.cpp:352
+#: src/fetch/tvmazefetcher.cpp:269 src/fetch/upcitemdbfetcher.cpp:250
+#: src/fetch/vndbfetcher.cpp:182
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "La couverture n'a pas pu être chargée."
@@ -3664,7 +3665,7 @@ msgstr "Distributeur"
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
 #: src/fetch/imdbfetcher.cpp:1807 src/fetch/themoviedbfetcher.cpp:578
 #: src/fetch/thetvdbfetcher.cpp:577 src/fetch/tvmazefetcher.cpp:383
-#: src/field.cpp:335
+#: src/field.cpp:336
 #, kde-format
 msgid "Episodes"
 msgstr "Épisodes"
@@ -3686,11 +3687,12 @@ msgstr "Note AnimeNfo"
 #: src/fetch/filmasterfetcher.cpp:323 src/fetch/gaminghistoryfetcher.cpp:438
 #: src/fetch/googlescholarfetcher.cpp:284 src/fetch/hathitrustfetcher.cpp:318
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:614
-#: src/fetch/kinofetcher.cpp:380 src/fetch/kinoteatrfetcher.cpp:515
-#: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:223
-#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
-#: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
-#: src/fetch/upcitemdbfetcher.cpp:466 src/fetch/vndbfetcher.cpp:440
+#: src/fetch/itunesfetcher.cpp:330 src/fetch/kinofetcher.cpp:380
+#: src/fetch/kinoteatrfetcher.cpp:515 src/fetch/moviemeterfetcher.cpp:301
+#: src/fetch/mrlookupfetcher.cpp:223 src/fetch/musicbrainzfetcher.cpp:378
+#: src/fetch/openlibraryfetcher.cpp:424 src/fetch/springerfetcher.cpp:183
+#: src/fetch/tvmazefetcher.cpp:393 src/fetch/upcitemdbfetcher.cpp:465
+#: src/fetch/vndbfetcher.cpp:440
 #, kde-format
 msgid "This source has no options."
 msgstr "Cette source n'a pas d'option."
@@ -3705,7 +3707,7 @@ msgstr "Coloriste"
 msgid "Bedetheque Link"
 msgstr "Lien Bedetheque"
 
-#: src/fetch/bedethequefetcher.cpp:456 src/field.cpp:313
+#: src/fetch/bedethequefetcher.cpp:456 src/field.cpp:314
 #, kde-format
 msgid "ISBN#"
 msgstr "ISBN#"
@@ -3823,7 +3825,7 @@ msgstr "Liens Discogs"
 #. i18n("Nationality");
 #: src/fetch/discogsfetcher.cpp:331 src/fetch/discogsfetcher.cpp:512
 #: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
-#: src/fetch/upcitemdbfetcher.cpp:208 src/fetch/upcitemdbfetcher.cpp:459
+#: src/fetch/upcitemdbfetcher.cpp:207 src/fetch/upcitemdbfetcher.cpp:458
 #, kde-format
 msgid "Barcode"
 msgstr "Code barre"
@@ -4026,29 +4028,29 @@ msgstr "Lien Filmaster"
 msgid "Gaming History Link"
 msgstr "Lien pour l'historique de jeux"
 
-#: src/fetch/gcstarpluginfetcher.cpp:386
+#: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
 msgid "GCstar Plugin"
 msgstr "Module externe GCstar"
 
-#: src/fetch/gcstarpluginfetcher.cpp:408
+#: src/fetch/gcstarpluginfetcher.cpp:413
 #, kde-format
 msgid "Set the collection type of the data returned from the plugin."
 msgstr "Sélectionne le type de données retourné par le module externe."
 
 # unreviewed-context
-#: src/fetch/gcstarpluginfetcher.cpp:413
+#: src/fetch/gcstarpluginfetcher.cpp:418
 #, kde-format
 msgid "&Plugin: "
 msgstr "&Module externe : "
 
-#: src/fetch/gcstarpluginfetcher.cpp:419
+#: src/fetch/gcstarpluginfetcher.cpp:424
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
 msgstr "Sélectionner le module externe GCstar utilisé comme source de données."
 
 # unreviewed-context
-#: src/fetch/gcstarpluginfetcher.cpp:424
+#: src/fetch/gcstarpluginfetcher.cpp:429
 #, kde-format
 msgid "Author: "
 msgstr "Auteur : "
@@ -4059,7 +4061,7 @@ msgid "GiantBomb Link"
 msgstr "Lien GiantBomb"
 
 #: src/fetch/giantbombfetcher.cpp:207 src/fetch/igdbfetcher.cpp:576
-#: src/fetch/mobygamesfetcher.cpp:637 src/field.cpp:325
+#: src/fetch/mobygamesfetcher.cpp:637 src/field.cpp:326
 #, kde-format
 msgid "PEGI Rating"
 msgstr "Classement PEGI"
@@ -4109,7 +4111,7 @@ msgid "Internet Game Database (IGDB.com)"
 msgstr "Base de données de jeux sur Internet (IGDB.com)"
 
 #: src/fetch/igdbfetcher.cpp:578 src/fetch/mobygamesfetcher.cpp:639
-#: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:343
+#: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:344
 #, kde-format
 msgid "Screenshot"
 msgstr "Copie d'écran"
@@ -4159,7 +4161,7 @@ msgstr "Certifications"
 #: src/fetch/imdbfetcher.cpp:1802 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:399 src/fetch/themoviedbfetcher.cpp:574
 #: src/fetch/thetvdbfetcher.cpp:576 src/fetch/tvmazefetcher.cpp:382
-#: src/field.cpp:331
+#: src/field.cpp:332
 #, kde-format
 msgid "IMDb Link"
 msgstr "Lien IMDb"
@@ -4194,6 +4196,12 @@ msgid ""
 msgstr ""
 "Recherche par lot de valeur « ISBN » est plus rapide mais n'est disponible "
 "qu'avec des accès « Premium » ou « Pro plan »."
+
+#: src/fetch/itunesfetcher.cpp:196 src/fetch/itunesfetcher.cpp:323
+#, fuzzy, kde-format
+#| msgid "Allocine Link"
+msgid "iTunes Link"
+msgstr "Lien vers « Allociné »"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4762,64 +4770,64 @@ msgid "If checked, updating entries will overwrite any existing information."
 msgstr ""
 "Si cochée, la mise à jour des entrées remplacera les données existantes."
 
-#: src/field.cpp:196
+#: src/field.cpp:197
 #, kde-format
 msgid "Simple Text"
 msgstr "Texte simple"
 
-#: src/field.cpp:197
+#: src/field.cpp:198
 #, kde-format
 msgid "Paragraph"
 msgstr "Paragraphe"
 
-#: src/field.cpp:198
+#: src/field.cpp:199
 #, kde-format
 msgid "Choice"
 msgstr "Choix"
 
-#: src/field.cpp:199
+#: src/field.cpp:200
 #, kde-format
 msgid "Checkbox"
 msgstr "Case à cocher"
 
-#: src/field.cpp:202
+#: src/field.cpp:203
 #, kde-format
 msgid "Table"
 msgstr "Tableau"
 
-#: src/field.cpp:204
+#: src/field.cpp:205
 #, kde-format
 msgid "Date"
 msgstr "Date"
 
-#: src/field.cpp:290
+#: src/field.cpp:291
 #, kde-format
 msgctxt "ID # of the entry"
 msgid "ID"
 msgstr "ID"
 
-#: src/field.cpp:303
+#: src/field.cpp:304
 #, kde-format
 msgid "Date Created"
 msgstr "Créé le"
 
-#: src/field.cpp:308
+#: src/field.cpp:309
 #, kde-format
 msgid "Date Modified"
 msgstr "Modifié le"
 
-#: src/field.cpp:315
+#: src/field.cpp:316
 #, kde-format
 msgid "International Standard Book Number"
 msgstr "Numéro international normalisé du livre"
 
-#: src/field.cpp:339
+#: src/field.cpp:340
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
 msgstr "Saison"
 
-#: src/field.cpp:340
+#: src/field.cpp:341
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
@@ -4932,92 +4940,87 @@ msgctxt "Edit Label"
 msgid "%1:"
 msgstr "%1 :"
 
-#: src/gui/filterrulewidget.cpp:66
+#: src/gui/filterrulewidget.cpp:64
 #, kde-format
 msgid "Any Field"
 msgstr "Tout champ"
 
-#: src/gui/filterrulewidget.cpp:105
-#, kde-format
-msgid "Edit..."
-msgstr "Éditer..."
-
-#: src/gui/filterrulewidget.cpp:269 src/gui/filterrulewidget.cpp:277
-#: src/gui/filterrulewidget.cpp:291 src/gui/filterrulewidget.cpp:297
+#: src/gui/filterrulewidget.cpp:234 src/gui/filterrulewidget.cpp:242
+#: src/gui/filterrulewidget.cpp:256 src/gui/filterrulewidget.cpp:262
 #, kde-format
 msgid "equals"
 msgstr "égal à"
 
-#: src/gui/filterrulewidget.cpp:270 src/gui/filterrulewidget.cpp:278
-#: src/gui/filterrulewidget.cpp:292 src/gui/filterrulewidget.cpp:298
+#: src/gui/filterrulewidget.cpp:235 src/gui/filterrulewidget.cpp:243
+#: src/gui/filterrulewidget.cpp:257 src/gui/filterrulewidget.cpp:263
 #, kde-format
 msgid "does not equal"
 msgstr "différent de"
 
-#: src/gui/filterrulewidget.cpp:271 src/gui/filterrulewidget.cpp:279
-#: src/gui/filterrulewidget.cpp:299
+#: src/gui/filterrulewidget.cpp:236 src/gui/filterrulewidget.cpp:244
+#: src/gui/filterrulewidget.cpp:264
 #, kde-format
 msgid "matches regular expression"
 msgstr "Correspond à l'expression rationnelle"
 
-#: src/gui/filterrulewidget.cpp:272 src/gui/filterrulewidget.cpp:280
-#: src/gui/filterrulewidget.cpp:300
+#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
+#: src/gui/filterrulewidget.cpp:265
 #, kde-format
 msgid "does not match regular expression"
 msgstr "Ne correspond pas à l'expression rationnelle"
 
-#: src/gui/filterrulewidget.cpp:273
+#: src/gui/filterrulewidget.cpp:238
 #, kde-format
 msgctxt "is before a date"
 msgid "is before"
 msgstr "est plus ancien"
 
-#: src/gui/filterrulewidget.cpp:274
+#: src/gui/filterrulewidget.cpp:239
 #, kde-format
 msgctxt "is after a date"
 msgid "is after"
 msgstr "est plus récent"
 
-#: src/gui/filterrulewidget.cpp:281
+#: src/gui/filterrulewidget.cpp:246
 #, kde-format
 msgctxt "is less than a number"
 msgid "is less than"
 msgstr "est plus petit que"
 
-#: src/gui/filterrulewidget.cpp:282
+#: src/gui/filterrulewidget.cpp:247
 #, kde-format
 msgctxt "is greater than a number"
 msgid "is greater than"
 msgstr "est plus grand que"
 
-#: src/gui/filterrulewidget.cpp:285
+#: src/gui/filterrulewidget.cpp:250
 #, kde-format
 msgid "image size equals"
 msgstr "La taille de l'image est égale à"
 
-#: src/gui/filterrulewidget.cpp:286
+#: src/gui/filterrulewidget.cpp:251
 #, kde-format
 msgid "image size does not equal"
 msgstr "La taille de l'image est différente de"
 
-#: src/gui/filterrulewidget.cpp:287
+#: src/gui/filterrulewidget.cpp:252
 #, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
 msgstr "la taille de l'image est plus petite que"
 
-#: src/gui/filterrulewidget.cpp:288
+#: src/gui/filterrulewidget.cpp:253
 #, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
 msgstr "la taille de l'image est plus grande que"
 
-#: src/gui/filterrulewidget.cpp:295
+#: src/gui/filterrulewidget.cpp:260
 #, kde-format
 msgid "contains"
 msgstr "contenant"
 
-#: src/gui/filterrulewidget.cpp:296
+#: src/gui/filterrulewidget.cpp:261
 #, kde-format
 msgid "does not contain"
 msgstr "ne contenant pas"
@@ -7709,6 +7712,9 @@ msgstr "Chercher"
 #, kde-format
 msgid "Clear"
 msgstr "Effacer"
+
+#~ msgid "Edit..."
+#~ msgstr "Éditer..."
 
 #~ msgid ""
 #~ "%1 requires the network request to include identification.\n"
