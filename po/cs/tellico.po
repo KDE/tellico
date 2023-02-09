@@ -4,21 +4,21 @@
 # Vit Pelcak <vit@pelcak.org>, 2010, 2011, 2014, 2015, 2016, 2017.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
 #
-# Vit Pelcak, 2010, 2012, 2013, 2018, 2019, 2020, 2021, 2022.
+# Vit Pelcak, 2010, 2012, 2013, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-07 01:00+0000\n"
-"PO-Revision-Date: 2022-01-05 12:27+0100\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2023-02-08 12:37+0100\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.0\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2360,7 +2360,7 @@ msgstr ""
 #: src/configdialog.cpp:218
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
-msgstr ""
+msgstr "Povolit &regulární výrazy v rychlém filtru"
 
 #: src/configdialog.cpp:219
 #, kde-format
@@ -3739,7 +3739,7 @@ msgstr "Čárový kód"
 #: src/fetch/discogsfetcher.cpp:336 src/fetch/discogsfetcher.cpp:513
 #, kde-format
 msgid "Catalog Number"
-msgstr ""
+msgstr "Katalogové číslo"
 
 #: src/fetch/discogsfetcher.cpp:346
 #, kde-format
@@ -3903,13 +3903,13 @@ msgstr ""
 #, kde-format
 msgctxt "Country"
 msgid "Spain"
-msgstr ""
+msgstr "Španělsko"
 
 #: src/fetch/filmaffinityfetcher.cpp:495
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "USA"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -4087,10 +4087,9 @@ msgid ""
 msgstr ""
 
 #: src/fetch/itunesfetcher.cpp:196 src/fetch/itunesfetcher.cpp:323
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "iTunes Link"
-msgstr "Odkaz na Allocine"
+msgstr "Odkaz iTunes"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4173,7 +4172,7 @@ msgstr "SRU server"
 #: src/fetch/srufetcher.cpp:526
 #, kde-format
 msgid "Scheme: "
-msgstr ""
+msgstr "Schéma: "
 
 #: src/fetch/srufetcher.cpp:535 src/fetch/srufetcher.cpp:571
 #, kde-format
@@ -4786,7 +4785,7 @@ msgstr "Lidé"
 #: src/gui/collectiontemplatedialog.ui:43
 #, kde-format
 msgid "Template Name:"
-msgstr ""
+msgstr "Název šablony:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
@@ -4805,7 +4804,7 @@ msgstr "Ikona:"
 #: src/gui/collectiontemplatedialog.cpp:56
 #, kde-format
 msgid "Save As Collection Template"
-msgstr ""
+msgstr "Uložit jako šablonu sbírky"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -5246,7 +5245,7 @@ msgstr "Tellico - software pro správu sbírek, svobodný a jednoduchý"
 #: src/main.cpp:123
 #, kde-format
 msgid "(c) 2001-2023, Robby Stephenson"
-msgstr ""
+msgstr "(c) 2001-2023, Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
@@ -5471,22 +5470,22 @@ msgstr "Uložit dokument jako jiný soubor..."
 #: src/mainwindow.cpp:335
 #, kde-format
 msgid "Save As Template..."
-msgstr ""
+msgstr "Uložit jako šablonu..."
 
 #: src/mainwindow.cpp:337
 #, kde-format
 msgid "Save as a collection template"
-msgstr ""
+msgstr "Uložit jako šablonu sbírky"
 
 #: src/mainwindow.cpp:340
 #, kde-format
 msgid "Print the contents of the collection..."
-msgstr ""
+msgstr "Tisk obsahu sbírky..."
 
 #: src/mainwindow.cpp:356
 #, kde-format
 msgid "Preview the contents of the collection..."
-msgstr ""
+msgstr "Náhled obsahu sbírky..."
 
 #: src/mainwindow.cpp:360
 #, kde-format
@@ -5611,12 +5610,12 @@ msgstr "Importovat referenční RIS soubor"
 #: src/mainwindow.cpp:431
 #, kde-format
 msgid "Import MARC Data..."
-msgstr ""
+msgstr "Importovat data MARC..."
 
 #: src/mainwindow.cpp:432
 #, kde-format
 msgid "Import MARC data"
-msgstr ""
+msgstr "Importovat data MARC"
 
 #: src/mainwindow.cpp:439
 #, kde-format
@@ -6195,7 +6194,7 @@ msgstr ""
 #: src/mainwindow.cpp:1190 src/mainwindow.cpp:1223
 #, kde-format
 msgid "Creating new collection..."
-msgstr ""
+msgstr "Vytváření nové sbírky..."
 
 #: src/mainwindow.cpp:1243 src/mainwindow.cpp:1266 src/mainwindow.cpp:1284
 #, kde-format
@@ -7117,12 +7116,12 @@ msgstr "Soubor LibraryThing:"
 #: src/translators/marcimporter.cpp:130
 #, kde-format
 msgid "Tellico was unable to read any data."
-msgstr ""
+msgstr "Tellico nemůže načíst jakákoliv data."
 
 #: src/translators/marcimporter.cpp:149
 #, kde-format
 msgid "MARC Options"
-msgstr ""
+msgstr "Možnosti MARC"
 
 #: src/translators/marcimporter.cpp:154
 #, kde-format
@@ -7132,7 +7131,7 @@ msgstr "Znaková sada:"
 #: src/translators/marcimporter.cpp:159
 #, kde-format
 msgid "MARC Format:"
-msgstr ""
+msgstr "Formát MARC:"
 
 #: src/translators/onixexporter.cpp:67
 #, kde-format
@@ -7529,6 +7528,3 @@ msgstr "Hledat"
 #, kde-format
 msgid "Clear"
 msgstr "Vymazat"
-
-#~ msgid "Edit..."
-#~ msgstr "Upravit..."

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-07 01:00+0000\n"
-"PO-Revision-Date: 2023-02-03 16:23+0100\n"
+"PO-Revision-Date: 2023-02-08 07:23+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -456,7 +456,7 @@ msgstr "ნაგულისხმები მნიშვნელობა:"
 #: src/collectionfieldsdialog.cpp:251
 #, kde-format
 msgid "<qt>A default value can be set for new entries.</qt>"
-msgstr ""
+msgstr "<qt>ახალი ჩანაწერების ნაგულისხმები მნიშვნელობა.</qt>"
 
 #: src/collectionfieldsdialog.cpp:256
 #, kde-format
@@ -2404,7 +2404,7 @@ msgstr "&სათაურებისა და სახელების �
 #: src/configdialog.cpp:268
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
-msgstr ""
+msgstr "თუ ჩართულია, სათაურები და სახელები ავტომატურად გადავა მაღალ რეგისტრში."
 
 #: src/configdialog.cpp:273
 #, kde-format
@@ -4005,10 +4005,9 @@ msgid ""
 msgstr ""
 
 #: src/fetch/itunesfetcher.cpp:196 src/fetch/itunesfetcher.cpp:323
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "iTunes Link"
-msgstr "Allocine -ის ბმული"
+msgstr "iTunes -ის ბმული"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -7243,7 +7242,7 @@ msgstr ""
 #: xslt/entry-templates/Album.xsl:170
 #, kde-format
 msgid "This template is meant for music collections only."
-msgstr ""
+msgstr "ეს შაბლონი მხოლოდ მუსიკის კოლექციებისთვისაა განკუთვნილი."
 
 #: xslt/entry-templates/Album.xsl:491
 #, kde-format
@@ -7253,7 +7252,7 @@ msgstr "ჯამი:"
 #: xslt/entry-templates/Video.xsl:200 xslt/report-templates/Tri-Column.xsl:124
 #, kde-format
 msgid "This template is meant for video collections only."
-msgstr ""
+msgstr "ეს შაბლონი მხოლოდ ვიდეოს კოლექციებისთვისაა განკუთვნილი."
 
 #: xslt/report-templates/Group_Summary.xsl:163
 #, kde-format
