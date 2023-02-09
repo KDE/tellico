@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-04 03:16+0000\n"
-"PO-Revision-Date: 2023-01-31 08:45+0100\n"
+"PO-Revision-Date: 2023-02-08 08:25+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -376,7 +376,7 @@ msgstr "<i>ჩასართავი</i> მარტივი დიახ/�
 #: src/collectionfieldsdialog.cpp:179
 #, kde-format
 msgid "<i>Number</i> indicates that the field contains a numerical value. "
-msgstr ""
+msgstr "<i>რიცხვი</i> უჩვენებს, რომ ველი რიცხვით მნიშვნელობას შეიცავს. "
 
 #: src/collectionfieldsdialog.cpp:180
 #, kde-format
@@ -384,6 +384,8 @@ msgid ""
 "<i>URL</i> is for fields which refer to URLs, including references to other "
 "files. "
 msgstr ""
+"<i>URL</i> ველებისთვისაა, რომლებიც ბმულებს შეიცავენ, სხვა ფაილებზე მიმართვის "
+"ჩათვლით. "
 
 #: src/collectionfieldsdialog.cpp:181
 #, kde-format
@@ -400,6 +402,7 @@ msgstr "<i>გამოსახულების</i> ველი სურა
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr ""
+"<i>თარიღის</i> ველი დღის, თვის და წლის ჩასაწერად შეგიძლიათ, გამოიყენოთ. "
 
 #: src/collectionfieldsdialog.cpp:184
 #, kde-format
@@ -453,7 +456,7 @@ msgstr "ნაგულისხმები მნიშვნელობა:"
 #: src/collectionfieldsdialog.cpp:252
 #, kde-format
 msgid "<qt>A default value can be set for new entries.</qt>"
-msgstr ""
+msgstr "<qt>ახალი ჩანაწერების ნაგულისხმები მნიშვნელობა.</qt>"
 
 #: src/collectionfieldsdialog.cpp:257
 #, kde-format
@@ -2388,7 +2391,7 @@ msgstr "&სათაურებისა და სახელების �
 #: src/configdialog.cpp:262
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
-msgstr ""
+msgstr "თუ ჩართულია, სათაურები და სახელები ავტომატურად გადავა მაღალ რეგისტრში."
 
 #: src/configdialog.cpp:267
 #, kde-format
@@ -5780,7 +5783,7 @@ msgstr "სტრიქონის &მაკროები..."
 #: src/mainwindow.cpp:649
 #, kde-format
 msgid "Edit the bibtex string macros"
-msgstr ""
+msgstr "Bibtex-ის სტრიქონს მაკროების ჩასწორება"
 
 #: src/mainwindow.cpp:652
 #, kde-format
@@ -6157,7 +6160,7 @@ msgstr "HTML ფაილები"
 #: src/tellico_kernel.cpp:267
 #, kde-format
 msgid "Do you really want to delete this filter?"
-msgstr ""
+msgstr "მართლა გნებავთ ამ ფილტრის წაშლა?"
 
 #: src/tellico_kernel.cpp:269
 #, kde-format
@@ -6285,7 +6288,7 @@ msgstr "&ბიბლიოთეკა:"
 #: src/translators/audiofileimporter.cpp:128
 #, kde-format
 msgid "Scanning audio files..."
-msgstr ""
+msgstr "აუდიო ფაილების სკანირება…"
 
 #: src/translators/audiofileimporter.cpp:188
 #: src/translators/audiofileimporter.cpp:191
@@ -6317,7 +6320,7 @@ msgstr "აუდიო ფაილის პარამეტრები"
 #: src/translators/audiofileimporter.cpp:495
 #, kde-format
 msgid "Recursive &folder search"
-msgstr ""
+msgstr "&საქაღალდეში რეკურსიული ძებნა"
 
 #: src/translators/audiofileimporter.cpp:496
 #, kde-format
@@ -7104,7 +7107,7 @@ msgstr ""
 #: xslt/entry-templates/Album.xsl:170
 #, kde-format
 msgid "This template is meant for music collections only."
-msgstr ""
+msgstr "ეს შაბლონი მხოლოდ მუსიკის კოლექციებისთვისაა განკუთვნილი."
 
 #: xslt/entry-templates/Album.xsl:491
 #, kde-format
@@ -7114,7 +7117,7 @@ msgstr "ჯამი:"
 #: xslt/entry-templates/Video.xsl:200 xslt/report-templates/Tri-Column.xsl:124
 #, kde-format
 msgid "This template is meant for video collections only."
-msgstr ""
+msgstr "ეს შაბლონი მხოლოდ ვიდეოს კოლექციებისთვისაა განკუთვნილი."
 
 #: xslt/report-templates/Group_Summary.xsl:163
 #, kde-format
