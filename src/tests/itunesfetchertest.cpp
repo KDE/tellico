@@ -47,7 +47,7 @@ void ItunesFetcherTest::testBurningEdge() {
   KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("itunes"));
   cg.writeEntry("Custom Fields", QStringLiteral("itunes"));
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Title,
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
                                        QStringLiteral("Burning Edge Of Dawn"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ItunesFetcher(this));
   fetcher->readConfig(cg);
@@ -91,4 +91,27 @@ void ItunesFetcherTest::testUpc() {
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
   QCOMPARE(trackList.count(), 10);
   QCOMPARE(trackList.at(0), QStringLiteral("The Dark Before the Dawn::Andrew Peterson::4:09"));
+}
+
+void ItunesFetcherTest::testTopGun() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
+                                       QStringLiteral("Top Gun"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ItunesFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Top Gun"));
+  QCOMPARE(entry->field(QStringLiteral("director")), QStringLiteral("Tony Scott"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1986"));
+  QCOMPARE(entry->field(QStringLiteral("nationality")), QStringLiteral("USA"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Action & Adventure"));
+  QCOMPARE(entry->field(QStringLiteral("certification")), QStringLiteral("PG (USA)"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(entry->field(QStringLiteral("plot")).startsWith(QLatin1String("A hip, heart-pounding combination of action")));
 }

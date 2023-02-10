@@ -24,6 +24,7 @@
 
 #include "itunesfetcher.h"
 #include "../collections/musiccollection.h"
+#include "../collections/videocollection.h"
 #include "../images/imagefactory.h"
 #include "../gui/combobox.h"
 #include "../core/filehandler.h"
@@ -69,11 +70,12 @@ QString ItunesFetcher::source() const {
 }
 
 bool ItunesFetcher::canSearch(Fetch::FetchKey k) const {
-  return k == Title || k == UPC;
+  return k == Keyword || k == UPC;
 }
 
 bool ItunesFetcher::canFetch(int type) const {
-  return type == Data::Collection::Album;
+  return type == Data::Collection::Album ||
+         type == Data::Collection::Video;
 }
 
 void ItunesFetcher::readConfigHook(const KConfigGroup& config_) {
@@ -91,10 +93,15 @@ void ItunesFetcher::search() {
   u = u.adjusted(QUrl::StripTrailingSlash);
   QUrlQuery q;
   switch(request().key()) {
-    case Title:
+    case Keyword:
       u.setPath(u.path() + QLatin1String("/search"));
-      q.addQueryItem(QStringLiteral("media"), QLatin1String("music"));
-      q.addQueryItem(QStringLiteral("entity"), QLatin1String("album"));
+      if(collectionType() == Data::Collection::Album) {
+        q.addQueryItem(QStringLiteral("media"), QLatin1String("music"));
+        q.addQueryItem(QStringLiteral("entity"), QLatin1String("album"));
+      } else if(collectionType() == Data::Collection::Video) {
+        q.addQueryItem(QStringLiteral("media"), QLatin1String("movie"));
+        q.addQueryItem(QStringLiteral("entity"), QLatin1String("movie"));
+      }
       q.addQueryItem(QStringLiteral("limit"), QString::number(ITUNES_MAX_RETURNS_TOTAL));
       q.addQueryItem(QStringLiteral("term"), request().value());
       break;
@@ -138,7 +145,7 @@ Tellico::Fetch::FetchRequest ItunesFetcher::updateRequest(Data::EntryPtr entry_)
 
   const QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
-    return FetchRequest(Title, title);
+    return FetchRequest(Keyword, title);
   }
 
   return FetchRequest();
@@ -188,7 +195,13 @@ void ItunesFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  Data::CollPtr coll(new Data::MusicCollection(true));
+  Data::CollPtr coll;
+  if(collectionType() == Data::Collection::Album) {
+    coll = new Data::MusicCollection(true);
+  } else if(collectionType() == Data::Collection::Video) {
+    coll = new Data::VideoCollection(true);
+  }
+
   // placeholder for collection id, to be removed later
   Data::FieldPtr f1(new Data::Field(QStringLiteral("collectionId"), QString(), Data::Field::Number));
   coll->addField(f1);
@@ -202,15 +215,15 @@ void ItunesFetcher::slotComplete(KJob* job_) {
   foreach(const QJsonValue& result, results) {
     // result kind must be an album
     auto obj = result.toObject();
-    if(obj.value(QLatin1String("wrapperType")) == QLatin1String("collection")) {
+    if(obj.value(QLatin1String("kind")) == QLatin1String("song")) {
+      readTrackInfo(obj.toVariantMap());
+    } else {
       Data::EntryPtr entry(new Data::Entry(coll));
       populateEntry(entry, obj.toVariantMap());
 
       FetchResult* r = new FetchResult(this, entry);
       m_entries.insert(r->uid, entry);
       fetchResults.append(r);
-    } else if(obj.value(QLatin1String("wrapperType")) == QLatin1String("track")) {
-      readTrackInfo(obj.toVariantMap());
     }
   }
 
@@ -239,7 +252,8 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
 
   // check if tracks need to be downloaded
   const QString collectionId = entry->field(QLatin1String("collectionId"));
-  if(!collectionId.isEmpty() && entry->field(QLatin1String("track")).isEmpty()) {
+  if(!collectionId.isEmpty() && collectionType() == Data::Collection::Album &&
+     entry->field(QLatin1String("track")).isEmpty()) {
     QUrl u(QString::fromLatin1(ITUNES_API_URL));
     u = u.adjusted(QUrl::StripTrailingSlash);
     u.setPath(u.path() + QLatin1String("/lookup"));
@@ -281,8 +295,29 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
 
 void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
   entry_->setField(QStringLiteral("collectionId"), mapValue(resultMap_, "collectionId"));
-  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "collectionName"));
-  entry_->setField(QStringLiteral("artist"), mapValue(resultMap_, "artistName"));
+  if(collectionType() == Data::Collection::Album) {
+    entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "collectionName"));
+    entry_->setField(QStringLiteral("artist"), mapValue(resultMap_, "artistName"));
+  } else if(collectionType() == Data::Collection::Video) {
+    entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "trackName"));
+    entry_->setField(QStringLiteral("director"), mapValue(resultMap_, "artistName"));
+    entry_->setField(QStringLiteral("nationality"), mapValue(resultMap_, "country"));
+    QString cert = mapValue(resultMap_, "contentAdvisoryRating");
+    if(cert == QStringLiteral("NR")) {
+      cert = QLatin1Char('U');
+    }
+    if(mapValue(resultMap_, "country") == QLatin1String("US")) {
+      cert += QStringLiteral(" (USA)");
+    } else {
+      cert += QLatin1String(" (") + mapValue(resultMap_, "country") + QLatin1Char(')');
+    }
+    QStringList certsAllowed = entry_->collection()->fieldByName(QStringLiteral("certification"))->allowed();
+    if(!certsAllowed.contains(cert)) {
+      certsAllowed << cert;
+    }
+    entry_->setField(QStringLiteral("certification"), cert);
+    entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "longDescription"));
+  }
   entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "releaseDate").left(4));
   entry_->setField(QStringLiteral("genre"), mapValue(resultMap_, "primaryGenreName"));
   entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "artworkUrl100"));
@@ -300,6 +335,8 @@ void ItunesFetcher::readTrackInfo(const QVariantMap& resultMap_) {
 
   const int collectionId = mapValue(resultMap_, "collectionId").toInt();
   const int idx = mapValue(resultMap_, "trackNumber").toInt();
+  if(idx < 1) return;
+
   QStringList tracks = m_trackList.value(collectionId);
   while(tracks.size() < idx) tracks << QString();
   tracks[idx-1] = trackInfo.join(FieldFormat::columnDelimiterString());

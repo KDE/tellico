@@ -36,6 +36,7 @@ private Q_SLOTS:
   void initTestCase();
   void testBurningEdge();
   void testUpc();
+  void testTopGun();
 };
 
 #endif
