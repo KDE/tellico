@@ -314,6 +314,8 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
     QStringList certsAllowed = entry_->collection()->fieldByName(QStringLiteral("certification"))->allowed();
     if(!certsAllowed.contains(cert)) {
       certsAllowed << cert;
+      Data::FieldPtr f = entry_->collection()->fieldByName(QStringLiteral("certification"));
+      f->setAllowed(certsAllowed);
     }
     entry_->setField(QStringLiteral("certification"), cert);
     entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "longDescription"));
