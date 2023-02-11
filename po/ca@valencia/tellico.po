@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-07 01:00+0000\n"
-"PO-Revision-Date: 2023-01-22 10:21+0100\n"
+"POT-Creation-Date: 2023-02-11 00:58+0000\n"
+"PO-Revision-Date: 2023-02-07 10:18+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -719,7 +719,7 @@ msgstr "Un camp amb un valor derivat ha de tindre una plantilla."
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
 #: src/fetch/imdbfetcher.cpp:831 src/fetch/imdbfetcher.cpp:1386
-#: src/fetch/itunesfetcher.cpp:197 src/fetch/kinopoiskfetcher.cpp:277
+#: src/fetch/itunesfetcher.cpp:210 src/fetch/kinopoiskfetcher.cpp:277
 #: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:459
 #: src/fetch/moviemeterfetcher.cpp:216 src/fetch/moviemeterfetcher.cpp:221
 #: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:359
@@ -3240,7 +3240,7 @@ msgstr "Codifica el fitxer exportat en la codificació regional."
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
 #: src/fetch/igdbfetcher.cpp:163 src/fetch/isbndbfetcher.cpp:295
-#: src/fetch/itunesfetcher.cpp:270 src/fetch/kinofetcher.cpp:342
+#: src/fetch/itunesfetcher.cpp:284 src/fetch/kinofetcher.cpp:342
 #: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:376
 #: src/fetch/mobygamesfetcher.cpp:345 src/fetch/moviemeterfetcher.cpp:162
 #: src/fetch/numistafetcher.cpp:285 src/fetch/numistafetcher.cpp:293
@@ -3635,7 +3635,7 @@ msgstr "Puntuació d'AnimeNfo"
 #: src/fetch/filmasterfetcher.cpp:323 src/fetch/gaminghistoryfetcher.cpp:438
 #: src/fetch/googlescholarfetcher.cpp:284 src/fetch/hathitrustfetcher.cpp:318
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:614
-#: src/fetch/itunesfetcher.cpp:330 src/fetch/kinofetcher.cpp:380
+#: src/fetch/itunesfetcher.cpp:367 src/fetch/kinofetcher.cpp:380
 #: src/fetch/kinoteatrfetcher.cpp:515 src/fetch/moviemeterfetcher.cpp:301
 #: src/fetch/mrlookupfetcher.cpp:223 src/fetch/musicbrainzfetcher.cpp:378
 #: src/fetch/openlibraryfetcher.cpp:424 src/fetch/springerfetcher.cpp:183
@@ -4135,11 +4135,10 @@ msgstr ""
 "La busca per lots de valors d'ISBN és més ràpida, però només estarà "
 "disponible per als plans Premium o Pro."
 
-#: src/fetch/itunesfetcher.cpp:196 src/fetch/itunesfetcher.cpp:323
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#: src/fetch/itunesfetcher.cpp:209 src/fetch/itunesfetcher.cpp:360
+#, kde-format
 msgid "iTunes Link"
-msgstr "Enllaç cap a Allocine"
+msgstr "Enllaç cap a iTunes"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -7611,6 +7610,3 @@ msgstr "Busca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
-
-#~ msgid "Edit..."
-#~ msgstr "Edita..."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-07 01:00+0000\n"
+"POT-Creation-Date: 2023-02-11 00:58+0000\n"
 "PO-Revision-Date: 2022-05-15 22:49+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -697,7 +697,7 @@ msgstr "값이 파생된 필드는 값 템플릿이 있어야 합니다."
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
 #: src/fetch/imdbfetcher.cpp:831 src/fetch/imdbfetcher.cpp:1386
-#: src/fetch/itunesfetcher.cpp:197 src/fetch/kinopoiskfetcher.cpp:277
+#: src/fetch/itunesfetcher.cpp:210 src/fetch/kinopoiskfetcher.cpp:277
 #: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:459
 #: src/fetch/moviemeterfetcher.cpp:216 src/fetch/moviemeterfetcher.cpp:221
 #: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:359
@@ -3186,7 +3186,7 @@ msgstr "내보낸 파일을 사용자 로캘의 인코딩으로 인코딩합니�
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
 #: src/fetch/igdbfetcher.cpp:163 src/fetch/isbndbfetcher.cpp:295
-#: src/fetch/itunesfetcher.cpp:270 src/fetch/kinofetcher.cpp:342
+#: src/fetch/itunesfetcher.cpp:284 src/fetch/kinofetcher.cpp:342
 #: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:376
 #: src/fetch/mobygamesfetcher.cpp:345 src/fetch/moviemeterfetcher.cpp:162
 #: src/fetch/numistafetcher.cpp:285 src/fetch/numistafetcher.cpp:293
@@ -3578,7 +3578,7 @@ msgstr "AnimeNfo 등급"
 #: src/fetch/filmasterfetcher.cpp:323 src/fetch/gaminghistoryfetcher.cpp:438
 #: src/fetch/googlescholarfetcher.cpp:284 src/fetch/hathitrustfetcher.cpp:318
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:614
-#: src/fetch/itunesfetcher.cpp:330 src/fetch/kinofetcher.cpp:380
+#: src/fetch/itunesfetcher.cpp:367 src/fetch/kinofetcher.cpp:380
 #: src/fetch/kinoteatrfetcher.cpp:515 src/fetch/moviemeterfetcher.cpp:301
 #: src/fetch/mrlookupfetcher.cpp:223 src/fetch/musicbrainzfetcher.cpp:378
 #: src/fetch/openlibraryfetcher.cpp:424 src/fetch/springerfetcher.cpp:183
@@ -4066,7 +4066,7 @@ msgid ""
 msgstr ""
 "ISBN 일괄 검색은 더 빠르지만 Premium 또는 Pro 구독 중에만 사용할 수 있습니다."
 
-#: src/fetch/itunesfetcher.cpp:196 src/fetch/itunesfetcher.cpp:323
+#: src/fetch/itunesfetcher.cpp:209 src/fetch/itunesfetcher.cpp:360
 #, fuzzy, kde-format
 #| msgid "Allocine Link"
 msgid "iTunes Link"
