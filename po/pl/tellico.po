@@ -10,13 +10,13 @@
 # Łukasz Purgal <lookanio@gmail.com>, 2011.
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2011, 2013.
 # Lukasz Purgal (Lookanio) <lookanio@gmail.com>, 2011, 2013.
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2012, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2012, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-04 03:16+0000\n"
-"PO-Revision-Date: 2022-08-21 07:10+0200\n"
+"PO-Revision-Date: 2023-02-11 07:44+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5201,10 +5201,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - oprogramowanie do zarządzania zbiorami, darmowe i proste"
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2022, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2023, Robby Stephenson"
-msgstr "(c) 2001-2022, Robby Stephenson"
+msgstr "(c) 2001-2023, Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
