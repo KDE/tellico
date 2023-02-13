@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-11 00:58+0000\n"
-"PO-Revision-Date: 2023-02-08 07:23+0100\n"
+"PO-Revision-Date: 2023-02-12 09:24+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -5168,22 +5168,22 @@ msgstr "ბოლო ფაილი ავტომატურად არ �
 #: src/main.cpp:145
 #, kde-format
 msgid "Import <filename> as a bibtex file"
-msgstr ""
+msgstr "<filename>-ის bibitex-ის ფაილის სახით შემოტანა"
 
 #: src/main.cpp:146
 #, kde-format
 msgid "Import <filename> as a MODS file"
-msgstr ""
+msgstr "<filename>-ის MODS-ის ფაილის სახით შემოტანა"
 
 #: src/main.cpp:147
 #, kde-format
 msgid "Import <filename> as a RIS file"
-msgstr ""
+msgstr "<filename>-ის RIS-ის ფაილის სახით შემოტანა"
 
 #: src/main.cpp:148
 #, kde-format
 msgid "Import <filename> as a PDF file"
-msgstr ""
+msgstr "<filename>-ის PDF-ის ფაილის სახით შემოტანა"
 
 #: src/main.cpp:149
 #, kde-format
