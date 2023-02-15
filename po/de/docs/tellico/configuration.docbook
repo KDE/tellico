@@ -60,7 +60,9 @@
 >Allgemeine Optionen</guilabel
 > für das Verhalten des Programms eingestellt werden. Bilder können in der Datendatei oder getrennt im Anwendungsverzeichnis von &appname; gespeichert werden. Bei Start kann &appname; automatisch wieder die zuletzt geöffnete Datei laden. im Dialog <guilabel
 >Tipp des Tages</guilabel
-> werden hilfreiche Informationen zum Arbeiten mit &appname; angezeigt, er kann beim Start angezeigt werden. Sie sollten diese Tipps einmal lesen und dann den Dialog deaktivieren. </para>
+> werden hilfreiche Informationen zum Arbeiten mit &appname; angezeigt, er kann beim Start angezeigt werden. Sie sollten diese Tipps einmal lesen und dann den Dialog deaktivieren. Der <interface
+>Schnellfilter</interface
+> in der Werkzeugleiste ist nützlich zum Filtern Ihrer Sammlung und kann mit regulären Ausdrücken umgehen. </para>
 
 <para
 >In den <guilabel
@@ -262,6 +264,12 @@
 ><simpara
 >the <link linkend="omdb"
 >Open Movie Database</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="filmaffinity"
+>FilmAffinity</link
 >,</simpara
 ></listitem>
 <!-- comics -->
@@ -606,7 +614,16 @@
 <para
 ><ulink url="http://allocine.fr"
 >AlloCiné</ulink
-> ist ein Online-Informationsdienste über Filme aus Frankreich. Die Browserkennung muss in den &systemsettings; aktiviert sein. </para>
+> ist ein Online-Informationsdienste über Filme aus Frankreich. </para>
+</sect3>
+
+<sect3 id="filmaffinity">
+<title
+>FilmAffinity</title>
+<para
+><ulink url="https://filmaffinity.com"
+>FilmAffinity</ulink
+> ist eine unabhängige Film-Seite. </para>
 </sect3>
 
 </sect2>
@@ -622,7 +639,7 @@
 <para
 ><ulink url="http://discogs.com"
 >Discogs.com</ulink
-> ist eine von Freiwilligen erstellte Musikdatenbank mit Informationen über Künstler, Labels und Aufnahmen. Die Anmeldung ist für einen freien Zugriff auf die Daten erforderlich. Die Browserkennung muss in den &systemsettings; aktiviert sein. </para>
+> ist eine von Freiwilligen erstellte Musikdatenbank mit Informationen über Künstler, Labels und Aufnahmen. Die Anmeldung ist für einen freien Zugriff auf die Daten erforderlich. </para>
 </sect3>
 
 <sect3 id="musicbrainz">
@@ -631,7 +648,7 @@
 <para
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
-> ist eine von Benutzern gemeinsam erstellte Datenbank für Musik-Metadaten die umfassende Informationen über Musik zur Verfügung stellt. Die Browserkennung muss in den &systemsettings; aktiviert sein. </para>
+> ist eine von Benutzern gemeinsam erstellte Datenbank für Musik-Metadaten die umfassende Informationen über Musik zur Verfügung stellt. </para>
 </sect3>
 
 </sect2>
