@@ -99,11 +99,11 @@ void ItunesFetcher::search() {
         q.addQueryItem(QStringLiteral("media"), QLatin1String("music"));
         q.addQueryItem(QStringLiteral("entity"), QLatin1String("album"));
       } else if(collectionType() == Data::Collection::Video) {
-        q.addQueryItem(QStringLiteral("media"), QLatin1String("movie"));
-        q.addQueryItem(QStringLiteral("entity"), QLatin1String("movie"));
+        q.addQueryItem(QStringLiteral("media"), QLatin1String("movie,tvShow"));
+        q.addQueryItem(QStringLiteral("entity"), QLatin1String("movie,tvSeason"));
       }
       q.addQueryItem(QStringLiteral("limit"), QString::number(ITUNES_MAX_RETURNS_TOTAL));
-      q.addQueryItem(QStringLiteral("term"), request().value());
+      q.addQueryItem(QStringLiteral("term"),  QString::fromLatin1(QUrl::toPercentEncoding(request().value())));
       break;
 
     case UPC:
@@ -299,8 +299,12 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
     entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "collectionName"));
     entry_->setField(QStringLiteral("artist"), mapValue(resultMap_, "artistName"));
   } else if(collectionType() == Data::Collection::Video) {
-    entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "trackName"));
-    entry_->setField(QStringLiteral("director"), mapValue(resultMap_, "artistName"));
+    if(mapValue(resultMap_, "collectionType") == QLatin1String("TV Season")) {
+      entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "artistName"));
+    } else {
+      entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "trackName"));
+      entry_->setField(QStringLiteral("director"), mapValue(resultMap_, "artistName"));
+    }
     entry_->setField(QStringLiteral("nationality"), mapValue(resultMap_, "country"));
     QString cert = mapValue(resultMap_, "contentAdvisoryRating");
     if(cert == QStringLiteral("NR")) {
