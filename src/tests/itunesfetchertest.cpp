@@ -136,3 +136,25 @@ void ItunesFetcherTest::testFirefly() {
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(entry->field(QStringLiteral("plot")).startsWith(QLatin1String("Five hundred years")));
 }
+
+void ItunesFetcherTest::testEscapingGravity() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword,
+                                       QStringLiteral("Escaping Gravity"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ItunesFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Escaping Gravity: My Quest to Transform NASA and Launch a New Space Age (Unabridged)"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Lori Garver"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2022"));
+  QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("E-Book"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Science & Nature"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(entry->field(QStringLiteral("plot")).startsWith(QLatin1String("The inside look")));
+}

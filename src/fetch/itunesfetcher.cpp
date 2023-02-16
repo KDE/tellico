@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2023 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "itunesfetcher.h"
+#include "../collections/bookcollection.h"
 #include "../collections/musiccollection.h"
 #include "../collections/videocollection.h"
 #include "../images/imagefactory.h"
@@ -74,8 +75,9 @@ bool ItunesFetcher::canSearch(Fetch::FetchKey k) const {
 }
 
 bool ItunesFetcher::canFetch(int type) const {
-  return type == Data::Collection::Album ||
-         type == Data::Collection::Video;
+  return type == Data::Collection::Book
+      || type == Data::Collection::Album
+      || type == Data::Collection::Video;
 }
 
 void ItunesFetcher::readConfigHook(const KConfigGroup& config_) {
@@ -95,7 +97,10 @@ void ItunesFetcher::search() {
   switch(request().key()) {
     case Keyword:
       u.setPath(u.path() + QLatin1String("/search"));
-      if(collectionType() == Data::Collection::Album) {
+      if(collectionType() == Data::Collection::Book) {
+        q.addQueryItem(QStringLiteral("media"), QLatin1String("audiobook"));
+        q.addQueryItem(QStringLiteral("entity"), QLatin1String("audiobook"));
+      } else if(collectionType() == Data::Collection::Album) {
         q.addQueryItem(QStringLiteral("media"), QLatin1String("music"));
         q.addQueryItem(QStringLiteral("entity"), QLatin1String("album"));
       } else if(collectionType() == Data::Collection::Video) {
@@ -196,11 +201,14 @@ void ItunesFetcher::slotComplete(KJob* job_) {
   }
 
   Data::CollPtr coll;
-  if(collectionType() == Data::Collection::Album) {
+  if(collectionType() == Data::Collection::Book) {
+    coll = new Data::BookCollection(true);
+  } else if(collectionType() == Data::Collection::Album) {
     coll = new Data::MusicCollection(true);
   } else if(collectionType() == Data::Collection::Video) {
     coll = new Data::VideoCollection(true);
   }
+  Q_ASSERT(coll);
 
   // placeholder for collection id, to be removed later
   Data::FieldPtr f1(new Data::Field(QStringLiteral("collectionId"), QString(), Data::Field::Number));
@@ -295,7 +303,11 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
 
 void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
   entry_->setField(QStringLiteral("collectionId"), mapValue(resultMap_, "collectionId"));
-  if(collectionType() == Data::Collection::Album) {
+  if(collectionType() == Data::Collection::Book) {
+    entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "collectionName"));
+    entry_->setField(QStringLiteral("author"), mapValue(resultMap_, "artistName"));
+    entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "description"));
+  } else if(collectionType() == Data::Collection::Album) {
     entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "collectionName"));
     entry_->setField(QStringLiteral("artist"), mapValue(resultMap_, "artistName"));
   } else if(collectionType() == Data::Collection::Video) {
@@ -324,7 +336,12 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
     entry_->setField(QStringLiteral("certification"), cert);
     entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "longDescription"));
   }
-  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "releaseDate").left(4));
+  if(collectionType() == Data::Collection::Book) {
+    entry_->setField(QStringLiteral("binding"), i18n("E-Book"));
+    entry_->setField(QStringLiteral("pub_year"), mapValue(resultMap_, "releaseDate").left(4));
+  } else {
+    entry_->setField(QStringLiteral("year"), mapValue(resultMap_, "releaseDate").left(4));
+  }
   entry_->setField(QStringLiteral("genre"), mapValue(resultMap_, "primaryGenreName"));
   entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "artworkUrl100"));
   if(optionalFields().contains(QStringLiteral("itunes"))) {

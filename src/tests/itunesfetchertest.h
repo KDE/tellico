@@ -38,6 +38,7 @@ private Q_SLOTS:
   void testUpc();
   void testTopGun();
   void testFirefly();
+  void testEscapingGravity();
 };
 
 #endif
