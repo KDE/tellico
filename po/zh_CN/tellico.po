@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-11 00:58+0000\n"
-"PO-Revision-Date: 2023-02-07 11:02\n"
+"PO-Revision-Date: 2023-02-15 11:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -3995,10 +3995,9 @@ msgid ""
 msgstr ""
 
 #: src/fetch/itunesfetcher.cpp:209 src/fetch/itunesfetcher.cpp:360
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "iTunes Link"
-msgstr "Discogs 链接"
+msgstr ""
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -7300,6 +7299,3 @@ msgstr "搜索"
 #, kde-format
 msgid "Clear"
 msgstr "清除"
-
-#~ msgid "Edit..."
-#~ msgstr "编辑..."
