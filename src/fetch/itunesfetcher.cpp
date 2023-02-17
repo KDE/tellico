@@ -43,7 +43,7 @@
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
-#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -61,7 +61,8 @@ using Tellico::Fetch::ItunesFetcher;
 ItunesFetcher::ItunesFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false)
-    , m_isTV(false) {
+    , m_isTV(false)
+    , m_imageSize(LargeImage) {
 }
 
 ItunesFetcher::~ItunesFetcher() {
@@ -82,7 +83,10 @@ bool ItunesFetcher::canFetch(int type) const {
 }
 
 void ItunesFetcher::readConfigHook(const KConfigGroup& config_) {
-  Q_UNUSED(config_)
+  const int imageSize = config_.readEntry("Image Size", -1);
+  if(imageSize > -1) {
+    m_imageSize = static_cast<ImageSize>(imageSize);
+  }
 }
 
 void ItunesFetcher::saveConfigHook(KConfigGroup& config_) {
@@ -227,7 +231,6 @@ void ItunesFetcher::slotComplete(KJob* job_) {
 
   QList<FetchResult*> fetchResults;
   foreach(const QJsonValue& result, results) {
-    // result kind must be an album
     auto obj = result.toObject();
     if(obj.value(QLatin1String("kind")) == QLatin1String("song")) {
       readTrackInfo(obj.toVariantMap());
@@ -297,7 +300,16 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
   // image might still be a URL
   const QString image_id = entry->field(QStringLiteral("cover"));
   if(image_id.contains(QLatin1Char('/'))) {
-    const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true /* quiet */);
+    // default image is the 100x100 size and considered 'Small'
+    QString newImage = image_id;
+    if(m_imageSize == LargeImage) {
+      newImage.replace(QLatin1String("100x100"), QLatin1String("600x600"));
+    }
+    QString id = ImageFactory::addImage(QUrl::fromUserInput(newImage), true /* quiet */);
+    if(id.isEmpty() && newImage != image_id) {
+      // fallback to original
+      id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true /* quiet */);
+    }
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
@@ -359,7 +371,9 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
     entry_->setField(QStringLiteral("year"), mapValue(resultMap_, "releaseDate").left(4));
   }
   entry_->setField(QStringLiteral("genre"), mapValue(resultMap_, "primaryGenreName"));
-  entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "artworkUrl100"));
+  if(m_imageSize != NoImage) {
+    entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "artworkUrl100"));
+  }
   if(optionalFields().contains(QStringLiteral("itunes"))) {
     entry_->setField(QStringLiteral("itunes"), mapValue(resultMap_, "collectionViewUrl"));
   }
@@ -453,12 +467,37 @@ Tellico::StringHash ItunesFetcher::allOptionalFields() {
 
 ItunesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ItunesFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+  QGridLayout* l = new QGridLayout(optionsWidget());
+  l->setColumnStretch(1, 10);
+
+  int row = -1;
+
+  QLabel* label = new QLabel(i18n("&Image size: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_imageCombo = new GUI::ComboBox(optionsWidget());
+  m_imageCombo->addItem(i18n("No Image"), NoImage);
+  m_imageCombo->addItem(i18n("Small Image"), SmallImage);
+  m_imageCombo->addItem(i18n("Large Image"), LargeImage);
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_imageCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_imageCombo, row, 1);
+  label->setBuddy(m_imageCombo);
+
+  l->setRowStretch(++row, 10);
 
   // now add additional fields widget
   addFieldsWidget(ItunesFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+
+  if(fetcher_) {
+    m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+  } else { // defaults
+    m_imageCombo->setCurrentData(SmallImage);
+  }
+}
+
+void ItunesFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  const int n = m_imageCombo->currentData().toInt();
+  config_.writeEntry("Image Size", n);
 }
 
 QString ItunesFetcher::ConfigWidget::preferredName() const {

@@ -325,6 +325,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(HathiTrust);
 // music
   FETCHER_ADD(MusicBrainz);
+  FETCHER_ADD(Itunes);
 // video games
   FETCHER_ADD(TheGamesDB);
   FETCHER_ADD(IGDB);

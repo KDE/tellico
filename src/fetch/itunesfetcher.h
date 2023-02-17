@@ -37,6 +37,9 @@ namespace KIO {
 }
 
 namespace Tellico {
+  namespace GUI {
+    class ComboBox;
+  }
   namespace Fetch {
 
 /**
@@ -75,8 +78,10 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const ItunesFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE {}
+    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
     virtual QString preferredName() const Q_DECL_OVERRIDE;
+  private:
+     GUI::ComboBox* m_imageCombo;
   };
   friend class ConfigWidget;
 
@@ -101,6 +106,13 @@ private:
   QHash<int, QStringList> m_trackList;
   QPointer<KIO::StoredTransferJob> m_job;
   bool m_isTV;
+
+  enum ImageSize {
+    NoImage=0,
+    SmallImage=1, // small is the default 100x100
+    LargeImage=2, // large is 600x600
+  };
+  ImageSize m_imageSize;
 };
 
   } // end namespace
