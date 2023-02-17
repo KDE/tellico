@@ -60,7 +60,8 @@ using Tellico::Fetch::ItunesFetcher;
 
 ItunesFetcher::ItunesFetcher(QObject* parent_)
     : Fetcher(parent_)
-    , m_started(false) {
+    , m_started(false)
+    , m_isTV(false) {
 }
 
 ItunesFetcher::~ItunesFetcher() {
@@ -90,6 +91,7 @@ void ItunesFetcher::saveConfigHook(KConfigGroup& config_) {
 
 void ItunesFetcher::search() {
   m_started = true;
+  m_isTV = false;
 
   QUrl u(QString::fromLatin1(ITUNES_API_URL));
   u = u.adjusted(QUrl::StripTrailingSlash);
@@ -218,6 +220,10 @@ void ItunesFetcher::slotComplete(KJob* job_) {
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
+  if(collectionType() == Data::Collection::Video &&
+     optionalFields().contains(QStringLiteral("episode"))) {
+    coll->addField(Data::Field::createDefaultField(Data::Field::EpisodeField));
+  }
 
   QList<FetchResult*> fetchResults;
   foreach(const QJsonValue& result, results) {
@@ -284,6 +290,10 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
     }
   }
 
+  if(m_isTV && optionalFields().contains(QStringLiteral("episode"))) {
+    populateEpisodes(entry);
+  }
+
   // image might still be a URL
   const QString image_id = entry->field(QStringLiteral("cover"));
   if(image_id.contains(QLatin1Char('/'))) {
@@ -312,7 +322,11 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
     entry_->setField(QStringLiteral("artist"), mapValue(resultMap_, "artistName"));
   } else if(collectionType() == Data::Collection::Video) {
     if(mapValue(resultMap_, "collectionType") == QLatin1String("TV Season")) {
-      entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "artistName"));
+      m_isTV = true;
+      // collection Name includes season
+      entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "collectionName"));
+      // artistName is TV Show title
+      entry_->setField(QStringLiteral("keyword"), mapValue(resultMap_, "artistName"));
     } else {
       entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "trackName"));
       entry_->setField(QStringLiteral("director"), mapValue(resultMap_, "artistName"));
@@ -322,18 +336,20 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
     if(cert == QStringLiteral("NR")) {
       cert = QLatin1Char('U');
     }
-    if(mapValue(resultMap_, "country") == QLatin1String("US")) {
-      cert += QStringLiteral(" (USA)");
-    } else {
-      cert += QLatin1String(" (") + mapValue(resultMap_, "country") + QLatin1Char(')');
+    if(!cert.isEmpty()) {
+      if(mapValue(resultMap_, "country") == QLatin1String("US")) {
+        cert += QStringLiteral(" (USA)");
+      } else {
+        cert += QLatin1String(" (") + mapValue(resultMap_, "country") + QLatin1Char(')');
+      }
+      QStringList certsAllowed = entry_->collection()->fieldByName(QStringLiteral("certification"))->allowed();
+      if(!certsAllowed.contains(cert)) {
+        certsAllowed << cert;
+        Data::FieldPtr f = entry_->collection()->fieldByName(QStringLiteral("certification"));
+        f->setAllowed(certsAllowed);
+      }
+      entry_->setField(QStringLiteral("certification"), cert);
     }
-    QStringList certsAllowed = entry_->collection()->fieldByName(QStringLiteral("certification"))->allowed();
-    if(!certsAllowed.contains(cert)) {
-      certsAllowed << cert;
-      Data::FieldPtr f = entry_->collection()->fieldByName(QStringLiteral("certification"));
-      f->setAllowed(certsAllowed);
-    }
-    entry_->setField(QStringLiteral("certification"), cert);
     entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "longDescription"));
   }
   if(collectionType() == Data::Collection::Book) {
@@ -348,6 +364,56 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
     entry_->setField(QStringLiteral("itunes"), mapValue(resultMap_, "collectionViewUrl"));
   }
   m_collectionHash.insert(resultMap_.value(QLatin1String("collectionId")).toInt(), entry_);
+}
+
+void ItunesFetcher::populateEpisodes(Data::EntryPtr entry_) {
+  const QString collectionId = entry_->field(QLatin1String("collectionId"));
+  QUrl u(QString::fromLatin1(ITUNES_API_URL));
+  u = u.adjusted(QUrl::StripTrailingSlash);
+  u.setPath(u.path() + QLatin1String("/lookup"));
+  QUrlQuery q;
+  q.addQueryItem(QStringLiteral("entity"), QLatin1String("tvEpisode"));
+  q.addQueryItem(QStringLiteral("id"), collectionId);
+  u.setQuery(q);
+
+  auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  if(!job->exec()) {
+    myDebug() << "Failed downloa ditunes episodes";
+    return;
+   }
+
+#if 0
+  myWarning() << "Remove debug2 from ItunesFetcher.cpp";
+  QFile f(QStringLiteral("/tmp/test-itunes-episodes.json"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << job->data();
+  }
+  f.close();
+#endif
+
+  static const QRegularExpression seasonRx(QStringLiteral("Season (\\d+)"));
+  QMap<int, QString> episodeMap; // mapping episode number to episode string
+  QJsonDocument doc = QJsonDocument::fromJson(job->data());
+  QJsonArray results = doc.object().value(QLatin1String("results")).toArray();
+  foreach(const QJsonValue& result, results) {
+    auto map = result.toObject().toVariantMap();
+    if(mapValue(map, "kind") != QStringLiteral("tv-episode")) continue;
+    int seasonNumber = 1;
+    // the season number is in the collection title
+    auto match = seasonRx.match(mapValue(map, "collectionName"));
+    if(match.hasMatch()) {
+      seasonNumber = match.captured(1).toInt();
+    }
+    QString ep = mapValue(map, "trackName") + FieldFormat::columnDelimiterString() +
+                 QString::number(seasonNumber) + FieldFormat::columnDelimiterString() +
+                 mapValue(map, "trackNumber");
+    episodeMap.insert(seasonNumber*1000 + mapValue(map, "trackNumber").toInt(), ep);
+  }
+  // the QMap sorts the values in ascending order by key
+  const auto episodes = episodeMap.values();
+  entry_->setField(QStringLiteral("episode"), episodes.join(FieldFormat::rowDelimiterString()));
 }
 
 void ItunesFetcher::readTrackInfo(const QVariantMap& resultMap_) {
@@ -381,6 +447,7 @@ QString ItunesFetcher::defaultIcon() {
 Tellico::StringHash ItunesFetcher::allOptionalFields() {
   StringHash hash;
   hash[QStringLiteral("itunes")] = i18n("iTunes Link");
+  hash[QStringLiteral("episode")] = i18n("Episodes");
   return hash;
 }
 

@@ -117,9 +117,13 @@ void ItunesFetcherTest::testTopGun() {
 }
 
 void ItunesFetcherTest::testFirefly() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("itunes"));
+  cg.writeEntry("Custom Fields", QStringLiteral("itunes,episode"));
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
                                        QStringLiteral("Firefly"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ItunesFetcher(this));
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -128,13 +132,17 @@ void ItunesFetcherTest::testFirefly() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Firefly"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Firefly, The Complete Series"));
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2002"));
   QCOMPARE(entry->field(QStringLiteral("nationality")), QStringLiteral("USA"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Sci-Fi & Fantasy"));
+  QVERIFY(entry->field(QStringLiteral("certification")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(entry->field(QStringLiteral("plot")).startsWith(QLatin1String("Five hundred years")));
+  QStringList episodeList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("episode")));
+  QCOMPARE(episodeList.size(), 14);
+  QCOMPARE(episodeList.at(0), QStringLiteral("Serenity::1::1"));
 }
 
 void ItunesFetcherTest::testEscapingGravity() {
