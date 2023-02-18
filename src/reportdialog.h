@@ -73,6 +73,8 @@ private Q_SLOTS:
 private:
   void generateChart();
   void generateHtml();
+  void generateAllEntries();
+  void showText(const QString& text, const QUrl& url);
 
   QStackedWidget* m_reportView;
 #ifdef USE_KHTML

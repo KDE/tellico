@@ -79,6 +79,7 @@ namespace {
   static const char* dialogOptionsString = "Report Dialog Options";
   static const int INDEX_HTML = 0;
   static const int INDEX_CHART = 1;
+  static const int ALL_ENTRIES = -1;
 }
 
 using Tellico::ReportDialog;
@@ -123,6 +124,8 @@ ReportDialog::ReportDialog(QWidget* parent_)
     templates.insert(report->title(), report->uuid());
   }
 #endif
+  // special case for concatenating all entry templates
+  templates.insert(i18n("One Entry Per Page"), ALL_ENTRIES);
 
   m_templateCombo = new GUI::ComboBox(mainWidget);
   for(auto it = templates.constBegin(); it != templates.constEnd(); ++it) {
@@ -216,6 +219,9 @@ void ReportDialog::slotGenerate() {
   if(static_cast<QMetaType::Type>(curData.type()) == QMetaType::QUuid) {
     generateChart();
     m_reportView->setCurrentIndex(INDEX_CHART);
+  } else if(curData == ALL_ENTRIES) {
+    generateAllEntries();
+    m_reportView->setCurrentIndex(INDEX_HTML);
   } else {
     generateHtml();
     m_reportView->setCurrentIndex(INDEX_HTML);
@@ -261,6 +267,67 @@ void ReportDialog::generateHtml() {
   slotRefresh();
 }
 
+void ReportDialog::generateAllEntries() {
+  auto coll = Data::Document::self()->collection();
+  QString entryXSLTFile = Config::templateName(coll);
+  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("entry-templates/") +
+                                                      entryXSLTFile + QLatin1String(".xsl"));
+  if(xsltFile.isEmpty()) {
+    myWarning() << "can't locate " << entryXSLTFile << ".xsl";
+    return;
+  }
+  m_xsltFile = xsltFile;
+
+  delete m_exporter;
+  m_exporter = new Export::HTMLExporter(coll);
+  m_exporter->setXSLTFile(m_xsltFile);
+  m_exporter->setPrintHeaders(false); // the templates should take care of this themselves
+  m_exporter->setPrintGrouped(true); // allow templates to take advantage of added DOM
+  m_exporter->setGroupBy(Controller::self()->expandedGroupBy());
+  m_exporter->setSortTitles(Controller::self()->sortTitles());
+  m_exporter->setColumns(Controller::self()->visibleColumns());
+  long options = Export::ExportUTF8 | Export::ExportComplete | Export::ExportImages;
+  if(Config::autoFormat()) {
+    options |= Export::ExportFormatted;
+  }
+  m_exporter->setOptions(options);
+
+  if(Controller::self()->visibleEntries().isEmpty()) {
+    slotRefresh();
+    return;
+  }
+
+  // do some surgery on the HTML since we've got <html> elements in every page
+  static const QRegularExpression bodyRx(QLatin1String("<body[^>]*>"));
+  m_exporter->setEntries(Controller::self()->visibleEntries());
+  QString html = m_exporter->text();
+  auto bodyMatch = bodyRx.match(html);
+  Q_ASSERT(bodyMatch.hasMatch());
+  const QString htmlStart = html.left(bodyMatch.capturedStart() + bodyMatch.capturedLength());
+  const QString htmlEnd = html.mid(html.lastIndexOf(QLatin1String("</body")));
+  const QString htmlBetween = QStringLiteral("<p style=\"page-break-after: always;\">&nbsp;</p>"
+                                             "<p style=\"page-break-before: always;\">&nbsp;</p>");
+
+  // estimate how much space in the string to reserve
+  const auto estimatedSize = Controller::self()->visibleEntries().size() * html.size();
+  html = htmlStart;
+  html.reserve(1.1*estimatedSize);
+  foreach(Data::EntryPtr entry, Controller::self()->visibleEntries()) {
+    m_exporter->setEntries(Data::EntryList() << entry);
+    QString fullText = m_exporter->text();
+    // extract the body portion
+    auto bodyMatch = bodyRx.match(fullText);
+    if(bodyMatch.hasMatch()) {
+      const auto bodyEnd = fullText.lastIndexOf(QLatin1String("</body"));
+      const auto bodyLength = bodyEnd - bodyMatch.capturedEnd();
+      html += fullText.midRef(bodyMatch.capturedEnd(), bodyLength) + htmlBetween;
+    }
+  }
+  html += htmlEnd;
+  m_exporter->setCustomHtml(html);
+  showText(html, QUrl::fromLocalFile(m_xsltFile));
+}
+
 void ReportDialog::slotRefresh() {
   if(!m_exporter) {
     myWarning() << "no exporter";
@@ -278,27 +345,28 @@ void ReportDialog::slotRefresh() {
     options |= Export::ExportFormatted;
   }
   m_exporter->setOptions(options);
-
   // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
   // by simply using a relative path in the xslt file
-  QUrl u = QUrl::fromLocalFile(m_xsltFile);
+  showText(m_exporter->text(), QUrl::fromLocalFile(m_xsltFile));
+}
+
+void ReportDialog::showText(const QString& text_, const QUrl& url_) {
 #ifdef USE_KHTML
-  m_HTMLPart->begin(u);
-  m_HTMLPart->write(m_exporter->text());
+  m_HTMLPart->begin(url_);
+  m_HTMLPart->write(text_);
   m_HTMLPart->end();
 #else
-  const auto exporterText = m_exporter->text();
   // limit is 2 MB after percent encoding, etc., so give some padding
-  if(exporterText.size() > 1200000) {
+  if(text_.size() > 1200000) {
     delete m_tempFile;
     m_tempFile = new QTemporaryFile(QDir::tempPath() + QLatin1String("/tellicoreport_XXXXXX") + QLatin1String(".html"));
     m_tempFile->open();
     QTextStream stream(m_tempFile);
     stream.setCodec("UTF-8");
-    stream << exporterText;
+    stream << text_;
     m_webView->load(QUrl::fromLocalFile(m_tempFile->fileName()));
   } else {
-    m_webView->setHtml(exporterText, u);
+    m_webView->setHtml(text_, url_);
   }
 #endif
 #if 0
@@ -306,7 +374,7 @@ void ReportDialog::slotRefresh() {
   QFile f(QLatin1String("/tmp/test.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t << m_exporter->text();
+    t << text_;
   }
   f.close();
 #endif
