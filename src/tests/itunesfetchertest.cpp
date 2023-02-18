@@ -166,3 +166,25 @@ void ItunesFetcherTest::testEscapingGravity() {
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(entry->field(QStringLiteral("plot")).startsWith(QLatin1String("The inside look")));
 }
+
+void ItunesFetcherTest::testIsbn() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
+                                       QStringLiteral("9780316069359"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ItunesFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("The Fifth Witness"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Michael Connelly"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2011"));
+  QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("E-Book"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Mysteries & Thrillers; Police Procedural"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
+}
