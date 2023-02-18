@@ -129,7 +129,10 @@ void ItunesFetcher::search() {
 
     case UPC:
       u.setPath(u.path() + QLatin1String("/lookup"));
-      q.addQueryItem(QStringLiteral("entity"), QLatin1String("song"));
+      if(collectionType() == Data::Collection::Album) {
+        // include songs
+        q.addQueryItem(QStringLiteral("entity"), QLatin1String("song"));
+      }
       q.addQueryItem(QStringLiteral("upc"), request().value());
       break;
 
