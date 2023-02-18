@@ -31,6 +31,7 @@
 #include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
+#include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -73,7 +74,7 @@ QString ItunesFetcher::source() const {
 }
 
 bool ItunesFetcher::canSearch(Fetch::FetchKey k) const {
-  return k == Keyword || k == UPC;
+  return k == Keyword || k == ISBN || k == UPC;
 }
 
 bool ItunesFetcher::canFetch(int type) const {
@@ -115,6 +116,15 @@ void ItunesFetcher::search() {
       }
       q.addQueryItem(QStringLiteral("limit"), QString::number(ITUNES_MAX_RETURNS_TOTAL));
       q.addQueryItem(QStringLiteral("term"),  QString::fromLatin1(QUrl::toPercentEncoding(request().value())));
+      break;
+
+    case ISBN:
+      u.setPath(u.path() + QLatin1String("/lookup"));
+      {
+        QString isbn = ISBNValidator::isbn13(request().value());
+        isbn.remove(QLatin1Char('-'));
+        q.addQueryItem(QStringLiteral("isbn"), isbn);
+      }
       break;
 
     case UPC:
@@ -326,7 +336,9 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
 void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
   entry_->setField(QStringLiteral("collectionId"), mapValue(resultMap_, "collectionId"));
   if(collectionType() == Data::Collection::Book) {
-    entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "collectionName"));
+    QString title = mapValue(resultMap_, "collectionName");
+    if(title.isEmpty()) title = mapValue(resultMap_, "trackName");
+    entry_->setField(QStringLiteral("title"), title);
     entry_->setField(QStringLiteral("author"), mapValue(resultMap_, "artistName"));
     entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "description"));
   } else if(collectionType() == Data::Collection::Album) {
@@ -370,13 +382,26 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
   } else {
     entry_->setField(QStringLiteral("year"), mapValue(resultMap_, "releaseDate").left(4));
   }
-  entry_->setField(QStringLiteral("genre"), mapValue(resultMap_, "primaryGenreName"));
+
+  QStringList genres;
+  genres += mapValue(resultMap_, "primaryGenreName");
+  const auto genreList = resultMap_.value(QLatin1String("genres")).toList();
+  for(const auto& genre : genreList) {
+    genres += genre.toString();
+  }
+  genres.removeDuplicates();
+  genres.removeOne(QString()); // no empty genres
+  genres.removeOne(QLatin1String("Books")); // too generic
+  entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
+
   if(m_imageSize != NoImage) {
     entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "artworkUrl100"));
   }
+
   if(optionalFields().contains(QStringLiteral("itunes"))) {
     entry_->setField(QStringLiteral("itunes"), mapValue(resultMap_, "collectionViewUrl"));
   }
+
   m_collectionHash.insert(resultMap_.value(QLatin1String("collectionId")).toInt(), entry_);
 }
 
