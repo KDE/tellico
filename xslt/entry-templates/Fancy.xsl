@@ -121,6 +121,7 @@
     top: 2px;
     text-align: right;
     color: <xsl:value-of select="$color1"/>;
+    background-color: <xsl:value-of select="$color2"/>;
   }
   div#content {
     padding-left: 1%;
