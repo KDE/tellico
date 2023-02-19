@@ -53,7 +53,7 @@
 <xsl:template match="tc:tellico">
  <html>
   <head>
-   <base href="file://{$basedir}"/>
+   <base href="{$basedir}"/>
    <meta name="viewport" content="width=device-width, initial-scale=1"/>
    <style type="text/css">
    body {
