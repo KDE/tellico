@@ -215,6 +215,8 @@ bool HTMLExporter::loadXSLTFile() {
 }
 
 QString HTMLExporter::text() {
+  // allow caching or overriding the main html text
+  if(!m_customHtml.isEmpty()) return m_customHtml;
   if((!m_handler || !m_handler->isValid()) && !loadXSLTFile()) {
     myWarning() << "error loading xslt file:" << m_xsltFile;
     return QString();
@@ -542,6 +544,7 @@ void HTMLExporter::saveOptions(KSharedConfigPtr config_) {
 }
 
 void HTMLExporter::setXSLTFile(const QString& filename_) {
+  m_customHtml.clear();
   if(m_xsltFile == filename_) {
     return;
   }

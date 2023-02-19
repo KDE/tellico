@@ -82,6 +82,7 @@ public:
   void setColumns(const QStringList& columns) { m_columns = columns; }
   void setParseDOM(bool parseDOM) { m_parseDOM = parseDOM; reset(); }
   void setExportEntryFiles(bool exportEntryFiles) { m_exportEntryFiles = exportEntryFiles; }
+  void setCustomHtml(const QString& html_) { m_customHtml = html_; }
 
   QString text();
 
@@ -135,6 +136,7 @@ private:
   QList<QUrl> m_files;
   QHash<QString, QString> m_links;
   StringSet m_copiedFiles;
+  QString m_customHtml;
 };
 
   } // end namespace
