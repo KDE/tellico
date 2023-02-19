@@ -183,7 +183,7 @@ bool HTMLExporter::loadXSLTFile() {
   m_handler->addStringParam("date", QDate::currentDate().toString(Qt::ISODate).toLatin1());
   m_handler->addStringParam("time", QTime::currentTime().toString(Qt::ISODate).toLatin1());
   m_handler->addStringParam("user", KUser(KUser::UseRealUserID).loginName().toLatin1());
-  m_handler->addStringParam("basedir", u.adjusted(QUrl::RemoveFilename).path().toLocal8Bit());
+  m_handler->addStringParam("basedir", u.url(QUrl::RemoveFilename).toLocal8Bit());
 
   if(m_exportEntryFiles) {
     // export entries to same place as all the other date files
@@ -251,7 +251,13 @@ QString HTMLExporter::text() {
   f.close();
 #endif
 
+  // need to adjust the basedir if we're exporting to a url()
+  const auto oldBasedir = m_handler->param("basedir");
+  if(!url().isEmpty()) {
+    m_handler->addStringParam("basedir", url().url(QUrl::RemoveFilename).toLocal8Bit());
+  }
   const QString outputText = m_handler->applyStylesheet(output.toString());
+  m_handler->addParam("basedir", oldBasedir); // not ::addStringParam since it has quotes now
 #if 0
   myDebug() << "Remove debug2 from htmlexporter.cpp";
   QFile f2(QLatin1String("/tmp/test.html"));
