@@ -344,9 +344,19 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
     entry_->setField(QStringLiteral("title"), title);
     entry_->setField(QStringLiteral("author"), mapValue(resultMap_, "artistName"));
     entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "description"));
+    static const QRegularExpression publisherRx(QStringLiteral("^© \\d{4} (.+)$"));
+    auto publisherMatch = publisherRx.match(mapValue(resultMap_, "copyright"));
+    if(publisherMatch.hasMatch()) {
+      entry_->setField(QStringLiteral("publisher"), publisherMatch.captured(1));
+    }
   } else if(collectionType() == Data::Collection::Album) {
     entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "collectionName"));
     entry_->setField(QStringLiteral("artist"), mapValue(resultMap_, "artistName"));
+    static const QRegularExpression labelRx(QStringLiteral("^℗ \\d{4} ([^,]+)"));
+    auto labelMatch = labelRx.match(mapValue(resultMap_, "copyright"));
+    if(labelMatch.hasMatch()) {
+      entry_->setField(QStringLiteral("label"), labelMatch.captured(1));
+    }
   } else if(collectionType() == Data::Collection::Video) {
     if(mapValue(resultMap_, "collectionType") == QLatin1String("TV Season")) {
       m_isTV = true;

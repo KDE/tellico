@@ -162,6 +162,7 @@ void ItunesFetcherTest::testEscapingGravity() {
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2022"));
   QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("E-Book"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Science & Nature"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Blackstone Publishing"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(entry->field(QStringLiteral("plot")).startsWith(QLatin1String("The inside look")));
