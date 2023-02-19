@@ -174,9 +174,8 @@ void TellicoImporter::loadZipData() {
     buffer.reset();
     zip.reset(new KZip(fileRef().fileName()));
   } else {
-    QByteArray allData = data();
-    buffer.reset(new QBuffer(&allData));
-    zip.reset(new KZip(buffer.get()));
+    myDebug() << "Attempting to read text as a zip file";
+    return;
   }
   if(!zip->open(QIODevice::ReadOnly)) {
     setStatusMessage(i18n(errorLoad, url().fileName()));

@@ -618,3 +618,21 @@ void TellicoReadTest::testEmoji() {
   QVERIFY(entry2);
   QCOMPARE(entry2->title(), textWithEmoji);
 }
+
+void TellicoReadTest::testXmlWithJunk() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QSL("data/xml-with-junk.xml")));
+
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(!coll);
+
+  QFile f(url.toLocalFile());
+  QVERIFY(f.exists());
+  QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
+
+  QTextStream in(&f);
+  QString fileText = in.readAll();
+  Tellico::Import::TellicoImporter importer2(fileText);
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+  QVERIFY(!coll2);
+}

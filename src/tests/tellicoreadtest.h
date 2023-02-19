@@ -60,6 +60,7 @@ private Q_SLOTS:
   void testEmptyFirstTableRow();
   void testBug443845();
   void testEmoji();
+  void testXmlWithJunk();
 
 private:
   QList<Tellico::Data::CollPtr> m_collections;
