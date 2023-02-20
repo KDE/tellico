@@ -42,7 +42,7 @@
 #include <QUrlQuery>
 
 namespace {
-  static const char* MRLOOKUP_URL = "http://www.ams.org/mrlookup";
+  static const char* MRLOOKUP_URL = "https://mathscinet.ams.org/mrlookup";
 }
 
 using namespace Tellico;
@@ -143,6 +143,16 @@ void MRLookupFetcher::slotComplete(KJob* job_) {
   // if the pointer is retained, it gets double-deleted
   m_job = nullptr;
 
+#if 0
+  myWarning() << "Remove debug from mrlookup.cpp";
+  QFile f(QString::fromLatin1("/tmp/test-mrlookup.html"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << data;
+  }
+  f.close();
+#endif
   const QString text = QString::fromUtf8(data.constData(), data.size());
   QString bibtexString;
 
