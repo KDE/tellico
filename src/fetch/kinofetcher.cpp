@@ -80,7 +80,7 @@ void KinoFetcher::search() {
 
   QUrl u(QString::fromLatin1(KINO_BASE_URL));
   QUrlQuery q;
-  q.addQueryItem(QStringLiteral("sp_search_filter"), QStringLiteral("movie"));
+  q.addQueryItem(QStringLiteral("types"), QStringLiteral("movie"));
 
   switch(request().key()) {
     case Title:
@@ -131,24 +131,25 @@ void KinoFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = nullptr;
 
-  const QString s = Tellico::decodeHTML(data);
+  const QString pageText = Tellico::decodeHTML(data);
 #if 0
   myWarning() << "Remove debug from kinofetcher.cpp";
   QFile f(QStringLiteral("/tmp/test.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
-    t << s;
+    t << pageText;
   }
   f.close();
 #endif
 
-  QRegularExpression linkRx(QStringLiteral("<span class=\"alice-teaser-label\\s*?\">.+?Film.+?<a .+?teaser-link.+?href=\"(.+?)\".*?>(.+?)</"));
+  QRegularExpression linkRx(QStringLiteral("<div class=\"alice-teaser-title\">.*?<a .+?teaser-link.+?href=\"(.+?)\".*?>(.+?)</"),
+                            QRegularExpression::DotMatchesEverythingOption);
   QRegularExpression dateSpanRx(QStringLiteral("<span .+?movie-startdate.+?>(.+?)</span"));
   QRegularExpression dateRx(QStringLiteral("\\d{2}\\.\\d{2}\\.(\\d{4})"));
   QRegularExpression yearEndRx(QStringLiteral("(\\d{4})/?$"));
 
-  QRegularExpressionMatchIterator i = linkRx.globalMatch(s);
+  QRegularExpressionMatchIterator i = linkRx.globalMatch(pageText);
   while(i.hasNext()) {
     QRegularExpressionMatch match = i.next();
     QString u = match.captured(1);
@@ -165,7 +166,7 @@ void KinoFetcher::slotComplete(KJob*) {
     entry->setField(QStringLiteral("title"), match.captured(2));
 
     QString y;
-    QRegularExpressionMatch dateMatch = dateSpanRx.match(s, match.capturedEnd());
+    QRegularExpressionMatch dateMatch = dateSpanRx.match(pageText, match.capturedEnd());
     if(dateMatch.hasMatch()) {
       y = dateRx.match(dateMatch.captured(1)).captured(1);
     } else {
