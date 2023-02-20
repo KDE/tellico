@@ -313,7 +313,7 @@ Tellico::Data::EntryPtr NumistaFetcher::parseEntry(const QByteArray& data_) {
   QVariantMap objectMap = doc.object().toVariantMap();
   // for type, try to tease out from title
   // use ruler name as a possible fallback
-  QRegularExpression titleQuote(QStringLiteral("&quot;(.+)&quot;"));
+  QRegularExpression titleQuote(QStringLiteral("\"(.+)\""));
   QRegularExpressionMatch quoteMatch = titleQuote.match(mapValue(objectMap, "title"));
   if(quoteMatch.hasMatch()) {
     entry->setField(QStringLiteral("type"), quoteMatch.captured(1));
