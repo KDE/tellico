@@ -37,8 +37,9 @@
    <fields>
     <field name="_default"/>
    </fields>
-   <!-- only grab records whose type is Book, "Bog" -->
-   <xsl:apply-templates select="dbc:searchResponse/dbc:result/dbc:searchResult/dbc:collection/dbc:object/dkabm:record[dc:type[@xsi:type='dkdcplus:BibDK-Type']='Bog']"/>
+   <!-- only grab records whose type is Book, "Bog", or "EBog" -->
+   <xsl:apply-templates select="dbc:searchResponse/dbc:result/dbc:searchResult/dbc:collection/dbc:object/dkabm:record[dc:type[@xsi:type='dkdcplus:BibDK-Type']='Bog' or
+                                                                                                                      dc:type[@xsi:type='dkdcplus:BibDK-Type']='Ebog']"/>
   </collection>
  </tellico>
 </xsl:template>
@@ -57,6 +58,12 @@
    <pages>
     <xsl:value-of select="translate(dcterms:extent[contains(.,'sider')],$letters,'')"/>
    </pages>
+  </xsl:if>
+
+  <xsl:if test="dc:type[@xsi:type='dkdcplus:BibDK-Type']='Ebog'">
+   <binding i18n="yes">
+    <xsl:text>E-Book</xsl:text>
+   </binding>
   </xsl:if>
 
   <publishers>

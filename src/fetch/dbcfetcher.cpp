@@ -142,7 +142,6 @@ Tellico::Fetch::ConfigWidget* DBCFetcher::configWidget(QWidget* parent_) const {
 }
 
 QString DBCFetcher::defaultName() {
-//  return QLatin1String("Dansk BiblioteksCenter (DBC)");
   return i18n("Danish Bibliographic Center (DBC.dk)");
 }
 

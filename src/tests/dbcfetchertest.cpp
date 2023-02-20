@@ -54,12 +54,12 @@ void DBCFetcherTest::testTitle() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp. 6"));
   QCOMPARE(entry->field(QStringLiteral("author")), QString::fromUtf8("Karl Ove Knausgård"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Lindhardt og Ringhof"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2012"));
-  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-87-11-39183-9"));
-  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("487"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-87-11-39509-7"));
+  QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("E-Book"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("barndomserindringer; erindringer"));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
