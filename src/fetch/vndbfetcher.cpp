@@ -167,8 +167,8 @@ Tellico::Data::EntryPtr VNDBFetcher::fetchEntryHook(uint uid_) {
 //  myDebug() << get << m_state;
   get.append(0x04);
   m_socket->write(get);
-  // 5 sec is long enough?
-  m_socket->waitForReadyRead(5000);
+  // 5 sec was not long enough
+  m_socket->waitForReadyRead(8000);
 
   if(verifyData()) {
     parseReleaseResults(entry);

@@ -48,8 +48,8 @@ void VNDBFetcherTest::initTestCase() {
 
   m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("G-senjou no Maou"));
   m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2008"));
-  m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("Akabei Soft2"));
-  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Akabei Soft2"));
+  m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("AkabeiSoft2"));
+  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("AkabeiSoft2"));
   m_fieldValues.insert(QStringLiteral("origtitle"), QStringLiteral("G線上の魔王"));
   m_fieldValues.insert(QStringLiteral("alias"), QStringLiteral("The Devil on G-String"));
 }
