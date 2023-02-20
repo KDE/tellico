@@ -265,7 +265,8 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("nationality"), n);
   }
 
-  QRegularExpression lengthRx(QStringLiteral(">Dauer:(.*?)</li"));
+  QRegularExpression lengthRx(QStringLiteral(">Dauer:(.*?)</li"),
+                              QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatch lengthMatch = lengthRx.match(str_);
   if(lengthMatch.hasMatch()) {
     const QString l = lengthMatch.captured(1).remove(tagRx).remove(QStringLiteral(" Min")).trimmed();
@@ -284,7 +285,8 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
   }
 
-  QRegularExpression certRx(QStringLiteral(">FSK:(.*?)</a"));
+  QRegularExpression certRx(QStringLiteral(">FSK:(.*?)</a"),
+                            QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatch certMatch = certRx.match(str_);
   if(certMatch.hasMatch()) {
     // need to translate? Let's just add FSK ratings to the allowed values
@@ -322,8 +324,13 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
   }
 
   QRegularExpression plotRx(QStringLiteral("(<p class=\"movie-plot-synopsis\">.+?</p>)<(div|h2)"),
-                                          QRegularExpression::DotMatchesEverythingOption);
+                            QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatch plotMatch = plotRx.match(str_);
+  if(!plotMatch.hasMatch()) {
+    QRegularExpression plot2Rx(QStringLiteral("(</h2><p>.+?</p>)<(div|h2)"),
+                               QRegularExpression::DotMatchesEverythingOption);
+    plotMatch = plot2Rx.match(str_);
+  }
   if(plotMatch.hasMatch()) {
     QString plot;
     // sometimes the plot starts with double <p>
