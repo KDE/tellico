@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-19 00:58+0000\n"
+"POT-Creation-Date: 2023-02-20 00:58+0000\n"
 "PO-Revision-Date: 2022-05-15 22:49+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1104,7 +1104,7 @@ msgid "Trade Paperback"
 msgstr "대형 페이퍼백(큰 일반 서적)"
 
 #: src/collections/bookcollection.cpp:72 src/fetch/ibsfetcher.cpp:292
-#: src/fetch/itunesfetcher.cpp:383
+#: src/fetch/itunesfetcher.cpp:393
 #, kde-format
 msgid "E-Book"
 msgstr "전자책"
@@ -2512,7 +2512,7 @@ msgstr "제목 및 이름 형식(&F)"
 msgid "&Print field headers"
 msgstr "필드 머리글 인쇄(&P)"
 
-#: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:500
+#: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:508
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "이 옵션을 선택하면 필드 이름을 표 머리글로 인쇄합니다."
@@ -2527,7 +2527,7 @@ msgstr "그룹화 옵션"
 msgid "&Group the entries"
 msgstr "항목 그룹화(&G)"
 
-#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:505
+#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:513
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "이 옵션을 선택하면 항목이 선택한 필드별로 그룹화됩니다."
@@ -2764,7 +2764,7 @@ msgid "Template Packages"
 msgstr "템플릿 패키지"
 
 #: src/configdialog.cpp:1131 src/importdialog.cpp:429 src/mainwindow.cpp:1250
-#: src/mainwindow.cpp:1420 src/reportdialog.cpp:360 src/reportdialog.cpp:375
+#: src/mainwindow.cpp:1420 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -3490,7 +3490,7 @@ msgstr ""
 "에 사용할 데이터를 선택합니다."
 
 #: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:213
-#: src/fetch/itunesfetcher.cpp:503 src/fetch/mobygamesfetcher.cpp:671
+#: src/fetch/itunesfetcher.cpp:513 src/fetch/mobygamesfetcher.cpp:671
 #: src/fetch/rpggeekfetcher.cpp:222 src/fetch/thegamesdbfetcher.cpp:655
 #: src/fetch/videogamegeekfetcher.cpp:213
 #, kde-format
@@ -3498,7 +3498,7 @@ msgid "&Image size: "
 msgstr "이미지 크기(&I): "
 
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:217
-#: src/fetch/itunesfetcher.cpp:507 src/fetch/mobygamesfetcher.cpp:674
+#: src/fetch/itunesfetcher.cpp:517 src/fetch/mobygamesfetcher.cpp:674
 #: src/fetch/rpggeekfetcher.cpp:226 src/fetch/thegamesdbfetcher.cpp:658
 #: src/fetch/videogamegeekfetcher.cpp:217
 #, kde-format
@@ -3512,7 +3512,7 @@ msgstr "중간 이미지"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/itunesfetcher.cpp:508 src/fetch/mobygamesfetcher.cpp:676
+#: src/fetch/itunesfetcher.cpp:518 src/fetch/mobygamesfetcher.cpp:676
 #: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:660
 #: src/fetch/videogamegeekfetcher.cpp:218
 #, kde-format
@@ -3520,7 +3520,7 @@ msgid "Large Image"
 msgstr "큰 이미지"
 
 #: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:216
-#: src/fetch/itunesfetcher.cpp:506 src/fetch/mobygamesfetcher.cpp:677
+#: src/fetch/itunesfetcher.cpp:516 src/fetch/mobygamesfetcher.cpp:677
 #: src/fetch/rpggeekfetcher.cpp:225 src/fetch/thegamesdbfetcher.cpp:661
 #: src/fetch/videogamegeekfetcher.cpp:216
 #, kde-format
@@ -3567,7 +3567,7 @@ msgid "Distributor"
 msgstr "배급사"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
-#: src/fetch/imdbfetcher.cpp:1807 src/fetch/itunesfetcher.cpp:492
+#: src/fetch/imdbfetcher.cpp:1807 src/fetch/itunesfetcher.cpp:502
 #: src/fetch/themoviedbfetcher.cpp:578 src/fetch/thetvdbfetcher.cpp:577
 #: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:336
 #, kde-format
@@ -4078,7 +4078,7 @@ msgid ""
 msgstr ""
 "ISBN 일괄 검색은 더 빠르지만 Premium 또는 Pro 구독 중에만 사용할 수 있습니다."
 
-#: src/fetch/itunesfetcher.cpp:236 src/fetch/itunesfetcher.cpp:491
+#: src/fetch/itunesfetcher.cpp:236 src/fetch/itunesfetcher.cpp:501
 #, fuzzy, kde-format
 #| msgid "Allocine Link"
 msgid "iTunes Link"
@@ -4765,7 +4765,7 @@ msgid "Group"
 msgstr "그룹"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1084 src/mainwindow.cpp:1705
-#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:330
+#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "사람"
@@ -6361,38 +6361,43 @@ msgid ""
 msgstr ""
 "Tellico는 한 번에 이 형식의 파일 하나만 가져올 수 있습니다. %1만 가져옵니다."
 
-#: src/reportdialog.cpp:90
+#: src/reportdialog.cpp:91
 #, kde-format
 msgid "Collection Report"
 msgstr "소장품 보고서"
 
-#: src/reportdialog.cpp:101
+#: src/reportdialog.cpp:102
 #, kde-format
 msgid "&Report template:"
 msgstr "보고서 템플릿(&R):"
 
-#: src/reportdialog.cpp:137
+#: src/reportdialog.cpp:128
+#, kde-format
+msgid "One Entry Per Page"
+msgstr ""
+
+#: src/reportdialog.cpp:140
 #, kde-format
 msgid "&Generate"
 msgstr "생성(&G)"
 
-#: src/reportdialog.cpp:157
+#: src/reportdialog.cpp:160
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr "보고서 템플릿을 선택하고 <em>생성</em>을 클릭하십시오."
 
-#: src/reportdialog.cpp:158
+#: src/reportdialog.cpp:161
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "일부 보고서는 대규모 소장품을 생성하는데 몇 초 정도 걸릴 수 있습니다."
 
-#: src/reportdialog.cpp:358
+#: src/reportdialog.cpp:426
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG 파일"
 
-#: src/reportdialog.cpp:373 src/translators/htmlexporter.cpp:100
+#: src/reportdialog.cpp:441 src/translators/htmlexporter.cpp:100
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML 파일"
@@ -7026,32 +7031,32 @@ msgstr "Goodreads 옵션"
 msgid "HTML"
 msgstr "HTML"
 
-#: src/translators/htmlexporter.cpp:334
+#: src/translators/htmlexporter.cpp:342
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1(으)로 그룹화)"
 
-#: src/translators/htmlexporter.cpp:496
+#: src/translators/htmlexporter.cpp:504
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML 옵션"
 
-#: src/translators/htmlexporter.cpp:499
+#: src/translators/htmlexporter.cpp:507
 #, kde-format
 msgid "Print field headers"
 msgstr "필드 머리글 인쇄"
 
-#: src/translators/htmlexporter.cpp:504
+#: src/translators/htmlexporter.cpp:512
 #, kde-format
 msgid "Group the entries"
 msgstr "항목 그룹화"
 
-#: src/translators/htmlexporter.cpp:509
+#: src/translators/htmlexporter.cpp:517
 #, kde-format
 msgid "Export individual entry files"
 msgstr "개별 항목 파일 내보내기"
 
-#: src/translators/htmlexporter.cpp:510
+#: src/translators/htmlexporter.cpp:518
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "이 옵션을 선택하면 각 항목을 개별 파일로 내보냅니다."

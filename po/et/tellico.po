@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-19 00:58+0000\n"
+"POT-Creation-Date: 2023-02-20 00:58+0000\n"
 "PO-Revision-Date: 2020-06-03 20:36+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -1127,7 +1127,7 @@ msgid "Trade Paperback"
 msgstr "Kvaliteetpehmeköide"
 
 #: src/collections/bookcollection.cpp:72 src/fetch/ibsfetcher.cpp:292
-#: src/fetch/itunesfetcher.cpp:383
+#: src/fetch/itunesfetcher.cpp:393
 #, kde-format
 msgid "E-Book"
 msgstr "E-raamat"
@@ -2547,7 +2547,7 @@ msgstr "Pealkirjade ja nimede &vormindamine"
 msgid "&Print field headers"
 msgstr "Välja &päiste trükkimine"
 
-#: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:500
+#: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:508
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Märkimisel trükitakse väljade nimed tabeli päistena."
@@ -2562,7 +2562,7 @@ msgstr "Rühmitamise valikud"
 msgid "&Group the entries"
 msgstr "Kir&jete rühmitamine"
 
-#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:505
+#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:513
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Märkimisel rühmitatakse kirjed valitud välja järgi."
@@ -2799,7 +2799,7 @@ msgid "Template Packages"
 msgstr "Mallipaketid"
 
 #: src/configdialog.cpp:1131 src/importdialog.cpp:429 src/mainwindow.cpp:1250
-#: src/mainwindow.cpp:1420 src/reportdialog.cpp:360 src/reportdialog.cpp:375
+#: src/mainwindow.cpp:1420 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -3536,7 +3536,7 @@ msgstr ""
 "soovid kasutada antud andmeallika puhul."
 
 #: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:213
-#: src/fetch/itunesfetcher.cpp:503 src/fetch/mobygamesfetcher.cpp:671
+#: src/fetch/itunesfetcher.cpp:513 src/fetch/mobygamesfetcher.cpp:671
 #: src/fetch/rpggeekfetcher.cpp:222 src/fetch/thegamesdbfetcher.cpp:655
 #: src/fetch/videogamegeekfetcher.cpp:213
 #, kde-format
@@ -3544,7 +3544,7 @@ msgid "&Image size: "
 msgstr "P&ildi suurus: "
 
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:217
-#: src/fetch/itunesfetcher.cpp:507 src/fetch/mobygamesfetcher.cpp:674
+#: src/fetch/itunesfetcher.cpp:517 src/fetch/mobygamesfetcher.cpp:674
 #: src/fetch/rpggeekfetcher.cpp:226 src/fetch/thegamesdbfetcher.cpp:658
 #: src/fetch/videogamegeekfetcher.cpp:217
 #, kde-format
@@ -3558,7 +3558,7 @@ msgstr "Keskmine pilt"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/itunesfetcher.cpp:508 src/fetch/mobygamesfetcher.cpp:676
+#: src/fetch/itunesfetcher.cpp:518 src/fetch/mobygamesfetcher.cpp:676
 #: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:660
 #: src/fetch/videogamegeekfetcher.cpp:218
 #, kde-format
@@ -3566,7 +3566,7 @@ msgid "Large Image"
 msgstr "Suur pilt"
 
 #: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:216
-#: src/fetch/itunesfetcher.cpp:506 src/fetch/mobygamesfetcher.cpp:677
+#: src/fetch/itunesfetcher.cpp:516 src/fetch/mobygamesfetcher.cpp:677
 #: src/fetch/rpggeekfetcher.cpp:225 src/fetch/thegamesdbfetcher.cpp:661
 #: src/fetch/videogamegeekfetcher.cpp:216
 #, kde-format
@@ -3614,7 +3614,7 @@ msgid "Distributor"
 msgstr "Levitaja"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
-#: src/fetch/imdbfetcher.cpp:1807 src/fetch/itunesfetcher.cpp:492
+#: src/fetch/imdbfetcher.cpp:1807 src/fetch/itunesfetcher.cpp:502
 #: src/fetch/themoviedbfetcher.cpp:578 src/fetch/thetvdbfetcher.cpp:577
 #: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:336
 #, kde-format
@@ -4127,7 +4127,7 @@ msgid ""
 "Pro plans."
 msgstr ""
 
-#: src/fetch/itunesfetcher.cpp:236 src/fetch/itunesfetcher.cpp:491
+#: src/fetch/itunesfetcher.cpp:236 src/fetch/itunesfetcher.cpp:501
 #, fuzzy, kde-format
 #| msgid "Allocine Link"
 msgid "iTunes Link"
@@ -4820,7 +4820,7 @@ msgid "Group"
 msgstr "Rühm:"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1084 src/mainwindow.cpp:1705
-#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:330
+#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Inimesed"
@@ -6442,39 +6442,44 @@ msgstr ""
 "Praegu suudab Tellico importida korraga ainult ühe seda tüüpi faili. "
 "Imporditakse ainult %1."
 
-#: src/reportdialog.cpp:90
+#: src/reportdialog.cpp:91
 #, kde-format
 msgid "Collection Report"
 msgstr "Kogu aruanne"
 
-#: src/reportdialog.cpp:101
+#: src/reportdialog.cpp:102
 #, kde-format
 msgid "&Report template:"
 msgstr "A&ruande mall:"
 
-#: src/reportdialog.cpp:137
+#: src/reportdialog.cpp:128
+#, kde-format
+msgid "One Entry Per Page"
+msgstr ""
+
+#: src/reportdialog.cpp:140
 #, kde-format
 msgid "&Generate"
 msgstr "&Loo"
 
-#: src/reportdialog.cpp:157
+#: src/reportdialog.cpp:160
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr "Vali aruande mall ja klõpsa <em>Tekita</em>."
 
-#: src/reportdialog.cpp:158
+#: src/reportdialog.cpp:161
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "Suurte kogude puhul võib aruande tekitamine võtta veidi aega."
 
-#: src/reportdialog.cpp:358
+#: src/reportdialog.cpp:426
 #, fuzzy, kde-format
 #| msgid "PDF Files"
 msgid "PNG Files"
 msgstr "PDF-failid"
 
-#: src/reportdialog.cpp:373 src/translators/htmlexporter.cpp:100
+#: src/reportdialog.cpp:441 src/translators/htmlexporter.cpp:100
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML-failid"
@@ -7114,32 +7119,32 @@ msgstr "Goodreadsi valikud"
 msgid "HTML"
 msgstr "HTML"
 
-#: src/translators/htmlexporter.cpp:334
+#: src/translators/htmlexporter.cpp:342
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(rühmituse alus on %1)"
 
-#: src/translators/htmlexporter.cpp:496
+#: src/translators/htmlexporter.cpp:504
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML valikud"
 
-#: src/translators/htmlexporter.cpp:499
+#: src/translators/htmlexporter.cpp:507
 #, kde-format
 msgid "Print field headers"
 msgstr "Välja päiste näitamine"
 
-#: src/translators/htmlexporter.cpp:504
+#: src/translators/htmlexporter.cpp:512
 #, kde-format
 msgid "Group the entries"
 msgstr "Kirjete rühmitamine"
 
-#: src/translators/htmlexporter.cpp:509
+#: src/translators/htmlexporter.cpp:517
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Kirjete eksport eraldi failidena"
 
-#: src/translators/htmlexporter.cpp:510
+#: src/translators/htmlexporter.cpp:518
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Märkimisel eksporditakse iga kirje eraldi failina."
