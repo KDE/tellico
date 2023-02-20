@@ -35,6 +35,7 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testComic();
+  void testMasterverse();
 };
 
 #endif

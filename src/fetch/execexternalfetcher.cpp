@@ -248,6 +248,16 @@ void ExecExternalFetcher::slotProcessExited() {
   }
 
   const QString text = QString::fromUtf8(m_data.constData(), m_data.size());
+#if 0
+  myWarning() << "Remove debug from ExecExternalFetcher.cpp";
+  QFile f(QStringLiteral("/tmp/test-exec.txt"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << m_data;
+  }
+  f.close();
+#endif
   Import::Format format = static_cast<Import::Format>(m_formatType > -1 ? m_formatType : Import::TellicoXML);
   Import::Importer* imp = nullptr;
   // only 4 formats re supported here

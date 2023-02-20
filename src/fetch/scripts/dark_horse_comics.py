@@ -28,7 +28,7 @@
 # $Id: comics_darkhorsecomics.py 123 2006-03-24 08:47:48Z mathias $
 
 """
-This script has to be used with tellico (http://periapsis.org/tellico) as an external data source program.
+This script has to be used with tellico as an external data source program.
 It allows searching through the Dark Horse Comics web database.
 
 Related info and cover are fetched automatically. It takes only one argument (comic title).
@@ -46,13 +46,7 @@ Update (checked) = %{title}
 import sys, os, re, hashlib, random, string
 import urllib, time, base64
 import xml.dom.minidom
-
-try:
-	# For Python 3.0 and later
-	from urllib.request import urlopen
-except ImportError:
-	# Fall back to Python 2's urllib2
-	from urllib2 import urlopen
+from urllib.request import urlopen
 
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
@@ -67,7 +61,7 @@ def genMD5():
 	image file name generation.
 	"""
 	float = random.random()
-	return hashlib.md5(str(float)).hexdigest()
+	return hashlib.md5(str(float).encode()).hexdigest()
 
 class BasicTellicoDOM:
 	"""
@@ -110,7 +104,7 @@ class BasicTellicoDOM:
 		entryNode.setAttribute('id', str(self.__currentId))
 
 		titleNode = self.__doc.createElement('title')
-		titleNode.appendChild(self.__doc.createTextNode(unicode(d['title'], 'latin-1').encode('utf-8')))
+		titleNode.appendChild(self.__doc.createTextNode(d['title']))
 		entryNode.appendChild(titleNode)
 
 		yearNode = self.__doc.createElement('pub_year')
@@ -130,31 +124,35 @@ class BasicTellicoDOM:
 		writersNode = self.__doc.createElement('writers')
 		for g in d['writer']:
 			writerNode = self.__doc.createElement('writer')
-			writerNode.appendChild(self.__doc.createTextNode(unicode(g, 'latin-1').encode('utf-8')))
+			writerNode.appendChild(self.__doc.createTextNode(g))
 			writersNode.appendChild(writerNode)
 		entryNode.appendChild(writersNode)
 
 		genresNode = self.__doc.createElement('genres')
 		for g in d['genre']:
 			genreNode = self.__doc.createElement('genre')
-			genreNode.appendChild(self.__doc.createTextNode(unicode(g, 'latin-1').encode('utf-8')))
+			genreNode.appendChild(self.__doc.createTextNode(g))
 			genresNode.appendChild(genreNode)
 		entryNode.appendChild(genresNode)
 
 		commentsNode = self.__doc.createElement('comments')
 		#for g in d['comments']:
-		#	commentsNode.appendChild(self.__doc.createTextNode(unicode("%s\n\n" % g, 'latin-1').encode('utf-8')))
-		commentsData = string.join(d['comments'], '\n\n')
-		commentsNode.appendChild(self.__doc.createTextNode(unicode(commentsData, 'latin-1').encode('utf-8')))
+		#	commentsNode.appendChild(self.__doc.createTextNode(str("%s\n\n" % g, 'latin-1').encode('utf-8')))
+		commentsData = '\n\n'.join(d['comments'])
+		commentsNode.appendChild(self.__doc.createTextNode(commentsData))
 		entryNode.appendChild(commentsNode)
 
 		artistsNode = self.__doc.createElement('artists')
-		for k, v in d['artist'].iteritems():
-			if v == 'various':
-				continue
-			artistNode = self.__doc.createElement('artist')
-			artistNode.appendChild(self.__doc.createTextNode(unicode(v, 'latin-1').encode('utf-8')))
-			artistsNode.appendChild(artistNode)
+		for k, v in iter(d['artist'].items()):
+			if isinstance(v, str) and v != 'various':
+                                artistNode = self.__doc.createElement('artist')
+                                artistNode.appendChild(self.__doc.createTextNode(v))
+                                artistsNode.appendChild(artistNode)
+			elif isinstance(v, list):
+                                for g in v:
+                                        artistNode = self.__doc.createElement('artist')
+                                        artistNode.appendChild(self.__doc.createTextNode(g))
+                                        artistsNode.appendChild(artistNode)
 		entryNode.appendChild(artistsNode)
 
 		if 'pages' in d:
@@ -176,7 +174,7 @@ class BasicTellicoDOM:
 			imageNode = self.__doc.createElement('image')
 			imageNode.setAttribute('format', 'JPEG')
 			imageNode.setAttribute('id', d['image'][0])
-			imageNode.appendChild(self.__doc.createTextNode(unicode(d['image'][1], 'latin-1').encode('utf-8')))
+			imageNode.appendChild(self.__doc.createTextNode(d['image'][1].decode(encoding='utf-8')))
 
 			coverNode = self.__doc.createElement('cover')
 			coverNode.appendChild(self.__doc.createTextNode(d['image'][0]))
@@ -198,7 +196,7 @@ class BasicTellicoDOM:
 		try:
 			print(nEntry.toxml())
 		except:
-			print(sys.stderr, "Error while outputting XML content from entry to Tellico")
+			print("Error while outputting XML content from entry to Tellico", file=sys.stderr)
 
 	def printXMLTree(self):
 		"""
@@ -218,23 +216,24 @@ class DarkHorseParser:
 		self.__movieURL  = self.__baseURL + self.__basePath
 
 		# Define some regexps
-		self.__regExps = { 	'title' 		: '<h2 class="title">(?P<title>.*?)</h2>',
-							'pub_date'			: '<dt>Pub.* Date:</dt>.*?<dd>(?P<pub_date>.*?)</dd>',
-							'isbn'					: '<dt>ISBN-10:</dt><dd>(?P<isbn>.*?)</dd>',
-							'desc'					: '<div class="product-description">(?P<desc>.*?)</div>',
-							'writer'				: '<dt>Writer: *</dt> *<dd><a.*?>(?P<writer>.*?)</a> *</dd>',
-							'cover_artist'	: '<dt>Artist: *</dt> *<dd><a.*>(?P<cover_artist>.*?)</a> *</dd>',
-							'penciller'			: '<dt>Penciller: *</dt> *<dd><a.*>(?P<penciller>.*?)</a> *</dd>',
-							'inker'					: '<dt>Inker: *</dt> *<dd><a.*>(?P<inker>.*?)</a> *</dd>',
-							'letterer'			: '<dt>Letterer: *</dt> *<dd><a.*>(?P<letterer>.*?)</a> *</dd>',
-							'colorist'			: '<dt>Colorist: *</dt> *<dd><a.*>(?P<colorist>.*?)</a> *</dd>',
-							'genre'					: '<strong>Genre: *</strong> *<a.*?>(?P<genre>.*?)</a> *</div>',
-							'format'				: '<dt>Format: *</dt> *(?P<format>.*?)<dt>',
-						}
+		self.__regExps = {
+                        'title' 	: '<h2 class="title">(?P<title>.*?)</h2>',
+			'pub_date'	: '<dt>Pub.* Date:</dt>.*?<dd>(?P<pub_date>.*?)</dd>',
+			'isbn'		: '<dt>ISBN-10:</dt><dd>(?P<isbn>.*?)</dd>',
+			'desc'		: '<div class="product-description">(?P<desc>.*?)</div>',
+			'writer'	: '<dt>Writer: *</dt> *<dd><a.*?>(?P<writer>.*?)</a> *</dd>',
+			'cover_artist'	: '<dt>Artist: *</dt> *<dd><a.*?>(?P<cover_artist>.*?)</a> *</dd>',
+			'penciller'	: '<dt>Penciller: *</dt> *<dd><a.*>(?P<penciller>.*?)</a> *</dd>',
+			'inker'		: '<dt>Inker: *</dt> *<dd><a.*>(?P<inker>.*?)</a> *</dd>',
+			'letterer'	: '<dt>Letterer: *</dt> *<dd><a.*>(?P<letterer>.*?)</a> *</dd>',
+			'colorist'	: '<dt>Colorist: *</dt> *<dd><a.*>(?P<colorist>.*?)</a> *</dd>',
+			'genre'		: '<strong>Genre: *</strong> *<a.*?>(?P<genre>.*?)</a> *</div>',
+			'format'	: '<dt>Format: *</dt> *(?P<format>.*?)<dt>',
+		}
 
 		# Compile patterns objects
 		self.__regExpsPO = {}
-		for k, pattern in self.__regExps.iteritems():
+		for k, pattern in iter(self.__regExps.items()):
 			self.__regExpsPO[k] = re.compile(pattern, re.DOTALL)
 
 		self.__domTree = BasicTellicoDOM()
@@ -253,7 +252,8 @@ class DarkHorseParser:
 		Fetch HTML data from url
 		"""
 		u = urlopen(url)
-		self.__data = u.read()
+                # the html says it's in utf-8, but it happens to be latin-1
+		self.__data = u.read().decode(encoding='latin-1')
 		u.close()
 
 	def __fetchMovieLinks(self):
@@ -261,38 +261,22 @@ class DarkHorseParser:
 		Retrieve all links related to the search. self.__data contains HTML content fetched by self.__getHTMLContent()
 		that need to be parsed.
 		"""
-		matchList = re.findall("""<a *href="%s(?P<page>.*?)" class="product_link">.*?</a>""" % self.__basePath.replace('?', '\?'), self.__data)
+		matchList = re.findall("""<a href="%s(?P<page>[^"]*?)" class="product_link">.*?</a>""" % self.__basePath.replace('?', '\?'), self.__data)
 		if not matchList: return None
 
 		return list(set(matchList))
 
 	def __fetchCover(self, path, delete = True):
-		"""
-		Fetch cover to /tmp. Returns base64 encoding of data.
-		The image is deleted if delete is True
-		"""
-		md5 = genMD5()
-		imObj = urlopen(path.strip())
-		img = imObj.read()
-		imObj.close()
-		imgPath = "/tmp/%s.jpeg" % md5
-		try:
-			f = open(imgPath, 'w')
-			f.write(img)
-			f.close()
-		except:
-			print(sys.stderr, "Error: could not write image into /tmp")
-
-		b64data = (md5 + '.jpeg', base64.encodestring(img))
-
-		# Delete temporary image
-		if delete:
-			try:
-				os.remove(imgPath)
-			except:
-				print(sys.stderr, "Error: could not delete temporary image /tmp/%s.jpeg" % md5)
-
-		return b64data
+                """
+                Fetch cover to /tmp. Returns base64 encoding of data.
+                The image is deleted if delete is True
+                """
+                md5 = genMD5()
+                imObj = urlopen(path.strip())
+                img = imObj.read()
+                imObj.close()
+                b64data = (md5 + '.jpeg', base64.b64encode(img))
+                return b64data
 
 	def __fetchMovieInfo(self, url):
 		"""
@@ -301,13 +285,13 @@ class DarkHorseParser:
 		self.__getHTMLContent(url)
 
 		# First grab picture data
-		imgMatch = re.search("""<img src="(?P<imgpath>.*%s.*?)".*>""" % self.__coverPath, self.__data)
+		imgMatch = re.search("""<img src="(?P<imgpath>[^>]*%s.*?)"[^>]*>""" % self.__coverPath, self.__data)
 		if imgMatch:
-			imgPath = "http:" + imgMatch.group('imgpath')
+                        imgPath = "http:" + imgMatch.group('imgpath')
 			# Fetch cover and gets its base64 encoded data
-			b64img = self.__fetchCover(imgPath)
+                        b64img = self.__fetchCover(imgPath)
 		else:
-			b64img = None
+                        b64img = None
 
 		# Now isolate data between <div class="bodytext">...</div> elements
 		# re.DOTALL makes the "." special character match any character at all, including a newline
@@ -331,7 +315,7 @@ class DarkHorseParser:
 			data['image'] 		= b64img
 		data['pub_year']	= NULLSTRING
 
-		for name, po in self.__regExpsPO.iteritems():
+		for name, po in iter(self.__regExpsPO.items()):
 			data[name] = NULLSTRING
 			if name == 'desc':
 				matches[name] = re.findall(self.__regExps[name], self.__data, re.S | re.I)
@@ -375,7 +359,10 @@ class DarkHorseParser:
 						data[name].append(d.strip())
 
 				elif name == 'cover_artist':
-					data['artist']['Cover Artist'] = matches[name].group('cover_artist').strip()
+                                        artistsList = matches[name].group('cover_artist').split(',')
+                                        data['artist']['Cover Artist'] = []
+                                        for d in artistsList:
+                                                data['artist']['Cover Artist'].append(d.strip())
 
 				elif name == 'penciller':
 					data['artist']['Penciller'] = matches[name].group('penciller').strip()
@@ -412,7 +399,7 @@ class DarkHorseParser:
 		if not len(title): return
 
 		self.__title = title
-		self.__getHTMLContent("%s%s" % (self.__baseURL, self.__searchURL % urllib.quote(self.__title)))
+		self.__getHTMLContent("%s%s" % (self.__baseURL, self.__searchURL % urllib.parse.quote(self.__title)))
 
 		# Get all links
 		links = self.__fetchMovieLinks()
