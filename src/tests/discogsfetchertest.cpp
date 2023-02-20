@@ -250,7 +250,7 @@ void DiscogsFetcherTest::testRawDataVinyl() {
   QCOMPARE(entry->field(QStringLiteral("label")), QStringLiteral("CBS; CBS"));
 //  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1977"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Rock"));
-  QCOMPARE(entry->field(QStringLiteral("discogs")), QStringLiteral("https://www.discogs.com/The-Clash-The-Clash/release/456552"));
+  QCOMPARE(entry->field(QStringLiteral("discogs")), QStringLiteral("https://www.discogs.com/release/456552-The-Clash-The-Clash"));
   QCOMPARE(entry->field(QStringLiteral("nationality")), QStringLiteral("UK"));
   QCOMPARE(entry->field(QStringLiteral("medium")), QStringLiteral("Vinyl"));
 
