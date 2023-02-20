@@ -68,7 +68,7 @@ void OMDBFetcherTest::testTitle() {
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Superman Returns"));
   QCOMPARE(entry->field(QStringLiteral("certification")), QStringLiteral("PG-13 (USA)"));
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2006"));
-  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Action; Sci-Fi"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Action; Adventure; Sci-Fi"));
   QCOMPARE(entry->field(QStringLiteral("director")), QStringLiteral("Bryan Singer"));
   QCOMPARE(set(entry, "writer"),
            set("Bryan Singer; Dan Harris; Michael Dougherty"));
