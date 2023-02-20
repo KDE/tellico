@@ -72,7 +72,7 @@ void KinoPoiskFetcherTest::testSuperman() {
   QVERIFY(entry->field("writer").contains(QString::fromUtf8("Дэн Харрис")));
   QVERIFY(entry->field("producer").contains(QString::fromUtf8("Гилберт Адлер")));
   QCOMPARE(entry->field("composer"), QString::fromUtf8("Джон Оттмен"));
-  QCOMPARE(entry->field("genre"), QString::fromUtf8("фантастика; боевик"));
+  QCOMPARE(set(entry->field("genre")), set(QString::fromUtf8("фантастика; боевик; приключения")));
   QCOMPARE(entry->field("certification"), QStringLiteral("PG-13 (USA)"));
   QCOMPARE(entry->field("running-time"), QStringLiteral("154"));
   QCOMPARE(entry->field("kinopoisk"), QStringLiteral("https://www.kinopoisk.ru/film/38472"));
