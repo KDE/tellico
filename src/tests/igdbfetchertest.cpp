@@ -79,7 +79,7 @@ void IGDBFetcherTest::testKeyword() {
   QCOMPARE(entry->field("pegi"), QStringLiteral("PEGI 12"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Role-playing (RPG); Adventure"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo"));
-  QCOMPARE(entry->field("developer"), QStringLiteral("Nintendo EAD Group No. 3"));
+  QCOMPARE(entry->field("developer"), QStringLiteral("Nintendo EAD Software Development Group No.3"));
   QCOMPARE(entry->field("igdb"), QStringLiteral("https://www.igdb.com/games/the-legend-of-zelda-twilight-princess--1"));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
