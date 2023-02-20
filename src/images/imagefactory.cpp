@@ -149,7 +149,10 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
   }
 
   const Data::Image& img = job->image();
-  Q_ASSERT(!img.isNull());
+  if(img.isNull()) {
+    myDebug() << "Null image for" << url_.toDisplayString();
+    return Data::Image::null;
+  }
 
   // hold the image in memory since it probably isn't written locally to disk yet
   if(!d->imageDict.contains(img.id())) {

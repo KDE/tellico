@@ -32,6 +32,10 @@
 #include <QBuffer>
 #include <QImageReader>
 
+namespace {
+  static const int IMAGEJOB_TIMEOUT = 5; // seconds
+}
+
 using Tellico::ImageJob;
 
 ImageJob::ImageJob(const QUrl& url_, const QString& id_, bool quiet_) : KIO::Job()
@@ -93,8 +97,11 @@ void ImageJob::slotStart() {
     if(!m_referrer.isEmpty()) {
       getJob->addMetaData(QStringLiteral("referrer"), m_referrer.url());
     }
-    addSubjob(getJob);
-    // don't emit result, it will be taken care of by the subjob handling
+    if(!addSubjob(getJob)) {
+      myDebug() << "ImageJob:: error adding subjob";
+      emitResult();
+    }
+    QTimer::singleShot(IMAGEJOB_TIMEOUT * 1000, this, &ImageJob::getJobTimeout);
   }
 }
 
@@ -103,6 +110,7 @@ void ImageJob::getJobResult(KJob* job_) {
   if(!getJob || getJob->error()) {
     // error handling for subjob is handled by KCompositeJob
     setErrorText(i18n("Tellico is unable to load the image - %1.", m_url.toDisplayString()));
+    emitResult();
     return;
   }
 
@@ -127,4 +135,11 @@ void ImageJob::getJobResult(KJob* job_) {
     }
   }
   emitResult();
+}
+
+void ImageJob::getJobTimeout() {
+  setError(KIO::ERR_SERVER_TIMEOUT);
+  for(auto job : subjobs()) {
+    job->kill(KIO::Job::EmitResult);
+  }
 }

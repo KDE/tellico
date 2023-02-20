@@ -52,6 +52,7 @@ public:
 private Q_SLOTS:
   void slotStart();
   void getJobResult(KJob* job);
+  void getJobTimeout();
 
 private:
   QUrl m_url;
