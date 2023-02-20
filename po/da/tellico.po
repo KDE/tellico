@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-04 03:16+0000\n"
+"POT-Creation-Date: 2023-02-20 02:50+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -2519,7 +2519,7 @@ msgstr "&Formater titler og navne"
 msgid "&Print field headers"
 msgstr "&Udskriv feltoverskrifter"
 
-#: src/configdialog.cpp:351 src/translators/htmlexporter.cpp:500
+#: src/configdialog.cpp:351 src/translators/htmlexporter.cpp:506
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Hvis markeret, vil feltnavnene blive udskrevet som tabeloverskrifter."
@@ -2534,7 +2534,7 @@ msgstr "Grupperingsindstillinger"
 msgid "&Group the entries"
 msgstr "&Gruppér indgangene"
 
-#: src/configdialog.cpp:361 src/translators/htmlexporter.cpp:505
+#: src/configdialog.cpp:361 src/translators/htmlexporter.cpp:511
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Hvis markeret, vil indgangene blive grupperet efter det valgte felt."
@@ -4751,7 +4751,7 @@ msgid "Group"
 msgstr "Gruppe"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1061 src/mainwindow.cpp:1638
-#: src/mainwindow.cpp:1672 src/translators/htmlexporter.cpp:330
+#: src/mainwindow.cpp:1672 src/translators/htmlexporter.cpp:336
 #, kde-format
 msgid "People"
 msgstr "Folk"
@@ -6994,32 +6994,32 @@ msgstr "Indstillinger for Goodreads"
 msgid "HTML"
 msgstr "HTML"
 
-#: src/translators/htmlexporter.cpp:334
+#: src/translators/htmlexporter.cpp:340
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(grupperet efter %1)"
 
-#: src/translators/htmlexporter.cpp:496
+#: src/translators/htmlexporter.cpp:502
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML-indstillinger"
 
-#: src/translators/htmlexporter.cpp:499
+#: src/translators/htmlexporter.cpp:505
 #, kde-format
 msgid "Print field headers"
 msgstr "Udskriv feltoverskrifter"
 
-#: src/translators/htmlexporter.cpp:504
+#: src/translators/htmlexporter.cpp:510
 #, kde-format
 msgid "Group the entries"
 msgstr "Grupper indgangene"
 
-#: src/translators/htmlexporter.cpp:509
+#: src/translators/htmlexporter.cpp:515
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Eksportér enkelte indgangsfiler"
 
-#: src/translators/htmlexporter.cpp:510
+#: src/translators/htmlexporter.cpp:516
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Hvis markeret, vil enkelte filer blive oprettet for hver indgang."

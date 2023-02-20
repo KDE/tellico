@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-04 03:16+0000\n"
+"POT-Creation-Date: 2023-02-20 02:50+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -2522,7 +2522,7 @@ msgstr "Атау мен айдарларын пі&шімдеп"
 msgid "&Print field headers"
 msgstr "Өріс айдарлары &басылсын"
 
-#: src/configdialog.cpp:351 src/translators/htmlexporter.cpp:500
+#: src/configdialog.cpp:351 src/translators/htmlexporter.cpp:506
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
@@ -2538,7 +2538,7 @@ msgstr "Топтастыру амалдары"
 msgid "&Group the entries"
 msgstr "Жазулар &топтастырылсын"
 
-#: src/configdialog.cpp:361 src/translators/htmlexporter.cpp:505
+#: src/configdialog.cpp:361 src/translators/htmlexporter.cpp:511
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Белгісі қойылса, жазулары таңдалған өрісі бойынша топтастырылады."
@@ -4768,7 +4768,7 @@ msgid "Group"
 msgstr "Топ"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1061 src/mainwindow.cpp:1638
-#: src/mainwindow.cpp:1672 src/translators/htmlexporter.cpp:330
+#: src/mainwindow.cpp:1672 src/translators/htmlexporter.cpp:336
 #, kde-format
 msgid "People"
 msgstr "Адамдар"
@@ -7032,32 +7032,32 @@ msgstr "Goodreads параметрлері"
 msgid "HTML"
 msgstr "HTML"
 
-#: src/translators/htmlexporter.cpp:334
+#: src/translators/htmlexporter.cpp:340
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1 бойынша топталған)"
 
-#: src/translators/htmlexporter.cpp:496
+#: src/translators/htmlexporter.cpp:502
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML параметрлері"
 
-#: src/translators/htmlexporter.cpp:499
+#: src/translators/htmlexporter.cpp:505
 #, kde-format
 msgid "Print field headers"
 msgstr "Өріс айдарлары болсын"
 
-#: src/translators/htmlexporter.cpp:504
+#: src/translators/htmlexporter.cpp:510
 #, kde-format
 msgid "Group the entries"
 msgstr "Жазулар топтастырылсын"
 
-#: src/translators/htmlexporter.cpp:509
+#: src/translators/htmlexporter.cpp:515
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Бөлек жазу файлдар экспортталсын"
 
-#: src/translators/htmlexporter.cpp:510
+#: src/translators/htmlexporter.cpp:516
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Белгісі қойылса, жазу файлдар бөлек-бөлек экспортталады."

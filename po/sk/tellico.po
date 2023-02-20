@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-04 03:16+0000\n"
+"POT-Creation-Date: 2023-02-20 02:50+0000\n"
 "PO-Revision-Date: 2022-04-09 18:57+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -2512,7 +2512,7 @@ msgstr "&Formátovať názvy a mená"
 msgid "&Print field headers"
 msgstr "Tlačiť hlavičky &polí"
 
-#: src/configdialog.cpp:351 src/translators/htmlexporter.cpp:500
+#: src/configdialog.cpp:351 src/translators/htmlexporter.cpp:506
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Ak je zaškrtnuté, budú názvy polí budú vytlačené ako hlavičky tabuľky."
@@ -2527,7 +2527,7 @@ msgstr "Voľby zoskupenia"
 msgid "&Group the entries"
 msgstr "&Zoskupiť položky"
 
-#: src/configdialog.cpp:361 src/translators/htmlexporter.cpp:505
+#: src/configdialog.cpp:361 src/translators/htmlexporter.cpp:511
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Ak je zaškrtnuté, budú položky zoskupené podľa vybraného poľa."
@@ -4729,7 +4729,7 @@ msgid "Group"
 msgstr "Skupina"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1061 src/mainwindow.cpp:1638
-#: src/mainwindow.cpp:1672 src/translators/htmlexporter.cpp:330
+#: src/mainwindow.cpp:1672 src/translators/htmlexporter.cpp:336
 #, kde-format
 msgid "People"
 msgstr "Ľudia"
@@ -6957,32 +6957,32 @@ msgstr "Voľby Goodreads"
 msgid "HTML"
 msgstr "HTML"
 
-#: src/translators/htmlexporter.cpp:334
+#: src/translators/htmlexporter.cpp:340
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(združené podľa %1)"
 
-#: src/translators/htmlexporter.cpp:496
+#: src/translators/htmlexporter.cpp:502
 #, kde-format
 msgid "HTML Options"
 msgstr "Voľby HTML"
 
-#: src/translators/htmlexporter.cpp:499
+#: src/translators/htmlexporter.cpp:505
 #, kde-format
 msgid "Print field headers"
 msgstr "Tlačiť hlavičky polí"
 
-#: src/translators/htmlexporter.cpp:504
+#: src/translators/htmlexporter.cpp:510
 #, kde-format
 msgid "Group the entries"
 msgstr "Zoskupiť položky"
 
-#: src/translators/htmlexporter.cpp:509
+#: src/translators/htmlexporter.cpp:515
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Exportovať jednotlivé súbory položiek"
 
-#: src/translators/htmlexporter.cpp:510
+#: src/translators/htmlexporter.cpp:516
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Ak je zaškrtnuté, budú vytvorené jednotlivé súbory pre každú položku."

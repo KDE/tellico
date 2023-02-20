@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-04 03:16+0000\n"
+"POT-Creation-Date: 2023-02-20 02:50+0000\n"
 "PO-Revision-Date: 2022-01-03 21:07+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -2517,7 +2517,7 @@ msgstr "&Formatera titlar och namn"
 msgid "&Print field headers"
 msgstr "&Skriv ut fältöverskrifter"
 
-#: src/configdialog.cpp:351 src/translators/htmlexporter.cpp:500
+#: src/configdialog.cpp:351 src/translators/htmlexporter.cpp:506
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Om markerad, skrivs fältnamn ut som tabellöverskrifter."
@@ -2532,7 +2532,7 @@ msgstr "Grupperingsalternativ"
 msgid "&Group the entries"
 msgstr "&Gruppera posterna"
 
-#: src/configdialog.cpp:361 src/translators/htmlexporter.cpp:505
+#: src/configdialog.cpp:361 src/translators/htmlexporter.cpp:511
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Om markerad, kommer posterna att grupperas under utvalt fält."
@@ -4743,7 +4743,7 @@ msgid "Group"
 msgstr "Grupp"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1061 src/mainwindow.cpp:1638
-#: src/mainwindow.cpp:1672 src/translators/htmlexporter.cpp:330
+#: src/mainwindow.cpp:1672 src/translators/htmlexporter.cpp:336
 #, kde-format
 msgid "People"
 msgstr "Personer"
@@ -6965,32 +6965,32 @@ msgstr "Goodreads-alternativ"
 msgid "HTML"
 msgstr "HTML"
 
-#: src/translators/htmlexporter.cpp:334
+#: src/translators/htmlexporter.cpp:340
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(grupperad på %1)"
 
-#: src/translators/htmlexporter.cpp:496
+#: src/translators/htmlexporter.cpp:502
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML-alternativ"
 
-#: src/translators/htmlexporter.cpp:499
+#: src/translators/htmlexporter.cpp:505
 #, kde-format
 msgid "Print field headers"
 msgstr "Skriv ut fältöverskrifter"
 
-#: src/translators/htmlexporter.cpp:504
+#: src/translators/htmlexporter.cpp:510
 #, kde-format
 msgid "Group the entries"
 msgstr "Gruppera posterna"
 
-#: src/translators/htmlexporter.cpp:509
+#: src/translators/htmlexporter.cpp:515
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Exportera enskilda poster som filer"
 
-#: src/translators/htmlexporter.cpp:510
+#: src/translators/htmlexporter.cpp:516
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Om markerad, kommer enskilda filer att skapas för varje post."

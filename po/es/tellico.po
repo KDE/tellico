@@ -14,15 +14,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-04 03:16+0000\n"
-"PO-Revision-Date: 2023-01-22 05:26+0100\n"
+"POT-Creation-Date: 2023-02-20 02:50+0000\n"
+"PO-Revision-Date: 2023-02-19 09:16+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -99,7 +99,7 @@ msgstr "Resumen de grupos"
 #, kde-format
 msgctxt "Image List XSL Template"
 msgid "Image List"
-msgstr "Lista con imágenes"
+msgstr "Lista de imágenes"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -2529,7 +2529,7 @@ msgstr "&Formatear títulos y nombres"
 msgid "&Print field headers"
 msgstr "Im&primir las cabeceras de los campos"
 
-#: src/configdialog.cpp:351 src/translators/htmlexporter.cpp:500
+#: src/configdialog.cpp:351 src/translators/htmlexporter.cpp:506
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
@@ -2546,7 +2546,7 @@ msgstr "Opciones de agrupamiento"
 msgid "&Group the entries"
 msgstr "A&grupar las entradas"
 
-#: src/configdialog.cpp:361 src/translators/htmlexporter.cpp:505
+#: src/configdialog.cpp:361 src/translators/htmlexporter.cpp:511
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Si se marca, las entradas se agruparán por el campo seleccionado."
@@ -4770,7 +4770,7 @@ msgid "Group"
 msgstr "Grupo"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1061 src/mainwindow.cpp:1638
-#: src/mainwindow.cpp:1672 src/translators/htmlexporter.cpp:330
+#: src/mainwindow.cpp:1672 src/translators/htmlexporter.cpp:336
 #, kde-format
 msgid "People"
 msgstr "Personas"
@@ -7007,32 +7007,32 @@ msgstr "Opciones de Goodreads"
 msgid "HTML"
 msgstr "HTML"
 
-#: src/translators/htmlexporter.cpp:334
+#: src/translators/htmlexporter.cpp:340
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(agrupado por %1)"
 
-#: src/translators/htmlexporter.cpp:496
+#: src/translators/htmlexporter.cpp:502
 #, kde-format
 msgid "HTML Options"
 msgstr "Opciones de HTML"
 
-#: src/translators/htmlexporter.cpp:499
+#: src/translators/htmlexporter.cpp:505
 #, kde-format
 msgid "Print field headers"
 msgstr "Imprimir las cabeceras de los campos"
 
-#: src/translators/htmlexporter.cpp:504
+#: src/translators/htmlexporter.cpp:510
 #, kde-format
 msgid "Group the entries"
 msgstr "Agrupar las entradas"
 
-#: src/translators/htmlexporter.cpp:509
+#: src/translators/htmlexporter.cpp:515
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Exportar archivos de entradas individuales"
 
-#: src/translators/htmlexporter.cpp:510
+#: src/translators/htmlexporter.cpp:516
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Si se marca, se crearán archivos independientes para cada entrada."

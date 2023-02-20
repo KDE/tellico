@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-04 03:16+0000\n"
+"POT-Creation-Date: 2023-02-20 02:50+0000\n"
 "PO-Revision-Date: 2009-09-18 16:56+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -2463,7 +2463,7 @@ msgstr "Форматиране на заглавия и имена"
 msgid "&Print field headers"
 msgstr "Печатане заглавията на полетата"
 
-#: src/configdialog.cpp:351 src/translators/htmlexporter.cpp:500
+#: src/configdialog.cpp:351 src/translators/htmlexporter.cpp:506
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Ако е избрано,заглавията на полетата ще бъдат отпечатани."
@@ -2478,7 +2478,7 @@ msgstr "Опции за групиране"
 msgid "&Group the entries"
 msgstr "Групиране на книгите"
 
-#: src/configdialog.cpp:361 src/translators/htmlexporter.cpp:505
+#: src/configdialog.cpp:361 src/translators/htmlexporter.cpp:511
 #, fuzzy, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Ако е избрано,книгите ще бъдат групирани по даден признак."
@@ -4613,7 +4613,7 @@ msgid "Group"
 msgstr "Група"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1061 src/mainwindow.cpp:1638
-#: src/mainwindow.cpp:1672 src/translators/htmlexporter.cpp:330
+#: src/mainwindow.cpp:1672 src/translators/htmlexporter.cpp:336
 #, kde-format
 msgid "People"
 msgstr "Хора"
@@ -6776,32 +6776,32 @@ msgstr "Настройки на полето"
 msgid "HTML"
 msgstr "HTML"
 
-#: src/translators/htmlexporter.cpp:334
+#: src/translators/htmlexporter.cpp:340
 #, fuzzy, kde-format
 msgid "(grouped by %1)"
 msgstr "(сортирано по %1)"
 
-#: src/translators/htmlexporter.cpp:496
+#: src/translators/htmlexporter.cpp:502
 #, fuzzy, kde-format
 msgid "HTML Options"
 msgstr "Настройки на полето"
 
-#: src/translators/htmlexporter.cpp:499
+#: src/translators/htmlexporter.cpp:505
 #, kde-format
 msgid "Print field headers"
 msgstr "Печатане заглавията на полетата"
 
-#: src/translators/htmlexporter.cpp:504
+#: src/translators/htmlexporter.cpp:510
 #, fuzzy, kde-format
 msgid "Group the entries"
 msgstr "Групиране на книгите"
 
-#: src/translators/htmlexporter.cpp:509
+#: src/translators/htmlexporter.cpp:515
 #, kde-format
 msgid "Export individual entry files"
 msgstr ""
 
-#: src/translators/htmlexporter.cpp:510
+#: src/translators/htmlexporter.cpp:516
 #, fuzzy, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Ако е избрано,заглавията на полетата ще бъдат отпечатани."
