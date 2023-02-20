@@ -44,9 +44,9 @@
 
 namespace {
   static const int GOOGLE_MAX_RETURNS_TOTAL = 20;
-  static const char* SCHOLAR_BASE_URL = "http://scholar.google.com/scholar";
-  static const char* SCHOLAR_SET_CONFIG_URL = "http://scholar.google.com/scholar_settings?hl=en&as_sdt=0,5";
-  static const char* SCHOLAR_SET_BIBTEX_URL = "http://scholar.google.com/scholar_setprefs?hl=en&num=100&scis=yes&scisf=4&submit=";
+  static const char* SCHOLAR_BASE_URL = "https://scholar.google.com/scholar";
+  static const char* SCHOLAR_SET_CONFIG_URL = "https://scholar.google.com/scholar_settings?sciifh=1&hl=en&as_sdt=0,47";
+  static const char* SCHOLAR_SET_BIBTEX_URL = "https://scholar.google.com/scholar_setprefs?hl=en&num=100&scis=yes&scisf=4&submit=";
 }
 
 using namespace Tellico;
@@ -55,7 +55,6 @@ using Tellico::Fetch::GoogleScholarFetcher;
 GoogleScholarFetcher::GoogleScholarFetcher(QObject* parent_)
     : Fetcher(parent_),
       m_limit(GOOGLE_MAX_RETURNS_TOTAL), m_start(0), m_total(0), m_job(nullptr), m_started(false)
-    , m_bibtexRx(QLatin1String("<a\\s.*?href\\s*=\\s*\"([^>]*scholar\\.bib[^>]*?)\""))
     , m_cookieIsSet(false) {
 }
 
@@ -147,8 +146,6 @@ void GoogleScholarFetcher::stop() {
 }
 
 void GoogleScholarFetcher::slotComplete(KJob*) {
-//  myDebug();
-
   if(m_job->error()) {
     m_job->uiDelegate()->showErrorMessage();
     stop();
@@ -178,9 +175,10 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
+  static const QRegularExpression bibtexRx(QStringLiteral("<a\\s.*?href\\s*=\\s*\"([^>]*scholar\\.bib[^>]*?)\""));
   QString bibtex;
   int count = 0;
-  for(QRegularExpressionMatchIterator i = m_bibtexRx.globalMatch(text); count < m_limit && i.hasNext(); ++count) {
+  for(QRegularExpressionMatchIterator i = bibtexRx.globalMatch(text); count < m_limit && i.hasNext(); ++count) {
     QRegularExpressionMatch match = i.next();
     // for some reason, KIO and google don't return bibtex when '&' is escaped
     QString url = match.captured(1).replace(QLatin1String("&amp;"), QLatin1String("&"));
@@ -252,7 +250,7 @@ void GoogleScholarFetcher::setBibtexCookie() {
   // have to set preferences to have bibtex output
   const QString text = FileHandler::readTextFile(QUrl(QString::fromLatin1(SCHOLAR_SET_CONFIG_URL)), true);
   // find hidden input variables
-  QRegExp inputRx(QLatin1String("<input\\s+[^>]*\\s*type\\s*=\\s*\"hidden\"\\s+[^>]+>"));
+  QRegExp inputRx(QLatin1String("<input\\s+[^>]*\\s*type\\s*=\\s*\"?hidden\"?\\s+[^>]+>"));
   inputRx.setMinimal(true);
   QRegExp pairRx(QLatin1String("([^=\\s<]+)\\s*=\\s*\"?([^=\\s\">]+)\"?"));
   QHash<QString, QString> nameValues;
