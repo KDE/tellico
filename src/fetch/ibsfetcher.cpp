@@ -168,9 +168,9 @@ void IBSFetcher::slotComplete(KJob*) {
   QString s = Tellico::decodeHTML(data);
   static const QRegularExpression itemRx(QLatin1String("<div class=\"cc-product-list-item.*?>(.+?)<!--"),
                                          QRegularExpression::DotMatchesEverythingOption);
-  static const QRegularExpression titleRx(QStringLiteral("<div class=\"cc-content-title\">\\s*<a [^>]*href=\"(.+?)\"[^>]*?>(.+?)</a"),
+  static const QRegularExpression titleRx(QStringLiteral("<a [^>]*href=\"(.+?)\"[^>]*?class=\"cc-title\">(.+?)</a"),
                                           QRegularExpression::DotMatchesEverythingOption);
-  static const QRegularExpression yearRx(QLatin1String("<span class=\"cc-owner\">.*?([12]\\d{3}).*?</"),
+  static const QRegularExpression yearRx(QLatin1String("<span class=\"cc-publisher\">.*?([12]\\d{3}).*?</"),
                                          QRegularExpression::DotMatchesEverythingOption);
   static const QRegularExpression tagRx(QLatin1String("<.*?>"));
 
