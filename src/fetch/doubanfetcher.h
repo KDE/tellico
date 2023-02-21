@@ -36,6 +36,7 @@ class KJob;
 namespace KIO {
   class StoredTransferJob;
 }
+class DoubanFetcherTest;
 
 namespace Tellico {
   namespace Fetch {
@@ -87,6 +88,9 @@ private Q_SLOTS:
   void slotCompleteISBN(KJob* job);
 
 private:
+  friend class ::DoubanFetcherTest;
+  void setTestUrl1(const QUrl& url) { m_testUrl1 = url; }
+  void setTestUrl2(const QUrl& url) { m_testUrl2 = url; }
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   virtual void resetSearch() {}
@@ -102,6 +106,9 @@ private:
   QHash<uint, QUrl> m_matches;
   QHash<uint, Data::EntryPtr> m_entries;
   QList< QPointer<KIO::StoredTransferJob> > m_jobs;
+
+  QUrl m_testUrl1;
+  QUrl m_testUrl2;
 };
 
   } // end namespace

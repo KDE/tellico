@@ -54,10 +54,15 @@ void DoubanFetcherTest::initTestCase() {
 }
 
 void DoubanFetcherTest::testBookTitle() {
+  QUrl testUrl1 = QUrl::fromLocalFile(QFINDTESTDATA("data/douban_book_search.json"));
+  QUrl testUrl2 = QUrl::fromLocalFile(QFINDTESTDATA("data/douban_book_details.json"));
+  auto f = new Tellico::Fetch::DoubanFetcher(this);
+  f->setTestUrl1(testUrl1);
+  f->setTestUrl2(testUrl2);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword,
                                        QStringLiteral("大设计 列纳德·蒙洛迪诺"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
-
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
@@ -73,7 +78,7 @@ void DoubanFetcherTest::testBookTitle() {
   QCOMPARE(entry->field("publisher"), QString::fromUtf8("湖南科学技术出版社"));
   QCOMPARE(entry->field("binding"), QStringLiteral("Hardback"));
   QCOMPARE(entry->field("pub_year"), QStringLiteral("2011"));
-  QCOMPARE(entry->field("isbn"), QStringLiteral("7535765440"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("7-53576544-0"));
   QCOMPARE(entry->field("pages"), QStringLiteral("176"));
   QVERIFY(!entry->field(QStringLiteral("keyword")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
@@ -82,14 +87,18 @@ void DoubanFetcherTest::testBookTitle() {
 }
 
 void DoubanFetcherTest::testISBN() {
+  QUrl testUrl = QUrl::fromLocalFile(QFINDTESTDATA("data/douban_book_isbn.json"));
+  auto f = new Tellico::Fetch::DoubanFetcher(this);
+  f->setTestUrl1(testUrl);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       QStringLiteral("9787535765444; 9787208104235"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
+                                       QStringLiteral("9787535765444"));
   fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  QCOMPARE(results.size(), 2);
+  QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
@@ -102,7 +111,7 @@ void DoubanFetcherTest::testISBN() {
   QCOMPARE(entry->field("publisher"), QString::fromUtf8("湖南科学技术出版社"));
   QCOMPARE(entry->field("binding"), QStringLiteral("Hardback"));
   QCOMPARE(entry->field("pub_year"), QStringLiteral("2011"));
-  QCOMPARE(entry->field("isbn"), QStringLiteral("7535765440"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("7-53576544-0"));
   QCOMPARE(entry->field("pages"), QStringLiteral("176"));
   QCOMPARE(entry->field("origtitle"), QStringLiteral("The Grand Design"));
   QCOMPARE(entry->field("douban"), QStringLiteral("https://book.douban.com/subject/5422665/"));
@@ -110,11 +119,6 @@ void DoubanFetcherTest::testISBN() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
-
-  entry = results.at(1);
-  QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QString::fromUtf8("太空漫游"));
-  QCOMPARE(entry->field("isbn"), QStringLiteral("7535765440"));
 }
 
 void DoubanFetcherTest::testVideo() {
