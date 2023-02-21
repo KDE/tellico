@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-20 00:58+0000\n"
+"POT-Creation-Date: 2023-02-21 01:00+0000\n"
 "PO-Revision-Date: 2022-05-15 22:49+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2567,7 +2567,7 @@ msgid "Template Options"
 msgstr "템플릿 옵션"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:354
+#: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:364
 #: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
@@ -3195,7 +3195,7 @@ msgstr "내보낸 파일을 사용자 로캘의 인코딩으로 인코딩합니�
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
 #: src/fetch/igdbfetcher.cpp:163 src/fetch/isbndbfetcher.cpp:295
-#: src/fetch/itunesfetcher.cpp:327 src/fetch/kinofetcher.cpp:342
+#: src/fetch/itunesfetcher.cpp:327 src/fetch/kinofetcher.cpp:343
 #: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:376
 #: src/fetch/mobygamesfetcher.cpp:345 src/fetch/moviemeterfetcher.cpp:162
 #: src/fetch/numistafetcher.cpp:285 src/fetch/numistafetcher.cpp:293
@@ -3586,12 +3586,12 @@ msgstr "AnimeNfo 등급"
 
 #: src/fetch/animenfofetcher.cpp:505 src/fetch/arxivfetcher.cpp:336
 #: src/fetch/bedethequefetcher.cpp:465 src/fetch/bibsonomyfetcher.cpp:190
-#: src/fetch/dbcfetcher.cpp:161 src/fetch/dblpfetcher.cpp:129
+#: src/fetch/dbcfetcher.cpp:160 src/fetch/dblpfetcher.cpp:129
 #: src/fetch/doubanfetcher.cpp:579 src/fetch/dvdfrfetcher.cpp:190
 #: src/fetch/filmasterfetcher.cpp:323 src/fetch/gaminghistoryfetcher.cpp:438
 #: src/fetch/googlescholarfetcher.cpp:284 src/fetch/hathitrustfetcher.cpp:318
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:614
-#: src/fetch/kinofetcher.cpp:380 src/fetch/kinoteatrfetcher.cpp:515
+#: src/fetch/kinofetcher.cpp:381 src/fetch/kinoteatrfetcher.cpp:515
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:223
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
@@ -3701,7 +3701,7 @@ msgstr "일부 계정에는 이메일 주소만 필요합니다."
 msgid "Email: "
 msgstr "이메일: "
 
-#: src/fetch/dbcfetcher.cpp:146
+#: src/fetch/dbcfetcher.cpp:145
 #, kde-format
 msgid "Danish Bibliographic Center (DBC.dk)"
 msgstr "덴마크 서지 정보 센터(DBC.dk)"
@@ -3769,45 +3769,45 @@ msgstr "Entrez 데이터베이스"
 msgid "Institution"
 msgstr "기관"
 
-#: src/fetch/execexternalfetcher.cpp:339
+#: src/fetch/execexternalfetcher.cpp:349
 #, kde-format
 msgid "External Application"
 msgstr "외부 프로그램"
 
-#: src/fetch/execexternalfetcher.cpp:360
+#: src/fetch/execexternalfetcher.cpp:370
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr "외부 프로그램에서 반환되는 데이터의 수집 형식을 설정합니다."
 
-#: src/fetch/execexternalfetcher.cpp:365
+#: src/fetch/execexternalfetcher.cpp:375
 #, kde-format
 msgid "&Result type: "
 msgstr "결과 형식(&R): "
 
-#: src/fetch/execexternalfetcher.cpp:374
+#: src/fetch/execexternalfetcher.cpp:384
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "외부 프로그램에서 반환된 데이터의 결과 형식을 설정합니다."
 
-#: src/fetch/execexternalfetcher.cpp:388
+#: src/fetch/execexternalfetcher.cpp:398
 #, kde-format
 msgid "Application &path: "
 msgstr "프로그램 경로(&P): "
 
-#: src/fetch/execexternalfetcher.cpp:393
+#: src/fetch/execexternalfetcher.cpp:403
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
 msgstr "올바른 Tellico 데이터 파일을 출력할 프로그램의 경로를 설정합니다."
 
-#: src/fetch/execexternalfetcher.cpp:398
+#: src/fetch/execexternalfetcher.cpp:408
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "데이터 원본에서 지원하는 검색 키를 선택합니다."
 
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:410
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3815,17 +3815,17 @@ msgid ""
 msgstr "필요한 인수를 추가하십시오. <b>%1</b>은(는) 검색어로 대체됩니다."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:401
+#: src/fetch/execexternalfetcher.cpp:411
 #, kde-format
 msgid "Arguments"
 msgstr "인수"
 
-#: src/fetch/execexternalfetcher.cpp:433
+#: src/fetch/execexternalfetcher.cpp:443
 #, kde-format
 msgid "Update"
 msgstr "업데이트"
 
-#: src/fetch/execexternalfetcher.cpp:441
+#: src/fetch/execexternalfetcher.cpp:451
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -5012,7 +5012,7 @@ msgstr "행 위로 이동"
 msgid "Move Row Down"
 msgstr "행 아래로 이동"
 
-#: src/images/imagejob.cpp:71 src/images/imagejob.cpp:105
+#: src/images/imagejob.cpp:75 src/images/imagejob.cpp:112
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico에서 이미지를 불러올 수 없음 - %1."
@@ -7163,12 +7163,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:190
+#: src/translators/tellicoimporter.cpp:189
 #, kde-format
 msgid "The file is empty."
 msgstr "파일이 비어 있습니다."
 
-#: src/translators/tellicoimporter.cpp:203
+#: src/translators/tellicoimporter.cpp:202
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "파일에 수집 데이터가 없습니다."

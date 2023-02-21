@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-20 00:58+0000\n"
+"POT-Creation-Date: 2023-02-21 01:00+0000\n"
 "PO-Revision-Date: 2023-02-07 11:10-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -2616,7 +2616,7 @@ msgid "Template Options"
 msgstr "Opções do modelo"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:354
+#: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:364
 #: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
@@ -3250,7 +3250,7 @@ msgstr "Codifica o arquivo exportado na codificação local."
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
 #: src/fetch/igdbfetcher.cpp:163 src/fetch/isbndbfetcher.cpp:295
-#: src/fetch/itunesfetcher.cpp:327 src/fetch/kinofetcher.cpp:342
+#: src/fetch/itunesfetcher.cpp:327 src/fetch/kinofetcher.cpp:343
 #: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:376
 #: src/fetch/mobygamesfetcher.cpp:345 src/fetch/moviemeterfetcher.cpp:162
 #: src/fetch/numistafetcher.cpp:285 src/fetch/numistafetcher.cpp:293
@@ -3643,12 +3643,12 @@ msgstr "AnimeNfo Rating"
 
 #: src/fetch/animenfofetcher.cpp:505 src/fetch/arxivfetcher.cpp:336
 #: src/fetch/bedethequefetcher.cpp:465 src/fetch/bibsonomyfetcher.cpp:190
-#: src/fetch/dbcfetcher.cpp:161 src/fetch/dblpfetcher.cpp:129
+#: src/fetch/dbcfetcher.cpp:160 src/fetch/dblpfetcher.cpp:129
 #: src/fetch/doubanfetcher.cpp:579 src/fetch/dvdfrfetcher.cpp:190
 #: src/fetch/filmasterfetcher.cpp:323 src/fetch/gaminghistoryfetcher.cpp:438
 #: src/fetch/googlescholarfetcher.cpp:284 src/fetch/hathitrustfetcher.cpp:318
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:614
-#: src/fetch/kinofetcher.cpp:380 src/fetch/kinoteatrfetcher.cpp:515
+#: src/fetch/kinofetcher.cpp:381 src/fetch/kinoteatrfetcher.cpp:515
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:223
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
@@ -3759,7 +3759,7 @@ msgstr "Para algumas contas, somente um endereço de e-mail é necessário."
 msgid "Email: "
 msgstr "E-mail: "
 
-#: src/fetch/dbcfetcher.cpp:146
+#: src/fetch/dbcfetcher.cpp:145
 #, kde-format
 msgid "Danish Bibliographic Center (DBC.dk)"
 msgstr "Biblioteca Central da Dinamarca (DBC.dk)"
@@ -3827,35 +3827,35 @@ msgstr "Banco de dados Entrez"
 msgid "Institution"
 msgstr "Instituição"
 
-#: src/fetch/execexternalfetcher.cpp:339
+#: src/fetch/execexternalfetcher.cpp:349
 #, kde-format
 msgid "External Application"
 msgstr "Aplicativo externo"
 
-#: src/fetch/execexternalfetcher.cpp:360
+#: src/fetch/execexternalfetcher.cpp:370
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr ""
 "Especifique o tipo de coleção dos dados retornados do aplicativo externo."
 
-#: src/fetch/execexternalfetcher.cpp:365
+#: src/fetch/execexternalfetcher.cpp:375
 #, kde-format
 msgid "&Result type: "
 msgstr "Tipo de &resultado: "
 
-#: src/fetch/execexternalfetcher.cpp:374
+#: src/fetch/execexternalfetcher.cpp:384
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr ""
 "Especifique o tipo de resultado dos dados retornados do aplicativo externo."
 
-#: src/fetch/execexternalfetcher.cpp:388
+#: src/fetch/execexternalfetcher.cpp:398
 #, kde-format
 msgid "Application &path: "
 msgstr "&Caminho do aplicativo: "
 
-#: src/fetch/execexternalfetcher.cpp:393
+#: src/fetch/execexternalfetcher.cpp:403
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3864,12 +3864,12 @@ msgstr ""
 "Especifique o caminho do aplicativo a ser executado que deve gerar um "
 "arquivo de dados Tellico válido."
 
-#: src/fetch/execexternalfetcher.cpp:398
+#: src/fetch/execexternalfetcher.cpp:408
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Selecione as chaves de pesquisa suportadas pela fonte de dados."
 
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:410
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3879,17 +3879,17 @@ msgstr ""
 "termo a ser pesquisado."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:401
+#: src/fetch/execexternalfetcher.cpp:411
 #, kde-format
 msgid "Arguments"
 msgstr "Argumentos"
 
-#: src/fetch/execexternalfetcher.cpp:433
+#: src/fetch/execexternalfetcher.cpp:443
 #, kde-format
 msgid "Update"
 msgstr "Atualizar"
 
-#: src/fetch/execexternalfetcher.cpp:441
+#: src/fetch/execexternalfetcher.cpp:451
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -5085,7 +5085,7 @@ msgstr "Mover linha para cima"
 msgid "Move Row Down"
 msgstr "Mover linha para baixo"
 
-#: src/images/imagejob.cpp:71 src/images/imagejob.cpp:105
+#: src/images/imagejob.cpp:75 src/images/imagejob.cpp:112
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "O Tellico não pôde carregar a imagem - %1."
@@ -7277,12 +7277,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:190
+#: src/translators/tellicoimporter.cpp:189
 #, kde-format
 msgid "The file is empty."
 msgstr "O arquivo está vazio."
 
-#: src/translators/tellicoimporter.cpp:203
+#: src/translators/tellicoimporter.cpp:202
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "O arquivo não contém dados de coleção."
