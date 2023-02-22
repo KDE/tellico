@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-21 01:00+0000\n"
+"POT-Creation-Date: 2023-02-22 00:59+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -732,8 +732,8 @@ msgstr "Ένα πεδίο με μια παράγωγη τιμή πρέπει ν�
 #: src/fetch/discogsfetcher.cpp:308 src/fetch/discogsfetcher.cpp:313
 #: src/fetch/discogsfetcher.cpp:318 src/fetch/discogsfetcher.cpp:325
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:337
-#: src/fetch/doubanfetcher.cpp:310 src/fetch/doubanfetcher.cpp:328
-#: src/fetch/doubanfetcher.cpp:346 src/fetch/filmaffinityfetcher.cpp:282
+#: src/fetch/doubanfetcher.cpp:349 src/fetch/doubanfetcher.cpp:367
+#: src/fetch/doubanfetcher.cpp:385 src/fetch/filmaffinityfetcher.cpp:282
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
@@ -1119,7 +1119,7 @@ msgid "Subtitle"
 msgstr "Υπότιτλος"
 
 #: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:967
-#: src/fetch/doubanfetcher.cpp:377 src/fetch/doubanfetcher.cpp:430
+#: src/fetch/doubanfetcher.cpp:416 src/fetch/doubanfetcher.cpp:469
 #: src/fetch/ibsfetcher.cpp:290 src/translators/alexandriaimporter.cpp:158
 #: src/translators/librarythingimporter.cpp:148
 #, kde-format
@@ -1127,7 +1127,7 @@ msgid "Hardback"
 msgstr "Σκληρόδετο"
 
 #: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:965
-#: src/fetch/doubanfetcher.cpp:379 src/fetch/doubanfetcher.cpp:432
+#: src/fetch/doubanfetcher.cpp:418 src/fetch/doubanfetcher.cpp:471
 #: src/fetch/ibsfetcher.cpp:288 src/translators/librarythingimporter.cpp:146
 #, kde-format
 msgid "Paperback"
@@ -1681,7 +1681,7 @@ msgid "Album"
 msgstr "Άλμπουμ"
 
 #: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:422
-#: src/fetch/doubanfetcher.cpp:385 src/fetch/doubanfetcher.cpp:519
+#: src/fetch/doubanfetcher.cpp:424 src/fetch/doubanfetcher.cpp:558
 #: src/fetch/upcitemdbfetcher.cpp:290 src/fetch/upcitemdbfetcher.cpp:410
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/freedbimporter.cpp:275
@@ -3258,11 +3258,11 @@ msgstr ""
 
 #: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:633
 #: src/fetch/colnectfetcher.cpp:527 src/fetch/discogsfetcher.cpp:217
-#: src/fetch/doubanfetcher.cpp:408 src/fetch/filmaffinityfetcher.cpp:425
+#: src/fetch/doubanfetcher.cpp:447 src/fetch/filmaffinityfetcher.cpp:425
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
 #: src/fetch/igdbfetcher.cpp:163 src/fetch/isbndbfetcher.cpp:295
-#: src/fetch/itunesfetcher.cpp:327 src/fetch/kinofetcher.cpp:343
+#: src/fetch/itunesfetcher.cpp:327 src/fetch/kinofetcher.cpp:350
 #: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:376
 #: src/fetch/mobygamesfetcher.cpp:345 src/fetch/moviemeterfetcher.cpp:162
 #: src/fetch/numistafetcher.cpp:285 src/fetch/numistafetcher.cpp:293
@@ -3281,8 +3281,8 @@ msgstr "Δεσμός Allocine"
 
 #: src/fetch/allocinefetcher.cpp:324 src/fetch/allocinefetcher.cpp:503
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
-#: src/fetch/doubanfetcher.cpp:303 src/fetch/doubanfetcher.cpp:321
-#: src/fetch/doubanfetcher.cpp:339 src/fetch/doubanfetcher.cpp:571
+#: src/fetch/doubanfetcher.cpp:342 src/fetch/doubanfetcher.cpp:360
+#: src/fetch/doubanfetcher.cpp:378 src/fetch/doubanfetcher.cpp:610
 #: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:321
 #: src/fetch/filmaffinityfetcher.cpp:456 src/fetch/imdbfetcher.cpp:887
 #: src/fetch/imdbfetcher.cpp:1806 src/fetch/kinopoiskfetcher.cpp:341
@@ -3656,12 +3656,12 @@ msgstr "Βαθμολογία AnimeNfo"
 #: src/fetch/animenfofetcher.cpp:505 src/fetch/arxivfetcher.cpp:336
 #: src/fetch/bedethequefetcher.cpp:465 src/fetch/bibsonomyfetcher.cpp:190
 #: src/fetch/dbcfetcher.cpp:160 src/fetch/dblpfetcher.cpp:129
-#: src/fetch/doubanfetcher.cpp:579 src/fetch/dvdfrfetcher.cpp:190
+#: src/fetch/doubanfetcher.cpp:618 src/fetch/dvdfrfetcher.cpp:190
 #: src/fetch/filmasterfetcher.cpp:323 src/fetch/gaminghistoryfetcher.cpp:438
-#: src/fetch/googlescholarfetcher.cpp:284 src/fetch/hathitrustfetcher.cpp:318
+#: src/fetch/googlescholarfetcher.cpp:282 src/fetch/hathitrustfetcher.cpp:318
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:614
-#: src/fetch/kinofetcher.cpp:381 src/fetch/kinoteatrfetcher.cpp:515
-#: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:223
+#: src/fetch/kinofetcher.cpp:388 src/fetch/kinoteatrfetcher.cpp:515
+#: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
 #: src/fetch/upcitemdbfetcher.cpp:465 src/fetch/vndbfetcher.cpp:440
@@ -3820,8 +3820,8 @@ msgstr "Αναζήτηση δισκογραφίας"
 msgid "User token: "
 msgstr "Αναγνωριστικό χρήστη: "
 
-#: src/fetch/doubanfetcher.cpp:309 src/fetch/doubanfetcher.cpp:327
-#: src/fetch/doubanfetcher.cpp:345 src/fetch/doubanfetcher.cpp:572
+#: src/fetch/doubanfetcher.cpp:348 src/fetch/doubanfetcher.cpp:366
+#: src/fetch/doubanfetcher.cpp:384 src/fetch/doubanfetcher.cpp:611
 #, kde-format
 msgid "Douban Link"
 msgstr "Δεσμός Douban"
