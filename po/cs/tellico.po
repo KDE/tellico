@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-22 00:59+0000\n"
-"PO-Revision-Date: 2023-02-08 12:37+0100\n"
+"PO-Revision-Date: 2023-02-22 14:11+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -97,12 +97,10 @@ msgid "Image List"
 msgstr "Seznam obrázků"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, fuzzy, kde-format
-#| msgctxt "Image List XSL Template"
-#| msgid "Image List"
+#, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "Seznam obrázků"
+msgstr "Mřížka obrázku"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -6402,7 +6400,7 @@ msgstr "Ša&blona zprávy:"
 #: src/reportdialog.cpp:128
 #, kde-format
 msgid "One Entry Per Page"
-msgstr ""
+msgstr "Jeden záznam na stránku"
 
 #: src/reportdialog.cpp:140
 #, kde-format
