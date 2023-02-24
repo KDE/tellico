@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-18 00:59+0000\n"
+"POT-Creation-Date: 2023-02-22 00:59+0000\n"
 "PO-Revision-Date: 2020-11-13 17:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -96,6 +96,12 @@ msgstr "Gruppesammendrag"
 msgctxt "Image List XSL Template"
 msgid "Image List"
 msgstr "Bildeliste"
+
+#. i18n: file: xslt/report-templates/Image_Grid.xsl
+#, kde-format
+msgctxt "Image Grid XSL Template"
+msgid "Image Grid"
+msgstr ""
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -706,13 +712,13 @@ msgstr "Et felt med en avledet verdi må ha en verdimal."
 #: src/fetch/discogsfetcher.cpp:308 src/fetch/discogsfetcher.cpp:313
 #: src/fetch/discogsfetcher.cpp:318 src/fetch/discogsfetcher.cpp:325
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:337
-#: src/fetch/doubanfetcher.cpp:310 src/fetch/doubanfetcher.cpp:328
-#: src/fetch/doubanfetcher.cpp:346 src/fetch/filmaffinityfetcher.cpp:282
+#: src/fetch/doubanfetcher.cpp:349 src/fetch/doubanfetcher.cpp:367
+#: src/fetch/doubanfetcher.cpp:385 src/fetch/filmaffinityfetcher.cpp:282
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
 #: src/fetch/imdbfetcher.cpp:831 src/fetch/imdbfetcher.cpp:1386
-#: src/fetch/itunesfetcher.cpp:224 src/fetch/kinopoiskfetcher.cpp:277
+#: src/fetch/itunesfetcher.cpp:237 src/fetch/kinopoiskfetcher.cpp:277
 #: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:459
 #: src/fetch/moviemeterfetcher.cpp:216 src/fetch/moviemeterfetcher.cpp:221
 #: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:359
@@ -1092,7 +1098,7 @@ msgid "Subtitle"
 msgstr "Undertittel"
 
 #: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:967
-#: src/fetch/doubanfetcher.cpp:377 src/fetch/doubanfetcher.cpp:430
+#: src/fetch/doubanfetcher.cpp:416 src/fetch/doubanfetcher.cpp:469
 #: src/fetch/ibsfetcher.cpp:290 src/translators/alexandriaimporter.cpp:158
 #: src/translators/librarythingimporter.cpp:148
 #, kde-format
@@ -1100,7 +1106,7 @@ msgid "Hardback"
 msgstr "Stivt omslag"
 
 #: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:965
-#: src/fetch/doubanfetcher.cpp:379 src/fetch/doubanfetcher.cpp:432
+#: src/fetch/doubanfetcher.cpp:418 src/fetch/doubanfetcher.cpp:471
 #: src/fetch/ibsfetcher.cpp:288 src/translators/librarythingimporter.cpp:146
 #, kde-format
 msgid "Paperback"
@@ -1112,7 +1118,7 @@ msgid "Trade Paperback"
 msgstr "Papirrygg"
 
 #: src/collections/bookcollection.cpp:72 src/fetch/ibsfetcher.cpp:292
-#: src/fetch/itunesfetcher.cpp:368
+#: src/fetch/itunesfetcher.cpp:393
 #, kde-format
 msgid "E-Book"
 msgstr "Elektronisk bok"
@@ -1650,7 +1656,7 @@ msgid "Album"
 msgstr "Album"
 
 #: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:422
-#: src/fetch/doubanfetcher.cpp:385 src/fetch/doubanfetcher.cpp:519
+#: src/fetch/doubanfetcher.cpp:424 src/fetch/doubanfetcher.cpp:558
 #: src/fetch/upcitemdbfetcher.cpp:290 src/fetch/upcitemdbfetcher.cpp:410
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/freedbimporter.cpp:275
@@ -2526,7 +2532,7 @@ msgstr "&Formater titler og navn"
 msgid "&Print field headers"
 msgstr "Skriv &ut feltoverskrifter"
 
-#: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:500
+#: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:508
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
@@ -2542,7 +2548,7 @@ msgstr "Grupperingsvalg"
 msgid "&Group the entries"
 msgstr "&Grupper innslagene"
 
-#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:505
+#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:513
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
@@ -2588,7 +2594,7 @@ msgid "Template Options"
 msgstr "Valg for maler"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:354
+#: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:364
 #: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
@@ -2785,7 +2791,7 @@ msgid "Template Packages"
 msgstr ""
 
 #: src/configdialog.cpp:1131 src/importdialog.cpp:429 src/mainwindow.cpp:1250
-#: src/mainwindow.cpp:1420 src/reportdialog.cpp:360 src/reportdialog.cpp:375
+#: src/mainwindow.cpp:1420 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -3216,11 +3222,11 @@ msgstr "Eksporter fila i ditt lokale tegnsett."
 
 #: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:633
 #: src/fetch/colnectfetcher.cpp:527 src/fetch/discogsfetcher.cpp:217
-#: src/fetch/doubanfetcher.cpp:408 src/fetch/filmaffinityfetcher.cpp:425
+#: src/fetch/doubanfetcher.cpp:447 src/fetch/filmaffinityfetcher.cpp:425
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
 #: src/fetch/igdbfetcher.cpp:163 src/fetch/isbndbfetcher.cpp:295
-#: src/fetch/itunesfetcher.cpp:314 src/fetch/kinofetcher.cpp:342
+#: src/fetch/itunesfetcher.cpp:327 src/fetch/kinofetcher.cpp:350
 #: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:376
 #: src/fetch/mobygamesfetcher.cpp:345 src/fetch/moviemeterfetcher.cpp:162
 #: src/fetch/numistafetcher.cpp:285 src/fetch/numistafetcher.cpp:293
@@ -3239,8 +3245,8 @@ msgstr ""
 
 #: src/fetch/allocinefetcher.cpp:324 src/fetch/allocinefetcher.cpp:503
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
-#: src/fetch/doubanfetcher.cpp:303 src/fetch/doubanfetcher.cpp:321
-#: src/fetch/doubanfetcher.cpp:339 src/fetch/doubanfetcher.cpp:571
+#: src/fetch/doubanfetcher.cpp:342 src/fetch/doubanfetcher.cpp:360
+#: src/fetch/doubanfetcher.cpp:378 src/fetch/doubanfetcher.cpp:610
 #: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:321
 #: src/fetch/filmaffinityfetcher.cpp:456 src/fetch/imdbfetcher.cpp:887
 #: src/fetch/imdbfetcher.cpp:1806 src/fetch/kinopoiskfetcher.cpp:341
@@ -3514,7 +3520,7 @@ msgstr ""
 "bruke som datakilde."
 
 #: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:213
-#: src/fetch/itunesfetcher.cpp:475 src/fetch/mobygamesfetcher.cpp:671
+#: src/fetch/itunesfetcher.cpp:513 src/fetch/mobygamesfetcher.cpp:671
 #: src/fetch/rpggeekfetcher.cpp:222 src/fetch/thegamesdbfetcher.cpp:655
 #: src/fetch/videogamegeekfetcher.cpp:213
 #, kde-format
@@ -3522,7 +3528,7 @@ msgid "&Image size: "
 msgstr "B&ildestørrelse:"
 
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:217
-#: src/fetch/itunesfetcher.cpp:479 src/fetch/mobygamesfetcher.cpp:674
+#: src/fetch/itunesfetcher.cpp:517 src/fetch/mobygamesfetcher.cpp:674
 #: src/fetch/rpggeekfetcher.cpp:226 src/fetch/thegamesdbfetcher.cpp:658
 #: src/fetch/videogamegeekfetcher.cpp:217
 #, kde-format
@@ -3536,7 +3542,7 @@ msgstr "Middelstort bilde"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/itunesfetcher.cpp:480 src/fetch/mobygamesfetcher.cpp:676
+#: src/fetch/itunesfetcher.cpp:518 src/fetch/mobygamesfetcher.cpp:676
 #: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:660
 #: src/fetch/videogamegeekfetcher.cpp:218
 #, kde-format
@@ -3544,7 +3550,7 @@ msgid "Large Image"
 msgstr "Stort bilde"
 
 #: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:216
-#: src/fetch/itunesfetcher.cpp:478 src/fetch/mobygamesfetcher.cpp:677
+#: src/fetch/itunesfetcher.cpp:516 src/fetch/mobygamesfetcher.cpp:677
 #: src/fetch/rpggeekfetcher.cpp:225 src/fetch/thegamesdbfetcher.cpp:661
 #: src/fetch/videogamegeekfetcher.cpp:216
 #, kde-format
@@ -3591,7 +3597,7 @@ msgid "Distributor"
 msgstr "Distributør"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
-#: src/fetch/imdbfetcher.cpp:1807 src/fetch/itunesfetcher.cpp:464
+#: src/fetch/imdbfetcher.cpp:1807 src/fetch/itunesfetcher.cpp:502
 #: src/fetch/themoviedbfetcher.cpp:578 src/fetch/thetvdbfetcher.cpp:577
 #: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:336
 #, kde-format
@@ -3610,13 +3616,13 @@ msgstr "AnimeNfo karakter"
 
 #: src/fetch/animenfofetcher.cpp:505 src/fetch/arxivfetcher.cpp:336
 #: src/fetch/bedethequefetcher.cpp:465 src/fetch/bibsonomyfetcher.cpp:190
-#: src/fetch/dbcfetcher.cpp:161 src/fetch/dblpfetcher.cpp:129
-#: src/fetch/doubanfetcher.cpp:579 src/fetch/dvdfrfetcher.cpp:190
+#: src/fetch/dbcfetcher.cpp:160 src/fetch/dblpfetcher.cpp:129
+#: src/fetch/doubanfetcher.cpp:618 src/fetch/dvdfrfetcher.cpp:190
 #: src/fetch/filmasterfetcher.cpp:323 src/fetch/gaminghistoryfetcher.cpp:438
-#: src/fetch/googlescholarfetcher.cpp:284 src/fetch/hathitrustfetcher.cpp:318
+#: src/fetch/googlescholarfetcher.cpp:282 src/fetch/hathitrustfetcher.cpp:318
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:614
-#: src/fetch/kinofetcher.cpp:380 src/fetch/kinoteatrfetcher.cpp:515
-#: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:223
+#: src/fetch/kinofetcher.cpp:388 src/fetch/kinoteatrfetcher.cpp:515
+#: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
 #: src/fetch/upcitemdbfetcher.cpp:465 src/fetch/vndbfetcher.cpp:440
@@ -3727,7 +3733,7 @@ msgstr "For noen kontoer kreves bare en e-postadresse."
 msgid "Email: "
 msgstr "E-post: "
 
-#: src/fetch/dbcfetcher.cpp:146
+#: src/fetch/dbcfetcher.cpp:145
 #, kde-format
 msgid "Danish Bibliographic Center (DBC.dk)"
 msgstr ""
@@ -3773,8 +3779,8 @@ msgstr "Discogs lydsøk"
 msgid "User token: "
 msgstr ""
 
-#: src/fetch/doubanfetcher.cpp:309 src/fetch/doubanfetcher.cpp:327
-#: src/fetch/doubanfetcher.cpp:345 src/fetch/doubanfetcher.cpp:572
+#: src/fetch/doubanfetcher.cpp:348 src/fetch/doubanfetcher.cpp:366
+#: src/fetch/doubanfetcher.cpp:384 src/fetch/doubanfetcher.cpp:611
 #, kde-format
 msgid "Douban Link"
 msgstr "Douban-lenke"
@@ -3794,33 +3800,33 @@ msgstr "Entrez Database"
 msgid "Institution"
 msgstr "Institusjon"
 
-#: src/fetch/execexternalfetcher.cpp:339
+#: src/fetch/execexternalfetcher.cpp:349
 #, kde-format
 msgid "External Application"
 msgstr "Eksternt program"
 
-#: src/fetch/execexternalfetcher.cpp:360
+#: src/fetch/execexternalfetcher.cpp:370
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr "Oppgi samlingstype for data returnert fra det eksterne programmet."
 
-#: src/fetch/execexternalfetcher.cpp:365
+#: src/fetch/execexternalfetcher.cpp:375
 #, kde-format
 msgid "&Result type: "
 msgstr "&Resultattype:"
 
-#: src/fetch/execexternalfetcher.cpp:374
+#: src/fetch/execexternalfetcher.cpp:384
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "Oppgi resultattype for data returnert fra det eksterne programmet."
 
-#: src/fetch/execexternalfetcher.cpp:388
+#: src/fetch/execexternalfetcher.cpp:398
 #, kde-format
 msgid "Application &path: "
 msgstr "&Programsti:"
 
-#: src/fetch/execexternalfetcher.cpp:393
+#: src/fetch/execexternalfetcher.cpp:403
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3829,12 +3835,12 @@ msgstr ""
 "Oppgi sti til programmet som skal kjøres for å gi ut en gyldig Tellico "
 "datafil."
 
-#: src/fetch/execexternalfetcher.cpp:398
+#: src/fetch/execexternalfetcher.cpp:408
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Velg søkenøkler som støttes av datakilden."
 
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:410
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3843,17 +3849,17 @@ msgstr ""
 "Legg til nødvendige argumenter. <b>%1</b> blir erstattet av søkebegrepet."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:401
+#: src/fetch/execexternalfetcher.cpp:411
 #, kde-format
 msgid "Arguments"
 msgstr "Argumenter"
 
-#: src/fetch/execexternalfetcher.cpp:433
+#: src/fetch/execexternalfetcher.cpp:443
 #, kde-format
 msgid "Update"
 msgstr "Oppdater"
 
-#: src/fetch/execexternalfetcher.cpp:441
+#: src/fetch/execexternalfetcher.cpp:451
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -4103,7 +4109,7 @@ msgid ""
 "Pro plans."
 msgstr ""
 
-#: src/fetch/itunesfetcher.cpp:223 src/fetch/itunesfetcher.cpp:463
+#: src/fetch/itunesfetcher.cpp:236 src/fetch/itunesfetcher.cpp:501
 #, kde-format
 msgid "iTunes Link"
 msgstr ""
@@ -4790,7 +4796,7 @@ msgid "Group"
 msgstr "Gruppe"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1084 src/mainwindow.cpp:1705
-#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:330
+#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Personer"
@@ -5037,7 +5043,7 @@ msgstr "Flytt rad opp"
 msgid "Move Row Down"
 msgstr "Flytt rad ned"
 
-#: src/images/imagejob.cpp:71 src/images/imagejob.cpp:105
+#: src/images/imagejob.cpp:75 src/images/imagejob.cpp:112
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico klarer ikke å laste finn bildet – %1."
@@ -6394,38 +6400,43 @@ msgstr ""
 "Tellico kan bare importere én fil av gangen av denne typen. Bare %1 blir "
 "importert."
 
-#: src/reportdialog.cpp:90
+#: src/reportdialog.cpp:91
 #, kde-format
 msgid "Collection Report"
 msgstr "Samlingsrapport"
 
-#: src/reportdialog.cpp:101
+#: src/reportdialog.cpp:102
 #, kde-format
 msgid "&Report template:"
 msgstr "&Rapportmal:"
 
-#: src/reportdialog.cpp:137
+#: src/reportdialog.cpp:128
+#, kde-format
+msgid "One Entry Per Page"
+msgstr ""
+
+#: src/reportdialog.cpp:140
 #, kde-format
 msgid "&Generate"
 msgstr "&Generer"
 
-#: src/reportdialog.cpp:157
+#: src/reportdialog.cpp:160
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr "Velg en rapportmal og trykk <em>Generer</em>."
 
-#: src/reportdialog.cpp:158
+#: src/reportdialog.cpp:161
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "Det kan ta flere sekunder å lage noen rapporter for store samlinger."
 
-#: src/reportdialog.cpp:358
+#: src/reportdialog.cpp:426
 #, kde-format
 msgid "PNG Files"
 msgstr ""
 
-#: src/reportdialog.cpp:373 src/translators/htmlexporter.cpp:100
+#: src/reportdialog.cpp:441 src/translators/htmlexporter.cpp:100
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML-filer"
@@ -7069,32 +7080,32 @@ msgstr "Goodreads-valg"
 msgid "HTML"
 msgstr "HTML"
 
-#: src/translators/htmlexporter.cpp:334
+#: src/translators/htmlexporter.cpp:342
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(gruppert på %1)"
 
-#: src/translators/htmlexporter.cpp:496
+#: src/translators/htmlexporter.cpp:504
 #, kde-format
 msgid "HTML Options"
 msgstr "Valg for HTML"
 
-#: src/translators/htmlexporter.cpp:499
+#: src/translators/htmlexporter.cpp:507
 #, kde-format
 msgid "Print field headers"
 msgstr "Skriv ut feltoverskrifter"
 
-#: src/translators/htmlexporter.cpp:504
+#: src/translators/htmlexporter.cpp:512
 #, kde-format
 msgid "Group the entries"
 msgstr "Grupper innslagene"
 
-#: src/translators/htmlexporter.cpp:509
+#: src/translators/htmlexporter.cpp:517
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Eksporter innslag til egne filer"
 
-#: src/translators/htmlexporter.cpp:510
+#: src/translators/htmlexporter.cpp:518
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Om slått på vil hvert innslag få sin egen fil."
@@ -7201,12 +7212,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:190
+#: src/translators/tellicoimporter.cpp:189
 #, kde-format
 msgid "The file is empty."
 msgstr "Fila er tom."
 
-#: src/translators/tellicoimporter.cpp:203
+#: src/translators/tellicoimporter.cpp:202
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "Fila inneholder ingen samlingsdata.s"
