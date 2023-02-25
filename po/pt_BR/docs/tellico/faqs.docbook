@@ -268,12 +268,12 @@ or does not exist</computeroutput>
 <qandaentry>
 <question>
 <para
->Porque você não usou uma base de dados real?</para>
+>Porque você não usou um banco de dados real?</para>
 </question>
 
 <answer>
 <para
->Uma das razões pelas quais o &appname; foi iniciado foi a aprendizagem de C++. O autor não sabia nada sobre SQL naquela época e, atualmente, só possui um conhecimento vago de como usá-lo. Em resumo, o &appname; não começou como uma base de dados relacional, e isso não irá mudar até que o autor aprenda SQL e tenha o tempo e motivação para modificar o modelo de dados. Se isso o incomodar, então não use o &appname;. </para>
+>Uma das razões pelas quais o &appname; foi iniciado foi a aprendizagem de C++. O autor não sabia nada sobre SQL naquela época e, atualmente, só possui um conhecimento vago de como usá-lo. Em resumo, o &appname; não começou como um banco de dados relacional, e isso não irá mudar até que o autor aprenda SQL e tenha o tempo e motivação para modificar o modelo de dados. Se isso o incomodar, então não use o &appname;. </para>
 
 <para
 >Obviamente, toda a ajuda é bem-vinda para fazer as alterações necessárias ao código-fonte. </para>
