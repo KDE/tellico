@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-22 00:59+0000\n"
-"PO-Revision-Date: 2023-02-07 11:10-0300\n"
+"PO-Revision-Date: 2023-02-24 17:14-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -106,12 +106,10 @@ msgid "Image List"
 msgstr "Lista de imagens"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, fuzzy, kde-format
-#| msgctxt "Image List XSL Template"
-#| msgid "Image List"
+#, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "Lista de imagens"
+msgstr "Grade de imagens"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -3786,10 +3784,9 @@ msgid "Barcode"
 msgstr "Código de barras"
 
 #: src/fetch/discogsfetcher.cpp:336 src/fetch/discogsfetcher.cpp:513
-#, fuzzy, kde-format
-#| msgid "Card Number"
+#, kde-format
 msgid "Catalog Number"
-msgstr "Número do Cartão"
+msgstr "Número no catálogo"
 
 #: src/fetch/discogsfetcher.cpp:346
 #, kde-format
@@ -3948,14 +3945,12 @@ msgid "Raw Query"
 msgstr "Pesquisa não refinada"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Referência à Filmaster"
+msgstr "Link do FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "Espanha"
@@ -3964,7 +3959,7 @@ msgstr "Espanha"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "EUA"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -4144,10 +4139,9 @@ msgstr ""
 "para planos Premium e Pro."
 
 #: src/fetch/itunesfetcher.cpp:236 src/fetch/itunesfetcher.cpp:501
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "iTunes Link"
-msgstr "Link Allocine"
+msgstr "Link do iTunes"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4228,10 +4222,9 @@ msgid "SRU Server"
 msgstr "Servidor SRU"
 
 #: src/fetch/srufetcher.cpp:526
-#, fuzzy, kde-format
-#| msgid "&Source name: "
+#, kde-format
 msgid "Scheme: "
-msgstr "Nome da &fonte: "
+msgstr "Esquema: "
 
 #: src/fetch/srufetcher.cpp:535 src/fetch/srufetcher.cpp:571
 #, kde-format
@@ -6458,7 +6451,7 @@ msgstr "Modelo de &relatório:"
 #: src/reportdialog.cpp:128
 #, kde-format
 msgid "One Entry Per Page"
-msgstr ""
+msgstr "Uma entrada por página"
 
 #: src/reportdialog.cpp:140
 #, kde-format
