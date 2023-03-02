@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the tellico package.
 # Jung Hee Lee <daemul72@gmail.com>, 2019, 2021.
-# Shinjo Park <kde@peremen.name>, 2019, 2020, 2021, 2022.
+# Shinjo Park <kde@peremen.name>, 2019, 2020, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-20 02:50+0000\n"
-"PO-Revision-Date: 2022-05-15 22:49+0200\n"
+"PO-Revision-Date: 2023-03-01 01:33+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -5135,10 +5135,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - 간단한 자유 소프트웨어 소장품 관리 도구"
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2022, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2023, Robby Stephenson"
-msgstr "(c) 2001-2022, Robby Stephenson"
+msgstr "(c) 2001-2023, Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
