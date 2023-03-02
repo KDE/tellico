@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the tellico package.
 # Jung Hee Lee <daemul72@gmail.com>, 2019, 2021.
-# Shinjo Park <kde@peremen.name>, 2019, 2020, 2021, 2022.
+# Shinjo Park <kde@peremen.name>, 2019, 2020, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-22 00:59+0000\n"
-"PO-Revision-Date: 2022-05-15 22:49+0200\n"
+"PO-Revision-Date: 2023-03-01 01:33+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -95,12 +95,10 @@ msgid "Image List"
 msgstr "이미지 목록"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, fuzzy, kde-format
-#| msgctxt "Image List XSL Template"
-#| msgid "Image List"
+#, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "이미지 목록"
+msgstr "이미지 그리드"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -3728,10 +3726,9 @@ msgid "Barcode"
 msgstr "바코드"
 
 #: src/fetch/discogsfetcher.cpp:336 src/fetch/discogsfetcher.cpp:513
-#, fuzzy, kde-format
-#| msgid "Card Number"
+#, kde-format
 msgid "Catalog Number"
-msgstr "카드 수"
+msgstr "카탈로그 번호"
 
 #: src/fetch/discogsfetcher.cpp:346
 #, kde-format
@@ -3884,14 +3881,12 @@ msgid "Raw Query"
 msgstr "Raw 쿼리"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Filmaster 링크"
+msgstr "FilmAffinity 링크"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "스페인"
@@ -3900,7 +3895,7 @@ msgstr "스페인"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "미국"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -4079,10 +4074,9 @@ msgstr ""
 "ISBN 일괄 검색은 더 빠르지만 Premium 또는 Pro 구독 중에만 사용할 수 있습니다."
 
 #: src/fetch/itunesfetcher.cpp:236 src/fetch/itunesfetcher.cpp:501
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "iTunes Link"
-msgstr "알로시네 링크"
+msgstr "iTunes 링크"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4163,10 +4157,9 @@ msgid "SRU Server"
 msgstr "SRU 서버"
 
 #: src/fetch/srufetcher.cpp:526
-#, fuzzy, kde-format
-#| msgid "&Source name: "
+#, kde-format
 msgid "Scheme: "
-msgstr "원본 이름(&S): "
+msgstr "스키마: "
 
 #: src/fetch/srufetcher.cpp:535 src/fetch/srufetcher.cpp:571
 #, kde-format
@@ -5230,10 +5223,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - 간단한 자유 소프트웨어 소장품 관리 도구"
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2022, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2023, Robby Stephenson"
-msgstr "(c) 2001-2022, Robby Stephenson"
+msgstr "(c) 2001-2023, Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
@@ -6374,7 +6366,7 @@ msgstr "보고서 템플릿(&R):"
 #: src/reportdialog.cpp:128
 #, kde-format
 msgid "One Entry Per Page"
-msgstr ""
+msgstr "쪽당 항목 한 개"
 
 #: src/reportdialog.cpp:140
 #, kde-format
