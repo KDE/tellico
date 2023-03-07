@@ -50,7 +50,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QDialogButtonBox>
-#include <QTimer>
+#include <QWindow>
 
 namespace {
   // must be an even number
@@ -765,19 +765,9 @@ void EntryEditDialog::fieldChanged(Tellico::Data::FieldPtr field_) {
 
 void EntryEditDialog::showEvent(QShowEvent* event_) {
   QDialog::showEvent(event_);
-/*
-  I attempted to read and restore window size here, but it didn't work (July 2016)
-  I discovered that I had to put it in a timer. Somewhere, the resize event or something
-  was overriding any size changes I did here. Calling this->resize() would work but
-  windowHandle()->resize() would not (as KWindowConfig::restoreWindowSize uses)
-  Bug 462237 - timer can not be 0
-*/
-  QTimer::singleShot(1, this, &EntryEditDialog::slotUpdateSize);
-}
-
-void EntryEditDialog::slotUpdateSize() {
   KConfigGroup config(KSharedConfig::openConfig(), QLatin1String(dialogOptionsString));
   KWindowConfig::restoreWindowSize(windowHandle(), config);
+  resize(windowHandle()->size()); // workaround for QTBUG-40584
 }
 
 void EntryEditDialog::hideEvent(QHideEvent* event_) {
