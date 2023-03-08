@@ -5693,97 +5693,97 @@ msgstr "Exporta les dades de la col·lecció a altres formats"
 #: src/mainwindow.cpp:492
 #, kde-format
 msgid "Export to XML..."
-msgstr "Exporta a XML..."
+msgstr "Exporta cap a XML..."
 
 #: src/mainwindow.cpp:493
 #, kde-format
 msgid "Export to a Tellico XML file"
-msgstr "Exporta a un fitxer XML de Tellico"
+msgstr "Exporta cap a un fitxer XML de Tellico"
 
 #: src/mainwindow.cpp:496
 #, kde-format
 msgid "Export to Zip..."
-msgstr "Exporta a ZIP..."
+msgstr "Exporta cap a ZIP..."
 
 #: src/mainwindow.cpp:497
 #, kde-format
 msgid "Export to a Tellico Zip file"
-msgstr "Exporta a un fitxer ZIP de Tellico"
+msgstr "Exporta cap a un fitxer ZIP de Tellico"
 
 #: src/mainwindow.cpp:500
 #, kde-format
 msgid "Export to HTML..."
-msgstr "Exporta a HTML..."
+msgstr "Exporta cap a HTML..."
 
 #: src/mainwindow.cpp:501
 #, kde-format
 msgid "Export to an HTML file"
-msgstr "Exporta a un fitxer HTML"
+msgstr "Exporta cap a un fitxer HTML"
 
 #: src/mainwindow.cpp:503
 #, kde-format
 msgid "Export to CSV..."
-msgstr "Exporta a CSV..."
+msgstr "Exporta cap a CSV..."
 
 #: src/mainwindow.cpp:504
 #, kde-format
 msgid "Export to a comma-separated values file"
-msgstr "Exporta a un fitxer de valors separats per comes"
+msgstr "Exporta cap a un fitxer de valors separats per comes"
 
 #: src/mainwindow.cpp:506
 #, kde-format
 msgid "Export to Alexandria..."
-msgstr "Exporta a Alexandria..."
+msgstr "Exporta cap a Alexandria..."
 
 #: src/mainwindow.cpp:507
 #, kde-format
 msgid "Export to an Alexandria library"
-msgstr "Exporta a una biblioteca d'Alexandria"
+msgstr "Exporta cap a una biblioteca d'Alexandria"
 
 #: src/mainwindow.cpp:510
 #, kde-format
 msgid "Export to Bibtex..."
-msgstr "Exporta a Bibtex..."
+msgstr "Exporta cap a Bibtex..."
 
 #: src/mainwindow.cpp:511
 #, kde-format
 msgid "Export to a bibtex file"
-msgstr "Exporta a un fitxer bibtex"
+msgstr "Exporta cap a un fitxer bibtex"
 
 #: src/mainwindow.cpp:513
 #, kde-format
 msgid "Export to Bibtexml..."
-msgstr "Exporta a Bibtexml..."
+msgstr "Exporta cap a Bibtexml..."
 
 #: src/mainwindow.cpp:514
 #, kde-format
 msgid "Export to a Bibtexml file"
-msgstr "Exporta a un fitxer Bibtexml"
+msgstr "Exporta cap a un fitxer Bibtexml"
 
 #: src/mainwindow.cpp:516
 #, kde-format
 msgid "Export to ONIX..."
-msgstr "Exporta a ONIX..."
+msgstr "Exporta cap a ONIX..."
 
 #: src/mainwindow.cpp:517
 #, kde-format
 msgid "Export to an ONIX file"
-msgstr "Exporta a un fitxer ONIX"
+msgstr "Exporta cap a un fitxer ONIX"
 
 #: src/mainwindow.cpp:519
 #, kde-format
 msgid "Export to GCstar..."
-msgstr "Exporta a GCstar..."
+msgstr "Exporta cap a GCstar..."
 
 #: src/mainwindow.cpp:520
 #, kde-format
 msgid "Export to a GCstar data file"
-msgstr "Exporta a un fitxer de dades GCstar"
+msgstr "Exporta cap a un fitxer de dades GCstar"
 
 #: src/mainwindow.cpp:523
 #, kde-format
 msgid "Export XSL Transform..."
-msgstr "Exporta a transformació XSL..."
+msgstr "Exporta cap a transformació XSL..."
 
 #: src/mainwindow.cpp:524
 #, kde-format
