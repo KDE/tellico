@@ -19,6 +19,7 @@ SET(translators_STAT_SRCS
    datacrowimporter.cpp
    dataimporter.cpp
    deliciousimporter.cpp
+   ebookimporter.cpp
    exporter.cpp
    filelistingimporter.cpp
    freedb_util.cpp

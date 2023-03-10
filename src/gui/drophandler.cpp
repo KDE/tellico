@@ -84,19 +84,18 @@ bool DropHandler::drop(QDropEvent* event_) {
 
 bool DropHandler::handleURL(const QList<QUrl>& urls_) {
   bool hasUnknown = false;
-  QList<QUrl> tc, pdf, bib, ris, ciw;
+  QMimeDatabase db;
+  QList<QUrl> tc, pdf, bib, ris, ciw, ebook;
   foreach(const QUrl& url, urls_) {
     QMimeType ptr;
     // findByURL doesn't work for http, so actually query
     // the url itself
     if(url.scheme() != QLatin1String("http")) {
-      QMimeDatabase db;
       ptr = db.mimeTypeForUrl(url);
     } else {
       KIO::MimetypeJob* job = KIO::mimetype(url, KIO::HideProgressInfo);
       KJobWidgets::setWindow(job, GUI::Proxy::widget());
       job->exec();
-      QMimeDatabase db;
       ptr = db.mimeTypeForName(job->mimetype());
     }
     if(ptr.inherits(QStringLiteral("application/x-tellico"))) {
@@ -109,6 +108,11 @@ bool DropHandler::handleURL(const QList<QUrl>& urls_) {
       bib << url;
     } else if(ptr.inherits(QStringLiteral("application/x-research-info-systems"))) {
       ris << url;
+    } else if(ptr.inherits(QStringLiteral("application/epub+zip")) ||
+              ptr.inherits(QStringLiteral("application/x-mobipocket-ebook")) ||
+              ptr.inherits(QStringLiteral("application/x-fictionbook+xml")) ||
+              ptr.inherits(QStringLiteral("application/x-zip-compressed-fb2"))) {
+      ebook << url;
     } else if(url.fileName().endsWith(QLatin1String(".bib"))) {
       bib << url;
     } else if(url.fileName().endsWith(QLatin1String(".ris"))) {
@@ -145,6 +149,9 @@ bool DropHandler::handleURL(const QList<QUrl>& urls_) {
   }
   if(!ciw.isEmpty()) {
     mainWindow->importFile(Import::CIW, ciw);
+  }
+  if(!ebook.isEmpty()) {
+    mainWindow->importFile(Import::EBook, ebook);
   }
   // any unknown urls get passed
   return !hasUnknown;

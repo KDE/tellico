@@ -55,6 +55,7 @@
 #include "translators/collectorzimporter.h"
 #include "translators/datacrowimporter.h"
 #include "translators/marcimporter.h"
+#include "translators/ebookimporter.h"
 #include "utils/datafileregistry.h"
 
 #include <KLocalizedString>
@@ -328,6 +329,10 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       CHECK_SIZE;
       importer = new Import::MarcImporter(firstURL);
       break;
+
+    case Import::EBook:
+      importer = new Import::EBookImporter(urls_);
+      break;
   }
   if(!importer) {
     myWarning() << "importer not created!";
@@ -412,6 +417,11 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
     case Import::VinoXML:
       text = i18n("VinoXML Data Files") + QLatin1String(" (*.vinoxml)") + QLatin1String(";;");
       text += i18n("XML Files") + QLatin1String(" (*.xml)") + QLatin1String(";;");
+      break;
+
+    case Import::EBook:
+      // KFileMetaData has extractors that support mimetypes with these typical extensions
+      text = i18n("eBook Files") + QLatin1String(" (*.epub *.fb2 *.fb2zip *.mobi)") + QLatin1String(";;");
       break;
 
     case Import::AudioFile:

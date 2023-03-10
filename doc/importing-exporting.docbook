@@ -222,7 +222,7 @@ Any &XML; file may be imported into &appname; provided an &XSL; stylesheet is av
 <sect1 id="drag-n-drop">
 <title>Drag and Drop</title>
 
-<para>Dragging data files to the main &appname; window and dropping them will import the files, just as if the <link linkend="importing">import command</link> was made from the menus. Drag and drop works for the following file formats: Tellico, Bibtex, RIS, and &PDF;. Importing multiple files at once is also supported.</para>
+<para>Dragging data files to the main &appname; window and dropping them will import the files, just as if the <link linkend="importing">import command</link> was made from the menus. Drag and drop works for the following file formats: Tellico, Bibtex, RIS, &PDF;, and EPub. Importing multiple files at once is also supported.</para>
 
 <para>So, for example, if you want to catalog several <link linkend="importing-pdf">&PDF; files</link>, select them in the file manager and drag them to the &appname; window. &appname; will import as much metadata from the files as it can, and then fetch additional information from various configured Internet sources.</para>
 
