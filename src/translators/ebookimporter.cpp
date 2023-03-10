@@ -60,7 +60,7 @@ Tellico::Data::CollPtr EBookImporter::collection() {
   KFileMetaData::ExtractorCollection extractors;
   foreach(const QUrl& url, urls()) {
     KFileItem item(url);
-    myDebug() << "Reading" << url.url() << item.mimetype();
+//    myDebug() << "Reading" << url.url() << item.mimetype();
     KFileMetaData::SimpleExtractionResult result(url.toLocalFile(),
                                                  item.mimetype(),
                                                  KFileMetaData::ExtractionResult::ExtractMetaData);
