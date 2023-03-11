@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-22 00:59+0000\n"
+"POT-Creation-Date: 2023-03-11 00:49+0000\n"
 "PO-Revision-Date: 2023-02-22 14:11+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -2780,7 +2780,7 @@ msgstr "Soubory XSL"
 msgid "Template Packages"
 msgstr "Balíčky šablon"
 
-#: src/configdialog.cpp:1131 src/importdialog.cpp:429 src/mainwindow.cpp:1250
+#: src/configdialog.cpp:1131 src/importdialog.cpp:439 src/mainwindow.cpp:1250
 #: src/mainwindow.cpp:1420 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -5037,27 +5037,27 @@ msgstr "Posunout řádek níže"
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico nemůže načíst obrázek %1."
 
-#: src/importdialog.cpp:78 src/importdialog.cpp:87
+#: src/importdialog.cpp:79 src/importdialog.cpp:88
 #, kde-format
 msgid "Import Options"
 msgstr "Možnosti importu"
 
-#: src/importdialog.cpp:91
+#: src/importdialog.cpp:92
 #, kde-format
 msgid "&Replace current collection"
 msgstr "&Nahradit stávající sbírku"
 
-#: src/importdialog.cpp:92
+#: src/importdialog.cpp:93
 #, kde-format
 msgid "Replace the current collection with the contents of the imported file."
 msgstr "Nahradit stávající sbírku obsahem importovaného souboru."
 
-#: src/importdialog.cpp:94
+#: src/importdialog.cpp:95
 #, kde-format
 msgid "A&ppend to current collection"
 msgstr "Př&ipojit ke stávající sbírce"
 
-#: src/importdialog.cpp:95
+#: src/importdialog.cpp:96
 #, kde-format
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
@@ -5066,12 +5066,12 @@ msgstr ""
 "Připojit obsah importovaného souboru ke stávající sbírce. Toto je možné, "
 "pouze pokud se shodují druhy sbírek."
 
-#: src/importdialog.cpp:98
+#: src/importdialog.cpp:99
 #, kde-format
 msgid "&Merge with current collection"
 msgstr "&Sloučit se stávající sbírkou"
 
-#: src/importdialog.cpp:99
+#: src/importdialog.cpp:100
 #, kde-format
 msgid ""
 "Merge the contents of the imported file to the current collection. This is "
@@ -5082,67 +5082,73 @@ msgstr ""
 "pouze pokud se shodují druhy sbírek. Aby byly záznamy sloučeny, musí být v "
 "přesně stejném pořadí."
 
-#: src/importdialog.cpp:148 src/mainwindow.cpp:371
+#: src/importdialog.cpp:149 src/mainwindow.cpp:371
 #, kde-format
 msgid "&Import"
 msgstr "&Importovat"
 
-#: src/importdialog.cpp:366 src/mainwindow.cpp:1246 src/mainwindow.cpp:1418
+#: src/importdialog.cpp:371 src/mainwindow.cpp:1246 src/mainwindow.cpp:1418
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Soubory Tellico"
 
-#: src/importdialog.cpp:367 src/importdialog.cpp:385 src/importdialog.cpp:414
+#: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
 #: src/mainwindow.cpp:1248 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "Soubory XML"
 
-#: src/importdialog.cpp:371 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:376 src/translators/bibtexexporter.cpp:65
 #, kde-format
 msgid "Bibtex Files"
 msgstr "Soubory Bibtex"
 
-#: src/importdialog.cpp:375 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:380 src/translators/csvexporter.cpp:64
 #, kde-format
 msgid "CSV Files"
 msgstr "Soubory CSV"
 
-#: src/importdialog.cpp:389
+#: src/importdialog.cpp:394
 #, kde-format
 msgid "RIS Files"
 msgstr "Soubory RIS"
 
-#: src/importdialog.cpp:393 src/translators/gcstarexporter.cpp:62
+#: src/importdialog.cpp:398 src/translators/gcstarexporter.cpp:62
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "Datové soubory GCstar"
 
-#: src/importdialog.cpp:397
+#: src/importdialog.cpp:402
 #, kde-format
 msgid "AMC Data Files"
 msgstr "AMC datové soubory"
 
-#: src/importdialog.cpp:401
+#: src/importdialog.cpp:406
 #, kde-format
 msgid "PDF Files"
 msgstr "Soubory PDF"
 
-#: src/importdialog.cpp:405
+#: src/importdialog.cpp:410
 #, kde-format
 msgid "Referencer Files"
 msgstr ""
 
-#: src/importdialog.cpp:409
+#: src/importdialog.cpp:414
 #, kde-format
 msgid "CIW Files"
 msgstr "Soubory CIW"
 
-#: src/importdialog.cpp:413
+#: src/importdialog.cpp:418
 #, kde-format
 msgid "VinoXML Data Files"
 msgstr "Datové soubory VinoXML"
+
+#: src/importdialog.cpp:424
+#, fuzzy, kde-format
+#| msgid "Book Title"
+msgid "eBook Files"
+msgstr "Název knihy"
 
 #: src/loandialog.cpp:67
 #, kde-format

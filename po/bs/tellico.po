@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-22 00:59+0000\n"
+"POT-Creation-Date: 2023-03-11 00:49+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -2885,7 +2885,7 @@ msgstr "Datoteke"
 msgid "Template Packages"
 msgstr "Predlošci"
 
-#: src/configdialog.cpp:1131 src/importdialog.cpp:429 src/mainwindow.cpp:1250
+#: src/configdialog.cpp:1131 src/importdialog.cpp:439 src/mainwindow.cpp:1250
 #: src/mainwindow.cpp:1420 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -5203,27 +5203,27 @@ msgstr "Pomakni red dolje."
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico nije moglao učitati sliku - %1."
 
-#: src/importdialog.cpp:78 src/importdialog.cpp:87
+#: src/importdialog.cpp:79 src/importdialog.cpp:88
 #, kde-format
 msgid "Import Options"
 msgstr "Opcije uvoza"
 
-#: src/importdialog.cpp:91
+#: src/importdialog.cpp:92
 #, kde-format
 msgid "&Replace current collection"
 msgstr "&Zamijeni trenutnu kolekciju."
 
-#: src/importdialog.cpp:92
+#: src/importdialog.cpp:93
 #, kde-format
 msgid "Replace the current collection with the contents of the imported file."
 msgstr "Zamijeni trenutnu kolekciju sadržajem uvezene datoteke."
 
-#: src/importdialog.cpp:94
+#: src/importdialog.cpp:95
 #, kde-format
 msgid "A&ppend to current collection"
 msgstr "Dodaj u trenutnu kolekciju"
 
-#: src/importdialog.cpp:95
+#: src/importdialog.cpp:96
 #, kde-format
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
@@ -5232,12 +5232,12 @@ msgstr ""
 "Dodavanje sadržaja na uvezene datoteke na trenutnu kolekciju. To je moguće "
 "samo kada se kolekcije slažu."
 
-#: src/importdialog.cpp:98
+#: src/importdialog.cpp:99
 #, kde-format
 msgid "&Merge with current collection"
 msgstr "&Spoji sa trenutnom kolekcijom"
 
-#: src/importdialog.cpp:99
+#: src/importdialog.cpp:100
 #, kde-format
 msgid ""
 "Merge the contents of the imported file to the current collection. This is "
@@ -5247,78 +5247,84 @@ msgstr ""
 "Spaja trenutnu kolekciju sa uvezenim fajlom. To je moguće samo kada se "
 "tipovi kolekcija slažu. Ulazi se moraju slagati da bi bili spojeni."
 
-#: src/importdialog.cpp:148 src/mainwindow.cpp:371
+#: src/importdialog.cpp:149 src/mainwindow.cpp:371
 #, kde-format
 msgid "&Import"
 msgstr "&Import"
 
-#: src/importdialog.cpp:366 src/mainwindow.cpp:1246 src/mainwindow.cpp:1418
+#: src/importdialog.cpp:371 src/mainwindow.cpp:1246 src/mainwindow.cpp:1418
 #: src/translators/tellicozipexporter.cpp:54
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
 msgid "Tellico Files"
 msgstr "Tellico Zip Datoteka"
 
-#: src/importdialog.cpp:367 src/importdialog.cpp:385 src/importdialog.cpp:414
+#: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
 #: src/mainwindow.cpp:1248 src/translators/tellicoxmlexporter.cpp:71
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "XML Files"
 msgstr "Moje datoteke"
 
-#: src/importdialog.cpp:371 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:376 src/translators/bibtexexporter.cpp:65
 #, fuzzy, kde-format
 #| msgid "Bibtex Key"
 msgid "Bibtex Files"
 msgstr "Bibtex ključ"
 
-#: src/importdialog.cpp:375 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:380 src/translators/csvexporter.cpp:64
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "CSV Files"
 msgstr "Datoteke"
 
-#: src/importdialog.cpp:389
+#: src/importdialog.cpp:394
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "RIS Files"
 msgstr "Datoteke"
 
-#: src/importdialog.cpp:393 src/translators/gcstarexporter.cpp:62
+#: src/importdialog.cpp:398 src/translators/gcstarexporter.cpp:62
 #, fuzzy, kde-format
 #| msgid "*.gcs|GCstar Data Files (*.gcs)"
 msgid "GCstar Data Files"
 msgstr "*.gcs|GCstar Datoteke(*.gcs)"
 
-#: src/importdialog.cpp:397
+#: src/importdialog.cpp:402
 #, fuzzy, kde-format
 #| msgid "*.amc|AMC Data Files (*.amc)"
 msgid "AMC Data Files"
 msgstr "*.amc|AMC Datoteke  (*.amc)"
 
-#: src/importdialog.cpp:401
+#: src/importdialog.cpp:406
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "PDF Files"
 msgstr "Datoteke"
 
-#: src/importdialog.cpp:405
+#: src/importdialog.cpp:410
 #, fuzzy, kde-format
 #| msgid "Reorder Fields"
 msgid "Referencer Files"
 msgstr "Promjeni poredak polja"
 
-#: src/importdialog.cpp:409
+#: src/importdialog.cpp:414
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "CIW Files"
 msgstr "Datoteke"
 
-#: src/importdialog.cpp:413
+#: src/importdialog.cpp:418
 #, fuzzy, kde-format
 #| msgid "*.vinoxml|VinoXML Data Files (*.vinoxml)"
 msgid "VinoXML Data Files"
 msgstr "*.vinoxml|VinoXML Datoteke (*.vinoxml)"
+
+#: src/importdialog.cpp:424
+#, fuzzy, kde-format
+#| msgid "Book Title"
+msgid "eBook Files"
+msgstr "Naziv knjige"
 
 #: src/loandialog.cpp:67
 #, kde-format

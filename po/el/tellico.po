@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-22 00:59+0000\n"
+"POT-Creation-Date: 2023-03-11 00:49+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -2820,7 +2820,7 @@ msgstr "XSL αρχεία"
 msgid "Template Packages"
 msgstr "Πακέτα προτύπων"
 
-#: src/configdialog.cpp:1131 src/importdialog.cpp:429 src/mainwindow.cpp:1250
+#: src/configdialog.cpp:1131 src/importdialog.cpp:439 src/mainwindow.cpp:1250
 #: src/mainwindow.cpp:1420 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -5136,29 +5136,29 @@ msgstr "Μετακίνηση γραμμής κάτω"
 msgid "Tellico is unable to load the image - %1."
 msgstr "Το Tellico δεν είναι σε θέση να φορτώσει την εικόνα - %1."
 
-#: src/importdialog.cpp:78 src/importdialog.cpp:87
+#: src/importdialog.cpp:79 src/importdialog.cpp:88
 #, kde-format
 msgid "Import Options"
 msgstr "Εισαγωγή ιδιοτήτων"
 
-#: src/importdialog.cpp:91
+#: src/importdialog.cpp:92
 #, kde-format
 msgid "&Replace current collection"
 msgstr "Αντικατάσταση τρέχουσας συλλογής"
 
-#: src/importdialog.cpp:92
+#: src/importdialog.cpp:93
 #, kde-format
 msgid "Replace the current collection with the contents of the imported file."
 msgstr ""
 "Αντικατάσταση της τρέχουσας συλλογής με τα περιεχόμενα του εισαχθέντος "
 "αρχείου."
 
-#: src/importdialog.cpp:94
+#: src/importdialog.cpp:95
 #, kde-format
 msgid "A&ppend to current collection"
 msgstr "Προσάρτηση στην τρέχουσα συλλογή"
 
-#: src/importdialog.cpp:95
+#: src/importdialog.cpp:96
 #, kde-format
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
@@ -5167,12 +5167,12 @@ msgstr ""
 "Προσάρτηση των περιεχομένων του εισαχθέντος αρχείου στην τρέχουσα συλλογή. "
 "Κάτι τέτοιο μπορεί να γίνει μόνον όταν οι τύποι των συλλογών ταιριάζουν."
 
-#: src/importdialog.cpp:98
+#: src/importdialog.cpp:99
 #, kde-format
 msgid "&Merge with current collection"
 msgstr "&Συγχώνευση με την τρέχουσα συλλογή"
 
-#: src/importdialog.cpp:99
+#: src/importdialog.cpp:100
 #, kde-format
 msgid ""
 "Merge the contents of the imported file to the current collection. This is "
@@ -5184,67 +5184,73 @@ msgstr ""
 "ταιριάζουν. Οι καταχωρήσεις πρέπει να ταιριάζουν επακριβώς ώστε να είναι "
 "δυνατή η συγχώνευση."
 
-#: src/importdialog.cpp:148 src/mainwindow.cpp:371
+#: src/importdialog.cpp:149 src/mainwindow.cpp:371
 #, kde-format
 msgid "&Import"
 msgstr "Ει&σαγωγή"
 
-#: src/importdialog.cpp:366 src/mainwindow.cpp:1246 src/mainwindow.cpp:1418
+#: src/importdialog.cpp:371 src/mainwindow.cpp:1246 src/mainwindow.cpp:1418
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Αρχεία Tellico"
 
-#: src/importdialog.cpp:367 src/importdialog.cpp:385 src/importdialog.cpp:414
+#: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
 #: src/mainwindow.cpp:1248 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "XML αρχεία"
 
-#: src/importdialog.cpp:371 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:376 src/translators/bibtexexporter.cpp:65
 #, kde-format
 msgid "Bibtex Files"
 msgstr "Bibtex αρχεία"
 
-#: src/importdialog.cpp:375 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:380 src/translators/csvexporter.cpp:64
 #, kde-format
 msgid "CSV Files"
 msgstr "CSV αρχεία"
 
-#: src/importdialog.cpp:389
+#: src/importdialog.cpp:394
 #, kde-format
 msgid "RIS Files"
 msgstr "RIS αρχεία"
 
-#: src/importdialog.cpp:393 src/translators/gcstarexporter.cpp:62
+#: src/importdialog.cpp:398 src/translators/gcstarexporter.cpp:62
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "Αρχεία δεδομένων GCstar"
 
-#: src/importdialog.cpp:397
+#: src/importdialog.cpp:402
 #, kde-format
 msgid "AMC Data Files"
 msgstr "Αρχεία δεδομένων AMC"
 
-#: src/importdialog.cpp:401
+#: src/importdialog.cpp:406
 #, kde-format
 msgid "PDF Files"
 msgstr "PDF αρχεία"
 
-#: src/importdialog.cpp:405
+#: src/importdialog.cpp:410
 #, kde-format
 msgid "Referencer Files"
 msgstr "Αρχεία εφαρμογής αναφορών"
 
-#: src/importdialog.cpp:409
+#: src/importdialog.cpp:414
 #, kde-format
 msgid "CIW Files"
 msgstr "CIW αρχεία"
 
-#: src/importdialog.cpp:413
+#: src/importdialog.cpp:418
 #, kde-format
 msgid "VinoXML Data Files"
 msgstr "VinoXML αρχεία δεδομένων"
+
+#: src/importdialog.cpp:424
+#, fuzzy, kde-format
+#| msgid "Book Title"
+msgid "eBook Files"
+msgstr "Τίτλος βιβλίου"
 
 #: src/loandialog.cpp:67
 #, kde-format
