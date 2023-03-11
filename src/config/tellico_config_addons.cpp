@@ -187,6 +187,13 @@ QColor Config::templateHighlightedTextColor(int type_) {
   return QColor();
 }
 
+QColor Config::templateLinkColor(int type_) {
+  switch(type_) {
+    ALL_GET(linkColor)
+  }
+  return QColor();
+}
+
 void Config::setTemplateName(int type_, const QString& name_) {
   switch(type_) {
     ALL_SET(setTemplate,name_)
@@ -220,6 +227,12 @@ void Config::setTemplateHighlightedBaseColor(int type_, const QColor& color_) {
 void Config::setTemplateHighlightedTextColor(int type_, const QColor& color_) {
   switch(type_) {
     ALL_SET(setHighlightedTextColor,color_)
+  }
+}
+
+void Config::setTemplateLinkColor(int type_, const QColor& color_) {
+  switch(type_) {
+    ALL_SET(setLinkColor,color_)
   }
 }
 

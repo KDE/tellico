@@ -36,6 +36,7 @@
 <xsl:param name="bgcolor"/> <!-- background color -->
 <xsl:param name="color1"/> <!-- highlighted text color -->
 <xsl:param name="color2"/> <!-- highlighted background color -->
+<xsl:param name="linkcolor"/> <!-- link color -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
@@ -175,6 +176,9 @@
    .year {
         direction: ltr;
         unicode-bidi: embed;
+   }
+   a {
+     color: <xsl:value-of select="$linkcolor"/>;
    }
   </style>
   <title>

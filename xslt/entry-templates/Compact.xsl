@@ -37,6 +37,7 @@
 <xsl:param name="fontsize"/> <!-- font size -->
 <xsl:param name="fgcolor"/> <!-- foreground color -->
 <xsl:param name="bgcolor"/> <!-- background color -->
+<xsl:param name="linkcolor"/> <!-- link color -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 <xsl:param name="skip-fields"/> <!-- comma-separated listed of field names to skip -->
@@ -136,6 +137,9 @@
     font-weight: bold;
     text-align: center;
     clear: both;
+  }
+  a {
+    color: <xsl:value-of select="$linkcolor"/>;
   }
   </style>
   <title>

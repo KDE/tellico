@@ -156,6 +156,10 @@
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorBook">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
+    </entry>
 </group>
 
 <group name="Options - video">
@@ -182,6 +186,10 @@
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorVideo">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
+    </entry>
 </group>
 
 <group name="Options - album">
@@ -207,6 +215,10 @@
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorAlbum">
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
+    </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorAlbum">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
     </entry>
 </group>
 
@@ -237,6 +249,10 @@
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorBibtex">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
+    </entry>
 </group>
 
 <group name="Options - comic">
@@ -262,6 +278,10 @@
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorComicBook">
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
+    </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorComicBook">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
     </entry>
 </group>
 
@@ -289,6 +309,10 @@
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorWine">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
+    </entry>
 </group>
 
 <group name="Options - coin">
@@ -314,6 +338,10 @@
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorCoin">
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
+    </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorCoin">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
     </entry>
 </group>
 
@@ -341,6 +369,10 @@
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorStamp">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
+    </entry>
 </group>
 
 <group name="Options - card">
@@ -366,6 +398,10 @@
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorCard">
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
+    </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorCard">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
     </entry>
 </group>
 
@@ -393,6 +429,10 @@
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorGame">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
+    </entry>
 </group>
 
 <group name="Options - file">
@@ -418,6 +458,10 @@
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorFile">
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
+    </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorFile">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
     </entry>
 </group>
 
@@ -445,6 +489,10 @@
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorBoardGame">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
+    </entry>
 </group>
 
 <group name="Options - entry">
@@ -470,6 +518,10 @@
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorBase">
         <label>Template highlighted text color</label>
         <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
+    </entry>
+    <entry key="Template Link Color" type="Color" name="linkColorBase">
+        <label>Template link color</label>
+        <default code="true">KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color()</default>
     </entry>
 </group>
 

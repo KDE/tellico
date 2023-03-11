@@ -536,6 +536,15 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   lab->setWhatsThis(whats);
   m_highTextColorCombo->setWhatsThis(whats);
 
+  lab = new QLabel(i18n("Link color:"), colGroup);
+  colLayout->addWidget(lab, ++row, 0);
+  m_linkColorCombo = new KColorCombo(colGroup);
+  colLayout->addWidget(m_linkColorCombo, row, 1);
+  connect(m_linkColorCombo, activatedInt, this, &ConfigDialog::slotModified);
+  lab->setBuddy(m_linkColorCombo);
+  lab->setWhatsThis(whats);
+  m_linkColorCombo->setWhatsThis(whats);
+
   QGroupBox* groupBox = new QGroupBox(i18n("Manage Templates"), frame);
   l->addWidget(groupBox);
   QVBoxLayout* vlay = new QVBoxLayout(groupBox);
@@ -579,6 +588,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   widgets.append(m_textColorCombo);
   widgets.append(m_highBaseColorCombo);
   widgets.append(m_highTextColorCombo);
+  widgets.append(m_linkColorCombo);
   int w = 0;
   foreach(QWidget* widget, widgets) {
     widget->ensurePolished();
@@ -748,6 +758,7 @@ void ConfigDialog::readTemplateConfig() {
   m_textColorCombo->setColor(Config::templateTextColor(collType));
   m_highBaseColorCombo->setColor(Config::templateHighlightedBaseColor(collType));
   m_highTextColorCombo->setColor(Config::templateHighlightedTextColor(collType));
+  m_linkColorCombo->setColor(Config::templateLinkColor(collType));
 
   m_modifying = false;
 }
@@ -831,6 +842,7 @@ void ConfigDialog::saveTemplateConfig() {
   Config::setTemplateTextColor(collType, m_textColorCombo->color());
   Config::setTemplateHighlightedBaseColor(collType, m_highBaseColorCombo->color());
   Config::setTemplateHighlightedTextColor(collType, m_highTextColorCombo->color());
+  Config::setTemplateLinkColor(collType, m_linkColorCombo->color());
 }
 
 void ConfigDialog::saveFetchConfig() {
@@ -1077,8 +1089,11 @@ void ConfigDialog::slotShowTemplatePreview() {
   options.textColor  = m_textColorCombo->color();
   options.highlightedTextColor = m_highTextColorCombo->color();
   options.highlightedBaseColor = m_highBaseColorCombo->color();
+  options.linkColor  = m_linkColorCombo->color();
   dlg->setXSLTOptions(Kernel::self()->collectionType(), options);
 
+  // always want to include a url to show link color too
+  bool hasLink = false;
   Data::CollPtr c = CollectionFactory::collection(Kernel::self()->collectionType(), true);
   Data::EntryPtr e(new Data::Entry(c));
   foreach(Data::FieldPtr f, c->fields()) {
@@ -1094,9 +1109,20 @@ void ConfigDialog::slotShowTemplatePreview() {
       e->setField(f->name(), QStringLiteral("true"));
     } else if(f->type() == Data::Field::Rating) {
       e->setField(f->name(), QStringLiteral("5"));
+    } else if(f->type() == Data::Field::URL) {
+      e->setField(f->name(), QStringLiteral("https://tellico-project.org"));
+      hasLink = true;
     } else {
       e->setField(f->name(), f->title());
     }
+  }
+  if(!hasLink) {
+    Data::FieldPtr f(new Data::Field(QStringLiteral("url"),
+                                     QLatin1String("URL"),
+                                     Data::Field::URL));
+    f->setCategory(i18n("General"));
+    c->addField(f);
+    e->setField(f->name(), QStringLiteral("https://tellico-project.org"));
   }
 
   dlg->showEntry(e);

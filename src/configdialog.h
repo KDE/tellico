@@ -195,6 +195,7 @@ private:
   KColorCombo* m_textColorCombo;
   KColorCombo* m_highBaseColorCombo;
   KColorCombo* m_highTextColorCombo;
+  KColorCombo* m_linkColorCombo;
 
   QListWidget* m_sourceListWidget;
   QMap<FetcherInfoListItem*, Fetch::ConfigWidget*> m_configWidgets;

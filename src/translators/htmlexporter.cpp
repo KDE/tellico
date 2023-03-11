@@ -400,6 +400,7 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   m_handler->addStringParam("fgcolor",  Config::templateTextColor(type).name().toLatin1());
   m_handler->addStringParam("color1",   Config::templateHighlightedTextColor(type).name().toLatin1());
   m_handler->addStringParam("color2",   Config::templateHighlightedBaseColor(type).name().toLatin1());
+  m_handler->addStringParam("linkcolor",Config::templateLinkColor(type).name().toLatin1());
 
   // add locale code to stylesheet (for sorting)
   m_handler->addStringParam("lang", QLocale().name().toLatin1());

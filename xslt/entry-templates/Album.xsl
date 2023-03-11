@@ -37,6 +37,7 @@
 <xsl:param name="bgcolor"/> <!-- background color -->
 <xsl:param name="color1"/> <!-- highlighted text color -->
 <xsl:param name="color2"/> <!-- highlighted background color -->
+<xsl:param name="linkcolor"/> <!-- link color -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
@@ -137,7 +138,7 @@
    img {
        border: 0px solid;
    }
-  <!-- since text is our own color, links have to be, too -->
+   <!-- since text is our own color, links have to be, too -->
    a {
        color: #006;
    }

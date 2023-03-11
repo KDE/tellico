@@ -53,6 +53,7 @@ public:
   QColor textColor;
   QColor highlightedBaseColor;
   QColor highlightedTextColor;
+  QColor linkColor;
   QString imgDir;
 };
 

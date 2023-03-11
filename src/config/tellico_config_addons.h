@@ -40,6 +40,7 @@ public:
   static QColor templateTextColor(int type);
   static QColor templateHighlightedBaseColor(int type);
   static QColor templateHighlightedTextColor(int type);
+  static QColor templateLinkColor(int type);
 
   static void setTemplateName(int type, const QString& name);
   static void setTemplateFont(int type, const QFont& font);
@@ -47,6 +48,7 @@ public:
   static void setTemplateTextColor(int type, const QColor& color);
   static void setTemplateHighlightedBaseColor(int type, const QColor& color);
   static void setTemplateHighlightedTextColor(int type, const QColor& color);
+  static void setTemplateLinkColor(int type, const QColor& color);
 
 private:
   static QRegularExpression commaSplit();
