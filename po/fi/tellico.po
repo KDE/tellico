@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the tellico package.
 # Teuvo Eloranta <teuvo@piketa.fi>, 2009.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
-# Tommi Nieminen <translator@legisign.org>, 2016, 2019.
+# Tommi Nieminen <translator@legisign.org>, 2016, 2019, 2023.
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-20 02:50+0000\n"
-"PO-Revision-Date: 2019-05-10 16:52+0200\n"
+"PO-Revision-Date: 2023-02-26 16:48+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2013-01-13 20:43:19+0000\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -96,11 +96,10 @@ msgid "Group Summary"
 msgstr "Ryhmäyhteenveto"
 
 #. i18n: file: xslt/report-templates/Image_List.xsl
-#, fuzzy, kde-format
-#| msgid "Image Options"
+#, kde-format
 msgctxt "Image List XSL Template"
 msgid "Image List"
-msgstr "Kuvan asetukset"
+msgstr "Kuvaluettelo"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -164,10 +163,9 @@ msgstr "Nimi"
 
 #: src/charts/collectionsizereport.cpp:45
 #: src/charts/collectionsizereport.cpp:116
-#, fuzzy, kde-format
-#| msgid "Collection Fields"
+#, kde-format
 msgid "Collection Size"
-msgstr "Kokoelman kentät"
+msgstr "Kokoelman koko"
 
 #: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1550
 #, kde-format
@@ -175,36 +173,29 @@ msgid "Total entries: %1"
 msgstr "Tietueita yhteensä: %1"
 
 #: src/charts/collectionsizereport.cpp:91
-#, fuzzy, kde-format
-#| msgid "Collection Fields"
+#, kde-format
 msgid "Collection Size Over Time"
-msgstr "Kokoelman kentät"
+msgstr "Kokoelman koko ajan myötä"
 
 #: src/charts/groupsummaryreport.cpp:60
-#, fuzzy, kde-format
-#| msgctxt "Group Summary XSL Template"
-#| msgid "Group Summary"
+#, kde-format
 msgid "Group Summary: %1"
-msgstr "Ryhmäyhteenveto"
+msgstr "Ryhmäyhteenveto: %1"
 
 #: src/charts/groupsummaryreport.cpp:66
-#, fuzzy, kde-format
-#| msgid "Total number of entries:"
+#, kde-format
 msgid "Total number of entries: %1"
-msgstr "Tietueita yhteensä:"
-
-#: src/charts/groupsummaryreport.cpp:120
-#, fuzzy, kde-format
-#| msgid "Total entries: %1"
-msgid "Top Values: %1"
 msgstr "Tietueita yhteensä: %1"
 
+#: src/charts/groupsummaryreport.cpp:120
+#, kde-format
+msgid "Top Values: %1"
+msgstr "Huippuarvot: %1"
+
 #: src/charts/groupsummaryreport.cpp:192
-#, fuzzy, kde-format
-#| msgctxt "Group Summary XSL Template"
-#| msgid "Group Summary"
+#, kde-format
 msgid "Group Summary Report"
-msgstr "Ryhmäyhteenveto"
+msgstr "Ryhmäyhteenvetoraportti"
 
 #: src/charts/yeardistributionreport.cpp:69
 #: src/charts/yeardistributionreport.cpp:133
@@ -214,11 +205,10 @@ msgid "Year Distribution"
 msgstr "Jakelija"
 
 #: src/charts/yeardistributionreport.cpp:158
-#, fuzzy, kde-format
-#| msgid "Country"
+#, kde-format
 msgctxt "Distinct number of items"
 msgid "Count"
-msgstr "Alkuperämaa"
+msgstr "Lukumäärä"
 
 #: src/cite/lyxpipe.cpp:57
 #, kde-format
@@ -461,7 +451,7 @@ msgstr "Kuvaus:"
 msgid ""
 "The description is a useful reminder of what information is contained in the "
 "field."
-msgstr "Kuvaus kertoo minkälaista tietoa kentässä on."
+msgstr "Kuvaus on hyvä muistutus siitä, millaista tietoa kenttään sisältyy."
 
 #: src/collectionfieldsdialog.cpp:242
 #, kde-format
@@ -568,8 +558,8 @@ msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
 "separated by a semi-colon."
 msgstr ""
-"Jos valittu, Tellico luetteloi kentän kaikki puolipisteellä erotellut arvot "
-"omina arvoinaan."
+"Jos valittu, Tellico tulkitsee kentän useiksi puolipistein erotetuiksi "
+"arvoiksi."
 
 #: src/collectionfieldsdialog.cpp:311
 #, kde-format
@@ -849,7 +839,7 @@ msgstr "DOI"
 #: src/collections/bibtexcollection.cpp:180
 #, kde-format
 msgid "Digital Object Identifier"
-msgstr "Digital Object Identifier"
+msgstr "Digitaalinen kohdetunniste"
 
 #: src/collections/bibtexcollection.cpp:185
 #, kde-format
@@ -985,15 +975,14 @@ msgid "Number of Players"
 msgstr "Pelaajien määrä"
 
 #: src/collections/boardgamecollection.cpp:85
-#, fuzzy, kde-format
-#| msgid "Running Time"
+#, kde-format
 msgid "Playing Time"
-msgstr "Kesto"
+msgstr "Toistoaika"
 
 #: src/collections/boardgamecollection.cpp:90
 #, kde-format
 msgid "Minimum Age"
-msgstr ""
+msgstr "Vähimmäisikä"
 
 #: src/collections/boardgamecollection.cpp:95
 #: src/collections/filecatalog.cpp:57 src/collections/gamecollection.cpp:94
@@ -1507,13 +1496,13 @@ msgstr "Windows"
 #, kde-format
 msgctxt "iOS Platform"
 msgid "iOS"
-msgstr ""
+msgstr "iOS"
 
 #: src/collections/gamecollection.cpp:241
 #, kde-format
 msgctxt "Android Platform"
 msgid "Android"
-msgstr ""
+msgstr "Android"
 
 #: src/collections/gamecollection.cpp:242
 #, kde-format
@@ -1531,10 +1520,9 @@ msgid "Xbox One"
 msgstr "Xbox One"
 
 #: src/collections/gamecollection.cpp:245
-#, fuzzy, kde-format
-#| msgid "Series"
+#, kde-format
 msgid "Xbox Series X"
-msgstr "Sarja"
+msgstr "Xbox Series X"
 
 #: src/collections/gamecollection.cpp:246
 #, kde-format
@@ -1544,23 +1532,22 @@ msgstr "PlayStation"
 #: src/collections/gamecollection.cpp:247
 #, kde-format
 msgid "PlayStation2"
-msgstr "PlayStation2"
+msgstr "PlayStation 2"
 
 #: src/collections/gamecollection.cpp:248
 #, kde-format
 msgid "PlayStation3"
-msgstr "PlayStation3"
+msgstr "PlayStation 3"
 
 #: src/collections/gamecollection.cpp:249
 #, kde-format
 msgid "PlayStation4"
-msgstr "PlayStation4"
+msgstr "PlayStation 4"
 
 #: src/collections/gamecollection.cpp:250
-#, fuzzy, kde-format
-#| msgid "PlayStation"
+#, kde-format
 msgid "PlayStation5"
-msgstr "PlayStation"
+msgstr "PlayStation 5"
 
 #: src/collections/gamecollection.cpp:251
 #, kde-format
@@ -1614,16 +1601,14 @@ msgid "Nintendo Wii"
 msgstr "Nintendo Wii"
 
 #: src/collections/gamecollection.cpp:261
-#, fuzzy, kde-format
-#| msgid "Nintendo Wii"
+#, kde-format
 msgid "Nintendo WiiU"
-msgstr "Nintendo Wii"
+msgstr "Nintendo WiiU"
 
 #: src/collections/gamecollection.cpp:262
-#, fuzzy, kde-format
-#| msgid "Nintendo DS"
+#, kde-format
 msgid "Nintendo Switch"
-msgstr "Nintendo DS"
+msgstr "Nintendo Switch"
 
 #: src/collections/gamecollection.cpp:263
 #, kde-format
@@ -1828,13 +1813,13 @@ msgstr "DivX"
 #: src/fetch/upcitemdbfetcher.cpp:387
 #, kde-format
 msgid "Blu-ray"
-msgstr "Blu-ray"
+msgstr "Bluray"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1028
 #: src/fetch/upcitemdbfetcher.cpp:390
 #, kde-format
 msgid "HD DVD"
-msgstr "HD DVD"
+msgstr "HD-DVD"
 
 #: src/collections/videocollection.cpp:60
 #, kde-format
@@ -2068,7 +2053,7 @@ msgstr "Kuohuviini"
 #: src/collections/winecollection.cpp:108
 #, kde-format
 msgid "Drink By"
-msgstr "Viimeinen juontipäivä"
+msgstr "Viimeinen käyttöpäivä"
 
 #: src/collections/winecollection.cpp:122
 #, kde-format
@@ -2116,17 +2101,17 @@ msgstr "Korvaa kokoelma"
 #: src/commands/fieldcommand.cpp:59
 #, kde-format
 msgid "Add %1 Field"
-msgstr "Lisää %1-kenttä"
+msgstr "Lisää kenttä %1"
 
 #: src/commands/fieldcommand.cpp:62
 #, kde-format
 msgid "Modify %1 Field"
-msgstr "Muuta %1-kenttää"
+msgstr "Muuta kenttää %1"
 
 #: src/commands/fieldcommand.cpp:65
 #, kde-format
 msgid "Delete %1 Field"
-msgstr "Tuhoa %1-kenttä"
+msgstr "Poista kenttä %1"
 
 #: src/commands/filtercommand.cpp:56
 #, kde-format
@@ -2142,7 +2127,7 @@ msgstr "Muuta suodatinta"
 #: src/commands/filtercommand.cpp:62 src/filterview.cpp:135
 #, kde-format
 msgid "Delete Filter"
-msgstr "Tuhoa suodatin"
+msgstr "Poista suodatin"
 
 #: src/commands/modifyentries.cpp:50 src/commands/modifyentries.cpp:70
 #: src/entryeditdialog.cpp:383
@@ -2165,13 +2150,13 @@ msgstr "Muuta lainausta"
 #: src/commands/removeentries.cpp:41
 #, kde-format
 msgid "Delete Entries"
-msgstr "Tuhoa nimikkeet"
+msgstr "Poista tietueet"
 
 #: src/commands/removeentries.cpp:42
 #, kde-format
 msgctxt "Delete (Entry Title)"
 msgid "Delete %1"
-msgstr "Tuhoa %1"
+msgstr "Poista %1"
 
 #: src/commands/removeloans.cpp:40
 #, kde-format
@@ -2214,13 +2199,13 @@ msgstr "the"
 #, kde-format
 msgctxt "comma-separated list of common surname suffixes, used for sorting"
 msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
+msgstr "jr.,jr,iii,iv,nuorempi,vanhempi,nuor.,vanh."
 
 #: src/config/tellico_config.kcfg:95
 #, kde-format
 msgctxt "comma-separated list of common surname prefixes, used for sorting"
 msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der,von"
+msgstr "de,van,der,van der,von,af"
 
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
@@ -2384,7 +2369,7 @@ msgstr "Jos valittu, viimeksi avattu tiedosto avataan ohjelman käynnistyessä."
 #: src/configdialog.cpp:218
 #, kde-format
 msgid "&Show \"Tip of the Day\" at startup"
-msgstr "&Näytä ”päivän vinkki” ohjelmaa käynnistettäessä"
+msgstr "&Näytä käynnistettäessä päivän vinkki"
 
 #: src/configdialog.cpp:219
 #, kde-format
@@ -2402,8 +2387,8 @@ msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
 "searching."
 msgstr ""
-"Jos valittu, web-kameran syötettä käytetään viivakoodien lukemiseksi "
-"etsittäessä."
+"Jos valittu, etsittäessä käytetään verkkokamerasyötettä viivakoodien "
+"lukemiseen."
 
 #: src/configdialog.cpp:230
 #, kde-format
@@ -2829,7 +2814,7 @@ msgstr "Haluatko varmasti poistaa tämän tietueen?"
 #: src/controller.cpp:362
 #, kde-format
 msgid "Delete Entry"
-msgstr "Tuhoa nimike"
+msgstr "Poista tietue"
 
 #: src/controller.cpp:374
 #, kde-format
@@ -2844,7 +2829,7 @@ msgstr "Poista useita tietueita"
 #: src/controller.cpp:527
 #, kde-format
 msgid "&Sort By"
-msgstr "&Järjestä tämän mukaan:"
+msgstr "La&jittelu"
 
 #: src/controller.cpp:589 src/mainwindow.cpp:584
 #, kde-format
@@ -2859,12 +2844,12 @@ msgstr "&Monista tietue"
 #: src/controller.cpp:591 src/mainwindow.cpp:685
 #, kde-format
 msgid "&Update Entry"
-msgstr "&Päivitä tietue"
+msgstr "Päi&vitä tietue"
 
 #: src/controller.cpp:592 src/mainwindow.cpp:598
 #, kde-format
 msgid "&Delete Entry"
-msgstr "&Tuhoa tietue"
+msgstr "&Poista tietue"
 
 #: src/controller.cpp:595
 #, kde-format
@@ -2879,12 +2864,12 @@ msgstr "Monista tietueet (x2)"
 #: src/controller.cpp:597
 #, kde-format
 msgid "&Update Entries"
-msgstr "&Päivitä tietueet"
+msgstr "Pä&ivitä tietueet"
 
 #: src/controller.cpp:598
 #, kde-format
 msgid "&Delete Entries"
-msgstr "Tuh&oa tietueet"
+msgstr "Pois&ta tietueet"
 
 #: src/controller.cpp:655
 #, kde-format
@@ -2968,7 +2953,7 @@ msgstr "Nimetön"
 #: src/core/tellico_strings.cpp:42
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-msgstr ""
+msgstr "Tiedon tarjoaa ilmaiseksi <a href=\"%1\">%2</a>."
 
 #: src/detailedlistview.cpp:523
 #, kde-format
@@ -2982,10 +2967,9 @@ msgid "Columns"
 msgstr "Sarakkeet"
 
 #: src/detailedlistview.cpp:541
-#, fuzzy, kde-format
-#| msgid "Hide All Columns"
+#, kde-format
 msgid "Hide This Column"
-msgstr "Piilota kaikki sarakkeet"
+msgstr "Piilota tämä sarake"
 
 #: src/detailedlistview.cpp:543
 #, kde-format
@@ -3083,11 +3067,10 @@ msgstr ""
 "ryhmän käyttäen kuvakkeita. Kuvake voi olla tietueenssa oleva kuva.</qt>"
 
 #: src/entryiconview.cpp:115
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgctxt "Open URL"
 msgid "Open %1"
-msgstr "Avaa tiedosto"
+msgstr "Avaa: %1"
 
 #: src/entrymatchdialog.cpp:56
 #, kde-format
@@ -3361,82 +3344,74 @@ msgid "Italy"
 msgstr "Italia"
 
 #: src/fetch/amazonfetcher.cpp:135
-#, fuzzy, kde-format
-#| msgid "Amazon (Spain)"
+#, kde-format
 msgid "Amazon (Brazil)"
-msgstr "Amazon (Espanja)"
+msgstr "Amazon (Brasilia)"
 
 #: src/fetch/amazonfetcher.cpp:139
 #, kde-format
 msgid "Brazil"
-msgstr ""
+msgstr "Brasilia"
 
 #: src/fetch/amazonfetcher.cpp:141
-#, fuzzy, kde-format
-#| msgid "Amazon (Italy)"
+#, kde-format
 msgid "Amazon (Australia)"
-msgstr "Amazon (Italia)"
+msgstr "Amazon (Australia)"
 
 #: src/fetch/amazonfetcher.cpp:145
 #, kde-format
 msgid "Australia"
-msgstr ""
+msgstr "Australia"
 
 #: src/fetch/amazonfetcher.cpp:147
-#, fuzzy, kde-format
-#| msgid "Amazon (Canada)"
+#, kde-format
 msgid "Amazon (India)"
-msgstr "Amazon (Kanada)"
+msgstr "Amazon (Intia)"
 
 #: src/fetch/amazonfetcher.cpp:151
 #, kde-format
 msgid "India"
-msgstr ""
+msgstr "Intia"
 
 #: src/fetch/amazonfetcher.cpp:153
-#, fuzzy, kde-format
-#| msgid "Amazon (US)"
+#, kde-format
 msgid "Amazon (Mexico)"
-msgstr "Amazon (Yhdysvallat)"
+msgstr "Amazon (Meksiko)"
 
 #: src/fetch/amazonfetcher.cpp:157
 #, kde-format
 msgid "Mexico"
-msgstr ""
+msgstr "Meksiko"
 
 #: src/fetch/amazonfetcher.cpp:159
-#, fuzzy, kde-format
-#| msgid "Amazon (France)"
+#, kde-format
 msgid "Amazon (Turkey)"
-msgstr "Amazon (Ranska)"
+msgstr "Amazon (Turkki)"
 
 #: src/fetch/amazonfetcher.cpp:163
 #, kde-format
 msgid "Turkey"
-msgstr ""
+msgstr "Turkki"
 
 #: src/fetch/amazonfetcher.cpp:165
-#, fuzzy, kde-format
-#| msgid "Amazon (Spain)"
+#, kde-format
 msgid "Amazon (Singapore)"
-msgstr "Amazon (Espanja)"
+msgstr "Amazon (Singapore)"
 
 #: src/fetch/amazonfetcher.cpp:169
 #, kde-format
 msgid "Singapore"
-msgstr ""
+msgstr "Singapore"
 
 #: src/fetch/amazonfetcher.cpp:171
-#, fuzzy, kde-format
-#| msgid "Amazon (US)"
+#, kde-format
 msgid "Amazon (UAE)"
-msgstr "Amazon (Yhdysvallat)"
+msgstr "Amazon (Yhdistyneet arabiemiirikunnat)"
 
 #: src/fetch/amazonfetcher.cpp:175
-#, fuzzy, kde-format
-#| msgid "United States"
+#, kde-format
 msgid "United Arab Emirates"
-msgstr "Yhdysvallat"
+msgstr "Yhdistyneet arabiemiirikunnat"
 
 #: src/fetch/amazonfetcher.cpp:200 src/fetch/filmasterfetcher.cpp:68
 #: src/fetch/springerfetcher.cpp:62
@@ -3483,18 +3458,14 @@ msgstr "Amazon.com"
 #: src/fetch/mobygamesfetcher.cpp:609 src/fetch/omdbfetcher.cpp:408
 #: src/fetch/thegamesdbfetcher.cpp:594 src/fetch/themoviedbfetcher.cpp:590
 #: src/fetch/thetvdbfetcher.cpp:590
-#, fuzzy, kde-format
-#| msgid ""
-#| "Registration is required for accessing the %1 data source. If you agree "
-#| "to the terms and conditions, <a href='%2'>sign up for an account</a>, and "
-#| "enter your information below."
+#, kde-format
 msgid ""
 "Registration is required for accessing this data source. If you agree to the "
 "terms and conditions, <a href='%1'>sign up for an account</a>, and enter "
 "your information below."
 msgstr ""
-"Tietolähteen %1 käyttöön vaaditaan rekisteröitymistä. Jos hyväksyt käytön "
-"ehdot, <a href='%2'>luo tili</a> ja anna tietosi alla."
+"Tietolähteen käyttö vaatii rekisteröitymisen. Jos hyväksyt käyttoehdot, <a "
+"href='%1'>luo tili</a> ja anna tietosi alla."
 
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:184
 #: src/fetch/comicvinefetcher.cpp:244 src/fetch/entrezfetcher.cpp:531
@@ -3531,7 +3502,7 @@ msgstr ""
 #: src/fetch/thegamesdbfetcher.cpp:614 src/fetch/videogamegeekfetcher.cpp:213
 #, kde-format
 msgid "&Image size: "
-msgstr "&Kuvan koko: "
+msgstr "&Kuvakoko: "
 
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:217
 #: src/fetch/mobygamesfetcher.cpp:632 src/fetch/rpggeekfetcher.cpp:226
@@ -3606,7 +3577,7 @@ msgstr "Jakelija"
 #: src/field.cpp:335
 #, kde-format
 msgid "Episodes"
-msgstr "Episodit"
+msgstr "Jaksot"
 
 #: src/fetch/animenfofetcher.cpp:309 src/fetch/animenfofetcher.cpp:498
 #, kde-format
@@ -3635,16 +3606,14 @@ msgid "This source has no options."
 msgstr "Tällä lähteellä ei ole valintoja."
 
 #: src/fetch/bedethequefetcher.cpp:330 src/fetch/bedethequefetcher.cpp:454
-#, fuzzy, kde-format
-#| msgid "Color"
+#, kde-format
 msgid "Colorist"
-msgstr "Väri"
+msgstr "Colorist"
 
 #: src/fetch/bedethequefetcher.cpp:338 src/fetch/bedethequefetcher.cpp:458
-#, fuzzy, kde-format
-#| msgid "Bedetheque.com"
+#, kde-format
 msgid "Bedetheque Link"
-msgstr "Bedetheque.com"
+msgstr "Bedetheque Link"
 
 #: src/fetch/bedethequefetcher.cpp:456 src/field.cpp:313
 #, kde-format
@@ -3678,13 +3647,13 @@ msgstr "Vuosikerta"
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
-msgstr ""
+msgstr "Stanley Gibbons"
 
 #: src/fetch/colnectfetcher.cpp:343 src/fetch/colnectfetcher.cpp:556
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
-msgstr ""
+msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:658 src/fetch/numistafetcher.cpp:422
 #: src/fetch/themoviedbfetcher.cpp:631
@@ -3694,10 +3663,9 @@ msgstr "Kieli: "
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:220
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "Comic Vine Link"
-msgstr "Allocine-linkki"
+msgstr "Comic Vine -linkki"
 
 #: src/fetch/configwidget.cpp:41
 #, kde-format
@@ -3742,7 +3710,7 @@ msgstr "Sähköposti: "
 #: src/fetch/dbcfetcher.cpp:146
 #, kde-format
 msgid "Danish Bibliographic Center (DBC.dk)"
-msgstr ""
+msgstr "Tanskan bibliografinen keskus (DBC.dk)"
 
 #: src/fetch/discogsfetcher.cpp:101 src/fetch/isbndbfetcher.cpp:112
 #: src/fetch/mobygamesfetcher.cpp:114 src/fetch/omdbfetcher.cpp:99
@@ -3750,7 +3718,7 @@ msgstr ""
 #: src/fetch/thetvdbfetcher.cpp:126
 #, kde-format
 msgid "An access key is required to use this data source."
-msgstr ""
+msgstr "Tietolähteen käyttö vaatii avainkoodin."
 
 #: src/fetch/discogsfetcher.cpp:306 src/fetch/discogsfetcher.cpp:496
 #, kde-format
@@ -3763,7 +3731,7 @@ msgstr "Discogs-linkki"
 #: src/fetch/upcitemdbfetcher.cpp:208 src/fetch/upcitemdbfetcher.cpp:459
 #, kde-format
 msgid "Barcode"
-msgstr ""
+msgstr "Viivakoodi"
 
 #: src/fetch/discogsfetcher.cpp:335
 #, kde-format
@@ -3825,7 +3793,7 @@ msgstr "Aseta ulkoisen sovelluksen palauttaman tiedon tyyppi."
 #: src/fetch/execexternalfetcher.cpp:388
 #, kde-format
 msgid "Application &path: "
-msgstr "&Polku sovellukseen:"
+msgstr "&Sovelluksen sijainti:"
 
 #: src/fetch/execexternalfetcher.cpp:393
 #, kde-format
@@ -3885,6 +3853,8 @@ msgid ""
 "%1 requires the network request to include identification.\n"
 "Check the network configuration in KDE System Settings."
 msgstr ""
+"%1 vaatii verkkopyyntöön tunnistautumisen.\n"
+"Tarkista verkkoasetukset järjestelmäasetuksista."
 
 #: src/fetch/fetchmanager.cpp:68
 #, kde-format
@@ -3959,14 +3929,13 @@ msgstr "Tekijä: "
 #: src/fetch/giantbombfetcher.cpp:206
 #, kde-format
 msgid "GiantBomb Link"
-msgstr ""
+msgstr "GiantBomb-linkki"
 
 #: src/fetch/giantbombfetcher.cpp:207 src/fetch/igdbfetcher.cpp:551
 #: src/fetch/mobygamesfetcher.cpp:596 src/field.cpp:325
-#, fuzzy, kde-format
-#| msgid "ESRB Rating"
+#, kde-format
 msgid "PEGI Rating"
-msgstr "ESRB-määritys"
+msgstr "PEGI-luokka"
 
 #: src/fetch/googlebookfetcher.cpp:258 src/fetch/googlebookfetcher.cpp:371
 #, kde-format
@@ -3988,7 +3957,7 @@ msgstr "Kuvittaja"
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
-msgstr ""
+msgstr "Dewey-luokka"
 
 #: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:522
 #: src/fetch/z3950fetcher.cpp:581
@@ -4003,16 +3972,14 @@ msgid "Internet Bookshop (ibs.it)"
 msgstr "Internet Bookshop (ibs.it)"
 
 #: src/fetch/igdbfetcher.cpp:225 src/fetch/igdbfetcher.cpp:552
-#, fuzzy, kde-format
-#| msgid "IMDb Link"
+#, kde-format
 msgid "IGDB Link"
-msgstr "IMDb-linkki"
+msgstr "IGDB-linkki"
 
 #: src/fetch/igdbfetcher.cpp:542
-#, fuzzy, kde-format
-#| msgid "Internet Movie Database (German)"
+#, kde-format
 msgid "Internet Game Database (IGDB.com)"
-msgstr "Internet Movie Database (Saksa)"
+msgstr "Internet-pelitietokanta (IGDB.com)"
 
 #: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
 #, kde-format
@@ -4072,7 +4039,7 @@ msgstr "Lataa &kansikuva"
 #: src/fetch/isbndbfetcher.cpp:360
 #, kde-format
 msgid "Dewey Decimal"
-msgstr ""
+msgstr "Dewey-luokka"
 
 #: src/fetch/isbndbfetcher.cpp:373
 #, kde-format
@@ -4082,7 +4049,7 @@ msgstr "ISBNdb.com"
 #: src/fetch/isbndbfetcher.cpp:414
 #, kde-format
 msgid "Enable batch ISBN searching (requires Premium or Pro plan)"
-msgstr ""
+msgstr "Käytä ISBN-erähakua (vaatii Premium- tai Pro-tilin)"
 
 #: src/fetch/isbndbfetcher.cpp:418
 #, kde-format
@@ -4090,24 +4057,23 @@ msgid ""
 "Batch searching for ISBN values is faster but only available for Premium or "
 "Pro plans."
 msgstr ""
+"ISBN-arvojen erähaku on nopeampi mutta käytettävissä vain Premium- ja Pro-"
+"tileille."
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "KinoPoisk Link"
-msgstr "Discogs-linkki"
+msgstr "KinoPoisk-linkki"
 
 #: src/fetch/kinoteatrfetcher.cpp:239 src/fetch/kinoteatrfetcher.cpp:508
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "Kino-Teatr Link"
-msgstr "Filmaster-linkki"
+msgstr "Kino-Teatr-linkki"
 
 #: src/fetch/mobygamesfetcher.cpp:417 src/fetch/mobygamesfetcher.cpp:597
-#, fuzzy, kde-format
-#| msgid "Douban Link"
+#, kde-format
 msgid "MobyGames Link"
-msgstr "Douban-linkki"
+msgstr "MobyGames-linkki"
 
 #: src/fetch/moviemeterfetcher.cpp:220 src/fetch/moviemeterfetcher.cpp:293
 #, kde-format
@@ -4120,22 +4086,20 @@ msgid "Multiple Sources"
 msgstr "Useampi lähde"
 
 #: src/fetch/multifetcher.cpp:280
-#, fuzzy, kde-format
-#| msgid "Data Sources"
+#, kde-format
 msgid "Data source:"
-msgstr "Tietolähteet"
+msgstr "Tietolähde:"
 
 #: src/fetch/numistafetcher.cpp:342 src/fetch/numistafetcher.cpp:397
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "Numista Link"
-msgstr "Filmaster-linkki"
+msgstr "Numista-linkki"
 
 #: src/fetch/numistafetcher.cpp:402
 #, kde-format
 msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
-msgstr ""
+msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:427 src/fetch/themoviedbfetcher.cpp:640
 #, kde-format
@@ -4152,7 +4116,7 @@ msgstr "Ranska"
 #: src/fetch/numistafetcher.cpp:461
 #, kde-format
 msgid "Numista (%1)"
-msgstr ""
+msgstr "Numista (%1)"
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
@@ -4160,10 +4124,9 @@ msgid "OpenLibrary Link"
 msgstr "OpenLibrary-linkki"
 
 #: src/fetch/rpggeekfetcher.cpp:210
-#, fuzzy, kde-format
-#| msgid "BoardGameGeek Link"
+#, kde-format
 msgid "RPGGeek Link"
-msgstr "BoardGameGeek-linkki"
+msgstr "RPGGeek-linkki"
 
 #: src/fetch/srufetcher.cpp:503
 #, kde-format
@@ -4178,7 +4141,7 @@ msgstr "SRU-palvelin"
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:604
 #, kde-format
 msgid "Hos&t: "
-msgstr "&Isäntä: "
+msgstr "&Kone:"
 
 #: src/fetch/srufetcher.cpp:544 src/fetch/z3950fetcher.cpp:610
 #, kde-format
@@ -4198,7 +4161,7 @@ msgstr "Anna palvelimen porttinumero. Oletusnumero on %1."
 #: src/fetch/srufetcher.cpp:563
 #, kde-format
 msgid "Path: "
-msgstr "&Polku:"
+msgstr "Sijainti:"
 
 #: src/fetch/srufetcher.cpp:568
 #, kde-format
@@ -4230,14 +4193,13 @@ msgstr "TMDb-linkki"
 #: src/fetch/tvmazefetcher.cpp:182 src/fetch/tvmazefetcher.cpp:384
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "Verkko"
 
 #: src/fetch/themoviedbfetcher.cpp:637
-#, fuzzy, kde-format
-#| msgid "China"
+#, kde-format
 msgctxt "Language"
 msgid "Chinese"
-msgstr "Kiina"
+msgstr "kiina"
 
 #: src/fetch/themoviedbfetcher.cpp:646
 #, kde-format
@@ -4255,7 +4217,7 @@ msgstr "Espanja"
 #, kde-format
 msgctxt "Language"
 msgid "Russian"
-msgstr ""
+msgstr "Venäläinen"
 
 #: src/fetch/themoviedbfetcher.cpp:695
 #, kde-format
@@ -4263,16 +4225,14 @@ msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB (%1)"
 
 #: src/fetch/thetvdbfetcher.cpp:265 src/fetch/thetvdbfetcher.cpp:575
-#, fuzzy, kde-format
-#| msgid "IMDb Link"
+#, kde-format
 msgid "TheTVDB Link"
-msgstr "IMDb-linkki"
+msgstr "TheTVDB-linkki"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
-#, fuzzy, kde-format
-#| msgid "BoardGameGeek Link"
+#, kde-format
 msgid "VideoGameGeek Link"
-msgstr "BoardGameGeek-linkki"
+msgstr "VideoGameGeek-linkki"
 
 #: src/fetch/vndbfetcher.cpp:289 src/fetch/vndbfetcher.cpp:433
 #, kde-format
@@ -4326,10 +4286,9 @@ msgid "Enter the database name used by the server."
 msgstr "Anna palvelimen käyttämän tietokannan nimi."
 
 #: src/fetch/z3950fetcher.cpp:639
-#, fuzzy, kde-format
-#| msgid "Ch&aracter set: "
+#, kde-format
 msgid "Query character set: "
-msgstr "Ki&rjainmerkistö:"
+msgstr "Kyselyn merkistö: "
 
 #: src/fetch/z3950fetcher.cpp:648
 #, fuzzy, kde-format
@@ -4344,10 +4303,9 @@ msgstr ""
 "vaihtoehto on MARC-8, tosin myös ISO-8859-1 on yleinen."
 
 #: src/fetch/z3950fetcher.cpp:654
-#, fuzzy, kde-format
-#| msgid "Ch&aracter set: "
+#, kde-format
 msgid "Results character set: "
-msgstr "Ki&rjainmerkistö:"
+msgstr "Tulosmerkistö: "
 
 #: src/fetch/z3950fetcher.cpp:663
 #, fuzzy, kde-format
@@ -4364,7 +4322,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:669
 #, kde-format
 msgid "&Format: "
-msgstr "&Formaatti:"
+msgstr "&Muoto:"
 
 #: src/fetch/z3950fetcher.cpp:672
 #, kde-format
@@ -4384,7 +4342,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:687
 #, kde-format
 msgid "&User: "
-msgstr "&Käyttäjä: "
+msgstr "&Tunnus: "
 
 #: src/fetch/z3950fetcher.cpp:690 src/fetch/z3950fetcher.cpp:702
 #, kde-format
@@ -4711,14 +4669,13 @@ msgstr "Kansainvälinen ISBN-kirjanumero"
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
-msgstr ""
+msgstr "Kausi"
 
 #: src/field.cpp:340
-#, fuzzy, kde-format
-#| msgid "Episodes"
+#, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
-msgstr "Episodit"
+msgstr "Jakso"
 
 #: src/filterdialog.cpp:62
 #, kde-format
@@ -4759,7 +4716,7 @@ msgstr "Suodatin"
 #: src/filterview.cpp:192
 #, kde-format
 msgid "Filter (Sort by Count)"
-msgstr "Suodata (Järjestetty lukumäärän mukaan)"
+msgstr "Suodata (lajiteltu lukumäärittäin)"
 
 #: src/groupview.cpp:262
 #, kde-format
@@ -4779,7 +4736,7 @@ msgstr "Suodata ryhmän mukaan"
 #: src/groupview.cpp:412
 #, kde-format
 msgid "%1 (Sort by Count)"
-msgstr "%1 (Järjestetty lukumäärän mukaan)"
+msgstr "%1 (lajiteltu lukumäärittäin)"
 
 #: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:68
 #, kde-format
@@ -4823,15 +4780,13 @@ msgstr "erisuuri kuin"
 
 #: src/gui/filterrulewidget.cpp:262 src/gui/filterrulewidget.cpp:270
 #: src/gui/filterrulewidget.cpp:286
-#, fuzzy, kde-format
-#| msgid "matches regexp"
+#, kde-format
 msgid "matches regular expression"
 msgstr "vastaa lauseketta"
 
 #: src/gui/filterrulewidget.cpp:263 src/gui/filterrulewidget.cpp:271
 #: src/gui/filterrulewidget.cpp:287
-#, fuzzy, kde-format
-#| msgid "does not match regexp"
+#, kde-format
 msgid "does not match regular expression"
 msgstr "ei vastaa lauseketta"
 
@@ -4860,32 +4815,26 @@ msgid "is greater than"
 msgstr "on suurempi kuin"
 
 #: src/gui/filterrulewidget.cpp:276
-#, fuzzy, kde-format
-#| msgid "&Image size: "
+#, kde-format
 msgid "image size equals"
-msgstr "&Kuvan koko: "
+msgstr "kuvakoko on"
 
 #: src/gui/filterrulewidget.cpp:277
-#, fuzzy, kde-format
-#| msgid "does not equal"
+#, kde-format
 msgid "image size does not equal"
-msgstr "erisuuri kuin"
+msgstr "kuvakoko on eri kuin"
 
 #: src/gui/filterrulewidget.cpp:278
-#, fuzzy, kde-format
-#| msgctxt "is less than a number"
-#| msgid "is less than"
+#, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
-msgstr "on pienempi kuin"
+msgstr "kuvakoko on pienempi kuin"
 
 #: src/gui/filterrulewidget.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "is greater than a number"
-#| msgid "is greater than"
+#, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
-msgstr "on suurempi kuin"
+msgstr "kuvakoko on suurempi kuin"
 
 #: src/gui/filterrulewidget.cpp:282
 #, kde-format
@@ -4924,10 +4873,9 @@ msgid "Save link only"
 msgstr "Tallenna vain linkki"
 
 #: src/gui/imagewidget.cpp:290 src/gui/imagewidget.cpp:526
-#, fuzzy, kde-format
-#| msgid "Small Image"
+#, kde-format
 msgid "All Images (%1)"
-msgstr "Pieni kuva"
+msgstr "Kaikki kuvat (%1)"
 
 #: src/gui/imagewidget.cpp:321
 #, kde-format
@@ -4977,7 +4925,7 @@ msgstr "&Aseta"
 #, kde-format
 msgctxt "delete a value"
 msgid "&Delete"
-msgstr "&Tuhoa"
+msgstr "&Poista"
 
 #: src/gui/tablefieldwidget.cpp:167
 #, kde-format
@@ -5237,13 +5185,12 @@ msgstr "Lainaaja"
 #: src/loanview.cpp:202
 #, kde-format
 msgid "Borrower (Sort by Count)"
-msgstr "Lainaaja (lajiteltu määrittäin)"
+msgstr "Lainaaja (lajiteltu lukumäärittäin)"
 
 #: src/main.cpp:121
-#, fuzzy, kde-format
-#| msgid "Tellico - a collection manager for KDE"
+#, kde-format
 msgid "Tellico - collection management software, free and simple"
-msgstr "Tellico – KDE:n kokoelmanhallintaohjelmisto"
+msgstr "Tellico – vapaa ja yksinkertainen kokoelmanhallintaohjelma"
 
 #: src/main.cpp:123
 #, fuzzy, kde-format
@@ -5307,10 +5254,9 @@ msgid "File to open"
 msgstr "Avattava tiedosto"
 
 #: src/mainwindow.cpp:253
-#, fuzzy, kde-format
-#| msgid "Wine Collection"
+#, kde-format
 msgid "New Collection"
-msgstr "Viinikokoelma"
+msgstr "Uusi kokoelma"
 
 #: src/mainwindow.cpp:255
 #, kde-format
@@ -5473,10 +5419,9 @@ msgid "Print the contents of the document..."
 msgstr "Tulosta tiedoston sisältö…"
 
 #: src/mainwindow.cpp:347
-#, fuzzy, kde-format
-#| msgid "Print the contents of the document..."
+#, kde-format
 msgid "Preview the contents of the document..."
-msgstr "Tulosta tiedoston sisältö…"
+msgstr "Esikatsele tiedoston sisältöä…"
 
 #: src/mainwindow.cpp:351
 #, kde-format
@@ -5486,7 +5431,7 @@ msgstr "Lopeta ohjelma"
 #: src/mainwindow.cpp:364
 #, kde-format
 msgid "Import the collection data from other formats"
-msgstr "Tuo kokoelmatietoa muista formaateista"
+msgstr "Tuo kokoelmatietoa muista muodoista"
 
 #: src/mainwindow.cpp:380
 #, kde-format
@@ -5539,16 +5484,14 @@ msgid "Import data from Delicious Library"
 msgstr "Tuo tietoa Delicious Librarystä"
 
 #: src/mainwindow.cpp:398
-#, fuzzy, kde-format
-#| msgid "Import Tellico Data..."
+#, kde-format
 msgid "Import Collectorz Data..."
-msgstr "Tuo Tellico-tietoa…"
+msgstr "Tuo Collectorz-tietoa…"
 
 #: src/mainwindow.cpp:399
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from Collectorz"
-msgstr "Tuo tietoa Referenceristä"
+msgstr "Tuo tietoa Collectorzista"
 
 #: src/mainwindow.cpp:402
 #, kde-format
@@ -5601,16 +5544,14 @@ msgid "Import a collection from Goodreads.com"
 msgstr "Tuo kokoelman Goodreads.comista"
 
 #: src/mainwindow.cpp:421
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import LibraryThing Collection..."
-msgstr "Tuo Goodreads-kokoelma…"
+msgstr "Tuo LibraryThing-kokoelma…"
 
 #: src/mainwindow.cpp:422
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from LibraryThing.com"
-msgstr "Tuo kokoelman Goodreads.comista"
+msgstr "Tuo kokoelma LibraryThing.comista"
 
 #: src/mainwindow.cpp:424
 #, kde-format
@@ -5720,7 +5661,7 @@ msgstr "&Vie"
 #: src/mainwindow.cpp:476
 #, kde-format
 msgid "Export the collection data to other formats"
-msgstr "Vie kokoelman tiedot toiseen formaattiin"
+msgstr "Vie kokoelman tiedot toiseen muotoon"
 
 #: src/mainwindow.cpp:492
 #, kde-format
@@ -5863,10 +5804,9 @@ msgid "&New Entry..."
 msgstr "&Uusi tietue…"
 
 #: src/mainwindow.cpp:559
-#, fuzzy, kde-format
-#| msgid "&New Entry"
+#, kde-format
 msgid "New Entry"
-msgstr "&Uusi tietue"
+msgstr "Uusi tietue:"
 
 #: src/mainwindow.cpp:561
 #, kde-format
@@ -5874,10 +5814,9 @@ msgid "Create a new entry"
 msgstr "Luo uusi tietue"
 
 #: src/mainwindow.cpp:563
-#, fuzzy, kde-format
-#| msgid "&Add Entry"
+#, kde-format
 msgid "Add Entry"
-msgstr "Lisää &tietue"
+msgstr "Lisää kohde"
 
 #: src/mainwindow.cpp:573
 #, kde-format
@@ -5902,7 +5841,7 @@ msgstr "Kopioi valitut tietueet"
 #: src/mainwindow.cpp:601
 #, kde-format
 msgid "Delete the selected entries"
-msgstr "Tuhoa valitut tietueet"
+msgstr "Poista valitut tietueet"
 
 #: src/mainwindow.cpp:605
 #, kde-format
@@ -6043,38 +5982,37 @@ msgstr "Päivitä tietueet kaikista saatavilla olevista lähteistä"
 #: src/mainwindow.cpp:708
 #, kde-format
 msgid "Unlock Layout"
-msgstr ""
+msgstr "Poista asettelun lukitus"
 
 #: src/mainwindow.cpp:709
 #, kde-format
 msgid "Unlock the window's layout"
-msgstr ""
+msgstr "Poista ikkuna-asettelun lukitus"
 
 #: src/mainwindow.cpp:711
 #, kde-format
 msgid "Lock Layout"
-msgstr ""
+msgstr "Lukitse asettelu"
 
 #: src/mainwindow.cpp:712
 #, kde-format
 msgid "Lock the window's layout"
-msgstr ""
+msgstr "Lukitse ikkuna-asettelu"
 
 #: src/mainwindow.cpp:717
 #, kde-format
 msgid "Reset Layout"
-msgstr ""
+msgstr "Palauta asettelu"
 
 #: src/mainwindow.cpp:718
 #, kde-format
 msgid "Reset the window's layout"
-msgstr ""
+msgstr "Palauta ikkuna-asettelu"
 
 #: src/mainwindow.cpp:721
-#, fuzzy, kde-format
-#| msgid "Show Entry &Editor"
+#, kde-format
 msgid "Entry &Editor"
-msgstr "Näytä tietue&muokkain"
+msgstr "Tietue&muokkain"
 
 #: src/mainwindow.cpp:723
 #, kde-format
@@ -6109,10 +6047,9 @@ msgid ""
 msgstr "<qt><i>Tietuenäkymä</i> näyttää tietueen sisällön muotoillusti.</qt>"
 
 #: src/mainwindow.cpp:833
-#, fuzzy, kde-format
-#| msgid "Collection Fields"
+#, kde-format
 msgid "Collection View"
-msgstr "Kokoelman kentät"
+msgstr "Kokoelmanäkymä"
 
 #: src/mainwindow.cpp:840
 #, kde-format
@@ -6124,9 +6061,7 @@ msgstr ""
 "arvot.</qt>"
 
 #: src/mainwindow.cpp:857
-#, fuzzy, kde-format
-#| msgctxt "Group View XSL Template"
-#| msgid "Group View"
+#, kde-format
 msgid "Group View"
 msgstr "Ryhmänäkymä"
 
@@ -6141,7 +6076,7 @@ msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr ""
-"<qt><i>Ryhmänäkymä</i> ryhmittelee tietueet valitun kentän perusteella.</qt>"
+"<qt><i>Ryhmänäkymä</i> lajittelee tietueet valitun kentän perusteella.</qt>"
 
 #: src/mainwindow.cpp:941
 #, kde-format
@@ -6158,10 +6093,9 @@ msgid ""
 "Internet sources.</h3>"
 msgstr ""
 "<h3>Tellico on työkalu eri kokoelmien kuten kirjojen, videoiden, musiikin ja "
-"muiden lueteltavien asioiden hallintaan. </h3><h3>Uusia tietueita voi lisätä "
-"kokoelmaasi <a href=\"tc:///coll_new_entry\">käsin syöttämällä</a> tai <a "
-"href=\"tc:///edit_search_internet\">lataamalla tiedot</a> eri "
-"internetlähteistä.</h3>"
+"muiden lueteltavien asioiden hallintaan.</h3><h3>Kokoelmaan voi lisätä uusia "
+"tietueita <a href=\"tc:///coll_new_entry\">käsin</a> tai <a href=\"tc:///"
+"edit_search_internet\">lataamalla tiedot</a> eri verkkolähteistä.</h3>"
 
 #: src/mainwindow.cpp:1131
 #, kde-format
@@ -6384,10 +6318,9 @@ msgid ""
 msgstr "Raporttien luominen suurista kokoelmista voi kestää useita sekunteja."
 
 #: src/reportdialog.cpp:358
-#, fuzzy, kde-format
-#| msgid "PDF Files"
+#, kde-format
 msgid "PNG Files"
-msgstr "PDF-tiedostot"
+msgstr "PNG-tiedostot"
 
 #: src/reportdialog.cpp:373 src/translators/htmlexporter.cpp:100
 #, kde-format
@@ -6442,58 +6375,51 @@ msgstr "&Tiedosto"
 
 #. i18n: ectx: Menu (file_new_collection)
 #: src/tellicoui.rc:8
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "&New Collection"
-msgstr "&Kokoelma"
+msgstr "&Uusi kokoelma"
 
 #. i18n: ectx: Menu (file_import)
 #: src/tellicoui.rc:24
-#, fuzzy, kde-format
-#| msgid "&Import"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Import"
-msgstr "T&uo"
+msgstr "&Tuo"
 
 #. i18n: ectx: Menu (file_export)
 #: src/tellicoui.rc:56
-#, fuzzy, kde-format
-#| msgid "&Export"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Export"
 msgstr "&Vie"
 
 #. i18n: ectx: Menu (collection)
 #: src/tellicoui.rc:76
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Collection"
-msgstr "&Kokoelma"
+msgstr "K&okoelma"
 
 #. i18n: ectx: Menu (coll_update_entry)
 #: src/tellicoui.rc:83
-#, fuzzy, kde-format
-#| msgid "&Update Entry"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Update Entry"
-msgstr "&Päivitä tietue"
+msgstr "Päi&vitä tietue"
 
 #. i18n: ectx: Menu (coll_bibliography)
 #: src/tellicoui.rc:97
-#, fuzzy, kde-format
-#| msgid "&Bibliography"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Bibliography"
-msgstr "&Lähdeluettelo"
+msgstr "Lä&hdeluettelo"
 
 #. i18n: ectx: Menu (dockers)
 #: src/tellicoui.rc:107
-#, fuzzy, kde-format
-#| msgid "Show Grou&p View"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Show Views"
-msgstr "Näytä &ryhmänäkymä"
+msgstr "Näytä &näkymät"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: src/tellicoui.rc:123
@@ -6731,10 +6657,9 @@ msgstr "Tuo vain omat tietueet"
 
 #: src/translators/boardgamegeekimporter.cpp:255
 #: src/translators/goodreadsimporter.cpp:153
-#, fuzzy, kde-format
-#| msgid "User ID"
+#, kde-format
 msgid "User ID:"
-msgstr "Käyttäjätunnus"
+msgstr "Käyttäjätunniste:"
 
 #: src/translators/csvexporter.cpp:60
 #, kde-format
@@ -7084,10 +7009,9 @@ msgid "Loading %1..."
 msgstr "Ladataan %1…"
 
 #: src/translators/librarythingimporter.cpp:177
-#, fuzzy, kde-format
-#| msgid "Formatting Options"
+#, kde-format
 msgid "LibraryThing Options"
-msgstr "Muotoiluasetukset"
+msgstr "LibraryThing-valinnat"
 
 #: src/translators/librarythingimporter.cpp:180
 #, kde-format
@@ -7095,17 +7019,18 @@ msgid ""
 "Export your LibraryThing collection in <a href=\"https://www.librarything."
 "com/export.php?export_type=json\">JSON format</a>."
 msgstr ""
+"Vie LibraryThing-kokoelma <a href=\"https://www.librarything.com/export.php?"
+"export_type=json\">JSON-muotoon</a>."
 
 #: src/translators/librarythingimporter.cpp:185
-#, fuzzy, kde-format
-#| msgid "XSL Files"
+#, kde-format
 msgid "JSON Files"
-msgstr "XSL-tiedostot"
+msgstr "JSON-tiedostot"
 
 #: src/translators/librarythingimporter.cpp:190
 #, kde-format
 msgid "LibraryThing file:"
-msgstr ""
+msgstr "LibraryThing-tiedosto:"
 
 #: src/translators/onixexporter.cpp:67
 #, kde-format
@@ -7355,7 +7280,7 @@ msgid ""
 "to be sorted or printed together, for example.</p>\n"
 msgstr ""
 "<p>…että jos useampaa kenttää muokataan nimenä, kokoelmaan lisätään ryhmä\n"
-"”Henkilöt”, jolloin tekijöitä ja kirjoittajia voi esimerkiksi järjestellä\n"
+"”Henkilöt”, jolloin tekijöitä ja kirjoittajia voi esimerkiksi lajitella\n"
 "ja tulostaa.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
@@ -7425,12 +7350,12 @@ msgid ""
 "types by respecting proper sorting at the same time. Consider for example\n"
 "a number field followed by a text subfield with entries 3b, 14a.</p>\n"
 msgstr ""
-"<p>…että voit käyttää johdannaiskenttiä yhdistämään usean eri kentän\n"
-"arvoja. Perityn arvon malli on esim. ”Arvo: %{kenttä1}%{kenttä2}”, missä\n"
+"<p>…että johdannaiskenttiä voi käyttää yhdistämään usean eri kentän arvot\n"
+"yhdeksi. Perityn arvon malli on esim. ”Arvo: %{kenttä1}%{kenttä2}”, missä\n"
 "%{…} korvataan vastaavan kentän arvolla. Näin voit koota eri arvoja\n"
-"yhteen kenttään esim. ryhmittelyn helpottamiseksi. Voit myös yhdistää\n"
-"erityyppisiä kenttiä ilman, että se vaikuttaa lajitteluun, esim. jos "
-"lukukenttää seuraa tekstimuotoinen alikenttä (3b, 14a).</p> \n"
+"yhteen kenttään esim. lajittelun helpottamiseksi. Voit myös yhdistää\n"
+"erityyppisiä kenttiä ilman, että se vaikuttaa lajitteluun, esim. jos\n"
+"lukukenttää seuraa tekstimuotoinen alikenttä (3b, 14a).</p>\n"
 
 #: xslt/entry-templates/Album.xsl:170
 #, kde-format
