@@ -378,7 +378,7 @@
 <para
 >Slepen van gegevensbestanden naar het hoofdvenster van &appname; en ze loslaten zal de bestanden importeren, evenals indien het <link linkend="importing"
 >importcommando</link
-> was gegeven vanuit de menu's. Slepen en loslaten werkt voor de volgende bestandsformaten: Tellico, Bibtex, RIS en &PDF;. Meerdere bestanden tegelijk importeren wordt ook ondersteund.</para>
+> was gegeven vanuit de menu's. Slepen en loslaten werkt voor de volgende bestandsformaten: Tellico, Bibtex, RIS, &PDF; en EPub. Meerdere bestanden tegelijk importeren wordt ook ondersteund.</para>
 
 <para
 >Dus als u bijvoorbeeld verschillende <link linkend="importing-pdf"

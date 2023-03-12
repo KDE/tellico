@@ -377,7 +377,7 @@
 <para
 >Arrastrar archivos de datos a la ventana principal de &appname; y soltarlos importará los archivos, de la misma forma que si se hubiera seleccionado la <link linkend="importing"
 >orden de importar</link
-> desde un menú. Arrastrar y soltar funciona para los siguientes tipos de archivos: Tellico, Bibtex, RIS y &PDF;. También se admite la importación de múltiples archivos a la vez.</para>
+> desde un menú. Arrastrar y soltar funciona para los siguientes tipos de archivos: Tellico, Bibtex, RIS y &PDF; y EPub. También se admite la importación de múltiples archivos a la vez.</para>
 
 <para
 >Así que, por ejemplo, si desea catalogar varios <link linkend="importing-pdf"

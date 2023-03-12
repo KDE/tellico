@@ -371,7 +371,7 @@
 <para
 >Arrossegar fitxers de dades a la finestra principal del &appname; i deixar-los anar importarà aquests fitxers, com si se seleccionés l'<link linkend="importing"
 >ordre importa</link
-> des dels menús. Arrossegar i deixar anar funciona per als següents formats de fitxer: Tellico, Bibtex, RIS i &PDF;. També està implementada la importació des de múltiples fitxers alhora.</para>
+> des dels menús. Arrossegar i deixar anar funciona per als següents formats de fitxer: Tellico, Bibtex, RIS, &PDF; i EPub. També està implementada la importació des de múltiples fitxers alhora.</para>
 
 <para
 >De manera que si voleu catalogar diversos <link linkend="importing-pdf"

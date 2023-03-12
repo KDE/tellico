@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-11 00:49+0000\n"
+"POT-Creation-Date: 2023-03-12 00:47+0000\n"
 "PO-Revision-Date: 2023-02-24 17:14-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -177,7 +177,7 @@ msgstr "Nome"
 msgid "Collection Size"
 msgstr "Tamanho da coleção"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1617
+#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1618
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Total de registros: %1"
@@ -717,18 +717,19 @@ msgstr "Um campo com um valor derivado deve ter um modelo de valor."
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
 #: src/configdialog.cpp:142 src/configdialog.cpp:169 src/configdialog.cpp:183
-#: src/configdialog.cpp:200 src/fetch/allocinefetcher.cpp:314
-#: src/fetch/allocinefetcher.cpp:320 src/fetch/amazonfetcher.cpp:863
-#: src/fetch/animenfofetcher.cpp:310 src/fetch/animenfofetcher.cpp:314
-#: src/fetch/bedethequefetcher.cpp:331 src/fetch/bedethequefetcher.cpp:339
-#: src/fetch/colnectfetcher.cpp:317 src/fetch/colnectfetcher.cpp:330
-#: src/fetch/colnectfetcher.cpp:337 src/fetch/colnectfetcher.cpp:344
-#: src/fetch/discogsfetcher.cpp:308 src/fetch/discogsfetcher.cpp:313
-#: src/fetch/discogsfetcher.cpp:318 src/fetch/discogsfetcher.cpp:325
-#: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:337
-#: src/fetch/doubanfetcher.cpp:349 src/fetch/doubanfetcher.cpp:367
-#: src/fetch/doubanfetcher.cpp:385 src/fetch/filmaffinityfetcher.cpp:282
-#: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
+#: src/configdialog.cpp:200 src/configdialog.cpp:1123
+#: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
+#: src/fetch/amazonfetcher.cpp:863 src/fetch/animenfofetcher.cpp:310
+#: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
+#: src/fetch/bedethequefetcher.cpp:339 src/fetch/colnectfetcher.cpp:317
+#: src/fetch/colnectfetcher.cpp:330 src/fetch/colnectfetcher.cpp:337
+#: src/fetch/colnectfetcher.cpp:344 src/fetch/discogsfetcher.cpp:308
+#: src/fetch/discogsfetcher.cpp:313 src/fetch/discogsfetcher.cpp:318
+#: src/fetch/discogsfetcher.cpp:325 src/fetch/discogsfetcher.cpp:332
+#: src/fetch/discogsfetcher.cpp:337 src/fetch/doubanfetcher.cpp:349
+#: src/fetch/doubanfetcher.cpp:367 src/fetch/doubanfetcher.cpp:385
+#: src/fetch/filmaffinityfetcher.cpp:282 src/fetch/filmasterfetcher.cpp:240
+#: src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
 #: src/fetch/imdbfetcher.cpp:831 src/fetch/imdbfetcher.cpp:1386
@@ -2239,13 +2240,13 @@ msgstr "de,van,der,van der,von"
 #. i18n: ectx: label, entry (fontFile), group (Options - file)
 #. i18n: ectx: label, entry (fontBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (fontBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:140 src/config/tellico_config.kcfg:166
-#: src/config/tellico_config.kcfg:192 src/config/tellico_config.kcfg:221
-#: src/config/tellico_config.kcfg:247 src/config/tellico_config.kcfg:273
-#: src/config/tellico_config.kcfg:299 src/config/tellico_config.kcfg:325
-#: src/config/tellico_config.kcfg:351 src/config/tellico_config.kcfg:377
-#: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:429
-#: src/config/tellico_config.kcfg:455
+#: src/config/tellico_config.kcfg:140 src/config/tellico_config.kcfg:170
+#: src/config/tellico_config.kcfg:200 src/config/tellico_config.kcfg:233
+#: src/config/tellico_config.kcfg:263 src/config/tellico_config.kcfg:293
+#: src/config/tellico_config.kcfg:323 src/config/tellico_config.kcfg:353
+#: src/config/tellico_config.kcfg:383 src/config/tellico_config.kcfg:413
+#: src/config/tellico_config.kcfg:443 src/config/tellico_config.kcfg:473
+#: src/config/tellico_config.kcfg:503
 #, kde-format
 msgid "Template font"
 msgstr "Fonte do modelo"
@@ -2263,13 +2264,13 @@ msgstr "Fonte do modelo"
 #. i18n: ectx: label, entry (baseColorFile), group (Options - file)
 #. i18n: ectx: label, entry (baseColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (baseColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:144 src/config/tellico_config.kcfg:170
-#: src/config/tellico_config.kcfg:196 src/config/tellico_config.kcfg:225
-#: src/config/tellico_config.kcfg:251 src/config/tellico_config.kcfg:277
-#: src/config/tellico_config.kcfg:303 src/config/tellico_config.kcfg:329
-#: src/config/tellico_config.kcfg:355 src/config/tellico_config.kcfg:381
-#: src/config/tellico_config.kcfg:407 src/config/tellico_config.kcfg:433
-#: src/config/tellico_config.kcfg:459
+#: src/config/tellico_config.kcfg:144 src/config/tellico_config.kcfg:174
+#: src/config/tellico_config.kcfg:204 src/config/tellico_config.kcfg:237
+#: src/config/tellico_config.kcfg:267 src/config/tellico_config.kcfg:297
+#: src/config/tellico_config.kcfg:327 src/config/tellico_config.kcfg:357
+#: src/config/tellico_config.kcfg:387 src/config/tellico_config.kcfg:417
+#: src/config/tellico_config.kcfg:447 src/config/tellico_config.kcfg:477
+#: src/config/tellico_config.kcfg:507
 #, kde-format
 msgid "Template background color"
 msgstr "Cor de fundo do modelo"
@@ -2287,13 +2288,13 @@ msgstr "Cor de fundo do modelo"
 #. i18n: ectx: label, entry (textColorFile), group (Options - file)
 #. i18n: ectx: label, entry (textColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (textColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:148 src/config/tellico_config.kcfg:174
-#: src/config/tellico_config.kcfg:200 src/config/tellico_config.kcfg:229
-#: src/config/tellico_config.kcfg:255 src/config/tellico_config.kcfg:281
-#: src/config/tellico_config.kcfg:307 src/config/tellico_config.kcfg:333
-#: src/config/tellico_config.kcfg:359 src/config/tellico_config.kcfg:385
-#: src/config/tellico_config.kcfg:411 src/config/tellico_config.kcfg:437
-#: src/config/tellico_config.kcfg:463
+#: src/config/tellico_config.kcfg:148 src/config/tellico_config.kcfg:178
+#: src/config/tellico_config.kcfg:208 src/config/tellico_config.kcfg:241
+#: src/config/tellico_config.kcfg:271 src/config/tellico_config.kcfg:301
+#: src/config/tellico_config.kcfg:331 src/config/tellico_config.kcfg:361
+#: src/config/tellico_config.kcfg:391 src/config/tellico_config.kcfg:421
+#: src/config/tellico_config.kcfg:451 src/config/tellico_config.kcfg:481
+#: src/config/tellico_config.kcfg:511
 #, kde-format
 msgid "Template text color"
 msgstr "Cor do texto do modelo"
@@ -2311,13 +2312,13 @@ msgstr "Cor do texto do modelo"
 #. i18n: ectx: label, entry (highlightedBaseColorFile), group (Options - file)
 #. i18n: ectx: label, entry (highlightedBaseColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (highlightedBaseColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:152 src/config/tellico_config.kcfg:178
-#: src/config/tellico_config.kcfg:204 src/config/tellico_config.kcfg:233
-#: src/config/tellico_config.kcfg:259 src/config/tellico_config.kcfg:285
-#: src/config/tellico_config.kcfg:311 src/config/tellico_config.kcfg:337
-#: src/config/tellico_config.kcfg:363 src/config/tellico_config.kcfg:389
-#: src/config/tellico_config.kcfg:415 src/config/tellico_config.kcfg:441
-#: src/config/tellico_config.kcfg:467
+#: src/config/tellico_config.kcfg:152 src/config/tellico_config.kcfg:182
+#: src/config/tellico_config.kcfg:212 src/config/tellico_config.kcfg:245
+#: src/config/tellico_config.kcfg:275 src/config/tellico_config.kcfg:305
+#: src/config/tellico_config.kcfg:335 src/config/tellico_config.kcfg:365
+#: src/config/tellico_config.kcfg:395 src/config/tellico_config.kcfg:425
+#: src/config/tellico_config.kcfg:455 src/config/tellico_config.kcfg:485
+#: src/config/tellico_config.kcfg:515
 #, kde-format
 msgid "Template highlight color"
 msgstr "Cor de destaque do modelo"
@@ -2335,16 +2336,41 @@ msgstr "Cor de destaque do modelo"
 #. i18n: ectx: label, entry (highlightedTextColorFile), group (Options - file)
 #. i18n: ectx: label, entry (highlightedTextColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (highlightedTextColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:156 src/config/tellico_config.kcfg:182
-#: src/config/tellico_config.kcfg:208 src/config/tellico_config.kcfg:237
-#: src/config/tellico_config.kcfg:263 src/config/tellico_config.kcfg:289
-#: src/config/tellico_config.kcfg:315 src/config/tellico_config.kcfg:341
-#: src/config/tellico_config.kcfg:367 src/config/tellico_config.kcfg:393
-#: src/config/tellico_config.kcfg:419 src/config/tellico_config.kcfg:445
-#: src/config/tellico_config.kcfg:471
+#: src/config/tellico_config.kcfg:156 src/config/tellico_config.kcfg:186
+#: src/config/tellico_config.kcfg:216 src/config/tellico_config.kcfg:249
+#: src/config/tellico_config.kcfg:279 src/config/tellico_config.kcfg:309
+#: src/config/tellico_config.kcfg:339 src/config/tellico_config.kcfg:369
+#: src/config/tellico_config.kcfg:399 src/config/tellico_config.kcfg:429
+#: src/config/tellico_config.kcfg:459 src/config/tellico_config.kcfg:489
+#: src/config/tellico_config.kcfg:519
 #, kde-format
 msgid "Template highlighted text color"
 msgstr "Cor do texto em destaque do modelo"
+
+#. i18n: ectx: label, entry (linkColorBook), group (Options - book)
+#. i18n: ectx: label, entry (linkColorVideo), group (Options - video)
+#. i18n: ectx: label, entry (linkColorAlbum), group (Options - album)
+#. i18n: ectx: label, entry (linkColorBibtex), group (Options - bibtex)
+#. i18n: ectx: label, entry (linkColorComicBook), group (Options - comic)
+#. i18n: ectx: label, entry (linkColorWine), group (Options - wine)
+#. i18n: ectx: label, entry (linkColorCoin), group (Options - coin)
+#. i18n: ectx: label, entry (linkColorStamp), group (Options - stamp)
+#. i18n: ectx: label, entry (linkColorCard), group (Options - card)
+#. i18n: ectx: label, entry (linkColorGame), group (Options - game)
+#. i18n: ectx: label, entry (linkColorFile), group (Options - file)
+#. i18n: ectx: label, entry (linkColorBoardGame), group (Options - boardgame)
+#. i18n: ectx: label, entry (linkColorBase), group (Options - entry)
+#: src/config/tellico_config.kcfg:160 src/config/tellico_config.kcfg:190
+#: src/config/tellico_config.kcfg:220 src/config/tellico_config.kcfg:253
+#: src/config/tellico_config.kcfg:283 src/config/tellico_config.kcfg:313
+#: src/config/tellico_config.kcfg:343 src/config/tellico_config.kcfg:373
+#: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
+#: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
+#: src/config/tellico_config.kcfg:523
+#, fuzzy, kde-format
+#| msgid "Template highlight color"
+msgid "Template link color"
+msgstr "Cor de destaque do modelo"
 
 #: src/configdialog.cpp:95
 #, kde-format
@@ -2363,7 +2389,7 @@ msgstr "Impressão"
 msgid "Templates"
 msgstr "Modelos"
 
-#: src/configdialog.cpp:148 src/configdialog.cpp:189 src/configdialog.cpp:598
+#: src/configdialog.cpp:148 src/configdialog.cpp:189 src/configdialog.cpp:608
 #, kde-format
 msgid "Data Sources"
 msgstr "Fontes de dados"
@@ -2556,7 +2582,7 @@ msgstr "&Formatação dos títulos e nomes"
 msgid "&Print field headers"
 msgstr "Im&primir cabeçalhos dos campos"
 
-#: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:508
+#: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
@@ -2572,7 +2598,7 @@ msgstr "Opções de agrupamento"
 msgid "&Group the entries"
 msgstr "A&grupar os registros"
 
-#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:513
+#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
@@ -2701,51 +2727,57 @@ msgid "Highlighted text color:"
 msgstr "Cor do texto em destaque:"
 
 #: src/configdialog.cpp:539
+#, fuzzy, kde-format
+#| msgid "Text color:"
+msgid "Link color:"
+msgstr "Cor do texto:"
+
+#: src/configdialog.cpp:548
 #, kde-format
 msgid "Manage Templates"
 msgstr "Gerenciamento de modelos"
 
-#: src/configdialog.cpp:550
+#: src/configdialog.cpp:559
 #, kde-format
 msgid "Install..."
 msgstr "Instalar..."
 
-#: src/configdialog.cpp:554
+#: src/configdialog.cpp:563
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Clique para instalar um modelo diretamente."
 
-#: src/configdialog.cpp:557 src/configdialog.cpp:662
+#: src/configdialog.cpp:566 src/configdialog.cpp:672
 #, kde-format
 msgid "Download..."
 msgstr "Baixar..."
 
-#: src/configdialog.cpp:561
+#: src/configdialog.cpp:570
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Clique para baixar modelos adicionais."
 
-#: src/configdialog.cpp:564
+#: src/configdialog.cpp:573
 #, kde-format
 msgid "Delete..."
 msgstr "Excluir..."
 
-#: src/configdialog.cpp:568
+#: src/configdialog.cpp:577
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Clique para selecionar e remover modelos instalados."
 
-#: src/configdialog.cpp:599
+#: src/configdialog.cpp:609
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Opções da fonte de dados"
 
-#: src/configdialog.cpp:620
+#: src/configdialog.cpp:630
 #, kde-format
 msgid "Move &Up"
 msgstr "Mover para &cima"
 
-#: src/configdialog.cpp:623 src/configdialog.cpp:628
+#: src/configdialog.cpp:633 src/configdialog.cpp:638
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2754,64 +2786,64 @@ msgstr ""
 "A ordem das fontes de dados define a ordem que o Tellico usa quando os "
 "registros são automaticamente atualizados."
 
-#: src/configdialog.cpp:625
+#: src/configdialog.cpp:635
 #, kde-format
 msgid "Move &Down"
 msgstr "Mover para &baixo"
 
-#: src/configdialog.cpp:635
+#: src/configdialog.cpp:645
 #, kde-format
 msgid "Filter by type:"
 msgstr "Filtrar por tipo:"
 
-#: src/configdialog.cpp:653
+#: src/configdialog.cpp:663
 #, kde-format
 msgid "&New..."
 msgstr "&Novo..."
 
-#: src/configdialog.cpp:655
+#: src/configdialog.cpp:665
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Clique para adicionar uma nova fonte de dados."
 
-#: src/configdialog.cpp:656
+#: src/configdialog.cpp:666
 #, kde-format
 msgid "&Modify..."
 msgstr "&Modificar..."
 
-#: src/configdialog.cpp:658
+#: src/configdialog.cpp:668
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Clique para modificar a fonte de dados selecionada."
 
-#: src/configdialog.cpp:659
+#: src/configdialog.cpp:669
 #, kde-format
 msgid "&Delete"
 msgstr "E&xcluir"
 
-#: src/configdialog.cpp:661
+#: src/configdialog.cpp:671
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Clique para excluir a fonte de dados selecionada."
 
-#: src/configdialog.cpp:664
+#: src/configdialog.cpp:674
 #, kde-format
 msgid "Click to download additional data sources."
 msgstr "Clique para baixar fontes de dados adicionais."
 
-#: src/configdialog.cpp:1129 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1155 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:125
 #, kde-format
 msgid "XSL Files"
 msgstr "Arquivos XSL"
 
-#: src/configdialog.cpp:1130
+#: src/configdialog.cpp:1156
 #, kde-format
 msgid "Template Packages"
 msgstr "Pacotes de modelos"
 
-#: src/configdialog.cpp:1131 src/importdialog.cpp:439 src/mainwindow.cpp:1250
-#: src/mainwindow.cpp:1420 src/reportdialog.cpp:428 src/reportdialog.cpp:443
+#: src/configdialog.cpp:1157 src/importdialog.cpp:439 src/mainwindow.cpp:1251
+#: src/mainwindow.cpp:1421 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -2825,12 +2857,12 @@ msgstr "Pacotes de modelos"
 msgid "All Files"
 msgstr "Todos os arquivos"
 
-#: src/configdialog.cpp:1160
+#: src/configdialog.cpp:1186
 #, kde-format
 msgid "Delete Template"
 msgstr "Excluir modelo"
 
-#: src/configdialog.cpp:1161
+#: src/configdialog.cpp:1187
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Selecione o modelo a ser excluído:"
@@ -3023,7 +3055,7 @@ msgstr "Exibir todas as colunas"
 msgid "Hide All Columns"
 msgstr "Ocultar todas as colunas"
 
-#: src/document.cpp:207 src/mainwindow.cpp:1364
+#: src/document.cpp:207 src/mainwindow.cpp:1365
 #, kde-format
 msgid "Saving file..."
 msgstr "Salvando arquivo..."
@@ -3084,7 +3116,7 @@ msgstr ""
 msgid "Save Entry"
 msgstr "Salvar registro"
 
-#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1156
+#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1157
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Alterações não salvas"
@@ -3165,7 +3197,7 @@ msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr ""
 "O Tellico não pôde encontrar a folha de estilo padrão para os registros."
 
-#: src/entryview.cpp:334 src/mainwindow.cpp:1770
+#: src/entryview.cpp:334 src/mainwindow.cpp:1771
 #, kde-format
 msgid "Please check your installation."
 msgstr "Confira sua instalação."
@@ -4829,8 +4861,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Grupo"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1084 src/mainwindow.cpp:1705
-#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1085 src/mainwindow.cpp:1706
+#: src/mainwindow.cpp:1740 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Pessoas"
@@ -5133,14 +5165,14 @@ msgstr ""
 msgid "&Import"
 msgstr "&Importar"
 
-#: src/importdialog.cpp:371 src/mainwindow.cpp:1246 src/mainwindow.cpp:1418
+#: src/importdialog.cpp:371 src/mainwindow.cpp:1247 src/mainwindow.cpp:1419
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Arquivos do Tellico"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1248 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1249 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "Arquivos XML"
@@ -6228,12 +6260,12 @@ msgstr ""
 "<qt>A <i>Visão de Grupos</i> classifica os registros em grupos com base em "
 "um campo selecionado.</qt>"
 
-#: src/mainwindow.cpp:964
+#: src/mainwindow.cpp:965
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Bem-vindo ao gerenciador de coleções Tellico"
 
-#: src/mainwindow.cpp:966
+#: src/mainwindow.cpp:967
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6248,7 +6280,7 @@ msgstr ""
 "\">digitar os dados manualmente</a> ou ao <a href=\"tc:///"
 "edit_search_internet\">baixar os dados</a> de várias fontes da Internet.</h3>"
 
-#: src/mainwindow.cpp:1154
+#: src/mainwindow.cpp:1155
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6257,22 +6289,22 @@ msgstr ""
 "O arquivo atual foi modificado.\n"
 "Deseja salvá-lo?"
 
-#: src/mainwindow.cpp:1190 src/mainwindow.cpp:1223
+#: src/mainwindow.cpp:1191 src/mainwindow.cpp:1224
 #, kde-format
 msgid "Creating new collection..."
 msgstr "Criar nova coleção..."
 
-#: src/mainwindow.cpp:1243 src/mainwindow.cpp:1266 src/mainwindow.cpp:1284
+#: src/mainwindow.cpp:1244 src/mainwindow.cpp:1267 src/mainwindow.cpp:1285
 #, kde-format
 msgid "Opening file..."
 msgstr "Abrindo arquivo..."
 
-#: src/mainwindow.cpp:1254
+#: src/mainwindow.cpp:1255
 #, kde-format
 msgid "Open File"
 msgstr "Abrir arquivo"
 
-#: src/mainwindow.cpp:1375
+#: src/mainwindow.cpp:1376
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6286,32 +6318,32 @@ msgstr ""
 "p><p>Sua escolha pode sempre ser alterada na caixa de diálogo de "
 "configuração.</p></qt>"
 
-#: src/mainwindow.cpp:1380
+#: src/mainwindow.cpp:1381
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Salvar as imagens separadamente"
 
-#: src/mainwindow.cpp:1381
+#: src/mainwindow.cpp:1382
 #, kde-format
 msgid "Save Images in File"
 msgstr "Salvar as imagens no arquivo"
 
-#: src/mainwindow.cpp:1416
+#: src/mainwindow.cpp:1417
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Salvando o arquivo com um novo nome..."
 
-#: src/mainwindow.cpp:1425
+#: src/mainwindow.cpp:1426
 #, kde-format
 msgid "Save As"
 msgstr "Salvar como"
 
-#: src/mainwindow.cpp:1491
+#: src/mainwindow.cpp:1492
 #, kde-format
 msgid "Printing..."
 msgstr "Impressão..."
 
-#: src/mainwindow.cpp:1495
+#: src/mainwindow.cpp:1496
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6320,27 +6352,27 @@ msgstr ""
 "A coleção esta sendo filtrada para mostrar um subconjunto limitado de seus "
 "registros. Apenas os registros visíveis serão impressos. Deseja continuar?"
 
-#: src/mainwindow.cpp:1518
+#: src/mainwindow.cpp:1519
 #, kde-format
 msgid "Exiting..."
 msgstr "Saindo..."
 
-#: src/mainwindow.cpp:1624
+#: src/mainwindow.cpp:1625
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrados, %2 selecionados)"
 
-#: src/mainwindow.cpp:1627
+#: src/mainwindow.cpp:1628
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtrados)"
 
-#: src/mainwindow.cpp:1630
+#: src/mainwindow.cpp:1631
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 selecionados)"
 
-#: src/mainwindow.cpp:1769 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1770 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:264
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6348,57 +6380,57 @@ msgstr "(%1 selecionados)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "O Tellico encontrou um erro no processamento do XSLT."
 
-#: src/mainwindow.cpp:1901
+#: src/mainwindow.cpp:1902
 #, kde-format
 msgid "Importing data..."
 msgstr "Importação de dados..."
 
-#: src/mainwindow.cpp:1912
+#: src/mainwindow.cpp:1913
 #, kde-format
 msgid "Import File"
 msgstr "Importar arquivo"
 
-#: src/mainwindow.cpp:1925
+#: src/mainwindow.cpp:1926
 #, kde-format
 msgid "Import Directory"
 msgstr "Importar pasta"
 
-#: src/mainwindow.cpp:1949
+#: src/mainwindow.cpp:1950
 #, kde-format
 msgid "Exporting data..."
 msgstr "Exportação de dados..."
 
-#: src/mainwindow.cpp:1972
+#: src/mainwindow.cpp:1973
 #, kde-format
 msgid "Export As"
 msgstr "Exportar como"
 
-#: src/mainwindow.cpp:2000
+#: src/mainwindow.cpp:2001
 #, kde-format
 msgid "String Macros"
 msgstr "Macros de String"
 
-#: src/mainwindow.cpp:2001
+#: src/mainwindow.cpp:2002
 #, kde-format
 msgid "Macro"
 msgstr "Macro"
 
-#: src/mainwindow.cpp:2001
+#: src/mainwindow.cpp:2002
 #, kde-format
 msgid "String"
 msgstr "String"
 
-#: src/mainwindow.cpp:2088
+#: src/mainwindow.cpp:2089
 #, kde-format
 msgid "Creating citations..."
 msgstr "Criando citações..."
 
-#: src/mainwindow.cpp:2198
+#: src/mainwindow.cpp:2199
 #, kde-format
 msgid "Filters"
 msgstr "Filtros"
 
-#: src/mainwindow.cpp:2199
+#: src/mainwindow.cpp:2200
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6407,12 +6439,12 @@ msgstr ""
 "<qt>A <i>Visão de Filtros</i> mostra os registros que atendem determinadas "
 "regras de filtros.</qt>"
 
-#: src/mainwindow.cpp:2222
+#: src/mainwindow.cpp:2223
 #, kde-format
 msgid "Loans"
 msgstr "Empréstimos"
 
-#: src/mainwindow.cpp:2223
+#: src/mainwindow.cpp:2224
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6421,7 +6453,7 @@ msgstr ""
 "<qt>A <i>Visão de Empréstimos</i> mostra uma lista com todas as pessoas que "
 "pegaram itens emprestados de sua coleção.</qt>"
 
-#: src/mainwindow.cpp:2310
+#: src/mainwindow.cpp:2311
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6430,12 +6462,12 @@ msgstr ""
 "Algumas imagens não estão salvas na localização configurada. O arquivo atual "
 "deve ser salvo e as imagens serão transferidas para a nova localização."
 
-#: src/mainwindow.cpp:2351
+#: src/mainwindow.cpp:2352
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Atualiza os dados do registro %1"
 
-#: src/mainwindow.cpp:2370
+#: src/mainwindow.cpp:2371
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6640,7 +6672,7 @@ msgstr "Taxa de bits"
 msgid "Tracks (Disc %1)"
 msgstr "Faixas (disco %1)"
 
-#: src/translators/audiofileimporter.cpp:315 xslt/entry-templates/Album.xsl:243
+#: src/translators/audiofileimporter.cpp:315 xslt/entry-templates/Album.xsl:244
 #, kde-format
 msgid "(Various)"
 msgstr "(Vários)"
@@ -7147,27 +7179,27 @@ msgstr "HTML"
 msgid "(grouped by %1)"
 msgstr "(agrupados por %1)"
 
-#: src/translators/htmlexporter.cpp:504
+#: src/translators/htmlexporter.cpp:505
 #, kde-format
 msgid "HTML Options"
 msgstr "Opções HTML"
 
-#: src/translators/htmlexporter.cpp:507
+#: src/translators/htmlexporter.cpp:508
 #, kde-format
 msgid "Print field headers"
 msgstr "Imprimir os cabeçalhos dos campos"
 
-#: src/translators/htmlexporter.cpp:512
+#: src/translators/htmlexporter.cpp:513
 #, kde-format
 msgid "Group the entries"
 msgstr "Agrupar os registros"
 
-#: src/translators/htmlexporter.cpp:517
+#: src/translators/htmlexporter.cpp:518
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Exportar arquivos de registros individuais"
 
-#: src/translators/htmlexporter.cpp:518
+#: src/translators/htmlexporter.cpp:519
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Se selecionado, serão criados arquivos individuais para cada registro."
@@ -7562,17 +7594,17 @@ msgstr ""
 "mesmo tempo. Considere, por exemplo, um campo de número\n"
 "seguido por um subcampo de texto com entradas 3b, 14a.</p>\n"
 
-#: xslt/entry-templates/Album.xsl:170
+#: xslt/entry-templates/Album.xsl:171
 #, kde-format
 msgid "This template is meant for music collections only."
 msgstr "Este modelo é apenas para coleções de música."
 
-#: xslt/entry-templates/Album.xsl:491
+#: xslt/entry-templates/Album.xsl:492
 #, kde-format
 msgid "Total:"
 msgstr "Total:"
 
-#: xslt/entry-templates/Video.xsl:200 xslt/report-templates/Tri-Column.xsl:124
+#: xslt/entry-templates/Video.xsl:204 xslt/report-templates/Tri-Column.xsl:124
 #, kde-format
 msgid "This template is meant for video collections only."
 msgstr "Este modelo é apenas para coleções de vídeo."

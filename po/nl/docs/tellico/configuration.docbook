@@ -266,6 +266,12 @@
 >Open filmdatabase</link
 >,</simpara
 ></listitem>
+<listitem
+><simpara
+><link linkend="filmaffinity"
+>FilmAffinity</link
+>,</simpara
+></listitem>
 <!-- comics -->
 <listitem
 ><simpara
@@ -604,7 +610,16 @@
 <para
 ><ulink url="http://allocine.fr"
 >AlloCiné</ulink
-> is een online informatieservice voor films, gebaseerd in Frankrijk. Identificatie van browser moet zijn ingeschakeld in &systemsettings; </para>
+> is een online informatieservice voor films, gebaseerd in Frankrijk. </para>
+</sect3>
+
+<sect3 id="filmaffinity">
+<title
+>FilmAffinity</title>
+<para
+><ulink url="https://filmaffinity.com"
+>FilmAffinity</ulink
+> is een onafhankelijke filmsite. </para>
 </sect3>
 
 </sect2>
@@ -620,7 +635,7 @@
 <para
 ><ulink url="http://discogs.com"
 >Discogs.com</ulink
-> is een door gebruikers gebouwde muziekdatabase met informatie over artiesten, labels en hun opnamen. Registratie voor een vrij account is vereist. Identificatie van browser moet zijn ingeschakeld in &systemsettings; </para>
+> is een door gebruikers gebouwde muziekdatabase met informatie over artiesten, labels en hun opnamen. Registratie voor een vrij account is vereist. </para>
 </sect3>
 
 <sect3 id="musicbrainz">
@@ -629,7 +644,7 @@
 <para
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
-> is een muziekmetadatabase van een gemeenschap die een beknopte informatiesite over muziek probeert te maken. Identificatie van browser moet zijn ingeschakeld in &systemsettings; </para>
+> is een muziekmetadatabase van een gemeenschap die een beknopte informatiesite over muziek probeert te maken. </para>
 </sect3>
 
 </sect2>
