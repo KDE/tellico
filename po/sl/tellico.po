@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-12 00:47+0000\n"
-"PO-Revision-Date: 2023-02-25 09:25+0100\n"
+"PO-Revision-Date: 2023-03-12 08:34+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2347,10 +2347,9 @@ msgstr "Barva poudarjenega besedila predloge"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, fuzzy, kde-format
-#| msgid "Template highlight color"
+#, kde-format
 msgid "Template link color"
-msgstr "Barva poudarjanja predloge"
+msgstr "Barva povezav predloge"
 
 #: src/configdialog.cpp:95
 #, kde-format
@@ -2698,10 +2697,9 @@ msgid "Highlighted text color:"
 msgstr "Barva poudarjenega besedila:"
 
 #: src/configdialog.cpp:539
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "Barva besedila:"
+msgstr "Barva povezave:"
 
 #: src/configdialog.cpp:548
 #, kde-format
@@ -5187,10 +5185,9 @@ msgid "VinoXML Data Files"
 msgstr "Podatkovne datoteke VinoXML"
 
 #: src/importdialog.cpp:424
-#, fuzzy, kde-format
-#| msgid "Book Title"
+#, kde-format
 msgid "eBook Files"
-msgstr "Naslov knjige"
+msgstr "datoteke elektronskih knjig"
 
 #: src/loandialog.cpp:67
 #, kde-format
