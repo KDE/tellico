@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-12 00:47+0000\n"
-"PO-Revision-Date: 2023-02-20 07:03+0100\n"
+"PO-Revision-Date: 2023-03-14 05:09+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2319,10 +2319,9 @@ msgstr "ნიმუშის გამოკვეთილი ტექსტ�
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, fuzzy, kde-format
-#| msgid "Template highlight color"
+#, kde-format
 msgid "Template link color"
-msgstr "ნიმუშის გამოკვეთილი ფერი"
+msgstr "ნიმუშის ბმულის ფერი"
 
 #: src/configdialog.cpp:95
 #, kde-format
@@ -2653,10 +2652,9 @@ msgid "Highlighted text color:"
 msgstr "გამოკვეთილი ტექსტის ფერი:"
 
 #: src/configdialog.cpp:539
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "ტექსტის ფერი:"
+msgstr "ბმულის ფერი:"
 
 #: src/configdialog.cpp:548
 #, kde-format
@@ -5069,10 +5067,9 @@ msgid "VinoXML Data Files"
 msgstr "VinoXML მონაცემების ფალები"
 
 #: src/importdialog.cpp:424
-#, fuzzy, kde-format
-#| msgid "Book Title"
+#, kde-format
 msgid "eBook Files"
-msgstr "წიგნის სათაური"
+msgstr "ელწიგნის ფაილები"
 
 #: src/loandialog.cpp:67
 #, kde-format
