@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-12 00:47+0000\n"
-"PO-Revision-Date: 2023-03-12 09:43+0100\n"
+"PO-Revision-Date: 2023-03-14 07:22+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -2387,10 +2387,9 @@ msgstr "Couleur de mise en valeur du texte du modèle"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, fuzzy, kde-format
-#| msgid "Template highlight color"
+#, kde-format
 msgid "Template link color"
-msgstr "Couleur de mise en valeur du modèle"
+msgstr "Couleur modèle de lien"
 
 #: src/configdialog.cpp:95
 #, kde-format
@@ -2761,10 +2760,9 @@ msgstr "Couleur de mise en valeur du texte :"
 
 # unreviewed-context
 #: src/configdialog.cpp:539
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "Couleur du texte :"
+msgstr "Couleur de lien :"
 
 #: src/configdialog.cpp:548
 #, kde-format
