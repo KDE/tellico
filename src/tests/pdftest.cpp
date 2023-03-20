@@ -84,3 +84,23 @@ void PdfTest::testMultiple() {
     QVERIFY(coll);
   }
 }
+
+void PdfTest::testMetadata() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-metadata.pdf"));
+  Tellico::Import::PDFImporter importer(url);
+
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
+  QCOMPARE(coll->entryCount(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(entry);
+#ifdef HAVE_POPPLER
+  QCOMPARE(entry->field("title"), QStringLiteral("The Big Brown Bear"));
+  QCOMPARE(entry->field("author"), QStringLiteral("Happy Man"));
+  QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
+  QCOMPARE(entry->field("keyword"), QStringLiteral("PDF Metadata"));
+#endif
+}

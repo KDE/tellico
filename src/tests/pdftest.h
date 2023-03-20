@@ -34,6 +34,7 @@ private Q_SLOTS:
   void initTestCase();
   void testScienceDirect();
   void testMultiple();
+  void testMetadata();
 };
 
 #endif

@@ -169,6 +169,9 @@ Tellico::Data::CollPtr PDFImporter::collection() {
         entry->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
       }
       s = doc->info(QStringLiteral("Keywords")).simplified();
+      if(s.isEmpty()) {
+        s = doc->info(QStringLiteral("Subject")).simplified();
+      }
       if(!s.isEmpty()) {
         // keywords are also separated by semi-colons in poppler
         entry->setField(QStringLiteral("keyword"), s);
