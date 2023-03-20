@@ -662,7 +662,7 @@ msgid ""
 "qt>"
 msgstr ""
 "<qt>Bir alan <em>Paragraf</em>, <em>Tablo</em> veya <em>Görsel</em> alanı "
-"ile aynı kategoride olmayabilir. Lütfen farklı bir kategori girin.< /qt>"
+"ile aynı kategoride olmayabilir. Lütfen farklı bir kategori girin.</qt>"
 
 #: src/collectionfieldsdialog.cpp:942
 #, kde-format
@@ -7603,6 +7603,3 @@ msgstr "Ara"
 #, kde-format
 msgid "Clear"
 msgstr "Temizle"
-
-#~ msgid "Edit..."
-#~ msgstr "Düzenle..."
