@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-12 00:47+0000\n"
-"PO-Revision-Date: 2023-03-06 15:44+0000\n"
+"PO-Revision-Date: 2023-03-20 13:53+0000\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
 "Language: pt\n"
@@ -63,7 +63,7 @@ msgstr ""
 "X-POFile-SpellExtra: BNC BiblioShare Kino Android iOS WiiU Teatr JSON\n"
 "X-POFile-SpellExtra: LibraryThing Mintage EAU Gibbons Michel Collectorz\n"
 "X-POFile-SpellExtra: Premium Numista Mishler Krause TVmaze TheTVDB RPGGeek\n"
-"X-POFile-SpellExtra: PIN Gaming History Crow FilmAffinity iTunes\n"
+"X-POFile-SpellExtra: PIN Gaming History Crow FilmAffinity iTunes eBook\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2405,10 +2405,9 @@ msgstr "Cor do texto realçado do modelo"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, fuzzy, kde-format
-#| msgid "Template highlight color"
+#, kde-format
 msgid "Template link color"
-msgstr "Cor de realce do modelo"
+msgstr "Cor da ligação do modelo"
 
 #: src/configdialog.cpp:95
 #, kde-format
@@ -2770,10 +2769,9 @@ msgid "Highlighted text color:"
 msgstr "Cor do texto realçado:"
 
 #: src/configdialog.cpp:539
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "Cor do texto:"
+msgstr "Cor da ligação:"
 
 #: src/configdialog.cpp:548
 #, kde-format
@@ -5273,10 +5271,9 @@ msgid "VinoXML Data Files"
 msgstr "Ficheiros de Dados do VinoXML"
 
 #: src/importdialog.cpp:424
-#, fuzzy, kde-format
-#| msgid "Book Title"
+#, kde-format
 msgid "eBook Files"
-msgstr "Título do Livro"
+msgstr "Ficheiros eBook"
 
 #: src/loandialog.cpp:67
 #, kde-format
