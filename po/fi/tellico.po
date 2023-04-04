@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-20 02:50+0000\n"
-"PO-Revision-Date: 2023-02-26 16:48+0200\n"
+"PO-Revision-Date: 2023-03-14 22:09+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2013-01-13 20:43:19+0000\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -199,10 +199,9 @@ msgstr "Ryhmäyhteenvetoraportti"
 
 #: src/charts/yeardistributionreport.cpp:69
 #: src/charts/yeardistributionreport.cpp:133
-#, fuzzy, kde-format
-#| msgid "Distributor"
+#, kde-format
 msgid "Year Distribution"
-msgstr "Jakelija"
+msgstr "Jakeluvuosi"
 
 #: src/charts/yeardistributionreport.cpp:158
 #, kde-format
@@ -4291,16 +4290,13 @@ msgid "Query character set: "
 msgstr "Kyselyn merkistö: "
 
 #: src/fetch/z3950fetcher.cpp:648
-#, fuzzy, kde-format
-#| msgid ""
-#| "Enter the character set encoding used by the z39.50 server. The most "
-#| "likely choice is MARC-8, although ISO-8859-1 is common as well."
+#, kde-format
 msgid ""
 "Enter the character set encoding used for queries by the z39.50 server. The "
 "most likely choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
-"Anna z39.50-palvelimen kirjainmerkistön koodaustapa. Todennäköisin "
-"vaihtoehto on MARC-8, tosin myös ISO-8859-1 on yleinen."
+"Anna z39.50-palvelimen merkistökoodaus. Todennäköisin vaihtoehto on MARC-8, "
+"mutta myös ISO-8859-1 on yleinen."
 
 #: src/fetch/z3950fetcher.cpp:654
 #, kde-format
@@ -4308,16 +4304,13 @@ msgid "Results character set: "
 msgstr "Tulosmerkistö: "
 
 #: src/fetch/z3950fetcher.cpp:663
-#, fuzzy, kde-format
-#| msgid ""
-#| "Enter the character set encoding used by the z39.50 server. The most "
-#| "likely choice is MARC-8, although ISO-8859-1 is common as well."
+#, kde-format
 msgid ""
 "Enter the character set encoding used for responses by the z39.50 server. "
 "The most likely choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
-"Anna z39.50-palvelimen kirjainmerkistön koodaustapa. Todennäköisin "
-"vaihtoehto on MARC-8, tosin myös ISO-8859-1 on yleinen."
+"Anna z39.50-palvelimen merkistökoodaus. Todennäköisin vaihtoehto on MARC-8, "
+"mutta myös ISO-8859-1 on yleinen."
 
 #: src/fetch/z3950fetcher.cpp:669
 #, kde-format
@@ -5193,10 +5186,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico – vapaa ja yksinkertainen kokoelmanhallintaohjelma"
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2015, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2023, Robby Stephenson"
-msgstr "© 2001–2015 Robby Stephenson"
+msgstr "© 2001–2023 Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
