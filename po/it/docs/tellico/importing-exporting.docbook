@@ -373,9 +373,9 @@
 >Trascinamento</title>
 
 <para
->Il trascinamento e il rilascio dei file di dati sulla finestra principale di &appname; importerà i file, allo stesso modo che scegliendo il <link linkend="importing"
->comando di importazione</link
-> dal menu. Il trascinamento funziona per i seguenti formati di file: Tellico, Bibtex, RIS e &PDF;. È possibile importare anche più file alla volta.</para>
+>Trascinare file dati sulla finestra principale di &appname; farà sì che il file venga importato, allo stesso modo che scegliendo il <link linkend="importing"
+>comando importa</link
+> dal menu. Il trascinamento funziona per i seguenti formati di file: Tellico, Bibtex, RIS &PDF; e EPub. È possibile importare anche più file alla volta.</para>
 
 <para
 >Quindi, se ad esempio si vuole creare un catalogo di molti <link linkend="importing-pdf"
