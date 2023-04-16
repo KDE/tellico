@@ -23,6 +23,9 @@
    ===================================================================
 -->
 
+<!-- param to set desired collection type, whether book(2) or bibtex(5) -->
+<xsl:param name="ctype" select="'5'"/>
+
 <!-- lookup table for months -->
 <m:months>
  <m:month id="Jan">1</m:month>
@@ -55,7 +58,7 @@
 
 <xsl:template match="/">
  <tellico syntaxVersion="11">
-  <collection title="XMP Conversion" type="5">
+  <collection title="XMP Conversion" type="{$ctype}">
    <fields>
     <field name="_default"/>
     <xsl:if test=".//prism:issn">
@@ -78,7 +81,9 @@
 </xsl:template>
 
 <xsl:template match="dc:type">
- <entry-type><xsl:value-of select="normalize-space(translate(., $ucletters, $lcletters))"/></entry-type>
+ <xsl:if test="$ctype = '5'">
+  <entry-type><xsl:value-of select="normalize-space(translate(., $ucletters, $lcletters))"/></entry-type>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="dc:creator">
@@ -147,7 +152,9 @@
 </xsl:template>
 
 <xsl:template match="jabref:url">
- <url><xsl:value-of select="normalize-space(.)"/></url>
+ <xsl:if test="$ctype = '5'">
+  <url><xsl:value-of select="normalize-space(.)"/></url>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="jabref:doi|prism:doi">

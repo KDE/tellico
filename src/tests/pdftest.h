@@ -35,6 +35,7 @@ private Q_SLOTS:
   void testScienceDirect();
   void testMultiple();
   void testMetadata();
+  void testBookCollection();
 };
 
 #endif

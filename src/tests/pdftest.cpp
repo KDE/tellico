@@ -29,6 +29,7 @@
 
 #include "../translators/pdfimporter.h"
 #include "../collections/bibtexcollection.h"
+#include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 #include "../fieldformat.h"
@@ -42,7 +43,8 @@ QTEST_MAIN( PdfTest )
 
 void PdfTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
-  Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBook(Tellico::Data::Collection::Bibtex, "bibliography");
+  Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibliography");
+  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   // since we use the XMP importer
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/xmp2tellico.xsl"));
   Tellico::ImageFactory::init();
@@ -101,6 +103,28 @@ void PdfTest::testMetadata() {
   QCOMPARE(entry->field("title"), QStringLiteral("The Big Brown Bear"));
   QCOMPARE(entry->field("author"), QStringLiteral("Happy Man"));
   QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
+  QCOMPARE(entry->field("keyword"), QStringLiteral("PDF Metadata"));
+#endif
+}
+
+void PdfTest::testBookCollection() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-metadata.pdf"));
+  Tellico::Import::PDFImporter importer(url);
+
+  // PDF importer defaults to bibtex unless current collection is a book collection
+  Tellico::Data::CollPtr tmpColl(new Tellico::Data::BookCollection(true));
+  importer.setCurrentCollection(tmpColl);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
+  QCOMPARE(coll->entryCount(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(entry);
+#ifdef HAVE_POPPLER
+  QCOMPARE(entry->field("title"), QStringLiteral("The Big Brown Bear"));
+  QCOMPARE(entry->field("author"), QStringLiteral("Happy Man"));
   QCOMPARE(entry->field("keyword"), QStringLiteral("PDF Metadata"));
 #endif
 }

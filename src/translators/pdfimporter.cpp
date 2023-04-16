@@ -26,6 +26,7 @@
 #include "tellicoimporter.h"
 #include "xslthandler.h"
 #include "xmphandler.h"
+#include "../collections/bookcollection.h"
 #include "../collections/bibtexcollection.h"
 #include "../fieldformat.h"
 #include "../core/filehandler.h"
@@ -66,7 +67,7 @@ PDFImporter::PDFImporter(const QList<QUrl>& urls_) : Importer(urls_), m_cancelle
 }
 
 bool PDFImporter::canImport(int type_) const {
-  return type_ == Data::Collection::Bibtex;
+  return type_ == Data::Collection::Book || type_ == Data::Collection::Bibtex;
 }
 
 Tellico::Data::CollPtr PDFImporter::collection() {
@@ -88,6 +89,11 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   if(!xsltHandler.isValid()) {
     myWarning() << "invalid xslt in xmp2tellico.xsl";
     return Data::CollPtr();
+  }
+  if(currentCollection() && currentCollection()->type() == Data::Collection::Book) {
+    xsltHandler.addStringParam("ctype", "2"); // book if already existing
+  } else {
+    xsltHandler.addStringParam("ctype", "5"); // bibtex by default
   }
 
   bool hasDOI = false;
@@ -143,7 +149,11 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     }
 
     if(!newColl) {
-      newColl = new Data::BibtexCollection(true);
+      if(currentCollection() && currentCollection()->type() == Data::Collection::Book) {
+        newColl = new Data::BookCollection(true);
+      } else {
+        newColl = new Data::BibtexCollection(true);
+      }
     }
     if(!entry) {
       entry = new Data::Entry(newColl);
@@ -229,10 +239,11 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     delete doc;
 #endif
 
-    entry->setField(QStringLiteral("url"), (*it).url());
-    // always an article?
-    entry->setField(QStringLiteral("entry-type"), QStringLiteral("article"));
-
+    if(!currentCollection() || currentCollection()->type() == Data::Collection::Bibtex) {
+      entry->setField(QStringLiteral("url"), (*it).url());
+      // always an article?
+      entry->setField(QStringLiteral("entry-type"), QStringLiteral("article"));
+    }
     QPixmap pix = NetAccess::filePreview(QUrl::fromLocalFile(ref->fileName()), PDF_FILE_PREVIEW_SIZE);
     if(pix.isNull()) {
       myDebug() << "No file preview from pdf";
