@@ -46,9 +46,6 @@ Importer::Importer(const QString& text) : QObject(), m_options(ImportProgress | 
 }
 
 Tellico::Data::CollPtr Importer::currentCollection() const {
-  if(!m_currentCollection) {
-    myDebug() << "Importer::currentCollection() - no current collection";
-  }
   return m_currentCollection;
 }
 

@@ -477,6 +477,7 @@ ecm_add_test(fetchertest.cpp
 # the PDF importer uses CrossRefFetcher, so include the test near the fetchers section
 ecm_add_test(pdftest.cpp
              ../translators/pdfimporter.cpp
+             ../translators/ebookimporter.cpp
              ../translators/xmphandler.cpp
              ../entryupdatejob.cpp
     TEST_NAME pdftest
@@ -488,6 +489,9 @@ endif(Exempi_FOUND)
 if(Poppler_Qt5_FOUND)
   target_link_libraries(pdftest Poppler::Qt5)
 endif(Poppler_Qt5_FOUND)
+if(KF5FileMetaData_FOUND)
+  target_link_libraries(pdftest KF5::FileMetaData)
+endif(KF5FileMetaData_FOUND)
 
 # fetcher tests from here down
 IF(BUILD_FETCHER_TESTS)

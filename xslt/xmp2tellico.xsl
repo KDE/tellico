@@ -184,6 +184,13 @@
     </xsl:element>
    </xsl:for-each>
   </xsl:when>
+  <xsl:when test="$value/rdf:Bag">
+   <xsl:for-each select="$value/rdf:Bag/rdf:li">
+    <xsl:element name="{$field}">
+     <xsl:value-of select="normalize-space(.)"/>
+    </xsl:element>
+   </xsl:for-each>
+  </xsl:when>
   <xsl:otherwise>
    <xsl:for-each select="$value/*">
     <xsl:element name="{$field}">

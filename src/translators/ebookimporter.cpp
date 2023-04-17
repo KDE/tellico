@@ -72,7 +72,7 @@ Tellico::Data::CollPtr EBookImporter::collection() {
     bool isEmpty = true;
     Data::EntryPtr entry(new Data::Entry(coll));
     entry->setField(QStringLiteral("comments"), url.toLocalFile());
-    QStringList authors, publishers, genres;
+    QStringList authors, publishers, genres, keywords;
     KFileMetaData::PropertyMap properties = result.properties();
     KFileMetaData::PropertyMap::const_iterator it = properties.constBegin();
     for( ; it != properties.constEnd(); ++it) {
@@ -94,6 +94,9 @@ Tellico::Data::CollPtr EBookImporter::collection() {
           break;
 
         case KFileMetaData::Property::Subject:
+          keywords += value;
+          break;
+
         case KFileMetaData::Property::Genre:
           genres += value;
           break;
@@ -122,6 +125,9 @@ Tellico::Data::CollPtr EBookImporter::collection() {
     }
     if(!genres.isEmpty()) {
       entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
+    }
+    if(!keywords.isEmpty()) {
+      entry->setField(QStringLiteral("keyword"), keywords.join(FieldFormat::delimiterString()));
     }
     if(!isEmpty) {
       coll->addEntries(entry);

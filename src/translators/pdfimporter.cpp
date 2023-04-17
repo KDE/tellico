@@ -24,6 +24,7 @@
 
 #include "pdfimporter.h"
 #include "tellicoimporter.h"
+#include "ebookimporter.h"
 #include "xslthandler.h"
 #include "xmphandler.h"
 #include "../collections/bookcollection.h"
@@ -90,8 +91,10 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     myWarning() << "invalid xslt in xmp2tellico.xsl";
     return Data::CollPtr();
   }
+  bool isBook = false;
   if(currentCollection() && currentCollection()->type() == Data::Collection::Book) {
     xsltHandler.addStringParam("ctype", "2"); // book if already existing
+    isBook = true;
   } else {
     xsltHandler.addStringParam("ctype", "5"); // bibtex by default
   }
@@ -148,8 +151,9 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       }
     }
 
+#ifdef HAVE_POPPLER
     if(!newColl) {
-      if(currentCollection() && currentCollection()->type() == Data::Collection::Book) {
+      if(isBook) {
         newColl = new Data::BookCollection(true);
       } else {
         newColl = new Data::BibtexCollection(true);
@@ -159,8 +163,6 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       entry = new Data::Entry(newColl);
       newColl->addEntries(entry);
     }
-
-#ifdef HAVE_POPPLER
 
     // now load from poppler
     Poppler::Document* doc = Poppler::Document::load(ref->fileName());
@@ -237,9 +239,39 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       myDebug() << "unable to read PDF info (poppler)";
     }
     delete doc;
+#elif defined HAVE_KFILEMETADATA
+    if(!newColl || newColl->entryCount() == 0) {
+      myDebug() << "Reading with metadata";
+      EBookImporter imp(urls());
+      auto ebookColl = imp.collection();
+      if(ebookColl && ebookColl->type() == Data::Collection::Book && !isBook) {
+        newColl = Data::BibtexCollection::convertBookCollection(ebookColl);
+      } else {
+        newColl = ebookColl;
+      }
+      if(newColl->entryCount() > 0) {
+        entry = new Data::Entry(newColl);
+        newColl->addEntries(entry);
+      } else {
+        entry = newColl->entries().front();
+      }
+    }
+#else
+    // only recourse is to create an empty collection
+    if(!newColl) {
+      if(isBook) {
+        newColl = new Data::BookCollection(true);
+      } else {
+        newColl = new Data::BibtexCollection(true);
+      }
+    }
+    if(!entry) {
+      entry = new Data::Entry(newColl);
+      newColl->addEntries(entry);
+    }
 #endif
 
-    if(!currentCollection() || currentCollection()->type() == Data::Collection::Bibtex) {
+    if(!isBook) {
       entry->setField(QStringLiteral("url"), (*it).url());
       // always an article?
       entry->setField(QStringLiteral("entry-type"), QStringLiteral("article"));
