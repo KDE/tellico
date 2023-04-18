@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-12 00:47+0000\n"
+"POT-Creation-Date: 2023-04-18 00:48+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -711,7 +711,7 @@ msgstr "General"
 #: src/collections/bookcollection.cpp:32
 #: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:361
 #: src/field.cpp:315 src/translators/grs1importer.cpp:75
-#: src/translators/pdfimporter.cpp:214
+#: src/translators/pdfimporter.cpp:229
 #, fuzzy, kde-format
 msgid "Publishing"
 msgstr "Editare"
@@ -1172,7 +1172,7 @@ msgstr "Citită"
 
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:209
-#: src/fetch/crossreffetcher.cpp:196 src/translators/pdfimporter.cpp:244
+#: src/fetch/crossreffetcher.cpp:196 src/translators/pdfimporter.cpp:290
 #: src/translators/referencerimporter.cpp:62
 #, fuzzy, kde-format
 msgid "Front Cover"
@@ -3860,7 +3860,7 @@ msgstr ""
 msgid "Keyword"
 msgstr "Cuvinte cheie"
 
-#: src/fetch/fetchmanager.cpp:73 src/translators/pdfimporter.cpp:213
+#: src/fetch/fetchmanager.cpp:73 src/translators/pdfimporter.cpp:228
 #, kde-format
 msgid "arXiv ID"
 msgstr ""
@@ -7033,12 +7033,12 @@ msgstr ""
 "Dacă bifați, ultimul fișier deschis va fi deschis din nou la pornirea "
 "programului."
 
-#: src/translators/importer.cpp:57
+#: src/translators/importer.cpp:54
 #, fuzzy, kde-format
 msgid "Loading data..."
 msgstr "Imprim..."
 
-#: src/translators/importer.cpp:58
+#: src/translators/importer.cpp:55
 #, kde-format
 msgid "Loading %1..."
 msgstr ""
@@ -7114,12 +7114,12 @@ msgstr ""
 "Dacă bifați, la numele grupului se va adăuga și numărul de elemente din acel "
 "grup."
 
-#: src/translators/pdfimporter.cpp:113 src/translators/pdfimporter.cpp:130
+#: src/translators/pdfimporter.cpp:122 src/translators/pdfimporter.cpp:139
 #, fuzzy, kde-format
 msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr "Nu pot deschide fișierul - %1."
 
-#: src/translators/pdfimporter.cpp:271
+#: src/translators/pdfimporter.cpp:317
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "

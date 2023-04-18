@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-12 00:47+0000\n"
+"POT-Creation-Date: 2023-04-18 00:48+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -727,7 +727,7 @@ msgstr "一般"
 #: src/collections/bookcollection.cpp:32
 #: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:361
 #: src/field.cpp:315 src/translators/grs1importer.cpp:75
-#: src/translators/pdfimporter.cpp:214
+#: src/translators/pdfimporter.cpp:229
 #, kde-format
 msgid "Publishing"
 msgstr "發布"
@@ -1189,7 +1189,7 @@ msgstr "已讀"
 
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:209
-#: src/fetch/crossreffetcher.cpp:196 src/translators/pdfimporter.cpp:244
+#: src/fetch/crossreffetcher.cpp:196 src/translators/pdfimporter.cpp:290
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
 msgid "Front Cover"
@@ -3909,7 +3909,7 @@ msgstr "UPC/EAN"
 msgid "Keyword"
 msgstr "關鍵字"
 
-#: src/fetch/fetchmanager.cpp:73 src/translators/pdfimporter.cpp:213
+#: src/fetch/fetchmanager.cpp:73 src/translators/pdfimporter.cpp:228
 #, kde-format
 msgid "arXiv ID"
 msgstr "arXiv 代碼"
@@ -7165,12 +7165,12 @@ msgstr "匯出個別的項目檔"
 msgid "If checked, individual files will be created for each entry."
 msgstr "若勾選此選項，每個項目都會建立個別的檔案。"
 
-#: src/translators/importer.cpp:57
+#: src/translators/importer.cpp:54
 #, kde-format
 msgid "Loading data..."
 msgstr "載入資料中..."
 
-#: src/translators/importer.cpp:58
+#: src/translators/importer.cpp:55
 #, kde-format
 msgid "Loading %1..."
 msgstr "載入 %1 中..."
@@ -7251,12 +7251,12 @@ msgid ""
 "archive."
 msgstr "若勾選此選項，文件中的影像也會被包入 ONIX 封存中。"
 
-#: src/translators/pdfimporter.cpp:113 src/translators/pdfimporter.cpp:130
+#: src/translators/pdfimporter.cpp:122 src/translators/pdfimporter.cpp:139
 #, kde-format
 msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr "Tellico 無法讀取此 PDF 檔的任何中繼資料。"
 
-#: src/translators/pdfimporter.cpp:271
+#: src/translators/pdfimporter.cpp:317
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "
