@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-18 00:48+0000\n"
-"PO-Revision-Date: 2023-03-14 22:09+0200\n"
+"PO-Revision-Date: 2023-04-04 23:09+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -2711,10 +2711,9 @@ msgid "Highlighted text color:"
 msgstr "Korostetun tekstin väri:"
 
 #: src/configdialog.cpp:539
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "Tekstin väri:"
+msgstr "Linkkiväri:"
 
 #: src/configdialog.cpp:548
 #, kde-format
@@ -5199,10 +5198,9 @@ msgid "VinoXML Data Files"
 msgstr "VinoXML-tiedostot"
 
 #: src/importdialog.cpp:424
-#, fuzzy, kde-format
-#| msgid "Book Title"
+#, kde-format
 msgid "eBook Files"
-msgstr "Kirjan nimi"
+msgstr "eBook-tiedostot"
 
 #: src/loandialog.cpp:67
 #, kde-format
