@@ -42,6 +42,10 @@
 
 #include <QPixmap>
 
+namespace {
+  static const int FILE_PREVIEW_SIZE = 196; // same as in pdfimporter.cpp
+}
+
 using Tellico::Import::EBookImporter;
 
 EBookImporter::EBookImporter(const QUrl& url_) : Importer(url_) {
@@ -130,6 +134,23 @@ Tellico::Data::CollPtr EBookImporter::collection() {
       entry->setField(QStringLiteral("keyword"), keywords.join(FieldFormat::delimiterString()));
     }
     if(!isEmpty) {
+      QPixmap pix = NetAccess::filePreview(url, FILE_PREVIEW_SIZE);
+      if(pix.isNull()) {
+        myDebug() << "No file preview from pdf";
+      } else {
+        // is png best option?
+        QString id = ImageFactory::addImage(pix, QStringLiteral("PNG"));
+        if(!id.isEmpty()) {
+          Data::FieldPtr field = coll->fieldByName(QStringLiteral("cover"));
+          if(!field && !coll->imageFields().isEmpty()) {
+            field = coll->imageFields().front();
+          } else if(!field) {
+            field = new Data::Field(QStringLiteral("cover"), i18n("Front Cover"), Data::Field::Image);
+            coll->addField(field);
+          }
+          entry->setField(field, id);
+        }
+      }
       coll->addEntries(entry);
      }
   }
