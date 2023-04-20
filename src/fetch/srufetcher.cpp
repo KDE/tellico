@@ -489,8 +489,8 @@ bool SRUFetcher::initSRWHandler() {
 }
 
 Tellico::Fetch::Fetcher::Ptr SRUFetcher::libraryOfCongress(QObject* parent_) {
-  return Fetcher::Ptr(new SRUFetcher(i18n("Library of Congress (US)"), QStringLiteral("z3950.loc.gov"), 7090,
-                                     QStringLiteral("voyager"), QStringLiteral("mods"), parent_));
+  return Fetcher::Ptr(new SRUFetcher(i18n("Library of Congress (US)"), QStringLiteral("lx2.loc.gov"), 210,
+                                     QStringLiteral("LCDB"), QStringLiteral("mods"), parent_));
 }
 
 QString SRUFetcher::defaultName() {
