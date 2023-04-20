@@ -2615,7 +2615,7 @@ msgstr "Vista p&reliminar..."
 #: src/configdialog.cpp:443
 #, kde-format
 msgid "Show a preview of the template"
-msgstr "Monstra un vista preliminari del patrono"
+msgstr "Monstra un vista preliminar del patrono"
 
 #. i18n("The options below will be passed to the template, but not "
 #. "all templates will use them. Some fonts and colors may be "
@@ -4923,7 +4923,7 @@ msgstr "De minus"
 #: src/gui/previewdialog.cpp:43
 #, kde-format
 msgid "Template Preview"
-msgstr "Vista preliminari de patrono"
+msgstr "Vista preliminar de patrono"
 
 #: src/gui/statusbar.cpp:61
 #, kde-format
