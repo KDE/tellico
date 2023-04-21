@@ -41,6 +41,7 @@ private Q_SLOTS:
   void testRaw();
   void testSacagawea();
   void testSkylab();
+  void testComic();
 
 private:
   KConfigGroup m_config;

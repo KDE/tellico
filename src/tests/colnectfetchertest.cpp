@@ -29,6 +29,7 @@
 #include "../fetch/colnectfetcher.h"
 #include "../entry.h"
 #include "../collections/coincollection.h"
+#include "../collections/comicbookcollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 #include "../fieldformat.h"
@@ -46,6 +47,7 @@ ColnectFetcherTest::ColnectFetcherTest() : AbstractFetcherTest() {
 void ColnectFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::CoinCollection> registerMe(Tellico::Data::Collection::Coin, "coin");
+  Tellico::RegisterCollection<Tellico::Data::ComicBookCollection> registerComic(Tellico::Data::Collection::ComicBook, "comic");
 
   m_config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect"));
   m_config.writeEntry("Custom Fields", QStringLiteral("obverse,reverse,series,mintage,description"));
@@ -144,4 +146,32 @@ void ColnectFetcherTest::testSkylab() {
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("image")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("image")).contains(QLatin1Char('/')));
+}
+
+void ColnectFetcherTest::testComic() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect comics"));
+  cg.writeEntry("Custom Fields", QStringLiteral("series"));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook,
+                                       Tellico::Fetch::Title,
+                                       QStringLiteral("Destiny's Hand: Finale"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ColnectFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
+
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Destiny's Hand: Finale"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("1993"));
+  QCOMPARE(entry->field(QStringLiteral("series")), QStringLiteral("Justice League America (JLA)"));
+  QCOMPARE(entry->field(QStringLiteral("writer")), QStringLiteral("Jurgens Dan"));
+  QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Jurgens Dan; Giordano Dick"));
+  QCOMPARE(entry->field(QStringLiteral("issue")), QStringLiteral("75"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("DC Comics"));
+  QCOMPARE(entry->field(QStringLiteral("edition")), QStringLiteral("First edition"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Superhero"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }

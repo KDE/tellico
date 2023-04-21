@@ -1,3 +1,7 @@
+2023-04-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Colnect data source to include comic book collections.
+
 2023-04-19  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated SRU and z39.50 server info for Library of Congress.
