@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-18 00:48+0000\n"
-"PO-Revision-Date: 2023-04-18 22:35+0200\n"
+"POT-Creation-Date: 2023-04-21 00:49+0000\n"
+"PO-Revision-Date: 2023-04-20 19:34+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
 "Language: de\n"
@@ -1237,7 +1237,8 @@ msgstr "Gelesen"
 
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:209
-#: src/fetch/crossreffetcher.cpp:196 src/translators/pdfimporter.cpp:290
+#: src/fetch/crossreffetcher.cpp:196 src/translators/ebookimporter.cpp:148
+#: src/translators/pdfimporter.cpp:290
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
 msgid "Front Cover"
@@ -2450,10 +2451,9 @@ msgstr ""
 "erneut geöffnet."
 
 #: src/configdialog.cpp:218
-#, fuzzy, kde-format
-#| msgid "matches regular expression"
+#, kde-format
 msgid "&Enable regular expressions in quick filter"
-msgstr "passt auf regulären Ausdruck"
+msgstr "&Reguläre Ausdrücke im Schnellfilter aktivieren"
 
 #: src/configdialog.cpp:219
 #, fuzzy, kde-format
@@ -7350,10 +7350,9 @@ msgid "LibraryThing file:"
 msgstr "LibraryThing-Datei:"
 
 #: src/translators/marcimporter.cpp:130
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#, kde-format
 msgid "Tellico was unable to read any data."
-msgstr "Es sind keine Metadaten aus der PDF-Datei gelesen worden."
+msgstr "Tellico war nicht in der Lage, Daten zu lesen."
 
 #: src/translators/marcimporter.cpp:149
 #, kde-format
