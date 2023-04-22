@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-21 00:49+0000\n"
+"POT-Creation-Date: 2023-04-22 00:51+0000\n"
 "PO-Revision-Date: 2023-03-15 16:14-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -721,9 +721,9 @@ msgstr "Um campo com um valor derivado deve ter um modelo de valor."
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:863 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
-#: src/fetch/bedethequefetcher.cpp:339 src/fetch/colnectfetcher.cpp:317
-#: src/fetch/colnectfetcher.cpp:330 src/fetch/colnectfetcher.cpp:337
-#: src/fetch/colnectfetcher.cpp:344 src/fetch/discogsfetcher.cpp:308
+#: src/fetch/bedethequefetcher.cpp:339 src/fetch/colnectfetcher.cpp:330
+#: src/fetch/colnectfetcher.cpp:343 src/fetch/colnectfetcher.cpp:350
+#: src/fetch/colnectfetcher.cpp:357 src/fetch/discogsfetcher.cpp:308
 #: src/fetch/discogsfetcher.cpp:313 src/fetch/discogsfetcher.cpp:318
 #: src/fetch/discogsfetcher.cpp:325 src/fetch/discogsfetcher.cpp:332
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/doubanfetcher.cpp:349
@@ -890,8 +890,8 @@ msgstr "Capítulo"
 
 #: src/collections/bibtexcollection.cpp:213
 #: src/collections/bookcollection.cpp:143 src/collections/cardcollection.cpp:82
-#: src/collections/comicbookcollection.cpp:70 src/fetch/colnectfetcher.cpp:316
-#: src/fetch/colnectfetcher.cpp:551
+#: src/collections/comicbookcollection.cpp:70 src/fetch/colnectfetcher.cpp:329
+#: src/fetch/colnectfetcher.cpp:629
 #, kde-format
 msgid "Series"
 msgstr "Série"
@@ -1008,7 +1008,7 @@ msgstr "Idade mínima"
 #: src/collections/filecatalog.cpp:57 src/collections/gamecollection.cpp:94
 #: src/collections/stampcollection.cpp:54
 #: src/collections/winecollection.cpp:125 src/entrymatchdialog.cpp:94
-#: src/fetch/colnectfetcher.cpp:323 src/fetch/colnectfetcher.cpp:554
+#: src/fetch/colnectfetcher.cpp:336 src/fetch/colnectfetcher.cpp:632
 #: src/fetch/numistafetcher.cpp:350 src/fetch/numistafetcher.cpp:398
 #: src/fetch/rpggeekfetcher.cpp:209 src/fetchdialog.cpp:253
 #, kde-format
@@ -1355,13 +1355,13 @@ msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "Grading Service"
 msgstr "Serviços de Classificação"
 
-#: src/collections/coincollection.cpp:136 src/fetch/colnectfetcher.cpp:549
+#: src/collections/coincollection.cpp:136 src/fetch/colnectfetcher.cpp:627
 #: src/fetch/numistafetcher.cpp:400
 #, kde-format
 msgid "Obverse"
 msgstr "Observação"
 
-#: src/collections/coincollection.cpp:139 src/fetch/colnectfetcher.cpp:550
+#: src/collections/coincollection.cpp:139 src/fetch/colnectfetcher.cpp:628
 #: src/fetch/numistafetcher.cpp:401
 #, kde-format
 msgid "Reverse"
@@ -3274,7 +3274,7 @@ msgid "Encode the exported file in the local encoding."
 msgstr "Codifica o arquivo exportado na codificação local."
 
 #: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:633
-#: src/fetch/colnectfetcher.cpp:527 src/fetch/discogsfetcher.cpp:217
+#: src/fetch/colnectfetcher.cpp:605 src/fetch/discogsfetcher.cpp:217
 #: src/fetch/doubanfetcher.cpp:447 src/fetch/filmaffinityfetcher.cpp:425
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
@@ -3718,24 +3718,24 @@ msgstr ""
 msgid "BoardGameGeek Link"
 msgstr "BoardGameGeek Link"
 
-#: src/fetch/colnectfetcher.cpp:329 src/fetch/colnectfetcher.cpp:553
+#: src/fetch/colnectfetcher.cpp:342 src/fetch/colnectfetcher.cpp:631
 #, kde-format
 msgid "Mintage"
 msgstr "Mintage"
 
-#: src/fetch/colnectfetcher.cpp:336 src/fetch/colnectfetcher.cpp:555
+#: src/fetch/colnectfetcher.cpp:349 src/fetch/colnectfetcher.cpp:633
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
 msgstr "Stanley Gibbons"
 
-#: src/fetch/colnectfetcher.cpp:343 src/fetch/colnectfetcher.cpp:556
+#: src/fetch/colnectfetcher.cpp:356 src/fetch/colnectfetcher.cpp:634
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "Michel"
 
-#: src/fetch/colnectfetcher.cpp:658 src/fetch/filmaffinityfetcher.cpp:487
+#: src/fetch/colnectfetcher.cpp:736 src/fetch/filmaffinityfetcher.cpp:487
 #: src/fetch/numistafetcher.cpp:422 src/fetch/themoviedbfetcher.cpp:631
 #, kde-format
 msgid "Language: "

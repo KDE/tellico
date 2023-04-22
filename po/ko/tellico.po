@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-21 00:49+0000\n"
-"PO-Revision-Date: 2023-03-01 01:33+0100\n"
+"POT-Creation-Date: 2023-04-22 00:51+0000\n"
+"PO-Revision-Date: 2023-04-22 00:08+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -692,9 +692,9 @@ msgstr "값이 파생된 필드는 값 템플릿이 있어야 합니다."
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:863 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
-#: src/fetch/bedethequefetcher.cpp:339 src/fetch/colnectfetcher.cpp:317
-#: src/fetch/colnectfetcher.cpp:330 src/fetch/colnectfetcher.cpp:337
-#: src/fetch/colnectfetcher.cpp:344 src/fetch/discogsfetcher.cpp:308
+#: src/fetch/bedethequefetcher.cpp:339 src/fetch/colnectfetcher.cpp:330
+#: src/fetch/colnectfetcher.cpp:343 src/fetch/colnectfetcher.cpp:350
+#: src/fetch/colnectfetcher.cpp:357 src/fetch/discogsfetcher.cpp:308
 #: src/fetch/discogsfetcher.cpp:313 src/fetch/discogsfetcher.cpp:318
 #: src/fetch/discogsfetcher.cpp:325 src/fetch/discogsfetcher.cpp:332
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/doubanfetcher.cpp:349
@@ -859,8 +859,8 @@ msgstr "장"
 
 #: src/collections/bibtexcollection.cpp:213
 #: src/collections/bookcollection.cpp:143 src/collections/cardcollection.cpp:82
-#: src/collections/comicbookcollection.cpp:70 src/fetch/colnectfetcher.cpp:316
-#: src/fetch/colnectfetcher.cpp:551
+#: src/collections/comicbookcollection.cpp:70 src/fetch/colnectfetcher.cpp:329
+#: src/fetch/colnectfetcher.cpp:629
 #, kde-format
 msgid "Series"
 msgstr "시리즈"
@@ -977,7 +977,7 @@ msgstr "최소 연령"
 #: src/collections/filecatalog.cpp:57 src/collections/gamecollection.cpp:94
 #: src/collections/stampcollection.cpp:54
 #: src/collections/winecollection.cpp:125 src/entrymatchdialog.cpp:94
-#: src/fetch/colnectfetcher.cpp:323 src/fetch/colnectfetcher.cpp:554
+#: src/fetch/colnectfetcher.cpp:336 src/fetch/colnectfetcher.cpp:632
 #: src/fetch/numistafetcher.cpp:350 src/fetch/numistafetcher.cpp:398
 #: src/fetch/rpggeekfetcher.cpp:209 src/fetchdialog.cpp:253
 #, kde-format
@@ -1324,13 +1324,13 @@ msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "Grading Service"
 msgstr "등급 서비스"
 
-#: src/collections/coincollection.cpp:136 src/fetch/colnectfetcher.cpp:549
+#: src/collections/coincollection.cpp:136 src/fetch/colnectfetcher.cpp:627
 #: src/fetch/numistafetcher.cpp:400
 #, kde-format
 msgid "Obverse"
 msgstr "앞면"
 
-#: src/collections/coincollection.cpp:139 src/fetch/colnectfetcher.cpp:550
+#: src/collections/coincollection.cpp:139 src/fetch/colnectfetcher.cpp:628
 #: src/fetch/numistafetcher.cpp:401
 #, kde-format
 msgid "Reverse"
@@ -2331,10 +2331,9 @@ msgstr "템플릿 강조 글자색"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, fuzzy, kde-format
-#| msgid "Template highlight color"
+#, kde-format
 msgid "Template link color"
-msgstr "템플릿 강조색"
+msgstr "템플릿 링크 색"
 
 #: src/configdialog.cpp:95
 #, kde-format
@@ -2679,10 +2678,9 @@ msgid "Highlighted text color:"
 msgstr "강조된 글자색:"
 
 #: src/configdialog.cpp:539
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "글자색:"
+msgstr "링크 색:"
 
 #: src/configdialog.cpp:548
 #, kde-format
@@ -3221,7 +3219,7 @@ msgid "Encode the exported file in the local encoding."
 msgstr "내보낸 파일을 사용자 로캘의 인코딩으로 인코딩합니다."
 
 #: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:633
-#: src/fetch/colnectfetcher.cpp:527 src/fetch/discogsfetcher.cpp:217
+#: src/fetch/colnectfetcher.cpp:605 src/fetch/discogsfetcher.cpp:217
 #: src/fetch/doubanfetcher.cpp:447 src/fetch/filmaffinityfetcher.cpp:425
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
@@ -3663,24 +3661,24 @@ msgstr ""
 msgid "BoardGameGeek Link"
 msgstr "BoardGameGeek 링크"
 
-#: src/fetch/colnectfetcher.cpp:329 src/fetch/colnectfetcher.cpp:553
+#: src/fetch/colnectfetcher.cpp:342 src/fetch/colnectfetcher.cpp:631
 #, kde-format
 msgid "Mintage"
 msgstr "주조"
 
-#: src/fetch/colnectfetcher.cpp:336 src/fetch/colnectfetcher.cpp:555
+#: src/fetch/colnectfetcher.cpp:349 src/fetch/colnectfetcher.cpp:633
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
 msgstr "Stanley Gibbons"
 
-#: src/fetch/colnectfetcher.cpp:343 src/fetch/colnectfetcher.cpp:556
+#: src/fetch/colnectfetcher.cpp:356 src/fetch/colnectfetcher.cpp:634
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "Michel"
 
-#: src/fetch/colnectfetcher.cpp:658 src/fetch/filmaffinityfetcher.cpp:487
+#: src/fetch/colnectfetcher.cpp:736 src/fetch/filmaffinityfetcher.cpp:487
 #: src/fetch/numistafetcher.cpp:422 src/fetch/themoviedbfetcher.cpp:631
 #, kde-format
 msgid "Language: "
@@ -5150,10 +5148,9 @@ msgid "VinoXML Data Files"
 msgstr "VinoXML 데이터 파일"
 
 #: src/importdialog.cpp:424
-#, fuzzy, kde-format
-#| msgid "Book Title"
+#, kde-format
 msgid "eBook Files"
-msgstr "책 제목"
+msgstr "전자책 파일"
 
 #: src/loandialog.cpp:67
 #, kde-format
