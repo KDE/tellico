@@ -383,17 +383,17 @@ void ColnectFetcher::slotComplete(KJob* job_) {
 
     Data::EntryPtr entry(new Data::Entry(coll));
     //list action - returns array of [item_id,series_id,producer_id,front_picture_id, back_picture_id,item_description,catalog_codes,item_name]
+    // comics, title is field #7
     const QVariantList values = result.toJsonArray().toVariantList();
     entry->setField(QStringLiteral("colnect-id"), values.first().toString());
     if(optionalFields().contains(desc)) {
       entry->setField(desc, values.last().toString());
     }
-    if(!m_year.isEmpty()) {
-      if(collectionType() == Data::Collection::ComicBook) {
-        entry->setField(QStringLiteral("pub_year"), m_year);
-      } else {
-        entry->setField(QStringLiteral("year"), m_year);
-      }
+    if(collectionType() == Data::Collection::ComicBook) {
+      entry->setField(QStringLiteral("title"), values.at(7).toString());
+      entry->setField(QStringLiteral("pub_year"), m_year);
+    } else {
+      entry->setField(QStringLiteral("year"), m_year);
     }
 
     FetchResult* r = new FetchResult(this, entry);
