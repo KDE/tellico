@@ -127,6 +127,11 @@ QString FetchResult::makeDescription(Data::EntryPtr entry) {
       append(desc, entry, "year");
       break;
 
+    case Data::Collection::Card:
+      append(desc, entry, "number");
+      append(desc, entry, "series");
+      break;
+
     case Data::Collection::BoardGame:
       append(desc, entry, "publisher");
       append(desc, entry, "designer");
