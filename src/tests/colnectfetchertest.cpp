@@ -175,3 +175,29 @@ void ColnectFetcherTest::testComic() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
+
+void ColnectFetcherTest::testBaseballCard() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect cards"));
+  cg.writeEntry("Custom Fields", QStringLiteral("series"));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Card,
+                                       Tellico::Fetch::Title,
+                                       QStringLiteral("1991 Chipper Jones"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ColnectFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
+
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("1991 Upper Deck Chipper Jones"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1991"));
+  QCOMPARE(entry->field(QStringLiteral("brand")), QStringLiteral("Upper Deck"));
+  QCOMPARE(entry->field(QStringLiteral("team")), QStringLiteral("Atlanta Braves"));
+  QCOMPARE(entry->field(QStringLiteral("number")), QStringLiteral("55"));
+  QCOMPARE(entry->field(QStringLiteral("series")), QStringLiteral("Base Set"));
+  QCOMPARE(entry->field(QStringLiteral("type")), QStringLiteral("Major League Baseball"));
+  QVERIFY(!entry->field(QStringLiteral("front")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("front")).contains(QLatin1Char('/')));
+}

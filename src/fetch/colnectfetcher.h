@@ -98,10 +98,14 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void populateEntry(Data::EntryPtr entry, const QVariantList& resultList);
+  void populateCoinEntry(Data::EntryPtr entry, const QVariantList& resultList);
+  void populateStampEntry(Data::EntryPtr entry, const QVariantList& resultList);
+  void populateComicEntry(Data::EntryPtr entry, const QVariantList& resultList);
+  void populateCardEntry(Data::EntryPtr entry, const QVariantList& resultList);
   void loadImage(Data::EntryPtr entry, const QString& fieldName);
 
   void readDataList();
-  void readStampColors();
+  void readItemNames(const QByteArray& item);
 
   QHash<uint, Data::EntryPtr> m_entries;
 
@@ -114,7 +118,8 @@ private:
   // map from field name to position in result list
   QHash<QString, int> m_colnectFields;
   // color names, for stamp collections
-  QHash<int, QString> m_stampColors;
+  // players and teams for sports cards
+  QHash<QByteArray, QHash<int, QString> > m_itemNames;
 };
 
 class ColnectFetcher::ConfigWidget : public Fetch::ConfigWidget {
