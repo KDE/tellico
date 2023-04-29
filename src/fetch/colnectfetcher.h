@@ -93,7 +93,6 @@ private Q_SLOTS:
 
 private:
   static QString URLize(const QString& name);
-  static QString imageUrl(const QString& name, const QString& id);
 
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
@@ -104,6 +103,7 @@ private:
   void populateCardEntry(Data::EntryPtr entry, const QVariantList& resultList);
   void loadImage(Data::EntryPtr entry, const QString& fieldName);
 
+  QString imageUrl(const QString& name, const QString& id);
   void readDataList();
   void readItemNames(const QByteArray& item);
 
@@ -120,6 +120,14 @@ private:
   // color names, for stamp collections
   // players and teams for sports cards
   QHash<QByteArray, QHash<int, QString> > m_itemNames;
+
+  enum ImageSize {
+    NoImage=0,
+    SmallImage=1, // small is really the thumb size
+    LargeImage=2
+  };
+  ImageSize m_imageSize;
+
 };
 
 class ColnectFetcher::ConfigWidget : public Fetch::ConfigWidget {
@@ -135,6 +143,7 @@ private Q_SLOTS:
 
 private:
   GUI::ComboBox* m_langCombo;
+  GUI::ComboBox* m_imageCombo;
 };
 
   } // end namespace

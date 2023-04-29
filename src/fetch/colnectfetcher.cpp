@@ -66,7 +66,8 @@ using Tellico::Fetch::ColnectFetcher;
 ColnectFetcher::ColnectFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false)
-    , m_locale(QStringLiteral("en")) {
+    , m_locale(QStringLiteral("en"))
+    , m_imageSize(LargeImage) {
 }
 
 ColnectFetcher::~ColnectFetcher() {
@@ -97,6 +98,10 @@ void ColnectFetcher::readConfigHook(const KConfigGroup& config_) {
     m_locale = k.toLower();
   }
   Q_ASSERT_X(m_locale.length() == 2, "ColnectFetcher::readConfigHook", "lang should be 2 char short iso");
+  const int imageSize = config_.readEntry("Image Size", -1);
+  if(imageSize > -1) {
+    m_imageSize = static_cast<ImageSize>(imageSize);
+  }
 }
 
 void ColnectFetcher::search() {
@@ -769,11 +774,13 @@ QString ColnectFetcher::URLize(const QString& name_) {
 }
 
 QString ColnectFetcher::imageUrl(const QString& name_, const QString& id_) {
+  if(m_imageSize == NoImage) return QString();
   const QString nameSlug = URLize(name_);
   const int id = id_.toInt();
   QUrl u(QString::fromLatin1(COLNECT_IMAGE_URL));
   // uses 't' for thumbnail, use 'f' for full-size
-  u.setPath(QString::fromLatin1("/t/%1/%2/%3.jpg")
+  u.setPath(QString::fromLatin1("/%1/%2/%3/%4.jpg")
+                           .arg(m_imageSize == SmallImage ? QLatin1Char('t') : QLatin1Char('f'))
                            .arg(id / 1000)
                            .arg(id % 1000, 3, 10, QLatin1Char('0'))
                            .arg(nameSlug));
@@ -871,6 +878,16 @@ ColnectFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ColnectFetche
   l->addWidget(m_langCombo, row, 1);
   label->setBuddy(m_langCombo);
 
+  label = new QLabel(i18n("&Image size: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_imageCombo = new GUI::ComboBox(optionsWidget());
+  m_imageCombo->addItem(i18n("No Image"), NoImage);
+  m_imageCombo->addItem(i18n("Small Image"), SmallImage);
+  m_imageCombo->addItem(i18n("Large Image"), LargeImage);
+  connect(m_imageCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_imageCombo, row, 1);
+  label->setBuddy(m_imageCombo);
+
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
@@ -883,6 +900,7 @@ ColnectFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ColnectFetche
       m_langCombo->addItem(fetcher_->m_locale, fetcher_->m_locale);
       m_langCombo->setCurrentIndex(m_langCombo->count()-1);
     }
+    m_imageCombo->setCurrentData(fetcher_->m_imageSize);
   }
 }
 
@@ -893,6 +911,9 @@ void ColnectFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
     lang = m_langCombo->currentText();
   }
   config_.writeEntry("Locale", lang);
+
+  const int n = m_imageCombo->currentData().toInt();
+  config_.writeEntry("Image Size", n);
 }
 
 QString ColnectFetcher::ConfigWidget::preferredName() const {
