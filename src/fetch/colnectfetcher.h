@@ -101,6 +101,7 @@ private:
   void populateStampEntry(Data::EntryPtr entry, const QVariantList& resultList);
   void populateComicEntry(Data::EntryPtr entry, const QVariantList& resultList);
   void populateCardEntry(Data::EntryPtr entry, const QVariantList& resultList);
+  void populateGameEntry(Data::EntryPtr entry, const QVariantList& resultList);
   void loadImage(Data::EntryPtr entry, const QString& fieldName);
 
   QString imageUrl(const QString& name, const QString& id);

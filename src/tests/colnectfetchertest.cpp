@@ -201,3 +201,41 @@ void ColnectFetcherTest::testBaseballCard() {
   QVERIFY(!entry->field(QStringLiteral("front")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("front")).contains(QLatin1Char('/')));
 }
+
+void ColnectFetcherTest::testGoldeneye() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect games"));
+  cg.writeEntry("Custom Fields", QStringLiteral("pegi"));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game,
+                                       Tellico::Fetch::Title,
+                                       QStringLiteral("Goldeneye 007"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ColnectFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 2);
+
+  QVERIFY(results.size() > 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
+
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("GoldenEye 007"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1997"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Nintendo"));
+  QCOMPARE(entry->field(QStringLiteral("platform")), QStringLiteral("Nintendo 64"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("FPS"));
+  QCOMPARE(entry->field(QStringLiteral("pegi")), QStringLiteral("PEGI 16"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+
+  // test against the Japanese version, which is result #2
+  entry = results.at(1);
+
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("GoldenEye 007"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1997"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Nintendo"));
+  QCOMPARE(entry->field(QStringLiteral("platform")), QStringLiteral("Nintendo 64"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Shooter"));
+  QCOMPARE(entry->field(QStringLiteral("certification")), QStringLiteral("Teen"));
+  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+}

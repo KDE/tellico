@@ -27,6 +27,7 @@
 #include "../collections/stampcollection.h"
 #include "../collections/comicbookcollection.h"
 #include "../collections/cardcollection.h"
+#include "../collections/gamecollection.h"
 #include "../images/imagefactory.h"
 #include "../gui/combobox.h"
 #include "../utils/guiproxy.h"
@@ -90,7 +91,8 @@ bool ColnectFetcher::canFetch(int type) const {
   return type == Data::Collection::Coin
       || type == Data::Collection::Stamp
       || type == Data::Collection::Card
-      || type == Data::Collection::ComicBook;
+      || type == Data::Collection::ComicBook
+      || type == Data::Collection::Game;
 }
 
 void ColnectFetcher::readConfigHook(const KConfigGroup& config_) {
@@ -125,6 +127,9 @@ void ColnectFetcher::search() {
       break;
     case Data::Collection::Card:
       m_category = QStringLiteral("sports_cards");
+      break;
+    case Data::Collection::Game:
+      m_category = QStringLiteral("video_games");
       break;
     default:
       myWarning() << "Colnect category type not available for" << collectionType();
@@ -234,7 +239,7 @@ Tellico::Data::EntryPtr ColnectFetcher::fetchEntryHook(uint uid_) {
       return entry;
     }
 #if 0
-    myWarning() << "Remove item debug from colnectfetcher.cpp";
+    myWarning() << "Remove item debug from colnectfetcher.cpp [colnectitemtest.json]";
     QFile file(QStringLiteral("/tmp/colnectitemtest.json"));
     if(file.open(QIODevice::WriteOnly)) {
       QTextStream t(&file);
@@ -294,7 +299,7 @@ void ColnectFetcher::slotComplete(KJob* job_) {
   m_job = nullptr;
 
 #if 0
-  myWarning() << "Remove debug from colnectfetcher.cpp";
+  myWarning() << "Remove debug from colnectfetcher.cpp [colnecttest.json]";
   QFile f(QStringLiteral("/tmp/colnecttest.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -335,6 +340,9 @@ void ColnectFetcher::slotComplete(KJob* job_) {
     case Data::Collection::Card:
       coll = new Data::CardCollection(true);
       break;
+    case Data::Collection::Game:
+      coll = new Data::GameCollection(true);
+      break;
     default:
       myWarning() << "no collection pointer for type" << collectionType();
       break;
@@ -353,27 +361,6 @@ void ColnectFetcher::slotComplete(KJob* job_) {
   const QString desc(QStringLiteral("description"));
   if(!coll->hasField(desc) && optionalFields().contains(desc)) {
     Data::FieldPtr field(new Data::Field(desc, i18n("Description"), Data::Field::Para));
-    coll->addField(field);
-  }
-
-  const QString mintage(QStringLiteral("mintage"));
-  if(!coll->hasField(mintage) && optionalFields().contains(mintage)) {
-    Data::FieldPtr field(new Data::Field(mintage, i18n("Mintage"), Data::Field::Number));
-    field->setCategory(i18n("General"));
-    coll->addField(field);
-  }
-
-  const QString stanleygibbons(QStringLiteral("stanley-gibbons"));
-  if(!coll->hasField(stanleygibbons) && optionalFields().contains(stanleygibbons)) {
-    Data::FieldPtr field(new Data::Field(stanleygibbons, i18nc("Stanley Gibbons stamp catalog code", "Stanley Gibbons")));
-    field->setCategory(i18n("General"));
-    coll->addField(field);
-  }
-
-  const QString michel(QStringLiteral("michel"));
-  if(!coll->hasField(michel) && optionalFields().contains(michel)) {
-    Data::FieldPtr field(new Data::Field(michel, i18nc("Michel stamp catalog code", "Michel")));
-    field->setCategory(i18n("General"));
     coll->addField(field);
   }
 
@@ -428,6 +415,39 @@ void ColnectFetcher::slotComplete(KJob* job_) {
   stop();
 }
 
+#define READ_AND_SET(NAME, FIELD) \
+  { \
+    const int idx = m_colnectFields.value(QStringLiteral(NAME), -1); \
+    if(idx > -1) { \
+      entry_->setField(QStringLiteral(FIELD), resultList_.at(idx).toString()); \
+    } \
+  }
+#define READ_AND_SET_OPTIONAL(NAME, FIELD) \
+  { \
+    const QString fieldName = QStringLiteral(FIELD); \
+    const int idx = m_colnectFields.value(QStringLiteral(NAME), -1); \
+    if(idx > -1 && optionalFields().contains(fieldName)) { \
+      entry_->setField(fieldName, resultList_.at(idx).toString()); \
+    } \
+  }
+#define READ_AND_SET_IMAGE(NAME, FIELD) \
+  { \
+    const int idx = m_colnectFields.value(QStringLiteral(NAME), -1); \
+    if(idx > -1) { \
+      entry_->setField(QStringLiteral(FIELD), \
+                       imageUrl(resultList_.at(0).toString(), resultList_.at(idx).toString())); \
+    } \
+  }
+#define READ_AND_SET_OPTIONAL_IMAGE(NAME, FIELD) \
+  { \
+    const QString fieldName = QStringLiteral(FIELD); \
+    const int idx = m_colnectFields.value(QStringLiteral(NAME), -1); \
+    if(idx > -1 && optionalFields().contains(fieldName)) { \
+      entry_->setField(fieldName, \
+                       imageUrl(resultList_.at(0).toString(), resultList_.at(idx).toString())); \
+    } \
+  }
+
 void ColnectFetcher::populateEntry(Data::EntryPtr entry_, const QVariantList& resultList_) {
   if(m_colnectFields.isEmpty() || m_lastCollType != collectionType()) {
     m_lastCollType = collectionType();
@@ -452,18 +472,9 @@ void ColnectFetcher::populateEntry(Data::EntryPtr entry_, const QVariantList& re
   }
 #endif
 
-  int idx = m_colnectFields.value(QStringLiteral("Series"), -1);
-  static const QString series(QStringLiteral("series"));
-  if(idx > -1 && optionalFields().contains(series)) {
-    entry_->setField(series, resultList_.at(idx).toString());
-  }
+  READ_AND_SET_OPTIONAL("Series", "series");
 
-  idx = m_colnectFields.value(QStringLiteral("Country"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("country"), resultList_.at(idx).toString());
-  }
-
-  idx = m_colnectFields.value(QStringLiteral("Description"), -1);
+  int idx = m_colnectFields.value(QStringLiteral("Description"), -1);
   static const QString desc(QStringLiteral("description"));
   if(idx > -1 && optionalFields().contains(desc)) {
     static const QString name(QStringLiteral("Name"));
@@ -498,10 +509,21 @@ void ColnectFetcher::populateEntry(Data::EntryPtr entry_, const QVariantList& re
     case Data::Collection::Card:
       populateCardEntry(entry_, resultList_);
       break;
+    case Data::Collection::Game:
+      populateGameEntry(entry_, resultList_);
+      break;
   }
 }
 
 void ColnectFetcher::populateCoinEntry(Data::EntryPtr entry_, const QVariantList& resultList_) {
+  auto coll = entry_->collection();
+  const QString mintage(QStringLiteral("mintage"));
+  if(!coll->hasField(mintage) && optionalFields().contains(mintage)) {
+    Data::FieldPtr field(new Data::Field(mintage, i18n("Mintage"), Data::Field::Number));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
+
   int idx = m_colnectFields.value(QStringLiteral("Issued on"), -1);
   // the year may have already been set in the query term
   if(m_year.isEmpty() && idx > -1) {
@@ -523,28 +545,28 @@ void ColnectFetcher::populateCoinEntry(Data::EntryPtr entry_, const QVariantList
     }
   }
 
-  idx = m_colnectFields.value(QStringLiteral("Known mintage"), -1);
-  static const QString mintage(QStringLiteral("mintage"));
-  if(idx > -1 && optionalFields().contains(mintage)) {
-    entry_->setField(mintage, resultList_.at(idx).toString());
-  }
-
-  idx = m_colnectFields.value(QStringLiteral("FrontPicture"), -1);
-  if(idx > -1 && optionalFields().contains(QStringLiteral("obverse"))) {
-    entry_->setField(QStringLiteral("obverse"),
-                     imageUrl(resultList_.at(0).toString(),
-                              resultList_.at(idx).toString()));
-   }
-
-  idx = m_colnectFields.value(QStringLiteral("BackPicture"), -1);
-  if(idx > -1 && optionalFields().contains(QStringLiteral("reverse"))) {
-    entry_->setField(QStringLiteral("reverse"),
-                     imageUrl(resultList_.at(0).toString(),
-                              resultList_.at(idx).toString()));
-   }
+  READ_AND_SET("Country", "country");
+  READ_AND_SET_OPTIONAL("Known mintage", "mintage");
+  READ_AND_SET_OPTIONAL_IMAGE("FrontPicture", "obverse");
+  READ_AND_SET_OPTIONAL_IMAGE("BackPicture", "reverse");
 }
 
 void ColnectFetcher::populateStampEntry(Data::EntryPtr entry_, const QVariantList& resultList_) {
+  auto coll = entry_->collection();
+  const QString stanleygibbons(QStringLiteral("stanley-gibbons"));
+  if(!coll->hasField(stanleygibbons) && optionalFields().contains(stanleygibbons)) {
+    Data::FieldPtr field(new Data::Field(stanleygibbons, i18nc("Stanley Gibbons stamp catalog code", "Stanley Gibbons")));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
+
+  const QString michel(QStringLiteral("michel"));
+  if(!coll->hasField(michel) && optionalFields().contains(michel)) {
+    Data::FieldPtr field(new Data::Field(michel, i18nc("Michel stamp catalog code", "Michel")));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
+
   int idx = m_colnectFields.value(QStringLiteral("Issued on"), -1);
   // the year may have already been set in the query term
   if(m_year.isEmpty() && idx > -1) {
@@ -566,10 +588,8 @@ void ColnectFetcher::populateStampEntry(Data::EntryPtr entry_, const QVariantLis
     }
   }
 
-  idx = m_colnectFields.value(QStringLiteral("Gum"), -1);
-  if(idx > -1 && collectionType() == Data::Collection::Stamp) {
-    entry_->setField(QStringLiteral("gummed"), resultList_.at(idx).toString());
-  }
+  READ_AND_SET("Gum", "gummed");
+  READ_AND_SET("Country", "country");
 
   idx = m_colnectFields.value(QStringLiteral("Colors"), -1);
   if(idx > -1) {
@@ -601,21 +621,13 @@ void ColnectFetcher::populateStampEntry(Data::EntryPtr entry_, const QVariantLis
     }
   }
 
-  idx = m_colnectFields.value(QStringLiteral("FrontPicture"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("image"),
-                     imageUrl(resultList_.at(0).toString(),
-                              resultList_.at(idx).toString()));
-  }
+  READ_AND_SET_IMAGE("FrontPicture", "image");
 }
 
 void ColnectFetcher::populateComicEntry(Data::EntryPtr entry_, const QVariantList& resultList_) {
-  int idx = m_colnectFields.value(QStringLiteral("Name"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("title"), resultList_.at(idx).toString());
-  }
+  READ_AND_SET("Name", "title");
 
-  idx = m_colnectFields.value(QStringLiteral("Issued on"), -1);
+  int idx = m_colnectFields.value(QStringLiteral("Issued on"), -1);
   // the year may have already been set in the query term
   if(m_year.isEmpty() && idx > -1) {
     entry_->setField(QStringLiteral("pub_year"), resultList_.at(idx).toString().left(4));
@@ -636,53 +648,23 @@ void ColnectFetcher::populateComicEntry(Data::EntryPtr entry_, const QVariantLis
     entry_->setField(QStringLiteral("artist"), artist);
   }
 
-  idx = m_colnectFields.value(QStringLiteral("Publisher"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("publisher"), resultList_.at(idx).toString());
-  }
-
-  idx = m_colnectFields.value(QStringLiteral("IssuingNumber"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("issue"), resultList_.at(idx).toString());
-  }
-
-  idx = m_colnectFields.value(QStringLiteral("Edition"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("edition"), resultList_.at(idx).toString());
-  }
-
-  idx = m_colnectFields.value(QStringLiteral("Genre"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("genre"), resultList_.at(idx).toString());
-  }
-
-  idx = m_colnectFields.value(QStringLiteral("FrontPicture"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("cover"),
-                     imageUrl(resultList_.at(0).toString(),
-                              resultList_.at(idx).toString()));
-  }
+  READ_AND_SET("Publisher", "publisher");
+  READ_AND_SET("IssuingNumber", "issue");
+  READ_AND_SET("Edition", "edition");
+  READ_AND_SET("Genre", "genre");
+  READ_AND_SET_IMAGE("FrontPicture", "cover");
 }
 
 void ColnectFetcher::populateCardEntry(Data::EntryPtr entry_, const QVariantList& resultList_) {
-  int idx = m_colnectFields.value(QStringLiteral("Type"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("series"), resultList_.at(idx).toString());
-  }
+  READ_AND_SET("Type", "series");
+  READ_AND_SET("Brand", "brand");
+  READ_AND_SET("Number", "number");
+  READ_AND_SET("League", "type");
 
-  idx = m_colnectFields.value(QStringLiteral("Brand"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("brand"), resultList_.at(idx).toString());
-  }
-
-  idx = m_colnectFields.value(QStringLiteral("Number"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("number"), resultList_.at(idx).toString());
-  }
-
-  idx = m_colnectFields.value(QStringLiteral("League"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("type"), resultList_.at(idx).toString());
+  int idx = m_colnectFields.value(QStringLiteral("Issued on"), -1);
+  // the year may have already been set in the query term
+  if(m_year.isEmpty() && idx > -1) {
+    entry_->setField(QStringLiteral("year"), resultList_.at(idx).toString().left(4));
   }
 
   idx = m_colnectFields.value(QStringLiteral("ZscCardPlayer"), -1);
@@ -707,20 +689,70 @@ void ColnectFetcher::populateCardEntry(Data::EntryPtr entry_, const QVariantList
     }
   }
 
-  idx = m_colnectFields.value(QStringLiteral("FrontPicture"), -1);
-  if(idx > -1) {
-    entry_->setField(QStringLiteral("front"),
-                     imageUrl(resultList_.at(0).toString(),
-                              resultList_.at(idx).toString()));
+  READ_AND_SET_IMAGE("FrontPicture", "front");
+  READ_AND_SET_IMAGE("BackPicture", "back");
+}
+
+void ColnectFetcher::populateGameEntry(Data::EntryPtr entry_, const QVariantList& resultList_) {
+  auto coll = entry_->collection();
+  const QString pegi(QStringLiteral("pegi"));
+  if(!coll->hasField(pegi) && optionalFields().contains(pegi)) {
+    coll->addField(Data::Field::createDefaultField(Data::Field::PegiField));
   }
 
-  idx = m_colnectFields.value(QStringLiteral("BackPicture"), -1);
+  READ_AND_SET("Name", "title");
+  READ_AND_SET("Publisher", "publisher");
+  READ_AND_SET("Description", "description");
+  READ_AND_SET("Genre", "genre");
+  READ_AND_SET_IMAGE("FrontPicture", "cover");
+
+  int idx = m_colnectFields.value(QStringLiteral("Console"), -1);
   if(idx > -1) {
-    entry_->setField(QStringLiteral("back"),
-                     imageUrl(resultList_.at(0).toString(),
-                              resultList_.at(idx).toString()));
+    entry_->setField(QStringLiteral("platform"),
+                     Data::GameCollection::normalizePlatform(resultList_.at(idx).toString()));
+  }
+
+  idx = m_colnectFields.value(QStringLiteral("Issued on"), -1);
+  // the year may have already been set in the query term
+  if(m_year.isEmpty() && idx > -1) {
+    entry_->setField(QStringLiteral("year"), resultList_.at(idx).toString().left(4));
+  }
+
+  idx = m_colnectFields.value(QStringLiteral("Rating"), -1);
+  if(idx > -1) {
+    // can have both esrb and pegi rating
+    QStringList ratings = resultList_.at(idx).toString().split(QLatin1String("/"));
+    Q_FOREACH(QString rating, ratings) {
+      rating = rating.simplified();
+      if(rating.startsWith(QLatin1String("ESRB"))) {
+        rating = rating.mid(5);
+        Data::GameCollection::EsrbRating esrb = Data::GameCollection::UnknownEsrb;
+        if(rating == QLatin1String("U"))         esrb = Data::GameCollection::Unrated;
+        else if(rating == QLatin1String("T"))    esrb = Data::GameCollection::Teen;
+        else if(rating == QLatin1String("E"))    esrb = Data::GameCollection::Everyone;
+        else if(rating == QLatin1String("E10+")) esrb = Data::GameCollection::Everyone10;
+        else if(rating == QLatin1String("EC"))   esrb = Data::GameCollection::EarlyChildhood;
+        else if(rating == QLatin1String("A"))    esrb = Data::GameCollection::Adults;
+        else if(rating == QLatin1String("M"))    esrb = Data::GameCollection::Mature;
+        else if(rating == QLatin1String("RP"))   esrb = Data::GameCollection::Pending;
+        if(rating != Data::GameCollection::UnknownEsrb) {
+          entry_->setField(QStringLiteral("certification"), Data::GameCollection::esrbRating(esrb));
+        }
+      } else if(rating.startsWith(QLatin1String("PEGI")) && optionalFields().contains(QStringLiteral("pegi"))) {
+        static const QRegularExpression pegiRx(QStringLiteral("^PEGI \\d\\d?"));
+        auto pegiMatch = pegiRx.match(rating);
+        if(pegiMatch.hasMatch()) {
+          entry_->setField(QStringLiteral("pegi"), pegiMatch.captured(0));
+        }
+      }
+    }
   }
 }
+
+#undef READ_AND_SET
+#undef READ_AND_SET_OPTIONAL
+#undef READ_AND_SET_IMAGE
+#undef READ_AND_SET_OPTIONAL_IMAGE
 
 void ColnectFetcher::loadImage(Data::EntryPtr entry_, const QString& fieldName_) {
   const QString image = entry_->field(fieldName_);
@@ -758,6 +790,7 @@ Tellico::StringHash ColnectFetcher::allOptionalFields() {
   hash[QStringLiteral("description")] = i18n("Description");
   hash[QStringLiteral("stanley-gibbons")] = i18nc("Stanley Gibbons stamp catalog code", "Stanley Gibbons");
   hash[QStringLiteral("michel")] = i18nc("Michel stamp catalog code", "Michel");
+  hash[QStringLiteral("pegi")] = i18n("PEGI Rating");
   return hash;
 }
 
