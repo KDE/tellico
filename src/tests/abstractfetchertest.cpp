@@ -27,6 +27,7 @@
 #include "abstractfetchertest.h"
 
 #include "../fetch/fetcherjob.h"
+#include "../tellico_debug.h"
 
 #include <QNetworkInterface>
 #include <QStandardPaths>
@@ -58,7 +59,13 @@ Tellico::Data::EntryList AbstractFetcherTest::doFetch(Tellico::Fetch::Fetcher::P
 }
 
 void AbstractFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
+  auto job = static_cast<Tellico::Fetch::FetcherJob*>(job_);
+  Q_FOREACH(auto result, job->results()) {
+    if(result->title.isEmpty() && result->desc.isEmpty()) {
+      myDebug() << "AbstractFetcherTest::slotResult() - FetchResult has empty title and description";
+    }
+  }
+  m_results = job->entries();
   m_loop.quit();
 }
 
