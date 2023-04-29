@@ -67,7 +67,8 @@ ColnectFetcher::ColnectFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false)
     , m_locale(QStringLiteral("en"))
-    , m_imageSize(LargeImage) {
+    , m_imageSize(LargeImage)
+    , m_lastCollType(-1) {
 }
 
 ColnectFetcher::~ColnectFetcher() {
@@ -407,8 +408,13 @@ void ColnectFetcher::slotComplete(KJob* job_) {
     if(optionalFields().contains(desc)) {
       entry->setField(desc, values.last().toString());
     }
-    if(collectionType() == Data::Collection::ComicBook) {
+    // since card collection use a dependent field for title, fake a description with the series field
+    if(collectionType() == Data::Collection::Card) {
+      entry->setField(QStringLiteral("series"), values.at(7).toString());
+    } else {
       entry->setField(QStringLiteral("title"), values.at(7).toString());
+    }
+    if(collectionType() == Data::Collection::ComicBook) {
       entry->setField(QStringLiteral("pub_year"), m_year);
     } else {
       entry->setField(QStringLiteral("year"), m_year);
@@ -423,7 +429,8 @@ void ColnectFetcher::slotComplete(KJob* job_) {
 }
 
 void ColnectFetcher::populateEntry(Data::EntryPtr entry_, const QVariantList& resultList_) {
-  if(m_colnectFields.isEmpty()) {
+  if(m_colnectFields.isEmpty() || m_lastCollType != collectionType()) {
+    m_lastCollType = collectionType();
     readDataList();
     // set minimum size of list here (cards are 23)
     if(m_colnectFields.count() < 23) {
@@ -720,6 +727,7 @@ void ColnectFetcher::loadImage(Data::EntryPtr entry_, const QString& fieldName_)
   if(image.contains(QLatin1Char('/'))) {
     const QString id = ImageFactory::addImage(QUrl::fromUserInput(image), true /* quiet */);
     if(id.isEmpty()) {
+      myDebug() << "Failed to load" << image;
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
     // empty image ID is ok

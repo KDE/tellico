@@ -121,7 +121,7 @@ void ColnectFetcherTest::testSacagawea() {
 
 void ColnectFetcherTest::testSkylab() {
   KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect stamps"));
-  cg.writeEntry("Custom Fields", QStringLiteral("image,series,description,stanley-gibbons,michel"));
+  cg.writeEntry("Custom Fields", QStringLiteral("series,description,stanley-gibbons,michel"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Stamp,
                                        Tellico::Fetch::Title,

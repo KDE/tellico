@@ -127,7 +127,7 @@ private:
     LargeImage=2
   };
   ImageSize m_imageSize;
-
+  int m_lastCollType;
 };
 
 class ColnectFetcher::ConfigWidget : public Fetch::ConfigWidget {
