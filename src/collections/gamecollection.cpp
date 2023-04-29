@@ -193,7 +193,7 @@ Tellico::Data::GameCollection::GamePlatform GameCollection::guessPlatform(const 
   } else if(name_.contains(QStringLiteral("PC")) ||
             name_.contains(QStringLiteral("Windows"))) {
     return Windows;
-  } else if(name_.contains(QStringLiteral("Mac"))) {
+  } else if(name_.contains(QStringLiteral("Mac"), Qt::CaseInsensitive)) {
     return MacOS;
   } else if(name_.contains(QStringLiteral("3DS"))) {
     return Nintendo3DS;
