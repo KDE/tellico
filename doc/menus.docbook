@@ -31,7 +31,7 @@ performs a menu item function, the default shortcut is listed with the menu item
 </term>
 
 <listitem>
-<para>This command <action>creates a new collection</action>. &tellico; supports <link linkend="collection-types">12 default collection types</link> along with an empty user-defined custom collection.</para>
+<para>This command <action>creates a new collection</action>. &tellico; supports <link linkend="collection-types">12 default collection types</link> along with an empty user-defined custom collection. Any custom-saved collection templates will also be available.</para>
 </listitem>
 </varlistentry>
 
@@ -103,6 +103,19 @@ modified.</para>
 <varlistentry>
 <term>
  <menuchoice>
+  <guimenu>File</guimenu>
+  <guimenuitem>Save As Template...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+  <para>This command <action>saves the collection as a new template</action>. Only the fields are saved, and the custom collection type can be created via the <guimenuitem>New Collection</guimenuitem> command.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
   <shortcut>
    <keycombo>&Ctrl;<keycap>P</keycap></keycombo>
   </shortcut>
@@ -113,6 +126,19 @@ modified.</para>
 
 <listitem>
 <para>This command <action>prints the collection</action>. Printing options may be set in the <interface>Configuration Dialog</interface>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>File</guimenu>
+  <guimenuitem>Print Preview</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>shows a preview of the printed collection</action>.</para>
 </listitem>
 </varlistentry>
 
@@ -614,6 +640,33 @@ chapter of the &kde; Fundamentals documentation &tellico; has these application 
 
 <listitem>
 <para>This command <action>changes the field used to group the entries</action> in the collection.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Lock Layout</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>locks the layout</action> such that the various collection views cannot be moved. Unlocking the layout allows the user to rearrange them.</para>
+</listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Reset Layout</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>resets the layout</action> to the default view, which may be helpful if the various views become hidden or collapsed.</para>
 </listitem>
 </varlistentry>
 
