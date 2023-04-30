@@ -121,7 +121,7 @@ void ColnectFetcherTest::testSacagawea() {
 
 void ColnectFetcherTest::testSkylab() {
   KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect stamps"));
-  cg.writeEntry("Custom Fields", QStringLiteral("series,description,stanley-gibbons,michel"));
+  cg.writeEntry("Custom Fields", QStringLiteral("series,description,stanley-gibbons,michel,colnect"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Stamp,
                                        Tellico::Fetch::Title,
@@ -144,13 +144,14 @@ void ColnectFetcherTest::testSkylab() {
   QCOMPARE(entry->field(QStringLiteral("currency")), QStringLiteral("K - Papua New Guinean kina"));
   QCOMPARE(entry->field(QStringLiteral("color")), QStringLiteral("Multicolor"));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("colnect")), QStringLiteral("https://colnect.com/en/stamps/stamp/717470-Skylab_space_station_1"));
   QVERIFY(!entry->field(QStringLiteral("image")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("image")).contains(QLatin1Char('/')));
 }
 
 void ColnectFetcherTest::testComic() {
   KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect comics"));
-  cg.writeEntry("Custom Fields", QStringLiteral("series"));
+  cg.writeEntry("Custom Fields", QStringLiteral("series,colnect"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook,
                                        Tellico::Fetch::Title,
@@ -172,13 +173,14 @@ void ColnectFetcherTest::testComic() {
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("DC Comics"));
   QCOMPARE(entry->field(QStringLiteral("edition")), QStringLiteral("First edition"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Superhero"));
+  QCOMPARE(entry->field(QStringLiteral("colnect")), QStringLiteral("https://colnect.com/en/comics/comic/16515-Destinys_Hand_Finale"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
 void ColnectFetcherTest::testBaseballCard() {
   KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect cards"));
-  cg.writeEntry("Custom Fields", QStringLiteral("series"));
+  cg.writeEntry("Custom Fields", QStringLiteral("series,colnect"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Card,
                                        Tellico::Fetch::Title,
@@ -198,6 +200,7 @@ void ColnectFetcherTest::testBaseballCard() {
   QCOMPARE(entry->field(QStringLiteral("number")), QStringLiteral("55"));
   QCOMPARE(entry->field(QStringLiteral("series")), QStringLiteral("Base Set"));
   QCOMPARE(entry->field(QStringLiteral("type")), QStringLiteral("Major League Baseball"));
+  QCOMPARE(entry->field(QStringLiteral("colnect")), QStringLiteral("https://colnect.com/en/sports_cards/sports_card/67064-55_Chipper_Jones_1991"));
   QVERIFY(!entry->field(QStringLiteral("front")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("front")).contains(QLatin1Char('/')));
 }

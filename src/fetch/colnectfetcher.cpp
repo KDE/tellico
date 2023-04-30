@@ -59,6 +59,7 @@ namespace {
   static const char* COLNECT_API_URL = "https://api.tellico-project.org/colnect";
 //  static const char* COLNECT_API_URL = "https://api.colnect.net";
   static const char* COLNECT_IMAGE_URL = "https://i.colnect.net";
+  static const char* COLNECT_LINK_URL = "https://colnect.com";
 }
 
 using namespace Tellico;
@@ -294,7 +295,7 @@ void ColnectFetcher::slotComplete(KJob* job_) {
     stop();
     return;
   }
-  // see bug 319662. If fetcher is cancelled, job is killed
+  // see bug 319662. If fetcher is canceled, job is killed
   // if the pointer is retained, it gets double-deleted
   m_job = nullptr;
 
@@ -512,6 +513,24 @@ void ColnectFetcher::populateEntry(Data::EntryPtr entry_, const QVariantList& re
     case Data::Collection::Game:
       populateGameEntry(entry_, resultList_);
       break;
+  }
+
+  static const QString colnect(QStringLiteral("colnect"));
+  if(optionalFields().contains(colnect)) {
+    if(!entry_->collection()->hasField(colnect)) {
+      Data::FieldPtr field(new Data::Field(colnect, i18n("Colnect Link"), Data::Field::URL));
+      field->setCategory(i18n("General"));
+      entry_->collection()->addField(field);
+    }
+    QUrl link(QString::fromLatin1(COLNECT_LINK_URL));
+    const QString path(QLatin1Char('/') + m_locale +
+                       QLatin1Char('/') + m_category +
+                       QLatin1Char('/') + m_category.chopped(1) +
+                       QLatin1Char('/') + entry_->field(QStringLiteral("colnect-id")) +
+                       QLatin1Char('-') + URLize(resultList_.at(0).toString()));
+    link.setPath(link.path() + path);
+//    myDebug() << "colnect link is" << link;
+    entry_->setField(colnect, link.url());
   }
 }
 
@@ -781,6 +800,7 @@ QString ColnectFetcher::defaultIcon() {
 
 Tellico::StringHash ColnectFetcher::allOptionalFields() {
   StringHash hash;
+  hash[QStringLiteral("colnect")] = i18n("Colnect Link");
   // treat images as optional since Colnect doesn't break out different images for each year
   hash[QStringLiteral("obverse")] = i18n("Obverse");
   hash[QStringLiteral("reverse")] = i18n("Reverse");
