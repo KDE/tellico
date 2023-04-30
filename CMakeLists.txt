@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 project(Tellico)
 set(TELLICO_VERSION "3.4.90+git")
 
-set(QT_MIN_VERSION "5.4.0")
+set(QT_MIN_VERSION "5.10.0")
 
 # FindPoppler was added to ECM in 5.19
 find_package(ECM 5.19 REQUIRED NO_MODULE)
