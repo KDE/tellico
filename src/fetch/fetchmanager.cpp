@@ -349,6 +349,9 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   if(langs.contains(QStringLiteral("it"))) {
     FETCHER_ADD(IBS);
   }
+  if(langs.contains(QStringLiteral("es"))) {
+    FETCHER_ADD(FilmAffinity);
+  }
   if(langs.contains(QStringLiteral("fr"))) {
     FETCHER_ADD(DVDFr);
     FETCHER_ADD(Allocine);
