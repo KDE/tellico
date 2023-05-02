@@ -40,7 +40,7 @@ or menu bars.
 >crea una nova col·lecció</action
 >. El &tellico; implementa <link linkend="collection-types"
 >12 tipus predeterminats de col·leccions</link
-> juntament amb una col·lecció personalitzada buida definida per l'usuari.</para>
+> juntament amb una col·lecció personalitzada buida definida per l'usuari. També hi haurà disponible qualsevol plantilla de col·lecció desada a mida.</para>
 </listitem>
 </varlistentry>
 
@@ -143,6 +143,26 @@ or menu bars.
 <varlistentry>
 <term>
  <menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Desa com a plantilla...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+  <para
+>Aquesta ordre <action
+>desa la col·lecció com a una plantilla nova</action
+>. Nomes es desen els camps, i el tipus personalitzat de col·lecció es pot crear a partir de l'ordre <guimenuitem
+>Col·lecció nova</guimenuitem
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
 ><shortcut
 > <keycombo action="simul"
 >&Ctrl;<keycap
@@ -162,6 +182,24 @@ or menu bars.
 >imprimeix la col·lecció</action
 >. Les opcions d'impressió es pot establir en el <interface
 >diàleg de configuració</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Vista prèvia d'impressió...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>mostra una vista prèvia de la col·lecció impresa</action
 >.</para>
 </listitem>
 </varlistentry>
@@ -912,6 +950,43 @@ or menu bars.
 >Aquesta ordre <action
 >canvia el camp utilitzat per a agrupar les entrades</action
 > en la col·lecció.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Bloca la disposició</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>bloca la disposició</action
+> de manera que les vistes diferents de les col·leccions no es poden moure. El desblocat de les disposicions permet que l'usuari les reorganitzi.</para>
+</listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Reinicia la disposició</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Aquesta ordre <action
+>reinicia la disposició</action
+> a la vista predeterminada, que pot ser d'ajuda si les diverses vistes esdevenen ocultes o reduïdes.</para>
 </listitem>
 </varlistentry>
 

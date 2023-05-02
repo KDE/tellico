@@ -112,6 +112,10 @@
 >GCstar</ulink
 ></application
 >, <application
+><ulink url="https://www.datacrow.net/"
+>Data Crow</ulink
+></application
+>, <application
 ><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
 >Alexandria</ulink
 ></application
@@ -205,7 +209,7 @@
 >Importar dades d'un &CD; d'àudio</title>
 
 <para
->El &appname; és capaç d'utilitzar el servei <ulink url="http://freedb.org"
+>El &appname; és capaç d'utilitzar el servei <ulink url="http://gnudb.org"
 >freedb.org</ulink
 > per a cercar informació sobre un &CD;, incloent-hi la llista de les pistes. Depenent de la vostra distribució, l'arranjament per a accedir al servei es pot establir en &systemsettings; del &kde;. S'afegiran l'artista, el títol, el gènere, l'any i llista de les pistes del &CD;. </para>
 

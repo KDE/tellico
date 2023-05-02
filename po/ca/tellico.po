@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-01 00:53+0000\n"
-"PO-Revision-Date: 2023-03-12 11:25+0100\n"
+"PO-Revision-Date: 2023-05-01 10:14+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -3718,10 +3718,9 @@ msgid "BoardGameGeek Link"
 msgstr "Enllaç a BoardGameGeek"
 
 #: src/fetch/colnectfetcher.cpp:521 src/fetch/colnectfetcher.cpp:803
-#, fuzzy, kde-format
-#| msgid "Comic Vine Link"
+#, kde-format
 msgid "Colnect Link"
-msgstr "Enllaç a Comic Vine"
+msgstr "Enllaç a Colnect"
 
 #: src/fetch/colnectfetcher.cpp:541 src/fetch/colnectfetcher.cpp:809
 #, kde-format

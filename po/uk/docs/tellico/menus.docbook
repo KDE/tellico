@@ -40,7 +40,7 @@ or menu bars.
 >створити нову збірку</action
 >. У &tellico; передбачено <link linkend="collection-types"
 >12 типових видів збірок</link
->, а також порожню нетипову збірку, параметри якої визначає користувач.</para>
+>, а також порожню нетипову збірку. Також можна скористатися будь-якими нетиповими збереженими шаблонами збірки.</para>
 </listitem>
 </varlistentry>
 
@@ -143,6 +143,26 @@ or menu bars.
 <varlistentry>
 <term>
  <menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Зберегти як шаблон...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+  <para
+>Цей пункт <action
+>зберігає збірку як новий шаблон</action
+>. Буде збережено лише назви полів. Нову нетипову збірку можна буде створити за допомогою пункту <guimenuitem
+>Створити збірку</guimenuitem
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
 ><shortcut
 > <keycombo
 >&Ctrl;<keycap
@@ -162,6 +182,24 @@ or menu bars.
 >надрукувати збірку</action
 >. Параметри друку можна налаштувати у <interface
 >діалоговому вікні налаштування</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Перегляд друку</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту меню можна <action
+>відкрити вікно попереднього перегляду друку збірки</action
 >.</para>
 </listitem>
 </varlistentry>
@@ -908,6 +946,43 @@ or menu bars.
 >За допомогою цього пункту меню можна <action
 >змінити поле, яке буде використано для групування записів</action
 > у збірці.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Заблокувати компонування</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту можна <action
+>зафіксувати компонування</action
+>, щоб панелі збірок не можна було пересувати. Якщо користувач розблокує компонування, панелі знову можна буде пересувати.</para>
+</listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Скинути компонування</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>За допомогою цього пункту можна <action
+>скинути компонування</action
+> до типового. Це може бути корисним, якщо якусь з панелей несподівано буде приховано або згорнуто.</para>
 </listitem>
 </varlistentry>
 
