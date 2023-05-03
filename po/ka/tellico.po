@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-01 00:53+0000\n"
-"PO-Revision-Date: 2023-03-14 05:09+0100\n"
+"PO-Revision-Date: 2023-05-02 06:50+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -3608,10 +3608,9 @@ msgid "BoardGameGeek Link"
 msgstr "BoardGameGeek -ის ბმული"
 
 #: src/fetch/colnectfetcher.cpp:521 src/fetch/colnectfetcher.cpp:803
-#, fuzzy, kde-format
-#| msgid "Comic Vine Link"
+#, kde-format
 msgid "Colnect Link"
-msgstr "Comic Vine -ის ბმული"
+msgstr "Colnect-ის ბმული"
 
 #: src/fetch/colnectfetcher.cpp:541 src/fetch/colnectfetcher.cpp:809
 #, kde-format

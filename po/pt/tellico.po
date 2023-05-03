@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-01 00:53+0000\n"
-"PO-Revision-Date: 2023-03-20 13:53+0000\n"
+"PO-Revision-Date: 2023-05-02 10:53+0100\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
 "Language: pt\n"
@@ -64,6 +64,7 @@ msgstr ""
 "X-POFile-SpellExtra: LibraryThing Mintage EAU Gibbons Michel Collectorz\n"
 "X-POFile-SpellExtra: Premium Numista Mishler Krause TVmaze TheTVDB RPGGeek\n"
 "X-POFile-SpellExtra: PIN Gaming History Crow FilmAffinity iTunes eBook\n"
+"X-POFile-SpellExtra: Colnect\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3765,10 +3766,9 @@ msgid "BoardGameGeek Link"
 msgstr "Ligação ao BoardGameGeek"
 
 #: src/fetch/colnectfetcher.cpp:521 src/fetch/colnectfetcher.cpp:803
-#, fuzzy, kde-format
-#| msgid "Comic Vine Link"
+#, kde-format
 msgid "Colnect Link"
-msgstr "Endereço do Comic Vine"
+msgstr "Endereço da Colnect"
 
 #: src/fetch/colnectfetcher.cpp:541 src/fetch/colnectfetcher.cpp:809
 #, kde-format

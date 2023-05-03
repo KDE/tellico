@@ -3719,10 +3719,9 @@ msgid "BoardGameGeek Link"
 msgstr "Enllaç cap a BoardGameGeek"
 
 #: src/fetch/colnectfetcher.cpp:521 src/fetch/colnectfetcher.cpp:803
-#, fuzzy, kde-format
-#| msgid "Comic Vine Link"
+#, kde-format
 msgid "Colnect Link"
-msgstr "Enllaç cap a Comic Vine"
+msgstr "Enllaç cap a Colnect"
 
 #: src/fetch/colnectfetcher.cpp:541 src/fetch/colnectfetcher.cpp:809
 #, kde-format
