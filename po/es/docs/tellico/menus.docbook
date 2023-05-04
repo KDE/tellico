@@ -39,8 +39,8 @@ or menu bars.
 >Esta orden <action
 >crea una nueva colección</action
 >. &tellico; permite <link linkend="collection-types"
->12 tipos de colecciones de manera predefinida</link
-> además de colecciones vacías a definir por el usuario.</para>
+>12 tipos de colecciones predefinidas</link
+>, además de una colección vacía definida por el usuario. Cualquier plantilla de colección personalizada que haya guardado también estará disponible.</para>
 </listitem>
 </varlistentry>
 
@@ -143,6 +143,26 @@ or menu bars.
 <varlistentry>
 <term>
  <menuchoice
+><guimenu
+>Archivo</guimenu
+> <guimenuitem
+>Guardar como plantilla...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+  <para
+>Esta orden <action
+>guarda la colección como una nueva plantilla</action
+>. Solo se guardan los campos, y el tipo de colección personalizada se puede crear mediante la orden <guimenuitem
+>Nueva colección</guimenuitem
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
 ><shortcut
 > <keycombo
 >&Ctrl;<keycap
@@ -162,6 +182,24 @@ or menu bars.
 >imprime la colección</action
 >. Las opciones de impresión se pueden configurar en el <interface
 >Diálogo de configuración</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Archivo</guimenu
+> <guimenuitem
+>Vista previa de la impresión</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Esta orden <action
+>muestra una vista previa de la colección impresa</action
 >.</para>
 </listitem>
 </varlistentry>
@@ -904,6 +942,43 @@ or menu bars.
 >Esta orden <action
 >cambia el campo usado para agrupar las entradas</action
 > de la colección.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Preferencias</guimenu
+> <guimenuitem
+>Bloquear esquema</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Esta orden <action
+>bloquea el esquema</action
+> para que no se puedan mover las distintas vistas de la colección. Si desbloquea el esquema podrá reorganizarlas.</para>
+</listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Preferencias</guimenu
+> <guimenuitem
+>Reiniciar esquema</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Esta orden <action
+>reinicia el esquema</action
+> a la vista predeterminada, lo que puede resultar de utilidad cuando algunas vistas se han ocultado o se han contraído.</para>
 </listitem>
 </varlistentry>
 
