@@ -148,11 +148,14 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
     connect(m_typeCombo, activatedInt, this, &FetcherConfigDialog::slotNewSourceSelected);
 
     int z3950_idx = 0;
-    Fetch::NameTypeMap typeMap = Fetch::Manager::self()->nameTypeMap();
-    // key is the fetcher name, value is the type
-    for(Fetch::NameTypeMap::ConstIterator it = typeMap.constBegin(); it != typeMap.constEnd(); ++it) {
-      m_typeCombo->addItem(Fetch::Manager::self()->fetcherIcon(it.value()), it.key(), it.value());
-      if(it.value() == Fetch::Z3950) {
+    const auto typeByName = Fetch::Manager::self()->nameTypeHash();
+    auto typeKeys = typeByName.keys();
+    typeKeys.sort(Qt::CaseInsensitive);
+    // key is the fetcher name, value is the fetcher type
+    for(auto it = typeKeys.constBegin(); it != typeKeys.constEnd(); ++it) {
+      const auto typeValue = typeByName.value(*it);
+      m_typeCombo->addItem(Fetch::Manager::self()->fetcherIcon(typeValue), *it, typeValue);
+      if(typeValue == Fetch::Z3950) {
         z3950_idx = m_typeCombo->count()-1;
       }
     }

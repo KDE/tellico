@@ -47,7 +47,7 @@ class ConfigWidget;
 class ManagerMessage;
 class FetcherInitializer;
 
-typedef QMap<QString, Type> NameTypeMap; // map fetcher name to type
+typedef QHash<QString, Type> NameTypeHash; // map fetcher name to type
 typedef QMap<FetchKey, QString> KeyMap; // map key type to name of key
 typedef QList<Fetcher::Ptr> FetcherVec;
 
@@ -90,7 +90,7 @@ public:
   const FetcherVec& fetchers();
   FetcherVec fetchers(int type);
   Fetcher::Ptr fetcherByUuid(const QString& uuid);
-  NameTypeMap nameTypeMap();
+  NameTypeHash nameTypeHash();
   ConfigWidget* configWidget(QWidget* parent, Type type, const QString& name);
 
   // create fetcher for updating an entry

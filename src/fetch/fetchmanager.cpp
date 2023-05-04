@@ -424,11 +424,11 @@ void Manager::updateStatus(const QString& message_) {
   emit signalStatus(message_);
 }
 
-Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
-  Fetch::NameTypeMap map;
+Tellico::Fetch::NameTypeHash Manager::nameTypeHash() {
+  Fetch::NameTypeHash hash;
   FunctionRegistry::const_iterator it = functionRegistry.constBegin();
   while(it != functionRegistry.constEnd()) {
-    map.insert(functionRegistry.value(it.key()).name(), static_cast<Type>(it.key()));
+    hash.insert(functionRegistry.value(it.key()).name(), static_cast<Type>(it.key()));
     ++it;
   }
 
@@ -448,10 +448,10 @@ Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
       continue;
     }
 
-    map.insert(name, ExecExternal);
+    hash.insert(name, ExecExternal);
     m_scriptMap.insert(name, file);
   }
-  return map;
+  return hash;
 }
 
 // called when creating a new fetcher
