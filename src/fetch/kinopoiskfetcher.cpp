@@ -241,7 +241,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
   f.close();
 #endif
 
-  if(results.contains(QStringLiteral("captcha"))) {
+  if(results.contains(QStringLiteral("captcha")) || results.endsWith(QLatin1String("</script>"))) {
 //    myDebug() << "KinoPoiskFetcher: captcha triggered";
     static const QRegularExpression re(QLatin1String("/(\\d+)"));
     QRegularExpressionMatch match = re.match(url.url());
@@ -485,7 +485,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntryLinkedData(const QString& st
   QRegularExpression jsonRx(QStringLiteral("<script.*?type=\"application/ld\\+json\".*?>(.+?)</script>"));
   QRegularExpressionMatch jsonMatch = jsonRx.match(str_);
   if(!jsonMatch.hasMatch()) {
-    myDebug() << "No JSON data";
+    myDebug() << "No LD+JSON data";
     return Data::EntryPtr();
   }
 
