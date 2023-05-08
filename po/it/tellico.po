@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-01 00:53+0000\n"
-"PO-Revision-Date: 2023-03-19 16:45+0100\n"
+"PO-Revision-Date: 2023-05-02 17:48+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3716,10 +3716,9 @@ msgid "BoardGameGeek Link"
 msgstr "Collegamento a BoardGameGeek"
 
 #: src/fetch/colnectfetcher.cpp:521 src/fetch/colnectfetcher.cpp:803
-#, fuzzy, kde-format
-#| msgid "Comic Vine Link"
+#, kde-format
 msgid "Colnect Link"
-msgstr "Collegamento a Comic Vine"
+msgstr "Collegamento a Colnect"
 
 #: src/fetch/colnectfetcher.cpp:541 src/fetch/colnectfetcher.cpp:809
 #, kde-format
