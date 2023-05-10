@@ -48,7 +48,9 @@ MarcImporter::MarcImporter(const QUrl& url_) : Tellico::Import::Importer(url_)
     , m_isUnimarc(false)
     , m_MARCHandler(nullptr)
     , m_MODSHandler(nullptr)
-    , m_widget(nullptr) {
+    , m_widget(nullptr)
+    , m_charSetCombo(nullptr)
+    , m_marcFormatCombo(nullptr) {
 }
 
 MarcImporter::~MarcImporter() {

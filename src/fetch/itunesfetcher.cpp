@@ -228,6 +228,10 @@ void ItunesFetcher::slotComplete(KJob* job_) {
     coll = new Data::VideoCollection(true);
   }
   Q_ASSERT(coll);
+  if(!coll) {
+    stop();
+    return;
+  }
 
   // placeholder for collection id, to be removed later
   Data::FieldPtr f1(new Data::Field(QStringLiteral("collectionId"), QString(), Data::Field::Number));

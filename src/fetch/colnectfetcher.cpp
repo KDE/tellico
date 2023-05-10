@@ -348,6 +348,11 @@ void ColnectFetcher::slotComplete(KJob* job_) {
       myWarning() << "no collection pointer for type" << collectionType();
       break;
   }
+  Q_ASSERT(coll);
+  if(!coll) {
+    stop();
+    return;
+  }
   // placeholder for colnect id, to be removed later
   Data::FieldPtr f1(new Data::Field(QStringLiteral("colnect-id"), QString()));
   coll->addField(f1);

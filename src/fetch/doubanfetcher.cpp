@@ -209,10 +209,12 @@ void DoubanFetcher::slotCompleteISBN(KJob* job_) {
     myDebug() << "Douban: no result -" << mapValue(resultMap, "msg");
   } else {
     Data::EntryPtr entry = createEntry(resultMap);
-    FetchResult* r = new FetchResult(this, entry);
-    m_entries.insert(r->uid, entry);
-    m_matches.insert(r->uid, QUrl(mapValue(resultMap, "url")));
-    emit signalResultFound(r);
+    if(entry) {
+      FetchResult* r = new FetchResult(this, entry);
+      m_entries.insert(r->uid, entry);
+      m_matches.insert(r->uid, QUrl(mapValue(resultMap, "url")));
+      emit signalResultFound(r);
+    }
   }
 
   endJob(job);
@@ -390,6 +392,11 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
       break;
     default:
       break;
+  }
+  Q_ASSERT(coll);
+  Q_ASSERT(entry);
+  if(!coll || !entry) {
+    return entry;
   }
 
   // Now read the info_url which is a table with additional info like binding and ISBN

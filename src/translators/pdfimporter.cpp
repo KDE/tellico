@@ -305,7 +305,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     }
   }
 
-  if(m_cancelled) {
+  if(m_cancelled || !coll) {
     return Data::CollPtr();
   }
 
