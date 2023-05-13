@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-11 00:47+0000\n"
-"PO-Revision-Date: 2023-04-29 12:05+0200\n"
+"PO-Revision-Date: 2023-05-12 19:32+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
 "Language: de\n"
@@ -103,12 +103,10 @@ msgid "Image List"
 msgstr "Bilderliste"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, fuzzy, kde-format
-#| msgctxt "Image List XSL Template"
-#| msgid "Image List"
+#, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "Bilderliste"
+msgstr "Bilderraster"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
