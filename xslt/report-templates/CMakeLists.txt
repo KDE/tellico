@@ -4,6 +4,7 @@ SET(REPORT_FILES
   Column_View.xsl
   Group_Summary.xsl
   Group_View.xsl
+  Image_Grid.xsl
   Image_List.xsl
   Loan_View.xsl
   Title_Listing_\(Horizontal\).xsl
