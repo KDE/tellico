@@ -1,7 +1,7 @@
 
 ########### next target ###############
 
-SET(btparse_STAT_SRCS
+set(btparse_STAT_SRCS
    bibtex_ast.c
    bibtex.c
    err.c
@@ -22,6 +22,7 @@ SET(btparse_STAT_SRCS
    postprocess.c
    input.c
    init.c
-   )
+)
 
-ADD_LIBRARY(btparse-tellico STATIC ${btparse_STAT_SRCS})
+add_library(btparse-tellico STATIC ${btparse_STAT_SRCS})
+set_target_properties(btparse-tellico PROPERTIES POSITION_INDEPENDENT_CODE ON)
