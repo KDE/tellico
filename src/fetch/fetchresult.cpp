@@ -30,11 +30,7 @@
 #include "../tellico_debug.h"
 
 #include <QPixmap>
-#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-#include <KRandom>
-#else
 #include <QRandomGenerator>
-#endif
 
 namespace {
   bool append(QString& text, Tellico::Data::EntryPtr entry, const char* field) {
@@ -55,11 +51,7 @@ using namespace Tellico::Fetch;
 using Tellico::Fetch::FetchResult;
 
 FetchResult::FetchResult(Fetcher* fetcher_, Data::EntryPtr entry_)
-#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-   : uid(KRandom::random())
-#else
    : uid(QRandomGenerator::global()->generate())
-#endif
    , title(entry_->title())
    , desc(makeDescription(entry_))
    , isbn(entry_->field(QStringLiteral("isbn")))
@@ -68,11 +60,7 @@ FetchResult::FetchResult(Fetcher* fetcher_, Data::EntryPtr entry_)
 }
 
 FetchResult::FetchResult(Fetcher* fetcher_, const QString& title_, const QString& desc_, const QString& isbn_)
-#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-   : uid(KRandom::random())
-#else
    : uid(QRandomGenerator::global()->generate())
-#endif
    , title(title_)
    , desc(desc_)
    , isbn(isbn_)

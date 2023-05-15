@@ -33,9 +33,7 @@
 #include <QTextCodec>
 #include <QVariant>
 #include <QCache>
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 #include <QRandomGenerator>
-#endif
 
 namespace {
   static const int STRING_STORE_SIZE = 4999; // too big, too small?
@@ -43,12 +41,7 @@ namespace {
   class StringIterator {
     QString::const_iterator pos, e;
   public:
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-    explicit StringIterator(QStringView string)
-#else
-    explicit StringIterator(const QString& string)
-#endif
-    : pos(string.begin()), e(string.end()) {}
+    explicit StringIterator(QStringView string) : pos(string.begin()), e(string.end()) {}
     inline bool hasNext() const { return pos < e; }
     inline uint next() {
       Q_ASSERT(hasNext());
@@ -224,11 +217,7 @@ QByteArray Tellico::obfuscate(const QString& string) {
   QByteArray b;
   b.reserve(string.length() * 2);
   for(int p = 0; p < string.length(); p++) {
-#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-    char c = KRandom::random() % 255;
-#else
     char c = QRandomGenerator::global()->generate() % 255;
-#endif
     b.prepend(c ^ string.at(p).unicode());
     b.prepend(c);
   }

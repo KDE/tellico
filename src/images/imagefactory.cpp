@@ -255,11 +255,11 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
 
   // if byteCount() is greater than maxCost, then trying and failing to insert it would
   // mean the image gets deleted
-  if(img->byteSize() > d->imageCache.maxCost()) {
+  if(img->sizeInBytes() > d->imageCache.maxCost()) {
     // can't hold it in the cache
     myWarning() << "Image cache is unable to hold the image, it's too big!";
     myWarning() << "Image name is " << img->id();
-    myWarning() << "Image size is " << img->byteSize();
+    myWarning() << "Image size is " << img->sizeInBytes();
     myWarning() << "Max cache size is " << d->imageCache.maxCost();
 
     // add it back to the dict, but add the image to the list of
@@ -267,7 +267,7 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
     // was called, we need to keep the pointer
     d->imageDict.insert(img->id(), img);
     s_imagesToRelease.add(img->id());
-  } else if(!d->imageCache.insert(img->id(), img, img->byteSize())) {
+  } else if(!d->imageCache.insert(img->id(), img, img->sizeInBytes())) {
     // at this point, img has been deleted!
     myWarning() << "Unable to insert into image cache";
     return Data::Image::null;
@@ -310,7 +310,7 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
       Data::Image* img = factory->d->imageDict.take(id_);
       Q_ASSERT(img);
       // imageCache.insert will delete the image by itself if the cost exceeds the cache size
-      if(factory->d->imageCache.insert(img->id(), img, img->byteSize())) {
+      if(factory->d->imageCache.insert(img->id(), img, img->sizeInBytes())) {
         s_imageInfoMap.remove(id_);
       }
     }

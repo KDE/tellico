@@ -30,10 +30,6 @@
 #include <QByteArray>
 #include <QPixmap>
 
-#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-using qsizetype = QIntegerForSizeof<std::size_t>::Signed;
-#endif
-
 namespace Tellico {
   class ImageFactory;
   class ImageDirectory;
@@ -63,7 +59,6 @@ public:
   bool isNull() const;
   bool linkOnly() const { return m_linkOnly; }
   void setLinkOnly(bool l) { m_linkOnly = l; }
-  qsizetype byteSize() const;
 
   QPixmap convertToPixmap() const;
   QPixmap convertToPixmap(int width, int height) const;
