@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-11 00:47+0000\n"
+"POT-Creation-Date: 2023-05-16 00:48+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -692,7 +692,7 @@ msgstr "含有衍生數值的欄位必須定義數值樣本。"
 #: src/configdialog.cpp:142 src/configdialog.cpp:169 src/configdialog.cpp:183
 #: src/configdialog.cpp:200 src/configdialog.cpp:1123
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
-#: src/fetch/amazonfetcher.cpp:863 src/fetch/animenfofetcher.cpp:310
+#: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
 #: src/fetch/bedethequefetcher.cpp:339 src/fetch/colnectfetcher.cpp:363
 #: src/fetch/colnectfetcher.cpp:527 src/fetch/colnectfetcher.cpp:547
@@ -887,7 +887,7 @@ msgstr "交叉參考"
 #: src/collections/cardcollection.cpp:111
 #: src/collections/comicbookcollection.cpp:120
 #: src/collections/musiccollection.cpp:113
-#: src/collections/videocollection.cpp:215 src/fetch/amazonfetcher.cpp:1078
+#: src/collections/videocollection.cpp:215 src/fetch/amazonfetcher.cpp:1076
 #, kde-format
 msgid "Keywords"
 msgstr "關鍵字"
@@ -1085,7 +1085,7 @@ msgstr "我的書籍"
 msgid "Subtitle"
 msgstr "副標題"
 
-#: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:967
+#: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:965
 #: src/fetch/doubanfetcher.cpp:423 src/fetch/doubanfetcher.cpp:476
 #: src/fetch/ibsfetcher.cpp:290 src/translators/alexandriaimporter.cpp:158
 #: src/translators/librarythingimporter.cpp:148
@@ -1093,7 +1093,7 @@ msgstr "副標題"
 msgid "Hardback"
 msgstr "精裝本"
 
-#: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:965
+#: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:963
 #: src/fetch/doubanfetcher.cpp:425 src/fetch/doubanfetcher.cpp:478
 #: src/fetch/ibsfetcher.cpp:288 src/translators/librarythingimporter.cpp:146
 #, kde-format
@@ -1672,7 +1672,7 @@ msgid "Compact Disc"
 msgstr "光碟"
 
 #: src/collections/musiccollection.cpp:54
-#: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1045
+#: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1043
 #: src/fetch/discogsfetcher.cpp:430 src/fetch/upcitemdbfetcher.cpp:406
 #: src/fetch/upcitemdbfetcher.cpp:414
 #, kde-format
@@ -1797,7 +1797,7 @@ msgstr "特色"
 msgid "My Videos"
 msgstr "我的影片"
 
-#: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1031
+#: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1029
 #: src/fetch/upcitemdbfetcher.cpp:392
 #, kde-format
 msgid "VHS"
@@ -1813,13 +1813,13 @@ msgstr "VCD"
 msgid "DivX"
 msgstr "DivX"
 
-#: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1025
+#: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1023
 #: src/fetch/upcitemdbfetcher.cpp:386
 #, kde-format
 msgid "Blu-ray"
 msgstr "藍光"
 
-#: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1028
+#: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1026
 #: src/fetch/upcitemdbfetcher.cpp:389
 #, kde-format
 msgid "HD DVD"
@@ -1897,7 +1897,7 @@ msgstr "區域"
 msgid "Nationality"
 msgstr "國籍"
 
-#: src/collections/videocollection.cpp:102 src/fetch/amazonfetcher.cpp:1041
+#: src/collections/videocollection.cpp:102 src/fetch/amazonfetcher.cpp:1039
 #: src/fetch/upcitemdbfetcher.cpp:402
 #, kde-format
 msgid "NTSC"
@@ -1991,7 +1991,7 @@ msgstr "影片片長（分）"
 msgid "Aspect Ratio"
 msgstr "外觀比例"
 
-#: src/collections/videocollection.cpp:175 src/fetch/amazonfetcher.cpp:1014
+#: src/collections/videocollection.cpp:175 src/fetch/amazonfetcher.cpp:1012
 #: src/fetch/upcitemdbfetcher.cpp:372
 #, kde-format
 msgid "Widescreen"
@@ -2007,7 +2007,7 @@ msgstr "黑白"
 msgid "Color Mode"
 msgstr "色彩模式"
 
-#: src/collections/videocollection.cpp:186 src/fetch/amazonfetcher.cpp:1035
+#: src/collections/videocollection.cpp:186 src/fetch/amazonfetcher.cpp:1033
 #: src/fetch/upcitemdbfetcher.cpp:396
 #, kde-format
 msgid "Director's Cut"
@@ -3229,7 +3229,7 @@ msgstr "以使用者的地域設定（%1）編碼"
 msgid "Encode the exported file in the local encoding."
 msgstr "匯出的檔案以使用者的地域設定編碼。"
 
-#: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:633
+#: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:631
 #: src/fetch/colnectfetcher.cpp:787 src/fetch/discogsfetcher.cpp:217
 #: src/fetch/doubanfetcher.cpp:454 src/fetch/filmaffinityfetcher.cpp:425
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
@@ -3458,7 +3458,7 @@ msgstr "美國"
 msgid "This data is licensed under <a href=%1>specific terms</a>."
 msgstr "此資料以<a href=%1>指定條款</a>授權。"
 
-#: src/fetch/amazonfetcher.cpp:270 src/fetch/amazonfetcher.cpp:1112
+#: src/fetch/amazonfetcher.cpp:270 src/fetch/amazonfetcher.cpp:1110
 #, kde-format
 msgid ""
 "Access to data from Amazon.com requires an AWS Access Key ID and a Secret "
@@ -3473,22 +3473,22 @@ msgstr "要從 Amazon.com 取得資料必須有 AWS 存取金鑰代碼以及私�
 msgid "Those values must be entered in the data source settings."
 msgstr "這些值必須在資料來源設定裡輸入。"
 
-#: src/fetch/amazonfetcher.cpp:465
+#: src/fetch/amazonfetcher.cpp:463
 #, kde-format
 msgid "Results from %1: %2/%3"
 msgstr "從 %1 傳回的結果：%2/%3"
 
-#: src/fetch/amazonfetcher.cpp:862 src/fetch/amazonfetcher.cpp:1079
+#: src/fetch/amazonfetcher.cpp:860 src/fetch/amazonfetcher.cpp:1077
 #, kde-format
 msgid "Amazon Link"
 msgstr "Amazon 連結"
 
-#: src/fetch/amazonfetcher.cpp:1069
+#: src/fetch/amazonfetcher.cpp:1067
 #, kde-format
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com 網頁服務（AWS）"
 
-#: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:172
+#: src/fetch/amazonfetcher.cpp:1093 src/fetch/bibliosharefetcher.cpp:172
 #: src/fetch/comicvinefetcher.cpp:232 src/fetch/crossreffetcher.cpp:313
 #: src/fetch/discogsfetcher.cpp:524 src/fetch/giantbombfetcher.cpp:219
 #: src/fetch/googlebookfetcher.cpp:382 src/fetch/isbndbfetcher.cpp:394
@@ -3508,7 +3508,7 @@ msgstr ""
 "要存取 %1 資料來源必須先註冊。若您同意這些條款與條件，<a href='%2'>請註冊一個"
 "帳號</a>並在底下輸入您的資訊。"
 
-#: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:184
+#: src/fetch/amazonfetcher.cpp:1105 src/fetch/bibliosharefetcher.cpp:184
 #: src/fetch/comicvinefetcher.cpp:244 src/fetch/entrezfetcher.cpp:531
 #: src/fetch/giantbombfetcher.cpp:231 src/fetch/googlebookfetcher.cpp:394
 #: src/fetch/isbndbfetcher.cpp:406 src/fetch/mobygamesfetcher.cpp:663
@@ -3518,24 +3518,24 @@ msgstr ""
 msgid "Access key: "
 msgstr "存取金鑰："
 
-#: src/fetch/amazonfetcher.cpp:1117
+#: src/fetch/amazonfetcher.cpp:1115
 #, kde-format
 msgid "Secret key: "
 msgstr "私密金鑰："
 
-#: src/fetch/amazonfetcher.cpp:1127
+#: src/fetch/amazonfetcher.cpp:1125
 #, kde-format
 msgid "Country: "
 msgstr "國家："
 
-#: src/fetch/amazonfetcher.cpp:1142
+#: src/fetch/amazonfetcher.cpp:1140
 #, kde-format
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
 msgstr "Amazon.com 提供數個不同的地域化站台。請選擇此資料來源要使用的站台。"
 
-#: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:213
+#: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:213
 #: src/fetch/colnectfetcher.cpp:947 src/fetch/itunesfetcher.cpp:517
 #: src/fetch/mobygamesfetcher.cpp:671 src/fetch/rpggeekfetcher.cpp:222
 #: src/fetch/thegamesdbfetcher.cpp:655 src/fetch/videogamegeekfetcher.cpp:213
@@ -3543,7 +3543,7 @@ msgstr "Amazon.com 提供數個不同的地域化站台。請選擇此資料來�
 msgid "&Image size: "
 msgstr "影像大小(&I)："
 
-#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:217
+#: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:217
 #: src/fetch/colnectfetcher.cpp:951 src/fetch/itunesfetcher.cpp:521
 #: src/fetch/mobygamesfetcher.cpp:674 src/fetch/rpggeekfetcher.cpp:226
 #: src/fetch/thegamesdbfetcher.cpp:658 src/fetch/videogamegeekfetcher.cpp:217
@@ -3551,13 +3551,13 @@ msgstr "影像大小(&I)："
 msgid "Small Image"
 msgstr "小"
 
-#: src/fetch/amazonfetcher.cpp:1152 src/fetch/thegamesdbfetcher.cpp:659
+#: src/fetch/amazonfetcher.cpp:1150 src/fetch/thegamesdbfetcher.cpp:659
 #, kde-format
 msgid "Medium Image"
 msgstr "中"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
-#: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:218
+#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:218
 #: src/fetch/colnectfetcher.cpp:952 src/fetch/itunesfetcher.cpp:522
 #: src/fetch/mobygamesfetcher.cpp:676 src/fetch/rpggeekfetcher.cpp:227
 #: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:218
@@ -3565,7 +3565,7 @@ msgstr "中"
 msgid "Large Image"
 msgstr "大"
 
-#: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:216
+#: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:216
 #: src/fetch/colnectfetcher.cpp:950 src/fetch/itunesfetcher.cpp:520
 #: src/fetch/mobygamesfetcher.cpp:677 src/fetch/rpggeekfetcher.cpp:225
 #: src/fetch/thegamesdbfetcher.cpp:661 src/fetch/videogamegeekfetcher.cpp:216
@@ -3573,7 +3573,7 @@ msgstr "大"
 msgid "No Image"
 msgstr "沒有影像"
 
-#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:1845
+#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:1845
 #: src/fetch/mobygamesfetcher.cpp:681 src/fetch/thegamesdbfetcher.cpp:665
 #, kde-format
 msgid ""
@@ -3582,12 +3582,12 @@ msgid ""
 msgstr ""
 "封面影像也可以下載。不過，若是收藏裡放了太多大張的影像，可能會降低它的效率。"
 
-#: src/fetch/amazonfetcher.cpp:1163
+#: src/fetch/amazonfetcher.cpp:1161
 #, kde-format
 msgid "&Associate's ID: "
 msgstr "夥伴代碼(&A)："
 
-#: src/fetch/amazonfetcher.cpp:1169
+#: src/fetch/amazonfetcher.cpp:1167
 #, kde-format
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
