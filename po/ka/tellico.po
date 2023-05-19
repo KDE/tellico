@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-16 00:48+0000\n"
-"PO-Revision-Date: 2023-05-02 06:50+0200\n"
+"PO-Revision-Date: 2023-05-18 05:57+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5500,7 +5500,7 @@ msgstr "Crow -დან მონაცემების შემოტან�
 #: src/mainwindow.cpp:412
 #, kde-format
 msgid "Import data from Data Crow"
-msgstr ""
+msgstr "მონაცემების შემოტანა Data Crow-დან"
 
 #: src/mainwindow.cpp:415
 #, kde-format
@@ -5720,7 +5720,7 @@ msgstr "CVS-ში გატანა..."
 #: src/mainwindow.cpp:525
 #, kde-format
 msgid "Export to a comma-separated values file"
-msgstr ""
+msgstr "მძიმით გამოყოფილი მნიშვნელობების ფაილში გატანა"
 
 #: src/mainwindow.cpp:527
 #, kde-format
@@ -5785,7 +5785,7 @@ msgstr "XSL გარდაქმნის გამოყენებით გ
 #: src/mainwindow.cpp:556
 #, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
-msgstr ""
+msgstr "მონიშნული ტექსტის ამოჭრა და ბუფერში მოთავსება"
 
 #: src/mainwindow.cpp:558
 #, kde-format
@@ -5960,7 +5960,7 @@ msgstr "დუბლირებული გასაღებების შ�
 #: src/mainwindow.cpp:675
 #, kde-format
 msgid "Check for duplicate citation keys"
-msgstr ""
+msgstr "დუბლირებული ციტირების გასაღებების შემოწმება"
 
 #: src/mainwindow.cpp:685
 #, kde-format
@@ -6115,6 +6115,8 @@ msgid ""
 "The current file has been modified.\n"
 "Do you want to save it?"
 msgstr ""
+"მიმდინარე ფაილი შეიცვალა.\n"
+"გნებავთ, შეინახოთ ის?"
 
 #: src/mainwindow.cpp:1191 src/mainwindow.cpp:1224
 #, kde-format
@@ -6279,7 +6281,7 @@ msgstr ""
 #: src/mainwindow.cpp:2352
 #, kde-format
 msgid "Update entry data from %1"
-msgstr ""
+msgstr "ჩანაწერის მონაცემების განახლება %1-დან"
 
 #: src/mainwindow.cpp:2371
 #, kde-format
@@ -6301,7 +6303,7 @@ msgstr "&ანგარიშის ნიმუში:"
 #: src/reportdialog.cpp:128
 #, kde-format
 msgid "One Entry Per Page"
-msgstr ""
+msgstr "ერთი ჩანაწერი თითო გვერდზე"
 
 #: src/reportdialog.cpp:140
 #, kde-format
@@ -6758,7 +6760,7 @@ msgstr ""
 #: src/translators/csvimporter.cpp:224
 #, kde-format
 msgid "Select the type of collection being imported."
-msgstr ""
+msgstr "აირჩიეთ შემოსატანი კოლექციის ტიპი."
 
 #: src/translators/csvimporter.cpp:228
 #, kde-format
@@ -6769,6 +6771,7 @@ msgstr "&პირველი მწკრივი ველის სახ�
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr ""
+"თუ ჩართულია, პირველი მწკრივი ველების სახელებისთვის იქნება გამოყენებული."
 
 #: src/translators/csvimporter.cpp:245
 #, kde-format
@@ -6798,7 +6801,7 @@ msgstr "&სხვა:"
 #: src/translators/csvimporter.cpp:329
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
-msgstr ""
+msgstr "ეს ცხრილი CSV ფაილის პირველ ხუთ ხაზს გაჩვენებთ."
 
 #: src/translators/csvimporter.cpp:336
 #, kde-format
