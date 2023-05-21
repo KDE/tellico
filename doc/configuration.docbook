@@ -163,6 +163,7 @@ while the full list is <ulink url="https://tellico-project.org/data-sources">ava
 <listitem><simpara><link linkend="amazon-web-services">Amazon.com Web Services</link>,</simpara></listitem>
 <listitem><simpara><link linkend="isbndb">ISBNdb.com</link>,</simpara></listitem>
 <listitem><simpara><link linkend="openlibrary">OpenLibrary.org</link>,</simpara></listitem>
+<listitem><simpara><link linkend="opds">OPDS catalogs</link>,</simpara></listitem>
 <!-- movies -->
 <listitem><simpara>the <link linkend="imdb">Internet Movie Database</link>,</simpara></listitem>
 <listitem><simpara><link linkend="allocine">AlloCiné</link>,</simpara></listitem>
@@ -301,6 +302,15 @@ the best known.
 <title>OpenLibrary.org</title>
 <para>
 <ulink url="http://openlibrary.org">OpenLibrary.org</ulink> is an online book database that aims to have one page for every book.
+</para>
+</sect3>
+
+<sect3 id="opds">
+<title>OPDS Catalogs</title>
+<para>
+<ulink url="https://en.wikipedia.org/wiki/Open_Publication_Distribution_System">OPDS catalogs</ulink> provide a means for searching (and distributing) digital books.
+&tellico; can use many OPDS catalogs as a data source, such as <ulink url="https://wiki.mobileread.com/wiki/OPDS">Project Gutenberg</ulink>. Enter the link to the catalog
+and verify the access and format to confirm &tellico; can read the link.
 </para>
 </sect3>
 

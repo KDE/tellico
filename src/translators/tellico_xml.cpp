@@ -70,6 +70,8 @@ const QString Tellico::XML::nsBookcase = QStringLiteral("http://periapsis.org/bo
 const QString Tellico::XML::nsDublinCore = QStringLiteral("http://purl.org/dc/elements/1.1/");
 const QString Tellico::XML::nsZing = QStringLiteral("http://www.loc.gov/zing/srw/");
 const QString Tellico::XML::nsZingDiag = QStringLiteral("http://www.loc.gov/zing/srw/diagnostic/");
+const QString Tellico::XML::nsAtom = QStringLiteral("http://www.w3.org/2005/Atom");
+const QString Tellico::XML::nsOpenSearch = QStringLiteral("http://a9.com/-/spec/opensearch/1.1/");
 
 QString Tellico::XML::pubTellico(int version) {
  return QStringLiteral("-//Robby Stephenson/DTD Tellico V%1.0//EN").arg(version);

@@ -773,6 +773,12 @@ ecm_add_test(numistafetchertest.cpp
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(opdsfetchertest.cpp
+             ../fetch/opdsfetcher.cpp
+    TEST_NAME opdsfetchertest
+    LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(openlibraryfetchertest.cpp
              ../fetch/openlibraryfetcher.cpp
     TEST_NAME openlibraryfetchertest

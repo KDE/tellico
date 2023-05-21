@@ -25,6 +25,7 @@
 #include "arxivfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
+#include "../translators/tellico_xml.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
 #include "../utils/datafileregistry.h"
@@ -164,7 +165,7 @@ void ArxivFetcher::slotComplete(KJob*) {
       return;
     }
     // total is top level element, with attribute totalResultsAvailable
-    QDomNodeList list = dom.elementsByTagNameNS(QStringLiteral("http://a9.com/-/spec/opensearch/1.1/"),
+    QDomNodeList list = dom.elementsByTagNameNS(XML::nsOpenSearch,
                                                 QStringLiteral("totalResults"));
     if(list.count() > 0) {
       m_total = list.item(0).toElement().text().toInt();

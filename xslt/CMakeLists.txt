@@ -5,6 +5,7 @@ ADD_SUBDIRECTORY( report-templates )
 
 SET(XSLT_FILES
     arxiv2tellico.xsl
+    atom2tellico.xsl
     biblioshare2tellico.xsl
     bibtexml2tellico.xsl
     bluray-logo.png

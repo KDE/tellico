@@ -79,6 +79,7 @@
 #include "gaminghistoryfetcher.h"
 #include "filmaffinityfetcher.h"
 #include "itunesfetcher.h"
+#include "opdsfetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -136,6 +137,7 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::GamingHistoryFetcher> registerGamingHistory(GamingHistory);
   RegisterFetcher<Fetch::FilmAffinityFetcher> registerFilmAffinity(FilmAffinity);
   RegisterFetcher<Fetch::ItunesFetcher> registerItunes(Itunes);
+  RegisterFetcher<Fetch::OPDSFetcher> registerOPDS(OPDS);
 
 // these data sources depend on being able to import bibtex
 #ifdef ENABLE_BTPARSE

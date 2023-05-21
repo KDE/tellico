@@ -498,7 +498,6 @@ QString SRUFetcher::defaultName() {
 }
 
 QString SRUFetcher::defaultIcon() {
-//  return QLatin1String("network-workgroup"); // just to be different than z3950
   return QStringLiteral(":/icons/sru");
 }
 

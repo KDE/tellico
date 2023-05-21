@@ -56,6 +56,7 @@ SET(fetch_STAT_SRCS
    musicbrainzfetcher.cpp
    numistafetcher.cpp
    omdbfetcher.cpp
+   opdsfetcher.cpp
    openlibraryfetcher.cpp
    rpggeekfetcher.cpp
    springerfetcher.cpp
