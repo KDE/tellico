@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-20 02:50+0000\n"
-"PO-Revision-Date: 2023-04-20 15:14+0300\n"
+"PO-Revision-Date: 2023-05-24 01:08+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1330,7 +1330,7 @@ msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 #: src/collections/coincollection.cpp:120
 #, kde-format
 msgid "Grading Service"
-msgstr "Sınıflandırma Servisleri"
+msgstr "Sınıflandırma Hizmetleri"
 
 #: src/collections/coincollection.cpp:144 src/fetch/colnectfetcher.cpp:549
 #: src/fetch/numistafetcher.cpp:400
@@ -3698,7 +3698,7 @@ msgstr "K&ullanıcı adı: "
 #: src/fetch/crossreffetcher.cpp:329
 #, kde-format
 msgid "A username and password is required to access the CrossRef service."
-msgstr "CrossRef servisine erişim bir kullanıcı adı ve parolası gerektiriyor."
+msgstr "CrossRef hizmetine erişim, bir kullanıcı adı ve parolası gerektiriyor."
 
 #: src/fetch/crossreffetcher.cpp:334
 #, kde-format
