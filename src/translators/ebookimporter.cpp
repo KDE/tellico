@@ -38,6 +38,7 @@
 #include <KFileMetaData/ExtractorCollection>
 #include <KFileMetaData/SimpleExtractionResult>
 #include <KFileMetaData/PropertyInfo>
+#include <kfilemetadata_version.h>
 #endif
 
 #include <QPixmap>
@@ -77,8 +78,12 @@ Tellico::Data::CollPtr EBookImporter::collection() {
     Data::EntryPtr entry(new Data::Entry(coll));
     entry->setField(QStringLiteral("comments"), url.toLocalFile());
     QStringList authors, publishers, genres, keywords;
-    KFileMetaData::PropertyMap properties = result.properties();
-    KFileMetaData::PropertyMap::const_iterator it = properties.constBegin();
+#if KFILEMETADATA_VERSION >= QT_VERSION_CHECK(5,89,0)
+    auto properties = result.properties(KFileMetaData::PropertiesMapType::MultiMap);
+#else
+    auto properties = result.properties();
+#endif
+    auto it = properties.constBegin();
     for( ; it != properties.constEnd(); ++it) {
       const QString value = it.value().toString();
       if(value.isEmpty()) continue;
