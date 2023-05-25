@@ -139,8 +139,6 @@ Barcode_EAN13 barcodeRecognitionThread::recognize( QImage img )
     }
   }
 
-  int successfull_lines = 0;
-
   // try to detect the barcode along scanlines:
   for (int i = 0; i < amount_scanlines; i++) {
     int x1 = 0;
@@ -152,7 +150,6 @@ Barcode_EAN13 barcodeRecognitionThread::recognize( QImage img )
     numbers[i] = ean13_code.getNumbers();
 
     if (ean13_code.isValid()) {
-      successfull_lines++;
       // add the recognized digits to the array of possible numbers:
       addNumberToPossibleNumbers( numbers[i], possible_numbers, true );
     } else {
@@ -676,18 +673,6 @@ QVector<int> Decoder_EAN13::decode( QVector< QVector<int> > fields, int start_i,
 
   if (end_sentinel_i + 3 > end_i)
     return QVector<int>();
-
-  // calculate the average (pixel) length of a bar that is one unit wide:
-  // (a complete  barcode consists out of 95 length units)
-  int temp_length = 0;
-  int field_amount = (end_sentinel_i - start_sentinel_i + 3);
-  for (int i = start_sentinel_i; i < start_sentinel_i + field_amount; i++)
-          temp_length += fields[i][1];
-
-#ifdef Decoder_EAN13_DEBUG
-  float unit_length = (float) ((float) temp_length / 95.0f);
-  fprintf( stderr, "unit_width: %f\n", unit_length );
-#endif
 
   QVector< QVector<int> > current_number_field( 4, QVector<int>(2,0) );
 
