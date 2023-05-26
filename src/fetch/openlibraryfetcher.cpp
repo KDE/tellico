@@ -141,11 +141,11 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
       break;
 
     case Keyword:
-      myWarning() << "not supported";
+      myWarning() << source() << "- key not recognized:" << request().key();
       return;
 
     default:
-      myWarning() << "key not recognized:" << request().key();
+      myWarning() << source() << "- key not recognized:" << request().key();
       return;
   }
   q.addQueryItem(QStringLiteral("*"), QString());

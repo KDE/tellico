@@ -138,7 +138,7 @@ void EntrezFetcher::search() {
       break;
 
     default:
-      myWarning() << "key not supported:" << request().key();
+      myWarning() << source() << "- key not recognized:" << request().key();
       stop();
       return;
   }

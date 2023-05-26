@@ -120,7 +120,7 @@ void GoogleScholarFetcher::doSearch() {
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key();
+      myWarning() << source() << "- key not recognized:" << request().key();
       stop();
       return;
   }

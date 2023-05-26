@@ -29,6 +29,8 @@
 #include "../fetch/fetcherjob.h"
 #include "../tellico_debug.h"
 
+#include <KLocalizedString>
+
 #include <QNetworkInterface>
 #include <QStandardPaths>
 
@@ -40,6 +42,7 @@ AbstractFetcherTest::AbstractFetcherTest() : QObject(), m_loop(this), m_hasNetwo
     }
   }
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
 }
 
 Tellico::Data::EntryList AbstractFetcherTest::doFetch(Tellico::Fetch::Fetcher::Ptr fetcher,

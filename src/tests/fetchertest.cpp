@@ -27,6 +27,8 @@
 #include "../fetch/fetchmanager.h"
 #include "../fetch/fetcherinitializer.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QSignalSpy>
 #include <QStandardPaths>
@@ -35,6 +37,7 @@ QTEST_GUILESS_MAIN( FetcherTest )
 
 void FetcherTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::Fetch::FetcherInitializer initFetchers;
 }
 
@@ -48,8 +51,9 @@ void FetcherTest::testType() {
   for( ; i != end; ++i) {
     auto f = registry.value(i.key()).create(this);
     QVERIFY2(i.key() == f->type(),
-             qPrintable(QString::fromLatin1("Mismatched type: %1 != %2").arg(QString::number(i.key()),
-                                                                             QString::number(f->type()))));
+             qPrintable(QString::fromLatin1("%1 has mismatched type: %2 != %3").arg(f->source(),
+                                                                                    QString::number(i.key()),
+                                                                                    QString::number(f->type()))));
     QVERIFY(f->uuid().isEmpty());
     QVERIFY(!f->isSearching());
 

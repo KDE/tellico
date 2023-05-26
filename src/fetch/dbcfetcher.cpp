@@ -92,7 +92,7 @@ QUrl DBCFetcher::searchUrl() {
       break;
 
     default:
-      myWarning() << "key not recognized:" << request().key();
+      myWarning() << source() << "- key not recognized:" << request().key();
       return QUrl();
   }
   query.addQueryItem(QStringLiteral("action"), QStringLiteral("search"));

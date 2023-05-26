@@ -256,7 +256,7 @@ QUrl CrossRefFetcher::searchURL(FetchKey key_, const QString& value_) const {
       break;
 
     default:
-      myWarning() << "key not recognized: " << key_;
+      myWarning() << source() << "- key not recognized:" << key_;
       return QUrl();
   }
   u.setQuery(q);

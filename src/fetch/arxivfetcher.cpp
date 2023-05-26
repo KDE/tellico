@@ -288,7 +288,7 @@ QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key();
+      myWarning() << source() << "- key not recognized:" << request().key();
       return QUrl();
   }
   q.addQueryItem(QStringLiteral("search_query"), query);

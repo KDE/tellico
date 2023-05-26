@@ -88,7 +88,7 @@ QUrl DVDFrFetcher::searchUrl() {
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key();
+      myWarning() << source() << "- key not recognized:" << request().key();
       return QUrl();
   }
   u.setQuery(q);

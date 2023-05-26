@@ -191,7 +191,7 @@ void Z3950Fetcher::search() {
   m_started = true;
   m_done = false;
   if(m_host.isEmpty() || m_dbname.isEmpty()) {
-    myDebug() << "settings are not set!";
+    myDebug() << source() << "- host and dbname are not set!";
     stop();
     return;
   }
@@ -262,7 +262,7 @@ void Z3950Fetcher::search() {
       m_pqn = request().value();
       break;
     default:
-      myWarning() << "key not recognized: " << request().key();
+      myWarning() << source() << "- key not recognized:" << request().key();
       stop();
       return;
   }

@@ -822,7 +822,7 @@ QByteArray AmazonFetcher::requestPayload(Fetch::FetchRequest request_) {
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key();
+      myWarning() << source() << "- key not recognized:" << request().key();
       return QByteArray();
   }
 

@@ -362,7 +362,7 @@ void IMDBFetcher::search() {
       break;
 
     default:
-      myWarning() << "not supported:" << request().key();
+      myWarning() << source() << "- key not recognized:" << request().key();
       stop();
       return;
   }
