@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-16 00:48+0000\n"
+"POT-Creation-Date: 2023-05-26 00:46+0000\n"
 "PO-Revision-Date: 2009-09-18 16:56+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -1166,7 +1166,7 @@ msgstr "Прочетена"
 
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:209
-#: src/fetch/crossreffetcher.cpp:196 src/translators/ebookimporter.cpp:148
+#: src/fetch/crossreffetcher.cpp:196 src/translators/ebookimporter.cpp:153
 #: src/translators/pdfimporter.cpp:290
 #: src/translators/referencerimporter.cpp:62
 #, fuzzy, kde-format
@@ -6843,32 +6843,32 @@ msgstr ""
 msgid "<New Field>"
 msgstr "Ново поле"
 
-#: src/translators/filelistingimporter.cpp:81
+#: src/translators/filelistingimporter.cpp:82
 #, fuzzy, kde-format
 msgid "Scanning files..."
 msgstr "Записва файл..."
 
-#: src/translators/filelistingimporter.cpp:259
+#: src/translators/filelistingimporter.cpp:264
 #, fuzzy, kde-format
 msgid "File Listing Options"
 msgstr "Настройки за печат"
 
-#: src/translators/filelistingimporter.cpp:262
+#: src/translators/filelistingimporter.cpp:267
 #, kde-format
 msgid "Recursive folder search"
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:263
+#: src/translators/filelistingimporter.cpp:268
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:267
+#: src/translators/filelistingimporter.cpp:272
 #, fuzzy, kde-format
 msgid "Generate file previews"
 msgstr "Създава нов документ"
 
-#: src/translators/filelistingimporter.cpp:268
+#: src/translators/filelistingimporter.cpp:273
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

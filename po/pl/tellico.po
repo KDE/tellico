@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-16 00:48+0000\n"
+"POT-Creation-Date: 2023-05-26 00:46+0000\n"
 "PO-Revision-Date: 2023-05-13 08:52+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -1213,7 +1213,7 @@ msgstr "Przeczytana"
 
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:209
-#: src/fetch/crossreffetcher.cpp:196 src/translators/ebookimporter.cpp:148
+#: src/fetch/crossreffetcher.cpp:196 src/translators/ebookimporter.cpp:153
 #: src/translators/pdfimporter.cpp:290
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
@@ -7049,34 +7049,34 @@ msgstr "Przejrzyj"
 msgid "<New Field>"
 msgstr "<Nowe pole>"
 
-#: src/translators/filelistingimporter.cpp:81
+#: src/translators/filelistingimporter.cpp:82
 #, kde-format
 msgid "Scanning files..."
 msgstr "Skanowanie plików..."
 
-#: src/translators/filelistingimporter.cpp:259
+#: src/translators/filelistingimporter.cpp:264
 #, kde-format
 msgid "File Listing Options"
 msgstr "Ustawienia listy plików"
 
-#: src/translators/filelistingimporter.cpp:262
+#: src/translators/filelistingimporter.cpp:267
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Przeszukiwanie rekursywne katalogów"
 
-#: src/translators/filelistingimporter.cpp:263
+#: src/translators/filelistingimporter.cpp:268
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 "Jeśli zaznaczone, katalogi będą przeszukiwane wgłąb w poszukiwaniu "
 "wszystkich plików."
 
-#: src/translators/filelistingimporter.cpp:267
+#: src/translators/filelistingimporter.cpp:272
 #, kde-format
 msgid "Generate file previews"
 msgstr "Generuj podglądy plików"
 
-#: src/translators/filelistingimporter.cpp:268
+#: src/translators/filelistingimporter.cpp:273
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

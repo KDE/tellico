@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-16 00:48+0000\n"
+"POT-Creation-Date: 2023-05-26 00:46+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -1225,7 +1225,7 @@ msgstr "Αναγνωσμένο"
 
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:209
-#: src/fetch/crossreffetcher.cpp:196 src/translators/ebookimporter.cpp:148
+#: src/fetch/crossreffetcher.cpp:196 src/translators/ebookimporter.cpp:153
 #: src/translators/pdfimporter.cpp:290
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
@@ -7139,33 +7139,33 @@ msgstr "Επιθεώρηση"
 msgid "<New Field>"
 msgstr "&lt;Νέο πεδίο&gt;"
 
-#: src/translators/filelistingimporter.cpp:81
+#: src/translators/filelistingimporter.cpp:82
 #, kde-format
 msgid "Scanning files..."
 msgstr "Σάρωση αρχείων..."
 
-#: src/translators/filelistingimporter.cpp:259
+#: src/translators/filelistingimporter.cpp:264
 #, kde-format
 msgid "File Listing Options"
 msgstr "Επιλογές καταλογογράφησης αρχείου"
 
-#: src/translators/filelistingimporter.cpp:262
+#: src/translators/filelistingimporter.cpp:267
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Αναδρομική αναζήτηση φακέλου"
 
-#: src/translators/filelistingimporter.cpp:263
+#: src/translators/filelistingimporter.cpp:268
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 "Εάν επιλεγεί, θα γίνει αναδρομική αναζήτηση στους φακέλους για όλα τα αρχεία."
 
-#: src/translators/filelistingimporter.cpp:267
+#: src/translators/filelistingimporter.cpp:272
 #, kde-format
 msgid "Generate file previews"
 msgstr "Δημιουργία προεπισκοπήσεων αρχείου"
 
-#: src/translators/filelistingimporter.cpp:268
+#: src/translators/filelistingimporter.cpp:273
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
