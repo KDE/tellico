@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-26 00:46+0000\n"
+"POT-Creation-Date: 2023-05-27 00:47+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -712,8 +712,8 @@ msgstr "含有衍生數值的欄位必須定義數值樣本。"
 #: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:359
 #: src/fetch/omdbfetcher.cpp:252 src/fetch/openlibraryfetcher.cpp:272
 #: src/fetch/thegamesdbfetcher.cpp:267 src/fetch/thegamesdbfetcher.cpp:272
-#: src/fetch/themoviedbfetcher.cpp:312 src/fetch/themoviedbfetcher.cpp:315
-#: src/fetch/themoviedbfetcher.cpp:320 src/fetch/themoviedbfetcher.cpp:338
+#: src/fetch/themoviedbfetcher.cpp:313 src/fetch/themoviedbfetcher.cpp:316
+#: src/fetch/themoviedbfetcher.cpp:321 src/fetch/themoviedbfetcher.cpp:339
 #: src/fetch/thetvdbfetcher.cpp:256 src/fetch/thetvdbfetcher.cpp:261
 #: src/fetch/thetvdbfetcher.cpp:266 src/fetch/tvmazefetcher.cpp:178
 #: src/fetch/tvmazefetcher.cpp:183 src/fetch/upcitemdbfetcher.cpp:208
@@ -3240,7 +3240,7 @@ msgstr "匯出的檔案以使用者的地域設定編碼。"
 #: src/fetch/mobygamesfetcher.cpp:345 src/fetch/moviemeterfetcher.cpp:162
 #: src/fetch/numistafetcher.cpp:285 src/fetch/numistafetcher.cpp:293
 #: src/fetch/omdbfetcher.cpp:182 src/fetch/thegamesdbfetcher.cpp:172
-#: src/fetch/themoviedbfetcher.cpp:239 src/fetch/thetvdbfetcher.cpp:352
+#: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:352
 #: src/fetch/tvmazefetcher.cpp:269 src/fetch/upcitemdbfetcher.cpp:250
 #: src/fetch/vndbfetcher.cpp:182
 #, kde-format
@@ -3261,8 +3261,8 @@ msgstr "Allocine 連結"
 #: src/fetch/imdbfetcher.cpp:1806 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:263 src/fetch/kinoteatrfetcher.cpp:507
-#: src/fetch/omdbfetcher.cpp:262 src/fetch/themoviedbfetcher.cpp:332
-#: src/fetch/themoviedbfetcher.cpp:576 src/fetch/vndbfetcher.cpp:284
+#: src/fetch/omdbfetcher.cpp:262 src/fetch/themoviedbfetcher.cpp:333
+#: src/fetch/themoviedbfetcher.cpp:577 src/fetch/vndbfetcher.cpp:284
 #: src/fetch/vndbfetcher.cpp:432
 #, kde-format
 msgid "Original Title"
@@ -3270,14 +3270,14 @@ msgstr "原始標題"
 
 #: src/fetch/allocinefetcher.cpp:432 src/fetch/filmaffinityfetcher.cpp:469
 #: src/fetch/imdbfetcher.cpp:1823 src/fetch/kinopoiskfetcher.cpp:685
-#: src/fetch/themoviedbfetcher.cpp:613
+#: src/fetch/themoviedbfetcher.cpp:614
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "最大演員數量(&M)："
 
 #: src/fetch/allocinefetcher.cpp:445 src/fetch/filmaffinityfetcher.cpp:482
 #: src/fetch/imdbfetcher.cpp:1836 src/fetch/kinopoiskfetcher.cpp:698
-#: src/fetch/themoviedbfetcher.cpp:626
+#: src/fetch/themoviedbfetcher.cpp:627
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -3468,7 +3468,7 @@ msgstr "要從 Amazon.com 取得資料必須有 AWS 存取金鑰代碼以及私�
 #: src/fetch/amazonfetcher.cpp:272 src/fetch/discogsfetcher.cpp:104
 #: src/fetch/isbndbfetcher.cpp:114 src/fetch/mobygamesfetcher.cpp:116
 #: src/fetch/omdbfetcher.cpp:101 src/fetch/thegamesdbfetcher.cpp:106
-#: src/fetch/themoviedbfetcher.cpp:136 src/fetch/thetvdbfetcher.cpp:128
+#: src/fetch/themoviedbfetcher.cpp:133 src/fetch/thetvdbfetcher.cpp:128
 #, kde-format
 msgid "Those values must be entered in the data source settings."
 msgstr "這些值必須在資料來源設定裡輸入。"
@@ -3493,7 +3493,7 @@ msgstr "Amazon.com 網頁服務（AWS）"
 #: src/fetch/discogsfetcher.cpp:524 src/fetch/giantbombfetcher.cpp:219
 #: src/fetch/googlebookfetcher.cpp:382 src/fetch/isbndbfetcher.cpp:394
 #: src/fetch/mobygamesfetcher.cpp:651 src/fetch/omdbfetcher.cpp:410
-#: src/fetch/thegamesdbfetcher.cpp:635 src/fetch/themoviedbfetcher.cpp:590
+#: src/fetch/thegamesdbfetcher.cpp:635 src/fetch/themoviedbfetcher.cpp:591
 #: src/fetch/thetvdbfetcher.cpp:590
 #, fuzzy, kde-format
 #| msgid ""
@@ -3513,7 +3513,7 @@ msgstr ""
 #: src/fetch/giantbombfetcher.cpp:231 src/fetch/googlebookfetcher.cpp:394
 #: src/fetch/isbndbfetcher.cpp:406 src/fetch/mobygamesfetcher.cpp:663
 #: src/fetch/numistafetcher.cpp:414 src/fetch/omdbfetcher.cpp:422
-#: src/fetch/thegamesdbfetcher.cpp:647 src/fetch/themoviedbfetcher.cpp:602
+#: src/fetch/thegamesdbfetcher.cpp:647 src/fetch/themoviedbfetcher.cpp:603
 #, kde-format
 msgid "Access key: "
 msgstr "存取金鑰："
@@ -3600,7 +3600,7 @@ msgstr ""
 #: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:952
 #: src/fetch/imdbfetcher.cpp:1804 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:257
-#: src/fetch/themoviedbfetcher.cpp:327 src/fetch/themoviedbfetcher.cpp:575
+#: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:576
 #: src/fetch/tvmazefetcher.cpp:193 src/fetch/tvmazefetcher.cpp:385
 #, kde-format
 msgid "Alternative Titles"
@@ -3613,7 +3613,7 @@ msgstr "發布器"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
 #: src/fetch/imdbfetcher.cpp:1807 src/fetch/itunesfetcher.cpp:506
-#: src/fetch/themoviedbfetcher.cpp:578 src/fetch/thetvdbfetcher.cpp:577
+#: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:577
 #: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:336
 #, kde-format
 msgid "Episodes"
@@ -3664,7 +3664,7 @@ msgstr "ISBN#"
 
 #: src/fetch/bibliosharefetcher.cpp:190 src/fetch/comicvinefetcher.cpp:250
 #: src/fetch/entrezfetcher.cpp:537 src/fetch/giantbombfetcher.cpp:237
-#: src/fetch/googlebookfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:608
+#: src/fetch/googlebookfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:609
 #: src/fetch/thetvdbfetcher.cpp:608
 #, kde-format
 msgid ""
@@ -3711,7 +3711,7 @@ msgid "PEGI Rating"
 msgstr "ESRB 評比"
 
 #: src/fetch/colnectfetcher.cpp:919 src/fetch/filmaffinityfetcher.cpp:487
-#: src/fetch/numistafetcher.cpp:422 src/fetch/themoviedbfetcher.cpp:631
+#: src/fetch/numistafetcher.cpp:422 src/fetch/themoviedbfetcher.cpp:632
 #, kde-format
 msgid "Language: "
 msgstr "語言："
@@ -3770,7 +3770,7 @@ msgstr ""
 
 #: src/fetch/discogsfetcher.cpp:102 src/fetch/isbndbfetcher.cpp:112
 #: src/fetch/mobygamesfetcher.cpp:114 src/fetch/omdbfetcher.cpp:99
-#: src/fetch/thegamesdbfetcher.cpp:104 src/fetch/themoviedbfetcher.cpp:134
+#: src/fetch/thegamesdbfetcher.cpp:104 src/fetch/themoviedbfetcher.cpp:131
 #: src/fetch/thetvdbfetcher.cpp:126
 #, kde-format
 msgid "An access key is required to use this data source."
@@ -4100,7 +4100,7 @@ msgid "Certifications"
 msgstr "憑證"
 
 #: src/fetch/imdbfetcher.cpp:1802 src/fetch/kinopoiskfetcher.cpp:672
-#: src/fetch/omdbfetcher.cpp:399 src/fetch/themoviedbfetcher.cpp:574
+#: src/fetch/omdbfetcher.cpp:399 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/thetvdbfetcher.cpp:576 src/fetch/tvmazefetcher.cpp:382
 #: src/field.cpp:332
 #, kde-format
@@ -4186,13 +4186,13 @@ msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
 msgstr ""
 
-#: src/fetch/numistafetcher.cpp:427 src/fetch/themoviedbfetcher.cpp:640
+#: src/fetch/numistafetcher.cpp:427 src/fetch/themoviedbfetcher.cpp:641
 #, kde-format
 msgctxt "Language"
 msgid "English"
 msgstr "英文"
 
-#: src/fetch/numistafetcher.cpp:430 src/fetch/themoviedbfetcher.cpp:643
+#: src/fetch/numistafetcher.cpp:430 src/fetch/themoviedbfetcher.cpp:644
 #, kde-format
 msgctxt "Language"
 msgid "French"
@@ -4276,44 +4276,44 @@ msgstr "輸入伺服器使用的結果格式。"
 msgid "Field"
 msgstr "欄位"
 
-#: src/fetch/themoviedbfetcher.cpp:319 src/fetch/themoviedbfetcher.cpp:573
+#: src/fetch/themoviedbfetcher.cpp:320 src/fetch/themoviedbfetcher.cpp:574
 #, kde-format
 msgid "TMDb Link"
 msgstr "TMDb 連結"
 
-#: src/fetch/themoviedbfetcher.cpp:337 src/fetch/themoviedbfetcher.cpp:577
+#: src/fetch/themoviedbfetcher.cpp:338 src/fetch/themoviedbfetcher.cpp:578
 #: src/fetch/thetvdbfetcher.cpp:260 src/fetch/thetvdbfetcher.cpp:578
 #: src/fetch/tvmazefetcher.cpp:182 src/fetch/tvmazefetcher.cpp:384
 #, kde-format
 msgid "Network"
 msgstr ""
 
-#: src/fetch/themoviedbfetcher.cpp:637
+#: src/fetch/themoviedbfetcher.cpp:638
 #, fuzzy, kde-format
 #| msgid "China"
 msgctxt "Language"
 msgid "Chinese"
 msgstr "中國"
 
-#: src/fetch/themoviedbfetcher.cpp:646
+#: src/fetch/themoviedbfetcher.cpp:647
 #, kde-format
 msgctxt "Language"
 msgid "German"
 msgstr "德文"
 
-#: src/fetch/themoviedbfetcher.cpp:649
+#: src/fetch/themoviedbfetcher.cpp:650
 #, kde-format
 msgctxt "Language"
 msgid "Spanish"
 msgstr "西班牙文"
 
-#: src/fetch/themoviedbfetcher.cpp:652
+#: src/fetch/themoviedbfetcher.cpp:653
 #, kde-format
 msgctxt "Language"
 msgid "Russian"
 msgstr ""
 
-#: src/fetch/themoviedbfetcher.cpp:695
+#: src/fetch/themoviedbfetcher.cpp:696
 #, kde-format
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB（%1）"
