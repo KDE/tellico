@@ -30,6 +30,7 @@
 #include <QByteArray>
 #include <QPixmap>
 
+class TellicoReadTest;
 namespace Tellico {
   class ImageFactory;
   class ImageDirectory;
@@ -44,6 +45,7 @@ namespace Tellico {
  */
 class Image : public QImage {
 
+friend class ::TellicoReadTest;
 friend class Tellico::ImageFactory;
 friend class Tellico::ImageDirectory;
 friend class Tellico::ImageZipArchive;

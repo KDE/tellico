@@ -197,23 +197,20 @@ QString ImageFactory::addImage(const QByteArray& data_, const QString& format_, 
 
 const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, const QString& format_,
                                                        const QString& id_) {
-  if(id_.isEmpty()) {
-    return Data::Image::null;
+  Data::Image* img;
+  if(!id_.isEmpty()) {
+    // do not call imageById(), it causes infinite looping with Document::loadImage()
+    img = d->imageCache.object(id_);
+    if(img) {
+      myLog() << "already exists in cache: " << id_;
+      return *img;
+    }
+    img = d->imageDict.value(id_);
+    if(img) {
+      myLog() << "already exists in dict: " << id_;
+      return *img;
+    }
   }
-
-  // do not call imageById(), it causes infinite looping with Document::loadImage()
-  Data::Image* img = d->imageCache.object(id_);
-  if(img) {
-    myLog() << "already exists in cache: " << id_;
-    return *img;
-  }
-
-  img = d->imageDict.value(id_);
-  if(img) {
-    myLog() << "already exists in dict: " << id_;
-    return *img;
-  }
-
   img = new Data::Image(data_, format_, id_);
   if(img->isNull()) {
     myDebug() << "NULL IMAGE!!!!!";
@@ -221,8 +218,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, 
     return Data::Image::null;
   }
 
-//  myLog() << "//          << " bytes, format = " << format_
-//          << ", id = "<< img->id();
+//  myLog() << "format = " << format_ << ", id = "<< img->id();
 
   d->imageDict.insert(img->id(), img);
   s_imageInfoMap.insert(img->id(), Data::ImageInfo(*img));

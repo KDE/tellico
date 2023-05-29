@@ -42,6 +42,8 @@
 #include "../utils/xmlhandler.h"
 #include "../utils/string_utils.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QNetworkInterface>
 #include <QDate>
@@ -66,6 +68,7 @@ static bool hasNetwork() {
 
 void TellicoReadTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   // need to register this first
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
@@ -317,7 +320,7 @@ void TellicoReadTest::testLocalImage() {
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(imageId));
 
-  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/local_image.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/image_test.xml"));
   QFile f(url.toLocalFile());
   QVERIFY(f.exists());
   QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
@@ -354,7 +357,7 @@ void TellicoReadTest::testRemoteImage() {
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(imageId));
 
-  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/local_image.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/image_test.xml"));
   QFile f(url.toLocalFile());
   QVERIFY(f.exists());
   QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
@@ -364,6 +367,46 @@ void TellicoReadTest::testRemoteImage() {
   // replace %COVER% with image file location
   fileText.replace(QSL("%COVER%"),
                    QSL("https://tellico-project.org/wp-content/uploads/96-tellico.png"));
+
+  Tellico::Import::TellicoImporter importer(fileText);
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->entries().count(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entries().at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QStringLiteral("cover")), imageId);
+
+  // the image should be in local memory now
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(imageId));
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInfo(imageId));
+
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(imageId);
+  QVERIFY(!img.isNull());
+}
+
+void TellicoReadTest::testDataImage() {
+  // this is the md5 hash of the tellico.png icon, used as an image id
+  const QString imageId(QSL("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  // not yet loaded
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(imageId));
+
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/image_test.xml"));
+  QFile f(url.toLocalFile());
+  QVERIFY(f.exists());
+  QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
+
+  Tellico::Data::Image testImage(QFINDTESTDATA("../../icons/tellico.png"));
+  QVERIFY(!testImage.isNull());
+  const QByteArray imgData = testImage.byteArray().toBase64();
+
+  QTextStream in(&f);
+  QString fileText = in.readAll();
+  // replace %COVER% with image file location
+  fileText.replace(QSL("%COVER%"),
+                   QString::fromUtf8("data:image/png;base64,") +
+                   QLatin1String(imgData));
 
   Tellico::Import::TellicoImporter importer(fileText);
   Tellico::Data::CollPtr coll = importer.collection();

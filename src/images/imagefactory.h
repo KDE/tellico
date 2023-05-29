@@ -119,7 +119,7 @@ public:
    * @param id The internal id of the image
    * @return The image id, empty if null
    */
-  static QString addImage(const QByteArray& data, const QString& format, const QString& id);
+  static QString addImage(const QByteArray& data, const QString& format, const QString& id=QString());
 
   static bool writeCachedImage(const QString& id, CacheDir dir, bool force = false);
   static bool writeCachedImage(const QString& id, ImageDirectory* dir, bool force = false);

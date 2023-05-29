@@ -86,6 +86,8 @@ Image::Image(const QByteArray& data_, const QString& format_, const QString& id_
     : QImage(QImage::fromData(data_)), m_id(idClean(id_)), m_format(format_.toLatin1()), m_linkOnly(false) {
   if(isNull()) {
     m_id.clear();
+  } else if(m_id.isEmpty()) {
+    calculateID();
   }
 }
 
