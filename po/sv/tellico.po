@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-27 00:47+0000\n"
+"POT-Creation-Date: 2023-05-30 00:47+0000\n"
 "PO-Revision-Date: 2022-05-11 16:49+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -931,7 +931,7 @@ msgid "Notes"
 msgstr "Anmärkning"
 
 #: src/collections/bibtexcollection.cpp:480
-#: src/translators/xmlstatehandler.cpp:293
+#: src/translators/xmlstatehandler.cpp:315
 #, kde-format
 msgid "Unknown"
 msgstr "Okänd"
@@ -1703,7 +1703,7 @@ msgstr "Media"
 #: src/collections/musiccollection.cpp:60
 #: src/collections/musiccollection.cpp:87
 #: src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:396
+#: src/translators/xmlstatehandler.cpp:418
 #, kde-format
 msgid "Artist"
 msgstr "Artist"
@@ -1721,14 +1721,14 @@ msgstr "Spår"
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
 #: src/fetch/fetchmanager.cpp:67 src/fetchdialog.cpp:252 src/field.cpp:298
 #: src/field.cpp:339 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:395
+#: src/translators/xmlstatehandler.cpp:417
 #, kde-format
 msgid "Title"
 msgstr "Titel"
 
 #: src/collections/musiccollection.cpp:88
 #: src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:397
+#: src/translators/xmlstatehandler.cpp:419
 #, kde-format
 msgid "Length"
 msgstr "Speltid"
@@ -1929,13 +1929,13 @@ msgid "Cast"
 msgstr "Rollista"
 
 #: src/collections/videocollection.cpp:110
-#: src/translators/xmlstatehandler.cpp:399
+#: src/translators/xmlstatehandler.cpp:421
 #, kde-format
 msgid "Actor/Actress"
 msgstr "Skådespelare/skådespelerska"
 
 #: src/collections/videocollection.cpp:111
-#: src/translators/xmlstatehandler.cpp:400
+#: src/translators/xmlstatehandler.cpp:422
 #, kde-format
 msgid "Role"
 msgstr "Roll"

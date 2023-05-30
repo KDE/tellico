@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-27 00:47+0000\n"
+"POT-Creation-Date: 2023-05-30 00:47+0000\n"
 "PO-Revision-Date: 2023-05-01 16:46+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -932,7 +932,7 @@ msgid "Notes"
 msgstr "Notas"
 
 #: src/collections/bibtexcollection.cpp:480
-#: src/translators/xmlstatehandler.cpp:293
+#: src/translators/xmlstatehandler.cpp:315
 #, kde-format
 msgid "Unknown"
 msgstr "Incognite"
@@ -1707,7 +1707,7 @@ msgstr "Medium"
 #: src/collections/musiccollection.cpp:60
 #: src/collections/musiccollection.cpp:87
 #: src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:396
+#: src/translators/xmlstatehandler.cpp:418
 #, kde-format
 msgid "Artist"
 msgstr "Artista"
@@ -1725,14 +1725,14 @@ msgstr "Bandas"
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
 #: src/fetch/fetchmanager.cpp:67 src/fetchdialog.cpp:252 src/field.cpp:298
 #: src/field.cpp:339 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:395
+#: src/translators/xmlstatehandler.cpp:417
 #, kde-format
 msgid "Title"
 msgstr "Titulo"
 
 #: src/collections/musiccollection.cpp:88
 #: src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:397
+#: src/translators/xmlstatehandler.cpp:419
 #, kde-format
 msgid "Length"
 msgstr "Longitude"
@@ -1933,13 +1933,13 @@ msgid "Cast"
 msgstr "Cast"
 
 #: src/collections/videocollection.cpp:110
-#: src/translators/xmlstatehandler.cpp:399
+#: src/translators/xmlstatehandler.cpp:421
 #, kde-format
 msgid "Actor/Actress"
 msgstr "Actor/Actrice"
 
 #: src/collections/videocollection.cpp:111
-#: src/translators/xmlstatehandler.cpp:400
+#: src/translators/xmlstatehandler.cpp:422
 #, kde-format
 msgid "Role"
 msgstr "Rolo"

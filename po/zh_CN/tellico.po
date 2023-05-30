@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-27 00:47+0000\n"
+"POT-Creation-Date: 2023-05-30 00:47+0000\n"
 "PO-Revision-Date: 2023-05-22 14:01\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -889,7 +889,7 @@ msgid "Notes"
 msgstr "注记"
 
 #: src/collections/bibtexcollection.cpp:480
-#: src/translators/xmlstatehandler.cpp:293
+#: src/translators/xmlstatehandler.cpp:315
 #, kde-format
 msgid "Unknown"
 msgstr "未知"
@@ -1655,7 +1655,7 @@ msgstr "中等图"
 #: src/collections/musiccollection.cpp:60
 #: src/collections/musiccollection.cpp:87
 #: src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:396
+#: src/translators/xmlstatehandler.cpp:418
 #, kde-format
 msgid "Artist"
 msgstr "艺人"
@@ -1673,14 +1673,14 @@ msgstr "音轨"
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
 #: src/fetch/fetchmanager.cpp:67 src/fetchdialog.cpp:252 src/field.cpp:298
 #: src/field.cpp:339 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:395
+#: src/translators/xmlstatehandler.cpp:417
 #, kde-format
 msgid "Title"
 msgstr "标题"
 
 #: src/collections/musiccollection.cpp:88
 #: src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:397
+#: src/translators/xmlstatehandler.cpp:419
 #, kde-format
 msgid "Length"
 msgstr "长度"
@@ -1881,13 +1881,13 @@ msgid "Cast"
 msgstr "演员阵容"
 
 #: src/collections/videocollection.cpp:110
-#: src/translators/xmlstatehandler.cpp:399
+#: src/translators/xmlstatehandler.cpp:421
 #, kde-format
 msgid "Actor/Actress"
 msgstr "男/女演员"
 
 #: src/collections/videocollection.cpp:111
-#: src/translators/xmlstatehandler.cpp:400
+#: src/translators/xmlstatehandler.cpp:422
 #, kde-format
 msgid "Role"
 msgstr "角色"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-27 00:47+0000\n"
+"POT-Creation-Date: 2023-05-30 00:47+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -896,7 +896,7 @@ msgid "Notes"
 msgstr "Ies..."
 
 #: src/collections/bibtexcollection.cpp:480
-#: src/translators/xmlstatehandler.cpp:293
+#: src/translators/xmlstatehandler.cpp:315
 #, kde-format
 msgid "Unknown"
 msgstr "necunoscut"
@@ -1665,7 +1665,7 @@ msgstr "Suport"
 #: src/collections/musiccollection.cpp:60
 #: src/collections/musiccollection.cpp:87
 #: src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:396
+#: src/translators/xmlstatehandler.cpp:418
 #, kde-format
 msgid "Artist"
 msgstr "Artist"
@@ -1683,14 +1683,14 @@ msgstr ""
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
 #: src/fetch/fetchmanager.cpp:67 src/fetchdialog.cpp:252 src/field.cpp:298
 #: src/field.cpp:339 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:395
+#: src/translators/xmlstatehandler.cpp:417
 #, kde-format
 msgid "Title"
 msgstr "Titlu"
 
 #: src/collections/musiccollection.cpp:88
 #: src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:397
+#: src/translators/xmlstatehandler.cpp:419
 #, kde-format
 msgid "Length"
 msgstr ""
@@ -1891,13 +1891,13 @@ msgid "Cast"
 msgstr "Casetă"
 
 #: src/collections/videocollection.cpp:110
-#: src/translators/xmlstatehandler.cpp:399
+#: src/translators/xmlstatehandler.cpp:421
 #, kde-format
 msgid "Actor/Actress"
 msgstr ""
 
 #: src/collections/videocollection.cpp:111
-#: src/translators/xmlstatehandler.cpp:400
+#: src/translators/xmlstatehandler.cpp:422
 #, fuzzy, kde-format
 msgid "Role"
 msgstr "Titlu"

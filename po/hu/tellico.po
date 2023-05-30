@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-27 00:47+0000\n"
+"POT-Creation-Date: 2023-05-30 00:47+0000\n"
 "PO-Revision-Date: 2022-02-01 11:21+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -927,7 +927,7 @@ msgid "Notes"
 msgstr "Megjegyzések"
 
 #: src/collections/bibtexcollection.cpp:480
-#: src/translators/xmlstatehandler.cpp:293
+#: src/translators/xmlstatehandler.cpp:315
 #, kde-format
 msgid "Unknown"
 msgstr "Ismeretlen"
@@ -1699,7 +1699,7 @@ msgstr "Hordozó"
 #: src/collections/musiccollection.cpp:60
 #: src/collections/musiccollection.cpp:87
 #: src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:396
+#: src/translators/xmlstatehandler.cpp:418
 #, kde-format
 msgid "Artist"
 msgstr "Előadó"
@@ -1717,14 +1717,14 @@ msgstr "Sávok"
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
 #: src/fetch/fetchmanager.cpp:67 src/fetchdialog.cpp:252 src/field.cpp:298
 #: src/field.cpp:339 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:395
+#: src/translators/xmlstatehandler.cpp:417
 #, kde-format
 msgid "Title"
 msgstr "Cím"
 
 #: src/collections/musiccollection.cpp:88
 #: src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:397
+#: src/translators/xmlstatehandler.cpp:419
 #, kde-format
 msgid "Length"
 msgstr "Hossz"
@@ -1925,13 +1925,13 @@ msgid "Cast"
 msgstr "Szereposztás"
 
 #: src/collections/videocollection.cpp:110
-#: src/translators/xmlstatehandler.cpp:399
+#: src/translators/xmlstatehandler.cpp:421
 #, kde-format
 msgid "Actor/Actress"
 msgstr "Színész/nő"
 
 #: src/collections/videocollection.cpp:111
-#: src/translators/xmlstatehandler.cpp:400
+#: src/translators/xmlstatehandler.cpp:422
 #, kde-format
 msgid "Role"
 msgstr "Szerep"
