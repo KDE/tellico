@@ -2723,7 +2723,7 @@ msgstr "Opcions de les fonts de dades"
 #: src/configdialog.cpp:614
 #, kde-format
 msgid "Move &Up"
-msgstr "Mou am&unt"
+msgstr "Mou cap am&unt"
 
 #: src/configdialog.cpp:617 src/configdialog.cpp:622
 #, kde-format
@@ -2737,7 +2737,7 @@ msgstr ""
 #: src/configdialog.cpp:619
 #, kde-format
 msgid "Move &Down"
-msgstr "Mou a&vall"
+msgstr "Mou cap a&vall"
 
 #: src/configdialog.cpp:629
 #, kde-format
