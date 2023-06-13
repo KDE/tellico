@@ -81,6 +81,7 @@ public:
    */
   virtual QString source() const = 0;
   virtual QString attribution() const { return QString(); }
+  virtual QString icon() const { return QString(); }
   /**
    * Returns the collection type of the most recent search
    */

@@ -504,6 +504,9 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher* fetcher_, int group_, int 
   if(!fetcher_) {
     return QPixmap();
   }
+  if(!fetcher_->icon().isEmpty()) {
+    return LOAD_ICON(fetcher_->icon(), group_, size_);
+  }
   if(fetcher_->type() == Fetch::Z3950) {
 #ifdef HAVE_YAZ
     const Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_);
