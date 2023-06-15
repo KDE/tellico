@@ -198,7 +198,7 @@ void OPDSFetcher::search() {
   OPDSReader reader(QUrl::fromUserInput(m_catalog));
   if(m_searchTemplate.isEmpty() && !reader.readSearchTemplate()) {
     myDebug() << source() << "- no search template";
-    message(i18n("Tellico is unable to read the search descripion in the OPDS catalog."), MessageHandler::Error);
+    message(i18n("Tellico is unable to read the search description in the OPDS catalog."), MessageHandler::Error);
     stop();
     return;
   }
