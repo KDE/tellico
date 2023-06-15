@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-30 00:47+0000\n"
+"POT-Creation-Date: 2023-06-15 00:47+0000\n"
 "PO-Revision-Date: 2023-05-22 14:01\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -608,7 +608,7 @@ msgid "Property"
 msgstr "属性"
 
 #: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:108
-#: src/fetch/srufetcher.cpp:596
+#: src/fetch/srufetcher.cpp:595
 #, kde-format
 msgid "Value"
 msgstr "值"
@@ -768,7 +768,7 @@ msgid "Publisher"
 msgstr "出版"
 
 #: src/collections/bibtexcollection.cpp:141 src/fetch/hathitrustfetcher.cpp:307
-#: src/fetch/srufetcher.cpp:508 src/fetch/z3950fetcher.cpp:577
+#: src/fetch/srufetcher.cpp:507 src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgid "Address"
 msgstr "地址"
@@ -871,14 +871,15 @@ msgstr "关键字"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
-#: src/field.cpp:202 src/translators/gcstarimporter.cpp:88
+#: src/fetch/opdsfetcher.cpp:352 src/field.cpp:202
+#: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:246 src/fetch/entrezfetcher.cpp:514
-#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:509
-#: src/fetch/z3950fetcher.cpp:578
+#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:508
+#: src/fetch/z3950fetcher.cpp:577
 #, kde-format
 msgid "Abstract"
 msgstr "抽象"
@@ -1164,7 +1165,7 @@ msgid "Read"
 msgstr "已读"
 
 #: src/collections/bookcollection.cpp:179
-#: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:209
+#: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
 #: src/fetch/crossreffetcher.cpp:196 src/translators/ebookimporter.cpp:153
 #: src/translators/pdfimporter.cpp:290
 #: src/translators/referencerimporter.cpp:62
@@ -3549,7 +3550,7 @@ msgstr ""
 msgid "AnimeNfo Rating"
 msgstr ""
 
-#: src/fetch/animenfofetcher.cpp:505 src/fetch/arxivfetcher.cpp:336
+#: src/fetch/animenfofetcher.cpp:505 src/fetch/arxivfetcher.cpp:337
 #: src/fetch/bedethequefetcher.cpp:465 src/fetch/bibsonomyfetcher.cpp:190
 #: src/fetch/dbcfetcher.cpp:160 src/fetch/dblpfetcher.cpp:129
 #: src/fetch/doubanfetcher.cpp:625 src/fetch/dvdfrfetcher.cpp:190
@@ -3924,20 +3925,20 @@ msgstr ""
 msgid "Google Book Search"
 msgstr ""
 
-#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/z3950fetcher.cpp:579
+#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/z3950fetcher.cpp:578
 #, kde-format
 msgid "Illustrator"
 msgstr "Illustrator"
 
 #: src/fetch/hathitrustfetcher.cpp:310 src/fetch/isbndbfetcher.cpp:383
-#: src/fetch/srufetcher.cpp:510 src/fetch/z3950fetcher.cpp:580
+#: src/fetch/srufetcher.cpp:509 src/fetch/z3950fetcher.cpp:579
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr ""
 
-#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:511
-#: src/fetch/z3950fetcher.cpp:581
+#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:510
+#: src/fetch/z3950fetcher.cpp:580
 #, kde-format
 msgctxt "Library of Congress classification system"
 msgid "LoC Classification"
@@ -4104,6 +4105,36 @@ msgstr "法语"
 msgid "Numista (%1)"
 msgstr ""
 
+#: src/fetch/opdsfetcher.cpp:201
+#, fuzzy, kde-format
+#| msgid "Tellico was unable to read any metadata from the PDF file."
+msgid "Tellico is unable to read the search descripion in the OPDS catalog."
+msgstr "Tellico 无法从 PDF 文件读取任何元数据。"
+
+#: src/fetch/opdsfetcher.cpp:342
+#, fuzzy, kde-format
+#| msgid "File Catalog"
+msgid "OPDS Catalog"
+msgstr "文件分类"
+
+#: src/fetch/opdsfetcher.cpp:367
+#, fuzzy, kde-format
+#| msgid "File Catalog"
+msgid "Catalog: "
+msgstr "文件分类"
+
+#: src/fetch/opdsfetcher.cpp:372
+#, fuzzy, kde-format
+#| msgid "Enter the host name of the server."
+msgid "Enter the link to the OPDS server."
+msgstr "输入服务器主机名。"
+
+#: src/fetch/opdsfetcher.cpp:377
+#, fuzzy, kde-format
+#| msgid "File Catalog"
+msgid "&Verify Catalog"
+msgstr "文件分类"
+
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
 msgid "OpenLibrary Link"
@@ -4124,52 +4155,52 @@ msgstr ""
 msgid "SRU Server"
 msgstr "SRU 服务器"
 
-#: src/fetch/srufetcher.cpp:526
+#: src/fetch/srufetcher.cpp:525
 #, kde-format
 msgid "Scheme: "
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:535 src/fetch/srufetcher.cpp:571
+#: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr "输入用于服务器的数据库路径。"
 
-#: src/fetch/srufetcher.cpp:540 src/fetch/z3950fetcher.cpp:604
+#: src/fetch/srufetcher.cpp:539 src/fetch/z3950fetcher.cpp:603
 #, kde-format
 msgid "Hos&t: "
 msgstr "主机(&T)："
 
-#: src/fetch/srufetcher.cpp:547 src/fetch/z3950fetcher.cpp:610
+#: src/fetch/srufetcher.cpp:546 src/fetch/z3950fetcher.cpp:609
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "输入服务器主机名。"
 
-#: src/fetch/srufetcher.cpp:552 src/fetch/z3950fetcher.cpp:615
+#: src/fetch/srufetcher.cpp:551 src/fetch/z3950fetcher.cpp:614
 #, kde-format
 msgid "&Port: "
 msgstr "端口(&P)："
 
-#: src/fetch/srufetcher.cpp:561 src/fetch/z3950fetcher.cpp:624
+#: src/fetch/srufetcher.cpp:560 src/fetch/z3950fetcher.cpp:623
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "输入服务器端口号。默认为 %1。"
 
-#: src/fetch/srufetcher.cpp:566
+#: src/fetch/srufetcher.cpp:565
 #, kde-format
 msgid "Path: "
 msgstr "路径："
 
-#: src/fetch/srufetcher.cpp:576
+#: src/fetch/srufetcher.cpp:575
 #, kde-format
 msgid "Format: "
 msgstr "格式："
 
-#: src/fetch/srufetcher.cpp:587
+#: src/fetch/srufetcher.cpp:586
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "输入用于服务器的结果格式。"
 
-#: src/fetch/srufetcher.cpp:596
+#: src/fetch/srufetcher.cpp:595
 #, kde-format
 msgid "Field"
 msgstr "字段"
@@ -4260,61 +4291,61 @@ msgstr "记录语法错误"
 msgid "Connection error %1: %2"
 msgstr "收藏错误 %1：%2"
 
-#: src/fetch/z3950fetcher.cpp:566 src/fetch/z3950fetcher.cpp:882
+#: src/fetch/z3950fetcher.cpp:566 src/fetch/z3950fetcher.cpp:881
 #, kde-format
 msgid "z39.50 Server"
 msgstr "z39.50 服务器"
 
-#: src/fetch/z3950fetcher.cpp:593
+#: src/fetch/z3950fetcher.cpp:592
 #, kde-format
 msgid "Use preset &server:"
 msgstr "使用预设服务器(&S)："
 
-#: src/fetch/z3950fetcher.cpp:629
+#: src/fetch/z3950fetcher.cpp:628
 #, kde-format
 msgid "&Database: "
 msgstr "数据库(&D)："
 
-#: src/fetch/z3950fetcher.cpp:634
+#: src/fetch/z3950fetcher.cpp:633
 #, kde-format
 msgid "Enter the database name used by the server."
 msgstr "输入用于服务器的数据库名称。"
 
-#: src/fetch/z3950fetcher.cpp:639
+#: src/fetch/z3950fetcher.cpp:638
 #, kde-format
 msgid "Query character set: "
 msgstr ""
 
-#: src/fetch/z3950fetcher.cpp:648
+#: src/fetch/z3950fetcher.cpp:647
 #, kde-format
 msgid ""
 "Enter the character set encoding used for queries by the z39.50 server. The "
 "most likely choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
 
-#: src/fetch/z3950fetcher.cpp:654
+#: src/fetch/z3950fetcher.cpp:653
 #, kde-format
 msgid "Results character set: "
 msgstr ""
 
-#: src/fetch/z3950fetcher.cpp:663
+#: src/fetch/z3950fetcher.cpp:662
 #, kde-format
 msgid ""
 "Enter the character set encoding used for responses by the z39.50 server. "
 "The most likely choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
 
-#: src/fetch/z3950fetcher.cpp:669
+#: src/fetch/z3950fetcher.cpp:668
 #, kde-format
 msgid "&Format: "
 msgstr "格式(&F)："
 
-#: src/fetch/z3950fetcher.cpp:672
+#: src/fetch/z3950fetcher.cpp:671
 #, kde-format
 msgid "Auto-detect"
 msgstr "自动探测"
 
-#: src/fetch/z3950fetcher.cpp:681
+#: src/fetch/z3950fetcher.cpp:680
 #, kde-format
 msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
@@ -4323,29 +4354,29 @@ msgstr ""
 "输入用于 z39.50 服务器的数据格式。如果选中<i>自动探测</i>，Tellico 会试图自动"
 "探测最佳设置。"
 
-#: src/fetch/z3950fetcher.cpp:687
+#: src/fetch/z3950fetcher.cpp:686
 #, kde-format
 msgid "&User: "
 msgstr "用户(&U)："
 
-#: src/fetch/z3950fetcher.cpp:690 src/fetch/z3950fetcher.cpp:702
+#: src/fetch/z3950fetcher.cpp:689 src/fetch/z3950fetcher.cpp:701
 #, kde-format
 msgid "Optional"
 msgstr "可选"
 
-#: src/fetch/z3950fetcher.cpp:693
+#: src/fetch/z3950fetcher.cpp:692
 #, kde-format
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
 
-#: src/fetch/z3950fetcher.cpp:699
+#: src/fetch/z3950fetcher.cpp:698
 #, kde-format
 msgid "Pass&word: "
 msgstr "密码(&W)："
 
-#: src/fetch/z3950fetcher.cpp:706
+#: src/fetch/z3950fetcher.cpp:705
 #, kde-format
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "

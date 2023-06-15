@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-30 00:47+0000\n"
+"POT-Creation-Date: 2023-06-15 00:47+0000\n"
 "PO-Revision-Date: 2022-04-07 18:20+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -647,7 +647,7 @@ msgid "Property"
 msgstr "Vlastnosť"
 
 #: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:108
-#: src/fetch/srufetcher.cpp:596
+#: src/fetch/srufetcher.cpp:595
 #, kde-format
 msgid "Value"
 msgstr "Hodnota"
@@ -815,7 +815,7 @@ msgid "Publisher"
 msgstr "Vydavateľ"
 
 #: src/collections/bibtexcollection.cpp:141 src/fetch/hathitrustfetcher.cpp:307
-#: src/fetch/srufetcher.cpp:508 src/fetch/z3950fetcher.cpp:577
+#: src/fetch/srufetcher.cpp:507 src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgid "Address"
 msgstr "Adresa"
@@ -918,14 +918,15 @@ msgstr "Kľúčové slová"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
-#: src/field.cpp:202 src/translators/gcstarimporter.cpp:88
+#: src/fetch/opdsfetcher.cpp:352 src/field.cpp:202
+#: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:246 src/fetch/entrezfetcher.cpp:514
-#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:509
-#: src/fetch/z3950fetcher.cpp:578
+#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:508
+#: src/fetch/z3950fetcher.cpp:577
 #, kde-format
 msgid "Abstract"
 msgstr "Abstraktné"
@@ -1211,7 +1212,7 @@ msgid "Read"
 msgstr "Čítať"
 
 #: src/collections/bookcollection.cpp:179
-#: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:209
+#: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
 #: src/fetch/crossreffetcher.cpp:196 src/translators/ebookimporter.cpp:153
 #: src/translators/pdfimporter.cpp:290
 #: src/translators/referencerimporter.cpp:62
@@ -3664,7 +3665,7 @@ msgstr "Odkaz  AnimeNfo"
 msgid "AnimeNfo Rating"
 msgstr "AnimeNfo hodnotenie"
 
-#: src/fetch/animenfofetcher.cpp:505 src/fetch/arxivfetcher.cpp:336
+#: src/fetch/animenfofetcher.cpp:505 src/fetch/arxivfetcher.cpp:337
 #: src/fetch/bedethequefetcher.cpp:465 src/fetch/bibsonomyfetcher.cpp:190
 #: src/fetch/dbcfetcher.cpp:160 src/fetch/dblpfetcher.cpp:129
 #: src/fetch/doubanfetcher.cpp:625 src/fetch/dvdfrfetcher.cpp:190
@@ -4053,20 +4054,20 @@ msgstr "Odkaz Google Book"
 msgid "Google Book Search"
 msgstr "Google Book Search"
 
-#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/z3950fetcher.cpp:579
+#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/z3950fetcher.cpp:578
 #, kde-format
 msgid "Illustrator"
 msgstr "Ilustrátor"
 
 #: src/fetch/hathitrustfetcher.cpp:310 src/fetch/isbndbfetcher.cpp:383
-#: src/fetch/srufetcher.cpp:510 src/fetch/z3950fetcher.cpp:580
+#: src/fetch/srufetcher.cpp:509 src/fetch/z3950fetcher.cpp:579
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Deweyho desatinné triedenie"
 
-#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:511
-#: src/fetch/z3950fetcher.cpp:581
+#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:510
+#: src/fetch/z3950fetcher.cpp:580
 #, kde-format
 msgctxt "Library of Congress classification system"
 msgid "LoC Classification"
@@ -4235,6 +4236,37 @@ msgstr "Francúzština"
 msgid "Numista (%1)"
 msgstr ""
 
+#: src/fetch/opdsfetcher.cpp:201
+#, fuzzy, kde-format
+#| msgid "Tellico was unable to read any metadata from the PDF file."
+msgid "Tellico is unable to read the search descripion in the OPDS catalog."
+msgstr ""
+"Aplikácia Tellico nebola schopná prečítať žiadne metadáta zo súboru PDF."
+
+#: src/fetch/opdsfetcher.cpp:342
+#, fuzzy, kde-format
+#| msgid "File Catalog"
+msgid "OPDS Catalog"
+msgstr "Katalóg súborov"
+
+#: src/fetch/opdsfetcher.cpp:367
+#, fuzzy, kde-format
+#| msgid "Card Number"
+msgid "Catalog: "
+msgstr "Číslo karty"
+
+#: src/fetch/opdsfetcher.cpp:372
+#, fuzzy, kde-format
+#| msgid "Enter the host name of the server."
+msgid "Enter the link to the OPDS server."
+msgstr "Zadať názov hostiteľa servera."
+
+#: src/fetch/opdsfetcher.cpp:377
+#, fuzzy, kde-format
+#| msgid "File Catalog"
+msgid "&Verify Catalog"
+msgstr "Katalóg súborov"
+
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
 msgid "OpenLibrary Link"
@@ -4256,53 +4288,53 @@ msgstr "Library of Congress (US)"
 msgid "SRU Server"
 msgstr "SRU Server"
 
-#: src/fetch/srufetcher.cpp:526
+#: src/fetch/srufetcher.cpp:525
 #, fuzzy, kde-format
 #| msgid "&Source name: "
 msgid "Scheme: "
 msgstr "Názov zdroja:"
 
-#: src/fetch/srufetcher.cpp:535 src/fetch/srufetcher.cpp:571
+#: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr "Zadať cestu k databáze používanej serverom."
 
-#: src/fetch/srufetcher.cpp:540 src/fetch/z3950fetcher.cpp:604
+#: src/fetch/srufetcher.cpp:539 src/fetch/z3950fetcher.cpp:603
 #, kde-format
 msgid "Hos&t: "
 msgstr "Hosti&teľ:"
 
-#: src/fetch/srufetcher.cpp:547 src/fetch/z3950fetcher.cpp:610
+#: src/fetch/srufetcher.cpp:546 src/fetch/z3950fetcher.cpp:609
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "Zadať názov hostiteľa servera."
 
-#: src/fetch/srufetcher.cpp:552 src/fetch/z3950fetcher.cpp:615
+#: src/fetch/srufetcher.cpp:551 src/fetch/z3950fetcher.cpp:614
 #, kde-format
 msgid "&Port: "
 msgstr "&Port: "
 
-#: src/fetch/srufetcher.cpp:561 src/fetch/z3950fetcher.cpp:624
+#: src/fetch/srufetcher.cpp:560 src/fetch/z3950fetcher.cpp:623
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Zadať číslo portu servera. Predvolená hodnota je %1."
 
-#: src/fetch/srufetcher.cpp:566
+#: src/fetch/srufetcher.cpp:565
 #, kde-format
 msgid "Path: "
 msgstr "Cesta:"
 
-#: src/fetch/srufetcher.cpp:576
+#: src/fetch/srufetcher.cpp:575
 #, kde-format
 msgid "Format: "
 msgstr "Formát:"
 
-#: src/fetch/srufetcher.cpp:587
+#: src/fetch/srufetcher.cpp:586
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "Zadať výsledný formát používaný serverom."
 
-#: src/fetch/srufetcher.cpp:596
+#: src/fetch/srufetcher.cpp:595
 #, kde-format
 msgid "Field"
 msgstr "Pole"
@@ -4395,32 +4427,32 @@ msgstr "Chyba syntaxe záznamu"
 msgid "Connection error %1: %2"
 msgstr "Chyba pripojenia %1: %2"
 
-#: src/fetch/z3950fetcher.cpp:566 src/fetch/z3950fetcher.cpp:882
+#: src/fetch/z3950fetcher.cpp:566 src/fetch/z3950fetcher.cpp:881
 #, kde-format
 msgid "z39.50 Server"
 msgstr "z39.50 Server"
 
-#: src/fetch/z3950fetcher.cpp:593
+#: src/fetch/z3950fetcher.cpp:592
 #, kde-format
 msgid "Use preset &server:"
 msgstr "Použiť prednastavený &server."
 
-#: src/fetch/z3950fetcher.cpp:629
+#: src/fetch/z3950fetcher.cpp:628
 #, kde-format
 msgid "&Database: "
 msgstr "Databáza:"
 
-#: src/fetch/z3950fetcher.cpp:634
+#: src/fetch/z3950fetcher.cpp:633
 #, kde-format
 msgid "Enter the database name used by the server."
 msgstr "Zadať názov databázy používanej serverom."
 
-#: src/fetch/z3950fetcher.cpp:639
+#: src/fetch/z3950fetcher.cpp:638
 #, kde-format
 msgid "Query character set: "
 msgstr "Znaková sada dopytov:"
 
-#: src/fetch/z3950fetcher.cpp:648
+#: src/fetch/z3950fetcher.cpp:647
 #, kde-format
 msgid ""
 "Enter the character set encoding used for queries by the z39.50 server. The "
@@ -4429,12 +4461,12 @@ msgstr ""
 "Zadajte kódovanie znakovej sady použité pre dotazy servera z39.50. "
 "Najpravdepodobnejšou voľbou je MARC-8, hoci ISO-8859-1 je tiež bežná."
 
-#: src/fetch/z3950fetcher.cpp:654
+#: src/fetch/z3950fetcher.cpp:653
 #, kde-format
 msgid "Results character set: "
 msgstr "Znaková sada výsledkov:"
 
-#: src/fetch/z3950fetcher.cpp:663
+#: src/fetch/z3950fetcher.cpp:662
 #, kde-format
 msgid ""
 "Enter the character set encoding used for responses by the z39.50 server. "
@@ -4443,17 +4475,17 @@ msgstr ""
 "Zadajte kódovanie znakovej sady použité pre odpovede servera z39.50. "
 "Najpravdepodobnejšou voľbou je MARC-8, hoci ISO-8859-1 je tiež bežná."
 
-#: src/fetch/z3950fetcher.cpp:669
+#: src/fetch/z3950fetcher.cpp:668
 #, kde-format
 msgid "&Format: "
 msgstr "&Formát: "
 
-#: src/fetch/z3950fetcher.cpp:672
+#: src/fetch/z3950fetcher.cpp:671
 #, kde-format
 msgid "Auto-detect"
 msgstr "Automatická detekcia"
 
-#: src/fetch/z3950fetcher.cpp:681
+#: src/fetch/z3950fetcher.cpp:680
 #, kde-format
 msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
@@ -4462,17 +4494,17 @@ msgstr ""
 "Zadať formát dát používaný serverom z39.50. Tellico sa pokúsi automaticky "
 "zistiť najlepšie nastavenie, ak je vybraná <i>automatická detekcia</i>."
 
-#: src/fetch/z3950fetcher.cpp:687
+#: src/fetch/z3950fetcher.cpp:686
 #, kde-format
 msgid "&User: "
 msgstr "Používateľ:"
 
-#: src/fetch/z3950fetcher.cpp:690 src/fetch/z3950fetcher.cpp:702
+#: src/fetch/z3950fetcher.cpp:689 src/fetch/z3950fetcher.cpp:701
 #, kde-format
 msgid "Optional"
 msgstr "Nepovinné"
 
-#: src/fetch/z3950fetcher.cpp:693
+#: src/fetch/z3950fetcher.cpp:692
 #, kde-format
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
@@ -4481,12 +4513,12 @@ msgstr ""
 "Zadať overovacie používateľské meno používané databázou z39.50. Väčšina "
 "serverov nepotrebuje žiadne."
 
-#: src/fetch/z3950fetcher.cpp:699
+#: src/fetch/z3950fetcher.cpp:698
 #, kde-format
 msgid "Pass&word: "
 msgstr "&Heslo:"
 
-#: src/fetch/z3950fetcher.cpp:706
+#: src/fetch/z3950fetcher.cpp:705
 #, kde-format
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
