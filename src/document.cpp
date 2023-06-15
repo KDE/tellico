@@ -109,12 +109,15 @@ bool Document::newDocument(int type_) {
   m_coll = CollectionFactory::collection(type_, true);
   m_coll->setTrackGroups(true);
 
+  // be sure to set the new Url before signalling a new collection
+  // since reading options for custom collections depend on the file name
+  const QUrl url = QUrl::fromLocalFile(i18n(Tellico::untitledFilename));
+  setURL(url);
+
   emit signalCollectionAdded(m_coll);
   emit signalCollectionImagesLoaded(m_coll);
 
   setModified(false);
-  QUrl url = QUrl::fromLocalFile(i18n(Tellico::untitledFilename));
-  setURL(url);
   m_validFile = false;
   m_fileFormat = Import::TellicoImporter::Unknown;
 

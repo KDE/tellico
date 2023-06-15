@@ -1059,7 +1059,18 @@ void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
     m_groupView->setEntrySortField(groupSortField);
   }
 
-  QString entryXSLTFile = Config::templateName(coll_->type());
+  QString entryXSLTFile;
+  if(coll_->type() == Data::Collection::Base &&
+     Data::Document::self()->URL().fileName() != i18n(Tellico::untitledFilename)) {
+    // use a nested config group for template specific to custom collections
+    // using the filename alone as a keyEvents
+    KConfigGroup subGroup(&group, Data::Document::self()->URL().fileName());
+    entryXSLTFile = subGroup.readEntry(QStringLiteral("Template Name"));
+  }
+  if(entryXSLTFile.isEmpty()) {
+    // lookup by collection type
+    entryXSLTFile = Config::templateName(coll_->type());
+  }
   if(entryXSLTFile.isEmpty()) {
     entryXSLTFile = QStringLiteral("Fancy"); // should never happen, but just in case
   }

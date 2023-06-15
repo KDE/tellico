@@ -37,6 +37,7 @@
 #include "utils/tellico_utils.h"
 #include "utils/string_utils.h"
 #include "config/tellico_config.h"
+#include "core/tellico_strings.h"
 #include "images/imagefactory.h"
 #include "gui/combobox.h"
 #include "gui/collectiontypecombo.h"
@@ -835,7 +836,17 @@ void ConfigDialog::savePrintingConfig() {
 
 void ConfigDialog::saveTemplateConfig() {
   const int collType = Kernel::self()->collectionType();
-  Config::setTemplateName(collType, m_templateCombo->currentData().toString());
+  if(collType == Data::Collection::Base &&
+     Kernel::self()->URL().fileName() != i18n(Tellico::untitledFilename)) {
+    // use a nested config group for template specific to custom collections
+    // using the filename alone as a keyEvents
+    const QString configGroup = QStringLiteral("Options - %1").arg(CollectionFactory::typeName(collType));
+    KConfigGroup group(KSharedConfig::openConfig(), configGroup);
+    KConfigGroup subGroup(&group, Kernel::self()->URL().fileName());
+    subGroup.writeEntry(QStringLiteral("Template Name"), m_templateCombo->currentData().toString());
+  } else {
+    Config::setTemplateName(collType, m_templateCombo->currentData().toString());
+  }
   QFont font(m_fontCombo->currentFont().family(), m_fontSizeInput->value());
   Config::setTemplateFont(collType, font);
   Config::setTemplateBaseColor(collType, m_baseColorCombo->color());
