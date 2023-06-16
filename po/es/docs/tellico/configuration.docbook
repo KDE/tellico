@@ -241,6 +241,12 @@
 >OpenLibrary.org</link
 >,</simpara
 ></listitem>
+<listitem
+><simpara
+><link linkend="opds"
+>Catálogos OPDS</link
+>,</simpara
+></listitem>
 <!-- movies -->
 <listitem
 ><simpara
@@ -531,6 +537,17 @@
 ><ulink url="http://openlibrary.org"
 >OpenLibrary.org</ulink
 > es una base de datos de libros que espera tener una página para cada libro. </para>
+</sect3>
+
+<sect3 id="opds">
+<title
+>Catálogos OPDS</title>
+<para
+>Los <ulink url="https://es.wikipedia.org/wiki/OPDS"
+>catálogos OPDS </ulink
+> proporcionan un medio para buscar (y distribuir) libros digitales. &tellico; puede usar diversos catálogos OPDS como fuente de datos, como el <ulink url="https://wiki.mobileread.com/wiki/OPDS"
+>Proyecto Gutenberg</ulink
+>. Introduzca el enlace del catálogo y compruebe el acceso y el formato para confirmar que &tellico; puede leer el enlace. </para>
 </sect3>
 
 </sect2>

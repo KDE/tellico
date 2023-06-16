@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-15 00:47+0000\n"
+"POT-Creation-Date: 2023-06-16 00:47+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -169,7 +169,7 @@ msgstr "名稱"
 msgid "Collection Size"
 msgstr "收藏欄位"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1618
+#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1629
 #, kde-format
 msgid "Total entries: %1"
 msgstr "所有項目：%1"
@@ -689,8 +689,8 @@ msgstr "含有衍生數值的欄位必須定義數值樣本。"
 #: src/collections/musiccollection.cpp:31
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
-#: src/configdialog.cpp:142 src/configdialog.cpp:169 src/configdialog.cpp:183
-#: src/configdialog.cpp:200 src/configdialog.cpp:1123
+#: src/configdialog.cpp:143 src/configdialog.cpp:170 src/configdialog.cpp:184
+#: src/configdialog.cpp:201 src/configdialog.cpp:1134
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -925,7 +925,7 @@ msgstr "未知"
 #: src/collections/gamecollection.cpp:33 src/collections/musiccollection.cpp:32
 #: src/collections/stampcollection.cpp:32
 #: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
-#: src/document.cpp:525 src/field.cpp:292 src/field.cpp:305 src/field.cpp:310
+#: src/document.cpp:528 src/field.cpp:292 src/field.cpp:305 src/field.cpp:310
 #, kde-format
 msgid "Personal"
 msgstr "個人"
@@ -1042,7 +1042,7 @@ msgstr "購買價格"
 #: src/collections/comicbookcollection.cpp:151
 #: src/collections/gamecollection.cpp:119
 #: src/collections/musiccollection.cpp:109
-#: src/collections/videocollection.cpp:211 src/document.cpp:523
+#: src/collections/videocollection.cpp:211 src/document.cpp:526
 #, kde-format
 msgid "Loaned"
 msgstr "借用"
@@ -2356,101 +2356,101 @@ msgstr "樣本突顯文字顏色"
 msgid "Template link color"
 msgstr "樣本突顯顏色"
 
-#: src/configdialog.cpp:95
+#: src/configdialog.cpp:96
 #, kde-format
 msgid "Configure Tellico"
 msgstr "設定 Tellico"
 
-#: src/configdialog.cpp:144 src/configdialog.cpp:171 src/configdialog.cpp:185
-#: src/configdialog.cpp:337
+#: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
+#: src/configdialog.cpp:338
 #, kde-format
 msgid "Printing"
 msgstr "列印"
 
-#: src/configdialog.cpp:146 src/configdialog.cpp:173 src/configdialog.cpp:187
-#: src/configdialog.cpp:414
+#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
+#: src/configdialog.cpp:415
 #, kde-format
 msgid "Templates"
 msgstr "樣本"
 
-#: src/configdialog.cpp:148 src/configdialog.cpp:189 src/configdialog.cpp:608
+#: src/configdialog.cpp:149 src/configdialog.cpp:190 src/configdialog.cpp:609
 #, kde-format
 msgid "Data Sources"
 msgstr "資料來源"
 
-#: src/configdialog.cpp:201
+#: src/configdialog.cpp:202
 #, kde-format
 msgid "General Options"
 msgstr "一般選項"
 
-#: src/configdialog.cpp:212
+#: src/configdialog.cpp:213
 #, kde-format
 msgid "&Reopen file at startup"
 msgstr "啟動時重新開啟檔案(&R)"
 
-#: src/configdialog.cpp:213
+#: src/configdialog.cpp:214
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
 "up."
 msgstr "若勾選此選項，在程式啟動時會開啟上次開啟的檔案。"
 
-#: src/configdialog.cpp:218
+#: src/configdialog.cpp:219
 #, fuzzy, kde-format
 #| msgid "matches regexp"
 msgid "&Enable regular expressions in quick filter"
 msgstr "符合正規表示式"
 
-#: src/configdialog.cpp:219
+#: src/configdialog.cpp:220
 #, fuzzy, kde-format
 #| msgid "If checked, the field names will be printed as table headers."
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr "若是勾選此選項，則會將欄位名稱印在表格標頭。"
 
-#: src/configdialog.cpp:224
+#: src/configdialog.cpp:225
 #, kde-format
 msgid "&Show \"Tip of the Day\" at startup"
 msgstr "啟動時顯示本日小秘訣(&S)"
 
-#: src/configdialog.cpp:225
+#: src/configdialog.cpp:226
 #, kde-format
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
 msgstr "若勾選此選項，在程式啟動時會開啟本日小秘訣。"
 
-#: src/configdialog.cpp:230
+#: src/configdialog.cpp:231
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "開啟攝影機來掃描條碼(&E)"
 
-#: src/configdialog.cpp:231
+#: src/configdialog.cpp:232
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
 "searching."
 msgstr "若勾選此選項，則可以用攝影機來掃描條碼以便搜尋。"
 
-#: src/configdialog.cpp:236
+#: src/configdialog.cpp:237
 #, kde-format
 msgid "Image Storage Options"
 msgstr "影像儲存選項"
 
-#: src/configdialog.cpp:238
+#: src/configdialog.cpp:239
 #, kde-format
 msgid "Store images in data file"
 msgstr "將影像存在資料檔"
 
-#: src/configdialog.cpp:239
+#: src/configdialog.cpp:240
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "將影像存在共用的應用程式目錄"
 
-#: src/configdialog.cpp:240
+#: src/configdialog.cpp:241
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "將影像存在資料檔所在目錄"
 
-#: src/configdialog.cpp:241
+#: src/configdialog.cpp:242
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2460,49 +2460,49 @@ msgstr ""
 "影像可以存在資料檔中（不過會造成 Tellico 執行變慢），存在 Tellico 應用程式目"
 "錄中，或是存在跟資料檔相同的目錄中。"
 
-#: src/configdialog.cpp:262 src/configdialog.cpp:346
+#: src/configdialog.cpp:263 src/configdialog.cpp:347
 #, kde-format
 msgid "Formatting Options"
 msgstr "格式化選項"
 
-#: src/configdialog.cpp:267
+#: src/configdialog.cpp:268
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "自動將標題與名稱改為大寫(&T)"
 
-#: src/configdialog.cpp:268
+#: src/configdialog.cpp:269
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr "勾選此選項的話，標題與名稱會自動變為大寫。"
 
-#: src/configdialog.cpp:273
+#: src/configdialog.cpp:274
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "自動格式化標題與名稱(&F)"
 
-#: src/configdialog.cpp:274 src/configdialog.cpp:352
+#: src/configdialog.cpp:275 src/configdialog.cpp:353
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "勾選此選項的話，標題與名稱會自動格式化。"
 
-#: src/configdialog.cpp:284
+#: src/configdialog.cpp:285
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "不使用大寫(&Z)："
 
-#: src/configdialog.cpp:289
+#: src/configdialog.cpp:290
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
 "be separated by a semi-colon.</qt>"
 msgstr "<qt>不要使用大寫的單字清單。多個單字用分號區隔。</qt>"
 
-#: src/configdialog.cpp:295
+#: src/configdialog.cpp:296
 #, kde-format
 msgid "Artic&les:"
 msgstr "冠詞(&L)："
 
-#: src/configdialog.cpp:300
+#: src/configdialog.cpp:301
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2512,113 +2512,113 @@ msgstr ""
 "<qt>若是標題中的第一個字為清單中的任一單字，則會被視為冠詞。多個冠詞用分號區"
 "隔。</qt>"
 
-#: src/configdialog.cpp:307
+#: src/configdialog.cpp:308
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "人名後置字串(&X)："
 
-#: src/configdialog.cpp:312
+#: src/configdialog.cpp:313
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
 msgstr "<qt>此清單中的單字會被用在人名後面。多個單字用分號區隔。</qt>"
 
-#: src/configdialog.cpp:318
+#: src/configdialog.cpp:319
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "姓氏前置字串(&P)："
 
-#: src/configdialog.cpp:323
+#: src/configdialog.cpp:324
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
 msgstr "<qt>此清單中的單字會被用於姓氏前面。多個單字用分號區隔。</qt>"
 
-#: src/configdialog.cpp:338
+#: src/configdialog.cpp:339
 #, kde-format
 msgid "Printing Options"
 msgstr "列印選項"
 
-#: src/configdialog.cpp:351
+#: src/configdialog.cpp:352
 #, kde-format
 msgid "&Format titles and names"
 msgstr "格式化標題與名稱(&F)"
 
-#: src/configdialog.cpp:356
+#: src/configdialog.cpp:357
 #, kde-format
 msgid "&Print field headers"
 msgstr "列印欄位標頭(&P)"
 
-#: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "若是勾選此選項，則會將欄位名稱印在表格標頭。"
 
-#: src/configdialog.cpp:361
+#: src/configdialog.cpp:362
 #, kde-format
 msgid "Grouping Options"
 msgstr "群組選項"
 
-#: src/configdialog.cpp:366
+#: src/configdialog.cpp:367
 #, kde-format
 msgid "&Group the entries"
 msgstr "將項目群組起來(&G)"
 
-#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "若勾選此選項，則會將選取的欄位群組起來。"
 
-#: src/configdialog.cpp:371
+#: src/configdialog.cpp:372
 #, kde-format
 msgid "Image Options"
 msgstr "圖像選項"
 
-#: src/configdialog.cpp:377
+#: src/configdialog.cpp:378
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "最大圖像寬度(&W)："
 
-#: src/configdialog.cpp:386
+#: src/configdialog.cpp:387
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "在列印時的最大圖像寬度。外觀比例會保留。"
 
-#: src/configdialog.cpp:392
+#: src/configdialog.cpp:393
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "最大圖像高度(&M)："
 
-#: src/configdialog.cpp:401
+#: src/configdialog.cpp:402
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "在列印時的最大圖像高度。外觀比例會保留。"
 
-#: src/configdialog.cpp:415
+#: src/configdialog.cpp:416
 #, kde-format
 msgid "Template Options"
 msgstr "樣本選項"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:364
+#: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:364
 #: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
 msgstr "收集型態(&T)："
 
-#: src/configdialog.cpp:436
+#: src/configdialog.cpp:437
 #, kde-format
 msgid "Template:"
 msgstr "樣本："
 
-#: src/configdialog.cpp:441
+#: src/configdialog.cpp:442
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2626,12 +2626,12 @@ msgid ""
 msgstr ""
 "請選擇要用於目前收藏型態的樣本。並非所有的樣本都會使用此字型與顏色設定。"
 
-#: src/configdialog.cpp:448
+#: src/configdialog.cpp:449
 #, kde-format
 msgid "&Preview..."
 msgstr "預覽(&P)..."
 
-#: src/configdialog.cpp:449
+#: src/configdialog.cpp:450
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "顯示樣本的預覽"
@@ -2641,174 +2641,174 @@ msgstr "顯示樣本的預覽"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:466
+#: src/configdialog.cpp:467
 #, kde-format
 msgid "Font Options"
 msgstr "字型選項"
 
-#: src/configdialog.cpp:473
+#: src/configdialog.cpp:474
 #, kde-format
 msgid "Font:"
 msgstr "字型："
 
-#: src/configdialog.cpp:479
+#: src/configdialog.cpp:480
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "此字型會在項目檢視中傳遞給樣本。"
 
-#: src/configdialog.cpp:483
+#: src/configdialog.cpp:484
 #, kde-format
 msgid "Size:"
 msgstr "大小："
 
-#: src/configdialog.cpp:495
+#: src/configdialog.cpp:496
 #, kde-format
 msgid "Color Options"
 msgstr "著色選項"
 
-#: src/configdialog.cpp:502
+#: src/configdialog.cpp:503
 #, kde-format
 msgid "Background color:"
 msgstr "背景顏色："
 
-#: src/configdialog.cpp:508
+#: src/configdialog.cpp:509
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "此顏色會在項目檢視中傳遞給樣本。"
 
-#: src/configdialog.cpp:512
+#: src/configdialog.cpp:513
 #, kde-format
 msgid "Text color:"
 msgstr "文字顏色："
 
-#: src/configdialog.cpp:521
+#: src/configdialog.cpp:522
 #, kde-format
 msgid "Highlight color:"
 msgstr "突顯顏色："
 
-#: src/configdialog.cpp:530
+#: src/configdialog.cpp:531
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "突顯文字顏色："
 
-#: src/configdialog.cpp:539
+#: src/configdialog.cpp:540
 #, fuzzy, kde-format
 #| msgid "Text color:"
 msgid "Link color:"
 msgstr "文字顏色："
 
-#: src/configdialog.cpp:548
+#: src/configdialog.cpp:549
 #, kde-format
 msgid "Manage Templates"
 msgstr "管理樣本"
 
-#: src/configdialog.cpp:559
+#: src/configdialog.cpp:560
 #, kde-format
 msgid "Install..."
 msgstr "安裝..."
 
-#: src/configdialog.cpp:563
+#: src/configdialog.cpp:564
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "點擊以直接安裝新的樣本。"
 
-#: src/configdialog.cpp:566 src/configdialog.cpp:672
+#: src/configdialog.cpp:567 src/configdialog.cpp:673
 #, kde-format
 msgid "Download..."
 msgstr "下載..."
 
-#: src/configdialog.cpp:570
+#: src/configdialog.cpp:571
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "點擊以下載額外的樣本。"
 
-#: src/configdialog.cpp:573
+#: src/configdialog.cpp:574
 #, kde-format
 msgid "Delete..."
 msgstr "刪除..."
 
-#: src/configdialog.cpp:577
+#: src/configdialog.cpp:578
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "點擊以選擇並移除安裝的樣本。"
 
-#: src/configdialog.cpp:609
+#: src/configdialog.cpp:610
 #, kde-format
 msgid "Data Sources Options"
 msgstr "資料來源選項"
 
-#: src/configdialog.cpp:630
+#: src/configdialog.cpp:631
 #, kde-format
 msgid "Move &Up"
 msgstr "上移(&U)"
 
-#: src/configdialog.cpp:633 src/configdialog.cpp:638
+#: src/configdialog.cpp:634 src/configdialog.cpp:639
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
 "are automatically updated."
 msgstr "資料來源的順序會決定 Tellico 在做自動更新項目時的順序。"
 
-#: src/configdialog.cpp:635
+#: src/configdialog.cpp:636
 #, kde-format
 msgid "Move &Down"
 msgstr "下移(&D)"
 
-#: src/configdialog.cpp:645
+#: src/configdialog.cpp:646
 #, kde-format
 msgid "Filter by type:"
 msgstr "以型態過濾："
 
-#: src/configdialog.cpp:663
+#: src/configdialog.cpp:664
 #, kde-format
 msgid "&New..."
 msgstr "新增(&N)..."
 
-#: src/configdialog.cpp:665
+#: src/configdialog.cpp:666
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "點擊以新增資料來源。"
 
-#: src/configdialog.cpp:666
+#: src/configdialog.cpp:667
 #, kde-format
 msgid "&Modify..."
 msgstr "變更(&M)..."
 
-#: src/configdialog.cpp:668
+#: src/configdialog.cpp:669
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "點擊以變更選取的資料來源。"
 
-#: src/configdialog.cpp:669
+#: src/configdialog.cpp:670
 #, kde-format
 msgid "&Delete"
 msgstr "刪除(&D)"
 
-#: src/configdialog.cpp:671
+#: src/configdialog.cpp:672
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "點擊以刪除選取的資料來源。"
 
-#: src/configdialog.cpp:674
+#: src/configdialog.cpp:675
 #, kde-format
 msgid "Click to download additional data sources."
 msgstr "點擊以下載額外的資料來源。"
 
-#: src/configdialog.cpp:1155 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1166 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:125
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "XSL Files"
 msgstr "檔案"
 
-#: src/configdialog.cpp:1156
+#: src/configdialog.cpp:1167
 #, fuzzy, kde-format
 #| msgid "Templates"
 msgid "Template Packages"
 msgstr "樣本"
 
-#: src/configdialog.cpp:1157 src/importdialog.cpp:439 src/mainwindow.cpp:1251
-#: src/mainwindow.cpp:1421 src/reportdialog.cpp:428 src/reportdialog.cpp:443
+#: src/configdialog.cpp:1168 src/importdialog.cpp:439 src/mainwindow.cpp:1262
+#: src/mainwindow.cpp:1432 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -2823,12 +2823,12 @@ msgstr "樣本"
 msgid "All Files"
 msgstr "*|所有檔案"
 
-#: src/configdialog.cpp:1186
+#: src/configdialog.cpp:1197
 #, kde-format
 msgid "Delete Template"
 msgstr "刪除樣本"
 
-#: src/configdialog.cpp:1187
+#: src/configdialog.cpp:1198
 #, kde-format
 msgid "Select template to delete:"
 msgstr "請選擇要刪除的樣本："
@@ -3017,7 +3017,7 @@ msgstr "顯示所有欄位"
 msgid "Hide All Columns"
 msgstr "隱藏所有欄位"
 
-#: src/document.cpp:207 src/mainwindow.cpp:1365
+#: src/document.cpp:210 src/mainwindow.cpp:1376
 #, kde-format
 msgid "Saving file..."
 msgstr "正在儲存檔案..."
@@ -3078,7 +3078,7 @@ msgstr ""
 msgid "Save Entry"
 msgstr "儲存項目"
 
-#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1157
+#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1168
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "未儲存的改變"
@@ -3157,7 +3157,7 @@ msgstr "更新 <b>%1</b> 中..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico 無法找到預設的項目樣式表。"
 
-#: src/entryview.cpp:334 src/mainwindow.cpp:1771
+#: src/entryview.cpp:334 src/mainwindow.cpp:1782
 #, kde-format
 msgid "Please check your installation."
 msgstr "請檢查您的安裝。"
@@ -4207,7 +4207,7 @@ msgstr ""
 #: src/fetch/opdsfetcher.cpp:201
 #, fuzzy, kde-format
 #| msgid "Tellico was unable to read any metadata from the PDF file."
-msgid "Tellico is unable to read the search descripion in the OPDS catalog."
+msgid "Tellico is unable to read the search description in the OPDS catalog."
 msgstr "Tellico 無法讀取此 PDF 檔的任何中繼資料。"
 
 #: src/fetch/opdsfetcher.cpp:342
@@ -4864,8 +4864,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "群組"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1085 src/mainwindow.cpp:1706
-#: src/mainwindow.cpp:1740 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1096 src/mainwindow.cpp:1717
+#: src/mainwindow.cpp:1751 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "人物"
@@ -5173,7 +5173,7 @@ msgstr ""
 msgid "&Import"
 msgstr "匯入(&I)"
 
-#: src/importdialog.cpp:371 src/mainwindow.cpp:1247 src/mainwindow.cpp:1419
+#: src/importdialog.cpp:371 src/mainwindow.cpp:1258 src/mainwindow.cpp:1430
 #: src/translators/tellicozipexporter.cpp:54
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
@@ -5181,7 +5181,7 @@ msgid "Tellico Files"
 msgstr "Tellico Zip 檔"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1249 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1260 src/translators/tellicoxmlexporter.cpp:71
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "XML Files"
@@ -6310,7 +6310,7 @@ msgstr ""
 "\"tc:///edit_search_internet\">從不同網路來源下載資料</a>的方式加入新的收藏項"
 "目。</h3>"
 
-#: src/mainwindow.cpp:1155
+#: src/mainwindow.cpp:1166
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6319,23 +6319,23 @@ msgstr ""
 "目前的檔案已修改。\n"
 "要儲存嗎？"
 
-#: src/mainwindow.cpp:1191 src/mainwindow.cpp:1224
+#: src/mainwindow.cpp:1202 src/mainwindow.cpp:1235
 #, fuzzy, kde-format
 #| msgid "Create a new collection"
 msgid "Creating new collection..."
 msgstr "建立新的收藏"
 
-#: src/mainwindow.cpp:1244 src/mainwindow.cpp:1267 src/mainwindow.cpp:1285
+#: src/mainwindow.cpp:1255 src/mainwindow.cpp:1278 src/mainwindow.cpp:1296
 #, kde-format
 msgid "Opening file..."
 msgstr "正在開啟檔案..."
 
-#: src/mainwindow.cpp:1255
+#: src/mainwindow.cpp:1266
 #, kde-format
 msgid "Open File"
 msgstr "開啟檔案"
 
-#: src/mainwindow.cpp:1376
+#: src/mainwindow.cpp:1387
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6347,59 +6347,59 @@ msgstr ""
 "否要將影像存在另外一個 Tellico 的資料目錄裡以加快效率？</p> <p>您稍後還是可以"
 "在設定對話框裡變更您的選擇。</p></qt>"
 
-#: src/mainwindow.cpp:1381
+#: src/mainwindow.cpp:1392
 #, kde-format
 msgid "Save Images Separately"
 msgstr "分別儲存影像"
 
-#: src/mainwindow.cpp:1382
+#: src/mainwindow.cpp:1393
 #, kde-format
 msgid "Save Images in File"
 msgstr "將影像存在檔案內"
 
-#: src/mainwindow.cpp:1417
+#: src/mainwindow.cpp:1428
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "正在用新檔名儲存檔案..."
 
-#: src/mainwindow.cpp:1426
+#: src/mainwindow.cpp:1437
 #, kde-format
 msgid "Save As"
 msgstr "另存新檔"
 
-#: src/mainwindow.cpp:1492
+#: src/mainwindow.cpp:1503
 #, kde-format
 msgid "Printing..."
 msgstr "正在列印..."
 
-#: src/mainwindow.cpp:1496
+#: src/mainwindow.cpp:1507
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr "正在過濾收藏，只有符合過濾條件的項目會被列印。要繼續嗎？"
 
-#: src/mainwindow.cpp:1519
+#: src/mainwindow.cpp:1530
 #, kde-format
 msgid "Exiting..."
 msgstr "正在離開..."
 
-#: src/mainwindow.cpp:1625
+#: src/mainwindow.cpp:1636
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "（%1 個已過濾；%2 個已選擇）"
 
-#: src/mainwindow.cpp:1628
+#: src/mainwindow.cpp:1639
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "（%1 個已過濾）"
 
-#: src/mainwindow.cpp:1631
+#: src/mainwindow.cpp:1642
 #, kde-format
 msgid "(%1 selected)"
 msgstr "（%1 個已選擇）"
 
-#: src/mainwindow.cpp:1770 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1781 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:264
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6407,76 +6407,76 @@ msgstr "（%1 個已選擇）"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico 在處理 XSLT 時遇到錯誤。"
 
-#: src/mainwindow.cpp:1902
+#: src/mainwindow.cpp:1913
 #, kde-format
 msgid "Importing data..."
 msgstr "匯入資料中..."
 
-#: src/mainwindow.cpp:1913
+#: src/mainwindow.cpp:1924
 #, kde-format
 msgid "Import File"
 msgstr "匯入檔案"
 
-#: src/mainwindow.cpp:1926
+#: src/mainwindow.cpp:1937
 #, kde-format
 msgid "Import Directory"
 msgstr "匯入目錄"
 
-#: src/mainwindow.cpp:1950
+#: src/mainwindow.cpp:1961
 #, kde-format
 msgid "Exporting data..."
 msgstr "匯出資料中..."
 
-#: src/mainwindow.cpp:1973
+#: src/mainwindow.cpp:1984
 #, kde-format
 msgid "Export As"
 msgstr "匯出為"
 
-#: src/mainwindow.cpp:2001
+#: src/mainwindow.cpp:2012
 #, kde-format
 msgid "String Macros"
 msgstr "字串巨集"
 
-#: src/mainwindow.cpp:2002
+#: src/mainwindow.cpp:2013
 #, kde-format
 msgid "Macro"
 msgstr "巨集"
 
-#: src/mainwindow.cpp:2002
+#: src/mainwindow.cpp:2013
 #, kde-format
 msgid "String"
 msgstr "字串"
 
-#: src/mainwindow.cpp:2089
+#: src/mainwindow.cpp:2100
 #, kde-format
 msgid "Creating citations..."
 msgstr "建立引用中..."
 
-#: src/mainwindow.cpp:2199
+#: src/mainwindow.cpp:2210
 #, kde-format
 msgid "Filters"
 msgstr "過濾器"
 
-#: src/mainwindow.cpp:2200
+#: src/mainwindow.cpp:2211
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr "<qt>過濾檢視會顯示符合特定過濾條件的項目。</qt>"
 
-#: src/mainwindow.cpp:2223
+#: src/mainwindow.cpp:2234
 #, kde-format
 msgid "Loans"
 msgstr "借貸"
 
-#: src/mainwindow.cpp:2224
+#: src/mainwindow.cpp:2235
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr "<qt>借貸檢視會顯示所有您已借出的收藏項目。</qt>"
 
-#: src/mainwindow.cpp:2311
+#: src/mainwindow.cpp:2322
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6485,12 +6485,12 @@ msgstr ""
 "有些影像並未儲存在設定的位置。目前的檔案必須先儲存，影像則會被轉換到新的位"
 "置。"
 
-#: src/mainwindow.cpp:2352
+#: src/mainwindow.cpp:2363
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "從 %1 更新的項目資料"
 
-#: src/mainwindow.cpp:2371
+#: src/mainwindow.cpp:2382
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "

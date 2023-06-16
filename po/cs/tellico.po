@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-15 00:47+0000\n"
+"POT-Creation-Date: 2023-06-16 00:47+0000\n"
 "PO-Revision-Date: 2023-03-15 14:32+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -169,7 +169,7 @@ msgstr "Název"
 msgid "Collection Size"
 msgstr "Velikost sbírky"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1618
+#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1629
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Celkem záznamů: %1"
@@ -699,8 +699,8 @@ msgstr "Pole s odvozenou hodnotou musí mít šablonu hodnoty."
 #: src/collections/musiccollection.cpp:31
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
-#: src/configdialog.cpp:142 src/configdialog.cpp:169 src/configdialog.cpp:183
-#: src/configdialog.cpp:200 src/configdialog.cpp:1123
+#: src/configdialog.cpp:143 src/configdialog.cpp:170 src/configdialog.cpp:184
+#: src/configdialog.cpp:201 src/configdialog.cpp:1134
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -936,7 +936,7 @@ msgstr "Neznámé"
 #: src/collections/gamecollection.cpp:33 src/collections/musiccollection.cpp:32
 #: src/collections/stampcollection.cpp:32
 #: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
-#: src/document.cpp:525 src/field.cpp:292 src/field.cpp:305 src/field.cpp:310
+#: src/document.cpp:528 src/field.cpp:292 src/field.cpp:305 src/field.cpp:310
 #, kde-format
 msgid "Personal"
 msgstr "Osobní"
@@ -1052,7 +1052,7 @@ msgstr "Kupní cena"
 #: src/collections/comicbookcollection.cpp:151
 #: src/collections/gamecollection.cpp:119
 #: src/collections/musiccollection.cpp:109
-#: src/collections/videocollection.cpp:211 src/document.cpp:523
+#: src/collections/videocollection.cpp:211 src/document.cpp:526
 #, kde-format
 msgid "Loaned"
 msgstr "Půjčená"
@@ -2350,39 +2350,39 @@ msgstr "Barva zvýrazněného textu v šabloně"
 msgid "Template link color"
 msgstr "Barva odkazu šablony"
 
-#: src/configdialog.cpp:95
+#: src/configdialog.cpp:96
 #, kde-format
 msgid "Configure Tellico"
 msgstr "Nastavit Tellico"
 
-#: src/configdialog.cpp:144 src/configdialog.cpp:171 src/configdialog.cpp:185
-#: src/configdialog.cpp:337
+#: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
+#: src/configdialog.cpp:338
 #, kde-format
 msgid "Printing"
 msgstr "Tisk"
 
-#: src/configdialog.cpp:146 src/configdialog.cpp:173 src/configdialog.cpp:187
-#: src/configdialog.cpp:414
+#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
+#: src/configdialog.cpp:415
 #, kde-format
 msgid "Templates"
 msgstr "Šablony"
 
-#: src/configdialog.cpp:148 src/configdialog.cpp:189 src/configdialog.cpp:608
+#: src/configdialog.cpp:149 src/configdialog.cpp:190 src/configdialog.cpp:609
 #, kde-format
 msgid "Data Sources"
 msgstr "Datové zdroje"
 
-#: src/configdialog.cpp:201
+#: src/configdialog.cpp:202
 #, kde-format
 msgid "General Options"
 msgstr "Obecné volby"
 
-#: src/configdialog.cpp:212
+#: src/configdialog.cpp:213
 #, kde-format
 msgid "&Reopen file at startup"
 msgstr "&Znovu otevřít soubor při spuštění"
 
-#: src/configdialog.cpp:213
+#: src/configdialog.cpp:214
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
@@ -2391,33 +2391,33 @@ msgstr ""
 "Je-li zaškrtnuto, naposledy otevřený soubor bude otevřen při dalším "
 "spuštěním."
 
-#: src/configdialog.cpp:218
+#: src/configdialog.cpp:219
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
 msgstr "Povolit &regulární výrazy v rychlém filtru"
 
-#: src/configdialog.cpp:219
+#: src/configdialog.cpp:220
 #, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr ""
 
-#: src/configdialog.cpp:224
+#: src/configdialog.cpp:225
 #, kde-format
 msgid "&Show \"Tip of the Day\" at startup"
 msgstr "Při &spuštění zobrazit \"Tip dne\""
 
-#: src/configdialog.cpp:225
+#: src/configdialog.cpp:226
 #, kde-format
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
 msgstr "Je-li zaškrtnuto, bude při spuštění programu zobrazen \"Tip dne\"."
 
-#: src/configdialog.cpp:230
+#: src/configdialog.cpp:231
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "Povolit &webkameru pro načítání čárových kódů"
 
-#: src/configdialog.cpp:231
+#: src/configdialog.cpp:232
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
@@ -2426,27 +2426,27 @@ msgstr ""
 "Je-li zaškrtnuto, bude pro skenování čárových kódů pro vyhledávání použita "
 "webkamera."
 
-#: src/configdialog.cpp:236
+#: src/configdialog.cpp:237
 #, kde-format
 msgid "Image Storage Options"
 msgstr "Možnosti ukládání obrázků"
 
-#: src/configdialog.cpp:238
+#: src/configdialog.cpp:239
 #, kde-format
 msgid "Store images in data file"
 msgstr "Uložit obrázky v datovém souboru"
 
-#: src/configdialog.cpp:239
+#: src/configdialog.cpp:240
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "Ukládat obrázky ve běžném adresáři aplikaci"
 
-#: src/configdialog.cpp:240
+#: src/configdialog.cpp:241
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "Ukládat obrázky v adresáři odvozeném od umístění datového souboru"
 
-#: src/configdialog.cpp:241
+#: src/configdialog.cpp:242
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2457,39 +2457,39 @@ msgstr ""
 "bude Tellico pomalé, nebo v adresáři aplikace Tellico, a nebo v adresáři na "
 "stejném místě jako datový soubor."
 
-#: src/configdialog.cpp:262 src/configdialog.cpp:346
+#: src/configdialog.cpp:263 src/configdialog.cpp:347
 #, kde-format
 msgid "Formatting Options"
 msgstr "Možnosti formátování"
 
-#: src/configdialog.cpp:267
+#: src/configdialog.cpp:268
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "Názvy a jména automaticky s &velkými písmeny"
 
-#: src/configdialog.cpp:268
+#: src/configdialog.cpp:269
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Je-li zaškrtnuto, názvy a jména budou mít automaticky změněna první písmena "
 "na velká."
 
-#: src/configdialog.cpp:273
+#: src/configdialog.cpp:274
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "Automaticky &formátovat názvy a jména"
 
-#: src/configdialog.cpp:274 src/configdialog.cpp:352
+#: src/configdialog.cpp:275 src/configdialog.cpp:353
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Je-li zaškrtnuto, názvy a jména budou automaticky formátována."
 
-#: src/configdialog.cpp:284
+#: src/configdialog.cpp:285
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "Nepřevádět na velká &písmena:"
 
-#: src/configdialog.cpp:289
+#: src/configdialog.cpp:290
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2498,12 +2498,12 @@ msgstr ""
 "<qt>Seznam slov, která nemají být převedena na velká písmena. Oddělovat "
 "středníkem.</qt>"
 
-#: src/configdialog.cpp:295
+#: src/configdialog.cpp:296
 #, kde-format
 msgid "Artic&les:"
 msgstr "Č&leny:"
 
-#: src/configdialog.cpp:300
+#: src/configdialog.cpp:301
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2513,12 +2513,12 @@ msgstr ""
 "<qt>Seznam slov, která mají být považována za členy, jsou-li prvním slovem v "
 "názvu. Oddělovat středníkem.</qt>"
 
-#: src/configdialog.cpp:307
+#: src/configdialog.cpp:308
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Osobní přípon&y:"
 
-#: src/configdialog.cpp:312
+#: src/configdialog.cpp:313
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2527,12 +2527,12 @@ msgstr ""
 "<qt>Seznam přípon, která mohou být použita ve jménech osob. Oddělovat "
 "středníkem.</qt>"
 
-#: src/configdialog.cpp:318
+#: src/configdialog.cpp:319
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "Přípony &příjmení:"
 
-#: src/configdialog.cpp:323
+#: src/configdialog.cpp:324
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2541,89 +2541,89 @@ msgstr ""
 "<qt>Seznam předpon, které mohou být použit v příjmeních. Oddělovat "
 "středníkem.</qt>"
 
-#: src/configdialog.cpp:338
+#: src/configdialog.cpp:339
 #, kde-format
 msgid "Printing Options"
 msgstr "Možnosti tisku"
 
-#: src/configdialog.cpp:351
+#: src/configdialog.cpp:352
 #, kde-format
 msgid "&Format titles and names"
 msgstr "&Formátovat názvy a jména"
 
-#: src/configdialog.cpp:356
+#: src/configdialog.cpp:357
 #, kde-format
 msgid "&Print field headers"
 msgstr "&Tisk hlaviček polí"
 
-#: src/configdialog.cpp:357 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Je-li zaškrtnuto, budou názvy polí vytištěny jako hlavičky tabulky."
 
-#: src/configdialog.cpp:361
+#: src/configdialog.cpp:362
 #, kde-format
 msgid "Grouping Options"
 msgstr "Možnosti seskupování"
 
-#: src/configdialog.cpp:366
+#: src/configdialog.cpp:367
 #, kde-format
 msgid "&Group the entries"
 msgstr "&Seskupit záznamy"
 
-#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Je-li zaškrtnuto, budou záznamy seskupeny podle zvoleného pole."
 
-#: src/configdialog.cpp:371
+#: src/configdialog.cpp:372
 #, kde-format
 msgid "Image Options"
 msgstr "Možnosti obrázku"
 
-#: src/configdialog.cpp:377
+#: src/configdialog.cpp:378
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "Maximální &šířka obrázků:"
 
-#: src/configdialog.cpp:386
+#: src/configdialog.cpp:387
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Maximální šířka tištěných obrázků. Poměr stran je zachován."
 
-#: src/configdialog.cpp:392
+#: src/configdialog.cpp:393
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "Maximální &výška obrázků:"
 
-#: src/configdialog.cpp:401
+#: src/configdialog.cpp:402
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Maximální výška tištěných obrázků. Poměr stran je zachován."
 
-#: src/configdialog.cpp:415
+#: src/configdialog.cpp:416
 #, kde-format
 msgid "Template Options"
 msgstr "Možnosti šablon"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:429 src/fetch/execexternalfetcher.cpp:364
+#: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:364
 #: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
 msgstr "&Druh sbírky:"
 
-#: src/configdialog.cpp:436
+#: src/configdialog.cpp:437
 #, kde-format
 msgid "Template:"
 msgstr "Šablona:"
 
-#: src/configdialog.cpp:441
+#: src/configdialog.cpp:442
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2632,12 +2632,12 @@ msgstr ""
 "Zvolte šablonu pro aktuální druh sbírky. Ne všechny šablony využijí "
 "nastavení písma a barev."
 
-#: src/configdialog.cpp:448
+#: src/configdialog.cpp:449
 #, kde-format
 msgid "&Preview..."
 msgstr "&Náhled..."
 
-#: src/configdialog.cpp:449
+#: src/configdialog.cpp:450
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "Zobrazit náhled šablony"
@@ -2647,107 +2647,107 @@ msgstr "Zobrazit náhled šablony"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:466
+#: src/configdialog.cpp:467
 #, kde-format
 msgid "Font Options"
 msgstr "Možnosti písma"
 
-#: src/configdialog.cpp:473
+#: src/configdialog.cpp:474
 #, kde-format
 msgid "Font:"
 msgstr "Písmo:"
 
-#: src/configdialog.cpp:479
+#: src/configdialog.cpp:480
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "Toto písmo se předává šabloně použité při zobrazení záznamu."
 
-#: src/configdialog.cpp:483
+#: src/configdialog.cpp:484
 #, kde-format
 msgid "Size:"
 msgstr "Velikost:"
 
-#: src/configdialog.cpp:495
+#: src/configdialog.cpp:496
 #, kde-format
 msgid "Color Options"
 msgstr "Možnosti barev"
 
-#: src/configdialog.cpp:502
+#: src/configdialog.cpp:503
 #, kde-format
 msgid "Background color:"
 msgstr "Barva pozadí:"
 
-#: src/configdialog.cpp:508
+#: src/configdialog.cpp:509
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Tato barva se předává šabloně použité při zobrazení záznamu."
 
-#: src/configdialog.cpp:512
+#: src/configdialog.cpp:513
 #, kde-format
 msgid "Text color:"
 msgstr "Barva textu:"
 
-#: src/configdialog.cpp:521
+#: src/configdialog.cpp:522
 #, kde-format
 msgid "Highlight color:"
 msgstr "Barva zvýraznění:"
 
-#: src/configdialog.cpp:530
+#: src/configdialog.cpp:531
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "Barva zvýrazněného textu:"
 
-#: src/configdialog.cpp:539
+#: src/configdialog.cpp:540
 #, kde-format
 msgid "Link color:"
 msgstr "Barva odkazu:"
 
-#: src/configdialog.cpp:548
+#: src/configdialog.cpp:549
 #, kde-format
 msgid "Manage Templates"
 msgstr "Správa šablon"
 
-#: src/configdialog.cpp:559
+#: src/configdialog.cpp:560
 #, kde-format
 msgid "Install..."
 msgstr "Instalace..."
 
-#: src/configdialog.cpp:563
+#: src/configdialog.cpp:564
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Klikněte pro instalaci nové šablony."
 
-#: src/configdialog.cpp:566 src/configdialog.cpp:672
+#: src/configdialog.cpp:567 src/configdialog.cpp:673
 #, kde-format
 msgid "Download..."
 msgstr "Stažení..."
 
-#: src/configdialog.cpp:570
+#: src/configdialog.cpp:571
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Klikněte pro stažení dalších šablon."
 
-#: src/configdialog.cpp:573
+#: src/configdialog.cpp:574
 #, kde-format
 msgid "Delete..."
 msgstr "Vymazat..."
 
-#: src/configdialog.cpp:577
+#: src/configdialog.cpp:578
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Klikněte pro výběr a odstranění nainstalovaných šablon."
 
-#: src/configdialog.cpp:609
+#: src/configdialog.cpp:610
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Možnosti datových zdrojů"
 
-#: src/configdialog.cpp:630
+#: src/configdialog.cpp:631
 #, kde-format
 msgid "Move &Up"
 msgstr "Posunout &nahoru"
 
-#: src/configdialog.cpp:633 src/configdialog.cpp:638
+#: src/configdialog.cpp:634 src/configdialog.cpp:639
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2756,64 +2756,64 @@ msgstr ""
 "Pořadí datových zdrojů určuje pořadí, kterého se Tellico drží při "
 "automatické aktualizaci záznamů."
 
-#: src/configdialog.cpp:635
+#: src/configdialog.cpp:636
 #, kde-format
 msgid "Move &Down"
 msgstr "Posunout &dolu"
 
-#: src/configdialog.cpp:645
+#: src/configdialog.cpp:646
 #, kde-format
 msgid "Filter by type:"
 msgstr "Filtrovat podle druhu:"
 
-#: src/configdialog.cpp:663
+#: src/configdialog.cpp:664
 #, kde-format
 msgid "&New..."
 msgstr "&Nový..."
 
-#: src/configdialog.cpp:665
+#: src/configdialog.cpp:666
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Klikněte pro přidání nového datového zdroje."
 
-#: src/configdialog.cpp:666
+#: src/configdialog.cpp:667
 #, kde-format
 msgid "&Modify..."
 msgstr "&Upravit..."
 
-#: src/configdialog.cpp:668
+#: src/configdialog.cpp:669
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Klikněte pro úpravu vybraného datového zdroje."
 
-#: src/configdialog.cpp:669
+#: src/configdialog.cpp:670
 #, kde-format
 msgid "&Delete"
 msgstr "S&mazat"
 
-#: src/configdialog.cpp:671
+#: src/configdialog.cpp:672
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Klikněte pro vymazání vybraného datového zdroje."
 
-#: src/configdialog.cpp:674
+#: src/configdialog.cpp:675
 #, kde-format
 msgid "Click to download additional data sources."
 msgstr "Klikněte pro stažení dalších datových zdrojů."
 
-#: src/configdialog.cpp:1155 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1166 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:125
 #, kde-format
 msgid "XSL Files"
 msgstr "Soubory XSL"
 
-#: src/configdialog.cpp:1156
+#: src/configdialog.cpp:1167
 #, kde-format
 msgid "Template Packages"
 msgstr "Balíčky šablon"
 
-#: src/configdialog.cpp:1157 src/importdialog.cpp:439 src/mainwindow.cpp:1251
-#: src/mainwindow.cpp:1421 src/reportdialog.cpp:428 src/reportdialog.cpp:443
+#: src/configdialog.cpp:1168 src/importdialog.cpp:439 src/mainwindow.cpp:1262
+#: src/mainwindow.cpp:1432 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -2827,12 +2827,12 @@ msgstr "Balíčky šablon"
 msgid "All Files"
 msgstr "Všechny soubory"
 
-#: src/configdialog.cpp:1186
+#: src/configdialog.cpp:1197
 #, kde-format
 msgid "Delete Template"
 msgstr "Smazat šablonu"
 
-#: src/configdialog.cpp:1187
+#: src/configdialog.cpp:1198
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Vyberte šablonu k vymazání:"
@@ -3025,7 +3025,7 @@ msgstr "Zobrazit všechny sloupce"
 msgid "Hide All Columns"
 msgstr "Skrýt všechny sloupce"
 
-#: src/document.cpp:207 src/mainwindow.cpp:1365
+#: src/document.cpp:210 src/mainwindow.cpp:1376
 #, kde-format
 msgid "Saving file..."
 msgstr "Ukládám soubor..."
@@ -3086,7 +3086,7 @@ msgstr ""
 msgid "Save Entry"
 msgstr "Uložit záznam"
 
-#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1157
+#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1168
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Neuložené změny"
@@ -3165,7 +3165,7 @@ msgstr "Aktualizuji <b>%1</b>..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico nemůže najít výchozí styl pro záznamy."
 
-#: src/entryview.cpp:334 src/mainwindow.cpp:1771
+#: src/entryview.cpp:334 src/mainwindow.cpp:1782
 #, kde-format
 msgid "Please check your installation."
 msgstr "Zkontrolujte instalaci programu."
@@ -4200,7 +4200,7 @@ msgstr ""
 #: src/fetch/opdsfetcher.cpp:201
 #, fuzzy, kde-format
 #| msgid "Tellico was unable to read any metadata from the PDF file."
-msgid "Tellico is unable to read the search descripion in the OPDS catalog."
+msgid "Tellico is unable to read the search description in the OPDS catalog."
 msgstr "Tellico nemůže načíst metadata z PDF souboru."
 
 #: src/fetch/opdsfetcher.cpp:342
@@ -4852,8 +4852,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Skupina"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1085 src/mainwindow.cpp:1706
-#: src/mainwindow.cpp:1740 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1096 src/mainwindow.cpp:1717
+#: src/mainwindow.cpp:1751 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Lidé"
@@ -5155,14 +5155,14 @@ msgstr ""
 msgid "&Import"
 msgstr "&Importovat"
 
-#: src/importdialog.cpp:371 src/mainwindow.cpp:1247 src/mainwindow.cpp:1419
+#: src/importdialog.cpp:371 src/mainwindow.cpp:1258 src/mainwindow.cpp:1430
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Soubory Tellico"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1249 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1260 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "Soubory XML"
@@ -6265,7 +6265,7 @@ msgstr ""
 "přidávat <a href=\"tc:///coll_new_entry\">ručně</a> nebo <a href=\"tc:///"
 "edit_search_internet\">stáhnutím dat</a> z různých internetových zdrojů.</h3>"
 
-#: src/mainwindow.cpp:1155
+#: src/mainwindow.cpp:1166
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6274,22 +6274,22 @@ msgstr ""
 "Aktuální soubor byl změněn.\n"
 "Přejete si jej uložit?"
 
-#: src/mainwindow.cpp:1191 src/mainwindow.cpp:1224
+#: src/mainwindow.cpp:1202 src/mainwindow.cpp:1235
 #, kde-format
 msgid "Creating new collection..."
 msgstr "Vytváření nové sbírky..."
 
-#: src/mainwindow.cpp:1244 src/mainwindow.cpp:1267 src/mainwindow.cpp:1285
+#: src/mainwindow.cpp:1255 src/mainwindow.cpp:1278 src/mainwindow.cpp:1296
 #, kde-format
 msgid "Opening file..."
 msgstr "Otevírám soubor..."
 
-#: src/mainwindow.cpp:1255
+#: src/mainwindow.cpp:1266
 #, kde-format
 msgid "Open File"
 msgstr "Otevřít soubor"
 
-#: src/mainwindow.cpp:1376
+#: src/mainwindow.cpp:1387
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6302,32 +6302,32 @@ msgstr ""
 "adresáři Tellico, aby se zlepšila rychlost?</p><p>Toto nastavení lze "
 "kdykoliv později změnit v konfiguračním okně.</p></qt>"
 
-#: src/mainwindow.cpp:1381
+#: src/mainwindow.cpp:1392
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Uložit obrázky samostatně"
 
-#: src/mainwindow.cpp:1382
+#: src/mainwindow.cpp:1393
 #, kde-format
 msgid "Save Images in File"
 msgstr "Uložit obrázky do souboru"
 
-#: src/mainwindow.cpp:1417
+#: src/mainwindow.cpp:1428
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Ukládám soubor s novým názvem..."
 
-#: src/mainwindow.cpp:1426
+#: src/mainwindow.cpp:1437
 #, kde-format
 msgid "Save As"
 msgstr "Uložit jako"
 
-#: src/mainwindow.cpp:1492
+#: src/mainwindow.cpp:1503
 #, kde-format
 msgid "Printing..."
 msgstr "Probíhá tisk..."
 
-#: src/mainwindow.cpp:1496
+#: src/mainwindow.cpp:1507
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6336,27 +6336,27 @@ msgstr ""
 "Sbírka má nastaven filtr tak, aby byla zobrazena jen určitá část záznamů. "
 "Vytištěny budou pouze viditelné záznamy. Pokračovat?"
 
-#: src/mainwindow.cpp:1519
+#: src/mainwindow.cpp:1530
 #, kde-format
 msgid "Exiting..."
 msgstr "Ukončuji..."
 
-#: src/mainwindow.cpp:1625
+#: src/mainwindow.cpp:1636
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrováno, %2 označeno)"
 
-#: src/mainwindow.cpp:1628
+#: src/mainwindow.cpp:1639
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtrováno)"
 
-#: src/mainwindow.cpp:1631
+#: src/mainwindow.cpp:1642
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 označeno)"
 
-#: src/mainwindow.cpp:1770 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1781 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:264
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6364,57 +6364,57 @@ msgstr "(%1 označeno)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico narazil na chybu při zpracovávání XSLT."
 
-#: src/mainwindow.cpp:1902
+#: src/mainwindow.cpp:1913
 #, kde-format
 msgid "Importing data..."
 msgstr "Importuji data..."
 
-#: src/mainwindow.cpp:1913
+#: src/mainwindow.cpp:1924
 #, kde-format
 msgid "Import File"
 msgstr "Importovat soubor"
 
-#: src/mainwindow.cpp:1926
+#: src/mainwindow.cpp:1937
 #, kde-format
 msgid "Import Directory"
 msgstr "Importovat adresář"
 
-#: src/mainwindow.cpp:1950
+#: src/mainwindow.cpp:1961
 #, kde-format
 msgid "Exporting data..."
 msgstr "Exportuji data..."
 
-#: src/mainwindow.cpp:1973
+#: src/mainwindow.cpp:1984
 #, kde-format
 msgid "Export As"
 msgstr "Exportovat jako"
 
-#: src/mainwindow.cpp:2001
+#: src/mainwindow.cpp:2012
 #, kde-format
 msgid "String Macros"
 msgstr "Řetězcová makra"
 
-#: src/mainwindow.cpp:2002
+#: src/mainwindow.cpp:2013
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:2002
+#: src/mainwindow.cpp:2013
 #, kde-format
 msgid "String"
 msgstr "Řetězec"
 
-#: src/mainwindow.cpp:2089
+#: src/mainwindow.cpp:2100
 #, kde-format
 msgid "Creating citations..."
 msgstr "Vytvářím citace..."
 
-#: src/mainwindow.cpp:2199
+#: src/mainwindow.cpp:2210
 #, kde-format
 msgid "Filters"
 msgstr "Filtry"
 
-#: src/mainwindow.cpp:2200
+#: src/mainwindow.cpp:2211
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6423,12 +6423,12 @@ msgstr ""
 "<qt><i>Filtrový pohled</i> ukazuje záznamy, které splňují pravidla filtru.</"
 "qt>"
 
-#: src/mainwindow.cpp:2223
+#: src/mainwindow.cpp:2234
 #, kde-format
 msgid "Loans"
 msgstr "Půjčky"
 
-#: src/mainwindow.cpp:2224
+#: src/mainwindow.cpp:2235
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6437,7 +6437,7 @@ msgstr ""
 "<qt><i>Půjčkový pohled</i> ukazuje seznam všech osob, které si ze sbírky "
 "půjčili položky.</qt>"
 
-#: src/mainwindow.cpp:2311
+#: src/mainwindow.cpp:2322
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6446,12 +6446,12 @@ msgstr ""
 "Některé obrázky nejsou uloženy na nastaveném místě. Aktuální soubor je "
 "potřeba uložit a obrázky budou přesunuty na nové umístění."
 
-#: src/mainwindow.cpp:2352
+#: src/mainwindow.cpp:2363
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Aktualizovat data záznamu z %1"
 
-#: src/mainwindow.cpp:2371
+#: src/mainwindow.cpp:2382
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "

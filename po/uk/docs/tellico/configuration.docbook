@@ -233,6 +233,12 @@
 >OpenLibrary.org</link
 >,</simpara
 ></listitem>
+<listitem
+><simpara
+><link linkend="opds"
+>каталоги OPDS</link
+>,</simpara
+></listitem>
 <!-- movies -->
 <listitem
 ><simpara
@@ -523,6 +529,17 @@
 ><ulink url="http://openlibrary.org"
 >OpenLibrary.org</ulink
 > — інтернет-база даних, у якій зберігається по сторінці для кожної з книг. </para>
+</sect3>
+
+<sect3 id="opds">
+<title
+>Каталоги OPDS</title>
+<para
+>У <ulink url="https://en.wikipedia.org/wiki/Open_Publication_Distribution_System"
+>каталогах OPDS</ulink
+> передбачено засоби для пошуку (та поширення) цифрових книг. &tellico; може використовувати як джерело даних багато каталогів OPDS, зокрема каталог <ulink url="https://wiki.mobileread.com/wiki/OPDS"
+>Проєкту Ґутенберґ</ulink
+>. Введіть посилання на каталог і перевірте доступ і формат, щоб переконатися, що &tellico; може читати посилання. </para>
 </sect3>
 
 </sect2>

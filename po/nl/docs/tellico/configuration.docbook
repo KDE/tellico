@@ -243,8 +243,8 @@
 ></listitem>
 <listitem
 ><simpara
-><link linkend="opds"
->OPDS catalogs</link
+><link linkend="omdb"
+>OPDS-catalogi</link
 >,</simpara
 ></listitem>
 <!-- movies -->
@@ -541,13 +541,13 @@
 
 <sect3 id="opds">
 <title
->OPDS Catalogs</title>
+>OPDS-catalogi</title>
 <para
 ><ulink url="https://en.wikipedia.org/wiki/Open_Publication_Distribution_System"
->OPDS catalogs</ulink
-> provide a means for searching (and distributing) digital books. &tellico; can use many OPDS catalogs as a data source, such as <ulink url="https://wiki.mobileread.com/wiki/OPDS"
+>OPDS-catalogi</ulink
+> bieden een middel voor zoeken (en distributie) van digitale boeken. &tellico; kan vele OPDS-catalogi als gegevensbronnen gebruiken, zoals <ulink url="https://wiki.mobileread.com/wiki/OPDS"
 >Project Gutenberg</ulink
->. Enter the link to the catalog and verify the access and format to confirm &tellico; can read the link. </para>
+>. Voer de koppeling in in de catalogus en verifieer de toegang en formaat on na te gaan dat &tellico; de koppeling kan lezen. </para>
 </sect3>
 
 </sect2>
