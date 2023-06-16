@@ -40,6 +40,7 @@
 #include <KJobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
 #include <KAcceleratorManager>
+#include <KUrlRequester>
 
 #include <QLabel>
 #include <QGridLayout>
@@ -366,8 +367,8 @@ OPDSFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const OPDSFetcher* fet
   int row = -1;
   QLabel* label = new QLabel(i18n("Catalog: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_catalogEdit = new GUI::LineEdit(optionsWidget());
-  connect(m_catalogEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
+  m_catalogEdit = new KUrlRequester(optionsWidget());
+  connect(m_catalogEdit, &KUrlRequester::textEdited, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_catalogEdit, row, 1);
   QString w = i18n("Enter the link to the OPDS server.");
   label->setWhatsThis(w);
@@ -406,12 +407,12 @@ void OPDSFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 }
 
 QString OPDSFetcher::ConfigWidget::preferredName() const {
-  QString s = m_catalogEdit->text();
-  return s.isEmpty() ? OPDSFetcher::defaultName() : s;
+  auto u = m_catalogEdit->url();
+  return m_name.isEmpty() ? (u.isEmpty() ? OPDSFetcher::defaultName() : u.host()) : m_name;
 }
 
 void OPDSFetcher::ConfigWidget::verifyCatalog() {
-  OPDSReader reader(QUrl::fromUserInput(m_catalogEdit->text()));
+  OPDSReader reader(m_catalogEdit->url());
   if(reader.readSearchTemplate()) {
     const int imgSize = 0.8*m_statusLabel->height();
     m_statusLabel->setPixmap(QIcon::fromTheme(QStringLiteral("emblem-checked")).pixmap(imgSize, imgSize));
@@ -419,6 +420,7 @@ void OPDSFetcher::ConfigWidget::verifyCatalog() {
     if(!reader.name.isEmpty()) {
       emit signalName(reader.name);
     }
+    m_name = reader.name;
     m_searchTemplate = reader.searchTemplate;
     m_icon = reader.icon;
     m_attribution = reader.attribution;

@@ -31,6 +31,7 @@
 #include <QPointer>
 
 class QLabel;
+class KUrlRequester;
 class KJob;
 namespace KIO {
   class StoredTransferJob;
@@ -111,8 +112,9 @@ private Q_SLOTS:
   void verifyCatalog();
 
 private:
-  GUI::LineEdit* m_catalogEdit;
+  KUrlRequester* m_catalogEdit;
   QLabel* m_statusLabel;
+  QString m_name;
   QString m_searchTemplate;
   QString m_icon;
   QString m_attribution;
