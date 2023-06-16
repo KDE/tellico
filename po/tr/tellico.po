@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-20 02:50+0000\n"
-"PO-Revision-Date: 2023-05-29 12:45+0300\n"
+"PO-Revision-Date: 2023-06-15 22:37+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4982,7 +4982,7 @@ msgstr "Satırı Aşağı Taşı"
 #: src/images/imagejob.cpp:71 src/images/imagejob.cpp:105
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
-msgstr "Tellico, %1 görselini yükleyemedi."
+msgstr "Tellico, %1 görselini yükleyemiyor."
 
 #: src/importdialog.cpp:76 src/importdialog.cpp:85
 #, kde-format
@@ -6908,7 +6908,7 @@ msgstr ""
 #: src/translators/freedbimporter.cpp:189
 #, kde-format
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
-msgstr "<qt>Tellico CD-ROM aygıtına erişemedi - <i>%1</i>.</qt>"
+msgstr "<qt>Tellico CD-ROM aygıtına erişemiyor - <i>%1</i>.</qt>"
 
 #: src/translators/freedbimporter.cpp:214
 #, kde-format
@@ -6928,7 +6928,7 @@ msgstr "<qt>CD ye eşleşen bir kayıt bulunamadı.</qt>"
 #: src/translators/freedbimporter.cpp:256
 #, kde-format
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
-msgstr "<qt>Tellico, CD aramasını bitiremedi.</qt>"
+msgstr "<qt>Tellico, CD aramasını bitiremiyor.</qt>"
 
 #: src/translators/freedbimporter.cpp:484
 #, kde-format
@@ -7075,7 +7075,7 @@ msgstr ""
 #: src/translators/pdfimporter.cpp:113 src/translators/pdfimporter.cpp:130
 #, kde-format
 msgid "Tellico was unable to read any metadata from the PDF file."
-msgstr "Tellico, PDF dosyasından hiçbir üst veriyi okuyamadı."
+msgstr "Tellico, PDF dosyasından hiçbir üst veriyi okuyamıyor."
 
 #: src/translators/pdfimporter.cpp:271
 #, kde-format
