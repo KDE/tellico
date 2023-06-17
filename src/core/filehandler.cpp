@@ -153,7 +153,7 @@ QDomDocument FileHandler::readXMLDocument(const QUrl& url_, bool processNamespac
       details += QLatin1String("\n\t") + errorMsg;
       GUI::CursorSaver cs(Qt::ArrowCursor);
       if(GUI::Proxy::widget()) {
-        KMessageBox::detailedSorry(GUI::Proxy::widget(), i18n(errorLoad, url_.fileName()), details);
+        KMessageBox::detailedError(GUI::Proxy::widget(), i18n(errorLoad, url_.fileName()), details);
       }
     }
     return QDomDocument();
