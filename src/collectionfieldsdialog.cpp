@@ -916,14 +916,14 @@ bool CollectionFieldsDialog::checkValues() {
   if((m_coll->fieldByTitle(title) && m_coll->fieldNameByTitle(title) != m_currentField->name()) ||
      titleCount > 1) {
     // already have a field with this title
-    KMessageBox::sorry(this, i18n("A field with this title already exists. Please enter a different title."));
+    KMessageBox::error(this, i18n("A field with this title already exists. Please enter a different title."));
     m_titleEdit->selectAll();
     return false;
   }
 
   const QString category = m_currentField->category();
   if(category.isEmpty()) {
-    KMessageBox::sorry(this, i18n("<qt>The category may not be empty. Please enter a category.</qt>"));
+    KMessageBox::error(this, i18n("<qt>The category may not be empty. Please enter a category.</qt>"));
     m_catCombo->lineEdit()->selectAll();
     return false;
   }
@@ -931,7 +931,7 @@ bool CollectionFieldsDialog::checkValues() {
   Data::FieldList fields = m_coll->fieldsByCategory(category);
   if(!fields.isEmpty() && fields[0]->isSingleCategory() && fields[0]->name() != m_currentField->name()) {
     // can't have this category, cause it conflicts with a single-category field
-    KMessageBox::sorry(this, i18n("<qt>A field may not be in the same category as a <em>Paragraph</em>, "
+    KMessageBox::error(this, i18n("<qt>A field may not be in the same category as a <em>Paragraph</em>, "
                                   "<em>Table</em> or <em>Image</em> field. Please enter a different category.</qt>"));
     m_catCombo->lineEdit()->selectAll();
     return false;
@@ -939,7 +939,7 @@ bool CollectionFieldsDialog::checkValues() {
 
   // the combobox is disabled for single-category fields
   if(!m_catCombo->isEnabled() && m_coll->fieldByTitle(title) && m_coll->fieldNameByTitle(title) != m_currentField->name()) {
-    KMessageBox::sorry(this, i18n("A field's title may not be the same as an existing category. "
+    KMessageBox::error(this, i18n("A field's title may not be the same as an existing category. "
                                   "Please enter a different title."));
     m_titleEdit->selectAll();
     return false;
@@ -951,7 +951,7 @@ bool CollectionFieldsDialog::checkValues() {
     int low = Tellico::toUInt(m_currentField->property(QStringLiteral("minimum")), &ok);
     int high = Tellico::toUInt(m_currentField->property(QStringLiteral("maximum")), &ok);
     while(low < 1 || low > 9 || high < 1 || high > 10 || low >= high) {
-      KMessageBox::sorry(this, i18n("The range for a rating field must be between 1 and 10, "
+      KMessageBox::error(this, i18n("The range for a rating field must be between 1 and 10, "
                                     "and the lower bound must be less than the higher bound. "
                                     "Please enter different low and high properties."));
       if(slotShowExtendedProperties()) {
@@ -966,13 +966,13 @@ bool CollectionFieldsDialog::checkValues() {
     int ncols = Tellico::toUInt(m_currentField->property(QStringLiteral("columns")), &ok);
     // also enforced in GUI::TableFieldWidget
     if(ncols > 10) {
-      KMessageBox::sorry(this, i18n("Tables are limited to a maximum of ten columns."));
+      KMessageBox::error(this, i18n("Tables are limited to a maximum of ten columns."));
       m_currentField->setProperty(QStringLiteral("columns"), QStringLiteral("10"));
     }
   }
 
   if(m_derived->isChecked() && !m_derivedEdit->text().contains(QLatin1Char('%'))) {
-    KMessageBox::sorry(this, i18n("A field with a derived value must have a value template."));
+    KMessageBox::error(this, i18n("A field with a derived value must have a value template."));
     m_derivedEdit->setFocus();
     m_derivedEdit->selectAll();
     return false;

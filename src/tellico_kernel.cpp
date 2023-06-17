@@ -80,7 +80,7 @@ void Kernel::sorry(const QString& text_, QWidget* widget_/* =nullptr */) {
     return;
   }
   GUI::CursorSaver cs(Qt::ArrowCursor);
-  KMessageBox::sorry(widget_ ? widget_ : m_widget, text_);
+  KMessageBox::error(widget_ ? widget_ : m_widget, text_);
 }
 
 void Kernel::beginCommandGroup(const QString& name_) {

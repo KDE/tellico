@@ -318,7 +318,7 @@ void ImageWidget::slotScanImage() {
   if(!m_saneDevice.isEmpty() && !m_saneDeviceIsOpen) {
     m_saneDeviceIsOpen = m_saneWidget->openDevice(m_saneDevice);
     if(!m_saneDeviceIsOpen) {
-      KMessageBox::sorry(this, i18n("Opening the selected scanner failed."));
+      KMessageBox::error(this, i18n("Opening the selected scanner failed."));
       m_saneDevice.clear();
     }
   }
@@ -409,7 +409,7 @@ void ImageWidget::slotLinkOnlyClicked() {
   // if the user is trying to link and can't before there's no information about the url
   // then let him know that
   if(link && m_originalURL.isEmpty()) {
-    KMessageBox::sorry(this, i18n("Saving a link is only possible for newly added images."));
+    KMessageBox::error(this, i18n("Saving a link is only possible for newly added images."));
     m_cbLinkOnly->setChecked(false);
     return;
   }

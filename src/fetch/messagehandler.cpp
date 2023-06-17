@@ -37,7 +37,7 @@ void ManagerMessage::send(const QString& message_, Type type_) {
   GUI::CursorSaver cs(Qt::ArrowCursor);
   // errors and warnings get a message box
   if(type_ == Error && GUI::Proxy::widget()) {
-    KMessageBox::sorry(GUI::Proxy::widget(), message_);
+    KMessageBox::error(GUI::Proxy::widget(), message_);
 //                       QString(), // caption
 //                       KMessageBox::Options(KMessageBox::Notify | KMessageBox::AllowLink));
   } else if(type_ == Warning && GUI::Proxy::widget()) {

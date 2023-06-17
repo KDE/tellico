@@ -401,7 +401,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
 bool CSVImporter::validImport() const {
   // at least one column has to be defined
   if(!m_hasAssignedFields) {
-    KMessageBox::sorry(m_widget, i18n("At least one column must be assigned to a field. "
+    KMessageBox::error(m_widget, i18n("At least one column must be assigned to a field. "
                                       "Only assigned columns will be imported."));
   }
   return m_hasAssignedFields;
