@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-16 00:47+0000\n"
-"PO-Revision-Date: 2023-05-18 05:57+0200\n"
+"POT-Creation-Date: 2023-06-17 00:49+0000\n"
+"PO-Revision-Date: 2023-06-16 06:45+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -879,7 +879,7 @@ msgstr "საკვანძო სიტყვები"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
-#: src/fetch/opdsfetcher.cpp:352 src/field.cpp:202
+#: src/fetch/opdsfetcher.cpp:353 src/field.cpp:202
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
@@ -4115,35 +4115,30 @@ msgstr "ფრანგული"
 msgid "Numista (%1)"
 msgstr "Numista ბმული (%1)"
 
-#: src/fetch/opdsfetcher.cpp:201
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the file - %1."
+#: src/fetch/opdsfetcher.cpp:202
+#, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellico -ის შეცდომა ფაილის ჩატვირთვისას - %1."
+msgstr "Tellico-ის შეცდომა ODPS კატალოგის აღწერის წაკითხვისას."
 
-#: src/fetch/opdsfetcher.cpp:342
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#: src/fetch/opdsfetcher.cpp:343
+#, kde-format
 msgid "OPDS Catalog"
-msgstr "ფაილების კატალოგი"
+msgstr "OPDS კატალოგი"
 
-#: src/fetch/opdsfetcher.cpp:367
-#, fuzzy, kde-format
-#| msgid "Catalog Number"
+#: src/fetch/opdsfetcher.cpp:368
+#, kde-format
 msgid "Catalog: "
-msgstr "კატალოგის ნომერი"
+msgstr "კატალოგი: "
 
-#: src/fetch/opdsfetcher.cpp:372
-#, fuzzy, kde-format
-#| msgid "Enter the host name of the server."
+#: src/fetch/opdsfetcher.cpp:373
+#, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr "შეიყვანეთ სერვერის ჰოსტის სახელი."
+msgstr "შეიყვანეთ ODPS სერვერის ბმული."
 
-#: src/fetch/opdsfetcher.cpp:377
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#: src/fetch/opdsfetcher.cpp:378
+#, kde-format
 msgid "&Verify Catalog"
-msgstr "ფაილების კატალოგი"
+msgstr "&კატალოგის გადამოწმება"
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format

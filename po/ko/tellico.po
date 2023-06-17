@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-16 00:47+0000\n"
+"POT-Creation-Date: 2023-06-17 00:49+0000\n"
 "PO-Revision-Date: 2023-04-22 00:08+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -892,7 +892,7 @@ msgstr "키워드"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
-#: src/fetch/opdsfetcher.cpp:352 src/field.cpp:202
+#: src/fetch/opdsfetcher.cpp:353 src/field.cpp:202
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
@@ -4175,31 +4175,31 @@ msgstr "프랑스어"
 msgid "Numista (%1)"
 msgstr "Numista(%1)"
 
-#: src/fetch/opdsfetcher.cpp:201
+#: src/fetch/opdsfetcher.cpp:202
 #, fuzzy, kde-format
 #| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico is unable to read the search description in the OPDS catalog."
 msgstr "Tellico가 PDF 파일에서 메타데이터를 읽을 수 없습니다."
 
-#: src/fetch/opdsfetcher.cpp:342
+#: src/fetch/opdsfetcher.cpp:343
 #, fuzzy, kde-format
 #| msgid "File Catalog"
 msgid "OPDS Catalog"
 msgstr "파일 카탈로그"
 
-#: src/fetch/opdsfetcher.cpp:367
+#: src/fetch/opdsfetcher.cpp:368
 #, fuzzy, kde-format
 #| msgid "Catalog Number"
 msgid "Catalog: "
 msgstr "카탈로그 번호"
 
-#: src/fetch/opdsfetcher.cpp:372
+#: src/fetch/opdsfetcher.cpp:373
 #, fuzzy, kde-format
 #| msgid "Enter the host name of the server."
 msgid "Enter the link to the OPDS server."
 msgstr "서버의 호스트 이름을 입력하십시오."
 
-#: src/fetch/opdsfetcher.cpp:377
+#: src/fetch/opdsfetcher.cpp:378
 #, fuzzy, kde-format
 #| msgid "File Catalog"
 msgid "&Verify Catalog"

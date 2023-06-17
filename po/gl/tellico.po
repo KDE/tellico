@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-16 00:47+0000\n"
-"PO-Revision-Date: 2023-06-11 21:36+0200\n"
+"POT-Creation-Date: 2023-06-17 00:49+0000\n"
+"PO-Revision-Date: 2023-06-16 08:40+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -913,7 +913,7 @@ msgstr "Palabras clave"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
-#: src/fetch/opdsfetcher.cpp:352 src/field.cpp:202
+#: src/fetch/opdsfetcher.cpp:353 src/field.cpp:202
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
@@ -4219,35 +4219,30 @@ msgstr "Francés"
 msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
-#: src/fetch/opdsfetcher.cpp:201
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#: src/fetch/opdsfetcher.cpp:202
+#, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellico non puido ler metadato ningún do ficheiro PDF."
+msgstr "Tellico non pode ler a descrición da busca no catálogo de OPDS."
 
-#: src/fetch/opdsfetcher.cpp:342
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#: src/fetch/opdsfetcher.cpp:343
+#, kde-format
 msgid "OPDS Catalog"
-msgstr "Catálogo de ficheiros"
+msgstr "Catálogo de OPDS"
 
-#: src/fetch/opdsfetcher.cpp:367
-#, fuzzy, kde-format
-#| msgid "Catalog Number"
+#: src/fetch/opdsfetcher.cpp:368
+#, kde-format
 msgid "Catalog: "
-msgstr "Número no catálogo"
+msgstr "Catálogo: "
 
-#: src/fetch/opdsfetcher.cpp:372
-#, fuzzy, kde-format
-#| msgid "Enter the host name of the server."
+#: src/fetch/opdsfetcher.cpp:373
+#, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr "Insira o nome do servidor."
+msgstr "Insira a ligazón ao servidor de OPDS."
 
-#: src/fetch/opdsfetcher.cpp:377
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#: src/fetch/opdsfetcher.cpp:378
+#, kde-format
 msgid "&Verify Catalog"
-msgstr "Catálogo de ficheiros"
+msgstr "&Verificar o catálogo"
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format

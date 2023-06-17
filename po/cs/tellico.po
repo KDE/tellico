@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-16 00:47+0000\n"
+"POT-Creation-Date: 2023-06-17 00:49+0000\n"
 "PO-Revision-Date: 2023-03-15 14:32+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -905,7 +905,7 @@ msgstr "Klíčová slova"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
-#: src/fetch/opdsfetcher.cpp:352 src/field.cpp:202
+#: src/fetch/opdsfetcher.cpp:353 src/field.cpp:202
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
@@ -4197,31 +4197,31 @@ msgstr "Francouzský"
 msgid "Numista (%1)"
 msgstr ""
 
-#: src/fetch/opdsfetcher.cpp:201
+#: src/fetch/opdsfetcher.cpp:202
 #, fuzzy, kde-format
 #| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico is unable to read the search description in the OPDS catalog."
 msgstr "Tellico nemůže načíst metadata z PDF souboru."
 
-#: src/fetch/opdsfetcher.cpp:342
+#: src/fetch/opdsfetcher.cpp:343
 #, fuzzy, kde-format
 #| msgid "File Catalog"
 msgid "OPDS Catalog"
 msgstr "Katalog souborů"
 
-#: src/fetch/opdsfetcher.cpp:367
+#: src/fetch/opdsfetcher.cpp:368
 #, fuzzy, kde-format
 #| msgid "Catalog Number"
 msgid "Catalog: "
 msgstr "Katalogové číslo"
 
-#: src/fetch/opdsfetcher.cpp:372
+#: src/fetch/opdsfetcher.cpp:373
 #, fuzzy, kde-format
 #| msgid "Enter the host name of the server."
 msgid "Enter the link to the OPDS server."
 msgstr "Zadejte host name serveru."
 
-#: src/fetch/opdsfetcher.cpp:377
+#: src/fetch/opdsfetcher.cpp:378
 #, fuzzy, kde-format
 #| msgid "File Catalog"
 msgid "&Verify Catalog"

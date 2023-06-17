@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-16 00:47+0000\n"
+"POT-Creation-Date: 2023-06-17 00:49+0000\n"
 "PO-Revision-Date: 2009-09-18 16:56+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -872,7 +872,7 @@ msgstr "Ключови думи"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
-#: src/fetch/opdsfetcher.cpp:352 src/field.cpp:202
+#: src/fetch/opdsfetcher.cpp:353 src/field.cpp:202
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
@@ -4116,27 +4116,27 @@ msgstr "Франция"
 msgid "Numista (%1)"
 msgstr ""
 
-#: src/fetch/opdsfetcher.cpp:201
+#: src/fetch/opdsfetcher.cpp:202
 #, fuzzy, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
 msgstr "Tellico не може да зареди файла %1."
 
-#: src/fetch/opdsfetcher.cpp:342
+#: src/fetch/opdsfetcher.cpp:343
 #, kde-format
 msgid "OPDS Catalog"
 msgstr ""
 
-#: src/fetch/opdsfetcher.cpp:367
+#: src/fetch/opdsfetcher.cpp:368
 #, fuzzy, kde-format
 msgid "Catalog: "
 msgstr "Номер от поредица"
 
-#: src/fetch/opdsfetcher.cpp:372
+#: src/fetch/opdsfetcher.cpp:373
 #, kde-format
 msgid "Enter the link to the OPDS server."
 msgstr ""
 
-#: src/fetch/opdsfetcher.cpp:377
+#: src/fetch/opdsfetcher.cpp:378
 #, fuzzy, kde-format
 msgid "&Verify Catalog"
 msgstr "Ново поле"

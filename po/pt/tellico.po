@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-16 00:47+0000\n"
+"POT-Creation-Date: 2023-06-17 00:49+0000\n"
 "PO-Revision-Date: 2023-06-15 11:47+0100\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -965,7 +965,7 @@ msgstr "Palavras-Chave"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
-#: src/fetch/opdsfetcher.cpp:352 src/field.cpp:202
+#: src/fetch/opdsfetcher.cpp:353 src/field.cpp:202
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
@@ -4288,28 +4288,28 @@ msgstr "Francês"
 msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
-#: src/fetch/opdsfetcher.cpp:201
+#: src/fetch/opdsfetcher.cpp:202
 #, fuzzy, kde-format
 #| msgid "Tellico is unable to read the search descripion in the OPDS catalog."
 msgid "Tellico is unable to read the search description in the OPDS catalog."
 msgstr "O Tellico não consegue ler a descrição da pesquisa no catálogo OPDS."
 
-#: src/fetch/opdsfetcher.cpp:342
+#: src/fetch/opdsfetcher.cpp:343
 #, kde-format
 msgid "OPDS Catalog"
 msgstr "Catálogo OPDS"
 
-#: src/fetch/opdsfetcher.cpp:367
+#: src/fetch/opdsfetcher.cpp:368
 #, kde-format
 msgid "Catalog: "
 msgstr "Catálogo: "
 
-#: src/fetch/opdsfetcher.cpp:372
+#: src/fetch/opdsfetcher.cpp:373
 #, kde-format
 msgid "Enter the link to the OPDS server."
 msgstr "Introduza o endereço do servidor OPDS."
 
-#: src/fetch/opdsfetcher.cpp:377
+#: src/fetch/opdsfetcher.cpp:378
 #, kde-format
 msgid "&Verify Catalog"
 msgstr "&Verificar o Catálogo"
