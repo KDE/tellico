@@ -355,7 +355,7 @@ msgstr "&Tipo:"
 #: src/collectionfieldsdialog.cpp:174
 #, kde-format
 msgid "The type of the field determines what values may be used. "
-msgstr "O tipo do campo determina que valores poden empregarse."
+msgstr "O tipo do campo determina que valores poden usarse."
 
 #: src/collectionfieldsdialog.cpp:175
 #, kde-format
@@ -405,14 +405,12 @@ msgstr "Un campo de <i>Imaxe</i> contén unha imaxe."
 #, kde-format
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
-msgstr ""
-"Un campo de <i>Data</i> pode empregarse para valores cun día, mes e ano."
+msgstr "Un campo de <i>Data</i> pode usarse para valores cun día, mes e ano."
 
 #: src/collectionfieldsdialog.cpp:184
 #, kde-format
 msgid "A <i>Rating</i> field uses stars to show a rating number. "
-msgstr ""
-"Un campo de <i>Cualificación</i> emprega estrelas para mostrar un nivel."
+msgstr "Un campo de <i>Cualificación</i> usa estrelas para amosar un nivel."
 
 #: src/collectionfieldsdialog.cpp:199
 #, kde-format
@@ -435,7 +433,7 @@ msgid ""
 "Extended field properties are used to specify things such as the "
 "corresponding bibtex field."
 msgstr ""
-"As propiedades ampliadas do campo empréganse para especificar cousas como o "
+"As propiedades ampliadas do campo úsanse para especificar cousas como o "
 "campo bibtex que corresponda."
 
 #: src/collectionfieldsdialog.cpp:230
@@ -571,8 +569,7 @@ msgstr "Permitir o agrupamento"
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
 msgstr ""
-"Se se marca poderá empregar o campo para agrupar as entradas na vista de "
-"grupo."
+"Se se marca poderá usar o campo para agrupar as entradas na vista de grupo."
 
 #: src/collectionfieldsdialog.cpp:342
 #, kde-format
@@ -2368,7 +2365,7 @@ msgstr ""
 #: src/configdialog.cpp:218
 #, kde-format
 msgid "&Show \"Tip of the Day\" at startup"
-msgstr "Mostrar os con&sellos ao iniciar"
+msgstr "Amosar os con&sellos ao iniciar"
 
 #: src/configdialog.cpp:219
 #, kde-format
@@ -2488,8 +2485,8 @@ msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
 msgstr ""
-"<qt>Unha lista de sufixos que poden empregarse en nomes persoais. Pode "
-"separar varios valores mediante puntos e comas.</qt>"
+"<qt>Unha lista de sufixos que poden usarse en nomes persoais. Pode separar "
+"varios valores mediante puntos e comas.</qt>"
 
 #: src/configdialog.cpp:312
 #, kde-format
@@ -2502,7 +2499,7 @@ msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
 msgstr ""
-"<qt>Unha lista de prefixos que se poden empregar cos apelidos. Pode separar "
+"<qt>Unha lista de prefixos que se poden usar cos apelidos. Pode separar "
 "varios valores con punto e coma.</qt>"
 
 #: src/configdialog.cpp:332
@@ -2595,8 +2592,8 @@ msgid ""
 "Select the template to use for the current type of collections. Not all "
 "templates will use the font and color settings."
 msgstr ""
-"Escolle o modelo a empregar para o tipo de coleccións escollido. Non todos "
-"os modelos empregan o tipo de letra e cores configurados."
+"Escolle o modelo a usar para o tipo de coleccións escollido. Non todos os "
+"modelos usan o tipo de letra e cores configurados."
 
 #: src/configdialog.cpp:442
 #, kde-format
@@ -2714,8 +2711,8 @@ msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
 "are automatically updated."
 msgstr ""
-"A orde das fontes de datos estabelece a que emprega Tellico cando se "
-"actualizan automaticamente as entradas."
+"A orde das fontes de datos define a que usa Tellico cando se actualizan "
+"automaticamente as entradas."
 
 #: src/configdialog.cpp:619
 #, kde-format
@@ -2979,7 +2976,7 @@ msgstr "Adaptar ao contido"
 #: src/detailedlistview.cpp:548
 #, kde-format
 msgid "Show All Columns"
-msgstr "Mostrar todas as columnas"
+msgstr "Amosar todas as columnas"
 
 #: src/detailedlistview.cpp:550
 #, kde-format
@@ -3496,7 +3493,7 @@ msgid ""
 "one you wish to use for this data source."
 msgstr ""
 "Amazon.com fornece datos de varios sitios distintos. Escolla o que queira "
-"empregar para esta fonte de datos."
+"usar para esta fonte de datos."
 
 #: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:213
 #: src/fetch/mobygamesfetcher.cpp:629 src/fetch/rpggeekfetcher.cpp:222
@@ -3629,8 +3626,8 @@ msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
 "access limits."
 msgstr ""
-"Pódese empregar as claves predeterminadas de Tellico pero as buscas poden "
-"acabar fallando por mor dos límites de acceso."
+"Pódese usar as claves predeterminadas de Tellico pero as buscas poden acabar "
+"fallando por mor dos límites de acceso."
 
 #: src/fetch/boardgamegeekfetcher.cpp:201
 #, kde-format
@@ -3839,7 +3836,7 @@ msgid ""
 "where field names are contained inside braces, such as <i>%{author}</i>. See "
 "the documentation for details.</p>"
 msgstr ""
-"<p>Insira os argumentos que se empregarán para buscar as actualizacións "
+"<p>Insira os argumentos que se usarán para buscar as actualizacións "
 "dispoñíbeis para unha entrada.</p><p>O formato é o mesmo que para os casos "
 "dependentes, onde os valores dos campos están contidos en corchetes, como <i>"
 "%{author}</i>. Consulte a documentación para coñecer máis detalles.</p>"
@@ -4334,7 +4331,7 @@ msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
 msgstr ""
-"Insira o formato de data que emprega o servidor z39.50. Tellico ha intentar "
+"Insira o formato de data que usa o servidor z39.50. Tellico ha intentar "
 "detectar automaticamente a mellor opción, no caso de escoller <i>Detectar "
 "automaticamente</i>."
 
@@ -4460,7 +4457,7 @@ msgid ""
 "the complete entry and show it in the view below."
 msgstr ""
 "Os resultados engádense á lista a medida que se van atopando. Se escolle un "
-"recuperarase a entrada enteira e mostrarase na vista en baixo."
+"recuperarase a entrada enteira e amosarase na vista en baixo."
 
 #: src/fetchdialog.cpp:278
 #, kde-format
@@ -4468,7 +4465,7 @@ msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
 msgstr ""
-"Se escolle unha entrada na lista de riba mostrarase aquí unha imaxe antes de "
+"Se escolle unha entrada na lista de riba amosarase aquí unha imaxe antes de "
 "engadila á colección actual"
 
 #: src/fetchdialog.cpp:286
@@ -4571,7 +4568,7 @@ msgid ""
 "100 values in your list will be used.</qt>"
 msgstr ""
 "<qt>Unha busca de ISBN pode conter como máximo 100 ISBN, polo que só se han "
-"empregar os primeiros 100 valores da lista.</qt>"
+"usar os primeiros 100 valores da lista.</qt>"
 
 #: src/fetcherconfigdialog.cpp:75
 #, kde-format
@@ -5645,7 +5642,7 @@ msgstr "Importar unha transformación XSL…"
 #: src/mainwindow.cpp:461
 #, kde-format
 msgid "Import using an XSL Transform"
-msgstr "Importa empregando unha transformación XSL"
+msgstr "Importa usando unha transformación XSL"
 
 #: src/mainwindow.cpp:474
 #, kde-format
@@ -5755,7 +5752,7 @@ msgstr "Exportar a transformación XSL…"
 #: src/mainwindow.cpp:524
 #, kde-format
 msgid "Export using an XSL Transform"
-msgstr "Exporta empregando unha transformación XSL"
+msgstr "Exporta usando unha transformación XSL"
 
 #: src/mainwindow.cpp:535
 #, kde-format
@@ -6163,7 +6160,7 @@ msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
-"A colección está a filtrarse para mostrar un subconxunto limitado das "
+"A colección está a filtrarse para amosar un subconxunto limitado das "
 "entradas. Só se imprimirán as visíbeis. Desexa continuar?"
 
 #: src/mainwindow.cpp:1451
@@ -6549,7 +6546,7 @@ msgstr ""
 #: src/translators/bibtexexporter.cpp:226
 #, kde-format
 msgid "Use URL package"
-msgstr "Empregar paquetes de URL"
+msgstr "Usar paquetes de URL"
 
 #: src/translators/bibtexexporter.cpp:228
 #, kde-format
@@ -6590,8 +6587,8 @@ msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will be "
 "escaped with either braces or quotation marks.</qt>"
 msgstr ""
-"<qt>O estilo de cita que se emprega ao exportar como bibtex. Todos os "
-"valores dos campos deben estar escapados ou con chaves ou con aspas.</qt>"
+"<qt>O estilo de cita que se usa ao exportar como bibtex. Todos os valores "
+"dos campos deben estar escapados ou con chaves ou con aspas.</qt>"
 
 #: src/translators/bibteximporter.cpp:106
 #, kde-format
@@ -6606,7 +6603,7 @@ msgstr "Non se atopou ningunha entrada correcta de bibtex no ficheiro, %1"
 #: src/translators/bibteximporter.cpp:345
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
-msgstr "Empregar a codificación Unicode (UTF-8)"
+msgstr "Usar a codificación Unicode (UTF-8)"
 
 #: src/translators/bibteximporter.cpp:346
 #, kde-format
@@ -6616,7 +6613,7 @@ msgstr "Le o ficheiro importado en Unicode (UTF-8)."
 #: src/translators/bibteximporter.cpp:347
 #, kde-format
 msgid "Use user locale (%1) encoding"
-msgstr "Empregar a codificación do local (%1)"
+msgstr "Usar a codificación do local (%1)"
 
 #: src/translators/bibteximporter.cpp:351
 #, kde-format
@@ -6693,7 +6690,7 @@ msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
 msgstr ""
-"Pode empregar outros caracteres ademais da coma para delimitar cada valor do "
+"Pode usar outros caracteres ademais da coma para delimitar cada valor do "
 "ficheiro."
 
 #: src/translators/csvexporter.cpp:154
@@ -6704,7 +6701,7 @@ msgstr "Coma"
 #: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:249
 #, kde-format
 msgid "Use a comma as the delimiter."
-msgstr "Emprega unha coma como delimitador."
+msgstr "Usa unha coma como delimitador."
 
 #: src/translators/csvexporter.cpp:160
 #, kde-format
@@ -6714,7 +6711,7 @@ msgstr "Punto e coma"
 #: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
-msgstr "Emprega un punto e coma como delimitador."
+msgstr "Usa un punto e coma como delimitador."
 
 #: src/translators/csvexporter.cpp:165
 #, kde-format
@@ -6724,7 +6721,7 @@ msgstr "Tabulador"
 #: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:259
 #, kde-format
 msgid "Use a tab as the delimiter."
-msgstr "Emprega unha tabulación como delimitador."
+msgstr "Usa unha tabulación como delimitador."
 
 #: src/translators/csvexporter.cpp:170
 #: xslt/report-templates/Group_Statistics.xsl:75
@@ -6735,13 +6732,13 @@ msgstr "Outros"
 #: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:264
 #, kde-format
 msgid "Use a custom string as the delimiter."
-msgstr "Emprega un texto personalizado como delimitador."
+msgstr "Usa un texto personalizado como delimitador."
 
 #: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:271
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
-"Unha cadea de texto personalizada, como un punto, pode empregarse como "
+"Unha cadea de texto personalizada, como un punto, pode usarse como "
 "delimitador."
 
 #: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:295
@@ -7146,7 +7143,7 @@ msgstr "Ficheiro XSLT:"
 #: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
-msgstr "Escolla o ficheiro XSLT que se ha empregar para transformar os datos."
+msgstr "Escolla o ficheiro XSLT que se ha usar para transformar os datos."
 
 #: src/viewstack.cpp:74
 #, kde-format
@@ -7178,7 +7175,7 @@ msgid ""
 "same way, with a semi-colon (;) separating each value.</p>\n"
 msgstr ""
 "<p>…que se un libro ten máis dun autor, debe separar os seus nomes\n"
-"mediante puntos e comas, para que Tellico saiba como dividilos e empregalos\n"
+"mediante puntos e comas, para que Tellico saiba como dividilos e usalos\n"
 "por separado.</p><p>Calquera outro campo que permita inserir múltiplos "
 "valores debe introducirse\n"
 "do mesmo xeito, co punto e coma (;) separando os valores.</p>\n"
@@ -7203,9 +7200,9 @@ msgid ""
 "position of the field in the list, which affects the placement in the entry\n"
 "editor.</p>\n"
 msgstr ""
-"<p>…que pode engadir, editar ou modificar os campos na colección empregando\n"
+"<p>…que pode engadir, editar ou modificar os campos na colección usando\n"
 "o editor de campos. Os botóns de frecha baixo a lista de campos poden "
-"empregarse\n"
+"usarse\n"
 "para cambiar a posición do campo na lista, o que afecta á posición no "
 "editor\n"
 "de entradas.</p>\n"
@@ -7222,9 +7219,9 @@ msgid ""
 "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
 "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
 msgstr ""
-"<p>…que se quere filtrar segundo unha caixa de selección, debe empregar o\n"
+"<p>…que se quere filtrar segundo unha caixa de selección, debe usar o\n"
 "valor «certo» . Se por exemplo quere filtrar de xeito que só se\n"
-"mostren os libros de ciencia ficción que non lese, marque o botón "
+"amosen os libros de ciencia ficción que non lese, marque o botón "
 "<em>Corresponder todo o seguinte</em>, indique que a primeira regra teña\n"
 "«Xénero» «contén» «Ciencia ficción» (sen aspas) e a segunda regra teña\n"
 "«Ler» «non contén» «certo» (sen aspas).</p>\n"
@@ -7238,10 +7235,9 @@ msgid ""
 "<p>To show only books which are by Weber or Bujold, for example, then\n"
 "type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
 msgstr ""
-"<p>…que se emprega un carácter que non é de palabra no filtro rápido, o "
-"texto\n"
+"<p>…que se usa un carácter que non é de palabra no filtro rápido, o texto\n"
 "interprétase como unha expresión regular.</p>\n"
-"<p>Para mostrar só libros escritos por Weber ou Bujold, por exemplo, entón\n"
+"<p>Para amosar só libros escritos por Weber ou Bujold, por exemplo, entón\n"
 "escriba «weber|bujold» (sen aspas) no campo do filtro.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
@@ -7310,7 +7306,7 @@ msgid ""
 "<p>...that you can import using any generic XSL stylesheet which\n"
 "outputs a valid Tellico XML file.</p>\n"
 msgstr ""
-"<p>…que pode importar empregando calquera folla de estilos XSL xenérica\n"
+"<p>…que pode importar usando calquera folla de estilos XSL xenérica\n"
 "que dea como resultado un ficheiro XML de Tellico correcto.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
@@ -7358,9 +7354,9 @@ msgid ""
 "types by respecting proper sorting at the same time. Consider for example\n"
 "a number field followed by a text subfield with entries 3b, 14a.</p>\n"
 msgstr ""
-"<p>…que pode empregar un campo cun valore derivado para combinar varios "
-"campos separados\n"
-"nun único campo. Simplemente escolla o tipo dependente e empregue unha\n"
+"<p>…que pode usar un campo cun valore derivado para combinar varios campos "
+"separados\n"
+"nun único campo. Simplemente escolla o tipo dependente e use unha\n"
 "descrición similar a «Valor: %{campoa}%{campob}» onde %{…} se substituirá\n"
 "polo valor do campo axeitado. É útil recoller varios valores nun único "
 "campo, por exemplo\n"
