@@ -501,7 +501,11 @@ void ImageWidget::loadImage(const QUrl& url_) {
 void ImageWidget::cancelScan() {
 #ifdef HAVE_KSANE
   if(m_saneWidget) {
+#if KSANE_VERSION < QT_VERSION_CHECK(22,4,0)
     m_saneWidget->scanCancel();
+#else
+    m_saneWidget->cancelScan();
+#endif
   }
 #endif
 }
