@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-17 00:49+0000\n"
-"PO-Revision-Date: 2023-05-01 16:46+0200\n"
+"PO-Revision-Date: 2023-06-21 16:16+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4237,34 +4237,30 @@ msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
 #: src/fetch/opdsfetcher.cpp:202
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellico non poteva leger alcun metadata ex le file PDF."
+msgstr ""
+"Tellico es incapace a leger le description de cerca in le catalogo OPDS."
 
 #: src/fetch/opdsfetcher.cpp:343
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "OPDS Catalog"
-msgstr "Catalogo de file"
+msgstr "Catalogo OPDS"
 
 #: src/fetch/opdsfetcher.cpp:368
-#, fuzzy, kde-format
-#| msgid "Catalog Number"
+#, kde-format
 msgid "Catalog: "
-msgstr "Numero de Catalogo"
+msgstr "Catalogo:"
 
 #: src/fetch/opdsfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "Enter the host name of the server."
+#, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr "Inserta le nomine de  hospite del servitor."
+msgstr "Inserta le ligamine al servitor de OPDS."
 
 #: src/fetch/opdsfetcher.cpp:378
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "&Verify Catalog"
-msgstr "Catalogo de file"
+msgstr "&Verifica Catalogo"
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
