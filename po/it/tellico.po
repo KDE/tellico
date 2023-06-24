@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-17 00:49+0000\n"
-"PO-Revision-Date: 2023-06-15 18:13+0200\n"
+"PO-Revision-Date: 2023-06-18 08:23+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -4239,10 +4239,10 @@ msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
 #: src/fetch/opdsfetcher.cpp:202
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellico non è riuscito a leggere i metadati del file PDF."
+msgstr ""
+"Tellico non è riuscito a leggere la descrizione di ricerca nel catalogo OPDS."
 
 #: src/fetch/opdsfetcher.cpp:343
 #, kde-format

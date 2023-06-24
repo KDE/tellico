@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-17 00:49+0000\n"
-"PO-Revision-Date: 2023-06-22 11:34+0200\n"
+"PO-Revision-Date: 2023-06-23 12:43+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -4200,12 +4200,12 @@ msgstr ""
 #: src/fetch/opdsfetcher.cpp:202
 #, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr ""
+msgstr "Tellico nemůže načíst popis hledání v katalogu OPDS."
 
 #: src/fetch/opdsfetcher.cpp:343
 #, kde-format
 msgid "OPDS Catalog"
-msgstr ""
+msgstr "Katalog OPDS"
 
 #: src/fetch/opdsfetcher.cpp:368
 #, kde-format
@@ -4215,12 +4215,12 @@ msgstr "Katalog: "
 #: src/fetch/opdsfetcher.cpp:373
 #, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr ""
+msgstr "Zadejte odkaz na server OPDS."
 
 #: src/fetch/opdsfetcher.cpp:378
 #, kde-format
 msgid "&Verify Catalog"
-msgstr ""
+msgstr "Ověřit &katalog"
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
