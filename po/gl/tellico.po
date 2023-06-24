@@ -2371,7 +2371,7 @@ msgstr "Amosar os con&sellos ao iniciar"
 #, kde-format
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
 msgstr ""
-"Se se marca mostraranse os «Consellos do día» cando se arrinque o programa."
+"Se se marca amosaranse os «Consellos do día» cando se arrinque o programa."
 
 #: src/configdialog.cpp:224
 #, kde-format
@@ -5192,7 +5192,7 @@ msgstr "© 2001-2023 Robby Stephenson"
 #: src/main.cpp:127
 #, kde-format
 msgid "Data source scripts"
-msgstr "Scripts de fonte de datos"
+msgstr "Guións de fonte de datos"
 
 #: src/main.cpp:132
 #, kde-format
@@ -7157,7 +7157,7 @@ msgid ""
 "Move the slider to change it."
 msgstr ""
 "O tamaño máximo de iconas é %1.\n"
-"Mova o control de desprazamento para cambialo."
+"Mova o control esvaradío para cambialo."
 
 #: src/viewstack.cpp:91
 #, kde-format
