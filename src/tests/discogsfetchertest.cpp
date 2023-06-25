@@ -49,6 +49,10 @@ void DiscogsFetcherTest::initTestCase() {
   }
 }
 
+void DiscogsFetcherTest::cleanup() {
+  m_needToWait = true;
+}
+
 void DiscogsFetcherTest::testTitle() {
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
@@ -64,7 +68,7 @@ void DiscogsFetcherTest::testTitle() {
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
   QVERIFY(results.size() > 0);
-  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until wee find the one we want
+  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until we find the one we want
   for(int i = 0; i < results.size(); ++i) {
     Tellico::Data::EntryPtr test = results.at(i);
     if(test->field(QStringLiteral("artist")).toLower() == QStringLiteral("evanescence")) {
@@ -86,7 +90,6 @@ void DiscogsFetcherTest::testTitle() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
   QVERIFY(!img.isNull());
-  m_needToWait = true;
 }
 
 void DiscogsFetcherTest::testPerson() {
@@ -117,7 +120,6 @@ void DiscogsFetcherTest::testPerson() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
   QVERIFY(!img.isNull());
-  m_needToWait = true;
 }
 
 void DiscogsFetcherTest::testKeyword() {
@@ -149,7 +151,6 @@ void DiscogsFetcherTest::testKeyword() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
   QVERIFY(!img.isNull());
-  m_needToWait = true;
 }
 
 void DiscogsFetcherTest::testBarcode() {
@@ -182,7 +183,6 @@ void DiscogsFetcherTest::testBarcode() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
   QVERIFY(!img.isNull());
-  m_needToWait = true;
 }
 
 // use the Raw query type to fully test the data for a Discogs release
@@ -221,7 +221,6 @@ void DiscogsFetcherTest::testRawData() {
   QCOMPARE(trackList.at(0), QStringLiteral("Haunted::Evanescence::4:04"));
 
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-  m_needToWait = true;
 }
 
 // do another check to make sure the Vinyl format is captured
@@ -257,7 +256,6 @@ void DiscogsFetcherTest::testRawDataVinyl() {
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
   QCOMPARE(trackList.count(), 14);
   QCOMPARE(trackList.at(0), QStringLiteral("Janie Jones::The Clash::2:05"));
-  m_needToWait = true;
 }
 
 void DiscogsFetcherTest::testUpdate() {

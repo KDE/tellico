@@ -36,6 +36,7 @@ public:
 
 private Q_SLOTS:
   void initTestCase();
+  void cleanup();
   void testTitle();
   void testPerson();
   void testKeyword();
