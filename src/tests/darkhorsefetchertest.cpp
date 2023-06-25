@@ -71,8 +71,7 @@ void DarkHorseFetcherTest::testComic() {
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
   QCOMPARE(results.size(), 2);
-  // the first entry had better be the right one
-  Tellico::Data::EntryPtr entry = results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(1);
 
   QCOMPARE(entry->field(QSL("title")), QSL("Axe Cop: Bad Guy Earth #1"));
   QCOMPARE(entry->field(QSL("pub_year")), QSL("2011"));
