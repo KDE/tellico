@@ -22,8 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
-
 #include "configdialog.h"
 #include "field.h"
 #include "collection.h"
@@ -54,7 +52,11 @@
 #include <KRecentDirs>
 
 #ifdef ENABLE_KNEWSTUFF3
-#include <KNS3/DownloadDialog>
+#if KNEWSTUFF_VERSION < QT_VERSION_CHECK(5, 91, 0)
+#include <KNS3/Button>
+#else
+#include <KNSWidgets/Button>
+#endif
 #endif
 
 #include <QSpinBox>
@@ -564,10 +566,20 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   whats = i18n("Click to install a new template directly.");
   b1->setWhatsThis(whats);
 
+#ifdef ENABLE_KNEWSTUFF3
+#if KNEWSTUFF_VERSION < QT_VERSION_CHECK(5, 91, 0)
+  auto b2 = new KNS3::Button(i18n("Download..."), QStringLiteral("tellico-template.knsrc"), box1);
+  connect(b2, &KNS3::Button::dialogFinished, this, &ConfigDialog::slotUpdateTemplates);
+#else
+  auto b2 = new KNSWidgets::Button(i18n("Download..."), QStringLiteral("tellico-template.knsrc"), box1);
+  connect(b2, &KNSWidgets::Button::dialogFinished, this, &ConfigDialog::slotUpdateTemplates);
+#endif
+#else
   QPushButton* b2 = new QPushButton(i18n("Download..."), box1);
-  box1HBoxLayout->addWidget(b2);
   b2->setIcon(QIcon::fromTheme(QStringLiteral("get-hot-new-stuff")));
-  connect(b2, &QAbstractButton::clicked, this, &ConfigDialog::slotDownloadTemplate);
+  b2->setEnabled(false);
+#endif
+  box1HBoxLayout->addWidget(b2);
   whats = i18n("Click to download additional templates.");
   b2->setWhatsThis(whats);
 
@@ -670,18 +682,10 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   m_removeSourceBtn = new QPushButton(i18n("&Delete"), frame);
   m_removeSourceBtn->setIcon(QIcon::fromTheme(QStringLiteral("list-remove")));
   m_removeSourceBtn->setWhatsThis(i18n("Click to delete the selected data source."));
-  m_newStuffBtn = new QPushButton(i18n("Download..."), frame);
-  m_newStuffBtn->setIcon(QIcon::fromTheme(QStringLiteral("get-hot-new-stuff")));
-  m_newStuffBtn->setWhatsThis(i18n("Click to download additional data sources."));
-  // TODO: disable button for now since checksum and signature checking are no longer possible with khotnewstuff
-  m_newStuffBtn->setEnabled(false);
 
   vlay->addWidget(newSourceBtn);
   vlay->addWidget(m_modifySourceBtn);
   vlay->addWidget(m_removeSourceBtn);
-  // separate newstuff button from the rest
-  vlay->addSpacing(16);
-  vlay->addWidget(m_newStuffBtn);
   vlay->addStretch(1);
 
   connect(newSourceBtn, &QAbstractButton::clicked, this, &ConfigDialog::slotNewSourceClicked);
@@ -689,7 +693,6 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   connect(m_moveUpSourceBtn, &QAbstractButton::clicked, this, &ConfigDialog::slotMoveUpSourceClicked);
   connect(m_moveDownSourceBtn, &QAbstractButton::clicked, this, &ConfigDialog::slotMoveDownSourceClicked);
   connect(m_removeSourceBtn, &QAbstractButton::clicked, this, &ConfigDialog::slotRemoveSourceClicked);
-  connect(m_newStuffBtn, &QAbstractButton::clicked, this, &ConfigDialog::slotNewStuffClicked);
 
   KAcceleratorManager::manage(frame);
   m_initializedPages |= Fetch;
@@ -1052,19 +1055,6 @@ void ConfigDialog::slotSelectedSourceChanged(QListWidgetItem* item_) {
   m_moveDownSourceBtn->setEnabled(row < m_sourceListWidget->count()-1);
 }
 
-void ConfigDialog::slotNewStuffClicked() {
-#ifdef ENABLE_KNEWSTUFF3
-  KNS3::DownloadDialog dialog(QStringLiteral("tellico-script.knsrc"), this);
-  dialog.exec();
-
-  KNS3::Entry::List entries = dialog.installedEntries();
-  if(!entries.isEmpty()) {
-    Fetch::Manager::self()->loadFetchers();
-    readFetchConfig();
-  }
-#endif
-}
-
 Tellico::FetcherInfoListItem* ConfigDialog::findItem(const QString& path_) const {
   if(path_.isEmpty()) {
     myDebug() << "empty path";
@@ -1179,17 +1169,17 @@ void ConfigDialog::slotInstallTemplate() {
   }
 }
 
-void ConfigDialog::slotDownloadTemplate() {
 #ifdef ENABLE_KNEWSTUFF3
-  KNS3::DownloadDialog dialog(QStringLiteral("tellico-template.knsrc"), this);
-  dialog.exec();
-
-  KNS3::Entry::List entries = dialog.installedEntries();
-  if(!entries.isEmpty()) {
+#if KNEWSTUFF_VERSION < QT_VERSION_CHECK(5, 91, 0)
+void ConfigDialog::slotUpdateTemplates(const QList<KNS3::Entry>& list_) {
+#else
+void ConfigDialog::slotUpdateTemplates(const QList<KNSCore::Entry>& list_) {
+#endif
+  if(!list_.isEmpty()) {
     loadTemplateList();
   }
-#endif
 }
+#endif
 
 void ConfigDialog::slotDeleteTemplate() {
   bool ok;

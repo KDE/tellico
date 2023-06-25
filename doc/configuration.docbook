@@ -212,13 +212,6 @@ existing ones may be modified or deleted, using the <guibutton>Modify...</guibut
 entry updating menus, can also be changed.
 </para>
 
-<warning>
-<para>
-Never install and run a script from an untrusted source. They are executed with the same permissions as the user,
-and as a result, could modify or delete files or otherwise mess up your system.
-</para>
-</warning>
-
 <para>
 Many of the data sources offer more information than the default fields in &appname;. Those other fields are
 shown on the right of the configuration box. If any of those fields are checked, they will be added
@@ -535,8 +528,15 @@ The collection type returned by the script must be set, along with the data form
 use the <link linkend="file-format">default &appname; &XML; format</link>, but it can also import other formats as well, such as bibtex.
 </para>
 
-<para>The full path to the application should be entered in the source options. Be aware that the application is executed on the system with the same permissions as the current user, so do not use scripts from untrusted sources. Check the boxes next to the search keys supported by the application, and enter the required command line options in the edit box. The search value will be inserted where <userinput>%1</userinput> appears.
+<para>The full path to the application should be entered in the source options. Check the boxes next to the search keys supported by the application, and enter the required command line options in the edit box. The search value will be inserted where <userinput>%1</userinput> appears.
 </para>
+
+<warning>
+<para>
+Never install and run a script from an untrusted source. They are executed with the same permissions as the user,
+and as a result, could modify or delete files or otherwise mess up your system.
+</para>
+</warning>
 
 <para>
 For updating entries already in the collection, the final check box and edit box are used to determine the command-line options. The entry fields used to find an update must be entered, in the same format as used for <link linkend="derived">derived value</link> fields.
