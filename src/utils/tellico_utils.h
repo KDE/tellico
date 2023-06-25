@@ -30,6 +30,7 @@
 class QString;
 class QStringList;
 class QPixmap;
+class QDialog;
 
 /**
  * This file contains utility functions.
@@ -60,6 +61,8 @@ namespace Tellico {
    * to the user's directory.
    */
   bool checkCommonXSLFile();
+
+  void activateDialog(QDialog* dialog);
 }
 
 #endif

@@ -82,7 +82,6 @@
 #include <KLocalizedString>
 #include <KConfig>
 #include <KStandardAction>
-#include <KWindowSystem>
 #include <KWindowConfig>
 #include <KMessageBox>
 #include <KTipDialog>
@@ -1165,8 +1164,9 @@ bool MainWindow::querySaveModified() {
   if(Data::Document::self()->isModified()) {
     QString str = i18n("The current file has been modified.\n"
                        "Do you want to save it?");
-    int want_save = KMessageBox::warningYesNoCancel(this, str, i18n("Unsaved Changes"),
-                                                    KStandardGuiItem::save(), KStandardGuiItem::discard());
+#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 100, 0)
+    auto want_save = KMessageBox::warningYesNoCancel(this, str, i18n("Unsaved Changes"),
+                                                     KStandardGuiItem::save(), KStandardGuiItem::discard());
     switch(want_save) {
       case KMessageBox::Yes:
         completed = fileSave();
@@ -1182,6 +1182,25 @@ bool MainWindow::querySaveModified() {
         completed = false;
         break;
     }
+#else
+    auto want_save = KMessageBox::warningTwoActionsCancel(this, str, i18n("Unsaved Changes"),
+                                                          KStandardGuiItem::save(), KStandardGuiItem::discard());
+    switch(want_save) {
+      case KMessageBox::ButtonCode::PrimaryAction:
+        completed = fileSave();
+        break;
+
+      case KMessageBox::ButtonCode::SecondaryAction:
+        Data::Document::self()->setModified(false);
+        completed = true;
+        break;
+
+      case KMessageBox::ButtonCode::Cancel:
+      default:
+        completed = false;
+        break;
+    }
+#endif
   }
 
   return completed;
@@ -1392,8 +1411,13 @@ bool MainWindow::fileSave() {
       KGuiItem yes(i18n("Save Images Separately"));
       KGuiItem no(i18n("Save Images in File"));
 
-      int res = KMessageBox::warningYesNo(this, msg, QString() /* caption */, yes, no);
+#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 100, 0)
+      auto res = KMessageBox::warningYesNo(this, msg, QString() /* caption */, yes, no);
       if(res == KMessageBox::No) {
+#else
+      auto res = KMessageBox::warningTwoActions(this, msg, QString() /* caption */, yes, no);
+      if(res == KMessageBox::ButtonCode::SecondaryAction) {
+#endif
         Config::setImageLocation(Config::ImagesInAppDir);
       }
       Config::setAskWriteImagesInFile(false);
@@ -1594,7 +1618,7 @@ void MainWindow::slotShowConfigDialog() {
     connect(m_configDlg, &QDialog::finished,
             this, &MainWindow::slotHideConfigDialog);
   } else {
-    KWindowSystem::activateWindow(m_configDlg->winId());
+    activateDialog(m_configDlg);
   }
   m_configDlg->show();
 }
@@ -1764,7 +1788,7 @@ void MainWindow::slotShowReportDialog() {
     connect(m_reportDlg, &QDialog::finished,
             this, &MainWindow::slotHideReportDialog);
   } else {
-    KWindowSystem::activateWindow(m_reportDlg->winId());
+    activateDialog(m_reportDlg);
   }
   m_reportDlg->show();
 }
@@ -1794,7 +1818,7 @@ void MainWindow::slotShowFilterDialog() {
     connect(m_filterDlg, &QDialog::finished,
             this, &MainWindow::slotHideFilterDialog);
   } else {
-    KWindowSystem::activateWindow(m_filterDlg->winId());
+    activateDialog(m_filterDlg);
   }
   m_filterDlg->setFilter(m_detailedView->filter());
   m_filterDlg->show();
@@ -1896,7 +1920,7 @@ void MainWindow::slotShowCollectionFieldsDialog() {
     connect(m_collFieldsDlg, &QDialog::finished,
             this, &MainWindow::slotHideCollectionFieldsDialog);
   } else {
-    KWindowSystem::activateWindow(m_collFieldsDlg->winId());
+    activateDialog(m_collFieldsDlg);
   }
   m_collFieldsDlg->show();
 }
@@ -2013,7 +2037,7 @@ void MainWindow::slotShowStringMacroDialog() {
     m_stringMacroDlg->setLabels(i18n("Macro"), i18n("String"));
     connect(m_stringMacroDlg, &QDialog::finished, this, &MainWindow::slotStringMacroDialogFinished);
   } else {
-    KWindowSystem::activateWindow(m_stringMacroDlg->winId());
+    activateDialog(m_stringMacroDlg);
   }
   m_stringMacroDlg->show();
 }
@@ -2043,7 +2067,7 @@ void MainWindow::slotShowBibtexKeyDialog() {
     connect(m_bibtexKeyDlg, &BibtexKeyDialog::signalUpdateFilter,
             this, &MainWindow::slotUpdateFilter);
   } else {
-    KWindowSystem::activateWindow(m_bibtexKeyDlg->winId());
+    activateDialog(m_bibtexKeyDlg);
   }
   m_bibtexKeyDlg->show();
 }
@@ -2068,8 +2092,7 @@ void MainWindow::slotEditDialogFinished() {
 void MainWindow::slotShowEntryEditor() {
   m_toggleEntryEditor->setChecked(true);
   m_editDialog->show();
-
-  KWindowSystem::activateWindow(m_editDialog->winId());
+  activateDialog(m_editDialog);
 }
 
 void MainWindow::slotConvertToBibliography() {
@@ -2112,7 +2135,7 @@ void MainWindow::slotShowFetchDialog() {
     connect(m_fetchDlg, &QDialog::finished, this, &MainWindow::slotHideFetchDialog);
     connect(Controller::self(), &Controller::collectionAdded, m_fetchDlg, &FetchDialog::slotResetCollection);
   } else {
-    KWindowSystem::activateWindow(m_fetchDlg->winId());
+    activateDialog(m_fetchDlg);
   }
   m_fetchDlg->show();
 }

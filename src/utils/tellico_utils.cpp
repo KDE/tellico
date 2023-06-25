@@ -35,6 +35,7 @@
 #include <QDateTime>
 #include <QUrl>
 #include <QSet>
+#include <QDialog>
 
 QStringList Tellico::findAllSubDirs(const QString& dir_) {
   if(dir_.isEmpty()) {
@@ -155,4 +156,11 @@ bool Tellico::checkCommonXSLFile() {
   }
   QUrl dest = QUrl::fromLocalFile(userCommonFile);
   return KIO::file_copy(src, dest)->exec();
+}
+
+void Tellico::activateDialog(QDialog* dlg_) {
+  Q_ASSERT(dlg_);
+  dlg_->show();
+  dlg_->raise();
+  dlg_->activateWindow();
 }
