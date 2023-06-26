@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 00:49+0000\n"
+"POT-Creation-Date: 2023-06-26 00:51+0000\n"
 "PO-Revision-Date: 2011-12-11 07:08+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -171,7 +171,7 @@ msgstr "Naam"
 msgid "Collection Size"
 msgstr "Sammeln-Feller"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1629
+#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1653
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Indrääg tosamen: %1"
@@ -717,8 +717,8 @@ msgstr "En Feld mit en afleddt Weert mutt en Weertvörlaag hebben."
 #: src/collections/musiccollection.cpp:31
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
-#: src/configdialog.cpp:143 src/configdialog.cpp:170 src/configdialog.cpp:184
-#: src/configdialog.cpp:201 src/configdialog.cpp:1134
+#: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
+#: src/configdialog.cpp:203 src/configdialog.cpp:1124
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -2166,7 +2166,7 @@ msgid "Delete Filter"
 msgstr "Filter wegmaken"
 
 #: src/commands/modifyentries.cpp:50 src/commands/modifyentries.cpp:70
-#: src/entryeditdialog.cpp:383
+#: src/entryeditdialog.cpp:391 src/entryeditdialog.cpp:395
 #, kde-format
 msgid "Modify Entries"
 msgstr "Indrääg ännern"
@@ -2205,7 +2205,7 @@ msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
 msgstr "%1 inboken"
 
-#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:306
+#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:313
 #, kde-format
 msgid "Rename Collection"
 msgstr "Sammeln ümnömen"
@@ -2386,39 +2386,39 @@ msgstr "Vörlaag för de Klöör för rutheevt Text"
 msgid "Template link color"
 msgstr "Vörlaag-Markerenklöör"
 
-#: src/configdialog.cpp:96
+#: src/configdialog.cpp:98
 #, kde-format
 msgid "Configure Tellico"
 msgstr "Tellico instellen"
 
-#: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:338
+#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
+#: src/configdialog.cpp:340
 #, kde-format
 msgid "Printing"
 msgstr "Drucken"
 
-#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:415
+#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
+#: src/configdialog.cpp:417
 #, kde-format
 msgid "Templates"
 msgstr "Vörlagen"
 
-#: src/configdialog.cpp:149 src/configdialog.cpp:190 src/configdialog.cpp:609
+#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:621
 #, kde-format
 msgid "Data Sources"
 msgstr "Datenborns"
 
-#: src/configdialog.cpp:202
+#: src/configdialog.cpp:204
 #, kde-format
 msgid "General Options"
 msgstr "Allmeen Optschonen"
 
-#: src/configdialog.cpp:213
+#: src/configdialog.cpp:215
 #, kde-format
 msgid "&Reopen file at startup"
 msgstr "Datei bi't Starten &wedder opmaken"
 
-#: src/configdialog.cpp:214
+#: src/configdialog.cpp:216
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
@@ -2426,36 +2426,36 @@ msgid ""
 msgstr ""
 "Wenn anmaakt, warrt de tolest opmaakt Datei bi't Starten wedder opmaakt."
 
-#: src/configdialog.cpp:219
+#: src/configdialog.cpp:221
 #, fuzzy, kde-format
 #| msgid "matches regexp"
 msgid "&Enable regular expressions in quick filter"
 msgstr "fallt ünner reguleer Utdruck"
 
-#: src/configdialog.cpp:220
+#: src/configdialog.cpp:222
 #, fuzzy, kde-format
 #| msgid "If checked, the field names will be printed as table headers."
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr "Wenn anmaakt, warrt Feldnaams as Tabellenköpp druckt."
 
-#: src/configdialog.cpp:225
+#: src/configdialog.cpp:227
 #, kde-format
 msgid "&Show \"Tip of the Day\" at startup"
 msgstr "\"Tipp för Vundaag\" bi't Starten &wiesen"
 
-#: src/configdialog.cpp:226
+#: src/configdialog.cpp:228
 #, kde-format
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
 msgstr ""
 "Wenn anmaakt, warrt de \"Tipp för vundaag\" bi't Starten wedder opmaakt."
 
-#: src/configdialog.cpp:231
+#: src/configdialog.cpp:233
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "Nettkamera för't Inlesen vun Streekkoden &anmaken"
 
-#: src/configdialog.cpp:232
+#: src/configdialog.cpp:234
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
@@ -2464,27 +2464,27 @@ msgstr ""
 "Wenn anmaakt, warrt en Nettkamera för't Inlesen vun Streekkoden för de Söök "
 "bruukt."
 
-#: src/configdialog.cpp:237
+#: src/configdialog.cpp:239
 #, kde-format
 msgid "Image Storage Options"
 msgstr "Optschonen för't Sekern vun Biller"
 
-#: src/configdialog.cpp:239
+#: src/configdialog.cpp:241
 #, kde-format
 msgid "Store images in data file"
 msgstr "Biller as Datendatei sekern"
 
-#: src/configdialog.cpp:240
+#: src/configdialog.cpp:242
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "Biller binnen allmeen Programmorner sekern"
 
-#: src/configdialog.cpp:241
+#: src/configdialog.cpp:243
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "Biller binnen en Orner relativ to de Datendatei sekern"
 
-#: src/configdialog.cpp:242
+#: src/configdialog.cpp:244
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2495,37 +2495,37 @@ msgstr ""
 "langsamer), binnen den Tellico-Programmorner, oder binnen en Orner mit de "
 "sülve Steed as de Datendatei."
 
-#: src/configdialog.cpp:263 src/configdialog.cpp:347
+#: src/configdialog.cpp:265 src/configdialog.cpp:349
 #, kde-format
 msgid "Formatting Options"
 msgstr "Formateren-Optschonen"
 
-#: src/configdialog.cpp:268
+#: src/configdialog.cpp:270
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "&Titels un Naams automaatsch groot schrieven"
 
-#: src/configdialog.cpp:269
+#: src/configdialog.cpp:271
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr "Wenn anmaakt, warrt Titels un Naams automaatsch groot schreven."
 
-#: src/configdialog.cpp:274
+#: src/configdialog.cpp:276
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "Titels un Naams automaatsch &formateren"
 
-#: src/configdialog.cpp:275 src/configdialog.cpp:353
+#: src/configdialog.cpp:277 src/configdialog.cpp:355
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Wenn anmaakt, warrt Titels un Naams automaatsch formateert."
 
-#: src/configdialog.cpp:285
+#: src/configdialog.cpp:287
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "Keen &Grootschrieven:"
 
-#: src/configdialog.cpp:290
+#: src/configdialog.cpp:292
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2534,12 +2534,12 @@ msgstr ""
 "<qt>En List mit Wöör, de nich grootschreven warrn schöölt. Mehr Weerten mööt "
 "mit Streekpünkt scheedt wesen.</qt>"
 
-#: src/configdialog.cpp:296
+#: src/configdialog.cpp:298
 #, kde-format
 msgid "Artic&les:"
 msgstr "&Artikeln:"
 
-#: src/configdialog.cpp:301
+#: src/configdialog.cpp:303
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2549,12 +2549,12 @@ msgstr ""
 "<qt>En List mit Wöör, de as Artikeln bruukt warrt, wenn se dat eerste Woort "
 "vun en Titel sünd. Mehr Weerten mööt mit Streekpünkt scheedt wesen.</qt>"
 
-#: src/configdialog.cpp:308
+#: src/configdialog.cpp:310
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Persöönlich &Suffixen:"
 
-#: src/configdialog.cpp:313
+#: src/configdialog.cpp:315
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2563,12 +2563,12 @@ msgstr ""
 "<qt>En List mit Tosetten, de för Personennaams bruukt warrt. Mehr Weerten "
 "mööt mit Streekpünkt scheedt wesen.</qt>"
 
-#: src/configdialog.cpp:319
+#: src/configdialog.cpp:321
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "Familiennaam-&Prefixen:"
 
-#: src/configdialog.cpp:324
+#: src/configdialog.cpp:326
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2577,89 +2577,89 @@ msgstr ""
 "<qt>En List mit Vöranstellen, de för Familiennaams bruukt warrt. Mehr "
 "Weerten mööt mit Streekpünkt scheedt wesen.</qt>"
 
-#: src/configdialog.cpp:339
+#: src/configdialog.cpp:341
 #, kde-format
 msgid "Printing Options"
 msgstr "Druckoptschonen"
 
-#: src/configdialog.cpp:352
+#: src/configdialog.cpp:354
 #, kde-format
 msgid "&Format titles and names"
 msgstr "Titels un Naams &formateren"
 
-#: src/configdialog.cpp:357
+#: src/configdialog.cpp:359
 #, kde-format
 msgid "&Print field headers"
 msgstr "Feldköpp &drucken"
 
-#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Wenn anmaakt, warrt Feldnaams as Tabellenköpp druckt."
 
-#: src/configdialog.cpp:362
+#: src/configdialog.cpp:364
 #, kde-format
 msgid "Grouping Options"
 msgstr "Koppeloptschonen"
 
-#: src/configdialog.cpp:367
+#: src/configdialog.cpp:369
 #, kde-format
 msgid "&Group the entries"
 msgstr "Indrääg &tohoopkoppeln"
 
-#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Wenn anmaakt, warrt de Indrääg na dat utsöchte Feld tohoopkoppelt."
 
-#: src/configdialog.cpp:372
+#: src/configdialog.cpp:374
 #, kde-format
 msgid "Image Options"
 msgstr "Bildoptschonen"
 
-#: src/configdialog.cpp:378
+#: src/configdialog.cpp:380
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "Gröttst Bild&breed:"
 
-#: src/configdialog.cpp:387
+#: src/configdialog.cpp:389
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Gröttst Bildbreed för den Utdruck. De Bildproportschoon warrt wohrt."
 
-#: src/configdialog.cpp:393
+#: src/configdialog.cpp:395
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "&Gröttst Bildhööchde:"
 
-#: src/configdialog.cpp:402
+#: src/configdialog.cpp:404
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Gröttst Bildhööchde för den Utdruck. De Bildproportschoon warrt wohrt."
 
-#: src/configdialog.cpp:416
+#: src/configdialog.cpp:418
 #, kde-format
 msgid "Template Options"
 msgstr "Vörlaag-Optschonen"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:364
+#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:364
 #: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
 msgstr "Sammeln&typ:"
 
-#: src/configdialog.cpp:437
+#: src/configdialog.cpp:439
 #, kde-format
 msgid "Template:"
 msgstr "Vörlaag:"
 
-#: src/configdialog.cpp:442
+#: src/configdialog.cpp:444
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2668,12 +2668,12 @@ msgstr ""
 "Söök en Vörlaag för de aktuelle Sammeln ut. Nich all Vörlagen bruukt de "
 "Instellen för Schriftoort un Klören."
 
-#: src/configdialog.cpp:449
+#: src/configdialog.cpp:451
 #, kde-format
 msgid "&Preview..."
 msgstr "&Vöransicht..."
 
-#: src/configdialog.cpp:450
+#: src/configdialog.cpp:452
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "En Vöransicht vun de Vörlaag wiesen"
@@ -2683,108 +2683,108 @@ msgstr "En Vöransicht vun de Vörlaag wiesen"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:467
+#: src/configdialog.cpp:469
 #, kde-format
 msgid "Font Options"
 msgstr "Schriftinstellen"
 
-#: src/configdialog.cpp:474
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "Font:"
 msgstr "Schriftoort:"
 
-#: src/configdialog.cpp:480
+#: src/configdialog.cpp:482
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "Disse Schriftoort warrt na de Indragansicht-Vörlaag övergeven."
 
-#: src/configdialog.cpp:484
+#: src/configdialog.cpp:486
 #, kde-format
 msgid "Size:"
 msgstr "Grött:"
 
-#: src/configdialog.cpp:496
+#: src/configdialog.cpp:498
 #, kde-format
 msgid "Color Options"
 msgstr "Klööroptschonen"
 
-#: src/configdialog.cpp:503
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "Background color:"
 msgstr "Achtergrundklöör:"
 
-#: src/configdialog.cpp:509
+#: src/configdialog.cpp:511
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Disse Klöör warrt na de Indragansicht-Vörlaag övergeven."
 
-#: src/configdialog.cpp:513
+#: src/configdialog.cpp:515
 #, kde-format
 msgid "Text color:"
 msgstr "Textklöör:"
 
-#: src/configdialog.cpp:522
+#: src/configdialog.cpp:524
 #, kde-format
 msgid "Highlight color:"
 msgstr "Markerenklöör:"
 
-#: src/configdialog.cpp:531
+#: src/configdialog.cpp:533
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "Klöör för rutheevt Text:"
 
-#: src/configdialog.cpp:540
+#: src/configdialog.cpp:542
 #, fuzzy, kde-format
 #| msgid "Text color:"
 msgid "Link color:"
 msgstr "Textklöör:"
 
-#: src/configdialog.cpp:549
+#: src/configdialog.cpp:551
 #, kde-format
 msgid "Manage Templates"
 msgstr "Vörlagen plegen"
 
-#: src/configdialog.cpp:560
+#: src/configdialog.cpp:562
 #, kde-format
 msgid "Install..."
 msgstr "Installeren..."
 
-#: src/configdialog.cpp:564
+#: src/configdialog.cpp:566
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Klick hier, wenn Du direktemang en nieg Vörlaag installeren wullt."
 
-#: src/configdialog.cpp:567 src/configdialog.cpp:673
+#: src/configdialog.cpp:571 src/configdialog.cpp:574 src/configdialog.cpp:578
 #, kde-format
 msgid "Download..."
 msgstr "Daalladen..."
 
-#: src/configdialog.cpp:571
+#: src/configdialog.cpp:583
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Klick hier, wenn Du mehr Vörlagen daalladen wullt."
 
-#: src/configdialog.cpp:574
+#: src/configdialog.cpp:586
 #, kde-format
 msgid "Delete..."
 msgstr "Wegdoon..."
 
-#: src/configdialog.cpp:578
+#: src/configdialog.cpp:590
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Klick hier, wenn Du installeert Vörlagen utsöken un wegmaken wullt."
 
-#: src/configdialog.cpp:610
+#: src/configdialog.cpp:622
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Datenborn-Optschonen"
 
-#: src/configdialog.cpp:631
+#: src/configdialog.cpp:643
 #, kde-format
 msgid "Move &Up"
 msgstr "Na &baven"
 
-#: src/configdialog.cpp:634 src/configdialog.cpp:639
+#: src/configdialog.cpp:646 src/configdialog.cpp:651
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2793,66 +2793,61 @@ msgstr ""
 "De Reeg vun Datenborns leggt de Reeg för automaatsche Opfrischen vun Indrääg "
 "fast, de Tellico bruukt."
 
-#: src/configdialog.cpp:636
+#: src/configdialog.cpp:648
 #, kde-format
 msgid "Move &Down"
 msgstr "Na &nerrn"
 
-#: src/configdialog.cpp:646
+#: src/configdialog.cpp:658
 #, kde-format
 msgid "Filter by type:"
 msgstr "Typfilter:"
 
-#: src/configdialog.cpp:664
+#: src/configdialog.cpp:676
 #, kde-format
 msgid "&New..."
 msgstr "&Nieg..."
 
-#: src/configdialog.cpp:666
+#: src/configdialog.cpp:678
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Klick hier, wenn Du en nieg Datenborn tofögen wullt."
 
-#: src/configdialog.cpp:667
+#: src/configdialog.cpp:679
 #, kde-format
 msgid "&Modify..."
 msgstr "Ä&nnern..."
 
-#: src/configdialog.cpp:669
+#: src/configdialog.cpp:681
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Klick hier, wenn Du den markeert Datenborn ännern wullt."
 
-#: src/configdialog.cpp:670
+#: src/configdialog.cpp:682
 #, kde-format
 msgid "&Delete"
 msgstr "&Wegdoon"
 
-#: src/configdialog.cpp:672
+#: src/configdialog.cpp:684
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Klick hier, wenn Du den markeert Datenborn wegdoon wullt."
 
-#: src/configdialog.cpp:675
-#, kde-format
-msgid "Click to download additional data sources."
-msgstr "Klick hier, wenn Du mehr Datenborns daalladen wullt."
-
-#: src/configdialog.cpp:1166 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1156 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:125
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "XSL Files"
 msgstr "Dateien"
 
-#: src/configdialog.cpp:1167
+#: src/configdialog.cpp:1157
 #, fuzzy, kde-format
 #| msgid "Templates"
 msgid "Template Packages"
 msgstr "Vörlagen"
 
-#: src/configdialog.cpp:1168 src/importdialog.cpp:439 src/mainwindow.cpp:1262
-#: src/mainwindow.cpp:1432 src/reportdialog.cpp:428 src/reportdialog.cpp:443
+#: src/configdialog.cpp:1158 src/importdialog.cpp:439 src/mainwindow.cpp:1281
+#: src/mainwindow.cpp:1456 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -2867,12 +2862,12 @@ msgstr "Vörlagen"
 msgid "All Files"
 msgstr "*|All Dateien"
 
-#: src/configdialog.cpp:1197
+#: src/configdialog.cpp:1187
 #, kde-format
 msgid "Delete Template"
 msgstr "Vörlaag wegdoon"
 
-#: src/configdialog.cpp:1198
+#: src/configdialog.cpp:1188
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Söök de Vörlaag ut, de Du wegdoon wullt:"
@@ -2909,22 +2904,22 @@ msgstr "Indrääg wegdoon"
 msgid "&Sort By"
 msgstr "&Sorteren na"
 
-#: src/controller.cpp:589 src/mainwindow.cpp:605
+#: src/controller.cpp:589 src/mainwindow.cpp:604
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "Indrag &bewerken..."
 
-#: src/controller.cpp:590 src/mainwindow.cpp:612
+#: src/controller.cpp:590 src/mainwindow.cpp:611
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "Indrag &verdubbeln"
 
-#: src/controller.cpp:591 src/mainwindow.cpp:706
+#: src/controller.cpp:591 src/mainwindow.cpp:705
 #, kde-format
 msgid "&Update Entry"
 msgstr "Indrag &opfrischen"
 
-#: src/controller.cpp:592 src/mainwindow.cpp:619
+#: src/controller.cpp:592 src/mainwindow.cpp:618
 #, kde-format
 msgid "&Delete Entry"
 msgstr "Indrag &wegdoon"
@@ -3065,54 +3060,54 @@ msgstr "All Striepen wiesen"
 msgid "Hide All Columns"
 msgstr "All Striepen versteken"
 
-#: src/document.cpp:210 src/mainwindow.cpp:1376
+#: src/document.cpp:210 src/mainwindow.cpp:1395
 #, kde-format
 msgid "Saving file..."
 msgstr "Datei warrt sekert..."
 
-#: src/entryeditdialog.cpp:70 src/entryeditdialog.cpp:404
-#: src/entryeditdialog.cpp:426 src/entryeditdialog.cpp:521
+#: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:417
+#: src/entryeditdialog.cpp:439 src/entryeditdialog.cpp:534
 #, kde-format
 msgid "Edit Entry"
 msgstr "Indrag bewerken"
 
-#: src/entryeditdialog.cpp:85
+#: src/entryeditdialog.cpp:86
 #, kde-format
 msgid "&New Entry"
 msgstr "&Nieg Indrag"
 
-#: src/entryeditdialog.cpp:90 src/entryeditdialog.cpp:131
-#: src/entryeditdialog.cpp:436 src/entryeditdialog.cpp:542
+#: src/entryeditdialog.cpp:91 src/entryeditdialog.cpp:132
+#: src/entryeditdialog.cpp:449 src/entryeditdialog.cpp:555
 #, kde-format
 msgid "Sa&ve Entry"
 msgstr "Indrag &sekern"
 
-#: src/entryeditdialog.cpp:334
+#: src/entryeditdialog.cpp:335
 #, kde-format
 msgid "Do you really want to modify these entries?"
 msgstr "Wullt Du disse Indrääg redig ännern?"
 
-#: src/entryeditdialog.cpp:336
+#: src/entryeditdialog.cpp:338 src/entryeditdialog.cpp:342
 #, kde-format
 msgid "Modify Multiple Entries"
 msgstr "Indrääg ännern"
 
-#: src/entryeditdialog.cpp:377
+#: src/entryeditdialog.cpp:384
 #, kde-format
 msgid "A value is required for the following fields. Do you want to continue?"
 msgstr "För dat nakamen Feld deit en Weert noot. Wullt Du wiedermaken?"
 
-#: src/entryeditdialog.cpp:472
+#: src/entryeditdialog.cpp:485
 #, kde-format
 msgid "Edit Entries"
 msgstr "Indrääg bewerken"
 
-#: src/entryeditdialog.cpp:498
+#: src/entryeditdialog.cpp:511
 #, kde-format
 msgid "Sa&ve Entries"
 msgstr "Indrääg &sekern"
 
-#: src/entryeditdialog.cpp:657
+#: src/entryeditdialog.cpp:670
 #, kde-format
 msgid ""
 "The current entry has been modified.\n"
@@ -3121,12 +3116,13 @@ msgstr ""
 "De aktuell Indrag wöör ännert.\n"
 "Wullt du de Ännern ingeven?"
 
-#: src/entryeditdialog.cpp:660
+#: src/entryeditdialog.cpp:673
 #, kde-format
 msgid "Save Entry"
 msgstr "Indrag sekern"
 
-#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1168
+#: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
+#: src/mainwindow.cpp:1168 src/mainwindow.cpp:1186
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Nich sekerte Ännern"
@@ -3136,7 +3132,7 @@ msgstr "Nich sekerte Ännern"
 msgid "(Empty)"
 msgstr "(Leddig)"
 
-#: src/entryiconview.cpp:65 src/mainwindow.cpp:873
+#: src/entryiconview.cpp:65 src/mainwindow.cpp:872
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3166,7 +3162,7 @@ msgstr ""
 "<qt><b>%1</b> geev mehr Resultaten torüch, de villicht op den aktuellen "
 "Indrag <b>%2</b> passt. Bitte den richtigen utsöken.</qt>"
 
-#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:343
+#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:351 src/tellico_kernel.cpp:363
 #, kde-format
 msgid "Merge Entries"
 msgstr "Indrääg tosamenföhren"
@@ -3206,7 +3202,7 @@ msgstr "<b>%1</b> warrt opfrischt..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico kann de Stilvörlaag för Standardindrääg nich finnen."
 
-#: src/entryview.cpp:334 src/mainwindow.cpp:1782
+#: src/entryview.cpp:334 src/mainwindow.cpp:1806
 #, kde-format
 msgid "Please check your installation."
 msgstr "Bitte prööv Dien Installatschoon."
@@ -4594,7 +4590,7 @@ msgstr "&Söken"
 msgid "&Stop"
 msgstr "An&hollen"
 
-#: src/fetchdialog.cpp:142 src/mainwindow.cpp:595
+#: src/fetchdialog.cpp:142 src/mainwindow.cpp:594
 #, kde-format
 msgid "Internet Search"
 msgstr "In't Internet söken"
@@ -4916,8 +4912,8 @@ msgstr "Filternaam:"
 msgid "&Save Filter"
 msgstr "Filter &sekern"
 
-#: src/filterview.cpp:191 src/mainwindow.cpp:568 src/mainwindow.cpp:778
-#: src/mainwindow.cpp:796
+#: src/filterview.cpp:191 src/mainwindow.cpp:567 src/mainwindow.cpp:777
+#: src/mainwindow.cpp:795
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
@@ -4953,8 +4949,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Koppel"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1096 src/mainwindow.cpp:1717
-#: src/mainwindow.cpp:1751 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1095 src/mainwindow.cpp:1741
+#: src/mainwindow.cpp:1775 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Lüüd"
@@ -5110,7 +5106,7 @@ msgstr "Wegmaken"
 msgid "Save link only"
 msgstr "Bloots Link sekern"
 
-#: src/gui/imagewidget.cpp:290 src/gui/imagewidget.cpp:526
+#: src/gui/imagewidget.cpp:290 src/gui/imagewidget.cpp:530
 #, fuzzy, kde-format
 #| msgid "Small Image"
 msgid "All Images (%1)"
@@ -5260,12 +5256,12 @@ msgstr ""
 "bloots mit passen Sammelntypen. De Indrääg mööt nipp un nau na de sülve Reeg "
 "sorteert wesen, dormit se sik tosamenföhren laat."
 
-#: src/importdialog.cpp:149 src/mainwindow.cpp:371
+#: src/importdialog.cpp:149 src/mainwindow.cpp:370
 #, kde-format
 msgid "&Import"
 msgstr "&Importeren"
 
-#: src/importdialog.cpp:371 src/mainwindow.cpp:1258 src/mainwindow.cpp:1430
+#: src/importdialog.cpp:371 src/mainwindow.cpp:1277 src/mainwindow.cpp:1454
 #: src/translators/tellicozipexporter.cpp:54
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
@@ -5273,7 +5269,7 @@ msgid "Tellico Files"
 msgstr "Tellico-Zip-Datei"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1260 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:71
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "XML Files"
@@ -5516,843 +5512,843 @@ msgstr "<Dateinaam> as MODS-Datei importeren"
 msgid "File to open"
 msgstr "Datei, de Du opmaken wullt"
 
-#: src/mainwindow.cpp:255
+#: src/mainwindow.cpp:254
 #, fuzzy, kde-format
 #| msgid "Wine Collection"
 msgid "New Collection"
 msgstr "Wiensammeln"
 
-#: src/mainwindow.cpp:257
+#: src/mainwindow.cpp:256
 #, kde-format
 msgid "Create a new collection"
 msgstr "En nieg Sammeln opstellen"
 
-#: src/mainwindow.cpp:276
+#: src/mainwindow.cpp:275
 #, kde-format
 msgid "New &Book Collection"
 msgstr "Nieg &Bökersammeln"
 
-#: src/mainwindow.cpp:277
+#: src/mainwindow.cpp:276
 #, kde-format
 msgid "Create a new book collection"
 msgstr "En nieg Bökersammeln opstellen"
 
-#: src/mainwindow.cpp:279
+#: src/mainwindow.cpp:278
 #, kde-format
 msgid "New B&ibliography"
 msgstr "Nieg &Bökerverteken"
 
-#: src/mainwindow.cpp:280
+#: src/mainwindow.cpp:279
 #, kde-format
 msgid "Create a new bibtex bibliography"
 msgstr "En nieg Bibtex-Bökerverteken opstellen"
 
-#: src/mainwindow.cpp:282
+#: src/mainwindow.cpp:281
 #, kde-format
 msgid "New &Comic Book Collection"
 msgstr "Nieg &Comicbooksammeln"
 
-#: src/mainwindow.cpp:283
+#: src/mainwindow.cpp:282
 #, kde-format
 msgid "Create a new comic book collection"
 msgstr "En nieg Comicbooksammeln opstellen"
 
-#: src/mainwindow.cpp:285
+#: src/mainwindow.cpp:284
 #, kde-format
 msgid "New &Video Collection"
 msgstr "Nieg &Videosammeln"
 
-#: src/mainwindow.cpp:286
+#: src/mainwindow.cpp:285
 #, kde-format
 msgid "Create a new video collection"
 msgstr "En nieg Videosammeln opstellen"
 
-#: src/mainwindow.cpp:288
+#: src/mainwindow.cpp:287
 #, kde-format
 msgid "New &Music Collection"
 msgstr "Nieg &Musiksammeln"
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:288
 #, kde-format
 msgid "Create a new music collection"
 msgstr "En nieg Musiksammeln opstellen"
 
-#: src/mainwindow.cpp:291
+#: src/mainwindow.cpp:290
 #, kde-format
 msgid "New C&oin Collection"
 msgstr "Nieg &Müntsammeln"
 
-#: src/mainwindow.cpp:292
+#: src/mainwindow.cpp:291
 #, kde-format
 msgid "Create a new coin collection"
 msgstr "En nieg Müntsammeln opstellen"
 
-#: src/mainwindow.cpp:294
+#: src/mainwindow.cpp:293
 #, kde-format
 msgid "New &Stamp Collection"
 msgstr "Nieg &Breefmarkensammeln"
 
-#: src/mainwindow.cpp:295
+#: src/mainwindow.cpp:294
 #, kde-format
 msgid "Create a new stamp collection"
 msgstr "En nieg Breefmarkensammeln opstellen"
 
-#: src/mainwindow.cpp:297
+#: src/mainwindow.cpp:296
 #, kde-format
 msgid "New C&ard Collection"
 msgstr "Nieg &Koortensammeln"
 
-#: src/mainwindow.cpp:298
+#: src/mainwindow.cpp:297
 #, kde-format
 msgid "Create a new trading card collection"
 msgstr "En nieg Koortensammeln opstellen"
 
-#: src/mainwindow.cpp:300
+#: src/mainwindow.cpp:299
 #, kde-format
 msgid "New &Wine Collection"
 msgstr "Nieg &Wiensammeln"
 
-#: src/mainwindow.cpp:301
+#: src/mainwindow.cpp:300
 #, kde-format
 msgid "Create a new wine collection"
 msgstr "En nieg Wiensammeln opstellen"
 
-#: src/mainwindow.cpp:303
+#: src/mainwindow.cpp:302
 #, kde-format
 msgid "New &Game Collection"
 msgstr "Nieg &Speelsammeln"
 
-#: src/mainwindow.cpp:304
+#: src/mainwindow.cpp:303
 #, kde-format
 msgid "Create a new game collection"
 msgstr "En nieg Speelsammeln opstellen"
 
-#: src/mainwindow.cpp:306
+#: src/mainwindow.cpp:305
 #, kde-format
 msgid "New Boa&rd Game Collection"
 msgstr "Nieg &Brettspeelsammeln"
 
-#: src/mainwindow.cpp:307
+#: src/mainwindow.cpp:306
 #, kde-format
 msgid "Create a new board game collection"
 msgstr "En nieg Brettspeelsammeln opstellen"
 
-#: src/mainwindow.cpp:309
+#: src/mainwindow.cpp:308
 #, kde-format
 msgid "New &File Catalog"
 msgstr "Nieg &Dateikataloog"
 
-#: src/mainwindow.cpp:310
+#: src/mainwindow.cpp:309
 #, kde-format
 msgid "Create a new file catalog"
 msgstr "Nieg Dateikataloog opstellen"
 
-#: src/mainwindow.cpp:313
+#: src/mainwindow.cpp:312
 #, kde-format
 msgid "New C&ustom Collection"
 msgstr "Nieg &egen Sammeln"
 
-#: src/mainwindow.cpp:314
+#: src/mainwindow.cpp:313
 #, kde-format
 msgid "Create a new custom collection"
 msgstr "En nieg egen Sammeln opstellen"
 
-#: src/mainwindow.cpp:325
+#: src/mainwindow.cpp:324
 #, kde-format
 msgid "Open an existing document"
 msgstr "En vörhannen Dokment opmaken"
 
-#: src/mainwindow.cpp:327
+#: src/mainwindow.cpp:326
 #, kde-format
 msgid "Open a recently used file"
 msgstr "En tolest bruukt Datei opmaken"
 
-#: src/mainwindow.cpp:329
+#: src/mainwindow.cpp:328
 #, kde-format
 msgid "Save the document"
 msgstr "Dat Dokment sekern"
 
-#: src/mainwindow.cpp:331
+#: src/mainwindow.cpp:330
 #, kde-format
 msgid "Save the document as a different file..."
 msgstr "Dat Dokment as anner Datei sekern..."
 
-#: src/mainwindow.cpp:335
+#: src/mainwindow.cpp:334
 #, fuzzy, kde-format
 #| msgid "Manage Templates"
 msgid "Save As Template..."
 msgstr "Vörlagen plegen"
 
-#: src/mainwindow.cpp:337
+#: src/mainwindow.cpp:336
 #, fuzzy, kde-format
 #| msgid "Create a new collection"
 msgid "Save as a collection template"
 msgstr "En nieg Sammeln opstellen"
 
-#: src/mainwindow.cpp:340
+#: src/mainwindow.cpp:339
 #, fuzzy, kde-format
 #| msgid "Print the contents of the document..."
 msgid "Print the contents of the collection..."
 msgstr "Den Inholt vun't Dokment drucken..."
 
-#: src/mainwindow.cpp:356
+#: src/mainwindow.cpp:355
 #, fuzzy, kde-format
 #| msgid "Print the contents of the document..."
 msgid "Preview the contents of the collection..."
 msgstr "Den Inholt vun't Dokment drucken..."
 
-#: src/mainwindow.cpp:360
+#: src/mainwindow.cpp:359
 #, kde-format
 msgid "Quit the application"
 msgstr "Dat Programm utmaken"
 
-#: src/mainwindow.cpp:373
+#: src/mainwindow.cpp:372
 #, kde-format
 msgid "Import the collection data from other formats"
 msgstr "De Sammeln-Daten ut anner Formaten importeren"
 
-#: src/mainwindow.cpp:389
+#: src/mainwindow.cpp:388
 #, kde-format
 msgid "Import Tellico Data..."
 msgstr "Tellico-Daten importeren..."
 
-#: src/mainwindow.cpp:390
+#: src/mainwindow.cpp:389
 #, kde-format
 msgid "Import another Tellico data file"
 msgstr "En anner Tellico-Datendatei importeren"
 
-#: src/mainwindow.cpp:393
+#: src/mainwindow.cpp:392
 #, kde-format
 msgid "Import CSV Data..."
 msgstr "CSV-Daten importeren..."
 
-#: src/mainwindow.cpp:394
+#: src/mainwindow.cpp:393
 #, kde-format
 msgid "Import a CSV file"
 msgstr "En CSV-Datei importeren"
 
-#: src/mainwindow.cpp:396
+#: src/mainwindow.cpp:395
 #, kde-format
 msgid "Import MODS Data..."
 msgstr "MODS-Daten importeren..."
 
-#: src/mainwindow.cpp:397
+#: src/mainwindow.cpp:396
 #, kde-format
 msgid "Import a MODS data file"
 msgstr "En MODS-Datendatei importeren"
 
-#: src/mainwindow.cpp:399
+#: src/mainwindow.cpp:398
 #, kde-format
 msgid "Import Alexandria Data..."
 msgstr "Alexandria-Daten importeren..."
 
-#: src/mainwindow.cpp:400
+#: src/mainwindow.cpp:399
 #, kde-format
 msgid "Import data from the Alexandria book collection manager"
 msgstr "Daten ut den Bökersammelnpleger \"Alexandria\" importeren"
 
-#: src/mainwindow.cpp:403
+#: src/mainwindow.cpp:402
 #, kde-format
 msgid "Import Delicious Library Data..."
 msgstr "Daten ut \"Delicious Library\" importeren..."
 
-#: src/mainwindow.cpp:404
+#: src/mainwindow.cpp:403
 #, kde-format
 msgid "Import data from Delicious Library"
 msgstr "Daten ut \"Delicious Library\" importeren"
 
-#: src/mainwindow.cpp:407
+#: src/mainwindow.cpp:406
 #, fuzzy, kde-format
 #| msgid "Import Tellico Data..."
 msgid "Import Collectorz Data..."
 msgstr "Tellico-Daten importeren..."
 
-#: src/mainwindow.cpp:408
+#: src/mainwindow.cpp:407
 #, fuzzy, kde-format
 #| msgid "Import data from Referencer"
 msgid "Import data from Collectorz"
 msgstr "Daten ut \"Referencer\" importeren"
 
-#: src/mainwindow.cpp:411
+#: src/mainwindow.cpp:410
 #, fuzzy, kde-format
 #| msgid "Import GCstar Data..."
 msgid "Import Data Crow Data..."
 msgstr "GCstar-Daten importeren..."
 
-#: src/mainwindow.cpp:412
+#: src/mainwindow.cpp:411
 #, fuzzy, kde-format
 #| msgid "Import data from Referencer"
 msgid "Import data from Data Crow"
 msgstr "Daten ut \"Referencer\" importeren"
 
-#: src/mainwindow.cpp:415
+#: src/mainwindow.cpp:414
 #, kde-format
 msgid "Import Referencer Data..."
 msgstr "Daten ut \"Referencer\" importeren..."
 
-#: src/mainwindow.cpp:416
+#: src/mainwindow.cpp:415
 #, kde-format
 msgid "Import data from Referencer"
 msgstr "Daten ut \"Referencer\" importeren"
 
-#: src/mainwindow.cpp:419
+#: src/mainwindow.cpp:418
 #, kde-format
 msgid "Import Bibtex Data..."
 msgstr "Bibtex-Daten importeren..."
 
-#: src/mainwindow.cpp:420
+#: src/mainwindow.cpp:419
 #, kde-format
 msgid "Import a bibtex bibliography file"
 msgstr "En Bibtex-Bökervertekendatei importeren"
 
-#: src/mainwindow.cpp:425
+#: src/mainwindow.cpp:424
 #, kde-format
 msgid "Import Bibtexml Data..."
 msgstr "Bibtexml-Daten importeren..."
 
-#: src/mainwindow.cpp:426
+#: src/mainwindow.cpp:425
 #, kde-format
 msgid "Import a Bibtexml bibliography file"
 msgstr "En Bibtexml-Bökervertekendatei importeren"
 
-#: src/mainwindow.cpp:428
+#: src/mainwindow.cpp:427
 #, kde-format
 msgid "Import RIS Data..."
 msgstr "RIS-Daten importeren..."
 
-#: src/mainwindow.cpp:429
+#: src/mainwindow.cpp:428
 #, kde-format
 msgid "Import an RIS reference file"
 msgstr "En RIS-Referenzdatei importeren"
 
-#: src/mainwindow.cpp:431
+#: src/mainwindow.cpp:430
 #, fuzzy, kde-format
 #| msgid "Import CSV Data..."
 msgid "Import MARC Data..."
 msgstr "CSV-Daten importeren..."
 
-#: src/mainwindow.cpp:432
+#: src/mainwindow.cpp:431
 #, fuzzy, kde-format
 #| msgid "Importing data..."
 msgid "Import MARC data"
 msgstr "Daten warrt importeert..."
 
-#: src/mainwindow.cpp:439
+#: src/mainwindow.cpp:438
 #, kde-format
 msgid "Import Goodreads Collection..."
 msgstr "Goodreads-Sammeln importeren…"
 
-#: src/mainwindow.cpp:440
+#: src/mainwindow.cpp:439
 #, kde-format
 msgid "Import a collection from Goodreads.com"
 msgstr "En Sammeln vun \"Goodreads.com\" importeren"
 
-#: src/mainwindow.cpp:442
+#: src/mainwindow.cpp:441
 #, fuzzy, kde-format
 #| msgid "Import Goodreads Collection..."
 msgid "Import LibraryThing Collection..."
 msgstr "Goodreads-Sammeln importeren…"
 
-#: src/mainwindow.cpp:443
+#: src/mainwindow.cpp:442
 #, fuzzy, kde-format
 #| msgid "Import a collection from Goodreads.com"
 msgid "Import a collection from LibraryThing.com"
 msgstr "En Sammeln vun \"Goodreads.com\" importeren"
 
-#: src/mainwindow.cpp:445
+#: src/mainwindow.cpp:444
 #, kde-format
 msgid "Import PDF File..."
 msgstr "PDF-Datei importeren..."
 
-#: src/mainwindow.cpp:446
+#: src/mainwindow.cpp:445
 #, kde-format
 msgid "Import a PDF file"
 msgstr "En PDF-Datei importeren"
 
-#: src/mainwindow.cpp:448
+#: src/mainwindow.cpp:447
 #, kde-format
 msgid "Import Audio File Metadata..."
 msgstr "Klangdatei-Metadaten importeren..."
 
-#: src/mainwindow.cpp:449
+#: src/mainwindow.cpp:448
 #, kde-format
 msgid "Import meta-data from audio files"
 msgstr "Metadaten ut Klangdateien importeren"
 
-#: src/mainwindow.cpp:454
+#: src/mainwindow.cpp:453
 #, kde-format
 msgid "Import Audio CD Data..."
 msgstr "Klang-CD-Daten importeren..."
 
-#: src/mainwindow.cpp:455
+#: src/mainwindow.cpp:454
 #, kde-format
 msgid "Import audio CD information"
 msgstr "Klang-CD-Informatschonen importeren"
 
-#: src/mainwindow.cpp:460
+#: src/mainwindow.cpp:459
 #, kde-format
 msgid "Import GCstar Data..."
 msgstr "GCstar-Daten importeren..."
 
-#: src/mainwindow.cpp:461
+#: src/mainwindow.cpp:460
 #, kde-format
 msgid "Import a GCstar data file"
 msgstr "En GCstar-Datendatei importeren"
 
-#: src/mainwindow.cpp:464
+#: src/mainwindow.cpp:463
 #, kde-format
 msgid "Import Griffith Data..."
 msgstr "Griffith-Daten importeren..."
 
-#: src/mainwindow.cpp:465
+#: src/mainwindow.cpp:464
 #, kde-format
 msgid "Import a Griffith database"
 msgstr "En Griffith-Datenbank importeren"
 
-#: src/mainwindow.cpp:468
+#: src/mainwindow.cpp:467
 #, kde-format
 msgid "Import Ant Movie Catalog Data..."
 msgstr "\"Ant Movie\"-Kataloogdaten importeren..."
 
-#: src/mainwindow.cpp:469
+#: src/mainwindow.cpp:468
 #, kde-format
 msgid "Import an Ant Movie Catalog data file"
 msgstr "En \"Ant Movie\"-Kataloogdatendatei importeren"
 
-#: src/mainwindow.cpp:472
+#: src/mainwindow.cpp:471
 #, fuzzy, kde-format
 #| msgid "Import Goodreads Collection..."
 msgid "Import BoardGameGeek Collection..."
 msgstr "Goodreads-Sammeln importeren…"
 
-#: src/mainwindow.cpp:473
+#: src/mainwindow.cpp:472
 #, fuzzy, kde-format
 #| msgid "Import a collection from Goodreads.com"
 msgid "Import a collection from BoardGameGeek.com"
 msgstr "En Sammeln vun \"Goodreads.com\" importeren"
 
-#: src/mainwindow.cpp:475
+#: src/mainwindow.cpp:474
 #, fuzzy, kde-format
 #| msgid "Export to XML..."
 msgid "Import VinoXML..."
 msgstr "As XML exporteren..."
 
-#: src/mainwindow.cpp:476
+#: src/mainwindow.cpp:475
 #, fuzzy, kde-format
 #| msgid "Importing data..."
 msgid "Import VinoXML data"
 msgstr "Daten warrt importeert..."
 
-#: src/mainwindow.cpp:478
+#: src/mainwindow.cpp:477
 #, kde-format
 msgid "Import File Listing..."
 msgstr "Dateilist importeren..."
 
-#: src/mainwindow.cpp:479
+#: src/mainwindow.cpp:478
 #, kde-format
 msgid "Import information about files in a folder"
 msgstr "Informatschonen över Dateien binnen en Orner importeren"
 
-#: src/mainwindow.cpp:481
+#: src/mainwindow.cpp:480
 #, kde-format
 msgid "Import XSL Transform..."
 msgstr "XSL-Ümwanneln importeren..."
 
-#: src/mainwindow.cpp:482
+#: src/mainwindow.cpp:481
 #, kde-format
 msgid "Import using an XSL Transform"
 msgstr "XSL-Ümwanneln för't Importeren bruken"
 
-#: src/mainwindow.cpp:495
+#: src/mainwindow.cpp:494
 #, kde-format
 msgid "&Export"
 msgstr "&Exporteren"
 
-#: src/mainwindow.cpp:497
+#: src/mainwindow.cpp:496
 #, kde-format
 msgid "Export the collection data to other formats"
 msgstr "De Sammeln-Daten as anner Formaten exporteren"
 
-#: src/mainwindow.cpp:513
+#: src/mainwindow.cpp:512
 #, kde-format
 msgid "Export to XML..."
 msgstr "As XML exporteren..."
 
-#: src/mainwindow.cpp:514
+#: src/mainwindow.cpp:513
 #, kde-format
 msgid "Export to a Tellico XML file"
 msgstr "As Tellico-XML-Datei exporteren"
 
-#: src/mainwindow.cpp:517
+#: src/mainwindow.cpp:516
 #, kde-format
 msgid "Export to Zip..."
 msgstr "As Zip exporteren..."
 
-#: src/mainwindow.cpp:518
+#: src/mainwindow.cpp:517
 #, kde-format
 msgid "Export to a Tellico Zip file"
 msgstr "As Tellico-Zip-Datei exporteren"
 
-#: src/mainwindow.cpp:521
+#: src/mainwindow.cpp:520
 #, kde-format
 msgid "Export to HTML..."
 msgstr "As HTML exporteren..."
 
-#: src/mainwindow.cpp:522
+#: src/mainwindow.cpp:521
 #, kde-format
 msgid "Export to an HTML file"
 msgstr "As HTML-Datei exporteren"
 
-#: src/mainwindow.cpp:524
+#: src/mainwindow.cpp:523
 #, kde-format
 msgid "Export to CSV..."
 msgstr "As CSV exporteren..."
 
-#: src/mainwindow.cpp:525
+#: src/mainwindow.cpp:524
 #, kde-format
 msgid "Export to a comma-separated values file"
 msgstr "Na en Datei exporteren, de mit Kommas trennte Weerten bargt"
 
-#: src/mainwindow.cpp:527
+#: src/mainwindow.cpp:526
 #, kde-format
 msgid "Export to Alexandria..."
 msgstr "As \"Alexandria\" exporteren..."
 
-#: src/mainwindow.cpp:528
+#: src/mainwindow.cpp:527
 #, kde-format
 msgid "Export to an Alexandria library"
 msgstr "As \"Alexandria\"-Bibliotheek exporteren"
 
-#: src/mainwindow.cpp:531
+#: src/mainwindow.cpp:530
 #, kde-format
 msgid "Export to Bibtex..."
 msgstr "As Bibtex exporteren..."
 
-#: src/mainwindow.cpp:532
+#: src/mainwindow.cpp:531
 #, kde-format
 msgid "Export to a bibtex file"
 msgstr "As Bibtex-Datei exporteren"
 
-#: src/mainwindow.cpp:534
+#: src/mainwindow.cpp:533
 #, kde-format
 msgid "Export to Bibtexml..."
 msgstr "As Bibtexml exporteren..."
 
-#: src/mainwindow.cpp:535
+#: src/mainwindow.cpp:534
 #, kde-format
 msgid "Export to a Bibtexml file"
 msgstr "As Bibtexml-Datei exporteren"
 
-#: src/mainwindow.cpp:537
+#: src/mainwindow.cpp:536
 #, kde-format
 msgid "Export to ONIX..."
 msgstr "As ONIX exporteren..."
 
-#: src/mainwindow.cpp:538
+#: src/mainwindow.cpp:537
 #, kde-format
 msgid "Export to an ONIX file"
 msgstr "As ONIX-Datei exporteren"
 
-#: src/mainwindow.cpp:540
+#: src/mainwindow.cpp:539
 #, kde-format
 msgid "Export to GCstar..."
 msgstr "As GCstar exporteren..."
 
-#: src/mainwindow.cpp:541
+#: src/mainwindow.cpp:540
 #, kde-format
 msgid "Export to a GCstar data file"
 msgstr "As GCstar-Datendatei exporteren"
 
-#: src/mainwindow.cpp:544
+#: src/mainwindow.cpp:543
 #, kde-format
 msgid "Export XSL Transform..."
 msgstr "XSL-Ümwanneln exporteren..."
 
-#: src/mainwindow.cpp:545
+#: src/mainwindow.cpp:544
 #, kde-format
 msgid "Export using an XSL Transform"
 msgstr "XSL-Ümwanneln för't Exporteren bruken"
 
-#: src/mainwindow.cpp:556
+#: src/mainwindow.cpp:555
 #, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr "Den utsöchten Text na de Twischenaflaag knippen"
 
-#: src/mainwindow.cpp:558
+#: src/mainwindow.cpp:557
 #, kde-format
 msgid "Copy the selected text to the clipboard"
 msgstr "Den utsöchten Text na de Twischenaflaag koperen"
 
-#: src/mainwindow.cpp:560
+#: src/mainwindow.cpp:559
 #, kde-format
 msgid "Paste the clipboard contents"
 msgstr "Den Twischenaflaaginholt infögen"
 
-#: src/mainwindow.cpp:562
+#: src/mainwindow.cpp:561
 #, kde-format
 msgid "Select all the entries in the collection"
 msgstr "All Indrääg binnen de Sammeln utsöken"
 
-#: src/mainwindow.cpp:564
+#: src/mainwindow.cpp:563
 #, kde-format
 msgid "Deselect all the entries in the collection"
 msgstr "All Indrääg binnen de Sammeln afkören"
 
-#: src/mainwindow.cpp:567
+#: src/mainwindow.cpp:566
 #, kde-format
 msgid "Advanced &Filter..."
 msgstr "Verwiedert &Filter..."
 
-#: src/mainwindow.cpp:571 src/mainwindow.cpp:797
+#: src/mainwindow.cpp:570 src/mainwindow.cpp:796
 #, kde-format
 msgid "Filter the collection"
 msgstr "De Sammeln filtern"
 
-#: src/mainwindow.cpp:578
+#: src/mainwindow.cpp:577
 #, kde-format
 msgid "&New Entry..."
 msgstr "&Nieg Indrag..."
 
-#: src/mainwindow.cpp:580
+#: src/mainwindow.cpp:579
 #, fuzzy, kde-format
 #| msgid "&New Entry"
 msgid "New Entry"
 msgstr "&Nieg Indrag"
 
-#: src/mainwindow.cpp:582
+#: src/mainwindow.cpp:581
 #, kde-format
 msgid "Create a new entry"
 msgstr "En nieg Indrag opstellen"
 
-#: src/mainwindow.cpp:584
+#: src/mainwindow.cpp:583
 #, fuzzy, kde-format
 #| msgid "&Add Entry"
 msgid "Add Entry"
 msgstr "Indrag &tofögen"
 
-#: src/mainwindow.cpp:594
+#: src/mainwindow.cpp:593
 #, kde-format
 msgid "Internet Search..."
 msgstr "In't Internet söken..."
 
-#: src/mainwindow.cpp:598
+#: src/mainwindow.cpp:597
 #, kde-format
 msgid "Search the internet..."
 msgstr "Internetsöök..."
 
-#: src/mainwindow.cpp:608
+#: src/mainwindow.cpp:607
 #, kde-format
 msgid "Edit the selected entries"
 msgstr "De utsöchten Indrääg bewerken"
 
-#: src/mainwindow.cpp:615
+#: src/mainwindow.cpp:614
 #, kde-format
 msgid "Copy the selected entries"
 msgstr "De utsöchten Indrääg koperen"
 
-#: src/mainwindow.cpp:622
+#: src/mainwindow.cpp:621
 #, kde-format
 msgid "Delete the selected entries"
 msgstr "De utsöchten Indrääg wegdoon"
 
-#: src/mainwindow.cpp:626
+#: src/mainwindow.cpp:625
 #, kde-format
 msgid "&Merge Entries"
 msgstr "Indrääg &tosamenföhren"
 
-#: src/mainwindow.cpp:630
+#: src/mainwindow.cpp:629
 #, kde-format
 msgid "Merge the selected entries"
 msgstr "De utsöchten Indrääg tosamenföhren"
 
-#: src/mainwindow.cpp:634
+#: src/mainwindow.cpp:633
 #, kde-format
 msgid "Check-&out..."
 msgstr "&Utboken..."
 
-#: src/mainwindow.cpp:636
+#: src/mainwindow.cpp:635
 #, kde-format
 msgid "Check-out the selected items"
 msgstr "De utsöchten Saken utboken"
 
-#: src/mainwindow.cpp:639
+#: src/mainwindow.cpp:638
 #, kde-format
 msgid "Check-&in"
 msgstr "&Inboken"
 
-#: src/mainwindow.cpp:641
+#: src/mainwindow.cpp:640
 #, kde-format
 msgid "Check-in the selected items"
 msgstr "De utsöchten Saken inboken"
 
-#: src/mainwindow.cpp:644
+#: src/mainwindow.cpp:643
 #, kde-format
 msgid "&Rename Collection..."
 msgstr "&Sammeln ümnömen..."
 
-#: src/mainwindow.cpp:647
+#: src/mainwindow.cpp:646
 #, kde-format
 msgid "Rename the collection"
 msgstr "De Sammeln ümnömen"
 
-#: src/mainwindow.cpp:650
+#: src/mainwindow.cpp:649
 #, kde-format
 msgid "Collection &Fields..."
 msgstr "Sammeln-&Feller..."
 
-#: src/mainwindow.cpp:651
+#: src/mainwindow.cpp:650
 #, kde-format
 msgid "Fields"
 msgstr "Feller"
 
-#: src/mainwindow.cpp:654
+#: src/mainwindow.cpp:653
 #, kde-format
 msgid "Modify the collection fields"
 msgstr "Sammeln-Feller ännern"
 
-#: src/mainwindow.cpp:657
+#: src/mainwindow.cpp:656
 #, kde-format
 msgid "&Generate Reports..."
 msgstr "Berichten &opstellen..."
 
-#: src/mainwindow.cpp:658
+#: src/mainwindow.cpp:657
 #, kde-format
 msgid "Reports"
 msgstr "Berichten"
 
-#: src/mainwindow.cpp:660
+#: src/mainwindow.cpp:659
 #, kde-format
 msgid "Generate collection reports"
 msgstr "Sammelnberichten opstellen"
 
-#: src/mainwindow.cpp:663
+#: src/mainwindow.cpp:662
 #, kde-format
 msgid "Convert to &Bibliography"
 msgstr "Na &Bökerverteken ümwanneln"
 
-#: src/mainwindow.cpp:665
+#: src/mainwindow.cpp:664
 #, kde-format
 msgid "Convert a book collection to a bibliography"
 msgstr "Bökersammeln na en Bökerverteken ümwanneln"
 
-#: src/mainwindow.cpp:668
+#: src/mainwindow.cpp:667
 #, kde-format
 msgid "String &Macros..."
 msgstr "Tekenkeden-&Makros..."
 
-#: src/mainwindow.cpp:670
+#: src/mainwindow.cpp:669
 #, kde-format
 msgid "Edit the bibtex string macros"
 msgstr "De Bibtex-Tekenkeden-Makros bewerken"
 
-#: src/mainwindow.cpp:673
+#: src/mainwindow.cpp:672
 #, kde-format
 msgid "Check for Duplicate Keys..."
 msgstr "Na dubbelte Slötels söken"
 
-#: src/mainwindow.cpp:675
+#: src/mainwindow.cpp:674
 #, kde-format
 msgid "Check for duplicate citation keys"
 msgstr "Na dubbelte Zitaatslötels söken"
 
-#: src/mainwindow.cpp:685
+#: src/mainwindow.cpp:684
 #, kde-format
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "Bibtex na de &Twischenaflaag koperen"
 
-#: src/mainwindow.cpp:686
+#: src/mainwindow.cpp:685
 #, kde-format
 msgid "Copy bibtex citations to the clipboard"
 msgstr "Bibtex-Zitaten na de Twischenaflaag koperen"
 
-#: src/mainwindow.cpp:691
+#: src/mainwindow.cpp:690
 #, kde-format
 msgid "Cite Entry in &LyX"
 msgstr "Indrag in &LyX ziteren"
 
-#: src/mainwindow.cpp:692
+#: src/mainwindow.cpp:691
 #, kde-format
 msgid "Cite the selected entries in LyX"
 msgstr "De utsöchten Indrääg in LyX ziteren"
 
-#: src/mainwindow.cpp:708
+#: src/mainwindow.cpp:707
 #, kde-format
 msgctxt "Update Entry"
 msgid "Update"
 msgstr "Opfrischen"
 
-#: src/mainwindow.cpp:717
+#: src/mainwindow.cpp:716
 #, kde-format
 msgid "All Sources"
 msgstr "All Borns"
 
-#: src/mainwindow.cpp:718
+#: src/mainwindow.cpp:717
 #, kde-format
 msgid "Update entry data from all available sources"
 msgstr "Indrääg ut all verföögbor Borns opfrischen"
 
-#: src/mainwindow.cpp:729
+#: src/mainwindow.cpp:728
 #, kde-format
 msgid "Unlock Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:730
+#: src/mainwindow.cpp:729
 #, kde-format
 msgid "Unlock the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:732
+#: src/mainwindow.cpp:731
 #, kde-format
 msgid "Lock Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:733
+#: src/mainwindow.cpp:732
 #, kde-format
 msgid "Lock the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:738
+#: src/mainwindow.cpp:737
 #, kde-format
 msgid "Reset Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:739
+#: src/mainwindow.cpp:738
 #, kde-format
 msgid "Reset the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:742
+#: src/mainwindow.cpp:741
 #, fuzzy, kde-format
 #| msgid "Show Entry &Editor"
 msgid "Entry &Editor"
 msgstr "Indrag&editor wiesen"
 
-#: src/mainwindow.cpp:744
+#: src/mainwindow.cpp:743
 #, kde-format
 msgid "Enable/disable the editor"
 msgstr "Editor an- oder utmaken"
 
-#: src/mainwindow.cpp:764
+#: src/mainwindow.cpp:763
 #, kde-format
 msgid "Change Grouping"
 msgstr "Koppeltyp ännern"
 
-#: src/mainwindow.cpp:767
+#: src/mainwindow.cpp:766
 #, kde-format
 msgid "&Group Selection"
 msgstr "&Koppelköör"
 
-#: src/mainwindow.cpp:768
+#: src/mainwindow.cpp:767
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr "De Sammeln ehr Koppeltyp ännern"
 
-#: src/mainwindow.cpp:782
+#: src/mainwindow.cpp:781
 #, kde-format
 msgid "Filter here..."
 msgstr "Hier filtern..."
 
-#: src/mainwindow.cpp:847 src/mainwindow.cpp:850
+#: src/mainwindow.cpp:846 src/mainwindow.cpp:849
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
@@ -6361,13 +6357,13 @@ msgstr ""
 "<qt>De <i>Indragansicht</i> wiest en formateert Ansicht vun Indraginholden.</"
 "qt>"
 
-#: src/mainwindow.cpp:856
+#: src/mainwindow.cpp:855
 #, fuzzy, kde-format
 #| msgid "Collection Fields"
 msgid "Collection View"
 msgstr "Sammeln-Feller"
 
-#: src/mainwindow.cpp:863
+#: src/mainwindow.cpp:862
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
@@ -6376,19 +6372,19 @@ msgstr ""
 "<qt>De <i>Striepenansicht</i> wiest den Weert vun mehr Feller för elk Indrag."
 "</qt>"
 
-#: src/mainwindow.cpp:880
+#: src/mainwindow.cpp:879
 #, fuzzy, kde-format
 #| msgctxt "Group View XSL Template"
 #| msgid "Group View"
 msgid "Group View"
 msgstr "Koppelansicht"
 
-#: src/mainwindow.cpp:889
+#: src/mainwindow.cpp:888
 #, kde-format
 msgid "Groups"
 msgstr "Koppeln"
 
-#: src/mainwindow.cpp:890
+#: src/mainwindow.cpp:889
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
@@ -6397,12 +6393,12 @@ msgstr ""
 "<qt>De <i>Koppelansicht</i> sorteert de Indrääg na Koppeln, baseert op en "
 "utsöcht Feld.</qt>"
 
-#: src/mainwindow.cpp:965
+#: src/mainwindow.cpp:964
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Willkamen bi Tellico, den Sammelnpleger"
 
-#: src/mainwindow.cpp:967
+#: src/mainwindow.cpp:966
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6417,7 +6413,7 @@ msgstr ""
 "edit_search_internet\">Daalladen vun Daten</a> ut verscheden Internetborns "
 "tofögen.</h3>"
 
-#: src/mainwindow.cpp:1166
+#: src/mainwindow.cpp:1165
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6426,23 +6422,23 @@ msgstr ""
 "De aktuelle Datei wöör ännert.\n"
 "Wullt Du ehr sekern?"
 
-#: src/mainwindow.cpp:1202 src/mainwindow.cpp:1235
+#: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
 #, fuzzy, kde-format
 #| msgid "Create a new collection"
 msgid "Creating new collection..."
 msgstr "En nieg Sammeln opstellen"
 
-#: src/mainwindow.cpp:1255 src/mainwindow.cpp:1278 src/mainwindow.cpp:1296
+#: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
 #, kde-format
 msgid "Opening file..."
 msgstr "Datei warrt opmaakt..."
 
-#: src/mainwindow.cpp:1266
+#: src/mainwindow.cpp:1285
 #, kde-format
 msgid "Open File"
 msgstr "Datei opmaken"
 
-#: src/mainwindow.cpp:1387
+#: src/mainwindow.cpp:1406
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6454,32 +6450,32 @@ msgstr ""
 "langsamer. Wullt Du de Biller na den Tellico-Datenorner sekern?</p><p>Dien "
 "Köör lett sik ok later noch mit den Instellendialoog ännern.</p></qt>"
 
-#: src/mainwindow.cpp:1392
+#: src/mainwindow.cpp:1411
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Biller för sik sekern"
 
-#: src/mainwindow.cpp:1393
+#: src/mainwindow.cpp:1412
 #, kde-format
 msgid "Save Images in File"
 msgstr "Biller in Datei sekern"
 
-#: src/mainwindow.cpp:1428
+#: src/mainwindow.cpp:1452
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Datei warrt mit en nieg Dateinaam sekert..."
 
-#: src/mainwindow.cpp:1437
+#: src/mainwindow.cpp:1461
 #, kde-format
 msgid "Save As"
 msgstr "Sekern as"
 
-#: src/mainwindow.cpp:1503
+#: src/mainwindow.cpp:1527
 #, kde-format
 msgid "Printing..."
 msgstr "An't Drucken..."
 
-#: src/mainwindow.cpp:1507
+#: src/mainwindow.cpp:1531
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6488,27 +6484,27 @@ msgstr ""
 "De Sammeln warrt jüst filtert, dormit en Ünnersett vun Indrääg wiest warrt. "
 "Bloots sichtbor Indrääg warrt druckt. Wiedermaken?"
 
-#: src/mainwindow.cpp:1530
+#: src/mainwindow.cpp:1554
 #, kde-format
 msgid "Exiting..."
 msgstr "An't Beennen..."
 
-#: src/mainwindow.cpp:1636
+#: src/mainwindow.cpp:1660
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtert; %2 utsöcht)"
 
-#: src/mainwindow.cpp:1639
+#: src/mainwindow.cpp:1663
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtert)"
 
-#: src/mainwindow.cpp:1642
+#: src/mainwindow.cpp:1666
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 utsöcht)"
 
-#: src/mainwindow.cpp:1781 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1805 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:264
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6516,57 +6512,57 @@ msgstr "(%1 utsöcht)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico hett en Fehler bi't XSLT-Verarbeiden opdeckt."
 
-#: src/mainwindow.cpp:1913
+#: src/mainwindow.cpp:1937
 #, kde-format
 msgid "Importing data..."
 msgstr "Daten warrt importeert..."
 
-#: src/mainwindow.cpp:1924
+#: src/mainwindow.cpp:1948
 #, kde-format
 msgid "Import File"
 msgstr "Datei importeren"
 
-#: src/mainwindow.cpp:1937
+#: src/mainwindow.cpp:1961
 #, kde-format
 msgid "Import Directory"
 msgstr "Orner importeren"
 
-#: src/mainwindow.cpp:1961
+#: src/mainwindow.cpp:1985
 #, kde-format
 msgid "Exporting data..."
 msgstr "Daten warrt exporteert..."
 
-#: src/mainwindow.cpp:1984
+#: src/mainwindow.cpp:2008
 #, kde-format
 msgid "Export As"
 msgstr "Exporteren as"
 
-#: src/mainwindow.cpp:2012
+#: src/mainwindow.cpp:2036
 #, kde-format
 msgid "String Macros"
 msgstr "Tekenkeden-Makros"
 
-#: src/mainwindow.cpp:2013
+#: src/mainwindow.cpp:2037
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:2013
+#: src/mainwindow.cpp:2037
 #, kde-format
 msgid "String"
 msgstr "Tekenkeed"
 
-#: src/mainwindow.cpp:2100
+#: src/mainwindow.cpp:2123
 #, kde-format
 msgid "Creating citations..."
 msgstr "Zitaten warrt opstellt..."
 
-#: src/mainwindow.cpp:2210
+#: src/mainwindow.cpp:2233
 #, kde-format
 msgid "Filters"
 msgstr "Filtern"
 
-#: src/mainwindow.cpp:2211
+#: src/mainwindow.cpp:2234
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6575,12 +6571,12 @@ msgstr ""
 "<qt>De <i>Filteransicht</i> wiest de Indrääg, de op verscheden Filterregeln "
 "passt.</qt>"
 
-#: src/mainwindow.cpp:2234
+#: src/mainwindow.cpp:2257
 #, kde-format
 msgid "Loans"
 msgstr "Utlehnt"
 
-#: src/mainwindow.cpp:2235
+#: src/mainwindow.cpp:2258
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6589,7 +6585,7 @@ msgstr ""
 "<qt>De <i>Utlehnansicht</i> wiest en List vun Lüüd, se sik wat ut Dien "
 "Sammeln utlehnt hebbt.</qt>"
 
-#: src/mainwindow.cpp:2322
+#: src/mainwindow.cpp:2345
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6598,12 +6594,12 @@ msgstr ""
 "En poor Biller warrt nich an de instellte Steed wohrt. Du muttst de aktuelle "
 "Datei sekern, de Biller warrt denn na de niege Steed överdragen."
 
-#: src/mainwindow.cpp:2363
+#: src/mainwindow.cpp:2386
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Indragdaten vun %1 warrt opfrischt."
 
-#: src/mainwindow.cpp:2382
+#: src/mainwindow.cpp:2405
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6656,42 +6652,43 @@ msgstr "Dateien"
 msgid "HTML Files"
 msgstr "Mien Dateien"
 
-#: src/tellico_kernel.cpp:268
+#: src/tellico_kernel.cpp:269
 #, kde-format
 msgid "Do you really want to delete this filter?"
 msgstr "Wullt Du dissen Filter redig wegdoon?"
 
-#: src/tellico_kernel.cpp:270
+#: src/tellico_kernel.cpp:272 src/tellico_kernel.cpp:276
 #, kde-format
 msgid "Delete Filter?"
 msgstr "Filter wegdoon?"
 
-#: src/tellico_kernel.cpp:306
+#: src/tellico_kernel.cpp:313
 #, kde-format
 msgid "New collection name:"
 msgstr "Nieg Sammeln-Naam:"
 
-#: src/tellico_kernel.cpp:322
+#: src/tellico_kernel.cpp:329
 #, kde-format
 msgid "Entry 1"
 msgstr "Indrag 1"
 
-#: src/tellico_kernel.cpp:323
+#: src/tellico_kernel.cpp:330
 #, kde-format
 msgid "Entry 2"
 msgstr "Indrag 2"
 
-#: src/tellico_kernel.cpp:332
+#: src/tellico_kernel.cpp:339
 #, kde-format
 msgid "Conflicting values for %1 were found while merging entries."
 msgstr "Konfliktweerten för %1bi't Tosamenföhren vun Indrääg opdeckt."
 
-#: src/tellico_kernel.cpp:338
+#: src/tellico_kernel.cpp:345
 #, kde-format
 msgid "Please choose which value to keep."
 msgstr "Bitte den Weert utsöken, den Du wohren wullt."
 
-#: src/tellico_kernel.cpp:344 src/tellico_kernel.cpp:345
+#: src/tellico_kernel.cpp:352 src/tellico_kernel.cpp:353
+#: src/tellico_kernel.cpp:364 src/tellico_kernel.cpp:365
 #, kde-format
 msgid "Select value from %1"
 msgstr "Weert ut %1 utsöken"
@@ -7806,6 +7803,9 @@ msgstr "Söök"
 #, kde-format
 msgid "Clear"
 msgstr "Leddig maken"
+
+#~ msgid "Click to download additional data sources."
+#~ msgstr "Klick hier, wenn Du mehr Datenborns daalladen wullt."
 
 #~ msgid "Edit..."
 #~ msgstr "Bewerken..."

@@ -217,7 +217,7 @@
 ></title>
 
 <para
->&appname; può usare varie fonti per importare dati, che possono essere configurate nella finestra di dialogo Fonti dei dati. Sono disponibili numerosi tipi e fonti, una parte dei quali è elencata qui sotto, mentre l'elenco completo è <ulink url="https://tellico-project.org/data-sources"
+>&appname; può usare varie fonti per importare dati, che possono essere configurate nella finestra di dialogo Fonti di dati. Sono disponibili numerosi tipi e fonti, una parte dei quali è elencata qui sotto, mentre l'elenco completo è <ulink url="https://tellico-project.org/data-sources"
 >disponibile nel sito web di Tellico</ulink
 >.</para>
 
@@ -239,6 +239,12 @@
 ><simpara
 ><link linkend="openlibrary"
 >OpenLibrary.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="opds"
+>Cataloghi OPDS</link
 >,</simpara
 ></listitem>
 <!-- movies -->
@@ -529,6 +535,17 @@
 ><ulink url="http://openlibrary.org"
 >OpenLibrary.org</ulink
 > è un database di libri su Internet che punta ad avere una pagina per ogni libro. </para>
+</sect3>
+
+<sect3 id="opds">
+<title
+>Cataloghi OPDS</title>
+<para
+>I <ulink url="https://en.wikipedia.org/wiki/Open_Publication_Distribution_System"
+>cataloghi OPDS</ulink
+> forniscono un mezzo per cercare (e per distribuire) i libri digitali. &tellico; può usare molti cataloghi OPDS, ad esempio il <ulink url="https://wiki.mobileread.com/wiki/OPDS"
+>Progetto Gutenberg</ulink
+>, come fonte di dati: inserisci il collegamento al catalogo, poi verifica l'accesso e il formato per avere conferma che Tellico possa leggere il collegamento. </para>
 </sect3>
 
 </sect2>

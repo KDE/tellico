@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 00:49+0000\n"
+"POT-Creation-Date: 2023-06-26 00:51+0000\n"
 "PO-Revision-Date: 2023-06-16 08:51+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -171,7 +171,7 @@ msgstr "Ім'я"
 msgid "Collection Size"
 msgstr "Розмір збірки"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1629
+#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1653
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Всього записів: %1"
@@ -697,8 +697,8 @@ msgstr "Для поля з похідним значенням слід вказ
 #: src/collections/musiccollection.cpp:31
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
-#: src/configdialog.cpp:143 src/configdialog.cpp:170 src/configdialog.cpp:184
-#: src/configdialog.cpp:201 src/configdialog.cpp:1134
+#: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
+#: src/configdialog.cpp:203 src/configdialog.cpp:1124
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -2129,7 +2129,7 @@ msgid "Delete Filter"
 msgstr "Вилучення фільтра"
 
 #: src/commands/modifyentries.cpp:50 src/commands/modifyentries.cpp:70
-#: src/entryeditdialog.cpp:383
+#: src/entryeditdialog.cpp:391 src/entryeditdialog.cpp:395
 #, kde-format
 msgid "Modify Entries"
 msgstr "Зміна записів"
@@ -2168,7 +2168,7 @@ msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
 msgstr "повернення %1"
 
-#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:306
+#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:313
 #, kde-format
 msgid "Rename Collection"
 msgstr "перейменування збірки"
@@ -2350,39 +2350,39 @@ msgstr "Колір підсвічування тексту у шаблоні"
 msgid "Template link color"
 msgstr "Колір посилання шаблону"
 
-#: src/configdialog.cpp:96
+#: src/configdialog.cpp:98
 #, kde-format
 msgid "Configure Tellico"
 msgstr "Налаштувати Tellico"
 
-#: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:338
+#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
+#: src/configdialog.cpp:340
 #, kde-format
 msgid "Printing"
 msgstr "Друк"
 
-#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:415
+#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
+#: src/configdialog.cpp:417
 #, kde-format
 msgid "Templates"
 msgstr "Шаблони"
 
-#: src/configdialog.cpp:149 src/configdialog.cpp:190 src/configdialog.cpp:609
+#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:621
 #, kde-format
 msgid "Data Sources"
 msgstr "Джерела даних"
 
-#: src/configdialog.cpp:202
+#: src/configdialog.cpp:204
 #, kde-format
 msgid "General Options"
 msgstr "Загальне"
 
-#: src/configdialog.cpp:213
+#: src/configdialog.cpp:215
 #, kde-format
 msgid "&Reopen file at startup"
 msgstr "Ві&дкривати файл знову при запуску"
 
-#: src/configdialog.cpp:214
+#: src/configdialog.cpp:216
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
@@ -2391,12 +2391,12 @@ msgstr ""
 "Якщо буде позначено цей пункт, останній файл знову відкриватиметься при "
 "запуску."
 
-#: src/configdialog.cpp:219
+#: src/configdialog.cpp:221
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
 msgstr "&Увімкнути формальні вирази у швидкому фільтруванні"
 
-#: src/configdialog.cpp:220
+#: src/configdialog.cpp:222
 #, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
@@ -2404,22 +2404,22 @@ msgstr ""
 "Якщо буде позначено цей пункт, засоби швидкого фільтрування вважатимуть "
 "введений текст формальним виразом."
 
-#: src/configdialog.cpp:225
+#: src/configdialog.cpp:227
 #, kde-format
 msgid "&Show \"Tip of the Day\" at startup"
 msgstr "По&казувати «Пораду дня» при запуску"
 
-#: src/configdialog.cpp:226
+#: src/configdialog.cpp:228
 #, kde-format
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
 msgstr "Якщо буде позначено, при запуску програми з'являтиметься «порада дня»"
 
-#: src/configdialog.cpp:231
+#: src/configdialog.cpp:233
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "&Увімкнути сканування штрихкоду вебкамерою"
 
-#: src/configdialog.cpp:232
+#: src/configdialog.cpp:234
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
@@ -2428,27 +2428,27 @@ msgstr ""
 "Якщо буде позначено, для пошуку буде використано зображення штрихкоду, "
 "отримані за допомогою вебкамери."
 
-#: src/configdialog.cpp:237
+#: src/configdialog.cpp:239
 #, kde-format
 msgid "Image Storage Options"
 msgstr "Параметри зберігання зображень"
 
-#: src/configdialog.cpp:239
+#: src/configdialog.cpp:241
 #, kde-format
 msgid "Store images in data file"
 msgstr "Зберігати зображення у файлі даних"
 
-#: src/configdialog.cpp:240
+#: src/configdialog.cpp:242
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "Зберегти зображення у власному каталозі програми"
 
-#: src/configdialog.cpp:241
+#: src/configdialog.cpp:243
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "Зберегти зображення у каталозі з файлом даних"
 
-#: src/configdialog.cpp:242
+#: src/configdialog.cpp:244
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2459,41 +2459,41 @@ msgstr ""
 "сповільнення Tellico, зберегти до каталогу програми Tellico або зберегти у "
 "каталозі, у якому розташовано файл даних."
 
-#: src/configdialog.cpp:263 src/configdialog.cpp:347
+#: src/configdialog.cpp:265 src/configdialog.cpp:349
 #, kde-format
 msgid "Formatting Options"
 msgstr "Параметри форматування"
 
-#: src/configdialog.cpp:268
+#: src/configdialog.cpp:270
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "Автоматично встановлювати регістр &назви та імен"
 
-#: src/configdialog.cpp:269
+#: src/configdialog.cpp:271
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Якщо буде позначено цей пункт, програма автоматично встановлюватиме регістр "
 "літер назви та імен."
 
-#: src/configdialog.cpp:274
+#: src/configdialog.cpp:276
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "Автоматично &форматувати назви та імена"
 
-#: src/configdialog.cpp:275 src/configdialog.cpp:353
+#: src/configdialog.cpp:277 src/configdialog.cpp:355
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr ""
 "Якщо буде позначено цей пункт, програма автоматично форматуватиме назви та "
 "імена."
 
-#: src/configdialog.cpp:285
+#: src/configdialog.cpp:287
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "Дозволити лише &явне форматування:"
 
-#: src/configdialog.cpp:290
+#: src/configdialog.cpp:292
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2502,12 +2502,12 @@ msgstr ""
 "<qt>Список слів, які не повинні форматуватися. Значення повинні розділятися "
 "крапкою з комою.</qt>"
 
-#: src/configdialog.cpp:296
+#: src/configdialog.cpp:298
 #, kde-format
 msgid "Artic&les:"
 msgstr "&Артиклі:"
 
-#: src/configdialog.cpp:301
+#: src/configdialog.cpp:303
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2517,12 +2517,12 @@ msgstr ""
 "<qt>Список слів, які будуть вважатимуться артиклями. Значення слід розділяти "
 "крапкою з комою.</qt>"
 
-#: src/configdialog.cpp:308
+#: src/configdialog.cpp:310
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Особисті &звернення:"
 
-#: src/configdialog.cpp:313
+#: src/configdialog.cpp:315
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2531,12 +2531,12 @@ msgstr ""
 "<qt>Список особистих суфіксів (jr, мол. тощо). Значення слід відокремлювати "
 "крапкою з комою.</qt>"
 
-#: src/configdialog.cpp:319
+#: src/configdialog.cpp:321
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "Пре&фікси прізвищ:"
 
-#: src/configdialog.cpp:324
+#: src/configdialog.cpp:326
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2545,55 +2545,55 @@ msgstr ""
 "<qt>Список приставок прізвищ (de, van і т.д.). Значення повинні розділятися "
 "крапкою з комою</qt>"
 
-#: src/configdialog.cpp:339
+#: src/configdialog.cpp:341
 #, kde-format
 msgid "Printing Options"
 msgstr "Параметри друку"
 
-#: src/configdialog.cpp:352
+#: src/configdialog.cpp:354
 #, kde-format
 msgid "&Format titles and names"
 msgstr "&Форматувати імена та назви"
 
-#: src/configdialog.cpp:357
+#: src/configdialog.cpp:359
 #, kde-format
 msgid "&Print field headers"
 msgstr "&Включати заголовки полів"
 
-#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
 "Якщо буде позначено цей пункт, при експорті в HTML будуть надруковані "
 "заголовки."
 
-#: src/configdialog.cpp:362
+#: src/configdialog.cpp:364
 #, kde-format
 msgid "Grouping Options"
 msgstr "Параметри групування"
 
-#: src/configdialog.cpp:367
+#: src/configdialog.cpp:369
 #, kde-format
 msgid "&Group the entries"
 msgstr "&Групувати записи"
 
-#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
 "Якщо буде позначено цей пункт, записи будуть згруповані за позначеним полем"
 
-#: src/configdialog.cpp:372
+#: src/configdialog.cpp:374
 #, kde-format
 msgid "Image Options"
 msgstr "Параметри зображень"
 
-#: src/configdialog.cpp:378
+#: src/configdialog.cpp:380
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "Максимальна &ширина зображення:"
 
-#: src/configdialog.cpp:387
+#: src/configdialog.cpp:389
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
@@ -2602,12 +2602,12 @@ msgstr ""
 "Максимальна ширина зображення при друці. Програма зберігатиме співвідношення "
 "розмірів."
 
-#: src/configdialog.cpp:393
+#: src/configdialog.cpp:395
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "Максимальна в&исота зображення:"
 
-#: src/configdialog.cpp:402
+#: src/configdialog.cpp:404
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
@@ -2616,25 +2616,25 @@ msgstr ""
 "Максимальна висота зображення при друці. Програма зберігатиме співвідношення "
 "розмірів."
 
-#: src/configdialog.cpp:416
+#: src/configdialog.cpp:418
 #, kde-format
 msgid "Template Options"
 msgstr "Параметри шаблонів"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:364
+#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:364
 #: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
 msgstr "&Тип збірки:"
 
-#: src/configdialog.cpp:437
+#: src/configdialog.cpp:439
 #, kde-format
 msgid "Template:"
 msgstr "Шаблон:"
 
-#: src/configdialog.cpp:442
+#: src/configdialog.cpp:444
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2643,12 +2643,12 @@ msgstr ""
 "Виберіть шаблон, щоб використовувати для поточного виду збірок. Не усі "
 "шаблони використовуватимуть налаштування шрифту та кольору."
 
-#: src/configdialog.cpp:449
+#: src/configdialog.cpp:451
 #, kde-format
 msgid "&Preview..."
 msgstr "&Попередній перегляд…"
 
-#: src/configdialog.cpp:450
+#: src/configdialog.cpp:452
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "Показати попередній перегляд шаблону"
@@ -2658,107 +2658,107 @@ msgstr "Показати попередній перегляд шаблону"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:467
+#: src/configdialog.cpp:469
 #, kde-format
 msgid "Font Options"
 msgstr "Вибір шрифту"
 
-#: src/configdialog.cpp:474
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "Font:"
 msgstr "Шрифт:"
 
-#: src/configdialog.cpp:480
+#: src/configdialog.cpp:482
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "Цей шрифт передається шаблону, що використовується у вигляді запису."
 
-#: src/configdialog.cpp:484
+#: src/configdialog.cpp:486
 #, kde-format
 msgid "Size:"
 msgstr "Розмір:"
 
-#: src/configdialog.cpp:496
+#: src/configdialog.cpp:498
 #, kde-format
 msgid "Color Options"
 msgstr "Вибір кольору"
 
-#: src/configdialog.cpp:503
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "Background color:"
 msgstr "Колір фону:"
 
-#: src/configdialog.cpp:509
+#: src/configdialog.cpp:511
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Цей колір передається шаблону, що використовується у вигляді запису."
 
-#: src/configdialog.cpp:513
+#: src/configdialog.cpp:515
 #, kde-format
 msgid "Text color:"
 msgstr "Колір тексту:"
 
-#: src/configdialog.cpp:522
+#: src/configdialog.cpp:524
 #, kde-format
 msgid "Highlight color:"
 msgstr "Колір підсвічування:"
 
-#: src/configdialog.cpp:531
+#: src/configdialog.cpp:533
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "Колір підсвічування тексту:"
 
-#: src/configdialog.cpp:540
+#: src/configdialog.cpp:542
 #, kde-format
 msgid "Link color:"
 msgstr "Колір посилання:"
 
-#: src/configdialog.cpp:549
+#: src/configdialog.cpp:551
 #, kde-format
 msgid "Manage Templates"
 msgstr "Керування шаблонами"
 
-#: src/configdialog.cpp:560
+#: src/configdialog.cpp:562
 #, kde-format
 msgid "Install..."
 msgstr "Встановлення…"
 
-#: src/configdialog.cpp:564
+#: src/configdialog.cpp:566
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Клацніть, щоб встановити новий шаблон безпосередньо."
 
-#: src/configdialog.cpp:567 src/configdialog.cpp:673
+#: src/configdialog.cpp:571 src/configdialog.cpp:574 src/configdialog.cpp:578
 #, kde-format
 msgid "Download..."
 msgstr "Отримання…"
 
-#: src/configdialog.cpp:571
+#: src/configdialog.cpp:583
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Натисніть, щоб отримати додаткові шаблони."
 
-#: src/configdialog.cpp:574
+#: src/configdialog.cpp:586
 #, kde-format
 msgid "Delete..."
 msgstr "Вилучення…"
 
-#: src/configdialog.cpp:578
+#: src/configdialog.cpp:590
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Клацніть, щоб вибрати та вилучити встановлені шаблони."
 
-#: src/configdialog.cpp:610
+#: src/configdialog.cpp:622
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Параметри джерела даних"
 
-#: src/configdialog.cpp:631
+#: src/configdialog.cpp:643
 #, kde-format
 msgid "Move &Up"
 msgstr "&Вище"
 
-#: src/configdialog.cpp:634 src/configdialog.cpp:639
+#: src/configdialog.cpp:646 src/configdialog.cpp:651
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2767,64 +2767,59 @@ msgstr ""
 "Порядок джерел даних встановлює порядок у якому Tellico проводить "
 "автоматичне оновлення записів."
 
-#: src/configdialog.cpp:636
+#: src/configdialog.cpp:648
 #, kde-format
 msgid "Move &Down"
 msgstr "&Нижче"
 
-#: src/configdialog.cpp:646
+#: src/configdialog.cpp:658
 #, kde-format
 msgid "Filter by type:"
 msgstr "Фільтрувати за типом:"
 
-#: src/configdialog.cpp:664
+#: src/configdialog.cpp:676
 #, kde-format
 msgid "&New..."
 msgstr "С&творити…"
 
-#: src/configdialog.cpp:666
+#: src/configdialog.cpp:678
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Клацніть, щоб додати нове джерело даних."
 
-#: src/configdialog.cpp:667
+#: src/configdialog.cpp:679
 #, kde-format
 msgid "&Modify..."
 msgstr "&Редагувати…"
 
-#: src/configdialog.cpp:669
+#: src/configdialog.cpp:681
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Клацніть, щоб змінити відібране джерело даних."
 
-#: src/configdialog.cpp:670
+#: src/configdialog.cpp:682
 #, kde-format
 msgid "&Delete"
 msgstr "&Вилучити"
 
-#: src/configdialog.cpp:672
+#: src/configdialog.cpp:684
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Клацніть, щоб вилучити відібране джерело даних."
 
-#: src/configdialog.cpp:675
-#, kde-format
-msgid "Click to download additional data sources."
-msgstr "Натисніть, щоб отримати додаткові джерела даних."
-
-#: src/configdialog.cpp:1166 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1156 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:125
 #, kde-format
 msgid "XSL Files"
 msgstr "файли XSL"
 
-#: src/configdialog.cpp:1167
+#: src/configdialog.cpp:1157
 #, kde-format
 msgid "Template Packages"
 msgstr "пакунки шаблонів"
 
-#: src/configdialog.cpp:1168 src/importdialog.cpp:439 src/mainwindow.cpp:1262
-#: src/mainwindow.cpp:1432 src/reportdialog.cpp:428 src/reportdialog.cpp:443
+#: src/configdialog.cpp:1158 src/importdialog.cpp:439 src/mainwindow.cpp:1281
+#: src/mainwindow.cpp:1456 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -2838,12 +2833,12 @@ msgstr "пакунки шаблонів"
 msgid "All Files"
 msgstr "усі файли"
 
-#: src/configdialog.cpp:1197
+#: src/configdialog.cpp:1187
 #, kde-format
 msgid "Delete Template"
 msgstr "Вилучити шаблон"
 
-#: src/configdialog.cpp:1198
+#: src/configdialog.cpp:1188
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Виберіть шаблон для вилучення:"
@@ -2880,22 +2875,22 @@ msgstr "Вилучити декілька записів"
 msgid "&Sort By"
 msgstr "Вп&орядкувати за"
 
-#: src/controller.cpp:589 src/mainwindow.cpp:605
+#: src/controller.cpp:589 src/mainwindow.cpp:604
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "&Редагувати запис…"
 
-#: src/controller.cpp:590 src/mainwindow.cpp:612
+#: src/controller.cpp:590 src/mainwindow.cpp:611
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "&Здублювати запис"
 
-#: src/controller.cpp:591 src/mainwindow.cpp:706
+#: src/controller.cpp:591 src/mainwindow.cpp:705
 #, kde-format
 msgid "&Update Entry"
 msgstr "Онов&ити запис"
 
-#: src/controller.cpp:592 src/mainwindow.cpp:619
+#: src/controller.cpp:592 src/mainwindow.cpp:618
 #, kde-format
 msgid "&Delete Entry"
 msgstr "&Вилучити запис"
@@ -3033,55 +3028,55 @@ msgstr "Показати всі стовпці"
 msgid "Hide All Columns"
 msgstr "Сховати всі стовпці"
 
-#: src/document.cpp:210 src/mainwindow.cpp:1376
+#: src/document.cpp:210 src/mainwindow.cpp:1395
 #, kde-format
 msgid "Saving file..."
 msgstr "Збереження файла…"
 
-#: src/entryeditdialog.cpp:70 src/entryeditdialog.cpp:404
-#: src/entryeditdialog.cpp:426 src/entryeditdialog.cpp:521
+#: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:417
+#: src/entryeditdialog.cpp:439 src/entryeditdialog.cpp:534
 #, kde-format
 msgid "Edit Entry"
 msgstr "Редагувати запис"
 
-#: src/entryeditdialog.cpp:85
+#: src/entryeditdialog.cpp:86
 #, kde-format
 msgid "&New Entry"
 msgstr "&Створити запис"
 
-#: src/entryeditdialog.cpp:90 src/entryeditdialog.cpp:131
-#: src/entryeditdialog.cpp:436 src/entryeditdialog.cpp:542
+#: src/entryeditdialog.cpp:91 src/entryeditdialog.cpp:132
+#: src/entryeditdialog.cpp:449 src/entryeditdialog.cpp:555
 #, kde-format
 msgid "Sa&ve Entry"
 msgstr "&Зберегти запис"
 
-#: src/entryeditdialog.cpp:334
+#: src/entryeditdialog.cpp:335
 #, kde-format
 msgid "Do you really want to modify these entries?"
 msgstr "Ви дійсно хочете змінити ці записи?"
 
-#: src/entryeditdialog.cpp:336
+#: src/entryeditdialog.cpp:338 src/entryeditdialog.cpp:342
 #, kde-format
 msgid "Modify Multiple Entries"
 msgstr "Редагувати декілька записів"
 
-#: src/entryeditdialog.cpp:377
+#: src/entryeditdialog.cpp:384
 #, kde-format
 msgid "A value is required for the following fields. Do you want to continue?"
 msgstr ""
 "Для наведених нижче полів потрібно вказати значення. Бажаєте продовжити?"
 
-#: src/entryeditdialog.cpp:472
+#: src/entryeditdialog.cpp:485
 #, kde-format
 msgid "Edit Entries"
 msgstr "Редагувати записи"
 
-#: src/entryeditdialog.cpp:498
+#: src/entryeditdialog.cpp:511
 #, kde-format
 msgid "Sa&ve Entries"
 msgstr "&Зберегти записи"
 
-#: src/entryeditdialog.cpp:657
+#: src/entryeditdialog.cpp:670
 #, kde-format
 msgid ""
 "The current entry has been modified.\n"
@@ -3090,12 +3085,13 @@ msgstr ""
 "Поточні записи були змінені.\n"
 "Ви хочете зберегти зміни?"
 
-#: src/entryeditdialog.cpp:660
+#: src/entryeditdialog.cpp:673
 #, kde-format
 msgid "Save Entry"
 msgstr "Зберегти запис"
 
-#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1168
+#: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
+#: src/mainwindow.cpp:1168 src/mainwindow.cpp:1186
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Незбережені зміни"
@@ -3105,7 +3101,7 @@ msgstr "Незбережені зміни"
 msgid "(Empty)"
 msgstr "(порожньо)"
 
-#: src/entryiconview.cpp:65 src/mainwindow.cpp:873
+#: src/entryiconview.cpp:65 src/mainwindow.cpp:872
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3134,7 +3130,7 @@ msgstr ""
 "<qt><b>%1</b> повернув декілька результатів, які можуть відповідати <b>%2</"
 "b>, цей запис вже є у збірці. Будь ласка, оберіть потрібний вам варіант.</qt>"
 
-#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:343
+#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:351 src/tellico_kernel.cpp:363
 #, kde-format
 msgid "Merge Entries"
 msgstr "Об’єднати записи"
@@ -3175,7 +3171,7 @@ msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr ""
 "Tellico не вдається встановити розташування типової таблиці стилів записів."
 
-#: src/entryview.cpp:334 src/mainwindow.cpp:1782
+#: src/entryview.cpp:334 src/mainwindow.cpp:1806
 #, kde-format
 msgid "Please check your installation."
 msgstr "Будь ласка, перевірте, чи належним чином встановлено програму."
@@ -4504,7 +4500,7 @@ msgstr "&Пошук"
 msgid "&Stop"
 msgstr "&Зупинка"
 
-#: src/fetchdialog.cpp:142 src/mainwindow.cpp:595
+#: src/fetchdialog.cpp:142 src/mainwindow.cpp:594
 #, kde-format
 msgid "Internet Search"
 msgstr "Пошук у інтернеті"
@@ -4827,8 +4823,8 @@ msgstr "Назва фільтра:"
 msgid "&Save Filter"
 msgstr "&Зберегти фільтр"
 
-#: src/filterview.cpp:191 src/mainwindow.cpp:568 src/mainwindow.cpp:778
-#: src/mainwindow.cpp:796
+#: src/filterview.cpp:191 src/mainwindow.cpp:567 src/mainwindow.cpp:777
+#: src/mainwindow.cpp:795
 #, kde-format
 msgid "Filter"
 msgstr "Фільтрувати"
@@ -4864,8 +4860,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Група"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1096 src/mainwindow.cpp:1717
-#: src/mainwindow.cpp:1751 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1095 src/mainwindow.cpp:1741
+#: src/mainwindow.cpp:1775 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Люди"
@@ -5013,7 +5009,7 @@ msgstr "Спорожнити"
 msgid "Save link only"
 msgstr "Зберегти лише посилання"
 
-#: src/gui/imagewidget.cpp:290 src/gui/imagewidget.cpp:526
+#: src/gui/imagewidget.cpp:290 src/gui/imagewidget.cpp:530
 #, kde-format
 msgid "All Images (%1)"
 msgstr "усі зображення (%1)"
@@ -5162,19 +5158,19 @@ msgstr ""
 "Додати лише ті записи, яких немає в поточному збірці. Можливо, лише якщо "
 "типи збірок збігаються."
 
-#: src/importdialog.cpp:149 src/mainwindow.cpp:371
+#: src/importdialog.cpp:149 src/mainwindow.cpp:370
 #, kde-format
 msgid "&Import"
 msgstr "&Імпорт"
 
-#: src/importdialog.cpp:371 src/mainwindow.cpp:1258 src/mainwindow.cpp:1430
+#: src/importdialog.cpp:371 src/mainwindow.cpp:1277 src/mainwindow.cpp:1454
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "файли Tellico"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1260 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "файли XML"
@@ -5400,823 +5396,823 @@ msgstr "Імпортувати <filename> як файл PDF"
 msgid "File to open"
 msgstr "Файл для відкриття"
 
-#: src/mainwindow.cpp:255
+#: src/mainwindow.cpp:254
 #, kde-format
 msgid "New Collection"
 msgstr "Нова збірка"
 
-#: src/mainwindow.cpp:257
+#: src/mainwindow.cpp:256
 #, kde-format
 msgid "Create a new collection"
 msgstr "Створити збірку"
 
-#: src/mainwindow.cpp:276
+#: src/mainwindow.cpp:275
 #, kde-format
 msgid "New &Book Collection"
 msgstr "Нова збірка &книг"
 
-#: src/mainwindow.cpp:277
+#: src/mainwindow.cpp:276
 #, kde-format
 msgid "Create a new book collection"
 msgstr "Створити збірку книг"
 
-#: src/mainwindow.cpp:279
+#: src/mainwindow.cpp:278
 #, kde-format
 msgid "New B&ibliography"
 msgstr "Нова &бібліографія"
 
-#: src/mainwindow.cpp:280
+#: src/mainwindow.cpp:279
 #, kde-format
 msgid "Create a new bibtex bibliography"
 msgstr "Створити нову бібліографію bibtex"
 
-#: src/mainwindow.cpp:282
+#: src/mainwindow.cpp:281
 #, kde-format
 msgid "New &Comic Book Collection"
 msgstr "Нова збірка к&оміксів"
 
-#: src/mainwindow.cpp:283
+#: src/mainwindow.cpp:282
 #, kde-format
 msgid "Create a new comic book collection"
 msgstr "Створити збірку коміксів"
 
-#: src/mainwindow.cpp:285
+#: src/mainwindow.cpp:284
 #, kde-format
 msgid "New &Video Collection"
 msgstr "Нова збірка &фільмів"
 
-#: src/mainwindow.cpp:286
+#: src/mainwindow.cpp:285
 #, kde-format
 msgid "Create a new video collection"
 msgstr "Створити збірку фільмів"
 
-#: src/mainwindow.cpp:288
+#: src/mainwindow.cpp:287
 #, kde-format
 msgid "New &Music Collection"
 msgstr "Нова збірка &музики"
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:288
 #, kde-format
 msgid "Create a new music collection"
 msgstr "Створити збірку музики"
 
-#: src/mainwindow.cpp:291
+#: src/mainwindow.cpp:290
 #, kde-format
 msgid "New C&oin Collection"
 msgstr "Нова збірка &монет"
 
-#: src/mainwindow.cpp:292
+#: src/mainwindow.cpp:291
 #, kde-format
 msgid "Create a new coin collection"
 msgstr "Створити збірку монет"
 
-#: src/mainwindow.cpp:294
+#: src/mainwindow.cpp:293
 #, kde-format
 msgid "New &Stamp Collection"
 msgstr "Нова збірка ма&рок"
 
-#: src/mainwindow.cpp:295
+#: src/mainwindow.cpp:294
 #, kde-format
 msgid "Create a new stamp collection"
 msgstr "Створити збірку марок"
 
-#: src/mainwindow.cpp:297
+#: src/mainwindow.cpp:296
 #, kde-format
 msgid "New C&ard Collection"
 msgstr "Нова збірка к&арток"
 
-#: src/mainwindow.cpp:298
+#: src/mainwindow.cpp:297
 #, kde-format
 msgid "Create a new trading card collection"
 msgstr "Створити збірку карток"
 
-#: src/mainwindow.cpp:300
+#: src/mainwindow.cpp:299
 #, kde-format
 msgid "New &Wine Collection"
 msgstr "Нова збірка &вин"
 
-#: src/mainwindow.cpp:301
+#: src/mainwindow.cpp:300
 #, kde-format
 msgid "Create a new wine collection"
 msgstr "Створити збірку вин"
 
-#: src/mainwindow.cpp:303
+#: src/mainwindow.cpp:302
 #, kde-format
 msgid "New &Game Collection"
 msgstr "Нова збірка &ігор"
 
-#: src/mainwindow.cpp:304
+#: src/mainwindow.cpp:303
 #, kde-format
 msgid "Create a new game collection"
 msgstr "Створити збірку ігор"
 
-#: src/mainwindow.cpp:306
+#: src/mainwindow.cpp:305
 #, kde-format
 msgid "New Boa&rd Game Collection"
 msgstr "Нова збірка ігор на до&шці"
 
-#: src/mainwindow.cpp:307
+#: src/mainwindow.cpp:306
 #, kde-format
 msgid "Create a new board game collection"
 msgstr "Створити нову збірку ігор на дошці"
 
-#: src/mainwindow.cpp:309
+#: src/mainwindow.cpp:308
 #, kde-format
 msgid "New &File Catalog"
 msgstr "Нова &файлова тека"
 
-#: src/mainwindow.cpp:310
+#: src/mainwindow.cpp:309
 #, kde-format
 msgid "Create a new file catalog"
 msgstr "Створити нову файлову теку"
 
-#: src/mainwindow.cpp:313
+#: src/mainwindow.cpp:312
 #, kde-format
 msgid "New C&ustom Collection"
 msgstr "Нова н&етипова збірка"
 
-#: src/mainwindow.cpp:314
+#: src/mainwindow.cpp:313
 #, kde-format
 msgid "Create a new custom collection"
 msgstr "Створити нетипову збірку"
 
-#: src/mainwindow.cpp:325
+#: src/mainwindow.cpp:324
 #, kde-format
 msgid "Open an existing document"
 msgstr "Відкрити існуючий документ"
 
-#: src/mainwindow.cpp:327
+#: src/mainwindow.cpp:326
 #, kde-format
 msgid "Open a recently used file"
 msgstr "Відкрити файл, що недавно використовувався"
 
-#: src/mainwindow.cpp:329
+#: src/mainwindow.cpp:328
 #, kde-format
 msgid "Save the document"
 msgstr "Зберегти документ"
 
-#: src/mainwindow.cpp:331
+#: src/mainwindow.cpp:330
 #, kde-format
 msgid "Save the document as a different file..."
 msgstr "Зберегти документ в інший файл…"
 
-#: src/mainwindow.cpp:335
+#: src/mainwindow.cpp:334
 #, kde-format
 msgid "Save As Template..."
 msgstr "Зберегти як шаблон…"
 
-#: src/mainwindow.cpp:337
+#: src/mainwindow.cpp:336
 #, kde-format
 msgid "Save as a collection template"
 msgstr "Зберегти як шаблон збірки"
 
-#: src/mainwindow.cpp:340
+#: src/mainwindow.cpp:339
 #, kde-format
 msgid "Print the contents of the collection..."
 msgstr "Надрукувати вміст збірки…"
 
-#: src/mainwindow.cpp:356
+#: src/mainwindow.cpp:355
 #, kde-format
 msgid "Preview the contents of the collection..."
 msgstr "Попередній перегляд друку вмісту збірки…"
 
-#: src/mainwindow.cpp:360
+#: src/mainwindow.cpp:359
 #, kde-format
 msgid "Quit the application"
 msgstr "Вийти з програми"
 
-#: src/mainwindow.cpp:373
+#: src/mainwindow.cpp:372
 #, kde-format
 msgid "Import the collection data from other formats"
 msgstr "Імпортувати дані збірок у інших форматах"
 
-#: src/mainwindow.cpp:389
+#: src/mainwindow.cpp:388
 #, kde-format
 msgid "Import Tellico Data..."
 msgstr "Імпорт даних Tellico…"
 
-#: src/mainwindow.cpp:390
+#: src/mainwindow.cpp:389
 #, kde-format
 msgid "Import another Tellico data file"
 msgstr "Імпортувати інший файл даних Tellico"
 
-#: src/mainwindow.cpp:393
+#: src/mainwindow.cpp:392
 #, kde-format
 msgid "Import CSV Data..."
 msgstr "Імпорт з CSV…"
 
-#: src/mainwindow.cpp:394
+#: src/mainwindow.cpp:393
 #, kde-format
 msgid "Import a CSV file"
 msgstr "Імпорт з файла CSV"
 
-#: src/mainwindow.cpp:396
+#: src/mainwindow.cpp:395
 #, kde-format
 msgid "Import MODS Data..."
 msgstr "Імпорт з MODS…"
 
-#: src/mainwindow.cpp:397
+#: src/mainwindow.cpp:396
 #, kde-format
 msgid "Import a MODS data file"
 msgstr "Імпорт з MODS"
 
-#: src/mainwindow.cpp:399
+#: src/mainwindow.cpp:398
 #, kde-format
 msgid "Import Alexandria Data..."
 msgstr "Імпорт з Alexandria…"
 
-#: src/mainwindow.cpp:400
+#: src/mainwindow.cpp:399
 #, kde-format
 msgid "Import data from the Alexandria book collection manager"
 msgstr "Імпорт з менеджера збірок книг Alexandria"
 
-#: src/mainwindow.cpp:403
+#: src/mainwindow.cpp:402
 #, kde-format
 msgid "Import Delicious Library Data..."
 msgstr "Імпорт даних з Delicious Library…"
 
-#: src/mainwindow.cpp:404
+#: src/mainwindow.cpp:403
 #, kde-format
 msgid "Import data from Delicious Library"
 msgstr "Імпорт даних з Delicious Library"
 
-#: src/mainwindow.cpp:407
+#: src/mainwindow.cpp:406
 #, kde-format
 msgid "Import Collectorz Data..."
 msgstr "Імпорт даних Collectorz…"
 
-#: src/mainwindow.cpp:408
+#: src/mainwindow.cpp:407
 #, kde-format
 msgid "Import data from Collectorz"
 msgstr "Імпорт даних з Collectorz"
 
-#: src/mainwindow.cpp:411
+#: src/mainwindow.cpp:410
 #, kde-format
 msgid "Import Data Crow Data..."
 msgstr "Імпорт даних Data Crow…"
 
-#: src/mainwindow.cpp:412
+#: src/mainwindow.cpp:411
 #, kde-format
 msgid "Import data from Data Crow"
 msgstr "Імпорт даних з Data Crow"
 
-#: src/mainwindow.cpp:415
+#: src/mainwindow.cpp:414
 #, kde-format
 msgid "Import Referencer Data..."
 msgstr "Імпорт даних Referencer…"
 
-#: src/mainwindow.cpp:416
+#: src/mainwindow.cpp:415
 #, kde-format
 msgid "Import data from Referencer"
 msgstr "Імпорт даних з Referencer"
 
-#: src/mainwindow.cpp:419
+#: src/mainwindow.cpp:418
 #, kde-format
 msgid "Import Bibtex Data..."
 msgstr "Імпорт з Bibtex…"
 
-#: src/mainwindow.cpp:420
+#: src/mainwindow.cpp:419
 #, kde-format
 msgid "Import a bibtex bibliography file"
 msgstr "Імпортувати з bibtex"
 
-#: src/mainwindow.cpp:425
+#: src/mainwindow.cpp:424
 #, kde-format
 msgid "Import Bibtexml Data..."
 msgstr "Імпорт з Bibtexml…"
 
-#: src/mainwindow.cpp:426
+#: src/mainwindow.cpp:425
 #, kde-format
 msgid "Import a Bibtexml bibliography file"
 msgstr "Імпортувати з Bibtexml"
 
-#: src/mainwindow.cpp:428
+#: src/mainwindow.cpp:427
 #, kde-format
 msgid "Import RIS Data..."
 msgstr "Імпорт даних з RIS…"
 
-#: src/mainwindow.cpp:429
+#: src/mainwindow.cpp:428
 #, kde-format
 msgid "Import an RIS reference file"
 msgstr "Імпорт файла посилань RIS"
 
-#: src/mainwindow.cpp:431
+#: src/mainwindow.cpp:430
 #, kde-format
 msgid "Import MARC Data..."
 msgstr "Імпортувати дані MARC…"
 
-#: src/mainwindow.cpp:432
+#: src/mainwindow.cpp:431
 #, kde-format
 msgid "Import MARC data"
 msgstr "Імпорт даних MARC"
 
-#: src/mainwindow.cpp:439
+#: src/mainwindow.cpp:438
 #, kde-format
 msgid "Import Goodreads Collection..."
 msgstr "Імпортувати збірку Goodreads…"
 
-#: src/mainwindow.cpp:440
+#: src/mainwindow.cpp:439
 #, kde-format
 msgid "Import a collection from Goodreads.com"
 msgstr "Імпортувати збірку з Goodreads.com"
 
-#: src/mainwindow.cpp:442
+#: src/mainwindow.cpp:441
 #, kde-format
 msgid "Import LibraryThing Collection..."
 msgstr "Імпортувати збірку LibraryThing…"
 
-#: src/mainwindow.cpp:443
+#: src/mainwindow.cpp:442
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
 msgstr "Імпортувати збірку з LibraryThing.com"
 
-#: src/mainwindow.cpp:445
+#: src/mainwindow.cpp:444
 #, kde-format
 msgid "Import PDF File..."
 msgstr "Імпорт файла PDF…"
 
-#: src/mainwindow.cpp:446
+#: src/mainwindow.cpp:445
 #, kde-format
 msgid "Import a PDF file"
 msgstr "Імпорт файла PDF"
 
-#: src/mainwindow.cpp:448
+#: src/mainwindow.cpp:447
 #, kde-format
 msgid "Import Audio File Metadata..."
 msgstr "Імпорт метаданих аудіофайла…"
 
-#: src/mainwindow.cpp:449
+#: src/mainwindow.cpp:448
 #, kde-format
 msgid "Import meta-data from audio files"
 msgstr "Імпорт з даних теґів аудіофайлів"
 
-#: src/mainwindow.cpp:454
+#: src/mainwindow.cpp:453
 #, kde-format
 msgid "Import Audio CD Data..."
 msgstr "Імпорт з Audio CD…"
 
-#: src/mainwindow.cpp:455
+#: src/mainwindow.cpp:454
 #, kde-format
 msgid "Import audio CD information"
 msgstr "Імпорт інформації про Audio CD з бази даних FreeDB"
 
-#: src/mainwindow.cpp:460
+#: src/mainwindow.cpp:459
 #, kde-format
 msgid "Import GCstar Data..."
 msgstr "Імпорт даних GCstar…"
 
-#: src/mainwindow.cpp:461
+#: src/mainwindow.cpp:460
 #, kde-format
 msgid "Import a GCstar data file"
 msgstr "Імпорт даних з файла GCstar"
 
-#: src/mainwindow.cpp:464
+#: src/mainwindow.cpp:463
 #, kde-format
 msgid "Import Griffith Data..."
 msgstr "Імпорт даних Griffith…"
 
-#: src/mainwindow.cpp:465
+#: src/mainwindow.cpp:464
 #, kde-format
 msgid "Import a Griffith database"
 msgstr "Імпортувати базу даних Griffith"
 
-#: src/mainwindow.cpp:468
+#: src/mainwindow.cpp:467
 #, kde-format
 msgid "Import Ant Movie Catalog Data..."
 msgstr "Імпорт даних з каталогу Ant Movie…"
 
-#: src/mainwindow.cpp:469
+#: src/mainwindow.cpp:468
 #, kde-format
 msgid "Import an Ant Movie Catalog data file"
 msgstr "Імпорт файла даних каталогу Ant Movie"
 
-#: src/mainwindow.cpp:472
+#: src/mainwindow.cpp:471
 #, kde-format
 msgid "Import BoardGameGeek Collection..."
 msgstr "Імпортувати збірку BoardGameGeek…"
 
-#: src/mainwindow.cpp:473
+#: src/mainwindow.cpp:472
 #, kde-format
 msgid "Import a collection from BoardGameGeek.com"
 msgstr "Імпортувати збірку з BoardGameGeek.com"
 
-#: src/mainwindow.cpp:475
+#: src/mainwindow.cpp:474
 #, kde-format
 msgid "Import VinoXML..."
 msgstr "Імпорт VinoXML…"
 
-#: src/mainwindow.cpp:476
+#: src/mainwindow.cpp:475
 #, kde-format
 msgid "Import VinoXML data"
 msgstr "Імпортувати дані VinoXML"
 
-#: src/mainwindow.cpp:478
+#: src/mainwindow.cpp:477
 #, kde-format
 msgid "Import File Listing..."
 msgstr "Імпорт списку файлів…"
 
-#: src/mainwindow.cpp:479
+#: src/mainwindow.cpp:478
 #, kde-format
 msgid "Import information about files in a folder"
 msgstr "Імпортувати інформацію про файли у теці"
 
-#: src/mainwindow.cpp:481
+#: src/mainwindow.cpp:480
 #, kde-format
 msgid "Import XSL Transform..."
 msgstr "Імпорт з XSLT…"
 
-#: src/mainwindow.cpp:482
+#: src/mainwindow.cpp:481
 #, kde-format
 msgid "Import using an XSL Transform"
 msgstr "Імпорт, використовуючи XSLT"
 
-#: src/mainwindow.cpp:495
+#: src/mainwindow.cpp:494
 #, kde-format
 msgid "&Export"
 msgstr "&Експорт"
 
-#: src/mainwindow.cpp:497
+#: src/mainwindow.cpp:496
 #, kde-format
 msgid "Export the collection data to other formats"
 msgstr "Експортувати дані збірки у іншому форматі"
 
-#: src/mainwindow.cpp:513
+#: src/mainwindow.cpp:512
 #, kde-format
 msgid "Export to XML..."
 msgstr "Експорт у XML…"
 
-#: src/mainwindow.cpp:514
+#: src/mainwindow.cpp:513
 #, kde-format
 msgid "Export to a Tellico XML file"
 msgstr "Експорт у XML"
 
-#: src/mainwindow.cpp:517
+#: src/mainwindow.cpp:516
 #, kde-format
 msgid "Export to Zip..."
 msgstr "Експорт в ZIP…"
 
-#: src/mainwindow.cpp:518
+#: src/mainwindow.cpp:517
 #, kde-format
 msgid "Export to a Tellico Zip file"
 msgstr "Експорт в стиснутий ZIP-файл Tellico"
 
-#: src/mainwindow.cpp:521
+#: src/mainwindow.cpp:520
 #, kde-format
 msgid "Export to HTML..."
 msgstr "Експорт в HTML…"
 
-#: src/mainwindow.cpp:522
+#: src/mainwindow.cpp:521
 #, kde-format
 msgid "Export to an HTML file"
 msgstr "Експорт в HTML"
 
-#: src/mainwindow.cpp:524
+#: src/mainwindow.cpp:523
 #, kde-format
 msgid "Export to CSV..."
 msgstr "Експорт в CSV…"
 
-#: src/mainwindow.cpp:525
+#: src/mainwindow.cpp:524
 #, kde-format
 msgid "Export to a comma-separated values file"
 msgstr "Експорт в CSV"
 
-#: src/mainwindow.cpp:527
+#: src/mainwindow.cpp:526
 #, kde-format
 msgid "Export to Alexandria..."
 msgstr "Експорт у Alexandria…"
 
-#: src/mainwindow.cpp:528
+#: src/mainwindow.cpp:527
 #, kde-format
 msgid "Export to an Alexandria library"
 msgstr "Експорт у бібліотеку Alexandria"
 
-#: src/mainwindow.cpp:531
+#: src/mainwindow.cpp:530
 #, kde-format
 msgid "Export to Bibtex..."
 msgstr "Експорт у Bibtex…"
 
-#: src/mainwindow.cpp:532
+#: src/mainwindow.cpp:531
 #, kde-format
 msgid "Export to a bibtex file"
 msgstr "Експорт у файл Bibtex"
 
-#: src/mainwindow.cpp:534
+#: src/mainwindow.cpp:533
 #, kde-format
 msgid "Export to Bibtexml..."
 msgstr "Експорт у Bibtexml…"
 
-#: src/mainwindow.cpp:535
+#: src/mainwindow.cpp:534
 #, kde-format
 msgid "Export to a Bibtexml file"
 msgstr "Експорт у файл Bibtexml"
 
-#: src/mainwindow.cpp:537
+#: src/mainwindow.cpp:536
 #, kde-format
 msgid "Export to ONIX..."
 msgstr "Експорт у ONIX…"
 
-#: src/mainwindow.cpp:538
+#: src/mainwindow.cpp:537
 #, kde-format
 msgid "Export to an ONIX file"
 msgstr "Експорт у файл ONIX"
 
-#: src/mainwindow.cpp:540
+#: src/mainwindow.cpp:539
 #, kde-format
 msgid "Export to GCstar..."
 msgstr "Експорт у GCstar…"
 
-#: src/mainwindow.cpp:541
+#: src/mainwindow.cpp:540
 #, kde-format
 msgid "Export to a GCstar data file"
 msgstr "Експорт у файл даних GCstar"
 
-#: src/mainwindow.cpp:544
+#: src/mainwindow.cpp:543
 #, kde-format
 msgid "Export XSL Transform..."
 msgstr "Експорт у XSLT…"
 
-#: src/mainwindow.cpp:545
+#: src/mainwindow.cpp:544
 #, kde-format
 msgid "Export using an XSL Transform"
 msgstr "Експорт, використовуючи XSLT"
 
-#: src/mainwindow.cpp:556
+#: src/mainwindow.cpp:555
 #, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr "Вирізати позначений текст та помістити його до буфера обміну"
 
-#: src/mainwindow.cpp:558
+#: src/mainwindow.cpp:557
 #, kde-format
 msgid "Copy the selected text to the clipboard"
 msgstr "Копіювати позначений текст до буфера обміну"
 
-#: src/mainwindow.cpp:560
+#: src/mainwindow.cpp:559
 #, kde-format
 msgid "Paste the clipboard contents"
 msgstr "Вставити вміст буфера обміну"
 
-#: src/mainwindow.cpp:562
+#: src/mainwindow.cpp:561
 #, kde-format
 msgid "Select all the entries in the collection"
 msgstr "Позначити усі записи у збірці"
 
-#: src/mainwindow.cpp:564
+#: src/mainwindow.cpp:563
 #, kde-format
 msgid "Deselect all the entries in the collection"
 msgstr "Скасувати вибір усіх записів у збірці"
 
-#: src/mainwindow.cpp:567
+#: src/mainwindow.cpp:566
 #, kde-format
 msgid "Advanced &Filter..."
 msgstr "Додаткове &фільтрування…"
 
-#: src/mainwindow.cpp:571 src/mainwindow.cpp:797
+#: src/mainwindow.cpp:570 src/mainwindow.cpp:796
 #, kde-format
 msgid "Filter the collection"
 msgstr "Фільтрувати збірку"
 
-#: src/mainwindow.cpp:578
+#: src/mainwindow.cpp:577
 #, kde-format
 msgid "&New Entry..."
 msgstr "&Новий запис…"
 
-#: src/mainwindow.cpp:580
+#: src/mainwindow.cpp:579
 #, kde-format
 msgid "New Entry"
 msgstr "Новий запис"
 
-#: src/mainwindow.cpp:582
+#: src/mainwindow.cpp:581
 #, kde-format
 msgid "Create a new entry"
 msgstr "Створити новий запис"
 
-#: src/mainwindow.cpp:584
+#: src/mainwindow.cpp:583
 #, kde-format
 msgid "Add Entry"
 msgstr "Додати запис"
 
-#: src/mainwindow.cpp:594
+#: src/mainwindow.cpp:593
 #, kde-format
 msgid "Internet Search..."
 msgstr "Пошук в інтернеті…"
 
-#: src/mainwindow.cpp:598
+#: src/mainwindow.cpp:597
 #, kde-format
 msgid "Search the internet..."
 msgstr "Пошук в інтернеті"
 
-#: src/mainwindow.cpp:608
+#: src/mainwindow.cpp:607
 #, kde-format
 msgid "Edit the selected entries"
 msgstr "Редагувати позначені записи"
 
-#: src/mainwindow.cpp:615
+#: src/mainwindow.cpp:614
 #, kde-format
 msgid "Copy the selected entries"
 msgstr "Копіювати позначені записи"
 
-#: src/mainwindow.cpp:622
+#: src/mainwindow.cpp:621
 #, kde-format
 msgid "Delete the selected entries"
 msgstr "Вилучити позначені записи"
 
-#: src/mainwindow.cpp:626
+#: src/mainwindow.cpp:625
 #, kde-format
 msgid "&Merge Entries"
 msgstr "&Об’єднати записи"
 
-#: src/mainwindow.cpp:630
+#: src/mainwindow.cpp:629
 #, kde-format
 msgid "Merge the selected entries"
 msgstr "Об’єднати позначені записи"
 
-#: src/mainwindow.cpp:634
+#: src/mainwindow.cpp:633
 #, kde-format
 msgid "Check-&out..."
 msgstr "В&іддати у борг…"
 
-#: src/mainwindow.cpp:636
+#: src/mainwindow.cpp:635
 #, kde-format
 msgid "Check-out the selected items"
 msgstr "Додати позначені записи до боргових"
 
-#: src/mainwindow.cpp:639
+#: src/mainwindow.cpp:638
 #, kde-format
 msgid "Check-&in"
 msgstr "&Повернути з боргу"
 
-#: src/mainwindow.cpp:641
+#: src/mainwindow.cpp:640
 #, kde-format
 msgid "Check-in the selected items"
 msgstr "Повернути з боргу позначені записи"
 
-#: src/mainwindow.cpp:644
+#: src/mainwindow.cpp:643
 #, kde-format
 msgid "&Rename Collection..."
 msgstr "П&ерейменувати збірку…"
 
-#: src/mainwindow.cpp:647
+#: src/mainwindow.cpp:646
 #, kde-format
 msgid "Rename the collection"
 msgstr "Перейменувати збірку"
 
-#: src/mainwindow.cpp:650
+#: src/mainwindow.cpp:649
 #, kde-format
 msgid "Collection &Fields..."
 msgstr "По&ля у збірці…"
 
-#: src/mainwindow.cpp:651
+#: src/mainwindow.cpp:650
 #, kde-format
 msgid "Fields"
 msgstr "Поля"
 
-#: src/mainwindow.cpp:654
+#: src/mainwindow.cpp:653
 #, kde-format
 msgid "Modify the collection fields"
 msgstr "Редагувати поля у збірці"
 
-#: src/mainwindow.cpp:657
+#: src/mainwindow.cpp:656
 #, kde-format
 msgid "&Generate Reports..."
 msgstr "С&творити звіт…"
 
-#: src/mainwindow.cpp:658
+#: src/mainwindow.cpp:657
 #, kde-format
 msgid "Reports"
 msgstr "Звіти"
 
-#: src/mainwindow.cpp:660
+#: src/mainwindow.cpp:659
 #, kde-format
 msgid "Generate collection reports"
 msgstr "Створити звіт щодо збірки"
 
-#: src/mainwindow.cpp:663
+#: src/mainwindow.cpp:662
 #, kde-format
 msgid "Convert to &Bibliography"
 msgstr "Перетворити на &бібліографію"
 
-#: src/mainwindow.cpp:665
+#: src/mainwindow.cpp:664
 #, kde-format
 msgid "Convert a book collection to a bibliography"
 msgstr "Перетворити збірку книг у бібліографію"
 
-#: src/mainwindow.cpp:668
+#: src/mainwindow.cpp:667
 #, kde-format
 msgid "String &Macros..."
 msgstr "&Макрос обробки рядків…"
 
-#: src/mainwindow.cpp:670
+#: src/mainwindow.cpp:669
 #, kde-format
 msgid "Edit the bibtex string macros"
 msgstr "Редагувати макрос обробки рядків bibtex"
 
-#: src/mainwindow.cpp:673
+#: src/mainwindow.cpp:672
 #, kde-format
 msgid "Check for Duplicate Keys..."
 msgstr "Перевірити на дублікати ключів…"
 
-#: src/mainwindow.cpp:675
+#: src/mainwindow.cpp:674
 #, kde-format
 msgid "Check for duplicate citation keys"
 msgstr "Перевірити на дублікати ключів цитування"
 
-#: src/mainwindow.cpp:685
+#: src/mainwindow.cpp:684
 #, kde-format
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "Копіювати дані Bibtex до б&уфера обміну"
 
-#: src/mainwindow.cpp:686
+#: src/mainwindow.cpp:685
 #, kde-format
 msgid "Copy bibtex citations to the clipboard"
 msgstr "Копіювати дані Bibtex в буфер обміну"
 
-#: src/mainwindow.cpp:691
+#: src/mainwindow.cpp:690
 #, kde-format
 msgid "Cite Entry in &LyX"
 msgstr "Створити посиланн&я в LyX"
 
-#: src/mainwindow.cpp:692
+#: src/mainwindow.cpp:691
 #, kde-format
 msgid "Cite the selected entries in LyX"
 msgstr "Відправити позначені записи в LyX"
 
-#: src/mainwindow.cpp:708
+#: src/mainwindow.cpp:707
 #, kde-format
 msgctxt "Update Entry"
 msgid "Update"
 msgstr "Оновити"
 
-#: src/mainwindow.cpp:717
+#: src/mainwindow.cpp:716
 #, kde-format
 msgid "All Sources"
 msgstr "Всі джерела"
 
-#: src/mainwindow.cpp:718
+#: src/mainwindow.cpp:717
 #, kde-format
 msgid "Update entry data from all available sources"
 msgstr "Оновити дані записів зі всіх джерел."
 
-#: src/mainwindow.cpp:729
+#: src/mainwindow.cpp:728
 #, kde-format
 msgid "Unlock Layout"
 msgstr "Розблокувати компонування"
 
-#: src/mainwindow.cpp:730
+#: src/mainwindow.cpp:729
 #, kde-format
 msgid "Unlock the window's layout"
 msgstr "Розблокувати компонування вікна"
 
-#: src/mainwindow.cpp:732
+#: src/mainwindow.cpp:731
 #, kde-format
 msgid "Lock Layout"
 msgstr "Заблокувати компонування"
 
-#: src/mainwindow.cpp:733
+#: src/mainwindow.cpp:732
 #, kde-format
 msgid "Lock the window's layout"
 msgstr "Заблокувати компонування вікна"
 
-#: src/mainwindow.cpp:738
+#: src/mainwindow.cpp:737
 #, kde-format
 msgid "Reset Layout"
 msgstr "Скинути компонування"
 
-#: src/mainwindow.cpp:739
+#: src/mainwindow.cpp:738
 #, kde-format
 msgid "Reset the window's layout"
 msgstr "Відновити початкове компонування вікна"
 
-#: src/mainwindow.cpp:742
+#: src/mainwindow.cpp:741
 #, kde-format
 msgid "Entry &Editor"
 msgstr "Редактор &записів"
 
-#: src/mainwindow.cpp:744
+#: src/mainwindow.cpp:743
 #, kde-format
 msgid "Enable/disable the editor"
 msgstr "Показати/приховати редактор записів"
 
-#: src/mainwindow.cpp:764
+#: src/mainwindow.cpp:763
 #, kde-format
 msgid "Change Grouping"
 msgstr "Змінити спосіб групування"
 
-#: src/mainwindow.cpp:767
+#: src/mainwindow.cpp:766
 #, kde-format
 msgid "&Group Selection"
 msgstr "&Групувати за"
 
-#: src/mainwindow.cpp:768
+#: src/mainwindow.cpp:767
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr "Змінити спосіб групування у збірці"
 
-#: src/mainwindow.cpp:782
+#: src/mainwindow.cpp:781
 #, kde-format
 msgid "Filter here..."
 msgstr "Введіть сюди критерій фільтрування…"
 
-#: src/mainwindow.cpp:847 src/mainwindow.cpp:850
+#: src/mainwindow.cpp:846 src/mainwindow.cpp:849
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
@@ -6225,12 +6221,12 @@ msgstr ""
 "<qt><i>Інформація про записи</i> показує інформацію про записи у "
 "відформатованому вигляді.</qt>"
 
-#: src/mainwindow.cpp:856
+#: src/mainwindow.cpp:855
 #, kde-format
 msgid "Collection View"
 msgstr "Перегляд збірки"
 
-#: src/mainwindow.cpp:863
+#: src/mainwindow.cpp:862
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
@@ -6239,17 +6235,17 @@ msgstr ""
 "<qt><i>Перегляд стовпців</i> показує значення декілька полів для кожного "
 "запису</qt>"
 
-#: src/mainwindow.cpp:880
+#: src/mainwindow.cpp:879
 #, kde-format
 msgid "Group View"
 msgstr "Перегляд груп"
 
-#: src/mainwindow.cpp:889
+#: src/mainwindow.cpp:888
 #, kde-format
 msgid "Groups"
 msgstr "Групи"
 
-#: src/mainwindow.cpp:890
+#: src/mainwindow.cpp:889
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
@@ -6258,12 +6254,12 @@ msgstr ""
 "<qt>Позначення пункту <i>«Групувати записи»</i> призведе до впорядкування "
 "записів за вибраним способом групування.</qt>"
 
-#: src/mainwindow.cpp:965
+#: src/mainwindow.cpp:964
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Ласкаво просимо до інструмента роботи зі збірками Tellico"
 
-#: src/mainwindow.cpp:967
+#: src/mainwindow.cpp:966
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6278,7 +6274,7 @@ msgstr ""
 "даних вручну</a>, або <a href=\"tc:///edit_search_internet\">отриманням "
 "даних</a> з різноманітних джерел у інтернеті.</h3>"
 
-#: src/mainwindow.cpp:1166
+#: src/mainwindow.cpp:1165
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6287,22 +6283,22 @@ msgstr ""
 "Поточний файл був змінений.\n"
 "Ви хочете зберегти його?"
 
-#: src/mainwindow.cpp:1202 src/mainwindow.cpp:1235
+#: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
 #, kde-format
 msgid "Creating new collection..."
 msgstr "Створення збірки…"
 
-#: src/mainwindow.cpp:1255 src/mainwindow.cpp:1278 src/mainwindow.cpp:1296
+#: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
 #, kde-format
 msgid "Opening file..."
 msgstr "Відкриття файла…"
 
-#: src/mainwindow.cpp:1266
+#: src/mainwindow.cpp:1285
 #, kde-format
 msgid "Open File"
 msgstr "Відкрити файл"
 
-#: src/mainwindow.cpp:1387
+#: src/mainwindow.cpp:1406
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6315,32 +6311,32 @@ msgstr ""
 "Хочете зберегти зображення у теці Tellico (у файл будуть записані тільки "
 "«текстові» дані)?</p></qt>"
 
-#: src/mainwindow.cpp:1392
+#: src/mainwindow.cpp:1411
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Зберігати зображення окремо"
 
-#: src/mainwindow.cpp:1393
+#: src/mainwindow.cpp:1412
 #, kde-format
 msgid "Save Images in File"
 msgstr "Зберігати файл разом із зображеннями"
 
-#: src/mainwindow.cpp:1428
+#: src/mainwindow.cpp:1452
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Файл зберігається з новою назвою…"
 
-#: src/mainwindow.cpp:1437
+#: src/mainwindow.cpp:1461
 #, kde-format
 msgid "Save As"
 msgstr "Зберегти як"
 
-#: src/mainwindow.cpp:1503
+#: src/mainwindow.cpp:1527
 #, kde-format
 msgid "Printing..."
 msgstr "Друк…"
 
-#: src/mainwindow.cpp:1507
+#: src/mainwindow.cpp:1531
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6349,27 +6345,27 @@ msgstr ""
 "Зараз до збірки застосовано фільтр, за якого показано обмежену підмножину "
 "записів. Надруковано буде лише видимі записи. Продовжити?"
 
-#: src/mainwindow.cpp:1530
+#: src/mainwindow.cpp:1554
 #, kde-format
 msgid "Exiting..."
 msgstr "Вихід…"
 
-#: src/mainwindow.cpp:1636
+#: src/mainwindow.cpp:1660
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 відфільтровано; %2 позначено)"
 
-#: src/mainwindow.cpp:1639
+#: src/mainwindow.cpp:1663
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 відфільтровано)"
 
-#: src/mainwindow.cpp:1642
+#: src/mainwindow.cpp:1666
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 позначено)"
 
-#: src/mainwindow.cpp:1781 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1805 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:264
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6377,57 +6373,57 @@ msgstr "(%1 позначено)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Відбулася помилка в XSLT"
 
-#: src/mainwindow.cpp:1913
+#: src/mainwindow.cpp:1937
 #, kde-format
 msgid "Importing data..."
 msgstr "Імпорт даних…"
 
-#: src/mainwindow.cpp:1924
+#: src/mainwindow.cpp:1948
 #, kde-format
 msgid "Import File"
 msgstr "Імпорт файла"
 
-#: src/mainwindow.cpp:1937
+#: src/mainwindow.cpp:1961
 #, kde-format
 msgid "Import Directory"
 msgstr "Імпорт теки"
 
-#: src/mainwindow.cpp:1961
+#: src/mainwindow.cpp:1985
 #, kde-format
 msgid "Exporting data..."
 msgstr "Експортування даних…"
 
-#: src/mainwindow.cpp:1984
+#: src/mainwindow.cpp:2008
 #, kde-format
 msgid "Export As"
 msgstr "Експортувати як"
 
-#: src/mainwindow.cpp:2012
+#: src/mainwindow.cpp:2036
 #, kde-format
 msgid "String Macros"
 msgstr "Макрос обробки рядків"
 
-#: src/mainwindow.cpp:2013
+#: src/mainwindow.cpp:2037
 #, kde-format
 msgid "Macro"
 msgstr "Макрос"
 
-#: src/mainwindow.cpp:2013
+#: src/mainwindow.cpp:2037
 #, kde-format
 msgid "String"
 msgstr "Рядок"
 
-#: src/mainwindow.cpp:2100
+#: src/mainwindow.cpp:2123
 #, kde-format
 msgid "Creating citations..."
 msgstr "Йде створення…"
 
-#: src/mainwindow.cpp:2210
+#: src/mainwindow.cpp:2233
 #, kde-format
 msgid "Filters"
 msgstr "Фільтри"
 
-#: src/mainwindow.cpp:2211
+#: src/mainwindow.cpp:2234
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6436,12 +6432,12 @@ msgstr ""
 "<qt>У режимі <i>Фільтрованого перегляду</i> буде показано лише ті записи, "
 "які відповідають певним правилам фільтрування.</qt>"
 
-#: src/mainwindow.cpp:2234
+#: src/mainwindow.cpp:2257
 #, kde-format
 msgid "Loans"
 msgstr "Борги"
 
-#: src/mainwindow.cpp:2235
+#: src/mainwindow.cpp:2258
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6450,7 +6446,7 @@ msgstr ""
 "<qt><i>Перегляд боржників</i> показує людей, які щось взяли у борг з вашої "
 "збірки.</qt>"
 
-#: src/mainwindow.cpp:2322
+#: src/mainwindow.cpp:2345
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6459,12 +6455,12 @@ msgstr ""
 "Деякі з зображень не було збережено за вказаною адресою. Вам слід зберегти "
 "поточний файл, зображення буде перенесено до теки за новою адресою."
 
-#: src/mainwindow.cpp:2363
+#: src/mainwindow.cpp:2386
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Оновити дані запису з «%1»"
 
-#: src/mainwindow.cpp:2382
+#: src/mainwindow.cpp:2405
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6514,42 +6510,43 @@ msgstr "файли PNG"
 msgid "HTML Files"
 msgstr "файли HTML"
 
-#: src/tellico_kernel.cpp:268
+#: src/tellico_kernel.cpp:269
 #, kde-format
 msgid "Do you really want to delete this filter?"
 msgstr "Ви дійсно хочете вилучити цей фільтр?"
 
-#: src/tellico_kernel.cpp:270
+#: src/tellico_kernel.cpp:272 src/tellico_kernel.cpp:276
 #, kde-format
 msgid "Delete Filter?"
 msgstr "Вилучити фільтр?"
 
-#: src/tellico_kernel.cpp:306
+#: src/tellico_kernel.cpp:313
 #, kde-format
 msgid "New collection name:"
 msgstr "Нова назва збірки:"
 
-#: src/tellico_kernel.cpp:322
+#: src/tellico_kernel.cpp:329
 #, kde-format
 msgid "Entry 1"
 msgstr "Запис 1"
 
-#: src/tellico_kernel.cpp:323
+#: src/tellico_kernel.cpp:330
 #, kde-format
 msgid "Entry 2"
 msgstr "Запис 2"
 
-#: src/tellico_kernel.cpp:332
+#: src/tellico_kernel.cpp:339
 #, kde-format
 msgid "Conflicting values for %1 were found while merging entries."
 msgstr "Під час об’єднання записів виявлено конфлікт значень %1."
 
-#: src/tellico_kernel.cpp:338
+#: src/tellico_kernel.cpp:345
 #, kde-format
 msgid "Please choose which value to keep."
 msgstr "Будь ласка, оберіть те значення, яке слід зберегти."
 
-#: src/tellico_kernel.cpp:344 src/tellico_kernel.cpp:345
+#: src/tellico_kernel.cpp:352 src/tellico_kernel.cpp:353
+#: src/tellico_kernel.cpp:364 src/tellico_kernel.cpp:365
 #, kde-format
 msgid "Select value from %1"
 msgstr "Вибрати значення з %1"
@@ -7638,6 +7635,9 @@ msgstr "Пошук"
 #, kde-format
 msgid "Clear"
 msgstr "Спорожнити"
+
+#~ msgid "Click to download additional data sources."
+#~ msgstr "Натисніть, щоб отримати додаткові джерела даних."
 
 #~ msgid "Edit..."
 #~ msgstr "Редагувати…"
