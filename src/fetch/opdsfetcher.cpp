@@ -50,95 +50,87 @@
 using namespace Tellico;
 using Tellico::Fetch::OPDSFetcher;
 
-// utility class for reading the OPDS catalog and finding the search information
-class OPDSReader {
-public:
-  OPDSReader(const QUrl& catalog_) : catalog(catalog_) {}
+OPDSFetcher::Reader::Reader(const QUrl& catalog_) : catalog(catalog_) {
+}
 
-  // read the catalog file and return the search description url
-  QString readSearchUrl() {
-    const QByteArray opdsText = FileHandler::readDataFile(catalog);
-    QXmlStreamReader xml(opdsText);
-    int depth = 0;
-    while(xml.readNext() != QXmlStreamReader::Invalid) {
-      switch(xml.tokenType()) {
-        case QXmlStreamReader::StartElement:
-          ++depth;
-          if(depth == 2 &&
-             xml.name() == QLatin1String("link") &&
-             xml.namespaceUri() == Tellico::XML::nsAtom) {
-            auto attributes = xml.attributes();
-            if(attributes.value(QStringLiteral("rel")) == QLatin1String("search")) {
-              // found the search url
-              return attributes.value(QStringLiteral("href")).toString();
-            }
+// read the catalog file and return the search description url
+QString OPDSFetcher::Reader::readSearchUrl() {
+  const QByteArray opdsText = FileHandler::readDataFile(catalog);
+  QXmlStreamReader xml(opdsText);
+  int depth = 0;
+  while(xml.readNext() != QXmlStreamReader::Invalid) {
+    switch(xml.tokenType()) {
+      case QXmlStreamReader::StartElement:
+        ++depth;
+        if(depth == 2 && xml.name() == QLatin1String("link") &&
+                         xml.namespaceUri() == Tellico::XML::nsAtom) {
+          auto attributes = xml.attributes();
+          if(attributes.value(QStringLiteral("rel")) == QLatin1String("search")) {
+            // found the search url
+            const auto href = QUrl(attributes.value(QStringLiteral("href")).toString());
+            return catalog.resolved(href).url();
           }
-          break;
-        case QXmlStreamReader::EndElement:
-          --depth;
-          break;
-        default:
-          break;
-      }
+        }
+        break;
+      case QXmlStreamReader::EndElement:
+        --depth;
+        break;
+      default:
+        break;
     }
-    // nothing found
-    return QString();
   }
+  // nothing found
+  return QString();
+}
 
-  bool readSearchTemplate() {
-//    myDebug() << "Reading catalog:" << catalog;
-    QString searchDescriptionUrl = readSearchUrl();
-    if(searchDescriptionUrl.isEmpty()) return false;
-//    myDebug() << "Reading search description:" << searchDescriptionUrl;
-    // read the search description and find the search template
-    const QByteArray descText = FileHandler::readDataFile(QUrl(searchDescriptionUrl));
-    QXmlStreamReader xml(descText);
-    int depth = 0;
-    QString text, shortName, longName;
-    while(xml.readNext() != QXmlStreamReader::Invalid) {
-      switch(xml.tokenType()) {
-        case QXmlStreamReader::StartElement:
-          ++depth;
-          if(depth == 2) {
-            if(xml.name() == QLatin1String("Url") &&
-               xml.namespaceUri() == XML::nsOpenSearch) {
-              auto attributes = xml.attributes();
-              if(attributes.value(QLatin1String("type")) == QLatin1String("application/atom+xml")) {
-                searchTemplate = attributes.value(QStringLiteral("template")).toString();
-              }
-            }
+bool OPDSFetcher::Reader::readSearchTemplate() {
+  //    myDebug() << "Reading catalog:" << catalog;
+  QString searchDescriptionUrl = readSearchUrl();
+  if(searchDescriptionUrl.isEmpty()) return false;
+  //    myDebug() << "Reading search description:" << searchDescriptionUrl;
+  // read the search description and find the search template
+  const QByteArray descText = FileHandler::readDataFile(QUrl(searchDescriptionUrl));
+  QXmlStreamReader xml(descText);
+  int depth = 0;
+  QString text, shortName, longName;
+  text.reserve(128);
+  while(xml.readNext() != QXmlStreamReader::Invalid) {
+    switch(xml.tokenType()) {
+      case QXmlStreamReader::StartElement:
+        ++depth;
+        if(depth == 2 && xml.name() == QLatin1String("Url") &&
+                         xml.namespaceUri() == XML::nsOpenSearch) {
+          auto attributes = xml.attributes();
+          if(attributes.value(QLatin1String("type")) == QLatin1String("application/atom+xml")) {
+            searchTemplate = attributes.value(QStringLiteral("template")).toString();
           }
-          break;
-        case QXmlStreamReader::EndElement:
-          if(depth == 2 && xml.name() == QLatin1String("LongName")) {
+        }
+        break;
+      case QXmlStreamReader::EndElement:
+        if(depth == 2) {
+          if(xml.name() == QLatin1String("LongName")) {
             longName = text.simplified();
-          } else if(depth == 2 && xml.name() == QLatin1String("ShortName")) {
+          } else if(xml.name() == QLatin1String("ShortName")) {
             shortName = text.simplified();
-          } else if(depth == 2 && xml.name() == QLatin1String("Image")) {
+          } else if(xml.name() == QLatin1String("Image")) {
             icon = text.simplified();
-          } else if(depth == 2 && xml.name() == QLatin1String("Attribution")) {
+          } else if(xml.name() == QLatin1String("Attribution")) {
             attribution = text.simplified();
           }
-          --depth;
-          text.clear();
-          break;
-        case QXmlStreamReader::Characters:
-          text += xml.text();
-          break;
-        default:
-          break;
-      }
+        }
+        --depth;
+        text.clear();
+        break;
+      case QXmlStreamReader::Characters:
+        text += xml.text();
+        break;
+      default:
+        break;
     }
-    name = longName.isEmpty() ? shortName : longName;
-    return !searchTemplate.isEmpty();
   }
-
-  QUrl catalog;
-  QString searchTemplate;
-  QString name;
-  QString icon;
-  QString attribution;
-};
+  name = longName.isEmpty() ? shortName : longName;
+  return !searchTemplate.isEmpty();
+}
 
 OPDSFetcher::OPDSFetcher(QObject* parent_)
     : Fetcher(parent_), m_xsltHandler(nullptr), m_started(false) {
@@ -196,7 +188,7 @@ void OPDSFetcher::search() {
     return;
   }
 
-  OPDSReader reader(QUrl::fromUserInput(m_catalog));
+  Reader reader(QUrl::fromUserInput(m_catalog));
   if(m_searchTemplate.isEmpty() && !reader.readSearchTemplate()) {
     myDebug() << source() << "- no search template";
     message(i18n("Tellico is unable to read the search description in the OPDS catalog."), MessageHandler::Error);
@@ -412,7 +404,7 @@ QString OPDSFetcher::ConfigWidget::preferredName() const {
 }
 
 void OPDSFetcher::ConfigWidget::verifyCatalog() {
-  OPDSReader reader(m_catalogEdit->url());
+  OPDSFetcher::Reader reader(m_catalogEdit->url());
   if(reader.readSearchTemplate()) {
     const int imgSize = 0.8*m_statusLabel->height();
     m_statusLabel->setPixmap(QIcon::fromTheme(QStringLiteral("emblem-checked")).pixmap(imgSize, imgSize));

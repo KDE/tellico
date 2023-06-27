@@ -74,6 +74,8 @@ public:
 
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
 
+  class Reader;
+  friend class Reader;
   class ConfigWidget;
   friend class ConfigWidget;
 
@@ -98,6 +100,20 @@ private:
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
   bool m_started;
+};
+
+// utility class for reading the OPDS catalog and finding the search information
+class OPDSFetcher::Reader {
+public:
+  Reader(const QUrl& catalog);
+  QString readSearchUrl();
+  bool readSearchTemplate();
+
+  QUrl catalog;
+  QString searchTemplate;
+  QString name;
+  QString icon;
+  QString attribution;
 };
 
 class OPDSFetcher::ConfigWidget : public Fetch::ConfigWidget {

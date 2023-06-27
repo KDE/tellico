@@ -93,3 +93,14 @@ void OPDSFetcherTest::testEmptyGutenberg() {
   QVERIFY(results.isEmpty());
   QVERIFY(!fetcher->attribution().isEmpty());
 }
+
+void OPDSFetcherTest::testRelativeSearch() {
+  QUrl catalog = QUrl::fromLocalFile(QFINDTESTDATA("data/opds-relative-search.xml"));
+  QUrl search = catalog.resolved(QUrl(QLatin1String("../opensearch.xml")));
+  Tellico::Fetch::OPDSFetcher::Reader reader(catalog);
+
+  QUrl searchUrl(reader.readSearchUrl());
+  QVERIFY(!searchUrl.isEmpty());
+  QVERIFY(!searchUrl.isRelative());
+  QCOMPARE(searchUrl.url(), search.url());
+}
