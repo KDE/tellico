@@ -417,11 +417,6 @@
 >Eliminar</guibutton
 >. El orden de las fuentes, que se muestra en los menús de actualización de entradas, también se puede cambiar. </para>
 
-<warning>
-<para
->Nunca instale o ejecute un script de una fuente que no sea de confianza. Se ejecutan con los mismos permisos del usuario, y como resultado podrían modificar o eliminar archivos, o perjudicar su sistema de cualquier otra forma. </para>
-</warning>
-
 <para
 >Muchas de las fuentes de datos ofrecen más información que los campos predeterminados de &appname;. Esos campos se muestran a la derecha del cuadro de configuración. Si alguno de esos campos está marcado, se añadirá a la colección cuando se añada una entrada desde esa fuente. </para>
 
@@ -825,9 +820,14 @@
 >, sino que también puede importar otros formatos, como bibtex. </para>
 
 <para
->La ruta completa a la aplicación debería introducirse en las opciones de la fuente. Tenga en cuenta que la aplicación se ejecuta en un sistema con los mismos permisos que el usuario actual, así que no use scripts de fuentes que no sean de confianza. Marque las casillas junto a las claves de búsqueda admitidas por la aplicación, e introduzca las opciones de línea de órdenes requeridas en la caja de edición. El valor de búsqueda será insertado donde aparezca <userinput
+>La ruta completa a la aplicación debería introducirse en las opciones de la fuente. Marque las casillas junto a las claves de búsqueda admitidas por la aplicación, e introduzca las opciones de línea de órdenes requeridas en la caja de edición. El valor de búsqueda será insertado donde aparezca <userinput
 >%1</userinput
 >. </para>
+
+<warning>
+<para
+>Nunca instale o ejecute un script de una fuente que no sea de confianza. Se ejecutan con los mismos permisos del usuario, y como resultado podrían modificar o eliminar archivos, o perjudicar su sistema de cualquier otra forma. </para>
+</warning>
 
 <para
 >Para actualizar entradas que ya estén en la colección, las casillas de comprobación final y de edición se utilizan para determinar las opciones de la línea de órdenes. Deben introducirse los campos de entrada usados para encontrar una actualización, en el mismo formato que se utilizó para los campos de <link linkend="derived"

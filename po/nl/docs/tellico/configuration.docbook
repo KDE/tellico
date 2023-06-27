@@ -417,11 +417,6 @@
 >Verwijderen</guibutton
 >. De volgorde van de bronnen, die verschijnen in het item menu's bijwerken, kan ook gewijzigd worden. </para>
 
-<warning>
-<para
->Installeer en voer nooit een script uit van een niet-vertrouwde bron. Ze worden uitgevoerd met dezelfde rechten als de gebruiker en, als resultaat, kunnen bestanden worden gewijzigd of verwijderd of op een andere manier uw systeem verstoren. </para>
-</warning>
-
 <para
 >Veel van de gegevensbronnen bieden meer informatie dan de standaard velden in &appname;. Die andere velden worden rechts van het configuratievak getoond. Als een van deze velden is aangevinkt zullen deze toegevoegd worden aan de verzameling wanneer een item wordt toegevoegd uit die bron. </para>
 
@@ -825,9 +820,14 @@
 > gebruikt, maar het kan ook andere formaten importeren, zoals bibtex. </para>
 
 <para
->Het volledige pad naar de toepassing zou ingevuld moeten worden in de bronopties. Merk op dat de toepassing wordt uitgevoerd op het systeem met dezelfde rechten als de huidige gebruiker, gebruik dus geen scripts uit niet vertrouwde bronnen. Activeer de vakjes naast de zoeksleutels ondersteund door de toepassing en voer de vereiste opdrachtregelopties in het bewerkingsvak. De zoekwaarde zal ingevoegd worden waar <userinput
+>Het volledige pad naar de toepassing zou ingevuld moeten worden in de bronopties. Activeer de vakjes naast de zoeksleutels ondersteund door de toepassing en voer de vereiste opdrachtregelopties in het bewerkingsvak. De zoekwaarde zal ingevoegd worden waar <userinput
 >%1</userinput
 > verschijnt. </para>
+
+<warning>
+<para
+>Installeer en voer nooit een script uit van een niet-vertrouwde bron. Ze worden uitgevoerd met dezelfde rechten als de gebruiker en, als resultaat, kunnen bestanden worden gewijzigd of verwijderd of op een andere manier uw systeem verstoren. </para>
+</warning>
 
 <para
 >Om items, die al in de verzameling zitten, bij te werken, worden het uiteindelijke keuzevakje en bewerkingsvak gebruikt om de opdrachtregelopties te bepalen. De invoervelden gebruikt om wat bijgewerkt moet worden te vinden moeten ingevoerd worden, in hetzelfde formaat als gebruikt voor <link linkend="derived"

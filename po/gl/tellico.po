@@ -6974,7 +6974,7 @@ msgstr "A primeira &fila contén os nomes dos campos"
 #: src/translators/csvimporter.cpp:229
 #, kde-format
 msgid "If checked, the first row is used as field titles."
-msgstr "Se se marca, empregarase a primeira fila como nomes dos campos."
+msgstr "Se se marca, usarase a primeira fila como nomes dos campos."
 
 #: src/translators/csvimporter.cpp:245
 #, kde-format

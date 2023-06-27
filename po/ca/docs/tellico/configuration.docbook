@@ -417,11 +417,6 @@
 >Suprimeix</guibutton
 >. L'ordre de les fonts, el qual es mostra en els menús d'actualització de les entrades, també es pot canviar. </para>
 
-<warning>
-<para
->Mai instal·leu i executeu un script des d'una font no fiable. Doncs s'executen amb els mateixos permisos que l'usuari, i com a resultat, podrien modificar o suprimir fitxers o perjudicar el vostre sistema de qualsevol altra forma. </para>
-</warning>
-
 <para
 >Moltes de les fonts de dades ofereixen més informació que els camps predeterminats del &appname;. Aquests altres camps es mostren a la dreta del quadre de configuració. Si es marca qualsevol d'aquests camps, s'afegiran a la col·lecció quan s'afegeixi una entrada des d'aquesta font. </para>
 
@@ -825,9 +820,14 @@
 >, sinó que també pot importar altres formats, així com «bibtex». </para>
 
 <para
->El camí complet a l'aplicació s'ha d'introduir a les opcions de la font. Cal tenir en compte que l'aplicació s'executa en el sistema amb els mateixos permisos que l'usuari actual, de manera que no utilitzeu scripts de fonts no fiables. Marqueu les caselles al costat de les claus de cerca admeses per l'aplicació, i introduïu les opcions de la línia d'ordres requerides al quadre d'edició. El valor de cerca s'insereix on apareix <userinput
+>S'ha d'introduir el camí complet a l'aplicació  a les opcions de la font. Marqueu les caselles al costat de les claus de cerca admeses per l'aplicació, i introduïu les opcions de la línia d'ordres requerides al quadre d'edició. El valor de cerca s'insereix on apareix <userinput
 >%1</userinput
 >. </para>
+
+<warning>
+<para
+>Mai instal·leu i executeu un script des d'una font no fiable. Doncs s'executen amb els mateixos permisos que l'usuari, i com a resultat, podrien modificar o suprimir fitxers o perjudicar el vostre sistema de qualsevol altra forma. </para>
+</warning>
 
 <para
 >Per a actualitzar les entrades que ja estan a la col·lecció, s'utilitzen les caselles de selecció finals i el quadre d'edició per a determinar les opcions de la línia d'ordres. Els camps d'entrada s'utilitzen per a trobar una actualització, en el mateix format a l'utilitzat per als camps de <link linkend="derived"
