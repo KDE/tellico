@@ -99,7 +99,8 @@ void OPDSFetcherTest::testRelativeSearch() {
   QUrl search = catalog.resolved(QUrl(QLatin1String("../opensearch.xml")));
   Tellico::Fetch::OPDSFetcher::Reader reader(catalog);
 
-  QUrl searchUrl(reader.readSearchUrl());
+  QVERIFY(reader.parse());
+  QUrl searchUrl = reader.searchUrl;
   QVERIFY(!searchUrl.isEmpty());
   QVERIFY(!searchUrl.isRelative());
   QCOMPARE(searchUrl.url(), search.url());

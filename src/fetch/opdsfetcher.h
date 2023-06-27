@@ -106,10 +106,11 @@ private:
 class OPDSFetcher::Reader {
 public:
   Reader(const QUrl& catalog);
-  QString readSearchUrl();
+  bool parse();
   bool readSearchTemplate();
 
   QUrl catalog;
+  QUrl searchUrl;
   QString searchTemplate;
   QString name;
   QString icon;

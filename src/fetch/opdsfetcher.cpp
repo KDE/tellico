@@ -54,7 +54,7 @@ OPDSFetcher::Reader::Reader(const QUrl& catalog_) : catalog(catalog_) {
 }
 
 // read the catalog file and return the search description url
-QString OPDSFetcher::Reader::readSearchUrl() {
+bool OPDSFetcher::Reader::parse() {
   const QByteArray opdsText = FileHandler::readDataFile(catalog);
   QXmlStreamReader xml(opdsText);
   int depth = 0;
@@ -68,7 +68,7 @@ QString OPDSFetcher::Reader::readSearchUrl() {
           if(attributes.value(QStringLiteral("rel")) == QLatin1String("search")) {
             // found the search url
             const auto href = QUrl(attributes.value(QStringLiteral("href")).toString());
-            return catalog.resolved(href).url();
+            searchUrl = catalog.resolved(href);
           }
         }
         break;
@@ -79,17 +79,17 @@ QString OPDSFetcher::Reader::readSearchUrl() {
         break;
     }
   }
-  // nothing found
-  return QString();
+  // valid catalog either has a search url or is an acquisition feed
+  return !searchUrl.isEmpty();
 }
 
 bool OPDSFetcher::Reader::readSearchTemplate() {
   //    myDebug() << "Reading catalog:" << catalog;
-  QString searchDescriptionUrl = readSearchUrl();
-  if(searchDescriptionUrl.isEmpty()) return false;
+  if(!parse()) return false;
+  if(searchUrl.isEmpty()) return false;
   //    myDebug() << "Reading search description:" << searchDescriptionUrl;
   // read the search description and find the search template
-  const QByteArray descText = FileHandler::readDataFile(QUrl(searchDescriptionUrl));
+  const QByteArray descText = FileHandler::readDataFile(searchUrl);
   QXmlStreamReader xml(descText);
   int depth = 0;
   QString text, shortName, longName;
