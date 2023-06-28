@@ -37,6 +37,9 @@ private Q_SLOTS:
   void testFeedbooksSearch();
   void testEmptyGutenberg();
   void testRelativeSearch();
+  void testAcquisitionByTitle();
+  void testAcquisitionByTitleNegative();
+  void testAcquisitionByKeyword();
 };
 
 #endif

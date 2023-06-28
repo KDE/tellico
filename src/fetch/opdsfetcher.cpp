@@ -25,6 +25,7 @@
 #include "opdsfetcher.h"
 #include "../fieldformat.h"
 #include "../collection.h"
+#include "../collections/bookcollection.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../gui/lineedit.h"
@@ -55,20 +56,24 @@ OPDSFetcher::Reader::Reader(const QUrl& catalog_) : catalog(catalog_) {
 
 // read the catalog file and return the search description url
 bool OPDSFetcher::Reader::parse() {
-  const QByteArray opdsText = FileHandler::readDataFile(catalog);
+  opdsText = FileHandler::readDataFile(catalog);
   QXmlStreamReader xml(opdsText);
   int depth = 0;
   while(xml.readNext() != QXmlStreamReader::Invalid) {
     switch(xml.tokenType()) {
       case QXmlStreamReader::StartElement:
         ++depth;
-        if(depth == 2 && xml.name() == QLatin1String("link") &&
-                         xml.namespaceUri() == Tellico::XML::nsAtom) {
-          auto attributes = xml.attributes();
-          if(attributes.value(QStringLiteral("rel")) == QLatin1String("search")) {
-            // found the search url
-            const auto href = QUrl(attributes.value(QStringLiteral("href")).toString());
-            searchUrl = catalog.resolved(href);
+        if(depth == 2 && xml.namespaceUri() == Tellico::XML::nsAtom) {
+          if(xml.name() == QLatin1String("link")) {
+            auto attributes = xml.attributes();
+            if(attributes.value(QStringLiteral("rel")) == QLatin1String("search")) {
+              // found the search url
+              const auto href = QUrl(attributes.value(QStringLiteral("href")).toString());
+              searchUrl = catalog.resolved(href);
+            } else if(attributes.value(QStringLiteral("rel")) == QLatin1String("self")) {
+              // for now, consider the feed an acquisition feed if the self link is labeled as an acquisition feed
+              isAcquisition = attributes.value(QStringLiteral("type")).contains(QLatin1String("kind=acquisition"));
+            }
           }
         }
         break;
@@ -80,7 +85,7 @@ bool OPDSFetcher::Reader::parse() {
     }
   }
   // valid catalog either has a search url or is an acquisition feed
-  return !searchUrl.isEmpty();
+  return !searchUrl.isEmpty() || isAcquisition;
 }
 
 bool OPDSFetcher::Reader::readSearchTemplate() {
@@ -93,7 +98,6 @@ bool OPDSFetcher::Reader::readSearchTemplate() {
   QXmlStreamReader xml(descText);
   int depth = 0;
   QString text, shortName, longName;
-  text.reserve(128);
   while(xml.readNext() != QXmlStreamReader::Invalid) {
     switch(xml.tokenType()) {
       case QXmlStreamReader::StartElement:
@@ -189,12 +193,25 @@ void OPDSFetcher::search() {
   }
 
   Reader reader(QUrl::fromUserInput(m_catalog));
-  if(m_searchTemplate.isEmpty() && !reader.readSearchTemplate()) {
-    myDebug() << source() << "- no search template";
-    message(i18n("Tellico is unable to read the search description in the OPDS catalog."), MessageHandler::Error);
-    stop();
-    return;
+  if(m_searchTemplate.isEmpty()) {
+    if(!reader.parse()) {
+      myDebug() << source() << "- failed to parse";
+      message(i18n("Tellico is unable to read the search description in the OPDS catalog."), MessageHandler::Error);
+      stop();
+      return;
+    }
+    if(reader.isAcquisition) {
+      parseData(reader.opdsText, true /* manualSearch */);
+      return;
+    }
+    if(!reader.readSearchTemplate()) {
+      myDebug() << source() << "- no search template";
+      message(i18n("Tellico is unable to read the search description in the OPDS catalog."), MessageHandler::Error);
+      stop();
+      return;
+    }
   }
+  // continue with search
   if(m_searchTemplate.isEmpty()) {
     m_searchTemplate = reader.searchTemplate;
     m_icon = reader.icon;
@@ -261,14 +278,17 @@ void OPDSFetcher::slotComplete(KJob*) {
   // see bug 319662. If fetcher is cancelled, job is killed
   // if the pointer is retained, it gets double-deleted
   m_job = nullptr;
+  parseData(data);
+}
 
+void OPDSFetcher::parseData(const QByteArray& data_, bool manualSearch_) {
 #if 0
   myWarning() << "Remove debug from opdsfetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
-    t << data;
+    t << data_;
   }
   f.close();
 #endif
@@ -282,7 +302,7 @@ void OPDSFetcher::slotComplete(KJob*) {
   }
 
   // assume result is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data.constData(), data.size()));
+  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data_.constData(), data_.size()));
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
 
@@ -293,11 +313,36 @@ void OPDSFetcher::slotComplete(KJob*) {
   }
 
   foreach(Data::EntryPtr entry, coll->entries()) {
+    // if manual search, do poor man's comparison
+    if(manualSearch_ && !matchesEntry(entry)) continue;
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }
   stop();
+}
+
+bool OPDSFetcher::matchesEntry(Data::EntryPtr entry_) const {
+  switch(request().key()) {
+    case Title:
+      return entry_->title().contains(request().value(), Qt::CaseInsensitive);
+    case ISBN:
+      {
+        ISBNComparison comp;
+        return comp(entry_->field(QStringLiteral("isbn")), request().value());
+      }
+    case Keyword:
+      return entry_->title().contains(request().value(), Qt::CaseInsensitive) ||
+        entry_->field(QStringLiteral("author")).contains(request().value(), Qt::CaseInsensitive) ||
+        entry_->field(QStringLiteral("keyword")).contains(request().value(), Qt::CaseInsensitive) ||
+        entry_->field(QStringLiteral("publisher")).contains(request().value(), Qt::CaseInsensitive) ||
+        entry_->field(QStringLiteral("genre")).contains(request().value(), Qt::CaseInsensitive) ||
+        entry_->field(QStringLiteral("pub_year")).contains(request().value(), Qt::CaseInsensitive) ||
+        entry_->field(QStringLiteral("plot")).contains(request().value(), Qt::CaseInsensitive);
+    default:
+      break;
+  }
+  return false;
 }
 
 Tellico::Data::EntryPtr OPDSFetcher::fetchEntryHook(uint uid_) {

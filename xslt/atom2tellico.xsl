@@ -79,10 +79,17 @@
   </pages>
 
   <plot>
-   <xsl:value-of select="normalize-space(atom:summary)"/>
+   <!-- prefer summary over content -->
+   <xsl:if test="atom:summary">
+    <xsl:value-of select="normalize-space(atom:summary)"/>
+   </xsl:if>
+   <xsl:if test="not(atom:summary)">
+    <xsl:value-of select="normalize-space(atom:content)"/>
+   </xsl:if>
   </plot>
 
   <cover>
+   <!-- need to handle relative image links -->
    <xsl:value-of select="(atom:link[@rel='http://opds-spec.org/image']/@href |
                           atom:link[@rel='http://opds-spec.org/image/thumbnail']/@href)[1]"/>
   </cover>

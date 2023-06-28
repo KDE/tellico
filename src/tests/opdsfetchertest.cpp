@@ -105,3 +105,56 @@ void OPDSFetcherTest::testRelativeSearch() {
   QVERIFY(!searchUrl.isRelative());
   QCOMPARE(searchUrl.url(), search.url());
 }
+
+void OPDSFetcherTest::testAcquisitionByTitle() {
+  QUrl catalog = QUrl::fromLocalFile(QFINDTESTDATA("data/opds-acquisition.xml"));
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group("Feedbooks");
+  cg.writeEntry("Catalog", catalog.url());
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
+                                       "Pride and Prejudice");
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field("title"), "Pride and Prejudice");
+  QCOMPARE(entry->field("author"), "Jane Austen");
+  QCOMPARE(entry->field("pub_year"), "1813");
+  QCOMPARE(entry->field("genre"), "Fiction; Romance");
+  QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
+  QVERIFY(!entry->field("cover").contains(QLatin1Char('.')));
+}
+
+void OPDSFetcherTest::testAcquisitionByTitleNegative() {
+  QUrl catalog = QUrl::fromLocalFile(QFINDTESTDATA("data/opds-acquisition.xml"));
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group("Feedbooks");
+  cg.writeEntry("Catalog", catalog.url());
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
+                                       "Nonexistent");
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+  QVERIFY(results.isEmpty());
+}
+
+void OPDSFetcherTest::testAcquisitionByKeyword() {
+  QUrl catalog = QUrl::fromLocalFile(QFINDTESTDATA("data/opds-acquisition.xml"));
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group("Feedbooks");
+  cg.writeEntry("Catalog", catalog.url());
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword,
+                                       "fizzes");
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 16);
+}

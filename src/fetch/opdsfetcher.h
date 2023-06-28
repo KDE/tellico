@@ -90,6 +90,8 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void initXSLTHandler();
+  void parseData(const QByteArray& data, bool manualSearch=false);
+  bool matchesEntry(Data::EntryPtr entry) const;
 
   QString m_catalog;
   QString m_searchTemplate;
@@ -110,6 +112,8 @@ public:
   bool readSearchTemplate();
 
   QUrl catalog;
+  QByteArray opdsText;
+  bool isAcquisition;
   QUrl searchUrl;
   QString searchTemplate;
   QString name;
