@@ -7608,6 +7608,3 @@ msgstr "Hledat"
 #, kde-format
 msgid "Clear"
 msgstr "Vymazat"
-
-#~ msgid "Click to download additional data sources."
-#~ msgstr "Klikněte pro stažení dalších datových zdrojů."
