@@ -34,6 +34,8 @@
 #include "../utils/datafileregistry.h"
 #include "../fieldformat.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QStandardPaths>
 
@@ -44,6 +46,7 @@ QTEST_GUILESS_MAIN( GCstarTest )
 
 void GCstarTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   // remove the test image directory
   QDir gcstarImageDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/gcstar/"));
   gcstarImageDir.removeRecursively();
