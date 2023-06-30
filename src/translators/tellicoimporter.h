@@ -78,6 +78,8 @@ public:
   bool hasImages() const;
   bool loadImage(const QString& id_);
 
+  void setBaseUrl(const QUrl& url) { m_baseUrl = url; }
+
   // take ownership of zip object with images
   std::unique_ptr<KZip> takeImages();
 
@@ -98,6 +100,7 @@ private:
   bool m_cancelled;
   bool m_hasImages;
   StringSet m_images;
+  QUrl m_baseUrl;
 
   std::unique_ptr<QBuffer> m_buffer;
   std::unique_ptr<KZip> m_zip;

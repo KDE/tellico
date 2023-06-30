@@ -50,11 +50,6 @@ bool DataCrowImporter::canImport(int type) const {
          type == Data::Collection::Album;
 }
 
-void DataCrowImporter::beginXSLTHandler(XSLTHandler* handler_) {
-  Q_ASSERT(handler_);
-  handler_->addStringParam("baseDir", url().adjusted(QUrl::RemoveFilename).path().toLocal8Bit());
-}
-
 Tellico::Data::CollPtr DataCrowImporter::collection() {
   Data::CollPtr coll = XSLTImporter::collection();
   if(!coll) {

@@ -265,10 +265,6 @@ void GCstarImporter::readGCstar(const QString& text_) {
     return;
   }
 
-  if(m_relativeImageLinks) {
-    handler.addStringParam("baseDir", url().adjusted(QUrl::RemoveFilename).path().toLocal8Bit());
-  }
-
   const QString str = handler.applyStylesheet(text_);
 
   if(str.isEmpty()) {
@@ -277,6 +273,9 @@ void GCstarImporter::readGCstar(const QString& text_) {
   }
 
   Import::TellicoImporter imp(str);
+  if(m_relativeImageLinks) {
+    imp.setBaseUrl(url()); /// empty base url is ok
+  }
   m_coll = imp.collection();
   setStatusMessage(imp.statusMessage());
 }

@@ -26,6 +26,7 @@
 #define TELLICO_IMPORT_XMLSTATEHANDLER_H
 
 #include <QXmlStreamAttributes>
+#include <QUrl>
 
 #include "../datavectors.h"
 
@@ -55,6 +56,7 @@ public:
   bool loadImages;
   bool hasImages;
   bool showImageLoadErrors;
+  QUrl baseUrl;
 };
 
 class StateHandler {

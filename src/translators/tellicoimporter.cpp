@@ -106,7 +106,7 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
 void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   const bool showProgress = options() & ImportProgress;
 
-  TellicoXmlReader reader;
+  TellicoXmlReader reader(m_baseUrl);
   reader.setLoadImages(loadImages_);
   reader.setShowImageLoadErrors(options() & ImportShowImageErrors);
   bool success = true;

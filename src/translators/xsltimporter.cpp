@@ -98,6 +98,7 @@ Tellico::Data::CollPtr XSLTImporter::collection() {
 //  myDebug() << str;
 
   Import::TellicoImporter imp(str);
+  imp.setBaseUrl(url()); // ignore case of multiple urls for now
   imp.setOptions(options());
   m_coll = imp.collection();
   setStatusMessage(imp.statusMessage());

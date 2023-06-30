@@ -32,7 +32,8 @@
 
 using Tellico::Import::TellicoXmlReader;
 
-TellicoXmlReader::TellicoXmlReader() : m_data(new SAX::StateData) {
+TellicoXmlReader::TellicoXmlReader(const QUrl& baseUrl_) : m_data(new SAX::StateData) {
+  m_data->baseUrl = baseUrl_;
   m_handlers.push(new SAX::RootHandler(m_data));
 }
 

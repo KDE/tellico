@@ -126,8 +126,8 @@ void OPDSFetcherTest::testAcquisitionByTitle() {
   QCOMPARE(entry->field("pub_year"), "1813");
   QCOMPARE(entry->field("genre"), "Fiction; Romance");
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field("cover").contains(QLatin1String("..")));
   QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
-  QVERIFY(!entry->field("cover").contains(QLatin1Char('.')));
 }
 
 void OPDSFetcherTest::testAcquisitionByTitleNegative() {

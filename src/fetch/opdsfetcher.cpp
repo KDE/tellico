@@ -304,6 +304,7 @@ void OPDSFetcher::parseData(const QByteArray& data_, bool manualSearch_) {
   // assume result is always utf-8
   QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data_.constData(), data_.size()));
   Import::TellicoImporter imp(str);
+  imp.setBaseUrl(QUrl(m_searchTemplate.isEmpty() ? m_catalog : m_searchTemplate));
   Data::CollPtr coll = imp.collection();
 
   if(!coll) {

@@ -22,9 +22,6 @@
             doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
             doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
 
-<!-- base url for data crow collection -->
-<xsl:param name="baseDir" select="''"/>
-
 <xsl:variable name="coll">
  <xsl:choose>
   <xsl:when test="/data-crow-objects/book">
@@ -219,15 +216,7 @@
 
 <xsl:template match="picture-front">
  <tc:cover>
-  <xsl:choose>
-   <!-- is the image location relative or not? -->
-   <xsl:when test="starts-with(., 'file://') or starts-with(., 'http') or starts-with(., '/')">
-    <xsl:value-of select="."/>
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:value-of select="concat($baseDir, .)"/>
-   </xsl:otherwise>
-  </xsl:choose>
+  <xsl:value-of select="."/>
  </tc:cover>
 </xsl:template>
 

@@ -35,7 +35,7 @@ namespace Tellico {
 
 class TellicoXmlReader {
 public:
-  TellicoXmlReader();
+  TellicoXmlReader(const QUrl& baseUrl);
   ~TellicoXmlReader();
 
   bool readNext(const QByteArray& data);

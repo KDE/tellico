@@ -49,7 +49,6 @@ public:
    */
   virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE { return nullptr; }
   virtual bool canImport(int type) const Q_DECL_OVERRIDE;
-  virtual void beginXSLTHandler(XSLTHandler* handler) Q_DECL_OVERRIDE;
 
 private:
   // private so it can't be changed accidentally

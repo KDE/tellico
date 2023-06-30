@@ -22,9 +22,6 @@
             doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
             doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
 
-<!-- base url for gcstar file -->
-<xsl:param name="baseDir" select="''"/>
-
 <xsl:variable name="coll">
  <xsl:choose>
   <xsl:when test="/collection[1]/@type='GCbooks'">
@@ -837,14 +834,8 @@
    <!-- no.png means no image -->
    <xsl:when test="$value = 'images/no.png'">
    </xsl:when>
-   <!-- is the image location relative or not? -->
-   <xsl:when test="starts-with($value, 'file://') or
-                   starts-with($value, 'http') or
-                   starts-with($value, '/')">
-    <xsl:value-of select="$value"/>
-   </xsl:when>
    <xsl:otherwise>
-    <xsl:value-of select="concat($baseDir,$value)"/>
+    <xsl:value-of select="$value"/>
    </xsl:otherwise>
   </xsl:choose>
  </xsl:element>

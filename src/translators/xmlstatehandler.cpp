@@ -199,7 +199,16 @@ bool CollectionHandler::end(const QStringRef&, const QStringRef&) {
       // if not, then there was no <image> in the XML
       // so it's a url, but maybe link only
       if(!ImageFactory::hasImageInfo(value)) {
-        const QUrl u = QUrl::fromUserInput(value);
+        QUrl u(value); // previously used QUrl::fromUserInput but now expect proper url
+        // also allow relative image urls
+        if(u.isRelative()) {
+          if(d->baseUrl.isEmpty()) {
+            // assume a local file, as fromUserInput() would do
+            u = QUrl::fromLocalFile(value);
+          } else {
+            u = d->baseUrl.resolved(u);
+          }
+        }
         // the image file name is a valid URL, but I want it to be a local URL or non empty remote one
         if(u.isValid()) {
           if(u.scheme() == QLatin1String("data")) {
