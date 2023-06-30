@@ -350,7 +350,6 @@ Tellico::Data::EntryPtr OPDSFetcher::fetchEntryHook(uint uid_) {
   return m_entries[uid_];
 }
 
-
 void OPDSFetcher::initXSLTHandler() {
   QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("atom2tellico.xsl"));
   if(xsltfile.isEmpty()) {
@@ -462,6 +461,10 @@ void OPDSFetcher::ConfigWidget::verifyCatalog() {
     m_searchTemplate = reader.searchTemplate;
     m_icon = reader.icon;
     m_attribution = reader.attribution;
+  } else if(reader.isAcquisition) {
+    const int imgSize = 0.8*m_statusLabel->height();
+    m_statusLabel->setPixmap(QIcon::fromTheme(QStringLiteral("emblem-added")).pixmap(imgSize, imgSize));
+    m_searchTemplate.clear();
   } else {
     const int imgSize = 0.8*m_statusLabel->height();
     m_statusLabel->setPixmap(QIcon::fromTheme(QStringLiteral("emblem-error")).pixmap(imgSize, imgSize));
