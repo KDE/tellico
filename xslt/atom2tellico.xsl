@@ -91,7 +91,7 @@
     <xsl:when test="not(atom:summary) and
                     (atom:content/@type='xhtml' or atom:content/@type='html')">
      <xsl:text disable-output-escaping="yes">&lt;![CDATA[</xsl:text>
-     <xsl:for-each select="atom:content/child::*">
+     <xsl:for-each select="atom:content/child::*|atom:content/text()">
       <xsl:copy-of select="."/>
      </xsl:for-each>
      <xsl:text disable-output-escaping="yes">]]</xsl:text>
