@@ -450,8 +450,8 @@ QString OPDSFetcher::ConfigWidget::preferredName() const {
 
 void OPDSFetcher::ConfigWidget::verifyCatalog() {
   OPDSFetcher::Reader reader(m_catalogEdit->url());
+  const int imgSize = 0.8*m_statusLabel->height();
   if(reader.readSearchTemplate()) {
-    const int imgSize = 0.8*m_statusLabel->height();
     m_statusLabel->setPixmap(QIcon::fromTheme(QStringLiteral("emblem-checked")).pixmap(imgSize, imgSize));
     slotSetModified();
     if(!reader.name.isEmpty()) {
@@ -462,11 +462,9 @@ void OPDSFetcher::ConfigWidget::verifyCatalog() {
     m_icon = reader.icon;
     m_attribution = reader.attribution;
   } else if(reader.isAcquisition) {
-    const int imgSize = 0.8*m_statusLabel->height();
     m_statusLabel->setPixmap(QIcon::fromTheme(QStringLiteral("emblem-added")).pixmap(imgSize, imgSize));
     m_searchTemplate.clear();
   } else {
-    const int imgSize = 0.8*m_statusLabel->height();
     m_statusLabel->setPixmap(QIcon::fromTheme(QStringLiteral("emblem-error")).pixmap(imgSize, imgSize));
     m_searchTemplate.clear();
     m_icon.clear();
