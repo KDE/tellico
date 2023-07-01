@@ -356,14 +356,14 @@ Tellico::Data::EntryPtr OPDSFetcher::fetchEntryHook(uint uid_) {
     if(plot.endsWith(QLatin1String("</div>"))) {
       plot.chop(6);
     }
-    static const QRegularExpression ratingRx(QStringLiteral("RATING: (★+)<br */>"));
+    static const QRegularExpression ratingRx(QStringLiteral("RATING: (★+)<br/>"));
     auto ratingMatch = ratingRx.match(plot);
     if(ratingMatch.hasMatch()) {
       // length of star match is the rating number
       entry->setField(QStringLiteral("rating"), QString::number(ratingMatch.captured(1).length()));
       plot.remove(ratingMatch.captured());
     }
-    static const QRegularExpression tagsRX(QStringLiteral("TAGS: (.+?)<br */>"));
+    static const QRegularExpression tagsRX(QStringLiteral("TAGS: (.+?)<br/>"));
     auto tagsMatch = tagsRX.match(plot);
     if(tagsMatch.hasMatch()) {
       entry->setField(QStringLiteral("genre"),
@@ -371,7 +371,7 @@ Tellico::Data::EntryPtr OPDSFetcher::fetchEntryHook(uint uid_) {
                                   .join(FieldFormat::delimiterString()));
       plot.remove(tagsMatch.captured());
     }
-    static const QRegularExpression seriesRx(QStringLiteral("SERIES: (.+?) \\[(\\d+)\\]<br */>"));
+    static const QRegularExpression seriesRx(QStringLiteral("SERIES: (.+?) \\[(\\d+)\\]<br/>"));
     auto seriesMatch = seriesRx.match(plot);
     if(seriesMatch.hasMatch()) {
       entry->setField(QStringLiteral("series"), seriesMatch.captured(1));
