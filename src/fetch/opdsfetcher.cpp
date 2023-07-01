@@ -347,7 +347,48 @@ bool OPDSFetcher::matchesEntry(Data::EntryPtr entry_) const {
 }
 
 Tellico::Data::EntryPtr OPDSFetcher::fetchEntryHook(uint uid_) {
-  return m_entries[uid_];
+  auto entry = m_entries[uid_];
+  if(!entry) return entry;
+  // check whether the summary shows content from Calibre server and try to compensate
+  QString plot = entry->field(QStringLiteral("plot"));
+  if(plot.startsWith(QLatin1String("<div xmlns=\"http://www.w3.org/1999/xhtml\">"))) {
+    plot = plot.mid(42);
+    if(plot.endsWith(QLatin1String("</div>"))) {
+      plot.chop(6);
+    }
+    static const QRegularExpression ratingRx(QStringLiteral("RATING: (★+)<br */>"));
+    auto ratingMatch = ratingRx.match(plot);
+    if(ratingMatch.hasMatch()) {
+      // length of star match is the rating number
+      entry->setField(QStringLiteral("rating"), QString::number(ratingMatch.captured(1).length()));
+      plot.remove(ratingMatch.captured());
+    }
+    static const QRegularExpression tagsRX(QStringLiteral("TAGS: (.+?)<br */>"));
+    auto tagsMatch = tagsRX.match(plot);
+    if(tagsMatch.hasMatch()) {
+      entry->setField(QStringLiteral("genre"),
+                      FieldFormat::splitValue(tagsMatch.captured(1), FieldFormat::CommaRegExpSplit)
+                                  .join(FieldFormat::delimiterString()));
+      plot.remove(tagsMatch.captured());
+    }
+    static const QRegularExpression seriesRx(QStringLiteral("SERIES: (.+?) \\[(\\d+)\\]<br */>"));
+    auto seriesMatch = seriesRx.match(plot);
+    if(seriesMatch.hasMatch()) {
+      entry->setField(QStringLiteral("series"), seriesMatch.captured(1));
+      entry->setField(QStringLiteral("series_num"), seriesMatch.captured(2));
+      plot.remove(seriesMatch.captured());
+    }
+    plot.remove(QLatin1String("SUMMARY:<br/>"));
+    plot = plot.simplified();
+    if(plot.startsWith(QLatin1String("<p class=\"description\">"))) {
+      plot = plot.mid(23);
+      if(plot.endsWith(QLatin1String("</p>"))) {
+        plot.chop(4);
+      }
+    }
+    entry->setField(QStringLiteral("plot"), plot);
+  }
+  return entry;
 }
 
 void OPDSFetcher::initXSLTHandler() {

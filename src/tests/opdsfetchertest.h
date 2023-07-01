@@ -40,6 +40,7 @@ private Q_SLOTS:
   void testAcquisitionByTitle();
   void testAcquisitionByTitleNegative();
   void testAcquisitionByKeyword();
+  void testCalibre();
 };
 
 #endif

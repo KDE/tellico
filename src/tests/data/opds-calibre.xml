@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom">
+  <id>opds-calibre</id>
+  <title>Calibre Server</title>
+  <updated>2022-10-20T01:11:18Z</updated>
+  <author>
+    <name>Robby Stephenson</name>
+    <uri>https://tellico-project.org</uri>
+  </author>
+
+  <link type="application/atom+xml;profile=opds-catalog;kind=acquisition" rel="self" href="opds-calibre.xml"/>
+
+  <entry>
+    <title>1632</title>
+    <author>
+      <name>Flint, Eric</name>
+    </author>
+    <id>urn:uuid:d00834a3-dfdc-4bfd-9193-ff37315c3483</id>
+    <updated>2013-10-06T15:06:23+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">RATING: ★★★★<br/>
+TAGS: Adventure, Alternate History, Fantasy, Historical, Science Fiction, War<br/>
+SERIES: 1632 [1]<br/>
+<p class="description">SUMMARY:<br/>When part of West Virginia is transported to 1632 East Germany during the Thirty Year's War, the new citizens repel marauding mercenaries, house German refugees, determine citizenship, and establish relationships and identities.</p></div>
+    </content>
+    <link href="/get/epub/74" type="application/epub+zip" rel="http://opds-spec.org/acquisition"/>
+    <link href="/get/cover/74" type="image/jpeg" rel="http://opds-spec.org/cover"/>
+    <link href="/get/thumb/74" type="image/jpeg" rel="http://opds-spec.org/thumbnail"/>
+  </entry>
+
+</feed>

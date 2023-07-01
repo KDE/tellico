@@ -66,6 +66,10 @@
    <xsl:value-of select="atom:id[starts-with(.,'http')]"/>
   </url>
 
+  <language>
+   <xsl:value-of select="dcterms:language"/>
+  </language>
+
   <isbn>
    <xsl:value-of select="substring-after(dcterms:identifier[starts-with(.,'urn:ISBN')],'ISBN:')"/>
   </isbn>
@@ -80,12 +84,23 @@
 
   <plot>
    <!-- prefer summary over content -->
-   <xsl:if test="atom:summary">
-    <xsl:value-of select="normalize-space(atom:summary)"/>
-   </xsl:if>
-   <xsl:if test="not(atom:summary)">
-    <xsl:value-of select="normalize-space(atom:content)"/>
-   </xsl:if>
+   <xsl:choose>
+    <xsl:when test="atom:summary">
+     <xsl:value-of select="normalize-space(atom:summary)"/>
+    </xsl:when>
+    <xsl:when test="not(atom:summary) and
+                    (atom:content/@type='xhtml' or atom:content/@type='html')">
+     <xsl:text disable-output-escaping="yes">&lt;![CDATA[</xsl:text>
+     <xsl:for-each select="atom:content/child::*">
+      <xsl:copy-of select="."/>
+     </xsl:for-each>
+     <xsl:text disable-output-escaping="yes">]]</xsl:text>
+     <xsl:text disable-output-escaping="yes">&gt;</xsl:text>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:value-of select="normalize-space(atom:content)"/>
+    </xsl:otherwise>
+   </xsl:choose>
   </plot>
 
   <cover>

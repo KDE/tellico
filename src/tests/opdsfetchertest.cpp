@@ -158,3 +158,27 @@ void OPDSFetcherTest::testAcquisitionByKeyword() {
 
   QCOMPARE(results.size(), 16);
 }
+
+void OPDSFetcherTest::testCalibre() {
+  QUrl catalog = QUrl::fromLocalFile(QFINDTESTDATA("data/opds-calibre.xml"));
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group("Calibre");
+  cg.writeEntry("Catalog", catalog.url());
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
+                                       "1632");
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field("title"), "1632");
+  QCOMPARE(entry->field("author"), "Flint, Eric");
+  QCOMPARE(entry->field("rating"), "4");
+  QCOMPARE(entry->field("series"), "1632");
+  QCOMPARE(entry->field("series_num"), "1");
+  QVERIFY(!entry->field("plot").isEmpty());
+  QVERIFY(!entry->field("plot").contains("SUMMARY"));
+}
