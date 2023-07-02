@@ -73,20 +73,25 @@ void MobyGamesFetcherTest::testTitle() {
   // to avoid downloading again, wait a moment
   qApp->processEvents();
 
-  // assuming the Wii result will be first
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
-
-  QCOMPARE(results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = results.at(0);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 5);
+  Tellico::Data::EntryPtr entry;
+  for(const auto& testEntry : qAsConst(results)) {
+    if(testEntry->field("platform") == QLatin1String("Nintendo Wii")) {
+      entry = testEntry;
+      break;
+    } else {
+      qDebug() << "...skipping" << testEntry->title();
+    }
+  }
   QVERIFY(entry);
+
   QCOMPARE(entry->field("title"), QStringLiteral("The Legend of Zelda: Twilight Princess"));
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("platform"), QStringLiteral("Nintendo Wii"));
   QVERIFY(entry->field("genre").contains(QStringLiteral("Action")));
 //  QCOMPARE(entry->field("certification"), QStringLiteral("Teen"));
   QCOMPARE(entry->field("pegi"), QStringLiteral("PEGI 12"));
-  QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo of America Inc."));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo Co., Ltd."));
   QCOMPARE(entry->field("developer"), QStringLiteral("Nintendo EAD"));
   QCOMPARE(entry->field("mobygames"), QStringLiteral("http://www.mobygames.com/game/legend-of-zelda-twilight-princess"));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
@@ -154,7 +159,7 @@ void MobyGamesFetcherTest::testRaw() {
   QVERIFY(entry->field("genre").contains(QStringLiteral("Action")));
 //  QCOMPARE(entry->field("certification"), QStringLiteral("Teen"));
   QCOMPARE(entry->field("pegi"), QStringLiteral("PEGI 12"));
-  QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo of America Inc."));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo Co., Ltd."));
   QCOMPARE(entry->field("developer"), QStringLiteral("Nintendo EAD"));
   QCOMPARE(entry->field("mobygames"), QStringLiteral("http://www.mobygames.com/game/legend-of-zelda-twilight-princess"));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
