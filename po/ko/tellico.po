@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-26 00:51+0000\n"
+"POT-Creation-Date: 2023-07-02 00:47+0000\n"
 "PO-Revision-Date: 2023-04-22 00:08+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -892,7 +892,7 @@ msgstr "키워드"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
-#: src/fetch/opdsfetcher.cpp:353 src/field.cpp:202
+#: src/fetch/opdsfetcher.cpp:431 src/field.cpp:202
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
@@ -911,7 +911,7 @@ msgid "Notes"
 msgstr "메모"
 
 #: src/collections/bibtexcollection.cpp:480
-#: src/translators/xmlstatehandler.cpp:315
+#: src/translators/xmlstatehandler.cpp:324
 #, kde-format
 msgid "Unknown"
 msgstr "알 수 없음"
@@ -1680,7 +1680,7 @@ msgstr "매체"
 #: src/collections/musiccollection.cpp:60
 #: src/collections/musiccollection.cpp:87
 #: src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:418
+#: src/translators/xmlstatehandler.cpp:427
 #, kde-format
 msgid "Artist"
 msgstr "작곡가"
@@ -1698,14 +1698,14 @@ msgstr "트랙"
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
 #: src/fetch/fetchmanager.cpp:67 src/fetchdialog.cpp:252 src/field.cpp:298
 #: src/field.cpp:339 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:417
+#: src/translators/xmlstatehandler.cpp:426
 #, kde-format
 msgid "Title"
 msgstr "제목"
 
 #: src/collections/musiccollection.cpp:88
 #: src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:419
+#: src/translators/xmlstatehandler.cpp:428
 #, kde-format
 msgid "Length"
 msgstr "길이"
@@ -1906,13 +1906,13 @@ msgid "Cast"
 msgstr "출연진"
 
 #: src/collections/videocollection.cpp:110
-#: src/translators/xmlstatehandler.cpp:421
+#: src/translators/xmlstatehandler.cpp:430
 #, kde-format
 msgid "Actor/Actress"
 msgstr "배우"
 
 #: src/collections/videocollection.cpp:111
-#: src/translators/xmlstatehandler.cpp:422
+#: src/translators/xmlstatehandler.cpp:431
 #, kde-format
 msgid "Role"
 msgstr "배역"
@@ -2778,7 +2778,7 @@ msgid "Click to delete the selected data source."
 msgstr "선택한 데이터 원본을 삭제하려면 여기를 클릭하십시오."
 
 #: src/configdialog.cpp:1156 src/translators/xsltexporter.cpp:99
-#: src/translators/xsltimporter.cpp:125
+#: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL 파일"
@@ -2798,7 +2798,7 @@ msgstr "템플릿 패키지"
 #: src/translators/tellicoxmlexporter.cpp:71
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
-#: src/translators/xsltimporter.cpp:127
+#: src/translators/xsltimporter.cpp:128
 #, kde-format
 msgid "All Files"
 msgstr "모든 파일"
@@ -4171,31 +4171,31 @@ msgstr "프랑스어"
 msgid "Numista (%1)"
 msgstr "Numista(%1)"
 
-#: src/fetch/opdsfetcher.cpp:202
+#: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
 #, fuzzy, kde-format
 #| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico is unable to read the search description in the OPDS catalog."
 msgstr "Tellico가 PDF 파일에서 메타데이터를 읽을 수 없습니다."
 
-#: src/fetch/opdsfetcher.cpp:343
+#: src/fetch/opdsfetcher.cpp:421
 #, fuzzy, kde-format
 #| msgid "File Catalog"
 msgid "OPDS Catalog"
 msgstr "파일 카탈로그"
 
-#: src/fetch/opdsfetcher.cpp:368
+#: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
 #| msgid "Catalog Number"
 msgid "Catalog: "
 msgstr "카탈로그 번호"
 
-#: src/fetch/opdsfetcher.cpp:373
+#: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
 #| msgid "Enter the host name of the server."
 msgid "Enter the link to the OPDS server."
 msgstr "서버의 호스트 이름을 입력하십시오."
 
-#: src/fetch/opdsfetcher.cpp:378
+#: src/fetch/opdsfetcher.cpp:456
 #, fuzzy, kde-format
 #| msgid "File Catalog"
 msgid "&Verify Catalog"
@@ -7079,7 +7079,7 @@ msgstr ""
 "기본 캐시 폴더에 포함된 모든 CDDB 캐시 파일에서 데이터를 다시 읽습니다."
 
 #: src/translators/gcstarimporter.cpp:125
-#: src/translators/gcstarimporter.cpp:275
+#: src/translators/gcstarimporter.cpp:271
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>파일이 올바른 GCstar 데이터 파일이 아닙니다.</qt>"
@@ -7275,17 +7275,17 @@ msgstr "Tellico의 이후 버전에서 만들었습니다."
 msgid "XSLT"
 msgstr "XSLT"
 
-#: src/translators/xsltexporter.cpp:85 src/translators/xsltimporter.cpp:116
+#: src/translators/xsltexporter.cpp:85 src/translators/xsltimporter.cpp:117
 #, kde-format
 msgid "XSLT Options"
 msgstr "XSLT 옵션"
 
-#: src/translators/xsltexporter.cpp:88 src/translators/xsltimporter.cpp:119
+#: src/translators/xsltexporter.cpp:88 src/translators/xsltimporter.cpp:120
 #, kde-format
 msgid "XSLT file:"
 msgstr "XSLT 파일:"
 
-#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
+#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:122
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr "데이터를 변환하는 데 사용되는 XSLT 파일을 선택합니다."

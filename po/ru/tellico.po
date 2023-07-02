@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-26 00:51+0000\n"
+"POT-Creation-Date: 2023-07-02 00:47+0000\n"
 "PO-Revision-Date: 2022-03-21 17:12+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -922,7 +922,7 @@ msgstr "Ключевые слова"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
-#: src/fetch/opdsfetcher.cpp:353 src/field.cpp:202
+#: src/fetch/opdsfetcher.cpp:431 src/field.cpp:202
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
@@ -941,7 +941,7 @@ msgid "Notes"
 msgstr "Заметки"
 
 #: src/collections/bibtexcollection.cpp:480
-#: src/translators/xmlstatehandler.cpp:315
+#: src/translators/xmlstatehandler.cpp:324
 #, kde-format
 msgid "Unknown"
 msgstr "Неизвестно"
@@ -1718,7 +1718,7 @@ msgstr "Носитель"
 #: src/collections/musiccollection.cpp:60
 #: src/collections/musiccollection.cpp:87
 #: src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:418
+#: src/translators/xmlstatehandler.cpp:427
 #, kde-format
 msgid "Artist"
 msgstr "Исполнитель"
@@ -1736,14 +1736,14 @@ msgstr "Дорожки"
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
 #: src/fetch/fetchmanager.cpp:67 src/fetchdialog.cpp:252 src/field.cpp:298
 #: src/field.cpp:339 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:417
+#: src/translators/xmlstatehandler.cpp:426
 #, kde-format
 msgid "Title"
 msgstr "Название"
 
 #: src/collections/musiccollection.cpp:88
 #: src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:419
+#: src/translators/xmlstatehandler.cpp:428
 #, kde-format
 msgid "Length"
 msgstr "Длительность"
@@ -1944,13 +1944,13 @@ msgid "Cast"
 msgstr "В ролях"
 
 #: src/collections/videocollection.cpp:110
-#: src/translators/xmlstatehandler.cpp:421
+#: src/translators/xmlstatehandler.cpp:430
 #, kde-format
 msgid "Actor/Actress"
 msgstr "Актёр/актриса"
 
 #: src/collections/videocollection.cpp:111
-#: src/translators/xmlstatehandler.cpp:422
+#: src/translators/xmlstatehandler.cpp:431
 #, kde-format
 msgid "Role"
 msgstr "Роль"
@@ -2829,7 +2829,7 @@ msgid "Click to delete the selected data source."
 msgstr "Нажмите для удаления выбранного источника данных."
 
 #: src/configdialog.cpp:1156 src/translators/xsltexporter.cpp:99
-#: src/translators/xsltimporter.cpp:125
+#: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
 msgstr "Файлы XSL"
@@ -2849,7 +2849,7 @@ msgstr "Пакеты шаблонов"
 #: src/translators/tellicoxmlexporter.cpp:71
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
-#: src/translators/xsltimporter.cpp:127
+#: src/translators/xsltimporter.cpp:128
 #, kde-format
 msgid "All Files"
 msgstr "Все файлы"
@@ -4239,31 +4239,31 @@ msgstr "Французский"
 msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
-#: src/fetch/opdsfetcher.cpp:202
+#: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
 #, fuzzy, kde-format
 #| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico is unable to read the search description in the OPDS catalog."
 msgstr "Tellico не удалось прочитать метаданные из этого файла PDF."
 
-#: src/fetch/opdsfetcher.cpp:343
+#: src/fetch/opdsfetcher.cpp:421
 #, fuzzy, kde-format
 #| msgid "File Catalog"
 msgid "OPDS Catalog"
 msgstr "Каталог файлов"
 
-#: src/fetch/opdsfetcher.cpp:368
+#: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
 #| msgid "Card Number"
 msgid "Catalog: "
 msgstr "Номер карточки"
 
-#: src/fetch/opdsfetcher.cpp:373
+#: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
 #| msgid "Enter the host name of the server."
 msgid "Enter the link to the OPDS server."
 msgstr "Введите адрес сервера."
 
-#: src/fetch/opdsfetcher.cpp:378
+#: src/fetch/opdsfetcher.cpp:456
 #, fuzzy, kde-format
 #| msgid "File Catalog"
 msgid "&Verify Catalog"
@@ -7190,7 +7190,7 @@ msgid ""
 msgstr "Рекурсивно читать данные из всех стандартных папок для кэша CDDB."
 
 #: src/translators/gcstarimporter.cpp:125
-#: src/translators/gcstarimporter.cpp:275
+#: src/translators/gcstarimporter.cpp:271
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Этот файл не является файлом данных GCstar.</qt>"
@@ -7388,17 +7388,17 @@ msgstr "Это данные более новой версии Tellico."
 msgid "XSLT"
 msgstr "XSLT"
 
-#: src/translators/xsltexporter.cpp:85 src/translators/xsltimporter.cpp:116
+#: src/translators/xsltexporter.cpp:85 src/translators/xsltimporter.cpp:117
 #, kde-format
 msgid "XSLT Options"
 msgstr "Параметры XSLT"
 
-#: src/translators/xsltexporter.cpp:88 src/translators/xsltimporter.cpp:119
+#: src/translators/xsltexporter.cpp:88 src/translators/xsltimporter.cpp:120
 #, kde-format
 msgid "XSLT file:"
 msgstr "Файл XSLT:"
 
-#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
+#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:122
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Выберите файл XSLT для преобразования данных."
