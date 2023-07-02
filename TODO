@@ -9,7 +9,6 @@
 * MPDB.tv: http://mpdb.tv/api/doc/index
 * Importing Google Books XML export
 * Add authentication and endpoint customization for DBC open search
-* IMDB support TV series (including episodes)
 
 === User Interface
 * Replace most of the toggle actions in the view settings with KDualAction
