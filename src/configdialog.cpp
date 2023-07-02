@@ -961,21 +961,23 @@ void ConfigDialog::slotNewSourceClicked() {
 
 void ConfigDialog::slotModifySourceClicked() {
   FetcherInfoListItem* item = static_cast<FetcherInfoListItem*>(m_sourceListWidget->currentItem());
-  if(!item || !item->fetcher()) {
+  if(!item) {
     return;
   }
 
   Fetch::ConfigWidget* cw = nullptr;
   if(m_configWidgets.contains(item)) {
     cw = m_configWidgets[item];
-  } else {
+  } else if(item->fetcher()) {
     // grab the config widget, taking ownership
     cw = item->fetcher()->configWidget(this);
-    if(cw) { // might return 0 when no widget available for fetcher type
+    if(cw) { // might return null when no widget available for fetcher type
       m_configWidgets.insert(item, cw);
       // there's weird layout bug if it's not hidden
       cw->hide();
     }
+  } else {
+    myDebug() << "no config item fetcher!";
   }
   if(!cw) {
     // no config widget for this one
