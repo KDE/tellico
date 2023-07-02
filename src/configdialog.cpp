@@ -643,13 +643,13 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   m_moveUpSourceBtn = new QPushButton(i18n("Move &Up"), hb);
   hbHBoxLayout->addWidget(m_moveUpSourceBtn);
   m_moveUpSourceBtn->setIcon(QIcon::fromTheme(QStringLiteral("go-up")));
-  m_moveUpSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
-                                       "that Tellico uses when entries are automatically updated."));
+  const QString moveTip(i18n("The order of the data sources sets the order "
+                             "that Tellico uses when entries are automatically updated."));
+  m_moveUpSourceBtn->setWhatsThis(moveTip);
   m_moveDownSourceBtn = new QPushButton(i18n("Move &Down"), hb);
   hbHBoxLayout->addWidget(m_moveDownSourceBtn);
   m_moveDownSourceBtn->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
-  m_moveDownSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
-                                         "that Tellico uses when entries are automatically updated."));
+  m_moveDownSourceBtn->setWhatsThis(moveTip);
 
   QWidget* hb2 = new QWidget(frame);
   QHBoxLayout* hb2HBoxLayout = new QHBoxLayout(hb2);

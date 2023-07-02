@@ -113,12 +113,13 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
   label->setBuddy(m_nameEdit);
   connect(m_nameEdit, &QLineEdit::textChanged, this, &FetcherConfigDialog::slotNameChanged);
 
+  const QString labelText(i18n("Source &type: "));
   if(m_newSource) {
-    label = new QLabel(i18n("Source &type: "), widget);
+    label = new QLabel(labelText, widget);
   } else {
     // since the label doesn't have a buddy, we don't want an accel,
     // but also want to reuse string we already have
-    label = new QLabel(KLocalizedString::removeAcceleratorMarker(i18n("Source &type: ")), widget);
+    label = new QLabel(KLocalizedString::removeAcceleratorMarker(labelText), widget);
   }
   gl->addWidget(label, ++row, 0);
   w = i18n("Tellico supports several different data sources.");
