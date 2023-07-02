@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<collection type="GCmusics" items="1" version="1.4.3">
+<collection type="GCmusics" items="1" version="1.8.0">
  <information>
   <maxId>1</maxId>
  </information>
@@ -8,29 +8,19 @@
 
  <item
   gcsautoid="1"
-  unique=""
   title="Lifesong"
-  backpic=""
   artist="Casting Crowns"
-  format="CD"
-  origin="US"
   running="52:18"
   release="2005"
   label="Beach Street Records"
+  added="22/09/2009"
+  origin="US"
   composer="Chad Cates, David Hunt, Mark Hall (5), Nichole Nordeman"
   producer="Mark A. Miller"
+  format="CD"
   web="http://www.discogs.com/release/873151?f=xml&amp;api_key=e8f5ae8ba2##Discogs"
-  rating="0"
-  added="22/09/2009"
-  location=""
-  playlist=""
   borrower="none"
-  lendDate=""
-  borrowings=""
-  favourite="0"
-  tags=""
  >
-  <comments></comments>
   <genre>
    <line>
     <col>Electronic</col>

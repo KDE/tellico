@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<collection type="GCwines" items="1" version="1.7.2">
+<collection type="GCwines" items="1" version="1.8.0">
  <information>
   <maxId>2</maxId>
  </information>
@@ -18,7 +18,6 @@
   country="australia"
   volume="750"
   alcohol="12"
-  medal="distinction"
   quantity="1"
   purchasedate="28/08/2010"
   purchaseprice="12.99"
@@ -27,8 +26,8 @@
   tasted="1"
   rating="6"
  >
+  <medal>distinction</medal>
   <comments>comments</comments>
-  <serving></serving>
   <tasting>description</tasting>
   <grapes>
    <line>

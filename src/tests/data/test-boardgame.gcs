@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<collection type="GCboardgames" items="2" version="1.5.0.beta1">
+<collection type="GCboardgames" items="2" version="1.8.0">
  <information>
   <maxId>2</maxId>
  </information>
@@ -9,78 +9,61 @@
  <item
   id="1"
   name="Risk"
-  original=""
-  backpic=""
   designedby="Albert Lamorisse, Michael I. Levin"
-  illustratedby=""
   publishedby="Alga (Brio), Borras Plana S.A., Editrice Giochi, Grow Jogos e Brinquedos, Guau, Juegos Crone, Miro Company, Palitoy, Parker Brothers, Waddingtons Games, Winning Moves"
   players="2-6"
   playingtime="120"
   suggestedage="10"
   released="1959"
-  expansionfor=""
-  gamefamily=""
   web="http://boardgamegeek.com/boardgame/181##Board Game Geek"
-  rating="0"
-  timesplayed=""
   added="07/09/2009"
   copies="1"
   completecontents="1"
   condition="3"
-  photo1=""
-  photo2=""
-  photo3=""
-  photo4=""
   borrower="none"
-  lendDate=""
-  borrowings=""
-  favourite="0"
-  tags=""
  >
   <description>Widely accepted as the first mainstream wargame. Players are given tons of little army units to place onto the map of the world.  When it's your turn, you use your units to attack other players' positions, hopefully with superior numbers.  Combat is a simple dice rolling affair that stresses attrition, and reinforcements are given to players who collect sets of cards.</description>
   <comments>My comments</comments>
   <category>
    <line>
- <col>Wargame</col>
+    <col>Wargame</col>
    </line>
   </category>
   <mechanics>
    <line>
- <col>Area Movement</col>
+    <col>Area Movement</col>
    </line>
    <line>
- <col>Dice Rolling</col>
+    <col>Dice Rolling</col>
    </line>
    <line>
- <col>Set Collection</col>
+    <col>Set Collection</col>
    </line>
   </mechanics>
   <expandedby>
    <line>
- <col>Hyborian Risk</col>
+    <col>Hyborian Risk</col>
    </line>
    <line>
- <col>La Conquête du Monde revised</col>
+    <col>La Conquête du Monde revised</col>
    </line>
    <line>
- <col>Medieval Risk</col>
+    <col>Medieval Risk</col>
    </line>
    <line>
- <col>One World Dominion</col>
+    <col>One World Dominion</col>
    </line>
    <line>
- <col>Risk - Going Over the Trenches</col>
+    <col>Risk - Going Over the Trenches</col>
    </line>
    <line>
- <col>Risk 2042</col>
+    <col>Risk 2042</col>
    </line>
   </expandedby>
  </item>
  <item
   id="2"
   name="The Settlers of Catan"
-  original=""
-  backpic=""
   designedby="Klaus Teuber"
   illustratedby="Tanja Donner, Franz Vohwinkel"
   publishedby="999 Games, Albi, Brain Games, Capcom, dan-spil, Descartes Editeur, Devir, Eurogames, Filosofia Editions, Galakta, Giochi Uniti, Hanayama, Ideal Board Games"
@@ -88,151 +71,138 @@
   playingtime="90"
   suggestedage="10"
   released="1995"
-  expansionfor=""
-  gamefamily=""
   web="http://boardgamegeek.com/boardgame/13##Board Game Geek"
-  rating="0"
-  timesplayed=""
   added="07/09/2009"
   copies="1"
   completecontents="1"
   condition="3"
-  photo1=""
-  photo2=""
-  photo3=""
-  photo4=""
   borrower="none"
-  lendDate=""
-  borrowings=""
-  favourite="0"
-  tags=""
  >
   <description>In Settlers of Catan, players try to be the dominant force on the island of Catan by building settlements, cities, and roads.  On each turn dice are rolled to determine what resources the island produces.  Players collect these resources to build up their civilizations to get to 10 victory points and win the game.  Multi-award-winning and one of the most popular games in recent history due to its amazing ability to appeal to non-gamers and gamers alike.Die Siedler von Catan was originally published by  Kosmos and has gone through multiple editions. It was licensed by  Mayfair and has undergone at least 4 editions as Settlers of Catan. It has also been re-published in a travel edition by  Kosmos and in yet another edition for Japan/Asia, Settlers of Catan : Rockman Edition.Settlers of Catan is the original game in the Catan Series.</description>
-  <comments></comments>
   <category>
    <line>
- <col>City Building</col>
+    <col>City Building</col>
    </line>
    <line>
- <col>Civilization</col>
+    <col>Civilization</col>
    </line>
    <line>
- <col>Negotiation</col>
+    <col>Negotiation</col>
    </line>
   </category>
   <mechanics>
    <line>
- <col>Dice Rolling</col>
+    <col>Dice Rolling</col>
    </line>
    <line>
- <col>Modular Board</col>
+    <col>Modular Board</col>
    </line>
    <line>
- <col>Route/network Building</col>
+    <col>Route/network Building</col>
    </line>
    <line>
- <col>Trading</col>
+    <col>Trading</col>
    </line>
   </mechanics>
   <expandedby>
    <line>
- <col>Atlantis: Szenarien &amp; Varianten zu Die Siedler von Catan</col>
+    <col>Atlantis: Szenarien &amp; Varianten zu Die Siedler von Catan</col>
    </line>
    <line>
- <col>Catan Austria / Wien meets Catan</col>
+    <col>Catan Austria / Wien meets Catan</col>
    </line>
    <line>
- <col>Catan Geographies: North Rhine - Westphalia</col>
+    <col>Catan Geographies: North Rhine - Westphalia</col>
    </line>
    <line>
- <col>Catan Geographies: Settlers of Hesse</col>
+    <col>Catan Geographies: Settlers of Hesse</col>
    </line>
    <line>
- <col>Catan: Cities &amp; Knights</col>
+    <col>Catan: Cities &amp; Knights</col>
    </line>
    <line>
- <col>Catan: Seafarers</col>
+    <col>Catan: Seafarers</col>
    </line>
    <line>
- <col>Catan: Traders &amp; Barbarians</col>
+    <col>Catan: Traders &amp; Barbarians</col>
    </line>
    <line>
- <col>Catan: Traders &amp; Barbarians - 5-6 Player Extension</col>
+    <col>Catan: Traders &amp; Barbarians - 5-6 Player Extension</col>
    </line>
    <line>
- <col>The Cities and Knights of Catan - 5-6 Player Expansion</col>
+    <col>The Cities and Knights of Catan - 5-6 Player Expansion</col>
    </line>
    <line>
- <col>De Kolonisten van Catan: De Diamanten</col>
+    <col>De Kolonisten van Catan: De Diamanten</col>
    </line>
    <line>
- <col>De Kolonisten van Catan: De drie Handelsteden van Noord-Nederland</col>
+    <col>De Kolonisten van Catan: De drie Handelsteden van Noord-Nederland</col>
    </line>
    <line>
- <col>De Kolonisten van Catan: De Specialisten</col>
+    <col>De Kolonisten van Catan: De Specialisten</col>
    </line>
    <line>
- <col>Die Gilden von Ankh-Morpork</col>
+    <col>Die Gilden von Ankh-Morpork</col>
    </line>
    <line>
- <col>Der Hafenmeister</col>
+    <col>Der Hafenmeister</col>
    </line>
    <line>
- <col>De Kolonisten van Catan: De Koloniën</col>
+    <col>De Kolonisten van Catan: De Koloniën</col>
    </line>
    <line>
- <col>De Kolonisten van Catan: De Wereldwonderen</col>
+    <col>De Kolonisten van Catan: De Wereldwonderen</col>
    </line>
    <line>
- <col>De Kolonisten van Catan: De Woestijnruiters</col>
+    <col>De Kolonisten van Catan: De Woestijnruiters</col>
    </line>
    <line>
- <col>De Kolonisten van Catan: Het Grote Kanaal</col>
+    <col>De Kolonisten van Catan: Het Grote Kanaal</col>
    </line>
    <line>
- <col>Rincewind and the Tourist</col>
+    <col>Rincewind and the Tourist</col>
    </line>
    <line>
- <col>The Seafarers of Catan - 5-6 Player Expansion</col>
+    <col>The Seafarers of Catan - 5-6 Player Expansion</col>
    </line>
    <line>
- <col>The Settlers of Catan - 5-6 Player Extension </col>
+    <col>The Settlers of Catan - 5-6 Player Extension </col>
    </line>
    <line>
- <col>Settlers of Catan - Event Cards</col>
+    <col>Settlers of Catan - Event Cards</col>
    </line>
    <line>
- <col>Settlers of Catan - The Fishermen of Catan</col>
+    <col>Settlers of Catan - The Fishermen of Catan</col>
    </line>
    <line>
- <col>Settlers of Catan - The Great River</col>
+    <col>Settlers of Catan - The Great River</col>
    </line>
    <line>
- <col>Settlers of New Catan (and extra modules)</col>
+    <col>Settlers of New Catan (and extra modules)</col>
    </line>
    <line>
- <col>Die Siedler von Catan - Burgbau auf Chaffenberch</col>
+    <col>Die Siedler von Catan - Burgbau auf Chaffenberch</col>
    </line>
    <line>
- <col>Die Siedler von Catan - Das Buch zum Spielen</col>
+    <col>Die Siedler von Catan - Das Buch zum Spielen</col>
    </line>
    <line>
- <col>Die Siedler von Catan - Die große Karawane</col>
+    <col>Die Siedler von Catan - Die große Karawane</col>
    </line>
    <line>
- <col>Die Siedler von Catan - Historische Szenarien</col>
+    <col>Die Siedler von Catan - Historische Szenarien</col>
    </line>
    <line>
- <col>Die Siedler von Catan - Historische Szenarien II</col>
+    <col>Die Siedler von Catan - Historische Szenarien II</col>
    </line>
    <line>
- <col>Die Siedler von Catan - Renaissance in der Steiermark</col>
+    <col>Die Siedler von Catan - Renaissance in der Steiermark</col>
    </line>
    <line>
- <col>Die Siedler von Catan - Saggsen Gadan</col>
+    <col>Die Siedler von Catan - Saggsen Gadan</col>
    </line>
    <line>
- <col>Die Siedler von Luxemburg</col>
+    <col>Die Siedler von Luxemburg</col>
    </line>
   </expandedby>
  </item>

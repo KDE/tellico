@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<collection type="GCfilms" items="2" version="1.5.0.beta1">
+<collection type="GCfilms" items="3" version="1.8.0">
  <information>
   <maxId>3</maxId>
  </information>
@@ -13,28 +13,15 @@
   time="102 min"
   director="George Miller"
   country="Australia"
-  backpic=""
-  original=""
   webPage="http://www.imdb.com/title/tt0084296/##IMDb"
   seen="1"
   added="07/09/2009"
   region="1"
   format="DVD"
   number="1"
-  identifier="0"
-  place=""
   rating="7"
-  ratingpress="0"
-  audio=""
-  subt=""
   age="11"
-  video=""
-  serie=""
-  rank=""
-  trailer=""
   borrower="none"
-  lendDate=""
-  borrowings=""
   favourite="1"
  >
   <synopsis>Jim Craig has lived his first 18 years in the mountains of Australia on his father's farm. The death...</synopsis>
@@ -111,33 +98,15 @@
   time="99 min"
   director="Geoff Burrowes"
   country="Australia"
-  backpic=""
-  original=""
   webPage="http://www.imdb.com/find?q=Return+to+Snowy+River;tt=on;mx=20##IMDb"
-  seen="0"
   added="07/09/2009"
-  region=""
   format="DVD"
   number="1"
-  identifier="0"
-  place=""
   rating="6"
-  ratingpress="0"
-  audio=""
-  subt=""
   age="5"
-  video=""
-  serie=""
-  rank=""
-  trailer=""
   borrower="none"
-  lendDate=""
-  borrowings=""
-  favourite="0"
-  tags=""
  >
   <synopsis>Young Jim Craig returns to his home in the Australian high country. He finds that things are not as he left them - his girlfriend is being pursued by another man, and her father doesn't want Jim back into her life.</synopsis>
-  <comment></comment>
   <genre>
    <line>
     <col>Adventure</col>
@@ -192,45 +161,20 @@
    </line>
   </actors>
  </item>
-  <item
+ <item
   id="4"
   title="100 Feet"
   date="2008"
   time="105"
   director="Eric Red"
   country="USA"
-  backpic=""
   actors="Famke Janssen (Marnie Watson), Bobby Cannavale (Shanks), Ed Westwick (Joey), Michael Pare (Mike Watson), John Fallon (Jimmy), Patricia Charbonneau (Frances), Kevin Geer (Father Pritchet), Evelyne Kandech (Patrolwoman), Kembe Sorel (Patrolman), Tibor Palffy (Homeless man), Ken Kelsch (Garbage Man)"
-  original=""
-  webPage=""
-  seen="0"
-  added=""
-  region=""
-  format=""
-  number=""
-  identifier=""
   place="On Hard Drive"
   rating="5"
-  ratingpress=""
   audio="English "
-  subt=""
   age="17"
-  video=""
-  serie=""
-  rank=""
-  trailer=""
-  borrower=""
-  lendDate=""
-  borrowings=""
-  favourite=""
-  tags=""
-  gcsfield2="0"
-  gcsfield1="0"
-  gcsfield3="avi"
-  gcsfield4="1"
  >
   <synopsis>A young woman, Marnie Watson, is granted early release from her prison sentence for manslaughter (killing her husband - a violent NYC cop - in self defense) on condition she wear an electronic ankle bracelet and remain within her home, effectively under house arrest, for the remainder of her sentence. Her late husband's partner keeps tabs on her from a patrol car parked across the street, hoping she'll violate probation and he can send her back to prison. But the 100-foot radius her ankle bracelet allows isn't the worst of her problems. Her dead husband --now a malevolent ghost--is still in the house, where he died -- intent on savage revenge.</synopsis>
-  <comment></comment>
   <genre>
    <line>
     <col>Science Fiction</col>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<collection type="GCcoins" items="1" version="1.6.0">
+<collection type="GCcoins" items="1" version="1.8.0">
  <information>
   <maxId>2</maxId>
  </information>
@@ -8,34 +8,19 @@
 
  <item
   gcsautoid="1"
-  name="USD 0.05 (1974)"
-  picture=""
-  currency="USD"
+  name="0.05 USD 1974   "
   country="australia"
-  value="0.05"
   year="1974"
-  added="29/08/2010"
-  condition="65"
-  diameter="12.7"
-  location="current"
-  website=""
-  estimate="5"
-  front=""
-  back=""
-  edge1=""
-  edge2=""
-  edge3=""
-  edge4=""
+  value="0.05"
+  currency="USD"
   type="coin"
-  favourite="0"
-  tags=""
+  diameter="12.7"
+  condition="65"
+  location="current"
+  added="29/08/2010"
+  estimate="5"
  >
   <comments>comments</comments>
-  <edge></edge>
-  <head></head>
-  <tail></tail>
-  <history></history>
-  <references></references>
   <metal>
    <line>
     <col>metal1</col>
