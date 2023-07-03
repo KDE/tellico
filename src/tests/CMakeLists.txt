@@ -503,6 +503,13 @@ ecm_add_test(entryupdatejobtest.cpp
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(adsfetchertest.cpp
+             ../fetch/adsfetcher.cpp
+             ../translators/risimporter.cpp
+    TEST_NAME adsfetchertest
+    LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(allocinefetchertest.cpp
              ../fetch/allocinefetcher.cpp
              ../fetch/execexternalfetcher.cpp
