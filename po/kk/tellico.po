@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-02 00:47+0000\n"
+"POT-Creation-Date: 2023-07-03 00:55+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -705,7 +705,7 @@ msgstr "Туынды мәнді өрісінде мәннің үлгісі бо�
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
 #: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:203 src/configdialog.cpp:1124
+#: src/configdialog.cpp:203 src/configdialog.cpp:1126
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -2771,7 +2771,7 @@ msgstr "Деректер көзін таңдау"
 msgid "Move &Up"
 msgstr "&Жоғарлату"
 
-#: src/configdialog.cpp:646 src/configdialog.cpp:651
+#: src/configdialog.cpp:646
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2780,7 +2780,7 @@ msgstr ""
 "Деректер көзінің реті-  Tellico жинақ жазуларын автожаңартқанда қолданатын "
 "реті."
 
-#: src/configdialog.cpp:648
+#: src/configdialog.cpp:649
 #, kde-format
 msgid "Move &Down"
 msgstr "&Төмендету"
@@ -2820,20 +2820,20 @@ msgstr "&Өшіру"
 msgid "Click to delete the selected data source."
 msgstr "Таңдалған дерек көзін өшіру."
 
-#: src/configdialog.cpp:1156 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1158 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:126
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "XSL Files"
 msgstr "Файлдар"
 
-#: src/configdialog.cpp:1157
+#: src/configdialog.cpp:1159
 #, fuzzy, kde-format
 #| msgid "Templates"
 msgid "Template Packages"
 msgstr "Үлгілер"
 
-#: src/configdialog.cpp:1158 src/importdialog.cpp:439 src/mainwindow.cpp:1281
+#: src/configdialog.cpp:1160 src/importdialog.cpp:439 src/mainwindow.cpp:1281
 #: src/mainwindow.cpp:1456 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2849,12 +2849,12 @@ msgstr "Үлгілер"
 msgid "All Files"
 msgstr "*|Бүкіл файлдар"
 
-#: src/configdialog.cpp:1187
+#: src/configdialog.cpp:1189
 #, kde-format
 msgid "Delete Template"
 msgstr "Үлгіні өшіру"
 
-#: src/configdialog.cpp:1188
+#: src/configdialog.cpp:1190
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Өшірілетін үлгі:"
@@ -4762,22 +4762,22 @@ msgid ""
 "The name identifies the data source and should be unique and informative."
 msgstr "Деректер көзінің атауы қайталанбайтын және маұмұнды болу тиіс."
 
-#: src/fetcherconfigdialog.cpp:117 src/fetcherconfigdialog.cpp:121
+#: src/fetcherconfigdialog.cpp:116
 #, kde-format
 msgid "Source &type: "
 msgstr "Деректер көзінің &түрі: "
 
-#: src/fetcherconfigdialog.cpp:124
+#: src/fetcherconfigdialog.cpp:125
 #, kde-format
 msgid "Tellico supports several different data sources."
 msgstr "Tellico бірнеше дерек көздерін таниды."
 
-#: src/fetcherconfigdialog.cpp:138
+#: src/fetcherconfigdialog.cpp:139
 #, kde-format
 msgid "Updating from source should overwrite user data"
 msgstr "Деректерді дерек көзінен алып жаңарту пайдаланушының дерегін жоғалтады"
 
-#: src/fetcherconfigdialog.cpp:141
+#: src/fetcherconfigdialog.cpp:142
 #, kde-format
 msgid "If checked, updating entries will overwrite any existing information."
 msgstr "Белгісі қойылса, жазуларын жаңартуы бар ақпаратты жоғалтады."

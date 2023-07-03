@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-02 00:47+0000\n"
+"POT-Creation-Date: 2023-07-03 00:55+0000\n"
 "PO-Revision-Date: 2023-06-21 16:16+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -709,7 +709,7 @@ msgstr "Un campo con un valor derivate debe haber un patrono de valor."
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
 #: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:203 src/configdialog.cpp:1124
+#: src/configdialog.cpp:203 src/configdialog.cpp:1126
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -2771,7 +2771,7 @@ msgstr "Optiones de fontes de datos"
 msgid "Move &Up"
 msgstr "Move in &alto"
 
-#: src/configdialog.cpp:646 src/configdialog.cpp:651
+#: src/configdialog.cpp:646
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2780,7 +2780,7 @@ msgstr ""
 "Le ordine de fontes de datos fixa le ordine que Tellico usa quando entratas "
 "es automaticamente actualisate."
 
-#: src/configdialog.cpp:648
+#: src/configdialog.cpp:649
 #, kde-format
 msgid "Move &Down"
 msgstr "Move a &basso"
@@ -2820,18 +2820,18 @@ msgstr "&Dele"
 msgid "Click to delete the selected data source."
 msgstr "Pulsa pro deler le seligite fonte de datos."
 
-#: src/configdialog.cpp:1156 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1158 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
 msgstr "Files XSL"
 
-#: src/configdialog.cpp:1157
+#: src/configdialog.cpp:1159
 #, kde-format
 msgid "Template Packages"
 msgstr "Pacchettos de patrono"
 
-#: src/configdialog.cpp:1158 src/importdialog.cpp:439 src/mainwindow.cpp:1281
+#: src/configdialog.cpp:1160 src/importdialog.cpp:439 src/mainwindow.cpp:1281
 #: src/mainwindow.cpp:1456 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2846,12 +2846,12 @@ msgstr "Pacchettos de patrono"
 msgid "All Files"
 msgstr "Omne files"
 
-#: src/configdialog.cpp:1187
+#: src/configdialog.cpp:1189
 #, kde-format
 msgid "Delete Template"
 msgstr "Dele patrono"
 
-#: src/configdialog.cpp:1188
+#: src/configdialog.cpp:1190
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Selige patrono de deler:"
@@ -4735,22 +4735,22 @@ msgid ""
 msgstr ""
 "Tu nomine identifica le fonte de datos e deberea esser unic e informative."
 
-#: src/fetcherconfigdialog.cpp:117 src/fetcherconfigdialog.cpp:121
+#: src/fetcherconfigdialog.cpp:116
 #, kde-format
 msgid "Source &type: "
 msgstr "T&ypo de fonte: "
 
-#: src/fetcherconfigdialog.cpp:124
+#: src/fetcherconfigdialog.cpp:125
 #, kde-format
 msgid "Tellico supports several different data sources."
 msgstr "Tellico supporta plure fontes de datos differente."
 
-#: src/fetcherconfigdialog.cpp:138
+#: src/fetcherconfigdialog.cpp:139
 #, kde-format
 msgid "Updating from source should overwrite user data"
 msgstr "Actualisar ex fonte super-scribera datos de usator"
 
-#: src/fetcherconfigdialog.cpp:141
+#: src/fetcherconfigdialog.cpp:142
 #, kde-format
 msgid "If checked, updating entries will overwrite any existing information."
 msgstr ""
