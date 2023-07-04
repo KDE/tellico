@@ -32,6 +32,8 @@
 #include "../fieldformat.h"
 #include "../utils/datafileregistry.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 
 #define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
@@ -39,6 +41,7 @@
 QTEST_GUILESS_MAIN( ReferencerTest )
 
 void ReferencerTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/referencer2tellico.xsl"));
   // need to register the collection type
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");

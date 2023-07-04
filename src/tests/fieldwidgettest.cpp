@@ -42,6 +42,7 @@
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 
+#include <KLocalizedString>
 #include <KTextEdit>
 #include <KUrlRequester>
 
@@ -57,6 +58,7 @@ QTEST_MAIN( FieldWidgetTest )
 
 void FieldWidgetTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::ImageFactory::init();
 }

@@ -32,6 +32,8 @@
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QStandardPaths>
 
@@ -39,6 +41,7 @@ QTEST_GUILESS_MAIN( AudioFileTest )
 
 void AudioFileTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
 }
 

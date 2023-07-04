@@ -32,12 +32,15 @@
 #include "../collectionfactory.h"
 #include "../utils/datafileregistry.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QStandardPaths>
 
 QTEST_APPLESS_MAIN( MarcTest )
 
 void MarcTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/mods2tellico.xsl"));

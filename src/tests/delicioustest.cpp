@@ -36,6 +36,8 @@
 #include "../fieldformat.h"
 #include "../utils/datafileregistry.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 
 #define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
@@ -44,6 +46,7 @@
 QTEST_GUILESS_MAIN( DeliciousTest )
 
 void DeliciousTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/delicious2tellico.xsl"));
   // need to register the collection type
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");

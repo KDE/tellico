@@ -31,6 +31,8 @@
 #include "../translators/xmphandler.h"
 #include "../images/imagefactory.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QStandardPaths>
 
@@ -39,6 +41,7 @@ QTEST_MAIN( FileListingTest )
 
 void FileListingTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
 }
 

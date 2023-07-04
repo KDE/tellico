@@ -29,6 +29,8 @@
 #include "../collections/bookcollection.h"
 #include "../images/imagefactory.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QTemporaryDir>
 #include <QStandardPaths>
@@ -39,6 +41,7 @@ QTEST_GUILESS_MAIN( AlexandriaTest )
 
 void AlexandriaTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
 }
 

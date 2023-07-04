@@ -29,9 +29,15 @@
 #include "../field.h"
 #include "../gui/urlfieldlogic.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 
 QTEST_APPLESS_MAIN( FieldTest )
+
+void FieldTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
+}
 
 void FieldTest::testAll() {
   Tellico::Data::Field field1(QStringLiteral("name"), QStringLiteral("title"));

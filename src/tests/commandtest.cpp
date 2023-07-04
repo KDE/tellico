@@ -31,6 +31,8 @@
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QStandardPaths>
 #include <QFile>
@@ -39,6 +41,7 @@ QTEST_GUILESS_MAIN( CommandTest )
 
 void CommandTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 

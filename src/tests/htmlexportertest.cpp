@@ -38,6 +38,8 @@
 #include "../utils/datafileregistry.h"
 #include "../config/tellico_config.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QRegularExpression>
 #include <QTemporaryDir>
@@ -49,6 +51,7 @@ QTEST_GUILESS_MAIN( HtmlExporterTest )
 
 void HtmlExporterTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");

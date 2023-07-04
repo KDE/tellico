@@ -35,6 +35,8 @@
 #include "../fieldformat.h"
 #include "../utils/datafileregistry.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QStandardPaths>
 
@@ -43,6 +45,7 @@ QTEST_MAIN( PdfTest )
 
 void PdfTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibliography");
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   // since we use the XMP importer

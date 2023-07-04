@@ -32,6 +32,8 @@
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QTemporaryDir>
 #include <QTemporaryFile>
@@ -42,6 +44,7 @@ QTEST_GUILESS_MAIN( DocumentTest )
 
 void DocumentTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
   // test case is a book file
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");

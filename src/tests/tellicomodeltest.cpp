@@ -40,6 +40,8 @@
 #include "../entrygroup.h"
 #include "../images/imagefactory.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QSignalSpy>
 #include <QStandardPaths>
@@ -48,6 +50,7 @@ QTEST_GUILESS_MAIN( TellicoModelTest )
 
 void TellicoModelTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 }

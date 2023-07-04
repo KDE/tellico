@@ -29,9 +29,15 @@
 #include "../translators/librarythingimporter.h"
 #include "../fieldformat.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 
 QTEST_APPLESS_MAIN( LibraryThingTest )
+
+void LibraryThingTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
+}
 
 void LibraryThingTest::testImport() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/librarything.json"));

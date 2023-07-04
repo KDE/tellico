@@ -31,6 +31,8 @@
 #include "../images/imagefactory.h"
 #include "../utils/datafileregistry.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QStandardPaths>
 
@@ -41,6 +43,7 @@ QTEST_GUILESS_MAIN( GriffithTest )
 
 void GriffithTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/griffith2tellico.xsl"));
   Tellico::ImageFactory::init();
   // need to register the collection type

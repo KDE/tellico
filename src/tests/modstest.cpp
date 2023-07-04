@@ -33,6 +33,8 @@
 #include "../fieldformat.h"
 #include "../utils/datafileregistry.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QDomDocument>
 #include <QTextCodec>
@@ -40,6 +42,7 @@
 QTEST_APPLESS_MAIN( ModsTest )
 
 void ModsTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/mods2tellico.xsl"));
 }

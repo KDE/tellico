@@ -30,12 +30,18 @@
 #include "../config/tellico_config.h"
 #include "../collections/bibtexcollection.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QTemporaryFile>
 #include <QApplication>
 #include <QClipboard>
 
 QTEST_MAIN( CiteTest )
+
+void CiteTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
+}
 
 void CiteTest::testLyxpipe() {
   QTemporaryFile tempFile(QStringLiteral("citetest.XXXXXX.in"));

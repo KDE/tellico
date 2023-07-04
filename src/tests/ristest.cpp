@@ -30,9 +30,15 @@
 #include "../collections/bibtexcollection.h"
 #include "../fieldformat.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 
 QTEST_APPLESS_MAIN( RisTest )
+
+void RisTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
+}
 
 void RisTest::testImport() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ris"));

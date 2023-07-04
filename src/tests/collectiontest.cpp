@@ -38,6 +38,7 @@
 #include "../utils/mergeconflictresolver.h"
 #include "../entrycomparison.h"
 
+#include <KLocalizedString>
 #include <KProcess>
 
 #include <QTest>
@@ -68,6 +69,7 @@ private:
 void CollectionTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   qRegisterMetaType<Tellico::EntryComparison::MatchValue>();
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
   // need to register the collection types
   Tellico::CollectionInitializer ci;

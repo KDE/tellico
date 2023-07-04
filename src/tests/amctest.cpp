@@ -29,9 +29,15 @@
 #include "../translators/amcimporter.h"
 #include "../collection.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 
 QTEST_GUILESS_MAIN( AmcTest )
+
+void AmcTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
+}
 
 // this is a real basic test right now, AMC doesn't run real well under wine
 void AmcTest::testImport() {

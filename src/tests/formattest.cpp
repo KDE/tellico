@@ -29,11 +29,14 @@
 #include "../fieldformat.h"
 #include "../config/tellico_config.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 
 QTEST_GUILESS_MAIN( FormatTest )
 
 void FormatTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::Config::setArticlesString(QStringLiteral("the,l'"));
   Tellico::Config::setNoCapitalizationString(QStringLiteral("the,of,et,de"));
 }

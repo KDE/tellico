@@ -28,11 +28,17 @@
 #include "../collections/bibtexcollection.h"
 #include "../fieldformat.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 
 QTEST_APPLESS_MAIN( CiwTest )
 
 #define QSL(x) QStringLiteral(x)
+
+void CiwTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
+}
 
 void CiwTest::testImport() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/test.ciw"));

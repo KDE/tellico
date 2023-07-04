@@ -29,6 +29,8 @@
 #include "../images/imagefactory.h"
 #include "../images/imageinfo.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QEventLoop>
 #include <QTemporaryFile>
@@ -51,6 +53,7 @@ static bool hasNetwork() {
 
 void ImageJobTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
 }
 

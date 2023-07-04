@@ -28,11 +28,17 @@
 
 #include "../utils/string_utils.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 
 QTEST_APPLESS_MAIN( EntityTest )
 
 #define QSL(x) QStringLiteral(x)
+
+void EntityTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
+}
 
 void EntityTest::testEntities() {
   QFETCH(QByteArray, data);

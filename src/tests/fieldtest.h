@@ -31,6 +31,7 @@ class FieldTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
+  void initTestCase();
   void testAll();
   void testUrlFieldLogic();
 };

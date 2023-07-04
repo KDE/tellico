@@ -29,11 +29,14 @@
 #include "../models/fieldcomparison.h"
 #include "../config/tellico_config.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 
 QTEST_GUILESS_MAIN( ComparisonTest )
 
 void ComparisonTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::Config::setArticlesString(QStringLiteral("the,l'"));
 }
 

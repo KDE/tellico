@@ -27,6 +27,8 @@
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QStandardPaths>
 
@@ -34,6 +36,7 @@ QTEST_GUILESS_MAIN( ImageTest )
 
 void ImageTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
 }
 

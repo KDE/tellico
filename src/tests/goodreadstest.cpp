@@ -34,6 +34,7 @@
 #include <KConfig>
 #include <KSharedConfig>
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 #include <QTest>
 #include <QNetworkInterface>
@@ -54,6 +55,7 @@ static bool hasNetwork() {
 
 void GoodreadsTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/goodreads2tellico.xsl"));
   Tellico::ImageFactory::init();

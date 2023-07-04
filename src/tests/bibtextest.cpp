@@ -35,6 +35,7 @@
 
 #include <KSharedConfig>
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 #include <QTest>
 
@@ -43,6 +44,7 @@ QTEST_GUILESS_MAIN( BibtexTest )
 #define QL1(x) QStringLiteral(x)
 
 void BibtexTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
   // since we use the bibtex mapping file
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../translators/bibtex-translation.xml"));
 }

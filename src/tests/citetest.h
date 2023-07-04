@@ -31,6 +31,7 @@ class CiteTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
+  void initTestCase();
   void testLyxpipe();
   void testLyxpipeNotExists();
   void testClipboard();
