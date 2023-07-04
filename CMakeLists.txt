@@ -79,7 +79,6 @@ find_package(KF5 REQUIRED COMPONENTS
     TextWidgets
     Wallet
     WidgetsAddons
-    WindowSystem
     XmlGui
 )
 if(NOT USE_KHTML)

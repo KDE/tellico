@@ -110,7 +110,6 @@ TARGET_LINK_LIBRARIES(tellico
     KF5::Crash
     KF5::KIOCore
     KF5::KIOFileWidgets
-    KF5::WindowSystem
     ${LIBXML2_LIBRARIES}
     ${LIBXSLT_LIBRARIES}
     ${LIBXSLT_EXSLT_LIBRARIES}
