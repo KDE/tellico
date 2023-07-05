@@ -55,6 +55,7 @@ void RISImporter::initTagMap() {
     s_tagMap->insert(QStringLiteral("ED"), QStringLiteral("editor"));
     s_tagMap->insert(QStringLiteral("YR"), QStringLiteral("year"));
     s_tagMap->insert(QStringLiteral("PY"), QStringLiteral("year"));
+    s_tagMap->insert(QStringLiteral("Y1"), QStringLiteral("year"));
     s_tagMap->insert(QStringLiteral("N1"), QStringLiteral("note"));
     s_tagMap->insert(QStringLiteral("AB"), QStringLiteral("abstract")); // should be note?
     s_tagMap->insert(QStringLiteral("N2"), QStringLiteral("abstract"));
@@ -274,7 +275,7 @@ void RISImporter::readText(const QString& text_, int n, const QHash<QString, Tel
       } else {
         continue;
       }
-    } else if(tag == QLatin1String("YR") || tag == QLatin1String("PY")) {  // for now, just grab the year
+    } else if(s_tagMap->value(tag) == QLatin1String("year")) {  // for now, just grab the year
       value = value.section(QLatin1Char('/'), 0, 0);
     }
 
