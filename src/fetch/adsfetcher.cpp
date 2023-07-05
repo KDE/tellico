@@ -281,7 +281,11 @@ Tellico::Data::EntryPtr ADSFetcher::fetchEntryHook(uint uid_) {
   Import::RISImporter imp(doc.object().value(QLatin1String("export")).toString());
   auto coll = imp.collection();
 
-  return coll->entryCount() > 0 ? coll->entries().at(0) : Data::EntryPtr();
+  if(coll->entryCount() == 0) {
+    return Data::EntryPtr();
+  }
+  m_entries.insert(uid_, coll->entries().at(0));
+  return coll->entries().at(0);
 }
 
 Tellico::Fetch::FetchRequest ADSFetcher::updateRequest(Data::EntryPtr entry_) {
