@@ -73,6 +73,7 @@ void RISImporter::initTagMap() {
     s_tagMap->insert(QStringLiteral("L1"), QStringLiteral("pdf"));
     s_tagMap->insert(QStringLiteral("T3"), QStringLiteral("series"));
     s_tagMap->insert(QStringLiteral("EP"), QStringLiteral("pages"));
+    s_tagMap->insert(QStringLiteral("DO"), QStringLiteral("doi"));
   }
 }
 
