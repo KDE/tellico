@@ -820,7 +820,7 @@
 >, sinó que també pot importar altres formats, així com «bibtex». </para>
 
 <para
->S'ha d'introduir el camí complet a l'aplicació  a les opcions de la font. Marqueu les caselles al costat de les claus de cerca admeses per l'aplicació, i introduïu les opcions de la línia d'ordres requerides al quadre d'edició. El valor de cerca s'insereix on apareix <userinput
+>S'ha d'introduir el camí complet a l'aplicació a les opcions de la font. Marqueu les caselles al costat de les claus de cerca admeses per l'aplicació, i introduïu les opcions de la línia d'ordres requerides al quadre d'edició. El valor de cerca s'insereix on apareix <userinput
 >%1</userinput
 >. </para>
 
