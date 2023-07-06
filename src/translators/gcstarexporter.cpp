@@ -152,7 +152,7 @@ bool GCstarExporter::writeImages() {
         break;
       }
 
-      const Data::Image& img = ImageFactory::self()->imageById(entry->field(field));
+      const Data::Image& img = ImageFactory::imageById(entry->field(field));
       if(img.isNull()) {
         break;
       }
