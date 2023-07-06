@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-03 00:55+0000\n"
+"POT-Creation-Date: 2023-07-06 01:00+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -756,7 +756,7 @@ msgid "Publishing"
 msgstr "Publicering"
 
 #: src/collections/bibtexcollection.cpp:40 src/fetch/entrezfetcher.cpp:440
-#: src/translators/risimporter.cpp:337
+#: src/translators/risimporter.cpp:339
 #, kde-format
 msgid "Miscellaneous"
 msgstr "Diverse"
@@ -3261,6 +3261,55 @@ msgstr "Indkod i brugerens lokalitetsindstilling (%1)"
 msgid "Encode the exported file in the local encoding."
 msgstr "Indkod den eksporterede fil i det lokale tegnsæt."
 
+#: src/fetch/adsfetcher.cpp:316
+#, kde-format
+msgid "SAO/NASA Astrophysics Data System"
+msgstr ""
+
+#: src/fetch/adsfetcher.cpp:331 src/fetch/amazonfetcher.cpp:1093
+#: src/fetch/bibliosharefetcher.cpp:172 src/fetch/comicvinefetcher.cpp:232
+#: src/fetch/crossreffetcher.cpp:313 src/fetch/discogsfetcher.cpp:524
+#: src/fetch/giantbombfetcher.cpp:219 src/fetch/googlebookfetcher.cpp:382
+#: src/fetch/isbndbfetcher.cpp:394 src/fetch/mobygamesfetcher.cpp:651
+#: src/fetch/omdbfetcher.cpp:410 src/fetch/thegamesdbfetcher.cpp:635
+#: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:590
+#, fuzzy, kde-format
+#| msgid ""
+#| "Registration is required for accessing the %1 data source. If you agree "
+#| "to the terms and conditions, <a href='%2'>sign up for an account</a>, and "
+#| "enter your information below."
+msgid ""
+"Registration is required for accessing this data source. If you agree to the "
+"terms and conditions, <a href='%1'>sign up for an account</a>, and enter "
+"your information below."
+msgstr ""
+"Registrering kræves for adgang til datakilden %1. Hvis du accepterer "
+"betingelserne, så <a href='%2'>registrér en konto</a>, og angiv din "
+"kontoinformation nedenfor."
+
+#: src/fetch/adsfetcher.cpp:343 src/fetch/amazonfetcher.cpp:1105
+#: src/fetch/bibliosharefetcher.cpp:184 src/fetch/comicvinefetcher.cpp:244
+#: src/fetch/entrezfetcher.cpp:531 src/fetch/giantbombfetcher.cpp:231
+#: src/fetch/googlebookfetcher.cpp:394 src/fetch/isbndbfetcher.cpp:406
+#: src/fetch/mobygamesfetcher.cpp:663 src/fetch/numistafetcher.cpp:414
+#: src/fetch/omdbfetcher.cpp:422 src/fetch/thegamesdbfetcher.cpp:647
+#: src/fetch/themoviedbfetcher.cpp:603
+#, kde-format
+msgid "Access key: "
+msgstr "Adgangsnøgle: "
+
+#: src/fetch/adsfetcher.cpp:349 src/fetch/bibliosharefetcher.cpp:190
+#: src/fetch/comicvinefetcher.cpp:250 src/fetch/entrezfetcher.cpp:537
+#: src/fetch/giantbombfetcher.cpp:237 src/fetch/googlebookfetcher.cpp:400
+#: src/fetch/themoviedbfetcher.cpp:609 src/fetch/thetvdbfetcher.cpp:608
+#, kde-format
+msgid ""
+"The default Tellico key may be used, but searching may fail due to reaching "
+"access limits."
+msgstr ""
+"Tellicos standardnøgle kan bruges, men søgning kan mislykkes pga. "
+"adgangsbegrænsninger."
+
 #: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:631
 #: src/fetch/colnectfetcher.cpp:787 src/fetch/discogsfetcher.cpp:217
 #: src/fetch/doubanfetcher.cpp:454 src/fetch/filmaffinityfetcher.cpp:425
@@ -3516,37 +3565,6 @@ msgstr "Amazon Link"
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com webtjenester"
 
-#: src/fetch/amazonfetcher.cpp:1093 src/fetch/bibliosharefetcher.cpp:172
-#: src/fetch/comicvinefetcher.cpp:232 src/fetch/crossreffetcher.cpp:313
-#: src/fetch/discogsfetcher.cpp:524 src/fetch/giantbombfetcher.cpp:219
-#: src/fetch/googlebookfetcher.cpp:382 src/fetch/isbndbfetcher.cpp:394
-#: src/fetch/mobygamesfetcher.cpp:651 src/fetch/omdbfetcher.cpp:410
-#: src/fetch/thegamesdbfetcher.cpp:635 src/fetch/themoviedbfetcher.cpp:591
-#: src/fetch/thetvdbfetcher.cpp:590
-#, fuzzy, kde-format
-#| msgid ""
-#| "Registration is required for accessing the %1 data source. If you agree "
-#| "to the terms and conditions, <a href='%2'>sign up for an account</a>, and "
-#| "enter your information below."
-msgid ""
-"Registration is required for accessing this data source. If you agree to the "
-"terms and conditions, <a href='%1'>sign up for an account</a>, and enter "
-"your information below."
-msgstr ""
-"Registrering kræves for adgang til datakilden %1. Hvis du accepterer "
-"betingelserne, så <a href='%2'>registrér en konto</a>, og angiv din "
-"kontoinformation nedenfor."
-
-#: src/fetch/amazonfetcher.cpp:1105 src/fetch/bibliosharefetcher.cpp:184
-#: src/fetch/comicvinefetcher.cpp:244 src/fetch/entrezfetcher.cpp:531
-#: src/fetch/giantbombfetcher.cpp:231 src/fetch/googlebookfetcher.cpp:394
-#: src/fetch/isbndbfetcher.cpp:406 src/fetch/mobygamesfetcher.cpp:663
-#: src/fetch/numistafetcher.cpp:414 src/fetch/omdbfetcher.cpp:422
-#: src/fetch/thegamesdbfetcher.cpp:647 src/fetch/themoviedbfetcher.cpp:603
-#, kde-format
-msgid "Access key: "
-msgstr "Adgangsnøgle: "
-
 #: src/fetch/amazonfetcher.cpp:1115
 #, kde-format
 msgid "Secret key: "
@@ -3691,18 +3709,6 @@ msgstr "Bedetheque-link"
 #, kde-format
 msgid "ISBN#"
 msgstr "ISBN#"
-
-#: src/fetch/bibliosharefetcher.cpp:190 src/fetch/comicvinefetcher.cpp:250
-#: src/fetch/entrezfetcher.cpp:537 src/fetch/giantbombfetcher.cpp:237
-#: src/fetch/googlebookfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:609
-#: src/fetch/thetvdbfetcher.cpp:608
-#, kde-format
-msgid ""
-"The default Tellico key may be used, but searching may fail due to reaching "
-"access limits."
-msgstr ""
-"Tellicos standardnøgle kan bruges, men søgning kan mislykkes pga. "
-"adgangsbegrænsninger."
 
 #: src/fetch/boardgamegeekfetcher.cpp:201
 #, kde-format
@@ -7352,7 +7358,7 @@ msgstr ""
 "Du skal dog oprette en CrossRef-konto og tilføje en ny datakilde med din "
 "kontoinformation."
 
-#: src/translators/risimporter.cpp:335
+#: src/translators/risimporter.cpp:337
 #, kde-format
 msgid "PDF"
 msgstr "PDF"
