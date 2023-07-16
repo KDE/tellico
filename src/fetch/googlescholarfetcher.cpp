@@ -78,9 +78,6 @@ void GoogleScholarFetcher::readConfigHook(const KConfigGroup& config_) {
 }
 
 void GoogleScholarFetcher::search() {
-  if(!m_cookieIsSet) {
-    setBibtexCookie();
-  }
   m_started = true;
   m_start = 0;
   m_total = -1;
@@ -120,6 +117,10 @@ void GoogleScholarFetcher::doSearch() {
   }
   u.setQuery(q);
 //  myDebug() << "url: " << u.url();
+
+  if(!m_cookieIsSet) {
+    setBibtexCookie();
+  }
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
