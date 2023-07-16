@@ -1,3 +1,7 @@
+2023-07-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Removed author searches from Google Scholar.
+
 2023-07-05  Robby Stephenson  <robby@periapsis.org>
 
 	* Added SAO/ADS as data source.

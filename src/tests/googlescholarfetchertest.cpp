@@ -76,25 +76,16 @@ void GoogleScholarFetcherTest::testTitle() {
   }
 }
 
-void GoogleScholarFetcherTest::testAuthor() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Person,
-                                       m_fieldValues.value(QStringLiteral("author")));
+void GoogleScholarFetcherTest::testKeyword() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Keyword,
+                                       m_fieldValues.value(QStringLiteral("title")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleScholarFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
   QVERIFY(!results.isEmpty());
 
-  Tellico::Data::EntryPtr entry;
-  foreach(Tellico::Data::EntryPtr test, results) {
-    if(test->title().toLower() == m_fieldValues.value(QStringLiteral("title")).toLower()) {
-      entry = test;
-      break;
-    } else {
-      qDebug() << "Skipping" << test->title();
-    }
-  }
-  QVERIFY(entry);
+  Tellico::Data::EntryPtr entry = results.at(0);
 
   QHashIterator<QString, QString> i(m_fieldValues);
   while(i.hasNext()) {
