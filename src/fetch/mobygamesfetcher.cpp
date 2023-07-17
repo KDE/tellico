@@ -109,15 +109,6 @@ void MobyGamesFetcher::continueSearch() {
   m_started = true;
   m_requestPlatformId = 0;
 
-  if(m_apiKey.isEmpty()) {
-    myDebug() << "empty API key";
-    message(i18n("An access key is required to use this data source.")
-            + QLatin1Char(' ') +
-            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
-    stop();
-    return;
-  }
-
   QUrl u(QString::fromLatin1(MOBYGAMES_API_URL));
   u.setPath(u.path() + QStringLiteral("/games"));
 
@@ -164,6 +155,16 @@ void MobyGamesFetcher::continueSearch() {
       stop();
       return;
   }
+
+  if(m_apiKey.isEmpty()) {
+    myDebug() << source() << "- empty API key";
+    message(i18n("An access key is required to use this data source.")
+            + QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
+    stop();
+    return;
+  }
+
   q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
   q.addQueryItem(QStringLiteral("limit"), QString::number(MOBYGAMES_MAX_RETURNS_TOTAL));
   q.addQueryItem(QStringLiteral("format"), QStringLiteral("normal"));

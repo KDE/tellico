@@ -121,15 +121,6 @@ void TheTVDBFetcher::search() {
 void TheTVDBFetcher::continueSearch() {
   m_started = true;
 
-  if(m_apiPin.isEmpty()) {
-    myDebug() << "TheTVDBFetcher:: empty API PIN";
-    message(i18n("An access key is required to use this data source.")
-            + QLatin1Char(' ') +
-            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
-    stop();
-    return;
-  }
-
   QUrl u(QString::fromLatin1(THETVDB_API_URL));
   switch(request().key()) {
     case Title:
@@ -170,6 +161,14 @@ void TheTVDBFetcher::continueSearch() {
 #if THETVDB_LOG
   myDebug() << u;
 #endif
+  if(m_apiPin.isEmpty()) {
+    myDebug() << source() << "- empty API PIN";
+    message(i18n("An access key is required to use this data source.")
+            + QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
+    stop();
+    return;
+  }
 
   m_job = getJob(u);
   connect(m_job.data(), &KJob::result, this, &TheTVDBFetcher::slotComplete);

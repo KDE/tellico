@@ -97,15 +97,6 @@ void DiscogsFetcher::search() {
 void DiscogsFetcher::continueSearch() {
   m_started = true;
 
-  if(m_apiKey.isEmpty()) {
-    myDebug() << "empty API key";
-    message(i18n("An access key is required to use this data source.")
-            + QLatin1Char(' ') +
-            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
-    stop();
-    return;
-  }
-
   QUrl u(QString::fromLatin1(DISCOGS_API_URL));
   u.setPath(QStringLiteral("/database/search"));
 
@@ -139,6 +130,16 @@ void DiscogsFetcher::continueSearch() {
       stop();
       return;
   }
+
+  if(m_apiKey.isEmpty()) {
+    myDebug() << source() << "- empty API key";
+    message(i18n("An access key is required to use this data source.")
+            + QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
+    stop();
+    return;
+  }
+
   q.addQueryItem(QStringLiteral("page"), QString::number(m_page));
   q.addQueryItem(QStringLiteral("per_page"), QString::number(m_limit));
   q.addQueryItem(QStringLiteral("token"), m_apiKey);

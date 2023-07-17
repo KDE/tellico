@@ -99,15 +99,6 @@ void TheGamesDBFetcher::readConfigHook(const KConfigGroup& config_) {
 void TheGamesDBFetcher::search() {
   m_started = true;
 
-  if(m_apiKey.isEmpty()) {
-    myDebug() << "empty API key";
-    message(i18n("An access key is required to use this data source.")
-            + QLatin1Char(' ') +
-            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
-    stop();
-    return;
-  }
-
   QUrl u(QString::fromLatin1(THEGAMESDB_API_URL));
   u.setPath(QLatin1String("/v") + QLatin1String(THEGAMESDB_API_VERSION));
 
@@ -136,6 +127,15 @@ void TheGamesDBFetcher::search() {
       myWarning() << source() << "- key not recognized:" << request().key();
       stop();
       return;
+  }
+
+  if(m_apiKey.isEmpty()) {
+    myDebug() << source() << "- empty API key";
+    message(i18n("An access key is required to use this data source.")
+            + QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
+    stop();
+    return;
   }
 //  u = QUrl::fromLocalFile(QStringLiteral("/tmp/test-tgdb.json"));
 //  myDebug() << u;

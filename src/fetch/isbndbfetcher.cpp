@@ -107,15 +107,6 @@ void ISBNdbFetcher::search() {
 void ISBNdbFetcher::continueSearch() {
   m_started = true;
 
-  if(m_apiKey.isEmpty()) {
-    myDebug() << "empty API key";
-    message(i18n("An access key is required to use this data source.")
-            + QLatin1Char(' ') +
-            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
-    stop();
-    return;
-  }
-
   doSearch(request().value());
 }
 
@@ -165,6 +156,16 @@ void ISBNdbFetcher::doSearch(const QString& term_) {
       stop();
       return;
   }
+
+  if(m_apiKey.isEmpty()) {
+    myDebug() << source() << "- empty API key";
+    message(i18n("An access key is required to use this data source.")
+            + QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
+    stop();
+    return;
+  }
+
 //  myDebug() << "url: " << u.url();
 
   QPointer<KIO::StoredTransferJob> job;

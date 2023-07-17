@@ -94,15 +94,6 @@ void OMDBFetcher::search() {
 void OMDBFetcher::continueSearch() {
   m_started = true;
 
-  if(m_apiKey.isEmpty()) {
-    myDebug() << "No API key";
-    message(i18n("An access key is required to use this data source.")
-            + QLatin1Char(' ') +
-            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
-    stop();
-    return;
-  }
-
   QUrl u(QString::fromLatin1(OMDB_API_URL));
   QUrlQuery q;
   switch(request().key()) {
@@ -121,6 +112,16 @@ void OMDBFetcher::continueSearch() {
       stop();
       return;
   }
+
+  if(m_apiKey.isEmpty()) {
+    myDebug() << source() << "- No API key";
+    message(i18n("An access key is required to use this data source.")
+            + QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
+    stop();
+    return;
+  }
+
   q.addQueryItem(QStringLiteral("apikey"), m_apiKey);
   u.setQuery(q);
 //  myDebug() << u;

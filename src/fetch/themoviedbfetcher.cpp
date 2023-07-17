@@ -126,15 +126,6 @@ void TheMovieDBFetcher::search() {
 void TheMovieDBFetcher::continueSearch() {
   m_started = true;
 
-  if(m_apiKey.isEmpty()) {
-    myDebug() << "empty API key";
-    message(i18n("An access key is required to use this data source.")
-            + QLatin1Char(' ') +
-            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
-    stop();
-    return;
-  }
-
   QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
   u.setPath(QLatin1Char('/') + QLatin1String(THEMOVIEDB_API_VERSION));
   u = u.adjusted(QUrl::StripTrailingSlash);
@@ -164,6 +155,15 @@ void TheMovieDBFetcher::continueSearch() {
   q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
   u.setQuery(q);
 //  myDebug() << u;
+
+  if(m_apiKey.isEmpty()) {
+    myDebug() << source() << "- empty API key";
+    message(i18n("An access key is required to use this data source.")
+            + QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
+    stop();
+    return;
+  }
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
