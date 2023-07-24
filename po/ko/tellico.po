@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-17 00:49+0000\n"
-"PO-Revision-Date: 2023-04-22 00:08+0200\n"
+"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"PO-Revision-Date: 2023-07-23 21:50+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -695,9 +695,9 @@ msgstr "값이 파생된 필드는 값 템플릿이 있어야 합니다."
 #: src/fetch/bedethequefetcher.cpp:339 src/fetch/colnectfetcher.cpp:363
 #: src/fetch/colnectfetcher.cpp:527 src/fetch/colnectfetcher.cpp:547
 #: src/fetch/colnectfetcher.cpp:583 src/fetch/colnectfetcher.cpp:590
-#: src/fetch/discogsfetcher.cpp:308 src/fetch/discogsfetcher.cpp:313
-#: src/fetch/discogsfetcher.cpp:318 src/fetch/discogsfetcher.cpp:325
-#: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:337
+#: src/fetch/discogsfetcher.cpp:309 src/fetch/discogsfetcher.cpp:314
+#: src/fetch/discogsfetcher.cpp:319 src/fetch/discogsfetcher.cpp:326
+#: src/fetch/discogsfetcher.cpp:333 src/fetch/discogsfetcher.cpp:338
 #: src/fetch/doubanfetcher.cpp:351 src/fetch/doubanfetcher.cpp:369
 #: src/fetch/doubanfetcher.cpp:387 src/fetch/filmaffinityfetcher.cpp:282
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
@@ -705,15 +705,15 @@ msgstr "값이 파생된 필드는 값 템플릿이 있어야 합니다."
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
 #: src/fetch/imdbfetcher.cpp:831 src/fetch/imdbfetcher.cpp:1386
 #: src/fetch/itunesfetcher.cpp:241 src/fetch/kinopoiskfetcher.cpp:277
-#: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:459
+#: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:460
 #: src/fetch/moviemeterfetcher.cpp:216 src/fetch/moviemeterfetcher.cpp:221
 #: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:359
-#: src/fetch/omdbfetcher.cpp:252 src/fetch/openlibraryfetcher.cpp:272
+#: src/fetch/omdbfetcher.cpp:253 src/fetch/openlibraryfetcher.cpp:272
 #: src/fetch/thegamesdbfetcher.cpp:267 src/fetch/thegamesdbfetcher.cpp:272
 #: src/fetch/themoviedbfetcher.cpp:313 src/fetch/themoviedbfetcher.cpp:316
 #: src/fetch/themoviedbfetcher.cpp:321 src/fetch/themoviedbfetcher.cpp:339
-#: src/fetch/thetvdbfetcher.cpp:256 src/fetch/thetvdbfetcher.cpp:261
-#: src/fetch/thetvdbfetcher.cpp:266 src/fetch/tvmazefetcher.cpp:178
+#: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:260
+#: src/fetch/thetvdbfetcher.cpp:265 src/fetch/tvmazefetcher.cpp:178
 #: src/fetch/tvmazefetcher.cpp:183 src/fetch/upcitemdbfetcher.cpp:208
 #: src/field.cpp:39 src/field.cpp:80 src/field.cpp:299 src/field.cpp:328
 #: src/field.cpp:333 src/translators/gcstarimporter.cpp:89
@@ -723,7 +723,7 @@ msgstr "일반"
 
 #: src/collections/bibtexcollection.cpp:39
 #: src/collections/bookcollection.cpp:32
-#: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:361
+#: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:362
 #: src/field.cpp:315 src/translators/grs1importer.cpp:75
 #: src/translators/pdfimporter.cpp:229
 #, kde-format
@@ -1187,7 +1187,7 @@ msgstr "읽음"
 
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
-#: src/fetch/crossreffetcher.cpp:196 src/translators/ebookimporter.cpp:153
+#: src/fetch/crossreffetcher.cpp:197 src/translators/ebookimporter.cpp:153
 #: src/translators/pdfimporter.cpp:290
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
@@ -1642,7 +1642,7 @@ msgstr "내 음악"
 msgid "Album"
 msgstr "앨범"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:422
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:423
 #: src/fetch/doubanfetcher.cpp:431 src/fetch/doubanfetcher.cpp:565
 #: src/fetch/upcitemdbfetcher.cpp:290 src/fetch/upcitemdbfetcher.cpp:410
 #: src/translators/audiofileimporter.cpp:335
@@ -1655,18 +1655,18 @@ msgstr "CD"
 
 #: src/collections/musiccollection.cpp:54
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1043
-#: src/fetch/discogsfetcher.cpp:430 src/fetch/upcitemdbfetcher.cpp:406
+#: src/fetch/discogsfetcher.cpp:431 src/fetch/upcitemdbfetcher.cpp:406
 #: src/fetch/upcitemdbfetcher.cpp:414
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:427
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:428
 #, kde-format
 msgid "Cassette"
 msgstr "카세트 테이프"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:425
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:426
 #, kde-format
 msgid "Vinyl"
 msgstr "레코드판"
@@ -1873,8 +1873,8 @@ msgstr "지역 8"
 msgid "Region"
 msgstr "지역"
 
-#: src/collections/videocollection.cpp:95 src/fetch/discogsfetcher.cpp:317
-#: src/fetch/discogsfetcher.cpp:510
+#: src/collections/videocollection.cpp:95 src/fetch/discogsfetcher.cpp:318
+#: src/fetch/discogsfetcher.cpp:511
 #, kde-format
 msgid "Nationality"
 msgstr "국적"
@@ -1927,8 +1927,8 @@ msgstr "출연진과 배역 표"
 msgid "Director"
 msgstr "감독"
 
-#: src/collections/videocollection.cpp:123 src/fetch/discogsfetcher.cpp:324
-#: src/fetch/discogsfetcher.cpp:509 src/fetch/rpggeekfetcher.cpp:207
+#: src/collections/videocollection.cpp:123 src/fetch/discogsfetcher.cpp:325
+#: src/fetch/discogsfetcher.cpp:510 src/fetch/rpggeekfetcher.cpp:207
 #, kde-format
 msgid "Producer"
 msgstr "제작자"
@@ -2422,7 +2422,7 @@ msgstr "데이터 파일에 이미지 저장"
 #: src/configdialog.cpp:242
 #, kde-format
 msgid "Store images in common application directory"
-msgstr "공통 프로그램 디렉터리에 이미지 저장"
+msgstr "공통 앱 디렉터리에 이미지 저장"
 
 #: src/configdialog.cpp:243
 #, kde-format
@@ -2437,8 +2437,8 @@ msgid ""
 "directory in the same location as the data file."
 msgstr ""
 "데이터 파일에 이미지를 저장할 수 있으나 이 경우 Tellico 실행이 느려질 수 있으"
-"며, Tellico 프로그램 디렉터리나 데이터 파일과 같은 경로에 이미지를 저장할 수"
-"도 있습니다."
+"며, Tellico 앱 디렉터리나 데이터 파일과 같은 경로에 이미지를 저장할 수도 있습"
+"니다."
 
 #: src/configdialog.cpp:265 src/configdialog.cpp:349
 #, kde-format
@@ -3222,11 +3222,11 @@ msgstr ""
 
 #: src/fetch/adsfetcher.cpp:331 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:172 src/fetch/comicvinefetcher.cpp:232
-#: src/fetch/crossreffetcher.cpp:313 src/fetch/discogsfetcher.cpp:524
+#: src/fetch/crossreffetcher.cpp:314 src/fetch/discogsfetcher.cpp:525
 #: src/fetch/giantbombfetcher.cpp:219 src/fetch/googlebookfetcher.cpp:382
-#: src/fetch/isbndbfetcher.cpp:394 src/fetch/mobygamesfetcher.cpp:651
-#: src/fetch/omdbfetcher.cpp:410 src/fetch/thegamesdbfetcher.cpp:635
-#: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:590
+#: src/fetch/isbndbfetcher.cpp:395 src/fetch/mobygamesfetcher.cpp:652
+#: src/fetch/omdbfetcher.cpp:411 src/fetch/thegamesdbfetcher.cpp:635
+#: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:589
 #, kde-format
 msgid ""
 "Registration is required for accessing this data source. If you agree to the "
@@ -3239,9 +3239,9 @@ msgstr ""
 #: src/fetch/adsfetcher.cpp:343 src/fetch/amazonfetcher.cpp:1105
 #: src/fetch/bibliosharefetcher.cpp:184 src/fetch/comicvinefetcher.cpp:244
 #: src/fetch/entrezfetcher.cpp:531 src/fetch/giantbombfetcher.cpp:231
-#: src/fetch/googlebookfetcher.cpp:394 src/fetch/isbndbfetcher.cpp:406
-#: src/fetch/mobygamesfetcher.cpp:663 src/fetch/numistafetcher.cpp:414
-#: src/fetch/omdbfetcher.cpp:422 src/fetch/thegamesdbfetcher.cpp:647
+#: src/fetch/googlebookfetcher.cpp:394 src/fetch/isbndbfetcher.cpp:407
+#: src/fetch/mobygamesfetcher.cpp:664 src/fetch/numistafetcher.cpp:414
+#: src/fetch/omdbfetcher.cpp:423 src/fetch/thegamesdbfetcher.cpp:647
 #: src/fetch/themoviedbfetcher.cpp:603
 #, kde-format
 msgid "Access key: "
@@ -3250,7 +3250,7 @@ msgstr "액세스 키: "
 #: src/fetch/adsfetcher.cpp:349 src/fetch/bibliosharefetcher.cpp:190
 #: src/fetch/comicvinefetcher.cpp:250 src/fetch/entrezfetcher.cpp:537
 #: src/fetch/giantbombfetcher.cpp:237 src/fetch/googlebookfetcher.cpp:400
-#: src/fetch/themoviedbfetcher.cpp:609 src/fetch/thetvdbfetcher.cpp:608
+#: src/fetch/themoviedbfetcher.cpp:609 src/fetch/thetvdbfetcher.cpp:607
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3260,17 +3260,17 @@ msgstr ""
 "니다."
 
 #: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:631
-#: src/fetch/colnectfetcher.cpp:787 src/fetch/discogsfetcher.cpp:217
+#: src/fetch/colnectfetcher.cpp:787 src/fetch/discogsfetcher.cpp:218
 #: src/fetch/doubanfetcher.cpp:454 src/fetch/filmaffinityfetcher.cpp:425
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
-#: src/fetch/igdbfetcher.cpp:163 src/fetch/isbndbfetcher.cpp:295
+#: src/fetch/igdbfetcher.cpp:163 src/fetch/isbndbfetcher.cpp:296
 #: src/fetch/itunesfetcher.cpp:331 src/fetch/kinofetcher.cpp:350
 #: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:376
-#: src/fetch/mobygamesfetcher.cpp:345 src/fetch/moviemeterfetcher.cpp:162
+#: src/fetch/mobygamesfetcher.cpp:346 src/fetch/moviemeterfetcher.cpp:162
 #: src/fetch/numistafetcher.cpp:285 src/fetch/numistafetcher.cpp:293
-#: src/fetch/omdbfetcher.cpp:182 src/fetch/thegamesdbfetcher.cpp:172
-#: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:352
+#: src/fetch/omdbfetcher.cpp:183 src/fetch/thegamesdbfetcher.cpp:172
+#: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:351
 #: src/fetch/tvmazefetcher.cpp:269 src/fetch/upcitemdbfetcher.cpp:250
 #: src/fetch/vndbfetcher.cpp:182
 #, kde-format
@@ -3291,7 +3291,7 @@ msgstr "알로시네 링크"
 #: src/fetch/imdbfetcher.cpp:1806 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:263 src/fetch/kinoteatrfetcher.cpp:507
-#: src/fetch/omdbfetcher.cpp:262 src/fetch/themoviedbfetcher.cpp:333
+#: src/fetch/omdbfetcher.cpp:263 src/fetch/themoviedbfetcher.cpp:333
 #: src/fetch/themoviedbfetcher.cpp:577 src/fetch/vndbfetcher.cpp:284
 #: src/fetch/vndbfetcher.cpp:432
 #, kde-format
@@ -3491,10 +3491,10 @@ msgid ""
 msgstr ""
 "Amazon.com에서 데이터에 접근하려면 AWS 액세스 키 ID와 비밀 키가 필요합니다."
 
-#: src/fetch/amazonfetcher.cpp:272 src/fetch/discogsfetcher.cpp:104
-#: src/fetch/isbndbfetcher.cpp:114 src/fetch/mobygamesfetcher.cpp:116
-#: src/fetch/omdbfetcher.cpp:101 src/fetch/thegamesdbfetcher.cpp:106
-#: src/fetch/themoviedbfetcher.cpp:133 src/fetch/thetvdbfetcher.cpp:128
+#: src/fetch/amazonfetcher.cpp:272 src/fetch/discogsfetcher.cpp:138
+#: src/fetch/isbndbfetcher.cpp:164 src/fetch/mobygamesfetcher.cpp:163
+#: src/fetch/omdbfetcher.cpp:120 src/fetch/thegamesdbfetcher.cpp:136
+#: src/fetch/themoviedbfetcher.cpp:163 src/fetch/thetvdbfetcher.cpp:168
 #, kde-format
 msgid "Those values must be entered in the data source settings."
 msgstr "이 값은 데이터 원본 설정에 입력해야 합니다."
@@ -3535,7 +3535,7 @@ msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:213
 #: src/fetch/colnectfetcher.cpp:947 src/fetch/itunesfetcher.cpp:517
-#: src/fetch/mobygamesfetcher.cpp:671 src/fetch/rpggeekfetcher.cpp:222
+#: src/fetch/mobygamesfetcher.cpp:672 src/fetch/rpggeekfetcher.cpp:222
 #: src/fetch/thegamesdbfetcher.cpp:655 src/fetch/videogamegeekfetcher.cpp:213
 #, kde-format
 msgid "&Image size: "
@@ -3543,7 +3543,7 @@ msgstr "이미지 크기(&I): "
 
 #: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:217
 #: src/fetch/colnectfetcher.cpp:951 src/fetch/itunesfetcher.cpp:521
-#: src/fetch/mobygamesfetcher.cpp:674 src/fetch/rpggeekfetcher.cpp:226
+#: src/fetch/mobygamesfetcher.cpp:675 src/fetch/rpggeekfetcher.cpp:226
 #: src/fetch/thegamesdbfetcher.cpp:658 src/fetch/videogamegeekfetcher.cpp:217
 #, kde-format
 msgid "Small Image"
@@ -3557,7 +3557,7 @@ msgstr "중간 이미지"
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:218
 #: src/fetch/colnectfetcher.cpp:952 src/fetch/itunesfetcher.cpp:522
-#: src/fetch/mobygamesfetcher.cpp:676 src/fetch/rpggeekfetcher.cpp:227
+#: src/fetch/mobygamesfetcher.cpp:677 src/fetch/rpggeekfetcher.cpp:227
 #: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:218
 #, kde-format
 msgid "Large Image"
@@ -3565,14 +3565,14 @@ msgstr "큰 이미지"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:216
 #: src/fetch/colnectfetcher.cpp:950 src/fetch/itunesfetcher.cpp:520
-#: src/fetch/mobygamesfetcher.cpp:677 src/fetch/rpggeekfetcher.cpp:225
+#: src/fetch/mobygamesfetcher.cpp:678 src/fetch/rpggeekfetcher.cpp:225
 #: src/fetch/thegamesdbfetcher.cpp:661 src/fetch/videogamegeekfetcher.cpp:216
 #, kde-format
 msgid "No Image"
 msgstr "이미지 없음"
 
 #: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:1845
-#: src/fetch/mobygamesfetcher.cpp:681 src/fetch/thegamesdbfetcher.cpp:665
+#: src/fetch/mobygamesfetcher.cpp:682 src/fetch/thegamesdbfetcher.cpp:665
 #, kde-format
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
@@ -3598,7 +3598,7 @@ msgstr ""
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
 #: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:952
 #: src/fetch/imdbfetcher.cpp:1804 src/fetch/moviemeterfetcher.cpp:225
-#: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:257
+#: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:258
 #: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:576
 #: src/fetch/tvmazefetcher.cpp:193 src/fetch/tvmazefetcher.cpp:385
 #, kde-format
@@ -3612,7 +3612,7 @@ msgstr "배급사"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
 #: src/fetch/imdbfetcher.cpp:1807 src/fetch/itunesfetcher.cpp:506
-#: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:577
+#: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:576
 #: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:336
 #, kde-format
 msgid "Episodes"
@@ -3688,7 +3688,7 @@ msgid "Michel"
 msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:818 src/fetch/giantbombfetcher.cpp:207
-#: src/fetch/igdbfetcher.cpp:576 src/fetch/mobygamesfetcher.cpp:637
+#: src/fetch/igdbfetcher.cpp:576 src/fetch/mobygamesfetcher.cpp:638
 #: src/field.cpp:326
 #, kde-format
 msgid "PEGI Rating"
@@ -3716,32 +3716,32 @@ msgstr "원본 옵션"
 msgid "Available Fields"
 msgstr "사용 가능한 필드"
 
-#: src/fetch/crossreffetcher.cpp:91 src/fetch/crossreffetcher.cpp:92
+#: src/fetch/crossreffetcher.cpp:100 src/fetch/crossreffetcher.cpp:101
 #, kde-format
 msgid "%1 requires a username and password."
 msgstr "%1에는 사용자 이름과 암호가 필요합니다."
 
-#: src/fetch/crossreffetcher.cpp:324
+#: src/fetch/crossreffetcher.cpp:325
 #, kde-format
 msgid "&Username: "
 msgstr "사용자 이름(&U): "
 
-#: src/fetch/crossreffetcher.cpp:329
+#: src/fetch/crossreffetcher.cpp:330
 #, kde-format
 msgid "A username and password is required to access the CrossRef service."
 msgstr "CrossRef 서비스에 접속하려면 사용자 이름과 암호가 필요합니다."
 
-#: src/fetch/crossreffetcher.cpp:334
+#: src/fetch/crossreffetcher.cpp:335
 #, kde-format
 msgid "&Password: "
 msgstr "암호(&P): "
 
-#: src/fetch/crossreffetcher.cpp:344
+#: src/fetch/crossreffetcher.cpp:345
 #, kde-format
 msgid "For some accounts, only an email address is required."
 msgstr "일부 계정에는 이메일 주소만 필요합니다."
 
-#: src/fetch/crossreffetcher.cpp:347
+#: src/fetch/crossreffetcher.cpp:348
 #, kde-format
 msgid "Email: "
 msgstr "이메일: "
@@ -3751,43 +3751,43 @@ msgstr "이메일: "
 msgid "Danish Bibliographic Center (DBC.dk)"
 msgstr "덴마크 서지 정보 센터(DBC.dk)"
 
-#: src/fetch/discogsfetcher.cpp:102 src/fetch/isbndbfetcher.cpp:112
-#: src/fetch/mobygamesfetcher.cpp:114 src/fetch/omdbfetcher.cpp:99
-#: src/fetch/thegamesdbfetcher.cpp:104 src/fetch/themoviedbfetcher.cpp:131
-#: src/fetch/thetvdbfetcher.cpp:126
+#: src/fetch/discogsfetcher.cpp:136 src/fetch/isbndbfetcher.cpp:162
+#: src/fetch/mobygamesfetcher.cpp:161 src/fetch/omdbfetcher.cpp:118
+#: src/fetch/thegamesdbfetcher.cpp:134 src/fetch/themoviedbfetcher.cpp:161
+#: src/fetch/thetvdbfetcher.cpp:166
 #, kde-format
 msgid "An access key is required to use this data source."
 msgstr "이 데이터 소스를 사용하려면 액세스 키가 필요합니다."
 
-#: src/fetch/discogsfetcher.cpp:312 src/fetch/discogsfetcher.cpp:511
+#: src/fetch/discogsfetcher.cpp:313 src/fetch/discogsfetcher.cpp:512
 #, kde-format
 msgid "Discogs Link"
 msgstr "Discogs 링크"
 
 #. i18n("Nationality");
-#: src/fetch/discogsfetcher.cpp:331 src/fetch/discogsfetcher.cpp:512
+#: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:513
 #: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:207 src/fetch/upcitemdbfetcher.cpp:458
 #, kde-format
 msgid "Barcode"
 msgstr "바코드"
 
-#: src/fetch/discogsfetcher.cpp:336 src/fetch/discogsfetcher.cpp:513
+#: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:514
 #, kde-format
 msgid "Catalog Number"
 msgstr "카탈로그 번호"
 
-#: src/fetch/discogsfetcher.cpp:346
+#: src/fetch/discogsfetcher.cpp:347
 #, kde-format
 msgid "The Discogs.com server reports a token error."
 msgstr "Discogs.com 서버에서 토큰 오류를 반환했습니다."
 
-#: src/fetch/discogsfetcher.cpp:500
+#: src/fetch/discogsfetcher.cpp:501
 #, kde-format
 msgid "Discogs Audio Search"
 msgstr "Discogs 오디오 검색"
 
-#: src/fetch/discogsfetcher.cpp:536
+#: src/fetch/discogsfetcher.cpp:537
 #, kde-format
 msgid "User token: "
 msgstr "사용자 토큰: "
@@ -3816,13 +3816,13 @@ msgstr "기관"
 #: src/fetch/execexternalfetcher.cpp:349
 #, kde-format
 msgid "External Application"
-msgstr "외부 프로그램"
+msgstr "외부 앱"
 
 #: src/fetch/execexternalfetcher.cpp:370
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
-msgstr "외부 프로그램에서 반환되는 데이터의 수집 형식을 설정합니다."
+msgstr "외부 앱에서 반환되는 데이터의 수집 형식을 설정합니다."
 
 #: src/fetch/execexternalfetcher.cpp:375
 #, kde-format
@@ -3832,19 +3832,19 @@ msgstr "결과 형식(&R): "
 #: src/fetch/execexternalfetcher.cpp:384
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
-msgstr "외부 프로그램에서 반환된 데이터의 결과 형식을 설정합니다."
+msgstr "외부 앱에서 반환된 데이터의 결과 형식을 설정합니다."
 
 #: src/fetch/execexternalfetcher.cpp:398
 #, kde-format
 msgid "Application &path: "
-msgstr "프로그램 경로(&P): "
+msgstr "앱 경로(&P): "
 
 #: src/fetch/execexternalfetcher.cpp:403
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
-msgstr "올바른 Tellico 데이터 파일을 출력할 프로그램의 경로를 설정합니다."
+msgstr "올바른 Tellico 데이터 파일을 출력할 앱의 경로를 설정합니다."
 
 #: src/fetch/execexternalfetcher.cpp:408
 #, kde-format
@@ -4001,7 +4001,7 @@ msgstr "Google 도서 검색"
 msgid "Illustrator"
 msgstr "삽화가"
 
-#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/isbndbfetcher.cpp:383
+#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/isbndbfetcher.cpp:384
 #: src/fetch/srufetcher.cpp:509 src/fetch/z3950fetcher.cpp:579
 #, kde-format
 msgctxt "Dewey Decimal classification system"
@@ -4030,7 +4030,7 @@ msgstr "IGDB 링크"
 msgid "Internet Game Database (IGDB.com)"
 msgstr "인터넷 게임 데이터베이스(IGDB.com)"
 
-#: src/fetch/igdbfetcher.cpp:578 src/fetch/mobygamesfetcher.cpp:639
+#: src/fetch/igdbfetcher.cpp:578 src/fetch/mobygamesfetcher.cpp:640
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:344
 #, kde-format
 msgid "Screenshot"
@@ -4079,8 +4079,8 @@ msgid "Certifications"
 msgstr "인증"
 
 #: src/fetch/imdbfetcher.cpp:1802 src/fetch/kinopoiskfetcher.cpp:672
-#: src/fetch/omdbfetcher.cpp:399 src/fetch/themoviedbfetcher.cpp:575
-#: src/fetch/thetvdbfetcher.cpp:576 src/fetch/tvmazefetcher.cpp:382
+#: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
+#: src/fetch/thetvdbfetcher.cpp:575 src/fetch/tvmazefetcher.cpp:382
 #: src/field.cpp:332
 #, kde-format
 msgid "IMDb Link"
@@ -4091,22 +4091,22 @@ msgstr "IMDb 링크"
 msgid "Download cover &image"
 msgstr "표지 이미지 다운로드(&I)"
 
-#: src/fetch/isbndbfetcher.cpp:360
+#: src/fetch/isbndbfetcher.cpp:361
 #, kde-format
 msgid "Dewey Decimal"
 msgstr "듀이 십진분류"
 
-#: src/fetch/isbndbfetcher.cpp:373
+#: src/fetch/isbndbfetcher.cpp:374
 #, kde-format
 msgid "ISBNdb.com"
 msgstr "ISBNdb.com"
 
-#: src/fetch/isbndbfetcher.cpp:414
+#: src/fetch/isbndbfetcher.cpp:415
 #, kde-format
 msgid "Enable batch ISBN searching (requires Premium or Pro plan)"
 msgstr "일괄 ISBN 검색 활성화(Premium 또는 Pro 구독 필요함)"
 
-#: src/fetch/isbndbfetcher.cpp:418
+#: src/fetch/isbndbfetcher.cpp:419
 #, kde-format
 msgid ""
 "Batch searching for ISBN values is faster but only available for Premium or "
@@ -4129,7 +4129,7 @@ msgstr "KinoPoisk 링크"
 msgid "Kino-Teatr Link"
 msgstr "Kino-Teatr 링크"
 
-#: src/fetch/mobygamesfetcher.cpp:458 src/fetch/mobygamesfetcher.cpp:638
+#: src/fetch/mobygamesfetcher.cpp:459 src/fetch/mobygamesfetcher.cpp:639
 #, kde-format
 msgid "MobyGames Link"
 msgstr "MobyGames 링크"
@@ -4283,7 +4283,7 @@ msgid "TMDb Link"
 msgstr "TMDb 링크"
 
 #: src/fetch/themoviedbfetcher.cpp:338 src/fetch/themoviedbfetcher.cpp:578
-#: src/fetch/thetvdbfetcher.cpp:260 src/fetch/thetvdbfetcher.cpp:578
+#: src/fetch/thetvdbfetcher.cpp:259 src/fetch/thetvdbfetcher.cpp:577
 #: src/fetch/tvmazefetcher.cpp:182 src/fetch/tvmazefetcher.cpp:384
 #, kde-format
 msgid "Network"
@@ -4318,12 +4318,12 @@ msgstr "러시아어"
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB(%1)"
 
-#: src/fetch/thetvdbfetcher.cpp:265 src/fetch/thetvdbfetcher.cpp:575
+#: src/fetch/thetvdbfetcher.cpp:264 src/fetch/thetvdbfetcher.cpp:574
 #, kde-format
 msgid "TheTVDB Link"
 msgstr "TheTVDB 링크"
 
-#: src/fetch/thetvdbfetcher.cpp:602
+#: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
 msgstr "가입자 PIN:"
@@ -5546,7 +5546,7 @@ msgstr "소장품 내용 미리 보기..."
 #: src/mainwindow.cpp:359
 #, kde-format
 msgid "Quit the application"
-msgstr "프로그램 끝내기"
+msgstr "앱 끝내기"
 
 #: src/mainwindow.cpp:372
 #, kde-format
@@ -7479,7 +7479,7 @@ msgid ""
 "<p>...that when the Column View is focused, you can press a letter on the\n"
 "keyboard to scroll to the next entry that starts with that letter.</p>\n"
 msgstr ""
-"<p>...열 보기에 초점이 맞춰지면 키보드의 문자를 눌러 해당 문자로 \n"
+"<p>...열 보기에 포커스가 맞춰지면 키보드의 문자를 눌러 해당 문자로 \n"
 "시작하는 다음 항목으로 스크롤할 수 있습니다.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
