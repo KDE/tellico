@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-20 02:50+0000\n"
-"PO-Revision-Date: 2023-03-01 01:33+0100\n"
+"PO-Revision-Date: 2023-07-23 21:50+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -2375,7 +2375,7 @@ msgstr "데이터 파일에 이미지 저장"
 #: src/configdialog.cpp:233
 #, kde-format
 msgid "Store images in common application directory"
-msgstr "공통 프로그램 디렉터리에 이미지 저장"
+msgstr "공통 앱 디렉터리에 이미지 저장"
 
 #: src/configdialog.cpp:234
 #, kde-format
@@ -2390,8 +2390,8 @@ msgid ""
 "directory in the same location as the data file."
 msgstr ""
 "데이터 파일에 이미지를 저장할 수 있으나 이 경우 Tellico 실행이 느려질 수 있으"
-"며, Tellico 프로그램 디렉터리나 데이터 파일과 같은 경로에 이미지를 저장할 수"
-"도 있습니다."
+"며, Tellico 앱 디렉터리나 데이터 파일과 같은 경로에 이미지를 저장할 수도 있습"
+"니다."
 
 #: src/configdialog.cpp:256 src/configdialog.cpp:340
 #, kde-format
@@ -3736,13 +3736,13 @@ msgstr "기관"
 #: src/fetch/execexternalfetcher.cpp:339
 #, kde-format
 msgid "External Application"
-msgstr "외부 프로그램"
+msgstr "외부 앱"
 
 #: src/fetch/execexternalfetcher.cpp:360
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
-msgstr "외부 프로그램에서 반환되는 데이터의 수집 형식을 설정합니다."
+msgstr "외부 앱에서 반환되는 데이터의 수집 형식을 설정합니다."
 
 #: src/fetch/execexternalfetcher.cpp:365
 #, kde-format
@@ -3752,19 +3752,19 @@ msgstr "결과 형식(&R): "
 #: src/fetch/execexternalfetcher.cpp:374
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
-msgstr "외부 프로그램에서 반환된 데이터의 결과 형식을 설정합니다."
+msgstr "외부 앱에서 반환된 데이터의 결과 형식을 설정합니다."
 
 #: src/fetch/execexternalfetcher.cpp:388
 #, kde-format
 msgid "Application &path: "
-msgstr "프로그램 경로(&P): "
+msgstr "앱 경로(&P): "
 
 #: src/fetch/execexternalfetcher.cpp:393
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
-msgstr "올바른 Tellico 데이터 파일을 출력할 프로그램의 경로를 설정합니다."
+msgstr "올바른 Tellico 데이터 파일을 출력할 앱의 경로를 설정합니다."
 
 #: src/fetch/execexternalfetcher.cpp:398
 #, kde-format
@@ -5367,7 +5367,7 @@ msgstr "문서의 내용 미리 보기..."
 #: src/mainwindow.cpp:351
 #, kde-format
 msgid "Quit the application"
-msgstr "프로그램 끝내기"
+msgstr "앱 끝내기"
 
 #: src/mainwindow.cpp:364
 #, kde-format
@@ -7254,7 +7254,7 @@ msgid ""
 "<p>...that when the Column View is focused, you can press a letter on the\n"
 "keyboard to scroll to the next entry that starts with that letter.</p>\n"
 msgstr ""
-"<p>...열 보기에 초점이 맞춰지면 키보드의 문자를 눌러 해당 문자로 \n"
+"<p>...열 보기에 포커스가 맞춰지면 키보드의 문자를 눌러 해당 문자로 \n"
 "시작하는 다음 항목으로 스크롤할 수 있습니다.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
