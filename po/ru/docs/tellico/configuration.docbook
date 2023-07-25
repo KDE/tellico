@@ -54,13 +54,11 @@
 </screenshot>
 
 <para
->The <guilabel
->General Options</guilabel
-> control the general behavior. Images may be included in the data files, or saved separately in the &appname; application folder. Also, when &appname; is started, it can automatically reopen the last data file that was open. The <guilabel
->Tip of the Day</guilabel
-> dialog contains helpful hints on using &appname; and appears at program startup. You may want to read through some of the hints and then disable the dialog. The <interface
->Quick Filter</interface
-> in the toolbar is useful for easily filtering through your collection and can utilize regular expressions. </para>
+>С помощью страницы <guilabel
+>Общие параметры</guilabel
+> возможно управлять общим поведением программы. Изображения могут быть включены в файлы данных или же сохранены отдельно в папке приложения &appname;. Кроме того, при запуске &appname; возможно автоматически открывать последний файл данных. Диалоговое окно <guilabel
+>Совет дня</guilabel
+>, которое появляется при запуске программы, содержит полезные советы по использованию &appname;. Возможно ознакомиться с советами, а затем отключить показ этого окна. </para>
 
 <para
 >Группа параметров <guilabel
