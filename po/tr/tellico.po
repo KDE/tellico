@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2023-07-06 13:21+0300\n"
+"PO-Revision-Date: 2023-07-26 00:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -183,7 +183,7 @@ msgstr "Zaman İçinde Koleksiyon Boyutu"
 #: src/charts/groupsummaryreport.cpp:60
 #, kde-format
 msgid "Group Summary: %1"
-msgstr "Grup Özeti: %1"
+msgstr "Grup özeti: %1"
 
 #: src/charts/groupsummaryreport.cpp:66
 #, kde-format
@@ -193,7 +193,7 @@ msgstr "Toplam girdi sayısı: %1"
 #: src/charts/groupsummaryreport.cpp:120
 #, kde-format
 msgid "Top Values: %1"
-msgstr "En Yüksek Değerler: %1"
+msgstr "En yüksek değerler: %1"
 
 #: src/charts/groupsummaryreport.cpp:192
 #, kde-format
@@ -861,7 +861,7 @@ msgstr "Sayı"
 #: src/collections/bibtexcollection.cpp:196
 #, kde-format
 msgid "How Published"
-msgstr "Nasıl Yayınlandı"
+msgstr "Nasıl Yayımlandı"
 
 #. i18n("School"));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("school"));
@@ -1134,7 +1134,7 @@ msgstr "Dergi"
 #: src/collections/bookcollection.cpp:73
 #, kde-format
 msgid "Binding"
-msgstr "Ciltleme"
+msgstr "Cilt"
 
 #: src/collections/bookcollection.cpp:99
 #, kde-format
@@ -1145,7 +1145,7 @@ msgstr "Telif Hakkı Yılı"
 #: src/collections/comicbookcollection.cpp:93
 #, kde-format
 msgid "Publication Year"
-msgstr "Yayın Yılı"
+msgstr "Yayım Yılı"
 
 #: src/collections/bookcollection.cpp:111
 #, kde-format
@@ -1376,7 +1376,7 @@ msgstr "Sanatçı"
 #: src/collections/comicbookcollection.cpp:76
 #, kde-format
 msgid "Issue"
-msgstr "Sayı"
+msgstr "Basım"
 
 #: src/collections/comicbookcollection.cpp:127
 #, kde-format
@@ -1737,7 +1737,7 @@ msgstr "Pullarım"
 #: src/collections/stampcollection.cpp:78
 #, kde-format
 msgid "Issue Year"
-msgstr "Yayın Yılı"
+msgstr "Basım Yılı"
 
 #: src/collections/stampcollection.cpp:83
 #: src/collections/videocollection.cpp:180 src/fetch/allocinefetcher.cpp:398
@@ -2085,7 +2085,7 @@ msgstr "Ögeleri Çıkış Yap"
 #, kde-format
 msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
-msgstr "Çıkış Yap: %1"
+msgstr "Çıkış yap: %1"
 
 #: src/commands/collectioncommand.cpp:54
 #, kde-format
@@ -2171,7 +2171,7 @@ msgstr "Girdileri Giriş Yap"
 #, kde-format
 msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
-msgstr "Giriş Yap: %1"
+msgstr "Giriş yap: %1"
 
 #: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:313
 #, kde-format
@@ -2191,7 +2191,7 @@ msgid ""
 "up,with"
 msgstr ""
 "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with,ve,veya,için, de ,"
+"up,with,ve,veya,için,de,da,mi,mü,mı,mu,ki,ile,ise"
 
 #: src/config/tellico_config.kcfg:89
 #, kde-format
@@ -2503,7 +2503,7 @@ msgstr ""
 #: src/configdialog.cpp:298
 #, kde-format
 msgid "Artic&les:"
-msgstr "&Yazılar:"
+msgstr "&Artikeller:"
 
 #: src/configdialog.cpp:303
 #, kde-format
@@ -3611,7 +3611,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:1161
 #, kde-format
 msgid "&Associate's ID: "
-msgstr "&İş Kişisi Kimliği: "
+msgstr "&İş kişisi kimliği: "
 
 #: src/fetch/amazonfetcher.cpp:1167
 #, kde-format
@@ -6275,9 +6275,9 @@ msgid ""
 "by <a href=\"tc:///edit_search_internet\">downloading data</a> from various "
 "Internet sources.</h3>"
 msgstr ""
-"<h3>Tellico kitap, video, müzik veya kataloglamak istediğiniz başka bir "
+"<h3>Tellico; kitap, video, müzik veya kataloglamak istediğiniz başka bir "
 "şeyin koleksiyonunu yönetmek için bir araçtır.</h3><h3>Koleksiyonunuza yeni "
-"girdiler <a href=\"tc:///coll_new_entry\">elle girilebileceği</a> gibi "
+"girdiler <a href=\"tc:///coll_new_entry\">elle girilebileceği</a> gibi, "
 "çeşitli İnternet kaynaklarından <a href=\"tc:///edit_search_internet\">veri "
 "indirirerek</a> de yapılabilir.</h3>"
 
@@ -7640,6 +7640,3 @@ msgstr "Ara"
 #, kde-format
 msgid "Clear"
 msgstr "Temizle"
-
-#~ msgid "Click to download additional data sources."
-#~ msgstr "Ek veri kaynakları indirmek için tıklayın."
