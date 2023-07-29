@@ -160,7 +160,7 @@
       <li xml:lang="et">Vaikimisi on toetatud, raamatute, bibliograafiliste kirjete, videode, muusika, videomängude, koomiksite, müntide, markide, mängukaartide, veinide, lauamängude ja failikataloogide kogud</li>
       <li xml:lang="eu">Liburu, bibliografia-sarrera, bideo, musika, bideo-joko, komiki-liburu, txanpon, karta (kromo), ardo, taula-joko eta fitxategi-katalogoen bilduma lehenetsiak onartzen ditu</li>
       <li xml:lang="fi">Tukee kirjojen, lähdeluettelotietueiden, videoiden, musiikin, videopelien, sarjakuvien, kolikoiden, postimerkkien, keräilykuvien, viinien, lautapelien ja tiedostoluettelojen oletuskokoelmia</li>
-      <li xml:lang="fr">Prends en charge par défaut des collections de livres, d'entrées bibliographiques, de vidéos, de musique, de jeux vidéo, de bandes dessinées, de monnaies, de timbres,de cartes à collectionner, de vins, de jeux de plateau et de catalogues de fichiers.</li>
+      <li xml:lang="fr">Prend en charge par défaut des collections de livres, d'entrées bibliographiques, de vidéos, de musique, de jeux vidéo, de bandes dessinées, de monnaies, de timbres,de cartes à collectionner, de vins, de jeux de plateau et de catalogues de fichiers.</li>
       <li xml:lang="gl">Compatíbel con coleccións predeterminadas de libros, entradas bibliográficas, vídeos, música, videoxogos, banda deseñada, moedas, selos, cartas de colección, viños, xogos de taboleiro e catálogos de ficheiros.</li>
       <li xml:lang="hu">Alapértelmezett gyűjtemények a következőkhöz: könyvek, irodalomjegyzék bejegyzések, videók, zenék, videojátékok, képregények, érmék, bélyegek, gyűjtőkártyák, borok, társasjátékok és fájlkatalógusok</li>
       <li xml:lang="ia">Il supporta collectiones predefinite de libros, entratas bibliographic, videos, musica, video jocos, libros in designo, numisma, timbros, cartas de commerciar, vinos, jocos de tabula e catalogos de files</li>
@@ -667,7 +667,7 @@
       <caption xml:lang="et">Peaaken mängude kõrvutivaatega</caption>
       <caption xml:lang="eu">Leiho nagusia alboz-albo joko bilduma baten ikuspegiak erakutsiz</caption>
       <caption xml:lang="fi">Pelikokoelmanäkymiä rinnakkain näyttävä pääikkuna</caption>
-      <caption xml:lang="fr">La fenêtre principale, qui affiche des vues côte-à-côte d'une collection de jeux</caption>
+      <caption xml:lang="fr">La fenêtre principale, qui affiche des vues côte-à-côte d'une collection de jeux vidéo</caption>
       <caption xml:lang="gl">A xanela principal amosando as vistas lado a lado dunha colección de xogos</caption>
       <caption xml:lang="hu">A játékgyűjtemény egymás melletti nézeteit mutató főablak</caption>
       <caption xml:lang="ia">Le fenestra principale monstrante vistas flancate de un collection de joco</caption>
