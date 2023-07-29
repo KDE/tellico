@@ -20,7 +20,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-24 07:35+0000\n"
 "PO-Revision-Date: 2023-05-05 16:18+0200\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -287,7 +287,7 @@ msgstr "Collection de cartes"
 #: src/collectionfactory.cpp:94
 #, kde-format
 msgid "Game Collection"
-msgstr "Collection de jeux"
+msgstr "Collection de jeux vidéo"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1488,7 +1488,7 @@ msgstr "Icône"
 #: src/collections/gamecollection.cpp:39
 #, kde-format
 msgid "My Games"
-msgstr "Mes jeux"
+msgstr "Mes jeux vidéo"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -4083,7 +4083,7 @@ msgstr "Lien Filmaster"
 #: src/fetch/gaminghistoryfetcher.cpp:374
 #, kde-format
 msgid "Gaming History Link"
-msgstr "Lien pour l'historique de jeux"
+msgstr "Lien pour l'historique de jeux vidéo"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
@@ -4159,7 +4159,7 @@ msgstr "Lien IGDB"
 #: src/fetch/igdbfetcher.cpp:567
 #, kde-format
 msgid "Internet Game Database (IGDB.com)"
-msgstr "Base de données de jeux sur Internet (IGDB.com)"
+msgstr "Base de données de jeux vidéo sur Internet (IGDB.com)"
 
 #: src/fetch/igdbfetcher.cpp:578 src/fetch/mobygamesfetcher.cpp:640
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:344
@@ -5630,12 +5630,12 @@ msgstr "Créer une nouvelle collection de vins"
 #: src/mainwindow.cpp:302
 #, kde-format
 msgid "New &Game Collection"
-msgstr "Nouvelle collection de &jeux"
+msgstr "Nouvelle collection de &jeux vidéo"
 
 #: src/mainwindow.cpp:303
 #, kde-format
 msgid "Create a new game collection"
-msgstr "Créer une nouvelle collection de jeux"
+msgstr "Créer une nouvelle collection de jeux vidéo"
 
 #: src/mainwindow.cpp:305
 #, kde-format
