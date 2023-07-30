@@ -28,7 +28,7 @@
 #include "datavectors.h"
 #include "entry.h"
 
-#include <QRegExp>
+#include <QRegularExpression>
 
 namespace Tellico {
   namespace Data {
@@ -51,7 +51,8 @@ private:
 
   QString m_fieldName;
   QString m_valueTemplate;
-  mutable QRegExp m_keyRx;
+  QRegularExpression m_keyRx;
+  static const QRegularExpression s_templateFieldsRx;
 };
 
   } // end namespace

@@ -33,9 +33,10 @@
 using namespace Tellico::Data;
 using Tellico::Data::DerivedValue;
 
+const QRegularExpression DerivedValue::s_templateFieldsRx(QLatin1String("%\\{([^:]+):?.*?\\}"));
+
 DerivedValue::DerivedValue(const QString& valueTemplate_) : m_valueTemplate(valueTemplate_)
     , m_keyRx(QLatin1String("^([^:]+):?(-?\\d*)/?(.*)$")) {
-  m_keyRx.setMinimal(true);
 }
 
 DerivedValue::DerivedValue(FieldPtr field_) : m_keyRx(QLatin1String("^([^:]+):?(-?\\d*)/?(.*)$")) {
@@ -46,7 +47,6 @@ DerivedValue::DerivedValue(FieldPtr field_) : m_keyRx(QLatin1String("^([^:]+):?(
     m_valueTemplate = field_->property(QStringLiteral("template"));
     m_fieldName = field_->name();
   }
-  m_keyRx.setMinimal(true);
 }
 
 bool DerivedValue::isRecursive(Collection* coll_) const {
@@ -123,23 +123,23 @@ QString DerivedValue::value(EntryPtr entry_, bool formatted_) const {
 
 // format is something like "%{year} %{author}"
 QStringList DerivedValue::templateFields() const {
-  QRegExp rx(QLatin1String("%\\{([^:]+):?.*\\}"));
-  rx.setMinimal(true);
-
   QStringList list;
-  for(int pos = rx.indexIn(m_valueTemplate); pos > -1; pos = rx.indexIn(m_valueTemplate, pos+rx.matchedLength())) {
-    list << rx.cap(1);
+  auto i = s_templateFieldsRx.globalMatch(m_valueTemplate);
+  while(i.hasNext()) {
+    auto match = i.next();
+    list << match.captured(1);
   }
   return list;
 }
 
 QString DerivedValue::templateKeyValue(EntryPtr entry_, const QString& key_, bool formatted_) const {
-  if(m_keyRx.indexIn(key_) == -1) {
+  auto match = m_keyRx.match(key_);
+  if(!match.hasMatch()) {
     myDebug() << "unmatched regexp for" << key_;
     return QLatin1String("%{") + key_ + QLatin1Char('}');
   }
 
-  const QString fieldName = m_keyRx.cap(1);
+  const QString fieldName = match.captured(1);
   FieldPtr field = entry_->collection()->fieldByName(fieldName);
   if(!field) {
     // allow the user to also use field titles
@@ -155,7 +155,7 @@ QString DerivedValue::templateKeyValue(EntryPtr entry_, const QString& key_, boo
     }
   }
   // field name, followed by optional colon, optional value index (negative), and words after slash
-  int pos = m_keyRx.cap(2).toInt();
+  int pos = match.captured(2).toInt();
   QString result;
   if(pos == 0) {
     // insert field value
@@ -187,7 +187,7 @@ QString DerivedValue::templateKeyValue(EntryPtr entry_, const QString& key_, boo
     result = values.value(pos);
   }
 
-  const QString func = m_keyRx.cap(3);
+  const QString func = match.captured(3);
   if(func.contains(QLatin1Char('u'))) {
     result = result.toUpper();
   }
