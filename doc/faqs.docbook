@@ -34,26 +34,6 @@ separating each value.</para>
 
 <qandaentry>
 <question>
-<para>Can I modify what the printed page looks like?</para>
-</question>
-<answer>
-
-<para>Yes, most certainly. Find the file <filename>tellico-printing.xsl</filename> which
- should be in the $<envar>KDEDIR</envar>/share/apps/tellico/ directory. You can copy
- that to $<envar>KDEHOME</envar>/share/apps/tellico/ for personal modifications.
- You'll have to know <ulink
- url="http://www.w3.org/TR/xslt">&xslt;</ulink>, but modifying that file
- is how you change the printing layout. &HTML; is generated from the
- file, and the easiest way to change the appearance of the printout is
- to modify the &CSS; in the top portion.</para>
-
-<para>Be aware that the <filename>tellico-printing.xsl</filename> references another file, <filename>tellico-common.xsl</filename>, that contains some common &xslt; templates. If you copy
-<filename>tellico-printing.xsl</filename> to $<envar>KDEHOME</envar>, you must either modify the &lt;xsl:import&gt; element to point to the actual location of the <filename>tellico-common.xsl</filename> file or copy the common file as well.
-</para>
-</answer>
-</qandaentry>
-<qandaentry>
-<question>
 <para>How do I group by a property other than the ones listed in the toolbar?</para>
 </question>
 <answer>
@@ -65,98 +45,10 @@ To allow grouping by a field which doesn't allow grouping by default, check the
 </qandaentry>
 
 <qandaentry>
-<question><para>Why does all that gobbledy-gook show up when I run &appname;?</para></question>
-<answer>
-<para>Stuff like:
-<screen width="40">
-<computeroutput>Tellico::updateCollectionToolBar</computeroutput>
-<computeroutput>GroupView::setGroupAttribute - author</computeroutput>
-<computeroutput>GroupView::slotAddCollection</computeroutput>
-<computeroutput>QCheckBox::property( "title" ) failed: property invalid
-or does not exist</computeroutput>
-</screen>
-
-is debug info. At compile time, this can be stopped by compiling with
-the <userinput><option>--disable-debug</option></userinput> flag. You
-might also want to use
-<userinput><option>--enable-final</option></userinput>, too, which
-takes a bit more memory when compiling, but is more efficient when
-running the application.</para>
-
-<para>The last message is slightly different, it just means your &Qt;
- installation was compiled with some debugging information.</para>
-
-<para>Or, if &appname; is already installed, run
-<userinput><command>kdebugdialog</command></userinput> and make sure
-that "0 (generic)" is unchecked. That turns off debug messages from
-all generic &kde; apps &ie; those not distributed officially by
-&kde;.</para>
-
-</answer>
-</qandaentry>
-
-<qandaentry>
 <question><para>How do I change which columns are shown?</para></question>
 <answer>
 <para>Right-click on the header bar. You can also drag the headers to re-order
 the columns, and click on them to sort by that field.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question><para>How do I filter by something like the "Read"
-field?</para></question>
-<answer>
-<para>Internally, the checkbox
-fields in &appname; are saved as "true", so if you'd like to filter
-to show only the science fiction books which you've not read, for
-example, then you have two rules. Make sure the "Match all of the
-following" button is checked. Set the first rule to have "Genre"
-"contains" "Science Fiction" (no quotes) and the second rule to have
-"Read" "does not contain" "true" (no quotes).</para>
-
-<para>Also, the quick filter in the toolbar will match any field,
-and if there is a non-word character, the text is interpreted as a
-regular expression. So if you quickly want to filter your books to
-show those by Weber or Bujold, then type "weber|bujold" (no quotes) in
-the toolbar.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question><para>How do I add new entry templates?</para></question>
-
-<answer>
-<para>Entry templates should be saved in
-<filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/entry-templates/</filename>
-for access for a single user or
-<filename class="directory">$<envar>KDEDIR</envar>/share/apps/tellico/entry-templates/</filename>
-for access by everyone. Templates in $<envar>KDEHOME</envar> will
-override any files by the same name in $<envar>KDEDIRS</envar>. The
-entry templates can be set on a per collection-type basis in the
-settings dialog.</para>
-
-<para>Templates for the <interface>Report Dialog</interface> are saved in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/report-templates/</filename>.
-</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question><para>Compiling and installing went
-fine, but when &appname; starts up, the window is blank. What's
-wrong?</para></question>
-
-<answer>
-<para>&kde; programs look for data in the locations defined in the
- $<envar>KDEDIRS</envar> environmental variable. If you install in
- <filename class="directory">/usr/local</filename> for example, but
- $<envar>KDEDIRS</envar> is empty or just <filename class="directory">/usr</filename>,
- then &appname; won't be able to find the files it needs. This is
- particularly true for &SuSE;, for which you should compile with
- <userinput><option>--prefix</option>=<filename class="directory">/opt/kde3</filename></userinput>. Alternatively,
- you could add a line to your <filename>.profile</filename> file to
- set $<envar>KDEDIRS</envar>. Check the documentation for your
- shell.</para>
 </answer>
 </qandaentry>
 
@@ -174,23 +66,11 @@ wrong?</para></question>
 
 <qandaentry>
 <question>
-<para>What happened to Bookcase?</para>
-</question>
-
-<answer>
-<para>Due to a trademark conflict, Bookcase was renamed Tellico in September 2004.
-Tellico 0.12 was then released, which was identical to
-Bookcase 0.11, except for the name change.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question>
 <para>What does the name Tellico have to do with anything?</para>
 </question>
 
 <answer>
-<para>I thought about <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html">several
+<para>I thought about <ulink url="https://periapsis.org/renaming-bookcase/">several
 other names</ulink>, a few of which were connected with book collections. However,
 Tellico can handle more than just books, and besides, this is a hobby, so I chose
 a neat-sounding (to me) name, one taken from a town close to where I grew up.</para>
@@ -218,7 +98,7 @@ The <ulink url="http://www.amazon.com/gp/browse.html/002-0927720-5265623?node=34
 <para>
 Part of the reason I started &appname; was to learn C++. I didn't know SQL at the time, and at the moment, I only have a faint knowledge
 of how to use it. Simply put, &appname; didn't start out as a relational database, and that won't change until sometime in the future when
-I get around to learning SQL and have the time and motivation to change the data model. If that bothers you, well, don't use &appname; then.
+I get around to learning SQL and have the time and motivation to change the data model.
 </para>
 
 <para>
