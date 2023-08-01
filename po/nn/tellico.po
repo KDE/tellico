@@ -1,19 +1,19 @@
 # Translation of tellico to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2005, 2006, 2007, 2008, 2009, 2011, 2013, 2017, 2018, 2019, 2020, 2021.
+# Karl Ove Hufthammer <karl@huftis.org>, 2005, 2006, 2007, 2008, 2009, 2011, 2013, 2017, 2018, 2019, 2020, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2021-04-09 23:48+0200\n"
+"PO-Revision-Date: 2023-07-31 21:23+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -3812,7 +3812,7 @@ msgstr "Strekkode"
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:514
 #, kde-format
 msgid "Catalog Number"
-msgstr ""
+msgstr "Katalognummer"
 
 #: src/fetch/discogsfetcher.cpp:347
 #, kde-format
@@ -3968,19 +3968,19 @@ msgstr "Råførespurnad"
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
 #, kde-format
 msgid "FilmAffinity Link"
-msgstr ""
+msgstr "FilmAffinity-lenkje"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
 #, kde-format
 msgctxt "Country"
 msgid "Spain"
-msgstr ""
+msgstr "Spania"
 
 #: src/fetch/filmaffinityfetcher.cpp:495
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "USA"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -4072,7 +4072,7 @@ msgstr "Internet Game Database (IGDB.com)"
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:344
 #, kde-format
 msgid "Screenshot"
-msgstr ""
+msgstr "Skjermbilete"
 
 #: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
 #, kde-format
@@ -4157,7 +4157,7 @@ msgstr ""
 #: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:505
 #, kde-format
 msgid "iTunes Link"
-msgstr ""
+msgstr "iTunes-lenkje"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4225,12 +4225,12 @@ msgstr ""
 #: src/fetch/opdsfetcher.cpp:421
 #, kde-format
 msgid "OPDS Catalog"
-msgstr ""
+msgstr "OPDS-katalog"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, kde-format
 msgid "Catalog: "
-msgstr ""
+msgstr "Katalog: "
 
 #: src/fetch/opdsfetcher.cpp:451
 #, kde-format
@@ -4240,7 +4240,7 @@ msgstr ""
 #: src/fetch/opdsfetcher.cpp:456
 #, kde-format
 msgid "&Verify Catalog"
-msgstr ""
+msgstr "&Stadfest katalog"
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
@@ -4250,7 +4250,7 @@ msgstr "OpenLibrary-lenkje"
 #: src/fetch/rpggeekfetcher.cpp:210
 #, kde-format
 msgid "RPGGeek Link"
-msgstr ""
+msgstr "RPGGeek-lenkje"
 
 #: src/fetch/srufetcher.cpp:492
 #, kde-format
@@ -4265,7 +4265,7 @@ msgstr "SRU-tenar"
 #: src/fetch/srufetcher.cpp:525
 #, kde-format
 msgid "Scheme: "
-msgstr ""
+msgstr "Oppsett: "
 
 #: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
 #, kde-format
@@ -4328,7 +4328,7 @@ msgstr "Nettverk"
 #, kde-format
 msgctxt "Language"
 msgid "Chinese"
-msgstr ""
+msgstr "Kinesisk"
 
 #: src/fetch/themoviedbfetcher.cpp:647
 #, kde-format
@@ -4346,7 +4346,7 @@ msgstr "Spansk"
 #, kde-format
 msgctxt "Language"
 msgid "Russian"
-msgstr ""
+msgstr "Russisk"
 
 #: src/fetch/themoviedbfetcher.cpp:696
 #, kde-format
@@ -4361,7 +4361,7 @@ msgstr "TheTVDB-lenkje"
 #: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr ""
+msgstr "Abonnent-PIN: "
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -4879,26 +4879,26 @@ msgstr "Personar"
 #: src/gui/collectiontemplatedialog.ui:43
 #, kde-format
 msgid "Template Name:"
-msgstr ""
+msgstr "Malnamn:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
 #, kde-format
 msgid "Comment:"
-msgstr ""
+msgstr "Merknad:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
 #, kde-format
 msgid "Icon:"
-msgstr ""
+msgstr "Ikon:"
 
 #: src/gui/collectiontemplatedialog.cpp:56
 #, kde-format
 msgid "Save As Collection Template"
-msgstr ""
+msgstr "Lagra som samlingsmal"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -5231,7 +5231,7 @@ msgstr "VinoXML-filer"
 #: src/importdialog.cpp:424
 #, kde-format
 msgid "eBook Files"
-msgstr ""
+msgstr "eBook-filer"
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5345,7 +5345,7 @@ msgstr "Tellico – ein enkel og gratis samlingsdatabase"
 #: src/main.cpp:123
 #, kde-format
 msgid "(c) 2001-2023, Robby Stephenson"
-msgstr ""
+msgstr "© 2001–2023 Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
@@ -5400,7 +5400,7 @@ msgstr "Importer <filename> som RIS-fil"
 #: src/main.cpp:148
 #, kde-format
 msgid "Import <filename> as a PDF file"
-msgstr ""
+msgstr "Importer <filename> som PDF-fil"
 
 #: src/main.cpp:149
 #, kde-format
@@ -5570,22 +5570,22 @@ msgstr "Lagra dokumentet under eit nytt filnamn."
 #: src/mainwindow.cpp:334
 #, kde-format
 msgid "Save As Template..."
-msgstr ""
+msgstr "Lagra som mal …"
 
 #: src/mainwindow.cpp:336
 #, kde-format
 msgid "Save as a collection template"
-msgstr ""
+msgstr "Lagra som samlingsmal"
 
 #: src/mainwindow.cpp:339
 #, kde-format
 msgid "Print the contents of the collection..."
-msgstr ""
+msgstr "Skriv ut innhaldet i samlinga …"
 
 #: src/mainwindow.cpp:355
 #, kde-format
 msgid "Preview the contents of the collection..."
-msgstr ""
+msgstr "Førehandsvis innhaldet i samlinga …"
 
 #: src/mainwindow.cpp:359
 #, kde-format
@@ -5712,12 +5712,12 @@ msgstr "Importer samling frå ei RIS-referansefil."
 #: src/mainwindow.cpp:430
 #, kde-format
 msgid "Import MARC Data..."
-msgstr ""
+msgstr "Importer MARC-data …"
 
 #: src/mainwindow.cpp:431
 #, kde-format
 msgid "Import MARC data"
-msgstr ""
+msgstr "Importer MARC-data"
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -6495,7 +6495,7 @@ msgstr "&Rapportmal:"
 #: src/reportdialog.cpp:128
 #, kde-format
 msgid "One Entry Per Page"
-msgstr ""
+msgstr "Éi oppføring per side"
 
 #: src/reportdialog.cpp:140
 #, kde-format
@@ -7241,17 +7241,17 @@ msgstr ""
 #: src/translators/marcimporter.cpp:151
 #, kde-format
 msgid "MARC Options"
-msgstr ""
+msgstr "MARC-val"
 
 #: src/translators/marcimporter.cpp:156
 #, kde-format
 msgid "Character set:"
-msgstr ""
+msgstr "Teiknkoding:"
 
 #: src/translators/marcimporter.cpp:161
 #, kde-format
 msgid "MARC Format:"
-msgstr ""
+msgstr "MARC-format:"
 
 #: src/translators/onixexporter.cpp:67
 #, kde-format

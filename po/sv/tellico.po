@@ -7,13 +7,13 @@
 # Karolina Lindqvist <pgd-karolinali@algonet.se>, 2003.
 # Peter Landgren <peter.talken@telia.com>, 2005, 2006, 2007, 2008.
 # Stefan Asserhäll <stefan.asserhall@bredband.net>, 2009, 2010.
-# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2022-05-11 16:49+0200\n"
+"PO-Revision-Date: 2023-07-24 11:36+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -2404,15 +2404,17 @@ msgstr ""
 "programmet."
 
 #: src/configdialog.cpp:221
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "matches regular expression"
 msgid "&Enable regular expressions in quick filter"
-msgstr "Aktiv&era reguljära uttryck i snabbfilter"
+msgstr "matchar reguljärt uttryck"
 
 #: src/configdialog.cpp:222
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
-msgstr "Om markerad, tolkar snabbfiltret text som ett reguljärt uttryck."
+msgstr "Om markerad, skrivs fältnamn ut som tabellöverskrifter."
 
 #: src/configdialog.cpp:227
 #, kde-format
@@ -4003,9 +4005,10 @@ msgstr "Länk till Filmaster"
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
 #: src/fetch/gaminghistoryfetcher.cpp:374
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "GiantBomb Link"
 msgid "Gaming History Link"
-msgstr "Länk till Gaming History"
+msgstr "Länk till GiantBomb"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
@@ -4085,7 +4088,7 @@ msgstr "Internetspeldatabas (IGDB.com)"
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:344
 #, kde-format
 msgid "Screenshot"
-msgstr "Skärmbild"
+msgstr ""
 
 #: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
 #, kde-format
@@ -4244,9 +4247,9 @@ msgstr "Filkatalog"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
-#| msgid "Card Number"
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Kortnummer"
+msgstr "Filkatalog"
 
 #: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
@@ -4380,7 +4383,7 @@ msgstr "Länk till TheTVDB"
 #: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr "Abonnentens PIN-kod: "
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -4898,28 +4901,32 @@ msgstr "Personer"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Template:"
 msgid "Template Name:"
-msgstr "Mallnamn:"
+msgstr "Mall:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Comments"
 msgid "Comment:"
-msgstr "Kommentar:"
+msgstr "Kommentarer"
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Icon"
 msgid "Icon:"
-msgstr "Ikon:"
+msgstr "Ikon"
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Collection Report"
 msgid "Save As Collection Template"
-msgstr "Spara som samlingsmall"
+msgstr "Samlingsrapport"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -5364,10 +5371,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - ett samlingshanterarprogram, fritt och enkelt"
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2022, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2023, Robby Stephenson"
-msgstr "© 2001-2022, Robby Stephenson"
+msgstr "© 2001-2023, Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
@@ -5420,9 +5426,10 @@ msgid "Import <filename> as a RIS file"
 msgstr "Importera <filename> som en RIS-fil"
 
 #: src/main.cpp:148
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import <filename> as a MODS file"
 msgid "Import <filename> as a PDF file"
-msgstr "Importera <filename> som en PDF-fil"
+msgstr "Importera <filename> som en MODS-fil"
 
 #: src/main.cpp:149
 #, kde-format
@@ -5590,24 +5597,28 @@ msgid "Save the document as a different file..."
 msgstr "Spara dokumentet som en annan fil..."
 
 #: src/mainwindow.cpp:334
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Manage Templates"
 msgid "Save As Template..."
-msgstr "Spara som mall..."
+msgstr "Mallhantering"
 
 #: src/mainwindow.cpp:336
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create a new collection"
 msgid "Save as a collection template"
-msgstr "Spara som samlingsmall"
+msgstr "Skapa en ny samling"
 
 #: src/mainwindow.cpp:339
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Print the contents of the document..."
 msgid "Print the contents of the collection..."
-msgstr "Skriv ut samlingens innehåll..."
+msgstr "Skriv ut innehållet av dokumentet..."
 
 #: src/mainwindow.cpp:355
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Preview the contents of the document..."
 msgid "Preview the contents of the collection..."
-msgstr "Förhandsgranska samlingens innehåll..."
+msgstr "Förhandsgranska dokumentets innehåll..."
 
 #: src/mainwindow.cpp:359
 #, kde-format
@@ -5680,14 +5691,16 @@ msgid "Import data from Collectorz"
 msgstr "Importera data från Collectorz"
 
 #: src/mainwindow.cpp:410
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import GCstar Data..."
 msgid "Import Data Crow Data..."
-msgstr "Importerar Data Crow-data..."
+msgstr "Importerar GCstar-data..."
 
 #: src/mainwindow.cpp:411
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Collectorz"
 msgid "Import data from Data Crow"
-msgstr "Importera data från Data Crow"
+msgstr "Importera data från Collectorz"
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5730,14 +5743,16 @@ msgid "Import an RIS reference file"
 msgstr "Importera en RIS-referensfil"
 
 #: src/mainwindow.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import CSV Data..."
 msgid "Import MARC Data..."
-msgstr "Importerar MARC-data..."
+msgstr "Importerar CSV-data..."
 
 #: src/mainwindow.cpp:431
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import VinoXML data"
 msgid "Import MARC data"
-msgstr "Importera MARC-data"
+msgstr "Importera VinoXML-data"
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -6314,9 +6329,10 @@ msgstr ""
 "Vill du spara den?"
 
 #: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create a new collection"
 msgid "Creating new collection..."
-msgstr "Skapar ny samling..."
+msgstr "Skapa en ny samling"
 
 #: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
 #, kde-format
@@ -7245,24 +7261,28 @@ msgid "LibraryThing file:"
 msgstr "LibraryThing-fil:"
 
 #: src/translators/marcimporter.cpp:132
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico was unable to read any data."
-msgstr "Tellico kunde inte läsa någon data."
+msgstr "Tellico kunde inte läsa några metadata från PDF-filen."
 
 #: src/translators/marcimporter.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "CSV Options"
 msgid "MARC Options"
-msgstr "MARC-alternativ"
+msgstr "CSV-alternativ"
 
 #: src/translators/marcimporter.cpp:156
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Query character set: "
 msgid "Character set:"
-msgstr "Teckenuppsättning:"
+msgstr "Teckenuppsättning för frågor:"
 
 #: src/translators/marcimporter.cpp:161
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Format: "
 msgid "MARC Format:"
-msgstr "MARC-format:"
+msgstr "Format: "
 
 #: src/translators/onixexporter.cpp:67
 #, kde-format
@@ -7664,9 +7684,6 @@ msgstr "Rensa"
 #~ msgid "Click to download additional data sources."
 #~ msgstr "Klicka för att ladda ner ytterligare datakällor."
 
-#~ msgid "Edit..."
-#~ msgstr "Redigera..."
-
 #~ msgid ""
 #~ "%1 requires the network request to include identification.\n"
 #~ "Check the network configuration in KDE System Settings."
@@ -7674,8 +7691,14 @@ msgstr "Rensa"
 #~ "%1 kräver att nätverkbegäran inkluderar identifikation.\n"
 #~ "Kontrollera nätverksinställningen i KDE:s systeminställningar."
 
+#~ msgid "Edit..."
+#~ msgstr "Redigera..."
+
 #~ msgid "Creating new document..."
 #~ msgstr "Skapar nytt dokument..."
+
+#~ msgid "Denomination"
+#~ msgstr "Valör"
 
 #~ msgid ""
 #~ "Data provided by <a href=\"https://www.booknetcanada.ca/biblioshare\">BNC "
@@ -7705,21 +7728,14 @@ msgstr "Rensa"
 #~ "Informationen tillhandahålls fritt av <a href=\"https://mobygames.com"
 #~ "\">MobyGames</a>."
 
-#~ msgid ""
-#~ "This information was freely provided by <a href=\"https://tvmaze.com"
-#~ "\">TVmaze</a>."
-#~ msgstr ""
-#~ "Informationen tillhandahålls fritt av <a href=\"https://tvmaze.com"
-#~ "\">TVmaze</a>."
+#~ msgid "Tellico - a KDE collection manager"
+#~ msgstr "Tellico - en KDE samlingshanterare"
 
 #~ msgid "Processing document..."
 #~ msgstr "Bearbetar dokument..."
 
 #~ msgid "&New"
 #~ msgstr "&Ny"
-
-#~ msgid "Denomination"
-#~ msgstr "Valör"
 
 #~ msgid "Group Tabs"
 #~ msgstr "Gruppflikar"
