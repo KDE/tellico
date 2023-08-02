@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2023-07-31 21:23+0200\n"
+"PO-Revision-Date: 2023-08-01 21:55+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -99,7 +99,7 @@ msgstr "Biletliste"
 #, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr ""
+msgstr "Bilet­rutenett"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -201,13 +201,13 @@ msgstr "Gruppesamandrags­rapport"
 #: src/charts/yeardistributionreport.cpp:133
 #, kde-format
 msgid "Year Distribution"
-msgstr ""
+msgstr "Årsfordeling"
 
 #: src/charts/yeardistributionreport.cpp:158
 #, kde-format
 msgctxt "Distinct number of items"
 msgid "Count"
-msgstr ""
+msgstr "Tal"
 
 #: src/cite/lyxpipe.cpp:57
 #, kde-format
@@ -2358,7 +2358,7 @@ msgstr "Tekstframhevingsfarge for mal"
 #: src/config/tellico_config.kcfg:523
 #, kde-format
 msgid "Template link color"
-msgstr ""
+msgstr "Lenkjefarge for mal"
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -2404,7 +2404,7 @@ msgstr ""
 #: src/configdialog.cpp:221
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
-msgstr ""
+msgstr "&Bruk regulære uttrykk i snøggfilter"
 
 #: src/configdialog.cpp:222
 #, kde-format
@@ -2717,7 +2717,7 @@ msgstr "Uthevingsfarge (tekst):"
 #: src/configdialog.cpp:542
 #, kde-format
 msgid "Link color:"
-msgstr ""
+msgstr "Lenkjefarge:"
 
 #: src/configdialog.cpp:551
 #, kde-format
@@ -3255,7 +3255,7 @@ msgstr "Bruk standardteiknkodinga frå lokalet i den eksporterte fila."
 #: src/fetch/adsfetcher.cpp:316
 #, kde-format
 msgid "SAO/NASA Astrophysics Data System"
-msgstr ""
+msgstr "SAO/NASA Astrophysics Data System"
 
 #: src/fetch/adsfetcher.cpp:331 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:172 src/fetch/comicvinefetcher.cpp:232
@@ -3705,7 +3705,7 @@ msgstr "BoardGameGeek-lenkje"
 #: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:808
 #, kde-format
 msgid "Colnect Link"
-msgstr ""
+msgstr "Colnect-lenkje"
 
 #: src/fetch/colnectfetcher.cpp:546 src/fetch/colnectfetcher.cpp:814
 #, kde-format
@@ -3992,7 +3992,7 @@ msgstr "Filmaster-lenkje"
 #: src/fetch/gaminghistoryfetcher.cpp:374
 #, kde-format
 msgid "Gaming History Link"
-msgstr ""
+msgstr "Gaming History-lenkje"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
@@ -6299,7 +6299,7 @@ msgstr ""
 #: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
 #, kde-format
 msgid "Creating new collection..."
-msgstr ""
+msgstr "Lagar ny samling …"
 
 #: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
 #, kde-format
@@ -7236,7 +7236,7 @@ msgstr "LibraryThing-fil:"
 #: src/translators/marcimporter.cpp:132
 #, kde-format
 msgid "Tellico was unable to read any data."
-msgstr ""
+msgstr "Tellico klarte ikkje lesa noko data."
 
 #: src/translators/marcimporter.cpp:151
 #, kde-format
