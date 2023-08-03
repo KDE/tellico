@@ -746,11 +746,6 @@ void MainWindow::initActions() {
   KStandardAction::preferences(this, SLOT(slotShowConfigDialog()), actionCollection());
 
   /*************************************************
-   * Help menu
-   *************************************************/
-  KStandardAction::tipOfDay(this, SLOT(slotShowTipOfDay()), actionCollection());
-
-  /*************************************************
    * Short cuts
    *************************************************/
   KStandardAction::fullScreen(this, SLOT(slotToggleFullScreen()), this, actionCollection());
@@ -1629,10 +1624,6 @@ void MainWindow::slotHideConfigDialog() {
     m_configDlg->deleteLater();
     m_configDlg = nullptr;
   }
-}
-
-void MainWindow::slotShowTipOfDay(bool force_/*=true*/) {
-  KTipDialog::showTip(this, QStringLiteral("tellico/tellico.tips"), force_);
 }
 
 void MainWindow::slotStatusMsg(const QString& text_) {

@@ -277,12 +277,6 @@ public Q_SLOTS:
    */
   void slotHideCollectionFieldsDialog();
   /**
-   * Shows the "Tip of the Day" dialog.
-   *
-   * @param force Whether the configuration setting should be ignored
-   */
-  void slotShowTipOfDay(bool force=true);
-  /**
    * Shows the string macro editor dialog for the application.
    */
   void slotShowStringMacroDialog();

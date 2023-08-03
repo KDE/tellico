@@ -8,12 +8,6 @@
 
 <kcfgfile name="tellicorc"/>
 
-<group name="TipOfDay">
-    <entry key="RunOnStart" type="Bool" name="showTipOfDay">
-        <default>true</default>
-    </entry>
-</group>
-
 <group name="Group View Options">
     <entry key="SortColumn" type="Int" name="groupViewSortColumn">
         <default>0</default>

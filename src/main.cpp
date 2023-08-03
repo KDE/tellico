@@ -159,7 +159,6 @@ int main(int argc, char* argv[]) {
   } else {
     Tellico::MainWindow* tellico = new Tellico::MainWindow();
     tellico->show();
-    tellico->slotShowTipOfDay(false);
     // slotInit gets called out of a QTimer signal
     // but it wasn't always completing in-time
     // so call it manually to ensure it has finished

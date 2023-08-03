@@ -224,12 +224,6 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
   l->addWidget(m_cbQuickFilterRegExp);
   connect(m_cbQuickFilterRegExp, &QAbstractButton::clicked, this, &ConfigDialog::slotModified);
 
-  m_cbShowTipDay = new QCheckBox(i18n("&Show \"Tip of the Day\" at startup"), frame);
-  m_cbShowTipDay->setWhatsThis(i18n("If checked, the \"Tip of the Day\" will be "
-                                    "shown at program start-up."));
-  l->addWidget(m_cbShowTipDay);
-  connect(m_cbShowTipDay, &QAbstractButton::clicked, this, &ConfigDialog::slotModified);
-
   m_cbEnableWebcam = new QCheckBox(i18n("&Enable webcam for barcode scanning"), frame);
   m_cbEnableWebcam->setWhatsThis(i18n("If checked, the input from a webcam will be used "
                                       "to scan barcodes for searching."));
@@ -702,7 +696,6 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
 void ConfigDialog::readGeneralConfig() {
   m_modifying = true;
 
-  m_cbShowTipDay->setChecked(Config::showTipOfDay());
   m_cbQuickFilterRegExp->setChecked(Config::quickFilterRegExp());
   m_cbOpenLastFile->setChecked(Config::reopenLastFile());
 #ifdef ENABLE_WEBCAM
@@ -802,7 +795,6 @@ void ConfigDialog::saveConfiguration() {
 }
 
 void ConfigDialog::saveGeneralConfig() {
-  Config::setShowTipOfDay(m_cbShowTipDay->isChecked());
   Config::setQuickFilterRegExp(m_cbQuickFilterRegExp->isChecked());
   Config::setEnableWebcam(m_cbEnableWebcam->isChecked());
 

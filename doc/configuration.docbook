@@ -34,10 +34,8 @@ Some minor settings can only be changed by editing the configuration file itself
 <para>
 The <guilabel>General Options</guilabel> control the general behavior. Images may be included
 in the data files, or saved separately in the &appname; application folder. Also, when &appname;
-is started, it can automatically reopen the last data file that was open. The
-<guilabel>Tip of the Day</guilabel> dialog contains helpful hints on using &appname;
-and appears at program startup. You may want to read through some of the hints and
-then disable the dialog. The <interface>Quick Filter</interface> in the toolbar is useful
+is started, it can automatically reopen the last data file that was open.
+The <interface>Quick Filter</interface> in the toolbar is useful
 for easily filtering through your collection and can utilize regular expressions.
 </para>
 

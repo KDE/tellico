@@ -479,10 +479,6 @@ When an entry is checked-out, the <emphasis>Loaned</emphasis> field is set to <e
 <sect1 id="tips">
 <title>General Tips</title>
 
-<para>
-These are the list of tips contained in the "Tip of the Day" list for &appname;.
-</para>
-
 <tip>
 <para>If a book has more than one author, you should separate
 their names by a semi-colon, so that Tellico will know to split them
@@ -502,24 +498,6 @@ right-clicking on the column header.
 the <interface>Collection Fields Dialog</interface>. The arrow buttons below the field list can be used to change the
 position of the field in the list, which affects the placement in the entry
 editor.
-</para>
-</tip>
-
-<tip>
-<para>If you want to filter by a <link linkend="bool"><emphasis>Checkbox</emphasis></link> field, a value of
-"true" should be used. If you'd like to filter to
-show only the science fiction books which you've not read, for
-example, check the <guilabel>Match all of the
-following</guilabel> button,  set the first rule to have "Genre"
-"contains" "Science Fiction" (no quotes) and the second rule to
-have "Read" "does not contain" "true" (no quotes).
-</para>
-</tip>
-
-<tip>
-<para>If a non-word character is used in the Quick Filter, the text is
-interpreted as a regular expression. To show only books which are by Weber or Bujold, for example, then
-type "weber|bujold" (no quotes) in the filter box.
 </para>
 </tip>
 
