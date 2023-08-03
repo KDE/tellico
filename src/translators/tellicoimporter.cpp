@@ -73,13 +73,7 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
       return Data::CollPtr();
     }
     QIODevice* f = fileRef().file();
-    char c;
-    for(int i = 0; i < 5; ++i) {
-      if(f->getChar(&c)) {
-        s += c;
-      }
-    }
-    f->reset();
+    s = f->peek(5);
   } else {
     if(data().size() < 5) {
       m_format = Error;
