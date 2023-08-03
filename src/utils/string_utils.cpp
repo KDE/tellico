@@ -96,8 +96,7 @@ uint Tellico::toUInt(const QString& s, bool* ok) {
 
 QString Tellico::i18nReplace(QString text) {
   // Because QDomDocument sticks in random newlines, go ahead and grab them too
-  static QRegularExpression rx(QStringLiteral("(?:\\n+ *)*<i18n>(.*?)</i18n>(?: *\\n+)*"),
-                               QRegularExpression::OptimizeOnFirstUsageOption);
+  static QRegularExpression rx(QStringLiteral("(?:\\n+ *)*<i18n>(.*?)</i18n>(?: *\\n+)*"));
   QRegularExpressionMatch match = rx.match(text);
   while(match.hasMatch()) {
     // KDE bug 254863, be sure to escape just in case of spurious & entities
