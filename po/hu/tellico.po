@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2022-02-01 11:21+0100\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
+"PO-Revision-Date: 2022-02-01 11:50+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -4235,9 +4235,9 @@ msgstr "Fájl gyűjtemény"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
-#| msgid "Card Number"
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Kártya szám"
+msgstr "Fájl gyűjtemény"
 
 #: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
@@ -4332,7 +4332,7 @@ msgstr "TMDb kapcsolat"
 #: src/fetch/tvmazefetcher.cpp:182 src/fetch/tvmazefetcher.cpp:384
 #, kde-format
 msgid "Network"
-msgstr "Csatorna"
+msgstr "Hálózat"
 
 #: src/fetch/themoviedbfetcher.cpp:638
 #, kde-format
@@ -4371,7 +4371,7 @@ msgstr "TheTVDB hivatkozás"
 #: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr "Feliratkozási PIN: "
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -5415,9 +5415,10 @@ msgid "Import <filename> as a RIS file"
 msgstr "<filename> RIS fájlként importálása"
 
 #: src/main.cpp:148
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import <filename> as a MODS file"
 msgid "Import <filename> as a PDF file"
-msgstr "Importálás <filename>PDF-fájlként"
+msgstr "<filename> MODS fájlként importálása"
 
 #: src/main.cpp:149
 #, kde-format
@@ -7674,9 +7675,6 @@ msgstr "Törlés"
 #~ msgid "Click to download additional data sources."
 #~ msgstr "Kattintson további adatforrások letöltéséhez."
 
-#~ msgid "Edit..."
-#~ msgstr "Szerkesztés..."
-
 #~ msgid ""
 #~ "%1 requires the network request to include identification.\n"
 #~ "Check the network configuration in KDE System Settings."
@@ -7684,17 +7682,20 @@ msgstr "Törlés"
 #~ "A(z) %1 kéri az azonosítás beillesztését a hálózati kérésbe.\n"
 #~ "Ellenőrizze a hálózatbeállításokat a KDE Rendszerbeállításokban."
 
+#~ msgid "Edit..."
+#~ msgstr "Szerkesztés..."
+
 #~ msgid "Creating new document..."
 #~ msgstr "Új dokumentum létrehozása..."
+
+#~ msgid "Denomination"
+#~ msgstr "Névérték"
 
 #~ msgid "Processing document..."
 #~ msgstr "Dokumentum feldolgozása..."
 
 #~ msgid "&New"
 #~ msgstr "&Új"
-
-#~ msgid "Denomination"
-#~ msgstr "Névérték"
 
 #, fuzzy
 #~| msgid "Groups"

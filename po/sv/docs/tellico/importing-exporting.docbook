@@ -343,7 +343,7 @@
 <para
 ><ulink url="https://www.librarything.com"
 >LibraryThing</ulink
-> är en nättjänst för att hjälpa till att enkelt katalogisera böcker. &appname; kan importera boklistan i en användares samling, <ulink url="https://www.librarything.com/export.php?export_type=json"
+> är en nättjänst som hjälper personer att enkelt katalogisera sina böcker.&appname; kan importera boklistan från en användares samling, <ulink url="https://www.librarything.com/export.php?export_type=json"
 >exporterad med JSON-format</ulink
 >. </para>
 </sect3>

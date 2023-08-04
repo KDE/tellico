@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -4370,9 +4370,9 @@ msgstr "Kolekcija datoteka"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
-#| msgid "Card Number"
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Broj karice"
+msgstr "Kolekcija datoteka"
 
 #: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
@@ -7865,14 +7865,14 @@ msgstr "Očisti"
 #~ msgid "Creating new document..."
 #~ msgstr "Kreiranje novog dokumenta..."
 
+#~ msgid "Denomination"
+#~ msgstr "Apoen"
+
 #~ msgid "Processing document..."
 #~ msgstr "Obrađujem dokument..."
 
 #~ msgid "&New"
 #~ msgstr "&Nova"
-
-#~ msgid "Denomination"
-#~ msgstr "Apoen"
 
 #, fuzzy
 #~| msgid "Groups"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -4157,9 +4157,9 @@ msgid "OPDS Catalog"
 msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:446
-#, fuzzy, kde-format
+#, kde-format
 msgid "Catalog: "
-msgstr "Nr. în serie"
+msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:451
 #, kde-format
@@ -7474,16 +7474,16 @@ msgstr "An"
 #~ msgstr "Creez documentul nou..."
 
 #, fuzzy
+#~ msgid "Denomination"
+#~ msgstr "Opțiuni colecții cărți"
+
+#, fuzzy
 #~ msgid "Processing document..."
 #~ msgstr "Creez documentul nou..."
 
 #, fuzzy
 #~ msgid "&New"
 #~ msgstr "Nouă"
-
-#, fuzzy
-#~ msgid "Denomination"
-#~ msgstr "Opțiuni colecții cărți"
 
 #, fuzzy
 #~ msgid "Group Tabs"

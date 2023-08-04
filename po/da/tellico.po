@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -4253,9 +4253,9 @@ msgstr "Filkatalog"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
-#| msgid "Card Number"
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Kortnummer"
+msgstr "Filkatalog"
 
 #: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
@@ -7717,9 +7717,6 @@ msgstr "Ryd"
 #~ msgid "Click to download additional data sources."
 #~ msgstr "Tryk for at downloade yderligere datakilder."
 
-#~ msgid "Edit..."
-#~ msgstr "Redigér..."
-
 #~ msgid ""
 #~ "%1 requires the network request to include identification.\n"
 #~ "Check the network configuration in KDE System Settings."
@@ -7727,8 +7724,14 @@ msgstr "Ryd"
 #~ "%1 kræver at netværksanmodningen inkluderer identifikation.\n"
 #~ "Tjek netværkskonfigurationen i KDE's Systemindstillinger."
 
+#~ msgid "Edit..."
+#~ msgstr "Redigér..."
+
 #~ msgid "Creating new document..."
 #~ msgstr "Opretter nyt dokument..."
+
+#~ msgid "Denomination"
+#~ msgstr "Pålydende værdi"
 
 #~ msgid ""
 #~ "Data provided by <a href=\"https://www.booknetcanada.ca/biblioshare\">BNC "
@@ -7758,25 +7761,11 @@ msgstr "Ryd"
 #~ "Denne information blev frit leveret af <a href=\"https://mobygames.com"
 #~ "\">MobyGames</a>."
 
-#, fuzzy
-#~| msgid ""
-#~| "This information was freely provided by <a href=\"https://mobygames.com"
-#~| "\">MobyGames</a>."
-#~ msgid ""
-#~ "This information was freely provided by <a href=\"https://tvmaze.com"
-#~ "\">TVmaze</a>."
-#~ msgstr ""
-#~ "Denne information blev frit leveret af <a href=\"https://mobygames.com"
-#~ "\">MobyGames</a>."
-
 #~ msgid "Processing document..."
 #~ msgstr "Behandler dokument..."
 
 #~ msgid "&New"
 #~ msgstr "&Ny"
-
-#~ msgid "Denomination"
-#~ msgstr "Pålydende værdi"
 
 #, fuzzy
 #~| msgid "Groups"

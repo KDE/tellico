@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
 "PO-Revision-Date: 2020-06-03 20:36+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -4231,9 +4231,10 @@ msgid "French"
 msgstr "Prantsuse"
 
 #: src/fetch/numistafetcher.cpp:461
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Filmaster Link"
 msgid "Numista (%1)"
-msgstr ""
+msgstr "Filmasteri link"
 
 #: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
 #, fuzzy, kde-format
@@ -4249,9 +4250,9 @@ msgstr "Failikogu"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
-#| msgid "Card Number"
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Kaardi number"
+msgstr "Failikogu"
 
 #: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
@@ -7687,9 +7688,6 @@ msgstr "Puhasta"
 #~ msgid "Click to download additional data sources."
 #~ msgstr "Klõpsa lisaandmeallikate allalaadimiseks."
 
-#~ msgid "Edit..."
-#~ msgstr "Muuda..."
-
 #~ msgid ""
 #~ "%1 requires the network request to include identification.\n"
 #~ "Check the network configuration in KDE System Settings."
@@ -7697,8 +7695,14 @@ msgstr "Puhasta"
 #~ "%1 vajab identifitseerimiseks võrgupäringut.\n"
 #~ "Kontrolli võrguseadistust KDE Süsteemi seadistustes."
 
+#~ msgid "Edit..."
+#~ msgstr "Muuda..."
+
 #~ msgid "Creating new document..."
 #~ msgstr "Uue dokumendi loomine..."
+
+#~ msgid "Denomination"
+#~ msgstr "Vääring"
 
 #~ msgid ""
 #~ "Data provided by <a href=\"https://www.booknetcanada.ca/biblioshare\">BNC "
@@ -7727,24 +7731,14 @@ msgstr "Puhasta"
 #~ msgstr ""
 #~ "Seda teavet pakub vabalt <a href=\"https://mobygames.com\">MobyGames</a>."
 
-#, fuzzy
-#~| msgid ""
-#~| "This information was freely provided by <a href=\"https://mobygames.com"
-#~| "\">MobyGames</a>."
-#~ msgid ""
-#~ "This information was freely provided by <a href=\"https://tvmaze.com"
-#~ "\">TVmaze</a>."
-#~ msgstr ""
-#~ "Seda teavet pakub vabalt <a href=\"https://mobygames.com\">MobyGames</a>."
+#~ msgid "Tellico - a KDE collection manager"
+#~ msgstr "Tellico - KDE kogude haldur"
 
 #~ msgid "Processing document..."
 #~ msgstr "Dokumendi töötlemine..."
 
 #~ msgid "&New"
 #~ msgstr "&Uus"
-
-#~ msgid "Denomination"
-#~ msgstr "Vääring"
 
 #, fuzzy
 #~| msgid "Groups"

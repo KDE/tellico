@@ -56,7 +56,7 @@ xx.yy (Applications xx.yy) for docbooks with own version released as Application
 $applicationname xx.yy for applications with independent release schedule (extragear/playground)
 -->
 <releaseinfo
->Tellico 3.5</releaseinfo>
+>Tellico 3.4</releaseinfo>
 
 <title
 >Підручник з &tellico;</title>
@@ -93,7 +93,7 @@ $applicationname xx.yy for applications with independent release schedule (extra
 
 <copyright>
 <year
->2001-2023</year>
+>2001-2021</year>
 <holder
 >&robby;</holder>
 </copyright>

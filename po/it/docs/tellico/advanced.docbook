@@ -21,7 +21,6 @@ Opzioni:
   --bibtex                  Importa &lt;nome del file&gt; come file bibtex
   --mods                    Import &lt;nome del file&gt; come file MODS
   --ris                     Import &lt;nome del file&gt; come file RIS
-  --pdf                     Importa &lt;nome del file&gt; come file PDF
 
 Argomenti:
   [nome del file]                  File da aprire

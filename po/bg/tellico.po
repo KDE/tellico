@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
 "PO-Revision-Date: 2009-09-18 16:56+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -2359,6 +2359,7 @@ msgstr "пасва на регул. израз"
 
 #: src/configdialog.cpp:222
 #, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr "Ако е избрано,заглавията на полетата ще бъдат отпечатани."
@@ -4129,9 +4130,9 @@ msgid "OPDS Catalog"
 msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:446
-#, fuzzy, kde-format
+#, kde-format
 msgid "Catalog: "
-msgstr "Номер от поредица"
+msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:451
 #, kde-format
@@ -4764,6 +4765,7 @@ msgstr "Опции за форматиране"
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
 #, fuzzy, kde-format
+#| msgid "Comments"
 msgid "Comment:"
 msgstr "Коментар"
 
@@ -5433,6 +5435,7 @@ msgstr "Записва текущия документ като ..."
 
 #: src/mainwindow.cpp:334
 #, fuzzy, kde-format
+#| msgid "Manage Templates"
 msgid "Save As Template..."
 msgstr "Управление на шаблоните"
 
@@ -7402,3 +7405,7 @@ msgstr "Изчистване"
 
 #~ msgid "Edit..."
 #~ msgstr "Редакция..."
+
+#, fuzzy
+#~ msgid "Creating new document..."
+#~ msgstr "Създава нов документ"

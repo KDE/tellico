@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2023-06-16 06:45+0200\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
+"PO-Revision-Date: 2023-02-08 08:25+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -92,13 +92,15 @@ msgstr "ჯგუფის შეჯამება"
 #, kde-format
 msgctxt "Image List XSL Template"
 msgid "Image List"
-msgstr "გამოსახულების სია"
+msgstr "გამოსახულებების სია"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Image List XSL Template"
+#| msgid "Image List"
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "გამოსახულების ბადე"
+msgstr "გამოსახულებების სია"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -613,7 +615,7 @@ msgstr "ველის გაფართოებული თვისებ�
 #: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:107
 #, kde-format
 msgid "Property"
-msgstr "თვისება"
+msgstr "პარამეტრი"
 
 #: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:108
 #: src/fetch/srufetcher.cpp:595
@@ -856,7 +858,7 @@ msgstr "სერია"
 #, kde-format
 msgctxt "A number field in a bibliography"
 msgid "Volume"
-msgstr "ხმის სიმაღლე"
+msgstr "საცავი"
 
 #: src/collections/bibtexcollection.cpp:225
 #, kde-format
@@ -979,7 +981,7 @@ msgstr "აღწერა"
 #: src/collections/winecollection.cpp:113 src/field.cpp:206
 #, kde-format
 msgid "Rating"
-msgstr "შეფასება"
+msgstr "ხმის მიცემა"
 
 #: src/collections/boardgamecollection.cpp:103
 #: src/collections/bookcollection.cpp:78 src/collections/cardcollection.cpp:93
@@ -1152,7 +1154,7 @@ msgstr "ახალი"
 #: src/collections/bookcollection.cpp:153
 #, kde-format
 msgid "Used"
-msgstr "Გამოყენებული"
+msgstr "გამოყენებულია"
 
 #: src/collections/bookcollection.cpp:154
 #: src/collections/comicbookcollection.cpp:129
@@ -1201,7 +1203,7 @@ msgstr "დამკვრელი"
 #: src/collections/cardcollection.cpp:60
 #, kde-format
 msgid "Team"
-msgstr "გუნდი"
+msgstr "ჯგუფი"
 
 #: src/collections/cardcollection.cpp:66
 #, kde-format
@@ -1224,7 +1226,7 @@ msgstr "ბარათის ტიპი"
 #: src/collections/winecollection.cpp:99
 #, kde-format
 msgid "Location"
-msgstr "დებარეობა"
+msgstr "მდებარეობა"
 
 #: src/collections/cardcollection.cpp:116
 #: src/collections/winecollection.cpp:104
@@ -1273,7 +1275,7 @@ msgstr "ქვეყანა"
 #: src/collections/coincollection.cpp:83 src/collections/stampcollection.cpp:66
 #, kde-format
 msgid "Currency"
-msgstr "ფული"
+msgstr "ვალუტა"
 
 #: src/collections/coincollection.cpp:89
 #, kde-format
@@ -1365,7 +1367,7 @@ msgstr "ჩემი ფაილები"
 #, kde-format
 msgctxt "File catalog"
 msgid "Volume"
-msgstr "ხმის სიმაღლე"
+msgstr "საცავი"
 
 #: src/collections/filecatalog.cpp:67
 #, kde-format
@@ -1400,7 +1402,7 @@ msgstr "ჯგუფი"
 #: src/collections/filecatalog.cpp:97
 #, kde-format
 msgid "Created"
-msgstr "შექმნილია"
+msgstr "შეიქმნა"
 
 #: src/collections/filecatalog.cpp:101
 #, kde-format
@@ -2321,9 +2323,10 @@ msgstr "ნიმუშის გამოკვეთილი ტექსტ�
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Template highlight color"
 msgid "Template link color"
-msgstr "ნიმუშის ბმულის ფერი"
+msgstr "ნიმუშის გამოკვეთილი ფერი"
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -2365,15 +2368,17 @@ msgid ""
 msgstr ""
 
 #: src/configdialog.cpp:221
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "matches regular expression"
 msgid "&Enable regular expressions in quick filter"
-msgstr "&სწრაფ ფილტრში რეგულარული გამოსახულებების ჩართვა"
+msgstr "ემთხვევა რეგულარულ გამოსახულებას"
 
 #: src/configdialog.cpp:222
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
-msgstr ""
+msgstr ".თუ ჩართულია, ველის სახელები ცხრილის თავსართებად დაიბეჭდება."
 
 #: src/configdialog.cpp:227
 #, kde-format
@@ -2654,9 +2659,10 @@ msgid "Highlighted text color:"
 msgstr "გამოკვეთილი ტექსტის ფერი:"
 
 #: src/configdialog.cpp:542
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Text color:"
 msgid "Link color:"
-msgstr "ბმულის ფერი:"
+msgstr "ტექსტის ფერი:"
 
 #: src/configdialog.cpp:551
 #, kde-format
@@ -3519,7 +3525,7 @@ msgstr "დიდი გამოსახულება"
 #: src/fetch/thegamesdbfetcher.cpp:661 src/fetch/videogamegeekfetcher.cpp:216
 #, kde-format
 msgid "No Image"
-msgstr "გამოსახულების გარეშე"
+msgstr "არავითარი სურათი"
 
 #: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:1845
 #: src/fetch/mobygamesfetcher.cpp:682 src/fetch/thegamesdbfetcher.cpp:665
@@ -3611,9 +3617,10 @@ msgid "BoardGameGeek Link"
 msgstr "BoardGameGeek -ის ბმული"
 
 #: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:808
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Comic Vine Link"
 msgid "Colnect Link"
-msgstr "Colnect-ის ბმული"
+msgstr "Comic Vine -ის ბმული"
 
 #: src/fetch/colnectfetcher.cpp:546 src/fetch/colnectfetcher.cpp:814
 #, kde-format
@@ -3718,9 +3725,10 @@ msgid "Barcode"
 msgstr "შტრიხკოდი"
 
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:514
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Card Number"
 msgid "Catalog Number"
-msgstr "კატალოგის ნომერი"
+msgstr "ბარათის ნომერი"
 
 #: src/fetch/discogsfetcher.cpp:347
 #, kde-format
@@ -3869,12 +3877,14 @@ msgid "Raw Query"
 msgstr "დაუმუშავებელი მოთხოვნა"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Filmaster Link"
 msgid "FilmAffinity Link"
-msgstr "FilmAffinity -ის ბმული"
+msgstr "Filmaster -ის ბმული"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Spain"
 msgctxt "Country"
 msgid "Spain"
 msgstr "ესპანეთი"
@@ -3883,7 +3893,7 @@ msgstr "ესპანეთი"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr "აშშ"
+msgstr ""
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -3893,9 +3903,10 @@ msgstr "Filmaster -ის ბმული"
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
 #: src/fetch/gaminghistoryfetcher.cpp:374
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "GiantBomb Link"
 msgid "Gaming History Link"
-msgstr "Gaming History -ის ბმული"
+msgstr "GiantBomb -ის ბმული"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
@@ -3975,7 +3986,7 @@ msgstr "ინტერნეტის თამაშების ბაზა 
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:344
 #, kde-format
 msgid "Screenshot"
-msgstr "ეკრანის ანაბეჭდი"
+msgstr ""
 
 #: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
 #, kde-format
@@ -4055,9 +4066,10 @@ msgid ""
 msgstr ""
 
 #: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:505
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Allocine Link"
 msgid "iTunes Link"
-msgstr "iTunes -ის ბმული"
+msgstr "Allocine -ის ბმული"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4118,29 +4130,34 @@ msgid "Numista (%1)"
 msgstr "Numista ბმული (%1)"
 
 #: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the file - %1."
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellico-ის შეცდომა ODPS კატალოგის აღწერის წაკითხვისას."
+msgstr "Tellico -ის შეცდომა ფაილის ჩატვირთვისას - %1."
 
 #: src/fetch/opdsfetcher.cpp:421
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Catalog"
 msgid "OPDS Catalog"
-msgstr "OPDS კატალოგი"
+msgstr "ფაილების კატალოგი"
 
 #: src/fetch/opdsfetcher.cpp:446
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "კატალოგი: "
+msgstr "ფაილების კატალოგი"
 
 #: src/fetch/opdsfetcher.cpp:451
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Enter the host name of the server."
 msgid "Enter the link to the OPDS server."
-msgstr "შეიყვანეთ ODPS სერვერის ბმული."
+msgstr "შეიყვანეთ სერვერის ჰოსტის სახელი."
 
 #: src/fetch/opdsfetcher.cpp:456
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Catalog"
 msgid "&Verify Catalog"
-msgstr "&კატალოგის გადამოწმება"
+msgstr "ფაილების კატალოგი"
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
@@ -4163,9 +4180,10 @@ msgid "SRU Server"
 msgstr "SRU სერვერი"
 
 #: src/fetch/srufetcher.cpp:525
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Source name: "
 msgid "Scheme: "
-msgstr "სქემა: "
+msgstr "&წყაროს სახელი: "
 
 #: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
 #, kde-format
@@ -4261,7 +4279,7 @@ msgstr "TheTVDB ბმული"
 #: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr "გამომწერის PIN: "
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -4755,28 +4773,32 @@ msgstr "ხალხი"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Template:"
 msgid "Template Name:"
-msgstr "შაბლონის სახელი:"
+msgstr "შაბლონი:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Comments"
 msgid "Comment:"
-msgstr "კომენტარი:"
+msgstr "კომენტარები"
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Icon"
 msgid "Icon:"
-msgstr "ხატულა:"
+msgstr "ხატულა"
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Collection Report"
 msgid "Save As Collection Template"
-msgstr "კოლექციის შაბლონად შენახვა"
+msgstr "კოლექციის ანგარიში"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -5102,9 +5124,10 @@ msgid "VinoXML Data Files"
 msgstr "VinoXML მონაცემების ფალები"
 
 #: src/importdialog.cpp:424
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Book Title"
 msgid "eBook Files"
-msgstr "ელწიგნის ფაილები"
+msgstr "წიგნის სათაური"
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5248,22 +5271,23 @@ msgstr "ბოლო ფაილი ავტომატურად არ �
 #: src/main.cpp:145
 #, kde-format
 msgid "Import <filename> as a bibtex file"
-msgstr "<filename>-ის bibitex-ის ფაილის სახით შემოტანა"
+msgstr ""
 
 #: src/main.cpp:146
 #, kde-format
 msgid "Import <filename> as a MODS file"
-msgstr "<filename>-ის MODS-ის ფაილის სახით შემოტანა"
+msgstr ""
 
 #: src/main.cpp:147
 #, kde-format
 msgid "Import <filename> as a RIS file"
-msgstr "<filename>-ის RIS-ის ფაილის სახით შემოტანა"
+msgstr ""
 
 #: src/main.cpp:148
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import a PDF file"
 msgid "Import <filename> as a PDF file"
-msgstr "<filename>-ის PDF-ის ფაილის სახით შემოტანა"
+msgstr "PDF ფაილის შემოტანა"
 
 #: src/main.cpp:149
 #, kde-format
@@ -5431,24 +5455,28 @@ msgid "Save the document as a different file..."
 msgstr "დოკუმენტის სხვა ფაილად შენახვა..."
 
 #: src/mainwindow.cpp:334
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Manage Templates"
 msgid "Save As Template..."
-msgstr "ნიმუშად შენახვა..."
+msgstr "ნიმუშების მართვა"
 
 #: src/mainwindow.cpp:336
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create a new collection"
 msgid "Save as a collection template"
-msgstr "კოლექციის ნიმუშად შენახვა"
+msgstr "ახალი კოლექციის შექმნა"
 
 #: src/mainwindow.cpp:339
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Select all the entries in the collection"
 msgid "Print the contents of the collection..."
-msgstr "კოლექციის შემცველობის დაბეჭდვა..."
+msgstr "კოლექციის ყველა ჩანაწერის მონიშვნა"
 
 #: src/mainwindow.cpp:355
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Select all the entries in the collection"
 msgid "Preview the contents of the collection..."
-msgstr ""
+msgstr "კოლექციის ყველა ჩანაწერის მონიშვნა"
 
 #: src/mainwindow.cpp:359
 #, kde-format
@@ -5521,14 +5549,16 @@ msgid "Import data from Collectorz"
 msgstr "Collectorz -დან მონაცემების შემოტანა"
 
 #: src/mainwindow.cpp:410
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import GCstar Data..."
 msgid "Import Data Crow Data..."
-msgstr "Crow -დან მონაცემების შემოტანა..."
+msgstr "GCstar-ის მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:411
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Collectorz"
 msgid "Import data from Data Crow"
-msgstr "მონაცემების შემოტანა Data Crow-დან"
+msgstr "Collectorz -დან მონაცემების შემოტანა"
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5571,14 +5601,16 @@ msgid "Import an RIS reference file"
 msgstr "RIS მიმართვის ფაილის შემოტანა"
 
 #: src/mainwindow.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import CSV Data..."
 msgid "Import MARC Data..."
-msgstr "MARC მონაცემების შემოტანა..."
+msgstr "CSV-ის შემოტანა..."
 
 #: src/mainwindow.cpp:431
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import VinoXML data"
 msgid "Import MARC data"
-msgstr "MARC მონაცემების შემოტანა"
+msgstr "VinoXML-ის მონაცემების შემოტანა"
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -5748,7 +5780,7 @@ msgstr "CVS-ში გატანა..."
 #: src/mainwindow.cpp:524
 #, kde-format
 msgid "Export to a comma-separated values file"
-msgstr "მძიმით გამოყოფილი მნიშვნელობების ფაილში გატანა"
+msgstr ""
 
 #: src/mainwindow.cpp:526
 #, kde-format
@@ -5813,7 +5845,7 @@ msgstr "XSL გარდაქმნის გამოყენებით გ
 #: src/mainwindow.cpp:555
 #, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
-msgstr "მონიშნული ტექსტის ამოჭრა და ბუფერში მოთავსება"
+msgstr ""
 
 #: src/mainwindow.cpp:557
 #, kde-format
@@ -5988,7 +6020,7 @@ msgstr "დუბლირებული გასაღებების შ�
 #: src/mainwindow.cpp:674
 #, kde-format
 msgid "Check for duplicate citation keys"
-msgstr "დუბლირებული ციტირების გასაღებების შემოწმება"
+msgstr ""
 
 #: src/mainwindow.cpp:684
 #, kde-format
@@ -6143,13 +6175,12 @@ msgid ""
 "The current file has been modified.\n"
 "Do you want to save it?"
 msgstr ""
-"მიმდინარე ფაილი შეიცვალა.\n"
-"გნებავთ, შეინახოთ ის?"
 
 #: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create a new collection"
 msgid "Creating new collection..."
-msgstr "ახალი კოლექციის შექმნა..."
+msgstr "ახალი კოლექციის შექმნა"
 
 #: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
 #, kde-format
@@ -6309,7 +6340,7 @@ msgstr ""
 #: src/mainwindow.cpp:2386
 #, kde-format
 msgid "Update entry data from %1"
-msgstr "ჩანაწერის მონაცემების განახლება %1-დან"
+msgstr ""
 
 #: src/mainwindow.cpp:2405
 #, kde-format
@@ -6331,7 +6362,7 @@ msgstr "&ანგარიშის ნიმუში:"
 #: src/reportdialog.cpp:128
 #, kde-format
 msgid "One Entry Per Page"
-msgstr "ერთი ჩანაწერი თითო გვერდზე"
+msgstr ""
 
 #: src/reportdialog.cpp:140
 #, kde-format
@@ -6392,13 +6423,13 @@ msgstr ""
 #: src/tellico_kernel.cpp:345
 #, kde-format
 msgid "Please choose which value to keep."
-msgstr "აირჩეთ, რომელი მნიშვნელობა შევნარჩუნო."
+msgstr "აირჩეთ, რომელი მნიშვნელობა შევინარჩუნო."
 
 #: src/tellico_kernel.cpp:352 src/tellico_kernel.cpp:353
 #: src/tellico_kernel.cpp:364 src/tellico_kernel.cpp:365
 #, kde-format
 msgid "Select value from %1"
-msgstr "აირჩიეთ მნიშვნელობა  %1-დან"
+msgstr "აირჩიეთ მნიშვნელობა %1-დან"
 
 #. i18n: ectx: Menu (file)
 #: src/tellicoui.rc:6
@@ -6424,7 +6455,7 @@ msgstr "&შემოტანა"
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Export"
-msgstr "გატანა"
+msgstr "&გატანა"
 
 #. i18n: ectx: Menu (collection)
 #: src/tellicoui.rc:81
@@ -6753,7 +6784,7 @@ msgstr "გამყოფად ტაბულაციის გამოყ�
 #: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
-msgstr "სხვები"
+msgstr "სხვა"
 
 #: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:268
 #, kde-format
@@ -6789,7 +6820,7 @@ msgstr ""
 #: src/translators/csvimporter.cpp:224
 #, kde-format
 msgid "Select the type of collection being imported."
-msgstr "აირჩიეთ შემოსატანი კოლექციის ტიპი."
+msgstr ""
 
 #: src/translators/csvimporter.cpp:228
 #, kde-format
@@ -6800,7 +6831,6 @@ msgstr "&პირველი მწკრივი ველის სახ�
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr ""
-"თუ ჩართულია, პირველი მწკრივი ველების სახელებისთვის იქნება გამოყენებული."
 
 #: src/translators/csvimporter.cpp:245
 #, kde-format
@@ -6830,7 +6860,7 @@ msgstr "&სხვა:"
 #: src/translators/csvimporter.cpp:329
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
-msgstr "ეს ცხრილი CSV ფაილის პირველ ხუთ ხაზს გაჩვენებთ."
+msgstr ""
 
 #: src/translators/csvimporter.cpp:336
 #, kde-format
@@ -7041,24 +7071,28 @@ msgid "LibraryThing file:"
 msgstr "LibraryThing-ის ფაილი:"
 
 #: src/translators/marcimporter.cpp:132
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to open the file - %1."
 msgid "Tellico was unable to read any data."
-msgstr ""
+msgstr "Tellico -ის შეცდომა ფაილის გახსნისას - %1."
 
 #: src/translators/marcimporter.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "CSV Options"
 msgid "MARC Options"
-msgstr "MARC -ის მორგება"
+msgstr "CSV -ის მორგება"
 
 #: src/translators/marcimporter.cpp:156
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Query character set: "
 msgid "Character set:"
-msgstr "სიმბოლოების კოდირება:"
+msgstr "მოთხოვნის სიმბოლოების კოდირება: "
 
 #: src/translators/marcimporter.cpp:161
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Format: "
 msgid "MARC Format:"
-msgstr "MARC -ის ფორმატი:"
+msgstr "ფორმატი: "
 
 #: src/translators/onixexporter.cpp:67
 #, kde-format
@@ -7401,3 +7435,6 @@ msgstr "გაწმენდა"
 
 #~ msgid "Edit..."
 #~ msgstr "ჩასწორება..."
+
+#~ msgid "Creating new document..."
+#~ msgstr "ახალი დოკუმენტის შექმნა..."

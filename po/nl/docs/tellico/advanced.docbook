@@ -21,7 +21,6 @@ Opties:
   --bibtex                  &lt;bestandsnaam&gt; importeren als een bibtex-bestand
   --mods                    &lt;bestandsnaam&gt; importeren als een MODS-bestand
   --ris                     &lt;bestandsnaam&gt; importeren als een RIS-bestand
-  --pdf                     &lt;filename&gt; importeren als een PDF-bestand
 
 Argumenten:
   bestandsnaam              Te openen bestand

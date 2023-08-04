@@ -3,14 +3,14 @@
 #
 #
 # Andrej Mernik <andrejm@ubuntu.si>, 2012, 2013, 2014, 2015, 2016, 2017, 2018.
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2021, 2022, 2023.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2021, 2023.
 # Martin Srebotnjak <miles@filmsi.net>, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2023-07-06 20:53+0200\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
+"PO-Revision-Date: 2023-01-23 07:09+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -98,10 +98,12 @@ msgid "Image List"
 msgstr "Seznam slik"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Image List XSL Template"
+#| msgid "Image List"
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "Mreža slik"
+msgstr "Seznam slik"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -2349,9 +2351,10 @@ msgstr "Barva poudarjenega besedila predloge"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Template highlight color"
 msgid "Template link color"
-msgstr "Barva povezav predloge"
+msgstr "Barva poudarjanja predloge"
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -2393,15 +2396,17 @@ msgid ""
 msgstr "Če to označite, bo ob zagonu programa naložena zadnja odprta datoteka."
 
 #: src/configdialog.cpp:221
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "matches regular expression"
 msgid "&Enable regular expressions in quick filter"
-msgstr "Omogoči regularne izraze v hitrem filtru"
+msgstr "se ujema z regularnim izrazom"
 
 #: src/configdialog.cpp:222
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
-msgstr "Če je označeno, bo hitri filter tolmačil besedilo kot regularni izraz."
+msgstr "Če to označite, bodo imena polj natisnjena kot glave razpredelnice."
 
 #: src/configdialog.cpp:227
 #, kde-format
@@ -2699,9 +2704,10 @@ msgid "Highlighted text color:"
 msgstr "Barva poudarjenega besedila:"
 
 #: src/configdialog.cpp:542
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Text color:"
 msgid "Link color:"
-msgstr "Barva povezave:"
+msgstr "Barva besedila:"
 
 #: src/configdialog.cpp:551
 #, kde-format
@@ -3240,7 +3246,7 @@ msgstr "Kodiraj izvoženo datoteko v krajevnem kodiranju."
 #: src/fetch/adsfetcher.cpp:316
 #, kde-format
 msgid "SAO/NASA Astrophysics Data System"
-msgstr "SAO/NASA Astrophysics Data System"
+msgstr ""
 
 #: src/fetch/adsfetcher.cpp:331 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:172 src/fetch/comicvinefetcher.cpp:232
@@ -3688,9 +3694,10 @@ msgid "BoardGameGeek Link"
 msgstr "Povezava BoardGameGeek"
 
 #: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:808
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Comic Vine Link"
 msgid "Colnect Link"
-msgstr "Povezava Colnect"
+msgstr "Povezava Comic Vine"
 
 #: src/fetch/colnectfetcher.cpp:546 src/fetch/colnectfetcher.cpp:814
 #, kde-format
@@ -3797,9 +3804,10 @@ msgid "Barcode"
 msgstr "Črtna koda"
 
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:514
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Card Number"
 msgid "Catalog Number"
-msgstr "Kataloška številka"
+msgstr "Številka karte"
 
 #: src/fetch/discogsfetcher.cpp:347
 #, kde-format
@@ -3956,12 +3964,14 @@ msgid "Raw Query"
 msgstr "Neposredna poizvedba"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Filmaster Link"
 msgid "FilmAffinity Link"
-msgstr "Povezava FilmAffinity"
+msgstr "Povezava Filmaster"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Spain"
 msgctxt "Country"
 msgid "Spain"
 msgstr "Španija"
@@ -3970,7 +3980,7 @@ msgstr "Španija"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr "ZDA"
+msgstr ""
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -3980,9 +3990,10 @@ msgstr "Povezava Filmaster"
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
 #: src/fetch/gaminghistoryfetcher.cpp:374
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "GiantBomb Link"
 msgid "Gaming History Link"
-msgstr "Povezava na Gaming History"
+msgstr "Povezava GiantBomb"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
@@ -4062,7 +4073,7 @@ msgstr "Internet Game Database (IGDB.com)"
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:344
 #, kde-format
 msgid "Screenshot"
-msgstr "Slika zaslona"
+msgstr ""
 
 #: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
 #, kde-format
@@ -4144,9 +4155,10 @@ msgstr ""
 "Premium ali Pro."
 
 #: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:505
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Allocine Link"
 msgid "iTunes Link"
-msgstr "Povezava iTunes"
+msgstr "Povezava Allocine"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4207,29 +4219,34 @@ msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
 #: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellico ne more prebrati opisa iskanja v katalogu OPDS."
+msgstr "Tellico ni mogel prebrati meta-podatkov iz datoteke PDF."
 
 #: src/fetch/opdsfetcher.cpp:421
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Catalog"
 msgid "OPDS Catalog"
-msgstr "Katalog OPDS"
+msgstr "Katalog datotek"
 
 #: src/fetch/opdsfetcher.cpp:446
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Katalog: "
+msgstr "Katalog datotek"
 
 #: src/fetch/opdsfetcher.cpp:451
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Enter the host name of the server."
 msgid "Enter the link to the OPDS server."
-msgstr "Vnesite povezavo do strežnika OPDS."
+msgstr "Vnesite gostiteljsko ime strežnika."
 
 #: src/fetch/opdsfetcher.cpp:456
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Catalog"
 msgid "&Verify Catalog"
-msgstr "Verificiraj katalog"
+msgstr "Katalog datotek"
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
@@ -4252,9 +4269,10 @@ msgid "SRU Server"
 msgstr "Strežnik SRU"
 
 #: src/fetch/srufetcher.cpp:525
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Source name: "
 msgid "Scheme: "
-msgstr "Shema: "
+msgstr "&Ime vira: "
 
 #: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
 #, kde-format
@@ -4350,7 +4368,7 @@ msgstr "Povezava TheTVDB"
 #: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr "Naročnikov PIN: "
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -4868,28 +4886,32 @@ msgstr "Ljudje"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Template:"
 msgid "Template Name:"
-msgstr "Ime predloge:"
+msgstr "Predloga:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Comments"
 msgid "Comment:"
-msgstr "Opomba:"
+msgstr "Opombe"
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Icon"
 msgid "Icon:"
-msgstr "Ikona:"
+msgstr "Ikona"
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Collection Report"
 msgid "Save As Collection Template"
-msgstr "Shrani kot zbirko predlog"
+msgstr "Poročilo o zbirki"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -5220,9 +5242,10 @@ msgid "VinoXML Data Files"
 msgstr "Podatkovne datoteke VinoXML"
 
 #: src/importdialog.cpp:424
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Book Title"
 msgid "eBook Files"
-msgstr "datoteke elektronskih knjig"
+msgstr "Naslov knjige"
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5388,9 +5411,10 @@ msgid "Import <filename> as a RIS file"
 msgstr "Uvozi  <filename> kot datoteko RIS"
 
 #: src/main.cpp:148
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import <filename> as a MODS file"
 msgid "Import <filename> as a PDF file"
-msgstr "Uvozi <filename> kot datoteko PDF"
+msgstr "Uvozi  <filename> kot datoteko MODS"
 
 #: src/main.cpp:149
 #, kde-format
@@ -5558,24 +5582,28 @@ msgid "Save the document as a different file..."
 msgstr "Shrani dokument kot drugačno datoteko ..."
 
 #: src/mainwindow.cpp:334
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Manage Templates"
 msgid "Save As Template..."
-msgstr "Shrani kot predlogo…"
+msgstr "Upravljaj s predlogami"
 
 #: src/mainwindow.cpp:336
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create a new collection"
 msgid "Save as a collection template"
-msgstr "Shrani kot zbirko predlogov"
+msgstr "Ustvari novo zbirko"
 
 #: src/mainwindow.cpp:339
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Print the contents of the document..."
 msgid "Print the contents of the collection..."
-msgstr "Natisni vsebino zbirke..."
+msgstr "Natisni vsebino dokumenta ..."
 
 #: src/mainwindow.cpp:355
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Preview the contents of the document..."
 msgid "Preview the contents of the collection..."
-msgstr "Predogled vsebine zbirke..."
+msgstr "Predogled vsebine dokumenta..."
 
 #: src/mainwindow.cpp:359
 #, kde-format
@@ -5648,14 +5676,16 @@ msgid "Import data from Collectorz"
 msgstr "Uvozi podatke iz Collectorz"
 
 #: src/mainwindow.cpp:410
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import GCstar Data..."
 msgid "Import Data Crow Data..."
-msgstr "Uvozi podatke Data Crow..."
+msgstr "Uvozi podatke GCstar ..."
 
 #: src/mainwindow.cpp:411
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Collectorz"
 msgid "Import data from Data Crow"
-msgstr "Uvozi podatke iz Data Crow"
+msgstr "Uvozi podatke iz Collectorz"
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5698,14 +5728,16 @@ msgid "Import an RIS reference file"
 msgstr "Uvozi datoteko s sklici RIS"
 
 #: src/mainwindow.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import CSV Data..."
 msgid "Import MARC Data..."
-msgstr "Uvozi podatke MARC..."
+msgstr "Uvozi podatke CSV ..."
 
 #: src/mainwindow.cpp:431
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import VinoXML data"
 msgid "Import MARC data"
-msgstr "Uvozi podatke MARC"
+msgstr "Uvozi podatke VinoXML"
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -6282,9 +6314,10 @@ msgstr ""
 "Jo želite shraniti?"
 
 #: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create a new collection"
 msgid "Creating new collection..."
-msgstr "Ustvarjam novo zbirko..."
+msgstr "Ustvari novo zbirko"
 
 #: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
 #, kde-format
@@ -6479,7 +6512,7 @@ msgstr "Predloga po&ročila:"
 #: src/reportdialog.cpp:128
 #, kde-format
 msgid "One Entry Per Page"
-msgstr "En vnos na stran"
+msgstr ""
 
 #: src/reportdialog.cpp:140
 #, kde-format
@@ -7210,24 +7243,28 @@ msgid "LibraryThing file:"
 msgstr "Datoteka LibraryThing:"
 
 #: src/translators/marcimporter.cpp:132
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico was unable to read any data."
-msgstr "Tellico ni mogel prebrati kakršnihkoli podatkov."
+msgstr "Tellico ni mogel prebrati meta-podatkov iz datoteke PDF."
 
 #: src/translators/marcimporter.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "CSV Options"
 msgid "MARC Options"
-msgstr "Možnosti MARC"
+msgstr "Možnosti CSV"
 
 #: src/translators/marcimporter.cpp:156
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Query character set: "
 msgid "Character set:"
-msgstr "Nabor znakov:"
+msgstr "Nabor znakov poizvedbe: "
 
 #: src/translators/marcimporter.cpp:161
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Format: "
 msgid "MARC Format:"
-msgstr "Format MARC:"
+msgstr "Oblika: "
 
 #: src/translators/onixexporter.cpp:67
 #, kde-format
@@ -7630,15 +7667,15 @@ msgstr "Počisti"
 #~ msgid "Click to download additional data sources."
 #~ msgstr "Kliknite, da prejmete dodatne vire podatkov."
 
-#~ msgid "Edit..."
-#~ msgstr "Uredi ..."
-
 #~ msgid ""
 #~ "%1 requires the network request to include identification.\n"
 #~ "Check the network configuration in KDE System Settings."
 #~ msgstr ""
 #~ "%1 zahteva, da omrežna zahteva vključuje identifikacijo.\n"
 #~ "Preverite omrežno nastavitve v nastavitvah sistema KDE."
+
+#~ msgid "Edit..."
+#~ msgstr "Uredi ..."
 
 #~ msgid "Creating new document..."
 #~ msgstr "Ustvarjanje novega dokumenta ..."

@@ -1,5 +1,5 @@
 # Translation of tellico.po to Ukrainian
-# Copyright (C) 2007-2021 This_file_is_part_of_KDE
+# Copyright (C) 2007-2020 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2023-07-06 06:46+0300\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
+"PO-Revision-Date: 2023-01-24 20:52+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -98,10 +98,12 @@ msgid "Image List"
 msgstr "Список зображень"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Image List XSL Template"
+#| msgid "Image List"
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "Таблиця зображень"
+msgstr "Список зображень"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -2346,9 +2348,10 @@ msgstr "Колір підсвічування тексту у шаблоні"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Template highlight color"
 msgid "Template link color"
-msgstr "Колір посилання шаблону"
+msgstr "Колір підсвічування шаблону"
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -2392,17 +2395,19 @@ msgstr ""
 "запуску."
 
 #: src/configdialog.cpp:221
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "matches regular expression"
 msgid "&Enable regular expressions in quick filter"
-msgstr "&Увімкнути формальні вирази у швидкому фільтруванні"
+msgstr "відповідає формальному виразу"
 
 #: src/configdialog.cpp:222
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr ""
-"Якщо буде позначено цей пункт, засоби швидкого фільтрування вважатимуть "
-"введений текст формальним виразом."
+"Якщо буде позначено цей пункт, при експорті в HTML будуть надруковані "
+"заголовки."
 
 #: src/configdialog.cpp:227
 #, kde-format
@@ -2709,9 +2714,10 @@ msgid "Highlighted text color:"
 msgstr "Колір підсвічування тексту:"
 
 #: src/configdialog.cpp:542
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Text color:"
 msgid "Link color:"
-msgstr "Колір посилання:"
+msgstr "Колір тексту:"
 
 #: src/configdialog.cpp:551
 #, kde-format
@@ -3251,7 +3257,7 @@ msgstr "Змінити кодування експортованого файл�
 #: src/fetch/adsfetcher.cpp:316
 #, kde-format
 msgid "SAO/NASA Astrophysics Data System"
-msgstr "SAO/NASA Astrophysics Data System (ADS)"
+msgstr ""
 
 #: src/fetch/adsfetcher.cpp:331 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:172 src/fetch/comicvinefetcher.cpp:232
@@ -3699,9 +3705,10 @@ msgid "BoardGameGeek Link"
 msgstr "Посилання BoardGameGeek"
 
 #: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:808
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Comic Vine Link"
 msgid "Colnect Link"
-msgstr "Посилання Colnect"
+msgstr "Посилання Comic Vine"
 
 #: src/fetch/colnectfetcher.cpp:546 src/fetch/colnectfetcher.cpp:814
 #, kde-format
@@ -3806,9 +3813,10 @@ msgid "Barcode"
 msgstr "Штрихкод"
 
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:514
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Card Number"
 msgid "Catalog Number"
-msgstr "Номер у каталозі"
+msgstr "Номер картки"
 
 #: src/fetch/discogsfetcher.cpp:347
 #, kde-format
@@ -3963,12 +3971,14 @@ msgid "Raw Query"
 msgstr "Необроблений запит"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Filmaster Link"
 msgid "FilmAffinity Link"
-msgstr "Посилання FilmAffinity"
+msgstr "Посилання Filmaster"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Spain"
 msgctxt "Country"
 msgid "Spain"
 msgstr "Іспанія"
@@ -3977,7 +3987,7 @@ msgstr "Іспанія"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr "США"
+msgstr ""
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -3987,9 +3997,10 @@ msgstr "Посилання Filmaster"
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
 #: src/fetch/gaminghistoryfetcher.cpp:374
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "GiantBomb Link"
 msgid "Gaming History Link"
-msgstr "Посилання Gaming History"
+msgstr "Посилання GiantBomb"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
@@ -4069,7 +4080,7 @@ msgstr "База даних ігор у інтернеті (IGDB.com)"
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:344
 #, kde-format
 msgid "Screenshot"
-msgstr "Знімок вікна"
+msgstr ""
 
 #: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
 #, kde-format
@@ -4151,9 +4162,10 @@ msgstr ""
 "тарифних планів Premium та Pro."
 
 #: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:505
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Allocine Link"
 msgid "iTunes Link"
-msgstr "Посилання iTunes"
+msgstr "Посилання Allocine"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4214,29 +4226,34 @@ msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
 #: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellico не вдалося прочитати опис пошуку у каталозі OPDS."
+msgstr "Tellico не вдалося прочитати метадані з файла PDF."
 
 #: src/fetch/opdsfetcher.cpp:421
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Catalog"
 msgid "OPDS Catalog"
-msgstr "Каталог OPDS"
+msgstr "Тека файлів"
 
 #: src/fetch/opdsfetcher.cpp:446
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Каталог: "
+msgstr "Тека файлів"
 
 #: src/fetch/opdsfetcher.cpp:451
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Enter the host name of the server."
 msgid "Enter the link to the OPDS server."
-msgstr "Введіть посилання на сервер OPDS."
+msgstr "Введіть адресу сервера."
 
 #: src/fetch/opdsfetcher.cpp:456
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Catalog"
 msgid "&Verify Catalog"
-msgstr "П&еревірити каталог"
+msgstr "Тека файлів"
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
@@ -4259,9 +4276,10 @@ msgid "SRU Server"
 msgstr "Сервер SRU"
 
 #: src/fetch/srufetcher.cpp:525
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Source name: "
 msgid "Scheme: "
-msgstr "Схема: "
+msgstr "Н&азва джерела: "
 
 #: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
 #, kde-format
@@ -4357,7 +4375,7 @@ msgstr "Посилання TheTVDB"
 #: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr "PIN-код передплатника: "
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -4875,28 +4893,32 @@ msgstr "Люди"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Template:"
 msgid "Template Name:"
-msgstr "Назва шаблона:"
+msgstr "Шаблон:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Comments"
 msgid "Comment:"
-msgstr "Коментар:"
+msgstr "Коментарі"
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Icon"
 msgid "Icon:"
-msgstr "Піктограма:"
+msgstr "Піктограма"
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Collection Report"
 msgid "Save As Collection Template"
-msgstr "Показати як шаблон збірки"
+msgstr "Звіт щодо збірки"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -5227,9 +5249,10 @@ msgid "VinoXML Data Files"
 msgstr "файли даних VinoXML"
 
 #: src/importdialog.cpp:424
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Book Title"
 msgid "eBook Files"
-msgstr "файли eBook"
+msgstr "Назва книги"
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5393,9 +5416,10 @@ msgid "Import <filename> as a RIS file"
 msgstr "Імпортувати <filename>як файл RIS"
 
 #: src/main.cpp:148
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import <filename> as a MODS file"
 msgid "Import <filename> as a PDF file"
-msgstr "Імпортувати <filename> як файл PDF"
+msgstr "Імпортувати <filename> як файл MODS"
 
 #: src/main.cpp:149
 #, kde-format
@@ -5563,24 +5587,28 @@ msgid "Save the document as a different file..."
 msgstr "Зберегти документ в інший файл…"
 
 #: src/mainwindow.cpp:334
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Manage Templates"
 msgid "Save As Template..."
-msgstr "Зберегти як шаблон…"
+msgstr "Керування шаблонами"
 
 #: src/mainwindow.cpp:336
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create a new collection"
 msgid "Save as a collection template"
-msgstr "Зберегти як шаблон збірки"
+msgstr "Створити збірку"
 
 #: src/mainwindow.cpp:339
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Print the contents of the document..."
 msgid "Print the contents of the collection..."
-msgstr "Надрукувати вміст збірки…"
+msgstr "Надрукувати вміст цього документа…"
 
 #: src/mainwindow.cpp:355
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Preview the contents of the document..."
 msgid "Preview the contents of the collection..."
-msgstr "Попередній перегляд друку вмісту збірки…"
+msgstr "Попередній перегляд друку цього документа…"
 
 #: src/mainwindow.cpp:359
 #, kde-format
@@ -5653,14 +5681,16 @@ msgid "Import data from Collectorz"
 msgstr "Імпорт даних з Collectorz"
 
 #: src/mainwindow.cpp:410
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import GCstar Data..."
 msgid "Import Data Crow Data..."
-msgstr "Імпорт даних Data Crow…"
+msgstr "Імпорт даних GCstar…"
 
 #: src/mainwindow.cpp:411
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Collectorz"
 msgid "Import data from Data Crow"
-msgstr "Імпорт даних з Data Crow"
+msgstr "Імпорт даних з Collectorz"
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5703,14 +5733,16 @@ msgid "Import an RIS reference file"
 msgstr "Імпорт файла посилань RIS"
 
 #: src/mainwindow.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import CSV Data..."
 msgid "Import MARC Data..."
-msgstr "Імпортувати дані MARC…"
+msgstr "Імпорт з CSV…"
 
 #: src/mainwindow.cpp:431
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import VinoXML data"
 msgid "Import MARC data"
-msgstr "Імпорт даних MARC"
+msgstr "Імпортувати дані VinoXML"
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -6290,9 +6322,10 @@ msgstr ""
 "Ви хочете зберегти його?"
 
 #: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create a new collection"
 msgid "Creating new collection..."
-msgstr "Створення збірки…"
+msgstr "Створити збірку"
 
 #: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
 #, kde-format
@@ -6488,7 +6521,7 @@ msgstr "&Шаблон звіту:"
 #: src/reportdialog.cpp:128
 #, kde-format
 msgid "One Entry Per Page"
-msgstr "Один запис на сторінку"
+msgstr ""
 
 #: src/reportdialog.cpp:140
 #, kde-format
@@ -7221,24 +7254,28 @@ msgid "LibraryThing file:"
 msgstr "Файл LibraryThing:"
 
 #: src/translators/marcimporter.cpp:132
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico was unable to read any data."
-msgstr "Tellico не вдалося прочитати дані."
+msgstr "Tellico не вдалося прочитати метадані з файла PDF."
 
 #: src/translators/marcimporter.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "CSV Options"
 msgid "MARC Options"
-msgstr "Параметри MARC"
+msgstr "Параметри CSV"
 
 #: src/translators/marcimporter.cpp:156
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Query character set: "
 msgid "Character set:"
-msgstr "Набір символів:"
+msgstr "Кодування символів запиту: "
 
 #: src/translators/marcimporter.cpp:161
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Format: "
 msgid "MARC Format:"
-msgstr "Формат MARC:"
+msgstr "Формат: "
 
 #: src/translators/onixexporter.cpp:67
 #, kde-format
@@ -7645,9 +7682,6 @@ msgstr "Спорожнити"
 #~ msgid "Click to download additional data sources."
 #~ msgstr "Натисніть, щоб отримати додаткові джерела даних."
 
-#~ msgid "Edit..."
-#~ msgstr "Редагувати…"
-
 #~ msgid ""
 #~ "%1 requires the network request to include identification.\n"
 #~ "Check the network configuration in KDE System Settings."
@@ -7655,8 +7689,14 @@ msgstr "Спорожнити"
 #~ "%1 потребує включення до запиту у мережі ідентифікації браузера.\n"
 #~ "Перевірте налаштування мережі у «Системних параметрах» KDE."
 
+#~ msgid "Edit..."
+#~ msgstr "Редагувати…"
+
 #~ msgid "Creating new document..."
 #~ msgstr "Створення нового документа…"
+
+#~ msgid "Denomination"
+#~ msgstr "Номінал"
 
 #~ msgid ""
 #~ "Data provided by <a href=\"https://www.booknetcanada.ca/biblioshare\">BNC "
@@ -7686,14 +7726,361 @@ msgstr "Спорожнити"
 #~ "Ці дані безкоштовно надано <a href=\"https://mobygames.com\">MobyGames</"
 #~ "a>."
 
-#~ msgid ""
-#~ "This information was freely provided by <a href=\"https://tvmaze.com"
-#~ "\">TVmaze</a>."
-#~ msgstr ""
-#~ "Ці дані безкоштовно надано <a href=\"https://tvmaze.com\">TVmaze</a>."
-
 #~ msgid "Processing document..."
 #~ msgstr "Почекайте…"
 
 #~ msgid "&New"
 #~ msgstr "&Створити"
+
+#~ msgid "Group Tabs"
+#~ msgstr "Групувати вкладки"
+
+#~ msgid "Column View"
+#~ msgstr "Перегляд стовпцями"
+
+#~ msgid ""
+#~ "<qt><p><b>The ISBNndb.com server reports an access key error.</b></p>You "
+#~ "may have reached the maximum number of searches for today with this key, "
+#~ "or you may have entered the access key incorrectly.</qt>"
+#~ msgstr ""
+#~ "<qt><p><b>Сервер ISBNndb.com надіслав повідомлення про помилку, пов’язану "
+#~ "з ключем доступу.</b></p>Можливо, за допомогою цього ключа вами вже було "
+#~ "виконано максимальну можливу кількість пошуків на сьогодні. Крім того, ви "
+#~ "могли помилитися під час введення ключа доступу.</qt>"
+
+#~ msgid "Enable/disable the group view"
+#~ msgstr "Показати/приховати групи"
+
+#~ msgid "Access to data from Discogs.com requires a personal token."
+#~ msgstr "Для доступу до даних з Discogs.com потрібен особистий ключ доступу."
+
+#~ msgid "API key: "
+#~ msgstr "Ключ до API: "
+
+#~ msgid "Freebase Link"
+#~ msgstr "Посилання Freebase"
+
+#~ msgid "Dark Horse Comics"
+#~ msgstr "Комікси Темного Коня"
+
+#~ msgid "Allocine.fr"
+#~ msgstr "Allocine.fr"
+
+#~ msgid "Spanish Ministry of Culture"
+#~ msgstr "Міністерство культури Іспанії"
+
+#~ msgid "The British Library"
+#~ msgstr "Британська Бібліотека"
+
+#~ msgid "Sudoc (France)"
+#~ msgstr "Sudoc (Франція)"
+
+#~ msgid "BIBSYS (Norway)"
+#~ msgstr "BIBSYS (Норвегія)"
+
+#~ msgid "Italian National Library"
+#~ msgstr "Італійська Національна Бібліотека"
+
+#~ msgid "Portuguese National Library"
+#~ msgstr "Португальська Національна Бібліотека"
+
+#~ msgid "National Library of Poland"
+#~ msgstr "Національна Бібліотека Польщі"
+
+#~ msgid "National Library of Canada"
+#~ msgstr "Національна Бібліотека Канади"
+
+#~ msgid "Israel Union List"
+#~ msgstr "Ізраїльський Об'єднаний Список"
+
+#~ msgid "National Library of Australia"
+#~ msgstr "Національна Бібліотека Австралії"
+
+#~ msgid "National Library of Lithuania"
+#~ msgstr "Національна Бібліотека Литви"
+
+#~ msgid "Copac (UK and Ireland)"
+#~ msgstr "Copac (Великобританія та Ірландія)"
+
+#~ msgid "Pontifical Biblical Institute"
+#~ msgstr "Папський біблійний інститут"
+
+#~ msgid "Bedetheque.com"
+#~ msgstr "Bedetheque.com"
+
+#~ msgid "*.xsl|XSL Files (*.xsl)"
+#~ msgstr "*.xsl|файли XSL (*.xsl)"
+
+#~ msgid "*.tar.gz *.tgz|Template Packages (*.tar.gz)"
+#~ msgstr "*.tar.gz *.tgz|Пакунки шаблонів (*.tar.gz)"
+
+#~ msgid "*.tc *.bc|Tellico Files (*.tc)"
+#~ msgstr "*.tc *.bc|файли Tellico (*.tc, *bc)"
+
+#~ msgid "*.xml|XML Files (*.xml)"
+#~ msgstr "*.xml|файли XML (*.xml)"
+
+#~ msgid "*.bib|Bibtex Files (*.bib)"
+#~ msgstr "*.bib|файли Bibtex (*.bib)"
+
+#~ msgid "*.csv|CSV Files (*.csv)"
+#~ msgstr "*.csv|файли CSV (*.csv)"
+
+#~ msgid "*.ris|RIS Files (*.ris)"
+#~ msgstr "*.ris|файли RIS (*.ris)"
+
+#~ msgid "*.gcf|GCfilms Data Files (*.gcf)"
+#~ msgstr "*.gcf|файли GCfilms(*.gcf)"
+
+#~ msgid "*.pdf|PDF Files (*.pdf)"
+#~ msgstr "*.pdf|файли PDF (*.pdf)"
+
+#~ msgid "*.reflib|Referencer Files (*.reflib)"
+#~ msgstr "*.reflib|файли Referencer (*.reflib)"
+
+#~ msgid "*.ciw|CIW Files (*.ciw)"
+#~ msgstr "*.ciw|файли CIW (*.ciw)"
+
+#~ msgid "*.html|HTML Files (*.html)"
+#~ msgstr "*.html|файли HTML (*.html)"
+
+#~ msgid "*.xml|Bibtexml Files (*.xml)"
+#~ msgstr "*.xml|файли Bibtexml (*.xml)"
+
+#~ msgid "*.zip|Zip Files (*.zip)"
+#~ msgstr "*.zip|файли ZIP (*.zip)"
+
+#~ msgid "Yahoo! Audio Search"
+#~ msgstr "Аудіопошук Yahoo!"
+
+#~ msgid "Overwrite"
+#~ msgstr "Переписати"
+
+#~ msgid "Select IMDb Result"
+#~ msgstr "Виберіть результат IMDb"
+
+#~ msgid ""
+#~ "<qt>Your search returned multiple matches. Please select one below.</qt>"
+#~ msgstr ""
+#~ "<qt>Ваш пошук дав декілька результатів. Будь ласка, виберіть один з них.</"
+#~ "qt>"
+
+#~ msgid "<qt>Select a search result.</qt>"
+#~ msgstr "<qt>Виберіть результат пошуку.</qt>"
+
+#~ msgctxt "@option next year"
+#~ msgid "Next Year"
+#~ msgstr "Наступний рік"
+
+#~ msgctxt "@option next month"
+#~ msgid "Next Month"
+#~ msgstr "Наступний місяць"
+
+#~ msgctxt "@option next week"
+#~ msgid "Next Week"
+#~ msgstr "Наступний тиждень"
+
+#~ msgctxt "@option tomorrow"
+#~ msgid "Tomorrow"
+#~ msgstr "Завтра"
+
+#~ msgctxt "@option today"
+#~ msgid "Today"
+#~ msgstr "Сьогодні"
+
+#~ msgctxt "@option yesterday"
+#~ msgid "Yesterday"
+#~ msgstr "Вчора"
+
+#~ msgctxt "@option last week"
+#~ msgid "Last Week"
+#~ msgstr "Минулого тижня"
+
+#~ msgctxt "@option last month"
+#~ msgid "Last Month"
+#~ msgstr "Попереднього місяця"
+
+#~ msgctxt "@option last year"
+#~ msgid "Last Year"
+#~ msgstr "Попереднього року"
+
+#~ msgctxt "@option do not specify a date"
+#~ msgid "No Date"
+#~ msgstr "Без дати"
+
+#~ msgctxt "@info"
+#~ msgid "The date you entered is invalid"
+#~ msgstr "Вами вказано некоректну дату"
+
+#~ msgctxt "@info"
+#~ msgid "Date cannot be earlier than %1"
+#~ msgstr "Дата не може бути ранішою за %1"
+
+#~ msgctxt "@info"
+#~ msgid "Date cannot be later than %1"
+#~ msgstr "Дата не може бути пізнішою за %1"
+
+#~ msgid "Tellico"
+#~ msgstr "Tellico"
+
+#~ msgid "Robby Stephenson"
+#~ msgstr "Robby Stephenson"
+
+#~ msgid "Mathias Monnerville"
+#~ msgstr "Mathias Monnerville"
+
+#~ msgid "Regis Boudin"
+#~ msgstr "Regis Boudin"
+
+#~ msgid "Petri Damstén"
+#~ msgstr "Petri Damstén"
+
+#~ msgid "Sebastian Held"
+#~ msgstr "Sebastian Held"
+
+#~ msgid "Virginie Quesnay"
+#~ msgstr "Virginie Quesnay"
+
+#~ msgid "Amarok"
+#~ msgstr "Amarok"
+
+#~ msgid "Greg Ward"
+#~ msgstr "Greg Ward"
+
+#~ msgid "Robert Gamble"
+#~ msgstr "Robert Gamble"
+
+#~ msgid "Valentin Lavrinenko"
+#~ msgstr "Valentin Lavrinenko"
+
+#~ msgid "Export to PilotDB..."
+#~ msgstr "Експорт в PilotDB…"
+
+#~ msgid "Export to a PilotDB database"
+#~ msgstr "Експортувати у базу даних PilotDB"
+
+#~ msgid "PilotDB"
+#~ msgstr "PilotDB"
+
+#~ msgid "*.pdb|Pilot Database Files (*.pdb)"
+#~ msgstr "*.pdb|файли бази даних Pilot (*.pdb)"
+
+#~ msgid "PilotDB Options"
+#~ msgstr "Параметри PilotDB"
+
+#~ msgid "Set PDA backup flag for database"
+#~ msgstr "Встановити параметр резервного копіювання даних КПК для бази даних"
+
+#~ msgid "Tellico: %1 is due to return \"%2\""
+#~ msgstr "Tellico: %1 повернув «%2»"
+
+#~ msgid "Active Calendar"
+#~ msgstr "Поточний календар"
+
+#~ msgid "Default Calendar"
+#~ msgstr "Типовий календар"
+
+#~ msgid "Received invalid XML markup: %1 at %2:%3"
+#~ msgstr "Отримано некоректний формат XML: %1 у %2:%3"
+
+#~ msgid "Unknown type of XML markup received"
+#~ msgstr "Отримано невідомий формат XML"
+
+#~ msgid "Portugal"
+#~ msgstr "Португалія"
+
+#~ msgid ""
+#~ "The Internet Movie Database provides data from several different "
+#~ "localized sites. Choose the one you wish to use for this data source."
+#~ msgstr ""
+#~ "База даних фільмів у інтернеті (IMDB) надає дані з декількох своїх "
+#~ "сайтів. Виберіть джерело, звідки ви хочете отримати дані."
+
+#~ msgid ""
+#~ "The Internet Movie Database uses several different servers. Choose the "
+#~ "one you wish to use."
+#~ msgstr ""
+#~ "IMDB використовує різні сервери. Будь ласка, виберіть той, котрий Ви "
+#~ "хочете використовувати."
+
+#~ msgid "Edit List..."
+#~ msgstr "Редагувати список..."
+
+#~ msgid "Album XSL Template"
+#~ msgstr "Шаблон альбому у XSL"
+
+#~ msgid "Compact XSL Template"
+#~ msgstr "Компактний шаблон у XSL"
+
+#~ msgid "Default XSL Template"
+#~ msgstr "Типовий шаблон XSL"
+
+#~ msgid "Fancy XSL Template"
+#~ msgstr "Шаблон XSL з форматуванням"
+
+#~ msgid "Video XSL Template"
+#~ msgstr "Шаблон відео у XSL"
+
+#~ msgid "Column View XSL Template"
+#~ msgstr "Шаблон перегляду стовпчиків XSL"
+
+#~ msgid "Group Statistics XSL Template"
+#~ msgstr "Шаблон XSL статистичних даних групи"
+
+#~ msgid "Group Summary XSL Template"
+#~ msgstr "Шаблон резюме груп XSL"
+
+#~ msgid "Group View XSL Template"
+#~ msgstr "Шаблон перегляду груп у XSL"
+
+#~ msgid "Image List XSL Template"
+#~ msgstr "Шаблон списку зображень у XSL"
+
+#~ msgid "Loan View XSL Template"
+#~ msgstr "Шаблон перегляду позиченого у XSL"
+
+#~ msgid "Tri-Column XSL Template"
+#~ msgstr "Шаблон з трьома стовпчиками у XSL"
+
+#~ msgid "Show Entry &View"
+#~ msgstr "Показувати &інформацію про записи"
+
+#~ msgid "Enable/disable the entry view"
+#~ msgstr "Показати/приховати інформацію про записи"
+
+#~ msgid "Both the user ID and developer key must be entered."
+#~ msgstr "Слід вказати ідентифікатор користувача і ключ розробника."
+
+#~ msgid "Developer Key"
+#~ msgstr "Ключ розробника"
+
+#~ msgid "Collection Statistics"
+#~ msgstr "Статистичні дані збірки"
+
+#~ msgid "&Show Statistics..."
+#~ msgstr "По&казати статистику…"
+
+#~ msgid "Show statistics for collection"
+#~ msgstr "Показати статистику щодо збірки"
+
+#~ msgid ""
+#~ "At the moment, Tellico only supports local calendar resources. The active "
+#~ "calendar is remotely located, so your loans will not be added."
+#~ msgstr ""
+#~ "У поточній версії Tellico передбачено підтримку лише локальних ресурсів "
+#~ "календаря. Поточний календар зберігається не на вашому комп’ютері, отже "
+#~ "записи ваших боргів не буде записано до нього."
+
+#~ msgid "Wine.com"
+#~ msgstr "Wine.com"
+
+#~ msgid "arXiv.org"
+#~ msgstr "arXiv.org"
+
+#~ msgid "MusicBrainz"
+#~ msgstr "MusicBrainz"
+
+#~ msgid "File format error: entries must come after fields are defined."
+#~ msgstr ""
+#~ "Помилка визначення формату файлів: після визначення полів слід вказувати "
+#~ "записи."

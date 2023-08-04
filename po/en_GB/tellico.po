@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2023-06-17 12:12+0100\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
+"PO-Revision-Date: 2023-02-27 22:42+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: British English\n"
+"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -95,10 +95,12 @@ msgid "Image List"
 msgstr "Image List"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Image List XSL Template"
+#| msgid "Image List"
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "Image Grid"
+msgstr "Image List"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -2350,9 +2352,10 @@ msgstr "Template highlighted text colour"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Template highlight color"
 msgid "Template link color"
-msgstr "Template link colour"
+msgstr "Template highlight colour"
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -2395,16 +2398,17 @@ msgstr ""
 "If ticked, the file that was last open will be re-opened at program start-up."
 
 #: src/configdialog.cpp:221
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "matches regular expression"
 msgid "&Enable regular expressions in quick filter"
-msgstr "&Enable regular expressions in quick filter"
+msgstr "matches regular expression"
 
 #: src/configdialog.cpp:222
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
-msgstr ""
-"If ticked, the quick filter will interpret text as a regular expression."
+msgstr "If ticked, the field names will be printed as table headers."
 
 #: src/configdialog.cpp:227
 #, kde-format
@@ -2705,9 +2709,10 @@ msgid "Highlighted text color:"
 msgstr "Highlighted text colour:"
 
 #: src/configdialog.cpp:542
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Text color:"
 msgid "Link color:"
-msgstr "Link colour:"
+msgstr "Text colour:"
 
 #: src/configdialog.cpp:551
 #, kde-format
@@ -3696,9 +3701,10 @@ msgid "BoardGameGeek Link"
 msgstr "BoardGameGeek Link"
 
 #: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:808
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Comic Vine Link"
 msgid "Colnect Link"
-msgstr "Colnect Link"
+msgstr "Comic Vine Link"
 
 #: src/fetch/colnectfetcher.cpp:546 src/fetch/colnectfetcher.cpp:814
 #, kde-format
@@ -3803,9 +3809,10 @@ msgid "Barcode"
 msgstr "Barcode"
 
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:514
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Card Number"
 msgid "Catalog Number"
-msgstr "Catalogue Number"
+msgstr "Card Number"
 
 #: src/fetch/discogsfetcher.cpp:347
 #, kde-format
@@ -3964,12 +3971,14 @@ msgid "Raw Query"
 msgstr "Raw Query"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Filmaster Link"
 msgid "FilmAffinity Link"
-msgstr "FilmAffinity Link"
+msgstr "Filmaster Link"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Spain"
 msgctxt "Country"
 msgid "Spain"
 msgstr "Spain"
@@ -3978,7 +3987,7 @@ msgstr "Spain"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr "USA"
+msgstr ""
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -3988,9 +3997,10 @@ msgstr "Filmaster Link"
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
 #: src/fetch/gaminghistoryfetcher.cpp:374
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "GiantBomb Link"
 msgid "Gaming History Link"
-msgstr "Gaming History Link"
+msgstr "GiantBomb Link"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
@@ -4070,7 +4080,7 @@ msgstr "Internet Game Database (IGDB.com)"
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:344
 #, kde-format
 msgid "Screenshot"
-msgstr "Screenshot"
+msgstr ""
 
 #: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
 #, kde-format
@@ -4152,9 +4162,10 @@ msgstr ""
 "Pro plans."
 
 #: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:505
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Allocine Link"
 msgid "iTunes Link"
-msgstr "iTunes Link"
+msgstr "Allocine Link"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4215,30 +4226,34 @@ msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
 #: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr ""
-"Tellico is unable to read the search description in the OPDS catalogue."
+msgstr "Tellico was unable to read any metadata from the PDF file."
 
 #: src/fetch/opdsfetcher.cpp:421
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Catalog"
 msgid "OPDS Catalog"
-msgstr "OPDS Catalogue"
+msgstr "File Catalogue"
 
 #: src/fetch/opdsfetcher.cpp:446
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Catalogue: "
+msgstr "File Catalogue"
 
 #: src/fetch/opdsfetcher.cpp:451
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Enter the host name of the server."
 msgid "Enter the link to the OPDS server."
-msgstr "Enter the link to the OPDS server."
+msgstr "Enter the host name of the server."
 
 #: src/fetch/opdsfetcher.cpp:456
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Catalog"
 msgid "&Verify Catalog"
-msgstr "&Verify Catalogue"
+msgstr "File Catalogue"
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
@@ -4261,9 +4276,10 @@ msgid "SRU Server"
 msgstr "SRU Server"
 
 #: src/fetch/srufetcher.cpp:525
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Source name: "
 msgid "Scheme: "
-msgstr "Scheme: "
+msgstr "&Source name: "
 
 #: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
 #, kde-format
@@ -4359,7 +4375,7 @@ msgstr "TheTVDB Link"
 #: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr "Subscriber PIN: "
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -4873,28 +4889,32 @@ msgstr "People"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Template:"
 msgid "Template Name:"
-msgstr "Template Name:"
+msgstr "Template:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Comments"
 msgid "Comment:"
-msgstr "Comment:"
+msgstr "Comments"
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Icon"
 msgid "Icon:"
-msgstr "Icon:"
+msgstr "Icon"
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Collection Report"
 msgid "Save As Collection Template"
-msgstr "Save As Collection Template"
+msgstr "Collection Report"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -5225,9 +5245,10 @@ msgid "VinoXML Data Files"
 msgstr "VinoXML Data Files"
 
 #: src/importdialog.cpp:424
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Book Title"
 msgid "eBook Files"
-msgstr "eBook Files"
+msgstr "Book Title"
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5393,9 +5414,10 @@ msgid "Import <filename> as a RIS file"
 msgstr "Import <filename> as a RIS file"
 
 #: src/main.cpp:148
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import <filename> as a MODS file"
 msgid "Import <filename> as a PDF file"
-msgstr "Import <filename> as a PDF file"
+msgstr "Import <filename> as a MODS file"
 
 #: src/main.cpp:149
 #, kde-format
@@ -5563,24 +5585,28 @@ msgid "Save the document as a different file..."
 msgstr "Save the document as a different file..."
 
 #: src/mainwindow.cpp:334
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Manage Templates"
 msgid "Save As Template..."
-msgstr "Save As Template..."
+msgstr "Manage Templates"
 
 #: src/mainwindow.cpp:336
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create a new collection"
 msgid "Save as a collection template"
-msgstr "Save as a collection template"
+msgstr "Create a new collection"
 
 #: src/mainwindow.cpp:339
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Print the contents of the document..."
 msgid "Print the contents of the collection..."
-msgstr "Print the contents of the collection..."
+msgstr "Print the contents of the document..."
 
 #: src/mainwindow.cpp:355
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Preview the contents of the document..."
 msgid "Preview the contents of the collection..."
-msgstr "Preview the contents of the collection..."
+msgstr "Preview the contents of the document..."
 
 #: src/mainwindow.cpp:359
 #, kde-format
@@ -5653,14 +5679,16 @@ msgid "Import data from Collectorz"
 msgstr "Import data from Collectorz"
 
 #: src/mainwindow.cpp:410
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import GCstar Data..."
 msgid "Import Data Crow Data..."
-msgstr "Import Data Crow Data..."
+msgstr "Import GCstar Data..."
 
 #: src/mainwindow.cpp:411
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Collectorz"
 msgid "Import data from Data Crow"
-msgstr "Import data from Data Crow"
+msgstr "Import data from Collectorz"
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5703,14 +5731,16 @@ msgid "Import an RIS reference file"
 msgstr "Import an RIS reference file"
 
 #: src/mainwindow.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import CSV Data..."
 msgid "Import MARC Data..."
-msgstr "Import MARC Data..."
+msgstr "Import CSV Data..."
 
 #: src/mainwindow.cpp:431
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import VinoXML data"
 msgid "Import MARC data"
-msgstr "Import MARC data"
+msgstr "Import VinoXML data"
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -6290,9 +6320,10 @@ msgstr ""
 "Do you want to save it?"
 
 #: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create a new collection"
 msgid "Creating new collection..."
-msgstr "Creating new collection..."
+msgstr "Create a new collection"
 
 #: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
 #, kde-format
@@ -6488,7 +6519,7 @@ msgstr "&Report template:"
 #: src/reportdialog.cpp:128
 #, kde-format
 msgid "One Entry Per Page"
-msgstr "One Entry Per Page"
+msgstr ""
 
 #: src/reportdialog.cpp:140
 #, kde-format
@@ -7219,24 +7250,28 @@ msgid "LibraryThing file:"
 msgstr "LibraryThing file:"
 
 #: src/translators/marcimporter.cpp:132
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico was unable to read any data."
-msgstr "Tellico was unable to read any data."
+msgstr "Tellico was unable to read any metadata from the PDF file."
 
 #: src/translators/marcimporter.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "CSV Options"
 msgid "MARC Options"
-msgstr "MARC Options"
+msgstr "CSV Options"
 
 #: src/translators/marcimporter.cpp:156
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Query character set: "
 msgid "Character set:"
-msgstr "Character set:"
+msgstr "Query character set: "
 
 #: src/translators/marcimporter.cpp:161
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Format: "
 msgid "MARC Format:"
-msgstr "MARC Format:"
+msgstr "Format: "
 
 #: src/translators/onixexporter.cpp:67
 #, kde-format
@@ -7640,19 +7675,22 @@ msgstr "Clear"
 #~ msgid "Click to download additional data sources."
 #~ msgstr "Click to download additional data sources."
 
-#~ msgid "Edit..."
-#~ msgstr "Edit..."
-
 #~ msgid ""
 #~ "%1 requires the network request to include identification.\n"
 #~ "Check the network configuration in KDE System Settings."
 #~ msgstr ""
 #~ "%1 requires the network request to include identification.\n"
 #~ "Check the network configuration in KDE System Settings."
+
+#~ msgid "Edit..."
+#~ msgstr "Edit..."
 
 #~ msgid "Creating new document..."
 #~ msgstr "Creating new document..."
 
+#~ msgid "Denomination"
+#~ msgstr "Denomination"
+
 #~ msgid ""
 #~ "Data provided by <a href=\"https://www.booknetcanada.ca/biblioshare\">BNC "
 #~ "BiblioShare</a>."
@@ -7680,22 +7718,12 @@ msgstr "Clear"
 #~ msgstr ""
 #~ "This information was freely provided by <a href=\"https://mobygames.com"
 #~ "\">MobyGames</a>."
-
-#~ msgid ""
-#~ "This information was freely provided by <a href=\"https://tvmaze.com"
-#~ "\">TVmaze</a>."
-#~ msgstr ""
-#~ "This information was freely provided by <a href=\"https://tvmaze.com"
-#~ "\">TVmaze</a>."
 
 #~ msgid "Processing document..."
 #~ msgstr "Processing document..."
 
 #~ msgid "&New"
 #~ msgstr "&New"
-
-#~ msgid "Denomination"
-#~ msgstr "Denomination"
 
 #~ msgid "Group Tabs"
 #~ msgstr "Group Tabs"

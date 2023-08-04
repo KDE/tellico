@@ -107,13 +107,9 @@
 >Importar datos de otro software</title>
 
 <para
->&appname; puede importar datos directamente de otros programas de gestión de colecciones, como <application
-><ulink url="https://gitlab.com/GCstar/GCstar"
+>&appname; can import data directly from a variety of other collection management programs, including <application
+><ulink url="http://www.gcstar.org"
 >GCstar</ulink
-></application
->, <application
-><ulink url="https://www.datacrow.net/"
->Data Crow</ulink
 ></application
 >, <application
 ><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
@@ -124,10 +120,6 @@
 >Delicious Library</ulink
 ></application
 >, <application
-><ulink url="https://www.collectorz.com"
->Collectorz</ulink
-></application
->, <application
 ><ulink url="http://www.antp.be/software/moviecatalog/"
 >Ant Movie Catalog</ulink
 ></application
@@ -135,7 +127,7 @@
 ><ulink url="https://en.wikipedia.org/wiki/Referencer"
 >Referencer</ulink
 ></application
-> y <application
+>, and <application
 ><ulink url="https://launchpad.net/griffith"
 >Griffith</ulink
 ></application
@@ -209,7 +201,7 @@
 >Importar datos de un &CD; de audio</title>
 
 <para
->&appname; puede usar el servicio <ulink url="http://gnudb.org"
+>&appname; puede usar el servicio <ulink url="http://freedb.org"
 >freedb.org</ulink
 > para buscar información sobre un &CD;, incluyendo la lista de pistas. Dependiendo de su distribución, los ajustes para acceder al servicio se podrán configurar en las &systemsettings; de &kde;. Se añadirán el &CD;, artista, título, género, año y lista de pistas. </para>
 
@@ -381,7 +373,7 @@
 <para
 >Arrastrar archivos de datos a la ventana principal de &appname; y soltarlos importará los archivos, de la misma forma que si se hubiera seleccionado la <link linkend="importing"
 >orden de importar</link
-> desde un menú. Arrastrar y soltar funciona para los siguientes tipos de archivos: Tellico, Bibtex, RIS y &PDF; y EPub. También se admite la importación de múltiples archivos a la vez.</para>
+> desde un menú. Arrastrar y soltar funciona para los siguientes tipos de archivos: Tellico, Bibtex, RIS y &PDF;. También se admite la importación de múltiples archivos a la vez.</para>
 
 <para
 >Así que, por ejemplo, si desea catalogar varios <link linkend="importing-pdf"
@@ -497,12 +489,12 @@
 
 <para
 ><application
-><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
+><ulink url="http://alexandria.rubyforge.net"
 >Alexandria</ulink
 ></application
-> es un gestor de colecciones de libros para el entorno de escritorio <ulink url="http://www.gnome.org"
+> is a book collection manager for the <ulink url="http://www.gnome.org"
 >GNOME</ulink
->. &appname; puede exportar un subconjunto limitado de campos de las colecciones de libros a la localización por defecto de los datos de Alexandria. </para>
+> desktop environment. &appname; is able to export a limited subset of book collection fields to the default Alexandria data location. </para>
 
 </sect2>
 

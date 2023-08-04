@@ -262,6 +262,13 @@
 <para
 >Tous les modèles par défaut respecte les choix de couleur et de police mais les autres modèles personnalisés pourrez ne pas le faire. Les modèles par défaut rendent aussi les champs d'&URL; actifs, en utilisant l'association de fichier par défaut de &kde;. À l'exportation en &HTML;, le modèle courant est employé pour exporter les fichiers d'entrée individuelle. </para>
 
+<para
+>En plus, lorsque plusieurs entrées sont sélectionnées, une vue en icônes est affichée, utilisant le premier champ <link linkend="image"
+>Image</link
+> dans la collection. Les entrées peuvent être sélectionnées comme dans la <interface
+>Vue par colonnes</interface
+>. Un clic-droit dans la vue en icônes affichera un menu pour modifier le critère de tri des entrées. </para>
+
 </sect2>
 
 <sect2 id="status-bar">
@@ -1016,6 +1023,7 @@
 <para
 >Vous pouvez convertir une collection existante de livres en bibliographie qui pourra ensuite être exportée vers le format BibTeX ou BibTeXML. </para>
 </tip>
+
 
 <tip>
 <para

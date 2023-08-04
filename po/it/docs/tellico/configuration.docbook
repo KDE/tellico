@@ -58,9 +58,7 @@
 >Opzioni generali</guilabel
 > regolano il comportamento generale dell'applicazione. Si può impostare se includere le immagini nel file di dati o salvarle separatamente nella cartella di &appname;. Inoltre si può impostare se caricare l'ultimo file aperto all'avvio di &appname;. La finestra di dialogo <guilabel
 >suggerimento del giorno</guilabel
-> contiene suggerimenti utili sull'utilizzo di &appname; e viene mostrata all'avvio del programma. Si può leggere alcuni dei suggerimenti e poi disabilitare la finestra se si vuole. Il <interface
->Filtro rapido</interface
-> nella barra degli strumenti è utile per filtrare velocemente nella collezione, inoltre può utilizzare le espressioni regolari. </para>
+> contiene suggerimenti utili sull'utilizzo di &appname; e viene mostrata all'avvio del programma. Si può leggere alcuni dei suggerimenti e poi disabilitare la finestra se si vuole. </para>
 
 <para
 >Le <guilabel
@@ -241,12 +239,6 @@
 >OpenLibrary.org</link
 >,</simpara
 ></listitem>
-<listitem
-><simpara
-><link linkend="opds"
->Cataloghi OPDS</link
->,</simpara
-></listitem>
 <!-- movies -->
 <listitem
 ><simpara
@@ -270,12 +262,6 @@
 ><simpara
 ><link linkend="omdb"
 >Open Movie Database</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="filmaffinity"
->FilmAffinity</link
 >,</simpara
 ></listitem>
 <!-- comics -->
@@ -537,17 +523,6 @@
 > è un database di libri su Internet che punta ad avere una pagina per ogni libro. </para>
 </sect3>
 
-<sect3 id="opds">
-<title
->Cataloghi OPDS</title>
-<para
->I <ulink url="https://en.wikipedia.org/wiki/Open_Publication_Distribution_System"
->cataloghi OPDS</ulink
-> forniscono un mezzo per cercare (e per distribuire) i libri digitali. &tellico; può usare molti cataloghi OPDS, ad esempio il <ulink url="https://wiki.mobileread.com/wiki/OPDS"
->Progetto Gutenberg</ulink
->, come fonte di dati: inserisci il collegamento al catalogo, poi verifica l'accesso e il formato per avere conferma che Tellico possa leggere il collegamento. </para>
-</sect3>
-
 </sect2>
 <!-- end of books -->
 
@@ -625,16 +600,7 @@
 <para
 ><ulink url="http://allocine.fr"
 >AlloCiné</ulink
-> è un servizio online di informazioni sui film, con sede in Francia. </para>
-</sect3>
-
-<sect3 id="filmaffinity">
-<title
->FilmAffinity</title>
-<para
-><ulink url="https://filmaffinity.com"
->FilmAffinity</ulink
-> è un sito di film indipendente. </para>
+> è un servizio online di informazioni sui film, con sede in Francia. L'identificazione del browser deve essere abilitata nelle &systemsettings; </para>
 </sect3>
 
 </sect2>
@@ -650,7 +616,7 @@
 <para
 ><ulink url="http://discogs.com"
 >Discogs.com</ulink
-> è un database musicale costruito dagli utenti e contenente informazioni sugli artisti, le etichette e le loro registrazioni. È richiesta la registrazione per un account gratuito. </para>
+> è un database musicale costruito dagli utenti e contenente informazioni sugli artisti, le etichette e le loro registrazioni. È richiesta la registrazione per un account gratuito. L'identificazione del browser deve essere abilitata nelle &systemsettings; </para>
 </sect3>
 
 <sect3 id="musicbrainz">
@@ -659,7 +625,7 @@
 <para
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
-> è un metadatabase musicale comunitario che tenta di creare un sito di informazione completa sulla musica. </para>
+> è un metadatabase musicale comunitario che tenta di creare un sito di informazione completa sulla musica. L'identificazione del browser deve essere abilitata nelle &systemsettings; </para>
 </sect3>
 
 </sect2>
@@ -751,7 +717,7 @@
 <para
 ><ulink url="https://colnect.com"
 >Colnect</ulink
-> è una comunità online di oggetti da collezione che fornisce la gestione personale delle collezioni. &tellico; può cercare in Colnect le informazioni su monete e francobolli, oltre a fumetti, carte sportive e videogiochi. </para>
+> è una comunità online di oggetti da collezione che fornisce la gestione personale delle collezioni. &tellico; può cercare le informazioni su monete e francobolli in Colnect. </para>
 </sect3>
 
 <sect3 id="numista">

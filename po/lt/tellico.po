@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
 "PO-Revision-Date: 2015-12-29 21:13+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -3120,7 +3120,7 @@ msgstr "Patikrinkite Jūsų įdiegimą."
 #: src/exportdialog.cpp:65
 #, kde-format
 msgid "Export Options"
-msgstr "Eksportavimo nuostatos"
+msgstr "Eksportavimo nustatymai"
 
 #: src/exportdialog.cpp:72
 #, kde-format
@@ -4151,9 +4151,9 @@ msgid "OPDS Catalog"
 msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:446
-#, fuzzy, kde-format
+#, kde-format
 msgid "Catalog: "
-msgstr "Skaičius"
+msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:451
 #, kde-format
@@ -7473,12 +7473,12 @@ msgstr "Išvalyti"
 #~ msgid "Creating new document..."
 #~ msgstr "Sukuriamas naujas dokumentas..."
 
+#~ msgid "Denomination"
+#~ msgstr "Aprašymas"
+
 #, fuzzy
 #~ msgid "&New"
 #~ msgstr "Naujas"
-
-#~ msgid "Denomination"
-#~ msgstr "Aprašymas"
 
 #, fuzzy
 #~| msgid "Groups"

@@ -109,12 +109,8 @@
 
 <para
 >&appname; kan gegevens direct importeren uit een variëteit van andere programma's voor beheer van verzamelingen, inclusief <application
-><ulink url="https://gitlab.com/GCstar/GCstar"
+><ulink url="http://www.gcstar.org"
 >GCstar</ulink
-></application
->, <application
-><ulink url="https://www.datacrow.net/"
->Data Crow</ulink
 ></application
 >, <application
 ><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
@@ -210,7 +206,7 @@
 >Gegevens van audio-cd's importeren</title>
 
 <para
->&appname; kan de service <ulink url="http://gnudb.org"
+>&appname; kan de service <ulink url="http://freedb.org"
 >freedb.org</ulink
 > gebruiken om informatie over een &CD; te gebruiken, inclusief de tracklijst. Afhankelijk van uw distributie, kunnen instellingen voor toegang tot de service ingesteld worden in het &kde; &systemsettings;. De artiest, titel, genre, jaar en tracklijst worden allen toegevoegd. </para>
 
@@ -342,7 +338,7 @@
 
 <sect3 id="importing-librarything">
 <title
->LibraryThing-verzameling wordt geïmporteerd</title>
+>LibraryThing-verzameling importeren</title>
 <para
 ><ulink url="https://www.librarything.com"
 >LibraryThing</ulink
@@ -382,7 +378,7 @@
 <para
 >Slepen van gegevensbestanden naar het hoofdvenster van &appname; en ze loslaten zal de bestanden importeren, evenals indien het <link linkend="importing"
 >importcommando</link
-> was gegeven vanuit de menu's. Slepen en loslaten werkt voor de volgende bestandsformaten: Tellico, Bibtex, RIS, &PDF; en EPub. Meerdere bestanden tegelijk importeren wordt ook ondersteund.</para>
+> was gegeven vanuit de menu's. Slepen en loslaten werkt voor de volgende bestandsformaten: Tellico, Bibtex, RIS en &PDF;. Meerdere bestanden tegelijk importeren wordt ook ondersteund.</para>
 
 <para
 >Dus als u bijvoorbeeld verschillende <link linkend="importing-pdf"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
 "PO-Revision-Date: 2021-07-19 23:57+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -485,9 +485,6 @@ msgid ""
 "value template. Named fields, such as \"%{year} %{title}\", get substituted "
 "in the value."
 msgstr ""
-"Eratorritako balioak beste eremuetako balioetatik osatzen dira balio-"
-"ereduaren arabera. Izendun eremuak, «%{year} %{title}» esaterako, "
-"balioarekin ordezkatzen dira."
 
 #: src/collectionfieldsdialog.cpp:270
 #, kde-format
@@ -4171,9 +4168,9 @@ msgstr "Numista (%1)"
 
 #: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
 #, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#| msgid "Tellico is unable to load the file - %1."
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellico-k ezin du irudia zamatu - %1."
+msgstr "Tellicok ezin du fitxategia zamatu  %1."
 
 #: src/fetch/opdsfetcher.cpp:421
 #, fuzzy, kde-format
@@ -4183,9 +4180,9 @@ msgstr "Fitxategi katalogoa"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
-#| msgid "Card Number"
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Karta zenbakia"
+msgstr "Fitxategi katalogoa"
 
 #: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
@@ -4908,26 +4905,32 @@ msgid "is greater than"
 msgstr "baino handiagoa da"
 
 #: src/gui/filterrulewidget.cpp:250
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Image size: "
 msgid "image size equals"
-msgstr "irudiaren neurria honen berdina da"
+msgstr "&Irudiaren neurria:"
 
 #: src/gui/filterrulewidget.cpp:251
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "does not equal"
 msgid "image size does not equal"
-msgstr "irudiaren neurria ez da honen berdina"
+msgstr "ez da berdina"
 
 #: src/gui/filterrulewidget.cpp:252
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "is less than a number"
+#| msgid "is less than"
 msgctxt "image size is less than a number"
 msgid "image size is less than"
-msgstr "irudiaren neurria hau baino txikiagoa da"
+msgstr "baino txikiagoa da"
 
 #: src/gui/filterrulewidget.cpp:253
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "is greater than a number"
+#| msgid "is greater than"
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
-msgstr "irudiaren neurria hau baino handiagoa da"
+msgstr "baino handiagoa da"
 
 #: src/gui/filterrulewidget.cpp:260
 #, kde-format
@@ -5285,13 +5288,12 @@ msgstr ""
 #: src/main.cpp:121
 #, kde-format
 msgid "Tellico - collection management software, free and simple"
-msgstr "Tellico - bildumak kudeatzeko softwarea, askea eta erraza"
+msgstr ""
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2020, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2023, Robby Stephenson"
-msgstr "(c) 2001-2020, Robby Stephenson"
+msgstr ""
 
 #: src/main.cpp:127
 #, kde-format
@@ -5600,14 +5602,16 @@ msgid "Import data from Delicious Library"
 msgstr "Inportatu datuak Delicious liburutegitik"
 
 #: src/mainwindow.cpp:406
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import Tellico Data..."
 msgid "Import Collectorz Data..."
-msgstr "Inportatu Collectorz datuak..."
+msgstr "Inportatu Tellico datuak..."
 
 #: src/mainwindow.cpp:407
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Referencer"
 msgid "Import data from Collectorz"
-msgstr "Inportatu datuak Collectorz-tik"
+msgstr "Inportatu datuak Referencer-retik"
 
 #: src/mainwindow.cpp:410
 #, fuzzy, kde-format
@@ -5617,9 +5621,9 @@ msgstr "Inportatu GCstar datuak..."
 
 #: src/mainwindow.cpp:411
 #, fuzzy, kde-format
-#| msgid "Import data from Collectorz"
+#| msgid "Import data from Referencer"
 msgid "Import data from Data Crow"
-msgstr "Inportatu datuak Collectorz-tik"
+msgstr "Inportatu datuak Referencer-retik"
 
 #: src/mainwindow.cpp:414
 #, kde-format

@@ -112,10 +112,6 @@
 >GCstar</ulink
 ></application
 >, <application
-><ulink url="https://www.datacrow.net/"
->Data Crow</ulink
-></application
->, <application
 ><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
 >Alexandria</ulink
 ></application
@@ -209,7 +205,7 @@
 >Importar dades d'un &CD; d'àudio</title>
 
 <para
->El &appname; és capaç d'utilitzar el servei <ulink url="http://gnudb.org"
+>El &appname; és capaç d'utilitzar el servei <ulink url="http://freedb.org"
 >freedb.org</ulink
 > per a cercar informació sobre un &CD;, incloent-hi la llista de les pistes. Depenent de la vostra distribució, l'arranjament per a accedir al servei es pot establir en &systemsettings; del &kde;. S'afegiran l'artista, el títol, el gènere, l'any i llista de les pistes del &CD;. </para>
 
@@ -375,7 +371,7 @@
 <para
 >Arrossegar fitxers de dades a la finestra principal del &appname; i deixar-los anar importarà aquests fitxers, com si se seleccionés l'<link linkend="importing"
 >ordre importa</link
-> des dels menús. Arrossegar i deixar anar funciona per als següents formats de fitxer: Tellico, Bibtex, RIS, &PDF; i EPub. També està implementada la importació des de múltiples fitxers alhora.</para>
+> des dels menús. Arrossegar i deixar anar funciona per als següents formats de fitxer: Tellico, Bibtex, RIS i &PDF;. També està implementada la importació des de múltiples fitxers alhora.</para>
 
 <para
 >De manera que si voleu catalogar diversos <link linkend="importing-pdf"
@@ -494,7 +490,7 @@
 ><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
 >Alexandria</ulink
 ></application
-> és un gestor de col·lecció de llibres per a l'entorn d'escriptori <ulink url="https://www.gnome.org"
+> és un gestor de col·lecció de llibres per a l'entorn d'escriptori <ulink url="http://www.gnome.org"
 >GNOME</ulink
 >. El &appname; és capaç d'exportar un subconjunt limitat de camps de col·lecció de llibres a la ubicació predeterminada de les dades d'Alexandria. </para>
 

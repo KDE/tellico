@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -4269,9 +4269,9 @@ msgstr "Файлдар каталогы"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
-#| msgid "Card Number"
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Кәртішке нөмірі"
+msgstr "Файлдар каталогы"
 
 #: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
@@ -7762,14 +7762,14 @@ msgstr "Тазалау"
 #~ msgid "Creating new document..."
 #~ msgstr "Жаңа құжатты құру..."
 
+#~ msgid "Denomination"
+#~ msgstr "Номиналы"
+
 #~ msgid "Processing document..."
 #~ msgstr "Құжатты өңдеу..."
 
 #~ msgid "&New"
 #~ msgstr "&Жаңа"
-
-#~ msgid "Denomination"
-#~ msgstr "Номиналы"
 
 #, fuzzy
 #~| msgid "Groups"

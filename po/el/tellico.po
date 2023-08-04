@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2021-10-23 08:51+0300\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
+"PO-Revision-Date: 2021-07-10 09:35+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
 "Language: el\n"
@@ -4288,9 +4288,9 @@ msgstr "Αρχείο καταλόγου"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
-#| msgid "Card Number"
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Αριθμός κάρτας"
+msgstr "Αρχείο καταλόγου"
 
 #: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
@@ -4428,7 +4428,7 @@ msgstr "Δεσμός TheTVDB"
 #: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr "PIN συνδρομητή: "
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -5493,9 +5493,10 @@ msgid "Import <filename> as a RIS file"
 msgstr "Εισαγωγή <filename> ως αρχείο RIS"
 
 #: src/main.cpp:148
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import <filename> as a MODS file"
 msgid "Import <filename> as a PDF file"
-msgstr "Εισαγωγή του <filename> ως αρχείο PDF"
+msgstr "Εισαγωγή <filename> ως αρχείο MODS"
 
 #: src/main.cpp:149
 #, kde-format
@@ -7791,15 +7792,15 @@ msgstr "Καθαρισμός"
 #~ msgid "Click to download additional data sources."
 #~ msgstr "Κάντε κλικ για λήψη πρόσθετων πηγών δεδομένων."
 
-#~ msgid "Edit..."
-#~ msgstr "Επεξεργασία..."
-
 #~ msgid ""
 #~ "%1 requires the network request to include identification.\n"
 #~ "Check the network configuration in KDE System Settings."
 #~ msgstr ""
 #~ "Το %1 απαιτεί από τη δικτυακή αίτηση να περιέχει ταυτότητα.\n"
 #~ "Ελέγξτε τη διαμόρφωση δικτύου στις ρυθμίσεις συστήματος του KDE."
+
+#~ msgid "Edit..."
+#~ msgstr "Επεξεργασία..."
 
 #~ msgid "Creating new document..."
 #~ msgstr "Δημιουργία νέου εγγράφου..."

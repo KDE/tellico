@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -4220,9 +4220,9 @@ msgstr "檔案類別"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
-#| msgid "Card Number"
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "卡號"
+msgstr "檔案類別"
 
 #: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
@@ -7652,11 +7652,11 @@ msgstr "清除"
 #~ msgid "Creating new document..."
 #~ msgstr "正在建立新文件..."
 
+#~ msgid "Denomination"
+#~ msgstr "面額"
+
 #~ msgid "Processing document..."
 #~ msgstr "正在處理文件..."
 
 #~ msgid "&New"
 #~ msgstr "新增(&N)"
-
-#~ msgid "Denomination"
-#~ msgstr "面額"

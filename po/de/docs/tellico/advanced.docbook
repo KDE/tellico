@@ -21,7 +21,6 @@ Optionen:
   --bibtex                  &lt;Dateiname&gt; als Bibtex-Datei importieren
   --mods                    &lt;filename&gt; als MODS-Datei importieren
   --ris                     &lt;filename&gt; als RIS-Datei importieren
-  --pdf                     &lt;filename&gt; als PDF-Datei importieren
 
 Argumente:
   filename                  Zu öffnende Datei

@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2022-03-21 17:12+0300\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
+"PO-Revision-Date: 2022-03-21 17:07+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -2417,17 +2417,19 @@ msgstr ""
 "открыт последним."
 
 #: src/configdialog.cpp:221
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "matches regular expression"
 msgid "&Enable regular expressions in quick filter"
-msgstr "&Включить регулярные выражения в быстром фильтре"
+msgstr "соответствует регулярному выражению"
 
 #: src/configdialog.cpp:222
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr ""
-"Если отмечено, то быстрый фильтр будет интерпретировать текст как регулярное "
-"выражение."
+"Если отмечено, то при экспорте в HTML названия полей будут напечатаны как "
+"заголовки таблицы."
 
 #: src/configdialog.cpp:227
 #, kde-format
@@ -4018,9 +4020,10 @@ msgstr "Ссылка Filmaster"
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
 #: src/fetch/gaminghistoryfetcher.cpp:374
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "GiantBomb Link"
 msgid "Gaming History Link"
-msgstr "Ссылка Gaming History"
+msgstr "Ссылка GiantBomb"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
@@ -4259,9 +4262,9 @@ msgstr "Каталог файлов"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
-#| msgid "Card Number"
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Номер карточки"
+msgstr "Каталог файлов"
 
 #: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
@@ -4395,7 +4398,7 @@ msgstr "Ссылка TheTVDB"
 #: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr "PIN подписчика: "
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -5440,9 +5443,10 @@ msgid "Import <filename> as a RIS file"
 msgstr "Импортировать <filename> как файл RIS"
 
 #: src/main.cpp:148
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import <filename> as a MODS file"
 msgid "Import <filename> as a PDF file"
-msgstr "Импортировать <filename> как файл PDF"
+msgstr "Импортировать <filename> как файл MODS"
 
 #: src/main.cpp:149
 #, kde-format
@@ -5704,14 +5708,16 @@ msgid "Import data from Collectorz"
 msgstr "Импорт данных из файла Collectorz"
 
 #: src/mainwindow.cpp:410
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import GCstar Data..."
 msgid "Import Data Crow Data..."
-msgstr "Импорт данных Data Crow..."
+msgstr "Импорт данных GCstar..."
 
 #: src/mainwindow.cpp:411
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Collectorz"
 msgid "Import data from Data Crow"
-msgstr "Импорт данных из файла Data Crow"
+msgstr "Импорт данных из файла Collectorz"
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5754,14 +5760,16 @@ msgid "Import an RIS reference file"
 msgstr "Импорт из файла ссылок RIS"
 
 #: src/mainwindow.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import CSV Data..."
 msgid "Import MARC Data..."
-msgstr "Импорт данных MARC..."
+msgstr "Импорт из CSV..."
 
 #: src/mainwindow.cpp:431
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import VinoXML data"
 msgid "Import MARC data"
-msgstr "Импорт данных MARC"
+msgstr "Импорт данных VinoXML"
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -7276,19 +7284,22 @@ msgid "LibraryThing file:"
 msgstr "Файл LibraryThing:"
 
 #: src/translators/marcimporter.cpp:132
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico was unable to read any data."
-msgstr "Tellico не удалось прочитать какие-либо данные."
+msgstr "Tellico не удалось прочитать метаданные из этого файла PDF."
 
 #: src/translators/marcimporter.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "CSV Options"
 msgid "MARC Options"
-msgstr "Параметры MARC"
+msgstr "Параметры CSV"
 
 #: src/translators/marcimporter.cpp:156
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Query character set: "
 msgid "Character set:"
-msgstr "Кодировка:"
+msgstr "Кодировка запросов: "
 
 #: src/translators/marcimporter.cpp:161
 #, fuzzy, kde-format
@@ -7708,9 +7719,6 @@ msgstr "Чистый"
 #~ msgid "Click to download additional data sources."
 #~ msgstr "Нажмите для загрузки дополнительных источников данных из Интернета."
 
-#~ msgid "Edit..."
-#~ msgstr "Изменить..."
-
 #~ msgid ""
 #~ "%1 requires the network request to include identification.\n"
 #~ "Check the network configuration in KDE System Settings."
@@ -7719,18 +7727,49 @@ msgstr "Чистый"
 #~ "идентификатор.\n"
 #~ "Проверьте конфигурацию сети в разделе параметров системы KDE."
 
+#~ msgid "Edit..."
+#~ msgstr "Изменить..."
+
 #~ msgid "Creating new document..."
 #~ msgstr "Создание нового документа..."
+
+# Denomination - это номинал для монет, название для марок
+#~ msgid "Denomination"
+#~ msgstr "Наименование"
+
+#~ msgid ""
+#~ "Data provided by <a href=\"https://www.booknetcanada.ca/biblioshare\">BNC "
+#~ "BiblioShare</a>."
+#~ msgstr ""
+#~ "Данные предоставлены <a href=\"https://www.booknetcanada.ca/biblioshare"
+#~ "\">BNC BiblioShare</a>."
+
+#~ msgid ""
+#~ "This information was freely provided by <a href=\"https://boardgamegeek."
+#~ "com\">BoardGameGeek</a>."
+#~ msgstr ""
+#~ "Эта информация бесплатно предоставлена <a href=\"https://boardgamegeek.com"
+#~ "\">BoardGameGeek</a>."
+
+#~ msgid ""
+#~ "This information was freely provided by <a href=\"https://comicvine."
+#~ "gamespot.com/\">Comic Vine</a>."
+#~ msgstr ""
+#~ "Эта информация бесплатно предоставлена <a href=\"https://comicvine."
+#~ "gamespot.com/\">Comic Vine</a>."
+
+#~ msgid ""
+#~ "This information was freely provided by <a href=\"https://mobygames.com"
+#~ "\">MobyGames</a>."
+#~ msgstr ""
+#~ "Эта информация бесплатно предоставлена <a href=\"https://mobygames.com"
+#~ "\">MobyGames</a>."
 
 #~ msgid "Processing document..."
 #~ msgstr "Обработка документа..."
 
 #~ msgid "&New"
 #~ msgstr "&Новая"
-
-# Denomination - это номинал для монет, название для марок
-#~ msgid "Denomination"
-#~ msgstr "Наименование"
 
 #, fuzzy
 #~ msgid "Group Tabs"
@@ -8430,34 +8469,6 @@ msgstr "Чистый"
 #~ "Если отмечено, то изображения будут сохраняться в файле данных Tellico, "
 #~ "иначе они будут сохраняться отдельно. Сохранение большого числа "
 #~ "изображений в файле может замедлить работу Tellico."
-
-#~ msgid ""
-#~ "Data provided by <a href=\"https://www.booknetcanada.ca/biblioshare\">BNC "
-#~ "BiblioShare</a>."
-#~ msgstr ""
-#~ "Данные предоставлены <a href=\"https://www.booknetcanada.ca/biblioshare"
-#~ "\">BNC BiblioShare</a>."
-
-#~ msgid ""
-#~ "This information was freely provided by <a href=\"https://boardgamegeek."
-#~ "com\">BoardGameGeek</a>."
-#~ msgstr ""
-#~ "Эта информация бесплатно предоставлена <a href=\"https://boardgamegeek.com"
-#~ "\">BoardGameGeek</a>."
-
-#~ msgid ""
-#~ "This information was freely provided by <a href=\"https://comicvine."
-#~ "gamespot.com/\">Comic Vine</a>."
-#~ msgstr ""
-#~ "Эта информация бесплатно предоставлена <a href=\"https://comicvine."
-#~ "gamespot.com/\">Comic Vine</a>."
-
-#~ msgid ""
-#~ "This information was freely provided by <a href=\"https://mobygames.com"
-#~ "\">MobyGames</a>."
-#~ msgstr ""
-#~ "Эта информация бесплатно предоставлена <a href=\"https://mobygames.com"
-#~ "\">MobyGames</a>."
 
 #~| msgid "(c) 2001-2013, Robby Stephenson"
 #~ msgid "(c) 2001-2019, Robby Stephenson"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-04 02:26+0000\n"
 "PO-Revision-Date: 2011-12-11 07:08+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -4298,9 +4298,9 @@ msgstr "Dateikataloog"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, fuzzy, kde-format
-#| msgid "Card Number"
+#| msgid "File Catalog"
 msgid "Catalog: "
-msgstr "Koort-Nummer"
+msgstr "Dateikataloog"
 
 #: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
@@ -7819,14 +7819,14 @@ msgstr "Leddig maken"
 #~ msgid "Creating new document..."
 #~ msgstr "Nieg Dokment warrt opstellt..."
 
+#~ msgid "Denomination"
+#~ msgstr "Nennweert"
+
 #~ msgid "Processing document..."
 #~ msgstr "Dokment warrt verarbeidt..."
 
 #~ msgid "&New"
 #~ msgstr "&Nieg"
-
-#~ msgid "Denomination"
-#~ msgstr "Nennweert"
 
 #, fuzzy
 #~| msgid "Groups"
