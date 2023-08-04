@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2023-08-01 21:55+0200\n"
+"PO-Revision-Date: 2023-08-03 19:40+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -4235,7 +4235,7 @@ msgstr "Katalog: "
 #: src/fetch/opdsfetcher.cpp:451
 #, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr ""
+msgstr "Skriv inn adresse til OPDS-tenaren."
 
 #: src/fetch/opdsfetcher.cpp:456
 #, kde-format
@@ -5662,12 +5662,12 @@ msgstr "Importer samling frå Collectorz."
 #: src/mainwindow.cpp:410
 #, kde-format
 msgid "Import Data Crow Data..."
-msgstr ""
+msgstr "Data Crow …"
 
 #: src/mainwindow.cpp:411
 #, kde-format
 msgid "Import data from Data Crow"
-msgstr ""
+msgstr "Importer samling frå Data Crow"
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5722,7 +5722,7 @@ msgstr "Importer MARC-data"
 #: src/mainwindow.cpp:438
 #, kde-format
 msgid "Import Goodreads Collection..."
-msgstr "Goodreads-samling …"
+msgstr "Goodreads …"
 
 #: src/mainwindow.cpp:439
 #, kde-format
@@ -5732,12 +5732,12 @@ msgstr "Importer samling frå Goodreads.com."
 #: src/mainwindow.cpp:441
 #, kde-format
 msgid "Import LibraryThing Collection..."
-msgstr "LibraryThing-samling …"
+msgstr "LibraryThing …"
 
 #: src/mainwindow.cpp:442
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
-msgstr "Importer samling frå LibraryThing.com"
+msgstr "Importer samling frå LibraryThing.com."
 
 #: src/mainwindow.cpp:444
 #, kde-format
