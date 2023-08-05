@@ -58,7 +58,9 @@
 >Opcions generals</guilabel
 > controlen el comportament general. Les imatges es poden incloure als fitxers de dades, o es desen per separat a la carpeta de l'aplicació &appname;. A més, quan s'inicia el &appname;, pot tornar a obrir automàticament el fitxer de dades que estava obert. El diàleg <guilabel
 >Consell del dia</guilabel
-> conté consells útils sobre l'ús del &appname; i apareix en iniciar el programa. Potser voldreu llegir alguns dels consells i després desactivar el diàleg. </para>
+> conté consells útils sobre l'ús del &appname; i apareix en iniciar el programa. Potser voldreu llegir alguns dels consells i després desactivar el diàleg. El <interface
+>Filtre ràpid</interface
+> de la barra d'eines és útil per a filtrar fàcilment la col·lecció i poder utilitzar expressions regulars. </para>
 
 <para
 >Les <guilabel
@@ -239,6 +241,12 @@
 >OpenLibrary.org</link
 >,</simpara
 ></listitem>
+<listitem
+><simpara
+><link linkend="discogs"
+>Catàlegs OPDS</link
+>,</simpara
+></listitem>
 <!-- movies -->
 <listitem
 ><simpara
@@ -262,6 +270,12 @@
 ><simpara
 >la <link linkend="omdb"
 >base de dades oberta de pel·lícules</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="filmaffinity"
+>FilmAffinity</link
 >,</simpara
 ></listitem>
 <!-- comics -->
@@ -403,11 +417,6 @@
 >Suprimeix</guibutton
 >. L'ordre de les fonts, el qual es mostra en els menús d'actualització de les entrades, també es pot canviar. </para>
 
-<warning>
-<para
->Mai instal·leu i executeu un script des d'una font no fiable. Doncs s'executen amb els mateixos permisos que l'usuari, i com a resultat, podrien modificar o suprimir fitxers o perjudicar el vostre sistema de qualsevol altra forma. </para>
-</warning>
-
 <para
 >Moltes de les fonts de dades ofereixen més informació que els camps predeterminats del &appname;. Aquests altres camps es mostren a la dreta del quadre de configuració. Si es marca qualsevol d'aquests camps, s'afegiran a la col·lecció quan s'afegeixi una entrada des d'aquesta font. </para>
 
@@ -525,6 +534,17 @@
 > és una base de dades de llibres en línia que aspira a tenir una pàgina per a cada llibre. </para>
 </sect3>
 
+<sect3 id="opds">
+<title
+>Catàlegs OPDS</title>
+<para
+>Els <ulink url="https://en.wikipedia.org/wiki/Open_Publication_Distribution_System"
+>catàlegs OPDS</ulink
+> proporcionen un mitjà per cercar (i distribuir) llibres digitals. El &tellico; pot utilitzar molts catàlegs OPDS com a font de dades, com ara el <ulink url="https://wiki.mobileread.com/wiki/OPDS"
+>Projecte Gutenberg</ulink
+>. Introduïu l'enllaç al catàleg i verifiqueu l'accés i el format per a confirmar que el &tellico; pot llegir l'enllaç. </para>
+</sect3>
+
 </sect2>
 <!-- end of books -->
 
@@ -602,7 +622,16 @@
 <para
 ><ulink url="http://allocine.fr"
 >AlloCiné</ulink
-> és un servei en línia d'informació de pel·lícules, amb seu a França. S'hauria d'habilitar la identificació del navegador a l'&systemsettings;. </para>
+> és un servei en línia d'informació de pel·lícules, amb seu a França. </para>
+</sect3>
+
+<sect3 id="filmaffinity">
+<title
+>FilmAffinity</title>
+<para
+><ulink url="https://filmaffinity.com"
+>FilmAffinity</ulink
+> és un lloc independent de pel·lícules. </para>
 </sect3>
 
 </sect2>
@@ -618,7 +647,7 @@
 <para
 ><ulink url="http://discogs.com"
 >Discogs.com</ulink
-> és una base de dades de música construïda pels usuaris que conté informació sobre els artistes, segells i les seves gravacions. Es requereix registre per a obtenir un compte gratuït. S'hauria d'habilitar la identificació del navegador a l'&systemsettings;. </para>
+> és una base de dades de música construïda pels usuaris que conté informació sobre els artistes, segells i les seves gravacions. Es requereix registre per a obtenir un compte gratuït. </para>
 </sect3>
 
 <sect3 id="musicbrainz">
@@ -627,7 +656,7 @@
 <para
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
-> és una base de dades de metadades comunitària de música que intenta crear un lloc d'informació de música exhaustiu. S'hauria d'habilitar la identificació del navegador a l'&systemsettings;. </para>
+> és una base de dades de metadades comunitària de música que intenta crear un lloc d'informació de música exhaustiu. </para>
 </sect3>
 
 </sect2>
@@ -719,7 +748,7 @@
 <para
 ><ulink url="https://colnect.com"
 >Colnect</ulink
-> és una comunitat en línia per a col·leccionistes que proporciona gestió de les col·leccions personals. El &tellico; pot cercar informació a Colnect sobre les monedes i segells. </para>
+> és una comunitat en línia per a col·leccionistes que proporciona gestió de les col·leccions personals. El &tellico; pot cercar a Colnect informació sobre monedes i segells, així com llibres de còmic, cromos i jocs de vídeo. </para>
 </sect3>
 
 <sect3 id="numista">
@@ -791,9 +820,14 @@
 >, sinó que també pot importar altres formats, així com «bibtex». </para>
 
 <para
->El camí complet a l'aplicació s'ha d'introduir a les opcions de la font. Cal tenir en compte que l'aplicació s'executa en el sistema amb els mateixos permisos que l'usuari actual, de manera que no utilitzeu scripts de fonts no fiables. Marqueu les caselles al costat de les claus de cerca admeses per l'aplicació, i introduïu les opcions de la línia d'ordres requerides al quadre d'edició. El valor de cerca s'insereix on apareix <userinput
+>S'ha d'introduir el camí complet a l'aplicació a les opcions de la font. Marqueu les caselles al costat de les claus de cerca admeses per l'aplicació, i introduïu les opcions de la línia d'ordres requerides al quadre d'edició. El valor de cerca s'insereix on apareix <userinput
 >%1</userinput
 >. </para>
+
+<warning>
+<para
+>Mai instal·leu i executeu un script des d'una font no fiable. Doncs s'executen amb els mateixos permisos que l'usuari, i com a resultat, podrien modificar o suprimir fitxers o perjudicar el vostre sistema de qualsevol altra forma. </para>
+</warning>
 
 <para
 >Per a actualitzar les entrades que ja estan a la col·lecció, s'utilitzen les caselles de selecció finals i el quadre d'edició per a determinar les opcions de la línia d'ordres. Els camps d'entrada s'utilitzen per a trobar una actualització, en el mateix format a l'utilitzat per als camps de <link linkend="derived"

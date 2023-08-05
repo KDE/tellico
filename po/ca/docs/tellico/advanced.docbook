@@ -19,8 +19,9 @@ Tellico - un programari per a la gestió de col·leccions, lliure i senzill
 Opcions:
   --nofile         No obris l'últim fitxer obert
   --bibtex         Importa &lt;nom_fitxer&gt; com un fitxer bibtex
-  --mods          Importa &lt;nom_fitxer&gt; com un fitxer MODS
-  --ris           Importa &lt;nom_fitxer&gt; com un fitxer RIS
+  --mods           Importa &lt;nom_fitxer&gt; com un fitxer MODS
+  --ris            Importa &lt;nom_fitxer&gt; com un fitxer RIS
+  --pdf            Importa &lt;nom_fitxer&gt; com un fitxer PDF
 
 Arguments:
   [nom_fitxer]         Fitxer a obrir
