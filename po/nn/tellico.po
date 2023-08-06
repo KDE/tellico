@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-24 07:35+0000\n"
-"PO-Revision-Date: 2023-08-03 19:40+0200\n"
+"PO-Revision-Date: 2023-08-05 23:23+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -2411,6 +2411,8 @@ msgstr "&Bruk regulære uttrykk i snøggfilter"
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr ""
+"Viss det er kryssa av her, vert teksten til snøggfilteret tolka som eit "
+"regulært uttrykk."
 
 #: src/configdialog.cpp:227
 #, kde-format

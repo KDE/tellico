@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-06 00:47+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -169,7 +169,7 @@ msgstr "名稱"
 msgid "Collection Size"
 msgstr "收藏欄位"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1653
+#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1644
 #, kde-format
 msgid "Total entries: %1"
 msgstr "所有項目：%1"
@@ -690,7 +690,7 @@ msgstr "含有衍生數值的欄位必須定義數值樣本。"
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
 #: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:203 src/configdialog.cpp:1126
+#: src/configdialog.cpp:203 src/configdialog.cpp:1118
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -2183,7 +2183,7 @@ msgstr "重新命名收藏"
 msgid "Reorder Fields"
 msgstr "重新排序欄位"
 
-#: src/config/tellico_config.kcfg:86
+#: src/config/tellico_config.kcfg:80
 #, kde-format
 msgctxt "comma-separated list of words ignored by auto-capitalize"
 msgid ""
@@ -2193,19 +2193,19 @@ msgstr ""
 "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
 "up,with"
 
-#: src/config/tellico_config.kcfg:89
+#: src/config/tellico_config.kcfg:83
 #, kde-format
 msgctxt "comma-separated list of articles ignored for title sorting"
 msgid "the"
 msgstr "the"
 
-#: src/config/tellico_config.kcfg:92
+#: src/config/tellico_config.kcfg:86
 #, kde-format
 msgctxt "comma-separated list of common surname suffixes, used for sorting"
 msgid "jr.,jr,iii,iv"
 msgstr "jr.,jr,iii,iv"
 
-#: src/config/tellico_config.kcfg:95
+#: src/config/tellico_config.kcfg:89
 #, kde-format
 msgctxt "comma-separated list of common surname prefixes, used for sorting"
 msgid "de,van,der,van der,von"
@@ -2224,13 +2224,13 @@ msgstr "de,van,der,van der,von"
 #. i18n: ectx: label, entry (fontFile), group (Options - file)
 #. i18n: ectx: label, entry (fontBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (fontBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:140 src/config/tellico_config.kcfg:170
-#: src/config/tellico_config.kcfg:200 src/config/tellico_config.kcfg:233
-#: src/config/tellico_config.kcfg:263 src/config/tellico_config.kcfg:293
-#: src/config/tellico_config.kcfg:323 src/config/tellico_config.kcfg:353
-#: src/config/tellico_config.kcfg:383 src/config/tellico_config.kcfg:413
-#: src/config/tellico_config.kcfg:443 src/config/tellico_config.kcfg:473
-#: src/config/tellico_config.kcfg:503
+#: src/config/tellico_config.kcfg:134 src/config/tellico_config.kcfg:164
+#: src/config/tellico_config.kcfg:194 src/config/tellico_config.kcfg:227
+#: src/config/tellico_config.kcfg:257 src/config/tellico_config.kcfg:287
+#: src/config/tellico_config.kcfg:317 src/config/tellico_config.kcfg:347
+#: src/config/tellico_config.kcfg:377 src/config/tellico_config.kcfg:407
+#: src/config/tellico_config.kcfg:437 src/config/tellico_config.kcfg:467
+#: src/config/tellico_config.kcfg:497
 #, kde-format
 msgid "Template font"
 msgstr "樣本字型"
@@ -2248,13 +2248,13 @@ msgstr "樣本字型"
 #. i18n: ectx: label, entry (baseColorFile), group (Options - file)
 #. i18n: ectx: label, entry (baseColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (baseColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:144 src/config/tellico_config.kcfg:174
-#: src/config/tellico_config.kcfg:204 src/config/tellico_config.kcfg:237
-#: src/config/tellico_config.kcfg:267 src/config/tellico_config.kcfg:297
-#: src/config/tellico_config.kcfg:327 src/config/tellico_config.kcfg:357
-#: src/config/tellico_config.kcfg:387 src/config/tellico_config.kcfg:417
-#: src/config/tellico_config.kcfg:447 src/config/tellico_config.kcfg:477
-#: src/config/tellico_config.kcfg:507
+#: src/config/tellico_config.kcfg:138 src/config/tellico_config.kcfg:168
+#: src/config/tellico_config.kcfg:198 src/config/tellico_config.kcfg:231
+#: src/config/tellico_config.kcfg:261 src/config/tellico_config.kcfg:291
+#: src/config/tellico_config.kcfg:321 src/config/tellico_config.kcfg:351
+#: src/config/tellico_config.kcfg:381 src/config/tellico_config.kcfg:411
+#: src/config/tellico_config.kcfg:441 src/config/tellico_config.kcfg:471
+#: src/config/tellico_config.kcfg:501
 #, kde-format
 msgid "Template background color"
 msgstr "樣本背景顏色"
@@ -2272,13 +2272,13 @@ msgstr "樣本背景顏色"
 #. i18n: ectx: label, entry (textColorFile), group (Options - file)
 #. i18n: ectx: label, entry (textColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (textColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:148 src/config/tellico_config.kcfg:178
-#: src/config/tellico_config.kcfg:208 src/config/tellico_config.kcfg:241
-#: src/config/tellico_config.kcfg:271 src/config/tellico_config.kcfg:301
-#: src/config/tellico_config.kcfg:331 src/config/tellico_config.kcfg:361
-#: src/config/tellico_config.kcfg:391 src/config/tellico_config.kcfg:421
-#: src/config/tellico_config.kcfg:451 src/config/tellico_config.kcfg:481
-#: src/config/tellico_config.kcfg:511
+#: src/config/tellico_config.kcfg:142 src/config/tellico_config.kcfg:172
+#: src/config/tellico_config.kcfg:202 src/config/tellico_config.kcfg:235
+#: src/config/tellico_config.kcfg:265 src/config/tellico_config.kcfg:295
+#: src/config/tellico_config.kcfg:325 src/config/tellico_config.kcfg:355
+#: src/config/tellico_config.kcfg:385 src/config/tellico_config.kcfg:415
+#: src/config/tellico_config.kcfg:445 src/config/tellico_config.kcfg:475
+#: src/config/tellico_config.kcfg:505
 #, kde-format
 msgid "Template text color"
 msgstr "樣本文字顏色"
@@ -2296,13 +2296,13 @@ msgstr "樣本文字顏色"
 #. i18n: ectx: label, entry (highlightedBaseColorFile), group (Options - file)
 #. i18n: ectx: label, entry (highlightedBaseColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (highlightedBaseColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:152 src/config/tellico_config.kcfg:182
-#: src/config/tellico_config.kcfg:212 src/config/tellico_config.kcfg:245
-#: src/config/tellico_config.kcfg:275 src/config/tellico_config.kcfg:305
-#: src/config/tellico_config.kcfg:335 src/config/tellico_config.kcfg:365
-#: src/config/tellico_config.kcfg:395 src/config/tellico_config.kcfg:425
-#: src/config/tellico_config.kcfg:455 src/config/tellico_config.kcfg:485
-#: src/config/tellico_config.kcfg:515
+#: src/config/tellico_config.kcfg:146 src/config/tellico_config.kcfg:176
+#: src/config/tellico_config.kcfg:206 src/config/tellico_config.kcfg:239
+#: src/config/tellico_config.kcfg:269 src/config/tellico_config.kcfg:299
+#: src/config/tellico_config.kcfg:329 src/config/tellico_config.kcfg:359
+#: src/config/tellico_config.kcfg:389 src/config/tellico_config.kcfg:419
+#: src/config/tellico_config.kcfg:449 src/config/tellico_config.kcfg:479
+#: src/config/tellico_config.kcfg:509
 #, kde-format
 msgid "Template highlight color"
 msgstr "樣本突顯顏色"
@@ -2320,13 +2320,13 @@ msgstr "樣本突顯顏色"
 #. i18n: ectx: label, entry (highlightedTextColorFile), group (Options - file)
 #. i18n: ectx: label, entry (highlightedTextColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (highlightedTextColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:156 src/config/tellico_config.kcfg:186
-#: src/config/tellico_config.kcfg:216 src/config/tellico_config.kcfg:249
-#: src/config/tellico_config.kcfg:279 src/config/tellico_config.kcfg:309
-#: src/config/tellico_config.kcfg:339 src/config/tellico_config.kcfg:369
-#: src/config/tellico_config.kcfg:399 src/config/tellico_config.kcfg:429
-#: src/config/tellico_config.kcfg:459 src/config/tellico_config.kcfg:489
-#: src/config/tellico_config.kcfg:519
+#: src/config/tellico_config.kcfg:150 src/config/tellico_config.kcfg:180
+#: src/config/tellico_config.kcfg:210 src/config/tellico_config.kcfg:243
+#: src/config/tellico_config.kcfg:273 src/config/tellico_config.kcfg:303
+#: src/config/tellico_config.kcfg:333 src/config/tellico_config.kcfg:363
+#: src/config/tellico_config.kcfg:393 src/config/tellico_config.kcfg:423
+#: src/config/tellico_config.kcfg:453 src/config/tellico_config.kcfg:483
+#: src/config/tellico_config.kcfg:513
 #, kde-format
 msgid "Template highlighted text color"
 msgstr "樣本突顯文字顏色"
@@ -2344,13 +2344,13 @@ msgstr "樣本突顯文字顏色"
 #. i18n: ectx: label, entry (linkColorFile), group (Options - file)
 #. i18n: ectx: label, entry (linkColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (linkColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:160 src/config/tellico_config.kcfg:190
-#: src/config/tellico_config.kcfg:220 src/config/tellico_config.kcfg:253
-#: src/config/tellico_config.kcfg:283 src/config/tellico_config.kcfg:313
-#: src/config/tellico_config.kcfg:343 src/config/tellico_config.kcfg:373
-#: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
-#: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
-#: src/config/tellico_config.kcfg:523
+#: src/config/tellico_config.kcfg:154 src/config/tellico_config.kcfg:184
+#: src/config/tellico_config.kcfg:214 src/config/tellico_config.kcfg:247
+#: src/config/tellico_config.kcfg:277 src/config/tellico_config.kcfg:307
+#: src/config/tellico_config.kcfg:337 src/config/tellico_config.kcfg:367
+#: src/config/tellico_config.kcfg:397 src/config/tellico_config.kcfg:427
+#: src/config/tellico_config.kcfg:457 src/config/tellico_config.kcfg:487
+#: src/config/tellico_config.kcfg:517
 #, fuzzy, kde-format
 #| msgid "Template highlight color"
 msgid "Template link color"
@@ -2362,18 +2362,18 @@ msgid "Configure Tellico"
 msgstr "設定 Tellico"
 
 #: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:340
+#: src/configdialog.cpp:334
 #, kde-format
 msgid "Printing"
 msgstr "列印"
 
 #: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:417
+#: src/configdialog.cpp:411
 #, kde-format
 msgid "Templates"
 msgstr "樣本"
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:621
+#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:615
 #, kde-format
 msgid "Data Sources"
 msgstr "資料來源"
@@ -2410,47 +2410,37 @@ msgstr "若是勾選此選項，則會將欄位名稱印在表格標頭。"
 
 #: src/configdialog.cpp:227
 #, kde-format
-msgid "&Show \"Tip of the Day\" at startup"
-msgstr "啟動時顯示本日小秘訣(&S)"
-
-#: src/configdialog.cpp:228
-#, kde-format
-msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
-msgstr "若勾選此選項，在程式啟動時會開啟本日小秘訣。"
-
-#: src/configdialog.cpp:233
-#, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "開啟攝影機來掃描條碼(&E)"
 
-#: src/configdialog.cpp:234
+#: src/configdialog.cpp:228
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
 "searching."
 msgstr "若勾選此選項，則可以用攝影機來掃描條碼以便搜尋。"
 
-#: src/configdialog.cpp:239
+#: src/configdialog.cpp:233
 #, kde-format
 msgid "Image Storage Options"
 msgstr "影像儲存選項"
 
-#: src/configdialog.cpp:241
+#: src/configdialog.cpp:235
 #, kde-format
 msgid "Store images in data file"
 msgstr "將影像存在資料檔"
 
-#: src/configdialog.cpp:242
+#: src/configdialog.cpp:236
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "將影像存在共用的應用程式目錄"
 
-#: src/configdialog.cpp:243
+#: src/configdialog.cpp:237
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "將影像存在資料檔所在目錄"
 
-#: src/configdialog.cpp:244
+#: src/configdialog.cpp:238
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2460,49 +2450,49 @@ msgstr ""
 "影像可以存在資料檔中（不過會造成 Tellico 執行變慢），存在 Tellico 應用程式目"
 "錄中，或是存在跟資料檔相同的目錄中。"
 
-#: src/configdialog.cpp:265 src/configdialog.cpp:349
+#: src/configdialog.cpp:259 src/configdialog.cpp:343
 #, kde-format
 msgid "Formatting Options"
 msgstr "格式化選項"
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:264
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "自動將標題與名稱改為大寫(&T)"
 
-#: src/configdialog.cpp:271
+#: src/configdialog.cpp:265
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr "勾選此選項的話，標題與名稱會自動變為大寫。"
 
-#: src/configdialog.cpp:276
+#: src/configdialog.cpp:270
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "自動格式化標題與名稱(&F)"
 
-#: src/configdialog.cpp:277 src/configdialog.cpp:355
+#: src/configdialog.cpp:271 src/configdialog.cpp:349
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "勾選此選項的話，標題與名稱會自動格式化。"
 
-#: src/configdialog.cpp:287
+#: src/configdialog.cpp:281
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "不使用大寫(&Z)："
 
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:286
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
 "be separated by a semi-colon.</qt>"
 msgstr "<qt>不要使用大寫的單字清單。多個單字用分號區隔。</qt>"
 
-#: src/configdialog.cpp:298
+#: src/configdialog.cpp:292
 #, kde-format
 msgid "Artic&les:"
 msgstr "冠詞(&L)："
 
-#: src/configdialog.cpp:303
+#: src/configdialog.cpp:297
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2512,113 +2502,113 @@ msgstr ""
 "<qt>若是標題中的第一個字為清單中的任一單字，則會被視為冠詞。多個冠詞用分號區"
 "隔。</qt>"
 
-#: src/configdialog.cpp:310
+#: src/configdialog.cpp:304
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "人名後置字串(&X)："
 
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:309
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
 msgstr "<qt>此清單中的單字會被用在人名後面。多個單字用分號區隔。</qt>"
 
-#: src/configdialog.cpp:321
+#: src/configdialog.cpp:315
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "姓氏前置字串(&P)："
 
-#: src/configdialog.cpp:326
+#: src/configdialog.cpp:320
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
 msgstr "<qt>此清單中的單字會被用於姓氏前面。多個單字用分號區隔。</qt>"
 
-#: src/configdialog.cpp:341
+#: src/configdialog.cpp:335
 #, kde-format
 msgid "Printing Options"
 msgstr "列印選項"
 
-#: src/configdialog.cpp:354
+#: src/configdialog.cpp:348
 #, kde-format
 msgid "&Format titles and names"
 msgstr "格式化標題與名稱(&F)"
 
-#: src/configdialog.cpp:359
+#: src/configdialog.cpp:353
 #, kde-format
 msgid "&Print field headers"
 msgstr "列印欄位標頭(&P)"
 
-#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "若是勾選此選項，則會將欄位名稱印在表格標頭。"
 
-#: src/configdialog.cpp:364
+#: src/configdialog.cpp:358
 #, kde-format
 msgid "Grouping Options"
 msgstr "群組選項"
 
-#: src/configdialog.cpp:369
+#: src/configdialog.cpp:363
 #, kde-format
 msgid "&Group the entries"
 msgstr "將項目群組起來(&G)"
 
-#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "若勾選此選項，則會將選取的欄位群組起來。"
 
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:368
 #, kde-format
 msgid "Image Options"
 msgstr "圖像選項"
 
-#: src/configdialog.cpp:380
+#: src/configdialog.cpp:374
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "最大圖像寬度(&W)："
 
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:383
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "在列印時的最大圖像寬度。外觀比例會保留。"
 
-#: src/configdialog.cpp:395
+#: src/configdialog.cpp:389
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "最大圖像高度(&M)："
 
-#: src/configdialog.cpp:404
+#: src/configdialog.cpp:398
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "在列印時的最大圖像高度。外觀比例會保留。"
 
-#: src/configdialog.cpp:418
+#: src/configdialog.cpp:412
 #, kde-format
 msgid "Template Options"
 msgstr "樣本選項"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:364
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:364
 #: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
 msgstr "收集型態(&T)："
 
-#: src/configdialog.cpp:439
+#: src/configdialog.cpp:433
 #, kde-format
 msgid "Template:"
 msgstr "樣本："
 
-#: src/configdialog.cpp:444
+#: src/configdialog.cpp:438
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2626,12 +2616,12 @@ msgid ""
 msgstr ""
 "請選擇要用於目前收藏型態的樣本。並非所有的樣本都會使用此字型與顏色設定。"
 
-#: src/configdialog.cpp:451
+#: src/configdialog.cpp:445
 #, kde-format
 msgid "&Preview..."
 msgstr "預覽(&P)..."
 
-#: src/configdialog.cpp:452
+#: src/configdialog.cpp:446
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "顯示樣本的預覽"
@@ -2641,169 +2631,169 @@ msgstr "顯示樣本的預覽"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:469
+#: src/configdialog.cpp:463
 #, kde-format
 msgid "Font Options"
 msgstr "字型選項"
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:470
 #, kde-format
 msgid "Font:"
 msgstr "字型："
 
-#: src/configdialog.cpp:482
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "此字型會在項目檢視中傳遞給樣本。"
 
-#: src/configdialog.cpp:486
+#: src/configdialog.cpp:480
 #, kde-format
 msgid "Size:"
 msgstr "大小："
 
-#: src/configdialog.cpp:498
+#: src/configdialog.cpp:492
 #, kde-format
 msgid "Color Options"
 msgstr "著色選項"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:499
 #, kde-format
 msgid "Background color:"
 msgstr "背景顏色："
 
-#: src/configdialog.cpp:511
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "此顏色會在項目檢視中傳遞給樣本。"
 
-#: src/configdialog.cpp:515
+#: src/configdialog.cpp:509
 #, kde-format
 msgid "Text color:"
 msgstr "文字顏色："
 
-#: src/configdialog.cpp:524
+#: src/configdialog.cpp:518
 #, kde-format
 msgid "Highlight color:"
 msgstr "突顯顏色："
 
-#: src/configdialog.cpp:533
+#: src/configdialog.cpp:527
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "突顯文字顏色："
 
-#: src/configdialog.cpp:542
+#: src/configdialog.cpp:536
 #, fuzzy, kde-format
 #| msgid "Text color:"
 msgid "Link color:"
 msgstr "文字顏色："
 
-#: src/configdialog.cpp:551
+#: src/configdialog.cpp:545
 #, kde-format
 msgid "Manage Templates"
 msgstr "管理樣本"
 
-#: src/configdialog.cpp:562
+#: src/configdialog.cpp:556
 #, kde-format
 msgid "Install..."
 msgstr "安裝..."
 
-#: src/configdialog.cpp:566
+#: src/configdialog.cpp:560
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "點擊以直接安裝新的樣本。"
 
-#: src/configdialog.cpp:571 src/configdialog.cpp:574 src/configdialog.cpp:578
+#: src/configdialog.cpp:565 src/configdialog.cpp:568 src/configdialog.cpp:572
 #, kde-format
 msgid "Download..."
 msgstr "下載..."
 
-#: src/configdialog.cpp:583
+#: src/configdialog.cpp:577
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "點擊以下載額外的樣本。"
 
-#: src/configdialog.cpp:586
+#: src/configdialog.cpp:580
 #, kde-format
 msgid "Delete..."
 msgstr "刪除..."
 
-#: src/configdialog.cpp:590
+#: src/configdialog.cpp:584
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "點擊以選擇並移除安裝的樣本。"
 
-#: src/configdialog.cpp:622
+#: src/configdialog.cpp:616
 #, kde-format
 msgid "Data Sources Options"
 msgstr "資料來源選項"
 
-#: src/configdialog.cpp:643
+#: src/configdialog.cpp:637
 #, kde-format
 msgid "Move &Up"
 msgstr "上移(&U)"
 
-#: src/configdialog.cpp:646
+#: src/configdialog.cpp:640
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
 "are automatically updated."
 msgstr "資料來源的順序會決定 Tellico 在做自動更新項目時的順序。"
 
-#: src/configdialog.cpp:649
+#: src/configdialog.cpp:643
 #, kde-format
 msgid "Move &Down"
 msgstr "下移(&D)"
 
-#: src/configdialog.cpp:658
+#: src/configdialog.cpp:652
 #, kde-format
 msgid "Filter by type:"
 msgstr "以型態過濾："
 
-#: src/configdialog.cpp:676
+#: src/configdialog.cpp:670
 #, kde-format
 msgid "&New..."
 msgstr "新增(&N)..."
 
-#: src/configdialog.cpp:678
+#: src/configdialog.cpp:672
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "點擊以新增資料來源。"
 
-#: src/configdialog.cpp:679
+#: src/configdialog.cpp:673
 #, kde-format
 msgid "&Modify..."
 msgstr "變更(&M)..."
 
-#: src/configdialog.cpp:681
+#: src/configdialog.cpp:675
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "點擊以變更選取的資料來源。"
 
-#: src/configdialog.cpp:682
+#: src/configdialog.cpp:676
 #, kde-format
 msgid "&Delete"
 msgstr "刪除(&D)"
 
-#: src/configdialog.cpp:684
+#: src/configdialog.cpp:678
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "點擊以刪除選取的資料來源。"
 
-#: src/configdialog.cpp:1158 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1150 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:126
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "XSL Files"
 msgstr "檔案"
 
-#: src/configdialog.cpp:1159
+#: src/configdialog.cpp:1151
 #, fuzzy, kde-format
 #| msgid "Templates"
 msgid "Template Packages"
 msgstr "樣本"
 
-#: src/configdialog.cpp:1160 src/importdialog.cpp:439 src/mainwindow.cpp:1281
-#: src/mainwindow.cpp:1456 src/reportdialog.cpp:428 src/reportdialog.cpp:443
+#: src/configdialog.cpp:1152 src/importdialog.cpp:439 src/mainwindow.cpp:1276
+#: src/mainwindow.cpp:1451 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -2818,12 +2808,12 @@ msgstr "樣本"
 msgid "All Files"
 msgstr "*|所有檔案"
 
-#: src/configdialog.cpp:1189
+#: src/configdialog.cpp:1181
 #, kde-format
 msgid "Delete Template"
 msgstr "刪除樣本"
 
-#: src/configdialog.cpp:1190
+#: src/configdialog.cpp:1182
 #, kde-format
 msgid "Select template to delete:"
 msgstr "請選擇要刪除的樣本："
@@ -3012,7 +3002,7 @@ msgstr "顯示所有欄位"
 msgid "Hide All Columns"
 msgstr "隱藏所有欄位"
 
-#: src/document.cpp:210 src/mainwindow.cpp:1395
+#: src/document.cpp:210 src/mainwindow.cpp:1390
 #, kde-format
 msgid "Saving file..."
 msgstr "正在儲存檔案..."
@@ -3074,7 +3064,7 @@ msgid "Save Entry"
 msgstr "儲存項目"
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1168 src/mainwindow.cpp:1186
+#: src/mainwindow.cpp:1163 src/mainwindow.cpp:1181
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "未儲存的改變"
@@ -3084,7 +3074,7 @@ msgstr "未儲存的改變"
 msgid "(Empty)"
 msgstr "（空）"
 
-#: src/entryiconview.cpp:65 src/mainwindow.cpp:872
+#: src/entryiconview.cpp:65 src/mainwindow.cpp:867
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3153,7 +3143,7 @@ msgstr "更新 <b>%1</b> 中..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico 無法找到預設的項目樣式表。"
 
-#: src/entryview.cpp:334 src/mainwindow.cpp:1806
+#: src/entryview.cpp:334 src/mainwindow.cpp:1797
 #, kde-format
 msgid "Please check your installation."
 msgstr "請檢查您的安裝。"
@@ -4829,8 +4819,8 @@ msgstr "過濾器名稱："
 msgid "&Save Filter"
 msgstr "儲存過濾器(&S)"
 
-#: src/filterview.cpp:191 src/mainwindow.cpp:567 src/mainwindow.cpp:777
-#: src/mainwindow.cpp:795
+#: src/filterview.cpp:191 src/mainwindow.cpp:567 src/mainwindow.cpp:772
+#: src/mainwindow.cpp:790
 #, kde-format
 msgid "Filter"
 msgstr "過濾器"
@@ -4866,8 +4856,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "群組"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1095 src/mainwindow.cpp:1741
-#: src/mainwindow.cpp:1775 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1090 src/mainwindow.cpp:1732
+#: src/mainwindow.cpp:1766 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "人物"
@@ -5175,7 +5165,7 @@ msgstr ""
 msgid "&Import"
 msgstr "匯入(&I)"
 
-#: src/importdialog.cpp:371 src/mainwindow.cpp:1277 src/mainwindow.cpp:1454
+#: src/importdialog.cpp:371 src/mainwindow.cpp:1272 src/mainwindow.cpp:1449
 #: src/translators/tellicozipexporter.cpp:54
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
@@ -5183,7 +5173,7 @@ msgid "Tellico Files"
 msgstr "Tellico Zip 檔"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "XML Files"
@@ -6005,7 +5995,7 @@ msgstr "取消選擇收藏中所有的項目"
 msgid "Advanced &Filter..."
 msgstr "進階過濾(&F)..."
 
-#: src/mainwindow.cpp:570 src/mainwindow.cpp:796
+#: src/mainwindow.cpp:570 src/mainwindow.cpp:791
 #, kde-format
 msgid "Filter the collection"
 msgstr "過濾收藏"
@@ -6234,71 +6224,71 @@ msgstr "顯示項目編輯器(&E)"
 msgid "Enable/disable the editor"
 msgstr "開啟/關閉編輯器"
 
-#: src/mainwindow.cpp:763
+#: src/mainwindow.cpp:758
 #, kde-format
 msgid "Change Grouping"
 msgstr "變更群組"
 
-#: src/mainwindow.cpp:766
+#: src/mainwindow.cpp:761
 #, kde-format
 msgid "&Group Selection"
 msgstr "群組選擇(&G)"
 
-#: src/mainwindow.cpp:767
+#: src/mainwindow.cpp:762
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr "變更收藏的群組"
 
-#: src/mainwindow.cpp:781
+#: src/mainwindow.cpp:776
 #, kde-format
 msgid "Filter here..."
 msgstr "在此過濾..."
 
-#: src/mainwindow.cpp:846 src/mainwindow.cpp:849
+#: src/mainwindow.cpp:841 src/mainwindow.cpp:844
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
 "qt>"
 msgstr "<qt><i>項目檢視</i>將項目的內容用格式化的方式呈現。</qt>"
 
-#: src/mainwindow.cpp:855
+#: src/mainwindow.cpp:850
 #, fuzzy, kde-format
 #| msgid "Collection Fields"
 msgid "Collection View"
 msgstr "收藏欄位"
 
-#: src/mainwindow.cpp:862
+#: src/mainwindow.cpp:857
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
 "</qt>"
 msgstr "<qt>欄位檢視會顯示每個項目的許多欄位的值。</qt>"
 
-#: src/mainwindow.cpp:879
+#: src/mainwindow.cpp:874
 #, fuzzy, kde-format
 #| msgctxt "Group View XSL Template"
 #| msgid "Group View"
 msgid "Group View"
 msgstr "群組檢視"
 
-#: src/mainwindow.cpp:888
+#: src/mainwindow.cpp:883
 #, kde-format
 msgid "Groups"
 msgstr "群組"
 
-#: src/mainwindow.cpp:889
+#: src/mainwindow.cpp:884
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr "<qt>群組檢視會將項目根據所選的欄位排序並歸類。</qt>"
 
-#: src/mainwindow.cpp:964
+#: src/mainwindow.cpp:959
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "歡迎使用 Tellico 收藏管理員"
 
-#: src/mainwindow.cpp:966
+#: src/mainwindow.cpp:961
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6312,7 +6302,7 @@ msgstr ""
 "\"tc:///edit_search_internet\">從不同網路來源下載資料</a>的方式加入新的收藏項"
 "目。</h3>"
 
-#: src/mainwindow.cpp:1165
+#: src/mainwindow.cpp:1160
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6321,23 +6311,23 @@ msgstr ""
 "目前的檔案已修改。\n"
 "要儲存嗎？"
 
-#: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
+#: src/mainwindow.cpp:1216 src/mainwindow.cpp:1249
 #, fuzzy, kde-format
 #| msgid "Create a new collection"
 msgid "Creating new collection..."
 msgstr "建立新的收藏"
 
-#: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
+#: src/mainwindow.cpp:1269 src/mainwindow.cpp:1292 src/mainwindow.cpp:1310
 #, kde-format
 msgid "Opening file..."
 msgstr "正在開啟檔案..."
 
-#: src/mainwindow.cpp:1285
+#: src/mainwindow.cpp:1280
 #, kde-format
 msgid "Open File"
 msgstr "開啟檔案"
 
-#: src/mainwindow.cpp:1406
+#: src/mainwindow.cpp:1401
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6349,59 +6339,59 @@ msgstr ""
 "否要將影像存在另外一個 Tellico 的資料目錄裡以加快效率？</p> <p>您稍後還是可以"
 "在設定對話框裡變更您的選擇。</p></qt>"
 
-#: src/mainwindow.cpp:1411
+#: src/mainwindow.cpp:1406
 #, kde-format
 msgid "Save Images Separately"
 msgstr "分別儲存影像"
 
-#: src/mainwindow.cpp:1412
+#: src/mainwindow.cpp:1407
 #, kde-format
 msgid "Save Images in File"
 msgstr "將影像存在檔案內"
 
-#: src/mainwindow.cpp:1452
+#: src/mainwindow.cpp:1447
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "正在用新檔名儲存檔案..."
 
-#: src/mainwindow.cpp:1461
+#: src/mainwindow.cpp:1456
 #, kde-format
 msgid "Save As"
 msgstr "另存新檔"
 
-#: src/mainwindow.cpp:1527
+#: src/mainwindow.cpp:1522
 #, kde-format
 msgid "Printing..."
 msgstr "正在列印..."
 
-#: src/mainwindow.cpp:1531
+#: src/mainwindow.cpp:1526
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr "正在過濾收藏，只有符合過濾條件的項目會被列印。要繼續嗎？"
 
-#: src/mainwindow.cpp:1554
+#: src/mainwindow.cpp:1549
 #, kde-format
 msgid "Exiting..."
 msgstr "正在離開..."
 
-#: src/mainwindow.cpp:1660
+#: src/mainwindow.cpp:1651
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "（%1 個已過濾；%2 個已選擇）"
 
-#: src/mainwindow.cpp:1663
+#: src/mainwindow.cpp:1654
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "（%1 個已過濾）"
 
-#: src/mainwindow.cpp:1666
+#: src/mainwindow.cpp:1657
 #, kde-format
 msgid "(%1 selected)"
 msgstr "（%1 個已選擇）"
 
-#: src/mainwindow.cpp:1805 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1796 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:264
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6409,76 +6399,76 @@ msgstr "（%1 個已選擇）"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico 在處理 XSLT 時遇到錯誤。"
 
-#: src/mainwindow.cpp:1937
+#: src/mainwindow.cpp:1928
 #, kde-format
 msgid "Importing data..."
 msgstr "匯入資料中..."
 
-#: src/mainwindow.cpp:1948
+#: src/mainwindow.cpp:1939
 #, kde-format
 msgid "Import File"
 msgstr "匯入檔案"
 
-#: src/mainwindow.cpp:1961
+#: src/mainwindow.cpp:1952
 #, kde-format
 msgid "Import Directory"
 msgstr "匯入目錄"
 
-#: src/mainwindow.cpp:1985
+#: src/mainwindow.cpp:1976
 #, kde-format
 msgid "Exporting data..."
 msgstr "匯出資料中..."
 
-#: src/mainwindow.cpp:2008
+#: src/mainwindow.cpp:1999
 #, kde-format
 msgid "Export As"
 msgstr "匯出為"
 
-#: src/mainwindow.cpp:2036
+#: src/mainwindow.cpp:2027
 #, kde-format
 msgid "String Macros"
 msgstr "字串巨集"
 
-#: src/mainwindow.cpp:2037
+#: src/mainwindow.cpp:2028
 #, kde-format
 msgid "Macro"
 msgstr "巨集"
 
-#: src/mainwindow.cpp:2037
+#: src/mainwindow.cpp:2028
 #, kde-format
 msgid "String"
 msgstr "字串"
 
-#: src/mainwindow.cpp:2123
+#: src/mainwindow.cpp:2114
 #, kde-format
 msgid "Creating citations..."
 msgstr "建立引用中..."
 
-#: src/mainwindow.cpp:2233
+#: src/mainwindow.cpp:2224
 #, kde-format
 msgid "Filters"
 msgstr "過濾器"
 
-#: src/mainwindow.cpp:2234
+#: src/mainwindow.cpp:2225
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr "<qt>過濾檢視會顯示符合特定過濾條件的項目。</qt>"
 
-#: src/mainwindow.cpp:2257
+#: src/mainwindow.cpp:2248
 #, kde-format
 msgid "Loans"
 msgstr "借貸"
 
-#: src/mainwindow.cpp:2258
+#: src/mainwindow.cpp:2249
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr "<qt>借貸檢視會顯示所有您已借出的收藏項目。</qt>"
 
-#: src/mainwindow.cpp:2345
+#: src/mainwindow.cpp:2336
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6487,12 +6477,12 @@ msgstr ""
 "有些影像並未儲存在設定的位置。目前的檔案必須先儲存，影像則會被轉換到新的位"
 "置。"
 
-#: src/mainwindow.cpp:2386
+#: src/mainwindow.cpp:2377
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "從 %1 更新的項目資料"
 
-#: src/mainwindow.cpp:2405
+#: src/mainwindow.cpp:2396
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6641,13 +6631,13 @@ msgid "&Show Views"
 msgstr "顯示群組檢視(&P)"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: src/tellicoui.rc:128
+#: src/tellicoui.rc:125
 #, kde-format
 msgid "Main Toolbar"
 msgstr "主工具列"
 
 #. i18n: ectx: ToolBar (collectionToolBar)
-#: src/tellicoui.rc:135
+#: src/tellicoui.rc:132
 #, kde-format
 msgid "Collection Toolbar"
 msgstr "收藏工具列"
@@ -7313,12 +7303,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:189
+#: src/translators/tellicoimporter.cpp:183
 #, kde-format
 msgid "The file is empty."
 msgstr "檔案是空的。"
 
-#: src/translators/tellicoimporter.cpp:202
+#: src/translators/tellicoimporter.cpp:196
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "檔案沒有包含收藏資料。"
@@ -7394,187 +7384,6 @@ msgstr ""
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "在圖示清單檢視中增加最大的圖示大小"
 
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:2
-#, kde-format
-msgid ""
-"<p>...that if a book has more than one author, you should separate\n"
-"their names by a semi-colon, so that Tellico will know how to split them\n"
-"and use them separately.</p>\n"
-"<p>Any other field which allows multiple values should be entered the\n"
-"same way, with a semi-colon (;) separating each value.</p>\n"
-msgstr ""
-"<p>若是一本書有一個以上的作者，您應該用分號區隔，讓 Tellico 知道這些是不同的"
-"作者。</p>\n"
-"<p>任何其它允許多個值的欄位也應該都用相同的方式，也就是用分號區隔每個不同的"
-"值。</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:11
-#, kde-format
-msgid ""
-"<p>...that you can change which fields are shown in the column view by\n"
-"right-clicking on the column header.\n"
-msgstr "<p>您可以在標頭欄上點擊右鍵來改變要在檢視中顯示哪些欄位。</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:17
-#, kde-format
-msgid ""
-"<p>...that you can add, edit, or modify the fields in the collection using\n"
-"the Field Editor. The arrow buttons below the field list can be used to "
-"change the\n"
-"position of the field in the list, which affects the placement in the entry\n"
-"editor.</p>\n"
-msgstr ""
-"<p>您可以用欄位編輯器新增、編輯或變更收藏的欄位。下方的箭頭按鈕\n"
-"可以用來變更清單中欄位的位置，也會影響到項目編輯器中的擺放。</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:25
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>...that if you want to filter by a Checkbox field, a value of\n"
-#| "\"true\" should be used. If you'd like to filter to\n"
-#| "show only the science fiction books which you've not read, for\n"
-#| "example, check the <em>Match all of the\n"
-#| "following</em> button,  set the first rule to have \"Genre\"\n"
-#| "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
-#| "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
-msgid ""
-"<p>...that if you want to filter by a Checkbox field, a value of\n"
-"\"true\" should be used. If you'd like to filter to\n"
-"show only the science fiction books which you've not read, for\n"
-"example, check the <em>Match all of the\n"
-"following</em> button, set the first rule to have \"Genre\"\n"
-"\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
-"have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
-msgstr ""
-"<p>若是您要過濾一個勾選盒的欄位，那麼應該要把值設為「真」。\n"
-"例如，若您只要顯示您尚未讀過的科幻小說， 那麼先勾選「符合下列\n"
-"全部規則」，設定第一個規則為「風格」符合「科幻」（不含引號），\n"
-"並將第二個條件設定為「讀取」「不包含」「真」。</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:36
-#, kde-format
-msgid ""
-"<p>...that if a non-word character is used in the Quick Filter, the text is\n"
-"interpreted as a regular expression.</p>\n"
-"<p>To show only books which are by Weber or Bujold, for example, then\n"
-"type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
-msgstr ""
-"<p>若是在快速過濾裡用了一個非字母或單字的字元，則會\n"
-"把它解譯成正規表示式。</p>\n"
-"<p>例如，您只要顯示 Weber 或 Bujold 所寫的書，那麼在過\n"
-"濾條件中輸入 weber|bujold 就會當成正規表示式使用。</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:44
-#, kde-format
-msgid ""
-"<p>...that you can edit more than one entry at a time, by holding down\n"
-"the Shift or Ctrl key and selecting multiple entries.</p>\n"
-msgstr ""
-"<p>您可以一次編輯多個項目，只要按住 Shift 或 Ctrl 鍵並選擇多個項目。</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:50
-#, kde-format
-msgid ""
-"<p>...that you can convert an existing book collection to a bibliography,\n"
-"which can then be exported to bibtex or Bibtexml format.</p>\n"
-msgstr ""
-"<p>您可以將現有的書籍收藏轉換為參考書目（bibliography），\n"
-"然後就可以匯出為 bibtex 或 Bibtexml 的格式。</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:56
-#, kde-format
-msgid ""
-"<p>...that you can add, edit, and delete string macros for bibliographies.</"
-"p>\n"
-msgstr "<p>您可以新增、編輯與刪除參考書目的字串巨集。</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:61
-#, kde-format
-msgid ""
-"<p>...that if more than one field is formatted as a name, then an "
-"additional\n"
-"group named \"People\" is added to the collection, allowing authors and "
-"editors\n"
-"to be sorted or printed together, for example.</p>\n"
-msgstr ""
-"<p>若有一個以上的欄位被設定為名字，則在收藏中會多出一個「人物」\n"
-"的欄位，讓作者與編輯者可以列印或排序在一起。</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:68
-#, kde-format
-msgid ""
-"<p>...that you can modify the appearance of the printed output by modifying\n"
-"the <tt>tellico-printing.xsl</tt> file. The file generates HTML, and the "
-"CSS\n"
-"within the stylesheet governs things like the font, the margins, etc.</p>\n"
-msgstr ""
-"<p>您可以變更 <tt>tellico-printing.xsl</tt> 檔來改變列印出來時的外觀。\n"
-"這個檔案會產生 HTML，而裡面的 CSS 樣式表則決定像字型、留邊等設定。</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:75
-#, kde-format
-msgid ""
-"<p>...that you can import using any generic XSL stylesheet which\n"
-"outputs a valid Tellico XML file.</p>\n"
-msgstr "<p>您可以用任何一般可以輸出 Tellico XML 檔的 XSL 樣式表來匯入。</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:81
-#, kde-format
-msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
-msgstr "<p>雙擊任一個項目可以開啟項目編輯器。</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:86
-#, kde-format
-msgid ""
-"<p>...that you can add HTML tags to any Paragraph field for formatting, such "
-"as\n"
-"&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
-msgstr ""
-"<p>您可以將 HTML 標籤新增到「段落」欄位做為格式化，如 &lt;b&gt;bold&lt;/"
-"b&gt; or &lt;i&gt;italic&lt;/i&gt;</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:92
-#, kde-format
-msgid ""
-"<p>...that when the Column View is focused, you can press a letter on the\n"
-"keyboard to scroll to the next entry that starts with that letter.</p>\n"
-msgstr ""
-"<p>在欄位檢視中，您可以按任一字母，就會自動跳到下一個以該字母開頭的項目。</"
-"p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:98
-#, kde-format
-msgid ""
-"<p>...that you can use a field with a derived value to combine multiple "
-"separated fields\n"
-"into a single field. Use a derived value template\n"
-"similar to \"Value: %{fielda}%{fieldb}\" where %{...} gets replaced with "
-"the\n"
-"appropriate field value. This is useful to collect multiple values in a\n"
-"single field, e.g. for better grouping, and to combine fields of different\n"
-"types by respecting proper sorting at the same time. Consider for example\n"
-"a number field followed by a text subfield with entries 3b, 14a.</p>\n"
-msgstr ""
-"<p>您可以用一個衍生欄位來結合多個不同的欄位。\n"
-"用衍生值樣本，例如 \"Value: ${fidlea}%{fieldb}\"，%{...} 就會以\n"
-"適當的欄位值取代。這樣可以在單一欄位中將多個欄位的值集中在一起，\n"
-"方便分組或排序。</p>\n"
-
 #: xslt/entry-templates/Album.xsl:171
 #, kde-format
 msgid "This template is meant for music collections only."
@@ -7642,6 +7451,161 @@ msgstr "搜尋"
 #, kde-format
 msgid "Clear"
 msgstr "清除"
+
+#~ msgid "&Show \"Tip of the Day\" at startup"
+#~ msgstr "啟動時顯示本日小秘訣(&S)"
+
+#~ msgid ""
+#~ "If checked, the \"Tip of the Day\" will be shown at program start-up."
+#~ msgstr "若勾選此選項，在程式啟動時會開啟本日小秘訣。"
+
+#~ msgid ""
+#~ "<p>...that if a book has more than one author, you should separate\n"
+#~ "their names by a semi-colon, so that Tellico will know how to split them\n"
+#~ "and use them separately.</p>\n"
+#~ "<p>Any other field which allows multiple values should be entered the\n"
+#~ "same way, with a semi-colon (;) separating each value.</p>\n"
+#~ msgstr ""
+#~ "<p>若是一本書有一個以上的作者，您應該用分號區隔，讓 Tellico 知道這些是不同"
+#~ "的作者。</p>\n"
+#~ "<p>任何其它允許多個值的欄位也應該都用相同的方式，也就是用分號區隔每個不同"
+#~ "的值。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can change which fields are shown in the column view by\n"
+#~ "right-clicking on the column header.\n"
+#~ msgstr "<p>您可以在標頭欄上點擊右鍵來改變要在檢視中顯示哪些欄位。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can add, edit, or modify the fields in the collection "
+#~ "using\n"
+#~ "the Field Editor. The arrow buttons below the field list can be used to "
+#~ "change the\n"
+#~ "position of the field in the list, which affects the placement in the "
+#~ "entry\n"
+#~ "editor.</p>\n"
+#~ msgstr ""
+#~ "<p>您可以用欄位編輯器新增、編輯或變更收藏的欄位。下方的箭頭按鈕\n"
+#~ "可以用來變更清單中欄位的位置，也會影響到項目編輯器中的擺放。</p>\n"
+
+#, fuzzy
+#~| msgid ""
+#~| "<p>...that if you want to filter by a Checkbox field, a value of\n"
+#~| "\"true\" should be used. If you'd like to filter to\n"
+#~| "show only the science fiction books which you've not read, for\n"
+#~| "example, check the <em>Match all of the\n"
+#~| "following</em> button,  set the first rule to have \"Genre\"\n"
+#~| "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
+#~| "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
+#~ msgid ""
+#~ "<p>...that if you want to filter by a Checkbox field, a value of\n"
+#~ "\"true\" should be used. If you'd like to filter to\n"
+#~ "show only the science fiction books which you've not read, for\n"
+#~ "example, check the <em>Match all of the\n"
+#~ "following</em> button, set the first rule to have \"Genre\"\n"
+#~ "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
+#~ "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
+#~ msgstr ""
+#~ "<p>若是您要過濾一個勾選盒的欄位，那麼應該要把值設為「真」。\n"
+#~ "例如，若您只要顯示您尚未讀過的科幻小說， 那麼先勾選「符合下列\n"
+#~ "全部規則」，設定第一個規則為「風格」符合「科幻」（不含引號），\n"
+#~ "並將第二個條件設定為「讀取」「不包含」「真」。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that if a non-word character is used in the Quick Filter, the text "
+#~ "is\n"
+#~ "interpreted as a regular expression.</p>\n"
+#~ "<p>To show only books which are by Weber or Bujold, for example, then\n"
+#~ "type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
+#~ msgstr ""
+#~ "<p>若是在快速過濾裡用了一個非字母或單字的字元，則會\n"
+#~ "把它解譯成正規表示式。</p>\n"
+#~ "<p>例如，您只要顯示 Weber 或 Bujold 所寫的書，那麼在過\n"
+#~ "濾條件中輸入 weber|bujold 就會當成正規表示式使用。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can edit more than one entry at a time, by holding down\n"
+#~ "the Shift or Ctrl key and selecting multiple entries.</p>\n"
+#~ msgstr ""
+#~ "<p>您可以一次編輯多個項目，只要按住 Shift 或 Ctrl 鍵並選擇多個項目。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can convert an existing book collection to a "
+#~ "bibliography,\n"
+#~ "which can then be exported to bibtex or Bibtexml format.</p>\n"
+#~ msgstr ""
+#~ "<p>您可以將現有的書籍收藏轉換為參考書目（bibliography），\n"
+#~ "然後就可以匯出為 bibtex 或 Bibtexml 的格式。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can add, edit, and delete string macros for bibliographies."
+#~ "</p>\n"
+#~ msgstr "<p>您可以新增、編輯與刪除參考書目的字串巨集。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that if more than one field is formatted as a name, then an "
+#~ "additional\n"
+#~ "group named \"People\" is added to the collection, allowing authors and "
+#~ "editors\n"
+#~ "to be sorted or printed together, for example.</p>\n"
+#~ msgstr ""
+#~ "<p>若有一個以上的欄位被設定為名字，則在收藏中會多出一個「人物」\n"
+#~ "的欄位，讓作者與編輯者可以列印或排序在一起。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can modify the appearance of the printed output by "
+#~ "modifying\n"
+#~ "the <tt>tellico-printing.xsl</tt> file. The file generates HTML, and the "
+#~ "CSS\n"
+#~ "within the stylesheet governs things like the font, the margins, etc.</"
+#~ "p>\n"
+#~ msgstr ""
+#~ "<p>您可以變更 <tt>tellico-printing.xsl</tt> 檔來改變列印出來時的外觀。\n"
+#~ "這個檔案會產生 HTML，而裡面的 CSS 樣式表則決定像字型、留邊等設定。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can import using any generic XSL stylesheet which\n"
+#~ "outputs a valid Tellico XML file.</p>\n"
+#~ msgstr ""
+#~ "<p>您可以用任何一般可以輸出 Tellico XML 檔的 XSL 樣式表來匯入。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
+#~ msgstr "<p>雙擊任一個項目可以開啟項目編輯器。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can add HTML tags to any Paragraph field for formatting, "
+#~ "such as\n"
+#~ "&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
+#~ msgstr ""
+#~ "<p>您可以將 HTML 標籤新增到「段落」欄位做為格式化，如 &lt;b&gt;bold&lt;/"
+#~ "b&gt; or &lt;i&gt;italic&lt;/i&gt;</p>\n"
+
+#~ msgid ""
+#~ "<p>...that when the Column View is focused, you can press a letter on "
+#~ "the\n"
+#~ "keyboard to scroll to the next entry that starts with that letter.</p>\n"
+#~ msgstr ""
+#~ "<p>在欄位檢視中，您可以按任一字母，就會自動跳到下一個以該字母開頭的項目。"
+#~ "</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can use a field with a derived value to combine multiple "
+#~ "separated fields\n"
+#~ "into a single field. Use a derived value template\n"
+#~ "similar to \"Value: %{fielda}%{fieldb}\" where %{...} gets replaced with "
+#~ "the\n"
+#~ "appropriate field value. This is useful to collect multiple values in a\n"
+#~ "single field, e.g. for better grouping, and to combine fields of "
+#~ "different\n"
+#~ "types by respecting proper sorting at the same time. Consider for "
+#~ "example\n"
+#~ "a number field followed by a text subfield with entries 3b, 14a.</p>\n"
+#~ msgstr ""
+#~ "<p>您可以用一個衍生欄位來結合多個不同的欄位。\n"
+#~ "用衍生值樣本，例如 \"Value: ${fidlea}%{fieldb}\"，%{...} 就會以\n"
+#~ "適當的欄位值取代。這樣可以在單一欄位中將多個欄位的值集中在一起，\n"
+#~ "方便分組或排序。</p>\n"
 
 #~ msgid "Click to download additional data sources."
 #~ msgstr "點擊以下載額外的資料來源。"

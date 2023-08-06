@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-06 00:47+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -172,7 +172,7 @@ msgstr "Όνομα"
 msgid "Collection Size"
 msgstr "Μέγεθος συλλογής"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1653
+#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1644
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Σύνολο καταχωρήσεων: %1"
@@ -723,7 +723,7 @@ msgstr "Ένα πεδίο με μια παράγωγη τιμή πρέπει ν�
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
 #: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:203 src/configdialog.cpp:1126
+#: src/configdialog.cpp:203 src/configdialog.cpp:1118
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -2205,7 +2205,7 @@ msgstr "Μετονομασία συλλογής"
 msgid "Reorder Fields"
 msgstr "Ανακατάταξη πεδίων"
 
-#: src/config/tellico_config.kcfg:86
+#: src/config/tellico_config.kcfg:80
 #, kde-format
 msgctxt "comma-separated list of words ignored by auto-capitalize"
 msgid ""
@@ -2215,19 +2215,19 @@ msgstr ""
 "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
 "up,with"
 
-#: src/config/tellico_config.kcfg:89
+#: src/config/tellico_config.kcfg:83
 #, kde-format
 msgctxt "comma-separated list of articles ignored for title sorting"
 msgid "the"
 msgstr "the"
 
-#: src/config/tellico_config.kcfg:92
+#: src/config/tellico_config.kcfg:86
 #, kde-format
 msgctxt "comma-separated list of common surname suffixes, used for sorting"
 msgid "jr.,jr,iii,iv"
 msgstr "jr.,jr,iii,iv"
 
-#: src/config/tellico_config.kcfg:95
+#: src/config/tellico_config.kcfg:89
 #, kde-format
 msgctxt "comma-separated list of common surname prefixes, used for sorting"
 msgid "de,van,der,van der,von"
@@ -2246,13 +2246,13 @@ msgstr "de,van,der,van der,von"
 #. i18n: ectx: label, entry (fontFile), group (Options - file)
 #. i18n: ectx: label, entry (fontBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (fontBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:140 src/config/tellico_config.kcfg:170
-#: src/config/tellico_config.kcfg:200 src/config/tellico_config.kcfg:233
-#: src/config/tellico_config.kcfg:263 src/config/tellico_config.kcfg:293
-#: src/config/tellico_config.kcfg:323 src/config/tellico_config.kcfg:353
-#: src/config/tellico_config.kcfg:383 src/config/tellico_config.kcfg:413
-#: src/config/tellico_config.kcfg:443 src/config/tellico_config.kcfg:473
-#: src/config/tellico_config.kcfg:503
+#: src/config/tellico_config.kcfg:134 src/config/tellico_config.kcfg:164
+#: src/config/tellico_config.kcfg:194 src/config/tellico_config.kcfg:227
+#: src/config/tellico_config.kcfg:257 src/config/tellico_config.kcfg:287
+#: src/config/tellico_config.kcfg:317 src/config/tellico_config.kcfg:347
+#: src/config/tellico_config.kcfg:377 src/config/tellico_config.kcfg:407
+#: src/config/tellico_config.kcfg:437 src/config/tellico_config.kcfg:467
+#: src/config/tellico_config.kcfg:497
 #, kde-format
 msgid "Template font"
 msgstr "Πρότυπο γραμματοσειράς"
@@ -2270,13 +2270,13 @@ msgstr "Πρότυπο γραμματοσειράς"
 #. i18n: ectx: label, entry (baseColorFile), group (Options - file)
 #. i18n: ectx: label, entry (baseColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (baseColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:144 src/config/tellico_config.kcfg:174
-#: src/config/tellico_config.kcfg:204 src/config/tellico_config.kcfg:237
-#: src/config/tellico_config.kcfg:267 src/config/tellico_config.kcfg:297
-#: src/config/tellico_config.kcfg:327 src/config/tellico_config.kcfg:357
-#: src/config/tellico_config.kcfg:387 src/config/tellico_config.kcfg:417
-#: src/config/tellico_config.kcfg:447 src/config/tellico_config.kcfg:477
-#: src/config/tellico_config.kcfg:507
+#: src/config/tellico_config.kcfg:138 src/config/tellico_config.kcfg:168
+#: src/config/tellico_config.kcfg:198 src/config/tellico_config.kcfg:231
+#: src/config/tellico_config.kcfg:261 src/config/tellico_config.kcfg:291
+#: src/config/tellico_config.kcfg:321 src/config/tellico_config.kcfg:351
+#: src/config/tellico_config.kcfg:381 src/config/tellico_config.kcfg:411
+#: src/config/tellico_config.kcfg:441 src/config/tellico_config.kcfg:471
+#: src/config/tellico_config.kcfg:501
 #, kde-format
 msgid "Template background color"
 msgstr "Πρότυπο χρώματος γραμματοσειράς"
@@ -2294,13 +2294,13 @@ msgstr "Πρότυπο χρώματος γραμματοσειράς"
 #. i18n: ectx: label, entry (textColorFile), group (Options - file)
 #. i18n: ectx: label, entry (textColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (textColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:148 src/config/tellico_config.kcfg:178
-#: src/config/tellico_config.kcfg:208 src/config/tellico_config.kcfg:241
-#: src/config/tellico_config.kcfg:271 src/config/tellico_config.kcfg:301
-#: src/config/tellico_config.kcfg:331 src/config/tellico_config.kcfg:361
-#: src/config/tellico_config.kcfg:391 src/config/tellico_config.kcfg:421
-#: src/config/tellico_config.kcfg:451 src/config/tellico_config.kcfg:481
-#: src/config/tellico_config.kcfg:511
+#: src/config/tellico_config.kcfg:142 src/config/tellico_config.kcfg:172
+#: src/config/tellico_config.kcfg:202 src/config/tellico_config.kcfg:235
+#: src/config/tellico_config.kcfg:265 src/config/tellico_config.kcfg:295
+#: src/config/tellico_config.kcfg:325 src/config/tellico_config.kcfg:355
+#: src/config/tellico_config.kcfg:385 src/config/tellico_config.kcfg:415
+#: src/config/tellico_config.kcfg:445 src/config/tellico_config.kcfg:475
+#: src/config/tellico_config.kcfg:505
 #, kde-format
 msgid "Template text color"
 msgstr "Πρότυπο χρώματος κειμένου"
@@ -2318,13 +2318,13 @@ msgstr "Πρότυπο χρώματος κειμένου"
 #. i18n: ectx: label, entry (highlightedBaseColorFile), group (Options - file)
 #. i18n: ectx: label, entry (highlightedBaseColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (highlightedBaseColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:152 src/config/tellico_config.kcfg:182
-#: src/config/tellico_config.kcfg:212 src/config/tellico_config.kcfg:245
-#: src/config/tellico_config.kcfg:275 src/config/tellico_config.kcfg:305
-#: src/config/tellico_config.kcfg:335 src/config/tellico_config.kcfg:365
-#: src/config/tellico_config.kcfg:395 src/config/tellico_config.kcfg:425
-#: src/config/tellico_config.kcfg:455 src/config/tellico_config.kcfg:485
-#: src/config/tellico_config.kcfg:515
+#: src/config/tellico_config.kcfg:146 src/config/tellico_config.kcfg:176
+#: src/config/tellico_config.kcfg:206 src/config/tellico_config.kcfg:239
+#: src/config/tellico_config.kcfg:269 src/config/tellico_config.kcfg:299
+#: src/config/tellico_config.kcfg:329 src/config/tellico_config.kcfg:359
+#: src/config/tellico_config.kcfg:389 src/config/tellico_config.kcfg:419
+#: src/config/tellico_config.kcfg:449 src/config/tellico_config.kcfg:479
+#: src/config/tellico_config.kcfg:509
 #, kde-format
 msgid "Template highlight color"
 msgstr "Πρότυπο χρώματος επισήμανσης"
@@ -2342,13 +2342,13 @@ msgstr "Πρότυπο χρώματος επισήμανσης"
 #. i18n: ectx: label, entry (highlightedTextColorFile), group (Options - file)
 #. i18n: ectx: label, entry (highlightedTextColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (highlightedTextColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:156 src/config/tellico_config.kcfg:186
-#: src/config/tellico_config.kcfg:216 src/config/tellico_config.kcfg:249
-#: src/config/tellico_config.kcfg:279 src/config/tellico_config.kcfg:309
-#: src/config/tellico_config.kcfg:339 src/config/tellico_config.kcfg:369
-#: src/config/tellico_config.kcfg:399 src/config/tellico_config.kcfg:429
-#: src/config/tellico_config.kcfg:459 src/config/tellico_config.kcfg:489
-#: src/config/tellico_config.kcfg:519
+#: src/config/tellico_config.kcfg:150 src/config/tellico_config.kcfg:180
+#: src/config/tellico_config.kcfg:210 src/config/tellico_config.kcfg:243
+#: src/config/tellico_config.kcfg:273 src/config/tellico_config.kcfg:303
+#: src/config/tellico_config.kcfg:333 src/config/tellico_config.kcfg:363
+#: src/config/tellico_config.kcfg:393 src/config/tellico_config.kcfg:423
+#: src/config/tellico_config.kcfg:453 src/config/tellico_config.kcfg:483
+#: src/config/tellico_config.kcfg:513
 #, kde-format
 msgid "Template highlighted text color"
 msgstr "Πρότυπο χρώματος επισήμανσης κειμένου"
@@ -2366,13 +2366,13 @@ msgstr "Πρότυπο χρώματος επισήμανσης κειμένου"
 #. i18n: ectx: label, entry (linkColorFile), group (Options - file)
 #. i18n: ectx: label, entry (linkColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (linkColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:160 src/config/tellico_config.kcfg:190
-#: src/config/tellico_config.kcfg:220 src/config/tellico_config.kcfg:253
-#: src/config/tellico_config.kcfg:283 src/config/tellico_config.kcfg:313
-#: src/config/tellico_config.kcfg:343 src/config/tellico_config.kcfg:373
-#: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
-#: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
-#: src/config/tellico_config.kcfg:523
+#: src/config/tellico_config.kcfg:154 src/config/tellico_config.kcfg:184
+#: src/config/tellico_config.kcfg:214 src/config/tellico_config.kcfg:247
+#: src/config/tellico_config.kcfg:277 src/config/tellico_config.kcfg:307
+#: src/config/tellico_config.kcfg:337 src/config/tellico_config.kcfg:367
+#: src/config/tellico_config.kcfg:397 src/config/tellico_config.kcfg:427
+#: src/config/tellico_config.kcfg:457 src/config/tellico_config.kcfg:487
+#: src/config/tellico_config.kcfg:517
 #, fuzzy, kde-format
 #| msgid "Template highlight color"
 msgid "Template link color"
@@ -2384,18 +2384,18 @@ msgid "Configure Tellico"
 msgstr "Διαμόρφωση Tellico"
 
 #: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:340
+#: src/configdialog.cpp:334
 #, kde-format
 msgid "Printing"
 msgstr "Εκτύπωση"
 
 #: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:417
+#: src/configdialog.cpp:411
 #, kde-format
 msgid "Templates"
 msgstr "Πρότυπα"
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:621
+#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:615
 #, kde-format
 msgid "Data Sources"
 msgstr "Πηγές δεδομένων"
@@ -2434,22 +2434,10 @@ msgstr "Εάν επιλεγεί, τα πεδία ονομάτων θα εκτυ�
 
 #: src/configdialog.cpp:227
 #, kde-format
-msgid "&Show \"Tip of the Day\" at startup"
-msgstr "Εμφάνιση \"Συμβουλή της ημέρας\" κατά την εκκίνηση"
-
-#: src/configdialog.cpp:228
-#, kde-format
-msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
-msgstr ""
-"Εάν επιλεγεί, η \"Συμβουλή της ημέρας\" θα εμφανίζεται στην εκκίνηση της "
-"εφαρμογής."
-
-#: src/configdialog.cpp:233
-#, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "&Ενεργοποίηση κάμερας για σάρωση barcode"
 
-#: src/configdialog.cpp:234
+#: src/configdialog.cpp:228
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
@@ -2458,27 +2446,27 @@ msgstr ""
 "Αν ενεργοποιηθεί, η καταγραφή από την κάμερα θα χρησιμοποιηθεί για την "
 "σάρωση barcode για αναζήτηση."
 
-#: src/configdialog.cpp:239
+#: src/configdialog.cpp:233
 #, kde-format
 msgid "Image Storage Options"
 msgstr "Επιλογές αποθήκευσης εικόνων"
 
-#: src/configdialog.cpp:241
+#: src/configdialog.cpp:235
 #, kde-format
 msgid "Store images in data file"
 msgstr "Αποθήκευση εικόνων στο αρχείο δεδομένων"
 
-#: src/configdialog.cpp:242
+#: src/configdialog.cpp:236
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "Αποθήκευση εικόνων στον συνηθισμένο φάκελο της εφαρμογής"
 
-#: src/configdialog.cpp:243
+#: src/configdialog.cpp:237
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "Αποθήκευση εικόνων στον σχετικό με το αρχείο δεδομένων φάκελο"
 
-#: src/configdialog.cpp:244
+#: src/configdialog.cpp:238
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2489,39 +2477,39 @@ msgstr ""
 "μειώσουν την ταχύτητα του Tellico. Αποθηκεύστε τις εικόνες στον φάκελο της "
 "εφαρμογής ή σε έναν άλλο φάκελο στην ίδια τοποθεσία με το αρχείο δεδομένων."
 
-#: src/configdialog.cpp:265 src/configdialog.cpp:349
+#: src/configdialog.cpp:259 src/configdialog.cpp:343
 #, kde-format
 msgid "Formatting Options"
 msgstr "Μορφοποίηση επιλογών"
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:264
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "Αυτόματη μετατροπή σε κεφαλαία των &τίτλων και των ονομάτων"
 
-#: src/configdialog.cpp:271
+#: src/configdialog.cpp:265
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Εάν επιλεγεί, οι τίτλοι και τα ονόματα θα μετατρέπονται αυτόματα σε γραφή με "
 "κεφαλαία γράμματα."
 
-#: src/configdialog.cpp:276
+#: src/configdialog.cpp:270
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "Αυτόματη μορφοποίηση τίτλων και ονομάτων"
 
-#: src/configdialog.cpp:277 src/configdialog.cpp:355
+#: src/configdialog.cpp:271 src/configdialog.cpp:349
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Εάν επιλεγεί, οι τίτλοι και τα ονόματα θα μορφοποιούνται αυτόματα."
 
-#: src/configdialog.cpp:287
+#: src/configdialog.cpp:281
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "Όχι κεφαλαία &γράμματα:"
 
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:286
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2531,12 +2519,12 @@ msgstr ""
 "γράμματα. Πολλαπλές τιμές πρέπει να διαχωρίζονται με ελληνικό ερωτηματικό.</"
 "qt>"
 
-#: src/configdialog.cpp:298
+#: src/configdialog.cpp:292
 #, kde-format
 msgid "Artic&les:"
 msgstr "Άρ&θρα:"
 
-#: src/configdialog.cpp:303
+#: src/configdialog.cpp:297
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2547,12 +2535,12 @@ msgstr ""
 "πρώτη λέξη σε έναν τίτλο. Πολλαπλές τιμές πρέπει να διαχωρίζονται με "
 "ελληνικό ερωτηματικό.</qt>"
 
-#: src/configdialog.cpp:310
+#: src/configdialog.cpp:304
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Προσωπικές καταλή&ξεις:"
 
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:309
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2561,12 +2549,12 @@ msgstr ""
 "<qt>Λίστα καταλήξεων που μπορεί να χρησιμοποιηθούν σε ονόματα. Πολλαπλές "
 "τιμές πρέπει να διαχωρίζονται με ελληνικό ερωτηματικό.</qt>"
 
-#: src/configdialog.cpp:321
+#: src/configdialog.cpp:315
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "&Προθέματα επωνύμου:"
 
-#: src/configdialog.cpp:326
+#: src/configdialog.cpp:320
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2575,54 +2563,54 @@ msgstr ""
 "<qt>Λίστα προθεμάτων που μπορεί να χρησιμοποιηθούν σε επώνυμα. Πολλαπλές "
 "τιμές πρέπει να διαχωρίζονται με ελληνικό ερωτηματικό.</qt>"
 
-#: src/configdialog.cpp:341
+#: src/configdialog.cpp:335
 #, kde-format
 msgid "Printing Options"
 msgstr "Επιλογές εκτύπωσης"
 
-#: src/configdialog.cpp:354
+#: src/configdialog.cpp:348
 #, kde-format
 msgid "&Format titles and names"
 msgstr "Μορ&φοποίηση τίτλων και ονομάτων"
 
-#: src/configdialog.cpp:359
+#: src/configdialog.cpp:353
 #, kde-format
 msgid "&Print field headers"
 msgstr "Εκτύ&πωση επικεφαλίδων πεδίων"
 
-#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Εάν επιλεγεί, τα πεδία ονομάτων θα εκτυπωθούν ως επικεφαλίδες πίνακα."
 
-#: src/configdialog.cpp:364
+#: src/configdialog.cpp:358
 #, kde-format
 msgid "Grouping Options"
 msgstr "Επιλογές ομαδοποίησης"
 
-#: src/configdialog.cpp:369
+#: src/configdialog.cpp:363
 #, kde-format
 msgid "&Group the entries"
 msgstr "&Ομαδοποίηση καταχωρήσεων"
 
-#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
 "Εάν επιλεγεί, οι καταχωρήσεις θα ομαδοποιηθούν σύμφωνα με το επιλεγμένο "
 "πεδίο."
 
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:368
 #, kde-format
 msgid "Image Options"
 msgstr "Επιλογές εικόνας"
 
-#: src/configdialog.cpp:380
+#: src/configdialog.cpp:374
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "Μέγιστο π&λάτος εικόνας:"
 
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:383
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
@@ -2630,37 +2618,37 @@ msgid ""
 msgstr ""
 "Το μέγιστο πλάτος των εικόνων που εκτυπώνονται. Η αναλογία διατηρείται. "
 
-#: src/configdialog.cpp:395
+#: src/configdialog.cpp:389
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "&Μέγιστο ύψος εικόνας:"
 
-#: src/configdialog.cpp:404
+#: src/configdialog.cpp:398
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Το μέγιστο ύψος των εικόνων που εκτυπώνονται. Η αναλογία διατηρείται. "
 
-#: src/configdialog.cpp:418
+#: src/configdialog.cpp:412
 #, kde-format
 msgid "Template Options"
 msgstr "Επιλογές προτύπου"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:364
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:364
 #: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
 msgstr "&Είδος συλλογής:"
 
-#: src/configdialog.cpp:439
+#: src/configdialog.cpp:433
 #, kde-format
 msgid "Template:"
 msgstr "Πρότυπο:"
 
-#: src/configdialog.cpp:444
+#: src/configdialog.cpp:438
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2669,12 +2657,12 @@ msgstr ""
 "Επιλέξτε το πρότυπο που θα χρησιμοποιηθεί για τις τρέχουσες συλλογές. Δεν "
 "χρησιμοποιούν όλα τα πρότυπα τη γραμματοσειρά και τις επιλογές χρώματος."
 
-#: src/configdialog.cpp:451
+#: src/configdialog.cpp:445
 #, kde-format
 msgid "&Preview..."
 msgstr "&Προεπισκόπηση..."
 
-#: src/configdialog.cpp:452
+#: src/configdialog.cpp:446
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "Προβολή προεπισκόπησης του προτύπου"
@@ -2684,112 +2672,112 @@ msgstr "Προβολή προεπισκόπησης του προτύπου"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:469
+#: src/configdialog.cpp:463
 #, kde-format
 msgid "Font Options"
 msgstr "Επιλογές γραμματοσειράς"
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:470
 #, kde-format
 msgid "Font:"
 msgstr "Γραμματοσειρά:"
 
-#: src/configdialog.cpp:482
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr ""
 "Αυτή η γραμματοσειρά πέρασε στο πρότυπο που χρησιμοποιείται στην Προβολή "
 "καταχώρησης."
 
-#: src/configdialog.cpp:486
+#: src/configdialog.cpp:480
 #, kde-format
 msgid "Size:"
 msgstr "Μέγεθος:"
 
-#: src/configdialog.cpp:498
+#: src/configdialog.cpp:492
 #, kde-format
 msgid "Color Options"
 msgstr "Επιλογές χρώματος"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:499
 #, kde-format
 msgid "Background color:"
 msgstr "Χρώμα φόντου:"
 
-#: src/configdialog.cpp:511
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr ""
 "Αυτό το χρώμα πέρασε στο πρότυπο που χρησιμοποιείται στην Προβολή "
 "καταχώρησης."
 
-#: src/configdialog.cpp:515
+#: src/configdialog.cpp:509
 #, kde-format
 msgid "Text color:"
 msgstr "Χρώμα κειμένου:"
 
-#: src/configdialog.cpp:524
+#: src/configdialog.cpp:518
 #, kde-format
 msgid "Highlight color:"
 msgstr "Χρώμα τονισμού:"
 
-#: src/configdialog.cpp:533
+#: src/configdialog.cpp:527
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "Χρώμα τονισμού κειμένου:"
 
-#: src/configdialog.cpp:542
+#: src/configdialog.cpp:536
 #, fuzzy, kde-format
 #| msgid "Text color:"
 msgid "Link color:"
 msgstr "Χρώμα κειμένου:"
 
-#: src/configdialog.cpp:551
+#: src/configdialog.cpp:545
 #, kde-format
 msgid "Manage Templates"
 msgstr "Διαχείριση προτύπων"
 
-#: src/configdialog.cpp:562
+#: src/configdialog.cpp:556
 #, kde-format
 msgid "Install..."
 msgstr "Εγκατάσταση..."
 
-#: src/configdialog.cpp:566
+#: src/configdialog.cpp:560
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Κάντε κλικ για να εγκαταστήσετε ένα νέο πρότυπο αμέσως."
 
-#: src/configdialog.cpp:571 src/configdialog.cpp:574 src/configdialog.cpp:578
+#: src/configdialog.cpp:565 src/configdialog.cpp:568 src/configdialog.cpp:572
 #, kde-format
 msgid "Download..."
 msgstr "Λήψη..."
 
-#: src/configdialog.cpp:583
+#: src/configdialog.cpp:577
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Κάντε κλικ για τη λήψη πρόσθετων προτύπων."
 
-#: src/configdialog.cpp:586
+#: src/configdialog.cpp:580
 #, kde-format
 msgid "Delete..."
 msgstr "Διαγραφή..."
 
-#: src/configdialog.cpp:590
+#: src/configdialog.cpp:584
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Κάντε κλικ για να επιλέξετε και να διαγράψετε πρότυπα."
 
-#: src/configdialog.cpp:622
+#: src/configdialog.cpp:616
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Επιλογές πηγών δεδομένων"
 
-#: src/configdialog.cpp:643
+#: src/configdialog.cpp:637
 #, kde-format
 msgid "Move &Up"
 msgstr "Μετακίνηση &πάνω"
 
-#: src/configdialog.cpp:646
+#: src/configdialog.cpp:640
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2798,59 +2786,59 @@ msgstr ""
 "Η σειρά των πηγών δεδομένων, καθορίζει τη σειρά που χρησιμοποιεί το Tellico "
 "όταν οι καταχωρήσεις ενημερώνονται αυτόματα."
 
-#: src/configdialog.cpp:649
+#: src/configdialog.cpp:643
 #, kde-format
 msgid "Move &Down"
 msgstr "Μετακίνηση &κάτω"
 
-#: src/configdialog.cpp:658
+#: src/configdialog.cpp:652
 #, kde-format
 msgid "Filter by type:"
 msgstr "Φιλτράρισμα ανάλογα με τον τύπο:"
 
-#: src/configdialog.cpp:676
+#: src/configdialog.cpp:670
 #, kde-format
 msgid "&New..."
 msgstr "&Νέο..."
 
-#: src/configdialog.cpp:678
+#: src/configdialog.cpp:672
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Κάντε κλικ για να προσθέσετε μια νέα πηγή δεδομένων."
 
-#: src/configdialog.cpp:679
+#: src/configdialog.cpp:673
 #, kde-format
 msgid "&Modify..."
 msgstr "&Τροποποίηση..."
 
-#: src/configdialog.cpp:681
+#: src/configdialog.cpp:675
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Κάντε κλικ για να τροποποιήσετε τις επιλεγμένες πηγές δεδομένων."
 
-#: src/configdialog.cpp:682
+#: src/configdialog.cpp:676
 #, kde-format
 msgid "&Delete"
 msgstr "&Διαγραφή"
 
-#: src/configdialog.cpp:684
+#: src/configdialog.cpp:678
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Κάντε κλικ για να διαγράψετε την πηγή δεδομένων."
 
-#: src/configdialog.cpp:1158 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1150 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL αρχεία"
 
-#: src/configdialog.cpp:1159
+#: src/configdialog.cpp:1151
 #, kde-format
 msgid "Template Packages"
 msgstr "Πακέτα προτύπων"
 
-#: src/configdialog.cpp:1160 src/importdialog.cpp:439 src/mainwindow.cpp:1281
-#: src/mainwindow.cpp:1456 src/reportdialog.cpp:428 src/reportdialog.cpp:443
+#: src/configdialog.cpp:1152 src/importdialog.cpp:439 src/mainwindow.cpp:1276
+#: src/mainwindow.cpp:1451 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -2864,12 +2852,12 @@ msgstr "Πακέτα προτύπων"
 msgid "All Files"
 msgstr "Όλα τα αρχεία"
 
-#: src/configdialog.cpp:1189
+#: src/configdialog.cpp:1181
 #, kde-format
 msgid "Delete Template"
 msgstr "Διαγραφή προτύπου"
 
-#: src/configdialog.cpp:1190
+#: src/configdialog.cpp:1182
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Επιλέξτε πρότυπο για να το διαγράψετε:"
@@ -3064,7 +3052,7 @@ msgstr "Εμφάνιση όλων των στηλών"
 msgid "Hide All Columns"
 msgstr "Απόκρυψη όλων των στηλών"
 
-#: src/document.cpp:210 src/mainwindow.cpp:1395
+#: src/document.cpp:210 src/mainwindow.cpp:1390
 #, kde-format
 msgid "Saving file..."
 msgstr "Αποθήκευση αρχείου..."
@@ -3126,7 +3114,7 @@ msgid "Save Entry"
 msgstr "Αποθήκευση εισαγωγών"
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1168 src/mainwindow.cpp:1186
+#: src/mainwindow.cpp:1163 src/mainwindow.cpp:1181
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Μη αποθηκευμένες αλλαγές"
@@ -3136,7 +3124,7 @@ msgstr "Μη αποθηκευμένες αλλαγές"
 msgid "(Empty)"
 msgstr "(Άδειο)"
 
-#: src/entryiconview.cpp:65 src/mainwindow.cpp:872
+#: src/entryiconview.cpp:65 src/mainwindow.cpp:867
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3209,7 +3197,7 @@ msgstr ""
 "Το Tellico δεν μπορεί να εντοπίσει το προκαθορισμένο στυλ φύλλου για τις "
 "καταχωρήσεις."
 
-#: src/entryview.cpp:334 src/mainwindow.cpp:1806
+#: src/entryview.cpp:334 src/mainwindow.cpp:1797
 #, kde-format
 msgid "Please check your installation."
 msgstr "Παρακαλώ ελέγξτε την εγκατάστασή σας."
@@ -4914,8 +4902,8 @@ msgstr "Όνομα φίλτρου:"
 msgid "&Save Filter"
 msgstr "&Αποθήκευση φίλτρου"
 
-#: src/filterview.cpp:191 src/mainwindow.cpp:567 src/mainwindow.cpp:777
-#: src/mainwindow.cpp:795
+#: src/filterview.cpp:191 src/mainwindow.cpp:567 src/mainwindow.cpp:772
+#: src/mainwindow.cpp:790
 #, kde-format
 msgid "Filter"
 msgstr "Φίλτρο"
@@ -4951,8 +4939,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Ομάδα"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1095 src/mainwindow.cpp:1741
-#: src/mainwindow.cpp:1775 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1090 src/mainwindow.cpp:1732
+#: src/mainwindow.cpp:1766 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Άτομα"
@@ -5263,14 +5251,14 @@ msgstr ""
 msgid "&Import"
 msgstr "Ει&σαγωγή"
 
-#: src/importdialog.cpp:371 src/mainwindow.cpp:1277 src/mainwindow.cpp:1454
+#: src/importdialog.cpp:371 src/mainwindow.cpp:1272 src/mainwindow.cpp:1449
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Αρχεία Tellico"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "XML αρχεία"
@@ -6080,7 +6068,7 @@ msgstr "Αποεπιλογή όλων των καταχωρήσεων της σ�
 msgid "Advanced &Filter..."
 msgstr "Προσαρμοσμένο &φίλτρο..."
 
-#: src/mainwindow.cpp:570 src/mainwindow.cpp:796
+#: src/mainwindow.cpp:570 src/mainwindow.cpp:791
 #, kde-format
 msgid "Filter the collection"
 msgstr "Φιλτράρισμα της συλλογής"
@@ -6307,27 +6295,27 @@ msgstr "&Επεξεργαστής καταχώρησης"
 msgid "Enable/disable the editor"
 msgstr "Ενεργοποίηση/Απενεργοποίηση του επεξεργαστή"
 
-#: src/mainwindow.cpp:763
+#: src/mainwindow.cpp:758
 #, kde-format
 msgid "Change Grouping"
 msgstr "Αλλαγή ομαδοποίησης"
 
-#: src/mainwindow.cpp:766
+#: src/mainwindow.cpp:761
 #, kde-format
 msgid "&Group Selection"
 msgstr "&Επιλογή ομάδας"
 
-#: src/mainwindow.cpp:767
+#: src/mainwindow.cpp:762
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr "Αλλαγή ομαδοποίησης της συλλογής"
 
-#: src/mainwindow.cpp:781
+#: src/mainwindow.cpp:776
 #, kde-format
 msgid "Filter here..."
 msgstr "Φίλτρο εδώ..."
 
-#: src/mainwindow.cpp:846 src/mainwindow.cpp:849
+#: src/mainwindow.cpp:841 src/mainwindow.cpp:844
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
@@ -6336,12 +6324,12 @@ msgstr ""
 "<qt>Η <i>Προβολή καταχώρησης</i> εμφανίζει μια μορφοποιημένη προβολή των "
 "περιεχομένων της καταχώρησης.</qt>"
 
-#: src/mainwindow.cpp:855
+#: src/mainwindow.cpp:850
 #, kde-format
 msgid "Collection View"
 msgstr "Προβολή συλλογής"
 
-#: src/mainwindow.cpp:862
+#: src/mainwindow.cpp:857
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
@@ -6350,17 +6338,17 @@ msgstr ""
 "<qt>Η <i>Προβολή στήλης</i> εμφανίζει την τιμή πολλαπλών πεδίων για κάθε "
 "καταχώρηση.</qt>"
 
-#: src/mainwindow.cpp:879
+#: src/mainwindow.cpp:874
 #, kde-format
 msgid "Group View"
 msgstr "Προβολή ομάδων"
 
-#: src/mainwindow.cpp:888
+#: src/mainwindow.cpp:883
 #, kde-format
 msgid "Groups"
 msgstr "Ομάδες"
 
-#: src/mainwindow.cpp:889
+#: src/mainwindow.cpp:884
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
@@ -6369,12 +6357,12 @@ msgstr ""
 "<qt>Η <i>Προβολή ομάδας</i> ταξινομεί τις καταχωρήσεις σε ομάδες με βάση το "
 "επιλεγμένο πεδίο.</qt>"
 
-#: src/mainwindow.cpp:964
+#: src/mainwindow.cpp:959
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Καλώς ήρθατε στον διαχειριστή συλλογών Tellico"
 
-#: src/mainwindow.cpp:966
+#: src/mainwindow.cpp:961
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6390,7 +6378,7 @@ msgstr ""
 "είτε <a href=\"tc:///edit_search_internet\"> εισάγοντας δεδομένα από "
 "διαδικτυακές πηγές.</a></h3>"
 
-#: src/mainwindow.cpp:1165
+#: src/mainwindow.cpp:1160
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6399,23 +6387,23 @@ msgstr ""
 "Το τρέχον αρχείο έχει τροποποιηθεί.\n"
 "Θέλετε να το αποθηκεύσετε;"
 
-#: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
+#: src/mainwindow.cpp:1216 src/mainwindow.cpp:1249
 #, fuzzy, kde-format
 #| msgid "Create a new collection"
 msgid "Creating new collection..."
 msgstr "Δημιουργία μιας νέας συλλογής"
 
-#: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
+#: src/mainwindow.cpp:1269 src/mainwindow.cpp:1292 src/mainwindow.cpp:1310
 #, kde-format
 msgid "Opening file..."
 msgstr "Άνοιγμα αρχείου..."
 
-#: src/mainwindow.cpp:1285
+#: src/mainwindow.cpp:1280
 #, kde-format
 msgid "Open File"
 msgstr "Άνοιγμα αρχείου"
 
-#: src/mainwindow.cpp:1406
+#: src/mainwindow.cpp:1401
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6429,32 +6417,32 @@ msgstr ""
 "λειτουργία του; </p><p>Η επιλογή σας μπορεί να αλλάξει από το παράθυρο "
 "διαμόρφωσης.</p></qt>"
 
-#: src/mainwindow.cpp:1411
+#: src/mainwindow.cpp:1406
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Ξεχωριστή αποθήκευση εικόνων"
 
-#: src/mainwindow.cpp:1412
+#: src/mainwindow.cpp:1407
 #, kde-format
 msgid "Save Images in File"
 msgstr "Αποθήκευση εικόνων σε αρχείο"
 
-#: src/mainwindow.cpp:1452
+#: src/mainwindow.cpp:1447
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Αποθήκευση αρχείου με ένα νέο όνομα..."
 
-#: src/mainwindow.cpp:1461
+#: src/mainwindow.cpp:1456
 #, kde-format
 msgid "Save As"
 msgstr "Αποθήκευση ως"
 
-#: src/mainwindow.cpp:1527
+#: src/mainwindow.cpp:1522
 #, kde-format
 msgid "Printing..."
 msgstr "Εκτύπωση..."
 
-#: src/mainwindow.cpp:1531
+#: src/mainwindow.cpp:1526
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6464,27 +6452,27 @@ msgstr ""
 "υποσύνολο των καταχωρήσεων. Μόνον οι εμφανιζόμενες καταχωρήσεις θα "
 "εκτυπωθούν. Θέλετε να συνεχίσετε;"
 
-#: src/mainwindow.cpp:1554
+#: src/mainwindow.cpp:1549
 #, kde-format
 msgid "Exiting..."
 msgstr "Έξοδος..."
 
-#: src/mainwindow.cpp:1660
+#: src/mainwindow.cpp:1651
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 φιλτραρίστηκαν; %2 επιλέχθηκαν)"
 
-#: src/mainwindow.cpp:1663
+#: src/mainwindow.cpp:1654
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 φιλτραρίστηκαν)"
 
-#: src/mainwindow.cpp:1666
+#: src/mainwindow.cpp:1657
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 Επιλεγμένο Παιχνίδι)"
 
-#: src/mainwindow.cpp:1805 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1796 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:264
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6492,57 +6480,57 @@ msgstr "(%1 Επιλεγμένο Παιχνίδι)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Το Tellico εντόπισε ένα σφάλμα στη διαδικασία XSLT."
 
-#: src/mainwindow.cpp:1937
+#: src/mainwindow.cpp:1928
 #, kde-format
 msgid "Importing data..."
 msgstr "Εισαγωγή δεδομένων..."
 
-#: src/mainwindow.cpp:1948
+#: src/mainwindow.cpp:1939
 #, kde-format
 msgid "Import File"
 msgstr "Εισαγωγή αρχείου"
 
-#: src/mainwindow.cpp:1961
+#: src/mainwindow.cpp:1952
 #, kde-format
 msgid "Import Directory"
 msgstr "Εισαγωγή φακέλου"
 
-#: src/mainwindow.cpp:1985
+#: src/mainwindow.cpp:1976
 #, kde-format
 msgid "Exporting data..."
 msgstr "Εξαγωγή δεδομένων..."
 
-#: src/mainwindow.cpp:2008
+#: src/mainwindow.cpp:1999
 #, kde-format
 msgid "Export As"
 msgstr "Εξαγωγή ως"
 
-#: src/mainwindow.cpp:2036
+#: src/mainwindow.cpp:2027
 #, kde-format
 msgid "String Macros"
 msgstr "Αλφαριθμητικό μακροεντολής"
 
-#: src/mainwindow.cpp:2037
+#: src/mainwindow.cpp:2028
 #, kde-format
 msgid "Macro"
 msgstr "Μακροεντολή"
 
-#: src/mainwindow.cpp:2037
+#: src/mainwindow.cpp:2028
 #, kde-format
 msgid "String"
 msgstr "Συμβολοσειρά"
 
-#: src/mainwindow.cpp:2123
+#: src/mainwindow.cpp:2114
 #, kde-format
 msgid "Creating citations..."
 msgstr "Δημιουργία παραπομπών..."
 
-#: src/mainwindow.cpp:2233
+#: src/mainwindow.cpp:2224
 #, kde-format
 msgid "Filters"
 msgstr "Φίλτρα"
 
-#: src/mainwindow.cpp:2234
+#: src/mainwindow.cpp:2225
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6551,12 +6539,12 @@ msgstr ""
 "<qt>Η <i>Προβολή φίλτρου</i> εμφανίζει τις καταχωρήσεις που ικανοποιούν "
 "συγκεκριμένους κανόνες αναζήτησης.</qt>"
 
-#: src/mainwindow.cpp:2257
+#: src/mainwindow.cpp:2248
 #, kde-format
 msgid "Loans"
 msgstr "Δανεισμοί"
 
-#: src/mainwindow.cpp:2258
+#: src/mainwindow.cpp:2249
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6565,7 +6553,7 @@ msgstr ""
 "<qt>Η <i>Προβολή δανεισμού</i> εμφανίζει μια λίστα όλων των ατόμων, οι "
 "οποίοι έχουν δανειστεί αντικείμενα από τις συλλογές σας.</qt>"
 
-#: src/mainwindow.cpp:2345
+#: src/mainwindow.cpp:2336
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6575,12 +6563,12 @@ msgstr ""
 "αρχείο πρέπει να αποθηκευτεί και οι εικόνες θα πρέπει να μεταφερθούν σε μια "
 "νέα τοποθεσία."
 
-#: src/mainwindow.cpp:2386
+#: src/mainwindow.cpp:2377
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Ενημέρωση δεδομένων καταχωρήσεων από %1"
 
-#: src/mainwindow.cpp:2405
+#: src/mainwindow.cpp:2396
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6729,13 +6717,13 @@ msgid "&Show Views"
 msgstr "Εμφάνι&ση προβολών"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: src/tellicoui.rc:128
+#: src/tellicoui.rc:125
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Κύρια γραμμή εργαλείων"
 
 #. i18n: ectx: ToolBar (collectionToolBar)
-#: src/tellicoui.rc:135
+#: src/tellicoui.rc:132
 #, kde-format
 msgid "Collection Toolbar"
 msgstr "Εργαλειοθήκη συλλογής"
@@ -7429,12 +7417,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:189
+#: src/translators/tellicoimporter.cpp:183
 #, kde-format
 msgid "The file is empty."
 msgstr "Το αρχείο είναι κενό."
 
-#: src/translators/tellicoimporter.cpp:202
+#: src/translators/tellicoimporter.cpp:196
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "Το αρχείο δεν περιέχει δεδομένα συλλογής."
@@ -7514,212 +7502,6 @@ msgstr ""
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "Αυξήστε το μέγιστο μέγεθος εικονιδίου στη λίστα προβολής εικονιδίων"
 
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:2
-#, kde-format
-msgid ""
-"<p>...that if a book has more than one author, you should separate\n"
-"their names by a semi-colon, so that Tellico will know how to split them\n"
-"and use them separately.</p>\n"
-"<p>Any other field which allows multiple values should be entered the\n"
-"same way, with a semi-colon (;) separating each value.</p>\n"
-msgstr ""
-"<p>...ότι εάν ένα βιβλίο έχει περισσότερους από έναν συγγραφείς, πρέπει να\n"
-"διαχωρίσετε τα ονόματά τους με ελληνικό ερωτηματικό, ώστε το Tellico να\n"
-"γνωρίζει πως να τα χωρίσει και να χρησιμοποιήσει ξεχωριστά.</p>\n"
-"<p>Κάθε άλλο πεδίο που επιτρέπει πολλαπλές τιμές, αυτές εισάγονται\n"
-"με τον ίδιο τρόπο, με ελληνικό ερωτηματικό (;) που διαχωρίζει κάθε τιμή.</"
-"p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:11
-#, kde-format
-msgid ""
-"<p>...that you can change which fields are shown in the column view by\n"
-"right-clicking on the column header.\n"
-msgstr ""
-"<p>...ότι μπορείτε να αλλάξετε τα πεδία που εμφανίζονται στην\n"
-"προβολή στήλης με δεξί κλικ στην επικεφαλίδα της στήλης.\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:17
-#, kde-format
-msgid ""
-"<p>...that you can add, edit, or modify the fields in the collection using\n"
-"the Field Editor. The arrow buttons below the field list can be used to "
-"change the\n"
-"position of the field in the list, which affects the placement in the entry\n"
-"editor.</p>\n"
-msgstr ""
-"<p>...ότι μπορείτε να προσθέσετε, να επεξεργαστείτε ή να τροποποιήσετε\n"
-"τα πεδία μιας συλλογής με τον Επεξεργαστή πεδίων. Τα πλήκτρα με τα βέλη\n"
-"κάτω από τη λίστα πεδίων μπορούν να χρησιμοποιηθούν για να αλλάξετε\n"
-"τη θέση των πεδίων στη λίστα, ώστε αυτά να εμφανίζονται με τη σειρά που\n"
-"επιθυμείτε στον επεξεργαστή καταχωρήσεων.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:25
-#, kde-format
-msgid ""
-"<p>...that if you want to filter by a Checkbox field, a value of\n"
-"\"true\" should be used. If you'd like to filter to\n"
-"show only the science fiction books which you've not read, for\n"
-"example, check the <em>Match all of the\n"
-"following</em> button, set the first rule to have \"Genre\"\n"
-"\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
-"have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
-msgstr ""
-"<p>...ότι εάν θέλετε να φιλτράρετε με ένα πεδίο πλαισίου επιλογής,\n"
-"μια τιμή \"αληθής\" πρέπει να χρησιμοποιηθεί. Εάν επιθυμείτε να\n"
-"φιλτράρετε για να προβάλλετε, για παράδειγμα, μόνο τα βιβλία\n"
-"επιστημονικής φαντασίας τα οποία δεν έχετε διαβάσει, επιλέξτε\n"
-"το πλαίσιο <em>Ταιριάζει με όλα τα παρακάτω</em> και καθορίστε\n"
-"τον πρώτο κανόνα φιλτραρίσματος ως εξής: επιλέξτε \"Είδος\"\n"
-"\"περιέχει\" \"Επιστημονική φαντασία\" (χωρίς εισαγωγικά) και\n"
-"τον δεύτερο κανόνα \"Αναγνωσμένο\" \"δεν περιέχει\" \"αληθές\"\n"
-"(χωρίς εισαγωγικά).</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:36
-#, kde-format
-msgid ""
-"<p>...that if a non-word character is used in the Quick Filter, the text is\n"
-"interpreted as a regular expression.</p>\n"
-"<p>To show only books which are by Weber or Bujold, for example, then\n"
-"type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
-msgstr ""
-"<p>...ότι εάν στο Γρήγορο φίλτρο χρησιμοποιηθεί μια λέξη ή φράση ανύπαρκτη\n"
-"ή χωρίς νόημα, το κείμενο θα ερμηνευτεί σαν μια συνηθισμένη έκφραση.</p>\n"
-"<p>Για να εμφανίσετε μόνο τα βιβλία του Καζαντζάκη ή του Levi-Strauss, για\n"
-"παράδειγμα, πληκτρολογήστε \"Καζαντζάκης|Levi-Strauss\" (χωρίς εισαγωγικά)\n"
-"στο πλαίσιο του φίλτρου.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:44
-#, kde-format
-msgid ""
-"<p>...that you can edit more than one entry at a time, by holding down\n"
-"the Shift or Ctrl key and selecting multiple entries.</p>\n"
-msgstr ""
-"<p>...ότι μπορείτε να επεξεργαστείτε περισσότερες από μία καταχωρήσεις\n"
-"κάθε φορά, κρατώντας πατημένο το πλήκτρο Shift ή Ctrl και επιλέγοντας\n"
-"πολλαπλές καταχωρήσεις.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:50
-#, kde-format
-msgid ""
-"<p>...that you can convert an existing book collection to a bibliography,\n"
-"which can then be exported to bibtex or Bibtexml format.</p>\n"
-msgstr ""
-"<p>...ότι μπορείτε να μετατρέψετε μια υπάρχουσα συλλογή βιβλίων σε\n"
-"βιβλιογραφία, η οποία μπορεί να εξαχθεί σε μορφοποίηση bibtex ή\n"
-"Bibtexml.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:56
-#, kde-format
-msgid ""
-"<p>...that you can add, edit, and delete string macros for bibliographies.</"
-"p>\n"
-msgstr ""
-"<p>...ότι μπορείτε να προσθέσετε, να επεξεργαστείτε και να διαγράψετε "
-"αλφαριθμητικά μακροεντολών για βιβλιογραφίες..</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:61
-#, kde-format
-msgid ""
-"<p>...that if more than one field is formatted as a name, then an "
-"additional\n"
-"group named \"People\" is added to the collection, allowing authors and "
-"editors\n"
-"to be sorted or printed together, for example.</p>\n"
-msgstr ""
-"<p>...ότι εάν ένα πεδίο είναι μορφοποιημένο ως όνομα, τότε μια πρόσθετη\n"
-"ομάδα με το όνομα \"Άτομα\" προστίθεται στη συλλογή, επιτρέποντας, για\n"
-"παράδειγμα, στους συγγραφείς ή τους επιμελητές να ταξινομηθούν ή να\n"
-"εκτυπωθούν μαζί.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:68
-#, kde-format
-msgid ""
-"<p>...that you can modify the appearance of the printed output by modifying\n"
-"the <tt>tellico-printing.xsl</tt> file. The file generates HTML, and the "
-"CSS\n"
-"within the stylesheet governs things like the font, the margins, etc.</p>\n"
-msgstr ""
-"<p>...ότι μπορείτε να τροποποιήσετε την εμφάνιση των εκτυπώσεων,\n"
-"τροποποιώντας το αρχείο <tt>tellico-printing.xsl</tt>. Το αρχείο δημιουργεί\n"
-"HTML και το φύλλο στυλ CSS κυριαρχεί σε πράγματα όπως η γραμματοσειρά,\n"
-"τα περιθώρια, κλπ.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:75
-#, kde-format
-msgid ""
-"<p>...that you can import using any generic XSL stylesheet which\n"
-"outputs a valid Tellico XML file.</p>\n"
-msgstr ""
-"<p>...ότι μπορείτε να κάνετε εισαγωγή χρησιμοποιώντας οποιοδήποτε\n"
-"φύλλο στυλ XSL, το οποίο παράγει ένα έγκυρο αρχείο Tellico XML.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:81
-#, kde-format
-msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
-msgstr ""
-"<p>...ότι μπορείτε να ανοίξετε τον Επεξεργαστή καταχωρήσεων\n"
-"με διπλό κλικ σε οποιαδήποτε καταχώρηση.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:86
-#, kde-format
-msgid ""
-"<p>...that you can add HTML tags to any Paragraph field for formatting, such "
-"as\n"
-"&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
-msgstr ""
-"<p>...ότι μπορείτε να προσθέσετε ετικέτες HTML σε οποιοδήποτε πεδίο\n"
-"παραγράφου, για να το μορφοποιήσετε ως &lt;b&gt;έντονα&lt;/b&gt; ή\n"
-" &lt;i&gt;πλάγια&lt;/i&gt;.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:92
-#, kde-format
-msgid ""
-"<p>...that when the Column View is focused, you can press a letter on the\n"
-"keyboard to scroll to the next entry that starts with that letter.</p>\n"
-msgstr ""
-"<p>...ότι όταν η Προβολή στήλης είναι στο επίκεντρο, μπορείτε να πατήσετε\n"
-"ένα γράμμα στο πληκτρολόγιο για να γίνει κύλιση στην επόμενη\n"
-"καταχώρηση που ξεκινά με αυτό το γράμμα.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:98
-#, kde-format
-msgid ""
-"<p>...that you can use a field with a derived value to combine multiple "
-"separated fields\n"
-"into a single field. Use a derived value template\n"
-"similar to \"Value: %{fielda}%{fieldb}\" where %{...} gets replaced with "
-"the\n"
-"appropriate field value. This is useful to collect multiple values in a\n"
-"single field, e.g. for better grouping, and to combine fields of different\n"
-"types by respecting proper sorting at the same time. Consider for example\n"
-"a number field followed by a text subfield with entries 3b, 14a.</p>\n"
-msgstr ""
-"<p>...ότι μπορείτε να χρησιμοποιήσετε ένα πεδίο με μια παράγωγη τιμή\n"
-"για να συνδυάσετε ξεχωριστά πεδία σε ένα μοναδικό πεδίο. Χρησιμοποιήστε\n"
-"ένα πρότυπο παράγωγης τιμής παρόμοιο με \"Τιμή: %{πεδίο α}%{πεδίο β}\"\n"
-"όπου το %{...} αντικαθίσταται με την κατάλληλη τιμή πεδίου. Αυτό είναι\n"
-"χρήσιμο για να συλλέξετε πολλαπλές τιμές σε ένα μοναδικό πεδίο, π.χ.,\n"
-"για καλύτερη ομαδοποίηση, καθώς και για να συνδυάσετε πεδία διαφορετικού\n"
-"είδους σεβόμενοι την ορθή ταξινόμηση την ίδια στιγμή. Εξετάστε για\n"
-"παράδειγμα, ένα αριθμητικό πεδίο που ακολουθείται από ένα υποπεδίο\n"
-"κειμένου με καταχωρήσεις 3b, 14a.</p>\n"
-
 #: xslt/entry-templates/Album.xsl:171
 #, kde-format
 msgid "This template is meant for music collections only."
@@ -7787,6 +7569,192 @@ msgstr "Αναζήτηση"
 #, kde-format
 msgid "Clear"
 msgstr "Καθαρισμός"
+
+#~ msgid "&Show \"Tip of the Day\" at startup"
+#~ msgstr "Εμφάνιση \"Συμβουλή της ημέρας\" κατά την εκκίνηση"
+
+#~ msgid ""
+#~ "If checked, the \"Tip of the Day\" will be shown at program start-up."
+#~ msgstr ""
+#~ "Εάν επιλεγεί, η \"Συμβουλή της ημέρας\" θα εμφανίζεται στην εκκίνηση της "
+#~ "εφαρμογής."
+
+#~ msgid ""
+#~ "<p>...that if a book has more than one author, you should separate\n"
+#~ "their names by a semi-colon, so that Tellico will know how to split them\n"
+#~ "and use them separately.</p>\n"
+#~ "<p>Any other field which allows multiple values should be entered the\n"
+#~ "same way, with a semi-colon (;) separating each value.</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι εάν ένα βιβλίο έχει περισσότερους από έναν συγγραφείς, πρέπει "
+#~ "να\n"
+#~ "διαχωρίσετε τα ονόματά τους με ελληνικό ερωτηματικό, ώστε το Tellico να\n"
+#~ "γνωρίζει πως να τα χωρίσει και να χρησιμοποιήσει ξεχωριστά.</p>\n"
+#~ "<p>Κάθε άλλο πεδίο που επιτρέπει πολλαπλές τιμές, αυτές εισάγονται\n"
+#~ "με τον ίδιο τρόπο, με ελληνικό ερωτηματικό (;) που διαχωρίζει κάθε τιμή.</"
+#~ "p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can change which fields are shown in the column view by\n"
+#~ "right-clicking on the column header.\n"
+#~ msgstr ""
+#~ "<p>...ότι μπορείτε να αλλάξετε τα πεδία που εμφανίζονται στην\n"
+#~ "προβολή στήλης με δεξί κλικ στην επικεφαλίδα της στήλης.\n"
+
+#~ msgid ""
+#~ "<p>...that you can add, edit, or modify the fields in the collection "
+#~ "using\n"
+#~ "the Field Editor. The arrow buttons below the field list can be used to "
+#~ "change the\n"
+#~ "position of the field in the list, which affects the placement in the "
+#~ "entry\n"
+#~ "editor.</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι μπορείτε να προσθέσετε, να επεξεργαστείτε ή να τροποποιήσετε\n"
+#~ "τα πεδία μιας συλλογής με τον Επεξεργαστή πεδίων. Τα πλήκτρα με τα βέλη\n"
+#~ "κάτω από τη λίστα πεδίων μπορούν να χρησιμοποιηθούν για να αλλάξετε\n"
+#~ "τη θέση των πεδίων στη λίστα, ώστε αυτά να εμφανίζονται με τη σειρά που\n"
+#~ "επιθυμείτε στον επεξεργαστή καταχωρήσεων.</p>\n"
+
+#~ msgid ""
+#~ "<p>...that if you want to filter by a Checkbox field, a value of\n"
+#~ "\"true\" should be used. If you'd like to filter to\n"
+#~ "show only the science fiction books which you've not read, for\n"
+#~ "example, check the <em>Match all of the\n"
+#~ "following</em> button, set the first rule to have \"Genre\"\n"
+#~ "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
+#~ "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι εάν θέλετε να φιλτράρετε με ένα πεδίο πλαισίου επιλογής,\n"
+#~ "μια τιμή \"αληθής\" πρέπει να χρησιμοποιηθεί. Εάν επιθυμείτε να\n"
+#~ "φιλτράρετε για να προβάλλετε, για παράδειγμα, μόνο τα βιβλία\n"
+#~ "επιστημονικής φαντασίας τα οποία δεν έχετε διαβάσει, επιλέξτε\n"
+#~ "το πλαίσιο <em>Ταιριάζει με όλα τα παρακάτω</em> και καθορίστε\n"
+#~ "τον πρώτο κανόνα φιλτραρίσματος ως εξής: επιλέξτε \"Είδος\"\n"
+#~ "\"περιέχει\" \"Επιστημονική φαντασία\" (χωρίς εισαγωγικά) και\n"
+#~ "τον δεύτερο κανόνα \"Αναγνωσμένο\" \"δεν περιέχει\" \"αληθές\"\n"
+#~ "(χωρίς εισαγωγικά).</p>\n"
+
+#~ msgid ""
+#~ "<p>...that if a non-word character is used in the Quick Filter, the text "
+#~ "is\n"
+#~ "interpreted as a regular expression.</p>\n"
+#~ "<p>To show only books which are by Weber or Bujold, for example, then\n"
+#~ "type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι εάν στο Γρήγορο φίλτρο χρησιμοποιηθεί μια λέξη ή φράση "
+#~ "ανύπαρκτη\n"
+#~ "ή χωρίς νόημα, το κείμενο θα ερμηνευτεί σαν μια συνηθισμένη έκφραση.</p>\n"
+#~ "<p>Για να εμφανίσετε μόνο τα βιβλία του Καζαντζάκη ή του Levi-Strauss, "
+#~ "για\n"
+#~ "παράδειγμα, πληκτρολογήστε \"Καζαντζάκης|Levi-Strauss\" (χωρίς "
+#~ "εισαγωγικά)\n"
+#~ "στο πλαίσιο του φίλτρου.</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can edit more than one entry at a time, by holding down\n"
+#~ "the Shift or Ctrl key and selecting multiple entries.</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι μπορείτε να επεξεργαστείτε περισσότερες από μία καταχωρήσεις\n"
+#~ "κάθε φορά, κρατώντας πατημένο το πλήκτρο Shift ή Ctrl και επιλέγοντας\n"
+#~ "πολλαπλές καταχωρήσεις.</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can convert an existing book collection to a "
+#~ "bibliography,\n"
+#~ "which can then be exported to bibtex or Bibtexml format.</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι μπορείτε να μετατρέψετε μια υπάρχουσα συλλογή βιβλίων σε\n"
+#~ "βιβλιογραφία, η οποία μπορεί να εξαχθεί σε μορφοποίηση bibtex ή\n"
+#~ "Bibtexml.</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can add, edit, and delete string macros for bibliographies."
+#~ "</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι μπορείτε να προσθέσετε, να επεξεργαστείτε και να διαγράψετε "
+#~ "αλφαριθμητικά μακροεντολών για βιβλιογραφίες..</p>\n"
+
+#~ msgid ""
+#~ "<p>...that if more than one field is formatted as a name, then an "
+#~ "additional\n"
+#~ "group named \"People\" is added to the collection, allowing authors and "
+#~ "editors\n"
+#~ "to be sorted or printed together, for example.</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι εάν ένα πεδίο είναι μορφοποιημένο ως όνομα, τότε μια πρόσθετη\n"
+#~ "ομάδα με το όνομα \"Άτομα\" προστίθεται στη συλλογή, επιτρέποντας, για\n"
+#~ "παράδειγμα, στους συγγραφείς ή τους επιμελητές να ταξινομηθούν ή να\n"
+#~ "εκτυπωθούν μαζί.</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can modify the appearance of the printed output by "
+#~ "modifying\n"
+#~ "the <tt>tellico-printing.xsl</tt> file. The file generates HTML, and the "
+#~ "CSS\n"
+#~ "within the stylesheet governs things like the font, the margins, etc.</"
+#~ "p>\n"
+#~ msgstr ""
+#~ "<p>...ότι μπορείτε να τροποποιήσετε την εμφάνιση των εκτυπώσεων,\n"
+#~ "τροποποιώντας το αρχείο <tt>tellico-printing.xsl</tt>. Το αρχείο "
+#~ "δημιουργεί\n"
+#~ "HTML και το φύλλο στυλ CSS κυριαρχεί σε πράγματα όπως η γραμματοσειρά,\n"
+#~ "τα περιθώρια, κλπ.</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can import using any generic XSL stylesheet which\n"
+#~ "outputs a valid Tellico XML file.</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι μπορείτε να κάνετε εισαγωγή χρησιμοποιώντας οποιοδήποτε\n"
+#~ "φύλλο στυλ XSL, το οποίο παράγει ένα έγκυρο αρχείο Tellico XML.</p>\n"
+
+#~ msgid ""
+#~ "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι μπορείτε να ανοίξετε τον Επεξεργαστή καταχωρήσεων\n"
+#~ "με διπλό κλικ σε οποιαδήποτε καταχώρηση.</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can add HTML tags to any Paragraph field for formatting, "
+#~ "such as\n"
+#~ "&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι μπορείτε να προσθέσετε ετικέτες HTML σε οποιοδήποτε πεδίο\n"
+#~ "παραγράφου, για να το μορφοποιήσετε ως &lt;b&gt;έντονα&lt;/b&gt; ή\n"
+#~ " &lt;i&gt;πλάγια&lt;/i&gt;.</p>\n"
+
+#~ msgid ""
+#~ "<p>...that when the Column View is focused, you can press a letter on "
+#~ "the\n"
+#~ "keyboard to scroll to the next entry that starts with that letter.</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι όταν η Προβολή στήλης είναι στο επίκεντρο, μπορείτε να "
+#~ "πατήσετε\n"
+#~ "ένα γράμμα στο πληκτρολόγιο για να γίνει κύλιση στην επόμενη\n"
+#~ "καταχώρηση που ξεκινά με αυτό το γράμμα.</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can use a field with a derived value to combine multiple "
+#~ "separated fields\n"
+#~ "into a single field. Use a derived value template\n"
+#~ "similar to \"Value: %{fielda}%{fieldb}\" where %{...} gets replaced with "
+#~ "the\n"
+#~ "appropriate field value. This is useful to collect multiple values in a\n"
+#~ "single field, e.g. for better grouping, and to combine fields of "
+#~ "different\n"
+#~ "types by respecting proper sorting at the same time. Consider for "
+#~ "example\n"
+#~ "a number field followed by a text subfield with entries 3b, 14a.</p>\n"
+#~ msgstr ""
+#~ "<p>...ότι μπορείτε να χρησιμοποιήσετε ένα πεδίο με μια παράγωγη τιμή\n"
+#~ "για να συνδυάσετε ξεχωριστά πεδία σε ένα μοναδικό πεδίο. Χρησιμοποιήστε\n"
+#~ "ένα πρότυπο παράγωγης τιμής παρόμοιο με \"Τιμή: %{πεδίο α}%{πεδίο β}\"\n"
+#~ "όπου το %{...} αντικαθίσταται με την κατάλληλη τιμή πεδίου. Αυτό είναι\n"
+#~ "χρήσιμο για να συλλέξετε πολλαπλές τιμές σε ένα μοναδικό πεδίο, π.χ.,\n"
+#~ "για καλύτερη ομαδοποίηση, καθώς και για να συνδυάσετε πεδία διαφορετικού\n"
+#~ "είδους σεβόμενοι την ορθή ταξινόμηση την ίδια στιγμή. Εξετάστε για\n"
+#~ "παράδειγμα, ένα αριθμητικό πεδίο που ακολουθείται από ένα υποπεδίο\n"
+#~ "κειμένου με καταχωρήσεις 3b, 14a.</p>\n"
 
 #~ msgid "Click to download additional data sources."
 #~ msgstr "Κάντε κλικ για λήψη πρόσθετων πηγών δεδομένων."
