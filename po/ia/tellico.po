@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-04 02:26+0000\n"
-"PO-Revision-Date: 2023-01-24 15:12+0100\n"
+"PO-Revision-Date: 2023-08-05 16:58+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -94,12 +94,10 @@ msgid "Image List"
 msgstr "Lista de imagine"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, fuzzy, kde-format
-#| msgctxt "Image List XSL Template"
-#| msgid "Image List"
+#, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "Lista de imagine"
+msgstr "Grilla de imagine"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -2361,10 +2359,9 @@ msgstr "Color de texto evidentiate de patrono"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, fuzzy, kde-format
-#| msgid "Template highlight color"
+#, kde-format
 msgid "Template link color"
-msgstr "Color evidentiate de patrono"
+msgstr "Color de ligamine de patrono"
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -2408,18 +2405,17 @@ msgstr ""
 "del programma."
 
 #: src/configdialog.cpp:221
-#, fuzzy, kde-format
-#| msgid "matches regular expression"
+#, kde-format
 msgid "&Enable regular expressions in quick filter"
-msgstr "es coincidente con le expression regular"
+msgstr "&Habilita expressiones regular in filtro rapide"
 
 #: src/configdialog.cpp:222
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr ""
-"Si marcate, le nomines de campo essera imprimite como capites de tabula."
+"Si marcate, le filtro rapide interpretara le texto como un expression "
+"regular."
 
 #: src/configdialog.cpp:227
 #, kde-format
@@ -2726,10 +2722,9 @@ msgid "Highlighted text color:"
 msgstr "Color de texto evidentiate :"
 
 #: src/configdialog.cpp:542
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "Color de texto :"
+msgstr "Color de ligamine:"
 
 #: src/configdialog.cpp:551
 #, kde-format
@@ -3275,7 +3270,7 @@ msgstr "Codifica le file exportate in le codifica de localisation"
 #: src/fetch/adsfetcher.cpp:316
 #, kde-format
 msgid "SAO/NASA Astrophysics Data System"
-msgstr ""
+msgstr "SAO/NASA Astrophysics Data System"
 
 #: src/fetch/adsfetcher.cpp:331 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:172 src/fetch/comicvinefetcher.cpp:232
@@ -3723,10 +3718,9 @@ msgid "BoardGameGeek Link"
 msgstr "Ligamine de BoardGameGeek"
 
 #: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:808
-#, fuzzy, kde-format
-#| msgid "Comic Vine Link"
+#, kde-format
 msgid "Colnect Link"
-msgstr "Ligamine de Comic Vine"
+msgstr "Ligamine de Colnect"
 
 #: src/fetch/colnectfetcher.cpp:546 src/fetch/colnectfetcher.cpp:814
 #, kde-format
@@ -3833,10 +3827,9 @@ msgid "Barcode"
 msgstr "Codice a barras"
 
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:514
-#, fuzzy, kde-format
-#| msgid "Card Number"
+#, kde-format
 msgid "Catalog Number"
-msgstr "Numero de carta"
+msgstr "Numero de Catalogo"
 
 #: src/fetch/discogsfetcher.cpp:347
 #, kde-format
@@ -3995,14 +3988,12 @@ msgid "Raw Query"
 msgstr "Requesta crude"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Ligamine de Filmaster"
+msgstr "Ligamine de FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "Espania"
@@ -4011,7 +4002,7 @@ msgstr "Espania"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "USA"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -4021,10 +4012,9 @@ msgstr "Ligamine de Filmaster"
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
 #: src/fetch/gaminghistoryfetcher.cpp:374
-#, fuzzy, kde-format
-#| msgid "GiantBomb Link"
+#, kde-format
 msgid "Gaming History Link"
-msgstr "Ligamine de GiantBomb"
+msgstr "Ligamine de chronologia de Jocar"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
@@ -4104,7 +4094,7 @@ msgstr "Base de datos  Internet Game (IGDB.com)"
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:344
 #, kde-format
 msgid "Screenshot"
-msgstr ""
+msgstr "Captura de schermo"
 
 #: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
 #, kde-format
@@ -4186,10 +4176,9 @@ msgstr ""
 "planes Premium o Pro."
 
 #: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:505
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "iTunes Link"
-msgstr "Ligamine de Allocine"
+msgstr "Ligamine de iTunes"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4250,34 +4239,30 @@ msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
 #: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellico non poteva leger alcun metadata ex le file PDF."
+msgstr ""
+"Tellico es incapace a leger le description de cerca in le catalogo OPDS."
 
 #: src/fetch/opdsfetcher.cpp:421
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "OPDS Catalog"
-msgstr "Catalogo de file"
+msgstr "Catalogo OPDS"
 
 #: src/fetch/opdsfetcher.cpp:446
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "Catalog: "
-msgstr "Catalogo de file"
+msgstr "Catalogo:"
 
 #: src/fetch/opdsfetcher.cpp:451
-#, fuzzy, kde-format
-#| msgid "Enter the host name of the server."
+#, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr "Inserta le nomine de  hospite del servitor."
+msgstr "Inserta le ligamine al servitor de OPDS."
 
 #: src/fetch/opdsfetcher.cpp:456
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "&Verify Catalog"
-msgstr "Catalogo de file"
+msgstr "&Verifica Catalogo"
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
@@ -4300,10 +4285,9 @@ msgid "SRU Server"
 msgstr "Servitor SRU"
 
 #: src/fetch/srufetcher.cpp:525
-#, fuzzy, kde-format
-#| msgid "&Source name: "
+#, kde-format
 msgid "Scheme: "
-msgstr "Nomine de &fonte: "
+msgstr "Schema: "
 
 #: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
 #, kde-format
@@ -4399,7 +4383,7 @@ msgstr "Ligamine TheTVDB"
 #: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr ""
+msgstr "PIN de subscriptor: "
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -4920,32 +4904,28 @@ msgstr "Gente"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, fuzzy, kde-format
-#| msgid "Template:"
+#, kde-format
 msgid "Template Name:"
-msgstr "Patrono:"
+msgstr "Nomine de patrono:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, fuzzy, kde-format
-#| msgid "Comments"
+#, kde-format
 msgid "Comment:"
-msgstr "Commentos"
+msgstr "Commento:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, fuzzy, kde-format
-#| msgid "Icon"
+#, kde-format
 msgid "Icon:"
-msgstr "Icone"
+msgstr "Icone:"
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, fuzzy, kde-format
-#| msgid "Collection Report"
+#, kde-format
 msgid "Save As Collection Template"
-msgstr "Reporto de collection"
+msgstr "Salveguarda como Patrono de Collection"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -5276,10 +5256,9 @@ msgid "VinoXML Data Files"
 msgstr "Files de datos VinoXML"
 
 #: src/importdialog.cpp:424
-#, fuzzy, kde-format
-#| msgid "Book Title"
+#, kde-format
 msgid "eBook Files"
-msgstr "Titulo de libro"
+msgstr "Files de eLibro (eBook)"
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5446,10 +5425,9 @@ msgid "Import <filename> as a RIS file"
 msgstr "Importa <filename> como file RIS"
 
 #: src/main.cpp:148
-#, fuzzy, kde-format
-#| msgid "Import <filename> as a MODS file"
+#, kde-format
 msgid "Import <filename> as a PDF file"
-msgstr "Importa  <filename> como file MODS"
+msgstr "Importa  <filename> como file PDF"
 
 #: src/main.cpp:149
 #, kde-format
@@ -5617,28 +5595,24 @@ msgid "Save the document as a different file..."
 msgstr "Salveguarda le documento como un file differente..."
 
 #: src/mainwindow.cpp:334
-#, fuzzy, kde-format
-#| msgid "Manage Templates"
+#, kde-format
 msgid "Save As Template..."
-msgstr "Gere patronos"
+msgstr "Salveguarda como Patrono ..."
 
 #: src/mainwindow.cpp:336
-#, fuzzy, kde-format
-#| msgid "Create a new collection"
+#, kde-format
 msgid "Save as a collection template"
-msgstr "Crea un nove collection"
+msgstr "Salveguarda como un patrono de collection"
 
 #: src/mainwindow.cpp:339
-#, fuzzy, kde-format
-#| msgid "Print the contents of the document..."
+#, kde-format
 msgid "Print the contents of the collection..."
-msgstr "Imprime le contentos del documento..."
+msgstr "Imprime le contentos del  collection.."
 
 #: src/mainwindow.cpp:355
-#, fuzzy, kde-format
-#| msgid "Preview the contents of the document..."
+#, kde-format
 msgid "Preview the contents of the collection..."
-msgstr "Imprime le contentos del documento..."
+msgstr "Vista preliminar del  contentos del collection..."
 
 #: src/mainwindow.cpp:359
 #, kde-format
@@ -5711,16 +5685,14 @@ msgid "Import data from Collectorz"
 msgstr "Importa datos ex Collectorz"
 
 #: src/mainwindow.cpp:410
-#, fuzzy, kde-format
-#| msgid "Import GCstar Data..."
+#, kde-format
 msgid "Import Data Crow Data..."
-msgstr "Importa datos GCStar..."
+msgstr "Importa datos  de Data Crow ..."
 
 #: src/mainwindow.cpp:411
-#, fuzzy, kde-format
-#| msgid "Import data from Collectorz"
+#, kde-format
 msgid "Import data from Data Crow"
-msgstr "Importa datos ex Collectorz"
+msgstr "Importa datos ex Data Crow"
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5763,16 +5735,14 @@ msgid "Import an RIS reference file"
 msgstr "Importa un file de referentia RIS"
 
 #: src/mainwindow.cpp:430
-#, fuzzy, kde-format
-#| msgid "Import CSV Data..."
+#, kde-format
 msgid "Import MARC Data..."
-msgstr "Importa datos CSV..."
+msgstr "Importa datos MARC..."
 
 #: src/mainwindow.cpp:431
-#, fuzzy, kde-format
-#| msgid "Import VinoXML data"
+#, kde-format
 msgid "Import MARC data"
-msgstr "Importa datos VinoXML"
+msgstr "Importa datos MARC"
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -6352,10 +6322,9 @@ msgstr ""
 "Tu vole salveguardar lo?"
 
 #: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
-#, fuzzy, kde-format
-#| msgid "Create a new collection"
+#, kde-format
 msgid "Creating new collection..."
-msgstr "Crea un nove collection"
+msgstr "Creante un nove collection..."
 
 #: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
 #, kde-format
@@ -6553,7 +6522,7 @@ msgstr "Patrono de &reporto:"
 #: src/reportdialog.cpp:128
 #, kde-format
 msgid "One Entry Per Page"
-msgstr ""
+msgstr "Un elemento per pagina"
 
 #: src/reportdialog.cpp:140
 #, kde-format
@@ -7294,28 +7263,24 @@ msgid "LibraryThing file:"
 msgstr "File de LibraryThing :"
 
 #: src/translators/marcimporter.cpp:132
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#, kde-format
 msgid "Tellico was unable to read any data."
-msgstr "Tellico non poteva leger alcun metadata ex le file PDF."
+msgstr "Tellico non poteva leger alcun dato."
 
 #: src/translators/marcimporter.cpp:151
-#, fuzzy, kde-format
-#| msgid "CSV Options"
+#, kde-format
 msgid "MARC Options"
-msgstr "Optiones CSV"
+msgstr "Optiones de MARC"
 
 #: src/translators/marcimporter.cpp:156
-#, fuzzy, kde-format
-#| msgid "Query character set: "
+#, kde-format
 msgid "Character set:"
-msgstr "Demandar insimul de character: "
+msgstr "Insimul de character:"
 
 #: src/translators/marcimporter.cpp:161
-#, fuzzy, kde-format
-#| msgid "Format: "
+#, kde-format
 msgid "MARC Format:"
-msgstr "Formato: "
+msgstr "Formato MARC:"
 
 #: src/translators/onixexporter.cpp:67
 #, kde-format
