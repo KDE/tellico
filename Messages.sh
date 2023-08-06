@@ -7,4 +7,3 @@ $EXTRACTRC `find . -name '*.rc' -o -name '*.ui' -o -name '*.kcfg'` >> rc.cpp
 $XGETTEXT `find . -name '*.cpp' -o -name '*.h' -o -name '*.c'` -o $podir/tellico.pot
 # cleanup
 rm -f rc.cpp
-rm -f tips.cpp
