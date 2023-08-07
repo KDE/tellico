@@ -56,9 +56,7 @@
 <para
 ><guilabel
 >Allmänna alternativ</guilabel
-> styr det allmänna beteendet. Bilder kan inkluderas i datafiler, eller sparas separat i &appname;s programkatalog. Dessutom kan &appname; vid start automatiskt öppna den senaste datafilen som var öppen igen. Dialogrutan <guilabel
->Dagens tips</guilabel
-> innehåller hjälpsamma tips om hur &appname; används, och visas vid programstart. Du kanske vill läsa igenom några av tipsen, och därefter inaktivera dialogrutan. <interface
+> styr det allmänna beteendet. Bilder kan inkluderas i datafiler, eller sparas separat i &appname;s programkatalog. Dessutom kan &appname; vid start automatiskt öppna den senaste datafilen som var öppen igen. <interface
 >Snabbfilter</interface
 > i verktygsraden är användbart för att enkelt filtrera samlingen och kan utnyttja reguljära uttryck. </para>
 
@@ -239,6 +237,12 @@
 >OpenLibrary.org</link
 >,</simpara
 ></listitem>
+<listitem
+><simpara
+><link linkend="opds"
+>OPDS-kataloger</link
+>,</simpara
+></listitem>
 <!-- movies -->
 <listitem
 ><simpara
@@ -262,6 +266,12 @@
 ><simpara
 >the <link linkend="omdb"
 >Open Movie Database</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="filmaffinity"
+>FilmAffinity</link
 >,</simpara
 ></listitem>
 <!-- comics -->
@@ -403,11 +413,6 @@
 >Ta bort</guibutton
 >. Källornas ordning, som visas i menyerna för postuppdatering, kan också ändras. </para>
 
-<warning>
-<para
->Installera och kör aldrig ett skript från en källa du inte litar på. De körs med samma behörighet som användaren, och på grund av det kan de ändra eller ta bort filer, eller ställa till datorn på annat sätt. </para>
-</warning>
-
 <para
 >Många av datakällorna erbjuder mer information än standardfälten i &appname;. De övriga fälten visas till höger i inställningsrutan. Om något av dessa fält är markerade, läggs de till i samlingen när en post läggs till från den källan. </para>
 
@@ -525,6 +530,17 @@
 > är en bokdatabas på nätet, med målet att ha en sida för varje bok. </para>
 </sect3>
 
+<sect3 id="opds">
+<title
+>OPDS-kataloger</title>
+<para
+><ulink url="https://en.wikipedia.org/wiki/Open_Publication_Distribution_System"
+>OPDS-kataloger</ulink
+> tillhandahåller ett sätt att söka efter (och distribuera) digitala böcker. &tellico; kan använda många OPDS-kataloger som en datakälla, såsom <ulink url="https://wiki.mobileread.com/wiki/OPDS"
+>Project Gutenberg</ulink
+>. Skriv in länken till katalogen och verifiera åtkomst och format för att bekräfta att &tellico; kan läsa länken. </para>
+</sect3>
+
 </sect2>
 <!-- end of books -->
 
@@ -602,7 +618,16 @@
 <para
 ><ulink url="http://allocine.fr"
 >AlloCiné</ulink
-> är en filminformationstjänst på nätet, baserad i Frankrike. Webbläsaridentifiering måste vara aktiverad i systeminställningarna. </para>
+> är en filminformationstjänst på nätet, baserad i Frankrike. </para>
+</sect3>
+
+<sect3 id="filmaffinity">
+<title
+>FilmAffinity</title>
+<para
+><ulink url="https://filmaffinity.com"
+>FilmAffinity</ulink
+> är en oberoende filmwebbplats. </para>
 </sect3>
 
 </sect2>
@@ -618,7 +643,7 @@
 <para
 ><ulink url="http://discogs.com"
 >Discogs.com</ulink
-> är en användarframtagen musikdatabas som innehåller information om artister, skivbolag och deras inspelningar. Registrering för att få ett gratis konto krävs. Webbläsaridentifiering måste vara aktiverad i systeminställningarna. </para>
+> är en användarframtagen musikdatabas som innehåller information om artister, skivbolag och deras inspelningar. Registrering för att få ett gratis konto krävs. </para>
 </sect3>
 
 <sect3 id="musicbrainz">
@@ -627,7 +652,7 @@
 <para
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
-> är en gemensam metadatabas för musik som försöker skapa en innehållsrik musikinformationsplats.  Webbläsaridentifiering måste vara aktiverad i systeminställningarna. </para>
+> är en gemensam metadatabas för musik som försöker skapa en innehållsrik musikinformationsplats. </para>
 </sect3>
 
 </sect2>
@@ -719,7 +744,7 @@
 <para
 ><ulink url="https://colnect.com"
 >Colnect</ulink
-> är en nätgemenskap för samlingar som tillhandahåller personlig samlingshantering. &tellico; kan sök i Colnect efter mynt- och frimärksinformation. </para>
+> är en nätgemenskap för samlingar som tillhandahåller personlig samlingshantering. &tellico; kan sök i Colnect efter mynt- och frimärksinformation, samt serier, sportkort och videospel. </para>
 </sect3>
 
 <sect3 id="numista">
@@ -791,9 +816,14 @@
 >, utan kan också importera andra format, såsom Bibtex. </para>
 
 <para
->Den fullständiga sökvägen till programmet ska skrivas in i källalternativen. Var medveten om att programmet körs på datorn med samma behörighet som nuvarande användare, så använd inte skript från källor du inte litar på. Markera rutorna intill söknycklarna som stöds av programmet, och skriv in kommandoradsväljarna som krävs i redigeringsrutan. Sökvärden infogas där <userinput
+>Den fullständiga sökvägen till programmet ska skrivas in i källalternativen. Markera rutorna intill söknycklarna som stöds av programmet, och skriv in kommandoradsväljarna som krävs i redigeringsrutan. Sökvärden infogas där <userinput
 >%1</userinput
 > uppträder. </para>
+
+<warning>
+<para
+>Installera och kör aldrig ett skript från en källa du inte litar på. De körs med samma behörighet som användaren, och på grund av det kan de ändra eller ta bort filer, eller ställa till datorn på annat sätt. </para>
+</warning>
 
 <para
 >Den sista kryssrutan och redigeringsrutan används för att bestämma kommandoradsväljarna för att uppdatera poster som redan finns i samlingen. Postfälten som används för att hitta en uppdatering måste matas in, med samma format som används för fält med <link linkend="derived"

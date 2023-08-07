@@ -35,38 +35,6 @@ application work. -->
 <qandaentry>
 <question>
 <para
->Kan man ändra hur den utskrivna sidan ser ut?</para>
-</question>
-<answer>
-
-<para
->Ja, definitivt. Leta rätt på filen <filename
->tellico-printing.xsl</filename
-> som ska finnas i katalogen $<envar
->KDEDIR</envar
->/share/apps/tellico/. Du kan kopiera den till $<envar
->KDEHOME</envar
->/share/apps/tellico/ för personliga ändringar. Du måste känna till <ulink url="http://www.w3.org/TR/xslt"
->&xslt;</ulink
->, men att ändra filen är sättet att ändra utskriftslayout. &HTML; skapas från filen, och det enklaste sättet att ändra utskriftens utseende är att ändra &CSS; i den övre delen.</para>
-
-<para
->Var medveten om att <filename
->tellico-printing.xsl</filename
-> refererar till en annan fil, <filename
->tellico-common.xsl</filename
->, som innehåller några gemensamma &xslt;-mallar. Om du kopierar <filename
->tellico-printing.xsl</filename
-> till $<envar
->KDEHOME</envar
->, måste du antingen ändra elementet &lt;xsl:import&gt; så att det pekar på den verkliga platsen för filen <filename
->tellico-common.xsl</filename
-> eller också kopiera den gemensamma filen. </para>
-</answer>
-</qandaentry>
-<qandaentry>
-<question>
-<para
 >Hur grupperar man enligt en annan egenskap än de som listas i verktygsraden?</para>
 </question>
 <answer>
@@ -78,129 +46,11 @@ application work. -->
 <qandaentry>
 <question
 ><para
->Varför dyker det upp en massa gallimatias när man kör &appname;?</para
-></question>
-<answer>
-<para
->Saker som: <screen width="40">
-<computeroutput
->Tellico::updateCollectionToolBar</computeroutput>
-<computeroutput
->GroupView::setGroupAttribute - author</computeroutput>
-<computeroutput
->GroupView::slotAddCollection</computeroutput>
-<computeroutput
->QCheckBox::property( "title" ) failed: property invalid
-or does not exist</computeroutput>
-</screen
-> är felsökningsinformation. Vid kompilering kan den stoppas genom att kompilera med väljaren <userinput
-><option
->--disable-debug</option
-></userinput
->. Du kanske också kan vilja använda <userinput
-><option
->--enable-final</option
-></userinput
->, som använder lite mer minne vid kompilering, men är effektivare när programmet körs.</para>
-
-<para
->Det sista meddelandet är något annorlunda. Det betyder bara att &Qt;-installationen kompilerades med viss felsökningsinformation.</para>
-
-<para
->Eller om &appname; redan är installerat, kör <userinput
-><command
->kdebugdialog</command
-></userinput
-> och försäkra dig om att "0 (generic)" är avmarkerat. Det stänger av felsökningsmeddelanden från alla generella &kde;-program, dvs. de som inte distribueras officiellt av &kde;.</para>
-
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question
-><para
 >Hur ändrar man vilka kolumner som visas?</para
 ></question>
 <answer>
 <para
 >Högerklicka i rubrikraden. Man kan också dra rubrikerna för att ordna om kolumnerna, och klicka på dem för att sortera enligt det fältet.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question
-><para
->Hur filtrerar man på något som fältet "Läst"?</para
-></question>
-<answer>
-<para
->Internt i &appname; sparas fälten med kryssrutor som "true", så om du till exempel vill filtrera för att bara visa science-fiction böcker som du inte har läst, behöver du två regler. Försäkra dig om att knappen "Matchar alla följande" är markerad. Ställ in den första regeln att ha "Genre" "innehåller" "Science fiction" (inga citationstecken) och den andra regeln att ha "Läst" "innehåller inte" "true" (inga citationstecken).</para>
-
-<para
->Dessutom matchar snabbfiltret i verktygsraden alla fält, och om något annat tecken än en bokstav, tolkas texten som ett reguljärt uttryck. Så om du snabbt vill filtrera böckerna för att visa de som är av Weber eller Bujold, skriv då "weber|bujold" (inga citationstecken) på verktygsraden.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question
-><para
->Hur lägger man till en ny postmall?</para
-></question>
-
-<answer>
-<para
->Postmallar ska sparas i <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/entry-templates/</filename
-> för att kommas åt av en enskild användare eller <filename class="directory"
->$<envar
->KDEDIR</envar
->/share/apps/tellico/entry-templates/</filename
-> för att kommas åt av alla. Mallar i $<envar
->KDEHOME</envar
-> överskider alla filer med samma namn i $<envar
->KDEDIRS</envar
->. Postmallar kan anges per samlingstyp i inställningsdialogrutan.</para>
-
-<para
->Mallar för <interface
->rapportdialogrutan</interface
-> sparas i <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/report-templates/</filename
->. </para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question
-><para
->Att kompilera och installera gick bra, men när &appname; startar är fönstret tomt. Vad är det som är fel?</para
-></question>
-
-<answer>
-<para
->&kde;-program letar efter data på platserna definierade i miljövariabeln $<envar
->KDEDIRS</envar
->. Om du till exempel installerar i <filename class="directory"
->/usr/local</filename
->, men $<envar
->KDEDIRS</envar
-> är tom eller bara <filename class="directory"
->/usr</filename
->, kommer inte &appname; kunna hitta filerna som det behöver. Det är i synnerhet sant för &SuSE;, där du måste kompilera med <userinput
-><option
->--prefix</option
->=<filename class="directory"
->/opt/kde3</filename
-></userinput
->. Som ett alternativ skulle du kunna lägga till en rad i filen <filename
->.profile</filename
-> för att ställa in $<envar
->KDEDIRS</envar
->. Kontrollera dokumentationen för skalet du använder.</para>
 </answer>
 </qandaentry>
 
@@ -228,25 +78,13 @@ or does not exist</computeroutput>
 <qandaentry>
 <question>
 <para
->Vad hände med Bookcase?</para>
-</question>
-
-<answer>
-<para
->På grund av en varumärkeskonflikt, bytte Bookcase namn till Tellico i september, 2004. Tellico 0.12 gavs därefter ut, som var identisk med Bookcase 0.11, förutom namnbytet.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question>
-<para
 >Vad har namnet Tellico att göra med någonting?</para>
 </question>
 
 <answer>
 <para
->Jag funderade på <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
->flera olika namn</ulink
+>Jag funderade på <ulink url="https://periapsis.org/renaming-bookcase/"
+>flera andra namn</ulink
 >, där några hade med boksamlingar att göra. Dock kan Tellico hantera mer än bara böcker, och dessutom är det en hobby, så jag valde ett namn som lät snyggt (i mina öron), taget från en stad nära stället där jag växte upp.</para>
 </answer>
 </qandaentry>
@@ -273,7 +111,7 @@ or does not exist</computeroutput>
 
 <answer>
 <para
->En av orsakerna att jag började med &appname; var att lära mig C++. Jag kunde inte SQL vid den tidpunkten, och för närvarande har jag bara en vag kunskap om hur det används. &appname; började helt enkelt inte som en relationsdatabas, och det kommer inte att ändras till någon gång i framtiden när jag kommer mig för att lära mig SQL, och har tid och motivation att ändra datamodellen. Om det stör dig, så använd då inte &appname;. </para>
+>En av orsakerna att jag började med &appname; var att lära mig C++. Jag kunde inte SQL vid den tidpunkten, och för närvarande har jag bara en vag kunskap om hur det används. &appname; började helt enkelt inte som en relationsdatabas, och det kommer inte att ändras till någon gång i framtiden när jag kommer mig för att lära mig SQL, och har tid och motivation att ändra datamodellen. </para>
 
 <para
 >Naturligtvis är vem som helst välkommen att göra vilka ändringar de vill i källkoden. </para>

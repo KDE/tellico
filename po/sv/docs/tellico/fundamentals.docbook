@@ -977,9 +977,6 @@
 <title
 >Allmänna tips</title>
 
-<para
->Här är listan med tips som finns i "Dagens tips" för &appname;. </para>
-
 <tip>
 <para
 >Om en bok har mer än en författare ska du separera de olika författarnamnen med semikolon, så att Tellico kan förstå namnen och använda dem separat. Vilket annat fält som tillåter multipla värden ska matas in på samma sätt, med semikolon (;) som separerar mellan värdena. </para>
@@ -995,22 +992,6 @@
 >Du kan lägga till, redigera eller ändra fält i samlingen genom att använda <interface
 >Samlingsfältsdialogrutan</interface
 >. Piltangenterna nedanför fältlistan kan användas för att ändra positionen på fälten i listan, vilket ändrar placeringen i posteditorn. </para>
-</tip>
-
-<tip>
-<para
->Om du vill filtrera på värdet i en <link linkend="bool"
-><emphasis
->kryssruta</emphasis
-></link
-> ska du använda värdet "true". Om du till exempel vill filtrera för att visa endast science-fiction böcker som du inte har läst, ska du markera knappen <guilabel
->Matcha alla följande</guilabel
->, sätta första rutan till "Genre" "innehåller" "Science fiction" (inga citationstecken) och den andra regeln till "Läst" "innehåller inte" "true" (inga citationstecken). </para>
-</tip>
-
-<tip>
-<para
->Om något annat än en bokstav används i Snabbfiltret, kommer texten att tolkas som ett reguljärt uttryck. För att visa böcker som är av Weber eller Bujold, till exempel, kan man söka på "weber|bujold" (inga citationstecken) i filterrutan. </para>
 </tip>
 
 <tip>

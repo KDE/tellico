@@ -40,7 +40,7 @@ or menu bars.
 >skapar en ny samling</action
 >. &tellico; stöder <link linkend="collection-types"
 >12 standardsamlingstyper</link
-> liksom en tom användardefinierad egensamling.</para>
+> liksom en tom användardefinierad egen samling. Alla egna sparade samlingsmallar är också tillgängliga.</para>
 </listitem>
 </varlistentry>
 
@@ -143,6 +143,26 @@ or menu bars.
 <varlistentry>
 <term>
  <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Spara som mall...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+  <para
+>Kommandot <action
+>sparar samlingen som en ny mall</action
+>. Bara fälten sparas, och den egna samlingstypen kan skapas via kommandot <guimenuitem 
+>Ny samling</guimenuitem 
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
 ><shortcut
 > <keycombo
 >&Ctrl;<keycap
@@ -162,6 +182,24 @@ or menu bars.
 >skriver ut samlingen</action
 >. Utskriftsalternativ kan ställas in i <interface
 >Inställningsdialogrutan</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Förhandsgranskning av utskrift</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>visar en förhandsgranskning av den utskrivna samlingen</action
 >.</para>
 </listitem>
 </varlistentry>
@@ -904,6 +942,43 @@ or menu bars.
 >Kommandot <action
 >ändrar fältet som används för att gruppera posterna </action
 > i samlingen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Lås layout</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>låser layouten</action
+> så att de olika samlingsvyerna inte kan flyttas. Genom att låsa upp layouten kan användaren ordna om dem.</para>
+</listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Återställ layout</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Kommandot <action
+>återställer layouten</action
+> till standardvyn, vilket kan vara användbart om de olika vyerna blir dolda eller hopdragna.</para>
 </listitem>
 </varlistentry>
 

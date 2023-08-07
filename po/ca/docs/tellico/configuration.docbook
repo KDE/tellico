@@ -56,9 +56,7 @@
 <para
 >Les <guilabel
 >Opcions generals</guilabel
-> controlen el comportament general. Les imatges es poden incloure als fitxers de dades, o es desen per separat a la carpeta de l'aplicació &appname;. A més, quan s'inicia el &appname;, pot tornar a obrir automàticament el fitxer de dades que estava obert. El diàleg <guilabel
->Consell del dia</guilabel
-> conté consells útils sobre l'ús del &appname; i apareix en iniciar el programa. Potser voldreu llegir alguns dels consells i després desactivar el diàleg. El <interface
+> controlen el comportament general. Les imatges es poden incloure als fitxers de dades, o es desen per separat a la carpeta de l'aplicació &appname;. A més, quan s'inicia el &appname;, pot tornar a obrir automàticament el fitxer de dades que estava obert. El <interface
 >Filtre ràpid</interface
 > de la barra d'eines és útil per a filtrar fàcilment la col·lecció i poder utilitzar expressions regulars. </para>
 

@@ -977,9 +977,6 @@
 <title
 >Consells generals</title>
 
-<para
->Es tracta de la llista de recomanacions contingudes en la llista «Consell del dia» per al &appname;. </para>
-
 <tip>
 <para
 >Si un llibre té més d'un autor, hauríeu de separar els seus noms per un punt i coma, de manera que el &appname; sabrà que ha de separar-los i utilitzar-los per separat. Haureu de fer el mateix per a qualsevol altre camp que permeti múltiples valors. Amb un punt i coma (;) separant cada valor. </para>
@@ -995,22 +992,6 @@
 >Podeu afegir, editar o modificar els camps de la col·lecció utilitzant <interface
 >diàleg Camps de la col·lecció</interface
 >. Els botons de fletxa sota la llista de camps es poden utilitzar per a canviar la posició del camp a la llista, el qual afectarà la ubicació a l'editor d'entrades. </para>
-</tip>
-
-<tip>
-<para
->Si voleu filtrar segons un camp de <link linkend="bool"
-><emphasis
->Casella de selecció</emphasis
-></link
->, s'haurà d'utilitzar un valor de «verdader». Per a només filtrar els llibres de ciència-ficció que no heu llegit, per exemple, marqueu el botó <guilabel
->Coincideix amb tots els següents</guilabel
-> i establiu la primera regla a «Gènere» «conté» «ciència-ficció» (sense les cometes) i la segona a «Llegit» «no conté» «verdader» (sense les cometes). </para>
-</tip>
-
-<tip>
-<para
->Si s'utilitza un caràcter que no sigui una paraula en el filtre ràpid, el text s'interpretarà com una expressió regular. Per a mostrar només els llibres que són d'en Weber o Bujold, per exemple, escriviu «weber|bujold» (sense les cometes) al quadre de filtre. </para>
 </tip>
 
 <tip>
