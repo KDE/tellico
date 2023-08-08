@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 07:35+0000\n"
+"POT-Creation-Date: 2023-08-06 00:47+0000\n"
 "PO-Revision-Date: 2020-11-13 17:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -169,7 +169,7 @@ msgstr "Navn"
 msgid "Collection Size"
 msgstr ""
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1653
+#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1644
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Totale innslag: %1"
@@ -703,7 +703,7 @@ msgstr "Et felt med en avledet verdi må ha en verdimal."
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
 #: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:203 src/configdialog.cpp:1126
+#: src/configdialog.cpp:203 src/configdialog.cpp:1118
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -2181,7 +2181,7 @@ msgstr "Gi samling nytt navn"
 msgid "Reorder Fields"
 msgstr "Omordne felter"
 
-#: src/config/tellico_config.kcfg:86
+#: src/config/tellico_config.kcfg:80
 #, kde-format
 msgctxt "comma-separated list of words ignored by auto-capitalize"
 msgid ""
@@ -2189,19 +2189,19 @@ msgid ""
 "up,with"
 msgstr "en,ei,og,som,men,for,fra,i,inn,verken,av,på,eller,ut,over,opp,med,den"
 
-#: src/config/tellico_config.kcfg:89
+#: src/config/tellico_config.kcfg:83
 #, kde-format
 msgctxt "comma-separated list of articles ignored for title sorting"
 msgid "the"
 msgstr "den"
 
-#: src/config/tellico_config.kcfg:92
+#: src/config/tellico_config.kcfg:86
 #, kde-format
 msgctxt "comma-separated list of common surname suffixes, used for sorting"
 msgid "jr.,jr,iii,iv"
 msgstr "jr.,jr,iii,iv"
 
-#: src/config/tellico_config.kcfg:95
+#: src/config/tellico_config.kcfg:89
 #, kde-format
 msgctxt "comma-separated list of common surname prefixes, used for sorting"
 msgid "de,van,der,van der,von"
@@ -2220,13 +2220,13 @@ msgstr "de,van,der,van der,von"
 #. i18n: ectx: label, entry (fontFile), group (Options - file)
 #. i18n: ectx: label, entry (fontBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (fontBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:140 src/config/tellico_config.kcfg:170
-#: src/config/tellico_config.kcfg:200 src/config/tellico_config.kcfg:233
-#: src/config/tellico_config.kcfg:263 src/config/tellico_config.kcfg:293
-#: src/config/tellico_config.kcfg:323 src/config/tellico_config.kcfg:353
-#: src/config/tellico_config.kcfg:383 src/config/tellico_config.kcfg:413
-#: src/config/tellico_config.kcfg:443 src/config/tellico_config.kcfg:473
-#: src/config/tellico_config.kcfg:503
+#: src/config/tellico_config.kcfg:134 src/config/tellico_config.kcfg:164
+#: src/config/tellico_config.kcfg:194 src/config/tellico_config.kcfg:227
+#: src/config/tellico_config.kcfg:257 src/config/tellico_config.kcfg:287
+#: src/config/tellico_config.kcfg:317 src/config/tellico_config.kcfg:347
+#: src/config/tellico_config.kcfg:377 src/config/tellico_config.kcfg:407
+#: src/config/tellico_config.kcfg:437 src/config/tellico_config.kcfg:467
+#: src/config/tellico_config.kcfg:497
 #, kde-format
 msgid "Template font"
 msgstr "Malskrift"
@@ -2244,13 +2244,13 @@ msgstr "Malskrift"
 #. i18n: ectx: label, entry (baseColorFile), group (Options - file)
 #. i18n: ectx: label, entry (baseColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (baseColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:144 src/config/tellico_config.kcfg:174
-#: src/config/tellico_config.kcfg:204 src/config/tellico_config.kcfg:237
-#: src/config/tellico_config.kcfg:267 src/config/tellico_config.kcfg:297
-#: src/config/tellico_config.kcfg:327 src/config/tellico_config.kcfg:357
-#: src/config/tellico_config.kcfg:387 src/config/tellico_config.kcfg:417
-#: src/config/tellico_config.kcfg:447 src/config/tellico_config.kcfg:477
-#: src/config/tellico_config.kcfg:507
+#: src/config/tellico_config.kcfg:138 src/config/tellico_config.kcfg:168
+#: src/config/tellico_config.kcfg:198 src/config/tellico_config.kcfg:231
+#: src/config/tellico_config.kcfg:261 src/config/tellico_config.kcfg:291
+#: src/config/tellico_config.kcfg:321 src/config/tellico_config.kcfg:351
+#: src/config/tellico_config.kcfg:381 src/config/tellico_config.kcfg:411
+#: src/config/tellico_config.kcfg:441 src/config/tellico_config.kcfg:471
+#: src/config/tellico_config.kcfg:501
 #, kde-format
 msgid "Template background color"
 msgstr "Bakgrunnsfarge for mal"
@@ -2268,13 +2268,13 @@ msgstr "Bakgrunnsfarge for mal"
 #. i18n: ectx: label, entry (textColorFile), group (Options - file)
 #. i18n: ectx: label, entry (textColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (textColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:148 src/config/tellico_config.kcfg:178
-#: src/config/tellico_config.kcfg:208 src/config/tellico_config.kcfg:241
-#: src/config/tellico_config.kcfg:271 src/config/tellico_config.kcfg:301
-#: src/config/tellico_config.kcfg:331 src/config/tellico_config.kcfg:361
-#: src/config/tellico_config.kcfg:391 src/config/tellico_config.kcfg:421
-#: src/config/tellico_config.kcfg:451 src/config/tellico_config.kcfg:481
-#: src/config/tellico_config.kcfg:511
+#: src/config/tellico_config.kcfg:142 src/config/tellico_config.kcfg:172
+#: src/config/tellico_config.kcfg:202 src/config/tellico_config.kcfg:235
+#: src/config/tellico_config.kcfg:265 src/config/tellico_config.kcfg:295
+#: src/config/tellico_config.kcfg:325 src/config/tellico_config.kcfg:355
+#: src/config/tellico_config.kcfg:385 src/config/tellico_config.kcfg:415
+#: src/config/tellico_config.kcfg:445 src/config/tellico_config.kcfg:475
+#: src/config/tellico_config.kcfg:505
 #, kde-format
 msgid "Template text color"
 msgstr "Tekstfarge for mal"
@@ -2292,13 +2292,13 @@ msgstr "Tekstfarge for mal"
 #. i18n: ectx: label, entry (highlightedBaseColorFile), group (Options - file)
 #. i18n: ectx: label, entry (highlightedBaseColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (highlightedBaseColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:152 src/config/tellico_config.kcfg:182
-#: src/config/tellico_config.kcfg:212 src/config/tellico_config.kcfg:245
-#: src/config/tellico_config.kcfg:275 src/config/tellico_config.kcfg:305
-#: src/config/tellico_config.kcfg:335 src/config/tellico_config.kcfg:365
-#: src/config/tellico_config.kcfg:395 src/config/tellico_config.kcfg:425
-#: src/config/tellico_config.kcfg:455 src/config/tellico_config.kcfg:485
-#: src/config/tellico_config.kcfg:515
+#: src/config/tellico_config.kcfg:146 src/config/tellico_config.kcfg:176
+#: src/config/tellico_config.kcfg:206 src/config/tellico_config.kcfg:239
+#: src/config/tellico_config.kcfg:269 src/config/tellico_config.kcfg:299
+#: src/config/tellico_config.kcfg:329 src/config/tellico_config.kcfg:359
+#: src/config/tellico_config.kcfg:389 src/config/tellico_config.kcfg:419
+#: src/config/tellico_config.kcfg:449 src/config/tellico_config.kcfg:479
+#: src/config/tellico_config.kcfg:509
 #, kde-format
 msgid "Template highlight color"
 msgstr "Uthevingsfarge for mal"
@@ -2316,13 +2316,13 @@ msgstr "Uthevingsfarge for mal"
 #. i18n: ectx: label, entry (highlightedTextColorFile), group (Options - file)
 #. i18n: ectx: label, entry (highlightedTextColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (highlightedTextColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:156 src/config/tellico_config.kcfg:186
-#: src/config/tellico_config.kcfg:216 src/config/tellico_config.kcfg:249
-#: src/config/tellico_config.kcfg:279 src/config/tellico_config.kcfg:309
-#: src/config/tellico_config.kcfg:339 src/config/tellico_config.kcfg:369
-#: src/config/tellico_config.kcfg:399 src/config/tellico_config.kcfg:429
-#: src/config/tellico_config.kcfg:459 src/config/tellico_config.kcfg:489
-#: src/config/tellico_config.kcfg:519
+#: src/config/tellico_config.kcfg:150 src/config/tellico_config.kcfg:180
+#: src/config/tellico_config.kcfg:210 src/config/tellico_config.kcfg:243
+#: src/config/tellico_config.kcfg:273 src/config/tellico_config.kcfg:303
+#: src/config/tellico_config.kcfg:333 src/config/tellico_config.kcfg:363
+#: src/config/tellico_config.kcfg:393 src/config/tellico_config.kcfg:423
+#: src/config/tellico_config.kcfg:453 src/config/tellico_config.kcfg:483
+#: src/config/tellico_config.kcfg:513
 #, kde-format
 msgid "Template highlighted text color"
 msgstr "Uthevet tekstfarge for mal"
@@ -2340,13 +2340,13 @@ msgstr "Uthevet tekstfarge for mal"
 #. i18n: ectx: label, entry (linkColorFile), group (Options - file)
 #. i18n: ectx: label, entry (linkColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (linkColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:160 src/config/tellico_config.kcfg:190
-#: src/config/tellico_config.kcfg:220 src/config/tellico_config.kcfg:253
-#: src/config/tellico_config.kcfg:283 src/config/tellico_config.kcfg:313
-#: src/config/tellico_config.kcfg:343 src/config/tellico_config.kcfg:373
-#: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
-#: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
-#: src/config/tellico_config.kcfg:523
+#: src/config/tellico_config.kcfg:154 src/config/tellico_config.kcfg:184
+#: src/config/tellico_config.kcfg:214 src/config/tellico_config.kcfg:247
+#: src/config/tellico_config.kcfg:277 src/config/tellico_config.kcfg:307
+#: src/config/tellico_config.kcfg:337 src/config/tellico_config.kcfg:367
+#: src/config/tellico_config.kcfg:397 src/config/tellico_config.kcfg:427
+#: src/config/tellico_config.kcfg:457 src/config/tellico_config.kcfg:487
+#: src/config/tellico_config.kcfg:517
 #, kde-format
 msgid "Template link color"
 msgstr ""
@@ -2357,18 +2357,18 @@ msgid "Configure Tellico"
 msgstr "Oppsett av Tellico"
 
 #: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:340
+#: src/configdialog.cpp:334
 #, kde-format
 msgid "Printing"
 msgstr "Utskrift"
 
 #: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:417
+#: src/configdialog.cpp:411
 #, kde-format
 msgid "Templates"
 msgstr "Maler"
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:621
+#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:615
 #, kde-format
 msgid "Data Sources"
 msgstr "Datakilder"
@@ -2405,22 +2405,10 @@ msgstr ""
 
 #: src/configdialog.cpp:227
 #, kde-format
-msgid "&Show \"Tip of the Day\" at startup"
-msgstr "Vis «Dagens tips» ved oppstart"
-
-#: src/configdialog.cpp:228
-#, kde-format
-msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
-msgstr ""
-" Hvis dette er krysset av  vil «Dagens tips» bli vist når programmet starter "
-"opp."
-
-#: src/configdialog.cpp:233
-#, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "&Slå på nettkamera for å skanne strekkode"
 
-#: src/configdialog.cpp:234
+#: src/configdialog.cpp:228
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
@@ -2429,27 +2417,27 @@ msgstr ""
 " Hvis dette er krysset av vil inndata fra et nettkamera bli brukt til å "
 "skanne strekkoder for søk."
 
-#: src/configdialog.cpp:239
+#: src/configdialog.cpp:233
 #, kde-format
 msgid "Image Storage Options"
 msgstr "Valg for bildelagring"
 
-#: src/configdialog.cpp:241
+#: src/configdialog.cpp:235
 #, kde-format
 msgid "Store images in data file"
 msgstr "Lagre bilder i datafil"
 
-#: src/configdialog.cpp:242
+#: src/configdialog.cpp:236
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "Lagre bilder i felles programmappe"
 
-#: src/configdialog.cpp:243
+#: src/configdialog.cpp:237
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "Lagre bilder i mappe relativt til datafil"
 
-#: src/configdialog.cpp:244
+#: src/configdialog.cpp:238
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2460,39 +2448,39 @@ msgstr ""
 "langsomt, lagret i Tellicos programmappe, eller lagret i en mappe med samme "
 "plassering som datafila."
 
-#: src/configdialog.cpp:265 src/configdialog.cpp:349
+#: src/configdialog.cpp:259 src/configdialog.cpp:343
 #, kde-format
 msgid "Formatting Options"
 msgstr "Formateringsvalg"
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:264
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "Stor forbokstav i &titler og navn"
 
-#: src/configdialog.cpp:271
+#: src/configdialog.cpp:265
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Hvis dette er krysset av vil titler og navn vil automatisk få stor "
 "forbokstav."
 
-#: src/configdialog.cpp:276
+#: src/configdialog.cpp:270
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "Auto&formater titler og navn"
 
-#: src/configdialog.cpp:277 src/configdialog.cpp:355
+#: src/configdialog.cpp:271 src/configdialog.cpp:349
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Hvis dette er krysset av vil titler og navn bli automatisk formatert."
 
-#: src/configdialog.cpp:287
+#: src/configdialog.cpp:281
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "Ingen sto&r forbokstav:"
 
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:286
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2501,12 +2489,12 @@ msgstr ""
 "<qt>En liste over ord som ikke skal ha stor forbokstav. Flere verdier bør "
 "atskilles med semikolon.</qt>"
 
-#: src/configdialog.cpp:298
+#: src/configdialog.cpp:292
 #, kde-format
 msgid "Artic&les:"
 msgstr "Artik&ler:"
 
-#: src/configdialog.cpp:303
+#: src/configdialog.cpp:297
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2516,12 +2504,12 @@ msgstr ""
 "<qt>En liste av ord som skal bli regnet som artikler om de er det første "
 "ordet i en tittel. Flere verdier atskilles med semikolon.</qt>"
 
-#: src/configdialog.cpp:310
+#: src/configdialog.cpp:304
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Personlige suffi&kser:"
 
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:309
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2530,12 +2518,12 @@ msgstr ""
 "<qt>En liste over suffikser som kan bli brukt i en persons navn. Flere "
 "verdier atskilles med semikolon.</qt>"
 
-#: src/configdialog.cpp:321
+#: src/configdialog.cpp:315
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "&Prefiks for etternavn:"
 
-#: src/configdialog.cpp:326
+#: src/configdialog.cpp:320
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2544,55 +2532,55 @@ msgstr ""
 "<qt>En liste over prefikser som kan bli brukt i personlige etternavn. Flere "
 "verdier atskilles med semikolon.</qt>"
 
-#: src/configdialog.cpp:341
+#: src/configdialog.cpp:335
 #, kde-format
 msgid "Printing Options"
 msgstr "Valg for utskrift"
 
-#: src/configdialog.cpp:354
+#: src/configdialog.cpp:348
 #, kde-format
 msgid "&Format titles and names"
 msgstr "&Formater titler og navn"
 
-#: src/configdialog.cpp:359
+#: src/configdialog.cpp:353
 #, kde-format
 msgid "&Print field headers"
 msgstr "Skriv &ut feltoverskrifter"
 
-#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
 "Feltnavn blir skrevet ut som tabelloverskrifter hvis dette er krysset av."
 
-#: src/configdialog.cpp:364
+#: src/configdialog.cpp:358
 #, kde-format
 msgid "Grouping Options"
 msgstr "Grupperingsvalg"
 
-#: src/configdialog.cpp:369
+#: src/configdialog.cpp:363
 #, kde-format
 msgid "&Group the entries"
 msgstr "&Grupper innslagene"
 
-#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
 "Hvis dette er krysset av vil innslagene bli gruppert etter det valgte "
 "feiltet."
 
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:368
 #, kde-format
 msgid "Image Options"
 msgstr "Valg for bilder"
 
-#: src/configdialog.cpp:380
+#: src/configdialog.cpp:374
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "Maks &bredde på bilder:"
 
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:383
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
@@ -2601,12 +2589,12 @@ msgstr ""
 "Maksbredden på bilder ved utskrift. Forholdet mellom høyde og bredde blir "
 "ivaretatt."
 
-#: src/configdialog.cpp:395
+#: src/configdialog.cpp:389
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "&Maks bildehøyde:"
 
-#: src/configdialog.cpp:404
+#: src/configdialog.cpp:398
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
@@ -2615,25 +2603,25 @@ msgstr ""
 "Maks høyde på bilde ved utskrift. Forholdet mellom høyde og bredde vil bli "
 "ivaretatt."
 
-#: src/configdialog.cpp:418
+#: src/configdialog.cpp:412
 #, kde-format
 msgid "Template Options"
 msgstr "Valg for maler"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:364
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:364
 #: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
 msgstr "Samlings&type:"
 
-#: src/configdialog.cpp:439
+#: src/configdialog.cpp:433
 #, kde-format
 msgid "Template:"
 msgstr "Mal:"
 
-#: src/configdialog.cpp:444
+#: src/configdialog.cpp:438
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2642,12 +2630,12 @@ msgstr ""
 "Velg malen som skal brukes for gjeldende samlingstype. Ikke alle maler "
 "bruker innstillingene for skrift og farger."
 
-#: src/configdialog.cpp:451
+#: src/configdialog.cpp:445
 #, kde-format
 msgid "&Preview..."
 msgstr "&Forhåndsvis …"
 
-#: src/configdialog.cpp:452
+#: src/configdialog.cpp:446
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "Vis en forhåndsvisning av malen"
@@ -2657,107 +2645,107 @@ msgstr "Vis en forhåndsvisning av malen"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:469
+#: src/configdialog.cpp:463
 #, kde-format
 msgid "Font Options"
 msgstr "Skriftvalg"
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:470
 #, kde-format
 msgid "Font:"
 msgstr "Skrift:"
 
-#: src/configdialog.cpp:482
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "Denne skrifta sendes til malen som brukes i Inndata-visningen."
 
-#: src/configdialog.cpp:486
+#: src/configdialog.cpp:480
 #, kde-format
 msgid "Size:"
 msgstr "Størrelse:"
 
-#: src/configdialog.cpp:498
+#: src/configdialog.cpp:492
 #, kde-format
 msgid "Color Options"
 msgstr "Fargevalg"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:499
 #, kde-format
 msgid "Background color:"
 msgstr "Bakgrunnsfarge:"
 
-#: src/configdialog.cpp:511
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Denne fargen sendes til malen som brukes i Inndata-visningen."
 
-#: src/configdialog.cpp:515
+#: src/configdialog.cpp:509
 #, kde-format
 msgid "Text color:"
 msgstr "Tekstfarge:"
 
-#: src/configdialog.cpp:524
+#: src/configdialog.cpp:518
 #, kde-format
 msgid "Highlight color:"
 msgstr "Uthevingsfarge:"
 
-#: src/configdialog.cpp:533
+#: src/configdialog.cpp:527
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "Farge på uthevet tekst:"
 
-#: src/configdialog.cpp:542
+#: src/configdialog.cpp:536
 #, kde-format
 msgid "Link color:"
 msgstr ""
 
-#: src/configdialog.cpp:551
+#: src/configdialog.cpp:545
 #, kde-format
 msgid "Manage Templates"
 msgstr "Administrer maler"
 
-#: src/configdialog.cpp:562
+#: src/configdialog.cpp:556
 #, kde-format
 msgid "Install..."
 msgstr "Installer …"
 
-#: src/configdialog.cpp:566
+#: src/configdialog.cpp:560
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Trykk for å installere en ny mal direkte."
 
-#: src/configdialog.cpp:571 src/configdialog.cpp:574 src/configdialog.cpp:578
+#: src/configdialog.cpp:565 src/configdialog.cpp:568 src/configdialog.cpp:572
 #, kde-format
 msgid "Download..."
 msgstr "Last ned …"
 
-#: src/configdialog.cpp:583
+#: src/configdialog.cpp:577
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Trykk for å laste ned flere maler."
 
-#: src/configdialog.cpp:586
+#: src/configdialog.cpp:580
 #, kde-format
 msgid "Delete..."
 msgstr "Slett …"
 
-#: src/configdialog.cpp:590
+#: src/configdialog.cpp:584
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Trykk for å velge og slette installerte maler."
 
-#: src/configdialog.cpp:622
+#: src/configdialog.cpp:616
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Valg for datakilder"
 
-#: src/configdialog.cpp:643
+#: src/configdialog.cpp:637
 #, kde-format
 msgid "Move &Up"
 msgstr "Flytt &opp"
 
-#: src/configdialog.cpp:646
+#: src/configdialog.cpp:640
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2766,59 +2754,59 @@ msgstr ""
 "Rekkefølgen for datakildene angir rekkefølgen som Tellico bruker når innslag "
 "oppdteres automatisk."
 
-#: src/configdialog.cpp:649
+#: src/configdialog.cpp:643
 #, kde-format
 msgid "Move &Down"
 msgstr "Flytt ne&d"
 
-#: src/configdialog.cpp:658
+#: src/configdialog.cpp:652
 #, kde-format
 msgid "Filter by type:"
 msgstr "Filtrer etter type:"
 
-#: src/configdialog.cpp:676
+#: src/configdialog.cpp:670
 #, kde-format
 msgid "&New..."
 msgstr "&Ny …"
 
-#: src/configdialog.cpp:678
+#: src/configdialog.cpp:672
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Trykk for å legge til en ny datakilde."
 
-#: src/configdialog.cpp:679
+#: src/configdialog.cpp:673
 #, kde-format
 msgid "&Modify..."
 msgstr "&Endre …"
 
-#: src/configdialog.cpp:681
+#: src/configdialog.cpp:675
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Trykk for å endre den valgte datakilden."
 
-#: src/configdialog.cpp:682
+#: src/configdialog.cpp:676
 #, kde-format
 msgid "&Delete"
 msgstr "&Slett"
 
-#: src/configdialog.cpp:684
+#: src/configdialog.cpp:678
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Trykk for å slette den valgte datakilden."
 
-#: src/configdialog.cpp:1158 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1150 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
 msgstr ""
 
-#: src/configdialog.cpp:1159
+#: src/configdialog.cpp:1151
 #, kde-format
 msgid "Template Packages"
 msgstr ""
 
-#: src/configdialog.cpp:1160 src/importdialog.cpp:439 src/mainwindow.cpp:1281
-#: src/mainwindow.cpp:1456 src/reportdialog.cpp:428 src/reportdialog.cpp:443
+#: src/configdialog.cpp:1152 src/importdialog.cpp:439 src/mainwindow.cpp:1276
+#: src/mainwindow.cpp:1451 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -2832,12 +2820,12 @@ msgstr ""
 msgid "All Files"
 msgstr "Alle filer"
 
-#: src/configdialog.cpp:1189
+#: src/configdialog.cpp:1181
 #, kde-format
 msgid "Delete Template"
 msgstr "Slett mal"
 
-#: src/configdialog.cpp:1190
+#: src/configdialog.cpp:1182
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Velg mal som skal slettes:"
@@ -3032,7 +3020,7 @@ msgstr "Vis alle kolonner"
 msgid "Hide All Columns"
 msgstr "Skjul alle kolonner"
 
-#: src/document.cpp:210 src/mainwindow.cpp:1395
+#: src/document.cpp:210 src/mainwindow.cpp:1390
 #, kde-format
 msgid "Saving file..."
 msgstr "Lagrer fila …"
@@ -3094,7 +3082,7 @@ msgid "Save Entry"
 msgstr "Lagre innslag"
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1168 src/mainwindow.cpp:1186
+#: src/mainwindow.cpp:1163 src/mainwindow.cpp:1181
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Ulagrede endringer"
@@ -3104,7 +3092,7 @@ msgstr "Ulagrede endringer"
 msgid "(Empty)"
 msgstr "(Tom)"
 
-#: src/entryiconview.cpp:65 src/mainwindow.cpp:872
+#: src/entryiconview.cpp:65 src/mainwindow.cpp:867
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3173,7 +3161,7 @@ msgstr "Oppdaterer <b>%1</b> …"
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico klarer ikke å finne standardmalens visningsark."
 
-#: src/entryview.cpp:334 src/mainwindow.cpp:1806
+#: src/entryview.cpp:334 src/mainwindow.cpp:1797
 #, kde-format
 msgid "Please check your installation."
 msgstr "Vennligst sjekk din installasjon."
@@ -4823,8 +4811,8 @@ msgstr "Filternavn:"
 msgid "&Save Filter"
 msgstr "&Lagre filter"
 
-#: src/filterview.cpp:191 src/mainwindow.cpp:567 src/mainwindow.cpp:777
-#: src/mainwindow.cpp:795
+#: src/filterview.cpp:191 src/mainwindow.cpp:567 src/mainwindow.cpp:772
+#: src/mainwindow.cpp:790
 #, kde-format
 msgid "Filter"
 msgstr "Filtrer"
@@ -4860,8 +4848,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Gruppe"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1095 src/mainwindow.cpp:1741
-#: src/mainwindow.cpp:1775 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1090 src/mainwindow.cpp:1732
+#: src/mainwindow.cpp:1766 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Personer"
@@ -5164,14 +5152,14 @@ msgstr ""
 msgid "&Import"
 msgstr "&Importer"
 
-#: src/importdialog.cpp:371 src/mainwindow.cpp:1277 src/mainwindow.cpp:1454
+#: src/importdialog.cpp:371 src/mainwindow.cpp:1272 src/mainwindow.cpp:1449
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr ""
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr ""
@@ -5969,7 +5957,7 @@ msgstr "Fravelg alle felter i samlinga"
 msgid "Advanced &Filter..."
 msgstr "Avansert &filter …"
 
-#: src/mainwindow.cpp:570 src/mainwindow.cpp:796
+#: src/mainwindow.cpp:570 src/mainwindow.cpp:791
 #, kde-format
 msgid "Filter the collection"
 msgstr "Filtrer samlinga"
@@ -6195,39 +6183,39 @@ msgstr ""
 msgid "Enable/disable the editor"
 msgstr "Slå på/av redigerer"
 
-#: src/mainwindow.cpp:763
+#: src/mainwindow.cpp:758
 #, kde-format
 msgid "Change Grouping"
 msgstr "Endre gruppering"
 
-#: src/mainwindow.cpp:766
+#: src/mainwindow.cpp:761
 #, kde-format
 msgid "&Group Selection"
 msgstr "&Valg for gruppering"
 
-#: src/mainwindow.cpp:767
+#: src/mainwindow.cpp:762
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr "Endre gruppering av samlinga"
 
-#: src/mainwindow.cpp:781
+#: src/mainwindow.cpp:776
 #, kde-format
 msgid "Filter here..."
 msgstr "Filtrer  her …"
 
-#: src/mainwindow.cpp:846 src/mainwindow.cpp:849
+#: src/mainwindow.cpp:841 src/mainwindow.cpp:844
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
 "qt>"
 msgstr "<qt><i>Innslagsvisning</i> viser innslagets innhold formattert</qt>"
 
-#: src/mainwindow.cpp:855
+#: src/mainwindow.cpp:850
 #, kde-format
 msgid "Collection View"
 msgstr ""
 
-#: src/mainwindow.cpp:862
+#: src/mainwindow.cpp:857
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
@@ -6236,17 +6224,17 @@ msgstr ""
 "<qt><i>Kolonnevisning</i> viser verdier for flere felter for hvert innslag.</"
 "qt>"
 
-#: src/mainwindow.cpp:879
+#: src/mainwindow.cpp:874
 #, kde-format
 msgid "Group View"
 msgstr ""
 
-#: src/mainwindow.cpp:888
+#: src/mainwindow.cpp:883
 #, kde-format
 msgid "Groups"
 msgstr "Grupper"
 
-#: src/mainwindow.cpp:889
+#: src/mainwindow.cpp:884
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
@@ -6255,12 +6243,12 @@ msgstr ""
 "<qt><i>Gruppevisning</i> sorterer innslag i grupper på grunnlag av valgt "
 "felt.</qt>"
 
-#: src/mainwindow.cpp:964
+#: src/mainwindow.cpp:959
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Tellico samlingshåndterer"
 
-#: src/mainwindow.cpp:966
+#: src/mainwindow.cpp:961
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6275,7 +6263,7 @@ msgstr ""
 "manuelt</a> eller å <a href=\"tc:///edit_search_internet\">laste ned data</"
 "a> fra forskjellige Internett-kilder.</h3>"
 
-#: src/mainwindow.cpp:1165
+#: src/mainwindow.cpp:1160
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6284,22 +6272,22 @@ msgstr ""
 "Dette dokumentet er endret.\n"
 "Vil du lagre?"
 
-#: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
+#: src/mainwindow.cpp:1216 src/mainwindow.cpp:1249
 #, kde-format
 msgid "Creating new collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
+#: src/mainwindow.cpp:1269 src/mainwindow.cpp:1292 src/mainwindow.cpp:1310
 #, kde-format
 msgid "Opening file..."
 msgstr "Åpner fil …"
 
-#: src/mainwindow.cpp:1285
+#: src/mainwindow.cpp:1280
 #, kde-format
 msgid "Open File"
 msgstr "Åpne fil"
 
-#: src/mainwindow.cpp:1406
+#: src/mainwindow.cpp:1401
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6312,32 +6300,32 @@ msgstr ""
 "bedre ytelse?</p><p>Dette valget kan du endre når som helst i "
 "oppsettsdialogen.</p></qt>"
 
-#: src/mainwindow.cpp:1411
+#: src/mainwindow.cpp:1406
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Lagre bilder for seg"
 
-#: src/mainwindow.cpp:1412
+#: src/mainwindow.cpp:1407
 #, kde-format
 msgid "Save Images in File"
 msgstr "Lagre bilder i fil"
 
-#: src/mainwindow.cpp:1452
+#: src/mainwindow.cpp:1447
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Lagrer fil med nytt navn …"
 
-#: src/mainwindow.cpp:1461
+#: src/mainwindow.cpp:1456
 #, kde-format
 msgid "Save As"
 msgstr "Lagre som"
 
-#: src/mainwindow.cpp:1527
+#: src/mainwindow.cpp:1522
 #, kde-format
 msgid "Printing..."
 msgstr "Skriver ut …"
 
-#: src/mainwindow.cpp:1531
+#: src/mainwindow.cpp:1526
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6346,27 +6334,27 @@ msgstr ""
 "Samlinga er foreløpig satt opp til å vise en begrenset antall  innslag. Bare "
 "innslag som er synlige vil bli skrevet ut. Vil du fortsette?"
 
-#: src/mainwindow.cpp:1554
+#: src/mainwindow.cpp:1549
 #, kde-format
 msgid "Exiting..."
 msgstr "Avslutter …"
 
-#: src/mainwindow.cpp:1660
+#: src/mainwindow.cpp:1651
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrert, %2 valgt)"
 
-#: src/mainwindow.cpp:1663
+#: src/mainwindow.cpp:1654
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtrert)"
 
-#: src/mainwindow.cpp:1666
+#: src/mainwindow.cpp:1657
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 valgt)"
 
-#: src/mainwindow.cpp:1805 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1796 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:264
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6374,57 +6362,57 @@ msgstr "(%1 valgt)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico traff på en feil i XSLT prosesseringen."
 
-#: src/mainwindow.cpp:1937
+#: src/mainwindow.cpp:1928
 #, kde-format
 msgid "Importing data..."
 msgstr "Importerer data …"
 
-#: src/mainwindow.cpp:1948
+#: src/mainwindow.cpp:1939
 #, kde-format
 msgid "Import File"
 msgstr "Importer fil"
 
-#: src/mainwindow.cpp:1961
+#: src/mainwindow.cpp:1952
 #, kde-format
 msgid "Import Directory"
 msgstr "Importer mappe"
 
-#: src/mainwindow.cpp:1985
+#: src/mainwindow.cpp:1976
 #, kde-format
 msgid "Exporting data..."
 msgstr "Eksporterer data …"
 
-#: src/mainwindow.cpp:2008
+#: src/mainwindow.cpp:1999
 #, kde-format
 msgid "Export As"
 msgstr "Eksporter som"
 
-#: src/mainwindow.cpp:2036
+#: src/mainwindow.cpp:2027
 #, kde-format
 msgid "String Macros"
 msgstr "Tekststreng-makro"
 
-#: src/mainwindow.cpp:2037
+#: src/mainwindow.cpp:2028
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:2037
+#: src/mainwindow.cpp:2028
 #, kde-format
 msgid "String"
 msgstr "Tekststreng"
 
-#: src/mainwindow.cpp:2123
+#: src/mainwindow.cpp:2114
 #, kde-format
 msgid "Creating citations..."
 msgstr "Lager litteraturreferanser …"
 
-#: src/mainwindow.cpp:2233
+#: src/mainwindow.cpp:2224
 #, kde-format
 msgid "Filters"
 msgstr "Filtre"
 
-#: src/mainwindow.cpp:2234
+#: src/mainwindow.cpp:2225
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6433,12 +6421,12 @@ msgstr ""
 "<qt><i>Filtervisning</i> viser innslag som stemmer med gitte filterregler.</"
 "qt>"
 
-#: src/mainwindow.cpp:2257
+#: src/mainwindow.cpp:2248
 #, kde-format
 msgid "Loans"
 msgstr "Lån"
 
-#: src/mainwindow.cpp:2258
+#: src/mainwindow.cpp:2249
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6447,7 +6435,7 @@ msgstr ""
 "<qt><i>Utlånsvisning</i> viser en liste over alle som har lånt ting fra "
 "samlingen din.</qt>"
 
-#: src/mainwindow.cpp:2345
+#: src/mainwindow.cpp:2336
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6456,12 +6444,12 @@ msgstr ""
 "Noen bilder er ikke lagret på det innstilte stedet. Den gjeldende fila må "
 "lagres og bildene vil bli overført til det nye stedet."
 
-#: src/mainwindow.cpp:2386
+#: src/mainwindow.cpp:2377
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Oppdater innslagsdata fra %1"
 
-#: src/mainwindow.cpp:2405
+#: src/mainwindow.cpp:2396
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6608,13 +6596,13 @@ msgid "&Show Views"
 msgstr ""
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: src/tellicoui.rc:128
+#: src/tellicoui.rc:125
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Hovedverktøylinje"
 
 #. i18n: ectx: ToolBar (collectionToolBar)
-#: src/tellicoui.rc:135
+#: src/tellicoui.rc:132
 #, kde-format
 msgid "Collection Toolbar"
 msgstr "Samlingsverktøylinje"
@@ -7283,12 +7271,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:189
+#: src/translators/tellicoimporter.cpp:183
 #, kde-format
 msgid "The file is empty."
 msgstr "Fila er tom."
 
-#: src/translators/tellicoimporter.cpp:202
+#: src/translators/tellicoimporter.cpp:196
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "Fila inneholder ingen samlingsdata.s"
@@ -7365,196 +7353,6 @@ msgstr ""
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "Øk største ikonstørrelse i ikonlistevisningen"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:2
-#, kde-format
-msgid ""
-"<p>...that if a book has more than one author, you should separate\n"
-"their names by a semi-colon, so that Tellico will know how to split them\n"
-"and use them separately.</p>\n"
-"<p>Any other field which allows multiple values should be entered the\n"
-"same way, with a semi-colon (;) separating each value.</p>\n"
-msgstr ""
-"<p>…om en bok har mer enn én forfatter, bør du  sette semikolon\n"
-"mellom navnene, slik at Tellico kan dele dem opp og bruke dem hver\n"
-"for seg.</p> <p>Alle andre felter som tillater flere verdier bør tastes inn "
-"på samme\n"
-"måte, med semikolon (;) som skilletegn mellom hver verdi.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:11
-#, kde-format
-msgid ""
-"<p>...that you can change which fields are shown in the column view by\n"
-"right-clicking on the column header.\n"
-msgstr ""
-"<p>…at du kan endre hvilke felter som blir vist i kolonnevisningen ved \n"
-"å høyreklikke på kolonnetittelen.\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:17
-#, kde-format
-msgid ""
-"<p>...that you can add, edit, or modify the fields in the collection using\n"
-"the Field Editor. The arrow buttons below the field list can be used to "
-"change the\n"
-"position of the field in the list, which affects the placement in the entry\n"
-"editor.</p>\n"
-msgstr ""
-"<p>…at du kan legge til, endre eller redigere felter i samlingen ved\n"
-"å bruke Feltredigerer. Pilknappene under feltene kan brukes til å\n"
-"forandre posisjonen til feltet i lista, og det påvirker plasseringen\n"
-"i innslagsredigereren.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:25
-#, kde-format
-msgid ""
-"<p>...that if you want to filter by a Checkbox field, a value of\n"
-"\"true\" should be used. If you'd like to filter to\n"
-"show only the science fiction books which you've not read, for\n"
-"example, check the <em>Match all of the\n"
-"following</em> button, set the first rule to have \"Genre\"\n"
-"\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
-"have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
-msgstr ""
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:36
-#, kde-format
-msgid ""
-"<p>...that if a non-word character is used in the Quick Filter, the text is\n"
-"interpreted as a regular expression.</p>\n"
-"<p>To show only books which are by Weber or Bujold, for example, then\n"
-"type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
-msgstr ""
-"<p>…at om et kommandotegn blir brukt i et hurtigfilter, blir teksten tolket\n"
-"som et regulært uttrykk.</p>\n"
-"<p>For å vise bare bøker som er av Weber eller Bujold, kan du for\n"
-"eksempel skrive inn «weber|bujold» (uten hermetegn) i filterboksen</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:44
-#, kde-format
-msgid ""
-"<p>...that you can edit more than one entry at a time, by holding down\n"
-"the Shift or Ctrl key and selecting multiple entries.</p>\n"
-msgstr ""
-"<p>…at du kan endre mer enn ett innslag om gangen ved å holde nede\n"
-"shift eller Ctrl-knappen og velge flere innslag.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:50
-#, kde-format
-msgid ""
-"<p>...that you can convert an existing book collection to a bibliography,\n"
-"which can then be exported to bibtex or Bibtexml format.</p>\n"
-msgstr ""
-"<p>…at du kan gjøre om en eksisterende samling til en bibliografi,\n"
-"som kan videre eksporteres til Bibtex eller Bibtexml-format.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:56
-#, kde-format
-msgid ""
-"<p>...that you can add, edit, and delete string macros for bibliographies.</"
-"p>\n"
-msgstr ""
-"<p>…at du kan legge til, endre og slette tekststreng-makroer for "
-"bibliografier.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:61
-#, kde-format
-msgid ""
-"<p>...that if more than one field is formatted as a name, then an "
-"additional\n"
-"group named \"People\" is added to the collection, allowing authors and "
-"editors\n"
-"to be sorted or printed together, for example.</p>\n"
-msgstr ""
-"<p>…at om flere enn ett felt er formatert som navn, så blir det\n"
-"lag til en ekstra gruppe som heter «Personer» til samlingen, slik at\n"
-" man kan sortere eller skrive ut for eksempel forfattere eller\n"
-"redaktører sammen.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:68
-#, kde-format
-msgid ""
-"<p>...that you can modify the appearance of the printed output by modifying\n"
-"the <tt>tellico-printing.xsl</tt> file. The file generates HTML, and the "
-"CSS\n"
-"within the stylesheet governs things like the font, the margins, etc.</p>\n"
-msgstr ""
-"<p>…at du kan endre utseendet på utskriften ved å endre på\n"
-"<tt>tellico-printing.xsl</tt>-filen. Denne fila genererer\n"
-"HTML, og CSS-stilsettet styrer ting slik som fonter, marger\n"
-"og så videre.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:75
-#, kde-format
-msgid ""
-"<p>...that you can import using any generic XSL stylesheet which\n"
-"outputs a valid Tellico XML file.</p>\n"
-msgstr ""
-"<p>…at du kan importere og eksportere alle generiske XSL-stilark som\n"
-"gir ut gyldig Tellico XML-filer.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:81
-#, kde-format
-msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
-msgstr "<p>…at dobbeltklikking åpner en redigerer for innslaget.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:86
-#, kde-format
-msgid ""
-"<p>...that you can add HTML tags to any Paragraph field for formatting, such "
-"as\n"
-"&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
-msgstr ""
-"<p>…at du kan legge til HTML-tagger til avsnittsfelt  for å formatere, slik "
-"som\n"
-"&lt;b&gt;halvfet&lt;/b&gt; eller &lt;i&gt;kursiv&lt;/i&gt;.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:92
-#, kde-format
-msgid ""
-"<p>...that when the Column View is focused, you can press a letter on the\n"
-"keyboard to scroll to the next entry that starts with that letter.</p>\n"
-msgstr ""
-"<p>…at du når Kolonnevisning har fokus kan trykke en bokstav på tastaturet\n"
-"for å komme til neste innslag som starter med den bokstaven.</p>\n"
-
-#. i18n: ectx: @info:tipoftheday
-#: tellico.tips:98
-#, kde-format
-msgid ""
-"<p>...that you can use a field with a derived value to combine multiple "
-"separated fields\n"
-"into a single field. Use a derived value template\n"
-"similar to \"Value: %{fielda}%{fieldb}\" where %{...} gets replaced with "
-"the\n"
-"appropriate field value. This is useful to collect multiple values in a\n"
-"single field, e.g. for better grouping, and to combine fields of different\n"
-"types by respecting proper sorting at the same time. Consider for example\n"
-"a number field followed by a text subfield with entries 3b, 14a.</p>\n"
-msgstr ""
-" <p>… at du kan bruke et felt med en avledet type til å sette sammen flere "
-"atskilte felter\n"
-"til ett enkelt felt. Bruk en mal for avledet verdi slik som\n"
-"«Verdi: %{felta}%{feltb}» der %{…} blir erstattet med tilsvarende "
-"feltverdi.\n"
-" Dette er nyttig for å samle flere verdier i ett og samme felt, f.eks. for "
-"bedre\n"
-"gruppering, og til å kombinere felter av forskjellige typer ved å sørge for\n"
-"riktig sortering samtidig. Betrakt for eksempel et tallfelt fulgt av \n"
-"et tekst-underfelt med oppføringer 3b, 14a.</p>\n"
 
 #: xslt/entry-templates/Album.xsl:171
 #, kde-format
