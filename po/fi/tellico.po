@@ -102,12 +102,10 @@ msgid "Image List"
 msgstr "Kuvaluettelo"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, fuzzy, kde-format
-#| msgctxt "Image List XSL Template"
-#| msgid "Image List"
+#, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "Kuvaluettelo"
+msgstr "Kuvaruudukko"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -2357,10 +2355,9 @@ msgstr "Mallipohjan korostetun tekstin väri"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, fuzzy, kde-format
-#| msgid "Template highlight color"
+#, kde-format
 msgid "Template link color"
-msgstr "Mallipohjan korostusväri"
+msgstr "Mallipohjan linkkiväri"
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -2402,17 +2399,16 @@ msgid ""
 msgstr "Jos valittu, viimeksi avattu tiedosto avataan ohjelman käynnistyessä."
 
 #: src/configdialog.cpp:221
-#, fuzzy, kde-format
-#| msgid "matches regular expression"
+#, kde-format
 msgid "&Enable regular expressions in quick filter"
-msgstr "vastaa lauseketta"
+msgstr "Käytä &pikasuodattimessa säännöllisiä lausekkeita"
 
 #: src/configdialog.cpp:222
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
-msgstr "Jos valittu, kenttien nimet tulostetaan taulukon otsakkeina."
+msgstr ""
+"Jos valittu, pikasuodatin tulkitsee tekstin säännölliseksi lausekkeeksi."
 
 #: src/configdialog.cpp:227
 #, kde-format
@@ -2713,10 +2709,9 @@ msgid "Highlighted text color:"
 msgstr "Korostetun tekstin väri:"
 
 #: src/configdialog.cpp:542
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "Tekstin väri:"
+msgstr "Linkkiväri:"
 
 #: src/configdialog.cpp:551
 #, kde-format
@@ -3811,10 +3806,9 @@ msgid "Barcode"
 msgstr "Viivakoodi"
 
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:514
-#, fuzzy, kde-format
-#| msgid "Card Number"
+#, kde-format
 msgid "Catalog Number"
-msgstr "Kortin numero"
+msgstr "Luettelonumero"
 
 #: src/fetch/discogsfetcher.cpp:347
 #, kde-format
@@ -3969,14 +3963,12 @@ msgid "Raw Query"
 msgstr "Raakahaku"
 
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Filmaster-linkki"
+msgstr "FilmAffinity-linkki"
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "Espanja"
@@ -3985,7 +3977,7 @@ msgstr "Espanja"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "Yhdysvallat"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -3995,10 +3987,9 @@ msgstr "Filmaster-linkki"
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
 #: src/fetch/gaminghistoryfetcher.cpp:374
-#, fuzzy, kde-format
-#| msgid "GiantBomb Link"
+#, kde-format
 msgid "Gaming History Link"
-msgstr "GiantBomb-linkki"
+msgstr "Pelihistorialinkki"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
@@ -4078,7 +4069,7 @@ msgstr "Internet-pelitietokanta (IGDB.com)"
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:344
 #, kde-format
 msgid "Screenshot"
-msgstr ""
+msgstr "Ruutukaappaus"
 
 #: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
 #, kde-format
@@ -4160,10 +4151,9 @@ msgstr ""
 "tileille."
 
 #: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:505
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "iTunes Link"
-msgstr "Allocine-linkki"
+msgstr "iTunes-linkki"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4274,10 +4264,9 @@ msgid "SRU Server"
 msgstr "SRU-palvelin"
 
 #: src/fetch/srufetcher.cpp:525
-#, fuzzy, kde-format
-#| msgid "&Source name: "
+#, kde-format
 msgid "Scheme: "
-msgstr "Tietolähteen &nimi: "
+msgstr "Malli: "
 
 #: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
 #, kde-format
@@ -4373,7 +4362,7 @@ msgstr "TheTVDB-linkki"
 #: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr ""
+msgstr "Tilaajan PIN:"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -4893,32 +4882,28 @@ msgstr "Henkilöt"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, fuzzy, kde-format
-#| msgid "Template:"
+#, kde-format
 msgid "Template Name:"
-msgstr "Mallipohja:"
+msgstr "Mallipohjan nimi:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, fuzzy, kde-format
-#| msgid "Comments"
+#, kde-format
 msgid "Comment:"
-msgstr "Kommentit"
+msgstr "Kommentti:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, fuzzy, kde-format
-#| msgid "Icon"
+#, kde-format
 msgid "Icon:"
-msgstr "Kuvake"
+msgstr "Kuvake:"
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, fuzzy, kde-format
-#| msgid "Collection Report"
+#, kde-format
 msgid "Save As Collection Template"
-msgstr "Kokoelmaraportti"
+msgstr "Tallenna kokoelmapohjaksi"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -5250,10 +5235,9 @@ msgid "VinoXML Data Files"
 msgstr "VinoXML-tiedostot"
 
 #: src/importdialog.cpp:424
-#, fuzzy, kde-format
-#| msgid "Book Title"
+#, kde-format
 msgid "eBook Files"
-msgstr "Kirjan nimi"
+msgstr "eBook-tiedostot"
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5419,10 +5403,9 @@ msgid "Import <filename> as a RIS file"
 msgstr "Tuo <filename> RIS-tiedostona"
 
 #: src/main.cpp:148
-#, fuzzy, kde-format
-#| msgid "Import <filename> as a MODS file"
+#, kde-format
 msgid "Import <filename> as a PDF file"
-msgstr "Tuo <filename> MODS-tiedostona"
+msgstr "Tuo <tstonimi> PDF-tiedostona"
 
 #: src/main.cpp:149
 #, kde-format
@@ -5590,28 +5573,24 @@ msgid "Save the document as a different file..."
 msgstr "Tallenna asiakirja eri tiedostoon…"
 
 #: src/mainwindow.cpp:334
-#, fuzzy, kde-format
-#| msgid "Manage Templates"
+#, kde-format
 msgid "Save As Template..."
-msgstr "Hallitse mallipohjia"
+msgstr "Tallenna mallipohjaksi…"
 
 #: src/mainwindow.cpp:336
-#, fuzzy, kde-format
-#| msgid "Create a new collection"
+#, kde-format
 msgid "Save as a collection template"
-msgstr "Luo uusi kokoelma"
+msgstr "Tallenna kokoelmapohjaksi"
 
 #: src/mainwindow.cpp:339
-#, fuzzy, kde-format
-#| msgid "Print the contents of the document..."
+#, kde-format
 msgid "Print the contents of the collection..."
-msgstr "Tulosta tiedoston sisältö…"
+msgstr "Tulosta kokoelman sisältö…"
 
 #: src/mainwindow.cpp:355
-#, fuzzy, kde-format
-#| msgid "Preview the contents of the document..."
+#, kde-format
 msgid "Preview the contents of the collection..."
-msgstr "Esikatsele tiedoston sisältöä…"
+msgstr "Esikatsele kokoelman sisältöä…"
 
 #: src/mainwindow.cpp:359
 #, kde-format
@@ -5684,16 +5663,14 @@ msgid "Import data from Collectorz"
 msgstr "Tuo tietoa Collectorzista"
 
 #: src/mainwindow.cpp:410
-#, fuzzy, kde-format
-#| msgid "Import GCstar Data..."
+#, kde-format
 msgid "Import Data Crow Data..."
-msgstr "Tuo GCstar-tietoa…"
+msgstr "Tuo Data Crow -tietoa…"
 
 #: src/mainwindow.cpp:411
-#, fuzzy, kde-format
-#| msgid "Import data from Collectorz"
+#, kde-format
 msgid "Import data from Data Crow"
-msgstr "Tuo tietoa Collectorzista"
+msgstr "Tuo tietoa Data Crow’sta"
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5736,16 +5713,14 @@ msgid "Import an RIS reference file"
 msgstr "Tuo RIS-viitetiedosto"
 
 #: src/mainwindow.cpp:430
-#, fuzzy, kde-format
-#| msgid "Import CSV Data..."
+#, kde-format
 msgid "Import MARC Data..."
-msgstr "Tuo CSV-tietoa…"
+msgstr "Tuo MARC-tietoa…"
 
 #: src/mainwindow.cpp:431
-#, fuzzy, kde-format
-#| msgid "Import VinoXML data"
+#, kde-format
 msgid "Import MARC data"
-msgstr "Tuo VinoXML-tiedot"
+msgstr "Tuo MARC-tieto"
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -6321,10 +6296,9 @@ msgstr ""
 "Haluatko tallentaa sen?"
 
 #: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
-#, fuzzy, kde-format
-#| msgid "Create a new collection"
+#, kde-format
 msgid "Creating new collection..."
-msgstr "Luo uusi kokoelma"
+msgstr "Luodaan uusi kokoelma…"
 
 #: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
 #, kde-format
@@ -6519,7 +6493,7 @@ msgstr "&Raportin mallipohja:"
 #: src/reportdialog.cpp:128
 #, kde-format
 msgid "One Entry Per Page"
-msgstr ""
+msgstr "Tietue/sivu"
 
 #: src/reportdialog.cpp:140
 #, kde-format
@@ -7254,28 +7228,24 @@ msgid "LibraryThing file:"
 msgstr "LibraryThing-tiedosto:"
 
 #: src/translators/marcimporter.cpp:132
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#, kde-format
 msgid "Tellico was unable to read any data."
-msgstr "Tellico ei pystynyt lukemaan PDF-tiedoston metatietoja."
+msgstr "Tellico ei saanut luetuksi mitään tietoa."
 
 #: src/translators/marcimporter.cpp:151
-#, fuzzy, kde-format
-#| msgid "CSV Options"
+#, kde-format
 msgid "MARC Options"
-msgstr "CSV-asetukset"
+msgstr "MARC-valinnat"
 
 #: src/translators/marcimporter.cpp:156
-#, fuzzy, kde-format
-#| msgid "Query character set: "
+#, kde-format
 msgid "Character set:"
-msgstr "Kyselyn merkistö: "
+msgstr "Merkistö:"
 
 #: src/translators/marcimporter.cpp:161
-#, fuzzy, kde-format
-#| msgid "Format: "
+#, kde-format
 msgid "MARC Format:"
-msgstr "Muoto:"
+msgstr "MARC-muoto:"
 
 #: src/translators/onixexporter.cpp:67
 #, kde-format
