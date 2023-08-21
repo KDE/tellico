@@ -56,9 +56,7 @@
 <para
 >Las <guilabel
 >Opciones generales</guilabel
-> controlan el comportamiento general. Las imágenes pueden estar incluidas en los archivos de datos, o guardadas por separado en la carpeta de la aplicación &appname;. Además, cuando se inicia &appname;, puede abrir automáticamente el último archivo de datos que ha sido abierto. El diálogo <guilabel
->Consejo del día</guilabel
-> contiene pistas útiles para usar &appname;, y aparece al inicio del programa. Puede querer leer algunas de estas pistas y después deshabilitar el diálogo. El <interface
+> controlan el comportamiento general. Las imágenes pueden estar incluidas en los archivos de datos, o guardadas por separado en la carpeta de la aplicación &appname;. Además, cuando se inicia &appname;, puede abrir automáticamente el último archivo de datos que ha sido abierto. El <interface
 >Filtrado rápido</interface
 > de la barra de herramientas resulta de utilidad para filtrar rápidamente la colección y permite el uso de expresiones regulares. </para>
 

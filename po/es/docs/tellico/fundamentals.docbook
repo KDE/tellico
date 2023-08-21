@@ -977,9 +977,6 @@
 <title
 >Consejos generales</title>
 
-<para
->Esta es la lista de consejos contenidos en la lista «Consejo del día» para &appname;. </para>
-
 <tip>
 <para
 >Si un libro tiene más de un autor, debería separar los nombres por un punto y coma, de forma que Tellico sepa cómo dividirlos y usarlos separadamente. Se debe hacer lo mismo con cualquier otro campo que permita múltiples valores, con un punto y coma (;) separando cada valor. </para>
@@ -995,22 +992,6 @@
 >Puede añadir, editar o modificar los campos de la colección usando el <interface
 >Diálogo de campos de la colección</interface
 >. Los botones de flecha debajo de la lista de campos se pueden usar para cambiar la posición del campo en la lista, lo que afecta a la ubicación en el editor de entradas. </para>
-</tip>
-
-<tip>
-<para
->Si desea filtrar según un campo de <link linkend="bool"
-><emphasis
->Casilla de verificación</emphasis
-></link
->, se debería usar un valor «verdadero». Si desea filtrar para que solo se muestren los libros de ciencia-ficción que no ha leído, por ejemplo, marque el botón <guilabel
->Hacer coincidir todos los siguientes</guilabel
->, establezca la primera regla para que «Género» contenga «Ciencia-ficción» (sin comillas) y la segunda para que «Leído» no contenga «verdadero» (sin comillas). </para>
-</tip>
-
-<tip>
-<para
->Si un carácter que no sea una palabra se usa en el filtro rápido, el texto se interpreta como una expresión regular. para mostrar solo los libros que son de Weber o de Bujold, por ejemplo, teclee «weber|bujold» (sin las comillas) en el cuadro de filtro. </para>
 </tip>
 
 <tip>
