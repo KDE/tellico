@@ -54,11 +54,11 @@
 </screenshot>
 
 <para
->Las <guilabel
->Opciones generales</guilabel
-> controlan el comportamiento general. Las imágenes pueden estar incluidas en los archivos de datos, o guardadas por separado en la carpeta de la aplicación &appname;. Además, cuando se inicia &appname;, puede abrir automáticamente el último archivo de datos que ha sido abierto. El diálogo <guilabel
->Consejo del día</guilabel
-> contiene pistas útiles para usar &appname;, y aparece al inicio del programa. Puede querer leer algunas de estas pistas y después deshabilitar el diálogo. </para>
+>The <guilabel
+>General Options</guilabel
+> control the general behavior. Images may be included in the data files, or saved separately in the &appname; application folder. Also, when &appname; is started, it can automatically reopen the last data file that was open. The <guilabel
+>Tip of the Day</guilabel
+> dialog contains helpful hints on using &appname; and appears at program startup. You may want to read through some of the hints and then disable the dialog. </para>
 
 <para
 >Las <guilabel
@@ -602,7 +602,7 @@
 <para
 ><ulink url="http://allocine.fr"
 >AlloCiné</ulink
-> es un servicio de información de películas en línea con sede en Francia. La identificación del navegador debe estar activada en &systemsettings;. </para>
+> is an online movie information service, based in France. Browser Identification must be enabled in &systemsettings; </para>
 </sect3>
 
 <sect3 id="animenfo">
@@ -626,7 +626,7 @@
 <para
 ><ulink url="http://discogs.com"
 >Discogs.com</ulink
-> es una base de datos de música construida por los usuarios que contiene información sobre artistas, sellos y sus grabaciones. Se requiere registrarse para obtener una cuenta gratuita. La identificación del navegador debe estar activada en &systemsettings;. </para>
+> is a user-built music database containing information on artists, labels, and their recordings. Registration for a free account is required. Browser Identification must be enabled in &systemsettings; </para>
 </sect3>
 
 <sect3 id="musicbrainz">
@@ -635,7 +635,7 @@
 <para
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
-> es una metabase de datos que intenta crear un sitio de información exhaustiva sobre música. La identificación del navegador debe estar activada en &systemsettings;. </para>
+> is a community music metadatabase that attempts to create a comprehensive music information site. Browser Identification must be enabled in &systemsettings; </para>
 </sect3>
 
 </sect2>
@@ -790,9 +790,9 @@
 >, sino que también puede importar otros formatos, como bibtex. </para>
 
 <para
->La ruta completa a la aplicación debería introducirse en las opciones de la fuente. Tenga en cuenta que la aplicación se ejecuta en un sistema con los mismos permisos que el usuario actual, así que no use scripts de fuentes que no sean de confianza. Marque las casillas junto a las claves de búsqueda admitidas por la aplicación, e introduzca las opciones de línea de órdenes requeridas en la caja de edición. El valor de búsqueda será insertado donde aparezca <userinput
+>The full path to the application should be entered in the source options. Be aware that the application is executed on the system with the same permissions as the current user, so do not use scripts from untrusted sources. Check the boxes next to the search keys supported by the application, and enter the required command line options in the edit box. The search value will be inserted where <userinput
 >%1</userinput
->. </para>
+> appears. </para>
 
 <para
 >Para actualizar entradas que ya estén en la colección, las casillas de comprobación final y de edición se utilizan para determinar las opciones de la línea de órdenes. Deben introducirse los campos de entrada usados para encontrar una actualización, en el mismo formato que se utilizó para los campos de <link linkend="derived"

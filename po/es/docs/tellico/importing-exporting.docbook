@@ -201,9 +201,9 @@
 >Importar datos de un &CD; de audio</title>
 
 <para
->&appname; puede usar el servicio <ulink url="http://freedb.org"
+>&appname; is able to use the <ulink url="http://freedb.org"
 >freedb.org</ulink
-> para buscar información sobre un &CD;, incluyendo la lista de pistas. Dependiendo de su distribución, los ajustes para acceder al servicio se podrán configurar en las &systemsettings; de &kde;. Se añadirán el &CD;, artista, título, género, año y lista de pistas. </para>
+> service to lookup information about a &CD;, including the track list. Depending on your distribution, settings for access to the service may be set in the &kde; &systemsettings;. The &CD; artist, title, genre, year, and track listing are all added. </para>
 
 <para
 >Además, si el disco contiene texto de &CD;, se leerá esa información y se añadirá a la entrada importada. </para>
@@ -371,9 +371,9 @@
 >Arrastrar y soltar</title>
 
 <para
->Arrastrar archivos de datos a la ventana principal de &appname; y soltarlos importará los archivos, de la misma forma que si se hubiera seleccionado la <link linkend="importing"
->orden de importar</link
-> desde un menú. Arrastrar y soltar funciona para los siguientes tipos de archivos: Tellico, Bibtex, RIS y &PDF;. También se admite la importación de múltiples archivos a la vez.</para>
+>Dragging data files to the main &appname; window and dropping them will import the files, just as if the <link linkend="importing"
+>import command</link
+> was made from the menus. Drag and drop works for the following file formats: Tellico, Bibtex, RIS, and &PDF;. Importing multiple files at once is also supported.</para>
 
 <para
 >Así que, por ejemplo, si desea catalogar varios <link linkend="importing-pdf"

@@ -35,33 +35,33 @@ application work. -->
 <qandaentry>
 <question>
 <para
->¿Puedo modificar la apariencia de la página impresa?</para>
+>Can I modify what the printed page looks like?</para>
 </question>
 <answer>
 
 <para
->Sí, ciertamente. Encuentre el archivo <filename
+>Yes, most certainly. Find the file <filename
 >tellico-printing.xsl</filename
-> que debería estar en el directorio $<envar
+> which should be in the $<envar
 >KDEDIR</envar
->/share/apps/tellico/. Puede copiarlo a $<envar
+>/share/apps/tellico/ directory. You can copy that to $<envar
 >KDEHOME</envar
->/share/apps/tellico/ para las modificaciones personales. Tendrá que saber <ulink url="http://www.w3.org/TR/xslt"
+>/share/apps/tellico/ for personal modifications. You'll have to know <ulink url="http://www.w3.org/TR/xslt"
 >&xslt;</ulink
->,pero modificar ese archivo es como se cambia el esquema de impresión. Se genera &HTML; desde ese archivo, y la manera más fácil de cambiar la apariencia del esquema de impresión es modificar el &CSS; en la parte superior.</para>
+>, but modifying that file is how you change the printing layout. &HTML; is generated from the file, and the easiest way to change the appearance of the printout is to modify the &CSS; in the top portion.</para>
 
 <para
->Tenga en cuenta que <filename
+>Be aware that the <filename
 >tellico-printing.xsl</filename
-> hace referencia a otro archivo,  <filename
+> references another file, <filename
 >tellico-common.xsl</filename
->, que contiene algunas plantillas &xslt; comunes. Si copia <filename
+>, that contains some common &xslt; templates. If you copy <filename
 >tellico-printing.xsl</filename
-> a $<envar
+> to $<envar
 >KDEHOME</envar
->, debe o bien modificar el elemento &lt;xsl:import&gt; para que apunte a la localización real del archivo <filename
+>, you must either modify the &lt;xsl:import&gt; element to point to the actual location of the <filename
 >tellico-common.xsl</filename
->o copiar también el archivo común. </para>
+> file or copy the common file as well. </para>
 </answer>
 </qandaentry>
 <qandaentry>
@@ -78,11 +78,11 @@ application work. -->
 <qandaentry>
 <question
 ><para
->¿Qué significa todo el chorro de texto que se muestra cuando ejecuto &appname;?</para
+>Why does all that gobbledy-gook show up when I run &appname;?</para
 ></question>
 <answer>
 <para
->Las líneas como: <screen width="40">
+>Stuff like: <screen width="40">
 <computeroutput
 >Tellico::updateCollectionToolBar</computeroutput>
 <computeroutput
@@ -93,25 +93,25 @@ application work. -->
 >QCheckBox::property( "title" ) failed: property invalid
 or does not exist</computeroutput>
 </screen
-> son información de depuración. Durante la compilación, se pueden omitir utilizando la bandera <userinput
+> is debug info. At compile time, this can be stopped by compiling with the <userinput
 ><option
 >--disable-debug</option
 ></userinput
->. También puede utilizar <userinput
+> flag. You might also want to use <userinput
 ><option
 >--enable-final</option
 ></userinput
->, que consume un poco más de memoria al compilar, pero proporciona más eficiencia al ejecutar la aplicación.</para>
+>, too, which takes a bit more memory when compiling, but is more efficient when running the application.</para>
 
 <para
->El último mensaje es ligeramente distinto, y solo quiere decir que la instalación de &Qt; se compiló con alguna información de depuración.</para>
+>The last message is slightly different, it just means your &Qt; installation was compiled with some debugging information.</para>
 
 <para
->O, si &appname; ya está instalado, ejecute <userinput
+>Or, if &appname; is already installed, run <userinput
 ><command
 >kdebugdialog</command
 ></userinput
-> y asegúrese de que «0 (genéricas)» no está marcado. Así desactivará los mensajes de depuración de todas las aplicaciones genéricas de &kde;, es decir, las que &kde; no distribuye oficialmente.</para>
+> and make sure that "0 (generic)" is unchecked. That turns off debug messages from all generic &kde; apps &ie; those not distributed officially by &kde;.</para>
 
 </answer>
 </qandaentry>
@@ -130,43 +130,43 @@ or does not exist</computeroutput>
 <qandaentry>
 <question
 ><para
->¿Cómo filtro por algo como el campo «Leído»?</para
+>How do I filter by something like the "Read" field?</para
 ></question>
 <answer>
 <para
->Internamente, los campos de casilla de verificación de &appname; se graban como «verdaderos», así que si desea filtrarlos para mostrar solo los libros de ciencia-ficción que aún no ha leído, por ejemplo, entonces tiene dos reglas. Asegúrese de que el botón «Emparejar todos los siguientes» está marcado. Establezca la primera regla para que tenga «Género» «contiene» «ciencia-ficción» (sin comillas) y la segunda regla para que tenga «Leído» no contiene «verdadero» (sin comillas).</para>
+>Internally, the checkbox fields in &appname; are saved as "true", so if you'd like to filter to show only the science fiction books which you've not read, for example, then you have two rules. Make sure the "Match all of the following" button is checked. Set the first rule to have "Genre" "contains" "Science Fiction" (no quotes) and the second rule to have "Read" "does not contain" "true" (no quotes).</para>
 
 <para
->También, el filtro rápido en la barra de herramientas coincidirá con cualquier campo, y si hay un carácter que no sea una palabra, el texto se interpreta como una expresión regular. Así que si desea filtrar rápidamente sus libros para mostrar los que son de Weber o de bujold, entonces teclee «weber|bujold» (sin comillas) en la barra de herramientas.</para>
+>Also, the quick filter in the toolbar will match any field, and if there is a non-word character, the text is interpreted as a regular expression. So if you quickly want to filter your books to show those by Weber or Bujold, then type "weber|bujold" (no quotes) in the toolbar.</para>
 </answer>
 </qandaentry>
 
 <qandaentry>
 <question
 ><para
->¿Cómo añado nuevas entradas de plantillas?</para
+>How do I add new entry templates?</para
 ></question>
 
 <answer>
 <para
->Las plantillas de entrada deberían guardarse en <filename class="directory"
+>Entry templates should be saved in <filename class="directory"
 >$<envar
 >KDEHOME</envar
 >/share/apps/tellico/entry-templates/</filename
-> para acceder como un usuario individual, o en <filename class="directory"
+> for access for a single user or <filename class="directory"
 >$<envar
 >KDEDIR</envar
 >/share/apps/tellico/entry-templates/</filename
-> para que sea accesible a todo el mundo. Las plantillas en $<envar
+> for access by everyone. Templates in $<envar
 >KDEHOME</envar
-> sobrescribirán cualquier archivo con el mismo nombre que $<envar
+> will override any files by the same name in $<envar
 >KDEDIRS</envar
->. Las plantillas de entrada pueden establecerse para cada tipo de colección en el diálogo de configuración.</para>
+>. The entry templates can be set on a per collection-type basis in the settings dialog.</para>
 
 <para
->Las plantillas para el <interface
->Diálogo de informe</interface
-> se guardan en <filename class="directory"
+>Templates for the <interface
+>Report Dialog</interface
+> are saved in <filename class="directory"
 >$<envar
 >KDEHOME</envar
 >/share/apps/tellico/report-templates/</filename
@@ -177,30 +177,30 @@ or does not exist</computeroutput>
 <qandaentry>
 <question
 ><para
->La compilación e instalación fueron bien, pero al iniciar &appname; la ventana está en blanco. ¿Qué ha pasado?</para
+>Compiling and installing went fine, but when &appname; starts up, the window is blank. What's wrong?</para
 ></question>
 
 <answer>
 <para
->Los programas de &kde; buscan datos en las localizaciones definidas en la variable de entorno $<envar
+>&kde; programs look for data in the locations defined in the $<envar
 >KDEDIRS</envar
->. Si instala, por ejemplo, en <filename class="directory"
+> environmental variable. If you install in <filename class="directory"
 >/usr/local</filename
->, pero $<envar
+> for example, but $<envar
 >KDEDIRS</envar
-> está vacío o <filename class="directory"
+> is empty or just <filename class="directory"
 >/usr</filename
->, entonces &appname; no podrá encontrar los archivos que necesita. Esto es particularmente cierto para &SuSE;, para la que debe compilar con <userinput
+>, then &appname; won't be able to find the files it needs. This is particularly true for &SuSE;, for which you should compile with <userinput
 ><option
 >--prefix</option
 >=<filename class="directory"
 >/opt/kde3</filename
 ></userinput
->. Alternativamente, puede añadir una línea a su archivo <filename
+>. Alternatively, you could add a line to your <filename
 >.profile</filename
-> para establecer $<envar
+> file to set $<envar
 >KDEDIRS</envar
->. Compruebe la documentación para su shell.</para>
+>. Check the documentation for your shell.</para>
 </answer>
 </qandaentry>
 
@@ -228,12 +228,12 @@ or does not exist</computeroutput>
 <qandaentry>
 <question>
 <para
->¿Qué ha pasado con Bookcase?</para>
+>What happened to Bookcase?</para>
 </question>
 
 <answer>
 <para
->Debido a conflictos de marcas registradas, Bookcase se rebautizó como Tellico en septiembre de 2004. Entonces se publicó Tellico 0.12, que era idéntico a Bookcase 0.11 excepto en el nombre.</para>
+>Due to a trademark conflict, Bookcase was renamed Tellico in September 2004. Tellico 0.12 was then released, which was identical to Bookcase 0.11, except for the name change.</para>
 </answer>
 </qandaentry>
 
@@ -245,9 +245,9 @@ or does not exist</computeroutput>
 
 <answer>
 <para
->Había pensando en <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
->otros nombres</ulink
->, algunos de ellos relacionados con las colecciones de libros. Sin embargo, Tellico puede manejar más que libros, y como además esto es una afición, elegí un nombre que sonase bien (en mi opinión), el de un pueblo cercano a donde crecí.</para>
+>I thought about <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
+>several other names</ulink
+>, a few of which were connected with book collections. However, Tellico can handle more than just books, and besides, this is a hobby, so I chose a neat-sounding (to me) name, one taken from a town close to where I grew up.</para>
 </answer>
 </qandaentry>
 
@@ -273,7 +273,7 @@ or does not exist</computeroutput>
 
 <answer>
 <para
->Parte de la razón por la que empecé &appname; fue aprender C++. No sabía SQL en esa época, y por el momento solo tengo un ligero conocimiento de cómo usarlo. Simplemente, &appname; no empezó como una base de datos relacional, y eso no cambiará hasta que en algún momento del futuro, cuando consiga aprender SQL y tenga el tiempo y la motivación para cambiar el modelo de datos. Si eso le molesta, bueno, pues no use &appname;. </para>
+>Part of the reason I started &appname; was to learn C++. I didn't know SQL at the time, and at the moment, I only have a faint knowledge of how to use it. Simply put, &appname; didn't start out as a relational database, and that won't change until sometime in the future when I get around to learning SQL and have the time and motivation to change the data model. If that bothers you, well, don't use &appname; then. </para>
 
 <para
 >Por supuesto, cualquiera puede realizar los cambios que desee sobre el código fuente. </para>
