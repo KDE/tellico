@@ -40,7 +40,7 @@ or menu bars.
 >crea una nuova collezione</action
 >. &tellico; supporta <link linkend="collection-types"
 >12 tipi di collezioni predefinite</link
->, oltre ad una collezione vuota personalizzabile.</para>
+>, oltre a una raccolta vuota personalizzabile definita dall'utente. Sarà inoltre disponibile qualsiasi modello di raccolta salvato su misura.</para>
 </listitem>
 </varlistentry>
 
@@ -143,6 +143,26 @@ or menu bars.
 <varlistentry>
 <term>
  <menuchoice
+><guimenu
+>File</guimenu
+> <guimenuitem
+>Salva come modello...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+  <para
+>Questo comando <action
+>salva la collezione come un nuovo modello</action
+>. Vengono salvati solo i campi, mentre il tipo di collezione personalizzata può essere creato col comando <guimenuitem
+>Nuova collezione</guimenuitem
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
 ><shortcut
 > <keycombo
 >&Ctrl;<keycap
@@ -162,6 +182,24 @@ or menu bars.
 >stampa la collezione</action
 >. Le opzioni di stampa possono essere impostate nella <interface
 >finestra di  configurazione</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>File</guimenu
+> <guimenuitem
+>Anteprima di stampa</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Questo comando <action
+>mostra un'anteprima della collezione stampata</action
 >.</para>
 </listitem>
 </varlistentry>
@@ -912,6 +950,43 @@ or menu bars.
 >Questo comando <action
 >cambia il campo usato per raggruppare gli elementi</action
 > della collezione.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Impostazioni</guimenu
+> <guimenuitem
+>Blocca disposizione</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Questo comando <action
+>blocca la disposizione</action
+>, in modo che le varie viste della collezione non possano più essere spostate. Lo sblocco della disposizione permette all'utente la riorganizzazione.</para>
+</listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Impostazioni</guimenu
+> <guimenuitem
+>Azzera disposizione</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Questo comando <action
+>ripristina la disposizione</action
+> alla vista predefinita. Può essere utile se la varie viste diventano nascoste o collassate.</para>
 </listitem>
 </varlistentry>
 

@@ -106,8 +106,12 @@
 
 <para
 >&appname; può importare i dati direttamente da una varietà di altri programmi di gestione delle collezioni, inclusi <application
-><ulink url="http://www.gcstar.org"
+><ulink url="https://gitlab.com/GCstar/GCstar"
 >GCstar</ulink
+></application
+>, <application
+><ulink url="https://www.datacrow.net/"
+>Data Crow</ulink
 ></application
 >, <application
 ><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
@@ -129,7 +133,7 @@
 ><ulink url="https://en.wikipedia.org/wiki/Referencer"
 >Referencer</ulink
 ></application
-> e <application
+>, e <application
 ><ulink url="https://launchpad.net/griffith"
 >Griffith</ulink
 ></application
@@ -203,7 +207,7 @@
 >Importare dati da un &CD; audio</title>
 
 <para
->&appname; è in grado di utilizzare il servizio <ulink url="http://freedb.org"
+>&appname; è in grado di utilizzare il servizio  <ulink url="http://gnudb.org"
 >freedb.org</ulink
 > per ricercare informazioni su un &CD;, compresa l'elenco delle tracce. A seconda della propria distribuzione le opzioni di accesso al servizio possono essere impostate nelle &systemsettings; di &kde;. I dati di artista, titolo, genere, anno e l'elenco delle tracce saranno aggiunti tutti. </para>
 
@@ -373,9 +377,9 @@
 >Trascinamento</title>
 
 <para
->Il trascinamento e il rilascio dei file di dati sulla finestra principale di &appname; importerà i file, allo stesso modo che scegliendo il <link linkend="importing"
->comando di importazione</link
-> dal menu. Il trascinamento funziona per i seguenti formati di file: Tellico, Bibtex, RIS e &PDF;. È possibile importare anche più file alla volta.</para>
+>Trascinare file dati sulla finestra principale di &appname; farà sì che il file venga importato, allo stesso modo che scegliendo il <link linkend="importing"
+>comando importa</link
+> dal menu. Il trascinamento funziona per i seguenti formati di file: Tellico, Bibtex, RIS &PDF; e EPub. È possibile importare anche più file alla volta.</para>
 
 <para
 >Quindi, se ad esempio si vuole creare un catalogo di molti <link linkend="importing-pdf"

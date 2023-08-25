@@ -58,7 +58,9 @@
 >Opzioni generali</guilabel
 > regolano il comportamento generale dell'applicazione. Si può impostare se includere le immagini nel file di dati o salvarle separatamente nella cartella di &appname;. Inoltre si può impostare se caricare l'ultimo file aperto all'avvio di &appname;. La finestra di dialogo <guilabel
 >suggerimento del giorno</guilabel
-> contiene suggerimenti utili sull'utilizzo di &appname; e viene mostrata all'avvio del programma. Si può leggere alcuni dei suggerimenti e poi disabilitare la finestra se si vuole. </para>
+> contiene suggerimenti utili sull'utilizzo di &appname; e viene mostrata all'avvio del programma. Si può leggere alcuni dei suggerimenti e poi disabilitare la finestra se si vuole. Il <interface
+>Filtro rapido</interface
+> nella barra degli strumenti è utile per filtrare velocemente nella collezione, inoltre può utilizzare le espressioni regolari. </para>
 
 <para
 >Le <guilabel
@@ -239,6 +241,12 @@
 >OpenLibrary.org</link
 >,</simpara
 ></listitem>
+<listitem
+><simpara
+><link linkend="opds"
+>Cataloghi OPDS</link
+>,</simpara
+></listitem>
 <!-- movies -->
 <listitem
 ><simpara
@@ -262,6 +270,12 @@
 ><simpara
 ><link linkend="omdb"
 >Open Movie Database</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="filmaffinity"
+>FilmAffinity</link
 >,</simpara
 ></listitem>
 <!-- comics -->
@@ -403,11 +417,6 @@
 >Elimina</guibutton
 >. Anche l'ordine delle fonti, che viene visualizzato nei menu di aggiornamento degli elementi, può essere modificato. </para>
 
-<warning>
-<para
->Mai installare od eseguire script di fonti non fidate. Questi sono eseguiti con gli stessi privilegi dell'utente, e per questo potrebbero modificare o cancellare file o creare problemi al sistema operativo. </para>
-</warning>
-
 <para
 >Molte delle fonti di dati offrono più informazioni di quelli che sono i campi predefiniti di &appname;. Gli altri campi vengono mostrati a destra della casella di configurazione. Se uno o più dei campi in questione viene marcato, i corrispettivi dati varranno aggiunti alla collezione quando un elemento viene aggiunto da quella fonte. </para>
 
@@ -523,6 +532,17 @@
 > è un database di libri su Internet che punta ad avere una pagina per ogni libro. </para>
 </sect3>
 
+<sect3 id="opds">
+<title
+>Cataloghi OPDS</title>
+<para
+>I <ulink url="https://en.wikipedia.org/wiki/Open_Publication_Distribution_System"
+>cataloghi OPDS</ulink
+> forniscono un mezzo per cercare (e per distribuire) i libri digitali. &tellico; può usare molti cataloghi OPDS, ad esempio il <ulink url="https://wiki.mobileread.com/wiki/OPDS"
+>Progetto Gutenberg</ulink
+>, come fonte di dati: inserisci il collegamento al catalogo, poi verifica l'accesso e il formato per avere conferma che Tellico possa leggere il collegamento. </para>
+</sect3>
+
 </sect2>
 <!-- end of books -->
 
@@ -600,7 +620,16 @@
 <para
 ><ulink url="http://allocine.fr"
 >AlloCiné</ulink
-> è un servizio online di informazioni sui film, con sede in Francia. L'identificazione del browser deve essere abilitata nelle &systemsettings; </para>
+> è un servizio online di informazioni sui film, con sede in Francia. </para>
+</sect3>
+
+<sect3 id="filmaffinity">
+<title
+>FilmAffinity</title>
+<para
+><ulink url="https://filmaffinity.com"
+>FilmAffinity</ulink
+> è un sito di film indipendente. </para>
 </sect3>
 
 </sect2>
@@ -616,7 +645,7 @@
 <para
 ><ulink url="http://discogs.com"
 >Discogs.com</ulink
-> è un database musicale costruito dagli utenti e contenente informazioni sugli artisti, le etichette e le loro registrazioni. È richiesta la registrazione per un account gratuito. L'identificazione del browser deve essere abilitata nelle &systemsettings; </para>
+> è un database musicale costruito dagli utenti e contenente informazioni sugli artisti, le etichette e le loro registrazioni. È richiesta la registrazione per un account gratuito. </para>
 </sect3>
 
 <sect3 id="musicbrainz">
@@ -625,7 +654,7 @@
 <para
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
-> è un metadatabase musicale comunitario che tenta di creare un sito di informazione completa sulla musica. L'identificazione del browser deve essere abilitata nelle &systemsettings; </para>
+> è un metadatabase musicale comunitario che tenta di creare un sito di informazione completa sulla musica. </para>
 </sect3>
 
 </sect2>
@@ -717,7 +746,7 @@
 <para
 ><ulink url="https://colnect.com"
 >Colnect</ulink
-> è una comunità online di oggetti da collezione che fornisce la gestione personale delle collezioni. &tellico; può cercare le informazioni su monete e francobolli in Colnect. </para>
+> è una comunità online di oggetti da collezione che fornisce la gestione personale delle collezioni. &tellico; può cercare in Colnect le informazioni su monete e francobolli, oltre a fumetti, carte sportive e videogiochi. </para>
 </sect3>
 
 <sect3 id="numista">
@@ -789,9 +818,14 @@
 >, ma può anche importare altri formati, come ad esempio bibtex. </para>
 
 <para
->Nelle opzioni della fonte va inserito il percorso completo dell'applicazione. Ricordate che l'applicazione viene eseguita nel sistema con gli stessi privilegi dell'utente corrente, perciò evitate di usare script di fonti non affidabili. Marcare la casella accanto alla chiave di ricerca supportata dall'applicazione ed inserire l'opzione da riga di comando richiesta nella casella di testo. Il valore di ricerca verrà inserito dove è scritto <userinput
+>Nelle opzioni della fonte va inserito il percorso completo dell'applicazione. Spunta la casella accanto alla chiave di ricerca supportata dall'applicazione ed inserisci l'opzione da riga di comando richiesta nella casella di testo. Il valore di ricerca verrà inserito dove è scritto <userinput
 >%1</userinput
 >. </para>
+
+<warning>
+<para
+>Mai installare od eseguire script di fonti non fidate. Questi sono eseguiti con gli stessi privilegi dell'utente, e per questo potrebbero modificare o cancellare file o creare problemi al sistema operativo. </para>
+</warning>
 
 <para
 >Per aggiornare elementi già presenti nella collezione, l'ultima casella e la casella di testo vengono usate per determinare le opzioni da riga di comando. I campi usati per trovare un aggiornamento devono essere inseriti nello stesso formato utilizzato per i campi <link linkend="derived"
