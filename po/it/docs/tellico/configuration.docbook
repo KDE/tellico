@@ -56,9 +56,7 @@
 <para
 >Le <guilabel
 >Opzioni generali</guilabel
-> regolano il comportamento generale dell'applicazione. Si può impostare se includere le immagini nel file di dati o salvarle separatamente nella cartella di &appname;. Inoltre si può impostare se caricare l'ultimo file aperto all'avvio di &appname;. La finestra di dialogo <guilabel
->suggerimento del giorno</guilabel
-> contiene suggerimenti utili sull'utilizzo di &appname; e viene mostrata all'avvio del programma. Si può leggere alcuni dei suggerimenti e poi disabilitare la finestra se si vuole. Il <interface
+> regolano il comportamento generale dell'applicazione. Si può impostare se includere le immagini nel file di dati o salvarle separatamente nella cartella di &appname;. Inoltre si può impostare se caricare l'ultimo file aperto all'avvio di &appname;. Si può leggere alcuni dei suggerimenti e poi disabilitare la finestra se si vuole. Il <interface
 >Filtro rapido</interface
 > nella barra degli strumenti è utile per filtrare velocemente nella collezione, inoltre può utilizzare le espressioni regolari. </para>
 
@@ -416,11 +414,6 @@
 > o <guibutton
 >Elimina</guibutton
 >. Anche l'ordine delle fonti, che viene visualizzato nei menu di aggiornamento degli elementi, può essere modificato. </para>
-
-<warning>
-<para
->Mai installare od eseguire script di fonti non fidate. Questi sono eseguiti con gli stessi privilegi dell'utente, e per questo potrebbero modificare o cancellare file o creare problemi al sistema operativo. </para>
-</warning>
 
 <para
 >Molte delle fonti di dati offrono più informazioni di quelli che sono i campi predefiniti di &appname;. Gli altri campi vengono mostrati a destra della casella di configurazione. Se uno o più dei campi in questione viene marcato, i corrispettivi dati varranno aggiunti alla collezione quando un elemento viene aggiunto da quella fonte. </para>
@@ -823,9 +816,14 @@
 >, ma può anche importare altri formati, come ad esempio bibtex. </para>
 
 <para
->Nelle opzioni della fonte va inserito il percorso completo dell'applicazione. Ricordate che l'applicazione viene eseguita nel sistema con gli stessi privilegi dell'utente corrente, perciò evitate di usare script di fonti non affidabili. Marcare la casella accanto alla chiave di ricerca supportata dall'applicazione ed inserire l'opzione da riga di comando richiesta nella casella di testo. Il valore di ricerca verrà inserito dove è scritto <userinput
+>Nelle opzioni della fonte va inserito il percorso completo dell'applicazione. Spunta la casella accanto alla chiave di ricerca supportata dall'applicazione ed inserisci l'opzione da riga di comando richiesta nella casella di testo. Il valore di ricerca verrà inserito dove è scritto <userinput
 >%1</userinput
 >. </para>
+
+<warning>
+<para
+>Mai installare od eseguire script di fonti non fidate. Questi sono eseguiti con gli stessi privilegi dell'utente, e per questo potrebbero modificare o cancellare file o creare problemi al sistema operativo. </para>
+</warning>
 
 <para
 >Per aggiornare elementi già presenti nella collezione, l'ultima casella e la casella di testo vengono usate per determinare le opzioni da riga di comando. I campi usati per trovare un aggiornamento devono essere inseriti nello stesso formato utilizzato per i campi <link linkend="derived"

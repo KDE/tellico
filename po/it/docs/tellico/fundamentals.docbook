@@ -975,9 +975,6 @@
 <title
 >Suggerimenti generali</title>
 
-<para
->La lista dei suggerimenti contenuta in "suggerimento del giorno" per &appname; </para>
-
 <tip>
 <para
 >Se un libro ha più di un autore, dovresti separare i diversi nomi usando un punto e virgola, cosicché Tellico possa suddividerli ed usarli separatamente.Qualsiasi campo che ammetta valori multipli riconoscerà i diversi valori allo stesso modo, identificando il punto e virgola (;) come separatore. </para>
@@ -993,22 +990,6 @@
 >Puoi aggiungere, modificare e cambiare i campi della collezione usando la <interface
 >finestra campi della collezione</interface
 >. I tasti freccia sotto i campi possono essere usati per cambiare la posizione all'interno della lista, il che modificherà la posizione nell'editor degli elementi. </para>
-</tip>
-
-<tip>
-<para
->Se vuoi filtrare dei contenuti secondo un campo <link linkend="bool"
-><emphasis
->Spunta</emphasis
-></link
-> dovresti usare un valore "true".Se, per esempio, vuoi che un filtro ti mostri solo i libri di fantascienza che non hai ancora letto seleziona <guilabel
->Verifica tutti i criteri seguenti</guilabel
->, imposta la prima regola in modo da avere "Genere" "contiene" "Fantascienza" (senza virgolette) e la seconda regola: "Letto" "non contiene" "true" (senza virgolette). </para>
-</tip>
-
-<tip>
-<para
->Se nel filtro rapido inserisci un carattere non alfanumerico il testo verrà interpretato come una espressione regolare. Per mostrare solo i libri di Vidal o Weber, per esempio, digita "vidal|weber" (senza virgolette) nella casella del filtro rapido. </para>
 </tip>
 
 <tip>
