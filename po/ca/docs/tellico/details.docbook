@@ -110,9 +110,11 @@
 >. De manera predeterminada, el camp està desactivat. Els camps <emphasis
 >Casella de selecció</emphasis
 > no tenen format i es limiten a valors individuals. Internament, els valors de camp es tracten com a <emphasis
->verdader<constant
-> o </constant
->fals</emphasis
+><constant
+>verdader</constant
+> o <constant
+>fals</constant
+></emphasis
 >. Alguns exemples són camps com «Regal» o «Prestat».</para>
 
 </sect2>

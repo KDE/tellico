@@ -249,7 +249,9 @@
 <para
 >«<ulink url="http://en.wikipedia.org/wiki/Bibtex"
 >Bibtex</ulink
->» és un format de bibliografia utilitzat amb el sistema de preparació de documents LaTeX. Es poden incloure diferents tipus de referències bibliogràfiques en el fitxer. El &appname; importarà els fitxers «bibtex» com a una col·lecció bibliogràfica. </para>
+>» és un format de bibliografia utilitzat amb el sistema de preparació de documents LaTeX. Es poden incloure diferents tipus de referències bibliogràfiques en el fitxer. El &appname; importarà els fitxers «bibtex» com una <link linkend="bibliography"
+>col·lecció bibliogràfica</link
+>. </para>
 
 <para
 >Si l'importador «bibtex» troba camps en el fitxer que no es troben a la col·lecció bibliogràfica predeterminada, llavors seran afegits com a camps <link linkend="line"
@@ -304,7 +306,9 @@
 ></ulink
 > és un format de fitxer bibliogràfic utilitzat per <application
 >Reference Manager</application
-> i altres. El &appname; importa fitxers RIS com a una col·lecció bibliogràfica. </para>
+> i altres. El &appname; importa fitxers RIS com una <link linkend="bibliography"
+>col·lecció bibliogràfica</link
+>. </para>
 </sect3>
 
 </sect2>

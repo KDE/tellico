@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-04 02:26+0000\n"
-"PO-Revision-Date: 2023-08-02 12:45\n"
+"PO-Revision-Date: 2023-08-27 03:44\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -94,11 +94,10 @@ msgid "Image List"
 msgstr ""
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, fuzzy, kde-format
-#| msgid "Image"
+#, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "图像"
+msgstr ""
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -2307,10 +2306,9 @@ msgstr "模板突出显示文本颜色"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, fuzzy, kde-format
-#| msgid "Template highlight color"
+#, kde-format
 msgid "Template link color"
-msgstr "模板突出显示颜色"
+msgstr ""
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -2641,10 +2639,9 @@ msgid "Highlighted text color:"
 msgstr "突出显示文本颜色："
 
 #: src/configdialog.cpp:542
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "文本颜色："
+msgstr ""
 
 #: src/configdialog.cpp:551
 #, kde-format
@@ -3602,10 +3599,9 @@ msgid "BoardGameGeek Link"
 msgstr ""
 
 #: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:808
-#, fuzzy, kde-format
-#| msgid "Amazon Link"
+#, kde-format
 msgid "Colnect Link"
-msgstr "Amazon 链接"
+msgstr ""
 
 #: src/fetch/colnectfetcher.cpp:546 src/fetch/colnectfetcher.cpp:814
 #, kde-format
@@ -3712,10 +3708,9 @@ msgid "Barcode"
 msgstr ""
 
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:514
-#, fuzzy, kde-format
-#| msgid "Card Number"
+#, kde-format
 msgid "Catalog Number"
-msgstr "卡片数"
+msgstr ""
 
 #: src/fetch/discogsfetcher.cpp:347
 #, kde-format
@@ -3869,11 +3864,10 @@ msgid "FilmAffinity Link"
 msgstr ""
 
 #: src/fetch/filmaffinityfetcher.cpp:492
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
-msgstr "西班牙"
+msgstr ""
 
 #: src/fetch/filmaffinityfetcher.cpp:495
 #, kde-format
@@ -4051,10 +4045,9 @@ msgid ""
 msgstr ""
 
 #: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:505
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "iTunes Link"
-msgstr "Discogs 链接"
+msgstr ""
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4115,34 +4108,29 @@ msgid "Numista (%1)"
 msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellico 无法从 PDF 文件读取任何元数据。"
+msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:421
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "OPDS Catalog"
-msgstr "文件分类"
+msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:446
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "Catalog: "
-msgstr "文件分类"
+msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:451
-#, fuzzy, kde-format
-#| msgid "Enter the host name of the server."
+#, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr "输入服务器主机名。"
+msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:456
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "&Verify Catalog"
-msgstr "文件分类"
+msgstr ""
 
 #: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
 #, kde-format
@@ -4165,10 +4153,9 @@ msgid "SRU Server"
 msgstr "SRU 服务器"
 
 #: src/fetch/srufetcher.cpp:525
-#, fuzzy, kde-format
-#| msgid "&Source name: "
+#, kde-format
 msgid "Scheme: "
-msgstr "源名称(&S)："
+msgstr ""
 
 #: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
 #, kde-format
@@ -4759,32 +4746,28 @@ msgstr "人物"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, fuzzy, kde-format
-#| msgid "Template:"
+#, kde-format
 msgid "Template Name:"
-msgstr "模板："
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, fuzzy, kde-format
-#| msgid "Comments"
+#, kde-format
 msgid "Comment:"
-msgstr "评论"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, fuzzy, kde-format
-#| msgid "Icon"
+#, kde-format
 msgid "Icon:"
-msgstr "图标"
+msgstr ""
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, fuzzy, kde-format
-#| msgid "Collection Report"
+#, kde-format
 msgid "Save As Collection Template"
-msgstr "收藏报告"
+msgstr ""
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -5110,10 +5093,9 @@ msgid "VinoXML Data Files"
 msgstr ""
 
 #: src/importdialog.cpp:424
-#, fuzzy, kde-format
-#| msgid "Book Title"
+#, kde-format
 msgid "eBook Files"
-msgstr "书标题"
+msgstr ""
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5270,10 +5252,9 @@ msgid "Import <filename> as a RIS file"
 msgstr "以 RIS 文件导入 <filename>"
 
 #: src/main.cpp:148
-#, fuzzy, kde-format
-#| msgid "Import <filename> as a MODS file"
+#, kde-format
 msgid "Import <filename> as a PDF file"
-msgstr "以 MODS 文件导入 <filename>"
+msgstr ""
 
 #: src/main.cpp:149
 #, kde-format
@@ -5441,28 +5422,24 @@ msgid "Save the document as a different file..."
 msgstr "文档另存为不同文件..."
 
 #: src/mainwindow.cpp:334
-#, fuzzy, kde-format
-#| msgid "Manage Templates"
+#, kde-format
 msgid "Save As Template..."
-msgstr "管理模板"
+msgstr ""
 
 #: src/mainwindow.cpp:336
-#, fuzzy, kde-format
-#| msgid "Create a new collection"
+#, kde-format
 msgid "Save as a collection template"
-msgstr "创建新收藏"
+msgstr ""
 
 #: src/mainwindow.cpp:339
-#, fuzzy, kde-format
-#| msgid "Print the contents of the document..."
+#, kde-format
 msgid "Print the contents of the collection..."
-msgstr "打印文档内容..."
+msgstr ""
 
 #: src/mainwindow.cpp:355
-#, fuzzy, kde-format
-#| msgid "Print the contents of the document..."
+#, kde-format
 msgid "Preview the contents of the collection..."
-msgstr "打印文档内容..."
+msgstr ""
 
 #: src/mainwindow.cpp:359
 #, kde-format
@@ -5535,16 +5512,14 @@ msgid "Import data from Collectorz"
 msgstr ""
 
 #: src/mainwindow.cpp:410
-#, fuzzy, kde-format
-#| msgid "Import GCstar Data..."
+#, kde-format
 msgid "Import Data Crow Data..."
-msgstr "导入 GCstar 数据..."
+msgstr ""
 
 #: src/mainwindow.cpp:411
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from Data Crow"
-msgstr "从 Referencer 导入数据"
+msgstr ""
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5587,16 +5562,14 @@ msgid "Import an RIS reference file"
 msgstr "导入 RIS 参考文件"
 
 #: src/mainwindow.cpp:430
-#, fuzzy, kde-format
-#| msgid "Import CSV Data..."
+#, kde-format
 msgid "Import MARC Data..."
-msgstr "导入 CSV 数据..."
+msgstr ""
 
 #: src/mainwindow.cpp:431
-#, fuzzy, kde-format
-#| msgid "Import CSV Data..."
+#, kde-format
 msgid "Import MARC data"
-msgstr "导入 CSV 数据..."
+msgstr ""
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -6165,10 +6138,9 @@ msgstr ""
 "您想要保存吗？"
 
 #: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
-#, fuzzy, kde-format
-#| msgid "Create a new collection"
+#, kde-format
 msgid "Creating new collection..."
-msgstr "创建新收藏"
+msgstr ""
 
 #: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
 #, kde-format
@@ -7059,16 +7031,14 @@ msgid "LibraryThing file:"
 msgstr ""
 
 #: src/translators/marcimporter.cpp:132
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#, kde-format
 msgid "Tellico was unable to read any data."
-msgstr "Tellico 无法从 PDF 文件读取任何元数据。"
+msgstr ""
 
 #: src/translators/marcimporter.cpp:151
-#, fuzzy, kde-format
-#| msgid "CSV Options"
+#, kde-format
 msgid "MARC Options"
-msgstr "CSV 选项"
+msgstr ""
 
 #: src/translators/marcimporter.cpp:156
 #, kde-format
@@ -7076,10 +7046,9 @@ msgid "Character set:"
 msgstr ""
 
 #: src/translators/marcimporter.cpp:161
-#, fuzzy, kde-format
-#| msgid "Format: "
+#, kde-format
 msgid "MARC Format:"
-msgstr "格式："
+msgstr ""
 
 #: src/translators/onixexporter.cpp:67
 #, kde-format
@@ -7416,12 +7385,3 @@ msgstr "搜索"
 #, kde-format
 msgid "Clear"
 msgstr "清除"
-
-#~ msgid "Click to download additional data sources."
-#~ msgstr "点击以下载其他数据源。"
-
-#~ msgid "Edit..."
-#~ msgstr "编辑..."
-
-#~ msgid "Creating new document..."
-#~ msgstr "正在创建新文档..."
