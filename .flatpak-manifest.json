@@ -1,0 +1,148 @@
+{
+    "id": "org.kde.tellico",
+    "command": "tellico",
+    "branch": "master",
+    "runtime": "org.kde.Platform",
+    "runtime-version": "5.15-22.08",
+    "base": "io.qt.qtwebengine.BaseApp",
+    "base-version": "5.15-22.08",
+    "sdk": "org.kde.Sdk",
+    "rename-icon": "tellico",
+    "tags": [
+        "nightly"
+    ],
+    "desktop-file-name-suffix": " (Nightly)",
+    "finish-args": [
+        "--share=ipc",
+        "--share=network",
+        "--filesystem=host",
+        "--socket=x11",
+        "--socket=wayland",
+        "--device=dri"
+    ],
+    "modules": [
+        {
+            "name": "poppler",
+            "config-opts": [ "-DENABLE_TESTING=OFF", "-DENABLE_UNSTABLE_API_ABI_HEADERS=ON", "-DENABLE_CPP=OFF", "-DENABLE_GLIB=OFF", "-DENABLE_GOBJECT_INTROSPECTION=OFF", "-DENABLE_UTILS=OFF" ],
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "sources": [ { "type": "git", "url": "git://anongit.freedesktop.org/poppler/poppler.git", "branch": "master" } ],
+            "modules": [
+                {
+                    "name": "boost",
+                    "buildsystem": "simple",
+                    "build-commands": [
+                        "./bootstrap.sh --prefix=/app --with-libraries=system",
+                        "./b2 -j $FLATPAK_BUILDER_N_JOBS install"
+                    ],
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2",
+                            "sha256": "8681f175d4bdb26c52222665793eef08490d7758529330f98d3b29dd0735bccc"
+                        }
+                    ]
+                },
+                {
+                    "name": "openjpeg2",
+                    "buildsystem": "cmake-ninja",
+                    "builddir": true,
+                    "sources": [
+                        {
+                            "type": "git",
+                            "url": "https://github.com/uclouvain/openjpeg.git",
+                            "tag": "v2.4.0",
+                            "x-checker-data": {
+                                "type": "git",
+                                "tag-pattern": "^v([\\d.]+)$"
+                            }
+                        }
+                    ],
+                    "cleanup": [ "/bin", "/include", "/lib/openjpeg-*", "/lib/pkgconfig" ]
+                }
+            ],
+            "cleanup": [ "/include", "/lib/pkgconfig" ]
+        },
+        {
+            "name": "taglib",
+            "buildsystem": "cmake-ninja",
+            "config-opts": [ "-DBUILD_SHARED_LIBS=ON" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://taglib.org/releases/taglib-1.12.tar.gz",
+                    "sha256": "7fccd07669a523b07a15bd24c8da1bbb92206cb19e9366c3692af3d79253b703",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 1982,
+                        "stable-only": true,
+                        "url-template": "https://taglib.github.io/releases/taglib-$version.tar.gz"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "kcddb",
+            "buildsystem": "cmake-ninja",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://invent.kde.org/multimedia/libkcddb.git",
+                    "branch": "release/21.12"
+                }
+            ]
+        },
+        {
+            "name": "yaz",
+            "buildsystem": "autotools",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://ftp.indexdata.com/pub/yaz/yaz-5.31.1.tar.gz",
+                    "sha256": "14cc34d19fd1fd27e544619f4c13300f14dc807088a1acc69fcb5c28d29baa15",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 5287,
+                        "stable-only": true,
+                        "url-template": "https://ftp.indexdata.com/pub/yaz/yaz-$version.tar.gz"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "cdio",
+            "buildsystem": "autotools",
+            "config-opts": [
+                "--disable-static",
+                "--without-cdda-player"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://ftp.gnu.org/gnu/libcdio/libcdio-2.1.0.tar.bz2",
+                    "sha256": "8550e9589dbd594bfac93b81ecf129b1dc9d0d51e90f9696f1b2f9b2af32712b",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 1573,
+                        "stable-only": true,
+                        "url-template": "https://ftp.gnu.org/gnu/libcdio/libcdio-$version.tar.bz2"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "tellico",
+            "buildsystem": "cmake-ninja",
+            "config-opts": [
+                "-DBUILD_TESTING=FALSE",
+                "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+            ],
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "."
+                }
+            ]
+        }
+    ]
+}
