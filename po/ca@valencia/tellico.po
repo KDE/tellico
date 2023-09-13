@@ -5824,7 +5824,7 @@ msgstr "Importa les dades de Griffith..."
 #: src/mainwindow.cpp:464
 #, kde-format
 msgid "Import a Griffith database"
-msgstr "Importa a una base de dades Griffith"
+msgstr "Importa cap a una base de dades Griffith"
 
 #: src/mainwindow.cpp:467
 #, kde-format
@@ -7625,7 +7625,7 @@ msgstr ""
 "camps separats en un sol camp. Utilitzeu una plantilla derivada pareixent\n"
 "a «Valor: %{campa}%{campb}» on %{...} se substituïx amb el valor\n"
 "apropiat del camp. Açò és útil per a agrupar múltiples valors en\n"
-"un sol camp, p. ex. per a agrupar millor i combinar camps de\n"
+"un sol camp, p. ex., per a agrupar millor i combinar camps de\n"
 "diferents tipus respectant l'ordenació adequada alhora. Penseu\n"
 "per exemple en un camp de número seguit per un subcamp de text\n"
 "amb entrades 3b, 14a.</p>\n"
