@@ -977,9 +977,6 @@
 <title
 >Algemene tips</title>
 
-<para
->Dit is de lijst met tips in de lijst "Tip van de dag" voor &appname;. </para>
-
 <tip>
 <para
 >Als een boek meer dan een auteur heeft, zou u de namen moeten scheiden door een puntkomma, zodat Tellico weet dan dat deze gescheiden moeten worden en apart gebruikt. Elk ander veld waar meerdere waardes zijn toegestaan moeten worden ingevuld op dezelfde manier met een puntkomma (;) die iedere waarde scheidt. </para>
@@ -995,22 +992,6 @@
 >U kunt velden toevoegen, bewerken of veranderen in de verzameling met behulp van <interface
 >Dialoog voor velden in verzameling</interface
 >. De pijlknoppen onder de veldlijst kunnen gebruikt worden om de positie van het veld in de lijst te veranderen waardoor de plaats in de item-editor wordt gewijzigd. </para>
-</tip>
-
-<tip>
-<para
->Als u wilt filteren op een veld <link linkend="bool"
-><emphasis
->Keuzevak</emphasis
-></link
->, zou een waarde "waar" moeten worden gebruikt. Als u bijvoorbeeld alle science fiction boeken die u nog niet hebt gelezen wilt tonen, kies dan de knop <guilabel
->Voldoe aan alle van de volgende</guilabel
-> en stel als eerste regel in dat "Genre" bevat "Science Fiction" (geen aanhalingtekens) en de tweede regel dat "Gelezen" "bevat niet" "waar" (geen aanhalingstekens). </para>
-</tip>
-
-<tip>
-<para
->Wanneer een speciaal teken wordt gebruikt in het snelfilter, zal de tekst geïnterpreteerd worden als een reguliere expressie. Om alleen boeken die bijvoorbeeld door Weber of Bujold zijn geschreven te tonen, type dan "weber|bujold" (geen aanhalingstekens) in het filtervak. </para>
 </tip>
 
 <tip>
