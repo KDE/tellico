@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-06 00:47+0000\n"
-"PO-Revision-Date: 2023-07-29 14:04-0300\n"
+"PO-Revision-Date: 2023-09-16 02:58-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -31,14 +31,14 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
 "Claudio Henrique Fortes Felix, Doutor Zero, Luiz Fernando Ranghetti, Rubens "
-"de Souza Matos Júnior, André Marcelo Alvarenga"
+"de Souza Matos Júnior, André Marcelo Alvarenga, Geraldo Simião"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 "claudio@helpo.com.br, doutor.zero@gmail.com, elchevive@opensuse.org, rubens."
-"matos@gmail.com, alvarenga@kde.org"
+"matos@gmail.com, alvarenga@kde.org, geraldosimiao@fedoraproject.org"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format

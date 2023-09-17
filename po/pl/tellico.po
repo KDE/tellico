@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-06 00:47+0000\n"
-"PO-Revision-Date: 2023-06-17 09:18+0200\n"
+"PO-Revision-Date: 2023-09-16 11:28+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -765,7 +765,7 @@ msgstr "Różne"
 #: src/collections/bibtexcollection.cpp:86
 #, kde-format
 msgid "Entry Type"
-msgstr "Rodzaj elementu"
+msgstr "Rodzaj wpisu"
 
 #: src/collections/bibtexcollection.cpp:90
 #, kde-format
@@ -2719,7 +2719,7 @@ msgstr "Zarządzaj wzorcami"
 #: src/configdialog.cpp:556
 #, kde-format
 msgid "Install..."
-msgstr "Instaluj..."
+msgstr "Wgraj..."
 
 #: src/configdialog.cpp:560
 #, kde-format
@@ -3249,7 +3249,7 @@ msgstr "Zakoduj eksportowany plik w lokalnym formacie kodowania."
 #: src/fetch/adsfetcher.cpp:316
 #, kde-format
 msgid "SAO/NASA Astrophysics Data System"
-msgstr ""
+msgstr "System danych astrofizycznych SAO/NASA"
 
 #: src/fetch/adsfetcher.cpp:331 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:172 src/fetch/comicvinefetcher.cpp:232
