@@ -81,6 +81,8 @@ SET(tellico_SRCS
    reportdialog.cpp
    tellico_kernel.cpp
    viewstack.cpp
+
+   tellico.qrc
    )
 
 add_executable(tellico ${tellico_SRCS} ../icons/icons.qrc)
@@ -168,4 +170,3 @@ ENDIF( KF5Sane_FOUND )
 
 INSTALL(TARGETS tellico ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 INSTALL(FILES tellicorc DESTINATION ${KDE_INSTALL_CONFDIR} )
-INSTALL(FILES tellicoui.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/tellico )
