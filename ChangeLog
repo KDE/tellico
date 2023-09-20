@@ -1,3 +1,7 @@
+2023-09-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Numista data source to fetch more than 20 results.
+
 2023-07-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Removed author searches from Google Scholar.

@@ -38,6 +38,7 @@ private Q_SLOTS:
   void initTestCase();
   void testSacagawea();
   void testJefferson();
+  void testPagination();
 
 private:
   KConfigGroup m_config;

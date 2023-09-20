@@ -91,3 +91,15 @@ void NumistaFetcherTest::testJefferson() {
   QCOMPARE(entry->field(QStringLiteral("denomination")), QStringLiteral("5 Cents"));
   QCOMPARE(entry->field(QStringLiteral("currency")), QStringLiteral("Dollar"));
 }
+
+void NumistaFetcherTest::testPagination() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Coin,
+                                       Tellico::Fetch::Keyword,
+                                       QStringLiteral("jefferson"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::NumistaFetcher(this));
+
+  // fetch as many as 30 :)
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 30);
+
+  QVERIFY(results.count() > 20);
+}

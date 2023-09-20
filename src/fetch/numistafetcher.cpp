@@ -103,6 +103,7 @@ void NumistaFetcher::search() {
 
 void NumistaFetcher::continueSearch() {
   m_started = true;
+  m_page++;
   doSearch();
 }
 
@@ -202,12 +203,13 @@ void NumistaFetcher::slotComplete(KJob* ) {
   if(obj.contains(QStringLiteral("error"))) {
     const QString msg = obj.value(QStringLiteral("error")).toString();
     message(msg, MessageHandler::Error);
-    myDebug() << "NunmistaFetcher -" << msg;
+    myDebug() << "NumistaFetcher -" << msg;
     stop();
     return;
   }
 
-  m_total = obj.value(QLatin1String("count")).toString().toInt();
+  m_total = obj.value(QLatin1String("count")).toInt();
+  m_hasMoreResults = m_total > m_page*m_limit;
 
   int count = 0;
   QJsonArray results = obj.value(QLatin1String("coins")).toArray();
