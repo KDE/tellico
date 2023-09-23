@@ -27,7 +27,7 @@
 #include "fieldtest.h"
 
 #include "../field.h"
-#include "../gui/urlfieldlogic.h"
+#include "../utils/urlfieldlogic.h"
 
 #include <KLocalizedString>
 

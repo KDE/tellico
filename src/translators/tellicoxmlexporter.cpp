@@ -25,13 +25,14 @@
 #include "tellicoxmlexporter.h"
 #include "tellico_xml.h"
 #include "../utils/bibtexhandler.h" // needed for cleaning text
+#include "../utils/string_utils.h"
+#include "../utils/urlfieldlogic.h"
 #include "../entrygroup.h"
 #include "../collections/bibtexcollection.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../images/imageinfo.h"
 #include "../core/filehandler.h"
-#include "../utils/string_utils.h"
 #include "../document.h"
 #include "../fieldformat.h"
 #include "../models/entrysortmodel.h"
@@ -360,9 +361,11 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
           QUrl new_url(url());
           if(new_url.scheme() == old_url.scheme() &&
              new_url.host() == old_url.host()) {
-            // try to calculate a new relative url
-            QString relPath = QDir(new_url.path()).relativeFilePath(old_url.path());
-            fieldElem.appendChild(dom_.createTextNode(relPath));
+            // calculate a new relative url
+            UrlFieldLogic logic;
+            logic.setRelative(true);
+            logic.setBaseUrl(url());
+            fieldElem.appendChild(dom_.createTextNode(logic.urlText(old_url)));
           } else {
             // use the absolute url here
             fieldElem.appendChild(dom_.createTextNode(old_url.url()));

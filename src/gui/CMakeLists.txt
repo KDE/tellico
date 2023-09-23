@@ -37,7 +37,6 @@ SET(gui_STAT_SRCS
    tablefieldwidget.cpp
    tabwidget.cpp
    treeview.cpp
-   urlfieldlogic.cpp
    urlfieldwidget.cpp
 )
 

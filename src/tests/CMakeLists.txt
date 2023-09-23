@@ -47,7 +47,7 @@ ecm_add_test(formattest.cpp ../fieldformat.cpp
     LINK_LIBRARIES Qt5::Test config
 )
 
-ecm_add_test(fieldtest.cpp ../field.cpp ../fieldformat.cpp ../gui/urlfieldlogic.cpp
+ecm_add_test(fieldtest.cpp ../field.cpp ../fieldformat.cpp
     TEST_NAME fieldtest
     LINK_LIBRARIES Qt5::Test config utils
 )
@@ -301,7 +301,6 @@ ecm_add_test(fieldwidgettest.cpp
              ../gui/ratingfieldwidget.cpp
              ../gui/tablefieldwidget.cpp
              ../gui/urlfieldwidget.cpp
-             ../gui/urlfieldlogic.cpp
              ../gui/fieldwidget.cpp
              ../document.cpp
              ../fieldcompletion.cpp

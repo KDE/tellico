@@ -26,7 +26,7 @@
 #define TELLICO_URLFIELDWIDGET_H
 
 #include "fieldwidget.h"
-#include "urlfieldlogic.h"
+#include "../utils/urlfieldlogic.h"
 
 #include <KUrlCompletion>
 
