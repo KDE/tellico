@@ -571,6 +571,7 @@ void TellicoReadTest::testRelativeLink() {
 
   Tellico::Export::TellicoXMLExporter exp(coll);
   exp.setEntries(coll->entries());
+  exp.setURL(url);
   QString output = handler.applyStylesheet(exp.text());
   // first, the link should remain completely relative
   QVERIFY(output.contains(QLatin1String("href=\"collectorz/image.png")));

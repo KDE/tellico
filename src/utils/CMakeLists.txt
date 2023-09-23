@@ -14,6 +14,7 @@ SET(utils_STAT_SRCS
    string_utils.cpp
    tellico_utils.cpp
    upcvalidator.cpp
+   urlfieldlogic.cpp
    wallet.cpp
    xmlhandler.cpp
    )
