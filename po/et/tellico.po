@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-20 02:27+0000\n"
+"POT-Creation-Date: 2023-09-23 02:24+0000\n"
 "PO-Revision-Date: 2020-06-03 20:36+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -2834,7 +2834,7 @@ msgstr "Mallipaketid"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5209,7 +5209,7 @@ msgid "Tellico Files"
 msgstr "Tellico failid"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:72
 #, kde-format
 msgid "XML Files"
 msgstr "XML-failid"
@@ -7346,22 +7346,22 @@ msgstr "Fail on tühi."
 msgid "The file contains no collection data."
 msgstr "Fail ei sisalda kogu andmeid."
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML-i valikud"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Piltide kaasamine XML-dokumenti"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-20 02:27+0000\n"
+"POT-Creation-Date: 2023-09-23 02:24+0000\n"
 "PO-Revision-Date: 2023-07-08 21:18+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -2841,7 +2841,7 @@ msgstr "Pacchetti di modelli"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5214,7 +5214,7 @@ msgid "Tellico Files"
 msgstr "File di Tellico"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:72
 #, kde-format
 msgid "XML Files"
 msgstr "File XML"
@@ -7357,22 +7357,22 @@ msgstr "Il file è vuoto."
 msgid "The file contains no collection data."
 msgstr "Il file non contiene dati di una collezione."
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Opzioni XML di Tellico"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Includi immagini nel file XML"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

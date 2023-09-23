@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-20 02:27+0000\n"
+"POT-Creation-Date: 2023-09-23 02:24+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -2755,7 +2755,7 @@ msgstr "नमूने"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5054,7 +5054,7 @@ msgid "Tellico Files"
 msgstr "*|सर्व फाईल्स"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:72
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "XML Files"
@@ -7132,22 +7132,22 @@ msgstr ""
 msgid "The file contains no collection data."
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Tellico XML Options"
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

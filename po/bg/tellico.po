@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-20 02:27+0000\n"
+"POT-Creation-Date: 2023-09-23 02:24+0000\n"
 "PO-Revision-Date: 2009-09-18 16:56+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -2766,7 +2766,7 @@ msgstr "Шаблони"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5054,7 +5054,7 @@ msgid "Tellico Files"
 msgstr "Лавица"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:72
 #, fuzzy, kde-format
 msgid "XML Files"
 msgstr "Моите клипове"
@@ -7118,22 +7118,22 @@ msgstr "Файлът е празен."
 msgid "The file contains no collection data."
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, fuzzy, kde-format
 msgid "Tellico XML Options"
 msgstr "TellicoDoc"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, fuzzy, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
