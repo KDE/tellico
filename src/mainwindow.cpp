@@ -299,8 +299,8 @@ void MainWindow::initActions() {
   COLL_ACTION(Wine, "new_wine_collection", i18n("New &Wine Collection"),
               i18n("Create a new wine collection"), "wine");
 
-  COLL_ACTION(Game, "new_game_collection", i18n("New &Game Collection"),
-              i18n("Create a new game collection"), "game");
+  COLL_ACTION(Game, "new_game_collection", i18n("New Video &Game Collection"),
+              i18n("Create a new video game collection"), "game");
 
   COLL_ACTION(BoardGame, "new_boardgame_collection", i18n("New Boa&rd Game Collection"),
               i18n("Create a new board game collection"), "boardgame");

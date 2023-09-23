@@ -36,7 +36,7 @@ namespace {
 using Tellico::Data::GameCollection;
 
 GameCollection::GameCollection(bool addDefaultFields_, const QString& title_)
-   : Collection(title_.isEmpty() ? i18n("My Games") : title_) {
+   : Collection(title_.isEmpty() ? i18n("My Video Games") : title_) {
   setDefaultGroupField(QStringLiteral("platform"));
   if(addDefaultFields_) {
     addFields(defaultFields());
