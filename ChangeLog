@@ -1,3 +1,7 @@
+2023-09-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with writing some relative url links (Bug 472778).
+
 2023-09-19  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Numista data source to fetch more than 20 results.
