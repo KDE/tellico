@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-09-24 00:44+0000\n"
 "PO-Revision-Date: 2022-04-07 18:20+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -277,9 +277,10 @@ msgid "Card Collection"
 msgstr "Zbierka kariet"
 
 #: src/collectionfactory.cpp:94
-#, kde-format
-msgid "Game Collection"
-msgstr "Zbierka hier"
+#, fuzzy, kde-format
+#| msgid "Video Collection"
+msgid "Video Game Collection"
+msgstr "Video zbierka"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1459,9 +1460,10 @@ msgid "Icon"
 msgstr "Ikona"
 
 #: src/collections/gamecollection.cpp:39
-#, kde-format
-msgid "My Games"
-msgstr "Moje hry"
+#, fuzzy, kde-format
+#| msgid "My Videos"
+msgid "My Video Games"
+msgstr "Moje videá"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -2822,7 +2824,7 @@ msgstr "Balíky šablón"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5212,7 +5214,7 @@ msgid "Tellico Files"
 msgstr "Súbory Tellico"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:72
 #, kde-format
 msgid "XML Files"
 msgstr "XML súbory"
@@ -5546,14 +5548,16 @@ msgid "Create a new wine collection"
 msgstr "Vytvoriť novú zbierku vín"
 
 #: src/mainwindow.cpp:302
-#, kde-format
-msgid "New &Game Collection"
+#, fuzzy, kde-format
+#| msgid "New &Game Collection"
+msgid "New Video &Game Collection"
 msgstr "&Nová zbierka hier"
 
 #: src/mainwindow.cpp:303
-#, kde-format
-msgid "Create a new game collection"
-msgstr "Vytvoriť novú zbierku hier"
+#, fuzzy, kde-format
+#| msgid "Create a new video collection"
+msgid "Create a new video game collection"
+msgstr "Vytvoriť novú video zbierku"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -7363,22 +7367,22 @@ msgstr "Súbor je prázdny."
 msgid "The file contains no collection data."
 msgstr "Súbor neobsahuje žiadne dáta zbierky."
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "XML možnosti Tellico"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Zahrnúť obrázky v dokumente XML"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7503,6 +7507,15 @@ msgstr "Hľadať"
 #, kde-format
 msgid "Clear"
 msgstr "Vyčistiť"
+
+#~ msgid "Game Collection"
+#~ msgstr "Zbierka hier"
+
+#~ msgid "My Games"
+#~ msgstr "Moje hry"
+
+#~ msgid "Create a new game collection"
+#~ msgstr "Vytvoriť novú zbierku hier"
 
 #~ msgid "&Show \"Tip of the Day\" at startup"
 #~ msgstr "Ukázať \"Tip dňa\" pri &spustení"

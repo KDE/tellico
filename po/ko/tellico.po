@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-09-24 00:44+0000\n"
 "PO-Revision-Date: 2023-07-25 01:20+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -263,9 +263,10 @@ msgid "Card Collection"
 msgstr "카드 소장품"
 
 #: src/collectionfactory.cpp:94
-#, kde-format
-msgid "Game Collection"
-msgstr "게임 소장품"
+#, fuzzy, kde-format
+#| msgid "Video Collection"
+msgid "Video Game Collection"
+msgstr "동영상 소장품"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1431,9 +1432,10 @@ msgid "Icon"
 msgstr "아이콘"
 
 #: src/collections/gamecollection.cpp:39
-#, kde-format
-msgid "My Games"
-msgstr "내 게임"
+#, fuzzy, kde-format
+#| msgid "My Videos"
+msgid "My Video Games"
+msgstr "내 동영상"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -2785,7 +2787,7 @@ msgstr "템플릿 패키지"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5121,7 +5123,7 @@ msgid "Tellico Files"
 msgstr "Tellico 파일"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:72
 #, kde-format
 msgid "XML Files"
 msgstr "XML 파일"
@@ -5448,14 +5450,16 @@ msgid "Create a new wine collection"
 msgstr "새 와인 소장품 만들기"
 
 #: src/mainwindow.cpp:302
-#, kde-format
-msgid "New &Game Collection"
+#, fuzzy, kde-format
+#| msgid "New &Game Collection"
+msgid "New Video &Game Collection"
 msgstr "새 게임 소장품(&G)"
 
 #: src/mainwindow.cpp:303
-#, kde-format
-msgid "Create a new game collection"
-msgstr "새 게임 소장품 만들기"
+#, fuzzy, kde-format
+#| msgid "Create a new video collection"
+msgid "Create a new video game collection"
+msgstr "새 동영상 소장품 만들기"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -7226,22 +7230,22 @@ msgstr "파일이 비어 있습니다."
 msgid "The file contains no collection data."
 msgstr "파일에 수집 데이터가 없습니다."
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML 옵션"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr "XML 문서에 이미지 포함"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7366,6 +7370,15 @@ msgstr "검색"
 #, kde-format
 msgid "Clear"
 msgstr "지우기"
+
+#~ msgid "Game Collection"
+#~ msgstr "게임 소장품"
+
+#~ msgid "My Games"
+#~ msgstr "내 게임"
+
+#~ msgid "Create a new game collection"
+#~ msgstr "새 게임 소장품 만들기"
 
 #~ msgid "&Show \"Tip of the Day\" at startup"
 #~ msgstr "시작 시 \"오늘의 팁\" 표시(&S)"

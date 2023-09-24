@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-09-24 00:44+0000\n"
 "PO-Revision-Date: 2023-06-16 06:45+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -265,9 +265,10 @@ msgid "Card Collection"
 msgstr "ბარათების კოლექცია"
 
 #: src/collectionfactory.cpp:94
-#, kde-format
-msgid "Game Collection"
-msgstr "თამაშების კოლექცია"
+#, fuzzy, kde-format
+#| msgid "Video Collection"
+msgid "Video Game Collection"
+msgstr "ვიდეო კოლექცია"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1418,9 +1419,10 @@ msgid "Icon"
 msgstr "ხატულა"
 
 #: src/collections/gamecollection.cpp:39
-#, kde-format
-msgid "My Games"
-msgstr "თამაშები"
+#, fuzzy, kde-format
+#| msgid "My Videos"
+msgid "My Video Games"
+msgstr "ჩემი ვიდეოები"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -2758,7 +2760,7 @@ msgstr "ნიმუშების პაკეტები"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5041,7 +5043,7 @@ msgid "Tellico Files"
 msgstr "Tellico ფაილები"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:72
 #, kde-format
 msgid "XML Files"
 msgstr "XML ფაილები"
@@ -5361,14 +5363,16 @@ msgid "Create a new wine collection"
 msgstr "ახალი ღვინოების კოლექციის შექმნა"
 
 #: src/mainwindow.cpp:302
-#, kde-format
-msgid "New &Game Collection"
+#, fuzzy, kde-format
+#| msgid "New &Game Collection"
+msgid "New Video &Game Collection"
 msgstr "&ახალი თამაშის კოლექცია"
 
 #: src/mainwindow.cpp:303
-#, kde-format
-msgid "Create a new game collection"
-msgstr "ახალი თამაშების კოლექციის შექმნა"
+#, fuzzy, kde-format
+#| msgid "Create a new video collection"
+msgid "Create a new video game collection"
+msgstr "ახალი ვიდეო კოლექციის შექმნა"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -7105,22 +7109,22 @@ msgstr "ფაილი ცარიელია."
 msgid "The file contains no collection data."
 msgstr "ეს ფაილი კოლექციის მონაცემებს არ შეიცავს."
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML -ის მორგება"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr "XML დოკუმენტში გამოსახულებებიც ჩაისმება"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7241,6 +7245,15 @@ msgstr "ძებნა"
 #, kde-format
 msgid "Clear"
 msgstr "გაწმენდა"
+
+#~ msgid "Game Collection"
+#~ msgstr "თამაშების კოლექცია"
+
+#~ msgid "My Games"
+#~ msgstr "თამაშები"
+
+#~ msgid "Create a new game collection"
+#~ msgstr "ახალი თამაშების კოლექციის შექმნა"
 
 #~ msgid "&Show \"Tip of the Day\" at startup"
 #~ msgstr "&გაშვებისას \"დღის რჩევის\" ჩვენება"

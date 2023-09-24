@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-09-24 00:44+0000\n"
 "PO-Revision-Date: 2009-09-18 16:56+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -265,8 +265,8 @@ msgstr "BCCollection"
 
 #: src/collectionfactory.cpp:94
 #, fuzzy, kde-format
-msgid "Game Collection"
-msgstr "Преименувай колекцията"
+msgid "Video Game Collection"
+msgstr "Видео колекция"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1409,7 +1409,8 @@ msgstr "съдържа"
 
 #: src/collections/gamecollection.cpp:39
 #, fuzzy, kde-format
-msgid "My Games"
+#| msgid "My Videos"
+msgid "My Video Games"
 msgstr "Моите клипове"
 
 #: src/collections/gamecollection.cpp:61
@@ -2753,7 +2754,7 @@ msgstr "Шаблони"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5040,7 +5041,7 @@ msgid "Tellico Files"
 msgstr "Лавица"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:72
 #, fuzzy, kde-format
 msgid "XML Files"
 msgstr "Моите клипове"
@@ -5361,12 +5362,12 @@ msgstr "Създава нов документ"
 
 #: src/mainwindow.cpp:302
 #, fuzzy, kde-format
-msgid "New &Game Collection"
+msgid "New Video &Game Collection"
 msgstr "Ново име за колекция"
 
 #: src/mainwindow.cpp:303
 #, fuzzy, kde-format
-msgid "Create a new game collection"
+msgid "Create a new video game collection"
 msgstr "Създава нов документ"
 
 #: src/mainwindow.cpp:305
@@ -7103,22 +7104,22 @@ msgstr "Файлът е празен."
 msgid "The file contains no collection data."
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, fuzzy, kde-format
 msgid "Tellico XML Options"
 msgstr "TellicoDoc"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, fuzzy, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7239,6 +7240,18 @@ msgstr "Търсене"
 #, kde-format
 msgid "Clear"
 msgstr "Изчистване"
+
+#, fuzzy
+#~ msgid "Game Collection"
+#~ msgstr "Преименувай колекцията"
+
+#, fuzzy
+#~ msgid "My Games"
+#~ msgstr "Моите клипове"
+
+#, fuzzy
+#~ msgid "Create a new game collection"
+#~ msgstr "Създава нов документ"
 
 #, fuzzy
 #~ msgid ""

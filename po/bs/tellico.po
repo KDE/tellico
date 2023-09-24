@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-09-24 00:44+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -283,9 +283,10 @@ msgid "Card Collection"
 msgstr "Kolekcija karti"
 
 #: src/collectionfactory.cpp:94
-#, kde-format
-msgid "Game Collection"
-msgstr "Kolekcija igara"
+#, fuzzy, kde-format
+#| msgid "Video Collection"
+msgid "Video Game Collection"
+msgstr "Kolekcija videa"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1464,9 +1465,10 @@ msgid "Icon"
 msgstr "Ikona"
 
 #: src/collections/gamecollection.cpp:39
-#, kde-format
-msgid "My Games"
-msgstr "Moje igre"
+#, fuzzy, kde-format
+#| msgid "My Videos"
+msgid "My Video Games"
+msgstr "Moj video"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -2923,7 +2925,7 @@ msgstr "Predlošci"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5335,7 +5337,7 @@ msgid "Tellico Files"
 msgstr "Tellico Zip Datoteka"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:72
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "XML Files"
@@ -5677,14 +5679,16 @@ msgid "Create a new wine collection"
 msgstr "Napravi novu kolekciju vina"
 
 #: src/mainwindow.cpp:302
-#, kde-format
-msgid "New &Game Collection"
+#, fuzzy, kde-format
+#| msgid "New &Game Collection"
+msgid "New Video &Game Collection"
 msgstr "Nova kolekcija &Igara"
 
 #: src/mainwindow.cpp:303
-#, kde-format
-msgid "Create a new game collection"
-msgstr "Napravi novu kolekciju igara"
+#, fuzzy, kde-format
+#| msgid "Create a new video collection"
+msgid "Create a new video game collection"
+msgstr "Napravi novu video kolekciju"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -7504,22 +7508,22 @@ msgstr "Datoteka je prazna."
 msgid "The file contains no collection data."
 msgstr "Datoteka ne sadrži podatke o kolekciji."
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML Opcije"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Uključi slike u XML dokument"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7642,6 +7646,15 @@ msgstr "Pretraga"
 #, kde-format
 msgid "Clear"
 msgstr "Očisti"
+
+#~ msgid "Game Collection"
+#~ msgstr "Kolekcija igara"
+
+#~ msgid "My Games"
+#~ msgstr "Moje igre"
+
+#~ msgid "Create a new game collection"
+#~ msgstr "Napravi novu kolekciju igara"
 
 #~ msgid "&Show \"Tip of the Day\" at startup"
 #~ msgstr "&Prikaz \"Tip dana\" prilikom pokretanja"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-09-24 00:44+0000\n"
 "PO-Revision-Date: 2023-07-06 11:58+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -269,9 +269,10 @@ msgid "Card Collection"
 msgstr "Col·lecció de cromos"
 
 #: src/collectionfactory.cpp:94
-#, kde-format
-msgid "Game Collection"
-msgstr "Col·lecció de jocs"
+#, fuzzy, kde-format
+#| msgid "Video Collection"
+msgid "Video Game Collection"
+msgstr "Col·lecció de vídeos"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1455,9 +1456,10 @@ msgid "Icon"
 msgstr "Icona"
 
 #: src/collections/gamecollection.cpp:39
-#, kde-format
-msgid "My Games"
-msgstr "Els meus jocs"
+#, fuzzy, kde-format
+#| msgid "My Videos"
+msgid "My Video Games"
+msgstr "Els meus vídeos"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -2835,7 +2837,7 @@ msgstr "Paquets de plantilla"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5206,7 +5208,7 @@ msgid "Tellico Files"
 msgstr "Fitxers de Tellico"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:72
 #, kde-format
 msgid "XML Files"
 msgstr "Fitxers XML"
@@ -5536,14 +5538,16 @@ msgid "Create a new wine collection"
 msgstr "Crea una nova col·lecció de vins"
 
 #: src/mainwindow.cpp:302
-#, kde-format
-msgid "New &Game Collection"
+#, fuzzy, kde-format
+#| msgid "New &Game Collection"
+msgid "New Video &Game Collection"
 msgstr "Col·lecció nova de &jocs"
 
 #: src/mainwindow.cpp:303
-#, kde-format
-msgid "Create a new game collection"
-msgstr "Crea una nova col·lecció de jocs"
+#, fuzzy, kde-format
+#| msgid "Create a new video collection"
+msgid "Create a new video game collection"
+msgstr "Crea una nova col·lecció de vídeos"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -7348,22 +7352,22 @@ msgstr "El fitxer està buit."
 msgid "The file contains no collection data."
 msgstr "El fitxer no conté dades de col·lecció."
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Opcions XML de Tellico"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Inclou imatges en el document XML"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7488,3 +7492,12 @@ msgstr "Busca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
+
+#~ msgid "Game Collection"
+#~ msgstr "Col·lecció de jocs"
+
+#~ msgid "My Games"
+#~ msgstr "Els meus jocs"
+
+#~ msgid "Create a new game collection"
+#~ msgstr "Crea una nova col·lecció de jocs"

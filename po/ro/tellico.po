@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-09-24 00:44+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -268,8 +268,8 @@ msgstr "Opțiuni colecții cărți"
 
 #: src/collectionfactory.cpp:94
 #, fuzzy, kde-format
-msgid "Game Collection"
-msgstr "Redenumește colecție..."
+msgid "Video Game Collection"
+msgstr "Opțiuni colecții video"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1416,7 +1416,8 @@ msgstr "Comentarii"
 
 #: src/collections/gamecollection.cpp:39
 #, fuzzy, kde-format
-msgid "My Games"
+#| msgid "My Videos"
+msgid "My Video Games"
 msgstr "Filmele mele"
 
 #: src/collections/gamecollection.cpp:61
@@ -2771,7 +2772,7 @@ msgstr "Opțiuni generale"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5076,7 +5077,7 @@ msgid "Tellico Files"
 msgstr "Tellico"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:72
 #, fuzzy, kde-format
 msgid "XML Files"
 msgstr "Filmele mele"
@@ -5406,12 +5407,12 @@ msgstr "Creează un document nou"
 
 #: src/mainwindow.cpp:302
 #, fuzzy, kde-format
-msgid "New &Game Collection"
+msgid "New Video &Game Collection"
 msgstr "&Colecție nouă"
 
 #: src/mainwindow.cpp:303
 #, fuzzy, kde-format
-msgid "Create a new game collection"
+msgid "Create a new video game collection"
 msgstr "Creează un document nou"
 
 #: src/mainwindow.cpp:305
@@ -7166,22 +7167,22 @@ msgstr ""
 msgid "The file contains no collection data."
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, fuzzy, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, fuzzy, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7305,6 +7306,18 @@ msgstr "Salvez fișierul..."
 #| msgid "Year"
 msgid "Clear"
 msgstr "An"
+
+#, fuzzy
+#~ msgid "Game Collection"
+#~ msgstr "Redenumește colecție..."
+
+#, fuzzy
+#~ msgid "My Games"
+#~ msgstr "Filmele mele"
+
+#, fuzzy
+#~ msgid "Create a new game collection"
+#~ msgstr "Creează un document nou"
 
 #, fuzzy
 #~ msgid ""

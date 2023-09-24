@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-09-24 00:44+0000\n"
 "PO-Revision-Date: 2022-02-01 11:21+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -270,9 +270,10 @@ msgid "Card Collection"
 msgstr "Kártya gyűjtemény"
 
 #: src/collectionfactory.cpp:94
-#, kde-format
-msgid "Game Collection"
-msgstr "Játék gyűjtemény"
+#, fuzzy, kde-format
+#| msgid "Video Collection"
+msgid "Video Game Collection"
+msgstr "Film gyűjtemény"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1449,9 +1450,10 @@ msgid "Icon"
 msgstr "Ikon"
 
 #: src/collections/gamecollection.cpp:39
-#, kde-format
-msgid "My Games"
-msgstr "Játékaim"
+#, fuzzy, kde-format
+#| msgid "My Videos"
+msgid "My Video Games"
+msgstr "Videóim"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -2813,7 +2815,7 @@ msgstr "Sabloncsomagok"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5184,7 +5186,7 @@ msgid "Tellico Files"
 msgstr "Tellico-fájlok"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:72
 #, kde-format
 msgid "XML Files"
 msgstr "XML-fájlok"
@@ -5515,14 +5517,16 @@ msgid "Create a new wine collection"
 msgstr "Új Bor gyűjtemény létrehozása"
 
 #: src/mainwindow.cpp:302
-#, kde-format
-msgid "New &Game Collection"
+#, fuzzy, kde-format
+#| msgid "New &Game Collection"
+msgid "New Video &Game Collection"
 msgstr "Új &Játék gyűjtemény"
 
 #: src/mainwindow.cpp:303
-#, kde-format
-msgid "Create a new game collection"
-msgstr "Új Játék gyűjtemény létrehozása"
+#, fuzzy, kde-format
+#| msgid "Create a new video collection"
+msgid "Create a new video game collection"
+msgstr "Új Film gyűjtemény létrehozása"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -7327,22 +7331,22 @@ msgstr "A fájl üres."
 msgid "The file contains no collection data."
 msgstr "A fájl nem tartalmaz gyűjtemény adatot."
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML beállítások"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Az XML dokumentum tartalmazza a képeket"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7467,6 +7471,15 @@ msgstr "Keresés"
 #, kde-format
 msgid "Clear"
 msgstr "Törlés"
+
+#~ msgid "Game Collection"
+#~ msgstr "Játék gyűjtemény"
+
+#~ msgid "My Games"
+#~ msgstr "Játékaim"
+
+#~ msgid "Create a new game collection"
+#~ msgstr "Új Játék gyűjtemény létrehozása"
 
 #~ msgid "&Show \"Tip of the Day\" at startup"
 #~ msgstr "&Mutassa a \"Nap tippjét\" induláskor"

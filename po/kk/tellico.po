@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-09-24 00:44+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -275,9 +275,10 @@ msgid "Card Collection"
 msgstr "Кәртішкелер жинағы"
 
 #: src/collectionfactory.cpp:94
-#, kde-format
-msgid "Game Collection"
-msgstr "Ойындар жинағы"
+#, fuzzy, kde-format
+#| msgid "Video Collection"
+msgid "Video Game Collection"
+msgstr "Фильмдер жинағы"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1449,9 +1450,10 @@ msgid "Icon"
 msgstr "Таңбашасы"
 
 #: src/collections/gamecollection.cpp:39
-#, kde-format
-msgid "My Games"
-msgstr "Ойындарым"
+#, fuzzy, kde-format
+#| msgid "My Videos"
+msgid "My Video Games"
+msgstr "Менің видеоларым"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -2830,7 +2832,7 @@ msgstr "Үлгілер"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5228,7 +5230,7 @@ msgid "Tellico Files"
 msgstr "Tellico Zip файлы"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:72
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "XML Files"
@@ -5570,14 +5572,16 @@ msgid "Create a new wine collection"
 msgstr "Жаңа шараптар жинағын құру"
 
 #: src/mainwindow.cpp:302
-#, kde-format
-msgid "New &Game Collection"
+#, fuzzy, kde-format
+#| msgid "New &Game Collection"
+msgid "New Video &Game Collection"
 msgstr "Жаңа &ойындар жинағы"
 
 #: src/mainwindow.cpp:303
-#, kde-format
-msgid "Create a new game collection"
-msgstr "Жаңа ойындар жинағын құру"
+#, fuzzy, kde-format
+#| msgid "Create a new video collection"
+msgid "Create a new video game collection"
+msgstr "Жаңа фильмдер жинағын құру"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -7403,22 +7407,22 @@ msgstr "Файл бос."
 msgid "The file contains no collection data."
 msgstr "Жинақ дерегі файлда жоқ."
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML параметрлері"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Кескіндер XML құжатына қосылсын"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7543,6 +7547,15 @@ msgstr "Іздеу"
 #, kde-format
 msgid "Clear"
 msgstr "Тазалау"
+
+#~ msgid "Game Collection"
+#~ msgstr "Ойындар жинағы"
+
+#~ msgid "My Games"
+#~ msgstr "Ойындарым"
+
+#~ msgid "Create a new game collection"
+#~ msgstr "Жаңа ойындар жинағын құру"
 
 #~ msgid "&Show \"Tip of the Day\" at startup"
 #~ msgstr "Бастағанда \"Бүгінгі кенес\" &көрсетілсін"

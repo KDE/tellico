@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-09-24 00:44+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -276,9 +276,10 @@ msgid "Card Collection"
 msgstr "卡類收藏"
 
 #: src/collectionfactory.cpp:94
-#, kde-format
-msgid "Game Collection"
-msgstr "遊戲類收藏"
+#, fuzzy, kde-format
+#| msgid "Video Collection"
+msgid "Video Game Collection"
+msgstr "影片收藏"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1434,9 +1435,10 @@ msgid "Icon"
 msgstr "圖示"
 
 #: src/collections/gamecollection.cpp:39
-#, kde-format
-msgid "My Games"
-msgstr "我的遊戲"
+#, fuzzy, kde-format
+#| msgid "My Videos"
+msgid "My Video Games"
+msgstr "我的影片"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -2799,7 +2801,7 @@ msgstr "樣本"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5173,7 +5175,7 @@ msgid "Tellico Files"
 msgstr "Tellico Zip 檔"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:72
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "XML Files"
@@ -5512,14 +5514,16 @@ msgid "Create a new wine collection"
 msgstr "建立新的酒類收藏"
 
 #: src/mainwindow.cpp:302
-#, kde-format
-msgid "New &Game Collection"
+#, fuzzy, kde-format
+#| msgid "New &Game Collection"
+msgid "New Video &Game Collection"
 msgstr "新增遊戲收藏(&G)"
 
 #: src/mainwindow.cpp:303
-#, kde-format
-msgid "Create a new game collection"
-msgstr "建立新的遊戲收藏"
+#, fuzzy, kde-format
+#| msgid "Create a new video collection"
+msgid "Create a new video game collection"
+msgstr "建立新的影片收藏"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -7313,22 +7317,22 @@ msgstr "檔案是空的。"
 msgid "The file contains no collection data."
 msgstr "檔案沒有包含收藏資料。"
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML 選項"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr "在 XML 文件中包含影像"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7451,6 +7455,15 @@ msgstr "搜尋"
 #, kde-format
 msgid "Clear"
 msgstr "清除"
+
+#~ msgid "Game Collection"
+#~ msgstr "遊戲類收藏"
+
+#~ msgid "My Games"
+#~ msgstr "我的遊戲"
+
+#~ msgid "Create a new game collection"
+#~ msgstr "建立新的遊戲收藏"
 
 #~ msgid "&Show \"Tip of the Day\" at startup"
 #~ msgstr "啟動時顯示本日小秘訣(&S)"

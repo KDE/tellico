@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-09-24 00:44+0000\n"
 "PO-Revision-Date: 2023-08-19 13:35+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -267,9 +267,10 @@ msgid "Card Collection"
 msgstr "Karta bilduma"
 
 #: src/collectionfactory.cpp:94
-#, kde-format
-msgid "Game Collection"
-msgstr "Joko bilduma"
+#, fuzzy, kde-format
+#| msgid "Video Collection"
+msgid "Video Game Collection"
+msgstr "Bideo bilduma"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1438,9 +1439,10 @@ msgid "Icon"
 msgstr "Ikonoa"
 
 #: src/collections/gamecollection.cpp:39
-#, kde-format
-msgid "My Games"
-msgstr "Nere jokoak"
+#, fuzzy, kde-format
+#| msgid "My Videos"
+msgid "My Video Games"
+msgstr "Nere bideoak"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -2807,7 +2809,7 @@ msgstr "Txantiloi-paketeak"
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
+#: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:128
@@ -5150,7 +5152,7 @@ msgid "Tellico Files"
 msgstr "Tellico fitxategiak"
 
 #: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1274 src/translators/tellicoxmlexporter.cpp:72
 #, kde-format
 msgid "XML Files"
 msgstr "XML fitxategiak"
@@ -5480,14 +5482,16 @@ msgid "Create a new wine collection"
 msgstr "Sortu ardo bilduma berri bat"
 
 #: src/mainwindow.cpp:302
-#, kde-format
-msgid "New &Game Collection"
+#, fuzzy, kde-format
+#| msgid "New &Game Collection"
+msgid "New Video &Game Collection"
 msgstr "&Joko bilduma berria"
 
 #: src/mainwindow.cpp:303
-#, kde-format
-msgid "Create a new game collection"
-msgstr "Sortu joko bilduma berri bat"
+#, fuzzy, kde-format
+#| msgid "Create a new video collection"
+msgid "Create a new video game collection"
+msgstr "Sortu bideo bilduma berri bat"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -7254,22 +7258,22 @@ msgstr "Fitxategia hutsi dago."
 msgid "The file contains no collection data."
 msgstr "Fitxategiak ez du bilduma daturik."
 
-#: src/translators/tellicoxmlexporter.cpp:67
+#: src/translators/tellicoxmlexporter.cpp:68
 #, kde-format
 msgid "XML"
 msgstr "XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:543
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML aukerak"
 
-#: src/translators/tellicoxmlexporter.cpp:543
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Barneratu irudiak XML dokumentuan"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7394,6 +7398,15 @@ msgstr "Bilatu"
 #, kde-format
 msgid "Clear"
 msgstr "Garbitu"
+
+#~ msgid "Game Collection"
+#~ msgstr "Joko bilduma"
+
+#~ msgid "My Games"
+#~ msgstr "Nere jokoak"
+
+#~ msgid "Create a new game collection"
+#~ msgstr "Sortu joko bilduma berri bat"
 
 #~ msgid "&Show \"Tip of the Day\" at startup"
 #~ msgstr "Erakut&si «Eguneko iradokizuna» abiatzean"
