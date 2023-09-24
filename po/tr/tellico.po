@@ -99,12 +99,10 @@ msgid "Image List"
 msgstr "Görsel Listesi"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, fuzzy, kde-format
-#| msgctxt "Image List XSL Template"
-#| msgid "Image List"
+#, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "Görsel Listesi"
+msgstr "Görsel Izgarası"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -1532,10 +1530,9 @@ msgid "Xbox One"
 msgstr "Xbox One"
 
 #: src/collections/gamecollection.cpp:245
-#, fuzzy, kde-format
-#| msgid "Series"
+#, kde-format
 msgid "Xbox Series X"
-msgstr "Seri"
+msgstr "Xbox Series X"
 
 #: src/collections/gamecollection.cpp:246
 #, kde-format
@@ -2356,10 +2353,9 @@ msgstr "Şablon vurgulanmış metin rengi"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, fuzzy, kde-format
-#| msgid "Template highlight color"
+#, kde-format
 msgid "Template link color"
-msgstr "Şablon vurgulama rengi"
+msgstr "Şablon bağlantı rengi"
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -2403,10 +2399,9 @@ msgstr ""
 "açılacaktır."
 
 #: src/configdialog.cpp:221
-#, fuzzy, kde-format
-#| msgid "matches regular expression"
+#, kde-format
 msgid "&Enable regular expressions in quick filter"
-msgstr "düzenli ifade ile eşleşir"
+msgstr "Hızlı süzgeçte düzenli ifadeleri &eşleştir"
 
 #: src/configdialog.cpp:222
 #, fuzzy, kde-format
@@ -7699,231 +7694,3 @@ msgstr "Ara"
 #, kde-format
 msgid "Clear"
 msgstr "Temizle"
-
-#~ msgid "Click to download additional data sources."
-#~ msgstr "Ek veri kaynakları indirmek için tıklayın."
-
-#~ msgid "Edit..."
-#~ msgstr "Düzenle..."
-
-#~ msgid "Creating new document..."
-#~ msgstr "Yeni doküman yaratılıyor..."
-
-#~ msgid "Denomination"
-#~ msgstr "Adlandırma"
-
-#, fuzzy
-#~| msgid ""
-#~| "This information was freely provided by <a href=\"http://igdb.com\">IGDB."
-#~| "com</a>."
-#~ msgid ""
-#~ "This information was freely provided by <a href=\"https://boardgamegeek."
-#~ "com\">BoardGameGeek</a>."
-#~ msgstr ""
-#~ "Bu bilgi <a href=\"http://igdb.com\">IGDB.com</a> tarafından ücretsizce "
-#~ "sağlanmıştır."
-
-#, fuzzy
-#~| msgid ""
-#~| "This information was freely provided by <a href=\"http://igdb.com\">IGDB."
-#~| "com</a>."
-#~ msgid ""
-#~ "This information was freely provided by <a href=\"https://comicvine."
-#~ "gamespot.com/\">Comic Vine</a>."
-#~ msgstr ""
-#~ "Bu bilgi <a href=\"http://igdb.com\">IGDB.com</a> tarafından ücretsizce "
-#~ "sağlanmıştır."
-
-#, fuzzy
-#~| msgid ""
-#~| "This information was freely provided by <a href=\"http://igdb.com\">IGDB."
-#~| "com</a>."
-#~ msgid ""
-#~ "This information was freely provided by <a href=\"https://mobygames.com"
-#~ "\">MobyGames</a>."
-#~ msgstr ""
-#~ "Bu bilgi <a href=\"http://igdb.com\">IGDB.com</a> tarafından ücretsizce "
-#~ "sağlanmıştır."
-
-#~ msgid "Processing document..."
-#~ msgstr "Döküman işletiliyor..."
-
-#~ msgid "&New"
-#~ msgstr "Ye&ni"
-
-#, fuzzy
-#~| msgid "Groups"
-#~ msgid "Group Tabs"
-#~ msgstr "Gruplar"
-
-#, fuzzy
-#~| msgctxt "Column View XSL Template"
-#~| msgid "Column View"
-#~ msgid "Column View"
-#~ msgstr "Sütun Görünümü"
-
-#~ msgid ""
-#~ "<qt><p><b>The ISBNndb.com server reports an access key error.</b></p>You "
-#~ "may have reached the maximum number of searches for today with this key, "
-#~ "or you may have entered the access key incorrectly.</qt>"
-#~ msgstr ""
-#~ "<qt><p><b>SBNndb.com sunucusu bir erişim anahtarı hatası raporladı.</b></"
-#~ "p>Bu anahtarla yapabileceğiniz en fazla erişimi yapmış olabilir veya "
-#~ "erişim anahtarını hatalı girmiş olabilirsiniz.</qt>"
-
-#~ msgid "Enable/disable the group view"
-#~ msgstr "Grup görünümüne izin ver/geri al"
-
-#~ msgid "Access to data from Discogs.com requires a personal token."
-#~ msgstr "Discogs.com adresinden veri erişimi için kişisel erişim gereklidir."
-
-#~ msgid "API key: "
-#~ msgstr "API anahtarı: "
-
-#~ msgid "Freebase Link"
-#~ msgstr "Freebase Bağlantısı"
-
-#~ msgid "Dark Horse Comics"
-#~ msgstr "Dark Horse Comics"
-
-#~ msgid "Allocine.fr"
-#~ msgstr "Allocine.fr"
-
-#~ msgid "Spanish Ministry of Culture"
-#~ msgstr "İspanya Kültür Bakanlığı"
-
-#~ msgid "The British Library"
-#~ msgstr "Britanya Kütüphanesi"
-
-#~ msgid "Sudoc (France)"
-#~ msgstr "Sudoc (Fransa)"
-
-#~ msgid "BIBSYS (Norway)"
-#~ msgstr "BIBSYS (Norveç)"
-
-#~ msgid "Italian National Library"
-#~ msgstr "İtalyan Ulusal Kütüphanesi"
-
-#~ msgid "Portuguese National Library"
-#~ msgstr "Portekiz Ulusal Kütüphanesi"
-
-#~ msgid "National Library of Poland"
-#~ msgstr "Polonya Ulusal Kütüphanesi"
-
-#~ msgid "National Library of Canada"
-#~ msgstr "Kanada Ulusal Kütüphanesi"
-
-#~ msgid "Israel Union List"
-#~ msgstr "İsrail Birliği Listesi"
-
-#~ msgid "National Library of Australia"
-#~ msgstr "Avustralya Ulusal Kütüphanesi"
-
-#~ msgid "National Library of Lithuania"
-#~ msgstr "Litvanya Ulusal Kütüphanesi"
-
-#~ msgid "Copac (UK and Ireland)"
-#~ msgstr "Copac (BK ve İrlanda)"
-
-#~ msgid "Pontifical Biblical Institute"
-#~ msgstr "Papalık İncil Enstitüsü"
-
-#~ msgid "Bedetheque.com"
-#~ msgstr "Bedetheque.com"
-
-#~ msgid "*.xsl|XSL Files (*.xsl)"
-#~ msgstr "*.xsl|XSL Dosyaları (*.xsl)"
-
-#~ msgid "*.tar.gz *.tgz|Template Packages (*.tar.gz)"
-#~ msgstr "*.tar.gz *.tgz|Şablon Paketleri (*.tar.gz)"
-
-#~ msgid "*.tc *.bc|Tellico Files (*.tc)"
-#~ msgstr "*.tc *.bc|Tellico Dosyaları (*.tc)"
-
-#~ msgid "*.xml|XML Files (*.xml)"
-#~ msgstr "*.xml|XMLDosyaları (*.xml)"
-
-#~ msgid "*.bib|Bibtex Files (*.bib)"
-#~ msgstr "*.bib|Bibtex Dosyaları (*.bib)"
-
-#~ msgid "*.csv|CSV Files (*.csv)"
-#~ msgstr "*.csv|CSV Dosyaları (*.csv)"
-
-#~ msgid "*.ris|RIS Files (*.ris)"
-#~ msgstr "*.ris|RIS Dosyaları (*.ris)"
-
-#~ msgid "*.gcf|GCfilms Data Files (*.gcf)"
-#~ msgstr "*.gcf|GCfilms Veri Dosyaları (*.gcf)"
-
-#~ msgid "*.pdf|PDF Files (*.pdf)"
-#~ msgstr "*.pdf|PDF Dosyaları (*.pdf)"
-
-#~ msgid "*.reflib|Referencer Files (*.reflib)"
-#~ msgstr "*.reflib|Referencer Dosyaları (*.reflib)"
-
-#~ msgid "*.ciw|CIW Files (*.ciw)"
-#~ msgstr "*.ciw|CIW Dosyaları (*.ciw)"
-
-#~ msgid "*.html|HTML Files (*.html)"
-#~ msgstr "*.html|HTML Dosyaları (*.html)"
-
-#~ msgid "*.xml|Bibtexml Files (*.xml)"
-#~ msgstr "*.xml|Bibtexml Dosyaları (*.xml)"
-
-#~ msgid "*.zip|Zip Files (*.zip)"
-#~ msgstr "*.zip|Zip Dosyaları (*.zip)"
-
-#~ msgid "Yahoo! Audio Search"
-#~ msgstr "Yahoo! Audio İçinde Ara"
-
-#~ msgid "Overwrite"
-#~ msgstr "Üzerine Yaz"
-
-#~ msgid "Select IMDb Result"
-#~ msgstr "IMDb Sonuçlarını Seç"
-
-#~ msgid ""
-#~ "<qt>Your search returned multiple matches. Please select one below.</qt>"
-#~ msgstr ""
-#~ "<qt>Aramanız iki benzer sonuç döndürdü. Lütfen aşağıdakilerden birini "
-#~ "seçin.</qt>"
-
-#~ msgid "<qt>Select a search result.</qt>"
-#~ msgstr "<qt>Arama sonuçlarından birini seçin.</qt>"
-
-#~ msgctxt "@option next year"
-#~ msgid "Next Year"
-#~ msgstr "Sonraki Yıl"
-
-#~ msgid "Tellico"
-#~ msgstr "Tellico"
-
-#~ msgid "Regis Boudin"
-#~ msgstr "Regis Boudin"
-
-#~ msgid "Export to PilotDB..."
-#~ msgstr "PilotDB olarak dışarı aktar..."
-
-#~ msgid "Export to a PilotDB database"
-#~ msgstr "Bir PilotDB veritabanına aktar"
-
-#~ msgid "PilotDB"
-#~ msgstr "PilotDB"
-
-#~ msgid "*.pdb|Pilot Database Files (*.pdb)"
-#~ msgstr "*.pdb|Pilot Veritabanı Dosyaları (*.pdb)"
-
-#~ msgid "PilotDB Options"
-#~ msgstr "PilotDB Seçenekleri"
-
-#~ msgid "Set PDA backup flag for database"
-#~ msgstr "Veritabanı için PDA yedekleme etiketi oluştur"
-
-#~ msgid "Tellico: %1 is due to return \"%2\""
-#~ msgstr "Tellico: %1 den dolayo \"%2\" döndürdü"
-
-#~ msgid "Active Calendar"
-#~ msgstr "Aktif Takvim"
-
-#~ msgid "Default Calendar"
-#~ msgstr "Öntanımlı Takvim"
