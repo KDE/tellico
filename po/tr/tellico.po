@@ -268,10 +268,9 @@ msgid "Card Collection"
 msgstr "Kart Koleksiyonu"
 
 #: src/collectionfactory.cpp:94
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "Video Koleksiyonu"
+msgstr "Video Oyunları Koleksiyonu"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1449,10 +1448,9 @@ msgid "Icon"
 msgstr "Simge"
 
 #: src/collections/gamecollection.cpp:39
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "Videolarım"
+msgstr "Video Oyunlarım"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -5496,16 +5494,14 @@ msgid "Create a new wine collection"
 msgstr "Yeni bir şarap koleksiyonu oluştur"
 
 #: src/mainwindow.cpp:302
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "Yeni O&yun Koleksiyonu"
+msgstr "Yeni Video O&yunu Koleksiyonu"
 
 #: src/mainwindow.cpp:303
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "Yeni bir video koleksiyonu oluştur"
+msgstr "Yeni bir video oyunu koleksiyonu oluştur"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -7435,12 +7431,3 @@ msgstr "Ara"
 #, kde-format
 msgid "Clear"
 msgstr "Temizle"
-
-#~ msgid "Game Collection"
-#~ msgstr "Oyun Koleksiyonu"
-
-#~ msgid "My Games"
-#~ msgstr "Oyunlarım"
-
-#~ msgid "Create a new game collection"
-#~ msgstr "Yeni bir oyun koleksiyonu oluştur"

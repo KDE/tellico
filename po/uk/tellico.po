@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-24 00:44+0000\n"
-"PO-Revision-Date: 2023-07-06 06:46+0300\n"
+"PO-Revision-Date: 2023-09-24 08:51+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -269,10 +269,9 @@ msgid "Card Collection"
 msgstr "Збірка карток"
 
 #: src/collectionfactory.cpp:94
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "Збірка відео"
+msgstr "Збірка відеоігор"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1444,10 +1443,9 @@ msgid "Icon"
 msgstr "Піктограма"
 
 #: src/collections/gamecollection.cpp:39
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "Мої відеозаписи"
+msgstr "Мої відеоігри"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -5495,16 +5493,14 @@ msgid "Create a new wine collection"
 msgstr "Створити збірку вин"
 
 #: src/mainwindow.cpp:302
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "Нова збірка &ігор"
+msgstr "Нова збірка &відеоігор"
 
 #: src/mainwindow.cpp:303
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "Створити збірку фільмів"
+msgstr "Створити збірку відеоігор"
 
 #: src/mainwindow.cpp:305
 #, kde-format

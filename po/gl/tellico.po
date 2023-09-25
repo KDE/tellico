@@ -6,14 +6,14 @@
 # Miguel Branco <mgl.branco@gmail.com>, 2013.
 # Marce Villarino <mvillarino@kde-espana.es>, 2013, 2014.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2016, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2020, 2023.
+# SPDX-FileCopyrightText: 2023 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-24 00:44+0000\n"
-"PO-Revision-Date: 2023-07-29 09:53+0200\n"
+"PO-Revision-Date: 2023-09-24 15:32+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -131,7 +131,7 @@ msgstr "Xestor de chaves de citación"
 #: src/bibtexkeydialog.cpp:59 src/bibtexkeydialog.cpp:101
 #, kde-format
 msgid "Checking for entries with duplicate citation keys..."
-msgstr "Comprobando as entradas con chaves de citación baleiras…"
+msgstr "Comprobando as entradas con chaves de citación duplicadas…"
 
 #: src/bibtexkeydialog.cpp:73
 #, kde-format
@@ -269,10 +269,9 @@ msgid "Card Collection"
 msgstr "Colección de cartas"
 
 #: src/collectionfactory.cpp:94
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "Colección de vídeos"
+msgstr "Colección de videoxogos"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1218,7 +1217,7 @@ msgstr "Cuberta"
 #: src/collections/videocollection.cpp:190
 #, kde-format
 msgid "Plot Summary"
-msgstr "Debuxar o resumo"
+msgstr "Resumo do argumento"
 
 #: src/collections/cardcollection.cpp:37
 #, kde-format
@@ -1378,7 +1377,7 @@ msgstr "Artista"
 #: src/collections/comicbookcollection.cpp:76
 #, kde-format
 msgid "Issue"
-msgstr "Publicación"
+msgstr "Número"
 
 #: src/collections/comicbookcollection.cpp:127
 #, kde-format
@@ -1450,10 +1449,9 @@ msgid "Icon"
 msgstr "Icona"
 
 #: src/collections/gamecollection.cpp:39
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "Os meus vídeos"
+msgstr "Os meus videoxogos"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -1576,7 +1574,7 @@ msgstr "PlayStation Vita"
 msgid "Game Boy"
 msgstr "Game Boy"
 
-# skip-rule: PT-2012_colour
+# skip-rule: trasno-colour
 #: src/collections/gamecollection.cpp:254
 #, kde-format
 msgid "Game Boy Color"
@@ -1674,7 +1672,7 @@ msgstr "Álbum"
 #: src/translators/freedbimporter.cpp:460
 #, kde-format
 msgid "Compact Disc"
-msgstr "CD"
+msgstr "Disco compacto"
 
 #: src/collections/musiccollection.cpp:54
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1043
@@ -1692,7 +1690,7 @@ msgstr "Cinta"
 #: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:426
 #, kde-format
 msgid "Vinyl"
-msgstr "Disco"
+msgstr "Disco de vinilo"
 
 #: src/collections/musiccollection.cpp:55
 #: src/collections/videocollection.cpp:55
@@ -1981,11 +1979,13 @@ msgstr "Idioma dos subtítulos"
 msgid "Audio Tracks"
 msgstr "Pistas de son"
 
+# skip-rule: trasno-execute-run2
 #: src/collections/videocollection.cpp:165
 #, kde-format
 msgid "Running Time"
 msgstr "Duración"
 
+# skip-rule: trasno-execute-run2
 #: src/collections/videocollection.cpp:167
 #, kde-format
 msgid "The running time of the video (in minutes)"
@@ -2921,7 +2921,7 @@ msgstr ""
 #: src/core/filehandler.cpp:150
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
-msgstr "Ocorreu un erro d procesado de XML na liña %1, columna %2."
+msgstr "Produciuse un erro d procesado de XML na liña %1, columna %2."
 
 #: src/core/filehandler.cpp:152
 #, kde-format
@@ -3137,7 +3137,7 @@ msgstr "Estanse a xuntar as entradas…"
 #: src/entrymerger.cpp:74
 #, kde-format
 msgid "Total merged/scanned entries: %1/%2"
-msgstr "Entradas xuntadas/analizadas: %1/%2"
+msgstr "Entradas xuntadas/examinadas: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
@@ -3206,13 +3206,13 @@ msgstr "Se se marca, só se exportarán as entradas escollidas."
 #: src/exportdialog.cpp:88
 #, kde-format
 msgid "Export visible fields only"
-msgstr "Exportar só as entradas visíbeis"
+msgstr "Exportar só os campos visíbeis"
 
 #: src/exportdialog.cpp:90
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
-msgstr "Se se marca, só se exportarán as entradas actualmente visíbeis."
+msgstr "Se se marca, só se exportarán os campos actualmente visíbeis."
 
 #: src/exportdialog.cpp:94
 #, kde-format
@@ -3300,7 +3300,7 @@ msgstr ""
 #: src/fetch/vndbfetcher.cpp:182
 #, kde-format
 msgid "The cover image could not be loaded."
-msgstr "Non se puido cargar o cartel."
+msgstr "Non foi posíbel cargar o cartel."
 
 #: src/fetch/allocinefetcher.cpp:319 src/fetch/allocinefetcher.cpp:504
 #, kde-format
@@ -3330,6 +3330,7 @@ msgstr "Título orixinal"
 msgid "&Maximum cast: "
 msgstr "&Máximo elenco: "
 
+# skip-rule: trasno-list
 #: src/fetch/allocinefetcher.cpp:445 src/fetch/filmaffinityfetcher.cpp:482
 #: src/fetch/imdbfetcher.cpp:1836 src/fetch/kinopoiskfetcher.cpp:698
 #: src/fetch/themoviedbfetcher.cpp:627
@@ -3743,7 +3744,7 @@ msgstr "Campos dispoñíbeis"
 #: src/fetch/crossreffetcher.cpp:100 src/fetch/crossreffetcher.cpp:101
 #, kde-format
 msgid "%1 requires a username and password."
-msgstr "%1 require dun nome de persoa usuaria e contrasinal."
+msgstr "%1 require dun nome de usuaria e contrasinal."
 
 #: src/fetch/crossreffetcher.cpp:325
 #, kde-format
@@ -3754,8 +3755,7 @@ msgstr "Nome de &usuaria: "
 #, kde-format
 msgid "A username and password is required to access the CrossRef service."
 msgstr ""
-"Requírese dun nome de persoa usuaria e contrasinal para acceder ao servizo "
-"CrossRef."
+"Requírese dun nome de usuaria e contrasinal para acceder ao servizo CrossRef."
 
 #: src/fetch/crossreffetcher.cpp:335
 #, kde-format
@@ -3806,8 +3806,7 @@ msgstr "Número no catálogo"
 #: src/fetch/discogsfetcher.cpp:347
 #, kde-format
 msgid "The Discogs.com server reports a token error."
-msgstr ""
-"O servidor de Discogs.com informou dun erro co código temporal de acceso."
+msgstr "O servidor de Discogs.com informou dun erro co código temporal."
 
 #: src/fetch/discogsfetcher.cpp:501
 #, kde-format
@@ -3981,6 +3980,7 @@ msgstr "EUA"
 msgid "Filmaster Link"
 msgstr "Ligazón de Filmaster"
 
+# skip-rule: trasno-history
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
 #: src/fetch/gaminghistoryfetcher.cpp:374
@@ -4457,7 +4457,7 @@ msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
 msgstr ""
-"Insira o formato de data que usa o servidor z39.50. Tellico ha intentar "
+"Insira o formato de datos que usa o servidor z39.50. Tellico ha intentar "
 "detectar automaticamente a mellor opción, no caso de escoller <i>Detectar "
 "automaticamente</i>."
 
@@ -4477,8 +4477,8 @@ msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
-"Insira o nome de persoa usuaria para a autenticación coa base de datos do "
-"z39.50. A maioría dos servidores non precisan dun."
+"Insira o nome de usuaria para a autenticación coa base de datos do z39.50. A "
+"maioría dos servidores non precisan dun."
 
 #: src/fetch/z3950fetcher.cpp:698
 #, kde-format
@@ -4558,8 +4558,8 @@ msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
 "values."
 msgstr ""
-"Prema para abrir un campo de edición de texto onde inserir ou editar varios "
-"valores de ISBN ou UPC."
+"Prema para abrir unha caixa de texto onde inserir ou editar varios valores "
+"de ISBN ou UPC."
 
 #: src/fetchdialog.cpp:220
 #, kde-format
@@ -4617,7 +4617,7 @@ msgstr "Obtén máis resultados da fonte de datos actual"
 #: src/fetchdialog.cpp:304
 #, kde-format
 msgid "Clear all search fields and results"
-msgstr "Limpar todos os campos de busca e os resultados"
+msgstr "Baleirar todos os campos de busca e os resultados"
 
 #: src/fetchdialog.cpp:395
 #, kde-format
@@ -4846,7 +4846,7 @@ msgstr "Expandir todos os grupos"
 #: src/groupview.cpp:264
 #, kde-format
 msgid "Collapse All Groups"
-msgstr "Recoller todos os grupos"
+msgstr "Pregar todos os grupos"
 
 #: src/groupview.cpp:266
 #, kde-format
@@ -4995,7 +4995,7 @@ msgstr "Escoller unha imaxe…"
 #: src/gui/imagewidget.cpp:113
 #, kde-format
 msgid "Scan Image..."
-msgstr "Dixitalizar unha imaxe…"
+msgstr "Escanear unha imaxe…"
 
 #: src/gui/imagewidget.cpp:122
 #, kde-format
@@ -5006,7 +5006,7 @@ msgstr "Abrir con…"
 #, kde-format
 msgctxt "Clear image"
 msgid "Clear"
-msgstr "Limpar"
+msgstr "Baleirar"
 
 #: src/gui/imagewidget.cpp:167
 #, kde-format
@@ -5021,7 +5021,7 @@ msgstr "Todas as imaxes (%1)"
 #: src/gui/imagewidget.cpp:321
 #, kde-format
 msgid "Opening the selected scanner failed."
-msgstr "Fallou a abertura do escáner que escolleu."
+msgstr "Produciuse un erro ao abrir o escáner seleccionado."
 
 #: src/gui/imagewidget.cpp:380
 #, kde-format
@@ -5090,7 +5090,7 @@ msgstr "Renomear a columna…"
 #: src/gui/tablefieldwidget.cpp:242 src/gui/tablefieldwidget.cpp:280
 #, kde-format
 msgid "Clear Table"
-msgstr "Limpar a táboa"
+msgstr "Baleirar a táboa"
 
 #: src/gui/tablefieldwidget.cpp:259
 #, kde-format
@@ -5269,7 +5269,7 @@ msgid ""
 "The check-out date is the date that you lent the items. By default, today's "
 "date is used."
 msgstr ""
-"A dada de saída é aquela na que empresta os elementos. De maneira "
+"A data de saída é aquela na que empresta os elementos. De maneira "
 "predeterminada é a data de hoxe."
 
 #: src/loandialog.cpp:175
@@ -5335,7 +5335,7 @@ msgstr "Prestameira (ordenar pola cantidade)"
 #: src/main.cpp:121
 #, kde-format
 msgid "Tellico - collection management software, free and simple"
-msgstr "Tellico — Software de xestión de coleccións, libre e sinxelo"
+msgstr "Tellico — Programa de xestión de coleccións, libre e sinxelo"
 
 #: src/main.cpp:123
 #, kde-format
@@ -5503,16 +5503,14 @@ msgid "Create a new wine collection"
 msgstr "Crea unha colección de viño nova"
 
 #: src/mainwindow.cpp:302
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "Nova colección de &xogos"
+msgstr "Nova colección de videoxo&gos"
 
 #: src/mainwindow.cpp:303
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "Crea unha colección de vídeos nova"
+msgstr "Crea unha colección de videoxogos nova"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -5654,11 +5652,13 @@ msgstr "Importar datos de Collectorz..."
 msgid "Import data from Collectorz"
 msgstr "Importar datos de Collectorz."
 
+# skip-rule: trasno-date_reverse
 #: src/mainwindow.cpp:410
 #, kde-format
 msgid "Import Data Crow Data..."
 msgstr "Importar datos de Data Crow…"
 
+# skip-rule: trasno-date_reverse
 #: src/mainwindow.cpp:411
 #, kde-format
 msgid "Import data from Data Crow"
@@ -5722,17 +5722,19 @@ msgstr "Importar a colección de Goodreads…"
 #: src/mainwindow.cpp:439
 #, kde-format
 msgid "Import a collection from Goodreads.com"
-msgstr "Importar os datos da colección de Goodreads.com"
+msgstr "Importar unha colección de Goodreads.com"
 
+# skip-rule: trasno-library
 #: src/mainwindow.cpp:441
 #, kde-format
 msgid "Import LibraryThing Collection..."
 msgstr "Importar a colección de LibraryThing…"
 
+# skip-rule: trasno-library
 #: src/mainwindow.cpp:442
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
-msgstr "Importar os datos da colección de LibraryThing.com"
+msgstr "Importar unha colección de LibraryThing.com"
 
 #: src/mainwindow.cpp:444
 #, kde-format
@@ -5802,7 +5804,7 @@ msgstr "Importar a colección de BoardGameGeek…"
 #: src/mainwindow.cpp:472
 #, kde-format
 msgid "Import a collection from BoardGameGeek.com"
-msgstr "Importar os datos da colección de BoardGameGeek.com"
+msgstr "Importar unha colección de BoardGameGeek.com"
 
 #: src/mainwindow.cpp:474
 #, kde-format
@@ -6912,7 +6914,7 @@ msgstr "Usa un punto e coma como delimitador."
 #: src/translators/csvexporter.cpp:165
 #, kde-format
 msgid "Tab"
-msgstr "Tabulador"
+msgstr "Tabulación"
 
 #: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:263
 #, kde-format
@@ -6995,7 +6997,7 @@ msgstr "Punto e co&ma"
 #: src/translators/csvimporter.cpp:262
 #, kde-format
 msgid "Ta&b"
-msgstr "Ta&bulador"
+msgstr "Ta&bulación"
 
 #: src/translators/csvimporter.cpp:267
 #, kde-format
@@ -7151,7 +7153,7 @@ msgstr ""
 #: src/translators/gcstarimporter.cpp:271
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
-msgstr "<qt>Este non é un ficheiro correcto de Gastar.</qt>"
+msgstr "<qt>Este non é un ficheiro de datos de GCstar correcto.</qt>"
 
 #: src/translators/goodreadsimporter.cpp:148
 #, kde-format
@@ -7203,11 +7205,13 @@ msgstr "Estanse a cargar os datos…"
 msgid "Loading %1..."
 msgstr "Cargando %1…"
 
+# skip-rule: trasno-library
 #: src/translators/librarythingimporter.cpp:177
 #, kde-format
 msgid "LibraryThing Options"
 msgstr "Opcións de LibraryThing"
 
+# skip-rule: trasno-library
 #: src/translators/librarythingimporter.cpp:180
 #, kde-format
 msgid ""
@@ -7222,6 +7226,7 @@ msgstr ""
 msgid "JSON Files"
 msgstr "Ficheiros JSON"
 
+# skip-rule: trasno-library
 #: src/translators/librarythingimporter.cpp:190
 #, kde-format
 msgid "LibraryThing file:"
@@ -7446,7 +7451,7 @@ msgstr "Buscar"
 #: xslt/tellico2html.xsl:255
 #, kde-format
 msgid "Clear"
-msgstr "Limpar"
+msgstr "Baleirar"
 
 #~ msgid "Game Collection"
 #~ msgstr "Colección de xogos"

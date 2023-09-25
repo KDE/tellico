@@ -10,16 +10,16 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-24 00:44+0000\n"
-"PO-Revision-Date: 2023-07-06 20:53+0200\n"
+"PO-Revision-Date: 2023-09-24 08:22+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.3.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -269,10 +269,9 @@ msgid "Card Collection"
 msgstr "Zbirka kart"
 
 #: src/collectionfactory.cpp:94
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "Zbirka video posnetkov"
+msgstr "Zbirka video igric"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1447,10 +1446,9 @@ msgid "Icon"
 msgstr "Ikona"
 
 #: src/collections/gamecollection.cpp:39
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "Moji videi"
+msgstr "Moje video igrice"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -5490,16 +5488,14 @@ msgid "Create a new wine collection"
 msgstr "Ustvari novo zbirko vin"
 
 #: src/mainwindow.cpp:302
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "Nova zbirka &iger"
+msgstr "Nova zbirka video i&gric"
 
 #: src/mainwindow.cpp:303
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "Ustvari novo video zbirko"
+msgstr "Ustvari novo zbirko video igric"
 
 #: src/mainwindow.cpp:305
 #, kde-format

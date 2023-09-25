@@ -5,7 +5,7 @@
 #
 # Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2003, 2004, 2005, 2006, 2007.
 # Ale Hamann <amadeus@bbs.frc.utn.edu.ar>, 2006, 2007, 2008.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
 # Kira J. Fernandez <kirajfdez@gmail.com>, 2010, 2011.
 # Huever, 2010.
 # Kira J. Fernandez <kirajfdez@gmail.es>, 2011.
@@ -15,14 +15,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-24 00:44+0000\n"
-"PO-Revision-Date: 2023-07-06 18:08+0200\n"
+"PO-Revision-Date: 2023-09-25 00:45+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -271,10 +271,9 @@ msgid "Card Collection"
 msgstr "Colección de tarjetas"
 
 #: src/collectionfactory.cpp:94
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "Colección de vídeos"
+msgstr "Colección de videojuegos"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1460,10 +1459,9 @@ msgid "Icon"
 msgstr "Icono"
 
 #: src/collections/gamecollection.cpp:39
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "Mis vídeos"
+msgstr "Mis videojuegos"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -5536,16 +5534,14 @@ msgid "Create a new wine collection"
 msgstr "Crear una nueva colección de vinos"
 
 #: src/mainwindow.cpp:302
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "Nueva colección de jue&gos"
+msgstr "Nueva colección de videojue&gos"
 
 #: src/mainwindow.cpp:303
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "Crear una nueva colección de vídeos"
+msgstr "Crear una nueva colección de videojuegos"
 
 #: src/mainwindow.cpp:305
 #, kde-format
