@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-23 02:24+0000\n"
-"PO-Revision-Date: 2023-08-04 09:39+0200\n"
+"PO-Revision-Date: 2023-09-24 10:49+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -611,7 +611,7 @@ msgstr "Mantín els valors modificats"
 #: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:518
 #, kde-format
 msgid "New Field %1"
-msgstr "Nou camp %1"
+msgstr "Camp nou %1"
 
 #: src/collectionfieldsdialog.cpp:804
 #, kde-format
@@ -5454,7 +5454,7 @@ msgstr "Col·lecció nova"
 #: src/mainwindow.cpp:256
 #, kde-format
 msgid "Create a new collection"
-msgstr "Crear una col·lecció nova"
+msgstr "Crea una col·lecció nova"
 
 #: src/mainwindow.cpp:275
 #, kde-format
@@ -5464,7 +5464,7 @@ msgstr "Col·lecció nova de lli&bres"
 #: src/mainwindow.cpp:276
 #, kde-format
 msgid "Create a new book collection"
-msgstr "Crear una nova col·lecció de llibres"
+msgstr "Crea una col·lecció nova de llibres"
 
 #: src/mainwindow.cpp:278
 #, kde-format
@@ -5474,7 +5474,7 @@ msgstr "B&ibliografia nova"
 #: src/mainwindow.cpp:279
 #, kde-format
 msgid "Create a new bibtex bibliography"
-msgstr "Crea una nova bibliografia de bibtex"
+msgstr "Crea una bibliografia nova de bibtex"
 
 #: src/mainwindow.cpp:281
 #, kde-format
@@ -5484,7 +5484,7 @@ msgstr "Col·lecció nova de llibres de &còmics"
 #: src/mainwindow.cpp:282
 #, kde-format
 msgid "Create a new comic book collection"
-msgstr "Crea una nova col·lecció de còmics"
+msgstr "Crea una col·lecció nova de còmics"
 
 #: src/mainwindow.cpp:284
 #, kde-format
@@ -5494,7 +5494,7 @@ msgstr "Col·lecció nova de &vídeos"
 #: src/mainwindow.cpp:285
 #, kde-format
 msgid "Create a new video collection"
-msgstr "Crea una nova col·lecció de vídeos"
+msgstr "Crea una col·lecció nova de vídeos"
 
 #: src/mainwindow.cpp:287
 #, kde-format
@@ -5504,7 +5504,7 @@ msgstr "Col·lecció nova de &música"
 #: src/mainwindow.cpp:288
 #, kde-format
 msgid "Create a new music collection"
-msgstr "Crea una nova col·lecció de música"
+msgstr "Crea una col·lecció nova de música"
 
 #: src/mainwindow.cpp:290
 #, kde-format
@@ -5514,7 +5514,7 @@ msgstr "Col·lecció nova de m&onedes"
 #: src/mainwindow.cpp:291
 #, kde-format
 msgid "Create a new coin collection"
-msgstr "Crea una nova col·lecció de monedes"
+msgstr "Crea una col·lecció nova de monedes"
 
 #: src/mainwindow.cpp:293
 #, kde-format
@@ -5524,7 +5524,7 @@ msgstr "Col·lecció nova de &segells"
 #: src/mainwindow.cpp:294
 #, kde-format
 msgid "Create a new stamp collection"
-msgstr "Crea una nova col·lecció de segells"
+msgstr "Crea una col·lecció nova de segells"
 
 #: src/mainwindow.cpp:296
 #, kde-format
@@ -5534,7 +5534,7 @@ msgstr "Col·lecció nova de cr&omos"
 #: src/mainwindow.cpp:297
 #, kde-format
 msgid "Create a new trading card collection"
-msgstr "Crea una nova col·lecció de targetes comercials"
+msgstr "Crea una col·lecció nova de targetes comercials"
 
 #: src/mainwindow.cpp:299
 #, kde-format
@@ -5544,7 +5544,7 @@ msgstr "Col·lecció nova de &vins"
 #: src/mainwindow.cpp:300
 #, kde-format
 msgid "Create a new wine collection"
-msgstr "Crea una nova col·lecció de vins"
+msgstr "Crea una col·lecció nova de vins"
 
 #: src/mainwindow.cpp:302
 #, kde-format
@@ -5564,7 +5564,7 @@ msgstr "Col·lecció nova de jocs de &taula"
 #: src/mainwindow.cpp:306
 #, kde-format
 msgid "Create a new board game collection"
-msgstr "Crea una nova col·lecció de jocs de taula"
+msgstr "Crea una col·lecció nova de jocs de taula"
 
 #: src/mainwindow.cpp:308
 #, kde-format
@@ -5574,7 +5574,7 @@ msgstr "Catàleg nou de fi&txers"
 #: src/mainwindow.cpp:309
 #, kde-format
 msgid "Create a new file catalog"
-msgstr "Crea un nou catàleg de fitxers"
+msgstr "Crea un catàleg nou de fitxers"
 
 #: src/mainwindow.cpp:312
 #, kde-format
@@ -5584,7 +5584,7 @@ msgstr "Col·lecció nova personal&isada"
 #: src/mainwindow.cpp:313
 #, kde-format
 msgid "Create a new custom collection"
-msgstr "Crea una nova col·lecció personalitzada"
+msgstr "Crea una col·lecció nova personalitzada"
 
 #: src/mainwindow.cpp:324
 #, kde-format
@@ -6505,7 +6505,7 @@ msgid ""
 "be saved and the images will be transferred to the new location."
 msgstr ""
 "Algunes imatges no estan guardades en la ubicació configurada. El fitxer "
-"actual s'ha de guardar i les imatges es transferiran a la nova ubicació."
+"actual s'ha de guardar i les imatges es transferiran a la ubicació nova."
 
 #: src/mainwindow.cpp:2386
 #, kde-format
@@ -7341,8 +7341,8 @@ msgid ""
 "data source with your account information."
 msgstr ""
 "Tellico pot baixar informació quant a les entrades amb DOI des de CrossRef."
-"org. No obstant açò, haureu de crear un compte CrossRef i afegir una nova "
-"font de dades amb la informació sobre el compte."
+"org. No obstant açò, haureu de crear un compte CrossRef i afegir una font "
+"nova de dades amb la informació sobre el compte."
 
 #: src/translators/risimporter.cpp:337
 #, kde-format
