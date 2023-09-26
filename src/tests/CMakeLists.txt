@@ -846,6 +846,12 @@ ecm_add_test(upcitemdbfetchertest.cpp
     LINK_LIBRARIES fetcherstest translatorstest ${TELLICO_BTPARSE_LIBS} ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(vgcollectfetchertest.cpp
+             ../fetch/vgcollectfetcher.cpp
+    TEST_NAME vgcollectfetchertest
+    LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(videogamegeekfetchertest.cpp
              ../fetch/videogamegeekfetcher.cpp
     TEST_NAME videogamegeekfetchertest

@@ -1,3 +1,7 @@
+2023-09-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Added VGCollect data source.
+
 2023-09-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with writing some relative url links (Bug 472778).
