@@ -267,10 +267,9 @@ msgid "Card Collection"
 msgstr "Sbírka karet"
 
 #: src/collectionfactory.cpp:94
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "Video sbírka"
+msgstr ""
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1446,10 +1445,9 @@ msgid "Icon"
 msgstr "Ikona"
 
 #: src/collections/gamecollection.cpp:39
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "Moje videa"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -5480,16 +5478,14 @@ msgid "Create a new wine collection"
 msgstr "Vytvořit novou sbírku vín"
 
 #: src/mainwindow.cpp:302
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "Nová sbírka &her"
+msgstr ""
 
 #: src/mainwindow.cpp:303
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "Vytvořit novou video sbírku"
+msgstr ""
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -7410,12 +7406,3 @@ msgstr "Hledat"
 #, kde-format
 msgid "Clear"
 msgstr "Vymazat"
-
-#~ msgid "Game Collection"
-#~ msgstr "Sbírka her"
-
-#~ msgid "My Games"
-#~ msgstr "Moje hry"
-
-#~ msgid "Create a new game collection"
-#~ msgstr "Vytvořit novou sbírku her"
