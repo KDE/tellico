@@ -568,8 +568,10 @@ QString IGDBFetcher::defaultName() {
 }
 
 QString IGDBFetcher::defaultIcon() {
-  return favIcon("http://www.igdb.com");
-}
+  // IGDB blocks favicon requests without a referer seemingly
+  return favIcon(QUrl(QLatin1String("https://www.igdb.com")),
+                 QUrl(QLatin1String("https://tellico-project.org/img/igdb-favicon.ico")));
+  }
 
 Tellico::StringHash IGDBFetcher::allOptionalFields() {
   StringHash hash;

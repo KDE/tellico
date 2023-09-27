@@ -595,7 +595,9 @@ QString TheGamesDBFetcher::defaultName() {
 }
 
 QString TheGamesDBFetcher::defaultIcon() {
-  return favIcon("https://thegamesdb.net");
+  // favicon is too big for the KIO job to download
+  return favIcon(QUrl(QLatin1String("https://thegamesdb.net")),
+                 QUrl(QLatin1String("https://tellico-project.org/img/thegamesdb-favicon.ico")));
 }
 
 Tellico::StringHash TheGamesDBFetcher::allOptionalFields() {

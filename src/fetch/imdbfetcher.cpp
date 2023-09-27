@@ -1793,7 +1793,8 @@ QString IMDBFetcher::defaultName() {
 }
 
 QString IMDBFetcher::defaultIcon() {
-  return favIcon("https://www.imdb.com");
+  return favIcon(QUrl(QLatin1String("https://www.imdb.com")),
+                 QUrl(QLatin1String("https://m.media-amazon.com/images/G/01/imdb/images-ANDW73HA/favicon_desktop_32x32._CB1582158068_.png")));
 }
 
 //static
