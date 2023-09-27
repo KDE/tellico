@@ -42,10 +42,9 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
-#include <QUrlQuery>
 
 namespace {
-  static const char* VGCOLLECT_BASE_URL = "https://vgcollect.com/search/";
+  static const char* VGCOLLECT_BASE_URL = "https://vgcollect.com/search/advanced";
 }
 
 using namespace Tellico;
@@ -75,24 +74,26 @@ void VGCollectFetcher::search() {
   m_matches.clear();
 
   QUrl u(QString::fromLatin1(VGCOLLECT_BASE_URL));
-  QUrlQuery q;
-  q.addQueryItem(QStringLiteral("release_type"), QStringLiteral("0"));
+  QString urlPath(QStringLiteral("/no-filter/%1/no-filter/0/ALL/ALL/ALL/ALL/no-filter/%2/%3"));
 
   switch(request().key()) {
     case Keyword:
       {
         QString value = request().value();
+        QString yearStart, yearEnd;
         // pull out year, keep the regexp a little loose
-        QRegularExpression yearRX(QStringLiteral("\\s*[0-9]{4}\\s*"));
+        QRegularExpression yearRX(QStringLiteral("\\s*[12][0-9]{3}\\s*"));
         QRegularExpressionMatch match = yearRX.match(value);
         if(match.hasMatch()) {
           // fragile, but the form uses a year index
-          const QString year = match.captured(0).trimmed();
-          q.addQueryItem(QStringLiteral("release_date_start"), year + QLatin1String("-01-01"));
+          yearStart = match.captured(0).trimmed() + QLatin1String("-01-01");
+          yearEnd = match.captured(0).trimmed() + QLatin1String("-12-31");
           value = value.remove(yearRX);
+        } else {
+          yearStart = QStringLiteral("no-filter");
+          yearEnd = yearStart;
         }
-        q.addQueryItem(QStringLiteral("search-query"), value);
-        u.setPath(u.path() + value);
+        urlPath = urlPath.arg(value, yearStart, yearEnd);
       }
       break;
 
@@ -101,10 +102,11 @@ void VGCollectFetcher::search() {
       stop();
       return;
   }
-//  u.setQuery(q);
+  u.setPath(u.path() + urlPath);
 //  myDebug() << "url:" << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->addMetaData(QStringLiteral("referrer"), QString::fromLatin1("https://vgcollect.com/search"));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &VGCollectFetcher::slotComplete);
@@ -178,8 +180,11 @@ void VGCollectFetcher::slotComplete(KJob*) {
        platform == QLatin1String("Clothing") ||
        platform == QLatin1String("Merchandise") ||
        platform == QLatin1String("Soundtrack") ||
+       platform == QLatin1String("Books") ||
+       platform == QLatin1String("Comics") ||
        platform == QLatin1String("GOG.com") ||
-       platform == QLatin1String("Amiibo Figures [JP]") ||
+       platform.startsWith(QLatin1String("Amiibo Figures")) ||
+       platform.contains(QLatin1String("Video")) ||
        platform == QLatin1String("Steam") ||
        platform == QLatin1String("Consoles") ||
        platform == QLatin1String("Accessory")) {
@@ -224,6 +229,9 @@ Tellico::Data::EntryPtr VGCollectFetcher::fetchEntryHook(uint uid_) {
 
   Data::CollPtr coll(new Data::GameCollection(true));
   entry = new Data::Entry(coll);
+  parseEntry(entry, results);
+  m_entries.insert(uid_, entry);
+
   const QString vgcollect(QStringLiteral("vgcollect"));
   if(optionalFields().contains(vgcollect)) {
     Data::FieldPtr field(new Data::Field(vgcollect, i18n("VGCollect Link"), Data::Field::URL));
@@ -231,9 +239,7 @@ Tellico::Data::EntryPtr VGCollectFetcher::fetchEntryHook(uint uid_) {
     coll->addField(field);
     entry->setField(vgcollect, url.url());
   }
-  m_entries.insert(uid_, entry);
 
-  parseEntry(entry, results);
   // remove url to indicate the entry is fully populated
   m_matches.remove(uid_);
   return entry;
@@ -311,8 +317,8 @@ void VGCollectFetcher::populateValue(Data::EntryPtr entry_, const QString& heade
     else if(value.contains(QLatin1String("ratings/ka.png")))  esrb = Data::GameCollection::Everyone;
     else if(value.contains(QLatin1String("ratings/e10.png"))) esrb = Data::GameCollection::Everyone10;
     else if(value.contains(QLatin1String("ratings/ec.png"))) esrb = Data::GameCollection::EarlyChildhood;
-    else if(value.contains(QLatin1String("ratings/a.png")))  esrb = Data::GameCollection::Adults;
     else if(value.contains(QLatin1String("ratings/m.png")))  esrb = Data::GameCollection::Mature;
+    else if(value.contains(QLatin1String("ratings/ao.png")))  esrb = Data::GameCollection::Adults;
     else if(value.contains(QLatin1String("ratings/pegi-3")))  pegi = QLatin1String("PEGI 3");
     else if(value.contains(QLatin1String("ratings/pegi-7")))  pegi = QLatin1String("PEGI 7");
     else if(value.contains(QLatin1String("ratings/pegi-12"))) pegi = QLatin1String("PEGI 12");
