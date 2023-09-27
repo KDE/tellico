@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-24 00:44+0000\n"
+"POT-Creation-Date: 2023-09-27 00:44+0000\n"
 "PO-Revision-Date: 2023-08-28 15:32+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -733,6 +733,7 @@ msgstr "Johdannaisarvoinen kenttä vaatii arvomallin."
 #: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:260
 #: src/fetch/thetvdbfetcher.cpp:265 src/fetch/tvmazefetcher.cpp:178
 #: src/fetch/tvmazefetcher.cpp:183 src/fetch/upcitemdbfetcher.cpp:208
+#: src/fetch/vgcollectfetcher.cpp:230 src/fetch/vgcollectfetcher.cpp:335
 #: src/field.cpp:39 src/field.cpp:80 src/field.cpp:299 src/field.cpp:328
 #: src/field.cpp:333 src/translators/gcstarimporter.cpp:89
 #, kde-format
@@ -3295,7 +3296,7 @@ msgstr ""
 #: src/fetch/omdbfetcher.cpp:183 src/fetch/thegamesdbfetcher.cpp:172
 #: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:351
 #: src/fetch/tvmazefetcher.cpp:269 src/fetch/upcitemdbfetcher.cpp:250
-#: src/fetch/vndbfetcher.cpp:182
+#: src/fetch/vgcollectfetcher.cpp:280 src/fetch/vndbfetcher.cpp:182
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "Kansikuvaa ei voitu ladata."
@@ -3663,7 +3664,8 @@ msgstr "AnimeNfo-arvostelu"
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
-#: src/fetch/upcitemdbfetcher.cpp:465 src/fetch/vndbfetcher.cpp:440
+#: src/fetch/upcitemdbfetcher.cpp:465 src/fetch/vgcollectfetcher.cpp:376
+#: src/fetch/vndbfetcher.cpp:440
 #, kde-format
 msgid "This source has no options."
 msgstr "Tällä lähteellä ei ole valintoja."
@@ -3713,7 +3715,7 @@ msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:818 src/fetch/giantbombfetcher.cpp:207
 #: src/fetch/igdbfetcher.cpp:576 src/fetch/mobygamesfetcher.cpp:638
-#: src/field.cpp:326
+#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:326
 #, kde-format
 msgid "PEGI Rating"
 msgstr "PEGI-luokka"
@@ -3792,6 +3794,7 @@ msgstr "Discogs-linkki"
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:513
 #: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:207 src/fetch/upcitemdbfetcher.cpp:458
+#: src/fetch/vgcollectfetcher.cpp:334 src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
 msgid "Barcode"
 msgstr "Viivakoodi"
@@ -4350,6 +4353,12 @@ msgstr "TheTVDB-linkki"
 #, kde-format
 msgid "Subscriber PIN: "
 msgstr "Tilaajan PIN:"
+
+#: src/fetch/vgcollectfetcher.cpp:229 src/fetch/vgcollectfetcher.cpp:367
+#, fuzzy, kde-format
+#| msgid "Colnect Link"
+msgid "VGCollect Link"
+msgstr "Colnect-linkki"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
