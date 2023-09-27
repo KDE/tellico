@@ -630,7 +630,7 @@ QString MobyGamesFetcher::defaultName() {
 }
 
 QString MobyGamesFetcher::defaultIcon() {
-  return favIcon("http://www.mobygames.com");
+  return favIcon("https://www.mobygames.com/static/img/favicon.ico");
 }
 
 Tellico::StringHash MobyGamesFetcher::allOptionalFields() {

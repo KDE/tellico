@@ -364,7 +364,7 @@ QString VGCollectFetcher::defaultName() {
 }
 
 QString VGCollectFetcher::defaultIcon() {
-  return favIcon("https://vgcollect.com");
+  return favIcon("https://vgcollect.com/assets/favicon.ico");
 }
 
 //static

@@ -300,7 +300,7 @@ QString CrossRefFetcher::defaultName() {
 }
 
 QString CrossRefFetcher::defaultIcon() {
-  return favIcon("http://crossref.org");
+  return favIcon("https://www.crossref.org");
 }
 
 CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetcher* fetcher_)

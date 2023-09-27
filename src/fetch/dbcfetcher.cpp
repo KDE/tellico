@@ -146,7 +146,7 @@ QString DBCFetcher::defaultName() {
 }
 
 QString DBCFetcher::defaultIcon() {
-  return favIcon("http://dbc.dk");
+  return favIcon("https://www.dbc.dk/++theme++dbc.theme/favicon.ico");
 }
 
 Tellico::StringHash DBCFetcher::allOptionalFields() {

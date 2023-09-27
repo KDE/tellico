@@ -170,7 +170,7 @@ QString Fetcher::favIcon(const char* url_) {
   return favIcon(QUrl(QString::fromLatin1(url_)));
 }
 
-QString Fetcher::favIcon(const QUrl& url_) {
+QString Fetcher::favIcon(const QUrl& url_, const QUrl& iconUrl_) {
   if(!url_.isValid()) {
     return QString();
   }
@@ -178,19 +178,22 @@ QString Fetcher::favIcon(const QUrl& url_) {
 #if KIO_VERSION >= QT_VERSION_CHECK(5,19,0)
   KIO::FavIconRequestJob* job = new KIO::FavIconRequestJob(url_);
   // if the url has a meaningful path, then use it as the icon url
-  if(url_.path().size() > 4 && url_.path().contains(QLatin1Char('.'))) {
+  if(!iconUrl_.isEmpty()) {
+    job->setIconUrl(iconUrl_);
+  } else if(url_.path().size() > 4 && url_.path().contains(QLatin1Char('.'))) {
     job->setIconUrl(url_);
   }
-/*
+
   connect(job, &KIO::FavIconRequestJob::result, [job](KJob *) {
          if(job->error()) {
-           myDebug() << "error:" << job->errorString();
+           myDebug() << job->hostUrl().host() << "error:" << job->errorString();
+         } else if(job->iconFile().isEmpty()) {
+//           myDebug() << "no favIcon found for" << job->hostUrl();
          }
      });
-*/
 #endif
-  QString name = KIO::favIconForUrl(url_);
 
+  QString name = KIO::favIconForUrl(url_);
   // favIcons start with "/". being an absolute file path from FavIconFetchJob
   // but KIconLoader still expects them to start with "favicons/" and appends ".png"
   // since the rest of Tellico assumes KDE4 behavior, adjust here

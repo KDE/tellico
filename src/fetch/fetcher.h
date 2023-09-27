@@ -135,7 +135,7 @@ public:
   virtual ConfigWidget* configWidget(QWidget* parent) const = 0;
 
   static QString favIcon(const char* url);
-  static QString favIcon(const QUrl& url);
+  static QString favIcon(const QUrl& url, const QUrl& iconUrl=QUrl());
 
 Q_SIGNALS:
   void signalResultFound(Tellico::Fetch::FetchResult* result);
