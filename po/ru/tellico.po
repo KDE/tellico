@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-26 02:39+0000\n"
+"POT-Creation-Date: 2023-09-28 02:28+0000\n"
 "PO-Revision-Date: 2022-03-21 17:07+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -745,7 +745,7 @@ msgstr "Для поля с зависимым значением необход�
 #: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:260
 #: src/fetch/thetvdbfetcher.cpp:265 src/fetch/tvmazefetcher.cpp:178
 #: src/fetch/tvmazefetcher.cpp:183 src/fetch/upcitemdbfetcher.cpp:208
-#: src/fetch/vgcollectfetcher.cpp:230 src/fetch/vgcollectfetcher.cpp:335
+#: src/fetch/vgcollectfetcher.cpp:238 src/fetch/vgcollectfetcher.cpp:341
 #: src/field.cpp:39 src/field.cpp:80 src/field.cpp:299 src/field.cpp:328
 #: src/field.cpp:333 src/translators/gcstarimporter.cpp:89
 #, kde-format
@@ -990,7 +990,7 @@ msgid "Designer"
 msgstr "Дизайнер"
 
 #: src/collections/boardgamecollection.cpp:80
-#: src/fetch/thegamesdbfetcher.cpp:271 src/fetch/thegamesdbfetcher.cpp:603
+#: src/fetch/thegamesdbfetcher.cpp:271 src/fetch/thegamesdbfetcher.cpp:605
 #, kde-format
 msgid "Number of Players"
 msgstr "Число игроков"
@@ -3279,11 +3279,11 @@ msgid "SAO/NASA Astrophysics Data System"
 msgstr ""
 
 #: src/fetch/adsfetcher.cpp:331 src/fetch/amazonfetcher.cpp:1093
-#: src/fetch/bibliosharefetcher.cpp:172 src/fetch/comicvinefetcher.cpp:232
+#: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:232
 #: src/fetch/crossreffetcher.cpp:314 src/fetch/discogsfetcher.cpp:525
 #: src/fetch/giantbombfetcher.cpp:219 src/fetch/googlebookfetcher.cpp:382
 #: src/fetch/isbndbfetcher.cpp:395 src/fetch/mobygamesfetcher.cpp:652
-#: src/fetch/omdbfetcher.cpp:411 src/fetch/thegamesdbfetcher.cpp:635
+#: src/fetch/omdbfetcher.cpp:411 src/fetch/thegamesdbfetcher.cpp:637
 #: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:589
 #, kde-format
 msgid ""
@@ -3295,17 +3295,17 @@ msgstr ""
 "href='%1'>зарегистрируйтесь</a> и введите свои данные ниже."
 
 #: src/fetch/adsfetcher.cpp:343 src/fetch/amazonfetcher.cpp:1105
-#: src/fetch/bibliosharefetcher.cpp:184 src/fetch/comicvinefetcher.cpp:244
+#: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:244
 #: src/fetch/entrezfetcher.cpp:531 src/fetch/giantbombfetcher.cpp:231
 #: src/fetch/googlebookfetcher.cpp:394 src/fetch/isbndbfetcher.cpp:407
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/numistafetcher.cpp:416
-#: src/fetch/omdbfetcher.cpp:423 src/fetch/thegamesdbfetcher.cpp:647
+#: src/fetch/omdbfetcher.cpp:423 src/fetch/thegamesdbfetcher.cpp:649
 #: src/fetch/themoviedbfetcher.cpp:603
 #, kde-format
 msgid "Access key: "
 msgstr "Ключ доступа: "
 
-#: src/fetch/adsfetcher.cpp:349 src/fetch/bibliosharefetcher.cpp:190
+#: src/fetch/adsfetcher.cpp:349 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:250 src/fetch/entrezfetcher.cpp:537
 #: src/fetch/giantbombfetcher.cpp:237 src/fetch/googlebookfetcher.cpp:400
 #: src/fetch/themoviedbfetcher.cpp:609 src/fetch/thetvdbfetcher.cpp:607
@@ -3330,7 +3330,7 @@ msgstr ""
 #: src/fetch/omdbfetcher.cpp:183 src/fetch/thegamesdbfetcher.cpp:172
 #: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:351
 #: src/fetch/tvmazefetcher.cpp:269 src/fetch/upcitemdbfetcher.cpp:250
-#: src/fetch/vgcollectfetcher.cpp:280 src/fetch/vndbfetcher.cpp:182
+#: src/fetch/vgcollectfetcher.cpp:286 src/fetch/vndbfetcher.cpp:182
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "Изображение обложки загрузить не удалось."
@@ -3346,7 +3346,7 @@ msgstr "Ссылка Allocine"
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:617
 #: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:321
 #: src/fetch/filmaffinityfetcher.cpp:456 src/fetch/imdbfetcher.cpp:887
-#: src/fetch/imdbfetcher.cpp:1806 src/fetch/kinopoiskfetcher.cpp:341
+#: src/fetch/imdbfetcher.cpp:1807 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:263 src/fetch/kinoteatrfetcher.cpp:507
 #: src/fetch/omdbfetcher.cpp:263 src/fetch/themoviedbfetcher.cpp:333
@@ -3357,14 +3357,14 @@ msgid "Original Title"
 msgstr "Оригинальное название"
 
 #: src/fetch/allocinefetcher.cpp:432 src/fetch/filmaffinityfetcher.cpp:469
-#: src/fetch/imdbfetcher.cpp:1823 src/fetch/kinopoiskfetcher.cpp:685
+#: src/fetch/imdbfetcher.cpp:1824 src/fetch/kinopoiskfetcher.cpp:685
 #: src/fetch/themoviedbfetcher.cpp:614
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Максимальное число актёров: "
 
 #: src/fetch/allocinefetcher.cpp:445 src/fetch/filmaffinityfetcher.cpp:482
-#: src/fetch/imdbfetcher.cpp:1836 src/fetch/kinopoiskfetcher.cpp:698
+#: src/fetch/imdbfetcher.cpp:1837 src/fetch/kinopoiskfetcher.cpp:698
 #: src/fetch/themoviedbfetcher.cpp:627
 #, kde-format
 msgid ""
@@ -3595,7 +3595,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:213
 #: src/fetch/colnectfetcher.cpp:947 src/fetch/itunesfetcher.cpp:517
 #: src/fetch/mobygamesfetcher.cpp:672 src/fetch/rpggeekfetcher.cpp:222
-#: src/fetch/thegamesdbfetcher.cpp:655 src/fetch/videogamegeekfetcher.cpp:213
+#: src/fetch/thegamesdbfetcher.cpp:657 src/fetch/videogamegeekfetcher.cpp:213
 #, kde-format
 msgid "&Image size: "
 msgstr "&Размер изображения: "
@@ -3603,12 +3603,12 @@ msgstr "&Размер изображения: "
 #: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:217
 #: src/fetch/colnectfetcher.cpp:951 src/fetch/itunesfetcher.cpp:521
 #: src/fetch/mobygamesfetcher.cpp:675 src/fetch/rpggeekfetcher.cpp:226
-#: src/fetch/thegamesdbfetcher.cpp:658 src/fetch/videogamegeekfetcher.cpp:217
+#: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:217
 #, kde-format
 msgid "Small Image"
 msgstr "Маленькое изображение"
 
-#: src/fetch/amazonfetcher.cpp:1150 src/fetch/thegamesdbfetcher.cpp:659
+#: src/fetch/amazonfetcher.cpp:1150 src/fetch/thegamesdbfetcher.cpp:661
 #, kde-format
 msgid "Medium Image"
 msgstr "Среднее изображение"
@@ -3617,7 +3617,7 @@ msgstr "Среднее изображение"
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:218
 #: src/fetch/colnectfetcher.cpp:952 src/fetch/itunesfetcher.cpp:522
 #: src/fetch/mobygamesfetcher.cpp:677 src/fetch/rpggeekfetcher.cpp:227
-#: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:218
+#: src/fetch/thegamesdbfetcher.cpp:662 src/fetch/videogamegeekfetcher.cpp:218
 #, kde-format
 msgid "Large Image"
 msgstr "Большое изображение"
@@ -3625,13 +3625,13 @@ msgstr "Большое изображение"
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:216
 #: src/fetch/colnectfetcher.cpp:950 src/fetch/itunesfetcher.cpp:520
 #: src/fetch/mobygamesfetcher.cpp:678 src/fetch/rpggeekfetcher.cpp:225
-#: src/fetch/thegamesdbfetcher.cpp:661 src/fetch/videogamegeekfetcher.cpp:216
+#: src/fetch/thegamesdbfetcher.cpp:663 src/fetch/videogamegeekfetcher.cpp:216
 #, kde-format
 msgid "No Image"
 msgstr "Нет изображения"
 
-#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:1845
-#: src/fetch/mobygamesfetcher.cpp:682 src/fetch/thegamesdbfetcher.cpp:665
+#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:1846
+#: src/fetch/mobygamesfetcher.cpp:682 src/fetch/thegamesdbfetcher.cpp:667
 #, kde-format
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
@@ -3657,7 +3657,7 @@ msgstr ""
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
 #: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:952
-#: src/fetch/imdbfetcher.cpp:1804 src/fetch/moviemeterfetcher.cpp:225
+#: src/fetch/imdbfetcher.cpp:1805 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:258
 #: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:576
 #: src/fetch/tvmazefetcher.cpp:193 src/fetch/tvmazefetcher.cpp:385
@@ -3671,7 +3671,7 @@ msgid "Distributor"
 msgstr "Распространитель"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
-#: src/fetch/imdbfetcher.cpp:1807 src/fetch/itunesfetcher.cpp:506
+#: src/fetch/imdbfetcher.cpp:1808 src/fetch/itunesfetcher.cpp:506
 #: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:576
 #: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:336
 #, kde-format
@@ -3690,16 +3690,16 @@ msgstr "Рейтинг AnimeNfo"
 
 #: src/fetch/animenfofetcher.cpp:505 src/fetch/arxivfetcher.cpp:337
 #: src/fetch/bedethequefetcher.cpp:465 src/fetch/bibsonomyfetcher.cpp:190
-#: src/fetch/dbcfetcher.cpp:160 src/fetch/dblpfetcher.cpp:129
+#: src/fetch/dbcfetcher.cpp:160 src/fetch/dblpfetcher.cpp:132
 #: src/fetch/doubanfetcher.cpp:625 src/fetch/dvdfrfetcher.cpp:190
 #: src/fetch/filmasterfetcher.cpp:323 src/fetch/gaminghistoryfetcher.cpp:438
 #: src/fetch/googlescholarfetcher.cpp:277 src/fetch/hathitrustfetcher.cpp:318
-#: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:614
+#: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:616
 #: src/fetch/kinofetcher.cpp:388 src/fetch/kinoteatrfetcher.cpp:515
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
-#: src/fetch/upcitemdbfetcher.cpp:465 src/fetch/vgcollectfetcher.cpp:376
+#: src/fetch/upcitemdbfetcher.cpp:465 src/fetch/vgcollectfetcher.cpp:382
 #: src/fetch/vndbfetcher.cpp:440
 #, kde-format
 msgid "This source has no options."
@@ -3749,8 +3749,8 @@ msgid "Michel"
 msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:818 src/fetch/giantbombfetcher.cpp:207
-#: src/fetch/igdbfetcher.cpp:576 src/fetch/mobygamesfetcher.cpp:638
-#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:326
+#: src/fetch/igdbfetcher.cpp:578 src/fetch/mobygamesfetcher.cpp:638
+#: src/fetch/vgcollectfetcher.cpp:374 src/field.cpp:326
 #, kde-format
 msgid "PEGI Rating"
 msgstr "Рейтинг PEGI"
@@ -3830,7 +3830,7 @@ msgstr "Ссылка Discogs"
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:513
 #: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:207 src/fetch/upcitemdbfetcher.cpp:458
-#: src/fetch/vgcollectfetcher.cpp:334 src/fetch/vgcollectfetcher.cpp:369
+#: src/fetch/vgcollectfetcher.cpp:340 src/fetch/vgcollectfetcher.cpp:375
 #, kde-format
 msgid "Barcode"
 msgstr "Штрихкод"
@@ -4092,7 +4092,7 @@ msgstr "Классификация Библиотеки Конгресса"
 msgid "Internet Bookshop (ibs.it)"
 msgstr "Интернет-магазин книг (ibs.it)"
 
-#: src/fetch/igdbfetcher.cpp:368 src/fetch/igdbfetcher.cpp:577
+#: src/fetch/igdbfetcher.cpp:368 src/fetch/igdbfetcher.cpp:579
 #, kde-format
 msgid "IGDB Link"
 msgstr "Ссылка IGDB"
@@ -4102,8 +4102,8 @@ msgstr "Ссылка IGDB"
 msgid "Internet Game Database (IGDB.com)"
 msgstr "Интернет-каталог игр (IGDB.com)"
 
-#: src/fetch/igdbfetcher.cpp:578 src/fetch/mobygamesfetcher.cpp:640
-#: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:344
+#: src/fetch/igdbfetcher.cpp:580 src/fetch/mobygamesfetcher.cpp:640
+#: src/fetch/thegamesdbfetcher.cpp:606 src/field.cpp:344
 #, kde-format
 msgid "Screenshot"
 msgstr ""
@@ -4139,18 +4139,18 @@ msgid "Internet Movie Database (Portuguese)"
 msgstr "Интернет-каталог фильмов IMDb — Португальский"
 
 #: src/fetch/imdbfetcher.cpp:830 src/fetch/imdbfetcher.cpp:1385
-#: src/fetch/imdbfetcher.cpp:1803
+#: src/fetch/imdbfetcher.cpp:1804
 #, kde-format
 msgid "IMDb Rating"
 msgstr "Рейтинг IMDb"
 
 #: src/fetch/imdbfetcher.cpp:1570 src/fetch/imdbfetcher.cpp:1667
-#: src/fetch/imdbfetcher.cpp:1805
+#: src/fetch/imdbfetcher.cpp:1806
 #, kde-format
 msgid "Certifications"
 msgstr "Сертификаты"
 
-#: src/fetch/imdbfetcher.cpp:1802 src/fetch/kinopoiskfetcher.cpp:672
+#: src/fetch/imdbfetcher.cpp:1803 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/thetvdbfetcher.cpp:575 src/fetch/tvmazefetcher.cpp:382
 #: src/field.cpp:332
@@ -4158,7 +4158,7 @@ msgstr "Сертификаты"
 msgid "IMDb Link"
 msgstr "Ссылка IMDb"
 
-#: src/fetch/imdbfetcher.cpp:1841
+#: src/fetch/imdbfetcher.cpp:1842
 #, kde-format
 msgid "Download cover &image"
 msgstr "Загрузить изображение &обложки"
@@ -4403,7 +4403,7 @@ msgstr "Ссылка TheTVDB"
 msgid "Subscriber PIN: "
 msgstr ""
 
-#: src/fetch/vgcollectfetcher.cpp:229 src/fetch/vgcollectfetcher.cpp:367
+#: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
 #, fuzzy, kde-format
 #| msgid "Comic Vine Link"
 msgid "VGCollect Link"
