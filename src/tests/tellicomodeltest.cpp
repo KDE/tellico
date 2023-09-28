@@ -202,7 +202,7 @@ void TellicoModelTest::testSelectionModel() {
 //  connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default fields
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
-  entry1->setField(QStringLiteral("title"), QStringLiteral("test1"));
+  entry1->setField(QStringLiteral("title"), QStringLiteral("Test1"));
   coll->addEntries(entry1);
 
   entryModel.setFields(coll->fields());
@@ -214,7 +214,7 @@ void TellicoModelTest::testSelectionModel() {
 
   Tellico::Data::EntryList entries = proxySelect.selectedEntries();
   QCOMPARE(entries.count(), 1);
-  QCOMPARE(entries.at(0)->title(), QStringLiteral("test1"));
+  QCOMPARE(entries.at(0)->title(), QStringLiteral("Test1"));
 
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
   entry2->setField(QStringLiteral("title"), QStringLiteral("test2"));
@@ -223,18 +223,18 @@ void TellicoModelTest::testSelectionModel() {
 
   entries = proxySelect.selectedEntries();
   QCOMPARE(entries.count(), 1);
-  QCOMPARE(entries.at(0)->title(), QStringLiteral("test1"));
+  QCOMPARE(entries.at(0)->title(), QStringLiteral("Test1"));
 
   selModel.select(entryModel.index(1,0), QItemSelectionModel::Select);
   entries = proxySelect.selectedEntries();
   QCOMPARE(entries.count(), 2);
-  QCOMPARE(entries.at(0)->title(), QStringLiteral("test1"));
-  QCOMPARE(entries.at(1)->title(), QStringLiteral("test2"));
+  QCOMPARE(entries.at(0)->title(), QStringLiteral("Test1"));
+  QCOMPARE(entries.at(1)->title(), QStringLiteral("Test2"));
 
   selModel.select(entryModel.index(0,0), QItemSelectionModel::Toggle);
   entries = proxySelect.selectedEntries();
   QCOMPARE(entries.count(), 1);
-  QCOMPARE(entries.at(0)->title(), QStringLiteral("test2"));
+  QCOMPARE(entries.at(0)->title(), QStringLiteral("Test2"));
 
   entryModel.clear();
   // now there should be no selection since EntryModel::clear calls modelReset()

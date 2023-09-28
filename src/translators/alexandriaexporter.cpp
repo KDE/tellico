@@ -167,7 +167,7 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
     ts << "  - n/a\n";
   }
 
-  QString tmp = entry_->formattedField(QStringLiteral("title"), format);
+  QString tmp = entry_->title(format);
   ts << "title: \"" << escapeText(tmp) << "\"\n";
 
   // Alexandria refers to the binding as the edition

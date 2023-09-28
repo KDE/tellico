@@ -431,7 +431,7 @@ void AmazonFetcher::slotComplete(KJob*) {
     // UK puts the year in the title for some reason
     if(m_site == UK && coll->type() == Data::Collection::Video) {
       QRegExp rx(QLatin1String("\\[(\\d{4})\\]"));
-      QString t = entry->title();
+      QString t = entry->field(QStringLiteral("title"));
       if(rx.indexIn(t) > -1) {
         QString y = rx.cap(1);
         t = t.remove(rx).simplified();
