@@ -54,6 +54,7 @@ private Q_SLOTS:
   void testMatchScore();
   void testMatchScore_data();
   void testGamePlatform();
+  void testNonTitle();
 
 private:
   Tellico::Data::CollPtr m_coll;

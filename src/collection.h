@@ -142,6 +142,7 @@ public:
    * @return The primary image field
    */
   FieldPtr primaryImageField() const;
+  QString titleField() const;
   /**
    * Returns a reference to the list of field groups. This value is cached rather
    * than generated with each call, so the method should be fairly fast.
@@ -372,6 +373,7 @@ private:
   QString m_title;
   QString m_defaultGroupField;
   QString m_lastGroupField;
+  QString m_titleField;
 
   FieldList m_fields;
   FieldList m_peopleFields; // keep separate list of people fields

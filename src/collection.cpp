@@ -92,6 +92,9 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
   m_fieldByName.insert(field_->name(), field_.data());
   m_fieldByTitle.insert(field_->title(), field_.data());
 
+  // always default to using field with title name as title
+  if(field_->name() == QLatin1String("title")) m_titleField = field_->name();
+
   if(field_->formatType() == FieldFormat::FormatName) {
     m_peopleFields.append(field_); // list of people attributes
     if(m_peopleFields.count() > 1) {
@@ -102,6 +105,8 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
         m_entryGroups.prepend(s_peopleGroupName);
       }
     }
+  } else if(m_titleField.isEmpty() && field_->formatType() == FieldFormat::FormatTitle) {
+    m_titleField = field_->name();
   }
 
   if(field_->type() == Field::Image) {
@@ -888,4 +893,10 @@ Tellico::Data::ID Collection::getID() {
 
 Data::FieldPtr Collection::primaryImageField() const {
   return m_imageFields.isEmpty() ? Data::FieldPtr() : fieldByName(m_imageFields.front()->name());
+}
+
+QString Collection::titleField() const {
+  return m_titleField.isEmpty()
+    ? (m_fields.isEmpty() ? QString() : m_fields.at(0)->name())
+    : m_titleField;
 }

@@ -771,3 +771,26 @@ void CollectionTest::testGamePlatform() {
   guess = Tellico::Data::GameCollection::guessPlatform(QStringLiteral("Nintendo Entertainment System"));
   QCOMPARE(guess, int(Tellico::Data::GameCollection::Nintendo));
 }
+
+void CollectionTest::testNonTitle() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(false));
+  QVERIFY(coll);
+  QVERIFY(coll->fields().isEmpty());
+
+  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QStringLiteral("test1"), QStringLiteral("Test1")));
+  coll->addField(field1);
+
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  entry->setField(QStringLiteral("test1"), QStringLiteral("non-title title"));
+  coll->addEntries(entry);
+
+  QCOMPARE(entry->title(), QStringLiteral("non-title title"));
+
+  Tellico::Data::FieldPtr field2(new Tellico::Data::Field(QStringLiteral("test2"), QStringLiteral("Test")));
+  field2->setFormatType(Tellico::FieldFormat::FormatTitle);
+  coll->addField(field2);
+
+  entry->setField(QStringLiteral("test2"), QStringLiteral("proxy title"));
+  // since there's a new field formatted as a title, the entry title changes
+  QCOMPARE(entry->title(), QStringLiteral("Proxy Title"));
+}
