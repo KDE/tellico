@@ -75,7 +75,7 @@ public:
    *
    * @return The entry title
    */
-  QString title() const;
+  QString title(FieldFormat::Request formatted = FieldFormat::DefaultFormat) const;
   /**
    * Returns the value of the field with a given key name.
    *

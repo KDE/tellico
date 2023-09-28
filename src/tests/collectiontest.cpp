@@ -494,31 +494,31 @@ void CollectionTest::testDuplicate() {
 
   ret = Tellico::Merge::mergeEntry(entry1, entry2, &cancelMerge);
   QCOMPARE(ret, false);
-  QCOMPARE(entry1->title(), QStringLiteral("title1"));
-  QCOMPARE(entry2->title(), QStringLiteral("title2"));
+  QCOMPARE(entry1->title(), QStringLiteral("Title1"));
+  QCOMPARE(entry2->title(), QStringLiteral("Title2"));
 
   TestResolver keepFirst(Tellico::Merge::ConflictResolver::KeepFirst);
   ret = Tellico::Merge::mergeEntry(entry1, entry2, &keepFirst);
   QCOMPARE(ret, true);
-  QCOMPARE(entry1->title(), QStringLiteral("title1"));
+  QCOMPARE(entry1->title(), QStringLiteral("Title1"));
   // the second entry never gets changed
-  QCOMPARE(entry2->title(), QStringLiteral("title2"));
+  QCOMPARE(entry2->title(), QStringLiteral("Title2"));
 
   entry2->setField(QStringLiteral("title"), QStringLiteral("title2"));
 
   TestResolver keepSecond(Tellico::Merge::ConflictResolver::KeepSecond);
   ret = Tellico::Merge::mergeEntry(entry1, entry2, &keepSecond);
   QCOMPARE(ret, true);
-  QCOMPARE(entry1->title(), QStringLiteral("title2"));
-  QCOMPARE(entry2->title(), QStringLiteral("title2"));
+  QCOMPARE(entry1->title(), QStringLiteral("Title2"));
+  QCOMPARE(entry2->title(), QStringLiteral("Title2"));
 
   entry1->setField(QStringLiteral("title"), QStringLiteral("title1"));
 
   // returns true, ("merge successful") even if values were not merged
   ret = Tellico::Merge::mergeEntry(entry1, entry2);
   QCOMPARE(ret, true);
-  QCOMPARE(entry1->title(), QStringLiteral("title1"));
-  QCOMPARE(entry2->title(), QStringLiteral("title2"));
+  QCOMPARE(entry1->title(), QStringLiteral("Title1"));
+  QCOMPARE(entry2->title(), QStringLiteral("Title2"));
 }
 
 void CollectionTest::testMergeFields() {

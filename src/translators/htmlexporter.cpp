@@ -774,7 +774,7 @@ bool HTMLExporter::writeEntryFiles() {
   bool multipleTitles = collection()->fieldByName(title)->hasFlag(Data::Field::AllowMultiple);
   Data::EntryList entries = this->entries(); // not const since the pointer has to be copied
   foreach(Data::EntryPtr entryIt, entries) {
-    QString file = entryIt->formattedField(title, formatted);
+    QString file = entryIt->title(formatted);
 
     // but only use the first title if it has multiple
     if(multipleTitles) {

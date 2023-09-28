@@ -103,8 +103,8 @@ void Entry::setCollection(Tellico::Data::CollPtr coll_) {
   }
 }
 
-QString Entry::title() const {
-  return field(QStringLiteral("title"));
+QString Entry::title(FieldFormat::Request request_) const {
+  return formattedField(QStringLiteral("title"), request_);
 }
 
 QString Entry::field(const QString& fieldName_) const {
