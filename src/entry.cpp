@@ -104,7 +104,7 @@ void Entry::setCollection(Tellico::Data::CollPtr coll_) {
 }
 
 QString Entry::title(FieldFormat::Request request_) const {
-  return formattedField(QStringLiteral("title"), request_);
+  return formattedField(m_coll ? m_coll->titleField() : QStringLiteral("title"), request_);
 }
 
 QString Entry::field(const QString& fieldName_) const {
