@@ -177,8 +177,10 @@ QWidget* LibraryThingImporter::widget(QWidget* parent_) {
   QGroupBox* gbox = new QGroupBox(i18n("LibraryThing Options"), m_widget);
   QFormLayout* lay = new QFormLayout(gbox);
 
-  lay->addRow(new QLabel(i18n("Export your LibraryThing collection in "
-                              "<a href=\"https://www.librarything.com/export.php?export_type=json\">JSON format</a>."), gbox));
+  auto label = new QLabel(i18n("Export your LibraryThing collection in "
+                               "<a href=\"https://www.librarything.com/export.php?export_type=json\">JSON format</a>."), gbox);
+  label->setOpenExternalLinks(true);
+  lay->addRow(label);
 
   m_URLRequester = new KUrlRequester(gbox);
   // these are in the old KDE4 filter format, not the Qt5 format
