@@ -149,8 +149,8 @@ void DiscogsFetcher::continueSearch() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
-  m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1")
-                                                                .arg(QStringLiteral(TELLICO_VERSION)));
+  m_job->addMetaData(QStringLiteral("UserAgent"),
+                     QStringLiteral("Tellico/%1").arg(QStringLiteral(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &DiscogsFetcher::slotComplete);
 }
@@ -392,8 +392,9 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
 
   QStringList labels, catnos;
   foreach(const QVariant& label, resultMap_.value(QLatin1String("labels")).toList()) {
-    labels << mapValue(label.toMap(), "name");
-    catnos << mapValue(label.toMap(), "catno");
+    const QVariantMap labelMap = label.toMap();
+    labels << mapValue(labelMap, "name");
+    catnos << mapValue(labelMap, "catno");
   }
   entry_->setField(QStringLiteral("label"), labels.join(FieldFormat::delimiterString()));
   if(entry_->collection()->hasField(QStringLiteral("catno"))) {
@@ -482,9 +483,10 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
 
   if(entry_->collection()->hasField(QStringLiteral("producer"))) {
     QStringList producers;
-    foreach(const QVariant& extraartist, resultMap_.value(QLatin1String("extraartists")).toList()) {
-      if(mapValue(extraartist.toMap(), "role").contains(QStringLiteral("Producer"))) {
-        producers << mapValue(extraartist.toMap(), "name");
+    foreach(const QVariant& extraArtist, resultMap_.value(QLatin1String("extraartists")).toList()) {
+      const QVariantMap extraArtistMap = extraArtist.toMap();
+      if(mapValue(extraArtistMap, "role").contains(QStringLiteral("Producer"))) {
+        producers << mapValue(extraArtistMap, "name");
       }
     }
     entry_->setField(QStringLiteral("producer"), producers.join(FieldFormat::delimiterString()));
@@ -534,7 +536,7 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   // richtext gets weird with size
   al->setMinimumWidth(al->sizeHint().width());
 
-  QLabel* label = new QLabel(i18n("User token: "), optionsWidget());
+  QLabel* label = new QLabel(i18n("User token:"), optionsWidget());
   l->addWidget(label, ++row, 0);
 
   m_apiKeyEdit = new QLineEdit(optionsWidget());

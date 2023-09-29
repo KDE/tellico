@@ -56,6 +56,7 @@
 #include "translators/datacrowimporter.h"
 #include "translators/marcimporter.h"
 #include "translators/ebookimporter.h"
+#include "translators/discogsimporter.h"
 #include "utils/datafileregistry.h"
 
 #include <KLocalizedString>
@@ -333,6 +334,11 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
     case Import::EBook:
       importer = new Import::EBookImporter(urls_);
       break;
+
+    case Import::Discogs:
+      CHECK_SIZE;
+      importer = new Import::DiscogsImporter();
+      break;
   }
   if(!importer) {
     myWarning() << "importer not created!";
@@ -433,6 +439,7 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
     case Import::BoardGameGeek:
     case Import::LibraryThing:
     case Import::MARC:
+    case Import::Discogs:
       break;
   }
 
@@ -452,6 +459,7 @@ Tellico::Import::Target ImportDialog::importTarget(Tellico::Import::Format forma
     case Import::Goodreads:
     case Import::BoardGameGeek:
     case Import::LibraryThing:
+    case Import::Discogs:
       return Import::None;
     default:
       return Import::File;

@@ -456,6 +456,9 @@ void MainWindow::initActions() {
   action->setEnabled(false);
 #endif
 
+  IMPORT_ACTION(Import::Discogs, "file_import_discogs", i18n("Import Discogs Collection..."),
+                i18n("Import a collection from Discogs.com"), QIcon::fromTheme(QStringLiteral(":/icons/discogs")));
+
   IMPORT_ACTION(Import::GCstar, "file_import_gcstar", i18n("Import GCstar Data..."),
                 i18n("Import a GCstar data file"),
                 QIcon::fromTheme(QStringLiteral("gcstar"), QIcon(QLatin1String(":/icons/gcstar"))));

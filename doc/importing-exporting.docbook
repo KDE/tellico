@@ -200,6 +200,13 @@ The <ulink url="https://en.wikipedia.org/wiki/RIS_(file_format)"><acronym>RIS</a
 </para>
 </sect3>
 
+<sect3 id="importing-discogs">
+<title>Importing Discogs Collection</title>
+<para>
+<ulink url="https://www.discogs.com">Discogs</ulink> is an online database and marketplace of music releases. &appname; can import the list of music releases in a user's collection, given  the user name, as long as the collection is set to be publicly accessible.
+</para>
+</sect3>
+
 </sect2>
 
 <sect2 id="importing-file-listing">
