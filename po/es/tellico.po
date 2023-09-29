@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-28 00:43+0000\n"
-"PO-Revision-Date: 2023-09-25 00:45+0200\n"
+"PO-Revision-Date: 2023-09-27 17:35+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -4386,10 +4386,9 @@ msgid "Subscriber PIN: "
 msgstr "PIN de abonado:"
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Enlace a Colnect"
+msgstr "Enlace a VGCollect"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
