@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="43" name="tellico">
+<kpartgui version="45" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -45,6 +45,7 @@
     <Separator/>
     <Action name="file_import_freedb"/>
     <Action name="file_import_audiofile"/>
+    <Action name="file_import_discogs"/>
     <Separator/>
     <Action name="file_import_amc"/>
     <Action name="file_import_griffith"/>

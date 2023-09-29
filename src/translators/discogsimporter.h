@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2023 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,77 +22,53 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TRANSLATORS_H
-#define TRANSLATORS_H
+#ifndef TELLICO_IMPORT_DISCOGSIMPORTER_H
+#define TELLICO_IMPORT_DISCOGSIMPORTER_H
+
+#include "importer.h"
+
+#include <KSharedConfig>
+
+class QLineEdit;
 
 namespace Tellico {
   namespace Import {
-    enum Format {
-      TellicoXML = 0,
-      Bibtex,
-      Bibtexml,
-      CSV,
-      XSLT,
-      AudioFile,
-      MODS,
-      Alexandria,
-      FreeDB,
-      RIS,
-      GCstar,
-      FileListing,
-      GRS1,
-      AMC,
-      Griffith,
-      PDF,
-      Referencer,
-      Delicious,
-      Goodreads,
-      CIW,
-      VinoXML,
-      BoardGameGeek,
-      LibraryThing,
-      Collectorz,
-      DataCrow,
-      MARC,
-      EBook,
-      Discogs
-    };
 
-    enum Action {
-      Replace,
-      Append,
-      Merge
-    };
+/**
+ * @author Robby Stephenson
+*/
+class DiscogsImporter : public Importer {
+Q_OBJECT
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
+public:
+  /**
+   */
+  DiscogsImporter();
 
-  namespace Export {
-    enum Format {
-      TellicoXML = 0,
-      TellicoZip,
-      Bibtex,
-      Bibtexml,
-      HTML,
-      CSV,
-      XSLT,
-      Text,
-      PilotDB, // Deprecated
-      Alexandria,
-      ONIX,
-      GCstar
-    };
+  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
-}
+  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
 
+  void setConfig(KSharedConfig::Ptr config);
+
+public Q_SLOTS:
+  void slotCancel() Q_DECL_OVERRIDE {}
+
+private:
+  void loadPage(int page);
+  void populateEntry(Data::EntryPtr entry, const QVariantMap& releaseMap);
+
+  Data::CollPtr m_coll;
+  QWidget* m_widget;
+  QLineEdit* m_userEdit;
+  QLineEdit* m_tokenEdit;
+  KSharedConfig::Ptr m_config;
+
+  QString m_user;
+  QString m_token;
+};
+
+  } // end namespace
+} // end namespace
 #endif

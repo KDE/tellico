@@ -1,3 +1,7 @@
+2023-09-28  Robby Stephenson  <robby@periapsis.org>
+
+	* Added importer for Discogs collections (Bug 446262).
+
 2023-09-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Added fallback title for entries with no title field (Bug 231867).

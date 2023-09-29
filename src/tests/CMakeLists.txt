@@ -280,11 +280,16 @@ ecm_add_test(datacrowtest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
 )
 
-
 ecm_add_test(delicioustest.cpp
              ../translators/deliciousimporter.cpp
     TEST_NAME delicioustest
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest rtf2html-tellico
+)
+
+ecm_add_test(discogstest.cpp
+             ../translators/discogsimporter.cpp
+    TEST_NAME discogstest
+    LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
 )
 
 ecm_add_test(fieldwidgettest.cpp
