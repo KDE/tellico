@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-28 00:43+0000\n"
-"PO-Revision-Date: 2023-09-26 05:27+0200\n"
+"PO-Revision-Date: 2023-09-29 04:52+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -4257,10 +4257,9 @@ msgid "Subscriber PIN: "
 msgstr "გამომწერის PIN: "
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Colnect-ის ბმული"
+msgstr "VGCollect-ის ბმული"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
