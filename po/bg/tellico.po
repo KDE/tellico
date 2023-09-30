@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-28 02:28+0000\n"
+"POT-Creation-Date: 2023-09-30 02:29+0000\n"
 "PO-Revision-Date: 2009-09-18 16:56+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -166,7 +166,7 @@ msgstr "Номер от поредица"
 msgid "Collection Size"
 msgstr "Полета на колекцията..."
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1653
+#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1656
 #, fuzzy, kde-format
 msgid "Total entries: %1"
 msgstr "Изтриване на поле"
@@ -1620,10 +1620,11 @@ msgstr ""
 msgid "Album"
 msgstr "Албум"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:423
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:424
 #: src/fetch/doubanfetcher.cpp:431 src/fetch/doubanfetcher.cpp:565
 #: src/fetch/upcitemdbfetcher.cpp:290 src/fetch/upcitemdbfetcher.cpp:410
 #: src/translators/audiofileimporter.cpp:335
+#: src/translators/discogsimporter.cpp:162
 #: src/translators/freedbimporter.cpp:275
 #: src/translators/freedbimporter.cpp:393
 #: src/translators/freedbimporter.cpp:460
@@ -1633,18 +1634,20 @@ msgstr ""
 
 #: src/collections/musiccollection.cpp:54
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1043
-#: src/fetch/discogsfetcher.cpp:431 src/fetch/upcitemdbfetcher.cpp:406
-#: src/fetch/upcitemdbfetcher.cpp:414
+#: src/fetch/discogsfetcher.cpp:432 src/fetch/upcitemdbfetcher.cpp:406
+#: src/fetch/upcitemdbfetcher.cpp:414 src/translators/discogsimporter.cpp:169
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:428
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:429
+#: src/translators/discogsimporter.cpp:166
 #, kde-format
 msgid "Cassette"
 msgstr "Касета"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:426
+#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:427
+#: src/translators/discogsimporter.cpp:164
 #, kde-format
 msgid "Vinyl"
 msgstr ""
@@ -1852,7 +1855,7 @@ msgid "Region"
 msgstr "Област"
 
 #: src/collections/videocollection.cpp:95 src/fetch/discogsfetcher.cpp:318
-#: src/fetch/discogsfetcher.cpp:511
+#: src/fetch/discogsfetcher.cpp:513
 #, kde-format
 msgid "Nationality"
 msgstr "Националност"
@@ -1906,7 +1909,7 @@ msgid "Director"
 msgstr "Режисьор"
 
 #: src/collections/videocollection.cpp:123 src/fetch/discogsfetcher.cpp:325
-#: src/fetch/discogsfetcher.cpp:510 src/fetch/rpggeekfetcher.cpp:207
+#: src/fetch/discogsfetcher.cpp:512 src/fetch/rpggeekfetcher.cpp:207
 #, fuzzy, kde-format
 msgid "Producer"
 msgstr "Година на публикуване"
@@ -2760,12 +2763,12 @@ msgstr "Изтрий книга"
 msgid "Template Packages"
 msgstr "Шаблони"
 
-#: src/configdialog.cpp:1160 src/importdialog.cpp:439 src/mainwindow.cpp:1281
-#: src/mainwindow.cpp:1456 src/reportdialog.cpp:428 src/reportdialog.cpp:443
+#: src/configdialog.cpp:1160 src/importdialog.cpp:446 src/mainwindow.cpp:1284
+#: src/mainwindow.cpp:1459 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
-#: src/translators/librarythingimporter.cpp:187
+#: src/translators/librarythingimporter.cpp:189
 #: src/translators/onixexporter.cpp:71
 #: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
@@ -2817,22 +2820,22 @@ msgstr "Изтриване на няколко книги ?"
 msgid "&Sort By"
 msgstr "Е&кспортиране"
 
-#: src/controller.cpp:589 src/mainwindow.cpp:604
+#: src/controller.cpp:589 src/mainwindow.cpp:607
 #, fuzzy, kde-format
 msgid "&Edit Entry..."
 msgstr "Изтрий книга"
 
-#: src/controller.cpp:590 src/mainwindow.cpp:611
+#: src/controller.cpp:590 src/mainwindow.cpp:614
 #, fuzzy, kde-format
 msgid "D&uplicate Entry"
 msgstr "Дуплициране на книга"
 
-#: src/controller.cpp:591 src/mainwindow.cpp:705
+#: src/controller.cpp:591 src/mainwindow.cpp:708
 #, fuzzy, kde-format
 msgid "&Update Entry"
 msgstr "Изтрий книга"
 
-#: src/controller.cpp:592 src/mainwindow.cpp:618
+#: src/controller.cpp:592 src/mainwindow.cpp:621
 #, fuzzy, kde-format
 msgid "&Delete Entry"
 msgstr "Изтриване на поле"
@@ -2968,7 +2971,7 @@ msgstr "Показва колони"
 msgid "Hide All Columns"
 msgstr "Показва колони"
 
-#: src/document.cpp:210 src/mainwindow.cpp:1395
+#: src/document.cpp:210 src/mainwindow.cpp:1398
 #, kde-format
 msgid "Saving file..."
 msgstr "Записва файл..."
@@ -3030,7 +3033,7 @@ msgid "Save Entry"
 msgstr "Дуплициране на книга"
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1168 src/mainwindow.cpp:1186
+#: src/mainwindow.cpp:1171 src/mainwindow.cpp:1189
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Незаписани промени"
@@ -3040,7 +3043,7 @@ msgstr "Незаписани промени"
 msgid "(Empty)"
 msgstr "(Празно)"
 
-#: src/entryiconview.cpp:65 src/mainwindow.cpp:872
+#: src/entryiconview.cpp:65 src/mainwindow.cpp:875
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3105,7 +3108,7 @@ msgstr ""
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico не може да зареди файла %1."
 
-#: src/entryview.cpp:334 src/mainwindow.cpp:1806
+#: src/entryview.cpp:334 src/mainwindow.cpp:1809
 #, kde-format
 msgid "Please check your installation."
 msgstr "Моля проверете инсталацията си."
@@ -3185,7 +3188,7 @@ msgstr ""
 
 #: src/fetch/adsfetcher.cpp:331 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:232
-#: src/fetch/crossreffetcher.cpp:314 src/fetch/discogsfetcher.cpp:525
+#: src/fetch/crossreffetcher.cpp:314 src/fetch/discogsfetcher.cpp:527
 #: src/fetch/giantbombfetcher.cpp:219 src/fetch/googlebookfetcher.cpp:382
 #: src/fetch/isbndbfetcher.cpp:395 src/fetch/mobygamesfetcher.cpp:652
 #: src/fetch/omdbfetcher.cpp:411 src/fetch/thegamesdbfetcher.cpp:637
@@ -3708,13 +3711,13 @@ msgstr ""
 msgid "An access key is required to use this data source."
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:313 src/fetch/discogsfetcher.cpp:512
+#: src/fetch/discogsfetcher.cpp:313 src/fetch/discogsfetcher.cpp:514
 #, kde-format
 msgid "Discogs Link"
 msgstr ""
 
 #. i18n("Nationality");
-#: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:513
+#: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:207 src/fetch/upcitemdbfetcher.cpp:458
 #: src/fetch/vgcollectfetcher.cpp:340 src/fetch/vgcollectfetcher.cpp:375
@@ -3722,7 +3725,7 @@ msgstr ""
 msgid "Barcode"
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:514
+#: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:516
 #, fuzzy, kde-format
 msgid "Catalog Number"
 msgstr "Номер от поредица"
@@ -3732,14 +3735,14 @@ msgstr "Номер от поредица"
 msgid "The Discogs.com server reports a token error."
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:501
+#: src/fetch/discogsfetcher.cpp:503
 #, kde-format
 msgid "Discogs Audio Search"
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:537
+#: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
 #, fuzzy, kde-format
-msgid "User token: "
+msgid "User token:"
 msgstr "Изтрий книга"
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
@@ -4409,7 +4412,7 @@ msgstr "Търси в :"
 msgid "&Stop"
 msgstr "&Стоп"
 
-#: src/fetchdialog.cpp:142 src/mainwindow.cpp:594
+#: src/fetchdialog.cpp:142 src/mainwindow.cpp:597
 #, kde-format
 msgid "Internet Search"
 msgstr "Търсене в Интернет"
@@ -4719,8 +4722,8 @@ msgstr "Изтрий книга"
 msgid "&Save Filter"
 msgstr "Разширен филтър"
 
-#: src/filterview.cpp:191 src/mainwindow.cpp:567 src/mainwindow.cpp:777
-#: src/mainwindow.cpp:795
+#: src/filterview.cpp:191 src/mainwindow.cpp:570 src/mainwindow.cpp:780
+#: src/mainwindow.cpp:798
 #, fuzzy, kde-format
 msgid "Filter"
 msgstr "Изтрий книга"
@@ -4756,8 +4759,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Група"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1095 src/mainwindow.cpp:1741
-#: src/mainwindow.cpp:1775 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1098 src/mainwindow.cpp:1744
+#: src/mainwindow.cpp:1778 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Хора"
@@ -5010,39 +5013,39 @@ msgstr "Преместване на реда надолу"
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico не може да зареди файла %1."
 
-#: src/importdialog.cpp:79 src/importdialog.cpp:88
+#: src/importdialog.cpp:80 src/importdialog.cpp:89
 #, fuzzy, kde-format
 msgid "Import Options"
 msgstr "Опции за форматиране"
 
-#: src/importdialog.cpp:92
+#: src/importdialog.cpp:93
 #, fuzzy, kde-format
 msgid "&Replace current collection"
 msgstr "Преименувай колекцията"
 
-#: src/importdialog.cpp:93
+#: src/importdialog.cpp:94
 #, kde-format
 msgid "Replace the current collection with the contents of the imported file."
 msgstr ""
 
-#: src/importdialog.cpp:95
+#: src/importdialog.cpp:96
 #, fuzzy, kde-format
 msgid "A&ppend to current collection"
 msgstr "Промяна на групирането на колекцията"
 
-#: src/importdialog.cpp:96
+#: src/importdialog.cpp:97
 #, kde-format
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
 "only possible when the collection types match."
 msgstr ""
 
-#: src/importdialog.cpp:99
+#: src/importdialog.cpp:100
 #, fuzzy, kde-format
 msgid "&Merge with current collection"
 msgstr "Промяна на групирането на колекцията"
 
-#: src/importdialog.cpp:100
+#: src/importdialog.cpp:101
 #, kde-format
 msgid ""
 "Merge the contents of the imported file to the current collection. This is "
@@ -5050,69 +5053,69 @@ msgid ""
 "order to be merged."
 msgstr ""
 
-#: src/importdialog.cpp:149 src/mainwindow.cpp:370
+#: src/importdialog.cpp:150 src/mainwindow.cpp:370
 #, fuzzy, kde-format
 msgid "&Import"
 msgstr "И&мпортиране"
 
-#: src/importdialog.cpp:371 src/mainwindow.cpp:1277 src/mainwindow.cpp:1454
+#: src/importdialog.cpp:377 src/mainwindow.cpp:1280 src/mainwindow.cpp:1457
 #: src/translators/tellicozipexporter.cpp:54
 #, fuzzy, kde-format
 msgid "Tellico Files"
 msgstr "Лавица"
 
-#: src/importdialog.cpp:372 src/importdialog.cpp:390 src/importdialog.cpp:419
-#: src/mainwindow.cpp:1279 src/translators/tellicoxmlexporter.cpp:72
+#: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
+#: src/mainwindow.cpp:1282 src/translators/tellicoxmlexporter.cpp:72
 #, fuzzy, kde-format
 msgid "XML Files"
 msgstr "Моите клипове"
 
-#: src/importdialog.cpp:376 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:382 src/translators/bibtexexporter.cpp:65
 #, fuzzy, kde-format
 msgid "Bibtex Files"
 msgstr "Настройки на полето"
 
-#: src/importdialog.cpp:380 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:386 src/translators/csvexporter.cpp:64
 #, fuzzy, kde-format
 msgid "CSV Files"
 msgstr "Изтрий книга"
 
-#: src/importdialog.cpp:394
+#: src/importdialog.cpp:400
 #, fuzzy, kde-format
 msgid "RIS Files"
 msgstr "Изтрий книга"
 
-#: src/importdialog.cpp:398 src/translators/gcstarexporter.cpp:62
+#: src/importdialog.cpp:404 src/translators/gcstarexporter.cpp:62
 #, fuzzy, kde-format
 msgid "GCstar Data Files"
 msgstr "*.xsl|XSLT файлове (*.xsl)"
 
-#: src/importdialog.cpp:402
+#: src/importdialog.cpp:408
 #, fuzzy, kde-format
 msgid "AMC Data Files"
 msgstr "*.xsl|XSLT файлове (*.xsl)"
 
-#: src/importdialog.cpp:406
+#: src/importdialog.cpp:412
 #, fuzzy, kde-format
 msgid "PDF Files"
 msgstr "Изтрий книга"
 
-#: src/importdialog.cpp:410
+#: src/importdialog.cpp:416
 #, fuzzy, kde-format
 msgid "Referencer Files"
 msgstr "Текущи полета"
 
-#: src/importdialog.cpp:414
+#: src/importdialog.cpp:420
 #, fuzzy, kde-format
 msgid "CIW Files"
 msgstr "Изтрий книга"
 
-#: src/importdialog.cpp:418
+#: src/importdialog.cpp:424
 #, fuzzy, kde-format
 msgid "VinoXML Data Files"
 msgstr "*.xml|XML файлове (*.xml)"
 
-#: src/importdialog.cpp:424
+#: src/importdialog.cpp:430
 #, fuzzy, kde-format
 msgid "eBook Files"
 msgstr "Заглавие"
@@ -5644,502 +5647,512 @@ msgstr "Експортирам..."
 
 #: src/mainwindow.cpp:459
 #, fuzzy, kde-format
+msgid "Import Discogs Collection..."
+msgstr "Преименувай колекцията"
+
+#: src/mainwindow.cpp:460
+#, fuzzy, kde-format
+msgid "Import a collection from Discogs.com"
+msgstr "Филтриране на колекцията за показване само на дадени книги..."
+
+#: src/mainwindow.cpp:462
+#, fuzzy, kde-format
 msgid "Import GCstar Data..."
 msgstr "Експортирам..."
 
-#: src/mainwindow.cpp:460
+#: src/mainwindow.cpp:463
 #, fuzzy, kde-format
 msgid "Import a GCstar data file"
 msgstr "Импортира Bibtexml файл ..."
 
-#: src/mainwindow.cpp:463
+#: src/mainwindow.cpp:466
 #, fuzzy, kde-format
 msgid "Import Griffith Data..."
 msgstr "Експортирам..."
 
-#: src/mainwindow.cpp:464
+#: src/mainwindow.cpp:467
 #, fuzzy, kde-format
 msgid "Import a Griffith database"
 msgstr "Експортира към Bibtex файл..."
 
-#: src/mainwindow.cpp:467
+#: src/mainwindow.cpp:470
 #, fuzzy, kde-format
 msgid "Import Ant Movie Catalog Data..."
 msgstr "Експортирам..."
 
-#: src/mainwindow.cpp:468
+#: src/mainwindow.cpp:471
 #, fuzzy, kde-format
 msgid "Import an Ant Movie Catalog data file"
 msgstr "Импортира Bibtex файл..."
 
-#: src/mainwindow.cpp:471
+#: src/mainwindow.cpp:474
 #, fuzzy, kde-format
 msgid "Import BoardGameGeek Collection..."
 msgstr "Преименувай колекцията"
 
-#: src/mainwindow.cpp:472
+#: src/mainwindow.cpp:475
 #, fuzzy, kde-format
 msgid "Import a collection from BoardGameGeek.com"
 msgstr "Филтриране на колекцията за показване само на дадени книги..."
 
-#: src/mainwindow.cpp:474
+#: src/mainwindow.cpp:477
 #, fuzzy, kde-format
 msgid "Import VinoXML..."
 msgstr "Е&кспортиране"
 
-#: src/mainwindow.cpp:475
+#: src/mainwindow.cpp:478
 #, fuzzy, kde-format
 msgid "Import VinoXML data"
 msgstr "Експортирам..."
 
-#: src/mainwindow.cpp:477
+#: src/mainwindow.cpp:480
 #, fuzzy, kde-format
 msgid "Import File Listing..."
 msgstr "Импортира Bibtex файл..."
 
-#: src/mainwindow.cpp:478
+#: src/mainwindow.cpp:481
 #, kde-format
 msgid "Import information about files in a folder"
 msgstr ""
 
-#: src/mainwindow.cpp:480
+#: src/mainwindow.cpp:483
 #, fuzzy, kde-format
 msgid "Import XSL Transform..."
 msgstr "Експортира,използвайки XSL Transform..."
 
-#: src/mainwindow.cpp:481
+#: src/mainwindow.cpp:484
 #, fuzzy, kde-format
 msgid "Import using an XSL Transform"
 msgstr "Експортира файл,използвайки XSL transform..."
 
-#: src/mainwindow.cpp:494
+#: src/mainwindow.cpp:497
 #, fuzzy, kde-format
 msgid "&Export"
 msgstr "Експортиране..."
 
-#: src/mainwindow.cpp:496
+#: src/mainwindow.cpp:499
 #, fuzzy, kde-format
 msgid "Export the collection data to other formats"
 msgstr "Филтриране на колекцията за показване само на дадени книги..."
 
-#: src/mainwindow.cpp:512
+#: src/mainwindow.cpp:515
 #, fuzzy, kde-format
 msgid "Export to XML..."
 msgstr "Е&кспортиране"
 
-#: src/mainwindow.cpp:513
+#: src/mainwindow.cpp:516
 #, fuzzy, kde-format
 msgid "Export to a Tellico XML file"
 msgstr "Експортира към Bibtex файл..."
 
-#: src/mainwindow.cpp:516
+#: src/mainwindow.cpp:519
 #, fuzzy, kde-format
 msgid "Export to Zip..."
 msgstr "Е&кспортиране"
 
-#: src/mainwindow.cpp:517
+#: src/mainwindow.cpp:520
 #, fuzzy, kde-format
 msgid "Export to a Tellico Zip file"
 msgstr "Експортира към Bibtex файл..."
 
-#: src/mainwindow.cpp:520
+#: src/mainwindow.cpp:523
 #, fuzzy, kde-format
 msgid "Export to HTML..."
 msgstr "Е&кспортиране"
 
-#: src/mainwindow.cpp:521
+#: src/mainwindow.cpp:524
 #, fuzzy, kde-format
 msgid "Export to an HTML file"
 msgstr "Експортира към Bibtex файл..."
 
-#: src/mainwindow.cpp:523
+#: src/mainwindow.cpp:526
 #, fuzzy, kde-format
 msgid "Export to CSV..."
 msgstr "Е&кспортиране"
 
-#: src/mainwindow.cpp:524
+#: src/mainwindow.cpp:527
 #, fuzzy, kde-format
 msgid "Export to a comma-separated values file"
 msgstr "Експортира към Bibtexml файл..."
 
-#: src/mainwindow.cpp:526
+#: src/mainwindow.cpp:529
 #, fuzzy, kde-format
 msgid "Export to Alexandria..."
 msgstr "Експортира към Bibtex файл..."
 
-#: src/mainwindow.cpp:527
+#: src/mainwindow.cpp:530
 #, kde-format
 msgid "Export to an Alexandria library"
 msgstr ""
 
-#: src/mainwindow.cpp:530
+#: src/mainwindow.cpp:533
 #, fuzzy, kde-format
 msgid "Export to Bibtex..."
 msgstr "Експортира към Bibtex файл..."
 
-#: src/mainwindow.cpp:531
+#: src/mainwindow.cpp:534
 #, fuzzy, kde-format
 msgid "Export to a bibtex file"
 msgstr "Експортира към Bibtex файл..."
 
-#: src/mainwindow.cpp:533
+#: src/mainwindow.cpp:536
 #, fuzzy, kde-format
 msgid "Export to Bibtexml..."
 msgstr "Експортира към Bibtexml файл"
 
-#: src/mainwindow.cpp:534
+#: src/mainwindow.cpp:537
 #, fuzzy, kde-format
 msgid "Export to a Bibtexml file"
 msgstr "Експортира към Bibtexml файл..."
 
-#: src/mainwindow.cpp:536
+#: src/mainwindow.cpp:539
 #, fuzzy, kde-format
 msgid "Export to ONIX..."
 msgstr "Е&кспортиране"
 
-#: src/mainwindow.cpp:537
+#: src/mainwindow.cpp:540
 #, fuzzy, kde-format
 msgid "Export to an ONIX file"
 msgstr "Експортира към Bibtex файл..."
 
-#: src/mainwindow.cpp:539
+#: src/mainwindow.cpp:542
 #, fuzzy, kde-format
 msgid "Export to GCstar..."
 msgstr "Е&кспортиране"
 
-#: src/mainwindow.cpp:540
+#: src/mainwindow.cpp:543
 #, fuzzy, kde-format
 msgid "Export to a GCstar data file"
 msgstr "Експортира към Bibtex файл..."
 
-#: src/mainwindow.cpp:543
+#: src/mainwindow.cpp:546
 #, fuzzy, kde-format
 msgid "Export XSL Transform..."
 msgstr "Експортира,използвайки XSL Transform..."
 
-#: src/mainwindow.cpp:544
+#: src/mainwindow.cpp:547
 #, fuzzy, kde-format
 msgid "Export using an XSL Transform"
 msgstr "Експортира файл,използвайки XSL transform..."
 
-#: src/mainwindow.cpp:555
+#: src/mainwindow.cpp:558
 #, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr ""
 
-#: src/mainwindow.cpp:557
+#: src/mainwindow.cpp:560
 #, fuzzy, kde-format
 msgid "Copy the selected text to the clipboard"
 msgstr "Копиране на избраното в буфера за обмен..."
 
-#: src/mainwindow.cpp:559
+#: src/mainwindow.cpp:562
 #, fuzzy, kde-format
 msgid "Paste the clipboard contents"
 msgstr "Поставяне на съдържанието на буфера"
 
-#: src/mainwindow.cpp:561
+#: src/mainwindow.cpp:564
 #, fuzzy, kde-format
 msgid "Select all the entries in the collection"
 msgstr "Няма избрани полета в тази колекция"
 
-#: src/mainwindow.cpp:563
+#: src/mainwindow.cpp:566
 #, fuzzy, kde-format
 msgid "Deselect all the entries in the collection"
 msgstr "Няма избрани полета в тази колекция"
 
-#: src/mainwindow.cpp:566
+#: src/mainwindow.cpp:569
 #, fuzzy, kde-format
 msgid "Advanced &Filter..."
 msgstr "Разширен филтър..."
 
-#: src/mainwindow.cpp:570 src/mainwindow.cpp:796
+#: src/mainwindow.cpp:573 src/mainwindow.cpp:799
 #, fuzzy, kde-format
 msgid "Filter the collection"
 msgstr "Редакция на полетата на колекцията..."
 
-#: src/mainwindow.cpp:577
+#: src/mainwindow.cpp:580
 #, fuzzy, kde-format
 msgid "&New Entry..."
 msgstr "Дуплициране на книга"
 
-#: src/mainwindow.cpp:579
+#: src/mainwindow.cpp:582
 #, fuzzy, kde-format
 msgid "New Entry"
 msgstr "Дуплициране на книга"
 
-#: src/mainwindow.cpp:581
+#: src/mainwindow.cpp:584
 #, fuzzy, kde-format
 msgid "Create a new entry"
 msgstr "Създава нов документ"
 
-#: src/mainwindow.cpp:583
+#: src/mainwindow.cpp:586
 #, fuzzy, kde-format
 msgid "Add Entry"
 msgstr "Изтрий книга"
 
-#: src/mainwindow.cpp:593
+#: src/mainwindow.cpp:596
 #, kde-format
 msgid "Internet Search..."
 msgstr "Търсене в Интернет..."
 
-#: src/mainwindow.cpp:597
+#: src/mainwindow.cpp:600
 #, kde-format
 msgid "Search the internet..."
 msgstr "Търсене в Интернет..."
 
-#: src/mainwindow.cpp:607
+#: src/mainwindow.cpp:610
 #, fuzzy, kde-format
 msgid "Edit the selected entries"
 msgstr "Изтриване на няколко книги ?"
 
-#: src/mainwindow.cpp:614
+#: src/mainwindow.cpp:617
 #, fuzzy, kde-format
 msgid "Copy the selected entries"
 msgstr "Изтриване на няколко книги ?"
 
-#: src/mainwindow.cpp:621
+#: src/mainwindow.cpp:624
 #, fuzzy, kde-format
 msgid "Delete the selected entries"
 msgstr "Изтриване на няколко книги ?"
 
-#: src/mainwindow.cpp:625
+#: src/mainwindow.cpp:628
 #, fuzzy, kde-format
 msgid "&Merge Entries"
 msgstr "Изтриване на поле"
 
-#: src/mainwindow.cpp:629
+#: src/mainwindow.cpp:632
 #, fuzzy, kde-format
 msgid "Merge the selected entries"
 msgstr "Изтриване на няколко книги ?"
 
-#: src/mainwindow.cpp:633
+#: src/mainwindow.cpp:636
 #, kde-format
 msgid "Check-&out..."
 msgstr ""
 
-#: src/mainwindow.cpp:635
+#: src/mainwindow.cpp:638
 #, fuzzy, kde-format
 msgid "Check-out the selected items"
 msgstr "Изтриване на няколко книги ?"
 
-#: src/mainwindow.cpp:638
+#: src/mainwindow.cpp:641
 #, kde-format
 msgid "Check-&in"
 msgstr ""
 
-#: src/mainwindow.cpp:640
+#: src/mainwindow.cpp:643
 #, fuzzy, kde-format
 msgid "Check-in the selected items"
 msgstr "Изтриване на няколко книги ?"
 
-#: src/mainwindow.cpp:643
+#: src/mainwindow.cpp:646
 #, fuzzy, kde-format
 msgid "&Rename Collection..."
 msgstr "Преименувай колекцията"
 
-#: src/mainwindow.cpp:646
+#: src/mainwindow.cpp:649
 #, fuzzy, kde-format
 msgid "Rename the collection"
 msgstr "Преименувай колекцията"
 
-#: src/mainwindow.cpp:649
+#: src/mainwindow.cpp:652
 #, fuzzy, kde-format
 msgid "Collection &Fields..."
 msgstr "Полета на колекцията..."
 
-#: src/mainwindow.cpp:650
+#: src/mainwindow.cpp:653
 #, fuzzy, kde-format
 msgid "Fields"
 msgstr "Полета"
 
-#: src/mainwindow.cpp:653
+#: src/mainwindow.cpp:656
 #, kde-format
 msgid "Modify the collection fields"
 msgstr "Редакция на полетата на колекцията..."
 
-#: src/mainwindow.cpp:656
+#: src/mainwindow.cpp:659
 #, kde-format
 msgid "&Generate Reports..."
 msgstr ""
 
-#: src/mainwindow.cpp:657
+#: src/mainwindow.cpp:660
 #, fuzzy, kde-format
 msgid "Reports"
 msgstr "Експортиране..."
 
-#: src/mainwindow.cpp:659
+#: src/mainwindow.cpp:662
 #, fuzzy, kde-format
 msgid "Generate collection reports"
 msgstr "Създава нов документ"
 
-#: src/mainwindow.cpp:662
+#: src/mainwindow.cpp:665
 #, fuzzy, kde-format
 msgid "Convert to &Bibliography"
 msgstr "Импортира Bibtexml файл ..."
 
-#: src/mainwindow.cpp:664
+#: src/mainwindow.cpp:667
 #, fuzzy, kde-format
 msgid "Convert a book collection to a bibliography"
 msgstr "Импортира Bibtexml файл ..."
 
-#: src/mainwindow.cpp:667
+#: src/mainwindow.cpp:670
 #, fuzzy, kde-format
 msgid "String &Macros..."
 msgstr "Оценка"
 
-#: src/mainwindow.cpp:669
+#: src/mainwindow.cpp:672
 #, kde-format
 msgid "Edit the bibtex string macros"
 msgstr ""
 
-#: src/mainwindow.cpp:672
+#: src/mainwindow.cpp:675
 #, kde-format
 msgid "Check for Duplicate Keys..."
 msgstr ""
 
-#: src/mainwindow.cpp:674
+#: src/mainwindow.cpp:677
 #, kde-format
 msgid "Check for duplicate citation keys"
 msgstr ""
 
-#: src/mainwindow.cpp:684
+#: src/mainwindow.cpp:687
 #, fuzzy, kde-format
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "Копиране на избраното в буфера за обмен..."
 
-#: src/mainwindow.cpp:685
+#: src/mainwindow.cpp:688
 #, fuzzy, kde-format
 msgid "Copy bibtex citations to the clipboard"
 msgstr "Копиране на избраното в буфера за обмен..."
 
-#: src/mainwindow.cpp:690
+#: src/mainwindow.cpp:693
 #, fuzzy, kde-format
 msgid "Cite Entry in &LyX"
 msgstr "Изтрий книга"
 
-#: src/mainwindow.cpp:691
+#: src/mainwindow.cpp:694
 #, fuzzy, kde-format
 msgid "Cite the selected entries in LyX"
 msgstr "Изтриване на няколко книги ?"
 
-#: src/mainwindow.cpp:707
+#: src/mainwindow.cpp:710
 #, fuzzy, kde-format
 msgctxt "Update Entry"
 msgid "Update"
 msgstr "Обновяване"
 
-#: src/mainwindow.cpp:716
+#: src/mainwindow.cpp:719
 #, kde-format
 msgid "All Sources"
 msgstr "Всички източници"
 
-#: src/mainwindow.cpp:717
+#: src/mainwindow.cpp:720
 #, kde-format
 msgid "Update entry data from all available sources"
 msgstr ""
 
-#: src/mainwindow.cpp:728
+#: src/mainwindow.cpp:731
 #, kde-format
 msgid "Unlock Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:729
+#: src/mainwindow.cpp:732
 #, kde-format
 msgid "Unlock the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:731
+#: src/mainwindow.cpp:734
 #, kde-format
 msgid "Lock Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:732
+#: src/mainwindow.cpp:735
 #, kde-format
 msgid "Lock the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:737
+#: src/mainwindow.cpp:740
 #, kde-format
 msgid "Reset Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:738
+#: src/mainwindow.cpp:741
 #, kde-format
 msgid "Reset the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:741
+#: src/mainwindow.cpp:744
 #, fuzzy, kde-format
 msgid "Entry &Editor"
 msgstr "Издание"
 
-#: src/mainwindow.cpp:743
+#: src/mainwindow.cpp:746
 #, fuzzy, kde-format
 msgid "Enable/disable the editor"
 msgstr "Показва/скрива тази лента"
 
-#: src/mainwindow.cpp:763
+#: src/mainwindow.cpp:766
 #, kde-format
 msgid "Change Grouping"
 msgstr ""
 
-#: src/mainwindow.cpp:766
+#: src/mainwindow.cpp:769
 #, fuzzy, kde-format
 msgid "&Group Selection"
 msgstr "Опции за групиране"
 
-#: src/mainwindow.cpp:767
+#: src/mainwindow.cpp:770
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr "Промяна на групирането на колекцията"
 
-#: src/mainwindow.cpp:781
+#: src/mainwindow.cpp:784
 #, fuzzy, kde-format
 msgid "Filter here..."
 msgstr "Критерии за филтриране"
 
-#: src/mainwindow.cpp:846 src/mainwindow.cpp:849
+#: src/mainwindow.cpp:849 src/mainwindow.cpp:852
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
 "qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:855
+#: src/mainwindow.cpp:858
 #, fuzzy, kde-format
 msgid "Collection View"
 msgstr "Полета на колекцията..."
 
-#: src/mainwindow.cpp:862
+#: src/mainwindow.cpp:865
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:879
+#: src/mainwindow.cpp:882
 #, fuzzy, kde-format
 msgid "Group View"
 msgstr "BCGroupView"
 
-#: src/mainwindow.cpp:888
+#: src/mainwindow.cpp:891
 #, fuzzy, kde-format
 msgid "Groups"
 msgstr "Групирай по:"
 
-#: src/mainwindow.cpp:889
+#: src/mainwindow.cpp:892
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:964
+#: src/mainwindow.cpp:967
 #, fuzzy, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Tellico (Лавица) - програма за картотекиране на книги"
 
-#: src/mainwindow.cpp:966
+#: src/mainwindow.cpp:969
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6149,7 +6162,7 @@ msgid ""
 "Internet sources.</h3>"
 msgstr ""
 
-#: src/mainwindow.cpp:1165
+#: src/mainwindow.cpp:1168
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6158,22 +6171,22 @@ msgstr ""
 "Текущият файл бе променен.\n"
 "Желаете ли да го запишете?"
 
-#: src/mainwindow.cpp:1221 src/mainwindow.cpp:1254
+#: src/mainwindow.cpp:1224 src/mainwindow.cpp:1257
 #, fuzzy, kde-format
 msgid "Creating new collection..."
 msgstr "Създава нов документ"
 
-#: src/mainwindow.cpp:1274 src/mainwindow.cpp:1297 src/mainwindow.cpp:1315
+#: src/mainwindow.cpp:1277 src/mainwindow.cpp:1300 src/mainwindow.cpp:1318
 #, kde-format
 msgid "Opening file..."
 msgstr "Отваряне на файл..."
 
-#: src/mainwindow.cpp:1285
+#: src/mainwindow.cpp:1288
 #, kde-format
 msgid "Open File"
 msgstr "Отваряне на файл"
 
-#: src/mainwindow.cpp:1406
+#: src/mainwindow.cpp:1409
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6182,59 +6195,59 @@ msgid ""
 "changed in the configuration dialog.</p></qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:1411
+#: src/mainwindow.cpp:1414
 #, kde-format
 msgid "Save Images Separately"
 msgstr ""
 
-#: src/mainwindow.cpp:1412
+#: src/mainwindow.cpp:1415
 #, kde-format
 msgid "Save Images in File"
 msgstr ""
 
-#: src/mainwindow.cpp:1452
+#: src/mainwindow.cpp:1455
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Записва файла с ново име ..."
 
-#: src/mainwindow.cpp:1461
+#: src/mainwindow.cpp:1464
 #, kde-format
 msgid "Save As"
 msgstr "Записване като"
 
-#: src/mainwindow.cpp:1527
+#: src/mainwindow.cpp:1530
 #, kde-format
 msgid "Printing..."
 msgstr "Отпечатване..."
 
-#: src/mainwindow.cpp:1531
+#: src/mainwindow.cpp:1534
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
 
-#: src/mainwindow.cpp:1554
+#: src/mainwindow.cpp:1557
 #, kde-format
 msgid "Exiting..."
 msgstr "Излизам..."
 
-#: src/mainwindow.cpp:1660
+#: src/mainwindow.cpp:1663
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr ""
 
-#: src/mainwindow.cpp:1663
+#: src/mainwindow.cpp:1666
 #, kde-format
 msgid "(%1 filtered)"
 msgstr ""
 
-#: src/mainwindow.cpp:1666
+#: src/mainwindow.cpp:1669
 #, kde-format
 msgid "(%1 selected)"
 msgstr ""
 
-#: src/mainwindow.cpp:1805 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1808 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:264
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6242,88 +6255,88 @@ msgstr ""
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Програмата се натъкна на грешка при XSLT процедирането.\n"
 
-#: src/mainwindow.cpp:1937
+#: src/mainwindow.cpp:1940
 #, fuzzy, kde-format
 msgid "Importing data..."
 msgstr "Експортирам..."
 
-#: src/mainwindow.cpp:1948
+#: src/mainwindow.cpp:1951
 #, fuzzy, kde-format
 msgid "Import File"
 msgstr "Импортира Bibtex файл..."
 
-#: src/mainwindow.cpp:1961
+#: src/mainwindow.cpp:1964
 #, fuzzy, kde-format
 msgid "Import Directory"
 msgstr "И&мпортиране"
 
-#: src/mainwindow.cpp:1985
+#: src/mainwindow.cpp:1988
 #, fuzzy, kde-format
 msgid "Exporting data..."
 msgstr "Експортирам..."
 
-#: src/mainwindow.cpp:2008
+#: src/mainwindow.cpp:2011
 #, fuzzy, kde-format
 msgid "Export As"
 msgstr "Е&кспортиране"
 
-#: src/mainwindow.cpp:2036
+#: src/mainwindow.cpp:2039
 #, fuzzy, kde-format
 msgid "String Macros"
 msgstr "Оценка"
 
-#: src/mainwindow.cpp:2037
+#: src/mainwindow.cpp:2040
 #, kde-format
 msgid "Macro"
 msgstr "Макрос"
 
-#: src/mainwindow.cpp:2037
+#: src/mainwindow.cpp:2040
 #, fuzzy, kde-format
 msgid "String"
 msgstr "Оценка"
 
-#: src/mainwindow.cpp:2123
+#: src/mainwindow.cpp:2126
 #, fuzzy, kde-format
 msgid "Creating citations..."
 msgstr "Отрязване на избраното..."
 
-#: src/mainwindow.cpp:2233
+#: src/mainwindow.cpp:2236
 #, fuzzy, kde-format
 msgid "Filters"
 msgstr "Изтрий книга"
 
-#: src/mainwindow.cpp:2234
+#: src/mainwindow.cpp:2237
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2257
+#: src/mainwindow.cpp:2260
 #, fuzzy, kde-format
 msgid "Loans"
 msgstr "Дадена"
 
-#: src/mainwindow.cpp:2258
+#: src/mainwindow.cpp:2261
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2345
+#: src/mainwindow.cpp:2348
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
 "be saved and the images will be transferred to the new location."
 msgstr ""
 
-#: src/mainwindow.cpp:2386
+#: src/mainwindow.cpp:2389
 #, kde-format
 msgid "Update entry data from %1"
 msgstr ""
 
-#: src/mainwindow.cpp:2405
+#: src/mainwindow.cpp:2408
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6432,48 +6445,48 @@ msgid "&Import"
 msgstr "И&мпортиране"
 
 #. i18n: ectx: Menu (file_export)
-#: src/tellicoui.rc:61
+#: src/tellicoui.rc:62
 #, fuzzy, kde-format
 msgctxt "@title:menu"
 msgid "&Export"
 msgstr "Експортиране..."
 
 #. i18n: ectx: Menu (collection)
-#: src/tellicoui.rc:81
+#: src/tellicoui.rc:82
 #, fuzzy, kde-format
 msgctxt "@title:menu"
 msgid "&Collection"
 msgstr "BCCollection"
 
 #. i18n: ectx: Menu (coll_update_entry)
-#: src/tellicoui.rc:88
+#: src/tellicoui.rc:89
 #, fuzzy, kde-format
 msgctxt "@title:menu"
 msgid "&Update Entry"
 msgstr "Изтрий книга"
 
 #. i18n: ectx: Menu (coll_bibliography)
-#: src/tellicoui.rc:102
+#: src/tellicoui.rc:103
 #, fuzzy, kde-format
 msgctxt "@title:menu"
 msgid "&Bibliography"
 msgstr "Импортира Bibtexml файл ..."
 
 #. i18n: ectx: Menu (dockers)
-#: src/tellicoui.rc:112
+#: src/tellicoui.rc:113
 #, fuzzy, kde-format
 msgctxt "@title:menu"
 msgid "&Show Views"
 msgstr "BCGroupView"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: src/tellicoui.rc:128
+#: src/tellicoui.rc:129
 #, fuzzy, kde-format
 msgid "Main Toolbar"
 msgstr "Летна \"Колекция\""
 
 #. i18n: ectx: ToolBar (collectionToolBar)
-#: src/tellicoui.rc:135
+#: src/tellicoui.rc:136
 #, kde-format
 msgid "Collection Toolbar"
 msgstr "Летна \"Колекция\""
@@ -6678,6 +6691,7 @@ msgid "A valid XSLT file is needed to import the file."
 msgstr ""
 
 #: src/translators/boardgamegeekimporter.cpp:92
+#: src/translators/discogsimporter.cpp:80
 #: src/translators/goodreadsimporter.cpp:105
 #, kde-format
 msgid "A valid user ID must be entered."
@@ -6694,6 +6708,7 @@ msgid "Import owned items only"
 msgstr "Изтриване на няколко книги ?"
 
 #: src/translators/boardgamegeekimporter.cpp:255
+#: src/translators/discogsimporter.cpp:199
 #: src/translators/goodreadsimporter.cpp:154
 #, fuzzy, kde-format
 msgid "User ID:"
@@ -6883,6 +6898,11 @@ msgstr ""
 msgid "<New Field>"
 msgstr "Ново поле"
 
+#: src/translators/discogsimporter.cpp:191
+#, fuzzy, kde-format
+msgid "Discogs Options"
+msgstr "Опции за форматиране"
+
 #: src/translators/filelistingimporter.cpp:82
 #, fuzzy, kde-format
 msgid "Scanning files..."
@@ -7041,12 +7061,12 @@ msgid ""
 "com/export.php?export_type=json\">JSON format</a>."
 msgstr ""
 
-#: src/translators/librarythingimporter.cpp:185
+#: src/translators/librarythingimporter.cpp:187
 #, fuzzy, kde-format
 msgid "JSON Files"
 msgstr "Изтрий книга"
 
-#: src/translators/librarythingimporter.cpp:190
+#: src/translators/librarythingimporter.cpp:192
 #, kde-format
 msgid "LibraryThing file:"
 msgstr ""
