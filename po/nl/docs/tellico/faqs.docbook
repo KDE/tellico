@@ -35,33 +35,33 @@ application work. -->
 <qandaentry>
 <question>
 <para
->Kan ik, hoe de afgedrukte pagina er uitziet, wijzigen?</para>
+>Can I modify what the printed page looks like?</para>
 </question>
 <answer>
 
 <para
->Zeker. Zoek het bestand <filename
+>Yes, most certainly. Find the file <filename
 >tellico-printing.xsl</filename
->, die zich in de map $<envar
+> which should be in the $<envar
 >KDEDIR</envar
->/share/apps/tellico/ zou moeten bevinden. U kunt die kopiëren naar $<envar
+>/share/apps/tellico/ directory. You can copy that to $<envar
 >KDEHOME</envar
->/share/apps/tellico/ voor persoonlijke wijzigingen. U moet kennis hebben van <ulink url="http://www.w3.org/TR/xslt"
+>/share/apps/tellico/ for personal modifications. You'll have to know <ulink url="http://www.w3.org/TR/xslt"
 >&xslt;</ulink
->, maar dat bestand wijzigen is nodig om de opmaak van het afdrukken te wijzigen. Er wordt &HTML; gegenereerd uit het bestand en de gemakkelijkste manier om het uiterlijk van de afdruk te wijzigen is de &CSS; aan het begin te wijzigen.</para>
+>, but modifying that file is how you change the printing layout. &HTML; is generated from the file, and the easiest way to change the appearance of the printout is to modify the &CSS; in the top portion.</para>
 
 <para
->Let erop dat het bestand <filename
+>Be aware that the <filename
 >tellico-printing.xsl</filename
-> refereert naar een ander bestand, <filename
+> references another file, <filename
 >tellico-common.xsl</filename
->, die enkele gemeenschappelijke &xslt;-sjablonen bevat. Als u <filename
+>, that contains some common &xslt; templates. If you copy <filename
 >tellico-printing.xsl</filename
-> kopieert naar $<envar
+> to $<envar
 >KDEHOME</envar
->, dan moet u ofwel het &lt;xsl:import&gt; element laten wijzen naar de actuele locatie van het bestand <filename
+>, you must either modify the &lt;xsl:import&gt; element to point to the actual location of the <filename
 >tellico-common.xsl</filename
-> of ook het gemeenschappelijke bestand kopiëren. </para>
+> file or copy the common file as well. </para>
 </answer>
 </qandaentry>
 <qandaentry>
@@ -78,11 +78,11 @@ application work. -->
 <qandaentry>
 <question
 ><para
->Waarom verschijnt niet al dat 'gobbledy-gook' wanneer ik &appname; start?</para
+>Why does all that gobbledy-gook show up when I run &appname;?</para
 ></question>
 <answer>
 <para
->Dingen zoals: <screen width="40">
+>Stuff like: <screen width="40">
 <computeroutput
 >Tellico::updateCollectionToolBar</computeroutput>
 <computeroutput
@@ -93,25 +93,25 @@ application work. -->
 >QCheckBox::property( "title" ) failed: property invalid
 or does not exist</computeroutput>
 </screen
-> is debug-informatie. Bij het compileren, kan dit worden gestopt door te compileren met de valag <userinput
+> is debug info. At compile time, this can be stopped by compiling with the <userinput
 ><option
 >--disable-debug</option
 ></userinput
->. U zou ook <userinput
+> flag. You might also want to use <userinput
 ><option
 >--enable-final</option
 ></userinput
-> kunnen gebruiken, die iets meer geheugen gebruikt bij compileren, maar efficiënter is bij het uitvoeren van de toepassing.</para>
+>, too, which takes a bit more memory when compiling, but is more efficient when running the application.</para>
 
 <para
->Het laatste bericht is enigszins verschillend, het betekent gewoon dat uw &Qt;-installatie gecompileerd is met enige debugging-informatie.</para>
+>The last message is slightly different, it just means your &Qt; installation was compiled with some debugging information.</para>
 
 <para
->Of, als &appname; al is geïnstalleerd, voer <userinput
+>Or, if &appname; is already installed, run <userinput
 ><command
 >kdebugdialog</command
 ></userinput
-> uit en ga na dat "0 (algemeen)" niet is geactiveerd. Dat schakelt debugberichten uit van alle algemene &kde; toepassingen &ie; die niet officieel door &kde; worden gedistribueerd.</para>
+> and make sure that "0 (generic)" is unchecked. That turns off debug messages from all generic &kde; apps &ie; those not distributed officially by &kde;.</para>
 
 </answer>
 </qandaentry>
@@ -130,43 +130,43 @@ or does not exist</computeroutput>
 <qandaentry>
 <question
 ><para
->Hoe filter ik op zoiets als het veld "Gelezen"?</para
+>How do I filter by something like the "Read" field?</para
 ></question>
 <answer>
 <para
->Intern worden de keuzevakjes in &appname; opgeslagen als "geactiveerd", dus als u, bijvoorbeeld, wilt filteren op alleen de science fiction boeken die u nog niet hebt gelezen, dan moet u twee regels maken. Ga na dat knop "Alle volgenden moeten overeenkomen" is geactiveerd. Stel de eerste regel on op "Genre" "bevat" "Science Fiction" (geen aanhalingstekens) en de tweede regel op "Gelezen" "bevat geen" "waar" (geen aanhalingstekens) ).</para>
+>Internally, the checkbox fields in &appname; are saved as "true", so if you'd like to filter to show only the science fiction books which you've not read, for example, then you have two rules. Make sure the "Match all of the following" button is checked. Set the first rule to have "Genre" "contains" "Science Fiction" (no quotes) and the second rule to have "Read" "does not contain" "true" (no quotes).</para>
 
 <para
->Het snelfilter in de werkbalk zal overeenkomen met elk veld en, als er een niet-woord teken inzit, zal de tekst geïnterpreteerd worden als een reguliere expressie. Dus als u snel wilt filteren op boeken om alleen diegenen te tonen door Weber of Bujold, typ dan "weber|bujold" (zonder aanhalingstekens) in de werkbalk.</para>
+>Also, the quick filter in the toolbar will match any field, and if there is a non-word character, the text is interpreted as a regular expression. So if you quickly want to filter your books to show those by Weber or Bujold, then type "weber|bujold" (no quotes) in the toolbar.</para>
 </answer>
 </qandaentry>
 
 <qandaentry>
 <question
 ><para
->Hoe voeg ik nieuwe invoersjablonen toe?</para
+>How do I add new entry templates?</para
 ></question>
 
 <answer>
 <para
->Invoersjablonen moeten opgeslagen worden in <filename class="directory"
+>Entry templates should be saved in <filename class="directory"
 >$<envar
 >KDEHOME</envar
 >/share/apps/tellico/entry-templates/</filename
-> voor toegang voor een enkele gebruiker of <filename class="directory"
+> for access for a single user or <filename class="directory"
 >$<envar
 >KDEDIR</envar
 >/share/apps/tellico/entry-templates/</filename
-> voor toegang door iedereen. Sjablonen in $<envar
+> for access by everyone. Templates in $<envar
 >KDEHOME</envar
-> gaan boven elk bestand met dezelfde naam in $<envar
+> will override any files by the same name in $<envar
 >KDEDIRS</envar
->. De invoersjablonen kunnen ingesteld worden op basis van per type verzameling de instellingendialoog.</para>
+>. The entry templates can be set on a per collection-type basis in the settings dialog.</para>
 
 <para
->Sjablonen voor de <interface
->Reportagedialoog</interface
-> worden opgeslagen in <filename class="directory"
+>Templates for the <interface
+>Report Dialog</interface
+> are saved in <filename class="directory"
 >$<envar
 >KDEHOME</envar
 >/share/apps/tellico/report-templates/</filename
@@ -177,30 +177,30 @@ or does not exist</computeroutput>
 <qandaentry>
 <question
 ><para
->Compileren en installeren gingen goed, maar wanneer &appname; opstart is het venster blanco. Wat is er fout?</para
+>Compiling and installing went fine, but when &appname; starts up, the window is blank. What's wrong?</para
 ></question>
 
 <answer>
 <para
->&kde; programma's kijken naar gegevens in de locaties gedefinieerd in de omgevingsvariabele $<envar
+>&kde; programs look for data in the locations defined in the $<envar
 >KDEDIRS</envar
->. Als u bijvoorbeeld installeert in <filename class="directory"
+> environmental variable. If you install in <filename class="directory"
 >/usr/local</filename
->, maar $<envar
+> for example, but $<envar
 >KDEDIRS</envar
-> is leeg of alleen <filename class="directory"
+> is empty or just <filename class="directory"
 >/usr</filename
->, dan is &appname; niet in staat de benodigde bestanden te vinden. Dit is speciaal het geval voor &SuSE;, waarvoor u het zou moeten compileren met <userinput
+>, then &appname; won't be able to find the files it needs. This is particularly true for &SuSE;, for which you should compile with <userinput
 ><option
 >--prefix</option
 >=<filename class="directory"
 >/opt/kde3</filename
 ></userinput
->. Als alternatief kunt u een regel toevoegen aan uw bestand <filename
+>. Alternatively, you could add a line to your <filename
 >.profile</filename
-> om $<envar
+> file to set $<envar
 >KDEDIRS</envar
-> in te stellen. Controleer de documentatie voor uw shell.</para>
+>. Check the documentation for your shell.</para>
 </answer>
 </qandaentry>
 
@@ -228,12 +228,12 @@ or does not exist</computeroutput>
 <qandaentry>
 <question>
 <para
->Wat is er gebeurt met Bookcase?</para>
+>What happened to Bookcase?</para>
 </question>
 
 <answer>
 <para
->Vanwege een conflict met een handelsmerk, is Bookcase hernoemd tot Tellico in september 2004. Tellico 0.12 is toen vrijgegeven, die identiek is aan Bookcase 0.11, behalve voor de wijziging in de naam.</para>
+>Due to a trademark conflict, Bookcase was renamed Tellico in September 2004. Tellico 0.12 was then released, which was identical to Bookcase 0.11, except for the name change.</para>
 </answer>
 </qandaentry>
 
@@ -245,9 +245,9 @@ or does not exist</computeroutput>
 
 <answer>
 <para
->Ik heb nagedacht over <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
->verschillende andere namen</ulink
->, waarvan een paar verbonden waren met boekverzamelingen. Tellico kan echter meer behandelen dan alleen boeken en terzijde, dit is een hobby, dus koos ik een (voor mij) mooi klinkende naam, genomen van een plaats dichtbij waar ik opgegroeid ben.</para>
+>I thought about <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
+>several other names</ulink
+>, a few of which were connected with book collections. However, Tellico can handle more than just books, and besides, this is a hobby, so I chose a neat-sounding (to me) name, one taken from a town close to where I grew up.</para>
 </answer>
 </qandaentry>
 
@@ -273,7 +273,7 @@ or does not exist</computeroutput>
 
 <answer>
 <para
->Deel van de reden dat ik begon met &appname; was om C++ te leren. Op dat moment kende ik SQL nog niet en op dit moment heb ik alleen nog maar een flauw begrip van hoe het te gebruiken. Eenvoudig gezegd, &appname; is niet begonnen als een relationele database en dat zal niet veranderen tot enig moment in de toekomst wanneer ik me SQL heb eigen gemaakt en de tijd en de motivatie om het gegevensmodel te wijzigen. Als u daar last van hebt, gebruik &appname; dan niet. </para>
+>Part of the reason I started &appname; was to learn C++. I didn't know SQL at the time, and at the moment, I only have a faint knowledge of how to use it. Simply put, &appname; didn't start out as a relational database, and that won't change until sometime in the future when I get around to learning SQL and have the time and motivation to change the data model. If that bothers you, well, don't use &appname; then. </para>
 
 <para
 >Natuurlijk is iedereen welkom om elke wijziging die ze willen aan te brengen in de broncode. </para>

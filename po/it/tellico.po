@@ -5,14 +5,14 @@
 # Lorenzo Novaro <novalore@inwind.it>, 2004, 2005.
 # Valerio Ricci <pompafi@hotmail.it>, 2008, 2009, 2010.
 # Andrea Celli <a.celli@tiscali.it>, 2013.
-# Paolo Zamponi <feus73@gmail.com>, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2017, 2018, 2019, 2020, 2021, 2022, 2023 Paolo Zamponi <feus73@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-30 02:29+0000\n"
-"PO-Revision-Date: 2023-07-08 21:18+0200\n"
+"PO-Revision-Date: 2023-09-29 18:48+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4396,10 +4396,9 @@ msgid "Subscriber PIN: "
 msgstr "PIN dell'abbonato: "
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Collegamento a Colnect"
+msgstr "Collegamento a VGCollect"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format

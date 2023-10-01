@@ -54,11 +54,11 @@
 </screenshot>
 
 <para
->De <guilabel
->Algemene opties</guilabel
-> besturen het algemene gedrag. Afbeeldingen kunnen ingevoegd worden in de gegevensbestanden of apart opgeslagen in de toepassingsmap van &appname;. Het kan ook het laatste gegevensbestand, dat open was, opnieuw openen op het moment dat &appname; wordt gestart. De dialoog <guilabel
->Tip van de dag</guilabel
-> bevat behulpzame tips over het gebruik van &appname; en verschijnt bij het opstarten. U kunt enkele van de tips lezen en daarna de dialoog uitschakelen. </para>
+>The <guilabel
+>General Options</guilabel
+> control the general behavior. Images may be included in the data files, or saved separately in the &appname; application folder. Also, when &appname; is started, it can automatically reopen the last data file that was open. The <guilabel
+>Tip of the Day</guilabel
+> dialog contains helpful hints on using &appname; and appears at program startup. You may want to read through some of the hints and then disable the dialog. </para>
 
 <para
 >De <guilabel
@@ -602,7 +602,7 @@
 <para
 ><ulink url="http://allocine.fr"
 >AlloCiné</ulink
-> is een online informatieservice voor films, gebaseerd in Frankrijk. Identificatie van browser moet zijn ingeschakeld in &systemsettings; </para>
+> is an online movie information service, based in France. Browser Identification must be enabled in &systemsettings; </para>
 </sect3>
 
 </sect2>
@@ -618,7 +618,7 @@
 <para
 ><ulink url="http://discogs.com"
 >Discogs.com</ulink
-> is een door gebruikers gebouwde muziekdatabase met informatie over artiesten, labels en hun opnamen. Registratie voor een vrij account is vereist. Identificatie van browser moet zijn ingeschakeld in &systemsettings; </para>
+> is a user-built music database containing information on artists, labels, and their recordings. Registration for a free account is required. Browser Identification must be enabled in &systemsettings; </para>
 </sect3>
 
 <sect3 id="musicbrainz">
@@ -627,7 +627,7 @@
 <para
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
-> is een muziekmetadatabase van een gemeenschap die een beknopte informatiesite over muziek probeert te maken. Identificatie van browser moet zijn ingeschakeld in &systemsettings; </para>
+> is a community music metadatabase that attempts to create a comprehensive music information site. Browser Identification must be enabled in &systemsettings; </para>
 </sect3>
 
 </sect2>
@@ -719,7 +719,7 @@
 <para
 ><ulink url="https://colnect.com"
 >Colnect</ulink
-> is een online gemeenschap voor verzamelobjecten die persoonlijk beheer van verzamelingen levert. &tellico; kan Colnect doorzoeken op informatie over munten en postzegels. </para>
+> is an online community for collectibles providing personal collection management. &tellico; can search Colnect for coin and stamp information. </para>
 </sect3>
 
 <sect3 id="numista">
@@ -791,9 +791,9 @@
 > gebruikt, maar het kan ook andere formaten importeren, zoals bibtex. </para>
 
 <para
->Het volledige pad naar de toepassing zou ingevuld moeten worden in de bronopties. Merk op dat de toepassing wordt uitgevoerd op het systeem met dezelfde rechten als de huidige gebruiker, gebruik dus geen scripts uit niet vertrouwde bronnen. Activeer de vakjes naast de zoeksleutels ondersteund door de toepassing en voer de vereiste opdrachtregelopties in het bewerkingsvak. De zoekwaarde zal ingevoegd worden waar <userinput
+>The full path to the application should be entered in the source options. Be aware that the application is executed on the system with the same permissions as the current user, so do not use scripts from untrusted sources. Check the boxes next to the search keys supported by the application, and enter the required command line options in the edit box. The search value will be inserted where <userinput
 >%1</userinput
-> verschijnt. </para>
+> appears. </para>
 
 <para
 >Om items, die al in de verzameling zitten, bij te werken, worden het uiteindelijke keuzevakje en bewerkingsvak gebruikt om de opdrachtregelopties te bepalen. De invoervelden gebruikt om wat bijgewerkt moet worden te vinden moeten ingevoerd worden, in hetzelfde formaat als gebruikt voor <link linkend="derived"

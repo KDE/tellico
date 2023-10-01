@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-30 02:29+0000\n"
-"PO-Revision-Date: 2023-09-16 11:28+0200\n"
+"PO-Revision-Date: 2023-09-30 11:10+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -3837,10 +3837,9 @@ msgid "Discogs Audio Search"
 msgstr "Wyszukiwarka audio Discogs"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "Token użytkownika: "
+msgstr "Token użytkownika:"
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:618
@@ -4380,10 +4379,9 @@ msgid "Subscriber PIN: "
 msgstr "PIN abonenta: "
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Odnośnik Colnect"
+msgstr "Odnośnik VGCollect"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -5801,16 +5799,14 @@ msgid "Import audio CD information"
 msgstr "Importuje informacje o Audio CD"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Zaimportuj zbiór z Goodreads..."
+msgstr "Zaimportuj zbiór z Discogs..."
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Zaimportuj zbiór z Goodreads.com"
+msgstr "Zaimportuj zbiór z Discogs.com"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7105,10 +7101,9 @@ msgid "<New Field>"
 msgstr "<Nowe pole>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Odsyłacz Discogs"
+msgstr "Ustawienia Discogs"
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format

@@ -108,7 +108,7 @@
 >Gegevens importeren uit andere software</title>
 
 <para
->&appname; kan gegevens direct importeren uit een variëteit van andere programma's voor beheer van verzamelingen, inclusief <application
+>&appname; can import data directly from a variety of other collection management programs, including <application
 ><ulink url="http://www.gcstar.org"
 >GCstar</ulink
 ></application
@@ -132,7 +132,7 @@
 ><ulink url="https://en.wikipedia.org/wiki/Referencer"
 >Referencer</ulink
 ></application
-> en <application
+>, and <application
 ><ulink url="https://launchpad.net/griffith"
 >Griffith</ulink
 ></application
@@ -206,9 +206,9 @@
 >Gegevens van audio-cd's importeren</title>
 
 <para
->&appname; kan de service <ulink url="http://freedb.org"
+>&appname; is able to use the <ulink url="http://freedb.org"
 >freedb.org</ulink
-> gebruiken om informatie over een &CD; te gebruiken, inclusief de tracklijst. Afhankelijk van uw distributie, kunnen instellingen voor toegang tot de service ingesteld worden in het &kde; &systemsettings;. De artiest, titel, genre, jaar en tracklijst worden allen toegevoegd. </para>
+> service to lookup information about a &CD;, including the track list. Depending on your distribution, settings for access to the service may be set in the &kde; &systemsettings;. The &CD; artist, title, genre, year, and track listing are all added. </para>
 
 <para
 >Bovendien, als de schijf &CD;-tekst bevat, dan wordt die informatie gelezen en toegevoegd aan het geïmporteerde item. </para>
@@ -376,9 +376,9 @@
 >Slepen en loslaten</title>
 
 <para
->Slepen van gegevensbestanden naar het hoofdvenster van &appname; en ze loslaten zal de bestanden importeren, evenals indien het <link linkend="importing"
->importcommando</link
-> was gegeven vanuit de menu's. Slepen en loslaten werkt voor de volgende bestandsformaten: Tellico, Bibtex, RIS en &PDF;. Meerdere bestanden tegelijk importeren wordt ook ondersteund.</para>
+>Dragging data files to the main &appname; window and dropping them will import the files, just as if the <link linkend="importing"
+>import command</link
+> was made from the menus. Drag and drop works for the following file formats: Tellico, Bibtex, RIS, and &PDF;. Importing multiple files at once is also supported.</para>
 
 <para
 >Dus als u bijvoorbeeld verschillende <link linkend="importing-pdf"

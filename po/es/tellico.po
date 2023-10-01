@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-30 02:29+0000\n"
-"PO-Revision-Date: 2023-09-27 01:14+0200\n"
+"PO-Revision-Date: 2023-09-30 20:11+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -3589,8 +3589,8 @@ msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
 msgstr ""
-"Amazon.com proporciona datos desde diferentes servidores locales. Elija el "
-"que desee utilizar como fuente de datos."
+"Amazon.com proporciona datos de diferentes servidores locales. Elija el que "
+"desee utilizar como fuente de datos."
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:213
 #: src/fetch/colnectfetcher.cpp:947 src/fetch/itunesfetcher.cpp:517
@@ -3843,7 +3843,7 @@ msgstr "Número de catálogo"
 #: src/fetch/discogsfetcher.cpp:347
 #, kde-format
 msgid "The Discogs.com server reports a token error."
-msgstr "El servidor Discogs.com informa de un error de credenciales."
+msgstr "El servidor Discogs.com informa de un error de token."
 
 #: src/fetch/discogsfetcher.cpp:503
 #, kde-format
@@ -3851,10 +3851,9 @@ msgid "Discogs Audio Search"
 msgstr "Búsqueda de sonido en Discogs"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "Credencial de usuario:"
+msgstr "Token del usuario:"
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:618
@@ -4731,12 +4730,12 @@ msgstr "<qt>Introduzca los valores ISBN o UPC, uno por linea.</qt>"
 #: src/fetchdialog.cpp:773
 #, kde-format
 msgid "&Load From File..."
-msgstr "Car&gar desde archivo..."
+msgstr "Car&gar de archivo..."
 
 #: src/fetchdialog.cpp:774
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
-msgstr "<qt>Cargar la lista desde un archivo de texto.</qt>"
+msgstr "<qt>Cargar la lista de un archivo de texto.</qt>"
 
 #: src/fetchdialog.cpp:798
 #, kde-format
@@ -4777,7 +4776,7 @@ msgstr "Tellico admite varias fuentes de datos diferentes."
 #: src/fetcherconfigdialog.cpp:139
 #, kde-format
 msgid "Updating from source should overwrite user data"
-msgstr "Actualizar desde la fuente debería sobrescribir los datos de usuario"
+msgstr "Actualizar de la fuente debería sobrescribir los datos del usuario"
 
 #: src/fetcherconfigdialog.cpp:142
 #, kde-format
@@ -5643,7 +5642,7 @@ msgstr "Salir de la aplicación"
 #: src/mainwindow.cpp:372
 #, kde-format
 msgid "Import the collection data from other formats"
-msgstr "Importar datos de la colección desde otros formatos"
+msgstr "Importar los datos de colección de otros formatos"
 
 #: src/mainwindow.cpp:388
 #, kde-format
@@ -5693,7 +5692,7 @@ msgstr "Importar datos de Delicious Library..."
 #: src/mainwindow.cpp:403
 #, kde-format
 msgid "Import data from Delicious Library"
-msgstr "Importar datos desde Delicious Library"
+msgstr "Importar datos de Delicious Library"
 
 #: src/mainwindow.cpp:406
 #, kde-format
@@ -5703,7 +5702,7 @@ msgstr "Importar datos de Collectorz..."
 #: src/mainwindow.cpp:407
 #, kde-format
 msgid "Import data from Collectorz"
-msgstr "Importar datos desde Collectorz"
+msgstr "Importar datos de Collectorz"
 
 #: src/mainwindow.cpp:410
 #, kde-format
@@ -5713,7 +5712,7 @@ msgstr "Importar datos de Data Crow..."
 #: src/mainwindow.cpp:411
 #, kde-format
 msgid "Import data from Data Crow"
-msgstr "Importar datos desde Data Crow"
+msgstr "Importar datos de Data Crow"
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5723,7 +5722,7 @@ msgstr "Importar datos de Referencer..."
 #: src/mainwindow.cpp:415
 #, kde-format
 msgid "Import data from Referencer"
-msgstr "Importar datos desde Referencer"
+msgstr "Importar datos de Referencer"
 
 #: src/mainwindow.cpp:418
 #, kde-format
@@ -5773,7 +5772,7 @@ msgstr "Importar colección de Goodreads..."
 #: src/mainwindow.cpp:439
 #, kde-format
 msgid "Import a collection from Goodreads.com"
-msgstr "Importar una colección desde Goodreads.com"
+msgstr "Importar una colección de Goodreads.com"
 
 #: src/mainwindow.cpp:441
 #, kde-format
@@ -5783,7 +5782,7 @@ msgstr "Importar colección de LibraryThing..."
 #: src/mainwindow.cpp:442
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
-msgstr "Importar una colección desde LibraryThing.com"
+msgstr "Importar una colección de LibraryThing.com"
 
 #: src/mainwindow.cpp:444
 #, kde-format
@@ -5803,7 +5802,7 @@ msgstr "Importar metadatos de archivos de sonido..."
 #: src/mainwindow.cpp:448
 #, kde-format
 msgid "Import meta-data from audio files"
-msgstr "Importar metadatos desde archivos de sonido"
+msgstr "Importar metadatos de archivos de sonido"
 
 #: src/mainwindow.cpp:453
 #, kde-format
@@ -5816,16 +5815,14 @@ msgid "Import audio CD information"
 msgstr "Importar información de un CD de audio"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Importar colección de Goodreads..."
+msgstr "Importar colección de Discogs..."
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Importar una colección desde Goodreads.com"
+msgstr "Importar una colección de Discogs.com"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -5865,7 +5862,7 @@ msgstr "Importar colección de BoardGameGeek..."
 #: src/mainwindow.cpp:475
 #, kde-format
 msgid "Import a collection from BoardGameGeek.com"
-msgstr "Importar una colección desde BoardGameGeek.com"
+msgstr "Importar una colección de BoardGameGeek.com"
 
 #: src/mainwindow.cpp:477
 #, kde-format
@@ -6340,11 +6337,11 @@ msgid ""
 "by <a href=\"tc:///edit_search_internet\">downloading data</a> from various "
 "Internet sources.</h3>"
 msgstr ""
-"<h3>Tellico es una herramienta para gestionar colecciones de libros, vídeos,"
-"música o cualquier otra cosa que desee catalogar.</h3><h3>Puede añadir "
-"nuevas entradas a su colección <a href=\"tc:///coll_new_entry"
+"<h3>Tellico es una herramienta para la gestión de colecciones de libros, "
+"vídeos,música o cualquier otra cosa que desee catalogar.</h3><h3>Puede "
+"añadir nuevas entradas a la colección <a href=\"tc:///coll_new_entry"
 "\">introduciendo datos manualmente</a> o <a href=\"tc:///edit_search_internet"
-"\">descargando datos</a> desde diversas fuentes en Internet.</h3>"
+"\">descargando datos</a> de diversas fuentes de Internet.</h3>"
 
 #: src/mainwindow.cpp:1168
 #, kde-format
@@ -6381,8 +6378,8 @@ msgstr ""
 "<qt><p>Está guardando un archivo con muchas imágenes, lo que hace que "
 "Tellico se ralentice considerablemente. ¿Desea guardar las imágenes por "
 "separado en la carpeta de datos de Tellico para mejorar el rendimiento?</p> "
-"<p>Siempre podrá modificar su elección desde la ventana de configuración</"
-"p></qt>"
+"<p>Siempre podrá modificar esta opción en el diálogo de configuración</p></"
+"qt>"
 
 #: src/mainwindow.cpp:1414
 #, kde-format
@@ -7123,10 +7120,9 @@ msgid "<New Field>"
 msgstr "<Nuevo campo>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Enlace a Discogs"
+msgstr "Opciones de Discogs"
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format
@@ -7367,8 +7363,8 @@ msgid ""
 "data source with your account information."
 msgstr ""
 "Tellico puede descargar información sobre las entradas con un DOI desde "
-"CrossRef.org. Sin embargo, debe crear una cuenta CrossRef y añadir una nueva "
-"fuente de datos con la información de su cuenta."
+"CrossRef.org. Sin embargo, debe crear una cuenta en CrossRef y añadir una "
+"nueva fuente de datos con la información de su cuenta."
 
 #: src/translators/risimporter.cpp:337
 #, kde-format

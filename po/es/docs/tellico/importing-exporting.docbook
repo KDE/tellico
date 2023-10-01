@@ -120,6 +120,10 @@
 >Delicious Library</ulink
 ></application
 >, <application
+><ulink url="https://www.collectorz.com"
+>Collectorz</ulink
+></application
+>, <application
 ><ulink url="http://www.antp.be/software/moviecatalog/"
 >Ant Movie Catalog</ulink
 ></application
@@ -489,12 +493,12 @@
 
 <para
 ><application
-><ulink url="http://alexandria.rubyforge.net"
+><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
 >Alexandria</ulink
 ></application
-> is a book collection manager for the <ulink url="http://www.gnome.org"
+> es un gestor de colecciones de libros para el entorno de escritorio <ulink url="http://www.gnome.org"
 >GNOME</ulink
-> desktop environment. &appname; is able to export a limited subset of book collection fields to the default Alexandria data location. </para>
+>. &appname; puede exportar un subconjunto limitado de campos de las colecciones de libros a la localización por defecto de los datos de Alexandria. </para>
 
 </sect2>
 

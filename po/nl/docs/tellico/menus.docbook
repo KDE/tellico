@@ -36,11 +36,11 @@ or menu bars.
 
 <listitem>
 <para
->Deze opdracht <action
->maakt een nieuwe verzameling</action
->. &tellico; ondersteunt <link linkend="collection-types"
->12 standaard typen verzamelingen</link
-> naast een lege gebruikergedefinieerde aangepaste verzameling.</para>
+>This command <action
+>creates a new collection</action
+>. &tellico; supports <link linkend="collection-types"
+>12 default collection types</link
+> along with an empty user-defined custom collection.</para>
 </listitem>
 </varlistentry>
 

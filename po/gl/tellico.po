@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-30 02:29+0000\n"
-"PO-Revision-Date: 2023-09-24 15:32+0200\n"
+"PO-Revision-Date: 2023-09-30 09:31+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -4375,10 +4375,9 @@ msgid "Subscriber PIN: "
 msgstr "PIN de subscrición: "
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Ligazón de Colnect"
+msgstr "Ligazón de VGCollect"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format

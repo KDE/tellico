@@ -352,6 +352,15 @@
 >. </para>
 </sect3>
 
+<sect3 id="importing-discogs">
+<title
+>Importera samling från Discogs</title>
+<para
+><ulink url="https://www.goodreads.com"
+>Discogs</ulink
+> är en databas på Internet och marknadsplats för musikutgåvor. &appname; kan importera listan av musikutgåvor till en användares samling, om användarnamnet anges, under förutsättning att samlingen är inställd att vara öppet tillgänglig. </para>
+</sect3>
+
 </sect2>
 
 <sect2 id="importing-file-listing">
