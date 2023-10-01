@@ -1111,10 +1111,21 @@ void ConfigDialog::slotShowTemplatePreview() {
     } else if(f->type() == Data::Field::Bool) {
       e->setField(f->name(), QStringLiteral("true"));
     } else if(f->type() == Data::Field::Rating) {
-      e->setField(f->name(), QStringLiteral("5"));
+      e->setField(f->name(), QStringLiteral("4"));
     } else if(f->type() == Data::Field::URL) {
       e->setField(f->name(), QStringLiteral("https://tellico-project.org"));
       hasLink = true;
+    } else if(f->type() == Data::Field::Table) {
+      QStringList values;
+      bool ok;
+      int ncols = Tellico::toUInt(f->property(QStringLiteral("columns")), &ok);
+      ncols = qMax(ncols, 1);
+      for(int ncol = 1; ncol <= ncols; ++ncol) {
+        const auto prop = QStringLiteral("column%1").arg(ncol);
+        const auto col = f->property(prop);
+        values += col.isEmpty() ? prop : col;
+      }
+      e->setField(f->name(), values.join(FieldFormat::columnDelimiterString()));
     } else {
       e->setField(f->name(), f->title());
     }
