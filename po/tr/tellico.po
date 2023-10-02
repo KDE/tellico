@@ -6,13 +6,13 @@
 # Kunter Kutlu <kunterkutlu@gmail.com>, 2007.
 # obsoleteman <tulliana@gmail.com>, 2009,2012.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014, 2017.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-30 02:29+0000\n"
-"PO-Revision-Date: 2023-08-02 00:37+0300\n"
+"PO-Revision-Date: 2023-10-01 12:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.11.70\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3840,10 +3840,9 @@ msgid "Discogs Audio Search"
 msgstr "Discogs Ses Arama"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "Kullanıcı jetonu: "
+msgstr "Kullanıcı jetonu:"
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:618
@@ -5826,16 +5825,14 @@ msgid "Import audio CD information"
 msgstr "Ses CD'si bilgisi içe aktar"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Goodreads Koleksiyonu İçe Aktar..."
+msgstr "Discogs Koleksiyonu İçe Aktar..."
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Goodreads.com adresinden bir koleksiyonu içe aktar"
+msgstr "Discogs.com adresinden bir koleksiyonu içe aktar"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7126,10 +7123,9 @@ msgid "<New Field>"
 msgstr "<Yeni Alan>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Discogs Bağlantısı"
+msgstr "Discogs Seçenekleri"
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format
