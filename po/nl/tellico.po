@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-01 00:43+0000\n"
-"PO-Revision-Date: 2023-09-27 12:18+0200\n"
+"PO-Revision-Date: 2023-10-01 14:25+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -3834,8 +3834,7 @@ msgid "Discogs Audio Search"
 msgstr "Discogs Audio-zoeken"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
 msgstr "Gebruikerstoken: "
 
@@ -5798,14 +5797,12 @@ msgid "Import audio CD information"
 msgstr "Importeer audio-cd informatie"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
 msgstr "Goodreads-verzameling importeren..."
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
 msgstr "Een verzameling uit Goodreads.com importeren"
 
@@ -7110,8 +7107,7 @@ msgid "<New Field>"
 msgstr "<Nieuw veld>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
 msgstr "Discogs-koppeling"
 

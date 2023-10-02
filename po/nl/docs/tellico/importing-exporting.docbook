@@ -351,6 +351,15 @@
 >. </para>
 </sect3>
 
+<sect3 id="importing-discogs">
+<title
+>Discogs-verzameling importeren</title>
+<para
+><ulink url="https://www.discogs.com"
+>Discogs</ulink
+> is een online database en marktplaats voor muziekuitgaven. &appname; kan de lijst met muziekuitgaven in een verzameling van een gebruiker importeren, gegeven de gebruikersnaam, zolang de verzameling is ingesteld als publiek toegankelijk. </para>
+</sect3>
+
 </sect2>
 
 <sect2 id="importing-file-listing">

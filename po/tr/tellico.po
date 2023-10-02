@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-01 00:43+0000\n"
-"PO-Revision-Date: 2023-09-27 12:48+0300\n"
+"PO-Revision-Date: 2023-10-01 12:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3810,10 +3810,9 @@ msgid "Discogs Audio Search"
 msgstr "Discogs Ses Arama"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "Kullanıcı jetonu: "
+msgstr "Kullanıcı jetonu:"
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:618
@@ -5766,16 +5765,14 @@ msgid "Import audio CD information"
 msgstr "Ses CD'si bilgisi içe aktar"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Goodreads Koleksiyonu İçe Aktar..."
+msgstr "Discogs Koleksiyonu İçe Aktar..."
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Goodreads.com adresinden bir koleksiyonu içe aktar"
+msgstr "Discogs.com adresinden bir koleksiyonu içe aktar"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7065,10 +7062,9 @@ msgid "<New Field>"
 msgstr "<Yeni Alan>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Discogs Bağlantısı"
+msgstr "Discogs Seçenekleri"
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format

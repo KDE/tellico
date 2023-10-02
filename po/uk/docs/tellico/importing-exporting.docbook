@@ -344,6 +344,15 @@
 >. </para>
 </sect3>
 
+<sect3 id="importing-discogs">
+<title
+>Імпортування збірки Discogs</title>
+<para
+><ulink url="https://www.discogs.com"
+>Discogs</ulink
+> — база даних в інтернеті та торговельний майданчик для музики. &appname; може імпортувати список музичний творів зі збірки користувача, якщо програмі надано ім’я користувача, а доступ до збірки відкрито. </para>
+</sect3>
+
 </sect2>
 
 <sect2 id="importing-file-listing">

@@ -350,6 +350,15 @@
 >. </para>
 </sect3>
 
+<sect3 id="importing-discogs">
+<title
+>Importar colección de Discogs</title>
+<para
+><ulink url="https://www.discogs.com"
+>Discogs</ulink
+> es una base de datos en línea y un mercado de lanzamientos musicales. &appname; puede importar la lista de lanzamientos musicales en una colección de un usuario, dado el nombre de usuario, siempre que la colección esté configurada para que se pueda acceder a ella públicamente. </para>
+</sect3>
+
 </sect2>
 
 <sect2 id="importing-file-listing">

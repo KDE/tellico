@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-01 00:43+0000\n"
-"PO-Revision-Date: 2023-03-23 21:50+0100\n"
+"PO-Revision-Date: 2023-10-01 06:01+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -3713,10 +3713,9 @@ msgid "Discogs Audio Search"
 msgstr ""
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User ID:"
+#, kde-format
 msgid "User token:"
-msgstr "Uzant-ID:"
+msgstr "Uzant-ĵetono:"
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:618
@@ -6870,10 +6869,9 @@ msgid "<New Field>"
 msgstr ""
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Description"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Priskribo"
+msgstr "Discogs-Opcioj"
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format

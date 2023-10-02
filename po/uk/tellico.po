@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-01 00:43+0000\n"
-"PO-Revision-Date: 2023-09-27 08:20+0300\n"
+"PO-Revision-Date: 2023-10-01 09:03+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -3817,8 +3817,7 @@ msgid "Discogs Audio Search"
 msgstr "Аудіопошук Discogs"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
 msgstr "Ключ користувача: "
 
@@ -5765,16 +5764,14 @@ msgid "Import audio CD information"
 msgstr "Імпорт інформації про Audio CD з бази даних FreeDB"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Імпортувати збірку Goodreads…"
+msgstr "Імпортувати збірку Discogs…"
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Імпортувати збірку з Goodreads.com"
+msgstr "Імпортувати збірку з Discogs.com"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7063,10 +7060,9 @@ msgid "<New Field>"
 msgstr "<Нове поле>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Посилання Discogs"
+msgstr "Параметри Discogs"
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format

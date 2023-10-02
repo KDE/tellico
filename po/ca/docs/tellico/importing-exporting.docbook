@@ -348,6 +348,15 @@
 >. </para>
 </sect3>
 
+<sect3 id="importing-discogs">
+<title
+>Importar col·leccions de «Discogs»</title>
+<para
+><ulink url="https://www.goodreads.com"
+>Discogs</ulink
+> és una base de dades i mercat en línia de llançaments musicals. El &appname; pot importar la llista de llançaments musicals en una col·lecció d'usuari, indicant el nom d'usuari, sempre que la col·lecció s'hagi definit com a públicament accessible. </para>
+</sect3>
+
 </sect2>
 
 <sect2 id="importing-file-listing">
