@@ -186,12 +186,6 @@
 
     <xsl:otherwise>
      <xsl:value-of select="$child"/>
-     <!-- hack for running-time in videos -->
-     <!--
-     <xsl:if test="$field='running-time' and key('fieldsByName',$field)/@type=6">
-      <xsl:text> minutes</xsl:text>
-     </xsl:if>
-     -->
     </xsl:otherwise>
    </xsl:choose>
   </xsl:when>
