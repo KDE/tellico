@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-30 02:29+0000\n"
+"POT-Creation-Date: 2023-10-04 02:26+0000\n"
 "PO-Revision-Date: 2023-09-29 18:48+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -714,7 +714,7 @@ msgstr ""
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
 #: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:203 src/configdialog.cpp:1126
+#: src/configdialog.cpp:203 src/configdialog.cpp:1137
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -2827,18 +2827,18 @@ msgstr "&Elimina"
 msgid "Click to delete the selected data source."
 msgstr "Fai clic per eliminare la fonte selezionata."
 
-#: src/configdialog.cpp:1158 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1169 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
 msgstr "File XSL"
 
-#: src/configdialog.cpp:1159
+#: src/configdialog.cpp:1170
 #, kde-format
 msgid "Template Packages"
 msgstr "Pacchetti di modelli"
 
-#: src/configdialog.cpp:1160 src/importdialog.cpp:446 src/mainwindow.cpp:1284
+#: src/configdialog.cpp:1171 src/importdialog.cpp:446 src/mainwindow.cpp:1284
 #: src/mainwindow.cpp:1459 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2853,12 +2853,12 @@ msgstr "Pacchetti di modelli"
 msgid "All Files"
 msgstr "Tutti i file"
 
-#: src/configdialog.cpp:1189
+#: src/configdialog.cpp:1200
 #, kde-format
 msgid "Delete Template"
 msgstr "Elimina modello"
 
-#: src/configdialog.cpp:1190
+#: src/configdialog.cpp:1201
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Seleziona il modello da eliminare:"
