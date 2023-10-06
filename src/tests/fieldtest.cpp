@@ -133,4 +133,10 @@ void FieldTest::testUrlFieldLogic() {
 
   logic.setRelative(false);
   QCOMPARE(logic.urlText(u), u.url());
+
+  // test relative to url for unknown document
+  logic.setBaseUrl(QUrl(QStringLiteral("file:Unknown")));
+  logic.setRelative(true);
+  // logic result should not be a relative path, but full path
+  QCOMPARE(logic.urlText(u), u.url());
 }

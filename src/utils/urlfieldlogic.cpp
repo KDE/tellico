@@ -49,6 +49,9 @@ QString UrlFieldLogic::urlText(const QUrl& url_) const {
     return url_.url(QUrl::PrettyDecoded | QUrl::NormalizePathSegments);
   }
   // BUG 410551: use the directory of the base url, not the file itself, in the QDir c'tor
-  return QDir(m_baseUrl.adjusted(QUrl::RemoveFilename).path())
-             .relativeFilePath(url_.path());
+  const QDir dir(m_baseUrl.adjusted(QUrl::RemoveFilename).path());
+  // if it's a relative path, don't try to resolve the logic
+  return dir.isRelative() ?
+         url_.url(QUrl::PrettyDecoded | QUrl::NormalizePathSegments) :
+         dir.relativeFilePath(url_.path());
 }
