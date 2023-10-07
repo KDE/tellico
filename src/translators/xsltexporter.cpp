@@ -47,7 +47,7 @@ XSLTExporter::XSLTExporter(Data::CollPtr coll_) : Export::Exporter(coll_),
 }
 
 QString XSLTExporter::formatString() const {
-  return i18n("XSLT");
+  return QStringLiteral("XSLT");
 }
 
 QString XSLTExporter::fileFilter() const {

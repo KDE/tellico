@@ -71,6 +71,7 @@ public:
   void setFields(const Data::FieldList& fields) { m_fields = fields; }
   void setOptions(long options) { m_options = options; reset(); }
 
+  // used for saving config options, do not translate
   virtual QString formatString() const = 0;
   virtual QString fileFilter() const = 0;
   const QUrl& url() const { return m_url; }

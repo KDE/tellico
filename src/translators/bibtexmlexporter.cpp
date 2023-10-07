@@ -44,7 +44,7 @@ BibtexmlExporter::BibtexmlExporter(Data::CollPtr coll_) : Exporter(coll_) {
 }
 
 QString BibtexmlExporter::formatString() const {
-  return i18n("Bibtexml");
+  return QStringLiteral("Bibtexml");
 }
 
 QString BibtexmlExporter::fileFilter() const {

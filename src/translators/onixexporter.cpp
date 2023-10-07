@@ -64,7 +64,7 @@ ONIXExporter::~ONIXExporter() {
 }
 
 QString ONIXExporter::formatString() const {
-  return i18n("ONIX Archive");
+  return QStringLiteral("ONIX");
 }
 
 QString ONIXExporter::fileFilter() const {

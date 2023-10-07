@@ -47,7 +47,7 @@ TellicoZipExporter::TellicoZipExporter(Data::CollPtr coll) : Exporter(coll)
 }
 
 QString TellicoZipExporter::formatString() const {
-  return i18n("Tellico Zip File");
+  return QStringLiteral("Zip");
 }
 
 QString TellicoZipExporter::fileFilter() const {

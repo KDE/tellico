@@ -65,7 +65,7 @@ QString AlexandriaExporter::escapeText(const QString& str_) {
 }
 
 QString AlexandriaExporter::formatString() const {
-  return i18n("Alexandria");
+  return QStringLiteral("Alexandria");
 }
 
 bool AlexandriaExporter::exec() {

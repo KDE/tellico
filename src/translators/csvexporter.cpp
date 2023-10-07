@@ -57,7 +57,7 @@ CSVExporter::CSVExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll_)
 }
 
 QString CSVExporter::formatString() const {
-  return i18n("CSV");
+  return QStringLiteral("CSV");
 }
 
 QString CSVExporter::fileFilter() const {

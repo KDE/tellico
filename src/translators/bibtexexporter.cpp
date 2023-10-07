@@ -58,7 +58,7 @@ BibtexExporter::BibtexExporter(Data::CollPtr coll) : Tellico::Export::Exporter(c
 }
 
 QString BibtexExporter::formatString() const {
-  return i18n("Bibtex");
+  return QStringLiteral("Bibtex");
 }
 
 QString BibtexExporter::fileFilter() const {

@@ -93,7 +93,7 @@ HTMLExporter::~HTMLExporter() {
 }
 
 QString HTMLExporter::formatString() const {
-  return i18n("HTML");
+  return QStringLiteral("HTML");
 }
 
 QString HTMLExporter::fileFilter() const {

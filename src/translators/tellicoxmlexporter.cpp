@@ -65,7 +65,7 @@ TellicoXMLExporter::~TellicoXMLExporter() {
 }
 
 QString TellicoXMLExporter::formatString() const {
-  return i18n("XML");
+  return QStringLiteral("XML");
 }
 
 QString TellicoXMLExporter::fileFilter() const {
