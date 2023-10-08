@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-04 02:26+0000\n"
-"PO-Revision-Date: 2023-09-30 09:31+0200\n"
+"PO-Revision-Date: 2023-10-07 11:20+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -3831,10 +3831,9 @@ msgid "Discogs Audio Search"
 msgstr "Busca de son en Discogs"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "Código da usuaria: "
+msgstr "Código da usuaria:"
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:618
@@ -5790,16 +5789,14 @@ msgid "Import audio CD information"
 msgstr "Importa información dun CD de son"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Importar a colección de Goodreads…"
+msgstr "Importar a colección de Discogs…"
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Importar unha colección de Goodreads.com"
+msgstr "Importar unha colección de Discogs.com"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7091,10 +7088,9 @@ msgid "<New Field>"
 msgstr "<Novo campo>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Ligazón de Discogs"
+msgstr "Opcións de Discogs"
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format
