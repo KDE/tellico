@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-01 00:43+0000\n"
+"POT-Creation-Date: 2023-10-08 00:43+0000\n"
 "PO-Revision-Date: 2023-10-01 12:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -704,7 +704,7 @@ msgstr "Türetilmiş değer içeren bir alanın bir değer şablonu olmalıdır.
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
 #: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:203 src/configdialog.cpp:1118
+#: src/configdialog.cpp:203 src/configdialog.cpp:1129
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -2792,18 +2792,18 @@ msgstr "&Sil"
 msgid "Click to delete the selected data source."
 msgstr "Seçili veri kaynağını silmek için tıklayın."
 
-#: src/configdialog.cpp:1150 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1161 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL Dosyaları"
 
-#: src/configdialog.cpp:1151
+#: src/configdialog.cpp:1162
 #, kde-format
 msgid "Template Packages"
 msgstr "Şablon Paketleri"
 
-#: src/configdialog.cpp:1152 src/importdialog.cpp:446 src/mainwindow.cpp:1279
+#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1279
 #: src/mainwindow.cpp:1454 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2818,12 +2818,12 @@ msgstr "Şablon Paketleri"
 msgid "All Files"
 msgstr "Tüm Dosyalar"
 
-#: src/configdialog.cpp:1181
+#: src/configdialog.cpp:1192
 #, kde-format
 msgid "Delete Template"
 msgstr "Şablonu Sil"
 
-#: src/configdialog.cpp:1182
+#: src/configdialog.cpp:1193
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Silmek için şablon seçin:"

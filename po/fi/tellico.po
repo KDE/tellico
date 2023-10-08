@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-01 00:43+0000\n"
+"POT-Creation-Date: 2023-10-08 00:43+0000\n"
 "PO-Revision-Date: 2023-08-28 15:32+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -706,7 +706,7 @@ msgstr "Johdannaisarvoinen kenttä vaatii arvomallin."
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
 #: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:203 src/configdialog.cpp:1118
+#: src/configdialog.cpp:203 src/configdialog.cpp:1129
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -2803,18 +2803,18 @@ msgstr "P&oista"
 msgid "Click to delete the selected data source."
 msgstr "Poista valittu tietolähde napsauttamalla."
 
-#: src/configdialog.cpp:1150 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1161 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL-tiedostot"
 
-#: src/configdialog.cpp:1151
+#: src/configdialog.cpp:1162
 #, kde-format
 msgid "Template Packages"
 msgstr "Mallipohjapaketit"
 
-#: src/configdialog.cpp:1152 src/importdialog.cpp:446 src/mainwindow.cpp:1279
+#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1279
 #: src/mainwindow.cpp:1454 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2829,12 +2829,12 @@ msgstr "Mallipohjapaketit"
 msgid "All Files"
 msgstr "Kaikki tiedostot"
 
-#: src/configdialog.cpp:1181
+#: src/configdialog.cpp:1192
 #, kde-format
 msgid "Delete Template"
 msgstr "Poista mallipohja"
 
-#: src/configdialog.cpp:1182
+#: src/configdialog.cpp:1193
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Valitse poistettava mallipohja:"

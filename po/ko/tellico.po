@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-01 00:43+0000\n"
+"POT-Creation-Date: 2023-10-08 00:43+0000\n"
 "PO-Revision-Date: 2023-07-25 01:20+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -689,7 +689,7 @@ msgstr "값이 파생된 필드는 값 템플릿이 있어야 합니다."
 #: src/collections/stampcollection.cpp:30
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
 #: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:203 src/configdialog.cpp:1118
+#: src/configdialog.cpp:203 src/configdialog.cpp:1129
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
@@ -2773,18 +2773,18 @@ msgstr "삭제(&D)"
 msgid "Click to delete the selected data source."
 msgstr "선택한 데이터 원본을 삭제하려면 여기를 클릭하십시오."
 
-#: src/configdialog.cpp:1150 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1161 src/translators/xsltexporter.cpp:99
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL 파일"
 
-#: src/configdialog.cpp:1151
+#: src/configdialog.cpp:1162
 #, kde-format
 msgid "Template Packages"
 msgstr "템플릿 패키지"
 
-#: src/configdialog.cpp:1152 src/importdialog.cpp:446 src/mainwindow.cpp:1279
+#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1279
 #: src/mainwindow.cpp:1454 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2799,12 +2799,12 @@ msgstr "템플릿 패키지"
 msgid "All Files"
 msgstr "모든 파일"
 
-#: src/configdialog.cpp:1181
+#: src/configdialog.cpp:1192
 #, kde-format
 msgid "Delete Template"
 msgstr "템플릿 삭제"
 
-#: src/configdialog.cpp:1182
+#: src/configdialog.cpp:1193
 #, kde-format
 msgid "Select template to delete:"
 msgstr "삭제할 템플릿 선택:"
