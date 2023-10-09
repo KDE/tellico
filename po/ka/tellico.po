@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-08 00:43+0000\n"
-"PO-Revision-Date: 2023-09-29 04:52+0200\n"
+"PO-Revision-Date: 2023-10-08 05:40+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3729,10 +3729,9 @@ msgid "Discogs Audio Search"
 msgstr "აუდიოძებნა Discogs"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "მომხმარებლის კოდი: "
+msgstr "მომხმარებლის კოდი:"
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:618
@@ -5633,16 +5632,14 @@ msgid "Import audio CD information"
 msgstr "აუდიო CD-ის ინფორმაციის შემოტანა"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Goodreads-ის კოლექციის შემოტანა..."
+msgstr "Discogs-ის კოლექციის შემოტანა..."
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Goodreads.com-დან კოლექციის შემოტანა"
+msgstr "Discogs.com-დან კოლექციის შემოტანა"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -6889,10 +6886,9 @@ msgid "<New Field>"
 msgstr "<ახალი ველი>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Discogs -ის ბული"
+msgstr "Discogs-ის მორგება"
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format
