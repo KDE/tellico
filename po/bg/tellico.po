@@ -7426,14 +7426,3 @@ msgstr "Търсене"
 #, kde-format
 msgid "Clear"
 msgstr "Изчистване"
-
-#, fuzzy
-#~ msgid "Click to download additional data sources."
-#~ msgstr "Изтриване на няколко книги ?"
-
-#~ msgid "Edit..."
-#~ msgstr "Редакция..."
-
-#, fuzzy
-#~ msgid "Creating new document..."
-#~ msgstr "Създава нов документ"

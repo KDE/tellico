@@ -2954,7 +2954,8 @@ msgstr ""
 #: src/core/filehandler.cpp:150
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
-msgstr "Hi ha un error en l'anàlisi sintàctica XML en la línia %1, columna %2."
+msgstr ""
+"S'ha produït un error en l'anàlisi sintàctica XML en la línia %1, columna %2."
 
 #: src/core/filehandler.cpp:152
 #, kde-format
@@ -5231,7 +5232,7 @@ msgstr "Fitxers de Tellico"
 #: src/mainwindow.cpp:1282 src/translators/tellicoxmlexporter.cpp:72
 #, kde-format
 msgid "XML Files"
-msgstr "Fitxers XML"
+msgstr "Fitxers en XML"
 
 #: src/importdialog.cpp:382 src/translators/bibtexexporter.cpp:65
 #, kde-format
@@ -5915,7 +5916,7 @@ msgstr "Exporta cap a XML..."
 #: src/mainwindow.cpp:516
 #, kde-format
 msgid "Export to a Tellico XML file"
-msgstr "Exporta cap a un fitxer XML de Tellico"
+msgstr "Exporta cap a un fitxer en XML de Tellico"
 
 #: src/mainwindow.cpp:519
 #, kde-format
@@ -7602,7 +7603,7 @@ msgid ""
 "outputs a valid Tellico XML file.</p>\n"
 msgstr ""
 "<p>...que podeu importar utilitzant qualsevol full d'estil XSL genèric\n"
-"el qual generarà un fitxer XML vàlid de Tellico.</p>\n"
+"el qual generarà un fitxer en XML vàlid de Tellico.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:81
