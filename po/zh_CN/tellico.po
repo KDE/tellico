@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-08 00:43+0000\n"
-"PO-Revision-Date: 2023-09-16 10:09\n"
+"PO-Revision-Date: 2023-10-10 14:30\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -262,10 +262,9 @@ msgid "Card Collection"
 msgstr "卡片收藏"
 
 #: src/collectionfactory.cpp:94
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "视频收藏"
+msgstr ""
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1409,10 +1408,9 @@ msgid "Icon"
 msgstr "图标"
 
 #: src/collections/gamecollection.cpp:39
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "我的视频"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -4252,11 +4250,9 @@ msgid "Subscriber PIN: "
 msgstr ""
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&Collection"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "收藏(&C)"
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -5367,16 +5363,14 @@ msgid "Create a new wine collection"
 msgstr "创建新葡萄酒收藏"
 
 #: src/mainwindow.cpp:302
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "新建游戏收藏(&G)"
+msgstr ""
 
 #: src/mainwindow.cpp:303
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "创建新视频收藏"
+msgstr ""
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -5629,16 +5623,14 @@ msgid "Import audio CD information"
 msgstr "导入音频 CD 信息"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import File Listing..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "导入文件列表..."
+msgstr ""
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import the collection data from other formats"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "从其他格式导入收藏数据"
+msgstr ""
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -6884,10 +6876,9 @@ msgid "<New Field>"
 msgstr "<新建域>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Discogs 链接"
+msgstr ""
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format
@@ -7268,12 +7259,3 @@ msgstr "搜索"
 #, kde-format
 msgid "Clear"
 msgstr "清除"
-
-#~ msgid "Game Collection"
-#~ msgstr "游戏收藏"
-
-#~ msgid "My Games"
-#~ msgstr "我的游戏"
-
-#~ msgid "Create a new game collection"
-#~ msgstr "创建新游戏收藏"
