@@ -3814,10 +3814,9 @@ msgid "Discogs Audio Search"
 msgstr "Audio vyhledávání Discogs"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User ID:"
+#, kde-format
 msgid "User token:"
-msgstr "ID uživatele:"
+msgstr ""
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:618
@@ -4353,11 +4352,9 @@ msgid "Subscriber PIN: "
 msgstr "Registrační PIN: "
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&Collection"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "&Sbírka"
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -5762,16 +5759,14 @@ msgid "Import audio CD information"
 msgstr "Importovat informace z audio CD"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import BoardGameGeek Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Importovat sbírku BoardGameGeek..."
+msgstr ""
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from BoardGameGeek.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Importovat sbírku z BoardGameGeek.com"
+msgstr ""
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7055,10 +7050,9 @@ msgid "<New Field>"
 msgstr "<Nové pole>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Odkaz Discogs"
+msgstr ""
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format

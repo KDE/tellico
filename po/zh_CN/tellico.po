@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-04 02:26+0000\n"
-"PO-Revision-Date: 2023-09-16 10:12\n"
+"PO-Revision-Date: 2023-10-10 14:34\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -4260,11 +4260,9 @@ msgid "Subscriber PIN: "
 msgstr ""
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&Collection"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "收藏(&C)"
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -5635,16 +5633,14 @@ msgid "Import audio CD information"
 msgstr "导入音频 CD 信息"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import File Listing..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "导入文件列表..."
+msgstr ""
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import the collection data from other formats"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "从其他格式导入收藏数据"
+msgstr ""
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -6890,10 +6886,9 @@ msgid "<New Field>"
 msgstr "<新建域>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Discogs 链接"
+msgstr ""
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format
