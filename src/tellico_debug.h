@@ -30,6 +30,8 @@
 // amarok is licensed under the GPL
 
 #include <QDebug>
+#include <QLoggingCategory>
+
 // std::clock_t
 #include <ctime>
 
@@ -58,39 +60,26 @@
 #  endif
 # endif
 
-// some logging
-#if !defined(KDE_NO_DEBUG_OUTPUT)
-#define TELLICO_LOG
-#endif
-
 #ifndef DEBUG_PREFIX
   #define FUNC_PREFIX ""
 #else
   #define FUNC_PREFIX "[" DEBUG_PREFIX "] "
 #endif
 
-#define myDebug()   qDebug()
-#define myWarning() qWarning()
-#ifdef TELLICO_LOG
-#define myLog()     qDebug()
-#else
-#define myLog()     //qDebug()
-#endif
+Q_DECLARE_LOGGING_CATEGORY(TELLICO)
+
+#define myLog()     qCInfo(TELLICO)
+#define myDebug()   qDebug(TELLICO)
+#define myWarning() qCWarning(TELLICO)
 
 namespace Debug {
 
 class Block {
 
 public:
-  Block(const char* label) : m_start(std::clock()), m_label(label) {
-    QDebug(QtDebugMsg) << "BEGIN:" << label;
-  }
+  Block(const char* label);
 
-  ~Block() {
-    std::clock_t finish = std::clock();
-    const double duration = (double) (finish - m_start) / CLOCKS_PER_SEC;
-    QDebug(QtDebugMsg) << "  END:" << m_label << "- duration =" << duration;
-  }
+  ~Block();
 
 private :
   std::clock_t m_start;
@@ -112,7 +101,7 @@ private :
 #define DEBUG_BLOCK
 #endif
 
-#if defined(TELLICO_LOG) && !defined(WIN32) && (defined(__unix__) || defined(__unix))
+#if !defined(QT_NO_INFO_OUTPUT) && !defined(WIN32) && (defined(__unix__) || defined(__unix))
 #include <unistd.h>
 // see https://www.gnome.org/~federico/news-2006-03.html#timeline-tools
 // strace -ttt -f -o /tmp/logfile.strace src/tellico

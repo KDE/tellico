@@ -25,7 +25,9 @@
 #include <config.h>
 
 #include "mainwindow.h"
+#include "core/logger.h"
 #include "translators/translators.h" // needed for file type enum
+#include "tellico_debug.h"
 
 #include <KAboutData>
 #include <KLocalizedString>
@@ -40,6 +42,7 @@
 #include <QDir>
 #include <QFile>
 #include <QStack>
+#include <QDebug>
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
@@ -146,6 +149,8 @@ int main(int argc, char* argv[]) {
   parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("mods"), i18n("Import <filename> as a MODS file")));
   parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("ris"), i18n("Import <filename> as a RIS file")));
   parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("pdf"), i18n("Import <filename> as a PDF file")));
+  parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("log"), i18n("Log diagnostic output")));
+  parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("logfile"), i18n("Write log output to <filename>"), QStringLiteral("logfile")));
   parser.addPositionalArgument(QStringLiteral("[filename]"), i18n("File to open"));
 
   aboutData.setupCommandLine(&parser);
@@ -154,7 +159,27 @@ int main(int argc, char* argv[]) {
   aboutData.processCommandLine(&parser);
   KAboutData::setApplicationData(aboutData);
 
+#ifndef NDEBUG
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true"));
+#endif
+  // initialize logger
+  Tellico::Logger::self();
+  QString logFile = qEnvironmentVariable("TELLICO_LOGFILE");
+  if(parser.isSet(QStringLiteral("logfile"))) {
+    logFile = parser.value(QStringLiteral("logfile"));
+  }
+  if(logFile.isEmpty() && parser.isSet(QStringLiteral("log"))) {
+    // use default log file location
+    logFile = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QStringLiteral("/tellico_log.txt");
+  }
+  if(!logFile.isEmpty()) {
+    Tellico::Logger::self()->setLogFile(logFile);
+    myLog() << "Starting Tellico at" << QDateTime::currentDateTime().toString(Qt::ISODate);
+    myLog() << "Opening log file" << logFile;
+  }
+
   if(app.isSessionRestored()) {
+    myLog() << "Restoring previous session";
     RESTORE(Tellico::MainWindow);
   } else {
     Tellico::MainWindow* tellico = new Tellico::MainWindow();
@@ -166,21 +191,29 @@ int main(int argc, char* argv[]) {
 
     QStringList args = parser.positionalArguments();
     if(args.count() > 0) {
+      QLatin1String formatStr;
       Tellico::Import::Format format = Tellico::Import::TellicoXML;
       if(parser.isSet(QStringLiteral("bibtex"))) {
         format = Tellico::Import::Bibtex;
+        formatStr = QLatin1String("bibtex");
       } else if(parser.isSet(QStringLiteral("mods"))) {
         format = Tellico::Import::MODS;
+        formatStr = QLatin1String("mods");
       } else if(parser.isSet(QStringLiteral("ris"))) {
         format = Tellico::Import::RIS;
+        formatStr = QLatin1String("ris");
       } else if(parser.isSet(QStringLiteral("pdf"))) {
         format = Tellico::Import::PDF;
+        formatStr = QLatin1String("pdf");
       };
       if(format == Tellico::Import::TellicoXML) {
+        myLog() << "Opening" << QUrl::fromUserInput(args.at(0), QDir::currentPath()).toDisplayString();
         tellico->slotFileOpen(QUrl::fromUserInput(args.at(0), QDir::currentPath()));
       } else {
+        myLog() << "Importing" << formatStr << "-" << QUrl::fromUserInput(args.at(0)).toDisplayString();
         tellico->importFile(format, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
         for(int i = 1; i < args.count(); ++i) {
+          myLog() << "Appending" << QUrl::fromUserInput(args.at(0)).toDisplayString();
           tellico->importFile(format, QUrl::fromUserInput(args.at(i)), Tellico::Import::Append);
         }
       }

@@ -2,6 +2,7 @@
 
 SET(core_STAT_SRCS
    filehandler.cpp
+   logger.cpp
    netaccess.cpp
    tellico_strings.cpp
    )

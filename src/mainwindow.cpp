@@ -931,11 +931,13 @@ void MainWindow::initFileOpen(bool nofile_) {
     // Config::lastOpenFile() is the full URL, protocol included
     QUrl lastFile(Config::lastOpenFile()); // empty string is actually ok, it gets handled
     if(!lastFile.isEmpty() && lastFile.isValid()) {
+      myLog() << "Re-opening" << lastFile.toDisplayString();
       slotFileOpen(lastFile);
       happyStart = true;
     }
   }
   if(!happyStart) {
+    myLog() << "Creating default book collection";
     // the document is created with an initial book collection, continue with that
     Controller::self()->slotCollectionAdded(Data::Document::self()->collection());
 
