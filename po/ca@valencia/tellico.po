@@ -3644,7 +3644,7 @@ msgid ""
 "Services, and is included in any links to the Amazon.com site."
 msgstr ""
 "L'ID de l'associat identifica la persona que accedix als serveis de la web "
-"Amazon.com, i és inclòs en tots els enllaços al lloc Amazon.com."
+"Amazon.com, i està inclòs en tots els enllaços cap al lloc Amazon.com."
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
 #: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:952
@@ -4263,7 +4263,7 @@ msgstr "Catàleg: "
 #: src/fetch/opdsfetcher.cpp:451
 #, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr "Introduïu l'enllaç al servidor OPDS."
+msgstr "Introduïu l'enllaç cap al servidor OPDS."
 
 #: src/fetch/opdsfetcher.cpp:456
 #, kde-format
@@ -5149,12 +5149,12 @@ msgstr "Elimina la fila"
 #: src/gui/tablefieldwidget.cpp:263
 #, kde-format
 msgid "Move Row Up"
-msgstr "Mou la fila amunt"
+msgstr "Mou cap la fila amunt"
 
 #: src/gui/tablefieldwidget.cpp:268
 #, kde-format
 msgid "Move Row Down"
-msgstr "Mou la fila avall"
+msgstr "Mou cap la fila avall"
 
 #: src/images/imagejob.cpp:75 src/images/imagejob.cpp:112
 #, kde-format
@@ -5635,7 +5635,7 @@ msgstr "Ix de l'aplicació"
 #: src/mainwindow.cpp:372
 #, kde-format
 msgid "Import the collection data from other formats"
-msgstr "Importa les dades cap a la col·lecció des d'altres formats"
+msgstr "Importa les dades cap a dins de la col·lecció des d'altres formats"
 
 #: src/mainwindow.cpp:388
 #, kde-format
