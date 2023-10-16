@@ -126,6 +126,9 @@ bool Document::newDocument(int type_) {
 
 bool Document::openDocument(const QUrl& url_) {
   MARK;
+  if(url_.isEmpty()) {
+    return false;
+  }
   // delayed image loading only works for local files
   m_loadAllImages = !url_.isLocalFile();
   m_loadImagesTimer.stop(); // avoid potential race condition
@@ -159,7 +162,7 @@ bool Document::openDocument(const QUrl& url_) {
   ImageFactory::setZipArchive(m_importer->takeImages());
 
   if(!coll) {
-//    myDebug() << "returning false";
+    myLog() << "Failed to read a collection" << m_importer->statusMessage();
     GUI::Proxy::sorry(m_importer->statusMessage());
     m_validFile = false;
     return false;
@@ -252,7 +255,7 @@ bool Document::saveDocument(const QUrl& url_, bool force_) {
     // if successful, doc is no longer modified
     setModified(false);
   } else {
-    myDebug() << "Document::saveDocument() - not successful saving to" << url_.url();
+    myLog() << "Document::saveDocument() - not successful saving to" << url_.toDisplayString(QUrl::PreferLocalFile);
   }
   return success;
 }
@@ -568,7 +571,7 @@ void Document::slotLoadAllImages() {
       // by ImageFactory::imageById()
       // TODO:: does this need to check against images with link only?
       if(ImageFactory::imageById(id).isNull()) {
-        myDebug() << "Null image for entry:" << entry->title() << id;
+        myLog() << "Null image for entry:" << entry->title() << id;
       }
       images.add(id);
       if(m_cancelImageWriting) {
@@ -630,7 +633,7 @@ void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
         success = ImageFactory::writeCachedImage(id, cacheDir);
       }
       if(!success) {
-        myDebug() << "did not write image for entry title:" << entry->title();
+        myLog() << "Failed to write image for entry title:" << entry->title();
       }
       if(m_cancelImageWriting) {
         break;
@@ -646,7 +649,7 @@ void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
   }
 
   if(m_cancelImageWriting) {
-    myDebug() << "Document::writeAllImages() - cancel image writing";
+    myLog() << "Document::writeAllImages() - image writing was cancelled";
   }
 
   m_cancelImageWriting = false;

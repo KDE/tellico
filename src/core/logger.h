@@ -42,6 +42,7 @@ public:
   void log(QtMsgType type, const QMessageLogContext& ctx, const QString& msg);
   void setLogFile(const QString& logFile);
   QString logFile() const;
+  void flush();
 
 private:
   explicit Logger(QObject* parent = nullptr);

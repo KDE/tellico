@@ -206,15 +206,16 @@ int main(int argc, char* argv[]) {
         format = Tellico::Import::PDF;
         formatStr = QLatin1String("pdf");
       };
+      const QUrl fileToLoad = QUrl::fromUserInput(args.at(0), QDir::currentPath());
       if(format == Tellico::Import::TellicoXML) {
-        myLog() << "Opening" << QUrl::fromUserInput(args.at(0), QDir::currentPath()).toDisplayString();
-        tellico->slotFileOpen(QUrl::fromUserInput(args.at(0), QDir::currentPath()));
+        myLog() << "Opening" << fileToLoad.toDisplayString(QUrl::PreferLocalFile);
+        tellico->slotFileOpen(fileToLoad);
       } else {
-        myLog() << "Importing" << formatStr << "-" << QUrl::fromUserInput(args.at(0)).toDisplayString();
-        tellico->importFile(format, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
+        myLog() << "Importing" << formatStr << "-" << fileToLoad.toDisplayString(QUrl::PreferLocalFile);
+        tellico->importFile(format, fileToLoad, Tellico::Import::Replace);
         for(int i = 1; i < args.count(); ++i) {
-          myLog() << "Appending" << QUrl::fromUserInput(args.at(0)).toDisplayString();
-          tellico->importFile(format, QUrl::fromUserInput(args.at(i)), Tellico::Import::Append);
+          myLog() << "Appending" << fileToLoad.toDisplayString(QUrl::PreferLocalFile);
+          tellico->importFile(format, fileToLoad, Tellico::Import::Append);
         }
       }
     } else {

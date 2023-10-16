@@ -108,3 +108,7 @@ void Logger::setLogFile(const QString& logFile_) {
 QString Logger::logFile() const {
   return m_logFile.fileName();
 }
+
+void Logger::flush() {
+  if(m_logStream) m_logStream->flush();
+}

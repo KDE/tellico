@@ -41,6 +41,7 @@
 #include "importdialog.h"
 #include "exportdialog.h"
 #include "core/filehandler.h" // needed so static mainWindow variable can be set
+#include "core/logger.h"
 #include "printhandler.h"
 #include "entryview.h"
 #include "entryiconview.h"
@@ -110,6 +111,8 @@
 #include <QMenuBar>
 #include <QFileDialog>
 #include <QMetaMethod>
+#include <QVBoxLayout>
+#include <QTextEdit>
 
 namespace {
   static const int MAX_IMAGES_WARN_PERFORMANCE = 200;
@@ -749,6 +752,17 @@ void MainWindow::initActions() {
   KStandardAction::preferences(this, SLOT(slotShowConfigDialog()), actionCollection());
 
   /*************************************************
+   * Help menu
+   *************************************************/
+  action = actionCollection()->addAction(QStringLiteral("show_log"), this, SLOT(showLog()));
+  action->setText(i18n("Show Log"));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("view-history")));
+  if(Logger::self()->logFile().isEmpty()) {
+    action->setEnabled(false);
+  }
+
+
+  /*************************************************
    * Short cuts
    *************************************************/
   KStandardAction::fullScreen(this, SLOT(slotToggleFullScreen()), this, actionCollection());
@@ -931,7 +945,7 @@ void MainWindow::initFileOpen(bool nofile_) {
     // Config::lastOpenFile() is the full URL, protocol included
     QUrl lastFile(Config::lastOpenFile()); // empty string is actually ok, it gets handled
     if(!lastFile.isEmpty() && lastFile.isValid()) {
-      myLog() << "Re-opening" << lastFile.toDisplayString();
+      myLog() << "Opening previous file:" << lastFile.toDisplayString(QUrl::PreferLocalFile);
       slotFileOpen(lastFile);
       happyStart = true;
     }
@@ -2571,4 +2585,37 @@ void MainWindow::guiFactoryReset() {
     m_newCollectionMenu->addAction(action);
   }
   plugActionList(actionListName, coll_actions);
+}
+
+void MainWindow::showLog() {
+  auto dlg = new QDialog(this);
+  auto layout = new QVBoxLayout();
+  dlg->setLayout(layout);
+  dlg->setWindowTitle(i18nc("@title:window", "Tellico Log"));
+
+  auto viewer = new QTextEdit(dlg);
+  viewer->setWordWrapMode(QTextOption::NoWrap);
+  viewer->setReadOnly(true);
+  viewer->setStyleSheet(QStringLiteral("QTextEdit { font-family: monospace; }"));
+  layout->addWidget(viewer);
+
+  auto buttonBox = new QDialogButtonBox(dlg);
+  buttonBox->setStandardButtons(QDialogButtonBox::Close);
+  connect(buttonBox, &QDialogButtonBox::rejected, dlg, &QDialog::reject);
+  layout->addWidget(buttonBox);
+
+  // TODO:: monitor for updates and reload log?
+  auto logFile = Logger::self()->logFile();
+  if(!logFile.isEmpty()) {
+    Logger::self()->flush();
+    QFile file(logFile);
+    if(file.open(QFile::ReadOnly | QIODevice::Text)) {
+      QTextStream in(&file);
+      viewer->setPlainText(in.readAll());
+    }
+  }
+
+  dlg->setMinimumSize(800, 600);
+  dlg->setAttribute(Qt::WA_DeleteOnClose, true);
+  dlg->show();
 }

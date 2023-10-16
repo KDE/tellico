@@ -57,10 +57,11 @@ FileHandler::FileRef::FileRef(const QUrl& url_, bool quiet_) : m_device(nullptr)
   }
 
   if(!Tellico::NetAccess::download(url_, m_filename, GUI::Proxy::widget(), quiet_)) {
-    myDebug() << "can't download" << url_.toDisplayString(QUrl::RemoveQuery);
     QString s = Tellico::NetAccess::lastErrorString();
-    if(!s.isEmpty()) {
-      myDebug() << s;
+    if(s.isEmpty()) {
+      myLog() << "Can't download" << url_.toDisplayString(QUrl::PreferLocalFile);
+    } else {
+      myLog() << s;
     }
     if(!quiet_) {
       GUI::Proxy::sorry(s.isEmpty() ? i18n(errorLoad, url_.fileName()) : s);
@@ -215,9 +216,6 @@ bool FileHandler::writeBackupFile(const QUrl& url_) {
 
 bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool encodeUTF8_, bool force_, bool quiet_) {
   if((!force_ && !queryExists(url_)) || text_.isNull()) {
-    if(text_.isNull()) {
-      myDebug() << "null string for" << url_;
-    }
     return false;
   }
 
@@ -270,12 +268,10 @@ bool FileHandler::writeTextFile(QSaveFile& file_, const QString& text_, bool enc
     ts << text_.midRef(i, MAX_TEXT_CHUNK_WRITE_SIZE);
   }
   file_.flush();
-  bool success = file_.commit();
-#ifndef NDEBUG
+  const bool success = file_.commit();
   if(!success) {
-    myDebug() << "error = " << file_.error();
+    myLog() << "Failed to write text file:" << file_.error();
   }
-#endif
   return success;
 }
 
@@ -323,15 +319,12 @@ bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool f
 }
 
 bool FileHandler::writeDataFile(QSaveFile& file_, const QByteArray& data_) {
-//  myDebug() << "Writing to" << file_.fileName();
   QDataStream s(&file_);
   s.writeRawData(data_.data(), data_.size());
   file_.flush();
   const bool success = file_.commit();
-#ifndef NDEBUG
   if(!success) {
-    myDebug() << "error = " << file_.error();
+    myDebug() << "Failed to write data file:" << file_.error();
   }
-#endif
   return success;
 }
