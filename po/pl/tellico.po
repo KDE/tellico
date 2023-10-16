@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-08 00:43+0000\n"
-"PO-Revision-Date: 2023-09-30 11:10+0200\n"
+"PO-Revision-Date: 2023-10-15 11:38+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -278,10 +278,9 @@ msgid "Card Collection"
 msgstr "Zbiór kart"
 
 #: src/collectionfactory.cpp:94
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "Zbiór filmów"
+msgstr "Zbiór gier wideo"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1462,10 +1461,9 @@ msgid "Icon"
 msgstr "Ikona"
 
 #: src/collections/gamecollection.cpp:39
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "Moje filmy"
+msgstr "Moje gry wideo"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -3829,10 +3827,9 @@ msgid "Discogs Audio Search"
 msgstr "Wyszukiwarka audio Discogs"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "Token użytkownika: "
+msgstr "Token użytkownika:"
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:618
@@ -5532,16 +5529,14 @@ msgid "Create a new wine collection"
 msgstr "Utwórz nowy zbiór win"
 
 #: src/mainwindow.cpp:302
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "Nowy zbiór &gier"
+msgstr "Nowy zbiór &gier wideo"
 
 #: src/mainwindow.cpp:303
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "Utwórz nowy zbiór filmów"
+msgstr "Utwórz nowy zbiór gier wideo"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -5794,16 +5789,14 @@ msgid "Import audio CD information"
 msgstr "Importuje informacje o Audio CD"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Zaimportuj zbiór z Goodreads..."
+msgstr "Zaimportuj zbiór z Discogs..."
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Zaimportuj zbiór z Goodreads.com"
+msgstr "Zaimportuj zbiór z Discogs.com"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7098,10 +7091,9 @@ msgid "<New Field>"
 msgstr "<Nowe pole>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Odsyłacz Discogs"
+msgstr "Ustawienia Discogs"
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format
