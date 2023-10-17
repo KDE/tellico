@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# g.sora <g.sora@tiscali.it>, 2010, 2011, 2012, 2013, 2014, 2015, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2015, 2020, 2021, 2022, 2023 g.sora <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-08 00:43+0000\n"
-"PO-Revision-Date: 2023-07-10 11:36+0200\n"
+"PO-Revision-Date: 2023-10-16 14:09+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -264,10 +264,9 @@ msgid "Card Collection"
 msgstr "Collection de cartas"
 
 #: src/collectionfactory.cpp:94
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "Collection video"
+msgstr "Collection de  video-joco"
 
 #: src/collectionfactory.cpp:95
 #, kde-format
@@ -1459,10 +1458,9 @@ msgid "Icon"
 msgstr "Icone"
 
 #: src/collections/gamecollection.cpp:39
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "Mi videos"
+msgstr "Mi video-jocos"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -3838,10 +3836,9 @@ msgid "Discogs Audio Search"
 msgstr "Cerca audio de Discogs"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "Token de usator: "
+msgstr "Token (indicio) de usator: "
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:618
@@ -4383,10 +4380,9 @@ msgid "Subscriber PIN: "
 msgstr "PIN de subscriptor: "
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Ligamine de Colnect"
+msgstr "Ligamine de VGCollect"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -5538,16 +5534,14 @@ msgid "Create a new wine collection"
 msgstr "Crea un nove collection de vino"
 
 #: src/mainwindow.cpp:302
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "Nove collection de &jocos"
+msgstr "Nove collection de video-&joco"
 
 #: src/mainwindow.cpp:303
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "Crea un nove collection de video"
+msgstr "Crea un nove collection de video-jocos"
 
 #: src/mainwindow.cpp:305
 #, kde-format
@@ -5800,16 +5794,14 @@ msgid "Import audio CD information"
 msgstr "Importa information de CD audio"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Importa collection de Goodreads..."
+msgstr "Importa collection de Discogs..."
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Importa un collection ex Goodreads.com"
+msgstr "Importa un collection ex Discogs.com"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7106,10 +7098,9 @@ msgid "<New Field>"
 msgstr "<New Field>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Ligamine de Discogs"
+msgstr "Optiones de Discogs"
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format
