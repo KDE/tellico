@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the tellico package.
 #
-# giovanni <g.sora@tiscali.it>, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2021, 2022, 2023 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-04 02:26+0000\n"
-"PO-Revision-Date: 2023-09-29 10:05+0200\n"
+"PO-Revision-Date: 2023-10-16 11:57+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3848,8 +3848,7 @@ msgid "Discogs Audio Search"
 msgstr "Cerca audio de Discogs"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
 msgstr "Token de usator: "
 
@@ -5807,16 +5806,14 @@ msgid "Import audio CD information"
 msgstr "Importa information de CD audio"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Importa collection de Goodreads..."
+msgstr "Importa collection de Discogs..."
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Importa un collection ex Goodreads.com"
+msgstr "Importa un collection ex Discogs.com"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7112,10 +7109,9 @@ msgid "<New Field>"
 msgstr "<New Field>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Ligamine de Discogs"
+msgstr "Optiones de Discogs"
 
 #: src/translators/filelistingimporter.cpp:82
 #, kde-format
