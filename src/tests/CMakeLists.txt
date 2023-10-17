@@ -37,7 +37,7 @@ ecm_add_test(lccntest.cpp
     LINK_LIBRARIES Qt5::Test utils
 )
 
-ecm_add_test(lcctest.cpp ../field.cpp ../fieldformat.cpp
+ecm_add_test(lcctest.cpp ../field.cpp ../fieldformat.cpp ../tellico_debug.cpp
     TEST_NAME lcctest
     LINK_LIBRARIES Qt5::Test tellicomodels
 )
@@ -52,27 +52,32 @@ ecm_add_test(fieldtest.cpp ../field.cpp ../fieldformat.cpp
     LINK_LIBRARIES Qt5::Test config utils
 )
 
-ecm_add_test(imagetest.cpp ../utils/tellico_utils.cpp ../utils/guiproxy.cpp ../utils/cursorsaver.cpp ../fieldformat.cpp
+ecm_add_test(imagetest.cpp
+             ../utils/tellico_utils.cpp
+             ../utils/guiproxy.cpp
+             ../utils/cursorsaver.cpp
+             ../fieldformat.cpp
+             ../tellico_debug.cpp
     TEST_NAME imagetest
     LINK_LIBRARIES Qt5::Test KF5::Archive images
 )
 
-ecm_add_test(imagejobtest.cpp ../fieldformat.cpp
+ecm_add_test(imagejobtest.cpp ../fieldformat.cpp ../tellico_debug.cpp
     TEST_NAME imagejobtest
     LINK_LIBRARIES Qt5::Test  KF5::Archive images
 )
 
-ecm_add_test(iso6937test.cpp
+ecm_add_test(iso6937test.cpp ../tellico_debug.cpp
     TEST_NAME iso6937test
     LINK_LIBRARIES Qt5::Test utils
 )
 
-ecm_add_test(iso5426test.cpp
+ecm_add_test(iso5426test.cpp ../tellico_debug.cpp
     TEST_NAME iso5426test
     LINK_LIBRARIES Qt5::Test utils
 )
 
-ecm_add_test(newstufftest.cpp ../fieldformat.cpp
+ecm_add_test(newstufftest.cpp ../fieldformat.cpp ../tellico_debug.cpp
     TEST_NAME newstufftest
     LINK_LIBRARIES Qt5::Test newstuff config
 )
@@ -89,6 +94,7 @@ set(tellicotest_SRCS
     ../collectionfactory.cpp
     ../derivedvalue.cpp
     ../progressmanager.cpp
+    ../tellico_debug.cpp
 )
 
 add_library(tellicotest STATIC ${tellicotest_SRCS})
