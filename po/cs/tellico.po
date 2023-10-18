@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-04 02:26+0000\n"
+"POT-Creation-Date: 2023-10-18 02:30+0000\n"
 "PO-Revision-Date: 2023-08-07 11:46+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -3160,12 +3160,12 @@ msgstr "Aktualizovat záznamy"
 msgid "Updating <b>%1</b>..."
 msgstr "Aktualizuji <b>%1</b>..."
 
-#: src/entryview.cpp:332
+#: src/entryview.cpp:333
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico nemůže najít výchozí styl pro záznamy."
 
-#: src/entryview.cpp:334 src/mainwindow.cpp:1809
+#: src/entryview.cpp:335 src/mainwindow.cpp:1809
 #, kde-format
 msgid "Please check your installation."
 msgstr "Zkontrolujte instalaci programu."

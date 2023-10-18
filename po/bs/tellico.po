@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-04 02:26+0000\n"
+"POT-Creation-Date: 2023-10-18 02:30+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -3286,12 +3286,12 @@ msgstr "Ažiriraj unose"
 msgid "Updating <b>%1</b>..."
 msgstr "Ažuriram <b>%1</b>..."
 
-#: src/entryview.cpp:332
+#: src/entryview.cpp:333
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico ne može naći podrazumjevani stil stranice."
 
-#: src/entryview.cpp:334 src/mainwindow.cpp:1809
+#: src/entryview.cpp:335 src/mainwindow.cpp:1809
 #, kde-format
 msgid "Please check your installation."
 msgstr "Molim provjerite vašu instalaciju."
