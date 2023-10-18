@@ -1,3 +1,7 @@
+2023-10-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated entry templates to show loan info (Bug 411903).
+
 2023-10-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Added support for outputting a log file (Bug 426624).

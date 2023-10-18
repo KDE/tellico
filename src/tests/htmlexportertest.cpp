@@ -218,7 +218,7 @@ void HtmlExporterTest::testDirectoryNames() {
   QCOMPARE(exp.fileDirName(), QStringLiteral("/"));
 }
 
-void HtmlExporterTest::testTemplates() {
+void HtmlExporterTest::testTemplatesTidy() {
   const QString tidy = QStandardPaths::findExecutable(QStringLiteral("tidy"));
   if(tidy.isEmpty()) {
     QSKIP("This test requires tidy", SkipAll);
@@ -248,6 +248,9 @@ void HtmlExporterTest::testTemplates() {
   exporter.setEntries(coll->entries());
   exporter.setXSLTFile(xsltFile);
   exporter.setPrintGrouped(true);
+  long opt = exporter.options();
+  opt |= Tellico::Export::ExportComplete; // include loan info
+  exporter.setOptions(opt);
 
   const QString output = exporter.text();
   QVERIFY(!output.contains(QStringLiteral("<p><p>")));
@@ -276,7 +279,7 @@ void HtmlExporterTest::testTemplates() {
   QVERIFY(tidyProc.exitCode() < 2);
 }
 
-void HtmlExporterTest::testTemplates_data() {
+void HtmlExporterTest::testTemplatesTidy_data() {
   QTest::addColumn<QString>("xsltFile");
   QTest::addColumn<QString>("tellicoFile");
 
@@ -294,5 +297,42 @@ void HtmlExporterTest::testTemplates_data() {
   foreach(const QString& file, reportDir.entryList({"*.xsl"}, QDir::Files)) {
     QTest::newRow(file.toUtf8().constData()) << file << ted;
     QTest::newRow(file.toUtf8().constData()) << file << moody;
+  }
+}
+
+void HtmlExporterTest::testEntryTemplates() {
+  QFETCH(QString, xsltFile);
+  Tellico::ImageFactory::clean(true);
+
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QStringLiteral("data/books-format11.bc")));
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+
+  Tellico::Export::HTMLExporter exporter(coll);
+  exporter.setParseDOM(false); // shows error for <wbr> tags and is not necessary for check
+  exporter.setEntries(coll->entries());
+  exporter.setXSLTFile(xsltFile);
+  exporter.setPrintGrouped(true);
+  long opt = exporter.options();
+  opt |= Tellico::Export::ExportComplete; // include loan info
+  exporter.setOptions(opt);
+
+  // check that the loan info appears in all generated HTML
+  const QString output = exporter.text();
+  // expect failure for the non-book templates since the file is a book collection
+  if(xsltFile.contains(QStringLiteral("Album")) || xsltFile.contains(QStringLiteral("Video"))) {
+    QEXPECT_FAIL("", "The test data is valid for a book collection only", Continue);
+  }
+  QVERIFY(output.contains(QStringLiteral("Robby")));
+}
+
+void HtmlExporterTest::testEntryTemplates_data() {
+  QTest::addColumn<QString>("xsltFile");
+
+  QDir entryDir(QFINDTESTDATA(QStringLiteral("../../xslt/entry-templates/Default.xsl")));
+  entryDir.cdUp();
+  foreach(const QString& file, entryDir.entryList({"*.xsl"}, QDir::Files)) {
+    QTest::newRow(file.toUtf8().constData()) << file;
   }
 }

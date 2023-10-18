@@ -42,6 +42,7 @@
 <xsl:key name="fieldsByName" match="tc:field" use="@name"/>
 <xsl:key name="fieldsByCat" match="tc:field" use="@category"/>
 <xsl:key name="imagesById" match="tc:image" use="@id"/>
+<xsl:key name="loansByEntry" match="tc:loan" use="@entryRef"/>
 
 <xsl:variable name="image-width" select="'150'"/>
 <xsl:variable name="image-height" select="'200'"/>
@@ -318,6 +319,41 @@
    </xsl:call-template>
   </xsl:for-each>
 
+  <xsl:for-each select="key('loansByEntry', tc:id)">
+   <div class="container">
+    <div class="category">
+     <h2><i18n>Loan</i18n></h2>
+     <table>
+      <tbody>
+       <tr>
+        <th class="fieldName"><i18n>Borrower</i18n></th>
+        <td class="fieldValue">
+         <xsl:value-of select="../@name"/>
+        </td>
+       </tr>
+       <tr>
+        <th class="fieldName"><i18n>Loan Date</i18n></th>
+        <td class="fieldValue">
+         <xsl:value-of select="@loanDate"/>
+        </td>
+       </tr>
+       <tr>
+        <th class="fieldName"><i18n>Due Date</i18n></th>
+        <td class="fieldValue">
+         <xsl:value-of select="@dueDate"/>
+        </td>
+       </tr>
+       <tr>
+        <th class="fieldName"><i18n>Note</i18n></th>
+        <td class="fieldValue">
+         <xsl:value-of select="."/>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </div>
+  </xsl:for-each>
  </div>
 
 </xsl:template>

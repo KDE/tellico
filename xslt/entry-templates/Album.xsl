@@ -501,6 +501,39 @@
     </tr>
    </xsl:if>
   </table>
+
+  <xsl:for-each select="key('loansByEntry', tc:id)">
+   <table width="50%" class="category">
+    <tr class="category">
+     <th colspan="2"><i18n>Loan</i18n></th>
+    </tr>
+    <tr>
+     <th><i18n>Borrower</i18n></th>
+     <td>
+      <xsl:value-of select="../@name"/>
+     </td>
+    </tr>
+    <tr>
+     <th><i18n>Loan Date</i18n></th>
+     <td>
+      <xsl:value-of select="@loanDate"/>
+     </td>
+    </tr>
+    <tr>
+     <th><i18n>Due Date</i18n></th>
+     <td>
+      <xsl:value-of select="@dueDate"/>
+     </td>
+    </tr>
+    <tr>
+     <th><i18n>Note</i18n></th>
+     <td>
+      <xsl:value-of select="."/>
+     </td>
+    </tr>
+  </table>
+ </xsl:for-each>
+
 </xsl:template>
 
 </xsl:stylesheet>
