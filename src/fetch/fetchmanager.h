@@ -118,6 +118,7 @@ public Q_SLOTS:
   void stop();
 
 private Q_SLOTS:
+  void slotResultFound(Tellico::Fetch::FetchResult* result);
   void slotFetcherDone(Tellico::Fetch::Fetcher* fetcher);
 
 private:

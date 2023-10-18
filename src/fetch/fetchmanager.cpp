@@ -29,7 +29,6 @@
 #include "messagehandler.h"
 #include "../entry.h"
 #include "../collection.h"
-#include "../utils/string_utils.h"
 #include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
@@ -182,9 +181,10 @@ void Manager::startSearch(const QString& source_, Tellico::Fetch::FetchKey key_,
     if(source_ == fetcher->source()) {
       ++m_count; // Fetcher::search() might emit done(), so increment before calling search()
       connect(fetcher.data(), &Fetcher::signalResultFound,
-              this, &Manager::signalResultFound);
+              this, &Manager::slotResultFound);
       connect(fetcher.data(), &Fetcher::signalDone,
               this, &Manager::slotFetcherDone);
+      myLog() << "Starting search - source:" << source_ << "value:" << value_ << "key:" << key_;
       fetcher->startSearch(request);
       m_currentFetcherIndex = i;
       break;
@@ -203,9 +203,10 @@ void Manager::continueSearch() {
   if(fetcher && fetcher->hasMoreResults()) {
     ++m_count;
     connect(fetcher.data(), &Fetcher::signalResultFound,
-            this, &Manager::signalResultFound);
+            this, &Manager::slotResultFound);
     connect(fetcher.data(), &Fetcher::signalDone,
             this, &Manager::slotFetcherDone);
+    myLog() << "Continuing search - source:" << fetcher->source();
     fetcher->continueSearch();
   } else {
     emit signalDone();
@@ -233,8 +234,15 @@ void Manager::stop() {
   m_count = 0;
 }
 
+void Manager::slotResultFound(Tellico::Fetch::FetchResult* result_) {
+  Q_ASSERT(result_);
+  myLog() << "Search result - source:" << result_->fetcher()->source() << "result:" << result_->title;
+  Q_EMIT signalResultFound(result_);
+}
+
 void Manager::slotFetcherDone(Tellico::Fetch::Fetcher* fetcher_) {
-//  myDebug() << (fetcher_ ? fetcher_->source() : QString()) << ":" << m_count;
+  Q_ASSERT(fetcher_);
+  myLog() << "Search done - source:" << fetcher_->source();
   fetcher_->disconnect(); // disconnect all signals
   fetcher_->saveConfig();
   --m_count;
