@@ -248,7 +248,7 @@ void ImdbFetcherTest::testFetchResultEncoding() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
-  QCOMPARE(entry->title(), QString::fromUtf8("'Shitsurakuen': jôbafuku onna harakiri"));
+  QCOMPARE(entry->title(), QString::fromUtf8("'Shitsurakuen': Jôbafuku Onna Harakiri"));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=336765
@@ -293,7 +293,8 @@ void ImdbFetcherTest::testFirefly() {
   QVERIFY(entry->field("cast").startsWith(QStringLiteral("Nathan Fillion::Captain Malcolm 'Mal' Reynolds")));
   QVERIFY(!entry->field("cast").contains(QStringLiteral("episodes")));
   QStringList episodeList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("episode")));
+  QEXPECT_FAIL("", "IMDB removed the season episodes link", Continue);
   QVERIFY(!episodeList.isEmpty());
-  QCOMPARE(episodeList.at(0), QStringLiteral("The Train Job::1::1"));
+  if(!episodeList.isEmpty()) QCOMPARE(episodeList.at(0), QStringLiteral("The Train Job::1::1"));
   QVERIFY(entry->field("plot").startsWith(QStringLiteral("Captain Malcolm")));
 }

@@ -157,7 +157,7 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QStringLiteral("Scénarist"),
       QString(),
       QStringLiteral("Durée.*(\\d+)\\s+heur.*\\s+(\\d+)\\s+min"),
-      QStringLiteral("Proportions de l’image"),
+      QStringLiteral("Rapport de forme"),
       QStringLiteral("Alias"),
       QStringLiteral("Sociétés de production"),
       QStringLiteral("Ensemble"),
@@ -165,7 +165,7 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QStringLiteral("credited cast"), // couldn't get phrase
       QStringLiteral("episodes"),
       QStringLiteral("Genre"),
-      QStringLiteral("Mixage audio"),
+      QStringLiteral("Mixage"),
       QStringLiteral("Couleur"),
       QStringLiteral("Langue"),
       QStringLiteral("Classification"),
@@ -342,10 +342,7 @@ void IMDBFetcher::search() {
   m_currentTitleBlock = Unknown;
   m_countOffset = 0;
 
-  m_url = QUrl();
-  m_url.setScheme(QStringLiteral("https"));
-  m_url.setHost(QStringLiteral("www.imdb.com"));
-  m_url.setPath(QStringLiteral("/find/"));
+  m_url = QUrl(QStringLiteral("https://www.imdb.com/find/"));
 
   // as far as I can tell, the url encoding should always be iso-8859-1?
   QUrlQuery q;
@@ -783,6 +780,16 @@ void IMDBFetcher::doJson(const QString& str_, Tellico::Data::EntryPtr entry_) {
   if(!jsonMatch.hasMatch()) {
     return;
   }
+
+#if 0
+  myWarning() << "Remove debug from imdbfetcher.cpp (/tmp/testimdbresult.json)";
+  QFile f(QString::fromLatin1("/tmp/testimdbresult.json"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t << jsonMatch.captured(1);
+  }
+  f.close();
+#endif
 
   QJsonParseError parseError;
   QJsonDocument doc = QJsonDocument::fromJson(jsonMatch.captured(1).toUtf8(), &parseError);
@@ -1498,8 +1505,8 @@ void IMDBFetcher::doLists2(const QString& str_, Tellico::Data::EntryPtr entry_) 
   QStringList genres, countries, langs, certs, tracks;
   for(int pos = divInfoRx.indexIn(str_); pos > -1; pos = divInfoRx.indexIn(str_, pos+divInfoRx.matchedLength())) {
     QString divMatch = divInfoRx.cap(1);
-    int pos2 = 0;
-    if((pos2=s_anchorRx->indexIn(divMatch)) == -1) continue;
+    int pos2 = s_anchorRx->indexIn(divMatch);
+    if(pos2 == -1) continue;
     const QString text = divMatch.remove(*s_tagRx);
     QString value = s_anchorRx->cap(2);
 
