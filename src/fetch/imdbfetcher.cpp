@@ -363,7 +363,7 @@ void IMDBFetcher::search() {
       stop();
       return;
   }
-//  myDebug() << m_url;
+  myLog() << "Loading" << m_url.toDisplayString();
 
   m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
   configureJob(m_job);
@@ -424,6 +424,7 @@ void IMDBFetcher::slotRedirection(KIO::Job*, const QUrl& toURL_) {
   if(m_url.path().contains(ttEndRx)) {
     m_url.setPath(m_url.path() + QStringLiteral("reference"));
   }
+  myLog() << "Redirected to" << m_url.toDisplayString();
   m_redirected = true;
 }
 
@@ -437,7 +438,7 @@ void IMDBFetcher::slotComplete(KJob*) {
 
   m_text = Tellico::fromHtmlData(m_job->data(), "UTF-8");
   if(m_text.isEmpty()) {
-    myLog() << "No data returned";
+    myDebug() << "No data returned";
     stop();
     return;
   }
@@ -471,7 +472,6 @@ void IMDBFetcher::slotComplete(KJob*) {
       break;
 
     default:
-      myWarning() << "skipping results";
       break;
   }
 }
@@ -565,7 +565,7 @@ void IMDBFetcher::parseMultipleTitleResults() {
   }
 
   if(m_matches.size() == 0) {
-    myLog() << "no matches found.";
+    myLog() << "No title results found";
   }
 
   stop();
@@ -674,7 +674,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntryHook(uint uid_) {
   }
 
   if(!m_matches.contains(uid_) && !m_allMatches.contains(uid_)) {
-    myLog() << "no url found";
+    myDebug() << "No url match found";
     return Data::EntryPtr();
   }
   QUrl url = m_matches.contains(uid_) ? m_matches[uid_]
@@ -692,6 +692,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntryHook(uint uid_) {
   } else {
     // now it's synchronous
     // be quiet about failure
+    myLog() << "Loading" << url.toDisplayString();
     QPointer<KIO::StoredTransferJob> getJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
     configureJob(getJob);
     if(!getJob->exec()) {
@@ -713,7 +714,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntryHook(uint uid_) {
     results = Tellico::decodeHTML(results);
   }
   if(results.isEmpty()) {
-    myLog() << "no text results";
+    myDebug() << "No text results";
     m_url = origURL;
     return Data::EntryPtr();
   }
@@ -721,7 +722,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntryHook(uint uid_) {
   entry = parseEntry(results);
   m_url = origURL;
   if(!entry) {
-    myDebug() << "error in processing entry";
+    myDebug() << "Error in processing entry";
     return Data::EntryPtr();
   }
   m_entries.insert(uid_, entry); // keep for later
@@ -995,8 +996,6 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
     if(!values.isEmpty()) {
       entry_->setField(QStringLiteral("alttitle"), values.join(FieldFormat::rowDelimiterString()));
     }
-//  } else {
-//    myLog() << "'Also Known As' not found";
   }
 }
 
@@ -1050,6 +1049,7 @@ void IMDBFetcher::doPlot(const QString& str_, Tellico::Data::EntryPtr entry_, co
     Q_ASSERT(idMatch.hasMatch());
     QUrl plotURL = baseURL_;
     plotURL.setPath(QStringLiteral("/title/") + idMatch.captured(1) + QStringLiteral("/plotsummary"));
+    myLog() << "Loading" << plotURL.toDisplayString();
     QPointer<KIO::StoredTransferJob> getJob = KIO::storedGet(plotURL, KIO::NoReload, KIO::HideProgressInfo);
     configureJob(getJob);
     if(!getJob->exec()) {
@@ -1080,18 +1080,15 @@ void IMDBFetcher::doPlot(const QString& str_, Tellico::Data::EntryPtr entry_, co
       }
     }
   }
-//  myDebug() << "Plot:" << entry_->field(QStringLiteral("plot"));
 }
 
 void IMDBFetcher::doStudio(const QString& str_, Tellico::Data::EntryPtr entry_) {
   // match until next opening tag
-//  QRegExp productionRx(langData(m_lang).studio, Qt::CaseInsensitive);
   QRegExp productionRx(langData(m_lang).studio);
   productionRx.setMinimal(true);
 
   const int pos1 = str_.indexOf(productionRx);
   if(pos1 == -1) {
-//    myLog() << "No studio found";
     return;
   }
 
@@ -1159,6 +1156,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
   castURL.setPath(QStringLiteral("/title/") + idMatch.captured(1) + QStringLiteral("/fullcredits"));
 
   // be quiet about failure and be sure to translate entities
+  myLog() << "Loading" << castURL.toDisplayString();
   QPointer<KIO::StoredTransferJob> getJob = KIO::storedGet(castURL, KIO::NoReload, KIO::HideProgressInfo);
   configureJob(getJob);
   if(!getJob->exec()) {
@@ -1212,7 +1210,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
     }
   }
   if(pos == -1) { // no cast list found
-    myLog() << "no cast list found";
+    myLog() << "No cast list found";
     return;
   }
   // loop until closing table tag
@@ -1238,7 +1236,6 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
 
   // sanity check
   while(characterList.length() > actorList.length()) {
-    myDebug() << "Too many characters";
     characterList.removeLast();
   }
   while(characterList.length() < actorList.length()) {
@@ -1711,6 +1708,7 @@ void IMDBFetcher::doEpisodes(const QString& str_, Tellico::Data::EntryPtr entry_
     q.addQueryItem(QLatin1String("season"), QString::number(currentSeason));
     episodeUrl.setQuery(q);
 
+    myLog() << "Loading" << episodeUrl.toDisplayString();
     QPointer<KIO::StoredTransferJob> getJob = KIO::storedGet(episodeUrl, KIO::NoReload, KIO::HideProgressInfo);
     configureJob(getJob);
     if(!getJob->exec()) {
@@ -1738,7 +1736,7 @@ void IMDBFetcher::doEpisodes(const QString& str_, Tellico::Data::EntryPtr entry_
       }
       totalSeasons = qMin(totalSeasons, IMDB_MAX_SEASON_COUNT);
      // ok if totalSeasons remains == -1
-//      myDebug() << "Total seasons:" << totalSeasons;
+      myLog() << "Total season count is" << totalSeasons;
     }
 
     auto i = episodeRx.globalMatch(episodeText);
@@ -1746,7 +1744,6 @@ void IMDBFetcher::doEpisodes(const QString& str_, Tellico::Data::EntryPtr entry_
       auto match = i.next();
       auto anchorMatch = anchorEpisodeRx.match(episodeText, match.capturedEnd());
       if(anchorMatch.hasMatch()) {
-//        myDebug() << "found episode" << anchorMatch.captured(1) << anchorMatch.captured(2);
         episodes << anchorMatch.captured(2) + FieldFormat::columnDelimiterString() +
                     QString::number(currentSeason) + FieldFormat::columnDelimiterString() +
                     anchorMatch.captured(1);
@@ -1763,7 +1760,6 @@ Tellico::Fetch::FetchRequest IMDBFetcher::updateRequest(Data::EntryPtr entry_) {
 
   if(!link.isEmpty() && link.isValid()) {
     if(link.host() != m_host) {
-//      myLog() << "switching hosts to " << m_host;
       link.setHost(m_host);
     }
     return FetchRequest(Fetch::Raw, link.url());

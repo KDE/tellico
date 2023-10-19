@@ -74,7 +74,7 @@ Tellico::Data::EntryPtr FetchResult::fetchEntry() {
 
 Tellico::Fetch::Fetcher* FetchResult::fetcher() {
   Q_ASSERT(m_fetcher);
-  if(!m_fetcher) myLog() << "FetchResult::fetcher() - null pointer";
+  if(!m_fetcher) myDebug() << "FetchResult::fetcher() - null pointer";
   return m_fetcher;
 }
 
