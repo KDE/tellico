@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-18 00:43+0000\n"
-"PO-Revision-Date: 2023-10-07 11:20+0200\n"
+"PO-Revision-Date: 2023-10-18 21:26+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5411,12 +5411,13 @@ msgstr "Importar <filename> como un ficheiro PDF"
 #: src/main.cpp:152
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "Rexistrar a saída de diagnóstico"
 
+# skip-rule: trasno-file_reverse, trasno-path_reverse
 #: src/main.cpp:153
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "Escribir a saída do rexistro en <filename> (ruta dun ficheiro)."
 
 #: src/main.cpp:154
 #, kde-format
@@ -6236,7 +6237,7 @@ msgstr "Activar ou desactivar o editor."
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "Amosar o rexistro"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6516,11 +6517,10 @@ msgstr ""
 "Tellico só pode importar un ficheiro deste tipo cada vez. Só se importará %1."
 
 #: src/mainwindow.cpp:2594
-#, fuzzy, kde-format
-#| msgid "Tellico"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Tellico"
+msgstr "Rexistro de Tellico"
 
 #: src/reportdialog.cpp:91
 #, kde-format

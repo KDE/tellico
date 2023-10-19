@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-18 00:43+0000\n"
-"PO-Revision-Date: 2023-10-01 09:03+0300\n"
+"PO-Revision-Date: 2023-10-18 15:15+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -5401,12 +5401,12 @@ msgstr "Імпортувати <filename> як файл PDF"
 #: src/main.cpp:152
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "Записувати до журналу виведені діагностичні дані"
 
 #: src/main.cpp:153
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "Записати журнальні дані до <filename>"
 
 #: src/main.cpp:154
 #, kde-format
@@ -6222,7 +6222,7 @@ msgstr "Показати/приховати редактор записів"
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "Показати журнал"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6502,11 +6502,10 @@ msgstr ""
 "імпортовано лише %1."
 
 #: src/mainwindow.cpp:2594
-#, fuzzy, kde-format
-#| msgid "Tellico Files"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "файли Tellico"
+msgstr "Журнал Tellico"
 
 #: src/reportdialog.cpp:91
 #, kde-format

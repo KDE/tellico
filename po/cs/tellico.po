@@ -6207,7 +6207,7 @@ msgstr "Povolit/zakázat editor"
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "Zobrazit záznamy"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6484,11 +6484,10 @@ msgstr ""
 "importován pouze %1."
 
 #: src/mainwindow.cpp:2594
-#, fuzzy, kde-format
-#| msgid "Tellico Files"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Soubory Tellico"
+msgstr ""
 
 #: src/reportdialog.cpp:91
 #, kde-format
@@ -7411,30 +7410,3 @@ msgstr "Hledat"
 #, kde-format
 msgid "Clear"
 msgstr "Vymazat"
-
-#~ msgid "Alexandria"
-#~ msgstr "Alexandria"
-
-#~ msgid "Bibtex"
-#~ msgstr "Bibtex"
-
-#~ msgid "Bibtexml"
-#~ msgstr "Bibtexml"
-
-#~ msgid "CSV"
-#~ msgstr "CSV"
-
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgid "ONIX Archive"
-#~ msgstr "Archiv ONIX"
-
-#~ msgid "XML"
-#~ msgstr "XML"
-
-#~ msgid "Tellico Zip File"
-#~ msgstr "Tellico zip soubor"
-
-#~ msgid "XSLT"
-#~ msgstr "XSLT"

@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-18 00:43+0000\n"
-"PO-Revision-Date: 2023-10-01 10:27+0200\n"
+"PO-Revision-Date: 2023-10-18 09:43+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -5149,12 +5149,12 @@ msgstr "Elimina la fila"
 #: src/gui/tablefieldwidget.cpp:263
 #, kde-format
 msgid "Move Row Up"
-msgstr "Mou cap la fila amunt"
+msgstr "Mou la fila cap amunt"
 
 #: src/gui/tablefieldwidget.cpp:268
 #, kde-format
 msgid "Move Row Down"
-msgstr "Mou cap la fila avall"
+msgstr "Mou la fila cap avall"
 
 #: src/images/imagejob.cpp:75 src/images/imagejob.cpp:112
 #, kde-format
@@ -5445,12 +5445,12 @@ msgstr "Importa <filename> com un fitxer PDF"
 #: src/main.cpp:152
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "Registre d'eixida de diagnòstic"
 
 #: src/main.cpp:153
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "Escriu l'eixida del registre a <nomfitxer>"
 
 #: src/main.cpp:154
 #, kde-format
@@ -6267,7 +6267,7 @@ msgstr "Activa/desactiva l'editor"
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "Mostra el registre"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6531,7 +6531,7 @@ msgid ""
 "be saved and the images will be transferred to the new location."
 msgstr ""
 "Algunes imatges no estan guardades en la ubicació configurada. El fitxer "
-"actual s'ha de guardar i les imatges es transferiran a la ubicació nova."
+"actual s'ha de guardar i les imatges es transferiran cap a la ubicació nova."
 
 #: src/mainwindow.cpp:2396
 #, kde-format
@@ -6548,11 +6548,10 @@ msgstr ""
 "%1."
 
 #: src/mainwindow.cpp:2594
-#, fuzzy, kde-format
-#| msgid "Tellico Files"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Fitxers de Tellico"
+msgstr "Registre de Tellico"
 
 #: src/reportdialog.cpp:91
 #, kde-format
@@ -7494,30 +7493,3 @@ msgstr "Busca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
-
-#~ msgid "Alexandria"
-#~ msgstr "Alexandria"
-
-#~ msgid "Bibtex"
-#~ msgstr "Bibtex"
-
-#~ msgid "Bibtexml"
-#~ msgstr "Bibtexml"
-
-#~ msgid "CSV"
-#~ msgstr "CSV"
-
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgid "ONIX Archive"
-#~ msgstr "Arxiu ONIX"
-
-#~ msgid "XML"
-#~ msgstr "XML"
-
-#~ msgid "Tellico Zip File"
-#~ msgstr "Fitxer ZIP de Tellico"
-
-#~ msgid "XSLT"
-#~ msgstr "XSLT"
