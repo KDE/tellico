@@ -32,6 +32,6 @@ Debug::Block::Block(const char* label) : m_start(std::clock()), m_label(label) {
 
 Debug::Block::~Block() {
   std::clock_t finish = std::clock();
-  const double duration = (double) (finish - m_start) / CLOCKS_PER_SEC;
+  const auto duration = (finish - m_start) / CLOCKS_PER_SEC;
   myLog() << "  END:" << m_label << "- duration =" << duration;
 }
