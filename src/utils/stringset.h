@@ -36,7 +36,7 @@ namespace Tellico {
 class StringSet : public QSet<QString> {
 
 public:
-  StringSet() {}
+  StringSet() = default;
 
   void add(const QString& val) { if(!val.isEmpty()) insert(val); }
   void add(const QStringList& values) {

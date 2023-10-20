@@ -1127,11 +1127,11 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
     QStringList groupSorts = QStringList() << groupEntrySort;
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
       QUrl u = config.readEntry(QStringLiteral("URL_%1").arg(i), QUrl());
-      QString g = config.readEntry(QStringLiteral("Group By_%1").arg(i), QString());
-      QString gs = config.readEntry(QStringLiteral("GroupEntrySortField_%1").arg(i), QString());
       if(!u.isEmpty() && url != u) {
         urls.append(u);
+        QString g = config.readEntry(QStringLiteral("Group By_%1").arg(i), QString());
         groupBys.append(g);
+        QString gs = config.readEntry(QStringLiteral("GroupEntrySortField_%1").arg(i), QString());
         groupSorts.append(gs);
       } else if(!u.isEmpty()) {
         configIndex = i;
