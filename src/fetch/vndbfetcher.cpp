@@ -99,6 +99,7 @@ void VNDBFetcher::search() {
 #endif
   }
   if(!m_isConnected) {
+    myLog() << "Connecting to" << VNDB_HOSTNAME << "at port" << VNDB_PORT;
     m_socket->connectToHost(QLatin1String(VNDB_HOSTNAME), VNDB_PORT);
   }
 
@@ -113,11 +114,12 @@ void VNDBFetcher::search() {
   login += clientVersion.toUtf8() + "\"}";
   login.append(0x04);
   if(m_socket->waitForConnected()) {
-//    myDebug() << login;
+    myLog() << "Sending login information:" << login;
     m_socket->write(login);
     m_socket->waitForReadyRead(5000);
     if(m_state == PreLogin) {
       // login did not work
+      myLog() << "Login did not succeed";
       stop();
       return;
     }
@@ -136,7 +138,7 @@ void VNDBFetcher::search() {
   }
 
   m_state = GetVN;
-//  myDebug() << get << m_state;
+  myLog() << "Sending get request:" << get;
   get.append(0x04);
   m_socket->write(get);
 }
@@ -164,7 +166,7 @@ Tellico::Data::EntryPtr VNDBFetcher::fetchEntryHook(uint uid_) {
        + " and patch = false and type = \"complete\")";
 
   m_state = GetRelease;
-//  myDebug() << get << m_state;
+  myLog() << "Sending get request:" << get;
   get.append(0x04);
   m_socket->write(get);
   // 5 sec was not long enough
@@ -188,6 +190,7 @@ Tellico::Data::EntryPtr VNDBFetcher::fetchEntryHook(uint uid_) {
   entry->setField(QStringLiteral("vn-id"), QString());
 
   if(m_socket->isValid()) {
+    myLog() << "Disconnecting from host";
     m_socket->disconnectFromHost();
     m_state = PreLogin;
   }
@@ -216,8 +219,9 @@ bool VNDBFetcher::verifyData() {
     QJsonDocument doc = QJsonDocument::fromJson(m_data.mid(5));
     QVariantMap result = doc.object().toVariantMap();
     if(result.contains(QStringLiteral("msg"))) {
-      myDebug() << "Data error:" << result.value(QStringLiteral("msg")).toString();
-      message(result.value(QStringLiteral("msg")).toString(), MessageHandler::Error);
+      const auto msg = result.value(QStringLiteral("msg")).toString();
+      myDebug() << "Data error:" << msg;
+      message(msg, MessageHandler::Error);
     }
     return false;
   }
@@ -270,7 +274,7 @@ void VNDBFetcher::parseVNResults() {
   QVariantMap topResultMap = doc.object().toVariantMap();
   QVariantList resultList = topResultMap.value(QStringLiteral("items")).toList();
   if(resultList.isEmpty()) {
-    myDebug() << "no results";
+    myLog() << "No results";
     stop();
     return;
   }
@@ -349,7 +353,7 @@ void VNDBFetcher::parseReleaseResults(Data::EntryPtr entry_) {
   QVariantMap topResultMap = doc.object().toVariantMap();
   QVariantList resultList = topResultMap.value(QStringLiteral("items")).toList();
   if(resultList.isEmpty()) {
-    myDebug() << "no results";
+    myLog() << "No results";
     return;
   }
 

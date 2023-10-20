@@ -34,6 +34,7 @@ using Tellico::Fetch::ManagerMessage;
 
 // default: all messages other than errors and warnings go to manager
 void ManagerMessage::send(const QString& message_, Type type_) {
+  myLog() << type_ << message_;
   GUI::CursorSaver cs(Qt::ArrowCursor);
   // errors and warnings get a message box
   if(type_ == Error && GUI::Proxy::widget()) {
