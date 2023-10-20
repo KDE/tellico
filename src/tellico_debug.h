@@ -88,7 +88,7 @@ public:
 
   ~Block() {
     std::clock_t finish = std::clock();
-    const double duration = (double) (finish - m_start) / CLOCKS_PER_SEC;
+    const auto duration = (finish - m_start) / CLOCKS_PER_SEC;
     QDebug(QtDebugMsg) << "  END:" << m_label << "- duration =" << duration;
   }
 
