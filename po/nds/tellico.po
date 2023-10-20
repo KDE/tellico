@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-18 00:43+0000\n"
+"POT-Creation-Date: 2023-10-20 00:42+0000\n"
 "PO-Revision-Date: 2011-12-11 07:08+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -734,7 +734,7 @@ msgstr "En Feld mit en afleddt Weert mutt en Weertvörlaag hebben."
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
-#: src/fetch/imdbfetcher.cpp:831 src/fetch/imdbfetcher.cpp:1386
+#: src/fetch/imdbfetcher.cpp:839 src/fetch/imdbfetcher.cpp:1390
 #: src/fetch/itunesfetcher.cpp:241 src/fetch/kinopoiskfetcher.cpp:277
 #: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:460
 #: src/fetch/moviemeterfetcher.cpp:216 src/fetch/moviemeterfetcher.cpp:221
@@ -855,7 +855,7 @@ msgstr "Johr"
 msgid "Journal"
 msgstr "Daagbook"
 
-#: src/collections/bibtexcollection.cpp:177 src/fetch/fetchmanager.cpp:72
+#: src/collections/bibtexcollection.cpp:177 src/fetch/fetchmanager.cpp:71
 #, kde-format
 msgid "DOI"
 msgstr "DOI"
@@ -1753,7 +1753,7 @@ msgid "Tracks"
 msgstr "Titeln"
 
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
-#: src/fetch/fetchmanager.cpp:67 src/fetchdialog.cpp:252 src/field.cpp:298
+#: src/fetch/fetchmanager.cpp:66 src/fetchdialog.cpp:252 src/field.cpp:298
 #: src/field.cpp:339 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:426
 #, kde-format
@@ -1779,7 +1779,7 @@ msgstr "Utgaavjohr"
 
 #: src/collections/stampcollection.cpp:83
 #: src/collections/videocollection.cpp:180 src/fetch/allocinefetcher.cpp:398
-#: src/fetch/imdbfetcher.cpp:1530
+#: src/fetch/imdbfetcher.cpp:1534
 #, kde-format
 msgid "Color"
 msgstr "Klöör"
@@ -3192,12 +3192,12 @@ msgstr "Indrääg opfrischen"
 msgid "Updating <b>%1</b>..."
 msgstr "<b>%1</b> warrt opfrischt..."
 
-#: src/entryview.cpp:332
+#: src/entryview.cpp:333
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico kann de Stilvörlaag för Standardindrääg nich finnen."
 
-#: src/entryview.cpp:334 src/mainwindow.cpp:1816
+#: src/entryview.cpp:335 src/mainwindow.cpp:1816
 #, kde-format
 msgid "Please check your installation."
 msgstr "Bitte prööv Dien Installatschoon."
@@ -3350,8 +3350,8 @@ msgstr "Allocine.fr"
 #: src/fetch/doubanfetcher.cpp:344 src/fetch/doubanfetcher.cpp:362
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:617
 #: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:321
-#: src/fetch/filmaffinityfetcher.cpp:456 src/fetch/imdbfetcher.cpp:887
-#: src/fetch/imdbfetcher.cpp:1807 src/fetch/kinopoiskfetcher.cpp:341
+#: src/fetch/filmaffinityfetcher.cpp:456 src/fetch/imdbfetcher.cpp:895
+#: src/fetch/imdbfetcher.cpp:1810 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:263 src/fetch/kinoteatrfetcher.cpp:507
 #: src/fetch/omdbfetcher.cpp:263 src/fetch/themoviedbfetcher.cpp:333
@@ -3362,14 +3362,14 @@ msgid "Original Title"
 msgstr "Orginaaltitel"
 
 #: src/fetch/allocinefetcher.cpp:432 src/fetch/filmaffinityfetcher.cpp:469
-#: src/fetch/imdbfetcher.cpp:1824 src/fetch/kinopoiskfetcher.cpp:685
+#: src/fetch/imdbfetcher.cpp:1827 src/fetch/kinopoiskfetcher.cpp:685
 #: src/fetch/themoviedbfetcher.cpp:614
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Hööchsttall vun Dorstellers: "
 
 #: src/fetch/allocinefetcher.cpp:445 src/fetch/filmaffinityfetcher.cpp:482
-#: src/fetch/imdbfetcher.cpp:1837 src/fetch/kinopoiskfetcher.cpp:698
+#: src/fetch/imdbfetcher.cpp:1840 src/fetch/kinopoiskfetcher.cpp:698
 #: src/fetch/themoviedbfetcher.cpp:627
 #, kde-format
 msgid ""
@@ -3641,7 +3641,7 @@ msgstr "Groot Bild"
 msgid "No Image"
 msgstr "Keen Bild"
 
-#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:1846
+#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:1849
 #: src/fetch/mobygamesfetcher.cpp:682 src/fetch/thegamesdbfetcher.cpp:667
 #, kde-format
 msgid ""
@@ -3666,8 +3666,8 @@ msgstr ""
 "com an, un is binnen elk Link na de Nettsiet vun Amazon.com inslaten."
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
-#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:952
-#: src/fetch/imdbfetcher.cpp:1805 src/fetch/moviemeterfetcher.cpp:225
+#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:960
+#: src/fetch/imdbfetcher.cpp:1808 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:258
 #: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:576
 #: src/fetch/tvmazefetcher.cpp:193 src/fetch/tvmazefetcher.cpp:385
@@ -3681,7 +3681,7 @@ msgid "Distributor"
 msgstr "Rutgever"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
-#: src/fetch/imdbfetcher.cpp:1808 src/fetch/itunesfetcher.cpp:506
+#: src/fetch/imdbfetcher.cpp:1811 src/fetch/itunesfetcher.cpp:506
 #: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:576
 #: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:336
 #, kde-format
@@ -3975,42 +3975,42 @@ msgstr ""
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 lett för dissen Sammeln-Typ keen Söök to."
 
-#: src/fetch/fetchmanager.cpp:68
+#: src/fetch/fetchmanager.cpp:67
 #, kde-format
 msgid "Person"
 msgstr "Persoon"
 
-#: src/fetch/fetchmanager.cpp:69
+#: src/fetch/fetchmanager.cpp:68
 #, kde-format
 msgid "ISBN"
 msgstr "ISBN"
 
-#: src/fetch/fetchmanager.cpp:70
+#: src/fetch/fetchmanager.cpp:69
 #, kde-format
 msgid "UPC/EAN"
 msgstr "UPC/EAN"
 
-#: src/fetch/fetchmanager.cpp:71
+#: src/fetch/fetchmanager.cpp:70
 #, kde-format
 msgid "Keyword"
 msgstr "Slötelwoort"
 
-#: src/fetch/fetchmanager.cpp:73 src/translators/pdfimporter.cpp:228
+#: src/fetch/fetchmanager.cpp:72 src/translators/pdfimporter.cpp:228
 #, kde-format
 msgid "arXiv ID"
 msgstr "arXiv-ID"
 
-#: src/fetch/fetchmanager.cpp:74
+#: src/fetch/fetchmanager.cpp:73
 #, kde-format
 msgid "PubMed ID"
 msgstr "PubMed-ID"
 
-#: src/fetch/fetchmanager.cpp:75
+#: src/fetch/fetchmanager.cpp:74
 #, kde-format
 msgid "LCCN"
 msgstr "LCCN"
 
-#: src/fetch/fetchmanager.cpp:76
+#: src/fetch/fetchmanager.cpp:75
 #, kde-format
 msgid "Raw Query"
 msgstr "Roh-Anfraag"
@@ -4128,7 +4128,7 @@ msgstr "Internet-Filmdatenbank"
 msgid "Screenshot"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
+#: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1795
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "Internet-Filmdatenbank"
@@ -4163,19 +4163,19 @@ msgstr "Internet-Filmdatenbank"
 msgid "Internet Movie Database (Portuguese)"
 msgstr "Internet-Filmdatenbank"
 
-#: src/fetch/imdbfetcher.cpp:830 src/fetch/imdbfetcher.cpp:1385
-#: src/fetch/imdbfetcher.cpp:1804
+#: src/fetch/imdbfetcher.cpp:838 src/fetch/imdbfetcher.cpp:1389
+#: src/fetch/imdbfetcher.cpp:1807
 #, kde-format
 msgid "IMDb Rating"
 msgstr "IMDB-Beweerten"
 
-#: src/fetch/imdbfetcher.cpp:1570 src/fetch/imdbfetcher.cpp:1667
-#: src/fetch/imdbfetcher.cpp:1806
+#: src/fetch/imdbfetcher.cpp:1574 src/fetch/imdbfetcher.cpp:1671
+#: src/fetch/imdbfetcher.cpp:1809
 #, kde-format
 msgid "Certifications"
 msgstr "Beglöven"
 
-#: src/fetch/imdbfetcher.cpp:1803 src/fetch/kinopoiskfetcher.cpp:672
+#: src/fetch/imdbfetcher.cpp:1806 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/thetvdbfetcher.cpp:575 src/fetch/tvmazefetcher.cpp:382
 #: src/field.cpp:332
@@ -4183,7 +4183,7 @@ msgstr "Beglöven"
 msgid "IMDb Link"
 msgstr "IMDB-Link"
 
-#: src/fetch/imdbfetcher.cpp:1842
+#: src/fetch/imdbfetcher.cpp:1845
 #, kde-format
 msgid "Download cover &image"
 msgstr "&Titelbild daalladen"
@@ -5438,7 +5438,10 @@ msgstr "Inboken"
 msgid "Modify Loan..."
 msgstr "Utlehnen ännern..."
 
-#: src/loanview.cpp:200 xslt/report-templates/Loan_View.xsl:135
+#: src/loanview.cpp:200 xslt/entry-templates/Album.xsl:511
+#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:362
+#: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:543
+#: xslt/report-templates/Loan_View.xsl:135
 #, kde-format
 msgid "Borrower"
 msgstr "Utlehner"
@@ -7548,7 +7551,37 @@ msgstr "Disse Vörlaag is bloots för Musiksammeln maakt."
 msgid "Total:"
 msgstr "Tosamen:"
 
-#: xslt/entry-templates/Video.xsl:204 xslt/report-templates/Tri-Column.xsl:124
+#: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
+#: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
+#, fuzzy, kde-format
+#| msgid "Loans"
+msgid "Loan"
+msgstr "Utlehnt"
+
+#: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
+#: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
+#: xslt/entry-templates/Video.xsl:549 xslt/report-templates/Loan_View.xsl:136
+#: xslt/report-templates/Loan_View.xsl:170
+#, kde-format
+msgid "Loan Date"
+msgstr "Utlehndatum"
+
+#: xslt/entry-templates/Album.xsl:523 xslt/entry-templates/Compact.xsl:318
+#: xslt/entry-templates/Default.xsl:374 xslt/entry-templates/Fancy.xsl:341
+#: xslt/entry-templates/Video.xsl:555 xslt/report-templates/Loan_View.xsl:171
+#, kde-format
+msgid "Due Date"
+msgstr "Torüchgaavdatum"
+
+#: xslt/entry-templates/Album.xsl:529 xslt/entry-templates/Compact.xsl:324
+#: xslt/entry-templates/Default.xsl:380 xslt/entry-templates/Fancy.xsl:347
+#: xslt/entry-templates/Video.xsl:561 xslt/report-templates/Loan_View.xsl:137
+#: xslt/report-templates/Loan_View.xsl:172
+#, kde-format
+msgid "Note"
+msgstr "Henwies"
+
+#: xslt/entry-templates/Video.xsl:205 xslt/report-templates/Tri-Column.xsl:124
 #, kde-format
 msgid "This template is meant for video collections only."
 msgstr "Disse Vörlaag is bloots för Videosammeln maakt."
@@ -7578,23 +7611,6 @@ msgstr "Vun Tellico opstellt"
 #, kde-format
 msgid "Distinct values: "
 msgstr "Verscheden Weerten: "
-
-#: xslt/report-templates/Loan_View.xsl:136
-#: xslt/report-templates/Loan_View.xsl:170
-#, kde-format
-msgid "Loan Date"
-msgstr "Utlehndatum"
-
-#: xslt/report-templates/Loan_View.xsl:137
-#: xslt/report-templates/Loan_View.xsl:172
-#, kde-format
-msgid "Note"
-msgstr "Henwies"
-
-#: xslt/report-templates/Loan_View.xsl:171
-#, kde-format
-msgid "Due Date"
-msgstr "Torüchgaavdatum"
 
 #: xslt/tellico2html.xsl:252
 #, kde-format
