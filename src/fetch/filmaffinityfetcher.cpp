@@ -158,7 +158,7 @@ void FilmAffinityFetcher::search() {
       return;
   }
   u.setQuery(q);
-//  myDebug() << "url: " << u.url();
+  myLog() << "Reading" << u.toDisplayString();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
