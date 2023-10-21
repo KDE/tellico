@@ -68,7 +68,7 @@ void FilmAffinityFetcherTest::testSuperman() {
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("nationality"), QStringLiteral("United States"));
   QCOMPARE(entry->field("director"), QStringLiteral("Bryan Singer"));
-  QCOMPARE(entry->field("writer"), QStringLiteral("Bryan Singer; Michael Dougherty; Dan Harris"));
+  QCOMPARE(set(entry->field("writer")), set(QStringLiteral("Bryan Singer; Michael Dougherty; Dan Harris")));
   QCOMPARE(entry->field("composer"), QStringLiteral("John Ottman"));
   QCOMPARE(entry->field("studio"), QStringLiteral("Warner Bros."));
   QCOMPARE(set(entry, "genre"), set(QStringLiteral("Sci-Fi; Fantasy; Action; Romance")));
@@ -102,7 +102,7 @@ void FilmAffinityFetcherTest::testSupermanES() {
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("nationality"), QStringLiteral("Estados Unidos"));
   QCOMPARE(entry->field("director"), QStringLiteral("Bryan Singer"));
-  QCOMPARE(entry->field("writer"), QStringLiteral("Bryan Singer; Michael Dougherty; Dan Harris"));
+  QCOMPARE(set(entry->field("writer")), set(QStringLiteral("Bryan Singer; Michael Dougherty; Dan Harris")));
   QCOMPARE(entry->field("composer"), QStringLiteral("John Ottman"));
   QCOMPARE(entry->field("studio"), QStringLiteral("Warner Bros."));
   QCOMPARE(set(entry, "genre"), set(QString::fromUtf8("Ciencia ficción; Fantástico; Acción; Romance")));
@@ -166,7 +166,7 @@ void FilmAffinityFetcherTest::testAlcarras() {
   QVERIFY(castList.count() > 2);
   QCOMPARE(castList.at(0), QStringLiteral("Jordi Pujol Dolcet"));
   QCOMPARE(castList.at(1), QStringLiteral("Anna Otín"));
-  QVERIFY(entry->field("plot").startsWith(QStringLiteral("Durante generaciones")));
+  QVERIFY(entry->field("plot").startsWith(QStringLiteral("La familia Solé")));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QCOMPARE(entry->field("filmaffinity"), QStringLiteral("https://www.filmaffinity.com/es/film457848.html"));

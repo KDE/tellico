@@ -65,7 +65,7 @@ void GamingHistoryFetcherTest::testKeyword() {
 
   QCOMPARE(entry->field("title"), QStringLiteral("Ikari Warriors"));
   QCOMPARE(entry->field("year"), QStringLiteral("1986"));
-  QCOMPARE(entry->field("publisher"), QStringLiteral("SNK Corp."));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Tradewest, Inc."));
   QCOMPARE(entry->field("platform"), QStringLiteral("Arcade Video"));
   QVERIFY(entry->field("description").startsWith(QLatin1String("Export release")));
   QVERIFY(!entry->field("cover").isEmpty());
