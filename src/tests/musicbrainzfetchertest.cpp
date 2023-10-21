@@ -166,7 +166,7 @@ void MusicBrainzFetcherTest::testCoverArt() {
   QVERIFY(!results.isEmpty());
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->title(), QStringLiteral("Laulut ja tarinat"));
+  QCOMPARE(entry->title(), QStringLiteral("Laulut Ja Tarinat"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
@@ -181,7 +181,7 @@ void MusicBrainzFetcherTest::testSoundtrack() {
   QVERIFY(!results.isEmpty());
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->title(), QStringLiteral("The Legend of Bagger Vance"));
+  QCOMPARE(entry->title(), QStringLiteral("Legend of Bagger Vance, The"));
   // sound tracks are the only genre tag that is read
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Soundtrack"));
 }
@@ -200,6 +200,6 @@ void MusicBrainzFetcherTest::testBarcode() {
   QVERIFY(!results.isEmpty());
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->title(), QStringLiteral("The Old Man and the Spirit"));
+  QCOMPARE(entry->title(), QStringLiteral("Old Man and the Spirit, The"));
   QCOMPARE(entry->field(QStringLiteral("barcode")), QStringLiteral("8024391054123"));
 }
