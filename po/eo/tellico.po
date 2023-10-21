@@ -1,13 +1,14 @@
 # Translation of tellico into esperanto.
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-20 00:42+0000\n"
-"PO-Revision-Date: 2023-10-01 06:01+0100\n"
+"PO-Revision-Date: 2023-10-20 07:06+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -7176,10 +7177,9 @@ msgstr "Sumo:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loan Date"
+#, kde-format
 msgid "Loan"
-msgstr "Pruntodato"
+msgstr "Prunto"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
@@ -7244,21 +7244,3 @@ msgstr "Serĉi"
 #, kde-format
 msgid "Clear"
 msgstr "Forigi"
-
-#~ msgid "Alexandria"
-#~ msgstr "Alexandria"
-
-#~ msgid "Bibtexml"
-#~ msgstr "Bibtexml"
-
-#~ msgid "CSV"
-#~ msgstr "CSV"
-
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgid "XML"
-#~ msgstr "XML"
-
-#~ msgid "XSLT"
-#~ msgstr "XSLT"

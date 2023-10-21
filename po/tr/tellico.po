@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-20 00:42+0000\n"
-"PO-Revision-Date: 2023-10-18 13:04+0300\n"
+"PO-Revision-Date: 2023-10-20 10:59+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -7384,10 +7384,9 @@ msgstr "Toplam:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
-msgstr "Ödünç Vermeler"
+msgstr "Ödünç Ver"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335

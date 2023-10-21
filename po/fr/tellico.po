@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-20 00:42+0000\n"
-"PO-Revision-Date: 2023-10-02 12:45+0200\n"
+"PO-Revision-Date: 2023-10-19 12:08+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -5525,12 +5525,12 @@ msgstr "Importer <filename> comme fichier « PDF »"
 #: src/main.cpp:152
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "Sortie du journal de diagnostic"
 
 #: src/main.cpp:153
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "Écrire la sortie du journal vers <filename>"
 
 #: src/main.cpp:154
 #, kde-format
@@ -6348,7 +6348,7 @@ msgstr "Afficher/masquer l'éditeur"
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "Afficher le journal"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6631,11 +6631,10 @@ msgstr ""
 "Tellico ne peut importer qu'un seul fichier à la fois. Seul %1 sera importé."
 
 #: src/mainwindow.cpp:2594
-#, fuzzy, kde-format
-#| msgid "Tellico"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Tellico"
+msgstr "Journal de Tellico"
 
 #: src/reportdialog.cpp:91
 #, kde-format

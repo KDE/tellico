@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-20 00:42+0000\n"
-"PO-Revision-Date: 2023-10-18 13:00+0200\n"
+"PO-Revision-Date: 2023-10-20 18:56+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -7435,10 +7435,9 @@ msgstr "Total:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
-msgstr "Préstamos"
+msgstr "Préstamo"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335

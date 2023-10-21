@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-20 00:42+0000\n"
-"PO-Revision-Date: 2023-10-18 09:43+0200\n"
+"PO-Revision-Date: 2023-10-20 09:11+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -7441,10 +7441,9 @@ msgstr "Total:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
-msgstr "Préstecs"
+msgstr "Préstec"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
