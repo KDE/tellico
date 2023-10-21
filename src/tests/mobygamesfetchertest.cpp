@@ -93,7 +93,7 @@ void MobyGamesFetcherTest::testTitle() {
   QCOMPARE(entry->field("pegi"), QStringLiteral("PEGI 12"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo Co., Ltd."));
   QCOMPARE(entry->field("developer"), QStringLiteral("Nintendo EAD"));
-  QCOMPARE(entry->field("mobygames"), QStringLiteral("http://www.mobygames.com/game/legend-of-zelda-twilight-princess"));
+  QCOMPARE(entry->field("mobygames"), QStringLiteral("https://www.mobygames.com/game/25103/the-legend-of-zelda-twilight-princess/"));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
@@ -161,7 +161,7 @@ void MobyGamesFetcherTest::testRaw() {
   QCOMPARE(entry->field("pegi"), QStringLiteral("PEGI 12"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo Co., Ltd."));
   QCOMPARE(entry->field("developer"), QStringLiteral("Nintendo EAD"));
-  QCOMPARE(entry->field("mobygames"), QStringLiteral("http://www.mobygames.com/game/legend-of-zelda-twilight-princess"));
+  QCOMPARE(entry->field("mobygames"), QStringLiteral("https://www.mobygames.com/game/25103/the-legend-of-zelda-twilight-princess/"));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   // no cover image downloaded
   QVERIFY(entry->field(QStringLiteral("cover")).isEmpty());

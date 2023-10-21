@@ -61,7 +61,7 @@ void ItunesFetcherTest::testBurningEdge() {
 
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("The Burning Edge of Dawn"));
   QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Andrew Peterson"));
-  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("CCM"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Christian"));
   QCOMPARE(entry->field(QStringLiteral("itunes")), QStringLiteral("https://music.apple.com/us/album/the-burning-edge-of-dawn/1560397363?uo=4"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
