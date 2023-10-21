@@ -307,7 +307,8 @@ Tellico::Data::EntryPtr FilmAffinityFetcher::parseEntry(const QString& str_) {
 
   const QString origtitle = QStringLiteral("origtitle");
   QRegularExpression tagRx(QStringLiteral("<.+?>"));
-  QRegularExpression spanRx(QStringLiteral("<span.*?>(.+?)</span"));
+  QRegularExpression spanRx(QStringLiteral("<span.*?>(.+?),*\\s*</span"));
+  QRegularExpression divRx(QStringLiteral("<div [^>]*?class=\"name\"[^>]*?>(.+?)</div"));
   QRegularExpression defRx(QStringLiteral("<dt>(.+?)</dt>\\s*?<dd.*?>(.+?)</dd>"),
                            QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatchIterator i = defRx.globalMatch(str_);
@@ -351,11 +352,13 @@ Tellico::Data::EntryPtr FilmAffinityFetcher::parseEntry(const QString& str_) {
     } else if(term == data.cast) {
       QStringList cast;
       const auto& captured = match.captured(2);
-      // only read up to thie hidden credits
-      const auto end = captured.indexOf(QLatin1String("hidden-credit"));
-      auto iSpan = spanRx.globalMatch(captured.left(end));
-      while(iSpan.hasNext() && cast.size() < m_numCast) {
-        auto spanMatch = iSpan.next();
+      // only read up to the hidden credits
+      auto end = captured.indexOf(QLatin1String("hidden-credit"));
+      if(end == -1) end = captured.indexOf(QLatin1String("see-more-cre"));
+      if(end == -1) end = captured.size();
+      auto iDiv = divRx.globalMatch(captured.left(end));
+      while(iDiv.hasNext() && cast.size() < m_numCast) {
+        auto spanMatch = iDiv.next();
         cast += spanMatch.captured(1).remove(tagRx).simplified();
       }
       if(!cast.isEmpty()) {
