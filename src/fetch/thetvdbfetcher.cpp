@@ -54,8 +54,6 @@
 #include <QUrlQuery>
 #include <QLineEdit>
 
-#define THETVDB_LOG 0
-
 namespace {
   static const int THETVDB_MAX_RETURNS_TOTAL = 20;
   static const char* THETVDB_API_URL = "https://api4.thetvdb.com/v4";
@@ -158,9 +156,7 @@ void TheTVDBFetcher::continueSearch() {
       stop();
       return;
   }
-#if THETVDB_LOG
-  myDebug() << u;
-#endif
+  myLog() << "Reading" << u.toDisplayString();
   if(m_apiPin.isEmpty()) {
     myDebug() << source() << "- empty API PIN";
     message(i18n("An access key is required to use this data source.")
@@ -238,8 +234,8 @@ void TheTVDBFetcher::slotComplete(KJob* job_) {
   // if the pointer is retained, it gets double-deleted
   m_job = nullptr;
 
-#if THETVDB_LOG
-  myWarning() << "Remove debug from tvtvdbfetcher.cpp";
+#if 1
+  myWarning() << "Remove debug from thetvdbfetcher.cpp";
   QFile f(QStringLiteral("/tmp/test-thetvdb.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -276,7 +272,7 @@ void TheTVDBFetcher::slotComplete(KJob* job_) {
   const QJsonArray results = doc.object().value(QLatin1String("data")).toArray();
 
   if(results.isEmpty()) {
-    myDebug() << "no results";
+    myLog() << "No results";
     stop();
     return;
   }
@@ -322,7 +318,7 @@ Tellico::Data::EntryPtr TheTVDBFetcher::fetchEntryHook(uint uid_) {
       myDebug() << "no data for" << url;
       return Data::EntryPtr();
     }
-#if THETVDB_LOG
+#if 0
     myWarning() << "Remove debug2 from thetvdbfetcher.cpp";
     QFile f(QStringLiteral("/tmp/test2-thetvdb.json"));
     if(f.open(QIODevice::WriteOnly)) {
@@ -487,6 +483,7 @@ void TheTVDBFetcher::requestToken() {
   obj.insert(QLatin1String("pin"), m_apiPin);
   const QByteArray loginPayload = QJsonDocument(obj).toJson();
 
+  myLog() << "Requesting access token for API PIN:" << m_apiPin;
   QPointer<KIO::StoredTransferJob> job = KIO::storedHttpPost(loginPayload, u, KIO::HideProgressInfo);
   job->addMetaData(QStringLiteral("content-type"), QStringLiteral("Content-Type: application/json"));
   job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
@@ -504,9 +501,9 @@ void TheTVDBFetcher::requestToken() {
   }
   QJsonObject response = doc.object();
   if(response.contains(QLatin1String("Error"))) {
-    myDebug() << "TheTVDB:" << response.value(QLatin1String("Error")).toString();
+    myLog() << "Error:" << response.value(QLatin1String("Error")).toString();
   } else if(response.value(QLatin1String("status")) == QLatin1String("failure")) {
-    myDebug() << "TheTVDB:" << response.value(QLatin1String("message")).toString();
+    myLog() << "Failure:" << response.value(QLatin1String("message")).toString();
   }
   m_accessToken = response.value(QLatin1String("data")).toObject()
                           .value(QLatin1String("token")).toString();
