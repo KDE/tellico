@@ -193,7 +193,7 @@ void ColnectFetcher::search() {
   }
 
   u.setPath(u.path() + query);
-//  myDebug() << "url:" << u;
+  myLog() << "Reading" << u.toDisplayString();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -226,7 +226,7 @@ Tellico::Data::EntryPtr ColnectFetcher::fetchEntryHook(uint uid_) {
     QString query(QLatin1Char('/') + m_locale + QStringLiteral("/item/cat/")
                   + m_category + QStringLiteral("/id/") + id);
     u.setPath(u.path() + query);
-//    myDebug() << "Reading item data from url:" << u;
+    myLog() << "Reading" << u.toDisplayString();
 
     QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
     KJobWidgets::setWindow(job, GUI::Proxy::widget());
@@ -320,7 +320,7 @@ void ColnectFetcher::slotComplete(KJob* job_) {
   }
   QVariantList resultList = doc.array().toVariantList();
   if(resultList.isEmpty()) {
-//    myDebug() << "no results";
+    myLog() << "No results";
     stop();
     return;
   }
@@ -855,11 +855,11 @@ QString ColnectFetcher::imageUrl(const QString& name_, const QString& id_) {
 }
 
 void ColnectFetcher::readDataList() {
-//  myDebug() << "Reading Colnect fields";
   QUrl u(QString::fromLatin1(COLNECT_API_URL));
   // Colnect API calls are encoded as a path
   QString query(QLatin1Char('/') + m_locale + QStringLiteral("/fields/cat/") + m_category + QLatin1Char('/'));
   u.setPath(u.path() + query);
+  myDebug() << "Reading Colnect fields from" << u.toDisplayString();
 
   const QByteArray data = FileHandler::readDataFile(u, true);
   QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -885,6 +885,7 @@ void ColnectFetcher::readItemNames(const QByteArray& item_) {
   // Colnect API calls are encoded as a path
   QString query(QLatin1Char('/') + m_locale + QLatin1Char('/') + QLatin1String(item_) + QStringLiteral("/cat/") + m_category + QLatin1Char('/'));
   u.setPath(u.path() + query);
+  myDebug() << "Reading item names from" << u.toDisplayString();
 
   const QByteArray data = FileHandler::readDataFile(u, true);
   QJsonDocument doc = QJsonDocument::fromJson(data);
