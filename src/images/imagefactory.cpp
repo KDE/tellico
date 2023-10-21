@@ -132,6 +132,7 @@ QString ImageFactory::addImage(const QUrl& url_, bool quiet_, const QUrl& refer_
 
 const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {
   if(url_.isEmpty() || !url_.isValid() || d->nullImages.contains(url_.url())) {
+    myDebug() << "Returning null image";
     return Data::Image::null;
   }
   ImageJob* job = new ImageJob(url_, QString(), quiet_);
@@ -139,7 +140,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
   job->setReferrer(refer_);
 
   if(!job->exec()) {
-//    myDebug() << "ImageJob failed to exec:" << job->errorString();
+    myDebug() << "ImageJob failed to exec:" << job->errorString();
     // ERR_UNKNOWN is used when the returned image is truly null
     // rather than network error or some such
     if(job->error() == KIO::ERR_UNKNOWN) {

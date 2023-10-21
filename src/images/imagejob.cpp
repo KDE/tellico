@@ -106,10 +106,11 @@ void ImageJob::slotStart() {
 }
 
 void ImageJob::getJobResult(KJob* job_) {
+  const auto errorText = i18n("Tellico is unable to load the image - %1.", m_url.toDisplayString());
   KIO::StoredTransferJob* getJob = qobject_cast<KIO::StoredTransferJob*>(job_);
   if(!getJob || getJob->error()) {
     // error handling for subjob is handled by KCompositeJob
-    setErrorText(i18n("Tellico is unable to load the image - %1.", m_url.toDisplayString()));
+    setErrorText(errorText);
     emitResult();
     return;
   }
@@ -119,8 +120,10 @@ void ImageJob::getJobResult(KJob* job_) {
   QByteArray data = getJob->data();
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  m_image = Data::Image(data, QString::fromLatin1(QImageReader::imageFormat(&buffer)), m_id);
+  const auto format = QString::fromLatin1(QImageReader::imageFormat(&buffer));
+  m_image = Data::Image(data, format, m_id);
   if(m_image.isNull()) {
+    setErrorText(errorText);
     setError(KIO::ERR_UNKNOWN);
     m_image = Data::Image::null;
   } else {
