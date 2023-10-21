@@ -779,13 +779,28 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
 
 void IMDBFetcher::doJson(const QString& str_, Tellico::Data::EntryPtr entry_) {
   static const QRegularExpression jsonRx(QStringLiteral("<script[^>]+?type=\"application/ld\\+json\".*?>(.+?)</script>"));
-  QRegularExpressionMatch jsonMatch = jsonRx.match(str_);
+  // match a section of text enclosed by quotes, followed only by a space (so not :, } or ,
+  static const QRegularExpression quoteRx(QStringLiteral(" \"([\\s\\w'\\.]+)\" "));
+  auto jsonMatch = jsonRx.match(str_);
   if(!jsonMatch.hasMatch()) {
     return;
   }
 
+  auto json = jsonMatch.captured(1);
+  // the JSON might have non-escaped quote mark within text
+  json.replace(quoteRx, QLatin1String(" \\1 "));
+#if 0
+  myWarning() << "Remove debug from imdbfetcher.cpp (/tmp/testimdbresult.json)";
+  QFile f(QString::fromLatin1("/tmp/testimdbresult.json"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t << json;
+  }
+  f.close();
+#endif
+
   QJsonParseError parseError;
-  QJsonDocument doc = QJsonDocument::fromJson(jsonMatch.captured(1).toUtf8(), &parseError);
+  QJsonDocument doc = QJsonDocument::fromJson(json.toUtf8(), &parseError);
   if(doc.isNull()) {
     myDebug() << "Bad json data:" << parseError.errorString();
     return;
