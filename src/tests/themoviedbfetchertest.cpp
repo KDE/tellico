@@ -45,9 +45,8 @@ void TheMovieDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("Superman Returns"));
-  m_fieldValues.insert(QStringLiteral("studio"), QStringLiteral("Warner Bros. Pictures; Red Sun Productions Pty. Ltd.; "
-                                                                "Peters Entertainment; DC Comics; Legendary Pictures; "
-                                                                "Bad Hat Harry Productions"));
+  m_fieldValues.insert(QStringLiteral("studio"), QStringLiteral("Warner Bros. Pictures; Bad Hat Harry Productions; "
+                                                                "Peters Entertainment; DC Comics; Legendary Pictures"));
   m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2006"));
   m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("action; adventure; science fiction"));
   m_fieldValues.insert(QStringLiteral("director"), QStringLiteral("Bryan Singer"));
@@ -74,7 +73,7 @@ void TheMovieDBFetcherTest::testTitle() {
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
-  QCOMPARE(castList.at(0), QStringLiteral("Brandon Routh::Superman / Clark Kent"));
+  QCOMPARE(castList.at(0), QStringLiteral("Brandon Routh::Clark Kent / Superman"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
@@ -104,7 +103,7 @@ void TheMovieDBFetcherTest::testTitleFr() {
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
-  QCOMPARE(castList.at(0), QStringLiteral("Brandon Routh::Superman / Clark Kent"));
+  QCOMPARE(castList.at(0), QStringLiteral("Brandon Routh::Clark Kent / Superman"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
@@ -150,6 +149,7 @@ void TheMovieDBFetcherTest::testAllMankind() {
   QCOMPARE(entry->field("network"), QStringLiteral("Apple TV+"));
   QCOMPARE(entry->field("language"), QStringLiteral("English"));
   QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
+  QEXPECT_FAIL("", "Producer info has been removed", Continue);
   QCOMPARE(set(entry, "producer"), set(QStringLiteral("Huey M. Park")));
   QVERIFY(entry->field("cast").startsWith(QStringLiteral("Joel Kinnaman::Ed Baldwin")));
   QStringList episodeList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("episode")));
