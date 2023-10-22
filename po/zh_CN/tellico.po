@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-18 02:30+0000\n"
-"PO-Revision-Date: 2023-10-10 14:34\n"
+"POT-Creation-Date: 2023-10-22 03:10+0000\n"
+"PO-Revision-Date: 2023-10-21 13:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -682,7 +682,7 @@ msgstr ""
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
-#: src/fetch/imdbfetcher.cpp:831 src/fetch/imdbfetcher.cpp:1386
+#: src/fetch/imdbfetcher.cpp:846 src/fetch/imdbfetcher.cpp:1401
 #: src/fetch/itunesfetcher.cpp:241 src/fetch/kinopoiskfetcher.cpp:277
 #: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:460
 #: src/fetch/moviemeterfetcher.cpp:216 src/fetch/moviemeterfetcher.cpp:221
@@ -1702,7 +1702,7 @@ msgstr "发布年份"
 
 #: src/collections/stampcollection.cpp:83
 #: src/collections/videocollection.cpp:180 src/fetch/allocinefetcher.cpp:398
-#: src/fetch/imdbfetcher.cpp:1530
+#: src/fetch/imdbfetcher.cpp:1545
 #, kde-format
 msgid "Color"
 msgstr "彩色"
@@ -3208,7 +3208,7 @@ msgstr ""
 
 #: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:631
 #: src/fetch/colnectfetcher.cpp:787 src/fetch/discogsfetcher.cpp:218
-#: src/fetch/doubanfetcher.cpp:454 src/fetch/filmaffinityfetcher.cpp:425
+#: src/fetch/doubanfetcher.cpp:454 src/fetch/filmaffinityfetcher.cpp:428
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
 #: src/fetch/igdbfetcher.cpp:163 src/fetch/isbndbfetcher.cpp:296
@@ -3233,9 +3233,9 @@ msgstr ""
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
 #: src/fetch/doubanfetcher.cpp:344 src/fetch/doubanfetcher.cpp:362
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:617
-#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:321
-#: src/fetch/filmaffinityfetcher.cpp:456 src/fetch/imdbfetcher.cpp:887
-#: src/fetch/imdbfetcher.cpp:1807 src/fetch/kinopoiskfetcher.cpp:341
+#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:322
+#: src/fetch/filmaffinityfetcher.cpp:459 src/fetch/imdbfetcher.cpp:902
+#: src/fetch/imdbfetcher.cpp:1822 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:263 src/fetch/kinoteatrfetcher.cpp:507
 #: src/fetch/omdbfetcher.cpp:263 src/fetch/themoviedbfetcher.cpp:333
@@ -3245,15 +3245,15 @@ msgstr ""
 msgid "Original Title"
 msgstr "原标题"
 
-#: src/fetch/allocinefetcher.cpp:432 src/fetch/filmaffinityfetcher.cpp:469
-#: src/fetch/imdbfetcher.cpp:1824 src/fetch/kinopoiskfetcher.cpp:685
+#: src/fetch/allocinefetcher.cpp:432 src/fetch/filmaffinityfetcher.cpp:472
+#: src/fetch/imdbfetcher.cpp:1839 src/fetch/kinopoiskfetcher.cpp:685
 #: src/fetch/themoviedbfetcher.cpp:614
 #, kde-format
 msgid "&Maximum cast: "
 msgstr ""
 
-#: src/fetch/allocinefetcher.cpp:445 src/fetch/filmaffinityfetcher.cpp:482
-#: src/fetch/imdbfetcher.cpp:1837 src/fetch/kinopoiskfetcher.cpp:698
+#: src/fetch/allocinefetcher.cpp:445 src/fetch/filmaffinityfetcher.cpp:485
+#: src/fetch/imdbfetcher.cpp:1852 src/fetch/kinopoiskfetcher.cpp:698
 #: src/fetch/themoviedbfetcher.cpp:627
 #, kde-format
 msgid ""
@@ -3513,7 +3513,7 @@ msgstr "大图"
 msgid "No Image"
 msgstr "无图像"
 
-#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:1846
+#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:1861
 #: src/fetch/mobygamesfetcher.cpp:682 src/fetch/thegamesdbfetcher.cpp:667
 #, kde-format
 msgid ""
@@ -3534,8 +3534,8 @@ msgid ""
 msgstr ""
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
-#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:952
-#: src/fetch/imdbfetcher.cpp:1805 src/fetch/moviemeterfetcher.cpp:225
+#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:967
+#: src/fetch/imdbfetcher.cpp:1820 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:258
 #: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:576
 #: src/fetch/tvmazefetcher.cpp:193 src/fetch/tvmazefetcher.cpp:385
@@ -3549,7 +3549,7 @@ msgid "Distributor"
 msgstr "发行商"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
-#: src/fetch/imdbfetcher.cpp:1808 src/fetch/itunesfetcher.cpp:506
+#: src/fetch/imdbfetcher.cpp:1823 src/fetch/itunesfetcher.cpp:506
 #: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:576
 #: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:336
 #, kde-format
@@ -3632,7 +3632,7 @@ msgstr ""
 msgid "PEGI Rating"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:919 src/fetch/filmaffinityfetcher.cpp:487
+#: src/fetch/colnectfetcher.cpp:919 src/fetch/filmaffinityfetcher.cpp:490
 #: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:632
 #, kde-format
 msgid "Language: "
@@ -3864,18 +3864,18 @@ msgstr "LCCN"
 msgid "Raw Query"
 msgstr "原始查询"
 
-#: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
+#: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:460
 #, kde-format
 msgid "FilmAffinity Link"
 msgstr ""
 
-#: src/fetch/filmaffinityfetcher.cpp:492
+#: src/fetch/filmaffinityfetcher.cpp:495
 #, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr ""
 
-#: src/fetch/filmaffinityfetcher.cpp:495
+#: src/fetch/filmaffinityfetcher.cpp:498
 #, kde-format
 msgctxt "Country"
 msgid "USA"
@@ -3973,7 +3973,7 @@ msgstr ""
 msgid "Screenshot"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1792
+#: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1807
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "互联网影片数据库"
@@ -4003,19 +4003,19 @@ msgstr ""
 msgid "Internet Movie Database (Portuguese)"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:830 src/fetch/imdbfetcher.cpp:1385
-#: src/fetch/imdbfetcher.cpp:1804
+#: src/fetch/imdbfetcher.cpp:845 src/fetch/imdbfetcher.cpp:1400
+#: src/fetch/imdbfetcher.cpp:1819
 #, kde-format
 msgid "IMDb Rating"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:1570 src/fetch/imdbfetcher.cpp:1667
-#: src/fetch/imdbfetcher.cpp:1806
+#: src/fetch/imdbfetcher.cpp:1585 src/fetch/imdbfetcher.cpp:1682
+#: src/fetch/imdbfetcher.cpp:1821
 #, kde-format
 msgid "Certifications"
 msgstr "证书"
 
-#: src/fetch/imdbfetcher.cpp:1803 src/fetch/kinopoiskfetcher.cpp:672
+#: src/fetch/imdbfetcher.cpp:1818 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/thetvdbfetcher.cpp:575 src/fetch/tvmazefetcher.cpp:382
 #: src/field.cpp:332
@@ -4023,7 +4023,7 @@ msgstr "证书"
 msgid "IMDb Link"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:1842
+#: src/fetch/imdbfetcher.cpp:1857
 #, kde-format
 msgid "Download cover &image"
 msgstr "下载封面图像(&I)"
