@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-20 00:42+0000\n"
+"POT-Creation-Date: 2023-10-22 00:43+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -729,7 +729,7 @@ msgstr "Et felt med en afledt værdi skal have en værdiskabelon."
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
-#: src/fetch/imdbfetcher.cpp:839 src/fetch/imdbfetcher.cpp:1390
+#: src/fetch/imdbfetcher.cpp:844 src/fetch/imdbfetcher.cpp:1395
 #: src/fetch/itunesfetcher.cpp:241 src/fetch/kinopoiskfetcher.cpp:277
 #: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:460
 #: src/fetch/moviemeterfetcher.cpp:216 src/fetch/moviemeterfetcher.cpp:221
@@ -738,8 +738,8 @@ msgstr "Et felt med en afledt værdi skal have en værdiskabelon."
 #: src/fetch/thegamesdbfetcher.cpp:267 src/fetch/thegamesdbfetcher.cpp:272
 #: src/fetch/themoviedbfetcher.cpp:313 src/fetch/themoviedbfetcher.cpp:316
 #: src/fetch/themoviedbfetcher.cpp:321 src/fetch/themoviedbfetcher.cpp:339
-#: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:260
-#: src/fetch/thetvdbfetcher.cpp:265 src/fetch/tvmazefetcher.cpp:178
+#: src/fetch/thetvdbfetcher.cpp:251 src/fetch/thetvdbfetcher.cpp:256
+#: src/fetch/thetvdbfetcher.cpp:261 src/fetch/tvmazefetcher.cpp:178
 #: src/fetch/tvmazefetcher.cpp:183 src/fetch/upcitemdbfetcher.cpp:208
 #: src/fetch/vgcollectfetcher.cpp:238 src/fetch/vgcollectfetcher.cpp:341
 #: src/field.cpp:39 src/field.cpp:80 src/field.cpp:299 src/field.cpp:328
@@ -1674,7 +1674,7 @@ msgstr "Album"
 
 #: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:424
 #: src/fetch/doubanfetcher.cpp:431 src/fetch/doubanfetcher.cpp:565
-#: src/fetch/upcitemdbfetcher.cpp:290 src/fetch/upcitemdbfetcher.cpp:410
+#: src/fetch/upcitemdbfetcher.cpp:293 src/fetch/upcitemdbfetcher.cpp:413
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:162
 #: src/translators/freedbimporter.cpp:275
@@ -1686,8 +1686,8 @@ msgstr "Compactdisk"
 
 #: src/collections/musiccollection.cpp:54
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1043
-#: src/fetch/discogsfetcher.cpp:432 src/fetch/upcitemdbfetcher.cpp:406
-#: src/fetch/upcitemdbfetcher.cpp:414 src/translators/discogsimporter.cpp:169
+#: src/fetch/discogsfetcher.cpp:432 src/fetch/upcitemdbfetcher.cpp:409
+#: src/fetch/upcitemdbfetcher.cpp:417 src/translators/discogsimporter.cpp:169
 #, kde-format
 msgid "DVD"
 msgstr "Dvd"
@@ -1755,7 +1755,7 @@ msgstr "Udgivelsesår"
 
 #: src/collections/stampcollection.cpp:83
 #: src/collections/videocollection.cpp:180 src/fetch/allocinefetcher.cpp:398
-#: src/fetch/imdbfetcher.cpp:1534
+#: src/fetch/imdbfetcher.cpp:1539
 #, kde-format
 msgid "Color"
 msgstr "Farve"
@@ -1813,7 +1813,7 @@ msgid "My Videos"
 msgstr "Mine videoer"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1029
-#: src/fetch/upcitemdbfetcher.cpp:392
+#: src/fetch/upcitemdbfetcher.cpp:395
 #, kde-format
 msgid "VHS"
 msgstr "VHS"
@@ -1829,13 +1829,13 @@ msgid "DivX"
 msgstr "DivX"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1023
-#: src/fetch/upcitemdbfetcher.cpp:386
+#: src/fetch/upcitemdbfetcher.cpp:389
 #, kde-format
 msgid "Blu-ray"
 msgstr "Blu-ray"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1026
-#: src/fetch/upcitemdbfetcher.cpp:389
+#: src/fetch/upcitemdbfetcher.cpp:392
 #, kde-format
 msgid "HD DVD"
 msgstr "HD dvd"
@@ -1913,7 +1913,7 @@ msgid "Nationality"
 msgstr "Nationalitet"
 
 #: src/collections/videocollection.cpp:102 src/fetch/amazonfetcher.cpp:1039
-#: src/fetch/upcitemdbfetcher.cpp:402
+#: src/fetch/upcitemdbfetcher.cpp:405
 #, kde-format
 msgid "NTSC"
 msgstr "NTSC"
@@ -2007,7 +2007,7 @@ msgid "Aspect Ratio"
 msgstr "Billedformat"
 
 #: src/collections/videocollection.cpp:175 src/fetch/amazonfetcher.cpp:1012
-#: src/fetch/upcitemdbfetcher.cpp:372
+#: src/fetch/upcitemdbfetcher.cpp:375
 #, kde-format
 msgid "Widescreen"
 msgstr "Widescreen"
@@ -2023,7 +2023,7 @@ msgid "Color Mode"
 msgstr "Farvetilstand"
 
 #: src/collections/videocollection.cpp:186 src/fetch/amazonfetcher.cpp:1033
-#: src/fetch/upcitemdbfetcher.cpp:396
+#: src/fetch/upcitemdbfetcher.cpp:399
 #, kde-format
 msgid "Director's Cut"
 msgstr "Instruktørens særudgave"
@@ -3267,7 +3267,7 @@ msgstr ""
 #: src/fetch/giantbombfetcher.cpp:219 src/fetch/googlebookfetcher.cpp:382
 #: src/fetch/isbndbfetcher.cpp:395 src/fetch/mobygamesfetcher.cpp:652
 #: src/fetch/omdbfetcher.cpp:411 src/fetch/thegamesdbfetcher.cpp:637
-#: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:589
+#: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:586
 #, fuzzy, kde-format
 #| msgid ""
 #| "Registration is required for accessing the %1 data source. If you agree "
@@ -3296,7 +3296,7 @@ msgstr "Adgangsnøgle: "
 #: src/fetch/adsfetcher.cpp:349 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:250 src/fetch/entrezfetcher.cpp:537
 #: src/fetch/giantbombfetcher.cpp:237 src/fetch/googlebookfetcher.cpp:400
-#: src/fetch/themoviedbfetcher.cpp:609 src/fetch/thetvdbfetcher.cpp:607
+#: src/fetch/themoviedbfetcher.cpp:609 src/fetch/thetvdbfetcher.cpp:604
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3307,7 +3307,7 @@ msgstr ""
 
 #: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:631
 #: src/fetch/colnectfetcher.cpp:787 src/fetch/discogsfetcher.cpp:218
-#: src/fetch/doubanfetcher.cpp:454 src/fetch/filmaffinityfetcher.cpp:425
+#: src/fetch/doubanfetcher.cpp:454 src/fetch/filmaffinityfetcher.cpp:428
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:198 src/fetch/ibsfetcher.cpp:301
 #: src/fetch/igdbfetcher.cpp:163 src/fetch/isbndbfetcher.cpp:296
@@ -3316,9 +3316,9 @@ msgstr ""
 #: src/fetch/mobygamesfetcher.cpp:346 src/fetch/moviemeterfetcher.cpp:162
 #: src/fetch/numistafetcher.cpp:287 src/fetch/numistafetcher.cpp:295
 #: src/fetch/omdbfetcher.cpp:183 src/fetch/thegamesdbfetcher.cpp:172
-#: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:351
-#: src/fetch/tvmazefetcher.cpp:269 src/fetch/upcitemdbfetcher.cpp:250
-#: src/fetch/vgcollectfetcher.cpp:286 src/fetch/vndbfetcher.cpp:182
+#: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:347
+#: src/fetch/tvmazefetcher.cpp:269 src/fetch/upcitemdbfetcher.cpp:253
+#: src/fetch/vgcollectfetcher.cpp:286 src/fetch/vndbfetcher.cpp:184
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "Omslagsbilledet kunne ikke indlæses."
@@ -3332,27 +3332,27 @@ msgstr "Allocine-link"
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
 #: src/fetch/doubanfetcher.cpp:344 src/fetch/doubanfetcher.cpp:362
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:617
-#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:321
-#: src/fetch/filmaffinityfetcher.cpp:456 src/fetch/imdbfetcher.cpp:895
-#: src/fetch/imdbfetcher.cpp:1810 src/fetch/kinopoiskfetcher.cpp:341
+#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:322
+#: src/fetch/filmaffinityfetcher.cpp:459 src/fetch/imdbfetcher.cpp:900
+#: src/fetch/imdbfetcher.cpp:1815 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:263 src/fetch/kinoteatrfetcher.cpp:507
 #: src/fetch/omdbfetcher.cpp:263 src/fetch/themoviedbfetcher.cpp:333
-#: src/fetch/themoviedbfetcher.cpp:577 src/fetch/vndbfetcher.cpp:284
-#: src/fetch/vndbfetcher.cpp:432
+#: src/fetch/themoviedbfetcher.cpp:577 src/fetch/vndbfetcher.cpp:288
+#: src/fetch/vndbfetcher.cpp:436
 #, kde-format
 msgid "Original Title"
 msgstr "Oprindelig titel"
 
-#: src/fetch/allocinefetcher.cpp:432 src/fetch/filmaffinityfetcher.cpp:469
-#: src/fetch/imdbfetcher.cpp:1827 src/fetch/kinopoiskfetcher.cpp:685
+#: src/fetch/allocinefetcher.cpp:432 src/fetch/filmaffinityfetcher.cpp:472
+#: src/fetch/imdbfetcher.cpp:1832 src/fetch/kinopoiskfetcher.cpp:685
 #: src/fetch/themoviedbfetcher.cpp:614
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Maksimal rolleliste: "
 
-#: src/fetch/allocinefetcher.cpp:445 src/fetch/filmaffinityfetcher.cpp:482
-#: src/fetch/imdbfetcher.cpp:1840 src/fetch/kinopoiskfetcher.cpp:698
+#: src/fetch/allocinefetcher.cpp:445 src/fetch/filmaffinityfetcher.cpp:485
+#: src/fetch/imdbfetcher.cpp:1845 src/fetch/kinopoiskfetcher.cpp:698
 #: src/fetch/themoviedbfetcher.cpp:627
 #, kde-format
 msgid ""
@@ -3540,7 +3540,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:272 src/fetch/discogsfetcher.cpp:138
 #: src/fetch/isbndbfetcher.cpp:164 src/fetch/mobygamesfetcher.cpp:163
 #: src/fetch/omdbfetcher.cpp:120 src/fetch/thegamesdbfetcher.cpp:136
-#: src/fetch/themoviedbfetcher.cpp:163 src/fetch/thetvdbfetcher.cpp:168
+#: src/fetch/themoviedbfetcher.cpp:163 src/fetch/thetvdbfetcher.cpp:164
 #, kde-format
 msgid "Those values must be entered in the data source settings."
 msgstr "Disse værdier skal indtastes i indstillingerne for datakilden."
@@ -3580,7 +3580,7 @@ msgstr ""
 "den du ønsker at bruge til denne datakilde."
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:213
-#: src/fetch/colnectfetcher.cpp:947 src/fetch/itunesfetcher.cpp:517
+#: src/fetch/colnectfetcher.cpp:948 src/fetch/itunesfetcher.cpp:517
 #: src/fetch/mobygamesfetcher.cpp:672 src/fetch/rpggeekfetcher.cpp:222
 #: src/fetch/thegamesdbfetcher.cpp:657 src/fetch/videogamegeekfetcher.cpp:213
 #, kde-format
@@ -3588,7 +3588,7 @@ msgid "&Image size: "
 msgstr "&Billedstørrelse: "
 
 #: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:217
-#: src/fetch/colnectfetcher.cpp:951 src/fetch/itunesfetcher.cpp:521
+#: src/fetch/colnectfetcher.cpp:952 src/fetch/itunesfetcher.cpp:521
 #: src/fetch/mobygamesfetcher.cpp:675 src/fetch/rpggeekfetcher.cpp:226
 #: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:217
 #, kde-format
@@ -3602,7 +3602,7 @@ msgstr "Mellemstort billede"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:952 src/fetch/itunesfetcher.cpp:522
+#: src/fetch/colnectfetcher.cpp:953 src/fetch/itunesfetcher.cpp:522
 #: src/fetch/mobygamesfetcher.cpp:677 src/fetch/rpggeekfetcher.cpp:227
 #: src/fetch/thegamesdbfetcher.cpp:662 src/fetch/videogamegeekfetcher.cpp:218
 #, kde-format
@@ -3610,14 +3610,14 @@ msgid "Large Image"
 msgstr "Stort billede"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:216
-#: src/fetch/colnectfetcher.cpp:950 src/fetch/itunesfetcher.cpp:520
+#: src/fetch/colnectfetcher.cpp:951 src/fetch/itunesfetcher.cpp:520
 #: src/fetch/mobygamesfetcher.cpp:678 src/fetch/rpggeekfetcher.cpp:225
 #: src/fetch/thegamesdbfetcher.cpp:663 src/fetch/videogamegeekfetcher.cpp:216
 #, kde-format
 msgid "No Image"
 msgstr "Intet billede"
 
-#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:1849
+#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:1854
 #: src/fetch/mobygamesfetcher.cpp:682 src/fetch/thegamesdbfetcher.cpp:667
 #, kde-format
 msgid ""
@@ -3642,8 +3642,8 @@ msgstr ""
 "inkluderes i alle links til Amazon.com-hjemmesiden."
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
-#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:960
-#: src/fetch/imdbfetcher.cpp:1808 src/fetch/moviemeterfetcher.cpp:225
+#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:965
+#: src/fetch/imdbfetcher.cpp:1813 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:258
 #: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:576
 #: src/fetch/tvmazefetcher.cpp:193 src/fetch/tvmazefetcher.cpp:385
@@ -3657,8 +3657,8 @@ msgid "Distributor"
 msgstr "Distributør"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
-#: src/fetch/imdbfetcher.cpp:1811 src/fetch/itunesfetcher.cpp:506
-#: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:576
+#: src/fetch/imdbfetcher.cpp:1816 src/fetch/itunesfetcher.cpp:506
+#: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:573
 #: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:336
 #, kde-format
 msgid "Episodes"
@@ -3685,8 +3685,8 @@ msgstr "AnimeNfo-vurdering"
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
-#: src/fetch/upcitemdbfetcher.cpp:465 src/fetch/vgcollectfetcher.cpp:382
-#: src/fetch/vndbfetcher.cpp:440
+#: src/fetch/upcitemdbfetcher.cpp:468 src/fetch/vgcollectfetcher.cpp:382
+#: src/fetch/vndbfetcher.cpp:444
 #, kde-format
 msgid "This source has no options."
 msgstr "Denne kilde har ingen indstillinger."
@@ -3741,7 +3741,7 @@ msgstr ""
 msgid "PEGI Rating"
 msgstr "PEGI-vurdering"
 
-#: src/fetch/colnectfetcher.cpp:919 src/fetch/filmaffinityfetcher.cpp:487
+#: src/fetch/colnectfetcher.cpp:920 src/fetch/filmaffinityfetcher.cpp:490
 #: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:632
 #, kde-format
 msgid "Language: "
@@ -3801,7 +3801,7 @@ msgstr "Dansk Bibliotekscenter (DBC.dk)"
 #: src/fetch/discogsfetcher.cpp:136 src/fetch/isbndbfetcher.cpp:162
 #: src/fetch/mobygamesfetcher.cpp:161 src/fetch/omdbfetcher.cpp:118
 #: src/fetch/thegamesdbfetcher.cpp:134 src/fetch/themoviedbfetcher.cpp:161
-#: src/fetch/thetvdbfetcher.cpp:166
+#: src/fetch/thetvdbfetcher.cpp:162
 #, kde-format
 msgid "An access key is required to use this data source."
 msgstr "Der kræves en adgangsnøgle for at bruge denne datakilde."
@@ -3814,7 +3814,7 @@ msgstr "Discogs-link"
 #. i18n("Nationality");
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
-#: src/fetch/upcitemdbfetcher.cpp:207 src/fetch/upcitemdbfetcher.cpp:458
+#: src/fetch/upcitemdbfetcher.cpp:207 src/fetch/upcitemdbfetcher.cpp:461
 #: src/fetch/vgcollectfetcher.cpp:340 src/fetch/vgcollectfetcher.cpp:375
 #, kde-format
 msgid "Barcode"
@@ -3983,20 +3983,20 @@ msgstr "LCCN"
 msgid "Raw Query"
 msgstr "Rå forespørgsel"
 
-#: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:457
+#: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:460
 #, fuzzy, kde-format
 #| msgid "Filmaster Link"
 msgid "FilmAffinity Link"
 msgstr "Filmaster-link"
 
-#: src/fetch/filmaffinityfetcher.cpp:492
+#: src/fetch/filmaffinityfetcher.cpp:495
 #, fuzzy, kde-format
 #| msgid "Spain"
 msgctxt "Country"
 msgid "Spain"
 msgstr "Spanien"
 
-#: src/fetch/filmaffinityfetcher.cpp:495
+#: src/fetch/filmaffinityfetcher.cpp:498
 #, kde-format
 msgctxt "Country"
 msgid "USA"
@@ -4095,7 +4095,7 @@ msgstr "Internet Game Database (IGDB.com)"
 msgid "Screenshot"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1795
+#: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1800
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
@@ -4125,27 +4125,27 @@ msgstr "Internet Movie Database (italiensk)"
 msgid "Internet Movie Database (Portuguese)"
 msgstr "Internet Movie Database (portugisisk)"
 
-#: src/fetch/imdbfetcher.cpp:838 src/fetch/imdbfetcher.cpp:1389
-#: src/fetch/imdbfetcher.cpp:1807
+#: src/fetch/imdbfetcher.cpp:843 src/fetch/imdbfetcher.cpp:1394
+#: src/fetch/imdbfetcher.cpp:1812
 #, kde-format
 msgid "IMDb Rating"
 msgstr "IMDb-vurdering"
 
-#: src/fetch/imdbfetcher.cpp:1574 src/fetch/imdbfetcher.cpp:1671
-#: src/fetch/imdbfetcher.cpp:1809
+#: src/fetch/imdbfetcher.cpp:1579 src/fetch/imdbfetcher.cpp:1676
+#: src/fetch/imdbfetcher.cpp:1814
 #, kde-format
 msgid "Certifications"
 msgstr "Certificeringer"
 
-#: src/fetch/imdbfetcher.cpp:1806 src/fetch/kinopoiskfetcher.cpp:672
+#: src/fetch/imdbfetcher.cpp:1811 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
-#: src/fetch/thetvdbfetcher.cpp:575 src/fetch/tvmazefetcher.cpp:382
+#: src/fetch/thetvdbfetcher.cpp:572 src/fetch/tvmazefetcher.cpp:382
 #: src/field.cpp:332
 #, kde-format
 msgid "IMDb Link"
 msgstr "IMDb-link"
 
-#: src/fetch/imdbfetcher.cpp:1845
+#: src/fetch/imdbfetcher.cpp:1850
 #, kde-format
 msgid "Download cover &image"
 msgstr "Download omslags&billede"
@@ -4345,7 +4345,7 @@ msgid "TMDb Link"
 msgstr "TMDb-link"
 
 #: src/fetch/themoviedbfetcher.cpp:338 src/fetch/themoviedbfetcher.cpp:578
-#: src/fetch/thetvdbfetcher.cpp:259 src/fetch/thetvdbfetcher.cpp:577
+#: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:574
 #: src/fetch/tvmazefetcher.cpp:182 src/fetch/tvmazefetcher.cpp:384
 #, kde-format
 msgid "Network"
@@ -4381,13 +4381,13 @@ msgstr ""
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB (%1)"
 
-#: src/fetch/thetvdbfetcher.cpp:264 src/fetch/thetvdbfetcher.cpp:574
+#: src/fetch/thetvdbfetcher.cpp:260 src/fetch/thetvdbfetcher.cpp:571
 #, fuzzy, kde-format
 #| msgid "IGDB Link"
 msgid "TheTVDB Link"
 msgstr "IGDB-link"
 
-#: src/fetch/thetvdbfetcher.cpp:601
+#: src/fetch/thetvdbfetcher.cpp:598
 #, kde-format
 msgid "Subscriber PIN: "
 msgstr ""
@@ -4403,12 +4403,12 @@ msgstr "Comic Vine-link"
 msgid "VideoGameGeek Link"
 msgstr "VideoGameGeek-link"
 
-#: src/fetch/vndbfetcher.cpp:289 src/fetch/vndbfetcher.cpp:433
+#: src/fetch/vndbfetcher.cpp:293 src/fetch/vndbfetcher.cpp:437
 #, kde-format
 msgid "Alias"
 msgstr "Alias"
 
-#: src/fetch/vndbfetcher.cpp:308
+#: src/fetch/vndbfetcher.cpp:312
 #, kde-format
 msgid "Visual Novel"
 msgstr "Visuel roman"
@@ -5164,7 +5164,7 @@ msgstr "Flyt række op"
 msgid "Move Row Down"
 msgstr "Flyt række ned"
 
-#: src/images/imagejob.cpp:75 src/images/imagejob.cpp:112
+#: src/images/imagejob.cpp:75 src/images/imagejob.cpp:109
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico kan ikke indlæse billedet - %1."
