@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 03:10+0000\n"
+"POT-Creation-Date: 2023-10-24 02:29+0000\n"
 "PO-Revision-Date: 2009-11-15 12:06+0100\n"
 "Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -1179,7 +1179,7 @@ msgstr "Legi"
 
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
-#: src/fetch/crossreffetcher.cpp:197 src/translators/ebookimporter.cpp:153
+#: src/fetch/crossreffetcher.cpp:197 src/translators/ebookimporter.cpp:158
 #: src/translators/pdfimporter.cpp:290
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
@@ -6997,32 +6997,32 @@ msgstr ""
 msgid "Discogs Options"
 msgstr "Ĝeneralaj opcioj"
 
-#: src/translators/filelistingimporter.cpp:82
+#: src/translators/filelistingimporter.cpp:87
 #, kde-format
 msgid "Scanning files..."
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:264
+#: src/translators/filelistingimporter.cpp:269
 #, kde-format
 msgid "File Listing Options"
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:267
+#: src/translators/filelistingimporter.cpp:272
 #, kde-format
 msgid "Recursive folder search"
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:268
+#: src/translators/filelistingimporter.cpp:273
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:272
+#: src/translators/filelistingimporter.cpp:277
 #, kde-format
 msgid "Generate file previews"
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:273
+#: src/translators/filelistingimporter.cpp:278
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
