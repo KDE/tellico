@@ -38,7 +38,12 @@
 #include <KFileMetaData/ExtractorCollection>
 #include <KFileMetaData/SimpleExtractionResult>
 #include <KFileMetaData/PropertyInfo>
+// kfilemetadata_version.h was added in 5.94, so first use kcoreaddons_version to check
+// with the expectation that the two versions should match or be no less than
+#include <kcoreaddons_version.h>
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5,94,0)
 #include <kfilemetadata_version.h>
+#endif
 #endif
 
 #include <QPixmap>
