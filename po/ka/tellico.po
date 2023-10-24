@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-22 00:43+0000\n"
-"PO-Revision-Date: 2023-10-08 05:40+0200\n"
+"PO-Revision-Date: 2023-10-23 06:18+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -6093,7 +6093,7 @@ msgstr "რედაქტორის ჩართვა/გამორთვ�
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "ჟურნალის ჩვენება"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6348,11 +6348,10 @@ msgid ""
 msgstr ""
 
 #: src/mainwindow.cpp:2594
-#, fuzzy, kde-format
-#| msgid "Tellico Files"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Tellico ფაილები"
+msgstr "Tellico-ის ჟურნალი"
 
 #: src/reportdialog.cpp:91
 #, kde-format
@@ -7194,10 +7193,9 @@ msgstr "ჯამი:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
-msgstr "სესხები"
+msgstr "სესხი"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
