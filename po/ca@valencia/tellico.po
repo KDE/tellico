@@ -5160,12 +5160,12 @@ msgstr "Elimina la fila"
 #: src/gui/tablefieldwidget.cpp:263
 #, kde-format
 msgid "Move Row Up"
-msgstr "Mou cap la fila amunt"
+msgstr "Mou la fila cap amunt"
 
 #: src/gui/tablefieldwidget.cpp:268
 #, kde-format
 msgid "Move Row Down"
-msgstr "Mou cap la fila avall"
+msgstr "Mou la fila cap avall"
 
 #: src/images/imagejob.cpp:75 src/images/imagejob.cpp:112
 #, kde-format
@@ -6527,7 +6527,7 @@ msgid ""
 "be saved and the images will be transferred to the new location."
 msgstr ""
 "Algunes imatges no estan guardades en la ubicació configurada. El fitxer "
-"actual s'ha de guardar i les imatges es transferiran a la ubicació nova."
+"actual s'ha de guardar i les imatges es transferiran cap a la ubicació nova."
 
 #: src/mainwindow.cpp:2389
 #, kde-format
