@@ -7,26 +7,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 00:43+0000\n"
-"PO-Revision-Date: 2023-10-23 21:19+0100\n"
+"POT-Creation-Date: 2023-10-25 00:44+0000\n"
+"PO-Revision-Date: 2023-10-24 23:25+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: pology\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Axel Rousseau"
+msgstr "Axel Rousseau,Oliver Kellogg"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org"
+msgstr "axel@esperanto-jeunes.org,okellogg@users.sourceforge.net"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -436,7 +436,7 @@ msgid ""
 "Extended field properties are used to specify things such as the "
 "corresponding bibtex field."
 msgstr ""
-"Plilongigitaj kampopropraĵoj estas uzataj por specifi aferojn kiel la "
+"Plilongigitaj kampoproprecoj estas uzataj por specifi aferojn kiel la "
 "responda bibtex-kampo."
 
 #: src/collectionfieldsdialog.cpp:229
@@ -610,7 +610,7 @@ msgstr "Nova Kampo %1"
 #: src/collectionfieldsdialog.cpp:804
 #, kde-format
 msgid "Revert Field Properties"
-msgstr "Reverti Kampajn Propraĵojn"
+msgstr "Reverti Kampajn Proprecojn"
 
 #: src/collectionfieldsdialog.cpp:805
 #, kde-format
@@ -629,7 +629,7 @@ msgstr "Malfari"
 #: src/collectionfieldsdialog.cpp:882
 #, kde-format
 msgid "Extended Field Properties"
-msgstr "Plilongigitaj Kampaj Propraĵoj"
+msgstr "Plilongigitaj Kampaj Proprecoj"
 
 #: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:107
 #, kde-format
@@ -773,12 +773,12 @@ msgstr "Aŭtoro"
 #: src/collections/bibtexcollection.cpp:100
 #, kde-format
 msgid "Bibtex Key"
-msgstr "Bibtex Ŝlosilo"
+msgstr "Bibtex-Ŝlosilo"
 
 #: src/collections/bibtexcollection.cpp:106
 #, kde-format
 msgid "Book Title"
-msgstr "Libro Titolo"
+msgstr "Librotitolo"
 
 #: src/collections/bibtexcollection.cpp:112
 #: src/collections/bookcollection.cpp:64
@@ -887,7 +887,7 @@ msgstr "Serio"
 #, kde-format
 msgctxt "A number field in a bibliography"
 msgid "Volume"
-msgstr "Laŭteco"
+msgstr "Volumo"
 
 #: src/collections/bibtexcollection.cpp:225
 #, kde-format
@@ -974,7 +974,7 @@ msgstr "Eldonjaro"
 #: src/collections/boardgamecollection.cpp:74 src/fetch/rpggeekfetcher.cpp:206
 #, kde-format
 msgid "Designer"
-msgstr "Dizajnisto"
+msgstr "Dezajnisto"
 
 #: src/collections/boardgamecollection.cpp:80
 #: src/fetch/thegamesdbfetcher.cpp:271 src/fetch/thegamesdbfetcher.cpp:605
@@ -1135,12 +1135,12 @@ msgstr "Revuo"
 #: src/collections/bookcollection.cpp:73
 #, kde-format
 msgid "Binding"
-msgstr "Binding"
+msgstr "Bindado"
 
 #: src/collections/bookcollection.cpp:99
 #, kde-format
 msgid "Copyright Year"
-msgstr "Kopirajto Jaro"
+msgstr "Kopirajta Jaro"
 
 #: src/collections/bookcollection.cpp:104
 #: src/collections/comicbookcollection.cpp:93
@@ -1205,19 +1205,19 @@ msgstr "Legi"
 
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
-#: src/fetch/crossreffetcher.cpp:197 src/translators/ebookimporter.cpp:153
+#: src/fetch/crossreffetcher.cpp:197 src/translators/ebookimporter.cpp:158
 #: src/translators/pdfimporter.cpp:290
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
 msgid "Front Cover"
-msgstr "Antaŭa kovro"
+msgstr "Fronta kovro"
 
 #: src/collections/bookcollection.cpp:182
 #: src/collections/comicbookcollection.cpp:163
 #: src/collections/videocollection.cpp:190
 #, kde-format
 msgid "Plot Summary"
-msgstr "Resumo de Temo"
+msgstr "Resumo de Agofadeno"
 
 #: src/collections/cardcollection.cpp:37
 #, kde-format
@@ -1292,7 +1292,7 @@ msgstr "Nomado"
 #: src/collections/coincollection.cpp:71
 #, kde-format
 msgid "Mint Mark"
-msgstr "Menta Marko"
+msgstr "Monfareja Marko"
 
 #: src/collections/coincollection.cpp:77
 #: src/collections/comicbookcollection.cpp:102
@@ -4268,7 +4268,7 @@ msgstr "Enigu la vojon al la datumbazo uzata de la servilo."
 #: src/fetch/srufetcher.cpp:539 src/fetch/z3950fetcher.cpp:603
 #, kde-format
 msgid "Hos&t: "
-msgstr "Gas&tiganto:"
+msgstr "Gastigan&to:"
 
 #: src/fetch/srufetcher.cpp:546 src/fetch/z3950fetcher.cpp:609
 #, kde-format
@@ -4700,7 +4700,7 @@ msgstr ""
 #: src/fetcherconfigdialog.cpp:75
 #, kde-format
 msgid "Data Source Properties"
-msgstr "Datumfontaj Propraĵoj"
+msgstr "Datumfontaj Proprecoj"
 
 #: src/fetcherconfigdialog.cpp:104
 #, kde-format
@@ -6892,7 +6892,7 @@ msgstr "Se markite, kaplinio estos aldonita kun la kampotitoloj."
 #: src/translators/csvexporter.cpp:147
 #, kde-format
 msgid "Delimiter"
-msgstr "Limilo"
+msgstr "Limigilo"
 
 #: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:246
 #, kde-format
@@ -6911,7 +6911,7 @@ msgstr "Komo"
 #: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:253
 #, kde-format
 msgid "Use a comma as the delimiter."
-msgstr "Uzi komon kiel limigilon."
+msgstr "Uzi komon kiel la limigilo."
 
 #: src/translators/csvexporter.cpp:160
 #, kde-format
@@ -6921,7 +6921,7 @@ msgstr "Punktokomo"
 #: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:258
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
-msgstr "Uzu punktokomon kiel limigilon."
+msgstr "Uzi punktokomon kiel la limigilo."
 
 #: src/translators/csvexporter.cpp:165
 #, kde-format
@@ -6931,7 +6931,7 @@ msgstr "Tabo"
 #: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:263
 #, kde-format
 msgid "Use a tab as the delimiter."
-msgstr "Uzu langeton kiel limigilo."
+msgstr "Uzi tabon kiel la limigilo."
 
 #: src/translators/csvexporter.cpp:170
 #: xslt/report-templates/Group_Statistics.xsl:75
@@ -7066,32 +7066,32 @@ msgstr "<Nova Kampo>"
 msgid "Discogs Options"
 msgstr "Discogs-Opcioj"
 
-#: src/translators/filelistingimporter.cpp:82
+#: src/translators/filelistingimporter.cpp:87
 #, kde-format
 msgid "Scanning files..."
 msgstr "Skanante dosierojn..."
 
-#: src/translators/filelistingimporter.cpp:264
+#: src/translators/filelistingimporter.cpp:269
 #, kde-format
 msgid "File Listing Options"
 msgstr "Dosierlistaj Opcioj"
 
-#: src/translators/filelistingimporter.cpp:267
+#: src/translators/filelistingimporter.cpp:272
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Rikura dosierujoserĉo"
 
-#: src/translators/filelistingimporter.cpp:268
+#: src/translators/filelistingimporter.cpp:273
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "Se markite, dosierujoj estas rekursie serĉataj por ĉiuj dosieroj."
 
-#: src/translators/filelistingimporter.cpp:272
+#: src/translators/filelistingimporter.cpp:277
 #, kde-format
 msgid "Generate file previews"
 msgstr "Generi dosierajn antaŭrigardojn"
 
-#: src/translators/filelistingimporter.cpp:273
+#: src/translators/filelistingimporter.cpp:278
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

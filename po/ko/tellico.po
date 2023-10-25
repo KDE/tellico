@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 00:43+0000\n"
+"POT-Creation-Date: 2023-10-25 00:44+0000\n"
 "PO-Revision-Date: 2023-07-25 01:20+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1189,7 +1189,7 @@ msgstr "읽음"
 
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
-#: src/fetch/crossreffetcher.cpp:197 src/translators/ebookimporter.cpp:153
+#: src/fetch/crossreffetcher.cpp:197 src/translators/ebookimporter.cpp:158
 #: src/translators/pdfimporter.cpp:290
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
@@ -7017,32 +7017,32 @@ msgstr "<새 필드>"
 msgid "Discogs Options"
 msgstr "Discogs 링크"
 
-#: src/translators/filelistingimporter.cpp:82
+#: src/translators/filelistingimporter.cpp:87
 #, kde-format
 msgid "Scanning files..."
 msgstr "파일 검색 중..."
 
-#: src/translators/filelistingimporter.cpp:264
+#: src/translators/filelistingimporter.cpp:269
 #, kde-format
 msgid "File Listing Options"
 msgstr "파일 목록 옵션"
 
-#: src/translators/filelistingimporter.cpp:267
+#: src/translators/filelistingimporter.cpp:272
 #, kde-format
 msgid "Recursive folder search"
 msgstr "재귀적 폴더 검색"
 
-#: src/translators/filelistingimporter.cpp:268
+#: src/translators/filelistingimporter.cpp:273
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "이 옵션을 선택하면 폴더에서 재귀적으로 모든 파일을 검색합니다."
 
-#: src/translators/filelistingimporter.cpp:272
+#: src/translators/filelistingimporter.cpp:277
 #, kde-format
 msgid "Generate file previews"
 msgstr "파일 미리 보기 생성"
 
-#: src/translators/filelistingimporter.cpp:273
+#: src/translators/filelistingimporter.cpp:278
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
