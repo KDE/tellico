@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-25 00:44+0000\n"
-"PO-Revision-Date: 2023-10-05 18:19-0300\n"
+"PO-Revision-Date: 2023-10-26 15:25-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -5436,12 +5436,12 @@ msgstr "Importar <filename> como um arquivo PDF"
 #: src/main.cpp:152
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "Registrar saída de diagnóstico"
 
 #: src/main.cpp:153
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "Salvar saída do registro para <nome_de_arquivo>"
 
 #: src/main.cpp:154
 #, kde-format
@@ -6257,7 +6257,7 @@ msgstr "Habilitar/desabilitar o editor"
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "Mostrar registro"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6538,11 +6538,10 @@ msgstr ""
 "será importado."
 
 #: src/mainwindow.cpp:2594
-#, fuzzy, kde-format
-#| msgid "Tellico Files"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Arquivos do Tellico"
+msgstr "Registro do Tellico"
 
 #: src/reportdialog.cpp:91
 #, kde-format
@@ -7434,10 +7433,9 @@ msgstr "Total:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
-msgstr "Empréstimos"
+msgstr "Empréstimo"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
