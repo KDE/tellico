@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-25 00:44+0000\n"
-"PO-Revision-Date: 2023-10-21 12:52+0200\n"
+"PO-Revision-Date: 2023-10-30 13:55+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -1569,7 +1569,7 @@ msgstr "Xbox One"
 #: src/collections/gamecollection.cpp:245
 #, kde-format
 msgid "Xbox Series X"
-msgstr "Xbox Series X"
+msgstr "Xbox Séries X"
 
 #: src/collections/gamecollection.cpp:246
 #, kde-format
@@ -2232,8 +2232,8 @@ msgid ""
 "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
 "up,with"
 msgstr ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
+"un, comme, à, mais, sauf, par, pour, de, dans, à l'intérieur de, ni, de, "
+"hors, sur, ou, dessus, le, la, les, vers, au dessus, avec"
 
 #: src/config/tellico_config.kcfg:83
 #, kde-format
@@ -2245,7 +2245,7 @@ msgstr "the"
 #, kde-format
 msgctxt "comma-separated list of common surname suffixes, used for sorting"
 msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
+msgstr "jr., jr, iii, iv"
 
 #: src/config/tellico_config.kcfg:89
 #, kde-format
@@ -3495,7 +3495,7 @@ msgstr "Espagne"
 #: src/fetch/amazonfetcher.cpp:129
 #, kde-format
 msgid "Amazon (Italy)"
-msgstr "Amazon (Italy)"
+msgstr "Amazon (Italie)"
 
 #: src/fetch/amazonfetcher.cpp:133
 #, kde-format
@@ -3756,7 +3756,7 @@ msgstr "Coloriste"
 #: src/fetch/bedethequefetcher.cpp:338 src/fetch/bedethequefetcher.cpp:458
 #, kde-format
 msgid "Bedetheque Link"
-msgstr "Lien Bedetheque"
+msgstr "Lien vers le site « Bedetheque »"
 
 #: src/fetch/bedethequefetcher.cpp:456 src/field.cpp:314
 #, kde-format
@@ -3771,7 +3771,7 @@ msgstr "Lien BoardGameGeek"
 #: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:808
 #, kde-format
 msgid "Colnect Link"
-msgstr "Lien pour Colnect"
+msgstr "Lien vers le site « Colnect »"
 
 #: src/fetch/colnectfetcher.cpp:546 src/fetch/colnectfetcher.cpp:814
 #, kde-format
@@ -4054,7 +4054,7 @@ msgstr "Requête brute"
 #: src/fetch/filmaffinityfetcher.cpp:281 src/fetch/filmaffinityfetcher.cpp:460
 #, kde-format
 msgid "FilmAffinity Link"
-msgstr "Lien « FilmAffinity »"
+msgstr "Lien vers le site « FilmAffinity »"
 
 #: src/fetch/filmaffinityfetcher.cpp:495
 #, kde-format
@@ -4071,7 +4071,7 @@ msgstr "EU"
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
 msgid "Filmaster Link"
-msgstr "Lien Filmaster"
+msgstr "Lien vers le site « Filmaster »"
 
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
@@ -4110,17 +4110,17 @@ msgstr "Auteur : "
 #: src/fetch/giantbombfetcher.cpp:206
 #, kde-format
 msgid "GiantBomb Link"
-msgstr "Lien GiantBomb"
+msgstr "Lien vers le site « GiantBomb »"
 
 #: src/fetch/googlebookfetcher.cpp:258 src/fetch/googlebookfetcher.cpp:371
 #, kde-format
 msgid "Google Book Link"
-msgstr "Lien Google Book"
+msgstr "Lien vers le site « Google Book »"
 
 #: src/fetch/googlebookfetcher.cpp:362
 #, kde-format
 msgid "Google Book Search"
-msgstr "Recherche Google Book"
+msgstr "Recherche sur le site « Google Book »"
 
 #: src/fetch/hathitrustfetcher.cpp:309 src/fetch/z3950fetcher.cpp:578
 #, kde-format
@@ -4149,7 +4149,7 @@ msgstr "Librairie internet (ibs.it)"
 #: src/fetch/igdbfetcher.cpp:368 src/fetch/igdbfetcher.cpp:579
 #, kde-format
 msgid "IGDB Link"
-msgstr "Lien IGDB"
+msgstr "Lien vers le site « IGDB »"
 
 #: src/fetch/igdbfetcher.cpp:567
 #, kde-format
@@ -4251,22 +4251,22 @@ msgstr "Lien vers « iTunes »"
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
 msgid "KinoPoisk Link"
-msgstr "Liens KinoPoisk"
+msgstr "Lien vers le site « KinoPoisk »"
 
 #: src/fetch/kinoteatrfetcher.cpp:239 src/fetch/kinoteatrfetcher.cpp:508
 #, kde-format
 msgid "Kino-Teatr Link"
-msgstr "Lien Kino-Teatr"
+msgstr "Lien vers le site « Kino-Teatr »"
 
 #: src/fetch/mobygamesfetcher.cpp:459 src/fetch/mobygamesfetcher.cpp:639
 #, kde-format
 msgid "MobyGames Link"
-msgstr "Lien MobyGames"
+msgstr "Lien vers le site « MobyGames »"
 
 #: src/fetch/moviemeterfetcher.cpp:220 src/fetch/moviemeterfetcher.cpp:293
 #, kde-format
 msgid "MovieMeter Link"
-msgstr "Lien MovieMeter"
+msgstr "Lien vers le site « MovieMeter »"
 
 #: src/fetch/multifetcher.cpp:208
 #, kde-format
@@ -4281,7 +4281,7 @@ msgstr "Source de données :"
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:399
 #, kde-format
 msgid "Numista Link"
-msgstr "Lien vers Numista"
+msgstr "Lien vers le site « Numista »"
 
 #: src/fetch/numistafetcher.cpp:404
 #, kde-format
@@ -4293,13 +4293,13 @@ msgstr "Krause-Mishler"
 #, kde-format
 msgctxt "Language"
 msgid "English"
-msgstr "anglais"
+msgstr "Anglais"
 
 #: src/fetch/numistafetcher.cpp:432 src/fetch/themoviedbfetcher.cpp:644
 #, kde-format
 msgctxt "Language"
 msgid "French"
-msgstr "français"
+msgstr "Français"
 
 #: src/fetch/numistafetcher.cpp:463
 #, kde-format
@@ -4341,7 +4341,7 @@ msgstr "Lien OpenLibrary"
 #: src/fetch/rpggeekfetcher.cpp:210
 #, kde-format
 msgid "RPGGeek Link"
-msgstr "Lien « RPGGeek »"
+msgstr "Lien vers le site « RPGGeek »"
 
 #: src/fetch/srufetcher.cpp:492
 #, kde-format
@@ -4458,12 +4458,12 @@ msgstr "Code PIN de l'abonné :"
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
 #, kde-format
 msgid "VGCollect Link"
-msgstr "Lien pour VGCollect"
+msgstr "Lien vers le site « VGCollect »"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
 msgid "VideoGameGeek Link"
-msgstr "Lien VideoGameGeek"
+msgstr "Lien vers le site « VideoGameGeek »"
 
 #: src/fetch/vndbfetcher.cpp:293 src/fetch/vndbfetcher.cpp:437
 #, kde-format
@@ -5339,7 +5339,7 @@ msgstr "Fichiers CIW"
 #: src/importdialog.cpp:424
 #, kde-format
 msgid "VinoXML Data Files"
-msgstr "Fichiers de données VinoXML"
+msgstr "Fichiers de données « VinoXML »"
 
 #: src/importdialog.cpp:430
 #, kde-format
@@ -5850,22 +5850,22 @@ msgstr "Importer des données « MARC »..."
 #: src/mainwindow.cpp:441
 #, kde-format
 msgid "Import Goodreads Collection..."
-msgstr "Importer une collection Goodreads..."
+msgstr "Importer une collection « Goodreads »..."
 
 #: src/mainwindow.cpp:442
 #, kde-format
 msgid "Import a collection from Goodreads.com"
-msgstr "Importer une collection depuis Goodreads."
+msgstr "Importer une collection depuis le site « Goodreads »."
 
 #: src/mainwindow.cpp:444
 #, kde-format
 msgid "Import LibraryThing Collection..."
-msgstr "Importer une collection LibraryThing..."
+msgstr "Importer une collection « LibraryThing »..."
 
 #: src/mainwindow.cpp:445
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
-msgstr "Importer une collection depuis LibraryThing.com"
+msgstr "Importer une collection depuis le site « LibraryThing.com »"
 
 #: src/mainwindow.cpp:447
 #, kde-format
@@ -5950,7 +5950,7 @@ msgstr "Importer une collection depuis BoardGameGeek.com"
 #: src/mainwindow.cpp:480
 #, kde-format
 msgid "Import VinoXML..."
-msgstr "Import VinoXML..."
+msgstr "Importer à partir de VinoXML..."
 
 #: src/mainwindow.cpp:481
 #, kde-format
@@ -6824,7 +6824,7 @@ msgstr "Fichiers"
 #: src/translators/audiofileimporter.cpp:194
 #, kde-format
 msgid "Bitrate"
-msgstr "Bitrate"
+msgstr "Débit binaire"
 
 #: src/translators/audiofileimporter.cpp:231
 #: src/translators/audiofileimporter.cpp:241
@@ -7363,7 +7363,7 @@ msgstr "Chargement de %1..."
 #: src/translators/librarythingimporter.cpp:177
 #, kde-format
 msgid "LibraryThing Options"
-msgstr "Options LibraryThing"
+msgstr "Options pour LibraryThing"
 
 #: src/translators/librarythingimporter.cpp:180
 #, kde-format
@@ -7371,8 +7371,8 @@ msgid ""
 "Export your LibraryThing collection in <a href=\"https://www.librarything."
 "com/export.php?export_type=json\">JSON format</a>."
 msgstr ""
-"Exportez votre collection LibraryThing au <a href=\"https://www.librarything."
-"com/export.php?export_type=json\">format JSON</a>."
+"Exportez votre collection « LibraryThing » au <a href=\"https://www."
+"librarything.com/export.php?export_type=json\">format JSON</a>."
 
 #: src/translators/librarythingimporter.cpp:187
 #, kde-format
@@ -7440,9 +7440,9 @@ msgid ""
 "CrossRef.org. However, you must create an CrossRef account and add a new "
 "data source with your account information."
 msgstr ""
-"Tellico peut télécharger les informations à propos des entrées avec un DOI "
-"CrossRef.org. Pour cela, vous devez créer un compte CrossRef et ajouter une "
-"nouvelle source de données l'utilisant."
+"Tellico peut télécharger les informations à propos des entrées avec un « DOI "
+"CrossRef.org ». Pour cela, vous devez créer un compte « CrossRef » et "
+"ajouter une nouvelle source de données l'utilisant."
 
 #: src/translators/risimporter.cpp:337
 #, kde-format
