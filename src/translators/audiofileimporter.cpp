@@ -351,7 +351,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
         QString numString;
         int i = 0;
         const int len = fileName.length();
-        while(fileName[i].isNumber() && i < len) {
+        while(i < len && fileName[i].isNumber()) {
           i++;
         }
         if(i == 0) { // does not start with a number
