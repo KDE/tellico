@@ -204,7 +204,13 @@ GCstarPluginFetcher::GCstarPluginFetcher(QObject* parent_) : Fetcher(parent_),
 }
 
 GCstarPluginFetcher::~GCstarPluginFetcher() {
-  stop();
+  if(m_thread) {
+    if(m_thread->isRunning()) {
+      m_thread->terminate();
+      m_thread->wait();
+    }
+    delete m_thread;
+  }
 }
 
 QString GCstarPluginFetcher::source() const {

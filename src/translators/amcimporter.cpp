@@ -179,13 +179,15 @@ QString AMCImporter::readImage(const QString& format_) {
     }
     return QString();
   }
-  QString format = QStringLiteral("PNG");
+  QString newFormat;
   if(format_ == QLatin1String(".jpg")) {
-    format = QStringLiteral("JPEG");
+    newFormat = QStringLiteral("JPEG");
   } else if(format_ == QLatin1String(".gif")) {
-    format = QStringLiteral("GIF");
+    newFormat = QStringLiteral("GIF");
+  } else {
+    newFormat = QStringLiteral("PNG");
   }
-  return ImageFactory::addImage(img, format);
+  return ImageFactory::addImage(img, newFormat);
 }
 
 void AMCImporter::readEntry() {

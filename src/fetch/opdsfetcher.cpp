@@ -51,7 +51,7 @@
 using namespace Tellico;
 using Tellico::Fetch::OPDSFetcher;
 
-OPDSFetcher::Reader::Reader(const QUrl& catalog_) : catalog(catalog_) {
+OPDSFetcher::Reader::Reader(const QUrl& catalog_) : catalog(catalog_), isAcquisition(false) {
 }
 
 // read the catalog file and return the search description url

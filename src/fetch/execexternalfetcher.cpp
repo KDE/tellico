@@ -94,7 +94,10 @@ ExecExternalFetcher::ExecExternalFetcher(QObject* parent_) : Fetcher(parent_),
 }
 
 ExecExternalFetcher::~ExecExternalFetcher() {
-  stop();
+  if(m_process) {
+    m_process->kill();
+    m_process->deleteLater();
+  }
 }
 
 QString ExecExternalFetcher::source() const {
