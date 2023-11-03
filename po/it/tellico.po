@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-25 00:44+0000\n"
+"POT-Creation-Date: 2023-11-03 00:43+0000\n"
 "PO-Revision-Date: 2023-10-01 20:59+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -2630,8 +2630,8 @@ msgid "Template Options"
 msgstr "Opzioni modello"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:364
-#: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:367
+#: src/fetch/gcstarpluginfetcher.cpp:412 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
@@ -3862,35 +3862,35 @@ msgstr "Database Entrez"
 msgid "Institution"
 msgstr "Istituzione"
 
-#: src/fetch/execexternalfetcher.cpp:349
+#: src/fetch/execexternalfetcher.cpp:352
 #, kde-format
 msgid "External Application"
 msgstr "Applicazione esterna"
 
-#: src/fetch/execexternalfetcher.cpp:370
+#: src/fetch/execexternalfetcher.cpp:373
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr ""
 "Imposta il tipo di collezione per i dati forniti dall'applicazione esterna."
 
-#: src/fetch/execexternalfetcher.cpp:375
+#: src/fetch/execexternalfetcher.cpp:378
 #, kde-format
 msgid "&Result type: "
 msgstr "Tipo di &risultato: "
 
-#: src/fetch/execexternalfetcher.cpp:384
+#: src/fetch/execexternalfetcher.cpp:387
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr ""
 "Imposta il tipo di risultato per i dati forniti dall'applicazione esterna."
 
-#: src/fetch/execexternalfetcher.cpp:398
+#: src/fetch/execexternalfetcher.cpp:401
 #, kde-format
 msgid "Application &path: "
 msgstr "&Percorso dell'applicazione: "
 
-#: src/fetch/execexternalfetcher.cpp:403
+#: src/fetch/execexternalfetcher.cpp:406
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3899,12 +3899,12 @@ msgstr ""
 "Inserisci il percorso dell'applicazione da avviare per produrre un valido "
 "file di dati per Tellico."
 
-#: src/fetch/execexternalfetcher.cpp:408
+#: src/fetch/execexternalfetcher.cpp:411
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Seleziona le chiavi di ricerca supportate dalla fonte dei dati."
 
-#: src/fetch/execexternalfetcher.cpp:410
+#: src/fetch/execexternalfetcher.cpp:413
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3914,17 +3914,17 @@ msgstr ""
 "sostituito dai termini di ricerca."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:411
+#: src/fetch/execexternalfetcher.cpp:414
 #, kde-format
 msgid "Arguments"
 msgstr "Argomenti"
 
-#: src/fetch/execexternalfetcher.cpp:443
+#: src/fetch/execexternalfetcher.cpp:446
 #, kde-format
 msgid "Update"
 msgstr "Aggiorna"
 
-#: src/fetch/execexternalfetcher.cpp:451
+#: src/fetch/execexternalfetcher.cpp:454
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -4012,27 +4012,27 @@ msgstr "Collegamento a Filmaster"
 msgid "Gaming History Link"
 msgstr "Collegamento a Gaming History"
 
-#: src/fetch/gcstarpluginfetcher.cpp:391
+#: src/fetch/gcstarpluginfetcher.cpp:397
 #, kde-format
 msgid "GCstar Plugin"
 msgstr "Estensione GCstar"
 
-#: src/fetch/gcstarpluginfetcher.cpp:413
+#: src/fetch/gcstarpluginfetcher.cpp:419
 #, kde-format
 msgid "Set the collection type of the data returned from the plugin."
 msgstr "Seleziona il tipo di collezione per i dati forniti dall'estensione."
 
-#: src/fetch/gcstarpluginfetcher.cpp:418
+#: src/fetch/gcstarpluginfetcher.cpp:424
 #, kde-format
 msgid "&Plugin: "
 msgstr "&Estensione: "
 
-#: src/fetch/gcstarpluginfetcher.cpp:424
+#: src/fetch/gcstarpluginfetcher.cpp:430
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
 msgstr "Seleziona l'estensione GCstar da usare per questa fonte."
 
-#: src/fetch/gcstarpluginfetcher.cpp:429
+#: src/fetch/gcstarpluginfetcher.cpp:435
 #, kde-format
 msgid "Author: "
 msgstr "Autore: "

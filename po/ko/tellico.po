@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-25 00:44+0000\n"
+"POT-Creation-Date: 2023-11-03 00:43+0000\n"
 "PO-Revision-Date: 2023-07-25 01:20+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2588,8 +2588,8 @@ msgid "Template Options"
 msgstr "템플릿 옵션"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:364
-#: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:367
+#: src/fetch/gcstarpluginfetcher.cpp:412 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #, kde-format
 msgid "Collection &type:"
@@ -3811,45 +3811,45 @@ msgstr "Entrez 데이터베이스"
 msgid "Institution"
 msgstr "기관"
 
-#: src/fetch/execexternalfetcher.cpp:349
+#: src/fetch/execexternalfetcher.cpp:352
 #, kde-format
 msgid "External Application"
 msgstr "외부 앱"
 
-#: src/fetch/execexternalfetcher.cpp:370
+#: src/fetch/execexternalfetcher.cpp:373
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr "외부 앱에서 반환되는 데이터의 수집 형식을 설정합니다."
 
-#: src/fetch/execexternalfetcher.cpp:375
+#: src/fetch/execexternalfetcher.cpp:378
 #, kde-format
 msgid "&Result type: "
 msgstr "결과 형식(&R): "
 
-#: src/fetch/execexternalfetcher.cpp:384
+#: src/fetch/execexternalfetcher.cpp:387
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "외부 앱에서 반환된 데이터의 결과 형식을 설정합니다."
 
-#: src/fetch/execexternalfetcher.cpp:398
+#: src/fetch/execexternalfetcher.cpp:401
 #, kde-format
 msgid "Application &path: "
 msgstr "앱 경로(&P): "
 
-#: src/fetch/execexternalfetcher.cpp:403
+#: src/fetch/execexternalfetcher.cpp:406
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
 msgstr "올바른 Tellico 데이터 파일을 출력할 앱의 경로를 설정합니다."
 
-#: src/fetch/execexternalfetcher.cpp:408
+#: src/fetch/execexternalfetcher.cpp:411
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "데이터 원본에서 지원하는 검색 키를 선택합니다."
 
-#: src/fetch/execexternalfetcher.cpp:410
+#: src/fetch/execexternalfetcher.cpp:413
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3857,17 +3857,17 @@ msgid ""
 msgstr "필요한 인수를 추가하십시오. <b>%1</b>은(는) 검색어로 대체됩니다."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:411
+#: src/fetch/execexternalfetcher.cpp:414
 #, kde-format
 msgid "Arguments"
 msgstr "인수"
 
-#: src/fetch/execexternalfetcher.cpp:443
+#: src/fetch/execexternalfetcher.cpp:446
 #, kde-format
 msgid "Update"
 msgstr "업데이트"
 
-#: src/fetch/execexternalfetcher.cpp:451
+#: src/fetch/execexternalfetcher.cpp:454
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3954,27 +3954,27 @@ msgstr "Filmaster 링크"
 msgid "Gaming History Link"
 msgstr "Gaming History 링크"
 
-#: src/fetch/gcstarpluginfetcher.cpp:391
+#: src/fetch/gcstarpluginfetcher.cpp:397
 #, kde-format
 msgid "GCstar Plugin"
 msgstr "GCstar 플러그인"
 
-#: src/fetch/gcstarpluginfetcher.cpp:413
+#: src/fetch/gcstarpluginfetcher.cpp:419
 #, kde-format
 msgid "Set the collection type of the data returned from the plugin."
 msgstr "플러그인에서 반환되는 데이터의 수집 형식을 설정합니다."
 
-#: src/fetch/gcstarpluginfetcher.cpp:418
+#: src/fetch/gcstarpluginfetcher.cpp:424
 #, kde-format
 msgid "&Plugin: "
 msgstr "플러그인(&P): "
 
-#: src/fetch/gcstarpluginfetcher.cpp:424
+#: src/fetch/gcstarpluginfetcher.cpp:430
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
 msgstr "데이터 원본에 사용되는 GCstar 플러그인을 선택합니다."
 
-#: src/fetch/gcstarpluginfetcher.cpp:429
+#: src/fetch/gcstarpluginfetcher.cpp:435
 #, kde-format
 msgid "Author: "
 msgstr "저자: "
