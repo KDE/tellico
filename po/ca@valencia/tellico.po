@@ -5,20 +5,20 @@
 # Manuel Tortosa <manutortosa@gmail.com>, 2009.
 # Manuel Tortosa Moreno <manutortosa@gmail.com>, 2009.
 # Josep M. Ferrer <txemaq@gmail.com>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023.
-# Antoni Bella Pérez <antonibella5@yahoo.com>, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022.
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-24 02:29+0000\n"
-"PO-Revision-Date: 2023-09-30 12:08+0200\n"
-"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"PO-Revision-Date: 2023-11-04 18:18+0100\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -551,7 +551,7 @@ msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
 "this field."
 msgstr ""
-"Si està marcada, s'activarà la compleció automàtica de KDE en el quadro "
+"Si se selecciona, s'activarà la compleció automàtica de KDE en el quadro "
 "d'edició de text per a este camp."
 
 #: src/collectionfieldsdialog.cpp:307
@@ -565,7 +565,7 @@ msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
 "separated by a semi-colon."
 msgstr ""
-"Si està marcada, Tellico analitzarà els valors en el camp per a múltiples "
+"Si se selecciona, Tellico analitzarà els valors en el camp per a múltiples "
 "valors separats per punt i coma."
 
 #: src/collectionfieldsdialog.cpp:310
@@ -578,8 +578,8 @@ msgstr "Permet agrupament"
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
 msgstr ""
-"Si està marcada, este camp es pot utilitzar per a agrupar les entrades en la "
-"vista de grup."
+"Si se selecciona, este camp es podrà utilitzar per a agrupar les entrades en "
+"la vista de grup."
 
 #: src/collectionfieldsdialog.cpp:341
 #, kde-format
@@ -2407,7 +2407,7 @@ msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
 "up."
 msgstr ""
-"Si està marcada, l'últim fitxer obert es tornarà a obrir en iniciar el "
+"Si se selecciona, l'últim fitxer obert es tornarà a obrir en iniciar el "
 "programa."
 
 #: src/configdialog.cpp:221
@@ -2420,7 +2420,7 @@ msgstr "&Activa les expressions regulars al filtre ràpid"
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr ""
-"Si està marcada, el filtre ràpid interpretarà el text com una expressió "
+"Si se selecciona, el filtre ràpid interpretarà el text com una expressió "
 "regular."
 
 #: src/configdialog.cpp:227
@@ -2432,7 +2432,7 @@ msgstr "Mo&stra el «Consell del dia» en iniciar"
 #, kde-format
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
 msgstr ""
-"Si està marcada. es mostrarà el «Consell del dia» en iniciar el programa."
+"Si se selecciona. es mostrarà el «Consell del dia» en iniciar el programa."
 
 #: src/configdialog.cpp:233
 #, kde-format
@@ -2445,7 +2445,7 @@ msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
 "searching."
 msgstr ""
-"Si està marcada, s'utilitzarà l'entrada des d'una càmera web per a llegir i "
+"Si se selecciona, s'utilitzarà l'entrada des d'una càmera web per a llegir i "
 "buscar codis de barres."
 
 #: src/configdialog.cpp:239
@@ -2496,7 +2496,7 @@ msgstr ""
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
-"Si està marcada, els títols i els noms es posaran automàticament en "
+"Si se selecciona, els títols i els noms es posaran automàticament en "
 "majúscula la primera lletra."
 
 #: src/configdialog.cpp:276
@@ -2508,7 +2508,7 @@ msgstr "Dona &format automàticament als títols i els noms"
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr ""
-"Si està marcada, els títols i els noms seran automàticament amb format."
+"Si se selecciona, els títols i els noms estaran automàticament amb format."
 
 #: src/configdialog.cpp:287
 #, kde-format
@@ -2587,7 +2587,7 @@ msgstr "Im&primix les capçaleres dels camps"
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
-"Si està marcada, els noms dels camps s'imprimiran com a capçaleres de la "
+"Si se selecciona, els noms dels camps s'imprimiran com a capçaleres de la "
 "taula."
 
 #: src/configdialog.cpp:364
@@ -2603,7 +2603,7 @@ msgstr "A&grupa les entrades"
 #: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
-msgstr "Si està marcada, les entrades s'agruparan per al camp seleccionat."
+msgstr "Si se selecciona, les entrades s'agruparan per al camp seleccionat."
 
 #: src/configdialog.cpp:374
 #, kde-format
@@ -3225,7 +3225,7 @@ msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
 msgstr ""
-"Si està marcada, els valors dels camps seran automàticament amb format "
+"Si se selecciona, els valors dels camps estaran automàticament amb format "
 "d'acord amb el seu tipus de format."
 
 #: src/exportdialog.cpp:82
@@ -3236,7 +3236,7 @@ msgstr "Exporta només les entrades seleccionades"
 #: src/exportdialog.cpp:84
 #, kde-format
 msgid "If checked, only the currently selected entries will be exported."
-msgstr "Si està marcada, només s'exportaran les entrades seleccionades."
+msgstr "Si se selecciona, només s'exportaran les entrades seleccionades."
 
 #: src/exportdialog.cpp:88
 #, kde-format
@@ -3247,7 +3247,7 @@ msgstr "Exporta només els camps visibles"
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
-msgstr "Si està marcada, només s'exportaran els camps actualment visibles."
+msgstr "Si se selecciona, només s'exportaran els camps actualment visibles."
 
 #: src/exportdialog.cpp:94
 #, kde-format
@@ -4786,7 +4786,7 @@ msgstr ""
 #, kde-format
 msgid "If checked, updating entries will overwrite any existing information."
 msgstr ""
-"Si està marcada, l'actualització de les entrades sobreescriurà qualsevol "
+"Si se selecciona, l'actualització de les entrades sobreescriurà qualsevol "
 "informació existent."
 
 #: src/field.cpp:197
@@ -6758,7 +6758,7 @@ msgstr "Busca recursiva en les &carpetes"
 #, kde-format
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
-"Si està marcada, les carpetes seran explorades recursivament per a buscar "
+"Si se selecciona, les carpetes seran explorades recursivament per a buscar "
 "fitxers d'àudio."
 
 #: src/translators/audiofileimporter.cpp:500
@@ -6770,7 +6770,7 @@ msgstr "Inclou la &ubicació del fitxer"
 #, kde-format
 msgid "If checked, the file names for each track are added to the entries."
 msgstr ""
-"Si està marcada, s'afegiran els noms dels fitxers de cada pista a les "
+"Si se selecciona, s'afegiran els noms dels fitxers de cada pista a les "
 "entrades."
 
 #: src/translators/audiofileimporter.cpp:505
@@ -6782,7 +6782,7 @@ msgstr "Inclou taxa de &bits"
 #, kde-format
 msgid "If checked, the bitrate for each track is added to the entries."
 msgstr ""
-"Si està marcada, la taxa de bits de cada pista s'afegirà a les entrades."
+"Si se selecciona, la taxa de bits de cada pista s'afegirà a les entrades."
 
 #: src/translators/bibtexexporter.cpp:61
 #, kde-format
@@ -6806,7 +6806,7 @@ msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
 "be written."
 msgstr ""
-"Si està marcada, s'expandiran les macros de cadena i no s'escriuran les "
+"Si se selecciona, s'expandiran les macros de cadena i no s'escriuran les "
 "entrades @string{}."
 
 #: src/translators/bibtexexporter.cpp:226
@@ -6818,7 +6818,8 @@ msgstr "Utilitza paquet URL"
 #, kde-format
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgstr ""
-"Si està marcada, qualsevol camp URL serà embolcallat en una declaració \\url."
+"Si se selecciona, qualsevol camp URL serà embolcallat en una declaració "
+"\\url."
 
 #: src/translators/bibtexexporter.cpp:231
 #, kde-format
@@ -6829,7 +6830,7 @@ msgstr "Omet les entrades amb claus de citació buides"
 #, kde-format
 msgid "If checked, any entries without a bibtex citation key will be skipped."
 msgstr ""
-"Si està marcada, s'ometrà qualsevol entrada sense un clau de citació de "
+"Si se selecciona, s'ometrà qualsevol entrada sense una clau de citació de "
 "bibtex."
 
 #: src/translators/bibtexexporter.cpp:239
@@ -6949,7 +6950,7 @@ msgstr "Inclou els títols dels camps com a capçaleres de les columnes"
 #, kde-format
 msgid "If checked, a header row will be added with the field titles."
 msgstr ""
-"Si està marcada, s'afegirà un fila de capçalera amb els títols dels camps."
+"Si se selecciona, s'afegirà un fila de capçalera amb els títols dels camps."
 
 #: src/translators/csvexporter.cpp:147
 #, kde-format
@@ -7050,7 +7051,7 @@ msgstr "La primera &fila conté els camps de títol"
 #: src/translators/csvimporter.cpp:229
 #, kde-format
 msgid "If checked, the first row is used as field titles."
-msgstr "Si està marcada, la primera fila s'utilitzarà com a camps de títol."
+msgstr "Si se selecciona, la primera fila s'utilitzarà com a camps de títol."
 
 #: src/translators/csvimporter.cpp:245
 #, kde-format
@@ -7151,7 +7152,7 @@ msgstr "Busca recursiva en les carpetes"
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
-"Si està marcada, les carpetes seran explorades recursivament per a buscar "
+"Si se selecciona, les carpetes seran explorades recursivament per a buscar "
 "tots els fitxers."
 
 #: src/translators/filelistingimporter.cpp:277
@@ -7165,7 +7166,7 @@ msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
 msgstr ""
-"Si està marcada, es generaran les vistes prèvies dels continguts en el "
+"Si se selecciona, es generaran les vistes prèvies dels continguts en el "
 "fitxer, cosa que pot alentir el llistat de la carpeta."
 
 #: src/translators/freedbimporter.cpp:106
@@ -7272,7 +7273,7 @@ msgstr "Exporta fitxers d'entrades individuals"
 #: src/translators/htmlexporter.cpp:519
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
-msgstr "Si està marcada, es crearan fitxers individuals per a cada entrada."
+msgstr "Si se selecciona, es crearan fitxers individuals per a cada entrada."
 
 #: src/translators/importer.cpp:54
 #, kde-format
@@ -7354,7 +7355,7 @@ msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
 "archive."
 msgstr ""
-"Si està marcada, les imatges en el document seran incloses en l'arxiu ZIP "
+"Si se selecciona, les imatges en el document seran incloses en l'arxiu ZIP "
 "comprimit ONIX."
 
 #: src/translators/pdfimporter.cpp:122 src/translators/pdfimporter.cpp:139
@@ -7409,7 +7410,7 @@ msgid ""
 "If checked, the images in the document will be included in the XML stream as "
 "base64 encoded elements."
 msgstr ""
-"Si està marcada, les imatges en el document seran incloses en el flux XML "
+"Si se selecciona, les imatges en el document seran incloses en el flux XML "
 "com a elements codificats amb base64."
 
 #: src/translators/tellicozipexporter.cpp:50
