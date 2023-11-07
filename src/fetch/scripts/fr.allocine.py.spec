@@ -28,6 +28,7 @@ Name[sl]=Allocine.fr
 Name[sv]=Allocine.fr
 Name[tr]=Allocine.fr
 Name[uk]=Allocine.fr
+Name[x-test]=xxAllocine.frxx
 Type=data-source
 ArgumentKeys=1
 Arguments=%1
