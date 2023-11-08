@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:35+0000\n"
-"PO-Revision-Date: 2023-10-20 10:29+0200\n"
+"PO-Revision-Date: 2023-11-07 12:35+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -2316,7 +2316,7 @@ msgstr "Sjabloon-tekstkleur"
 #: src/config/tellico_config.kcfg:509
 #, kde-format
 msgid "Template highlight color"
-msgstr "Sjabloon-accentueringskleur"
+msgstr "Sjabloon-accentuatiekleur"
 
 #. i18n: ectx: label, entry (highlightedTextColorBook), group (Options - book)
 #. i18n: ectx: label, entry (highlightedTextColorVideo), group (Options - video)
@@ -2708,7 +2708,7 @@ msgstr "Tekstkleur:"
 #: src/configdialog.cpp:518
 #, kde-format
 msgid "Highlight color:"
-msgstr "Accentueringskleur:"
+msgstr "Accentuatiekleur:"
 
 #: src/configdialog.cpp:527
 #, kde-format
