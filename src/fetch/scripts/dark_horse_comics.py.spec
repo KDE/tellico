@@ -10,6 +10,7 @@ Name[da]=Dark Horse Comics
 Name[de]=Dark-Horse-Comics
 Name[el]=Dark Horse Comics
 Name[en_GB]=Dark Horse Comics
+Name[eo]=Malhela Ĉevalo-Bildliteraturo
 Name[es]=Dark Horse Comics
 Name[et]=Dark Horse koomiksid
 Name[eu]=Dark Horse Komikiak
