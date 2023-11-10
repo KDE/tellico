@@ -268,12 +268,12 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
     // since the Dewey and LoC field titles have a context in their i18n call here
     // but not in the mods2tellico.xsl stylesheet where the field is actually created
     // update the field titles here
-    QHashIterator<QString, QString> i(allOptionalFields());
-    while(i.hasNext()) {
-      i.next();
-      Data::FieldPtr field = coll->fieldByName(i.key());
+    QHashIterator<QString, QString> i2(allOptionalFields());
+    while(i2.hasNext()) {
+      i2.next();
+      Data::FieldPtr field = coll->fieldByName(i2.key());
       if(field) {
-        field->setTitle(i.value());
+        field->setTitle(i2.value());
         coll->modifyField(field);
       }
     }

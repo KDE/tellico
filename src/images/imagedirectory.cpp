@@ -72,10 +72,6 @@ Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
   }
 
   Data::Image* img = new Data::Image(path() + id_, id_);
-  if(!img) {
-    myLog() << "image not found:" << (path() + id_);
-    return nullptr;
-  }
   if(img->isNull()) {
     myLog() << "image found but null:" << (path() + id_);
     delete img;

@@ -104,8 +104,7 @@ Field& Field::operator=(const Field& field_) {
   return *this;
 }
 
-Field::~Field() {
-}
+Field::~Field() = default;
 
 void Field::setTitle(const QString& title_) {
   m_title = title_;

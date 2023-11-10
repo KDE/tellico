@@ -272,7 +272,7 @@ void barcodeRecognitionThread::sortDigits( int possible_numbers[10][13][2] )
         }
       }
 
-      if ((possible_numbers[i][j][0] < 0) || (i >= 9)) {
+      if ((i >= 9) || (possible_numbers[i][j][0] < 0)) {
         if (!changes)
           break;
         else {

@@ -109,7 +109,7 @@ QString GCstarExporter::text() {
 
   delete m_handler;
   m_handler = new XSLTHandler(dom, QFile::encodeName(xsltFile));
-  if(!m_handler || !m_handler->isValid()) {
+  if(!m_handler->isValid()) {
     return QString();
   }
 

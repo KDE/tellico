@@ -954,9 +954,9 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
      collectionType() == Data::Collection::Bibtex ||
      collectionType() == Data::Collection::ComicBook) {
     QVariantMap classificationsMap = itemMap.value(QLatin1String("Classifications")).toMap();
-    QVariantMap technicalMap = itemMap.value(QLatin1String("TechnicalInfo")).toMap();
     QString binding = mapValue(classificationsMap, "Binding", "DisplayValue");
     if(binding.isEmpty()) {
+      QVariantMap technicalMap = itemMap.value(QLatin1String("TechnicalInfo")).toMap();
       binding = mapValue(technicalMap, "Formats", "DisplayValues");
     }
     if(binding.contains(QStringLiteral("Paperback")) && binding != QStringLiteral("Trade Paperback")) {

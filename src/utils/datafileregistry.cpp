@@ -35,8 +35,7 @@ Tellico::DataFileRegistry* DataFileRegistry::self() {
   return &registry;
 }
 
-DataFileRegistry::DataFileRegistry() {
-}
+DataFileRegistry::DataFileRegistry() = default;
 
 void DataFileRegistry::addDataLocation(const QString& dir_, bool prepend_) {
   if(dir_.isEmpty()) {

@@ -31,8 +31,7 @@
 using namespace Tellico;
 using Tellico::CollectionFactory;
 
-CollectionFactory::CollectionFactory() {
-}
+CollectionFactory::CollectionFactory() = default;
 
 void CollectionFactory::registerFunction(int type_, const QString& typeName_, CREATE_COLL_FN func_) {
   functionRegistry.insert(type_, func_);

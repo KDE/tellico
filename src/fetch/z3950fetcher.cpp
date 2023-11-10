@@ -195,7 +195,6 @@ void Z3950Fetcher::search() {
     stop();
     return;
   }
-  m_started = true;
 
   QString svalue = request().value();
   QRegExp rx1(QLatin1String("^['\"].*\\1$"));

@@ -53,7 +53,7 @@ Tellico::ImageFactory* ImageFactory::factory = nullptr;
 
 class ImageFactory::Private {
 public:
-  Private() {}
+  Private() = default;
 
   QHash<QString, Data::Image*> imageDict;
   QCache<QString, Data::Image> imageCache;
