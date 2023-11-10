@@ -78,8 +78,7 @@ Entry& Entry::operator=(const Entry& other_) {
   return *this;
 }
 
-Entry::~Entry() {
-}
+Entry::~Entry() = default;
 
 Tellico::Data::CollPtr Entry::collection() const {
   return m_coll;
