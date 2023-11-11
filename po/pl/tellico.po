@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:35+0000\n"
+"POT-Creation-Date: 2023-11-11 00:43+0000\n"
 "PO-Revision-Date: 2023-10-21 11:28+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -232,67 +232,67 @@ msgstr "<qt>Tellico nie może zapisywać do potoku serwera <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Mój zbiór"
 
-#: src/collectionfactory.cpp:85
+#: src/collectionfactory.cpp:84
 #, kde-format
 msgid "Book Collection"
 msgstr "Zbiór książek"
 
-#: src/collectionfactory.cpp:86 src/collections/bibtexcollection.cpp:44
+#: src/collectionfactory.cpp:85 src/collections/bibtexcollection.cpp:44
 #, kde-format
 msgid "Bibliography"
 msgstr "Bibliografia"
 
-#: src/collectionfactory.cpp:87
+#: src/collectionfactory.cpp:86
 #, kde-format
 msgid "Comic Book Collection"
 msgstr "Zbiór komiksów"
 
-#: src/collectionfactory.cpp:88
+#: src/collectionfactory.cpp:87
 #, kde-format
 msgid "Video Collection"
 msgstr "Zbiór filmów"
 
-#: src/collectionfactory.cpp:89
+#: src/collectionfactory.cpp:88
 #, kde-format
 msgid "Music Collection"
 msgstr "Zbiór muzyki"
 
-#: src/collectionfactory.cpp:90
+#: src/collectionfactory.cpp:89
 #, kde-format
 msgid "Coin Collection"
 msgstr "Zbiór monet"
 
-#: src/collectionfactory.cpp:91
+#: src/collectionfactory.cpp:90
 #, kde-format
 msgid "Stamp Collection"
 msgstr "Zbiór znaczków"
 
-#: src/collectionfactory.cpp:92
+#: src/collectionfactory.cpp:91
 #, kde-format
 msgid "Wine Collection"
 msgstr "Zbiór win"
 
-#: src/collectionfactory.cpp:93
+#: src/collectionfactory.cpp:92
 #, kde-format
 msgid "Card Collection"
 msgstr "Zbiór kart"
 
-#: src/collectionfactory.cpp:94
+#: src/collectionfactory.cpp:93
 #, kde-format
 msgid "Video Game Collection"
 msgstr "Zbiór gier wideo"
 
-#: src/collectionfactory.cpp:95
+#: src/collectionfactory.cpp:94
 #, kde-format
 msgid "File Catalog"
 msgstr "Katalog plików"
 
-#: src/collectionfactory.cpp:96
+#: src/collectionfactory.cpp:95
 #, kde-format
 msgid "Board Game Collection"
 msgstr "Zbiór gier planszowych"
 
-#: src/collectionfactory.cpp:97
+#: src/collectionfactory.cpp:96
 #, kde-format
 msgid "Custom Collection"
 msgstr "Dowolny zbiór"
@@ -742,8 +742,8 @@ msgstr "Pole z wartością pochodną musi posiadać wartość wzorca."
 #: src/fetch/thetvdbfetcher.cpp:261 src/fetch/tvmazefetcher.cpp:178
 #: src/fetch/tvmazefetcher.cpp:183 src/fetch/upcitemdbfetcher.cpp:208
 #: src/fetch/vgcollectfetcher.cpp:238 src/fetch/vgcollectfetcher.cpp:341
-#: src/field.cpp:39 src/field.cpp:80 src/field.cpp:299 src/field.cpp:328
-#: src/field.cpp:333 src/translators/gcstarimporter.cpp:89
+#: src/field.cpp:39 src/field.cpp:80 src/field.cpp:298 src/field.cpp:327
+#: src/field.cpp:332 src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "General"
 msgstr "Ogólne"
@@ -751,7 +751,7 @@ msgstr "Ogólne"
 #: src/collections/bibtexcollection.cpp:39
 #: src/collections/bookcollection.cpp:32
 #: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:362
-#: src/field.cpp:315 src/translators/grs1importer.cpp:75
+#: src/field.cpp:314 src/translators/grs1importer.cpp:75
 #: src/translators/pdfimporter.cpp:229
 #, kde-format
 msgid "Publishing"
@@ -817,7 +817,7 @@ msgid "Publisher"
 msgstr "Wydawnictwo"
 
 #: src/collections/bibtexcollection.cpp:141 src/fetch/hathitrustfetcher.cpp:307
-#: src/fetch/srufetcher.cpp:507 src/fetch/z3950fetcher.cpp:576
+#: src/fetch/srufetcher.cpp:507 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgid "Address"
 msgstr "Adres"
@@ -864,7 +864,7 @@ msgstr "Cyfrowy Identyfikator Obiektu (DOI)"
 msgid "Month"
 msgstr "Miesiąc"
 
-#: src/collections/bibtexcollection.cpp:191 src/field.cpp:201
+#: src/collections/bibtexcollection.cpp:191 src/field.cpp:200
 #, kde-format
 msgid "Number"
 msgstr "Liczba"
@@ -920,7 +920,7 @@ msgstr "Słowa kluczowe"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
-#: src/fetch/opdsfetcher.cpp:431 src/field.cpp:202
+#: src/fetch/opdsfetcher.cpp:431 src/field.cpp:201
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
@@ -928,7 +928,7 @@ msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:246 src/fetch/entrezfetcher.cpp:514
 #: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:508
-#: src/fetch/z3950fetcher.cpp:577
+#: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgid "Abstract"
 msgstr "Streszczenie"
@@ -951,7 +951,7 @@ msgstr "Nieznany"
 #: src/collections/gamecollection.cpp:33 src/collections/musiccollection.cpp:32
 #: src/collections/stampcollection.cpp:32
 #: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
-#: src/document.cpp:531 src/field.cpp:292 src/field.cpp:305 src/field.cpp:310
+#: src/document.cpp:531 src/field.cpp:291 src/field.cpp:304 src/field.cpp:309
 #, kde-format
 msgid "Personal"
 msgstr "Osobiste"
@@ -1017,7 +1017,7 @@ msgstr "Opis"
 #: src/collections/bookcollection.cpp:174
 #: src/collections/comicbookcollection.cpp:155
 #: src/collections/musiccollection.cpp:91
-#: src/collections/winecollection.cpp:113 src/field.cpp:206
+#: src/collections/winecollection.cpp:113 src/field.cpp:205
 #, kde-format
 msgid "Rating"
 msgstr "Ocena"
@@ -1731,8 +1731,8 @@ msgid "Tracks"
 msgstr "Ścieżki"
 
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
-#: src/fetch/fetchmanager.cpp:66 src/fetchdialog.cpp:252 src/field.cpp:298
-#: src/field.cpp:339 src/translators/audiofileimporter.cpp:235
+#: src/fetch/fetchmanager.cpp:66 src/fetchdialog.cpp:252 src/field.cpp:297
+#: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:426
 #, kde-format
 msgid "Title"
@@ -1794,7 +1794,7 @@ msgstr "Wyśrodkowany"
 msgid "Gummed"
 msgstr "Podgumowany"
 
-#: src/collections/stampcollection.cpp:140 src/field.cpp:204
+#: src/collections/stampcollection.cpp:140 src/field.cpp:203
 #, kde-format
 msgid "Image"
 msgstr "Obraz"
@@ -3650,7 +3650,7 @@ msgstr "Dystrybucja"
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
 #: src/fetch/imdbfetcher.cpp:1816 src/fetch/itunesfetcher.cpp:506
 #: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:573
-#: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:336
+#: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
 msgstr "Rozdziały"
@@ -3692,7 +3692,7 @@ msgstr "Kolorysta"
 msgid "Bedetheque Link"
 msgstr "Odnośnik do Bedetheque"
 
-#: src/fetch/bedethequefetcher.cpp:456 src/field.cpp:314
+#: src/fetch/bedethequefetcher.cpp:456 src/field.cpp:313
 #, kde-format
 msgid "ISBN#"
 msgstr "ISBN#"
@@ -3726,7 +3726,7 @@ msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:818 src/fetch/giantbombfetcher.cpp:207
 #: src/fetch/igdbfetcher.cpp:578 src/fetch/mobygamesfetcher.cpp:638
-#: src/fetch/vgcollectfetcher.cpp:374 src/field.cpp:326
+#: src/fetch/vgcollectfetcher.cpp:374 src/field.cpp:325
 #, kde-format
 msgid "PEGI Rating"
 msgstr "Klasyfikacja PEGI"
@@ -4039,20 +4039,20 @@ msgstr "Odnośnik Google Książki"
 msgid "Google Book Search"
 msgstr "Wyszukiwanie Google Książki"
 
-#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/z3950fetcher.cpp:578
+#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/z3950fetcher.cpp:577
 #, kde-format
 msgid "Illustrator"
 msgstr "Ilustrator"
 
 #: src/fetch/hathitrustfetcher.cpp:310 src/fetch/isbndbfetcher.cpp:384
-#: src/fetch/srufetcher.cpp:509 src/fetch/z3950fetcher.cpp:579
+#: src/fetch/srufetcher.cpp:509 src/fetch/z3950fetcher.cpp:578
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Nr w klasyfikacji Dewey'a"
 
 #: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:510
-#: src/fetch/z3950fetcher.cpp:580
+#: src/fetch/z3950fetcher.cpp:579
 #, kde-format
 msgctxt "Library of Congress classification system"
 msgid "LoC Classification"
@@ -4074,7 +4074,7 @@ msgid "Internet Game Database (IGDB.com)"
 msgstr "Internetowa baza gier (IGDB.com)"
 
 #: src/fetch/igdbfetcher.cpp:580 src/fetch/mobygamesfetcher.cpp:640
-#: src/fetch/thegamesdbfetcher.cpp:606 src/field.cpp:344
+#: src/fetch/thegamesdbfetcher.cpp:606 src/field.cpp:343
 #, kde-format
 msgid "Screenshot"
 msgstr "Zrzut ekranu"
@@ -4124,7 +4124,7 @@ msgstr "Certyfikaty"
 #: src/fetch/imdbfetcher.cpp:1811 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/thetvdbfetcher.cpp:572 src/fetch/tvmazefetcher.cpp:382
-#: src/field.cpp:332
+#: src/field.cpp:331
 #, kde-format
 msgid "IMDb Link"
 msgstr "Odsyłacz IMDB"
@@ -4277,22 +4277,22 @@ msgid "Enter the path to the database used by the server."
 msgstr "Wpisz ścieżkę bazy danych używaną przez serwer z39.50."
 
 # CHECKME: spaces! other mesages are effected as well
-#: src/fetch/srufetcher.cpp:539 src/fetch/z3950fetcher.cpp:603
+#: src/fetch/srufetcher.cpp:539 src/fetch/z3950fetcher.cpp:602
 #, kde-format
 msgid "Hos&t: "
 msgstr "&Serwer: "
 
-#: src/fetch/srufetcher.cpp:546 src/fetch/z3950fetcher.cpp:609
+#: src/fetch/srufetcher.cpp:546 src/fetch/z3950fetcher.cpp:608
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "Wpisz nazwę serwera."
 
-#: src/fetch/srufetcher.cpp:551 src/fetch/z3950fetcher.cpp:614
+#: src/fetch/srufetcher.cpp:551 src/fetch/z3950fetcher.cpp:613
 #, kde-format
 msgid "&Port: "
 msgstr "&Port: "
 
-#: src/fetch/srufetcher.cpp:560 src/fetch/z3950fetcher.cpp:623
+#: src/fetch/srufetcher.cpp:560 src/fetch/z3950fetcher.cpp:622
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Podaj numer portu serwera (domyślnie %1)."
@@ -4408,32 +4408,32 @@ msgstr "Błąd składni rekordu"
 msgid "Connection error %1: %2"
 msgstr "Błąd połączenia %1: %2"
 
-#: src/fetch/z3950fetcher.cpp:566 src/fetch/z3950fetcher.cpp:881
+#: src/fetch/z3950fetcher.cpp:565 src/fetch/z3950fetcher.cpp:880
 #, kde-format
 msgid "z39.50 Server"
 msgstr "Serwer z39.50"
 
-#: src/fetch/z3950fetcher.cpp:592
+#: src/fetch/z3950fetcher.cpp:591
 #, kde-format
 msgid "Use preset &server:"
 msgstr "Użyj predefiniowanego &serwera:"
 
-#: src/fetch/z3950fetcher.cpp:628
+#: src/fetch/z3950fetcher.cpp:627
 #, kde-format
 msgid "&Database: "
 msgstr "Baza &danych: "
 
-#: src/fetch/z3950fetcher.cpp:633
+#: src/fetch/z3950fetcher.cpp:632
 #, kde-format
 msgid "Enter the database name used by the server."
 msgstr "Wpisz nazwę bazy danych używaną przez serwer."
 
-#: src/fetch/z3950fetcher.cpp:638
+#: src/fetch/z3950fetcher.cpp:637
 #, kde-format
 msgid "Query character set: "
 msgstr "Odpytaj zestaw znaków: "
 
-#: src/fetch/z3950fetcher.cpp:647
+#: src/fetch/z3950fetcher.cpp:646
 #, kde-format
 msgid ""
 "Enter the character set encoding used for queries by the z39.50 server. The "
@@ -4443,12 +4443,12 @@ msgstr ""
 "Najprawdopodobniejszym wyborem jest MARC-8, chociaż ISO-8859-1 jest również "
 "powszechne."
 
-#: src/fetch/z3950fetcher.cpp:653
+#: src/fetch/z3950fetcher.cpp:652
 #, kde-format
 msgid "Results character set: "
 msgstr "Zestaw znaków odpowiedzi: "
 
-#: src/fetch/z3950fetcher.cpp:662
+#: src/fetch/z3950fetcher.cpp:661
 #, kde-format
 msgid ""
 "Enter the character set encoding used for responses by the z39.50 server. "
@@ -4458,17 +4458,17 @@ msgstr ""
 "Najprawdopodobniejszym wyborem jest MARC-8, chociaż ISO-8859-1 jest również "
 "powszechne."
 
-#: src/fetch/z3950fetcher.cpp:668
+#: src/fetch/z3950fetcher.cpp:667
 #, kde-format
 msgid "&Format: "
 msgstr "&Format: "
 
-#: src/fetch/z3950fetcher.cpp:671
+#: src/fetch/z3950fetcher.cpp:670
 #, kde-format
 msgid "Auto-detect"
 msgstr "Wykryj samoczynnie"
 
-#: src/fetch/z3950fetcher.cpp:680
+#: src/fetch/z3950fetcher.cpp:679
 #, kde-format
 msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
@@ -4477,17 +4477,17 @@ msgstr ""
 "Podaj format danych używanych przez serwer z39.50. Tellico spróbuje odgadnąć "
 "najlepsze ustawienia jeżeli zaznaczono <i> Wykryj samoczynnie </i>."
 
-#: src/fetch/z3950fetcher.cpp:686
+#: src/fetch/z3950fetcher.cpp:685
 #, kde-format
 msgid "&User: "
 msgstr "&Użytkownik: "
 
-#: src/fetch/z3950fetcher.cpp:689 src/fetch/z3950fetcher.cpp:701
+#: src/fetch/z3950fetcher.cpp:688 src/fetch/z3950fetcher.cpp:700
 #, kde-format
 msgid "Optional"
 msgstr "Niewymagane"
 
-#: src/fetch/z3950fetcher.cpp:692
+#: src/fetch/z3950fetcher.cpp:691
 #, kde-format
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
@@ -4497,12 +4497,12 @@ msgstr ""
 "jej nie potrzebuje."
 
 # CHECKME
-#: src/fetch/z3950fetcher.cpp:698
+#: src/fetch/z3950fetcher.cpp:697
 #, kde-format
 msgid "Pass&word: "
 msgstr "&Hasło"
 
-#: src/fetch/z3950fetcher.cpp:705
+#: src/fetch/z3950fetcher.cpp:704
 #, kde-format
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
@@ -4755,64 +4755,64 @@ msgstr ""
 "Jeśli zaznaczone, uaktualnianie elementów będzie powodowało zastąpienie "
 "istniejącej informacji."
 
-#: src/field.cpp:197
+#: src/field.cpp:196
 #, kde-format
 msgid "Simple Text"
 msgstr "Prosty tekst"
 
-#: src/field.cpp:198
+#: src/field.cpp:197
 #, kde-format
 msgid "Paragraph"
 msgstr "Paragraf"
 
-#: src/field.cpp:199
+#: src/field.cpp:198
 #, kde-format
 msgid "Choice"
 msgstr "Lista wyboru"
 
-#: src/field.cpp:200
+#: src/field.cpp:199
 #, kde-format
 msgid "Checkbox"
 msgstr "Pole wyboru"
 
-#: src/field.cpp:203
+#: src/field.cpp:202
 #, kde-format
 msgid "Table"
 msgstr "Tabela"
 
-#: src/field.cpp:205
+#: src/field.cpp:204
 #, kde-format
 msgid "Date"
 msgstr "Data"
 
-#: src/field.cpp:291
+#: src/field.cpp:290
 #, kde-format
 msgctxt "ID # of the entry"
 msgid "ID"
 msgstr "Nr identyfikacyjny"
 
-#: src/field.cpp:304
+#: src/field.cpp:303
 #, kde-format
 msgid "Date Created"
 msgstr "Data utworzenia"
 
-#: src/field.cpp:309
+#: src/field.cpp:308
 #, kde-format
 msgid "Date Modified"
 msgstr "Data zmiany"
 
-#: src/field.cpp:316
+#: src/field.cpp:315
 #, kde-format
 msgid "International Standard Book Number"
 msgstr "Międzynarodowy Standardowy Numer Książki"
 
-#: src/field.cpp:340
+#: src/field.cpp:339
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
 msgstr "Pora Roku"
 
-#: src/field.cpp:341
+#: src/field.cpp:340
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
