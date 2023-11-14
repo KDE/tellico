@@ -20,6 +20,10 @@ Dependencies:
     'frameworks/extra-cmake-modules': '@stable'
     'multimedia/libkcddb': 'master'
 
+- 'on': ['Linux', 'FreeBSD']
+  'require':
+    'graphics/libksane': '@stable'
+
 Options:
   run-tests: True
   require-passing-tests-on: [ 'Linux' ]
