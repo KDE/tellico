@@ -2,12 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2015, 2020, 2021, 2022, 2023 g.sora <g.sora@tiscali.it>
+# giovanni <g.sora@tiscali.it>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-11 00:43+0000\n"
-"PO-Revision-Date: 2023-10-16 14:09+0200\n"
+"PO-Revision-Date: 2023-11-13 15:51+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5434,12 +5435,12 @@ msgstr "Importa  <filename> como file PDF"
 #: src/main.cpp:152
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "Registra exito de diagnostica"
 
 #: src/main.cpp:153
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "Scribe exito de registro a </filename>"
 
 #: src/main.cpp:154
 #, kde-format
@@ -6255,7 +6256,7 @@ msgstr "Habilita/dishabilita le redactor"
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "Monstra registro"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6537,11 +6538,10 @@ msgstr ""
 "essera importate. "
 
 #: src/mainwindow.cpp:2594
-#, fuzzy, kde-format
-#| msgid "Tellico"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Tellico"
+msgstr "Tellico Log (Registro de Tellico)"
 
 #: src/reportdialog.cpp:91
 #, kde-format
@@ -7424,10 +7424,9 @@ msgstr "Total:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
-msgstr "Prestos"
+msgstr "Presto"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
