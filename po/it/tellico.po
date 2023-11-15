@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-11 00:43+0000\n"
-"PO-Revision-Date: 2023-10-01 20:59+0200\n"
+"PO-Revision-Date: 2023-11-12 18:34+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5443,12 +5443,12 @@ msgstr "Importa <filename> come file PDF"
 #: src/main.cpp:152
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "Output diagnostico del registro"
 
 #: src/main.cpp:153
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "Scrivi l'output del registro in <nome file>"
 
 #: src/main.cpp:154
 #, kde-format
@@ -6264,7 +6264,7 @@ msgstr "Abilita/disabilita l'editor"
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "Mostra il registro"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6544,11 +6544,10 @@ msgstr ""
 "importato."
 
 #: src/mainwindow.cpp:2594
-#, fuzzy, kde-format
-#| msgid "Tellico"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Tellico"
+msgstr "Registro di Tellico"
 
 #: src/reportdialog.cpp:91
 #, kde-format
@@ -7438,10 +7437,9 @@ msgstr "Totale:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
-msgstr "Prestiti"
+msgstr "Prestito"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
