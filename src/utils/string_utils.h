@@ -68,6 +68,7 @@ namespace Tellico {
   QString mapValue(const QVariantMap& map, const char* name1);
   QString mapValue(const QVariantMap& map, const char* name1, const char* name2);
   QString mapValue(const QVariantMap& map, const char* name1, const char* name2, const char* name3);
+  QString mapValue(const QVariantMap& map, const char* name1, const char* name2, const char* name3, const char* name4);
 
   QByteArray obfuscate(const QString& string);
   QString reverseObfuscate(const QByteArray& bytes);

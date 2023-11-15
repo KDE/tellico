@@ -207,6 +207,31 @@ QString Tellico::mapValue(const QVariantMap& map, const char* name1, const char*
     return QString();
   } else if(v.canConvert(QVariant::Map)) {
     return mapValue(v.toMap(), name2, name3);
+  } else if(v.canConvert(QVariant::List)) {
+    QStringList values;
+    foreach(QVariant v, v.toList()) {
+      const QString s = mapValue(v.toMap(), name2, name3);
+      if(!s.isEmpty()) values += s;
+    }
+    return values.join(FieldFormat::delimiterString());
+  } else {
+    return QString();
+  }
+}
+
+QString Tellico::mapValue(const QVariantMap& map, const char* name1, const char* name2, const char* name3, const char* name4) {
+  const QVariant v = map.value(QLatin1String(name1));
+  if(v.isNull())  {
+    return QString();
+  } else if(v.canConvert(QVariant::Map)) {
+    return mapValue(v.toMap(), name2, name3, name4);
+  } else if(v.canConvert(QVariant::List)) {
+    QStringList values;
+    foreach(QVariant v, v.toList()) {
+      const QString s = mapValue(v.toMap(), name2, name3, name4);
+      if(!s.isEmpty()) values += s;
+    }
+    return values.join(FieldFormat::delimiterString());
   } else {
     return QString();
   }
