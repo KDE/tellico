@@ -139,10 +139,9 @@ query TitleFull($id: ID!) {
             text
             id
           }
-          company { companyText { text } }
-          displayableProperty {
-            value {
-              plainText
+          company {
+            companyText {
+              text
             }
           }
         }
@@ -311,10 +310,9 @@ query TitleFull($id: ID!) {
             text
             id
           }
-          company { companyText { text } }
-          displayableProperty {
-            value {
-              plainText
+          company {
+            companyText {
+              text
             }
           }
         }
