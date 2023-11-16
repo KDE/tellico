@@ -31,8 +31,8 @@
 #include "../collections/videocollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
+#include "../images/imageinfo.h"
 #include "../fieldformat.h"
-#include "../fetch/fetcherjob.h"
 
 #include <KSharedConfig>
 
@@ -57,6 +57,7 @@ void ImdbFetcherTest::init() {
 }
 
 void ImdbFetcherTest::testSnowyRiver() {
+  m_config.writeEntry("Image Size", 1); // small
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("The Man From Snowy River"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
   fetcher->readConfig(m_config);
@@ -92,6 +93,9 @@ void ImdbFetcherTest::testSnowyRiver() {
   QVERIFY(!entry->field("plot").contains('>'));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  auto imageInfo = Tellico::ImageFactory::imageInfo(entry->field("cover"));
+  QVERIFY(imageInfo.height() <= 256);
+  QVERIFY(imageInfo.width() <= 256);
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("alttitle")));
   QVERIFY(altTitleList.contains(QStringLiteral("Herencia de un valiente")));
   QVERIFY(!entry->field("alttitle").contains(QStringLiteral("See more")));

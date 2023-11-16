@@ -23,13 +23,14 @@
  ***************************************************************************/
 
 #include "imdbfetcher.h"
-#include "../utils/guiproxy.h"
 #include "../collections/videocollection.h"
 #include "../entry.h"
 #include "../field.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../utils/string_utils.h"
+#include "../utils/guiproxy.h"
+#include "../gui/combobox.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -59,7 +60,7 @@ using namespace Tellico;
 using Tellico::Fetch::IMDBFetcher;
 
 IMDBFetcher::IMDBFetcher(QObject* parent_) : Fetcher(parent_),
-    m_job(nullptr), m_started(false), m_fetchImages(true),
+    m_job(nullptr), m_started(false), m_imageSize(MediumImage),
     m_numCast(IMDB_DEFAULT_CAST_SIZE), m_lang(EN) {
 }
 
@@ -82,7 +83,10 @@ bool IMDBFetcher::canSearch(Fetch::FetchKey k) const {
 void IMDBFetcher::readConfigHook(const KConfigGroup& config_) {
   m_lang = static_cast<Lang>(config_.readEntry("Lang", int(EN)));
   m_numCast = config_.readEntry("Max Cast", IMDB_DEFAULT_CAST_SIZE);
-  m_fetchImages = config_.readEntry("Fetch Images", true);
+  const int imageSize = config_.readEntry("Image Size", -1);
+  if(imageSize > -1) {
+    m_imageSize = static_cast<ImageSize>(imageSize);
+  }
 }
 
 // multiple values not supported
@@ -355,11 +359,26 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
   entry->setField(QStringLiteral("language"), mapValue(objectMap, "spokenLanguages", "spokenLanguages", "text"));
   entry->setField(QStringLiteral("plot"), mapValue(objectMap, "plot", "plotText", "plainText"));
 
-  if(m_fetchImages) {
-    const QUrl imageUrl(mapValue(objectMap, "primaryImage", "url"));
-    const int imageWidth = mapValue(objectMap, "primaryImage", "width").toInt();
-    const int imageHeight = mapValue(objectMap, "primaryImage", "height").toInt();
-//    myDebug() << imageUrl.toDisplayString() << imageWidth << imageHeight;
+  if(m_imageSize != NoImage) {
+    QUrl imageUrl(mapValue(objectMap, "primaryImage", "url"));
+    // LargeImage just means use default available size
+    if(m_imageSize != LargeImage) {
+      // limit to 256 for small and 640 for medium
+      const int maxDim = m_imageSize == SmallImage ? 256 : 640;
+      const auto imageWidth = mapValue(objectMap, "primaryImage", "width").toFloat();
+      const auto imageHeight = mapValue(objectMap, "primaryImage", "height").toFloat();
+      const auto ratio = imageWidth/imageHeight;
+      int newWidth, newHeight;
+      if(ratio < 1) {
+        newWidth = ratio*maxDim;
+        newHeight = maxDim;
+      } else {
+        newWidth = maxDim;
+        newHeight = ratio*maxDim;
+      }
+      auto param = QStringLiteral("QL75_SX%1_CR0,0,%1,%2_.jpg").arg(newWidth).arg(newHeight);
+      imageUrl.setPath(imageUrl.path().replace(QLatin1String(".jpg"), param));
+    }
     entry->setField(QStringLiteral("cover"), ImageFactory::addImage(imageUrl, true));
   }
 
@@ -557,13 +576,21 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   m_numCast->setWhatsThis(w);
   label->setBuddy(m_numCast);
 
-  m_fetchImageCheck = new QCheckBox(i18n("Download cover &image"), optionsWidget());
-  connect(m_fetchImageCheck, &QAbstractButton::clicked, this, &ConfigWidget::slotSetModified);
-  ++row;
-  l->addWidget(m_fetchImageCheck, row, 0, 1, 2);
+  label = new QLabel(i18n("&Image size: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_imageCombo = new GUI::ComboBox(optionsWidget());
+  m_imageCombo->addItem(i18n("Small Image"), SmallImage);
+  m_imageCombo->addItem(i18n("Medium Image"), MediumImage);
+  m_imageCombo->addItem(i18n("Large Image"), LargeImage);
+  m_imageCombo->addItem(i18n("No Image"), NoImage);
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_imageCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_imageCombo, row, 1);
   w = i18n("The cover image may be downloaded as well. However, too many large images in the "
            "collection may degrade performance.");
-  m_fetchImageCheck->setWhatsThis(w);
+  label->setWhatsThis(w);
+  m_imageCombo->setWhatsThis(w);
+  label->setBuddy(m_imageCombo);
 
   l->setRowStretch(++row, 10);
 
@@ -573,16 +600,18 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
 
   if(fetcher_) {
     m_numCast->setValue(fetcher_->m_numCast);
-    m_fetchImageCheck->setChecked(fetcher_->m_fetchImages);
+    m_imageCombo->setCurrentData(fetcher_->m_imageSize);
   } else { //defaults
-    m_fetchImageCheck->setChecked(true);
+    m_imageCombo->setCurrentData(MediumImage);
   }
 }
 
 void IMDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   config_.deleteEntry("Host"); // clear old host entry
   config_.writeEntry("Max Cast", m_numCast->value());
-  config_.writeEntry("Fetch Images", m_fetchImageCheck->isChecked());
+  config_.deleteEntry("Fetch Images"); // no longer used
+  const int n = m_imageCombo->currentData().toInt();
+  config_.writeEntry("Image Size", n);
 }
 
 QString IMDBFetcher::ConfigWidget::preferredName() const {

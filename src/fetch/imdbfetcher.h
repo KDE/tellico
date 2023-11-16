@@ -112,8 +112,14 @@ private:
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
-  bool m_fetchImages;
 
+  enum ImageSize {
+    NoImage=0,
+    SmallImage=1, // 256x256 max
+    MediumImage=2, // 640x640 max
+    LargeImage=3 // max returned
+  };
+  ImageSize m_imageSize;
   int m_numCast;
   QUrl m_url;
   Lang m_lang;
@@ -129,7 +135,7 @@ public:
   virtual QString preferredName() const Q_DECL_OVERRIDE;
 
 private:
-  QCheckBox* m_fetchImageCheck;
+  GUI::ComboBox* m_imageCombo;
   QSpinBox* m_numCast;
 };
 
