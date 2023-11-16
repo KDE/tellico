@@ -2413,7 +2413,7 @@ msgstr ""
 #: src/configdialog.cpp:221
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
-msgstr "&Activa les expressions regulars al filtre ràpid"
+msgstr "&Activa les expressions regulars en el filtre ràpid"
 
 #: src/configdialog.cpp:222
 #, kde-format
@@ -4587,7 +4587,7 @@ msgstr "Busca &múltiple ISBN/UPC"
 #: src/fetchdialog.cpp:206
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
-msgstr "Marqueu esta casella per a buscar múltiples valors ISBN o UPC."
+msgstr "Seleccioneu esta casella per a buscar múltiples valors ISBN o UPC."
 
 #: src/fetchdialog.cpp:210
 #, kde-format
@@ -5353,8 +5353,8 @@ msgid ""
 "calendar, which can be viewed using KOrganizer. The box is only active if "
 "you set a due date.</qt>"
 msgstr ""
-"<qt>Marcant esta casella s'afegirà un element de <em>Tasca pendent</em> al "
-"calendari actiu, el qual es pot veure utilitzant KOrganizer. La casella "
+"<qt>Seleccionant esta casella s'afegirà un element de <em>Tasca pendent</em> "
+"al calendari actiu, el qual es pot veure utilitzant KOrganizer. La casella "
 "només estarà activa si heu establit una data de venciment.</qt>"
 
 #: src/loanview.cpp:119
@@ -6265,7 +6265,7 @@ msgstr "&Editor d'entrades"
 #: src/mainwindow.cpp:749
 #, kde-format
 msgid "Enable/disable the editor"
-msgstr "Activa/desactiva l'editor"
+msgstr "Activa o desactiva l'editor"
 
 #: src/mainwindow.cpp:758
 #, kde-format
