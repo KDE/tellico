@@ -43,6 +43,8 @@ class QCheckBox;
 class QRegExpr;
 class QRegularExpression;
 
+class ImdbFetcherTest;
+
 namespace Tellico {
   namespace GUI {
     class ComboBox;
@@ -72,44 +74,12 @@ public:
 
   virtual QString source() const Q_DECL_OVERRIDE;
   virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
-  virtual void continueSearch() Q_DECL_OVERRIDE;
   virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
   virtual void stop() Q_DECL_OVERRIDE;
   virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
   virtual Type type() const Q_DECL_OVERRIDE { return IMDB; }
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
   virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
-
-  struct LangData {
-    QString siteTitle;
-    QString title_popular;
-    QString match_exact;
-    QString match_partial;
-    QString match_approx;
-    QString result_popular;
-    QString result_other;
-    QString aka;
-    QString director;
-    QString writer;
-    QString producer;
-    QString runtime;
-    QString aspect_ratio;
-    QString also_known_as;
-    QString studio;
-    QString cast;
-    QString cast1;
-    QString cast2;
-    QString episodes;
-    QString genre;
-    QString sound;
-    QString color;
-    QString language;
-    QString certification;
-    QString country;
-    QString plot;
-    QString composer;
-  };
-  static const LangData& langData(int lang);
 
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
 
@@ -122,68 +92,31 @@ public:
 
 private Q_SLOTS:
   void slotComplete(KJob* job);
-  void slotRedirection(KIO::Job* job, const QUrl& toURL);
 
 private:
+  friend class ::ImdbFetcherTest;
+  static QString searchQuery();
+  static QString titleQuery();
+  static QString episodeQuery();
+
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
-  static void initRegExps();
-  static void deleteRegExps();
-  static QRegExp* s_tagRx;
-  static QRegExp* s_anchorRx;
-  static QRegExp* s_anchorTitleRx;
-  static QRegExp* s_anchorNameRx;
-  static QRegExp* s_titleRx;
-  static const QRegularExpression* s_titleIdRx;
-  static int s_instanceCount;
 
-  void doJson(const QString& s, Data::EntryPtr e);
-  void doTitle(const QString& s, Data::EntryPtr e);
-  void doRunningTime(const QString& s, Data::EntryPtr e);
-  void doAspectRatio(const QString& s, Data::EntryPtr e);
-  void doAlsoKnownAs(const QString& s, Data::EntryPtr e);
-  void doPlot(const QString& s, Data::EntryPtr e, const QUrl& baseURL_);
-  void doStudio(const QString& s, Data::EntryPtr e);
-  void doPerson(const QString& s, Data::EntryPtr e,
-                const QString& imdbHeader, const QString& fieldName);
-  void doCast(const QString& s, Data::EntryPtr e, const QUrl& baseURL_);
-  void doLists(const QString& s, Data::EntryPtr e);
-  void doLists2(const QString& s, Data::EntryPtr e);
-  void doRating(const QString& s, Data::EntryPtr e);
-  void doCover(const QString& s, Data::EntryPtr e, const QUrl& baseURL);
-  void doEpisodes(const QString& s, Data::EntryPtr e, const QUrl& baseURL);
-
-  void parseSingleTitleResult();
-  void parseMultipleTitleResults();
-  void parseTitleBlock(const QString& str);
-  Data::EntryPtr parseEntry(const QString& str);
   void configureJob(QPointer<KIO::StoredTransferJob> job);
+  Data::EntryPtr readGraphQL(const QString& imdbId, const QString& titleType);
+  Data::EntryPtr parseResult(const QByteArray& data);
 
-  QString m_text;
   QHash<uint, Data::EntryPtr> m_entries;
-  QHash<uint, QUrl> m_matches;
-  // if a new search is started, m_matches is cleared
-  // but we might still need to recover an entry by uid
-  QHash<uint, QUrl> m_allMatches;
+  QHash<uint, QString> m_matches;
+  QHash<uint, QString> m_titleTypes;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
   bool m_fetchImages;
 
-  QString m_host;
   int m_numCast;
   QUrl m_url;
-  bool m_redirected;
-  int m_limit;
   Lang m_lang;
-
-  QString m_popularTitles;
-  QString m_exactTitles;
-  QString m_partialTitles;
-  QString m_approxTitles;
-  enum TitleBlock { Unknown = 0, Popular = 1, Exact = 2, Partial = 3, Approx = 4 };
-  TitleBlock m_currentTitleBlock;
-  int m_countOffset;
 };
 
 class IMDBFetcher::ConfigWidget : public Fetch::ConfigWidget {
@@ -194,9 +127,6 @@ public:
 
   virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
   virtual QString preferredName() const Q_DECL_OVERRIDE;
-
-private Q_SLOTS:
-  void slotSiteChanged();
 
 private:
   QCheckBox* m_fetchImageCheck;

@@ -711,7 +711,7 @@ ecm_add_test(igdbfetchertest.cpp
 
 ecm_add_test(imdbfetchertest.cpp
              ../fetch/imdbfetcher.cpp
-             ../gui/listwidgetitem.cpp
+             ../fetch/imdbfetcher_query.cpp
     TEST_NAME imdbfetchertest
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )

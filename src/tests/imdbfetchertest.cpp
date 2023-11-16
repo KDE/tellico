@@ -80,7 +80,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   QCOMPARE(entry->field("language"), QStringLiteral("English"));
   QCOMPARE(entry->field("certification"), QStringLiteral("PG (USA)"));
   QCOMPARE(entry->field("director"), QStringLiteral("George Miller"));
-  QCOMPARE(entry->field("producer"), QStringLiteral("Geoff Burrowes"));
+  QCOMPARE(set(entry->field("producer")), set(QStringLiteral("Geoff Burrowes; Michael Edgley; Simon Wincer")));
   QCOMPARE(entry->field("composer"), QStringLiteral("Bruce Rowland"));
   QCOMPARE(set(entry, "writer"), set("Cul Cullen; A.B. 'Banjo' Paterson;John Dixon"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
@@ -113,14 +113,15 @@ void ImdbFetcherTest::testSnowyRiverFr() {
 
   QCOMPARE(entry->field("title"), QString::fromUtf8("L'homme de la rivière d'argent"));
   QCOMPARE(entry->field("year"), QLatin1String("1982"));
-  QCOMPARE(set(entry->field("genre")), set(QLatin1String("Aventure; Drame; Romantique")));
-  QCOMPARE(entry->field("nationality"), QLatin1String("Australie"));
+  // with GraphQL, genres still in english
+//  QCOMPARE(set(entry->field("genre")), set(QLatin1String("Aventure; Drame; Romantique")));
+//  QCOMPARE(entry->field("nationality"), QLatin1String("Australie"));
   QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
   QCOMPARE(entry->field("audio-track"), QLatin1String("Dolby"));
   QCOMPARE(entry->field("aspect-ratio"), QLatin1String("2.35 : 1"));
-//  QCOMPARE(entry->field("color"), QLatin1String("Color"));
-  QCOMPARE(entry->field("language"), QLatin1String("Anglais"));
+  QCOMPARE(entry->field("color"), QLatin1String("Color"));
+//  QCOMPARE(entry->field("language"), QLatin1String("Anglais"));
   QCOMPARE(entry->field("director"), QLatin1String("George Miller"));
   QCOMPARE(entry->field("certification"), QLatin1String("PG (USA)"));
   QCOMPARE(set(entry->field("writer")), set(QLatin1String("Cul Cullen; A.B. 'Banjo' Paterson; John Dixon")));
@@ -177,7 +178,7 @@ void ImdbFetcherTest::testBodyDouble() {
   QCOMPARE(entry->field("title"), QStringLiteral("Body Double"));
   QCOMPARE(entry->field("director"), QStringLiteral("Brian De Palma"));
   QCOMPARE(set(entry, "writer"), set("Brian De Palma; Robert J. Avrech"));
-  QCOMPARE(entry->field("producer"), QStringLiteral("Brian De Palma"));
+  QCOMPARE(entry->field("producer"), QStringLiteral("Brian De Palma; Howard Gottfried"));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=249096
@@ -267,12 +268,12 @@ void ImdbFetcherTest::testBabel() {
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro G. Iñárritu"));
   QCOMPARE(set(entry, "writer"), set(QString::fromUtf8("Alejandro G. Iñárritu; Guillermo Arriaga")));
-  QCOMPARE(set(entry, "producer"), set(QString::fromUtf8("Steve Golin; Alejandro G. Iñárritu; Jon Kilik; Ann Ruark; Corinne Golden Weber")));
+  QCOMPARE(set(entry, "producer"), set(QString::fromUtf8("Steve Golin; Alejandro G. Iñárritu; Jimmy Abounouom; Jon Kilik; Kay Ueda; Norihisa Harada; Ann Ruark; Corinne Golden Weber; Tita Lombardo")));
 }
 
 void ImdbFetcherTest::testFirefly() {
   m_config.writeEntry("Custom Fields", QStringLiteral("imdb,episode"));
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Firefly 2002"));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("firefly 2002"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
   fetcher->readConfig(m_config);
 
@@ -285,16 +286,38 @@ void ImdbFetcherTest::testFirefly() {
 
   QCOMPARE(entry->field("title"), QStringLiteral("Firefly"));
   QCOMPARE(entry->field("year"), QStringLiteral("2002"));
-  QCOMPARE(entry->field("producer"), QStringLiteral("Gareth Davies; Lisa Lassek; Brian Wankum; Ben Edlund"));
-  QVERIFY(entry->field("director").startsWith(QStringLiteral("Joss Whedon; Vern Gillum; Tim Minear")));
-  QVERIFY(entry->field("writer").startsWith(QStringLiteral("Joss Whedon; Cheryl Cain")));
+  QCOMPARE(set(entry->field("producer")), set(QStringLiteral("Gareth Davies; Lisa Lassek; Brian Wankum; Tim Minear; Joss Whedon")));
+  QVERIFY(entry->field("director").contains(QStringLiteral("Joss Whedon")));
+  QVERIFY(entry->field("director").contains(QStringLiteral("Tim Minear")));
+  QVERIFY(entry->field("writer").contains(QStringLiteral("Joss Whedon")));
+  QVERIFY(entry->field("writer").contains(QStringLiteral("Cheryl Cain")));
   QCOMPARE(entry->field("composer"), QStringLiteral("Greg Edmonson"));
   QCOMPARE(set(entry->field("genre")), set(QStringLiteral("Adventure; Drama; Sci-Fi")));
   QVERIFY(entry->field("cast").startsWith(QStringLiteral("Nathan Fillion::Captain Malcolm 'Mal' Reynolds")));
   QVERIFY(!entry->field("cast").contains(QStringLiteral("episodes")));
   QStringList episodeList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("episode")));
-  QEXPECT_FAIL("", "IMDB removed the season episodes link", Continue);
   QVERIFY(!episodeList.isEmpty());
   if(!episodeList.isEmpty()) QCOMPARE(episodeList.at(0), QStringLiteral("The Train Job::1::1"));
-  QVERIFY(entry->field("plot").startsWith(QStringLiteral("Captain Malcolm")));
+  QVERIFY(entry->field("plot").startsWith(QStringLiteral("Five hundred")));
+}
+
+void ImdbFetcherTest::testUpdate() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::VideoCollection(true));
+  coll->addField(Tellico::Data::Field::createDefaultField(Tellico::Data::Field::ImdbField));
+  Tellico::Data::EntryPtr emptyEntry(new Tellico::Data::Entry(coll));
+  emptyEntry->setField(QLatin1String("imdb"), QStringLiteral("https://www.imdb.com/title/tt0084296/"));
+
+  m_config.writeEntry("Custom Fields", QStringLiteral("imdb,episode"));
+  Tellico::Fetch::IMDBFetcher fetcher(this);
+  fetcher.readConfig(m_config);
+  auto request = fetcher.updateRequest(emptyEntry);
+  request.setCollectionType(coll->type());
+
+  Tellico::Data::EntryList results = DO_FETCH1(&fetcher, request, 1);
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field("title"), QStringLiteral("The Man from Snowy River"));
+  QCOMPARE(entry->field("year"), QStringLiteral("1982"));
+  QCOMPARE(entry->field("imdb"), QStringLiteral("https://www.imdb.com/title/tt0084296/"));
 }
