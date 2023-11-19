@@ -106,7 +106,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
   void doSearch();
-  QByteArray requestPayload(FetchRequest request);
+  QByteArray requestPayload(const FetchRequest& request);
   Data::CollPtr createCollection();
   void populateEntry(Data::EntryPtr entry, const QJsonObject& info);
   void parseTitle(Data::EntryPtr entry);

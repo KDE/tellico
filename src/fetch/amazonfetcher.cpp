@@ -667,7 +667,7 @@ Tellico::Fetch::FetchRequest AmazonFetcher::updateRequest(Data::EntryPtr entry_)
   return FetchRequest();
 }
 
-QByteArray AmazonFetcher::requestPayload(Fetch::FetchRequest request_) {
+QByteArray AmazonFetcher::requestPayload(const Fetch::FetchRequest& request_) {
   QJsonObject payload;
   payload.insert(QLatin1String("PartnerTag"), m_assoc);
   payload.insert(QLatin1String("PartnerType"), QLatin1String("Associates"));
