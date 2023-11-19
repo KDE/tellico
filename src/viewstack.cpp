@@ -37,6 +37,13 @@
 #include <QSlider>
 #include <QButtonGroup>
 
+namespace {
+  static const int MIN_ENTRY_ICON_SIZE = 64;
+  static const int MAX_ENTRY_ICON_SIZE = 512;
+  static const int SMALL_INCREMENT_ICON_SIZE = 1;
+  static const int LARGE_INCREMENT_ICON_SIZE = 8;
+}
+
 using Tellico::ViewStack;
 
 ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)

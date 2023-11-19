@@ -45,12 +45,13 @@
 
 namespace {
   static const int ENTRY_ICON_SIZE_PAD = 2;
+  static const int DEFAULT_ENTRY_ICON_SIZE = 96; // same as in tellico_config.kcfg
 }
 
 using Tellico::EntryIconView;
 
 EntryIconView::EntryIconView(QWidget* parent_)
-    : QListView(parent_), m_maxAllowedIconWidth(MAX_ENTRY_ICON_SIZE) {
+    : QListView(parent_), m_maxAllowedIconWidth(DEFAULT_ENTRY_ICON_SIZE) {
   setViewMode(QListView::IconMode);
   setMovement(QListView::Static);
   setDragEnabled(false);
@@ -78,7 +79,7 @@ void EntryIconView::setModel(QAbstractItemModel* model_) {
 }
 
 void EntryIconView::setMaxAllowedIconWidth(int width_) {
-  m_maxAllowedIconWidth = qBound(MIN_ENTRY_ICON_SIZE, width_, MAX_ENTRY_ICON_SIZE);
+  m_maxAllowedIconWidth = qMax(16, width_);
   QSize iconSize(m_maxAllowedIconWidth, m_maxAllowedIconWidth);
   setIconSize(iconSize);
 
