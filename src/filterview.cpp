@@ -27,7 +27,6 @@
 #include "entry.h"
 #include "collection.h"
 #include "tellico_kernel.h"
-#include "../tellico_debug.h"
 #include "models/filtermodel.h"
 #include "models/entrysortmodel.h"
 #include "models/models.h"

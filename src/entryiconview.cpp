@@ -24,17 +24,12 @@
 
 #include "entryiconview.h"
 #include "collection.h"
-#include "collectionfactory.h"
-#include "images/imagefactory.h"
 #include "controller.h"
 #include "entry.h"
 #include "field.h"
 #include "document.h"
-#include "utils/tellico_utils.h"
-#include "models/entrymodel.h"
-#include "models/entrysortmodel.h"
+#include "models/models.h" // for EntryPtrRole
 #include "tellico_kernel.h"
-#include "tellico_debug.h"
 
 #include <KLocalizedString>
 
