@@ -361,10 +361,11 @@ void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "name"));
   const QString yearString = QStringLiteral("year");
   if(entry_->field(yearString).isEmpty()) {
-    entry_->setField(yearString,  mapValue(resultMap_, "year").left(4));
-  }
-  if(entry_->field(yearString).isEmpty()) {
-    entry_->setField(yearString,  mapValue(resultMap_, "firstAired").left(4));
+    QString year = mapValue(resultMap_, "year");
+    if(year.isEmpty()) {
+      year = mapValue(resultMap_, "firstAired");
+    }
+    entry_->setField(yearString, year.left(4));
   }
 
   const QString network(QStringLiteral("network"));
