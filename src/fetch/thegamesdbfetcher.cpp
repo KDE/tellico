@@ -341,8 +341,8 @@ void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
     entry_->setField(QStringLiteral("certification"), Data::GameCollection::esrbRating(rating));
   }
 
-  const QString coverUrl = m_covers.value(mapValue(resultMap_, "id"));
   if(m_imageSize != NoImage) {
+    const QString coverUrl = m_covers.value(mapValue(resultMap_, "id"));
     entry_->setField(QStringLiteral("cover"), coverUrl);
   }
 

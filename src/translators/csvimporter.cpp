@@ -144,12 +144,13 @@ Tellico::Data::CollPtr CSVImporter::collection() {
         continue;
       }
       QString value = values[m_columnsToImport.at(i)].trimmed();
+      const auto fieldType = m_coll->fieldByName(currentFieldName)->type();
       // only replace delimiters for tables
       // see https://forum.kde.org/viewtopic.php?f=200&t=142712
-      if(replaceColDelimiter && m_coll->fieldByName(currentFieldName)->type() == Data::Field::Table) {
+      if(replaceColDelimiter && fieldType == Data::Field::Table) {
         value.replace(m_colDelimiter, FieldFormat::columnDelimiterString());
       }
-      if(replaceRowDelimiter && m_coll->fieldByName(currentFieldName)->type() == Data::Field::Table) {
+      if(replaceRowDelimiter && fieldType == Data::Field::Table) {
         value.replace(m_rowDelimiter, FieldFormat::rowDelimiterString());
       }
       if(m_isLibraryThing) {
@@ -168,7 +169,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
       bool success = entry->setField(currentFieldName, value);
       // we might need to add a new allowed value
       // assume that if the user is importing the value, it should be allowed
-      if(!success && m_coll->fieldByName(currentFieldName)->type() == Data::Field::Choice) {
+      if(!success && fieldType == Data::Field::Choice) {
         Data::FieldPtr f = m_coll->fieldByName(currentFieldName);
         StringSet allow;
         allow.add(f->allowed());

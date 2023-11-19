@@ -193,11 +193,9 @@ void VGCollectFetcher::slotComplete(KJob*) {
 //    myDebug() << title << platform << u;
     FetchResult* r = new FetchResult(this, title, platform);
     QUrl url = QUrl(QString::fromLatin1(VGCOLLECT_BASE_URL)).resolved(QUrl(u));
-    if(!url.isEmpty()) {
-      m_matches.insert(r->uid, url);
-      // don't emit signal until after putting url in matches hash
-      emit signalResultFound(r);
-    }
+    m_matches.insert(r->uid, url);
+    // don't emit signal until after putting url in matches hash
+    emit signalResultFound(r);
   }
 
   stop();
