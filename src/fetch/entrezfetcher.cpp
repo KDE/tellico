@@ -65,7 +65,7 @@ using namespace Tellico::Fetch;
 using Tellico::Fetch::EntrezFetcher;
 
 EntrezFetcher::EntrezFetcher(QObject* parent_) : Fetcher(parent_), m_xsltHandler(nullptr),
-    m_start(1), m_total(-1), m_step(Begin), m_started(false) {
+    m_start(1), m_total(-1), m_step(Step::Begin), m_started(false) {
   m_idleTime.start();
 }
 
@@ -147,7 +147,7 @@ void EntrezFetcher::search() {
   }
   u.setQuery(q);
 
-  m_step = Search;
+  m_step = Step::Search;
 //  myLog() << "search url: " << u.url();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -170,7 +170,7 @@ void EntrezFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  m_step = Begin;
+  m_step = Step::Begin;
   emit signalDone(this);
 }
 
@@ -204,16 +204,16 @@ void EntrezFetcher::slotComplete(KJob*) {
 #endif
 
   switch(m_step) {
-    case Search:
+    case Step::Search:
       searchResults(data);
       break;
-    case Summary:
+    case Step::Summary:
       summaryResults(data);
       break;
-    case Begin:
-    case Fetch:
+    case Step::Begin:
+    case Step::Fetch:
     default:
-      myLog() << "wrong step =" << m_step;
+      myLog() << "wrong step =" << int(m_step);
       stop();
       break;
   }
@@ -270,7 +270,7 @@ void EntrezFetcher::doSummary() {
   }
   u.setQuery(q);
 
-  m_step = Summary;
+  m_step = Step::Summary;
 //  myLog() << "summary url:" << u.url();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -302,11 +302,12 @@ void EntrezFetcher::summaryResults(const QByteArray& data_) {
     QString title, pubdate, authors;
     nodes = e.elementsByTagName(QStringLiteral("Item"));
     for(int j = 0; j < nodes.count(); ++j) {
-      if(nodes.item(j).toElement().attribute(QStringLiteral("Name")) == QLatin1String("Title")) {
-        title = nodes.item(j).toElement().text();
-      } else if(nodes.item(j).toElement().attribute(QStringLiteral("Name")) == QLatin1String("PubDate")) {
-        pubdate = nodes.item(j).toElement().text();
-      } else if(nodes.item(j).toElement().attribute(QStringLiteral("Name")) == QLatin1String("AuthorList")) {
+      const auto elem = nodes.item(j).toElement();
+      if(elem.attribute(QStringLiteral("Name")) == QLatin1String("Title")) {
+        title = elem.text();
+      } else if(elem.attribute(QStringLiteral("Name")) == QLatin1String("PubDate")) {
+        pubdate = elem.text();
+      } else if(elem.attribute(QStringLiteral("Name")) == QLatin1String("AuthorList")) {
         QStringList list;
         for(QDomNode aNode = nodes.item(j).firstChild(); !aNode.isNull(); aNode = aNode.nextSibling()) {
           // lazy, assume all children Items are authors

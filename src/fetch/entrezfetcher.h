@@ -95,7 +95,7 @@ private:
   // honor throttle limit for the API
   void markTime();
 
-  enum Step {
+  enum class Step {
     Begin,
     Search,
     Summary,
