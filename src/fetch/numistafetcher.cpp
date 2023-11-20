@@ -373,9 +373,9 @@ Tellico::Data::EntryPtr NumistaFetcher::parseEntry(const QByteArray& data_) {
 }
 
 Tellico::Fetch::FetchRequest NumistaFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString t = entry_->field(QStringLiteral("type"));
-  QString c = entry_->field(QStringLiteral("country"));
+  const QString t = entry_->field(QStringLiteral("type"));
   if(!t.isEmpty()) {
+    const QString c = entry_->field(QStringLiteral("country"));
     return FetchRequest(Fetch::Keyword, t + QLatin1Char(' ') + c);
   }
 
