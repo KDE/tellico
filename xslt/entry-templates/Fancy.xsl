@@ -367,6 +367,7 @@
 
  <xsl:variable name="n" select="count($entry//*[key('fieldsByName',local-name(.))/@category=$category and
                                                 key('fieldsByName',local-name(.))/@name != 'id' and
+                                                key('fieldsByName',local-name(.))/@name != 'title' and
                                                 key('fieldsByName',local-name(.))/@name != 'cdate' and
                                                 key('fieldsByName',local-name(.))/@name != 'mdate'])"/>
  <!-- only output if there are fields in this category
@@ -375,24 +376,16 @@
   <div class="container">
    <xsl:if test="$num-images = 0 and $first-type != 2">
     <xsl:attribute name="style">
-     <xsl:text>width: 50%; </xsl:text>
      <!-- two columns of divs -->
-     <xsl:choose>
-       <xsl:when test="$categories[. = $category and position() mod 2 = 1]">
-        <xsl:text>float: left; clear: both;</xsl:text>
-       </xsl:when>
-       <xsl:otherwise>
-        <xsl:text>float: right;</xsl:text>
-       </xsl:otherwise>
-     </xsl:choose>
+     <xsl:text>width: 50%; display: block; float: left;</xsl:text>
     </xsl:attribute>
    </xsl:if>
    <xsl:if test="$num-images = 0 and $first-type = 2">
     <xsl:attribute name="style">
-     <xsl:text>width: 100%; float: left; clear: both;</xsl:text>
+     <xsl:text>width: 100%; display: block; float: left;</xsl:text>
     </xsl:attribute>
    </xsl:if>
-  <div class="category">
+   <div class="category">
 
    <h2>
     <xsl:value-of select="$category"/>
