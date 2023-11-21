@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 00:42+0000\n"
+"POT-Creation-Date: 2023-11-21 00:42+0000\n"
 "PO-Revision-Date: 2023-10-20 18:56+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -740,8 +740,8 @@ msgstr "Un campo con un valor derivado debe tener una plantilla de valor."
 #: src/fetch/themoviedbfetcher.cpp:339 src/fetch/thetvdbfetcher.cpp:251
 #: src/fetch/thetvdbfetcher.cpp:256 src/fetch/thetvdbfetcher.cpp:261
 #: src/fetch/tvmazefetcher.cpp:178 src/fetch/tvmazefetcher.cpp:183
-#: src/fetch/upcitemdbfetcher.cpp:208 src/fetch/vgcollectfetcher.cpp:238
-#: src/fetch/vgcollectfetcher.cpp:341 src/field.cpp:39 src/field.cpp:80
+#: src/fetch/upcitemdbfetcher.cpp:208 src/fetch/vgcollectfetcher.cpp:236
+#: src/fetch/vgcollectfetcher.cpp:339 src/field.cpp:39 src/field.cpp:80
 #: src/field.cpp:298 src/field.cpp:327 src/field.cpp:332
 #: src/translators/gcstarimporter.cpp:89
 #, kde-format
@@ -757,7 +757,7 @@ msgstr "General"
 msgid "Publishing"
 msgstr "Publicación"
 
-#: src/collections/bibtexcollection.cpp:40 src/fetch/entrezfetcher.cpp:440
+#: src/collections/bibtexcollection.cpp:40 src/fetch/entrezfetcher.cpp:441
 #: src/translators/risimporter.cpp:339
 #, kde-format
 msgid "Miscellaneous"
@@ -920,14 +920,14 @@ msgid "Keywords"
 msgstr "Palabras clave"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
-#: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
+#: src/fetch/entrezfetcher.cpp:440 src/fetch/entrezfetcher.cpp:516
 #: src/fetch/opdsfetcher.cpp:431 src/field.cpp:201
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
 msgstr "URL"
 
-#: src/collections/bibtexcollection.cpp:246 src/fetch/entrezfetcher.cpp:514
+#: src/collections/bibtexcollection.cpp:246 src/fetch/entrezfetcher.cpp:515
 #: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:508
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
@@ -2138,12 +2138,12 @@ msgid "Add Filter"
 msgstr "Añadir un filtro"
 
 #: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:62
-#: src/filterview.cpp:133
+#: src/filterview.cpp:132
 #, kde-format
 msgid "Modify Filter"
 msgstr "Modificar el filtro"
 
-#: src/commands/filtercommand.cpp:62 src/filterview.cpp:135
+#: src/commands/filtercommand.cpp:62 src/filterview.cpp:134
 #, kde-format
 msgid "Delete Filter"
 msgstr "Borrar el filtro"
@@ -2634,7 +2634,7 @@ msgstr "Opciones de las plantillas"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:367
 #: src/fetch/gcstarpluginfetcher.cpp:412 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:219
+#: src/translators/csvimporter.cpp:220
 #, kde-format
 msgid "Collection &type:"
 msgstr "&Tipo de colección:"
@@ -3115,7 +3115,7 @@ msgstr "Cambios sin guardar"
 msgid "(Empty)"
 msgstr "(Vacío)"
 
-#: src/entryiconview.cpp:65 src/mainwindow.cpp:884
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:884
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3124,7 +3124,7 @@ msgstr ""
 "<qt>La <i>Vista de iconos</i> muestra cada entrada de la colección o grupo "
 "usando un icono, que puede ser una imagen en la entrada.</qt>"
 
-#: src/entryiconview.cpp:115
+#: src/entryiconview.cpp:111
 #, kde-format
 msgctxt "Open URL"
 msgid "Open %1"
@@ -3272,7 +3272,7 @@ msgstr "Sistema de datos astrofísicos SAO/NASA"
 #: src/fetch/giantbombfetcher.cpp:219 src/fetch/googlebookfetcher.cpp:382
 #: src/fetch/isbndbfetcher.cpp:395 src/fetch/mobygamesfetcher.cpp:652
 #: src/fetch/omdbfetcher.cpp:411 src/fetch/thegamesdbfetcher.cpp:637
-#: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:586
+#: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:587
 #, kde-format
 msgid ""
 "Registration is required for accessing this data source. If you agree to the "
@@ -3285,7 +3285,7 @@ msgstr ""
 
 #: src/fetch/adsfetcher.cpp:343 src/fetch/amazonfetcher.cpp:1105
 #: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:244
-#: src/fetch/entrezfetcher.cpp:531 src/fetch/giantbombfetcher.cpp:231
+#: src/fetch/entrezfetcher.cpp:532 src/fetch/giantbombfetcher.cpp:231
 #: src/fetch/googlebookfetcher.cpp:394 src/fetch/isbndbfetcher.cpp:407
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/numistafetcher.cpp:416
 #: src/fetch/omdbfetcher.cpp:423 src/fetch/thegamesdbfetcher.cpp:649
@@ -3295,9 +3295,9 @@ msgid "Access key: "
 msgstr "Clave de acceso:"
 
 #: src/fetch/adsfetcher.cpp:349 src/fetch/bibliosharefetcher.cpp:191
-#: src/fetch/comicvinefetcher.cpp:250 src/fetch/entrezfetcher.cpp:537
+#: src/fetch/comicvinefetcher.cpp:250 src/fetch/entrezfetcher.cpp:538
 #: src/fetch/giantbombfetcher.cpp:237 src/fetch/googlebookfetcher.cpp:400
-#: src/fetch/themoviedbfetcher.cpp:609 src/fetch/thetvdbfetcher.cpp:604
+#: src/fetch/themoviedbfetcher.cpp:609 src/fetch/thetvdbfetcher.cpp:605
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3319,7 +3319,7 @@ msgstr ""
 #: src/fetch/omdbfetcher.cpp:183 src/fetch/thegamesdbfetcher.cpp:172
 #: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:347
 #: src/fetch/tvmazefetcher.cpp:269 src/fetch/upcitemdbfetcher.cpp:253
-#: src/fetch/vgcollectfetcher.cpp:286 src/fetch/vndbfetcher.cpp:184
+#: src/fetch/vgcollectfetcher.cpp:284 src/fetch/vndbfetcher.cpp:184
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "No se ha podido cargar la imagen de la carátula."
@@ -3666,7 +3666,7 @@ msgstr "Distribuidor"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
 #: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:506
-#: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:573
+#: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:574
 #: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
@@ -3693,7 +3693,7 @@ msgstr "Valoración de AnimeNfo"
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
-#: src/fetch/upcitemdbfetcher.cpp:468 src/fetch/vgcollectfetcher.cpp:382
+#: src/fetch/upcitemdbfetcher.cpp:468 src/fetch/vgcollectfetcher.cpp:380
 #: src/fetch/vndbfetcher.cpp:444
 #, kde-format
 msgid "This source has no options."
@@ -3743,7 +3743,7 @@ msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:818 src/fetch/giantbombfetcher.cpp:207
 #: src/fetch/igdbfetcher.cpp:578 src/fetch/mobygamesfetcher.cpp:638
-#: src/fetch/vgcollectfetcher.cpp:374 src/field.cpp:325
+#: src/fetch/vgcollectfetcher.cpp:372 src/field.cpp:325
 #, kde-format
 msgid "PEGI Rating"
 msgstr "Clasificación PEGI"
@@ -3824,7 +3824,7 @@ msgstr "Enlace a Discogs"
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:207 src/fetch/upcitemdbfetcher.cpp:461
-#: src/fetch/vgcollectfetcher.cpp:340 src/fetch/vgcollectfetcher.cpp:375
+#: src/fetch/vgcollectfetcher.cpp:338 src/fetch/vgcollectfetcher.cpp:373
 #, kde-format
 msgid "Barcode"
 msgstr "Código de barras"
@@ -3860,12 +3860,12 @@ msgstr "Enlace a Douban"
 msgid "DVDFr Link"
 msgstr "Enlace a DVDFr"
 
-#: src/fetch/entrezfetcher.cpp:503
+#: src/fetch/entrezfetcher.cpp:504
 #, kde-format
 msgid "Entrez Database"
 msgstr "Base de datos Entrez"
 
-#: src/fetch/entrezfetcher.cpp:513
+#: src/fetch/entrezfetcher.cpp:514
 #, kde-format
 msgid "Institution"
 msgstr "Institución"
@@ -4115,7 +4115,7 @@ msgstr "Base de datos de películas de Internet"
 
 #: src/fetch/imdbfetcher.cpp:540 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
-#: src/fetch/thetvdbfetcher.cpp:572 src/fetch/tvmazefetcher.cpp:382
+#: src/fetch/thetvdbfetcher.cpp:573 src/fetch/tvmazefetcher.cpp:382
 #: src/field.cpp:331
 #, kde-format
 msgid "IMDb Link"
@@ -4315,7 +4315,7 @@ msgid "TMDb Link"
 msgstr "Enlace a TMDb"
 
 #: src/fetch/themoviedbfetcher.cpp:338 src/fetch/themoviedbfetcher.cpp:578
-#: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:574
+#: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:575
 #: src/fetch/tvmazefetcher.cpp:182 src/fetch/tvmazefetcher.cpp:384
 #, kde-format
 msgid "Network"
@@ -4350,17 +4350,17 @@ msgstr "Ruso"
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB (%1)"
 
-#: src/fetch/thetvdbfetcher.cpp:260 src/fetch/thetvdbfetcher.cpp:571
+#: src/fetch/thetvdbfetcher.cpp:260 src/fetch/thetvdbfetcher.cpp:572
 #, kde-format
 msgid "TheTVDB Link"
 msgstr "Enlace a TheTVDB"
 
-#: src/fetch/thetvdbfetcher.cpp:598
+#: src/fetch/thetvdbfetcher.cpp:599
 #, kde-format
 msgid "Subscriber PIN: "
 msgstr "PIN de abonado:"
 
-#: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
+#: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:371
 #, kde-format
 msgid "VGCollect Link"
 msgstr "Enlace a VGCollect"
@@ -4840,13 +4840,13 @@ msgstr "Nombre del filtro:"
 msgid "&Save Filter"
 msgstr "&Guardar filtro"
 
-#: src/filterview.cpp:191 src/mainwindow.cpp:573 src/mainwindow.cpp:789
+#: src/filterview.cpp:190 src/mainwindow.cpp:573 src/mainwindow.cpp:789
 #: src/mainwindow.cpp:807
 #, kde-format
 msgid "Filter"
 msgstr "Filtro"
 
-#: src/filterview.cpp:193
+#: src/filterview.cpp:192
 #, kde-format
 msgid "Filter (Sort by Count)"
 msgstr "Filtro (ordenar por número)"
@@ -5326,17 +5326,17 @@ msgstr ""
 "calendario activo, que puede ver usando KOrganizer. Esta casilla solo se "
 "activa cuando se configura una fecha límite de devolución.</qt>"
 
-#: src/loanview.cpp:119
+#: src/loanview.cpp:117
 #, kde-format
 msgid "Check-in"
 msgstr "Devolución"
 
-#: src/loanview.cpp:121
+#: src/loanview.cpp:119
 #, kde-format
 msgid "Modify Loan..."
 msgstr "Modificar préstamo..."
 
-#: src/loanview.cpp:200 xslt/entry-templates/Album.xsl:511
+#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:511
 #: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:362
 #: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:543
 #: xslt/report-templates/Loan_View.xsl:135
@@ -5344,7 +5344,7 @@ msgstr "Modificar préstamo..."
 msgid "Borrower"
 msgstr "Prestado a"
 
-#: src/loanview.cpp:202
+#: src/loanview.cpp:200
 #, kde-format
 msgid "Borrower (Sort by Count)"
 msgstr "Prestado a (ordenado por número)"
@@ -6895,7 +6895,7 @@ msgstr "Importar solo las entradas que se poseen"
 msgid "User ID:"
 msgstr "ID de usuario:"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:214
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:215
 #, kde-format
 msgid "CSV Options"
 msgstr "Opciones CSV"
@@ -6916,7 +6916,7 @@ msgstr ""
 msgid "Delimiter"
 msgstr "Separador"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:246
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:247
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6930,7 +6930,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Coma"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:253
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "Usar una coma como separador."
@@ -6940,7 +6940,7 @@ msgstr "Usar una coma como separador."
 msgid "Semicolon"
 msgstr "Punto y coma"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:258
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:259
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "Usar punto y coma como separador."
@@ -6950,7 +6950,7 @@ msgstr "Usar punto y coma como separador."
 msgid "Tab"
 msgstr "Tabulador"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:263
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:264
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "Usar tabulaciones como separador."
@@ -6961,22 +6961,22 @@ msgstr "Usar tabulaciones como separador."
 msgid "Other"
 msgstr "Otro"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:268
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:269
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "Usar una cadena personalizada como separador."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:275
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:276
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "Puede usar como delimitador una cadena personalizada, como dos puntos."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:299
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:300
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "Delimitador de columnas de la tabla:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:298
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:299
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
@@ -6984,64 +6984,64 @@ msgstr ""
 "El delimitador de columnas separa valores en cada columna de un campo de la "
 "<i>tabla</i>."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:310
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:311
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "Delimitador de filas de la tabla:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:309
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:310
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
 "El delimitador de filas separa valores en cada fila de un campo de la "
 "<i>tabla</i>."
 
-#: src/translators/csvimporter.cpp:224
+#: src/translators/csvimporter.cpp:225
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Seleccione el tipo de colección que se va a importar."
 
-#: src/translators/csvimporter.cpp:228
+#: src/translators/csvimporter.cpp:229
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "La primera &fila contiene los títulos de campo"
 
-#: src/translators/csvimporter.cpp:229
+#: src/translators/csvimporter.cpp:230
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr "Si se marca, se usa la primera fila como títulos de los campos."
 
-#: src/translators/csvimporter.cpp:245
+#: src/translators/csvimporter.cpp:246
 #, kde-format
 msgid "Delimiter:"
 msgstr "Separador:"
 
-#: src/translators/csvimporter.cpp:251
+#: src/translators/csvimporter.cpp:252
 #, kde-format
 msgid "&Comma"
 msgstr "&Coma"
 
-#: src/translators/csvimporter.cpp:257
+#: src/translators/csvimporter.cpp:258
 #, kde-format
 msgid "&Semicolon"
 msgstr "Punto &y coma"
 
-#: src/translators/csvimporter.cpp:262
+#: src/translators/csvimporter.cpp:263
 #, kde-format
 msgid "Ta&b"
 msgstr "Ta&bulador"
 
-#: src/translators/csvimporter.cpp:267
+#: src/translators/csvimporter.cpp:268
 #, kde-format
 msgid "Ot&her:"
 msgstr "O&tro:"
 
-#: src/translators/csvimporter.cpp:329
+#: src/translators/csvimporter.cpp:330
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "La tabla muestra las primeras cinco lineas del archivo CSV."
 
-#: src/translators/csvimporter.cpp:336
+#: src/translators/csvimporter.cpp:337
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -7051,22 +7051,22 @@ msgstr ""
 "<qt>Asocie cada columna a un campo de la colección, seleccionando una "
 "columna, el campo, y pulsando después el botón <i>Asignar campo</i>.</qt>"
 
-#: src/translators/csvimporter.cpp:338
+#: src/translators/csvimporter.cpp:339
 #, kde-format
 msgid "Co&lumn:"
 msgstr "Co&lumna:"
 
-#: src/translators/csvimporter.cpp:351
+#: src/translators/csvimporter.cpp:352
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "Campo de &datos de esta columna:"
 
-#: src/translators/csvimporter.cpp:365
+#: src/translators/csvimporter.cpp:366
 #, kde-format
 msgid "&Assign Field"
 msgstr "&Asignar campo"
 
-#: src/translators/csvimporter.cpp:404
+#: src/translators/csvimporter.cpp:405
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
@@ -7075,12 +7075,12 @@ msgstr ""
 "Debe asignar al menos una columna a un campo. Solo se importarán las "
 "columnas asignadas."
 
-#: src/translators/csvimporter.cpp:601
+#: src/translators/csvimporter.cpp:602
 #, kde-format
 msgid "Review"
 msgstr "Revisar"
 
-#: src/translators/csvimporter.cpp:694
+#: src/translators/csvimporter.cpp:695
 #, kde-format
 msgid "<New Field>"
 msgstr "<Nuevo campo>"
@@ -7376,12 +7376,12 @@ msgstr "Archivo XSLT:"
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Seleccione el archivo XSLT con el que transformar los datos."
 
-#: src/viewstack.cpp:74
+#: src/viewstack.cpp:81
 #, kde-format
 msgid "Decrease the maximum icon size in the icon list view"
 msgstr "Disminuir el tamaño máximo del icono en la vista de lista de iconos"
 
-#: src/viewstack.cpp:85 src/viewstack.cpp:147
+#: src/viewstack.cpp:92 src/viewstack.cpp:154
 #, kde-format
 msgid ""
 "The current maximum icon size is %1.\n"
@@ -7390,7 +7390,7 @@ msgstr ""
 "El tamaño máximo actual del icono es %1.\n"
 "Mueva el deslizador para cambiarlo."
 
-#: src/viewstack.cpp:91
+#: src/viewstack.cpp:98
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "Aumentar el tamaño máximo del icono en la vista de lista de iconos."

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 00:42+0000\n"
+"POT-Creation-Date: 2023-11-21 00:42+0000\n"
 "PO-Revision-Date: 2023-11-03 09:08+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -726,8 +726,8 @@ msgstr "Pole s odvozenou hodnotou musí mít šablonu hodnoty."
 #: src/fetch/themoviedbfetcher.cpp:339 src/fetch/thetvdbfetcher.cpp:251
 #: src/fetch/thetvdbfetcher.cpp:256 src/fetch/thetvdbfetcher.cpp:261
 #: src/fetch/tvmazefetcher.cpp:178 src/fetch/tvmazefetcher.cpp:183
-#: src/fetch/upcitemdbfetcher.cpp:208 src/fetch/vgcollectfetcher.cpp:238
-#: src/fetch/vgcollectfetcher.cpp:341 src/field.cpp:39 src/field.cpp:80
+#: src/fetch/upcitemdbfetcher.cpp:208 src/fetch/vgcollectfetcher.cpp:236
+#: src/fetch/vgcollectfetcher.cpp:339 src/field.cpp:39 src/field.cpp:80
 #: src/field.cpp:298 src/field.cpp:327 src/field.cpp:332
 #: src/translators/gcstarimporter.cpp:89
 #, kde-format
@@ -743,7 +743,7 @@ msgstr "Obecné"
 msgid "Publishing"
 msgstr "Publikování"
 
-#: src/collections/bibtexcollection.cpp:40 src/fetch/entrezfetcher.cpp:440
+#: src/collections/bibtexcollection.cpp:40 src/fetch/entrezfetcher.cpp:441
 #: src/translators/risimporter.cpp:339
 #, kde-format
 msgid "Miscellaneous"
@@ -905,14 +905,14 @@ msgid "Keywords"
 msgstr "Klíčová slova"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
-#: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
+#: src/fetch/entrezfetcher.cpp:440 src/fetch/entrezfetcher.cpp:516
 #: src/fetch/opdsfetcher.cpp:431 src/field.cpp:201
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
 msgstr "URL"
 
-#: src/collections/bibtexcollection.cpp:246 src/fetch/entrezfetcher.cpp:514
+#: src/collections/bibtexcollection.cpp:246 src/fetch/entrezfetcher.cpp:515
 #: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:508
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
@@ -2123,12 +2123,12 @@ msgid "Add Filter"
 msgstr "Přidat filtr"
 
 #: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:62
-#: src/filterview.cpp:133
+#: src/filterview.cpp:132
 #, kde-format
 msgid "Modify Filter"
 msgstr "Upravit filtr"
 
-#: src/commands/filtercommand.cpp:62 src/filterview.cpp:135
+#: src/commands/filtercommand.cpp:62 src/filterview.cpp:134
 #, kde-format
 msgid "Delete Filter"
 msgstr "Smazat filtr"
@@ -2606,7 +2606,7 @@ msgstr "Možnosti šablon"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:367
 #: src/fetch/gcstarpluginfetcher.cpp:412 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:219
+#: src/translators/csvimporter.cpp:220
 #, kde-format
 msgid "Collection &type:"
 msgstr "&Druh sbírky:"
@@ -3085,7 +3085,7 @@ msgstr "Neuložené změny"
 msgid "(Empty)"
 msgstr "(Prázdné)"
 
-#: src/entryiconview.cpp:65 src/mainwindow.cpp:884
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:884
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3094,7 +3094,7 @@ msgstr ""
 "<qt><i>Ikonový pohled</i> ukazuje všechny záznamy ve sbírce nebo skupině "
 "pomocí ikon, které mohou být obrázky v záznamech.</qt>"
 
-#: src/entryiconview.cpp:115
+#: src/entryiconview.cpp:111
 #, kde-format
 msgctxt "Open URL"
 msgid "Open %1"
@@ -3240,7 +3240,7 @@ msgstr "SAO/NASA Astrophysics Data System"
 #: src/fetch/giantbombfetcher.cpp:219 src/fetch/googlebookfetcher.cpp:382
 #: src/fetch/isbndbfetcher.cpp:395 src/fetch/mobygamesfetcher.cpp:652
 #: src/fetch/omdbfetcher.cpp:411 src/fetch/thegamesdbfetcher.cpp:637
-#: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:586
+#: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:587
 #, kde-format
 msgid ""
 "Registration is required for accessing this data source. If you agree to the "
@@ -3252,7 +3252,7 @@ msgstr ""
 
 #: src/fetch/adsfetcher.cpp:343 src/fetch/amazonfetcher.cpp:1105
 #: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:244
-#: src/fetch/entrezfetcher.cpp:531 src/fetch/giantbombfetcher.cpp:231
+#: src/fetch/entrezfetcher.cpp:532 src/fetch/giantbombfetcher.cpp:231
 #: src/fetch/googlebookfetcher.cpp:394 src/fetch/isbndbfetcher.cpp:407
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/numistafetcher.cpp:416
 #: src/fetch/omdbfetcher.cpp:423 src/fetch/thegamesdbfetcher.cpp:649
@@ -3262,9 +3262,9 @@ msgid "Access key: "
 msgstr "Přístupový klíč: "
 
 #: src/fetch/adsfetcher.cpp:349 src/fetch/bibliosharefetcher.cpp:191
-#: src/fetch/comicvinefetcher.cpp:250 src/fetch/entrezfetcher.cpp:537
+#: src/fetch/comicvinefetcher.cpp:250 src/fetch/entrezfetcher.cpp:538
 #: src/fetch/giantbombfetcher.cpp:237 src/fetch/googlebookfetcher.cpp:400
-#: src/fetch/themoviedbfetcher.cpp:609 src/fetch/thetvdbfetcher.cpp:604
+#: src/fetch/themoviedbfetcher.cpp:609 src/fetch/thetvdbfetcher.cpp:605
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3286,7 +3286,7 @@ msgstr ""
 #: src/fetch/omdbfetcher.cpp:183 src/fetch/thegamesdbfetcher.cpp:172
 #: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:347
 #: src/fetch/tvmazefetcher.cpp:269 src/fetch/upcitemdbfetcher.cpp:253
-#: src/fetch/vgcollectfetcher.cpp:286 src/fetch/vndbfetcher.cpp:184
+#: src/fetch/vgcollectfetcher.cpp:284 src/fetch/vndbfetcher.cpp:184
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "Nelze načíst obrázek obálky."
@@ -3630,7 +3630,7 @@ msgstr "Distributor"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
 #: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:506
-#: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:573
+#: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:574
 #: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
@@ -3657,7 +3657,7 @@ msgstr ""
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
-#: src/fetch/upcitemdbfetcher.cpp:468 src/fetch/vgcollectfetcher.cpp:382
+#: src/fetch/upcitemdbfetcher.cpp:468 src/fetch/vgcollectfetcher.cpp:380
 #: src/fetch/vndbfetcher.cpp:444
 #, kde-format
 msgid "This source has no options."
@@ -3707,7 +3707,7 @@ msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:818 src/fetch/giantbombfetcher.cpp:207
 #: src/fetch/igdbfetcher.cpp:578 src/fetch/mobygamesfetcher.cpp:638
-#: src/fetch/vgcollectfetcher.cpp:374 src/field.cpp:325
+#: src/fetch/vgcollectfetcher.cpp:372 src/field.cpp:325
 #, kde-format
 msgid "PEGI Rating"
 msgstr "Hodnocení PEGI"
@@ -3787,7 +3787,7 @@ msgstr "Odkaz Discogs"
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:207 src/fetch/upcitemdbfetcher.cpp:461
-#: src/fetch/vgcollectfetcher.cpp:340 src/fetch/vgcollectfetcher.cpp:375
+#: src/fetch/vgcollectfetcher.cpp:338 src/fetch/vgcollectfetcher.cpp:373
 #, kde-format
 msgid "Barcode"
 msgstr "Čárový kód"
@@ -3823,12 +3823,12 @@ msgstr "Odkaz na Douban"
 msgid "DVDFr Link"
 msgstr "Odkaz na DVDFr"
 
-#: src/fetch/entrezfetcher.cpp:503
+#: src/fetch/entrezfetcher.cpp:504
 #, kde-format
 msgid "Entrez Database"
 msgstr "Databáze záznamů"
 
-#: src/fetch/entrezfetcher.cpp:513
+#: src/fetch/entrezfetcher.cpp:514
 #, kde-format
 msgid "Institution"
 msgstr "Instituce"
@@ -4071,7 +4071,7 @@ msgstr "Internetová databáze filmů"
 
 #: src/fetch/imdbfetcher.cpp:540 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
-#: src/fetch/thetvdbfetcher.cpp:572 src/fetch/tvmazefetcher.cpp:382
+#: src/fetch/thetvdbfetcher.cpp:573 src/fetch/tvmazefetcher.cpp:382
 #: src/field.cpp:331
 #, kde-format
 msgid "IMDb Link"
@@ -4268,7 +4268,7 @@ msgid "TMDb Link"
 msgstr "Odkaz na TMDb"
 
 #: src/fetch/themoviedbfetcher.cpp:338 src/fetch/themoviedbfetcher.cpp:578
-#: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:574
+#: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:575
 #: src/fetch/tvmazefetcher.cpp:182 src/fetch/tvmazefetcher.cpp:384
 #, kde-format
 msgid "Network"
@@ -4303,17 +4303,17 @@ msgstr "Ruština"
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB (%1)"
 
-#: src/fetch/thetvdbfetcher.cpp:260 src/fetch/thetvdbfetcher.cpp:571
+#: src/fetch/thetvdbfetcher.cpp:260 src/fetch/thetvdbfetcher.cpp:572
 #, kde-format
 msgid "TheTVDB Link"
 msgstr ""
 
-#: src/fetch/thetvdbfetcher.cpp:598
+#: src/fetch/thetvdbfetcher.cpp:599
 #, kde-format
 msgid "Subscriber PIN: "
 msgstr "Registrační PIN: "
 
-#: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
+#: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:371
 #, kde-format
 msgid "VGCollect Link"
 msgstr ""
@@ -4785,13 +4785,13 @@ msgstr "Název filtru:"
 msgid "&Save Filter"
 msgstr "&Uložit filtr"
 
-#: src/filterview.cpp:191 src/mainwindow.cpp:573 src/mainwindow.cpp:789
+#: src/filterview.cpp:190 src/mainwindow.cpp:573 src/mainwindow.cpp:789
 #: src/mainwindow.cpp:807
 #, kde-format
 msgid "Filter"
 msgstr "Filtr"
 
-#: src/filterview.cpp:193
+#: src/filterview.cpp:192
 #, kde-format
 msgid "Filter (Sort by Count)"
 msgstr "Filtr (seřadit podle počtu)"
@@ -5270,17 +5270,17 @@ msgstr ""
 "<em>úkol</em>, který můžete spravovat pomocí programu KOrganizer. Přepínač "
 "je aktivní, pouze pokud nastavíte datum vrácení.</qt>"
 
-#: src/loanview.cpp:119
+#: src/loanview.cpp:117
 #, kde-format
 msgid "Check-in"
 msgstr "Vrácení"
 
-#: src/loanview.cpp:121
+#: src/loanview.cpp:119
 #, kde-format
 msgid "Modify Loan..."
 msgstr "Upravit půjčku..."
 
-#: src/loanview.cpp:200 xslt/entry-templates/Album.xsl:511
+#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:511
 #: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:362
 #: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:543
 #: xslt/report-templates/Loan_View.xsl:135
@@ -5288,7 +5288,7 @@ msgstr "Upravit půjčku..."
 msgid "Borrower"
 msgstr "Vypůjčitel"
 
-#: src/loanview.cpp:202
+#: src/loanview.cpp:200
 #, kde-format
 msgid "Borrower (Sort by Count)"
 msgstr "Vypůjčitel (seřadit podle počtu)"
@@ -6830,7 +6830,7 @@ msgstr "Importovat pouze vlastněné položky"
 msgid "User ID:"
 msgstr "ID uživatele:"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:214
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:215
 #, kde-format
 msgid "CSV Options"
 msgstr "Možnosti CSV"
@@ -6850,7 +6850,7 @@ msgstr "Je-li zaškrtnuto, bude přidána řada hlaviček s názvy polí."
 msgid "Delimiter"
 msgstr "Oddělovač"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:246
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:247
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6864,7 +6864,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Čárka"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:253
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "Použít čárku jako oddělovač."
@@ -6874,7 +6874,7 @@ msgstr "Použít čárku jako oddělovač."
 msgid "Semicolon"
 msgstr "Středník"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:258
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:259
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "Použít střední jako oddělovač."
@@ -6884,7 +6884,7 @@ msgstr "Použít střední jako oddělovač."
 msgid "Tab"
 msgstr "Tabulátor"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:263
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:264
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "Použít tabulátor jako oddělovač."
@@ -6895,83 +6895,83 @@ msgstr "Použít tabulátor jako oddělovač."
 msgid "Other"
 msgstr "Jiné"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:268
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:269
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "Použít vlastní řetězec jako oddělovač."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:275
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:276
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "Jako oddělovač může být použit vlastní řetězec, třeba dvojtečka."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:299
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:300
 #, kde-format
 msgid "Table column delimiter:"
 msgstr ""
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:298
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:299
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:310
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:311
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "Oddělovač řádek tabulky:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:309
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:310
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
 
-#: src/translators/csvimporter.cpp:224
+#: src/translators/csvimporter.cpp:225
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Vyberte importovaný druh sbírky."
 
-#: src/translators/csvimporter.cpp:228
+#: src/translators/csvimporter.cpp:229
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "&První řada obsahuje názvy polí"
 
-#: src/translators/csvimporter.cpp:229
+#: src/translators/csvimporter.cpp:230
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr "Je-li zaškrtnuto, bude první řada použita jako názvy polí."
 
-#: src/translators/csvimporter.cpp:245
+#: src/translators/csvimporter.cpp:246
 #, kde-format
 msgid "Delimiter:"
 msgstr "Oddělovač:"
 
-#: src/translators/csvimporter.cpp:251
+#: src/translators/csvimporter.cpp:252
 #, kde-format
 msgid "&Comma"
 msgstr "Čár&ka"
 
-#: src/translators/csvimporter.cpp:257
+#: src/translators/csvimporter.cpp:258
 #, kde-format
 msgid "&Semicolon"
 msgstr "&Středník"
 
-#: src/translators/csvimporter.cpp:262
+#: src/translators/csvimporter.cpp:263
 #, kde-format
 msgid "Ta&b"
 msgstr "Ta&bulátor"
 
-#: src/translators/csvimporter.cpp:267
+#: src/translators/csvimporter.cpp:268
 #, kde-format
 msgid "Ot&her:"
 msgstr "&Jiný:"
 
-#: src/translators/csvimporter.cpp:329
+#: src/translators/csvimporter.cpp:330
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "Tabulka se zobrazuje až po prvních pět řádků souboru CSV."
 
-#: src/translators/csvimporter.cpp:336
+#: src/translators/csvimporter.cpp:337
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -6981,22 +6981,22 @@ msgstr ""
 "<qt> Nastavte každý sloupec tak, aby odpovídal poli ve sbírce. Vyberte "
 "sloupec, označte pole a klikněte na tlačítko <i>Přiřadit pole</i>.</qt>"
 
-#: src/translators/csvimporter.cpp:338
+#: src/translators/csvimporter.cpp:339
 #, kde-format
 msgid "Co&lumn:"
 msgstr "S&loupec:"
 
-#: src/translators/csvimporter.cpp:351
+#: src/translators/csvimporter.cpp:352
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "&Datové pole v tomto sloupci:"
 
-#: src/translators/csvimporter.cpp:365
+#: src/translators/csvimporter.cpp:366
 #, kde-format
 msgid "&Assign Field"
 msgstr "Přiř&adit pole"
 
-#: src/translators/csvimporter.cpp:404
+#: src/translators/csvimporter.cpp:405
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
@@ -7005,12 +7005,12 @@ msgstr ""
 "Poli musí být přiřazen aspoň jeden sloupec. Importovány budou pouze "
 "přiřazené sloupce."
 
-#: src/translators/csvimporter.cpp:601
+#: src/translators/csvimporter.cpp:602
 #, kde-format
 msgid "Review"
 msgstr "Kontrola"
 
-#: src/translators/csvimporter.cpp:694
+#: src/translators/csvimporter.cpp:695
 #, kde-format
 msgid "<New Field>"
 msgstr "<Nové pole>"
@@ -7301,19 +7301,19 @@ msgstr "Soubor XSLT:"
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Zvolte soubor XSLT použitý pro transformaci dat."
 
-#: src/viewstack.cpp:74
+#: src/viewstack.cpp:81
 #, kde-format
 msgid "Decrease the maximum icon size in the icon list view"
 msgstr ""
 
-#: src/viewstack.cpp:85 src/viewstack.cpp:147
+#: src/viewstack.cpp:92 src/viewstack.cpp:154
 #, kde-format
 msgid ""
 "The current maximum icon size is %1.\n"
 "Move the slider to change it."
 msgstr ""
 
-#: src/viewstack.cpp:91
+#: src/viewstack.cpp:98
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
 msgstr ""
