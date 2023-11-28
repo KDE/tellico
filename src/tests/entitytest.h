@@ -44,6 +44,7 @@ private Q_SLOTS:
   void testControlCodes();
   void testControlCodes_data();
   void testBug254863();
+  void testMapValue();
 };
 
 #endif

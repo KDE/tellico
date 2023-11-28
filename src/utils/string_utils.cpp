@@ -24,6 +24,7 @@
 
 #include "string_utils.h"
 #include "../fieldformat.h"
+#include "../tellico_debug.h"
 
 #include <KCharsets>
 #include <KLocalizedString>
@@ -177,6 +178,7 @@ QString Tellico::mapValue(const QVariantMap& map, const char* name) {
     return v.toStringList().join(FieldFormat::delimiterString());
   } else if(v.canConvert(QVariant::Map)) {
     // FilmasterFetcher, OpenLibraryFetcher and VNDBFetcher depend on the default "value" field
+//    myDebug() << "mapValue called, depending on value" << name;
     return v.toMap().value(QStringLiteral("value")).toString();
   } else {
     return QString();

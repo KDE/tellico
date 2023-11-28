@@ -318,7 +318,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     entry->setField(QStringLiteral("publisher"), mapValue(resultMap, "publishers"));
     entry->setField(QStringLiteral("series"), mapValue(resultMap, "series"));
     entry->setField(QStringLiteral("pages"), mapValue(resultMap, "number_of_pages"));
-    entry->setField(QStringLiteral("comments"), mapValue(resultMap, "notes"));
+    entry->setField(QStringLiteral("comments"), mapValue(resultMap, "notes", "value"));
 
     if(optionalFields().contains(QStringLiteral("openlibrary"))) {
       entry->setField(QStringLiteral("openlibrary"), QLatin1String("https://openlibrary.org") + mapValue(resultMap, "key"));

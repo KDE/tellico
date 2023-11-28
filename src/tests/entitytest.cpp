@@ -32,6 +32,8 @@
 
 #include <QTest>
 #include <QRegularExpression>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 QTEST_APPLESS_MAIN( EntityTest )
 
@@ -150,4 +152,33 @@ void EntityTest::testBug254863() {
   QVERIFY(!output.contains(QLatin1String("i18n>")));
   QVERIFY(!output.contains(QLatin1String("&replace")));
   QVERIFY(!output.contains(QRegularExpression(QLatin1String("\\s$"))));
+}
+
+void EntityTest::testMapValue() {
+  auto data(QByteArrayLiteral(R"(
+{
+ "num": 10,
+ "item":"value",
+ "items": [
+    {"title":"title"},
+    {"title":"title2"}
+ ],
+ "chain": {
+   "chain2": {
+     "chain3": {
+       "chain4":"value"
+     }
+   }
+ },
+ "list":["value1", "value2", "value3"]
+}
+)"));
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  auto map = doc.object().toVariantMap();
+  QVERIFY(!doc.isNull());
+  QCOMPARE(Tellico::mapValue(map, "num"), QStringLiteral("10"));
+  QCOMPARE(Tellico::mapValue(map, "item"), QStringLiteral("value"));
+  QCOMPARE(Tellico::mapValue(map, "items", "title"), QStringLiteral("title; title2"));
+  QCOMPARE(Tellico::mapValue(map, "chain", "chain2", "chain3", "chain4"), QStringLiteral("value"));
+  QCOMPARE(Tellico::mapValue(map, "list"), QStringLiteral("value1; value2; value3"));
 }
