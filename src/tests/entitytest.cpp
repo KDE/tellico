@@ -31,6 +31,7 @@
 #include <KLocalizedString>
 
 #include <QTest>
+#include <QRegularExpression>
 
 QTEST_APPLESS_MAIN( EntityTest )
 
@@ -141,4 +142,12 @@ void EntityTest::testControlCodes_data() {
   QTest::newRow("tab") << QSL("new\ttab") << QSL("new\ttab");
   QTest::newRow("hex5") << QSL("hex5\x5") << QSL("hex5");
   QTest::newRow("hexD") << QSL("hexD\xD") << QSL("hexD\xD");
+}
+
+void EntityTest::testBug254863() {
+  QString input(QLatin1String("\\n<div>\\n\\n<i18n>check&replace</i18n></div>\\n"));
+  auto output = Tellico::i18nReplace(input);
+  QVERIFY(!output.contains(QLatin1String("i18n>")));
+  QVERIFY(!output.contains(QLatin1String("&replace")));
+  QVERIFY(!output.contains(QRegularExpression(QLatin1String("\\s$"))));
 }
