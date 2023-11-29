@@ -149,7 +149,6 @@ void TheMovieDBFetcherTest::testAllMankind() {
   QCOMPARE(entry->field("network"), QStringLiteral("Apple TV+"));
   QCOMPARE(entry->field("language"), QStringLiteral("English"));
   QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
-  QEXPECT_FAIL("", "Producer info has been removed", Continue);
   QCOMPARE(set(entry, "producer"), set(QStringLiteral("Huey M. Park")));
   QVERIFY(entry->field("cast").startsWith(QStringLiteral("Joel Kinnaman::Ed Baldwin")));
   QStringList episodeList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("episode")));
