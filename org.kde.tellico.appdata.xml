@@ -12,6 +12,7 @@
   <name xml:lang="de">Tellico</name>
   <name xml:lang="el">Tellico</name>
   <name xml:lang="en-GB">Tellico</name>
+  <name xml:lang="eo">Tellico</name>
   <name xml:lang="es">Tellico</name>
   <name xml:lang="et">Tellico</name>
   <name xml:lang="eu">Tellico</name>
@@ -46,6 +47,7 @@
   <summary xml:lang="de">Sammlungsverwaltung</summary>
   <summary xml:lang="el">Διαχειριστής συλλογών</summary>
   <summary xml:lang="en-GB">Collection Manager</summary>
+  <summary xml:lang="eo">Kolekta Administranto</summary>
   <summary xml:lang="es">Gestor de colecciones</summary>
   <summary xml:lang="et">Kogude haldur</summary>
   <summary xml:lang="eu">Bilduma kudeatzailea</summary>
@@ -117,6 +119,7 @@
     <p xml:lang="de">Funktionen:</p>
     <p xml:lang="el">Χαρακτηριστικά:</p>
     <p xml:lang="en-GB">Features:</p>
+    <p xml:lang="eo">Trajtoj:</p>
     <p xml:lang="es">Características:</p>
     <p xml:lang="et">Omadused:</p>
     <p xml:lang="eu">Ezaugarriak:</p>
@@ -183,6 +186,7 @@
       <li xml:lang="de">Unterstützt benutzerdefinierte Sammlungen</li>
       <li xml:lang="el">Υποστηρίζει συλλογές ορισμένες από τον χρήστη</li>
       <li xml:lang="en-GB">Supports user-defined custom collections</li>
+      <li xml:lang="eo">Subtenas uzant-difinitajn proprajn kolektojn</li>
       <li xml:lang="es">Soporta colecciones personalizadas definidas por el usuario</li>
       <li xml:lang="et">Toetatud on ka kasutaja loodud kohandatud kogud</li>
       <li xml:lang="eu">Erabiltzaileek definitutako beren erara moldatutako bildumak onartzen ditu</li>
@@ -247,6 +251,7 @@
       <li xml:lang="de">Verarbeitet Einträge mit mehreren Autoren, Genres, Stichwörtern usw.</li>
       <li xml:lang="el">Χειρίζεται εγγραφές με πολλούς συγγραφείς, είδη, λέξεις κλειδιά, κλπ.</li>
       <li xml:lang="en-GB">Handles entries with multiple authors, genres, keywords, etc</li>
+      <li xml:lang="eo">Pritraktas enskribojn kun pluraj aŭtoroj, ĝenroj, ŝlosilvortoj ktp</li>
       <li xml:lang="es">Maneja entradas con varios autores, géneros, palabras clave, etc</li>
       <li xml:lang="et">Raskusi ei valmista ka kirjed, mis sisaldavad mitut autorit, žanri, võtmesõna jne.</li>
       <li xml:lang="eu">Egile, genero, gako-hitz, eta abar anizkoitzak dituzten sarrerak maneiatzen ditu</li>
@@ -279,6 +284,7 @@
       <li xml:lang="de">Automatische Formatierung von Titeln und Namen</li>
       <li xml:lang="el">Αυτόματα διαμορφώνει τίτλους και ονόματα</li>
       <li xml:lang="en-GB">Automatically formats titles and names</li>
+      <li xml:lang="eo">Aŭtomate formatas titolojn kaj nomojn</li>
       <li xml:lang="es">Formatea automáticamente títulos y nombres</li>
       <li xml:lang="et">Pealkirjasid ja nimesid saab lasta automaatselt vormindada</li>
       <li xml:lang="eu">Automatikoki formateatzen ditu izenburuak eta izenak</li>
@@ -311,6 +317,7 @@
       <li xml:lang="de">Unterstützt das Durchsuchen von Sammlungen und Filterung der Ansichten</li>
       <li xml:lang="el">Υποστηρίζει αναζήτηση συλλογών και φιλτράρισμα προβολής</li>
       <li xml:lang="en-GB">Supports collection searching and view filtering</li>
+      <li xml:lang="eo">Elportas kolekton serĉadon kaj rigardan filtradon</li>
       <li xml:lang="es">Soporta búsqueda de colecciones y filtrado de la vista</li>
       <li xml:lang="et">Toetatud on kogudes otsimine ja vaate filtreerimine</li>
       <li xml:lang="eu">Bildumetan bilatzea eta ikuspegietan iragaztea onartzen du</li>
@@ -343,6 +350,7 @@
       <li xml:lang="de">Sortiert und Gruppiert Sammlungen nach verschiedenen Eigenschaften</li>
       <li xml:lang="el">Ταξινομεί και ομαδοποιεί συλλογές με διάφορες ιδιότητες</li>
       <li xml:lang="en-GB">Sorts and groups collection by various properties</li>
+      <li xml:lang="eo">Ordigi kaj grupigas kolekton laŭ diversaj propraĵoj</li>
       <li xml:lang="es">Ordena y agrupa las colecciones en función de diversas propiedades</li>
       <li xml:lang="et">Kogusid saab sortida ja rühmitada eri omaduste järgi</li>
       <li xml:lang="eu">Bildumak hainbat propietateren arabera sailkatu eta taldekatzen ditu</li>
@@ -375,6 +383,7 @@
       <li xml:lang="de">Erlaubt anpassbare Vorlagen für Einträge mittels XSLT</li>
       <li xml:lang="el">Επιτρέπει προσαρμόσιμα πρότυπα εγγραφών μέσω XSLT</li>
       <li xml:lang="en-GB">Allows customisable entry templates through XSLT</li>
+      <li xml:lang="eo">Permesas agordeblajn enirajn ŝablonojn per XSLT</li>
       <li xml:lang="es">Permite plantillas personalizadas de entradas a través de XSLT </li>
       <li xml:lang="et">XSLT abil on võimalik luua kohandatud kirjemalle</li>
       <li xml:lang="eu">XSLT erabliz norbere erara molda daitezkeen sarrera-txantiloiak onartzen ditu</li>
@@ -407,6 +416,7 @@
       <li xml:lang="de">Import von MODS-, Bibtex-, RIS-, CSV-, PDF-Metadaten und vielen anderen Formaten</li>
       <li xml:lang="el">Εισάγει μεταδεδομένα από MODS, Bibtex, RIS, CSV, PDF και πολλούς άλλους τύπους αποθήκευσης</li>
       <li xml:lang="en-GB">Imports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formats</li>
+      <li xml:lang="eo">Importas metadatumojn MODS, Bibtex, RIS, CSV, PDF kaj multajn aliajn formatojn</li>
       <li xml:lang="es">Importa MODS, Bibtex, RIS, CSV, metadatos PDF y muchos otros formatos</li>
       <li xml:lang="et">MODS-i, Bibtexi, RIS-i, CSV, PDF-i metaandmete ja veel paljude vormingute import</li>
       <li xml:lang="eu">MODS, Bibtex, RIS, CSV, PDF meta-datuak, eta beste formatu ugari inportatzen ditu</li>
@@ -438,6 +448,7 @@
       <li xml:lang="de">Export zu Bibtex, ONIX, CSV, HTML, und andere Formate</li>
       <li xml:lang="el">Εξάγει σε Bibtex, ONIX, CSV, HTML και άλλους τύπους αποθήκευσης</li>
       <li xml:lang="en-GB">Exports to Bibtex, ONIX, CSV, HTML, and other formats</li>
+      <li xml:lang="eo">Eksportaĵoj al Bibtex, ONIX, CSV, HTML kaj aliaj formatoj</li>
       <li xml:lang="es">Exporta a Bibtex, ONIX, CSV, HTML y otros formatos</li>
       <li xml:lang="et">Eksport Bibtexi, ONIX-i, CSV, HTML-i ja veel paljudesse vormingutesse</li>
       <li xml:lang="eu">Bibtex, ONIX, CSV, HTML, eta beste formatuetara esportatzen du</li>
@@ -502,6 +513,7 @@
       <li xml:lang="de">Importiert CDDB-Daten für die Katalogisierung von Audi-CDs</li>
       <li xml:lang="el">Εισάγει CDDB δεδομένα για καταλογογράφηση CD ήχου</li>
       <li xml:lang="en-GB">Imports CDDB data for cataloguing audio CDs</li>
+      <li xml:lang="eo">Importas CDDB-datumojn por katalogado de son-KD-oj</li>
       <li xml:lang="es">Importa datos CDDB para catalogar CD de audio</li>
       <li xml:lang="et">CDDB andmete import audio-CD-de kataloogimiseks</li>
       <li xml:lang="eu">Audio CDak katalogatzeko CDDB datuak inportatzen ditu</li>
@@ -534,6 +546,7 @@
       <li xml:lang="de">Durchsucht und importiert Sammlungen von Audio-Dateien wie zum Beispiel mp3 oder ogg</li>
       <li xml:lang="el">Σαρώνει και εισάγει συλλογές αρχείων ήχου, όπως mp3 ή ogg</li>
       <li xml:lang="en-GB">Scans and imports audio file collections, such as mp3 or ogg</li>
+      <li xml:lang="eo">Skanas kaj importas sondosierkolektojn, kiel mp3 aŭ ogg</li>
       <li xml:lang="es">Escanea e importa colecciones de archivos de audio, como por ejemplo mp3 u ogg</li>
       <li xml:lang="et">Helifailide (näiteks mp3 või ogg) kogude läbiuurimine ja import</li>
       <li xml:lang="eu">Miatu eta audio bildumak inportatzen ditu, hala nola mp3 edo ogg</li>
@@ -574,6 +587,7 @@
       <caption xml:lang="de">Das Hauptfenster mit einer Film-Sammlung</caption>
       <caption xml:lang="el">Το κύριο παράθυρο με μια συλλογή ταινιών</caption>
       <caption xml:lang="en-GB">The main window showing a movie collection</caption>
+      <caption xml:lang="eo">La ĉefa fenestro montranta filmkolekton</caption>
       <caption xml:lang="es">La ventana principal mostrando una colección de películas</caption>
       <caption xml:lang="et">Peaaken filmikoguga</caption>
       <caption xml:lang="eu">Leiho nagusia pelikulen bilduma bat erakutsiz</caption>
@@ -608,6 +622,7 @@
       <caption xml:lang="de">Das Hauptfenster mit einem einfachen Eintrag einer Bücher-Sammlung</caption>
       <caption xml:lang="el">Το κύριο παράθυρο με ένα απλό αντικείμενο σε μια συλλογή βιβλίων</caption>
       <caption xml:lang="en-GB">The main window showing a simple item in a book collection</caption>
+      <caption xml:lang="eo">La ĉefa fenestro montranta simplan objekton en librokolekto</caption>
       <caption xml:lang="es">La ventana principal mostrando un elemento sencillo de una colección de libros</caption>
       <caption xml:lang="et">Peaaken raamatukollektsiooni kirjega</caption>
       <caption xml:lang="eu">Leiho nagusia liburu bilduma bateko elementu soil bat erakutsiz</caption>
@@ -643,6 +658,7 @@
       <caption xml:lang="de">Das Hauptfenster mit einer zweispaltigen Ansicht einer Spiele-Sammlung</caption>
       <caption xml:lang="el">Το κύριο παράθυρο με κατ' αντιπαράθεση προβολές μιας συλλογής παιχνιδιών</caption>
       <caption xml:lang="en-GB">The main window showing side-by-side views of a game collection</caption>
+      <caption xml:lang="eo">La ĉefa fenestro montranta flank-al-flanke vidojn de ludkolekto</caption>
       <caption xml:lang="es">La ventana principal mostrando vistas en paralelo de una colección de juegos</caption>
       <caption xml:lang="et">Peaaken mängude kõrvutivaatega</caption>
       <caption xml:lang="eu">Leiho nagusia alboz-albo joko bilduma baten ikuspegiak erakutsiz</caption>
