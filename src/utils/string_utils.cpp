@@ -24,7 +24,6 @@
 
 #include "string_utils.h"
 #include "../fieldformat.h"
-#include "../tellico_debug.h"
 
 #include <KCharsets>
 #include <KLocalizedString>
@@ -166,77 +165,6 @@ QString Tellico::removeAccents(const QString& value_) {
   const QString value2 = value_.normalized(QString::NormalizationForm_D).remove(rx);
   stringCache.insert(value_, new QString(value2));
   return value2;
-}
-
-QString Tellico::mapValue(const QVariantMap& map, const char* name) {
-  const QVariant v = map.value(QLatin1String(name));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::String)) {
-    return v.toString();
-  } else if(v.canConvert(QVariant::StringList)) {
-    return v.toStringList().join(FieldFormat::delimiterString());
-  } else if(v.canConvert(QVariant::Map)) {
-    // FilmasterFetcher, OpenLibraryFetcher and VNDBFetcher depend on the default "value" field
-//    myDebug() << "mapValue called, depending on value" << name;
-    return v.toMap().value(QStringLiteral("value")).toString();
-  } else {
-    return QString();
-  }
-}
-
-QString Tellico::mapValue(const QVariantMap& map, const char* name1, const char* name2) {
-  const QVariant v = map.value(QLatin1String(name1));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::Map)) {
-    return mapValue(v.toMap(), name2);
-  } else if(v.canConvert(QVariant::List)) {
-    QStringList values;
-    foreach(QVariant v, v.toList()) {
-      const QString s = mapValue(v.toMap(), name2);
-      if(!s.isEmpty()) values += s;
-    }
-    return values.join(FieldFormat::delimiterString());
-  } else {
-    return QString();
-  }
-}
-
-QString Tellico::mapValue(const QVariantMap& map, const char* name1, const char* name2, const char* name3) {
-  const QVariant v = map.value(QLatin1String(name1));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::Map)) {
-    return mapValue(v.toMap(), name2, name3);
-  } else if(v.canConvert(QVariant::List)) {
-    QStringList values;
-    foreach(QVariant v, v.toList()) {
-      const QString s = mapValue(v.toMap(), name2, name3);
-      if(!s.isEmpty()) values += s;
-    }
-    return values.join(FieldFormat::delimiterString());
-  } else {
-    return QString();
-  }
-}
-
-QString Tellico::mapValue(const QVariantMap& map, const char* name1, const char* name2, const char* name3, const char* name4) {
-  const QVariant v = map.value(QLatin1String(name1));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::Map)) {
-    return mapValue(v.toMap(), name2, name3, name4);
-  } else if(v.canConvert(QVariant::List)) {
-    QStringList values;
-    foreach(QVariant v, v.toList()) {
-      const QString s = mapValue(v.toMap(), name2, name3, name4);
-      if(!s.isEmpty()) values += s;
-    }
-    return values.join(FieldFormat::delimiterString());
-  } else {
-    return QString();
-  }
 }
 
 QByteArray Tellico::obfuscate(const QString& string) {

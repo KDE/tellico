@@ -170,15 +170,17 @@ void EntityTest::testMapValue() {
      }
    }
  },
- "list":["value1", "value2", "value3"]
+ "list":["value1", "value2", "value3"],
+ "list2":{"list":["value1", "value2", "value3"]}
 }
 )"));
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  auto map = doc.object().toVariantMap();
   QVERIFY(!doc.isNull());
+  auto map = doc.object().toVariantMap();
   QCOMPARE(Tellico::mapValue(map, "num"), QStringLiteral("10"));
   QCOMPARE(Tellico::mapValue(map, "item"), QStringLiteral("value"));
   QCOMPARE(Tellico::mapValue(map, "items", "title"), QStringLiteral("title; title2"));
   QCOMPARE(Tellico::mapValue(map, "chain", "chain2", "chain3", "chain4"), QStringLiteral("value"));
   QCOMPARE(Tellico::mapValue(map, "list"), QStringLiteral("value1; value2; value3"));
+  QCOMPARE(Tellico::mapValue(map, "list2", "list"), QStringLiteral("value1; value2; value3"));
 }

@@ -28,8 +28,11 @@
 class QByteArray;
 class QString;
 
+#include "../fieldformat.h"
+
 #include <Qt>
 #include <QMetaType>
+#include <QVariant>
 
 /**
  * This file contains utility functions for manipulating strings.
@@ -64,16 +67,44 @@ namespace Tellico {
   QString minutes(int seconds);
   QString fromHtmlData(const QByteArray& data, const char* codecName = nullptr);
 
-  // helper methods for the QVariantMaps used by the JSON importers
-  QString mapValue(const QVariantMap& map, const char* name1);
-  QString mapValue(const QVariantMap& map, const char* name1, const char* name2);
-  QString mapValue(const QVariantMap& map, const char* name1, const char* name2, const char* name3);
-  QString mapValue(const QVariantMap& map, const char* name1, const char* name2, const char* name3, const char* name4);
-
   QByteArray obfuscate(const QString& string);
   QString reverseObfuscate(const QByteArray& bytes);
 
   QString removeControlCodes(const QString& string);
+
+  // helper methods for the QVariantMaps used by the JSON importers
+  template<typename T>
+  QString mapValue(const QVariantMap& map, T name) {
+    const QVariant v = map.value(QLatin1String(name));
+    if(v.isNull())  {
+      return QString();
+    } else if(v.canConvert(QVariant::String)) {
+      return v.toString();
+    } else if(v.canConvert(QVariant::StringList)) {
+      return v.toStringList().join(FieldFormat::delimiterString());
+    } else {
+      return QString();
+    }
+  }
+  template<typename T, typename... Args>
+  QString mapValue(const QVariantMap& map, T name, Args... args) {
+    const QVariant v = map.value(QLatin1String(name));
+    if(v.isNull())  {
+      return QString();
+    } else if(v.canConvert(QVariant::Map)) {
+      return mapValue(v.toMap(), args...);
+    } else if(v.canConvert(QVariant::List)) {
+      QStringList values;
+      const auto list = v.toList();
+      for(const QVariant& v : list) {
+        const QString s = mapValue(v.toMap(), args...);
+        if(!s.isEmpty()) values += s;
+      }
+      return values.join(FieldFormat::delimiterString());
+    } else {
+      return QString();
+    }
+  }
 }
 
 #endif
