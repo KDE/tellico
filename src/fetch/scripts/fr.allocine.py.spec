@@ -6,6 +6,7 @@ Name[da]=Allocine.fr
 Name[de]=Allocine.fr
 Name[el]=Allocine.fr
 Name[en_GB]=Allocine.fr
+Name[eo]=Allocine.fr
 Name[es]=Allocine.fr
 Name[et]=Allocine.fr
 Name[eu]=Allocine.fr
