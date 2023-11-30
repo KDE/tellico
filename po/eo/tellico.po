@@ -1312,15 +1312,7 @@ msgid "Coin Set"
 msgstr "Monero Aro"
 
 #: src/collections/coincollection.cpp:98
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
-#| "¦Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,"
-#| "Very ¦Fine-20,Fine-12,Very Good-8,Good-4,Fair"
-#| msgid ""
-#| "Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,"
-#| "Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,"
-#| "Fine-12,Very Good-8,Good-4,Fair"
+#, kde-format
 msgctxt ""
 "Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
 "Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very "
@@ -1388,11 +1380,7 @@ msgid "Issue"
 msgstr "Temo"
 
 #: src/collections/comicbookcollection.cpp:127
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very Good,Good,"
-#| "Fair,¦Poor"
-#| msgid "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
+#, kde-format
 msgctxt ""
 "Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,"
 "Poor"
@@ -1653,13 +1641,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-#| "¦Everyone, Early Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
-#| "Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
 "Everyone, Early Childhood, Pending"
