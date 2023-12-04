@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: CC0-1.0
-# SPDX-FileCopyrightText: 2022 Robby Stephenson <robby@periapsis.org>
+# SPDX-FileCopyrightText: Robby Stephenson <robby@periapsis.org>
 
 include:
-  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/linux.yml
-  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/freebsd.yml
-  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/flatpak.yml
+  - project: sysadmin/ci-utilities
+    file:
+      - /gitlab-templates/linux.yml
+      - /gitlab-templates/freebsd.yml
+      - /gitlab-templates/flatpak.yml   
