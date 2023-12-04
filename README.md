@@ -23,3 +23,7 @@ The [Tellico mailing list](mailto:tellico-users@kde.org) or
 [KDE Discuss](https://discuss.kde.org) can provide
 further help. Please report bugs or make feature requests through the
 [KDE bug reporting system](https://bugs.kde.org/buglist.cgi?query_format=specific&order=relevance+desc&bug_status=__all__&product=tellico).
+
+## SAST Tools
+
+[PVS-Studio](https://pvs-studio.com/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.
