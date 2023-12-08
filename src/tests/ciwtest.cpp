@@ -80,4 +80,5 @@ void CiwTest::testImport() {
   Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
   QVERIFY(bColl);
   QCOMPARE(bColl->fieldByBibtexName(QSL("entry-type"))->name(), QSL("entry-type"));
+  QVERIFY(Tellico::Import::CIWImporter::maybeCIW(url));
 }

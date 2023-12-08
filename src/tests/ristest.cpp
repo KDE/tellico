@@ -67,4 +67,5 @@ void RisTest::testImport() {
   Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
   QVERIFY(bColl);
   QCOMPARE(bColl->fieldByBibtexName("entry-type")->name(), QStringLiteral("entry-type"));
+  QVERIFY(Tellico::Import::RISImporter::maybeRIS(url));
 }

@@ -36,6 +36,7 @@ private Q_SLOTS:
   void testPages();
   void testDuplicateKeys();
   void testMapping();
+  void testMaybe();
 };
 
 #endif

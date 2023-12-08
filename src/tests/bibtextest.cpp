@@ -163,3 +163,8 @@ void BibtexTest::testMapping() {
   QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("…"), QStringList()), QStringLiteral("{{\\ldots}}"));
   QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("°"), QStringList()), QStringLiteral("{$^{\\circ}$}"));
 }
+
+void BibtexTest::testMaybe() {
+  QUrl u(QUrl::fromLocalFile(QFINDTESTDATA("data/test.bib")));
+  QVERIFY(Tellico::Import::BibtexImporter::maybeBibtex(u));
+}
