@@ -30,6 +30,7 @@
 #include "../translators/filelistingimporter.h"
 #include "../translators/xmphandler.h"
 #include "../images/imagefactory.h"
+#include "../core/netaccess.h"
 
 #include <KLocalizedString>
 
@@ -116,4 +117,12 @@ void FileListingTest::testXMPData() {
 #endif
   QVERIFY(!entry->field("metainfo").isEmpty());
 #endif
+}
+
+void FileListingTest::testStat() {
+  QUrl local = QUrl::fromLocalFile(QFINDTESTDATA("filelistingtest.cpp"));
+  QVERIFY(Tellico::NetAccess::exists(local, false, nullptr));
+  QUrl remote(QStringLiteral("https://tellico-project.org"));
+  // http doesn't support existence without downloading
+  QVERIFY(!Tellico::NetAccess::exists(remote, false, nullptr));
 }
