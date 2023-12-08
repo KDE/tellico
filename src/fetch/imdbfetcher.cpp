@@ -28,7 +28,7 @@
 #include "../field.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
-#include "../utils/string_utils.h"
+#include "../utils/mapvalue.h"
 #include "../utils/guiproxy.h"
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"

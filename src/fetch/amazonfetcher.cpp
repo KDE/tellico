@@ -34,6 +34,7 @@
 #include "../field.h"
 #include "../fieldformat.h"
 #include "../utils/string_utils.h"
+#include "../utils/mapvalue.h"
 #include "../utils/isbnvalidator.h"
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"
@@ -42,7 +43,6 @@
 #include <KIO/Job>
 #include <KIO/JobUiDelegate>
 #include <KSeparator>
-#include <KComboBox>
 #include <KAcceleratorManager>
 #include <KConfigGroup>
 #include <KJobWidgets/KJobWidgets>

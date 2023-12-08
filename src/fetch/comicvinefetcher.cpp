@@ -25,8 +25,7 @@
 #include "comicvinefetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../utils/guiproxy.h"
-#include "../utils/string_utils.h"
+#include "../utils/mapvalue.h"
 #include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 

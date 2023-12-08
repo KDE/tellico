@@ -27,6 +27,7 @@
 #include "entitytest.h"
 
 #include "../utils/string_utils.h"
+#include "../utils/mapvalue.h"
 
 #include <KLocalizedString>
 

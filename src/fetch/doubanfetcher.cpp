@@ -31,6 +31,7 @@
 #include "../utils/guiproxy.h"
 #include "../utils/isbnvalidator.h"
 #include "../utils/string_utils.h"
+#include "../utils/mapvalue.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>

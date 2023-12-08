@@ -27,7 +27,7 @@
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
 #include "../core/filehandler.h"
-#include "../utils/string_utils.h"
+#include "../utils/mapvalue.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>

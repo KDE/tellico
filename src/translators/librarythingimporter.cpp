@@ -25,7 +25,7 @@
 #include "librarythingimporter.h"
 #include "../collections/bookcollection.h"
 #include "../core/filehandler.h"
-#include "../utils/string_utils.h"
+#include "../utils/mapvalue.h"
 #include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 

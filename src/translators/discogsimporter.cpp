@@ -26,7 +26,7 @@
 #include "../collections/musiccollection.h"
 #include "../images/imagefactory.h"
 #include "../core/filehandler.h"
-#include "../utils/string_utils.h"
+#include "../utils/mapvalue.h"
 #include "../tellico_debug.h"
 
 #include <KConfigGroup>

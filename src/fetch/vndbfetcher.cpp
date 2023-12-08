@@ -26,11 +26,9 @@
 #include "vndbfetcher.h"
 #include "../collections/gamecollection.h"
 #include "../images/imagefactory.h"
-#include "../utils/guiproxy.h"
-#include "../utils/string_utils.h"
+#include "../utils/mapvalue.h"
 #include "../entry.h"
 #include "../fieldformat.h"
-#include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2023 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,49 +22,48 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef STRING_UTILS_H
-#define STRING_UTILS_H
+#ifndef MAPVALUE_H
+#define MAPVALUE_H
 
-class QByteArray;
-class QString;
+#include "../fieldformat.h"
 
-/**
- * This file contains utility functions for manipulating strings.
- *
- * @author Robby Stephenson
- */
+#include <QMetaType>
+#include <QVariant>
+
 namespace Tellico {
-  /**
-   * Decode HTML entities. Only numeric entities are handled currently.
-   */
-  QString decodeHTML(const QByteArray& data);
-  QString decodeHTML(const QString& text);
-
-  /**
-   * Return a random, and almost certainly unique UID.
-   *
-   * @param length The UID starts with "Tellico" and adds enough letters to be @p length long.
-   */
-  QString uid(int length=20, bool prefix=true);
-  unsigned int toUInt(const QString& string, bool* ok);
-  /**
-   * Replace all occurrences  of <i18n>text</i18n> with i18n("text")
-   */
-  QString i18nReplace(QString text);
-  QString removeAccents(const QString& value);
-
-  int stringHash(const QString& str);
-  /** take advantage string collisions to reduce memory
-  */
-  QString shareString(const QString& str);
-
-  QString minutes(int seconds);
-  QString fromHtmlData(const QByteArray& data, const char* codecName = nullptr);
-
-  QByteArray obfuscate(const QString& string);
-  QString reverseObfuscate(const QByteArray& bytes);
-
-  QString removeControlCodes(const QString& string);
+  // helper methods for the QVariantMaps used by the JSON importers
+  template<typename T>
+  QString mapValue(const QVariantMap& map, T name) {
+    const QVariant v = map.value(QLatin1String(name));
+    if(v.isNull())  {
+      return QString();
+    } else if(v.canConvert(QVariant::String)) {
+      return v.toString();
+    } else if(v.canConvert(QVariant::StringList)) {
+      return v.toStringList().join(FieldFormat::delimiterString());
+    } else {
+      return QString();
+    }
+  }
+  template<typename T, typename... Args>
+  QString mapValue(const QVariantMap& map, T name, Args... args) {
+    const QVariant v = map.value(QLatin1String(name));
+    if(v.isNull())  {
+      return QString();
+    } else if(v.canConvert(QVariant::Map)) {
+      return mapValue(v.toMap(), args...);
+    } else if(v.canConvert(QVariant::List)) {
+      QStringList values;
+      const auto list = v.toList();
+      for(const QVariant& v : list) {
+        const QString s = mapValue(v.toMap(), args...);
+        if(!s.isEmpty()) values += s;
+      }
+      return values.join(FieldFormat::delimiterString());
+    } else {
+      return QString();
+    }
+  }
 }
 
 #endif

@@ -24,13 +24,13 @@
 
 #include "kinofetcher.h"
 #include "../utils/guiproxy.h"
-#include "../utils/string_utils.h"
-#include "../collections/bookcollection.h"
 #include "../collections/videocollection.h"
 #include "../entry.h"
 #include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "../images/imagefactory.h"
+#include "../utils/string_utils.h"
+#include "../utils/mapvalue.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
