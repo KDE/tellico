@@ -15,7 +15,6 @@ SET(utils_STAT_SRCS
    tellico_utils.cpp
    upcvalidator.cpp
    urlfieldlogic.cpp
-   wallet.cpp
    xmlhandler.cpp
    )
 
@@ -26,7 +25,6 @@ TARGET_LINK_LIBRARIES(utils
     Qt5::Widgets
     Qt5::Xml
     KF5::CoreAddons # for KRandom
-    KF5::Wallet
     KF5::I18n
     KF5::WidgetsAddons
     KF5::Codecs

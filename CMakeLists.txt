@@ -77,7 +77,6 @@ find_package(KF5 REQUIRED COMPONENTS
     Solid
     Sonnet
     TextWidgets
-    Wallet
     WidgetsAddons
     XmlGui
 )

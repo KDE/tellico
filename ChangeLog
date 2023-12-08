@@ -1,3 +1,7 @@
+2023-12-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Removed backchecking of KWallet in CrossRef source.
+
 2023-10-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 3.5.2.
