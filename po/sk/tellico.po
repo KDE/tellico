@@ -1,6 +1,6 @@
 # translation of tellico.po to Slovak
 # Richard Fric <Richard.Fric@kdemail.net>, 2009.
-# Roman Paholík <wizzardsk@gmail.com>, 2012, 2013, 2014, 2015, 2016, 2019, 2021, 2022.
+# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2019, 2021, 2022, 2023 Roman Paholík <wizzardsk@gmail.com>
 # Ferdinand Galko <galko.ferdinand@gmail.com>, 2014.
 # Matej Mrenica <matejm98mthw@gmail.com>, 2020.
 msgid ""
@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-24 02:29+0000\n"
-"PO-Revision-Date: 2022-04-09 18:57+0200\n"
+"PO-Revision-Date: 2023-12-11 18:06+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
@@ -2710,10 +2710,9 @@ msgid "Highlighted text color:"
 msgstr "Farba zvýrazneného textu:"
 
 #: src/configdialog.cpp:542
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "Farba textu:"
+msgstr "Farba odkazu:"
 
 #: src/configdialog.cpp:551
 #, kde-format
@@ -3980,8 +3979,7 @@ msgid "FilmAffinity Link"
 msgstr "Odkaz Filmaster"
 
 #: src/fetch/filmaffinityfetcher.cpp:495
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "Španielsko"
@@ -3990,7 +3988,7 @@ msgstr "Španielsko"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "USA"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
@@ -4083,7 +4081,7 @@ msgstr "Internet Game Database (IGDB.com)"
 #: src/fetch/thegamesdbfetcher.cpp:606 src/field.cpp:344
 #, kde-format
 msgid "Screenshot"
-msgstr ""
+msgstr "Snímka obrazovky"
 
 #: src/fetch/imdbfetcher.cpp:120 src/fetch/imdbfetcher.cpp:1807
 #, kde-format
@@ -4242,10 +4240,9 @@ msgid "OPDS Catalog"
 msgstr "Katalóg súborov"
 
 #: src/fetch/opdsfetcher.cpp:446
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "Catalog: "
-msgstr "Katalóg súborov"
+msgstr "Katalóg:"
 
 #: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
@@ -4280,10 +4277,9 @@ msgid "SRU Server"
 msgstr "SRU Server"
 
 #: src/fetch/srufetcher.cpp:525
-#, fuzzy, kde-format
-#| msgid "&Source name: "
+#, kde-format
 msgid "Scheme: "
-msgstr "Názov zdroja:"
+msgstr "Schéma: "
 
 #: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
 #, kde-format
@@ -4901,26 +4897,23 @@ msgstr "Ľudia"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, fuzzy, kde-format
-#| msgid "Template:"
+#, kde-format
 msgid "Template Name:"
-msgstr "Šablóna:"
+msgstr "Meno šablóny:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, fuzzy, kde-format
-#| msgid "Comments"
+#, kde-format
 msgid "Comment:"
-msgstr "Komentáre"
+msgstr "Komentár:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, fuzzy, kde-format
-#| msgid "Icon"
+#, kde-format
 msgid "Icon:"
-msgstr "Ikona"
+msgstr "Ikona:"
 
 #: src/gui/collectiontemplatedialog.cpp:56
 #, fuzzy, kde-format
@@ -5371,10 +5364,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - správca zbierok pre KDE"
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2022, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2023, Robby Stephenson"
-msgstr "(c) 2001-2022, Robby Stephenson"
+msgstr "(c) 2001-2023, Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
@@ -5598,10 +5590,9 @@ msgid "Save the document as a different file..."
 msgstr "Uložiť dokument ako iný súbor..."
 
 #: src/mainwindow.cpp:334
-#, fuzzy, kde-format
-#| msgid "Manage Templates"
+#, kde-format
 msgid "Save As Template..."
-msgstr "Správa šablón"
+msgstr "Uložiť ako šablónu..."
 
 #: src/mainwindow.cpp:336
 #, fuzzy, kde-format
@@ -7301,10 +7292,9 @@ msgid "MARC Options"
 msgstr "Voľby pre CSV"
 
 #: src/translators/marcimporter.cpp:156
-#, fuzzy, kde-format
-#| msgid "Query character set: "
+#, kde-format
 msgid "Character set:"
-msgstr "Znaková sada dopytov:"
+msgstr "Znaková sada:"
 
 #: src/translators/marcimporter.cpp:161
 #, fuzzy, kde-format
