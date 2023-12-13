@@ -58,6 +58,7 @@ void DeliciousTest::initTestCase() {
 void DeliciousTest::testBooks1() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/delicious1_books.xml"));
   Tellico::Import::DeliciousImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Book));
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
@@ -111,6 +112,7 @@ void DeliciousTest::testBooks2() {
 void DeliciousTest::testMovies1() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/delicious1_movies.xml"));
   Tellico::Import::DeliciousImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Video));
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
@@ -196,6 +198,7 @@ void DeliciousTest::testMovies2() {
 void DeliciousTest::testMusic1() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/delicious1_music.xml"));
   Tellico::Import::DeliciousImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Album));
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
@@ -242,6 +245,7 @@ void DeliciousTest::testMusic2() {
 void DeliciousTest::testGames1() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/delicious1_games.xml"));
   Tellico::Import::DeliciousImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Game));
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
