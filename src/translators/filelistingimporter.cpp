@@ -27,10 +27,8 @@
 #include "filelistingimporter.h"
 #include "../collections/filecatalog.h"
 #include "../entry.h"
-#include "../field.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
-#include "../utils/tellico_utils.h"
 #include "../utils/guiproxy.h"
 #include "../progressmanager.h"
 #include "../core/netaccess.h"
@@ -72,7 +70,7 @@ namespace {
 using Tellico::Import::FileListingImporter;
 
 FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_), m_coll(nullptr), m_widget(nullptr),
-    m_recursive(nullptr), m_filePreview(nullptr), m_job(nullptr), m_cancelled(false) {
+    m_recursive(nullptr), m_filePreview(nullptr), m_job(nullptr), m_useFilePreview(false), m_cancelled(false) {
 }
 
 bool FileListingImporter::canImport(int type) const {
@@ -118,7 +116,9 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
                          << QStringLiteral("contentSize")
                          << QStringLiteral("type");
 
-  const bool usePreview = m_widget && m_filePreview->isChecked();
+  if(m_widget) {
+   m_useFilePreview = m_filePreview->isChecked();
+  }
 
   const QString title    = QStringLiteral("title");
   const QString url      = QStringLiteral("url");
@@ -220,7 +220,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 #endif
 
     QPixmap pixmap;
-    if(!m_cancelled && usePreview) {
+    if(!m_cancelled && m_useFilePreview) {
       pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
     }
     if(pixmap.isNull()) {

@@ -49,8 +49,10 @@ void FileListingTest::initTestCase() {
 void FileListingTest::testCpp() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("filelistingtest.cpp"));
   Tellico::Import::FileListingImporter importer(url.adjusted(QUrl::RemoveFilename));
+  QVERIFY(importer.canImport(Tellico::Data::Collection::File));
   // can't import images for local test
 //  importer.setOptions(importer.options() & ~Tellico::Import::ImportShowImageErrors);
+  importer.setUseFilePreview(true);
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
@@ -79,8 +81,7 @@ void FileListingTest::testCpp() {
 #ifdef HAVE_KFILEMETADATA
   QCOMPARE(entry->field("metainfo"), QString());
 #endif
-  // icon name does not get set for the jenkins build service
-//  QVERIFY(!entry->field("icon").isEmpty());
+  QVERIFY(!entry->field("icon").isEmpty());
 }
 
 void FileListingTest::testXMPData() {

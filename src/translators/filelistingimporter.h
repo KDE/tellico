@@ -58,6 +58,8 @@ public:
   virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE;
   virtual bool canImport(int type) const Q_DECL_OVERRIDE;
 
+  void setUseFilePreview(bool b) { m_useFilePreview = b; }
+
 public Q_SLOTS:
   void slotCancel() Q_DECL_OVERRIDE;
 
@@ -73,6 +75,7 @@ private:
   QCheckBox* m_filePreview;
   QPointer<KIO::Job> m_job;
   KFileItemList m_files;
+  bool m_useFilePreview;
   bool m_cancelled;
 };
 
