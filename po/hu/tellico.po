@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-09 00:42+0000\n"
+"POT-Creation-Date: 2023-12-13 00:42+0000\n"
 "PO-Revision-Date: 2022-02-01 11:21+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -744,7 +744,7 @@ msgstr "Általános"
 #: src/collections/bookcollection.cpp:32
 #: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:362
 #: src/field.cpp:314 src/translators/grs1importer.cpp:75
-#: src/translators/pdfimporter.cpp:229
+#: src/translators/pdfimporter.cpp:233
 #, kde-format
 msgid "Publishing"
 msgstr "Kiadás"
@@ -1207,7 +1207,7 @@ msgstr "Olvasva"
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
 #: src/fetch/crossreffetcher.cpp:193 src/translators/ebookimporter.cpp:158
-#: src/translators/pdfimporter.cpp:290
+#: src/translators/pdfimporter.cpp:294
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
 msgid "Front Cover"
@@ -3948,7 +3948,7 @@ msgstr "UPC/EAN"
 msgid "Keyword"
 msgstr "Kulcsszó"
 
-#: src/fetch/fetchmanager.cpp:72 src/translators/pdfimporter.cpp:228
+#: src/fetch/fetchmanager.cpp:72 src/translators/pdfimporter.cpp:232
 #, kde-format
 msgid "arXiv ID"
 msgstr "arXiv azonosító"
@@ -7305,7 +7305,7 @@ msgstr ""
 msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr "Nem sikerült a PDF fájlból a metaadatok kiolvasása."
 
-#: src/translators/pdfimporter.cpp:317
+#: src/translators/pdfimporter.cpp:321
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "

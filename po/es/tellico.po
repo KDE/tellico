@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-09 00:42+0000\n"
+"POT-Creation-Date: 2023-12-13 00:42+0000\n"
 "PO-Revision-Date: 2023-10-20 18:56+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -752,7 +752,7 @@ msgstr "General"
 #: src/collections/bookcollection.cpp:32
 #: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:362
 #: src/field.cpp:314 src/translators/grs1importer.cpp:75
-#: src/translators/pdfimporter.cpp:229
+#: src/translators/pdfimporter.cpp:233
 #, kde-format
 msgid "Publishing"
 msgstr "Publicación"
@@ -1217,7 +1217,7 @@ msgstr "Leído"
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
 #: src/fetch/crossreffetcher.cpp:193 src/translators/ebookimporter.cpp:158
-#: src/translators/pdfimporter.cpp:290
+#: src/translators/pdfimporter.cpp:294
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
 msgid "Front Cover"
@@ -3973,7 +3973,7 @@ msgstr "UPC/EAN"
 msgid "Keyword"
 msgstr "Palabra clave"
 
-#: src/fetch/fetchmanager.cpp:72 src/translators/pdfimporter.cpp:228
+#: src/fetch/fetchmanager.cpp:72 src/translators/pdfimporter.cpp:232
 #, kde-format
 msgid "arXiv ID"
 msgstr "ID de arXiv"
@@ -7311,7 +7311,7 @@ msgstr ""
 msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr "Tellico no ha podido leer ningún metadato del archivo PDF."
 
-#: src/translators/pdfimporter.cpp:317
+#: src/translators/pdfimporter.cpp:321
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-09 00:42+0000\n"
+"POT-Creation-Date: 2023-12-13 00:42+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -762,7 +762,7 @@ msgstr "Γενικά"
 #: src/collections/bookcollection.cpp:32
 #: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:362
 #: src/field.cpp:314 src/translators/grs1importer.cpp:75
-#: src/translators/pdfimporter.cpp:229
+#: src/translators/pdfimporter.cpp:233
 #, kde-format
 msgid "Publishing"
 msgstr "Έκδοση"
@@ -1229,7 +1229,7 @@ msgstr "Αναγνωσμένο"
 #: src/collections/bookcollection.cpp:179
 #: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
 #: src/fetch/crossreffetcher.cpp:193 src/translators/ebookimporter.cpp:158
-#: src/translators/pdfimporter.cpp:290
+#: src/translators/pdfimporter.cpp:294
 #: src/translators/referencerimporter.cpp:62
 #, kde-format
 msgid "Front Cover"
@@ -3995,7 +3995,7 @@ msgstr "UPC/EAN"
 msgid "Keyword"
 msgstr "Λέξη κλειδί"
 
-#: src/fetch/fetchmanager.cpp:72 src/translators/pdfimporter.cpp:228
+#: src/fetch/fetchmanager.cpp:72 src/translators/pdfimporter.cpp:232
 #, kde-format
 msgid "arXiv ID"
 msgstr "arXiv ID"
@@ -7404,7 +7404,7 @@ msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr ""
 "Το Tellico δεν είναι σε θέση να διαβάσει μεταδεδομένα από το αρχείο PDF."
 
-#: src/translators/pdfimporter.cpp:317
+#: src/translators/pdfimporter.cpp:321
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "
