@@ -208,6 +208,10 @@ Tellico::Data::CollPtr PDFImporter::collection() {
                                                             "[^\\s]+"
                                                             ")"));
         QRegularExpressionMatch m = doiRx.match(text);
+        if(!m.hasMatch()) {
+          static const QRegularExpression doiUrlRx(QLatin1String("https?://(?:dx\\.)?doi\\.org/(10.\\d{4,9}/[-._;()/:a-zA-Z0-9]+)"));
+          m = doiUrlRx.match(text);
+        }
         if(m.hasMatch()) {
           const QString doi = m.captured(1);
           myLog() << "in PDF file, found DOI:" << doi;
