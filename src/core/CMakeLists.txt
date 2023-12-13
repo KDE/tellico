@@ -11,9 +11,9 @@ add_library(core STATIC ${core_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(core
     utils
-    Qt5::Core
-    Qt5::Xml
-    KF5::I18n
-    KF5::JobWidgets
-    KF5::KIOWidgets
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Xml
+    KF${KF_MAJOR_VERSION}::I18n
+    KF${KF_MAJOR_VERSION}::JobWidgets
+    KF${KF_MAJOR_VERSION}::KIOWidgets
     )

@@ -21,12 +21,12 @@ SET(utils_STAT_SRCS
 add_library(utils STATIC ${utils_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(utils
-    Qt5::Core
-    Qt5::Widgets
-    Qt5::Xml
-    KF5::CoreAddons # for KRandom
-    KF5::I18n
-    KF5::WidgetsAddons
-    KF5::Codecs
-    KF5::KIOCore
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Xml
+    KF${KF_MAJOR_VERSION}::CoreAddons # for KRandom
+    KF${KF_MAJOR_VERSION}::I18n
+    KF${KF_MAJOR_VERSION}::WidgetsAddons
+    KF${KF_MAJOR_VERSION}::Codecs
+    KF${KF_MAJOR_VERSION}::KIOCore
 )

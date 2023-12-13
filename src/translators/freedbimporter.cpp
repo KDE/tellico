@@ -43,7 +43,7 @@
 #include "../utils/cursorsaver.h"
 #include "../tellico_debug.h"
 
-#if defined HAVE_KF5KCDDB
+#if defined HAVE_KCDDB
 #include <KCddb/Client>
 #elif defined HAVE_KCDDB
 #include <libkcddb/client.h>
@@ -100,7 +100,7 @@ Tellico::Data::CollPtr FreeDBImporter::collection() {
 }
 
 void FreeDBImporter::readCDROM() {
-#if defined (HAVE_KCDDB) || defined (HAVE_KF5KCDDB)
+#if defined (HAVE_OLD_KCDDB) || defined (HAVE_KCDDB)
   QString drivePath = m_driveCombo->currentText();
   if(drivePath.isEmpty()) {
     setStatusMessage(i18n("<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>", drivePath));
@@ -303,7 +303,7 @@ void FreeDBImporter::readCDROM() {
 }
 
 void FreeDBImporter::readCache() {
-#if defined (HAVE_KCDDB) || defined (HAVE_KF5KCDDB)
+#if defined (HAVE_OLD_KCDDB) || defined (HAVE_KCDDB)
   {
     // remember the import options
     KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - FreeDB"));

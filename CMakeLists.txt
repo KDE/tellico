@@ -50,8 +50,9 @@ include(CheckSymbolExists)
 check_symbol_exists(strlwr "string.h" HAVE_STRLWR)
 check_symbol_exists(strupr "string.h" HAVE_STRUPR)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
-    Core
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
+message(STATUS "Found Qt version ${QT_VERSION_MAJOR}")
+find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Widgets
     Xml
     DBus
@@ -60,7 +61,8 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     PrintSupport
 )
 
-find_package(KF5 REQUIRED COMPONENTS
+set(KF_MAJOR_VERSION ${QT_VERSION_MAJOR})
+find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS
     Archive
     Codecs
     Config
@@ -81,21 +83,21 @@ find_package(KF5 REQUIRED COMPONENTS
     XmlGui
 )
 if(NOT USE_KHTML)
-  find_package(Qt5 ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
+  find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
     WebEngineWidgets
   )
-  set_package_properties(Qt5WebEngineWidgets PROPERTIES
+  set_package_properties(Qt${QT_VERSION_MAJOR}WebEngineWidgets PROPERTIES
     DESCRIPTION "Building with QWebEngine is preferrable to KHTML"
     TYPE OPTIONAL)
 endif()
-if(USE_KHTML OR NOT Qt5WebEngineWidgets_FOUND)
+if(USE_KHTML OR NOT Qt${QT_VERSION_MAJOR}WebEngineWidgets_FOUND)
   set(USE_KHTML ON)
-  find_package(KF5KHtml REQUIRED NO_MODULE)
-  set_package_properties(KF5Html PROPERTIES
+  find_package(KF${KF_MAJOR_VERSION}KHtml REQUIRED NO_MODULE)
+  set_package_properties(KF${KF_MAJOR_VERSION}Html PROPERTIES
     DESCRIPTION "Building with QWebEngine is preferrable to KHTML")
 endif()
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
+find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
   Charts
 )
 
@@ -105,26 +107,26 @@ find_package(Gettext REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
 
-find_package(KF5FileMetaData)
-set_package_properties(KF5FileMetaData PROPERTIES
+find_package(KF${KF_MAJOR_VERSION}FileMetaData)
+set_package_properties(KF${KF_MAJOR_VERSION}FileMetaData PROPERTIES
     DESCRIPTION "Support for reading file metadata"
     URL "https://www.kde.org"
     TYPE OPTIONAL)
 
-find_package(KF5NewStuff)
-set_package_properties(KF5NewStuff PROPERTIES
+find_package(KF${KF_MAJOR_VERSION}NewStuff)
+set_package_properties(KF${KF_MAJOR_VERSION}NewStuff PROPERTIES
     DESCRIPTION "Support for fetching new templates and scripts"
     URL "https://www.kde.org"
     TYPE OPTIONAL)
 
-find_package(KF5Sane)
-set_package_properties(KF5Sane PROPERTIES
+find_package(KF${KF_MAJOR_VERSION}Sane)
+set_package_properties(KF${KF_MAJOR_VERSION}Sane PROPERTIES
     DESCRIPTION "Support for adding scanned images to a collection"
     URL "https://www.kde.org"
     TYPE OPTIONAL)
-if(KF5Sane_FOUND)
-    include_directories(${KF5Sane_INCLUDE_DIR})
-endif(KF5Sane_FOUND)
+if(KF${KF_MAJOR_VERSION}Sane_FOUND)
+    include_directories(${KF${KF_MAJOR_VERSION}Sane_INCLUDE_DIR})
+endif(KF${KF_MAJOR_VERSION}Sane_FOUND)
 
 #macro_optional_find_package(KdepimLibs 4.5)
 #macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "Support for using the address book and calendar for loans" "https://community.kde.org/PIM" FALSE "4.5.0" "")
@@ -137,8 +139,8 @@ if(KDEPIMLIBS_FOUND)
     include_directories(${KDEPIMLIBS_INCLUDE_DIRS})
 endif(KDEPIMLIBS_FOUND)
 
-find_package(KF5Cddb)
-set_package_properties(KF5Cddb PROPERTIES
+find_package(KF${KF_MAJOR_VERSION}Cddb)
+set_package_properties(KF${KF_MAJOR_VERSION}Cddb PROPERTIES
     DESCRIPTION "Support for CDDB searches"
     URL "https://invent.kde.org/multimedia/libkcddb"
     TYPE OPTIONAL)
@@ -168,7 +170,7 @@ if(Yaz_FOUND)
 endif(Yaz_FOUND)
 
 # FindPoppler is part of ECM >= 5.19
-find_package(Poppler COMPONENTS Qt5)
+find_package(Poppler COMPONENTS Qt${QT_VERSION_MAJOR})
 
 find_package(Exempi 2.0)
 set_package_properties(Exempi PROPERTIES
@@ -243,13 +245,9 @@ endif(ENABLE_WEBCAM)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
 #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -Wextra -fno-check-new -Woverloaded-virtual")
-    # remove -Wno-deprecated when porting to KF5 is more advanced
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -fno-check-new -Woverloaded-virtual -Wno-deprecated -Wno-deprecated-declarations")
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
-#add_definitions(${QT_DEFINITIONS}
-#                ${KDE4_DEFINITIONS}
-#                ${YAZ_CFLAGS})
 add_definitions(-DQT_STL -DQT_NO_CAST_FROM_ASCII -DQT_NO_URL_CAST_FROM_STRING -DQT_USE_QSTRINGBUILDER)
 remove_definitions(-DQT_NO_STL)
 
@@ -269,21 +267,21 @@ add_subdirectory(doc)
 ########## Wrap tests results around the tests done within the source
 
 macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
-macro_bool_to_01(Poppler_Qt5_FOUND HAVE_POPPLER)
+macro_bool_to_01(Poppler_Qt${QT_VERSION_MAJOR}_FOUND HAVE_POPPLER)
 macro_bool_to_01(Exempi_FOUND HAVE_EXEMPI)
 macro_bool_to_01(Yaz_FOUND HAVE_YAZ)
-macro_bool_to_01(KF5Sane_FOUND HAVE_KSANE)
-macro_bool_to_01(Libkcddb_FOUND HAVE_KCDDB)
-macro_bool_to_01(KF5Cddb_FOUND HAVE_KF5KCDDB)
+macro_bool_to_01(KF${KF_MAJOR_VERSION}Sane_FOUND HAVE_KSANE)
+macro_bool_to_01(Libkcddb_FOUND HAVE_OLD_KCDDB)
+macro_bool_to_01(KF${KF_MAJOR_VERSION}Cddb_FOUND HAVE_KCDDB)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KABC)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
-macro_bool_to_01(KF5NewStuff_FOUND ENABLE_KNEWSTUFF3)
+macro_bool_to_01(KF${KF_MAJOR_VERSION}NewStuff_FOUND ENABLE_KNEWSTUFF3)
 macro_bool_to_01(Btparse_FOUND HAVE_LIBBTPARSE)
 macro_bool_to_01(CDIO_FOUND HAVE_CDIO)
 macro_bool_to_01(Csv_FOUND HAVE_LIBCSV)
-macro_bool_to_01(KF5FileMetaData_FOUND HAVE_KFILEMETADATA)
-macro_bool_to_01(Qt5Charts_FOUND HAVE_QCHARTS)
+macro_bool_to_01(KF${KF_MAJOR_VERSION}FileMetaData_FOUND HAVE_KFILEMETADATA)
+macro_bool_to_01(Qt${QT_VERSION_MAJOR}Charts_FOUND HAVE_QCHARTS)
 macro_bool_to_01(ENABLE_BTPARSE ENABLE_BTPARSE)
 macro_bool_to_01(BUILD_FETCHER_TESTS ENABLE_NETWORK_TESTS)
 

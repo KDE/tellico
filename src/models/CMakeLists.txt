@@ -21,10 +21,10 @@ add_library(tellicomodels STATIC ${models_STAT_SRCS})
 target_link_libraries(tellicomodels
     core
     images
-    Qt5::Core
-    Qt5::Gui
-    Qt5::Widgets
-    KF5::ItemModels
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Gui
+    Qt${QT_VERSION_MAJOR}::Widgets
+    KF${KF_MAJOR_VERSION}::ItemModels
 )
 
 ADD_DEPENDENCIES(tellicomodels tellico_config)

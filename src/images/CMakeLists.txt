@@ -12,10 +12,10 @@ TARGET_LINK_LIBRARIES(images
     core
     config
     utils
-    KF5::KIOCore
-    KF5::Archive
-    KF5::GuiAddons
-    Qt5::Gui
+    KF${KF_MAJOR_VERSION}::KIOCore
+    KF${KF_MAJOR_VERSION}::Archive
+    KF${KF_MAJOR_VERSION}::GuiAddons
+    Qt${QT_VERSION_MAJOR}::Gui
 )
 
 ADD_DEPENDENCIES(images tellico_config)

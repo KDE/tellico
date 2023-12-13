@@ -15,11 +15,11 @@ ADD_CUSTOM_TARGET(tellico_config DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/tellico_con
 add_library(config STATIC ${config_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(config
-    Qt5::Core
-    KF5::I18n
-    KF5::ConfigCore
-    KF5::ConfigGui
-    KF5::ConfigWidgets
+    Qt${QT_VERSION_MAJOR}::Core
+    KF${KF_MAJOR_VERSION}::I18n
+    KF${KF_MAJOR_VERSION}::ConfigCore
+    KF${KF_MAJOR_VERSION}::ConfigGui
+    KF${KF_MAJOR_VERSION}::ConfigWidgets
     )
 
 ########### install files ###############

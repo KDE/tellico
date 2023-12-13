@@ -19,4 +19,4 @@ SET(collections_STAT_SRCS
 add_library(collections STATIC ${collections_STAT_SRCS})
 
 # bibtexcollection depends on utils/bibtexhandler
-TARGET_LINK_LIBRARIES(collections utils Qt5::Core)
+TARGET_LINK_LIBRARIES(collections utils Qt${QT_VERSION_MAJOR}::Core)

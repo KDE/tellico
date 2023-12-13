@@ -455,7 +455,7 @@ void MainWindow::initActions() {
 
   IMPORT_ACTION(Import::FreeDB, "file_import_freedb", i18n("Import Audio CD Data..."),
                 i18n("Import audio CD information"), mimeIcon("media/audiocd", "application/x-cda"));
-#if !defined (HAVE_KCDDB) && !defined (HAVE_KF5KCDDB)
+#if !defined (HAVE_OLD_KCDDB) && !defined (HAVE_KCDDB)
   action->setEnabled(false);
 #endif
 

@@ -16,8 +16,8 @@
 
 #cmakedefine HAVE_KCAL
 
+#cmakedefine HAVE_OLD_KCDDB
 #cmakedefine HAVE_KCDDB
-#cmakedefine HAVE_KF5KCDDB
 
 #cmakedefine ENABLE_CDTEXT
 

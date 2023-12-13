@@ -48,26 +48,26 @@ qt_wrap_ui(gui_STAT_SRCS ${gui_UI})
 add_library(gui STATIC ${gui_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(gui
-    Qt5::Core
-    Qt5::Widgets
-    Qt5::Gui
-    KF5::KIOCore
-    KF5::KIOFileWidgets
-    KF5::SonnetCore
-    KF5::SonnetUi
-    KF5::XmlGui
-    KF5::I18n
-    KF5::TextWidgets
-    KF5::IconThemes
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Gui
+    KF${KF_MAJOR_VERSION}::KIOCore
+    KF${KF_MAJOR_VERSION}::KIOFileWidgets
+    KF${KF_MAJOR_VERSION}::SonnetCore
+    KF${KF_MAJOR_VERSION}::SonnetUi
+    KF${KF_MAJOR_VERSION}::XmlGui
+    KF${KF_MAJOR_VERSION}::I18n
+    KF${KF_MAJOR_VERSION}::TextWidgets
+    KF${KF_MAJOR_VERSION}::IconThemes
 )
 
 IF(USE_KHTML)
-  TARGET_LINK_LIBRARIES(gui KF5::KHtml)
+  TARGET_LINK_LIBRARIES(gui KF${KF_MAJOR_VERSION}::KHtml)
   ADD_DEFINITIONS(-DUSE_KHTML=${USE_KHTML})
 ELSE()
-  TARGET_LINK_LIBRARIES(gui Qt5::WebEngineWidgets)
+  TARGET_LINK_LIBRARIES(gui Qt${QT_VERSION_MAJOR}::WebEngineWidgets)
 ENDIF()
 
-IF( KF5Sane_FOUND )
-  TARGET_LINK_LIBRARIES(gui KF5::Sane)
-ENDIF( KF5Sane_FOUND )
+IF( KF${KF_MAJOR_VERSION}Sane_FOUND )
+  TARGET_LINK_LIBRARIES(gui KF${KF_MAJOR_VERSION}::Sane)
+ENDIF( KF${KF_MAJOR_VERSION}Sane_FOUND )
