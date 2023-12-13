@@ -291,7 +291,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
         if(!field && !newColl->imageFields().isEmpty()) {
           field = newColl->imageFields().front();
         } else if(!field) {
-          field = new Data::Field(QStringLiteral("cover"), i18n("Front Cover"), Data::Field::Image);
+          field = Data::Field::createDefaultField(Data::Field::FrontCoverField);
           newColl->addField(field);
         }
         entry->setField(field, id);

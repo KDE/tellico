@@ -157,8 +157,7 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("cover"), i18n("Front Cover"), Field::Image);
-  list.append(field);
+  list.append(Field::createDefaultField(Field::FrontCoverField));
 
   field = new Field(QStringLiteral("plot"), i18n("Plot Summary"), Field::Para);
   list.append(field);

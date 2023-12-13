@@ -319,7 +319,8 @@ public:
     PegiField,
     ImdbField,
     EpisodeField,
-    ScreenshotField
+    ScreenshotField,
+    FrontCoverField
   };
 
   static FieldPtr createDefaultField(DefaultField field);

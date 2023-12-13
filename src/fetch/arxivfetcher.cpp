@@ -207,7 +207,7 @@ Tellico::Data::EntryPtr ArxivFetcher::fetchEntryHook(uint uid_) {
     if(!field && !coll->imageFields().isEmpty()) {
       field = coll->imageFields().front();
     } else if(!field) {
-      field = new Data::Field(QStringLiteral("cover"), i18n("Front Cover"), Data::Field::Image);
+      field = Data::Field::createDefaultField(Data::Field::FrontCoverField);
       coll->addField(field);
     }
     if(entry->field(field).isEmpty()) {
