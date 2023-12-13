@@ -27,7 +27,6 @@
 #include "librarythingtest.h"
 
 #include "../translators/librarythingimporter.h"
-#include "../fieldformat.h"
 
 #include <KLocalizedString>
 
@@ -41,7 +40,8 @@ void LibraryThingTest::initTestCase() {
 
 void LibraryThingTest::testImport() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/librarything.json"));
-   Tellico::Import::LibraryThingImporter importer(url);
+  Tellico::Import::LibraryThingImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Book));
   // shut the importer up about current collection
 //  Tellico::Data::CollPtr tmpColl(new Tellico::Data::BibtexCollection(true));
 //  importer.setCurrentCollection(tmpColl);

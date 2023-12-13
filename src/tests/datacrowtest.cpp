@@ -56,6 +56,7 @@ void DataCrowTest::initTestCase() {
 void DataCrowTest::testBooks() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/datacrow_books.xml"));
   Tellico::Import::DataCrowImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Book));
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
@@ -87,6 +88,7 @@ void DataCrowTest::testBooks() {
 void DataCrowTest::testMovies() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/datacrow_movies.xml"));
   Tellico::Import::DataCrowImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Video));
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
@@ -124,6 +126,7 @@ void DataCrowTest::testMovies() {
 void DataCrowTest::testMusic() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/datacrow_music.xml"));
   Tellico::Import::DataCrowImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Album));
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);

@@ -32,7 +32,6 @@
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
-#include "../fieldformat.h"
 #include "../utils/datafileregistry.h"
 
 #include <KLocalizedString>

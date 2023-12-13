@@ -56,6 +56,7 @@ void CollectorzTest::initTestCase() {
 void CollectorzTest::testBooks() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/collectorz_books.xml"));
   Tellico::Import::CollectorzImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Book));
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
@@ -85,6 +86,7 @@ void CollectorzTest::testBooks() {
 void CollectorzTest::testMovies() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/collectorz_movies.xml"));
   Tellico::Import::CollectorzImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Video));
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
@@ -127,6 +129,7 @@ void CollectorzTest::testMovies() {
 void CollectorzTest::testMusic() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/collectorz_music.xml"));
   Tellico::Import::CollectorzImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Album));
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);

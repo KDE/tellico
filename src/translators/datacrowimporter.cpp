@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "datacrowimporter.h"
-#include "xslthandler.h"
 #include "../collection.h"
 #include "../images/imagefactory.h"
 #include "../utils/datafileregistry.h"

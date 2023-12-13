@@ -27,8 +27,6 @@
 #include "audiofiletest.h"
 
 #include "../translators/audiofileimporter.h"
-#include "../collections/musiccollection.h"
-#include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 
@@ -97,7 +95,9 @@ void AudioFileTest::testOgg() {
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Album"));
   QCOMPARE(entry->field("artist"), QStringLiteral("Album Artist"));
-  QCOMPARE(entry->field("track"), QStringLiteral("Test OGG::The Artist::0:03"));
+  // test file uses Disc 2
+  QVERIFY(entry->field("track").isEmpty());
+  QCOMPARE(entry->field("track2"), QStringLiteral("Test OGG::The Artist::0:03"));
   QCOMPARE(entry->field("year"), QStringLiteral("2020"));
   QCOMPARE(entry->field("genre"), QStringLiteral("The Genre"));
   QCOMPARE(entry->field("label"), QStringLiteral("Label"));
