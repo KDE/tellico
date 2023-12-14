@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-13 00:42+0000\n"
+"POT-Creation-Date: 2023-12-14 00:42+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -1080,10 +1080,10 @@ msgid "Cover"
 msgstr "Omslag"
 
 #: src/collections/boardgamecollection.cpp:123
-#: src/collections/bookcollection.cpp:185
+#: src/collections/bookcollection.cpp:184
 #: src/collections/cardcollection.cpp:126
 #: src/collections/coincollection.cpp:142
-#: src/collections/comicbookcollection.cpp:166
+#: src/collections/comicbookcollection.cpp:165
 #: src/collections/gamecollection.cpp:126
 #: src/collections/musiccollection.cpp:121
 #: src/collections/stampcollection.cpp:143
@@ -1212,17 +1212,8 @@ msgstr "Signeret"
 msgid "Read"
 msgstr "Læst"
 
-#: src/collections/bookcollection.cpp:179
-#: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
-#: src/fetch/crossreffetcher.cpp:193 src/translators/ebookimporter.cpp:158
-#: src/translators/pdfimporter.cpp:294
-#: src/translators/referencerimporter.cpp:62
-#, kde-format
-msgid "Front Cover"
-msgstr "Omslagets forside"
-
-#: src/collections/bookcollection.cpp:182
-#: src/collections/comicbookcollection.cpp:163
+#: src/collections/bookcollection.cpp:181
+#: src/collections/comicbookcollection.cpp:162
 #: src/collections/videocollection.cpp:190
 #, kde-format
 msgid "Plot Summary"
@@ -4809,6 +4800,11 @@ msgctxt "TV Episode"
 msgid "Episode"
 msgstr "Afsnit"
 
+#: src/field.cpp:346
+#, kde-format
+msgid "Front Cover"
+msgstr "Omslagets forside"
+
 #: src/filterdialog.cpp:62
 #, kde-format
 msgid "Advanced Filter"
@@ -7118,7 +7114,7 @@ msgstr "<Nyt felt>"
 msgid "Discogs Options"
 msgstr "Discogs-link"
 
-#: src/translators/filelistingimporter.cpp:87
+#: src/translators/filelistingimporter.cpp:85
 #, kde-format
 msgid "Scanning files..."
 msgstr "Scanner filer..."

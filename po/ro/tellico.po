@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-13 00:42+0000\n"
+"POT-Creation-Date: 2023-12-14 00:42+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -1040,10 +1040,10 @@ msgid "Cover"
 msgstr "Ies..."
 
 #: src/collections/boardgamecollection.cpp:123
-#: src/collections/bookcollection.cpp:185
+#: src/collections/bookcollection.cpp:184
 #: src/collections/cardcollection.cpp:126
 #: src/collections/coincollection.cpp:142
-#: src/collections/comicbookcollection.cpp:166
+#: src/collections/comicbookcollection.cpp:165
 #: src/collections/gamecollection.cpp:126
 #: src/collections/musiccollection.cpp:121
 #: src/collections/stampcollection.cpp:143
@@ -1172,17 +1172,8 @@ msgstr "Semnată"
 msgid "Read"
 msgstr "Citită"
 
-#: src/collections/bookcollection.cpp:179
-#: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
-#: src/fetch/crossreffetcher.cpp:193 src/translators/ebookimporter.cpp:158
-#: src/translators/pdfimporter.cpp:294
-#: src/translators/referencerimporter.cpp:62
-#, fuzzy, kde-format
-msgid "Front Cover"
-msgstr "Ies..."
-
-#: src/collections/bookcollection.cpp:182
-#: src/collections/comicbookcollection.cpp:163
+#: src/collections/bookcollection.cpp:181
+#: src/collections/comicbookcollection.cpp:162
 #: src/collections/videocollection.cpp:190
 #, kde-format
 msgid "Plot Summary"
@@ -4684,6 +4675,11 @@ msgctxt "TV Episode"
 msgid "Episode"
 msgstr ""
 
+#: src/field.cpp:346
+#, fuzzy, kde-format
+msgid "Front Cover"
+msgstr "Ies..."
+
 #: src/filterdialog.cpp:62
 #, fuzzy, kde-format
 msgid "Advanced Filter"
@@ -6925,7 +6921,7 @@ msgstr "Șterge carte"
 msgid "Discogs Options"
 msgstr "Opțiuni generale"
 
-#: src/translators/filelistingimporter.cpp:87
+#: src/translators/filelistingimporter.cpp:85
 #, fuzzy, kde-format
 msgid "Scanning files..."
 msgstr "Salvez fișierul..."

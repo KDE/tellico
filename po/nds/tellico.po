@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-13 00:42+0000\n"
+"POT-Creation-Date: 2023-12-14 00:42+0000\n"
 "PO-Revision-Date: 2011-12-11 07:08+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -1088,10 +1088,10 @@ msgid "Cover"
 msgstr "Titelbild"
 
 #: src/collections/boardgamecollection.cpp:123
-#: src/collections/bookcollection.cpp:185
+#: src/collections/bookcollection.cpp:184
 #: src/collections/cardcollection.cpp:126
 #: src/collections/coincollection.cpp:142
-#: src/collections/comicbookcollection.cpp:166
+#: src/collections/comicbookcollection.cpp:165
 #: src/collections/gamecollection.cpp:126
 #: src/collections/musiccollection.cpp:121
 #: src/collections/stampcollection.cpp:143
@@ -1221,17 +1221,8 @@ msgstr "Ünnerschreven"
 msgid "Read"
 msgstr "Leest"
 
-#: src/collections/bookcollection.cpp:179
-#: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
-#: src/fetch/crossreffetcher.cpp:193 src/translators/ebookimporter.cpp:158
-#: src/translators/pdfimporter.cpp:294
-#: src/translators/referencerimporter.cpp:62
-#, kde-format
-msgid "Front Cover"
-msgstr "Vörsiet"
-
-#: src/collections/bookcollection.cpp:182
-#: src/collections/comicbookcollection.cpp:163
+#: src/collections/bookcollection.cpp:181
+#: src/collections/comicbookcollection.cpp:162
 #: src/collections/videocollection.cpp:190
 #, kde-format
 msgid "Plot Summary"
@@ -4858,6 +4849,11 @@ msgctxt "TV Episode"
 msgid "Episode"
 msgstr "Kapitels"
 
+#: src/field.cpp:346
+#, kde-format
+msgid "Front Cover"
+msgstr "Vörsiet"
+
 #: src/filterdialog.cpp:62
 #, kde-format
 msgid "Advanced Filter"
@@ -7200,7 +7196,7 @@ msgstr "Nieg Feld"
 msgid "Discogs Options"
 msgstr "Discogs-Link"
 
-#: src/translators/filelistingimporter.cpp:87
+#: src/translators/filelistingimporter.cpp:85
 #, kde-format
 msgid "Scanning files..."
 msgstr "Dateien warrt dörkeken..."

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-13 00:42+0000\n"
+"POT-Creation-Date: 2023-12-14 00:42+0000\n"
 "PO-Revision-Date: 2023-10-20 10:59+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -1072,10 +1072,10 @@ msgid "Cover"
 msgstr "Kapak"
 
 #: src/collections/boardgamecollection.cpp:123
-#: src/collections/bookcollection.cpp:185
+#: src/collections/bookcollection.cpp:184
 #: src/collections/cardcollection.cpp:126
 #: src/collections/coincollection.cpp:142
-#: src/collections/comicbookcollection.cpp:166
+#: src/collections/comicbookcollection.cpp:165
 #: src/collections/gamecollection.cpp:126
 #: src/collections/musiccollection.cpp:121
 #: src/collections/stampcollection.cpp:143
@@ -1204,17 +1204,8 @@ msgstr "İmzalı"
 msgid "Read"
 msgstr "Okundu"
 
-#: src/collections/bookcollection.cpp:179
-#: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
-#: src/fetch/crossreffetcher.cpp:193 src/translators/ebookimporter.cpp:158
-#: src/translators/pdfimporter.cpp:294
-#: src/translators/referencerimporter.cpp:62
-#, kde-format
-msgid "Front Cover"
-msgstr "Ön Kapak"
-
-#: src/collections/bookcollection.cpp:182
-#: src/collections/comicbookcollection.cpp:163
+#: src/collections/bookcollection.cpp:181
+#: src/collections/comicbookcollection.cpp:162
 #: src/collections/videocollection.cpp:190
 #, kde-format
 msgid "Plot Summary"
@@ -4770,6 +4761,11 @@ msgctxt "TV Episode"
 msgid "Episode"
 msgstr "Bölüm"
 
+#: src/field.cpp:346
+#, kde-format
+msgid "Front Cover"
+msgstr "Ön Kapak"
+
 #: src/filterdialog.cpp:62
 #, kde-format
 msgid "Advanced Filter"
@@ -7043,7 +7039,7 @@ msgstr "<Yeni Alan>"
 msgid "Discogs Options"
 msgstr "Discogs Seçenekleri"
 
-#: src/translators/filelistingimporter.cpp:87
+#: src/translators/filelistingimporter.cpp:85
 #, kde-format
 msgid "Scanning files..."
 msgstr "Dosyalar taranıyor..."
