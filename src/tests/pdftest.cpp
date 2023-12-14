@@ -55,6 +55,8 @@ void PdfTest::initTestCase() {
 void PdfTest::testScienceDirect() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-sciencedirect.pdf"));
   Tellico::Import::PDFImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Book));
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Bibtex));
 
   Tellico::Data::CollPtr coll = importer.collection();
 
