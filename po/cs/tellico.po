@@ -7393,21 +7393,3 @@ msgstr "Hledat"
 #, kde-format
 msgid "Clear"
 msgstr "Vymazat"
-
-#~ msgid "Internet Movie Database (French)"
-#~ msgstr "Internetová databáze filmů (Francouzsky)"
-
-#~ msgid "Internet Movie Database (Spanish)"
-#~ msgstr "Internetová databáze filmů (Španělsky)"
-
-#~ msgid "Internet Movie Database (German)"
-#~ msgstr "Internetová databáze filmů (Německy)"
-
-#~ msgid "Internet Movie Database (Italian)"
-#~ msgstr "Internetová databáze filmů (Italsky)"
-
-#~ msgid "Internet Movie Database (Portuguese)"
-#~ msgstr "Internetová databáze filmů (Portugalsky)"
-
-#~ msgid "Download cover &image"
-#~ msgstr "Stáhnout obrázek &obálky"
