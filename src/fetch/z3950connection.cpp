@@ -565,7 +565,7 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
   size_t len = marc_.left(5).toInt(&ok);
 #endif
   if(ok && (len < 25 || len > 100000)) {
-    myDebug() << "bad length:" << (ok ? len : -1);
+    myDebug() << "bad length:" << len;
     return QString();
   }
 
