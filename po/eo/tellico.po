@@ -68,7 +68,7 @@ msgstr "Titololisto (Vertikala)"
 #, kde-format
 msgctxt "Group View XSL Template"
 msgid "Group View"
-msgstr "Grupvida"
+msgstr "Grupvido"
 
 #. i18n: file: xslt/report-templates/Loan_View.xsl
 #, kde-format
@@ -6264,7 +6264,7 @@ msgstr ""
 #: src/mainwindow.cpp:882
 #, kde-format
 msgid "Group View"
-msgstr "Grupvida"
+msgstr "Grupvido"
 
 #: src/mainwindow.cpp:891
 #, kde-format
