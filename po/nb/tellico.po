@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-09 00:42+0000\n"
+"POT-Creation-Date: 2023-12-14 00:42+0000\n"
 "PO-Revision-Date: 2020-11-13 17:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -741,7 +741,7 @@ msgstr "Generelt"
 #: src/collections/bookcollection.cpp:32
 #: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:362
 #: src/field.cpp:314 src/translators/grs1importer.cpp:75
-#: src/translators/pdfimporter.cpp:229
+#: src/translators/pdfimporter.cpp:233
 #, kde-format
 msgid "Publishing"
 msgstr "Utgivelse"
@@ -1070,10 +1070,10 @@ msgid "Cover"
 msgstr "Omslag"
 
 #: src/collections/boardgamecollection.cpp:123
-#: src/collections/bookcollection.cpp:185
+#: src/collections/bookcollection.cpp:184
 #: src/collections/cardcollection.cpp:126
 #: src/collections/coincollection.cpp:142
-#: src/collections/comicbookcollection.cpp:166
+#: src/collections/comicbookcollection.cpp:165
 #: src/collections/gamecollection.cpp:126
 #: src/collections/musiccollection.cpp:121
 #: src/collections/stampcollection.cpp:143
@@ -1202,17 +1202,8 @@ msgstr "Signert"
 msgid "Read"
 msgstr "Lest"
 
-#: src/collections/bookcollection.cpp:179
-#: src/collections/comicbookcollection.cpp:160 src/fetch/arxivfetcher.cpp:210
-#: src/fetch/crossreffetcher.cpp:193 src/translators/ebookimporter.cpp:158
-#: src/translators/pdfimporter.cpp:290
-#: src/translators/referencerimporter.cpp:62
-#, kde-format
-msgid "Front Cover"
-msgstr "Forside"
-
-#: src/collections/bookcollection.cpp:182
-#: src/collections/comicbookcollection.cpp:163
+#: src/collections/bookcollection.cpp:181
+#: src/collections/comicbookcollection.cpp:162
 #: src/collections/videocollection.cpp:190
 #, kde-format
 msgid "Plot Summary"
@@ -3941,7 +3932,7 @@ msgstr "UPC/EAN"
 msgid "Keyword"
 msgstr "Nøkkelord"
 
-#: src/fetch/fetchmanager.cpp:72 src/translators/pdfimporter.cpp:228
+#: src/fetch/fetchmanager.cpp:72 src/translators/pdfimporter.cpp:232
 #, kde-format
 msgid "arXiv ID"
 msgstr "arXiv ID"
@@ -4763,6 +4754,11 @@ msgstr ""
 msgctxt "TV Episode"
 msgid "Episode"
 msgstr ""
+
+#: src/field.cpp:346
+#, kde-format
+msgid "Front Cover"
+msgstr "Forside"
 
 #: src/filterdialog.cpp:62
 #, kde-format
@@ -7031,7 +7027,7 @@ msgstr ""
 msgid "Discogs Options"
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:87
+#: src/translators/filelistingimporter.cpp:85
 #, kde-format
 msgid "Scanning files..."
 msgstr "Ser gjennom filer …"
@@ -7249,7 +7245,7 @@ msgstr ""
 msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr "Tellico klarte ikke å lese noen metadata fra PDF-fila."
 
-#: src/translators/pdfimporter.cpp:317
+#: src/translators/pdfimporter.cpp:321
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "
