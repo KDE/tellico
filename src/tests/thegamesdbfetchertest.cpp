@@ -25,7 +25,7 @@
 #include "thegamesdbfetchertest.h"
 
 #include "../fetch/thegamesdbfetcher.h"
-#include "../collectionfactory.h"
+#include "../collections/gamecollection.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
@@ -79,6 +79,7 @@ void TheGamesDBFetcherTest::testTitle() {
                                        QStringLiteral("Goldeneye 007"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheGamesDBFetcher(this));
   fetcher->readConfig(m_config);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -96,4 +97,27 @@ void TheGamesDBFetcherTest::testTitle() {
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("screenshot")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("screenshot")).contains(QLatin1Char('/')));
+}
+
+void TheGamesDBFetcherTest::testUpdate() {
+  if(!m_config.isValid()) {
+    QSKIP("This test requires a config file with TGDB settings.", SkipAll);
+  }
+  Tellico::Data::CollPtr coll(new Tellico::Data::GameCollection(true));
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry);
+  entry->setField(QStringLiteral("title"), QStringLiteral("GoldenEye 007"));
+  entry->setField(QStringLiteral("platform"), QStringLiteral("Nintendo 64"));
+
+  Tellico::Fetch::TheGamesDBFetcher fetcher(this);
+  qApp->processEvents(); // allow time for timer to load cached data
+  auto request = fetcher.updateRequest(entry);
+  QCOMPARE(request.key(), Tellico::Fetch::Title);
+  QCOMPARE(request.value(), QStringLiteral("GoldenEye 007"));
+  QCOMPARE(request.data(), QLatin1String("3"));
+
+  fetcher.readConfig(m_config);
+  request.setCollectionType(coll->type());
+  Tellico::Data::EntryList results = DO_FETCH1(&fetcher, request, 1);
+  QCOMPARE(results.size(), 1);
 }
