@@ -251,7 +251,8 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
   Data::EntryPtr entry(new Data::Entry(coll));
   coll->addEntries(entry);
 
-  QRegularExpression anchorRx(QStringLiteral("<a.+?href=[\"'].+?[\"'].*?>(.*?)</"));
+  const QRegularExpression tagRx(QLatin1String("<.*?>"));
+  const QRegularExpression anchorRx(QStringLiteral("<a.+?href=[\"'].+?[\"'].*?>(.*?)</"));
 
   QRegularExpression titleRx(QStringLiteral("<span itemprop=[\"']name[\"']>(.+?)</span"));
   QRegularExpressionMatch match = titleRx.match(str_);
@@ -327,9 +328,9 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
     QRegularExpressionMatchIterator i = anchorRx.globalMatch(innerText);
     while(i.hasNext()) {
       match = i.next();
-      const QString s = match.captured(1).simplified();
+      QString s = match.captured(1).simplified();
       if(!s.isEmpty()) {
-        directors += s;
+        directors += s.remove(tagRx);
       }
     }
     if(!directors.isEmpty()) {
@@ -395,17 +396,17 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
 
   QRegularExpression castRx(QStringLiteral("Актори(.+?)<(header|/section)"),
                             QRegularExpression::DotMatchesEverythingOption);
-  QRegularExpressionMatch match = castRx.match(str_);
+  auto match = castRx.match(str_);
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
     QStringList actors, roles;
-    QRegularExpressionMatchIterator i = nameDivRx.globalMatch(innerText);
+    auto i = nameDivRx.globalMatch(innerText);
     while(i.hasNext()) {
       match = i.next();
       QRegularExpressionMatch anchorMatch = anchorRx.match(match.captured(1));
       if(anchorMatch.hasMatch()) {
         actors += anchorMatch.captured(1).simplified();
-        QRegularExpressionMatch roleMatch = roleRx.match(match.captured(1));
+        auto roleMatch = roleRx.match(match.captured(1));
         roles += roleMatch.hasMatch() ? roleMatch.captured(1).simplified() : QString();
       }
     }
@@ -430,10 +431,10 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
     QStringList writers;
-    QRegularExpressionMatchIterator i = nameDivRx.globalMatch(innerText);
+    auto i = nameDivRx.globalMatch(innerText);
     while(i.hasNext()) {
       match = i.next();
-      QRegularExpressionMatch anchorMatch = anchorRx.match(match.captured(1));
+      auto anchorMatch = anchorRx.match(match.captured(1));
       if(anchorMatch.hasMatch()) {
         writers += anchorMatch.captured(1).simplified();
       }
@@ -449,10 +450,10 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
     QStringList producers;
-    QRegularExpressionMatchIterator i = nameDivRx.globalMatch(innerText);
+    auto i = nameDivRx.globalMatch(innerText);
     while(i.hasNext()) {
       match = i.next();
-      QRegularExpressionMatch anchorMatch = anchorRx.match(match.captured(1));
+      auto anchorMatch = anchorRx.match(match.captured(1));
       if(anchorMatch.hasMatch()) {
         producers += anchorMatch.captured(1).simplified();
       }
@@ -468,10 +469,10 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
     QStringList composers;
-    QRegularExpressionMatchIterator i = nameDivRx.globalMatch(innerText);
+    auto i = nameDivRx.globalMatch(innerText);
     while(i.hasNext()) {
       match = i.next();
-      QRegularExpressionMatch anchorMatch = anchorRx.match(match.captured(1));
+      auto anchorMatch = anchorRx.match(match.captured(1));
       if(anchorMatch.hasMatch()) {
         composers += anchorMatch.captured(1).simplified();
       }
