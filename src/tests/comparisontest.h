@@ -45,6 +45,7 @@ private Q_SLOTS:
   void testBool();
   void testBool_data();
   void testChoiceField();
+  void testImage();
 };
 
 #endif

@@ -27,6 +27,7 @@
 #include "comparisontest.h"
 #include "../models/stringcomparison.h"
 #include "../models/fieldcomparison.h"
+#include "../images/imagefactory.h"
 #include "../config/tellico_config.h"
 
 #include <KLocalizedString>
@@ -38,6 +39,7 @@ QTEST_GUILESS_MAIN( ComparisonTest )
 void ComparisonTest::initTestCase() {
   KLocalizedString::setApplicationDomain("tellico");
   Tellico::Config::setArticlesString(QStringLiteral("the,l'"));
+  Tellico::ImageFactory::init();
 }
 
 void ComparisonTest::testNumber() {
@@ -214,4 +216,28 @@ void ComparisonTest::testChoiceField() {
   Tellico::FieldComparison* comp = Tellico::FieldComparison::create(field);
   // even though the second allowed value would sort first, it comes second in the list
   QCOMPARE(comp->compare(entry1, entry2), -1);
+}
+
+void ComparisonTest::testImage() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("image"), QStringLiteral("Image"), Tellico::Data::Field::Image));
+  coll->addField(field);
+
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
+
+  Tellico::FieldComparison* comp = Tellico::FieldComparison::create(field);
+  QCOMPARE(comp->compare(entry1, entry2), 0);
+
+  QUrl u1 = QUrl::fromLocalFile(QFINDTESTDATA("data/img1.jpg"));
+  QString id1 = Tellico::ImageFactory::addImage(u1);
+  QUrl u2 = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/128-apps-tellico.png"));
+  QString id2 = Tellico::ImageFactory::addImage(u2);
+
+  entry1->setField(QLatin1String("image"), id1);
+  QCOMPARE(comp->compare(entry1, entry2), 1);
+  entry2->setField(QLatin1String("image"), id1);
+  QCOMPARE(comp->compare(entry1, entry2), 0);
+  entry2->setField(QLatin1String("image"), id2);
+  QVERIFY(comp->compare(entry1, entry2) < 0);
 }
