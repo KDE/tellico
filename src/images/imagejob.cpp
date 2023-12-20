@@ -128,9 +128,13 @@ void ImageJob::getJobResult(KJob* job_) {
     m_image = Data::Image::null;
   } else {
     // if we can't write the input format, then change to one we can
-    m_image.setFormat(Data::Image::outputFormat(m_image.format()));
-    if(m_id.isEmpty()) {
-      m_image.calculateID();
+    const auto outputFormat = Data::Image::outputFormat(m_image.format());
+    if(m_image.format() != outputFormat) {
+      m_image.setFormat(outputFormat);
+      // recalculate m_id if necessary, since the format is included in the id
+      if(m_id.isEmpty()) {
+        m_image.calculateID();
+      }
     }
     if(m_linkOnly) {
       m_image.setLinkOnly(true);
