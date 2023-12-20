@@ -380,8 +380,8 @@ void Z3950Connection::run() {
 #endif
       data = toXML(ZOOM_record_get(rec, "raw", &len), m_responseCharSet);
     }
-    Z3950ResultFound* ev = new Z3950ResultFound(data);
     if(m_fetcher) {
+      auto ev = new Z3950ResultFound(data);
       QApplication::postEvent(m_fetcher.data(), ev);
     }
   }

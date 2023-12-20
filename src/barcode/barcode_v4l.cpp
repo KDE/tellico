@@ -106,10 +106,8 @@ barcode_v4l::~barcode_v4l()
 {
   if (m_fd >= 0)
     v4l1_close(m_fd);
-  if (m_buffer)
-    delete m_buffer;
-  if (m_image)
-    delete m_image;
+  delete m_buffer;
+  delete m_image;
 }
 
 bool barcode_v4l::isOpen()
