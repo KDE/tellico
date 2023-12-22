@@ -37,11 +37,13 @@
 #include <KConfigGroup>
 
 #include <QTest>
+#include <QLoggingCategory>
 
 QTEST_GUILESS_MAIN( OPDSFetcherTest )
 
 OPDSFetcherTest::OPDSFetcherTest() : AbstractFetcherTest() {
   QStandardPaths::setTestModeEnabled(true);
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = true"));
 }
 
 void OPDSFetcherTest::initTestCase() {
@@ -58,6 +60,7 @@ void OPDSFetcherTest::testFeedbooksSearch() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
                                        "9781773231341");
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
   fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -85,6 +88,7 @@ void OPDSFetcherTest::testEmptyGutenberg() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
                                        "XXXXXXXXXXXX");
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
   fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -114,6 +118,7 @@ void OPDSFetcherTest::testAcquisitionByTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
                                        "Pride and Prejudice");
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
   fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -138,6 +143,7 @@ void OPDSFetcherTest::testAcquisitionByTitleNegative() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
                                        "Nonexistent");
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
   fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
