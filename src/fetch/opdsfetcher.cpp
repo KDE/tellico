@@ -90,7 +90,7 @@ bool OPDSFetcher::Reader::parse() {
 
 bool OPDSFetcher::Reader::readSearchTemplate() {
   //    myDebug() << "Reading catalog:" << catalog;
-  if(!parse()) return false;
+  if(searchUrl.isEmpty() && !isAcquisition && !parse()) return false;
   if(searchUrl.isEmpty()) return false;
   //    myDebug() << "Reading search description:" << searchDescriptionUrl;
   // read the search description and find the search template
