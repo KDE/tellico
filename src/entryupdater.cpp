@@ -250,8 +250,8 @@ Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(const ResultList& resu
 }
 
 void EntryUpdater::mergeCurrent(Tellico::Data::EntryPtr entry_, bool overWrite_) {
-  Data::EntryPtr currEntry = m_entriesToUpdate.front();
   if(entry_) {
+    Data::EntryPtr currEntry = m_entriesToUpdate.front();
     m_matchedEntries.append(entry_);
     Kernel::self()->updateEntry(currEntry, entry_, overWrite_);
     if(m_entriesToUpdate.count() % CHECK_COLLECTION_IMAGES_STEP_SIZE == 1) {
