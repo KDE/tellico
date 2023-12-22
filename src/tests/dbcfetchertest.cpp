@@ -54,19 +54,19 @@ void DBCFetcherTest::testTitle() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp. 6. bog"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp. 6"));
   QCOMPARE(entry->field(QStringLiteral("author")), QString::fromUtf8("Karl Ove Knausgård"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Lindhardt og Ringhof"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2012"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-87-11-39509-7"));
   QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("E-Book"));
-  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("barndomserindringer; erindringer"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("biografiske romaner"));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
 
 void DBCFetcherTest::testIsbn() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
-                                       QStringLiteral("9788711391839"));
+                                       QStringLiteral("978-87-11-39509-7"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DBCFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -74,21 +74,20 @@ void DBCFetcherTest::testIsbn() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp. 1. bog"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp. 6"));
   QCOMPARE(entry->field(QStringLiteral("author")), QString::fromUtf8("Karl Ove Knausgård"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Lindhardt og Ringhof"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2012"));
-  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-87-11-39183-9"));
-  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("487"));
-  QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("Dansk"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-87-11-39509-7"));
+  QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("dansk"));
   QCOMPARE(entry->field(QStringLiteral("translator")), QStringLiteral("Sara Koch"));
-  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("barndomserindringer; erindringer"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("biografiske romaner"));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
 
 void DBCFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Keyword,
-                                       QStringLiteral("9788711391839"));
+                                       QStringLiteral("9788711395097"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DBCFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -96,12 +95,13 @@ void DBCFetcherTest::testKeyword() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp. 1. bog"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp. 6"));
   QCOMPARE(entry->field(QStringLiteral("author")), QString::fromUtf8("Karl Ove Knausgård"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Lindhardt og Ringhof"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2012"));
-  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-87-11-39183-9"));
-  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("487"));
-  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("barndomserindringer; erindringer"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-87-11-39509-7"));
+  QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("dansk"));
+  QCOMPARE(entry->field(QStringLiteral("translator")), QStringLiteral("Sara Koch"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("biografiske romaner"));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
