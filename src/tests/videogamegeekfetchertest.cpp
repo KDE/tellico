@@ -26,7 +26,6 @@
 
 #include "videogamegeekfetchertest.h"
 
-#include "../fetch/execexternalfetcher.h"
 #include "../fetch/videogamegeekfetcher.h"
 #include "../collections/gamecollection.h"
 #include "../collectionfactory.h"
@@ -53,6 +52,7 @@ void VideoGameGeekFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
                                        QStringLiteral("Mass Effect 3 Citadel"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::VideoGameGeekFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -70,4 +70,28 @@ void VideoGameGeekFetcherTest::testKeyword() {
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   QCOMPARE(entry->field(QStringLiteral("videogamegeek-link")), QStringLiteral("https://www.videogamegeek.com/videogame/139806"));
+}
+
+void VideoGameGeekFetcherTest::testUpdate() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::GameCollection(true));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("bggid"), QStringLiteral("bggid")));
+  coll->addField(field);
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry);
+  entry->setField(QStringLiteral("bggid"), QStringLiteral("139806"));
+
+  Tellico::Fetch::VideoGameGeekFetcher fetcher(this);
+  auto request = fetcher.updateRequest(entry);
+  request.setCollectionType(coll->type());
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QCOMPARE(request.value(), QStringLiteral("139806"));
+
+  Tellico::Data::EntryList results = DO_FETCH1(&fetcher, request, 1);
+  QCOMPARE(results.size(), 1);
+
+  entry = results.at(0);
+  QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Game);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Mass Effect 3 - Citadel"));
+  QCOMPARE(entry->field(QStringLiteral("developer")), QStringLiteral("BioWare"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Electronic Arts Inc. (EA)"));
 }

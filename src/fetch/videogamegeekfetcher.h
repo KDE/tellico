@@ -29,6 +29,7 @@
 #include "configwidget.h"
 #include "../datavectors.h"
 
+class VideoGameGeekFetcherTest;
 namespace Tellico {
   namespace GUI {
     class ComboBox;
@@ -43,6 +44,8 @@ namespace Tellico {
  */
 class VideoGameGeekFetcher : public XMLFetcher {
 Q_OBJECT
+
+friend class ::VideoGameGeekFetcherTest;
 
 public:
   /**

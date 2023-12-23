@@ -28,7 +28,6 @@
 
 #include "../fetch/rpggeekfetcher.h"
 #include "../collection.h"
-#include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
@@ -57,6 +56,7 @@ void RPGGeekFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Base, Tellico::Fetch::Keyword,
                                        QStringLiteral("Winds of the North"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::RPGGeekFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
   fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -64,6 +64,47 @@ void RPGGeekFetcherTest::testKeyword() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Base);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Winds of the North"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("(Self-Published)"));
+  QCOMPARE(entry->field(QStringLiteral("designer")), QStringLiteral("Thomas King"));
+  QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Nils Bergslien"));
+  QCOMPARE(entry->field(QStringLiteral("producer")), QStringLiteral("Thomas King"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Culture; History; History (Medieval); History (Vikings); Mythology / Folklore"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("0"));
+  auto genres = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("genre")));
+  QVERIFY(genres.count() > 2);
+  QVERIFY(genres.contains(QStringLiteral("Culture")));
+  auto mechs = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("mechanism")));
+  QVERIFY(mechs.count() > 2);
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("rpggeek-link")), QStringLiteral("https://rpggeek.com/rpgitem/338762"));
+}
+
+void RPGGeekFetcherTest::testUpdate() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("bggid"), QStringLiteral("bggid")));
+  coll->addField(field);
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry);
+  entry->setField(QStringLiteral("bggid"), QStringLiteral("338762"));
+
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("rpggeek"));
+  cg.writeEntry("Custom Fields", QStringLiteral("genre,year,publisher,artist,designer,producer,mechanism,description,rpggeek-link"));
+
+  Tellico::Fetch::RPGGeekFetcher fetcher(this);
+  auto request = fetcher.updateRequest(entry);
+  request.setCollectionType(coll->type());
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QCOMPARE(request.value(), QStringLiteral("338762"));
+  fetcher.readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH1(&fetcher, request, 1);
+  QCOMPARE(results.size(), 1);
+
+  entry = results.at(0);
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Base);
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Winds of the North"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("(Self-Published)"));
