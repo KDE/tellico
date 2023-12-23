@@ -149,9 +149,9 @@ void KinoFetcher::slotComplete(KJob*) {
   QRegularExpression dateRx(QStringLiteral("\\d{2}\\.\\d{2}\\.(\\d{4})"));
   QRegularExpression yearEndRx(QStringLiteral("(\\d{4})/?$"));
 
-  QRegularExpressionMatchIterator i = linkRx.globalMatch(pageText);
+  auto i = linkRx.globalMatch(pageText);
   while(i.hasNext()) {
-    QRegularExpressionMatch match = i.next();
+    auto match = i.next();
     QString u = match.captured(1);
     if(u.isEmpty() || u.contains(QLatin1String("news")) || !u.contains(QLatin1String("film"))) {
       continue;
@@ -166,7 +166,7 @@ void KinoFetcher::slotComplete(KJob*) {
     entry->setField(QStringLiteral("title"), match.captured(2));
 
     QString y;
-    QRegularExpressionMatch dateMatch = dateSpanRx.match(pageText, match.capturedEnd());
+    auto dateMatch = dateSpanRx.match(pageText, match.capturedEnd());
     if(dateMatch.hasMatch()) {
       y = dateRx.match(dateMatch.captured(1)).captured(1);
     } else {
@@ -200,7 +200,7 @@ Tellico::Data::EntryPtr KinoFetcher::fetchEntryHook(uint uid_) {
 
   QString results = Tellico::decodeHTML(FileHandler::readTextFile(m_matches[uid_], true, true));
   if(results.isEmpty()) {
-    myDebug() << "no text results from" << m_matches[uid_];
+    myDebug() << "No text results from" << m_matches[uid_];
     return entry;
   }
 
@@ -222,9 +222,9 @@ Tellico::Data::EntryPtr KinoFetcher::fetchEntryHook(uint uid_) {
 }
 
 void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
-  QRegularExpression jsonRx(QStringLiteral("<script type=\"application/ld\\+json\">(.*?)</script"),
-                            QRegularExpression::DotMatchesEverythingOption);
-  QRegularExpressionMatchIterator i = jsonRx.globalMatch(str_);
+  static const QRegularExpression jsonRx(QStringLiteral("<script type=\"application/ld\\+json\">(.*?)</script"),
+                                         QRegularExpression::DotMatchesEverythingOption);
+  auto i = jsonRx.globalMatch(str_);
   while(i.hasNext()) {
     QJsonDocument doc = QJsonDocument::fromJson(i.next().captured(1).toUtf8());
     QVariantMap objectMap = doc.object().toVariantMap();
@@ -256,10 +256,9 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     }
   }
 
-  QRegularExpression tagRx(QStringLiteral("<.+?>"));
-
+  static const QRegularExpression tagRx(QStringLiteral("<.+?>"));
   QRegularExpression nationalityRx(QStringLiteral(">Produktionsland:(.*?)</a>"));
-  QRegularExpressionMatch nationalityMatch = nationalityRx.match(str_);
+  auto nationalityMatch = nationalityRx.match(str_);
   if(nationalityMatch.hasMatch()) {
     const QString n = nationalityMatch.captured(1).remove(tagRx).trimmed();
     entry->setField(QStringLiteral("nationality"), n);
@@ -267,17 +266,17 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
 
   QRegularExpression lengthRx(QStringLiteral(">Dauer:(.*?)</li"),
                               QRegularExpression::DotMatchesEverythingOption);
-  QRegularExpressionMatch lengthMatch = lengthRx.match(str_);
+  auto lengthMatch = lengthRx.match(str_);
   if(lengthMatch.hasMatch()) {
     const QString l = lengthMatch.captured(1).remove(tagRx).remove(QStringLiteral(" Min")).trimmed();
     entry->setField(QStringLiteral("running-time"), l);
   }
 
   QRegularExpression genreRx(QStringLiteral("<dt.*?>Genre</dt><dd.*?>(.*?)</dd>"));
-  QRegularExpressionMatch genreMatch = genreRx.match(str_);
+  auto genreMatch = genreRx.match(str_);
   if(genreMatch.hasMatch()) {
     QRegularExpression anchorRx(QStringLiteral("<a.*?>(.*?)</a>"));
-    QRegularExpressionMatchIterator i = anchorRx.globalMatch(genreMatch.captured(1));
+    auto i = anchorRx.globalMatch(genreMatch.captured(1));
     QStringList genres;
     while(i.hasNext()) {
       genres += i.next().captured(1).trimmed();
@@ -287,7 +286,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
 
   QRegularExpression certRx(QStringLiteral(">FSK:(.*?)</a"),
                             QRegularExpression::DotMatchesEverythingOption);
-  QRegularExpressionMatch certMatch = certRx.match(str_);
+  auto certMatch = certRx.match(str_);
   if(certMatch.hasMatch()) {
     // need to translate? Let's just add FSK ratings to the allowed values
     QStringList allowed = entry->collection()->hasField(QStringLiteral("certification")) ?
@@ -317,7 +316,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
   }
 
   QRegularExpression studioRx(QStringLiteral(">Filmverleih:(.*?)</li"));
-  QRegularExpressionMatch studioMatch = studioRx.match(str_);
+  auto studioMatch = studioRx.match(str_);
   if(studioMatch.hasMatch()) {
     QString s = studioMatch.captured(1).remove(tagRx).trimmed();
     entry->setField(QStringLiteral("studio"), s);
@@ -325,7 +324,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
 
   QRegularExpression plotRx(QStringLiteral("(<p class=\"movie-plot-synopsis\">.+?</p>)<(div|h2)"),
                             QRegularExpression::DotMatchesEverythingOption);
-  QRegularExpressionMatch plotMatch = plotRx.match(str_);
+  auto plotMatch = plotRx.match(str_);
   if(!plotMatch.hasMatch()) {
     QRegularExpression plot2Rx(QStringLiteral("(</h2><p>.+?</p>)<(div|h2)"),
                                QRegularExpression::DotMatchesEverythingOption);
@@ -335,7 +334,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     QString plot;
     // sometimes the plot starts with double <p>
     QRegularExpression pRx(QStringLiteral("<p.*?>(?!<p.*?>).*?</p>"));
-    QRegularExpressionMatchIterator i = pRx.globalMatch(plotMatch.captured(1));
+    auto i = pRx.globalMatch(plotMatch.captured(1));
     while(i.hasNext()) {
       plot += i.next().captured(0);
     }
