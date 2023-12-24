@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-14 00:42+0000\n"
+"POT-Creation-Date: 2023-12-24 00:42+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -911,7 +911,7 @@ msgstr "Түйінді сөздері"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:440 src/fetch/entrezfetcher.cpp:516
-#: src/fetch/opdsfetcher.cpp:431 src/field.cpp:201
+#: src/fetch/opdsfetcher.cpp:436 src/field.cpp:201
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
@@ -3304,8 +3304,8 @@ msgstr ""
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:199 src/fetch/ibsfetcher.cpp:302
 #: src/fetch/igdbfetcher.cpp:162 src/fetch/isbndbfetcher.cpp:296
-#: src/fetch/itunesfetcher.cpp:331 src/fetch/kinofetcher.cpp:350
-#: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:376
+#: src/fetch/itunesfetcher.cpp:331 src/fetch/kinofetcher.cpp:349
+#: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:377
 #: src/fetch/mobygamesfetcher.cpp:346 src/fetch/moviemeterfetcher.cpp:162
 #: src/fetch/numistafetcher.cpp:288 src/fetch/numistafetcher.cpp:296
 #: src/fetch/omdbfetcher.cpp:183 src/fetch/thegamesdbfetcher.cpp:173
@@ -3329,7 +3329,7 @@ msgstr "Allocine сілтемесі"
 #: src/fetch/filmaffinityfetcher.cpp:459 src/fetch/imdbfetcher.cpp:482
 #: src/fetch/imdbfetcher.cpp:544 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
-#: src/fetch/kinoteatrfetcher.cpp:263 src/fetch/kinoteatrfetcher.cpp:507
+#: src/fetch/kinoteatrfetcher.cpp:264 src/fetch/kinoteatrfetcher.cpp:508
 #: src/fetch/omdbfetcher.cpp:263 src/fetch/themoviedbfetcher.cpp:333
 #: src/fetch/themoviedbfetcher.cpp:577 src/fetch/vndbfetcher.cpp:286
 #: src/fetch/vndbfetcher.cpp:434
@@ -3685,7 +3685,7 @@ msgstr "AnimeNfo бағасы"
 #: src/fetch/filmasterfetcher.cpp:323 src/fetch/gaminghistoryfetcher.cpp:438
 #: src/fetch/googlescholarfetcher.cpp:277 src/fetch/hathitrustfetcher.cpp:318
 #: src/fetch/ibsfetcher.cpp:397 src/fetch/igdbfetcher.cpp:615
-#: src/fetch/kinofetcher.cpp:388 src/fetch/kinoteatrfetcher.cpp:515
+#: src/fetch/kinofetcher.cpp:387 src/fetch/kinoteatrfetcher.cpp:516
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:392
@@ -4159,7 +4159,7 @@ msgstr "Allocine сілтемесі"
 msgid "KinoPoisk Link"
 msgstr "Discogs сілтемесі"
 
-#: src/fetch/kinoteatrfetcher.cpp:239 src/fetch/kinoteatrfetcher.cpp:508
+#: src/fetch/kinoteatrfetcher.cpp:239 src/fetch/kinoteatrfetcher.cpp:509
 #, fuzzy, kde-format
 #| msgid "Filmaster Link"
 msgid "Kino-Teatr Link"
@@ -4216,31 +4216,31 @@ msgstr "Француз"
 msgid "Numista (%1)"
 msgstr ""
 
-#: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
+#: src/fetch/opdsfetcher.cpp:200 src/fetch/opdsfetcher.cpp:210
 #, fuzzy, kde-format
 #| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico is unable to read the search description in the OPDS catalog."
 msgstr "Tellico PDF файлдан ешбір метадеректі оқи алмады."
 
-#: src/fetch/opdsfetcher.cpp:421
+#: src/fetch/opdsfetcher.cpp:426
 #, fuzzy, kde-format
 #| msgid "File Catalog"
 msgid "OPDS Catalog"
 msgstr "Файлдар каталогы"
 
-#: src/fetch/opdsfetcher.cpp:446
+#: src/fetch/opdsfetcher.cpp:451
 #, fuzzy, kde-format
 #| msgid "Card Number"
 msgid "Catalog: "
 msgstr "Кәртішке нөмірі"
 
-#: src/fetch/opdsfetcher.cpp:451
+#: src/fetch/opdsfetcher.cpp:456
 #, fuzzy, kde-format
 #| msgid "Enter the host name of the server."
 msgid "Enter the link to the OPDS server."
 msgstr "Сервер хостының атауын кетіру."
 
-#: src/fetch/opdsfetcher.cpp:456
+#: src/fetch/opdsfetcher.cpp:461
 #, fuzzy, kde-format
 #| msgid "File Catalog"
 msgid "&Verify Catalog"
