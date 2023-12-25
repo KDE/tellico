@@ -1,3 +1,7 @@
+2023-12-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated IMDB fetcher to make locale configurable.
+
 2023-12-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Removed backchecking of KWallet in CrossRef source.

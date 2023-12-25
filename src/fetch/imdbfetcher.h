@@ -32,6 +32,7 @@
 #include <QPointer>
 
 class QSpinBox;
+class QRadioButton;
 
 class KJob;
 namespace KIO {
@@ -48,6 +49,7 @@ class ImdbFetcherTest;
 namespace Tellico {
   namespace GUI {
     class ComboBox;
+    class LineEdit;
   }
   namespace Fetch {
 
@@ -58,15 +60,6 @@ class IMDBFetcher : public Fetcher {
 Q_OBJECT
 
 public:
-  enum Lang {
-    EN = 0,
-    FR = 1,
-    ES = 2,
-    DE = 3,
-    IT = 4,
-    PT = 5
-  };
-
   IMDBFetcher(QObject* parent);
   /**
    */
@@ -122,7 +115,8 @@ private:
   ImageSize m_imageSize;
   int m_numCast;
   QUrl m_url;
-  Lang m_lang;
+  bool m_useSystemLocale;
+  QString m_customLocale;
 };
 
 class IMDBFetcher::ConfigWidget : public Fetch::ConfigWidget {
@@ -134,9 +128,15 @@ public:
   virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
   virtual QString preferredName() const Q_DECL_OVERRIDE;
 
+private Q_SLOTS:
+  void slotLocaleChanged(int id);
+
 private:
   GUI::ComboBox* m_imageCombo;
   QSpinBox* m_numCast;
+  QRadioButton* m_systemLocaleRadioButton;
+  QRadioButton* m_customLocaleRadioButton;
+  GUI::LineEdit* m_customLocaleEdit;
 };
 
   } // end namespace

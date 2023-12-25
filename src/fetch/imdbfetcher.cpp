@@ -31,6 +31,7 @@
 #include "../utils/mapvalue.h"
 #include "../utils/guiproxy.h"
 #include "../gui/combobox.h"
+#include "../gui/lineedit.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -44,8 +45,9 @@
 #include <QFile>
 #include <QMap>
 #include <QLabel>
-#include <QCheckBox>
+#include <QRadioButton>
 #include <QGroupBox>
+#include <QButtonGroup>
 #include <QGridLayout>
 #include <QJsonDocument>
 #include <QJsonParseError>
@@ -61,7 +63,7 @@ using Tellico::Fetch::IMDBFetcher;
 
 IMDBFetcher::IMDBFetcher(QObject* parent_) : Fetcher(parent_),
     m_job(nullptr), m_started(false), m_imageSize(MediumImage),
-    m_numCast(IMDB_DEFAULT_CAST_SIZE), m_lang(EN) {
+    m_numCast(IMDB_DEFAULT_CAST_SIZE), m_useSystemLocale(true) {
 }
 
 IMDBFetcher::~IMDBFetcher() = default;
@@ -81,12 +83,13 @@ bool IMDBFetcher::canSearch(Fetch::FetchKey k) const {
 }
 
 void IMDBFetcher::readConfigHook(const KConfigGroup& config_) {
-  m_lang = static_cast<Lang>(config_.readEntry("Lang", int(EN)));
   m_numCast = config_.readEntry("Max Cast", IMDB_DEFAULT_CAST_SIZE);
   const int imageSize = config_.readEntry("Image Size", -1);
   if(imageSize > -1) {
     m_imageSize = static_cast<ImageSize>(imageSize);
   }
+  m_useSystemLocale = config_.readEntry("System Locale", true);
+  m_customLocale = config_.readEntry("Custom Locale");
 }
 
 // multiple values not supported
@@ -262,36 +265,21 @@ void IMDBFetcher::configureJob(QPointer<KIO::StoredTransferJob> job_) {
   job_->addMetaData(QStringLiteral("origin"), QLatin1String("https://www.imdb.com"));
   QStringList headers;
   headers += QStringLiteral("x-imdb-client-name: imdb-web-next-localized");
-  QString languages(QStringLiteral("Languages"));
-  QString lang;
-  switch(m_lang) {
-    case EN:
-      lang = QLatin1String("US");
-      job_->addMetaData(languages, QStringLiteral("en-US")); break;
-      break;
-    case FR:
-      lang = QLatin1String("FR");
-      job_->addMetaData(languages, QStringLiteral("fr-FR")); break;
-      //  headers += QStringLiteral("x-imdb-user-language: fr-FR");
-      break;
-    case ES:
-      lang = QLatin1String("ES");
-      job_->addMetaData(languages, QStringLiteral("es-ES")); break;
-      break;
-    case DE:
-      lang = QLatin1String("DE");
-      job_->addMetaData(languages, QStringLiteral("de-DE")); break;
-      break;
-    case IT:
-      lang = QLatin1String("IT");
-      job_->addMetaData(languages, QStringLiteral("it-IT")); break;
-      break;
-    case PT:
-      lang = QLatin1String("PT");
-      job_->addMetaData(languages, QStringLiteral("pt-PT")); break;
-      break;
+
+  QString localeName;
+  if(m_useSystemLocale || m_customLocale.isEmpty()) {
+    // use default locale instead of system in case it was changed
+    localeName = QLocale().name();
+    myLog() << "Using system locale:" << localeName;
+  } else {
+    localeName = m_customLocale;
+    myLog() << "Using custom locale:" << localeName;
   }
-  headers += QStringLiteral("x-imdb-user-country: %1").arg(lang);
+  localeName.replace(QLatin1Char('_'), QLatin1Char('-'));
+
+  job_->addMetaData(QStringLiteral("Languages"), localeName);
+  headers += QStringLiteral("x-imdb-user-country: %1").arg(localeName.section(QLatin1Char('-'), 1, 1));
+
   job_->addMetaData(QStringLiteral("customHTTPHeader"), headers.join(QLatin1String("\r\n")));
 }
 
@@ -592,6 +580,33 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   m_imageCombo->setWhatsThis(w);
   label->setBuddy(m_imageCombo);
 
+  auto localeGroupBox = new QGroupBox(i18n("Locale"), optionsWidget());
+  l->addWidget(localeGroupBox, ++row, 0, 1, -1);
+
+  m_systemLocaleRadioButton = new QRadioButton(i18n("Use system locale"), localeGroupBox);
+  m_customLocaleRadioButton = new QRadioButton(i18n("Use custom locale"), localeGroupBox);
+  m_customLocaleEdit = new GUI::LineEdit(localeGroupBox);
+  m_customLocaleEdit->setEnabled(false);
+
+  auto localeGroupLayout = new QGridLayout(localeGroupBox);
+  localeGroupLayout->addWidget(m_systemLocaleRadioButton, 0, 0);
+  localeGroupLayout->addWidget(m_customLocaleRadioButton, 1, 0);
+  localeGroupLayout->addWidget(m_customLocaleEdit, 1, 1);
+  localeGroupBox->setLayout(localeGroupLayout);
+
+  auto localeGroup = new QButtonGroup(localeGroupBox);
+  localeGroup->addButton(m_systemLocaleRadioButton, 0 /* id */);
+  localeGroup->addButton(m_customLocaleRadioButton, 1 /* id */);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+  void (QButtonGroup::* buttonClicked)(int) = &QButtonGroup::buttonClicked;
+  connect(localeGroup, buttonClicked, this, &ConfigWidget::slotSetModified);
+  connect(localeGroup, buttonClicked, this, &ConfigWidget::slotLocaleChanged);
+#else
+  connect(localeGroup, &QButtonGroup::idClicked, this, &ConfigWidget::slotSetModified);
+  connect(localeGroup, &QButtonGroup::idClicked, this, &ConfigWidget::slotLocaleChanged);
+#endif
+  connect(m_customLocaleEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
+
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
@@ -601,6 +616,14 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   if(fetcher_) {
     m_numCast->setValue(fetcher_->m_numCast);
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+    if(fetcher_->m_useSystemLocale) {
+      m_systemLocaleRadioButton->setChecked(true);
+      m_customLocaleEdit->setText(QLocale().name());
+    } else {
+      m_customLocaleRadioButton->setChecked(true);
+      m_customLocaleEdit->setEnabled(true);
+      m_customLocaleEdit->setText(fetcher_->m_customLocale);
+    }
   } else { //defaults
     m_imageCombo->setCurrentData(MediumImage);
   }
@@ -612,8 +635,18 @@ void IMDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   config_.deleteEntry("Fetch Images"); // no longer used
   const int n = m_imageCombo->currentData().toInt();
   config_.writeEntry("Image Size", n);
+  config_.deleteEntry("Lang"); // no longer used
+  config_.writeEntry("System Locale", m_systemLocaleRadioButton->isChecked());
+  config_.writeEntry("Custom Locale", m_customLocaleRadioButton->isChecked() ?
+                                        m_customLocaleEdit->text().trimmed() :
+                                        QString());
 }
 
 QString IMDBFetcher::ConfigWidget::preferredName() const {
   return i18n("Internet Movie Database");
+}
+
+void IMDBFetcher::ConfigWidget::slotLocaleChanged(int id_) {
+  // id 0 is system locale, 1 is custom locale
+  m_customLocaleEdit->setEnabled(id_ == 1);
 }

@@ -52,8 +52,8 @@ void ImdbFetcherTest::initTestCase() {
 }
 
 void ImdbFetcherTest::init() {
-  // reset to english every time
-  m_config.writeEntry("Lang", QStringLiteral("0"));
+  // reset to system locale every time
+  QLocale::setDefault(QLocale::system());
 }
 
 void ImdbFetcherTest::testSnowyRiver() {
@@ -102,7 +102,7 @@ void ImdbFetcherTest::testSnowyRiver() {
 }
 
 void ImdbFetcherTest::testSnowyRiverFr() {
-  m_config.writeEntry("Lang", QStringLiteral("1")); // french
+  QLocale::setDefault(QLocale(QLocale::French, QLocale::France));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "The Man From Snowy River");
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
@@ -137,8 +137,25 @@ void ImdbFetcherTest::testSnowyRiverFr() {
   QVERIFY(!entry->field("plot").contains(QStringLiteral("apos")));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
+}
 
-  m_config.writeEntry("Lang", QStringLiteral("0")); // back to english
+void ImdbFetcherTest::testPacteDesLoupsEn() {
+  m_config.writeEntry("System Locale", false);
+  m_config.writeEntry("Custom Locale", "en_US");
+  QLocale::setDefault(QLocale(QLocale::French, QLocale::France));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Pacte des Loups");
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+  fetcher->readConfig(m_config);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  // the first entry had better be the right one
+  Tellico::Data::EntryPtr entry = results.at(0);
+
+  QCOMPARE(entry->field("title"), QLatin1String("Brotherhood of the Wolf"));
 }
 
 void ImdbFetcherTest::testAsterix() {

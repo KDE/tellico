@@ -39,6 +39,7 @@ private Q_SLOTS:
   void init();
   void testSnowyRiver();
   void testSnowyRiverFr();
+  void testPacteDesLoupsEn();
   void testAsterix();
   void testBodyDouble();
   void testMary();
