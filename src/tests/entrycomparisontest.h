@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2016 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2023 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,34 +22,27 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COLLECTIONTEST_H
-#define COLLECTIONTEST_H
+#ifndef ENTRYCOMPARISONTEST_H
+#define ENTRYCOMPARISONTEST_H
 
 #include <QObject>
 
-class CollectionTest : public QObject {
+#include "../datavectors.h"
+
+class EntryComparisonTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
   void initTestCase();
   void cleanupTestCase();
 
-  void testEmpty();
-  void testCollection();
-  void testFields();
-  void testDerived();
-  void testValue();
-  void testValue_data();
-  void testDtd();
-  void testDtd_data();
-  void testDuplicate();
-  void testMergeFields();
-  void testFieldsIntersection();
-  void testAppendCollection();
-  void testMergeCollection();
-  void testMergeBenchmark();
-  void testGamePlatform();
-  void testNonTitle();
+  void testBookMatch();
+  void testMatchScore();
+  void testMatchScore_data();
+
+private:
+  Tellico::Data::CollPtr m_coll;
+  Tellico::Data::EntryPtr m_entry;
 };
 
 #endif

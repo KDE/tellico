@@ -36,7 +36,6 @@
 #include "../images/imagefactory.h"
 #include "../document.h"
 #include "../utils/mergeconflictresolver.h"
-#include "../entrycomparison.h"
 
 #include <KLocalizedString>
 #include <KProcess>
@@ -46,8 +45,6 @@
 #include <QRandomGenerator>
 
 QTEST_GUILESS_MAIN( CollectionTest )
-
-Q_DECLARE_METATYPE(Tellico::EntryComparison::MatchValue)
 
 class TestResolver : public Tellico::Merge::ConflictResolver {
 public:
@@ -68,23 +65,10 @@ private:
 
 void CollectionTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
-  qRegisterMetaType<Tellico::EntryComparison::MatchValue>();
   KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
   // need to register the collection types
   Tellico::CollectionInitializer ci;
-
-  // create the collection and entry used for testMatchScore()
-  m_coll = Tellico::Data::CollPtr(new Tellico::Data::BookCollection(true));
-  m_entry = Tellico::Data::EntryPtr(new Tellico::Data::Entry(m_coll));
-  m_entry->setField(QStringLiteral("title"), QStringLiteral("title1"));
-  m_entry->setField(QStringLiteral("author"), QStringLiteral("John Doe"));
-  m_entry->setField(QStringLiteral("isbn"), QStringLiteral("1234367890"));
-  m_entry->setField(QStringLiteral("lccn"), QStringLiteral("89456"));
-  Tellico::Data::FieldPtr f(new Tellico::Data::Field(QStringLiteral("arxiv"), QStringLiteral("Arxiv ID")));
-  m_coll->addField(f);
-  m_entry->setField(QStringLiteral("arxiv"), QStringLiteral("hep-lat/0110180"));
-  m_coll->addEntries(m_entry);
 }
 
 void CollectionTest::cleanupTestCase() {
@@ -97,7 +81,7 @@ void CollectionTest::testEmpty() {
 
   Tellico::Data::Collection coll(false, QStringLiteral("Title"));
 
-  QCOMPARE(coll.id(), 2); // ID is 2 since ID of 1 is created in initTestCase()
+  QCOMPARE(coll.id(), 1);
   QCOMPARE(coll.entryCount(), 0);
   QCOMPARE(coll.type(), Tellico::Data::Collection::Base);
   QVERIFY(coll.fields().isEmpty());
@@ -653,37 +637,6 @@ void CollectionTest::testMergeCollection() {
   QCOMPARE(coll1->entryCount(), coll2->entryCount());
 }
 
-void CollectionTest::testBookMatch() {
-  Tellico::Data::CollPtr c(new Tellico::Data::BookCollection(true));
-
-  // first check merging with same isbn
-  Tellico::Data::EntryPtr e1(new Tellico::Data::Entry(c));
-  e1->setField(QStringLiteral("title"), QStringLiteral("title1"));
-  e1->setField(QStringLiteral("author"), QStringLiteral("author1"));
-  e1->setField(QStringLiteral("edition"), QStringLiteral("edition1"));
-  e1->setField(QStringLiteral("pur_price"), QStringLiteral("price1"));
-  e1->setField(QStringLiteral("isbn"), QStringLiteral("1234567890"));
-  c->addEntries(e1);
-
-  Tellico::Data::EntryPtr e2(new Tellico::Data::Entry(c));
-  e2->setField(QStringLiteral("title"), QStringLiteral("title2"));
-  e2->setField(QStringLiteral("author"), QStringLiteral("author2"));
-  e2->setField(QStringLiteral("edition"), QStringLiteral("edition2"));
-  e2->setField(QStringLiteral("pur_price"), QStringLiteral("price2"));
-  e2->setField(QStringLiteral("isbn"), QStringLiteral("000000000"));
-
-  // not a good match
-  QVERIFY(c->sameEntry(e1, e2) < Tellico::EntryComparison::ENTRY_GOOD_MATCH);
-
-  // perfect match now
-  e2->setField(QStringLiteral("isbn"), QStringLiteral("1234567890"));
-  QCOMPARE(c->sameEntry(e1, e2), int(Tellico::EntryComparison::ENTRY_PERFECT_MATCH));
-
-  QBENCHMARK {
-    QCOMPARE(c->sameEntry(e1, e2), int(Tellico::EntryComparison::ENTRY_PERFECT_MATCH));
-  }
-}
-
 void CollectionTest::testMergeBenchmark() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/movies-many.tc"));
 
@@ -709,41 +662,6 @@ void CollectionTest::testMergeBenchmark() {
 
     Tellico::Data::Document::mergeCollection(coll1, coll2, &structuralChange);
   }
-}
-
-void CollectionTest::testMatchScore() {
-  QFETCH(QString, field);
-  QFETCH(QString, value);
-  QFETCH(Tellico::EntryComparison::MatchValue, score);
-
-  QVERIFY(m_coll);
-  Tellico::Data::EntryPtr e(new Tellico::Data::Entry(m_coll));
-  e->setField(field, value);
-  QCOMPARE(Tellico::EntryComparison::score(m_entry, e, field, m_coll.data()), int(score));
-}
-
-void CollectionTest::testMatchScore_data() {
-  QTest::addColumn<QString>("field");
-  QTest::addColumn<QString>("value");
-  QTest::addColumn<Tellico::EntryComparison::MatchValue>("score");
-
-  QTest::newRow("empty title") << QStringLiteral("title") << QString() << Tellico::EntryComparison::MATCH_VALUE_NONE;
-  QTest::newRow("title match") << QStringLiteral("title") << QStringLiteral("title1") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("title match case") << QStringLiteral("title") << QStringLiteral("TITLE1") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-//  QTest::newRow("title match articles") << QStringLiteral("title") << QStringLiteral("THE TITLE1") << Tellico::EntryComparison::MATCH_VALUE_WEAK;
-  QTest::newRow("title match non alphanum") << QStringLiteral("title") << QStringLiteral("title1.") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-//  QTest::newRow("title match paren") << QStringLiteral("title") << QStringLiteral("title1 (old)") << Tellico::EntryComparison::MATCH_VALUE_WEAK;
-  QTest::newRow("isbn match") << QStringLiteral("isbn") << QStringLiteral("1234367890") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("isbn match formatted") << QStringLiteral("isbn") << QStringLiteral("1-234-36789-0") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("lccn match") << QStringLiteral("lccn") << QStringLiteral("89456") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("lccn match formatted") << QStringLiteral("lccn") << QStringLiteral("89-456") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("arxiv") << QStringLiteral("arxiv") << QStringLiteral("hep-lat/0110180") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("arxiv format1") << QStringLiteral("arxiv") << QStringLiteral("hep-lat/0110180v1") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("arxiv format2") << QStringLiteral("arxiv") << QStringLiteral("arxiv:hep-lat/0110180v1") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("author") << QStringLiteral("author") << QStringLiteral("John Doe") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("author formatted") << QStringLiteral("author") << QStringLiteral("Doe, John") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("author formatted2") << QStringLiteral("author") << QStringLiteral("doe, john") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("author multiple") << QStringLiteral("author") << QStringLiteral("John Doe; Jane Doe") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
 }
 
 void CollectionTest::testGamePlatform() {

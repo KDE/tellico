@@ -171,6 +171,11 @@ ecm_add_test(documenttest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
 )
 
+ecm_add_test(entrycomparisontest.cpp
+    TEST_NAME entrycomparisontest
+    LINK_LIBRARIES ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(filtertest.cpp
     TEST_NAME filtertest
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} gui
