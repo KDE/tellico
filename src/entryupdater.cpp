@@ -82,7 +82,7 @@ EntryUpdater::EntryUpdater(const QString& source_, Tellico::Data::CollPtr coll_,
 
 EntryUpdater::~EntryUpdater() {
   foreach(const UpdateResult& res, m_results) {
-    delete res.first;
+    delete res.result;
   }
   m_results.clear();
 }
@@ -157,13 +157,14 @@ void EntryUpdater::slotResult(Tellico::Fetch::FetchResult* result_) {
     return;
   }
 
-//  myDebug() << "update result:" << result_->title << " [" << fetcher->source() << "]";
-  m_results.append(UpdateResult(result_, fetcher->updateOverwrite() ? Overwrite::Yes : Overwrite::No));
-  Data::EntryPtr e = result_->fetchEntry();
-  if(e && !m_entriesToUpdate.isEmpty()) {
-    m_fetchedEntries.append(e);
-    const int match = m_coll->sameEntry(m_entriesToUpdate.front(), e);
+  Data::EntryPtr matchEntry = result_->fetchEntry();
+  if(matchEntry && !m_entriesToUpdate.isEmpty()) {
+    m_fetchedEntries.append(matchEntry);
+    const int match = m_coll->sameEntry(m_entriesToUpdate.front(), matchEntry);
+    m_results.append(UpdateResult(result_, match));
+    myLog() << "Found match:" << matchEntry->title() << "- score =" << match;
     if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
+      myLog() << "Score exceeds high confidence threshold, stopping search";
       fetcher->stop();
     }
   }
@@ -181,61 +182,60 @@ void EntryUpdater::slotCancel() {
 }
 
 void EntryUpdater::handleResults() {
-  Data::EntryPtr entry = m_entriesToUpdate.front();
-  int best = 0;
+  Data::EntryPtr entryToUpdate = m_entriesToUpdate.front();
+  int bestScore = 0;
   ResultList matches;
   foreach(const UpdateResult& res, m_results) {
-    Data::EntryPtr e = res.first->fetchEntry();
-    if(!e) {
+    Data::EntryPtr matchEntry = res.result->fetchEntry();
+    if(!matchEntry) {
       continue;
     }
-    m_fetchedEntries.append(e);
-    int match = m_coll->sameEntry(entry, e);
-    if(match) {
-//      myDebug() << e->title() << "matches by" << match;
-    }
+    const int match = res.matchScore;
     // if the match is GOOD but not PERFECT, keep all of them
     if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
-      if(match > best) {
-        best = match;
+      if(match > bestScore) {
+        bestScore = match;
         matches.clear();
         matches.append(res);
-      } else if(match == best) {
+      } else if(match == bestScore) {
+        // multiple "perfect" matches
         matches.append(res);
       }
     } else if(match >= EntryComparison::ENTRY_GOOD_MATCH) {
-      best = qMax(best, match);
+      myLog() << "Found good match:" << matchEntry->title() << "- score=" << match;
+      bestScore = qMax(bestScore, match);
       // keep all the results that don't exceed the perfect match
       matches.append(res);
-    } else if(match > best) {
-      best = match;
+    } else if(match > bestScore) {
+      myLog() << "Found better match:" << matchEntry->title() << "- score=" << match;
+      bestScore = match;
       matches.clear();
       matches.append(res);
-    } else if(m_results.count() == 1 && best == 0 && entry->title().isEmpty()) {
+    } else if(m_results.count() == 1 && bestScore == 0 && entryToUpdate->title().isEmpty()) {
       // special case for updates which may backfire, but let's go with it
       // if there is a single result AND the best match is zero AND title is empty
       // let's assume it's a case where an entry with a single url or link was updated
-      myLog() << "Updating entry with 0 score and empty title:" << e->title();
-      best = EntryComparison::ENTRY_PERFECT_MATCH;
+      myLog() << "Updating entry with 0 score and empty title:" << matchEntry->title();
+      bestScore = EntryComparison::ENTRY_PERFECT_MATCH;
       matches.append(res);
     }
   }
-  if(best < EntryComparison::ENTRY_GOOD_MATCH) {
-    if(best > 0) {
-      myDebug() << "no good match (score > 10), best match =" << best << "(" << matches.count() << "matches)";
+  if(bestScore < EntryComparison::ENTRY_GOOD_MATCH) {
+    if(bestScore > 0) {
+      myLog() << "Best match is not good enough, not updating the entry";
     }
     return;
   }
-//  myDebug() << "best match = " << best << " (" << matches.count() << " matches)";
-  UpdateResult match(nullptr, Overwrite::Yes);
+  UpdateResult match;
   if(matches.count() == 1) {
     match = matches.front();
   } else if(matches.count() > 1) {
     match = askUser(matches);
   }
   // askUser() could come back with nil
-  if(match.first) {
-    mergeCurrent(match.first->fetchEntry(), match.second == Overwrite::Yes);
+  if(match.result) {
+    myLog() << "Best match is good enough, updating the entry";
+    mergeCurrent(match.result->fetchEntry(), match.result->fetcher()->updateOverwrite());
   }
 }
 
@@ -244,27 +244,29 @@ Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(const ResultList& resu
                        m_fetchers[m_fetchIndex].data(), results);
 
   if(dlg.exec() != QDialog::Accepted) {
-    return UpdateResult(nullptr, Overwrite::No);
+    return UpdateResult();
   }
   return dlg.updateResult();
 }
 
 void EntryUpdater::mergeCurrent(Tellico::Data::EntryPtr entry_, bool overWrite_) {
-  if(entry_) {
-    Data::EntryPtr currEntry = m_entriesToUpdate.front();
-    m_matchedEntries.append(entry_);
-    Kernel::self()->updateEntry(currEntry, entry_, overWrite_);
-    if(m_entriesToUpdate.count() % CHECK_COLLECTION_IMAGES_STEP_SIZE == 1) {
-      // I don't want to remove any images in the entries that are getting
-      // updated since they'll reference them later and the command isn't
-      // executed until the command history group is finished
-      // so remove pointers to matched entries
-      Data::EntryList nonUpdatedEntries = m_fetchedEntries;
-      foreach(Data::EntryPtr match, m_matchedEntries) {
-        nonUpdatedEntries.removeAll(match);
-      }
-      Data::Document::self()->removeImagesNotInCollection(nonUpdatedEntries, m_matchedEntries);
+  if(!entry_) {
+    return;
+  }
+
+  Data::EntryPtr currEntry = m_entriesToUpdate.front();
+  m_matchedEntries.append(entry_);
+  Kernel::self()->updateEntry(currEntry, entry_, overWrite_);
+  if(m_entriesToUpdate.count() % CHECK_COLLECTION_IMAGES_STEP_SIZE == 1) {
+    // I don't want to remove any images in the entries that are getting
+    // updated since they'll reference them later and the command isn't
+    // executed until the command history group is finished
+    // so remove pointers to matched entries
+    Data::EntryList nonUpdatedEntries = m_fetchedEntries;
+    foreach(Data::EntryPtr match, m_matchedEntries) {
+      nonUpdatedEntries.removeAll(match);
     }
+    Data::Document::self()->removeImagesNotInCollection(nonUpdatedEntries, m_matchedEntries);
   }
 }
 

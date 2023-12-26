@@ -33,7 +33,6 @@
 #include "entrygroup.h"
 #include "field.h"
 #include "filter.h"
-#include "filterdialog.h"
 #include "tellico_kernel.h"
 #include "collection.h"
 #include "document.h"

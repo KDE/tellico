@@ -95,10 +95,9 @@ EntryMatchDialog::EntryMatchDialog(QWidget* parent_, Data::EntryPtr entryToUpdat
   connect(m_treeWidget, &QTreeWidget::itemSelectionChanged, this, &EntryMatchDialog::slotShowEntry);
 
   foreach(const EntryUpdater::UpdateResult& res, matchResults_) {
-    Data::EntryPtr matchingEntry = res.first->fetchEntry();
-    QTreeWidgetItem* item = new QTreeWidgetItem(m_treeWidget, QStringList() << matchingEntry->title() << res.first->desc);
+    Data::EntryPtr matchingEntry = res.result->fetchEntry();
+    QTreeWidgetItem* item = new QTreeWidgetItem(m_treeWidget, QStringList() << matchingEntry->title() << res.result->desc);
     m_itemResults.insert(item, res);
-    m_itemEntries.insert(item, matchingEntry);
   }
 
   m_entryView = new EntryView(split);
@@ -127,13 +126,13 @@ void EntryMatchDialog::slotShowEntry() {
     return;
   }
 
-  m_entryView->showEntry(m_itemEntries[item]);
+  m_entryView->showEntry(m_itemResults[item].result->fetchEntry());
 }
 
 Tellico::EntryUpdater::UpdateResult EntryMatchDialog::updateResult() const {
   QTreeWidgetItem* item = m_treeWidget->currentItem();
   if(!item) {
-    return EntryUpdater::UpdateResult(nullptr, EntryUpdater::Overwrite::No);
+    return EntryUpdater::UpdateResult();
   }
   return m_itemResults[item];
 }

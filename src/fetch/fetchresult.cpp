@@ -24,7 +24,6 @@
 
 #include "fetchresult.h"
 #include "fetcher.h"
-#include "fetchmanager.h"
 #include "../entry.h"
 #include "../collection.h"
 #include "../tellico_debug.h"

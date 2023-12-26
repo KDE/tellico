@@ -66,7 +66,6 @@ private:
   EntryView* m_entryView;
 
   QHash<QTreeWidgetItem*, EntryUpdater::UpdateResult> m_itemResults;
-  QHash<QTreeWidgetItem*, Data::EntryPtr> m_itemEntries;
 };
 
 } //end namespace
