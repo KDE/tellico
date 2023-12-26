@@ -37,13 +37,11 @@
 #include <KConfigGroup>
 
 #include <QTest>
-#include <QLoggingCategory>
 
 QTEST_GUILESS_MAIN( OPDSFetcherTest )
 
 OPDSFetcherTest::OPDSFetcherTest() : AbstractFetcherTest() {
   QStandardPaths::setTestModeEnabled(true);
-  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = true"));
 }
 
 void OPDSFetcherTest::initTestCase() {
