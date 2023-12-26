@@ -379,21 +379,23 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
 
   const QString certification(QStringLiteral("certification"));
   QString cert = mapValue(objectMap, "certificate", "rating");
-  // set default certification, assuming US for now
-  if(cert == QLatin1String("Not Rated")) {
-    cert = QLatin1Char('U');
-  }
-  const QString certCountry = mapValue(objectMap, "certificate", "country", "text");
-  if(certCountry == QLatin1String("United States")) {
-    cert += QStringLiteral(" (USA)");
-  } else {
-    cert += QStringLiteral(" (%1)").arg(certCountry);
-  }
-  const QStringList& certsAllowed = coll->fieldByName(certification)->allowed();
-  if(certsAllowed.contains(cert)) {
-    entry->setField(certification, cert);
-  } else {
-    myLog() << "Skipping certification as not allowed:" << cert;
+  if(!cert.isEmpty()) {
+    // set default certification, assuming US for now
+    if(cert == QLatin1String("Not Rated")) {
+      cert = QLatin1Char('U');
+    }
+    const QString certCountry = mapValue(objectMap, "certificate", "country", "text");
+    if(certCountry == QLatin1String("United States")) {
+      cert += QStringLiteral(" (USA)");
+    } else if(!certCountry.isEmpty()) {
+      cert += QStringLiteral(" (%1)").arg(certCountry);
+    }
+    const QStringList& certsAllowed = coll->fieldByName(certification)->allowed();
+    if(certsAllowed.contains(cert)) {
+      entry->setField(certification, cert);
+    } else {
+      myLog() << "Skipping certification as not allowed:" << cert;
+    }
   }
 
   QStringList directors;
