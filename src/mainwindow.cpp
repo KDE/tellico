@@ -1253,6 +1253,7 @@ void MainWindow::slotFileNew(int type_) {
     }
     m_viewTabs->setTabBarHidden(true);
     Data::Document::self()->newDocument(type_);
+    myLog() << "Creating new collection, type" << CollectionFactory::typeName(type_);
     Kernel::self()->resetHistory();
     m_fileOpenRecent->setCurrentItem(-1);
     slotEnableOpenedActions();
@@ -1272,6 +1273,7 @@ void MainWindow::slotFileNewByTemplate(const QString& collectionTemplate_) {
 
   if(m_editDialog->queryModified() && querySaveModified()) {
     openURL(QUrl::fromLocalFile(collectionTemplate_));
+    myLog() << "Creating new collection from template:" << collectionTemplate_;
     Data::Document::self()->setURL(QUrl::fromLocalFile(i18n(Tellico::untitledFilename)));
     Kernel::self()->resetHistory();
     m_fileOpenRecent->setCurrentItem(-1);
