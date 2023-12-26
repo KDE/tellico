@@ -158,7 +158,7 @@ void EntryUpdater::slotResult(Tellico::Fetch::FetchResult* result_) {
   }
 
 //  myDebug() << "update result:" << result_->title << " [" << fetcher->source() << "]";
-  m_results.append(UpdateResult(result_, fetcher->updateOverwrite()));
+  m_results.append(UpdateResult(result_, fetcher->updateOverwrite() ? Overwrite::Yes : Overwrite::No));
   Data::EntryPtr e = result_->fetchEntry();
   if(e && !m_entriesToUpdate.isEmpty()) {
     m_fetchedEntries.append(e);
@@ -227,7 +227,7 @@ void EntryUpdater::handleResults() {
     return;
   }
 //  myDebug() << "best match = " << best << " (" << matches.count() << " matches)";
-  UpdateResult match(nullptr, true);
+  UpdateResult match(nullptr, Overwrite::Yes);
   if(matches.count() == 1) {
     match = matches.front();
   } else if(matches.count() > 1) {
@@ -235,7 +235,7 @@ void EntryUpdater::handleResults() {
   }
   // askUser() could come back with nil
   if(match.first) {
-    mergeCurrent(match.first->fetchEntry(), match.second);
+    mergeCurrent(match.first->fetchEntry(), match.second == Overwrite::Yes);
   }
 }
 
@@ -244,7 +244,7 @@ Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(const ResultList& resu
                        m_fetchers[m_fetchIndex].data(), results);
 
   if(dlg.exec() != QDialog::Accepted) {
-    return UpdateResult(nullptr, false);
+    return UpdateResult(nullptr, Overwrite::No);
   }
   return dlg.updateResult();
 }

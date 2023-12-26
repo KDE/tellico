@@ -42,7 +42,8 @@ public:
   EntryUpdater(const QString& fetcher, Data::CollPtr coll, Data::EntryList entries, QObject* parent);
   ~EntryUpdater();
 
-  typedef QPair<Fetch::FetchResult*, bool> UpdateResult;
+  enum class Overwrite { Yes, No };
+  typedef QPair<Fetch::FetchResult*, Overwrite> UpdateResult;
   typedef QList<UpdateResult> ResultList;
 
 public Q_SLOTS:
