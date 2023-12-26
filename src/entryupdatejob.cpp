@@ -62,11 +62,13 @@ void EntryUpdateJob::slotResult(Tellico::Fetch::FetchResult* result_) {
 
   const int match = m_entry->collection()->sameEntry(m_entry, entry);
   if(match > m_bestMatchScore) {
+    myLog() << "Found better match:" << entry->title() << "- score =" << match;
     m_bestMatchScore = match;
     m_bestMatchEntry = entry;
   }
   // if perfect match, go ahead and top
   if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
+    myLog() << "Score exceeds hgih confidence threshold, stopping search";
     doKill();
   }
 }
@@ -76,7 +78,10 @@ void EntryUpdateJob::slotDone() {
     const int matchToBeat = (m_mode == PerfectMatchOnly ? EntryComparison::ENTRY_PERFECT_MATCH
                                                         : EntryComparison::ENTRY_GOOD_MATCH);
     if(m_bestMatchScore > matchToBeat) {
+      myLog() << "Best match is good enough, updating the entry";
       Merge::mergeEntry(m_entry, m_bestMatchEntry);
+    } else {
+      myLog() << "Best match is not good enough, not updating the entry";
     }
   }
   emitResult();

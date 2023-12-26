@@ -174,7 +174,7 @@ int main(int argc, char* argv[]) {
   }
   if(!logFile.isEmpty()) {
     Tellico::Logger::self()->setLogFile(logFile);
-    myLog() << "Starting Tellico at" << QDateTime::currentDateTime().toString(Qt::ISODate);
+    myLog() << "Starting Tellico" << QStringLiteral(TELLICO_VERSION) << "at" << QDateTime::currentDateTime().toString(Qt::ISODate);
     myLog() << "Opening log file" << logFile;
   }
 

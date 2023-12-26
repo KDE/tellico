@@ -1300,6 +1300,7 @@ void MainWindow::slotFileOpen() {
     const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QStringLiteral("kfiledialog:///open")), fileClass);
     QUrl url = QFileDialog::getOpenFileUrl(this, i18n("Open File"), startUrl, filter);
     if(!url.isEmpty() && url.isValid()) {
+      myLog() << "Opening collection file:" << url.toDisplayString(QUrl::PreferLocalFile);
       slotFileOpen(url);
       if(url.isLocalFile()) {
         KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());

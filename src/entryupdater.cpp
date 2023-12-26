@@ -115,7 +115,6 @@ void EntryUpdater::slotStartNext() {
   ProgressManager::self()->setProgress(this, m_fetchers.count() * (m_origEntryCount - m_entriesToUpdate.count()) + m_fetchIndex);
 
   Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
-//  myDebug() << "starting update from" << f->source();
   f->startUpdate(m_entriesToUpdate.front());
 }
 
@@ -125,13 +124,14 @@ void EntryUpdater::slotDone() {
     return;
   }
 
-  if(!m_results.isEmpty()) {
+  if(m_results.isEmpty()) {
+    myLog() << "No search results found to update entry";
+  } else {
     handleResults();
   }
 
   m_results.clear();
   ++m_fetchIndex;
-//  myDebug() << m_fetchIndex;
   if(m_fetchIndex == m_fetchers.count()) {
     m_fetchIndex = 0;
     // we've gone through the loop for the first entry in the vector
@@ -230,6 +230,7 @@ void EntryUpdater::handleResults() {
   if(matches.count() == 1) {
     match = matches.front();
   } else if(matches.count() > 1) {
+    myLog() << "Found" << matches.count() << "good results";
     match = askUser(matches);
   }
   // askUser() could come back with nil

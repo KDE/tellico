@@ -92,9 +92,11 @@ void Fetcher::startUpdate(Tellico::Data::EntryPtr entry_) {
   m_request = updateRequest(entry_);
   m_request.setCollectionType(entry_->collection()->type());
   if(m_request.isNull()) {
-    myLog() << "insufficient info to update" << entry_->title();
+    myLog() << "Insufficient info from" << source() << "to update" << entry_->title();
     emit signalDone(this); // always need to emit this if not continuing with the search
     return;
+  } else {
+    myLog() << "Starting update from" << source() << "for" << entry_->title();
   }
   search();
 }
