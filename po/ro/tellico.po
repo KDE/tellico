@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-24 00:42+0000\n"
+"POT-Creation-Date: 2023-12-26 00:42+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -689,7 +689,7 @@ msgstr ""
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:255
 #: src/fetch/googlebookfetcher.cpp:260 src/fetch/igdbfetcher.cpp:368
-#: src/fetch/imdbfetcher.cpp:471 src/fetch/itunesfetcher.cpp:241
+#: src/fetch/imdbfetcher.cpp:459 src/fetch/itunesfetcher.cpp:241
 #: src/fetch/kinopoiskfetcher.cpp:277 src/fetch/kinoteatrfetcher.cpp:240
 #: src/fetch/mobygamesfetcher.cpp:460 src/fetch/moviemeterfetcher.cpp:216
 #: src/fetch/moviemeterfetcher.cpp:221 src/fetch/numistafetcher.cpp:346
@@ -3253,8 +3253,8 @@ msgstr ""
 #: src/fetch/doubanfetcher.cpp:345 src/fetch/doubanfetcher.cpp:363
 #: src/fetch/doubanfetcher.cpp:381 src/fetch/doubanfetcher.cpp:618
 #: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:322
-#: src/fetch/filmaffinityfetcher.cpp:459 src/fetch/imdbfetcher.cpp:482
-#: src/fetch/imdbfetcher.cpp:544 src/fetch/kinopoiskfetcher.cpp:341
+#: src/fetch/filmaffinityfetcher.cpp:459 src/fetch/imdbfetcher.cpp:470
+#: src/fetch/imdbfetcher.cpp:532 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:264 src/fetch/kinoteatrfetcher.cpp:508
 #: src/fetch/omdbfetcher.cpp:263 src/fetch/themoviedbfetcher.cpp:333
@@ -3265,14 +3265,14 @@ msgid "Original Title"
 msgstr ""
 
 #: src/fetch/allocinefetcher.cpp:432 src/fetch/filmaffinityfetcher.cpp:472
-#: src/fetch/imdbfetcher.cpp:561 src/fetch/kinopoiskfetcher.cpp:685
+#: src/fetch/imdbfetcher.cpp:549 src/fetch/kinopoiskfetcher.cpp:685
 #: src/fetch/themoviedbfetcher.cpp:614
 #, kde-format
 msgid "&Maximum cast: "
 msgstr ""
 
 #: src/fetch/allocinefetcher.cpp:445 src/fetch/filmaffinityfetcher.cpp:485
-#: src/fetch/imdbfetcher.cpp:574 src/fetch/kinopoiskfetcher.cpp:698
+#: src/fetch/imdbfetcher.cpp:562 src/fetch/kinopoiskfetcher.cpp:698
 #: src/fetch/themoviedbfetcher.cpp:627
 #, kde-format
 msgid ""
@@ -3494,7 +3494,7 @@ msgid ""
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:213
-#: src/fetch/colnectfetcher.cpp:948 src/fetch/imdbfetcher.cpp:579
+#: src/fetch/colnectfetcher.cpp:948 src/fetch/imdbfetcher.cpp:567
 #: src/fetch/itunesfetcher.cpp:517 src/fetch/mobygamesfetcher.cpp:672
 #: src/fetch/rpggeekfetcher.cpp:222 src/fetch/thegamesdbfetcher.cpp:658
 #: src/fetch/videogamegeekfetcher.cpp:213
@@ -3503,7 +3503,7 @@ msgid "&Image size: "
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:217
-#: src/fetch/colnectfetcher.cpp:952 src/fetch/imdbfetcher.cpp:582
+#: src/fetch/colnectfetcher.cpp:952 src/fetch/imdbfetcher.cpp:570
 #: src/fetch/itunesfetcher.cpp:521 src/fetch/mobygamesfetcher.cpp:675
 #: src/fetch/rpggeekfetcher.cpp:226 src/fetch/thegamesdbfetcher.cpp:661
 #: src/fetch/videogamegeekfetcher.cpp:217
@@ -3511,7 +3511,7 @@ msgstr ""
 msgid "Small Image"
 msgstr "Titlu"
 
-#: src/fetch/amazonfetcher.cpp:1150 src/fetch/imdbfetcher.cpp:583
+#: src/fetch/amazonfetcher.cpp:1150 src/fetch/imdbfetcher.cpp:571
 #: src/fetch/thegamesdbfetcher.cpp:662
 #, fuzzy, kde-format
 msgid "Medium Image"
@@ -3519,7 +3519,7 @@ msgstr "Suport"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:953 src/fetch/imdbfetcher.cpp:584
+#: src/fetch/colnectfetcher.cpp:953 src/fetch/imdbfetcher.cpp:572
 #: src/fetch/itunesfetcher.cpp:522 src/fetch/mobygamesfetcher.cpp:677
 #: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:663
 #: src/fetch/videogamegeekfetcher.cpp:218
@@ -3528,7 +3528,7 @@ msgid "Large Image"
 msgstr "Titlu"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:216
-#: src/fetch/colnectfetcher.cpp:951 src/fetch/imdbfetcher.cpp:585
+#: src/fetch/colnectfetcher.cpp:951 src/fetch/imdbfetcher.cpp:573
 #: src/fetch/itunesfetcher.cpp:520 src/fetch/mobygamesfetcher.cpp:678
 #: src/fetch/rpggeekfetcher.cpp:225 src/fetch/thegamesdbfetcher.cpp:664
 #: src/fetch/videogamegeekfetcher.cpp:216
@@ -3536,7 +3536,7 @@ msgstr "Titlu"
 msgid "No Image"
 msgstr "Pagini"
 
-#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:589
+#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:577
 #: src/fetch/mobygamesfetcher.cpp:682 src/fetch/thegamesdbfetcher.cpp:668
 #, kde-format
 msgid ""
@@ -3557,8 +3557,8 @@ msgid ""
 msgstr ""
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
-#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:490
-#: src/fetch/imdbfetcher.cpp:542 src/fetch/moviemeterfetcher.cpp:225
+#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:478
+#: src/fetch/imdbfetcher.cpp:530 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:258
 #: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:576
 #: src/fetch/tvmazefetcher.cpp:192 src/fetch/tvmazefetcher.cpp:384
@@ -3572,7 +3572,7 @@ msgid "Distributor"
 msgstr ""
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
-#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:506
+#: src/fetch/imdbfetcher.cpp:533 src/fetch/itunesfetcher.cpp:506
 #: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:573
 #: src/fetch/tvmazefetcher.cpp:382 src/field.cpp:335
 #, kde-format
@@ -3996,17 +3996,17 @@ msgstr ""
 msgid "Screenshot"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:470 src/fetch/imdbfetcher.cpp:541
+#: src/fetch/imdbfetcher.cpp:458 src/fetch/imdbfetcher.cpp:529
 #, fuzzy, kde-format
 msgid "IMDb Rating"
 msgstr "Calificativ"
 
-#: src/fetch/imdbfetcher.cpp:529 src/fetch/imdbfetcher.cpp:618
+#: src/fetch/imdbfetcher.cpp:517 src/fetch/imdbfetcher.cpp:646
 #, kde-format
 msgid "Internet Movie Database"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:540 src/fetch/kinopoiskfetcher.cpp:672
+#: src/fetch/imdbfetcher.cpp:528 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/thetvdbfetcher.cpp:572 src/fetch/tvmazefetcher.cpp:381
 #: src/field.cpp:331
@@ -4014,10 +4014,25 @@ msgstr ""
 msgid "IMDb Link"
 msgstr "Calificativ"
 
-#: src/fetch/imdbfetcher.cpp:543
+#: src/fetch/imdbfetcher.cpp:531
 #, fuzzy, kde-format
 msgid "Certifications"
 msgstr "Clasificare"
+
+#: src/fetch/imdbfetcher.cpp:583
+#, kde-format
+msgid "Locale"
+msgstr ""
+
+#: src/fetch/imdbfetcher.cpp:586
+#, kde-format
+msgid "Use system locale"
+msgstr ""
+
+#: src/fetch/imdbfetcher.cpp:587
+#, kde-format
+msgid "Use custom locale"
+msgstr ""
 
 #: src/fetch/isbndbfetcher.cpp:361
 #, kde-format
