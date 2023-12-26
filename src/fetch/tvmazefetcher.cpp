@@ -198,15 +198,12 @@ void TVmazeFetcher::slotComplete(KJob* job_) {
   const QJsonArray results = doc.array();
 
   if(results.isEmpty()) {
-    myDebug() << "no results";
     stop();
     return;
   }
 
   int count = 0;
   foreach(const QJsonValue& result, results) {
-//    myDebug() << "found result:" << result;
-
     Data::EntryPtr entry(new Data::Entry(coll));
     populateEntry(entry, result.toObject().value(QLatin1String("show"))
                                .toObject().toVariantMap(), false);
