@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-26 00:42+0000\n"
+"POT-Creation-Date: 2023-12-27 00:42+0000\n"
 "PO-Revision-Date: 2023-08-19 13:35+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -168,7 +168,7 @@ msgstr "Izena"
 msgid "Collection Size"
 msgstr "Bildumaren neurria"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1663
+#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1666
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Sarrerak guztira: %1"
@@ -712,7 +712,7 @@ msgstr "Eratorritako balio bat duen eremu batek balio-eredu bat izan behar du."
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:255
 #: src/fetch/googlebookfetcher.cpp:260 src/fetch/igdbfetcher.cpp:368
-#: src/fetch/imdbfetcher.cpp:459 src/fetch/itunesfetcher.cpp:241
+#: src/fetch/imdbfetcher.cpp:461 src/fetch/itunesfetcher.cpp:241
 #: src/fetch/kinopoiskfetcher.cpp:277 src/fetch/kinoteatrfetcher.cpp:240
 #: src/fetch/mobygamesfetcher.cpp:460 src/fetch/moviemeterfetcher.cpp:216
 #: src/fetch/moviemeterfetcher.cpp:221 src/fetch/numistafetcher.cpp:346
@@ -2796,8 +2796,8 @@ msgstr "XSL fitxategiak"
 msgid "Template Packages"
 msgstr "Txantiloi-paketeak"
 
-#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1295
-#: src/mainwindow.cpp:1470 src/reportdialog.cpp:428 src/reportdialog.cpp:443
+#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1297
+#: src/mainwindow.cpp:1473 src/reportdialog.cpp:428 src/reportdialog.cpp:443
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
@@ -2821,79 +2821,79 @@ msgstr "Ezabatu txantiloia"
 msgid "Select template to delete:"
 msgstr "Hautatu ezabatu beharreko txantiloia:"
 
-#: src/controller.cpp:140 src/controller.cpp:194 src/fetchdialog.cpp:330
+#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:330
 #: src/fetchdialog.cpp:429 src/fetchdialog.cpp:563 src/fetchdialog.cpp:624
 #: src/fetchdialog.cpp:638 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Prest."
 
-#: src/controller.cpp:360
+#: src/controller.cpp:359
 #, kde-format
 msgid "Do you really want to delete this entry?"
 msgstr "Benetan ezabatu nahi duzu sarrera hau?"
 
-#: src/controller.cpp:362
+#: src/controller.cpp:361
 #, kde-format
 msgid "Delete Entry"
 msgstr "Ezabatu sarrera"
 
-#: src/controller.cpp:374
+#: src/controller.cpp:373
 #, kde-format
 msgid "Do you really want to delete these entries?"
 msgstr "Benetan ezabatu nahi dituzu sarrera hauek?"
 
-#: src/controller.cpp:378
+#: src/controller.cpp:377
 #, kde-format
 msgid "Delete Multiple Entries"
 msgstr "Ezabatu sarrera anizkoitzak"
 
-#: src/controller.cpp:527
+#: src/controller.cpp:526
 #, kde-format
 msgid "&Sort By"
 msgstr "&Sailkatu honen arabera"
 
-#: src/controller.cpp:589 src/mainwindow.cpp:610
+#: src/controller.cpp:588 src/mainwindow.cpp:610
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "&Editatu sarrera..."
 
-#: src/controller.cpp:590 src/mainwindow.cpp:617
+#: src/controller.cpp:589 src/mainwindow.cpp:617
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "Bikoizt&u sarrera"
 
-#: src/controller.cpp:591 src/mainwindow.cpp:711
+#: src/controller.cpp:590 src/mainwindow.cpp:711
 #, kde-format
 msgid "&Update Entry"
 msgstr "Egunerat&u sarrera"
 
-#: src/controller.cpp:592 src/mainwindow.cpp:624
+#: src/controller.cpp:591 src/mainwindow.cpp:624
 #, kde-format
 msgid "&Delete Entry"
 msgstr "Eza&batu sarrera"
 
-#: src/controller.cpp:595
+#: src/controller.cpp:594
 #, kde-format
 msgid "&Edit Entries..."
 msgstr "&Editatu sarrerak..."
 
-#: src/controller.cpp:596
+#: src/controller.cpp:595
 #, kde-format
 msgid "D&uplicate Entries"
 msgstr "Bikoizt&u sarrerak"
 
-#: src/controller.cpp:597
+#: src/controller.cpp:596
 #, kde-format
 msgid "&Update Entries"
 msgstr "Egunerat&u sarrerak"
 
-#: src/controller.cpp:598
+#: src/controller.cpp:597
 #, kde-format
 msgid "&Delete Entries"
 msgstr "Eza&batu sarrerak"
 
-#: src/controller.cpp:655
+#: src/controller.cpp:654
 #, kde-format
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
@@ -3011,7 +3011,7 @@ msgstr "Erakutsi zutabe guztiak"
 msgid "Hide All Columns"
 msgstr "Ezkutatu zutabe guztiak"
 
-#: src/document.cpp:213 src/mainwindow.cpp:1409
+#: src/document.cpp:213 src/mainwindow.cpp:1412
 #, kde-format
 msgid "Saving file..."
 msgstr "Fitxategia gordetzen..."
@@ -3153,7 +3153,7 @@ msgstr "<b>%1</b> eguneratzen..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico-k ezin du kokatu sarrera lehenetsiaren estilo-orria."
 
-#: src/entryview.cpp:335 src/mainwindow.cpp:1816
+#: src/entryview.cpp:335 src/mainwindow.cpp:1819
 #, kde-format
 msgid "Please check your installation."
 msgstr "Ikuskatu zure instalazioa."
@@ -3287,7 +3287,7 @@ msgstr ""
 #: src/fetch/numistafetcher.cpp:288 src/fetch/numistafetcher.cpp:296
 #: src/fetch/omdbfetcher.cpp:183 src/fetch/thegamesdbfetcher.cpp:173
 #: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:346
-#: src/fetch/tvmazefetcher.cpp:268 src/fetch/upcitemdbfetcher.cpp:251
+#: src/fetch/tvmazefetcher.cpp:265 src/fetch/upcitemdbfetcher.cpp:251
 #: src/fetch/vgcollectfetcher.cpp:284 src/fetch/vndbfetcher.cpp:182
 #, kde-format
 msgid "The cover image could not be loaded."
@@ -3303,8 +3303,8 @@ msgstr "«AlloCiné»ren esteka"
 #: src/fetch/doubanfetcher.cpp:345 src/fetch/doubanfetcher.cpp:363
 #: src/fetch/doubanfetcher.cpp:381 src/fetch/doubanfetcher.cpp:618
 #: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:322
-#: src/fetch/filmaffinityfetcher.cpp:459 src/fetch/imdbfetcher.cpp:470
-#: src/fetch/imdbfetcher.cpp:532 src/fetch/kinopoiskfetcher.cpp:341
+#: src/fetch/filmaffinityfetcher.cpp:459 src/fetch/imdbfetcher.cpp:472
+#: src/fetch/imdbfetcher.cpp:534 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
 #: src/fetch/kinoteatrfetcher.cpp:264 src/fetch/kinoteatrfetcher.cpp:508
 #: src/fetch/omdbfetcher.cpp:263 src/fetch/themoviedbfetcher.cpp:333
@@ -3315,14 +3315,14 @@ msgid "Original Title"
 msgstr "Jatorrizko titulua"
 
 #: src/fetch/allocinefetcher.cpp:432 src/fetch/filmaffinityfetcher.cpp:472
-#: src/fetch/imdbfetcher.cpp:549 src/fetch/kinopoiskfetcher.cpp:685
+#: src/fetch/imdbfetcher.cpp:551 src/fetch/kinopoiskfetcher.cpp:685
 #: src/fetch/themoviedbfetcher.cpp:614
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Gehineko aktoreen zerrenda:"
 
 #: src/fetch/allocinefetcher.cpp:445 src/fetch/filmaffinityfetcher.cpp:485
-#: src/fetch/imdbfetcher.cpp:562 src/fetch/kinopoiskfetcher.cpp:698
+#: src/fetch/imdbfetcher.cpp:564 src/fetch/kinopoiskfetcher.cpp:698
 #: src/fetch/themoviedbfetcher.cpp:627
 #, kde-format
 msgid ""
@@ -3550,7 +3550,7 @@ msgstr ""
 "Datu-sorburu honetarako erabili nahi duzuna aukeratu."
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:213
-#: src/fetch/colnectfetcher.cpp:948 src/fetch/imdbfetcher.cpp:567
+#: src/fetch/colnectfetcher.cpp:948 src/fetch/imdbfetcher.cpp:569
 #: src/fetch/itunesfetcher.cpp:517 src/fetch/mobygamesfetcher.cpp:672
 #: src/fetch/rpggeekfetcher.cpp:222 src/fetch/thegamesdbfetcher.cpp:658
 #: src/fetch/videogamegeekfetcher.cpp:213
@@ -3559,7 +3559,7 @@ msgid "&Image size: "
 msgstr "&Irudiaren neurria:"
 
 #: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:217
-#: src/fetch/colnectfetcher.cpp:952 src/fetch/imdbfetcher.cpp:570
+#: src/fetch/colnectfetcher.cpp:952 src/fetch/imdbfetcher.cpp:572
 #: src/fetch/itunesfetcher.cpp:521 src/fetch/mobygamesfetcher.cpp:675
 #: src/fetch/rpggeekfetcher.cpp:226 src/fetch/thegamesdbfetcher.cpp:661
 #: src/fetch/videogamegeekfetcher.cpp:217
@@ -3567,7 +3567,7 @@ msgstr "&Irudiaren neurria:"
 msgid "Small Image"
 msgstr "Irudi txikia"
 
-#: src/fetch/amazonfetcher.cpp:1150 src/fetch/imdbfetcher.cpp:571
+#: src/fetch/amazonfetcher.cpp:1150 src/fetch/imdbfetcher.cpp:573
 #: src/fetch/thegamesdbfetcher.cpp:662
 #, kde-format
 msgid "Medium Image"
@@ -3575,7 +3575,7 @@ msgstr "Irudi ertaina"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:953 src/fetch/imdbfetcher.cpp:572
+#: src/fetch/colnectfetcher.cpp:953 src/fetch/imdbfetcher.cpp:574
 #: src/fetch/itunesfetcher.cpp:522 src/fetch/mobygamesfetcher.cpp:677
 #: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:663
 #: src/fetch/videogamegeekfetcher.cpp:218
@@ -3584,7 +3584,7 @@ msgid "Large Image"
 msgstr "Irudi handia"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:216
-#: src/fetch/colnectfetcher.cpp:951 src/fetch/imdbfetcher.cpp:573
+#: src/fetch/colnectfetcher.cpp:951 src/fetch/imdbfetcher.cpp:575
 #: src/fetch/itunesfetcher.cpp:520 src/fetch/mobygamesfetcher.cpp:678
 #: src/fetch/rpggeekfetcher.cpp:225 src/fetch/thegamesdbfetcher.cpp:664
 #: src/fetch/videogamegeekfetcher.cpp:216
@@ -3592,7 +3592,7 @@ msgstr "Irudi handia"
 msgid "No Image"
 msgstr "Irudirik gabe"
 
-#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:577
+#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:579
 #: src/fetch/mobygamesfetcher.cpp:682 src/fetch/thegamesdbfetcher.cpp:668
 #, kde-format
 msgid ""
@@ -3617,11 +3617,11 @@ msgstr ""
 "identifikatzen du, eta Amazon.com guneko esteka guztietan barneratuta dago."
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
-#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:478
-#: src/fetch/imdbfetcher.cpp:530 src/fetch/moviemeterfetcher.cpp:225
+#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:480
+#: src/fetch/imdbfetcher.cpp:532 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:258
 #: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:576
-#: src/fetch/tvmazefetcher.cpp:192 src/fetch/tvmazefetcher.cpp:384
+#: src/fetch/tvmazefetcher.cpp:192 src/fetch/tvmazefetcher.cpp:381
 #, kde-format
 msgid "Alternative Titles"
 msgstr "Ordezko tituluak"
@@ -3632,9 +3632,9 @@ msgid "Distributor"
 msgstr "Banatzailea"
 
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
-#: src/fetch/imdbfetcher.cpp:533 src/fetch/itunesfetcher.cpp:506
+#: src/fetch/imdbfetcher.cpp:535 src/fetch/itunesfetcher.cpp:506
 #: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:573
-#: src/fetch/tvmazefetcher.cpp:382 src/field.cpp:335
+#: src/fetch/tvmazefetcher.cpp:379 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
 msgstr "Atalak"
@@ -3659,7 +3659,7 @@ msgstr "«AnimeNfo»ren sailkapena"
 #: src/fetch/kinofetcher.cpp:387 src/fetch/kinoteatrfetcher.cpp:516
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
-#: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:392
+#: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:389
 #: src/fetch/upcitemdbfetcher.cpp:466 src/fetch/vgcollectfetcher.cpp:380
 #: src/fetch/vndbfetcher.cpp:442
 #, kde-format
@@ -4057,40 +4057,40 @@ msgstr "Internet Game Database (IGDB.com)"
 msgid "Screenshot"
 msgstr "Pantaila-argazkia"
 
-#: src/fetch/imdbfetcher.cpp:458 src/fetch/imdbfetcher.cpp:529
+#: src/fetch/imdbfetcher.cpp:460 src/fetch/imdbfetcher.cpp:531
 #, kde-format
 msgid "IMDb Rating"
 msgstr "IMDb sailkapena"
 
-#: src/fetch/imdbfetcher.cpp:517 src/fetch/imdbfetcher.cpp:646
+#: src/fetch/imdbfetcher.cpp:519 src/fetch/imdbfetcher.cpp:648
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
 
-#: src/fetch/imdbfetcher.cpp:528 src/fetch/kinopoiskfetcher.cpp:672
+#: src/fetch/imdbfetcher.cpp:530 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
-#: src/fetch/thetvdbfetcher.cpp:572 src/fetch/tvmazefetcher.cpp:381
+#: src/fetch/thetvdbfetcher.cpp:572 src/fetch/tvmazefetcher.cpp:378
 #: src/field.cpp:331
 #, kde-format
 msgid "IMDb Link"
 msgstr "«IMDb»ren esteka"
 
-#: src/fetch/imdbfetcher.cpp:531
+#: src/fetch/imdbfetcher.cpp:533
 #, kde-format
 msgid "Certifications"
 msgstr "Ziurtagiriak"
 
-#: src/fetch/imdbfetcher.cpp:583
+#: src/fetch/imdbfetcher.cpp:585
 #, kde-format
 msgid "Locale"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:586
+#: src/fetch/imdbfetcher.cpp:588
 #, kde-format
 msgid "Use system locale"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:587
+#: src/fetch/imdbfetcher.cpp:589
 #, kde-format
 msgid "Use custom locale"
 msgstr ""
@@ -4288,7 +4288,7 @@ msgstr "TMDb esteka"
 
 #: src/fetch/themoviedbfetcher.cpp:338 src/fetch/themoviedbfetcher.cpp:578
 #: src/fetch/thetvdbfetcher.cpp:254 src/fetch/thetvdbfetcher.cpp:574
-#: src/fetch/tvmazefetcher.cpp:181 src/fetch/tvmazefetcher.cpp:383
+#: src/fetch/tvmazefetcher.cpp:181 src/fetch/tvmazefetcher.cpp:380
 #, kde-format
 msgid "Network"
 msgstr ""
@@ -4832,8 +4832,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Taldea"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1109 src/mainwindow.cpp:1751
-#: src/mainwindow.cpp:1785 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1109 src/mainwindow.cpp:1754
+#: src/mainwindow.cpp:1788 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Jendea"
@@ -5141,14 +5141,14 @@ msgstr ""
 msgid "&Import"
 msgstr "&Inportatu"
 
-#: src/importdialog.cpp:377 src/mainwindow.cpp:1291 src/mainwindow.cpp:1468
+#: src/importdialog.cpp:377 src/mainwindow.cpp:1293 src/mainwindow.cpp:1471
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico fitxategiak"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1293 src/translators/tellicoxmlexporter.cpp:72
+#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:72
 #, kde-format
 msgid "XML Files"
 msgstr "XML fitxategiak"
@@ -6296,23 +6296,23 @@ msgstr ""
 "Uneko fitxategia aldatu da.\n"
 "Gorde nahi al duzu?"
 
-#: src/mainwindow.cpp:1235 src/mainwindow.cpp:1268
+#: src/mainwindow.cpp:1235 src/mainwindow.cpp:1269
 #, fuzzy, kde-format
 #| msgid "Create a new collection"
 msgid "Creating new collection..."
 msgstr "Sortu bilduma berri bat"
 
-#: src/mainwindow.cpp:1288 src/mainwindow.cpp:1311 src/mainwindow.cpp:1329
+#: src/mainwindow.cpp:1290 src/mainwindow.cpp:1314 src/mainwindow.cpp:1332
 #, kde-format
 msgid "Opening file..."
 msgstr "Fitxategia irekitzea..."
 
-#: src/mainwindow.cpp:1299
+#: src/mainwindow.cpp:1301
 #, kde-format
 msgid "Open File"
 msgstr "Ireki fitxategia"
 
-#: src/mainwindow.cpp:1420
+#: src/mainwindow.cpp:1423
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6321,59 +6321,59 @@ msgid ""
 "changed in the configuration dialog.</p></qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:1425
+#: src/mainwindow.cpp:1428
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Gorde irudiak bereizita"
 
-#: src/mainwindow.cpp:1426
+#: src/mainwindow.cpp:1429
 #, kde-format
 msgid "Save Images in File"
 msgstr "Gorde irudiak fitxategian"
 
-#: src/mainwindow.cpp:1466
+#: src/mainwindow.cpp:1469
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Gorde fitxategia fitxategi-izen berri batekin..."
 
-#: src/mainwindow.cpp:1475
+#: src/mainwindow.cpp:1478
 #, kde-format
 msgid "Save As"
 msgstr "Gorde honela"
 
-#: src/mainwindow.cpp:1541
+#: src/mainwindow.cpp:1544
 #, kde-format
 msgid "Printing..."
 msgstr "Inprimatzen..."
 
-#: src/mainwindow.cpp:1545
+#: src/mainwindow.cpp:1548
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
 
-#: src/mainwindow.cpp:1568
+#: src/mainwindow.cpp:1571
 #, kde-format
 msgid "Exiting..."
 msgstr "Irteten..."
 
-#: src/mainwindow.cpp:1670
+#: src/mainwindow.cpp:1673
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 iragazita; %2 hautatuta)"
 
-#: src/mainwindow.cpp:1673
+#: src/mainwindow.cpp:1676
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 iragazita)"
 
-#: src/mainwindow.cpp:1676
+#: src/mainwindow.cpp:1679
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 hautatuta)"
 
-#: src/mainwindow.cpp:1815 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1818 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:264
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6381,88 +6381,88 @@ msgstr "(%1 hautatuta)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico-k errore bat aurkitu du XSLT prozesatzean."
 
-#: src/mainwindow.cpp:1947
+#: src/mainwindow.cpp:1950
 #, kde-format
 msgid "Importing data..."
 msgstr "Datuak inportatzea..."
 
-#: src/mainwindow.cpp:1958
+#: src/mainwindow.cpp:1961
 #, kde-format
 msgid "Import File"
 msgstr "Inportatu fitxategia"
 
-#: src/mainwindow.cpp:1971
+#: src/mainwindow.cpp:1974
 #, kde-format
 msgid "Import Directory"
 msgstr "Inportatu direktorioa"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:1998
 #, kde-format
 msgid "Exporting data..."
 msgstr "Datuak esportatzen..."
 
-#: src/mainwindow.cpp:2018
+#: src/mainwindow.cpp:2021
 #, kde-format
 msgid "Export As"
 msgstr "Esportatu honela"
 
-#: src/mainwindow.cpp:2046
+#: src/mainwindow.cpp:2049
 #, kde-format
 msgid "String Macros"
 msgstr ""
 
-#: src/mainwindow.cpp:2047
+#: src/mainwindow.cpp:2050
 #, kde-format
 msgid "Macro"
 msgstr "Makroa"
 
-#: src/mainwindow.cpp:2047
+#: src/mainwindow.cpp:2050
 #, fuzzy, kde-format
 msgid "String"
 msgstr "Katea"
 
-#: src/mainwindow.cpp:2133
+#: src/mainwindow.cpp:2136
 #, kde-format
 msgid "Creating citations..."
 msgstr "Aipamenak sortzen..."
 
-#: src/mainwindow.cpp:2243
+#: src/mainwindow.cpp:2246
 #, kde-format
 msgid "Filters"
 msgstr "Iragazkiak"
 
-#: src/mainwindow.cpp:2244
+#: src/mainwindow.cpp:2247
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2267
+#: src/mainwindow.cpp:2270
 #, kde-format
 msgid "Loans"
 msgstr "Maileguak"
 
-#: src/mainwindow.cpp:2268
+#: src/mainwindow.cpp:2271
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2355
+#: src/mainwindow.cpp:2358
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
 "be saved and the images will be transferred to the new location."
 msgstr ""
 
-#: src/mainwindow.cpp:2396
+#: src/mainwindow.cpp:2399
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Eguneratu sarrerako datuak %1(e)tik"
 
-#: src/mainwindow.cpp:2415
+#: src/mainwindow.cpp:2418
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6471,7 +6471,7 @@ msgstr ""
 "Tellico-k aldiko mota honetako fitxategi bakarra inportatu dezake. Soilik %1 "
 "inportatuko da."
 
-#: src/mainwindow.cpp:2594
+#: src/mainwindow.cpp:2597
 #, fuzzy, kde-format
 #| msgid "Tellico Files"
 msgctxt "@title:window"
