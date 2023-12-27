@@ -111,8 +111,7 @@ int EntryComparison::score(const Tellico::Data::EntryPtr& e1, const Tellico::Dat
 //    FieldFormat::stripArticles(s2);
     const QString s1t = e1->formattedField(f, FieldFormat::ForceFormat);
     const QString s2t = e2->formattedField(f, FieldFormat::ForceFormat);
-    if(s1t == s2t) {
-//    if(!s1.isEmpty() && s1 == s2) {
+    if(s1t.compare(s2t, Qt::CaseInsensitive) == 0) {
       // let this one fall through if no match, without returning 0
       return MATCH_VALUE_WEAK;
     }
