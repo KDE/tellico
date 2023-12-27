@@ -28,11 +28,14 @@
 #include "../field.h"
 #include "../entry.h"
 #include "../collections/bookcollection.h"
+#include "../collections/videocollection.h"
+#include "../collections/filecatalog.h"
 #include "../entrycomparison.h"
 
 #include <KLocalizedString>
 
 #include <QTest>
+#include <QLoggingCategory>
 #include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( EntryComparisonTest )
@@ -41,6 +44,7 @@ Q_DECLARE_METATYPE(Tellico::EntryComparison::MatchValue)
 
 void EntryComparisonTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
   qRegisterMetaType<Tellico::EntryComparison::MatchValue>();
   KLocalizedString::setApplicationDomain("tellico");
 //  Tellico::ImageFactory::init();
@@ -60,37 +64,6 @@ void EntryComparisonTest::initTestCase() {
 
 void EntryComparisonTest::cleanupTestCase() {
 //  Tellico::ImageFactory::clean(true);
-}
-
-void EntryComparisonTest::testBookMatch() {
-  Tellico::Data::CollPtr c(new Tellico::Data::BookCollection(true));
-
-  // first check merging with same isbn
-  Tellico::Data::EntryPtr e1(new Tellico::Data::Entry(c));
-  e1->setField(QStringLiteral("title"), QStringLiteral("title1"));
-  e1->setField(QStringLiteral("author"), QStringLiteral("author1"));
-  e1->setField(QStringLiteral("edition"), QStringLiteral("edition1"));
-  e1->setField(QStringLiteral("pur_price"), QStringLiteral("price1"));
-  e1->setField(QStringLiteral("isbn"), QStringLiteral("1234567890"));
-  c->addEntries(e1);
-
-  Tellico::Data::EntryPtr e2(new Tellico::Data::Entry(c));
-  e2->setField(QStringLiteral("title"), QStringLiteral("title2"));
-  e2->setField(QStringLiteral("author"), QStringLiteral("author2"));
-  e2->setField(QStringLiteral("edition"), QStringLiteral("edition2"));
-  e2->setField(QStringLiteral("pur_price"), QStringLiteral("price2"));
-  e2->setField(QStringLiteral("isbn"), QStringLiteral("000000000"));
-
-  // not a good match
-  QVERIFY(c->sameEntry(e1, e2) < Tellico::EntryComparison::ENTRY_GOOD_MATCH);
-
-  // perfect match now
-  e2->setField(QStringLiteral("isbn"), QStringLiteral("1234567890"));
-  QCOMPARE(c->sameEntry(e1, e2), int(Tellico::EntryComparison::ENTRY_PERFECT_MATCH));
-
-  QBENCHMARK {
-    QCOMPARE(c->sameEntry(e1, e2), int(Tellico::EntryComparison::ENTRY_PERFECT_MATCH));
-  }
 }
 
 void EntryComparisonTest::testMatchScore() {
@@ -126,4 +99,93 @@ void EntryComparisonTest::testMatchScore_data() {
   QTest::newRow("author formatted") << QStringLiteral("author") << QStringLiteral("Doe, John") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
   QTest::newRow("author formatted2") << QStringLiteral("author") << QStringLiteral("doe, john") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
   QTest::newRow("author multiple") << QStringLiteral("author") << QStringLiteral("John Doe; Jane Doe") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
+}
+
+void EntryComparisonTest::testBookMatch() {
+  Tellico::Data::CollPtr c(new Tellico::Data::BookCollection(true));
+
+  Tellico::Data::EntryPtr e1(new Tellico::Data::Entry(c));
+  e1->setField(QStringLiteral("title"), QStringLiteral("title1"));
+  e1->setField(QStringLiteral("author"), QStringLiteral("author1"));
+  e1->setField(QStringLiteral("edition"), QStringLiteral("edition1"));
+  e1->setField(QStringLiteral("pur_price"), QStringLiteral("price1"));
+  e1->setField(QStringLiteral("isbn"), QStringLiteral("1234567890"));
+  c->addEntries(e1);
+
+  Tellico::Data::EntryPtr e2(new Tellico::Data::Entry(c));
+  e2->setField(QStringLiteral("title"), QStringLiteral("title2"));
+  e2->setField(QStringLiteral("author"), QStringLiteral("author2"));
+  e2->setField(QStringLiteral("edition"), QStringLiteral("edition2"));
+  e2->setField(QStringLiteral("pur_price"), QStringLiteral("price2"));
+  e2->setField(QStringLiteral("isbn"), QStringLiteral("000000000"));
+
+  // not a good match
+  QVERIFY(c->sameEntry(e1, e2) < Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  // matching the title makes a good match, even if author does not match
+  e2->setField(QStringLiteral("title"), QStringLiteral("title1"));
+  QVERIFY(c->sameEntry(e1, e2) > Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  // title and author both matching are enough for high confidence
+  e2->setField(QStringLiteral("author"), QStringLiteral("author1"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+
+  // perfect match for isbn by itself
+  e2->setField(QStringLiteral("title"), QString());
+  e2->setField(QStringLiteral("author"), QString());
+  e2->setField(QStringLiteral("isbn"), QStringLiteral("1234567890"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+}
+
+void EntryComparisonTest::testVideoMatch() {
+  Tellico::Data::CollPtr c(new Tellico::Data::VideoCollection(true));
+  Tellico::Data::FieldPtr f(new Tellico::Data::Field(QStringLiteral("imdb"),
+                                                     QStringLiteral("IMDB"),
+                                                     Tellico::Data::Field::URL));
+  c->addField(f);
+
+  Tellico::Data::EntryPtr e1(new Tellico::Data::Entry(c));
+  e1->setField(QStringLiteral("title"), QStringLiteral("the man from snowy river"));
+  e1->setField(QStringLiteral("year"), QStringLiteral("1982"));
+  e1->setField(QStringLiteral("director"), QStringLiteral("a director"));
+  e1->setField(QStringLiteral("studio"), QStringLiteral("studio 7"));
+  c->addEntries(e1);
+
+  Tellico::Data::EntryPtr e2(new Tellico::Data::Entry(c));
+  e2->setField(QStringLiteral("title"), QStringLiteral("man from snowy river, the"));
+
+  // not a good match
+  QVERIFY(c->sameEntry(e1, e2) < Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  // matching the year makes a good match
+  e2->setField(QStringLiteral("year"), QStringLiteral("1982"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  // matching the title exactly and year makes a perfect match
+  e2->setField(QStringLiteral("title"), QStringLiteral("the man from snowy river"));
+  e2->setField(QStringLiteral("year"), QStringLiteral("1982"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+
+  // imdb link should be pefect match by itself, ignoring host
+  e1->setField(QStringLiteral("imdb"), QLatin1String("https://www.imdb.com/title/tt1856080/"));
+  e2->setField(QStringLiteral("imdb"), QLatin1String("https://us.imdb.com/title/tt1856080/"));
+  e2->setField(QStringLiteral("title"), QString());
+  e2->setField(QStringLiteral("year"), QString());
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+}
+
+void EntryComparisonTest::testFileMatch() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ris"));
+  Tellico::Data::CollPtr c(new Tellico::Data::FileCatalog(true));
+
+  // first check merging with same isbn
+  Tellico::Data::EntryPtr e1(new Tellico::Data::Entry(c));
+  e1->setField(QStringLiteral("url"), url.url());
+  c->addEntries(e1);
+
+  Tellico::Data::EntryPtr e2(new Tellico::Data::Entry(c));
+  e2->setField(QStringLiteral("url"), url.url());
+
+  // perfect match by file url
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
 }

@@ -555,11 +555,10 @@ bool Collection::removeEntries(const Tellico::Data::EntryList& vec_) {
 }
 
 Tellico::Data::FieldList Collection::fieldsByCategory(const QString& cat_) {
-#ifndef NDEBUG
   if(!m_fieldCategories.contains(cat_)) {
     myDebug() << cat_ << "' is not in category list";
   }
-#endif
+
   if(cat_.isEmpty()) {
     myDebug() << "empty category!";
     return FieldList();

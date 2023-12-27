@@ -96,19 +96,8 @@ int EntryComparison::score(const Tellico::Data::EntryPtr& e1, const Tellico::Dat
   if(s1.compare(s2, Qt::CaseInsensitive) == 0) {
     return MATCH_VALUE_STRONG;
   }
-  if(f->name() == QStringLiteral("arxiv")) {
-    // normalize and unVersion arxiv ID
-    static const QRegularExpression rx1(QStringLiteral("^arxiv:"));
-    static const QRegularExpression rx2(QStringLiteral("v\\d+$"));
-    s1.remove(rx1);
-    s1.remove(rx2);
-    s2.remove(rx1);
-    s2.remove(rx2);
-    return (s1 == s2) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
-  }
+
   if(f->formatType() == FieldFormat::FormatTitle) {
-//    FieldFormat::stripArticles(s1);
-//    FieldFormat::stripArticles(s2);
     const QString s1t = e1->formattedField(f, FieldFormat::ForceFormat);
     const QString s2t = e2->formattedField(f, FieldFormat::ForceFormat);
     if(s1t.compare(s2t, Qt::CaseInsensitive) == 0) {
@@ -132,14 +121,24 @@ int EntryComparison::score(const Tellico::Data::EntryPtr& e1, const Tellico::Dat
     }
     return matches / sl1.count();
   }
+  if(f->name() == QStringLiteral("arxiv")) {
+    // normalize and unVersion arxiv ID
+    static const QRegularExpression rx1(QStringLiteral("^arxiv:"));
+    static const QRegularExpression rx2(QStringLiteral("v\\d+$"));
+    s1.remove(rx1);
+    s1.remove(rx2);
+    s2.remove(rx1);
+    s2.remove(rx2);
+    return (s1 == s2) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
+  }
+
   // last resort try removing punctuation
   static const QRegularExpression notAlphaNum(QStringLiteral("[^\\s\\w]"));
   QString s1a = s1;
   s1a.remove(notAlphaNum);
   QString s2a = s2;
   s2a.remove(notAlphaNum);
-  if(!s1a.isEmpty() && s1a == s2a) {
-//    myDebug() << "match without punctuation";
+  if(!s1a.isEmpty() && s1a.compare(s2a, Qt::CaseInsensitive) == 0) {
     return MATCH_VALUE_STRONG;
   }
   return MATCH_VALUE_NONE;

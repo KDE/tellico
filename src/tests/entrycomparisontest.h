@@ -36,9 +36,11 @@ private Q_SLOTS:
   void initTestCase();
   void cleanupTestCase();
 
-  void testBookMatch();
   void testMatchScore();
   void testMatchScore_data();
+  void testBookMatch();
+  void testVideoMatch();
+  void testFileMatch();
 
 private:
   Tellico::Data::CollPtr m_coll;
