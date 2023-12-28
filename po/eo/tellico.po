@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-27 00:42+0000\n"
-"PO-Revision-Date: 2023-12-16 23:54+0100\n"
+"PO-Revision-Date: 2023-12-27 22:06+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -4089,17 +4089,17 @@ msgstr "Atestoj"
 #: src/fetch/imdbfetcher.cpp:585
 #, kde-format
 msgid "Locale"
-msgstr ""
+msgstr "Lokaĵaro"
 
 #: src/fetch/imdbfetcher.cpp:588
 #, kde-format
 msgid "Use system locale"
-msgstr ""
+msgstr "Uzi sisteman lokaĵaron"
 
 #: src/fetch/imdbfetcher.cpp:589
 #, kde-format
 msgid "Use custom locale"
-msgstr ""
+msgstr "Uzi propre agorditan lokaĵaron"
 
 #: src/fetch/isbndbfetcher.cpp:361
 #, kde-format
@@ -7431,21 +7431,3 @@ msgstr "Serĉi"
 #, kde-format
 msgid "Clear"
 msgstr "Forigi"
-
-#~ msgid "Internet Movie Database (French)"
-#~ msgstr "Interreta filma datenbazo (franca)"
-
-#~ msgid "Internet Movie Database (Spanish)"
-#~ msgstr "Interreta filma datenbazo (hispana)"
-
-#~ msgid "Internet Movie Database (German)"
-#~ msgstr "Interreta filma datenbazo (germana)"
-
-#~ msgid "Internet Movie Database (Italian)"
-#~ msgstr "Interreta filma datenbazo (itala)"
-
-#~ msgid "Internet Movie Database (Portuguese)"
-#~ msgstr "Interreta filma datenbazo (portugala)"
-
-#~ msgid "Download cover &image"
-#~ msgstr "Elŝuti kovrilan b&ildon"
