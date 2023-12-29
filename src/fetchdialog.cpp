@@ -313,6 +313,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_statusLabel = new QLabel(m_statusBar);
   m_statusBar->addPermanentWidget(m_statusLabel, 1);
   m_progress = new QProgressBar(m_statusBar);
+  m_progress->setFormat(i18nc("%p is the percent value, % is the percent sign", "%p%"));
   m_progress->setMaximum(0);
   m_progress->setFixedHeight(fontMetrics().height()+2);
   m_progress->hide();
