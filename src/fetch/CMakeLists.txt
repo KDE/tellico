@@ -82,7 +82,7 @@ TARGET_LINK_LIBRARIES(fetch
     newstuff
     utils
     ${TELLICO_BTPARSE_LIBS}
-    Qt${QT_VERSION_MAJOR}::Network
+    Qt${QT_MAJOR_VERSION}::Network
     KF${KF_MAJOR_VERSION}::Archive
     KF${KF_MAJOR_VERSION}::IconThemes
     KF${KF_MAJOR_VERSION}::JobWidgets

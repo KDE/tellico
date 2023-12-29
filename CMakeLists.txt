@@ -50,9 +50,7 @@ include(CheckSymbolExists)
 check_symbol_exists(strlwr "string.h" HAVE_STRLWR)
 check_symbol_exists(strupr "string.h" HAVE_STRUPR)
 
-find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
-message(STATUS "Found Qt version ${QT_VERSION_MAJOR}")
-find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Widgets
     Xml
     DBus
@@ -61,7 +59,7 @@ find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     PrintSupport
 )
 
-set(KF_MAJOR_VERSION ${QT_VERSION_MAJOR})
+set(KF_MAJOR_VERSION ${QT_MAJOR_VERSION})
 find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS
     Archive
     Codecs
@@ -83,21 +81,21 @@ find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS
     XmlGui
 )
 if(NOT USE_KHTML)
-  find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
+  find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
     WebEngineWidgets
   )
-  set_package_properties(Qt${QT_VERSION_MAJOR}WebEngineWidgets PROPERTIES
+  set_package_properties(Qt${QT_MAJOR_VERSION}WebEngineWidgets PROPERTIES
     DESCRIPTION "Building with QWebEngine is preferrable to KHTML"
     TYPE OPTIONAL)
 endif()
-if(USE_KHTML OR NOT Qt${QT_VERSION_MAJOR}WebEngineWidgets_FOUND)
+if(USE_KHTML OR NOT Qt${QT_MAJOR_VERSION}WebEngineWidgets_FOUND)
   set(USE_KHTML ON)
   find_package(KF${KF_MAJOR_VERSION}KHtml REQUIRED NO_MODULE)
   set_package_properties(KF${KF_MAJOR_VERSION}Html PROPERTIES
     DESCRIPTION "Building with QWebEngine is preferrable to KHTML")
 endif()
 
-find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
   Charts
 )
 
@@ -170,7 +168,7 @@ if(Yaz_FOUND)
 endif(Yaz_FOUND)
 
 # FindPoppler is part of ECM >= 5.19
-find_package(Poppler COMPONENTS Qt${QT_VERSION_MAJOR})
+find_package(Poppler COMPONENTS Qt${QT_MAJOR_VERSION})
 
 find_package(Exempi 2.0)
 set_package_properties(Exempi PROPERTIES
@@ -267,7 +265,7 @@ add_subdirectory(doc)
 ########## Wrap tests results around the tests done within the source
 
 macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
-macro_bool_to_01(Poppler_Qt${QT_VERSION_MAJOR}_FOUND HAVE_POPPLER)
+macro_bool_to_01(Poppler_Qt${QT_MAJOR_VERSION}_FOUND HAVE_POPPLER)
 macro_bool_to_01(Exempi_FOUND HAVE_EXEMPI)
 macro_bool_to_01(Yaz_FOUND HAVE_YAZ)
 macro_bool_to_01(KF${KF_MAJOR_VERSION}Sane_FOUND HAVE_KSANE)
@@ -281,7 +279,7 @@ macro_bool_to_01(Btparse_FOUND HAVE_LIBBTPARSE)
 macro_bool_to_01(CDIO_FOUND HAVE_CDIO)
 macro_bool_to_01(Csv_FOUND HAVE_LIBCSV)
 macro_bool_to_01(KF${KF_MAJOR_VERSION}FileMetaData_FOUND HAVE_KFILEMETADATA)
-macro_bool_to_01(Qt${QT_VERSION_MAJOR}Charts_FOUND HAVE_QCHARTS)
+macro_bool_to_01(Qt${QT_MAJOR_VERSION}Charts_FOUND HAVE_QCHARTS)
 macro_bool_to_01(ENABLE_BTPARSE ENABLE_BTPARSE)
 macro_bool_to_01(BUILD_FETCHER_TESTS ENABLE_NETWORK_TESTS)
 

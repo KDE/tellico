@@ -9,47 +9,47 @@ include_directories(${Tellico_BINARY_DIR}/src)
 
 ecm_add_test(entitytest.cpp ../fieldformat.cpp
     TEST_NAME entitytest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test utils config
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test utils config
 )
 
 ecm_add_test(comparisontest.cpp
     TEST_NAME comparisontest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test tellicotest tellicomodels
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test tellicotest tellicomodels
 )
 
 ecm_add_test(completiontest.cpp ../fieldcompletion.cpp ../field.cpp ../fieldformat.cpp
     TEST_NAME completiontest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test KF${KF_MAJOR_VERSION}::Completion utils config
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF${KF_MAJOR_VERSION}::Completion utils config
 )
 
 ecm_add_test(cuecattest.cpp
     TEST_NAME cuecattest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test utils
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test utils
 )
 
 ecm_add_test(isbntest.cpp
     TEST_NAME isbntest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test utils
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test utils
 )
 
 ecm_add_test(lccntest.cpp
     TEST_NAME lccntest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test utils
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test utils
 )
 
 ecm_add_test(lcctest.cpp ../field.cpp ../fieldformat.cpp ../tellico_debug.cpp
     TEST_NAME lcctest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test tellicomodels
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test tellicomodels
 )
 
 ecm_add_test(formattest.cpp ../fieldformat.cpp
     TEST_NAME formattest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test config
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test config
 )
 
 ecm_add_test(fieldtest.cpp ../field.cpp ../fieldformat.cpp
     TEST_NAME fieldtest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test config utils
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test config utils
 )
 
 ecm_add_test(imagetest.cpp
@@ -59,27 +59,27 @@ ecm_add_test(imagetest.cpp
              ../fieldformat.cpp
              ../tellico_debug.cpp
     TEST_NAME imagetest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test KF${KF_MAJOR_VERSION}::Archive images
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF${KF_MAJOR_VERSION}::Archive images
 )
 
 ecm_add_test(imagejobtest.cpp ../fieldformat.cpp ../tellico_debug.cpp
     TEST_NAME imagejobtest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test  KF${KF_MAJOR_VERSION}::Archive images
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test  KF${KF_MAJOR_VERSION}::Archive images
 )
 
 ecm_add_test(iso6937test.cpp ../tellico_debug.cpp
     TEST_NAME iso6937test
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test utils
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test utils
 )
 
 ecm_add_test(iso5426test.cpp ../tellico_debug.cpp
     TEST_NAME iso5426test
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test utils
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test utils
 )
 
 ecm_add_test(newstufftest.cpp ../fieldformat.cpp ../tellico_debug.cpp
     TEST_NAME newstufftest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test newstuff config
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test newstuff config
 )
 
 set(tellicotest_SRCS
@@ -98,7 +98,7 @@ set(tellicotest_SRCS
 )
 
 add_library(tellicotest STATIC ${tellicotest_SRCS})
-target_link_libraries(tellicotest Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::ConfigWidgets)
+target_link_libraries(tellicotest Qt${QT_MAJOR_VERSION}::Core Qt${QT_MAJOR_VERSION}::Gui KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::ConfigWidgets)
 
 add_dependencies(tellicotest tellico_config)
 
@@ -116,10 +116,10 @@ set(translatorstest_SRCS
 
 add_library(translatorstest STATIC ${translatorstest_SRCS})
 target_link_libraries(translatorstest
-    Qt${QT_VERSION_MAJOR}::Core
-    Qt${QT_VERSION_MAJOR}::Gui
-    Qt${QT_VERSION_MAJOR}::Widgets
-    Qt${QT_VERSION_MAJOR}::Xml
+    Qt${QT_MAJOR_VERSION}::Core
+    Qt${QT_MAJOR_VERSION}::Gui
+    Qt${QT_MAJOR_VERSION}::Widgets
+    Qt${QT_MAJOR_VERSION}::Xml
     KF${KF_MAJOR_VERSION}::I18n
     KF${KF_MAJOR_VERSION}::Archive
     KF${KF_MAJOR_VERSION}::KIOWidgets
@@ -136,7 +136,7 @@ set(TELLICO_TEST_LIBS
     images
     core
     tellicomodels
-    Qt${QT_VERSION_MAJOR}::Test
+    Qt${QT_MAJOR_VERSION}::Test
     KF${KF_MAJOR_VERSION}::KIOCore
     KF${KF_MAJOR_VERSION}::Archive
 )
@@ -254,7 +254,7 @@ ecm_add_test(citetest.cpp
              ../collections/bibtexcollection.cpp
              ../core/filehandler.cpp
     TEST_NAME citetest
-    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test cite tellicotest config images
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test cite tellicotest config images
 )
 
 ecm_add_test(ciwtest.cpp
@@ -448,9 +448,9 @@ set(fetcherstest_SRCS
 add_library(fetcherstest STATIC ${fetcherstest_SRCS})
 target_link_libraries(fetcherstest
     translatorstest
-    Qt${QT_VERSION_MAJOR}::Core
-    Qt${QT_VERSION_MAJOR}::Gui
-    Qt${QT_VERSION_MAJOR}::DBus
+    Qt${QT_MAJOR_VERSION}::Core
+    Qt${QT_MAJOR_VERSION}::Gui
+    Qt${QT_MAJOR_VERSION}::DBus
     KF${KF_MAJOR_VERSION}::ConfigCore
     KF${KF_MAJOR_VERSION}::ConfigGui
     KF${KF_MAJOR_VERSION}::ConfigWidgets
@@ -498,9 +498,9 @@ ecm_add_test(pdftest.cpp
 if(Exempi_FOUND)
   target_link_libraries(pdftest ${Exempi_LIBRARIES})
 endif(Exempi_FOUND)
-if(Poppler_Qt${QT_VERSION_MAJOR}_FOUND)
-  target_link_libraries(pdftest Poppler::Qt${QT_VERSION_MAJOR})
-endif(Poppler_Qt${QT_VERSION_MAJOR}_FOUND)
+if(Poppler_Qt${QT_MAJOR_VERSION}_FOUND)
+  target_link_libraries(pdftest Poppler::Qt${QT_MAJOR_VERSION})
+endif(Poppler_Qt${QT_MAJOR_VERSION}_FOUND)
 if(KF${KF_MAJOR_VERSION}FileMetaData_FOUND)
   target_link_libraries(pdftest KF${KF_MAJOR_VERSION}::FileMetaData)
 endif(KF${KF_MAJOR_VERSION}FileMetaData_FOUND)

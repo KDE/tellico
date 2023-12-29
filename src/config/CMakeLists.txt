@@ -15,7 +15,7 @@ ADD_CUSTOM_TARGET(tellico_config DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/tellico_con
 add_library(config STATIC ${config_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(config
-    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_MAJOR_VERSION}::Core
     KF${KF_MAJOR_VERSION}::I18n
     KF${KF_MAJOR_VERSION}::ConfigCore
     KF${KF_MAJOR_VERSION}::ConfigGui

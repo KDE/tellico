@@ -8,6 +8,6 @@ SET(barcode_STAT_SRCS
 add_library(barcode STATIC ${barcode_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(barcode
-    Qt${QT_VERSION_MAJOR}::Core
-    Qt${QT_VERSION_MAJOR}::Gui
+    Qt${QT_MAJOR_VERSION}::Core
+    Qt${QT_MAJOR_VERSION}::Gui
 )
