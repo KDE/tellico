@@ -4054,7 +4054,7 @@ msgstr "Enllaç cap a Google Book"
 #: src/fetch/googlebookfetcher.cpp:363
 #, kde-format
 msgid "Google Book Search"
-msgstr "Busca a Google Book"
+msgstr "Busca en Google Book"
 
 #: src/fetch/hathitrustfetcher.cpp:309 src/fetch/z3950fetcher.cpp:577
 #, kde-format
