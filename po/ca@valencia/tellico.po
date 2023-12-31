@@ -4070,7 +4070,7 @@ msgstr "Enllaç cap a Google Book"
 #: src/fetch/googlebookfetcher.cpp:362
 #, kde-format
 msgid "Google Book Search"
-msgstr "Busca a Google Book"
+msgstr "Busca en Google Book"
 
 #: src/fetch/hathitrustfetcher.cpp:309 src/fetch/z3950fetcher.cpp:578
 #, kde-format
@@ -4561,7 +4561,7 @@ msgstr "Atu&ra"
 #: src/fetchdialog.cpp:142 src/mainwindow.cpp:597
 #, kde-format
 msgid "Internet Search"
-msgstr "Busca a Internet"
+msgstr "Busca en Internet"
 
 #: src/fetchdialog.cpp:153
 #, kde-format
@@ -6071,7 +6071,7 @@ msgstr "Busca d'Internet..."
 #: src/mainwindow.cpp:600
 #, kde-format
 msgid "Search the internet..."
-msgstr "Busca a Internet..."
+msgstr "Busca en Internet..."
 
 #: src/mainwindow.cpp:610
 #, kde-format
