@@ -60,6 +60,7 @@ void AlexandriaTest::testImport() {
   QCOMPARE(coll->entryCount(), 2);
   // should be translated somehow
   QCOMPARE(coll->title(), QSL("My Books"));
+  QVERIFY(importer.canImport(coll->type()));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QCOMPARE(entry->field(QSL("title")), QSL("The Hallowed Hunt"));

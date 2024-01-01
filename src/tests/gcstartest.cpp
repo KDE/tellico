@@ -66,6 +66,7 @@ void GCstarTest::testBook() {
   QCOMPARE(coll->entryCount(), 2);
   // should be translated somehow
   QCOMPARE(coll->title(), QStringLiteral("GCstar Import"));
+  QVERIFY(importer.canImport(coll->type()));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
@@ -118,6 +119,7 @@ void GCstarTest::testComicBook() {
   QCOMPARE(coll->entryCount(), 1);
   // should be translated somehow
   QCOMPARE(coll->title(), QStringLiteral("GCstar Import"));
+  QVERIFY(importer.canImport(coll->type()));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
@@ -174,6 +176,7 @@ void GCstarTest::testVideo() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
   QCOMPARE(coll->entryCount(), 3);
+  QVERIFY(importer.canImport(coll->type()));
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
   QVERIFY(entry);
@@ -243,6 +246,7 @@ void GCstarTest::testMusic() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
   QCOMPARE(coll->entryCount(), 1);
+  QVERIFY(importer.canImport(coll->type()));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
@@ -294,6 +298,7 @@ void GCstarTest::testVideoGame() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Game);
   QCOMPARE(coll->entryCount(), 2);
+  QVERIFY(importer.canImport(coll->type()));
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
   QVERIFY(entry);
@@ -339,6 +344,7 @@ void GCstarTest::testBoardGame() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::BoardGame);
   QCOMPARE(coll->entryCount(), 2);
+  QVERIFY(importer.canImport(coll->type()));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
@@ -386,6 +392,7 @@ void GCstarTest::testWine() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Wine);
   QCOMPARE(coll->entryCount(), 1);
+  QVERIFY(importer.canImport(coll->type()));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
@@ -439,6 +446,7 @@ void GCstarTest::testCoin() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Coin);
   QCOMPARE(coll->entryCount(), 1);
+  QVERIFY(importer.canImport(coll->type()));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
@@ -487,6 +495,7 @@ void GCstarTest::testCustomFields() {
   QCOMPARE(coll->entryCount(), 2);
   // should be translated somehow
   QCOMPARE(coll->title(), QStringLiteral("GCstar Import"));
+  QVERIFY(importer.canImport(coll->type()));
 
   // test custom fields
   Tellico::Data::FieldPtr field = coll->fieldByName(QStringLiteral("gcsfield1"));

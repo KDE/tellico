@@ -62,6 +62,7 @@ void MarcTest::testMarc() {
   QCOMPARE(coll->entryCount(), 1);
   // since the importer uses MODS as an intermediate format, the title reflects that
   QCOMPARE(coll->title(), QStringLiteral("MODS Import"));
+  QVERIFY(importer.canImport(coll->type()));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);

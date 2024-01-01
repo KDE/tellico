@@ -60,6 +60,7 @@ void GriffithTest::testMovies() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
   QCOMPARE(coll->entryCount(), 5);
+  QVERIFY(importer.canImport(coll->type()));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);

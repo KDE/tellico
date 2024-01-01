@@ -27,7 +27,6 @@
 #include "adstest.h"
 
 #include "../translators/adsimporter.h"
-#include "../collections/bibtexcollection.h"
 #include "../fieldformat.h"
 
 #include <KLocalizedString>
@@ -51,6 +50,7 @@ void AdsTest::testImport() {
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 1);
   QCOMPARE(coll->title(), QStringLiteral("Bibliography"));
+  QVERIFY(importer.canImport(coll->type()));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
