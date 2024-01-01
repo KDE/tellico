@@ -50,6 +50,7 @@ GCstarImporter::GCstarImporter(const QString& text_) : TextImporter(text_), m_ca
 bool GCstarImporter::canImport(int type) const {
   return type == Data::Collection::Video
       || type == Data::Collection::Book
+      || type == Data::Collection::ComicBook
       || type == Data::Collection::Album
       || type == Data::Collection::Game
       || type == Data::Collection::Wine
