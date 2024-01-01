@@ -28,7 +28,11 @@
 #include "../field.h"
 #include "../entry.h"
 #include "../collections/bookcollection.h"
+#include "../collections/bibtexcollection.h"
 #include "../collections/videocollection.h"
+#include "../collections/comicbookcollection.h"
+#include "../collections/musiccollection.h"
+#include "../collections/gamecollection.h"
 #include "../collections/filecatalog.h"
 #include "../entrycomparison.h"
 
@@ -137,6 +141,65 @@ void EntryComparisonTest::testBookMatch() {
   QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
 }
 
+void EntryComparisonTest::testBibtexMatch() {
+  Tellico::Data::CollPtr c(new Tellico::Data::BibtexCollection(true));
+
+  Tellico::Data::EntryPtr e1(new Tellico::Data::Entry(c));
+  e1->setField(QStringLiteral("title"), QStringLiteral("title1"));
+  e1->setField(QStringLiteral("author"), QStringLiteral("author1"));
+  e1->setField(QStringLiteral("edition"), QStringLiteral("edition1"));
+  e1->setField(QStringLiteral("doi"), QStringLiteral("1234567890"));
+  c->addEntries(e1);
+
+  Tellico::Data::EntryPtr e2(new Tellico::Data::Entry(c));
+  e2->setField(QStringLiteral("title"), QStringLiteral("title2"));
+  e2->setField(QStringLiteral("author"), QStringLiteral("author2"));
+  e2->setField(QStringLiteral("edition"), QStringLiteral("edition2"));
+  e2->setField(QStringLiteral("doi"), QStringLiteral("000000000"));
+
+  // not a good match
+  QVERIFY(c->sameEntry(e1, e2) < Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  // matching the title makes a good match, even if author does not match
+  e2->setField(QStringLiteral("title"), QStringLiteral("title1"));
+  QVERIFY(c->sameEntry(e1, e2) > Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  // title and author both matching are enough for high confidence
+  e2->setField(QStringLiteral("author"), QStringLiteral("author1"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+
+  // perfect match for doi by itself
+  e2->setField(QStringLiteral("title"), QString());
+  e2->setField(QStringLiteral("author"), QString());
+  e2->setField(QStringLiteral("doi"), QStringLiteral("1234567890"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+}
+
+void EntryComparisonTest::testComicMatch() {
+  Tellico::Data::CollPtr c(new Tellico::Data::ComicBookCollection(true));
+
+  Tellico::Data::EntryPtr e1(new Tellico::Data::Entry(c));
+  e1->setField(QStringLiteral("title"), QStringLiteral("title1"));
+  e1->setField(QStringLiteral("series"), QStringLiteral("series1"));
+  e1->setField(QStringLiteral("issue"), QStringLiteral("1"));
+  c->addEntries(e1);
+
+  Tellico::Data::EntryPtr e2(new Tellico::Data::Entry(c));
+  e2->setField(QStringLiteral("title"), QStringLiteral("title2"));
+
+  // not a good match
+  QVERIFY(c->sameEntry(e1, e2) < Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  // matching the title makes a good match, even if author does not match
+  e2->setField(QStringLiteral("title"), QStringLiteral("title1"));
+  QVERIFY(c->sameEntry(e1, e2) > Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  // matching series and issue makes a perfect match
+  e2->setField(QStringLiteral("series"), QStringLiteral("series1"));
+  e2->setField(QStringLiteral("issue"), QStringLiteral("1"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+}
+
 void EntryComparisonTest::testVideoMatch() {
   Tellico::Data::CollPtr c(new Tellico::Data::VideoCollection(true));
   Tellico::Data::FieldPtr f(new Tellico::Data::Field(QStringLiteral("imdb"),
@@ -174,6 +237,60 @@ void EntryComparisonTest::testVideoMatch() {
   QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
 }
 
+void EntryComparisonTest::testMusicMatch() {
+  Tellico::Data::CollPtr c(new Tellico::Data::MusicCollection(true));
+
+  Tellico::Data::EntryPtr e1(new Tellico::Data::Entry(c));
+  e1->setField(QStringLiteral("title"), QStringLiteral("title1"));
+  e1->setField(QStringLiteral("artist"), QStringLiteral("artist1"));
+  e1->setField(QStringLiteral("label"), QStringLiteral("label"));
+  e1->setField(QStringLiteral("year"), QStringLiteral("1994"));
+  c->addEntries(e1);
+
+  Tellico::Data::EntryPtr e2(new Tellico::Data::Entry(c));
+  e2->setField(QStringLiteral("title"), QStringLiteral("title2"));
+  e2->setField(QStringLiteral("artist"), QStringLiteral("artist2"));
+
+  // not a good match
+  QVERIFY(c->sameEntry(e1, e2) < Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  // matching the title and artist makes a good match
+  e2->setField(QStringLiteral("title"), QStringLiteral("title1"));
+  e2->setField(QStringLiteral("artist"), QStringLiteral("artist1"));
+  QVERIFY(c->sameEntry(e1, e2) > Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  e2->setField(QStringLiteral("label"), QStringLiteral("label"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+  e2->setField(QStringLiteral("label"), QString());
+  e2->setField(QStringLiteral("year"), QStringLiteral("1994"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+}
+
+void EntryComparisonTest::testGameMatch() {
+  Tellico::Data::CollPtr c(new Tellico::Data::GameCollection(true));
+
+  Tellico::Data::EntryPtr e1(new Tellico::Data::Entry(c));
+  e1->setField(QStringLiteral("title"), QStringLiteral("title1"));
+  e1->setField(QStringLiteral("platform"), QStringLiteral("Xbox One"));
+  e1->setField(QStringLiteral("publisher"), QStringLiteral("publisher"));
+  e1->setField(QStringLiteral("year"), QStringLiteral("1994"));
+  c->addEntries(e1);
+
+  Tellico::Data::EntryPtr e2(new Tellico::Data::Entry(c));
+  e2->setField(QStringLiteral("title"), QStringLiteral("title2"));
+  e2->setField(QStringLiteral("platform"), QStringLiteral("Xbox One"));
+
+  // not a good match
+  QVERIFY(c->sameEntry(e1, e2) < Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  e2->setField(QStringLiteral("title"), QStringLiteral("title1"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  e2->setField(QStringLiteral("publisher"), QStringLiteral("publisher"));
+  e2->setField(QStringLiteral("year"), QStringLiteral("1994"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+}
+
 void EntryComparisonTest::testFileMatch() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ris"));
   Tellico::Data::CollPtr c(new Tellico::Data::FileCatalog(true));
@@ -181,11 +298,35 @@ void EntryComparisonTest::testFileMatch() {
   // first check merging with same isbn
   Tellico::Data::EntryPtr e1(new Tellico::Data::Entry(c));
   e1->setField(QStringLiteral("url"), url.url());
+  e1->setField(QStringLiteral("title"), QStringLiteral("file.name"));
+  e1->setField(QStringLiteral("description"), QStringLiteral("desc"));
+  e1->setField(QStringLiteral("mimetype"), QStringLiteral("text/plain"));
+  e1->setField(QStringLiteral("size"), QStringLiteral("1234"));
+  e1->setField(QStringLiteral("volume"), QStringLiteral("vol1"));
   c->addEntries(e1);
 
   Tellico::Data::EntryPtr e2(new Tellico::Data::Entry(c));
   e2->setField(QStringLiteral("url"), url.url());
+  e2->setField(QStringLiteral("title"), QStringLiteral("file.name"));
 
   // perfect match by file url
   QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+
+  e2->setField(QStringLiteral("url"), QString());
+  QVERIFY(c->sameEntry(e1, e2) == Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+
+  e2->setField(QStringLiteral("description"), QStringLiteral("desc"));
+  QVERIFY(c->sameEntry(e1, e2) > Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+  QVERIFY(c->sameEntry(e1, e2) < Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+  e2->setField(QStringLiteral("mimetype"), QStringLiteral("text/plain"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+
+  e2->setField(QStringLiteral("description"), QString());
+  e2->setField(QStringLiteral("mimetype"), QString());
+  e2->setField(QStringLiteral("size"), QStringLiteral("1234"));
+  QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+
+  // if volume is different, can't be same match
+  e2->setField(QStringLiteral("volume"), QStringLiteral("vol2"));
+  QVERIFY(c->sameEntry(e1, e2) <= Tellico::EntryComparison::ENTRY_BAD_MATCH);
 }

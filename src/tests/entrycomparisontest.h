@@ -39,7 +39,11 @@ private Q_SLOTS:
   void testMatchScore();
   void testMatchScore_data();
   void testBookMatch();
+  void testBibtexMatch();
+  void testComicMatch();
   void testVideoMatch();
+  void testMusicMatch();
+  void testGameMatch();
   void testFileMatch();
 
 private:
