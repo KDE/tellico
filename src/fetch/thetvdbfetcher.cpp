@@ -233,7 +233,7 @@ void TheTVDBFetcher::slotComplete(KJob* job_) {
   // if the pointer is retained, it gets double-deleted
   m_job = nullptr;
 
-#if 1
+#if 0
   myWarning() << "Remove debug from thetvdbfetcher.cpp";
   QFile f(QStringLiteral("/tmp/test-thetvdb.json"));
   if(f.open(QIODevice::WriteOnly)) {

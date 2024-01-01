@@ -138,7 +138,6 @@ void TheGamesDBFetcher::search() {
     stop();
     return;
   }
-//  u = QUrl::fromLocalFile(QStringLiteral("/tmp/test-tgdb.json"));
 //  myDebug() << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
