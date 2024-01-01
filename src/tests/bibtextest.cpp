@@ -168,3 +168,19 @@ void BibtexTest::testMaybe() {
   QUrl u(QUrl::fromLocalFile(QFINDTESTDATA("data/test.bib")));
   QVERIFY(Tellico::Import::BibtexImporter::maybeBibtex(u));
 }
+
+void BibtexTest::testModify() {
+  Tellico::Data::BibtexCollection coll(true); // add default fields
+  auto field = coll.fieldByBibtexName(QStringLiteral("key"));
+  QVERIFY(field);
+  QCOMPARE(field->name(), QLatin1String("bibtex-key"));
+
+  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("new-key"));
+  QVERIFY(coll.modifyField(field));
+
+  field = coll.fieldByBibtexName(QStringLiteral("key"));
+  QVERIFY(!field); // no longer exists in collection by this bibtex name
+  field = coll.fieldByBibtexName(QStringLiteral("new-key"));
+  QVERIFY(field);
+  QCOMPARE(field->name(), QLatin1String("bibtex-key"));
+}

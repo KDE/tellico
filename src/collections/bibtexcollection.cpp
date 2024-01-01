@@ -288,11 +288,20 @@ bool BibtexCollection::modifyField(Tellico::Data::FieldPtr newField_) {
   const QString bibtex = QStringLiteral("bibtex");
   bool success = Collection::modifyField(newField_);
   FieldPtr oldField = fieldByName(newField_->name());
-  const QString oldBibtex = oldField->property(bibtex);
-  const QString newBibtex = newField_->property(bibtex);
-  if(!oldBibtex.isEmpty()) {
-    success &= (m_bibtexFieldDict.remove(oldBibtex) != 0);
+  QString oldBibtex = oldField->property(bibtex);
+  // if the field was edited in place, can't just look at the property value
+  if(oldField == newField_) {
+    // have to look at all fields in the hash to update the key
+    auto i = m_bibtexFieldDict.constBegin();
+    for( ; i != m_bibtexFieldDict.constEnd(); ++i) {
+      if(oldField == i.value()) {
+        oldBibtex = i.key();
+      }
+    }
   }
+  success &= (m_bibtexFieldDict.remove(oldBibtex) > 0);
+
+  const QString newBibtex = newField_->property(bibtex);
   if(!newBibtex.isEmpty()) {
     oldField->setProperty(bibtex, newBibtex);
     m_bibtexFieldDict.insert(newBibtex, oldField.data());
@@ -522,9 +531,9 @@ Tellico::Data::EntryList BibtexCollection::duplicateBibtexKeys() const {
     keyValue = entry->field(keyField);
     if(keyHash.contains(keyValue)) {
       dupes << keyHash.value(keyValue) << entry;
-     } else {
-       keyHash.insert(keyValue, entry);
-     }
+    } else {
+      keyHash.insert(keyValue, entry);
+    }
   }
   return dupes.values();
 }
