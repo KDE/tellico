@@ -1,3 +1,7 @@
+2024-01-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated author search for Open Library.
+
 2023-12-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated IMDB fetcher to make locale configurable.

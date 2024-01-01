@@ -48,7 +48,8 @@
 #include <QUrlQuery>
 
 namespace {
-  static const char* OPENLIBRARY_QUERY_URL = "http://openlibrary.org/query.json";
+  static const char* OPENLIBRARY_QUERY_URL = "https://openlibrary.org/query.json";
+  static const char* OPENLIBRARY_AUTHOR_QUERY_URL = "https://openlibrary.org/search/authors.json";
 }
 
 using namespace Tellico;
@@ -66,7 +67,7 @@ QString OpenLibraryFetcher::source() const {
 }
 
 bool OpenLibraryFetcher::canSearch(Fetch::FetchKey k) const {
-  return k == Title || k == Person || k == ISBN || k == LCCN || k == Keyword;
+  return k == Title || k == Person || k == ISBN || k == LCCN;
 }
 
 bool OpenLibraryFetcher::canFetch(int type) const {
@@ -106,11 +107,12 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
 
     case Person:
       {
-        const QString author = getAuthorKeys(term_);
+        QString author = getAuthorKeys(term_);
         if(author.isEmpty()) {
-          myWarning() << "no authors found";
+          myLog() << "No matching authors found";
           return;
         }
+        author.prepend(QLatin1String("/authors/"));
         q.addQueryItem(QStringLiteral("authors"), author);
       }
       break;
@@ -140,17 +142,13 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
       }
       break;
 
-    case Keyword:
-      myWarning() << source() << "- key not recognized:" << request().key();
-      return;
-
     default:
       myWarning() << source() << "- key not recognized:" << request().key();
       return;
   }
   q.addQueryItem(QStringLiteral("*"), QString());
   u.setQuery(q);
-//  myDebug() << "url:" << u;
+//  myDebug() << u;
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
@@ -386,18 +384,34 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
 }
 
 QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
-  QUrl u(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
+  QUrl u(QString::fromLatin1(OPENLIBRARY_AUTHOR_QUERY_URL));
   QUrlQuery q;
-  q.addQueryItem(QStringLiteral("type"), QStringLiteral("/type/author"));
-  q.addQueryItem(QStringLiteral("name"), term_);
+  q.addQueryItem(QStringLiteral("q"), term_);
   u.setQuery(q);
 
+//  myLog() << "Searching for authors:" << u.toDisplayString();
   QString output = FileHandler::readTextFile(u, true /*quiet*/, true /*utf8*/);
-  QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
-  QJsonArray array = doc.array();
-//  myDebug() << "found" << array.count() << "authors";
+#if 0
+  myWarning() << "Remove author debug from openlibraryfetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/test-openlibraryauthor.json"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << output;
+  }
+  f.close();
+#endif
+  const QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
+  const auto obj = doc.object();
+  myLog() << "Found" << obj.value(QLatin1String("numFound")).toInt() << "authors";
   // right now, only use the first
-  return array.isEmpty() ? QString() : mapValue(array.at(0).toObject().toVariantMap(), "key");
+  const auto array = obj.value(QLatin1String("docs")).toArray();
+  if(array.isEmpty()) {
+    return QString();
+  }
+  const auto obj1 = array.at(0).toObject();
+  myLog() << "Using" << obj1.value(QLatin1String("name")).toString();
+  return obj1.value(QLatin1String("key")).toString();
 }
 
 Tellico::Fetch::ConfigWidget* OpenLibraryFetcher::configWidget(QWidget* parent_) const {
@@ -409,7 +423,7 @@ QString OpenLibraryFetcher::defaultName() {
 }
 
 QString OpenLibraryFetcher::defaultIcon() {
-  return favIcon("http://openlibrary.org");
+  return favIcon("https://openlibrary.org");
 }
 
 Tellico::StringHash OpenLibraryFetcher::allOptionalFields() {
