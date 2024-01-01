@@ -155,9 +155,9 @@ QString GameCollection::normalizePlatform(const QString& platformName_) {
 Tellico::Data::GameCollection::GamePlatform GameCollection::guessPlatform(const QString& name_) {
   // try to be smart about guessing the platform from its name
   if(name_.contains(QStringLiteral("PlayStation"), Qt::CaseInsensitive)) {
-    if(name_.contains(QStringLiteral("Vita"))) {
+    if(name_.contains(QStringLiteral("Vita"), Qt::CaseInsensitive)) {
       return PlayStationVita;
-    } else if(name_.contains(QStringLiteral("Portable"))) {
+    } else if(name_.contains(QStringLiteral("Portable"), Qt::CaseInsensitive)) {
       return PlayStationPortable;
     } else if(name_.contains(QStringLiteral("5"))) {
       return PlayStation5;
@@ -170,10 +170,10 @@ Tellico::Data::GameCollection::GamePlatform GameCollection::guessPlatform(const 
     } else {
       return PlayStation;
     }
-  } else if(name_.contains(QStringLiteral("PSP"))) {
+  } else if(name_.contains(QStringLiteral("PSP"), Qt::CaseInsensitive)) {
     return PlayStationPortable;
   } else if(name_.contains(QStringLiteral("Xbox"), Qt::CaseInsensitive)) {
-    if(name_.contains(QStringLiteral("One"))) {
+    if(name_.contains(QStringLiteral("One"), Qt::CaseInsensitive)) {
       return XboxOne;
     } else if(name_.contains(QStringLiteral("360"))) {
       return Xbox360;
@@ -182,50 +182,53 @@ Tellico::Data::GameCollection::GamePlatform GameCollection::guessPlatform(const 
     } else {
       return Xbox;
     }
-  } else if(name_.contains(QStringLiteral("Switch"))) {
+  } else if(name_.contains(QStringLiteral("Switch"), Qt::CaseInsensitive)) {
     return NintendoSwitch;
-  } else if(name_.contains(QStringLiteral("Wii"))) {
-    if(name_.contains(QStringLiteral("U"))) {
+  } else if(name_.contains(QStringLiteral("Wii"), Qt::CaseInsensitive)) {
+    if(name_.contains(QStringLiteral("U"), Qt::CaseInsensitive)) {
       return NintendoWiiU;
     } else {
       return NintendoWii;
     }
-  } else if(name_.contains(QStringLiteral("PC")) ||
-            name_.contains(QStringLiteral("Windows"))) {
+  } else if(name_.contains(QStringLiteral("PC"), Qt::CaseInsensitive) ||
+            name_.contains(QStringLiteral("Windows"), Qt::CaseInsensitive)) {
     return Windows;
   } else if(name_.contains(QStringLiteral("Mac"), Qt::CaseInsensitive)) {
     return MacOS;
-  } else if(name_.contains(QStringLiteral("3DS"))) {
+  } else if(name_.contains(QStringLiteral("3DS"), Qt::CaseInsensitive)) {
     return Nintendo3DS;
-  } else if(name_.contains(QStringLiteral("DS"))) {
+  } else if(name_.contains(QStringLiteral("DS"), Qt::CaseInsensitive)) {
     return NintendoDS;
   } else if(name_ == QStringLiteral("Nintendo 64")) {
     return Nintendo64;
   } else if(name_.contains(QStringLiteral("GameCube"), Qt::CaseInsensitive)) {
     return NintendoGameCube;
-  } else if(name_.contains(QStringLiteral("Advance"))) {
+  } else if(name_.contains(QStringLiteral("Advance"), Qt::CaseInsensitive)) {
     return GameBoyAdvance;
-  } else if(name_.contains(QStringLiteral("Game Boy Color")) || name_.contains(QStringLiteral("GameBoy Color"), Qt::CaseInsensitive)) {
+  } else if(name_.contains(QStringLiteral("Game Boy Color"), Qt::CaseInsensitive) ||
+            name_.contains(QStringLiteral("GameBoy Color"), Qt::CaseInsensitive)) {
     return GameBoyColor;
-  } else if(name_.contains(QStringLiteral("Game Boy")) || name_.contains(QStringLiteral("GameBoy"), Qt::CaseInsensitive)) {
+  } else if(name_.contains(QStringLiteral("Game Boy"), Qt::CaseInsensitive) ||
+            name_.contains(QStringLiteral("GameBoy"), Qt::CaseInsensitive)) {
     return GameBoy;
-  } else if(name_.contains(QStringLiteral("SNES")) || name_.contains(QStringLiteral("Super Nintendo"))) {
+  } else if(name_.contains(QStringLiteral("SNES"), Qt::CaseInsensitive) ||
+            name_.contains(QStringLiteral("Super Nintendo"), Qt::CaseInsensitive)) {
     return SuperNintendo;
     // only return Nintendo if equal or includes Original or Entertainment
     // could be platforms like "Nintendo Virtual Boy"
-  } else if(name_ == QStringLiteral("Nintendo")
-            || name_ == QStringLiteral("NES")
-            || name_.contains(QStringLiteral("Nintendo Entertainment"))) {
+  } else if(name_ == QLatin1String("Nintendo") ||
+            name_ == QLatin1String("NES") ||
+            name_.contains(QStringLiteral("Nintendo Entertainment"), Qt::CaseInsensitive)) {
     return Nintendo;
-  } else if(name_.contains(QStringLiteral("Genesis"))) {
+  } else if(name_.contains(QStringLiteral("Genesis"), Qt::CaseInsensitive)) {
     return Genesis;
-  } else if(name_.contains(QStringLiteral("Dreamcast"))) {
+  } else if(name_.contains(QStringLiteral("Dreamcast"), Qt::CaseInsensitive)) {
     return Dreamcast;
-  } else if(name_.contains(QStringLiteral("Linux"))) {
+  } else if(name_.contains(QStringLiteral("Linux"), Qt::CaseInsensitive)) {
     return Linux;
   } else if(name_.contains(QStringLiteral("ios"), Qt::CaseInsensitive)) {
     return iOS;
-  } else if(name_.contains(QStringLiteral("Android"))) {
+  } else if(name_.contains(QStringLiteral("Android"), Qt::CaseInsensitive)) {
     return Android;
   }
 //  myDebug() << "No platform guess for" << name_;
