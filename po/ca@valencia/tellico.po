@@ -6016,7 +6016,7 @@ msgstr "Retalla el text seleccionat i posa'l en el porta-retalls"
 #: src/mainwindow.cpp:560
 #, kde-format
 msgid "Copy the selected text to the clipboard"
-msgstr "Còpia el text seleccionat al porta-retalls"
+msgstr "Copia el text seleccionat a dins del porta-retalls"
 
 #: src/mainwindow.cpp:562
 #, kde-format
@@ -6191,12 +6191,12 @@ msgstr "Busca claus de citació duplicades"
 #: src/mainwindow.cpp:687
 #, kde-format
 msgid "Copy Bibtex to Cli&pboard"
-msgstr "Copia Bibtex al &porta-retalls"
+msgstr "Copia Bibtex a dins del &porta-retalls"
 
 #: src/mainwindow.cpp:688
 #, kde-format
 msgid "Copy bibtex citations to the clipboard"
-msgstr "Copia les citacions bibtex al porta-retalls"
+msgstr "Copia les citacions bibtex a dins del porta-retalls"
 
 #: src/mainwindow.cpp:693
 #, kde-format
