@@ -770,6 +770,9 @@ void CollectionTest::testGamePlatform() {
   QCOMPARE(guess, int(Tellico::Data::GameCollection::UnknownPlatform));
   guess = Tellico::Data::GameCollection::guessPlatform(QStringLiteral("Nintendo Entertainment System"));
   QCOMPARE(guess, int(Tellico::Data::GameCollection::Nintendo));
+
+  QCOMPARE(Tellico::Data::GameCollection::normalizePlatform(QStringLiteral("Microsoft xboxone")),
+           QStringLiteral("Xbox One"));
 }
 
 void CollectionTest::testNonTitle() {
