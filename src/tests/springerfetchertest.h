@@ -41,6 +41,7 @@ private Q_SLOTS:
   void testKeyword();
   void testISBN();
   void testDOI();
+  void testUpdate();
 
 private:
   QHash<QString, QString> m_fieldValues;

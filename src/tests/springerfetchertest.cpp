@@ -58,6 +58,7 @@ void SpringerFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
                                        QStringLiteral("roughening transition of the three-dimensional Ising interface"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -76,6 +77,7 @@ void SpringerFetcherTest::testAuthor() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Person,
                                        QStringLiteral("Albert Einstein"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -86,6 +88,7 @@ void SpringerFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Keyword,
                                        QStringLiteral("Hadron-hadron scattering"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   // spring fetcher defaults to 10 at a time, expect 11 to check search continue
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 11);
@@ -97,6 +100,7 @@ void SpringerFetcherTest::testISBN() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
                                        QStringLiteral("978-3-7643-7436-5"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   // there are several results for the same ISBN here
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -108,6 +112,7 @@ void SpringerFetcherTest::testDOI() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::DOI,
                                        m_fieldValues.value(QStringLiteral("doi")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -120,4 +125,17 @@ void SpringerFetcherTest::testDOI() {
     QCOMPARE(entry->field(i.key()), i.value());
   }
   QVERIFY(entry->field(QStringLiteral("abstract")).contains(QStringLiteral("Kosterlitz-Thouless")));
+}
+
+void SpringerFetcherTest::testUpdate() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry);
+  entry->setField(QStringLiteral("doi"), m_fieldValues.value(QStringLiteral("doi")));
+
+  Tellico::Fetch::SpringerFetcher fetcher(this);
+  auto request = fetcher.updateRequest(entry);
+  request.setCollectionType(coll->type());
+  QCOMPARE(request.key(), Tellico::Fetch::DOI);
+  QCOMPARE(request.value(), m_fieldValues.value(QStringLiteral("doi")));
 }

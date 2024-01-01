@@ -28,6 +28,8 @@
 #include "xmlfetcher.h"
 #include "configwidget.h"
 
+class SpringerFetcherTest;
+
 namespace Tellico {
   namespace Fetch {
 
@@ -36,6 +38,8 @@ namespace Tellico {
  */
 class SpringerFetcher : public XMLFetcher {
 Q_OBJECT
+
+friend class ::SpringerFetcherTest;
 
 public:
   SpringerFetcher(QObject* parent = nullptr);
