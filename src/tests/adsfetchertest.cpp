@@ -73,7 +73,7 @@ void ADSFetcherTest::testAuthor() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QVERIFY(entry->field("author").contains("Miret-Roig, N."));
+  QVERIFY(entry->field("author").contains("Miret-Roig, Núria"));
 }
 
 void ADSFetcherTest::testDOI() {
