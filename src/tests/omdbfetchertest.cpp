@@ -59,6 +59,7 @@ void OMDBFetcherTest::testTitle() {
                                        QStringLiteral("superman returns"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OMDBFetcher(this));
   fetcher->readConfig(m_config);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -94,6 +95,7 @@ void OMDBFetcherTest::testBabel() {
                                        QStringLiteral("babel"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OMDBFetcher(this));
   fetcher->readConfig(m_config);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
