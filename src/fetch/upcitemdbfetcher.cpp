@@ -196,6 +196,15 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
     stop();
     return;
   }
+  const auto obj = doc.object();
+  // check for error
+  if(obj.value(QStringLiteral("code")) == QLatin1String("TOO_FAST")) {
+    const QString msg = obj.value(QStringLiteral("message")).toString();
+    message(msg, MessageHandler::Error);
+    myDebug() << "UPCItemDbFetcher -" << msg;
+    stop();
+    return;
+  }
 
   Data::CollPtr coll = CollectionFactory::collection(collectionType(), true);
   if(!coll) {
@@ -209,7 +218,7 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
     coll->addField(field);
   }
 
-  QJsonArray results = doc.object().value(QLatin1String("items")).toArray();
+  QJsonArray results = obj.value(QLatin1String("items")).toArray();
   if(results.isEmpty()) {
     myDebug() << "UPCItemdb: no results";
     stop();
@@ -267,8 +276,13 @@ void UPCItemDbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
 
   // take the first cover
   const auto imageList = resultMap_.value(QLatin1String("images")).toList();
-  if(!imageList.isEmpty()) {
-    entry_->setField(QStringLiteral("cover"), imageList.first().toString());
+  for(const auto& imageValue : imageList) {
+    // skip booksamillion images
+    const QString image = imageValue.toString();
+    if(!image.isEmpty() && !image.contains(QLatin1String("booksamillion.com"))) {
+      entry_->setField(QStringLiteral("cover"), image);
+      break;
+    }
   }
 
   switch(collectionType()) {
