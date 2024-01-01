@@ -77,7 +77,7 @@ void EntryUpdateJob::slotDone() {
   if(m_bestMatchEntry) {
     const int matchToBeat = (m_mode == PerfectMatchOnly ? EntryComparison::ENTRY_PERFECT_MATCH
                                                         : EntryComparison::ENTRY_GOOD_MATCH);
-    if(m_bestMatchScore > matchToBeat) {
+    if(m_bestMatchScore >= matchToBeat) {
       myLog() << "Best match is good enough, updating the entry";
       Merge::mergeEntry(m_entry, m_bestMatchEntry);
     } else {
