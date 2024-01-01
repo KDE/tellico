@@ -35,6 +35,7 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testTitle();
+  void testAuthor();
   void testIsbn();
   void testIsbn13();
   void testMultipleIsbn();

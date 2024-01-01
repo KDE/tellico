@@ -46,6 +46,7 @@ void OpenLibraryFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
                                        QStringLiteral("Barrayar"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -55,10 +56,24 @@ void OpenLibraryFetcherTest::testTitle() {
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Barrayar"));
 }
 
+void OpenLibraryFetcherTest::testAuthor() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Person,
+                                       QStringLiteral("Bujold"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Lois McMaster Bujold"));
+}
+
 void OpenLibraryFetcherTest::testIsbn() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
                                        QStringLiteral("0789312239"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -82,6 +97,7 @@ void OpenLibraryFetcherTest::testIsbn13() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
                                        QStringLiteral("9780596004361"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
