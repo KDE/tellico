@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-27 00:42+0000\n"
-"PO-Revision-Date: 2023-11-12 18:34+0100\n"
+"PO-Revision-Date: 2023-12-27 20:51+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4113,17 +4113,17 @@ msgstr "Certificazioni"
 #: src/fetch/imdbfetcher.cpp:585
 #, kde-format
 msgid "Locale"
-msgstr ""
+msgstr "Localizzazione"
 
 #: src/fetch/imdbfetcher.cpp:588
 #, kde-format
 msgid "Use system locale"
-msgstr ""
+msgstr "Usa la localizzazione di sistema"
 
 #: src/fetch/imdbfetcher.cpp:589
 #, kde-format
 msgid "Use custom locale"
-msgstr ""
+msgstr "Utilizza localizzazione personalizzata"
 
 #: src/fetch/isbndbfetcher.cpp:361
 #, kde-format
