@@ -693,6 +693,17 @@ void CollectionTest::testGamePlatform() {
            QStringLiteral("Xbox One"));
 }
 
+void CollectionTest::testEsrb() {
+  // test that values for all rating enums are not empty and not repeated
+  QSet<QString> values;
+  for(int i = Tellico::Data::GameCollection::Unrated; i <= Tellico::Data::GameCollection::Pending; i++) {
+    const QString esrb = Tellico::Data::GameCollection::esrbRating(Tellico::Data::GameCollection::EsrbRating(i));
+    QVERIFY(!esrb.isEmpty());
+    QVERIFY(!values.contains(esrb));
+    values.insert(esrb);
+  }
+}
+
 void CollectionTest::testNonTitle() {
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(false));
   QVERIFY(coll);

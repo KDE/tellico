@@ -49,6 +49,7 @@ private Q_SLOTS:
   void testMergeCollection();
   void testMergeBenchmark();
   void testGamePlatform();
+  void testEsrb();
   void testNonTitle();
 };
 
