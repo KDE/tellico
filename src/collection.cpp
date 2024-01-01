@@ -879,7 +879,17 @@ int Collection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryP
   res += EntryComparison::MATCH_WEIGHT_MED*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
   // then add score for each field
   foreach(FieldPtr field, entry1_->collection()->fields()) {
-    res += EntryComparison::MATCH_WEIGHT_LOW*EntryComparison::score(entry1_, entry2_, field->name(), this);
+    // skip title field and personal category
+    if(field->name() == QLatin1String("title") ||
+       field->category() == i18n("Personal")) {
+      continue;
+    }
+    // url link is extra
+    if(field->type() == Field::URL) {
+      res += EntryComparison::MATCH_WEIGHT_MED*EntryComparison::score(entry1_, entry2_, field->name(), this);
+    } else {
+      res += EntryComparison::MATCH_WEIGHT_LOW*EntryComparison::score(entry1_, entry2_, field->name(), this);
+    }
     if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
   }
   return res;

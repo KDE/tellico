@@ -176,15 +176,11 @@ int ComicBookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Dat
   if(!entry1_ || !entry2_) {
     return 0;
   }
-  // equal isbn's or lccn's are easy, give it a weight of 100
-  if(EntryComparison::score(entry1_, entry2_, QStringLiteral("isbn"), this) > 0 ||
-     EntryComparison::score(entry1_, entry2_, QStringLiteral("lccn"), this) > 0) {
+
+  if(EntryComparison::score(entry1_, entry2_, QStringLiteral("isbn"), this) > 0) {
     return EntryComparison::ENTRY_PERFECT_MATCH;
   }
-  // special for Bedetheque links for match
-  if(hasField(QStringLiteral("lien-bel")) && EntryComparison::score(entry1_, entry2_, QStringLiteral("lien-bel"), this) > 0) {
-    return EntryComparison::ENTRY_PERFECT_MATCH;
-  }
+
   int res = 0;
   res += EntryComparison::MATCH_WEIGHT_HIGH*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
   if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;

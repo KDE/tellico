@@ -213,6 +213,7 @@ int BookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::En
   res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("pub_year"), this);
   if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
 
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("publisher"), this);
   res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("binding"), this);
   return res;
 }

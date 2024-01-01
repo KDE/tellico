@@ -339,7 +339,6 @@ QString BibtexCollection::prepareText(const QString& text_) const {
   return text;
 }
 
-// same as BookCollection::sameEntry()
 int BibtexCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
   // equal identifiers are easy, give it a weight of 100
   if(EntryComparison::score(entry1_, entry2_, QStringLiteral("isbn"),  this) > 0 ||
@@ -347,17 +346,21 @@ int BibtexCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::
      EntryComparison::score(entry1_, entry2_, QStringLiteral("doi"),   this) > 0 ||
      EntryComparison::score(entry1_, entry2_, QStringLiteral("pmid"),  this) > 0 ||
      EntryComparison::score(entry1_, entry2_, QStringLiteral("arxiv"), this) > 0) {
-    return 100; // good match
+    return EntryComparison::ENTRY_PERFECT_MATCH;
   }
   int res = 3*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
-//  if(res == 0) {
-//    myDebug() << "different titles for " << entry1_->title() << " vs. "
-//              << entry2_->title();
-//  }
   res += EntryComparison::score(entry1_, entry2_, QStringLiteral("author"),   this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("cr_year"),  this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("pub_year"), this);
+  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("entry-type"),   this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("year"),  this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("publisher"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
   res += EntryComparison::score(entry1_, entry2_, QStringLiteral("binding"),  this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
   return res;
 }
 
