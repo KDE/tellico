@@ -120,14 +120,22 @@ int FileCatalog::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::Entry
     return EntryComparison::ENTRY_PERFECT_MATCH;
   }
   // if volume or created time is different, it can't be same entry
-  if(EntryComparison::score(entry1_, entry2_, QStringLiteral("volume"), this) == 0 ||
-     EntryComparison::score(entry1_, entry2_, QStringLiteral("created"), this) == 0 ||
-     EntryComparison::score(entry1_, entry2_, QStringLiteral("size"), this) == 0) {
+  const int bad = EntryComparison::MATCH_VALUE_BAD;
+  if(EntryComparison::score(entry1_, entry2_, QStringLiteral("volume"), this) == bad ||
+     EntryComparison::score(entry1_, entry2_, QStringLiteral("created"), this) == bad ||
+     EntryComparison::score(entry1_, entry2_, QStringLiteral("size"), this) == bad) {
     return EntryComparison::ENTRY_BAD_MATCH;
   }
   int res = 0;
-  res += EntryComparison::MATCH_WEIGHT_LOW*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
+  res += EntryComparison::MATCH_WEIGHT_MED*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
+  res += EntryComparison::MATCH_WEIGHT_MED*EntryComparison::score(entry1_, entry2_, QStringLiteral("mimetype"), this);
+  res += EntryComparison::MATCH_WEIGHT_HIGH*EntryComparison::score(entry1_, entry2_, QStringLiteral("size"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_MED*EntryComparison::score(entry1_, entry2_, QStringLiteral("volume"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  // description is less helpful
   res += EntryComparison::MATCH_WEIGHT_LOW*EntryComparison::score(entry1_, entry2_, QStringLiteral("description"), this);
-  res += EntryComparison::MATCH_WEIGHT_LOW*EntryComparison::score(entry1_, entry2_, QStringLiteral("mimetype"), this);
   return res;
 }

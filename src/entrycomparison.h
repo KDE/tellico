@@ -45,6 +45,7 @@ public:
 
   // match scores for individual fields
   enum MatchValue {
+    MATCH_VALUE_BAD    = -1,
     MATCH_VALUE_NONE   = 0,
     MATCH_VALUE_WEAK   = 3,
     MATCH_VALUE_STRONG = 5
