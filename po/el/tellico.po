@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-21 03:13+0000\n"
+"POT-Creation-Date: 2024-01-02 02:24+0000\n"
 "PO-Revision-Date: 2021-07-10 09:35+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -225,6 +225,18 @@ msgstr ""
 #, kde-format
 msgid "My Collection"
 msgstr "Η συλλογή μου"
+
+#: src/collection.cpp:885 src/collections/boardgamecollection.cpp:32
+#: src/collections/bookcollection.cpp:34 src/collections/cardcollection.cpp:31
+#: src/collections/coincollection.cpp:31
+#: src/collections/comicbookcollection.cpp:34
+#: src/collections/gamecollection.cpp:33 src/collections/musiccollection.cpp:32
+#: src/collections/stampcollection.cpp:32
+#: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
+#: src/document.cpp:528 src/field.cpp:292 src/field.cpp:305 src/field.cpp:310
+#, kde-format
+msgid "Personal"
+msgstr "Ατομικά στοιχεία"
 
 #: src/collectionfactory.cpp:85
 #, kde-format
@@ -743,16 +755,16 @@ msgstr "Ένα πεδίο με μια παράγωγη τιμή πρέπει ν�
 #: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:460
 #: src/fetch/moviemeterfetcher.cpp:216 src/fetch/moviemeterfetcher.cpp:221
 #: src/fetch/numistafetcher.cpp:345 src/fetch/numistafetcher.cpp:361
-#: src/fetch/omdbfetcher.cpp:253 src/fetch/openlibraryfetcher.cpp:272
+#: src/fetch/omdbfetcher.cpp:253 src/fetch/openlibraryfetcher.cpp:274
 #: src/fetch/thegamesdbfetcher.cpp:267 src/fetch/thegamesdbfetcher.cpp:272
 #: src/fetch/themoviedbfetcher.cpp:313 src/fetch/themoviedbfetcher.cpp:316
 #: src/fetch/themoviedbfetcher.cpp:321 src/fetch/themoviedbfetcher.cpp:339
 #: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:260
 #: src/fetch/thetvdbfetcher.cpp:265 src/fetch/tvmazefetcher.cpp:178
-#: src/fetch/tvmazefetcher.cpp:183 src/fetch/upcitemdbfetcher.cpp:208
+#: src/fetch/tvmazefetcher.cpp:183 src/fetch/upcitemdbfetcher.cpp:217
 #: src/fetch/vgcollectfetcher.cpp:238 src/fetch/vgcollectfetcher.cpp:341
 #: src/field.cpp:39 src/field.cpp:80 src/field.cpp:299 src/field.cpp:328
-#: src/field.cpp:333 src/translators/gcstarimporter.cpp:89
+#: src/field.cpp:333 src/translators/gcstarimporter.cpp:90
 #, kde-format
 msgid "General"
 msgstr "Γενικά"
@@ -931,7 +943,7 @@ msgstr "Λέξεις κλειδιά"
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:439 src/fetch/entrezfetcher.cpp:515
 #: src/fetch/opdsfetcher.cpp:431 src/field.cpp:202
-#: src/translators/gcstarimporter.cpp:88
+#: src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "URL"
 msgstr "URL"
@@ -948,23 +960,11 @@ msgstr "Περίληψη"
 msgid "Notes"
 msgstr "Σημειώσεις"
 
-#: src/collections/bibtexcollection.cpp:480
+#: src/collections/bibtexcollection.cpp:492
 #: src/translators/xmlstatehandler.cpp:324
 #, kde-format
 msgid "Unknown"
 msgstr "Άγνωστο"
-
-#: src/collections/boardgamecollection.cpp:32
-#: src/collections/bookcollection.cpp:34 src/collections/cardcollection.cpp:31
-#: src/collections/coincollection.cpp:31
-#: src/collections/comicbookcollection.cpp:34
-#: src/collections/gamecollection.cpp:33 src/collections/musiccollection.cpp:32
-#: src/collections/stampcollection.cpp:32
-#: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
-#: src/document.cpp:528 src/field.cpp:292 src/field.cpp:305 src/field.cpp:310
-#, kde-format
-msgid "Personal"
-msgstr "Ατομικά στοιχεία"
 
 #: src/collections/boardgamecollection.cpp:38
 #, kde-format
@@ -1507,162 +1507,162 @@ msgstr "Προσωπική βαθμολογία"
 msgid "Completed"
 msgstr "Ολοκληρώθηκε"
 
-#: src/collections/gamecollection.cpp:237
+#: src/collections/gamecollection.cpp:240
 #, kde-format
 msgid "Linux"
 msgstr "Linux"
 
-#: src/collections/gamecollection.cpp:238
+#: src/collections/gamecollection.cpp:241
 #, kde-format
 msgid "Mac OS"
 msgstr "Mac OS"
 
-#: src/collections/gamecollection.cpp:239
+#: src/collections/gamecollection.cpp:242
 #, kde-format
 msgctxt "Windows Platform"
 msgid "Windows"
 msgstr "Windows"
 
-#: src/collections/gamecollection.cpp:240
+#: src/collections/gamecollection.cpp:243
 #, kde-format
 msgctxt "iOS Platform"
 msgid "iOS"
 msgstr "iOS"
 
-#: src/collections/gamecollection.cpp:241
+#: src/collections/gamecollection.cpp:244
 #, kde-format
 msgctxt "Android Platform"
 msgid "Android"
 msgstr "Android"
 
-#: src/collections/gamecollection.cpp:242
+#: src/collections/gamecollection.cpp:245
 #, kde-format
 msgid "Xbox"
 msgstr "Xbox"
 
-#: src/collections/gamecollection.cpp:243
+#: src/collections/gamecollection.cpp:246
 #, kde-format
 msgid "Xbox 360"
 msgstr "Xbox 360"
 
-#: src/collections/gamecollection.cpp:244
+#: src/collections/gamecollection.cpp:247
 #, kde-format
 msgid "Xbox One"
 msgstr "Xbox One"
 
-#: src/collections/gamecollection.cpp:245
+#: src/collections/gamecollection.cpp:248
 #, kde-format
 msgid "Xbox Series X"
 msgstr "Xbox Series X"
 
-#: src/collections/gamecollection.cpp:246
+#: src/collections/gamecollection.cpp:249
 #, kde-format
 msgid "PlayStation"
 msgstr "PlayStation"
 
-#: src/collections/gamecollection.cpp:247
+#: src/collections/gamecollection.cpp:250
 #, kde-format
 msgid "PlayStation2"
 msgstr "PlayStation2"
 
-#: src/collections/gamecollection.cpp:248
+#: src/collections/gamecollection.cpp:251
 #, kde-format
 msgid "PlayStation3"
 msgstr "PlayStation3"
 
-#: src/collections/gamecollection.cpp:249
+#: src/collections/gamecollection.cpp:252
 #, kde-format
 msgid "PlayStation4"
 msgstr "PlayStation4"
 
-#: src/collections/gamecollection.cpp:250
+#: src/collections/gamecollection.cpp:253
 #, kde-format
 msgid "PlayStation5"
 msgstr "PlayStation5"
 
-#: src/collections/gamecollection.cpp:251
+#: src/collections/gamecollection.cpp:254
 #, kde-format
 msgctxt "PlayStation Portable"
 msgid "PSP"
 msgstr "PSP"
 
-#: src/collections/gamecollection.cpp:252
+#: src/collections/gamecollection.cpp:255
 #, kde-format
 msgid "PlayStation Vita"
 msgstr "PlayStation Vita"
 
-#: src/collections/gamecollection.cpp:253
+#: src/collections/gamecollection.cpp:256
 #, kde-format
 msgid "Game Boy"
 msgstr "Game Boy"
 
-#: src/collections/gamecollection.cpp:254
+#: src/collections/gamecollection.cpp:257
 #, kde-format
 msgid "Game Boy Color"
 msgstr "Game Boy Color"
 
-#: src/collections/gamecollection.cpp:255
+#: src/collections/gamecollection.cpp:258
 #, kde-format
 msgid "Game Boy Advance"
 msgstr "Game Boy Advance"
 
-#: src/collections/gamecollection.cpp:256
+#: src/collections/gamecollection.cpp:259
 #, kde-format
 msgid "Nintendo"
 msgstr "Nintendo"
 
-#: src/collections/gamecollection.cpp:257
+#: src/collections/gamecollection.cpp:260
 #, kde-format
 msgid "Super Nintendo"
 msgstr "Super Nintendo"
 
-#: src/collections/gamecollection.cpp:258
+#: src/collections/gamecollection.cpp:261
 #, kde-format
 msgid "Nintendo 64"
 msgstr "Nintendo 64"
 
-#: src/collections/gamecollection.cpp:259
+#: src/collections/gamecollection.cpp:262
 #, kde-format
 msgid "GameCube"
 msgstr "GameCube"
 
-#: src/collections/gamecollection.cpp:260
+#: src/collections/gamecollection.cpp:263
 #, kde-format
 msgid "Nintendo Wii"
 msgstr "Nintendo Wii"
 
-#: src/collections/gamecollection.cpp:261
+#: src/collections/gamecollection.cpp:264
 #, kde-format
 msgid "Nintendo WiiU"
 msgstr "Nintendo WiiU"
 
-#: src/collections/gamecollection.cpp:262
+#: src/collections/gamecollection.cpp:265
 #, kde-format
 msgid "Nintendo Switch"
 msgstr "Nintendo Switch"
 
-#: src/collections/gamecollection.cpp:263
+#: src/collections/gamecollection.cpp:266
 #, kde-format
 msgid "Nintendo DS"
 msgstr "Nintendo DS"
 
-#: src/collections/gamecollection.cpp:264
+#: src/collections/gamecollection.cpp:267
 #, kde-format
 msgid "Nintendo 3DS"
 msgstr "Nintendo 3DS"
 
-#: src/collections/gamecollection.cpp:265
+#: src/collections/gamecollection.cpp:268
 #, kde-format
 msgctxt "Sega Genesis"
 msgid "Genesis"
 msgstr "Genesis"
 
-#: src/collections/gamecollection.cpp:266
+#: src/collections/gamecollection.cpp:269
 #, kde-format
 msgid "Dreamcast"
 msgstr "Dreamcast"
 
-#: src/collections/gamecollection.cpp:278
+#: src/collections/gamecollection.cpp:281
 #, kde-format
 msgctxt ""
 "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
@@ -1686,7 +1686,7 @@ msgstr "Άλμπουμ"
 
 #: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:424
 #: src/fetch/doubanfetcher.cpp:431 src/fetch/doubanfetcher.cpp:565
-#: src/fetch/upcitemdbfetcher.cpp:290 src/fetch/upcitemdbfetcher.cpp:410
+#: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:162
 #: src/translators/freedbimporter.cpp:275
@@ -1698,8 +1698,8 @@ msgstr "CD"
 
 #: src/collections/musiccollection.cpp:54
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1043
-#: src/fetch/discogsfetcher.cpp:432 src/fetch/upcitemdbfetcher.cpp:406
-#: src/fetch/upcitemdbfetcher.cpp:414 src/translators/discogsimporter.cpp:169
+#: src/fetch/discogsfetcher.cpp:432 src/fetch/upcitemdbfetcher.cpp:420
+#: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:169
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
@@ -1825,7 +1825,7 @@ msgid "My Videos"
 msgstr "Τα βίντεο μου"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1029
-#: src/fetch/upcitemdbfetcher.cpp:392
+#: src/fetch/upcitemdbfetcher.cpp:406
 #, kde-format
 msgid "VHS"
 msgstr "VHS"
@@ -1841,13 +1841,13 @@ msgid "DivX"
 msgstr "DivX"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1023
-#: src/fetch/upcitemdbfetcher.cpp:386
+#: src/fetch/upcitemdbfetcher.cpp:400
 #, kde-format
 msgid "Blu-ray"
 msgstr "Blu-ray"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1026
-#: src/fetch/upcitemdbfetcher.cpp:389
+#: src/fetch/upcitemdbfetcher.cpp:403
 #, kde-format
 msgid "HD DVD"
 msgstr "HD DVD"
@@ -1925,7 +1925,7 @@ msgid "Nationality"
 msgstr "Εθνικότητα"
 
 #: src/collections/videocollection.cpp:102 src/fetch/amazonfetcher.cpp:1039
-#: src/fetch/upcitemdbfetcher.cpp:402
+#: src/fetch/upcitemdbfetcher.cpp:416
 #, kde-format
 msgid "NTSC"
 msgstr "NTSC"
@@ -2019,7 +2019,7 @@ msgid "Aspect Ratio"
 msgstr "Αναλογία"
 
 #: src/collections/videocollection.cpp:175 src/fetch/amazonfetcher.cpp:1012
-#: src/fetch/upcitemdbfetcher.cpp:372
+#: src/fetch/upcitemdbfetcher.cpp:386
 #, kde-format
 msgid "Widescreen"
 msgstr "Ευρεία οθόνη"
@@ -2035,7 +2035,7 @@ msgid "Color Mode"
 msgstr "Λειτουργία χρώματος"
 
 #: src/collections/videocollection.cpp:186 src/fetch/amazonfetcher.cpp:1033
-#: src/fetch/upcitemdbfetcher.cpp:396
+#: src/fetch/upcitemdbfetcher.cpp:410
 #, kde-format
 msgid "Director's Cut"
 msgstr "Director's Cut"
@@ -3348,7 +3348,7 @@ msgstr ""
 #: src/fetch/numistafetcher.cpp:287 src/fetch/numistafetcher.cpp:295
 #: src/fetch/omdbfetcher.cpp:183 src/fetch/thegamesdbfetcher.cpp:172
 #: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:351
-#: src/fetch/tvmazefetcher.cpp:269 src/fetch/upcitemdbfetcher.cpp:250
+#: src/fetch/tvmazefetcher.cpp:269 src/fetch/upcitemdbfetcher.cpp:259
 #: src/fetch/vgcollectfetcher.cpp:286 src/fetch/vndbfetcher.cpp:182
 #, kde-format
 msgid "The cover image could not be loaded."
@@ -3714,9 +3714,9 @@ msgstr "Βαθμολογία AnimeNfo"
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:616
 #: src/fetch/kinofetcher.cpp:388 src/fetch/kinoteatrfetcher.cpp:516
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
-#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
+#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:439
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
-#: src/fetch/upcitemdbfetcher.cpp:465 src/fetch/vgcollectfetcher.cpp:382
+#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:382
 #: src/fetch/vndbfetcher.cpp:440
 #, kde-format
 msgid "This source has no options."
@@ -3848,7 +3848,7 @@ msgstr "Δεσμός δισκογραφίας"
 #. i18n("Nationality");
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
-#: src/fetch/upcitemdbfetcher.cpp:207 src/fetch/upcitemdbfetcher.cpp:458
+#: src/fetch/upcitemdbfetcher.cpp:216 src/fetch/upcitemdbfetcher.cpp:472
 #: src/fetch/vgcollectfetcher.cpp:340 src/fetch/vgcollectfetcher.cpp:375
 #, kde-format
 msgid "Barcode"
@@ -4311,7 +4311,7 @@ msgstr "Εισάγετε το όνομα του εξυπηρετητή."
 msgid "&Verify Catalog"
 msgstr "Αρχείο καταλόγου"
 
-#: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
+#: src/fetch/openlibraryfetcher.cpp:273 src/fetch/openlibraryfetcher.cpp:432
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "Δεσμός OpenLibrary"
@@ -6511,7 +6511,7 @@ msgid "(%1 selected)"
 msgstr "(%1 Επιλεγμένο Παιχνίδι)"
 
 #: src/mainwindow.cpp:1808 src/translators/boardgamegeekimporter.cpp:98
-#: src/translators/gcstarimporter.cpp:264
+#: src/translators/gcstarimporter.cpp:265
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
 #, kde-format
@@ -7306,8 +7306,8 @@ msgstr ""
 "Αναδρομική ανάγνωση δεδομένων από όλα τα αρχεία λανθάνουσας μνήμης CDDB που "
 "περιέχονται στους προκαθορισμένους φακέλους λανθάνουσας μνήμης."
 
-#: src/translators/gcstarimporter.cpp:125
-#: src/translators/gcstarimporter.cpp:271
+#: src/translators/gcstarimporter.cpp:126
+#: src/translators/gcstarimporter.cpp:272
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Το αρχείο δεν είναι ένα έγκυρο αρχείο GCstar.</qt>"
