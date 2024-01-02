@@ -44,7 +44,7 @@ public:
   void setCheckISBN(bool b) { m_checkISBN = b; }
 
 Q_SIGNALS:
-  void signalISBN() const;
+  void signalISBN() const; // clazy:exclude=const-signal-or-slot
 
 private:
   bool m_checkISBN;
