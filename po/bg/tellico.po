@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-27 00:42+0000\n"
+"POT-Creation-Date: 2024-01-02 00:41+0000\n"
 "PO-Revision-Date: 2009-09-18 16:56+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -217,6 +217,18 @@ msgstr "Tellico не може да пише във файл %1."
 #, fuzzy, kde-format
 msgid "My Collection"
 msgstr "BCCollection"
+
+#: src/collection.cpp:884 src/collections/boardgamecollection.cpp:32
+#: src/collections/bookcollection.cpp:34 src/collections/cardcollection.cpp:31
+#: src/collections/coincollection.cpp:31
+#: src/collections/comicbookcollection.cpp:34
+#: src/collections/gamecollection.cpp:33 src/collections/musiccollection.cpp:32
+#: src/collections/stampcollection.cpp:32
+#: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
+#: src/document.cpp:531 src/field.cpp:291 src/field.cpp:304 src/field.cpp:309
+#, kde-format
+msgid "Personal"
+msgstr "Лични"
 
 #: src/collectionfactory.cpp:84
 #, fuzzy, kde-format
@@ -672,9 +684,9 @@ msgstr ""
 #: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
 #: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
-#: src/fetch/bedethequefetcher.cpp:339 src/fetch/colnectfetcher.cpp:363
-#: src/fetch/colnectfetcher.cpp:527 src/fetch/colnectfetcher.cpp:547
-#: src/fetch/colnectfetcher.cpp:583 src/fetch/colnectfetcher.cpp:590
+#: src/fetch/bedethequefetcher.cpp:339 src/fetch/colnectfetcher.cpp:362
+#: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:545
+#: src/fetch/colnectfetcher.cpp:581 src/fetch/colnectfetcher.cpp:588
 #: src/fetch/discogsfetcher.cpp:309 src/fetch/discogsfetcher.cpp:314
 #: src/fetch/discogsfetcher.cpp:319 src/fetch/discogsfetcher.cpp:326
 #: src/fetch/discogsfetcher.cpp:333 src/fetch/discogsfetcher.cpp:338
@@ -688,16 +700,16 @@ msgstr ""
 #: src/fetch/mobygamesfetcher.cpp:460 src/fetch/moviemeterfetcher.cpp:216
 #: src/fetch/moviemeterfetcher.cpp:221 src/fetch/numistafetcher.cpp:346
 #: src/fetch/numistafetcher.cpp:362 src/fetch/omdbfetcher.cpp:253
-#: src/fetch/openlibraryfetcher.cpp:272 src/fetch/thegamesdbfetcher.cpp:268
-#: src/fetch/thegamesdbfetcher.cpp:273 src/fetch/themoviedbfetcher.cpp:313
+#: src/fetch/openlibraryfetcher.cpp:270 src/fetch/thegamesdbfetcher.cpp:267
+#: src/fetch/thegamesdbfetcher.cpp:272 src/fetch/themoviedbfetcher.cpp:313
 #: src/fetch/themoviedbfetcher.cpp:316 src/fetch/themoviedbfetcher.cpp:321
 #: src/fetch/themoviedbfetcher.cpp:339 src/fetch/thetvdbfetcher.cpp:250
 #: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:260
 #: src/fetch/tvmazefetcher.cpp:177 src/fetch/tvmazefetcher.cpp:182
-#: src/fetch/upcitemdbfetcher.cpp:206 src/fetch/vgcollectfetcher.cpp:236
+#: src/fetch/upcitemdbfetcher.cpp:215 src/fetch/vgcollectfetcher.cpp:236
 #: src/fetch/vgcollectfetcher.cpp:339 src/field.cpp:39 src/field.cpp:80
 #: src/field.cpp:298 src/field.cpp:327 src/field.cpp:332
-#: src/translators/gcstarimporter.cpp:89
+#: src/translators/gcstarimporter.cpp:90
 #, kde-format
 msgid "General"
 msgstr "Общи"
@@ -840,8 +852,8 @@ msgstr "Категория:"
 
 #: src/collections/bibtexcollection.cpp:213
 #: src/collections/bookcollection.cpp:143 src/collections/cardcollection.cpp:82
-#: src/collections/comicbookcollection.cpp:70 src/fetch/colnectfetcher.cpp:362
-#: src/fetch/colnectfetcher.cpp:812
+#: src/collections/comicbookcollection.cpp:70 src/fetch/colnectfetcher.cpp:361
+#: src/fetch/colnectfetcher.cpp:810
 #, kde-format
 msgid "Series"
 msgstr "Поредица"
@@ -874,7 +886,7 @@ msgstr "Ключови думи"
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:440 src/fetch/entrezfetcher.cpp:516
 #: src/fetch/opdsfetcher.cpp:436 src/field.cpp:201
-#: src/translators/gcstarimporter.cpp:88
+#: src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "URL"
 msgstr "URL"
@@ -891,23 +903,11 @@ msgstr "Резюме"
 msgid "Notes"
 msgstr "Е&кспортиране"
 
-#: src/collections/bibtexcollection.cpp:480
+#: src/collections/bibtexcollection.cpp:492
 #: src/translators/xmlstatehandler.cpp:324
 #, kde-format
 msgid "Unknown"
 msgstr "Непознат"
-
-#: src/collections/boardgamecollection.cpp:32
-#: src/collections/bookcollection.cpp:34 src/collections/cardcollection.cpp:31
-#: src/collections/coincollection.cpp:31
-#: src/collections/comicbookcollection.cpp:34
-#: src/collections/gamecollection.cpp:33 src/collections/musiccollection.cpp:32
-#: src/collections/stampcollection.cpp:32
-#: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
-#: src/document.cpp:531 src/field.cpp:291 src/field.cpp:304 src/field.cpp:309
-#, kde-format
-msgid "Personal"
-msgstr "Лични"
 
 #: src/collections/boardgamecollection.cpp:38
 #, fuzzy, kde-format
@@ -940,7 +940,7 @@ msgid "Designer"
 msgstr ""
 
 #: src/collections/boardgamecollection.cpp:80
-#: src/fetch/thegamesdbfetcher.cpp:272 src/fetch/thegamesdbfetcher.cpp:606
+#: src/fetch/thegamesdbfetcher.cpp:271 src/fetch/thegamesdbfetcher.cpp:605
 #, fuzzy, kde-format
 msgid "Number of Players"
 msgstr "Изтриване на поле"
@@ -959,7 +959,7 @@ msgstr ""
 #: src/collections/filecatalog.cpp:57 src/collections/gamecollection.cpp:94
 #: src/collections/stampcollection.cpp:54
 #: src/collections/winecollection.cpp:125 src/entrymatchdialog.cpp:94
-#: src/fetch/colnectfetcher.cpp:369 src/fetch/colnectfetcher.cpp:815
+#: src/fetch/colnectfetcher.cpp:368 src/fetch/colnectfetcher.cpp:813
 #: src/fetch/numistafetcher.cpp:353 src/fetch/numistafetcher.cpp:401
 #: src/fetch/rpggeekfetcher.cpp:209 src/fetchdialog.cpp:253
 #, fuzzy, kde-format
@@ -1294,13 +1294,13 @@ msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "Grading Service"
 msgstr ""
 
-#: src/collections/coincollection.cpp:136 src/fetch/colnectfetcher.cpp:810
+#: src/collections/coincollection.cpp:136 src/fetch/colnectfetcher.cpp:808
 #: src/fetch/numistafetcher.cpp:403
 #, fuzzy, kde-format
 msgid "Obverse"
 msgstr "Презаписване"
 
-#: src/collections/coincollection.cpp:139 src/fetch/colnectfetcher.cpp:811
+#: src/collections/coincollection.cpp:139 src/fetch/colnectfetcher.cpp:809
 #: src/fetch/numistafetcher.cpp:404
 #, fuzzy, kde-format
 msgid "Reverse"
@@ -1437,162 +1437,162 @@ msgstr "Лични"
 msgid "Completed"
 msgstr "Коментар"
 
-#: src/collections/gamecollection.cpp:237
+#: src/collections/gamecollection.cpp:240
 #, kde-format
 msgid "Linux"
 msgstr "Linux"
 
-#: src/collections/gamecollection.cpp:238
+#: src/collections/gamecollection.cpp:241
 #, kde-format
 msgid "Mac OS"
 msgstr "Mac OS"
 
-#: src/collections/gamecollection.cpp:239
+#: src/collections/gamecollection.cpp:242
 #, kde-format
 msgctxt "Windows Platform"
 msgid "Windows"
 msgstr "Windows"
 
-#: src/collections/gamecollection.cpp:240
+#: src/collections/gamecollection.cpp:243
 #, kde-format
 msgctxt "iOS Platform"
 msgid "iOS"
 msgstr ""
 
-#: src/collections/gamecollection.cpp:241
+#: src/collections/gamecollection.cpp:244
 #, kde-format
 msgctxt "Android Platform"
 msgid "Android"
 msgstr ""
 
-#: src/collections/gamecollection.cpp:242
+#: src/collections/gamecollection.cpp:245
 #, kde-format
 msgid "Xbox"
 msgstr "Xbox"
 
-#: src/collections/gamecollection.cpp:243
+#: src/collections/gamecollection.cpp:246
 #, kde-format
 msgid "Xbox 360"
 msgstr "Xbox 360"
 
-#: src/collections/gamecollection.cpp:244
+#: src/collections/gamecollection.cpp:247
 #, fuzzy, kde-format
 msgid "Xbox One"
 msgstr "Xbox"
 
-#: src/collections/gamecollection.cpp:245
+#: src/collections/gamecollection.cpp:248
 #, fuzzy, kde-format
 msgid "Xbox Series X"
 msgstr "Поредица"
 
-#: src/collections/gamecollection.cpp:246
+#: src/collections/gamecollection.cpp:249
 #, kde-format
 msgid "PlayStation"
 msgstr "PlayStation"
 
-#: src/collections/gamecollection.cpp:247
+#: src/collections/gamecollection.cpp:250
 #, kde-format
 msgid "PlayStation2"
 msgstr "PlayStation2"
 
-#: src/collections/gamecollection.cpp:248
+#: src/collections/gamecollection.cpp:251
 #, kde-format
 msgid "PlayStation3"
 msgstr "PlayStation3"
 
-#: src/collections/gamecollection.cpp:249
+#: src/collections/gamecollection.cpp:252
 #, fuzzy, kde-format
 msgid "PlayStation4"
 msgstr "PlayStation"
 
-#: src/collections/gamecollection.cpp:250
+#: src/collections/gamecollection.cpp:253
 #, fuzzy, kde-format
 msgid "PlayStation5"
 msgstr "PlayStation"
 
-#: src/collections/gamecollection.cpp:251
+#: src/collections/gamecollection.cpp:254
 #, kde-format
 msgctxt "PlayStation Portable"
 msgid "PSP"
 msgstr "PSP"
 
-#: src/collections/gamecollection.cpp:252
+#: src/collections/gamecollection.cpp:255
 #, fuzzy, kde-format
 msgid "PlayStation Vita"
 msgstr "PlayStation"
 
-#: src/collections/gamecollection.cpp:253
+#: src/collections/gamecollection.cpp:256
 #, kde-format
 msgid "Game Boy"
 msgstr "Game Boy"
 
-#: src/collections/gamecollection.cpp:254
+#: src/collections/gamecollection.cpp:257
 #, kde-format
 msgid "Game Boy Color"
 msgstr "Game Boy Color"
 
-#: src/collections/gamecollection.cpp:255
+#: src/collections/gamecollection.cpp:258
 #, kde-format
 msgid "Game Boy Advance"
 msgstr "Game Boy Advance"
 
-#: src/collections/gamecollection.cpp:256
+#: src/collections/gamecollection.cpp:259
 #, fuzzy, kde-format
 msgid "Nintendo"
 msgstr "Nintendo DS"
 
-#: src/collections/gamecollection.cpp:257
+#: src/collections/gamecollection.cpp:260
 #, fuzzy, kde-format
 msgid "Super Nintendo"
 msgstr "Nintendo DS"
 
-#: src/collections/gamecollection.cpp:258
+#: src/collections/gamecollection.cpp:261
 #, fuzzy, kde-format
 msgid "Nintendo 64"
 msgstr "Nintendo DS"
 
-#: src/collections/gamecollection.cpp:259
+#: src/collections/gamecollection.cpp:262
 #, kde-format
 msgid "GameCube"
 msgstr "GameCube"
 
-#: src/collections/gamecollection.cpp:260
+#: src/collections/gamecollection.cpp:263
 #, kde-format
 msgid "Nintendo Wii"
 msgstr "Nintendo Wii"
 
-#: src/collections/gamecollection.cpp:261
+#: src/collections/gamecollection.cpp:264
 #, fuzzy, kde-format
 msgid "Nintendo WiiU"
 msgstr "Nintendo Wii"
 
-#: src/collections/gamecollection.cpp:262
+#: src/collections/gamecollection.cpp:265
 #, fuzzy, kde-format
 msgid "Nintendo Switch"
 msgstr "Nintendo DS"
 
-#: src/collections/gamecollection.cpp:263
+#: src/collections/gamecollection.cpp:266
 #, kde-format
 msgid "Nintendo DS"
 msgstr "Nintendo DS"
 
-#: src/collections/gamecollection.cpp:264
+#: src/collections/gamecollection.cpp:267
 #, fuzzy, kde-format
 msgid "Nintendo 3DS"
 msgstr "Nintendo DS"
 
-#: src/collections/gamecollection.cpp:265
+#: src/collections/gamecollection.cpp:268
 #, kde-format
 msgctxt "Sega Genesis"
 msgid "Genesis"
 msgstr ""
 
-#: src/collections/gamecollection.cpp:266
+#: src/collections/gamecollection.cpp:269
 #, kde-format
 msgid "Dreamcast"
 msgstr "Dreamcast"
 
-#: src/collections/gamecollection.cpp:278
+#: src/collections/gamecollection.cpp:281
 #, kde-format
 msgctxt ""
 "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
@@ -1614,7 +1614,7 @@ msgstr "Албум"
 
 #: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:424
 #: src/fetch/doubanfetcher.cpp:432 src/fetch/doubanfetcher.cpp:566
-#: src/fetch/upcitemdbfetcher.cpp:291 src/fetch/upcitemdbfetcher.cpp:411
+#: src/fetch/upcitemdbfetcher.cpp:305 src/fetch/upcitemdbfetcher.cpp:425
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:162
 #: src/translators/freedbimporter.cpp:275
@@ -1626,8 +1626,8 @@ msgstr ""
 
 #: src/collections/musiccollection.cpp:54
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1043
-#: src/fetch/discogsfetcher.cpp:432 src/fetch/upcitemdbfetcher.cpp:407
-#: src/fetch/upcitemdbfetcher.cpp:415 src/translators/discogsimporter.cpp:169
+#: src/fetch/discogsfetcher.cpp:432 src/fetch/upcitemdbfetcher.cpp:421
+#: src/fetch/upcitemdbfetcher.cpp:429 src/translators/discogsimporter.cpp:169
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
@@ -1752,7 +1752,7 @@ msgid "My Videos"
 msgstr "Моите клипове"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1029
-#: src/fetch/upcitemdbfetcher.cpp:393
+#: src/fetch/upcitemdbfetcher.cpp:407
 #, kde-format
 msgid "VHS"
 msgstr "VHS"
@@ -1768,13 +1768,13 @@ msgid "DivX"
 msgstr "DivX"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1023
-#: src/fetch/upcitemdbfetcher.cpp:387
+#: src/fetch/upcitemdbfetcher.cpp:401
 #, kde-format
 msgid "Blu-ray"
 msgstr "Blu-ray"
 
 #: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1026
-#: src/fetch/upcitemdbfetcher.cpp:390
+#: src/fetch/upcitemdbfetcher.cpp:404
 #, kde-format
 msgid "HD DVD"
 msgstr "HD DVD"
@@ -1852,7 +1852,7 @@ msgid "Nationality"
 msgstr "Националност"
 
 #: src/collections/videocollection.cpp:102 src/fetch/amazonfetcher.cpp:1039
-#: src/fetch/upcitemdbfetcher.cpp:403
+#: src/fetch/upcitemdbfetcher.cpp:417
 #, kde-format
 msgid "NTSC"
 msgstr "NTSC"
@@ -1946,7 +1946,7 @@ msgid "Aspect Ratio"
 msgstr ""
 
 #: src/collections/videocollection.cpp:175 src/fetch/amazonfetcher.cpp:1012
-#: src/fetch/upcitemdbfetcher.cpp:373
+#: src/fetch/upcitemdbfetcher.cpp:387
 #, kde-format
 msgid "Widescreen"
 msgstr ""
@@ -1962,7 +1962,7 @@ msgid "Color Mode"
 msgstr "Цветови режим"
 
 #: src/collections/videocollection.cpp:186 src/fetch/amazonfetcher.cpp:1033
-#: src/fetch/upcitemdbfetcher.cpp:397
+#: src/fetch/upcitemdbfetcher.cpp:411
 #, kde-format
 msgid "Director's Cut"
 msgstr ""
@@ -2766,9 +2766,9 @@ msgstr "Изтриване на поле?"
 msgid "Select template to delete:"
 msgstr ""
 
-#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:330
-#: src/fetchdialog.cpp:429 src/fetchdialog.cpp:563 src/fetchdialog.cpp:624
-#: src/fetchdialog.cpp:638 src/gui/statusbar.cpp:94
+#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:331
+#: src/fetchdialog.cpp:430 src/fetchdialog.cpp:564 src/fetchdialog.cpp:625
+#: src/fetchdialog.cpp:639 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Готово."
@@ -3169,7 +3169,7 @@ msgstr ""
 #: src/fetch/crossreffetcher.cpp:300 src/fetch/discogsfetcher.cpp:527
 #: src/fetch/giantbombfetcher.cpp:219 src/fetch/googlebookfetcher.cpp:383
 #: src/fetch/isbndbfetcher.cpp:395 src/fetch/mobygamesfetcher.cpp:652
-#: src/fetch/omdbfetcher.cpp:411 src/fetch/thegamesdbfetcher.cpp:638
+#: src/fetch/omdbfetcher.cpp:411 src/fetch/thegamesdbfetcher.cpp:637
 #: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:586
 #, kde-format
 msgid ""
@@ -3183,7 +3183,7 @@ msgstr ""
 #: src/fetch/entrezfetcher.cpp:532 src/fetch/giantbombfetcher.cpp:231
 #: src/fetch/googlebookfetcher.cpp:395 src/fetch/isbndbfetcher.cpp:407
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/numistafetcher.cpp:417
-#: src/fetch/omdbfetcher.cpp:423 src/fetch/thegamesdbfetcher.cpp:650
+#: src/fetch/omdbfetcher.cpp:423 src/fetch/thegamesdbfetcher.cpp:649
 #: src/fetch/themoviedbfetcher.cpp:603
 #, kde-format
 msgid "Access key: "
@@ -3200,7 +3200,7 @@ msgid ""
 msgstr ""
 
 #: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:631
-#: src/fetch/colnectfetcher.cpp:787 src/fetch/discogsfetcher.cpp:218
+#: src/fetch/colnectfetcher.cpp:785 src/fetch/discogsfetcher.cpp:218
 #: src/fetch/doubanfetcher.cpp:455 src/fetch/filmaffinityfetcher.cpp:428
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:199 src/fetch/ibsfetcher.cpp:302
@@ -3209,9 +3209,9 @@ msgstr ""
 #: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:377
 #: src/fetch/mobygamesfetcher.cpp:346 src/fetch/moviemeterfetcher.cpp:162
 #: src/fetch/numistafetcher.cpp:288 src/fetch/numistafetcher.cpp:296
-#: src/fetch/omdbfetcher.cpp:183 src/fetch/thegamesdbfetcher.cpp:173
+#: src/fetch/omdbfetcher.cpp:183 src/fetch/thegamesdbfetcher.cpp:172
 #: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:346
-#: src/fetch/tvmazefetcher.cpp:265 src/fetch/upcitemdbfetcher.cpp:251
+#: src/fetch/tvmazefetcher.cpp:265 src/fetch/upcitemdbfetcher.cpp:260
 #: src/fetch/vgcollectfetcher.cpp:284 src/fetch/vndbfetcher.cpp:182
 #, kde-format
 msgid "The cover image could not be loaded."
@@ -3468,50 +3468,50 @@ msgid ""
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:213
-#: src/fetch/colnectfetcher.cpp:948 src/fetch/imdbfetcher.cpp:569
+#: src/fetch/colnectfetcher.cpp:945 src/fetch/imdbfetcher.cpp:569
 #: src/fetch/itunesfetcher.cpp:517 src/fetch/mobygamesfetcher.cpp:672
-#: src/fetch/rpggeekfetcher.cpp:222 src/fetch/thegamesdbfetcher.cpp:658
+#: src/fetch/rpggeekfetcher.cpp:222 src/fetch/thegamesdbfetcher.cpp:657
 #: src/fetch/videogamegeekfetcher.cpp:213
 #, kde-format
 msgid "&Image size: "
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:217
-#: src/fetch/colnectfetcher.cpp:952 src/fetch/imdbfetcher.cpp:572
+#: src/fetch/colnectfetcher.cpp:949 src/fetch/imdbfetcher.cpp:572
 #: src/fetch/itunesfetcher.cpp:521 src/fetch/mobygamesfetcher.cpp:675
-#: src/fetch/rpggeekfetcher.cpp:226 src/fetch/thegamesdbfetcher.cpp:661
+#: src/fetch/rpggeekfetcher.cpp:226 src/fetch/thegamesdbfetcher.cpp:660
 #: src/fetch/videogamegeekfetcher.cpp:217
 #, fuzzy, kde-format
 msgid "Small Image"
 msgstr "Заглавие"
 
 #: src/fetch/amazonfetcher.cpp:1150 src/fetch/imdbfetcher.cpp:573
-#: src/fetch/thegamesdbfetcher.cpp:662
+#: src/fetch/thegamesdbfetcher.cpp:661
 #, fuzzy, kde-format
 msgid "Medium Image"
 msgstr "Медия"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:953 src/fetch/imdbfetcher.cpp:574
+#: src/fetch/colnectfetcher.cpp:950 src/fetch/imdbfetcher.cpp:574
 #: src/fetch/itunesfetcher.cpp:522 src/fetch/mobygamesfetcher.cpp:677
-#: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:663
+#: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:662
 #: src/fetch/videogamegeekfetcher.cpp:218
 #, fuzzy, kde-format
 msgid "Large Image"
 msgstr "Заглавие"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:216
-#: src/fetch/colnectfetcher.cpp:951 src/fetch/imdbfetcher.cpp:575
+#: src/fetch/colnectfetcher.cpp:948 src/fetch/imdbfetcher.cpp:575
 #: src/fetch/itunesfetcher.cpp:520 src/fetch/mobygamesfetcher.cpp:678
-#: src/fetch/rpggeekfetcher.cpp:225 src/fetch/thegamesdbfetcher.cpp:664
+#: src/fetch/rpggeekfetcher.cpp:225 src/fetch/thegamesdbfetcher.cpp:663
 #: src/fetch/videogamegeekfetcher.cpp:216
 #, fuzzy, kde-format
 msgid "No Image"
 msgstr "Страници"
 
 #: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:579
-#: src/fetch/mobygamesfetcher.cpp:682 src/fetch/thegamesdbfetcher.cpp:668
+#: src/fetch/mobygamesfetcher.cpp:682 src/fetch/thegamesdbfetcher.cpp:667
 #, kde-format
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
@@ -3572,9 +3572,9 @@ msgstr "Лични"
 #: src/fetch/ibsfetcher.cpp:397 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:387 src/fetch/kinoteatrfetcher.cpp:516
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
-#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:424
+#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:438
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:389
-#: src/fetch/upcitemdbfetcher.cpp:466 src/fetch/vgcollectfetcher.cpp:380
+#: src/fetch/upcitemdbfetcher.cpp:480 src/fetch/vgcollectfetcher.cpp:380
 #: src/fetch/vndbfetcher.cpp:442
 #, kde-format
 msgid "This source has no options."
@@ -3600,36 +3600,36 @@ msgstr "ISBN"
 msgid "BoardGameGeek Link"
 msgstr "Преименувай колекцията"
 
-#: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:808
+#: src/fetch/colnectfetcher.cpp:525 src/fetch/colnectfetcher.cpp:806
 #, fuzzy, kde-format
 msgid "Colnect Link"
 msgstr "Оценка"
 
-#: src/fetch/colnectfetcher.cpp:546 src/fetch/colnectfetcher.cpp:814
+#: src/fetch/colnectfetcher.cpp:544 src/fetch/colnectfetcher.cpp:812
 #, fuzzy, kde-format
 msgid "Mintage"
 msgstr "С автограф"
 
-#: src/fetch/colnectfetcher.cpp:582 src/fetch/colnectfetcher.cpp:816
+#: src/fetch/colnectfetcher.cpp:580 src/fetch/colnectfetcher.cpp:814
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:589 src/fetch/colnectfetcher.cpp:817
+#: src/fetch/colnectfetcher.cpp:587 src/fetch/colnectfetcher.cpp:815
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:818 src/fetch/giantbombfetcher.cpp:207
+#: src/fetch/colnectfetcher.cpp:816 src/fetch/giantbombfetcher.cpp:207
 #: src/fetch/igdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:638
 #: src/fetch/vgcollectfetcher.cpp:372 src/field.cpp:325
 #, fuzzy, kde-format
 msgid "PEGI Rating"
 msgstr "Оценка"
 
-#: src/fetch/colnectfetcher.cpp:920 src/fetch/filmaffinityfetcher.cpp:490
+#: src/fetch/colnectfetcher.cpp:917 src/fetch/filmaffinityfetcher.cpp:490
 #: src/fetch/numistafetcher.cpp:425 src/fetch/themoviedbfetcher.cpp:632
 #, fuzzy, kde-format
 msgid "Language: "
@@ -3702,7 +3702,7 @@ msgstr ""
 #. i18n("Nationality");
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
-#: src/fetch/upcitemdbfetcher.cpp:205 src/fetch/upcitemdbfetcher.cpp:459
+#: src/fetch/upcitemdbfetcher.cpp:214 src/fetch/upcitemdbfetcher.cpp:473
 #: src/fetch/vgcollectfetcher.cpp:338 src/fetch/vgcollectfetcher.cpp:373
 #, kde-format
 msgid "Barcode"
@@ -3963,7 +3963,7 @@ msgid "Internet Game Database (IGDB.com)"
 msgstr "Тип:"
 
 #: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:640
-#: src/fetch/thegamesdbfetcher.cpp:607 src/field.cpp:343
+#: src/fetch/thegamesdbfetcher.cpp:606 src/field.cpp:343
 #, kde-format
 msgid "Screenshot"
 msgstr ""
@@ -4116,7 +4116,7 @@ msgstr ""
 msgid "&Verify Catalog"
 msgstr "Ново поле"
 
-#: src/fetch/openlibraryfetcher.cpp:271 src/fetch/openlibraryfetcher.cpp:417
+#: src/fetch/openlibraryfetcher.cpp:269 src/fetch/openlibraryfetcher.cpp:431
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr ""
@@ -4485,74 +4485,80 @@ msgstr ""
 msgid "Clear all search fields and results"
 msgstr ""
 
-#: src/fetchdialog.cpp:395
+#: src/fetchdialog.cpp:316
+#, kde-format
+msgctxt "%p is the percent value, % is the percent sign"
+msgid "%p%"
+msgstr ""
+
+#: src/fetchdialog.cpp:396
 #, kde-format
 msgid "Cancelling the search..."
 msgstr ""
 
-#: src/fetchdialog.cpp:408 src/fetchdialog.cpp:588
+#: src/fetchdialog.cpp:409 src/fetchdialog.cpp:589
 #, fuzzy, kde-format
 msgid "Searching..."
 msgstr "Търси в :"
 
-#: src/fetchdialog.cpp:468
+#: src/fetchdialog.cpp:469
 #, fuzzy, kde-format
 msgid "The search returned no items."
 msgstr "Стринг за търсене"
 
-#: src/fetchdialog.cpp:471
+#: src/fetchdialog.cpp:472
 #, fuzzy, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
 msgstr[0] "Стринг за търсене"
 msgstr[1] "Стринг за търсене"
 
-#: src/fetchdialog.cpp:500
+#: src/fetchdialog.cpp:501
 #, kde-format
 msgid "No results were found for the following ISBN values:"
 msgstr ""
 
-#: src/fetchdialog.cpp:502
+#: src/fetchdialog.cpp:503
 #, kde-format
 msgid "No Results"
 msgstr ""
 
-#: src/fetchdialog.cpp:555 src/fetchdialog.cpp:611
+#: src/fetchdialog.cpp:556 src/fetchdialog.cpp:612
 #, kde-format
 msgid "Fetching %1..."
 msgstr ""
 
-#: src/fetchdialog.cpp:628
+#: src/fetchdialog.cpp:629
 #, fuzzy, kde-format
 msgid "Attribution"
 msgstr "Институция"
 
-#: src/fetchdialog.cpp:665 src/fetchdialog.cpp:889
+#: src/fetchdialog.cpp:666 src/fetchdialog.cpp:890
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 
-#: src/fetchdialog.cpp:746
+#: src/fetchdialog.cpp:747
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr ""
 
-#: src/fetchdialog.cpp:757
+#: src/fetchdialog.cpp:758
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr ""
 
-#: src/fetchdialog.cpp:773
+#: src/fetchdialog.cpp:774
 #, fuzzy, kde-format
 msgid "&Load From File..."
 msgstr "Импортира Bibtex файл..."
 
-#: src/fetchdialog.cpp:774
+#: src/fetchdialog.cpp:775
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr ""
 
-#: src/fetchdialog.cpp:798
+#: src/fetchdialog.cpp:799
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
@@ -6235,7 +6241,7 @@ msgid "(%1 selected)"
 msgstr ""
 
 #: src/mainwindow.cpp:1818 src/translators/boardgamegeekimporter.cpp:98
-#: src/translators/gcstarimporter.cpp:264
+#: src/translators/gcstarimporter.cpp:265
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
 #, fuzzy, kde-format
@@ -6966,8 +6972,8 @@ msgid ""
 "cache folders."
 msgstr ""
 
-#: src/translators/gcstarimporter.cpp:125
-#: src/translators/gcstarimporter.cpp:271
+#: src/translators/gcstarimporter.cpp:126
+#: src/translators/gcstarimporter.cpp:272
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr ""
