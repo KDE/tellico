@@ -1,14 +1,24 @@
 2024-01-01  Robby Stephenson  <robby@periapsis.org>
 
+	* Released Tellico 3.5.3.
 	* Updated author search for Open Library.
+	* Improved entry matching heuristics.
 
 2023-12-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated IMDB fetcher to make locale configurable.
 
+2023-12-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Kino-Teatr data source.
+
 2023-12-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Removed backchecking of KWallet in CrossRef source.
+
+2023-11-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with showing empty space on left for custom collections with no image.
 
 2023-10-22  Robby Stephenson  <robby@periapsis.org>
 
