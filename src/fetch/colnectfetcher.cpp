@@ -31,7 +31,6 @@
 #include "../images/imagefactory.h"
 #include "../gui/combobox.h"
 #include "../utils/guiproxy.h"
-#include "../utils/string_utils.h"
 #include "../entry.h"
 #include "../fieldformat.h"
 #include "../core/filehandler.h"
@@ -385,7 +384,7 @@ void ColnectFetcher::slotComplete(KJob* job_) {
   }
 
   // here, we have multiple results to loop through
-//  myDebug() << "Reading" << resultList.size() << "results";
+  myLog() << "Reading" << resultList.size() << "results";
   foreach(const QVariant& result, resultList) {
     // be sure to check that the fetcher has not been stopped
     // crashes can occur if not
@@ -534,7 +533,6 @@ void ColnectFetcher::populateEntry(Data::EntryPtr entry_, const QVariantList& re
                        QLatin1Char('/') + entry_->field(QStringLiteral("colnect-id")) +
                        QLatin1Char('-') + URLize(resultList_.at(0).toString()));
     link.setPath(link.path() + path);
-//    myDebug() << "colnect link is" << link;
     entry_->setField(colnect, link.url());
   }
 }
@@ -783,7 +781,7 @@ void ColnectFetcher::loadImage(Data::EntryPtr entry_, const QString& fieldName_)
   if(image.contains(QLatin1Char('/'))) {
     const QString id = ImageFactory::addImage(QUrl::fromUserInput(image), true /* quiet */);
     if(id.isEmpty()) {
-      myDebug() << "Failed to load" << image;
+      myLog() << "Failed to load" << image;
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
     // empty image ID is ok
@@ -859,7 +857,7 @@ void ColnectFetcher::readDataList() {
   // Colnect API calls are encoded as a path
   QString query(QLatin1Char('/') + m_locale + QStringLiteral("/fields/cat/") + m_category + QLatin1Char('/'));
   u.setPath(u.path() + query);
-  myDebug() << "Reading Colnect fields from" << u.toDisplayString();
+  myLog() << "Reading Colnect fields from" << u.toDisplayString();
 
   const QByteArray data = FileHandler::readDataFile(u, true);
   QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -875,7 +873,6 @@ void ColnectFetcher::readDataList() {
   m_colnectFields.clear();
   for(int i = 0; i < resultList.size(); ++i) {
     m_colnectFields.insert(resultList.at(i).toString(), i);
-//    if(i == 5) myDebug() << m_colnectFields;
   }
 //  myDebug() << "Colnect fields:" << m_colnectFields;
 }
@@ -885,7 +882,7 @@ void ColnectFetcher::readItemNames(const QByteArray& item_) {
   // Colnect API calls are encoded as a path
   QString query(QLatin1Char('/') + m_locale + QLatin1Char('/') + QLatin1String(item_) + QStringLiteral("/cat/") + m_category + QLatin1Char('/'));
   u.setPath(u.path() + query);
-  myDebug() << "Reading item names from" << u.toDisplayString();
+  myLog() << "Reading item names from" << u.toDisplayString();
 
   const QByteArray data = FileHandler::readDataFile(u, true);
   QJsonDocument doc = QJsonDocument::fromJson(data);

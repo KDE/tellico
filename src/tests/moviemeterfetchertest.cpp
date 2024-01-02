@@ -55,6 +55,7 @@ void MovieMeterFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
                                        QStringLiteral("Man From Snowy River"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MovieMeterFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 2);
 
@@ -78,12 +79,11 @@ void MovieMeterFetcherTest::testKeyword() {
 }
 
 void MovieMeterFetcherTest::testKeywordCzech() {
-//  QString tmav = QString::fromUtf8("Tmavomodrý Svět");
   QString tmav = QStringLiteral("Tmavomodrý Svet");
-//  QString tmav = QString::fromUtf8("Tmavomodrý svet");
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
                                        tmav);
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MovieMeterFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 2);
 

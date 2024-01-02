@@ -32,7 +32,6 @@
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 #include "../fieldformat.h"
-#include "../fetch/fetcherjob.h"
 
 #include <KSharedConfig>
 
@@ -55,6 +54,7 @@ void KinoTeatrFetcherTest::testSuperman() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Superman Returns"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::KinoTeatrFetcher(this));
   fetcher->readConfig(m_config);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
