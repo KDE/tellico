@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-02 02:24+0000\n"
+"POT-Creation-Date: 2024-01-03 02:31+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -5403,7 +5403,7 @@ msgstr "Tellico - håndtering af samlinger fra KDE"
 #: src/main.cpp:123
 #, fuzzy, kde-format
 #| msgid "(c) 2001-2020, Robby Stephenson"
-msgid "(c) 2001-2023, Robby Stephenson"
+msgid "(c) 2001-2024, Robby Stephenson"
 msgstr "(c) 2001-2020, Robby Stephenson"
 
 #: src/main.cpp:127

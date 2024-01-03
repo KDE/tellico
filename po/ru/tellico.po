@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-02 02:24+0000\n"
+"POT-Creation-Date: 2024-01-03 02:31+0000\n"
 "PO-Revision-Date: 2022-03-21 17:07+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -5402,7 +5402,7 @@ msgstr "Tellico — диспетчер коллекций, простая сво
 #: src/main.cpp:123
 #, fuzzy, kde-format
 #| msgid "(c) 2001-2022, Robby Stephenson"
-msgid "(c) 2001-2023, Robby Stephenson"
+msgid "(c) 2001-2024, Robby Stephenson"
 msgstr "© Robby Stephenson, 2001—2022"
 
 #: src/main.cpp:127

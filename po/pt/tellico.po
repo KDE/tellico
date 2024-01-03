@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-02 02:24+0000\n"
+"POT-Creation-Date: 2024-01-03 02:31+0000\n"
 "PO-Revision-Date: 2020-03-14 11:14+0000\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -5484,7 +5484,7 @@ msgstr "Tellico - um gestor de colecções do KDE"
 #: src/main.cpp:123
 #, fuzzy, kde-format
 #| msgid "(c) 2001-2020, Robby Stephenson"
-msgid "(c) 2001-2023, Robby Stephenson"
+msgid "(c) 2001-2024, Robby Stephenson"
 msgstr "(c) 2001-2020, Robby Stephenson"
 
 #: src/main.cpp:127

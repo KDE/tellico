@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-02 02:24+0000\n"
+"POT-Creation-Date: 2024-01-03 02:31+0000\n"
 "PO-Revision-Date: 2020-06-03 20:36+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -5389,7 +5389,7 @@ msgstr "Tellico - vaba ja lihtne kogude haldur"
 #: src/main.cpp:123
 #, fuzzy, kde-format
 #| msgid "(c) 2001-2020, Robby Stephenson"
-msgid "(c) 2001-2023, Robby Stephenson"
+msgid "(c) 2001-2024, Robby Stephenson"
 msgstr "(c) 2001-2020: Robby Stephenson"
 
 #: src/main.cpp:127

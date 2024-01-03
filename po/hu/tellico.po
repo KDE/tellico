@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-02 02:24+0000\n"
+"POT-Creation-Date: 2024-01-03 02:31+0000\n"
 "PO-Revision-Date: 2022-02-01 11:50+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -5374,7 +5374,7 @@ msgstr "Tellico - egy szabad és egyszerű gyűjteménykezelő szoftver"
 #: src/main.cpp:123
 #, fuzzy, kde-format
 #| msgid "(c) 2001-2022, Robby Stephenson"
-msgid "(c) 2001-2023, Robby Stephenson"
+msgid "(c) 2001-2024, Robby Stephenson"
 msgstr "© Robby Stephenson, 2001-2022."
 
 #: src/main.cpp:127

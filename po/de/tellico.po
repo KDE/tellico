@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-02 02:24+0000\n"
+"POT-Creation-Date: 2024-01-03 02:31+0000\n"
 "PO-Revision-Date: 2023-05-12 19:32+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -5494,8 +5494,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico – eine Sammlungsverwaltung, frei und einfach"
 
 #: src/main.cpp:123
-#, kde-format
-msgid "(c) 2001-2023, Robby Stephenson"
+#, fuzzy, kde-format
+#| msgid "(c) 2001-2023, Robby Stephenson"
+msgid "(c) 2001-2024, Robby Stephenson"
 msgstr "Copyright 2001-2023 Robby Stephenson"
 
 #: src/main.cpp:127
