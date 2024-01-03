@@ -544,12 +544,6 @@ ecm_add_test(amazonfetchertest.cpp
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )
 
-ecm_add_test(animenfofetchertest.cpp
-             ../fetch/animenfofetcher.cpp
-    TEST_NAME animenfofetchertest
-    LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
-)
-
 ecm_add_test(arxivfetchertest.cpp
              ../fetch/arxivfetcher.cpp
     TEST_NAME arxivfetchertest

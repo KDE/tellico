@@ -7,7 +7,6 @@ SET(fetch_STAT_SRCS
    allocinefetcher.cpp
    amazonfetcher.cpp
    amazonrequest.cpp
-   animenfofetcher.cpp
    arxivfetcher.cpp
    bedethequefetcher.cpp
    bibliosharefetcher.cpp
