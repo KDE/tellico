@@ -33,6 +33,8 @@
 #include "../collectionfactory.h"
 #include "../utils/datafileregistry.h"
 
+#include <KLocalizedString>
+
 #include <QTest>
 
 QTEST_GUILESS_MAIN( EntryUpdateJobTest )
@@ -41,6 +43,7 @@ EntryUpdateJobTest::EntryUpdateJobTest() : m_loop(this) {
 }
 
 void EntryUpdateJobTest::initTestCase() {
+  KLocalizedString::setApplicationDomain("tellico");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/arxiv2tellico.xsl"));
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 }

@@ -62,13 +62,13 @@ void EntryUpdateJob::slotResult(Tellico::Fetch::FetchResult* result_) {
 
   const int match = m_entry->collection()->sameEntry(m_entry, entry);
   if(match > m_bestMatchScore) {
-    myLog() << "Found better match:" << entry->title() << "- score =" << match;
+    myLog() << "Found better match:" << entry->title() << "; score =" << match;
     m_bestMatchScore = match;
     m_bestMatchEntry = entry;
   }
   // if perfect match, go ahead and top
   if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
-    myLog() << "Score exceeds hgih confidence threshold, stopping search";
+    myLog() << "Score exceeds high confidence threshold, stopping search";
     doKill();
   }
 }
