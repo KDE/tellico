@@ -10,16 +10,16 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-02 00:41+0000\n"
-"PO-Revision-Date: 2023-12-27 17:34+0100\n"
+"PO-Revision-Date: 2024-01-02 14:54+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.4.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4379,7 +4379,7 @@ msgstr "Uporabi prednastavljen &strežnik:"
 #: src/fetch/z3950fetcher.cpp:627
 #, kde-format
 msgid "&Database: "
-msgstr "&Podatkovna zbirka: "
+msgstr "Po&datkovna zbirka: "
 
 #: src/fetch/z3950fetcher.cpp:632
 #, kde-format
@@ -4596,7 +4596,7 @@ msgstr "Počisti vsa iskalna polja in rezultate"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p%"
 
 #: src/fetchdialog.cpp:396
 #, kde-format

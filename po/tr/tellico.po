@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# SPDX-FileCopyrightText: 2022, 2023 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
 # Ali Isingor <isingor@gmail.com>, 2007.
 # Kunter Kutlu <kunterkutlu@gmail.com>, 2007.
 # obsoleteman <tulliana@gmail.com>, 2009,2012.
@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-02 00:41+0000\n"
-"PO-Revision-Date: 2023-12-26 11:07+0300\n"
+"PO-Revision-Date: 2024-01-02 16:06+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -4600,7 +4600,7 @@ msgstr "Bütün arama alanlarını ve sonuçlarını temizle"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%​%p"
 
 #: src/fetchdialog.cpp:396
 #, kde-format

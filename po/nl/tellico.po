@@ -5,14 +5,14 @@
 # Fred Marchee <fred@intercookie.com>, 2005.
 # Fred Marchee <fredmarchee@gmail.com>, 2005.
 # Antoon Tolboom <atolboo@gmail.com>, 2009.
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2023 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2023, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
 # Freek de Kruijf <f.de.kruijf@gmail.com>, 2011, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-02 00:41+0000\n"
-"PO-Revision-Date: 2023-12-26 11:03+0100\n"
+"PO-Revision-Date: 2024-01-02 13:34+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -4632,7 +4632,7 @@ msgstr "Wis alle zoekvelden en resultaten"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p%"
 
 #: src/fetchdialog.cpp:396
 #, kde-format
