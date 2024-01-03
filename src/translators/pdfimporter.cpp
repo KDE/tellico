@@ -24,7 +24,6 @@
 
 #include "pdfimporter.h"
 #include "tellicoimporter.h"
-#include "ebookimporter.h"
 #include "xslthandler.h"
 #include "xmphandler.h"
 #include "../collections/bookcollection.h"

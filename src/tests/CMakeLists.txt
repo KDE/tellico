@@ -489,7 +489,6 @@ ecm_add_test(fetchertest.cpp
 # the PDF importer uses CrossRefFetcher, so include the test near the fetchers section
 ecm_add_test(pdftest.cpp
              ../translators/pdfimporter.cpp
-             ../translators/ebookimporter.cpp
              ../translators/xmphandler.cpp
              ../entryupdatejob.cpp
     TEST_NAME pdftest
