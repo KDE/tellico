@@ -7,7 +7,7 @@
 # Regis Boudin <regis@boudin.name>, 2004, 2005, 2006, 2007, 2008.
 # Mathias Monnerville <tellico@monnerville.com>, 2006.
 # Arnaud <arnaud.bienner@gmail.com>, 2008.
-# SPDX-FileCopyrightText: 2012, 2020, 2021, 2022, 2023 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2012, 2020, 2021, 2022, 2023, 2024 Xavier Besnard <xavier.besnard@kde.org>
 # Vincent PINON <vincent.pinon@st.com>, 2013, 2014.
 # Olivier Delaune <olivier.delaune@wanadoo.fr>, 2014, 2015.
 # Johan Claude-Breuninger <johan.claudebreuninger@gmail.com>, 2017.
@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-02 00:41+0000\n"
-"PO-Revision-Date: 2023-12-28 10:43+0100\n"
+"PO-Revision-Date: 2024-01-03 09:47+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -4712,7 +4712,7 @@ msgstr "Effacer tous les champs et valeurs"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p %"
 
 #: src/fetchdialog.cpp:396
 #, kde-format
