@@ -36,6 +36,7 @@ private Q_SLOTS:
   void testFilterModel();
   void testGroupModel();
   void testSelectionModel();
+  void testBorrowerModel();
 };
 
 #endif
