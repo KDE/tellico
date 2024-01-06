@@ -245,7 +245,7 @@ void Field::setPropertyList(const Tellico::StringMap& props_) {
 }
 
 QString Field::property(const QString& key_) const {
-  return m_properties.contains(key_) ? m_properties.value(key_) : QString();
+  return m_properties.value(key_);
 }
 
 void Field::convertOldRating(Tellico::Data::FieldPtr field_) {

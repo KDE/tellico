@@ -35,11 +35,10 @@ using Tellico::Data::DerivedValue;
 
 const QRegularExpression DerivedValue::s_templateFieldsRx(QLatin1String("%\\{([^:]+):?.*?\\}"));
 
-DerivedValue::DerivedValue(const QString& valueTemplate_) : m_valueTemplate(valueTemplate_)
-    , m_keyRx(QLatin1String("^([^:]+):?(-?\\d*)/?(.*)$")) {
+DerivedValue::DerivedValue(const QString& valueTemplate_) : m_valueTemplate(valueTemplate_) {
 }
 
-DerivedValue::DerivedValue(FieldPtr field_) : m_keyRx(QLatin1String("^([^:]+):?(-?\\d*)/?(.*)$")) {
+DerivedValue::DerivedValue(FieldPtr field_) {
   Q_ASSERT(field_);
   if(!field_->hasFlag(Field::Derived)) {
     myWarning() << "using DerivedValue for non-derived field";
@@ -121,6 +120,10 @@ QString DerivedValue::value(EntryPtr entry_, bool formatted_) const {
   return result.simplified();
 }
 
+void DerivedValue::initRegularExpression() const {
+  m_keyRx.setPattern(QLatin1String("^([^:]+):?(-?\\d*)/?(.*)$"));
+}
+
 // format is something like "%{year} %{author}"
 QStringList DerivedValue::templateFields() const {
   QStringList list;
@@ -138,6 +141,9 @@ QString DerivedValue::templateKeyValue(EntryPtr entry_, const QString& key_, boo
     return QString::number(entry_->id());
   }
 
+  if(m_keyRx.pattern().isEmpty()) {
+    initRegularExpression();
+  }
   auto match = m_keyRx.match(key_);
   if(!match.hasMatch()) {
     myDebug() << "unmatched regexp for" << key_;

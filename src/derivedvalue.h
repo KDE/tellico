@@ -46,12 +46,13 @@ public:
   QString value(EntryPtr entry, bool formatted) const;
 
 private:
+  void initRegularExpression() const;
   QStringList templateFields() const;
   QString templateKeyValue(EntryPtr entry, const QString& key, bool formatted) const;
 
   QString m_fieldName;
   QString m_valueTemplate;
-  QRegularExpression m_keyRx;
+  mutable QRegularExpression m_keyRx;
   static const QRegularExpression s_templateFieldsRx;
 };
 
