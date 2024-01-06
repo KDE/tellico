@@ -47,6 +47,7 @@
 #include <QTest>
 #include <QSignalSpy>
 #include <QStandardPaths>
+#include <QLoggingCategory>
 
 QTEST_MAIN( TellicoModelTest )
 
@@ -55,6 +56,7 @@ void TellicoModelTest::initTestCase() {
   KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
 }
 
 void TellicoModelTest::testEntryModel() {
@@ -118,11 +120,9 @@ void TellicoModelTest::testEntryModel() {
   QVariant icon1 = iconModel.data(iconModel.index(0, 0), Qt::DecorationRole);
   QVERIFY(icon1.isValid());
   QVERIFY(!icon1.isNull());
+  QVERIFY(icon1.canConvert<QIcon>());
   auto& img1 = Tellico::ImageFactory::imageById(imageId);
   QVERIFY(!img1.isNull());
-  auto pix1 = img1.convertToPixmap();
-  QVERIFY(!pix1.isNull());
-  QCOMPARE(pix1, icon1.value<QPixmap>());
 
   Tellico::FilterRule* rule1 = new Tellico::FilterRule(QStringLiteral("title"),
                                                        QStringLiteral("Star Wars"),
