@@ -133,6 +133,11 @@ QStringList DerivedValue::templateFields() const {
 }
 
 QString DerivedValue::templateKeyValue(EntryPtr entry_, const QString& key_, bool formatted_) const {
+  // @id is used often, so avoid regex if possible
+  if(key_ == QLatin1String("@id")) {
+    return QString::number(entry_->id());
+  }
+
   auto match = m_keyRx.match(key_);
   if(!match.hasMatch()) {
     myDebug() << "unmatched regexp for" << key_;
@@ -146,8 +151,7 @@ QString DerivedValue::templateKeyValue(EntryPtr entry_, const QString& key_, boo
     field = entry_->collection()->fieldByTitle(fieldName);
   }
   if(!field) {
-    if(fieldName == QLatin1String("@id") ||
-       fieldName == QLatin1String("id")) {
+    if(fieldName == QLatin1String("id")) {
       // '@id' is the best way to use it, but formerly, we allowed just 'id'
       return QString::number(entry_->id());
     } else {
