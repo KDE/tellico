@@ -28,6 +28,7 @@
 
 #include <KLocalizedString>
 
+#include <QDateTime>
 #include <QApplication>
 #include <QVBoxLayout>
 #include <QChartView>

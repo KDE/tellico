@@ -25,13 +25,9 @@
 #include "tellicoimporter.h"
 #include "tellicoxmlreader.h"
 #include "tellico_xml.h"
-#include "../collectionfactory.h"
 #include "../images/imagefactory.h"
-#include "../images/image.h"
-#include "../utils/isbnvalidator.h"
 #include "../core/tellico_strings.h"
 #include "../utils/guiproxy.h"
-#include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>

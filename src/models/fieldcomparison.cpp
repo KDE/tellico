@@ -25,10 +25,8 @@
 #include "fieldcomparison.h"
 #include "stringcomparison.h"
 #include "../field.h"
-#include "../collection.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
-#include "../tellico_debug.h"
 
 #include <QDateTime>
 
@@ -36,7 +34,6 @@ using namespace Tellico;
 
 Tellico::FieldComparison* Tellico::FieldComparison::create(Data::FieldPtr field_) {
   if(!field_) {
-//    myWarning() << "No field for creating a field comparison";
     return nullptr;
   }
   if(field_->type() == Data::Field::Image) {

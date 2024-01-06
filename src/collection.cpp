@@ -35,6 +35,8 @@
 
 #include <KLocalizedString>
 
+#include <QDate>
+
 using namespace Tellico;
 using Tellico::Data::Collection;
 
