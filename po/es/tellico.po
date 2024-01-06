@@ -5,7 +5,7 @@
 #
 # Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2003, 2004, 2005, 2006, 2007.
 # Ale Hamann <amadeus@bbs.frc.utn.edu.ar>, 2006, 2007, 2008.
-# SPDX-FileCopyrightText: 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
 # Kira J. Fernandez <kirajfdez@gmail.com>, 2010, 2011.
 # Huever, 2010.
 # Kira J. Fernandez <kirajfdez@gmail.es>, 2011.
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-02 00:41+0000\n"
-"PO-Revision-Date: 2023-12-26 14:33+0100\n"
+"PO-Revision-Date: 2024-01-05 01:48+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -4641,7 +4641,7 @@ msgstr "Limpiar todos los campos de búsqueda y los resultados"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p %"
 
 #: src/fetchdialog.cpp:396
 #, kde-format
