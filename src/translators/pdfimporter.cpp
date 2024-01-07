@@ -213,7 +213,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
         }
         if(m.hasMatch()) {
           const QString doi = m.captured(1);
-          myLog() << "in PDF file, found DOI:" << doi;
+          myLog() << "In PDF file, found DOI:" << doi;
           entry->setField(QStringLiteral("doi"), doi);
           hasDOI = true;
         }
