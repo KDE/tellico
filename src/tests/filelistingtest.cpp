@@ -78,9 +78,7 @@ void FileListingTest::testCpp() {
   // for some reason, the Creation time isn't populated for this test
 //  QVERIFY(!entry->field("created").isEmpty());
   QVERIFY(!entry->field("modified").isEmpty());
-#ifdef HAVE_KFILEMETADATA
   QCOMPARE(entry->field("metainfo"), QString());
-#endif
   QVERIFY(!entry->field("icon").isEmpty());
 }
 
@@ -102,10 +100,12 @@ void FileListingTest::testXMPData() {
   QCOMPARE(coll->type(), Tellico::Data::Collection::File);
   QVERIFY(coll->entryCount() > 0);
 
-  Tellico::Data::EntryPtr entry;
+  Tellico::Data::EntryPtr entry, oggEntry;
   foreach(Tellico::Data::EntryPtr tmpEntry, coll->entries()) {
     if(tmpEntry->field(QStringLiteral("title")) == QStringLiteral("BlueSquare.jpg")) {
       entry = tmpEntry;
+    } else if(tmpEntry->field(QStringLiteral("title")) == QStringLiteral("test.ogg")) {
+      oggEntry = tmpEntry;
     }
   }
   QVERIFY(entry);
@@ -118,6 +118,13 @@ void FileListingTest::testXMPData() {
 #endif
   QVERIFY(!entry->field("metainfo").isEmpty());
 #endif
+
+  QVERIFY(oggEntry);
+  QCOMPARE(oggEntry->field("title"), QStringLiteral("test.ogg"));
+  QCOMPARE(oggEntry->field("mimetype"), QStringLiteral("audio/x-vorbis+ogg"));
+  QStringList meta = Tellico::FieldFormat::splitTable(oggEntry->field(QStringLiteral("metainfo")));
+  QVERIFY(!meta.isEmpty());
+  QVERIFY(meta.contains(QStringLiteral("Bitrate::159000")));
 }
 
 void FileListingTest::testStat() {

@@ -23,6 +23,7 @@ SET(translators_STAT_SRCS
    ebookimporter.cpp
    exporter.cpp
    filelistingimporter.cpp
+   filereader.cpp
    freedb_util.cpp
    freedbimporter.cpp
    gcstarexporter.cpp

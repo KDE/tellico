@@ -329,6 +329,7 @@ ecm_add_test(fieldwidgettest.cpp
 
 ecm_add_test(filelistingtest.cpp
              ../translators/filelistingimporter.cpp
+             ../translators/filereader.cpp
              ../translators/xmphandler.cpp
     TEST_NAME filelistingtest
     LINK_LIBRARIES translatorstest ${TELLICO_TEST_LIBS} KF${KF_MAJOR_VERSION}::Solid #order of libs here is important
