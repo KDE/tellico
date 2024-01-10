@@ -4057,7 +4057,7 @@ msgstr "Epizody"
 #: src/fetch/imdbfetcher.cpp:585
 #, kde-format
 msgid "Locale"
-msgstr ""
+msgstr "Lokalizace"
 
 #: src/fetch/imdbfetcher.cpp:588
 #, kde-format
@@ -7395,9 +7395,3 @@ msgstr "Hledat"
 #, kde-format
 msgid "Clear"
 msgstr "Vymazat"
-
-#~ msgid "Distributor"
-#~ msgstr "Distributor"
-
-#~ msgid "AnimeNfo Link"
-#~ msgstr "Odkaz na AnimeNfo"
