@@ -1,6 +1,7 @@
 # FindKF5 requires CMake >= 2.8.12
 # FindPoppler requires CMake >= 3.16
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
+set(CMAKE_CXX_STANDARD 14)
 
 project(Tellico)
 set(TELLICO_VERSION "3.5.99+git")
