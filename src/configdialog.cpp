@@ -184,13 +184,13 @@ void ConfigDialog::slotHelp() {
   const QString name = currentPage()->name();
   // these names must be kept in sync with the page names
   if(name == i18n("General")) {
-    KHelpClient::invokeHelp(QStringLiteral("general-options"));
+    KHelpClient::invokeHelp(QStringLiteral("configuration.html#general-options"));
   } else if(name == i18n("Printing")) {
-    KHelpClient::invokeHelp(QStringLiteral("printing-options"));
+    KHelpClient::invokeHelp(QStringLiteral("configuration.html#printing-options"));
   } else if(name == i18n("Templates")) {
-    KHelpClient::invokeHelp(QStringLiteral("template-options"));
+    KHelpClient::invokeHelp(QStringLiteral("configuration.html#template-options"));
   } else if(name == i18n("Data Sources")) {
-    KHelpClient::invokeHelp(QStringLiteral("internet-sources-options"));
+    KHelpClient::invokeHelp(QStringLiteral("configuration.html#data-sources-options"));
   }
 }
 
