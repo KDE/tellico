@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "fetcherjob.h"
-#include "../entry.h"
 #include "../tellico_debug.h"
 
 #include <QTimer>

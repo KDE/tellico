@@ -243,7 +243,7 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
   }
 
   m_offset += count;
-  m_hasMoreResults = m_offset <= m_total;
+  m_hasMoreResults = (m_total > 0 && m_offset <= m_total);
 
   stop(); // required
 }
