@@ -29,7 +29,6 @@
 #include "combobox.h"
 #include "../document.h"
 #include "../fieldcompletion.h"
-#include "../tellico_debug.h"
 
 #include <KLocalizedString>
 #include <KComboBox>
@@ -80,13 +79,14 @@ void FilterRuleWidget::initWidget() {
   m_ruleField = new KComboBox(this);
   layout()->addWidget(m_ruleField);
   void (KComboBox::* activatedInt)(int) = &KComboBox::activated;
-  connect(m_ruleField, activatedInt, this, &FilterRuleWidget::signalModified);
+  // change the rule field before emitting modified
   connect(m_ruleField, activatedInt, this, &FilterRuleWidget::slotRuleFieldChanged);
+  connect(m_ruleField, activatedInt, this, &FilterRuleWidget::signalModified);
 
   m_ruleFunc = new GUI::ComboBox(this);
   layout()->addWidget(m_ruleFunc);
-  connect(m_ruleFunc, activatedInt, this, &FilterRuleWidget::signalModified);
   connect(m_ruleFunc, activatedInt, this, &FilterRuleWidget::slotRuleFunctionChanged);
+  connect(m_ruleFunc, activatedInt, this, &FilterRuleWidget::signalModified);
 
   m_valueStack = new QStackedWidget(this);
   layout()->addWidget(m_valueStack);
