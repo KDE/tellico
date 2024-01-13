@@ -174,6 +174,7 @@ bool FileReaderBook::populate(Data::EntryPtr entry, const KFileItem& item) {
     entry->collection()->addField(f);
   }
   entry->setField(url, item.url().url());
+  entry->setField(QStringLiteral("binding"), i18n("E-Book"));
 
   const QString cover = QStringLiteral("cover");
   QPixmap pixmap;
