@@ -27,12 +27,8 @@
 
 #include "filterdialog.h"
 #include "tellico_kernel.h"
-#include "document.h"
-#include "collection.h"
-#include "fieldcompletion.h"
 #include "gui/filterrulewidgetlister.h"
 #include "gui/filterrulewidget.h"
-#include "tellico_debug.h"
 
 #include <KLocalizedString>
 #include <KHelpClient>
