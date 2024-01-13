@@ -4,7 +4,7 @@
 #
 # Claudio Henrique Fortes Felix <claudio@helpo.com.br>, 2006.
 # Doutor Zero <doutor.zero@gmail.com>, 2008.
-# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2009, 2010, 2011, 2012, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2009, 2010, 2011, 2012, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
 # Rubens de Souza Matos Júnior <rubens.matos@gmail.com>, 2009.
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020.
 # Marcus Vinícius de Andrade Gama <marcus.gama@gmail.com>, 2010.
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-07 00:42+0000\n"
-"PO-Revision-Date: 2023-10-26 15:25-0300\n"
+"PO-Revision-Date: 2024-01-11 21:00-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -4097,17 +4097,17 @@ msgstr "Episódios"
 #: src/fetch/imdbfetcher.cpp:585
 #, kde-format
 msgid "Locale"
-msgstr ""
+msgstr "Localidade"
 
 #: src/fetch/imdbfetcher.cpp:588
 #, kde-format
 msgid "Use system locale"
-msgstr ""
+msgstr "Usar localidade do sistema"
 
 #: src/fetch/imdbfetcher.cpp:589
 #, kde-format
 msgid "Use custom locale"
-msgstr ""
+msgstr "Usar localidade personalizada"
 
 #: src/fetch/isbndbfetcher.cpp:361
 #, kde-format
@@ -4613,7 +4613,7 @@ msgstr "Apagar todos os campos e valores"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p%"
 
 #: src/fetchdialog.cpp:396
 #, kde-format
