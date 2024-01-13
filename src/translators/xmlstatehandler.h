@@ -134,7 +134,7 @@ private:
 
 class FieldHandler : public StateHandler {
 public:
-  FieldHandler(StateData* data) : StateHandler(data) {}
+  FieldHandler(StateData* data) : StateHandler(data), isI18n(false) {}
   virtual ~FieldHandler() {}
 
   virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
@@ -142,6 +142,7 @@ public:
 
 private:
   virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  bool isI18n;
 };
 
 class FieldPropertyHandler : public StateHandler {
