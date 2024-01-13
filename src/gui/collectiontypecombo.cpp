@@ -44,7 +44,8 @@ void CollectionTypeCombo::reset() {
   QMap<QString, int> nameMap;
   for(CollectionNameHash::ConstIterator it = nameHash.constBegin(); it != nameHash.constEnd(); ++it) {
     // skip the custom type, we add it later
-    if(it.key() != Data::Collection::Base) {
+    if(it.key() != Data::Collection::Base &&
+       (m_includedTypes.isEmpty() || m_includedTypes.contains(it.key()))) {
       nameMap.insert(it.value(), it.key());
     }
   }
@@ -52,18 +53,21 @@ void CollectionTypeCombo::reset() {
     addItem(it.key(), it.value());
   }
   // now add the custom type last
-  ComboBox::addItem(QIcon::fromTheme(QStringLiteral("document-new")),
-                    nameHash.value(Data::Collection::Base), Data::Collection::Base);
+  if(m_includedTypes.isEmpty() || m_includedTypes.contains(Data::Collection::Base)) {
+    ComboBox::addItem(QIcon::fromTheme(QStringLiteral("document-new")),
+                      nameHash.value(Data::Collection::Base), Data::Collection::Base);
+  }
 }
 
 void CollectionTypeCombo::setCurrentType(int type_) {
   setCurrentData(type_);
 }
 
-void CollectionTypeCombo::addItem(const QString& value_, int collType_) {
-  ComboBox::addItem(QIcon(QLatin1String(":/icons/") + CollectionFactory::typeName(collType_)), value_, collType_);
+void CollectionTypeCombo::setIncludedTypes(const QList<int> types_) {
+  m_includedTypes = types_;
+  reset();
 }
 
-void CollectionTypeCombo::insertItem(int index_, const QString& value_, int collType_) {
-  ComboBox::insertItem(index_, QIcon(QLatin1String(":/icons/") + CollectionFactory::typeName(collType_)), value_, collType_);
+void CollectionTypeCombo::addItem(const QString& value_, int collType_) {
+  ComboBox::addItem(QIcon(QLatin1String(":/icons/") + CollectionFactory::typeName(collType_)), value_, collType_);
 }
