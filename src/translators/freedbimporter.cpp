@@ -34,7 +34,6 @@
 #include "freedbimporter.h"
 #include "../collections/musiccollection.h"
 #include "../entry.h"
-#include "../field.h"
 #include "../fieldformat.h"
 #include "../utils/tellico_utils.h"
 #include "../utils/string_utils.h"
