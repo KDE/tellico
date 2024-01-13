@@ -313,7 +313,7 @@ StateHandler* FieldHandler::nextHandlerImpl(const QStringRef&, const QStringRef&
 
 bool FieldHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes& atts_) {
   // special case: if the i18n attribute equals true, then translate the title, description, category, and allowed
-  const bool isI18n = atts_.value(QLatin1String("i18n")) == QLatin1String("true");
+  isI18n = atts_.value(QLatin1String("i18n")) == QLatin1String("true");
 
   const QString name = attValue(atts_, "name", "unknown");
   if(name == QLatin1String("_default")) {
@@ -406,6 +406,14 @@ bool FieldHandler::end(const QStringRef&, const QStringRef&) {
        field->description().contains(QLatin1Char('%'))) {
       field->setProperty(QStringLiteral("template"), field->description());
       field->setDescription(QString());
+    } else if(isI18n && field->type() == Data::Field::Table) {
+      // translate table column headers if requestsed (such as Title, Artist, etc.
+      const auto props = field->propertyList();
+      for(auto i = props.constBegin(); i != props.constEnd(); ++i) {
+        if(i.key().startsWith(QLatin1String("column"))) {
+          field->setProperty(i.key(), i18n(i.value().toUtf8().constData()));
+        }
+      }
     }
   }
 
