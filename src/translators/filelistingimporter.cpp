@@ -26,8 +26,11 @@
 
 #include "filelistingimporter.h"
 #include "filereader.h"
+#include "filereaderbook.h"
+#include "../collections/bookcollection.h"
 #include "../collections/filecatalog.h"
 #include "../entry.h"
+#include "../gui/collectiontypecombo.h"
 #include "../utils/guiproxy.h"
 #include "../progressmanager.h"
 #include "../tellico_debug.h"
@@ -52,7 +55,8 @@ FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_), m_c
 }
 
 bool FileListingImporter::canImport(int type) const {
-  return type == Data::Collection::File;
+  return type == Data::Collection::Book ||
+      type == Data::Collection::File;
 }
 
 Tellico::Data::CollPtr FileListingImporter::collection() {
@@ -78,20 +82,35 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     return Data::CollPtr();
   }
 
+  int collType = Data::Collection::File;
   if(m_widget) {
     m_useFilePreview = m_filePreview->isChecked();
+    collType = m_collCombo->currentType();
   }
 
-  m_coll = new Data::FileCatalog(true);
   const uint stepSize = qMax(1, m_files.count()/100);
   const bool showProgress = options() & ImportProgress;
   item.setTotalSteps(m_files.count());
 
   std::unique_ptr<AbstractFileReader> reader;
-  {
-    auto ptr = new FileReader(url());
-    ptr->setUseFilePreview(m_useFilePreview);
-    reader.reset(ptr);
+  switch(collType) {
+    case(Data::Collection::Book):
+      m_coll = new Data::BookCollection(true);
+      {
+        auto ptr = new FileReaderBook(url());
+        ptr->setUseFilePreview(m_useFilePreview);
+        reader.reset(ptr);
+      }
+      break;
+
+    case(Data::Collection::File):
+      m_coll = new Data::FileCatalog(true);
+      {
+        auto ptr = new FileReader(url());
+        ptr->setUseFilePreview(m_useFilePreview);
+        reader.reset(ptr);
+      }
+      break;
   }
   Data::EntryList entries;
   uint j = 0;
@@ -101,8 +120,9 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     }
 
     Data::EntryPtr entry(new Data::Entry(m_coll));
-    reader->populate(entry, item);
-    entries += entry;
+    if(reader->populate(entry, item)) {
+      entries += entry;
+    }
 
     if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
@@ -138,12 +158,20 @@ QWidget* FileListingImporter::widget(QWidget* parent_) {
 
   m_filePreview = new QCheckBox(i18n("Generate file previews"), gbox);
   m_filePreview->setWhatsThis(i18n("If checked, previews of the file contents are generated, which can slow down "
-                                      "the folder listing."));
+                                   "the folder listing."));
   // by default, make it no previews
   m_filePreview->setChecked(false);
 
+  QList<int> collTypes;
+  collTypes << Data::Collection::Book << Data::Collection::File;
+  m_collCombo = new GUI::CollectionTypeCombo(gbox);
+  m_collCombo->setIncludedTypes(collTypes);
+  // default to file catalog
+  m_collCombo->setCurrentData(Data::Collection::File);
+
   vlay->addWidget(m_recursive);
   vlay->addWidget(m_filePreview);
+  vlay->addWidget(m_collCombo);
 
   l->addWidget(gbox);
   l->addStretch(1);

@@ -25,7 +25,6 @@
 #include "field.h"
 #include "fieldformat.h"
 #include "utils/string_utils.h"
-#include "tellico_debug.h"
 
 #include <KLocalizedString>
 
@@ -344,7 +343,7 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
       break;
     case FrontCoverField:
       field = new Field(QStringLiteral("cover"), i18n("Front Cover"), Field::Image);
-      break;
+      break;      
   }
   Q_ASSERT(field);
   return field;

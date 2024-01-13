@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2023 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2024 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,58 +22,28 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
+#ifndef TELLICO_FILEREADERBOOK_H
+#define TELLICO_FILEREADERBOOK_H
 
-#include "ebookimporter.h"
-#include "filereaderbook.h"
-#include "../collections/bookcollection.h"
-#include "../tellico_debug.h"
+#include "filereader.h"
 
-#include <KLocalizedString>
-#include <KFileItem>
+namespace Tellico {
 
-#include <QPixmap>
+class FileReaderBookPrivate;
+class FileReaderBook : public AbstractFileReader {
+public:
+  FileReaderBook(const QUrl& u);
+  virtual ~FileReaderBook();
 
-#include <memory>
+  virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem);
 
-using Tellico::Import::EBookImporter;
+  void setUseFilePreview(bool filePreview);
 
-EBookImporter::EBookImporter(const QUrl& url_) : Importer(url_) {
+private:
+  class Private;
+  friend class Private;
+  std::unique_ptr<Private> d;
+};
+
 }
-
-EBookImporter::EBookImporter(const QList<QUrl>& urls_) : Importer(urls_) {
-}
-
-bool EBookImporter::canImport(int type) const {
-  return type == Data::Collection::Book;
-}
-
-Tellico::Data::CollPtr EBookImporter::collection() {
-  const auto urls = this->urls();
-  if(urls.isEmpty()) {
-    return Data::CollPtr();
-  }
-  auto reader = std::make_unique<Tellico::FileReaderBook>(urls.first());
-  reader->setUseFilePreview(true);
-
-  Data::CollPtr coll(new Data::BookCollection(true));
-
-#ifdef HAVE_KFILEMETADATA
-  Data::EntryList entries;
-  foreach(const QUrl& url, urls) {
-    KFileItem item(url);
-//    myDebug() << "Reading" << url.url() << item.mimetype();
-    Data::EntryPtr entry(new Data::Entry(coll));
-    if(reader->populate(entry, item)) {
-      entry->setField(QStringLiteral("comments"), url.toLocalFile());
-      entries += entry;
-    }
-  }
-  coll->addEntries(entries);
 #endif
-  return coll;
-}
-
-void EBookImporter::slotCancel() {
-  myDebug() << "EBookImporter::slotCancel() - unimplemented";
-}

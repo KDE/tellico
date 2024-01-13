@@ -15,6 +15,7 @@
 * Save the group view sorting in the config file and reload
 
 * Allow user to show/hide fields in the edit dialog, such as when a music album has multiple track fields
+* Can isbn be read from epub?
 
 === Bugs
 * Make sure all usages of FileRef* delete the pointer
