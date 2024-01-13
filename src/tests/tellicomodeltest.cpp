@@ -215,7 +215,7 @@ void TellicoModelTest::testGroupModel() {
   QCOMPARE(sortModel.entrySortField(), QLatin1String("author"));
   sortModel.sort(0, Qt::AscendingOrder);
 
-  Tellico::ModelIterator gIt(&groupModel);
+  Tellico::ModelIterator gIt(&sortModel);
   QVERIFY(gIt.isValid());
   auto group = gIt.group();
   QVERIFY(group);
