@@ -213,26 +213,24 @@ void TellicoModelTest::testGroupModel() {
   sortModel.sort(0);
   sortModel.setEntrySortField(QStringLiteral("author"));
   QCOMPARE(sortModel.entrySortField(), QLatin1String("author"));
-  sortModel.sort(0, Qt::DescendingOrder);
+  sortModel.sort(0, Qt::AscendingOrder);
 
   Tellico::ModelIterator gIt(&groupModel);
-  QVERIFY(gIt.group());
   QVERIFY(gIt.isValid());
   auto group = gIt.group();
-  QVERIFY(group);
-  QCOMPARE(group->groupName(), QStringLiteral("Lucas, George"));
-  QCOMPARE(group->fieldName(), QStringLiteral("author"));
-  QCOMPARE(group->size(), 2);
-  QVERIFY(!group->hasEmptyGroupName());
-
-  ++gIt;
-  QVERIFY(gIt.group());
-  QVERIFY(gIt.isValid());
-  group = gIt.group();
   QVERIFY(group);
   QCOMPARE(group->groupName(), QStringLiteral("Flint, Eric"));
   QCOMPARE(group->fieldName(), QStringLiteral("author"));
   QCOMPARE(group->size(), 1);
+  QVERIFY(!group->hasEmptyGroupName());
+
+  ++gIt;
+  QVERIFY(gIt.isValid());
+  group = gIt.group();
+  QVERIFY(group);
+  QCOMPARE(group->groupName(), QStringLiteral("Lucas, George"));
+  QCOMPARE(group->fieldName(), QStringLiteral("author"));
+  QCOMPARE(group->size(), 2);
   QVERIFY(!group->hasEmptyGroupName());
 
   ++gIt;
