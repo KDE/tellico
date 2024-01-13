@@ -4,7 +4,7 @@
 #
 # Claudio Henrique Fortes Felix <claudio@helpo.com.br>, 2006.
 # Doutor Zero <doutor.zero@gmail.com>, 2008.
-# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2009, 2010, 2011, 2012, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2009, 2010, 2011, 2012, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
 # Rubens de Souza Matos Júnior <rubens.matos@gmail.com>, 2009.
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019.
 # Marcus Vinícius de Andrade Gama <marcus.gama@gmail.com>, 2010.
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-03 02:31+0000\n"
-"PO-Revision-Date: 2023-10-05 18:06-0300\n"
+"PO-Revision-Date: 2024-01-11 20:36-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -5383,10 +5383,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - software gerenciador de coleções, gratuito e simples"
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2023, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr "(c) 2001-2023, Robby Stephenson"
+msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format

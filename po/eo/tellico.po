@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-03 02:31+0000\n"
-"PO-Revision-Date: 2023-10-24 23:25+0100\n"
+"PO-Revision-Date: 2024-01-03 14:17+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -748,7 +748,7 @@ msgstr "Kampo kun derivita valoro devas havi valorŝablonon."
 #: src/field.cpp:333 src/translators/gcstarimporter.cpp:90
 #, kde-format
 msgid "General"
-msgstr "Ĝeneralo"
+msgstr "Ĝenerala"
 
 #: src/collections/bibtexcollection.cpp:39
 #: src/collections/bookcollection.cpp:32
@@ -5348,10 +5348,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - programaro pri kolekto-administrado, libera kaj simpla"
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2023, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr "(c) 2001-2023, Robby Stephenson"
+msgstr ""
 
 #: src/main.cpp:127
 #, kde-format
