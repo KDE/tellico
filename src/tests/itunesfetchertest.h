@@ -40,6 +40,7 @@ private Q_SLOTS:
   void testFirefly();
   void testEscapingGravity();
   void testIsbn();
+  void testMultiDisc();
 };
 
 #endif

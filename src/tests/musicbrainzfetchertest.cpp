@@ -34,6 +34,7 @@
 #include "../utils/datafileregistry.h"
 
 #include <KSharedConfig>
+#include <KLocalizedString>
 
 #include <QTest>
 
@@ -59,6 +60,7 @@ void MusicBrainzFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Title,
                                        m_fieldValues.value(QStringLiteral("title")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   static_cast<Tellico::Fetch::MusicBrainzFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -109,6 +111,7 @@ void MusicBrainzFetcherTest::testBug426560() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
                                        QStringLiteral("lily allen - no shame"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   static_cast<Tellico::Fetch::MusicBrainzFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -142,6 +145,7 @@ void MusicBrainzFetcherTest::testACDC() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Person,
                                        QStringLiteral("AC/DC"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   // TODO: Fetcher::setLimit should be virtual in Fetcher class
   static_cast<Tellico::Fetch::MusicBrainzFetcher*>(fetcher.data())->setLimit(1);
@@ -175,6 +179,7 @@ void MusicBrainzFetcherTest::testSoundtrack() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Title,
                                        QStringLiteral("legend of bagger vance"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -194,6 +199,7 @@ void MusicBrainzFetcherTest::testBarcode() {
                                        QStringLiteral("8024391054123"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
   fetcher->readConfig(cg);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -202,4 +208,28 @@ void MusicBrainzFetcherTest::testBarcode() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->title(), QStringLiteral("Old Man and the Spirit, The"));
   QCOMPARE(entry->field(QStringLiteral("barcode")), QStringLiteral("8024391054123"));
+}
+
+// bug 479503, https://bugs.kde.org/show_bug.cgi?id=479503
+void MusicBrainzFetcherTest::testMultiDisc() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::UPC,
+                                       QStringLiteral("4988031446843"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->title(), QStringLiteral("Silver Lining Suite"));
+  auto trackField = entry->collection()->fieldByName(QStringLiteral("track"));
+  QVERIFY(trackField);
+  // verify the title was updated to include the disc number
+  QVERIFY(trackField->title() != i18n("Tracks"));
+  QStringList tracks1 = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
+  QCOMPARE(tracks1.count(), 9);
+  // new field with Disc 2 tracks
+  QStringList tracks2 = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track2")));
+  QCOMPARE(tracks2.count(), 8);
+  QCOMPARE(tracks2.first(), QStringLiteral("Somewhere::上原ひろみ::7:31"));
 }

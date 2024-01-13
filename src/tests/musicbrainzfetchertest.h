@@ -44,6 +44,7 @@ private Q_SLOTS:
   void testCoverArt();
   void testSoundtrack();
   void testBarcode();
+  void testMultiDisc();
 
 private:
   QHash<QString, QString> m_fieldValues;

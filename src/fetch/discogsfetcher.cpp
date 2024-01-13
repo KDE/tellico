@@ -433,7 +433,9 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
     }
   }
 
-  QStringList tracks;
+  static const QRegularExpression discSplit(QStringLiteral("[-. ]"));
+  static const QRegularExpression nonDigits(QStringLiteral("[\\D]"));
+  QList<QStringList> discs; // list of tracks per disc
   foreach(const QVariant& track, resultMap_.value(QLatin1String("tracklist")).toList()) {
     const QVariantMap trackMap = track.toMap();
     if(mapValue(trackMap, "type_") != QLatin1String("track")) {
@@ -459,9 +461,41 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
       trackInfo << entry_->field(QStringLiteral("artist"));
     }
     trackInfo << mapValue(trackMap, "duration");
-    tracks << trackInfo.join(FieldFormat::columnDelimiterString());
+
+    // determine whether the track is in a multi-disc album
+    int disc = 1;
+    const QString trackNum = mapValue(trackMap, "position");
+    if(trackNum.contains(discSplit)) {
+      disc = trackNum.section(discSplit, 0, 0).remove(nonDigits).toInt();
+      if(disc == 0) disc = 1;
+    }
+    while(discs.size() < disc) discs << QStringList();
+    discs[disc-1] << trackInfo.join(FieldFormat::columnDelimiterString());
   }
-  entry_->setField(QStringLiteral("track"), tracks.join(FieldFormat::rowDelimiterString()));
+  bool changeTrackTitle = true;
+  for(int disc = 0; disc < discs.count(); ++disc) {
+    QString trackField = QStringLiteral("track");
+    if(disc > 0) {
+      trackField.append(QString::number(disc+1));
+      Data::FieldPtr f2(new Data::Field(trackField,
+                                        i18n("Tracks (Disc %1)", disc+1),
+                                        Data::Field::Table));
+      f2->setFormatType(FieldFormat::FormatTitle);
+      f2->setProperty(QStringLiteral("columns"), QStringLiteral("3"));
+      f2->setProperty(QStringLiteral("column1"), i18n("Title"));
+      f2->setProperty(QStringLiteral("column2"), i18n("Artist"));
+      f2->setProperty(QStringLiteral("column3"), i18n("Length"));
+      entry_->collection()->addField(f2);
+      // also change the title of the first track field
+      if(changeTrackTitle) {
+        Data::FieldPtr f1 = entry_->collection()->fieldByName(QStringLiteral("track"));
+        f1->setTitle(i18n("Tracks (Disc %1)", 1));
+        entry_->collection()->modifyField(f1);
+        changeTrackTitle = false;
+      }
+    }
+    entry_->setField(trackField, discs.at(disc).join(FieldFormat::rowDelimiterString()));
+  }
 
   if(entry_->collection()->hasField(QStringLiteral("discogs"))) {
     entry_->setField(QStringLiteral("discogs"), mapValue(resultMap_, "uri"));

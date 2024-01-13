@@ -1,3 +1,7 @@
+2024-01-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated iTunes, Discogs, and MusicBrainz to separate multi-disc tracks (Bug 479503).
+
 2024-01-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with opening help from the config dialog (Bug 479591).

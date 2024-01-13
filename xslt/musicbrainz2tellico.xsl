@@ -30,6 +30,26 @@
     <field name="_default"/>
     <field flags="0" title="MusicBrainz ID" category="General" format="4" type="1" name="mbid"/>
     <field flags="0" title="Barcode" category="General" format="4" type="1" name="barcode" i18n="true"/>
+    <!-- allow for multi-disc albums, with separate track fields for each disc -->
+    <xsl:if test="count(//mb:release/mb:medium-list/mb:medium) &gt; 1">
+     <!-- update title of first track field -->
+     <field flags="1" title="Tracks (Disc 1)" name="track" format="1" type="8" i18n="true">
+      <prop name="column1">Title</prop>
+      <prop name="column2">Artist</prop>
+      <prop name="column3">Length</prop>
+      <prop name="columns">3</prop>
+     </field>
+     <!-- new field for each disc -->
+     <xsl:for-each select="//mb:release/mb:medium-list/mb:medium[position() &gt; 1]">
+      <field flags="1" title="{concat('Tracks (Disc ', position()+1, ')')}"
+       name="{concat('track', position()+1)}" format="1" type="8" i18n="true">
+       <prop name="column1">Title</prop>
+       <prop name="column2">Artist</prop>
+       <prop name="column3">Length</prop>
+       <prop name="columns">3</prop>
+      </field>
+     </xsl:for-each>
+    </xsl:if>
    </fields>
    <xsl:apply-templates select="//mb:release"/>
   </collection>
@@ -98,33 +118,32 @@
   -->
 
   <xsl:variable name="release" select="."/>
+  <!-- take care of tracks in first disc -->
   <tracks>
-   <xsl:for-each select="mb:medium-list/mb:medium/mb:track-list/mb:track">
-    <track>
-     <column>
-      <xsl:value-of select="mb:recording/mb:title"/>
-     </column>
-     <column>
-     <xsl:choose>
-      <xsl:when test="mb:recording/mb:artist">
-       <!-- some combinationss are separated by &,but some artists use & -->
-       <!-- some combinations uses 'and' -->
-       <!-- no way to accurately split, just setlle on comma for now -->
-       <xsl:value-of select="translate(mb:recording/mb:artist/mb:name,',', ';')"/>
-      </xsl:when>
-      <xsl:otherwise>
-       <xsl:value-of select="$release/mb:artist-credit/mb:name-credit/mb:artist[1]/mb:name"/>
-      </xsl:otherwise>
-     </xsl:choose>
-     </column>
-     <column>
-     <xsl:call-template name="time">
-      <xsl:with-param name="duration" select="mb:length"/>
-     </xsl:call-template>
-     </column>
-    </track>
+   <xsl:for-each select="mb:medium-list/mb:medium[1]/mb:track-list/mb:track">
+    <xsl:sort select="mb:position"/>
+    <xsl:call-template name="track">
+     <xsl:with-param name="release" select="$release"/>
+     <xsl:with-param name="track" select="."/>
+     <xsl:with-param name="fieldName" select="'track'"/>
+    </xsl:call-template>
    </xsl:for-each>
   </tracks>
+
+  <!-- account for multi-disc albums -->
+  <xsl:for-each select="mb:medium-list/mb:medium[position() &gt; 1]">
+   <xsl:variable name="fieldName" select="concat('track', position()+1)"/>
+   <xsl:element name="{concat($fieldName, 's')}">
+    <xsl:for-each select="mb:track-list/mb:track">
+     <xsl:sort select="mb:position"/>
+     <xsl:call-template name="track">
+      <xsl:with-param name="release" select="$release"/>
+      <xsl:with-param name="track" select="."/>
+      <xsl:with-param name="fieldName" select="$fieldName"/>
+     </xsl:call-template>
+    </xsl:for-each>
+   </xsl:element>
+  </xsl:for-each>
 
   <cover>
    <xsl:choose>
@@ -143,6 +162,36 @@
   </cover>
 
  </entry>
+</xsl:template>
+
+<xsl:template name="track">
+ <xsl:param name="release"/>
+ <xsl:param name="track"/>
+ <xsl:param name="fieldName"/>
+
+ <xsl:element name="{$fieldName}">
+  <column>
+   <xsl:value-of select="$track/mb:recording/mb:title"/>
+  </column>
+  <column>
+   <xsl:choose>
+    <xsl:when test="$track/mb:recording/mb:artist">
+     <!-- some combinationss are separated by &,but some artists use & -->
+     <!-- some combinations uses 'and' -->
+     <!-- no way to accurately split, just settle on comma for now -->
+     <xsl:value-of select="translate($track/mb:recording/mb:artist/mb:name,',', ';')"/>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:value-of select="$release/mb:artist-credit/mb:name-credit/mb:artist[1]/mb:name"/>
+    </xsl:otherwise>
+   </xsl:choose>
+  </column>
+  <column>
+   <xsl:call-template name="time">
+    <xsl:with-param name="duration" select="$track/mb:length"/>
+   </xsl:call-template>
+  </column>
+ </xsl:element>
 </xsl:template>
 
 <xsl:template name="time">

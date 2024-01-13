@@ -195,7 +195,7 @@ void ItunesFetcher::slotComplete(KJob* job_) {
   m_job = nullptr;
 
 #if 0
-  myWarning() << "Remove debug from ItunesFetcher.cpp";
+  myWarning() << "Remove debug from itunesfetcher.cpp";
   QFile f(QStringLiteral("/tmp/test-itunes.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -261,15 +261,6 @@ void ItunesFetcher::slotComplete(KJob* job_) {
     }
   }
 
-  // check for tracks to add by iterating over all known track lists
-  QHashIterator<int, QStringList> i(m_trackList);
-  while(i.hasNext()) {
-    i.next();
-    Data::EntryPtr entry = m_collectionHash.value(i.key());
-    if(!entry) continue;
-    entry->setField(QStringLiteral("track"), i.value().join(FieldFormat::rowDelimiterString()));
-  }
-
   // don't emit result until after adding tracks
   for(auto fetchResult : fetchResults) {
     emit signalResultFound(fetchResult);
@@ -297,6 +288,16 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
     u.setQuery(q);
     auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
     if(job->exec()) {
+#if 0
+      myWarning() << "Remove debug from itunesfetcher.cpp";
+      QFile f(QStringLiteral("/tmp/test-itunes-tracks.json"));
+      if(f.open(QIODevice::WriteOnly)) {
+        QTextStream t(&f);
+        t.setCodec("UTF-8");
+        t << job->data();
+      }
+      f.close();
+#endif
       QJsonDocument doc = QJsonDocument::fromJson(job->data());
       QJsonArray results = doc.object().value(QLatin1String("results")).toArray();
       foreach(const QJsonValue& result, results) {
@@ -305,8 +306,31 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
           readTrackInfo(obj.toVariantMap());
         }
       }
-      entry->setField(QStringLiteral("track"),
-                      m_trackList.value(collectionId.toInt()).join(FieldFormat::rowDelimiterString()));
+      auto discsInColl = m_trackList.value(collectionId.toInt());
+      bool changeTrackTitle = true;
+      for(int disc = 0; disc < discsInColl.count(); ++disc) {
+        QString trackField = QStringLiteral("track");
+        if(disc > 0) {
+          trackField.append(QString::number(disc+1));
+          Data::FieldPtr f2(new Data::Field(trackField,
+                                            i18n("Tracks (Disc %1)", disc+1),
+                                            Data::Field::Table));
+          f2->setFormatType(FieldFormat::FormatTitle);
+          f2->setProperty(QStringLiteral("columns"), QStringLiteral("3"));
+          f2->setProperty(QStringLiteral("column1"), i18n("Title"));
+          f2->setProperty(QStringLiteral("column2"), i18n("Artist"));
+          f2->setProperty(QStringLiteral("column3"), i18n("Length"));
+          entry->collection()->addField(f2);
+          // also change the title of the first track field
+          if(changeTrackTitle) {
+            Data::FieldPtr f1 = entry->collection()->fieldByName(QStringLiteral("track"));
+            f1->setTitle(i18n("Tracks (Disc %1)", 1));
+            entry->collection()->modifyField(f1);
+            changeTrackTitle = false;
+          }
+        }
+        entry->setField(trackField, discsInColl.at(disc).join(FieldFormat::rowDelimiterString()));
+      }
     }
   }
 
@@ -479,13 +503,19 @@ void ItunesFetcher::readTrackInfo(const QVariantMap& resultMap_) {
             << Tellico::minutes(mapValue(resultMap_, "trackTimeMillis").toInt() / 1000);
 
   const int collectionId = mapValue(resultMap_, "collectionId").toInt();
-  const int idx = mapValue(resultMap_, "trackNumber").toInt();
-  if(idx < 1) return;
+  const int discNum = mapValue(resultMap_, "discNumber").toInt();
+  const int trackNum = mapValue(resultMap_, "trackNumber").toInt();
+  if(trackNum < 1) return;
 
-  QStringList tracks = m_trackList.value(collectionId);
-  while(tracks.size() < idx) tracks << QString();
-  tracks[idx-1] = trackInfo.join(FieldFormat::columnDelimiterString());
-  m_trackList.insert(collectionId, tracks);
+  auto discsInColl = m_trackList.value(collectionId);
+  while(discsInColl.size() < discNum) discsInColl << QStringList();
+
+  auto tracks = discsInColl.at(discNum-1);
+  while(tracks.size() < trackNum) tracks << QString();
+
+  tracks[trackNum-1] = trackInfo.join(FieldFormat::columnDelimiterString());
+  discsInColl[discNum-1] = tracks;
+  m_trackList.insert(collectionId, discsInColl);
 }
 
 Tellico::Fetch::ConfigWidget* ItunesFetcher::configWidget(QWidget* parent_) const {

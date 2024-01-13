@@ -44,6 +44,7 @@ private Q_SLOTS:
   void testRawData();
   void testRawDataVinyl();
   void testUpdate();
+  void testMultiDisc();
 
 private:
   bool m_hasConfigFile;

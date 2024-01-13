@@ -25,12 +25,12 @@
 #include "itunesfetchertest.h"
 
 #include "../fetch/itunesfetcher.h"
-#include "../collections/musiccollection.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
 #include <KSharedConfig>
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 #include <QTest>
 
@@ -75,6 +75,7 @@ void ItunesFetcherTest::testUpc() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::UPC,
                                        QStringLiteral("829619128628"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ItunesFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -149,6 +150,7 @@ void ItunesFetcherTest::testEscapingGravity() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword,
                                        QStringLiteral("Escaping Gravity"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ItunesFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -172,7 +174,7 @@ void ItunesFetcherTest::testIsbn() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
                                        QStringLiteral("9780316069359"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ItunesFetcher(this));
-
+  QVERIFY(fetcher->canSearch(request.key()));
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
@@ -188,4 +190,27 @@ void ItunesFetcherTest::testIsbn() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
+}
+
+// bug 479503, https://bugs.kde.org/show_bug.cgi?id=479503
+void ItunesFetcherTest::testMultiDisc() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
+                                       QStringLiteral("Hamilton: An American Musical"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ItunesFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  auto trackField = entry->collection()->fieldByName(QStringLiteral("track"));
+  QVERIFY(trackField);
+  // verify the title was updated to include the disc number
+  QVERIFY(trackField->title() != i18n("Tracks"));
+  QStringList tracks1 = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
+  QCOMPARE(tracks1.count(), 23);
+  // new field with Disc 2 tracks
+  QStringList tracks2 = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track2")));
+  QCOMPARE(tracks2.count(), 23);
+  QVERIFY(!tracks2.first().isEmpty());
 }

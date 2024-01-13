@@ -32,6 +32,7 @@
 #include "../images/image.h"
 
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 #include <QTest>
 
@@ -64,6 +65,7 @@ void DiscogsFetcherTest::testTitle() {
                                        QStringLiteral("Anywhere But Home"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
   fetcher->readConfig(cg);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -106,6 +108,7 @@ void DiscogsFetcherTest::testPerson() {
                                        QStringLiteral("Evanescence"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
   fetcher->readConfig(cg);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   static_cast<Tellico::Fetch::DiscogsFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -136,6 +139,7 @@ void DiscogsFetcherTest::testKeyword() {
                                        QStringLiteral("Fallen Evanescence 2004"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
   fetcher->readConfig(cg);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   static_cast<Tellico::Fetch::DiscogsFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -167,6 +171,7 @@ void DiscogsFetcherTest::testBarcode() {
                                        QStringLiteral("4 547366 014099"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
   fetcher->readConfig(cg);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   static_cast<Tellico::Fetch::DiscogsFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -272,4 +277,39 @@ void DiscogsFetcherTest::testUpdate() {
   QVERIFY(request.value().contains(QStringLiteral("title=Nevermind")));
   QVERIFY(request.value().contains(QStringLiteral("artist=Nirvana")));
   QVERIFY(request.value().contains(QStringLiteral("year=1991")));
+}
+
+// bug 479503, https://bugs.kde.org/show_bug.cgi?id=479503
+void DiscogsFetcherTest::testMultiDisc() {
+  // the total test case ends up exceeding the throttle limit so pause for a second
+  if(m_needToWait) QTest::qWait(5000);
+
+  QString groupName = QStringLiteral("Discogs");
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Discogs settings.", SkipAll);
+  }
+  KConfigGroup cg(m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::UPC,
+                                       QStringLiteral("4988031446843"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->title(), QStringLiteral("Silver Lining Suite"));
+  auto trackField = entry->collection()->fieldByName(QStringLiteral("track"));
+  QVERIFY(trackField);
+  // verify the title was updated to include the disc number
+  QVERIFY(trackField->title() != i18n("Tracks"));
+  QStringList tracks1 = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
+  QCOMPARE(tracks1.count(), 9);
+  QCOMPARE(tracks1.first(), QStringLiteral("Isolation::Hiromi Uehara::"));
+  // new field with Disc 2 tracks
+  QStringList tracks2 = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track2")));
+  QCOMPARE(tracks2.count(), 8);
+  QCOMPARE(tracks2.first(), QStringLiteral("Somewhere::Hiromi Uehara::"));
 }

@@ -103,7 +103,8 @@ private:
 
   QHash<uint, Data::EntryPtr> m_entries;
   QHash<int, Data::EntryPtr> m_collectionHash;
-  QHash<int, QStringList> m_trackList;
+  // a hash into a list of tracks, per disc
+  QHash<int, QList<QStringList> > m_trackList;
   QPointer<KIO::StoredTransferJob> m_job;
   bool m_isTV;
 
