@@ -144,3 +144,19 @@ void OpenLibraryFetcherTest::testUpdate() {
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2014"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Orbit"));
 }
+
+void OpenLibraryFetcherTest::testComic() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::ISBN,
+                                       QStringLiteral("4048690663"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  // sometimes OpenLibrary has multiple works defined, so just verify one or more
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Yotsuba& Volume 1"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("4-04869066-3"));
+}

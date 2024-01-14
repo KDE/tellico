@@ -40,6 +40,7 @@ private Q_SLOTS:
   void testIsbn13();
   void testMultipleIsbn();
   void testUpdate();
+  void testComic();
 };
 
 #endif

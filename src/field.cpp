@@ -313,6 +313,11 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
       field->setCategory(i18n("Publishing"));
       field->setDescription(i18n("International Standard Book Number"));
       break;
+    case LccnField:
+      field = new Field(QStringLiteral("lccn"), i18n("LCCN#"));
+      field->setCategory(i18n("Publishing"));
+      field->setDescription(i18n("Library of Congress Control Number"));
+      break;
     case PegiField:
       {
       QStringList pegi = QStringLiteral("PEGI 3, PEGI 7, PEGI 12, PEGI 16, PEGI 18")

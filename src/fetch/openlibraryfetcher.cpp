@@ -24,6 +24,7 @@
 
 #include "openlibraryfetcher.h"
 #include "../collections/bookcollection.h"
+#include "../collections/comicbookcollection.h"
 #include "../images/imagefactory.h"
 #include "../utils/isbnvalidator.h"
 #include "../utils/guiproxy.h"
@@ -71,7 +72,9 @@ bool OpenLibraryFetcher::canSearch(Fetch::FetchKey k) const {
 }
 
 bool OpenLibraryFetcher::canFetch(int type) const {
-  return type == Data::Collection::Book || type == Data::Collection::Bibtex;
+  return type == Data::Collection::Book ||
+      type == Data::Collection::Bibtex ||
+      type == Data::Collection::ComicBook;
 }
 
 void OpenLibraryFetcher::readConfigHook(const KConfigGroup&) {
@@ -264,47 +267,36 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  Data::CollPtr coll(new Data::BookCollection(true));
+  Data::CollPtr coll;
+  if(request().collectionType() == Data::Collection::ComicBook) {
+    coll = new Data::ComicBookCollection(true);
+  } else {
+    coll = new Data::BookCollection(true);
+  }
   if(!coll->hasField(QStringLiteral("openlibrary")) && optionalFields().contains(QStringLiteral("openlibrary"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("openlibrary"), i18n("OpenLibrary Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
 
+  static const QRegularExpression yearRx(QStringLiteral("\\d{4}"));
   for(int i = 0; i < array.count(); i++) {
     // be sure to check that the fetcher has not been stopped
     // crashes can occur if not
     if(!m_started) {
       break;
     }
-//    myDebug() << "found result:" << result;
-    QVariantMap resultMap = array.at(i).toObject().toVariantMap();
-
-//  myDebug() << resultMap.value(QLatin1String("isbn_10")).toList().at(0);
 
     Data::EntryPtr entry(new Data::Entry(coll));
-
+    QVariantMap resultMap = array.at(i).toObject().toVariantMap();
     entry->setField(QStringLiteral("title"), mapValue(resultMap, "title"));
-    entry->setField(QStringLiteral("subtitle"), mapValue(resultMap, "subtitle"));
-    QRegularExpression yearRx(QStringLiteral("\\d{4}"));
-    QRegularExpressionMatch yearMatch = yearRx.match(mapValue(resultMap, "publish_date"));
-    if(yearMatch.hasMatch()) {
-      entry->setField(QStringLiteral("pub_year"), yearMatch.captured());
-    }
-    QString isbn = mapValue(resultMap, "isbn_10");
-    if(isbn.isEmpty()) {
-      isbn = mapValue(resultMap, "isbn_13");
-    }
-    if(!isbn.isEmpty()) {
-      ISBNValidator val(this);
-      val.fixup(isbn);
-      entry->setField(QStringLiteral("isbn"), isbn);
-    }
-    entry->setField(QStringLiteral("lccn"), mapValue(resultMap, "lccn"));
-    entry->setField(QStringLiteral("genre"), mapValue(resultMap, "genres"));
-    entry->setField(QStringLiteral("keyword"), mapValue(resultMap, "subjects"));
-    entry->setField(QStringLiteral("edition"), mapValue(resultMap, "edition_name"));
+    // only allow comic format for comic book collections
     QString binding = mapValue(resultMap, "physical_format");
+    if(coll->type() == Data::Collection::ComicBook &&
+       (!binding.isEmpty() && binding != QLatin1String("comic"))) {
+      myLog() << "Skipping non-comic result:" << entry->title();
+      continue;
+    }
     if(binding.toLower() == QLatin1String("hardcover")) {
       binding = QStringLiteral("Hardback");
     } else if(binding.contains(QStringLiteral("paperback"), Qt::CaseInsensitive)) {
@@ -313,6 +305,36 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     if(!binding.isEmpty()) {
       entry->setField(QStringLiteral("binding"), i18n(binding.toUtf8().constData()));
     }
+
+    entry->setField(QStringLiteral("subtitle"), mapValue(resultMap, "subtitle"));
+    auto yearMatch = yearRx.match(mapValue(resultMap, "publish_date"));
+    if(yearMatch.hasMatch()) {
+      entry->setField(QStringLiteral("pub_year"), yearMatch.captured());
+    }
+    QString isbn = mapValue(resultMap, "isbn_10");
+    if(isbn.isEmpty()) {
+      isbn = mapValue(resultMap, "isbn_13");
+    }
+    const QString isbnName(QStringLiteral("isbn"));
+    if(!isbn.isEmpty()) {
+      if(!coll->hasField(isbnName)) {
+        coll->addField(Data::Field::createDefaultField(Data::Field::IsbnField));
+      }
+      ISBNValidator val(this);
+      val.fixup(isbn);
+      entry->setField(isbnName, isbn);
+    }
+    const QString lccnName(QStringLiteral("lccn"));
+    const QString lccn = mapValue(resultMap, "lccn");
+    if(!lccn.isEmpty()) {
+      if(!coll->hasField(lccnName)) {
+        coll->addField(Data::Field::createDefaultField(Data::Field::LccnField));
+      }
+      entry->setField(lccnName, lccn);
+    }
+    entry->setField(QStringLiteral("genre"), mapValue(resultMap, "genres"));
+    entry->setField(QStringLiteral("keyword"), mapValue(resultMap, "subjects"));
+    entry->setField(QStringLiteral("edition"), mapValue(resultMap, "edition_name"));
     entry->setField(QStringLiteral("publisher"), mapValue(resultMap, "publishers"));
     entry->setField(QStringLiteral("series"), mapValue(resultMap, "series"));
     entry->setField(QStringLiteral("pages"), mapValue(resultMap, "number_of_pages"));
