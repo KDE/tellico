@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-07 00:42+0000\n"
+"POT-Creation-Date: 2024-01-14 01:59+0000\n"
 "PO-Revision-Date: 2024-01-02 08:45+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -165,18 +165,18 @@ msgstr "Вибрати боржника"
 msgid "Name"
 msgstr "Ім'я"
 
-#: src/charts/collectionsizereport.cpp:45
-#: src/charts/collectionsizereport.cpp:116
+#: src/charts/collectionsizereport.cpp:46
+#: src/charts/collectionsizereport.cpp:117
 #, kde-format
 msgid "Collection Size"
 msgstr "Розмір збірки"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1666
+#: src/charts/collectionsizereport.cpp:88 src/mainwindow.cpp:1666
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Всього записів: %1"
 
-#: src/charts/collectionsizereport.cpp:91
+#: src/charts/collectionsizereport.cpp:92
 #, kde-format
 msgid "Collection Size Over Time"
 msgstr "Зміна розміру збірки з часом"
@@ -218,19 +218,20 @@ msgstr "Кількість"
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
 msgstr "<qt>Tellico не вдається записати на сервер <b>%1</b>.</qt>"
 
-#: src/collection.cpp:51
+#: src/collection.cpp:53
 #, kde-format
 msgid "My Collection"
 msgstr "Моя збірка"
 
-#: src/collection.cpp:884 src/collections/boardgamecollection.cpp:32
+#: src/collection.cpp:886 src/collections/boardgamecollection.cpp:32
 #: src/collections/bookcollection.cpp:34 src/collections/cardcollection.cpp:31
 #: src/collections/coincollection.cpp:31
 #: src/collections/comicbookcollection.cpp:34
 #: src/collections/gamecollection.cpp:33 src/collections/musiccollection.cpp:32
 #: src/collections/stampcollection.cpp:32
 #: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
-#: src/document.cpp:531 src/field.cpp:291 src/field.cpp:304 src/field.cpp:309
+#: src/document.cpp:531 src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
+#: src/translators/filereaderbook.cpp:173
 #, kde-format
 msgid "Personal"
 msgstr "Особисте"
@@ -736,8 +737,8 @@ msgstr "Для поля з похідним значенням слід вказ
 #: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:260
 #: src/fetch/tvmazefetcher.cpp:177 src/fetch/tvmazefetcher.cpp:182
 #: src/fetch/upcitemdbfetcher.cpp:215 src/fetch/vgcollectfetcher.cpp:236
-#: src/fetch/vgcollectfetcher.cpp:339 src/field.cpp:39 src/field.cpp:80
-#: src/field.cpp:298 src/field.cpp:327 src/field.cpp:332
+#: src/fetch/vgcollectfetcher.cpp:339 src/field.cpp:38 src/field.cpp:79
+#: src/field.cpp:297 src/field.cpp:326 src/field.cpp:331
 #: src/translators/gcstarimporter.cpp:90
 #, kde-format
 msgid "General"
@@ -746,7 +747,7 @@ msgstr "Загальне"
 #: src/collections/bibtexcollection.cpp:39
 #: src/collections/bookcollection.cpp:32
 #: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:362
-#: src/field.cpp:314 src/translators/grs1importer.cpp:75
+#: src/field.cpp:313 src/translators/grs1importer.cpp:75
 #: src/translators/pdfimporter.cpp:232
 #, kde-format
 msgid "Publishing"
@@ -858,7 +859,7 @@ msgstr "Цифровий ідентифікатор об'єкта"
 msgid "Month"
 msgstr "Місяць"
 
-#: src/collections/bibtexcollection.cpp:191 src/field.cpp:200
+#: src/collections/bibtexcollection.cpp:191 src/field.cpp:199
 #, kde-format
 msgid "Number"
 msgstr "Число"
@@ -914,8 +915,8 @@ msgstr "Ключові слова"
 
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:440 src/fetch/entrezfetcher.cpp:516
-#: src/fetch/opdsfetcher.cpp:436 src/field.cpp:201
-#: src/translators/gcstarimporter.cpp:89
+#: src/fetch/opdsfetcher.cpp:436 src/field.cpp:200
+#: src/translators/filereaderbook.cpp:172 src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "URL"
 msgstr "URL"
@@ -999,7 +1000,7 @@ msgstr "Опис"
 #: src/collections/bookcollection.cpp:174
 #: src/collections/comicbookcollection.cpp:155
 #: src/collections/musiccollection.cpp:91
-#: src/collections/winecollection.cpp:113 src/field.cpp:205
+#: src/collections/winecollection.cpp:113 src/field.cpp:204
 #, kde-format
 msgid "Rating"
 msgstr "Рейтинг"
@@ -1114,7 +1115,7 @@ msgid "Trade Paperback"
 msgstr "Газета"
 
 #: src/collections/bookcollection.cpp:72 src/fetch/ibsfetcher.cpp:293
-#: src/fetch/itunesfetcher.cpp:397
+#: src/fetch/itunesfetcher.cpp:421 src/translators/filereaderbook.cpp:177
 #, kde-format
 msgid "E-Book"
 msgstr "Електронна книга"
@@ -1652,9 +1653,9 @@ msgstr "Альбом"
 #: src/fetch/upcitemdbfetcher.cpp:305 src/fetch/upcitemdbfetcher.cpp:425
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:162
-#: src/translators/freedbimporter.cpp:275
-#: src/translators/freedbimporter.cpp:393
-#: src/translators/freedbimporter.cpp:460
+#: src/translators/freedbimporter.cpp:274
+#: src/translators/freedbimporter.cpp:392
+#: src/translators/freedbimporter.cpp:459
 #, kde-format
 msgid "Compact Disc"
 msgstr "Компакт-диск"
@@ -1686,9 +1687,9 @@ msgid "Medium"
 msgstr "Носій"
 
 #: src/collections/musiccollection.cpp:60
-#: src/collections/musiccollection.cpp:87
-#: src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:427
+#: src/collections/musiccollection.cpp:87 src/fetch/discogsfetcher.cpp:486
+#: src/fetch/itunesfetcher.cpp:321 src/translators/audiofileimporter.cpp:236
+#: src/translators/xmlstatehandler.cpp:435
 #, kde-format
 msgid "Artist"
 msgstr "Виконавець"
@@ -1698,22 +1699,24 @@ msgstr "Виконавець"
 msgid "Label"
 msgstr "Лейбл"
 
-#: src/collections/musiccollection.cpp:83
+#: src/collections/musiccollection.cpp:83 src/tests/discogsfetchertest.cpp:307
+#: src/tests/itunesfetchertest.cpp:209 src/tests/musicbrainzfetchertest.cpp:228
 #, kde-format
 msgid "Tracks"
 msgstr "Композиції"
 
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
-#: src/fetch/fetchmanager.cpp:66 src/fetchdialog.cpp:252 src/field.cpp:297
-#: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:426
+#: src/fetch/discogsfetcher.cpp:485 src/fetch/fetchmanager.cpp:66
+#: src/fetch/itunesfetcher.cpp:320 src/fetchdialog.cpp:252 src/field.cpp:296
+#: src/field.cpp:337 src/translators/audiofileimporter.cpp:235
+#: src/translators/xmlstatehandler.cpp:434
 #, kde-format
 msgid "Title"
 msgstr "Назва"
 
-#: src/collections/musiccollection.cpp:88
-#: src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:428
+#: src/collections/musiccollection.cpp:88 src/fetch/discogsfetcher.cpp:487
+#: src/fetch/itunesfetcher.cpp:322 src/translators/audiofileimporter.cpp:237
+#: src/translators/xmlstatehandler.cpp:436
 #, kde-format
 msgid "Length"
 msgstr "Довжина"
@@ -1766,7 +1769,7 @@ msgstr "Центрування"
 msgid "Gummed"
 msgstr "Приклеєна"
 
-#: src/collections/stampcollection.cpp:140 src/field.cpp:203
+#: src/collections/stampcollection.cpp:140 src/field.cpp:202
 #, kde-format
 msgid "Image"
 msgstr "Зображення"
@@ -1881,7 +1884,7 @@ msgid "Region"
 msgstr "Регіон"
 
 #: src/collections/videocollection.cpp:95 src/fetch/discogsfetcher.cpp:318
-#: src/fetch/discogsfetcher.cpp:513
+#: src/fetch/discogsfetcher.cpp:547
 #, kde-format
 msgid "Nationality"
 msgstr "Країна"
@@ -1913,13 +1916,13 @@ msgid "Cast"
 msgstr "Ролі"
 
 #: src/collections/videocollection.cpp:110
-#: src/translators/xmlstatehandler.cpp:430
+#: src/translators/xmlstatehandler.cpp:438
 #, kde-format
 msgid "Actor/Actress"
 msgstr "Актор/Актриса"
 
 #: src/collections/videocollection.cpp:111
-#: src/translators/xmlstatehandler.cpp:431
+#: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Role"
 msgstr "Ролі"
@@ -1935,7 +1938,7 @@ msgid "Director"
 msgstr "Режисер"
 
 #: src/collections/videocollection.cpp:123 src/fetch/discogsfetcher.cpp:325
-#: src/fetch/discogsfetcher.cpp:512 src/fetch/rpggeekfetcher.cpp:207
+#: src/fetch/discogsfetcher.cpp:546 src/fetch/rpggeekfetcher.cpp:207
 #, kde-format
 msgid "Producer"
 msgstr "Виробник"
@@ -3238,7 +3241,7 @@ msgstr "SAO/NASA Astrophysics Data System (ADS)"
 
 #: src/fetch/adsfetcher.cpp:331 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:231
-#: src/fetch/crossreffetcher.cpp:300 src/fetch/discogsfetcher.cpp:527
+#: src/fetch/crossreffetcher.cpp:300 src/fetch/discogsfetcher.cpp:561
 #: src/fetch/giantbombfetcher.cpp:219 src/fetch/googlebookfetcher.cpp:383
 #: src/fetch/isbndbfetcher.cpp:395 src/fetch/mobygamesfetcher.cpp:652
 #: src/fetch/omdbfetcher.cpp:411 src/fetch/thegamesdbfetcher.cpp:637
@@ -3282,7 +3285,7 @@ msgstr ""
 #: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
 #: src/fetch/googlebookfetcher.cpp:199 src/fetch/ibsfetcher.cpp:302
 #: src/fetch/igdbfetcher.cpp:162 src/fetch/isbndbfetcher.cpp:296
-#: src/fetch/itunesfetcher.cpp:331 src/fetch/kinofetcher.cpp:349
+#: src/fetch/itunesfetcher.cpp:355 src/fetch/kinofetcher.cpp:349
 #: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:377
 #: src/fetch/mobygamesfetcher.cpp:346 src/fetch/moviemeterfetcher.cpp:162
 #: src/fetch/numistafetcher.cpp:288 src/fetch/numistafetcher.cpp:296
@@ -3551,7 +3554,7 @@ msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:213
 #: src/fetch/colnectfetcher.cpp:945 src/fetch/imdbfetcher.cpp:569
-#: src/fetch/itunesfetcher.cpp:517 src/fetch/mobygamesfetcher.cpp:672
+#: src/fetch/itunesfetcher.cpp:547 src/fetch/mobygamesfetcher.cpp:672
 #: src/fetch/rpggeekfetcher.cpp:222 src/fetch/thegamesdbfetcher.cpp:657
 #: src/fetch/videogamegeekfetcher.cpp:213
 #, kde-format
@@ -3560,7 +3563,7 @@ msgstr "&Розмір зображення: "
 
 #: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:217
 #: src/fetch/colnectfetcher.cpp:949 src/fetch/imdbfetcher.cpp:572
-#: src/fetch/itunesfetcher.cpp:521 src/fetch/mobygamesfetcher.cpp:675
+#: src/fetch/itunesfetcher.cpp:551 src/fetch/mobygamesfetcher.cpp:675
 #: src/fetch/rpggeekfetcher.cpp:226 src/fetch/thegamesdbfetcher.cpp:660
 #: src/fetch/videogamegeekfetcher.cpp:217
 #, kde-format
@@ -3576,7 +3579,7 @@ msgstr "Середнє зображення"
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:218
 #: src/fetch/colnectfetcher.cpp:950 src/fetch/imdbfetcher.cpp:574
-#: src/fetch/itunesfetcher.cpp:522 src/fetch/mobygamesfetcher.cpp:677
+#: src/fetch/itunesfetcher.cpp:552 src/fetch/mobygamesfetcher.cpp:677
 #: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:662
 #: src/fetch/videogamegeekfetcher.cpp:218
 #, kde-format
@@ -3585,7 +3588,7 @@ msgstr "Велике зображення"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:216
 #: src/fetch/colnectfetcher.cpp:948 src/fetch/imdbfetcher.cpp:575
-#: src/fetch/itunesfetcher.cpp:520 src/fetch/mobygamesfetcher.cpp:678
+#: src/fetch/itunesfetcher.cpp:550 src/fetch/mobygamesfetcher.cpp:678
 #: src/fetch/rpggeekfetcher.cpp:225 src/fetch/thegamesdbfetcher.cpp:663
 #: src/fetch/videogamegeekfetcher.cpp:216
 #, kde-format
@@ -3625,7 +3628,7 @@ msgstr ""
 #: src/fetch/ibsfetcher.cpp:397 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:387 src/fetch/kinoteatrfetcher.cpp:516
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
-#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:438
+#: src/fetch/musicbrainzfetcher.cpp:377 src/fetch/openlibraryfetcher.cpp:438
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:389
 #: src/fetch/upcitemdbfetcher.cpp:480 src/fetch/vgcollectfetcher.cpp:380
 #: src/fetch/vndbfetcher.cpp:442
@@ -3643,7 +3646,7 @@ msgstr "Колорист"
 msgid "Bedetheque Link"
 msgstr "Посилання Bedetheque"
 
-#: src/fetch/bedethequefetcher.cpp:456 src/field.cpp:313
+#: src/fetch/bedethequefetcher.cpp:456 src/field.cpp:312
 #, kde-format
 msgid "ISBN#"
 msgstr "ISBN#"
@@ -3677,7 +3680,7 @@ msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:816 src/fetch/giantbombfetcher.cpp:207
 #: src/fetch/igdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:638
-#: src/fetch/vgcollectfetcher.cpp:372 src/field.cpp:325
+#: src/fetch/vgcollectfetcher.cpp:372 src/field.cpp:324
 #, kde-format
 msgid "PEGI Rating"
 msgstr "Рейтинг PEGI"
@@ -3747,21 +3750,21 @@ msgstr "Данський бібліографічний центр (DBC.dk)"
 msgid "An access key is required to use this data source."
 msgstr "Для використання цього джерела даних потрібен ключ доступу."
 
-#: src/fetch/discogsfetcher.cpp:313 src/fetch/discogsfetcher.cpp:514
+#: src/fetch/discogsfetcher.cpp:313 src/fetch/discogsfetcher.cpp:548
 #, kde-format
 msgid "Discogs Link"
 msgstr "Посилання Discogs"
 
 #. i18n("Nationality");
-#: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:515
-#: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
+#: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:549
+#: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:370
 #: src/fetch/upcitemdbfetcher.cpp:214 src/fetch/upcitemdbfetcher.cpp:473
 #: src/fetch/vgcollectfetcher.cpp:338 src/fetch/vgcollectfetcher.cpp:373
 #, kde-format
 msgid "Barcode"
 msgstr "Штрихкод"
 
-#: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:516
+#: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:550
 #, kde-format
 msgid "Catalog Number"
 msgstr "Номер у каталозі"
@@ -3771,12 +3774,20 @@ msgstr "Номер у каталозі"
 msgid "The Discogs.com server reports a token error."
 msgstr "Сервер Discogs.com повідомляє про помилку ключа."
 
-#: src/fetch/discogsfetcher.cpp:503
+#: src/fetch/discogsfetcher.cpp:481 src/fetch/discogsfetcher.cpp:492
+#: src/fetch/itunesfetcher.cpp:316 src/fetch/itunesfetcher.cpp:327
+#: src/translators/audiofileimporter.cpp:231
+#: src/translators/audiofileimporter.cpp:241
+#, kde-format
+msgid "Tracks (Disc %1)"
+msgstr "Композиції (Диск %1)"
+
+#: src/fetch/discogsfetcher.cpp:537
 #, kde-format
 msgid "Discogs Audio Search"
 msgstr "Аудіопошук Discogs"
 
-#: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
+#: src/fetch/discogsfetcher.cpp:573 src/translators/discogsimporter.cpp:200
 #, kde-format
 msgid "User token:"
 msgstr "Ключ користувача: "
@@ -4031,7 +4042,7 @@ msgid "Internet Game Database (IGDB.com)"
 msgstr "База даних ігор у інтернеті (IGDB.com)"
 
 #: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:640
-#: src/fetch/thegamesdbfetcher.cpp:606 src/field.cpp:343
+#: src/fetch/thegamesdbfetcher.cpp:606 src/field.cpp:342
 #, kde-format
 msgid "Screenshot"
 msgstr "Знімок вікна"
@@ -4049,7 +4060,7 @@ msgstr "База даних фільмів у інтернеті (IMDB)"
 #: src/fetch/imdbfetcher.cpp:530 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/thetvdbfetcher.cpp:572 src/fetch/tvmazefetcher.cpp:378
-#: src/field.cpp:331
+#: src/field.cpp:330
 #, kde-format
 msgid "IMDb Link"
 msgstr "Посилання IMDb"
@@ -4059,9 +4070,9 @@ msgstr "Посилання IMDb"
 msgid "Certifications"
 msgstr "Сертифікації"
 
-#: src/fetch/imdbfetcher.cpp:535 src/fetch/itunesfetcher.cpp:506
+#: src/fetch/imdbfetcher.cpp:535 src/fetch/itunesfetcher.cpp:536
 #: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:573
-#: src/fetch/tvmazefetcher.cpp:379 src/field.cpp:335
+#: src/fetch/tvmazefetcher.cpp:379 src/field.cpp:334
 #, kde-format
 msgid "Episodes"
 msgstr "Епізоди"
@@ -4105,7 +4116,7 @@ msgstr ""
 "Пакетний пошук значень ISBN є швидшим, але він доступний лише користувачам "
 "тарифних планів Premium та Pro."
 
-#: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:505
+#: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:535
 #, kde-format
 msgid "iTunes Link"
 msgstr "Посилання iTunes"
@@ -4702,70 +4713,70 @@ msgstr ""
 "Якщо буде позначено, оновлення записів переписуватиме будь-яку існуючу "
 "інформацію."
 
-#: src/field.cpp:196
+#: src/field.cpp:195
 #, kde-format
 msgid "Simple Text"
 msgstr "Простий текст"
 
-#: src/field.cpp:197
+#: src/field.cpp:196
 #, kde-format
 msgid "Paragraph"
 msgstr "Стаття"
 
-#: src/field.cpp:198
+#: src/field.cpp:197
 #, kde-format
 msgid "Choice"
 msgstr "Вибір"
 
-#: src/field.cpp:199
+#: src/field.cpp:198
 #, kde-format
 msgid "Checkbox"
 msgstr "Вибір так/ні"
 
-#: src/field.cpp:202
+#: src/field.cpp:201
 #, kde-format
 msgid "Table"
 msgstr "Таблиця"
 
-#: src/field.cpp:204
+#: src/field.cpp:203
 #, kde-format
 msgid "Date"
 msgstr "Дата"
 
-#: src/field.cpp:290
+#: src/field.cpp:289
 #, kde-format
 msgctxt "ID # of the entry"
 msgid "ID"
 msgstr "Ід."
 
-#: src/field.cpp:303
+#: src/field.cpp:302
 #, kde-format
 msgid "Date Created"
 msgstr "Дата створення"
 
-#: src/field.cpp:308
+#: src/field.cpp:307
 #, kde-format
 msgid "Date Modified"
 msgstr "Дата зміни"
 
-#: src/field.cpp:315
+#: src/field.cpp:314
 #, kde-format
 msgid "International Standard Book Number"
 msgstr "Міжнародний Стандартний Номер Книги"
 
-#: src/field.cpp:339
+#: src/field.cpp:338
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
 msgstr "Сезон"
 
-#: src/field.cpp:340
+#: src/field.cpp:339
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
 msgstr "Епізод"
 
-#: src/field.cpp:346
+#: src/field.cpp:345
 #, kde-format
 msgid "Front Cover"
 msgstr "Обкладинка"
@@ -6663,12 +6674,6 @@ msgstr "Файли"
 msgid "Bitrate"
 msgstr "Бітова швидкість"
 
-#: src/translators/audiofileimporter.cpp:231
-#: src/translators/audiofileimporter.cpp:241
-#, kde-format
-msgid "Tracks (Disc %1)"
-msgstr "Композиції (Диск %1)"
-
 #: src/translators/audiofileimporter.cpp:315 xslt/entry-templates/Album.xsl:244
 #, kde-format
 msgid "(Various)"
@@ -7038,32 +7043,32 @@ msgstr "<Нове поле>"
 msgid "Discogs Options"
 msgstr "Параметри Discogs"
 
-#: src/translators/filelistingimporter.cpp:85
+#: src/translators/filelistingimporter.cpp:67
 #, kde-format
 msgid "Scanning files..."
 msgstr "Скануються файли…"
 
-#: src/translators/filelistingimporter.cpp:269
+#: src/translators/filelistingimporter.cpp:151
 #, kde-format
 msgid "File Listing Options"
 msgstr "Параметри побудови списків файлів"
 
-#: src/translators/filelistingimporter.cpp:272
+#: src/translators/filelistingimporter.cpp:154
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Рекурсивний пошук у теках"
 
-#: src/translators/filelistingimporter.cpp:273
+#: src/translators/filelistingimporter.cpp:155
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "Якщо буде позначено, програма виконуватиме рекурсивний пошук у теках."
 
-#: src/translators/filelistingimporter.cpp:277
+#: src/translators/filelistingimporter.cpp:159
 #, kde-format
 msgid "Generate file previews"
 msgstr "Створювати значки файлів"
 
-#: src/translators/filelistingimporter.cpp:278
+#: src/translators/filelistingimporter.cpp:160
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
@@ -7072,59 +7077,59 @@ msgstr ""
 "Якщо буде позначено цей пункт, створюватимуться значки файлів (наприклад "
 "зменшена копія фотографії)."
 
-#: src/translators/freedbimporter.cpp:106
-#: src/translators/freedbimporter.cpp:189
+#: src/translators/freedbimporter.cpp:105
+#: src/translators/freedbimporter.cpp:188
 #, kde-format
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
 msgstr ""
 "<qt>Tellico не вдається дістати доступ до пристрою CD-ROM - <i>%1</i>.</qt>"
 
-#: src/translators/freedbimporter.cpp:214
+#: src/translators/freedbimporter.cpp:213
 #, kde-format
 msgid "Select CDDB Entry"
 msgstr "Виберіть результат IMDB"
 
-#: src/translators/freedbimporter.cpp:215
+#: src/translators/freedbimporter.cpp:214
 #, kde-format
 msgid "Select a CDDB entry:"
 msgstr "Виберіть результат IMDB:"
 
-#: src/translators/freedbimporter.cpp:238
+#: src/translators/freedbimporter.cpp:237
 #, kde-format
 msgid "<qt>No records were found to match the CD.</qt>"
 msgstr "<qt>За вашим запитом нічого не знайдено</qt>"
 
-#: src/translators/freedbimporter.cpp:256
+#: src/translators/freedbimporter.cpp:255
 #, kde-format
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
 msgstr "<qt>Tellico не вдалося отримати загальні дані щодо диска.</qt>"
 
-#: src/translators/freedbimporter.cpp:485
+#: src/translators/freedbimporter.cpp:484
 #, kde-format
 msgid "Various"
 msgstr "Змінний"
 
-#: src/translators/freedbimporter.cpp:505
+#: src/translators/freedbimporter.cpp:504
 #, kde-format
 msgid "Audio CD Options"
 msgstr "Параметри звукових КД"
 
-#: src/translators/freedbimporter.cpp:512
+#: src/translators/freedbimporter.cpp:511
 #, kde-format
 msgid "Read data from CD-ROM device"
 msgstr "Прочитати дані з пристрою CD-ROM"
 
-#: src/translators/freedbimporter.cpp:515
+#: src/translators/freedbimporter.cpp:514
 #, kde-format
 msgid "Select or input the CD-ROM device location."
 msgstr "Виберіть або введіть адресу вашого пристрою CD-ROM"
 
-#: src/translators/freedbimporter.cpp:524
+#: src/translators/freedbimporter.cpp:523
 #, kde-format
 msgid "Read all CDDB cache files only"
 msgstr "Прочитати тільки файли CDDB"
 
-#: src/translators/freedbimporter.cpp:525
+#: src/translators/freedbimporter.cpp:524
 #, kde-format
 msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
@@ -7272,12 +7277,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:183
+#: src/translators/tellicoimporter.cpp:179
 #, kde-format
 msgid "The file is empty."
 msgstr "Файл є порожнім."
 
-#: src/translators/tellicoimporter.cpp:196
+#: src/translators/tellicoimporter.cpp:192
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "Файл не містить даних збірок."
