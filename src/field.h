@@ -316,6 +316,7 @@ public:
     CreatedDateField,
     ModifiedDateField,
     IsbnField,
+    LccnField,
     PegiField,
     ImdbField,
     EpisodeField,
