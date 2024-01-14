@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 02:31+0000\n"
+"POT-Creation-Date: 2024-01-14 03:58+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -737,7 +737,7 @@ msgstr "Туынды мәнді өрісінде мәннің үлгісі бо�
 #: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:460
 #: src/fetch/moviemeterfetcher.cpp:216 src/fetch/moviemeterfetcher.cpp:221
 #: src/fetch/numistafetcher.cpp:345 src/fetch/numistafetcher.cpp:361
-#: src/fetch/omdbfetcher.cpp:253 src/fetch/openlibraryfetcher.cpp:274
+#: src/fetch/omdbfetcher.cpp:253 src/fetch/openlibraryfetcher.cpp:282
 #: src/fetch/thegamesdbfetcher.cpp:267 src/fetch/thegamesdbfetcher.cpp:272
 #: src/fetch/themoviedbfetcher.cpp:313 src/fetch/themoviedbfetcher.cpp:316
 #: src/fetch/themoviedbfetcher.cpp:321 src/fetch/themoviedbfetcher.cpp:339
@@ -745,8 +745,8 @@ msgstr "Туынды мәнді өрісінде мәннің үлгісі бо�
 #: src/fetch/thetvdbfetcher.cpp:265 src/fetch/tvmazefetcher.cpp:178
 #: src/fetch/tvmazefetcher.cpp:183 src/fetch/upcitemdbfetcher.cpp:217
 #: src/fetch/vgcollectfetcher.cpp:238 src/fetch/vgcollectfetcher.cpp:341
-#: src/field.cpp:39 src/field.cpp:80 src/field.cpp:299 src/field.cpp:328
-#: src/field.cpp:333 src/translators/gcstarimporter.cpp:90
+#: src/field.cpp:39 src/field.cpp:80 src/field.cpp:299 src/field.cpp:333
+#: src/field.cpp:338 src/translators/gcstarimporter.cpp:90
 #, kde-format
 msgid "General"
 msgstr "Жалпы"
@@ -754,7 +754,7 @@ msgstr "Жалпы"
 #: src/collections/bibtexcollection.cpp:39
 #: src/collections/bookcollection.cpp:32
 #: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:362
-#: src/field.cpp:315 src/translators/grs1importer.cpp:75
+#: src/field.cpp:315 src/field.cpp:320 src/translators/grs1importer.cpp:75
 #: src/translators/pdfimporter.cpp:229
 #, kde-format
 msgid "Publishing"
@@ -1149,12 +1149,12 @@ msgstr "Басуға тапсырылған жылы"
 msgid "Publication Year"
 msgstr "Басылған жылы"
 
-#: src/collections/bookcollection.cpp:111
+#: src/collections/bookcollection.cpp:111 src/field.cpp:319
 #, kde-format
 msgid "LCCN#"
 msgstr "LCCN#"
 
-#: src/collections/bookcollection.cpp:113
+#: src/collections/bookcollection.cpp:113 src/field.cpp:321
 #, kde-format
 msgid "Library of Congress Control Number"
 msgstr "Конгрес кітапханасының бақылау нөмірі"
@@ -1720,7 +1720,7 @@ msgstr "Тасушысы"
 #: src/collections/musiccollection.cpp:60
 #: src/collections/musiccollection.cpp:87
 #: src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:427
+#: src/translators/xmlstatehandler.cpp:435
 #, kde-format
 msgid "Artist"
 msgstr "Орындаушысы"
@@ -1737,15 +1737,15 @@ msgstr "Жолсызықтары"
 
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
 #: src/fetch/fetchmanager.cpp:67 src/fetchdialog.cpp:252 src/field.cpp:298
-#: src/field.cpp:339 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:426
+#: src/field.cpp:344 src/translators/audiofileimporter.cpp:235
+#: src/translators/xmlstatehandler.cpp:434
 #, kde-format
 msgid "Title"
 msgstr "Атауы"
 
 #: src/collections/musiccollection.cpp:88
 #: src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:428
+#: src/translators/xmlstatehandler.cpp:436
 #, kde-format
 msgid "Length"
 msgstr "Ұзақтығы"
@@ -1946,13 +1946,13 @@ msgid "Cast"
 msgstr "Рөлдері"
 
 #: src/collections/videocollection.cpp:110
-#: src/translators/xmlstatehandler.cpp:430
+#: src/translators/xmlstatehandler.cpp:438
 #, kde-format
 msgid "Actor/Actress"
 msgstr "Актер/Актриса"
 
 #: src/collections/videocollection.cpp:111
-#: src/translators/xmlstatehandler.cpp:431
+#: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Role"
 msgstr "Рөлі"
@@ -2143,7 +2143,7 @@ msgstr "%1 өрісін өшіру"
 msgid "Add Filter"
 msgstr "Сүзгіні қосу"
 
-#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:62
+#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:58
 #: src/filterview.cpp:133
 #, kde-format
 msgid "Modify Filter"
@@ -3676,7 +3676,7 @@ msgstr "Үлестіргіш"
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
 #: src/fetch/imdbfetcher.cpp:1823 src/fetch/itunesfetcher.cpp:506
 #: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:576
-#: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:336
+#: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:341
 #, kde-format
 msgid "Episodes"
 msgstr "Үзінділер"
@@ -3700,7 +3700,7 @@ msgstr "AnimeNfo бағасы"
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:616
 #: src/fetch/kinofetcher.cpp:388 src/fetch/kinoteatrfetcher.cpp:516
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
-#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:439
+#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:461
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:382
 #: src/fetch/vndbfetcher.cpp:440
@@ -3757,7 +3757,7 @@ msgstr ""
 
 #: src/fetch/colnectfetcher.cpp:818 src/fetch/giantbombfetcher.cpp:207
 #: src/fetch/igdbfetcher.cpp:578 src/fetch/mobygamesfetcher.cpp:638
-#: src/fetch/vgcollectfetcher.cpp:374 src/field.cpp:326
+#: src/fetch/vgcollectfetcher.cpp:374 src/field.cpp:331
 #, fuzzy, kde-format
 #| msgid "ESRB Rating"
 msgid "PEGI Rating"
@@ -4108,7 +4108,7 @@ msgid "Internet Game Database (IGDB.com)"
 msgstr "Интернет фильмдер қоры (Германия)"
 
 #: src/fetch/igdbfetcher.cpp:580 src/fetch/mobygamesfetcher.cpp:640
-#: src/fetch/thegamesdbfetcher.cpp:606 src/field.cpp:344
+#: src/fetch/thegamesdbfetcher.cpp:606 src/field.cpp:349
 #, kde-format
 msgid "Screenshot"
 msgstr ""
@@ -4158,7 +4158,7 @@ msgstr "Куәландырулары"
 #: src/fetch/imdbfetcher.cpp:1818 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/thetvdbfetcher.cpp:575 src/fetch/tvmazefetcher.cpp:382
-#: src/field.cpp:332
+#: src/field.cpp:337
 #, kde-format
 msgid "IMDb Link"
 msgstr "IMDb сілтемесі"
@@ -4291,7 +4291,7 @@ msgstr "Сервер хостының атауын кетіру."
 msgid "&Verify Catalog"
 msgstr "Файлдар каталогы"
 
-#: src/fetch/openlibraryfetcher.cpp:273 src/fetch/openlibraryfetcher.cpp:432
+#: src/fetch/openlibraryfetcher.cpp:281 src/fetch/openlibraryfetcher.cpp:454
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "OpenLibrary сілтемесі"
@@ -4851,45 +4851,45 @@ msgstr "Өзгертілген күні"
 msgid "International Standard Book Number"
 msgstr "Халықаралық стандарты кітап нөмірі"
 
-#: src/field.cpp:340
+#: src/field.cpp:345
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
 msgstr ""
 
-#: src/field.cpp:341
+#: src/field.cpp:346
 #, fuzzy, kde-format
 #| msgid "Episodes"
 msgctxt "TV Episode"
 msgid "Episode"
 msgstr "Үзінділер"
 
-#: src/filterdialog.cpp:62
+#: src/filterdialog.cpp:58
 #, kde-format
 msgid "Advanced Filter"
 msgstr "Жетелеген сүзгі"
 
-#: src/filterdialog.cpp:83
+#: src/filterdialog.cpp:79
 #, kde-format
 msgid "Filter Criteria"
 msgstr "Сүзгі шарты"
 
-#: src/filterdialog.cpp:88
+#: src/filterdialog.cpp:84
 #, kde-format
 msgid "Match a&ll of the following"
 msgstr "Б&үкіл келесі шарттарға сәйкес келетін"
 
-#: src/filterdialog.cpp:89
+#: src/filterdialog.cpp:85
 #, kde-format
 msgid "Match an&y of the following"
 msgstr "Келесі б&ір шартқа сәйкес келетін"
 
-#: src/filterdialog.cpp:113
+#: src/filterdialog.cpp:109
 #, kde-format
 msgid "Filter name:"
 msgstr "Сүзгінің атауы"
 
-#: src/filterdialog.cpp:122
+#: src/filterdialog.cpp:118
 #, kde-format
 msgid "&Save Filter"
 msgstr "&Сүзгіні сақтау"
@@ -4973,7 +4973,7 @@ msgctxt "Edit Label"
 msgid "%1:"
 msgstr "%1:"
 
-#: src/gui/filterrulewidget.cpp:64
+#: src/gui/filterrulewidget.cpp:63
 #, kde-format
 msgid "Any Field"
 msgstr "Кез келген өрісі"

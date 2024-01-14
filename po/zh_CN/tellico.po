@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 02:31+0000\n"
-"PO-Revision-Date: 2024-01-06 03:37\n"
+"POT-Creation-Date: 2024-01-14 03:58+0000\n"
+"PO-Revision-Date: 2024-01-13 06:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -699,7 +699,7 @@ msgstr ""
 #: src/fetch/kinoteatrfetcher.cpp:240 src/fetch/mobygamesfetcher.cpp:460
 #: src/fetch/moviemeterfetcher.cpp:216 src/fetch/moviemeterfetcher.cpp:221
 #: src/fetch/numistafetcher.cpp:345 src/fetch/numistafetcher.cpp:361
-#: src/fetch/omdbfetcher.cpp:253 src/fetch/openlibraryfetcher.cpp:274
+#: src/fetch/omdbfetcher.cpp:253 src/fetch/openlibraryfetcher.cpp:282
 #: src/fetch/thegamesdbfetcher.cpp:267 src/fetch/thegamesdbfetcher.cpp:272
 #: src/fetch/themoviedbfetcher.cpp:313 src/fetch/themoviedbfetcher.cpp:316
 #: src/fetch/themoviedbfetcher.cpp:321 src/fetch/themoviedbfetcher.cpp:339
@@ -707,8 +707,8 @@ msgstr ""
 #: src/fetch/thetvdbfetcher.cpp:265 src/fetch/tvmazefetcher.cpp:178
 #: src/fetch/tvmazefetcher.cpp:183 src/fetch/upcitemdbfetcher.cpp:217
 #: src/fetch/vgcollectfetcher.cpp:238 src/fetch/vgcollectfetcher.cpp:341
-#: src/field.cpp:39 src/field.cpp:80 src/field.cpp:299 src/field.cpp:328
-#: src/field.cpp:333 src/translators/gcstarimporter.cpp:90
+#: src/field.cpp:39 src/field.cpp:80 src/field.cpp:299 src/field.cpp:333
+#: src/field.cpp:338 src/translators/gcstarimporter.cpp:90
 #, kde-format
 msgid "General"
 msgstr "常规"
@@ -716,7 +716,7 @@ msgstr "常规"
 #: src/collections/bibtexcollection.cpp:39
 #: src/collections/bookcollection.cpp:32
 #: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:362
-#: src/field.cpp:315 src/translators/grs1importer.cpp:75
+#: src/field.cpp:315 src/field.cpp:320 src/translators/grs1importer.cpp:75
 #: src/translators/pdfimporter.cpp:229
 #, kde-format
 msgid "Publishing"
@@ -1110,12 +1110,12 @@ msgstr "版权年份"
 msgid "Publication Year"
 msgstr "发行年份"
 
-#: src/collections/bookcollection.cpp:111
+#: src/collections/bookcollection.cpp:111 src/field.cpp:319
 #, kde-format
 msgid "LCCN#"
 msgstr "LCCN#"
 
-#: src/collections/bookcollection.cpp:113
+#: src/collections/bookcollection.cpp:113 src/field.cpp:321
 #, kde-format
 msgid "Library of Congress Control Number"
 msgstr ""
@@ -1660,7 +1660,7 @@ msgstr "中等图"
 #: src/collections/musiccollection.cpp:60
 #: src/collections/musiccollection.cpp:87
 #: src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:427
+#: src/translators/xmlstatehandler.cpp:435
 #, kde-format
 msgid "Artist"
 msgstr "艺人"
@@ -1677,15 +1677,15 @@ msgstr "音轨"
 
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
 #: src/fetch/fetchmanager.cpp:67 src/fetchdialog.cpp:252 src/field.cpp:298
-#: src/field.cpp:339 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:426
+#: src/field.cpp:344 src/translators/audiofileimporter.cpp:235
+#: src/translators/xmlstatehandler.cpp:434
 #, kde-format
 msgid "Title"
 msgstr "标题"
 
 #: src/collections/musiccollection.cpp:88
 #: src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:428
+#: src/translators/xmlstatehandler.cpp:436
 #, kde-format
 msgid "Length"
 msgstr "长度"
@@ -1886,13 +1886,13 @@ msgid "Cast"
 msgstr "演员阵容"
 
 #: src/collections/videocollection.cpp:110
-#: src/translators/xmlstatehandler.cpp:430
+#: src/translators/xmlstatehandler.cpp:438
 #, kde-format
 msgid "Actor/Actress"
 msgstr "男/女演员"
 
 #: src/collections/videocollection.cpp:111
-#: src/translators/xmlstatehandler.cpp:431
+#: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Role"
 msgstr "角色"
@@ -2083,7 +2083,7 @@ msgstr "删除 %1 域"
 msgid "Add Filter"
 msgstr "添加过滤"
 
-#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:62
+#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:58
 #: src/filterview.cpp:133
 #, kde-format
 msgid "Modify Filter"
@@ -3551,7 +3551,7 @@ msgstr "发行商"
 #: src/fetch/animenfofetcher.cpp:305 src/fetch/animenfofetcher.cpp:494
 #: src/fetch/imdbfetcher.cpp:1823 src/fetch/itunesfetcher.cpp:506
 #: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:576
-#: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:336
+#: src/fetch/tvmazefetcher.cpp:383 src/field.cpp:341
 #, kde-format
 msgid "Episodes"
 msgstr ""
@@ -3575,7 +3575,7 @@ msgstr ""
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:616
 #: src/fetch/kinofetcher.cpp:388 src/fetch/kinoteatrfetcher.cpp:516
 #: src/fetch/moviemeterfetcher.cpp:301 src/fetch/mrlookupfetcher.cpp:233
-#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:439
+#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:461
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:393
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:382
 #: src/fetch/vndbfetcher.cpp:440
@@ -3627,7 +3627,7 @@ msgstr ""
 
 #: src/fetch/colnectfetcher.cpp:818 src/fetch/giantbombfetcher.cpp:207
 #: src/fetch/igdbfetcher.cpp:578 src/fetch/mobygamesfetcher.cpp:638
-#: src/fetch/vgcollectfetcher.cpp:374 src/field.cpp:326
+#: src/fetch/vgcollectfetcher.cpp:374 src/field.cpp:331
 #, kde-format
 msgid "PEGI Rating"
 msgstr ""
@@ -3968,7 +3968,7 @@ msgid "Internet Game Database (IGDB.com)"
 msgstr ""
 
 #: src/fetch/igdbfetcher.cpp:580 src/fetch/mobygamesfetcher.cpp:640
-#: src/fetch/thegamesdbfetcher.cpp:606 src/field.cpp:344
+#: src/fetch/thegamesdbfetcher.cpp:606 src/field.cpp:349
 #, kde-format
 msgid "Screenshot"
 msgstr ""
@@ -4018,7 +4018,7 @@ msgstr "证书"
 #: src/fetch/imdbfetcher.cpp:1818 src/fetch/kinopoiskfetcher.cpp:672
 #: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
 #: src/fetch/thetvdbfetcher.cpp:575 src/fetch/tvmazefetcher.cpp:382
-#: src/field.cpp:332
+#: src/field.cpp:337
 #, kde-format
 msgid "IMDb Link"
 msgstr ""
@@ -4138,7 +4138,7 @@ msgstr ""
 msgid "&Verify Catalog"
 msgstr ""
 
-#: src/fetch/openlibraryfetcher.cpp:273 src/fetch/openlibraryfetcher.cpp:432
+#: src/fetch/openlibraryfetcher.cpp:281 src/fetch/openlibraryfetcher.cpp:454
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr ""
@@ -4669,44 +4669,44 @@ msgstr "修改日期"
 msgid "International Standard Book Number"
 msgstr "国际标准书号"
 
-#: src/field.cpp:340
+#: src/field.cpp:345
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
 msgstr ""
 
-#: src/field.cpp:341
+#: src/field.cpp:346
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
 msgstr ""
 
-#: src/filterdialog.cpp:62
+#: src/filterdialog.cpp:58
 #, kde-format
 msgid "Advanced Filter"
 msgstr "高级过滤"
 
-#: src/filterdialog.cpp:83
+#: src/filterdialog.cpp:79
 #, kde-format
 msgid "Filter Criteria"
 msgstr "过滤器条件"
 
-#: src/filterdialog.cpp:88
+#: src/filterdialog.cpp:84
 #, kde-format
 msgid "Match a&ll of the following"
 msgstr "匹配以下全部条件(&L)"
 
-#: src/filterdialog.cpp:89
+#: src/filterdialog.cpp:85
 #, kde-format
 msgid "Match an&y of the following"
 msgstr "匹配以下任何条件(&Y)"
 
-#: src/filterdialog.cpp:113
+#: src/filterdialog.cpp:109
 #, kde-format
 msgid "Filter name:"
 msgstr "过滤名称："
 
-#: src/filterdialog.cpp:122
+#: src/filterdialog.cpp:118
 #, kde-format
 msgid "&Save Filter"
 msgstr "保存过滤(&S)"
@@ -4786,7 +4786,7 @@ msgctxt "Edit Label"
 msgid "%1:"
 msgstr "%1："
 
-#: src/gui/filterrulewidget.cpp:64
+#: src/gui/filterrulewidget.cpp:63
 #, kde-format
 msgid "Any Field"
 msgstr "任何域"
