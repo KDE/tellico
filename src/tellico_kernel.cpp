@@ -25,7 +25,6 @@
 #include "tellico_kernel.h"
 #include "document.h"
 #include "collection.h"
-#include "controller.h"
 #include "filter.h"
 #include "filterdialog.h"
 #include "loandialog.h"
@@ -40,7 +39,6 @@
 #include "commands/reorderfields.h"
 #include "commands/renamecollection.h"
 #include "collectionfactory.h"
-#include "utils/stringset.h"
 #include "utils/cursorsaver.h"
 #include "utils/mergeconflictresolver.h"
 
