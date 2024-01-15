@@ -274,8 +274,9 @@ void EntryModel::clearSaveState() {
       // If the hash is modified while a QHashIterator is active, the QHashIterator
       // will continue iterating over the original hash, ignoring the modified copy.
       m_saveStates.remove(i.key());
-      QModelIndex idx = createIndex(i.key(), 0);
-      emit dataChanged(idx, idx, QVector<int>() << SaveStateRole);
+      QModelIndex idx1 = createIndex(i.key(), 0);
+      QModelIndex idx2 = createIndex(i.key(), m_fields.count());
+      emit dataChanged(idx1, idx2, QVector<int>() << SaveStateRole);
     }
   }
 }

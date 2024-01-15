@@ -1,3 +1,7 @@
+2024-01-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed display bug with entry status (Bug 479843).
+
 2024-01-13  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Open Library source to search for comics (Bug 479506).
