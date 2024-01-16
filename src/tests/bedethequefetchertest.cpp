@@ -31,8 +31,6 @@
 #include "../collections/comicbookcollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
-#include "../fieldformat.h"
-#include "../fetch/fetcherjob.h"
 
 #include <KSharedConfig>
 
@@ -52,9 +50,11 @@ void BedethequeFetcherTest::initTestCase() {
 }
 
 void BedethequeFetcherTest::testTitle() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Title, QStringLiteral("Le Combat d'Odiri"));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Title,
+                                       QStringLiteral("Le Combat d'Odiri"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BedethequeFetcher(this));
   fetcher->readConfig(m_config);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -80,9 +80,11 @@ void BedethequeFetcherTest::testTitle() {
 }
 
 void BedethequeFetcherTest::testSeries() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Keyword, QStringLiteral("Arno"));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Keyword,
+                                       QStringLiteral("Arno"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BedethequeFetcher(this));
   fetcher->readConfig(m_config);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -108,9 +110,11 @@ void BedethequeFetcherTest::testSeries() {
 }
 
 void BedethequeFetcherTest::testIsbn() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::ISBN, QStringLiteral("2-205-05868-1"));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::ISBN,
+                                       QStringLiteral("2-205-05868-1"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BedethequeFetcher(this));
   fetcher->readConfig(m_config);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -137,7 +141,8 @@ void BedethequeFetcherTest::testIsbn() {
 
 void BedethequeFetcherTest::testDonjon() {
   // this one has multiple writers
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Raw, QStringLiteral("http://m.bedetheque.com/BD-Donjon-Zenith-Tome-5-Un-mariage-a-part-56495.html"));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Raw,
+                                       QStringLiteral("http://m.bedetheque.com/BD-Donjon-Zenith-Tome-5-Un-mariage-a-part-56495.html"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BedethequeFetcher(this));
   fetcher->readConfig(m_config);
 
@@ -154,4 +159,22 @@ void BedethequeFetcherTest::testDonjon() {
   QCOMPARE(entry->field("lien-bel"), QStringLiteral("https://www.bedetheque.com/BD-Donjon-Zenith-Tome-5-Un-mariage-a-part-56495.html"));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+}
+
+void BedethequeFetcherTest::testUpdate() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::ComicBookCollection(true));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("lien-bel"),
+                                                         QLatin1String("Link"),
+                                                         Tellico::Data::Field::URL));
+  coll->addField(field);
+  Tellico::Data::EntryPtr oldEntry(new Tellico::Data::Entry(coll));
+  coll->addEntries(oldEntry);
+
+  oldEntry->setField(QStringLiteral("lien-bel"), QStringLiteral("https://www.bedetheque.com/BD-Donjon-Zenith-Tome-5-Un-mariage-a-part-56495.html"));
+
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BedethequeFetcher(this));
+  auto f = static_cast<Tellico::Fetch::BedethequeFetcher*>(fetcher.data());
+
+  auto request = f->updateRequest(oldEntry);
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
 }

@@ -40,6 +40,7 @@ private Q_SLOTS:
   void testSeries();
   void testIsbn();
   void testDonjon();
+  void testUpdate();
 
 private:
   KConfigGroup m_config;
