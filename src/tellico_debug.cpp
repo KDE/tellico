@@ -27,11 +27,11 @@
 Q_LOGGING_CATEGORY(TELLICO, "tellico", QtInfoMsg)
 
 Debug::Block::Block(const char* label) : m_start(std::clock()), m_label(label) {
-  myLog() << "BEGIN:" << label;
+  myDebug() << "BEGIN:" << label;
  }
 
 Debug::Block::~Block() {
   std::clock_t finish = std::clock();
   const auto duration = (finish - m_start) / CLOCKS_PER_SEC;
-  myLog() << "  END:" << m_label << "- duration =" << duration;
+  myDebug() << "  END:" << m_label << "- duration =" << duration;
 }
