@@ -40,12 +40,7 @@ namespace KIO {
   class StoredTransferJob;
 }
 
-class QCheckBox;
-class QRegExpr;
-class QRegularExpression;
-
 class ImdbFetcherTest;
-
 namespace Tellico {
   namespace GUI {
     class ComboBox;
