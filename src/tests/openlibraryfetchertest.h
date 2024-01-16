@@ -38,6 +38,7 @@ private Q_SLOTS:
   void testAuthor();
   void testIsbn();
   void testIsbn13();
+  void testLccn();
   void testMultipleIsbn();
   void testUpdate();
   void testComic();

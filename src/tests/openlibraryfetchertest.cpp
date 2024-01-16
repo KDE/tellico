@@ -31,6 +31,9 @@
 #include "../collections/bookcollection.h"
 #include "../images/imagefactory.h"
 
+#include <KSharedConfig>
+#include <KConfigGroup>
+
 #include <QTest>
 
 QTEST_GUILESS_MAIN( OpenLibraryFetcherTest )
@@ -107,6 +110,35 @@ void OpenLibraryFetcherTest::testIsbn13() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("C Pocket Reference"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-0-596-00436-1"));
+}
+
+void OpenLibraryFetcherTest::testLccn() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("OpenLibrary"));
+  cg.writeEntry("Custom Fields", QStringLiteral("openlibrary"));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::LCCN,
+                                       QStringLiteral("2004110229"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+  fetcher->readConfig(cg);
+  QVERIFY(fetcher->canSearch(request.key()));
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("This is Venice"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("M. Sasek"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0-7893-1223-9"));
+  QCOMPARE(entry->field(QStringLiteral("lccn")), QStringLiteral("2004110229"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2005"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Juvenile literature."));
+  QCOMPARE(entry->field(QStringLiteral("keyword")), QStringLiteral("Venice (Italy) -- Description and travel -- Juvenile literature"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Universe"));
+  QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("English"));
+  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("56"));
+  QCOMPARE(entry->field(QStringLiteral("openlibrary")), QStringLiteral("https://openlibrary.org/books/OL3315616M"));
+  QVERIFY(!entry->field(QStringLiteral("comments")).isEmpty());
 }
 
 void OpenLibraryFetcherTest::testMultipleIsbn() {
