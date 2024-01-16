@@ -48,6 +48,14 @@ void ExternalFetcherTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/mods2tellico.xsl"));
 }
 
+void ExternalFetcherTest::testParsing() {
+  const QString argsList(QStringLiteral("run a test \"with 3 args\" plus \"one more\" at end"));
+  auto args = Tellico::Fetch::ExecExternalFetcher::parseArguments(argsList);
+  QCOMPARE(args.count(), 8);
+  QCOMPARE(args.at(3), QLatin1String("with 3 args"));
+  QCOMPARE(args.at(4), QLatin1String("plus"));
+}
+
 void ExternalFetcherTest::testMods() {
   // fake the fetcher by 'cat'ting the MODS file
   // the search request is a dummy title search
@@ -61,6 +69,7 @@ void ExternalFetcherTest::testMods() {
   cg.markAsClean(); // don't edit the file on sync()
 
   fetcher->readConfig(cg);
+  QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 

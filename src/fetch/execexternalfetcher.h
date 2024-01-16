@@ -39,6 +39,7 @@ class KConfig;
 class QCheckBox;
 class QLineEdit;
 
+class ExternalFetcherTest;
 namespace Tellico {
   namespace GUI {
     class ComboBox;
@@ -83,7 +84,7 @@ public:
     virtual QString preferredName() const Q_DECL_OVERRIDE;
 
   private:
-    bool m_deleteOnRemove : 1;
+    bool m_deleteOnRemove;
     QString m_name, m_newStuffName;
     KUrlRequester* m_pathEdit;
     GUI::CollectionTypeCombo* m_collCombo;
@@ -105,6 +106,7 @@ private Q_SLOTS:
   void slotProcessExited();
 
 private:
+  friend class ::ExternalFetcherTest;
   static QStringList parseArguments(const QString& str);
 
   virtual void search() Q_DECL_OVERRIDE;

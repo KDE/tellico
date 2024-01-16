@@ -49,25 +49,21 @@
 #include <KConfigGroup>
 
 #include <QLabel>
-#include <QRegExp>
 #include <QGroupBox>
 #include <QGridLayout>
 #include <QStandardItemModel>
 
-using namespace Tellico;
 using Tellico::Fetch::ExecExternalFetcher;
 
 QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
   // matching escaped quotes is too hard... :(
-//  QRegExp quotes(QLatin1String("[^\\\\](['\"])(.*[^\\\\])\\1"));
-  QRegExp quotes(QLatin1String("(['\"])(.*)\\1"));
-  quotes.setMinimal(true);
-  QRegExp spaces(QLatin1String("\\s+"));
-  spaces.setMinimal(true);
+  static const QRegularExpression quotes(QLatin1String("(['\"])(.*?)\\1"));
+  static const QRegularExpression spaces(QLatin1String("\\s+?"));
 
   QStringList args;
+  QRegularExpressionMatch match;
   int pos = 0;
-  for(int nextPos = quotes.indexIn(str_); nextPos > -1; pos = nextPos+1, nextPos = quotes.indexIn(str_, pos)) {
+  for(int nextPos = str_.indexOf(quotes, pos, &match); nextPos > -1; pos = nextPos+1, nextPos = str_.indexOf(quotes, pos, &match)) {
     // a non-quotes arguments runs from pos to nextPos
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
     args += str_.mid(pos, nextPos-pos).split(spaces, QString::SkipEmptyParts);
@@ -75,9 +71,8 @@ QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
     args += str_.mid(pos, nextPos-pos).split(spaces, Qt::SkipEmptyParts);
 #endif
     // move nextpos marker to end of match
-    pos = quotes.pos(2); // skip quotation mark
-    nextPos += quotes.matchedLength();
-    args += str_.mid(pos, nextPos-pos-1);
+    nextPos += match.capturedLength();
+    args += match.captured(2);
   }
   // catch the end stuff
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
@@ -170,13 +165,16 @@ void ExecExternalFetcher::search() {
     value.remove(QLatin1Char('-')); // remove hyphens from isbn values
     // shouldn't hurt and might keep from confusing stupid search sources
   }
-  QRegExp rx1(QLatin1String("['\"].*\\1"));
-  if(!rx1.exactMatch(value)) {
+  bool hasQuotes = value.startsWith(QLatin1Char('"')) && value.endsWith(QLatin1Char('"'));
+  if(!hasQuotes) {
+    hasQuotes = value.startsWith(QLatin1Char('\'')) && value.endsWith(QLatin1Char('\''));
+  }
+  if(!hasQuotes) {
     value = QLatin1Char('"') + value + QLatin1Char('"');
   }
   QString args = m_args.value(request().key());
-  QRegExp rx2(QLatin1String("['\"]%1\\1"));
-  args.replace(rx2, QStringLiteral("%1"));
+  static const QRegularExpression rx(QLatin1String("(['\"])%1\\1"));
+  args.replace(rx, QStringLiteral("%1"));
   startSearch(parseArguments(args.arg(value))); // replace %1 with search value
 }
 
