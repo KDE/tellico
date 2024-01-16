@@ -420,7 +420,7 @@ void AmazonFetcher::slotComplete(KJob*) {
     // special case book author
     // amazon is really bad about not putting spaces after periods
     if(coll->type() == Data::Collection::Book) {
-      QRegExp rx(QLatin1String("\\.([^\\s])"));
+      static const QRegularExpression rx(QLatin1String("\\.([^\\s])"));
       QStringList values = FieldFormat::splitValue(entry->field(QStringLiteral("author")));
       for(QStringList::Iterator it = values.begin(); it != values.end(); ++it) {
         (*it).replace(rx, QStringLiteral(". \\1"));
@@ -430,14 +430,16 @@ void AmazonFetcher::slotComplete(KJob*) {
 
     // UK puts the year in the title for some reason
     if(m_site == UK && coll->type() == Data::Collection::Video) {
-      QRegExp rx(QLatin1String("\\[(\\d{4})\\]"));
-      QString t = entry->field(QStringLiteral("title"));
-      if(rx.indexIn(t) > -1) {
-        QString y = rx.cap(1);
+      static const QRegularExpression rx(QLatin1String("\\[(\\d{4})\\]"));
+      const QString titleString(QStringLiteral("title"));
+      QString t = entry->field(titleString);
+      auto match = rx.match(t);
+      if(match.hasMatch()) {
         t = t.remove(rx).simplified();
-        entry->setField(QStringLiteral("title"), t);
-        if(entry->field(QStringLiteral("year")).isEmpty()) {
-          entry->setField(QStringLiteral("year"), y);
+        entry->setField(titleString, t);
+        const QString yearString(QStringLiteral("year"));
+        if(entry->field(yearString).isEmpty()) {
+          entry->setField(yearString, match.captured(1));
         }
       }
     }
@@ -590,15 +592,16 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
 
   // also sometimes table fields have rows but no values
   Data::FieldList fields = entry->collection()->fields();
-  QRegExp blank(QLatin1String("[\\s") +
-                FieldFormat::columnDelimiterString() +
-                FieldFormat::delimiterString() +
-                QLatin1String("]+")); // only white space, column separators and value separators
+  static const QRegularExpression blank(QLatin1String("^[\\s") +
+                                        FieldFormat::columnDelimiterString() +
+                                        FieldFormat::delimiterString() +
+                                        QLatin1String("]+$")); // only white space, column separators and value separators
   foreach(Data::FieldPtr fIt, fields) {
     if(fIt->type() != Data::Field::Table) {
       continue;
     }
-    if(blank.exactMatch(entry->field(fIt))) {
+    auto blankMatch = blank.match(entry->field(fIt));
+    if(blankMatch.hasMatch()) {
       entry->setField(fIt, QString());
     }
   }

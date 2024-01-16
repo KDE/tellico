@@ -166,7 +166,7 @@ int Tellico::LCCComparison::compare(const QString& str1_, const QString& str2_) 
   }
   QStringList cap1 = match1.capturedTexts();
   QStringList cap2 = match2.capturedTexts();
-  // In contrast to QRegExp, QRegularExpression doesn't include an empty string
+  // QRegularExpression doesn't include an empty string
   // in optional captured groups that don't exist
   while(cap1.size() < 8) {
     cap1 += QString();

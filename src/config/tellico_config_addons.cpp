@@ -139,7 +139,7 @@ QStringList Config::surnamePrefixTokens() {
   static QString cacheValue;
   if(cacheValue != Config::surnamePrefixesString()) {
     cacheValue = Config::surnamePrefixesString();
-    const QRegExp commaSpaceSplit = QRegExp(QLatin1String("\\s*[, ]\\s*"));
+    static const QRegularExpression commaSpaceSplit(QLatin1String("\\s*[, ]\\s*"));
     m_surnamePrefixTokens = cacheValue.split(commaSpaceSplit);
   }
   return m_surnamePrefixTokens;
