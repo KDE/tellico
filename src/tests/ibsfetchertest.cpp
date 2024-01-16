@@ -52,7 +52,7 @@ void IBSFetcherTest::testTitle() {
   QVERIFY(results.size() > 0);
   Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until we find the one we want
   foreach(Tellico::Data::EntryPtr testEntry, results) {
-    if(testEntry->title().startsWith(QStringLiteral("Vino & cucina"))) {
+    if(testEntry->title().startsWith(QStringLiteral("Vino & cucina"), Qt::CaseInsensitive)) {
       entry = testEntry;
       break;
     }
@@ -85,7 +85,7 @@ void IBSFetcherTest::testTranslator() {
   Tellico::Data::EntryPtr entry = results.first();
   QCOMPARE(entry->field("title"), QString::fromUtf8("città sepolta"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("8842914975"));
-  QCOMPARE(entry->field("pages"), QStringLiteral("528"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("542"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Avventura"));
   QCOMPARE(entry->field("language"), QStringLiteral("italiano"));
   QCOMPARE(entry->field("author"), QStringLiteral("James Rollins"));
