@@ -84,7 +84,6 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   Data::EntryPtr parseEntry(const QString& str);
-  void fetchToken();
 
   QString m_token;
   int m_total;

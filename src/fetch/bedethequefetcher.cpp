@@ -38,7 +38,7 @@
 #include <KJobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
 
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
@@ -97,15 +97,6 @@ void BedethequeFetcher::search() {
   }
 
   QUrl u(QString::fromLatin1(BD_BASE_URL));
-
-/*
-  fetchToken();
-  if(m_token.isEmpty()) {
-    myDebug() << "empty token";
-    stop();
-    return;
-  }
-*/
 
   QUrlQuery q;
   switch(request().key()) {
@@ -186,31 +177,27 @@ void BedethequeFetcher::slotComplete(KJob*) {
   const int pos_end = output.indexOf(QLatin1String("</ul>"), pos_list+1, Qt::CaseInsensitive);
   output = output.mid(pos_list, pos_end-pos_list);
 
-  QString pat = QStringLiteral("https://m.bedetheque.com/BD");
-  QRegExp anchorRx(QLatin1String("<a\\s+[^>]*href\\s*=\\s*[\"'](") +
-                   QRegExp::escape(pat) +
-                   QLatin1String("[^\"']*)\"[^>]*>(.*)</a"), Qt::CaseInsensitive);
-  anchorRx.setMinimal(true);
+  static const QRegularExpression anchorRx(QLatin1String("<a\\s+?[^>]*?href\\s*?=\\s*?\"(https://m.bedetheque.com/BD.+?)\".*?>(.*?)</a"),
+                                           QRegularExpression::DotMatchesEverythingOption | QRegularExpression::CaseInsensitiveOption);
+  static const QRegularExpression spanRx(QLatin1String("\\sclass\\s*?=\\s*?\"(.+?)\">(.+?)<"),
+                                         QRegularExpression::DotMatchesEverythingOption);
 
-  QRegExp spanRx(QLatin1String("\\sclass\\s*=\\s*\"(.*)\">(.*)<"));
-  spanRx.setMinimal(true);
-
-  for(int pos = anchorRx.indexIn(output); m_started && pos > -1; pos = anchorRx.indexIn(output, pos+anchorRx.matchedLength())) {
-    QString url = anchorRx.cap(1);
-    if(url.isEmpty()) {
-      continue;
-    }
-
-    const QString result = anchorRx.cap(2);
+  auto i = anchorRx.globalMatch(output);
+  while(i.hasNext() && m_started) {
+    auto match = i.next();
+    const auto url = match.capturedRef(1);
+    const auto result = match.capturedRef(2);
     if(result.isEmpty()) {
       continue;
     }
 
     QString title;
     QStringList desc;
-    for(int pos2 = spanRx.indexIn(result); pos2 > -1; pos2 = spanRx.indexIn(result, pos2+spanRx.matchedLength())) {
-      QString cname = spanRx.cap(1);
-      QString value = spanRx.cap(2);
+    auto i2 = spanRx.globalMatch(result);
+    while(i2.hasNext()) {
+      auto spanMatch = i2.next();
+      const auto cname = spanMatch.capturedRef(1);
+      const auto value = spanMatch.captured(2);
       if(cname == QLatin1String("serie")) {
         desc += value;
       } else if(cname == QLatin1String("titre")) {
@@ -222,7 +209,7 @@ void BedethequeFetcher::slotComplete(KJob*) {
 
     if(!title.isEmpty() && !url.isEmpty()) {
       FetchResult* r = new FetchResult(this, title, desc.join(QLatin1String(" ")));
-      m_matches.insert(r->uid, QUrl(url));
+      m_matches.insert(r->uid, QUrl(url.toString()));
       emit signalResultFound(r);
     }
   }
@@ -309,17 +296,17 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
  // map captions in HTML to field names
   QHash<QString, QString> fieldMap;
   fieldMap.insert(QStringLiteral("Série"),       QStringLiteral("series"));
-  fieldMap.insert(QStringLiteral("Titre"),           QStringLiteral("title"));
-  fieldMap.insert(QStringLiteral("Origine"),         QStringLiteral("country"));
-//  fieldMap.insert(QLatin1String("Format"),          QLatin1String("binding"));
+  fieldMap.insert(QStringLiteral("Titre"),       QStringLiteral("title"));
+  fieldMap.insert(QStringLiteral("Origine"),     QStringLiteral("country"));
+//  fieldMap.insert(QLatin1String("Format"),       QLatin1String("binding"));
   fieldMap.insert(QStringLiteral("Scénario"),    QStringLiteral("writer"));
-  fieldMap.insert(QStringLiteral("Dessin"),          QStringLiteral("artist"));
+  fieldMap.insert(QStringLiteral("Dessin"),      QStringLiteral("artist"));
   fieldMap.insert(QStringLiteral("Dépot légal"), QStringLiteral("pub_year"));
-  fieldMap.insert(QStringLiteral("Editeur"),         QStringLiteral("publisher"));
-  fieldMap.insert(QStringLiteral("Planches"),        QStringLiteral("pages"));
-  fieldMap.insert(QStringLiteral("Style"),           QStringLiteral("genre"));
-  fieldMap.insert(QStringLiteral("Tome"),            QStringLiteral("issue"));
-  fieldMap.insert(QStringLiteral("Collection"),      QStringLiteral("edition"));
+  fieldMap.insert(QStringLiteral("Editeur"),     QStringLiteral("publisher"));
+  fieldMap.insert(QStringLiteral("Planches"),    QStringLiteral("pages"));
+  fieldMap.insert(QStringLiteral("Style"),       QStringLiteral("genre"));
+  fieldMap.insert(QStringLiteral("Tome"),        QStringLiteral("issue"));
+  fieldMap.insert(QStringLiteral("Collection"),  QStringLiteral("edition"));
 
   if(optionalFields().contains(QStringLiteral("isbn"))) {
     Data::FieldPtr field = Data::Field::createDefaultField(Data::Field::IsbnField);
@@ -340,70 +327,71 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
     coll->addField(field);
   }
 
-  QRegExp tagRx(QLatin1String("<.*>"));
-  tagRx.setMinimal(true);
-
-  QRegExp yearRx(QLatin1String("\\d{4}"));
+  static const QRegularExpression tagRx(QLatin1String("<.*?>"));
+  static const QRegularExpression yearRx(QLatin1String("\\d{4}"));
   // the negative lookahead with "no-border" is for multiple values
-  QString pat = QStringLiteral("<label>%1.*</label>(.+)</li>(?!\\s*<li class=\"no-border)");
+  const QString pat = QStringLiteral("<label>%1.*?</label>(.+?)</li>(?!\\s*<li class=\"no-border)");
 
   Data::EntryPtr entry(new Data::Entry(coll));
 
   for(QHash<QString, QString>::Iterator it = fieldMap.begin(); it != fieldMap.end(); ++it) {
-    QRegExp infoRx(pat.arg(it.key()));
-    infoRx.setMinimal(true);
-    if(infoRx.indexIn(str_) == -1) {
+    const QRegularExpression infoRx(pat.arg(it.key()),
+                                    QRegularExpression::DotMatchesEverythingOption);
+    auto match = infoRx.match(str_);
+    if(!match.hasMatch()) {
       continue;
     }
     if(it.value() == QLatin1String("pub_year")) {
-      QString data = infoRx.cap(1).remove(tagRx).simplified();
-      if(yearRx.indexIn(data) > -1) {
-        entry->setField(it.value(), yearRx.cap(0));
+      const QString data = match.captured(1).remove(tagRx).simplified();
+      auto yearMatch = yearRx.match(data);
+      if(yearMatch.hasMatch()) {
+        entry->setField(it.value(), yearMatch.captured(0));
       }
     } else if(it.value() == QLatin1String("writer") ||
               it.value() == QLatin1String("artist") ||
               it.value() == QLatin1String("publisher") ||
               it.value() == QLatin1String("colorist")) {
       // catch multiple people
-      QString value = infoRx.cap(1);
+      auto value = match.captured(1);
       // split the values with the "no-border" CSS
       value.replace(QLatin1String("<li class=\"no-border\">"), FieldFormat::delimiterString());
       value = FieldFormat::fixupValue(value.remove(tagRx).simplified());
       entry->setField(it.value(), value);
     } else if(it.value() == QLatin1String("genre")) {
       // replace comma with semi-colons to effectively split string values
-      QString value = infoRx.cap(1).remove(tagRx).simplified();
+      QString value = match.captured(1).remove(tagRx).simplified();
       value.replace(QLatin1String(", "), FieldFormat::delimiterString());
       entry->setField(it.value(), value);
     } else {
-      entry->setField(it.value(), infoRx.cap(1).remove(tagRx).simplified());
+      entry->setField(it.value(), match.captured(1).remove(tagRx).simplified());
     }
     // myDebug() << it.value() << entry->field(it.value());
   }
 
-  QRegExp imgRx(QLatin1String("<img[^<]*src\\s*=\\s*\"([^\"]+)\"\\s+alt\\s*=\\s*\"Couverture"));
-  imgRx.setMinimal(true);
-  if(imgRx.indexIn(str_) > -1) {
-    QUrl u(imgRx.cap(1));
-    QString id = ImageFactory::addImage(u, true);
+  static const QRegularExpression imgRx(QLatin1String("<img.+?src\\s*=\\s*\"(.+?)\"\\s+alt\\s*=\\s*\"Couverture"));
+  auto imgMatch = imgRx.match(str_);
+  if(imgMatch.hasMatch()) {
+    const QUrl u(imgMatch.captured(1));
+    const QString id = ImageFactory::addImage(u, true);
     if(!id.isEmpty()) {
       entry->setField(QStringLiteral("cover"), id);
     }
   }
 
   if(optionalFields().contains(QStringLiteral("comments"))) {
-    QRegExp chronRx(QLatin1String("La chronique\\s*</li>\\s*<li[^>]*>(.*)</ul>"));
-    chronRx.setMinimal(true);
-    if(chronRx.indexIn(str_) > -1) {
-      entry->setField(QStringLiteral("comments"), chronRx.cap(1).trimmed());
+    static const QRegularExpression chronRx(QLatin1String("La chronique\\s*</li>\\s*<li.*?>(.+?)</ul>"),
+                                            QRegularExpression::DotMatchesEverythingOption);
+    auto chronMatch = chronRx.match(str_);
+    if(chronMatch.hasMatch()) {
+      entry->setField(QStringLiteral("comments"), chronMatch.captured(1).trimmed());
     }
   }
 
   if(optionalFields().contains(QStringLiteral("lien-bel"))) {
-    QRegExp linkRx(QLatin1String("<link\\s+rel\\s*=\\s*\"canonical\"\\s+href\\s*=\\s*\"([^\"]+)\""));
-    linkRx.setMinimal(true);
-    if(linkRx.indexIn(str_) > -1) {
-      entry->setField(QStringLiteral("lien-bel"), linkRx.cap(1));
+    static const QRegularExpression linkRx(QLatin1String("<link\\s+rel\\s*=\\s*\"canonical\"\\s+href\\s*=\\s*\"(.+?)\""));
+    auto linkMatch = linkRx.match(str_);
+    if(linkMatch.hasMatch()) {
+      entry->setField(QStringLiteral("lien-bel"), linkMatch.captured(1));
     }
   }
 
@@ -424,16 +412,6 @@ Tellico::Fetch::FetchRequest BedethequeFetcher::updateRequest(Data::EntryPtr ent
     return FetchRequest(Fetch::Title, t);
   }
   return FetchRequest();
-}
-
-void BedethequeFetcher::fetchToken() {
-  QRegExp tokenRx(QLatin1String("name\\s*=\\s*\"csrf_token_bedetheque\"\\s*value\\s*=\\s*\"([^\"]+)\""));
-
-  const QUrl url(QStringLiteral("https://www.bedetheque.com/search/albums"));
-  const QString text = FileHandler::readTextFile(url, true /*quiet*/);
-  if(tokenRx.indexIn(text) > -1) {
-    m_token = tokenRx.cap(1);
-  }
 }
 
 Tellico::Fetch::ConfigWidget* BedethequeFetcher::configWidget(QWidget* parent_) const {
