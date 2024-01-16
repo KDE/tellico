@@ -197,8 +197,11 @@ void Z3950Fetcher::search() {
   }
 
   QString svalue = request().value();
-  QRegExp rx1(QLatin1String("^['\"].*\\1$"));
-  if(!rx1.exactMatch(svalue)) {
+  bool hasQuotes = svalue.startsWith(QLatin1Char('"')) && svalue.endsWith(QLatin1Char('"'));
+  if(!hasQuotes) {
+    hasQuotes = svalue.startsWith(QLatin1Char('\'')) && svalue.endsWith(QLatin1Char('\''));
+  }
+  if(!hasQuotes) {
     svalue = QLatin1Char('"') + svalue + QLatin1Char('"');
   }
 
@@ -207,8 +210,6 @@ void Z3950Fetcher::search() {
       m_pqn = QLatin1String("@attr 1=4 ") + svalue;
       break;
     case Person:
-//      m_pqn = QLatin1String("@or ");
-//      m_pqn += QLatin1String("@attr 1=1 \"") + request().value() + QLatin1Char('"');
       m_pqn = QLatin1String(" @attr 1=1003 ") + svalue;
       break;
     case ISBN:
@@ -265,7 +266,6 @@ void Z3950Fetcher::search() {
       stop();
       return;
   }
-//  m_pqn = QLatin1String("@attr 1=7 0253333490");
 //  myLog() << "PQN query = " << m_pqn;
 
   if(m_conn) {
