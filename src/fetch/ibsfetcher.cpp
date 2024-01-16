@@ -39,7 +39,7 @@
 #include <KJobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
 
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
@@ -246,10 +246,11 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
-  QRegExp jsonRx(QLatin1String("<script type=\"application/ld\\+json\">(.*)</script"));
-  jsonRx.setMinimal(true);
+  static const QRegularExpression jsonRx(QLatin1String("<script type=\"application/ld\\+json\">(.*?)</script"),
+                                         QRegularExpression::DotMatchesEverythingOption);
 
-  if(!str_.contains(jsonRx)) {
+  const auto jsonMatch = jsonRx.match(str_);
+  if(!jsonMatch.hasMatch()) {
     myDebug() << "No JSON block";
     return Data::EntryPtr();
   }
@@ -264,7 +265,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   }
   f.close();
 #endif
-  QJsonDocument doc = QJsonDocument::fromJson(jsonRx.cap(1).toUtf8());
+  QJsonDocument doc = QJsonDocument::fromJson(jsonMatch.capturedRef(1).toUtf8());
   QVariantMap objectMap = doc.object().toVariantMap();
   QVariantMap resultMap = objectMap.value(QStringLiteral("mainEntity")).toMap();
   if(resultMap.isEmpty()) {
@@ -313,55 +314,63 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   entry->setField(QStringLiteral("publisher"), mapValue(resultMap, "publisher"));
 
   // multiple authors do not show up in the embedded JSON
-  QRegExp titleDivRx(QLatin1String("<div id=\"title\">(.*)</div>"));
-  titleDivRx.setMinimal(true);
-  if(str_.contains(titleDivRx)) {
-    const QString titleDiv = titleDivRx.cap(1);
-    QRegExp authorRx(QLatin1String("<a href=\"/libri/autori/[^>]+>(.*)</a>"));
-    authorRx.setMinimal(true);
+  static const QRegularExpression titleDivRx(QLatin1String("<div id=\"title\">(.*?)</div>"),
+                                             QRegularExpression::DotMatchesEverythingOption);
+  const auto titleDivMatch = titleDivRx.match(str_);
+  if(titleDivMatch.hasMatch()) {
+    const QString titleDiv = titleDivMatch.captured(1);
+    static const QRegularExpression authorRx(QLatin1String("<a href=\"/libri/autori/[^>]+?>(.*?)</a>"),
+                                             QRegularExpression::DotMatchesEverythingOption);
     QStringList authors;
-    for(int pos = authorRx.indexIn(titleDiv); pos > -1; pos = authorRx.indexIn(titleDiv, pos+authorRx.matchedLength())) {
-      authors << authorRx.cap(1).simplified();
+    auto i = authorRx.globalMatch(titleDiv);
+    while(i.hasNext()) {
+      const auto match = i.next();
+      authors << match.captured(1).simplified();
     }
     if(!authors.isEmpty()) {
       entry->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
     }
     // the title in the embedded loses its identifier? "La..."
-    QRegExp labelRx(QLatin1String("<label>(.*)</label>"));
-    if(titleDiv.contains(labelRx)) {
-      entry->setField(QStringLiteral("title"), labelRx.cap(1).simplified());
+    static const QRegularExpression labelRx(QLatin1String("<label>(.*?)</label>"),
+                                            QRegularExpression::DotMatchesEverythingOption);
+    const auto labelMatch = labelRx.match(titleDiv);
+    if(labelMatch.hasMatch()) {
+      entry->setField(QStringLiteral("title"), labelMatch.captured(1).simplified());
     }
   }
 
-  QRegExp tagRx(QLatin1String("<.*>"));
-  tagRx.setMinimal(true);
+  static const QRegularExpression tagRx(QLatin1String("<.*?>"));
 
   // editor is not in embedded json
-  QRegExp editorRx(QLatin1String("Curatore:.*>(.*)</a"));
-  editorRx.setMinimal(true);
-  if(str_.contains(editorRx)) {
-    entry->setField(QStringLiteral("editor"), editorRx.cap(1).remove(tagRx).simplified());
+  static const QRegularExpression editorRx(QLatin1String("Curatore:.*?>(.*?)</a"),
+                                           QRegularExpression::DotMatchesEverythingOption);
+  auto match = editorRx.match(str_);
+  if(match.hasMatch()) {
+    entry->setField(QStringLiteral("editor"), match.captured(1).remove(tagRx).simplified());
   }
 
   // translator is not in embedded json
-  QRegExp translatorRx(QLatin1String("Traduttore:.*>(.*)</a"));
-  translatorRx.setMinimal(true);
-  if(str_.contains(translatorRx)) {
-    entry->setField(QStringLiteral("translator"), translatorRx.cap(1).remove(tagRx).simplified());
+  static const QRegularExpression translatorRx(QLatin1String("Traduttore:.*?>(.*?)</a"),
+                                               QRegularExpression::DotMatchesEverythingOption);
+  match = translatorRx.match(str_);
+  if(match.hasMatch()) {
+    entry->setField(QStringLiteral("translator"), match.captured(1).remove(tagRx).simplified());
   }
 
   // edition is not in embedded json
-  QRegExp editionRx(QLatin1String("Editore:.*>(.*)</a"));
-  editionRx.setMinimal(true);
-  if(str_.contains(editionRx)) {
-    entry->setField(QStringLiteral("edition"), editionRx.cap(1).remove(tagRx).simplified());
+  static const QRegularExpression editionRx(QLatin1String("Editore:.*?>(.*?)</a"),
+                                            QRegularExpression::DotMatchesEverythingOption);
+  match = editionRx.match(str_);
+  if(match.hasMatch()) {
+    entry->setField(QStringLiteral("edition"), match.captured(1).remove(tagRx).simplified());
   }
 
   // series is not in embedded json
-  QRegExp seriesRx(QLatin1String("Collana:.*>(.*)</a"));
-  seriesRx.setMinimal(true);
-  if(str_.contains(seriesRx)) {
-    entry->setField(QStringLiteral("series"), seriesRx.cap(1).remove(tagRx).simplified());
+  static const QRegularExpression seriesRx(QLatin1String("Collana:.*?>(.*?)</a"),
+                                           QRegularExpression::DotMatchesEverythingOption);
+  match = seriesRx.match(str_);
+  if(match.hasMatch()) {
+    entry->setField(QStringLiteral("series"), match.captured(1).remove(tagRx).simplified());
   }
 
   return entry;
