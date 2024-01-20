@@ -44,15 +44,18 @@ namespace Tellico {
 
 class AbstractFileReader {
 public:
-  AbstractFileReader(const QUrl& u) : m_url(u) {}
+  AbstractFileReader(const QUrl& u) : m_url(u), m_useFilePreview(false) {}
   virtual ~AbstractFileReader() {}
 
   QUrl url() const { return m_url; }
+  void setUseFilePreview(bool filePreview) { m_useFilePreview = filePreview; }
+  bool useFilePreview() const { return m_useFilePreview; }
 
   virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) = 0;
 
 private:
   QUrl m_url;
+  bool m_useFilePreview;
 };
 
 class FileReaderMetaData : public AbstractFileReader {
@@ -74,8 +77,6 @@ public:
   virtual ~FileReaderFile();
 
   virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) Q_DECL_OVERRIDE;
-
-  void setUseFilePreview(bool filePreview);
 
 private:
   QString volumeName() const;

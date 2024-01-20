@@ -43,9 +43,8 @@ using Tellico::FileReaderBook;
 
 class FileReaderBook::Private {
 public:
-  Private() : useFilePreview(false) {}
+  Private() {}
 
-  bool useFilePreview;
   // cache the icon image ids to avoid repeated creation of Data::Image objects
   QHash<QString, QString> iconImageId;
 };
@@ -54,10 +53,6 @@ FileReaderBook::FileReaderBook(const QUrl& url_) : FileReaderMetaData(url_), d(n
 }
 
 FileReaderBook::~FileReaderBook() = default;
-
-void FileReaderBook::setUseFilePreview(bool filePreview_) {
-  d->useFilePreview = filePreview_;
-}
 
 bool FileReaderBook::populate(Data::EntryPtr entry, const KFileItem& item) {
   // reads pdf and ebooks
@@ -147,7 +142,7 @@ bool FileReaderBook::populate(Data::EntryPtr entry, const KFileItem& item) {
 
   const QString cover = QStringLiteral("cover");
   QPixmap pixmap;
-  if(d->useFilePreview) {
+  if(useFilePreview()) {
     pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
   }
   if(pixmap.isNull()) {

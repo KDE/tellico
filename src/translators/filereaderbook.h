@@ -37,8 +37,6 @@ public:
 
   virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) Q_DECL_OVERRIDE;
 
-  void setUseFilePreview(bool filePreview);
-
 private:
   class Private;
   friend class Private;

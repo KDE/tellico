@@ -83,9 +83,8 @@ KFileMetaData::PropertyMap FileReaderMetaData::properties(const KFileItem& item_
 
 class FileReaderFile::Private {
 public:
-  Private() : useFilePreview(false) {}
+  Private() {}
 
-  bool useFilePreview;
   QString volume;
   QStringList metaIgnore;
   // cache the icon image ids to avoid repeated creation of Data::Image objects
@@ -107,10 +106,6 @@ FileReaderFile::FileReaderFile(const QUrl& url_) : FileReaderMetaData(url_), d(n
 }
 
 FileReaderFile::~FileReaderFile() = default;
-
-void FileReaderFile::setUseFilePreview(bool filePreview_) {
-  d->useFilePreview = filePreview_;
-}
 
 bool FileReaderFile::populate(Data::EntryPtr entry, const KFileItem& item) {
   const QString title    = QStringLiteral("title");
@@ -173,7 +168,7 @@ bool FileReaderFile::populate(Data::EntryPtr entry, const KFileItem& item) {
 #endif
 
   QPixmap pixmap;
-  if(d->useFilePreview) {
+  if(useFilePreview()) {
     pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
   }
   if(pixmap.isNull()) {
