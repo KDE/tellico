@@ -31,18 +31,6 @@
 
 #include <KLocalizedString>
 #include <KFileItem>
-#ifdef HAVE_KFILEMETADATA
-#include <KFileMetaData/Extractor>
-#include <KFileMetaData/ExtractorCollection>
-#include <KFileMetaData/SimpleExtractionResult>
-#include <KFileMetaData/PropertyInfo>
-// kfilemetadata_version.h was added in 5.94, so first use kcoreaddons_version to check
-// with the expectation that the two versions should match or be no less than
-#include <kcoreaddons_version.h>
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5,94,0)
-#include <kfilemetadata_version.h>
-#endif
-#endif
 
 #include <QPixmap>
 #include <QIcon>
@@ -60,13 +48,9 @@ public:
   bool useFilePreview;
   // cache the icon image ids to avoid repeated creation of Data::Image objects
   QHash<QString, QString> iconImageId;
-#ifdef HAVE_KFILEMETADATA
-  KFileMetaData::ExtractorCollection extractors;
-  QHash<KFileMetaData::Property::Property, QString> propertyNameHash;
-#endif
 };
 
-FileReaderBook::FileReaderBook(const QUrl& url_) : AbstractFileReader(url_), d(new Private) {
+FileReaderBook::FileReaderBook(const QUrl& url_) : FileReaderMetaData(url_), d(new Private) {
 }
 
 FileReaderBook::~FileReaderBook() = default;
@@ -87,26 +71,10 @@ bool FileReaderBook::populate(Data::EntryPtr entry, const KFileItem& item) {
 #ifndef HAVE_KFILEMETADATA
   return false;
 #else
-  auto exList = d->extractors.fetchExtractors(item.mimetype());
-  if(exList.isEmpty()) {
-    return false;
-  }
-
-  KFileMetaData::SimpleExtractionResult result(item.url().toLocalFile(),
-                                               item.mimetype(),
-                                               KFileMetaData::ExtractionResult::ExtractMetaData);
-  foreach(auto ex, exList) {
-    ex->extract(&result);
-  }
   bool isEmpty = true;
   QStringList authors, publishers, genres, keywords;
-#if KFILEMETADATA_VERSION >= QT_VERSION_CHECK(5,89,0)
-  auto properties = result.properties(KFileMetaData::PropertiesMapType::MultiMap);
-#else
-  auto properties = result.properties();
-#endif
-  auto it = properties.constBegin();
-  for( ; it != properties.constEnd(); ++it) {
+  const auto props = properties(item);
+  for(auto it = props.constBegin(); it != props.constEnd(); ++it) {
     const QString value = it.value().toString();
     if(value.isEmpty()) continue;
     switch(it.key()) {

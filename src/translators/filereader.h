@@ -25,7 +25,14 @@
 #ifndef TELLICO_FILEREADER_H
 #define TELLICO_FILEREADER_H
 
+#include <config.h>
+
 #include "../datavectors.h"
+
+#ifdef HAVE_KFILEMETADATA
+#include <KFileMetaData/PropertyInfo>
+#include <KFileMetaData/ExtractorCollection>
+#endif
 
 #include <QUrl>
 
@@ -48,11 +55,23 @@ private:
   QUrl m_url;
 };
 
-class FileReaderPrivate;
-class FileReader : public AbstractFileReader {
+class FileReaderMetaData : public AbstractFileReader {
 public:
-  FileReader(const QUrl& u);
-  virtual ~FileReader();
+  FileReaderMetaData(const QUrl& u) : AbstractFileReader(u) {}
+
+  virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) = 0;
+
+protected:
+#ifdef HAVE_KFILEMETADATA
+  KFileMetaData::PropertyMap properties(const KFileItem& item);
+  KFileMetaData::ExtractorCollection m_extractors;
+#endif
+};
+
+class FileReaderFile : public FileReaderMetaData {
+public:
+  FileReaderFile(const QUrl& u);
+  virtual ~FileReaderFile();
 
   virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) Q_DECL_OVERRIDE;
 

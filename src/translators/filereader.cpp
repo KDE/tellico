@@ -22,8 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
-
 #include "filereader.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
@@ -36,9 +34,7 @@
 #include <KFileItem>
 #ifdef HAVE_KFILEMETADATA
 #include <KFileMetaData/Extractor>
-#include <KFileMetaData/ExtractorCollection>
 #include <KFileMetaData/SimpleExtractionResult>
-#include <KFileMetaData/PropertyInfo>
 // kfilemetadata_version.h was added in 5.94, so first use kcoreaddons_version to check
 // with the expectation that the two versions should match or be no less than
 #include <kcoreaddons_version.h>
@@ -54,9 +50,38 @@ namespace {
   static const int FILE_PREVIEW_SIZE = 128;
 }
 
-using Tellico::FileReader;
+using Tellico::FileReaderMetaData;
+using Tellico::FileReaderFile;
 
-class FileReader::Private {
+#ifdef HAVE_KFILEMETADATA
+KFileMetaData::PropertyMap FileReaderMetaData::properties(const KFileItem& item_) {
+  KFileMetaData::SimpleExtractionResult result(item_.url().toLocalFile(),
+                                               item_.mimetype(),
+                                               KFileMetaData::ExtractionResult::ExtractMetaData);
+  QList<KFileMetaData::Extractor*> exList = m_extractors.fetchExtractors(item_.mimetype());
+  foreach(KFileMetaData::Extractor* ex, exList) {
+// initializing exempi can cause a crash in Exiv for files with XMP data
+// crude workaround is to avoid using the exivextractor and the only apparent way is to
+// match against the mimetypes. Here, we use image/x-exv as the canary in the coal mine
+// see https://bugs.kde.org/show_bug.cgi?id=390744
+#ifdef HAVE_EXEMPI
+    if(!ex->mimetypes().contains(QStringLiteral("image/x-exv"))) {
+#else
+    if(true) {
+#endif
+      ex->extract(&result);
+    }
+  }
+#if KFILEMETADATA_VERSION >= QT_VERSION_CHECK(5,89,0)
+  auto props = result.properties(KFileMetaData::PropertiesMapType::MultiMap);
+#else
+  auto props = result.properties();
+#endif
+  return props;
+}
+#endif
+
+class FileReaderFile::Private {
 public:
   Private() : useFilePreview(false) {}
 
@@ -66,12 +91,11 @@ public:
   // cache the icon image ids to avoid repeated creation of Data::Image objects
   QHash<QString, QString> iconImageId;
 #ifdef HAVE_KFILEMETADATA
-  KFileMetaData::ExtractorCollection extractors;
   QHash<KFileMetaData::Property::Property, QString> propertyNameHash;
 #endif
 };
 
-FileReader::FileReader(const QUrl& url_) : AbstractFileReader(url_), d(new Private) {
+FileReaderFile::FileReaderFile(const QUrl& url_) : FileReaderMetaData(url_), d(new Private) {
   // going to assume only one volume will ever be imported
   d->volume = volumeName();
   d->metaIgnore << QStringLiteral("mimeType")
@@ -82,13 +106,13 @@ FileReader::FileReader(const QUrl& url_) : AbstractFileReader(url_), d(new Priva
                 << QStringLiteral("type");
 }
 
-FileReader::~FileReader() = default;
+FileReaderFile::~FileReaderFile() = default;
 
-void FileReader::setUseFilePreview(bool filePreview_) {
+void FileReaderFile::setUseFilePreview(bool filePreview_) {
   d->useFilePreview = filePreview_;
 }
 
-bool FileReader::populate(Data::EntryPtr entry, const KFileItem& item) {
+bool FileReaderFile::populate(Data::EntryPtr entry, const KFileItem& item) {
   const QString title    = QStringLiteral("title");
   const QString url      = QStringLiteral("url");
   const QString desc     = QStringLiteral("description");
@@ -128,31 +152,9 @@ bool FileReader::populate(Data::EntryPtr entry, const KFileItem& item) {
   }
 
 #ifdef HAVE_KFILEMETADATA
-  KFileMetaData::SimpleExtractionResult result(u.toLocalFile(),
-                                               item.mimetype(),
-                                               KFileMetaData::ExtractionResult::ExtractMetaData);
-  QList<KFileMetaData::Extractor*> exList = d->extractors.fetchExtractors(item.mimetype());
-  foreach(KFileMetaData::Extractor* ex, exList) {
-// initializing exempi can cause a crash in Exiv for files with XMP data
-// crude workaround is to avoid using the exivextractor and the only apparent way is to
-// match against the mimetypes. Here, we use image/x-exv as the canary in the coal mine
-// see https://bugs.kde.org/show_bug.cgi?id=390744
-#ifdef HAVE_EXEMPI
-    if(!ex->mimetypes().contains(QStringLiteral("image/x-exv"))) {
-#else
-    if(true) {
-#endif
-      ex->extract(&result);
-    }
-  }
   QStringList strings;
-#if KFILEMETADATA_VERSION >= QT_VERSION_CHECK(5,89,0)
-  auto properties = result.properties(KFileMetaData::PropertiesMapType::MultiMap);
-#else
-  auto properties = result.properties();
-#endif
-  auto it = properties.constBegin();
-  for( ; it != properties.constEnd(); ++it) {
+  const auto props = properties(item);
+  for(auto it = props.constBegin(); it != props.constEnd(); ++it) {
     const QString value = it.value().toString();
     if(!value.isEmpty()) {
       QString label;
@@ -195,7 +197,7 @@ bool FileReader::populate(Data::EntryPtr entry, const KFileItem& item) {
   return true;
 }
 
-QString FileReader::volumeName() const {
+QString FileReaderFile::volumeName() const {
   const QString filePath = url().toLocalFile();
   QString matchingPath, volume;
   QList<Solid::Device> devices = Solid::Device::listFromType(Solid::DeviceInterface::StorageVolume, QString());

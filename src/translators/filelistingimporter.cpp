@@ -106,7 +106,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     case(Data::Collection::File):
       m_coll = new Data::FileCatalog(true);
       {
-        auto ptr = new FileReader(url());
+        auto ptr = new FileReaderFile(url());
         ptr->setUseFilePreview(m_useFilePreview);
         reader.reset(ptr);
       }

@@ -30,7 +30,7 @@
 namespace Tellico {
 
 class FileReaderBookPrivate;
-class FileReaderBook : public AbstractFileReader {
+class FileReaderBook : public FileReaderMetaData {
 public:
   FileReaderBook(const QUrl& u);
   virtual ~FileReaderBook();
