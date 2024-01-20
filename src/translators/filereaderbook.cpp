@@ -28,7 +28,6 @@
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../core/netaccess.h"
-#include "../tellico_debug.h"
 
 #include <KLocalizedString>
 #include <KFileItem>
@@ -85,7 +84,9 @@ bool FileReaderBook::populate(Data::EntryPtr entry, const KFileItem& item) {
      item.mimetype() != QLatin1String("application/x-mobipocket-ebook")) {
     return false;
   }
-#ifdef HAVE_KFILEMETADATA
+#ifndef HAVE_KFILEMETADATA
+  return false;
+#else
   auto exList = d->extractors.fetchExtractors(item.mimetype());
   if(exList.isEmpty()) {
     return false;
