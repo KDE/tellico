@@ -25,7 +25,6 @@
 #include "entrygroupmodel.h"
 #include "models.h"
 #include "../entrygroup.h"
-#include "../collection.h"
 #include "../collectionfactory.h"
 #include "../tellico_debug.h"
 

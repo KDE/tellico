@@ -120,7 +120,7 @@ void GroupView::populateCollection() {
   }
 
   setUpdatesEnabled(false);
-  sourceModel()->clear(); // delete all groups
+  slotReset(); // delete all groups
 
   // if there's no group field, just return
   if(m_groupBy.isEmpty()) {
