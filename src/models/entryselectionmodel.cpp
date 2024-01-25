@@ -47,6 +47,8 @@ void EntrySelectionModel::addSelectionProxy(QItemSelectionModel* selModel_) {
   m_modelList += selModel_;
   connect(selModel_, &QItemSelectionModel::selectionChanged,
           this, &EntrySelectionModel::selectedEntriesChanged);
+  connect(selModel_->model(), &QAbstractItemModel::modelAboutToBeReset,
+          this, [this]() { m_selectedEntries.clear();});
 }
 
 void EntrySelectionModel::selectedEntriesChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
