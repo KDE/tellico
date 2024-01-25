@@ -25,6 +25,7 @@ SET(translators_STAT_SRCS
    filelistingimporter.cpp
    filereader.cpp
    filereaderbook.cpp
+   filereadervideo.cpp
    freedb_util.cpp
    freedbimporter.cpp
    gcstarexporter.cpp

@@ -27,7 +27,9 @@
 #include "filelistingimporter.h"
 #include "filereader.h"
 #include "filereaderbook.h"
+#include "filereadervideo.h"
 #include "../collections/bookcollection.h"
+#include "../collections/videocollection.h"
 #include "../collections/filecatalog.h"
 #include "../entry.h"
 #include "../gui/collectiontypecombo.h"
@@ -56,6 +58,7 @@ FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_), m_c
 
 bool FileListingImporter::canImport(int type) const {
   return type == Data::Collection::Book ||
+      type == Data::Collection::Video ||
       type == Data::Collection::File;
 }
 
@@ -98,6 +101,15 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
       m_coll = new Data::BookCollection(true);
       {
         auto ptr = new FileReaderBook(url());
+        ptr->setUseFilePreview(m_useFilePreview);
+        reader.reset(ptr);
+      }
+      break;
+
+    case(Data::Collection::Video):
+      m_coll = new Data::VideoCollection(true);
+      {
+        auto ptr = new FileReaderVideo(url());
         ptr->setUseFilePreview(m_useFilePreview);
         reader.reset(ptr);
       }
@@ -163,7 +175,7 @@ QWidget* FileListingImporter::widget(QWidget* parent_) {
   m_filePreview->setChecked(false);
 
   QList<int> collTypes;
-  collTypes << Data::Collection::Book << Data::Collection::File;
+  collTypes << Data::Collection::Book << Data::Collection::Video << Data::Collection::File;
   m_collCombo = new GUI::CollectionTypeCombo(gbox);
   m_collCombo->setIncludedTypes(collTypes);
   // default to file catalog
