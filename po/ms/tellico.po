@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-14 03:58+0000\n"
+"POT-Creation-Date: 2024-01-26 03:14+0000\n"
 "PO-Revision-Date: 2009-10-03 23:05+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -4741,7 +4741,7 @@ msgstr ""
 msgid "%1 (Sort by Count)"
 msgstr ""
 
-#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:68
+#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
 #, kde-format
 msgctxt "Group Name Header"
 msgid "Group"

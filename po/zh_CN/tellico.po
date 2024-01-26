@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-14 03:58+0000\n"
+"POT-Creation-Date: 2024-01-26 03:14+0000\n"
 "PO-Revision-Date: 2024-01-21 14:17\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -4742,7 +4742,7 @@ msgstr "按分组过滤"
 msgid "%1 (Sort by Count)"
 msgstr ""
 
-#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:68
+#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
 #, kde-format
 msgctxt "Group Name Header"
 msgid "Group"

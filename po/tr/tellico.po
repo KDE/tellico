@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-14 03:58+0000\n"
+"POT-Creation-Date: 2024-01-26 03:14+0000\n"
 "PO-Revision-Date: 2023-10-01 12:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -4904,7 +4904,7 @@ msgstr "Gruba göre Süz"
 msgid "%1 (Sort by Count)"
 msgstr "%1 (Sayıya Göre Sırala)"
 
-#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:68
+#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
 #, kde-format
 msgctxt "Group Name Header"
 msgid "Group"

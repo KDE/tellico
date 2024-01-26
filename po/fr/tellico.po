@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-14 03:58+0000\n"
+"POT-Creation-Date: 2024-01-26 03:14+0000\n"
 "PO-Revision-Date: 2024-01-04 09:11+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -4983,7 +4983,7 @@ msgstr "Filtrer par groupe"
 msgid "%1 (Sort by Count)"
 msgstr "%1 (Tri par nombres croissants)"
 
-#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:68
+#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
 #, kde-format
 msgctxt "Group Name Header"
 msgid "Group"

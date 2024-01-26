@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-14 03:58+0000\n"
+"POT-Creation-Date: 2024-01-26 03:14+0000\n"
 "PO-Revision-Date: 2020-03-14 11:14+0000\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -4986,7 +4986,7 @@ msgstr "Filtrar por Grupo"
 msgid "%1 (Sort by Count)"
 msgstr "%1 (Classificar por Quantidade)"
 
-#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:68
+#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
 #, kde-format
 msgctxt "Group Name Header"
 msgid "Group"
