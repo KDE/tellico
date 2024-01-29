@@ -39,7 +39,7 @@
 </programlisting>
 
 <para
->El fitxer comença amb la declaració i la codificació &XML; requerides, seguides pel tipus de document. Quan s'afegeix un nou tipus de camp o s'estableixen propietats addicionals en els camps predeterminats, s'incrementarà la versió del tipus de document DTD. El &appname; sempre és capaç d'obrir i llegir qualsevol versió anterior de DTD, però desarà els fitxers en la versió actual. La ubicació de DTD apunta a un fitxer DTD real. </para>
+>El fitxer comença amb la declaració i la codificació &XML; requerides, seguides pel tipus de document. Quan s'afegeix un tipus de camp nou o s'estableixen propietats addicionals en els camps predeterminats, s'incrementarà la versió del tipus de document DTD. El &appname; sempre és capaç d'obrir i llegir qualsevol versió anterior de DTD, però desarà els fitxers en la versió actual. La ubicació de DTD apunta a un fitxer DTD real. </para>
 
 <para
 >L'element de nivell superior és un element <markup
@@ -102,7 +102,7 @@
 <para
 >Tots els camps es defineixen dins d'un element <markup
 >&lt;fields&gt;</markup
->, del qual sols n'hi pot haver un. Tota la informació per a un camp, amb excepció de les propietats, s'inclou com a atributs de l'element <markup
+>, del qual sols n'hi pot haver un. Tota la informació per a un camp, a excepció de les propietats, s'inclou com a atributs de l'element <markup
 >&lt;field&gt;</markup
 >. Els valors permesos per als atributs <markup
 >flags</markup

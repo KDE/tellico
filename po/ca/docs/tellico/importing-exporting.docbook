@@ -193,7 +193,7 @@
 >Si la columna sols té un número a la capçalera, les dades en aquesta columna no s'importaran.</emphasis
 > Haureu d'assignar camps a cada columna seleccionant una columna fent clic sobre seu o canviant el número de la columna en si, llavors seleccioneu el camp a assignar-li des de la llista desplegable i feu clic al botó <guibutton
 >Assigna camp</guibutton
->. Si cal afegir un nou camp a la col·lecció, l'últim element de la llista desplegable obre el <link linkend="fields-dialog"
+>. Si cal afegir un camp nou a la col·lecció, l'últim element de la llista desplegable obre el <link linkend="fields-dialog"
 ><interface
 >diàleg Camps de la col·lecció</interface
 ></link
@@ -366,7 +366,7 @@
 <para
 >La millor manera de crear un <link linkend="file-catalog"
 >catàleg de fitxers</link
-> és importar el contingut d'una carpeta. La carpeta es pot cercar de manera recursiva, per a afegir tots els fitxers que es trobin al seu interior. Aquest importador és més útil per a les llistes de còpia de seguretat i suports de catalogació, com llistats de &CD; o <acronym
+> és importar el contingut d'una carpeta. La carpeta es pot cercar de manera recursiva, per a afegir tots els fitxers que es trobin al seu interior. Aquest importador és més útil per a les llistes de còpies de seguretat i suports de catalogació, com llistats de &CD; o <acronym
 >DVD</acronym
 >. A més, es poden generar les vistes prèvies de les imatges contingudes al fitxer, tot i que podria portar el seu temps llegir un gran nombre de fitxers. Les vistes prèvies de fitxers són les mateixes que es mostren al gestor de fitxers del &kde;. </para>
 </sect2>
@@ -388,7 +388,7 @@
 <para
 >Arrossegar fitxers de dades a la finestra principal del &appname; i deixar-los anar importarà aquests fitxers, com si se seleccionés l'<link linkend="importing"
 >ordre importa</link
-> des dels menús. Arrossegar i deixar anar funciona per als següents formats de fitxer: Tellico, Bibtex, RIS, &PDF; i EPub. També està implementada la importació des de múltiples fitxers alhora.</para>
+> des dels menús. Arrossegar i deixar anar funciona per als formats següents de fitxer: Tellico, Bibtex, RIS, &PDF; i EPub. També està implementada la importació des de múltiples fitxers alhora.</para>
 
 <para
 >De manera que si voleu catalogar diversos <link linkend="importing-pdf"
@@ -459,7 +459,7 @@
 >. </para>
 
 <para
->A més, els fitxers individuals es poden crear per a cada entrada de la col·lecció, amb enllaços creats al fitxer &HTML; de nivell superior. Els fitxers d'entrada seran creats a la mateixa carpeta que les imatges. Els fitxers &HTML; d'entrada utilitzaran la plantilla de full d'estil actual, com es mostra en la <interface
+>A més, els fitxers individuals es poden crear per a cada entrada de la col·lecció, amb enllaços creats al fitxer &HTML; de nivell superior. Els fitxers d'entrada seran creats a la mateixa carpeta que les imatges. Els fitxers &HTML; d'entrada utilitzaran la plantilla de fulls d'estil actual, com es mostra en la <interface
 >Vista d'entrada</interface
 >. </para>
 
@@ -533,7 +533,7 @@
 >Bibtex</ulink
 >, els valors dels camps es poden tancar amb marques de claus o cometes. Si s'utilitzen macros de cadena a la col·lecció, de manera opcional es poden exportar com a macros o expandir-se. Per als camps d'&URL;, el &appname; pot tancar els valors de camp amb l'etiqueta <literal
 >\url{...}</literal
->. Finalment, les entrades sense clau de cita es poden ometre en lloc que el &appname; generi la clau automàticament. </para>
+>. Finalment, les entrades sense clau de cita es poden ometre abans que el &appname; generi la clau automàticament. </para>
 
 <screenshot>
 <screeninfo

@@ -68,7 +68,7 @@
 >. La primera lletra en majúscula i el format són opcions diferents, ja que un camp es pot posar en majúscula la primera lletra sense canviar l'ordre de les paraules, i viceversa. La primera lletra en majúscula automàtica es pot canviar per a ignorar certes paraules. El format automàtic inclou articles gramaticals en els títols, juntament amb prefixos i sufixos per als noms propis. Els valors distingeixen entre majúscules i minúscules, i han d'estar separats per un punt i coma. </para>
 
 <para
->Les regles de format segueixen l'ús general de l'anglès, el qual potser no funciona per a altres idiomes. Els articles s'afegeixen al final del títol, amb una coma. Els noms propis es disposen per a tenir primer el cognom, seguit d'una coma i després el nom. Els sufixos personals, com ara Jr, es mantenen amb el cognom. Els prefixos, com ara <emphasis
+>Les regles de format segueixen l'ús general de l'anglès, el qual potser no funciona per a altres idiomes. Els articles s'afegeixen al final del títol, amb una coma. Els noms propis es disposen per a tenir primer el cognom, seguit d'una coma i després el nom. Els sufixos personals, com ara Jr., es mantenen amb el cognom. Els prefixos, com ara <emphasis
 >von</emphasis
 >, es mantenen amb el cognom, però s'ignoren quan s'ordenen els valors.</para>
 
@@ -538,7 +538,7 @@
 <para
 >Els <ulink url="https://en.wikipedia.org/wiki/Open_Publication_Distribution_System"
 >catàlegs OPDS</ulink
-> proporcionen un mitjà per cercar (i distribuir) llibres digitals. El &tellico; pot utilitzar molts catàlegs OPDS com a font de dades, com ara el <ulink url="https://wiki.mobileread.com/wiki/OPDS"
+> proporcionen un mitjà per a cercar (i distribuir) llibres digitals. El &tellico; pot utilitzar molts catàlegs OPDS com a font de dades, com ara el <ulink url="https://wiki.mobileread.com/wiki/OPDS"
 >Projecte Gutenberg</ulink
 >. Introduïu l'enllaç al catàleg i verifiqueu l'accés i el format per a confirmar que el &tellico; pot llegir l'enllaç. </para>
 </sect3>
