@@ -37,7 +37,7 @@ or menu bars.
 <listitem>
 <para
 >Aquesta ordre <action
->crea una nova col·lecció</action
+>crea una col·lecció nova</action
 >. El &tellico; implementa <link linkend="collection-types"
 >12 tipus predeterminats de col·leccions</link
 > juntament amb una col·lecció personalitzada buida definida per l'usuari. També hi haurà disponible qualsevol plantilla de col·lecció desada a mida.</para>
@@ -135,7 +135,7 @@ or menu bars.
 <listitem>
 <para
 >Aquesta ordre <action
->desa la col·lecció a un nou fitxer</action
+>desa la col·lecció a un fitxer nou</action
 >.</para>
 </listitem>
 </varlistentry>
@@ -154,7 +154,7 @@ or menu bars.
   <para
 >Aquesta ordre <action
 >desa la col·lecció com a una plantilla nova</action
->. Nomes es desen els camps, i el tipus personalitzat de col·lecció es pot crear a partir de l'ordre <guimenuitem
+>. Només es desen els camps, i el tipus personalitzat de col·lecció es pot crear a partir de l'ordre <guimenuitem
 >Col·lecció nova</guimenuitem
 >.</para>
 </listitem>
@@ -536,7 +536,7 @@ or menu bars.
 > <guimenu
 >Col·lecció</guimenu
 > <guimenuitem
->Nova entrada</guimenuitem
+>Entrada nova</guimenuitem
 > </menuchoice>
 </term>
 
