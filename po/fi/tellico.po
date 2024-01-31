@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-17 01:39+0000\n"
-"PO-Revision-Date: 2023-10-30 14:10+0200\n"
+"PO-Revision-Date: 2023-12-27 17:21+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -3787,10 +3787,9 @@ msgid "Discogs Audio Search"
 msgstr "Discogs-äänihaku"
 
 #: src/fetch/discogsfetcher.cpp:573 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "Käyttäjätunniste: "
+msgstr "Käyttäjämerkki:"
 
 #: src/fetch/doubanfetcher.cpp:351 src/fetch/doubanfetcher.cpp:369
 #: src/fetch/doubanfetcher.cpp:387 src/fetch/doubanfetcher.cpp:619
@@ -4326,10 +4325,9 @@ msgid "Subscriber PIN: "
 msgstr "Tilaajan PIN:"
 
 #: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:371
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Colnect-linkki"
+msgstr "VGCollect-linkki"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -5391,12 +5389,12 @@ msgstr "Tuo <tstonimi> PDF-tiedostona"
 #: src/main.cpp:152
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "Vie diagnostiikka lokiin"
 
 #: src/main.cpp:153
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "Kirjoita lokituloste nimelle <tiedostonimi>"
 
 #: src/main.cpp:154
 #, kde-format
@@ -5764,16 +5762,14 @@ msgid "Import audio CD information"
 msgstr "Tuo ääni-CD:n tietoa"
 
 #: src/mainwindow.cpp:462
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Tuo Goodreads-kokoelma…"
+msgstr "Tuo Discogs-kokoelma…"
 
 #: src/mainwindow.cpp:463
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Tuo kokoelman Goodreads.comista"
+msgstr "Tuo kokoelman Discogs.comista"
 
 #: src/mainwindow.cpp:465
 #, kde-format
@@ -6214,7 +6210,7 @@ msgstr "Käytä muokkainta tai poista se käytöstä"
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "Näytä loki"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6489,11 +6485,10 @@ msgstr ""
 "tuodaan."
 
 #: src/mainwindow.cpp:2597
-#, fuzzy, kde-format
-#| msgid "Tellico"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Tellico"
+msgstr "Tellicon loki"
 
 #: src/reportdialog.cpp:91
 #, kde-format
@@ -7044,10 +7039,9 @@ msgid "<New Field>"
 msgstr "<Uusi kenttä>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Discogs-linkki"
+msgstr "Discogs-valinnat"
 
 #: src/translators/filelistingimporter.cpp:67
 #, kde-format
@@ -7363,10 +7357,9 @@ msgstr "Yhteensä:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
-msgstr "Lainaukset"
+msgstr "Lainaa"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
