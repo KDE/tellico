@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-26 03:14+0000\n"
-"PO-Revision-Date: 2023-10-30 14:10+0200\n"
+"PO-Revision-Date: 2023-12-27 17:21+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -3826,10 +3826,9 @@ msgid "Discogs Audio Search"
 msgstr "Discogs-äänihaku"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "Käyttäjätunniste: "
+msgstr "Käyttäjämerkki:"
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:618
@@ -4366,10 +4365,9 @@ msgid "Subscriber PIN: "
 msgstr "Tilaajan PIN:"
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Colnect-linkki"
+msgstr "VGCollect-linkki"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -5781,16 +5779,14 @@ msgid "Import audio CD information"
 msgstr "Tuo ääni-CD:n tietoa"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Tuo Goodreads-kokoelma…"
+msgstr "Tuo Discogs-kokoelma…"
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Tuo kokoelman Goodreads.comista"
+msgstr "Tuo kokoelman Discogs.comista"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7075,10 +7071,9 @@ msgid "<New Field>"
 msgstr "<Uusi kenttä>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Discogs-linkki"
+msgstr "Discogs-valinnat"
 
 #: src/translators/filelistingimporter.cpp:87
 #, kde-format
