@@ -160,7 +160,7 @@
 
 <para
 >Pour chaque champ de la collection, une <markup
->&lt;entry&gt;</markup
+>&lt;entrée&gt;</markup
 > peut contenir un élément dont le nom est identique au nom d'un champ. Si plusieurs valeurs sont permises pour le champ, la lettre <emphasis
 >s</emphasis
 > est ensuite ajoutée au nom de champ pour créer un élément et chaque valeur est ajoutée comme un enfant de l'élément, comme dans le cas des champs author (auteur), genre et keyword (mot clé) ci-dessus. </para>
@@ -183,7 +183,7 @@
 <para
 >Dans l'élément <markup
 >&lt;images&gt;</markup
->, chaque image référencée par une entrée est listée, avec des attributs décrivant la taille de l'image, le format et l'ID. Si l'image est contenue dans le fichier zip, l'élément est vide. Sinon, l'image peut être ajoutée au flux &XML;, sous forme de texte et encodée en base64. </para>
+>, chaque image référencée par une entrée est listée, avec des attributs décrivant la taille de l'image, le format et l'identifiant. Si l'image est contenue dans le fichier « zip », l'élément est vide. Sinon, l'image peut être ajoutée au flux &XML;, sous forme de texte et encodée en base64. </para>
 </sect3>
 
 </sect2>
@@ -195,7 +195,7 @@
 >Valeurs du type de collection</title>
 
 <para
->Le type de collection est indiqué par l'attribut type de l'élément de la collection. La valeur est identique à la valeur enum <type
+>Le type de collection est indiqué par l'attribut type de l'élément de la collection. La valeur est identique à la valeur d'énumération <type
 >Type</type
 > dans <filename
 >src/collection.h</filename
@@ -314,7 +314,7 @@
 >, la catégorie de champ doit être identique au titre de champ. </para>
 
 <para
->Le type d'un champ est donné dans l'attribut type de l'élément champ. La valeur est identique à la valeur enum <type
+>Le type d'un champ est donné dans l'attribut type de l'élément champ. La valeur est identique à la valeur d'énumération de <type
 >FieldType</type
 > dans <filename
 >src/field.h</filename
@@ -546,8 +546,8 @@
 >KDEHOME</envar
 >/share/config/tellicorc</filename
 >. Dans ce fichier, les réglages sont regroupés dans des sections avec des noms entre crochets, tel que « [General Options] ». Pour ajouter un paramètre au groupe <emphasis
->General Options</emphasis
->, cherchez la ligne dans le fichier de configuration avec ce nom de groupe. S'il n'apparaît pas, créez-le vous-même en ajoutant une ligne intitulée [General Options]. Le paramètre peut ensuite être ajouté sous le nom de groupe. </para>
+>Options générales</emphasis
+>, cherchez la ligne dans le fichier de configuration avec ce nom de groupe. S'il n'apparaît pas, créez-le vous-même en ajoutant une ligne intitulée [Options générales]. Le paramètre peut ensuite être ajouté sous le nom de groupe. </para>
 
 <sect2 id="hidden-general-options">
 <title
@@ -611,7 +611,7 @@
 
 <sect3>
 <title
->Image Cache Size</title>
+>Taille du cache d'image</title>
 
 <para
 >La taille maximale de mémoire allouée, en octets, à la mise en cache de toutes les images peut être modifiée avec ce paramètre. La valeur par défaut est 67108864. </para>

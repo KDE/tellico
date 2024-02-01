@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2015, 2020, 2021, 2022, 2023 g.sora <g.sora@tiscali.it>
-# giovanni <g.sora@tiscali.it>, 2023.
+# giovanni <g.sora@tiscali.it>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-17 01:39+0000\n"
-"PO-Revision-Date: 2023-11-13 15:51+0100\n"
+"PO-Revision-Date: 2024-01-31 11:48+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -4104,17 +4104,17 @@ msgstr "Episodes"
 #: src/fetch/imdbfetcher.cpp:585
 #, kde-format
 msgid "Locale"
-msgstr ""
+msgstr "Local"
 
 #: src/fetch/imdbfetcher.cpp:588
 #, kde-format
 msgid "Use system locale"
-msgstr ""
+msgstr "Usa locale de systema"
 
 #: src/fetch/imdbfetcher.cpp:589
 #, kde-format
 msgid "Use custom locale"
-msgstr ""
+msgstr "Usa local personalisate"
 
 #: src/fetch/isbndbfetcher.cpp:361
 #, kde-format
@@ -4621,7 +4621,7 @@ msgstr "Netta omne campos e resultatos de cerca"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p%"
 
 #: src/fetchdialog.cpp:396
 #, kde-format
