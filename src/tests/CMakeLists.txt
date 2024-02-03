@@ -331,6 +331,7 @@ ecm_add_test(filelistingtest.cpp
              ../translators/filelistingimporter.cpp
              ../translators/filereader.cpp
              ../translators/filereaderbook.cpp
+             ../translators/filereadervideo.cpp
              ../translators/xmphandler.cpp
              ../gui/collectiontypecombo.cpp
              ../gui/combobox.cpp
