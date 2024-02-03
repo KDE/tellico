@@ -117,7 +117,7 @@ Entries can be edited directly with the &DBus; interface. Given an entry ID, <co
 <title>&DBus; Examples</title>
 
 <para>
-Here are some examples for scripting &appname; using the &DBus; interface.
+Here are some examples for scripting &appname; using the &DBus; interface. Note that the <command>qdbus</command> command may exist as <command>qdbus-qt5</command> or something similar on your system.
 </para>
 
 <screen width="40">
