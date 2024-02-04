@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-17 01:39+0000\n"
+"POT-Creation-Date: 2024-02-04 01:38+0000\n"
 "PO-Revision-Date: 2023-08-19 13:35+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -229,7 +229,8 @@ msgstr "Nere bilduma"
 #: src/collections/stampcollection.cpp:32
 #: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
 #: src/document.cpp:531 src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
-#: src/translators/filereaderbook.cpp:173
+#: src/translators/filereaderbook.cpp:137
+#: src/translators/filereadervideo.cpp:122
 #, kde-format
 msgid "Personal"
 msgstr "Pertsonala"
@@ -915,7 +916,9 @@ msgstr "Gako-hitzak"
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:440 src/fetch/entrezfetcher.cpp:516
 #: src/fetch/opdsfetcher.cpp:436 src/field.cpp:200
-#: src/translators/filereaderbook.cpp:172 src/translators/gcstarimporter.cpp:89
+#: src/translators/filereaderbook.cpp:136
+#: src/translators/filereadervideo.cpp:121
+#: src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "URL"
 msgstr "URL"
@@ -1114,7 +1117,7 @@ msgid "Trade Paperback"
 msgstr "paper-azaleko zainduagoa"
 
 #: src/collections/bookcollection.cpp:72 src/fetch/ibsfetcher.cpp:294
-#: src/fetch/itunesfetcher.cpp:421 src/translators/filereaderbook.cpp:177
+#: src/fetch/itunesfetcher.cpp:421 src/translators/filereaderbook.cpp:141
 #, kde-format
 msgid "E-Book"
 msgstr "Liburu elektronikoa"
@@ -4824,7 +4827,7 @@ msgstr "Iragazi taldearen arabera"
 msgid "%1 (Sort by Count)"
 msgstr "%1 (sailkatu kopuruaren arabera)"
 
-#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:68
+#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
 #, kde-format
 msgctxt "Group Name Header"
 msgid "Group"
@@ -7014,34 +7017,34 @@ msgstr ""
 msgid "Discogs Options"
 msgstr "«Discogs»en esteka"
 
-#: src/translators/filelistingimporter.cpp:67
+#: src/translators/filelistingimporter.cpp:70
 #, fuzzy, kde-format
 msgid "Scanning files..."
 msgstr "Fitxategiak aztertzen..."
 
-#: src/translators/filelistingimporter.cpp:151
+#: src/translators/filelistingimporter.cpp:163
 #, kde-format
 msgid "File Listing Options"
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:154
+#: src/translators/filelistingimporter.cpp:166
 #, kde-format
 msgid "Recursive folder search"
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:155
+#: src/translators/filelistingimporter.cpp:167
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 "Markatuta badago, karpetetan fitxategi guztien bila errekurtsiboki bilatzen "
 "da."
 
-#: src/translators/filelistingimporter.cpp:159
+#: src/translators/filelistingimporter.cpp:171
 #, kde-format
 msgid "Generate file previews"
 msgstr "Sortu fitxategien aurreikuspegiak"
 
-#: src/translators/filelistingimporter.cpp:160
+#: src/translators/filelistingimporter.cpp:172
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

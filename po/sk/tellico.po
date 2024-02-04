@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-17 01:39+0000\n"
+"POT-Creation-Date: 2024-02-04 01:38+0000\n"
 "PO-Revision-Date: 2022-04-07 18:20+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -239,7 +239,8 @@ msgstr "Moja zbierka"
 #: src/collections/stampcollection.cpp:32
 #: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
 #: src/document.cpp:531 src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
-#: src/translators/filereaderbook.cpp:173
+#: src/translators/filereaderbook.cpp:137
+#: src/translators/filereadervideo.cpp:122
 #, kde-format
 msgid "Personal"
 msgstr "Osobný"
@@ -933,7 +934,9 @@ msgstr "Kľúčové slová"
 #: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
 #: src/fetch/entrezfetcher.cpp:440 src/fetch/entrezfetcher.cpp:516
 #: src/fetch/opdsfetcher.cpp:436 src/field.cpp:200
-#: src/translators/filereaderbook.cpp:172 src/translators/gcstarimporter.cpp:89
+#: src/translators/filereaderbook.cpp:136
+#: src/translators/filereadervideo.cpp:121
+#: src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "URL"
 msgstr "URL"
@@ -1132,7 +1135,7 @@ msgid "Trade Paperback"
 msgstr "Obchodná brožovaná kniha"
 
 #: src/collections/bookcollection.cpp:72 src/fetch/ibsfetcher.cpp:294
-#: src/fetch/itunesfetcher.cpp:421 src/translators/filereaderbook.cpp:177
+#: src/fetch/itunesfetcher.cpp:421 src/translators/filereaderbook.cpp:141
 #, kde-format
 msgid "E-Book"
 msgstr "E-Book"
@@ -4880,7 +4883,7 @@ msgstr "Filtrovať podľa skupiny"
 msgid "%1 (Sort by Count)"
 msgstr "%1 (Zoradiť podľa počtu)"
 
-#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:68
+#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
 #, kde-format
 msgctxt "Group Name Header"
 msgid "Group"
@@ -7120,32 +7123,32 @@ msgstr "<Nové pole>"
 msgid "Discogs Options"
 msgstr "Odkaz Discogs"
 
-#: src/translators/filelistingimporter.cpp:67
+#: src/translators/filelistingimporter.cpp:70
 #, kde-format
 msgid "Scanning files..."
 msgstr "Skenovanie súborov..."
 
-#: src/translators/filelistingimporter.cpp:151
+#: src/translators/filelistingimporter.cpp:163
 #, kde-format
 msgid "File Listing Options"
 msgstr "Možnosti výpisu súboru"
 
-#: src/translators/filelistingimporter.cpp:154
+#: src/translators/filelistingimporter.cpp:166
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Rekurzívne prehľadávanie zložky"
 
-#: src/translators/filelistingimporter.cpp:155
+#: src/translators/filelistingimporter.cpp:167
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "Ak je zaškrtnuté, zložky sú rekurzívne prehľadávané pre všetky súbory."
 
-#: src/translators/filelistingimporter.cpp:159
+#: src/translators/filelistingimporter.cpp:171
 #, kde-format
 msgid "Generate file previews"
 msgstr "Vytvoriť náhľady súborov"
 
-#: src/translators/filelistingimporter.cpp:160
+#: src/translators/filelistingimporter.cpp:172
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
