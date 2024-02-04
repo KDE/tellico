@@ -36,11 +36,11 @@ or menu bars.
 
 <listitem>
 <para
->This command <action
->creates a new collection</action
->. &tellico; supports <link linkend="collection-types"
->12 default collection types</link
-> along with an empty user-defined custom collection.</para>
+>Deze opdracht <action
+>maakt een nieuwe verzameling</action
+>. &tellico; ondersteunt <link linkend="collection-types"
+>12 standaard typen verzamelingen</link
+> naast een lege gebruikergedefinieerde aangepaste verzameling. Elke zelf opgeslagen verzameling van sjablonen zal ook beschikbaar zijn.</para>
 </listitem>
 </varlistentry>
 
@@ -143,6 +143,26 @@ or menu bars.
 <varlistentry>
 <term>
  <menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Opslaan als sjabloon...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+  <para
+>Deze opdracht <action
+>slaat de verzameling op als een nieuw sjabloon</action
+>. Alleen worden de velden opgeslagen en het eigen type verzameling kan aangemaakt worden via het commando <guimenuitem
+>Nieuwe verzameling</guimenuitem
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
 ><shortcut
 > <keycombo action="simul"
 >&Ctrl;<keycap
@@ -163,6 +183,24 @@ or menu bars.
 >. Afdrukopties kunnen ingesteld worden in de <interface
 >Instellingendialoog</interface
 >.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Afdrukvoorbeeld</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>toont een voorbeeld van de af te drukken verzameling</action
+></para>
 </listitem>
 </varlistentry>
 
@@ -908,6 +946,43 @@ or menu bars.
 >Deze opdracht <action
 >wijzigt het veld gebruikt voor het groeperen van de items</action
 > in de collectie.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Indeling vergrendelen</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>vergrendelt de indeling</action
+> zodat de verschillende weergaven van verzamelingen niet verplaatst kunnen worden. De indeling ontgrendelen biedt de gebruiker ze opnieuw te arrangeren.</para>
+</listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Indeling resetten</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Deze opdracht <action
+>reset de indeling</action
+> naar de standaard weergave, die behulpzaam kan zijn als de verschillende weergaven verborgen of ingevouwen worden.</para>
 </listitem>
 </varlistentry>
 

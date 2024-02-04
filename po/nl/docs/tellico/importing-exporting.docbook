@@ -108,9 +108,13 @@
 >Gegevens importeren uit andere software</title>
 
 <para
->&appname; can import data directly from a variety of other collection management programs, including <application
-><ulink url="http://www.gcstar.org"
+>&appname; kan gegevens direct importeren uit een variëteit van andere programma's voor beheer van verzamelingen, inclusief <application
+><ulink url="https://gitlab.com/GCstar/GCstar"
 >GCstar</ulink
+></application
+>, <application
+><ulink url="https://www.datacrow.net/"
+>Data Crow</ulink
 ></application
 >, <application
 ><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
@@ -132,7 +136,7 @@
 ><ulink url="https://en.wikipedia.org/wiki/Referencer"
 >Referencer</ulink
 ></application
->, and <application
+> en <application
 ><ulink url="https://launchpad.net/griffith"
 >Griffith</ulink
 ></application
@@ -206,9 +210,9 @@
 >Gegevens van audio-cd's importeren</title>
 
 <para
->&appname; is able to use the <ulink url="http://freedb.org"
+>&appname; kan de service <ulink url="http://gnudb.org"
 >freedb.org</ulink
-> service to lookup information about a &CD;, including the track list. Depending on your distribution, settings for access to the service may be set in the &kde; &systemsettings;. The &CD; artist, title, genre, year, and track listing are all added. </para>
+> gebruiken om informatie over een &CD; te gebruiken, inclusief de tracklijst. Afhankelijk van uw distributie, kunnen instellingen voor toegang tot de service ingesteld worden in het &kde; &systemsettings;. De artiest, titel, genre, jaar en tracklijst worden allen toegevoegd. </para>
 
 <para
 >Bovendien, als de schijf &CD;-tekst bevat, dan wordt die informatie gelezen en toegevoegd aan het geïmporteerde item. </para>
@@ -347,6 +351,15 @@
 >. </para>
 </sect3>
 
+<sect3 id="importing-discogs">
+<title
+>Discogs-verzameling importeren</title>
+<para
+><ulink url="https://www.discogs.com"
+>Discogs</ulink
+> is een online database en marktplaats voor muziekuitgaven. &appname; kan de lijst met muziekuitgaven in een verzameling van een gebruiker importeren, gegeven de gebruikersnaam, zolang de verzameling is ingesteld als publiek toegankelijk. </para>
+</sect3>
+
 </sect2>
 
 <sect2 id="importing-file-listing">
@@ -376,9 +389,9 @@
 >Slepen en loslaten</title>
 
 <para
->Dragging data files to the main &appname; window and dropping them will import the files, just as if the <link linkend="importing"
->import command</link
-> was made from the menus. Drag and drop works for the following file formats: Tellico, Bibtex, RIS, and &PDF;. Importing multiple files at once is also supported.</para>
+>Slepen van gegevensbestanden naar het hoofdvenster van &appname; en ze loslaten zal de bestanden importeren, evenals indien het <link linkend="importing"
+>importcommando</link
+> was gegeven vanuit de menu's. Slepen en loslaten werkt voor de volgende bestandsformaten: Tellico, Bibtex, RIS, &PDF; en EPub. Meerdere bestanden tegelijk importeren wordt ook ondersteund.</para>
 
 <para
 >Dus als u bijvoorbeeld verschillende <link linkend="importing-pdf"

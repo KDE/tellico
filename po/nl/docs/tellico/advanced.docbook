@@ -12,18 +12,19 @@
 >. </para>
 
 <programlisting
->Usage: tellico [options] [filename]
+>Gebruik: tellico [opties] [bestandsnaam]
 
-Tellico - collection management software, free and simple
+Tellico - software voor beheer van verzamelingen, vtij en eenvoudig
 
-Options:
-  --nofile                  Do not reopen the last open file
-  --bibtex                  Import &lt;filename&gt; as a bibtex file
-  --mods                    Import &lt;filename&gt; as a MODS file
-  --ris                     Import &lt;filename&gt; as a RIS file
+Opties:
+  --nofile                  Het laatst geopende bestand niet opnieuw openen
+  --bibtex                  &lt;bestandsnaam&gt; importeren als een bibtex-bestand
+  --mods                    &lt;bestandsnaam&gt; importeren als een MODS-bestand
+  --ris                     &lt;bestandsnaam&gt; importeren als een RIS-bestand
+  --pdf                     &lt;filename&gt; importeren als een PDF-bestand
 
-Arguments:
-  [filename]                File to open
+Argumenten:
+  bestandsnaam              Te openen bestand
 </programlisting>
 
 </sect1>
