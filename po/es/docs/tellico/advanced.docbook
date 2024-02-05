@@ -14,7 +14,7 @@
 <programlisting
 >Usage: tellico [options] [filename]
 
-Tellico - collection management software, free and simple
+Tellico - a KDE collection manager
 
 Options:
   --nofile                  Do not reopen the last open file
@@ -23,7 +23,7 @@ Options:
   --ris                     Import &lt;filename&gt; as a RIS file
 
 Arguments:
-  [filename]                File to open
+  filename                  File to open
 </programlisting>
 
 </sect1>
@@ -60,20 +60,19 @@ Arguments:
 >:</para>
 
 <programlisting
->bool importTellico(QString archivo, QString acción)
-bool importBibtex(QString archivo, QString acción)
-bool importMODS(QString archivo, QString acción)
-bool importPDF(QString archivo, QString acción)
-bool importRIS(QString archivo, QString acción)
-bool exportXML(QString archivo, bool filtrado)
-bool exportZip(QString archivo, bool filtrado)
-bool exportBibtex(QString archivo, bool filtrado)
-bool exportHTML(QString archivo, bool filtrado)
-bool exportCSV(QString archivo, bool filtrado)
+>bool importTellico(QString file, QString action)
+bool importBibtex(QString file, QString action)
+bool importMODS(QString file, QString action)
+bool importRIS(QString file, QString action)
+bool exportXML(QString file, bool filtered)
+bool exportZip(QString file, bool filtered)
+bool exportBibtex(QString file, bool filtered)
+bool exportHTML(QString file, bool filtered)
+bool exportCSV(QString file, bool filtered)
 QList&lt;int&gt; selectedEntries()
 QList&lt;int&gt; filteredEntries()
-void openFile(QString archivo)
-void setFilter(QString texto)
+void openFile(QString file)
+void setFilter(QString text)
 bool showEntry(int id)
 </programlisting>
 
@@ -164,7 +163,7 @@ bool addEntryValue(int entryID, QString fieldName, QString value)
 >Ejemplos de &DBus;</title>
 
 <para
->Aquí tiene algunos ejemplos sobre cómo usar &appname; con la interfaz &DBus;. </para>
+>Here are some examples for scripting &appname; using the &DBus; interface. </para>
 
 <screen width="40"
 ><emphasis

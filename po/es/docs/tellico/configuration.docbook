@@ -264,6 +264,12 @@
 >Open Movie Database</link
 >,</simpara
 ></listitem>
+<listitem
+><simpara
+><link linkend="animenfo"
+>AnimeNfo.com</link
+>,</simpara
+></listitem>
 <!-- comics -->
 <listitem
 ><simpara
@@ -358,12 +364,6 @@
 ><simpara
 ><link linkend="colnect"
 >Colnect</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="numista"
->Numista</link
 >,</simpara
 ></listitem>
 <!-- others -->
@@ -605,6 +605,14 @@
 > is an online movie information service, based in France. Browser Identification must be enabled in &systemsettings; </para>
 </sect3>
 
+<sect3 id="animenfo">
+<title
+>AnimeNfo.com</title>
+<para
+><ulink url="http://www.animenfo.com"
+>AnimeNfo</ulink
+> is a popular site for information on anime, or Japanese animation. </para>
+</sect3>
 </sect2>
 
 <!-- start of music sources -->
@@ -711,7 +719,7 @@
 <!-- start of coin sources -->
 <sect2 id="coin-sources">
 <title
->Fuentes de datos de monedas y sellos</title>
+>Coin Data Sources</title>
 
 <sect3 id="colnect">
 <title
@@ -719,16 +727,7 @@
 <para
 ><ulink url="https://colnect.com"
 >Colnect</ulink
-> is an online community for collectibles providing personal collection management. &tellico; can search Colnect for coin and stamp information. </para>
-</sect3>
-
-<sect3 id="numista">
-<title
->Numista</title>
-<para
-><ulink url="https://numista.com"
->Numista</ulink
-> es un catálogo de monedas del mundo que crece gracias a la contribución de sus miembros y que ofrece gestión de colecciones en línea, herramientas para realizar intercambios de forma fácil con otros coleccionistas y un foro. </para>
+> is an online community for collectibles providing personal collection management. &tellico; can search Colnect for coin information. </para>
 </sect3>
 
 </sect2>
@@ -807,7 +806,7 @@
 <title
 >Múltiples fuentes de datos combinadas</title>
 <para
->Se pueden usar combinaciones de hasta ocho fuentes de datos existentes como una fuente única, donde cada resultado de la búsqueda de la primera fuente se actualiza desde las siguientes fuentes. Debe establecerse el tipo de colección que se utilizará antes de añadir fuentes. </para>
+>Combinations of up to eight existing data sources can be used as a single source, where the search results from all the sources are merged. The collection type to be used must be set before adding sources. </para>
 
 <screenshot>
 <mediaobject>
@@ -817,7 +816,7 @@
 </screenshot>
 
 <para
->Solo se pueden usar en combinación las fuentes de datos existentes. Solo el tipo de búsqueda de la primera fuente se puede usar en esta fuente, ya que el resultado procede de la primera fuente de datos. Por ejemplo, se puede hacer primero una búsqueda en UPCitemDb, con la que cada resultado se actualiza después desde TheMovieDB. </para>
+>Only existing data sources can be used in combination. The search request is sent to each source, and the results are combined. Since the merged results depend on the order of the search results, the combined set may be different depending on network and source speed. </para>
 </sect2>
 
 </sect1>

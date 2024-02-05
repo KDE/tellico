@@ -191,13 +191,11 @@
 ></title>
 
 <para
->Si hay filtros guardados para la colección, la <interface
->Vista de filtro</interface
-> estará activa. A medida que añada y modifique entradas, estas se compararán con los filtros y se añadirán o eliminarán, según sea el caso. Puede modificar el filtro haciendo doble clic en el elemento para abrir el <link linkend="filter-dialog"
-><interface
->Diálogo de filtro avanzado</interface
-></link
->. Haga clic con el botón derecho para poder eliminarlo de todas formas. </para>
+>If any filters are saved for the collection, the <interface
+>Filter View</interface
+> becomes active. As you add or modify entries, they will automatically be checked against the filters and add or removed as appropriate. The filter may be modified by double-clicking on the item to open the <interface
+>Advanced Filter Dialog</interface
+>. Right-clicking gives you the option to delete it altogether. </para>
 
 <screenshot>
 <screeninfo
@@ -832,9 +830,9 @@
 </screenshot>
 
 <para
->Cada fila contiene una sola regla de filtrado. Seleccione el campo que quiera hacer coincidir con la primera casilla de la fila, y seleccione la regla de coincidencia en el centro. Las reglas pueden hacer coincidir valores que contengan una determinada palabra, o que sean exactamente iguales. También se puede usar una expresión regular para emparejar entradas, en cuyo caso el botón <guibutton
->Editar...</guibutton
-> se vuelve activo para editar la expresión, si &kregexpeditor; está instalado en su equipo. Finalmente, la palabra o cadena que emparejar se debe introducir en el cuadro de texto. Para los campos de imagen, puede usar el tamaño de la imagen para filtrar donde el valor del filtro se compara con la dimensión más grande de la imagen, ya sea su anchura o su altura. </para>
+>Each row contains a single filter rule. Select the field to match in the first box in the row, then select a matching rule in the center. Rules may match values that contain a certain word, or are exactly equal. A regular expression may also be used to match entries, in which case the <guibutton
+>Edit...</guibutton
+> button becomes active for editing the expression, if &kregexpeditor; is installed on your computer. Finally, the word or string to match should be entered in the text box. </para>
 
 <para
 >Se pueden usar hasta ocho (8) reglas en el filtrado. Los botones <guibutton

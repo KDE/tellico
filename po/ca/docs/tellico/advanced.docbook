@@ -165,7 +165,11 @@ bool addEntryValue(int entryID, QString fieldName, QString valor)
 >Exemples de &DBus;</title>
 
 <para
->Aquests són alguns exemples de scripts creats per al &appname; utilitzant la interfície de &DBus;. </para>
+>Aquests són alguns exemples de scripts creats per al &appname; utilitzant la interfície de &DBus;. Tingueu en compte que l'ordre <command
+>qdbus</command
+> pot existir com <command
+>qdbus-qt5</command
+> o alguna cosa semblant en el vostre sistema. </para>
 
 <screen width="40"
 ><emphasis
