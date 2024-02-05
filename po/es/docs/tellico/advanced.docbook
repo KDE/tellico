@@ -165,7 +165,11 @@ bool addEntryValue(int entryID, QString fieldName, QString value)
 >Ejemplos de &DBus;</title>
 
 <para
->Aquí tiene algunos ejemplos sobre cómo usar &appname; con la interfaz &DBus;. </para>
+>Estos son algunos ejemplos de guiones de &appname; que usan la interfaz &DBus;. Tenga en cuenta que la orden <command
+>qdbus</command
+> puede existir con el nombre <command
+>qdbus-qt5</command
+> u otro similar en su sistema. </para>
 
 <screen width="40"
 ><emphasis
