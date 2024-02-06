@@ -1,14 +1,14 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the tellico package.
 # Jung Hee Lee <daemul72@gmail.com>, 2019, 2021.
-# Shinjo Park <kde@peremen.name>, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2024 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-04 01:38+0000\n"
-"PO-Revision-Date: 2023-07-25 01:20+0200\n"
+"PO-Revision-Date: 2024-02-05 21:58+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -277,10 +277,9 @@ msgid "Card Collection"
 msgstr "카드 소장품"
 
 #: src/collectionfactory.cpp:93
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "동영상 소장품"
+msgstr "비디오 게임 소장품"
 
 #: src/collectionfactory.cpp:94
 #, kde-format
@@ -1427,10 +1426,9 @@ msgid "Icon"
 msgstr "아이콘"
 
 #: src/collections/gamecollection.cpp:39
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "내 동영상"
+msgstr "내 비디오 게임"
 
 #: src/collections/gamecollection.cpp:61
 #, kde-format
@@ -3759,8 +3757,7 @@ msgid "Discogs Audio Search"
 msgstr "Discogs 오디오 검색"
 
 #: src/fetch/discogsfetcher.cpp:573 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
 msgstr "사용자 토큰: "
 
@@ -4050,17 +4047,17 @@ msgstr "에피소드"
 #: src/fetch/imdbfetcher.cpp:585
 #, kde-format
 msgid "Locale"
-msgstr ""
+msgstr "로캘"
 
 #: src/fetch/imdbfetcher.cpp:588
 #, kde-format
 msgid "Use system locale"
-msgstr ""
+msgstr "시스템 로캘 사용"
 
 #: src/fetch/imdbfetcher.cpp:589
 #, kde-format
 msgid "Use custom locale"
-msgstr ""
+msgstr "사용자 정의 로캘 사용"
 
 #: src/fetch/isbndbfetcher.cpp:361
 #, kde-format
@@ -4295,10 +4292,9 @@ msgid "Subscriber PIN: "
 msgstr "가입자 PIN:"
 
 #: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:371
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Colnect 링크"
+msgstr "VGCollect 링크"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -4563,7 +4559,7 @@ msgstr "모든 검색 필드 및 결과 지우기"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p%"
 
 #: src/fetchdialog.cpp:396
 #, kde-format
@@ -5347,12 +5343,12 @@ msgstr "PDF 파일로 <filename> 가져오기"
 #: src/main.cpp:152
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "진단 로그 기록"
 
 #: src/main.cpp:153
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "<filename>으로 로그 출력 기록"
 
 #: src/main.cpp:154
 #, kde-format
@@ -5460,16 +5456,14 @@ msgid "Create a new wine collection"
 msgstr "새 와인 소장품 만들기"
 
 #: src/mainwindow.cpp:305
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "새 게임 소장품(&G)"
+msgstr "새 비디오 게임 소장품(&G)"
 
 #: src/mainwindow.cpp:306
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "새 동영상 소장품 만들기"
+msgstr "새 비디오 게임 소장품 만들기"
 
 #: src/mainwindow.cpp:308
 #, kde-format
@@ -5722,16 +5716,14 @@ msgid "Import audio CD information"
 msgstr "오디오 CD 정보 가져오기"
 
 #: src/mainwindow.cpp:462
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Goodreads 소장품 가져오기..."
+msgstr "Discogs 소장품 가져오기..."
 
 #: src/mainwindow.cpp:463
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Goodreads.com에서 소장품 가져오기"
+msgstr "Discogs.com에서 소장품 가져오기"
 
 #: src/mainwindow.cpp:465
 #, kde-format
@@ -6172,7 +6164,7 @@ msgstr "편집기 활성화/비활성화"
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "로그 표시"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6445,11 +6437,10 @@ msgstr ""
 "Tellico는 한 번에 이 형식의 파일 하나만 가져올 수 있습니다. %1만 가져옵니다."
 
 #: src/mainwindow.cpp:2597
-#, fuzzy, kde-format
-#| msgid "Tellico Files"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Tellico 파일"
+msgstr "Tellico 로그"
 
 #: src/reportdialog.cpp:91
 #, kde-format
@@ -6990,10 +6981,9 @@ msgid "<New Field>"
 msgstr "<새 필드>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Discogs 링크"
+msgstr "Discogs 옵션"
 
 #: src/translators/filelistingimporter.cpp:70
 #, kde-format
@@ -7306,8 +7296,7 @@ msgstr "전체:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
 msgstr "대여"
 
