@@ -1,14 +1,14 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the tellico package.
 # Jung Hee Lee <daemul72@gmail.com>, 2019, 2021.
-# Shinjo Park <kde@peremen.name>, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2024 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-26 03:14+0000\n"
-"PO-Revision-Date: 2023-07-25 01:20+0200\n"
+"PO-Revision-Date: 2024-02-05 21:58+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3793,8 +3793,7 @@ msgid "Discogs Audio Search"
 msgstr "Discogs 오디오 검색"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
 msgstr "사용자 토큰: "
 
@@ -4330,10 +4329,9 @@ msgid "Subscriber PIN: "
 msgstr "가입자 PIN:"
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Colnect 링크"
+msgstr "VGCollect 링크"
 
 #: src/fetch/videogamegeekfetcher.cpp:201
 #, kde-format
@@ -5306,10 +5304,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - 간단한 자유 소프트웨어 소장품 관리 도구"
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2023, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr "(c) 2001-2023, Robby Stephenson"
+msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
@@ -5732,16 +5729,14 @@ msgid "Import audio CD information"
 msgstr "오디오 CD 정보 가져오기"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Goodreads 소장품 가져오기..."
+msgstr "Discogs 소장품 가져오기..."
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Goodreads.com에서 소장품 가져오기"
+msgstr "Discogs.com에서 소장품 가져오기"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7014,10 +7009,9 @@ msgid "<New Field>"
 msgstr "<새 필드>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Discogs 링크"
+msgstr "Discogs 옵션"
 
 #: src/translators/filelistingimporter.cpp:87
 #, kde-format
