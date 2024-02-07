@@ -46,26 +46,26 @@ public:
 
 public Q_SLOTS:
   Q_SCRIPTABLE bool importTellico(const QString& file, const QString& action)
-    { return importFile(Import::TellicoXML, QUrl::fromUserInput(file), actionType(action)); }
+    { return importFile(Import::TellicoXML, file, actionType(action)); }
   Q_SCRIPTABLE bool importBibtex(const QString& file, const QString& action)
-    { return importFile(Import::Bibtex, QUrl::fromUserInput(file), actionType(action)); }
+    { return importFile(Import::Bibtex, file, actionType(action)); }
   Q_SCRIPTABLE bool importMODS(const QString& file, const QString& action)
-    { return importFile(Import::MODS, QUrl::fromUserInput(file), actionType(action)); }
+    { return importFile(Import::MODS, file, actionType(action)); }
   Q_SCRIPTABLE bool importRIS(const QString& file, const QString& action)
-    { return importFile(Import::RIS, QUrl::fromUserInput(file), actionType(action)); }
+    { return importFile(Import::RIS, file, actionType(action)); }
   Q_SCRIPTABLE bool importPDF(const QString& file, const QString& action)
-    { return importFile(Import::PDF, QUrl::fromUserInput(file), actionType(action)); }
+    { return importFile(Import::PDF, file, actionType(action)); }
 
   Q_SCRIPTABLE bool exportXML(const QString& file, bool filtered=false)
-    { return exportCollection(Export::TellicoXML, QUrl::fromUserInput(file), filtered); }
+    { return exportCollection(Export::TellicoXML, file, filtered); }
   Q_SCRIPTABLE bool exportZip(const QString& file, bool filtered=false)
-    { return exportCollection(Export::TellicoZip, QUrl::fromUserInput(file), filtered); }
+    { return exportCollection(Export::TellicoZip, file, filtered); }
   Q_SCRIPTABLE bool exportBibtex(const QString& file, bool filtered=false)
-    { return exportCollection(Export::Bibtex, QUrl::fromUserInput(file), filtered); }
+    { return exportCollection(Export::Bibtex, file, filtered); }
   Q_SCRIPTABLE bool exportHTML(const QString& file, bool filtered=false)
-    { return exportCollection(Export::HTML, QUrl::fromUserInput(file), filtered); }
+    { return exportCollection(Export::HTML, file, filtered); }
   Q_SCRIPTABLE bool exportCSV(const QString& file, bool filtered=false)
-    { return exportCollection(Export::CSV, QUrl::fromUserInput(file), filtered); }
+    { return exportCollection(Export::CSV, file, filtered); }
 
   Q_SCRIPTABLE QList<int> selectedEntries();
   Q_SCRIPTABLE QList<int> filteredEntries();
@@ -75,8 +75,8 @@ public Q_SLOTS:
   Q_SCRIPTABLE virtual bool showEntry(int id);
 
 private:
-  virtual bool importFile(Import::Format format, const QUrl& url, Import::Action action);
-  virtual bool exportCollection(Export::Format format, const QUrl& url, bool filtered);
+  virtual bool importFile(Import::Format format, const QString& file, Import::Action action);
+  virtual bool exportCollection(Export::Format format, const QString& file, bool filtered);
 
   Import::Action actionType(const QString& actionName);
 
