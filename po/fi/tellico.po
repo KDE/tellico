@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the tellico package.
 # Teuvo Eloranta <teuvo@piketa.fi>, 2009.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
-# Tommi Nieminen <translator@legisign.org>, 2016, 2019, 2023.
+# Tommi Nieminen <translator@legisign.org>, 2016, 2019, 2023, 2024.
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-26 03:14+0000\n"
-"PO-Revision-Date: 2023-12-27 17:21+0200\n"
+"PO-Revision-Date: 2024-02-02 17:33+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -5353,10 +5353,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico – vapaa ja yksinkertainen kokoelmanhallintaohjelma"
 
 #: src/main.cpp:123
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2023, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr "© 2001–2023 Robby Stephenson"
+msgstr "© 2001–2024 Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
