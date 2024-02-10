@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-04 01:38+0000\n"
-"PO-Revision-Date: 2024-01-02 16:06+0300\n"
+"PO-Revision-Date: 2024-02-09 19:02+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.01.85\n"
+"X-Generator: Lokalize 24.01.95\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5755,12 +5755,12 @@ msgstr "Ses dosyalarından üst veri içe aktar"
 #: src/mainwindow.cpp:456
 #, kde-format
 msgid "Import Audio CD Data..."
-msgstr "Ses CD'si Verisi İçe Aktar..."
+msgstr "Ses CD’si Verisi İçe Aktar..."
 
 #: src/mainwindow.cpp:457
 #, kde-format
 msgid "Import audio CD information"
-msgstr "Ses CD'si bilgisi içe aktar"
+msgstr "Ses CD’si bilgisi içe aktar"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7117,7 +7117,7 @@ msgstr "Çeşitli"
 #: src/translators/freedbimporter.cpp:504
 #, kde-format
 msgid "Audio CD Options"
-msgstr "Ses CD'si Seçenekleri"
+msgstr "Ses CD’si Seçenekleri"
 
 #: src/translators/freedbimporter.cpp:511
 #, kde-format
