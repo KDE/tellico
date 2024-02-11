@@ -4,7 +4,6 @@ ADD_SUBDIRECTORY( scripts )
 
 SET(fetch_STAT_SRCS
    adsfetcher.cpp
-   allocinefetcher.cpp
    amazonfetcher.cpp
    amazonrequest.cpp
    arxivfetcher.cpp

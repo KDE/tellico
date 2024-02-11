@@ -83,7 +83,7 @@ enum Type {
   GoogleBook,
   MAS, // Removed
   Springer,
-  Allocine,
+  Allocine, // Removed
   ScreenRush, // Removed
   FilmStarts, // Removed
   SensaCine, // Removed

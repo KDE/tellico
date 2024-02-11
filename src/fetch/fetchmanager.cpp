@@ -27,7 +27,6 @@
 #include "fetchmanager.h"
 #include "configwidget.h"
 #include "messagehandler.h"
-#include "../entry.h"
 #include "../collection.h"
 #include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
@@ -363,7 +362,6 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   }
   if(langs.contains(QStringLiteral("fr"))) {
     FETCHER_ADD(DVDFr);
-    FETCHER_ADD(Allocine);
   }
   if(langs.contains(QStringLiteral("ru"))) {
     FETCHER_ADD(KinoPoisk);

@@ -526,20 +526,6 @@ ecm_add_test(adsfetchertest.cpp
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )
 
-ecm_add_test(allocinefetchertest.cpp
-             ../fetch/allocinefetcher.cpp
-             ../fetch/execexternalfetcher.cpp
-             ../translators/bibteximporter.cpp
-             ../translators/risimporter.cpp
-             ../gui/collectiontypecombo.cpp
-    TEST_NAME allocinefetchertest
-    LINK_LIBRARIES fetcherstest
-                   translatorstest
-                   newstuff
-                   ${TELLICO_BTPARSE_LIBS}
-                   ${TELLICO_TEST_LIBS}
-)
-
 ecm_add_test(amazonfetchertest.cpp
              ../fetch/amazonfetcher.cpp
              ../fetch/amazonrequest.cpp

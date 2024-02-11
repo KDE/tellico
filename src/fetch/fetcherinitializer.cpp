@@ -55,7 +55,6 @@
 #include "moviemeterfetcher.h"
 #include "googlebookfetcher.h"
 #include "springerfetcher.h"
-#include "allocinefetcher.h"
 #include "thegamesdbfetcher.h"
 #include "dblpfetcher.h"
 #include "mrlookupfetcher.h"
@@ -111,7 +110,6 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::GoogleBookFetcher> registerGoogleBook(GoogleBook);
   RegisterFetcher<Fetch::HathiTrustFetcher> registerHathiTrust(HathiTrust);
   RegisterFetcher<Fetch::VNDBFetcher> registerVNDB(VNDB);
-  RegisterFetcher<Fetch::AllocineFetcher> registerAllocine(Allocine);
   RegisterFetcher<Fetch::MovieMeterFetcher> registerMovieMeter(MovieMeter);
   RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
   RegisterFetcher<Fetch::DoubanFetcher> registerDouban(Douban);
