@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "imagejob.h"
+#include "../utils/guiproxy.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -87,7 +88,7 @@ void ImageJob::slotStart() {
     emitResult();
   } else {
     KIO::JobFlags flags = KIO::DefaultFlags;
-    if(m_quiet) {
+    if(m_quiet || !GUI::Proxy::widget()) {
       flags |= KIO::HideProgressInfo;
     }
     // non-local valid url
