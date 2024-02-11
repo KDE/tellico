@@ -54,7 +54,7 @@
       Pride And Prejudice, the story of Mrs. Bennet's attempts to marry off her five daughters is one of the best-loved and most enduring classics in English literature. Excitement fizzes through the Bennet household at Longbourn in Hertfordshire when y...
     </summary>
     <link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://www.feedbooks.com/book/52.epub"/>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
     <link type="application/atom+xml;type=entry;profile=opds-catalog" title="Full entry" rel="alternate" href="entry.xml"/>
   </entry>
@@ -77,7 +77,7 @@
     <rights>This work is available for countries where copyright is Life+70 and in the USA.</rights>
     <dcterms:extent>120,697 words</dcterms:extent>
     <link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://www.feedbooks.com/book/52.epub"/>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
     <link type="text/html" rel="related" href="http://www.feedbooks.com/book/52" title="Some link for the test"/>
   </entry>
@@ -103,7 +103,7 @@
     <rights>This work is available for countries where copyright is Life+70 and in the USA.</rights>
     <dcterms:extent>120,697 words</dcterms:extent>
     <link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://www.feedbooks.com/book/52.epub"/>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
     <link type="text/html" rel="related" href="http://www.feedbooks.com/book/52" title="Some link for the test"/>
   </entry>
@@ -126,7 +126,7 @@
     <rights>This work is available for countries where copyright is Life+70 and in the USA.</rights>
     <dcterms:extent>120,697 words</dcterms:extent>
     <link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://www.feedbooks.com/book/52.epub"/>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
     <link type="text/html" rel="related" href="http://www.feedbooks.com/book/52" title="Some link for the test"/>
   </entry>
@@ -149,7 +149,7 @@
     <rights>This work is available for countries where copyright is Life+70 and in the USA.</rights>
     <dcterms:extent>120,697 words</dcterms:extent>
     <link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://www.feedbooks.com/book/52.epub"/>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
     <link type="text/html" rel="related" href="http://www.feedbooks.com/book/52" title="Some link for the test"/>
   </entry>
@@ -172,7 +172,7 @@
     <rights>This work is available for countries where copyright is Life+70 and in the USA.</rights>
     <dcterms:extent>120,697 words</dcterms:extent>
     <link type="application/epub+zip" rel="http://opds-spec.org/acquisition/open-access" href="http://www.feedbooks.com/book/52.epub"/>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
     <link type="text/html" rel="related" href="http://www.feedbooks.com/book/52" title="Some link for the test"/>
   </entry>
@@ -195,7 +195,7 @@
     <rights>This work is available for countries where copyright is Life+70 and in the USA.</rights>
     <dcterms:extent>120,697 words</dcterms:extent>
     <link type="application/epub+zip" rel="http://opds-spec.org/acquisition/sample" href="http://www.feedbooks.com/book/52.epub"/>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
     <link type="text/html" rel="related" href="http://www.feedbooks.com/book/52" title="Some link for the test"/>
   </entry>
@@ -221,7 +221,7 @@
       <opds:price currencycode="USD">10.99</opds:price>
       <opds:indirectAcquisition type="application/epub+zip"/>
     </link>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
     <link type="text/html" rel="related" href="http://www.feedbooks.com/book/52" title="Some link for the test"/>
   </entry>
@@ -247,7 +247,7 @@
       <opds:price currencycode="EUR">4.99</opds:price>
       <opds:indirectAcquisition type="application/epub+zip"/>
     </link>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
     <link type="text/html" rel="related" href="http://www.feedbooks.com/book/52" title="Some link for the test"/>
   </entry>
@@ -270,7 +270,7 @@
     <link type="text/html" rel="http://opds-spec.org/acquisition/borrow" href="http://www.feedbooks.com/book/52">
       <opds:indirectAcquisition type="application/epub+zip"/>
     </link>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
   </entry>
 
@@ -293,7 +293,7 @@
       <opds:indirectAcquisition type="application/epub+zip"/>
     </link>
     <link type="application/epub+zip" rel="http://opds-spec.org/acquisition/sample" href="http://www.feedbooks.com/book/52.epub"/>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
     <link type="application/atom+xml;type=entry;profile=opds-catalog" title="Full entry" rel="alternate" href="sample_borrow.xml"/>
   </entry>
@@ -317,7 +317,7 @@
       <opds:indirectAcquisition type="application/epub+zip"/>
       <opds:unavailable date="2016-10-12"/>
     </link>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
   </entry>
 
@@ -341,7 +341,7 @@
       <opds:indirectAcquisition type="application/epub+zip"/>
       <opds:unavailable date="2016-10-12"/>
     </link>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
   </entry>
 
@@ -368,7 +368,7 @@
       <opds:indirectAcquisition type="application/epub+zip"/>
     </link>
     <link type="application/epub+zip" rel="http://opds-spec.org/acquisition/sample" href="http://www.feedbooks.com/book/52.epub"/>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
   </entry>
 
@@ -390,7 +390,7 @@
     <link type="text/html" rel="http://opds-spec.org/acquisition" href="http://www.feedbooks.com/book/52">
       <opds:indirectAcquisition type="application/epub+zip"/>
     </link>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
   </entry>
 
@@ -412,7 +412,7 @@
     <link type="text/imaginarytype" rel="http://opds-spec.org/acquisition" href="http://www.feedbooks.com/book/52">
       <opds:indirectAcquisition type="application/epub+zip"/>
     </link>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/fb23724a101bd7100cd0360b8ad368bc.jpeg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
   </entry>
 

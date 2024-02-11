@@ -56,7 +56,7 @@ void OPDSFetcherTest::testFeedbooksSearch() {
   cg.writeEntry("Custom Fields", "url");
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       "9781773231341");
+                                       "9781515461234");
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
   QVERIFY(fetcher->canSearch(request.key()));
   fetcher->readConfig(cg);
@@ -67,13 +67,13 @@ void OPDSFetcherTest::testFeedbooksSearch() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field("title"), "First Lensman");
-  QCOMPARE(entry->field("author"), "E. E. Smith");
-  QCOMPARE(entry->field("isbn"), "978-1-77323-134-1");
-  QCOMPARE(entry->field("pub_year"), "2018");
-  QCOMPARE(entry->field("publisher"), "Reading Essentials");
-  QCOMPARE(entry->field("genre"), "Fiction; Science fiction; Space opera and planet opera");
-  QCOMPARE(entry->field("pages"), "226");
-  QCOMPARE(entry->field("url"), "https://www.feedbooks.com/item/2971293");
+  QCOMPARE(entry->field("author"), "E. E. \"Doc\" Smith");
+  QCOMPARE(entry->field("isbn"), "978-1-51546-123-4");
+  QCOMPARE(entry->field("pub_year"), "2023");
+  QCOMPARE(entry->field("publisher"), "Positronic Publishing");
+  QCOMPARE(entry->field("genre"), "Fiction; Science fiction; Adventure; Short stories");
+  QCOMPARE(entry->field("pages"), "180");
+  QCOMPARE(entry->field("url"), "https://www.feedbooks.com/item/5582241");
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
   QVERIFY(!entry->field("plot").isEmpty());

@@ -33,7 +33,7 @@
     <rights>This work is available for countries where copyright is Life+70 and in the USA.</rights>
     <dcterms:extent>120,697 words</dcterms:extent>
     <link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://www.feedbooks.com/book/52.epub"/>
-    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../larger.jpg"/>
+    <link type="image/jpeg" rel="http://opds-spec.org/image" href="../data/img1.jpg"/>
     <link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="../thumbnail.jpg"/>
     <link type="text/html" rel="related" href="http://www.feedbooks.com/book/52" title="Some link for the test"/>
   </entry>
