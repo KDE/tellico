@@ -362,10 +362,15 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
 
   int count = 0;
   foreach(const QVariant& result, resultList) {
+    // skip people results
+    const auto map = result.toMap();
+    if(mapValue(map, "media_type") == QLatin1String("person")) {
+      continue;
+    }
 //    myDebug() << "found result:" << result;
 
     Data::EntryPtr entry(new Data::Entry(coll));
-    populateEntry(entry, result.toMap(), false);
+    populateEntry(entry, map, false);
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
