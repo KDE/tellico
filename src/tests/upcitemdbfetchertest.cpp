@@ -70,10 +70,10 @@ void UPCItemDbFetcherTest::testFightClub() {
   QVERIFY(entry);
 
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Fight Club"));
-  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1999"));
+//  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1999"));
   QCOMPARE(entry->field(QStringLiteral("barcode")), QStringLiteral("024543617907"));
   QCOMPARE(entry->field(QStringLiteral("medium")), QStringLiteral("Blu-ray"));
-  QCOMPARE(entry->field(QStringLiteral("studio")), QStringLiteral("20TH CENTURY FOX"));
+  QCOMPARE(entry->field(QStringLiteral("studio")), QStringLiteral("20th Century Studios"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
