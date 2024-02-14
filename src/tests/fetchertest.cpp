@@ -56,6 +56,7 @@ void FetcherTest::testType() {
                                                                                     QString::number(f->type()))));
     QVERIFY(f->uuid().isEmpty());
     QVERIFY(!f->isSearching());
+    QVERIFY(!f->hasMoreResults());
 
     Tellico::Data::Collection::Type cType = Tellico::Data::Collection::Base;
     // BoardGame is the last collection type (currently)
