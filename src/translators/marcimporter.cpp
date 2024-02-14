@@ -171,9 +171,9 @@ QWidget* MarcImporter::widget(QWidget* parent_) {
     charSets += QStringLiteral("ISO-8859-1");
   }
 #if (QT_VERSION < QT_VERSION_CHECK(5, 11, 0))
-  auto textWidth = parent_->fontMetrics().width(charSets.last());
+  auto textWidth = m_widget->fontMetrics().width(charSets.last());
 #else
-  auto textWidth = parent_->fontMetrics().horizontalAdvance(charSets.last());
+  auto textWidth = m_widget->fontMetrics().horizontalAdvance(charSets.last());
 #endif
   m_charSetCombo->setMinimumWidth(1.5*textWidth);
   QString lastCharSet = config.readEntry("Last Character Set");

@@ -33,11 +33,12 @@
 #include "../utils/datafileregistry.h"
 
 #include <KLocalizedString>
+#include <KComboBox>
 
 #include <QTest>
 #include <QStandardPaths>
 
-QTEST_APPLESS_MAIN( MarcTest )
+QTEST_MAIN( MarcTest )
 
 void MarcTest::initTestCase() {
   KLocalizedString::setApplicationDomain("tellico");
@@ -70,4 +71,21 @@ void MarcTest::testMarc() {
   QCOMPARE(entry->field("author"), QStringLiteral("Jansson, Tove"));
   QCOMPARE(entry->field("pub_year"), QStringLiteral("1998"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("951-500880-8"));
+}
+
+void MarcTest::testWidget() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.mrc"));
+  Tellico::Import::MarcImporter importer(url);
+  QScopedPointer<QWidget> widget(importer.widget(nullptr));
+  QVERIFY(widget);
+
+  auto boxes = widget->findChildren<KComboBox *>();
+  QCOMPARE(boxes.size(), 2);
+  auto box1 = static_cast<KComboBox*>(boxes[0]);
+  QCOMPARE(box1->itemText(0), QLatin1String("UTF-8"));
+  auto box2 = static_cast<KComboBox*>(boxes[1]);
+  QCOMPARE(box2->itemText(0), QLatin1String("MARC21"));
+
+  importer.setCharacterSet(QStringLiteral("iso-8859-1"));
+  QCOMPARE(box1->currentText(), QLatin1String("iso-8859-1"));
 }

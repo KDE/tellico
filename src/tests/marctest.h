@@ -33,6 +33,7 @@ Q_OBJECT
 private Q_SLOTS:
   void initTestCase();
   void testMarc();
+  void testWidget();
 };
 
 #endif
