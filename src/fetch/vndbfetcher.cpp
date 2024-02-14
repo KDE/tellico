@@ -84,6 +84,18 @@ void VNDBFetcher::search() {
   m_started = true;
   m_data.clear();
 
+  QByteArray get("get vn basic,details ");
+  switch(request().key()) {
+    case Title:
+      get += "(search ~ \"" + request().value().toUtf8() + "\")";
+      break;
+
+    default:
+      myWarning() << source() << "- key not recognized:" << request().key();
+      stop();
+      return;
+  }
+
   if(!m_socket) {
     m_socket = new QTcpSocket(this);
     QObject::connect(m_socket, &QTcpSocket::readyRead,     this, &VNDBFetcher::slotRead);
@@ -121,18 +133,6 @@ void VNDBFetcher::search() {
       stop();
       return;
     }
-  }
-
-  QByteArray get("get vn basic,details ");
-  switch(request().key()) {
-    case Title:
-      get += "(search ~ \"" + request().value().toUtf8() + "\")";
-      break;
-
-    default:
-      myWarning() << source() << "- key not recognized:" << request().key();
-      stop();
-      return;
   }
 
   m_state = GetVN;
