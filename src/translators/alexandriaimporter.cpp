@@ -25,7 +25,6 @@
 #include "alexandriaimporter.h"
 #include "../collections/bookcollection.h"
 #include "../entry.h"
-#include "../field.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../utils/isbnvalidator.h"
@@ -44,6 +43,9 @@
 
 using Tellico::Import::AlexandriaImporter;
 
+AlexandriaImporter::AlexandriaImporter() : Importer(), m_widget(nullptr), m_library(nullptr), m_cancelled(false) {
+}
+
 bool AlexandriaImporter::canImport(int type) const {
   return type == Data::Collection::Book;
 }
@@ -57,7 +59,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
     dataDir.setPath(m_libraryPath);
   } else {
     // no widget and no explicit set of the library path means we fail
-    myWarning() << "no widget and no library path";
+    myLog() << "Alexandria importer has no library path";
     return Data::CollPtr();
   }
   // just a sanity check

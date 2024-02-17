@@ -52,6 +52,9 @@ DiscogsImporter::DiscogsImporter() : Import::Importer(), m_widget(nullptr), m_us
 
 void DiscogsImporter::setConfig(KSharedConfig::Ptr config_) {
   m_config = config_;
+  KConfigGroup cg(m_config, QStringLiteral("ImportOptions - Discogs"));
+  m_user = cg.readEntry("User ID");
+  m_token = cg.readEntry("API Key"); // same config name as used in discogsfetcher
 }
 
 bool DiscogsImporter::canImport(int type) const {
@@ -64,12 +67,8 @@ Tellico::Data::CollPtr DiscogsImporter::collection() {
   }
 
   if(!m_config) {
-    m_config = KSharedConfig::openConfig();
+    setConfig(KSharedConfig::openConfig());
   }
-
-  KConfigGroup cg(m_config, QStringLiteral("ImportOptions - Discogs"));
-  m_user = cg.readEntry("User ID");
-  m_token = cg.readEntry("API Key"); // same config name as used in discogsfetcher
 
   if(m_widget) {
     m_user = m_userEdit->text().trimmed();
@@ -77,6 +76,7 @@ Tellico::Data::CollPtr DiscogsImporter::collection() {
   }
 
   if(m_user.isEmpty()) {
+    myLog() << "Discogs importer is missing the user ID";
     setStatusMessage(i18n("A valid user ID must be entered."));
     return Data::CollPtr();
   }
@@ -115,7 +115,7 @@ void DiscogsImporter::loadPage(int page_) {
     myLog() << "DiscogsFetcher -" << msg;
   }
   const int totalPages = mapValue(resultMap, "pagination", "pages").toInt();
-//  myDebug() << "total pages:" << totalPages << "current:" << page_;
+  myLog() << "Reading page" << page_ << "of" << totalPages << "from Discogs collection";
   foreach(const QVariant& release, resultMap.value(QLatin1String("releases")).toList()) {
     Data::EntryPtr entry(new Data::Entry(m_coll));
     const auto releaseMap = release.toMap();

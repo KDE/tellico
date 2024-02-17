@@ -38,8 +38,9 @@
 #include <QTest>
 #include <QNetworkInterface>
 #include <QStandardPaths>
+#include <QLineEdit>
 
-QTEST_GUILESS_MAIN( DiscogsTest )
+QTEST_MAIN( DiscogsTest )
 
 static bool hasNetwork() {
 #ifdef ENABLE_NETWORK_TESTS
@@ -92,4 +93,22 @@ void DiscogsTest::testImport() {
 //  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
 //  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 //  QVERIFY(!entry->field(QStringLiteral("comments")).isEmpty());
+}
+
+void DiscogsTest::testWidget() {
+  Tellico::Import::DiscogsImporter importer;
+
+  KSharedConfig::Ptr config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig);
+  KConfigGroup cg(config, QStringLiteral("ImportOptions - Discogs"));
+  cg.writeEntry("User ID", QStringLiteral("tellico-robby"));
+  // need to add token to get images
+  config->sync();
+  importer.setConfig(config);
+
+  QScopedPointer<QWidget> widget(importer.widget(nullptr));
+  QVERIFY(widget);
+  auto edits = widget->findChildren<QLineEdit *>();
+  QCOMPARE(edits.size(), 2);
+  auto edit1 = static_cast<QLineEdit*>(edits[0]);
+  QCOMPARE(edit1->text(), QLatin1String("tellico-robby"));
 }

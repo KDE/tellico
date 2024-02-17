@@ -34,6 +34,7 @@ private Q_SLOTS:
   void initTestCase();
   void testImport();
   void testEscapeText();
+  void testWidget();
 };
 
 #endif

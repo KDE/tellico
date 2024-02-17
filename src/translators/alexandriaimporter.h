@@ -50,7 +50,7 @@ Q_OBJECT
 public:
   /**
    */
-  AlexandriaImporter() : Importer(), m_widget(nullptr), m_library(nullptr), m_cancelled(false) {}
+  AlexandriaImporter();
   /**
    */
   virtual ~AlexandriaImporter() {}
@@ -64,6 +64,7 @@ public:
   virtual bool canImport(int type) const Q_DECL_OVERRIDE;
 
   void setLibraryPath(const QString& libraryPath) { m_libraryPath = libraryPath; }
+  QString libraryPath() const { return m_libraryPath; }
 
 public Q_SLOTS:
   void slotCancel() Q_DECL_OVERRIDE;
@@ -78,7 +79,7 @@ private:
   QString m_libraryPath;
 
   QDir m_libraryDir;
-  bool m_cancelled : 1;
+  bool m_cancelled;
 };
 
   } // end namespace
