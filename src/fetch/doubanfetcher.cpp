@@ -54,6 +54,7 @@ namespace {
   static const int DOUBAN_MAX_RETURNS_TOTAL = 20;
   static const char* DOUBAN_API_URL = "https://api.douban.com/v2/";
   static const char* DOUBAN_API_KEY = "93a5facb2118d2e0d1b32e4a2c1e497d01310d6c41715e3ba0c36c58f2c27e4c3705cdafe783261621180632ebdd8ebf55659efb97f6e0d42d192241f0914777";
+//  static const char* DOUBAN_API_KEY = "cba90d6c2a48f6c097a1b1d2f2c682b36b0a8deb3505deeacbfddaeb6f5fab99b48d6754023bb681596e340d0637caa84e7686e793a600315664a9cbaccda393";
 }
 
 using namespace Tellico;
@@ -149,6 +150,8 @@ void DoubanFetcher::doSearch(const QString& term_) {
 //  myDebug() << "url:" << u.url();
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  job->addMetaData(QStringLiteral("referrer"), QStringLiteral("https://douban.com"));
+  job->addMetaData(QStringLiteral("ConnectTimeout"), QStringLiteral("120"));
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   if(request().key() == ISBN) {
     connect(job.data(), &KJob::result, this, &DoubanFetcher::slotCompleteISBN);
@@ -199,15 +202,17 @@ void DoubanFetcher::slotCompleteISBN(KJob* job_) {
   QJsonDocument doc = QJsonDocument::fromJson(data);
   const QVariantMap resultMap = doc.object().toVariantMap();
 
-  // code == 6000 for no result, 997 for provisioning error, 109 for invalid credential, 104 for invalid apikey, 105 is blocked apikey
+  // code == 6000 for no result, 997 for provisioning error, 109 for invalid credential, 104 for invalid apikey, 105 is blocked apikey, 999 is invalid request
   const auto code = mapValue(resultMap, "code");
   if(code == QLatin1String("6000") ||
      code == QLatin1String("997") ||
+     code == QLatin1String("999") ||
      code == QLatin1String("109") ||
      code == QLatin1String("104") ||
      code == QLatin1String("105")) {
-    message(mapValue(resultMap, "msg"), MessageHandler::Error);
-    myDebug() << "Douban: no result -" << mapValue(resultMap, "msg");
+    const auto& msg = mapValue(resultMap, "msg");
+    message(msg, MessageHandler::Error);
+    myLog() << "DoubanFetcher -" << msg;
   } else {
     Data::EntryPtr entry = createEntry(resultMap);
     if(entry) {
@@ -225,6 +230,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 
   if(job->error()) {
+    myLog() << job->errorText();
     job->uiDelegate()->showErrorMessage();
     endJob(job);
     return;
@@ -232,7 +238,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
 
   QByteArray data = job->data();
   if(data.isEmpty()) {
-    myDebug() << "no data";
+    myLog() << "No data received";
     endJob(job);
     return;
   }
@@ -248,8 +254,25 @@ void DoubanFetcher::slotComplete(KJob* job_) {
   f.close();
 #endif
 
-  QJsonDocument doc = QJsonDocument::fromJson(data);
+  QJsonParseError error;
+  QJsonDocument doc = QJsonDocument::fromJson(data, &error);
   const QVariantMap resultsMap = doc.object().toVariantMap();
+
+  // code == 6000 for no result, 997 for provisioning error, 109 for invalid credential, 104 for invalid apikey, 105 is blocked apikey
+  const auto code = mapValue(resultsMap, "code");
+  if(code == QLatin1String("6000") ||
+     code == QLatin1String("997") ||
+     code == QLatin1String("999") ||
+     code == QLatin1String("109") ||
+     code == QLatin1String("104") ||
+     code == QLatin1String("105")) {
+    const auto& msg = mapValue(resultsMap, "msg");
+    message(msg, MessageHandler::Error);
+    myLog() << "DoubanFetcher -" << msg;
+    endJob(job);
+    return;
+  }
+
   switch(request().collectionType()) {
     case Data::Collection::Book:
     case Data::Collection::Bibtex:
@@ -311,7 +334,8 @@ Tellico::Data::EntryPtr DoubanFetcher::fetchEntryHook(uint uid_) {
   q.addQueryItem(QLatin1String("apiKey"), Tellico::reverseObfuscate(DOUBAN_API_KEY));
   url.setQuery(q);
   if(!m_testUrl2.isEmpty()) url = m_testUrl2;
-  QByteArray data = FileHandler::readDataFile(url, true);
+//  myDebug() << url.url();
+  const QByteArray data = FileHandler::readDataFile(url, true);
 #if 0
   myWarning() << "Remove output debug from doubanfetcher.cpp";
   QFile f(QLatin1String("/tmp/test-douban2.json"));
@@ -336,8 +360,8 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
   Data::CollPtr coll;
   Data::EntryPtr entry;
   switch(request().collectionType()) {
-  case Data::Collection::Book:
-  case Data::Collection::Bibtex:
+    case Data::Collection::Book:
+    case Data::Collection::Bibtex:
       coll = new Data::BookCollection(true);
       if(optionalFields().contains(QStringLiteral("origtitle")) &&
         !mapValue(resultMap_, "origin_title").isEmpty() &&
@@ -406,6 +430,7 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
     info_url = mapValue(resultMap_, "intro_url");
   }
   if(!info_url.isEmpty()) {
+//    myDebug() << info_url;
     const QString infoHtml = Tellico::decodeHTML(FileHandler::readTextFile(QUrl::fromUserInput(info_url), true));
     QRegularExpression tableRowRx(QStringLiteral("<tr>.*?<td>(.+?)</td>.*?<td>(.+?)</td>.*?</tr>"),
                                   QRegularExpression::DotMatchesEverythingOption);
@@ -450,7 +475,7 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
   const QString image_id = entry->field(QStringLiteral("cover"));
   // if it's still a url, we need to load it
   if(image_id.startsWith(QLatin1String("http"))) {
-    const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true);
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true, QUrl(info_url));
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
       entry->setField(QStringLiteral("cover"), QString());
