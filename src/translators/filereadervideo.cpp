@@ -124,11 +124,6 @@ bool FileReaderVideo::populate(Data::EntryPtr entry, const KFileItem& item) {
     myLog() << "Reading" << nfoFile;
     isEmpty = !populateNfo(entry, nfoFile);
   }
-  const QString posterFile = info.path() + QLatin1Char('/') + info.completeBaseName() + QLatin1String("-poster.jpg");
-  if(QFileInfo::exists(posterFile)) {
-    const QString id = ImageFactory::addImage(QUrl::fromUserInput(posterFile), true /* quiet */);
-    entry->setField(QStringLiteral("cover"), id);
-  }
 
   if(isEmpty) return false;
 
@@ -141,25 +136,31 @@ bool FileReaderVideo::populate(Data::EntryPtr entry, const KFileItem& item) {
   entry->setField(url, item.url().url());
 
   const QString cover = QStringLiteral("cover");
-  QPixmap pixmap;
-  if(useFilePreview()) {
-    pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
-  }
-  if(pixmap.isNull()) {
-    if(d->iconImageId.contains(item.iconName())) {
-      entry->setField(cover, d->iconImageId.value(item.iconName()));
+  const QString posterFile = info.path() + QLatin1Char('/') + info.completeBaseName() + QLatin1String("-poster.jpg");
+  if(QFileInfo::exists(posterFile)) {
+    const QString id = ImageFactory::addImage(QUrl::fromLocalFile(posterFile), true /* quiet */);
+    entry->setField(cover, id);
+  } else {
+    QPixmap pixmap;
+    if(useFilePreview()) {
+      pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
+    }
+    if(pixmap.isNull()) {
+      if(d->iconImageId.contains(item.iconName())) {
+        entry->setField(cover, d->iconImageId.value(item.iconName()));
+      } else {
+        pixmap = QIcon::fromTheme(item.iconName()).pixmap(QSize(FILE_PREVIEW_SIZE, FILE_PREVIEW_SIZE));
+        const QString id = ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
+        if(!id.isEmpty()) {
+          entry->setField(cover, id);
+          d->iconImageId.insert(item.iconName(), id);
+        }
+      }
     } else {
-      pixmap = QIcon::fromTheme(item.iconName()).pixmap(QSize(FILE_PREVIEW_SIZE, FILE_PREVIEW_SIZE));
       const QString id = ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
       if(!id.isEmpty()) {
         entry->setField(cover, id);
-        d->iconImageId.insert(item.iconName(), id);
       }
-    }
-  } else {
-    const QString id = ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
-    if(!id.isEmpty()) {
-      entry->setField(cover, id);
     }
   }
 
