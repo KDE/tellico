@@ -52,8 +52,8 @@
 
 using Tellico::Import::FileListingImporter;
 
-FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_), m_coll(nullptr), m_widget(nullptr),
-    m_recursive(nullptr), m_filePreview(nullptr), m_job(nullptr), m_useFilePreview(false), m_cancelled(false) {
+FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_), m_collType(Data::Collection::File), m_coll(nullptr)
+    , m_widget(nullptr), m_recursive(nullptr), m_filePreview(nullptr), m_job(nullptr), m_useFilePreview(false), m_cancelled(false) {
 }
 
 bool FileListingImporter::canImport(int type) const {
@@ -85,10 +85,9 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     return Data::CollPtr();
   }
 
-  int collType = Data::Collection::File;
   if(m_widget) {
     m_useFilePreview = m_filePreview->isChecked();
-    collType = m_collCombo->currentType();
+    m_collType = m_collCombo->currentType();
   }
 
   const uint stepSize = qMax(1, m_files.count()/100);
@@ -96,34 +95,24 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   item.setTotalSteps(m_files.count());
 
   std::unique_ptr<AbstractFileReader> reader;
-  switch(collType) {
+  switch(m_collType) {
     case(Data::Collection::Book):
       m_coll = new Data::BookCollection(true);
-      {
-        auto ptr = new FileReaderBook(url());
-        ptr->setUseFilePreview(m_useFilePreview);
-        reader.reset(ptr);
-      }
+      reader.reset(new FileReaderBook(url()));
       break;
 
     case(Data::Collection::Video):
       m_coll = new Data::VideoCollection(true);
-      {
-        auto ptr = new FileReaderVideo(url());
-        ptr->setUseFilePreview(m_useFilePreview);
-        reader.reset(ptr);
-      }
+      reader.reset(new FileReaderVideo(url()));
       break;
 
     case(Data::Collection::File):
       m_coll = new Data::FileCatalog(true);
-      {
-        auto ptr = new FileReaderFile(url());
-        ptr->setUseFilePreview(m_useFilePreview);
-        reader.reset(ptr);
-      }
+      reader.reset(new FileReaderFile(url()));
       break;
   }
+  reader->setUseFilePreview(m_useFilePreview);
+
   Data::EntryList entries;
   uint j = 0;
   foreach(const KFileItem& item, m_files) {
@@ -178,8 +167,7 @@ QWidget* FileListingImporter::widget(QWidget* parent_) {
   collTypes << Data::Collection::Book << Data::Collection::Video << Data::Collection::File;
   m_collCombo = new GUI::CollectionTypeCombo(gbox);
   m_collCombo->setIncludedTypes(collTypes);
-  // default to file catalog
-  m_collCombo->setCurrentData(Data::Collection::File);
+  m_collCombo->setCurrentData(m_collType);
 
   vlay->addWidget(m_recursive);
   vlay->addWidget(m_filePreview);

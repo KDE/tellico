@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!-- comment -->
+<movie>
+  <title>Test Movie</title>
+  <originaltitle>The original title</originaltitle>
+  <userrating>4</userrating>
+  <mpaa>USA:PG</mpaa>
+  <uniqueid type="imdb" default="true">tt0012345</uniqueid>
+  <uniqueid type="tmdb" default="true">345</uniqueid>
+  <genre>Science Fiction</genre>
+  <genre>Romance</genre>
+  <plot>This is the best movie of all time
+
+  And another thing, it's good.
+  </plot>
+  <tag>Favorite</tag>
+  <country>USA</country>
+  <credits>Jill W. Writer</credits>
+  <director>John B. Director</director>
+  <director>Famous Director</director>
+  <studio>Paramount</studio>
+  <actor>
+    <name>Jack Actor</name>
+    <role>Hero</role>
+    <order>1</order>
+  </actor>
+  <actor>
+    <name>Jill Actress</name>
+    <role>Heroine</role>
+    <order>0</order>
+  </actor>
+  <runtime>113</runtime>
+  <year>2004</year>
+</movie>

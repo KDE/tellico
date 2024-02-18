@@ -35,6 +35,7 @@ private Q_SLOTS:
   void testCpp();
   void testXMPData();
   void testStat();
+  void testVideo();
 };
 
 #endif

@@ -62,6 +62,7 @@ public:
   virtual bool canImport(int type) const Q_DECL_OVERRIDE;
 
   void setUseFilePreview(bool b) { m_useFilePreview = b; }
+  void setCollectionType(int type_) { m_collType = type_; }
 
 public Q_SLOTS:
   void slotCancel() Q_DECL_OVERRIDE;
@@ -72,6 +73,7 @@ private Q_SLOTS:
 private:
   QString volumeName() const;
 
+  int m_collType;
   Data::CollPtr m_coll;
   QWidget* m_widget;
   GUI::CollectionTypeCombo* m_collCombo;

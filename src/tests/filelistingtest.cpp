@@ -35,6 +35,7 @@
 #include <KLocalizedString>
 
 #include <QTest>
+#include <QLoggingCategory>
 #include <QStandardPaths>
 
 // KIO::listDir in FileListingImporter seems to require a GUI Application
@@ -44,6 +45,7 @@ void FileListingTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = true"));
 }
 
 void FileListingTest::testCpp() {
@@ -133,4 +135,35 @@ void FileListingTest::testStat() {
   QUrl remote(QStringLiteral("https://tellico-project.org"));
   // http doesn't support existence without downloading
   QVERIFY(!Tellico::NetAccess::exists(remote, false, nullptr));
+}
+
+void FileListingTest::testVideo() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test_movie.mpg"));
+  Tellico::Import::FileListingImporter importer(url.adjusted(QUrl::RemoveFilename));
+  importer.setCollectionType(Tellico::Data::Collection::Video);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
+  QCOMPARE(coll->entryCount(), 1);
+
+  auto entry = coll->entries().front();
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("Test Movie"));
+  QCOMPARE(entry->field("origtitle"), QStringLiteral("The original title"));
+  QCOMPARE(entry->field("imdb"), QStringLiteral("https://www.imdb.com/title/tt0012345"));
+  QCOMPARE(entry->field("tmdb"), QStringLiteral("https://www.themoviedb.org/movie/345"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2004"));
+  QCOMPARE(entry->field("running-time"), QStringLiteral("113"));
+  QCOMPARE(entry->field("certification"), QStringLiteral("PG (USA)"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Science Fiction; Romance"));
+  QCOMPARE(entry->field("keyword"), QStringLiteral("Favorite"));
+  QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
+  QCOMPARE(entry->field("studio"), QStringLiteral("Paramount"));
+  QCOMPARE(entry->field("writer"), QStringLiteral("Jill W. Writer"));
+  QCOMPARE(entry->field("director"), QStringLiteral("John B. Director; Famous Director"));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
+  QVERIFY(!castList.isEmpty());
+  QCOMPARE(castList.at(0), QStringLiteral("Jill Actress::Heroine"));
+  QVERIFY(!entry->field("plot").isEmpty());
 }

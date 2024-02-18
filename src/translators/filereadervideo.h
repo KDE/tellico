@@ -38,6 +38,8 @@ public:
   virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) Q_DECL_OVERRIDE;
 
 private:
+  bool populateNfo(Data::EntryPtr entry, const QString& nfoFile);
+
   class Private;
   friend class Private;
   std::unique_ptr<Private> d;
