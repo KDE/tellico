@@ -376,7 +376,7 @@ void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
     if(!entry_->collection()->hasField(imdb)) {
       entry_->collection()->addField(Data::Field::createDefaultField(Data::Field::ImdbField));
     }
-    entry_->setField(imdb, QLatin1String("http://www.imdb.com/title/")
+    entry_->setField(imdb, QLatin1String("https://www.imdb.com/title/")
                                           + entry_->field(QStringLiteral("imdb-id"))
                                           + QLatin1Char('/'));
   }
