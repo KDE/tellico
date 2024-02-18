@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-04 01:38+0000\n"
+"POT-Creation-Date: 2024-02-18 01:40+0000\n"
 "PO-Revision-Date: 2024-01-03 09:47+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -248,7 +248,7 @@ msgstr "Ma collection"
 #: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
 #: src/document.cpp:531 src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:137
-#: src/translators/filereadervideo.cpp:122
+#: src/translators/filereadervideo.cpp:138
 #, kde-format
 msgid "Personal"
 msgstr "Personnel"
@@ -756,7 +756,6 @@ msgstr "Un champ avec une valeur dérivée doit avoir une valeur de modèle."
 #: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
 #: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
 #: src/configdialog.cpp:203 src/configdialog.cpp:1129
-#: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
 #: src/fetch/amazonfetcher.cpp:864 src/fetch/bedethequefetcher.cpp:318
 #: src/fetch/bedethequefetcher.cpp:326 src/fetch/colnectfetcher.cpp:362
 #: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:545
@@ -764,8 +763,8 @@ msgstr "Un champ avec une valeur dérivée doit avoir une valeur de modèle."
 #: src/fetch/discogsfetcher.cpp:309 src/fetch/discogsfetcher.cpp:314
 #: src/fetch/discogsfetcher.cpp:319 src/fetch/discogsfetcher.cpp:326
 #: src/fetch/discogsfetcher.cpp:333 src/fetch/discogsfetcher.cpp:338
-#: src/fetch/doubanfetcher.cpp:352 src/fetch/doubanfetcher.cpp:370
-#: src/fetch/doubanfetcher.cpp:388 src/fetch/filmaffinityfetcher.cpp:282
+#: src/fetch/doubanfetcher.cpp:376 src/fetch/doubanfetcher.cpp:394
+#: src/fetch/doubanfetcher.cpp:412 src/fetch/filmaffinityfetcher.cpp:282
 #: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:255
 #: src/fetch/googlebookfetcher.cpp:260 src/fetch/igdbfetcher.cpp:368
@@ -783,6 +782,7 @@ msgstr "Un champ avec une valeur dérivée doit avoir une valeur de modèle."
 #: src/fetch/upcitemdbfetcher.cpp:215 src/fetch/vgcollectfetcher.cpp:236
 #: src/fetch/vgcollectfetcher.cpp:339 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:331 src/field.cpp:336
+#: src/translators/filereadervideo.cpp:260
 #: src/translators/gcstarimporter.cpp:90
 #, kde-format
 msgid "General"
@@ -888,7 +888,7 @@ msgstr "Année"
 msgid "Journal"
 msgstr "Journal"
 
-#: src/collections/bibtexcollection.cpp:177 src/fetch/fetchmanager.cpp:71
+#: src/collections/bibtexcollection.cpp:177 src/fetch/fetchmanager.cpp:70
 #, kde-format
 msgid "DOI"
 msgstr "DOI"
@@ -961,7 +961,7 @@ msgstr "Mots clés"
 #: src/fetch/entrezfetcher.cpp:440 src/fetch/entrezfetcher.cpp:516
 #: src/fetch/opdsfetcher.cpp:436 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:136
-#: src/translators/filereadervideo.cpp:121
+#: src/translators/filereadervideo.cpp:137
 #: src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "URL"
@@ -1141,15 +1141,15 @@ msgid "Subtitle"
 msgstr "Sous-titre"
 
 #: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:968
-#: src/fetch/doubanfetcher.cpp:424 src/fetch/doubanfetcher.cpp:477
-#: src/fetch/ibsfetcher.cpp:292 src/translators/alexandriaimporter.cpp:158
+#: src/fetch/doubanfetcher.cpp:449 src/fetch/doubanfetcher.cpp:502
+#: src/fetch/ibsfetcher.cpp:292 src/translators/alexandriaimporter.cpp:160
 #: src/translators/librarythingimporter.cpp:148
 #, kde-format
 msgid "Hardback"
 msgstr "Rigide"
 
 #: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:966
-#: src/fetch/doubanfetcher.cpp:426 src/fetch/doubanfetcher.cpp:479
+#: src/fetch/doubanfetcher.cpp:451 src/fetch/doubanfetcher.cpp:504
 #: src/fetch/ibsfetcher.cpp:290 src/translators/librarythingimporter.cpp:146
 #, kde-format
 msgid "Paperback"
@@ -1695,7 +1695,7 @@ msgid "Album"
 msgstr "Album"
 
 #: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:424
-#: src/fetch/doubanfetcher.cpp:432 src/fetch/doubanfetcher.cpp:566
+#: src/fetch/doubanfetcher.cpp:457 src/fetch/doubanfetcher.cpp:591
 #: src/fetch/upcitemdbfetcher.cpp:305 src/fetch/upcitemdbfetcher.cpp:425
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:162
@@ -1752,7 +1752,7 @@ msgid "Tracks"
 msgstr "Pistes"
 
 #: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
-#: src/fetch/discogsfetcher.cpp:485 src/fetch/fetchmanager.cpp:66
+#: src/fetch/discogsfetcher.cpp:485 src/fetch/fetchmanager.cpp:65
 #: src/fetch/itunesfetcher.cpp:320 src/fetchdialog.cpp:252 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:434
@@ -1778,7 +1778,7 @@ msgid "Issue Year"
 msgstr "Année"
 
 #: src/collections/stampcollection.cpp:83
-#: src/collections/videocollection.cpp:180 src/fetch/allocinefetcher.cpp:398
+#: src/collections/videocollection.cpp:180
 #, kde-format
 msgid "Color"
 msgstr "Couleur"
@@ -3314,7 +3314,7 @@ msgstr "Système de données d'astrophysique de SAO / NASA"
 #: src/fetch/giantbombfetcher.cpp:219 src/fetch/googlebookfetcher.cpp:383
 #: src/fetch/isbndbfetcher.cpp:395 src/fetch/mobygamesfetcher.cpp:652
 #: src/fetch/omdbfetcher.cpp:411 src/fetch/thegamesdbfetcher.cpp:637
-#: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:586
+#: src/fetch/themoviedbfetcher.cpp:596 src/fetch/thetvdbfetcher.cpp:586
 #, kde-format
 msgid ""
 "Registration is required for accessing this data source. If you agree to the "
@@ -3332,7 +3332,7 @@ msgstr ""
 #: src/fetch/googlebookfetcher.cpp:395 src/fetch/isbndbfetcher.cpp:407
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/numistafetcher.cpp:417
 #: src/fetch/omdbfetcher.cpp:423 src/fetch/thegamesdbfetcher.cpp:649
-#: src/fetch/themoviedbfetcher.cpp:603
+#: src/fetch/themoviedbfetcher.cpp:608
 #, kde-format
 msgid "Access key: "
 msgstr "Clé d'accès :"
@@ -3340,7 +3340,7 @@ msgstr "Clé d'accès :"
 #: src/fetch/adsfetcher.cpp:349 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:249 src/fetch/entrezfetcher.cpp:538
 #: src/fetch/giantbombfetcher.cpp:237 src/fetch/googlebookfetcher.cpp:401
-#: src/fetch/themoviedbfetcher.cpp:609 src/fetch/thetvdbfetcher.cpp:604
+#: src/fetch/themoviedbfetcher.cpp:614 src/fetch/thetvdbfetcher.cpp:604
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3348,63 +3348,6 @@ msgid ""
 msgstr ""
 "La clé par défaut de Tellico sera utilisée, mais la recherche peut échouer "
 "si des limites d'accès sont atteintes."
-
-#: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:634
-#: src/fetch/colnectfetcher.cpp:785 src/fetch/discogsfetcher.cpp:218
-#: src/fetch/doubanfetcher.cpp:455 src/fetch/filmaffinityfetcher.cpp:428
-#: src/fetch/filmasterfetcher.cpp:148 src/fetch/gaminghistoryfetcher.cpp:308
-#: src/fetch/googlebookfetcher.cpp:199 src/fetch/ibsfetcher.cpp:303
-#: src/fetch/igdbfetcher.cpp:162 src/fetch/isbndbfetcher.cpp:296
-#: src/fetch/itunesfetcher.cpp:355 src/fetch/kinofetcher.cpp:349
-#: src/fetch/kinopoiskfetcher.cpp:269 src/fetch/kinoteatrfetcher.cpp:377
-#: src/fetch/mobygamesfetcher.cpp:346 src/fetch/moviemeterfetcher.cpp:162
-#: src/fetch/numistafetcher.cpp:288 src/fetch/numistafetcher.cpp:296
-#: src/fetch/omdbfetcher.cpp:183 src/fetch/thegamesdbfetcher.cpp:172
-#: src/fetch/themoviedbfetcher.cpp:240 src/fetch/thetvdbfetcher.cpp:346
-#: src/fetch/tvmazefetcher.cpp:265 src/fetch/upcitemdbfetcher.cpp:260
-#: src/fetch/vgcollectfetcher.cpp:284 src/fetch/vndbfetcher.cpp:182
-#, kde-format
-msgid "The cover image could not be loaded."
-msgstr "La couverture n'a pas pu être chargée."
-
-#: src/fetch/allocinefetcher.cpp:319 src/fetch/allocinefetcher.cpp:504
-#, kde-format
-msgid "Allocine Link"
-msgstr "Lien vers « Allociné »"
-
-#: src/fetch/allocinefetcher.cpp:324 src/fetch/allocinefetcher.cpp:503
-#: src/fetch/doubanfetcher.cpp:345 src/fetch/doubanfetcher.cpp:363
-#: src/fetch/doubanfetcher.cpp:381 src/fetch/doubanfetcher.cpp:618
-#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:322
-#: src/fetch/filmaffinityfetcher.cpp:459 src/fetch/imdbfetcher.cpp:472
-#: src/fetch/imdbfetcher.cpp:534 src/fetch/kinopoiskfetcher.cpp:341
-#: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
-#: src/fetch/kinoteatrfetcher.cpp:264 src/fetch/kinoteatrfetcher.cpp:508
-#: src/fetch/omdbfetcher.cpp:263 src/fetch/themoviedbfetcher.cpp:333
-#: src/fetch/themoviedbfetcher.cpp:577 src/fetch/vndbfetcher.cpp:286
-#: src/fetch/vndbfetcher.cpp:434
-#, kde-format
-msgid "Original Title"
-msgstr "Titre original"
-
-# unreviewed-context
-#: src/fetch/allocinefetcher.cpp:432 src/fetch/filmaffinityfetcher.cpp:472
-#: src/fetch/imdbfetcher.cpp:551 src/fetch/kinopoiskfetcher.cpp:685
-#: src/fetch/themoviedbfetcher.cpp:614
-#, kde-format
-msgid "&Maximum cast: "
-msgstr "Nombre &maximal d'acteur : "
-
-#: src/fetch/allocinefetcher.cpp:445 src/fetch/filmaffinityfetcher.cpp:485
-#: src/fetch/imdbfetcher.cpp:564 src/fetch/kinopoiskfetcher.cpp:698
-#: src/fetch/themoviedbfetcher.cpp:627
-#, kde-format
-msgid ""
-"The list of cast members may include many people. Set the maximum number "
-"returned from the search."
-msgstr ""
-"La liste des membres de la distribution peut contenir beaucoup de personnes. "
-"Sélectionnez le nombre d'occurrences maximal retourné par la recherche."
 
 #: src/fetch/amazonfetcher.cpp:80
 #, kde-format
@@ -3599,6 +3542,24 @@ msgstr ""
 msgid "Results from %1: %2/%3"
 msgstr "Résultats de %1 : %2/%3"
 
+#: src/fetch/amazonfetcher.cpp:634 src/fetch/colnectfetcher.cpp:785
+#: src/fetch/discogsfetcher.cpp:218 src/fetch/doubanfetcher.cpp:480
+#: src/fetch/filmaffinityfetcher.cpp:428 src/fetch/filmasterfetcher.cpp:148
+#: src/fetch/gaminghistoryfetcher.cpp:308 src/fetch/googlebookfetcher.cpp:199
+#: src/fetch/ibsfetcher.cpp:303 src/fetch/igdbfetcher.cpp:162
+#: src/fetch/isbndbfetcher.cpp:296 src/fetch/itunesfetcher.cpp:355
+#: src/fetch/kinofetcher.cpp:349 src/fetch/kinopoiskfetcher.cpp:269
+#: src/fetch/kinoteatrfetcher.cpp:377 src/fetch/mobygamesfetcher.cpp:346
+#: src/fetch/moviemeterfetcher.cpp:162 src/fetch/numistafetcher.cpp:288
+#: src/fetch/numistafetcher.cpp:296 src/fetch/omdbfetcher.cpp:183
+#: src/fetch/thegamesdbfetcher.cpp:172 src/fetch/themoviedbfetcher.cpp:240
+#: src/fetch/thetvdbfetcher.cpp:346 src/fetch/tvmazefetcher.cpp:265
+#: src/fetch/upcitemdbfetcher.cpp:260 src/fetch/vgcollectfetcher.cpp:284
+#: src/fetch/vndbfetcher.cpp:182
+#, kde-format
+msgid "The cover image could not be loaded."
+msgstr "La couverture n'a pas pu être chargée."
+
 #: src/fetch/amazonfetcher.cpp:863 src/fetch/amazonfetcher.cpp:1080
 #, kde-format
 msgid "Amazon Link"
@@ -3699,7 +3660,7 @@ msgstr ""
 
 #: src/fetch/arxivfetcher.cpp:337 src/fetch/bedethequefetcher.cpp:443
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:626
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:651
 #: src/fetch/dvdfrfetcher.cpp:190 src/fetch/filmasterfetcher.cpp:323
 #: src/fetch/gaminghistoryfetcher.cpp:438
 #: src/fetch/googlescholarfetcher.cpp:280 src/fetch/hathitrustfetcher.cpp:318
@@ -3764,7 +3725,7 @@ msgid "PEGI Rating"
 msgstr "Classement PEGI"
 
 #: src/fetch/colnectfetcher.cpp:917 src/fetch/filmaffinityfetcher.cpp:490
-#: src/fetch/numistafetcher.cpp:425 src/fetch/themoviedbfetcher.cpp:632
+#: src/fetch/numistafetcher.cpp:425 src/fetch/themoviedbfetcher.cpp:637
 #, kde-format
 msgid "Language: "
 msgstr "Langue :"
@@ -3877,8 +3838,22 @@ msgstr "Recherche audio Discogs"
 msgid "User token:"
 msgstr "Identifiant de l'utilisateur : "
 
-#: src/fetch/doubanfetcher.cpp:351 src/fetch/doubanfetcher.cpp:369
-#: src/fetch/doubanfetcher.cpp:387 src/fetch/doubanfetcher.cpp:619
+#: src/fetch/doubanfetcher.cpp:369 src/fetch/doubanfetcher.cpp:387
+#: src/fetch/doubanfetcher.cpp:405 src/fetch/doubanfetcher.cpp:643
+#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:322
+#: src/fetch/filmaffinityfetcher.cpp:459 src/fetch/imdbfetcher.cpp:472
+#: src/fetch/imdbfetcher.cpp:534 src/fetch/kinopoiskfetcher.cpp:341
+#: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
+#: src/fetch/kinoteatrfetcher.cpp:264 src/fetch/kinoteatrfetcher.cpp:508
+#: src/fetch/omdbfetcher.cpp:263 src/fetch/themoviedbfetcher.cpp:333
+#: src/fetch/themoviedbfetcher.cpp:582 src/fetch/vndbfetcher.cpp:286
+#: src/fetch/vndbfetcher.cpp:434 src/translators/filereadervideo.cpp:199
+#, kde-format
+msgid "Original Title"
+msgstr "Titre original"
+
+#: src/fetch/doubanfetcher.cpp:375 src/fetch/doubanfetcher.cpp:393
+#: src/fetch/doubanfetcher.cpp:411 src/fetch/doubanfetcher.cpp:644
 #, kde-format
 msgid "Douban Link"
 msgstr "Lien Douban"
@@ -3891,7 +3866,7 @@ msgstr "Lien DVDFr"
 #: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:480
 #: src/fetch/imdbfetcher.cpp:532 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:258
-#: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:576
+#: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:581
 #: src/fetch/tvmazefetcher.cpp:192 src/fetch/tvmazefetcher.cpp:381
 #, kde-format
 msgid "Alternative Titles"
@@ -3994,42 +3969,42 @@ msgstr ""
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 ne permet pas la recherche pour ce type de collection."
 
-#: src/fetch/fetchmanager.cpp:67
+#: src/fetch/fetchmanager.cpp:66
 #, kde-format
 msgid "Person"
 msgstr "Personne"
 
-#: src/fetch/fetchmanager.cpp:68
+#: src/fetch/fetchmanager.cpp:67
 #, kde-format
 msgid "ISBN"
 msgstr "ISBN"
 
-#: src/fetch/fetchmanager.cpp:69
+#: src/fetch/fetchmanager.cpp:68
 #, kde-format
 msgid "UPC/EAN"
 msgstr "UPC/EAN"
 
-#: src/fetch/fetchmanager.cpp:70
+#: src/fetch/fetchmanager.cpp:69
 #, kde-format
 msgid "Keyword"
 msgstr "Mot-clé"
 
-#: src/fetch/fetchmanager.cpp:72 src/translators/pdfimporter.cpp:231
+#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:231
 #, kde-format
 msgid "arXiv ID"
 msgstr "ID arXiv"
 
-#: src/fetch/fetchmanager.cpp:73
+#: src/fetch/fetchmanager.cpp:72
 #, kde-format
 msgid "PubMed ID"
 msgstr "ID « Pubmed »"
 
-#: src/fetch/fetchmanager.cpp:74
+#: src/fetch/fetchmanager.cpp:73
 #, kde-format
 msgid "LCCN"
 msgstr "LCCN"
 
-#: src/fetch/fetchmanager.cpp:75
+#: src/fetch/fetchmanager.cpp:74
 #, kde-format
 msgid "Raw Query"
 msgstr "Requête brute"
@@ -4038,6 +4013,23 @@ msgstr "Requête brute"
 #, kde-format
 msgid "FilmAffinity Link"
 msgstr "Lien vers le site « FilmAffinity »"
+
+# unreviewed-context
+#: src/fetch/filmaffinityfetcher.cpp:472 src/fetch/imdbfetcher.cpp:551
+#: src/fetch/kinopoiskfetcher.cpp:685 src/fetch/themoviedbfetcher.cpp:619
+#, kde-format
+msgid "&Maximum cast: "
+msgstr "Nombre &maximal d'acteur : "
+
+#: src/fetch/filmaffinityfetcher.cpp:485 src/fetch/imdbfetcher.cpp:564
+#: src/fetch/kinopoiskfetcher.cpp:698 src/fetch/themoviedbfetcher.cpp:632
+#, kde-format
+msgid ""
+"The list of cast members may include many people. Set the maximum number "
+"returned from the search."
+msgstr ""
+"La liste des membres de la distribution peut contenir beaucoup de personnes. "
+"Sélectionnez le nombre d'occurrences maximal retourné par la recherche."
 
 #: src/fetch/filmaffinityfetcher.cpp:495
 #, kde-format
@@ -4156,7 +4148,7 @@ msgid "Internet Movie Database"
 msgstr "Base de données de films Internet"
 
 #: src/fetch/imdbfetcher.cpp:530 src/fetch/kinopoiskfetcher.cpp:672
-#: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:575
+#: src/fetch/omdbfetcher.cpp:400 src/fetch/themoviedbfetcher.cpp:580
 #: src/fetch/thetvdbfetcher.cpp:572 src/fetch/tvmazefetcher.cpp:378
 #: src/field.cpp:335
 #, kde-format
@@ -4169,7 +4161,7 @@ msgid "Certifications"
 msgstr "Certifications"
 
 #: src/fetch/imdbfetcher.cpp:535 src/fetch/itunesfetcher.cpp:536
-#: src/fetch/themoviedbfetcher.cpp:579 src/fetch/thetvdbfetcher.cpp:573
+#: src/fetch/themoviedbfetcher.cpp:584 src/fetch/thetvdbfetcher.cpp:573
 #: src/fetch/tvmazefetcher.cpp:379 src/field.cpp:339
 #, kde-format
 msgid "Episodes"
@@ -4262,13 +4254,13 @@ msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
-#: src/fetch/numistafetcher.cpp:430 src/fetch/themoviedbfetcher.cpp:641
+#: src/fetch/numistafetcher.cpp:430 src/fetch/themoviedbfetcher.cpp:646
 #, kde-format
 msgctxt "Language"
 msgid "English"
 msgstr "Anglais"
 
-#: src/fetch/numistafetcher.cpp:433 src/fetch/themoviedbfetcher.cpp:644
+#: src/fetch/numistafetcher.cpp:433 src/fetch/themoviedbfetcher.cpp:649
 #, kde-format
 msgctxt "Language"
 msgid "French"
@@ -4377,43 +4369,44 @@ msgstr "Saisissez le format de résultat utilisé par le serveur."
 msgid "Field"
 msgstr "Champ"
 
-#: src/fetch/themoviedbfetcher.cpp:320 src/fetch/themoviedbfetcher.cpp:574
+#: src/fetch/themoviedbfetcher.cpp:320 src/fetch/themoviedbfetcher.cpp:579
+#: src/translators/filereadervideo.cpp:259
 #, kde-format
 msgid "TMDb Link"
 msgstr "Lien vers « TMDb »"
 
-#: src/fetch/themoviedbfetcher.cpp:338 src/fetch/themoviedbfetcher.cpp:578
+#: src/fetch/themoviedbfetcher.cpp:338 src/fetch/themoviedbfetcher.cpp:583
 #: src/fetch/thetvdbfetcher.cpp:254 src/fetch/thetvdbfetcher.cpp:574
 #: src/fetch/tvmazefetcher.cpp:181 src/fetch/tvmazefetcher.cpp:380
 #, kde-format
 msgid "Network"
 msgstr "Réseau"
 
-#: src/fetch/themoviedbfetcher.cpp:638
+#: src/fetch/themoviedbfetcher.cpp:643
 #, kde-format
 msgctxt "Language"
 msgid "Chinese"
 msgstr "Chinois"
 
-#: src/fetch/themoviedbfetcher.cpp:647
+#: src/fetch/themoviedbfetcher.cpp:652
 #, kde-format
 msgctxt "Language"
 msgid "German"
 msgstr "allemand"
 
-#: src/fetch/themoviedbfetcher.cpp:650
+#: src/fetch/themoviedbfetcher.cpp:655
 #, kde-format
 msgctxt "Language"
 msgid "Spanish"
 msgstr "espagnol"
 
-#: src/fetch/themoviedbfetcher.cpp:653
+#: src/fetch/themoviedbfetcher.cpp:658
 #, kde-format
 msgctxt "Language"
 msgid "Russian"
 msgstr "Russe"
 
-#: src/fetch/themoviedbfetcher.cpp:696
+#: src/fetch/themoviedbfetcher.cpp:701
 #, kde-format
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB (%1)"
@@ -5213,7 +5206,7 @@ msgstr "Se déplacer d'une ligne vers le haut"
 msgid "Move Row Down"
 msgstr "Se déplacer d'une ligne vers le bas"
 
-#: src/images/imagejob.cpp:75 src/images/imagejob.cpp:109
+#: src/images/imagejob.cpp:76 src/images/imagejob.cpp:110
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico ne peut pas charger l'image - %1."
@@ -6783,13 +6776,13 @@ msgstr ""
 "<qt>Une bibliothèque Alexandria appelée <i>%1</i> existe déjà. Tout livre "
 "existant dans cette bibliothèque pourrait être remplacée</qt>"
 
-#: src/translators/alexandriaimporter.cpp:234
+#: src/translators/alexandriaimporter.cpp:236
 #, kde-format
 msgid "Alexandria Options"
 msgstr "Options Alexandria"
 
 # unreviewed-context
-#: src/translators/alexandriaimporter.cpp:237
+#: src/translators/alexandriaimporter.cpp:239
 #, kde-format
 msgid "&Library:"
 msgstr "Bib&liothèque :"
@@ -7193,29 +7186,29 @@ msgstr "Options pour Discogs"
 msgid "Scanning files..."
 msgstr "Lecture des fichiers..."
 
-#: src/translators/filelistingimporter.cpp:163
+#: src/translators/filelistingimporter.cpp:152
 #, kde-format
 msgid "File Listing Options"
 msgstr "Options des listes de fichiers"
 
-#: src/translators/filelistingimporter.cpp:166
+#: src/translators/filelistingimporter.cpp:155
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Recherche récursive"
 
-#: src/translators/filelistingimporter.cpp:167
+#: src/translators/filelistingimporter.cpp:156
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 "Si cochée, les dossiers sont balayés récursivement pour chercher tous les "
 "fichiers."
 
-#: src/translators/filelistingimporter.cpp:171
+#: src/translators/filelistingimporter.cpp:160
 #, kde-format
 msgid "Generate file previews"
 msgstr "Générer les aperçus de fichiers"
 
-#: src/translators/filelistingimporter.cpp:172
+#: src/translators/filelistingimporter.cpp:161
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
@@ -7579,6 +7572,9 @@ msgstr "Chercher"
 #, kde-format
 msgid "Clear"
 msgstr "Effacer"
+
+#~ msgid "Allocine Link"
+#~ msgstr "Lien vers « Allociné »"
 
 #~ msgid "Distributor"
 #~ msgstr "Distributeur"
