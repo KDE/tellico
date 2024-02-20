@@ -7396,6 +7396,3 @@ msgstr "Hledat"
 #, kde-format
 msgid "Clear"
 msgstr "Vymazat"
-
-#~ msgid "Allocine Link"
-#~ msgstr "Odkaz na Allocine"
