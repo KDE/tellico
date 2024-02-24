@@ -103,9 +103,6 @@ bool FileReaderVideo::populate(Data::EntryPtr entry, const KFileItem& item) {
         break;
 
       default:
-        if(!value.isEmpty()) {
-          myDebug() << "skipping" << it.key() << it.value();
-        }
         break;
     }
   }
@@ -170,9 +167,14 @@ bool FileReaderVideo::populate(Data::EntryPtr entry, const KFileItem& item) {
 
 bool FileReaderVideo::populateNfo(Data::EntryPtr entry_, const QString& nfoFile_) {
   const QUrl nfoUrl(QUrl::fromLocalFile(nfoFile_));
+  const auto nfoData = FileHandler::readDataFile(nfoUrl);
+  if(nfoData.isEmpty()) return false;
+
   QDomDocument dom;
-  if(!dom.setContent(FileHandler::readDataFile(nfoUrl))) {
+  QString errorMsg;
+  if(!dom.setContent(nfoData, &errorMsg)) {
     myDebug() << "Failed to read contents of" << nfoFile_;
+    myDebug() << errorMsg;
     return false;
   }
 
