@@ -202,15 +202,30 @@ bool FileReaderVideo::populateNfo(Data::EntryPtr entry_, const QString& nfoFile_
       }
       entry_->setField(orig, elem.text());
     } else if(elem.tagName() == QLatin1String("country")) {
-      entry_->setField(QStringLiteral("nationality"), elem.text());
+      QString nat = elem.text();
+      if(nat == QLatin1String("US") || nat.compare(QLatin1String("united States Of America"), Qt::CaseInsensitive) == 0) {
+        nat = QLatin1String("USA");
+      }
+      entry_->setField(QStringLiteral("nationality"), nat);
     } else if(elem.tagName() == QLatin1String("runtime")) {
       entry_->setField(QStringLiteral("running-time"), elem.text());
+    } else if(elem.tagName() == QLatin1String("userrating")) {
+      const auto s = elem.text();
+      if(!s.isEmpty() && s != QLatin1String("0") && s != QLatin1String("0.0")) {
+        entry_->setField(QStringLiteral("rating"), elem.text());
+      }
     } else if(elem.tagName() == QLatin1String("year")) {
       entry_->setField(QStringLiteral("year"), elem.text());
     } else if(elem.tagName() == QLatin1String("genre")) {
       genres += elem.text();
     } else if(elem.tagName() == QLatin1String("tag")) {
       keywords += elem.text();
+    } else if(elem.tagName() == QLatin1String("set")) {
+      // add set names as a keyword, as well
+      auto nameElem = elem.firstChildElement(QLatin1String("name"));
+      if(!nameElem.isNull()) {
+        keywords += nameElem.text();
+      }
     } else if(elem.tagName() == QLatin1String("studio")) {
       studios += elem.text();
     } else if(elem.tagName() == QLatin1String("credits")) {
