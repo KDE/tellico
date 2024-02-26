@@ -165,7 +165,11 @@ bool addEntryValue(int entryID, QString fieldName, QString value)
 >&DBus;-exempel</title>
 
 <para
->Här är några exempel på att använda skript för &appname; med användning av &DBus;-gränssnittet. </para>
+>Här är några exempel på att använda skript i &appname; med &DBus;-gränssnittet. Observera att kommandot <command
+>qdbus</command
+> kan förekomma som <command
+>qdbus-qt5</command
+> eller något liknande på din dator. </para>
 
 <screen width="40"
 ><emphasis
