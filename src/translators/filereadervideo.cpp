@@ -63,9 +63,7 @@ bool FileReaderVideo::populate(Data::EntryPtr entry, const KFileItem& item) {
   if(!item.mimetype().startsWith(QLatin1String("video"))) {
     return false;
   }
-#ifndef HAVE_KFILEMETADATA
-  return false;
-#else
+#ifdef HAVE_KFILEMETADATA
   bool isEmpty = true;
   QStringList genres, keywords;
   const auto props = properties(item);
