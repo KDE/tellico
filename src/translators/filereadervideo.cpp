@@ -63,8 +63,8 @@ bool FileReaderVideo::populate(Data::EntryPtr entry, const KFileItem& item) {
   if(!item.mimetype().startsWith(QLatin1String("video"))) {
     return false;
   }
-#ifdef HAVE_KFILEMETADATA
   bool isEmpty = true;
+#ifdef HAVE_KFILEMETADATA2
   QStringList genres, keywords;
   const auto props = properties(item);
   for(auto it = props.constBegin(); it != props.constEnd(); ++it) {
@@ -111,6 +111,7 @@ bool FileReaderVideo::populate(Data::EntryPtr entry, const KFileItem& item) {
   if(!keywords.isEmpty()) {
     entry->setField(QStringLiteral("keyword"), keywords.join(FieldFormat::delimiterString()));
   }
+#endif
 
   // look for an NFO file
   QFileInfo info(item.localPath());
@@ -159,7 +160,6 @@ bool FileReaderVideo::populate(Data::EntryPtr entry, const KFileItem& item) {
     }
   }
 
-#endif
   return true;
 }
 
