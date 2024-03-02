@@ -609,7 +609,8 @@ QString DoubanFetcher::defaultName() {
 }
 
 QString DoubanFetcher::defaultIcon() {
-  return favIcon("http://www.douban.com");
+  return favIcon(QUrl(QLatin1String("http://www.douban.com")),
+                 QUrl(QLatin1String("https://tellico-project.org/img/douban-favicon.ico")));
 }
 
 Tellico::StringHash DoubanFetcher::allOptionalFields() {
