@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-18 01:40+0000\n"
+"POT-Creation-Date: 2024-03-02 01:37+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -235,7 +235,7 @@ msgstr "Η συλλογή μου"
 #: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
 #: src/document.cpp:531 src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:137
-#: src/translators/filereadervideo.cpp:138
+#: src/translators/filereadervideo.cpp:130
 #, kde-format
 msgid "Personal"
 msgstr "Ατομικά στοιχεία"
@@ -765,7 +765,7 @@ msgstr "Ένα πεδίο με μια παράγωγη τιμή πρέπει ν�
 #: src/fetch/upcitemdbfetcher.cpp:215 src/fetch/vgcollectfetcher.cpp:236
 #: src/fetch/vgcollectfetcher.cpp:339 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:331 src/field.cpp:336
-#: src/translators/filereadervideo.cpp:260
+#: src/translators/filereadervideo.cpp:278
 #: src/translators/gcstarimporter.cpp:90
 #, kde-format
 msgid "General"
@@ -946,7 +946,7 @@ msgstr "Λέξεις κλειδιά"
 #: src/fetch/entrezfetcher.cpp:440 src/fetch/entrezfetcher.cpp:516
 #: src/fetch/opdsfetcher.cpp:436 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:136
-#: src/translators/filereadervideo.cpp:137
+#: src/translators/filereadervideo.cpp:129
 #: src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "URL"
@@ -3811,7 +3811,7 @@ msgstr "Αναγνωριστικό χρήστη: "
 #: src/fetch/kinoteatrfetcher.cpp:264 src/fetch/kinoteatrfetcher.cpp:508
 #: src/fetch/omdbfetcher.cpp:263 src/fetch/themoviedbfetcher.cpp:333
 #: src/fetch/themoviedbfetcher.cpp:582 src/fetch/vndbfetcher.cpp:286
-#: src/fetch/vndbfetcher.cpp:434 src/translators/filereadervideo.cpp:199
+#: src/fetch/vndbfetcher.cpp:434 src/translators/filereadervideo.cpp:202
 #, kde-format
 msgid "Original Title"
 msgstr "Αυθεντικός τίτλος"
@@ -4342,7 +4342,7 @@ msgid "Field"
 msgstr "Πεδίο"
 
 #: src/fetch/themoviedbfetcher.cpp:320 src/fetch/themoviedbfetcher.cpp:579
-#: src/translators/filereadervideo.cpp:259
+#: src/translators/filereadervideo.cpp:277
 #, kde-format
 msgid "TMDb Link"
 msgstr "Δεσμός TMDb"
