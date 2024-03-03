@@ -82,6 +82,10 @@ bool Iso6937Converter::isCombining(uchar c) {
 
 // Source : http://www.open-std.org/jtc1/sc2/wg3/docs/6937cd.pdf
 QChar Iso6937Converter::getChar(uchar c) {
+  return QChar(getCharInt(c));
+}
+
+int Iso6937Converter::getCharInt(uchar c) {
   switch(c) {
   case 0xA0:
     return 0x00A0; // 10/00 NO-BREAK SPACE
@@ -239,11 +243,16 @@ QChar Iso6937Converter::getChar(uchar c) {
   case 0xFF:
     return 0x00AD; // 15/15 SOFT HYPHEN$
   default:
-    return QLatin1Char(c);
+    return c;
   }
 }
 
 QChar Iso6937Converter::getCombiningChar(uint c) {
+  const auto cc = getCombiningCharInt(c);
+  return cc ? QChar(cc) : QChar();
+}
+
+int Iso6937Converter::getCombiningCharInt(uint c) {
   switch(c) {
     // 12/00 (This position shall not be used)
 
@@ -604,7 +613,11 @@ QChar Iso6937Converter::getCombiningChar(uint c) {
     return 0x017E; // LATIN SMALL LETTER Z WITH CARON
 
   default:
-    myDebug() << "no match for " << c;
-    return QChar();
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+    myDebug() << "no match for" << hex << c;
+#else
+    myDebug() << "no match for" << Qt::hex << c;
+#endif
+    return 0;
   }
 }

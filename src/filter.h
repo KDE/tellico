@@ -32,9 +32,6 @@
 #include <QVariant>
 
 namespace Tellico {
-  namespace Data {
-    class Entry;
-  }
 
 /**
  * @author Robby Stephenson
@@ -67,7 +64,7 @@ public:
    *
    * @return Returns true if the entry is matched by the rule.
    */
-  bool matches(Data::EntryPtr entry) const;
+  bool matches(Tellico::Data::EntryPtr entry) const;
 
   /**
    * Return filter function. This can be any of the operators

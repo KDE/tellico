@@ -30,7 +30,7 @@
 #include "../translators/ciwimporter.h"
 #include "../tellico_debug.h"
 
-#include <KIO/Job>
+#include <KIO/MimetypeJob>
 #include <KJobWidgets>
 
 #include <QEvent>

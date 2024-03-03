@@ -141,7 +141,7 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
   mainLayout->addWidget(buttonBox);
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
-  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  okButton->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
   connect(okButton, &QPushButton::clicked, this, &ImportDialog::slotOk);
   connect(buttonBox, &QDialogButtonBox::accepted, this, &ImportDialog::accept);
   connect(buttonBox, &QDialogButtonBox::rejected, this, &ImportDialog::reject);

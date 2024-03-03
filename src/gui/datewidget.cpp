@@ -40,7 +40,7 @@
 #include <QMenu>
 #include <QWidgetAction>
 #include <QApplication>
-#include <QDesktopWidget>
+#include <QScreen>
 
 using Tellico::GUI::DateWidget;
 
@@ -286,7 +286,7 @@ void DateWidget::clear() {
 }
 
 void DateWidget::slotShowPicker() {
-  QRect desk = QApplication::desktop()->screenGeometry(this);
+  QRect desk = QApplication::primaryScreen()->geometry();
   QPoint popupPoint = mapToGlobal(QPoint(0, 0));
 
   int dateFrameHeight = m_menu->sizeHint().height();

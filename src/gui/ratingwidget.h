@@ -64,7 +64,7 @@ Q_SIGNALS:
 
 protected:
   virtual void mousePressEvent(QMouseEvent* e) Q_DECL_OVERRIDE;
-  virtual void enterEvent(QEvent* e) Q_DECL_OVERRIDE;
+  virtual void enterEvent(QEvent* e);
   virtual void leaveEvent(QEvent* e) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:

@@ -30,6 +30,12 @@
 
 #include "../datavectors.h"
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+#define TC_STRINGVIEW const QStringRef&
+#else
+#define TC_STRINGVIEW QStringView
+#endif
+
 namespace Tellico {
   namespace Import {
     namespace SAX {
@@ -64,15 +70,15 @@ public:
   StateHandler(StateData* data) : d(data) {}
   virtual ~StateHandler() {}
 
-  virtual bool start(const QStringRef& nsUri, const QStringRef& localName, const QXmlStreamAttributes& attributes) = 0;
-  virtual bool   end(const QStringRef& nsUri, const QStringRef& localName) = 0;
+  virtual bool start(TC_STRINGVIEW nsUri, TC_STRINGVIEW localName, const QXmlStreamAttributes& attributes) = 0;
+  virtual bool   end(TC_STRINGVIEW nsUri, TC_STRINGVIEW localName) = 0;
 
-  StateHandler* nextHandler(const QStringRef& nsUri, const QStringRef& localName);
+  StateHandler* nextHandler(TC_STRINGVIEW nsUri, TC_STRINGVIEW localName);
 protected:
   StateData* d;
 private:
   Q_DISABLE_COPY(StateHandler)
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&)  { return nullptr; }
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW)  { return nullptr; }
 };
 
 class NullHandler : public StateHandler {
@@ -80,8 +86,8 @@ public:
   NullHandler(StateData* data) : StateHandler(data) {}
   virtual ~NullHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE { return true; }
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE { return true; }
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE { return true; }
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE { return true; }
 };
 
 class RootHandler : public StateHandler {
@@ -89,11 +95,11 @@ public:
   RootHandler(StateData* data) : StateHandler(data) {}
   virtual ~RootHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE { return true; }
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE { return true; }
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE { return true; }
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE { return true; }
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class DocumentHandler : public StateHandler {
@@ -101,11 +107,11 @@ public:
   DocumentHandler(StateData* data) : StateHandler(data) {}
   virtual ~DocumentHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class CollectionHandler : public StateHandler {
@@ -113,11 +119,11 @@ public:
   CollectionHandler(StateData* data) : StateHandler(data) {}
   virtual ~CollectionHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class FieldsHandler : public StateHandler {
@@ -125,11 +131,11 @@ public:
   FieldsHandler(StateData* data) : StateHandler(data) {}
   virtual ~FieldsHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class FieldHandler : public StateHandler {
@@ -137,11 +143,11 @@ public:
   FieldHandler(StateData* data) : StateHandler(data), isI18n(false) {}
   virtual ~FieldHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
   bool isI18n;
 };
 
@@ -150,8 +156,8 @@ public:
   FieldPropertyHandler(StateData* data) : StateHandler(data) {}
   virtual ~FieldPropertyHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
   QString m_propertyName;
@@ -162,8 +168,8 @@ public:
   BibtexPreambleHandler(StateData* data) : StateHandler(data) {}
   virtual ~BibtexPreambleHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class BibtexMacrosHandler : public StateHandler {
@@ -171,11 +177,11 @@ public:
   BibtexMacrosHandler(StateData* data) : StateHandler(data) {}
   virtual ~BibtexMacrosHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class BibtexMacroHandler : public StateHandler {
@@ -183,8 +189,8 @@ public:
   BibtexMacroHandler(StateData* data) : StateHandler(data) {}
   virtual ~BibtexMacroHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
   QString m_macroName;
@@ -195,11 +201,11 @@ public:
   EntryHandler(StateData* data) : StateHandler(data) {}
   virtual ~EntryHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class FieldValueContainerHandler : public StateHandler {
@@ -207,11 +213,11 @@ public:
   FieldValueContainerHandler(StateData* data) : StateHandler(data) {}
   virtual ~FieldValueContainerHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class FieldValueHandler : public StateHandler {
@@ -220,11 +226,11 @@ public:
     , m_i18n(false), m_validateISBN(false) {}
   virtual ~FieldValueHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
   bool m_i18n;
   bool m_validateISBN;
 };
@@ -234,8 +240,8 @@ public:
   DateValueHandler(StateData* data) : StateHandler(data) {}
   virtual ~DateValueHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class TableColumnHandler : public StateHandler {
@@ -243,8 +249,8 @@ public:
   TableColumnHandler(StateData* data) : StateHandler(data) {}
   virtual ~TableColumnHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class ImagesHandler : public StateHandler {
@@ -252,11 +258,11 @@ public:
   ImagesHandler(StateData* data) : StateHandler(data) {}
   virtual ~ImagesHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class ImageHandler : public StateHandler {
@@ -265,8 +271,8 @@ public:
     , m_link(false), m_width(0), m_height(0) {}
   virtual ~ImageHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
   QString m_format;
@@ -281,11 +287,11 @@ public:
   FiltersHandler(StateData* data) : StateHandler(data) {}
   virtual ~FiltersHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class FilterHandler : public StateHandler {
@@ -293,11 +299,11 @@ public:
   FilterHandler(StateData* data) : StateHandler(data) {}
   virtual ~FilterHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class FilterRuleHandler : public StateHandler {
@@ -305,8 +311,8 @@ public:
   FilterRuleHandler(StateData* data) : StateHandler(data) {}
   virtual ~FilterRuleHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class BorrowersHandler : public StateHandler {
@@ -314,11 +320,11 @@ public:
   BorrowersHandler(StateData* data) : StateHandler(data) {}
   virtual ~BorrowersHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class BorrowerHandler : public StateHandler {
@@ -326,11 +332,11 @@ public:
   BorrowerHandler(StateData* data) : StateHandler(data) {}
   virtual ~BorrowerHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual StateHandler* nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 };
 
 class LoanHandler : public StateHandler {
@@ -339,8 +345,8 @@ public:
     , m_id(-1), m_inCalendar(false) {}
   virtual ~LoanHandler() {}
 
-  virtual bool start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
-  virtual bool   end(const QStringRef&, const QStringRef&) Q_DECL_OVERRIDE;
+  virtual bool start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(TC_STRINGVIEW, TC_STRINGVIEW) Q_DECL_OVERRIDE;
 
 private:
   int m_id;

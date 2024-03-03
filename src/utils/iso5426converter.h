@@ -41,12 +41,14 @@ public:
   static QString toUtf8(const QByteArray& text);
 
 private:
-  static bool hasNext(uint pos, uint len);
-  static bool isAscii(uchar c);
-  static bool isCombining(uchar c);
+  static bool hasNext(unsigned int pos, unsigned int len);
+  static bool isAscii(unsigned char c);
+  static bool isCombining(unsigned char c);
 
-  static QChar getChar(uchar c);
-  static QChar getCombiningChar(uint i);
+  static QChar getChar(unsigned char c);
+  static int getCharInt(unsigned char c);
+  static QChar getCombiningChar(unsigned int c);
+  static int getCombiningCharInt(unsigned int c);
 };
 
 } // end namespace

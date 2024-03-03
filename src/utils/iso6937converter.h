@@ -44,7 +44,9 @@ private:
   static bool isCombining(unsigned char c);
 
   static QChar getChar(unsigned char c);
+  static int getCharInt(unsigned char c);
   static QChar getCombiningChar(unsigned int c);
+  static int getCombiningCharInt(unsigned int c);
 };
 
 } // end namespace

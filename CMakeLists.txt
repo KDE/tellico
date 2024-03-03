@@ -64,6 +64,7 @@ set(KF_MAJOR_VERSION ${QT_MAJOR_VERSION})
 find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS
     Archive
     Codecs
+    Completion
     Config
     ConfigWidgets
     CoreAddons
@@ -81,6 +82,7 @@ find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS
     WidgetsAddons
     XmlGui
 )
+
 if(NOT USE_KHTML)
   find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
     WebEngineWidgets

@@ -333,7 +333,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
 
   QPushButton* okButton = m_buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
-  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  okButton->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
   connect(m_buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
   connect(m_buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
   connect(m_buttonBox, &QDialogButtonBox::helpRequested, this, &CollectionFieldsDialog::slotHelp);

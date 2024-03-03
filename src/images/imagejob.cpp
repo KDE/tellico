@@ -27,6 +27,7 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
+#include <KIO/StoredTransferJob>
 
 #include <QTimer>
 #include <QFileInfo>

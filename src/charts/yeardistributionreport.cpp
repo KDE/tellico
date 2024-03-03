@@ -36,7 +36,9 @@
 #include <QValueAxis>
 #include <QGraphicsSimpleTextItem>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 using namespace QtCharts;
+#endif
 using Tellico::YearDistributionReport;
 
 class YearDistributionReport::View : public QChartView {
@@ -165,7 +167,7 @@ QWidget* YearDistributionReport::createWidget() {
 
   auto widget = new QWidget;
   auto layout = new QVBoxLayout(widget);
-  layout->setMargin(0);
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
   auto chartView = new View(chart, widget);
   chartView->setRenderHint(QPainter::Antialiasing);

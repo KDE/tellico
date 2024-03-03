@@ -30,7 +30,11 @@
 #include <KRandom>
 
 #include <QRegularExpression>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QTextCodec>
+#else
+#include <QStringConverter>
+#endif
 #include <QVariant>
 #include <QCache>
 #include <QRandomGenerator>
@@ -91,7 +95,7 @@ uint Tellico::toUInt(const QString& s, bool* ok) {
     }
     return 0;
   }
-  return s.leftRef(idx).toUInt(ok);
+  return s.left(idx).toUInt(ok);
 }
 
 QString Tellico::i18nReplace(QString text) {
@@ -140,9 +144,15 @@ QString Tellico::minutes(int seconds) {
 }
 
 QString Tellico::fromHtmlData(const QByteArray& data_, const char* codecName) {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QTextCodec* codec = codecName ? QTextCodec::codecForHtml(data_, QTextCodec::codecForName(codecName))
                                 : QTextCodec::codecForHtml(data_);
   return codec->toUnicode(data_);
+#else
+  QStringDecoder decoder = QStringDecoder::decoderForHtml(data_);
+  if(!decoder.isValid()) decoder = QStringDecoder(codecName);
+  return decoder.decode(data_);
+#endif
 }
 
 QString Tellico::removeAccents(const QString& value_) {

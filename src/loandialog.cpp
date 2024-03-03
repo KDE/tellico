@@ -215,7 +215,7 @@ void LoanDialog::init() {
   m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
   QPushButton* okButton = m_buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
-  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  okButton->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
   okButton->setEnabled(false); // disable until a name is entered
   connect(m_buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
   connect(m_buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);

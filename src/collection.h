@@ -221,7 +221,7 @@ public:
   // it also gets overridden for different collection types
   // the return values should be compared against the GOOD and PERFECT
   // static match constants
-  virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const;
+  virtual int sameEntry(EntryPtr entry1, EntryPtr entry2) const;
 
   /**
    * Determines whether or not a certain value is allowed for an field.

@@ -27,6 +27,7 @@
 #include "../utils/guiproxy.h"
 #include "../tellico_debug.h"
 
+#include <KIO/StoredTransferJob>
 #include <KIO/PreviewJob>
 #include <KIO/StatJob>
 #include <KIO/JobUiDelegate>

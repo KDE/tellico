@@ -24,8 +24,6 @@
 
 #include "logger.h"
 
-#include <QTextCodec>
-
 namespace {
   const int MAX_LINES_BEFORE_FLUSH = 1000;
 }
@@ -102,7 +100,6 @@ void Logger::setLogFile(const QString& logFile_) {
   }
 
   m_logStream.reset(new QTextStream(&m_logFile));
-  m_logStream->setCodec(QTextCodec::codecForName("UTF-8"));
 }
 
 QString Logger::logFile() const {

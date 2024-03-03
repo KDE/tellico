@@ -34,6 +34,7 @@
 
 #include <KColorUtils>
 #include <KZip>
+#include <KIO/Global>
 
 #include <QCache>
 #include <QFileInfo>

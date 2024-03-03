@@ -96,6 +96,10 @@ bool Iso5426Converter::isCombining(uchar c) {
 
 // Source : https://www.itscj.ipsj.or.jp/iso-ir/053.pdf
 QChar Iso5426Converter::getChar(uchar c) {
+  return QChar(getCharInt(c));
+}
+
+int Iso5426Converter::getCharInt(uchar c) {
   switch(c) {
   case 0xA1:
     return 0x00A1; // 2/1 inverted exclamation mark
@@ -210,11 +214,16 @@ QChar Iso5426Converter::getChar(uchar c) {
   // 7/13 (this position shall not be used)
   // 7/14 (this position shall not be used)
   default:
-    return QLatin1Char(c);
+    return c;
   }
 }
 
 QChar Iso5426Converter::getCombiningChar(uint c) {
+  const auto cc = getCombiningCharInt(c);
+  return cc ? QChar(cc) : QChar();
+}
+
+int Iso5426Converter::getCombiningCharInt(uint c) {
   switch(c) {
   // 4/0 low rising tone mark
   case 0xC041:
@@ -1214,6 +1223,6 @@ QChar Iso5426Converter::getCombiningChar(uint c) {
 #else
     myDebug() << "no match for" << Qt::hex << c;
 #endif
-    return QChar();
+    return 0;
   }
 }

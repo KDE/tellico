@@ -44,7 +44,9 @@ namespace {
   static const int NUM_CHART_COLUMNS = 2;
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 using namespace QtCharts;
+#endif
 using Tellico::GroupSummaryWidget;
 using Tellico::GroupSummaryReport;
 
@@ -53,7 +55,7 @@ GroupSummaryWidget::GroupSummaryWidget(const QString& title_, int count_, QWidge
   setWidget(widget);
 
   m_layout = new QGridLayout(widget);
-  m_layout->setMargin(0);
+  m_layout->setContentsMargins(0, 0, 0, 0);
   m_layout->setSpacing(0);
   widget->setLayout(m_layout);
 
@@ -118,8 +120,8 @@ void GroupSummaryWidget::addChart(Tellico::Data::FieldPtr field_) {
   auto chart = new BarChart(groupNames, groupCounts);
   m_charts << chart;
   chart->setTitle(i18n("Top Values: %1", field_->title()));
-  chart->setTheme(qApp->palette().color(QPalette::Window).lightnessF() < 0.25 ? QtCharts::QChart::ChartThemeDark
-                                                                              : QtCharts::QChart::ChartThemeLight);
+  chart->setTheme(qApp->palette().color(QPalette::Window).lightnessF() < 0.25 ? QChart::ChartThemeDark
+                                                                              : QChart::ChartThemeLight);
 
   auto chartView = new QChartView(chart, widget());
   chartView->setMinimumHeight(groupNames.count() * 50);

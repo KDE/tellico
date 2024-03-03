@@ -36,7 +36,9 @@
 #include <QDateTimeAxis>
 #include <QValueAxis>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 using namespace QtCharts;
+#endif
 using Tellico::CollectionSizeReport;
 
 CollectionSizeReport::CollectionSizeReport() : ChartReport() {
@@ -122,7 +124,7 @@ QWidget* CollectionSizeReport::createWidget() {
 
   auto widget = new QWidget;
   auto layout = new QVBoxLayout(widget);
-  layout->setMargin(0);
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
   auto chartView = new QChartView(chart, widget);
   chartView->setRenderHint(QPainter::Antialiasing);

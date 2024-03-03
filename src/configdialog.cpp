@@ -119,7 +119,7 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
   button(QDialogButtonBox::Ok)->setEnabled(false);
   button(QDialogButtonBox::Apply)->setEnabled(false);
   button(QDialogButtonBox::Ok)->setDefault(true);
-  button(QDialogButtonBox::Ok)->setShortcut(Qt::CTRL | Qt::Key_Return);
+  button(QDialogButtonBox::Ok)->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
 
   connect(this, &KPageDialog::currentPageChanged, this, &ConfigDialog::slotInitPage);
 }

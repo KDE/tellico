@@ -180,7 +180,7 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
                                                      QDialogButtonBox::Help);
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
-  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  okButton->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
   connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
   connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
   connect(buttonBox, &QDialogButtonBox::helpRequested, this, &FetcherConfigDialog::slotHelp);

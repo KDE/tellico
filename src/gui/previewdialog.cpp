@@ -55,7 +55,7 @@ PreviewDialog::PreviewDialog(QWidget* parent_)
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok);
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
-  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  okButton->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
   connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
   mainLayout->addWidget(buttonBox);
 

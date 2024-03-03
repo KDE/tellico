@@ -25,10 +25,8 @@
 #ifndef TELLICO_UTILS_H
 #define TELLICO_UTILS_H
 
-#include <Qt>
+#include <QStringList>
 
-class QString;
-class QStringList;
 class QPixmap;
 class QDialog;
 
