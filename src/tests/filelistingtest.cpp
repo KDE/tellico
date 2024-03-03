@@ -124,9 +124,11 @@ void FileListingTest::testXMPData() {
   QVERIFY(oggEntry);
   QCOMPARE(oggEntry->field("title"), QStringLiteral("test.ogg"));
   QCOMPARE(oggEntry->field("mimetype"), QStringLiteral("audio/x-vorbis+ogg"));
+#ifdef HAVE_KFILEMETADATA
   QStringList meta = Tellico::FieldFormat::splitTable(oggEntry->field(QStringLiteral("metainfo")));
   QVERIFY(!meta.isEmpty());
   QVERIFY(meta.contains(QStringLiteral("Bitrate::159000")));
+#endif
 }
 
 void FileListingTest::testStat() {
