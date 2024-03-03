@@ -73,9 +73,11 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   ProgressItem::Done done(this);
 
   // the importer might be running without a gui/widget
+  KIO::JobFlags flags = KIO::DefaultFlags;
+  if(!m_widget) flags |= KIO::HideProgressInfo;
   m_job = (m_widget && m_recursive->isChecked())
-          ? KIO::listRecursive(url(), KIO::DefaultFlags, false /* include hidden */)
-          : KIO::listDir(url(), KIO::DefaultFlags, false /* include hidden */);
+          ? KIO::listRecursive(url(), flags, false /* include hidden */)
+          : KIO::listDir(url(), flags, false /* include hidden */);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   void (KIO::ListJob::* jobEntries)(KIO::Job*, const KIO::UDSEntryList&) = &KIO::ListJob::entries;
   connect(static_cast<KIO::ListJob*>(m_job.data()), jobEntries, this, &FileListingImporter::slotEntries);

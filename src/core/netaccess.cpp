@@ -144,7 +144,9 @@ bool NetAccess::exists(const QUrl& url_, bool sourceSide_, QWidget* window_) {
     return QFile::exists(url_.toLocalFile());
   }
 
-  KIO::StatJob* job = KIO::stat(url_);
+  KIO::JobFlags flags = KIO::DefaultFlags;
+  if(!window_) flags |= KIO::HideProgressInfo;
+  KIO::StatJob* job = KIO::stat(url_, flags);
   KJobWidgets::setWindow(job, window_);
   job->setSide(sourceSide_ ? KIO::StatJob::SourceSide : KIO::StatJob::DestinationSide);
   return job->exec();
