@@ -147,39 +147,45 @@ void FileListingTest::testVideo() {
   QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
   QCOMPARE(coll->entryCount(), 2);
 
-  auto entry = coll->entries().at(0);
-  QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QStringLiteral("Test Movie"));
-  QCOMPARE(entry->field("origtitle"), QStringLiteral("The original title"));
-  QCOMPARE(entry->field("imdb"), QStringLiteral("https://www.imdb.com/title/tt0012345"));
-  QCOMPARE(entry->field("tmdb"), QStringLiteral("https://www.themoviedb.org/movie/345"));
-  QCOMPARE(entry->field("year"), QStringLiteral("2004"));
-  QCOMPARE(entry->field("running-time"), QStringLiteral("113"));
-  QCOMPARE(entry->field("certification"), QStringLiteral("PG (USA)"));
-  QCOMPARE(entry->field("genre"), QStringLiteral("Science Fiction; Romance"));
-  QCOMPARE(entry->field("keyword"), QStringLiteral("Favorite"));
-  QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
-  QCOMPARE(entry->field("studio"), QStringLiteral("Paramount"));
-  QCOMPARE(entry->field("writer"), QStringLiteral("Jill W. Writer"));
-  QCOMPARE(entry->field("director"), QStringLiteral("John B. Director; Famous Director"));
-  QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
+  auto e0 = coll->entries().at(0);
+  auto e1 = e0;
+  QVERIFY(e0);
+  if(e0->title() != QLatin1String("TestMove")) {
+    // the entries can be imported out of order from the file system
+    e0 = coll->entries().at(1);
+  } else {
+    e1 = coll->entries().at(1);
+  }
+  QCOMPARE(e0->field("title"), QStringLiteral("Test Movie"));
+  QCOMPARE(e0->field("origtitle"), QStringLiteral("The original title"));
+  QCOMPARE(e0->field("imdb"), QStringLiteral("https://www.imdb.com/title/tt0012345"));
+  QCOMPARE(e0->field("tmdb"), QStringLiteral("https://www.themoviedb.org/movie/345"));
+  QCOMPARE(e0->field("year"), QStringLiteral("2004"));
+  QCOMPARE(e0->field("running-time"), QStringLiteral("113"));
+  QCOMPARE(e0->field("certification"), QStringLiteral("PG (USA)"));
+  QCOMPARE(e0->field("genre"), QStringLiteral("Science Fiction; Romance"));
+  QCOMPARE(e0->field("keyword"), QStringLiteral("Favorite"));
+  QCOMPARE(e0->field("nationality"), QStringLiteral("USA"));
+  QCOMPARE(e0->field("studio"), QStringLiteral("Paramount"));
+  QCOMPARE(e0->field("writer"), QStringLiteral("Jill W. Writer"));
+  QCOMPARE(e0->field("director"), QStringLiteral("John B. Director; Famous Director"));
+  QStringList castList = Tellico::FieldFormat::splitTable(e0->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QStringLiteral("Jill Actress::Heroine"));
-  QVERIFY(!entry->field("plot").isEmpty());
+  QVERIFY(!e0->field("plot").isEmpty());
 
-  entry = coll->entries().at(1);
-  QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QStringLiteral("Alien"));
-  QCOMPARE(entry->field("imdb"), QStringLiteral("https://www.imdb.com/title/tt0078748"));
-  QCOMPARE(entry->field("tmdb"), QStringLiteral("https://www.themoviedb.org/movie/348"));
-  QCOMPARE(entry->field("year"), QStringLiteral("1979"));
-  QCOMPARE(entry->field("running-time"), QStringLiteral("117"));
-  QCOMPARE(entry->field("certification"), QStringLiteral("R (USA)"));
-  QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
-  QCOMPARE(entry->field("genre"), QStringLiteral("Horror; Science Fiction"));
-  QCOMPARE(entry->field("keyword"), QStringLiteral("Alien Collection"));
-  castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
+  QVERIFY(e1);
+  QCOMPARE(e1->field("title"), QStringLiteral("Alien"));
+  QCOMPARE(e1->field("imdb"), QStringLiteral("https://www.imdb.com/title/tt0078748"));
+  QCOMPARE(e1->field("tmdb"), QStringLiteral("https://www.themoviedb.org/movie/348"));
+  QCOMPARE(e1->field("year"), QStringLiteral("1979"));
+  QCOMPARE(e1->field("running-time"), QStringLiteral("117"));
+  QCOMPARE(e1->field("certification"), QStringLiteral("R (USA)"));
+  QCOMPARE(e1->field("nationality"), QStringLiteral("USA"));
+  QCOMPARE(e1->field("genre"), QStringLiteral("Horror; Science Fiction"));
+  QCOMPARE(e1->field("keyword"), QStringLiteral("Alien Collection"));
+  castList = Tellico::FieldFormat::splitTable(e1->field(QStringLiteral("cast")));
   QVERIFY(castList.count() > 2);
   QCOMPARE(castList.at(1), QStringLiteral("Sigourney Weaver::Lt. Ellen Louise Ripley"));
-  QVERIFY(!entry->field("plot").isEmpty());
+  QVERIFY(!e1->field("plot").isEmpty());
 }
