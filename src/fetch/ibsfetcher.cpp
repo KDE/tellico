@@ -265,7 +265,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   }
   f.close();
 #endif
-  QJsonDocument doc = QJsonDocument::fromJson(jsonMatch.capturedRef(1).toUtf8());
+  QJsonDocument doc = QJsonDocument::fromJson(jsonMatch.captured(1).toUtf8());
   QVariantMap objectMap = doc.object().toVariantMap();
   QVariantMap resultMap = objectMap.value(QStringLiteral("mainEntity")).toMap();
   if(resultMap.isEmpty()) {

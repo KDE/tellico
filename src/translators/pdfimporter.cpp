@@ -51,7 +51,11 @@
 
 #include <config.h>
 #ifdef HAVE_POPPLER
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <poppler-qt5.h>
+#else
+#include <poppler-qt6.h>
+#endif
 #endif
 
 namespace {
@@ -164,7 +168,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     }
 
     // now load from poppler
-    Poppler::Document* doc = Poppler::Document::load(ref->fileName());
+    auto doc = Poppler::Document::load(ref->fileName());
     if(doc && !doc->isLocked()) {
       // now the question is, do we overwrite XMP data with Poppler data?
       // for now, let's say yes conditionally
@@ -189,7 +193,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       }
 
       // now parse the first page text and try to guess
-      Poppler::Page* page = doc->page(0);
+      auto page = doc->page(0);
       if(page) {
         // a null rectangle means get all text on page
         QString text = page->text(QRectF());
@@ -235,13 +239,16 @@ Tellico::Data::CollPtr PDFImporter::collection() {
           entry->setField(QStringLiteral("arxiv"), arxiv);
           hasArxiv = true;
         }
-
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
         delete page;
+#endif
       }
     } else {
       myDebug() << "unable to read PDF info (poppler)";
     }
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     delete doc;
+#endif
 #elif defined HAVE_KFILEMETADATA
     if(!newColl || newColl->entryCount() == 0) {
       myDebug() << "Reading with metadata";

@@ -35,6 +35,7 @@
 
 #include <QImage>
 #include <QByteArray>
+#include <QIODevice>
 #include <QApplication>
 
 #include <limits>

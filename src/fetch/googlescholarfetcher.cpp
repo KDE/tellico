@@ -251,7 +251,7 @@ void GoogleScholarFetcher::setBibtexCookie() {
   auto i = inputRx.globalMatch(text);
   while(i.hasNext()) {
     auto match = i.next();
-    const auto input = match.capturedRef(0);
+    const auto input = match.captured(0);
     QString name, value;
     auto i2 = pairRx.globalMatch(input);
     while(i2.hasNext()) {

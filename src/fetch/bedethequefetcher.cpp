@@ -185,8 +185,8 @@ void BedethequeFetcher::slotComplete(KJob*) {
   auto i = anchorRx.globalMatch(output);
   while(i.hasNext() && m_started) {
     auto match = i.next();
-    const auto url = match.capturedRef(1);
-    const auto result = match.capturedRef(2);
+    const auto url = match.captured(1);
+    const auto result = match.captured(2);
     if(result.isEmpty()) {
       continue;
     }
@@ -196,7 +196,7 @@ void BedethequeFetcher::slotComplete(KJob*) {
     auto i2 = spanRx.globalMatch(result);
     while(i2.hasNext()) {
       auto spanMatch = i2.next();
-      const auto cname = spanMatch.capturedRef(1);
+      const auto cname = spanMatch.captured(1);
       const auto value = spanMatch.captured(2);
       if(cname == QLatin1String("serie")) {
         desc += value;
@@ -209,7 +209,7 @@ void BedethequeFetcher::slotComplete(KJob*) {
 
     if(!title.isEmpty() && !url.isEmpty()) {
       FetchResult* r = new FetchResult(this, title, desc.join(QLatin1String(" ")));
-      m_matches.insert(r->uid, QUrl(url.toString()));
+      m_matches.insert(r->uid, QUrl(url));
       emit signalResultFound(r);
     }
   }

@@ -27,11 +27,11 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../fieldformat.h"
-#include "../tellico_debug.h"
 
 #include <KLocalizedString>
 
 #include <QTextStream>
+#include <QIODevice>
 
 using Tellico::Import::GRS1Importer;
 GRS1Importer::TagMap* GRS1Importer::s_tagMap = nullptr;

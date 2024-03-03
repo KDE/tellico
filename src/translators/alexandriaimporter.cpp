@@ -97,7 +97,11 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   static const QRegularExpression spaces(QLatin1String("^ +"));
 
   QTextStream ts;
-  ts.setCodec("UTF-8"); // YAML is always utf8?
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+  ts.setCodec("UTF-8");
+#else
+  ts.setEncoding(QStringConverter::Utf8);
+#endif
   uint j = 0;
   for(QStringList::ConstIterator it = files.begin(); !m_cancelled && it != files.end(); ++it, ++j) {
     QFile file(dataDir.absoluteFilePath(*it));
@@ -109,7 +113,6 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
 
     bool readNextLine = true;
     ts.setDevice(&file);
-    ts.setCodec("UTF-8"); // YAML is always utf8?
     QString line;
     while(!ts.atEnd()) {
       if(readNextLine) {

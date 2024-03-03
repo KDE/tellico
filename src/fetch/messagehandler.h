@@ -25,9 +25,7 @@
 #ifndef TELLICO_FETCH_MESSAGEHANDLER_H
 #define TELLICO_FETCH_MESSAGEHANDLER_H
 
-#include <QString>
-
-class QStringList;
+#include <QStringList>
 
 namespace Tellico {
   namespace Fetch {

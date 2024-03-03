@@ -38,8 +38,8 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <KJobWidgets/KJobWidgets>
-#include <KIO/Job>
+#include <KJobWidgets>
+#include <KIO/ListJob>
 
 #include <QDate>
 #include <QDir>

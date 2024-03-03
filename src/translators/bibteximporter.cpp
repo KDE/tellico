@@ -38,7 +38,11 @@
 #include <QRegularExpression>
 #include <QGroupBox>
 #include <QRadioButton>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QTextCodec>
+#else
+#include <QStringConverter>
+#endif
 #include <QVBoxLayout>
 #include <QButtonGroup>
 #include <QFile>
@@ -70,7 +74,7 @@ BibtexImporter::~BibtexImporter() {
     bt_cleanup();
   }
   if(m_readUTF8) {
-    KConfigGroup config(KSharedConfig::openConfig(), "Import Options");
+    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Import Options"));
     config.writeEntry("Bibtex UTF8", m_readUTF8->isChecked());
   }
 }
@@ -345,7 +349,11 @@ QWidget* BibtexImporter::widget(QWidget* parent_) {
   m_readUTF8 = new QRadioButton(i18n("Use Unicode (UTF-8) encoding"), gbox);
   m_readUTF8->setWhatsThis(i18n("Read the imported file in Unicode (UTF-8)."));
   QString localStr = i18n("Use user locale (%1) encoding",
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
                           QLatin1String(QTextCodec::codecForLocale()->name()));
+#else
+                          QLatin1String(QStringConverter::::nameForEncoding(QStringConverter::System)));
+#endif
   m_readLocale = new QRadioButton(localStr, gbox);
   m_readLocale->setChecked(true);
   m_readLocale->setWhatsThis(i18n("Read the imported file in the local encoding."));
@@ -357,7 +365,7 @@ QWidget* BibtexImporter::widget(QWidget* parent_) {
   bg->addButton(m_readUTF8);
   bg->addButton(m_readLocale);
 
-  KConfigGroup config(KSharedConfig::openConfig(), "Import Options");
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Import Options"));
   bool useUTF8 = config.readEntry("Bibtex UTF8", false);
   if(useUTF8) {
     m_readUTF8->setChecked(true);

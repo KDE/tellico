@@ -155,7 +155,12 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
 
   QTextStream ts(&file);
   // alexandria uses utf-8 all the time
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   ts.setCodec("UTF-8");
+#else
+  ts.setEncoding(QStringConverter::Utf8);
+#endif
+
   ts << "--- !ruby/object:Alexandria::Book\n";
   ts << "authors:\n";
   QStringList authors = FieldFormat::splitValue(entry_->formattedField(QStringLiteral("author"), format));

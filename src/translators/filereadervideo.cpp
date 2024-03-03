@@ -257,7 +257,7 @@ bool FileReaderVideo::populateNfo(Data::EntryPtr entry_, const QString& nfoFile_
         QString certCountry = match.captured(1);
         if(certCountry.endsWith(QLatin1Char(':'))) certCountry.chop(1);
         if(certCountry.isEmpty() || certCountry == QLatin1String("US")) certCountry = QLatin1String("USA");
-        const QString cert = QStringLiteral("%1 (%2)").arg(match.capturedRef(2), certCountry);
+        const QString cert = QStringLiteral("%1 (%2)").arg(match.captured(2), certCountry);
         entry_->setField(QStringLiteral("certification"), cert);
       }
     } else if(elem.tagName() == QLatin1String("plot")) {

@@ -34,7 +34,7 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 #include <KDesktopFile>
-#include <KIO/Job>
+#include <KIO/FileCopyJob>
 #include <KIO/DeleteJob>
 
 #include <QFileInfo>
@@ -128,7 +128,7 @@ bool Manager::installTemplate(const QString& file_) {
   if(xslFile.isEmpty()) {
     success = false;
   } else {
-    KConfigGroup config(KSharedConfig::openConfig(), "KNewStuffFiles");
+    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("KNewStuffFiles"));
     config.writeEntry(file_, allFiles);
     config.writeEntry(xslFile, file_);
   }
@@ -158,7 +158,7 @@ bool Manager::removeTemplateByName(const QString& name_) {
 
   QString xslFile = userTemplates().value(name_);
   if(!xslFile.isEmpty()) {
-    KConfigGroup config(KSharedConfig::openConfig(), "KNewStuffFiles");
+    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("KNewStuffFiles"));
     QString file = config.readEntry(xslFile, QString());
     if(!file.isEmpty()) {
       return removeTemplate(file);
@@ -176,7 +176,7 @@ bool Manager::removeTemplate(const QString& file_) {
   }
   GUI::CursorSaver cs;
 
-  KConfigGroup fileGroup(KSharedConfig::openConfig(), "KNewStuffFiles");
+  KConfigGroup fileGroup(KSharedConfig::openConfig(), QLatin1String("KNewStuffFiles"));
   QStringList files = fileGroup.readEntry(file_, QStringList());
 
   if(files.isEmpty()) {
@@ -286,7 +286,7 @@ bool Manager::installScript(const QString& file_) {
   cg.writeEntry("NewStuffName", sourceName);
   cg.writeEntry("DeleteOnRemove", true);
 
-  KConfigGroup config(KSharedConfig::openConfig(), "KNewStuffFiles");
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("KNewStuffFiles"));
   config.writeEntry(sourceName, realFile);
   config.writeEntry(realFile, scriptFolder);
   //  myDebug() << "exeFile = " << exeFile;
@@ -311,7 +311,7 @@ bool Manager::removeScriptByName(const QString& name_) {
     return false;
   }
 
-  KConfigGroup config(KSharedConfig::openConfig(), "KNewStuffFiles");
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("KNewStuffFiles"));
   QString file = config.readEntry(name_, QString());
   if(!file.isEmpty()) {
     return removeScript(file);
@@ -330,7 +330,7 @@ bool Manager::removeScript(const QString& file_) {
   const QString sourceName = fi.completeBaseName();
 
   bool success = true;
-  KConfigGroup fileGroup(KSharedConfig::openConfig(), "KNewStuffFiles");
+  KConfigGroup fileGroup(KSharedConfig::openConfig(), QLatin1String("KNewStuffFiles"));
   QString scriptFolder = fileGroup.readEntry(file_, QString());
   if(scriptFolder.isEmpty()) {
     scriptFolder = fileGroup.readEntry(realFile, QString());

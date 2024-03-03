@@ -25,11 +25,8 @@
 #include <config.h>
 #include "reportdialog.h"
 #include "translators/htmlexporter.h"
-#include "images/imagefactory.h"
-#include "tellico_kernel.h"
 #include "collection.h"
 #include "document.h"
-#include "entry.h"
 #include "controller.h"
 #include "tellico_debug.h"
 #include "gui/combobox.h"
@@ -361,9 +358,13 @@ void ReportDialog::showText(const QString& text_, const QUrl& url_) {
     delete m_tempFile;
     m_tempFile = new QTemporaryFile(QDir::tempPath() + QLatin1String("/tellicoreport_XXXXXX") + QLatin1String(".html"));
     m_tempFile->open();
-    QTextStream stream(m_tempFile);
-    stream.setCodec("UTF-8");
-    stream << text_;
+    QTextStream ts(m_tempFile);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+    ts.setCodec("UTF-8");
+#else
+    ts.setEncoding(QStringConverter::Utf8);
+#endif
+    ts << text_;
     m_webView->load(QUrl::fromLocalFile(m_tempFile->fileName()));
   } else {
     m_webView->setHtml(text_, url_);

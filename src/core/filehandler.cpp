@@ -273,7 +273,7 @@ bool FileHandler::writeTextFile(QSaveFile& file_, const QString& text_, bool enc
   }
   // KDE Bug 380832. If string is longer than MAX_TEXT_CHUNK_WRITE_SIZE characters, split into chunks.
   for(int i = 0; i < text_.length(); i += MAX_TEXT_CHUNK_WRITE_SIZE) {
-    ts << text_.midRef(i, MAX_TEXT_CHUNK_WRITE_SIZE);
+    ts << text_.mid(i, MAX_TEXT_CHUNK_WRITE_SIZE);
   }
   file_.flush();
   const bool success = file_.commit();

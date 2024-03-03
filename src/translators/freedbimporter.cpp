@@ -376,7 +376,11 @@ void FreeDBImporter::readCache() {
     }
     QTextStream ts(&file);
     // libkcddb always writes the cache files in utf-8
-    ts.setCodec(QTextCodec::codecForName("UTF-8"));
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+    ts.setCodec("UTF-8");
+#else
+    ts.setEncoding(QStringConverter::Utf8);
+#endif
     QString cddbData = ts.readAll();
     file.close();
 

@@ -170,7 +170,7 @@ void GamingHistoryFetcher::slotComplete(KJob*) {
     QRegularExpressionMatchIterator i2 = dataRx.globalMatch(rowMatch.captured(1));
     while(i2.hasNext()) {
       QRegularExpressionMatch dataMatch = i2.next();
-      const QStringRef dataType = dataMatch.capturedRef(1);
+      const auto dataType = dataMatch.captured(1);
       QString dataValue = dataMatch.captured(2);
       if(dataType == QLatin1String("Name")) {
         auto anchorMatch = anchorRx.match(dataValue);
