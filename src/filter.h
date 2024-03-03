@@ -130,7 +130,7 @@ public:
 
   void setMatch(FilterOp op) { m_op = op; }
   FilterOp op() const { return m_op; }
-  bool matches(Data::EntryPtr entry) const;
+  bool matches(Tellico::Data::EntryPtr entry) const;
 
   void setName(const QString& name) { m_name = name; }
   const QString& name() const { return m_name; }
