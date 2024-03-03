@@ -62,7 +62,7 @@ class FileReaderMetaData : public AbstractFileReader {
 public:
   FileReaderMetaData(const QUrl& u) : AbstractFileReader(u) {}
 
-  virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) = 0;
+  virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) Q_DECL_OVERRIDE = 0;
 
 protected:
 #ifdef HAVE_KFILEMETADATA
