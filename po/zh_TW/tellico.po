@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-26 03:14+0000\n"
+"POT-Creation-Date: 2024-03-03 03:14+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -3302,7 +3302,7 @@ msgstr "Allocine 連結"
 #: src/fetch/allocinefetcher.cpp:324 src/fetch/allocinefetcher.cpp:503
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
 #: src/fetch/doubanfetcher.cpp:344 src/fetch/doubanfetcher.cpp:362
-#: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:617
+#: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:618
 #: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:322
 #: src/fetch/filmaffinityfetcher.cpp:459 src/fetch/imdbfetcher.cpp:902
 #: src/fetch/imdbfetcher.cpp:1822 src/fetch/kinopoiskfetcher.cpp:341
@@ -3649,7 +3649,7 @@ msgstr "AnimeNfo 評比"
 #: src/fetch/animenfofetcher.cpp:505 src/fetch/arxivfetcher.cpp:337
 #: src/fetch/bedethequefetcher.cpp:465 src/fetch/bibsonomyfetcher.cpp:190
 #: src/fetch/dbcfetcher.cpp:160 src/fetch/dblpfetcher.cpp:132
-#: src/fetch/doubanfetcher.cpp:625 src/fetch/dvdfrfetcher.cpp:190
+#: src/fetch/doubanfetcher.cpp:626 src/fetch/dvdfrfetcher.cpp:190
 #: src/fetch/filmasterfetcher.cpp:323 src/fetch/gaminghistoryfetcher.cpp:438
 #: src/fetch/googlescholarfetcher.cpp:277 src/fetch/hathitrustfetcher.cpp:318
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:616
@@ -3821,7 +3821,7 @@ msgid "User token:"
 msgstr "使用者(&U)："
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
-#: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:618
+#: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:619
 #, kde-format
 msgid "Douban Link"
 msgstr "Douban 連結"
