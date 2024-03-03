@@ -150,7 +150,7 @@ void FileListingTest::testVideo() {
   auto e0 = coll->entries().at(0);
   auto e1 = e0;
   QVERIFY(e0);
-  if(e0->title() != QLatin1String("TestMove")) {
+  if(e0->title() != QLatin1String("Test Movie")) {
     // the entries can be imported out of order from the file system
     e0 = coll->entries().at(1);
   } else {
