@@ -50,7 +50,7 @@ bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, b
     target_ = url_.toLocalFile();
     const bool readable = QFileInfo(target_).isReadable();
     if(!readable) {
-      s_lastErrorMessage = i18n(errorOpen, target_);
+      s_lastErrorMessage = TC_I18N(errorOpen, target_);
     }
     return readable;
   }
@@ -81,11 +81,11 @@ bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, b
       if(f.write(getJob->data()) > -1) {
         return true;
       } else {
-        s_lastErrorMessage = i18n(errorWrite, target_);
+        s_lastErrorMessage = TC_I18N(errorWrite, target_);
         myWarning() << "failed to write to" << target_;
       }
     } else {
-      s_lastErrorMessage = i18n(errorOpen, target_);
+      s_lastErrorMessage = TC_I18N(errorOpen, target_);
     }
   } else {
     s_lastErrorMessage = QStringLiteral("Tellico was unable to download %1").arg(url_.url());

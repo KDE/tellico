@@ -64,7 +64,7 @@ FileHandler::FileRef::FileRef(const QUrl& url_, bool quiet_) : m_device(nullptr)
       myLog() << s;
     }
     if(!quiet_) {
-      GUI::Proxy::sorry(s.isEmpty() ? i18n(errorLoad, url_.fileName()) : s);
+      GUI::Proxy::sorry(s.isEmpty() ? TC_I18N(errorLoad, url_.fileName()) : s);
     }
     return;
   }
@@ -92,7 +92,7 @@ bool FileHandler::FileRef::open(bool quiet_) {
   if(!m_device || !m_device->open(QIODevice::ReadOnly)) {
     if(!quiet_) {
       QUrl u = QUrl::fromLocalFile(fileName());
-      GUI::Proxy::sorry(i18n(errorLoad, u.fileName()));
+      GUI::Proxy::sorry(TC_I18N(errorLoad, u.fileName()));
     }
     delete m_device;
     m_device = nullptr;
@@ -158,7 +158,7 @@ QDomDocument FileHandler::readXMLDocument(const QUrl& url_, bool processNamespac
       details += QLatin1String("\n\t") + errorMsg;
       GUI::CursorSaver cs(Qt::ArrowCursor);
       if(GUI::Proxy::widget()) {
-        KMessageBox::detailedError(GUI::Proxy::widget(), i18n(errorLoad, url_.fileName()), details);
+        KMessageBox::detailedError(GUI::Proxy::widget(), TC_I18N(errorLoad, url_.fileName()), details);
       }
     }
     return QDomDocument();
@@ -213,7 +213,7 @@ bool FileHandler::writeBackupFile(const QUrl& url_) {
     success = job->exec();
   }
   if(!success) {
-    GUI::Proxy::sorry(i18n(errorWrite, url_.fileName() + QLatin1Char('~')));
+    GUI::Proxy::sorry(TC_I18N(errorWrite, url_.fileName() + QLatin1Char('~')));
   }
   return success;
 }
@@ -228,7 +228,7 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
     f.open(QIODevice::WriteOnly);
     if(f.error() != QFile::NoError) {
       if(!quiet_) {
-        GUI::Proxy::sorry(i18n(errorWrite, url_.fileName()));
+        GUI::Proxy::sorry(TC_I18N(errorWrite, url_.fileName()));
       }
       return false;
     }
@@ -243,7 +243,7 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
   if(f.error() != QFile::NoError) {
     tempfile.remove();
     if(!quiet_) {
-      GUI::Proxy::sorry(i18n(errorWrite, url_.fileName()));
+      GUI::Proxy::sorry(TC_I18N(errorWrite, url_.fileName()));
     }
     return false;
   }
@@ -254,7 +254,7 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
     KJobWidgets::setWindow(job, GUI::Proxy::widget());
     success = job->exec();
     if(!success && !quiet_) {
-      GUI::Proxy::sorry(i18n(errorUpload, url_.fileName()));
+      GUI::Proxy::sorry(TC_I18N(errorUpload, url_.fileName()));
     }
   }
   tempfile.remove();
@@ -293,7 +293,7 @@ bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool f
     f.open(QIODevice::WriteOnly);
     if(f.error() != QFile::NoError) {
       if(!quiet_) {
-        GUI::Proxy::sorry(i18n(errorWrite, url_.fileName()));
+        GUI::Proxy::sorry(TC_I18N(errorWrite, url_.fileName()));
       }
       return false;
     }
@@ -307,7 +307,7 @@ bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool f
   f.open(QIODevice::WriteOnly);
   if(f.error() != QFile::NoError) {
     if(!quiet_) {
-      GUI::Proxy::sorry(i18n(errorWrite, url_.fileName()));
+      GUI::Proxy::sorry(TC_I18N(errorWrite, url_.fileName()));
     }
     return false;
   }
@@ -318,7 +318,7 @@ bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool f
     KJobWidgets::setWindow(job, GUI::Proxy::widget());
     success = job->exec();
     if(!success && !quiet_) {
-      GUI::Proxy::sorry(i18n(errorUpload, url_.fileName()));
+      GUI::Proxy::sorry(TC_I18N(errorUpload, url_.fileName()));
     }
   }
   tempfile.remove();

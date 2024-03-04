@@ -24,19 +24,29 @@
 
 #include "tellico_strings.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <KLocalizedString>
+#define TC_STR const char*
+#define STR_NOOP I18N_NOOP
+#else
+#define TC_STR KLazyLocalizedString
+#define STR_NOOP kli18n
+#endif
 
-const char* Tellico::errorOpen = I18N_NOOP("Tellico is unable to open the file - %1.");
-const char* Tellico::errorLoad = I18N_NOOP("Tellico is unable to load the file - %1.");
-const char* Tellico::errorWrite = I18N_NOOP("Tellico is unable to write the file - %1.");
-const char* Tellico::errorUpload = I18N_NOOP("Tellico is unable to upload the file - %1.");
-const char* Tellico::errorAppendType = I18N_NOOP("Only collections with the same type of entries as "
+TC_STR Tellico::errorOpen = STR_NOOP("Tellico is unable to open the file - %1.");
+TC_STR Tellico::errorLoad = STR_NOOP("Tellico is unable to load the file - %1.");
+TC_STR Tellico::errorWrite = STR_NOOP("Tellico is unable to write the file - %1.");
+TC_STR Tellico::errorUpload = STR_NOOP("Tellico is unable to upload the file - %1.");
+TC_STR Tellico::errorAppendType = STR_NOOP("Only collections with the same type of entries as "
                                                  "the current one can be appended. No changes are being "
                                                  "made to the current collection.");
-const char* Tellico::errorMergeType = I18N_NOOP("Only collections with the same type of entries as "
+TC_STR Tellico::errorMergeType = STR_NOOP("Only collections with the same type of entries as "
                                                 "the current one can be merged. No changes are being "
                                                 "made to the current collection.");
-const char* Tellico::errorImageLoad = I18N_NOOP("Tellico is unable to load an image from the file - %1.");
+TC_STR Tellico::errorImageLoad = STR_NOOP("Tellico is unable to load an image from the file - %1.");
 
-const char* Tellico::untitledFilename = I18N_NOOP("Untitled");
-const char* Tellico::providedBy = I18N_NOOP("This information was freely provided by <a href=\"%1\">%2</a>.");
+TC_STR Tellico::untitledFilename = STR_NOOP("Untitled");
+TC_STR Tellico::providedBy = STR_NOOP("This information was freely provided by <a href=\"%1\">%2</a>.");
+
+#undef TC_STR
+#undef STR_NOOP

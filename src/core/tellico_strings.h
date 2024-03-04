@@ -25,16 +25,29 @@
 #ifndef TELLICO_STRINGS_H
 #define TELLICO_STRINGS_H
 
+#include <Qt>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#define TC_STR const char*
+#define TC_I18N i18n
+#else
+#include <KLazyLocalizedString>
+#define TC_STR KLazyLocalizedString
+#define TC_I18N(str1, str2) str1.subs(str2).toString()
+#endif
+
 namespace Tellico {
-  extern const char* errorOpen;
-  extern const char* errorLoad;
-  extern const char* errorWrite;
-  extern const char* errorUpload;
-  extern const char* errorAppendType;
-  extern const char* errorMergeType;
-  extern const char* errorImageLoad;
-  extern const char* untitledFilename;
-  extern const char* providedBy;
+  extern TC_STR errorOpen;
+  extern TC_STR errorLoad;
+  extern TC_STR errorWrite;
+  extern TC_STR errorUpload;
+  extern TC_STR errorAppendType;
+  extern TC_STR errorMergeType;
+  extern TC_STR errorImageLoad;
+  extern TC_STR untitledFilename;
+  extern TC_STR providedBy;
 }
+
+#undef TC_STR
 
 #endif
