@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-02 01:37+0000\n"
+"POT-Creation-Date: 2024-03-04 01:36+0000\n"
 "PO-Revision-Date: 2023-05-12 19:32+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -168,52 +168,52 @@ msgstr "Ausleiher auswählen"
 msgid "Name"
 msgstr "Name"
 
-#: src/charts/collectionsizereport.cpp:46
-#: src/charts/collectionsizereport.cpp:117
+#: src/charts/collectionsizereport.cpp:48
+#: src/charts/collectionsizereport.cpp:119
 #, kde-format
 msgid "Collection Size"
 msgstr "Sammlungsgröße"
 
 # Kürzel testen
-#: src/charts/collectionsizereport.cpp:88 src/mainwindow.cpp:1666
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1666
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Einträge insgesamt: %1"
 
-#: src/charts/collectionsizereport.cpp:92
+#: src/charts/collectionsizereport.cpp:94
 #, kde-format
 msgid "Collection Size Over Time"
 msgstr "Sammlungsgröße im Verlauf der Zeit"
 
-#: src/charts/groupsummaryreport.cpp:60
+#: src/charts/groupsummaryreport.cpp:62
 #, kde-format
 msgid "Group Summary: %1"
 msgstr "Gruppen-Zusammenfassung: %1"
 
 # Kürzel testen
-#: src/charts/groupsummaryreport.cpp:66
+#: src/charts/groupsummaryreport.cpp:68
 #, kde-format
 msgid "Total number of entries: %1"
 msgstr "Gesamte Anzahl von Einträgen: %1"
 
 # Kürzel testen
-#: src/charts/groupsummaryreport.cpp:120
+#: src/charts/groupsummaryreport.cpp:122
 #, kde-format
 msgid "Top Values: %1"
 msgstr "Höchste Werte: %1"
 
-#: src/charts/groupsummaryreport.cpp:192
+#: src/charts/groupsummaryreport.cpp:194
 #, kde-format
 msgid "Group Summary Report"
 msgstr "Gruppen-Zusammenfassungsbericht"
 
-#: src/charts/yeardistributionreport.cpp:69
-#: src/charts/yeardistributionreport.cpp:133
+#: src/charts/yeardistributionreport.cpp:71
+#: src/charts/yeardistributionreport.cpp:135
 #, kde-format
 msgid "Year Distribution"
 msgstr "Jahresverteilung"
 
-#: src/charts/yeardistributionreport.cpp:158
+#: src/charts/yeardistributionreport.cpp:160
 #, kde-format
 msgctxt "Distinct number of items"
 msgid "Count"
@@ -239,7 +239,7 @@ msgstr "Meine Sammlung"
 #: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
 #: src/document.cpp:531 src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:137
-#: src/translators/filereadervideo.cpp:130
+#: src/translators/filereadervideo.cpp:129
 #, kde-format
 msgid "Personal"
 msgstr "Privat"
@@ -772,7 +772,7 @@ msgstr "Ein Feld mit einem abgeleiteten Wert muss eine Wertvorlage besitzen."
 #: src/fetch/upcitemdbfetcher.cpp:215 src/fetch/vgcollectfetcher.cpp:236
 #: src/fetch/vgcollectfetcher.cpp:339 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:331 src/field.cpp:336
-#: src/translators/filereadervideo.cpp:278
+#: src/translators/filereadervideo.cpp:276
 #: src/translators/gcstarimporter.cpp:90
 #, kde-format
 msgid "General"
@@ -782,7 +782,7 @@ msgstr "Allgemein"
 #: src/collections/bookcollection.cpp:32
 #: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:362
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
-#: src/translators/pdfimporter.cpp:232
+#: src/translators/pdfimporter.cpp:236
 #, kde-format
 msgid "Publishing"
 msgstr "Ausgabe"
@@ -955,7 +955,7 @@ msgstr "Schlüsselwörter"
 #: src/fetch/entrezfetcher.cpp:440 src/fetch/entrezfetcher.cpp:516
 #: src/fetch/opdsfetcher.cpp:436 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:136
-#: src/translators/filereadervideo.cpp:129
+#: src/translators/filereadervideo.cpp:128
 #: src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "URL"
@@ -1137,7 +1137,7 @@ msgstr "Untertitel"
 
 #: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:968
 #: src/fetch/doubanfetcher.cpp:449 src/fetch/doubanfetcher.cpp:502
-#: src/fetch/ibsfetcher.cpp:292 src/translators/alexandriaimporter.cpp:160
+#: src/fetch/ibsfetcher.cpp:292 src/translators/alexandriaimporter.cpp:163
 #: src/translators/librarythingimporter.cpp:148
 #, kde-format
 msgid "Hardback"
@@ -1702,8 +1702,8 @@ msgstr "Album"
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:162
 #: src/translators/freedbimporter.cpp:274
-#: src/translators/freedbimporter.cpp:392
-#: src/translators/freedbimporter.cpp:459
+#: src/translators/freedbimporter.cpp:396
+#: src/translators/freedbimporter.cpp:463
 #, kde-format
 msgid "Compact Disc"
 msgstr "Compact Disc"
@@ -2872,9 +2872,9 @@ msgid "Template Packages"
 msgstr "Vorlagenpakete"
 
 #: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1297
-#: src/mainwindow.cpp:1473 src/reportdialog.cpp:428 src/reportdialog.cpp:443
+#: src/mainwindow.cpp:1473 src/reportdialog.cpp:429 src/reportdialog.cpp:444
 #: src/translators/bibtexexporter.cpp:65
-#: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
+#: src/translators/bibtexmlexporter.cpp:55 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
 #: src/translators/librarythingimporter.cpp:189
 #: src/translators/onixexporter.cpp:71
@@ -2981,17 +2981,17 @@ msgstr ""
 "unterstützt es zurzeit noch nicht, einen Gegenstand mehrfach zu verleihen. "
 "Sie werden von der Liste der zu verleihenden Gegenstände entfernt."
 
-#: src/core/filehandler.cpp:151
+#: src/core/filehandler.cpp:155
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Fehler beim Einlesen der XML-Datei in Zeile %1, Spalte %2."
 
-#: src/core/filehandler.cpp:153
+#: src/core/filehandler.cpp:157
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Die Qt-Fehlermeldung lautet:"
 
-#: src/core/filehandler.cpp:185
+#: src/core/filehandler.cpp:189
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
@@ -2999,7 +2999,7 @@ msgstr ""
 "Eine Datei mit dem Namen „%1“ existiert bereits. Möchten Sie diese "
 "überschreiben?"
 
-#: src/core/filehandler.cpp:188
+#: src/core/filehandler.cpp:192
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Datei überschreiben?"
@@ -3674,7 +3674,7 @@ msgstr ""
 
 #: src/fetch/arxivfetcher.cpp:337 src/fetch/bedethequefetcher.cpp:443
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:651
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:652
 #: src/fetch/dvdfrfetcher.cpp:190 src/fetch/filmasterfetcher.cpp:323
 #: src/fetch/gaminghistoryfetcher.cpp:438
 #: src/fetch/googlescholarfetcher.cpp:280 src/fetch/hathitrustfetcher.cpp:318
@@ -3851,7 +3851,7 @@ msgid "User token:"
 msgstr "Benutzer-Token: "
 
 #: src/fetch/doubanfetcher.cpp:369 src/fetch/doubanfetcher.cpp:387
-#: src/fetch/doubanfetcher.cpp:405 src/fetch/doubanfetcher.cpp:643
+#: src/fetch/doubanfetcher.cpp:405 src/fetch/doubanfetcher.cpp:644
 #: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:322
 #: src/fetch/filmaffinityfetcher.cpp:459 src/fetch/imdbfetcher.cpp:472
 #: src/fetch/imdbfetcher.cpp:534 src/fetch/kinopoiskfetcher.cpp:341
@@ -3859,13 +3859,13 @@ msgstr "Benutzer-Token: "
 #: src/fetch/kinoteatrfetcher.cpp:264 src/fetch/kinoteatrfetcher.cpp:508
 #: src/fetch/omdbfetcher.cpp:263 src/fetch/themoviedbfetcher.cpp:333
 #: src/fetch/themoviedbfetcher.cpp:582 src/fetch/vndbfetcher.cpp:286
-#: src/fetch/vndbfetcher.cpp:434 src/translators/filereadervideo.cpp:202
+#: src/fetch/vndbfetcher.cpp:434 src/translators/filereadervideo.cpp:200
 #, kde-format
 msgid "Original Title"
 msgstr "Original-Titel"
 
 #: src/fetch/doubanfetcher.cpp:375 src/fetch/doubanfetcher.cpp:393
-#: src/fetch/doubanfetcher.cpp:411 src/fetch/doubanfetcher.cpp:644
+#: src/fetch/doubanfetcher.cpp:411 src/fetch/doubanfetcher.cpp:645
 #, kde-format
 msgid "Douban Link"
 msgstr "Douban-Verknüpfung"
@@ -4000,7 +4000,7 @@ msgstr "UPC/EAN"
 msgid "Keyword"
 msgstr "Schlüsselwort"
 
-#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:231
+#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:235
 #, kde-format
 msgid "arXiv ID"
 msgstr "arXiv-ID"
@@ -4391,7 +4391,7 @@ msgid "Field"
 msgstr "Feld"
 
 #: src/fetch/themoviedbfetcher.cpp:320 src/fetch/themoviedbfetcher.cpp:579
-#: src/translators/filereadervideo.cpp:277
+#: src/translators/filereadervideo.cpp:275
 #, kde-format
 msgid "TMDb Link"
 msgstr "TMDb-Verknüpfung"
@@ -5223,7 +5223,7 @@ msgstr "Zeile nach oben bewegen"
 msgid "Move Row Down"
 msgstr "Zeile nach unten bewegen"
 
-#: src/images/imagejob.cpp:76 src/images/imagejob.cpp:110
+#: src/images/imagejob.cpp:77 src/images/imagejob.cpp:111
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Das Bild kann nicht geladen werden – %1."
@@ -6635,33 +6635,33 @@ msgctxt "@title:window"
 msgid "Tellico Log"
 msgstr "Tellico"
 
-#: src/reportdialog.cpp:91
+#: src/reportdialog.cpp:88
 #, kde-format
 msgid "Collection Report"
 msgstr "Sammlungsbericht"
 
-#: src/reportdialog.cpp:102
+#: src/reportdialog.cpp:99
 #, kde-format
 msgid "&Report template:"
 msgstr "Be&richtsvorlage:"
 
-#: src/reportdialog.cpp:128
+#: src/reportdialog.cpp:125
 #, kde-format
 msgid "One Entry Per Page"
 msgstr "Ein Eintrag pro Seite"
 
-#: src/reportdialog.cpp:140
+#: src/reportdialog.cpp:137
 #, kde-format
 msgid "&Generate"
 msgstr "&Erstellen"
 
-#: src/reportdialog.cpp:160
+#: src/reportdialog.cpp:157
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr ""
 "Wählen Sie eine Berichtsvorlage aus und klicken Sie auf <em>Erstellen</em>."
 
-#: src/reportdialog.cpp:161
+#: src/reportdialog.cpp:158
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
@@ -6669,12 +6669,12 @@ msgstr ""
 "Bei großen Sammlungen kann es mehrere Sekunden dauern, bis der Bericht "
 "erstellt wurde."
 
-#: src/reportdialog.cpp:426
+#: src/reportdialog.cpp:427
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG-Dateien"
 
-#: src/reportdialog.cpp:441 src/translators/htmlexporter.cpp:100
+#: src/reportdialog.cpp:442 src/translators/htmlexporter.cpp:100
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML-Dateien"
@@ -6798,12 +6798,12 @@ msgstr ""
 "<qt>Eine Alexandria-Bibliothek namens <i>%1</i> existiert bereits. Alle "
 "existierenden Bücher in dieser Bibliothek werden überschrieben.</qt>"
 
-#: src/translators/alexandriaimporter.cpp:236
+#: src/translators/alexandriaimporter.cpp:239
 #, kde-format
 msgid "Alexandria Options"
 msgstr "Alexandria-Optionen"
 
-#: src/translators/alexandriaimporter.cpp:239
+#: src/translators/alexandriaimporter.cpp:242
 #, kde-format
 msgid "&Library:"
 msgstr "Bib&liothek:"
@@ -6868,7 +6868,7 @@ msgstr ""
 "Wenn markiert, wird die Bitrate für jede Spur zu den Einträgen hinzugefügt."
 
 #: src/translators/bibtexexporter.cpp:218
-#: src/translators/bibteximporter.cpp:342
+#: src/translators/bibteximporter.cpp:346
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Bibtex-Optionen"
@@ -6937,37 +6937,37 @@ msgstr ""
 "Werte werden entweder durch geschweifte Klammern oder mit Anführungszeichen "
 "markiert.</qt>"
 
-#: src/translators/bibteximporter.cpp:106
+#: src/translators/bibteximporter.cpp:110
 #, kde-format
 msgid "No valid bibtex entries were found"
 msgstr "Es wurden keine gültigen Bibtex-Einträge gefunden"
 
-#: src/translators/bibteximporter.cpp:125
+#: src/translators/bibteximporter.cpp:129
 #, kde-format
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "Es wurden keine gültigen Bibtex-Einträge in der Datei gefunden – %1"
 
-#: src/translators/bibteximporter.cpp:345
+#: src/translators/bibteximporter.cpp:349
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
 msgstr "Unicode-(UTF-8)-Kodierung verwenden"
 
-#: src/translators/bibteximporter.cpp:346
+#: src/translators/bibteximporter.cpp:350
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
 msgstr "Die importierte Datei als Unicode (UTF-8) einlesen."
 
-#: src/translators/bibteximporter.cpp:347
+#: src/translators/bibteximporter.cpp:351
 #, kde-format
 msgid "Use user locale (%1) encoding"
 msgstr "Benutzer-Kodierung (%1) verwenden"
 
-#: src/translators/bibteximporter.cpp:351
+#: src/translators/bibteximporter.cpp:359
 #, kde-format
 msgid "Read the imported file in the local encoding."
 msgstr "Die importierte Datei in der lokalen Kodierung einlesen."
 
-#: src/translators/bibtexmlexporter.cpp:51
+#: src/translators/bibtexmlexporter.cpp:55
 #, kde-format
 msgid "Bibtexml Files"
 msgstr "BibTeXML-Dateien"
@@ -7207,27 +7207,27 @@ msgstr "Discogs-Verknüpfung"
 msgid "Scanning files..."
 msgstr "Dateien werden eingelesen ..."
 
-#: src/translators/filelistingimporter.cpp:152
+#: src/translators/filelistingimporter.cpp:154
 #, kde-format
 msgid "File Listing Options"
 msgstr "Dateianzeige-Einstellungen"
 
-#: src/translators/filelistingimporter.cpp:155
+#: src/translators/filelistingimporter.cpp:157
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Rekursive Ordnersuche"
 
-#: src/translators/filelistingimporter.cpp:156
+#: src/translators/filelistingimporter.cpp:158
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "Wenn markiert, werden Ordner rekursiv nach allen Dateien abgesucht."
 
-#: src/translators/filelistingimporter.cpp:160
+#: src/translators/filelistingimporter.cpp:162
 #, kde-format
 msgid "Generate file previews"
 msgstr "Datei-Vorschauen erzeugen"
 
-#: src/translators/filelistingimporter.cpp:161
+#: src/translators/filelistingimporter.cpp:163
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
@@ -7264,32 +7264,32 @@ msgstr ""
 "<qt>Tellico war nicht in der Lage, das Nachschlagen der CD abzuschließen.</"
 "qt> "
 
-#: src/translators/freedbimporter.cpp:484
+#: src/translators/freedbimporter.cpp:488
 #, kde-format
 msgid "Various"
 msgstr "Verschiedene"
 
-#: src/translators/freedbimporter.cpp:504
+#: src/translators/freedbimporter.cpp:508
 #, kde-format
 msgid "Audio CD Options"
 msgstr "Audio-CD-Optionen"
 
-#: src/translators/freedbimporter.cpp:511
+#: src/translators/freedbimporter.cpp:515
 #, kde-format
 msgid "Read data from CD-ROM device"
 msgstr "Daten vom CD-Laufwerk lesen"
 
-#: src/translators/freedbimporter.cpp:514
+#: src/translators/freedbimporter.cpp:518
 #, kde-format
 msgid "Select or input the CD-ROM device location."
 msgstr "Wählen Sie das CD-Laufwerk aus oder geben Sie die Position ein."
 
-#: src/translators/freedbimporter.cpp:523
+#: src/translators/freedbimporter.cpp:527
 #, kde-format
 msgid "Read all CDDB cache files only"
 msgstr "Nur die Dateien aus dem CDDB-Cache lesen"
 
-#: src/translators/freedbimporter.cpp:524
+#: src/translators/freedbimporter.cpp:528
 #, kde-format
 msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
@@ -7417,12 +7417,12 @@ msgstr ""
 "Wenn markiert, werden die Bilder des Dokuments zum gezippten ONIX-Archiv "
 "hinzugefügt."
 
-#: src/translators/pdfimporter.cpp:121 src/translators/pdfimporter.cpp:138
+#: src/translators/pdfimporter.cpp:125 src/translators/pdfimporter.cpp:142
 #, kde-format
 msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr "Es sind keine Metadaten aus der PDF-Datei gelesen worden."
 
-#: src/translators/pdfimporter.cpp:320
+#: src/translators/pdfimporter.cpp:327
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "
