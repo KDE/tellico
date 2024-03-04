@@ -43,7 +43,7 @@ using Tellico::GUI::RatingWidget;
 RatingWidget::RatingWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
     : QWidget(parent_), m_field(field_), m_currIndex(-1) {
   QHBoxLayout* layout = new QHBoxLayout(this);
-  layout->setMargin(0);
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
 
   m_pixOn = QIcon(QLatin1String(":/icons/star_on")).pixmap(QSize(18, 18));

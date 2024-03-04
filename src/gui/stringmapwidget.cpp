@@ -53,7 +53,7 @@ StringMapWidget::StringMapWidget(const QMap<QString, QString>& map_, QWidget* pa
 
   QWidget* box = new QWidget(this);
   QHBoxLayout* boxHBoxLayout = new QHBoxLayout(box);
-  boxHBoxLayout->setMargin(0);
+  boxHBoxLayout->setContentsMargins(0, 0, 0, 0);
   boxHBoxLayout->setSpacing(4);
   l->addWidget(box);
 

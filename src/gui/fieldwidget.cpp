@@ -45,7 +45,7 @@ using Tellico::GUI::FieldWidget;
 FieldWidget::FieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
     : QWidget(parent_), m_field(field_), m_settingText(false) {
   QHBoxLayout* l = new QHBoxLayout(this);
-  l->setMargin(2);
+  l->setContentsMargins(2, 2, 2, 2);
   l->setSpacing(2);
   l->addSpacing(4); // add some more space in the columns between widgets
 

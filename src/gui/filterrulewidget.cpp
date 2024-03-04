@@ -45,7 +45,7 @@ using Tellico::FilterRuleWidget;
 FilterRuleWidget::FilterRuleWidget(Tellico::FilterRule* rule_, QWidget* parent_)
     : QWidget(parent_), m_ruleDate(nullptr), m_ruleType(General) {
   QHBoxLayout* l = new QHBoxLayout(this);
-  l->setMargin(0);
+  l->setContentsMargins(0, 0, 0, 0);
 //  l->setSizeConstraint(QLayout::SetFixedSize);
   setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
 

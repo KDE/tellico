@@ -549,7 +549,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
 
   QWidget* box1 = new QWidget(groupBox);
   QHBoxLayout* box1HBoxLayout = new QHBoxLayout(box1);
-  box1HBoxLayout->setMargin(0);
+  box1HBoxLayout->setContentsMargins(0, 0, 0, 0);
   vlay->addWidget(box1);
   box1HBoxLayout->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
@@ -632,7 +632,7 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
 
   QWidget* hb = new QWidget(frame);
   QHBoxLayout* hbHBoxLayout = new QHBoxLayout(hb);
-  hbHBoxLayout->setMargin(0);
+  hbHBoxLayout->setContentsMargins(0, 0, 0, 0);
   leftLayout->addWidget(hb);
   m_moveUpSourceBtn = new QPushButton(i18n("Move &Up"), hb);
   hbHBoxLayout->addWidget(m_moveUpSourceBtn);
@@ -647,7 +647,7 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
 
   QWidget* hb2 = new QWidget(frame);
   QHBoxLayout* hb2HBoxLayout = new QHBoxLayout(hb2);
-  hb2HBoxLayout->setMargin(0);
+  hb2HBoxLayout->setContentsMargins(0, 0, 0, 0);
   leftLayout->addWidget(hb2);
   m_cbFilterSource = new QCheckBox(i18n("Filter by type:"), hb2);
   hb2HBoxLayout->addWidget(m_cbFilterSource);

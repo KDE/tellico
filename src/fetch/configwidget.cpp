@@ -36,7 +36,7 @@ using Tellico::Fetch::ConfigWidget;
 ConfigWidget::ConfigWidget(QWidget* parent_) : QWidget(parent_), m_modified(false), m_accepted(false) {
   QHBoxLayout* boxLayout = new QHBoxLayout(this);
   boxLayout->setSpacing(10);
-  boxLayout->setMargin(0);
+  boxLayout->setContentsMargins(0, 0, 0, 0);
 
   QGroupBox* gvbox = new QGroupBox(i18n("Source Options"), this);
   boxLayout->addWidget(gvbox, 10 /*stretch*/);

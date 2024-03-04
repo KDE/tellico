@@ -92,7 +92,10 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(nullpt
 #endif
 {
   QHBoxLayout* l = new QHBoxLayout(this);
-  l->setMargin(IMAGE_WIDGET_BUTTON_MARGIN);
+  l->setContentsMargins(IMAGE_WIDGET_BUTTON_MARGIN,
+                        IMAGE_WIDGET_BUTTON_MARGIN,
+                        IMAGE_WIDGET_BUTTON_MARGIN,
+                        IMAGE_WIDGET_BUTTON_MARGIN);
   m_label = new QLabel(this);
   m_label->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored));
   m_label->setFrameStyle(QFrame::Panel | QFrame::Sunken);

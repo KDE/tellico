@@ -123,7 +123,7 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
   QWidget* w = m_importer->widget(widget);
 //  m_importer->readOptions(KSharedConfig::openConfig());
   if(w) {
-    w->layout()->setMargin(0);
+    w->layout()->setContentsMargins(0, 0, 0, 0);
     topLayout->addWidget(w, 0);
   }
 

@@ -50,12 +50,12 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
     , m_listView(new DetailedListView(this))
     , m_iconView(new EntryIconView(this)) {
   QBoxLayout* lay = new QVBoxLayout();
-  lay->setMargin(0);
+  lay->setContentsMargins(0, 0, 0, 0);
   lay->setSpacing(0);
 
   QBoxLayout* hlay = new QHBoxLayout();
   lay->addLayout(hlay);
-  hlay->setMargin(0);
+  hlay->setContentsMargins(0, 0, 0, 0);
   hlay->setSpacing(0);
 
   m_listButton = new QToolButton(this);

@@ -223,7 +223,7 @@ MultiFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MultiFetcher* f
 
   QWidget* hbox = new QWidget(optionsWidget());
   QHBoxLayout* hboxHBoxLayout = new QHBoxLayout(hbox);
-  hboxHBoxLayout->setMargin(0);
+  hboxHBoxLayout->setContentsMargins(0, 0, 0, 0);
   l->addWidget(hbox);
 
   QLabel* label = new QLabel(i18n("Collection &type:"), hbox);
@@ -274,7 +274,7 @@ MultiFetcher::FetcherItemWidget::FetcherItemWidget(QWidget* parent_)
     : QFrame(parent_) {
   QHBoxLayout* layout = new QHBoxLayout(this);
   layout->setSpacing(0);
-  layout->setMargin(0);
+  layout->setContentsMargins(0, 0, 0, 0);
   setLayout(layout);
 
   QLabel* label = new QLabel(i18n("Data source:"), this);

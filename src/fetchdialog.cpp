@@ -156,7 +156,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
 
   QWidget* box1 = new QWidget(queryBox);
   QHBoxLayout* box1HBoxLayout = new QHBoxLayout(box1);
-  box1HBoxLayout->setMargin(0);
+  box1HBoxLayout->setContentsMargins(0, 0, 0, 0);
   queryLayout->addWidget(box1);
 
   QLabel* label = new QLabel(i18nc("Start the search", "S&earch:"), box1);
@@ -198,7 +198,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
 
   QWidget* box2 = new QWidget(queryBox);
   QHBoxLayout* box2HBoxLayout = new QHBoxLayout(box2);
-  box2HBoxLayout->setMargin(0);
+  box2HBoxLayout->setContentsMargins(0, 0, 0, 0);
   queryLayout->addWidget(box2);
 
   m_multipleISBN = new QCheckBox(i18n("&Multiple ISBN/UPC search"), box2);
@@ -280,7 +280,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
 
   QWidget* box3 = new QWidget(mainWidget);
   QHBoxLayout* box3HBoxLayout = new QHBoxLayout(box3);
-  box3HBoxLayout->setMargin(0);
+  box3HBoxLayout->setContentsMargins(0, 0, 0, 0);
   topLayout->addWidget(box3);
 
   m_addButton = new QPushButton(i18n("&Add Entry"), box3);
@@ -305,7 +305,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
 
   QWidget* bottombox = new QWidget(mainWidget);
   QHBoxLayout* bottomboxHBoxLayout = new QHBoxLayout(bottombox);
-  bottomboxHBoxLayout->setMargin(0);
+  bottomboxHBoxLayout->setContentsMargins(0, 0, 0, 0);
   topLayout->addWidget(bottombox);
 
   m_statusBar = new QStatusBar(bottombox);
@@ -751,7 +751,7 @@ void FetchDialog::slotEditMultipleISBN() {
 
   QWidget* box = new QWidget(&dlg);
   QVBoxLayout* boxVBoxLayout = new QVBoxLayout(box);
-  boxVBoxLayout->setMargin(0);
+  boxVBoxLayout->setContentsMargins(0, 0, 0, 0);
   boxVBoxLayout->setSpacing(10);
   mainLayout->addWidget(box);
 

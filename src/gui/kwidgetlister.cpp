@@ -50,14 +50,14 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
 
   //--------- the button box
   mLayout = new QVBoxLayout( this );
-  mLayout->setMargin( 0 );
+  mLayout->setContentsMargins(0, 0, 0, 0);
   mLayout->setSpacing( 4 );
 //  mLayout->setSizeConstraint(QLayout::SetFixedSize);
   setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
 
   mButtonBox = new QWidget( this );
   QHBoxLayout* mButtonBoxHBoxLayout = new QHBoxLayout( mButtonBox );
-  mButtonBoxHBoxLayout->setMargin( 0 );
+  mButtonBoxHBoxLayout->setContentsMargins(0, 0, 0, 0);
   mLayout->addWidget( mButtonBox );
 
   mBtnMore = new QPushButton( mButtonBox );

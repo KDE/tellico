@@ -118,7 +118,7 @@ ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollP
 
   QWidget* w = m_exporter->widget(widget);
   if(w) {
-    w->layout()->setMargin(0);
+    w->layout()->setContentsMargins(0, 0, 0, 0);
     topLayout->addWidget(w, 0);
   }
 

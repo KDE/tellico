@@ -64,7 +64,7 @@ EntryMatchDialog::EntryMatchDialog(QWidget* parent_, Data::EntryPtr entryToUpdat
   QWidget* hbox = new QWidget(mainWidget);
   mainLayout->addWidget(hbox);
   QHBoxLayout* hboxHBoxLayout = new QHBoxLayout(hbox);
-  hboxHBoxLayout->setMargin(0);
+  hboxHBoxLayout->setContentsMargins(0, 0, 0, 0);
   hboxHBoxLayout->setSpacing(10);
 
   QLabel* icon = new QLabel(hbox);

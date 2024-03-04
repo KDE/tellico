@@ -108,7 +108,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
 
   QWidget* hb1 = new QWidget(fieldsGroup);
   QHBoxLayout* hb1HBoxLayout = new QHBoxLayout(hb1);
-  hb1HBoxLayout->setMargin(0);
+  hb1HBoxLayout->setContentsMargins(0, 0, 0, 0);
   fieldsLayout->addWidget(hb1);
   m_btnNew = new QPushButton(i18nc("New Field", "&New"), hb1);
   hb1HBoxLayout->addWidget(m_btnNew);
@@ -124,7 +124,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
 
   QWidget* hb2 = new QWidget(fieldsGroup);
   QHBoxLayout* hb2HBoxLayout = new QHBoxLayout(hb2);
-  hb2HBoxLayout->setMargin(0);
+  hb2HBoxLayout->setContentsMargins(0, 0, 0, 0);
   fieldsLayout->addWidget(hb2);
   m_btnUp = new QPushButton(hb2);
   hb2HBoxLayout->addWidget(m_btnUp);
@@ -142,7 +142,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
 
   QWidget* vbox = new QWidget(page);
   QVBoxLayout* vboxVBoxLayout = new QVBoxLayout(vbox);
-  vboxVBoxLayout->setMargin(0);
+  vboxVBoxLayout->setContentsMargins(0, 0, 0, 0);
   topLayout->addWidget(vbox, 2);
 
   QGroupBox* propGroup = new QGroupBox(i18n("Field Properties"), vbox);
