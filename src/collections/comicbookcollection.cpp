@@ -24,15 +24,9 @@
 
 #include "comicbookcollection.h"
 #include "../entrycomparison.h"
+#include "../core/tellico_strings.h"
 
 #include <KLocalizedString>
-
-namespace {
-  static const char* comic_general = I18N_NOOP("General");
-  static const char* comic_publishing = I18N_NOOP("Publishing");
-  static const char* comic_classification = I18N_NOOP("Classification");
-  static const char* comic_personal = I18N_NOOP("Personal");
-}
 
 using Tellico::Data::ComicBookCollection;
 
@@ -51,74 +45,74 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
   list.append(Field::createDefaultField(Field::TitleField));
 
   field = new Field(QStringLiteral("subtitle"), i18n("Subtitle"));
-  field->setCategory(i18n(comic_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QStringLiteral("writer"), i18n("Writer"));
-  field->setCategory(i18n(comic_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QStringLiteral("artist"), i18nc("Comic Book Illustrator", "Artist"));
-  field->setCategory(i18n(comic_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QStringLiteral("series"), i18n("Series"));
-  field->setCategory(i18n(comic_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QStringLiteral("issue"), i18n("Issue"), Field::Number);
-  field->setCategory(i18n(comic_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowMultiple);
   list.append(field);
 
   field = new Field(QStringLiteral("publisher"), i18n("Publisher"));
-  field->setCategory(i18n(comic_publishing));
+  field->setCategory(TC_I18N(categoryPublishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("edition"), i18n("Edition"));
-  field->setCategory(i18n(comic_publishing));
+  field->setCategory(TC_I18N(categoryPublishing));
   field->setFlags(Field::AllowCompletion);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("pub_year"), i18n("Publication Year"),  Field::Number);
-  field->setCategory(i18n(comic_publishing));
+  field->setCategory(TC_I18N(categoryPublishing));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("pages"), i18n("Pages"), Field::Number);
-  field->setCategory(i18n(comic_publishing));
+  field->setCategory(TC_I18N(categoryPublishing));
   list.append(field);
 
   field = new Field(QStringLiteral("country"), i18n("Country"));
-  field->setCategory(i18n(comic_publishing));
+  field->setCategory(TC_I18N(categoryPublishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("language"), i18n("Language"));
-  field->setCategory(i18n(comic_publishing));
+  field->setCategory(TC_I18N(categoryPublishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("genre"), i18n("Genre"));
-  field->setCategory(i18n(comic_classification));
+  field->setCategory(TC_I18N(categoryClassification));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("keyword"), i18n("Keywords"));
-  field->setCategory(i18n(comic_classification));
+  field->setCategory(TC_I18N(categoryClassification));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
@@ -127,33 +121,33 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
                                             "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"),
                                       FieldFormat::CommaRegExpSplit);
   field = new Field(QStringLiteral("condition"), i18n("Condition"), cond);
-  field->setCategory(i18n(comic_classification));
+  field->setCategory(TC_I18N(categoryClassification));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
-  field->setCategory(i18n(comic_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
-  field->setCategory(i18n(comic_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("signed"), i18n("Signed"), Field::Bool);
-  field->setCategory(i18n(comic_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
-  field->setCategory(i18n(comic_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool);
-  field->setCategory(i18n(comic_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("rating"), i18n("Rating"), Field::Rating);
-  field->setCategory(i18n(comic_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 

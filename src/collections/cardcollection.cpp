@@ -23,13 +23,9 @@
  ***************************************************************************/
 
 #include "cardcollection.h"
+#include "../core/tellico_strings.h"
 
 #include <KLocalizedString>
-
-namespace {
-  static const char* card_general = I18N_NOOP("General");
-  static const char* card_personal = I18N_NOOP("Personal");
-}
 
 using Tellico::Data::CardCollection;
 
@@ -52,69 +48,69 @@ Tellico::Data::FieldList CardCollection::defaultFields() {
   list.append(field);
 
   field = new Field(QStringLiteral("player"), i18n("Player"));
-  field->setCategory(i18n(card_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QStringLiteral("team"), i18n("Team"));
-  field->setCategory(i18n(card_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QStringLiteral("brand"), i18n("Brand"));
-  field->setCategory(i18n(card_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   // might not be totally numeric!
   field = new Field(QStringLiteral("number"), i18n("Card Number"));
-  field->setCategory(i18n(card_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   list.append(field);
 
   field = new Field(QStringLiteral("year"), i18n("Year"), Field::Number);
-  field->setCategory(i18n(card_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("series"), i18n("Series"));
-  field->setCategory(i18n(card_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QStringLiteral("type"), i18n("Card Type"));
-  field->setCategory(i18n(card_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
-  field->setCategory(i18n(card_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
-  field->setCategory(i18n(card_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("location"), i18n("Location"));
-  field->setCategory(i18n(card_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
-  field->setCategory(i18n(card_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("keyword"), i18n("Keywords"));
-  field->setCategory(i18n(card_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("quantity"), i18n("Quantity"), Field::Number);
-  field->setCategory(i18n(card_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("front"), i18n("Front Image"), Field::Image);

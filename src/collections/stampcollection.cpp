@@ -23,14 +23,9 @@
  ***************************************************************************/
 
 #include "stampcollection.h"
+#include "../core/tellico_strings.h"
 
 #include <KLocalizedString>
-
-namespace {
-  static const char* stamp_general = I18N_NOOP("General");
-  static const char* stamp_condition = I18N_NOOP("Condition");
-  static const char* stamp_personal = I18N_NOOP("Personal");
-}
 
 using Tellico::Data::StampCollection;
 
@@ -52,41 +47,41 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
   list.append(field);
 
   field = new Field(QStringLiteral("description"), i18n("Description"));
-  field->setCategory(i18n(stamp_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   /* TRANSLATORS: denomination refers to the monetary value. */
   field = new Field(QStringLiteral("denomination"), i18nc("monetary denomination", "Denomination"));
-  field->setCategory(i18n(stamp_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("currency"), i18n("Currency"));
-  field->setCategory(i18n(stamp_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("country"), i18n("Country"));
-  field->setCategory(i18n(stamp_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFormatType(FieldFormat::FormatPlain);
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("year"), i18n("Issue Year"), Field::Number);
-  field->setCategory(i18n(stamp_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("color"), i18n("Color"));
-  field->setCategory(i18n(stamp_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("scott"), i18n("Scott#"));
-  field->setCategory(i18n(stamp_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   list.append(field);
 
   auto grade = FieldFormat::splitValue(i18nc("Stamp grade levels - "
@@ -94,47 +89,47 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
                                              "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"),
                                        FieldFormat::CommaRegExpSplit);
   field = new Field(QStringLiteral("grade"), i18n("Grade"), grade);
-  field->setCategory(i18n(stamp_condition));
+  field->setCategory(TC_I18N(categoryCondition));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("cancelled"), i18n("Cancelled"), Field::Bool);
-  field->setCategory(i18n(stamp_condition));
+  field->setCategory(TC_I18N(categoryCondition));
   list.append(field);
 
   /* TRANSLATORS: See https://en.wikipedia.org/wiki/Stamp_hinge */
   field = new Field(QStringLiteral("hinged"), i18n("Hinged"));
-  field->setCategory(i18n(stamp_condition));
+  field->setCategory(TC_I18N(categoryCondition));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("centering"), i18n("Centering"));
-  field->setCategory(i18n(stamp_condition));
+  field->setCategory(TC_I18N(categoryCondition));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("gummed"), i18n("Gummed"));
-  field->setCategory(i18n(stamp_condition));
+  field->setCategory(TC_I18N(categoryCondition));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
-  field->setCategory(i18n(stamp_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
-  field->setCategory(i18n(stamp_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("location"), i18n("Location"));
-  field->setCategory(i18n(stamp_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
-  field->setCategory(i18n(stamp_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("image"), i18n("Image"), Field::Image);

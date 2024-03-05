@@ -24,13 +24,9 @@
  ***************************************************************************/
 
 #include "boardgamecollection.h"
+#include "../core/tellico_strings.h"
 
 #include <KLocalizedString>
-
-namespace {
-  static const char* boardgame_general = I18N_NOOP("General");
-  static const char* boardgame_personal = I18N_NOOP("Personal");
-}
 
 using Tellico::Data::BoardGameCollection;
 
@@ -49,46 +45,46 @@ Tellico::Data::FieldList BoardGameCollection::defaultFields() {
   list.append(Field::createDefaultField(Field::TitleField));
 
   field = new Field(QStringLiteral("genre"), i18n("Genre"));
-  field->setCategory(i18n(boardgame_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("mechanism"), i18n("Mechanism"));
-  field->setCategory(i18n(boardgame_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("year"), i18n("Release Year"), Field::Number);
-  field->setCategory(i18n(boardgame_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("publisher"), i18n("Publisher"));
-  field->setCategory(i18n(boardgame_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("designer"), i18n("Designer"));
-  field->setCategory(i18n(boardgame_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("num-player"), i18n("Number of Players"), Field::Number);
-  field->setCategory(i18n(boardgame_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("playing-time"), i18n("Playing Time"), Field::Number);
-  field->setCategory(i18n(boardgame_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("minimum-age"), i18n("Minimum Age"), Field::Number);
-  field->setCategory(i18n(boardgame_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
@@ -96,32 +92,32 @@ Tellico::Data::FieldList BoardGameCollection::defaultFields() {
   list.append(field);
 
   field = new Field(QStringLiteral("rating"), i18n("Rating"), Field::Rating);
-  field->setCategory(i18n(boardgame_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
-  field->setCategory(i18n(boardgame_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
-  field->setCategory(i18n(boardgame_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
-  field->setCategory(i18n(boardgame_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool);
-  field->setCategory(i18n(boardgame_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("cover"), i18n("Cover"), Field::Image);
   list.append(field);
 
   field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
-  field->setCategory(i18n(boardgame_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   list.append(Field::createDefaultField(Field::IDField));

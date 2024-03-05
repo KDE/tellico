@@ -23,13 +23,9 @@
  ***************************************************************************/
 
 #include "coincollection.h"
+#include "../core/tellico_strings.h"
 
 #include <KLocalizedString>
-
-namespace {
-  static const char* coin_general = I18N_NOOP("General");
-  static const char* coin_personal = I18N_NOOP("Personal");
-}
 
 using Tellico::Data::CoinCollection;
 
@@ -52,42 +48,42 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   list.append(field);
 
   field = new Field(QStringLiteral("type"), i18n("Type"));
-  field->setCategory(i18n(coin_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   /* TRANSLATORS: denomination refers to the monetary value. */
   field = new Field(QStringLiteral("denomination"), i18nc("monetary denomination", "Denomination"));
-  field->setCategory(i18n(coin_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("year"), i18n("Year"), Field::Number);
-  field->setCategory(i18n(coin_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("mintmark"), i18n("Mint Mark"));
-  field->setCategory(i18n(coin_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("country"), i18n("Country"));
-  field->setCategory(i18n(coin_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("currency"), i18n("Currency"));
-  field->setCategory(i18n(coin_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("set"), i18n("Coin Set"), Field::Bool);
-  field->setCategory(i18n(coin_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   list.append(field);
 
   auto grade = FieldFormat::splitValue(i18nc("Coin grade levels - "
@@ -101,7 +97,7 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
                                              "Very Good-8,Good-4,Fair"),
                                        FieldFormat::CommaRegExpSplit);
   field = new Field(QStringLiteral("grade"), i18n("Grade"), grade);
-  field->setCategory(i18n(coin_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
@@ -110,27 +106,27 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
                                                "PCGS,NGC,ANACS,ICG,ASA,PCI"),
                                          FieldFormat::CommaRegExpSplit);
   field = new Field(QStringLiteral("service"), i18n("Grading Service"), service);
-  field->setCategory(i18n(coin_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
-  field->setCategory(i18n(coin_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
-  field->setCategory(i18n(coin_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("location"), i18n("Location"));
-  field->setCategory(i18n(coin_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
-  field->setCategory(i18n(coin_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("obverse"), i18n("Obverse"), Field::Image);
@@ -140,7 +136,7 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   list.append(field);
 
   field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
-  field->setCategory(i18n(coin_personal));
+  field->setCategory(TC_I18N(categoryPersonal));
   list.append(field);
 
   list.append(Field::createDefaultField(Field::IDField));

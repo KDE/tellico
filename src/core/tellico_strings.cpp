@@ -48,5 +48,14 @@ TC_STR Tellico::errorImageLoad = STR_NOOP("Tellico is unable to load an image fr
 TC_STR Tellico::untitledFilename = STR_NOOP("Untitled");
 TC_STR Tellico::providedBy = STR_NOOP("This information was freely provided by <a href=\"%1\">%2</a>.");
 
+TC_STR Tellico::categoryGeneral        = STR_NOOP("General");
+TC_STR Tellico::categoryFeatures       = STR_NOOP("Features");
+TC_STR Tellico::categoryPeople         = STR_NOOP("Other People");
+TC_STR Tellico::categoryPublishing     = STR_NOOP("Publishing");
+TC_STR Tellico::categoryClassification = STR_NOOP("Classification");
+TC_STR Tellico::categoryCondition      = STR_NOOP("Condition");
+TC_STR Tellico::categoryPersonal       = STR_NOOP("Personal");
+TC_STR Tellico::categoryMisc           = STR_NOOP("Miscellaneous");
+
 #undef TC_STR
 #undef STR_NOOP

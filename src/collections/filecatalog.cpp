@@ -24,12 +24,9 @@
 
 #include "filecatalog.h"
 #include "../entrycomparison.h"
+#include "../core/tellico_strings.h"
 
 #include <KLocalizedString>
-
-namespace {
-  static const char* file_general = I18N_NOOP("General");
-}
 
 using Tellico::Data::FileCatalog;
 
@@ -51,55 +48,55 @@ Tellico::Data::FieldList FileCatalog::defaultFields() {
   list.append(field);
 
   field = new Field(QStringLiteral("url"), i18n("URL"), Field::URL);
-  field->setCategory(i18n(file_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   list.append(field);
 
   field = new Field(QStringLiteral("description"), i18n("Description"));
-  field->setCategory(i18n(file_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("volume"), i18nc("File catalog", "Volume"));
-  field->setCategory(i18n(file_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("folder"), i18n("Folder"));
-  field->setCategory(i18n(file_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("mimetype"), i18n("Mimetype"));
-  field->setCategory(i18n(file_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("size"), i18n("Size"));
-  field->setCategory(i18n(file_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   list.append(field);
 
   field = new Field(QStringLiteral("permissions"), i18n("Permissions"));
-  field->setCategory(i18n(file_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("owner"), i18n("Owner"));
-  field->setCategory(i18n(file_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("group"), i18n("Group"));
-  field->setCategory(i18n(file_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   // these dates are string fields, not dates, since the time is included
   field = new Field(QStringLiteral("created"), i18n("Created"));
-  field->setCategory(i18n(file_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   list.append(field);
 
   field = new Field(QStringLiteral("modified"), i18n("Modified"));
-  field->setCategory(i18n(file_general));
+  field->setCategory(TC_I18N(categoryGeneral));
   list.append(field);
 
   field = new Field(QStringLiteral("metainfo"), i18n("Meta Info"), Field::Table);

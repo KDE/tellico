@@ -33,6 +33,7 @@
 #else
 #include <KLazyLocalizedString>
 #define TC_STR KLazyLocalizedString
+#define TC_I18N(str) str.toString();
 #define TC_I18N(str1, str2) str1.subs(str2).toString()
 #endif
 
@@ -46,6 +47,15 @@ namespace Tellico {
   extern TC_STR errorImageLoad;
   extern TC_STR untitledFilename;
   extern TC_STR providedBy;
+
+  extern TC_STR categoryGeneral;
+  extern TC_STR categoryFeatures;
+  extern TC_STR categoryPeople;
+  extern TC_STR categoryPublishing;
+  extern TC_STR categoryClassification;
+  extern TC_STR categoryCondition;
+  extern TC_STR categoryPersonal;
+  extern TC_STR categoryMisc;
 }
 
 #undef TC_STR
