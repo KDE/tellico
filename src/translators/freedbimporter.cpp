@@ -63,7 +63,11 @@
 #include <QCheckBox>
 #include <QTextStream>
 #include <QVBoxLayout>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QTextCodec>
+#else
+#include <QStringConverter>
+#endif
 #include <QApplication>
 
 using Tellico::Import::FreeDBImporter;

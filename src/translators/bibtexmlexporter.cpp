@@ -105,7 +105,7 @@ QString BibtexmlExporter::text() {
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     encodeStr += QLatin1String(QTextCodec::codecForLocale()->name());
 #else
-    encodeStr += QLatin1String(QStringConverter::::nameForEncoding(QStringConverter::System));
+    encodeStr += QLatin1String(QStringConverter::nameForEncoding(QStringConverter::System));
 #endif
   }
   encodeStr += QLatin1Char('"');

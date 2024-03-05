@@ -297,7 +297,7 @@ QString HTMLExporter::text() {
 
 void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   QString file = Data::Document::self()->URL().fileName();
-  if(file != i18n(Tellico::untitledFilename)) {
+  if(file != TC_I18N1(Tellico::untitledFilename)) {
     m_handler->addStringParam("filename", QFile::encodeName(file));
   }
   m_handler->addStringParam("cdate", QLocale().toString(QDate::currentDate()).toUtf8());

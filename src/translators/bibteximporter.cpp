@@ -352,7 +352,7 @@ QWidget* BibtexImporter::widget(QWidget* parent_) {
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
                           QLatin1String(QTextCodec::codecForLocale()->name()));
 #else
-                          QLatin1String(QStringConverter::::nameForEncoding(QStringConverter::System)));
+                          QLatin1String(QStringConverter::nameForEncoding(QStringConverter::System)));
 #endif
   m_readLocale = new QRadioButton(localStr, gbox);
   m_readLocale->setChecked(true);
