@@ -251,7 +251,7 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
   Data::EntryPtr entry(new Data::Entry(coll));
   coll->addEntries(entry);
 
-  const QRegularExpression tagRx(QLatin1String("<.*?>"));
+  static const QRegularExpression tagRx(QLatin1String("<.*?>"));
   const QRegularExpression anchorRx(QStringLiteral("<a.+?href=[\"'].+?[\"'].*?>(.*?)</"));
 
   QRegularExpression titleRx(QStringLiteral("<span itemprop=[\"']name[\"']>(.+?)</span"));
