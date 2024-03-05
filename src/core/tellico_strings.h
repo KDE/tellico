@@ -34,7 +34,7 @@
 #else
 #include <KLazyLocalizedString>
 #define TC_STR KLazyLocalizedString
-#define TC_I18N1(str) str.toString();
+#define TC_I18N1(str) str.toString()
 #define TC_I18N2(str1, str2) str1.subs(str2).toString()
 #endif
 
