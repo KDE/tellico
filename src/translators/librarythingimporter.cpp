@@ -31,6 +31,7 @@
 
 #include <KLocalizedString>
 #include <KUrlRequester>
+#include <kio_version.h>
 
 #include <QVBoxLayout>
 #include <QFormLayout>
@@ -183,11 +184,17 @@ QWidget* LibraryThingImporter::widget(QWidget* parent_) {
   lay->addRow(label);
 
   m_URLRequester = new KUrlRequester(gbox);
+#if KIO_VERSION < QT_VERSION_CHECK(5, 108, 0)
   // these are in the old KDE4 filter format, not the Qt5 format
   QString filter = QLatin1String("*.json|") + i18n("JSON Files")
                  + QLatin1Char('\n')
                  + QLatin1String("*|") + i18n("All Files");
   m_URLRequester->setFilter(filter);
+#else
+  const QStringList filters = {i18n("JSON Files") + QLatin1String(" (*.json)"),
+                               i18n("All Files") + QLatin1String(" (*)")};
+  m_URLRequester->setNameFilters(filters);
+#endif
 
   lay->addRow(i18n("LibraryThing file:"), m_URLRequester);
 
