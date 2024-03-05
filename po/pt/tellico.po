@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-04 01:36+0000\n"
+"POT-Creation-Date: 2024-03-05 01:35+0000\n"
 "PO-Revision-Date: 2023-07-08 12:53+0100\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -203,7 +203,7 @@ msgstr[1] "Existem %1 chaves de citação duplicadas."
 msgid "Select Borrower"
 msgstr "Seleccionar o Requisitante"
 
-#: src/borrowerdialog.cpp:91 src/collections/filecatalog.cpp:49
+#: src/borrowerdialog.cpp:91 src/collections/filecatalog.cpp:46
 #, kde-format
 msgid "Name"
 msgstr "Nome"
@@ -268,15 +268,8 @@ msgstr ""
 msgid "My Collection"
 msgstr "A Minha Colecção"
 
-#: src/collection.cpp:886 src/collections/boardgamecollection.cpp:32
-#: src/collections/bookcollection.cpp:34 src/collections/cardcollection.cpp:31
-#: src/collections/coincollection.cpp:31
-#: src/collections/comicbookcollection.cpp:34
-#: src/collections/gamecollection.cpp:33 src/collections/musiccollection.cpp:32
-#: src/collections/stampcollection.cpp:32
-#: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
-#: src/document.cpp:531 src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
-#: src/translators/filereaderbook.cpp:137
+#: src/collection.cpp:886 src/document.cpp:531 src/field.cpp:290
+#: src/field.cpp:303 src/field.cpp:308 src/translators/filereaderbook.cpp:137
 #: src/translators/filereadervideo.cpp:129
 #, kde-format
 msgid "Personal"
@@ -287,7 +280,7 @@ msgstr "Pessoal"
 msgid "Book Collection"
 msgstr "Colecção de Livros"
 
-#: src/collectionfactory.cpp:85 src/collections/bibtexcollection.cpp:44
+#: src/collectionfactory.cpp:85 src/collections/bibtexcollection.cpp:39
 #, kde-format
 msgid "Bibliography"
 msgstr "Bibliografia"
@@ -699,12 +692,12 @@ msgstr "Reverter"
 msgid "Extended Field Properties"
 msgstr "Propriedades Alargadas do Campo"
 
-#: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:107
+#: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:104
 #, kde-format
 msgid "Property"
 msgstr "Propriedade"
 
-#: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:108
+#: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:105
 #: src/fetch/srufetcher.cpp:595
 #, kde-format
 msgid "Value"
@@ -764,28 +757,41 @@ msgstr "As tabelas são limitadas a um máximo de dez colunas."
 msgid "A field with a derived value must have a value template."
 msgstr "Um campo com um valor derivado deverá ter um modelo de valores."
 
-#: src/collections/bibtexcollection.cpp:38
-#: src/collections/bibtexcollection.cpp:102
-#: src/collections/boardgamecollection.cpp:31
-#: src/collections/bookcollection.cpp:31 src/collections/cardcollection.cpp:30
-#: src/collections/coincollection.cpp:30
-#: src/collections/comicbookcollection.cpp:31
-#: src/collections/filecatalog.cpp:31 src/collections/gamecollection.cpp:32
-#: src/collections/musiccollection.cpp:31
-#: src/collections/stampcollection.cpp:30
-#: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
-#: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:203 src/configdialog.cpp:1129
-#: src/fetch/amazonfetcher.cpp:864 src/fetch/bedethequefetcher.cpp:318
-#: src/fetch/bedethequefetcher.cpp:326 src/fetch/colnectfetcher.cpp:362
-#: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:545
-#: src/fetch/colnectfetcher.cpp:581 src/fetch/colnectfetcher.cpp:588
-#: src/fetch/discogsfetcher.cpp:309 src/fetch/discogsfetcher.cpp:314
-#: src/fetch/discogsfetcher.cpp:319 src/fetch/discogsfetcher.cpp:326
-#: src/fetch/discogsfetcher.cpp:333 src/fetch/discogsfetcher.cpp:338
-#: src/fetch/doubanfetcher.cpp:376 src/fetch/doubanfetcher.cpp:394
-#: src/fetch/doubanfetcher.cpp:412 src/fetch/filmaffinityfetcher.cpp:282
-#: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
+#: src/collections/bibtexcollection.cpp:81
+#, kde-format
+msgid "Entry Type"
+msgstr "Tipo de Item"
+
+#: src/collections/bibtexcollection.cpp:85
+#, kde-format
+msgid "These entry types are specific to bibtex. See the bibtex documentation."
+msgstr ""
+"Estes tipos de item são específica da BibTeX. Ver a documentação do BibTeX."
+
+#: src/collections/bibtexcollection.cpp:88
+#: src/collections/bookcollection.cpp:52
+#, kde-format
+msgid "Author"
+msgstr "Autoria"
+
+#: src/collections/bibtexcollection.cpp:95
+#, kde-format
+msgid "Bibtex Key"
+msgstr "Chave da BibTeX"
+
+#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:145
+#: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
+#: src/configdialog.cpp:1129 src/fetch/amazonfetcher.cpp:864
+#: src/fetch/bedethequefetcher.cpp:318 src/fetch/bedethequefetcher.cpp:326
+#: src/fetch/colnectfetcher.cpp:362 src/fetch/colnectfetcher.cpp:526
+#: src/fetch/colnectfetcher.cpp:545 src/fetch/colnectfetcher.cpp:581
+#: src/fetch/colnectfetcher.cpp:588 src/fetch/discogsfetcher.cpp:309
+#: src/fetch/discogsfetcher.cpp:314 src/fetch/discogsfetcher.cpp:319
+#: src/fetch/discogsfetcher.cpp:326 src/fetch/discogsfetcher.cpp:333
+#: src/fetch/discogsfetcher.cpp:338 src/fetch/doubanfetcher.cpp:376
+#: src/fetch/doubanfetcher.cpp:394 src/fetch/doubanfetcher.cpp:412
+#: src/fetch/filmaffinityfetcher.cpp:282 src/fetch/filmasterfetcher.cpp:240
+#: src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:255
 #: src/fetch/googlebookfetcher.cpp:260 src/fetch/igdbfetcher.cpp:368
 #: src/fetch/imdbfetcher.cpp:461 src/fetch/itunesfetcher.cpp:241
@@ -808,177 +814,140 @@ msgstr "Um campo com um valor derivado deverá ter um modelo de valores."
 msgid "General"
 msgstr "Geral"
 
-#: src/collections/bibtexcollection.cpp:39
-#: src/collections/bookcollection.cpp:32
-#: src/collections/comicbookcollection.cpp:32 src/fetch/isbndbfetcher.cpp:362
-#: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
-#: src/translators/pdfimporter.cpp:236
-#, kde-format
-msgid "Publishing"
-msgstr "Publicação"
-
-#: src/collections/bibtexcollection.cpp:40 src/fetch/entrezfetcher.cpp:441
-#: src/translators/risimporter.cpp:339
-#, kde-format
-msgid "Miscellaneous"
-msgstr "Diversos"
-
-#: src/collections/bibtexcollection.cpp:86
-#, kde-format
-msgid "Entry Type"
-msgstr "Tipo de Item"
-
-#: src/collections/bibtexcollection.cpp:90
-#, kde-format
-msgid "These entry types are specific to bibtex. See the bibtex documentation."
-msgstr ""
-"Estes tipos de item são específica da BibTeX. Ver a documentação do BibTeX."
-
-#: src/collections/bibtexcollection.cpp:93
-#: src/collections/bookcollection.cpp:58
-#, kde-format
-msgid "Author"
-msgstr "Autoria"
-
-#: src/collections/bibtexcollection.cpp:100
-#, kde-format
-msgid "Bibtex Key"
-msgstr "Chave da BibTeX"
-
-#: src/collections/bibtexcollection.cpp:106
+#: src/collections/bibtexcollection.cpp:101
 #, kde-format
 msgid "Book Title"
 msgstr "Título do Livro"
 
-#: src/collections/bibtexcollection.cpp:112
-#: src/collections/bookcollection.cpp:64
+#: src/collections/bibtexcollection.cpp:107
+#: src/collections/bookcollection.cpp:58
 #, kde-format
 msgid "Editor"
 msgstr "Editor"
 
-#: src/collections/bibtexcollection.cpp:119
+#: src/collections/bibtexcollection.cpp:114
 #, kde-format
 msgid "Organization"
 msgstr "Organização"
 
 #. i18n("Institution"));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("institution"));
-#. field->setCategory(i18n(bibtex_general));
+#. field->setCategory(TC_I18N1(categoryGeneral));
 #. field->setFlags(Field::AllowDelete);
 #. field->setFormatType(FieldFormat::FormatTitle);
 #. list.append(field);
 #. ****************** Publishing ***************************
-#: src/collections/bibtexcollection.cpp:134
-#: src/collections/boardgamecollection.cpp:68
-#: src/collections/bookcollection.cpp:87
-#: src/collections/comicbookcollection.cpp:81 src/fetch/rpggeekfetcher.cpp:204
+#: src/collections/bibtexcollection.cpp:129
+#: src/collections/boardgamecollection.cpp:64
+#: src/collections/bookcollection.cpp:81
+#: src/collections/comicbookcollection.cpp:75 src/fetch/rpggeekfetcher.cpp:204
 #, kde-format
 msgid "Publisher"
 msgstr "Publicador"
 
-#: src/collections/bibtexcollection.cpp:141 src/fetch/hathitrustfetcher.cpp:307
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:307
 #: src/fetch/srufetcher.cpp:507 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgid "Address"
 msgstr "Endereço"
 
-#: src/collections/bibtexcollection.cpp:147
-#: src/collections/bookcollection.cpp:93
-#: src/collections/comicbookcollection.cpp:87
+#: src/collections/bibtexcollection.cpp:142
+#: src/collections/bookcollection.cpp:87
+#: src/collections/comicbookcollection.cpp:81
 #, kde-format
 msgid "Edition"
 msgstr "Edição"
 
-#: src/collections/bibtexcollection.cpp:154
-#: src/collections/bookcollection.cpp:116
-#: src/collections/comicbookcollection.cpp:98
+#: src/collections/bibtexcollection.cpp:149
+#: src/collections/bookcollection.cpp:110
+#: src/collections/comicbookcollection.cpp:92
 #, kde-format
 msgid "Pages"
 msgstr "Páginas"
 
-#: src/collections/bibtexcollection.cpp:159
-#: src/collections/cardcollection.cpp:77 src/collections/coincollection.cpp:66
-#: src/collections/musiccollection.cpp:72
+#: src/collections/bibtexcollection.cpp:154
+#: src/collections/cardcollection.cpp:73 src/collections/coincollection.cpp:62
+#: src/collections/musiccollection.cpp:68
 #, kde-format
 msgid "Year"
 msgstr "Ano"
 
-#: src/collections/bibtexcollection.cpp:170
-#: src/collections/bookcollection.cpp:72
+#: src/collections/bibtexcollection.cpp:165
+#: src/collections/bookcollection.cpp:66
 #, kde-format
 msgid "Journal"
 msgstr "Jornal"
 
-#: src/collections/bibtexcollection.cpp:177 src/fetch/fetchmanager.cpp:70
+#: src/collections/bibtexcollection.cpp:172 src/fetch/fetchmanager.cpp:70
 #, kde-format
 msgid "DOI"
 msgstr "IOD"
 
-#: src/collections/bibtexcollection.cpp:180
+#: src/collections/bibtexcollection.cpp:175
 #, kde-format
 msgid "Digital Object Identifier"
 msgstr "Identificador de Objecto Digital"
 
-#: src/collections/bibtexcollection.cpp:185
+#: src/collections/bibtexcollection.cpp:180
 #, kde-format
 msgid "Month"
 msgstr "Mês"
 
-#: src/collections/bibtexcollection.cpp:191 src/field.cpp:199
+#: src/collections/bibtexcollection.cpp:186 src/field.cpp:199
 #, kde-format
 msgid "Number"
 msgstr "Número"
 
-#: src/collections/bibtexcollection.cpp:196
+#: src/collections/bibtexcollection.cpp:191
 #, kde-format
 msgid "How Published"
 msgstr "Modo de Publicação"
 
 #. i18n("School"));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("school"));
-#. field->setCategory(i18n(bibtex_publishing));
+#. field->setCategory(TC_I18N1(categoryPublishing));
 #. field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
 #. list.append(field);
 #. ****************** Classification ***************************
-#: src/collections/bibtexcollection.cpp:208
+#: src/collections/bibtexcollection.cpp:203
 #, kde-format
 msgid "Chapter"
 msgstr "Capítulo"
 
-#: src/collections/bibtexcollection.cpp:213
-#: src/collections/bookcollection.cpp:143 src/collections/cardcollection.cpp:82
-#: src/collections/comicbookcollection.cpp:70 src/fetch/colnectfetcher.cpp:361
+#: src/collections/bibtexcollection.cpp:208
+#: src/collections/bookcollection.cpp:137 src/collections/cardcollection.cpp:78
+#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:361
 #: src/fetch/colnectfetcher.cpp:810
 #, kde-format
 msgid "Series"
 msgstr "Séries"
 
-#: src/collections/bibtexcollection.cpp:220
+#: src/collections/bibtexcollection.cpp:215
 #, kde-format
 msgctxt "A number field in a bibliography"
 msgid "Volume"
 msgstr "Volume"
 
-#: src/collections/bibtexcollection.cpp:225
+#: src/collections/bibtexcollection.cpp:220
 #, kde-format
 msgid "Cross-Reference"
 msgstr "Descritores"
 
 #. i18n("Annotation"));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("annote"));
-#. field->setCategory(i18n(bibtex_misc));
+#. field->setCategory(TC_I18N1(categoryMisc));
 #. list.append(field);
-#: src/collections/bibtexcollection.cpp:235
-#: src/collections/bookcollection.cpp:138
-#: src/collections/cardcollection.cpp:111
-#: src/collections/comicbookcollection.cpp:120
-#: src/collections/musiccollection.cpp:113
-#: src/collections/videocollection.cpp:215 src/fetch/amazonfetcher.cpp:1079
+#: src/collections/bibtexcollection.cpp:230
+#: src/collections/bookcollection.cpp:132
+#: src/collections/cardcollection.cpp:107
+#: src/collections/comicbookcollection.cpp:114
+#: src/collections/musiccollection.cpp:109
+#: src/collections/videocollection.cpp:209 src/fetch/amazonfetcher.cpp:1079
 #, kde-format
 msgid "Keywords"
 msgstr "Palavras-Chave"
 
-#: src/collections/bibtexcollection.cpp:241 src/collections/filecatalog.cpp:53
+#: src/collections/bibtexcollection.cpp:236 src/collections/filecatalog.cpp:50
 #: src/fetch/entrezfetcher.cpp:440 src/fetch/entrezfetcher.cpp:516
 #: src/fetch/opdsfetcher.cpp:436 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:136
@@ -988,74 +957,74 @@ msgstr "Palavras-Chave"
 msgid "URL"
 msgstr "URL"
 
-#: src/collections/bibtexcollection.cpp:246 src/fetch/entrezfetcher.cpp:515
+#: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:515
 #: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:508
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgid "Abstract"
 msgstr "Resumo"
 
-#: src/collections/bibtexcollection.cpp:250
+#: src/collections/bibtexcollection.cpp:245
 #, kde-format
 msgid "Notes"
 msgstr "Notas"
 
-#: src/collections/bibtexcollection.cpp:492
+#: src/collections/bibtexcollection.cpp:487
 #: src/translators/xmlstatehandler.cpp:324
 #, kde-format
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: src/collections/boardgamecollection.cpp:38
+#: src/collections/boardgamecollection.cpp:34
 #, kde-format
 msgid "My Board Games"
 msgstr "Os Meus Jogos de Tabuleiro"
 
-#: src/collections/boardgamecollection.cpp:51
-#: src/collections/bookcollection.cpp:131
-#: src/collections/comicbookcollection.cpp:114
-#: src/collections/gamecollection.cpp:66 src/collections/musiccollection.cpp:77
-#: src/collections/videocollection.cpp:74 src/fetch/rpggeekfetcher.cpp:202
+#: src/collections/boardgamecollection.cpp:47
+#: src/collections/bookcollection.cpp:125
+#: src/collections/comicbookcollection.cpp:108
+#: src/collections/gamecollection.cpp:62 src/collections/musiccollection.cpp:73
+#: src/collections/videocollection.cpp:68 src/fetch/rpggeekfetcher.cpp:202
 #, kde-format
 msgid "Genre"
 msgstr "Género"
 
-#: src/collections/boardgamecollection.cpp:57 src/fetch/rpggeekfetcher.cpp:208
+#: src/collections/boardgamecollection.cpp:53 src/fetch/rpggeekfetcher.cpp:208
 #, kde-format
 msgid "Mechanism"
 msgstr "Mecanismo"
 
-#: src/collections/boardgamecollection.cpp:63
-#: src/collections/gamecollection.cpp:72 src/fetch/rpggeekfetcher.cpp:203
+#: src/collections/boardgamecollection.cpp:59
+#: src/collections/gamecollection.cpp:68 src/fetch/rpggeekfetcher.cpp:203
 #, kde-format
 msgid "Release Year"
 msgstr "Ano de Lançamento"
 
-#: src/collections/boardgamecollection.cpp:74 src/fetch/rpggeekfetcher.cpp:206
+#: src/collections/boardgamecollection.cpp:70 src/fetch/rpggeekfetcher.cpp:206
 #, kde-format
 msgid "Designer"
 msgstr "Desenhador"
 
-#: src/collections/boardgamecollection.cpp:80
+#: src/collections/boardgamecollection.cpp:76
 #: src/fetch/thegamesdbfetcher.cpp:271 src/fetch/thegamesdbfetcher.cpp:605
 #, kde-format
 msgid "Number of Players"
 msgstr "Número de Jogadores"
 
-#: src/collections/boardgamecollection.cpp:85
+#: src/collections/boardgamecollection.cpp:81
 #, kde-format
 msgid "Playing Time"
 msgstr "Tempo de Jogo"
 
-#: src/collections/boardgamecollection.cpp:90
+#: src/collections/boardgamecollection.cpp:86
 #, kde-format
 msgid "Minimum Age"
 msgstr "Idade Mínima"
 
-#: src/collections/boardgamecollection.cpp:95
-#: src/collections/filecatalog.cpp:57 src/collections/gamecollection.cpp:94
-#: src/collections/stampcollection.cpp:54
-#: src/collections/winecollection.cpp:125 src/entrymatchdialog.cpp:94
+#: src/collections/boardgamecollection.cpp:91
+#: src/collections/filecatalog.cpp:54 src/collections/gamecollection.cpp:90
+#: src/collections/stampcollection.cpp:49
+#: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:368 src/fetch/colnectfetcher.cpp:813
 #: src/fetch/numistafetcher.cpp:353 src/fetch/numistafetcher.cpp:401
 #: src/fetch/rpggeekfetcher.cpp:209 src/fetchdialog.cpp:253
@@ -1063,105 +1032,99 @@ msgstr "Idade Mínima"
 msgid "Description"
 msgstr "Descrição"
 
-#: src/collections/boardgamecollection.cpp:98
-#: src/collections/bookcollection.cpp:174
-#: src/collections/comicbookcollection.cpp:155
-#: src/collections/musiccollection.cpp:91
-#: src/collections/winecollection.cpp:113 src/field.cpp:204
+#: src/collections/boardgamecollection.cpp:94
+#: src/collections/bookcollection.cpp:168
+#: src/collections/comicbookcollection.cpp:149
+#: src/collections/musiccollection.cpp:87
+#: src/collections/winecollection.cpp:109 src/field.cpp:204
 #, kde-format
 msgid "Rating"
 msgstr "Classificação"
 
-#: src/collections/boardgamecollection.cpp:103
-#: src/collections/bookcollection.cpp:78 src/collections/cardcollection.cpp:93
-#: src/collections/coincollection.cpp:117
-#: src/collections/comicbookcollection.cpp:134
-#: src/collections/gamecollection.cpp:106
-#: src/collections/musiccollection.cpp:96
-#: src/collections/stampcollection.cpp:121
-#: src/collections/videocollection.cpp:198
-#: src/collections/winecollection.cpp:90
+#: src/collections/boardgamecollection.cpp:99
+#: src/collections/bookcollection.cpp:72 src/collections/cardcollection.cpp:89
+#: src/collections/coincollection.cpp:113
+#: src/collections/comicbookcollection.cpp:128
+#: src/collections/gamecollection.cpp:102
+#: src/collections/musiccollection.cpp:92
+#: src/collections/stampcollection.cpp:116
+#: src/collections/videocollection.cpp:192
+#: src/collections/winecollection.cpp:86
 #, kde-format
 msgid "Purchase Date"
 msgstr "Data de Compra"
 
-#: src/collections/boardgamecollection.cpp:108
-#: src/collections/bookcollection.cpp:166
-#: src/collections/cardcollection.cpp:107
-#: src/collections/coincollection.cpp:132
-#: src/collections/comicbookcollection.cpp:147
-#: src/collections/gamecollection.cpp:111
-#: src/collections/musiccollection.cpp:101
-#: src/collections/stampcollection.cpp:136
-#: src/collections/videocollection.cpp:203
-#: src/collections/winecollection.cpp:118
+#: src/collections/boardgamecollection.cpp:104
+#: src/collections/bookcollection.cpp:160
+#: src/collections/cardcollection.cpp:103
+#: src/collections/coincollection.cpp:128
+#: src/collections/comicbookcollection.cpp:141
+#: src/collections/gamecollection.cpp:107
+#: src/collections/musiccollection.cpp:97
+#: src/collections/stampcollection.cpp:131
+#: src/collections/videocollection.cpp:197
+#: src/collections/winecollection.cpp:114
 #, kde-format
 msgid "Gift"
 msgstr "Oferta"
 
-#: src/collections/boardgamecollection.cpp:112
-#: src/collections/bookcollection.cpp:83 src/collections/cardcollection.cpp:98
-#: src/collections/coincollection.cpp:122
-#: src/collections/comicbookcollection.cpp:139
-#: src/collections/gamecollection.cpp:115
-#: src/collections/musiccollection.cpp:105
-#: src/collections/stampcollection.cpp:126
-#: src/collections/videocollection.cpp:207
-#: src/collections/winecollection.cpp:95
+#: src/collections/boardgamecollection.cpp:108
+#: src/collections/bookcollection.cpp:77 src/collections/cardcollection.cpp:94
+#: src/collections/coincollection.cpp:118
+#: src/collections/comicbookcollection.cpp:133
+#: src/collections/gamecollection.cpp:111
+#: src/collections/musiccollection.cpp:101
+#: src/collections/stampcollection.cpp:121
+#: src/collections/videocollection.cpp:201
+#: src/collections/winecollection.cpp:91
 #, kde-format
 msgid "Purchase Price"
 msgstr "Preço de Compra"
 
-#: src/collections/boardgamecollection.cpp:116
-#: src/collections/bookcollection.cpp:170
-#: src/collections/comicbookcollection.cpp:151
-#: src/collections/gamecollection.cpp:119
-#: src/collections/musiccollection.cpp:109
-#: src/collections/videocollection.cpp:211 src/document.cpp:529
+#: src/collections/boardgamecollection.cpp:112
+#: src/collections/bookcollection.cpp:164
+#: src/collections/comicbookcollection.cpp:145
+#: src/collections/gamecollection.cpp:115
+#: src/collections/musiccollection.cpp:105
+#: src/collections/videocollection.cpp:205 src/document.cpp:529
 #, kde-format
 msgid "Loaned"
 msgstr "Alugado"
 
-#: src/collections/boardgamecollection.cpp:120
-#: src/collections/gamecollection.cpp:123
-#: src/collections/musiccollection.cpp:118
-#: src/collections/videocollection.cpp:220
+#: src/collections/boardgamecollection.cpp:116
+#: src/collections/gamecollection.cpp:119
+#: src/collections/musiccollection.cpp:114
+#: src/collections/videocollection.cpp:214
 #, kde-format
 msgid "Cover"
 msgstr "Capa"
 
-#: src/collections/boardgamecollection.cpp:123
-#: src/collections/bookcollection.cpp:184
-#: src/collections/cardcollection.cpp:126
-#: src/collections/coincollection.cpp:142
-#: src/collections/comicbookcollection.cpp:165
-#: src/collections/gamecollection.cpp:126
-#: src/collections/musiccollection.cpp:121
-#: src/collections/stampcollection.cpp:143
-#: src/collections/videocollection.cpp:223
-#: src/collections/winecollection.cpp:128 src/fetch/bedethequefetcher.cpp:433
+#: src/collections/boardgamecollection.cpp:119
+#: src/collections/bookcollection.cpp:178
+#: src/collections/cardcollection.cpp:122
+#: src/collections/coincollection.cpp:138
+#: src/collections/comicbookcollection.cpp:159
+#: src/collections/gamecollection.cpp:122
+#: src/collections/musiccollection.cpp:117
+#: src/collections/stampcollection.cpp:138
+#: src/collections/videocollection.cpp:217
+#: src/collections/winecollection.cpp:124 src/fetch/bedethequefetcher.cpp:433
 #, kde-format
 msgid "Comments"
 msgstr "Comentários"
 
-#: src/collections/bookcollection.cpp:33
-#: src/collections/comicbookcollection.cpp:33
-#, kde-format
-msgid "Classification"
-msgstr "Classificação"
-
-#: src/collections/bookcollection.cpp:40
+#: src/collections/bookcollection.cpp:34
 #, kde-format
 msgid "My Books"
 msgstr "Os Meus Livros"
 
-#: src/collections/bookcollection.cpp:53
-#: src/collections/comicbookcollection.cpp:53
+#: src/collections/bookcollection.cpp:47
+#: src/collections/comicbookcollection.cpp:47
 #, kde-format
 msgid "Subtitle"
 msgstr "Legenda"
 
-#: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:968
+#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:968
 #: src/fetch/doubanfetcher.cpp:449 src/fetch/doubanfetcher.cpp:502
 #: src/fetch/ibsfetcher.cpp:292 src/translators/alexandriaimporter.cpp:163
 #: src/translators/librarythingimporter.cpp:148
@@ -1169,200 +1132,198 @@ msgstr "Legenda"
 msgid "Hardback"
 msgstr "Capa Dura"
 
-#: src/collections/bookcollection.cpp:71 src/fetch/amazonfetcher.cpp:966
+#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:966
 #: src/fetch/doubanfetcher.cpp:451 src/fetch/doubanfetcher.cpp:504
 #: src/fetch/ibsfetcher.cpp:290 src/translators/librarythingimporter.cpp:146
 #, kde-format
 msgid "Paperback"
 msgstr "Capa Flexível"
 
-#: src/collections/bookcollection.cpp:71
+#: src/collections/bookcollection.cpp:65
 #, kde-format
 msgid "Trade Paperback"
 msgstr "Económico"
 
-#: src/collections/bookcollection.cpp:72 src/fetch/ibsfetcher.cpp:294
+#: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:294
 #: src/fetch/itunesfetcher.cpp:421 src/translators/filereaderbook.cpp:141
 #, kde-format
 msgid "E-Book"
 msgstr "Livro Electrónico (e-book)"
 
-#: src/collections/bookcollection.cpp:72
+#: src/collections/bookcollection.cpp:66
 #, kde-format
 msgid "Magazine"
 msgstr "Revista"
 
-#: src/collections/bookcollection.cpp:73
+#: src/collections/bookcollection.cpp:67
 #, kde-format
 msgid "Binding"
 msgstr "Formato"
 
-#: src/collections/bookcollection.cpp:99
+#: src/collections/bookcollection.cpp:93
 #, kde-format
 msgid "Copyright Year"
 msgstr "Ano de 'Copyright'"
 
-#: src/collections/bookcollection.cpp:104
-#: src/collections/comicbookcollection.cpp:93
+#: src/collections/bookcollection.cpp:98
+#: src/collections/comicbookcollection.cpp:87
 #, kde-format
 msgid "Publication Year"
 msgstr "Ano de Publicação"
 
-#: src/collections/bookcollection.cpp:111 src/field.cpp:317
+#: src/collections/bookcollection.cpp:105 src/field.cpp:317
 #, kde-format
 msgid "LCCN#"
 msgstr "LCCN#"
 
-#: src/collections/bookcollection.cpp:113 src/field.cpp:319
+#: src/collections/bookcollection.cpp:107 src/field.cpp:319
 #, kde-format
 msgid "Library of Congress Control Number"
 msgstr "Número de Controlo da Livraria do Congresso"
 
-#: src/collections/bookcollection.cpp:120
+#: src/collections/bookcollection.cpp:114
 #, kde-format
 msgid "Translator"
 msgstr "Tradutor"
 
-#: src/collections/bookcollection.cpp:126
-#: src/collections/comicbookcollection.cpp:108
+#: src/collections/bookcollection.cpp:120
+#: src/collections/comicbookcollection.cpp:102
 #: src/translators/grs1importer.cpp:74
 #, kde-format
 msgid "Language"
 msgstr "Língua"
 
-#: src/collections/bookcollection.cpp:148
+#: src/collections/bookcollection.cpp:142
 #, kde-format
 msgid "Series Number"
 msgstr "Nº de Série"
 
-#: src/collections/bookcollection.cpp:153
+#: src/collections/bookcollection.cpp:147
 #, kde-format
 msgid "New"
 msgstr "Novo"
 
-#: src/collections/bookcollection.cpp:153
+#: src/collections/bookcollection.cpp:147
 #, kde-format
 msgid "Used"
 msgstr "Usado"
 
-#: src/collections/bookcollection.cpp:154
-#: src/collections/comicbookcollection.cpp:129
-#: src/collections/stampcollection.cpp:31
+#: src/collections/bookcollection.cpp:148
+#: src/collections/comicbookcollection.cpp:123
 #, kde-format
 msgid "Condition"
 msgstr "Condição"
 
-#: src/collections/bookcollection.cpp:158
-#: src/collections/comicbookcollection.cpp:143
+#: src/collections/bookcollection.cpp:152
+#: src/collections/comicbookcollection.cpp:137
 #, kde-format
 msgid "Signed"
 msgstr "Autografado"
 
-#: src/collections/bookcollection.cpp:162
+#: src/collections/bookcollection.cpp:156
 #, kde-format
 msgid "Read"
 msgstr "Lido"
 
-#: src/collections/bookcollection.cpp:181
-#: src/collections/comicbookcollection.cpp:162
-#: src/collections/videocollection.cpp:190
+#: src/collections/bookcollection.cpp:175
+#: src/collections/comicbookcollection.cpp:156
+#: src/collections/videocollection.cpp:184
 #, kde-format
 msgid "Plot Summary"
 msgstr "Resumo da Acção"
 
-#: src/collections/cardcollection.cpp:37
+#: src/collections/cardcollection.cpp:33
 #, kde-format
 msgid "My Cards"
 msgstr "As Minhas Cartas"
 
-#: src/collections/cardcollection.cpp:54
+#: src/collections/cardcollection.cpp:50
 #, kde-format
 msgid "Player"
 msgstr "Jogador"
 
-#: src/collections/cardcollection.cpp:60
+#: src/collections/cardcollection.cpp:56
 #, kde-format
 msgid "Team"
 msgstr "Equipa"
 
-#: src/collections/cardcollection.cpp:66
+#: src/collections/cardcollection.cpp:62
 #, kde-format
 msgid "Brand"
 msgstr "Marca"
 
-#: src/collections/cardcollection.cpp:73
+#: src/collections/cardcollection.cpp:69
 #, kde-format
 msgid "Card Number"
 msgstr "Número da Carta"
 
-#: src/collections/cardcollection.cpp:88
+#: src/collections/cardcollection.cpp:84
 #, kde-format
 msgid "Card Type"
 msgstr "Tipo de Carta"
 
-#: src/collections/cardcollection.cpp:102
-#: src/collections/coincollection.cpp:126
-#: src/collections/stampcollection.cpp:130
-#: src/collections/winecollection.cpp:99
+#: src/collections/cardcollection.cpp:98 src/collections/coincollection.cpp:122
+#: src/collections/stampcollection.cpp:125
+#: src/collections/winecollection.cpp:95
 #, kde-format
 msgid "Location"
 msgstr "Localização"
 
-#: src/collections/cardcollection.cpp:116
-#: src/collections/winecollection.cpp:104
+#: src/collections/cardcollection.cpp:112
+#: src/collections/winecollection.cpp:100
 #, kde-format
 msgid "Quantity"
 msgstr "Quantidade"
 
-#: src/collections/cardcollection.cpp:120
+#: src/collections/cardcollection.cpp:116
 #, kde-format
 msgid "Front Image"
 msgstr "Imagem Frontal"
 
-#: src/collections/cardcollection.cpp:123
+#: src/collections/cardcollection.cpp:119
 #, kde-format
 msgid "Back Image"
 msgstr "Imagem Traseira"
 
-#: src/collections/coincollection.cpp:37
+#: src/collections/coincollection.cpp:33
 #, kde-format
 msgid "My Coins"
 msgstr "As Minhas Moedas"
 
-#: src/collections/coincollection.cpp:54 src/collections/winecollection.cpp:79
+#: src/collections/coincollection.cpp:50 src/collections/winecollection.cpp:75
 #, kde-format
 msgid "Type"
 msgstr "Tipo"
 
-#: src/collections/coincollection.cpp:61 src/collections/stampcollection.cpp:61
+#: src/collections/coincollection.cpp:57 src/collections/stampcollection.cpp:56
 #, kde-format
 msgctxt "monetary denomination"
 msgid "Denomination"
 msgstr "Denominação"
 
-#: src/collections/coincollection.cpp:71
+#: src/collections/coincollection.cpp:67
 #, kde-format
 msgid "Mint Mark"
 msgstr "Marca da Casa Emissora"
 
-#: src/collections/coincollection.cpp:77
-#: src/collections/comicbookcollection.cpp:102
-#: src/collections/stampcollection.cpp:72 src/collections/winecollection.cpp:84
+#: src/collections/coincollection.cpp:73
+#: src/collections/comicbookcollection.cpp:96
+#: src/collections/stampcollection.cpp:67 src/collections/winecollection.cpp:80
 #, kde-format
 msgid "Country"
 msgstr "País"
 
-#: src/collections/coincollection.cpp:83 src/collections/stampcollection.cpp:66
+#: src/collections/coincollection.cpp:79 src/collections/stampcollection.cpp:61
 #, kde-format
 msgid "Currency"
 msgstr "Moeda"
 
-#: src/collections/coincollection.cpp:89
+#: src/collections/coincollection.cpp:85
 #, kde-format
 msgid "Coin Set"
 msgstr "Conjunto de Moedas"
 
-#: src/collections/coincollection.cpp:98
+#: src/collections/coincollection.cpp:94
 #, kde-format
 msgctxt ""
 "Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
@@ -1377,47 +1338,46 @@ msgstr ""
 "Circulada-50,Extremamente Rara-40,Muito Rara-30,Muito Rara-20,Rara-12,Muito "
 "Boa-8,Boa-4,Razoável"
 
-#: src/collections/coincollection.cpp:103
-#: src/collections/stampcollection.cpp:96
+#: src/collections/coincollection.cpp:99 src/collections/stampcollection.cpp:91
 #, kde-format
 msgid "Grade"
 msgstr "Classificação"
 
-#: src/collections/coincollection.cpp:110
+#: src/collections/coincollection.cpp:106
 #, kde-format
 msgctxt "Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 
-#: src/collections/coincollection.cpp:112
+#: src/collections/coincollection.cpp:108
 #, kde-format
 msgid "Grading Service"
 msgstr "Tipo de Classificação"
 
-#: src/collections/coincollection.cpp:136 src/fetch/colnectfetcher.cpp:808
+#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:808
 #: src/fetch/numistafetcher.cpp:403
 #, kde-format
 msgid "Obverse"
 msgstr "Face"
 
-#: src/collections/coincollection.cpp:139 src/fetch/colnectfetcher.cpp:809
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:809
 #: src/fetch/numistafetcher.cpp:404
 #, kde-format
 msgid "Reverse"
 msgstr "Reverso"
 
-#: src/collections/comicbookcollection.cpp:40
+#: src/collections/comicbookcollection.cpp:34
 #, kde-format
 msgid "My Comic Books"
 msgstr "As minhas BD's"
 
-#: src/collections/comicbookcollection.cpp:58
-#: src/collections/videocollection.cpp:129
+#: src/collections/comicbookcollection.cpp:52
+#: src/collections/videocollection.cpp:123
 #, kde-format
 msgid "Writer"
 msgstr "Escritor"
 
-#: src/collections/comicbookcollection.cpp:64
+#: src/collections/comicbookcollection.cpp:58
 #: src/fetch/boardgamegeekfetcher.cpp:200 src/fetch/rpggeekfetcher.cpp:205
 #: src/translators/boardgamegeekimporter.cpp:217
 #, kde-format
@@ -1425,12 +1385,12 @@ msgctxt "Comic Book Illustrator"
 msgid "Artist"
 msgstr "Artista"
 
-#: src/collections/comicbookcollection.cpp:76
+#: src/collections/comicbookcollection.cpp:70
 #, kde-format
 msgid "Issue"
 msgstr "Número"
 
-#: src/collections/comicbookcollection.cpp:127
+#: src/collections/comicbookcollection.cpp:121
 #, kde-format
 msgctxt ""
 "Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,"
@@ -1438,261 +1398,261 @@ msgctxt ""
 msgid "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgstr "Soberbo,Quase Soberbo,Excelente,Óptimo,Muito Bom,Bom,Razoável,Mau"
 
-#: src/collections/filecatalog.cpp:37
+#: src/collections/filecatalog.cpp:34
 #, kde-format
 msgid "My Files"
 msgstr "Os Meus Ficheiros"
 
-#: src/collections/filecatalog.cpp:62
+#: src/collections/filecatalog.cpp:59
 #, kde-format
 msgctxt "File catalog"
 msgid "Volume"
 msgstr "Volume"
 
-#: src/collections/filecatalog.cpp:67
+#: src/collections/filecatalog.cpp:64
 #, kde-format
 msgid "Folder"
 msgstr "Pasta"
 
-#: src/collections/filecatalog.cpp:72
+#: src/collections/filecatalog.cpp:69
 #, kde-format
 msgid "Mimetype"
 msgstr "Tipo MIME"
 
-#: src/collections/filecatalog.cpp:77
+#: src/collections/filecatalog.cpp:74
 #, kde-format
 msgid "Size"
 msgstr "Tamanho"
 
-#: src/collections/filecatalog.cpp:81
+#: src/collections/filecatalog.cpp:78
 #, kde-format
 msgid "Permissions"
 msgstr "Permissões"
 
-#: src/collections/filecatalog.cpp:86
+#: src/collections/filecatalog.cpp:83
 #, kde-format
 msgid "Owner"
 msgstr "Dono"
 
-#: src/collections/filecatalog.cpp:91
+#: src/collections/filecatalog.cpp:88
 #, kde-format
 msgid "Group"
 msgstr "Grupo"
 
-#: src/collections/filecatalog.cpp:97
+#: src/collections/filecatalog.cpp:94
 #, kde-format
 msgid "Created"
 msgstr "Criado"
 
-#: src/collections/filecatalog.cpp:101
+#: src/collections/filecatalog.cpp:98
 #, kde-format
 msgid "Modified"
 msgstr "Modificado"
 
-#: src/collections/filecatalog.cpp:105
+#: src/collections/filecatalog.cpp:102
 #, kde-format
 msgid "Meta Info"
 msgstr "Meta-Informação"
 
-#: src/collections/filecatalog.cpp:111
+#: src/collections/filecatalog.cpp:108
 #, kde-format
 msgid "Icon"
 msgstr "Ícone"
 
-#: src/collections/gamecollection.cpp:39
+#: src/collections/gamecollection.cpp:35
 #, fuzzy, kde-format
 #| msgid "My Videos"
 msgid "My Video Games"
 msgstr "Os Meus Vídeos"
 
-#: src/collections/gamecollection.cpp:61
+#: src/collections/gamecollection.cpp:57
 #, kde-format
 msgid "Platform"
 msgstr "Plataforma"
 
-#: src/collections/gamecollection.cpp:77
+#: src/collections/gamecollection.cpp:73
 #, kde-format
 msgctxt "Games - Publisher"
 msgid "Publisher"
 msgstr "Publicador"
 
-#: src/collections/gamecollection.cpp:83
+#: src/collections/gamecollection.cpp:79
 #, kde-format
 msgid "Developer"
 msgstr "Desenvolvimento"
 
-#: src/collections/gamecollection.cpp:89
+#: src/collections/gamecollection.cpp:85
 #, kde-format
 msgid "ESRB Rating"
 msgstr "Classificação ESRB"
 
-#: src/collections/gamecollection.cpp:97
-#: src/collections/videocollection.cpp:193
+#: src/collections/gamecollection.cpp:93
+#: src/collections/videocollection.cpp:187
 #, kde-format
 msgid "Personal Rating"
 msgstr "Classificação Pessoal"
 
-#: src/collections/gamecollection.cpp:102
+#: src/collections/gamecollection.cpp:98
 #, kde-format
 msgid "Completed"
 msgstr "Completo"
 
-#: src/collections/gamecollection.cpp:240
+#: src/collections/gamecollection.cpp:236
 #, kde-format
 msgid "Linux"
 msgstr "Linux"
 
-#: src/collections/gamecollection.cpp:241
+#: src/collections/gamecollection.cpp:237
 #, kde-format
 msgid "Mac OS"
 msgstr "Mac OS"
 
-#: src/collections/gamecollection.cpp:242
+#: src/collections/gamecollection.cpp:238
 #, kde-format
 msgctxt "Windows Platform"
 msgid "Windows"
 msgstr "Windows"
 
-#: src/collections/gamecollection.cpp:243
+#: src/collections/gamecollection.cpp:239
 #, kde-format
 msgctxt "iOS Platform"
 msgid "iOS"
 msgstr "iOS"
 
-#: src/collections/gamecollection.cpp:244
+#: src/collections/gamecollection.cpp:240
 #, kde-format
 msgctxt "Android Platform"
 msgid "Android"
 msgstr "Android"
 
-#: src/collections/gamecollection.cpp:245
+#: src/collections/gamecollection.cpp:241
 #, kde-format
 msgid "Xbox"
 msgstr "Xbox"
 
-#: src/collections/gamecollection.cpp:246
+#: src/collections/gamecollection.cpp:242
 #, kde-format
 msgid "Xbox 360"
 msgstr "Xbox 360"
 
-#: src/collections/gamecollection.cpp:247
+#: src/collections/gamecollection.cpp:243
 #, kde-format
 msgid "Xbox One"
 msgstr "Xbox One"
 
-#: src/collections/gamecollection.cpp:248
+#: src/collections/gamecollection.cpp:244
 #, kde-format
 msgid "Xbox Series X"
 msgstr "Xbox Series X"
 
-#: src/collections/gamecollection.cpp:249
+#: src/collections/gamecollection.cpp:245
 #, kde-format
 msgid "PlayStation"
 msgstr "PlayStation"
 
-#: src/collections/gamecollection.cpp:250
+#: src/collections/gamecollection.cpp:246
 #, kde-format
 msgid "PlayStation2"
 msgstr "PlayStation2"
 
-#: src/collections/gamecollection.cpp:251
+#: src/collections/gamecollection.cpp:247
 #, kde-format
 msgid "PlayStation3"
 msgstr "PlayStation3"
 
-#: src/collections/gamecollection.cpp:252
+#: src/collections/gamecollection.cpp:248
 #, kde-format
 msgid "PlayStation4"
 msgstr "PlayStation4"
 
-#: src/collections/gamecollection.cpp:253
+#: src/collections/gamecollection.cpp:249
 #, kde-format
 msgid "PlayStation5"
 msgstr "PlayStation5"
 
-#: src/collections/gamecollection.cpp:254
+#: src/collections/gamecollection.cpp:250
 #, kde-format
 msgctxt "PlayStation Portable"
 msgid "PSP"
 msgstr "PSP"
 
-#: src/collections/gamecollection.cpp:255
+#: src/collections/gamecollection.cpp:251
 #, kde-format
 msgid "PlayStation Vita"
 msgstr "PlayStation Vita"
 
-#: src/collections/gamecollection.cpp:256
+#: src/collections/gamecollection.cpp:252
 #, kde-format
 msgid "Game Boy"
 msgstr "Game Boy"
 
-#: src/collections/gamecollection.cpp:257
+#: src/collections/gamecollection.cpp:253
 #, kde-format
 msgid "Game Boy Color"
 msgstr "Game Boy Color"
 
-#: src/collections/gamecollection.cpp:258
+#: src/collections/gamecollection.cpp:254
 #, kde-format
 msgid "Game Boy Advance"
 msgstr "Game Boy Advance"
 
-#: src/collections/gamecollection.cpp:259
+#: src/collections/gamecollection.cpp:255
 #, kde-format
 msgid "Nintendo"
 msgstr "Nintendo"
 
-#: src/collections/gamecollection.cpp:260
+#: src/collections/gamecollection.cpp:256
 #, kde-format
 msgid "Super Nintendo"
 msgstr "Super Nintendo"
 
-#: src/collections/gamecollection.cpp:261
+#: src/collections/gamecollection.cpp:257
 #, kde-format
 msgid "Nintendo 64"
 msgstr "Nintendo 64"
 
-#: src/collections/gamecollection.cpp:262
+#: src/collections/gamecollection.cpp:258
 #, kde-format
 msgid "GameCube"
 msgstr "GameCube"
 
-#: src/collections/gamecollection.cpp:263
+#: src/collections/gamecollection.cpp:259
 #, kde-format
 msgid "Nintendo Wii"
 msgstr "Nintendo Wii"
 
-#: src/collections/gamecollection.cpp:264
+#: src/collections/gamecollection.cpp:260
 #, kde-format
 msgid "Nintendo WiiU"
 msgstr "Nintendo WiiU"
 
-#: src/collections/gamecollection.cpp:265
+#: src/collections/gamecollection.cpp:261
 #, kde-format
 msgid "Nintendo Switch"
 msgstr "Nintendo Switch"
 
-#: src/collections/gamecollection.cpp:266
+#: src/collections/gamecollection.cpp:262
 #, kde-format
 msgid "Nintendo DS"
 msgstr "Nintendo DS"
 
-#: src/collections/gamecollection.cpp:267
+#: src/collections/gamecollection.cpp:263
 #, kde-format
 msgid "Nintendo 3DS"
 msgstr "Nintendo 3DS"
 
-#: src/collections/gamecollection.cpp:268
+#: src/collections/gamecollection.cpp:264
 #, kde-format
 msgctxt "Sega Genesis"
 msgid "Genesis"
 msgstr "Genesis"
 
-#: src/collections/gamecollection.cpp:269
+#: src/collections/gamecollection.cpp:265
 #, kde-format
 msgid "Dreamcast"
 msgstr "Dreamcast"
 
-#: src/collections/gamecollection.cpp:281
+#: src/collections/gamecollection.cpp:277
 #, kde-format
 msgctxt ""
 "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
@@ -1704,17 +1664,17 @@ msgstr ""
 "Sem Classificação,Só para Adultos,Adultos,Adolescentes,Todos Maiores de 10,"
 "Todos,Infantil,Pendente"
 
-#: src/collections/musiccollection.cpp:38
+#: src/collections/musiccollection.cpp:34
 #, kde-format
 msgid "My Music"
 msgstr "A Minha Música"
 
-#: src/collections/musiccollection.cpp:50
+#: src/collections/musiccollection.cpp:46
 #, kde-format
 msgid "Album"
 msgstr "Álbum"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:424
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:424
 #: src/fetch/doubanfetcher.cpp:457 src/fetch/doubanfetcher.cpp:591
 #: src/fetch/upcitemdbfetcher.cpp:305 src/fetch/upcitemdbfetcher.cpp:425
 #: src/translators/audiofileimporter.cpp:335
@@ -1726,52 +1686,52 @@ msgstr "Álbum"
 msgid "Compact Disc"
 msgstr "CD"
 
-#: src/collections/musiccollection.cpp:54
-#: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1046
+#: src/collections/musiccollection.cpp:50
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1046
 #: src/fetch/discogsfetcher.cpp:432 src/fetch/upcitemdbfetcher.cpp:421
 #: src/fetch/upcitemdbfetcher.cpp:429 src/translators/discogsimporter.cpp:169
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:429
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:429
 #: src/translators/discogsimporter.cpp:166
 #, kde-format
 msgid "Cassette"
 msgstr "Cassete"
 
-#: src/collections/musiccollection.cpp:54 src/fetch/discogsfetcher.cpp:427
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:427
 #: src/translators/discogsimporter.cpp:164
 #, kde-format
 msgid "Vinyl"
 msgstr "Vinil"
 
-#: src/collections/musiccollection.cpp:55
-#: src/collections/videocollection.cpp:55
+#: src/collections/musiccollection.cpp:51
+#: src/collections/videocollection.cpp:49
 #, kde-format
 msgid "Medium"
 msgstr "Disco"
 
-#: src/collections/musiccollection.cpp:60
-#: src/collections/musiccollection.cpp:87 src/fetch/discogsfetcher.cpp:486
+#: src/collections/musiccollection.cpp:56
+#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:486
 #: src/fetch/itunesfetcher.cpp:321 src/translators/audiofileimporter.cpp:236
 #: src/translators/xmlstatehandler.cpp:435
 #, kde-format
 msgid "Artist"
 msgstr "Artista"
 
-#: src/collections/musiccollection.cpp:66
+#: src/collections/musiccollection.cpp:62
 #, kde-format
 msgid "Label"
 msgstr "Editor"
 
-#: src/collections/musiccollection.cpp:83 src/tests/discogsfetchertest.cpp:307
+#: src/collections/musiccollection.cpp:79 src/tests/discogsfetchertest.cpp:307
 #: src/tests/itunesfetchertest.cpp:209 src/tests/musicbrainzfetchertest.cpp:228
 #, kde-format
 msgid "Tracks"
 msgstr "Faixas"
 
-#: src/collections/musiccollection.cpp:86 src/entrymatchdialog.cpp:94
+#: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:485 src/fetch/fetchmanager.cpp:65
 #: src/fetch/itunesfetcher.cpp:320 src/fetchdialog.cpp:252 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
@@ -1780,345 +1740,335 @@ msgstr "Faixas"
 msgid "Title"
 msgstr "Título"
 
-#: src/collections/musiccollection.cpp:88 src/fetch/discogsfetcher.cpp:487
+#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:487
 #: src/fetch/itunesfetcher.cpp:322 src/translators/audiofileimporter.cpp:237
 #: src/translators/xmlstatehandler.cpp:436
 #, kde-format
 msgid "Length"
 msgstr "Duração"
 
-#: src/collections/stampcollection.cpp:38
+#: src/collections/stampcollection.cpp:33
 #, kde-format
 msgid "My Stamps"
 msgstr "Os meus Selos"
 
-#: src/collections/stampcollection.cpp:78
+#: src/collections/stampcollection.cpp:73
 #, kde-format
 msgid "Issue Year"
 msgstr "Ano de Edição"
 
-#: src/collections/stampcollection.cpp:83
-#: src/collections/videocollection.cpp:180
+#: src/collections/stampcollection.cpp:78
+#: src/collections/videocollection.cpp:174
 #, kde-format
 msgid "Color"
 msgstr "Cor"
 
-#: src/collections/stampcollection.cpp:88
+#: src/collections/stampcollection.cpp:83
 #, kde-format
 msgid "Scott#"
 msgstr "Scott#"
 
-#: src/collections/stampcollection.cpp:94
+#: src/collections/stampcollection.cpp:89
 #, kde-format
 msgctxt ""
 "Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgid "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgstr "Soberbo,Excelente,Muito Bom,Bom,Médio,Mau"
 
-#: src/collections/stampcollection.cpp:101
+#: src/collections/stampcollection.cpp:96
 #, kde-format
 msgid "Cancelled"
 msgstr "Cancelado"
 
-#: src/collections/stampcollection.cpp:106
+#: src/collections/stampcollection.cpp:101
 #, kde-format
 msgid "Hinged"
 msgstr "Articulado"
 
-#: src/collections/stampcollection.cpp:111
+#: src/collections/stampcollection.cpp:106
 #, kde-format
 msgid "Centering"
 msgstr "Centrado"
 
-#: src/collections/stampcollection.cpp:116
+#: src/collections/stampcollection.cpp:111
 #, kde-format
 msgid "Gummed"
 msgstr "Colado"
 
-#: src/collections/stampcollection.cpp:140 src/field.cpp:202
+#: src/collections/stampcollection.cpp:135 src/field.cpp:202
 #, kde-format
 msgid "Image"
 msgstr "Imagem"
 
-#: src/collections/videocollection.cpp:32
-#, kde-format
-msgid "Other People"
-msgstr "Outras Pessoas"
-
-#: src/collections/videocollection.cpp:33
-#, kde-format
-msgid "Features"
-msgstr "Características"
-
-#: src/collections/videocollection.cpp:40
+#: src/collections/videocollection.cpp:34
 #, kde-format
 msgid "My Videos"
 msgstr "Os Meus Vídeos"
 
-#: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1032
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1032
 #: src/fetch/upcitemdbfetcher.cpp:407
 #, kde-format
 msgid "VHS"
 msgstr "VHS"
 
-#: src/collections/videocollection.cpp:54
+#: src/collections/videocollection.cpp:48
 #, kde-format
 msgid "VCD"
 msgstr "VCD"
 
-#: src/collections/videocollection.cpp:54
+#: src/collections/videocollection.cpp:48
 #, kde-format
 msgid "DivX"
 msgstr "DivX"
 
-#: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1026
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1026
 #: src/fetch/upcitemdbfetcher.cpp:401
 #, kde-format
 msgid "Blu-ray"
 msgstr "Blu-Ray"
 
-#: src/collections/videocollection.cpp:54 src/fetch/amazonfetcher.cpp:1029
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1029
 #: src/fetch/upcitemdbfetcher.cpp:404
 #, kde-format
 msgid "HD DVD"
 msgstr "HD DVD"
 
-#: src/collections/videocollection.cpp:60
+#: src/collections/videocollection.cpp:54
 #, kde-format
 msgid "Production Year"
 msgstr "Ano de Produção"
 
-#: src/collections/videocollection.cpp:67
+#: src/collections/videocollection.cpp:61
 #, kde-format
 msgctxt "Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 msgid "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 msgstr "G (EUA),PG (EUA),PG-13 (EUA),R (EUA), U (EUA)"
 
-#: src/collections/videocollection.cpp:69
+#: src/collections/videocollection.cpp:63
 #, kde-format
 msgid "Certification"
 msgstr "Certificação"
 
-#: src/collections/videocollection.cpp:81
+#: src/collections/videocollection.cpp:75
 #, kde-format
 msgid "Region 0"
 msgstr "Região 0"
 
-#: src/collections/videocollection.cpp:82
+#: src/collections/videocollection.cpp:76
 #, kde-format
 msgid "Region 1"
 msgstr "Região 1"
 
-#: src/collections/videocollection.cpp:83
+#: src/collections/videocollection.cpp:77
 #, kde-format
 msgid "Region 2"
 msgstr "Região 2"
 
-#: src/collections/videocollection.cpp:84
+#: src/collections/videocollection.cpp:78
 #, kde-format
 msgid "Region 3"
 msgstr "Região 3"
 
-#: src/collections/videocollection.cpp:85
+#: src/collections/videocollection.cpp:79
 #, kde-format
 msgid "Region 4"
 msgstr "Região 4"
 
-#: src/collections/videocollection.cpp:86
+#: src/collections/videocollection.cpp:80
 #, kde-format
 msgid "Region 5"
 msgstr "Região 5"
 
-#: src/collections/videocollection.cpp:87
+#: src/collections/videocollection.cpp:81
 #, kde-format
 msgid "Region 6"
 msgstr "Região 6"
 
-#: src/collections/videocollection.cpp:88
+#: src/collections/videocollection.cpp:82
 #, kde-format
 msgid "Region 7"
 msgstr "Região 7"
 
-#: src/collections/videocollection.cpp:89
+#: src/collections/videocollection.cpp:83
 #, kde-format
 msgid "Region 8"
 msgstr "Região 8"
 
-#: src/collections/videocollection.cpp:90
+#: src/collections/videocollection.cpp:84
 #, kde-format
 msgid "Region"
 msgstr "Região"
 
-#: src/collections/videocollection.cpp:95 src/fetch/discogsfetcher.cpp:318
+#: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:318
 #: src/fetch/discogsfetcher.cpp:547
 #, kde-format
 msgid "Nationality"
 msgstr "Nacionalidade"
 
-#: src/collections/videocollection.cpp:102 src/fetch/amazonfetcher.cpp:1042
+#: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1042
 #: src/fetch/upcitemdbfetcher.cpp:417
 #, kde-format
 msgid "NTSC"
 msgstr "NTSC"
 
-#: src/collections/videocollection.cpp:102
+#: src/collections/videocollection.cpp:96
 #, kde-format
 msgid "PAL"
 msgstr "PAL"
 
-#: src/collections/videocollection.cpp:102
+#: src/collections/videocollection.cpp:96
 #, kde-format
 msgid "SECAM"
 msgstr "SECAM"
 
-#: src/collections/videocollection.cpp:103
+#: src/collections/videocollection.cpp:97
 #, kde-format
 msgid "Format"
 msgstr "Formato"
 
-#: src/collections/videocollection.cpp:108
+#: src/collections/videocollection.cpp:102
 #, kde-format
 msgid "Cast"
 msgstr "Elenco"
 
-#: src/collections/videocollection.cpp:110
+#: src/collections/videocollection.cpp:104
 #: src/translators/xmlstatehandler.cpp:438
 #, kde-format
 msgid "Actor/Actress"
 msgstr "Actor/Actriz"
 
-#: src/collections/videocollection.cpp:111
+#: src/collections/videocollection.cpp:105
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Role"
 msgstr "Papel"
 
-#: src/collections/videocollection.cpp:114
+#: src/collections/videocollection.cpp:108
 #, kde-format
 msgid "A table for the cast members, along with the roles they play"
 msgstr ""
 "Um folheto para o elenco do filme, com o papel representado por cada um"
 
-#: src/collections/videocollection.cpp:117
+#: src/collections/videocollection.cpp:111
 #, kde-format
 msgid "Director"
 msgstr "Realizador"
 
-#: src/collections/videocollection.cpp:123 src/fetch/discogsfetcher.cpp:325
+#: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:325
 #: src/fetch/discogsfetcher.cpp:546 src/fetch/rpggeekfetcher.cpp:207
 #, kde-format
 msgid "Producer"
 msgstr "Produtor"
 
-#: src/collections/videocollection.cpp:135
+#: src/collections/videocollection.cpp:129
 #, kde-format
 msgid "Composer"
 msgstr "Compositor"
 
-#: src/collections/videocollection.cpp:141
+#: src/collections/videocollection.cpp:135
 #, kde-format
 msgid "Studio"
 msgstr "Estúdio"
 
-#: src/collections/videocollection.cpp:147
+#: src/collections/videocollection.cpp:141
 #, kde-format
 msgid "Language Tracks"
 msgstr "Línguas Disponíveis"
 
-#: src/collections/videocollection.cpp:153
+#: src/collections/videocollection.cpp:147
 #, kde-format
 msgid "Subtitle Languages"
 msgstr "Língua das Legendas"
 
-#: src/collections/videocollection.cpp:159
+#: src/collections/videocollection.cpp:153
 #, kde-format
 msgid "Audio Tracks"
 msgstr "Faixas de Áudio"
 
-#: src/collections/videocollection.cpp:165
+#: src/collections/videocollection.cpp:159
 #, kde-format
 msgid "Running Time"
 msgstr "Duração"
 
-#: src/collections/videocollection.cpp:167
+#: src/collections/videocollection.cpp:161
 #, kde-format
 msgid "The running time of the video (in minutes)"
 msgstr "Duração do vídeo (em minutos)"
 
-#: src/collections/videocollection.cpp:170
+#: src/collections/videocollection.cpp:164
 #, kde-format
 msgid "Aspect Ratio"
 msgstr "Proporções"
 
-#: src/collections/videocollection.cpp:175 src/fetch/amazonfetcher.cpp:1015
+#: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1015
 #: src/fetch/upcitemdbfetcher.cpp:387
 #, kde-format
 msgid "Widescreen"
 msgstr "Panorâmico"
 
-#: src/collections/videocollection.cpp:180
+#: src/collections/videocollection.cpp:174
 #, kde-format
 msgid "Black & White"
 msgstr "Preto e Branco"
 
-#: src/collections/videocollection.cpp:181
+#: src/collections/videocollection.cpp:175
 #, kde-format
 msgid "Color Mode"
 msgstr "Modo de Cor"
 
-#: src/collections/videocollection.cpp:186 src/fetch/amazonfetcher.cpp:1036
+#: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1036
 #: src/fetch/upcitemdbfetcher.cpp:411
 #, kde-format
 msgid "Director's Cut"
 msgstr "Versão do Realizador"
 
-#: src/collections/winecollection.cpp:37
+#: src/collections/winecollection.cpp:33
 #, kde-format
 msgid "My Wines"
 msgstr "Os Meus Vinhos"
 
-#: src/collections/winecollection.cpp:54
+#: src/collections/winecollection.cpp:50
 #, kde-format
 msgctxt "Wine Producer"
 msgid "Producer"
 msgstr "Produtor"
 
-#: src/collections/winecollection.cpp:60
+#: src/collections/winecollection.cpp:56
 #, kde-format
 msgid "Appellation"
 msgstr "Apelação"
 
-#: src/collections/winecollection.cpp:66
+#: src/collections/winecollection.cpp:62
 #, kde-format
 msgid "Varietal"
 msgstr "Variedade"
 
-#: src/collections/winecollection.cpp:72
+#: src/collections/winecollection.cpp:68
 #, kde-format
 msgid "Vintage"
 msgstr "Safra"
 
-#: src/collections/winecollection.cpp:78
+#: src/collections/winecollection.cpp:74
 #, kde-format
 msgid "Red Wine"
 msgstr "Vinho Tinto"
 
-#: src/collections/winecollection.cpp:78
+#: src/collections/winecollection.cpp:74
 #, kde-format
 msgid "White Wine"
 msgstr "Vinho Branco"
 
-#: src/collections/winecollection.cpp:78
+#: src/collections/winecollection.cpp:74
 #, kde-format
 msgid "Sparkling Wine"
 msgstr "Espumoso"
 
-#: src/collections/winecollection.cpp:108
+#: src/collections/winecollection.cpp:104
 #, kde-format
 msgid "Drink By"
 msgstr "Bebido Por"
 
-#: src/collections/winecollection.cpp:122
+#: src/collections/winecollection.cpp:118
 #, kde-format
 msgid "Label Image"
 msgstr "Etiqueta"
@@ -3002,60 +2952,6 @@ msgstr ""
 msgid "Overwrite File?"
 msgstr "Sobrepor o Ficheiro?"
 
-#: src/core/tellico_strings.cpp:29
-#, kde-format
-msgid "Tellico is unable to open the file - %1."
-msgstr "O Tellico não consegue abrir o ficheiro - %1."
-
-#: src/core/tellico_strings.cpp:30
-#, kde-format
-msgid "Tellico is unable to load the file - %1."
-msgstr "O Tellico não consegue carregar o ficheiro - %1."
-
-#: src/core/tellico_strings.cpp:31
-#, kde-format
-msgid "Tellico is unable to write the file - %1."
-msgstr "O Tellico não consegue escrever o ficheiro - %1."
-
-#: src/core/tellico_strings.cpp:32
-#, kde-format
-msgid "Tellico is unable to upload the file - %1."
-msgstr "O Tellico não consegue enviar o ficheiro - %1."
-
-#: src/core/tellico_strings.cpp:33
-#, kde-format
-msgid ""
-"Only collections with the same type of entries as the current one can be "
-"appended. No changes are being made to the current collection."
-msgstr ""
-"Só podem ser adicionadas colecções com o mesmo tipo de campos do da colecção "
-"actual. Não causa nenhuma alteração na colecção actual."
-
-#: src/core/tellico_strings.cpp:36
-#, kde-format
-msgid ""
-"Only collections with the same type of entries as the current one can be "
-"merged. No changes are being made to the current collection."
-msgstr ""
-"Só podem ser combinadas colecções com tipos de campos idênticos aos da "
-"colecção actual. Não provoca nenhuma alteração na colecção actual."
-
-#: src/core/tellico_strings.cpp:39
-#, kde-format
-msgid "Tellico is unable to load an image from the file - %1."
-msgstr "O Tellico não consegue carregar uma imagem do ficheiro - %1."
-
-#: src/core/tellico_strings.cpp:41
-#, kde-format
-msgid "Untitled"
-msgstr "Sem Título"
-
-#: src/core/tellico_strings.cpp:42
-#, kde-format
-msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-msgstr ""
-"Esta informação foi oferecida de forma livre pelo <a href=\"%1\">%2</a>."
-
 #: src/detailedlistview.cpp:523
 #, kde-format
 msgid "View Columns"
@@ -3864,6 +3760,11 @@ msgstr "Ligação do DVDFr"
 msgid "Alternative Titles"
 msgstr "Títulos Alternativos"
 
+#: src/fetch/entrezfetcher.cpp:441 src/translators/risimporter.cpp:339
+#, kde-format
+msgid "Miscellaneous"
+msgstr "Diversos"
+
 #: src/fetch/entrezfetcher.cpp:504
 #, kde-format
 msgid "Entrez Database"
@@ -4169,6 +4070,12 @@ msgstr ""
 #, kde-format
 msgid "Dewey Decimal"
 msgstr "Decimal Dewey"
+
+#: src/fetch/isbndbfetcher.cpp:362 src/field.cpp:313 src/field.cpp:318
+#: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:236
+#, kde-format
+msgid "Publishing"
+msgstr "Publicação"
 
 #: src/fetch/isbndbfetcher.cpp:374
 #, kde-format
@@ -5049,48 +4956,48 @@ msgstr "contém"
 msgid "does not contain"
 msgstr "não contém"
 
-#: src/gui/imagewidget.cpp:108
+#: src/gui/imagewidget.cpp:111
 #, kde-format
 msgid "Select Image..."
 msgstr "Seleccione a Imagem..."
 
-#: src/gui/imagewidget.cpp:113
+#: src/gui/imagewidget.cpp:116
 #, kde-format
 msgid "Scan Image..."
 msgstr "Digitalizar a Imagem..."
 
-#: src/gui/imagewidget.cpp:122
+#: src/gui/imagewidget.cpp:125
 #, kde-format
 msgid "Open With..."
 msgstr "Abrir Com..."
 
-#: src/gui/imagewidget.cpp:160
+#: src/gui/imagewidget.cpp:163
 #, kde-format
 msgctxt "Clear image"
 msgid "Clear"
 msgstr "Limpar"
 
-#: src/gui/imagewidget.cpp:167
+#: src/gui/imagewidget.cpp:170
 #, kde-format
 msgid "Save link only"
 msgstr "Guardar só a ligação"
 
-#: src/gui/imagewidget.cpp:290 src/gui/imagewidget.cpp:530
+#: src/gui/imagewidget.cpp:293 src/gui/imagewidget.cpp:533
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Todas as Imagens (%1)"
 
-#: src/gui/imagewidget.cpp:321
+#: src/gui/imagewidget.cpp:324
 #, kde-format
 msgid "Opening the selected scanner failed."
 msgstr "O acesso ao 'scanner' seleccionado falhou."
 
-#: src/gui/imagewidget.cpp:380
+#: src/gui/imagewidget.cpp:383
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "A abrir a imagem em %1..."
 
-#: src/gui/imagewidget.cpp:412
+#: src/gui/imagewidget.cpp:415
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr ""
@@ -7150,29 +7057,29 @@ msgstr "Ligação Discogs"
 msgid "Scanning files..."
 msgstr "A analisar os ficheiros..."
 
-#: src/translators/filelistingimporter.cpp:154
+#: src/translators/filelistingimporter.cpp:159
 #, kde-format
 msgid "File Listing Options"
 msgstr "Opções de Listagem dos Ficheiros"
 
-#: src/translators/filelistingimporter.cpp:157
+#: src/translators/filelistingimporter.cpp:162
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Pesquisa recursiva das pastas"
 
-#: src/translators/filelistingimporter.cpp:158
+#: src/translators/filelistingimporter.cpp:163
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 "Se seleccionado, as pastas são analisadas de forma recursiva para procurar "
 "todos os ficheiros."
 
-#: src/translators/filelistingimporter.cpp:162
+#: src/translators/filelistingimporter.cpp:167
 #, kde-format
 msgid "Generate file previews"
 msgstr "Gerar pré-visualizações dos ficheiros"
 
-#: src/translators/filelistingimporter.cpp:163
+#: src/translators/filelistingimporter.cpp:168
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
@@ -7530,6 +7437,51 @@ msgstr "Procurar"
 #, kde-format
 msgid "Clear"
 msgstr "Limpar"
+
+#~ msgid "Classification"
+#~ msgstr "Classificação"
+
+#~ msgid "Other People"
+#~ msgstr "Outras Pessoas"
+
+#~ msgid "Features"
+#~ msgstr "Características"
+
+#~ msgid "Tellico is unable to open the file - %1."
+#~ msgstr "O Tellico não consegue abrir o ficheiro - %1."
+
+#~ msgid "Tellico is unable to load the file - %1."
+#~ msgstr "O Tellico não consegue carregar o ficheiro - %1."
+
+#~ msgid "Tellico is unable to write the file - %1."
+#~ msgstr "O Tellico não consegue escrever o ficheiro - %1."
+
+#~ msgid "Tellico is unable to upload the file - %1."
+#~ msgstr "O Tellico não consegue enviar o ficheiro - %1."
+
+#~ msgid ""
+#~ "Only collections with the same type of entries as the current one can be "
+#~ "appended. No changes are being made to the current collection."
+#~ msgstr ""
+#~ "Só podem ser adicionadas colecções com o mesmo tipo de campos do da "
+#~ "colecção actual. Não causa nenhuma alteração na colecção actual."
+
+#~ msgid ""
+#~ "Only collections with the same type of entries as the current one can be "
+#~ "merged. No changes are being made to the current collection."
+#~ msgstr ""
+#~ "Só podem ser combinadas colecções com tipos de campos idênticos aos da "
+#~ "colecção actual. Não provoca nenhuma alteração na colecção actual."
+
+#~ msgid "Tellico is unable to load an image from the file - %1."
+#~ msgstr "O Tellico não consegue carregar uma imagem do ficheiro - %1."
+
+#~ msgid "Untitled"
+#~ msgstr "Sem Título"
+
+#~ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
+#~ msgstr ""
+#~ "Esta informação foi oferecida de forma livre pelo <a href=\"%1\">%2</a>."
 
 #~ msgid "Allocine Link"
 #~ msgstr "Endereço do Allocine"
