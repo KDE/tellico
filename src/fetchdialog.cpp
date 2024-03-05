@@ -79,9 +79,6 @@
 namespace {
   static const int FETCH_MIN_WIDTH = 600;
 
-  static const char* FETCH_STRING_SEARCH = I18N_NOOP("&Search");
-  static const char* FETCH_STRING_STOP   = I18N_NOOP("&Stop");
-
   static const int StringDataType = QEvent::User;
   static const int ImageDataType = QEvent::User+1;
 
@@ -179,7 +176,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
 
   m_searchButton = new QPushButton(box1);
   box1HBoxLayout->addWidget(m_searchButton);
-  KGuiItem::assign(m_searchButton, KGuiItem(i18n(FETCH_STRING_STOP),
+  KGuiItem::assign(m_searchButton, KGuiItem(i18n("&Stop"),
                                             QIcon::fromTheme(QStringLiteral("dialog-cancel"))));
   connect(m_searchButton, &QAbstractButton::clicked, this, &FetchDialog::slotSearchClicked);
   m_searchButton->setWhatsThis(i18n("Click to start or stop the search"));
@@ -189,7 +186,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_searchButton->ensurePolished();
   int maxWidth = m_searchButton->sizeHint().width();
   int maxHeight = m_searchButton->sizeHint().height();
-  KGuiItem::assign(m_searchButton, KGuiItem(i18n(FETCH_STRING_SEARCH),
+  KGuiItem::assign(m_searchButton, KGuiItem(i18n("&Search"),
                                             QIcon::fromTheme(QStringLiteral("edit-find"))));
   maxWidth = qMax(maxWidth, m_searchButton->sizeHint().width());
   maxHeight = qMax(maxHeight, m_searchButton->sizeHint().height());
@@ -403,7 +400,7 @@ void FetchDialog::slotSearchClicked() {
     m_resultCount = 0;
     m_oldSearch = value;
     m_started = true;
-    KGuiItem::assign(m_searchButton, KGuiItem(i18n(FETCH_STRING_STOP),
+    KGuiItem::assign(m_searchButton, KGuiItem(i18n("&Stop"),
                                               QIcon::fromTheme(QStringLiteral("dialog-cancel"))));
     startProgress();
     setStatus(i18n("Searching..."));
@@ -462,7 +459,7 @@ void FetchDialog::slotFetchDone() {
 void FetchDialog::fetchDone(bool checkISBN_) {
 //  myDebug() << "fetchDone";
   m_started = false;
-  KGuiItem::assign(m_searchButton, KGuiItem(i18n(FETCH_STRING_SEARCH),
+  KGuiItem::assign(m_searchButton, KGuiItem(i18n("&Search"),
                                             QIcon::fromTheme(QStringLiteral("edit-find"))));
   stopProgress();
   if(m_resultCount == 0) {
@@ -583,7 +580,7 @@ void FetchDialog::slotMoreClicked() {
   }
 
   m_started = true;
-  KGuiItem::assign(m_searchButton, KGuiItem(i18n(FETCH_STRING_STOP),
+  KGuiItem::assign(m_searchButton, KGuiItem(i18n("&Stop"),
                                             QIcon::fromTheme(QStringLiteral("dialog-cancel"))));
   startProgress();
   setStatus(i18n("Searching..."));

@@ -51,6 +51,7 @@ public:
   QString fieldName() const;
 
   bool hasEmptyGroupName() const;
+  static QString emptyGroupName();
 
 private:
   QString m_group;

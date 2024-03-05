@@ -26,10 +26,20 @@
 #include "entry.h"
 #include "utils/string_utils.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <KLocalizedString>
+#define TC_STR const char*
+#define STR_NOOP I18N_NOOP
+#define TC_I18N i18n
+#else
+#include <KLazyLocalizedString>
+#define TC_STR KLazyLocalizedString
+#define STR_NOOP kli18n
+#define TC_I18N(str) str.toString()
+#endif
 
 namespace {
-  static const char* emptyString = I18N_NOOP("(Empty)");
+  static TC_STR emptyString = STR_NOOP("(Empty)");
 }
 
 using Tellico::Data::EntryGroup;
@@ -47,7 +57,7 @@ EntryGroup::~EntryGroup() {
 }
 
 QString EntryGroup::groupName() const {
-  return hasEmptyGroupName() ? i18n(emptyString) : m_group;
+  return hasEmptyGroupName() ? emptyGroupName() : m_group;
 }
 
 QString EntryGroup::fieldName() const {
@@ -56,4 +66,9 @@ QString EntryGroup::fieldName() const {
 
 bool EntryGroup::hasEmptyGroupName() const {
   return m_group.isEmpty();
+}
+
+QString EntryGroup::emptyGroupName() {
+  static const QString name = TC_I18N(emptyString);
+  return name;
 }
