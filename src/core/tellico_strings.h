@@ -29,12 +29,13 @@
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #define TC_STR const char*
-#define TC_I18N i18n
+#define TC_I18N1 i18n
+#define TC_I18N2 i18n
 #else
 #include <KLazyLocalizedString>
 #define TC_STR KLazyLocalizedString
-#define TC_I18N(str) str.toString();
-#define TC_I18N(str1, str2) str1.subs(str2).toString()
+#define TC_I18N1(str) str.toString();
+#define TC_I18N2(str1, str2) str1.subs(str2).toString()
 #endif
 
 namespace Tellico {

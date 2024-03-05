@@ -55,35 +55,35 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
            << platformName(NintendoGameCube) << platformName(Dreamcast)
            << platformName(Windows) << platformName(MacOS) << platformName(Linux);
   field = new Field(QStringLiteral("platform"), i18n("Platform"), platform);
-  field->setCategory(TC_I18N(categoryGeneral));
+  field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("genre"), i18n("Genre"));
-  field->setCategory(TC_I18N(categoryGeneral));
+  field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("year"), i18n("Release Year"), Field::Number);
-  field->setCategory(TC_I18N(categoryGeneral));
+  field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("publisher"), i18nc("Games - Publisher", "Publisher"));
-  field->setCategory(TC_I18N(categoryGeneral));
+  field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("developer"), i18n("Developer"));
-  field->setCategory(TC_I18N(categoryGeneral));
+  field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("certification"), i18n("ESRB Rating"), esrbRatings());
-  field->setCategory(TC_I18N(categoryGeneral));
+  field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
@@ -91,36 +91,36 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   list.append(field);
 
   field = new Field(QStringLiteral("rating"), i18n("Personal Rating"), Field::Rating);
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("completed"), i18n("Completed"), Field::Bool);
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool);
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("cover"), i18n("Cover"), Field::Image);
   list.append(field);
 
   field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
   list.append(Field::createDefaultField(Field::IDField));

@@ -49,29 +49,29 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
   QStringList media;
   media << i18n("Compact Disc") << i18n("DVD") << i18n("Cassette") << i18n("Vinyl");
   field = new Field(QStringLiteral("medium"), i18n("Medium"), media);
-  field->setCategory(TC_I18N(categoryGeneral));
+  field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("artist"), i18n("Artist"));
-  field->setCategory(TC_I18N(categoryGeneral));
+  field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
   field->setFormatType(FieldFormat::FormatTitle); // don't use FormatName
   list.append(field);
 
   field = new Field(QStringLiteral("label"), i18n("Label"));
-  field->setCategory(TC_I18N(categoryGeneral));
+  field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("year"), i18n("Year"), Field::Number);
-  field->setCategory(TC_I18N(categoryGeneral));
+  field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("genre"), i18n("Genre"));
-  field->setCategory(TC_I18N(categoryGeneral));
+  field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
@@ -85,29 +85,29 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
   list.append(field);
 
   field = new Field(QStringLiteral("rating"), i18n("Rating"), Field::Rating);
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool);
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
   field = new Field(QStringLiteral("keyword"), i18n("Keywords"));
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
@@ -115,7 +115,7 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
   list.append(field);
 
   field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
-  field->setCategory(TC_I18N(categoryPersonal));
+  field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
   list.append(Field::createDefaultField(Field::IDField));
