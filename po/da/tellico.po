@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-05 01:35+0000\n"
+"POT-Creation-Date: 2024-03-06 01:34+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -761,7 +761,7 @@ msgstr "Bibtex-nøgle"
 #: src/fetch/vgcollectfetcher.cpp:339 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:331 src/field.cpp:336
 #: src/translators/filereadervideo.cpp:276
-#: src/translators/gcstarimporter.cpp:90
+#: src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "General"
 msgstr "Generelt"
@@ -904,7 +904,7 @@ msgstr "Nøgleord"
 #: src/fetch/opdsfetcher.cpp:436 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:136
 #: src/translators/filereadervideo.cpp:128
-#: src/translators/gcstarimporter.cpp:89
+#: src/translators/gcstarimporter.cpp:88
 #, kde-format
 msgid "URL"
 msgstr "URL"
@@ -979,7 +979,7 @@ msgstr "Minimumsalder"
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:368 src/fetch/colnectfetcher.cpp:813
 #: src/fetch/numistafetcher.cpp:353 src/fetch/numistafetcher.cpp:401
-#: src/fetch/rpggeekfetcher.cpp:209 src/fetchdialog.cpp:253
+#: src/fetch/rpggeekfetcher.cpp:209 src/fetchdialog.cpp:250
 #, kde-format
 msgid "Description"
 msgstr "Beskrivelse"
@@ -1079,14 +1079,14 @@ msgstr "Undertekst"
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:968
 #: src/fetch/doubanfetcher.cpp:449 src/fetch/doubanfetcher.cpp:502
 #: src/fetch/ibsfetcher.cpp:292 src/translators/alexandriaimporter.cpp:163
-#: src/translators/librarythingimporter.cpp:148
+#: src/translators/librarythingimporter.cpp:149
 #, kde-format
 msgid "Hardback"
 msgstr "Hardback"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:966
 #: src/fetch/doubanfetcher.cpp:451 src/fetch/doubanfetcher.cpp:504
-#: src/fetch/ibsfetcher.cpp:290 src/translators/librarythingimporter.cpp:146
+#: src/fetch/ibsfetcher.cpp:290 src/translators/librarythingimporter.cpp:147
 #, kde-format
 msgid "Paperback"
 msgstr "Paperback"
@@ -1631,9 +1631,9 @@ msgstr "Album"
 #: src/fetch/upcitemdbfetcher.cpp:305 src/fetch/upcitemdbfetcher.cpp:425
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:162
-#: src/translators/freedbimporter.cpp:274
-#: src/translators/freedbimporter.cpp:396
-#: src/translators/freedbimporter.cpp:463
+#: src/translators/freedbimporter.cpp:278
+#: src/translators/freedbimporter.cpp:400
+#: src/translators/freedbimporter.cpp:467
 #, kde-format
 msgid "Compact Disc"
 msgstr "Compactdisk"
@@ -1685,7 +1685,7 @@ msgstr "Spor"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:485 src/fetch/fetchmanager.cpp:65
-#: src/fetch/itunesfetcher.cpp:320 src/fetchdialog.cpp:252 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:320 src/fetchdialog.cpp:249 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:434
 #, kde-format
@@ -2753,8 +2753,9 @@ msgstr "S&let"
 msgid "Click to delete the selected data source."
 msgstr "Tryk for at slette den valgte datakilde."
 
-#: src/configdialog.cpp:1161 src/translators/xsltexporter.cpp:99
-#: src/translators/xsltimporter.cpp:126
+#: src/configdialog.cpp:1161 src/translators/xsltexporter.cpp:101
+#: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
+#: src/translators/xsltimporter.cpp:133
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL-filer"
@@ -2769,12 +2770,14 @@ msgstr "Skabelonpakker"
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:55 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:100
-#: src/translators/librarythingimporter.cpp:189
+#: src/translators/librarythingimporter.cpp:191
+#: src/translators/librarythingimporter.cpp:195
 #: src/translators/onixexporter.cpp:71
 #: src/translators/tellicoxmlexporter.cpp:72
 #: src/translators/tellicozipexporter.cpp:54
-#: src/translators/xsltexporter.cpp:54 src/translators/xsltexporter.cpp:101
-#: src/translators/xsltimporter.cpp:128
+#: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:103
+#: src/translators/xsltexporter.cpp:107 src/translators/xsltimporter.cpp:130
+#: src/translators/xsltimporter.cpp:134
 #, kde-format
 msgid "All Files"
 msgstr "Alle filer"
@@ -2789,9 +2792,9 @@ msgstr "Slet skabelon"
 msgid "Select template to delete:"
 msgstr "Vælg skabelon der skal slettes:"
 
-#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:331
-#: src/fetchdialog.cpp:430 src/fetchdialog.cpp:564 src/fetchdialog.cpp:625
-#: src/fetchdialog.cpp:639 src/gui/statusbar.cpp:94
+#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:328
+#: src/fetchdialog.cpp:427 src/fetchdialog.cpp:561 src/fetchdialog.cpp:622
+#: src/fetchdialog.cpp:636 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Klar."
@@ -2991,11 +2994,6 @@ msgstr "Gem indgang"
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Ikke-gemte ændringer"
-
-#: src/entrygroup.cpp:32
-#, kde-format
-msgid "(Empty)"
-msgstr "(Tom)"
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:884
 #, kde-format
@@ -4405,63 +4403,63 @@ msgstr ""
 "fleste servere behøver ikke nogen. Adgangskoden vil blive gemt i klartekst i "
 "Tellicos konfigurationsfil."
 
-#: src/fetchdialog.cpp:82
-#, kde-format
-msgid "&Search"
-msgstr "&Søg"
-
-#: src/fetchdialog.cpp:83
-#, kde-format
-msgid "&Stop"
-msgstr "&Stop"
-
-#: src/fetchdialog.cpp:142 src/mainwindow.cpp:600
+#: src/fetchdialog.cpp:139 src/mainwindow.cpp:600
 #, kde-format
 msgid "Internet Search"
 msgstr "Internet-søgning"
 
-#: src/fetchdialog.cpp:153
+#: src/fetchdialog.cpp:150
 #, kde-format
 msgid "Search Query"
 msgstr "Søgeforespørgsel"
 
-#: src/fetchdialog.cpp:162
+#: src/fetchdialog.cpp:159
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "Sø&g:"
 
-#: src/fetchdialog.cpp:168
+#: src/fetchdialog.cpp:165
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr "Angiv en søgeværdi. En ISBN-søgning skal indeholde det fulde ISBN."
 
-#: src/fetchdialog.cpp:178
+#: src/fetchdialog.cpp:175
 #, kde-format
 msgid "Choose the type of search"
 msgstr "Vælg typen af søgning"
 
-#: src/fetchdialog.cpp:185
+#: src/fetchdialog.cpp:179 src/fetchdialog.cpp:403 src/fetchdialog.cpp:583
+#, kde-format
+msgid "&Stop"
+msgstr "&Stop"
+
+#: src/fetchdialog.cpp:182
 #, kde-format
 msgid "Click to start or stop the search"
 msgstr "Klik for at starte søgningen"
 
-#: src/fetchdialog.cpp:204
+#: src/fetchdialog.cpp:189 src/fetchdialog.cpp:462
+#, kde-format
+msgid "&Search"
+msgstr "&Søg"
+
+#: src/fetchdialog.cpp:201
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
 msgstr "Søgning efter &flere ISBN/UPC"
 
-#: src/fetchdialog.cpp:206
+#: src/fetchdialog.cpp:203
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr "Markér dette felt, for at søge efter flere ISBN- eller UPC-værdier."
 
-#: src/fetchdialog.cpp:210
+#: src/fetchdialog.cpp:207
 #, kde-format
 msgid "Edit ISBN/UPC values..."
 msgstr "Redigér ISBN-/UPC-værdier..."
 
-#: src/fetchdialog.cpp:214
+#: src/fetchdialog.cpp:211
 #, kde-format
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
@@ -4470,22 +4468,22 @@ msgstr ""
 "Klik for at åbne et tekstredigeringsfelt til indtastning eller redigering af "
 "flere ISBN- eller UPC-værdier."
 
-#: src/fetchdialog.cpp:220
+#: src/fetchdialog.cpp:217
 #, kde-format
 msgid "Search s&ource:"
 msgstr "Søge&kilde:"
 
-#: src/fetchdialog.cpp:235
+#: src/fetchdialog.cpp:232
 #, kde-format
 msgid "Select the database to search"
 msgstr "Vælg den database der skal søges i"
 
-#: src/fetchdialog.cpp:254
+#: src/fetchdialog.cpp:251
 #, kde-format
 msgid "Source"
 msgstr "Kilde"
 
-#: src/fetchdialog.cpp:265
+#: src/fetchdialog.cpp:262
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
@@ -4494,7 +4492,7 @@ msgstr ""
 "Efterhånden som resultater findes, tilføjes de til denne liste. Markering af "
 "et vil hente den fulde indgang og vise den i visningen nedenfor."
 
-#: src/fetchdialog.cpp:278
+#: src/fetchdialog.cpp:275
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
@@ -4503,105 +4501,105 @@ msgstr ""
 "En indgang kan blive vist her før tilføjelse af den til den aktuelle samling "
 "ved at markere den på listen ovenfor"
 
-#: src/fetchdialog.cpp:286
+#: src/fetchdialog.cpp:283
 #, kde-format
 msgid "&Add Entry"
 msgstr "&Tilføj indgang"
 
-#: src/fetchdialog.cpp:291
+#: src/fetchdialog.cpp:288
 #, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr "Tilføj den markerede indgang til den nuværende samling"
 
-#: src/fetchdialog.cpp:294
+#: src/fetchdialog.cpp:291
 #, kde-format
 msgid "Get More Results"
 msgstr "Hent flere resultater"
 
-#: src/fetchdialog.cpp:298
+#: src/fetchdialog.cpp:295
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr "Hent flere resultater fra den nuværende datakilde"
 
-#: src/fetchdialog.cpp:304
+#: src/fetchdialog.cpp:301
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr "Ryd alle søgefelter og -resultater"
 
-#: src/fetchdialog.cpp:316
+#: src/fetchdialog.cpp:313
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr ""
 
-#: src/fetchdialog.cpp:396
+#: src/fetchdialog.cpp:393
 #, kde-format
 msgid "Cancelling the search..."
 msgstr "Annullerer søgningen..."
 
-#: src/fetchdialog.cpp:409 src/fetchdialog.cpp:589
+#: src/fetchdialog.cpp:406 src/fetchdialog.cpp:586
 #, kde-format
 msgid "Searching..."
 msgstr "Søger..."
 
-#: src/fetchdialog.cpp:469
+#: src/fetchdialog.cpp:466
 #, kde-format
 msgid "The search returned no items."
 msgstr "Søgningen fandt ingen elementer."
 
-#: src/fetchdialog.cpp:472
+#: src/fetchdialog.cpp:469
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
 msgstr[0] "Søgningen fandt 1 element."
 msgstr[1] "Søgningen fandt %1 elementer."
 
-#: src/fetchdialog.cpp:501
+#: src/fetchdialog.cpp:498
 #, kde-format
 msgid "No results were found for the following ISBN values:"
 msgstr "Ingen resultater blev fundet for følgende ISBN-værdier:"
 
-#: src/fetchdialog.cpp:503
+#: src/fetchdialog.cpp:500
 #, kde-format
 msgid "No Results"
 msgstr "Ingen resultater"
 
-#: src/fetchdialog.cpp:556 src/fetchdialog.cpp:612
+#: src/fetchdialog.cpp:553 src/fetchdialog.cpp:609
 #, kde-format
 msgid "Fetching %1..."
 msgstr "Henter %1..."
 
-#: src/fetchdialog.cpp:629
+#: src/fetchdialog.cpp:626
 #, kde-format
 msgid "Attribution"
 msgstr "Attribution"
 
-#: src/fetchdialog.cpp:666 src/fetchdialog.cpp:890
+#: src/fetchdialog.cpp:663 src/fetchdialog.cpp:887
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "Ingen internetkilder er tilgængelige for din aktuelle samlingstype."
 
-#: src/fetchdialog.cpp:747
+#: src/fetchdialog.cpp:744
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "Redigér ISBN-/UPC-værdier"
 
-#: src/fetchdialog.cpp:758
+#: src/fetchdialog.cpp:755
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Angiv ISBN- eller UPC-værdier, én pr. linje.</qt>"
 
-#: src/fetchdialog.cpp:774
+#: src/fetchdialog.cpp:771
 #, kde-format
 msgid "&Load From File..."
 msgstr "&Indlæs fra fil..."
 
-#: src/fetchdialog.cpp:775
+#: src/fetchdialog.cpp:772
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Indlæs listen fra en tekstfil.</qt>"
 
-#: src/fetchdialog.cpp:799
+#: src/fetchdialog.cpp:796
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
@@ -6353,9 +6351,9 @@ msgid "(%1 selected)"
 msgstr "(%1 markerede)"
 
 #: src/mainwindow.cpp:1818 src/translators/boardgamegeekimporter.cpp:98
-#: src/translators/gcstarimporter.cpp:265
+#: src/translators/gcstarimporter.cpp:257
 #: src/translators/goodreadsimporter.cpp:111
-#: src/translators/xsltimporter.cpp:92
+#: src/translators/xsltimporter.cpp:93
 #, kde-format
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico stødte på en fejl i XSLT-behandlingen."
@@ -6797,8 +6795,8 @@ msgid "Bibtexml Files"
 msgstr "Bibtexml-filer"
 
 #: src/translators/boardgamegeekimporter.cpp:81
-#: src/translators/goodreadsimporter.cpp:87 src/translators/xsltimporter.cpp:79
-#: src/translators/xsltimporter.cpp:85
+#: src/translators/goodreadsimporter.cpp:87 src/translators/xsltimporter.cpp:80
+#: src/translators/xsltimporter.cpp:86
 #, kde-format
 msgid "A valid XSLT file is needed to import the file."
 msgstr "En gyldig XSLT-fil kræves for at filen kan importeres."
@@ -7054,58 +7052,58 @@ msgstr ""
 "Hvis markeret, genereres forhåndsvisning af filindholdet, hvilket kan gøre "
 "mappelistningen langsommere."
 
-#: src/translators/freedbimporter.cpp:105
-#: src/translators/freedbimporter.cpp:188
+#: src/translators/freedbimporter.cpp:109
+#: src/translators/freedbimporter.cpp:192
 #, kde-format
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
 msgstr "<qt>Tellico kunne ikke tilgå cd-rom-enheden - <i>%1</i>.</qt>"
 
-#: src/translators/freedbimporter.cpp:213
+#: src/translators/freedbimporter.cpp:217
 #, kde-format
 msgid "Select CDDB Entry"
 msgstr "Vælg CDDB-indgang"
 
-#: src/translators/freedbimporter.cpp:214
+#: src/translators/freedbimporter.cpp:218
 #, kde-format
 msgid "Select a CDDB entry:"
 msgstr "Vælg en CDDB-indgang:"
 
-#: src/translators/freedbimporter.cpp:237
+#: src/translators/freedbimporter.cpp:241
 #, kde-format
 msgid "<qt>No records were found to match the CD.</qt>"
 msgstr "<qt>Ingen registre blev fundet som matcher cd'en.</qt>"
 
-#: src/translators/freedbimporter.cpp:255
+#: src/translators/freedbimporter.cpp:259
 #, kde-format
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
 msgstr "<qt>Tellico kunne ikke gennemføre cd-opslaget.</qt>"
 
-#: src/translators/freedbimporter.cpp:488
+#: src/translators/freedbimporter.cpp:492
 #, kde-format
 msgid "Various"
 msgstr "Diverse"
 
-#: src/translators/freedbimporter.cpp:508
+#: src/translators/freedbimporter.cpp:512
 #, kde-format
 msgid "Audio CD Options"
 msgstr "Indstillinger for lyd-cd"
 
-#: src/translators/freedbimporter.cpp:515
+#: src/translators/freedbimporter.cpp:519
 #, kde-format
 msgid "Read data from CD-ROM device"
 msgstr "Læs data fra cd-rom-enhed"
 
-#: src/translators/freedbimporter.cpp:518
+#: src/translators/freedbimporter.cpp:522
 #, kde-format
 msgid "Select or input the CD-ROM device location."
 msgstr "Vælg eller angiv placering af cd-rom-enheden."
 
-#: src/translators/freedbimporter.cpp:527
+#: src/translators/freedbimporter.cpp:531
 #, kde-format
 msgid "Read all CDDB cache files only"
 msgstr "Læs kun alle CDDB-cache-filer"
 
-#: src/translators/freedbimporter.cpp:528
+#: src/translators/freedbimporter.cpp:532
 #, kde-format
 msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
@@ -7114,8 +7112,8 @@ msgstr ""
 "Læs data rekursivt fra alle CDDB-cache-filer indeholdt i standard cache-"
 "mapperne."
 
-#: src/translators/gcstarimporter.cpp:126
-#: src/translators/gcstarimporter.cpp:272
+#: src/translators/gcstarimporter.cpp:125
+#: src/translators/gcstarimporter.cpp:264
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Filen er ikke en gyldig GCStar datafil.</qt>"
@@ -7165,12 +7163,12 @@ msgstr "Indlæser data..."
 msgid "Loading %1..."
 msgstr "Indlæser %1..."
 
-#: src/translators/librarythingimporter.cpp:177
+#: src/translators/librarythingimporter.cpp:178
 #, kde-format
 msgid "LibraryThing Options"
 msgstr "LibraryThing-indstillinger"
 
-#: src/translators/librarythingimporter.cpp:180
+#: src/translators/librarythingimporter.cpp:181
 #, kde-format
 msgid ""
 "Export your LibraryThing collection in <a href=\"https://www.librarything."
@@ -7179,12 +7177,13 @@ msgstr ""
 "Eksportér LibraryThing-samling i <a href=\"https://www.librarything.com/"
 "export.php?export_type=json\">JSON-format</a>."
 
-#: src/translators/librarythingimporter.cpp:187
+#: src/translators/librarythingimporter.cpp:189
+#: src/translators/librarythingimporter.cpp:194
 #, kde-format
 msgid "JSON Files"
 msgstr "JSON-filer"
 
-#: src/translators/librarythingimporter.cpp:192
+#: src/translators/librarythingimporter.cpp:199
 #, kde-format
 msgid "LibraryThing file:"
 msgstr "LibraryThing-fil:"
@@ -7292,17 +7291,17 @@ msgstr ""
 msgid "It is from a future version of Tellico."
 msgstr "Det er fra en fremtidig version af Tellico."
 
-#: src/translators/xsltexporter.cpp:85 src/translators/xsltimporter.cpp:117
+#: src/translators/xsltexporter.cpp:86 src/translators/xsltimporter.cpp:118
 #, kde-format
 msgid "XSLT Options"
 msgstr "XSLT-indstillinger"
 
-#: src/translators/xsltexporter.cpp:88 src/translators/xsltimporter.cpp:120
+#: src/translators/xsltexporter.cpp:89 src/translators/xsltimporter.cpp:121
 #, kde-format
 msgid "XSLT file:"
 msgstr "XSLT-fil:"
 
-#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:122
+#: src/translators/xsltexporter.cpp:91 src/translators/xsltimporter.cpp:123
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Vælg den XSLT-fil der bruges til at transformere data."
@@ -7406,6 +7405,9 @@ msgstr "Søg"
 #, kde-format
 msgid "Clear"
 msgstr "Ryd"
+
+#~ msgid "(Empty)"
+#~ msgstr "(Tom)"
 
 #~ msgid "Classification"
 #~ msgstr "Klassificering"
