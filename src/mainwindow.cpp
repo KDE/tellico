@@ -1074,7 +1074,7 @@ void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
 
   QString entryXSLTFile;
   if(coll_->type() == Data::Collection::Base &&
-     Data::Document::self()->URL().fileName() != i18n(Tellico::untitledFilename)) {
+     Data::Document::self()->URL().fileName() != TC_I18N1(Tellico::untitledFilename)) {
     // use a nested config group for template specific to custom collections
     // using the filename alone as a keyEvents
     KConfigGroup subGroup(&group, Data::Document::self()->URL().fileName());
@@ -1274,7 +1274,7 @@ void MainWindow::slotFileNewByTemplate(const QString& collectionTemplate_) {
   if(m_editDialog->queryModified() && querySaveModified()) {
     openURL(QUrl::fromLocalFile(collectionTemplate_));
     myLog() << "Creating new collection from template:" << collectionTemplate_;
-    Data::Document::self()->setURL(QUrl::fromLocalFile(i18n(Tellico::untitledFilename)));
+    Data::Document::self()->setURL(QUrl::fromLocalFile(TC_I18N1(Tellico::untitledFilename)));
     Kernel::self()->resetHistory();
     m_fileOpenRecent->setCurrentItem(-1);
     slotEnableOpenedActions();
@@ -2170,7 +2170,7 @@ bool MainWindow::importFile(Tellico::Import::Format format_, const QUrl& url_, T
   if(!url_.isEmpty() && url_.isValid() && NetAccess::exists(url_, true, this)) {
     coll = ImportDialog::importURL(format_, url_);
   } else {
-    Kernel::self()->sorry(i18n(errorLoad, url_.fileName()));
+    Kernel::self()->sorry(TC_I18N2(errorLoad, url_.fileName()));
     failed = true;
   }
 
@@ -2292,7 +2292,7 @@ void MainWindow::updateCaption(bool modified_) {
        caption += QLatin1String(" - ");
     }
     QUrl u = Data::Document::self()->URL();
-    if(u.isLocalFile() && u.fileName() == i18n(Tellico::untitledFilename)) {
+    if(u.isLocalFile() && u.fileName() == TC_I18N1(Tellico::untitledFilename)) {
       // for new files, the filename is set to Untitled in Data::Document
       caption += u.fileName();
     } else {
@@ -2463,7 +2463,7 @@ bool MainWindow::importCollection(Tellico::Data::CollPtr coll_, Tellico::Import:
           Kernel::self()->appendCollection(coll_);
           slotEnableModifiedActions(true);
         } else {
-          Kernel::self()->sorry(i18n(errorAppendType));
+          Kernel::self()->sorry(TC_I18N1(errorAppendType));
           failed = true;
         }
       }
@@ -2478,7 +2478,7 @@ bool MainWindow::importCollection(Tellico::Data::CollPtr coll_, Tellico::Import:
           Kernel::self()->mergeCollection(coll_);
           slotEnableModifiedActions(true);
         } else {
-          Kernel::self()->sorry(i18n(errorMergeType));
+          Kernel::self()->sorry(TC_I18N1(errorMergeType));
           failed = true;
         }
       }

@@ -74,7 +74,7 @@ Tellico::Data::CollPtr Document::collection() const {
 
 void Document::setURL(const QUrl& url_) {
   m_url = url_;
-  if(m_url.fileName() != i18n(Tellico::untitledFilename)) {
+  if(m_url.fileName() != TC_I18N1(Tellico::untitledFilename)) {
     ImageFactory::setLocalDirectory(m_url);
     EntryComparison::setDocumentUrl(m_url);
   }
@@ -111,7 +111,7 @@ bool Document::newDocument(int type_) {
 
   // be sure to set the new Url before signalling a new collection
   // since reading options for custom collections depend on the file name
-  const QUrl url = QUrl::fromLocalFile(i18n(Tellico::untitledFilename));
+  const QUrl url = QUrl::fromLocalFile(TC_I18N1(Tellico::untitledFilename));
   setURL(url);
 
   emit signalCollectionAdded(m_coll);
@@ -411,7 +411,7 @@ void Document::replaceCollection(Tellico::Data::CollPtr coll_) {
     return;
   }
 
-  QUrl url = QUrl::fromLocalFile(i18n(Tellico::untitledFilename));
+  QUrl url = QUrl::fromLocalFile(TC_I18N1(Tellico::untitledFilename));
   setURL(url);
   m_validFile = false;
 

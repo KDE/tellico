@@ -832,7 +832,7 @@ void ConfigDialog::savePrintingConfig() {
 void ConfigDialog::saveTemplateConfig() {
   const int collType = Kernel::self()->collectionType();
   if(collType == Data::Collection::Base &&
-     Kernel::self()->URL().fileName() != i18n(Tellico::untitledFilename)) {
+     Kernel::self()->URL().fileName() != TC_I18N1(Tellico::untitledFilename)) {
     // use a nested config group for template specific to custom collections
     // using the filename alone as a keyEvents
     const QString configGroup = QStringLiteral("Options - %1").arg(CollectionFactory::typeName(collType));
