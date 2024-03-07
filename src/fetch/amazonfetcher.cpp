@@ -40,12 +40,12 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 #include <KIO/JobUiDelegate>
 #include <KSeparator>
 #include <KAcceleratorManager>
 #include <KConfigGroup>
-#include <KJobWidgets/KJobWidgets>
+#include <KJobWidgets>
 
 #include <QLineEdit>
 #include <QLabel>

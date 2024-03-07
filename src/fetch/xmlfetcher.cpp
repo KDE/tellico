@@ -31,13 +31,13 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 #include <KIO/JobUiDelegate>
 
 #include <QFile>
 #include <QTextStream>
 #include <QTextCodec>
-#include <KJobWidgets/KJobWidgets>
+#include <KJobWidgets>
 
 using Tellico::Fetch::XMLFetcher;
 

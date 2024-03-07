@@ -35,7 +35,7 @@
 #include <KConfigGroup>
 #include <KJob>
 #include <KJobUiDelegate>
-#include <KJobWidgets/KJobWidgets>
+#include <KJobWidgets>
 #include <KIO/StoredTransferJob>
 #include <kwidgetsaddons_version.h>
 #if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,55,0)

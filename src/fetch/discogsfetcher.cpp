@@ -34,9 +34,9 @@
 
 #include <KLocalizedString>
 #include <KConfigGroup>
-#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 #include <KJobUiDelegate>
-#include <KJobWidgets/KJobWidgets>
+#include <KJobWidgets>
 
 #include <QLineEdit>
 #include <QLabel>

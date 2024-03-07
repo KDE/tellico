@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "adsfetcher.h"
-#include "../core/filehandler.h"
-#include "../collections/bibtexcollection.h"
 #include "../translators/risimporter.h"
 #include "../entry.h"
 #include "../utils/string_utils.h"
@@ -33,9 +31,9 @@
 
 #include <KLocalizedString>
 #include <KConfigGroup>
-#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 #include <KIO/JobUiDelegate>
-#include <KJobWidgets/KJobWidgets>
+#include <KJobWidgets>
 
 #include <QLabel>
 #include <QGridLayout>

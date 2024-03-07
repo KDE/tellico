@@ -34,10 +34,10 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 #include <KIO/JobUiDelegate>
 #include <KConfigGroup>
-#include <KJobWidgets/KJobWidgets>
+#include <KJobWidgets>
 
 #include <QDomDocument>
 #include <QLabel>

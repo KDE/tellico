@@ -34,7 +34,7 @@
 #include <KConfigGroup>
 #include <KJob>
 #include <KJobUiDelegate>
-#include <KJobWidgets/KJobWidgets>
+#include <KJobWidgets>
 #include <KIO/StoredTransferJob>
 
 #include <QLabel>

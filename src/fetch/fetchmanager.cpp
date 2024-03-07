@@ -39,7 +39,7 @@
 
 #include <KLocalizedString>
 #include <KIconLoader>
-#include <KIO/Job>
+#include <KIO/FileCopyJob>
 #include <KSharedConfig>
 
 #include <QFileInfo>

@@ -36,10 +36,10 @@
 
 #include <KLocalizedString>
 #include <KConfigGroup>
-#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 #include <KJobUiDelegate>
 #include <KAcceleratorManager>
-#include <KJobWidgets/KJobWidgets>
+#include <KJobWidgets>
 
 #include <QSpinBox>
 #include <QFile>
