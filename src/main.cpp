@@ -180,7 +180,7 @@ int main(int argc, char* argv[]) {
 
   if(app.isSessionRestored()) {
     myLog() << "Restoring previous session";
-    RESTORE(Tellico::MainWindow);
+    kRestoreMainWindows<Tellico::MainWindow>();
   } else {
     Tellico::MainWindow* tellico = new Tellico::MainWindow();
     tellico->show();
