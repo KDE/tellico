@@ -1,3 +1,7 @@
+2024-03-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed DVDFr searches with title accents.
+
 2024-02-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Removed data source for Allocine.

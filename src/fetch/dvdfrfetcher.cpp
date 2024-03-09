@@ -34,12 +34,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-#include <QTextCodec>
-#else
-#include <QStringConverter>
-#endif
-#include <QDomDocument>
 #include <QUrlQuery>
 
 namespace {
@@ -78,19 +72,7 @@ QUrl DVDFrFetcher::searchUrl() {
   QUrlQuery q;
   switch(request().key()) {
     case Title:
-      // DVDfr requires the title string to be in iso-8859-15
-      {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-        QTextCodec* codec = QTextCodec::codecForName("iso-8859-15");
-        Q_ASSERT(codec);
-        auto title = codec->fromUnicode(request().value());
-#else
-        QStringEncoder toIso885915("iso-8859-15");
-        Q_ASSERT(toIso885915.isValid());
-        auto title = toIso885915(request().value());
-#endif
-        q.addQueryItem(QStringLiteral("title"), QString::fromUtf8(title));
-      }
+      q.addQueryItem(QStringLiteral("title"), request().value());
       break;
 
     case UPC:
