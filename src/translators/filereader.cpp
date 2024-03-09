@@ -70,7 +70,7 @@ KFileMetaData::PropertyMap FileReaderMetaData::properties(const KFileItem& item_
       ex->extract(&result);
     }
   }
-#if KFILEMETADATA_VERSION > QT_VERSION_CHECK(5,240,0)
+#if KFILEMETADATA_VERSION >= QT_VERSION_CHECK(5,240,0)
   return result.properties();
 #elif KFILEMETADATA_VERSION >= QT_VERSION_CHECK(5,89,0)
   return result.properties(KFileMetaData::PropertiesMapType::MultiMap);

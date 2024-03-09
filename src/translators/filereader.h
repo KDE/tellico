@@ -72,7 +72,7 @@ public:
 
 protected:
 #ifdef HAVE_KFILEMETADATA
-#if KFILEMETADATA_VERSION > QT_VERSION_CHECK(5,240,0)
+#if KFILEMETADATA_VERSION >= QT_VERSION_CHECK(5,240,0)
   KFileMetaData::PropertyMultiMap properties(const KFileItem& item);
 #else
   KFileMetaData::PropertyMap properties(const KFileItem& item);

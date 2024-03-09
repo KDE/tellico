@@ -6,14 +6,19 @@ set(CMAKE_CXX_STANDARD 14)
 project(Tellico)
 set(TELLICO_VERSION "3.5.99+git")
 
-set(QT_MIN_VERSION "5.10.0")
-
 # FindPoppler was added to ECM in 5.19
 find_package(ECM 5.19 REQUIRED NO_MODULE)
 
 if(POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW)
 endif(POLICY CMP0063)
+
+if(QT_MAJOR_VERSION STREQUAL "6")
+  set(QT_MIN_VERSION "6.4.0")
+  set(KF_MIN_VERSION "5.240.0")
+else()
+  set(QT_MIN_VERSION "5.10.0")
+endif()
 
 # https://gitlab.kitware.com/cmake/community/wikis/doc/cmake/Useful-Variables
 # automatically add CMAKE_CURRENT_SOURCE_DIR and CMAKE_CURRENT_BINARY_DIR
