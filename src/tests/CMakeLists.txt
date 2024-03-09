@@ -82,6 +82,11 @@ ecm_add_test(newstufftest.cpp ../fieldformat.cpp ../tellico_debug.cpp
     LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test newstuff config
 )
 
+ecm_add_test(rtftest.cpp
+    TEST_NAME rtftest
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test rtf2html-tellico
+)
+
 set(tellicotest_SRCS
     ../collection.cpp
     ../entry.cpp
