@@ -53,7 +53,6 @@
 #include <QFile>
 #include <QDir>
 #include <QTextStream>
-#include <QTextCodec>
 #include <QGridLayout>
 #include <QStandardPaths>
 #include <QJsonDocument>
@@ -346,7 +345,6 @@ void AmazonFetcher::slotComplete(KJob*) {
     logFile.setAutoRemove(false);
     if(logFile.open()) {
       QTextStream t(&logFile);
-      t.setCodec("UTF-8");
       t << data;
       myLog() << "Writing Amazon data output to" << logFile.fileName();
     }
@@ -356,7 +354,6 @@ void AmazonFetcher::slotComplete(KJob*) {
   QFile f(QString::fromLatin1("/tmp/test%1.json").arg(m_page));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();

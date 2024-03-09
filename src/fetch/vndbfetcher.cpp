@@ -38,7 +38,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
@@ -255,7 +254,6 @@ void VNDBFetcher::parseVNResults() {
   QFile f(QString::fromLatin1("/tmp/vndbtest.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << m_data;
   }
   f.close();
@@ -335,7 +333,6 @@ void VNDBFetcher::parseReleaseResults(Data::EntryPtr entry_) {
   QFile f(QString::fromLatin1("/tmp/vndb-release.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << m_data;
   }
   f.close();

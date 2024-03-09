@@ -24,7 +24,6 @@
 
 #include "exportdialog.h"
 #include "collection.h"
-#include "core/filehandler.h"
 #include "controller.h"
 #include "tellico_debug.h"
 
@@ -49,7 +48,11 @@
 #include <QGroupBox>
 #include <QButtonGroup>
 #include <QRadioButton>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QTextCodec>
+#else
+#include <QStringConverter>
+#endif
 #include <QVBoxLayout>
 #include <QDialogButtonBox>
 #include <QPushButton>
@@ -101,13 +104,18 @@ ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollP
   m_encodeUTF8->setWhatsThis(i18n("Encode the exported file in Unicode (UTF-8)."));
   vlay2->addWidget(m_encodeUTF8);
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+  const auto localeName = QTextCodec::codecForLocale()->name();
+#else
+  const auto localeName = QStringConverter::nameForEncoding(QStringConverter::System);
+#endif
   QString localStr = i18n("Encode in user locale (%1)",
-                          QLatin1String(QTextCodec::codecForLocale()->name()));
+                          QLatin1String(localeName));
   m_encodeLocale = new QRadioButton(localStr, group2);
   m_encodeLocale->setWhatsThis(i18n("Encode the exported file in the local encoding."));
   vlay2->addWidget(m_encodeLocale);
 
-  if(QTextCodec::codecForLocale()->name() == "UTF-8") {
+  if(localeName == "UTF-8") {
     m_encodeUTF8->setEnabled(false);
     m_encodeLocale->setChecked(true);
   }

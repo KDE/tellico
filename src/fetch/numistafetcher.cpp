@@ -184,7 +184,6 @@ void NumistaFetcher::slotComplete(KJob* ) {
   QFile f(QStringLiteral("/tmp/test.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();
@@ -269,7 +268,6 @@ Tellico::Data::EntryPtr NumistaFetcher::fetchEntryHook(uint uid_) {
   QFile f(QStringLiteral("/tmp/test2-numista.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();

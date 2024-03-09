@@ -45,7 +45,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -199,7 +198,6 @@ void ItunesFetcher::slotComplete(KJob* job_) {
   QFile f(QStringLiteral("/tmp/test-itunes.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();
@@ -293,7 +291,6 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
       QFile f(QStringLiteral("/tmp/test-itunes-tracks.json"));
       if(f.open(QIODevice::WriteOnly)) {
         QTextStream t(&f);
-        t.setCodec("UTF-8");
         t << job->data();
       }
       f.close();
@@ -467,7 +464,6 @@ void ItunesFetcher::populateEpisodes(Data::EntryPtr entry_) {
   QFile f(QStringLiteral("/tmp/test-itunes-episodes.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << job->data();
   }
   f.close();

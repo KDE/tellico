@@ -27,7 +27,6 @@
 #include "../translators/tellicoimporter.h"
 #include "../utils/guiproxy.h"
 #include "../utils/xmlhandler.h"
-#include "../utils/string_utils.h"
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
@@ -36,7 +35,6 @@
 
 #include <QFile>
 #include <QTextStream>
-#include <QTextCodec>
 #include <KJobWidgets>
 
 using Tellico::Fetch::XMLFetcher;
@@ -121,7 +119,6 @@ void XMLFetcher::slotComplete(KJob* ) {
   QFile f(QStringLiteral("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("utf-8");
     t << data;
   }
   f.close();
@@ -135,7 +132,6 @@ void XMLFetcher::slotComplete(KJob* ) {
   QFile f2(QStringLiteral("/tmp/test-tellico.xml"));
   if(f2.open(QIODevice::WriteOnly)) {
     QTextStream t(&f2);
-    t.setCodec("utf-8");
     t << str;
   }
   f2.close();

@@ -45,7 +45,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
-#include <QTextCodec>
 #include <QUrlQuery>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -248,7 +247,6 @@ void DoubanFetcher::slotComplete(KJob* job_) {
   QFile f(QString::fromLatin1("/tmp/test-douban1.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();
@@ -341,7 +339,6 @@ Tellico::Data::EntryPtr DoubanFetcher::fetchEntryHook(uint uid_) {
   QFile f(QLatin1String("/tmp/test-douban2.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();

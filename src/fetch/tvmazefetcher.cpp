@@ -42,7 +42,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
-#include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -165,7 +164,6 @@ void TVmazeFetcher::slotComplete(KJob* job_) {
   QFile f(QStringLiteral("/tmp/test.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();
@@ -248,7 +246,6 @@ Tellico::Data::EntryPtr TVmazeFetcher::fetchEntryHook(uint uid_) {
     QFile f(QStringLiteral("/tmp/test2.json"));
     if(f.open(QIODevice::WriteOnly)) {
       QTextStream t(&f);
-      t.setCodec("UTF-8");
       t << data;
     }
     f.close();

@@ -282,7 +282,6 @@ void SRUFetcher::slotComplete(KJob*) {
   QFile f(QString::fromLatin1("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();

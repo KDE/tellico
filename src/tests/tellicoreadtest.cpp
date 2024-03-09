@@ -47,7 +47,11 @@
 #include <QTest>
 #include <QNetworkInterface>
 #include <QDate>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QTextCodec>
+#else
+#include <QStringDecoder>
+#endif
 #include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( TellicoReadTest )
@@ -451,10 +455,17 @@ void TellicoReadTest::testXMLHandler_data() {
                           << QStringLiteral("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<x>value</x>") << true;
 
   QString usa = QString::fromUtf8("США");
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QTextCodec* cp1251 = QTextCodec::codecForName("cp1251");
   QByteArray usaBytes = QByteArray("<?xml version=\"1.0\" encoding=\"cp1251\"?>\n<x>")
                       + cp1251->fromUnicode(usa)
                       + QByteArray("</x>");
+#else
+  QStringDecoder toCp1251("cp1251");
+  QByteArray usaBytes = QByteArray("<?xml version=\"1.0\" encoding=\"cp1251\"?>\n<x>")
+                      + toCp1251(usa)
+                      + QByteArray("</x>");
+#endif
   QString usaString = QStringLiteral("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<x>")
                     + usa
                     + QStringLiteral("</x>");

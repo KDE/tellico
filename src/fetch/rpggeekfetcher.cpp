@@ -37,7 +37,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QTextCodec>
 #include <QUrlQuery>
 
 namespace {
@@ -141,7 +140,6 @@ Tellico::Data::EntryPtr RPGGeekFetcher::fetchEntryHookData(Data::EntryPtr entry_
   QFile f(QStringLiteral("/tmp/test-rpggeek.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << output;
   }
   f.close();

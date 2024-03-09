@@ -43,7 +43,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QUrlQuery>
@@ -166,7 +165,6 @@ Tellico::Data::EntryPtr OMDBFetcher::fetchEntryHook(uint uid_) {
     QFile f(QString::fromLatin1("/tmp/test2.json"));
     if(f.open(QIODevice::WriteOnly)) {
       QTextStream t(&f);
-      t.setCodec("UTF-8");
       t << data;
     }
     f.close();
@@ -241,7 +239,6 @@ void OMDBFetcher::slotComplete(KJob* job_) {
   QFile f(QString::fromLatin1("/tmp/test.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();

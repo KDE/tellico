@@ -275,7 +275,6 @@ Tellico::Data::EntryPtr BedethequeFetcher::fetchEntryHook(uint uid_) {
   QFile f(QLatin1String("/tmp/testbditem.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << results;
   }
   f.close();

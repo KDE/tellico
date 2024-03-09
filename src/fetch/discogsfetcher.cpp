@@ -186,7 +186,6 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
     QFile f(QString::fromLatin1("/tmp/test-discogs-data.json"));
     if(f.open(QIODevice::WriteOnly)) {
       QTextStream t(&f);
-      t.setCodec("UTF-8");
       t << data;
     }
     f.close();
@@ -297,7 +296,6 @@ void DiscogsFetcher::slotComplete(KJob*) {
   QFile f(QString::fromLatin1("/tmp/test-discogs.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();

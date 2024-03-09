@@ -30,14 +30,17 @@
 #include "../translators/xslthandler.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
-#include "../fieldformat.h"
 #include "../utils/datafileregistry.h"
 
 #include <KLocalizedString>
 
 #include <QTest>
 #include <QDomDocument>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QTextCodec>
+#else
+#include <QStringConverter>
+#endif
 
 QTEST_APPLESS_MAIN( ModsTest )
 
@@ -104,5 +107,9 @@ void ModsTest::testLocaleEncoding() {
   QVERIFY(!dom.isNull());
   QVERIFY(dom.toString().contains(QLatin1String("windows-1251")));
   Tellico::XSLTHandler::setLocaleEncoding(dom);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QVERIFY(dom.toString().contains(QTextCodec::codecForLocale()->name()));
+#else
+  QVERIFY(dom.toString().contains(QStringConverter::nameForEncoding(QStringConverter::System)));
+#endif
 }

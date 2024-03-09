@@ -148,7 +148,6 @@ void VGCollectFetcher::slotComplete(KJob*) {
   QFile f(QStringLiteral("/tmp/test.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << s;
   }
   f.close();
@@ -219,7 +218,6 @@ Tellico::Data::EntryPtr VGCollectFetcher::fetchEntryHook(uint uid_) {
   QFile f(QStringLiteral("/tmp/test2.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << results;
   }
   f.close();

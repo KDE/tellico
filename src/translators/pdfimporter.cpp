@@ -130,7 +130,6 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       QFile f(QString::fromLatin1("/tmp/test-xmp.xml"));
       if(f.open(QIODevice::WriteOnly)) {
         QTextStream t(&f);
-        t.setCodec("UTF-8");
         t << xmp;
       }
       f.close();

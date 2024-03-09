@@ -118,7 +118,6 @@ Tellico::Data::CollPtr GoodreadsImporter::collection() {
   QFile f(QLatin1String("/tmp/goodreads.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << text;
   }
   f.close();

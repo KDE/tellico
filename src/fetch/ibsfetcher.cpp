@@ -160,7 +160,6 @@ void IBSFetcher::slotComplete(KJob*) {
   QFile f(QString::fromLatin1("/tmp/test-ibs.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();
@@ -230,7 +229,6 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntryHook(uint uid_) {
   QFile f(QLatin1String("/tmp/test-ibs2.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << results;
   }
   f.close();
@@ -260,7 +258,6 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   QFile f(QLatin1String("/tmp/test.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << jsonRx.cap(1);
   }
   f.close();

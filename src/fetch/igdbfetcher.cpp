@@ -44,7 +44,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
-#include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -207,7 +206,6 @@ void IGDBFetcher::slotComplete(KJob* job_) {
   QFile file(QStringLiteral("/tmp/test.json"));
   if(file.open(QIODevice::WriteOnly)) {
     QTextStream t(&file);
-    t.setCodec("UTF-8");
     t << data;
   }
   file.close();

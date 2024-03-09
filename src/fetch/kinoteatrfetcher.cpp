@@ -134,7 +134,6 @@ void KinoTeatrFetcher::slotComplete(KJob*) {
   QFile f(QStringLiteral("/tmp/test1.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << output;
   }
   f.close();
@@ -202,7 +201,6 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::fetchEntryHook(uint uid_) {
   QFile f(QStringLiteral("/tmp/test-kinoteatr.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << results;
   }
   f.close();
@@ -228,7 +226,6 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::fetchEntryHook(uint uid_) {
     QFile f2(QStringLiteral("/tmp/test-kinoteatr-persons.html"));
     if(f2.open(QIODevice::WriteOnly)) {
       QTextStream t(&f2);
-      t.setCodec("UTF-8");
       t << personsText;
     }
     f2.close();

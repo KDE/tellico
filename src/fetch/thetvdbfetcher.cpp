@@ -46,7 +46,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
-#include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -238,7 +237,6 @@ void TheTVDBFetcher::slotComplete(KJob* job_) {
   QFile f(QStringLiteral("/tmp/test-thetvdb.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();
@@ -322,7 +320,6 @@ Tellico::Data::EntryPtr TheTVDBFetcher::fetchEntryHook(uint uid_) {
     QFile f(QStringLiteral("/tmp/test2-thetvdb.json"));
     if(f.open(QIODevice::WriteOnly)) {
       QTextStream t(&f);
-      t.setCodec("UTF-8");
       t << data;
     }
     f.close();

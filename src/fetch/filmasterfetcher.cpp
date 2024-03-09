@@ -40,7 +40,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QUrlQuery>
@@ -186,7 +185,6 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
   QFile f(QString::fromLatin1("/tmp/test.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();

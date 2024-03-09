@@ -288,7 +288,6 @@ void OPDSFetcher::parseData(const QByteArray& data_, bool manualSearch_) {
   QFile f(QString::fromLatin1("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data_;
   }
   f.close();

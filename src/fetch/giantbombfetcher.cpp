@@ -38,7 +38,6 @@
 #include <QTextStream>
 #include <QGridLayout>
 #include <QDomDocument>
-#include <QTextCodec>
 #include <QUrlQuery>
 
 namespace {
@@ -156,7 +155,6 @@ Tellico::Data::EntryPtr GiantBombFetcher::fetchEntryHookData(Data::EntryPtr entr
   QFile f(QStringLiteral("/tmp/test2.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << output;
   }
   f.close();

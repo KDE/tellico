@@ -158,7 +158,6 @@ void KinoPoiskFetcher::slotComplete(KJob*) {
   QFile f(QStringLiteral("/tmp/test1.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << output;
   }
   f.close();
@@ -235,7 +234,6 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
   QFile f(QStringLiteral("/tmp/test2.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << results;
   }
   f.close();
@@ -302,7 +300,6 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::requestEntry(const QString& filmId_) {
   QFile file(QString::fromLatin1("/tmp/test-kinopoisk.json"));
   if(file.open(QIODevice::WriteOnly)) {
     QTextStream t(&file);
-    t.setCodec("UTF-8");
     t << data;
   }
   file.close();
@@ -366,7 +363,6 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::requestEntry(const QString& filmId_) {
   QFile file2(QString::fromLatin1("/tmp/test-kinopoisk-staff.json"));
   if(file2.open(QIODevice::WriteOnly)) {
     QTextStream t(&file2);
-    t.setCodec("UTF-8");
     t << data;
   }
   file2.close();

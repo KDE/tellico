@@ -25,7 +25,6 @@
 #include "dvdfrfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -35,7 +34,11 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QTextCodec>
+#else
+#include <QStringConverter>
+#endif
 #include <QDomDocument>
 #include <QUrlQuery>
 
@@ -77,9 +80,16 @@ QUrl DVDFrFetcher::searchUrl() {
     case Title:
       // DVDfr requires the title string to be in iso-8859-15
       {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
         QTextCodec* codec = QTextCodec::codecForName("iso-8859-15");
         Q_ASSERT(codec);
-        q.addQueryItem(QStringLiteral("title"), QString::fromUtf8(codec->fromUnicode(request().value())));
+        auto title = codec->fromUnicode(request().value());
+#else
+        QStringDecoder toIso885915("iso-8859-15");
+        Q_ASSERT(toIso885915.isValid())
+        auto title = toIso885915(request().value());
+#endif
+        q.addQueryItem(QStringLiteral("title"), QString::fromUtf8(title));
       }
       break;
 
@@ -119,7 +129,6 @@ Tellico::Data::EntryPtr DVDFrFetcher::fetchEntryHookData(Data::EntryPtr entry_) 
   QFile f(QLatin1String("/tmp/test-dvdfr-details.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << output;
   }
   f.close();

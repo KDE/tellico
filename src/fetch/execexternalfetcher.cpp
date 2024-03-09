@@ -254,7 +254,6 @@ void ExecExternalFetcher::slotProcessExited() {
   QFile f(QStringLiteral("/tmp/test-exec.txt"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << m_data;
   }
   f.close();

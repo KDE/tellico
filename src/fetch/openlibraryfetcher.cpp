@@ -42,7 +42,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -253,7 +252,6 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
   QFile f(QString::fromLatin1("/tmp/test.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();
@@ -418,7 +416,6 @@ QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
   QFile f(QString::fromLatin1("/tmp/test-openlibraryauthor.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << output;
   }
   f.close();

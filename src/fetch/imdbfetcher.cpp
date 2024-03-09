@@ -179,7 +179,6 @@ void IMDBFetcher::slotComplete(KJob*) {
   QFile f(QString::fromLatin1("/tmp/imdb-graphql-search.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << QString::fromUtf8(data.constData(), data.size());
   }
   f.close();
@@ -310,7 +309,6 @@ Tellico::Data::EntryPtr IMDBFetcher::readGraphQL(const QString& imdbId_, const Q
   QFile f(QString::fromLatin1("/tmp/imdb-graphql-title.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << QString::fromUtf8(data.constData(), data.size());
   }
   f.close();

@@ -45,7 +45,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -255,7 +254,6 @@ void TheGamesDBFetcher::slotComplete(KJob* job_) {
   QFile f(QStringLiteral("/tmp/test-tgdb.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();

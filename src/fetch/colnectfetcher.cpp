@@ -47,7 +47,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonValue>
@@ -243,7 +242,6 @@ Tellico::Data::EntryPtr ColnectFetcher::fetchEntryHook(uint uid_) {
     QFile file(QStringLiteral("/tmp/colnectitemtest.json"));
     if(file.open(QIODevice::WriteOnly)) {
       QTextStream t(&file);
-      t.setCodec("UTF-8");
       t << data;
     }
     file.close();
@@ -303,7 +301,6 @@ void ColnectFetcher::slotComplete(KJob* job_) {
   QFile f(QStringLiteral("/tmp/colnecttest.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();

@@ -38,7 +38,6 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QFile>
-#include <QTextCodec>
 #include <QUrlQuery>
 
 namespace {
@@ -148,7 +147,6 @@ void MRLookupFetcher::slotComplete(KJob* job_) {
   QFile f(QString::fromLatin1("/tmp/test-mrlookup.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();
@@ -173,7 +171,6 @@ void MRLookupFetcher::slotComplete(KJob* job_) {
   QFile f(QString::fromLatin1("/tmp/test.bibtex"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << bibtexString;
   }
   f.close();

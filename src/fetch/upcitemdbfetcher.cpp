@@ -41,7 +41,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
-#include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -182,7 +181,6 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
   QFile f(QStringLiteral("/tmp/test-upcitemdb.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();

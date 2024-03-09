@@ -197,7 +197,6 @@ void EntrezFetcher::slotComplete(KJob*) {
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec("UTF-8");
     t << data;
   }
   f.close();
@@ -377,7 +376,6 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
   QFile f1(QLatin1String("/tmp/test-entry.xml"));
   if(f1.open(QIODevice::WriteOnly)) {
     QTextStream t(&f1);
-    t.setCodec("UTF-8");
     t << xmlOutput;
   }
   f1.close();

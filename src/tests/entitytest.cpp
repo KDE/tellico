@@ -152,7 +152,8 @@ void EntityTest::testBug254863() {
   auto output = Tellico::i18nReplace(input);
   QVERIFY(!output.contains(QLatin1String("i18n>")));
   QVERIFY(!output.contains(QLatin1String("&replace")));
-  QVERIFY(!output.contains(QRegularExpression(QLatin1String("\\s$"))));
+  static const QRegularExpression whiteSpaceRx(QLatin1String("\\s$"));
+  QVERIFY(!output.contains(whiteSpaceRx));
 }
 
 void EntityTest::testMapValue() {

@@ -45,7 +45,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QUrlQuery>
@@ -224,7 +223,6 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   QFile file(QStringLiteral("/tmp/moby-game-info.json"));
   if(file.open(QIODevice::WriteOnly)) {
     QTextStream t(&file);
-    t.setCodec("UTF-8");
     t << data;
   }
   file.close();
@@ -302,7 +300,6 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   QFile file2(QStringLiteral("/tmp/moby-covers.json"));
   if(file2.open(QIODevice::WriteOnly)) {
     QTextStream t(&file2);
-    t.setCodec("UTF-8");
     t << data;
   }
   file2.close();
@@ -371,7 +368,6 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
     QFile file3(QStringLiteral("/tmp/moby-screenshots.json"));
     if(file3.open(QIODevice::WriteOnly)) {
       QTextStream t(&file3);
-      t.setCodec("UTF-8");
       t << job->data();
     }
     file3.close();
@@ -445,7 +441,6 @@ void MobyGamesFetcher::slotComplete(KJob* job_) {
   QFile file(QStringLiteral("/tmp/moby-results.json"));
   if(file.open(QIODevice::WriteOnly)) {
     QTextStream t(&file);
-    t.setCodec("UTF-8");
     t << data;
   }
   file.close();

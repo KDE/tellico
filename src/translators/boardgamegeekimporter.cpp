@@ -137,7 +137,6 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
     QFile f(QStringLiteral("/tmp/bgg-message.xml"));
     if(f.open(QIODevice::WriteOnly)) {
       QTextStream t(&f);
-      t.setCodec("UTF-8");
       t << dom.toString();
     }
     f.close();
@@ -182,7 +181,6 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
     QFile f(QStringLiteral("/tmp/test.xml"));
     if(f.open(QIODevice::WriteOnly)) {
       QTextStream t(&f);
-      t.setCodec("UTF-8");
       t << xmlData;
     }
     f.close();
@@ -196,7 +194,6 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
     QFile f2(QStringLiteral("/tmp/test.tc"));
     if(f2.open(QIODevice::WriteOnly)) {
       QTextStream t(&f2);
-      t.setCodec("UTF-8");
       t << str;
     }
     f2.close();
