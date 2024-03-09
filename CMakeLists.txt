@@ -120,28 +120,23 @@ set_package_properties(KF${KF_MAJOR_VERSION}NewStuff PROPERTIES
     URL "https://www.kde.org"
     TYPE OPTIONAL)
 
-find_package(KF${KF_MAJOR_VERSION}Sane)
-set_package_properties(KF${KF_MAJOR_VERSION}Sane PROPERTIES
+if (KF_MAJOR_VERSION STREQUAL "5")
+    set(KSANE_TARGET_NAME KF5::Sane)
+    find_package(KF5Sane)
+endif()
+set_package_properties(KSANE_TARGET_NAME PROPERTIES
     DESCRIPTION "Support for adding scanned images to a collection"
     URL "https://www.kde.org"
     TYPE OPTIONAL)
-if(KF${KF_MAJOR_VERSION}Sane_FOUND)
-    include_directories(${KF${KF_MAJOR_VERSION}Sane_INCLUDE_DIR})
-endif(KF${KF_MAJOR_VERSION}Sane_FOUND)
 
-#macro_optional_find_package(KdepimLibs 4.5)
-#macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "Support for using the address book and calendar for loans" "https://community.kde.org/PIM" FALSE "4.5.0" "")
-#find_package(KdepimLibs 4.5)
-#set_package_properties(KdepimLibs PROPERTIES
-#    DESCRIPTION "Support for using the address book and calendar for loans"
-#    URL "https://community.kde.org/PIM"
-#    TYPE OPTIONAL)
-if(KDEPIMLIBS_FOUND)
-    include_directories(${KDEPIMLIBS_INCLUDE_DIRS})
-endif(KDEPIMLIBS_FOUND)
-
-find_package(KF${KF_MAJOR_VERSION}Cddb)
-set_package_properties(KF${KF_MAJOR_VERSION}Cddb PROPERTIES
+if (KF_MAJOR_VERSION STREQUAL "5")
+    set(KCDDB_TARGET_NAME KF5::Cddb)
+    find_package(KF5Cddb 5.1)
+else()
+    set(KCDDB_TARGET_NAME KCddb6)
+    find_package(KCddb6 5.1)
+endif()
+set_package_properties(${KCDDB_TARGET_NAME} PROPERTIES
     DESCRIPTION "Support for CDDB searches"
     URL "https://invent.kde.org/multimedia/libkcddb"
     TYPE OPTIONAL)
@@ -271,9 +266,9 @@ macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
 macro_bool_to_01(Poppler_Qt${QT_MAJOR_VERSION}_FOUND HAVE_POPPLER)
 macro_bool_to_01(Exempi_FOUND HAVE_EXEMPI)
 macro_bool_to_01(Yaz_FOUND HAVE_YAZ)
-macro_bool_to_01(KF${KF_MAJOR_VERSION}Sane_FOUND HAVE_KSANE)
+macro_bool_to_01(${KSANE_TARGET_NAME}_FOUND HAVE_KSANE)
 macro_bool_to_01(Libkcddb_FOUND HAVE_OLD_KCDDB)
-macro_bool_to_01(KF${KF_MAJOR_VERSION}Cddb_FOUND HAVE_KCDDB)
+macro_bool_to_01(${KCDDB_TARGET_NAME}_FOUND HAVE_KCDDB)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KABC)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)

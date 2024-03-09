@@ -43,8 +43,8 @@
 #include "../tellico_debug.h"
 
 #if defined HAVE_KCDDB
-#include <KCddb/Client>
-#elif defined HAVE_KCDDB
+#include <KCDDB/Client>
+#elif defined HAVE_OLD_KCDDB
 #include <libkcddb/client.h>
 #endif
 
