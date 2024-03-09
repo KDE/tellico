@@ -37,7 +37,7 @@ Dependencies:
 
 Options:
   run-tests: True
-  require-passing-tests-on: [ 'Linux/Qt5' ]
+  require-passing-tests-on: [ 'Linux', 'FreeBSD' ]
   run-cppcheck: True
   cppcheck-arguments: '--enable=warning,style,performance'
   cppcheck-ignore-files:
