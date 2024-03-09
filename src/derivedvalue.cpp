@@ -101,19 +101,19 @@ QString DerivedValue::value(EntryPtr entry_, bool formatted_) const {
     if(m_valueTemplate.at(pctPos+1) == QLatin1Char('{')) {
       endPos = m_valueTemplate.indexOf(QLatin1Char('}'), pctPos+2);
       if(endPos > -1) {
-        result += m_valueTemplate.midRef(curPos, pctPos-curPos)
+        result += m_valueTemplate.mid(curPos, pctPos-curPos)
                 + templateKeyValue(entry_, m_valueTemplate.mid(pctPos+2, endPos-pctPos-2), formatted_);
         curPos = endPos+1;
       } else {
         break;
       }
     } else {
-      result += m_valueTemplate.midRef(curPos, pctPos-curPos+1);
+      result += m_valueTemplate.mid(curPos, pctPos-curPos+1);
       curPos = pctPos+1;
     }
     pctPos = m_valueTemplate.indexOf(QLatin1Char('%'), curPos);
   }
-  result += m_valueTemplate.midRef(curPos, m_valueTemplate.length()-curPos);
+  result += m_valueTemplate.mid(curPos, m_valueTemplate.length()-curPos);
 //  myDebug() << "format_ << " = " << result;
   // sometimes field value might empty, resulting in multiple consecutive white spaces
   // so let's simplify that...

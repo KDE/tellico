@@ -52,6 +52,12 @@
 
 #include <QMenu>
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+#define ACTSTR(str) str
+#else
+#define ACTSTR(str) QLatin1String(str)
+#endif
+
 using Tellico::Controller;
 
 Controller* Controller::s_self = nullptr;
@@ -495,9 +501,9 @@ void Controller::plugCollectionActions(QMenu* popup_) {
     return;
   }
 
-  popup_->addAction(m_mainWindow->action("coll_rename_collection"));
-  popup_->addAction(m_mainWindow->action("coll_fields"));
-  popup_->addAction(m_mainWindow->action("change_entry_grouping"));
+  popup_->addAction(m_mainWindow->action(ACTSTR("coll_rename_collection")));
+  popup_->addAction(m_mainWindow->action(ACTSTR("coll_fields")));
+  popup_->addAction(m_mainWindow->action(ACTSTR("change_entry_grouping")));
 }
 
 void Controller::plugEntryActions(QMenu* popup_) {
@@ -579,8 +585,8 @@ void Controller::updateActions() const {
   //only enable citation items when it's a bibliography
   const bool isBibtex = Kernel::self()->collectionType() == Data::Collection::Bibtex;
   if(isBibtex) {
-    m_mainWindow->action("cite_clipboard")->setEnabled(!emptySelection);
-    m_mainWindow->action("cite_lyxpipe")->setEnabled(!emptySelection);
+    m_mainWindow->action(ACTSTR("cite_clipboard"))->setEnabled(!emptySelection);
+    m_mainWindow->action(ACTSTR("cite_lyxpipe"))->setEnabled(!emptySelection);
   }
   m_mainWindow->m_checkInEntry->setEnabled(canCheckIn());
 

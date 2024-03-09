@@ -111,7 +111,7 @@ void AlexandriaTest::testImport() {
 
 void AlexandriaTest::testEscapeText() {
   // text escaping puts slashes in for quotes and remove control characters
-  QString input(QStringLiteral("\"test \uFD3F") + QString(0x90));
+  QString input(QStringLiteral("\"test \uFD3F") + QLatin1Char(0x90));
   QCOMPARE(Tellico::Export::AlexandriaExporter::escapeText(input), QStringLiteral("\\\"test \uFD3F"));
 }
 

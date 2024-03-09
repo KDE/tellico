@@ -85,8 +85,8 @@ QUrl DVDFrFetcher::searchUrl() {
         Q_ASSERT(codec);
         auto title = codec->fromUnicode(request().value());
 #else
-        QStringDecoder toIso885915("iso-8859-15");
-        Q_ASSERT(toIso885915.isValid())
+        QStringEncoder toIso885915("iso-8859-15");
+        Q_ASSERT(toIso885915.isValid());
         auto title = toIso885915(request().value());
 #endif
         q.addQueryItem(QStringLiteral("title"), QString::fromUtf8(title));

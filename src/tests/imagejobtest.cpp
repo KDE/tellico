@@ -30,6 +30,7 @@
 #include "../images/imageinfo.h"
 
 #include <KLocalizedString>
+#include <KIO/Global>
 
 #include <QTest>
 #include <QEventLoop>

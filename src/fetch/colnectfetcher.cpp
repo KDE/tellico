@@ -754,7 +754,7 @@ void ColnectFetcher::populateGameEntry(Data::EntryPtr entry_, const QVariantList
         else if(rating == QLatin1String("A"))    esrb = Data::GameCollection::Adults;
         else if(rating == QLatin1String("M"))    esrb = Data::GameCollection::Mature;
         else if(rating == QLatin1String("RP"))   esrb = Data::GameCollection::Pending;
-        if(rating != Data::GameCollection::UnknownEsrb) {
+        if(esrb != Data::GameCollection::UnknownEsrb) {
           entry_->setField(QStringLiteral("certification"), Data::GameCollection::esrbRating(esrb));
         }
       } else if(rating.startsWith(QLatin1String("PEGI")) && optionalFields().contains(QStringLiteral("pegi"))) {

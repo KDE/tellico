@@ -25,7 +25,7 @@
 #include "fieldcompletion.h"
 #include "fieldformat.h"
 
-#include <KCompletion/KCompletionMatches>
+#include <KCompletionMatches>
 
 using Tellico::FieldCompletion;
 

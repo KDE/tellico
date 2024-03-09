@@ -53,7 +53,7 @@ class WebPagePrintable : public QWebEnginePage {
 Q_OBJECT
 
 public:
-  WebPagePrintable(QObject* parent) : QWebEnginePage(parent) {
+  WebPagePrintable(QWebEngineView* parent) : QWebEnginePage(parent) {
     QWebEngineSettings* settings = this->settings();
     settings->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
     settings->setAttribute(QWebEngineSettings::PluginsEnabled, false);
@@ -64,9 +64,13 @@ public:
 public Q_SLOTS:
   void printDocument(QPrinter* printer) {
     Tellico::GUI::CursorSaver cs(Qt::WaitCursor);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     QEventLoop loop;
     print(printer, [&](bool) { loop.quit(); });
     loop.exec();
+#else
+    static_cast<QWebEngineView*>(parent())->print(printer);
+#endif
   }
 };
 #endif

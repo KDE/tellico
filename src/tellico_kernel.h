@@ -28,10 +28,10 @@
 #include "datavectors.h"
 #include "borrower.h"
 
+#include <QStringList>
+
 class QUndoStack;
 class QWidget;
-class QString;
-class QStringList;
 class QUndoCommand;
 class QUrl;
 

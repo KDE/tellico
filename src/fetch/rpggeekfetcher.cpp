@@ -65,7 +65,7 @@ QString RPGGeekFetcher::source() const {
 
 // https://boardgamegeek.com/wiki/page/XML_API_Terms_of_Use
 QString RPGGeekFetcher::attribution() const {
-  return i18n(providedBy, QLatin1String("https://boardgamegeek.com"), QLatin1String("BoardGameGeek"));
+  return TC_I18N3(providedBy, QLatin1String("https://boardgamegeek.com"), QLatin1String("BoardGameGeek"));
 }
 
 bool RPGGeekFetcher::canSearch(Fetch::FetchKey k) const {

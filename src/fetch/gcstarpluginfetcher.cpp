@@ -39,11 +39,14 @@
 #include <KProcess>
 #include <KAcceleratorManager>
 #include <KShell>
-#include <KFilterDev>
-#include <KCompressionDevice>
 #include <KTar>
 #include <KLocalizedString>
 #include <karchive_version.h>
+#if KARCHIVE_VERSION >= QT_VERSION_CHECK(5,85,0)
+#include <KCompressionDevice>
+#else
+#include <KFilterDev>
+#endif
 
 #include <QTemporaryDir>
 #include <QDir>

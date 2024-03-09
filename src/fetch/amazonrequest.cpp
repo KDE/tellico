@@ -120,7 +120,7 @@ QByteArray AmazonRequest::prepareStringToSign(const QByteArray& canonicalUrl_) c
 
 QByteArray AmazonRequest::calculateSignature(const QByteArray& stringToSign_) const {
   QByteArray signatureKey;
-  signatureKey = QMessageAuthenticationCode::hash(m_amzDate.left(8), "AWS4" + m_secretKey, QCryptographicHash::Sha256);
+  signatureKey = QMessageAuthenticationCode::hash(m_amzDate.left(8), QByteArray("AWS4" + m_secretKey), QCryptographicHash::Sha256);
   signatureKey = QMessageAuthenticationCode::hash(m_region, signatureKey, QCryptographicHash::Sha256);
   signatureKey = QMessageAuthenticationCode::hash(m_service, signatureKey, QCryptographicHash::Sha256);
   signatureKey = QMessageAuthenticationCode::hash(AMAZON_REQUEST, signatureKey, QCryptographicHash::Sha256);

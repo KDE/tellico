@@ -85,7 +85,6 @@
 #include <KStandardAction>
 #include <KWindowConfig>
 #include <KMessageBox>
-#include <KTipDialog>
 #include <KRecentDocument>
 #include <KRecentDirs>
 #include <KEditToolBar>
@@ -572,7 +571,7 @@ void MainWindow::initActions() {
   action->setText(i18n("Advanced &Filter..."));
   action->setIconText(i18n("Filter"));
   action->setIcon(QIcon::fromTheme(QStringLiteral("view-filter")));
-  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_J);
+  actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_J));
   action->setToolTip(i18n("Filter the collection"));
 
   /*************************************************
@@ -583,7 +582,7 @@ void MainWindow::initActions() {
   m_newEntry->setText(i18n("&New Entry..."));
   m_newEntry->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
   m_newEntry->setIconText(i18n("New Entry"));
-  actionCollection()->setDefaultShortcut(m_newEntry, Qt::CTRL + Qt::Key_N);
+  actionCollection()->setDefaultShortcut(m_newEntry, QKeySequence(Qt::CTRL | Qt::Key_N));
   m_newEntry->setToolTip(i18n("Create a new entry"));
 
   KActionMenu* addEntryMenu = new KActionMenu(i18n("Add Entry"), this);
@@ -599,7 +598,7 @@ void MainWindow::initActions() {
   action->setText(i18n("Internet Search..."));
   action->setIconText(i18n("Internet Search"));
   action->setIcon(QIcon::fromTheme(QStringLiteral("tools-wizard")));
-  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_I);
+  actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_I));
   action->setToolTip(i18n("Search the internet..."));
 
   addEntryMenu->addAction(m_newEntry);
@@ -609,21 +608,21 @@ void MainWindow::initActions() {
                                               this, SLOT(slotShowEntryEditor()));
   m_editEntry->setText(i18n("&Edit Entry..."));
   m_editEntry->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
-  actionCollection()->setDefaultShortcut(m_editEntry, Qt::CTRL + Qt::Key_E);
+  actionCollection()->setDefaultShortcut(m_editEntry, QKeySequence(Qt::CTRL | Qt::Key_E));
   m_editEntry->setToolTip(i18n("Edit the selected entries"));
 
   m_copyEntry = actionCollection()->addAction(QStringLiteral("coll_copy_entry"),
                                               Controller::self(), SLOT(slotCopySelectedEntries()));
   m_copyEntry->setText(i18n("D&uplicate Entry"));
   m_copyEntry->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
-  actionCollection()->setDefaultShortcut(m_copyEntry, Qt::CTRL + Qt::Key_Y);
+  actionCollection()->setDefaultShortcut(m_copyEntry, QKeySequence(Qt::CTRL | Qt::Key_Y));
   m_copyEntry->setToolTip(i18n("Copy the selected entries"));
 
   m_deleteEntry = actionCollection()->addAction(QStringLiteral("coll_delete_entry"),
                                                 Controller::self(), SLOT(slotDeleteSelectedEntries()));
   m_deleteEntry->setText(i18n("&Delete Entry"));
   m_deleteEntry->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
-  actionCollection()->setDefaultShortcut(m_deleteEntry, Qt::CTRL + Qt::Key_D);
+  actionCollection()->setDefaultShortcut(m_deleteEntry, QKeySequence(Qt::CTRL | Qt::Key_D));
   m_deleteEntry->setToolTip(i18n("Delete the selected entries"));
 
   m_mergeEntry = actionCollection()->addAction(QStringLiteral("coll_merge_entry"),
@@ -631,7 +630,7 @@ void MainWindow::initActions() {
   m_mergeEntry->setText(i18n("&Merge Entries"));
   m_mergeEntry->setIcon(QIcon::fromTheme(QStringLiteral("document-import")));
 //  CTRL+G is ambiguous, pick another
-//  actionCollection()->setDefaultShortcut(m_mergeEntry, Qt::CTRL + Qt::Key_G);
+//  actionCollection()->setDefaultShortcut(m_mergeEntry, QKeySequence(Qt::CTRL | Qt::Key_G));
   m_mergeEntry->setToolTip(i18n("Merge the selected entries"));
   m_mergeEntry->setEnabled(false); // gets enabled when more than 1 entry is selected
 
@@ -648,14 +647,14 @@ void MainWindow::initActions() {
   action = actionCollection()->addAction(QStringLiteral("coll_rename_collection"), this, SLOT(slotRenameCollection()));
   action->setText(i18n("&Rename Collection..."));
   action->setIcon(QIcon::fromTheme(QStringLiteral("edit-rename")));
-  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_R);
+  actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_R));
   action->setToolTip(i18n("Rename the collection"));
 
   action = actionCollection()->addAction(QStringLiteral("coll_fields"), this, SLOT(slotShowCollectionFieldsDialog()));
   action->setText(i18n("Collection &Fields..."));
   action->setIconText(i18n("Fields"));
   action->setIcon(QIcon::fromTheme(QStringLiteral("preferences-other")));
-  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_U);
+  actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_U));
   action->setToolTip(i18n("Modify the collection fields"));
 
   action = actionCollection()->addAction(QStringLiteral("coll_reports"), this, SLOT(slotShowReportDialog()));
@@ -773,7 +772,7 @@ void MainWindow::initActions() {
    *************************************************/
   action = actionCollection()->addAction(QStringLiteral("change_entry_grouping_accel"), this, SLOT(slotGroupLabelActivated()));
   action->setText(i18n("Change Grouping"));
-  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_G);
+  actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_G));
 
   m_entryGrouping = new KSelectAction(i18n("&Group Selection"), this);
   m_entryGrouping->setToolTip(i18n("Change the grouping of the collection"));
@@ -787,7 +786,7 @@ void MainWindow::initActions() {
 
   action = actionCollection()->addAction(QStringLiteral("quick_filter_accel"), this, SLOT(slotFilterLabelActivated()));
   action->setText(i18n("Filter"));
-  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_F);
+  actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_F));
 
   m_quickFilter = new GUI::LineEdit(this);
   m_quickFilter->setPlaceholderText(i18n("Filter here...")); // same text as kdepim and amarok
@@ -819,7 +818,7 @@ void MainWindow::initDocument() {
   Data::Document* doc = Data::Document::self();
   Kernel::self()->resetHistory();
 
-  KConfigGroup config(KSharedConfig::openConfig(), "General Options");
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("General Options"));
   doc->setLoadAllImages(config.readEntry("Load All Images", false));
 
   // allow status messages from the document
@@ -992,7 +991,7 @@ void MainWindow::initFileOpen(bool nofile_) {
 // The options that can be changed in the "Configuration..." dialog
 // are taken care of by the ConfigDialog object.
 void MainWindow::saveOptions() {
-  KConfigGroup config(KSharedConfig::openConfig(), "Main Window Options");
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Main Window Options"));
   saveMainWindowSettings(config);
   config.writeEntry(QStringLiteral("Central Dock State"), m_dummyWindow->saveState());
 
@@ -1000,7 +999,7 @@ void MainWindow::saveOptions() {
   // check any single dock widget, they all get locked together
   Config::setLockLayout(m_groupViewDock->isLocked());
 
-  KConfigGroup filesConfig(KSharedConfig::openConfig(), "Recent Files");
+  KConfigGroup filesConfig(KSharedConfig::openConfig(), QLatin1String("Recent Files"));
   m_fileOpenRecent->saveEntries(filesConfig);
   if(!isNewDocument()) {
     Config::setLastOpenFile(Data::Document::self()->URL().url());
@@ -1027,7 +1026,7 @@ void MainWindow::saveOptions() {
   }
 
   // this is used in the EntryEditDialog constructor, too
-  KConfigGroup editDialogConfig(KSharedConfig::openConfig(), "Edit Dialog Options");
+  KConfigGroup editDialogConfig(KSharedConfig::openConfig(), QLatin1String("Edit Dialog Options"));
   KWindowConfig::saveWindowSize(m_editDialog->windowHandle(), editDialogConfig);
 
   saveCollectionOptions(Data::Document::self()->collection());
@@ -1148,7 +1147,7 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
 }
 
 void MainWindow::readOptions() {
-  KConfigGroup mainWindowConfig(KSharedConfig::openConfig(), "Main Window Options");
+  KConfigGroup mainWindowConfig(KSharedConfig::openConfig(), QLatin1String("Main Window Options"));
   applyMainWindowSettings(mainWindowConfig);
   m_dummyWindow->restoreState(mainWindowConfig.readEntry(QStringLiteral("Central Dock State"), QByteArray()));
 
@@ -1158,7 +1157,7 @@ void MainWindow::readOptions() {
   connect(toolBar(QStringLiteral("collectionToolBar")), &QToolBar::iconSizeChanged, this, &MainWindow::slotUpdateToolbarIcons);
 
   // initialize the recent file list
-  KConfigGroup filesConfig(KSharedConfig::openConfig(), "Recent Files");
+  KConfigGroup filesConfig(KSharedConfig::openConfig(), QLatin1String("Recent Files"));
   m_fileOpenRecent->loadEntries(filesConfig);
 
   // sort by count if column = 1
@@ -2500,7 +2499,11 @@ bool MainWindow::importCollection(Tellico::Data::CollPtr coll_, Tellico::Import:
 void MainWindow::slotURLAction(const QUrl& url_) {
   Q_ASSERT(url_.scheme() == QLatin1String("tc"));
   QString actionName = url_.fileName();
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QAction* action = this->action(actionName.toLatin1().constData());
+#else
+  QAction* action = this->action(actionName);
+#endif
   if(action) {
     action->activate(QAction::Trigger);
   } else {

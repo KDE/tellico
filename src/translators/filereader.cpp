@@ -35,12 +35,6 @@
 #ifdef HAVE_KFILEMETADATA
 #include <KFileMetaData/Extractor>
 #include <KFileMetaData/SimpleExtractionResult>
-// kfilemetadata_version.h was added in 5.94, so first use kcoreaddons_version to check
-// with the expectation that the two versions should match or be no less than
-#include <kcoreaddons_version.h>
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5,94,0)
-#include <kfilemetadata_version.h>
-#endif
 #endif
 
 #include <QDir>
@@ -54,7 +48,11 @@ using Tellico::FileReaderMetaData;
 using Tellico::FileReaderFile;
 
 #ifdef HAVE_KFILEMETADATA
+#if KFILEMETADATA_VERSION > QT_VERSION_CHECK(5,240,0)
+KFileMetaData::PropertyMultiMap FileReaderMetaData::properties(const KFileItem& item_) {
+#else
 KFileMetaData::PropertyMap FileReaderMetaData::properties(const KFileItem& item_) {
+#endif
   KFileMetaData::SimpleExtractionResult result(item_.url().toLocalFile(),
                                                item_.mimetype(),
                                                KFileMetaData::ExtractionResult::ExtractMetaData);
@@ -72,12 +70,13 @@ KFileMetaData::PropertyMap FileReaderMetaData::properties(const KFileItem& item_
       ex->extract(&result);
     }
   }
-#if KFILEMETADATA_VERSION >= QT_VERSION_CHECK(5,89,0)
-  auto props = result.properties(KFileMetaData::PropertiesMapType::MultiMap);
+#if KFILEMETADATA_VERSION > QT_VERSION_CHECK(5,240,0)
+  return result.properties();
+#elif KFILEMETADATA_VERSION >= QT_VERSION_CHECK(5,89,0)
+  return result.properties(KFileMetaData::PropertiesMapType::MultiMap);
 #else
-  auto props = result.properties();
+  return result.properties();
 #endif
-  return props;
 }
 #endif
 

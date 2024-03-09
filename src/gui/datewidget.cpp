@@ -286,7 +286,7 @@ void DateWidget::clear() {
 }
 
 void DateWidget::slotShowPicker() {
-  QRect desk = QApplication::primaryScreen()->geometry();
+  const QRect desk = QApplication::primaryScreen()->geometry();
   QPoint popupPoint = mapToGlobal(QPoint(0, 0));
 
   int dateFrameHeight = m_menu->sizeHint().height();

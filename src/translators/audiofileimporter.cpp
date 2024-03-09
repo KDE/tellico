@@ -568,7 +568,7 @@ int AudioFileImporter::discNumber(const TagLib::FileRef& ref_) const {
     if(pos == -1) {
       n = disc.toInt(&ok);
     } else {
-      n = disc.leftRef(pos).toInt(&ok);
+      n = disc.left(pos).toInt(&ok);
     }
     if(ok && n > 0) {
       num = n;

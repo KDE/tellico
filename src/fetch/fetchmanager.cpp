@@ -87,9 +87,10 @@ void Manager::loadFetchers() {
   m_fetchers.clear();
   m_uuidHash.clear();
 
+  const QString dataSources(QStringLiteral("Data Sources"));
   KSharedConfigPtr config = KSharedConfig::openConfig();
-  if(config->hasGroup(QStringLiteral("Data Sources"))) {
-    KConfigGroup configGroup(config, QStringLiteral("Data Sources"));
+  if(config->hasGroup(dataSources)) {
+    KConfigGroup configGroup(config, dataSources);
     int nSources = configGroup.readEntry("Sources Count", 0);
     for(int i = 0; i < nSources; ++i) {
       QString group = QStringLiteral("Data Source %1").arg(i);
@@ -389,7 +390,7 @@ Tellico::Fetch::FetcherVec Manager::createUpdateFetchers(int collType_) {
   }
 
   FetcherVec vec;
-  KConfigGroup config(KSharedConfig::openConfig(), "Data Sources");
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Data Sources"));
   int nSources = config.readEntry("Sources Count", 0);
   for(int i = 0; i < nSources; ++i) {
     QString group = QStringLiteral("Data Source %1").arg(i);

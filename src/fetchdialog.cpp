@@ -41,7 +41,6 @@
 #include "fieldformat.h"
 #include "gui/combobox.h"
 #include "utils/cursorsaver.h"
-#include "utils/stringset.h"
 #include "images/image.h"
 #include "tellico_debug.h"
 
@@ -72,9 +71,9 @@
 #include <QTreeWidget>
 #include <QHeaderView>
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QFileDialog>
 #include <QStatusBar>
+#include <QScreen>
 
 namespace {
   static const int FETCH_MIN_WIDTH = 600;
@@ -327,7 +326,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   setMinimumWidth(qMax(minimumWidth(), qMax(FETCH_MIN_WIDTH, minimumSizeHint().width())));
   setStatus(i18n("Ready."));
 
-  KConfigGroup config(KSharedConfig::openConfig(), "Fetch Dialog Options");
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
   QList<int> splitList = config.readEntry("Splitter Sizes", QList<int>());
   if(!splitList.empty()) {
     split->setSizes(splitList);
@@ -372,7 +371,7 @@ FetchDialog::~FetchDialog() {
   // no additional entries to check images to keep though
   Data::Document::self()->removeImagesNotInCollection(entriesToCheck, Data::EntryList());
 
-  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Fetch Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
   KWindowConfig::saveWindowSize(windowHandle(), config);
 
   config.writeEntry("Splitter Sizes", static_cast<QSplitter*>(m_treeWidget->parentWidget())->sizes());
@@ -655,7 +654,7 @@ void FetchDialog::stopProgress() {
 void FetchDialog::slotInit() {
   // do this in the singleShot slot so it works
   // see note in entryeditdialog.cpp (Feb 2017)
-  KConfigGroup config(KSharedConfig::openConfig(), "Fetch Dialog Options");
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
   KWindowConfig::restoreWindowSize(windowHandle(), config);
 
   if(!Fetch::Manager::self()->canFetch(Data::Document::self()->collection()->type())) {
@@ -916,8 +915,8 @@ void FetchDialog::openBarcodePreview() {
   if(m_barcodeRecognitionThread->isWebcamAvailable()) {
     m_barcodePreview = new QLabel(nullptr);
     m_barcodePreview->resize(m_barcodeRecognitionThread->getPreviewSize());
-    m_barcodePreview->move(QApplication::desktop()->screenGeometry(m_barcodePreview).width()
-                           - m_barcodePreview->frameGeometry().width(), 30);
+    const QRect desk = QApplication::primaryScreen()->geometry();
+    m_barcodePreview->move(desk.width() - m_barcodePreview->frameGeometry().width(), 30);
     m_barcodePreview->show();
 
     connect(m_barcodeRecognitionThread, &barcodeRecognition::barcodeRecognitionThread::recognized,

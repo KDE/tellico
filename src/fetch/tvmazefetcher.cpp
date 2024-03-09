@@ -69,7 +69,7 @@ QString TVmazeFetcher::source() const {
 
 // https://www.tvmaze.com/api#licensing
 QString TVmazeFetcher::attribution() const {
-  return i18n(providedBy, QLatin1String("https://tvmaze.com"), QLatin1String("TVmaze"));
+  return TC_I18N3(providedBy, QLatin1String("https://tvmaze.com"), QLatin1String("TVmaze"));
 }
 
 bool TVmazeFetcher::canSearch(Fetch::FetchKey k) const {

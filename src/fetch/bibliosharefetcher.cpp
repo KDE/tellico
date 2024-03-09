@@ -62,7 +62,7 @@ QString BiblioShareFetcher::source() const {
 
 // https://www.booknetcanada.ca/get-a-token
 QString BiblioShareFetcher::attribution() const {
-  return i18n(providedBy, QLatin1String("https://www.booknetcanada.ca/biblioshare"), QLatin1String("BNC BiblioShare"));
+  return TC_I18N3(providedBy, QLatin1String("https://www.booknetcanada.ca/biblioshare"), QLatin1String("BNC BiblioShare"));
 }
 
 bool BiblioShareFetcher::canFetch(int type) const {

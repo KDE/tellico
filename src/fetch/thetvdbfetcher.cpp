@@ -77,7 +77,7 @@ QString TheTVDBFetcher::source() const {
 }
 
 QString TheTVDBFetcher::attribution() const {
-  return i18n(providedBy, QLatin1String("https://thetvdb.com"), defaultName());
+  return TC_I18N3(providedBy, QLatin1String("https://thetvdb.com"), defaultName());
 }
 
 bool TheTVDBFetcher::canSearch(Fetch::FetchKey k) const {

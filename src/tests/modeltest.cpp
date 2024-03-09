@@ -441,17 +441,6 @@ void ModelTest::data()
         QCOMPARE( alignment, ( alignment & ( Qt::AlignHorizontal_Mask | Qt::AlignVertical_Mask ) ) );
     }
 
-    // General Purpose roles that should return a QColor
-    QVariant colorVariant = model->data ( model->index ( 0, 0 ), Qt::BackgroundColorRole );
-    if ( colorVariant.isValid() ) {
-        QVERIFY( colorVariant.canConvert<QColor>() );
-    }
-
-    colorVariant = model->data ( model->index ( 0, 0 ), Qt::TextColorRole );
-    if ( colorVariant.isValid() ) {
-        QVERIFY( colorVariant.canConvert<QColor>() );
-    }
-
     // Check that the "check state" is one we know about.
     QVariant checkStateVariant = model->data ( model->index ( 0, 0 ), Qt::CheckStateRole );
     if ( checkStateVariant.isValid() ) {

@@ -30,9 +30,9 @@
 #include <QWidget>
 #include <QCheckBox>
 #include <QHash>
+#include <QStringList>
 
 class KConfigGroup;
-class QStringList;
 
 namespace Tellico {
   namespace Fetch {

@@ -317,7 +317,7 @@ void ReportDialog::generateAllEntries() {
     if(bodyMatch.hasMatch()) {
       const auto bodyEnd = fullText.lastIndexOf(QLatin1String("</body"));
       const auto bodyLength = bodyEnd - bodyMatch.capturedEnd();
-      html += fullText.midRef(bodyMatch.capturedEnd(), bodyLength) + htmlBetween;
+      html += fullText.mid(bodyMatch.capturedEnd(), bodyLength) + htmlBetween;
     }
   }
   html += htmlEnd;
@@ -413,10 +413,14 @@ void ReportDialog::slotPrint() {
     printer.setResolution(300);
     QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, this);
     if(dialog->exec() == QDialog::Accepted) {
-      QEventLoop loop;
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       GUI::CursorSaver cs(Qt::WaitCursor);
+      QEventLoop loop;
       m_webView->page()->print(&printer, [&](bool) { loop.quit(); });
       loop.exec();
+#else
+      m_webView->print(&printer);
+#endif
     }
 #endif
   }
@@ -440,11 +444,11 @@ void ReportDialog::slotSaveAs() {
     }
   } else if(m_exporter) {
     QString filter = i18n("HTML Files") + QLatin1String(" (*.html)")
-                  + QLatin1String(";;")
-                  + i18n("All Files") + QLatin1String(" (*)");
+                   + QLatin1String(";;")
+                   + i18n("All Files") + QLatin1String(" (*)");
     QUrl u = QFileDialog::getSaveFileUrl(this, QString(), QUrl(), filter);
     if(!u.isEmpty() && u.isValid()) {
-      KConfigGroup config(KSharedConfig::openConfig(), "ExportOptions");
+      KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ExportOptions"));
       bool encode = config.readEntry("EncodeUTF8", true);
       long oldOpt = m_exporter->options();
 

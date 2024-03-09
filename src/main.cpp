@@ -33,8 +33,10 @@
 #include <KLocalizedString>
 #include <KCrash>
 #include <KSharedConfig>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <Kdelibs4ConfigMigrator>
 #include <Kdelibs4Migration>
+#endif
 
 #include <QApplication>
 #include <QCommandLineParser>
@@ -52,6 +54,7 @@ int main(int argc, char* argv[]) {
 
   Q_INIT_RESOURCE(icons);
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   // Migrate KDE4 configuration and data files
   Kdelibs4ConfigMigrator migrator(QStringLiteral("tellico"));
   migrator.setConfigFiles(QStringList() << QStringLiteral("tellicorc"));
@@ -116,6 +119,7 @@ int main(int argc, char* argv[]) {
     // update the configuration cache
     KSharedConfig::openConfig()->reparseConfiguration();
   }
+#endif
 
   KCrash::initialize();
 

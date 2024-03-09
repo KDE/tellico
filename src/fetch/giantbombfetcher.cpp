@@ -65,7 +65,7 @@ QString GiantBombFetcher::source() const {
 }
 
 QString GiantBombFetcher::attribution() const {
-  return i18n(providedBy, QLatin1String("https://giantbomb.com"), QLatin1String("Giant Bomb"));
+  return TC_I18N3(providedBy, QLatin1String("https://giantbomb.com"), QLatin1String("Giant Bomb"));
 }
 
 bool GiantBombFetcher::canFetch(int type) const {

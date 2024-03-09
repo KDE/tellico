@@ -50,7 +50,7 @@
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QTextCodec>
 #else
-#include <QStringDecoder>
+#include <QStringEncoder>
 #endif
 #include <QStandardPaths>
 
@@ -461,9 +461,9 @@ void TellicoReadTest::testXMLHandler_data() {
                       + cp1251->fromUnicode(usa)
                       + QByteArray("</x>");
 #else
-  QStringDecoder toCp1251("cp1251");
+  QStringEncoder toCp1251("cp1251");
   QByteArray usaBytes = QByteArray("<?xml version=\"1.0\" encoding=\"cp1251\"?>\n<x>")
-                      + toCp1251(usa)
+                      + QByteArray(toCp1251(usa))
                       + QByteArray("</x>");
 #endif
   QString usaString = QStringLiteral("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<x>")

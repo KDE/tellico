@@ -551,7 +551,6 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   QHBoxLayout* box1HBoxLayout = new QHBoxLayout(box1);
   box1HBoxLayout->setContentsMargins(0, 0, 0, 0);
   vlay->addWidget(box1);
-  box1HBoxLayout->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
   QPushButton* b1 = new QPushButton(i18n("Install..."), box1);
   box1HBoxLayout->addWidget(b1);
@@ -882,14 +881,15 @@ void ConfigDialog::saveFetchConfig() {
     reloadFetchers = true;
   }
   // now update total number of sources
-  KConfigGroup sourceGroup(KSharedConfig::openConfig(), "Data Sources");
+  KConfigGroup sourceGroup(KSharedConfig::openConfig(), QLatin1String("Data Sources"));
   sourceGroup.writeEntry("Sources Count", count);
   // and purge old config groups
-  QString group = QStringLiteral("Data Source %1").arg(count);
+  const QString dataSource1(QStringLiteral("Data Source %1"));
+  QString group = dataSource1.arg(count);
   while(KSharedConfig::openConfig()->hasGroup(group)) {
     KSharedConfig::openConfig()->deleteGroup(group);
     ++count;
-    group = QStringLiteral("Data Source %1").arg(count);
+    group = dataSource1.arg(count);
   }
 
   Config::self()->save();

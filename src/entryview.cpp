@@ -592,6 +592,10 @@ void EntryView::slotPrint() {
     return;
   }
   Tellico::GUI::CursorSaver cs(Qt::WaitCursor);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   page()->print(&m_printer, [](bool) {});
+#else
+  print(&m_printer);
+#endif
 #endif
 }
