@@ -33,9 +33,6 @@ Dependencies:
     'frameworks/kcrash': '@stable'
     'frameworks/extra-cmake-modules': '@stable'
     'multimedia/libkcddb': '@stable'
-
-- 'on': ['Linux', 'FreeBSD']
-  'require':
     'graphics/libksane': '@stable'
 
 Options:
