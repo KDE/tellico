@@ -47,7 +47,7 @@ namespace {
   public:
     explicit StringIterator(QStringView string) : pos(string.begin()), e(string.end()) {}
     inline bool hasNext() const { return pos < e; }
-    inline uint next() {
+    inline char32_t next() {
       Q_ASSERT(hasNext());
       const QChar uc = *pos++;
       if(uc.isSurrogate()) {
