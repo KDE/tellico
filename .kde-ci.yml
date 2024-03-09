@@ -15,7 +15,7 @@ Dependencies:
     'frameworks/kiconthemes': '@latest-qt6'
     'frameworks/kitemmodels': '@latest-qt6'
     'frameworks/knewstuff': '@latest-qt6'
-    'multimedia/libkcddb': '@latest-qt6'
+    'multimedia/libkcddb': '@same'
 
 - 'on': ['Linux/Qt5', 'FreeBSD/Qt5']
   'require':
