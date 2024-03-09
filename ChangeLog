@@ -1,5 +1,6 @@
 2024-03-09  Robby Stephenson  <robby@periapsis.org>
 
+	* Enabled building with Qt6/KF6.
 	* Fixed DVDFr searches with title accents.
 
 2024-02-11  Robby Stephenson  <robby@periapsis.org>
