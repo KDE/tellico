@@ -374,6 +374,7 @@ ecm_add_test(htmlexportertest.cpp
              ../translators/tellicozipexporter.cpp
              ../translators/exporter.cpp
              ../document.cpp
+             ../../icons/icons.qrc
     TEST_NAME htmlexportertest
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
 )

@@ -60,6 +60,7 @@
 #include <QFileInfo>
 #include <QApplication>
 #include <QLocale>
+#include <QTemporaryDir>
 
 extern "C" {
 #include <libxml/HTMLparser.h>
@@ -205,9 +206,8 @@ bool HTMLExporter::loadXSLTFile() {
   } else if(!m_parseDOM) {
     m_dataDir.clear();
   }
-  if(!m_dataDir.isEmpty()) {
-    m_handler->addStringParam("datadir", QFile::encodeName(m_dataDir));
-  }
+  // empty string is fine
+  m_handler->addStringParam("datadir", QFile::encodeName(m_dataDir));
 
   setFormattingOptions(collection());
 
@@ -818,7 +818,8 @@ bool HTMLExporter::writeEntryFiles() {
   for(uint i = 1; i <= 10; ++i) {
     dataImages << QStringLiteral("stars%1.png").arg(i);
   }
-  QUrl dataDir = QUrl::fromLocalFile(Tellico::installationDir() + QLatin1String("pics/"));
+  QTemporaryDir tempDir;
+  tempDir.setAutoRemove(true);
   QUrl target = fileDir();
   target = target.adjusted(QUrl::StripTrailingSlash);
   target.setPath(target.path() + QLatin1Char('/') + (QLatin1String("pics/")));
@@ -827,14 +828,28 @@ bool HTMLExporter::writeEntryFiles() {
   job->exec();
   KIO::JobFlags flags = KIO::DefaultFlags;
   if(!m_widget) flags |= KIO::HideProgressInfo;
-  foreach(const QString& dataImage, dataImages) {
-    dataDir = dataDir.adjusted(QUrl::RemoveFilename);
-    dataDir.setPath(dataDir.path() + dataImage);
-    target = target.adjusted(QUrl::RemoveFilename);
-    target.setPath(target.path() + dataImage);
-    KIO::Job* job = KIO::file_copy(dataDir, target, -1, flags);
+  myDebug() << "Test";
+  foreach(const QString& dataImageName, dataImages) {
+    // copy the image out of the resources
+    QImage dataImage(QStringLiteral(":/icons/") + dataImageName);
+    if(dataImage.isNull()) {
+      myDebug() << "Null image resource:" << dataImageName;
+      continue;
+    }
+    const QString dataImageFullName = tempDir.path() + dataImageName;
+    if(!dataImage.save(dataImageFullName)) {
+      myDebug() << "Failed to save" << dataImageFullName;
+      continue;
+    }
+    const QUrl dataImageUrl = QUrl::fromLocalFile(dataImageFullName);
+    QUrl targetUrl = target;
+    targetUrl.setPath(target.path() + dataImageName);
+    KIO::Job* job = KIO::file_copy(dataImageUrl, targetUrl, -1, flags);
     KJobWidgets::setWindow(job, m_widget);
-    job->exec();
+    if(!job->exec()) {
+      myWarning() << "Can't copy " << dataImage;
+      myWarning() << job->errorString();
+    }
   }
 
   return true;

@@ -196,13 +196,16 @@ void HtmlExporterTest::testReportHtml() {
 
   QString output2 = exporter2.text();
   QVERIFY(!output2.isEmpty());
-  // the rating pic image needs to be an absolute local path
   QRegularExpression starsPathRx(QStringLiteral("src=\"(.+stars3.png)\""));
   auto starsMatch = starsPathRx.match(output2);
   QVERIFY(starsMatch.hasMatch());
-  QFileInfo starsInfo(starsMatch.captured(1));
-  qDebug() << "Looking for absolute path:" << starsInfo.filePath();
-  QVERIFY(starsInfo.isAbsolute());
+  // the rating pic image should be an absolute local path
+  // but that's only when Tellico is fully installed
+  QString installPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("tellico/pics/stars3.png"));
+  if(!installPath.isEmpty()) {
+    QFileInfo starsInfo(starsMatch.captured(1));
+    QVERIFY(starsInfo.isAbsolute());
+  }
 }
 
 void HtmlExporterTest::testDirectoryNames() {
@@ -289,14 +292,18 @@ void HtmlExporterTest::testTemplatesTidy_data() {
   QDir entryDir(QFINDTESTDATA(QStringLiteral("../../xslt/entry-templates/Default.xsl")));
   entryDir.cdUp();
   foreach(const QString& file, entryDir.entryList({"*.xsl"}, QDir::Files)) {
-    QTest::newRow(file.toUtf8().constData()) << file << ted;
-    QTest::newRow(file.toUtf8().constData()) << file << moody;
+    const QString test1 = file + QLatin1String(":ted");
+    const QString test2 = file + QLatin1String(":moody");
+    QTest::newRow(test1.toUtf8().constData()) << file << ted;
+    QTest::newRow(test2.toUtf8().constData()) << file << moody;
   }
   QDir reportDir(QFINDTESTDATA(QStringLiteral("../../xslt/report-templates/Column_View.xsl")));
   reportDir.cdUp();
   foreach(const QString& file, reportDir.entryList({"*.xsl"}, QDir::Files)) {
-    QTest::newRow(file.toUtf8().constData()) << file << ted;
-    QTest::newRow(file.toUtf8().constData()) << file << moody;
+    const QString test1 = file + QLatin1String(":ted");
+    const QString test2 = file + QLatin1String(":moody");
+    QTest::newRow(test1.toUtf8().constData()) << file << ted;
+    QTest::newRow(test2.toUtf8().constData()) << file << moody;
   }
 }
 
