@@ -26,6 +26,7 @@
 #include "newstuffadaptor.h"
 #include "../utils/cursorsaver.h"
 #include "../utils/tellico_utils.h"
+#include "../utils/guiproxy.h"
 #include "../tellico_debug.h"
 
 #include <KTar>
@@ -118,7 +119,11 @@ bool Manager::installTemplate(const QString& file_) {
     if(QFile::exists(name)) {
       QFile::remove(name);
     }
-    auto job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(name));
+    KIO::JobFlags flags = KIO::DefaultFlags;
+    if(!GUI::Proxy::widget()) {
+      flags |= KIO::HideProgressInfo;
+    }
+    auto job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(name), -1, flags);
     if(job->exec()) {
       xslFile = QFileInfo(name).fileName();
       allFiles << xslFile;
@@ -260,7 +265,11 @@ bool Manager::installScript(const QString& file_) {
     copyTarget += sourceName;
     scriptFolder = copyTarget + QDir::separator();
     QDir().mkpath(scriptFolder);
-    auto job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(scriptFolder + exeFile));
+    KIO::JobFlags flags = KIO::DefaultFlags;
+    if(!GUI::Proxy::widget()) {
+      flags |= KIO::HideProgressInfo;
+    }
+    auto job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(scriptFolder + exeFile), -1, flags);
     if(!job->exec()) {
       myDebug() << "Copy failed";
       return false;
@@ -341,7 +350,11 @@ bool Manager::removeScript(const QString& file_) {
   }
 
   if(!scriptFolder.isEmpty()) {
-    KIO::del(QUrl::fromLocalFile(scriptFolder))->exec();
+    KIO::JobFlags flags = KIO::DefaultFlags;
+    if(!GUI::Proxy::widget()) {
+      flags |= KIO::HideProgressInfo;
+    }
+    KIO::del(QUrl::fromLocalFile(scriptFolder), flags)->exec();
   }
   if(source != -1) {
     KConfigGroup configGroup(KSharedConfig::openConfig(), QStringLiteral("Data Sources"));
