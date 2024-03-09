@@ -85,12 +85,15 @@ void DVDFrFetcherTest::testTitle() {
 
 void DVDFrFetcherTest::testTitleAccented() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
-                                       QStringLiteral("La Communauté de l'Anneau"));
+                                       QStringLiteral("Le fabuleux destin d'Amélie Poulain"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DVDFrFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
+  auto entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->title(), QStringLiteral("Le Fabuleux Destin D'Amélie Poulain"));
 }
 
 void DVDFrFetcherTest::testUPC() {
