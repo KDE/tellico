@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-03 03:14+0000\n"
+"POT-Creation-Date: 2024-03-10 03:45+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -3246,7 +3246,7 @@ msgstr ""
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
 #: src/fetch/doubanfetcher.cpp:344 src/fetch/doubanfetcher.cpp:362
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:618
-#: src/fetch/dvdfrfetcher.cpp:180 src/fetch/filmaffinityfetcher.cpp:322
+#: src/fetch/dvdfrfetcher.cpp:173 src/fetch/filmaffinityfetcher.cpp:322
 #: src/fetch/filmaffinityfetcher.cpp:459 src/fetch/imdbfetcher.cpp:902
 #: src/fetch/imdbfetcher.cpp:1822 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
@@ -3547,7 +3547,7 @@ msgid ""
 msgstr ""
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
-#: src/fetch/dvdfrfetcher.cpp:182 src/fetch/imdbfetcher.cpp:967
+#: src/fetch/dvdfrfetcher.cpp:175 src/fetch/imdbfetcher.cpp:967
 #: src/fetch/imdbfetcher.cpp:1820 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:258
 #: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:576
@@ -3582,7 +3582,7 @@ msgstr ""
 #: src/fetch/animenfofetcher.cpp:505 src/fetch/arxivfetcher.cpp:337
 #: src/fetch/bedethequefetcher.cpp:465 src/fetch/bibsonomyfetcher.cpp:190
 #: src/fetch/dbcfetcher.cpp:160 src/fetch/dblpfetcher.cpp:132
-#: src/fetch/doubanfetcher.cpp:626 src/fetch/dvdfrfetcher.cpp:190
+#: src/fetch/doubanfetcher.cpp:626 src/fetch/dvdfrfetcher.cpp:183
 #: src/fetch/filmasterfetcher.cpp:323 src/fetch/gaminghistoryfetcher.cpp:438
 #: src/fetch/googlescholarfetcher.cpp:277 src/fetch/hathitrustfetcher.cpp:318
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:616
@@ -3721,7 +3721,7 @@ msgstr ""
 
 #. i18n("Nationality");
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:515
-#: src/fetch/dvdfrfetcher.cpp:183 src/fetch/musicbrainzfetcher.cpp:371
+#: src/fetch/dvdfrfetcher.cpp:176 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:216 src/fetch/upcitemdbfetcher.cpp:472
 #: src/fetch/vgcollectfetcher.cpp:340 src/fetch/vgcollectfetcher.cpp:375
 #, kde-format
@@ -3756,7 +3756,7 @@ msgstr "ئىشلەتكۈچى(&U): "
 msgid "Douban Link"
 msgstr ""
 
-#: src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/dvdfrfetcher.cpp:174
 #, kde-format
 msgid "DVDFr Link"
 msgstr ""
