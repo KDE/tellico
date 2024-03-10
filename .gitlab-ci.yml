@@ -10,5 +10,5 @@ include:
       - /gitlab-templates/freebsd.yml
       - /gitlab-templates/flatpak.yml   
       - /gitlab-templates/craft-windows-x86-64.yml
-      - /gitlab-templates/craft-windows-x86-64-qt6.yml
+#      - /gitlab-templates/craft-windows-x86-64-qt6.yml
       - /gitlab-templates/yaml-lint.yml
