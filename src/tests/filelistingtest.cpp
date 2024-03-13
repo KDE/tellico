@@ -38,7 +38,8 @@
 #include <QLoggingCategory>
 #include <QStandardPaths>
 
-QTEST_GUILESS_MAIN( FileListingTest )
+// can't be GUILESS to get the icon preview
+QTEST_MAIN( FileListingTest )
 
 void FileListingTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
