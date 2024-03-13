@@ -140,3 +140,33 @@ void FieldTest::testUrlFieldLogic() {
   // logic result should not be a relative path, but full path
   QCOMPARE(logic.urlText(u), u.url());
 }
+
+void FieldTest::testFieldTypeChange() {
+  Tellico::Data::Field field1(QStringLiteral("name"), QStringLiteral("title"));
+
+  // the default field type is line
+  QCOMPARE(field1.type(), Tellico::Data::Field::Line);
+  QCOMPARE(field1.name(), QStringLiteral("name"));
+  QCOMPARE(field1.title(), QStringLiteral("title"));
+  // description should match title, to begin with
+  QCOMPARE(field1.description(), QStringLiteral("title"));
+  QCOMPARE(field1.flags(), 0);
+  QCOMPARE(field1.formatType(), Tellico::FieldFormat::FormatNone);
+  field1.setCategory(QStringLiteral("category"));
+  QCOMPARE(field1.category(), QStringLiteral("category"));
+  QCOMPARE(field1.isSingleCategory(), false);
+
+  // change title to a table
+  field1.setType(Tellico::Data::Field::Table);
+
+  QCOMPARE(field1.type(), Tellico::Data::Field::Table);
+  QCOMPARE(field1.name(), QStringLiteral("name"));
+  QVERIFY(field1.hasFlag(Tellico::Data::Field::AllowMultiple));
+  QCOMPARE(field1.formatType(), Tellico::FieldFormat::FormatNone);
+  // category is now same as the title
+  QCOMPARE(field1.category(), QStringLiteral("title"));
+  QVERIFY(field1.isSingleCategory());
+
+  QCOMPARE(Tellico::Data::Field::typeMap().count(),
+           Tellico::Data::Field::typeTitles().count());
+}

@@ -230,6 +230,12 @@ void TellicoReadTest::testBibtexCollection() {
   QCOMPARE(loan1->note(), loan2->note());
   QCOMPARE(loan1->uid(), loan2->uid());
   QCOMPARE(loan1->entry()->title(), loan2->entry()->title());
+
+  auto loanEntry = loan1->entry();
+  QCOMPARE(loan1->uid(), borr1->loan(loanEntry)->uid());
+  QVERIFY(borr1->hasEntry(loanEntry));
+  QVERIFY(borr1->removeLoan(loan1));
+  QVERIFY(!borr1->hasEntry(loanEntry));
 }
 
 void TellicoReadTest::testTableData() {

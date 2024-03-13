@@ -34,6 +34,7 @@ private Q_SLOTS:
   void initTestCase();
   void testAll();
   void testUrlFieldLogic();
+  void testFieldTypeChange();
 };
 
 #endif
