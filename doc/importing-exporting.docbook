@@ -213,8 +213,13 @@ The <ulink url="https://en.wikipedia.org/wiki/RIS_(file_format)"><acronym>RIS</a
 <title>Importing File Listings</title>
 
 <para>
-The best way to create a <link linkend="file-catalog">File Catalog</link> is to import the contents of a folder. The folder may be searched recursively, to add all files found within. This importer is most useful for backup listings and media cataloging, such as &CD; or <acronym>DVD</acronym> listings. In addition, image previews of the file contents may be generated, although it can take some time to read a large number of files. The file previews are same as those shown in the &kde; file manager.
+&tellico; can scan folders to import file information, primarily to create a <link linkend="file-catalog">File Catalog</link> collection. The folder may be searched recursively, to add all files found within. This importer is most useful for backup listings and media cataloging, such as &CD; or <acronym>DVD</acronym> listings. In addition, image previews of the file contents may be generated. The file previews are same as those shown in the &kde; file manager.
 </para>
+
+<para>
+Folders with ebook files and video files may also be imported as book and video collections. File metadata can be read, and for video files, any existing <literal role="extension">nfo</literal> files are used to complete the video entry information.
+</para>
+
 </sect2>
 
 <sect2 id="importing-xslt">

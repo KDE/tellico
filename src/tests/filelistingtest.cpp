@@ -38,8 +38,7 @@
 #include <QLoggingCategory>
 #include <QStandardPaths>
 
-// KIO::listDir in FileListingImporter seems to require a GUI Application
-QTEST_MAIN( FileListingTest )
+QTEST_GUILESS_MAIN( FileListingTest )
 
 void FileListingTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
@@ -177,6 +176,7 @@ void FileListingTest::testVideo() {
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QStringLiteral("Jill Actress::Heroine"));
   QVERIFY(!e0->field("plot").isEmpty());
+  QCOMPARE(e0->field("url"), url.url());
 
   QVERIFY(e1);
   QCOMPARE(e1->field("title"), QStringLiteral("Alien"));

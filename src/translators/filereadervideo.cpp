@@ -64,7 +64,7 @@ bool FileReaderVideo::populate(Data::EntryPtr entry, const KFileItem& item) {
     return false;
   }
   bool isEmpty = true;
-#ifdef HAVE_KFILEMETADATA2
+#ifdef HAVE_KFILEMETADATA
   QStringList genres, keywords;
   const auto props = properties(item);
   for(auto it = props.constBegin(); it != props.constEnd(); ++it) {

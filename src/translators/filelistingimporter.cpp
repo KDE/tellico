@@ -43,6 +43,7 @@
 
 #include <QDate>
 #include <QDir>
+#include <QLabel>
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QFile>
@@ -157,7 +158,7 @@ QWidget* FileListingImporter::widget(QWidget* parent_) {
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
   QGroupBox* gbox = new QGroupBox(i18n("File Listing Options"), m_widget);
-  QVBoxLayout* vlay = new QVBoxLayout(gbox);
+  auto lay = new QGridLayout(gbox);
 
   m_recursive = new QCheckBox(i18n("Recursive folder search"), gbox);
   m_recursive->setWhatsThis(i18n("If checked, folders are recursively searched for all files."));
@@ -175,10 +176,15 @@ QWidget* FileListingImporter::widget(QWidget* parent_) {
   m_collCombo = new GUI::CollectionTypeCombo(gbox);
   m_collCombo->setIncludedTypes(collTypes);
   m_collCombo->setCurrentData(m_collType);
+  m_collCombo->setWhatsThis(i18n("Select the type of collection being imported."));
+  auto lab = new QLabel(i18n("Collection &type:"), gbox);
+  lab->setBuddy(m_collCombo);
 
-  vlay->addWidget(m_recursive);
-  vlay->addWidget(m_filePreview);
-  vlay->addWidget(m_collCombo);
+  int row = 0;
+  lay->addWidget(m_recursive, row++, 0, 1, -1);
+  lay->addWidget(m_filePreview, row++, 0, 1, -1);
+  lay->addWidget(lab, row, 0);
+  lay->addWidget(m_collCombo, row++, 1);
 
   l->addWidget(gbox);
   l->addStretch(1);
