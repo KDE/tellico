@@ -62,7 +62,11 @@ bool showEntry(int id)
 </programlisting>
 
 <para>
-For the four import commands, the first argument is the file to import, and the second is the import action. Three actions are available: <emphasis>replace</emphasis>, <emphasis>append</emphasis>, and <emphasis>merge</emphasis>. Four file formats are supported for importing: Tellico &XML; files, Bibtex files, MODS files, and RIS files.
+For the four import commands, the first argument is the file to import, and the second is the import action. Three actions are available: <emphasis>replace</emphasis>, <emphasis>append</emphasis>, and <emphasis>merge</emphasis>. Four file formats are supported for importing: Tellico &XML; files, Bibtex files, MODS files, and RIS files. Metadata from <link linkend="importing-pdf">&PDF;</link> files can also be imported.
+</para>
+
+<para>
+For any of the commands to export text, a file name of <filename>--</filename> will pipe to the standard output.
 </para>
 
 <para>

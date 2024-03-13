@@ -37,6 +37,7 @@ namespace KIO {
 class QDomDocument;
 class QIODevice;
 class QSaveFile;
+class QTextStream;
 
 namespace Tellico {
   class ImageFactory;
@@ -167,6 +168,7 @@ private:
    * @return A boolean indicating success
    */
   static bool writeTextFile(QSaveFile& file, const QString& text, bool encodeUTF8);
+  static void writeTextStream(QTextStream& ts, const QString& text, bool encodeUTF8);
   /**
    * Writes data to a file.
    *

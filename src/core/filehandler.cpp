@@ -41,6 +41,7 @@
 #include <QUrl>
 #include <QDomDocument>
 #include <QFile>
+#include <QDir>
 #include <QTextStream>
 #include <QTemporaryFile>
 #include <QSaveFile>
@@ -224,6 +225,14 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
   }
 
   if(url_.isLocalFile()) {
+    // push to stdout _if_ file name is '--' AND is same as current path
+    // as is used in dbusinterface
+    if(url_.fileName() == QLatin1String("--") &&
+       url_.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).path() == QDir::currentPath()) {
+      QTextStream ts(stdout);
+      writeTextStream(ts, text_, encodeUTF8_);
+      return true;
+    }
     QSaveFile f(url_.toLocalFile());
     f.open(QIODevice::WriteOnly);
     if(f.error() != QFile::NoError) {
@@ -264,23 +273,27 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
 
 bool FileHandler::writeTextFile(QSaveFile& file_, const QString& text_, bool encodeUTF8_) {
   QTextStream ts(&file_);
-  if(encodeUTF8_) {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    ts.setCodec("UTF-8");
-#else
-    ts.setEncoding(QStringConverter::Utf8);
-#endif
-  }
-  // KDE Bug 380832. If string is longer than MAX_TEXT_CHUNK_WRITE_SIZE characters, split into chunks.
-  for(int i = 0; i < text_.length(); i += MAX_TEXT_CHUNK_WRITE_SIZE) {
-    ts << text_.mid(i, MAX_TEXT_CHUNK_WRITE_SIZE);
-  }
+  writeTextStream(ts, text_, encodeUTF8_);
   file_.flush();
   const bool success = file_.commit();
   if(!success) {
     myLog() << "Failed to write text file:" << file_.error();
   }
   return success;
+}
+
+void FileHandler::writeTextStream(QTextStream& ts_, const QString& text_, bool encodeUTF8_) {
+  if(encodeUTF8_) {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+    ts_.setCodec("UTF-8");
+#else
+    ts_.setEncoding(QStringConverter::Utf8);
+#endif
+  }
+  // KDE Bug 380832. If string is longer than MAX_TEXT_CHUNK_WRITE_SIZE characters, split into chunks.
+  for(int i = 0; i < text_.length(); i += MAX_TEXT_CHUNK_WRITE_SIZE) {
+    ts_ << text_.mid(i, MAX_TEXT_CHUNK_WRITE_SIZE);
+  }
 }
 
 bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool force_, bool quiet_) {

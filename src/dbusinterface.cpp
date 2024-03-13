@@ -88,7 +88,11 @@ bool ApplicationInterface::importFile(Tellico::Import::Format format, const QStr
 
 bool ApplicationInterface::exportCollection(Tellico::Export::Format format, const QString& file, bool filtered) {
   const QUrl url = QUrl::fromUserInput(file, QDir::currentPath(), QUrl::AssumeLocalFile);
-  myLog() << "Exporting collection to" << url.toDisplayString(QUrl::PreferLocalFile);
+  if(file == QLatin1String("--")) {
+    myLog() << "Exporting collection to stdout";
+  } else {
+    myLog() << "Exporting collection to" << url.toDisplayString(QUrl::PreferLocalFile);
+  }
   return m_mainWindow->exportCollection(format, url, filtered);
 }
 
