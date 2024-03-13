@@ -182,8 +182,10 @@ ecm_add_test(entrycomparisontest.cpp
 )
 
 ecm_add_test(filtertest.cpp
+             ../filter.cpp
+             ../filterparser.cpp
     TEST_NAME filtertest
-    LINK_LIBRARIES ${TELLICO_TEST_LIBS} gui
+    LINK_LIBRARIES ${TELLICO_TEST_LIBS}
 )
 
 ecm_add_test(tellicomodeltest.cpp

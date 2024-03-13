@@ -69,6 +69,7 @@ SET(tellico_SRCS
    fieldformat.cpp
    filter.cpp
    filterdialog.cpp
+   filterparser.cpp
    filterview.cpp
    groupview.cpp
    importdialog.cpp

@@ -45,7 +45,6 @@
 #include <KProcess>
 #include <KUrlRequester>
 #include <KAcceleratorManager>
-#include <KShell>
 #include <KConfigGroup>
 
 #include <QLabel>

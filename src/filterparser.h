@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2024 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,19 +22,31 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FILTERTEST_H
-#define FILTERTEST_H
+#ifndef TELLICO_FILTERPARSER_H
+#define TELLICO_FILTERPARSER_H
 
-#include <QObject>
+#include "datavectors.h"
 
-class FilterTest : public QObject {
-Q_OBJECT
+namespace Tellico {
 
-private Q_SLOTS:
-  void initTestCase();
-  void testFilter();
-  void testGroupViewFilter();
-  void testFilterParser();
+/**
+ * @author Robby Stephenson
+ */
+class FilterParser {
+
+public:
+  FilterParser(const QString& text, bool allowRegExp=false);
+
+  void setCollection(Tellico::Data::CollPtr coll_) { m_coll = coll_; }
+  FilterPtr filter();
+
+private:
+  void parseToken(FilterPtr filter, const QString& fieldName, const QString& text);
+
+  QString m_text;
+  Data::CollPtr m_coll;
+  bool m_allowRegExp;
 };
 
+} // end namespace
 #endif

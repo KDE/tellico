@@ -25,7 +25,7 @@ The entries in the collection are grouped together when they share the same valu
 </para>
 
 <para>
-You can use the <interface>Quick Filter</interface> in the toolbar to quickly limit the visible entries to ones which contain the word you type. The filter is also useful when you want to quickly find an entry. You can type in the title or some other unique word that identifies the entry and the <link linkend="detailed-view"><interface>Column View</interface></link> will only show the entries that match the filter. The status bar shows you how many entries are in the collection, and how many are currently being filtered.
+You can use the <interface>Quick Filter</interface> in the toolbar to limit the visible entries. The filter is also useful when you want to quickly find an entry. You can type in the title or some other unique word that identifies the entry and the <link linkend="detailed-view"><interface>Column View</interface></link> will only show the entries that match the filter. More complex filtering can use field names directly, such as <emphasis>author=stephenson</emphasis>. The status bar shows you how many entries are in the collection, and how many are currently being filtered.
 </para>
 
 </sect1>

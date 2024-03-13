@@ -27,6 +27,7 @@
 #include "filtertest.h"
 
 #include "../filter.h"
+#include "../filterparser.h"
 #include "../entry.h"
 #include "../collections/bookcollection.h"
 #include "../collections/videocollection.h"
@@ -335,26 +336,65 @@ void FilterTest::testGroupViewFilter() {
   QVERIFY(castFilter.matches(movie));
 }
 
-void FilterTest::testQuickFilter() {
+void FilterTest::testFilterParser() {
   Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true, QStringLiteral("TestCollection")));
   Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
   entry->setField(QStringLiteral("title"), QStringLiteral("C++ Coding Standards"));
+  entry->setField(QStringLiteral("author"), QStringLiteral("Herb Sutter"));
 
-  Tellico::FilterPtr filter(new Tellico::Filter(Tellico::Filter::MatchAll));
-  QString fieldName; // empty means any field
-
-  Tellico::Filter::populateQuickFilter(filter, fieldName, QStringLiteral("C++"), true /* allow regexps */);
+  Tellico::FilterParser parser(QStringLiteral("C++"), true /* allow regexps */);
+  Tellico::FilterPtr filter = parser.filter();
   QVERIFY(filter->matches(entry));
 
   entry->setField(QStringLiteral("title"), QStringLiteral("Coding Standards"));
   QVERIFY(filter->matches(entry)); // still matches due to c++ being interpreted as a regexp
 
-  Tellico::FilterPtr filter2(new Tellico::Filter(Tellico::Filter::MatchAll));
+  Tellico::FilterParser parser2(QStringLiteral("C++"), false /* allow regexps */);
+  filter = parser2.filter();
+  QVERIFY(!filter->matches(entry)); // no longer matches
 
-  Tellico::Filter::populateQuickFilter(filter2, fieldName, QStringLiteral("C++"), false /* allow regexps */);
   entry->setField(QStringLiteral("title"), QStringLiteral("C++ Coding Standards"));
-  QVERIFY(filter2->matches(entry));
+  QVERIFY(filter->matches(entry));
 
-  entry->setField(QStringLiteral("title"), QStringLiteral("Coding Standards"));
-  QVERIFY(!filter2->matches(entry)); // no longer matches
+  // match title fiel donly
+  Tellico::FilterParser parser3(QStringLiteral("title=C++"), false /* allow regexps */);
+  filter = parser3.filter();
+  auto rule0 = filter->at(0);
+  QVERIFY(rule0);
+  QCOMPARE(rule0->fieldName(), QLatin1String("title"));
+  QCOMPARE(rule0->pattern(), QLatin1String("C++"));
+
+  entry->setField(QStringLiteral("title"), QStringLiteral("C++ Coding Standards"));
+  QVERIFY(filter->matches(entry));
+
+  // shouldn't match since there's no field names Title2
+  Tellico::FilterParser parser4(QStringLiteral("Title2=C++"), false /* allow regexps */);
+  parser4.setCollection(coll);
+  filter = parser4.filter();
+  QVERIFY(!filter->matches(entry));
+
+  // match by field title instead
+  Tellico::FilterParser parser5(QStringLiteral("Title=C++"), false /* allow regexps */);
+  parser5.setCollection(coll);
+  filter = parser5.filter();
+  QVERIFY(filter->matches(entry));
+
+  Tellico::FilterParser parser6(QStringLiteral("title=\"C++ coding\""), false /* allow regexps */);
+  filter = parser6.filter();
+  rule0 = filter->at(0);
+  QVERIFY(rule0);
+  QCOMPARE(rule0->fieldName(), QLatin1String("title"));
+  QCOMPARE(rule0->pattern(), QLatin1String("C++ coding"));
+
+  Tellico::FilterParser parser7(QStringLiteral("title=\"C++ coding\" author=sutter"), false /* allow regexps */);
+  filter = parser7.filter();
+  rule0 = filter->at(0);
+  QVERIFY(rule0);
+  QCOMPARE(rule0->fieldName(), QLatin1String("title"));
+  QCOMPARE(rule0->pattern(), QLatin1String("C++ coding"));
+  QVERIFY(filter->size() > 1);
+  auto rule1 = filter->at(1);
+  QVERIFY(rule1);
+  QCOMPARE(rule1->fieldName(), QLatin1String("author"));
+  QCOMPARE(rule1->pattern(), QLatin1String("sutter"));
 }

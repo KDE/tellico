@@ -35,6 +35,7 @@
 #include "entry.h"
 #include "configdialog.h"
 #include "filter.h"
+#include "filterparser.h"
 #include "filterdialog.h"
 #include "collectionfieldsdialog.h"
 #include "controller.h"
@@ -1887,26 +1888,12 @@ void MainWindow::setFilter(const QString& text_) {
     slotClearFilter();
     return;
   }
-  QString text = text_.trimmed();
-  FilterPtr filter;
-  if(!text.isEmpty()) {
-    filter = new Filter(Filter::MatchAll);
-    QString fieldName; // empty field name means match on any field
-    // if the text contains '=' assume it's a field name or title
-    if(text.indexOf(QLatin1Char('=')) > -1) {
-      fieldName = text.section(QLatin1Char('='), 0, 0).trimmed();
-      text = text.section(QLatin1Char('='), 1).trimmed();
-      // check that the field name might be a title
-      if(!Data::Document::self()->collection()->hasField(fieldName)) {
-        fieldName = Data::Document::self()->collection()->fieldNameByTitle(fieldName);
-      }
-    }
-    Filter::populateQuickFilter(filter, fieldName, text, Config::quickFilterRegExp());
-    // also want to update the line edit in case the filter was set by DBUS
-    if(m_quickFilter->text() != text_) {
-      m_quickFilter->setText(text_);
-    }
-  }
+  // update the line edit in case the filter was set by DBUS
+  m_quickFilter->setText(text_);
+
+  FilterParser parser(text_.trimmed(), Config::quickFilterRegExp());
+  parser.setCollection(Data::Document::self()->collection());
+  FilterPtr filter = parser.filter();
   // only update filter if one exists or did exist
   if(filter || m_detailedView->filter()) {
     Controller::self()->slotUpdateFilter(filter);
