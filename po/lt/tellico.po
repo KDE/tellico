@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 01:58+0000\n"
+"POT-Creation-Date: 2024-03-14 02:00+0000\n"
 "PO-Revision-Date: 2015-12-29 21:13+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -170,7 +170,7 @@ msgstr "Pavadinimas"
 msgid "Collection Size"
 msgstr "&Fonoteka"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1665
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1666
 #, fuzzy, kde-format
 msgid "Total entries: %1"
 msgstr "Viso įrašų"
@@ -2516,9 +2516,10 @@ msgid "Template Options"
 msgstr ""
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:364
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:220
+#: src/translators/filelistingimporter.cpp:180
 #, kde-format
 msgid "Collection &type:"
 msgstr ""
@@ -2711,8 +2712,8 @@ msgstr "Failai"
 msgid "Template Packages"
 msgstr "Šablonai"
 
-#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1296
-#: src/mainwindow.cpp:1472 src/reportdialog.cpp:433 src/reportdialog.cpp:448
+#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1297
+#: src/mainwindow.cpp:1473 src/reportdialog.cpp:433 src/reportdialog.cpp:448
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:55 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -2771,22 +2772,22 @@ msgstr ""
 msgid "&Sort By"
 msgstr "Rikiuoti pagal"
 
-#: src/controller.cpp:594 src/mainwindow.cpp:609
+#: src/controller.cpp:594 src/mainwindow.cpp:610
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "&Keisti įrašą..."
 
-#: src/controller.cpp:595 src/mainwindow.cpp:616
+#: src/controller.cpp:595 src/mainwindow.cpp:617
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr ""
 
-#: src/controller.cpp:596 src/mainwindow.cpp:710
+#: src/controller.cpp:596 src/mainwindow.cpp:711
 #, kde-format
 msgid "&Update Entry"
 msgstr "&Atnaujinti įrašą"
 
-#: src/controller.cpp:597 src/mainwindow.cpp:623
+#: src/controller.cpp:597 src/mainwindow.cpp:624
 #, kde-format
 msgid "&Delete Entry"
 msgstr "&Triniti įrašą"
@@ -2871,7 +2872,7 @@ msgstr ""
 msgid "Hide All Columns"
 msgstr ""
 
-#: src/document.cpp:213 src/mainwindow.cpp:1411
+#: src/document.cpp:213 src/mainwindow.cpp:1412
 #, fuzzy, kde-format
 msgid "Saving file..."
 msgstr "Išsaugojamas failas..."
@@ -2931,12 +2932,12 @@ msgid "Save Entry"
 msgstr ""
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1181 src/mainwindow.cpp:1199
+#: src/mainwindow.cpp:1182 src/mainwindow.cpp:1200
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Neišsaugoti pakeitimai"
 
-#: src/entryiconview.cpp:61 src/mainwindow.cpp:883
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:884
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3002,7 +3003,7 @@ msgstr "Atnaujinama"
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr ""
 
-#: src/entryview.cpp:335 src/mainwindow.cpp:1818
+#: src/entryview.cpp:335 src/mainwindow.cpp:1819
 #, fuzzy, kde-format
 msgid "Please check your installation."
 msgstr "Patikrinkite Jūsų įdiegimą."
@@ -3635,45 +3636,45 @@ msgstr ""
 msgid "Institution"
 msgstr "Institucija"
 
-#: src/fetch/execexternalfetcher.cpp:349
+#: src/fetch/execexternalfetcher.cpp:348
 #, kde-format
 msgid "External Application"
 msgstr "Išorinė programa"
 
-#: src/fetch/execexternalfetcher.cpp:370
+#: src/fetch/execexternalfetcher.cpp:369
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:375
+#: src/fetch/execexternalfetcher.cpp:374
 #, kde-format
 msgid "&Result type: "
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:384
+#: src/fetch/execexternalfetcher.cpp:383
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:398
+#: src/fetch/execexternalfetcher.cpp:397
 #, kde-format
 msgid "Application &path: "
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:403
+#: src/fetch/execexternalfetcher.cpp:402
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:408
+#: src/fetch/execexternalfetcher.cpp:407
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:410
+#: src/fetch/execexternalfetcher.cpp:409
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3681,17 +3682,17 @@ msgid ""
 msgstr ""
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:411
+#: src/fetch/execexternalfetcher.cpp:410
 #, fuzzy, kde-format
 msgid "Arguments"
 msgstr "Argumentai"
 
-#: src/fetch/execexternalfetcher.cpp:443
+#: src/fetch/execexternalfetcher.cpp:442
 #, fuzzy, kde-format
 msgid "Update"
 msgstr "&Atnaujinti įrašą"
 
-#: src/fetch/execexternalfetcher.cpp:451
+#: src/fetch/execexternalfetcher.cpp:450
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -4293,7 +4294,7 @@ msgid ""
 "configuration file."
 msgstr ""
 
-#: src/fetchdialog.cpp:138 src/mainwindow.cpp:599
+#: src/fetchdialog.cpp:138 src/mainwindow.cpp:600
 #, kde-format
 msgid "Internet Search"
 msgstr "Interneto paieška"
@@ -4629,8 +4630,8 @@ msgstr "Filtro vardas"
 msgid "&Save Filter"
 msgstr "Filtras"
 
-#: src/filterview.cpp:190 src/mainwindow.cpp:572 src/mainwindow.cpp:788
-#: src/mainwindow.cpp:806
+#: src/filterview.cpp:190 src/mainwindow.cpp:573 src/mainwindow.cpp:789
+#: src/mainwindow.cpp:807
 #, kde-format
 msgid "Filter"
 msgstr "Filtras"
@@ -4666,8 +4667,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Grupė"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1108 src/mainwindow.cpp:1753
-#: src/mainwindow.cpp:1787 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1109 src/mainwindow.cpp:1754
+#: src/mainwindow.cpp:1788 src/translators/htmlexporter.cpp:338
 #, fuzzy, kde-format
 msgid "People"
 msgstr "Žmonės"
@@ -4965,12 +4966,12 @@ msgid ""
 "order to be merged."
 msgstr ""
 
-#: src/importdialog.cpp:150 src/mainwindow.cpp:372
+#: src/importdialog.cpp:150 src/mainwindow.cpp:373
 #, kde-format
 msgid "&Import"
 msgstr "&Importuoti"
 
-#: src/importdialog.cpp:377 src/mainwindow.cpp:1292 src/mainwindow.cpp:1470
+#: src/importdialog.cpp:377 src/mainwindow.cpp:1293 src/mainwindow.cpp:1471
 #: src/translators/tellicozipexporter.cpp:54
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
@@ -4978,7 +4979,7 @@ msgid "Tellico Files"
 msgstr "Tellico Zip failas"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1294 src/translators/tellicoxmlexporter.cpp:76
+#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:76
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "XML Files"
@@ -5146,7 +5147,7 @@ msgstr ""
 #: src/main.cpp:130
 #, fuzzy, kde-format
 #| msgid "(c) 2001-2012, Robby Stephenson"
-msgid "(c) 2001-2023, Robby Stephenson"
+msgid "(c) 2001-2024, Robby Stephenson"
 msgstr "(c) 2001-2012, Robby Stephenson"
 
 #: src/main.cpp:134
@@ -5220,894 +5221,894 @@ msgstr ""
 msgid "File to open"
 msgstr "Atverti failą"
 
-#: src/mainwindow.cpp:256
+#: src/mainwindow.cpp:257
 #, fuzzy, kde-format
 #| msgid "&Collection"
 msgid "New Collection"
 msgstr "&Fonoteka"
 
-#: src/mainwindow.cpp:258
+#: src/mainwindow.cpp:259
 #, fuzzy, kde-format
 msgid "Create a new collection"
 msgstr "Kurti naują rinkinį"
 
-#: src/mainwindow.cpp:277
+#: src/mainwindow.cpp:278
 #, kde-format
 msgid "New &Book Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:278
+#: src/mainwindow.cpp:279
 #, kde-format
 msgid "Create a new book collection"
 msgstr ""
 
-#: src/mainwindow.cpp:280
+#: src/mainwindow.cpp:281
 #, kde-format
 msgid "New B&ibliography"
 msgstr ""
 
-#: src/mainwindow.cpp:281
+#: src/mainwindow.cpp:282
 #, kde-format
 msgid "Create a new bibtex bibliography"
 msgstr ""
 
-#: src/mainwindow.cpp:283
+#: src/mainwindow.cpp:284
 #, kde-format
 msgid "New &Comic Book Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:284
+#: src/mainwindow.cpp:285
 #, kde-format
 msgid "Create a new comic book collection"
 msgstr ""
 
-#: src/mainwindow.cpp:286
+#: src/mainwindow.cpp:287
 #, kde-format
 msgid "New &Video Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:287
+#: src/mainwindow.cpp:288
 #, kde-format
 msgid "Create a new video collection"
 msgstr ""
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:290
 #, kde-format
 msgid "New &Music Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:290
+#: src/mainwindow.cpp:291
 #, kde-format
 msgid "Create a new music collection"
 msgstr ""
 
-#: src/mainwindow.cpp:292
+#: src/mainwindow.cpp:293
 #, kde-format
 msgid "New C&oin Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:293
+#: src/mainwindow.cpp:294
 #, kde-format
 msgid "Create a new coin collection"
 msgstr ""
 
-#: src/mainwindow.cpp:295
+#: src/mainwindow.cpp:296
 #, kde-format
 msgid "New &Stamp Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:296
+#: src/mainwindow.cpp:297
 #, kde-format
 msgid "Create a new stamp collection"
 msgstr ""
 
-#: src/mainwindow.cpp:298
+#: src/mainwindow.cpp:299
 #, kde-format
 msgid "New C&ard Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:299
+#: src/mainwindow.cpp:300
 #, kde-format
 msgid "Create a new trading card collection"
 msgstr ""
 
-#: src/mainwindow.cpp:301
+#: src/mainwindow.cpp:302
 #, kde-format
 msgid "New &Wine Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:302
+#: src/mainwindow.cpp:303
 #, kde-format
 msgid "Create a new wine collection"
 msgstr ""
 
-#: src/mainwindow.cpp:304
+#: src/mainwindow.cpp:305
 #, fuzzy, kde-format
 #| msgid "&Collection"
 msgid "New Video &Game Collection"
 msgstr "&Fonoteka"
 
-#: src/mainwindow.cpp:305
+#: src/mainwindow.cpp:306
 #, fuzzy, kde-format
 msgid "Create a new video game collection"
 msgstr "Kurti naują rinkinį"
 
-#: src/mainwindow.cpp:307
+#: src/mainwindow.cpp:308
 #, kde-format
 msgid "New Boa&rd Game Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:309
 #, kde-format
 msgid "Create a new board game collection"
 msgstr ""
 
-#: src/mainwindow.cpp:310
+#: src/mainwindow.cpp:311
 #, kde-format
 msgid "New &File Catalog"
 msgstr ""
 
-#: src/mainwindow.cpp:311
+#: src/mainwindow.cpp:312
 #, kde-format
 msgid "Create a new file catalog"
 msgstr ""
 
-#: src/mainwindow.cpp:314
+#: src/mainwindow.cpp:315
 #, kde-format
 msgid "New C&ustom Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:315
+#: src/mainwindow.cpp:316
 #, kde-format
 msgid "Create a new custom collection"
 msgstr ""
 
-#: src/mainwindow.cpp:326
+#: src/mainwindow.cpp:327
 #, kde-format
 msgid "Open an existing document"
 msgstr "Atverti egzistuojantį dokumentą"
 
-#: src/mainwindow.cpp:328
+#: src/mainwindow.cpp:329
 #, kde-format
 msgid "Open a recently used file"
 msgstr "Atverti neseniai naudotą failą"
 
-#: src/mainwindow.cpp:330
+#: src/mainwindow.cpp:331
 #, kde-format
 msgid "Save the document"
 msgstr "Įrašyti dokumentą"
 
-#: src/mainwindow.cpp:332
+#: src/mainwindow.cpp:333
 #, kde-format
 msgid "Save the document as a different file..."
 msgstr ""
 
-#: src/mainwindow.cpp:336
+#: src/mainwindow.cpp:337
 #, fuzzy, kde-format
 msgid "Save As Template..."
 msgstr "&Tvarkyti šablonus..."
 
-#: src/mainwindow.cpp:338
+#: src/mainwindow.cpp:339
 #, fuzzy, kde-format
 msgid "Save as a collection template"
 msgstr "Kurti naują rinkinį"
 
-#: src/mainwindow.cpp:341
+#: src/mainwindow.cpp:342
 #, kde-format
 msgid "Print the contents of the collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:357
+#: src/mainwindow.cpp:358
 #, kde-format
 msgid "Preview the contents of the collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:361
+#: src/mainwindow.cpp:362
 #, kde-format
 msgid "Quit the application"
 msgstr "Išjungti programą"
 
-#: src/mainwindow.cpp:374
+#: src/mainwindow.cpp:375
 #, kde-format
 msgid "Import the collection data from other formats"
 msgstr ""
 
-#: src/mainwindow.cpp:390
+#: src/mainwindow.cpp:391
 #, kde-format
 msgid "Import Tellico Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:391
+#: src/mainwindow.cpp:392
 #, kde-format
 msgid "Import another Tellico data file"
 msgstr ""
 
-#: src/mainwindow.cpp:394
+#: src/mainwindow.cpp:395
 #, kde-format
 msgid "Import CSV Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:395
+#: src/mainwindow.cpp:396
 #, kde-format
 msgid "Import a CSV file"
 msgstr "Importuoti PDF failą"
 
-#: src/mainwindow.cpp:397
+#: src/mainwindow.cpp:398
 #, kde-format
 msgid "Import MODS Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:398
+#: src/mainwindow.cpp:399
 #, kde-format
 msgid "Import a MODS data file"
 msgstr ""
 
-#: src/mainwindow.cpp:400
+#: src/mainwindow.cpp:401
 #, kde-format
 msgid "Import Alexandria Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:401
+#: src/mainwindow.cpp:402
 #, kde-format
 msgid "Import data from the Alexandria book collection manager"
 msgstr ""
 
-#: src/mainwindow.cpp:404
+#: src/mainwindow.cpp:405
 #, kde-format
 msgid "Import Delicious Library Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:405
+#: src/mainwindow.cpp:406
 #, kde-format
 msgid "Import data from Delicious Library"
 msgstr ""
 
-#: src/mainwindow.cpp:408
+#: src/mainwindow.cpp:409
 #, fuzzy, kde-format
 #| msgid "Import Bibtex Data..."
 msgid "Import Collectorz Data..."
 msgstr "Importuoti Bibtex duomenis"
 
-#: src/mainwindow.cpp:409
+#: src/mainwindow.cpp:410
 #, fuzzy, kde-format
 #| msgid "Import Directory"
 msgid "Import data from Collectorz"
 msgstr "Importuoti aplanką"
 
-#: src/mainwindow.cpp:412
+#: src/mainwindow.cpp:413
 #, fuzzy, kde-format
 #| msgid "Import Bibtex Data..."
 msgid "Import Data Crow Data..."
 msgstr "Importuoti Bibtex duomenis"
 
-#: src/mainwindow.cpp:413
+#: src/mainwindow.cpp:414
 #, fuzzy, kde-format
 #| msgid "Import Directory"
 msgid "Import data from Data Crow"
 msgstr "Importuoti aplanką"
 
-#: src/mainwindow.cpp:416
+#: src/mainwindow.cpp:417
 #, kde-format
 msgid "Import Referencer Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:417
+#: src/mainwindow.cpp:418
 #, kde-format
 msgid "Import data from Referencer"
 msgstr ""
 
-#: src/mainwindow.cpp:420
+#: src/mainwindow.cpp:421
 #, kde-format
 msgid "Import Bibtex Data..."
 msgstr "Importuoti Bibtex duomenis"
 
-#: src/mainwindow.cpp:421
+#: src/mainwindow.cpp:422
 #, kde-format
 msgid "Import a bibtex bibliography file"
 msgstr ""
 
-#: src/mainwindow.cpp:426
+#: src/mainwindow.cpp:427
 #, kde-format
 msgid "Import Bibtexml Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:427
+#: src/mainwindow.cpp:428
 #, kde-format
 msgid "Import a Bibtexml bibliography file"
 msgstr ""
 
-#: src/mainwindow.cpp:429
+#: src/mainwindow.cpp:430
 #, kde-format
 msgid "Import RIS Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:430
+#: src/mainwindow.cpp:431
 #, kde-format
 msgid "Import an RIS reference file"
 msgstr ""
 
-#: src/mainwindow.cpp:432
+#: src/mainwindow.cpp:433
 #, fuzzy, kde-format
 #| msgid "Import Bibtex Data..."
 msgid "Import MARC Data..."
 msgstr "Importuoti Bibtex duomenis"
 
-#: src/mainwindow.cpp:433
+#: src/mainwindow.cpp:434
 #, fuzzy, kde-format
 #| msgid "Import VinoXML data"
 msgid "Import MARC data"
 msgstr "Importuoti VinoXML duomenis"
 
-#: src/mainwindow.cpp:440
+#: src/mainwindow.cpp:441
 #, kde-format
 msgid "Import Goodreads Collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:441
+#: src/mainwindow.cpp:442
 #, kde-format
 msgid "Import a collection from Goodreads.com"
 msgstr ""
 
-#: src/mainwindow.cpp:443
+#: src/mainwindow.cpp:444
 #, kde-format
 msgid "Import LibraryThing Collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:444
+#: src/mainwindow.cpp:445
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
 msgstr ""
 
-#: src/mainwindow.cpp:446
+#: src/mainwindow.cpp:447
 #, kde-format
 msgid "Import PDF File..."
 msgstr "Importuoti PDF failą..."
 
-#: src/mainwindow.cpp:447
+#: src/mainwindow.cpp:448
 #, kde-format
 msgid "Import a PDF file"
 msgstr "Importuoti PDF failą"
 
-#: src/mainwindow.cpp:449
+#: src/mainwindow.cpp:450
 #, kde-format
 msgid "Import Audio File Metadata..."
 msgstr ""
 
-#: src/mainwindow.cpp:450
+#: src/mainwindow.cpp:451
 #, kde-format
 msgid "Import meta-data from audio files"
 msgstr ""
 
-#: src/mainwindow.cpp:455
+#: src/mainwindow.cpp:456
 #, kde-format
 msgid "Import Audio CD Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:456
+#: src/mainwindow.cpp:457
 #, kde-format
 msgid "Import audio CD information"
 msgstr ""
 
-#: src/mainwindow.cpp:461
+#: src/mainwindow.cpp:462
 #, fuzzy, kde-format
 #| msgid "Import Bibtex Data..."
 msgid "Import Discogs Collection..."
 msgstr "Importuoti Bibtex duomenis"
 
-#: src/mainwindow.cpp:462
+#: src/mainwindow.cpp:463
 #, kde-format
 msgid "Import a collection from Discogs.com"
 msgstr ""
 
-#: src/mainwindow.cpp:464
+#: src/mainwindow.cpp:465
 #, kde-format
 msgid "Import GCstar Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:465
+#: src/mainwindow.cpp:466
 #, kde-format
 msgid "Import a GCstar data file"
 msgstr ""
 
-#: src/mainwindow.cpp:468
+#: src/mainwindow.cpp:469
 #, kde-format
 msgid "Import Griffith Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:469
+#: src/mainwindow.cpp:470
 #, kde-format
 msgid "Import a Griffith database"
 msgstr ""
 
-#: src/mainwindow.cpp:472
+#: src/mainwindow.cpp:473
 #, kde-format
 msgid "Import Ant Movie Catalog Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:473
+#: src/mainwindow.cpp:474
 #, kde-format
 msgid "Import an Ant Movie Catalog data file"
 msgstr ""
 
-#: src/mainwindow.cpp:476
+#: src/mainwindow.cpp:477
 #, kde-format
 msgid "Import BoardGameGeek Collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:477
+#: src/mainwindow.cpp:478
 #, kde-format
 msgid "Import a collection from BoardGameGeek.com"
 msgstr ""
 
-#: src/mainwindow.cpp:479
+#: src/mainwindow.cpp:480
 #, kde-format
 msgid "Import VinoXML..."
 msgstr "Importuoti VinoXML..."
 
-#: src/mainwindow.cpp:480
+#: src/mainwindow.cpp:481
 #, kde-format
 msgid "Import VinoXML data"
 msgstr "Importuoti VinoXML duomenis"
 
-#: src/mainwindow.cpp:482
+#: src/mainwindow.cpp:483
 #, kde-format
 msgid "Import File Listing..."
 msgstr ""
 
-#: src/mainwindow.cpp:483
+#: src/mainwindow.cpp:484
 #, kde-format
 msgid "Import information about files in a folder"
 msgstr ""
 
-#: src/mainwindow.cpp:485
+#: src/mainwindow.cpp:486
 #, kde-format
 msgid "Import XSL Transform..."
 msgstr ""
 
-#: src/mainwindow.cpp:486
+#: src/mainwindow.cpp:487
 #, kde-format
 msgid "Import using an XSL Transform"
 msgstr ""
 
-#: src/mainwindow.cpp:499
+#: src/mainwindow.cpp:500
 #, kde-format
 msgid "&Export"
 msgstr "&Eksportuoti"
 
-#: src/mainwindow.cpp:501
+#: src/mainwindow.cpp:502
 #, kde-format
 msgid "Export the collection data to other formats"
 msgstr ""
 
-#: src/mainwindow.cpp:517
+#: src/mainwindow.cpp:518
 #, kde-format
 msgid "Export to XML..."
 msgstr "Eksportuoti į XML..."
 
-#: src/mainwindow.cpp:518
+#: src/mainwindow.cpp:519
 #, kde-format
 msgid "Export to a Tellico XML file"
 msgstr "Eksportuoti į Tellico XML failą"
 
-#: src/mainwindow.cpp:521
+#: src/mainwindow.cpp:522
 #, kde-format
 msgid "Export to Zip..."
 msgstr "Eksportuoti į Zip..."
 
-#: src/mainwindow.cpp:522
+#: src/mainwindow.cpp:523
 #, kde-format
 msgid "Export to a Tellico Zip file"
 msgstr "Eksportuoti į Tellico Zip failą"
 
-#: src/mainwindow.cpp:525
+#: src/mainwindow.cpp:526
 #, kde-format
 msgid "Export to HTML..."
 msgstr "Eksportuoti į HTML..."
 
-#: src/mainwindow.cpp:526
+#: src/mainwindow.cpp:527
 #, kde-format
 msgid "Export to an HTML file"
 msgstr "Eksportuoti į HTML failą"
 
-#: src/mainwindow.cpp:528
+#: src/mainwindow.cpp:529
 #, kde-format
 msgid "Export to CSV..."
 msgstr "Eksportuoti į CSV..."
 
-#: src/mainwindow.cpp:529
+#: src/mainwindow.cpp:530
 #, kde-format
 msgid "Export to a comma-separated values file"
 msgstr ""
 
-#: src/mainwindow.cpp:531
+#: src/mainwindow.cpp:532
 #, kde-format
 msgid "Export to Alexandria..."
 msgstr ""
 
-#: src/mainwindow.cpp:532
+#: src/mainwindow.cpp:533
 #, kde-format
 msgid "Export to an Alexandria library"
 msgstr ""
 
-#: src/mainwindow.cpp:535
+#: src/mainwindow.cpp:536
 #, kde-format
 msgid "Export to Bibtex..."
 msgstr "Eksportuoti į Bibtex..."
 
-#: src/mainwindow.cpp:536
+#: src/mainwindow.cpp:537
 #, kde-format
 msgid "Export to a bibtex file"
 msgstr "Eksportuoti į bibtex failą"
 
-#: src/mainwindow.cpp:538
+#: src/mainwindow.cpp:539
 #, kde-format
 msgid "Export to Bibtexml..."
 msgstr ""
 
-#: src/mainwindow.cpp:539
+#: src/mainwindow.cpp:540
 #, kde-format
 msgid "Export to a Bibtexml file"
 msgstr ""
 
-#: src/mainwindow.cpp:541
+#: src/mainwindow.cpp:542
 #, kde-format
 msgid "Export to ONIX..."
 msgstr "Eksportuoti į ONIX..."
 
-#: src/mainwindow.cpp:542
+#: src/mainwindow.cpp:543
 #, kde-format
 msgid "Export to an ONIX file"
 msgstr "Eksportuoti į ONIX failą"
 
-#: src/mainwindow.cpp:544
+#: src/mainwindow.cpp:545
 #, kde-format
 msgid "Export to GCstar..."
 msgstr ""
 
-#: src/mainwindow.cpp:545
+#: src/mainwindow.cpp:546
 #, kde-format
 msgid "Export to a GCstar data file"
 msgstr ""
 
-#: src/mainwindow.cpp:548
+#: src/mainwindow.cpp:549
 #, kde-format
 msgid "Export XSL Transform..."
 msgstr ""
 
-#: src/mainwindow.cpp:549
+#: src/mainwindow.cpp:550
 #, kde-format
 msgid "Export using an XSL Transform"
 msgstr ""
 
-#: src/mainwindow.cpp:560
+#: src/mainwindow.cpp:561
 #, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr ""
 
-#: src/mainwindow.cpp:562
+#: src/mainwindow.cpp:563
 #, fuzzy, kde-format
 msgid "Copy the selected text to the clipboard"
 msgstr "Kopijuoti pažymėtą tekstą į iškarpinę"
 
-#: src/mainwindow.cpp:564
+#: src/mainwindow.cpp:565
 #, kde-format
 msgid "Paste the clipboard contents"
 msgstr "Padėti talpyklės turinį"
 
-#: src/mainwindow.cpp:566
+#: src/mainwindow.cpp:567
 #, kde-format
 msgid "Select all the entries in the collection"
 msgstr ""
 
-#: src/mainwindow.cpp:568
+#: src/mainwindow.cpp:569
 #, kde-format
 msgid "Deselect all the entries in the collection"
 msgstr ""
 
-#: src/mainwindow.cpp:571
+#: src/mainwindow.cpp:572
 #, fuzzy, kde-format
 msgid "Advanced &Filter..."
 msgstr "Sudėtingas filtras"
 
-#: src/mainwindow.cpp:575 src/mainwindow.cpp:807
+#: src/mainwindow.cpp:576 src/mainwindow.cpp:808
 #, kde-format
 msgid "Filter the collection"
 msgstr ""
 
-#: src/mainwindow.cpp:582
+#: src/mainwindow.cpp:583
 #, kde-format
 msgid "&New Entry..."
 msgstr "&Naujas įrašas..."
 
-#: src/mainwindow.cpp:584
+#: src/mainwindow.cpp:585
 #, fuzzy, kde-format
 #| msgid "&New Entry"
 msgid "New Entry"
 msgstr "&Naujas įrašas"
 
-#: src/mainwindow.cpp:586
+#: src/mainwindow.cpp:587
 #, kde-format
 msgid "Create a new entry"
 msgstr "Sukurti naują įrašą"
 
-#: src/mainwindow.cpp:588
+#: src/mainwindow.cpp:589
 #, fuzzy, kde-format
 msgid "Add Entry"
 msgstr "Pridėti įrašą..."
 
-#: src/mainwindow.cpp:598
+#: src/mainwindow.cpp:599
 #, fuzzy, kde-format
 msgid "Internet Search..."
 msgstr "Interneto paieška"
 
-#: src/mainwindow.cpp:602
+#: src/mainwindow.cpp:603
 #, kde-format
 msgid "Search the internet..."
 msgstr ""
 
-#: src/mainwindow.cpp:612
+#: src/mainwindow.cpp:613
 #, kde-format
 msgid "Edit the selected entries"
 msgstr ""
 
-#: src/mainwindow.cpp:619
+#: src/mainwindow.cpp:620
 #, kde-format
 msgid "Copy the selected entries"
 msgstr ""
 
-#: src/mainwindow.cpp:626
+#: src/mainwindow.cpp:627
 #, fuzzy, kde-format
 msgid "Delete the selected entries"
 msgstr "Ar šalinti pasirinktus įrašus?"
 
-#: src/mainwindow.cpp:630
+#: src/mainwindow.cpp:631
 #, kde-format
 msgid "&Merge Entries"
 msgstr "&Sujungti įrašus"
 
-#: src/mainwindow.cpp:634
+#: src/mainwindow.cpp:635
 #, kde-format
 msgid "Merge the selected entries"
 msgstr ""
 
-#: src/mainwindow.cpp:638
+#: src/mainwindow.cpp:639
 #, fuzzy, kde-format
 msgid "Check-&out..."
 msgstr "Išimti"
 
-#: src/mainwindow.cpp:640
+#: src/mainwindow.cpp:641
 #, kde-format
 msgid "Check-out the selected items"
 msgstr ""
 
-#: src/mainwindow.cpp:643
+#: src/mainwindow.cpp:644
 #, kde-format
 msgid "Check-&in"
 msgstr ""
 
-#: src/mainwindow.cpp:645
+#: src/mainwindow.cpp:646
 #, kde-format
 msgid "Check-in the selected items"
 msgstr ""
 
-#: src/mainwindow.cpp:648
+#: src/mainwindow.cpp:649
 #, kde-format
 msgid "&Rename Collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:651
+#: src/mainwindow.cpp:652
 #, kde-format
 msgid "Rename the collection"
 msgstr ""
 
-#: src/mainwindow.cpp:654
+#: src/mainwindow.cpp:655
 #, kde-format
 msgid "Collection &Fields..."
 msgstr ""
 
-#: src/mainwindow.cpp:655
+#: src/mainwindow.cpp:656
 #, fuzzy, kde-format
 msgid "Fields"
 msgstr "Laukai"
 
-#: src/mainwindow.cpp:658
+#: src/mainwindow.cpp:659
 #, kde-format
 msgid "Modify the collection fields"
 msgstr ""
 
-#: src/mainwindow.cpp:661
+#: src/mainwindow.cpp:662
 #, kde-format
 msgid "&Generate Reports..."
 msgstr ""
 
-#: src/mainwindow.cpp:662
+#: src/mainwindow.cpp:663
 #, fuzzy, kde-format
 msgid "Reports"
 msgstr "Ataskaitos"
 
-#: src/mainwindow.cpp:664
+#: src/mainwindow.cpp:665
 #, kde-format
 msgid "Generate collection reports"
 msgstr ""
 
-#: src/mainwindow.cpp:667
+#: src/mainwindow.cpp:668
 #, kde-format
 msgid "Convert to &Bibliography"
 msgstr ""
 
-#: src/mainwindow.cpp:669
+#: src/mainwindow.cpp:670
 #, kde-format
 msgid "Convert a book collection to a bibliography"
 msgstr ""
 
-#: src/mainwindow.cpp:672
+#: src/mainwindow.cpp:673
 #, kde-format
 msgid "String &Macros..."
 msgstr ""
 
-#: src/mainwindow.cpp:674
+#: src/mainwindow.cpp:675
 #, kde-format
 msgid "Edit the bibtex string macros"
 msgstr ""
 
-#: src/mainwindow.cpp:677
+#: src/mainwindow.cpp:678
 #, kde-format
 msgid "Check for Duplicate Keys..."
 msgstr ""
 
-#: src/mainwindow.cpp:679
+#: src/mainwindow.cpp:680
 #, kde-format
 msgid "Check for duplicate citation keys"
 msgstr ""
 
-#: src/mainwindow.cpp:689
+#: src/mainwindow.cpp:690
 #, kde-format
 msgid "Copy Bibtex to Cli&pboard"
 msgstr ""
 
-#: src/mainwindow.cpp:690
+#: src/mainwindow.cpp:691
 #, kde-format
 msgid "Copy bibtex citations to the clipboard"
 msgstr ""
 
-#: src/mainwindow.cpp:695
+#: src/mainwindow.cpp:696
 #, kde-format
 msgid "Cite Entry in &LyX"
 msgstr ""
 
-#: src/mainwindow.cpp:696
+#: src/mainwindow.cpp:697
 #, kde-format
 msgid "Cite the selected entries in LyX"
 msgstr ""
 
-#: src/mainwindow.cpp:712
+#: src/mainwindow.cpp:713
 #, fuzzy, kde-format
 #| msgid "&Update Entry"
 msgctxt "Update Entry"
 msgid "Update"
 msgstr "&Atnaujinti įrašą"
 
-#: src/mainwindow.cpp:721
+#: src/mainwindow.cpp:722
 #, kde-format
 msgid "All Sources"
 msgstr ""
 
-#: src/mainwindow.cpp:722
+#: src/mainwindow.cpp:723
 #, kde-format
 msgid "Update entry data from all available sources"
 msgstr ""
 
-#: src/mainwindow.cpp:733
+#: src/mainwindow.cpp:734
 #, kde-format
 msgid "Unlock Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:734
+#: src/mainwindow.cpp:735
 #, kde-format
 msgid "Unlock the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:736
+#: src/mainwindow.cpp:737
 #, kde-format
 msgid "Lock Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:737
+#: src/mainwindow.cpp:738
 #, kde-format
 msgid "Lock the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:742
+#: src/mainwindow.cpp:743
 #, kde-format
 msgid "Reset Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:743
+#: src/mainwindow.cpp:744
 #, kde-format
 msgid "Reset the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:746
+#: src/mainwindow.cpp:747
 #, fuzzy, kde-format
 #| msgid "Editor"
 msgid "Entry &Editor"
 msgstr "Redaktorius"
 
-#: src/mainwindow.cpp:748
+#: src/mainwindow.cpp:749
 #, kde-format
 msgid "Enable/disable the editor"
 msgstr ""
 
-#: src/mainwindow.cpp:757
+#: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
 msgstr ""
 
-#: src/mainwindow.cpp:774
+#: src/mainwindow.cpp:775
 #, kde-format
 msgid "Change Grouping"
 msgstr ""
 
-#: src/mainwindow.cpp:777
+#: src/mainwindow.cpp:778
 #, kde-format
 msgid "&Group Selection"
 msgstr ""
 
-#: src/mainwindow.cpp:778
+#: src/mainwindow.cpp:779
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr ""
 
-#: src/mainwindow.cpp:792
+#: src/mainwindow.cpp:793
 #, kde-format
 msgid "Filter here..."
 msgstr ""
 
-#: src/mainwindow.cpp:857 src/mainwindow.cpp:860
+#: src/mainwindow.cpp:858 src/mainwindow.cpp:861
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
 "qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:866
+#: src/mainwindow.cpp:867
 #, fuzzy, kde-format
 #| msgid "&Collection"
 msgid "Collection View"
 msgstr "&Fonoteka"
 
-#: src/mainwindow.cpp:873
+#: src/mainwindow.cpp:874
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:890
+#: src/mainwindow.cpp:891
 #, fuzzy, kde-format
 #| msgctxt "Group View XSL Template"
 #| msgid "Group View"
 msgid "Group View"
 msgstr "Grupės rodinys"
 
-#: src/mainwindow.cpp:899
+#: src/mainwindow.cpp:900
 #, kde-format
 msgid "Groups"
 msgstr "Grupės"
 
-#: src/mainwindow.cpp:900
+#: src/mainwindow.cpp:901
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:977
+#: src/mainwindow.cpp:978
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr ""
 
-#: src/mainwindow.cpp:979
+#: src/mainwindow.cpp:980
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6117,7 +6118,7 @@ msgid ""
 "Internet sources.</h3>"
 msgstr ""
 
-#: src/mainwindow.cpp:1178
+#: src/mainwindow.cpp:1179
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6126,22 +6127,22 @@ msgstr ""
 "Dabartinis failas buvo pakeistas.\n"
 "Ar norite jį įrašyti?"
 
-#: src/mainwindow.cpp:1234 src/mainwindow.cpp:1268
+#: src/mainwindow.cpp:1235 src/mainwindow.cpp:1269
 #, fuzzy, kde-format
 msgid "Creating new collection..."
 msgstr "Kurti naują rinkinį"
 
-#: src/mainwindow.cpp:1289 src/mainwindow.cpp:1313 src/mainwindow.cpp:1331
+#: src/mainwindow.cpp:1290 src/mainwindow.cpp:1314 src/mainwindow.cpp:1332
 #, kde-format
 msgid "Opening file..."
 msgstr "Atveriamas failas..."
 
-#: src/mainwindow.cpp:1300
+#: src/mainwindow.cpp:1301
 #, kde-format
 msgid "Open File"
 msgstr "Atverti failą"
 
-#: src/mainwindow.cpp:1422
+#: src/mainwindow.cpp:1423
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6150,59 +6151,59 @@ msgid ""
 "changed in the configuration dialog.</p></qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:1427
+#: src/mainwindow.cpp:1428
 #, kde-format
 msgid "Save Images Separately"
 msgstr ""
 
-#: src/mainwindow.cpp:1428
+#: src/mainwindow.cpp:1429
 #, kde-format
 msgid "Save Images in File"
 msgstr ""
 
-#: src/mainwindow.cpp:1468
+#: src/mainwindow.cpp:1469
 #, fuzzy, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Failas įrašomas nauju pavadinimu..."
 
-#: src/mainwindow.cpp:1477
+#: src/mainwindow.cpp:1478
 #, kde-format
 msgid "Save As"
 msgstr "Įrašyti kaip"
 
-#: src/mainwindow.cpp:1543
+#: src/mainwindow.cpp:1544
 #, kde-format
 msgid "Printing..."
 msgstr "Spausdinama..."
 
-#: src/mainwindow.cpp:1547
+#: src/mainwindow.cpp:1548
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
 
-#: src/mainwindow.cpp:1570
+#: src/mainwindow.cpp:1571
 #, kde-format
 msgid "Exiting..."
 msgstr "Išeinama..."
 
-#: src/mainwindow.cpp:1672
+#: src/mainwindow.cpp:1673
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr ""
 
-#: src/mainwindow.cpp:1675
+#: src/mainwindow.cpp:1676
 #, fuzzy, kde-format
 msgid "(%1 filtered)"
 msgstr "Atfiltruota"
 
-#: src/mainwindow.cpp:1678
+#: src/mainwindow.cpp:1679
 #, fuzzy, kde-format
 msgid "(%1 selected)"
 msgstr "pažymėtas"
 
-#: src/mainwindow.cpp:1817 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1818 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:257
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6210,95 +6211,95 @@ msgstr "pažymėtas"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr ""
 
-#: src/mainwindow.cpp:1949
+#: src/mainwindow.cpp:1936
 #, kde-format
 msgid "Importing data..."
 msgstr "Importuojami duomenys..."
 
-#: src/mainwindow.cpp:1960
+#: src/mainwindow.cpp:1947
 #, kde-format
 msgid "Import File"
 msgstr "Importuoti failą"
 
-#: src/mainwindow.cpp:1973
+#: src/mainwindow.cpp:1960
 #, kde-format
 msgid "Import Directory"
 msgstr "Importuoti aplanką"
 
-#: src/mainwindow.cpp:1997
+#: src/mainwindow.cpp:1984
 #, kde-format
 msgid "Exporting data..."
 msgstr "Eksportuojami duomenys..."
 
-#: src/mainwindow.cpp:2020
+#: src/mainwindow.cpp:2007
 #, kde-format
 msgid "Export As"
 msgstr "Eksportuoti kaip"
 
-#: src/mainwindow.cpp:2048
+#: src/mainwindow.cpp:2035
 #, kde-format
 msgid "String Macros"
 msgstr ""
 
-#: src/mainwindow.cpp:2049
+#: src/mainwindow.cpp:2036
 #, fuzzy, kde-format
 msgid "Macro"
 msgstr "Makrokomanda"
 
-#: src/mainwindow.cpp:2049
+#: src/mainwindow.cpp:2036
 #, fuzzy, kde-format
 msgid "String"
 msgstr "Eilutė"
 
-#: src/mainwindow.cpp:2135
+#: src/mainwindow.cpp:2122
 #, kde-format
 msgid "Creating citations..."
 msgstr ""
 
-#: src/mainwindow.cpp:2245
+#: src/mainwindow.cpp:2232
 #, kde-format
 msgid "Filters"
 msgstr "Filtrai"
 
-#: src/mainwindow.cpp:2246
+#: src/mainwindow.cpp:2233
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2269
+#: src/mainwindow.cpp:2256
 #, kde-format
 msgid "Loans"
 msgstr ""
 
-#: src/mainwindow.cpp:2270
+#: src/mainwindow.cpp:2257
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2357
+#: src/mainwindow.cpp:2344
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
 "be saved and the images will be transferred to the new location."
 msgstr ""
 
-#: src/mainwindow.cpp:2398
+#: src/mainwindow.cpp:2385
 #, kde-format
 msgid "Update entry data from %1"
 msgstr ""
 
-#: src/mainwindow.cpp:2417
+#: src/mainwindow.cpp:2404
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr ""
 
-#: src/mainwindow.cpp:2600
+#: src/mainwindow.cpp:2587
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"
@@ -6759,6 +6760,7 @@ msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
 
 #: src/translators/csvimporter.cpp:225
+#: src/translators/filelistingimporter.cpp:179
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr ""
@@ -6850,32 +6852,32 @@ msgstr "Naujas laukas"
 msgid "Discogs Options"
 msgstr "Šrifto parinktys"
 
-#: src/translators/filelistingimporter.cpp:70
+#: src/translators/filelistingimporter.cpp:71
 #, kde-format
 msgid "Scanning files..."
 msgstr "Skanuojami failai..."
 
-#: src/translators/filelistingimporter.cpp:159
+#: src/translators/filelistingimporter.cpp:160
 #, kde-format
 msgid "File Listing Options"
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:162
+#: src/translators/filelistingimporter.cpp:163
 #, kde-format
 msgid "Recursive folder search"
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:163
+#: src/translators/filelistingimporter.cpp:164
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:167
+#: src/translators/filelistingimporter.cpp:168
 #, kde-format
 msgid "Generate file previews"
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:168
+#: src/translators/filelistingimporter.cpp:169
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
