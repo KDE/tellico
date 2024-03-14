@@ -595,7 +595,7 @@ source and <action>update the selected entries</action>.</para>
 </sect2>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
-<sect2>
+<sect2 id="settings-help-menu">
 <title>The Settings and Help Menu</title>
 
 <para>Apart from the common &kde; Settings and Help menus described in the <ulink url="help:/fundamentals/menus.html">Menu</ulink>
@@ -656,7 +656,6 @@ chapter of the &kde; Fundamentals documentation &tellico; has these application 
 </listitem>
 </varlistentry>
 
-
 <varlistentry>
 <term>
  <menuchoice>
@@ -668,6 +667,19 @@ chapter of the &kde; Fundamentals documentation &tellico; has these application 
 <listitem>
 <para>This command <action>resets the layout</action> to the default view, which may be helpful if the various views become hidden or collapsed.</para>
 </listitem>
+</varlistentry>
+
+<varlistentry>
+  <term>
+    <menuchoice>
+      <guimenu>Help</guimenu>
+      <guimenuitem>Show Log</guimenuitem>
+    </menuchoice>
+  </term>
+
+  <listitem>
+    <para>When the <userinput>tellico --log</userinput> option is used, this command shows the diagnostic log.</para>
+  </listitem>
 </varlistentry>
 
 </variablelist>

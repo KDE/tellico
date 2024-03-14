@@ -5,7 +5,7 @@
 <title>Command Line Options</title>
 
 <para>
-When running &appname; from the command line, there are several options for opening data files. They may be seen by running <userinput>tellico --help</userinput>.
+When running &appname; from the command line, there are several options for opening data files. They may be seen by running <userinput>tellico --help</userinput>. Diagnostic logging can also be enabled, which will make a <link linkend="settings-help-menu">menu item</link> to show the diagnostic log. The <userinput>--logfile</userinput> option redirects the log to a file.
 </para>
 
 <programlisting>
@@ -19,6 +19,8 @@ Options:
   --mods                    Import &lt;filename&gt; as a MODS file
   --ris                     Import &lt;filename&gt; as a RIS file
   --pdf                     Import &lt;filename&gt; as a PDF file
+  --log                     Log diagnostic output
+  --logfile &lt;logfile&gt;       Write log output to &lt;filename&gt;
 
 Arguments:
   [filename]                File to open
