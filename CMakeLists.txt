@@ -17,7 +17,7 @@ if(QT_MAJOR_VERSION STREQUAL "6")
   set(QT_MIN_VERSION "6.4.0")
   set(KF_MIN_VERSION "5.240.0")
 else()
-  set(QT_MIN_VERSION "5.10.0")
+  set(QT_MIN_VERSION "5.12.0")
 endif()
 
 # https://gitlab.kitware.com/cmake/community/wikis/doc/cmake/Useful-Variables

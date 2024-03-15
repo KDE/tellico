@@ -38,6 +38,10 @@ public:
   virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) Q_DECL_OVERRIDE;
 
 private:
+  bool readEpub(Data::EntryPtr entry, const KFileItem& fileItem);
+  bool readMeta(Data::EntryPtr entry, const KFileItem& fileItem);
+  void setCover(Data::EntryPtr entry, const KFileItem& fileItem);
+
   class Private;
   friend class Private;
   std::unique_ptr<Private> d;

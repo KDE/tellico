@@ -154,10 +154,13 @@ void FileListingTest::testBook() {
   auto e0 = coll->entries().at(2);
   QCOMPARE(e0->field("url"), url.url());
   QCOMPARE(e0->field("title"), QStringLiteral("Blank Book"));
-  QCOMPARE(e0->field("author"), QStringLiteral("Jason Hibbs"));
+  QCOMPARE(e0->field("author"), QStringLiteral("Jason Hibbs; Robby Stephenson"));
   QCOMPARE(e0->field("publisher"), QStringLiteral("Jason Hibbs"));
   QCOMPARE(e0->field("pub_year"), QStringLiteral("2012"));
-//  QCOMPARE(e0->field("isbn"), QStringLiteral("0136091814"));
+  QCOMPARE(e0->field("genre"), QStringLiteral("Science Fiction"));
+  QCOMPARE(e0->field("isbn"), QStringLiteral("0136091814"));
+  QVERIFY(!e0->field("plot").isEmpty());
+  QCOMPARE(e0->field("cover"), QLatin1String("20e52204b48e0f0651290866d9e75a91.jpg"));
 }
 
 void FileListingTest::testVideo() {

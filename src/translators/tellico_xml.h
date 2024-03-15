@@ -45,6 +45,7 @@ namespace Tellico {
     extern const QString nsZingDiag;
     extern const QString nsAtom;
     extern const QString nsOpenSearch;
+    extern const QString nsOpenPackageFormat;
 
     bool validXMLElementName(const QString& name);
     QString elementName(const QString& name);

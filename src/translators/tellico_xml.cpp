@@ -72,6 +72,7 @@ const QString Tellico::XML::nsZing = QStringLiteral("http://www.loc.gov/zing/srw
 const QString Tellico::XML::nsZingDiag = QStringLiteral("http://www.loc.gov/zing/srw/diagnostic/");
 const QString Tellico::XML::nsAtom = QStringLiteral("http://www.w3.org/2005/Atom");
 const QString Tellico::XML::nsOpenSearch = QStringLiteral("http://a9.com/-/spec/opensearch/1.1/");
+const QString Tellico::XML::nsOpenPackageFormat = QStringLiteral("http://www.idpf.org/2007/opf");
 
 QString Tellico::XML::pubTellico(int version) {
  return QStringLiteral("-//Robby Stephenson/DTD Tellico V%1.0//EN").arg(version);
@@ -123,7 +124,6 @@ QByteArray Tellico::XML::recoverFromBadXMLName(const QByteArray& data_) {
   // so don't worry about attribute order within the field elements
   const int fieldsEnd = data_.indexOf("</fields>");
   if(fieldsEnd == -1) {
-//    myDebug() << "no fields end";
     return data_;
   }
 

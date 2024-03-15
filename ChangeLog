@@ -1,3 +1,7 @@
+2024-03-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Added reader for importing book and video collections from file metadata (Bug 214606).
+
 2024-03-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Enabled building with Qt6/KF6.
