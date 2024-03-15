@@ -28,7 +28,6 @@
 #include "../utils/isbnvalidator.h"
 #include "../utils/lccnvalidator.h"
 #include "../utils/guiproxy.h"
-#include "../utils/string_utils.h"
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
