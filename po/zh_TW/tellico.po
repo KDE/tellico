@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-14 02:00+0000\n"
+"POT-Creation-Date: 2024-03-15 01:59+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -2855,23 +2855,23 @@ msgstr ""
 "以下的項目已被借出，但 Tellico 目前不支援同一項目被借出多次的功能。它們會在借"
 "出清單中被移除。"
 
-#: src/core/filehandler.cpp:155
+#: src/core/filehandler.cpp:156
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "XML 剖析時發生錯誤：第 %1 行，第 %2 欄"
 
-#: src/core/filehandler.cpp:157
+#: src/core/filehandler.cpp:158
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Qt 傳來的錯誤訊息為："
 
-#: src/core/filehandler.cpp:189
+#: src/core/filehandler.cpp:190
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "名為「%1」的檔案已經存在。您確定要覆寫它嗎？"
 
-#: src/core/filehandler.cpp:192
+#: src/core/filehandler.cpp:193
 #, kde-format
 msgid "Overwrite File?"
 msgstr "要覆寫檔案嗎？"

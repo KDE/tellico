@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-14 02:00+0000\n"
-"PO-Revision-Date: 2024-01-03 09:47+0100\n"
+"POT-Creation-Date: 2024-03-15 01:59+0000\n"
+"PO-Revision-Date: 2024-01-04 09:11+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
@@ -2924,18 +2924,18 @@ msgstr ""
 "actuellement pas en charge le prêt multiple d'articles. Ces articles vont "
 "être supprimés de la liste des articles à prêter."
 
-#: src/core/filehandler.cpp:155
+#: src/core/filehandler.cpp:156
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Une erreur d'analyse XML est survenue ligne %1, colonne %2."
 
-#: src/core/filehandler.cpp:157
+#: src/core/filehandler.cpp:158
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Le message d'erreur de Qt est :"
 
 # unreviewed-context
-#: src/core/filehandler.cpp:189
+#: src/core/filehandler.cpp:190
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
@@ -2943,7 +2943,7 @@ msgstr ""
 "Un fichier nommé « %1 » existe déjà. Voulez-vous vraiment le remplacer ?"
 
 # unreviewed-context
-#: src/core/filehandler.cpp:192
+#: src/core/filehandler.cpp:193
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Remplacer le fichier ?"
@@ -5344,10 +5344,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - un gestionnaire de collections libre et simple"
 
 #: src/main.cpp:130
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2023, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr "(c) 2001 - 2023, Robby Stephenson"
+msgstr "(c) 2001 - 2024, Robby Stephenson"
 
 #: src/main.cpp:134
 #, kde-format

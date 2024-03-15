@@ -254,12 +254,6 @@
 ></listitem>
 <listitem
 ><simpara
-><link linkend="allocine"
->AlloCiné</link
->,</simpara
-></listitem>
-<listitem
-><simpara
 ><link linkend="tmdb"
 >TheMovieDB.org</link
 >,</simpara
@@ -612,15 +606,6 @@
 ><ulink url="http://omdbapi.com"
 >La base de dades oberta de pel·lícules (OMDBAPI.com)</ulink
 > és un servei web gratuït per a obtenir informació sobre les pel·lícules. </para>
-</sect3>
-
-<sect3 id="allocine">
-<title
->AlloCiné</title>
-<para
-><ulink url="http://allocine.fr"
->AlloCiné</ulink
-> és un servei en línia d'informació de pel·lícules, amb seu a França. </para>
 </sect3>
 
 <sect3 id="filmaffinity">

@@ -78,11 +78,13 @@
 <para
 >Puede usar el  <interface
 >Filtro rápido</interface
-> de la barra de herramientas para limitar rápidamente las entradas visibles a solo las que contengan la palabra que escriba. El filtro también es útil cuando quiere encontrar rápidamente una entrada. Puede teclear el título o cualquier otra palabra única que identifique la entrada y la <link linkend="detailed-view"
+> de la barra de herramientas para limitar las entradas visibles. El filtro también es útil cuando quiera encontrar rápidamente una entrada. Puede teclear el título o cualquier otra palabra única que identifique la entrada y la <link linkend="detailed-view"
 ><interface
 >Vista de columnas</interface
-> </link
-> mostrará solo las entradas que coincidan con el filtro. La barra de estado muestra cuántas entradas hay en la colección, y cuántas están siendo filtradas actualmente. </para>
+></link
+> mostrará solo las entradas que coincidan con el filtro. Un filtrado más complejo puede usar nombres de campos directamente, como <emphasis
+>autor=stephenson</emphasis
+>. La barra de estado muestra el número de entradas que hay en la colección y cuántas están siendo filtradas actualmente. </para>
 
 </sect1>
 

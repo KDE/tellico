@@ -876,7 +876,7 @@ or menu bars.
 </sect2>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
-<sect2>
+<sect2 id="settings-help-menu">
 <title
 >Los menús Preferencias y Ayuda</title>
 
@@ -963,7 +963,6 @@ or menu bars.
 </listitem>
 </varlistentry>
 
-
 <varlistentry>
 <term>
  <menuchoice
@@ -980,6 +979,24 @@ or menu bars.
 >reinicia el esquema</action
 > a la vista predeterminada, lo que puede resultar de utilidad cuando algunas vistas se han ocultado o se han contraído.</para>
 </listitem>
+</varlistentry>
+
+<varlistentry>
+  <term>
+    <menuchoice
+><guimenu
+>Help</guimenu
+> <guimenuitem
+>Show Log</guimenuitem
+> </menuchoice>
+  </term>
+
+  <listitem>
+    <para
+>When the <userinput
+>tellico --log</userinput
+> option is used, this command shows the diagnostic log.</para>
+  </listitem>
 </varlistentry>
 
 </variablelist>

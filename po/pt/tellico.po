@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-14 02:00+0000\n"
+"POT-Creation-Date: 2024-03-15 01:59+0000\n"
 "PO-Revision-Date: 2023-07-08 12:53+0100\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -2933,17 +2933,17 @@ msgstr ""
 "empréstimo múltiplo de artigos, de momento eles serão removidos da lista de "
 "artigos a serem emprestados."
 
-#: src/core/filehandler.cpp:155
+#: src/core/filehandler.cpp:156
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Apareceu um erro de análise do XML na linha %1, coluna %2."
 
-#: src/core/filehandler.cpp:157
+#: src/core/filehandler.cpp:158
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "A mensagem de erro de Qt é:"
 
-#: src/core/filehandler.cpp:189
+#: src/core/filehandler.cpp:190
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
@@ -2951,7 +2951,7 @@ msgstr ""
 "Já existe um ficheiro com o nome \"%1\". Tem a certeza que o deseja "
 "substituir?"
 
-#: src/core/filehandler.cpp:192
+#: src/core/filehandler.cpp:193
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Sobrepor o Ficheiro?"

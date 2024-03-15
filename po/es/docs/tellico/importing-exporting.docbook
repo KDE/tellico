@@ -366,11 +366,17 @@
 >Importar listados de archivos</title>
 
 <para
->La mejor manera de crear un <link linkend="file-catalog"
+>&tellico; puede explorar carpetas para importar información de archivos, principalmente para crear una colección de <link linkend="file-catalog"
 >Catálogo de archivos</link
-> es importar los contenidos de una carpeta. La carpeta puede examinarse recursivamente para añadir todos los archivos encontrados dentro. El importador es más útil para listados de copias de respaldo y para catalogar archivos de medios, como listados de &CD; o <acronym
+>. La carpeta se puede examinar recursivamente para añadir todos los archivos que se encuentren en su interior. El importador es más útil para listados de copias de seguridad y para catalogar archivos multimedia, como listados de &CD; o <acronym
 >DVD</acronym
->. Además, se puede generar las vistas previas de los contenidos del archivo, aunque puede llevar algún tiempo leer un gran número de archivos. Las vistas previas son las mismas que las que se muestran en el gestor de archivos de &kde;. </para>
+>. Además, puede generar las vistas previas del contenido de los archivos. Las vistas previas de los archivos son las mismas que se muestran en el gestor de archivos de &kde;. </para>
+
+<para
+>Las carpetas con archivos de libros electrónicos y de vídeo también se pueden importar como colecciones de libros y de vídeos. Los metadatos de los archivos se pueden leer y, para los archivos de vídeo, cualquier archivo <literal role="extension"
+>nfo</literal
+> que exista se usa para completar la información de las entradas de vídeo. </para>
+
 </sect2>
 
 <sect2 id="importing-xslt">

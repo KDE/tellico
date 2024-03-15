@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-14 02:00+0000\n"
-"PO-Revision-Date: 2024-01-02 08:27+0200\n"
+"POT-Creation-Date: 2024-03-15 01:59+0000\n"
+"PO-Revision-Date: 2024-03-14 12:07+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -2889,24 +2889,24 @@ msgstr ""
 "préstec d'un element múltiples vegades. Seran eliminats de la llista "
 "d'elements que es presten."
 
-#: src/core/filehandler.cpp:155
+#: src/core/filehandler.cpp:156
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr ""
 "S'ha produït un error en l'anàlisi sintàctica XML en la línia %1, columna %2."
 
-#: src/core/filehandler.cpp:157
+#: src/core/filehandler.cpp:158
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "El missatge d'error de les Qt és:"
 
-#: src/core/filehandler.cpp:189
+#: src/core/filehandler.cpp:190
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Ja existix un fitxer anomenat «%1». Segur que el voleu sobreescriure?"
 
-#: src/core/filehandler.cpp:192
+#: src/core/filehandler.cpp:193
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Voleu sobreescriure el fitxer?"
@@ -5270,10 +5270,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - programari de gestió de col·leccions, lliure i senzill"
 
 #: src/main.cpp:130
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2023, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr "(c) 2001-2023, Robby Stephenson"
+msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:134
 #, kde-format
@@ -7390,62 +7389,3 @@ msgstr "Busca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Buit)"
-
-#~ msgid "Classification"
-#~ msgstr "Classificació"
-
-#~ msgid "Other People"
-#~ msgstr "Altres persones"
-
-#~ msgid "Features"
-#~ msgstr "Característiques"
-
-#~ msgid "Tellico is unable to open the file - %1."
-#~ msgstr "Tellico no pot carregar el fitxer - %1."
-
-#~ msgid "Tellico is unable to load the file - %1."
-#~ msgstr "Tellico no pot carregar el fitxer - %1."
-
-#~ msgid "Tellico is unable to write the file - %1."
-#~ msgstr "Tellico no pot escriure el fitxer - %1."
-
-#~ msgid "Tellico is unable to upload the file - %1."
-#~ msgstr "Tellico no pot pujar el fitxer - %1."
-
-#~ msgid ""
-#~ "Only collections with the same type of entries as the current one can be "
-#~ "appended. No changes are being made to the current collection."
-#~ msgstr ""
-#~ "Només es poden annexar col·leccions amb el mateix tipus d'entrades a les "
-#~ "de l'actual. No s'ha fet cap canvi a la col·lecció actual."
-
-#~ msgid ""
-#~ "Only collections with the same type of entries as the current one can be "
-#~ "merged. No changes are being made to the current collection."
-#~ msgstr ""
-#~ "Només es poden fusionar col·leccions amb el mateix tipus d'entrades a les "
-#~ "de l'actual. No s'ha fet cap canvi a la col·lecció actual."
-
-#~ msgid "Tellico is unable to load an image from the file - %1."
-#~ msgstr "Tellico no pot carregar una imatge des del fitxer - %1."
-
-#~ msgid "Untitled"
-#~ msgstr "Sense títol"
-
-#~ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-#~ msgstr "Esta informació l'ha proporcionat debades <a href=\"%1\">%2</a>."
-
-#~ msgid "Allocine Link"
-#~ msgstr "Enllaç cap a Allocine"
-
-#~ msgid "Distributor"
-#~ msgstr "Distribuïdor"
-
-#~ msgid "AnimeNfo Link"
-#~ msgstr "Enllaç cap a AnimeNfo"
-
-#~ msgid "AnimeNfo Rating"
-#~ msgstr "Puntuació d'AnimeNfo"

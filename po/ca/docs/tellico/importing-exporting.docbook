@@ -364,11 +364,17 @@
 >Importar llistes de fitxers</title>
 
 <para
->La millor manera de crear un <link linkend="file-catalog"
+>El &tellico; pot escanejar carpetes per a importar informació de fitxers, principalment per a crear una col·lecció de <link linkend="file-catalog"
 >catàleg de fitxers</link
-> és importar el contingut d'una carpeta. La carpeta es pot cercar de manera recursiva, per a afegir tots els fitxers que es trobin al seu interior. Aquest importador és més útil per a les llistes de còpies de seguretat i suports de catalogació, com llistats de &CD; o <acronym
+>. La carpeta es pot cercar recursivament, per a afegir tots els fitxers trobats. Aquest importador és més útil per a llistes de còpies de seguretat i catalogació d'elements multimèdia, com llistes de &CD; o <acronym
 >DVD</acronym
->. A més, es poden generar les vistes prèvies de les imatges contingudes al fitxer, tot i que podria portar el seu temps llegir un gran nombre de fitxers. Les vistes prèvies de fitxers són les mateixes que es mostren al gestor de fitxers del &kde;. </para>
+>. A més, es poden generar vistes prèvies d'imatges del contingut del fitxer. Les vistes prèvies de fitxer són les mateixes que les que es mostren al gestor de fitxers de &kde;. </para>
+
+<para
+>Les carpetes amb fitxers de llibres electrònics i fitxers de vídeo també es poden importar com a col·leccions de llibres i vídeos. Es poden llegir les metadades dels fitxers, i per als fitxers de vídeo, qualsevol fitxer <literal role="extension"
+>nfo</literal
+> existent s'utilitzarà per completar la informació de les entrades dels vídeos. </para>
+
 </sect2>
 
 <sect2 id="importing-xslt">

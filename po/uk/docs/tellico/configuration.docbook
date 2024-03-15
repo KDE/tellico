@@ -246,12 +246,6 @@
 ></listitem>
 <listitem
 ><simpara
-><link linkend="allocine"
->AlloCiné</link
->,</simpara
-></listitem>
-<listitem
-><simpara
 ><link linkend="tmdb"
 >TheMovieDB.org</link
 >,</simpara
@@ -604,15 +598,6 @@
 ><ulink url="http://omdbapi.com"
 >Open Movie Database (OMDBAPI.com)</ulink
 > — вільна служба для отримання даних щодо фільмів. </para>
-</sect3>
-
-<sect3 id="allocine">
-<title
->AlloCiné</title>
-<para
-><ulink url="http://allocine.fr"
->AlloCiné</ulink
-> — інформаційна інтернет-служба, дані якої стосуються Франції. </para>
 </sect3>
 
 <sect3 id="filmaffinity">

@@ -7,24 +7,30 @@
 >Opciones de la línea de órdenes</title>
 
 <para
->Cuando ejecute &appname; desde la línea de órdenes, dispondrá de muchas opciones para abrir archivos de datos. Puede consultarlas ejecutando <userinput
+>When running &appname; from the command line, there are several options for opening data files. They may be seen by running <userinput
 >tellico --help</userinput
->. </para>
+>. Diagnostic logging can also be enabled, which will make a <link linkend="settings-help-menu"
+>menu item</link
+> to show the diagnostic log. The <userinput
+>--logfile</userinput
+> option redirects the log to a file. </para>
 
 <programlisting
->Uso: tellico [opciones] [archivo]
+>Usage: tellico [options] [filename]
 
-Tellico - software de gestión de colecciones, libre y sencillo
+Tellico - collection management software, free and simple
 
-Opciones:
-  --nofile                  No reabrir el último archivo abierto
-  --bibtex                  Importar &lt;archivo&gt; como archivo bibtex
-  --mods                    Importar &lt;archivo&gt; como archivo MODS
-  --ris                     Importar &lt;archivo&gt; como archivo RIS
-  --pdf                     Importar &lt;archivo&gt; como archivo PDF
+Options:
+  --nofile                  Do not reopen the last open file
+  --bibtex                  Import &lt;filename&gt; as a bibtex file
+  --mods                    Import &lt;filename&gt; as a MODS file
+  --ris                     Import &lt;filename&gt; as a RIS file
+  --pdf                     Import &lt;filename&gt; as a PDF file
+  --log                     Log diagnostic output
+  --logfile &lt;logfile&gt;       Write log output to &lt;filename&gt;
 
-Argumentos:
-  [archivo]                  Archivo a abrir
+Arguments:
+  [filename]                File to open
 </programlisting>
 
 </sect1>
@@ -79,13 +85,20 @@ bool showEntry(int id)
 </programlisting>
 
 <para
->Para las cuatro órdenes de importación, el primer argumento es el archivo a importar y el segundo la acción. Dispone de tres acciones: <emphasis
+>For the four import commands, the first argument is the file to import, and the second is the import action. Three actions are available: <emphasis
 >replace</emphasis
 >, <emphasis
 >append</emphasis
 >, and <emphasis
 >merge</emphasis
->. Four file formats are supported for importing: Tellico &XML; files, Bibtex files, MODS files, and RIS files. </para>
+>. Four file formats are supported for importing: Tellico &XML; files, Bibtex files, MODS files, and RIS files. Metadata from <link linkend="importing-pdf"
+>&PDF;</link
+> files can also be imported. </para>
+
+<para
+>For any of the commands to export text, a file name of <filename
+>--</filename
+> will pipe to the standard output. </para>
 
 <para
 >La colección actualmente abierta en &appname; se puede exportar a un archivo, ya sea en formato &XML; de Tellico, en formato ZIP de Tellico, Bibtex, &HTML; o en valores separados por comas (CSV). Las órdenes de exportación tienen un argumento adicional para indicar si la colección se debe limitar al filtro actual o no. </para>

@@ -78,11 +78,13 @@
 <para
 >Podeu utilitzar el <interface
 >Filtre ràpid</interface
-> a la barra d'eines per a limitar ràpidament les entrades visibles a aquelles que contenen la paraula escrita. El filtre també és útil quan voleu trobar ràpidament una entrada. Podeu escriure el títol o alguna altra paraula única que identifiqui l'entrada i la <link linkend="detailed-view"
+> a la barra d'eines per a limitar les entrades visibles. El filtre també és útil quan voleu trobar ràpidament una entrada. Podeu escriure el títol o alguna altra paraula única que identifiqui l'entrada i la <link linkend="detailed-view"
 ><interface
 >Vista de columna</interface
 ></link
-> sols mostrarà les entrades que coincideixin amb el filtre. La barra d'estat mostra quantes entrades hi ha a la col·lecció, i quantes s'estan filtrant. </para>
+> sols mostrarà les entrades que coincideixin amb el filtre. Un filtratge més complex pot utilitzar directament noms de camps, com ara <emphasis
+>author=stephenson</emphasis
+>. La barra d'estat mostra quantes entrades hi ha a la col·lecció, i quantes s'estan filtrant. </para>
 
 </sect1>
 

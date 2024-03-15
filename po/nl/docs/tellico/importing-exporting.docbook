@@ -367,11 +367,17 @@
 >Lijsten met bestanden importeren</title>
 
 <para
->De beste manier om een <link linkend="file-catalog"
+>&tellico; kan folders scannen om bestandsinformatie te importeren, primair een verzameling <link linkend="file-catalog"
 >Bestandencatalogus</link
-> te maken is om de inhoud van een map te importeren. De map kan recursief doorzocht worden om alle gevonden bestanden erin toe te voegen. Dit importprogramma is het meest nuttig voor backuplijsten en mediacatalogussen, zoals &CD; of <acronym
+> te maken. De map kan recursief doorzocht worden om alle gevonden bestanden erin toe te voegen. Dit importprogramma is het meest nuttig voor backuplijsten en mediacatalogussen, zoals &CD; of <acronym
 >DVD</acronym
-> lijsten. Bovendien kunnen afbeeldingvoorbeelden van de inhoud van bestanden gegenereerd worden, hoewel het enige tijd kan kosten om een groot aantal bestanden te lezen. De bestandsvoorbeelden zijn hetzelfde als die getoond in de &kde; bestandenbeheerder. </para>
+> lijsten. Bovendien kunnen afbeeldingsvoorbeelden van de inhoud van bestanden gegenereerd worden. De bestandsvoorbeelden zijn hetzelfde als die getoond in de &kde; bestandenbeheerder. </para>
+
+<para
+>Mappen met e-book bestanden en videobestanden kunnen ook geïmporteerd worden als boek- en videoverzamelingen. Metagegevens van bestanden kunnen gelezen worden en voor videobestanden, worden bestaande <literal role="extension"
+>nfo</literal
+> bestanden gebruikt om de informatie van het video-item te completeren. </para>
+
 </sect2>
 
 <sect2 id="importing-xslt">

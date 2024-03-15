@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-14 02:00+0000\n"
+"POT-Creation-Date: 2024-03-15 01:59+0000\n"
 "PO-Revision-Date: 2015-12-29 21:13+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -2820,23 +2820,23 @@ msgid ""
 "of items to lend."
 msgstr ""
 
-#: src/core/filehandler.cpp:155
+#: src/core/filehandler.cpp:156
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr ""
 
-#: src/core/filehandler.cpp:157
+#: src/core/filehandler.cpp:158
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr ""
 
-#: src/core/filehandler.cpp:189
+#: src/core/filehandler.cpp:190
 #, fuzzy, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Failas pavadinimu „%1“ jau yra. Ar norite jį perrašyti?"
 
-#: src/core/filehandler.cpp:192
+#: src/core/filehandler.cpp:193
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Perrašyti failą?"

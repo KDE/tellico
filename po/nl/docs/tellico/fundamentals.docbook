@@ -78,11 +78,13 @@
 <para
 >U kunt het veld <interface
 >Snelfilter</interface
-> in de werkbalk gebruiken om snel het aantal zichtbare items te beperken tot diegenen die het woord dat u invoerde bevat. Het filter is ook nuttig wanneer u snel een item wilt vinden. U kunt de titel invoeren of een ander uniek woord dat het item identificeert en de <link linkend="detailed-view"
+> in de werkbalk gebruiken om het aantal zichtbare items te beperken. Het filter is ook nuttig wanneer u snel een item wilt vinden. U kunt de titel invoeren of een ander uniek woord dat het item identificeert en de <link linkend="detailed-view"
 ><interface
 >Kolomweergave</interface
 ></link
-> zal alleen de items tonen die overeenkomen met het filter. De statusbalk toont u hoeveel items er in de verzameling zijn en hoeveel er nu worden gefilterd. </para>
+> zal alleen de items tonen die overeenkomen met het filter. Meer complexe filtering kan direct veldnamen gebruiken, zoals <emphasis
+>author=stephenson</emphasis
+>. De statusbalk toont u hoeveel items er in de verzameling zijn en hoeveel er nu worden gefilterd. </para>
 
 </sect1>
 
