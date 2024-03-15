@@ -348,7 +348,7 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
       break;
     case FrontCoverField:
       field = new Field(QStringLiteral("cover"), i18n("Front Cover"), Field::Image);
-      break;      
+      break;
   }
   Q_ASSERT(field);
   return field;
