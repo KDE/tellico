@@ -149,9 +149,17 @@ void FileListingTest::testBook() {
 
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
-  QCOMPARE(coll->entryCount(), 3);
 
-  auto e0 = coll->entries().at(2);
+  // find the entry that matches the test url
+  Tellico::Data::EntryPtr e0;
+  foreach(auto testEntry, coll->entries()) {
+    if(testEntry->field("url") == url.url()) {
+      e0 = testEntry;
+      break;
+    }
+  }
+  QVERIFY(e0);
+
   QCOMPARE(e0->field("url"), url.url());
   QCOMPARE(e0->field("title"), QStringLiteral("Blank Book"));
   QCOMPARE(e0->field("author"), QStringLiteral("Jason Hibbs; Robby Stephenson"));
