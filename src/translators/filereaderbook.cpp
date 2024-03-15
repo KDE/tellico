@@ -171,7 +171,8 @@ bool FileReaderBook::readEpub(Data::EntryPtr entry, const KFileItem& item) {
         isbn = elemText.mid(9);
       } else {
         auto elem = child.toElement();
-        if(elem.attributeNS(XML::nsOpenPackageFormat, QLatin1String("scheme")) == QLatin1String("ISBN")) {
+        if(elem.attributeNS(XML::nsOpenPackageFormat, QLatin1String("scheme")) == QLatin1String("ISBN") ||
+           elem.attributeNS(XML::nsOpenPackageFormat, QLatin1String("id")) == QLatin1String("ISBN")) {
           isbn = elemText;
         }
       }
