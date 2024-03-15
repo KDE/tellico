@@ -141,6 +141,25 @@ void FileListingTest::testStat() {
   QVERIFY(!Tellico::NetAccess::exists(remote, false, nullptr));
 }
 
+void FileListingTest::testBook() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.epub"));
+  Tellico::Import::FileListingImporter importer(url.adjusted(QUrl::RemoveFilename));
+  importer.setCollectionType(Tellico::Data::Collection::Book);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
+  QCOMPARE(coll->entryCount(), 3);
+
+  auto e0 = coll->entries().at(2);
+  QCOMPARE(e0->field("url"), url.url());
+  QCOMPARE(e0->field("title"), QStringLiteral("Blank Book"));
+  QCOMPARE(e0->field("author"), QStringLiteral("Jason Hibbs"));
+  QCOMPARE(e0->field("publisher"), QStringLiteral("Jason Hibbs"));
+  QCOMPARE(e0->field("pub_year"), QStringLiteral("2012"));
+//  QCOMPARE(e0->field("isbn"), QStringLiteral("0136091814"));
+}
+
 void FileListingTest::testVideo() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test_movie.mpg"));
   Tellico::Import::FileListingImporter importer(url.adjusted(QUrl::RemoveFilename));
