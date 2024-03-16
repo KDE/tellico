@@ -1,3 +1,7 @@
+2024-03-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated FilmAffinity data source.
+
 2024-03-15  Robby Stephenson  <robby@periapsis.org>
 
 	* Added reader for importing book and video collections from file metadata (Bug 214606).
