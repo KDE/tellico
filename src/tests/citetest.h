@@ -35,6 +35,7 @@ private Q_SLOTS:
   void testLyxpipe();
   void testLyxpipeNotExists();
   void testClipboard();
+  void testManager();
 };
 
 #endif

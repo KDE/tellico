@@ -114,3 +114,18 @@ void CiteTest::testClipboard() {
   // read and verify clipboard contents
   QCOMPARE(QApplication::clipboard()->text(), QStringLiteral("\\cite{title1, title2}"));
 }
+
+void CiteTest::testManager() {
+  auto mgr = Tellico::Cite::ActionManager::self();
+  QVERIFY(mgr);
+  // empty list has flse result
+  QCOMPARE(mgr->cite(Tellico::Cite::CiteClipboard, {}), false);
+  QVERIFY(!mgr->hasError());
+
+  Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  coll->addEntries(Tellico::Data::EntryList() << entry1);
+  QCOMPARE(mgr->cite(Tellico::Cite::CiteClipboard, coll->entries()), true);
+  QVERIFY(!mgr->hasError());
+  QVERIFY(mgr->errorString().isEmpty());
+}
