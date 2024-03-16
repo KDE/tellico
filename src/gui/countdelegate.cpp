@@ -91,20 +91,11 @@ void CountDelegate::paint(QPainter* painter_,
   // Squeeze the folder text if it is to big and calculate the rectangles
   // where the text and the count will be drawn to
   QFontMetrics fm(painter_->fontMetrics());
-#if (QT_VERSION < QT_VERSION_CHECK(5, 11, 0))
-  const int countWidth = fm.width(countString);
-  int textWidth = fm.width(text);
-#else
   const int countWidth = fm.horizontalAdvance(countString);
   int textWidth = fm.horizontalAdvance(text);
-#endif
   if(textWidth + countWidth > itemRect.width()) {
     text = fm.elidedText(text, Qt::ElideRight, itemRect.width() - countWidth);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 11, 0))
-    textWidth = fm.width(text);
-#else
     textWidth = fm.horizontalAdvance(text);
-#endif
   }
 
   const int top = itemRect.top() + (itemRect.height() - fm.height()) / 2;

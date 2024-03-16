@@ -234,11 +234,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   hlay->addStretch(10);
 
   // use a constant width for the edit boxes. They're 1 or 2 characters long.
-#if (QT_VERSION < QT_VERSION_CHECK(5, 11, 0))
-  const int editWidth = 4 * m_widget->fontMetrics().width(QLatin1Char('X'));
-#else
   const int editWidth = 4 * m_widget->fontMetrics().horizontalAdvance(QLatin1Char('X'));
-#endif
 
   QHBoxLayout* delimiterLayout = new QHBoxLayout();
   vlay->addLayout(delimiterLayout);
