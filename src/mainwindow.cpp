@@ -1300,7 +1300,6 @@ void MainWindow::slotFileOpen() {
     const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QStringLiteral("kfiledialog:///open")), fileClass);
     QUrl url = QFileDialog::getOpenFileUrl(this, i18n("Open File"), startUrl, filter);
     if(!url.isEmpty() && url.isValid()) {
-      myLog() << "Opening collection file:" << url.toDisplayString(QUrl::PreferLocalFile);
       slotFileOpen(url);
       if(url.isLocalFile()) {
         KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
@@ -1359,6 +1358,7 @@ bool MainWindow::openURL(const QUrl& url_) {
   // try to open document
   GUI::CursorSaver cs(Qt::WaitCursor);
 
+  myLog() << "Opening collection file:" << url_.toDisplayString(QUrl::PreferLocalFile);
   bool success = Data::Document::self()->openDocument(url_);
 
   if(success) {
@@ -2599,7 +2599,10 @@ void MainWindow::showLog() {
 
   auto logFile = Logger::self()->logFile();
   if(!logFile.isEmpty()) {
-    connect(Logger::self(), &Logger::updated, dlg, [logFile, viewer]() {
+    auto timer = new QTimer(dlg);
+    timer->setSingleShot(true);
+    timer->setInterval(1000);
+    timer->callOnTimeout([logFile, viewer]() {
       Logger::self()->flush();
       QFile file(logFile);
       if(file.open(QFile::ReadOnly | QIODevice::Text)) {
@@ -2607,6 +2610,7 @@ void MainWindow::showLog() {
         viewer->setPlainText(in.readAll());
       }
     });
+    connect(Logger::self(), &Logger::updated, timer, QOverload<>::of(&QTimer::start));
     myLog() << "Showing log viewer"; // this triggers the first read of the log file
   }
 
