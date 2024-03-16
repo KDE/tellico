@@ -2597,15 +2597,17 @@ void MainWindow::showLog() {
   connect(buttonBox, &QDialogButtonBox::rejected, dlg, &QDialog::reject);
   layout->addWidget(buttonBox);
 
-  // TODO:: monitor for updates and reload log?
   auto logFile = Logger::self()->logFile();
   if(!logFile.isEmpty()) {
-    Logger::self()->flush();
-    QFile file(logFile);
-    if(file.open(QFile::ReadOnly | QIODevice::Text)) {
-      QTextStream in(&file);
-      viewer->setPlainText(in.readAll());
-    }
+    connect(Logger::self(), &Logger::updated, dlg, [logFile, viewer]() {
+      Logger::self()->flush();
+      QFile file(logFile);
+      if(file.open(QFile::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&file);
+        viewer->setPlainText(in.readAll());
+      }
+    });
+    myLog() << "Showing log viewer"; // this triggers the first read of the log file
   }
 
   dlg->setMinimumSize(800, 600);

@@ -44,6 +44,9 @@ public:
   QString logFile() const;
   void flush();
 
+Q_SIGNALS:
+  void updated();
+
 private:
   explicit Logger(QObject* parent = nullptr);
   virtual ~Logger();
