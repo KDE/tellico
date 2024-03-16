@@ -69,9 +69,8 @@ void FilmasterFetcherTest::testTitle() {
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QCOMPARE(castList.at(0), QStringLiteral("Tom Burlinson::Jim Craig"));
-// 2017-10-01: cover link is now invalid
-//  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-//  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 //   2017-05-01: plot is no longer being returned
 //  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
@@ -104,9 +103,8 @@ void FilmasterFetcherTest::testPerson() {
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QCOMPARE(castList.at(0), QStringLiteral("Tom Burlinson::Jim Craig"));
-// 2017-10-01: cover link is now invalid
-//  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-//  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 //   2017-05-01: plot is no longer being returned
 //  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
@@ -131,9 +129,8 @@ void FilmasterFetcherTest::testKeyword() {
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QCOMPARE(castList.at(0), QStringLiteral("Tom Burlinson::Jim Craig"));
-// 2017-10-01: cover link is now invalid
-//  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
- // QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 //   2017-05-01: plot is no longer being returned
 //  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
