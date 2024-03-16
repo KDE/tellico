@@ -207,9 +207,9 @@ void FilmAffinityFetcher::slotComplete(KJob*) {
   // look for a specific div, with an href and title, sometime uses single-quote, sometimes double-quotes
   QRegularExpression resultRx(QStringLiteral("<div class=\"fa-shadow adv-search-item\">(.+?)<div class=\"mc-actions\">"),
                               QRegularExpression::DotMatchesEverythingOption);
-  QRegularExpression titleRx(QStringLiteral("<a\\s+href=\"(.+?)\"\\s+title=\"(.+?)\">(.+?)<img"));
+  QRegularExpression titleRx(QStringLiteral("<div class=\"mc-title\"><a.+?href=\"(.+?)\".+?>(.+?)</a>"));
   // the year is within the title text as a 4-digit number, starting with 1 or 2
-  QRegularExpression yearRx(QStringLiteral("\\(([12]\\d\\d\\d)\\)"));
+  QRegularExpression yearRx(QStringLiteral("<span class=\"mc-year\">([12]\\d\\d\\d)</span"));
 
   QString href, title, year;
   QRegularExpressionMatchIterator i = resultRx.globalMatch(output);
@@ -219,10 +219,14 @@ void FilmAffinityFetcher::slotComplete(KJob*) {
     if(anchorMatch.hasMatch()) {
       href = anchorMatch.captured(1);
       title = anchorMatch.captured(2).trimmed();
-      auto yearMatch = yearRx.match(anchorMatch.captured(3));
+      auto yearMatch = yearRx.match(topMatch.captured(1));
       if(yearMatch.hasMatch()) {
         year = yearMatch.captured(1);
+      } else {
+        year.clear();
       }
+    } else {
+      href.clear();
     }
     if(!href.isEmpty()) {
       QUrl url(QString::fromLatin1(FILMAFFINITY_SEARCH_URL));
