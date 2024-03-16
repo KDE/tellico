@@ -398,8 +398,9 @@ void ColnectFetcher::slotComplete(KJob* job_) {
     if(optionalFields().contains(desc)) {
       entry->setField(desc, values.last().toString());
     }
-    // since card collection use a dependent field for title, fake a description with the series field
-    if(collectionType() == Data::Collection::Card) {
+    // fake a description with the series field for derived titles
+    auto titleField = coll->fieldByName(coll->titleField());
+    if(titleField && titleField->hasFlag(Data::Field::Derived)) {
       entry->setField(QStringLiteral("series"), values.at(7).toString());
     } else {
       entry->setField(QStringLiteral("title"), values.at(7).toString());
@@ -841,6 +842,7 @@ QString ColnectFetcher::imageUrl(const QString& name_, const QString& id_) {
   if(m_imageSize == NoImage) return QString();
   const QString nameSlug = URLize(name_);
   const int id = id_.toInt();
+  if(id == 0) return QString();
   QUrl u(QString::fromLatin1(COLNECT_IMAGE_URL));
   // uses 't' for thumbnail, use 'f' for full-size
   u.setPath(QString::fromLatin1("/%1/%2/%3/%4.jpg")
