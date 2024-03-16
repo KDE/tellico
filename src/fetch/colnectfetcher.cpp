@@ -357,6 +357,7 @@ void ColnectFetcher::slotComplete(KJob* job_) {
   if(!coll->hasField(series) && optionalFields().contains(series)) {
     Data::FieldPtr field(new Data::Field(series, i18n("Series")));
     field->setCategory(i18n("General"));
+    field->setFlags(Data::Field::AllowCompletion | Data::Field::AllowGrouped);
     coll->addField(field);
   }
 
