@@ -985,17 +985,17 @@ or menu bars.
   <term>
     <menuchoice
 ><guimenu
->Help</guimenu
+>Ayuda</guimenu
 > <guimenuitem
->Show Log</guimenuitem
+>Mostrar registro</guimenuitem
 > </menuchoice>
   </term>
 
   <listitem>
     <para
->When the <userinput
+>Cuando se usa la opción <userinput
 >tellico --log</userinput
-> option is used, this command shows the diagnostic log.</para>
+>, esta orden muestra el registro de diagnóstico.</para>
   </listitem>
 </varlistentry>
 

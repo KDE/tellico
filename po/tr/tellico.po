@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-15 01:59+0000\n"
+"POT-Creation-Date: 2024-03-16 02:04+0000\n"
 "PO-Revision-Date: 2024-03-14 14:19+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -224,7 +224,7 @@ msgid "My Collection"
 msgstr "Koleksiyonum"
 
 #: src/collection.cpp:886 src/document.cpp:531 src/field.cpp:290
-#: src/field.cpp:303 src/field.cpp:308 src/translators/filereaderbook.cpp:137
+#: src/field.cpp:303 src/field.cpp:308 src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
 #, kde-format
 msgid "Personal"
@@ -789,7 +789,7 @@ msgstr "Organizasyon"
 msgid "Publisher"
 msgstr "Yayımcı"
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:305
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:304
 #: src/fetch/srufetcher.cpp:506 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
@@ -894,7 +894,7 @@ msgstr "Anahtar Sözcükler"
 #: src/collections/bibtexcollection.cpp:236 src/collections/filecatalog.cpp:50
 #: src/fetch/entrezfetcher.cpp:438 src/fetch/entrezfetcher.cpp:514
 #: src/fetch/opdsfetcher.cpp:435 src/field.cpp:200
-#: src/translators/filereaderbook.cpp:136
+#: src/translators/filereaderbook.cpp:81
 #: src/translators/filereadervideo.cpp:128
 #: src/translators/gcstarimporter.cpp:88
 #, kde-format
@@ -902,7 +902,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:513
-#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/srufetcher.cpp:507
+#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/srufetcher.cpp:507
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -1089,7 +1089,7 @@ msgid "Trade Paperback"
 msgstr "Satılır Karton Kapak"
 
 #: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
-#: src/fetch/itunesfetcher.cpp:418 src/translators/filereaderbook.cpp:141
+#: src/fetch/itunesfetcher.cpp:418 src/translators/filereaderbook.cpp:86
 #, kde-format
 msgid "E-Book"
 msgstr "E-kitap"
@@ -3133,7 +3133,7 @@ msgstr "SAO/NASA Astrofizik Veri Sistemi"
 #: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:229
 #: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:559
-#: src/fetch/giantbombfetcher.cpp:217 src/fetch/googlebookfetcher.cpp:381
+#: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:381
 #: src/fetch/isbndbfetcher.cpp:393 src/fetch/mobygamesfetcher.cpp:647
 #: src/fetch/omdbfetcher.cpp:408 src/fetch/thegamesdbfetcher.cpp:635
 #: src/fetch/themoviedbfetcher.cpp:592 src/fetch/thetvdbfetcher.cpp:583
@@ -3148,7 +3148,7 @@ msgstr ""
 
 #: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1105
 #: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:241
-#: src/fetch/entrezfetcher.cpp:530 src/fetch/giantbombfetcher.cpp:229
+#: src/fetch/entrezfetcher.cpp:530 src/fetch/giantbombfetcher.cpp:227
 #: src/fetch/googlebookfetcher.cpp:393 src/fetch/isbndbfetcher.cpp:405
 #: src/fetch/mobygamesfetcher.cpp:659 src/fetch/numistafetcher.cpp:415
 #: src/fetch/omdbfetcher.cpp:420 src/fetch/thegamesdbfetcher.cpp:647
@@ -3159,7 +3159,7 @@ msgstr "Erişim anahtarı: "
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:536
-#: src/fetch/giantbombfetcher.cpp:235 src/fetch/googlebookfetcher.cpp:399
+#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:399
 #: src/fetch/themoviedbfetcher.cpp:610 src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid ""
@@ -3476,7 +3476,7 @@ msgstr ""
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:316
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:315
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:613
 #: src/fetch/kinofetcher.cpp:385 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
@@ -3530,7 +3530,7 @@ msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "Michel"
 
-#: src/fetch/colnectfetcher.cpp:813 src/fetch/giantbombfetcher.cpp:205
+#: src/fetch/colnectfetcher.cpp:813 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:575 src/fetch/mobygamesfetcher.cpp:633
 #: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:329
 #, kde-format
@@ -3882,7 +3882,7 @@ msgstr "Veri kaynağında kullanılacak GCstar eklentisini seçin."
 msgid "Author: "
 msgstr "Yazar: "
 
-#: src/fetch/giantbombfetcher.cpp:204
+#: src/fetch/giantbombfetcher.cpp:202
 #, kde-format
 msgid "GiantBomb Link"
 msgstr "GiantBomb Bağlantısı"
@@ -3897,19 +3897,19 @@ msgstr "Google Kitaplar Bağlantısı"
 msgid "Google Book Search"
 msgstr "Google Kitap Araması"
 
-#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr "Çizer"
 
-#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/isbndbfetcher.cpp:382
+#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/isbndbfetcher.cpp:382
 #: src/fetch/srufetcher.cpp:508 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Dewey Ondalık Sistemi"
 
-#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/srufetcher.cpp:509
+#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:509
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"

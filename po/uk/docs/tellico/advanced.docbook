@@ -7,30 +7,30 @@
 >Параметри командного рядка</title>
 
 <para
->When running &appname; from the command line, there are several options for opening data files. They may be seen by running <userinput
+>Під час запуску &appname; за допомогою командного рядка ви можете вказати параметри, пов’язані з відкриттям файлів даних. Переглянути список цих параметрів можна за допомогою команди <userinput
 >tellico --help</userinput
->. Diagnostic logging can also be enabled, which will make a <link linkend="settings-help-menu"
->menu item</link
-> to show the diagnostic log. The <userinput
+>. Можна також увімкнути ведення діагностичного журналу, яке призведе до показу повідомлень діагностики для <link linkend="settings-help-menu"
+>пункту меню</link
+>. Використання параметра <userinput
 >--logfile</userinput
-> option redirects the log to a file. </para>
+> переспрямує виведення даних до файла. </para>
 
 <programlisting
->Usage: tellico [options] [filename]
+>Користування: tellico [параметри Qt] [параметри KDE] [параметри] [назва файла]
 
-Tellico - collection management software, free and simple
+Tellico — інструмент керування збірками, вільний і простий
 
-Options:
-  --nofile                  Do not reopen the last open file
-  --bibtex                  Import &lt;filename&gt; as a bibtex file
-  --mods                    Import &lt;filename&gt; as a MODS file
-  --ris                     Import &lt;filename&gt; as a RIS file
-  --pdf                     Import &lt;filename&gt; as a PDF file
-  --log                     Log diagnostic output
-  --logfile &lt;logfile&gt;       Write log output to &lt;filename&gt;
+Параметри:
+  --nofile                  Не відкривати повторно останній відкритий файл
+  --bibtex                  Імпортувати файл &lt;назва файла&gt; як файл bibtex
+  --mods                    Імпортувати файл &lt;назва файла&gt; як файл MODS
+  --ris                     Імпортувати файл &lt;назва файла&gt; як файл RIS
+  --pdf                     Імпортувати файл &lt;назва файла&gt; як файл PDF
+  --log                     вести діагностичний журнал
+  --logfile &lt;файл_журналу&gt;       записати журнал до файла &lt;файл_журналу&gt;
 
-Arguments:
-  [filename]                File to open
+Аргументи:
+  назва файла                  Назва файла, який слід відкрити
 </programlisting>
 
 </sect1>
@@ -85,20 +85,20 @@ bool showEntry(int id)
 </programlisting>
 
 <para
->For the four import commands, the first argument is the file to import, and the second is the import action. Three actions are available: <emphasis
+>Для чотирьох найважливіших команд першим аргументом є назва файла, який слід імпортувати, а другим — дія з імпортування. Можна використовувати одну з трьох дій: <emphasis
 >replace</emphasis
 >, <emphasis
 >append</emphasis
->, and <emphasis
+> або <emphasis
 >merge</emphasis
->. Four file formats are supported for importing: Tellico &XML; files, Bibtex files, MODS files, and RIS files. Metadata from <link linkend="importing-pdf"
+>. Підтримується імпорт файлів у чотирьох форматах: файли XML Tellico, файли Bibtex, файли MODS і файли RIS. Також можна імпортувати метадані з файлів <link linkend="importing-pdf"
 >&PDF;</link
-> files can also be imported. </para>
+>. </para>
 
 <para
->For any of the commands to export text, a file name of <filename
+>Для усіх команд для експортування тексту назва файла <filename
 >--</filename
-> will pipe to the standard output. </para>
+> означає виведення даних каналом до стандартного виведення. </para>
 
 <para
 >Поточну відкриту у &appname; збірку можна експортувати до файла у одному з таких форматів: формат XML Tellico, формат ZIP Tellico, Bibtex, HTML, формат відокремлених комами значень (CSV). Для команд експортування можна додавати необов’язковий аргумент, який визначає, чи буде обмежено збірку поточний фільтром. </para>

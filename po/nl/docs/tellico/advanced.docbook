@@ -9,7 +9,11 @@
 <para
 >Bij het gebruiken van &appname; vanaf de commandoregel zijn er verschillende opties voor het openen van gegevensbestanden. Deze worden zichtbaar door het commando <userinput
 >tellico --help</userinput
->. </para>
+>. Loggen voor diagnostiek kan ook ingeschakeld worden, wat een <link linkend="settings-help-menu"
+>menu-item</link
+> zal aanmaken om de log met diagnostiek te tonen. De optie <userinput
+>--logfile</userinput
+> dirigeert de log naar een bestand. </para>
 
 <programlisting
 >Gebruik: tellico [opties] [bestandsnaam]
@@ -22,6 +26,8 @@ Opties:
   --mods                    &lt;bestandsnaam&gt; importeren als een MODS-bestand
   --ris                     &lt;bestandsnaam&gt; importeren als een RIS-bestand
   --pdf                     &lt;filename&gt; importeren als een PDF-bestand
+  --log                     Diagnostische uitvoer loggen
+  --logfile &lt;logfile&gt;       Uitvoer van log schrijven naar &lt;bestandsnaam&gt;
 
 Argumenten:
   bestandsnaam              Te openen bestand
@@ -85,7 +91,14 @@ bool showEntry(int id)
 >append</emphasis
 >, and <emphasis
 >merge</emphasis
->. Vier bestandsformaten worden voor importeren ondersteund: Tellico-&XML;-bestanden, Bibtex-bestanden, MODS-bestanden en RIS-bestanden. </para>
+>. Vier bestandsformaten worden voor importeren ondersteund: Tellico-&XML;-bestanden, Bibtex-bestanden, MODS-bestanden en RIS-bestanden. Metagegevens uit <link linkend="importing-pdf"
+>&PDF;</link
+> bestanden kunnen ook geïmporteerd worden. </para>
+
+<para
+>Voor elk van de commando's om tekst te exporteren, zal een bestandsnaam met <filename
+>--</filename
+> dit door sturen naar de standaard uitvoer. </para>
 
 <para
 >De huidige geopende verzameling in &appname; kan naar een bestand worden geëxporteerd in ofwel Tellico-&XML;-formaat, Tellico-ZIP-formaat, Bibtex, &HTML; of komma-gescheiden-waarden (CSV). De exportcommando's kunnen een optioneel argument hebben om te specificeren of de verzameling beperkt wordt tot het huidige filter of niet. </para>

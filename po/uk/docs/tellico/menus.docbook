@@ -989,17 +989,17 @@ or menu bars.
   <term>
     <menuchoice
 ><guimenu
->Help</guimenu
+>Довідка</guimenu
 > <guimenuitem
->Show Log</guimenuitem
+>Показати журнал</guimenuitem
 > </menuchoice>
   </term>
 
   <listitem>
     <para
->When the <userinput
+>Якщо використано параметр <userinput
 >tellico --log</userinput
-> option is used, this command shows the diagnostic log.</para>
+>, програма виводитиме діагностичний журнал.</para>
   </listitem>
 </varlistentry>
 
