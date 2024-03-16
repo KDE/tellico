@@ -26,9 +26,7 @@
 
 #include "filmasterfetchertest.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/filmasterfetcher.h"
-#include "../collections/videocollection.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 

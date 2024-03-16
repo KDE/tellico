@@ -31,8 +31,6 @@
 #include "../collections/gamecollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
-#include "../fieldformat.h"
-#include "../fetch/fetcherjob.h"
 
 #include <KSharedConfig>
 
