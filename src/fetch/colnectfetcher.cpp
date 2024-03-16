@@ -482,6 +482,8 @@ void ColnectFetcher::populateEntry(Data::EntryPtr entry_, const QVariantList& re
     static const QString name(QStringLiteral("Name"));
     auto idxName = m_colnectFields.value(name, -1);
     QString s = resultList_.at(idx).toString().trimmed();
+    s.replace(QLatin1String("[b]"), QLatin1String("<b>"));
+    s.replace(QLatin1String("[/b]"), QLatin1String("</b>"));
     // use the name as the description for stamps since the title includes it
     // put the description text into the comments
     if(collectionType() == Data::Collection::Stamp) {
