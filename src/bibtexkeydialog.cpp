@@ -31,7 +31,6 @@
 #include <KTitleWidget>
 #include <KSharedConfig>
 #include <KGuiItem>
-#include <kwidgetsaddons_version.h>
 
 #include <QLabel>
 #include <QVBoxLayout>
@@ -57,11 +56,7 @@ BibtexKeyDialog::BibtexKeyDialog(Tellico::Data::CollPtr coll_, QWidget* parent_)
   m_dupeLabel = new KTitleWidget(this);
   m_dupeLabel->setText(m_coll->title(), KTitleWidget::PlainMessage);
   m_dupeLabel->setComment(i18n("Checking for entries with duplicate citation keys..."));
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,63,0)
   m_dupeLabel->setIcon(QIcon::fromTheme(QStringLiteral("tools-wizard")), KTitleWidget::ImageLeft);
-#else
-  m_dupeLabel->setPixmap(QIcon::fromTheme(QStringLiteral("tools-wizard")).pixmap(64, 64), KTitleWidget::ImageLeft);
-#endif
   topLayout->addWidget(m_dupeLabel);
 
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);

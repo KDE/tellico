@@ -29,7 +29,6 @@
 #include <KLineEdit>
 #include <KUrlRequester>
 #include <KUrlLabel>
-#include <kwidgetsaddons_version.h>
 
 #include <QUrl>
 #include <QDesktopServices>
@@ -58,11 +57,7 @@ URLFieldWidget::URLFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   m_requester->lineEdit()->setAutoDeleteCompletionObject(true);
   connect(m_requester, &KUrlRequester::textChanged, this, &URLFieldWidget::checkModified);
   connect(m_requester, &KUrlRequester::textChanged, urlLabel, &KUrlLabel::setUrl);
-#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 65, 0)
-  void (KUrlLabel::* clickedSignal)(const QString&) = &KUrlLabel::leftClickedUrl;
-#else
   void (KUrlLabel::* clickedSignal)(void) = &KUrlLabel::leftClickedUrl;
-#endif
   connect(urlLabel, clickedSignal, this, &URLFieldWidget::slotOpenURL);
   registerWidget();
 

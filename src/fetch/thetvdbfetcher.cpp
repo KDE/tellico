@@ -37,10 +37,7 @@
 #include <KJobUiDelegate>
 #include <KJobWidgets>
 #include <KIO/StoredTransferJob>
-#include <kwidgetsaddons_version.h>
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,55,0)
 #include <KLanguageName>
-#endif
 
 #include <QLabel>
 #include <QFile>
@@ -415,10 +412,8 @@ void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   if(!cover.isEmpty()) entry_->setField(QStringLiteral("cover"), cover);
 
   QString lang = mapValue(resultMap_, "originalLanguage");
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,55,0)
   const QString langName = KLanguageName::nameForCode(lang);
   if(!langName.isEmpty()) lang = langName;
-#endif
   if(lang == QLatin1String("US English") ||
      lang == QLatin1String("en") ||
      lang == QLatin1String("eng")) {

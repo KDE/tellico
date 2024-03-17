@@ -37,10 +37,7 @@
 #include <KJobUiDelegate>
 #include <KJobWidgets>
 #include <KIO/StoredTransferJob>
-#include <kwidgetsaddons_version.h>
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,55,0)
 #include <KLanguageName>
-#endif
 
 #include <QLabel>
 #include <QLineEdit>
@@ -522,13 +519,9 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
 
   entry_->setField(QStringLiteral("running-time"), mapValue(resultMap_, "runtime"));
   QString lang = mapValue(resultMap_, "original_language");
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,55,0)
   const QString langName = KLanguageName::nameForCode(lang);
   if(!langName.isEmpty()) lang = langName;
   if(lang == QLatin1String("US English")) lang = QLatin1String("English");
-#else
-  if(lang == QLatin1String("en")) lang = QStringLiteral("English");
-#endif
   entry_->setField(QStringLiteral("language"), lang);
   entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "overview"));
 }
