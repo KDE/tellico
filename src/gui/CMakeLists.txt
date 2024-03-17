@@ -2,6 +2,7 @@
 
 SET(gui_STAT_SRCS
    boolfieldwidget.cpp
+   checkablecombobox.cpp
    choicefieldwidget.cpp
    collectiontemplatedialog.cpp
    collectiontypecombo.cpp

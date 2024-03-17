@@ -637,19 +637,24 @@ bool Collection::isAllowed(const QString& field_, const QString& value_) const {
     return true;
   }
 
-  // find the field with a name of 'key_'
   FieldPtr field = fieldByName(field_);
-
-  // if the type is not multiple choice or if value_ is allowed, return true
-  if(field && (field->type() != Field::Choice || field->allowed().contains(value_))) {
+  if(!field) return false;
+  // non-choice or single-value choice fields with alowed values
+  if(field->type() != Field::Choice ||
+     (!field->hasFlag(Field::AllowMultiple) && field->allowed().contains(value_))) {
     return true;
   }
 
-  return false;
+  // now have to split the text into separate values and check each one
+  const auto values = FieldFormat::splitValue(value_, FieldFormat::StringSplit);
+  for(const auto& value : values) {
+    if(!field->allowed().contains(value)) return false;
+  }
+
+  return true;
 }
 
 Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& name_) {
-//  myDebug() << name_;
   m_lastGroupField = name_; // keep track, even if it's invalid
   if(name_.isEmpty() || !m_entryGroupDicts.contains(name_) || m_entries.isEmpty()) {
     return nullptr;

@@ -23,11 +23,12 @@
  ***************************************************************************/
 
 #include "choicefieldwidget.h"
+#include "checkablecombobox.h"
 #include "../field.h"
 
-#include <QComboBox>
 #include <QGuiApplication>
 #include <QScreen>
+#include <QBoxLayout>
 
 namespace {
   const double MAX_FRACTION_SCREEN_WIDTH = 0.4;
@@ -36,11 +37,31 @@ namespace {
 using Tellico::GUI::ChoiceFieldWidget;
 
 ChoiceFieldWidget::ChoiceFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
-    : FieldWidget(field_, parent_), m_comboBox(nullptr) {
+    : FieldWidget(field_, parent_), m_comboBox(nullptr), m_checkableComboBox(nullptr) {
 
+  if(field_->hasFlag(Data::Field::AllowMultiple)) {
+    initCheckableComboBox();
+  } else {
+    initComboBox();
+  }
+  initCommon(field_);
+
+  registerWidget();
+}
+
+void ChoiceFieldWidget::initComboBox() {
   m_comboBox = new QComboBox(this);
   void (QComboBox::* indexChanged)(int) = &QComboBox::currentIndexChanged;
   connect(m_comboBox, indexChanged, this, &ChoiceFieldWidget::checkModified);
+}
+
+void ChoiceFieldWidget::initCheckableComboBox() {
+  m_checkableComboBox = new CheckableComboBox(this);
+  m_checkableComboBox->setSeparator(FieldFormat::delimiterString());
+  connect(m_checkableComboBox, &CheckableComboBox::checkedItemsChanged, this, &ChoiceFieldWidget::checkModified);
+}
+
+void ChoiceFieldWidget::initCommon(Tellico::Data::FieldPtr field_) {
   m_maxTextWidth = MAX_FRACTION_SCREEN_WIDTH * QGuiApplication::primaryScreen()->size().width();
 
   QStringList values = field_->allowed();
@@ -48,54 +69,84 @@ ChoiceFieldWidget::ChoiceFieldWidget(Tellico::Data::FieldPtr field_, QWidget* pa
   values.removeAll(QString());
 
   const QFontMetrics& fm = fontMetrics();
-  m_comboBox->addItem(QString(), QString());
+  auto cb = comboBox(); // everything here applies to either type of combobox;
+  cb->addItem(QString(), QString());
   foreach(const QString& value, values) {
-    m_comboBox->addItem(fm.elidedText(value, Qt::ElideMiddle, m_maxTextWidth), value);
+    cb->addItem(fm.elidedText(value, Qt::ElideMiddle, m_maxTextWidth), value);
   }
-
-  m_comboBox->setMinimumWidth(5*fm.maxWidth());
-  registerWidget();
+  cb->setMinimumWidth(5*fm.maxWidth());
 }
 
 QString ChoiceFieldWidget::text() const {
-  return m_comboBox->currentData().toString();
+  return isMultiSelect() ? comboBox()->currentText()
+                         : comboBox()->currentData().toString();
 }
 
 void ChoiceFieldWidget::setTextImpl(const QString& text_) {
-  int idx = m_comboBox->findData(text_);
-  if(idx < 0) {
-    m_comboBox->addItem(fontMetrics().elidedText(text_, Qt::ElideMiddle, m_maxTextWidth), text_);
-    m_comboBox->setCurrentIndex(m_comboBox->count()-1);
+  auto cb = comboBox();
+  if(isMultiSelect()) {
+    // first uncheck all the boxes
+    m_checkableComboBox->setAllCheckState(Qt::Unchecked);
+    const auto values = FieldFormat::splitValue(text_, FieldFormat::StringSplit);
+    for(const auto& value : qAsConst(values)) {
+      int idx = cb->findData(value);
+      if(idx < 0) {
+        m_checkableComboBox->addItem(fontMetrics().elidedText(text_, Qt::ElideMiddle, m_maxTextWidth), text_);
+        idx = m_checkableComboBox->count()-1;
+      }
+      m_checkableComboBox->setItemData(idx, Qt::Checked, Qt::CheckStateRole);
+    }
   } else {
-    m_comboBox->setCurrentIndex(idx);
+    int idx = cb->findData(text_);
+    if(idx < 0) {
+      m_comboBox->addItem(fontMetrics().elidedText(text_, Qt::ElideMiddle, m_maxTextWidth), text_);
+      m_comboBox->setCurrentIndex(m_comboBox->count()-1);
+    } else {
+      m_comboBox->setCurrentIndex(idx);
+    }
   }
 }
 
 void ChoiceFieldWidget::clearImpl() {
-  m_comboBox->setCurrentIndex(0); // first item is empty
+  comboBox()->setCurrentIndex(0); // first item is empty
   editMultiple(false);
 }
 
 void ChoiceFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
+  bool wasMultiSelect = isMultiSelect();
+  bool nowMultiSelect = newField_->hasFlag(Data::Field::AllowMultiple);
+
   const QString oldValue = text();
-  int idx = m_comboBox->currentIndex();
-  m_comboBox->blockSignals(true);
-  m_comboBox->clear();
 
-  QStringList values = newField_->allowed();
-  values.removeAll(QString());
+  const int widgetIndex = layout()->indexOf(widget());
+  Q_ASSERT(widgetIndex > -1);
 
-  const QFontMetrics& fm = fontMetrics();
-  // always have empty choice
-  m_comboBox->addItem(QString(), QString());
-  foreach(const QString& value, values) {
-    m_comboBox->addItem(fm.elidedText(value, Qt::ElideMiddle, m_maxTextWidth), value);
+  if(wasMultiSelect && !nowMultiSelect) {
+    layout()->removeWidget(m_checkableComboBox);
+    delete m_checkableComboBox;
+    m_checkableComboBox = nullptr;
+    initComboBox();
+  } else if(!wasMultiSelect && nowMultiSelect) {
+    layout()->removeWidget(m_comboBox);
+    delete m_comboBox;
+    m_comboBox = nullptr;
+    initCheckableComboBox();
+  } else {
+    // remove existing values
+    comboBox()->clear();
   }
-  m_comboBox->setCurrentIndex(idx);
-  m_comboBox->blockSignals(false);
+  initCommon(newField_);
+
+  static_cast<QBoxLayout*>(layout())->insertWidget(widgetIndex, widget(), 1 /*stretch*/);
+  widget()->show();
+
   setTextImpl(oldValue); // set back to previous value
 }
 
+QComboBox* ChoiceFieldWidget::comboBox() const {
+  return isMultiSelect() ? m_checkableComboBox : m_comboBox;
+}
+
 QWidget* ChoiceFieldWidget::widget() {
-  return m_comboBox;
+  return comboBox();
 }

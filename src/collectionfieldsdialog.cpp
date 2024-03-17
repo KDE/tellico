@@ -575,25 +575,29 @@ void CollectionFieldsDialog::slotTypeChanged(const QString& type_) {
   m_allowEdit->setEnabled(type == Data::Field::Choice);
 
   // paragraphs, tables, and images are their own category
-  bool isCategory = (type == Data::Field::Para || type == Data::Field::Table ||
+  bool isCategory = (type == Data::Field::Para ||
+                     type == Data::Field::Table ||
                      type == Data::Field::Image);
   m_catCombo->setEnabled(!isCategory);
 
   // formatting is only applicable when the type is simple text or a table
-  bool isText = (type == Data::Field::Line || type == Data::Field::Table);
   // formatNone is the default
-  m_formatCombo->setEnabled(isText);
+  m_formatCombo->setEnabled(type == Data::Field::Line ||
+                            type == Data::Field::Table);
 
-  // multiple is only applicable for simple text and number
-  isText = (type == Data::Field::Line || type == Data::Field::Number);
-  m_multiple->setEnabled(isText);
+  // multiple is only applicable for simple text, number, and choice
+  m_multiple->setEnabled(type == Data::Field::Line ||
+                         type == Data::Field::Number ||
+                         type == Data::Field::Choice);
 
   // completion is only applicable for simple text, number, and URL
-  isText = (isText || type == Data::Field::URL);
-  m_complete->setEnabled(isText);
+  m_complete->setEnabled(type == Data::Field::Line ||
+                         type == Data::Field::Number ||
+                         type == Data::Field::URL);
 
   // grouping is not possible with paragraphs or images
-  m_grouped->setEnabled(type != Data::Field::Para && type != Data::Field::Image);
+  m_grouped->setEnabled(type != Data::Field::Para &&
+                        type != Data::Field::Image);
 }
 
 void CollectionFieldsDialog::slotHighlightedChanged(int index_) {

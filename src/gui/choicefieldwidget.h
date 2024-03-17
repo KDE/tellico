@@ -34,6 +34,8 @@ class FieldWidgetTest;
 namespace Tellico {
   namespace GUI {
 
+class CheckableComboBox;
+
 /**
  * @author Robby Stephenson
  */
@@ -57,7 +59,14 @@ protected:
   virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
 
 private:
+  QComboBox* comboBox() const;
+  bool isMultiSelect() const { return (m_checkableComboBox != nullptr); }
+  void initComboBox();
+  void initCheckableComboBox();
+  void initCommon(Data::FieldPtr field);
+
   QComboBox* m_comboBox;
+  CheckableComboBox* m_checkableComboBox;
   int m_maxTextWidth;
 };
 

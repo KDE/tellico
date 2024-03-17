@@ -1,3 +1,7 @@
+2024-03-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Choice fields to allow multiple values (Bug 483831).
+
 2024-03-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated FilmAffinity data source.

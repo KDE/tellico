@@ -82,8 +82,8 @@ summaries, or reviews should be entered using this field type.</para>
 <para>
 When a field should be limited to a few preset values, a
 <emphasis>Choice</emphasis> type is used. The acceptable values are
-presented in a drop down box for selection. Obviously, multiple values
-are not applicable. Fields such as bibliography type or personal rating
+presented in a drop down box for selection. Multiple values can be allowed.
+Fields such as bibliography type or personal rating
 are <emphasis>Choice</emphasis>-type fields.</para>
 
 <para>Semi-colons should be used to separated the allowed values.</para>
