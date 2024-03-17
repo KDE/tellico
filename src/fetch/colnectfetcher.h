@@ -42,6 +42,7 @@ namespace Tellico {
 
   namespace GUI {
     class ComboBox;
+    class LineEdit;
   }
 
   namespace Fetch {
@@ -128,6 +129,7 @@ private:
     LargeImage=2
   };
   ImageSize m_imageSize;
+  QString m_countryCode;
   int m_lastCollType;
 };
 
@@ -145,6 +147,7 @@ private Q_SLOTS:
 private:
   GUI::ComboBox* m_langCombo;
   GUI::ComboBox* m_imageCombo;
+  GUI::LineEdit* m_countryEdit;
 };
 
   } // end namespace

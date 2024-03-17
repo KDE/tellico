@@ -30,6 +30,7 @@
 #include "../collections/gamecollection.h"
 #include "../images/imagefactory.h"
 #include "../gui/combobox.h"
+#include "../gui/lineedit.h"
 #include "../utils/guiproxy.h"
 #include "../entry.h"
 #include "../fieldformat.h"
@@ -104,6 +105,7 @@ void ColnectFetcher::readConfigHook(const KConfigGroup& config_) {
   if(imageSize > -1) {
     m_imageSize = static_cast<ImageSize>(imageSize);
   }
+  m_countryCode = config_.readEntry("Country"); // ok to be empty
 }
 
 void ColnectFetcher::search() {
@@ -155,6 +157,9 @@ void ColnectFetcher::search() {
           value = value.remove(yearRX);
         }
       }
+      if(!m_countryCode.isEmpty()) {
+        query += QStringLiteral("/country/") + m_countryCode;
+      }
       // everything left is for the item description
       query += QStringLiteral("/item_name/") + value.simplified();
       break;
@@ -175,6 +180,9 @@ void ColnectFetcher::search() {
           query += m_year;
           value = value.remove(yearRX);
         }
+      }
+      if(!m_countryCode.isEmpty()) {
+        query += QStringLiteral("/country/") + m_countryCode;
       }
       // everything left is for the item description
       query += QStringLiteral("/description/") + value.simplified();
@@ -224,7 +232,7 @@ Tellico::Data::EntryPtr ColnectFetcher::fetchEntryHook(uint uid_) {
     QString query(QLatin1Char('/') + m_locale + QStringLiteral("/item/cat/")
                   + m_category + QStringLiteral("/id/") + id);
     u.setPath(u.path() + query);
-    myLog() << "Reading" << u.toDisplayString();
+//    myLog() << "Reading" << u.toDisplayString();
 
     QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
     KJobWidgets::setWindow(job, GUI::Proxy::widget());
@@ -562,9 +570,11 @@ void ColnectFetcher::populateCoinEntry(Data::EntryPtr entry_, const QVariantList
       QString currency = entry_->field(QStringLiteral("currency"));
       if(!currency.isEmpty()) currency.truncate(1);
       const double value = resultList_.at(idx).toDouble();
-      // don't assume the value is in system currency
-      entry_->setField(QStringLiteral("denomination"),
-                       QLocale::system().toCurrencyString(value, currency));
+      if(value > 0) {
+        // don't assume the value is in system currency
+        entry_->setField(QStringLiteral("denomination"),
+                         QLocale::system().toCurrencyString(value, currency));
+      }
     }
   }
 
@@ -859,7 +869,7 @@ void ColnectFetcher::readDataList() {
   // Colnect API calls are encoded as a path
   QString query(QLatin1Char('/') + m_locale + QStringLiteral("/fields/cat/") + m_category + QLatin1Char('/'));
   u.setPath(u.path() + query);
-  myLog() << "Reading Colnect fields from" << u.toDisplayString();
+//  myLog() << "Reading Colnect fields from" << u.toDisplayString();
 
   const QByteArray data = FileHandler::readDataFile(u, true);
   QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -876,7 +886,7 @@ void ColnectFetcher::readDataList() {
   for(int i = 0; i < resultList.size(); ++i) {
     m_colnectFields.insert(resultList.at(i).toString(), i);
   }
-//  myDebug() << "Colnect fields:" << m_colnectFields;
+  myDebug() << "Colnect fields:" << m_colnectFields;
 }
 
 void ColnectFetcher::readItemNames(const QByteArray& item_) {
@@ -884,7 +894,7 @@ void ColnectFetcher::readItemNames(const QByteArray& item_) {
   // Colnect API calls are encoded as a path
   QString query(QLatin1Char('/') + m_locale + QLatin1Char('/') + QLatin1String(item_) + QStringLiteral("/cat/") + m_category + QLatin1Char('/'));
   u.setPath(u.path() + query);
-  myLog() << "Reading item names from" << u.toDisplayString();
+//  myLog() << "Reading item names from" << u.toDisplayString();
 
   const QByteArray data = FileHandler::readDataFile(u, true);
   QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -954,6 +964,13 @@ ColnectFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ColnectFetche
   l->addWidget(m_imageCombo, row, 1);
   label->setBuddy(m_imageCombo);
 
+  label = new QLabel(i18n("Country code: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_countryEdit = new GUI::LineEdit(optionsWidget());
+  connect(m_countryEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_countryEdit, row, 1);
+  label->setBuddy(m_countryEdit);
+
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
@@ -967,6 +984,7 @@ ColnectFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ColnectFetche
       m_langCombo->setCurrentIndex(m_langCombo->count()-1);
     }
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+    m_countryEdit->setText(fetcher_->m_countryCode);
   }
 }
 
@@ -980,6 +998,7 @@ void ColnectFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 
   const int n = m_imageCombo->currentData().toInt();
   config_.writeEntry("Image Size", n);
+  config_.writeEntry("Country", m_countryEdit->text().trimmed());
 }
 
 QString ColnectFetcher::ConfigWidget::preferredName() const {
