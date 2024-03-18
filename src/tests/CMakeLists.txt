@@ -312,6 +312,7 @@ ecm_add_test(discogstest.cpp
 
 ecm_add_test(fieldwidgettest.cpp
              ../gui/boolfieldwidget.cpp
+             ../gui/checkablecombobox.cpp
              ../gui/choicefieldwidget.cpp
              ../gui/datefieldwidget.cpp
              ../gui/datewidget.cpp

@@ -121,6 +121,7 @@ void ChoiceFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::
   const int widgetIndex = layout()->indexOf(widget());
   Q_ASSERT(widgetIndex > -1);
 
+  blockSignals(true);
   if(wasMultiSelect && !nowMultiSelect) {
     layout()->removeWidget(m_checkableComboBox);
     delete m_checkableComboBox;
@@ -141,6 +142,7 @@ void ChoiceFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::
   widget()->show();
 
   setTextImpl(oldValue); // set back to previous value
+  blockSignals(false);
 }
 
 QComboBox* ChoiceFieldWidget::comboBox() const {
