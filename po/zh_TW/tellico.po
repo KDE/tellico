@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-16 02:04+0000\n"
+"POT-Creation-Date: 2024-03-18 02:00+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -121,32 +121,32 @@ msgctxt "Column View XSL Template"
 msgid "Column View"
 msgstr "欄檢視"
 
-#: src/bibtexkeydialog.cpp:49
+#: src/bibtexkeydialog.cpp:48
 #, kde-format
 msgid "Citation Key Manager"
 msgstr "引文鍵值管理員"
 
-#: src/bibtexkeydialog.cpp:59 src/bibtexkeydialog.cpp:101
+#: src/bibtexkeydialog.cpp:58 src/bibtexkeydialog.cpp:96
 #, kde-format
 msgid "Checking for entries with duplicate citation keys..."
 msgstr "檢查引文鍵值是否有重複"
 
-#: src/bibtexkeydialog.cpp:73
+#: src/bibtexkeydialog.cpp:68
 #, kde-format
 msgid "Check for duplicates"
 msgstr "檢查重複的項目"
 
-#: src/bibtexkeydialog.cpp:76
+#: src/bibtexkeydialog.cpp:71
 #, kde-format
 msgid "Filter for duplicates"
 msgstr "過濾重複的項目"
 
-#: src/bibtexkeydialog.cpp:111
+#: src/bibtexkeydialog.cpp:106
 #, kde-format
 msgid "There are no duplicate citation keys."
 msgstr "引文鍵值沒有重複。"
 
-#: src/bibtexkeydialog.cpp:114
+#: src/bibtexkeydialog.cpp:109
 #, kde-format
 msgid "There is %1 duplicate citation key."
 msgid_plural "There are %1 duplicate citation keys."
@@ -230,7 +230,7 @@ msgstr "<qt>Tellico 無法寫入伺服器管線於 <b>%1</b>。</qt>"
 msgid "My Collection"
 msgstr "我的收藏"
 
-#: src/collection.cpp:886 src/document.cpp:531 src/field.cpp:290
+#: src/collection.cpp:891 src/document.cpp:531 src/field.cpp:290
 #: src/field.cpp:303 src/field.cpp:308 src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
 #, kde-format
@@ -609,50 +609,50 @@ msgstr "保持所做的變更"
 msgid "New Field %1"
 msgstr "新增欄位 %1"
 
-#: src/collectionfieldsdialog.cpp:804
+#: src/collectionfieldsdialog.cpp:808
 #, kde-format
 msgid "Revert Field Properties"
 msgstr "回復欄位屬性"
 
-#: src/collectionfieldsdialog.cpp:805
+#: src/collectionfieldsdialog.cpp:809
 #, kde-format
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr "<qt><p>您要將 <em>%1</em> 欄位的屬性回復為預設值嗎？</p></qt>"
 
-#: src/collectionfieldsdialog.cpp:808
+#: src/collectionfieldsdialog.cpp:812
 #, kde-format
 msgid "Revert"
 msgstr "回復"
 
-#: src/collectionfieldsdialog.cpp:882
+#: src/collectionfieldsdialog.cpp:886
 #, kde-format
 msgid "Extended Field Properties"
 msgstr "延伸欄位屬性"
 
-#: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:104
+#: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:104
 #, kde-format
 msgid "Property"
 msgstr "屬性"
 
-#: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:105
+#: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:105
 #: src/fetch/srufetcher.cpp:594
 #, kde-format
 msgid "Value"
 msgstr "數值"
 
-#: src/collectionfieldsdialog.cpp:919
+#: src/collectionfieldsdialog.cpp:923
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "已經有欄位使用此標題。請輸入不同的標題。"
 
-#: src/collectionfieldsdialog.cpp:926
+#: src/collectionfieldsdialog.cpp:930
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>類別不能為空。請輸入類別。</qt>"
 
-#: src/collectionfieldsdialog.cpp:934
+#: src/collectionfieldsdialog.cpp:938
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -662,14 +662,14 @@ msgstr ""
 "<qt>欄位不能與<em>段落</em>、<em>表格</em>或<em>影像</em>欄位在同一個類別中。"
 "請輸入不同的類別。</qt>"
 
-#: src/collectionfieldsdialog.cpp:942
+#: src/collectionfieldsdialog.cpp:946
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
 msgstr "欄位的標題不能與現有的類別相同。請輸入不同的標題。"
 
-#: src/collectionfieldsdialog.cpp:954
+#: src/collectionfieldsdialog.cpp:958
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -677,12 +677,12 @@ msgid ""
 "properties."
 msgstr "評分欄位的範圍為 1 到 10。低限必須比高限低。請輸入不同的高低限屬性。"
 
-#: src/collectionfieldsdialog.cpp:969
+#: src/collectionfieldsdialog.cpp:973
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "表格裡最多只能有十欄。"
 
-#: src/collectionfieldsdialog.cpp:975
+#: src/collectionfieldsdialog.cpp:979
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr "含有衍生數值的欄位必須定義數值樣本。"
@@ -712,14 +712,14 @@ msgstr "Bibtex 鍵值"
 #: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
 #: src/configdialog.cpp:1129 src/fetch/amazonfetcher.cpp:861
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
-#: src/fetch/colnectfetcher.cpp:359 src/fetch/colnectfetcher.cpp:523
-#: src/fetch/colnectfetcher.cpp:542 src/fetch/colnectfetcher.cpp:578
-#: src/fetch/colnectfetcher.cpp:585 src/fetch/discogsfetcher.cpp:307
+#: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:535
+#: src/fetch/colnectfetcher.cpp:554 src/fetch/colnectfetcher.cpp:592
+#: src/fetch/colnectfetcher.cpp:599 src/fetch/discogsfetcher.cpp:307
 #: src/fetch/discogsfetcher.cpp:312 src/fetch/discogsfetcher.cpp:317
 #: src/fetch/discogsfetcher.cpp:324 src/fetch/discogsfetcher.cpp:331
 #: src/fetch/discogsfetcher.cpp:336 src/fetch/doubanfetcher.cpp:373
 #: src/fetch/doubanfetcher.cpp:391 src/fetch/doubanfetcher.cpp:409
-#: src/fetch/filmaffinityfetcher.cpp:280 src/fetch/filmasterfetcher.cpp:238
+#: src/fetch/filmaffinityfetcher.cpp:284 src/fetch/filmasterfetcher.cpp:238
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:253
 #: src/fetch/googlebookfetcher.cpp:258 src/fetch/igdbfetcher.cpp:366
@@ -729,10 +729,10 @@ msgstr "Bibtex 鍵值"
 #: src/fetch/moviemeterfetcher.cpp:218 src/fetch/numistafetcher.cpp:344
 #: src/fetch/numistafetcher.cpp:360 src/fetch/omdbfetcher.cpp:250
 #: src/fetch/openlibraryfetcher.cpp:276 src/fetch/thegamesdbfetcher.cpp:265
-#: src/fetch/thegamesdbfetcher.cpp:270 src/fetch/themoviedbfetcher.cpp:310
-#: src/fetch/themoviedbfetcher.cpp:313 src/fetch/themoviedbfetcher.cpp:318
-#: src/fetch/themoviedbfetcher.cpp:336 src/fetch/thetvdbfetcher.cpp:248
-#: src/fetch/thetvdbfetcher.cpp:253 src/fetch/thetvdbfetcher.cpp:258
+#: src/fetch/thegamesdbfetcher.cpp:270 src/fetch/themoviedbfetcher.cpp:307
+#: src/fetch/themoviedbfetcher.cpp:310 src/fetch/themoviedbfetcher.cpp:315
+#: src/fetch/themoviedbfetcher.cpp:333 src/fetch/thetvdbfetcher.cpp:245
+#: src/fetch/thetvdbfetcher.cpp:250 src/fetch/thetvdbfetcher.cpp:255
 #: src/fetch/tvmazefetcher.cpp:175 src/fetch/tvmazefetcher.cpp:180
 #: src/fetch/upcitemdbfetcher.cpp:213 src/fetch/vgcollectfetcher.cpp:234
 #: src/fetch/vgcollectfetcher.cpp:337 src/field.cpp:38 src/field.cpp:79
@@ -845,8 +845,8 @@ msgstr "章節"
 
 #: src/collections/bibtexcollection.cpp:208
 #: src/collections/bookcollection.cpp:137 src/collections/cardcollection.cpp:78
-#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:358
-#: src/fetch/colnectfetcher.cpp:807
+#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:366
+#: src/fetch/colnectfetcher.cpp:821
 #, kde-format
 msgid "Series"
 msgstr "級數"
@@ -955,7 +955,7 @@ msgstr ""
 #: src/collections/filecatalog.cpp:54 src/collections/gamecollection.cpp:90
 #: src/collections/stampcollection.cpp:49
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
-#: src/fetch/colnectfetcher.cpp:365 src/fetch/colnectfetcher.cpp:810
+#: src/fetch/colnectfetcher.cpp:374 src/fetch/colnectfetcher.cpp:824
 #: src/fetch/numistafetcher.cpp:351 src/fetch/numistafetcher.cpp:399
 #: src/fetch/rpggeekfetcher.cpp:207 src/fetchdialog.cpp:249
 #, kde-format
@@ -1284,13 +1284,13 @@ msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "Grading Service"
 msgstr "評比服務"
 
-#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:805
+#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:819
 #: src/fetch/numistafetcher.cpp:401
 #, kde-format
 msgid "Obverse"
 msgstr "正面"
 
-#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:806
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:820
 #: src/fetch/numistafetcher.cpp:402
 #, kde-format
 msgid "Reverse"
@@ -3128,7 +3128,7 @@ msgstr ""
 #: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:381
 #: src/fetch/isbndbfetcher.cpp:393 src/fetch/mobygamesfetcher.cpp:647
 #: src/fetch/omdbfetcher.cpp:408 src/fetch/thegamesdbfetcher.cpp:635
-#: src/fetch/themoviedbfetcher.cpp:592 src/fetch/thetvdbfetcher.cpp:583
+#: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:578
 #, fuzzy, kde-format
 #| msgid ""
 #| "Registration is required for accessing the %1 data source. If you agree "
@@ -3148,7 +3148,7 @@ msgstr ""
 #: src/fetch/googlebookfetcher.cpp:393 src/fetch/isbndbfetcher.cpp:405
 #: src/fetch/mobygamesfetcher.cpp:659 src/fetch/numistafetcher.cpp:415
 #: src/fetch/omdbfetcher.cpp:420 src/fetch/thegamesdbfetcher.cpp:647
-#: src/fetch/themoviedbfetcher.cpp:604
+#: src/fetch/themoviedbfetcher.cpp:597
 #, kde-format
 msgid "Access key: "
 msgstr "存取金鑰："
@@ -3156,7 +3156,7 @@ msgstr "存取金鑰："
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:536
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:399
-#: src/fetch/themoviedbfetcher.cpp:610 src/fetch/thetvdbfetcher.cpp:601
+#: src/fetch/themoviedbfetcher.cpp:603 src/fetch/thetvdbfetcher.cpp:596
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3347,7 +3347,7 @@ msgstr "要從 Amazon.com 取得資料必須有 AWS 存取金鑰代碼以及私�
 #: src/fetch/amazonfetcher.cpp:271 src/fetch/discogsfetcher.cpp:138
 #: src/fetch/isbndbfetcher.cpp:163 src/fetch/mobygamesfetcher.cpp:162
 #: src/fetch/omdbfetcher.cpp:119 src/fetch/thegamesdbfetcher.cpp:136
-#: src/fetch/themoviedbfetcher.cpp:162 src/fetch/thetvdbfetcher.cpp:162
+#: src/fetch/themoviedbfetcher.cpp:159 src/fetch/thetvdbfetcher.cpp:159
 #, kde-format
 msgid "Those values must be entered in the data source settings."
 msgstr "這些值必須在資料來源設定裡輸入。"
@@ -3357,9 +3357,9 @@ msgstr "這些值必須在資料來源設定裡輸入。"
 msgid "Results from %1: %2/%3"
 msgstr "從 %1 傳回的結果：%2/%3"
 
-#: src/fetch/amazonfetcher.cpp:631 src/fetch/colnectfetcher.cpp:782
+#: src/fetch/amazonfetcher.cpp:631 src/fetch/colnectfetcher.cpp:796
 #: src/fetch/discogsfetcher.cpp:217 src/fetch/doubanfetcher.cpp:477
-#: src/fetch/filmaffinityfetcher.cpp:426 src/fetch/filmasterfetcher.cpp:147
+#: src/fetch/filmaffinityfetcher.cpp:430 src/fetch/filmasterfetcher.cpp:147
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:198
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
 #: src/fetch/isbndbfetcher.cpp:294 src/fetch/itunesfetcher.cpp:352
@@ -3367,8 +3367,8 @@ msgstr "從 %1 傳回的結果：%2/%3"
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/mobygamesfetcher.cpp:343
 #: src/fetch/moviemeterfetcher.cpp:160 src/fetch/numistafetcher.cpp:286
 #: src/fetch/numistafetcher.cpp:294 src/fetch/omdbfetcher.cpp:181
-#: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:238
-#: src/fetch/thetvdbfetcher.cpp:343 src/fetch/tvmazefetcher.cpp:262
+#: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:235
+#: src/fetch/thetvdbfetcher.cpp:340 src/fetch/tvmazefetcher.cpp:262
 #: src/fetch/upcitemdbfetcher.cpp:258 src/fetch/vgcollectfetcher.cpp:282
 #: src/fetch/vndbfetcher.cpp:181
 #, kde-format
@@ -3403,7 +3403,7 @@ msgid ""
 msgstr "Amazon.com 提供數個不同的地域化站台。請選擇此資料來源要使用的站台。"
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:211
-#: src/fetch/colnectfetcher.cpp:942 src/fetch/imdbfetcher.cpp:567
+#: src/fetch/colnectfetcher.cpp:957 src/fetch/imdbfetcher.cpp:567
 #: src/fetch/itunesfetcher.cpp:543 src/fetch/mobygamesfetcher.cpp:667
 #: src/fetch/rpggeekfetcher.cpp:220 src/fetch/thegamesdbfetcher.cpp:655
 #: src/fetch/videogamegeekfetcher.cpp:211
@@ -3412,7 +3412,7 @@ msgid "&Image size: "
 msgstr "影像大小(&I)："
 
 #: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:946 src/fetch/imdbfetcher.cpp:570
+#: src/fetch/colnectfetcher.cpp:961 src/fetch/imdbfetcher.cpp:570
 #: src/fetch/itunesfetcher.cpp:547 src/fetch/mobygamesfetcher.cpp:670
 #: src/fetch/rpggeekfetcher.cpp:224 src/fetch/thegamesdbfetcher.cpp:658
 #: src/fetch/videogamegeekfetcher.cpp:215
@@ -3428,7 +3428,7 @@ msgstr "中"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:216
-#: src/fetch/colnectfetcher.cpp:947 src/fetch/imdbfetcher.cpp:572
+#: src/fetch/colnectfetcher.cpp:962 src/fetch/imdbfetcher.cpp:572
 #: src/fetch/itunesfetcher.cpp:548 src/fetch/mobygamesfetcher.cpp:672
 #: src/fetch/rpggeekfetcher.cpp:225 src/fetch/thegamesdbfetcher.cpp:660
 #: src/fetch/videogamegeekfetcher.cpp:216
@@ -3437,7 +3437,7 @@ msgid "Large Image"
 msgstr "大"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:214
-#: src/fetch/colnectfetcher.cpp:945 src/fetch/imdbfetcher.cpp:573
+#: src/fetch/colnectfetcher.cpp:960 src/fetch/imdbfetcher.cpp:573
 #: src/fetch/itunesfetcher.cpp:546 src/fetch/mobygamesfetcher.cpp:673
 #: src/fetch/rpggeekfetcher.cpp:223 src/fetch/thegamesdbfetcher.cpp:661
 #: src/fetch/videogamegeekfetcher.cpp:214
@@ -3508,31 +3508,31 @@ msgstr "ISBN#"
 msgid "BoardGameGeek Link"
 msgstr "BoardGameGeek"
 
-#: src/fetch/colnectfetcher.cpp:522 src/fetch/colnectfetcher.cpp:803
+#: src/fetch/colnectfetcher.cpp:534 src/fetch/colnectfetcher.cpp:817
 #, fuzzy, kde-format
 #| msgid "Allocine Link"
 msgid "Colnect Link"
 msgstr "Allocine 連結"
 
-#: src/fetch/colnectfetcher.cpp:541 src/fetch/colnectfetcher.cpp:809
+#: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:823
 #, fuzzy, kde-format
 #| msgid "Vintage"
 msgid "Mintage"
 msgstr "釀造年份"
 
-#: src/fetch/colnectfetcher.cpp:577 src/fetch/colnectfetcher.cpp:811
+#: src/fetch/colnectfetcher.cpp:591 src/fetch/colnectfetcher.cpp:825
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:584 src/fetch/colnectfetcher.cpp:812
+#: src/fetch/colnectfetcher.cpp:598 src/fetch/colnectfetcher.cpp:826
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:813 src/fetch/giantbombfetcher.cpp:203
+#: src/fetch/colnectfetcher.cpp:827 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:575 src/fetch/mobygamesfetcher.cpp:633
 #: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:329
 #, fuzzy, kde-format
@@ -3540,11 +3540,17 @@ msgstr ""
 msgid "PEGI Rating"
 msgstr "ESRB 評比"
 
-#: src/fetch/colnectfetcher.cpp:914 src/fetch/filmaffinityfetcher.cpp:488
-#: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:633
+#: src/fetch/colnectfetcher.cpp:929 src/fetch/filmaffinityfetcher.cpp:492
+#: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:626
 #, kde-format
 msgid "Language: "
 msgstr "語言："
+
+#: src/fetch/colnectfetcher.cpp:967
+#, fuzzy, kde-format
+#| msgid "Country: "
+msgid "Country code: "
+msgstr "國家："
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
@@ -3600,8 +3606,8 @@ msgstr ""
 
 #: src/fetch/discogsfetcher.cpp:136 src/fetch/isbndbfetcher.cpp:161
 #: src/fetch/mobygamesfetcher.cpp:160 src/fetch/omdbfetcher.cpp:117
-#: src/fetch/thegamesdbfetcher.cpp:134 src/fetch/themoviedbfetcher.cpp:160
-#: src/fetch/thetvdbfetcher.cpp:160
+#: src/fetch/thegamesdbfetcher.cpp:134 src/fetch/themoviedbfetcher.cpp:157
+#: src/fetch/thetvdbfetcher.cpp:157
 #, kde-format
 msgid "An access key is required to use this data source."
 msgstr ""
@@ -3652,13 +3658,13 @@ msgstr "使用者(&U)："
 
 #: src/fetch/doubanfetcher.cpp:366 src/fetch/doubanfetcher.cpp:384
 #: src/fetch/doubanfetcher.cpp:402 src/fetch/doubanfetcher.cpp:641
-#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:320
-#: src/fetch/filmaffinityfetcher.cpp:457 src/fetch/imdbfetcher.cpp:470
+#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:324
+#: src/fetch/filmaffinityfetcher.cpp:461 src/fetch/imdbfetcher.cpp:470
 #: src/fetch/imdbfetcher.cpp:532 src/fetch/kinopoiskfetcher.cpp:338
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
-#: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:330
-#: src/fetch/themoviedbfetcher.cpp:578 src/fetch/vndbfetcher.cpp:284
+#: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:327
+#: src/fetch/themoviedbfetcher.cpp:571 src/fetch/vndbfetcher.cpp:284
 #: src/fetch/vndbfetcher.cpp:431 src/translators/filereadervideo.cpp:200
 #, kde-format
 msgid "Original Title"
@@ -3678,7 +3684,7 @@ msgstr "DVDFr 連結"
 #: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:478
 #: src/fetch/imdbfetcher.cpp:530 src/fetch/moviemeterfetcher.cpp:222
 #: src/fetch/moviemeterfetcher.cpp:291 src/fetch/omdbfetcher.cpp:255
-#: src/fetch/themoviedbfetcher.cpp:325 src/fetch/themoviedbfetcher.cpp:577
+#: src/fetch/themoviedbfetcher.cpp:322 src/fetch/themoviedbfetcher.cpp:570
 #: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:378
 #, kde-format
 msgid "Alternative Titles"
@@ -3766,7 +3772,7 @@ msgstr ""
 "<p>輸入搜尋某個項目可用更新時的參數。</p> <p>格式應與欄位取得的數值格式一樣，"
 "欄位名稱則要以括號包起來，如 <i>%(author)</i>。詳情請參考文件說明。</p>"
 
-#: src/fetch/fetcher.cpp:79
+#: src/fetch/fetcher.cpp:76
 #, kde-format
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 不允許搜尋此種收藏型態。"
@@ -3811,34 +3817,34 @@ msgstr "LCCN"
 msgid "Raw Query"
 msgstr "原始查詢"
 
-#: src/fetch/filmaffinityfetcher.cpp:279 src/fetch/filmaffinityfetcher.cpp:458
+#: src/fetch/filmaffinityfetcher.cpp:283 src/fetch/filmaffinityfetcher.cpp:462
 #, fuzzy, kde-format
 #| msgid "Filmaster Link"
 msgid "FilmAffinity Link"
 msgstr "Filmaster 連結"
 
-#: src/fetch/filmaffinityfetcher.cpp:470 src/fetch/imdbfetcher.cpp:549
-#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:615
+#: src/fetch/filmaffinityfetcher.cpp:474 src/fetch/imdbfetcher.cpp:549
+#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:608
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "最大演員數量(&M)："
 
-#: src/fetch/filmaffinityfetcher.cpp:483 src/fetch/imdbfetcher.cpp:562
-#: src/fetch/kinopoiskfetcher.cpp:694 src/fetch/themoviedbfetcher.cpp:628
+#: src/fetch/filmaffinityfetcher.cpp:487 src/fetch/imdbfetcher.cpp:562
+#: src/fetch/kinopoiskfetcher.cpp:694 src/fetch/themoviedbfetcher.cpp:621
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
 msgstr "一部電影的卡司清單可能會有很多人。請選擇搜尋傳回的最大數量。"
 
-#: src/fetch/filmaffinityfetcher.cpp:493
+#: src/fetch/filmaffinityfetcher.cpp:497
 #, fuzzy, kde-format
 #| msgid "Spain"
 msgctxt "Country"
 msgid "Spain"
 msgstr "西班牙"
 
-#: src/fetch/filmaffinityfetcher.cpp:496
+#: src/fetch/filmaffinityfetcher.cpp:500
 #, kde-format
 msgctxt "Country"
 msgid "USA"
@@ -3949,8 +3955,8 @@ msgid "Internet Movie Database"
 msgstr "網際網路電影資料庫 (imdb)"
 
 #: src/fetch/imdbfetcher.cpp:528 src/fetch/kinopoiskfetcher.cpp:668
-#: src/fetch/omdbfetcher.cpp:397 src/fetch/themoviedbfetcher.cpp:576
-#: src/fetch/thetvdbfetcher.cpp:569 src/fetch/tvmazefetcher.cpp:375
+#: src/fetch/omdbfetcher.cpp:397 src/fetch/themoviedbfetcher.cpp:569
+#: src/fetch/thetvdbfetcher.cpp:564 src/fetch/tvmazefetcher.cpp:375
 #: src/field.cpp:335
 #, kde-format
 msgid "IMDb Link"
@@ -3962,7 +3968,7 @@ msgid "Certifications"
 msgstr "憑證"
 
 #: src/fetch/imdbfetcher.cpp:533 src/fetch/itunesfetcher.cpp:532
-#: src/fetch/themoviedbfetcher.cpp:580 src/fetch/thetvdbfetcher.cpp:570
+#: src/fetch/themoviedbfetcher.cpp:573 src/fetch/thetvdbfetcher.cpp:565
 #: src/fetch/tvmazefetcher.cpp:376 src/field.cpp:339
 #, kde-format
 msgid "Episodes"
@@ -4063,13 +4069,13 @@ msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
 msgstr ""
 
-#: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:642
+#: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:635
 #, kde-format
 msgctxt "Language"
 msgid "English"
 msgstr "英文"
 
-#: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:645
+#: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:638
 #, kde-format
 msgctxt "Language"
 msgid "French"
@@ -4183,56 +4189,56 @@ msgstr "輸入伺服器使用的結果格式。"
 msgid "Field"
 msgstr "欄位"
 
-#: src/fetch/themoviedbfetcher.cpp:317 src/fetch/themoviedbfetcher.cpp:575
+#: src/fetch/themoviedbfetcher.cpp:314 src/fetch/themoviedbfetcher.cpp:568
 #: src/translators/filereadervideo.cpp:275
 #, kde-format
 msgid "TMDb Link"
 msgstr "TMDb 連結"
 
-#: src/fetch/themoviedbfetcher.cpp:335 src/fetch/themoviedbfetcher.cpp:579
-#: src/fetch/thetvdbfetcher.cpp:252 src/fetch/thetvdbfetcher.cpp:571
+#: src/fetch/themoviedbfetcher.cpp:332 src/fetch/themoviedbfetcher.cpp:572
+#: src/fetch/thetvdbfetcher.cpp:249 src/fetch/thetvdbfetcher.cpp:566
 #: src/fetch/tvmazefetcher.cpp:179 src/fetch/tvmazefetcher.cpp:377
 #, kde-format
 msgid "Network"
 msgstr ""
 
-#: src/fetch/themoviedbfetcher.cpp:639
+#: src/fetch/themoviedbfetcher.cpp:632
 #, fuzzy, kde-format
 #| msgid "China"
 msgctxt "Language"
 msgid "Chinese"
 msgstr "中國"
 
-#: src/fetch/themoviedbfetcher.cpp:648
+#: src/fetch/themoviedbfetcher.cpp:641
 #, kde-format
 msgctxt "Language"
 msgid "German"
 msgstr "德文"
 
-#: src/fetch/themoviedbfetcher.cpp:651
+#: src/fetch/themoviedbfetcher.cpp:644
 #, kde-format
 msgctxt "Language"
 msgid "Spanish"
 msgstr "西班牙文"
 
-#: src/fetch/themoviedbfetcher.cpp:654
+#: src/fetch/themoviedbfetcher.cpp:647
 #, kde-format
 msgctxt "Language"
 msgid "Russian"
 msgstr ""
 
-#: src/fetch/themoviedbfetcher.cpp:697
+#: src/fetch/themoviedbfetcher.cpp:690
 #, kde-format
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB（%1）"
 
-#: src/fetch/thetvdbfetcher.cpp:257 src/fetch/thetvdbfetcher.cpp:568
+#: src/fetch/thetvdbfetcher.cpp:254 src/fetch/thetvdbfetcher.cpp:563
 #, fuzzy, kde-format
 #| msgid "IMDb Link"
 msgid "TheTVDB Link"
 msgstr "IMDb 連結"
 
-#: src/fetch/thetvdbfetcher.cpp:595
+#: src/fetch/thetvdbfetcher.cpp:590
 #, kde-format
 msgid "Subscriber PIN: "
 msgstr ""
@@ -4889,49 +4895,49 @@ msgstr "內含"
 msgid "does not contain"
 msgstr "不含"
 
-#: src/gui/imagewidget.cpp:111
+#: src/gui/imagewidget.cpp:106
 #, kde-format
 msgid "Select Image..."
 msgstr "選擇影像..."
 
-#: src/gui/imagewidget.cpp:116
+#: src/gui/imagewidget.cpp:111
 #, kde-format
 msgid "Scan Image..."
 msgstr "掃描影像..."
 
-#: src/gui/imagewidget.cpp:125
+#: src/gui/imagewidget.cpp:120
 #, kde-format
 msgid "Open With..."
 msgstr "開啟用..."
 
-#: src/gui/imagewidget.cpp:163
+#: src/gui/imagewidget.cpp:153
 #, kde-format
 msgctxt "Clear image"
 msgid "Clear"
 msgstr "清除"
 
-#: src/gui/imagewidget.cpp:170
+#: src/gui/imagewidget.cpp:160
 #, kde-format
 msgid "Save link only"
 msgstr "只儲存連結"
 
-#: src/gui/imagewidget.cpp:293 src/gui/imagewidget.cpp:533
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:523
 #, fuzzy, kde-format
 #| msgid "Small Image"
 msgid "All Images (%1)"
 msgstr "小"
 
-#: src/gui/imagewidget.cpp:324
+#: src/gui/imagewidget.cpp:314
 #, kde-format
 msgid "Opening the selected scanner failed."
 msgstr "開啟選取的掃描器失敗。"
 
-#: src/gui/imagewidget.cpp:383
+#: src/gui/imagewidget.cpp:373
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "在 %1 中開啟影像..."
 
-#: src/gui/imagewidget.cpp:415
+#: src/gui/imagewidget.cpp:405
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "只有新加入的影像可以儲存連結。"
@@ -6251,7 +6257,7 @@ msgstr ""
 msgid "Creating new collection..."
 msgstr "建立新的收藏"
 
-#: src/mainwindow.cpp:1290 src/mainwindow.cpp:1314 src/mainwindow.cpp:1332
+#: src/mainwindow.cpp:1290 src/mainwindow.cpp:1313 src/mainwindow.cpp:1331
 #, kde-format
 msgid "Opening file..."
 msgstr "正在開啟檔案..."
@@ -6816,7 +6822,7 @@ msgstr "若勾選此選項，會產生一個標頭列，並放入欄位的標題
 msgid "Delimiter"
 msgstr "分隔符"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:247
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:243
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6828,7 +6834,7 @@ msgstr "除了逗號外，您也可以指定其他的字元做為分隔符，以
 msgid "Comma"
 msgstr "逗號"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:254
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:250
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "用逗號做分隔符。"
@@ -6838,7 +6844,7 @@ msgstr "用逗號做分隔符。"
 msgid "Semicolon"
 msgstr "分號"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:259
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:255
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "用分號做分隔符。"
@@ -6848,7 +6854,7 @@ msgstr "用分號做分隔符。"
 msgid "Tab"
 msgstr "定位點"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:264
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:260
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "用定位點（tab）做分隔符。"
@@ -6859,33 +6865,33 @@ msgstr "用定位點（tab）做分隔符。"
 msgid "Other"
 msgstr "其他"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:269
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:265
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "用自訂的字元做分隔符。"
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:276
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:272
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "也可以用自訂字元，如冒號，做為分隔符。"
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:300
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "表格欄分隔符："
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:299
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:295
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr "若欄位屬於「表格」屬性，欄分隔符用於區分每一欄的值。"
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:311
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:307
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "表格列分隔符："
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:310
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:306
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "若欄位屬於「表格」屬性，列分隔符用於區分每一列的值。"
@@ -6906,37 +6912,37 @@ msgstr "第一列包含欄位的標題(&F)"
 msgid "If checked, the first row is used as field titles."
 msgstr "若勾選此選項，則第一列會用做欄位的標題。"
 
-#: src/translators/csvimporter.cpp:246
+#: src/translators/csvimporter.cpp:242
 #, kde-format
 msgid "Delimiter:"
 msgstr "分隔符號："
 
-#: src/translators/csvimporter.cpp:252
+#: src/translators/csvimporter.cpp:248
 #, kde-format
 msgid "&Comma"
 msgstr "逗號(&C)"
 
-#: src/translators/csvimporter.cpp:258
+#: src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "&Semicolon"
 msgstr "分號(&S)"
 
-#: src/translators/csvimporter.cpp:263
+#: src/translators/csvimporter.cpp:259
 #, kde-format
 msgid "Ta&b"
 msgstr "定位點(&B)"
 
-#: src/translators/csvimporter.cpp:268
+#: src/translators/csvimporter.cpp:264
 #, kde-format
 msgid "Ot&her:"
 msgstr "其他(&H)："
 
-#: src/translators/csvimporter.cpp:330
+#: src/translators/csvimporter.cpp:326
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "此表格顯示 CSV 檔的最前面五行。"
 
-#: src/translators/csvimporter.cpp:337
+#: src/translators/csvimporter.cpp:333
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -6946,34 +6952,34 @@ msgstr ""
 "<qt>要根據收藏裡的欄位來設定每一欄，只要先選擇表格中的欄，然後選擇收藏中的欄"
 "位，最後點擊「指定欄位」按鍵即可。</qt>"
 
-#: src/translators/csvimporter.cpp:339
+#: src/translators/csvimporter.cpp:335
 #, kde-format
 msgid "Co&lumn:"
 msgstr "欄(&L)："
 
-#: src/translators/csvimporter.cpp:352
+#: src/translators/csvimporter.cpp:348
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "此欄中的日期欄位(&D)："
 
-#: src/translators/csvimporter.cpp:366
+#: src/translators/csvimporter.cpp:362
 #, kde-format
 msgid "&Assign Field"
 msgstr "指定欄位(&A)"
 
-#: src/translators/csvimporter.cpp:405
+#: src/translators/csvimporter.cpp:401
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
 "be imported."
 msgstr "要指定一個欄位，至少要先指定一個表格欄。只會匯入指定的表格欄。"
 
-#: src/translators/csvimporter.cpp:602
+#: src/translators/csvimporter.cpp:598
 #, kde-format
 msgid "Review"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:695
+#: src/translators/csvimporter.cpp:691
 #, fuzzy, kde-format
 #| msgid "New Field"
 msgid "<New Field>"
