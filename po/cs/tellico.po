@@ -3539,10 +3539,9 @@ msgid "Language: "
 msgstr "Jazyk: "
 
 #: src/fetch/colnectfetcher.cpp:967
-#, fuzzy, kde-format
-#| msgid "Country: "
+#, kde-format
 msgid "Country code: "
-msgstr "Země: "
+msgstr ""
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
@@ -5217,10 +5216,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - software pro správu sbírek, svobodný a jednoduchý"
 
 #: src/main.cpp:130
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2023, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr "(c) 2001-2023, Robby Stephenson"
+msgstr ""
 
 #: src/main.cpp:134
 #, kde-format

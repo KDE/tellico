@@ -91,7 +91,7 @@
 <para
 >Quan un camp ha d'estar limitat a uns pocs valors preestablerts, s'utilitza un tipus <emphasis
 >Opció</emphasis
->. Els valors acceptables es presenten en una llista desplegable per a la selecció. Òbviament, múltiples valors no són aplicables. Els camps com el tipus de bibliografia o la puntuació personal són camps <emphasis
+>. Els valors acceptables es presenten en una llista desplegable per a la selecció. Es permeten diversos valors. Els camps com el tipus de bibliografia o la puntuació personal són camps <emphasis
 >Opció</emphasis
 >.</para>
 

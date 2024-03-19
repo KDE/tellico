@@ -91,7 +91,7 @@
 <para
 >Wanneer een veld beperkt moet worden tot een paar vooraf ingestelde waarden, wordt een type <emphasis
 >Keuze</emphasis
-> gebruikt. De te accepteren waarden worden getoond in een keuzevak voor selectie. Natuurlijk zijn meerdere waarden niet toegestaan. Velden zoals het type bibliografie of persoonlijke waardering zijn velden van het type <emphasis
+> gebruikt. De te accepteren waarden worden getoond in een keuzevak voor selectie. Meerdere waarden kunnen worden toegestaan. Velden zoals het type bibliografie of persoonlijke waardering zijn velden van het type <emphasis
 >Keuze</emphasis
 >.</para>
 
