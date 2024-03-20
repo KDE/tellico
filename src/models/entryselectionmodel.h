@@ -48,6 +48,9 @@ public:
   void addSelectionProxy(QItemSelectionModel* selModel);
   Tellico::Data::EntryList selectedEntries() const { return m_selectedEntries; }
 
+public Q_SLOTS:
+  void clear() Q_DECL_OVERRIDE;
+
 Q_SIGNALS:
   void entriesSelected(Tellico::Data::EntryList entries);
 
@@ -57,7 +60,6 @@ private Q_SLOTS:
 private:
   Data::EntryList m_selectedEntries;
   QList< QPointer<QItemSelectionModel> > m_modelList;
-  QPointer<QItemSelectionModel> m_recentSelectionModel;
   bool m_processing;
 };
 

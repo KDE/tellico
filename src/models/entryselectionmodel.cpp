@@ -39,7 +39,7 @@ EntrySelectionModel::EntrySelectionModel(QAbstractItemModel* targetModel_,
   // when the entry model is reset, the selection signal is not triggered
   // using the modelReset signal does not work
   connect(targetModel_, &QAbstractItemModel::modelAboutToBeReset,
-          this, &QItemSelectionModel::clear);
+          this, &EntrySelectionModel::clear);
 }
 
 void EntrySelectionModel::addSelectionProxy(QItemSelectionModel* selModel_) {
@@ -48,10 +48,17 @@ void EntrySelectionModel::addSelectionProxy(QItemSelectionModel* selModel_) {
   connect(selModel_, &QItemSelectionModel::selectionChanged,
           this, &EntrySelectionModel::selectedEntriesChanged);
   connect(selModel_->model(), &QAbstractItemModel::modelAboutToBeReset,
-          this, [this]() { m_selectedEntries.clear();});
+          this, &EntrySelectionModel::clear);
+}
+
+void EntrySelectionModel::clear() {
+  m_selectedEntries.clear();
+  KLinkItemSelectionModel::clear();
 }
 
 void EntrySelectionModel::selectedEntriesChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
+  Q_UNUSED(selected_);
+  Q_UNUSED(deselected_);
   // when clearSelection() is called on the other models, then there's a cascading series of calls to
   // selectedEntriesChanged(). But we only care about the first one
   if(m_processing) {
@@ -66,29 +73,13 @@ void EntrySelectionModel::selectedEntriesChanged(const QItemSelection& selected_
     return;
   }
 
-  if(m_recentSelectionModel != selectionModel) {
-    m_selectedEntries.clear();
-  }
-  m_recentSelectionModel = selectionModel;
-
-  // clearing the selection in the other models will have cascading calls to selectionChanged()
-  // now, add and remove selected entries from the list
-  // the selection will include an index for every column, need to check for duplicates
-  // can't use a QSet of entries since we want to retain the selection ordering
-  QSet<Data::ID> IDlist;
-  foreach(const QModelIndex& index, deselected_.indexes()) {
+  m_selectedEntries.clear();
+  // selectedIndexes() includes an index for every row/column, but we only want one per row
+  const auto selectedIndexes = selectionModel->selectedRows();
+  for(const auto& index : selectedIndexes) {
     Data::EntryPtr entry = index.data(EntryPtrRole).value<Data::EntryPtr>();
-    if(entry && !IDlist.contains(entry->id())) {
-      m_selectedEntries.removeOne(entry);
-      IDlist += entry->id();
-    }
-  }
-  IDlist.clear();
-  foreach(const QModelIndex& index, selected_.indexes()) {
-    Data::EntryPtr entry = index.data(EntryPtrRole).value<Data::EntryPtr>();
-    if(entry && !IDlist.contains(entry->id())) {
+    if(entry) {
       m_selectedEntries += entry;
-      IDlist += entry->id();
     }
   }
 
