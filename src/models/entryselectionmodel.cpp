@@ -74,7 +74,8 @@ void EntrySelectionModel::selectedEntriesChanged(const QItemSelection& selected_
   }
 
   m_selectedEntries.clear();
-  const auto selectedIndexes = selectionModel->selectedIndexes();
+  // selectedIndexes() includes an index for every row/column, but we only want one per row
+  const auto selectedIndexes = selectionModel->selectedRows();
   for(const auto& index : selectedIndexes) {
     Data::EntryPtr entry = index.data(EntryPtrRole).value<Data::EntryPtr>();
     if(entry) {
