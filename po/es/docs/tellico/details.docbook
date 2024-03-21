@@ -91,7 +91,7 @@
 <para
 >Cuando un campo debe limitarse a unos pocos valores preestablecidos, se utiliza el tipo <emphasis
 >Elección</emphasis
->. Los valores aceptables se presentan en una caja desplegable para su selección. Obviamente, no se permiten valores múltiples. Los campos tales como el tipo de bibliografía o la calificación personal son campos de tipo <emphasis
+>. Los valores aceptables se presentan en una caja desplegable para su selección. Se permiten valores múltiples. Algunos campos, como el tipo de bibliografía o la calificación personal, son campos de tipo <emphasis
 >Elección</emphasis
 >.</para>
 
