@@ -74,12 +74,15 @@ void EntrySelectionModel::selectedEntriesChanged(const QItemSelection& selected_
   }
 
   m_selectedEntries.clear();
+  // use a set to ensure no duplicates but still retain selection order
+  QSet<Data::ID> entryIds;
   // can't use selectedRows() since it only returns rows which have all columns selected
   const auto selectedIndexes = selectionModel->selectedIndexes();
   for(const auto& index : selectedIndexes) {
     Data::EntryPtr entry = index.data(EntryPtrRole).value<Data::EntryPtr>();
-    if(entry && !m_selectedEntries.contains(entry)) {
+    if(entry && !entryIds.contains(entry->id())) {
       m_selectedEntries += entry;
+      entryIds << entry->id();
     }
   }
 
