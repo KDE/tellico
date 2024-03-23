@@ -25,7 +25,6 @@
 #include "dvdfrfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>

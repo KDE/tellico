@@ -407,7 +407,7 @@ bool FieldHandler::end(const QStringRef&, const QStringRef&) {
       field->setProperty(QStringLiteral("template"), field->description());
       field->setDescription(QString());
     } else if(isI18n && field->type() == Data::Field::Table) {
-      // translate table column headers if requestsed (such as Title, Artist, etc.
+      // translate table column headers if requested (such as Title, Artist, etc.)
       const auto props = field->propertyList();
       for(auto i = props.constBegin(); i != props.constEnd(); ++i) {
         if(i.key().startsWith(QLatin1String("column"))) {
