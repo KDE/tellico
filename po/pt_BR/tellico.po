@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-18 02:00+0000\n"
-"PO-Revision-Date: 2024-01-11 21:00-0300\n"
+"PO-Revision-Date: 2024-03-23 18:59-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -3576,10 +3576,9 @@ msgid "Language: "
 msgstr "Idioma: "
 
 #: src/fetch/colnectfetcher.cpp:967
-#, fuzzy, kde-format
-#| msgid "Country: "
+#, kde-format
 msgid "Country code: "
-msgstr "País: "
+msgstr "Código do país: "
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
@@ -5264,10 +5263,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - software gerenciador de coleções, gratuito e simples"
 
 #: src/main.cpp:130
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2023, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr "(c) 2001-2023, Robby Stephenson"
+msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:134
 #, kde-format
