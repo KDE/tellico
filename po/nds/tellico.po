@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-17 03:46+0000\n"
+"POT-Creation-Date: 2024-03-24 03:09+0000\n"
 "PO-Revision-Date: 2011-12-11 07:08+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -3358,7 +3358,7 @@ msgstr "Allocine.fr"
 #: src/fetch/animenfofetcher.cpp:292 src/fetch/animenfofetcher.cpp:495
 #: src/fetch/doubanfetcher.cpp:344 src/fetch/doubanfetcher.cpp:362
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:618
-#: src/fetch/dvdfrfetcher.cpp:173 src/fetch/filmaffinityfetcher.cpp:326
+#: src/fetch/dvdfrfetcher.cpp:172 src/fetch/filmaffinityfetcher.cpp:326
 #: src/fetch/filmaffinityfetcher.cpp:463 src/fetch/imdbfetcher.cpp:902
 #: src/fetch/imdbfetcher.cpp:1822 src/fetch/kinopoiskfetcher.cpp:341
 #: src/fetch/kinopoiskfetcher.cpp:469 src/fetch/kinopoiskfetcher.cpp:673
@@ -3675,7 +3675,7 @@ msgstr ""
 "com an, un is binnen elk Link na de Nettsiet vun Amazon.com inslaten."
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
-#: src/fetch/dvdfrfetcher.cpp:175 src/fetch/imdbfetcher.cpp:967
+#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/imdbfetcher.cpp:967
 #: src/fetch/imdbfetcher.cpp:1820 src/fetch/moviemeterfetcher.cpp:225
 #: src/fetch/moviemeterfetcher.cpp:294 src/fetch/omdbfetcher.cpp:258
 #: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:576
@@ -3710,7 +3710,7 @@ msgstr "AnimeNfo-Beweerten"
 #: src/fetch/animenfofetcher.cpp:505 src/fetch/arxivfetcher.cpp:337
 #: src/fetch/bedethequefetcher.cpp:465 src/fetch/bibsonomyfetcher.cpp:190
 #: src/fetch/dbcfetcher.cpp:160 src/fetch/dblpfetcher.cpp:132
-#: src/fetch/doubanfetcher.cpp:626 src/fetch/dvdfrfetcher.cpp:183
+#: src/fetch/doubanfetcher.cpp:626 src/fetch/dvdfrfetcher.cpp:182
 #: src/fetch/filmasterfetcher.cpp:323 src/fetch/gaminghistoryfetcher.cpp:438
 #: src/fetch/googlescholarfetcher.cpp:277 src/fetch/hathitrustfetcher.cpp:318
 #: src/fetch/ibsfetcher.cpp:396 src/fetch/igdbfetcher.cpp:616
@@ -3854,7 +3854,7 @@ msgstr "Discogs-Link"
 
 #. i18n("Nationality");
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:515
-#: src/fetch/dvdfrfetcher.cpp:176 src/fetch/musicbrainzfetcher.cpp:371
+#: src/fetch/dvdfrfetcher.cpp:175 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:216 src/fetch/upcitemdbfetcher.cpp:472
 #: src/fetch/vgcollectfetcher.cpp:340 src/fetch/vgcollectfetcher.cpp:375
 #, kde-format
@@ -3889,7 +3889,7 @@ msgstr "&Bruker: "
 msgid "Douban Link"
 msgstr "Douban-Link"
 
-#: src/fetch/dvdfrfetcher.cpp:174
+#: src/fetch/dvdfrfetcher.cpp:173
 #, kde-format
 msgid "DVDFr Link"
 msgstr "DVDFr-Link"
