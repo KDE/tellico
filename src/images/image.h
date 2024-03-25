@@ -53,6 +53,8 @@ friend class Tellico::FileHandler;
 friend class Tellico::ImageJob;
 
 public:
+  Image(const Image& image);
+  Image& operator=(const Image&);
   ~Image();
 
   const QString& id() const { return m_id; };
@@ -74,8 +76,6 @@ public:
 
 private:
   Image();
-  Image(const Image& image);
-  Image& operator=(const Image&);
   explicit Image(const QString& filename, const QString& id = QString());
   Image(const QImage& image, const QString& format);
   Image(const QByteArray& data, const QString& format, const QString& id);

@@ -74,7 +74,7 @@ void AudioFileTest::testDirectory() {
   QCOMPARE(entry->field("title"), QStringLiteral("mp3 album"));
   QVERIFY(entry->field("file").contains(QStringLiteral("data/audio/test.mp3")));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
+  auto img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
   QVERIFY(!img.isNull());
 }
 

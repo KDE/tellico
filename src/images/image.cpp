@@ -40,21 +40,9 @@ QList<QByteArray> Image::s_outputFormats;
 Image::Image() : QImage(), m_linkOnly(false) {
 }
 
-Image::Image(const Image& other) : QImage(other)
-  , m_id(other.m_id)
-  , m_format(other.m_format)
-  , m_linkOnly(other.m_linkOnly) {
-}
+Image::Image(const Image& other) = default;
 
-Image& Image::operator=(const Image& other) {
-  QImage::operator=(other);
-  if(this != &other) {
-    m_id = other.m_id;
-    m_format = other.m_format;
-    m_linkOnly = other.m_linkOnly;
-  }
-  return *this;
-}
+Image& Image::operator=(const Image& other) = default;
 
 // I'm using the MD5 hash as the id. I consider it rather unlikely that two images in one
 // collection could ever have the same hash, and this lets me do a fast comparison of two images
