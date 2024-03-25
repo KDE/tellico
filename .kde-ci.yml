@@ -16,6 +16,7 @@ Dependencies:
     'frameworks/kitemmodels': '@latest-kf6'
     'frameworks/knewstuff': '@latest-kf6'
     'multimedia/libkcddb': '@same'
+    'graphics/libksane': '@same'
 
 - 'on': ['Linux/Qt5', 'FreeBSD/Qt5']
   'require':

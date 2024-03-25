@@ -129,6 +129,9 @@ set_package_properties(KF${KF_MAJOR_VERSION}NewStuff PROPERTIES
 if (KF_MAJOR_VERSION STREQUAL "5")
     set(KSANE_TARGET_NAME KF5::Sane)
     find_package(KF5Sane)
+else()
+    set(KSANE_TARGET_NAME KSaneWidgets6)
+    find_package(KSaneWidgets6)
 endif()
 set_package_properties(KSANE_TARGET_NAME PROPERTIES
     DESCRIPTION "Support for adding scanned images to a collection"
