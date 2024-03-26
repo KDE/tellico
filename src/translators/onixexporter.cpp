@@ -103,7 +103,6 @@ bool ONIXExporter::exec() {
 
   zip.close();
   return FileHandler::writeDataURL(url(), data, options() & Export::ExportForce);
-//  return FileHandler::writeTextURL(url(), text(),  options() & Export::ExportUTF8, options() & Export::ExportForce);
 }
 
 QString ONIXExporter::text() {
