@@ -1,0 +1,242 @@
+<chapter id="advanced">
+<title
+>Napredna raba</title>
+
+<sect1 id="command-line">
+<title
+>Možnosti ukazne vrstice</title>
+
+<para
+>Kadar poganjate &appname; iz ukazne vrstice, obstaja več možnosti za odpiranje podatkovnih datotek. Lahko si jih ogledate z zagonom <userinput
+>tellico --help</userinput
+>. </para>
+
+<programlisting
+>Raba: tellico [možnosti] [filename]
+
+Tellico - collection management software, free and simple
+
+Možnosti:
+  --nofile                  Ponovno ne odpiraj zadnje odprte datoteke
+  --bibtex                  Uvoz &lt;filename&gt; kot datoteka bibtex
+  --mods                    Uvoz &lt;filename&gt; kot datoteka MODS
+  --ris                     Uvoz &lt;filename&gt; kot datoteka RIS
+  --pdf                     Uvoz &lt;filename&gt; kot datoteka PDF
+
+Argumenti:
+  [filename]                Datoteka za odpiranje
+</programlisting>
+
+</sect1>
+
+<sect1 id="dbus-interface">
+<title
+>&DBus; Vmesnik</title>
+
+<para
+>&appname; ima minimalen &DBus; vmesnik, ki je lahko uporaben za skriptiranje ali interakcijo z delujočo aplikacijo iz ukazne vrstice. Kot pri vseh&DBus; klicih morate določiti storitev, s katero želite vzpostaviti vmesnik,in poseben vmesnik. Ime storitev &DBus; <constant
+>org.kde.tellico</constant
+>. </para>
+
+<sect2 id="dbus-commands">
+<title
+>Ukazi &DBus;</title>
+
+<para
+>Dva primarna objekta &DBus; sta na razpolago v vmesniku tellico: <constant
+>Tellico</constant
+> in <constant
+>Zbirke</constant
+>.</para>
+
+<sect3 id="dbus-tellico">
+<title
+><constant
+>Tellico</constant
+> Objekt</title>
+
+<para
+>Poln seznam ukazov &DBus; v <constant
+>tellico</constant
+> objektu je prikazan spodaj:</para>
+
+<programlisting
+>bool importTellico(QString file, QString action)
+bool importBibtex(QString file, QString action)
+bool importMODS(QString file, QString action)
+bool importPDF(QString file, QString action)
+bool importRIS(QString file, QString action)
+bool exportXML(QString file, bool filtered)
+bool exportZip(QString file, bool filtered)
+bool exportBibtex(QString file, bool filtered)
+bool exportHTML(QString file, bool filtered)
+bool exportCSV(QString file, bool filtered)
+QList&lt;int&gt; selectedEntries()
+QList&lt;int&gt; filteredEntries()
+void openFile(QString file)
+void setFilter(QString text)
+bool showEntry(int id)
+</programlisting>
+
+<para
+>Pri štirih ukazih za uvoz je prvi argument datoteka za uvoz, drugi pa dejanje uvoza. Na voljo so tri dejanja: <emphasis
+>zamenjaj</emphasis
+>, <emphasis
+>dodaj</emphasis
+> in <emphasis
+>spoj</emphasis
+>. Za uvoz so podprti štirje formati datotek: Tellico &XML; datoteke, datoteke Bibtex, datoteke MODS in datoteke RIS. </para>
+
+<para
+>Trenutna odprta zbirka v &appname; lahko izvozite v datoteko bodisi v Tellico &XML; format Tellico ZIP, Bibtex, &HTML; ali vrednosti, ločene z vejico (CSV). Ukazi za izvoz sprejmejo izbirni argument, s katerim določijo, ali naj bo zbirka omejena na trenutni filter ali ne. </para>
+
+<para
+>Seznam ID-jev vnosov, ki so trenutno izbrani ali filtrirani, lahko olajša prikazovanje ali posodabljanje vnosov v pogledu.</para>
+
+<para
+>Novo podatkovno datoteko lahko odprete z ukazom <command
+>openFile()</command
+>. Določiti je treba celotno pot.</para>
+
+<para
+>Nov filter lahko nastavite z ukazom <command
+>setFilter()</command
+>, ki je enakovreden vnašanju v polje filtra v glavnem oknu.</para>
+
+<para
+>Glede na ID vnosa bo <command
+>showEntry()</command
+> izbral ta vnos in prikazal podrobnosti vnosa v glavnem oknu.</para>
+</sect3>
+
+<sect3 id="dbus-collection">
+<title
+>Objekt <constant
+>Zbirke</constant
+></title>
+
+<para
+>Celoten seznam &DBus; ukazov v objektu <constant
+>Zbirke</constant
+> je prikazan spodaj:</para>
+
+<programlisting
+>int addEntry()
+bool removeEntry(int entryID)
+QStringList allValues(QString fieldName)
+QStringList entryValues(int entryID, QString fieldName)
+QStringList selectedBibtexKeys()
+QString entryBibtexKey(int entryID)
+bool setEntryValue(int entryID, QString fieldName, QString value)
+bool addEntryValue(int entryID, QString fieldName, QString value)
+</programlisting>
+
+<para
+>Nov prazen vnos se lahko ustvari v trenutni zbirki z uporabo ukaza <command
+>addEntry()</command
+>. Povratna vrednost je ID vnosa, ki jih lahko nato uporabite za nastavitev vrednosti polj v vnosu. Vnos je lahkoizbrisani iz zbirke s klicem <command
+>removeEntry()</command
+>. </para>
+
+<para
+>Klic <command
+>allValues()</command
+> z uporabo samo imena polja bo vrnil vse vrednosti za to polje za trenutno izbrane vnose. Če ni izbranih vnosov je povratni seznam prazen. Če je vključen ID vnosa v ukazu so vrnjene vrednosti polja za ta določen vnos. </para>
+
+<para
+>Če je tekoča zbirka bibliografija, klic <command
+>selectedBibtexKeys()</command
+> vrne ključ navedbe Bibtex za vse izbrane vnose. BibtexKey za določen vnos lahko najdete v z uporabo ukaza <command
+>entryBibtexKey()</command
+>. </para>
+
+<para
+>Vnose lahko urejate neposredno z &DBus; vmesnikom. Glede na vnosa ID, bo <command
+>setEntryValue()</command
+> neposredno nastavil vrednost polja. Da bi dodali vrednost, ne da bi to vplivalo na obstoječe vrednosti, uporabite <command
+>addEntryValue()</command
+>. Nova vrednost se doda na konec obstoječega seznama. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="dbus-examples">
+<title
+>&DBus; Primeri</title>
+
+<para
+>Tukaj je nekaj primerov za skript &appname; z uporabo vmesnika &DBus;. Upoštevajte, da lahko na vašem sistemu ukaz <command
+>qdbus</command
+> obstaja kot <command
+>qdbus-qt5</command
+> ali kaj podobnega. </para>
+
+<screen width="40"
+><emphasis
+>Odpri datoteko Bibtex</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.importBibtex "/home/robby/reference.bib" "replace"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Izvoz datoteke Bibtex file</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Izvoz datoteke Bibtex z uporabo trenutnega filtra</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib true</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Odmev ključa navedbe trenutne izbire</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.selectedBibtexKeys</userinput>
+<computeroutput
+>stephenson2004</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>Dodaj nov vnos in nastavi naslov</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>myid=`qdbus org.kde.tellico /Collections org.kde.tellico.addEntry`</userinput>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.setEntryValue $myid title "My New Book"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+</sect2>
+
+</sect1>
+
+</chapter>

@@ -1,0 +1,596 @@
+<chapter id="importing-exporting">
+<title
+>Uvoz in izvoz podatkov</title>
+
+<para
+>&appname; lahko uvaža in izvaža najrazličnejše podatkovne datoteke ter išče informacije na različnih spletnih mestih. </para>
+
+<sect1 id="internet-search">
+<title
+>Uvoz iz interneta</title>
+<para
+>&appname; lahko išče po različnih internetnih straneh s pomočjo <interface
+>Pogovorno okno za internetno iskanje</interface
+>. Vnose je mogoče neposredno uvoziti in dodati vaši trenutni zbirki. Različni ponudniki so konfigurirani prek <link linkend="data-sources-options"
+>Možnosti podatkovnih virov</link
+>. </para>
+
+<para
+>Iskanja lahko uporabljajo različne kriterije: <guilabel
+>Naziv</guilabel
+>, <guilabel
+>Oseba</guilabel
+>, <guilabel
+>ISBN</guilabel
+>, <guilabel
+>UPC/EAN</guilabel
+>, <guilabel
+>LCCN</guilabel
+> guilabel
+> ali <guilabel
+>Ključna beseda</guilabel
+>. Za nekatere vire podatkov niso na voljo vsi kriteriji. Vrednosti <acronym
+>ISBN</acronym
+> in <acronym
+>LCCN</acronym
+> sta samo za knjige, vrednosti <acronym
+>UPC</acronym
+> ali <acronym
+>EAN</acronym
+> pa lahko veljajo za katero koli vrsto predmeta.</para>
+
+<para
+>Ko se iskanje začne, gumb <guibutton
+>Išči</guibutton
+> postane <guibutton
+>Ustavi</guibutton
+>, kar bo končalo iskanje. Ko so rezultati najdeni, so dodani na seznam neposredno pod iskalno polje, kjer se bo z izbiro elementa prikazal rezultat, ne da bi ga dodali v zbirko. Če kliknete gumb <guibutton
+>Dodaj vnos</guibutton
+>, boste v svojo zbirko dodali vse izbrane elemente. Če ima vir podatkov več rezultatov, kot je bilo prvotno zahtevanih, postane gumb <guibutton
+>Pridobi več rezultatov</guibutton
+> aktiven. Če kliknete <guibutton
+>Počisti</guibutton
+>, boste odstranili vse trenutne rezultate in ponastavili iskanje. </para>
+
+<screenshot>
+<screeninfo
+>&appname; <interface
+>Pogovorno okno internetnega iskanja</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fetch-dialog.png"/></imageobject>
+<textobject
+><phrase
+>&appname; <interface
+>Pogovorno okno internetnega iskanja</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Najdeni bodo le vnosi, ki se ujemajo s trenutno vrsto zbirke. Stolpec <guilabel
+>Opis</guilabel
+> vsebuje dodatne informacije o vnosu, da lahko na primer razlikujete med videoposnetki v različnih formatih ali knjigami v različnih vezavah. Ko je vnos uspešno dodan v zbirko, se prvemu stolpcu na seznamu doda kljukica. </para>
+
+<para
+>Več vnosov je mogoče dodati hkrati z uporabo standardnega &kde; metoda za večkratno izbiro, ki običajno vključuje držanje &Shift; ali &Ctrl; tipko ob kliku na predmet. </para>
+
+<para
+>Za lažjo uporabo čitalnikov črtne kode lahko iskanja vključujejo več vrednosti ISBN/UPC. Če izberete potrditveno polje <guilabel
+>Iskanje po več ISBN/UPC</guilabel
+>, boste onemogočili iskalno polje in omogočili gumb <guibutton
+>Uredi vrednosti ISBN/UPC ...</guibutton
+>, ki bo odprl večvrstični vnos besedila škatla. Vsak ISBN mora biti vnesen v vrstico zase. Ko zaprete polje, bo vsak ISBN preverjen za pravilno oblikovanje. Preverjanje ISBN lahko pretvori 13-mestne vrednosti EAN in polne <acronym
+>UPC</acronym
+> kode v pravilno oblikovanje. Seznam ISBN je mogoče prebrati tudi iz besedilne datoteke. </para>
+
+</sect1>
+
+<sect1 id="importing">
+<title
+>Uvažanje podatkov</title>
+
+<para
+>&appname; ponuja tri različna dejanja pri uvozu podatkov. <guilabel
+>Zamenjaj trenutno zbirko</guilabel
+> zapre trenutno zbirko in ustvari novo s podatki iz uvožene datoteke. <guilabel
+>Dodaj trenutni zbirki</guilabel
+> pove &appname; da dodate vse vnose v uvoženi zbirki v trenutno in dodate vsa polja, ki trenutno ne obstajajo. Dejanje <guilabel
+>Združi zbirko</guilabel
+> je enako kot pripenjanje, le da se vsak uvožen vnos primerja s trenutnimi, vsi enaki vnosi pa so preskočeni. &appname; poskuša identificirati ujemajoče se vnose, ki niso povsem identični, s primerjavo pomembnih polj in nato združi vnose. Na primer, glasbene zbirke primerjajo izvajalca in album, skladbe pa bi bile združene za ujemajoče se vnose. <link linkend="importing-audio-files"
+>Uvoznik zvočnih datotek</link
+> lahko pravilno sestavi sezname skladb z združevanjem vnosov. </para>
+
+<sect2 id="alternate-software">
+<title
+>Uvažanje podatkov iz druge programske opreme</title>
+
+<para
+>&appname; lahko uvozi podatke neposredno iz različnih drugih programov za upravljanje zbirk, vključno z <application
+><ulink url="https://gitlab.com/GCstar/GCstar"
+>GCstar</ulink
+></application
+>, <application
+><ulink url="https://www.datacrow.net/"
+>Data Crow</ulink
+></application
+>, <application
+><ulink url="https://github.com/mvz/alexandria-book-collection- manager"
+>Alexandria</ulink
+></application
+>, <application
+><ulink url="https://www.delicious-monster.com"
+>Delicious Library</ulink
+></application
+>, <application
+><ulink url="https://www.collectorz.com"
+>Collectorz</ulink
+></application
+>, <application
+><ulink url="http://www.antp.be/software/moviecatalog/"
+>Ant Movie Katalog</ulink
+></application
+>, <application
+><ulink url="https://en.wikipedia.org/wiki/Referencer"
+>Referencer</ulink
+></application
+> in <application
+><ulink url ="https://launchpad.net/griffith"
+>Griffith</ulink
+></application
+>.</para>
+
+</sect2>
+
+<sect2 id="import-data-files">
+<title
+>Uvažanje drugih formatov podatkov</title>
+<para
+>&appname; lahko uvozi podatke iz različnih drugih formatov datotek, vključno s <acronym
+>CSV</acronym
+>, bibtex, zvočnimi diski in datotekami, <acronym
+>MODS</acronym
+>, &PDF; in <acronym
+>RIS</acronym
+>.</para>
+
+<sect3 id="importing-tellico">
+<title
+>Uvažanje podatkov &appname;</title>
+
+<para
+>Druge podatkovne datoteke &appname; je mogoče uvoziti neposredno. Zamenjava trenutne zbirke z uvozom &appname; datoteka je isto kot samo odpiranje datoteke same. Vrednost uvoza &appname; podatkov je predvsem za dodajanje ali združevanje dveh zbirk. </para>
+</sect3>
+
+<sect3 id="importing-csv">
+<title
+>Uvažanje podatkov CSV</title>
+
+<para
+>Z vejicami ločene vrednosti (<acronym
+>CSV</acronym
+>) so običajen način za uvoz in izvoz tabelaričnih podatkov. Vsaka vrednost polja je ločena z vejico, z enim vnosom na vrstico. Naslovi polj so lahko vključeni v prvo vrstico. Uvoznik CSV ni omejen na uporabo vejice kot ločila. Uporabi se lahko kateri koli znak ali niz. </para>
+
+<screenshot>
+<screeninfo
+>Pogovorno okno za uvoz CSV</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="csv-dialog.png"/></imageobject>
+<textobject
+><phrase
+>Pogovorno okno za uvoz CSV</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Najprej izberite vrsto zbirke, ki jo uvažate. Če dodajate ali združujete svojo odprto zbirko, je vrsta omejena na vašo trenutno vrsto zbirke. Če prva vrstica datoteke CSV vsebuje naslove polj, kliknite potrditveno polje in uvoznik bo samodejno primerjal naslove s polji v trenutni zbirki. Če se naslov polja ujema, se glava tega stolpca spremeni in pokaže, da je bil stolpec dodeljen temu polju. Če datoteka uporablja ločilo, ki ni vejica, to možnost ustrezno spremenite. </para>
+
+<para
+>Za pravilen uvoz datoteke v &appname; mora aplikacija vedeti, katero polje ustreza posameznemu stolpcu. <emphasis
+>Če ima stolpec samo številko v glavi, podatki v tem stolpcu ne bodo uvoženi.</emphasis
+> Vsakemu stolpcu morate dodeliti polja tako, da izberete stolpec, tako da ga kliknete ali spremenite številko stolpca sam, nato pa iz spustnega menija izberete polje za dodelitev in kliknete gumb <guibutton
+>Dodeli polje</guibutton
+>. Če morate v zbirko dodati novo polje, zadnji element v spustnem polju odpre <link linkend="fields-dialog"
+><interface
+>Pogovorno okno Polja zbirke</interface
+></link
+>. </para>
+
+<para
+>Zaradi kompaktnosti je v pogovornem oknu prikazanih samo prvih pet vrstic uvožene datoteke CSV. Vendar bodo vse vrstice v datoteki uvožene. </para>
+
+</sect3>
+
+<sect3 id="importing-audio">
+<title
+>Uvažanje zvoka &CD; podatki</title>
+
+<para
+>&appname; lahko uporablja storitev <ulink url="http://gnudb.org"
+>freedb.org</ulink
+> za iskanje informacij o &CD;, vključno s seznamom skladb. Odvisno od vaše distribucije lahko nastavitve za dostop do storitve nastavite v &kde; &systemsettings;. &CD; dodani so izvajalec, naslov, zvrst, leto in seznam skladb. </para>
+
+<para
+>Poleg tega, če disk vsebuje &CD;-besedilo, se te informacije preberejo in dodajo uvoženemu vnosu. </para>
+</sect3>
+
+<sect3 id="importing-audio-files">
+<title
+>Uvažanje metapodatkov zvočne datoteke</title>
+
+<para
+>&appname; lahko pregleda mapo in prebere oznake za pogoste formate zvočnih datotek, kot sta <literal role="extension"
+>mp3</literal
+> in <literal role="extension"
+>ogg</literal
+>. Pesmi so vnesene v glasbeno zbirko, kjer je vsak vnos album. Če datoteke pesmi vsebujejo številko skladbe, je ime skladbe vstavljeno na pravo mesto na seznamu skladb. Vnosu so dodani tudi podatki o izvajalcu in žanru. Če oznake pesmi vsebujejo komentarje, so dodani v polje za komentarje v vnosu, pred katerim je ime datoteke. </para>
+
+<para
+>Poleg tega, če mapa vsebuje datoteko <filename
+>.directory</filename
+> in se ime mape ujema z naslovom albuma, se vnos <literal
+>ikona</literal
+> v namizni datoteki uporabi kot naslovna slika albuma . </para>
+
+<para
+>Uvoznik metapodatkov zvočnih datotek lahko rekurzivno pregleda mapo, da poišče vse zvočne datoteke v kateri koli podmapi, vendar simbolnim povezavam ne sledi. &appname; uporablja <ulink url="https://taglib.org"
+>knjižnico TagLib</ulink
+> za branje metapodatkov zvočne datoteke in tako lahko uvozi podatke iz katere koli vrste datoteke, ki jo TagLib razume. </para>
+
+</sect3>
+
+<sect3 id="importing-bibtex">
+<title
+>Uvažanje podatkov Bibtex</title>
+
+<para
+><ulink url="http://en.wikipedia.org/wiki/Bibtex"
+>Bibtex</ulink
+> je format bibliografije, ki se uporablja s sistemom za pripravo dokumentov LaTeX. V datoteko so lahko vključene različne vrste bibliografskih referenc. &appname; uvozi datoteke bibtex kot <link linkend="bibliography"
+>Bibliografsko zbirko</link
+>. </para>
+
+<para
+>Če uvoznik bibtex v datoteki naleti na polja, ki niso v privzeti bibliografski zbirki, so dodana kot polja <link linkend="line"
+>Preprosto besedilo</link
+>, z dvema izjemama. Če vrednost polja vsebuje več kot 100 znakov, postane polje <link linkend="para"
+>Odstavek</link
+>. Če se zdi, da vrednost polja vsebuje &URL; ali sklic na datoteko, potem se ustvari polje <link linkend="url"
+>&URL;</link
+>. &appname; uporablja notranjo kopijo <ulink url="http://www.gerg.ca/software/btOOL/"
+>knjižnice btparse</ulink
+> za razčlenjevanje datotek bibtex. </para>
+
+<para
+><ulink url="http://bibtexml.sf.net"
+>Bibtexml</ulink
+> je &XML; predstavitev podatkov bibtex, podatki iz uvožene datoteke bibtexml pa se obravnavajo na enak način kot podatki bibtex. </para>
+</sect3>
+
+<sect3 id="importing-mods">
+<title
+>Uvažanje podatkov MODS</title>
+
+<para
+><acronym
+><ulink url="http://www.loc.gov/standards/mods/"
+>MODS</ulink
+></acronym
+> je format za predstavitev različnih vrst medijskih zbirk. Trenutno &appname; uvaža samo knjige kot <link linkend="bibliography"
+>Bibliografsko zbirko</link
+>. </para>
+
+</sect3>
+
+<sect3 id="importing-pdf">
+<title
+>Uvažanje &PDF; podatki</title>
+<para
+>Če &appname; je bil preveden s podporo za <emphasis
+>exempi</emphasis
+> ali <emphasis
+>poppler</emphasis
+>, metapodatki iz &PDF; datoteke je mogoče uvoziti. Metapodatki lahko vključujejo informacije o naslovu, avtorju in datumu ter bibliografske identifikatorje, ki se nato uporabijo za posodobitev drugih informacij. </para>
+</sect3>
+
+<sect3 id="importing-ris">
+<title
+>Uvažanje podatkov RIS</title>
+<para
+>Format <ulink url="https://en.wikipedia.org/wiki/RIS_(file_format)"
+><acronym
+>RIS</acronym
+></ulink
+> je bibliografski format datoteke, ki ga uporablja <application
+>EndNote</application
+>, <application
+>Reference Manager</application
+> in drugi. &appname; uvozi datoteke RIS kot <link linkend="bibliography"
+>Bibliografsko zbirko</link
+>. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="import-online-collection">
+<title
+>Uvažanje spletnih zbirk</title>
+<para
+>&appname; se lahko poveže in uvaža s spletnih mest, ki upravljajo osebne zbirke.</para>
+
+<sect3 id="importing-boardgamegeek">
+<title
+>Uvažanje zbirke BoardGameGeek</title>
+<para
+><ulink url="https://boardgamegeek.com"
+>BoardGameGeek</ulink
+> je spletni vir in skupnost za družabne igre. &appname; lahko uvozi družabne igre v uporabnikovi zbirki, če je zbirka nastavljena kot javno dostopna. Uvožena zbirka je lahko omejena na predmete, ki so označeni kot lastniški. </para>
+</sect3>
+
+<sect3 id="importing-goodreads">
+<title
+>Uvažanje zbirke Goodreads</title>
+<para
+><ulink url="https://www.goodreads.com"
+>Goodreads</ulink
+> je spletno socialno omrežje za bralce, ki spremljajo knjižne zbirke. &appname; lahko uvozi seznam knjig v uporabnikovi zbirki glede na uporabniško ime ali ID uporabnika, če je zbirka nastavljena kot javno dostopna. </para>
+</sect3>
+
+<sect3 id="importing-librarything">
+<title
+>Uvažanje zbirke LibraryThing</title>
+<para
+><ulink url="https://www.librarything.com"
+>LibraryThing</ulink
+> je spletna storitev, ki ljudem pomaga enostavno katalogizirati svoje knjige. &appname; lahko uvozi seznam knjig v uporabnikovi zbirki, <ulink url="https://www.librarything.com/export.php?export_type=json"
+>izvožen v formatu JSON</ulink
+>. </para>
+</sect3>
+
+<sect3 id="importing-discogs">
+<title
+>Uvažanje zbirke Discogs</title>
+<para
+><ulink url="https://www.discogs.com"
+>Discogs</ulink
+> je spletna zbirka podatkov in tržnica glasbenih izdaj. &appname; lahko uvozi seznam glasbenih izdaj v uporabnikovi zbirki glede na uporabniško ime, če je zbirka nastavljena kot javno dostopna. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="importing-file-listing">
+<title
+>Uvažanje seznamov datotek</title>
+
+<para
+>Najboljši način za ustvarjanje <link linkend="file-catalog"
+>Kataloga datotek</link
+> je uvoz vsebine mape. Mapo lahko iščete rekurzivno, da dodate vse datoteke, ki jih najdete v njej. Ta uvoznik je najbolj uporaben za varnostne kopije seznamov in katalogizacijo medijev, kot je &CD; ali seznami <acronym
+>DVD</acronym
+>. Poleg tega se lahko ustvarijo slikovni predogledi vsebine datoteke, čeprav lahko branje velikega števila datotek traja nekaj časa. Predogledi datotek so enaki tistim, prikazanim v datoteki &kde; upravljalnik datotek. </para>
+</sect2>
+
+<sect2 id="importing-xslt">
+<title
+>Uvažanje &XML; Podatki prek XSLT</title>
+
+<para
+>Vsak &XML; datoteko lahko uvozite v &appname; podal &XSL; za pretvorbo datoteke v &appname; format. &appname; samodejno naloži slogovno datoteko in izvede &xslt; potrebna obdelava za nalaganje datoteke. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="drag-n-drop">
+<title
+>Povleci in spusti</title>
+
+<para
+>Vlečenje podatkovnih datotek v glavno &appname; okno in jih spustite, bodo uvozili datoteke, tako kot če bi bil <link linkend="importing"
+>ukaz za uvoz</link
+> narejen iz menijev. Povleci in spusti deluje za naslednje formate datotek: Tellico, Bibtex, RIS, &PDF; in EPub. Podprt je tudi uvoz več datotek hkrati.</para>
+
+<para
+>Torej, če želite na primer katalogizirati več <link linkend="importing-pdf"
+>&PDF; datotek</link
+>, jih izberite v upravitelju datotek in jih povlecite v &appname; okno. &appname; bo uvozil čim več metapodatkov iz datotek in nato pridobil dodatne informacije iz različnih konfiguriranih internetnih virov.</para>
+
+</sect1>
+
+<sect1 id="exporting">
+<title
+>Izvažanje podatkov</title>
+
+<para
+>Pri izvozu podatkov v zbirki se lahko vnesene vrednosti izvozijo, kot so vnesene, ali s <link linkend="field-formatting"
+>samodejnim oblikovanjem</link
+>, ki ga zagotavlja &appname;. Poleg tega je lahko izvoz omejen tudi na trenutno izbrane vnose v zbirki, kjer <link linkend="status-bar"
+>vrstica stanja</link
+> prikazuje število izbranih vnosov. </para>
+
+<para
+>Izvožene besedilne datoteke, kot sta Bibtex ali CSV, lahko uporabljajo kodiranje znakov Unicode (UTF-8) ali trenutno področno nastavitev operacijskega sistema. </para>
+
+<screenshot>
+<screeninfo
+>Splošne možnosti izvoza</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-options.png"/></imageobject>
+<textobject
+><phrase
+>Splošne možnosti izvoza</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="exporting-xml">
+<title
+>Izvažanje &XML;</title>
+
+<para
+>Format datoteke za &appname; podatki so stisnjeni &XML; mapa. Izvažanje v &XML; samo ustvari &XML; datoteko, ne da bi jo stisnili. Slike so lahko vključene v &XML; datoteko kot podatke, kodirane z base64, v slikovnem elementu, vendar lahko s tem ustvarite zelo velike besedilne datoteke. </para>
+</sect2>
+
+<sect2 id="exporting-zip">
+<title
+>Izvoz Zip</title>
+
+<para
+>Standardna oblika datoteke za &appname; je stisnjena datoteka, ki vsebuje &XML; datoteko zbirke in po izbiri vse slike, na katere se sklicuje zbirka. Če so slike shranjene v mapi aplikacije, bo izvoz v datoteko Zip ustvaril samostojno podatkovno datoteko, ki vključuje vse slike v zbirki. </para>
+</sect2>
+
+<sect2 id="exporting-html">
+<title
+>Izvažanje &HTML;</title>
+
+<para
+>&HTML; izvoz uporablja slogovno datoteko <filename
+>tellico2html.xsl</filename
+>. Slike se izvozijo v mapo z enakim imenom kot izvoženi &HTML; datoteka s pripetim <emphasis
+><filename
+>_files</filename
+></emphasis
+>. </para>
+
+<para
+>Privzeti format je podoben natisnjenemu izhodu in omogoča različne možnosti za spreminjanje &HTML;. Glave polj so lahko natisnjene na vrhu vsakega stolpca, a na žalost &kde; še ne dovoljuje ponavljanja glav tabel na vsaki strani. Vnose je mogoče združiti tudi v <interface
+>Group View</interface
+>. </para>
+
+<para
+>Poleg tega se lahko za vsak vnos v zbirki ustvarijo posamezne datoteke s povezavami, ustvarjenimi v zgornjem nivoju &HTML; mapa. Vnosne datoteke bodo ustvarjene v isti mapi kot slike. Vnos &HTML; datoteke bodo uporabljale trenutno predlogo slogovne datoteke, kot je prikazano v <interface
+>Vnosni pogled</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>&HTML; Možnosti izvoza</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-html.png"/></imageobject>
+<textobject
+><phrase
+>&HTML; Možnosti izvoza</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-csv">
+<title
+>Izvažanje CSV</title>
+
+<para
+>Vrednosti, ločene z vejico (CSV), so običajen način za uvoz in izvoz tabelaričnih podatkov. Vsaka vrednost polja je ločena z vejico, z enim vnosom na vrstico. Naslovi polj so lahko vključeni kot glave v prvi vrstici. Za razmejitev polj se lahko uporabi tudi kateri koli znak ali niz, razen vejice. </para>
+
+<screenshot>
+<screeninfo
+>Možnosti izvoza CSV</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-csv.png"/></imageobject>
+<textobject
+><phrase
+>Možnosti izvoza CSV</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-alexandria">
+<title
+>Izvoz Alexandrie</title>
+
+<para
+><application
+><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
+>Alexandria</ulink
+></application
+> je upravitelj knjižne zbirke za <ulink url="http: //www.gnome.org"
+>GNOME</ulink
+> namizno okolje.&appname; lahko izvozi omejeno podmnožico polj knjižne zbirke na privzeto lokacijo podatkov Alexandria. </para>
+
+</sect2>
+
+<sect2 id="exporting-onix">
+<title
+>Izvažanje ONIX</title>
+
+<para
+><ulink url="http://www.editeur.org/onix.html"
+>ONIX</ulink
+> je &XML; format za predstavljanje in sporočanje informacij o izdelkih knjižne industrije, predvsem za prodajalce knjig. &appname; lahko izvozi knjižne zbirke z majhno podmnožico ONIX. </para>
+
+</sect2>
+
+<sect2 id="exporting-bibtex">
+<title
+>Izvoz Bibtexa</title>
+
+<para
+>Pri izvozu v <ulink url="http://en.wikipedia.org/wiki/Bibtex"
+>Bibtex</ulink
+> so lahko vrednosti polj označene z oklepaji ali narekovaji. Če so v zbirki uporabljeni makri nizov, jih je mogoče po želji izvoziti kot makre ali razširiti. Za &URL; polja lahko &appname; obdaja vrednosti polja z oznako <literal
+>\\url{...}</literal
+>. Nazadnje, vnose brez ključa navedbe lahko preskočite, namesto da bi imeli &appname; samodejno ustvari ključ. </para>
+
+<screenshot>
+<screeninfo
+>Možnosti izvoza Bibtex</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-bibtex.png"/></imageobject>
+<textobject
+><phrase
+>Možnosti izvoza Bibtex</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-gcstar">
+<title
+>Izvoz GCstar</title>
+
+<para
+><application
+><ulink url="http://www.gcstar.org"
+>GCstar</ulink
+></application
+> je še en upravitelj zbirke filmov. &appname; lahko izvozi večino vrst zbirk v podatkovno datoteko GCstar. </para>
+
+</sect2>
+
+<sect2 id="exporting-xslt">
+<title
+>Izvažanje &XML; prek &xslt;</title>
+
+<para
+>Končno &appname; lahko obdela svoj notranji &XML; predstavitev podatkov o zbirki prek zunanjega &XSL; pred izvozom. Ta vrsta izvoza je lahko uporabna za ustvarjanje besedilnih poročil ali drugih vrst datotek. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="citations">
+<title
+>Delo s citati</title>
+<para
+>Pri delu z <link linkend="bibliography"
+>bibliografijo</link
+> se lahko ustvarijo citati za trenutno izbrane vnose in uporabijo v različnih drugih aplikacijah. Navedbo v formatu bibtex je mogoče kopirati v odložišče in nato prilepiti v datoteko iz lateksa. Navedbe Bibtex je mogoče potisniti tudi v zunanjo aplikacijo, kot je <application
+>LyX</application
+> ali <application
+>Kile</application
+> s tako imenovanim <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe </link
+></emphasis
+>. </para>
+
+</sect1>
+
+</chapter>

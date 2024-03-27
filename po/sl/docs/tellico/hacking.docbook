@@ -1,0 +1,696 @@
+<chapter id="hacking">
+<title
+>Programiranje &appname;</title>
+
+<para
+>V duhu proste programske opreme ste dobrodošli, da programirate za &appname; kolikor hočete. Morali bi biti sposobni zelo enostavno pisati skripte za uvoz, izvoz ali spreminjanje podatkov. To poglavje vam ponuja več informacij o tem. </para>
+
+<sect1 id="file-format">
+<title
+>Format datoteke</title>
+
+<para
+>Privzeta podatkovna datoteka za &appname; je arhiv zip, običajno s pripono <literal role="extension"
+>.tc</literal
+>. Znotraj arhiva je datoteka <filename
+>tellico.xml</filename
+> najvišje ravni. Slike so lahko vključene v mapo <filename
+>images/</filename
+> v arhivu ali pa so vključene v datoteko &XML; podatke neposredno v kodiranju base64. Slike so lahko shranjene tudi v podatkovni mapi aplikacije, v tem primeru pa sploh niso v podatkovni datoteki. &appname; lahko tudi sama po sebi naloži nestisnjeno &XML; datoteko. </para>
+
+<sect2 id="xml-format">
+<title
+>&XML; podatki</title>
+
+ 
+
+<sect3 id="coll-xml-data">
+<title
+>Zbirka</title>
+<programlisting
+><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V11.0//EN" "http://periapsis.org/tellico/dtd/v11/tellico.dtd">
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="My Books" type="2">
+ </collection>
+</tellico>
+]]>
+</programlisting>
+
+<para
+>Datoteka se začne z zahtevanim &XML; deklaracijo in kodiranje, ki ji sledi tip dokumenta. Ko je dodana nova vrsta polja ali nastavljene dodatne lastnosti za privzeta polja, se različica doctype DTD poveča. &appname; vedno lahko odpre in prebere katero koli prejšnjo različico DTD, vendar bo shranil datoteke v trenutno različico. Lokacija DTD kaže na dejansko datoteko DTD. </para>
+
+<para
+>Element najvišje ravni je element <markup
+>&lt;tellico&gt;</markup
+>, ki vsebuje deklaracijo privzetega imenskega prostora in različico sintakse datoteke, ki se mora vedno ujemati z DTD. </para>
+
+<para
+>Element <markup
+>&lt;tellico&gt;</markup
+> vsebuje en element <markup
+>&lt;collection&gt;</markup
+>. Več zbirk je za zdaj prezrtih. Atribut <markup
+>title</markup
+> vsebuje naslov zbirke, medtem ko <markup
+>type</markup
+> določa, katere vrste vnosov vsebuje zbirka. Dovoljene vrste so <link linkend="collection-type-values"
+>navedene v kasnejšem razdelku</link
+>. Izbirni atribut <markup
+>entryTitle</markup
+> se lahko uporabi za določitev naslova vnosov za zbirko po meri in mora biti množinski. </para>
+</sect3>
+
+<sect3 id="fields-xml-data">
+<title
+>Polja</title>
+
+<programlisting
+><![CDATA[
+  <fields>
+   <field flags="8" title="Title" category="General" format="1" type="1" name="title" />
+   <field flags="7" title="Author" category="General" format="2" type="1" name="author" />
+   <field flags="2" title="Binding" category="General" allowed="Hardback;Paperback;Trade Paperback;E-Book;Magazine;Journal" format="4" type="3" name="binding" >
+    <prop name="default"
+>Paperback</prop>
+   </field>
+   <field flags="6" title="Publisher" category="Publishing" format="0" type="1" name="publisher" />
+   <field flags="4" title="Edition" category="Publishing" format="0" type="1" name="edition" />
+   <field flags="3" title="Copyright Year" category="Publishing" format="4" type="6" name="cr_year" />
+   <field flags="2" title="Publication Year" category="Publishing" format="4" type="6" name="pub_year" />
+   <field flags="0" title="ISBN#" category="Publishing" format="4" type="1" name="isbn" description="International Standard Book Number" />
+   <field flags="7" title="Genre" category="Classification" format="0" type="1" name="genre" />
+   <field flags="7" title="Keywords" category="Classification" format="0" type="1" name="keyword" />
+   <field flags="0" title="Front Cover" category="Front Cover" format="4" type="10" name="cover" />
+   <field flags="0" title="Comments" category="Personal" format="4" type="1" name="comments" />
+   <field title="Rating" flags="2" category="Personal" format="4" type="14" name="rating">
+    <prop name="maximum"
+>5</prop>
+    <prop name="minimum"
+>1</prop>
+   </field>
+   <field title="ID" flags="32" category="Personal" format="4" type="6" name="id">
+    <prop name="template"
+>%{@id}</prop>
+   </field>
+
+  </fields>
+]]>
+</programlisting>
+
+<para
+>Vsa polja so definirana znotraj elementa <markup
+>&lt;fields&gt;</markup
+>, ki je lahko samo eden. Vse informacije za polje, razen morebitnih lastnosti, so vključene kot atributi elementa <markup
+>&lt;field&gt;</markup
+>. Dovoljene vrednosti za atribute <markup
+>zastavic</markup
+>, <markup
+>format</markup
+> in <markup
+>type</markup
+> so podane v <link linkend="field-type-values"
+>naslednjem razdelku</link
+>. </para>
+
+<para
+>Lastnosti polj se uporabljajo za nastavitev privzetih vrednosti polj, razponov vrednosti ocen, predlog izpeljanih vrednosti itd. Zgornji primeri vključujejo privzeto vrednost, največjo vrednost ocene in predlogo za polje izpeljanega ID-ja. </para>
+
+ 
+
+</sect3>
+
+<sect3 id="entries-xml-data">
+<title
+>Vnosi</title>
+
+<programlisting
+><![CDATA[
+  <entry>
+   <title
+>C++ Programming Language, The</title>
+   <authors>
+    <author
+>Stroustrup, Bjarne</author>
+   </authors>
+   <publisher
+>Addison-Wesley Pub Co</publisher>
+   <edition
+>3rd</edition>
+   <pub_year
+>1997</pub_year>
+   <isbn
+>0-201-88954-4</isbn>
+   <genres>
+    <genre
+>Non-Fiction</genre>
+   </genres>
+   <keywords>
+    <keyword
+>Programming</keyword>
+    <keyword
+>Computers</keyword>
+   </keywords>
+   <cover
+>cf65a2f023b6cb9e9233323dca10ac7c.jpeg</cover>
+  </entry>
+]]>
+</programlisting>
+
+<para
+>Za vsako polje v zbirki lahko <markup
+>&lt;entry&gt;</markup
+> vsebuje element, katerega ime je enako imenu polja. Če je za polje dovoljenih več vrednosti, je črka <emphasis
+>s</emphasis
+> dodana imenu polja, da se ustvari element, in vsaka vrednost je dodana kot podrejena elementu, kot v primeru avtorja, zvrst in polja za ključne besede zgoraj. </para>
+
+<para
+>Posledično, če so zbirki dodana dodatna polja, podatkovna datoteka ne bo več v skladu z DTD. Vendar &appname; uporablja nepreverjalni &XML; razčlenjevalnik, tako da dodatna polja ne povzročajo težav. </para>
+</sect3>
+
+<sect3 id="images-xml-data">
+<title
+>Slike</title>
+<programlisting
+><![CDATA[
+  <images>
+   <image width="111" format="JPEG" height="140" id="cf65a2f023b6cb9e9233323dca10ac7c.jpeg" />
+  </images>
+]]>
+</programlisting>
+
+<para
+>Znotraj elementa <markup
+>&lt;images&gt;</markup
+> je navedena vsaka slika, na katero se sklicuje vnos, skupaj z atributi, ki opisujejo velikost, obliko in ID slike. Če je slika v datoteki Zip, je element prazen. V nasprotnem primeru so lahko slikovni podatki v datoteki &XML; tok kot besedilo, kodirano z base64. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-type-values">
+<title
+>Vrednosti vrste zbirke</title>
+
+<para
+>Tip zbirke je podan v atributu tipa elementa zbirke. Vrednost je enaka enumski vrednosti <type
+>Type</type
+> v <filename
+>src/collection.h</filename
+>. </para>
+
+<table>
+<title
+>Vrednosti vrste zbirke</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Vrsta zbirke</entry>
+<entry
+>Vrednost</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Zbirka po meri</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Knjižna zbirka</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Video zbirka</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Glasbena zbirka</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Bibliografija</entry
+><entry
+>5</entry
+></row>
+<row
+><entry
+>Zbirka stripov</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>Zbirka vin</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Zbirka kovancev</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Zbirka znamk</entry
+><entry
+>9</entry
+></row>
+<row
+><entry
+>Zbirka menjalnih kartic</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Zbirka video iger</entry
+><entry
+>11</entry
+></row>
+<row
+><entry
+>Katalog datotek</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Zbirka družabnih iger</entry
+><entry
+>13</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="field-type-values">
+<title
+>Vrednosti vrste polja</title>
+
+<para
+>&appname; bo vključeval vsa privzeta polja za zbirko, če ima prvi element polja ime <emphasis
+>_default</emphasis
+>. Za polja <emphasis
+>Odstavek</emphasis
+>, <emphasis
+>Tabela</emphasis
+> ali <emphasis
+>Slika</emphasis
+> mora biti kategorija polja enaka naslovu polja. </para>
+
+<para
+>Tip polja je podan v atributu tipa elementa polja. Vrednost je enaka vrednosti enum <type
+>FieldType</type
+> v <filename
+>src/field.h</filename
+>. </para>
+
+<table>
+<title
+>Vrednosti vrste polja</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Vrsta polja</entry>
+<entry
+>Vrednost</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Preprosto besedilo</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Odstavek</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>Izbira</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Potrditveno polje</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>Število</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>&URL;</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>Tabela</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>Slika</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>Datum</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>Ocena</entry
+><entry
+>14</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>Polje ima lahko nastavljene različne zastavice, podane kot bitna vrednost ALI v atributu zastavic na elementu polja. Zastavica, ki uporabniku preprečuje brisanje polja, je namenjena stvarem, kot je ključ navedbe za bibliografske vnose. </para>
+
+<table>
+<title
+>Vrednosti zastavic polja</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Zastavice polja</entry>
+<entry
+>Vrednost</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Dovoli več vrednosti</entry
+><entry
+><constant
+>0x01</constant
+></entry
+></row>
+<row
+><entry
+>Dovoli združevanje</entry
+><entry
+><constant
+>0x02</constant
+></entry
+></row>
+<row
+><entry
+>Dovoli dokončanje</entry
+><entry
+><constant
+>0x04</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>Onemogoči brisanje</emphasis
+></entry
+><entry
+><constant
+>0x08</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>Onemogoči urejanje</emphasis
+></entry
+><entry
+><constant
+>0x10</constant
+></entry
+></row>
+<row
+><entry
+>Izpeljana vrednost</entry
+><entry
+><constant
+>0x20</constant
+></entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>Format polja je podan v atributu format na elementu polja. <emphasis
+>Oblikovanje datuma</emphasis
+> se trenutno ne uporablja. Združevanje glede na <emphasis
+>Osebe</emphasis
+> uporablja vsa polja, ki uporabljajo <emphasis
+>Oblikovanje imena</emphasis
+>. Nastavitev zastavice <emphasis
+>Izpeljana vrednost</emphasis
+> pomeni, da je vrednost za polje ustvarjena iz lastnosti predloge iz drugih vrednosti polja. </para>
+
+<table>
+<title
+>Vrednosti oblike polja</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Oblika polja</entry>
+<entry
+>Vrednost</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>Samo velika začetnica</entry
+><entry
+>0</entry
+></row>
+<row
+><entry
+>Oblikovanje naslova</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>Oblikovanje imena</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+><emphasis
+>Oblikovanje datuma</emphasis
+></entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>Brez oblikovanja</entry
+><entry
+>4</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="hidden-options">
+<title
+>Možnosti skrite konfiguracije</title>
+
+<para
+>&appname; ima nekaj dodatnih konfiguracijskih možnosti, ki niso vidne v <interface
+>konfiguracijskem pogovornem oknu</interface
+>. Niso dovolj pomembne, da bi upravičile natrpanje pogovornega okna z več nastavitvami, a ker predstavljajo možnosti, ki bi lahko pritegnile različne uporabnike, jih aplikacija prebere iz konfiguracijske datoteke. </para>
+
+<para
+>Nastavitve za &appname; se shranijo v datoteko v domači mapi uporabnika, in sicer <filename
+>$<envar
+>KDEHOME</envar
+>/share/config/tellicorc</filename
+>. Znotraj te datoteke so nastavitve razvrščene v skupine, ki se prikažejo z imeni v oklepajih, kot je [Splošne možnosti]. Če želite dodati nastavitev v skupino <emphasis
+>Splošne možnosti</emphasis
+>, poiščite vrstico v datoteki z nastavitvami z imenom te skupine. Če se ne prikaže, ga ustvarite sami, tako da dodate vrstico [Splošne možnosti]. Nato lahko nastavitev dodate pod ime skupine. </para>
+
+<sect2 id="hidden-general-options">
+<title
+>[Splošne možnosti]</title>
+
+<para
+>Te nastavitve je treba postaviti v skupino <emphasis
+>Splošne možnosti</emphasis
+>. </para>
+
+<sect3>
+<title
+>Največja velikost ikone</title>
+
+<para
+>S to nastavitvijo lahko spremenite največjo velikost ikon v <interface
+>Pogled ikon</interface
+>. Privzeta vrednost je 96. Velikost mora biti v območju od 32 do 512. </para>
+</sect3>
+
+<sect3>
+<title
+>Primer</title>
+<informalexample>
+<para
+><userinput
+>Največja velikost ikone = 128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Velikost predpomnilnika ikon</title>
+
+<para
+>S to nastavitvijo lahko spremenite največje število ikon, ki so predpomnjene v pomnilniku. Privzeta vrednost je 1000. </para>
+</sect3>
+
+<sect3>
+<title
+>Primer</title>
+<informalexample>
+<para
+><userinput
+>Velikost predpomnilnika ikon = 100</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Primer</title>
+<informalexample>
+<para
+><userinput
+>Največja velikost ikone = 128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>Velikost predpomnilnika slike</title>
+
+<para
+>S to nastavitvijo lahko spremenite največjo količino pomnilnika v bajtih, ki se uporablja za predpomnjenje vseh slik. Privzeta vrednost je 67108864. </para>
+</sect3>
+
+<sect3>
+<title
+>Primer</title>
+<informalexample>
+<para
+><userinput
+>Velikost predpomnilnika slike = 256000000</userinput
+></para>
+</informalexample>
+</sect3>
+
+</sect2>
+
+<sect2 id="hidden-bibtex-options">
+<title
+>[Možnosti - bibtex]</title>
+
+<para
+>Te nastavitve bi morali postaviti v skupino <emphasis
+>Možnosti - bibtex</emphasis
+>. </para>
+
+<sect3>
+<title
+>lyxpipe</title>
+
+<para
+>Ta nastavitev je za lokacijo lyxpipe za pošiljanje bibliografskih citatov. Ne sme vsebovati pripone <literal role="extension"
+>.in</literal
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Primer</title>
+<informalexample>
+<para
+><userinput
+>lyxpipe=$HOME/.lyx/lyxpipe</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
+
+</sect1>
+
+<sect1 id="bibtex-translation">
+<title
+>Prevod znakov Bibtex</title>
+
+<para
+>Ko so datoteke bibtex uvožene ali izvožene, se nekateri znaki prevedejo med njihovimi ekvivalenti TeX in znaki Unicode. Te preslikave znakov so v datoteki <filename
+>bibtex-translation.xml</filename
+>, ki se nahaja v imeniku namestitvenih podatkov. Preslikave je mogoče po želji spreminjati. Ključni element vsebuje znak Unicode, elementi niza znotraj pa vsebujejo ekvivalente TeX, ki so lahko preslikava ena proti mnogo. Prvi je tisti, ki se uporablja pri izvozu v bibtex. </para>
+
+<programlisting
+><![CDATA[
+  <key char="À">
+    <string
+>{\`A}</string>
+    <string
+>\`{A}</string>
+  </key>
+]]>
+</programlisting>
+
+</sect1>
+
+<sect1 id="xslt-tricks">
+<title
+>Triki XSLT</title>
+
+<para
+>Tukaj je nekaj nasvetov za pisanje XSLT za razčlenjevanje &appname; &XML; podatki: (TBD). </para>
+</sect1>
+
+</chapter>
