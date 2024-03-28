@@ -45,18 +45,30 @@ void ImageTest::testLinkOnly() {
   // addImage(url, quiet, referer, link)
   QString id = Tellico::ImageFactory::addImage(u, false, QUrl(), true);
   QCOMPARE(id, u.url());
+
+  const auto img1 = Tellico::ImageFactory::imageById(id);
+  QVERIFY(!img1.isNull());
+  QCOMPARE(img1.format(), "png");
+  QVERIFY(img1.linkOnly());
+  const auto img2 = img1;
+  QCOMPARE(img1, img2);
+  QCOMPARE(img1.id(), img2.id());
+
+  auto null = Tellico::Data::Image::null;
+  QVERIFY(null.isNull());
+  QVERIFY(null.id().isEmpty());
 }
 
 void ImageTest::testOrientation() {
   QUrl u1 = QUrl::fromLocalFile(QFINDTESTDATA("data/img1.jpg"));
   QString id1 = Tellico::ImageFactory::addImage(u1);
-  const Tellico::Data::Image& img1 = Tellico::ImageFactory::imageById(id1);
+  const auto img1 = Tellico::ImageFactory::imageById(id1);
   QRgb px = img1.pixel(0, 0);
   QVERIFY(qRed(px) > 250 && qGreen(px) < 5 && qBlue(px) < 5);
 
   QUrl u2 = QUrl::fromLocalFile(QFINDTESTDATA("data/img2.jpg"));
   QString id2 = Tellico::ImageFactory::addImage(u2);
-  const Tellico::Data::Image& img2 = Tellico::ImageFactory::imageById(id2);
+  const auto img2 = Tellico::ImageFactory::imageById(id2);
   px = img2.pixel(0, 0);
   QVERIFY(qRed(px) > 250 && qGreen(px) < 5 && qBlue(px) < 5);
 }
