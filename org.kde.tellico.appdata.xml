@@ -22,6 +22,7 @@
   <name xml:lang="fi">Tellico</name>
   <name xml:lang="fr">Tellico</name>
   <name xml:lang="gl">Tellico</name>
+  <name xml:lang="hi">टेलिको</name>
   <name xml:lang="hu">Tellico</name>
   <name xml:lang="ia">Tellico</name>
   <name xml:lang="id">Tellico</name>
@@ -57,6 +58,7 @@
   <summary xml:lang="fi">Kokoelmahallinta</summary>
   <summary xml:lang="fr">Gestionnaire de collections</summary>
   <summary xml:lang="gl">Xestor de coleccións.</summary>
+  <summary xml:lang="hi">संग्रह प्रबंधक</summary>
   <summary xml:lang="hu">Gyűjteménykezelő</summary>
   <summary xml:lang="ia">Gerente de collection</summary>
   <summary xml:lang="id">Pengelola Koleksi</summary>
@@ -96,6 +98,7 @@
     <p xml:lang="fi">Tellico on sovellus kokoelmiesi järjestämiseen. Se tarjoaa oletusmallit kirjoille, lähdeluetteloille, videoille, musiikille, videopeleille, kolikoille, postimerkeille, keräilykorteille, sarjakuville ja viineille. Sen avulla voit syöttää kokoelmasi luettelotietokantaan eri ominaisuudet kuten otsikon, tekijän jne. säilyttäen.</p>
     <p xml:lang="fr">Tellico est une application pour organiser vos collections. Il fournit des modèles par défaut pour les livres, les bibliographies, les vidéos, la musique, les jeux vidéo, les monnaies, les timbres, les cartes à collectionner, les bandes dessinées et les vins. Il vous permet de saisir votre collection dans une base de données de catalogue, enregistrant différentes propriétés telles que le titre, l'auteur, etc.</p>
     <p xml:lang="gl">Tellico é unha aplicación para organizar coleccións. Fornece modelos predeterminados para libros, bibliografías, vídeos, música, videoxogos, moedas, selos, cartas de colección, banda deseñada, e vinos. Permítelle inserir a súa colección a unha base de datos de catálogo na que pode gardar moitas propiedades distintas, como o título de cada elemento, o seu autor, etc.</p>
+    <p xml:lang="hi">टेलिको आपके संग्रह को व्यवस्थित करने के लिए एक अनुप्रयोग है। यह पुस्तकों, ग्रंथ सूची, वीडियो, संगीत, वीडियो गेम, सिक्के, टिकटें, ट्रेडिंग कार्ड, कॉमिक पुस्तकें और वाइन के लिए पूर्वन्यस्त नमूने प्रदान करता है। यह आपको शीर्षक, लेखक आदि जैसी कई अलग-अलग गुणों को सहेजते हुए, सूचीपत्र डेटाबेस में अपना संग्रह दर्ज करने में सहायता करता है।</p>
     <p xml:lang="hu">A Tellico egy alkalmazás gyűjteményei rendszerezéséhez. Sablonokat biztosít könyvekhez, irodalomjegyzékekhez, videókhoz, zenékhez, videojátékokhoz, érmékhez, gyűjtőkártyákhoz, képregényekhez és borokhoz. Lehetővé teszi a gyűjteménye felvitelét egy katalógusadatbázisba, számos különböző tulajdonságot mentve, például cím, szerző, stb.</p>
     <p xml:lang="ia">Tellico es un application pro organisar tu collectiones. Il forni patronos predefinite pro libros, bibliographias, videos, musica, video jocos, numisma, timbros, cartas de commercio, libros in designos e vinos. Il permitte te insertar tu collection inn un base de datos de catalogo, salveguardante multe proprietates como titulo, autor, etc.</p>
     <p xml:lang="id">Tellico adalah aplikasi untuk mengatur koleksi Anda. Ini menyediakan template baku untuk buku, bibliografi, video, musik, video game, koin, perangko, kartu perdagangan, buku komik, dan wine. Ini memungkinkan Anda untuk memasukkan koleksi Anda di database katalog, menyimpan banyak properti berbeda seperti judul, penulis, dll.</p>
@@ -130,6 +133,7 @@
     <p xml:lang="fi">Ominaisuuksia:</p>
     <p xml:lang="fr">Fonctionnalités :</p>
     <p xml:lang="gl">Funcionalidades:</p>
+    <p xml:lang="hi">विशेषताएँ :</p>
     <p xml:lang="hu">Szolgáltatások:</p>
     <p xml:lang="ia">Characteristicas:</p>
     <p xml:lang="id">Fitur:</p>
@@ -165,6 +169,7 @@
       <li xml:lang="fi">Tukee kirjojen, lähdeluettelotietueiden, videoiden, musiikin, videopelien, sarjakuvien, kolikoiden, postimerkkien, keräilykuvien, viinien, lautapelien ja tiedostoluettelojen oletuskokoelmia</li>
       <li xml:lang="fr">Prend en charge par défaut des collections de livres, d'entrées bibliographiques, de vidéos, de musique, de jeux vidéo, de bandes dessinées, de monnaies, de timbres,de cartes à collectionner, de vins, de jeux de plateau et de catalogues de fichiers.</li>
       <li xml:lang="gl">Compatíbel con coleccións predeterminadas de libros, entradas bibliográficas, vídeos, música, videoxogos, banda deseñada, moedas, selos, cartas de colección, viños, xogos de taboleiro e catálogos de ficheiros.</li>
+      <li xml:lang="hi">पुस्तकों, ग्रंथसूची प्रविष्टियों, वीडियो, संगीत, वीडियो गेम, कॉमिक पुस्तकें, सिक्के, टिकटें, ट्रेडिंग कार्ड, वाइन, बोर्ड गेम और फ़ाइल सूचीपत्रों के पूर्वन्यस्त संग्रह का समर्थन करता है</li>
       <li xml:lang="hu">Alapértelmezett gyűjtemények a következőkhöz: könyvek, irodalomjegyzék bejegyzések, videók, zenék, videojátékok, képregények, érmék, bélyegek, gyűjtőkártyák, borok, társasjátékok és fájlkatalógusok</li>
       <li xml:lang="ia">Il supporta collectiones predefinite de libros, entratas bibliographic, videos, musica, video jocos, libros in designo, numisma, timbros, cartas de commerciar, vinos, jocos de tabula e catalogos de files</li>
       <li xml:lang="id">Mendukung koleksi buku, entri bibliografi, video, musik, video game, buku komik, koin, perangko, kartu perdagangan, wine, permainan papan, dan katalog file standar yang didukung</li>
@@ -198,6 +203,7 @@
       <li xml:lang="fi">Tukee käyttäjän mukauttamia kokoelmia</li>
       <li xml:lang="fr">Prends en charge les collections personnalisées par l'utilisateur</li>
       <li xml:lang="gl">Permite aos usuarios definir coleccións personalizadas.</li>
+      <li xml:lang="hi">उपयोगकर्ता-परिभाषित तदनुकूल संग्रह का समर्थन करता है</li>
       <li xml:lang="hu">Egyedileg definiált, saját gyűjtemények</li>
       <li xml:lang="ia">Il supporta collectiones personalisate definite per le usator</li>
       <li xml:lang="id">Dukungan koleksi kustom yang ditentukan pengguna</li>
@@ -231,6 +237,7 @@
       <li xml:lang="fi">Tukee rajattomasti käyttäjän määrittämiä useamman tyypin kenttiä (teksti, kappale, luettelo, valintaruutu, luku-, verkko-osoite, päiväys, kuvat ja niiden yhdistelmät)</li>
       <li xml:lang="fr">Prend en charge n'importe quel nombre de champs définis par l'utilisateur, de plusieurs types différents : texte, paragraphe, liste, case à cocher, nombre, URL, date, images et combinaisons</li>
       <li xml:lang="gl">Permite ao usuario definir campos de varios tipos: texto, parágrafo, lista, lista con caixas para marcar, número, URL, data, imaxes, e combinacións.</li>
+      <li xml:lang="hi">कई अलग-अलग प्रकार के उपयोगकर्ता-परिभाषित  क्षेत्र का समर्थन करता है : पाठ, अनुच्छेद, सूची, चेकबॉक्स, संख्या, यूआरएल, दिनांक, छवियां और संयोजन</li>
       <li xml:lang="hu">Tetszőleges számú, különböző típusú mező: szöveg, bekezdés, lista, jelölőnégyzet, szám, URL, dátum, képek és ezek kombinációi</li>
       <li xml:lang="ia">Il supporta qualcunque numero de campos definite per le usator, de plure typos differente: texto, paragrapho, lista, quadrato de selection, numero, URL, data, imagines e combinationes</li>
       <li xml:lang="id">Mendukung angka apa pun dari bidang yang ditentukan, beberapa tipe yang berbeda: teks, paragraf, daftar, kotak centang, nomor, URL, tanggal, gambar, dan kombinasi</li>
@@ -264,6 +271,7 @@
       <li xml:lang="fi">Käsittelee tietueet, joissa on useampia tekijöitä, tyylilajeja, avainsanoja jne.</li>
       <li xml:lang="fr">Gestion des entrées avec plusieurs auteurs, genres, mots clé, etc.</li>
       <li xml:lang="gl">Pode xestionar entradas con varios autores, xéneros, palabras clave, etc.</li>
+      <li xml:lang="hi">अनेक लेखकों, शैलियों, संकेतशब्द आदि वाली प्रविष्टियों को संभालता है</li>
       <li xml:lang="hu">Több szerzőt, műfajt, kulcsszót, stb tartalmazó bejegyzések kezelése</li>
       <li xml:lang="ia">Il manea entratas con multiple autores, generes, parolas clave, etc.</li>
       <li xml:lang="id">Menangani entri-entri dengan beberapa penulis, genre, kata kunci, dll.</li>
@@ -297,6 +305,7 @@
       <li xml:lang="fi">Muotoilee otsikot ja nimet automaattisesti</li>
       <li xml:lang="fr">Formate automatiquement les titres et les noms</li>
       <li xml:lang="gl">Aplica automaticamente un formato aos títulos e nomes.</li>
+      <li xml:lang="hi">शीर्षकों और नामों को स्वचालित रूप से प्रारूपित करता है</li>
       <li xml:lang="hu">Címek és nevek automatikus formázása</li>
       <li xml:lang="ia">Automaticamente da forma a titulos e nomines</li>
       <li xml:lang="id">Format secara otomatis judul-judul dan nama-nama</li>
@@ -330,6 +339,7 @@
       <li xml:lang="fi">Tukee kokoelmien hakua ja näkymien suodatusta</li>
       <li xml:lang="fr">Prend en charge la recherche dans la collection et une vue filtrée</li>
       <li xml:lang="gl">Permite buscar nas coleccións e filtrar nas vistas.</li>
+      <li xml:lang="hi">संग्रह खोज और दृश्य फ़िल्टरिंग का समर्थन करता है</li>
       <li xml:lang="hu">Keresés és szűrés a gyűjteményben</li>
       <li xml:lang="ia">Il supporta cerca de collection e filtro de vista</li>
       <li xml:lang="id">Dukungan pencarian koleksi dan pemfilteran tampilan</li>
@@ -363,6 +373,7 @@
       <li xml:lang="fi">Lajittelee ja ryhmittelee kokoelmia eri ominaisuuksien mukaan</li>
       <li xml:lang="fr">Trie et groupe les collections suivant diverses propriétés</li>
       <li xml:lang="gl">Permite ordenar ou agrupar as coleccións en funcións de varias propiedades.</li>
+      <li xml:lang="hi">विभिन्न गुणों के आधार पर वर्गीकरण और समूह संग्रह</li>
       <li xml:lang="hu">Gyűjtemények rendezése és csoportosítása különböző tulajdonságok szerint</li>
       <li xml:lang="ia">Il ordina e gruppa per varie proprietates</li>
       <li xml:lang="id">Mengurutkan dan mengelompokkan koleksi dengan berbagai properti</li>
@@ -396,6 +407,7 @@
       <li xml:lang="fi">Sallii mukautetut tietuemallit XSLT:n avulla</li>
       <li xml:lang="fr">Permet des modèles d'entrées personnalisable via XSLT</li>
       <li xml:lang="gl">Permite personalizar os modelos para entradas mediante XSLT.</li>
+      <li xml:lang="hi">XSLT के माध्यम से अनुकूलन योग्य प्रविष्टि टेम्पलेट्स की अनुमति देता है</li>
       <li xml:lang="hu">Testre szabható bejegyzéssablonok XSLT-vel</li>
       <li xml:lang="ia">Il permitte patronos de entratas personalisate per XSLT</li>
       <li xml:lang="id">Kemungkinan men-template-kan entri yang dapat dikustomisasi melalui XSLT</li>
@@ -429,6 +441,7 @@
       <li xml:lang="fi">Tuo MODS-, BibTeX-, RIS-, CSV-, PDF-metatieto- ja muista tiedostomuodoista</li>
       <li xml:lang="fr">Importe MODS, Bibtex, RIS, CSV, les métadonnées PDF, et beaucoup d'autres formats</li>
       <li xml:lang="gl">Pode importar ficheiros en formato MODS, Bibtex, RIS, CSV, metadatos de PDF, e moitos outros formatos.</li>
+      <li xml:lang="hi">MODS, बिबटेक्स, RIS, CSV, PDF मेटाडेटा और कई अन्य प्रारूप आयात करता है</li>
       <li xml:lang="hu">MODS, Bibtex, RIS, CSV és PDF metaadatok, és számos egyéb formátum importálása</li>
       <li xml:lang="ia">Il importa metadatos MODS, Bibtex, RIS, CSV, PDF e plure altere formatos</li>
       <li xml:lang="id">Mengimporkan format MODS, Bibtex, RIS, CSV, PDF metadata, dan banyak format lain</li>
@@ -461,6 +474,7 @@
       <li xml:lang="fi">Vie BibTeX-, ONIX-, CSV-, HTML- ja muihin tiedostomuotoihin</li>
       <li xml:lang="fr">Exporte vers Bibtex, ONIX, CSV, HTML et beaucoup d'autres formats</li>
       <li xml:lang="gl">Pode exportar coleccións nos formatos Bibtex, CSV, e HTML, entre outros.</li>
+      <li xml:lang="hi">बिबटेक्स, ONIX, CSV, HTML और अन्य प्रारूपों में निर्यात</li>
       <li xml:lang="hu">Exportálás Bibtex-, ONIX-, CSV-, HTML- és egyéb formátumokba</li>
       <li xml:lang="ia">Il exporta a Bibtex, ONIX, CSV, HTML, e altere formatos</li>
       <li xml:lang="id">Pengeksporan ke format Bibtex, ONIX, CSV, HTML, dan format lain</li>
@@ -494,6 +508,7 @@
       <li xml:lang="fi">Tuo tietoa suoraan Amazon.comista, IMDb:stä, z39.50-palvelimilta, PubMedistä, SRU-palvelimilta, CrossRef.orgista, muilta verkkosivuilta ja ulkoisista skripteistä</li>
       <li xml:lang="fr">Importe les informations directement depuis Amazon.com, IMDb, z39.50, PubMed, SRU, CrossRef.org et de nombreux autres sites web ainsi que depuis des scripts externes</li>
       <li xml:lang="gl">Importa información directamente de Amazon.com, IMDb, servidores z39.50, PubMed, servidores SRU, CrossRef.org, doutros sitios web, e de guións externos.</li>
+      <li xml:lang="hi">Amazon.com, IMDb, z39.50 सर्वर, PubMed, SRU सर्वर, CrossRef.org, विभिन्न अन्य वेबसाइटों और बाहरी स्क्रिप्ट से सीधे जानकारी आयात करता है</li>
       <li xml:lang="hu">Adatok importálása közvetlenül az Amazon.com-ról, IMDb-ről, z39.50 kiszolgálókról, PubMedről, SRU kiszolgálókról, CrossRef.org-ról, különböző más weboldalakról és külső parancsfájlokból</li>
       <li xml:lang="ia">Il importa information directemente ab Amazon.com, IMDb,  servitores z39.50, PubMed, seritores SRU, CrossRef.org, varie altere sitios web e ab external scripts</li>
       <li xml:lang="id">Pengimporkan informasi secara langsung dari situs Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, berbagai situs lain, dan dari skrip eksternal</li>
@@ -527,6 +542,7 @@
       <li xml:lang="fi">Tuo ääni-CD:iden luokitteluun tarvittavat CDDB-tiedot</li>
       <li xml:lang="fr">Importe les données CDDB pour cataloguer les CDs audio</li>
       <li xml:lang="gl">Importa datos de CDDB para catalogar CD de son.</li>
+      <li xml:lang="hi">ऑडियो CD को सूचीबद्ध करने के लिए CDDB डेटा आयात करता है</li>
       <li xml:lang="hu">CDDB adatok importálása audió CD-k katalogizálásához</li>
       <li xml:lang="ia">Il importa datos de CDDB pro catalogar CDs audio</li>
       <li xml:lang="id">Pengimporan data CDDB untuk pengkatalogan CD-CD audio</li>
@@ -560,6 +576,7 @@
       <li xml:lang="fi">Etsii ja tuo äänitiedostojen kuten MP3:ten ja Oggien kokoelmia</li>
       <li xml:lang="fr">Scanne et importe les collections de fichiers audio, tels que les fichiers mp3 ou ogg</li>
       <li xml:lang="gl">Analiza e importa coleccións de ficheiros de son, como MP3 ou OGG.</li>
+      <li xml:lang="hi">mp3 या ogg जैसे ऑडियो फ़ाइल संग्रह को स्कैन और आयात करता है</li>
       <li xml:lang="hu">Hangfájlgyűjtemények (például mp3 vagy ogg) keresése és importálása</li>
       <li xml:lang="ia">Il scande e importa collectiones de file audio, tal como mp3 o ogg</li>
       <li xml:lang="id">Pemindaian dan pengimporan koleksi file audio, sepertihalnya mp3 atau ogg</li>
@@ -601,6 +618,7 @@
       <caption xml:lang="fi">Elokuvakokoelman näyttävä pääikkuna</caption>
       <caption xml:lang="fr">La fenêtre principale, qui affiche une collection de films</caption>
       <caption xml:lang="gl">A xanela principal, amosando unha colección de filmes.</caption>
+      <caption xml:lang="hi">चलचित्र संग्रह दिखाने वाली मुख्य विंडो</caption>
       <caption xml:lang="hu">A filmgyűjteményt mutató főablak</caption>
       <caption xml:lang="ia">Le fenestra principale monstrante uncollection de filmes</caption>
       <caption xml:lang="id">Jendela utama menampilkan sebuah koleksi filem</caption>
@@ -636,6 +654,7 @@
       <caption xml:lang="fi">Yksinkertaisen kohteen kirjakokoelmasta näyttävä pääikkuna</caption>
       <caption xml:lang="fr">La fenêtre principale, qui affiche un élément simple au sein d'une collection de livres</caption>
       <caption xml:lang="gl">A xanela principal, amosando un elemento sinxelo nunha colección de libros.</caption>
+      <caption xml:lang="hi">पुस्तक संग्रह में एक  सरल वस्तु दिखाने वाली मुख्य विंडो</caption>
       <caption xml:lang="hu">A könyvgyűjtemény egy elemét mutató főablak</caption>
       <caption xml:lang="ia">Le fenestra principale monstrante un simple elemento in un collection de libros</caption>
       <caption xml:lang="id">Jendela utama menampilkan butir sederhana dalam koleksi buku</caption>
@@ -672,6 +691,7 @@
       <caption xml:lang="fi">Pelikokoelmanäkymiä rinnakkain näyttävä pääikkuna</caption>
       <caption xml:lang="fr">La fenêtre principale, qui affiche des vues côte-à-côte d'une collection de jeux vidéo</caption>
       <caption xml:lang="gl">A xanela principal amosando as vistas lado a lado dunha colección de xogos.</caption>
+      <caption xml:lang="hi">मुख्य विंडो खेल संग्रह के अगल-बगल दृश्य दिखाती है</caption>
       <caption xml:lang="hu">A játékgyűjtemény egymás melletti nézeteit mutató főablak</caption>
       <caption xml:lang="ia">Le fenestra principale monstrante vistas flancate de un collection de joco</caption>
       <caption xml:lang="id">Jendela utama menampilkan tampilan sisi ke sisi dari sebuah koleksi permainan</caption>
