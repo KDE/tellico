@@ -13,6 +13,7 @@ Name[eu]=Allocine.fr
 Name[fi]=Allocine.fr
 Name[fr]=Allocine.fr
 Name[gl]=Allocine.fr
+Name[hi]=Allocine.fr
 Name[hu]=Allocine.fr
 Name[ia]=Allocine.fr
 Name[it]=Allocine.fr
