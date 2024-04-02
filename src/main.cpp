@@ -145,7 +145,7 @@ int main(int argc, char* argv[]) {
 
   aboutData.addLicense(KAboutLicense::GPL_V3);
   aboutData.setOrganizationDomain("kde.org");
-  aboutData.setDesktopFileName(QStringLiteral("org.kde.tellico.desktop"));
+  aboutData.setDesktopFileName(QStringLiteral("org.kde.tellico"));
 
   QCommandLineParser parser;
   parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("nofile"), i18n("Do not reopen the last open file")));
