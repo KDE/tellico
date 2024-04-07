@@ -74,13 +74,15 @@
 >. </para>
 
 <para
->Si può usare il <interface
+>Puoi usare il <interface
 >filtro rapido</interface
-> nella barra degli strumenti per limitare rapidamente gli elementi visibili a quelli che contengono la parola inserita. Il filtro è utile anche quando si vuole trovare rapidamente uno specifico elemento. Si inserisce il titolo o qualche altra parola che identifichi univocamente un elemento e nella <link linkend="detailed-view"
+> nella barra degli strumenti per limitare gli elementi visibili. Il filtro è utile anche quando vuoi trovare rapidamente uno specifico elemento: inserisci il titolo o qualche altra parola che identifichi univocamente un elemento, e nella <link linkend="detailed-view"
 ><interface
 >vista per colonne</interface
 ></link
-> verrà mostrato solo l'elemento che corrisponde al filtro immesso. La barra di stato mostra quanti elementi ci sono in totale nella nostra collezione, e quanti sono quelli filtrati. </para>
+> verrà mostrato solo l'elemento che corrisponde al filtro immesso. Un filtraggio più complesso potrebbe usare direttamente i nomi dei campi, ad esempio <emphasis
+>author=stephenson</emphasis
+>. La barra di stato mostra quanti elementi ci sono in totale nella nostra collezione, e quanti sono quelli filtrati. </para>
 
 </sect1>
 

@@ -364,11 +364,17 @@
 >Importare liste di file</title>
 
 <para
->Il miglior modo di creare un <link linkend="file-catalog"
->catalogo di file</link
-> è importare il contenuto di una cartella. La cartella può essere analizzata ricorsivamente, per cercare tutti i file che vi sono contenuti. Questo importatore è utile per creare copie di sicurezza di elenchi e catalogazione di media, come &CD; o <acronym
+>&tellico; può analizzare le cartelle per importare le informazioni sui file, principalmente per creare una collezione di <link linkend="file-catalog"
+>cataloghi di file</link
+>. La cartella può essere cercata ricorsivamente, così da aggiungere tutti i file che vi sono contenuti. Questo importatore è utile per creare copie di sicurezza di elenchi e catalogazione di media, come &CD; o <acronym
 >DVD</acronym
->. Inoltre, è possibile generare anteprime del contenuto dei file sebbene questo possa richiedere del tempo per leggere collezioni di grandi dimensioni. Le anteprime dei file sono come quelle mostrate nel gestore dei file di &kde;. </para>
+>. Inoltre, è possibile generare anteprime del contenuto dei file. Le anteprime dei file sono le stesse mostrate nel gestore dei file di &kde;. </para>
+
+<para
+>Le cartelle con file di ebook e video possono essere importate anche come collezioni di libri e di video. È possibile leggere i metadati dei file, inoltre, per i video, ogni file <literal role="extension"
+>nfo</literal
+> esistente viene utilizzato per completare le informazioni sulla voce video. </para>
+
 </sect2>
 
 <sect2 id="importing-xslt">

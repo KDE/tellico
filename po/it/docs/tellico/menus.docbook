@@ -884,7 +884,7 @@ or menu bars.
 </sect2>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
-<sect2>
+<sect2 id="settings-help-menu">
 <title
 >I menu Impostazioni e Aiuto</title>
 
@@ -971,7 +971,6 @@ or menu bars.
 </listitem>
 </varlistentry>
 
-
 <varlistentry>
 <term>
  <menuchoice
@@ -988,6 +987,24 @@ or menu bars.
 >ripristina la disposizione</action
 > alla vista predefinita. Può essere utile se la varie viste diventano nascoste o collassate.</para>
 </listitem>
+</varlistentry>
+
+<varlistentry>
+  <term>
+    <menuchoice
+><guimenu
+>Aiuto</guimenu
+> <guimenuitem
+>Mostra il registro</guimenuitem
+> </menuchoice>
+  </term>
+
+  <listitem>
+    <para
+>Quando viene usata l'opzione <userinput
+>tellico --log</userinput
+>, questo comando mostra il registro diagnostico.</para>
+  </listitem>
 </varlistentry>
 
 </variablelist>
