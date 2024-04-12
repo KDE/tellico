@@ -717,6 +717,9 @@
   <provides>
     <binary>tellico</binary>
   </provides>
+  <url type="homepage">https://tellico-project.org/</url>
+  <url type="bugtracker">https://bugs.kde.org/buglist.cgi?component=general&product=tellico</url>
+  <url type="vcs-browser">https://invent.kde.org/office/tellico/</url>
   <releases>
     <release version="3.5.4" date="2024-03-23">
       <url>https://tellico-project.org/tellico-3-5-4-released</url>
