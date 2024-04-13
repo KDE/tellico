@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-18 02:00+0000\n"
+"POT-Creation-Date: 2024-04-13 01:44+0000\n"
 "PO-Revision-Date: 2022-03-21 17:12+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -7214,17 +7214,17 @@ msgstr "Формат: "
 msgid "Zip Files"
 msgstr "Файлы ZIP"
 
-#: src/translators/onixexporter.cpp:179
+#: src/translators/onixexporter.cpp:178
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "Параметры архива ONIX"
 
-#: src/translators/onixexporter.cpp:182
+#: src/translators/onixexporter.cpp:181
 #, kde-format
 msgid "Include images in archive"
 msgstr "Включать изображения в архив"
 
-#: src/translators/onixexporter.cpp:184
+#: src/translators/onixexporter.cpp:183
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
