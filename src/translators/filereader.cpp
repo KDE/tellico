@@ -82,7 +82,7 @@ KFileMetaData::PropertyMap FileReaderMetaData::properties(const KFileItem& item_
 
 class FileReaderFile::Private {
 public:
-  Private() {}
+  Private() = default;
 
   QString volume;
   QStringList metaIgnore;

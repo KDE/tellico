@@ -47,7 +47,7 @@ using Tellico::FileReaderVideo;
 
 class FileReaderVideo::Private {
 public:
-  Private() {}
+  Private() = default;
 
   // cache the icon image ids to avoid repeated creation of Data::Image objects
   QHash<QString, QString> iconImageId;

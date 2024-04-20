@@ -63,7 +63,7 @@ void CollectionTypeCombo::setCurrentType(int type_) {
   setCurrentData(type_);
 }
 
-void CollectionTypeCombo::setIncludedTypes(const QList<int> types_) {
+void CollectionTypeCombo::setIncludedTypes(const QList<int>& types_) {
   m_includedTypes = types_;
   reset();
 }

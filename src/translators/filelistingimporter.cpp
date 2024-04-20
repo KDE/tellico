@@ -119,6 +119,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
       reader.reset(new FileReaderFile(url()));
       break;
   }
+  if(!reader) return Data::CollPtr();
   reader->setUseFilePreview(m_useFilePreview);
 
   Data::EntryList entries;
