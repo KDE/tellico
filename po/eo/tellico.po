@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-13 01:44+0000\n"
+"POT-Creation-Date: 2024-04-20 01:45+0000\n"
 "PO-Revision-Date: 2024-03-20 22:52+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -2562,7 +2562,7 @@ msgstr "Ŝablonaj Ebloj"
 #: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:220
-#: src/translators/filelistingimporter.cpp:180
+#: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Collection &type:"
 msgstr "Kolekto&tipo:"
@@ -6855,7 +6855,7 @@ msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "La viclimigilo apartigas valorojn en ĉiu vico de kampo <i>Tabelo</i>."
 
 #: src/translators/csvimporter.cpp:225
-#: src/translators/filelistingimporter.cpp:179
+#: src/translators/filelistingimporter.cpp:180
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Elekti la tipon de kolekto importita."
@@ -6955,27 +6955,27 @@ msgstr "Discogs-Opcioj"
 msgid "Scanning files..."
 msgstr "Skanante dosierojn..."
 
-#: src/translators/filelistingimporter.cpp:160
+#: src/translators/filelistingimporter.cpp:161
 #, kde-format
 msgid "File Listing Options"
 msgstr "Dosierlistaj Opcioj"
 
-#: src/translators/filelistingimporter.cpp:163
+#: src/translators/filelistingimporter.cpp:164
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Rikura dosierujoserĉo"
 
-#: src/translators/filelistingimporter.cpp:164
+#: src/translators/filelistingimporter.cpp:165
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "Se markite, dosierujoj estas rekursie serĉataj por ĉiuj dosieroj."
 
-#: src/translators/filelistingimporter.cpp:168
+#: src/translators/filelistingimporter.cpp:169
 #, kde-format
 msgid "Generate file previews"
 msgstr "Generi dosierajn antaŭrigardojn"
 
-#: src/translators/filelistingimporter.cpp:169
+#: src/translators/filelistingimporter.cpp:170
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

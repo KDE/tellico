@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-13 01:44+0000\n"
+"POT-Creation-Date: 2024-04-20 01:45+0000\n"
 "PO-Revision-Date: 2022-04-07 18:20+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -2572,7 +2572,7 @@ msgstr "Voľby šablón"
 #: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:220
-#: src/translators/filelistingimporter.cpp:180
+#: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Collection &type:"
 msgstr "&Typ zbierky:"
@@ -6931,7 +6931,7 @@ msgstr ""
 "Oddeľovač riadkov oddeľuje hodnoty v každom riadku poľa <i>Tabuľka</i>."
 
 #: src/translators/csvimporter.cpp:225
-#: src/translators/filelistingimporter.cpp:179
+#: src/translators/filelistingimporter.cpp:180
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Vybrať typ zbierky, ktorý sa importuje."
@@ -7031,27 +7031,27 @@ msgstr "Odkaz Discogs"
 msgid "Scanning files..."
 msgstr "Skenovanie súborov..."
 
-#: src/translators/filelistingimporter.cpp:160
+#: src/translators/filelistingimporter.cpp:161
 #, kde-format
 msgid "File Listing Options"
 msgstr "Možnosti výpisu súboru"
 
-#: src/translators/filelistingimporter.cpp:163
+#: src/translators/filelistingimporter.cpp:164
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Rekurzívne prehľadávanie zložky"
 
-#: src/translators/filelistingimporter.cpp:164
+#: src/translators/filelistingimporter.cpp:165
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "Ak je zaškrtnuté, zložky sú rekurzívne prehľadávané pre všetky súbory."
 
-#: src/translators/filelistingimporter.cpp:168
+#: src/translators/filelistingimporter.cpp:169
 #, kde-format
 msgid "Generate file previews"
 msgstr "Vytvoriť náhľady súborov"
 
-#: src/translators/filelistingimporter.cpp:169
+#: src/translators/filelistingimporter.cpp:170
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

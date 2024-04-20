@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-13 01:44+0000\n"
+"POT-Creation-Date: 2024-04-20 01:45+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -2550,7 +2550,7 @@ msgstr "樣本選項"
 #: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:220
-#: src/translators/filelistingimporter.cpp:180
+#: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Collection &type:"
 msgstr "收集型態(&T)："
@@ -6897,7 +6897,7 @@ msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "若欄位屬於「表格」屬性，列分隔符用於區分每一列的值。"
 
 #: src/translators/csvimporter.cpp:225
-#: src/translators/filelistingimporter.cpp:179
+#: src/translators/filelistingimporter.cpp:180
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "選擇要匯入的收藏型態。"
@@ -6996,27 +6996,27 @@ msgstr "Discogs 連結"
 msgid "Scanning files..."
 msgstr "掃描檔案中..."
 
-#: src/translators/filelistingimporter.cpp:160
+#: src/translators/filelistingimporter.cpp:161
 #, kde-format
 msgid "File Listing Options"
 msgstr "檔案列表選項"
 
-#: src/translators/filelistingimporter.cpp:163
+#: src/translators/filelistingimporter.cpp:164
 #, kde-format
 msgid "Recursive folder search"
 msgstr "遞迴資料夾搜尋"
 
-#: src/translators/filelistingimporter.cpp:164
+#: src/translators/filelistingimporter.cpp:165
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "若勾選此選項，則會遞迴式地搜尋資料夾內的所有檔案。"
 
-#: src/translators/filelistingimporter.cpp:168
+#: src/translators/filelistingimporter.cpp:169
 #, kde-format
 msgid "Generate file previews"
 msgstr "產生檔案預覽"
 
-#: src/translators/filelistingimporter.cpp:169
+#: src/translators/filelistingimporter.cpp:170
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

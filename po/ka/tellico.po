@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-13 01:44+0000\n"
+"POT-Creation-Date: 2024-04-20 01:45+0000\n"
 "PO-Revision-Date: 2023-10-23 06:18+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -2511,7 +2511,7 @@ msgstr "შაბლონის მორგება"
 #: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:220
-#: src/translators/filelistingimporter.cpp:180
+#: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Collection &type:"
 msgstr "მიერთების &ტიპი:"
@@ -6693,7 +6693,7 @@ msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
 
 #: src/translators/csvimporter.cpp:225
-#: src/translators/filelistingimporter.cpp:179
+#: src/translators/filelistingimporter.cpp:180
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "აირჩიეთ შემოსატანი კოლექციის ტიპი."
@@ -6789,27 +6789,27 @@ msgstr "Discogs-ის მორგება"
 msgid "Scanning files..."
 msgstr "ფაილების სკანირება…"
 
-#: src/translators/filelistingimporter.cpp:160
+#: src/translators/filelistingimporter.cpp:161
 #, kde-format
 msgid "File Listing Options"
 msgstr "ფაილების ჩამონათვლის მორგება"
 
-#: src/translators/filelistingimporter.cpp:163
+#: src/translators/filelistingimporter.cpp:164
 #, kde-format
 msgid "Recursive folder search"
 msgstr "საქაღალდეში რეკურსიული ძებნა"
 
-#: src/translators/filelistingimporter.cpp:164
+#: src/translators/filelistingimporter.cpp:165
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:168
+#: src/translators/filelistingimporter.cpp:169
 #, kde-format
 msgid "Generate file previews"
 msgstr "ფაილების მინიატურების გენერაცია"
 
-#: src/translators/filelistingimporter.cpp:169
+#: src/translators/filelistingimporter.cpp:170
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

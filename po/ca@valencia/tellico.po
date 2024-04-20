@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-13 01:44+0000\n"
+"POT-Creation-Date: 2024-04-20 01:45+0000\n"
 "PO-Revision-Date: 2024-03-18 10:02+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2581,7 +2581,7 @@ msgstr "Opcions de plantilla"
 #: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:220
-#: src/translators/filelistingimporter.cpp:180
+#: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Collection &type:"
 msgstr "&Tipus de col·lecció:"
@@ -6915,7 +6915,7 @@ msgstr ""
 "El delimitador de fila separa valors en cada fila d'un camp de <i>Taula</i>."
 
 #: src/translators/csvimporter.cpp:225
-#: src/translators/filelistingimporter.cpp:179
+#: src/translators/filelistingimporter.cpp:180
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Seleccioneu el tipus de col·lecció que s'està important."
@@ -7015,29 +7015,29 @@ msgstr "Opcions de Discogs"
 msgid "Scanning files..."
 msgstr "S'estan explorant els fitxers..."
 
-#: src/translators/filelistingimporter.cpp:160
+#: src/translators/filelistingimporter.cpp:161
 #, kde-format
 msgid "File Listing Options"
 msgstr "Opcions de llistat de fitxers"
 
-#: src/translators/filelistingimporter.cpp:163
+#: src/translators/filelistingimporter.cpp:164
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Busca recursiva en les carpetes"
 
-#: src/translators/filelistingimporter.cpp:164
+#: src/translators/filelistingimporter.cpp:165
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 "Si se selecciona, les carpetes seran explorades recursivament per a buscar "
 "tots els fitxers."
 
-#: src/translators/filelistingimporter.cpp:168
+#: src/translators/filelistingimporter.cpp:169
 #, kde-format
 msgid "Generate file previews"
 msgstr "Genera vistes prèvies dels fitxers"
 
-#: src/translators/filelistingimporter.cpp:169
+#: src/translators/filelistingimporter.cpp:170
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
