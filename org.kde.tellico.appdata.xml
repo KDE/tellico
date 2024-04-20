@@ -718,6 +718,7 @@
   <provides>
     <binary>tellico</binary>
   </provides>
+  <launchable type="desktop-id">org.kde.tellico.desktop</launchable>
   <releases>
     <release version="3.5.4" date="2024-03-23">
       <url>https://tellico-project.org/tellico-3-5-4-released</url>
