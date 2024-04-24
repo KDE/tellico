@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-20 01:45+0000\n"
+"POT-Creation-Date: 2024-04-24 01:56+0000\n"
 "PO-Revision-Date: 2024-02-05 21:58+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -3768,7 +3768,7 @@ msgstr "UPC/EAN"
 msgid "Keyword"
 msgstr "키워드"
 
-#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:234
+#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:235
 #, kde-format
 msgid "arXiv ID"
 msgstr "arXiv ID"
@@ -3964,7 +3964,7 @@ msgid "Dewey Decimal"
 msgstr "듀이 십진분류"
 
 #: src/fetch/isbndbfetcher.cpp:360 src/field.cpp:313 src/field.cpp:318
-#: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:235
+#: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:236
 #, kde-format
 msgid "Publishing"
 msgstr "게시"
@@ -7104,12 +7104,12 @@ msgid ""
 "archive."
 msgstr "이 옵션을 선택하면 문서의 이미지가 압축된 ONIX 압축 파일에 포함됩니다."
 
-#: src/translators/pdfimporter.cpp:125 src/translators/pdfimporter.cpp:141
+#: src/translators/pdfimporter.cpp:126 src/translators/pdfimporter.cpp:142
 #, kde-format
 msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr "Tellico가 PDF 파일에서 메타데이터를 읽을 수 없습니다."
 
-#: src/translators/pdfimporter.cpp:326
+#: src/translators/pdfimporter.cpp:327
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "

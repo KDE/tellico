@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-20 01:45+0000\n"
+"POT-Creation-Date: 2024-04-24 01:56+0000\n"
 "PO-Revision-Date: 2022-04-07 18:20+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -3825,7 +3825,7 @@ msgstr "UPC/EAN"
 msgid "Keyword"
 msgstr "Kľúčové slovo"
 
-#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:234
+#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:235
 #, kde-format
 msgid "arXiv ID"
 msgstr "ID arXiv"
@@ -4024,7 +4024,7 @@ msgid "Dewey Decimal"
 msgstr "Deweyho desatinné triedenie"
 
 #: src/fetch/isbndbfetcher.cpp:360 src/field.cpp:313 src/field.cpp:318
-#: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:235
+#: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:236
 #, kde-format
 msgid "Publishing"
 msgstr "Publikovanie"
@@ -7245,13 +7245,13 @@ msgid ""
 msgstr ""
 "Ak je zaškrtnuté, budú obrázky v dokumente zahrnuté v zipovanom archíve ONIX."
 
-#: src/translators/pdfimporter.cpp:125 src/translators/pdfimporter.cpp:141
+#: src/translators/pdfimporter.cpp:126 src/translators/pdfimporter.cpp:142
 #, kde-format
 msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr ""
 "Aplikácia Tellico nebola schopná prečítať žiadne metadáta zo súboru PDF."
 
-#: src/translators/pdfimporter.cpp:326
+#: src/translators/pdfimporter.cpp:327
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "

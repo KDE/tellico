@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-20 01:45+0000\n"
+"POT-Creation-Date: 2024-04-24 01:56+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -3797,7 +3797,7 @@ msgstr "UPC/EAN"
 msgid "Keyword"
 msgstr "關鍵字"
 
-#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:234
+#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:235
 #, kde-format
 msgid "arXiv ID"
 msgstr "arXiv 代碼"
@@ -3995,7 +3995,7 @@ msgid "Dewey Decimal"
 msgstr "Dewey Decimal"
 
 #: src/fetch/isbndbfetcher.cpp:360 src/field.cpp:313 src/field.cpp:318
-#: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:235
+#: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:236
 #, kde-format
 msgid "Publishing"
 msgstr "發布"
@@ -7204,12 +7204,12 @@ msgid ""
 "archive."
 msgstr "若勾選此選項，文件中的影像也會被包入 ONIX 封存中。"
 
-#: src/translators/pdfimporter.cpp:125 src/translators/pdfimporter.cpp:141
+#: src/translators/pdfimporter.cpp:126 src/translators/pdfimporter.cpp:142
 #, kde-format
 msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr "Tellico 無法讀取此 PDF 檔的任何中繼資料。"
 
-#: src/translators/pdfimporter.cpp:326
+#: src/translators/pdfimporter.cpp:327
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "

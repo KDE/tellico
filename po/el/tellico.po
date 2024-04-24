@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-20 01:45+0000\n"
+"POT-Creation-Date: 2024-04-24 01:56+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -3856,7 +3856,7 @@ msgstr "UPC/EAN"
 msgid "Keyword"
 msgstr "Λέξη κλειδί"
 
-#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:234
+#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:235
 #, kde-format
 msgid "arXiv ID"
 msgstr "arXiv ID"
@@ -4059,7 +4059,7 @@ msgid "Dewey Decimal"
 msgstr "Δεκαδικό Dewey"
 
 #: src/fetch/isbndbfetcher.cpp:360 src/field.cpp:313 src/field.cpp:318
-#: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:235
+#: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:236
 #, kde-format
 msgid "Publishing"
 msgstr "Έκδοση"
@@ -7311,13 +7311,13 @@ msgstr ""
 "Εάν επιλεγεί, οι εικόνες του εγγράφου θα συμπεριληφθούν στο συμπιεσμένο "
 "αρχείο ONIX."
 
-#: src/translators/pdfimporter.cpp:125 src/translators/pdfimporter.cpp:141
+#: src/translators/pdfimporter.cpp:126 src/translators/pdfimporter.cpp:142
 #, kde-format
 msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr ""
 "Το Tellico δεν είναι σε θέση να διαβάσει μεταδεδομένα από το αρχείο PDF."
 
-#: src/translators/pdfimporter.cpp:326
+#: src/translators/pdfimporter.cpp:327
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "
