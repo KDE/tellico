@@ -504,6 +504,9 @@ ecm_add_test(fetchertest.cpp
 ecm_add_test(pdftest.cpp
              ../translators/pdfimporter.cpp
              ../translators/xmphandler.cpp
+             ../translators/ebookimporter.cpp
+             ../translators/filereaderbook.cpp
+             ../translators/filereader.cpp
              ../entryupdatejob.cpp
     TEST_NAME pdftest
     LINK_LIBRARIES fetcherstest translatorstest ${TELLICO_TEST_LIBS} #order of libs here is important
