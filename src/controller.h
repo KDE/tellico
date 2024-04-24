@@ -146,7 +146,7 @@ public Q_SLOTS:
   void slotUpdateFilter(Tellico::FilterPtr filter);
   void slotCheckOut();
   void slotCheckIn();
-  void slotCheckIn(const Data::EntryList& entries);
+  void slotCheckIn(const Tellico::Data::EntryList& entries);
 
 Q_SIGNALS:
   void collectionAdded(int collType);

@@ -102,10 +102,10 @@ public Q_SLOTS:
   void beginCommandGroup(const QString& name);
   void endCommandGroup();
 
-  bool addField(Data::FieldPtr field);
-  bool modifyField(Data::FieldPtr field);
-  bool removeField(Data::FieldPtr field);
-  void reorderFields(const Data::FieldList& fields);
+  bool addField(Tellico::Data::FieldPtr field);
+  bool modifyField(Tellico::Data::FieldPtr field);
+  bool removeField(Tellico::Data::FieldPtr field);
+  void reorderFields(const Tellico::Data::FieldList& fields);
 
 private:
   static Kernel* s_self;
