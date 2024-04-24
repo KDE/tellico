@@ -66,7 +66,7 @@ public:
   Importer(const QString& text);
   /**
    */
-  virtual ~Importer() {}
+  virtual ~Importer() = default;
 
   /**
    * Returns a pointer to a @ref Data::Collection containing the contents of the imported file.
