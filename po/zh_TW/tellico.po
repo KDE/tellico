@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-24 01:56+0000\n"
+"POT-Creation-Date: 2024-04-25 01:40+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -7234,17 +7234,17 @@ msgstr "檔案是空的。"
 msgid "The file contains no collection data."
 msgstr "檔案沒有包含收藏資料。"
 
-#: src/translators/tellicoxmlexporter.cpp:551
+#: src/translators/tellicoxmlexporter.cpp:550
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML 選項"
 
-#: src/translators/tellicoxmlexporter.cpp:554
+#: src/translators/tellicoxmlexporter.cpp:553
 #, kde-format
 msgid "Include images in XML document"
 msgstr "在 XML 文件中包含影像"
 
-#: src/translators/tellicoxmlexporter.cpp:556
+#: src/translators/tellicoxmlexporter.cpp:555
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

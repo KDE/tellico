@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-24 01:56+0000\n"
+"POT-Creation-Date: 2024-04-25 01:40+0000\n"
 "PO-Revision-Date: 2024-03-23 18:59-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -7248,17 +7248,17 @@ msgstr "O arquivo está vazio."
 msgid "The file contains no collection data."
 msgstr "O arquivo não contém dados de coleção."
 
-#: src/translators/tellicoxmlexporter.cpp:551
+#: src/translators/tellicoxmlexporter.cpp:550
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Opções XML do Tellico"
 
-#: src/translators/tellicoxmlexporter.cpp:554
+#: src/translators/tellicoxmlexporter.cpp:553
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Incluir as imagens no documento XML"
 
-#: src/translators/tellicoxmlexporter.cpp:556
+#: src/translators/tellicoxmlexporter.cpp:555
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
