@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "importer.h"
-#include "../tellico_debug.h"
 
 #include <KLocalizedString>
 
