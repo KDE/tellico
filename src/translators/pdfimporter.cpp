@@ -259,7 +259,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       } else {
         newColl = ebookColl;
       }
-      if(newColl->entryCount() > 0) {
+      if(newColl->entryCount() == 0) {
         entry = new Data::Entry(newColl);
         newColl->addEntries(entry);
       } else {
