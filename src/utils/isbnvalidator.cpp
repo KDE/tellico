@@ -124,9 +124,10 @@ void ISBNValidator::fixup(QString& input_) const {
 }
 
 void ISBNValidator::staticFixup(QString& input_) {
+  static const QRegularExpression digits(QStringLiteral("\\d"));
   if((input_.startsWith(QStringLiteral("978"))
        || input_.startsWith(QStringLiteral("979")))
-     && input_.count(QRegularExpression(QStringLiteral("\\d"))) > 10) {
+     && input_.count(digits) > 10) {
     fixup13(input_);
   } else {
     fixup10(input_);
