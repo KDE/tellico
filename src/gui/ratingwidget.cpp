@@ -155,7 +155,11 @@ void RatingWidget::mousePressEvent(QMouseEvent* event_) {
   }
 }
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 void RatingWidget::enterEvent(QEvent* event_) {
+#else
+void RatingWidget::enterEvent(QEnterEvent* event_) {
+#endif
   Q_UNUSED(event_);
   setUpdatesEnabled(false);
   m_clearButton->show();
