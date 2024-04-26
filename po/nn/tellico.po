@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-20 01:45+0000\n"
+"POT-Creation-Date: 2024-04-25 01:40+0000\n"
 "PO-Revision-Date: 2023-08-10 18:43+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -3805,7 +3805,7 @@ msgstr "UPC/EAN"
 msgid "Keyword"
 msgstr "Nøkkelord"
 
-#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:234
+#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:235
 #, kde-format
 msgid "arXiv ID"
 msgstr "arXiv-ID"
@@ -4001,7 +4001,7 @@ msgid "Dewey Decimal"
 msgstr "Dewey-klassifikasjon"
 
 #: src/fetch/isbndbfetcher.cpp:360 src/field.cpp:313 src/field.cpp:318
-#: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:235
+#: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:236
 #, kde-format
 msgid "Publishing"
 msgstr "Utgjeving"
@@ -7178,12 +7178,12 @@ msgstr ""
 "Viss det er kryssa av her, vert bileta i dokumentet med det komprimerte ONIX-"
 "arkivet."
 
-#: src/translators/pdfimporter.cpp:125 src/translators/pdfimporter.cpp:141
+#: src/translators/pdfimporter.cpp:126 src/translators/pdfimporter.cpp:142
 #, kde-format
 msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr "Klarte ikkje lesa metadata frå PDF-fila."
 
-#: src/translators/pdfimporter.cpp:326
+#: src/translators/pdfimporter.cpp:327
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "
@@ -7209,17 +7209,17 @@ msgstr "Fila er tom."
 msgid "The file contains no collection data."
 msgstr "Fila inneheld ikkje noko samlingsdata."
 
-#: src/translators/tellicoxmlexporter.cpp:551
+#: src/translators/tellicoxmlexporter.cpp:550
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML-val"
 
-#: src/translators/tellicoxmlexporter.cpp:554
+#: src/translators/tellicoxmlexporter.cpp:553
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Ta med bilete i XML-dokument"
 
-#: src/translators/tellicoxmlexporter.cpp:556
+#: src/translators/tellicoxmlexporter.cpp:555
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
