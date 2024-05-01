@@ -9,7 +9,11 @@
 <para
 >Quando si lancia &appname; da linea di comando sono disponibili diverse opzioni per aprire i file dati. Possono essere visualizzate lanciando <userinput
 >tellico --help</userinput
->. </para>
+>. Può essere anche abilitata la registrazione diagnostica, che crea una <link linkend="settings-help-menu"
+>voce di menu</link
+> per mostrarla. L'opzione <userinput
+>--logfile</userinput
+> ridireziona la registrazione su un file. </para>
 
 <programlisting
 >Uso: tellico [opzioni] [nome del file]
@@ -22,6 +26,8 @@ Opzioni:
   --mods                    Import &lt;nome del file&gt; come file MODS
   --ris                     Import &lt;nome del file&gt; come file RIS
   --pdf                     Importa &lt;nome del file&gt; come file PDF
+  --log                     Registra l'output diagnostico
+  --logfile &lt;logfile&gt;       Scrivi l'output diagnostico su &lt;nome del file&gt;
 
 Argomenti:
   [nome del file]                  File da aprire
@@ -85,7 +91,14 @@ bool showEntry(int id)
 >append</emphasis
 >, e <emphasis
 >merge</emphasis
->. Per l'importazione sono supportati quattro formati di file: file Tellico &XML;, file Bibtex, file MODS, e file RIS. </para>
+>. Per l'importazione sono supportati quattro formati di file: file Tellico &XML;, file Bibtex, file MODS, e file RIS. Possono essere importati i metadati dai file <link linkend="importing-pdf"
+>&PDF;</link
+>. </para>
+
+<para
+>Per ognuno dei comandi per esportare del testo, un nome del file verrà messo di seguito a <filename
+>--</filename
+> nello standard output. </para>
 
 <para
 >La collezione attualmente aperta in &appname; può essere esportata in un file, sia nei formati Tellico &XML;, Tellico ZIP, Bibtex, &HTML;, sia in formato CSV (comma-separated values, valori separati da virgole). Il comando di esportazione accetta un argomento opzionale per specificare se la collezione debba essere limitata al file corrente oppure no. </para>

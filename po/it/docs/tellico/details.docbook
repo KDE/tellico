@@ -91,7 +91,7 @@
 <para
 >Quando i valori di un campo devono essere limitati ad un certo numero si usa il tipo <emphasis
 >scelta</emphasis
->. I valori ammessi sono mostrati in un menu a tendina da cui vengono selezionati. Ovviamente non è possibile inserire valori multipli. Campi come genere bibliografico o valutazione personale sono campi di tipo <emphasis
+>. I valori ammessi sono mostrati in una casella a cascata da cui vengono selezionati. Sono permessi valori multipli. Campi come genere bibliografico o valutazione personale sono campi di tipo <emphasis
 >scelta</emphasis
 >.</para>
 
