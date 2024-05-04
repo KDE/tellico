@@ -162,7 +162,9 @@ QWidget* YearDistributionReport::createWidget() {
   series->attachAxis(axisY);
   if(axisY->max() < 5) axisY->setMax(5);
   axisY->applyNiceNumbers();
-  axisY->setMinorTickCount(4);
+  if(axisY->max() >= 20) {
+    axisY->setMinorTickCount(4);
+  }
   axisY->setMinorGridLineVisible(true);
 
   auto widget = new QWidget;
