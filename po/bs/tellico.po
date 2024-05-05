@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-25 01:40+0000\n"
+"POT-Creation-Date: 2024-05-05 01:44+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -7308,12 +7308,12 @@ msgstr "Izvezi pojedinačne unosne datoteke"
 msgid "If checked, individual files will be created for each entry."
 msgstr "Ako je označeno, pojedinačne datoteke se kreiraju za svaki unos."
 
-#: src/translators/importer.cpp:54
+#: src/translators/importer.cpp:53
 #, kde-format
 msgid "Loading data..."
 msgstr "Učitavanje podataka..."
 
-#: src/translators/importer.cpp:55
+#: src/translators/importer.cpp:54
 #, kde-format
 msgid "Loading %1..."
 msgstr "Učitavanja %1..."

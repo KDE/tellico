@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-25 01:40+0000\n"
+"POT-Creation-Date: 2024-05-05 01:44+0000\n"
 "PO-Revision-Date: 2024-04-23 00:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -7087,12 +7087,12 @@ msgstr "Bireysel girdi dosyalarını dışa aktar"
 msgid "If checked, individual files will be created for each entry."
 msgstr "İşaretliyse her bir girdi için bireysel dosyalar yaratılacaktır."
 
-#: src/translators/importer.cpp:54
+#: src/translators/importer.cpp:53
 #, kde-format
 msgid "Loading data..."
 msgstr "Veri yükleniyor…"
 
-#: src/translators/importer.cpp:55
+#: src/translators/importer.cpp:54
 #, kde-format
 msgid "Loading %1..."
 msgstr "%1 yükleniyor…"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-25 01:40+0000\n"
+"POT-Creation-Date: 2024-05-05 01:44+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -7206,12 +7206,12 @@ msgstr "Бөлек жазу файлдар экспортталсын"
 msgid "If checked, individual files will be created for each entry."
 msgstr "Белгісі қойылса, жазу файлдар бөлек-бөлек экспортталады."
 
-#: src/translators/importer.cpp:54
+#: src/translators/importer.cpp:53
 #, kde-format
 msgid "Loading data..."
 msgstr "Деректерді жүктеу..."
 
-#: src/translators/importer.cpp:55
+#: src/translators/importer.cpp:54
 #, kde-format
 msgid "Loading %1..."
 msgstr "%1 жүктеуі..."

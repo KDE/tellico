@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-25 01:40+0000\n"
+"POT-Creation-Date: 2024-05-05 01:44+0000\n"
 "PO-Revision-Date: 2024-03-20 22:52+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -7085,12 +7085,12 @@ msgstr "Eksporti individuajn enirajn dosierojn"
 msgid "If checked, individual files will be created for each entry."
 msgstr "Se markite, individuaj dosieroj estos kreitaj por ĉiu eniro."
 
-#: src/translators/importer.cpp:54
+#: src/translators/importer.cpp:53
 #, kde-format
 msgid "Loading data..."
 msgstr "Ŝargante datumojn..."
 
-#: src/translators/importer.cpp:55
+#: src/translators/importer.cpp:54
 #, kde-format
 msgid "Loading %1..."
 msgstr "Ŝargante %1..."
