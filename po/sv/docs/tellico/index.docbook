@@ -82,7 +82,7 @@ $applicationname xx.yy for applications with independent release schedule (extra
 > <affiliation
 ><address
 ><email
->stefan.asserhall@bredband.net</email
+>stefan.asserhall@gmail.com</email
 ></address
 ></affiliation
 > <contrib
@@ -93,7 +93,7 @@ $applicationname xx.yy for applications with independent release schedule (extra
 
 <copyright>
 <year
->2001-2023</year>
+>2001-2024</year>
 <holder
 >&robby;</holder>
 </copyright>
@@ -269,17 +269,17 @@ file included in the KDE distribution. -->
 <para
 >&tellico; </para>
 <para
->Program copyright 2001-2019 &robby; <email
+>Program copyright 2001-2024 &robby; <email
 >&email;</email
 > </para>
 <para
->Dokumentation copyright 2001-2019 &robby; <email
+>Dokumentation copyright 2001-2024 &robby; <email
 >&email;</email
 > </para>
 
 <para
 >Översättning Stefan Asserhäll <email
->stefan.asserhall@bredband.net</email
+>stefan.asserhall@gmail.com</email
 ></para
 > &underGPL; &underFDL; <para
 >Författaren av detta dokument har också beviljat dig rättighet att använda innehållet under villkoren i <ulink url="http://www.freebsd.org/copyright/freebsd-doc-license.html"

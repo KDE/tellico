@@ -368,13 +368,19 @@
 >Importera fillistor</title>
 
 <para
->Det bästa sättet att skapa en <link linkend="file-catalog"
->filkatalog</link
-> är att importera innehållet i en katalog. Katalogen kan sökas igenom rekursivt, för att lägga till alla filer som hittas i den. Importverktyget är mest användbart för säkerhetskopieringslistor och katalogisering av media, som <acronym
+>&tellico; kan söka igenom kataloger för att importera filinformation, i huvudsak för att skapa en <link linkend="file-catalog"
+>filkatalogsamling</link
+>. Katalogen kan sökas igenom rekursivt, för att lägga till alla filer som finns i den. Importfunktionen är mest användbart för säkerhetskopieringslistor och katalogisering av media, som <acronym
 >cd</acronym
 >- eller <acronym
 >dvd</acronym
->-listor. Dessutom kan förhandsgranskningsbilder av filinnehållet skapas, även om det kan ta en viss tid att läsa ett stort antal filer. Förhandsgranskningarna av filer är likadana som de som visas av &kde;:s filhanterare. </para>
+>-listor. Dessutom kan förhandsgranskningsbilder av filinnehållet skapas. Förhandsgranskningarna av filer är likadana som de som visas av &kde;:s filhanterare. </para>
+
+<para
+>Kataloger med e-bokfiler och videofiler kan också importeras som bok- och videosamlingar. Filernas metadata kan läsas, och för videofiler används eventuella befintliga <literal role="extension"
+>nfo</literal
+>-filer för att komplettera informationen om videoposten. </para>
+
 </sect2>
 
 <sect2 id="importing-xslt">

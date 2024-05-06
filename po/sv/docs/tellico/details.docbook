@@ -91,7 +91,7 @@
 <para
 >När ett fält ska begränsas till några få förinställda värden, används typen <emphasis
 >Val</emphasis
->. De tillåtna värdena finns att väljas i en kombinationsruta. Uppenbarligen är inte flera värden tillämpliga. Fält som bibliografityp eller personligt betyg har typen <emphasis
+>. De tillåtna värdena finns att väljas i en kombinationsruta. Flera värden är tillåtna. Fält som bibliografityp eller personligt betyg har typen <emphasis
 >Val</emphasis
 >.</para>
 

@@ -78,11 +78,13 @@
 <para
 >Du kan använda <interface
 >Snabbfiltret</interface
-> i verktygsraden för att snabbt begränsa de synliga posterna till de som innehåller ordet du skriver. Filtret är också användbart när du snabbt vill hitta en post. Du kan skriva in titel eller något annat unikt ord som identifierar posten, så visar <link linkend="detailed-view"
+> i verktygsraden för att begränsa de synliga posterna. Filtret är också användbart när du snabbt vill hitta en post. Du kan skriva in titel eller något annat unikt ord som identifierar posten, så visar <link linkend="detailed-view"
 ><interface
 >Kolumnvyn</interface
 ></link
-> bara posterna som motsvarar filtret. Statusraden visar hur många poster som finns i samlingen, och hur många som för närvarande filtreras. </para>
+> bara posterna som motsvarar filtret. Mer komplex filtrering kan direkt använda fältnamn, såsom <emphasis
+>author=stephenson</emphasis
+>. Statusraden visar hur många poster som finns i samlingen, och hur många som för närvarande filtreras. </para>
 
 </sect1>
 

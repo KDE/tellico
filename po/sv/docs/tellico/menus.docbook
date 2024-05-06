@@ -876,7 +876,7 @@ or menu bars.
 </sect2>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
-<sect2>
+<sect2 id="settings-help-menu">
 <title
 >Menyerna Inställningar och Hjälp</title>
 
@@ -963,7 +963,6 @@ or menu bars.
 </listitem>
 </varlistentry>
 
-
 <varlistentry>
 <term>
  <menuchoice
@@ -980,6 +979,24 @@ or menu bars.
 >återställer layouten</action
 > till standardvyn, vilket kan vara användbart om de olika vyerna blir dolda eller hopdragna.</para>
 </listitem>
+</varlistentry>
+
+<varlistentry>
+  <term>
+    <menuchoice
+><guimenu
+>Hjälp</guimenu
+> <guimenuitem
+>Visa logg</guimenuitem
+> </menuchoice>
+  </term>
+
+  <listitem>
+    <para
+>När väljaren <userinput
+>tellico --log</userinput
+> används, visar kommandot diagnostikloggen.</para>
+  </listitem>
 </varlistentry>
 
 </variablelist>

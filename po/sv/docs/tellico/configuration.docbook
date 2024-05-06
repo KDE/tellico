@@ -252,12 +252,6 @@
 ></listitem>
 <listitem
 ><simpara
-><link linkend="allocine"
->AlloCiné</link
->,</simpara
-></listitem>
-<listitem
-><simpara
 ><link linkend="tmdb"
 >TheMovieDB.org</link
 >,</simpara
@@ -610,15 +604,6 @@
 ><ulink url="http://omdbapi.com"
 >Open Movie Database (OMDBAPI.com)</ulink
 > är en fri webbtjänst för att erhålla information om filmer. </para>
-</sect3>
-
-<sect3 id="allocine">
-<title
->AlloCiné</title>
-<para
-><ulink url="http://allocine.fr"
->AlloCiné</ulink
-> är en filminformationstjänst på nätet, baserad i Frankrike. </para>
 </sect3>
 
 <sect3 id="filmaffinity">

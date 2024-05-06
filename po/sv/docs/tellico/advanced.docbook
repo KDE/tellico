@@ -7,9 +7,13 @@
 >Kommandoradsväljare</title>
 
 <para
->När &appname; körs från kommandoraden finns det flera alternativ för att öppna datafiler. De visas genom att köra <userinput
+>När &appname; körs från kommandoraden finns det flera alternativ för att öppna datafiler. De kan visas genom att köra <userinput
 >tellico --help</userinput
->. </para>
+>. Diagnostikloggning kan också aktiveras, vilket skapar ett <link linkend="settings-help-menu"
+>menyalternativ</link
+> för att visa diagnostikloggen. Väljaren <userinput
+>--logfile</userinput
+> dirigerar om loggen till en fil. </para>
 
 <programlisting
 >Användning: tellico [väljare] [filnamn]
@@ -22,8 +26,9 @@ Väljare:
   --mods                    Importera &lt;filnamn&gt; som en MODS-fil
   --ris                     Importera &lt;filnamn&gt; som en RIS-fil
   --pdf                     Importera &lt;filnamn&gt; som en PDF-fil
-
-Argument:
+  --log                     Logga diagnostikutmatning
+  --logfile &lt;loggfil&gt;       Skriv loggutmatning i &lt;loggfil&gt;
+\nArgument:
   [filnamn]                 Fil att öppna
 </programlisting>
 
@@ -85,7 +90,14 @@ bool showEntry(int id)
 >append</emphasis
 > (lägg till) och <emphasis
 >merge</emphasis
-> (sammanfoga). Fyra filformat för import stöds: Tellico &XML;-filer, Bibtex-filer, MODS-filer och RIS-filer. </para>
+> (sammanfoga). Fyra filformat för import stöds: Tellico &XML;-filer, Bibtex-filer, MODS-filer och RIS-filer. Metadata från <link linkend="importing-pdf"
+>&PDF;</link
+>-filer kan också importeras. </para>
+
+<para
+>För alla kommandon som exporterar text, skickas det till standardutmatningen med filnamnet <filename
+>--</filename
+>. </para>
 
 <para
 >Samlingen som för närvarande är öppen i &appname; kan exporteras till en fil, antingen med Tellico &XML;-format, Tellico ZIP-format, Bibtex, &HTML; eller CSV (värden åtskilda med kommatecken). Exportkommandot har en valfri väljare för att ange om samlingen ska begränsas till nuvarande filtrering eller inte. </para>
@@ -165,7 +177,11 @@ bool addEntryValue(int entryID, QString fieldName, QString value)
 >&DBus;-exempel</title>
 
 <para
->Här är några exempel på att använda skript för &appname; med användning av &DBus;-gränssnittet. </para>
+>Här är några exempel på att använda skript i &appname; med &DBus;-gränssnittet. Observera att kommandot <command
+>qdbus</command
+> kan förekomma som <command
+>qdbus-qt5</command
+> eller något liknande på din dator. </para>
 
 <screen width="40"
 ><emphasis
