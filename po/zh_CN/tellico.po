@@ -2233,7 +2233,7 @@ msgstr "模板突出显示颜色"
 #: src/config/tellico_config.kcfg:513
 #, kde-format
 msgid "Template highlighted text color"
-msgstr "模板突出显示文本颜色"
+msgstr "模板高亮文本颜色"
 
 #. i18n: ectx: label, entry (linkColorBook), group (Options - book)
 #. i18n: ectx: label, entry (linkColorVideo), group (Options - video)
@@ -2576,7 +2576,7 @@ msgstr "突出显示颜色："
 #: src/configdialog.cpp:527
 #, kde-format
 msgid "Highlighted text color:"
-msgstr "突出显示文本颜色："
+msgstr "高亮文本颜色："
 
 #: src/configdialog.cpp:536
 #, kde-format
