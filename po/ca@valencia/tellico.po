@@ -130,7 +130,7 @@ msgstr "Gestor de claus de citació"
 #: src/bibtexkeydialog.cpp:59 src/bibtexkeydialog.cpp:101
 #, kde-format
 msgid "Checking for entries with duplicate citation keys..."
-msgstr "S'estan buscant entrades amb claus de citació duplicades..."
+msgstr "S'estan buscant entrades amb claus de citació duplicades…"
 
 #: src/bibtexkeydialog.cpp:73
 #, kde-format
@@ -445,7 +445,7 @@ msgstr "La categoria del camp determina on es troba el camp en l'editor."
 #: src/collectionfieldsdialog.cpp:220
 #, kde-format
 msgid "Set &properties..."
-msgstr "Establix les &propietats..."
+msgstr "Establix les &propietats…"
 
 #: src/collectionfieldsdialog.cpp:224
 #, kde-format
@@ -563,7 +563,7 @@ msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
 "this field."
 msgstr ""
-"Si se selecciona, s'activarà la compleció automàtica de KDE en el quadro "
+"Si està marcada, s'activarà la compleció automàtica de KDE en el quadro "
 "d'edició de text per a este camp."
 
 #: src/collectionfieldsdialog.cpp:307
@@ -577,7 +577,7 @@ msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
 "separated by a semi-colon."
 msgstr ""
-"Si se selecciona, Tellico analitzarà els valors en el camp per a múltiples "
+"Si està marcada, Tellico analitzarà els valors en el camp per a múltiples "
 "valors separats per punt i coma."
 
 #: src/collectionfieldsdialog.cpp:310
@@ -590,7 +590,7 @@ msgstr "Permet agrupament"
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
 msgstr ""
-"Si se selecciona, este camp es podrà utilitzar per a agrupar les entrades en "
+"Si està marcada, este camp es podrà utilitzar per a agrupar les entrades en "
 "la vista de grup."
 
 #: src/collectionfieldsdialog.cpp:341
@@ -2407,7 +2407,7 @@ msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
 "up."
 msgstr ""
-"Si se selecciona, l'últim fitxer obert es tornarà a obrir en iniciar el "
+"Si està marcada, l'últim fitxer obert es tornarà a obrir en iniciar el "
 "programa."
 
 #: src/configdialog.cpp:221
@@ -2420,7 +2420,7 @@ msgstr "&Activa les expressions regulars en el filtre ràpid"
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr ""
-"Si se selecciona, el filtre ràpid interpretarà el text com una expressió "
+"Si està marcada, el filtre ràpid interpretarà el text com una expressió "
 "regular."
 
 #: src/configdialog.cpp:227
@@ -2432,7 +2432,7 @@ msgstr "Mo&stra el «Consell del dia» en iniciar"
 #, kde-format
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
 msgstr ""
-"Si se selecciona. es mostrarà el «Consell del dia» en iniciar el programa."
+"Si està marcada. es mostrarà el «Consell del dia» en iniciar el programa."
 
 #: src/configdialog.cpp:233
 #, kde-format
@@ -2445,7 +2445,7 @@ msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
 "searching."
 msgstr ""
-"Si se selecciona, s'utilitzarà l'entrada des d'una càmera web per a llegir i "
+"Si està marcada, s'utilitzarà l'entrada des d'una càmera web per a llegir i "
 "buscar codis de barres."
 
 #: src/configdialog.cpp:239
@@ -2496,7 +2496,7 @@ msgstr ""
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
-"Si se selecciona, els títols i els noms es posaran automàticament en "
+"Si està marcada, els títols i els noms es posaran automàticament en "
 "majúscula la primera lletra."
 
 #: src/configdialog.cpp:276
@@ -2508,7 +2508,7 @@ msgstr "Dona &format automàticament als títols i els noms"
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr ""
-"Si se selecciona, els títols i els noms estaran automàticament amb format."
+"Si està marcada, els títols i els noms estaran automàticament amb format."
 
 #: src/configdialog.cpp:287
 #, kde-format
@@ -2587,7 +2587,7 @@ msgstr "Im&primix les capçaleres dels camps"
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
-"Si se selecciona, els noms dels camps s'imprimiran com a capçaleres de la "
+"Si està marcada, els noms dels camps s'imprimiran com a capçaleres de la "
 "taula."
 
 #: src/configdialog.cpp:364
@@ -2603,7 +2603,7 @@ msgstr "A&grupa les entrades"
 #: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
-msgstr "Si se selecciona, les entrades s'agruparan per al camp seleccionat."
+msgstr "Si està marcada, les entrades s'agruparan per al camp seleccionat."
 
 #: src/configdialog.cpp:374
 #, kde-format
@@ -2669,7 +2669,7 @@ msgstr ""
 #: src/configdialog.cpp:451
 #, kde-format
 msgid "&Preview..."
-msgstr "&Vista prèvia..."
+msgstr "&Vista prèvia…"
 
 #: src/configdialog.cpp:452
 #, kde-format
@@ -2746,7 +2746,7 @@ msgstr "Gestiona les plantilles"
 #: src/configdialog.cpp:562
 #, kde-format
 msgid "Install..."
-msgstr "Instal·la..."
+msgstr "Instal·la…"
 
 #: src/configdialog.cpp:566
 #, kde-format
@@ -2756,7 +2756,7 @@ msgstr "Cliqueu per a instal·lar directament una plantilla nova."
 #: src/configdialog.cpp:571 src/configdialog.cpp:574 src/configdialog.cpp:578
 #, kde-format
 msgid "Download..."
-msgstr "Baixa..."
+msgstr "Baixa…"
 
 #: src/configdialog.cpp:583
 #, kde-format
@@ -2766,7 +2766,7 @@ msgstr "Cliqueu per a baixar plantilles addicionals."
 #: src/configdialog.cpp:586
 #, kde-format
 msgid "Delete..."
-msgstr "Suprimix..."
+msgstr "Suprimix…"
 
 #: src/configdialog.cpp:590
 #, kde-format
@@ -2805,7 +2805,7 @@ msgstr "Filtra per tipus:"
 #: src/configdialog.cpp:676
 #, kde-format
 msgid "&New..."
-msgstr "&Nova..."
+msgstr "&Nova…"
 
 #: src/configdialog.cpp:678
 #, kde-format
@@ -2815,7 +2815,7 @@ msgstr "Cliqueu per a afegir una font de dades nova."
 #: src/configdialog.cpp:679
 #, kde-format
 msgid "&Modify..."
-msgstr "&Modifica..."
+msgstr "&Modifica…"
 
 #: src/configdialog.cpp:681
 #, kde-format
@@ -2903,7 +2903,7 @@ msgstr "&Ordena per"
 #: src/controller.cpp:589 src/mainwindow.cpp:607
 #, kde-format
 msgid "&Edit Entry..."
-msgstr "&Edita l'entrada..."
+msgstr "&Edita l'entrada…"
 
 #: src/controller.cpp:590 src/mainwindow.cpp:614
 #, kde-format
@@ -2923,7 +2923,7 @@ msgstr "E&limina entrada"
 #: src/controller.cpp:595
 #, kde-format
 msgid "&Edit Entries..."
-msgstr "&Edita entrades..."
+msgstr "&Edita entrades…"
 
 #: src/controller.cpp:596
 #, kde-format
@@ -3060,7 +3060,7 @@ msgstr "Oculta totes les columnes"
 #: src/document.cpp:210 src/mainwindow.cpp:1398
 #, kde-format
 msgid "Saving file..."
-msgstr "S'està guardant el fitxer..."
+msgstr "S'està guardant el fitxer…"
 
 #: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:417
 #: src/entryeditdialog.cpp:439 src/entryeditdialog.cpp:534
@@ -3167,7 +3167,7 @@ msgstr "Fusiona les entrades"
 #: src/entrymerger.cpp:55
 #, kde-format
 msgid "Merging entries..."
-msgstr "S'estan fusionant les entrades..."
+msgstr "S'estan fusionant les entrades…"
 
 #: src/entrymerger.cpp:74
 #, kde-format
@@ -3177,12 +3177,12 @@ msgstr "Total d'entrades fusionades/explorades: %1/%2"
 #: src/entryupdater.cpp:95
 #, kde-format
 msgid "Updating %1..."
-msgstr "S'està actualitzant %1..."
+msgstr "S'està actualitzant %1…"
 
 #: src/entryupdater.cpp:97
 #, kde-format
 msgid "Updating entries..."
-msgstr "S'estan actualitzant les entrades..."
+msgstr "S'estan actualitzant les entrades…"
 
 #: src/entryupdater.cpp:99
 #, kde-format
@@ -3192,7 +3192,7 @@ msgstr "Actualitza les entrades"
 #: src/entryupdater.cpp:114
 #, kde-format
 msgid "Updating <b>%1</b>..."
-msgstr "S'està actualitzant <b>%1</b>..."
+msgstr "S'està actualitzant <b>%1</b>…"
 
 #: src/entryview.cpp:333
 #, kde-format
@@ -3225,7 +3225,7 @@ msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
 msgstr ""
-"Si se selecciona, els valors dels camps estaran automàticament amb format "
+"Si està marcada, els valors dels camps estaran automàticament amb format "
 "d'acord amb el seu tipus de format."
 
 #: src/exportdialog.cpp:82
@@ -3236,7 +3236,7 @@ msgstr "Exporta només les entrades seleccionades"
 #: src/exportdialog.cpp:84
 #, kde-format
 msgid "If checked, only the currently selected entries will be exported."
-msgstr "Si se selecciona, només s'exportaran les entrades seleccionades."
+msgstr "Si està marcada, només s'exportaran les entrades seleccionades."
 
 #: src/exportdialog.cpp:88
 #, kde-format
@@ -3247,7 +3247,7 @@ msgstr "Exporta només els camps visibles"
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
-msgstr "Si se selecciona, només s'exportaran els camps actualment visibles."
+msgstr "Si està marcada, només s'exportaran els camps actualment visibles."
 
 #: src/exportdialog.cpp:94
 #, kde-format
@@ -4598,12 +4598,12 @@ msgstr "Busca &múltiple ISBN/UPC"
 #: src/fetchdialog.cpp:206
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
-msgstr "Seleccioneu esta casella per a buscar múltiples valors ISBN o UPC."
+msgstr "Marqueu esta casella per a buscar múltiples valors ISBN o UPC."
 
 #: src/fetchdialog.cpp:210
 #, kde-format
 msgid "Edit ISBN/UPC values..."
-msgstr "Edita dels valors ISBN/UPC..."
+msgstr "Edita dels valors ISBN/UPC…"
 
 #: src/fetchdialog.cpp:214
 #, kde-format
@@ -4676,12 +4676,12 @@ msgstr "Neteja tots els camps de busca i els resultats"
 #: src/fetchdialog.cpp:395
 #, kde-format
 msgid "Cancelling the search..."
-msgstr "S'està cancel·lant la busca..."
+msgstr "S'està cancel·lant la busca…"
 
 #: src/fetchdialog.cpp:408 src/fetchdialog.cpp:588
 #, kde-format
 msgid "Searching..."
-msgstr "S'està buscant..."
+msgstr "S'està buscant…"
 
 #: src/fetchdialog.cpp:468
 #, kde-format
@@ -4708,7 +4708,7 @@ msgstr "Sense resultats"
 #: src/fetchdialog.cpp:555 src/fetchdialog.cpp:611
 #, kde-format
 msgid "Fetching %1..."
-msgstr "S'està obtenint %1..."
+msgstr "S'està obtenint %1…"
 
 #: src/fetchdialog.cpp:628
 #, kde-format
@@ -4734,7 +4734,7 @@ msgstr "<qt>Introduïu els valors ISBN o UPC, un per línia.</qt>"
 #: src/fetchdialog.cpp:773
 #, kde-format
 msgid "&Load From File..."
-msgstr "Ca&rrega des d'un fitxer..."
+msgstr "Ca&rrega des d'un fitxer…"
 
 #: src/fetchdialog.cpp:774
 #, kde-format
@@ -4786,7 +4786,7 @@ msgstr ""
 #, kde-format
 msgid "If checked, updating entries will overwrite any existing information."
 msgstr ""
-"Si se selecciona, l'actualització de les entrades sobreescriurà qualsevol "
+"Si està marcada, l'actualització de les entrades sobreescriurà qualsevol "
 "informació existent."
 
 #: src/field.cpp:197
@@ -5045,17 +5045,17 @@ msgstr "no conté"
 #: src/gui/imagewidget.cpp:108
 #, kde-format
 msgid "Select Image..."
-msgstr "Seleccioneu una imatge..."
+msgstr "Seleccioneu una imatge…"
 
 #: src/gui/imagewidget.cpp:113
 #, kde-format
 msgid "Scan Image..."
-msgstr "Escaneja una imatge..."
+msgstr "Escaneja una imatge…"
 
 #: src/gui/imagewidget.cpp:122
 #, kde-format
 msgid "Open With..."
-msgstr "Obri amb..."
+msgstr "Obri amb…"
 
 #: src/gui/imagewidget.cpp:160
 #, kde-format
@@ -5081,7 +5081,7 @@ msgstr "No s'ha pogut obrir l'escàner seleccionat."
 #: src/gui/imagewidget.cpp:380
 #, kde-format
 msgid "Opening image in %1..."
-msgstr "S'està obrint una imatge en %1..."
+msgstr "S'està obrint una imatge en %1…"
 
 #: src/gui/imagewidget.cpp:412
 #, kde-format
@@ -5140,7 +5140,7 @@ msgstr "Columna %1"
 #: src/gui/tablefieldwidget.cpp:240 src/gui/tablefieldwidget.cpp:274
 #, kde-format
 msgid "Rename Column..."
-msgstr "Canvia el nom de la columna..."
+msgstr "Canvia el nom de la columna…"
 
 #: src/gui/tablefieldwidget.cpp:242 src/gui/tablefieldwidget.cpp:280
 #, kde-format
@@ -5364,8 +5364,8 @@ msgid ""
 "calendar, which can be viewed using KOrganizer. The box is only active if "
 "you set a due date.</qt>"
 msgstr ""
-"<qt>Seleccionant esta casella s'afegirà un element de <em>Tasca pendent</em> "
-"al calendari actiu, el qual es pot veure utilitzant KOrganizer. La casella "
+"<qt>Marcant esta casella s'afegirà un element de <em>Tasca pendent</em> al "
+"calendari actiu, el qual es pot veure utilitzant KOrganizer. La casella "
 "només estarà activa si heu establit una data de venciment.</qt>"
 
 #: src/loanview.cpp:119
@@ -5376,7 +5376,7 @@ msgstr "Marca"
 #: src/loanview.cpp:121
 #, kde-format
 msgid "Modify Loan..."
-msgstr "Modifica el préstec..."
+msgstr "Modifica el préstec…"
 
 #: src/loanview.cpp:200 xslt/report-templates/Loan_View.xsl:135
 #, kde-format
@@ -5616,12 +5616,12 @@ msgstr "Guarda el document"
 #: src/mainwindow.cpp:330
 #, kde-format
 msgid "Save the document as a different file..."
-msgstr "Guarda el document com a un fitxer diferent..."
+msgstr "Guarda el document com a un fitxer diferent…"
 
 #: src/mainwindow.cpp:334
 #, kde-format
 msgid "Save As Template..."
-msgstr "Anomena i guarda plantilla..."
+msgstr "Anomena i guarda plantilla…"
 
 #: src/mainwindow.cpp:336
 #, kde-format
@@ -5631,12 +5631,12 @@ msgstr "Anomena i guarda plantilla de col·lecció"
 #: src/mainwindow.cpp:339
 #, kde-format
 msgid "Print the contents of the collection..."
-msgstr "Imprimix el contingut de la col·lecció..."
+msgstr "Imprimix el contingut de la col·lecció…"
 
 #: src/mainwindow.cpp:355
 #, kde-format
 msgid "Preview the contents of the collection..."
-msgstr "Previsualitza el contingut de la col·lecció..."
+msgstr "Previsualitza el contingut de la col·lecció…"
 
 #: src/mainwindow.cpp:359
 #, kde-format
@@ -5651,7 +5651,7 @@ msgstr "Importa les dades cap a dins de la col·lecció des d'altres formats"
 #: src/mainwindow.cpp:388
 #, kde-format
 msgid "Import Tellico Data..."
-msgstr "Importa les dades a Tellico..."
+msgstr "Importa les dades a Tellico…"
 
 #: src/mainwindow.cpp:389
 #, kde-format
@@ -5661,7 +5661,7 @@ msgstr "Importa les dades d'un altre fitxer a Tellico"
 #: src/mainwindow.cpp:392
 #, kde-format
 msgid "Import CSV Data..."
-msgstr "Importa dades de CSV..."
+msgstr "Importa dades de CSV…"
 
 #: src/mainwindow.cpp:393
 #, kde-format
@@ -5671,7 +5671,7 @@ msgstr "Importa un fitxer CSV"
 #: src/mainwindow.cpp:395
 #, kde-format
 msgid "Import MODS Data..."
-msgstr "Importa dades MODS..."
+msgstr "Importa dades MODS…"
 
 #: src/mainwindow.cpp:396
 #, kde-format
@@ -5681,7 +5681,7 @@ msgstr "Importa un fitxer de dades MODS"
 #: src/mainwindow.cpp:398
 #, kde-format
 msgid "Import Alexandria Data..."
-msgstr "Importa les dades Alexandria..."
+msgstr "Importa les dades Alexandria…"
 
 #: src/mainwindow.cpp:399
 #, kde-format
@@ -5691,7 +5691,7 @@ msgstr "Importa les dades des del gestor de col·leccions de llibres Alexandria"
 #: src/mainwindow.cpp:402
 #, kde-format
 msgid "Import Delicious Library Data..."
-msgstr "Importa les dades de la biblioteca Delicious..."
+msgstr "Importa les dades de la biblioteca Delicious…"
 
 #: src/mainwindow.cpp:403
 #, kde-format
@@ -5701,7 +5701,7 @@ msgstr "Importa les dades des de la biblioteca Delicious"
 #: src/mainwindow.cpp:406
 #, kde-format
 msgid "Import Collectorz Data..."
-msgstr "Importa les dades de Collectorz..."
+msgstr "Importa les dades de Collectorz…"
 
 #: src/mainwindow.cpp:407
 #, kde-format
@@ -5711,7 +5711,7 @@ msgstr "Importa les dades des d'un fitxer de Collectorz"
 #: src/mainwindow.cpp:410
 #, kde-format
 msgid "Import Data Crow Data..."
-msgstr "Importa les dades de Crow Data..."
+msgstr "Importa les dades de Crow Data…"
 
 #: src/mainwindow.cpp:411
 #, kde-format
@@ -5721,7 +5721,7 @@ msgstr "Importa les dades des de Data Crow"
 #: src/mainwindow.cpp:414
 #, kde-format
 msgid "Import Referencer Data..."
-msgstr "Importa les dades d'un fitxer de referència..."
+msgstr "Importa les dades d'un fitxer de referència…"
 
 #: src/mainwindow.cpp:415
 #, kde-format
@@ -5731,7 +5731,7 @@ msgstr "Importa les dades des d'un fitxer de referència"
 #: src/mainwindow.cpp:418
 #, kde-format
 msgid "Import Bibtex Data..."
-msgstr "Importa les dades de Bibtex..."
+msgstr "Importa les dades de Bibtex…"
 
 #: src/mainwindow.cpp:419
 #, kde-format
@@ -5741,7 +5741,7 @@ msgstr "Importa un fitxer de bibliografia bibtex"
 #: src/mainwindow.cpp:424
 #, kde-format
 msgid "Import Bibtexml Data..."
-msgstr "Importa les dades de Bibtexml..."
+msgstr "Importa les dades de Bibtexml…"
 
 #: src/mainwindow.cpp:425
 #, kde-format
@@ -5751,7 +5751,7 @@ msgstr "Importa un fitxer de bibliografia Bibtexml"
 #: src/mainwindow.cpp:427
 #, kde-format
 msgid "Import RIS Data..."
-msgstr "Importa les dades de RIS..."
+msgstr "Importa les dades de RIS…"
 
 #: src/mainwindow.cpp:428
 #, kde-format
@@ -5761,7 +5761,7 @@ msgstr "Importa un fitxer de referència RIS"
 #: src/mainwindow.cpp:430
 #, kde-format
 msgid "Import MARC Data..."
-msgstr "Importa les dades MARC..."
+msgstr "Importa les dades MARC…"
 
 #: src/mainwindow.cpp:431
 #, kde-format
@@ -5771,7 +5771,7 @@ msgstr "Importa les dades MARC"
 #: src/mainwindow.cpp:438
 #, kde-format
 msgid "Import Goodreads Collection..."
-msgstr "Importa una col·lecció de Goodreads..."
+msgstr "Importa una col·lecció de Goodreads…"
 
 #: src/mainwindow.cpp:439
 #, kde-format
@@ -5781,7 +5781,7 @@ msgstr "Importa una col·lecció de Goodreads.com"
 #: src/mainwindow.cpp:441
 #, kde-format
 msgid "Import LibraryThing Collection..."
-msgstr "Importa una col·lecció de LibraryThing..."
+msgstr "Importa una col·lecció de LibraryThing…"
 
 #: src/mainwindow.cpp:442
 #, kde-format
@@ -5791,7 +5791,7 @@ msgstr "Importa una col·lecció de LibraryThing.com"
 #: src/mainwindow.cpp:444
 #, kde-format
 msgid "Import PDF File..."
-msgstr "Importa un fitxer PDF..."
+msgstr "Importa un fitxer PDF…"
 
 #: src/mainwindow.cpp:445
 #, kde-format
@@ -5801,7 +5801,7 @@ msgstr "Importa un fitxer PDF"
 #: src/mainwindow.cpp:447
 #, kde-format
 msgid "Import Audio File Metadata..."
-msgstr "Importa les metadades d'un fitxer d'àudio..."
+msgstr "Importa les metadades d'un fitxer d'àudio…"
 
 #: src/mainwindow.cpp:448
 #, kde-format
@@ -5811,7 +5811,7 @@ msgstr "Importa les metadades dels fitxers d'àudio"
 #: src/mainwindow.cpp:453
 #, kde-format
 msgid "Import Audio CD Data..."
-msgstr "Importa les dades del CD d'àudio..."
+msgstr "Importa les dades del CD d'àudio…"
 
 #: src/mainwindow.cpp:454
 #, kde-format
@@ -5821,7 +5821,7 @@ msgstr "Importa la informació del CD d'àudio"
 #: src/mainwindow.cpp:459
 #, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Importa una col·lecció de Discogs..."
+msgstr "Importa una col·lecció de Discogs…"
 
 #: src/mainwindow.cpp:460
 #, kde-format
@@ -5831,7 +5831,7 @@ msgstr "Importa una col·lecció de Discogs.com"
 #: src/mainwindow.cpp:462
 #, kde-format
 msgid "Import GCstar Data..."
-msgstr "Importa les dades de GCstar..."
+msgstr "Importa les dades de GCstar…"
 
 #: src/mainwindow.cpp:463
 #, kde-format
@@ -5841,7 +5841,7 @@ msgstr "Importa un fitxer de dades GCstar"
 #: src/mainwindow.cpp:466
 #, kde-format
 msgid "Import Griffith Data..."
-msgstr "Importa les dades de Griffith..."
+msgstr "Importa les dades de Griffith…"
 
 #: src/mainwindow.cpp:467
 #, kde-format
@@ -5851,7 +5851,7 @@ msgstr "Importa cap a una base de dades Griffith"
 #: src/mainwindow.cpp:470
 #, kde-format
 msgid "Import Ant Movie Catalog Data..."
-msgstr "Importa les dades de catàleg Ant Movie..."
+msgstr "Importa les dades de catàleg Ant Movie…"
 
 #: src/mainwindow.cpp:471
 #, kde-format
@@ -5861,7 +5861,7 @@ msgstr "Importa un fitxer de dades de catàleg Ant Movie"
 #: src/mainwindow.cpp:474
 #, kde-format
 msgid "Import BoardGameGeek Collection..."
-msgstr "Importa una col·lecció de BoardGameGeek..."
+msgstr "Importa una col·lecció de BoardGameGeek…"
 
 #: src/mainwindow.cpp:475
 #, kde-format
@@ -5871,7 +5871,7 @@ msgstr "Importa una col·lecció de BoardGameGeek.com"
 #: src/mainwindow.cpp:477
 #, kde-format
 msgid "Import VinoXML..."
-msgstr "Importa VinoXML..."
+msgstr "Importa VinoXML…"
 
 #: src/mainwindow.cpp:478
 #, kde-format
@@ -5881,7 +5881,7 @@ msgstr "Importa les dades de VinoXML"
 #: src/mainwindow.cpp:480
 #, kde-format
 msgid "Import File Listing..."
-msgstr "Importa un llistat de fitxers..."
+msgstr "Importa un llistat de fitxers…"
 
 #: src/mainwindow.cpp:481
 #, kde-format
@@ -5891,7 +5891,7 @@ msgstr "Importa la informació quant als fitxers en una carpeta"
 #: src/mainwindow.cpp:483
 #, kde-format
 msgid "Import XSL Transform..."
-msgstr "Importa una transformació XSL..."
+msgstr "Importa una transformació XSL…"
 
 #: src/mainwindow.cpp:484
 #, kde-format
@@ -5911,7 +5911,7 @@ msgstr "Exporta les dades de la col·lecció a altres formats"
 #: src/mainwindow.cpp:515
 #, kde-format
 msgid "Export to XML..."
-msgstr "Exporta cap a XML..."
+msgstr "Exporta cap a XML…"
 
 #: src/mainwindow.cpp:516
 #, kde-format
@@ -5921,7 +5921,7 @@ msgstr "Exporta cap a un fitxer en XML de Tellico"
 #: src/mainwindow.cpp:519
 #, kde-format
 msgid "Export to Zip..."
-msgstr "Exporta cap a ZIP..."
+msgstr "Exporta cap a ZIP…"
 
 #: src/mainwindow.cpp:520
 #, kde-format
@@ -5931,7 +5931,7 @@ msgstr "Exporta cap a un fitxer ZIP de Tellico"
 #: src/mainwindow.cpp:523
 #, kde-format
 msgid "Export to HTML..."
-msgstr "Exporta cap a HTML..."
+msgstr "Exporta cap a HTML…"
 
 #: src/mainwindow.cpp:524
 #, kde-format
@@ -5941,7 +5941,7 @@ msgstr "Exporta cap a un fitxer HTML"
 #: src/mainwindow.cpp:526
 #, kde-format
 msgid "Export to CSV..."
-msgstr "Exporta cap a CSV..."
+msgstr "Exporta cap a CSV…"
 
 #: src/mainwindow.cpp:527
 #, kde-format
@@ -5951,7 +5951,7 @@ msgstr "Exporta cap a un fitxer de valors separats per comes"
 #: src/mainwindow.cpp:529
 #, kde-format
 msgid "Export to Alexandria..."
-msgstr "Exporta cap a Alexandria..."
+msgstr "Exporta cap a Alexandria…"
 
 #: src/mainwindow.cpp:530
 #, kde-format
@@ -5961,7 +5961,7 @@ msgstr "Exporta cap a una biblioteca d'Alexandria"
 #: src/mainwindow.cpp:533
 #, kde-format
 msgid "Export to Bibtex..."
-msgstr "Exporta cap a Bibtex..."
+msgstr "Exporta cap a Bibtex…"
 
 #: src/mainwindow.cpp:534
 #, kde-format
@@ -5971,7 +5971,7 @@ msgstr "Exporta cap a un fitxer bibtex"
 #: src/mainwindow.cpp:536
 #, kde-format
 msgid "Export to Bibtexml..."
-msgstr "Exporta cap a Bibtexml..."
+msgstr "Exporta cap a Bibtexml…"
 
 #: src/mainwindow.cpp:537
 #, kde-format
@@ -5981,7 +5981,7 @@ msgstr "Exporta cap a un fitxer Bibtexml"
 #: src/mainwindow.cpp:539
 #, kde-format
 msgid "Export to ONIX..."
-msgstr "Exporta cap a ONIX..."
+msgstr "Exporta cap a ONIX…"
 
 #: src/mainwindow.cpp:540
 #, kde-format
@@ -5991,7 +5991,7 @@ msgstr "Exporta cap a un fitxer ONIX"
 #: src/mainwindow.cpp:542
 #, kde-format
 msgid "Export to GCstar..."
-msgstr "Exporta cap a GCstar..."
+msgstr "Exporta cap a GCstar…"
 
 #: src/mainwindow.cpp:543
 #, kde-format
@@ -6001,7 +6001,7 @@ msgstr "Exporta cap a un fitxer de dades GCstar"
 #: src/mainwindow.cpp:546
 #, kde-format
 msgid "Export XSL Transform..."
-msgstr "Exporta cap a transformació XSL..."
+msgstr "Exporta cap a transformació XSL…"
 
 #: src/mainwindow.cpp:547
 #, kde-format
@@ -6036,7 +6036,7 @@ msgstr "Desselecciona totes les entrades de la col·lecció"
 #: src/mainwindow.cpp:569
 #, kde-format
 msgid "Advanced &Filter..."
-msgstr "&Filtre avançat..."
+msgstr "&Filtre avançat…"
 
 #: src/mainwindow.cpp:573 src/mainwindow.cpp:799
 #, kde-format
@@ -6046,7 +6046,7 @@ msgstr "Filtra per col·lecció"
 #: src/mainwindow.cpp:580
 #, kde-format
 msgid "&New Entry..."
-msgstr "Entrada &nova..."
+msgstr "Entrada &nova…"
 
 #: src/mainwindow.cpp:582
 #, kde-format
@@ -6066,12 +6066,12 @@ msgstr "Afig una entrada"
 #: src/mainwindow.cpp:596
 #, kde-format
 msgid "Internet Search..."
-msgstr "Busca d'Internet..."
+msgstr "Busca d'Internet…"
 
 #: src/mainwindow.cpp:600
 #, kde-format
 msgid "Search the internet..."
-msgstr "Busca en Internet..."
+msgstr "Busca en Internet…"
 
 #: src/mainwindow.cpp:610
 #, kde-format
@@ -6101,7 +6101,7 @@ msgstr "Fusiona les entrades seleccionades"
 #: src/mainwindow.cpp:636
 #, kde-format
 msgid "Check-&out..."
-msgstr "&Desmarca..."
+msgstr "&Desmarca…"
 
 #: src/mainwindow.cpp:638
 #, kde-format
@@ -6121,7 +6121,7 @@ msgstr "Marca els elements seleccionats"
 #: src/mainwindow.cpp:646
 #, kde-format
 msgid "&Rename Collection..."
-msgstr "Ca&nvia el nom de la col·lecció..."
+msgstr "Ca&nvia el nom de la col·lecció…"
 
 #: src/mainwindow.cpp:649
 #, kde-format
@@ -6131,7 +6131,7 @@ msgstr "Canvia el nom de la col·lecció"
 #: src/mainwindow.cpp:652
 #, kde-format
 msgid "Collection &Fields..."
-msgstr "C&amps de la col·lecció..."
+msgstr "C&amps de la col·lecció…"
 
 #: src/mainwindow.cpp:653
 #, kde-format
@@ -6146,7 +6146,7 @@ msgstr "Modifica els camps de la col·lecció"
 #: src/mainwindow.cpp:659
 #, kde-format
 msgid "&Generate Reports..."
-msgstr "&Genera informes..."
+msgstr "&Genera informes…"
 
 #: src/mainwindow.cpp:660
 #, kde-format
@@ -6171,7 +6171,7 @@ msgstr "Convertix una col·lecció de llibres a bibliografia"
 #: src/mainwindow.cpp:670
 #, kde-format
 msgid "String &Macros..."
-msgstr "&Macros de cadena..."
+msgstr "&Macros de cadena…"
 
 #: src/mainwindow.cpp:672
 #, kde-format
@@ -6181,7 +6181,7 @@ msgstr "Edita les macros de cadena bibtex"
 #: src/mainwindow.cpp:675
 #, kde-format
 msgid "Check for Duplicate Keys..."
-msgstr "Busca claus duplicades..."
+msgstr "Busca claus duplicades…"
 
 #: src/mainwindow.cpp:677
 #, kde-format
@@ -6283,7 +6283,7 @@ msgstr "Canvia l'agrupació de la col·lecció"
 #: src/mainwindow.cpp:784
 #, kde-format
 msgid "Filter here..."
-msgstr "Filtra ací..."
+msgstr "Filtra ací…"
 
 #: src/mainwindow.cpp:849 src/mainwindow.cpp:852
 #, kde-format
@@ -6359,12 +6359,12 @@ msgstr ""
 #: src/mainwindow.cpp:1224 src/mainwindow.cpp:1257
 #, kde-format
 msgid "Creating new collection..."
-msgstr "S'està creant una col·lecció nova..."
+msgstr "S'està creant una col·lecció nova…"
 
 #: src/mainwindow.cpp:1277 src/mainwindow.cpp:1300 src/mainwindow.cpp:1318
 #, kde-format
 msgid "Opening file..."
-msgstr "S'està obrint el fitxer..."
+msgstr "S'està obrint el fitxer…"
 
 #: src/mainwindow.cpp:1288
 #, kde-format
@@ -6398,7 +6398,7 @@ msgstr "Guarda les imatges en el fitxer"
 #: src/mainwindow.cpp:1455
 #, kde-format
 msgid "Saving file with a new filename..."
-msgstr "S'està guardant el fitxer amb un nom nou..."
+msgstr "S'està guardant el fitxer amb un nom nou…"
 
 #: src/mainwindow.cpp:1464
 #, kde-format
@@ -6408,7 +6408,7 @@ msgstr "Anomena i guarda"
 #: src/mainwindow.cpp:1530
 #, kde-format
 msgid "Printing..."
-msgstr "S'està imprimint..."
+msgstr "S'està imprimint…"
 
 #: src/mainwindow.cpp:1534
 #, kde-format
@@ -6422,7 +6422,7 @@ msgstr ""
 #: src/mainwindow.cpp:1557
 #, kde-format
 msgid "Exiting..."
-msgstr "S'està eixint..."
+msgstr "S'està eixint…"
 
 #: src/mainwindow.cpp:1663
 #, kde-format
@@ -6450,7 +6450,7 @@ msgstr "Tellico ha trobat un error en processar el XSLT."
 #: src/mainwindow.cpp:1940
 #, kde-format
 msgid "Importing data..."
-msgstr "S'estan important les dades..."
+msgstr "S'estan important les dades…"
 
 #: src/mainwindow.cpp:1951
 #, kde-format
@@ -6465,7 +6465,7 @@ msgstr "Importa el directori"
 #: src/mainwindow.cpp:1988
 #, kde-format
 msgid "Exporting data..."
-msgstr "S'estan exportant les dades..."
+msgstr "S'estan exportant les dades…"
 
 #: src/mainwindow.cpp:2011
 #, kde-format
@@ -6490,7 +6490,7 @@ msgstr "Cadena"
 #: src/mainwindow.cpp:2126
 #, kde-format
 msgid "Creating citations..."
-msgstr "S'estan creant les citacions..."
+msgstr "S'estan creant les citacions…"
 
 #: src/mainwindow.cpp:2236
 #, kde-format
@@ -6720,7 +6720,7 @@ msgstr "&Biblioteca:"
 #: src/translators/audiofileimporter.cpp:128
 #, kde-format
 msgid "Scanning audio files..."
-msgstr "S'estan explorant els fitxers d'àudio..."
+msgstr "S'estan explorant els fitxers d'àudio…"
 
 #: src/translators/audiofileimporter.cpp:188
 #: src/translators/audiofileimporter.cpp:191
@@ -6758,7 +6758,7 @@ msgstr "Busca recursiva en les &carpetes"
 #, kde-format
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
-"Si se selecciona, les carpetes seran explorades recursivament per a buscar "
+"Si està marcada, les carpetes seran explorades recursivament per a buscar "
 "fitxers d'àudio."
 
 #: src/translators/audiofileimporter.cpp:500
@@ -6770,7 +6770,7 @@ msgstr "Inclou la &ubicació del fitxer"
 #, kde-format
 msgid "If checked, the file names for each track are added to the entries."
 msgstr ""
-"Si se selecciona, s'afegiran els noms dels fitxers de cada pista a les "
+"Si està marcada, s'afegiran els noms dels fitxers de cada pista a les "
 "entrades."
 
 #: src/translators/audiofileimporter.cpp:505
@@ -6782,7 +6782,7 @@ msgstr "Inclou taxa de &bits"
 #, kde-format
 msgid "If checked, the bitrate for each track is added to the entries."
 msgstr ""
-"Si se selecciona, la taxa de bits de cada pista s'afegirà a les entrades."
+"Si està marcada, la taxa de bits de cada pista s'afegirà a les entrades."
 
 #: src/translators/bibtexexporter.cpp:61
 #, kde-format
@@ -6806,7 +6806,7 @@ msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
 "be written."
 msgstr ""
-"Si se selecciona, s'expandiran les macros de cadena i no s'escriuran les "
+"Si està marcada, s'expandiran les macros de cadena i no s'escriuran les "
 "entrades @string{}."
 
 #: src/translators/bibtexexporter.cpp:226
@@ -6818,8 +6818,7 @@ msgstr "Utilitza paquet URL"
 #, kde-format
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgstr ""
-"Si se selecciona, qualsevol camp URL serà embolcallat en una declaració "
-"\\url."
+"Si està marcada, qualsevol camp URL serà embolcallat en una declaració \\url."
 
 #: src/translators/bibtexexporter.cpp:231
 #, kde-format
@@ -6830,7 +6829,7 @@ msgstr "Omet les entrades amb claus de citació buides"
 #, kde-format
 msgid "If checked, any entries without a bibtex citation key will be skipped."
 msgstr ""
-"Si se selecciona, s'ometrà qualsevol entrada sense una clau de citació de "
+"Si està marcada, s'ometrà qualsevol entrada sense una clau de citació de "
 "bibtex."
 
 #: src/translators/bibtexexporter.cpp:239
@@ -6950,7 +6949,7 @@ msgstr "Inclou els títols dels camps com a capçaleres de les columnes"
 #, kde-format
 msgid "If checked, a header row will be added with the field titles."
 msgstr ""
-"Si se selecciona, s'afegirà un fila de capçalera amb els títols dels camps."
+"Si està marcada, s'afegirà un fila de capçalera amb els títols dels camps."
 
 #: src/translators/csvexporter.cpp:147
 #, kde-format
@@ -7051,7 +7050,7 @@ msgstr "La primera &fila conté els camps de títol"
 #: src/translators/csvimporter.cpp:229
 #, kde-format
 msgid "If checked, the first row is used as field titles."
-msgstr "Si se selecciona, la primera fila s'utilitzarà com a camps de títol."
+msgstr "Si està marcada, la primera fila s'utilitzarà com a camps de títol."
 
 #: src/translators/csvimporter.cpp:245
 #, kde-format
@@ -7136,7 +7135,7 @@ msgstr "Opcions de Discogs"
 #: src/translators/filelistingimporter.cpp:87
 #, kde-format
 msgid "Scanning files..."
-msgstr "S'estan explorant els fitxers..."
+msgstr "S'estan explorant els fitxers…"
 
 #: src/translators/filelistingimporter.cpp:269
 #, kde-format
@@ -7152,7 +7151,7 @@ msgstr "Busca recursiva en les carpetes"
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
-"Si se selecciona, les carpetes seran explorades recursivament per a buscar "
+"Si està marcada, les carpetes seran explorades recursivament per a buscar "
 "tots els fitxers."
 
 #: src/translators/filelistingimporter.cpp:277
@@ -7166,7 +7165,7 @@ msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
 msgstr ""
-"Si se selecciona, es generaran les vistes prèvies dels continguts en el "
+"Si està marcada, es generaran les vistes prèvies dels continguts en el "
 "fitxer, cosa que pot alentir el llistat de la carpeta."
 
 #: src/translators/freedbimporter.cpp:106
@@ -7273,17 +7272,17 @@ msgstr "Exporta fitxers d'entrades individuals"
 #: src/translators/htmlexporter.cpp:519
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
-msgstr "Si se selecciona, es crearan fitxers individuals per a cada entrada."
+msgstr "Si està marcada, es crearan fitxers individuals per a cada entrada."
 
 #: src/translators/importer.cpp:54
 #, kde-format
 msgid "Loading data..."
-msgstr "S'estan carregant dades..."
+msgstr "S'estan carregant dades…"
 
 #: src/translators/importer.cpp:55
 #, kde-format
 msgid "Loading %1..."
-msgstr "S'està carregant %1..."
+msgstr "S'està carregant %1…"
 
 #: src/translators/librarythingimporter.cpp:177
 #, kde-format
@@ -7355,7 +7354,7 @@ msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
 "archive."
 msgstr ""
-"Si se selecciona, les imatges en el document seran incloses en l'arxiu ZIP "
+"Si està marcada, les imatges en el document seran incloses en l'arxiu ZIP "
 "comprimit ONIX."
 
 #: src/translators/pdfimporter.cpp:122 src/translators/pdfimporter.cpp:139
@@ -7410,7 +7409,7 @@ msgid ""
 "If checked, the images in the document will be included in the XML stream as "
 "base64 encoded elements."
 msgstr ""
-"Si se selecciona, les imatges en el document seran incloses en el flux XML "
+"Si està marcada, les imatges en el document seran incloses en el flux XML "
 "com a elements codificats amb base64."
 
 #: src/translators/tellicozipexporter.cpp:50
@@ -7472,7 +7471,7 @@ msgid ""
 "<p>Any other field which allows multiple values should be entered the\n"
 "same way, with a semi-colon (;) separating each value.</p>\n"
 msgstr ""
-"<p>...que si un llibre té més d'un autor, podeu separar-ne els noms\n"
+"<p>…que si un llibre té més d'un autor, podeu separar-ne els noms\n"
 "amb punt i coma, d'esta manera Tellico coneixerà com separar-los\n"
 "i utilitzar-los.</p>\n"
 "<p>Qualsevol altre camp que permeta múltiples valors s'ha d'introduir\n"
@@ -7485,7 +7484,7 @@ msgid ""
 "<p>...that you can change which fields are shown in the column view by\n"
 "right-clicking on the column header.\n"
 msgstr ""
-"<p>...que podeu canviar quins camps es mostren en la vista de columna\n"
+"<p>…que podeu canviar quins camps es mostren en la vista de columna\n"
 "fent clic dret en la capçalera de la columna.\n"
 
 #. i18n: ectx: @info:tipoftheday
@@ -7498,7 +7497,7 @@ msgid ""
 "position of the field in the list, which affects the placement in the entry\n"
 "editor.</p>\n"
 msgstr ""
-"<p>...que podeu afegir, editar o modificar els camps en la col·lecció\n"
+"<p>…que podeu afegir, editar o modificar els camps en la col·lecció\n"
 "utilitzant l'editor de camps. Els botons de fletxa inferiors de la llista\n"
 "de camps poden utilitzar-se per a canviar la posició del camp a la\n"
 "llista, cosa que afectarà l'emplaçament en l'editor d'entrades.</p>\n"
@@ -7515,7 +7514,7 @@ msgid ""
 "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
 "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
 msgstr ""
-"<p>...que si voleu filtrar per un camp d'una casella de selecció\n"
+"<p>…que si voleu filtrar per un camp d'una casella de selecció\n"
 "s'ha d'utilitzar un valor «cert». Si voleu filtrar per a mostrar\n"
 "només els llibres de ciència-ficció que no heu llegit, p. ex.,\n"
 "marqueu el botó <em>Coincidix amb tot el següent</em>\n"
@@ -7532,7 +7531,7 @@ msgid ""
 "<p>To show only books which are by Weber or Bujold, for example, then\n"
 "type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
 msgstr ""
-"<p>...que si s'utilitza un caràcter especial en el filtre ràpid, el text\n"
+"<p>…que si s'utilitza un caràcter especial en el filtre ràpid, el text\n"
 "s'interpretarà com una expressió regular.</p>\n"
 "<p>Per a mostrar només els llibres de Weber o Bujold per exemple,\n"
 "escriviu «weber|bujold» (sense cometes) en el quadro de filtre.</p>\n"
@@ -7544,7 +7543,7 @@ msgid ""
 "<p>...that you can edit more than one entry at a time, by holding down\n"
 "the Shift or Ctrl key and selecting multiple entries.</p>\n"
 msgstr ""
-"<p>...que podeu editar més d'una entrada alhora, mantenint\n"
+"<p>…que podeu editar més d'una entrada alhora, mantenint\n"
 "premuda la tecla «Maj» o «Ctrl» i seleccionant múltiples\n"
 "entrades.</p>\n"
 
@@ -7555,7 +7554,7 @@ msgid ""
 "<p>...that you can convert an existing book collection to a bibliography,\n"
 "which can then be exported to bibtex or Bibtexml format.</p>\n"
 msgstr ""
-"<p>...que podeu convertir una col·lecció de llibres existent en una\n"
+"<p>…que podeu convertir una col·lecció de llibres existent en una\n"
 "bibliografia, la qual pot ser exportada als formats bibtex o Bibtexml.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
@@ -7565,7 +7564,7 @@ msgid ""
 "<p>...that you can add, edit, and delete string macros for bibliographies.</"
 "p>\n"
 msgstr ""
-"<p>...que podeu afegir, editar i suprimir macros de cadenes de\n"
+"<p>…que podeu afegir, editar i suprimir macros de cadenes de\n"
 "bibliografia.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
@@ -7578,7 +7577,7 @@ msgid ""
 "editors\n"
 "to be sorted or printed together, for example.</p>\n"
 msgstr ""
-"<p>...si més d'un camp té format com a nom, llavors s'afegirà a la\n"
+"<p>…si més d'un camp té format com a nom, llavors s'afegirà a la\n"
 "col·lecció un grup addicional anomenat «Persones», permetent-vos\n"
 "ordenar als autors i editors o imprimir-los junts, per exemple.</p>\n"
 
@@ -7591,7 +7590,7 @@ msgid ""
 "CSS\n"
 "within the stylesheet governs things like the font, the margins, etc.</p>\n"
 msgstr ""
-"<p>...que podeu modificar l'aparença de l'eixida impresa modificant\n"
+"<p>…que podeu modificar l'aparença de l'eixida impresa modificant\n"
 "el fitxer <tt>tellico-printing.xsl</tt>. El fitxer genera l'HTML\n"
 "i el CSS dins del full d'estil que regula coses com la tipografia,\n"
 "els marges, etc.</p>\n"
@@ -7603,7 +7602,7 @@ msgid ""
 "<p>...that you can import using any generic XSL stylesheet which\n"
 "outputs a valid Tellico XML file.</p>\n"
 msgstr ""
-"<p>...que podeu importar utilitzant qualsevol full d'estil XSL genèric\n"
+"<p>…que podeu importar utilitzant qualsevol full d'estil XSL genèric\n"
 "el qual generarà un fitxer en XML vàlid de Tellico.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
@@ -7611,7 +7610,7 @@ msgstr ""
 #, kde-format
 msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
 msgstr ""
-"<p>...que fent doble clic damunt d'un element d'entrada s'obrirà\n"
+"<p>…que fent doble clic damunt d'un element d'entrada s'obrirà\n"
 "l'editor d'entrades.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
@@ -7622,7 +7621,7 @@ msgid ""
 "as\n"
 "&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
 msgstr ""
-"<p>...que podeu afegir etiquetes HTML a qualsevol paràgraf per a\n"
+"<p>…que podeu afegir etiquetes HTML a qualsevol paràgraf per a\n"
 "donat-li format, com ara &lt;b&gt;negreta&lt;/b&gt; o &lt;i&gt;cursiva&lt;/"
 "i&gt;.</p>\n"
 
@@ -7633,7 +7632,7 @@ msgid ""
 "<p>...that when the Column View is focused, you can press a letter on the\n"
 "keyboard to scroll to the next entry that starts with that letter.</p>\n"
 msgstr ""
-"<p>...que quan està activa la vista detallada, podeu prémer una lletra\n"
+"<p>…que quan està activa la vista detallada, podeu prémer una lletra\n"
 "del teclat per a desplaçar-se a la següent entrada que comença amb\n"
 "esta lletra.</p>\n"
 
@@ -7651,9 +7650,9 @@ msgid ""
 "types by respecting proper sorting at the same time. Consider for example\n"
 "a number field followed by a text subfield with entries 3b, 14a.</p>\n"
 msgstr ""
-"<p>...podeu utilitzar un camp amb un valor derivat per a combinar múltiples\n"
+"<p>…podeu utilitzar un camp amb un valor derivat per a combinar múltiples\n"
 "camps separats en un sol camp. Utilitzeu una plantilla derivada pareixent\n"
-"a «Valor: %{campa}%{campb}» on %{...} se substituïx amb el valor\n"
+"a «Valor: %{campa}%{campb}» on %{…} se substituïx amb el valor\n"
 "apropiat del camp. Açò és útil per a agrupar múltiples valors en\n"
 "un sol camp, p. ex., per a agrupar millor i combinar camps de\n"
 "diferents tipus respectant l'ordenació adequada alhora. Penseu\n"
