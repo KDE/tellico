@@ -46,9 +46,6 @@
 #include <QDir>
 #include <QTemporaryFile>
 
-#define LOAD_ICON(name, group, size) \
-  KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group), size_)
-
 using namespace Tellico;
 using Tellico::Fetch::Manager;
 
@@ -507,6 +504,9 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
   return QString();
 }
 
+#define LOAD_ICON(name, group, size) \
+  KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group), size_)
+
 QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher* fetcher_, int group_, int size_) {
   Q_ASSERT(fetcher_);
   if(!fetcher_) {
@@ -554,6 +554,8 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher* fetcher_, int group_, int 
   return fetcherIcon(fetcher_->type(), group_, size_);
 }
 
+#undef LOAD_ICON
+
 QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) {
   QString name;
   if(self()->functionRegistry.contains(type_)) {
@@ -562,14 +564,16 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
     myWarning() << "no pixmap defined for type =" << type_;
   }
 
+  QStringList overlays;
   if(name.isEmpty()) {
     // use default tellico application icon
     name = QStringLiteral("tellico");
+    overlays += QStringLiteral("information");
   }
 
   QPixmap pix = KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group_),
                                                 size_, KIconLoader::DefaultState,
-                                                QStringList(), nullptr, true);
+                                                overlays, nullptr, true);
   if(pix.isNull()) {
     QIcon icon = QIcon::fromTheme(name);
     const int groupSize = KIconLoader::global()->currentSize(static_cast<KIconLoader::Group>(group_));
