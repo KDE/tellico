@@ -33,7 +33,7 @@ Dependencies:
     'frameworks/knewstuff': '@stable'
     'frameworks/kcrash': '@stable'
     'frameworks/extra-cmake-modules': '@stable'
-    'multimedia/libkcddb': '@stable'
+    'multimedia/libkcddb': '@same'
     'graphics/libksane': '@same'
 
 Options:
