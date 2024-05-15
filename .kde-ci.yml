@@ -34,7 +34,7 @@ Dependencies:
     'frameworks/kcrash': '@stable'
     'frameworks/extra-cmake-modules': '@stable'
     'multimedia/libkcddb': '@stable'
-    'graphics/libksane': '@stable'
+    'graphics/libksane': '@same'
 
 Options:
   run-tests: True
