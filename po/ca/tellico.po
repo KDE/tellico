@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-05 01:44+0000\n"
+"POT-Creation-Date: 2024-05-15 01:45+0000\n"
 "PO-Revision-Date: 2024-03-18 10:02+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -830,7 +830,7 @@ msgstr "Any"
 msgid "Journal"
 msgstr "Diari"
 
-#: src/collections/bibtexcollection.cpp:172 src/fetch/fetchmanager.cpp:70
+#: src/collections/bibtexcollection.cpp:172 src/fetch/fetchmanager.cpp:67
 #, kde-format
 msgid "DOI"
 msgstr "DOI"
@@ -1683,7 +1683,7 @@ msgid "Tracks"
 msgstr "Pistes"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
-#: src/fetch/discogsfetcher.cpp:483 src/fetch/fetchmanager.cpp:65
+#: src/fetch/discogsfetcher.cpp:483 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:317 src/fetchdialog.cpp:248 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:434
@@ -3813,42 +3813,42 @@ msgstr ""
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 no permet la cerca d'aquest tipus de col·lecció."
 
-#: src/fetch/fetchmanager.cpp:66
+#: src/fetch/fetchmanager.cpp:63
 #, kde-format
 msgid "Person"
 msgstr "Persona"
 
-#: src/fetch/fetchmanager.cpp:67
+#: src/fetch/fetchmanager.cpp:64
 #, kde-format
 msgid "ISBN"
 msgstr "ISBN"
 
-#: src/fetch/fetchmanager.cpp:68
+#: src/fetch/fetchmanager.cpp:65
 #, kde-format
 msgid "UPC/EAN"
 msgstr "UPC/EAN"
 
-#: src/fetch/fetchmanager.cpp:69
+#: src/fetch/fetchmanager.cpp:66
 #, kde-format
 msgid "Keyword"
 msgstr "Paraula clau"
 
-#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:235
+#: src/fetch/fetchmanager.cpp:68 src/translators/pdfimporter.cpp:235
 #, kde-format
 msgid "arXiv ID"
 msgstr "ID arXiv"
 
-#: src/fetch/fetchmanager.cpp:72
+#: src/fetch/fetchmanager.cpp:69
 #, kde-format
 msgid "PubMed ID"
 msgstr "ID PubMed"
 
-#: src/fetch/fetchmanager.cpp:73
+#: src/fetch/fetchmanager.cpp:70
 #, kde-format
 msgid "LCCN"
 msgstr "LCCN"
 
-#: src/fetch/fetchmanager.cpp:74
+#: src/fetch/fetchmanager.cpp:71
 #, kde-format
 msgid "Raw Query"
 msgstr "Consulta en cru"
@@ -5265,82 +5265,82 @@ msgstr "Prestatari"
 msgid "Borrower (Sort by Count)"
 msgstr "Prestatari (ordena per comptador)"
 
-#: src/main.cpp:128
+#: src/main.cpp:157
 #, kde-format
 msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - programari de gestió de col·leccions, lliure i senzill"
 
-#: src/main.cpp:130
+#: src/main.cpp:159
 #, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
 msgstr "(c) 2001-2024, Robby Stephenson"
 
-#: src/main.cpp:134
+#: src/main.cpp:163
 #, kde-format
 msgid "Data source scripts"
 msgstr "Scripts de fonts de les dades"
 
-#: src/main.cpp:139
+#: src/main.cpp:168
 #, kde-format
 msgid "Icons"
 msgstr "Icones"
 
-#: src/main.cpp:140
+#: src/main.cpp:169
 #, kde-format
 msgid "Code examples and general inspiration"
 msgstr "Exemples de codi i inspiració general"
 
-#: src/main.cpp:142
+#: src/main.cpp:171
 #, kde-format
 msgid "Author of btparse library"
 msgstr "Autor de la biblioteca btparse"
 
-#: src/main.cpp:143
+#: src/main.cpp:172
 #, kde-format
 msgid "Author of libcsv library"
 msgstr "Autor de la biblioteca libcsv"
 
-#: src/main.cpp:144
+#: src/main.cpp:173
 #, kde-format
 msgid "Author of rtf2html library"
 msgstr "Autor de la biblioteca rtf2html"
 
-#: src/main.cpp:151
+#: src/main.cpp:180
 #, kde-format
 msgid "Do not reopen the last open file"
 msgstr "No obris l'últim fitxer obert"
 
-#: src/main.cpp:152
+#: src/main.cpp:181
 #, kde-format
 msgid "Import <filename> as a bibtex file"
 msgstr "Importa <filename> com un fitxer bibtex"
 
-#: src/main.cpp:153
+#: src/main.cpp:182
 #, kde-format
 msgid "Import <filename> as a MODS file"
 msgstr "Importa <filename> com un fitxer MODS"
 
-#: src/main.cpp:154
+#: src/main.cpp:183
 #, kde-format
 msgid "Import <filename> as a RIS file"
 msgstr "Importa <filename> com un fitxer RIS"
 
-#: src/main.cpp:155
+#: src/main.cpp:184
 #, kde-format
 msgid "Import <filename> as a PDF file"
 msgstr "Importa <filename> com un fitxer PDF"
 
-#: src/main.cpp:156
+#: src/main.cpp:185
 #, kde-format
 msgid "Log diagnostic output"
 msgstr "Registre de sortida de diagnòstic"
 
-#: src/main.cpp:157
+#: src/main.cpp:186
 #, kde-format
 msgid "Write log output to <filename>"
 msgstr "Escriu la sortida del registre a <nomfitxer>"
 
-#: src/main.cpp:158
+#: src/main.cpp:187
 #, kde-format
 msgid "File to open"
 msgstr "Fitxer a obrir"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-05 01:44+0000\n"
+"POT-Creation-Date: 2024-05-15 01:45+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -830,7 +830,7 @@ msgstr "År"
 msgid "Journal"
 msgstr "Journal"
 
-#: src/collections/bibtexcollection.cpp:172 src/fetch/fetchmanager.cpp:70
+#: src/collections/bibtexcollection.cpp:172 src/fetch/fetchmanager.cpp:67
 #, kde-format
 msgid "DOI"
 msgstr "DOI"
@@ -1684,7 +1684,7 @@ msgid "Tracks"
 msgstr "Spor"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
-#: src/fetch/discogsfetcher.cpp:483 src/fetch/fetchmanager.cpp:65
+#: src/fetch/discogsfetcher.cpp:483 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:317 src/fetchdialog.cpp:248 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:434
@@ -3804,42 +3804,42 @@ msgstr ""
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 tillader ikke søgning efter denne samlingstype."
 
-#: src/fetch/fetchmanager.cpp:66
+#: src/fetch/fetchmanager.cpp:63
 #, kde-format
 msgid "Person"
 msgstr "Person"
 
-#: src/fetch/fetchmanager.cpp:67
+#: src/fetch/fetchmanager.cpp:64
 #, kde-format
 msgid "ISBN"
 msgstr "ISBN"
 
-#: src/fetch/fetchmanager.cpp:68
+#: src/fetch/fetchmanager.cpp:65
 #, kde-format
 msgid "UPC/EAN"
 msgstr "UPC/EAN"
 
-#: src/fetch/fetchmanager.cpp:69
+#: src/fetch/fetchmanager.cpp:66
 #, kde-format
 msgid "Keyword"
 msgstr "Nøgleord"
 
-#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:235
+#: src/fetch/fetchmanager.cpp:68 src/translators/pdfimporter.cpp:235
 #, kde-format
 msgid "arXiv ID"
 msgstr "arXiv-id"
 
-#: src/fetch/fetchmanager.cpp:72
+#: src/fetch/fetchmanager.cpp:69
 #, kde-format
 msgid "PubMed ID"
 msgstr "PubMed-id"
 
-#: src/fetch/fetchmanager.cpp:73
+#: src/fetch/fetchmanager.cpp:70
 #, kde-format
 msgid "LCCN"
 msgstr "LCCN"
 
-#: src/fetch/fetchmanager.cpp:74
+#: src/fetch/fetchmanager.cpp:71
 #, kde-format
 msgid "Raw Query"
 msgstr "Rå forespørgsel"
@@ -5273,85 +5273,85 @@ msgstr "Låner"
 msgid "Borrower (Sort by Count)"
 msgstr "Låner (sortér efter tælling)"
 
-#: src/main.cpp:128
+#: src/main.cpp:157
 #, fuzzy, kde-format
 #| msgid "Tellico - a KDE collection manager"
 msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - håndtering af samlinger fra KDE"
 
-#: src/main.cpp:130
+#: src/main.cpp:159
 #, fuzzy, kde-format
 #| msgid "(c) 2001-2020, Robby Stephenson"
 msgid "(c) 2001-2024, Robby Stephenson"
 msgstr "(c) 2001-2020, Robby Stephenson"
 
-#: src/main.cpp:134
+#: src/main.cpp:163
 #, kde-format
 msgid "Data source scripts"
 msgstr "Datakilde-scripts"
 
-#: src/main.cpp:139
+#: src/main.cpp:168
 #, kde-format
 msgid "Icons"
 msgstr "Ikoner"
 
-#: src/main.cpp:140
+#: src/main.cpp:169
 #, kde-format
 msgid "Code examples and general inspiration"
 msgstr "Kodeeksempler og generel inspiration"
 
-#: src/main.cpp:142
+#: src/main.cpp:171
 #, kde-format
 msgid "Author of btparse library"
 msgstr "Ophavsmand til btparse-biblioteket"
 
-#: src/main.cpp:143
+#: src/main.cpp:172
 #, kde-format
 msgid "Author of libcsv library"
 msgstr "Ophavsmand til libcsv-biblioteket"
 
-#: src/main.cpp:144
+#: src/main.cpp:173
 #, kde-format
 msgid "Author of rtf2html library"
 msgstr "Ophavsmand til rtf2html-biblioteket"
 
-#: src/main.cpp:151
+#: src/main.cpp:180
 #, kde-format
 msgid "Do not reopen the last open file"
 msgstr "Genåbn ikke den senest åbnede fil"
 
-#: src/main.cpp:152
+#: src/main.cpp:181
 #, kde-format
 msgid "Import <filename> as a bibtex file"
 msgstr "Importér <filename> som en bibtex-fil"
 
-#: src/main.cpp:153
+#: src/main.cpp:182
 #, kde-format
 msgid "Import <filename> as a MODS file"
 msgstr "Importér <filename> som en MODS-fil"
 
-#: src/main.cpp:154
+#: src/main.cpp:183
 #, kde-format
 msgid "Import <filename> as a RIS file"
 msgstr "Importér <filename> som en RIS-fil"
 
-#: src/main.cpp:155
+#: src/main.cpp:184
 #, fuzzy, kde-format
 #| msgid "Import <filename> as a MODS file"
 msgid "Import <filename> as a PDF file"
 msgstr "Importér <filename> som en MODS-fil"
 
-#: src/main.cpp:156
+#: src/main.cpp:185
 #, kde-format
 msgid "Log diagnostic output"
 msgstr ""
 
-#: src/main.cpp:157
+#: src/main.cpp:186
 #, kde-format
 msgid "Write log output to <filename>"
 msgstr ""
 
-#: src/main.cpp:158
+#: src/main.cpp:187
 #, kde-format
 msgid "File to open"
 msgstr "Fil der skal åbnes"

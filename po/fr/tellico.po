@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-05 01:44+0000\n"
+"POT-Creation-Date: 2024-05-15 01:45+0000\n"
 "PO-Revision-Date: 2024-03-19 08:26+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -857,7 +857,7 @@ msgstr "Année"
 msgid "Journal"
 msgstr "Journal"
 
-#: src/collections/bibtexcollection.cpp:172 src/fetch/fetchmanager.cpp:70
+#: src/collections/bibtexcollection.cpp:172 src/fetch/fetchmanager.cpp:67
 #, kde-format
 msgid "DOI"
 msgstr "DOI"
@@ -1712,7 +1712,7 @@ msgid "Tracks"
 msgstr "Pistes"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
-#: src/fetch/discogsfetcher.cpp:483 src/fetch/fetchmanager.cpp:65
+#: src/fetch/discogsfetcher.cpp:483 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:317 src/fetchdialog.cpp:248 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:434
@@ -3872,42 +3872,42 @@ msgstr ""
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 ne permet pas la recherche pour ce type de collection."
 
-#: src/fetch/fetchmanager.cpp:66
+#: src/fetch/fetchmanager.cpp:63
 #, kde-format
 msgid "Person"
 msgstr "Personne"
 
-#: src/fetch/fetchmanager.cpp:67
+#: src/fetch/fetchmanager.cpp:64
 #, kde-format
 msgid "ISBN"
 msgstr "ISBN"
 
-#: src/fetch/fetchmanager.cpp:68
+#: src/fetch/fetchmanager.cpp:65
 #, kde-format
 msgid "UPC/EAN"
 msgstr "UPC/EAN"
 
-#: src/fetch/fetchmanager.cpp:69
+#: src/fetch/fetchmanager.cpp:66
 #, kde-format
 msgid "Keyword"
 msgstr "Mot-clé"
 
-#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:235
+#: src/fetch/fetchmanager.cpp:68 src/translators/pdfimporter.cpp:235
 #, kde-format
 msgid "arXiv ID"
 msgstr "ID arXiv"
 
-#: src/fetch/fetchmanager.cpp:72
+#: src/fetch/fetchmanager.cpp:69
 #, kde-format
 msgid "PubMed ID"
 msgstr "ID « Pubmed »"
 
-#: src/fetch/fetchmanager.cpp:73
+#: src/fetch/fetchmanager.cpp:70
 #, kde-format
 msgid "LCCN"
 msgstr "LCCN"
 
-#: src/fetch/fetchmanager.cpp:74
+#: src/fetch/fetchmanager.cpp:71
 #, kde-format
 msgid "Raw Query"
 msgstr "Requête brute"
@@ -5343,82 +5343,82 @@ msgstr "Emprunteur"
 msgid "Borrower (Sort by Count)"
 msgstr "Emprunteur (Classement par nombre d'occurrences)"
 
-#: src/main.cpp:128
+#: src/main.cpp:157
 #, kde-format
 msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - un gestionnaire de collections libre et simple"
 
-#: src/main.cpp:130
+#: src/main.cpp:159
 #, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
 msgstr "(c) 2001 - 2024, Robby Stephenson"
 
-#: src/main.cpp:134
+#: src/main.cpp:163
 #, kde-format
 msgid "Data source scripts"
 msgstr "Scripts de sources de données"
 
-#: src/main.cpp:139
+#: src/main.cpp:168
 #, kde-format
 msgid "Icons"
 msgstr "Icônes"
 
-#: src/main.cpp:140
+#: src/main.cpp:169
 #, kde-format
 msgid "Code examples and general inspiration"
 msgstr "Exemples de code et inspiration générale"
 
-#: src/main.cpp:142
+#: src/main.cpp:171
 #, kde-format
 msgid "Author of btparse library"
 msgstr "Auteur de la bibliothèque btparse"
 
-#: src/main.cpp:143
+#: src/main.cpp:172
 #, kde-format
 msgid "Author of libcsv library"
 msgstr "Auteur de la bibliothèque libcsv"
 
-#: src/main.cpp:144
+#: src/main.cpp:173
 #, kde-format
 msgid "Author of rtf2html library"
 msgstr "Auteur de la bibliothèque rtf2html"
 
-#: src/main.cpp:151
+#: src/main.cpp:180
 #, kde-format
 msgid "Do not reopen the last open file"
 msgstr "Ne pas charger le dernier fichier ouvert"
 
-#: src/main.cpp:152
+#: src/main.cpp:181
 #, kde-format
 msgid "Import <filename> as a bibtex file"
 msgstr "Importer <filename> en tant que fichier BibTeX"
 
-#: src/main.cpp:153
+#: src/main.cpp:182
 #, kde-format
 msgid "Import <filename> as a MODS file"
 msgstr "Importer <filename> en tant que fichier MODS"
 
-#: src/main.cpp:154
+#: src/main.cpp:183
 #, kde-format
 msgid "Import <filename> as a RIS file"
 msgstr "Importer <filename> en tant que fichier CSV"
 
-#: src/main.cpp:155
+#: src/main.cpp:184
 #, kde-format
 msgid "Import <filename> as a PDF file"
 msgstr "Importer <filename> comme fichier « PDF »"
 
-#: src/main.cpp:156
+#: src/main.cpp:185
 #, kde-format
 msgid "Log diagnostic output"
 msgstr "Sortie du journal de diagnostic"
 
-#: src/main.cpp:157
+#: src/main.cpp:186
 #, kde-format
 msgid "Write log output to <filename>"
 msgstr "Écrire la sortie du journal vers <filename>"
 
-#: src/main.cpp:158
+#: src/main.cpp:187
 #, kde-format
 msgid "File to open"
 msgstr "Fichier à ouvrir"
