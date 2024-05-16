@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 03:09+0000\n"
+"POT-Creation-Date: 2024-05-16 03:33+0000\n"
 "PO-Revision-Date: 2024-01-05 15:28+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -3191,12 +3191,12 @@ msgstr "Aggiorna elementi"
 msgid "Updating <b>%1</b>..."
 msgstr "Aggiornamento <b>%1</b>..."
 
-#: src/entryview.cpp:333
+#: src/entryview.cpp:352
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico non riesce a trovare il foglio di stile predefinito."
 
-#: src/entryview.cpp:335 src/mainwindow.cpp:1809
+#: src/entryview.cpp:354 src/mainwindow.cpp:1809
 #, kde-format
 msgid "Please check your installation."
 msgstr "Controlla la tua installazione."

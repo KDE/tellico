@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 03:09+0000\n"
+"POT-Creation-Date: 2024-05-16 03:33+0000\n"
 "PO-Revision-Date: 2024-01-03 09:39+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -3169,13 +3169,13 @@ msgstr "Оновити записи"
 msgid "Updating <b>%1</b>..."
 msgstr "Оновлення <b>%1</b>…"
 
-#: src/entryview.cpp:333
+#: src/entryview.cpp:352
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr ""
 "Tellico не вдається встановити розташування типової таблиці стилів записів."
 
-#: src/entryview.cpp:335 src/mainwindow.cpp:1809
+#: src/entryview.cpp:354 src/mainwindow.cpp:1809
 #, kde-format
 msgid "Please check your installation."
 msgstr "Будь ласка, перевірте, чи належним чином встановлено програму."
