@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-15 01:45+0000\n"
+"POT-Creation-Date: 2024-05-16 02:08+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -3060,12 +3060,12 @@ msgstr "Opdatér indgange"
 msgid "Updating <b>%1</b>..."
 msgstr "Opdaterer <b>%1</b>..."
 
-#: src/entryview.cpp:333
+#: src/entryview.cpp:352
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico kan ikke finde standard-stylesheet til indgange."
 
-#: src/entryview.cpp:335 src/mainwindow.cpp:1819
+#: src/entryview.cpp:354 src/mainwindow.cpp:1819
 #, kde-format
 msgid "Please check your installation."
 msgstr "Kontrollér din installation."

@@ -1,19 +1,18 @@
 # Translation of tellico to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2005, 2006, 2007, 2008, 2009, 2011, 2013, 2017, 2018, 2019, 2020, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-05 01:44+0000\n"
-"PO-Revision-Date: 2023-08-10 18:43+0200\n"
+"POT-Creation-Date: 2024-05-15 01:45+0000\n"
+"PO-Revision-Date: 2024-05-15 20:40+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 24.02.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -274,7 +273,7 @@ msgstr "Samlekort"
 #: src/collectionfactory.cpp:93
 #, kde-format
 msgid "Video Game Collection"
-msgstr ""
+msgstr "Dataspel"
 
 #: src/collectionfactory.cpp:94
 #, kde-format
@@ -817,7 +816,7 @@ msgstr "År"
 msgid "Journal"
 msgstr "Tidsskrift"
 
-#: src/collections/bibtexcollection.cpp:172 src/fetch/fetchmanager.cpp:70
+#: src/collections/bibtexcollection.cpp:172 src/fetch/fetchmanager.cpp:67
 #, kde-format
 msgid "DOI"
 msgstr "DOI"
@@ -1403,7 +1402,7 @@ msgstr "Ikon"
 #: src/collections/gamecollection.cpp:35
 #, kde-format
 msgid "My Video Games"
-msgstr ""
+msgstr "Dataspela mine"
 
 #: src/collections/gamecollection.cpp:57
 #, kde-format
@@ -1672,7 +1671,7 @@ msgid "Tracks"
 msgstr "Spor"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
-#: src/fetch/discogsfetcher.cpp:483 src/fetch/fetchmanager.cpp:65
+#: src/fetch/discogsfetcher.cpp:483 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:317 src/fetchdialog.cpp:248 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:434
@@ -3558,7 +3557,7 @@ msgstr "Språk: "
 #: src/fetch/colnectfetcher.cpp:967
 #, kde-format
 msgid "Country code: "
-msgstr ""
+msgstr "Landkode: "
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
@@ -3659,7 +3658,7 @@ msgstr "Discogs-lydsøk"
 #: src/fetch/discogsfetcher.cpp:571 src/translators/discogsimporter.cpp:200
 #, kde-format
 msgid "User token:"
-msgstr ""
+msgstr "Brukarkode:"
 
 #: src/fetch/doubanfetcher.cpp:366 src/fetch/doubanfetcher.cpp:384
 #: src/fetch/doubanfetcher.cpp:402 src/fetch/doubanfetcher.cpp:641
@@ -3785,42 +3784,42 @@ msgstr ""
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 lèt deg ikkje søkja i denne samlingstypen."
 
-#: src/fetch/fetchmanager.cpp:66
+#: src/fetch/fetchmanager.cpp:63
 #, kde-format
 msgid "Person"
 msgstr "Person"
 
-#: src/fetch/fetchmanager.cpp:67
+#: src/fetch/fetchmanager.cpp:64
 #, kde-format
 msgid "ISBN"
 msgstr "ISBN"
 
-#: src/fetch/fetchmanager.cpp:68
+#: src/fetch/fetchmanager.cpp:65
 #, kde-format
 msgid "UPC/EAN"
 msgstr "UPC/EAN"
 
-#: src/fetch/fetchmanager.cpp:69
+#: src/fetch/fetchmanager.cpp:66
 #, kde-format
 msgid "Keyword"
 msgstr "Nøkkelord"
 
-#: src/fetch/fetchmanager.cpp:71 src/translators/pdfimporter.cpp:235
+#: src/fetch/fetchmanager.cpp:68 src/translators/pdfimporter.cpp:235
 #, kde-format
 msgid "arXiv ID"
 msgstr "arXiv-ID"
 
-#: src/fetch/fetchmanager.cpp:72
+#: src/fetch/fetchmanager.cpp:69
 #, kde-format
 msgid "PubMed ID"
 msgstr "PubMed-ID"
 
-#: src/fetch/fetchmanager.cpp:73
+#: src/fetch/fetchmanager.cpp:70
 #, kde-format
 msgid "LCCN"
 msgstr "LCCN"
 
-#: src/fetch/fetchmanager.cpp:74
+#: src/fetch/fetchmanager.cpp:71
 #, kde-format
 msgid "Raw Query"
 msgstr "Råførespurnad"
@@ -3983,17 +3982,17 @@ msgstr "Episodar"
 #: src/fetch/imdbfetcher.cpp:583
 #, kde-format
 msgid "Locale"
-msgstr ""
+msgstr "Språk"
 
 #: src/fetch/imdbfetcher.cpp:586
 #, kde-format
 msgid "Use system locale"
-msgstr ""
+msgstr "Bruk systemspråkinnstillingar"
 
 #: src/fetch/imdbfetcher.cpp:587
 #, kde-format
 msgid "Use custom locale"
-msgstr ""
+msgstr "Bruk sjølvvalt språk"
 
 #: src/fetch/isbndbfetcher.cpp:359
 #, kde-format
@@ -4239,7 +4238,7 @@ msgstr "Abonnent-PIN: "
 #: src/fetch/vgcollectfetcher.cpp:233 src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
 msgid "VGCollect Link"
-msgstr ""
+msgstr "VGCollect-lenkje"
 
 #: src/fetch/videogamegeekfetcher.cpp:199
 #, kde-format
@@ -4505,7 +4504,7 @@ msgstr "Tøm alle søkjefelta og søkjeresultata."
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p %"
 
 #: src/fetchdialog.cpp:392
 #, kde-format
@@ -5229,82 +5228,82 @@ msgstr "Lånar"
 msgid "Borrower (Sort by Count)"
 msgstr "Lånar (sortert etter tal)"
 
-#: src/main.cpp:128
+#: src/main.cpp:157
 #, kde-format
 msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico – ein enkel og gratis samlingsdatabase"
 
-#: src/main.cpp:130
+#: src/main.cpp:159
 #, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr ""
+msgstr "© 2001–2024 Robby Stephenson"
 
-#: src/main.cpp:134
+#: src/main.cpp:163
 #, kde-format
 msgid "Data source scripts"
 msgstr "Datakjeldeskript"
 
-#: src/main.cpp:139
+#: src/main.cpp:168
 #, kde-format
 msgid "Icons"
 msgstr "Ikona brukte i programmet"
 
-#: src/main.cpp:140
+#: src/main.cpp:169
 #, kde-format
 msgid "Code examples and general inspiration"
 msgstr "Programkodeeksempel og generell inspirasjon"
 
-#: src/main.cpp:142
+#: src/main.cpp:171
 #, kde-format
 msgid "Author of btparse library"
 msgstr "Utviklar av btparse-biblioteket"
 
-#: src/main.cpp:143
+#: src/main.cpp:172
 #, kde-format
 msgid "Author of libcsv library"
 msgstr "Utviklar av libcsv-biblioteket"
 
-#: src/main.cpp:144
+#: src/main.cpp:173
 #, kde-format
 msgid "Author of rtf2html library"
 msgstr "Utviklar av rtf2html-biblioteket"
 
-#: src/main.cpp:151
+#: src/main.cpp:180
 #, kde-format
 msgid "Do not reopen the last open file"
 msgstr "Ikkje opna den sist opna fila på nytt"
 
-#: src/main.cpp:152
+#: src/main.cpp:181
 #, kde-format
 msgid "Import <filename> as a bibtex file"
 msgstr "Importer <filename> som BibTeX-fil"
 
-#: src/main.cpp:153
+#: src/main.cpp:182
 #, kde-format
 msgid "Import <filename> as a MODS file"
 msgstr "Importer <filename> som MODS-fil"
 
-#: src/main.cpp:154
+#: src/main.cpp:183
 #, kde-format
 msgid "Import <filename> as a RIS file"
 msgstr "Importer <filename> som RIS-fil"
 
-#: src/main.cpp:155
+#: src/main.cpp:184
 #, kde-format
 msgid "Import <filename> as a PDF file"
 msgstr "Importer <filename> som PDF-fil"
 
-#: src/main.cpp:156
+#: src/main.cpp:185
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "Loggfør diagnosedata"
 
-#: src/main.cpp:157
+#: src/main.cpp:186
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "Skriv loggen til <filename>"
 
-#: src/main.cpp:158
+#: src/main.cpp:187
 #, kde-format
 msgid "File to open"
 msgstr "Fil som skal opnast"
@@ -5412,12 +5411,12 @@ msgstr "Lag ei ny vinsamling."
 #: src/mainwindow.cpp:305
 #, kde-format
 msgid "New Video &Game Collection"
-msgstr ""
+msgstr "Ny &dataspelsamling"
 
 #: src/mainwindow.cpp:306
 #, kde-format
 msgid "Create a new video game collection"
-msgstr ""
+msgstr "Lag ei ny dataspelsamling."
 
 #: src/mainwindow.cpp:308
 #, kde-format
@@ -5674,12 +5673,12 @@ msgstr "Importer lyd-CD-informasjon."
 #: src/mainwindow.cpp:462
 #, kde-format
 msgid "Import Discogs Collection..."
-msgstr ""
+msgstr "Discogs-samling …"
 
 #: src/mainwindow.cpp:463
 #, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr ""
+msgstr "Importer samling frå Discogs.com."
 
 #: src/mainwindow.cpp:465
 #, kde-format
@@ -6120,7 +6119,7 @@ msgstr "Vis/gøym redigeringsvindauge for oppføringar."
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "Vis logg"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6403,7 +6402,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr ""
+msgstr "Tellico-logg"
 
 #: src/reportdialog.cpp:88
 #, kde-format
@@ -6959,7 +6958,7 @@ msgstr "<Nytt felt>"
 #: src/translators/discogsimporter.cpp:191
 #, kde-format
 msgid "Discogs Options"
-msgstr ""
+msgstr "Discogs-val"
 
 #: src/translators/filelistingimporter.cpp:71
 #, kde-format
@@ -7281,7 +7280,7 @@ msgstr "Totalt:"
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
 #, kde-format
 msgid "Loan"
-msgstr ""
+msgstr "Lån"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335

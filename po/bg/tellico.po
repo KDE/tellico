@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-15 01:45+0000\n"
+"POT-Creation-Date: 2024-05-16 02:08+0000\n"
 "PO-Revision-Date: 2009-09-18 16:56+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -2986,12 +2986,12 @@ msgstr "Изтрий книга"
 msgid "Updating <b>%1</b>..."
 msgstr ""
 
-#: src/entryview.cpp:333
+#: src/entryview.cpp:352
 #, fuzzy, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico не може да зареди файла %1."
 
-#: src/entryview.cpp:335 src/mainwindow.cpp:1819
+#: src/entryview.cpp:354 src/mainwindow.cpp:1819
 #, kde-format
 msgid "Please check your installation."
 msgstr "Моля проверете инсталацията си."
