@@ -33,7 +33,6 @@
 #include "tellico_kernel.h"
 #include "utils/tellico_utils.h"
 #include "utils/datafileregistry.h"
-#include "core/filehandler.h"
 #include "config/tellico_config.h"
 #include "gui/drophandler.h"
 #include "utils/cursorsaver.h"
@@ -46,6 +45,7 @@
 #include <KColorScheme>
 
 #include <QFile>
+#include <QDir>
 #include <QTextStream>
 #include <QClipboard>
 #include <QDomDocument>
@@ -161,6 +161,9 @@ EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_),
     m_printer.setResolution(300);
   }
 
+  connect(this, &QWebEngineView::loadFinished, this, [](bool b) {
+    if(!b) myDebug() << "EntryView - failed to load view";
+  });
   connect(page, &EntryViewPage::signalTellicoAction,
           this, &EntryView::signalTellicoAction);
 
@@ -259,7 +262,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   f1.close();
 #endif
 
-  QString html = m_handler->applyStylesheet(dom.toString());
+  const QString html = m_handler->applyStylesheet(dom.toString());
   // write out image files
   Data::FieldList fields = entry_->collection()->imageFields();
   foreach(Data::FieldPtr field, fields) {
@@ -294,9 +297,25 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   end();
   view()->layout(); // I need this because some of the margins and widths may get messed up
 #else
-  // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
-  // by simply using a relative path in the xslt file
-  page()->setHtml(html, QUrl::fromLocalFile(m_xsltFile));
+  // limit is 2 MB after percent encoding, etc., so give some padding
+  if(html.size() > 1200000) {
+    delete m_tempFile;
+    m_tempFile = new QTemporaryFile(QDir::tempPath() + QLatin1String("/tellicoview_XXXXXX") + QLatin1String(".html"));
+    m_tempFile->open();
+    QTextStream ts(m_tempFile);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+    ts.setCodec("UTF-8");
+#else
+    ts.setEncoding(QStringConverter::Utf8);
+#endif
+    ts << html;
+    // TODO: need to handle relative links
+    page()->load(QUrl::fromLocalFile(m_tempFile->fileName()));
+  } else {
+    // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
+    // by simply using a relative path in the xslt file
+    page()->setHtml(html, QUrl::fromLocalFile(m_xsltFile));
+  }
 #endif
 }
 
