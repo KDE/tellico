@@ -2,13 +2,13 @@
 #
 # Abigail Brady <morwen@evilmagic.org>, Bastien Nocera <hadess@hadess.net>, 2008.
 # Andrew Coles <andrew_coles@yahoo.co.uk>, 2009, 2010.
-# Steve Allewell <steve.allewell@gmail.com>, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Steve Allewell <steve.allewell@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-16 02:08+0000\n"
-"PO-Revision-Date: 2023-06-17 12:12+0100\n"
+"PO-Revision-Date: 2024-05-24 19:21+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -271,10 +271,9 @@ msgid "Card Collection"
 msgstr "Card Collection"
 
 #: src/collectionfactory.cpp:93
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "Video Collection"
+msgstr "Video Game Collection"
 
 #: src/collectionfactory.cpp:94
 #, kde-format
@@ -1403,10 +1402,9 @@ msgid "Icon"
 msgstr "Icon"
 
 #: src/collections/gamecollection.cpp:35
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "My Videos"
+msgstr "My Video Games"
 
 #: src/collections/gamecollection.cpp:57
 #, kde-format
@@ -3135,7 +3133,7 @@ msgstr "Encode the exported file in the local encoding."
 #: src/fetch/adsfetcher.cpp:311
 #, kde-format
 msgid "SAO/NASA Astrophysics Data System"
-msgstr ""
+msgstr "SAO/NASA Astrophysics Data System"
 
 #: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:229
@@ -3552,10 +3550,9 @@ msgid "Language: "
 msgstr "Language: "
 
 #: src/fetch/colnectfetcher.cpp:967
-#, fuzzy, kde-format
-#| msgid "Country: "
+#, kde-format
 msgid "Country code: "
-msgstr "Country: "
+msgstr "Country code: "
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
@@ -3654,10 +3651,9 @@ msgid "Discogs Audio Search"
 msgstr "Discogs Audio Search"
 
 #: src/fetch/discogsfetcher.cpp:571 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "User token: "
+msgstr "User token:"
 
 #: src/fetch/doubanfetcher.cpp:366 src/fetch/doubanfetcher.cpp:384
 #: src/fetch/doubanfetcher.cpp:402 src/fetch/doubanfetcher.cpp:641
@@ -3986,17 +3982,17 @@ msgstr "Episodes"
 #: src/fetch/imdbfetcher.cpp:583
 #, kde-format
 msgid "Locale"
-msgstr ""
+msgstr "Locale"
 
 #: src/fetch/imdbfetcher.cpp:586
 #, kde-format
 msgid "Use system locale"
-msgstr ""
+msgstr "Use system locale"
 
 #: src/fetch/imdbfetcher.cpp:587
 #, kde-format
 msgid "Use custom locale"
-msgstr ""
+msgstr "Use custom locale"
 
 #: src/fetch/isbndbfetcher.cpp:359
 #, kde-format
@@ -4240,10 +4236,9 @@ msgid "Subscriber PIN: "
 msgstr "Subscriber PIN: "
 
 #: src/fetch/vgcollectfetcher.cpp:233 src/fetch/vgcollectfetcher.cpp:369
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Colnect Link"
+msgstr "VGCollect Link"
 
 #: src/fetch/videogamegeekfetcher.cpp:199
 #, kde-format
@@ -4509,7 +4504,7 @@ msgstr "Clear all search fields and results"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p%"
 
 #: src/fetchdialog.cpp:392
 #, kde-format
@@ -5236,10 +5231,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - collection management software, free and simple"
 
 #: src/main.cpp:159
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2023, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr "(c) 2001-2023, Robby Stephenson"
+msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:163
 #, kde-format
@@ -5299,12 +5293,12 @@ msgstr "Import <filename> as a PDF file"
 #: src/main.cpp:185
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "Log diagnostic output"
 
 #: src/main.cpp:186
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "Write log output to <filename>"
 
 #: src/main.cpp:187
 #, kde-format
@@ -5412,16 +5406,14 @@ msgid "Create a new wine collection"
 msgstr "Create a new wine collection"
 
 #: src/mainwindow.cpp:305
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "New &Game Collection"
+msgstr "New Video &Game Collection"
 
 #: src/mainwindow.cpp:306
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "Create a new video collection"
+msgstr "Create a new video game collection"
 
 #: src/mainwindow.cpp:308
 #, kde-format
@@ -5674,16 +5666,14 @@ msgid "Import audio CD information"
 msgstr "Import audio CD information"
 
 #: src/mainwindow.cpp:462
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Import Goodreads Collection..."
+msgstr "Import Discogs Collection..."
 
 #: src/mainwindow.cpp:463
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Import a collection from Goodreads.com"
+msgstr "Import a collection from Discogs.com"
 
 #: src/mainwindow.cpp:465
 #, kde-format
@@ -6124,7 +6114,7 @@ msgstr "Enable/disable the editor"
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "Show Log"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6404,11 +6394,10 @@ msgstr ""
 "imported."
 
 #: src/mainwindow.cpp:2587
-#, fuzzy, kde-format
-#| msgid "Tellico"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Tellico"
+msgstr "Tellico Log"
 
 #: src/reportdialog.cpp:88
 #, kde-format
@@ -6957,10 +6946,9 @@ msgid "<New Field>"
 msgstr "<New Field>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Discogs Link"
+msgstr "Discogs Options"
 
 #: src/translators/filelistingimporter.cpp:71
 #, kde-format
@@ -7277,10 +7265,9 @@ msgstr "Total:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
-msgstr "Loans"
+msgstr "Loan"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
