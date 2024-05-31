@@ -1,15 +1,15 @@
 # Translation of tellico into esperanto.
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
-# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-16 02:08+0000\n"
-"PO-Revision-Date: 2024-03-20 22:52+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"PO-Revision-Date: 2024-05-30 22:41+0200\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Axel Rousseau,Oliver Kellogg"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org,okellogg@users.sourceforge.net"
+msgstr "axel@esperanto-jeunes.org,olivermkellogg@gmail.com"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -2342,8 +2342,8 @@ msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
 "up."
 msgstr ""
-"Se kontrolite, la dosiero, kiu estis laste malfermita, estos remalfermita ĉe "
-"la ekfunkciigo de la programo."
+"Se markite, la dosiero, kiu estis laste malfermita, estos remalfermita ĉe la "
+"ekfunkciigo de la programo."
 
 #: src/configdialog.cpp:221
 #, kde-format
@@ -5188,7 +5188,7 @@ msgstr "Vi povas aldoni notojn pri la prunto."
 #: src/loandialog.cpp:200
 #, kde-format
 msgid "&Add a reminder to the active calendar"
-msgstr "Aldonu memorigilon al la aktiva kalendaro"
+msgstr "&Aldoni memorigilon al la aktiva kalendaro"
 
 #: src/loandialog.cpp:204
 #, kde-format
@@ -6863,7 +6863,7 @@ msgstr "Elekti la tipon de kolekto importita."
 #: src/translators/csvimporter.cpp:229
 #, kde-format
 msgid "&First row contains field titles"
-msgstr "La unua vico enhavas kampotitolojn"
+msgstr "Unua &vico enhavas kampotitolojn"
 
 #: src/translators/csvimporter.cpp:230
 #, kde-format
@@ -7161,8 +7161,8 @@ msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
 "archive."
 msgstr ""
-"Se kontrolite, la bildoj en la dokumento estos inkluzivitaj en la zipita "
-"ONIX-arkivo."
+"Se markite, la bildoj en la dokumento estos inkluzivitaj en la zipita ONIX-"
+"arkivo."
 
 #: src/translators/pdfimporter.cpp:126 src/translators/pdfimporter.cpp:142
 #, kde-format
