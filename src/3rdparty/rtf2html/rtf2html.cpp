@@ -414,6 +414,7 @@ QString RTF2HTML::toHTML() const {
                case rtf_keyword::rkw_trowd:
                   CurCellDefs=CellDefsList.insert(CellDefsList.end(),
                                                   table_cell_defs());
+                   break;
                case rtf_keyword::rkw_row:
                   if (!trCurRow->Cells.empty())
                   {
