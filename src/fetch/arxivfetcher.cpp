@@ -71,6 +71,12 @@ QString ArxivFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+QString ArxivFetcher::attribution() const {
+  // https://info.arxiv.org/help/api/index.html
+  return i18nc("Acknowledgment from https://info.arxiv.org/help/api/index.html",
+               "Thank you to arXiv for use of its open access interoperability.");
+}
+
 bool ArxivFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person || k == Keyword || k == ArxivID;
 }
@@ -111,7 +117,6 @@ void ArxivFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug();
   if(m_job) {
     m_job->kill();
     m_job = nullptr;

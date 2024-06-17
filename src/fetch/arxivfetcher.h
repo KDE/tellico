@@ -53,6 +53,7 @@ public:
   ~ArxivFetcher();
 
   virtual QString source() const Q_DECL_OVERRIDE;
+  virtual QString attribution() const Q_DECL_OVERRIDE;
   virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
   virtual void continueSearch() Q_DECL_OVERRIDE;
   virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
