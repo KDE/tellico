@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-16 02:08+0000\n"
+"POT-Creation-Date: 2024-06-18 01:52+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -3423,7 +3423,13 @@ msgid ""
 "Services, and is included in any links to the Amazon.com site."
 msgstr ""
 
-#: src/fetch/arxivfetcher.cpp:336 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:77
+#, kde-format
+msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
+msgid "Thank you to arXiv for use of its open access interoperability."
+msgstr ""
+
+#: src/fetch/arxivfetcher.cpp:341 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321

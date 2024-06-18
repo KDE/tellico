@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-16 02:08+0000\n"
+"POT-Creation-Date: 2024-06-18 01:52+0000\n"
 "PO-Revision-Date: 2024-03-23 18:59-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -3503,7 +3503,13 @@ msgstr ""
 "A identidade associada identifica a pessoa acessando os serviços Web Amazon."
 "com, e será incluída em todos os links para o site Amazon.com."
 
-#: src/fetch/arxivfetcher.cpp:336 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:77
+#, kde-format
+msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
+msgid "Thank you to arXiv for use of its open access interoperability."
+msgstr ""
+
+#: src/fetch/arxivfetcher.cpp:341 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321

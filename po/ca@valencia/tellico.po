@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-16 02:08+0000\n"
+"POT-Creation-Date: 2024-06-18 01:52+0000\n"
 "PO-Revision-Date: 2024-03-18 10:02+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -3503,7 +3503,13 @@ msgstr ""
 "L'ID de l'associat identifica la persona que accedix als serveis de la web "
 "Amazon.com, i està inclòs en tots els enllaços cap al lloc Amazon.com."
 
-#: src/fetch/arxivfetcher.cpp:336 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:77
+#, kde-format
+msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
+msgid "Thank you to arXiv for use of its open access interoperability."
+msgstr ""
+
+#: src/fetch/arxivfetcher.cpp:341 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321

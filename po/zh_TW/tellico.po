@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-16 02:08+0000\n"
+"POT-Creation-Date: 2024-06-18 01:52+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -3468,7 +3468,13 @@ msgstr ""
 "「夥伴」（Associate）的代碼，用於辨識存取 Amazon.com 網頁服務的使用者。此代碼"
 "會被含在所有存取 Amazon.com 站台的連結中。"
 
-#: src/fetch/arxivfetcher.cpp:336 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:77
+#, kde-format
+msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
+msgid "Thank you to arXiv for use of its open access interoperability."
+msgstr ""
+
+#: src/fetch/arxivfetcher.cpp:341 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
