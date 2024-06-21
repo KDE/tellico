@@ -83,9 +83,8 @@ int XSLTHandler::s_initCount = 0;
 XSLTHandler::XSLTHandler(const QByteArray& xsltFile_) :
     m_stylesheet(nullptr) {
   init();
-  QByteArray file = QUrl::toPercentEncoding(QString::fromLocal8Bit(xsltFile_));
-  if(!file.isEmpty()) {
-    xmlDocPtr xsltDoc = xmlReadFile(file.constData(), nullptr, xslt_options);
+  if(!xsltFile_.isEmpty()) {
+    xmlDocPtr xsltDoc = xmlReadFile(xsltFile_.constData(), nullptr, xslt_options);
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
       myDebug() << "null stylesheet pointer for " << xsltFile_;
@@ -112,9 +111,8 @@ XSLTHandler::XSLTHandler(const QUrl& xsltURL_) :
 XSLTHandler::XSLTHandler(const QDomDocument& xsltDoc_, const QByteArray& xsltFile_, bool translate_) :
     m_stylesheet(nullptr) {
   init();
-  QByteArray file = QUrl::toPercentEncoding(QString::fromLocal8Bit(xsltFile_));
-  if(!xsltDoc_.isNull() && !file.isEmpty()) {
-    setXSLTDoc(xsltDoc_, file, translate_);
+  if(!xsltDoc_.isNull() && !xsltFile_.isEmpty()) {
+    setXSLTDoc(xsltDoc_, xsltFile_, translate_);
   }
 }
 
