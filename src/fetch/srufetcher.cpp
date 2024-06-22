@@ -64,13 +64,13 @@ using namespace Tellico;
 using Tellico::Fetch::SRUFetcher;
 
 SRUFetcher::SRUFetcher(QObject* parent_)
-    : Fetcher(parent_), m_port(SRU_DEFAULT_PORT), m_job(nullptr), m_MARCXMLHandler(nullptr), m_MODSHandler(nullptr), m_SRWHandler(nullptr), m_started(false) {
+    : Fetcher(parent_), m_port(SRU_DEFAULT_PORT), m_job(nullptr), m_started(false) {
 }
 
 SRUFetcher::SRUFetcher(const QString& name_, const QString& host_, uint port_, const QString& path_,
                        const QString& format_, QObject* parent_) : Fetcher(parent_),
       m_scheme(QStringLiteral("http")), m_host(host_), m_port(port_), m_path(path_), m_format(format_),
-      m_job(nullptr), m_MARCXMLHandler(nullptr), m_MODSHandler(nullptr), m_SRWHandler(nullptr), m_started(false) {
+      m_job(nullptr), m_started(false) {
   m_name = name_; // m_name is protected in super class
   if(!m_path.startsWith(QLatin1Char('/'))) {
     m_path.prepend(QLatin1Char('/'));
@@ -78,12 +78,8 @@ SRUFetcher::SRUFetcher(const QString& name_, const QString& host_, uint port_, c
 }
 
 SRUFetcher::~SRUFetcher() {
-  delete m_MARCXMLHandler;
-  m_MARCXMLHandler = nullptr;
-  delete m_MODSHandler;
-  m_MODSHandler = nullptr;
-  delete m_SRWHandler;
-  m_SRWHandler = nullptr;
+  qDeleteAll(m_handlers);
+  m_handlers.clear();
 }
 
 QString SRUFetcher::source() const {
@@ -325,20 +321,26 @@ void SRUFetcher::slotComplete(KJob*) {
   QString modsResult;
   if(m_format == QLatin1String("mods")) {
     modsResult = result;
-//  } else if(m_format == QLatin1String("marcxml") && initMARCXMLHandler()) {
-// some SRU data sources call it MARC21-xml or something other than marcxml
-  } else if(m_format.startsWith(QLatin1String("marc"), Qt::CaseInsensitive) && initMARCXMLHandler()) {
+// some SRU data sources call their MARC format MARC21-xml or something other than marcxml
+  } else if(m_format.startsWith(QLatin1String("marc"), Qt::CaseInsensitive)) {
+    // default to MARC21 unless format="UNIMARC"
+    HandlerType handlerType = MARC21;
     // brute force marcxchange conversion. This is probably wrong at some level
     QString newResult = result;
     if(m_format.startsWith(QLatin1String("marcxchange"), Qt::CaseInsensitive)) {
-      static const QRegularExpression marcRx(QLatin1String("xmlns:marc=\"info:lc/xmlns/marcxchange-v[12]\""));
-      newResult.replace(marcRx,
-                        QStringLiteral("xmlns:marc=\"http://www.loc.gov/MARC21/slim\""));
+      if(newResult.contains(QLatin1String("format=\"UNIMARC\""))) {
+        handlerType = UNIMARC;
+      }
+      myLog() << "Replacing marcXchange namespace with MARC21";
+      static const QRegularExpression marcRx(QLatin1String("xmlns:(marc|mxc)=\"info:lc/xmlns/marcxchange-v[12]\""));
+      newResult.replace(marcRx, QStringLiteral("xmlns:\\1=\"http://www.loc.gov/MARC21/slim\""));
     }
-    modsResult = m_MARCXMLHandler->applyStylesheet(newResult);
+    if(initHandler(handlerType)) {
+      modsResult = m_handlers[handlerType]->applyStylesheet(newResult);
+    }
   }
-  if(!modsResult.isEmpty() && initMODSHandler()) {
-    Import::TellicoImporter imp(m_MODSHandler->applyStylesheet(modsResult));
+  if(!modsResult.isEmpty() && initHandler(MODS)) {
+    Import::TellicoImporter imp(m_handlers[MODS]->applyStylesheet(modsResult));
     coll = imp.collection();
     if(!msg.isEmpty()) {
       msg += QLatin1Char('\n');
@@ -347,8 +349,8 @@ void SRUFetcher::slotComplete(KJob*) {
   } else if((m_format == QLatin1String("pam") ||
              m_format == QLatin1String("dc") ||
              m_format == QLatin1String("none")) &&
-            initSRWHandler()) {
-    Import::TellicoImporter imp(m_SRWHandler->applyStylesheet(result));
+            initHandler(SRW)) {
+    Import::TellicoImporter imp(m_handlers[SRW]->applyStylesheet(result));
     coll = imp.collection();
     if(!msg.isEmpty()) {
       msg += QLatin1Char('\n');
@@ -418,72 +420,42 @@ Tellico::Fetch::FetchRequest SRUFetcher::updateRequest(Data::EntryPtr entry_) {
   return FetchRequest();
 }
 
-bool SRUFetcher::initMARCXMLHandler() {
-  if(m_MARCXMLHandler) {
+bool SRUFetcher::initHandler(HandlerType type_) {
+  if(m_handlers[type_]) {
     return true;
   }
 
-  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("MARC21slim2MODS3.xsl"));
+  QString fileName;
+  switch(type_) {
+    case MARC21:
+      fileName = QStringLiteral("MARC21slim2MODS3.xsl");
+      break;
+    case UNIMARC:
+      fileName = QStringLiteral("UNIMARC2MODS3.xsl");
+      break;
+    case MODS:
+      fileName = QStringLiteral("mods2tellico.xsl");
+      break;
+    case SRW:
+      fileName = QStringLiteral("srw2tellico.xsl");
+      break;
+  }
+
+  QString xsltfile = DataFileRegistry::self()->locate(fileName);
   if(xsltfile.isEmpty()) {
-    myWarning() << "can not locate MARC21slim2MODS3.xsl.";
+    myWarning() << "can not locate" << fileName;
     return false;
   }
 
   QUrl u = QUrl::fromLocalFile(xsltfile);
 
-  m_MARCXMLHandler = new XSLTHandler(u);
-  if(!m_MARCXMLHandler->isValid()) {
-    myWarning() << "error in MARC21slim2MODS3.xsl.";
-    delete m_MARCXMLHandler;
-    m_MARCXMLHandler = nullptr;
+  auto handler = new XSLTHandler(u);
+  if(!handler->isValid()) {
+    myWarning() << "error in" << fileName;
+    delete handler;
     return false;
   }
-  return true;
-}
-
-bool SRUFetcher::initMODSHandler() {
-  if(m_MODSHandler) {
-    return true;
-  }
-
-  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("mods2tellico.xsl"));
-  if(xsltfile.isEmpty()) {
-    myWarning() << "can not locate mods2tellico.xsl.";
-    return false;
-  }
-
-  QUrl u = QUrl::fromLocalFile(xsltfile);
-
-  m_MODSHandler = new XSLTHandler(u);
-  if(!m_MODSHandler->isValid()) {
-    myWarning() << "error in mods2tellico.xsl.";
-    delete m_MODSHandler;
-    m_MODSHandler = nullptr;
-    return false;
-  }
-  return true;
-}
-
-bool SRUFetcher::initSRWHandler() {
-  if(m_SRWHandler) {
-    return true;
-  }
-
-  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("srw2tellico.xsl"));
-  if(xsltfile.isEmpty()) {
-    myWarning() << "can not locate srw2tellico.xsl.";
-    return false;
-  }
-
-  QUrl u = QUrl::fromLocalFile(xsltfile);
-
-  m_SRWHandler = new XSLTHandler(u);
-  if(!m_SRWHandler->isValid()) {
-    myWarning() << "error in srw2tellico.xsl.";
-    delete m_SRWHandler;
-    m_SRWHandler = nullptr;
-    return false;
-  }
+  m_handlers.insert(type_, handler);
   return true;
 }
 

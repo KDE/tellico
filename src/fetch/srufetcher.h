@@ -94,9 +94,8 @@ private Q_SLOTS:
 private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
-  bool initMARCXMLHandler();
-  bool initMODSHandler();
-  bool initSRWHandler();
+  enum HandlerType { MARC21, UNIMARC, MODS, SRW };
+  bool initHandler(HandlerType type);
 
   QString m_scheme;
   QString m_host;
@@ -107,9 +106,7 @@ private:
 
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
-  XSLTHandler* m_MARCXMLHandler;
-  XSLTHandler* m_MODSHandler;
-  XSLTHandler* m_SRWHandler;
+  QHash<HandlerType, XSLTHandler*> m_handlers;
   bool m_started;
 };
 
