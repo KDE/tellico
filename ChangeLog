@@ -1,6 +1,14 @@
+2024-06-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Implemented overrides for SRU query indices (Bug 488931).
+
+2024-06-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Removed percent encoding for XSLT file reading (Bug 488707).
+
 2024-05-15  Robby Stephenson  <robby@periapsis.org>
 
-	* HandleFixed bug with showing entries with long content (Bug 487079).
+	* Fixed bug with showing entries with long content (Bug 487079).
 
 2024-03-23  Robby Stephenson  <robby@periapsis.org>
 
