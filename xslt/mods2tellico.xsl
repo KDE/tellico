@@ -353,6 +353,8 @@
   <xsl:with-param name="nodes" select="mods:name[mods:role/mods:roleTerm[@authority='marcrelator' and @type='text'] = 'editor']"/>
  </xsl:call-template>
 
+ <!-- Tellico 3.5.5, don't read publisher from relatedInfo -->
+ <!--
  <xsl:choose>
   <xsl:when test="$npubs &gt; 1">
    <publishers>
@@ -363,6 +365,7 @@
    <xsl:apply-templates select="mods:originInfo/mods:publisher"/>
   </xsl:otherwise>
  </xsl:choose>
+-->
 
  <xsl:choose>
   <xsl:when test="mods:originInfo/mods:dateIssued[@encoding='marc']">

@@ -133,16 +133,26 @@ void SRUFetcher::search() {
   u.setPort(m_port);
   u = QUrl::fromUserInput(u.url() + m_path);
 
+  QString cqlVersion;
   QUrlQuery query;
   for(StringMap::ConstIterator it = m_queryMap.constBegin(); it != m_queryMap.constEnd(); ++it) {
+    // query values starting with x-tellico signify query context set replacements
+    // and not query values themselves
+    if(it.key().startsWith(QLatin1String("x-tellico"))) {
+      continue;
+    }
     query.addQueryItem(it.key(), it.value());
+    if(it.key() == QLatin1String("version")) {
+      cqlVersion = it.value();
+    }
   }
   // allow user to override these so check for existing item first
   if(!query.hasQueryItem(QStringLiteral("operation"))) {
     query.addQueryItem(QStringLiteral("operation"), QStringLiteral("searchRetrieve"));
   }
   if(!query.hasQueryItem(QStringLiteral("version"))) {
-    query.addQueryItem(QStringLiteral("version"), QStringLiteral("1.1"));
+    cqlVersion = QStringLiteral("1.1");
+    query.addQueryItem(QStringLiteral("version"), cqlVersion);
   }
   if(!query.hasQueryItem(QStringLiteral("maximumRecords"))) {
     query.addQueryItem(QStringLiteral("maximumRecords"), QString::number(SRU_MAX_RECORDS));
@@ -153,19 +163,32 @@ void SRUFetcher::search() {
   }
 
   const int type = collectionType();
-  QString str = QLatin1Char('"') + request().value() + QLatin1Char('"');
   switch(request().key()) {
     case Title:
-      query.addQueryItem(QStringLiteral("query"), QLatin1String("dc.title=") + str);
+      {
+        QString context(QLatin1String("dc.title"));
+        if(m_queryMap.contains(QLatin1String("x-tellico-title"))) {
+          context = m_queryMap[QLatin1String("x-tellico-title")];
+        }
+        query.addQueryItem(QStringLiteral("query"), queryTerm(context,
+                                                              request().value(),
+                                                              cqlVersion));
+      }
       break;
 
     case Person:
       {
         QString s;
         if(type == Data::Collection::Book || type == Data::Collection::Bibtex) {
-          s = QLatin1String("author=") + str + QLatin1String(" or dc.author=") + str;
+          QString context(QLatin1String("author"));
+          if(m_queryMap.contains(QLatin1String("x-tellico-author"))) {
+            context = m_queryMap[QLatin1String("x-tellico-author")];
+          }
+          s = queryTerm(QLatin1String("author"), request().value(), cqlVersion);
         } else {
-          s = QLatin1String("dc.creator=") + str + QLatin1String(" or dc.editor=") + str;
+          s = queryTerm(QLatin1String("dc.creator"), request().value(), cqlVersion) +
+              QLatin1String(" or ") +
+              queryTerm(QLatin1String("dc.editor="), request().value(), cqlVersion);
         }
         query.addQueryItem(QStringLiteral("query"), s);
       }
@@ -189,10 +212,14 @@ void SRUFetcher::search() {
         for(int i = 0; i < isbnList.count(); ++i) {
           // make an assumption that DC output uses the dc profile and everything else uses Bath for ISBN
           // no idea if this holds true universally, but matches LOC, COPAC, and KB
-          if(m_format == QLatin1String("dc")) {
-            q += QLatin1String("dc.identifier=") + isbnList.at(i);
+          if(m_format == QLatin1String("dc") || m_format == QLatin1String("dublincore")) {
+            q += queryTerm(QLatin1String("dc.identifier"), isbnList.at(i), cqlVersion);
           } else {
-            q += QLatin1String("bath.isbn=") + isbnList.at(i);
+            QString isbnContext(QLatin1String("bath.isbn"));
+            if(m_queryMap.contains(QLatin1String("x-tellico-isbn"))) {
+              isbnContext = m_queryMap[QLatin1String("x-tellico-isbn")];
+            }
+            q += queryTerm(isbnContext, isbnList.at(i), cqlVersion);
           }
           if(i < isbnList.count()-1) {
             q += QLatin1String(" or ");
@@ -204,12 +231,11 @@ void SRUFetcher::search() {
 
     case LCCN:
       {
-        QString s = request().value();
-        QStringList lccnList = FieldFormat::splitValue(s);
+        QStringList lccnList = FieldFormat::splitValue(request().value());
         QString q;
         for(int i = 0; i < lccnList.count(); ++i) {
-          q += QLatin1String("bath.lccn=") + lccnList.at(i);
-          q += QLatin1String(" or bath.lccn=") + LCCNValidator::formalize(lccnList.at(i));
+          q += queryTerm(QLatin1String("bath.lccn"), lccnList.at(i), cqlVersion) + QLatin1String(" or ") +
+               queryTerm(QLatin1String("bath.lccn"), LCCNValidator::formalize(lccnList.at(i)), cqlVersion);
           if(i < lccnList.count()-1) {
             q += QLatin1String(" or ");
           }
@@ -219,7 +245,7 @@ void SRUFetcher::search() {
       break;
 
     case Keyword:
-      query.addQueryItem(QStringLiteral("query"), str);
+      query.addQueryItem(QStringLiteral("query"), request().value());
       break;
 
     case Raw:
@@ -235,6 +261,7 @@ void SRUFetcher::search() {
       stop();
       break;
   }
+  myLog() << "SRU query is" << query.toString();
   u.setQuery(query);
 //  myDebug() << u.url();
 
@@ -291,7 +318,7 @@ void SRUFetcher::slotComplete(KJob*) {
   // first check for SRU errors
   QDomDocument dom;
   if(!dom.setContent(result, true /*namespace*/)) {
-    myWarning() << "server did not return valid XML.";
+    myWarning() << "The server did not return valid XML.";
     stop();
     return;
   }
@@ -321,17 +348,20 @@ void SRUFetcher::slotComplete(KJob*) {
   QString modsResult;
   if(m_format == QLatin1String("mods")) {
     modsResult = result;
-// some SRU data sources call their MARC format MARC21-xml or something other than marcxml
+  // some SRU data sources call their MARC format MARC21-xml or something other than marcxml
   } else if(m_format.startsWith(QLatin1String("marc"), Qt::CaseInsensitive)) {
     // default to MARC21 unless format="UNIMARC"
     HandlerType handlerType = MARC21;
     // brute force marcxchange conversion. This is probably wrong at some level
     QString newResult = result;
     if(m_format.startsWith(QLatin1String("marcxchange"), Qt::CaseInsensitive)) {
-      if(newResult.contains(QLatin1String("format=\"UNIMARC\""))) {
-        handlerType = UNIMARC;
-      }
       myLog() << "Replacing marcXchange namespace with MARC21";
+      if(newResult.contains(QLatin1String("format=\"UNIMARC\""))) {
+        myLog() << "Reading marcXchange data as UNIMARC";
+        handlerType = UNIMARC;
+      } else {
+        myLog() << "Reading marcXchange data as MARC21";
+      }
       static const QRegularExpression marcRx(QLatin1String("xmlns:(marc|mxc)=\"info:lc/xmlns/marcxchange-v[12]\""));
       newResult.replace(marcRx, QStringLiteral("xmlns:\\1=\"http://www.loc.gov/MARC21/slim\""));
     }
@@ -348,6 +378,7 @@ void SRUFetcher::slotComplete(KJob*) {
     msg += imp.statusMessage();
   } else if((m_format == QLatin1String("pam") ||
              m_format == QLatin1String("dc") ||
+             m_format == QLatin1String("dublincore") ||
              m_format == QLatin1String("none")) &&
             initHandler(SRW)) {
     Import::TellicoImporter imp(m_handlers[SRW]->applyStylesheet(result));
@@ -357,7 +388,7 @@ void SRUFetcher::slotComplete(KJob*) {
     }
     msg += imp.statusMessage();
   } else {
-    myDebug() << "unrecognized format:" << m_format;
+    myDebug() << "Unrecognized format:" << m_format;
     stop();
     return;
   }
@@ -457,6 +488,16 @@ bool SRUFetcher::initHandler(HandlerType type_) {
   }
   m_handlers.insert(type_, handler);
   return true;
+}
+
+QString SRUFetcher::queryTerm(const QString& index_, const QString& term_, const QString& ver_) const {
+  QString tmp;
+  if(ver_ == QLatin1String("1.1")) {
+    tmp = QLatin1String("%1=\"%2\"");
+  } else {
+    tmp = QLatin1String("%1 adj \"%2\"");
+  }
+  return tmp.arg(index_, term_);
 }
 
 Tellico::Fetch::Fetcher::Ptr SRUFetcher::libraryOfCongress(QObject* parent_) {
