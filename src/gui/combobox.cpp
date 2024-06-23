@@ -42,7 +42,16 @@ void ComboBox::addItems(const QStringList& strings_, const QList<QVariant>& vari
 }
 
 QVariant ComboBox::currentData(int role_) const {
-  return itemData(currentIndex(), role_);
+  // if the user typed a custom format, _but didn't press enter_
+  // then the combo box text is changes but hasn't been added to the list
+  // so calling currentData returns something different than expected
+  // account for that
+  if(isEditable() && currentText() != itemText(currentIndex())) {
+    // for a user-entered string, the data is the same as the string
+    return currentText();
+  } else {
+    return itemData(currentIndex(), role_);
+  }
 }
 
 bool ComboBox::setCurrentData(const QVariant& data_, int role_) {
