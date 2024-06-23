@@ -37,6 +37,7 @@
 #include <KConfigGroup>
 
 #include <QTest>
+#include <QLoggingCategory>
 
 QTEST_GUILESS_MAIN( SRUFetcherTest )
 
@@ -48,6 +49,7 @@ void SRUFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
   // since we use the MODS importer
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/mods2tellico.xsl"));
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = true"));
 }
 
 void SRUFetcherTest::testTitle() {
@@ -195,4 +197,54 @@ void SRUFetcherTest::testHttpFallback() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(!entry->field(QStringLiteral("title")).isEmpty());
+}
+
+void SRUFetcherTest::testBnFTitle() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("BnF"));
+  cg.writeEntry("Format", QStringLiteral("marcxchange"));
+  cg.writeEntry("Host", QStringLiteral("catalogue.bnf.fr"));
+  cg.writeEntry("Path", QStringLiteral("/api/SRU"));
+  cg.writeEntry("Port", 80);
+  cg.writeEntry("QueryFields", QStringLiteral("recordSchema,version,maximumRecords,x-tellico-title"));
+  cg.writeEntry("QueryValues", QStringLiteral("unimarcXchange,1.2,1,bib.title"));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
+                                       QStringLiteral("Fondation"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  // for whatever reason, there are two results with the same isbn and we want the second
+  QCOMPARE(results.size(), 1);
+}
+
+// https://bugs.kde.org/show_bug.cgi?id=488931
+void SRUFetcherTest::testBnFIsbn() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("BnF"));
+  cg.writeEntry("Format", QStringLiteral("marcxchange"));
+  cg.writeEntry("Host", QStringLiteral("catalogue.bnf.fr"));
+  cg.writeEntry("Path", QStringLiteral("/api/SRU"));
+  cg.writeEntry("Port", 80);
+  cg.writeEntry("QueryFields", QStringLiteral("recordSchema,version,x-tellico-isbn"));
+  cg.writeEntry("QueryValues", QStringLiteral("unimarcXchange,1.2,bib.isbn"));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
+                                       QStringLiteral("9782070463619"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  // for whatever reason, there are two results with the same isbn and we want the second
+  QCOMPARE(results.size(), 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Fondation"));
+  // name is apparently reversed in the BnF db?
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Asimov Isaac"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2015"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-2-07-046361-9"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Gallimard"));
+  QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("French"));
 }

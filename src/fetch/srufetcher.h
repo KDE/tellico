@@ -96,6 +96,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   enum HandlerType { MARC21, UNIMARC, MODS, SRW };
   bool initHandler(HandlerType type);
+  QString queryTerm(const QString& index, const QString& term, const QString& ver) const;
 
   QString m_scheme;
   QString m_host;
