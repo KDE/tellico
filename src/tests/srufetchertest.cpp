@@ -146,12 +146,12 @@ void SRUFetcherTest::testKBIsbn() {
   QVERIFY(!entry->field(QStringLiteral("url")).isEmpty());
 }
 
-void SRUFetcherTest::testCopacIsbn() {
-  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("Copac"));
+void SRUFetcherTest::testJiscIsbn() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("Jisc"));
   cg.writeEntry("Format", QStringLiteral("mods"));
+  cg.writeEntry("Scheme", QStringLiteral("https"));
   cg.writeEntry("Host", QStringLiteral("discover.libraryhub.jisc.ac.uk"));
-  cg.writeEntry("Path", QStringLiteral("/discover"));
-  cg.writeEntry("Port", 210);
+  cg.writeEntry("Path", QStringLiteral("/sru-api"));
   cg.writeEntry("Custom Fields", QStringLiteral("lcc"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
