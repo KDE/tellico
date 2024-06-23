@@ -56,7 +56,8 @@
 namespace {
   // 7090 was the old default port, but that was just because LoC used it
   // let's use default HTTP port of 80 now
-  static const int SRU_DEFAULT_PORT = 80;
+  static const int HTTP_DEFAULT_PORT = 80;
+  static const int HTTPS_DEFAULT_PORT = 443;
   static const int SRU_MAX_RECORDS = 25;
 }
 
@@ -64,7 +65,7 @@ using namespace Tellico;
 using Tellico::Fetch::SRUFetcher;
 
 SRUFetcher::SRUFetcher(QObject* parent_)
-    : Fetcher(parent_), m_port(SRU_DEFAULT_PORT), m_job(nullptr), m_started(false) {
+    : Fetcher(parent_), m_port(HTTP_DEFAULT_PORT), m_job(nullptr), m_started(false) {
 }
 
 SRUFetcher::SRUFetcher(const QString& name_, const QString& host_, uint port_, const QString& path_,
@@ -98,10 +99,11 @@ bool SRUFetcher::canFetch(int type) const {
 void SRUFetcher::readConfigHook(const KConfigGroup& config_) {
   m_scheme = config_.readEntry("Scheme", "http");
   m_host = config_.readEntry("Host");
-  int p = config_.readEntry("Port", SRU_DEFAULT_PORT);
-  if(p > 0) {
-    m_port = p;
+  int p = config_.readEntry("Port", 0);
+  if(p == 0) {
+    p = (m_scheme == QLatin1String("https")) ? HTTPS_DEFAULT_PORT : HTTP_DEFAULT_PORT;
   }
+  m_port = p;
   m_path = config_.readEntry("Path");
   // used to be called Database
   if(m_path.isEmpty()) {
@@ -542,6 +544,7 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   m_schemeCombo->addItem(QStringLiteral("https"));
   void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
   connect(m_schemeCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  connect(m_schemeCombo, activatedInt, this, &ConfigWidget::slotCheckPort);
   connect(m_schemeCombo, &QComboBox::editTextChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_schemeCombo, row, 1);
   QString w = i18n("Enter the path to the database used by the server.");
@@ -566,11 +569,11 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   m_portSpinBox = new QSpinBox(optionsWidget());
   m_portSpinBox->setMaximum(999999);
   m_portSpinBox->setMinimum(0);
-  m_portSpinBox->setValue(SRU_DEFAULT_PORT);
+  m_portSpinBox->setValue(HTTP_DEFAULT_PORT);
   void (QSpinBox::* valueChanged)(int) = &QSpinBox::valueChanged;
   connect(m_portSpinBox, valueChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_portSpinBox, row, 1);
-  w = i18n("Enter the port number of the server. The default is %1.", SRU_DEFAULT_PORT);
+  w = i18n("Enter the port number of the server. The default is %1.", HTTP_DEFAULT_PORT);
   label->setWhatsThis(w);
   m_portSpinBox->setWhatsThis(w);
   label->setBuddy(m_portSpinBox);
@@ -671,5 +674,16 @@ void SRUFetcher::ConfigWidget::slotCheckHost() {
         m_pathEdit->setText(u.path().trimmed());
       }
     }
+  }
+}
+
+// update the default port if the host scheme changes
+void SRUFetcher::ConfigWidget::slotCheckPort() {
+  QString scheme = m_schemeCombo->currentText();
+  const int port = m_portSpinBox->value();
+  if(port == HTTP_DEFAULT_PORT && scheme == QLatin1String("https")) {
+    m_portSpinBox->setValue(HTTPS_DEFAULT_PORT);
+  } else if(port == HTTPS_DEFAULT_PORT && scheme == QLatin1String("http")) {
+    m_portSpinBox->setValue(HTTP_DEFAULT_PORT);
   }
 }
