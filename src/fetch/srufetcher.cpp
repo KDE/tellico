@@ -596,10 +596,6 @@ void SRUFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
     config_.writeEntry("Path", s);
   }
   s = m_formatCombo->currentData().toString().trimmed();
-  if(s.isEmpty()) {
-    // user-entered format will not have data set for the item. Just use the text itself
-    s = m_formatCombo->currentText().trimmed();
-  }
   if(!s.isEmpty()) {
     config_.writeEntry("Format", s);
   }
