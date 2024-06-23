@@ -121,6 +121,7 @@ public:
 
 private Q_SLOTS:
   void slotCheckHost();
+  void slotCheckPort();
 
 private:
   GUI::ComboBox* m_schemeCombo;
