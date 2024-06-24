@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-16 03:33+0000\n"
+"POT-Creation-Date: 2024-06-24 03:04+0000\n"
 "PO-Revision-Date: 2024-02-02 17:33+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -652,7 +652,7 @@ msgid "Property"
 msgstr "Ominaisuus"
 
 #: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:108
-#: src/fetch/srufetcher.cpp:595
+#: src/fetch/srufetcher.cpp:611
 #, kde-format
 msgid "Value"
 msgstr "Arvo"
@@ -820,7 +820,7 @@ msgid "Publisher"
 msgstr "Julkaisija"
 
 #: src/collections/bibtexcollection.cpp:141 src/fetch/hathitrustfetcher.cpp:307
-#: src/fetch/srufetcher.cpp:507 src/fetch/z3950fetcher.cpp:576
+#: src/fetch/srufetcher.cpp:522 src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgid "Address"
 msgstr "Osoite"
@@ -931,7 +931,7 @@ msgid "URL"
 msgstr "Verkko-osoite"
 
 #: src/collections/bibtexcollection.cpp:246 src/fetch/entrezfetcher.cpp:514
-#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:508
+#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:523
 #: src/fetch/z3950fetcher.cpp:577
 #, kde-format
 msgid "Abstract"
@@ -4042,13 +4042,13 @@ msgid "Illustrator"
 msgstr "Kuvittaja"
 
 #: src/fetch/hathitrustfetcher.cpp:310 src/fetch/isbndbfetcher.cpp:384
-#: src/fetch/srufetcher.cpp:509 src/fetch/z3950fetcher.cpp:579
+#: src/fetch/srufetcher.cpp:524 src/fetch/z3950fetcher.cpp:579
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Dewey-luokka"
 
-#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:510
+#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:525
 #: src/fetch/z3950fetcher.cpp:580
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -4253,62 +4253,62 @@ msgstr "OpenLibrary-linkki"
 msgid "RPGGeek Link"
 msgstr "RPGGeek-linkki"
 
-#: src/fetch/srufetcher.cpp:492
+#: src/fetch/srufetcher.cpp:507
 #, kde-format
 msgid "Library of Congress (US)"
 msgstr "Kongressin kirjasto (Yhdysvallat)"
 
-#: src/fetch/srufetcher.cpp:497
+#: src/fetch/srufetcher.cpp:512
 #, kde-format
 msgid "SRU Server"
 msgstr "SRU-palvelin"
 
-#: src/fetch/srufetcher.cpp:525
+#: src/fetch/srufetcher.cpp:540
 #, kde-format
 msgid "Scheme: "
 msgstr "Malli: "
 
-#: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
+#: src/fetch/srufetcher.cpp:550 src/fetch/srufetcher.cpp:586
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr "Anna palvelimen käyttämän tietokannan sijainti."
 
-#: src/fetch/srufetcher.cpp:539 src/fetch/z3950fetcher.cpp:603
+#: src/fetch/srufetcher.cpp:555 src/fetch/z3950fetcher.cpp:603
 #, kde-format
 msgid "Hos&t: "
 msgstr "&Kone:"
 
-#: src/fetch/srufetcher.cpp:546 src/fetch/z3950fetcher.cpp:609
+#: src/fetch/srufetcher.cpp:562 src/fetch/z3950fetcher.cpp:609
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "Anna palvelimen isäntänimi."
 
-#: src/fetch/srufetcher.cpp:551 src/fetch/z3950fetcher.cpp:614
+#: src/fetch/srufetcher.cpp:567 src/fetch/z3950fetcher.cpp:614
 #, kde-format
 msgid "&Port: "
 msgstr "&Portti: "
 
-#: src/fetch/srufetcher.cpp:560 src/fetch/z3950fetcher.cpp:623
+#: src/fetch/srufetcher.cpp:576 src/fetch/z3950fetcher.cpp:623
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Anna palvelimen porttinumero. Oletusnumero on %1."
 
-#: src/fetch/srufetcher.cpp:565
+#: src/fetch/srufetcher.cpp:581
 #, kde-format
 msgid "Path: "
 msgstr "Sijainti:"
 
-#: src/fetch/srufetcher.cpp:575
+#: src/fetch/srufetcher.cpp:591
 #, kde-format
 msgid "Format: "
 msgstr "Muoto:"
 
-#: src/fetch/srufetcher.cpp:586
+#: src/fetch/srufetcher.cpp:602
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "Anna palvelimen palauttaman vastauksen muoto"
 
-#: src/fetch/srufetcher.cpp:595
+#: src/fetch/srufetcher.cpp:611
 #, kde-format
 msgid "Field"
 msgstr "Kenttä"

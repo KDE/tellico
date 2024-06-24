@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-16 03:33+0000\n"
+"POT-Creation-Date: 2024-06-24 03:04+0000\n"
 "PO-Revision-Date: 2024-02-05 21:58+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -637,7 +637,7 @@ msgid "Property"
 msgstr "속성"
 
 #: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:108
-#: src/fetch/srufetcher.cpp:595
+#: src/fetch/srufetcher.cpp:611
 #, kde-format
 msgid "Value"
 msgstr "값"
@@ -802,7 +802,7 @@ msgid "Publisher"
 msgstr "출판사"
 
 #: src/collections/bibtexcollection.cpp:141 src/fetch/hathitrustfetcher.cpp:307
-#: src/fetch/srufetcher.cpp:507 src/fetch/z3950fetcher.cpp:576
+#: src/fetch/srufetcher.cpp:522 src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgid "Address"
 msgstr "주소"
@@ -912,7 +912,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:246 src/fetch/entrezfetcher.cpp:514
-#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:508
+#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:523
 #: src/fetch/z3950fetcher.cpp:577
 #, kde-format
 msgid "Abstract"
@@ -4007,13 +4007,13 @@ msgid "Illustrator"
 msgstr "삽화가"
 
 #: src/fetch/hathitrustfetcher.cpp:310 src/fetch/isbndbfetcher.cpp:384
-#: src/fetch/srufetcher.cpp:509 src/fetch/z3950fetcher.cpp:579
+#: src/fetch/srufetcher.cpp:524 src/fetch/z3950fetcher.cpp:579
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "듀이 십진분류"
 
-#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:510
+#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:525
 #: src/fetch/z3950fetcher.cpp:580
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -4217,62 +4217,62 @@ msgstr "OpenLibrary 링크"
 msgid "RPGGeek Link"
 msgstr "RPGGeek 링크"
 
-#: src/fetch/srufetcher.cpp:492
+#: src/fetch/srufetcher.cpp:507
 #, kde-format
 msgid "Library of Congress (US)"
 msgstr "의회 도서관(미국)"
 
-#: src/fetch/srufetcher.cpp:497
+#: src/fetch/srufetcher.cpp:512
 #, kde-format
 msgid "SRU Server"
 msgstr "SRU 서버"
 
-#: src/fetch/srufetcher.cpp:525
+#: src/fetch/srufetcher.cpp:540
 #, kde-format
 msgid "Scheme: "
 msgstr "스키마: "
 
-#: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
+#: src/fetch/srufetcher.cpp:550 src/fetch/srufetcher.cpp:586
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr "서버에서 사용하는 데이터베이스의 경로를 입력하십시오."
 
-#: src/fetch/srufetcher.cpp:539 src/fetch/z3950fetcher.cpp:603
+#: src/fetch/srufetcher.cpp:555 src/fetch/z3950fetcher.cpp:603
 #, kde-format
 msgid "Hos&t: "
 msgstr "호스트(&T): "
 
-#: src/fetch/srufetcher.cpp:546 src/fetch/z3950fetcher.cpp:609
+#: src/fetch/srufetcher.cpp:562 src/fetch/z3950fetcher.cpp:609
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "서버의 호스트 이름을 입력하십시오."
 
-#: src/fetch/srufetcher.cpp:551 src/fetch/z3950fetcher.cpp:614
+#: src/fetch/srufetcher.cpp:567 src/fetch/z3950fetcher.cpp:614
 #, kde-format
 msgid "&Port: "
 msgstr "포트(&P): "
 
-#: src/fetch/srufetcher.cpp:560 src/fetch/z3950fetcher.cpp:623
+#: src/fetch/srufetcher.cpp:576 src/fetch/z3950fetcher.cpp:623
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "서버의 포트 번호를 입력하십시오. 기본값은 %1입니다."
 
-#: src/fetch/srufetcher.cpp:565
+#: src/fetch/srufetcher.cpp:581
 #, kde-format
 msgid "Path: "
 msgstr "경로: "
 
-#: src/fetch/srufetcher.cpp:575
+#: src/fetch/srufetcher.cpp:591
 #, kde-format
 msgid "Format: "
 msgstr "형식: "
 
-#: src/fetch/srufetcher.cpp:586
+#: src/fetch/srufetcher.cpp:602
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "서버에서 사용하는 결과 형식을 입력하십시오."
 
-#: src/fetch/srufetcher.cpp:595
+#: src/fetch/srufetcher.cpp:611
 #, kde-format
 msgid "Field"
 msgstr "필드"

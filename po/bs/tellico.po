@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-16 03:33+0000\n"
+"POT-Creation-Date: 2024-06-24 03:04+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -665,7 +665,7 @@ msgid "Property"
 msgstr "Svojstvo"
 
 #: src/collectionfieldsdialog.cpp:883 src/collections/filecatalog.cpp:108
-#: src/fetch/srufetcher.cpp:595
+#: src/fetch/srufetcher.cpp:611
 #, kde-format
 msgid "Value"
 msgstr "Vrijednost"
@@ -835,7 +835,7 @@ msgid "Publisher"
 msgstr "Izdavač"
 
 #: src/collections/bibtexcollection.cpp:141 src/fetch/hathitrustfetcher.cpp:307
-#: src/fetch/srufetcher.cpp:507 src/fetch/z3950fetcher.cpp:576
+#: src/fetch/srufetcher.cpp:522 src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgid "Address"
 msgstr "Adresa"
@@ -945,7 +945,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:246 src/fetch/entrezfetcher.cpp:514
-#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:508
+#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:523
 #: src/fetch/z3950fetcher.cpp:577
 #, kde-format
 msgid "Abstract"
@@ -4179,13 +4179,13 @@ msgid "Illustrator"
 msgstr "Illustrator"
 
 #: src/fetch/hathitrustfetcher.cpp:310 src/fetch/isbndbfetcher.cpp:384
-#: src/fetch/srufetcher.cpp:509 src/fetch/z3950fetcher.cpp:579
+#: src/fetch/srufetcher.cpp:524 src/fetch/z3950fetcher.cpp:579
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Dewey Decimalni"
 
-#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:510
+#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:525
 #: src/fetch/z3950fetcher.cpp:580
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -4404,63 +4404,63 @@ msgstr "OtvorenaBiblioteka link"
 msgid "RPGGeek Link"
 msgstr "BoardGameGeek"
 
-#: src/fetch/srufetcher.cpp:492
+#: src/fetch/srufetcher.cpp:507
 #, kde-format
 msgid "Library of Congress (US)"
 msgstr "Kongresna Biblioteka (US)"
 
-#: src/fetch/srufetcher.cpp:497
+#: src/fetch/srufetcher.cpp:512
 #, kde-format
 msgid "SRU Server"
 msgstr "SRU Server"
 
-#: src/fetch/srufetcher.cpp:525
+#: src/fetch/srufetcher.cpp:540
 #, fuzzy, kde-format
 #| msgid "&Source name: "
 msgid "Scheme: "
 msgstr "&Ime izvora "
 
-#: src/fetch/srufetcher.cpp:534 src/fetch/srufetcher.cpp:570
+#: src/fetch/srufetcher.cpp:550 src/fetch/srufetcher.cpp:586
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr "Unesite putanju do baze podataka za server."
 
-#: src/fetch/srufetcher.cpp:539 src/fetch/z3950fetcher.cpp:603
+#: src/fetch/srufetcher.cpp:555 src/fetch/z3950fetcher.cpp:603
 #, kde-format
 msgid "Hos&t: "
 msgstr "Krisnik: "
 
-#: src/fetch/srufetcher.cpp:546 src/fetch/z3950fetcher.cpp:609
+#: src/fetch/srufetcher.cpp:562 src/fetch/z3950fetcher.cpp:609
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "Unesite ime korisnika servera."
 
-#: src/fetch/srufetcher.cpp:551 src/fetch/z3950fetcher.cpp:614
+#: src/fetch/srufetcher.cpp:567 src/fetch/z3950fetcher.cpp:614
 #, kde-format
 msgid "&Port: "
 msgstr "&Port "
 
-#: src/fetch/srufetcher.cpp:560 src/fetch/z3950fetcher.cpp:623
+#: src/fetch/srufetcher.cpp:576 src/fetch/z3950fetcher.cpp:623
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Unesite broj porta servera. Podrazumjevani je %1."
 
-#: src/fetch/srufetcher.cpp:565
+#: src/fetch/srufetcher.cpp:581
 #, kde-format
 msgid "Path: "
 msgstr "Putanja: "
 
-#: src/fetch/srufetcher.cpp:575
+#: src/fetch/srufetcher.cpp:591
 #, kde-format
 msgid "Format: "
 msgstr "Format: "
 
-#: src/fetch/srufetcher.cpp:586
+#: src/fetch/srufetcher.cpp:602
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "Unesite rezultate formatiranja za server."
 
-#: src/fetch/srufetcher.cpp:595
+#: src/fetch/srufetcher.cpp:611
 #, fuzzy, kde-format
 #| msgid "Fields"
 msgid "Field"
