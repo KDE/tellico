@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-18 01:52+0000\n"
+"POT-Creation-Date: 2024-06-24 01:40+0000\n"
 "PO-Revision-Date: 2024-01-31 11:48+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -647,7 +647,7 @@ msgid "Property"
 msgstr "Proprietate"
 
 #: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:105
-#: src/fetch/srufetcher.cpp:594
+#: src/fetch/srufetcher.cpp:610
 #, kde-format
 msgid "Value"
 msgstr "Valor"
@@ -795,7 +795,7 @@ msgid "Publisher"
 msgstr "Editor (Publishing)"
 
 #: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:304
-#: src/fetch/srufetcher.cpp:506 src/fetch/z3950fetcher.cpp:572
+#: src/fetch/srufetcher.cpp:521 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
 msgstr "Adresse"
@@ -907,7 +907,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:513
-#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/srufetcher.cpp:507
+#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/srufetcher.cpp:522
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -3945,13 +3945,13 @@ msgid "Illustrator"
 msgstr "Illustrator"
 
 #: src/fetch/hathitrustfetcher.cpp:307 src/fetch/isbndbfetcher.cpp:382
-#: src/fetch/srufetcher.cpp:508 src/fetch/z3950fetcher.cpp:575
+#: src/fetch/srufetcher.cpp:523 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Decimal  Dewey"
 
-#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:509
+#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:524
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -4153,62 +4153,62 @@ msgstr "Ligamine de OpenLibrary"
 msgid "RPGGeek Link"
 msgstr "Ligamine de RPGGeek"
 
-#: src/fetch/srufetcher.cpp:491
+#: src/fetch/srufetcher.cpp:506
 #, kde-format
 msgid "Library of Congress (US)"
 msgstr "Bibliotheca de Congresso (SU)"
 
-#: src/fetch/srufetcher.cpp:496
+#: src/fetch/srufetcher.cpp:511
 #, kde-format
 msgid "SRU Server"
 msgstr "Servitor SRU"
 
-#: src/fetch/srufetcher.cpp:524
+#: src/fetch/srufetcher.cpp:539
 #, kde-format
 msgid "Scheme: "
 msgstr "Schema: "
 
-#: src/fetch/srufetcher.cpp:533 src/fetch/srufetcher.cpp:569
+#: src/fetch/srufetcher.cpp:549 src/fetch/srufetcher.cpp:585
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr "Inserta le percurso al base de datos usate per le servitor."
 
-#: src/fetch/srufetcher.cpp:538 src/fetch/z3950fetcher.cpp:599
+#: src/fetch/srufetcher.cpp:554 src/fetch/z3950fetcher.cpp:599
 #, kde-format
 msgid "Hos&t: "
 msgstr "Hospi&te:"
 
-#: src/fetch/srufetcher.cpp:545 src/fetch/z3950fetcher.cpp:605
+#: src/fetch/srufetcher.cpp:561 src/fetch/z3950fetcher.cpp:605
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "Inserta le nomine de  hospite del servitor."
 
-#: src/fetch/srufetcher.cpp:550 src/fetch/z3950fetcher.cpp:610
+#: src/fetch/srufetcher.cpp:566 src/fetch/z3950fetcher.cpp:610
 #, kde-format
 msgid "&Port: "
 msgstr "&Porto: "
 
-#: src/fetch/srufetcher.cpp:559 src/fetch/z3950fetcher.cpp:619
+#: src/fetch/srufetcher.cpp:575 src/fetch/z3950fetcher.cpp:619
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Inserta le numero de porto del servitor. Le predefinite es %1."
 
-#: src/fetch/srufetcher.cpp:564
+#: src/fetch/srufetcher.cpp:580
 #, kde-format
 msgid "Path: "
 msgstr "Percurso: "
 
-#: src/fetch/srufetcher.cpp:574
+#: src/fetch/srufetcher.cpp:590
 #, kde-format
 msgid "Format: "
 msgstr "Formato: "
 
-#: src/fetch/srufetcher.cpp:585
+#: src/fetch/srufetcher.cpp:601
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "Inserta le formato de resultato usate per le servitor."
 
-#: src/fetch/srufetcher.cpp:594
+#: src/fetch/srufetcher.cpp:610
 #, kde-format
 msgid "Field"
 msgstr "Campo"

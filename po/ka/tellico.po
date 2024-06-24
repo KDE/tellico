@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-18 01:52+0000\n"
+"POT-Creation-Date: 2024-06-24 01:40+0000\n"
 "PO-Revision-Date: 2023-10-23 06:18+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -623,7 +623,7 @@ msgid "Property"
 msgstr "თვისება"
 
 #: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:105
-#: src/fetch/srufetcher.cpp:594
+#: src/fetch/srufetcher.cpp:610
 #, kde-format
 msgid "Value"
 msgstr "მნიშვნელობა"
@@ -759,7 +759,7 @@ msgid "Publisher"
 msgstr "გამომცემელი"
 
 #: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:304
-#: src/fetch/srufetcher.cpp:506 src/fetch/z3950fetcher.cpp:572
+#: src/fetch/srufetcher.cpp:521 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
 msgstr "მისამართი"
@@ -871,7 +871,7 @@ msgid "URL"
 msgstr "ბმული"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:513
-#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/srufetcher.cpp:507
+#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/srufetcher.cpp:522
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -3831,13 +3831,13 @@ msgid "Illustrator"
 msgstr "ილუსტრატორი"
 
 #: src/fetch/hathitrustfetcher.cpp:307 src/fetch/isbndbfetcher.cpp:382
-#: src/fetch/srufetcher.cpp:508 src/fetch/z3950fetcher.cpp:575
+#: src/fetch/srufetcher.cpp:523 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "დიუის ათობითი"
 
-#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:509
+#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:524
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -4036,62 +4036,62 @@ msgstr "OpenLibrary ბმული"
 msgid "RPGGeek Link"
 msgstr "RPGGeek ბმული"
 
-#: src/fetch/srufetcher.cpp:491
+#: src/fetch/srufetcher.cpp:506
 #, kde-format
 msgid "Library of Congress (US)"
 msgstr "კონგრესის ბიბლიოთეკა (US)"
 
-#: src/fetch/srufetcher.cpp:496
+#: src/fetch/srufetcher.cpp:511
 #, kde-format
 msgid "SRU Server"
 msgstr "SRU სერვერი"
 
-#: src/fetch/srufetcher.cpp:524
+#: src/fetch/srufetcher.cpp:539
 #, kde-format
 msgid "Scheme: "
 msgstr "სქემა: "
 
-#: src/fetch/srufetcher.cpp:533 src/fetch/srufetcher.cpp:569
+#: src/fetch/srufetcher.cpp:549 src/fetch/srufetcher.cpp:585
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:538 src/fetch/z3950fetcher.cpp:599
+#: src/fetch/srufetcher.cpp:554 src/fetch/z3950fetcher.cpp:599
 #, kde-format
 msgid "Hos&t: "
 msgstr "&ჰოსტი: "
 
-#: src/fetch/srufetcher.cpp:545 src/fetch/z3950fetcher.cpp:605
+#: src/fetch/srufetcher.cpp:561 src/fetch/z3950fetcher.cpp:605
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "შეიყვანეთ სერვერის ჰოსტის სახელი."
 
-#: src/fetch/srufetcher.cpp:550 src/fetch/z3950fetcher.cpp:610
+#: src/fetch/srufetcher.cpp:566 src/fetch/z3950fetcher.cpp:610
 #, kde-format
 msgid "&Port: "
 msgstr "&პორტი: "
 
-#: src/fetch/srufetcher.cpp:559 src/fetch/z3950fetcher.cpp:619
+#: src/fetch/srufetcher.cpp:575 src/fetch/z3950fetcher.cpp:619
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "შეიყვანეთ სერვერის პორტის ნომერი. ნაგულისხმები მნიშვნელობაა %1."
 
-#: src/fetch/srufetcher.cpp:564
+#: src/fetch/srufetcher.cpp:580
 #, kde-format
 msgid "Path: "
 msgstr "ბილიკი: "
 
-#: src/fetch/srufetcher.cpp:574
+#: src/fetch/srufetcher.cpp:590
 #, kde-format
 msgid "Format: "
 msgstr "ფორმატი: "
 
-#: src/fetch/srufetcher.cpp:585
+#: src/fetch/srufetcher.cpp:601
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "შეიყვანეთ სერვერის მიერ გამოყენებული შედეგის ფორმატი."
 
-#: src/fetch/srufetcher.cpp:594
+#: src/fetch/srufetcher.cpp:610
 #, kde-format
 msgid "Field"
 msgstr "ველი"
