@@ -1,3 +1,7 @@
+2024-06-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 3.5.5.
+
 2024-06-23  Robby Stephenson  <robby@periapsis.org>
 
 	* Implemented overrides for SRU query indices (Bug 488931).
