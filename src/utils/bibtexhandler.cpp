@@ -173,7 +173,7 @@ QString BibtexHandler::importText(char* text_) {
   // we need to lower-case any capitalized text after the first letter that is
   // NOT contained in braces
 
-  QRegularExpression rx(QStringLiteral("\\{([A-Z]+?)\\}"));
+  static const QRegularExpression rx(QStringLiteral("\\{([A-Z]+?)\\}"));
   str.replace(rx, QStringLiteral("\\1"));
 
   return str;
