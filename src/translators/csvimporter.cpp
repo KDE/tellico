@@ -97,8 +97,6 @@ Tellico::Data::CollPtr CSVImporter::collection() {
     createCollection();
   }
 
-  const QStringList existingNames = m_coll->fieldNames();
-
   if(m_fieldsToImport.isEmpty() && m_table) {
     for(int col = 0; col < m_table->columnCount(); ++col) {
       QString t = m_table->horizontalHeaderItem(col)->text();
