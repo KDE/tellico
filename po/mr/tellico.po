@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-24 01:40+0000\n"
+"POT-Creation-Date: 2024-07-05 01:42+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -2496,7 +2496,7 @@ msgstr ""
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:220
+#: src/translators/csvimporter.cpp:218
 #: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Collection &type:"
@@ -6617,7 +6617,7 @@ msgstr ""
 msgid "User ID:"
 msgstr "वापरकर्ता ID :"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:215
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:213
 #, kde-format
 msgid "CSV Options"
 msgstr ""
@@ -6637,7 +6637,7 @@ msgstr ""
 msgid "Delimiter"
 msgstr "सीमांकन :"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:243
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:241
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6649,7 +6649,7 @@ msgstr ""
 msgid "Comma"
 msgstr ""
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:250
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:248
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr ""
@@ -6659,7 +6659,7 @@ msgstr ""
 msgid "Semicolon"
 msgstr ""
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:255
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:253
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr ""
@@ -6669,7 +6669,7 @@ msgstr ""
 msgid "Tab"
 msgstr "Tab"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:260
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:258
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr ""
@@ -6680,84 +6680,84 @@ msgstr ""
 msgid "Other"
 msgstr "इतर"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:265
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:263
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr ""
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:272
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:270
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:296
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:294
 #, kde-format
 msgid "Table column delimiter:"
 msgstr ""
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:295
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:293
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:307
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:305
 #, kde-format
 msgid "Table row delimiter:"
 msgstr ""
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:306
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:304
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
 
-#: src/translators/csvimporter.cpp:225
+#: src/translators/csvimporter.cpp:223
 #: src/translators/filelistingimporter.cpp:180
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr ""
 
-#: src/translators/csvimporter.cpp:229
+#: src/translators/csvimporter.cpp:227
 #, kde-format
 msgid "&First row contains field titles"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:230
+#: src/translators/csvimporter.cpp:228
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr ""
 
-#: src/translators/csvimporter.cpp:242
+#: src/translators/csvimporter.cpp:240
 #, kde-format
 msgid "Delimiter:"
 msgstr "सीमांकन :"
 
-#: src/translators/csvimporter.cpp:248
+#: src/translators/csvimporter.cpp:246
 #, kde-format
 msgid "&Comma"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:254
+#: src/translators/csvimporter.cpp:252
 #, kde-format
 msgid "&Semicolon"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:259
+#: src/translators/csvimporter.cpp:257
 #, fuzzy, kde-format
 msgid "Ta&b"
 msgstr "टॅब 1"
 
-#: src/translators/csvimporter.cpp:264
+#: src/translators/csvimporter.cpp:262
 #, fuzzy, kde-format
 msgid "Ot&her:"
 msgstr "इतर"
 
-#: src/translators/csvimporter.cpp:326
+#: src/translators/csvimporter.cpp:324
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr ""
 
-#: src/translators/csvimporter.cpp:333
+#: src/translators/csvimporter.cpp:331
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -6765,34 +6765,34 @@ msgid ""
 "qt>"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:335
+#: src/translators/csvimporter.cpp:333
 #, fuzzy, kde-format
 msgid "Co&lumn:"
 msgstr "स्तंभ"
 
-#: src/translators/csvimporter.cpp:348
+#: src/translators/csvimporter.cpp:346
 #, kde-format
 msgid "&Data field in this column:"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:362
+#: src/translators/csvimporter.cpp:360
 #, kde-format
 msgid "&Assign Field"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:401
+#: src/translators/csvimporter.cpp:399
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
 "be imported."
 msgstr ""
 
-#: src/translators/csvimporter.cpp:598
+#: src/translators/csvimporter.cpp:596
 #, kde-format
 msgid "Review"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:691
+#: src/translators/csvimporter.cpp:689
 #, kde-format
 msgid "<New Field>"
 msgstr ""

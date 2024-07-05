@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-24 01:40+0000\n"
+"POT-Creation-Date: 2024-07-05 01:42+0000\n"
 "PO-Revision-Date: 2023-10-21 11:28+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -2569,7 +2569,7 @@ msgstr "Ustawienia wzorców"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:220
+#: src/translators/csvimporter.cpp:218
 #: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Collection &type:"
@@ -6793,7 +6793,7 @@ msgstr "Zaimportuj tylko nabyte elementy"
 msgid "User ID:"
 msgstr "Identyfikator użytkownika:"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:215
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:213
 #, kde-format
 msgid "CSV Options"
 msgstr "Ustawienia CSV"
@@ -6814,7 +6814,7 @@ msgstr ""
 msgid "Delimiter"
 msgstr "Rozgranicznik"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:243
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:241
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6828,7 +6828,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Przecinek"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:250
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:248
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "Użyj przecinka jako separatora."
@@ -6838,7 +6838,7 @@ msgstr "Użyj przecinka jako separatora."
 msgid "Semicolon"
 msgstr "Średnik"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:255
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:253
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "Użyj średnika jako separatora."
@@ -6848,7 +6848,7 @@ msgstr "Użyj średnika jako separatora."
 msgid "Tab"
 msgstr "Tabulator"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:260
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:258
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "Użyj tabulatora jako separatora."
@@ -6859,22 +6859,22 @@ msgstr "Użyj tabulatora jako separatora."
 msgid "Other"
 msgstr "Inny"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:265
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:263
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "Użyj innego łańcucha jako separatora."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:272
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:270
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "Inny łańcuch, taki jak dwukropek, może być używany jako separator."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:296
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:294
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "Rozgranicznik kolumny:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:295
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:293
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
@@ -6882,64 +6882,64 @@ msgstr ""
 "Rozgranicznik kolumny rozdziela wartości w każdej kolumnie pola <i>Tabeli</"
 "i>."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:307
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:305
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "Rozgranicznik wiersza:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:306
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:304
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
 "Rozgranicznik wiersza rozdziela wartości w każdym wierszu pola <i>Tabeli</i>."
 
-#: src/translators/csvimporter.cpp:225
+#: src/translators/csvimporter.cpp:223
 #: src/translators/filelistingimporter.cpp:180
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Wybierz rodzaj importowanego zbioru."
 
-#: src/translators/csvimporter.cpp:229
+#: src/translators/csvimporter.cpp:227
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "&Pierwszy rząd zawiera nazwy pól"
 
-#: src/translators/csvimporter.cpp:230
+#: src/translators/csvimporter.cpp:228
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr "Jeśli zaznaczone, pierwszy rząd jest używany jako nazwy pól."
 
-#: src/translators/csvimporter.cpp:242
+#: src/translators/csvimporter.cpp:240
 #, kde-format
 msgid "Delimiter:"
 msgstr "Rozgranicznik:"
 
-#: src/translators/csvimporter.cpp:248
+#: src/translators/csvimporter.cpp:246
 #, kde-format
 msgid "&Comma"
 msgstr "&Przecinek"
 
-#: src/translators/csvimporter.cpp:254
+#: src/translators/csvimporter.cpp:252
 #, kde-format
 msgid "&Semicolon"
 msgstr "Ś&rednik"
 
-#: src/translators/csvimporter.cpp:259
+#: src/translators/csvimporter.cpp:257
 #, kde-format
 msgid "Ta&b"
 msgstr "&Tabulator"
 
-#: src/translators/csvimporter.cpp:264
+#: src/translators/csvimporter.cpp:262
 #, kde-format
 msgid "Ot&her:"
 msgstr "&Inny:"
 
-#: src/translators/csvimporter.cpp:326
+#: src/translators/csvimporter.cpp:324
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "Tabela pokazuje do pięciu pierwszych linii pliku CSV."
 
-#: src/translators/csvimporter.cpp:333
+#: src/translators/csvimporter.cpp:331
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -6949,22 +6949,22 @@ msgstr ""
 "<qt>Ustaw każdą kolumnę tak, by odpowiadała polu w zbiorze wybierając "
 "kolumnę i pole, a następnie naciśnij na przycisk <i>Przypisz pole</i>.</qt>"
 
-#: src/translators/csvimporter.cpp:335
+#: src/translators/csvimporter.cpp:333
 #, kde-format
 msgid "Co&lumn:"
 msgstr "&Kolumna:"
 
-#: src/translators/csvimporter.cpp:348
+#: src/translators/csvimporter.cpp:346
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "Pole &danych w tej kolumnie:"
 
-#: src/translators/csvimporter.cpp:362
+#: src/translators/csvimporter.cpp:360
 #, kde-format
 msgid "&Assign Field"
 msgstr "P&rzypisz pole"
 
-#: src/translators/csvimporter.cpp:401
+#: src/translators/csvimporter.cpp:399
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
@@ -6973,12 +6973,12 @@ msgstr ""
 "Co najmniej jedna kolumna musi być przypisana do pola. Tylko przypisane "
 "kolumny zostaną zaimportowane."
 
-#: src/translators/csvimporter.cpp:598
+#: src/translators/csvimporter.cpp:596
 #, kde-format
 msgid "Review"
 msgstr "Przejrzyj"
 
-#: src/translators/csvimporter.cpp:691
+#: src/translators/csvimporter.cpp:689
 #, kde-format
 msgid "<New Field>"
 msgstr "<Nowe pole>"
