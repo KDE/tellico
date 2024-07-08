@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-05 01:42+0000\n"
-"PO-Revision-Date: 2023-10-23 06:18+0200\n"
+"PO-Revision-Date: 2024-07-07 10:35+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3477,10 +3477,9 @@ msgid "Language: "
 msgstr "ენა: "
 
 #: src/fetch/colnectfetcher.cpp:967
-#, fuzzy, kde-format
-#| msgid "Country: "
+#, kde-format
 msgid "Country code: "
-msgstr "ქვეყანა: "
+msgstr "ქვეყნის კოდი: "
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
@@ -3898,12 +3897,12 @@ msgstr "ეპიზოდები"
 #: src/fetch/imdbfetcher.cpp:583
 #, kde-format
 msgid "Locale"
-msgstr ""
+msgstr "ენა"
 
 #: src/fetch/imdbfetcher.cpp:586
 #, kde-format
 msgid "Use system locale"
-msgstr ""
+msgstr "სისტემური ენის გამოყენება"
 
 #: src/fetch/imdbfetcher.cpp:587
 #, kde-format
@@ -5110,10 +5109,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr ""
 
 #: src/main.cpp:159
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2023, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr "(c) 2001-2023, Robby Stephenson"
+msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:163
 #, kde-format
