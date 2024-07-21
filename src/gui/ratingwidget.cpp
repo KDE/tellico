@@ -105,8 +105,8 @@ void RatingWidget::init() {
 
 void RatingWidget::updateBounds() {
   bool ok; // not used;
-  m_min = Tellico::toUInt(m_field->property(QStringLiteral("minimum")), &ok);
-  m_max = Tellico::toUInt(m_field->property(QStringLiteral("maximum")), &ok);
+  m_min = Tellico::toInt(m_field->property(QStringLiteral("minimum")), &ok);
+  m_max = Tellico::toInt(m_field->property(QStringLiteral("maximum")), &ok);
   if(m_max > RATING_WIDGET_MAX_ICONS) {
     myDebug() << "max is too high: " << m_max;
     m_max = RATING_WIDGET_MAX_ICONS;
@@ -190,7 +190,7 @@ QString RatingWidget::text() const {
 void RatingWidget::setText(const QString& text_) {
   bool ok;
   // text is value, subtract one to get index
-  m_currIndex = Tellico::toUInt(text_, &ok)-1;
+  m_currIndex = Tellico::toInt(text_, &ok)-1;
   if(ok) {
     if(m_currIndex > m_total-1) {
       m_currIndex = -1;

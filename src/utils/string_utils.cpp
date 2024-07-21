@@ -77,6 +77,27 @@ QString Tellico::uid(int l, bool prefix) {
   return uid;
 }
 
+int Tellico::toInt(const QString& s, bool* ok) {
+  if(s.isEmpty()) {
+    if(ok) {
+      *ok = false;
+    }
+    return 0;
+  }
+
+  int idx = 0;
+  while(idx < s.length() && s[idx].isDigit()) {
+    ++idx;
+  }
+  if(idx == 0) {
+    if(ok) {
+      *ok = false;
+    }
+    return 0;
+  }
+  return s.left(idx).toInt(ok);
+}
+
 uint Tellico::toUInt(const QString& s, bool* ok) {
   if(s.isEmpty()) {
     if(ok) {

@@ -46,6 +46,7 @@ namespace Tellico {
    * @param length The UID starts with "Tellico" and adds enough letters to be @p length long.
    */
   QString uid(int length=20, bool prefix=true);
+  int toInt(const QString& string, bool* ok);
   unsigned int toUInt(const QString& string, bool* ok);
   /**
    * Replace all occurrences  of <i18n>text</i18n> with i18n("text")
