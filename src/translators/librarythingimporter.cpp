@@ -86,8 +86,8 @@ Tellico::Data::CollPtr LibraryThingImporter::collection() {
     return Data::CollPtr();
   }
 
-  QRegularExpression digits(QStringLiteral("\\d+"));
-  QRegularExpression pubRx(QStringLiteral("^(.+?)[\\(,]"));
+  static const QRegularExpression digits(QStringLiteral("\\d+"));
+  static const QRegularExpression pubRx(QStringLiteral("^(.+?)[\\(,]"));
 
   m_coll = new Data::BookCollection(true);
   bool defaultTitle = true;
