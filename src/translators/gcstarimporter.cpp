@@ -91,7 +91,6 @@ void GCstarImporter::readGCfilms(const QString& text_) {
     hasURL = true;
   }
 
-  bool convertUTF8 = false;
   QHash<QString, Data::BorrowerPtr> borrowers;
   static const QRegularExpression rx(QLatin1String("\\s*,\\s*"));
   static const QRegularExpression year(QLatin1String("\\d{4}"));
@@ -111,10 +110,6 @@ void GCstarImporter::readGCfilms(const QString& text_) {
 
   uint j = 0;
   for(QString line = t.readLine(); !m_cancelled && !line.isNull(); line = t.readLine(), j += line.length()) {
-    // string was wrongly converted
-    if(convertUTF8) {
-      line = QString::fromUtf8(line.toLocal8Bit());
-    }
     QStringList values = line.split(QLatin1Char('|'));
     if(values.empty()) {
       continue;
