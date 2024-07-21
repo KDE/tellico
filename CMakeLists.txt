@@ -151,10 +151,6 @@ set_package_properties(${KCDDB_TARGET_NAME} PROPERTIES
     TYPE OPTIONAL)
 
 find_package(Taglib)
-set_package_properties(Taglib PROPERTIES
-    DESCRIPTION "Support for reading multimedia files"
-    URL "https://taglib.org"
-    TYPE OPTIONAL)
 if(TAGLIB_FOUND)
     if(TAGLIB_LIBRARIES)
         # Older taglib
