@@ -76,7 +76,10 @@ QWidget* CollectionSizeReport::createWidget() {
     if(momentInTime.isValid()) {
       auto msecs = momentInTime.toMSecsSinceEpoch();
       // for a step chart, add a point just before this one with the previous total
-      series->append(msecs-1, totalCount);
+      // but avoid huge step from initial zero to next value
+      if(totalCount > 0) {
+        series->append(msecs-1, totalCount);
+      }
       totalCount += entryDateCounts.value(date);
       series->append(msecs, totalCount);
     }
@@ -118,6 +121,16 @@ QWidget* CollectionSizeReport::createWidget() {
   series->attachAxis(axisY);
   if(axisY->max() < 5) axisY->setMax(5);
   axisY->applyNiceNumbers();
+  // get the lowest tick off the minimum
+  if(!series->points().isEmpty() && axisY->min() == series->points().at(0).y()) {
+    // add 10% padding below lowest value
+    const auto range = axisY->max()-axisY->min();
+    const auto delta = qMax(0.0, 0.1 * qMin(range, axisY->max()));
+    const auto newMin = axisY->min()-delta;
+    if(newMin > 0.5) {
+      axisY->setMin(static_cast<int>(newMin));
+    }
+  }
 
   auto widget = new QWidget;
   auto layout = new QVBoxLayout(widget);
