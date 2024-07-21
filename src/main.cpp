@@ -63,7 +63,9 @@ int main(int argc, char* argv[]) {
 
   QApplication app(argc, argv);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-  QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::RoundPreferFloor);
+  if(!qEnvironmentVariableIsSet("QT_SCALE_FACTOR_ROUNDING_POLICY")) {
+    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::RoundPreferFloor);
+  }
 #endif
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
