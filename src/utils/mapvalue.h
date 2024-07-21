@@ -37,9 +37,9 @@ namespace Tellico {
     const QVariant v = map.value(QLatin1String(name));
     if(v.isNull())  {
       return QString();
-    } else if(v.canConvert(QVariant::String)) {
+    } else if(v.canConvert<QString>()) {
       return v.toString();
-    } else if(v.canConvert(QVariant::StringList)) {
+    } else if(v.canConvert<QStringList>()) {
       return v.toStringList().join(FieldFormat::delimiterString());
     } else {
       return QString();
@@ -50,9 +50,9 @@ namespace Tellico {
     const QVariant v = map.value(QLatin1String(name));
     if(v.isNull())  {
       return QString();
-    } else if(v.canConvert(QVariant::Map)) {
+    } else if(v.canConvert<QVariantMap>()) {
       return mapValue(v.toMap(), args...);
-    } else if(v.canConvert(QVariant::List)) {
+    } else if(v.canConvert<QVariantList>()) {
       QStringList values;
       const auto list = v.toList();
       for(const QVariant& v : list) {
