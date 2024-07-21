@@ -97,7 +97,9 @@ void Logger::setLogFile(const QString& logFile_) {
     m_logFile.open(stdout, QIODevice::WriteOnly);
   } else {
     m_logFile.setFileName(logFile_);
-    m_logFile.open(QIODevice::WriteOnly);
+    if(!m_logFile.open(QIODevice::WriteOnly)) {
+      return;
+    }
   }
 
   m_logStream.reset(new QTextStream(&m_logFile));
