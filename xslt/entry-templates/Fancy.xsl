@@ -85,7 +85,7 @@
   }
   h1 {
     margin: 0px;
-    padding: 0px;
+    padding: 4px 0px 4px 0px;
     font-size: 1.8em;
     color: <xsl:value-of select="$color1"/>;
     background-color: <xsl:value-of select="$color2"/>;
@@ -147,7 +147,7 @@
     background-repeat: repeat-x;
     border-bottom: 1px outset;
     border-color: <xsl:value-of select="$fgcolor"/>;
-    padding: 0px 8px 0px 0px;
+    padding: 4px 8px 4px 0px;
     margin: 0px 0px 2px -4px; /* -4px to match .category padding */
     font-size: 1.0em;
     top: -1px;
