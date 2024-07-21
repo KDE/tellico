@@ -259,7 +259,7 @@ Tellico::Data::EntryPtr ColnectFetcher::fetchEntryHook(uint uid_) {
     Q_ASSERT_X(!doc.isNull(), "colnect", jsonError.errorString().toUtf8().constData());
     const QVariantList resultList = doc.array().toVariantList();
     Q_ASSERT_X(!resultList.isEmpty(), "colnect", "no item results");
-    Q_ASSERT_X(static_cast<QMetaType::Type>(resultList.at(0).type()) == QMetaType::QString, "colnect",
+    Q_ASSERT_X(resultList.at(0).canConvert<QString>(), "colnect",
                "Weird single item result, first value is not a string");
     populateEntry(entry, resultList);
   }
@@ -376,8 +376,7 @@ void ColnectFetcher::slotComplete(KJob* job_) {
   }
 
   // if the first item in the array is a string, probably a single item result, possibly from a Raw query
-  if(!resultList.isEmpty() &&
-     static_cast<QMetaType::Type>(resultList.at(0).type()) == QMetaType::QString) {
+  if(!resultList.isEmpty() && resultList.at(0).canConvert<QString>()) {
     Data::EntryPtr entry(new Data::Entry(coll));
     populateEntry(entry, resultList);
 
@@ -886,7 +885,7 @@ void ColnectFetcher::readDataList() {
   for(int i = 0; i < resultList.size(); ++i) {
     m_colnectFields.insert(resultList.at(i).toString(), i);
   }
-  myDebug() << "Colnect fields:" << m_colnectFields;
+//  myDebug() << "Colnect fields:" << m_colnectFields;
 }
 
 void ColnectFetcher::readItemNames(const QByteArray& item_) {
