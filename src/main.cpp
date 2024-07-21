@@ -61,7 +61,10 @@ int main(int argc, char* argv[]) {
   KIconTheme::initTheme();
 #endif
 
-  QApplication app(argc, argv);
+#ifndef USE_KHTML
+  QGuiApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
+#endif
+
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
   if(!qEnvironmentVariableIsSet("QT_SCALE_FACTOR_ROUNDING_POLICY")) {
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::RoundPreferFloor);
@@ -70,6 +73,7 @@ int main(int argc, char* argv[]) {
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
+
 #if HAVE_STYLE_MANAGER
     /**
      * trigger initialisation of proper application style
@@ -85,8 +89,10 @@ int main(int argc, char* argv[]) {
     QApplication::setStyle(QStringLiteral("breeze"));
 #endif
 #endif
-  KLocalizedString::setApplicationDomain("tellico");
+
+  QApplication app(argc, argv);
   app.setApplicationVersion(QStringLiteral(TELLICO_VERSION));
+  KLocalizedString::setApplicationDomain("tellico");
 
   Q_INIT_RESOURCE(icons);
 
