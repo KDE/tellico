@@ -126,8 +126,13 @@ ReportDialog::ReportDialog(QWidget* parent_)
 
   m_templateCombo = new GUI::ComboBox(mainWidget);
   for(auto it = templates.constBegin(); it != templates.constEnd(); ++it) {
-    const bool isChart = static_cast<QMetaType::Type>(it.value().type()) == QMetaType::QUuid;
-    m_templateCombo->addItem(QIcon::fromTheme(isChart ? QStringLiteral("kchart") : QStringLiteral("text-rdf")),
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+    const auto metaType = static_cast<QMetaType::Type>(it.value().type());
+#else
+    const auto metaType = static_cast<QMetaType::Type>(it.value().typeId());
+#endif
+    m_templateCombo->addItem(QIcon::fromTheme(metaType == QMetaType::QUuid ? QStringLiteral("kchart")
+                                                                           : QStringLiteral("text-rdf")),
                              it.key(), it.value());
   }
   hlay->addWidget(m_templateCombo);
@@ -213,7 +218,12 @@ void ReportDialog::slotGenerate() {
   GUI::CursorSaver cs(Qt::WaitCursor);
 
   QVariant curData = m_templateCombo->currentData();
-  if(static_cast<QMetaType::Type>(curData.type()) == QMetaType::QUuid) {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+  const auto metaType = static_cast<QMetaType::Type>(curData.type());
+#else
+  const auto metaType = static_cast<QMetaType::Type>(curData.typeId());
+#endif
+  if(metaType == QMetaType::QUuid) {
     generateChart();
     m_reportView->setCurrentIndex(INDEX_CHART);
   } else if(curData == ALL_ENTRIES) {
