@@ -54,7 +54,7 @@
 using Tellico::Import::FileListingImporter;
 
 FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_), m_collType(Data::Collection::File), m_coll(nullptr)
-    , m_widget(nullptr), m_recursive(nullptr), m_filePreview(nullptr), m_job(nullptr), m_useFilePreview(false), m_cancelled(false) {
+    , m_widget(nullptr), m_collCombo(nullptr), m_recursive(nullptr), m_filePreview(nullptr), m_job(nullptr), m_useFilePreview(false), m_cancelled(false) {
 }
 
 bool FileListingImporter::canImport(int type) const {
