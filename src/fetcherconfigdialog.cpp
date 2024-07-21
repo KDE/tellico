@@ -87,9 +87,9 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
   topLayout->addLayout(vlay1);
   m_iconLabel = new QLabel(widget);
   if(type_ == Fetch::Unknown) {
-    m_iconLabel->setPixmap(KIconLoader::global()->loadIcon(QStringLiteral("network-wired"), KIconLoader::Panel, 64));
+    m_iconLabel->setPixmap(KIconLoader::global()->loadIcon(QStringLiteral("network-wired"), KIconLoader::Dialog, 64));
   } else {
-    m_iconLabel->setPixmap(Fetch::Manager::self()->fetcherIcon(type_, KIconLoader::Panel, 64));
+    m_iconLabel->setPixmap(Fetch::Manager::self()->fetcherIcon(type_, KIconLoader::Dialog, 64));
   }
   vlay1->addWidget(m_iconLabel);
   vlay1->addStretch(1);
@@ -231,7 +231,7 @@ void FetcherConfigDialog::slotNewSourceSelected(int idx_) {
     myWarning() << "unknown source type";
     return;
   }
-  m_iconLabel->setPixmap(Fetch::Manager::self()->fetcherIcon(type, KIconLoader::Panel, 64));
+  m_iconLabel->setPixmap(Fetch::Manager::self()->fetcherIcon(type, KIconLoader::Dialog, 64));
   cw = Fetch::Manager::self()->configWidget(m_stack, type, m_typeCombo->currentText());
   if(!cw) {
     // bad bad bad!

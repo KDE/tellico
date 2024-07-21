@@ -69,8 +69,8 @@ EntryMatchDialog::EntryMatchDialog(QWidget* parent_, Data::EntryPtr entryToUpdat
 
   QLabel* icon = new QLabel(hbox);
   hboxHBoxLayout->addWidget(icon);
-  icon->setPixmap(Fetch::Manager::fetcherIcon(fetcher_, KIconLoader::Panel, 48));
-  icon->setAlignment(Qt::Alignment(Qt::AlignLeft) | Qt::AlignTop);
+  icon->setPixmap(Fetch::Manager::fetcherIcon(fetcher_, KIconLoader::Dialog, 48));
+  icon->setAlignment(Qt::Alignment(Qt::AlignLeft) | Qt::Alignment(Qt::AlignTop));
 
   QString s = i18n("<qt><b>%1</b> returned multiple results which could match <b>%2</b>, "
                    "the entry currently in the collection. Please select the correct match.</qt>",
