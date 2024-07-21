@@ -557,10 +557,6 @@ bool Collection::removeEntries(const Tellico::Data::EntryList& vec_) {
 }
 
 Tellico::Data::FieldList Collection::fieldsByCategory(const QString& cat_) {
-  if(!m_fieldCategories.contains(cat_)) {
-    myDebug() << cat_ << "' is not in category list";
-  }
-
   if(cat_.isEmpty()) {
     myDebug() << "empty category!";
     return FieldList();
@@ -639,7 +635,7 @@ bool Collection::isAllowed(const QString& field_, const QString& value_) const {
 
   FieldPtr field = fieldByName(field_);
   if(!field) return false;
-  // non-choice or single-value choice fields with alowed values
+  // non-choice or single-value choice fields with allowed values
   if(field->type() != Field::Choice ||
      (!field->hasFlag(Field::AllowMultiple) && field->allowed().contains(value_))) {
     return true;
