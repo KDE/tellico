@@ -588,7 +588,7 @@ void DoubanFetcher::populateMusicEntry(Data::EntryPtr entry, const QVariantMap& 
     entry->setField(QStringLiteral("medium"), i18n("Compact Disc"));
   }
 
-  QStringList values, tracks;
+  QStringList tracks;
   foreach(const QVariant& v, resultMap_.value(QLatin1String("songs")).toList()) {
     const QVariantMap trackMap = v.toMap();
     QString title = mapValue(trackMap, "title");
