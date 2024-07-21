@@ -62,7 +62,12 @@ int main(int argc, char* argv[]) {
 #endif
 
   QApplication app(argc, argv);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+  QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::RoundPreferFloor);
+#endif
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
 #if HAVE_STYLE_MANAGER
     /**
      * trigger initialisation of proper application style
