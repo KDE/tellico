@@ -76,14 +76,14 @@ void VGCollectFetcher::search() {
   QUrl u(QString::fromLatin1(VGCOLLECT_BASE_URL));
   QString urlPath(QStringLiteral("/no-filter/%1/no-filter/0/ALL/ALL/ALL/ALL/no-filter/%2/%3"));
 
+  static const QRegularExpression yearRX(QStringLiteral("\\s*[12][0-9]{3}\\s*"));
   switch(request().key()) {
     case Keyword:
       {
         QString value = request().value();
         QString yearStart, yearEnd;
         // pull out year, keep the regexp a little loose
-        QRegularExpression yearRX(QStringLiteral("\\s*[12][0-9]{3}\\s*"));
-        QRegularExpressionMatch match = yearRX.match(value);
+        auto match = yearRX.match(value);
         if(match.hasMatch()) {
           // fragile, but the form uses a year index
           yearStart = match.captured(0).trimmed() + QLatin1String("-01-01");
