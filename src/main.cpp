@@ -74,6 +74,7 @@ int main(int argc, char* argv[]) {
   QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
 
+  QApplication app(argc, argv);
 #if HAVE_STYLE_MANAGER
     /**
      * trigger initialisation of proper application style
@@ -89,10 +90,8 @@ int main(int argc, char* argv[]) {
     QApplication::setStyle(QStringLiteral("breeze"));
 #endif
 #endif
-
-  QApplication app(argc, argv);
-  app.setApplicationVersion(QStringLiteral(TELLICO_VERSION));
   KLocalizedString::setApplicationDomain("tellico");
+  app.setApplicationVersion(QStringLiteral(TELLICO_VERSION));
 
   Q_INIT_RESOURCE(icons);
 
