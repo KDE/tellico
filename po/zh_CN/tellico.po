@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-05 01:42+0000\n"
+"POT-Creation-Date: 2024-07-22 01:49+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -159,17 +159,17 @@ msgid "Name"
 msgstr "名称"
 
 #: src/charts/collectionsizereport.cpp:48
-#: src/charts/collectionsizereport.cpp:119
+#: src/charts/collectionsizereport.cpp:122
 #, kde-format
 msgid "Collection Size"
 msgstr ""
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1666
+#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1666
 #, kde-format
 msgid "Total entries: %1"
 msgstr "总共条目：%1"
 
-#: src/charts/collectionsizereport.cpp:94
+#: src/charts/collectionsizereport.cpp:97
 #, kde-format
 msgid "Collection Size Over Time"
 msgstr ""
@@ -216,7 +216,7 @@ msgstr "<qt>Tellico 无法写入位于 <b>%1</b> 的服务器管道。</qt>"
 msgid "My Collection"
 msgstr "我的收藏"
 
-#: src/collection.cpp:891 src/document.cpp:531 src/field.cpp:290
+#: src/collection.cpp:887 src/document.cpp:531 src/field.cpp:290
 #: src/field.cpp:303 src/field.cpp:308 src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
 #, kde-format
@@ -688,9 +688,9 @@ msgstr "Bibtex 键"
 #: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
 #: src/configdialog.cpp:1129 src/fetch/amazonfetcher.cpp:861
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
-#: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:535
-#: src/fetch/colnectfetcher.cpp:554 src/fetch/colnectfetcher.cpp:592
-#: src/fetch/colnectfetcher.cpp:599 src/fetch/discogsfetcher.cpp:307
+#: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:534
+#: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:591
+#: src/fetch/colnectfetcher.cpp:598 src/fetch/discogsfetcher.cpp:307
 #: src/fetch/discogsfetcher.cpp:312 src/fetch/discogsfetcher.cpp:317
 #: src/fetch/discogsfetcher.cpp:324 src/fetch/discogsfetcher.cpp:331
 #: src/fetch/discogsfetcher.cpp:336 src/fetch/doubanfetcher.cpp:373
@@ -822,7 +822,7 @@ msgstr "章节"
 #: src/collections/bibtexcollection.cpp:208
 #: src/collections/bookcollection.cpp:137 src/collections/cardcollection.cpp:78
 #: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:366
-#: src/fetch/colnectfetcher.cpp:821
+#: src/fetch/colnectfetcher.cpp:820
 #, kde-format
 msgid "Series"
 msgstr "系列"
@@ -930,7 +930,7 @@ msgstr ""
 #: src/collections/filecatalog.cpp:54 src/collections/gamecollection.cpp:90
 #: src/collections/stampcollection.cpp:49
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
-#: src/fetch/colnectfetcher.cpp:374 src/fetch/colnectfetcher.cpp:824
+#: src/fetch/colnectfetcher.cpp:374 src/fetch/colnectfetcher.cpp:823
 #: src/fetch/numistafetcher.cpp:351 src/fetch/numistafetcher.cpp:399
 #: src/fetch/rpggeekfetcher.cpp:207 src/fetchdialog.cpp:249
 #, kde-format
@@ -1256,13 +1256,13 @@ msgstr ""
 msgid "Grading Service"
 msgstr ""
 
-#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:819
+#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:818
 #: src/fetch/numistafetcher.cpp:401
 #, kde-format
 msgid "Obverse"
 msgstr "正面"
 
-#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:820
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:819
 #: src/fetch/numistafetcher.cpp:402
 #, kde-format
 msgid "Reverse"
@@ -2688,7 +2688,7 @@ msgid "Template Packages"
 msgstr ""
 
 #: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1297
-#: src/mainwindow.cpp:1473 src/reportdialog.cpp:433 src/reportdialog.cpp:448
+#: src/mainwindow.cpp:1473 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:55 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -3277,7 +3277,7 @@ msgstr ""
 msgid "Results from %1: %2/%3"
 msgstr "结果来自 %1：%2/%3"
 
-#: src/fetch/amazonfetcher.cpp:631 src/fetch/colnectfetcher.cpp:796
+#: src/fetch/amazonfetcher.cpp:631 src/fetch/colnectfetcher.cpp:795
 #: src/fetch/discogsfetcher.cpp:217 src/fetch/doubanfetcher.cpp:477
 #: src/fetch/filmaffinityfetcher.cpp:430 src/fetch/filmasterfetcher.cpp:147
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:198
@@ -3290,7 +3290,7 @@ msgstr "结果来自 %1：%2/%3"
 #: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:235
 #: src/fetch/thetvdbfetcher.cpp:340 src/fetch/tvmazefetcher.cpp:262
 #: src/fetch/upcitemdbfetcher.cpp:258 src/fetch/vgcollectfetcher.cpp:282
-#: src/fetch/vndbfetcher.cpp:181
+#: src/fetch/vndbfetcher.cpp:182
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "无法加载封面图像。"
@@ -3324,7 +3324,7 @@ msgstr ""
 "Amazon.com 从多个不同的本地化站点上提供数据。选择您期望用作此数据源的一个。"
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:211
-#: src/fetch/colnectfetcher.cpp:957 src/fetch/imdbfetcher.cpp:567
+#: src/fetch/colnectfetcher.cpp:956 src/fetch/imdbfetcher.cpp:567
 #: src/fetch/itunesfetcher.cpp:543 src/fetch/mobygamesfetcher.cpp:667
 #: src/fetch/rpggeekfetcher.cpp:220 src/fetch/thegamesdbfetcher.cpp:655
 #: src/fetch/videogamegeekfetcher.cpp:211
@@ -3333,7 +3333,7 @@ msgid "&Image size: "
 msgstr "图像大小(&I)："
 
 #: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:961 src/fetch/imdbfetcher.cpp:570
+#: src/fetch/colnectfetcher.cpp:960 src/fetch/imdbfetcher.cpp:570
 #: src/fetch/itunesfetcher.cpp:547 src/fetch/mobygamesfetcher.cpp:670
 #: src/fetch/rpggeekfetcher.cpp:224 src/fetch/thegamesdbfetcher.cpp:658
 #: src/fetch/videogamegeekfetcher.cpp:215
@@ -3349,7 +3349,7 @@ msgstr "中图"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:216
-#: src/fetch/colnectfetcher.cpp:962 src/fetch/imdbfetcher.cpp:572
+#: src/fetch/colnectfetcher.cpp:961 src/fetch/imdbfetcher.cpp:572
 #: src/fetch/itunesfetcher.cpp:548 src/fetch/mobygamesfetcher.cpp:672
 #: src/fetch/rpggeekfetcher.cpp:225 src/fetch/thegamesdbfetcher.cpp:660
 #: src/fetch/videogamegeekfetcher.cpp:216
@@ -3358,7 +3358,7 @@ msgid "Large Image"
 msgstr "大图"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:214
-#: src/fetch/colnectfetcher.cpp:960 src/fetch/imdbfetcher.cpp:573
+#: src/fetch/colnectfetcher.cpp:959 src/fetch/imdbfetcher.cpp:573
 #: src/fetch/itunesfetcher.cpp:546 src/fetch/mobygamesfetcher.cpp:673
 #: src/fetch/rpggeekfetcher.cpp:223 src/fetch/thegamesdbfetcher.cpp:661
 #: src/fetch/videogamegeekfetcher.cpp:214
@@ -3404,7 +3404,7 @@ msgstr ""
 #: src/fetch/musicbrainzfetcher.cpp:374 src/fetch/openlibraryfetcher.cpp:457
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:386
 #: src/fetch/upcitemdbfetcher.cpp:478 src/fetch/vgcollectfetcher.cpp:378
-#: src/fetch/vndbfetcher.cpp:439
+#: src/fetch/vndbfetcher.cpp:440
 #, kde-format
 msgid "This source has no options."
 msgstr "来源没有选项。"
@@ -3429,42 +3429,42 @@ msgstr "ISBN#"
 msgid "BoardGameGeek Link"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:534 src/fetch/colnectfetcher.cpp:817
+#: src/fetch/colnectfetcher.cpp:533 src/fetch/colnectfetcher.cpp:816
 #, kde-format
 msgid "Colnect Link"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:823
+#: src/fetch/colnectfetcher.cpp:552 src/fetch/colnectfetcher.cpp:822
 #, kde-format
 msgid "Mintage"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:591 src/fetch/colnectfetcher.cpp:825
+#: src/fetch/colnectfetcher.cpp:590 src/fetch/colnectfetcher.cpp:824
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:598 src/fetch/colnectfetcher.cpp:826
+#: src/fetch/colnectfetcher.cpp:597 src/fetch/colnectfetcher.cpp:825
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:827 src/fetch/giantbombfetcher.cpp:203
+#: src/fetch/colnectfetcher.cpp:826 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:575 src/fetch/mobygamesfetcher.cpp:633
 #: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:329
 #, kde-format
 msgid "PEGI Rating"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:929 src/fetch/filmaffinityfetcher.cpp:492
+#: src/fetch/colnectfetcher.cpp:928 src/fetch/filmaffinityfetcher.cpp:492
 #: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:626
 #, kde-format
 msgid "Language: "
 msgstr "语言: "
 
-#: src/fetch/colnectfetcher.cpp:967
+#: src/fetch/colnectfetcher.cpp:966
 #, kde-format
 msgid "Country code: "
 msgstr ""
@@ -3580,8 +3580,8 @@ msgstr ""
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:327
-#: src/fetch/themoviedbfetcher.cpp:571 src/fetch/vndbfetcher.cpp:284
-#: src/fetch/vndbfetcher.cpp:431 src/translators/filereadervideo.cpp:200
+#: src/fetch/themoviedbfetcher.cpp:571 src/fetch/vndbfetcher.cpp:285
+#: src/fetch/vndbfetcher.cpp:432 src/translators/filereadervideo.cpp:200
 #, kde-format
 msgid "Original Title"
 msgstr "原标题"
@@ -4147,12 +4147,12 @@ msgstr ""
 msgid "VideoGameGeek Link"
 msgstr ""
 
-#: src/fetch/vndbfetcher.cpp:289 src/fetch/vndbfetcher.cpp:432
+#: src/fetch/vndbfetcher.cpp:290 src/fetch/vndbfetcher.cpp:433
 #, kde-format
 msgid "Alias"
 msgstr "别名"
 
-#: src/fetch/vndbfetcher.cpp:308
+#: src/fetch/vndbfetcher.cpp:309
 #, kde-format
 msgid "Visual Novel"
 msgstr ""
@@ -5094,82 +5094,82 @@ msgstr "借贷者"
 msgid "Borrower (Sort by Count)"
 msgstr ""
 
-#: src/main.cpp:157
+#: src/main.cpp:169
 #, kde-format
 msgid "Tellico - collection management software, free and simple"
 msgstr ""
 
-#: src/main.cpp:159
+#: src/main.cpp:171
 #, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
 msgstr ""
 
-#: src/main.cpp:163
+#: src/main.cpp:175
 #, kde-format
 msgid "Data source scripts"
 msgstr "数据源脚本"
 
-#: src/main.cpp:168
+#: src/main.cpp:180
 #, kde-format
 msgid "Icons"
 msgstr "图标"
 
-#: src/main.cpp:169
+#: src/main.cpp:181
 #, kde-format
 msgid "Code examples and general inspiration"
 msgstr "代码范例和启发"
 
-#: src/main.cpp:171
+#: src/main.cpp:183
 #, kde-format
 msgid "Author of btparse library"
 msgstr "btparse 库的作者"
 
-#: src/main.cpp:172
+#: src/main.cpp:184
 #, kde-format
 msgid "Author of libcsv library"
 msgstr "libcsv 库的作者"
 
-#: src/main.cpp:173
+#: src/main.cpp:185
 #, kde-format
 msgid "Author of rtf2html library"
 msgstr "rtf2html 库的作者"
 
-#: src/main.cpp:180
+#: src/main.cpp:192
 #, kde-format
 msgid "Do not reopen the last open file"
 msgstr "不打开上次打开的文件"
 
-#: src/main.cpp:181
+#: src/main.cpp:193
 #, kde-format
 msgid "Import <filename> as a bibtex file"
 msgstr "以 bibtex 文件导入 <filename>"
 
-#: src/main.cpp:182
+#: src/main.cpp:194
 #, kde-format
 msgid "Import <filename> as a MODS file"
 msgstr "以 MODS 文件导入 <filename>"
 
-#: src/main.cpp:183
+#: src/main.cpp:195
 #, kde-format
 msgid "Import <filename> as a RIS file"
 msgstr "以 RIS 文件导入 <filename>"
 
-#: src/main.cpp:184
+#: src/main.cpp:196
 #, kde-format
 msgid "Import <filename> as a PDF file"
 msgstr ""
 
-#: src/main.cpp:185
+#: src/main.cpp:197
 #, kde-format
 msgid "Log diagnostic output"
 msgstr ""
 
-#: src/main.cpp:186
+#: src/main.cpp:198
 #, kde-format
 msgid "Write log output to <filename>"
 msgstr ""
 
-#: src/main.cpp:187
+#: src/main.cpp:199
 #, kde-format
 msgid "File to open"
 msgstr "要打开的文件"
@@ -6142,7 +6142,7 @@ msgid "(%1 selected)"
 msgstr "(%1 个已选中)"
 
 #: src/mainwindow.cpp:1818 src/translators/boardgamegeekimporter.cpp:98
-#: src/translators/gcstarimporter.cpp:257
+#: src/translators/gcstarimporter.cpp:252
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
 #, kde-format
@@ -6258,28 +6258,28 @@ msgstr "报告模板(&R)："
 msgid "One Entry Per Page"
 msgstr ""
 
-#: src/reportdialog.cpp:137
+#: src/reportdialog.cpp:142
 #, kde-format
 msgid "&Generate"
 msgstr "生成(&G)"
 
-#: src/reportdialog.cpp:157
+#: src/reportdialog.cpp:162
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr "选择一种报告模板并点击<em>生成</em>。"
 
-#: src/reportdialog.cpp:158
+#: src/reportdialog.cpp:163
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "某些报告可能需要花费好几秒钟来为大型收藏生成。"
 
-#: src/reportdialog.cpp:431
+#: src/reportdialog.cpp:441
 #, kde-format
 msgid "PNG Files"
 msgstr ""
 
-#: src/reportdialog.cpp:446 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:456 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML 文件"
@@ -6868,8 +6868,8 @@ msgid ""
 "cache folders."
 msgstr ""
 
-#: src/translators/gcstarimporter.cpp:125
-#: src/translators/gcstarimporter.cpp:264
+#: src/translators/gcstarimporter.cpp:120
+#: src/translators/gcstarimporter.cpp:259
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>文件不是有效的 GCstar 数据文件。</qt>"
