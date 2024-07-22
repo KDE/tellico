@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-24 03:04+0000\n"
+"POT-Creation-Date: 2024-07-22 03:22+0000\n"
 "PO-Revision-Date: 2015-12-29 21:13+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -164,18 +164,18 @@ msgid "Name"
 msgstr "Pavadinimas"
 
 #: src/charts/collectionsizereport.cpp:45
-#: src/charts/collectionsizereport.cpp:116
+#: src/charts/collectionsizereport.cpp:119
 #, fuzzy, kde-format
 #| msgid "&Collection"
 msgid "Collection Size"
 msgstr "&Fonoteka"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1656
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1656
 #, fuzzy, kde-format
 msgid "Total entries: %1"
 msgstr "Viso įrašų"
 
-#: src/charts/collectionsizereport.cpp:91
+#: src/charts/collectionsizereport.cpp:94
 #, fuzzy, kde-format
 #| msgid "&Collection"
 msgid "Collection Size Over Time"

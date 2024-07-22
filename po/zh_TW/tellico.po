@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-24 03:04+0000\n"
+"POT-Creation-Date: 2024-07-22 03:22+0000\n"
 "PO-Revision-Date: 2019-05-14 22:35+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -163,18 +163,18 @@ msgid "Name"
 msgstr "名稱"
 
 #: src/charts/collectionsizereport.cpp:45
-#: src/charts/collectionsizereport.cpp:116
+#: src/charts/collectionsizereport.cpp:119
 #, fuzzy, kde-format
 #| msgid "Collection Fields"
 msgid "Collection Size"
 msgstr "收藏欄位"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1656
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1656
 #, kde-format
 msgid "Total entries: %1"
 msgstr "所有項目：%1"
 
-#: src/charts/collectionsizereport.cpp:91
+#: src/charts/collectionsizereport.cpp:94
 #, fuzzy, kde-format
 #| msgid "Collection Fields"
 msgid "Collection Size Over Time"

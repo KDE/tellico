@@ -8,14 +8,14 @@
 # Łukasz Purgal <lookanio@gmail.com>, 2011.
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2011, 2013.
 # Lukasz Purgal (Lookanio) <lookanio@gmail.com>, 2011, 2013.
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2012, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2011, 2012, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-24 03:04+0000\n"
+"POT-Creation-Date: 2024-07-22 03:22+0000\n"
 "PO-Revision-Date: 2024-01-07 12:00+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -25,6 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -174,17 +175,17 @@ msgid "Name"
 msgstr "Nazwa"
 
 #: src/charts/collectionsizereport.cpp:45
-#: src/charts/collectionsizereport.cpp:116
+#: src/charts/collectionsizereport.cpp:119
 #, kde-format
 msgid "Collection Size"
 msgstr "Rozmiar zbioru"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1656
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1656
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Liczba elementów: %1"
 
-#: src/charts/collectionsizereport.cpp:91
+#: src/charts/collectionsizereport.cpp:94
 #, kde-format
 msgid "Collection Size Over Time"
 msgstr "Rozmiar zbioru na przestrzeni czasu"

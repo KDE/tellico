@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-24 03:04+0000\n"
+"POT-Creation-Date: 2024-07-22 03:22+0000\n"
 "PO-Revision-Date: 2024-01-03 12:22+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -165,17 +165,17 @@ msgid "Name"
 msgstr "Naam"
 
 #: src/charts/collectionsizereport.cpp:45
-#: src/charts/collectionsizereport.cpp:116
+#: src/charts/collectionsizereport.cpp:119
 #, kde-format
 msgid "Collection Size"
 msgstr "Grootte van verzameling"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1656
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1656
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Aantal items: %1"
 
-#: src/charts/collectionsizereport.cpp:91
+#: src/charts/collectionsizereport.cpp:94
 #, kde-format
 msgid "Collection Size Over Time"
 msgstr "Grootte van verzameling in de tijd"

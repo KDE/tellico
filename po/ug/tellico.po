@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-24 03:04+0000\n"
+"POT-Creation-Date: 2024-07-22 03:22+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -160,18 +160,18 @@ msgid "Name"
 msgstr "ئاتى"
 
 #: src/charts/collectionsizereport.cpp:45
-#: src/charts/collectionsizereport.cpp:116
+#: src/charts/collectionsizereport.cpp:119
 #, fuzzy, kde-format
 #| msgid "&Collection"
 msgid "Collection Size"
 msgstr "توپلام(&C)"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1656
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1656
 #, kde-format
 msgid "Total entries: %1"
 msgstr ""
 
-#: src/charts/collectionsizereport.cpp:91
+#: src/charts/collectionsizereport.cpp:94
 #, fuzzy, kde-format
 #| msgid "&Collection"
 msgid "Collection Size Over Time"

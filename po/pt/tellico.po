@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-24 03:04+0000\n"
+"POT-Creation-Date: 2024-07-22 03:22+0000\n"
 "PO-Revision-Date: 2020-03-14 11:14+0000\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -208,18 +208,18 @@ msgid "Name"
 msgstr "Nome"
 
 #: src/charts/collectionsizereport.cpp:45
-#: src/charts/collectionsizereport.cpp:116
+#: src/charts/collectionsizereport.cpp:119
 #, fuzzy, kde-format
 #| msgid "Collection View"
 msgid "Collection Size"
 msgstr "Área da Colecção"
 
-#: src/charts/collectionsizereport.cpp:87 src/mainwindow.cpp:1656
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1656
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Total de itens: %1"
 
-#: src/charts/collectionsizereport.cpp:91
+#: src/charts/collectionsizereport.cpp:94
 #, fuzzy, kde-format
 #| msgid "Collection View"
 msgid "Collection Size Over Time"
