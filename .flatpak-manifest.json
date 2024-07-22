@@ -51,7 +51,7 @@
                         {
                             "type": "git",
                             "url": "https://github.com/uclouvain/openjpeg.git",
-                            "tag": "v2.4.0",
+                            "tag": "v2.5.2",
                             "x-checker-data": {
                                 "type": "git",
                                 "tag-pattern": "^v([\\d.]+)$"
