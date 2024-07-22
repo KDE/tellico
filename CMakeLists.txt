@@ -1,23 +1,13 @@
+# FindKF5 requires CMake >= 2.8.12
 # FindPoppler requires CMake >= 3.16
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
+set(CMAKE_CXX_STANDARD 14)
 
-set(TELLICO_VERSION "3.5.99")
-project(Tellico VERSION ${TELLICO_VERSION})
+project(Tellico)
+set(TELLICO_VERSION "3.5.99+git")
 
-if(BUILD_WITH_QT6)
-  find_package(Qt6 6.4 REQUIRED COMPONENTS Core)
-elseif(BUILD_WITH_QT5)
-  find_package(Qt5 5.12 REQUIRED COMPONENTS Core)
-else()
-  find_package(Qt6 6.4 COMPONENTS Core)
-  if(Qt6_FOUND)
-    set(QT_MAJOR_VERSION "6")
-  else()
-    find_package(Qt5 5.12 REQUIRED COMPONENTS Core)
-    set(QT_MAJOR_VERSION "5")
-  endif()
-endif()
-message(STATUS "Found Qt version: ${QT_MAJOR_VERSION}")
+# FindPoppler was added to ECM in 5.19
+find_package(ECM 5.19 REQUIRED NO_MODULE)
 
 if(POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW)
@@ -26,14 +16,10 @@ endif(POLICY CMP0063)
 if(QT_MAJOR_VERSION STREQUAL "6")
   set(QT_MIN_VERSION "6.4.0")
   set(KF_MIN_VERSION "5.240.0")
-  set(CMAKE_CXX_STANDARD 20)
 else()
   set(QT_MIN_VERSION "5.12.0")
   set(KF_MIN_VERSION "5.72.0")
-  set(CMAKE_CXX_STANDARD 17)
 endif()
-
-find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 
 # https://gitlab.kitware.com/cmake/community/wikis/doc/cmake/Useful-Variables
 # automatically add CMAKE_CURRENT_SOURCE_DIR and CMAKE_CURRENT_BINARY_DIR
