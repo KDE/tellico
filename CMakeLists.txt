@@ -1,13 +1,10 @@
-# FindKF5 requires CMake >= 2.8.12
 # FindPoppler requires CMake >= 3.16
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
-set(CMAKE_CXX_STANDARD 14)
 
 project(Tellico)
 set(TELLICO_VERSION "3.5.99+git")
 
-# FindPoppler was added to ECM in 5.19
-find_package(ECM 5.19 REQUIRED NO_MODULE)
+find_package(ECM REQUIRED NO_MODULE)
 
 if(POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW)
@@ -16,9 +13,11 @@ endif(POLICY CMP0063)
 if(QT_MAJOR_VERSION STREQUAL "6")
   set(QT_MIN_VERSION "6.4.0")
   set(KF_MIN_VERSION "5.240.0")
+  set(CMAKE_CXX_STANDARD 20)
 else()
   set(QT_MIN_VERSION "5.12.0")
   set(KF_MIN_VERSION "5.72.0")
+  set(CMAKE_CXX_STANDARD 17)
 endif()
 
 # https://gitlab.kitware.com/cmake/community/wikis/doc/cmake/Useful-Variables
@@ -39,6 +38,7 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 ############# Options #################
 
