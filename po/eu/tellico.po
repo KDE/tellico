@@ -1,16 +1,16 @@
 # Translation for tellico.po to Euskara/Basque (eu).
-# Copyright (C) 2010-2023 This file is copyright:
+# Copyright (C) 2010-2024 This file is copyright:
 # This file is distributed under the same license as the tellico package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2020, 2021, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2020, 2021, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 01:49+0000\n"
-"PO-Revision-Date: 2023-08-19 13:35+0200\n"
+"PO-Revision-Date: 2024-07-25 18:08+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -274,10 +274,9 @@ msgid "Card Collection"
 msgstr "Karta bilduma"
 
 #: src/collectionfactory.cpp:93
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "Bideo bilduma"
+msgstr "Bideo-joko bilduma"
 
 #: src/collectionfactory.cpp:94
 #, kde-format
@@ -1271,9 +1270,9 @@ msgid ""
 msgstr ""
 
 #: src/collections/coincollection.cpp:99 src/collections/stampcollection.cpp:91
-#, fuzzy, kde-format
+#, kde-format
 msgid "Grade"
-msgstr "Maila"
+msgstr ""
 
 #: src/collections/coincollection.cpp:106
 #, kde-format
@@ -1394,10 +1393,9 @@ msgid "Icon"
 msgstr "Ikonoa"
 
 #: src/collections/gamecollection.cpp:35
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "Nere bideoak"
+msgstr "Nire bideo-jokoak"
 
 #: src/collections/gamecollection.cpp:57
 #, kde-format
@@ -6691,41 +6689,41 @@ msgstr ""
 #: src/translators/bibteximporter.cpp:349
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
-msgstr ""
+msgstr "Erabili Unicode (UTF-8) kodeketa"
 
 #: src/translators/bibteximporter.cpp:350
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
-msgstr ""
+msgstr "Inportatutako fitxategia Unicode-rekin (UTF-8) irakurri."
 
 #: src/translators/bibteximporter.cpp:351
 #, kde-format
 msgid "Use user locale (%1) encoding"
-msgstr ""
+msgstr "Erabili erabiltzailearen tokiko (%1) kodeketa"
 
 #: src/translators/bibteximporter.cpp:359
 #, kde-format
 msgid "Read the imported file in the local encoding."
-msgstr ""
+msgstr "Inportatutako fitxategia kodeketa lokalean irakurri."
 
 #: src/translators/bibtexmlexporter.cpp:55
 #, kde-format
 msgid "Bibtexml Files"
-msgstr ""
+msgstr "Bibtexml fitxategiak"
 
 #: src/translators/boardgamegeekimporter.cpp:81
 #: src/translators/goodreadsimporter.cpp:87 src/translators/xsltimporter.cpp:80
 #: src/translators/xsltimporter.cpp:86
 #, kde-format
 msgid "A valid XSLT file is needed to import the file."
-msgstr ""
+msgstr "Balizko XSLT fitxategi bat behar da fitxategia inportatzeko."
 
 #: src/translators/boardgamegeekimporter.cpp:92
 #: src/translators/discogsimporter.cpp:80
 #: src/translators/goodreadsimporter.cpp:105
 #, kde-format
 msgid "A valid user ID must be entered."
-msgstr ""
+msgstr "Balizko erabiltzaile ID bat sartu behar da."
 
 #: src/translators/boardgamegeekimporter.cpp:243
 #, kde-format
@@ -6735,19 +6733,19 @@ msgstr ""
 #: src/translators/boardgamegeekimporter.cpp:249
 #, kde-format
 msgid "Import owned items only"
-msgstr ""
+msgstr "Inportatu jabe zaren elementuak bakarrik"
 
 #: src/translators/boardgamegeekimporter.cpp:252
 #: src/translators/discogsimporter.cpp:199
 #: src/translators/goodreadsimporter.cpp:153
-#, fuzzy, kde-format
+#, kde-format
 msgid "User ID:"
-msgstr "Erabiltzailea IDa:"
+msgstr "Erabiltzaile ID:"
 
 #: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:213
 #, kde-format
 msgid "CSV Options"
-msgstr ""
+msgstr "CSV aukerak"
 
 #: src/translators/csvexporter.cpp:142
 #, kde-format
@@ -6760,7 +6758,7 @@ msgid "If checked, a header row will be added with the field titles."
 msgstr ""
 
 #: src/translators/csvexporter.cpp:147
-#, fuzzy, kde-format
+#, kde-format
 msgid "Delimiter"
 msgstr "Bereizlea"
 
@@ -6772,55 +6770,57 @@ msgid ""
 msgstr ""
 
 #: src/translators/csvexporter.cpp:154
-#, fuzzy, kde-format
+#, kde-format
 msgid "Comma"
 msgstr "Koma"
 
 #: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:248
 #, kde-format
 msgid "Use a comma as the delimiter."
-msgstr ""
+msgstr "Erabili koma bat bereizle gisa."
 
 #: src/translators/csvexporter.cpp:160
-#, fuzzy, kde-format
+#, kde-format
 msgid "Semicolon"
 msgstr "Puntu eta koma"
 
 #: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:253
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
-msgstr ""
+msgstr "Erabili puntu eta koma bereizle gisa."
 
 #: src/translators/csvexporter.cpp:165
-#, fuzzy, kde-format
+#, kde-format
 msgid "Tab"
-msgstr "Tab"
+msgstr "Tabulazioa"
 
 #: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:258
 #, kde-format
 msgid "Use a tab as the delimiter."
-msgstr ""
+msgstr "Erabili tabulazio bat bereizle gisa."
 
 #: src/translators/csvexporter.cpp:170
 #: xslt/report-templates/Group_Statistics.xsl:75
-#, fuzzy, kde-format
+#, kde-format
 msgid "Other"
-msgstr "Bestelakoak"
+msgstr "Bestelakoa"
 
 #: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:263
 #, kde-format
 msgid "Use a custom string as the delimiter."
-msgstr ""
+msgstr "Erabili neurrira ipinitako kate bat bereizle gisa."
 
 #: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:270
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
+"Neurrira ipinitako kate bat, puntu eta koma bat esaterako, erabil daiteke "
+"bereizle gisa."
 
 #: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:294
 #, kde-format
 msgid "Table column delimiter:"
-msgstr ""
+msgstr "Taulako zutabe-bereizlea:"
 
 #: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:293
 #, kde-format
@@ -6831,7 +6831,7 @@ msgstr ""
 #: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:305
 #, kde-format
 msgid "Table row delimiter:"
-msgstr ""
+msgstr "Taulako errenkada-bereizlea:"
 
 #: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:304
 #, kde-format
@@ -6842,42 +6842,43 @@ msgstr ""
 #: src/translators/filelistingimporter.cpp:180
 #, kde-format
 msgid "Select the type of collection being imported."
-msgstr ""
+msgstr "Aukeratu inportatzen ari den bildumaren mota."
 
 #: src/translators/csvimporter.cpp:227
 #, kde-format
 msgid "&First row contains field titles"
-msgstr ""
+msgstr "&Lehenego errenkadak eremuen tituluak ditu"
 
 #: src/translators/csvimporter.cpp:228
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr ""
+"Markatuta badago, lehenego errenkada eremuen titulu gisa erabiltzen da."
 
 #: src/translators/csvimporter.cpp:240
-#, fuzzy, kde-format
+#, kde-format
 msgid "Delimiter:"
 msgstr "Bereizlea:"
 
 #: src/translators/csvimporter.cpp:246
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Comma"
-msgstr "Koma"
+msgstr "&Koma"
 
 #: src/translators/csvimporter.cpp:252
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Semicolon"
-msgstr "Puntu eta koma"
+msgstr "&Puntu eta koma"
 
 #: src/translators/csvimporter.cpp:257
-#, fuzzy, kde-format
+#, kde-format
 msgid "Ta&b"
-msgstr "TAB"
+msgstr "Ta&bulazioa"
 
 #: src/translators/csvimporter.cpp:262
-#, fuzzy, kde-format
+#, kde-format
 msgid "Ot&her:"
-msgstr "Bestelakoak"
+msgstr "&Bestelakoa:"
 
 #: src/translators/csvimporter.cpp:324
 #, kde-format
@@ -6893,19 +6894,19 @@ msgid ""
 msgstr ""
 
 #: src/translators/csvimporter.cpp:333
-#, fuzzy, kde-format
+#, kde-format
 msgid "Co&lumn:"
-msgstr "Zutabea"
+msgstr "&Zutabea:"
 
 #: src/translators/csvimporter.cpp:346
 #, kde-format
 msgid "&Data field in this column:"
-msgstr ""
+msgstr "&Datu-eremua zutabe honetan:"
 
 #: src/translators/csvimporter.cpp:360
 #, kde-format
 msgid "&Assign Field"
-msgstr ""
+msgstr "&Esleitu eremua"
 
 #: src/translators/csvimporter.cpp:399
 #, kde-format
@@ -6913,6 +6914,8 @@ msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
 "be imported."
 msgstr ""
+"Zutabe bat gutxienez eremu bati esleitu behar zaio. Esleitutako zutabeak "
+"bakarrik inportatuko dira."
 
 #: src/translators/csvimporter.cpp:596
 #, fuzzy, kde-format
@@ -6922,28 +6925,27 @@ msgstr "Berrikuspena"
 #: src/translators/csvimporter.cpp:689
 #, kde-format
 msgid "<New Field>"
-msgstr ""
+msgstr "<Eremu berria>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "«Discogs»en esteka"
+msgstr "«Discogs»en aukerak"
 
 #: src/translators/filelistingimporter.cpp:71
-#, fuzzy, kde-format
+#, kde-format
 msgid "Scanning files..."
 msgstr "Fitxategiak aztertzen..."
 
 #: src/translators/filelistingimporter.cpp:161
 #, kde-format
 msgid "File Listing Options"
-msgstr ""
+msgstr "Fitxategiak zerrendatzeko aukerak"
 
 #: src/translators/filelistingimporter.cpp:164
 #, kde-format
 msgid "Recursive folder search"
-msgstr ""
+msgstr "Karpeta bilaketa errepikaria"
 
 #: src/translators/filelistingimporter.cpp:165
 #, kde-format
@@ -7248,10 +7250,9 @@ msgstr "Guztira:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
-msgstr "Maileguak"
+msgstr "Mailegua"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
