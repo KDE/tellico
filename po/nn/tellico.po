@@ -622,8 +622,8 @@ msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr ""
-"<qt><p>Er du sikker på at du vil tilbakestilla eigenskapane for feltet "
-"<em>%1</em> til standardverdiane?</p></qt>"
+"<qt><p>Er du sikker på at du vil tilbakestilla eigenskapane for feltet <em>"
+"%1</em> til standardverdiane?</p></qt>"
 
 #: src/collectionfieldsdialog.cpp:812
 #, kde-format
@@ -6206,8 +6206,8 @@ msgstr ""
 "<h3>Tellico er eit verktøy for å halda oversikt i samlingar med bøker, "
 "filmar, musikk og alt anna du måtte ønskja.</h3><h3>Du kan leggja nye "
 "oppføringar til samlinga di ved å <a href=\"tc:///coll_new_entry\">skriva "
-"inn data manuelt</a> eller ved å <a href=\"tc:///"
-"edit_search_internet\">lasta ned data</a> frå ulike Internett-kjelder.</h3>"
+"inn data manuelt</a> eller ved å <a href=\"tc:///edit_search_internet"
+"\">lasta ned data</a> frå ulike Internett-kjelder.</h3>"
 
 #: src/mainwindow.cpp:1179
 #, kde-format
