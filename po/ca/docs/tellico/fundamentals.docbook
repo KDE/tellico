@@ -265,10 +265,10 @@
 ><interface
 >diàleg de configuració</interface
 ></link
->, juntament amb colors i tipus de lletra personalitzats.</para>
+>, juntament amb lletres i colors personalitzats.</para>
 
 <para
->Totes les plantilles predeterminades enalteixen el color i la selecció del tipus de lletra, però altres plantilles personalitzades potser no. Les plantilles predeterminades també tenen camps d'&URL; actius, les quals s'obriran amb l'associació de fitxer predeterminada del &kde;. Quan s'exporti a &HTML;, s'utilitzarà la plantilla actual per a exportar els fitxers d'entrada individuals. </para>
+>Totes les plantilles predeterminades enalteixen el color i la selecció de la lletra, però altres plantilles personalitzades potser no. Les plantilles predeterminades també tenen camps d'&URL; actius, les quals s'obriran amb l'associació de fitxer predeterminada del &kde;. Quan s'exporti a &HTML;, s'utilitzarà la plantilla actual per a exportar els fitxers d'entrada individuals. </para>
 
 </sect2>
 
@@ -1015,7 +1015,7 @@
 <para
 >Podeu modificar l'aparença de la sortida impresa modificant el fitxer <filename
 >tellico-printing.xsl</filename
->. El fitxer genera &HTML;, i el &CSS; dins del full d'estil que governa coses com el tipus de lletra, els marges, &etc; </para>
+>. El fitxer genera &HTML;, i el &CSS; dins del full d'estil que governa coses com la lletra, els marges, &etc; </para>
 </tip>
 
 <tip>

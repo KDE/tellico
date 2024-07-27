@@ -175,7 +175,7 @@
 >Vista d'entrada</interface
 > si s'utilitzen per a altres tipus. El botó <guilabel
 >Vista prèvia</guilabel
-> fa aparèixer una finestra per a mostrar una vista prèvia de l'aspecte de la plantilla. Els tipus de lletra i colors personalitzats es poden passar a la plantilla, i totes les plantilles predeterminades faran honor a aquestes opcions de configuració. No obstant això, les plantilles personalitzades podran optar per ignorar-los.</para>
+> fa aparèixer una finestra per a mostrar una vista prèvia de l'aspecte de la plantilla. Les lletres i els colors personalitzats es poden passar a la plantilla, i totes les plantilles predeterminades faran honor a aquestes opcions de configuració. No obstant això, les plantilles personalitzades podran optar per ignorar-los.</para>
 
 <para
 >Es poden instal·lar directament plantilles addicionals, o descarregar-les des de <ulink url="https://store.kde.org/"
