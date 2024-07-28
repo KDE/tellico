@@ -42,6 +42,7 @@
   <name xml:lang="uk">Tellico</name>
   <name xml:lang="x-test">xxTellicoxx</name>
   <name xml:lang="zh-CN">Tellico</name>
+  <name xml:lang="zh-TW">Tellico</name>
   <summary>Collection Manager</summary>
   <summary xml:lang="bs">Menadžer kolekcija</summary>
   <summary xml:lang="ca">Gestor de col·leccions</summary>
@@ -78,6 +79,7 @@
   <summary xml:lang="uk">Програма для керування збірками</summary>
   <summary xml:lang="x-test">xxCollection Managerxx</summary>
   <summary xml:lang="zh-CN">收藏管理器</summary>
+  <summary xml:lang="zh-TW">收藏管理員</summary>
   <description>
     <p>
       Tellico is an application for organizing your collections.
@@ -117,6 +119,7 @@
     <p xml:lang="tr">Tellico koleksiyonlarınızı yönetmek için bir programdır. Kitaplar, kaynakçalar, videolar, müzikler, video oyunları, paralar, pullar, kartlar, çizgi romanlar ve şaraplar için öntanımlı şablonlar içerir. Koleksiyonunuzu bir katalog veritabanına girmenize ve başlık, yazar gibi pek çok özelliğe göre kaydetmenize olanak tanır.</p>
     <p xml:lang="uk">Tellico — програма для упорядковування ваших збірок. У ній передбачено типові шаблони для збірок книг, бібліографій, відео, музичних творів, відеоігор, нумізматики, марок, карток, коміксів та вин. За її допомогою ви зможете вести записи у форматі бази даних, зберігаючи різноманітні дані щодо елементів збірки, зокрема дані щодо назви, автора тощо.</p>
     <p xml:lang="x-test">xxTellico is an application for organizing your collections. It provides default templates for books, bibliographies, videos, music, video games, coins, stamps, trading cards, comic books, and wines. It allows you to enter your collection in a catalogue database, saving many different properties like title, author, etc.xx</p>
+    <p xml:lang="zh-TW">Tellico 是一個用來管理您的收藏的應用程式。它提供書本、參考書目、影片、音樂、遊戲、錢幣、印章、卡牌、漫畫書，及紅酒的預設樣本。Tellico 讓您將收藏輸入資料目錄，並附上各種屬性，像是標題、作者等等。</p>
     <p>Features:</p>
     <p xml:lang="bs">Svojstva:</p>
     <p xml:lang="ca">Característiques:</p>
@@ -153,6 +156,7 @@
     <p xml:lang="uk">Можливості:</p>
     <p xml:lang="x-test">xxFeatures:xx</p>
     <p xml:lang="zh-CN">功能：</p>
+    <p xml:lang="zh-TW">功能：</p>
     <ul>
       <li>Supports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogs</li>
       <li xml:lang="bs">Podržava početne kolekcije knjiga, bibliografskih ulaza, videa, muzike, video igrica, stripova, kovanica, markica, kartica za razmjenu, vina, društvenih igara i datotečnih kataloga.</li>
@@ -188,6 +192,7 @@
       <li xml:lang="tr">Kitapların, kaynakça girdilerinin, videoların, müziklerin, video oyunlarının, çizgi romanların, paraların, pulların, kartların, şarapların, oyunların ve dosya katalogların öntanımlı koleksiyonlarını destekler</li>
       <li xml:lang="uk">Підтримка типових збірок книг, бібліографічних записів, відео, музики, відеоігор, коміксів, нумізматики, марок, карток, вин, настільних ігор та каталогів файлів.</li>
       <li xml:lang="x-test">xxSupports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogsxx</li>
+      <li xml:lang="zh-TW">預設支援書本、參考書目條目、影片、音樂、遊戲、漫畫書、錢幣、印章、卡牌、紅酒、桌上遊戲，與檔案目錄的收藏</li>
       <li>Supports user-defined custom collections</li>
       <li xml:lang="bs">Podržava korisnički definisane prilagođene kolekcije</li>
       <li xml:lang="ca">Funciona amb col·leccions personalitzades definides per l'usuari</li>
@@ -222,6 +227,7 @@
       <li xml:lang="tr">Kullanıcı tanımlı özel koleksiyonları destekler</li>
       <li xml:lang="uk">Підтримка визначених користувачем нетипових збірок.</li>
       <li xml:lang="x-test">xxSupports user-defined custom collectionsxx</li>
+      <li xml:lang="zh-TW">支援使用者定義的自訂收藏</li>
       <li>Supports any number of user-defined fields, of several different types: text, paragraph, list, checkbox, number, URL, date, images, and combinations</li>
       <li xml:lang="bs">Podržava bilo koji broj korisnički definisanih polja, nekoliko različitih tipova: tekst, paragraf, lista, kvadtratić za označavanje, broj, URL, datum, slike i kombinacije.</li>
       <li xml:lang="ca">Funciona amb qualsevol nombre de camps definits per l'usuari, de molts tipus diferents: text, paràgraf, llista, casella de selecció, nombre, URL, data, imatges i combinacions</li>
@@ -256,6 +262,7 @@
       <li xml:lang="tr">Çok farklı türlerde kullanıcı tanımlı alanları destekler: metin, paragraf, liste, işaret kutusu, sayı, URL, tarih, görseller ve bunların bileşimleri</li>
       <li xml:lang="uk">Підтримка довільної кількості визначених користувачем полів записів: текст, абзац, список, поле для позначки, номер, адреса, дата, зображення та будь-які інші комбінації.</li>
       <li xml:lang="x-test">xxSupports any number of user-defined fields, of several different types: text, paragraph, list, checkbox, number, URL, date, images, and combinationsxx</li>
+      <li xml:lang="zh-TW">支援任何使用者定義的欄位，並提供多種型態供選擇：文字、段落、列表、核取方塊、數字、網址、日期、影像及組合</li>
       <li>Handles entries with multiple authors, genres, keywords, etc</li>
       <li xml:lang="bs">Upravlja ulazima sa više autora, žanrova, ključnih riječi, itd.</li>
       <li xml:lang="ca">Gestiona entrades amb múltiples autors, gèneres, paraules clau, etc.</li>
@@ -290,6 +297,7 @@
       <li xml:lang="tr">Birden çok yazarı, türü ve anahtar sözcüğü işleyebilir</li>
       <li xml:lang="uk">Обробка записів з декількома авторами, жанрами, ключовими словами тощо.</li>
       <li xml:lang="x-test">xxHandles entries with multiple authors, genres, keywords, etcxx</li>
+      <li xml:lang="zh-TW">能夠處理有多個作者、風格、關鍵字等等的條目</li>
       <li>Automatically formats titles and names</li>
       <li xml:lang="bs">Automatski formatira naslove i imena</li>
       <li xml:lang="ca">Dona format als títols i als noms automàticament</li>
@@ -324,6 +332,7 @@
       <li xml:lang="tr">Başlık ve adları otomatik biçimlendirir</li>
       <li xml:lang="uk">Автоматичне форматування заголовків та назв.</li>
       <li xml:lang="x-test">xxAutomatically formats titles and namesxx</li>
+      <li xml:lang="zh-TW">自動格式化標題與名稱</li>
       <li>Supports collection searching and view filtering</li>
       <li xml:lang="bs">Podržava pretragu kolekcije i filter pregleda</li>
       <li xml:lang="ca">Admet la cerca de col·leccions i filtratge de la vista</li>
@@ -358,6 +367,7 @@
       <li xml:lang="tr">Koleksiyon araması ve süzerek görüntülemeyi destekler</li>
       <li xml:lang="uk">Підтримка пошуку у збірці та фільтрування даних для перегляду.</li>
       <li xml:lang="x-test">xxSupports collection searching and view filteringxx</li>
+      <li xml:lang="zh-TW">支援收藏搜尋與檢視過濾</li>
       <li>Sorts and groups collection by various properties</li>
       <li xml:lang="bs">Sortira i grupira kolekcije po različitim osobinama</li>
       <li xml:lang="ca">Ordena i agrupa les col·leccions per diverses propietats</li>
@@ -392,6 +402,7 @@
       <li xml:lang="tr">Koleksiyonları çeşitli özelliklerine göre sıralar ve gruplar</li>
       <li xml:lang="uk">Упорядковування та групування збірки за різноманітними властивостями.</li>
       <li xml:lang="x-test">xxSorts and groups collection by various propertiesxx</li>
+      <li xml:lang="zh-TW">依各種屬性排序或分組收藏</li>
       <li>Allows customizable entry templates through XSLT</li>
       <li xml:lang="bs">Dopušta prilagođene ulazne predloške preko XSLT</li>
       <li xml:lang="ca">Admet plantilles d'entrades personalitzades mitjançant XSLT</li>
@@ -426,6 +437,7 @@
       <li xml:lang="tr">XSLT üzerinden girdi şablonlarının özelleştirilmesine izin verir</li>
       <li xml:lang="uk">Придатні до налаштовування шаблони записів на основі XSLT.</li>
       <li xml:lang="x-test">xxAllows customizable entry templates through XSLTxx</li>
+      <li xml:lang="zh-TW">允許透過 XSLT 來自訂條目樣本</li>
       <li>Imports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formats</li>
       <li xml:lang="bs">Uvozi iz MODS, Bibtex, RIS, CSV, PDF metapodatke, i mnogih drugih formata</li>
       <li xml:lang="ca">Importa MODS, Bibtex, RIS, CSV, metadades de PDF, i molts altres formats</li>
@@ -460,6 +472,7 @@
       <li xml:lang="tr">MODS, Bibtex, RIS, CSV, PDF üst verisi ve pek çok diğer biçimi içe aktarır</li>
       <li xml:lang="uk">Імпортування метаданих MODS, Bibtex, RIS, CSV, PDF та даних у багатьох інших форматах.</li>
       <li xml:lang="x-test">xxImports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formatsxx</li>
+      <li xml:lang="zh-TW">能匯入 MODS、Bibtex、RIS、CSV、PDF 中繼資料及其他更多格式</li>
       <li>Exports to Bibtex, ONIX, CSV, HTML, and other formats</li>
       <li xml:lang="ca">Exporta a Bibtex, ONIX, CSV, HTML i altres formats</li>
       <li xml:lang="ca-valencia">Exporta cap a Bibtex, ONIX, CSV, HTML i altres formats</li>
@@ -493,6 +506,7 @@
       <li xml:lang="tr">Bibtex, ONIX, CSV, HTML, PilotDB ve pek çok diğer biçimi dışa aktarır</li>
       <li xml:lang="uk">Експортування даних у форматах Bibtex, ONIX, CSV, HTML тощо.</li>
       <li xml:lang="x-test">xxExports to Bibtex, ONIX, CSV, HTML, and other formatsxx</li>
+      <li xml:lang="zh-TW">匯出到 Bibtex、ONIX、CSV、HTML 及其他更多格式</li>
       <li>Imports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scripts</li>
       <li xml:lang="bs">Uvozi informacije direktno sa Amazon.com, IMDb, z39.50 servera, PubMed, SRU servera, CrossRef.org, različitih drugih web stranica, i iz vanjskih skripti</li>
       <li xml:lang="ca">Importa informació directament des d'Amazon.com, IMDb, servidors z39.50, PubMed, servidors SRU, CrossRef.org, altres llocs web, i des de scripts externs</li>
