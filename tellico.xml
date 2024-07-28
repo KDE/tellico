@@ -36,6 +36,7 @@
     <comment xml:lang="tr">Tellico Veri Dosyası</comment>
     <comment xml:lang="uk">файл даних Tellico</comment>
     <comment xml:lang="zh_CN">Tellico 数据文件</comment>
+    <comment xml:lang="zh_TW">Tellico 資料檔</comment>
     <glob pattern="*.tc"/>
     <glob pattern="*.bc"/>
   </mime-type>
