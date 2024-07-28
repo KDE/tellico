@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 01:49+0000\n"
-"PO-Revision-Date: 2024-07-26 09:56+0200\n"
+"PO-Revision-Date: 2024-07-27 16:52+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -562,6 +562,8 @@ msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
 "separated by a semi-colon."
 msgstr ""
+"თუ ჩართულია, Tellico დაამუშავებს მნიშვნელობებს ველებიდან, სადაც ერთზე მეტი "
+"მნიშვნელობაა, წერტილმძიმით გამოყოფილი."
 
 #: src/collectionfieldsdialog.cpp:310
 #, kde-format
@@ -669,6 +671,8 @@ msgid ""
 "must be less than the higher bound. Please enter different low and high "
 "properties."
 msgstr ""
+"რეიტინგის ველის შუალედი 1-10 და ქვედა საზღვარი ზედაზე ნაკლები უნდა იყოს. "
+"შეიყვანეთ სხვადასხვა დაბალი და მაღალი თვისებები."
 
 #: src/collectionfieldsdialog.cpp:973
 #, kde-format
@@ -2375,6 +2379,9 @@ msgid ""
 "slowly, stored in the Tellico application directory, or stored in a "
 "directory in the same location as the data file."
 msgstr ""
+"გამოსახულებები შეგიძლიათ შეინახოთ მონაცემების ფაილში, Tellico-ის შენელებას "
+"გამოიწვევს, დაიმახსოვროთ Tellico-ის აპლიკაციის საქაღალდეში ან იმავე "
+"საქაღალდეში, სადაც მონაცემების ფაილია."
 
 #: src/configdialog.cpp:259 src/configdialog.cpp:343
 #, kde-format
@@ -2828,6 +2835,9 @@ msgid ""
 "support lending an item multiple times. They will be removed from the list "
 "of items to lend."
 msgstr ""
+"შემდეგ საგნები უკვე გათხოვებულია, მაგრამ Tellico-ს ამჟამად ერთი და იგივე "
+"საგნის ორჯერ გათხოვების საშუალება არ გააჩნია. გასათხოვებლად საგანი ჯერ "
+"სიიდან უნდა წაშალოთ."
 
 #: src/core/filehandler.cpp:156
 #, kde-format
@@ -3039,6 +3049,8 @@ msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
 msgstr ""
+"თუ ჩართულია, ველის მნიშვნელობები ავტომატურად დაფორმატდება მათი ფორმატის "
+"ტიპიდან გამომდინარე."
 
 #: src/exportdialog.cpp:85
 #, kde-format
@@ -3104,6 +3116,9 @@ msgid ""
 "terms and conditions, <a href='%1'>sign up for an account</a>, and enter "
 "your information below."
 msgstr ""
+"მონაცემების წყაროსთან წვდომისთვის რეგისტრაციაა საჭირო. თუ ეთანხმებით "
+"გამოყენების პირობებს, <a href=\"%1\">დარეგისტრირდით</a> და შეიყვანეთ თქვენი "
+"ინფორმაცია ქვემოთ."
 
 #: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1105
 #: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:241
@@ -3360,6 +3375,8 @@ msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
 msgstr ""
+"Amazon.com მონაცემებს რამდენიმე სხვადასხვა ლოკალური ადგილიდან მოგაწვდით. "
+"აირჩიეთ, რომელი გნებავთ, გამოიყენოთ ამ მონაცემების წყაროსთვის."
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:211
 #: src/fetch/colnectfetcher.cpp:956 src/fetch/imdbfetcher.cpp:567
@@ -3411,6 +3428,8 @@ msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
 msgstr ""
+"ასევე შეგიძლიათ, გადმოწეროთ ყდის სურათიც. მაგრამ, კოლექციაში მეტისმეტად "
+"ბევრმა დიდმა სურათმა, შეიძლება, წარმადობა დააგდოს."
 
 #: src/fetch/amazonfetcher.cpp:1161
 #, kde-format
@@ -3788,6 +3807,8 @@ msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
 msgstr ""
+"კასტინგის სია, შეიძლება, ბევრ ხალხს შეიცავდეს. დააყენეთ მაქსიმალური "
+"რაოდენობა, რომელიც ძებნამ უნდა დააბრუნოს."
 
 #: src/fetch/filmaffinityfetcher.cpp:497
 #, kde-format
@@ -4406,6 +4427,8 @@ msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
 "the complete entry and show it in the view below."
 msgstr ""
+"თუ შედეგები ნაპოვნია, ისინი ამ სიას მიემატება. აირჩიეთ, რომელი გნებავთ, "
+"მთლიანად გადმოწეროთ და ქვედა ხედში აჩვენოთ."
 
 #: src/fetchdialog.cpp:274
 #, kde-format
@@ -4413,6 +4436,8 @@ msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
 msgstr ""
+"ჩანაწერი, შეიძლება, აქ იქნეს ნაჩვენები, სანამ ის მიმდინარე კოლექციას "
+"მიემატება, მისი ქვედა სიიდან არჩევით"
 
 #: src/fetchdialog.cpp:282
 #, kde-format
@@ -4975,6 +5000,8 @@ msgid ""
 "Append the contents of the imported file to the current collection. This is "
 "only possible when the collection types match."
 msgstr ""
+"შემოტანლი ფაილის შემცველობის ბოლოში მიწერა მიმდინარე კოლექციისთვის. ეს, "
+"მხოლოდ, მაშინაა შესაძლებელი, როცა კოლექციის ტიპები ემთხვევა."
 
 #: src/importdialog.cpp:100
 #, kde-format
@@ -4988,6 +5015,9 @@ msgid ""
 "only possible when the collection types match. Entries must match exactly in "
 "order to be merged."
 msgstr ""
+"შემოტანილი ფაილის შემცველობის შერწყმა მიმდინარე კოლექციაში. ეს, მხოლოდ, "
+"მაშინაა შესაძლებელი, როცა კოლექციის ტიპები ემთხვევა. ჩანაწერების "
+"შერწყმისთვის ისინი ზუსტად უნდა ემთხვეოდეს."
 
 #: src/importdialog.cpp:150 src/mainwindow.cpp:373
 #, kde-format
@@ -5082,6 +5112,8 @@ msgid ""
 "Enter the name of the person borrowing the items from you. Clicking the "
 "button allows you to select from your address book."
 msgstr ""
+"შეიყვანეთ პიროვნების სახელი, რომელსაც საგნებს თხოვნით. ღილაკზე დაწკაპუნებით "
+"მისი არჩევა მისამართების წიგნიდან შეგეძლებათ."
 
 #: src/loandialog.cpp:159
 #, kde-format
@@ -5094,6 +5126,8 @@ msgid ""
 "The check-out date is the date that you lent the items. By default, today's "
 "date is used."
 msgstr ""
+"ჩეკაუტის თარიღი ის თარიღია, როცა თქვენი საგნები გაათხოვეთ. ნაგულისხმევად "
+"გამოიყენება დღევანდელი თარიღი."
 
 #: src/loandialog.cpp:175
 #, kde-format
@@ -5106,6 +5140,8 @@ msgid ""
 "The due date is when the items are due to be returned. The due date is not "
 "required, unless you want to add the loan to your active calendar."
 msgstr ""
+"დადგომის თარიღია, როცა ელემენტები უნდა დაბრუნდეს. ეს თარიღი აუცილებელი არაა, "
+"თუ თქვენს აქტიურ კალენდარში სესხის ჩამატებას არ აპირებთ."
 
 #: src/loandialog.cpp:188
 #, kde-format
@@ -6070,6 +6106,8 @@ msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
 "qt>"
 msgstr ""
+"<qt><i>ჩანაწერის ხედი</i> ჩანაწერის შემცველობის დაფორმატებულ ხედს გაჩვენებთ."
+"</qt>"
 
 #: src/mainwindow.cpp:867
 #, kde-format
@@ -6082,6 +6120,8 @@ msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
 "</qt>"
 msgstr ""
+"<qt><i>სვეტის ხედი</i> თითოეული ჩანაწერისთვის ერთზე მეტი ველის მნიშვნელობას "
+"გაჩვენებთ.</qt>"
 
 #: src/mainwindow.cpp:891
 #, kde-format
@@ -6179,6 +6219,8 @@ msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
+"კოლექცია ამჯამად იფილტრება, რომ ჩანაწერების შეზღუდული რაოდენობა აჩვენოს. "
+"დაბეჭდილი იქნება, მხოლოდ, ხილული ჩანაწერები. გავაგრძელო?"
 
 #: src/mainwindow.cpp:1571
 #, kde-format
@@ -6264,6 +6306,8 @@ msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr ""
+"<qt><i>ფილტრის ხედი</i> გაჩვენებთ ჩანაწერებს, რომლებიც მითითებული ფილტრის "
+"წესებს აკმაყოფილებს.</qt>"
 
 #: src/mainwindow.cpp:2256
 #, kde-format
@@ -6276,6 +6320,8 @@ msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
+"<qt><i>თხოვების ხედი</i> გაჩვენებთ სიას ხალხისას, რომლებმაც თქვენი "
+"კოლექციიდან საგნები ითხოვეს.</qt>"
 
 #: src/mainwindow.cpp:2344
 #, kde-format
@@ -6283,6 +6329,9 @@ msgid ""
 "Some images are not saved in the configured location. The current file must "
 "be saved and the images will be transferred to the new location."
 msgstr ""
+"ზოგიერთი გამოსახულების შენახვა მორგებულ მდებარეობებზე შეუძლებელია. მიმდინარე "
+"ფაილი უნდა შეინახოთ და გამოსახულების ფაილები გადატანილი იქნება ახალ "
+"მდებარეობაზე."
 
 #: src/mainwindow.cpp:2385
 #, kde-format
@@ -6295,6 +6344,8 @@ msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr ""
+"Tellico-ს ამ ტიპის ფაილის შემოტანა ერთდროულად, მხოლოდ, ერთის შეუძლია. "
+"შემოტანილი იქნება, მხოლოდ, %1."
 
 #: src/mainwindow.cpp:2587
 #, kde-format
@@ -6459,6 +6510,8 @@ msgid ""
 "<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
 "books in that library could be overwritten.</qt>"
 msgstr ""
+"<qt>Alexandria-ის ბიბლიოთეკა სახელად <i>%1</i> უკვე არსებობს. ბიბლიოთეკაში "
+"არსებულ წიგნებს თავზე გადაეწერება.</qt>"
 
 #: src/translators/alexandriaimporter.cpp:239
 #, kde-format
@@ -6594,6 +6647,8 @@ msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will be "
 "escaped with either braces or quotation marks.</qt>"
 msgstr ""
+"<qt>ციტირების ტიპი bibtex-ის გატანისას. ყველა ველის მნიშვნელობები ციტირდება "
+"ან ფრჩხილებით, ან ბრჭყალებით.</qt>"
 
 #: src/translators/bibteximporter.cpp:110
 #, kde-format
@@ -6748,6 +6803,7 @@ msgstr "ცხრილის სვეტის გამყოფი:"
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
+"სვეტის გამყოფი ყოფს მნიშვნელობებს <i>ცხრილის</i> ველის თითოეულ მწკრივში."
 
 #: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:305
 #, kde-format
@@ -6758,6 +6814,7 @@ msgstr "ცხრილის მწკრივის გამყოფი:"
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
+"მწკრივის გამყოფი ყოფს მნიშვნელობებს <i>ცხრილის</i> ველის თითოეულ მწკრივში."
 
 #: src/translators/csvimporter.cpp:223
 #: src/translators/filelistingimporter.cpp:180
@@ -6835,6 +6892,8 @@ msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
 "be imported."
 msgstr ""
+"ველს სულ ცოტა ერთი სვეტი უნდა მიანიჭოთ. შემოტანილი იქნება, მხოლოდ, "
+"მინიჭებული სვეტები."
 
 #: src/translators/csvimporter.cpp:596
 #, kde-format
@@ -6882,6 +6941,8 @@ msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
 msgstr ""
+"თუ ჩართულია, შეიქმნება ფაილის შემცველობის მინიატურები, რომლებმაც, შეიძლება, "
+"საქაღალდის ჩამონათვალი შეანელოს."
 
 #: src/translators/freedbimporter.cpp:109
 #: src/translators/freedbimporter.cpp:192
@@ -6941,6 +7002,8 @@ msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
 "cache folders."
 msgstr ""
+"მონაცემების რეკურსიული წაკითხვა ყველა CDDB კეშის ფაილებიდან, რომელსაც "
+"ნაგულისხმევი კეშის საქაღალდეები შეიცავენ."
 
 #: src/translators/gcstarimporter.cpp:120
 #: src/translators/gcstarimporter.cpp:259
@@ -7105,6 +7168,8 @@ msgid ""
 "If checked, the images in the document will be included in the XML stream as "
 "base64 encoded elements."
 msgstr ""
+"თუ ჩართულია, დოკუმენტის გამოსახულებები XML ნაკადში base64-ში კოდირებული "
+"ელემენტების სახით ჩაისმება."
 
 #: src/translators/xmlstatehandler.cpp:127
 #, kde-format

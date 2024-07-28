@@ -4,20 +4,21 @@
 # Franklin Weng <franklin@goodhorse.idv.tw>, 2010, 2011, 2012, 2013, 2015.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2009.
 # pan93412 <pan93412@gmail.com>, 2019.
+# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 01:49+0000\n"
-"PO-Revision-Date: 2019-05-14 22:35+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2024-07-27 13:49+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 19.04.1\n"
+"X-Generator: Lokalize 24.04.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -96,12 +97,10 @@ msgid "Image List"
 msgstr "影像列表"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, fuzzy, kde-format
-#| msgctxt "Image List XSL Template"
-#| msgid "Image List"
+#, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "影像列表"
+msgstr "影像格線"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -164,10 +163,9 @@ msgstr "名稱"
 
 #: src/charts/collectionsizereport.cpp:48
 #: src/charts/collectionsizereport.cpp:122
-#, fuzzy, kde-format
-#| msgid "Collection Fields"
+#, kde-format
 msgid "Collection Size"
-msgstr "收藏欄位"
+msgstr "收藏大小"
 
 #: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1666
 #, kde-format
@@ -178,20 +176,17 @@ msgstr "所有項目：%1"
 #, fuzzy, kde-format
 #| msgid "Collection Fields"
 msgid "Collection Size Over Time"
-msgstr "收藏欄位"
+msgstr "收藏大小"
 
 #: src/charts/groupsummaryreport.cpp:62
-#, fuzzy, kde-format
-#| msgctxt "Group Summary XSL Template"
-#| msgid "Group Summary"
+#, kde-format
 msgid "Group Summary: %1"
-msgstr "群組摘要"
+msgstr "群組摘要：%1"
 
 #: src/charts/groupsummaryreport.cpp:68
-#, fuzzy, kde-format
-#| msgid "Total number of entries:"
+#, kde-format
 msgid "Total number of entries: %1"
-msgstr "總項目數："
+msgstr "總項目數：%1"
 
 #: src/charts/groupsummaryreport.cpp:122
 #, fuzzy, kde-format
@@ -208,17 +203,15 @@ msgstr "群組摘要"
 
 #: src/charts/yeardistributionreport.cpp:71
 #: src/charts/yeardistributionreport.cpp:135
-#, fuzzy, kde-format
-#| msgid "Distributor"
+#, kde-format
 msgid "Year Distribution"
-msgstr "發布器"
+msgstr "年份分佈"
 
 #: src/charts/yeardistributionreport.cpp:160
-#, fuzzy, kde-format
-#| msgid "Country"
+#, kde-format
 msgctxt "Distinct number of items"
 msgid "Count"
-msgstr "國家"
+msgstr "計數"
 
 #: src/cite/lyxpipe.cpp:57
 #, kde-format
@@ -283,10 +276,9 @@ msgid "Card Collection"
 msgstr "卡類收藏"
 
 #: src/collectionfactory.cpp:93
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "影片收藏"
+msgstr "遊戲收藏"
 
 #: src/collectionfactory.cpp:94
 #, kde-format
@@ -325,12 +317,10 @@ msgid "Add a new field to the collection"
 msgstr "新增欄位到收藏"
 
 #: src/collectionfieldsdialog.cpp:117
-#, fuzzy, kde-format
-#| msgctxt "Delete Field"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "Delete Field"
 msgid "Delete"
-msgstr "刪除(&D)"
+msgstr "刪除"
 
 #: src/collectionfieldsdialog.cpp:120
 #, kde-format
@@ -941,15 +931,14 @@ msgid "Number of Players"
 msgstr "玩家數"
 
 #: src/collections/boardgamecollection.cpp:81
-#, fuzzy, kde-format
-#| msgid "Running Time"
+#, kde-format
 msgid "Playing Time"
-msgstr "片長"
+msgstr "遊玩時間"
 
 #: src/collections/boardgamecollection.cpp:86
 #, kde-format
 msgid "Minimum Age"
-msgstr ""
+msgstr "最低年齡"
 
 #: src/collections/boardgamecollection.cpp:91
 #: src/collections/filecatalog.cpp:54 src/collections/gamecollection.cpp:90
@@ -1390,10 +1379,9 @@ msgid "Icon"
 msgstr "圖示"
 
 #: src/collections/gamecollection.cpp:35
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "我的影片"
+msgstr "我的遊戲"
 
 #: src/collections/gamecollection.cpp:57
 #, kde-format
@@ -1447,13 +1435,13 @@ msgstr "視窗"
 #, kde-format
 msgctxt "iOS Platform"
 msgid "iOS"
-msgstr ""
+msgstr "iOS"
 
 #: src/collections/gamecollection.cpp:240
 #, kde-format
 msgctxt "Android Platform"
 msgid "Android"
-msgstr ""
+msgstr "Android"
 
 #: src/collections/gamecollection.cpp:241
 #, kde-format
@@ -1466,16 +1454,14 @@ msgid "Xbox 360"
 msgstr "Xbox 360"
 
 #: src/collections/gamecollection.cpp:243
-#, fuzzy, kde-format
-#| msgid "Xbox"
+#, kde-format
 msgid "Xbox One"
-msgstr "Xbox"
+msgstr "Xbox One"
 
 #: src/collections/gamecollection.cpp:244
-#, fuzzy, kde-format
-#| msgid "Series"
+#, kde-format
 msgid "Xbox Series X"
-msgstr "級數"
+msgstr "Xbox Series X"
 
 #: src/collections/gamecollection.cpp:245
 #, kde-format
@@ -1493,16 +1479,14 @@ msgid "PlayStation3"
 msgstr "PlayStation3"
 
 #: src/collections/gamecollection.cpp:248
-#, fuzzy, kde-format
-#| msgid "PlayStation"
+#, kde-format
 msgid "PlayStation4"
-msgstr "PlayStation"
+msgstr "PlayStation4"
 
 #: src/collections/gamecollection.cpp:249
-#, fuzzy, kde-format
-#| msgid "PlayStation"
+#, kde-format
 msgid "PlayStation5"
-msgstr "PlayStation"
+msgstr "PlayStation5"
 
 #: src/collections/gamecollection.cpp:250
 #, kde-format
@@ -1511,10 +1495,9 @@ msgid "PSP"
 msgstr "PSP"
 
 #: src/collections/gamecollection.cpp:251
-#, fuzzy, kde-format
-#| msgid "PlayStation"
+#, kde-format
 msgid "PlayStation Vita"
-msgstr "PlayStation"
+msgstr "PlayStation Vita"
 
 #: src/collections/gamecollection.cpp:252
 #, kde-format
@@ -1594,19 +1577,14 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:277
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone, Early "
-#| "Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
 "Everyone, Early Childhood, Pending"
 msgid ""
 "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, "
 "Pending"
-msgstr "Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending"
+msgstr "未分級, 僅成人, 成熟, 青少年, 所有人, 幼童, 待處理"
 
 #: src/collections/musiccollection.cpp:34
 #, kde-format
@@ -2734,16 +2712,14 @@ msgstr "點擊以刪除選取的資料來源。"
 #: src/configdialog.cpp:1161 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
 #: src/translators/xsltimporter.cpp:133
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "XSL Files"
-msgstr "檔案"
+msgstr "XSL 檔案"
 
 #: src/configdialog.cpp:1162
-#, fuzzy, kde-format
-#| msgid "Templates"
+#, kde-format
 msgid "Template Packages"
-msgstr "樣本"
+msgstr "樣本套件"
 
 #: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1297
 #: src/mainwindow.cpp:1473 src/reportdialog.cpp:443 src/reportdialog.cpp:458
@@ -2758,10 +2734,9 @@ msgstr "樣本"
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:103
 #: src/translators/xsltexporter.cpp:107 src/translators/xsltimporter.cpp:130
 #: src/translators/xsltimporter.cpp:134
-#, fuzzy, kde-format
-#| msgid "*|All Files"
+#, kde-format
 msgid "All Files"
-msgstr "*|所有檔案"
+msgstr "所有檔案"
 
 #: src/configdialog.cpp:1192
 #, kde-format
@@ -2888,10 +2863,9 @@ msgid "Columns"
 msgstr "欄位"
 
 #: src/detailedlistview.cpp:541
-#, fuzzy, kde-format
-#| msgid "Hide All Columns"
+#, kde-format
 msgid "Hide This Column"
-msgstr "隱藏所有欄位"
+msgstr "隱藏這個欄位"
 
 #: src/detailedlistview.cpp:543
 #, kde-format
@@ -2984,11 +2958,10 @@ msgstr ""
 "<qt>圖示檢視會用圖示顯示收藏或群組中的每個項目（該項目可能是張影像）。</qt>"
 
 #: src/entryiconview.cpp:111
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgctxt "Open URL"
 msgid "Open %1"
-msgstr "開啟檔案"
+msgstr "開啟 %1"
 
 #: src/entrymatchdialog.cpp:56
 #, kde-format
@@ -3254,82 +3227,74 @@ msgid "Italy"
 msgstr "義大利"
 
 #: src/fetch/amazonfetcher.cpp:134
-#, fuzzy, kde-format
-#| msgid "Amazon (Spain)"
+#, kde-format
 msgid "Amazon (Brazil)"
-msgstr "Amazon（西班牙）"
+msgstr "Amazon（巴西）"
 
 #: src/fetch/amazonfetcher.cpp:138
 #, kde-format
 msgid "Brazil"
-msgstr ""
+msgstr "巴西"
 
 #: src/fetch/amazonfetcher.cpp:140
-#, fuzzy, kde-format
-#| msgid "Amazon (Italy)"
+#, kde-format
 msgid "Amazon (Australia)"
-msgstr "Amazon（義大利）"
+msgstr "Amazon（澳大利亞）"
 
 #: src/fetch/amazonfetcher.cpp:144
 #, kde-format
 msgid "Australia"
-msgstr ""
+msgstr "澳大利亞"
 
 #: src/fetch/amazonfetcher.cpp:146
-#, fuzzy, kde-format
-#| msgid "Amazon (Canada)"
+#, kde-format
 msgid "Amazon (India)"
-msgstr "Amazon（加拿大）"
+msgstr "Amazon（印度）"
 
 #: src/fetch/amazonfetcher.cpp:150
 #, kde-format
 msgid "India"
-msgstr ""
+msgstr "印度"
 
 #: src/fetch/amazonfetcher.cpp:152
-#, fuzzy, kde-format
-#| msgid "Amazon (US)"
+#, kde-format
 msgid "Amazon (Mexico)"
-msgstr "Amazon（美國）"
+msgstr "Amazon（墨西哥）"
 
 #: src/fetch/amazonfetcher.cpp:156
 #, kde-format
 msgid "Mexico"
-msgstr ""
+msgstr "墨西哥"
 
 #: src/fetch/amazonfetcher.cpp:158
-#, fuzzy, kde-format
-#| msgid "Amazon (France)"
+#, kde-format
 msgid "Amazon (Turkey)"
-msgstr "Amazon（法國）"
+msgstr "Amazon（土耳其）"
 
 #: src/fetch/amazonfetcher.cpp:162
 #, kde-format
 msgid "Turkey"
-msgstr ""
+msgstr "土耳其"
 
 #: src/fetch/amazonfetcher.cpp:164
-#, fuzzy, kde-format
-#| msgid "Amazon (Spain)"
+#, kde-format
 msgid "Amazon (Singapore)"
-msgstr "Amazon（西班牙）"
+msgstr "Amazon（新加坡）"
 
 #: src/fetch/amazonfetcher.cpp:168
 #, kde-format
 msgid "Singapore"
-msgstr ""
+msgstr "新加坡"
 
 #: src/fetch/amazonfetcher.cpp:170
-#, fuzzy, kde-format
-#| msgid "Amazon (US)"
+#, kde-format
 msgid "Amazon (UAE)"
-msgstr "Amazon（美國）"
+msgstr "Amazon（阿聯酋）"
 
 #: src/fetch/amazonfetcher.cpp:174
-#, fuzzy, kde-format
-#| msgid "United States"
+#, kde-format
 msgid "United Arab Emirates"
-msgstr "美國"
+msgstr "阿拉伯聯合大公國"
 
 #: src/fetch/amazonfetcher.cpp:199 src/fetch/filmasterfetcher.cpp:67
 #: src/fetch/springerfetcher.cpp:62
@@ -3492,16 +3457,14 @@ msgid "This source has no options."
 msgstr "此來源沒有選項。"
 
 #: src/fetch/bedethequefetcher.cpp:316 src/fetch/bedethequefetcher.cpp:431
-#, fuzzy, kde-format
-#| msgid "Color"
+#, kde-format
 msgid "Colorist"
-msgstr "顏色"
+msgstr "上色員"
 
 #: src/fetch/bedethequefetcher.cpp:324 src/fetch/bedethequefetcher.cpp:435
-#, fuzzy, kde-format
-#| msgid "Bedetheque.com"
+#, kde-format
 msgid "Bedetheque Link"
-msgstr "Bedetheque.com"
+msgstr "Bedetheque 連結"
 
 #: src/fetch/bedethequefetcher.cpp:433 src/field.cpp:312
 #, kde-format
@@ -3509,16 +3472,14 @@ msgid "ISBN#"
 msgstr "ISBN#"
 
 #: src/fetch/boardgamegeekfetcher.cpp:199
-#, fuzzy, kde-format
-#| msgid "BoardGameGeek"
+#, kde-format
 msgid "BoardGameGeek Link"
-msgstr "BoardGameGeek"
+msgstr "BoardGameGeek 連結"
 
 #: src/fetch/colnectfetcher.cpp:533 src/fetch/colnectfetcher.cpp:816
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "Colnect Link"
-msgstr "Allocine 連結"
+msgstr "Colnect 連結"
 
 #: src/fetch/colnectfetcher.cpp:552 src/fetch/colnectfetcher.cpp:822
 #, fuzzy, kde-format
@@ -3553,17 +3514,15 @@ msgid "Language: "
 msgstr "語言："
 
 #: src/fetch/colnectfetcher.cpp:966
-#, fuzzy, kde-format
-#| msgid "Country: "
+#, kde-format
 msgid "Country code: "
-msgstr "國家："
+msgstr "國家代碼："
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "Comic Vine Link"
-msgstr "Allocine 連結"
+msgstr "Comic Vine 連結"
 
 #: src/fetch/configwidget.cpp:41
 #, kde-format
@@ -3630,7 +3589,7 @@ msgstr "Discogs 連結"
 #: src/fetch/vgcollectfetcher.cpp:336 src/fetch/vgcollectfetcher.cpp:371
 #, kde-format
 msgid "Barcode"
-msgstr ""
+msgstr "條碼"
 
 #: src/fetch/discogsfetcher.cpp:335 src/fetch/discogsfetcher.cpp:548
 #, fuzzy, kde-format
@@ -3657,10 +3616,9 @@ msgid "Discogs Audio Search"
 msgstr "Discogs 音效搜尋"
 
 #: src/fetch/discogsfetcher.cpp:571 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "&User: "
+#, kde-format
 msgid "User token:"
-msgstr "使用者(&U)："
+msgstr "使用者權杖："
 
 #: src/fetch/doubanfetcher.cpp:366 src/fetch/doubanfetcher.cpp:384
 #: src/fetch/doubanfetcher.cpp:402 src/fetch/doubanfetcher.cpp:641
@@ -3824,10 +3782,9 @@ msgid "Raw Query"
 msgstr "原始查詢"
 
 #: src/fetch/filmaffinityfetcher.cpp:283 src/fetch/filmaffinityfetcher.cpp:462
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Filmaster 連結"
+msgstr "FilmAffinity 連結"
 
 #: src/fetch/filmaffinityfetcher.cpp:474 src/fetch/imdbfetcher.cpp:549
 #: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:608
@@ -3844,8 +3801,7 @@ msgid ""
 msgstr "一部電影的卡司清單可能會有很多人。請選擇搜尋傳回的最大數量。"
 
 #: src/fetch/filmaffinityfetcher.cpp:497
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "西班牙"
@@ -3854,7 +3810,7 @@ msgstr "西班牙"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "美國"
 
 #: src/fetch/filmasterfetcher.cpp:237 src/fetch/filmasterfetcher.cpp:314
 #, kde-format
@@ -3866,7 +3822,7 @@ msgstr "Filmaster 連結"
 #: src/fetch/gaminghistoryfetcher.cpp:372
 #, kde-format
 msgid "Gaming History Link"
-msgstr ""
+msgstr "Gaming History 連結"
 
 #: src/fetch/gcstarpluginfetcher.cpp:400
 #, kde-format
@@ -3896,7 +3852,7 @@ msgstr "作者："
 #: src/fetch/giantbombfetcher.cpp:202
 #, kde-format
 msgid "GiantBomb Link"
-msgstr ""
+msgstr "GiantBomb 連結"
 
 #: src/fetch/googlebookfetcher.cpp:257 src/fetch/googlebookfetcher.cpp:370
 #, kde-format
@@ -3933,10 +3889,9 @@ msgid "Internet Bookshop (ibs.it)"
 msgstr "網路書店（ibs.it）"
 
 #: src/fetch/igdbfetcher.cpp:365 src/fetch/igdbfetcher.cpp:576
-#, fuzzy, kde-format
-#| msgid "IMDb Link"
+#, kde-format
 msgid "IGDB Link"
-msgstr "IMDb 連結"
+msgstr "IGDB 連結"
 
 #: src/fetch/igdbfetcher.cpp:564
 #, fuzzy, kde-format
@@ -3948,7 +3903,7 @@ msgstr "網際網路電影資料庫（德文）"
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:347
 #, kde-format
 msgid "Screenshot"
-msgstr ""
+msgstr "螢幕截圖"
 
 #: src/fetch/imdbfetcher.cpp:458 src/fetch/imdbfetcher.cpp:529
 #, kde-format
@@ -3983,17 +3938,17 @@ msgstr "集數"
 #: src/fetch/imdbfetcher.cpp:583
 #, kde-format
 msgid "Locale"
-msgstr ""
+msgstr "地域"
 
 #: src/fetch/imdbfetcher.cpp:586
 #, kde-format
 msgid "Use system locale"
-msgstr ""
+msgstr "使用系統區域設定"
 
 #: src/fetch/imdbfetcher.cpp:587
 #, kde-format
 msgid "Use custom locale"
-msgstr ""
+msgstr "使用自訂區域設定"
 
 #: src/fetch/isbndbfetcher.cpp:359
 #, kde-format
@@ -4024,28 +3979,24 @@ msgid ""
 msgstr ""
 
 #: src/fetch/itunesfetcher.cpp:238 src/fetch/itunesfetcher.cpp:531
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "iTunes Link"
-msgstr "Allocine 連結"
+msgstr "iTunes 連結"
 
 #: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:667
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "KinoPoisk Link"
-msgstr "Discogs 連結"
+msgstr "KinoPoisk 連結"
 
 #: src/fetch/kinoteatrfetcher.cpp:236 src/fetch/kinoteatrfetcher.cpp:506
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "Kino-Teatr Link"
-msgstr "Filmaster 連結"
+msgstr "Kino-Teatr 連結"
 
 #: src/fetch/mobygamesfetcher.cpp:454 src/fetch/mobygamesfetcher.cpp:634
-#, fuzzy, kde-format
-#| msgid "Douban Link"
+#, kde-format
 msgid "MobyGames Link"
-msgstr "Douban 連結"
+msgstr "MobyGames 連結"
 
 #: src/fetch/moviemeterfetcher.cpp:217 src/fetch/moviemeterfetcher.cpp:290
 #, kde-format
@@ -4064,10 +4015,9 @@ msgid "Data source:"
 msgstr "資料來源"
 
 #: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:398
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "Numista Link"
-msgstr "Filmaster 連結"
+msgstr "Numista 連結"
 
 #: src/fetch/numistafetcher.cpp:403
 #, kde-format
@@ -4128,10 +4078,9 @@ msgid "OpenLibrary Link"
 msgstr "OpenLibrary 連結"
 
 #: src/fetch/rpggeekfetcher.cpp:208
-#, fuzzy, kde-format
-#| msgid "BoardGameGeek"
+#, kde-format
 msgid "RPGGeek Link"
-msgstr "BoardGameGeek"
+msgstr "RPGGeek 連結"
 
 #: src/fetch/srufetcher.cpp:506
 #, kde-format
@@ -4190,8 +4139,7 @@ msgid "Enter the result format used by the server."
 msgstr "輸入伺服器使用的結果格式。"
 
 #: src/fetch/srufetcher.cpp:610
-#, fuzzy, kde-format
-#| msgid "Fields"
+#, kde-format
 msgid "Field"
 msgstr "欄位"
 
@@ -4206,14 +4154,13 @@ msgstr "TMDb 連結"
 #: src/fetch/tvmazefetcher.cpp:179 src/fetch/tvmazefetcher.cpp:377
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "網路"
 
 #: src/fetch/themoviedbfetcher.cpp:632
-#, fuzzy, kde-format
-#| msgid "China"
+#, kde-format
 msgctxt "Language"
 msgid "Chinese"
-msgstr "中國"
+msgstr "中文"
 
 #: src/fetch/themoviedbfetcher.cpp:641
 #, kde-format
@@ -4231,7 +4178,7 @@ msgstr "西班牙文"
 #, kde-format
 msgctxt "Language"
 msgid "Russian"
-msgstr ""
+msgstr "俄語"
 
 #: src/fetch/themoviedbfetcher.cpp:690
 #, kde-format
@@ -4239,27 +4186,24 @@ msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB（%1）"
 
 #: src/fetch/thetvdbfetcher.cpp:254 src/fetch/thetvdbfetcher.cpp:563
-#, fuzzy, kde-format
-#| msgid "IMDb Link"
+#, kde-format
 msgid "TheTVDB Link"
-msgstr "IMDb 連結"
+msgstr "TheTVDB 連結"
 
 #: src/fetch/thetvdbfetcher.cpp:590
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr ""
+msgstr "訂閱者 PIN 碼："
 
 #: src/fetch/vgcollectfetcher.cpp:233 src/fetch/vgcollectfetcher.cpp:369
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Allocine 連結"
+msgstr "VGCollect 連結"
 
 #: src/fetch/videogamegeekfetcher.cpp:199
-#, fuzzy, kde-format
-#| msgid "BoardGameGeek"
+#, kde-format
 msgid "VideoGameGeek Link"
-msgstr "BoardGameGeek"
+msgstr "VideoGameGeek 連結"
 
 #: src/fetch/vndbfetcher.cpp:290 src/fetch/vndbfetcher.cpp:433
 #, kde-format
@@ -4521,7 +4465,7 @@ msgstr "清除所有搜尋欄位與結果"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p%"
 
 #: src/fetchdialog.cpp:392
 #, kde-format
@@ -4689,11 +4633,10 @@ msgstr "國際標準書目編號（ISBN）"
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
-msgstr ""
+msgstr "季數"
 
 #: src/field.cpp:344
-#, fuzzy, kde-format
-#| msgid "Episodes"
+#, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
 msgstr "集數"
@@ -4779,32 +4722,28 @@ msgstr "人物"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, fuzzy, kde-format
-#| msgid "Template:"
+#, kde-format
 msgid "Template Name:"
-msgstr "樣本："
+msgstr "樣本名稱："
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, fuzzy, kde-format
-#| msgid "Comments"
+#, kde-format
 msgid "Comment:"
-msgstr "註解"
+msgstr "備註："
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, fuzzy, kde-format
-#| msgid "Icon"
+#, kde-format
 msgid "Icon:"
-msgstr "圖示"
+msgstr "圖示："
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, fuzzy, kde-format
-#| msgid "Collection Report"
+#, kde-format
 msgid "Save As Collection Template"
-msgstr "收藏報告"
+msgstr "存為收藏樣本"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -4831,17 +4770,15 @@ msgstr "不等於"
 
 #: src/gui/filterrulewidget.cpp:236 src/gui/filterrulewidget.cpp:244
 #: src/gui/filterrulewidget.cpp:264
-#, fuzzy, kde-format
-#| msgid "matches regexp"
+#, kde-format
 msgid "matches regular expression"
-msgstr "符合正規表示式"
+msgstr "符合正則表達式"
 
 #: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
 #: src/gui/filterrulewidget.cpp:265
-#, fuzzy, kde-format
-#| msgid "does not match regexp"
+#, kde-format
 msgid "does not match regular expression"
-msgstr "不符合正規表示式"
+msgstr "不符合正則表達式"
 
 #: src/gui/filterrulewidget.cpp:238
 #, kde-format
@@ -4859,37 +4796,35 @@ msgstr "是後於"
 #, kde-format
 msgctxt "is less than a number"
 msgid "is less than"
-msgstr ""
+msgstr "小於"
 
 #: src/gui/filterrulewidget.cpp:247
 #, kde-format
 msgctxt "is greater than a number"
 msgid "is greater than"
-msgstr ""
+msgstr "大於"
 
 #: src/gui/filterrulewidget.cpp:250
-#, fuzzy, kde-format
-#| msgid "&Image size: "
+#, kde-format
 msgid "image size equals"
-msgstr "影像大小(&I)："
+msgstr "影像尺寸等於"
 
 #: src/gui/filterrulewidget.cpp:251
-#, fuzzy, kde-format
-#| msgid "does not equal"
+#, kde-format
 msgid "image size does not equal"
-msgstr "不等於"
+msgstr "影像尺寸不等於"
 
 #: src/gui/filterrulewidget.cpp:252
 #, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
-msgstr ""
+msgstr "影像尺寸小於"
 
 #: src/gui/filterrulewidget.cpp:253
 #, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
-msgstr ""
+msgstr "影像尺寸大於"
 
 #: src/gui/filterrulewidget.cpp:260
 #, kde-format
@@ -4928,10 +4863,9 @@ msgid "Save link only"
 msgstr "只儲存連結"
 
 #: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:523
-#, fuzzy, kde-format
-#| msgid "Small Image"
+#, kde-format
 msgid "All Images (%1)"
-msgstr "小"
+msgstr "所有影像 (%1)"
 
 #: src/gui/imagewidget.cpp:314
 #, kde-format
@@ -5081,77 +5015,65 @@ msgstr "匯入(&I)"
 
 #: src/importdialog.cpp:377 src/mainwindow.cpp:1293 src/mainwindow.cpp:1471
 #: src/translators/tellicozipexporter.cpp:54
-#, fuzzy, kde-format
-#| msgid "Tellico Zip File"
+#, kde-format
 msgid "Tellico Files"
-msgstr "Tellico Zip 檔"
+msgstr "Tellico 檔案"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
 #: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:76
-#, fuzzy, kde-format
-#| msgid "My Files"
+#, kde-format
 msgid "XML Files"
-msgstr "我的檔案"
+msgstr "XML 檔案"
 
 #: src/importdialog.cpp:382 src/translators/bibtexexporter.cpp:65
-#, fuzzy, kde-format
-#| msgid "Bibtex Key"
+#, kde-format
 msgid "Bibtex Files"
-msgstr "Bibtex 鍵值"
+msgstr "BibTeX 檔案"
 
 #: src/importdialog.cpp:386 src/translators/csvexporter.cpp:64
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "CSV Files"
-msgstr "檔案"
+msgstr "CSV 檔案"
 
 #: src/importdialog.cpp:400
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "RIS Files"
-msgstr "檔案"
+msgstr "RIS 檔案"
 
 #: src/importdialog.cpp:404 src/translators/gcstarexporter.cpp:62
-#, fuzzy, kde-format
-#| msgid "*.gcs|GCstar Data Files (*.gcs)"
+#, kde-format
 msgid "GCstar Data Files"
-msgstr "*.gcs|GCstar 資料檔 (*.gcs)"
+msgstr "GCstar 資料檔"
 
 #: src/importdialog.cpp:408
-#, fuzzy, kde-format
-#| msgid "*.amc|AMC Data Files (*.amc)"
+#, kde-format
 msgid "AMC Data Files"
-msgstr "*.amc|AMC 資料檔 (*.amc)"
+msgstr "AMC 資料檔"
 
 #: src/importdialog.cpp:412
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "PDF Files"
-msgstr "檔案"
+msgstr "PDF 檔案"
 
 #: src/importdialog.cpp:416
-#, fuzzy, kde-format
-#| msgid "Reorder Fields"
+#, kde-format
 msgid "Referencer Files"
-msgstr "重新排序欄位"
+msgstr "Referencer 檔案"
 
 #: src/importdialog.cpp:420
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "CIW Files"
-msgstr "檔案"
+msgstr "CIW 檔案"
 
 #: src/importdialog.cpp:424
-#, fuzzy, kde-format
-#| msgid "*.vinoxml|VinoXML Data Files (*.vinoxml)"
+#, kde-format
 msgid "VinoXML Data Files"
-msgstr "*.vinoxml|VinoXML 資料檔 (*.vinoxml)"
+msgstr "VinoXML 資料檔"
 
 #: src/importdialog.cpp:430
-#, fuzzy, kde-format
-#| msgid "Book Title"
+#, kde-format
 msgid "eBook Files"
-msgstr "書名"
+msgstr "電子書檔案"
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5255,16 +5177,14 @@ msgid "Borrower (Sort by Count)"
 msgstr "借用者（依計數排序）"
 
 #: src/main.cpp:169
-#, fuzzy, kde-format
-#| msgid "Tellico - a collection manager for KDE"
+#, kde-format
 msgid "Tellico - collection management software, free and simple"
-msgstr "Tellico - KDE 上的收藏管理員"
+msgstr "Tellico - 自由簡潔的收藏管理員"
 
 #: src/main.cpp:171
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2013, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr "(c) 2001-2013, Robby Stephenson"
+msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:175
 #, kde-format
@@ -5317,20 +5237,19 @@ msgid "Import <filename> as a RIS file"
 msgstr "將 <filename> 匯入為 RIS 檔"
 
 #: src/main.cpp:196
-#, fuzzy, kde-format
-#| msgid "Import <filename> as a MODS file"
+#, kde-format
 msgid "Import <filename> as a PDF file"
-msgstr "將 <filename> 匯入為 MODS 檔"
+msgstr "將 <filename> 匯入為 PDF 檔"
 
 #: src/main.cpp:197
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "記錄診斷輸出"
 
 #: src/main.cpp:198
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "將紀錄輸出寫至 <filename>"
 
 #: src/main.cpp:199
 #, kde-format
@@ -5338,10 +5257,9 @@ msgid "File to open"
 msgstr "要開啟的檔案"
 
 #: src/mainwindow.cpp:257
-#, fuzzy, kde-format
-#| msgid "Wine Collection"
+#, kde-format
 msgid "New Collection"
-msgstr "酒類收藏"
+msgstr "新增收藏"
 
 #: src/mainwindow.cpp:259
 #, kde-format
@@ -5439,16 +5357,14 @@ msgid "Create a new wine collection"
 msgstr "建立新的酒類收藏"
 
 #: src/mainwindow.cpp:305
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
 msgstr "新增遊戲收藏(&G)"
 
 #: src/mainwindow.cpp:306
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "建立新的影片收藏"
+msgstr "建立新的遊戲收藏"
 
 #: src/mainwindow.cpp:308
 #, kde-format
@@ -5501,16 +5417,14 @@ msgid "Save the document as a different file..."
 msgstr "將文件儲存為不同的檔案..."
 
 #: src/mainwindow.cpp:337
-#, fuzzy, kde-format
-#| msgid "Manage Templates"
+#, kde-format
 msgid "Save As Template..."
-msgstr "管理樣本"
+msgstr "存為樣本..."
 
 #: src/mainwindow.cpp:339
-#, fuzzy, kde-format
-#| msgid "Create a new collection"
+#, kde-format
 msgid "Save as a collection template"
-msgstr "建立新的收藏"
+msgstr "存為收藏樣本"
 
 #: src/mainwindow.cpp:342
 #, fuzzy, kde-format
@@ -6127,32 +6041,32 @@ msgstr "從所有可用來源更新項目資料"
 #: src/mainwindow.cpp:734
 #, kde-format
 msgid "Unlock Layout"
-msgstr ""
+msgstr "解除鎖定佈局"
 
 #: src/mainwindow.cpp:735
 #, kde-format
 msgid "Unlock the window's layout"
-msgstr ""
+msgstr "解除鎖定視窗的佈局"
 
 #: src/mainwindow.cpp:737
 #, kde-format
 msgid "Lock Layout"
-msgstr ""
+msgstr "鎖定佈局"
 
 #: src/mainwindow.cpp:738
 #, kde-format
 msgid "Lock the window's layout"
-msgstr ""
+msgstr "鎖定視窗的佈局"
 
 #: src/mainwindow.cpp:743
 #, kde-format
 msgid "Reset Layout"
-msgstr ""
+msgstr "重設佈局"
 
 #: src/mainwindow.cpp:744
 #, kde-format
 msgid "Reset the window's layout"
-msgstr ""
+msgstr "重設視窗的佈局"
 
 #: src/mainwindow.cpp:747
 #, fuzzy, kde-format
@@ -6168,7 +6082,7 @@ msgstr "開啟/關閉編輯器"
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "顯示紀錄"
 
 #: src/mainwindow.cpp:775
 #, kde-format
@@ -6740,12 +6654,12 @@ msgstr ""
 #: src/translators/bibteximporter.cpp:110
 #, kde-format
 msgid "No valid bibtex entries were found"
-msgstr "找不到合法的 bibtex 項目"
+msgstr "找不到有效的 bibtex 項目"
 
 #: src/translators/bibteximporter.cpp:129
 #, kde-format
 msgid "No valid bibtex entries were found in file - %1"
-msgstr "在檔案裡找不到合法的 bibtex 項目 - %1"
+msgstr "在檔案裡找不到有效的 bibtex 項目 - %1"
 
 #: src/translators/bibteximporter.cpp:349
 #, kde-format
@@ -6778,35 +6692,31 @@ msgstr "Bibtexml"
 #: src/translators/xsltimporter.cpp:86
 #, kde-format
 msgid "A valid XSLT file is needed to import the file."
-msgstr "要匯入檔案需要一個合法的 XSLT 檔。"
+msgstr "要匯入檔案需要一個有效的 XSLT 檔。"
 
 #: src/translators/boardgamegeekimporter.cpp:92
 #: src/translators/discogsimporter.cpp:80
 #: src/translators/goodreadsimporter.cpp:105
-#, fuzzy, kde-format
-#| msgid "A valid Goodreads user ID must be entered."
+#, kde-format
 msgid "A valid user ID must be entered."
-msgstr "必須輸入合法的 Goodreads 使用者代碼。"
+msgstr "必須輸入有效的使用者 ID。"
 
 #: src/translators/boardgamegeekimporter.cpp:243
-#, fuzzy, kde-format
-#| msgid "BoardGameGeek"
+#, kde-format
 msgid "BoardGameGeek Options"
-msgstr "BoardGameGeek"
+msgstr "BoardGameGeek 選項"
 
 #: src/translators/boardgamegeekimporter.cpp:249
-#, fuzzy, kde-format
-#| msgid "Export selected entries only"
+#, kde-format
 msgid "Import owned items only"
-msgstr "只匯出選取的項目。"
+msgstr "只匯入擁有的項目"
 
 #: src/translators/boardgamegeekimporter.cpp:252
 #: src/translators/discogsimporter.cpp:199
 #: src/translators/goodreadsimporter.cpp:153
-#, fuzzy, kde-format
-#| msgid "User ID"
+#, kde-format
 msgid "User ID:"
-msgstr "使用者 ID"
+msgstr "使用者 ID："
 
 #: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:213
 #, kde-format
@@ -6986,16 +6896,14 @@ msgid "Review"
 msgstr ""
 
 #: src/translators/csvimporter.cpp:689
-#, fuzzy, kde-format
-#| msgid "New Field"
+#, kde-format
 msgid "<New Field>"
-msgstr "新增欄位"
+msgstr "<新欄位>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Discogs 連結"
+msgstr "Discogs 選項"
 
 #: src/translators/filelistingimporter.cpp:71
 #, kde-format
@@ -7091,7 +6999,7 @@ msgstr "從預設的快取資料夾裡所有的 CDDB 快取檔中遞迴地讀取
 #: src/translators/gcstarimporter.cpp:259
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
-msgstr "<qt>檔案不是合法的 GCstar 資料檔。</qt>"
+msgstr "<qt>檔案不是有效的 GCstar 資料檔。</qt>"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -7139,10 +7047,9 @@ msgid "Loading %1..."
 msgstr "載入 %1 中..."
 
 #: src/translators/librarythingimporter.cpp:178
-#, fuzzy, kde-format
-#| msgid "Formatting Options"
+#, kde-format
 msgid "LibraryThing Options"
-msgstr "格式化選項"
+msgstr "LibraryThing 選項"
 
 #: src/translators/librarythingimporter.cpp:181
 #, kde-format
@@ -7153,10 +7060,9 @@ msgstr ""
 
 #: src/translators/librarythingimporter.cpp:189
 #: src/translators/librarythingimporter.cpp:194
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "JSON Files"
-msgstr "檔案"
+msgstr "JSON 檔案"
 
 #: src/translators/librarythingimporter.cpp:199
 #, kde-format
@@ -7164,34 +7070,29 @@ msgid "LibraryThing file:"
 msgstr ""
 
 #: src/translators/marcimporter.cpp:132
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#, kde-format
 msgid "Tellico was unable to read any data."
-msgstr "Tellico 無法讀取此 PDF 檔的任何中繼資料。"
+msgstr "Tellico 無法讀取任何資料。"
 
 #: src/translators/marcimporter.cpp:151
-#, fuzzy, kde-format
-#| msgid "CSV Options"
+#, kde-format
 msgid "MARC Options"
-msgstr "CVS 選項"
+msgstr "MARC 選項"
 
 #: src/translators/marcimporter.cpp:156
-#, fuzzy, kde-format
-#| msgid "Ch&aracter set: "
+#, kde-format
 msgid "Character set:"
-msgstr "字元集(&A)："
+msgstr "字元集："
 
 #: src/translators/marcimporter.cpp:161
-#, fuzzy, kde-format
-#| msgid "Format: "
+#, kde-format
 msgid "MARC Format:"
-msgstr "格式："
+msgstr "MARC 格式："
 
 #: src/translators/onixexporter.cpp:71
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "Zip Files"
-msgstr "檔案"
+msgstr "Zip 檔案"
 
 #: src/translators/onixexporter.cpp:178
 #, kde-format
@@ -7308,8 +7209,7 @@ msgstr "總計："
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
 msgstr "借貸"
 
