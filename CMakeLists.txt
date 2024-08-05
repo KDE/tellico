@@ -4,7 +4,18 @@ cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 project(Tellico)
 set(TELLICO_VERSION "3.5.99+git")
 
+if(DEFINED BUILD_WITH_QT6)
+  set(GLOBAL_BUILD_WITH_QT6 ${BUILD_WITH_QT6})
+endif()
+
 find_package(ECM REQUIRED NO_MODULE)
+# ECM uses the required version to determine whether to build with Qt6
+# Instead, use the installed version and assume building with Qt6 unless
+# BUILD_WITH_QT6=OFF was passed to cmake
+if(NOT DEFINED GLOBAL_BUILD_WITH_QT6 AND
+   ECM_VERSION VERSION_GREATER_EQUAL 5.240)
+  option(BUILD_WITH_QT6 "Build against Qt 6" ON)
+endif()
 
 if(POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW)
