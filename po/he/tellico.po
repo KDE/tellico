@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 01:49+0000\n"
-"PO-Revision-Date: 2024-08-04 01:14+0300\n"
+"PO-Revision-Date: 2024-08-04 21:19+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -62,13 +62,13 @@ msgstr "מצומצם"
 #, kde-format
 msgctxt "Title Listing (Vertical) XSL Template"
 msgid "Title Listing (Vertical)"
-msgstr ""
+msgstr "הצגת כותרות (אנכית)"
 
 #. i18n: file: xslt/report-templates/Group_View.xsl
 #, kde-format
 msgctxt "Group View XSL Template"
 msgid "Group View"
-msgstr "תצוגת קבוצה"
+msgstr "תצוגת קיבוץ"
 
 #. i18n: file: xslt/report-templates/Loan_View.xsl
 #, kde-format
@@ -80,7 +80,7 @@ msgstr "תצוגת השאלה"
 #, kde-format
 msgctxt "Title Listing (Horizontal) XSL Template"
 msgid "Title Listing (Horizontal)"
-msgstr ""
+msgstr "הצגת כותרות (אופקית)"
 
 #. i18n: file: xslt/report-templates/Group_Summary.xsl
 #, kde-format
@@ -147,10 +147,10 @@ msgstr "אין מפתחות ציטוט כפולים."
 #, kde-format
 msgid "There is %1 duplicate citation key."
 msgid_plural "There are %1 duplicate citation keys."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "יש מפתח ציטוט כפול."
+msgstr[1] "יש שני מפתחות ציטוט כפולים."
+msgstr[2] "יש %1 מפתחות ציטוט כפולים."
+msgstr[3] "יש %1 מפתחות ציטוט כפולים."
 
 #: src/borrowerdialog.cpp:74
 #, kde-format
@@ -573,7 +573,7 @@ msgstr ""
 #: src/collectionfieldsdialog.cpp:341
 #, kde-format
 msgid "Revert the selected field's properties to the default values."
-msgstr ""
+msgstr "להסיג את מאפייני השדה הנבחר לערכי ברירת המחדל."
 
 #: src/collectionfieldsdialog.cpp:398
 #, kde-format
@@ -587,11 +587,13 @@ msgid ""
 "in the collection may cause data corruption. Do you want to keep your "
 "modified values or cancel and revert to the current ones?</qt>"
 msgstr ""
+"<qt>הסרת ערכים מורשים מהשדה <i>%1</i> שקיימים כרגע באוסף יכול לפגום בנתונים. "
+"לשמור את הערכים ששינית או לבטל ולהסיג לנוכחיים?</qt>"
 
 #: src/collectionfieldsdialog.cpp:416
 #, kde-format
 msgid "Keep modified values"
-msgstr ""
+msgstr "לשמור על הערכים שהשתנו"
 
 #: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:518
 #, kde-format
@@ -609,6 +611,8 @@ msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr ""
+"<qt><p>להסיג את מאפייני השדה <em>%1</em> בחזרה לערך ברירת המחדל שלהם?</p></"
+"qt>"
 
 #: src/collectionfieldsdialog.cpp:812
 #, kde-format
@@ -634,12 +638,12 @@ msgstr "ערך"
 #: src/collectionfieldsdialog.cpp:923
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
-msgstr ""
+msgstr "כבר קיים שדה עם הכותרת הזאת. נא למלא כותרת אחרת."
 
 #: src/collectionfieldsdialog.cpp:930
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
-msgstr ""
+msgstr "<qt>הקטגוריה לא יכולה להיות ריקה. נא למלא קטגוריה.</qt>"
 
 #: src/collectionfieldsdialog.cpp:938
 #, kde-format
@@ -648,13 +652,15 @@ msgid ""
 "<em>Table</em> or <em>Image</em> field. Please enter a different category.</"
 "qt>"
 msgstr ""
+"<qt>שדה לא יכול להיות באותה קטגוריה כמו שדות מסוג <em>פסקה</em>, <em>טבלה</"
+"em> או <em>תמונה</em>. נא לבחור בקטגוריה אחרת.</qt>"
 
 #: src/collectionfieldsdialog.cpp:946
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
-msgstr ""
+msgstr "כותרת של שדה לא יכולה להיות זהה לקטגוריה קיימת. נא למלא כותרת שונה."
 
 #: src/collectionfieldsdialog.cpp:958
 #, kde-format
@@ -663,16 +669,18 @@ msgid ""
 "must be less than the higher bound. Please enter different low and high "
 "properties."
 msgstr ""
+"טווח שדה דירוג חייב להיות בין 1 ל־10 והגבול התחתון חייב להיות קטן מהעליון. "
+"נא למלא מאפייני נמוך וגבוה אחרים."
 
 #: src/collectionfieldsdialog.cpp:973
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
-msgstr ""
+msgstr "טבלאות מוגבלות לכמות מרבית של עשר עמודות."
 
 #: src/collectionfieldsdialog.cpp:979
 #, kde-format
 msgid "A field with a derived value must have a value template."
-msgstr ""
+msgstr "לשדה עם ערך נגזר חייבת להיות תבנית ערך."
 
 #: src/collections/bibtexcollection.cpp:81
 #, kde-format
@@ -682,7 +690,7 @@ msgstr "סוג רשימה"
 #: src/collections/bibtexcollection.cpp:85
 #, kde-format
 msgid "These entry types are specific to bibtex. See the bibtex documentation."
-msgstr ""
+msgstr "סוגי הרשומות האלה הם נקודתיים ל־bibtex. כדאי לעיין בתיעוד של bibtex."
 
 #: src/collections/bibtexcollection.cpp:88
 #: src/collections/bookcollection.cpp:52
@@ -797,12 +805,12 @@ msgstr "יומן"
 #: src/collections/bibtexcollection.cpp:172 src/fetch/fetchmanager.cpp:67
 #, kde-format
 msgid "DOI"
-msgstr ""
+msgstr "DOI"
 
 #: src/collections/bibtexcollection.cpp:175
 #, kde-format
 msgid "Digital Object Identifier"
-msgstr ""
+msgstr "מזהה עצם דיגיטלי"
 
 #: src/collections/bibtexcollection.cpp:180
 #, kde-format
@@ -1074,7 +1082,7 @@ msgstr "מגזין"
 #: src/collections/bookcollection.cpp:67
 #, kde-format
 msgid "Binding"
-msgstr ""
+msgstr "כריכה"
 
 #: src/collections/bookcollection.cpp:93
 #, kde-format
@@ -1220,7 +1228,7 @@ msgstr "חלוקה"
 #: src/collections/coincollection.cpp:67
 #, kde-format
 msgid "Mint Mark"
-msgstr ""
+msgstr "סימן מטבעה"
 
 #: src/collections/coincollection.cpp:73
 #: src/collections/comicbookcollection.cpp:96
@@ -1250,6 +1258,9 @@ msgid ""
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 msgstr ""
+"מוכח-65,מוכח-60,מצב מטבעה-65,מצב מטבעה-60,כמעט שלא נכנסלמחזור-55,כמעט שלא "
+"נכנס למחזור-50,מעולה ביותר-40,מעולה מאוד-30,מעולהמאוד-20,מעולה-12,טוב מאוד-8,"
+"טוב-4,סביר"
 
 #: src/collections/coincollection.cpp:99 src/collections/stampcollection.cpp:91
 #, kde-format
@@ -1260,7 +1271,7 @@ msgstr "דירוג"
 #, kde-format
 msgctxt "Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "PCGS,NGC,ANACS,ICG,ASA,PCI"
-msgstr ""
+msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 
 #: src/collections/coincollection.cpp:108
 #, kde-format
@@ -1309,7 +1320,7 @@ msgctxt ""
 "Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,"
 "Poor"
 msgid "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
-msgstr ""
+msgstr "מטבעה,כמעט מטבעה,מעולה ביותר,מעולה,טוב מאוד,טוב,סביר,עלוב"
 
 #: src/collections/filecatalog.cpp:34
 #, kde-format
@@ -1396,7 +1407,7 @@ msgstr "פיתוח"
 #: src/collections/gamecollection.cpp:85
 #, kde-format
 msgid "ESRB Rating"
-msgstr ""
+msgstr "דירוג ESRB"
 
 #: src/collections/gamecollection.cpp:93
 #: src/collections/videocollection.cpp:187
@@ -1573,6 +1584,7 @@ msgid ""
 "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, "
 "Pending"
 msgstr ""
+"ללא הגבלה, למבוגרים בלבד, בגירים, נוער, מעל 10, כולם, ילדים רכים, ממתין"
 
 #: src/collections/musiccollection.cpp:34
 #, kde-format
@@ -1582,7 +1594,7 @@ msgstr "המוזיקה שלי"
 #: src/collections/musiccollection.cpp:46
 #, kde-format
 msgid "Album"
-msgstr ""
+msgstr "אלבום"
 
 #: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:422
 #: src/fetch/doubanfetcher.cpp:454 src/fetch/doubanfetcher.cpp:588
@@ -1594,7 +1606,7 @@ msgstr ""
 #: src/translators/freedbimporter.cpp:467
 #, kde-format
 msgid "Compact Disc"
-msgstr ""
+msgstr "תקליטור"
 
 #: src/collections/musiccollection.cpp:50
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1043
@@ -1602,25 +1614,25 @@ msgstr ""
 #: src/fetch/upcitemdbfetcher.cpp:427 src/translators/discogsimporter.cpp:169
 #, kde-format
 msgid "DVD"
-msgstr ""
+msgstr "DVD"
 
 #: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:427
 #: src/translators/discogsimporter.cpp:166
 #, kde-format
 msgid "Cassette"
-msgstr ""
+msgstr "קלטת"
 
 #: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:425
 #: src/translators/discogsimporter.cpp:164
 #, kde-format
 msgid "Vinyl"
-msgstr ""
+msgstr "תקליט"
 
 #: src/collections/musiccollection.cpp:51
 #: src/collections/videocollection.cpp:49
 #, kde-format
 msgid "Medium"
-msgstr ""
+msgstr "אמצעי"
 
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:484
@@ -1628,18 +1640,18 @@ msgstr ""
 #: src/translators/xmlstatehandler.cpp:435
 #, kde-format
 msgid "Artist"
-msgstr ""
+msgstr "אומן או אומנית"
 
 #: src/collections/musiccollection.cpp:62
 #, kde-format
 msgid "Label"
-msgstr ""
+msgstr "חברת תקליטים"
 
 #: src/collections/musiccollection.cpp:79 src/tests/discogsfetchertest.cpp:307
 #: src/tests/itunesfetchertest.cpp:209 src/tests/musicbrainzfetchertest.cpp:228
 #, kde-format
 msgid "Tracks"
-msgstr ""
+msgstr "רצועות"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:483 src/fetch/fetchmanager.cpp:62
@@ -1648,30 +1660,30 @@ msgstr ""
 #: src/translators/xmlstatehandler.cpp:434
 #, kde-format
 msgid "Title"
-msgstr ""
+msgstr "כותר"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:485
 #: src/fetch/itunesfetcher.cpp:319 src/translators/audiofileimporter.cpp:237
 #: src/translators/xmlstatehandler.cpp:436
 #, kde-format
 msgid "Length"
-msgstr ""
+msgstr "אורך"
 
 #: src/collections/stampcollection.cpp:33
 #, kde-format
 msgid "My Stamps"
-msgstr ""
+msgstr "החותמות שלי"
 
 #: src/collections/stampcollection.cpp:73
 #, kde-format
 msgid "Issue Year"
-msgstr ""
+msgstr "שנת הנפקה"
 
 #: src/collections/stampcollection.cpp:78
 #: src/collections/videocollection.cpp:174
 #, kde-format
 msgid "Color"
-msgstr ""
+msgstr "צבע"
 
 #: src/collections/stampcollection.cpp:83
 #, kde-format
@@ -1688,7 +1700,7 @@ msgstr ""
 #: src/collections/stampcollection.cpp:96
 #, kde-format
 msgid "Cancelled"
-msgstr ""
+msgstr "מבוטל"
 
 #: src/collections/stampcollection.cpp:101
 #, kde-format
@@ -1698,7 +1710,7 @@ msgstr ""
 #: src/collections/stampcollection.cpp:106
 #, kde-format
 msgid "Centering"
-msgstr ""
+msgstr "מירכוז"
 
 #: src/collections/stampcollection.cpp:111
 #, kde-format
@@ -1708,397 +1720,397 @@ msgstr ""
 #: src/collections/stampcollection.cpp:135 src/field.cpp:202
 #, kde-format
 msgid "Image"
-msgstr ""
+msgstr "תמונה"
 
 #: src/collections/videocollection.cpp:34
 #, kde-format
 msgid "My Videos"
-msgstr ""
+msgstr "הסרטונים שלי"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1029
 #: src/fetch/upcitemdbfetcher.cpp:405
 #, kde-format
 msgid "VHS"
-msgstr ""
+msgstr "קלטת וידאו"
 
 #: src/collections/videocollection.cpp:48
 #, kde-format
 msgid "VCD"
-msgstr ""
+msgstr "VCD - וידאו דיסק"
 
 #: src/collections/videocollection.cpp:48
 #, kde-format
 msgid "DivX"
-msgstr ""
+msgstr "DivX"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1023
 #: src/fetch/upcitemdbfetcher.cpp:399
 #, kde-format
 msgid "Blu-ray"
-msgstr ""
+msgstr "Blu-ray"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1026
 #: src/fetch/upcitemdbfetcher.cpp:402
 #, kde-format
 msgid "HD DVD"
-msgstr ""
+msgstr "HD DVD"
 
 #: src/collections/videocollection.cpp:54
 #, kde-format
 msgid "Production Year"
-msgstr ""
+msgstr "שנת ההפקה"
 
 #: src/collections/videocollection.cpp:61
 #, kde-format
 msgctxt "Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 msgid "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
-msgstr ""
+msgstr "G (ארה״ב),PG (ארה״ב),PG-13 (ארה״ב),R (ארה״ב), U (ארה״ב)"
 
 #: src/collections/videocollection.cpp:63
 #, kde-format
 msgid "Certification"
-msgstr ""
+msgstr "הסמכה"
 
 #: src/collections/videocollection.cpp:75
 #, kde-format
 msgid "Region 0"
-msgstr ""
+msgstr "אזור 0"
 
 #: src/collections/videocollection.cpp:76
 #, kde-format
 msgid "Region 1"
-msgstr ""
+msgstr "אזור 1"
 
 #: src/collections/videocollection.cpp:77
 #, kde-format
 msgid "Region 2"
-msgstr ""
+msgstr "אזור 2"
 
 #: src/collections/videocollection.cpp:78
 #, kde-format
 msgid "Region 3"
-msgstr ""
+msgstr "אזור 3"
 
 #: src/collections/videocollection.cpp:79
 #, kde-format
 msgid "Region 4"
-msgstr ""
+msgstr "אזור 4"
 
 #: src/collections/videocollection.cpp:80
 #, kde-format
 msgid "Region 5"
-msgstr ""
+msgstr "אזור 5"
 
 #: src/collections/videocollection.cpp:81
 #, kde-format
 msgid "Region 6"
-msgstr ""
+msgstr "אזור 6"
 
 #: src/collections/videocollection.cpp:82
 #, kde-format
 msgid "Region 7"
-msgstr ""
+msgstr "אזור 7"
 
 #: src/collections/videocollection.cpp:83
 #, kde-format
 msgid "Region 8"
-msgstr ""
+msgstr "אזור 8"
 
 #: src/collections/videocollection.cpp:84
 #, kde-format
 msgid "Region"
-msgstr ""
+msgstr "אזור"
 
 #: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:316
 #: src/fetch/discogsfetcher.cpp:545
 #, kde-format
 msgid "Nationality"
-msgstr ""
+msgstr "לאום"
 
 #: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1039
 #: src/fetch/upcitemdbfetcher.cpp:415
 #, kde-format
 msgid "NTSC"
-msgstr ""
+msgstr "NTSC"
 
 #: src/collections/videocollection.cpp:96
 #, kde-format
 msgid "PAL"
-msgstr ""
+msgstr "PAL"
 
 #: src/collections/videocollection.cpp:96
 #, kde-format
 msgid "SECAM"
-msgstr ""
+msgstr "SECAM"
 
 #: src/collections/videocollection.cpp:97
 #, kde-format
 msgid "Format"
-msgstr ""
+msgstr "תסדיר"
 
 #: src/collections/videocollection.cpp:102
 #, kde-format
 msgid "Cast"
-msgstr ""
+msgstr "צוות שחקנים"
 
 #: src/collections/videocollection.cpp:104
 #: src/translators/xmlstatehandler.cpp:438
 #, kde-format
 msgid "Actor/Actress"
-msgstr ""
+msgstr "שחקן או שחקנית"
 
 #: src/collections/videocollection.cpp:105
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Role"
-msgstr ""
+msgstr "תפקיד"
 
 #: src/collections/videocollection.cpp:108
 #, kde-format
 msgid "A table for the cast members, along with the roles they play"
-msgstr ""
+msgstr "רשימת חברי צוות השחקנים, לרבות התפקידים אותם הם משחקים"
 
 #: src/collections/videocollection.cpp:111
 #, kde-format
 msgid "Director"
-msgstr ""
+msgstr "בימוי"
 
 #: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:323
 #: src/fetch/discogsfetcher.cpp:544 src/fetch/rpggeekfetcher.cpp:205
 #, kde-format
 msgid "Producer"
-msgstr ""
+msgstr "הפקה"
 
 #: src/collections/videocollection.cpp:129
 #, kde-format
 msgid "Composer"
-msgstr ""
+msgstr "הלחנה"
 
 #: src/collections/videocollection.cpp:135
 #, kde-format
 msgid "Studio"
-msgstr ""
+msgstr "סטודיו"
 
 #: src/collections/videocollection.cpp:141
 #, kde-format
 msgid "Language Tracks"
-msgstr ""
+msgstr "רצועות שפה"
 
 #: src/collections/videocollection.cpp:147
 #, kde-format
 msgid "Subtitle Languages"
-msgstr ""
+msgstr "שפות כתוביות"
 
 #: src/collections/videocollection.cpp:153
 #, kde-format
 msgid "Audio Tracks"
-msgstr ""
+msgstr "רצועות שמע"
 
 #: src/collections/videocollection.cpp:159
 #, kde-format
 msgid "Running Time"
-msgstr ""
+msgstr "זמן ריצה"
 
 #: src/collections/videocollection.cpp:161
 #, kde-format
 msgid "The running time of the video (in minutes)"
-msgstr ""
+msgstr "זמן הריצה של הווידאו (בדקות)"
 
 #: src/collections/videocollection.cpp:164
 #, kde-format
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "יחס גובה־רוחב"
 
 #: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1012
 #: src/fetch/upcitemdbfetcher.cpp:385
 #, kde-format
 msgid "Widescreen"
-msgstr ""
+msgstr "מסך רחב"
 
 #: src/collections/videocollection.cpp:174
 #, kde-format
 msgid "Black & White"
-msgstr ""
+msgstr "שחור ולבן"
 
 #: src/collections/videocollection.cpp:175
 #, kde-format
 msgid "Color Mode"
-msgstr ""
+msgstr "מצב צבע"
 
 #: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1033
 #: src/fetch/upcitemdbfetcher.cpp:409
 #, kde-format
 msgid "Director's Cut"
-msgstr ""
+msgstr "גרסת הבמאי"
 
 #: src/collections/winecollection.cpp:33
 #, kde-format
 msgid "My Wines"
-msgstr ""
+msgstr "היינות שלי"
 
 #: src/collections/winecollection.cpp:50
 #, kde-format
 msgctxt "Wine Producer"
 msgid "Producer"
-msgstr ""
+msgstr "יצרן"
 
 #: src/collections/winecollection.cpp:56
 #, kde-format
 msgid "Appellation"
-msgstr ""
+msgstr "אפלאסיון"
 
 #: src/collections/winecollection.cpp:62
 #, kde-format
 msgid "Varietal"
-msgstr ""
+msgstr "זני"
 
 #: src/collections/winecollection.cpp:68
 #, kde-format
 msgid "Vintage"
-msgstr ""
+msgstr "בציר"
 
 #: src/collections/winecollection.cpp:74
 #, kde-format
 msgid "Red Wine"
-msgstr ""
+msgstr "יין אדום"
 
 #: src/collections/winecollection.cpp:74
 #, kde-format
 msgid "White Wine"
-msgstr ""
+msgstr "יין לבן"
 
 #: src/collections/winecollection.cpp:74
 #, kde-format
 msgid "Sparkling Wine"
-msgstr ""
+msgstr "יין מבעבע"
 
 #: src/collections/winecollection.cpp:104
 #, kde-format
 msgid "Drink By"
-msgstr ""
+msgstr "לשתות עד"
 
 #: src/collections/winecollection.cpp:118
 #, kde-format
 msgid "Label Image"
-msgstr ""
+msgstr "תמונת תווית"
 
 #: src/commands/addentries.cpp:41
 #, kde-format
 msgid "Add Entries"
-msgstr ""
+msgstr "הוספת רשומות"
 
 #: src/commands/addentries.cpp:42
 #, kde-format
 msgctxt "Add (Entry Title)"
 msgid "Add %1"
-msgstr ""
+msgstr "הוספת %1"
 
 #: src/commands/addloans.cpp:47
 #, kde-format
 msgid "Check-out Items"
-msgstr ""
+msgstr "מסירת פריטים"
 
 #: src/commands/addloans.cpp:48
 #, kde-format
 msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
-msgstr ""
+msgstr "מסירת %1"
 
 #: src/commands/collectioncommand.cpp:54
 #, kde-format
 msgid "Append Collection"
-msgstr ""
+msgstr "הוספה לסוף האוסף"
 
 #: src/commands/collectioncommand.cpp:57
 #, kde-format
 msgid "Merge Collection"
-msgstr ""
+msgstr "מיזוג אוסף"
 
 #: src/commands/collectioncommand.cpp:60
 #, kde-format
 msgid "Replace Collection"
-msgstr ""
+msgstr "החלפת אוסף"
 
 #: src/commands/fieldcommand.cpp:59
 #, kde-format
 msgid "Add %1 Field"
-msgstr ""
+msgstr "הוספת שדה %1"
 
 #: src/commands/fieldcommand.cpp:62
 #, kde-format
 msgid "Modify %1 Field"
-msgstr ""
+msgstr "שינוי שדה %1"
 
 #: src/commands/fieldcommand.cpp:65
 #, kde-format
 msgid "Delete %1 Field"
-msgstr ""
+msgstr "מחיקת שדה %1"
 
 #: src/commands/filtercommand.cpp:56
 #, kde-format
 msgid "Add Filter"
-msgstr ""
+msgstr "הוספת מסנן"
 
 #: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:58
 #: src/filterview.cpp:132
 #, kde-format
 msgid "Modify Filter"
-msgstr ""
+msgstr "שינוי מסנן"
 
 #: src/commands/filtercommand.cpp:62 src/filterview.cpp:134
 #, kde-format
 msgid "Delete Filter"
-msgstr ""
+msgstr "מחיקת מסנן"
 
 #: src/commands/modifyentries.cpp:50 src/commands/modifyentries.cpp:70
 #: src/entryeditdialog.cpp:391 src/entryeditdialog.cpp:395
 #, kde-format
 msgid "Modify Entries"
-msgstr ""
+msgstr "שינוי רשומות"
 
 #: src/commands/modifyentries.cpp:51 src/commands/modifyentries.cpp:71
 #: src/commands/updateentries.cpp:91
 #, kde-format
 msgctxt "Modify (Entry Title)"
 msgid "Modify %1"
-msgstr ""
+msgstr "שינוי %1"
 
 #: src/commands/modifyloans.cpp:36 src/loandialog.cpp:78
 #, kde-format
 msgid "Modify Loan"
-msgstr ""
+msgstr "שינוי השאלה"
 
 #: src/commands/removeentries.cpp:41
 #, kde-format
 msgid "Delete Entries"
-msgstr ""
+msgstr "מחיקת רשומות"
 
 #: src/commands/removeentries.cpp:42
 #, kde-format
 msgctxt "Delete (Entry Title)"
 msgid "Delete %1"
-msgstr ""
+msgstr "מחיקת %1"
 
 #: src/commands/removeloans.cpp:40
 #, kde-format
 msgid "Check-in Entries"
-msgstr ""
+msgstr "רשומות קליטה"
 
 #: src/commands/removeloans.cpp:41
 #, kde-format
 msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
-msgstr ""
+msgstr "קליטת %1"
 
 #: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:311
 #, kde-format
 msgid "Rename Collection"
-msgstr ""
+msgstr "שינוי שם אוסף"
 
 #: src/commands/reorderfields.cpp:36
 #, kde-format
 msgid "Reorder Fields"
-msgstr ""
+msgstr "שינוי סדר שדות"
 
 #: src/config/tellico_config.kcfg:80
 #, kde-format
@@ -2148,7 +2160,7 @@ msgstr ""
 #: src/config/tellico_config.kcfg:497
 #, kde-format
 msgid "Template font"
-msgstr ""
+msgstr "גופן תבנית"
 
 #. i18n: ectx: label, entry (baseColorBook), group (Options - book)
 #. i18n: ectx: label, entry (baseColorVideo), group (Options - video)
@@ -2172,7 +2184,7 @@ msgstr ""
 #: src/config/tellico_config.kcfg:501
 #, kde-format
 msgid "Template background color"
-msgstr ""
+msgstr "צבע רקע תבנית"
 
 #. i18n: ectx: label, entry (textColorBook), group (Options - book)
 #. i18n: ectx: label, entry (textColorVideo), group (Options - video)
@@ -2196,7 +2208,7 @@ msgstr ""
 #: src/config/tellico_config.kcfg:505
 #, kde-format
 msgid "Template text color"
-msgstr ""
+msgstr "צבע כתב תבנית"
 
 #. i18n: ectx: label, entry (highlightedBaseColorBook), group (Options - book)
 #. i18n: ectx: label, entry (highlightedBaseColorVideo), group (Options - video)
@@ -2220,7 +2232,7 @@ msgstr ""
 #: src/config/tellico_config.kcfg:509
 #, kde-format
 msgid "Template highlight color"
-msgstr ""
+msgstr "צבע הדגשת תבנית"
 
 #. i18n: ectx: label, entry (highlightedTextColorBook), group (Options - book)
 #. i18n: ectx: label, entry (highlightedTextColorVideo), group (Options - video)
@@ -2244,7 +2256,7 @@ msgstr ""
 #: src/config/tellico_config.kcfg:513
 #, kde-format
 msgid "Template highlighted text color"
-msgstr ""
+msgstr "צבע הדגשת כתב תבנית"
 
 #. i18n: ectx: label, entry (linkColorBook), group (Options - book)
 #. i18n: ectx: label, entry (linkColorVideo), group (Options - video)
@@ -2268,89 +2280,89 @@ msgstr ""
 #: src/config/tellico_config.kcfg:517
 #, kde-format
 msgid "Template link color"
-msgstr ""
+msgstr "צבע קישור תבנית"
 
 #: src/configdialog.cpp:98
 #, kde-format
 msgid "Configure Tellico"
-msgstr ""
+msgstr "הגדרת Tellico"
 
 #: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
 #: src/configdialog.cpp:334
 #, kde-format
 msgid "Printing"
-msgstr ""
+msgstr "הדפסה"
 
 #: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
 #: src/configdialog.cpp:411
 #, kde-format
 msgid "Templates"
-msgstr ""
+msgstr "תבניות"
 
 #: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:614
 #, kde-format
 msgid "Data Sources"
-msgstr ""
+msgstr "מקורות נתונים"
 
 #: src/configdialog.cpp:204
 #, kde-format
 msgid "General Options"
-msgstr ""
+msgstr "אפשרויות כלליות"
 
 #: src/configdialog.cpp:215
 #, kde-format
 msgid "&Reopen file at startup"
-msgstr ""
+msgstr "פתיחת קבצים מ&חדש עם ההפעלה"
 
 #: src/configdialog.cpp:216
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
 "up."
-msgstr ""
+msgstr "אם האפשרות מסומנת, הקובץ האחרון שנפתח ייפתח מחדש עם עליית התוכנית."
 
 #: src/configdialog.cpp:221
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
-msgstr ""
+msgstr "הפעלת &ביטויים רגולריים במסנן המהיר"
 
 #: src/configdialog.cpp:222
 #, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
-msgstr ""
+msgstr "אם האפשרות מסומנת, המסנן המהיר יפענח את הטקסט כביטוי רגולרי."
 
 #: src/configdialog.cpp:227
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
-msgstr ""
+msgstr "להפ&עיל מצלמה כדי לסרוק ברקודים"
 
 #: src/configdialog.cpp:228
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
 "searching."
-msgstr ""
+msgstr "אם האפשרות מסומנת, הקלט מהמצלמה ישמש לסריקת ברקודים לחיפוש."
 
 #: src/configdialog.cpp:233
 #, kde-format
 msgid "Image Storage Options"
-msgstr ""
+msgstr "אפשרויות אחסון תמונות"
 
 #: src/configdialog.cpp:235
 #, kde-format
 msgid "Store images in data file"
-msgstr ""
+msgstr "אחסון תמונות בקובץ נתונים"
 
 #: src/configdialog.cpp:236
 #, kde-format
 msgid "Store images in common application directory"
-msgstr ""
+msgstr "אחסון תמונות בתיקיית יישום משותפת"
 
 #: src/configdialog.cpp:237
 #, kde-format
 msgid "Store images in directory relative to data file"
-msgstr ""
+msgstr "אחסון תמונות בתיקייה ביחס לקובץ הנתונים"
 
 #: src/configdialog.cpp:238
 #, kde-format
@@ -2359,36 +2371,39 @@ msgid ""
 "slowly, stored in the Tellico application directory, or stored in a "
 "directory in the same location as the data file."
 msgstr ""
+"אפשר לשמור תמונות בקובץ הנתונים עצמו, מה שעלול לגרום להאט את Tellico, כדי "
+"להימנע מכך כדאי לאחסן את התמונות בתיקיית היישום של Tellico או בתיקייה לצד "
+"קובץ הנתונים."
 
 #: src/configdialog.cpp:259 src/configdialog.cpp:343
 #, kde-format
 msgid "Formatting Options"
-msgstr ""
+msgstr "אפשרויות סידור בתבנית"
 
 #: src/configdialog.cpp:264
 #, kde-format
 msgid "Auto capitalize &titles and names"
-msgstr ""
+msgstr "הגדלת אותיות ראשונות ב&כותרים ושמות"
 
 #: src/configdialog.cpp:265
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
-msgstr ""
+msgstr "אם האפשרות מסומנת, אותיות ראשונות בכותרות ובשמות יוגדלו אוטומטית."
 
 #: src/configdialog.cpp:270
 #, kde-format
 msgid "Auto &format titles and names"
-msgstr ""
+msgstr "&עיצוב כותרים ושמות אוטומטית"
 
 #: src/configdialog.cpp:271 src/configdialog.cpp:349
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
-msgstr ""
+msgstr "אם האפשרות מסומנת, כותרות ושמות תסודרנה אוטומטית בתבנית."
 
 #: src/configdialog.cpp:281
 #, kde-format
 msgid "No capitali&zation:"
-msgstr ""
+msgstr "ללא הגדלת אותיות &ראשונות:"
 
 #: src/configdialog.cpp:286
 #, kde-format
@@ -2396,11 +2411,13 @@ msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
 "be separated by a semi-colon.</qt>"
 msgstr ""
+"<qt>רשימה של מילים שאין להגדיל להן את האות הראשונה. אם יש יותר ממילה יש "
+"להפריד בין המילים בנקודה־פסיק.</qt>"
 
 #: src/configdialog.cpp:292
 #, kde-format
 msgid "Artic&les:"
-msgstr ""
+msgstr "&תוויות:"
 
 #: src/configdialog.cpp:297
 #, kde-format
@@ -2409,11 +2426,13 @@ msgid ""
 "first word in a title. Multiple values should be separated by a semi-colon.</"
 "qt>"
 msgstr ""
+"<qt>רשימה של מילים שיש להחשיב כתוויות אם הן המילים הראשונות בכותר.אם יש יותר "
+"ממילה אחת, יש להפריד בין המילים בנקודה־פסיק.</qt>"
 
 #: src/configdialog.cpp:304
 #, kde-format
 msgid "Personal suffi&xes:"
-msgstr ""
+msgstr "&סיומות לשם הפרטי:"
 
 #: src/configdialog.cpp:309
 #, kde-format
@@ -2421,11 +2440,13 @@ msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
 msgstr ""
+"<qt>רשימת סיומות אפשריות לשמות פרטיים. אם יש יותר מאחת, יש להפריד ביניהן "
+"בנקודה־פסיק.</qt>"
 
 #: src/configdialog.cpp:315
 #, kde-format
 msgid "Surname &prefixes:"
-msgstr ""
+msgstr "קידומות לשם מש&פחה:"
 
 #: src/configdialog.cpp:320
 #, kde-format
@@ -2433,75 +2454,77 @@ msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
 msgstr ""
+"<qt>רשימת קידומות שאפשר להשתמש בהם בשמות משפחה. אם יש יותר מערך אחד יש "
+"להפריד ביניהם בנקודה־פסיק.</qt>"
 
 #: src/configdialog.cpp:335
 #, kde-format
 msgid "Printing Options"
-msgstr ""
+msgstr "אפשרויות הדפסה"
 
 #: src/configdialog.cpp:348
 #, kde-format
 msgid "&Format titles and names"
-msgstr ""
+msgstr "&עיצוב כותרים ושמות"
 
 #: src/configdialog.cpp:353
 #, kde-format
 msgid "&Print field headers"
-msgstr ""
+msgstr "ה&דפסת כותרות שדות"
 
 #: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
-msgstr ""
+msgstr "אם האפשרות מסומנת, שמות השדות יודפסו ככותרות הטבלה."
 
 #: src/configdialog.cpp:358
 #, kde-format
 msgid "Grouping Options"
-msgstr ""
+msgstr "אפשרויות קיבוץ"
 
 #: src/configdialog.cpp:363
 #, kde-format
 msgid "&Group the entries"
-msgstr ""
+msgstr "&קיבוץ האפשרויות"
 
 #: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
-msgstr ""
+msgstr "אם האפשרות מסומנת, הרשומות תקובצנה לפי השדה הנבחר."
 
 #: src/configdialog.cpp:368
 #, kde-format
 msgid "Image Options"
-msgstr ""
+msgstr "אפשרויות תמונה"
 
 #: src/configdialog.cpp:374
 #, kde-format
 msgid "Maximum image &width:"
-msgstr ""
+msgstr "&רוחב תמונה מרבי:"
 
 #: src/configdialog.cpp:383
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
-msgstr ""
+msgstr "הרוחב המרבי לתמונות בתדפיס. יחס גובה־רוחב נשמר."
 
 #: src/configdialog.cpp:389
 #, kde-format
 msgid "&Maximum image height:"
-msgstr ""
+msgstr "&גובה תמונה מרבי:"
 
 #: src/configdialog.cpp:398
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
-msgstr ""
+msgstr "הגובה המרבי לתמונות בתדפיס. יחס גובה־רוחב נשמר."
 
 #: src/configdialog.cpp:412
 #, kde-format
 msgid "Template Options"
-msgstr ""
+msgstr "אפשרויות תבנית"
 
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
@@ -2510,12 +2533,12 @@ msgstr ""
 #: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Collection &type:"
-msgstr ""
+msgstr "סוג &אוסף:"
 
 #: src/configdialog.cpp:433
 #, kde-format
 msgid "Template:"
-msgstr ""
+msgstr "תבנית:"
 
 #: src/configdialog.cpp:438
 #, kde-format
@@ -2523,16 +2546,18 @@ msgid ""
 "Select the template to use for the current type of collections. Not all "
 "templates will use the font and color settings."
 msgstr ""
+"נא לבחור את התבנית לשימוש לסוג האוספים הנוכחי. לא כל התבניות תשתמשנה בהגדרות "
+"גופן וצבע."
 
 #: src/configdialog.cpp:445
 #, kde-format
 msgid "&Preview..."
-msgstr ""
+msgstr "&תצוגה מקדימה..."
 
 #: src/configdialog.cpp:446
 #, kde-format
 msgid "Show a preview of the template"
-msgstr ""
+msgstr "הצגת תצוגה מקדימה של התבנית"
 
 #. i18n("The options below will be passed to the template, but not "
 #. "all templates will use them. Some fonts and colors may be "
@@ -2542,102 +2567,102 @@ msgstr ""
 #: src/configdialog.cpp:463
 #, kde-format
 msgid "Font Options"
-msgstr ""
+msgstr "אפשרויות גופן"
 
 #: src/configdialog.cpp:470
 #, kde-format
 msgid "Font:"
-msgstr ""
+msgstr "גופן:"
 
 #: src/configdialog.cpp:476
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
-msgstr ""
+msgstr "הגופן הזה מועבר לתבנית ונעשה בו שימוש לתצוגת הרשומות."
 
 #: src/configdialog.cpp:480
 #, kde-format
 msgid "Size:"
-msgstr ""
+msgstr "גודל:"
 
 #: src/configdialog.cpp:492
 #, kde-format
 msgid "Color Options"
-msgstr ""
+msgstr "אפשרויות צבע"
 
 #: src/configdialog.cpp:499
 #, kde-format
 msgid "Background color:"
-msgstr ""
+msgstr "צבע רקע:"
 
 #: src/configdialog.cpp:505
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
-msgstr ""
+msgstr "הצבע הזה מועבר לתבנית ונעשה בו שימוש לתצוגת הרשומות."
 
 #: src/configdialog.cpp:509
 #, kde-format
 msgid "Text color:"
-msgstr ""
+msgstr "צבע כתב:"
 
 #: src/configdialog.cpp:518
 #, kde-format
 msgid "Highlight color:"
-msgstr ""
+msgstr "צבע הדגשה:"
 
 #: src/configdialog.cpp:527
 #, kde-format
 msgid "Highlighted text color:"
-msgstr ""
+msgstr "צבע טקסט מודגש:"
 
 #: src/configdialog.cpp:536
 #, kde-format
 msgid "Link color:"
-msgstr ""
+msgstr "צבע קישור:"
 
 #: src/configdialog.cpp:545
 #, kde-format
 msgid "Manage Templates"
-msgstr ""
+msgstr "ניהול תבניות"
 
 #: src/configdialog.cpp:555
 #, kde-format
 msgid "Install..."
-msgstr ""
+msgstr "התקנה…"
 
 #: src/configdialog.cpp:559
 #, kde-format
 msgid "Click to install a new template directly."
-msgstr ""
+msgstr "לחיצה כאן תאפשר להתקין תבנית חדשה ישירות."
 
 #: src/configdialog.cpp:564 src/configdialog.cpp:567 src/configdialog.cpp:571
 #, kde-format
 msgid "Download..."
-msgstr ""
+msgstr "הורדה…"
 
 #: src/configdialog.cpp:576
 #, kde-format
 msgid "Click to download additional templates."
-msgstr ""
+msgstr "לחיצה כאן תאפשר לך להוריד תבניות נוספות."
 
 #: src/configdialog.cpp:579
 #, kde-format
 msgid "Delete..."
-msgstr ""
+msgstr "מחיקה…"
 
 #: src/configdialog.cpp:583
 #, kde-format
 msgid "Click to select and remove installed templates."
-msgstr ""
+msgstr "לחיצה תאפשר לבחור ולהסיר תבניות מותקנות."
 
 #: src/configdialog.cpp:615
 #, kde-format
 msgid "Data Sources Options"
-msgstr ""
+msgstr "אפשרויות מקורות נתונים"
 
 #: src/configdialog.cpp:636
 #, kde-format
 msgid "Move &Up"
-msgstr ""
+msgstr "העלאה למ&עלה"
 
 #: src/configdialog.cpp:639
 #, kde-format
@@ -2645,58 +2670,59 @@ msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
 "are automatically updated."
 msgstr ""
+"סדר מקורות הנתונים מגדיר את הסדר בו Tellico משתמש כשרשומות מתעדכנות אוטומטית."
 
 #: src/configdialog.cpp:642
 #, kde-format
 msgid "Move &Down"
-msgstr ""
+msgstr "הורדה למ&טה"
 
 #: src/configdialog.cpp:651
 #, kde-format
 msgid "Filter by type:"
-msgstr ""
+msgstr "סינון לפי סוג:"
 
 #: src/configdialog.cpp:669
 #, kde-format
 msgid "&New..."
-msgstr ""
+msgstr "&חדש…"
 
 #: src/configdialog.cpp:671
 #, kde-format
 msgid "Click to add a new data source."
-msgstr ""
+msgstr "לחיצה להוספת מקור נתונים חדש."
 
 #: src/configdialog.cpp:672
 #, kde-format
 msgid "&Modify..."
-msgstr ""
+msgstr "&שינוי…"
 
 #: src/configdialog.cpp:674
 #, kde-format
 msgid "Click to modify the selected data source."
-msgstr ""
+msgstr "לחיצה לשינוי מקור הנתונים הנבחר."
 
 #: src/configdialog.cpp:675
 #, kde-format
 msgid "&Delete"
-msgstr ""
+msgstr "מ&חיקה"
 
 #: src/configdialog.cpp:677
 #, kde-format
 msgid "Click to delete the selected data source."
-msgstr ""
+msgstr "לחיצה תמחק את מקור הנתונים הנבחר."
 
 #: src/configdialog.cpp:1161 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
 #: src/translators/xsltimporter.cpp:133
 #, kde-format
 msgid "XSL Files"
-msgstr ""
+msgstr "קובצי XSL"
 
 #: src/configdialog.cpp:1162
 #, kde-format
 msgid "Template Packages"
-msgstr ""
+msgstr "חבילות תבניות"
 
 #: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1297
 #: src/mainwindow.cpp:1473 src/reportdialog.cpp:443 src/reportdialog.cpp:458
@@ -2713,89 +2739,89 @@ msgstr ""
 #: src/translators/xsltimporter.cpp:134
 #, kde-format
 msgid "All Files"
-msgstr ""
+msgstr "כל הקבצים"
 
 #: src/configdialog.cpp:1192
 #, kde-format
 msgid "Delete Template"
-msgstr ""
+msgstr "מחיקת תבנית"
 
 #: src/configdialog.cpp:1193
 #, kde-format
 msgid "Select template to delete:"
-msgstr ""
+msgstr "בחירת תבניות למחיקה:"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:560 src/fetchdialog.cpp:621
 #: src/fetchdialog.cpp:635 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
-msgstr ""
+msgstr "בהמתנה."
 
 #: src/controller.cpp:365
 #, kde-format
 msgid "Do you really want to delete this entry?"
-msgstr ""
+msgstr "למחוק את הרשומה הזאת?"
 
 #: src/controller.cpp:367
 #, kde-format
 msgid "Delete Entry"
-msgstr ""
+msgstr "מחיקת רשומה"
 
 #: src/controller.cpp:379
 #, kde-format
 msgid "Do you really want to delete these entries?"
-msgstr ""
+msgstr "למחוק את הרשומות האלה?"
 
 #: src/controller.cpp:383
 #, kde-format
 msgid "Delete Multiple Entries"
-msgstr ""
+msgstr "מחיקת רשומות במרוכז"
 
 #: src/controller.cpp:532
 #, kde-format
 msgid "&Sort By"
-msgstr ""
+msgstr "מיון ל&פי"
 
 #: src/controller.cpp:594 src/mainwindow.cpp:610
 #, kde-format
 msgid "&Edit Entry..."
-msgstr ""
+msgstr "&עריכת רשומה…"
 
 #: src/controller.cpp:595 src/mainwindow.cpp:617
 #, kde-format
 msgid "D&uplicate Entry"
-msgstr ""
+msgstr "&שכפול רשומה"
 
 #: src/controller.cpp:596 src/mainwindow.cpp:711
 #, kde-format
 msgid "&Update Entry"
-msgstr ""
+msgstr "ע&דכון רשומה"
 
 #: src/controller.cpp:597 src/mainwindow.cpp:624
 #, kde-format
 msgid "&Delete Entry"
-msgstr ""
+msgstr "מ&חיקת רשומה"
 
 #: src/controller.cpp:600
 #, kde-format
 msgid "&Edit Entries..."
-msgstr ""
+msgstr "ע&ריכת רשומות…"
 
 #: src/controller.cpp:601
 #, kde-format
 msgid "D&uplicate Entries"
-msgstr ""
+msgstr "ש&כפול רשומות"
 
 #: src/controller.cpp:602
 #, kde-format
 msgid "&Update Entries"
-msgstr ""
+msgstr "עדכ&ון רשומות"
 
 #: src/controller.cpp:603
 #, kde-format
 msgid "&Delete Entries"
-msgstr ""
+msgstr "מח&יקת רשומות"
 
 #: src/controller.cpp:660
 #, kde-format
@@ -2804,105 +2830,107 @@ msgid ""
 "support lending an item multiple times. They will be removed from the list "
 "of items to lend."
 msgstr ""
+"הפריטים הבאים כבר הושאלו, אבל Tellico לא תומך כרגע בהשאלת פריט כמה פעמים. הם "
+"יוסרו מרשימת הפריטים להשאלה."
 
 #: src/core/filehandler.cpp:156
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
-msgstr ""
+msgstr "יש שגיאת פענוח XML בשורה %1, עמודה %2."
 
 #: src/core/filehandler.cpp:158
 #, kde-format
 msgid "The error message from Qt is:"
-msgstr ""
+msgstr "הודעת השגיאה מ־Qt היא:"
 
 #: src/core/filehandler.cpp:190
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
-msgstr ""
+msgstr "כבר קיים קובץ בשם „%1”. לשכתב אותו?"
 
 #: src/core/filehandler.cpp:193
 #, kde-format
 msgid "Overwrite File?"
-msgstr ""
+msgstr "לשכתב קובץ?"
 
 #: src/detailedlistview.cpp:523
 #, kde-format
 msgid "View Columns"
-msgstr ""
+msgstr "הצגת עמודות"
 
 #: src/detailedlistview.cpp:538
 #, kde-format
 msgctxt "Noun, Menu name"
 msgid "Columns"
-msgstr ""
+msgstr "עמודות"
 
 #: src/detailedlistview.cpp:541
 #, kde-format
 msgid "Hide This Column"
-msgstr ""
+msgstr "הסתרת העמודה"
 
 #: src/detailedlistview.cpp:543
 #, kde-format
 msgid "Resize to Content"
-msgstr ""
+msgstr "שינוי גודל לפי התוכן"
 
 #: src/detailedlistview.cpp:548
 #, kde-format
 msgid "Show All Columns"
-msgstr ""
+msgstr "הצגת כל העמודות"
 
 #: src/detailedlistview.cpp:550
 #, kde-format
 msgid "Hide All Columns"
-msgstr ""
+msgstr "הסתרת כל העמודות"
 
 #: src/document.cpp:213 src/mainwindow.cpp:1412
 #, kde-format
 msgid "Saving file..."
-msgstr ""
+msgstr "הקובץ נשמר…"
 
 #: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:417
 #: src/entryeditdialog.cpp:439 src/entryeditdialog.cpp:534
 #, kde-format
 msgid "Edit Entry"
-msgstr ""
+msgstr "עריכת רשומה"
 
 #: src/entryeditdialog.cpp:86
 #, kde-format
 msgid "&New Entry"
-msgstr ""
+msgstr "רשומה &חדשה"
 
 #: src/entryeditdialog.cpp:91 src/entryeditdialog.cpp:132
 #: src/entryeditdialog.cpp:449 src/entryeditdialog.cpp:555
 #, kde-format
 msgid "Sa&ve Entry"
-msgstr ""
+msgstr "&שמירת רשומה"
 
 #: src/entryeditdialog.cpp:335
 #, kde-format
 msgid "Do you really want to modify these entries?"
-msgstr ""
+msgstr "לשנות את הרשומות האלו?"
 
 #: src/entryeditdialog.cpp:338 src/entryeditdialog.cpp:342
 #, kde-format
 msgid "Modify Multiple Entries"
-msgstr ""
+msgstr "שינוי רשומות במרוכז"
 
 #: src/entryeditdialog.cpp:384
 #, kde-format
 msgid "A value is required for the following fields. Do you want to continue?"
-msgstr ""
+msgstr "חייבים להיות ערכים בשדות הבאים. להמשיך?"
 
 #: src/entryeditdialog.cpp:485
 #, kde-format
 msgid "Edit Entries"
-msgstr ""
+msgstr "עריכת רשומות"
 
 #: src/entryeditdialog.cpp:511
 #, kde-format
 msgid "Sa&ve Entries"
-msgstr ""
+msgstr "&שמירת רשומות"
 
 #: src/entryeditdialog.cpp:670
 #, kde-format
@@ -2910,17 +2938,19 @@ msgid ""
 "The current entry has been modified.\n"
 "Do you want to enter the changes?"
 msgstr ""
+"הרשומה הנוכחית נערכה.\n"
+"להכניס את השינויים?"
 
 #: src/entryeditdialog.cpp:673
 #, kde-format
 msgid "Save Entry"
-msgstr ""
+msgstr "שמירת רשומה"
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
 #: src/mainwindow.cpp:1182 src/mainwindow.cpp:1200
 #, kde-format
 msgid "Unsaved Changes"
-msgstr ""
+msgstr "שינויים שלא נשמרו"
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:884
 #, kde-format
@@ -2928,17 +2958,19 @@ msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
 "an icon, which may be an image in the entry.</qt>"
 msgstr ""
+"<qt><i>תצוגת סמלים</i> מציגה כל רשומה באוסף או בקבוצה עם סמל, שיכול להיות "
+"תמונה ברשומה.</qt>"
 
 #: src/entryiconview.cpp:111
 #, kde-format
 msgctxt "Open URL"
 msgid "Open %1"
-msgstr ""
+msgstr "פתיחת %1"
 
 #: src/entrymatchdialog.cpp:56
 #, kde-format
 msgid "Select Match"
-msgstr ""
+msgstr "בחירת תוצאה"
 
 #: src/entrymatchdialog.cpp:75
 #, kde-format
@@ -2946,66 +2978,68 @@ msgid ""
 "<qt><b>%1</b> returned multiple results which could match <b>%2</b>, the "
 "entry currently in the collection. Please select the correct match.</qt>"
 msgstr ""
+"<qt><b>%1</b> החזיר מספר תוצאות שעונות על <b>%2</b>, הרשומה שנמצאת כרגע "
+"באוסף, נא לבחור את התוצאה הנכונה.</qt>"
 
 #: src/entrymerger.cpp:53 src/tellico_kernel.cpp:349 src/tellico_kernel.cpp:361
 #, kde-format
 msgid "Merge Entries"
-msgstr ""
+msgstr "מיזוג רשומות"
 
 #: src/entrymerger.cpp:55
 #, kde-format
 msgid "Merging entries..."
-msgstr ""
+msgstr "הרשומות ממוזגות…"
 
 #: src/entrymerger.cpp:74
 #, kde-format
 msgid "Total merged/scanned entries: %1/%2"
-msgstr ""
+msgstr "סך כל הרשומות שמוזגו/נסרקו: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
 msgid "Updating %1..."
-msgstr ""
+msgstr "%1 מתעדכן…"
 
 #: src/entryupdater.cpp:97
 #, kde-format
 msgid "Updating entries..."
-msgstr ""
+msgstr "הרשומות מתעדכנות…"
 
 #: src/entryupdater.cpp:99
 #, kde-format
 msgid "Update Entries"
-msgstr ""
+msgstr "עדכון רשומות"
 
 #: src/entryupdater.cpp:114
 #, kde-format
 msgid "Updating <b>%1</b>..."
-msgstr ""
+msgstr "<b>%1</b> מתעדכן…"
 
 #: src/entryview.cpp:352
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
-msgstr ""
+msgstr "Tellico לא הצליח לאתר את סגנון הגיליון לרשומת ברירת המחדל."
 
 #: src/entryview.cpp:354 src/mainwindow.cpp:1819
 #, kde-format
 msgid "Please check your installation."
-msgstr ""
+msgstr "נא לבדוק שההתקנה שלך תקינה."
 
 #: src/exportdialog.cpp:68
 #, kde-format
 msgid "Export Options"
-msgstr ""
+msgstr "אפשרויות ייצוא"
 
 #: src/exportdialog.cpp:75
 #, kde-format
 msgid "Formatting"
-msgstr ""
+msgstr "סידור בתבנית"
 
 #: src/exportdialog.cpp:79
 #, kde-format
 msgid "Format all fields"
-msgstr ""
+msgstr "עיצוב כל השדות"
 
 #: src/exportdialog.cpp:81
 #, kde-format
@@ -3013,57 +3047,58 @@ msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
 msgstr ""
+"אם האפשרות מסומנת, הערכים של השדות יעוצבו אוטומטית לפי סוג התבנית שלהם."
 
 #: src/exportdialog.cpp:85
 #, kde-format
 msgid "Export selected entries only"
-msgstr ""
+msgstr "ייצוא הרשומות הנבחרות בלבד"
 
 #: src/exportdialog.cpp:87
 #, kde-format
 msgid "If checked, only the currently selected entries will be exported."
-msgstr ""
+msgstr "אם האפשרות מסומנת, רק הרשומות הנבחרות תיוצאנה."
 
 #: src/exportdialog.cpp:91
 #, kde-format
 msgid "Export visible fields only"
-msgstr ""
+msgstr "ייצוא השדות הגלויים בלבד"
 
 #: src/exportdialog.cpp:93
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
-msgstr ""
+msgstr "אם האפשרות הזאת מסומנת, רק השדות שגלויים כרגע בתצוגה ייוצאו."
 
 #: src/exportdialog.cpp:97
 #, kde-format
 msgid "Encoding"
-msgstr ""
+msgstr "קידוד"
 
 #: src/exportdialog.cpp:102
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
-msgstr ""
+msgstr "קידוד ליוניקוד (UTF-8)"
 
 #: src/exportdialog.cpp:104
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
-msgstr ""
+msgstr "קידוד הקובץ המיוצא ליוניקוד (UTF-8)."
 
 #: src/exportdialog.cpp:112
 #, kde-format
 msgid "Encode in user locale (%1)"
-msgstr ""
+msgstr "קידוד לשפת המשתמש (%1)"
 
 #: src/exportdialog.cpp:115
 #, kde-format
 msgid "Encode the exported file in the local encoding."
-msgstr ""
+msgstr "קידוד הקובץ המיוצא בקידוד המקומי."
 
 #: src/fetch/adsfetcher.cpp:311
 #, kde-format
 msgid "SAO/NASA Astrophysics Data System"
-msgstr ""
+msgstr "מערכת הנתונים האסטרופיזקלית של SAO/NASA"
 
 #: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:229
@@ -3078,6 +3113,8 @@ msgid ""
 "terms and conditions, <a href='%1'>sign up for an account</a>, and enter "
 "your information below."
 msgstr ""
+"צריך להירשם כדי לגשת למקור הנתונים הזה. אם התנאים וההגבלות מקובלים עליך, נא "
+"<a href='%1'>להירשם לחשבון חדש</a>, ולמלא את הפרטים שלך להלן."
 
 #: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1105
 #: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:241
@@ -3088,7 +3125,7 @@ msgstr ""
 #: src/fetch/themoviedbfetcher.cpp:597
 #, kde-format
 msgid "Access key: "
-msgstr ""
+msgstr "מפתח גישה: "
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:536
@@ -3099,179 +3136,181 @@ msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
 "access limits."
 msgstr ""
+"אפשר להשתמש במפתח ברירת המחדל של Tellico אך החיפוש עלול להיכשל עקב הגעה "
+"למגבלת הגישה."
 
 #: src/fetch/amazonfetcher.cpp:79
 #, kde-format
 msgid "Amazon (US)"
-msgstr ""
+msgstr "Amazon (ארה״ב)"
 
 #: src/fetch/amazonfetcher.cpp:83
 #, kde-format
 msgid "United States"
-msgstr ""
+msgstr "ארצות הברית"
 
 #: src/fetch/amazonfetcher.cpp:85
 #, kde-format
 msgid "Amazon (UK)"
-msgstr ""
+msgstr "Amazon (אנגליה)"
 
 #: src/fetch/amazonfetcher.cpp:89
 #, kde-format
 msgid "United Kingdom"
-msgstr ""
+msgstr "אנגליה"
 
 #: src/fetch/amazonfetcher.cpp:91
 #, kde-format
 msgid "Amazon (Germany)"
-msgstr ""
+msgstr "Amazon (גרמניה)"
 
 #: src/fetch/amazonfetcher.cpp:95
 #, kde-format
 msgid "Germany"
-msgstr ""
+msgstr "גרמניה"
 
 #: src/fetch/amazonfetcher.cpp:97
 #, kde-format
 msgid "Amazon (Japan)"
-msgstr ""
+msgstr "Amazon (יפן)"
 
 #: src/fetch/amazonfetcher.cpp:101
 #, kde-format
 msgid "Japan"
-msgstr ""
+msgstr "יפן"
 
 #: src/fetch/amazonfetcher.cpp:103
 #, kde-format
 msgid "Amazon (France)"
-msgstr ""
+msgstr "Amazon (צרפת)"
 
 #: src/fetch/amazonfetcher.cpp:107
 #, kde-format
 msgid "France"
-msgstr ""
+msgstr "צרפת"
 
 #: src/fetch/amazonfetcher.cpp:109
 #, kde-format
 msgid "Amazon (Canada)"
-msgstr ""
+msgstr "Amazon (קנדה)"
 
 #: src/fetch/amazonfetcher.cpp:113
 #, kde-format
 msgid "Canada"
-msgstr ""
+msgstr "קנדה"
 
 #: src/fetch/amazonfetcher.cpp:116
 #, kde-format
 msgid "Amazon (China)"
-msgstr ""
+msgstr "Amazon (סין)"
 
 #: src/fetch/amazonfetcher.cpp:120
 #, kde-format
 msgid "China"
-msgstr ""
+msgstr "סין"
 
 #: src/fetch/amazonfetcher.cpp:122
 #, kde-format
 msgid "Amazon (Spain)"
-msgstr ""
+msgstr "Amazon (ספרד)"
 
 #: src/fetch/amazonfetcher.cpp:126
 #, kde-format
 msgid "Spain"
-msgstr ""
+msgstr "ספרד"
 
 #: src/fetch/amazonfetcher.cpp:128
 #, kde-format
 msgid "Amazon (Italy)"
-msgstr ""
+msgstr "Amazon (איטליה)"
 
 #: src/fetch/amazonfetcher.cpp:132
 #, kde-format
 msgid "Italy"
-msgstr ""
+msgstr "איטליה"
 
 #: src/fetch/amazonfetcher.cpp:134
 #, kde-format
 msgid "Amazon (Brazil)"
-msgstr ""
+msgstr "Amazon (ברזיל)"
 
 #: src/fetch/amazonfetcher.cpp:138
 #, kde-format
 msgid "Brazil"
-msgstr ""
+msgstr "ברזיל"
 
 #: src/fetch/amazonfetcher.cpp:140
 #, kde-format
 msgid "Amazon (Australia)"
-msgstr ""
+msgstr "Amazon (אוסטרליה)"
 
 #: src/fetch/amazonfetcher.cpp:144
 #, kde-format
 msgid "Australia"
-msgstr ""
+msgstr "אוסטרליה"
 
 #: src/fetch/amazonfetcher.cpp:146
 #, kde-format
 msgid "Amazon (India)"
-msgstr ""
+msgstr "Amazon (הודו)"
 
 #: src/fetch/amazonfetcher.cpp:150
 #, kde-format
 msgid "India"
-msgstr ""
+msgstr "הודו"
 
 #: src/fetch/amazonfetcher.cpp:152
 #, kde-format
 msgid "Amazon (Mexico)"
-msgstr ""
+msgstr "Amazon (מקסיקו)"
 
 #: src/fetch/amazonfetcher.cpp:156
 #, kde-format
 msgid "Mexico"
-msgstr ""
+msgstr "מקסיקו"
 
 #: src/fetch/amazonfetcher.cpp:158
 #, kde-format
 msgid "Amazon (Turkey)"
-msgstr ""
+msgstr "Amazon (טורקיה)"
 
 #: src/fetch/amazonfetcher.cpp:162
 #, kde-format
 msgid "Turkey"
-msgstr ""
+msgstr "טורקיה"
 
 #: src/fetch/amazonfetcher.cpp:164
 #, kde-format
 msgid "Amazon (Singapore)"
-msgstr ""
+msgstr "Amazon (סינגפור)"
 
 #: src/fetch/amazonfetcher.cpp:168
 #, kde-format
 msgid "Singapore"
-msgstr ""
+msgstr "סינגפור"
 
 #: src/fetch/amazonfetcher.cpp:170
 #, kde-format
 msgid "Amazon (UAE)"
-msgstr ""
+msgstr "Amazon (איחוד האמירויות הערביות)"
 
 #: src/fetch/amazonfetcher.cpp:174
 #, kde-format
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "איחוד האמירויות הערביות"
 
 #: src/fetch/amazonfetcher.cpp:199 src/fetch/filmasterfetcher.cpp:67
 #: src/fetch/springerfetcher.cpp:62
 #, kde-format
 msgid "This data is licensed under <a href=%1>specific terms</a>."
-msgstr ""
+msgstr "הנתונים האלו כפופים ל<a href=%1>תנאים מסוימים</a>."
 
 #: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1110
 #, kde-format
 msgid ""
 "Access to data from Amazon.com requires an AWS Access Key ID and a Secret "
 "Key."
-msgstr ""
+msgstr "גישה לנתונים מ־Amazon.com דורשת מזהה מפתח גישה ומפתח סודי ל־AWS."
 
 #: src/fetch/amazonfetcher.cpp:271 src/fetch/discogsfetcher.cpp:138
 #: src/fetch/isbndbfetcher.cpp:163 src/fetch/mobygamesfetcher.cpp:162
@@ -3279,12 +3318,12 @@ msgstr ""
 #: src/fetch/themoviedbfetcher.cpp:159 src/fetch/thetvdbfetcher.cpp:159
 #, kde-format
 msgid "Those values must be entered in the data source settings."
-msgstr ""
+msgstr "יש למלא את הערכים האלה בהגדרות מקור הנתונים."
 
 #: src/fetch/amazonfetcher.cpp:462
 #, kde-format
 msgid "Results from %1: %2/%3"
-msgstr ""
+msgstr "תוצאות מתוך %1: %2/%3"
 
 #: src/fetch/amazonfetcher.cpp:631 src/fetch/colnectfetcher.cpp:795
 #: src/fetch/discogsfetcher.cpp:217 src/fetch/doubanfetcher.cpp:477
@@ -3302,27 +3341,27 @@ msgstr ""
 #: src/fetch/vndbfetcher.cpp:182
 #, kde-format
 msgid "The cover image could not be loaded."
-msgstr ""
+msgstr "אי אפשר לטעון את תמונת עטיפה."
 
 #: src/fetch/amazonfetcher.cpp:860 src/fetch/amazonfetcher.cpp:1077
 #, kde-format
 msgid "Amazon Link"
-msgstr ""
+msgstr "קישור ל־Amazon"
 
 #: src/fetch/amazonfetcher.cpp:1067
 #, kde-format
 msgid "Amazon.com Web Services"
-msgstr ""
+msgstr "שירותי הרשת של Amazon.com‏ (AWS)"
 
 #: src/fetch/amazonfetcher.cpp:1115
 #, kde-format
 msgid "Secret key: "
-msgstr ""
+msgstr "מפתח סודי: "
 
 #: src/fetch/amazonfetcher.cpp:1125
 #, kde-format
 msgid "Country: "
-msgstr ""
+msgstr "מדינה: "
 
 #: src/fetch/amazonfetcher.cpp:1140
 #, kde-format
@@ -3330,6 +3369,8 @@ msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
 msgstr ""
+"Amazon.com מספיק מידע ממספר אתרים בפריסה עולמית. נא לבחור את האתרשישמש אותך "
+"כחלק ממקור הנתונים הזה."
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:211
 #: src/fetch/colnectfetcher.cpp:956 src/fetch/imdbfetcher.cpp:567
@@ -3338,7 +3379,7 @@ msgstr ""
 #: src/fetch/videogamegeekfetcher.cpp:211
 #, kde-format
 msgid "&Image size: "
-msgstr ""
+msgstr "&גודל תמונה: "
 
 #: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:215
 #: src/fetch/colnectfetcher.cpp:960 src/fetch/imdbfetcher.cpp:570
@@ -3347,13 +3388,13 @@ msgstr ""
 #: src/fetch/videogamegeekfetcher.cpp:215
 #, kde-format
 msgid "Small Image"
-msgstr ""
+msgstr "תמונה קטנה"
 
 #: src/fetch/amazonfetcher.cpp:1150 src/fetch/imdbfetcher.cpp:571
 #: src/fetch/thegamesdbfetcher.cpp:659
 #, kde-format
 msgid "Medium Image"
-msgstr ""
+msgstr "תמונה בינונית"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:216
@@ -3363,7 +3404,7 @@ msgstr ""
 #: src/fetch/videogamegeekfetcher.cpp:216
 #, kde-format
 msgid "Large Image"
-msgstr ""
+msgstr "תמונה גדולה"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:214
 #: src/fetch/colnectfetcher.cpp:959 src/fetch/imdbfetcher.cpp:573
@@ -3372,7 +3413,7 @@ msgstr ""
 #: src/fetch/videogamegeekfetcher.cpp:214
 #, kde-format
 msgid "No Image"
-msgstr ""
+msgstr "ללא תמונה"
 
 #: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:577
 #: src/fetch/mobygamesfetcher.cpp:677 src/fetch/thegamesdbfetcher.cpp:665
@@ -3381,11 +3422,13 @@ msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
 msgstr ""
+"יכול להיות שגם תמונת העטיפה תתקבל. עם זאת, תמונות גדולות מאוד באוסף יכולות "
+"לפגוע בביצועים."
 
 #: src/fetch/amazonfetcher.cpp:1161
 #, kde-format
 msgid "&Associate's ID: "
-msgstr ""
+msgstr "מזהה ה&עוזר או העוזרת: "
 
 #: src/fetch/amazonfetcher.cpp:1167
 #, kde-format
@@ -3393,12 +3436,14 @@ msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
 msgstr ""
+"מזהה העוזר או העוזרת הוא אמצעי הזיהוי למי שניגש לשירותי האינטרנט של Amazon."
+"com‏ (AWS), והוא נכלל בקישורים כלשהם לאתר Amazon.com."
 
 #: src/fetch/arxivfetcher.cpp:77
 #, kde-format
 msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
-msgstr ""
+msgstr "תודה ל־arXiv על השימוש בתפעול הגישה הפתוחה שלהם."
 
 #: src/fetch/arxivfetcher.cpp:341 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
@@ -3415,118 +3460,118 @@ msgstr ""
 #: src/fetch/vndbfetcher.cpp:440
 #, kde-format
 msgid "This source has no options."
-msgstr ""
+msgstr "למקור הזה אין אפשרויות."
 
 #: src/fetch/bedethequefetcher.cpp:316 src/fetch/bedethequefetcher.cpp:431
 #, kde-format
 msgid "Colorist"
-msgstr ""
+msgstr "צביעה"
 
 #: src/fetch/bedethequefetcher.cpp:324 src/fetch/bedethequefetcher.cpp:435
 #, kde-format
 msgid "Bedetheque Link"
-msgstr ""
+msgstr "קישור ל־Bedetheque"
 
 #: src/fetch/bedethequefetcher.cpp:433 src/field.cpp:312
 #, kde-format
 msgid "ISBN#"
-msgstr ""
+msgstr "מס׳ מסת״ב"
 
 #: src/fetch/boardgamegeekfetcher.cpp:199
 #, kde-format
 msgid "BoardGameGeek Link"
-msgstr ""
+msgstr "קישור ל־BoardGameGeek"
 
 #: src/fetch/colnectfetcher.cpp:533 src/fetch/colnectfetcher.cpp:816
 #, kde-format
 msgid "Colnect Link"
-msgstr ""
+msgstr "קישור ל־Colnect"
 
 #: src/fetch/colnectfetcher.cpp:552 src/fetch/colnectfetcher.cpp:822
 #, kde-format
 msgid "Mintage"
-msgstr ""
+msgstr "טבעה"
 
 #: src/fetch/colnectfetcher.cpp:590 src/fetch/colnectfetcher.cpp:824
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
-msgstr ""
+msgstr "סטנלי גיבונס"
 
 #: src/fetch/colnectfetcher.cpp:597 src/fetch/colnectfetcher.cpp:825
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
-msgstr ""
+msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:826 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:575 src/fetch/mobygamesfetcher.cpp:633
 #: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:329
 #, kde-format
 msgid "PEGI Rating"
-msgstr ""
+msgstr "דירוג PEGI"
 
 #: src/fetch/colnectfetcher.cpp:928 src/fetch/filmaffinityfetcher.cpp:492
 #: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:626
 #, kde-format
 msgid "Language: "
-msgstr ""
+msgstr "שפה: "
 
 #: src/fetch/colnectfetcher.cpp:966
 #, kde-format
 msgid "Country code: "
-msgstr ""
+msgstr "קוד מדינה: "
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
 #, kde-format
 msgid "Comic Vine Link"
-msgstr ""
+msgstr "קישור ל־Comic Vine"
 
 #: src/fetch/configwidget.cpp:41
 #, kde-format
 msgid "Source Options"
-msgstr ""
+msgstr "אפשרויות מקור"
 
 #: src/fetch/configwidget.cpp:68
 #, kde-format
 msgid "Available Fields"
-msgstr ""
+msgstr "שדות זמינים"
 
 #: src/fetch/crossreffetcher.cpp:95 src/fetch/crossreffetcher.cpp:96
 #, kde-format
 msgid "%1 requires a username and password."
-msgstr ""
+msgstr "%1 דורש שם משתמש וסיסמה."
 
 #: src/fetch/crossreffetcher.cpp:309
 #, kde-format
 msgid "&Username: "
-msgstr ""
+msgstr "&שם משתמש:"
 
 #: src/fetch/crossreffetcher.cpp:314
 #, kde-format
 msgid "A username and password is required to access the CrossRef service."
-msgstr ""
+msgstr "צריך שם משתמש וסיסמה כדי לגשת לשירות CrossRef."
 
 #: src/fetch/crossreffetcher.cpp:319
 #, kde-format
 msgid "&Password: "
-msgstr ""
+msgstr "&סיסמה: "
 
 #: src/fetch/crossreffetcher.cpp:329
 #, kde-format
 msgid "For some accounts, only an email address is required."
-msgstr ""
+msgstr "לחלק מהחשבונות צריך רק כתובת דוא״ל"
 
 #: src/fetch/crossreffetcher.cpp:332
 #, kde-format
 msgid "Email: "
-msgstr ""
+msgstr "דוא״ל: "
 
 #: src/fetch/dbcfetcher.cpp:145
 #, kde-format
 msgid "Danish Bibliographic Center (DBC.dk)"
-msgstr ""
+msgstr "מרכז הביבליוגרפיה הדני (DBC.dk)"
 
 #: src/fetch/discogsfetcher.cpp:136 src/fetch/isbndbfetcher.cpp:161
 #: src/fetch/mobygamesfetcher.cpp:160 src/fetch/omdbfetcher.cpp:117
@@ -3534,12 +3579,12 @@ msgstr ""
 #: src/fetch/thetvdbfetcher.cpp:157
 #, kde-format
 msgid "An access key is required to use this data source."
-msgstr ""
+msgstr "צריך מפתח גישה כדי להשתמש במקור הנתונים הזה."
 
 #: src/fetch/discogsfetcher.cpp:311 src/fetch/discogsfetcher.cpp:546
 #, kde-format
 msgid "Discogs Link"
-msgstr ""
+msgstr "קישור ל־Discogs"
 
 #. i18n("Nationality");
 #: src/fetch/discogsfetcher.cpp:330 src/fetch/discogsfetcher.cpp:547
@@ -3548,17 +3593,17 @@ msgstr ""
 #: src/fetch/vgcollectfetcher.cpp:336 src/fetch/vgcollectfetcher.cpp:371
 #, kde-format
 msgid "Barcode"
-msgstr ""
+msgstr "ברקוד"
 
 #: src/fetch/discogsfetcher.cpp:335 src/fetch/discogsfetcher.cpp:548
 #, kde-format
 msgid "Catalog Number"
-msgstr ""
+msgstr "מס׳ קטלוגי"
 
 #: src/fetch/discogsfetcher.cpp:345
 #, kde-format
 msgid "The Discogs.com server reports a token error."
-msgstr ""
+msgstr "שרת Discogs.com מדווח על שגיאת אסימון."
 
 #: src/fetch/discogsfetcher.cpp:479 src/fetch/discogsfetcher.cpp:490
 #: src/fetch/itunesfetcher.cpp:313 src/fetch/itunesfetcher.cpp:324
@@ -3566,17 +3611,17 @@ msgstr ""
 #: src/translators/audiofileimporter.cpp:241
 #, kde-format
 msgid "Tracks (Disc %1)"
-msgstr ""
+msgstr "רצועות (תקליטור %1)"
 
 #: src/fetch/discogsfetcher.cpp:535
 #, kde-format
 msgid "Discogs Audio Search"
-msgstr ""
+msgstr "חיפוש שמע ב־Discogs"
 
 #: src/fetch/discogsfetcher.cpp:571 src/translators/discogsimporter.cpp:200
 #, kde-format
 msgid "User token:"
-msgstr ""
+msgstr "אסימון משתמש:"
 
 #: src/fetch/doubanfetcher.cpp:366 src/fetch/doubanfetcher.cpp:384
 #: src/fetch/doubanfetcher.cpp:402 src/fetch/doubanfetcher.cpp:641
@@ -3590,18 +3635,18 @@ msgstr ""
 #: src/fetch/vndbfetcher.cpp:432 src/translators/filereadervideo.cpp:200
 #, kde-format
 msgid "Original Title"
-msgstr ""
+msgstr "כותר מקורי"
 
 #: src/fetch/doubanfetcher.cpp:372 src/fetch/doubanfetcher.cpp:390
 #: src/fetch/doubanfetcher.cpp:408 src/fetch/doubanfetcher.cpp:642
 #, kde-format
 msgid "Douban Link"
-msgstr ""
+msgstr "קישור ל־Douban"
 
 #: src/fetch/dvdfrfetcher.cpp:172
 #, kde-format
 msgid "DVDFr Link"
-msgstr ""
+msgstr "קישור ל־DVDFr"
 
 #: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:478
 #: src/fetch/imdbfetcher.cpp:530 src/fetch/moviemeterfetcher.cpp:222
@@ -3610,78 +3655,78 @@ msgstr ""
 #: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:378
 #, kde-format
 msgid "Alternative Titles"
-msgstr ""
+msgstr "כותרים חלופיים"
 
 #: src/fetch/entrezfetcher.cpp:439 src/translators/risimporter.cpp:339
 #, kde-format
 msgid "Miscellaneous"
-msgstr ""
+msgstr "שונות"
 
 #: src/fetch/entrezfetcher.cpp:502
 #, kde-format
 msgid "Entrez Database"
-msgstr ""
+msgstr "מסד הנתונים Entrez"
 
 #: src/fetch/entrezfetcher.cpp:512
 #, kde-format
 msgid "Institution"
-msgstr ""
+msgstr "מוסד"
 
 #: src/fetch/execexternalfetcher.cpp:348
 #, kde-format
 msgid "External Application"
-msgstr ""
+msgstr "יישום חיצוני"
 
 #: src/fetch/execexternalfetcher.cpp:369
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
-msgstr ""
+msgstr "הגדרת סוג האוסף של הנתונים שהוחזרו מהיישום החיצוני."
 
 #: src/fetch/execexternalfetcher.cpp:374
 #, kde-format
 msgid "&Result type: "
-msgstr ""
+msgstr "סוג ה&תוצאה: "
 
 #: src/fetch/execexternalfetcher.cpp:383
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
-msgstr ""
+msgstr "הגדרת סוג התוצאה של הנתונים שהוחזרו מהיישום החיצוני."
 
 #: src/fetch/execexternalfetcher.cpp:397
 #, kde-format
 msgid "Application &path: "
-msgstr ""
+msgstr "&נתיב היישום:"
 
 #: src/fetch/execexternalfetcher.cpp:402
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
-msgstr ""
+msgstr "הגדרת נתיב היישום להרצה שאמור לפלוט קובץ נתונים תקני של Tellico."
 
 #: src/fetch/execexternalfetcher.cpp:407
 #, kde-format
 msgid "Select the search keys supported by the data source."
-msgstr ""
+msgstr "נא לבחור את מפתחות החיפוש בהם תומך מקור הנתונים."
 
 #: src/fetch/execexternalfetcher.cpp:409
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
 "search term."
-msgstr ""
+msgstr "אפשר להוסיף כל ארגומנט נחוץ שהוא. <b>%1</b> יוחלף בביטוי לחיפוש."
 
 #. i18ncheckarg
 #: src/fetch/execexternalfetcher.cpp:410
 #, kde-format
 msgid "Arguments"
-msgstr ""
+msgstr "ארגומנטים"
 
 #: src/fetch/execexternalfetcher.cpp:442
 #, kde-format
 msgid "Update"
-msgstr ""
+msgstr "עדכון"
 
 #: src/fetch/execexternalfetcher.cpp:450
 #, kde-format
@@ -3691,62 +3736,65 @@ msgid ""
 "where field names are contained inside braces, such as <i>%{author}</i>. See "
 "the documentation for details.</p>"
 msgstr ""
+"<p>נא למלא את הארגומנטים לשימוש בחיפוש אחר עדכונים זמינים לרשומה.</"
+"p><p>התבנית זהה כמו לשדות עם ערכים נגזרים, בהם שמות השדות עטופים בסוגריים "
+"מסולסלים, כמו למשל <i>%{author}</i>. בתיעוד יש פרטים נוספים בנושא.</p>"
 
 #: src/fetch/fetcher.cpp:76
 #, kde-format
 msgid "%1 does not allow searching for this collection type."
-msgstr ""
+msgstr "%1 לא מאפשר לחפש אחר סוג האוסף הזה."
 
 #: src/fetch/fetchmanager.cpp:63
 #, kde-format
 msgid "Person"
-msgstr ""
+msgstr "אדם"
 
 #: src/fetch/fetchmanager.cpp:64
 #, kde-format
 msgid "ISBN"
-msgstr ""
+msgstr "מסת״ב"
 
 #: src/fetch/fetchmanager.cpp:65
 #, kde-format
 msgid "UPC/EAN"
-msgstr ""
+msgstr "UPC/EAN"
 
 #: src/fetch/fetchmanager.cpp:66
 #, kde-format
 msgid "Keyword"
-msgstr ""
+msgstr "מילת מפתח"
 
 #: src/fetch/fetchmanager.cpp:68 src/translators/pdfimporter.cpp:235
 #, kde-format
 msgid "arXiv ID"
-msgstr ""
+msgstr "מזהה arXiv"
 
 #: src/fetch/fetchmanager.cpp:69
 #, kde-format
 msgid "PubMed ID"
-msgstr ""
+msgstr "מזהה PubMed"
 
 #: src/fetch/fetchmanager.cpp:70
 #, kde-format
 msgid "LCCN"
-msgstr ""
+msgstr "LCCN"
 
 #: src/fetch/fetchmanager.cpp:71
 #, kde-format
 msgid "Raw Query"
-msgstr ""
+msgstr "שאילתה גולמית"
 
 #: src/fetch/filmaffinityfetcher.cpp:283 src/fetch/filmaffinityfetcher.cpp:462
 #, kde-format
 msgid "FilmAffinity Link"
-msgstr ""
+msgstr "קישור FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:474 src/fetch/imdbfetcher.cpp:549
 #: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:608
 #, kde-format
 msgid "&Maximum cast: "
-msgstr ""
+msgstr "&כמות שחקנים מרבית:"
 
 #: src/fetch/filmaffinityfetcher.cpp:487 src/fetch/imdbfetcher.cpp:562
 #: src/fetch/kinopoiskfetcher.cpp:694 src/fetch/themoviedbfetcher.cpp:621
@@ -3755,120 +3803,122 @@ msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
 msgstr ""
+"רשימת חברי צוות השחקנים יכולה לכלול אנשים רבים. אפשר להגדיר את הכמות המרבית "
+"שמוחזרת מהחיפוש."
 
 #: src/fetch/filmaffinityfetcher.cpp:497
 #, kde-format
 msgctxt "Country"
 msgid "Spain"
-msgstr ""
+msgstr "ספרד"
 
 #: src/fetch/filmaffinityfetcher.cpp:500
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "ארצות הברית"
 
 #: src/fetch/filmasterfetcher.cpp:237 src/fetch/filmasterfetcher.cpp:314
 #, kde-format
 msgid "Filmaster Link"
-msgstr ""
+msgstr "קישור Filmaster"
 
 #: src/fetch/gaminghistoryfetcher.cpp:195
 #: src/fetch/gaminghistoryfetcher.cpp:317
 #: src/fetch/gaminghistoryfetcher.cpp:372
 #, kde-format
 msgid "Gaming History Link"
-msgstr ""
+msgstr "קישור Gaming History"
 
 #: src/fetch/gcstarpluginfetcher.cpp:400
 #, kde-format
 msgid "GCstar Plugin"
-msgstr ""
+msgstr "תוסף GCstar"
 
 #: src/fetch/gcstarpluginfetcher.cpp:422
 #, kde-format
 msgid "Set the collection type of the data returned from the plugin."
-msgstr ""
+msgstr "הגדרת סוג האוסף של הנתונים שהוחזרו מהתוסף."
 
 #: src/fetch/gcstarpluginfetcher.cpp:427
 #, kde-format
 msgid "&Plugin: "
-msgstr ""
+msgstr "&תוסף:"
 
 #: src/fetch/gcstarpluginfetcher.cpp:433
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
-msgstr ""
+msgstr "נא לבחור את תוסף ה־GCStar שמשמש כמקור הנתונים."
 
 #: src/fetch/gcstarpluginfetcher.cpp:438
 #, kde-format
 msgid "Author: "
-msgstr ""
+msgstr "כתיבה: "
 
 #: src/fetch/giantbombfetcher.cpp:202
 #, kde-format
 msgid "GiantBomb Link"
-msgstr ""
+msgstr "קישור ל־GiantBomb"
 
 #: src/fetch/googlebookfetcher.cpp:257 src/fetch/googlebookfetcher.cpp:370
 #, kde-format
 msgid "Google Book Link"
-msgstr ""
+msgstr "קישור ל־Google ספרים"
 
 #: src/fetch/googlebookfetcher.cpp:361
 #, kde-format
 msgid "Google Book Search"
-msgstr ""
+msgstr "חיפוש ב־Google ספרים"
 
 #: src/fetch/hathitrustfetcher.cpp:306 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
-msgstr ""
+msgstr "איור"
 
 #: src/fetch/hathitrustfetcher.cpp:307 src/fetch/isbndbfetcher.cpp:382
 #: src/fetch/srufetcher.cpp:523 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
-msgstr ""
+msgstr "שיטת דיואי"
 
 #: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:524
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
 msgid "LoC Classification"
-msgstr ""
+msgstr "שיטת ספריית הקונגרס"
 
 #: src/fetch/ibsfetcher.cpp:393
 #, kde-format
 msgid "Internet Bookshop (ibs.it)"
-msgstr ""
+msgstr "Internet Bookshop (ibs.it)"
 
 #: src/fetch/igdbfetcher.cpp:365 src/fetch/igdbfetcher.cpp:576
 #, kde-format
 msgid "IGDB Link"
-msgstr ""
+msgstr "קישור ל־IGDB"
 
 #: src/fetch/igdbfetcher.cpp:564
 #, kde-format
 msgid "Internet Game Database (IGDB.com)"
-msgstr ""
+msgstr "Internet Game Database (IGDB.com)"
 
 #: src/fetch/igdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:635
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:347
 #, kde-format
 msgid "Screenshot"
-msgstr ""
+msgstr "צילום מסך"
 
 #: src/fetch/imdbfetcher.cpp:458 src/fetch/imdbfetcher.cpp:529
 #, kde-format
 msgid "IMDb Rating"
-msgstr ""
+msgstr "דירוג ב־IMDb"
 
 #: src/fetch/imdbfetcher.cpp:517 src/fetch/imdbfetcher.cpp:646
 #, kde-format
 msgid "Internet Movie Database"
-msgstr ""
+msgstr "Internet Movie Database"
 
 #: src/fetch/imdbfetcher.cpp:528 src/fetch/kinopoiskfetcher.cpp:668
 #: src/fetch/omdbfetcher.cpp:397 src/fetch/themoviedbfetcher.cpp:569
@@ -3876,337 +3926,337 @@ msgstr ""
 #: src/field.cpp:335
 #, kde-format
 msgid "IMDb Link"
-msgstr ""
+msgstr "קישור ל־IMDb"
 
 #: src/fetch/imdbfetcher.cpp:531
 #, kde-format
 msgid "Certifications"
-msgstr ""
+msgstr "הסמכות"
 
 #: src/fetch/imdbfetcher.cpp:533 src/fetch/itunesfetcher.cpp:532
 #: src/fetch/themoviedbfetcher.cpp:573 src/fetch/thetvdbfetcher.cpp:565
 #: src/fetch/tvmazefetcher.cpp:376 src/field.cpp:339
 #, kde-format
 msgid "Episodes"
-msgstr ""
+msgstr "פרקים"
 
 #: src/fetch/imdbfetcher.cpp:583
 #, kde-format
 msgid "Locale"
-msgstr ""
+msgstr "שפה"
 
 #: src/fetch/imdbfetcher.cpp:586
 #, kde-format
 msgid "Use system locale"
-msgstr ""
+msgstr "להשתמש בשפת המערכת"
 
 #: src/fetch/imdbfetcher.cpp:587
 #, kde-format
 msgid "Use custom locale"
-msgstr ""
+msgstr "להשתמש בשפה אחרת"
 
 #: src/fetch/isbndbfetcher.cpp:359
 #, kde-format
 msgid "Dewey Decimal"
-msgstr ""
+msgstr "שיטת דיואי"
 
 #: src/fetch/isbndbfetcher.cpp:360 src/field.cpp:313 src/field.cpp:318
 #: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:236
 #, kde-format
 msgid "Publishing"
-msgstr ""
+msgstr "הוצאה לאור"
 
 #: src/fetch/isbndbfetcher.cpp:372
 #, kde-format
 msgid "ISBNdb.com"
-msgstr ""
+msgstr "ISBNdb.com"
 
 #: src/fetch/isbndbfetcher.cpp:413
 #, kde-format
 msgid "Enable batch ISBN searching (requires Premium or Pro plan)"
-msgstr ""
+msgstr "הפעלת חיפוש מסת״בים במרוכז (דורש תוכניות פרימיום או פרו)"
 
 #: src/fetch/isbndbfetcher.cpp:417
 #, kde-format
 msgid ""
 "Batch searching for ISBN values is faster but only available for Premium or "
 "Pro plans."
-msgstr ""
+msgstr "חיפוש מסת״בים במרוכז הוא מהיר יותר אך זמין רק בתוכניות פרימיום או פרו."
 
 #: src/fetch/itunesfetcher.cpp:238 src/fetch/itunesfetcher.cpp:531
 #, kde-format
 msgid "iTunes Link"
-msgstr ""
+msgstr "קישור ל־iTunes"
 
 #: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:667
 #, kde-format
 msgid "KinoPoisk Link"
-msgstr ""
+msgstr "קישור ל־KinoPoisk"
 
 #: src/fetch/kinoteatrfetcher.cpp:236 src/fetch/kinoteatrfetcher.cpp:506
 #, kde-format
 msgid "Kino-Teatr Link"
-msgstr ""
+msgstr "קישור ל־Kino-Teatr"
 
 #: src/fetch/mobygamesfetcher.cpp:454 src/fetch/mobygamesfetcher.cpp:634
 #, kde-format
 msgid "MobyGames Link"
-msgstr ""
+msgstr "קישור ל־MobyGames"
 
 #: src/fetch/moviemeterfetcher.cpp:217 src/fetch/moviemeterfetcher.cpp:290
 #, kde-format
 msgid "MovieMeter Link"
-msgstr ""
+msgstr "קישור ל־MovieMeter"
 
 #: src/fetch/multifetcher.cpp:208
 #, kde-format
 msgid "Multiple Sources"
-msgstr ""
+msgstr "מגוון מקורות"
 
 #: src/fetch/multifetcher.cpp:280
 #, kde-format
 msgid "Data source:"
-msgstr ""
+msgstr "מקור נתונים:"
 
 #: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:398
 #, kde-format
 msgid "Numista Link"
-msgstr ""
+msgstr "קישור ל־Numista"
 
 #: src/fetch/numistafetcher.cpp:403
 #, kde-format
 msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
-msgstr ""
+msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:635
 #, kde-format
 msgctxt "Language"
 msgid "English"
-msgstr ""
+msgstr "אנגלית"
 
 #: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:638
 #, kde-format
 msgctxt "Language"
 msgid "French"
-msgstr ""
+msgstr "צרפתית"
 
 #: src/fetch/numistafetcher.cpp:462
 #, kde-format
 msgid "Numista (%1)"
-msgstr ""
+msgstr "Numista (%1)"
 
 #: src/fetch/opdsfetcher.cpp:200 src/fetch/opdsfetcher.cpp:210
 #, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr ""
+msgstr "Tellico לא הצליח לקרוא את תיאור החיפוש בקטלוג OPDS."
 
 #: src/fetch/opdsfetcher.cpp:425
 #, kde-format
 msgid "OPDS Catalog"
-msgstr ""
+msgstr "קטלוג OPDS"
 
 #: src/fetch/opdsfetcher.cpp:450
 #, kde-format
 msgid "Catalog: "
-msgstr ""
+msgstr "קטלוג: "
 
 #: src/fetch/opdsfetcher.cpp:455
 #, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr ""
+msgstr "נא למלא את הקישור לשרת ה־OPDS."
 
 #: src/fetch/opdsfetcher.cpp:460
 #, kde-format
 msgid "&Verify Catalog"
-msgstr ""
+msgstr "&אימות קטלוג"
 
 #: src/fetch/openlibraryfetcher.cpp:275 src/fetch/openlibraryfetcher.cpp:450
 #, kde-format
 msgid "OpenLibrary Link"
-msgstr ""
+msgstr "קישור ל־OpenLibrary"
 
 #: src/fetch/rpggeekfetcher.cpp:208
 #, kde-format
 msgid "RPGGeek Link"
-msgstr ""
+msgstr "קישור ל־RPGGeek"
 
 #: src/fetch/srufetcher.cpp:506
 #, kde-format
 msgid "Library of Congress (US)"
-msgstr ""
+msgstr "ספריית הקונגרס (ארה״ב)"
 
 #: src/fetch/srufetcher.cpp:511
 #, kde-format
 msgid "SRU Server"
-msgstr ""
+msgstr "שרת SRU"
 
 #: src/fetch/srufetcher.cpp:539
 #, kde-format
 msgid "Scheme: "
-msgstr ""
+msgstr "סכמה: "
 
 #: src/fetch/srufetcher.cpp:549 src/fetch/srufetcher.cpp:585
 #, kde-format
 msgid "Enter the path to the database used by the server."
-msgstr ""
+msgstr "נא למלא את הנתיב למסד הנתונים בו משתמש השרת."
 
 #: src/fetch/srufetcher.cpp:554 src/fetch/z3950fetcher.cpp:599
 #, kde-format
 msgid "Hos&t: "
-msgstr ""
+msgstr "מ&ארח: "
 
 #: src/fetch/srufetcher.cpp:561 src/fetch/z3950fetcher.cpp:605
 #, kde-format
 msgid "Enter the host name of the server."
-msgstr ""
+msgstr "נא למלא את שם המארח של השרת."
 
 #: src/fetch/srufetcher.cpp:566 src/fetch/z3950fetcher.cpp:610
 #, kde-format
 msgid "&Port: "
-msgstr ""
+msgstr "&פתחה: "
 
 #: src/fetch/srufetcher.cpp:575 src/fetch/z3950fetcher.cpp:619
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
-msgstr ""
+msgstr "נא למלא את מספר פתחת השרת. ברירת המחדל היא %1."
 
 #: src/fetch/srufetcher.cpp:580
 #, kde-format
 msgid "Path: "
-msgstr ""
+msgstr "נתיב: "
 
 #: src/fetch/srufetcher.cpp:590
 #, kde-format
 msgid "Format: "
-msgstr ""
+msgstr "תבנית: "
 
 #: src/fetch/srufetcher.cpp:601
 #, kde-format
 msgid "Enter the result format used by the server."
-msgstr ""
+msgstr "נא למלא את תבנית התוצאה בה משתמש השרת."
 
 #: src/fetch/srufetcher.cpp:610
 #, kde-format
 msgid "Field"
-msgstr ""
+msgstr "שדה"
 
 #: src/fetch/themoviedbfetcher.cpp:314 src/fetch/themoviedbfetcher.cpp:568
 #: src/translators/filereadervideo.cpp:275
 #, kde-format
 msgid "TMDb Link"
-msgstr ""
+msgstr "קישור ל־TMDb"
 
 #: src/fetch/themoviedbfetcher.cpp:332 src/fetch/themoviedbfetcher.cpp:572
 #: src/fetch/thetvdbfetcher.cpp:249 src/fetch/thetvdbfetcher.cpp:566
 #: src/fetch/tvmazefetcher.cpp:179 src/fetch/tvmazefetcher.cpp:377
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "רשת"
 
 #: src/fetch/themoviedbfetcher.cpp:632
 #, kde-format
 msgctxt "Language"
 msgid "Chinese"
-msgstr ""
+msgstr "סינית"
 
 #: src/fetch/themoviedbfetcher.cpp:641
 #, kde-format
 msgctxt "Language"
 msgid "German"
-msgstr ""
+msgstr "גרמנית"
 
 #: src/fetch/themoviedbfetcher.cpp:644
 #, kde-format
 msgctxt "Language"
 msgid "Spanish"
-msgstr ""
+msgstr "ספרדית"
 
 #: src/fetch/themoviedbfetcher.cpp:647
 #, kde-format
 msgctxt "Language"
 msgid "Russian"
-msgstr ""
+msgstr "רוסית"
 
 #: src/fetch/themoviedbfetcher.cpp:690
 #, kde-format
 msgid "TheMovieDB (%1)"
-msgstr ""
+msgstr "TheMovieDB (%1)"
 
 #: src/fetch/thetvdbfetcher.cpp:254 src/fetch/thetvdbfetcher.cpp:563
 #, kde-format
 msgid "TheTVDB Link"
-msgstr ""
+msgstr "קישור ל־TheTVDB"
 
 #: src/fetch/thetvdbfetcher.cpp:590
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr ""
+msgstr "קוד מנוי אישי: "
 
 #: src/fetch/vgcollectfetcher.cpp:233 src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
 msgid "VGCollect Link"
-msgstr ""
+msgstr "קישור ל־VGCollect"
 
 #: src/fetch/videogamegeekfetcher.cpp:199
 #, kde-format
 msgid "VideoGameGeek Link"
-msgstr ""
+msgstr "קישור ל־VideoGameGeek"
 
 #: src/fetch/vndbfetcher.cpp:290 src/fetch/vndbfetcher.cpp:433
 #, kde-format
 msgid "Alias"
-msgstr ""
+msgstr "כינוי"
 
 #: src/fetch/vndbfetcher.cpp:309
 #, kde-format
 msgid "Visual Novel"
-msgstr ""
+msgstr "רומן חזותי"
 
 #: src/fetch/z3950connection.cpp:183
 #, kde-format
 msgid "Query error!"
-msgstr ""
+msgstr "שגיאת שאילתה!"
 
 #: src/fetch/z3950connection.cpp:223 src/fetch/z3950connection.cpp:344
 #, kde-format
 msgid "Connection search error %1: %2"
-msgstr ""
+msgstr "שגיאת חיפוש חיבור %1: %2"
 
 #: src/fetch/z3950connection.cpp:305
 #, kde-format
 msgid "Record syntax error"
-msgstr ""
+msgstr "שגיאת תחביר רשומה"
 
 #: src/fetch/z3950connection.cpp:425
 #, kde-format
 msgid "Connection error %1: %2"
-msgstr ""
+msgstr "שגיאת חיבור %1: %2"
 
 #: src/fetch/z3950fetcher.cpp:562 src/fetch/z3950fetcher.cpp:877
 #, kde-format
 msgid "z39.50 Server"
-msgstr ""
+msgstr "שרת z39.50"
 
 #: src/fetch/z3950fetcher.cpp:588
 #, kde-format
 msgid "Use preset &server:"
-msgstr ""
+msgstr "להשתמש בשרת &ערכות מוגדרות מראש:"
 
 #: src/fetch/z3950fetcher.cpp:624
 #, kde-format
 msgid "&Database: "
-msgstr ""
+msgstr "מסד &נתונים:"
 
 #: src/fetch/z3950fetcher.cpp:629
 #, kde-format
 msgid "Enter the database name used by the server."
-msgstr ""
+msgstr "נא למלא את שם מסד הנתונים בו משתמש השרת."
 
 #: src/fetch/z3950fetcher.cpp:634
 #, kde-format
 msgid "Query character set: "
-msgstr ""
+msgstr "ערכת התווים של השאילתה:"
 
 #: src/fetch/z3950fetcher.cpp:643
 #, kde-format
@@ -4214,11 +4264,13 @@ msgid ""
 "Enter the character set encoding used for queries by the z39.50 server. The "
 "most likely choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
+"נא למלא את קידוד ערכת התווים לשימוש לשאילתות על ידי שרת ה־z39.50. הבחירה "
+"ההגיונית ביותר היא MARC-8, למרות שגם ISO-8859-1 נפוץ."
 
 #: src/fetch/z3950fetcher.cpp:649
 #, kde-format
 msgid "Results character set: "
-msgstr ""
+msgstr "ערכת תווים לתוצאות:"
 
 #: src/fetch/z3950fetcher.cpp:658
 #, kde-format
@@ -4226,16 +4278,18 @@ msgid ""
 "Enter the character set encoding used for responses by the z39.50 server. "
 "The most likely choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
+"נא למלא את קידוד ערכת התווים לשימוש לתגובות על ידי שרת ה־z39.50. הבחירה "
+"ההגיונית ביותר היא MARC-8, למרות שגם ISO-8859-1 נפוץ."
 
 #: src/fetch/z3950fetcher.cpp:664
 #, kde-format
 msgid "&Format: "
-msgstr ""
+msgstr "&תבנית: "
 
 #: src/fetch/z3950fetcher.cpp:667
 #, kde-format
 msgid "Auto-detect"
-msgstr ""
+msgstr "זיהוי אוטומטי"
 
 #: src/fetch/z3950fetcher.cpp:676
 #, kde-format
@@ -4243,16 +4297,18 @@ msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
 msgstr ""
+"נא למלא את תבנית הנתונים בה משתמש שרת ה־z39.50.‏ Tellico ינסה לזהות את "
+"ההגדרות המיטביות אם נבחרה האפשרות <i>זיהוי אוטומטי</i>."
 
 #: src/fetch/z3950fetcher.cpp:682
 #, kde-format
 msgid "&User: "
-msgstr ""
+msgstr "מ&שתמש:"
 
 #: src/fetch/z3950fetcher.cpp:685 src/fetch/z3950fetcher.cpp:697
 #, kde-format
 msgid "Optional"
-msgstr ""
+msgstr "רשות"
 
 #: src/fetch/z3950fetcher.cpp:688
 #, kde-format
@@ -4260,11 +4316,13 @@ msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
+"נא למלא את שם המשתמש לאימות לשימוש על ידי מסד הנתונים מסוג z39.50 רוב השרתים "
+"לא צריכים אותו."
 
 #: src/fetch/z3950fetcher.cpp:694
 #, kde-format
 msgid "Pass&word: "
-msgstr ""
+msgstr "&סיסמה: "
 
 #: src/fetch/z3950fetcher.cpp:701
 #, kde-format
@@ -4273,62 +4331,64 @@ msgid ""
 "do not need one. The password will be saved in plain text in the Tellico "
 "configuration file."
 msgstr ""
+"נא למלא את שם המשתמש לאימות לשימוש על ידי מסד הנתונים מסוג z39.50. רוב "
+"השרתים לא צריכים אותו. הסיסמה תישמר בטקסט פשוט בקובץ ההגדרות של Tellico."
 
 #: src/fetchdialog.cpp:138 src/mainwindow.cpp:600
 #, kde-format
 msgid "Internet Search"
-msgstr ""
+msgstr "חיפוש באינטרנט"
 
 #: src/fetchdialog.cpp:149
 #, kde-format
 msgid "Search Query"
-msgstr ""
+msgstr "שאילתת חיפוש"
 
 #: src/fetchdialog.cpp:158
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
-msgstr ""
+msgstr "&חיפוש:"
 
 #: src/fetchdialog.cpp:164
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
-msgstr ""
+msgstr "נא למלא ערך לחיפוש. חיפוש מסת״ב חייב לכלול את המסת״ב במלואו."
 
 #: src/fetchdialog.cpp:174
 #, kde-format
 msgid "Choose the type of search"
-msgstr ""
+msgstr "נא לבחור את סוג החיפוש"
 
 #: src/fetchdialog.cpp:178 src/fetchdialog.cpp:402 src/fetchdialog.cpp:582
 #, kde-format
 msgid "&Stop"
-msgstr ""
+msgstr "&עצירה"
 
 #: src/fetchdialog.cpp:181
 #, kde-format
 msgid "Click to start or stop the search"
-msgstr ""
+msgstr "נא ללחוץ כדי להתחיל או לעצור את החיפוש"
 
 #: src/fetchdialog.cpp:188 src/fetchdialog.cpp:461
 #, kde-format
 msgid "&Search"
-msgstr ""
+msgstr "&חיפוש"
 
 #: src/fetchdialog.cpp:200
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
-msgstr ""
+msgstr "חיפוש מסת״ב/UPC במ&רוכז"
 
 #: src/fetchdialog.cpp:202
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
-msgstr ""
+msgstr "יש לסמן את התיבה הזאת כדי לחפש אחר כמה ערכי מסת״ב או UPC."
 
 #: src/fetchdialog.cpp:206
 #, kde-format
 msgid "Edit ISBN/UPC values..."
-msgstr ""
+msgstr "עריכת ערכי מסת״ב/UPC…"
 
 #: src/fetchdialog.cpp:210
 #, kde-format
@@ -4336,21 +4396,22 @@ msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
 "values."
 msgstr ""
+"נא ללחוץ כדי לפתוח תיבת עריכת טקסט למילוי או עריכת כמה ערכי מסת״ב או UPC."
 
 #: src/fetchdialog.cpp:216
 #, kde-format
 msgid "Search s&ource:"
-msgstr ""
+msgstr "מ&קור חיפוש:"
 
 #: src/fetchdialog.cpp:231
 #, kde-format
 msgid "Select the database to search"
-msgstr ""
+msgstr "נא לבחור באיזה מסד נתונים לחפש"
 
 #: src/fetchdialog.cpp:250
 #, kde-format
 msgid "Source"
-msgstr ""
+msgstr "מקור"
 
 #: src/fetchdialog.cpp:261
 #, kde-format
@@ -4358,113 +4419,115 @@ msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
 "the complete entry and show it in the view below."
 msgstr ""
+"כשתוצאות נמצאות הן מתווספות לרשימה הזאת. בחירה בתוצאה תמשוך את הרשומה במלואה "
+"ותציג אותה בתצוגה שלהלן."
 
 #: src/fetchdialog.cpp:274
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
-msgstr ""
+msgstr "על רשומה להופיע כאן לפני הוספתה לאוסף הנוכחי על ידי בחירתה ברשימה לעיל"
 
 #: src/fetchdialog.cpp:282
 #, kde-format
 msgid "&Add Entry"
-msgstr ""
+msgstr "הוס&פת רשומה"
 
 #: src/fetchdialog.cpp:287
 #, kde-format
 msgid "Add the selected entry to the current collection"
-msgstr ""
+msgstr "הוספת הרשומה הנבחרת לאוסף הנוכחי"
 
 #: src/fetchdialog.cpp:290
 #, kde-format
 msgid "Get More Results"
-msgstr ""
+msgstr "משיכת תוצאות נוספות"
 
 #: src/fetchdialog.cpp:294
 #, kde-format
 msgid "Fetch more results from the current data source"
-msgstr ""
+msgstr "משיכת תוצאות נוספות ממקור הנתונים הנוכחי"
 
 #: src/fetchdialog.cpp:300
 #, kde-format
 msgid "Clear all search fields and results"
-msgstr ""
+msgstr "פינוי כל שדתו החיפוש והתוצאות"
 
 #: src/fetchdialog.cpp:312
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p%"
 
 #: src/fetchdialog.cpp:392
 #, kde-format
 msgid "Cancelling the search..."
-msgstr ""
+msgstr "החיפוש מבוטל…"
 
 #: src/fetchdialog.cpp:405 src/fetchdialog.cpp:585
 #, kde-format
 msgid "Searching..."
-msgstr ""
+msgstr "מתבצע חיפוש…"
 
 #: src/fetchdialog.cpp:465
 #, kde-format
 msgid "The search returned no items."
-msgstr ""
+msgstr "החיפוש לא החזיר תוצאות."
 
 #: src/fetchdialog.cpp:468
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "החיפוש החזיר תוצאה."
+msgstr[1] "החיפוש החזיר שתי תוצאות."
+msgstr[2] "החיפוש החזיר %1 תוצאות."
+msgstr[3] "החיפוש החזיר %1 תוצאות."
 
 #: src/fetchdialog.cpp:497
 #, kde-format
 msgid "No results were found for the following ISBN values:"
-msgstr ""
+msgstr "לא נמצאו תוצאות לערכי המסת״ב הבאים:"
 
 #: src/fetchdialog.cpp:499
 #, kde-format
 msgid "No Results"
-msgstr ""
+msgstr "אין תוצאות"
 
 #: src/fetchdialog.cpp:552 src/fetchdialog.cpp:608
 #, kde-format
 msgid "Fetching %1..."
-msgstr ""
+msgstr "%1 מתקבל…"
 
 #: src/fetchdialog.cpp:625
 #, kde-format
 msgid "Attribution"
-msgstr ""
+msgstr "ייחוס"
 
 #: src/fetchdialog.cpp:662 src/fetchdialog.cpp:886
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
-msgstr ""
+msgstr "אין מקורות אינטרנט זמינים לסוג האוסף הנוכחי שלך."
 
 #: src/fetchdialog.cpp:743
 #, kde-format
 msgid "Edit ISBN/UPC Values"
-msgstr ""
+msgstr "עריכת ערכי מסת״ב/UPD"
 
 #: src/fetchdialog.cpp:754
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
-msgstr ""
+msgstr "<qt>נא למלא את ערכי המסת״ב או ה־UPC, אחד בשורה.</qt>"
 
 #: src/fetchdialog.cpp:770
 #, kde-format
 msgid "&Load From File..."
-msgstr ""
+msgstr "&טעינה מקובץ…"
 
 #: src/fetchdialog.cpp:771
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
-msgstr ""
+msgstr "<qt>טעינת הרשימה מקובץ טקסט.</qt>"
 
 #: src/fetchdialog.cpp:795
 #, kde-format
@@ -4472,62 +4535,64 @@ msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
 msgstr ""
+"<qt>חיפוש מסת״בים יכול להכיל עד 100 ערכי מסת״ב. רק 100 הערכים הראשונים "
+"ברשימה שלך יישלחו לחיפוש בפועל.</qt>"
 
 #: src/fetcherconfigdialog.cpp:75
 #, kde-format
 msgid "Data Source Properties"
-msgstr ""
+msgstr "מאפייני מקור נתונים"
 
 #: src/fetcherconfigdialog.cpp:104
 #, kde-format
 msgid "&Source name: "
-msgstr ""
+msgstr "&שם מקור:"
 
 #: src/fetcherconfigdialog.cpp:106
 #, kde-format
 msgid ""
 "The name identifies the data source and should be unique and informative."
-msgstr ""
+msgstr "השם מבדיל את מקור הנתונים מהשאר ועליו להיות ייחודי ומשמעותי."
 
 #: src/fetcherconfigdialog.cpp:116
 #, kde-format
 msgid "Source &type: "
-msgstr ""
+msgstr "&סוג מקור:"
 
 #: src/fetcherconfigdialog.cpp:125
 #, kde-format
 msgid "Tellico supports several different data sources."
-msgstr ""
+msgstr "Tellico תומך במגוון מקורות נתונים."
 
 #: src/fetcherconfigdialog.cpp:139
 #, kde-format
 msgid "Updating from source should overwrite user data"
-msgstr ""
+msgstr "עדכון ממקור אמור לשכתב נתוני משתמש"
 
 #: src/fetcherconfigdialog.cpp:142
 #, kde-format
 msgid "If checked, updating entries will overwrite any existing information."
-msgstr ""
+msgstr "אם האפשרות מסומנת, עדכון רשומות ישכתב פרטים קיימים."
 
 #: src/field.cpp:195
 #, kde-format
 msgid "Simple Text"
-msgstr ""
+msgstr "טקסט פשוט"
 
 #: src/field.cpp:196
 #, kde-format
 msgid "Paragraph"
-msgstr ""
+msgstr "פסקה"
 
 #: src/field.cpp:197
 #, kde-format
 msgid "Choice"
-msgstr ""
+msgstr "בחירה"
 
 #: src/field.cpp:198
 #, kde-format
 msgid "Checkbox"
-msgstr ""
+msgstr "תיבת סימון"
 
 #: src/field.cpp:201
 #, kde-format
@@ -4558,7 +4623,7 @@ msgstr "מועד עריכה"
 #: src/field.cpp:314
 #, kde-format
 msgid "International Standard Book Number"
-msgstr ""
+msgstr "מספר ספר תקני בינלאומי"
 
 #: src/field.cpp:343
 #, kde-format
@@ -4590,12 +4655,12 @@ msgstr "אילוצי סינון"
 #: src/filterdialog.cpp:84
 #, kde-format
 msgid "Match a&ll of the following"
-msgstr ""
+msgstr "ללכוד את כל ה&באים"
 
 #: src/filterdialog.cpp:85
 #, kde-format
 msgid "Match an&y of the following"
-msgstr ""
+msgstr "ללכוד &אחד מהבאים"
 
 #: src/filterdialog.cpp:109
 #, kde-format
@@ -4616,7 +4681,7 @@ msgstr "מסנן"
 #: src/filterview.cpp:192
 #, kde-format
 msgid "Filter (Sort by Count)"
-msgstr ""
+msgstr "סינון (מיון לפי כמות)"
 
 #: src/groupview.cpp:262
 #, kde-format
@@ -4636,7 +4701,7 @@ msgstr "סינון לפי קבוצה"
 #: src/groupview.cpp:412
 #, kde-format
 msgid "%1 (Sort by Count)"
-msgstr "%1 (סינון לפי כמות)"
+msgstr "%1 (מיון לפי כמות)"
 
 #: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
 #, kde-format
@@ -4806,116 +4871,116 @@ msgstr "פתיחת הסורק הנבחר נכשלה."
 #: src/gui/imagewidget.cpp:373
 #, kde-format
 msgid "Opening image in %1..."
-msgstr ""
+msgstr "התמונה נפתחת ב־%1…"
 
 #: src/gui/imagewidget.cpp:405
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
-msgstr ""
+msgstr "שמירת קישור אפשרית רק לתמונות חדשות שנוספו."
 
 #: src/gui/kwidgetlister.cpp:64
 #, kde-format
 msgctxt "more widgets"
 msgid "More"
-msgstr ""
+msgstr "יותר"
 
 #: src/gui/kwidgetlister.cpp:70
 #, kde-format
 msgctxt "fewer widgets"
 msgid "Fewer"
-msgstr ""
+msgstr "פחות"
 
 #: src/gui/previewdialog.cpp:43
 #, kde-format
 msgid "Template Preview"
-msgstr ""
+msgstr "תצוגת תבנית מקדימה"
 
 #: src/gui/statusbar.cpp:61
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "ביטול"
 
 #: src/gui/stringmapwidget.cpp:70
 #, kde-format
 msgctxt "set a value"
 msgid "&Set"
-msgstr ""
+msgstr "ה&גדרה"
 
 #: src/gui/stringmapwidget.cpp:75
 #, kde-format
 msgctxt "delete a value"
 msgid "&Delete"
-msgstr ""
+msgstr "מ&חיקה"
 
 #: src/gui/tablefieldwidget.cpp:167
 #, kde-format
 msgid "Rename Column"
-msgstr ""
+msgstr "שינוי שם עמודה"
 
 #: src/gui/tablefieldwidget.cpp:167
 #, kde-format
 msgid "New column name:"
-msgstr ""
+msgstr "שם העמודה החדש:"
 
 #: src/gui/tablefieldwidget.cpp:189
 #, kde-format
 msgid "Column %1"
-msgstr ""
+msgstr "עמודה %1"
 
 #: src/gui/tablefieldwidget.cpp:240 src/gui/tablefieldwidget.cpp:274
 #, kde-format
 msgid "Rename Column..."
-msgstr ""
+msgstr "שינוי שם עמודה..."
 
 #: src/gui/tablefieldwidget.cpp:242 src/gui/tablefieldwidget.cpp:280
 #, kde-format
 msgid "Clear Table"
-msgstr ""
+msgstr "פינוי טבלה"
 
 #: src/gui/tablefieldwidget.cpp:259
 #, kde-format
 msgid "Insert Row"
-msgstr ""
+msgstr "הוספת שורה"
 
 #: src/gui/tablefieldwidget.cpp:261
 #, kde-format
 msgid "Remove Row"
-msgstr ""
+msgstr "הסרת שורה"
 
 #: src/gui/tablefieldwidget.cpp:263
 #, kde-format
 msgid "Move Row Up"
-msgstr ""
+msgstr "העלאת שורה למעלה"
 
 #: src/gui/tablefieldwidget.cpp:268
 #, kde-format
 msgid "Move Row Down"
-msgstr ""
+msgstr "הורדת שורה למטה"
 
 #: src/images/imagejob.cpp:77 src/images/imagejob.cpp:111
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
-msgstr ""
+msgstr "Tellico לא הצליח לטעון את התמונה - %1."
 
 #: src/importdialog.cpp:80 src/importdialog.cpp:89
 #, kde-format
 msgid "Import Options"
-msgstr ""
+msgstr "אפשרויות ייבוא"
 
 #: src/importdialog.cpp:93
 #, kde-format
 msgid "&Replace current collection"
-msgstr ""
+msgstr "ה&חלפת האוסף הנוכחי"
 
 #: src/importdialog.cpp:94
 #, kde-format
 msgid "Replace the current collection with the contents of the imported file."
-msgstr ""
+msgstr "החלפת האוסף הנוכחי בתוכן הקובץ המיובא."
 
 #: src/importdialog.cpp:96
 #, kde-format
 msgid "A&ppend to current collection"
-msgstr ""
+msgstr "הו&ספה לסוף האוסף הנוכחי"
 
 #: src/importdialog.cpp:97
 #, kde-format
@@ -4923,11 +4988,12 @@ msgid ""
 "Append the contents of the imported file to the current collection. This is "
 "only possible when the collection types match."
 msgstr ""
+"הוספת תוכן הקובץ שיובא לאוסף הנוכחי. אפשרי רק כאשר סוגי האוספים תואמים."
 
 #: src/importdialog.cpp:100
 #, kde-format
 msgid "&Merge with current collection"
-msgstr ""
+msgstr "מי&זוג עם האוסף הנוכחי"
 
 #: src/importdialog.cpp:101
 #, kde-format
@@ -4936,93 +5002,95 @@ msgid ""
 "only possible when the collection types match. Entries must match exactly in "
 "order to be merged."
 msgstr ""
+"מיזוג תוכן הקובץ שיובא לאוסף הנוכחי. אפשרי רק כאשר סוגי האוספים תואמים. "
+"הרשומות חייבות להיות בדיוק באותו הסדר כדי שהמיזוג יצליח."
 
 #: src/importdialog.cpp:150 src/mainwindow.cpp:373
 #, kde-format
 msgid "&Import"
-msgstr ""
+msgstr "יי&בוא"
 
 #: src/importdialog.cpp:377 src/mainwindow.cpp:1293 src/mainwindow.cpp:1471
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
-msgstr ""
+msgstr "קובי Tellico"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
 #: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:76
 #, kde-format
 msgid "XML Files"
-msgstr ""
+msgstr "קובצי XML "
 
 #: src/importdialog.cpp:382 src/translators/bibtexexporter.cpp:65
 #, kde-format
 msgid "Bibtex Files"
-msgstr ""
+msgstr "קובצי Bibtex"
 
 #: src/importdialog.cpp:386 src/translators/csvexporter.cpp:64
 #, kde-format
 msgid "CSV Files"
-msgstr ""
+msgstr "קובצי CSV"
 
 #: src/importdialog.cpp:400
 #, kde-format
 msgid "RIS Files"
-msgstr ""
+msgstr "קובצי RIS"
 
 #: src/importdialog.cpp:404 src/translators/gcstarexporter.cpp:62
 #, kde-format
 msgid "GCstar Data Files"
-msgstr ""
+msgstr "קובצי נתונים מסוג GCstar"
 
 #: src/importdialog.cpp:408
 #, kde-format
 msgid "AMC Data Files"
-msgstr ""
+msgstr "קובצי נתונים מסוג AMC"
 
 #: src/importdialog.cpp:412
 #, kde-format
 msgid "PDF Files"
-msgstr ""
+msgstr "קובצי PDF"
 
 #: src/importdialog.cpp:416
 #, kde-format
 msgid "Referencer Files"
-msgstr ""
+msgstr "קובצי Referencer"
 
 #: src/importdialog.cpp:420
 #, kde-format
 msgid "CIW Files"
-msgstr ""
+msgstr "קובצי CIW"
 
 #: src/importdialog.cpp:424
 #, kde-format
 msgid "VinoXML Data Files"
-msgstr ""
+msgstr "קובצי נתונים מסוג VinoXML"
 
 #: src/importdialog.cpp:430
 #, kde-format
 msgid "eBook Files"
-msgstr ""
+msgstr "קובצי ספרים אלקטרוניים (eBooks)"
 
 #: src/loandialog.cpp:67
 #, kde-format
 msgid "Loan Dialog"
-msgstr ""
+msgstr "חלונית השאלה"
 
 #: src/loandialog.cpp:119
 #, kde-format
 msgid "The following items are being checked out:"
-msgstr ""
+msgstr "הפריטים הבאים נמסרים:"
 
 #: src/loandialog.cpp:125
 #, kde-format
 msgid "The following item is on-loan:"
-msgstr ""
+msgstr "הפריטים הבאים הושאלו:"
 
 #: src/loandialog.cpp:136
 #, kde-format
 msgid "&Lend to:"
-msgstr ""
+msgstr "הש&אלה לידי:"
 
 #: src/loandialog.cpp:150
 #, kde-format
@@ -5030,11 +5098,13 @@ msgid ""
 "Enter the name of the person borrowing the items from you. Clicking the "
 "button allows you to select from your address book."
 msgstr ""
+"נא למלא את שם המשאיל או המשאילה של הפריטים ממך. לחיצה על הכפתור מאפשרת לך "
+"לבחור מפנקס הכתובות שלך."
 
 #: src/loandialog.cpp:159
 #, kde-format
 msgid "&Loan date:"
-msgstr ""
+msgstr "תאריך ה&שאלה:"
 
 #: src/loandialog.cpp:166
 #, kde-format
@@ -5042,11 +5112,13 @@ msgid ""
 "The check-out date is the date that you lent the items. By default, today's "
 "date is used."
 msgstr ""
+"תאריך המסירה הוא התאריך בו השאלת את הפריטים. כברירת מחדל, נעשה שימוש בתאריך "
+"של היום."
 
 #: src/loandialog.cpp:175
 #, kde-format
 msgid "D&ue date:"
-msgstr ""
+msgstr "תאריך י&עד:"
 
 #: src/loandialog.cpp:183
 #, kde-format
@@ -5054,21 +5126,23 @@ msgid ""
 "The due date is when the items are due to be returned. The due date is not "
 "required, unless you want to add the loan to your active calendar."
 msgstr ""
+"תאריך היעד להחזרת הפריטים. תאריך היעד לא נחוץ, אלא אם כן יש להוסיף את ההשאלה "
+"ללוח השנה הפעיל שלך."
 
 #: src/loandialog.cpp:188
 #, kde-format
 msgid "&Note:"
-msgstr ""
+msgstr "ה&ערה"
 
 #: src/loandialog.cpp:196
 #, kde-format
 msgid "You can add notes about the loan."
-msgstr ""
+msgstr "אפשר להוסיף הערות על ההשאלה."
 
 #: src/loandialog.cpp:200
 #, kde-format
 msgid "&Add a reminder to the active calendar"
-msgstr ""
+msgstr "הוספת &תזכורת ללוח השנה הפעיל"
 
 #: src/loandialog.cpp:204
 #, kde-format
@@ -5077,16 +5151,18 @@ msgid ""
 "calendar, which can be viewed using KOrganizer. The box is only active if "
 "you set a due date.</qt>"
 msgstr ""
+"<qt>סימון התיבה הזאת יוסיף פריט <em>מטלה</em> ללוח השנה הפעיל שלך, שניתן "
+"לצפות בו עם KOrganizer. התיבה פעילה רק אם מוגדר תאריך יעד.</qt>"
 
 #: src/loanview.cpp:117
 #, kde-format
 msgid "Check-in"
-msgstr ""
+msgstr "&קליטה"
 
 #: src/loanview.cpp:119
 #, kde-format
 msgid "Modify Loan..."
-msgstr ""
+msgstr "שינוי השאלה…"
 
 #: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:511
 #: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:362
@@ -5094,27 +5170,27 @@ msgstr ""
 #: xslt/report-templates/Loan_View.xsl:135
 #, kde-format
 msgid "Borrower"
-msgstr ""
+msgstr "משאיל/ה"
 
 #: src/loanview.cpp:200
 #, kde-format
 msgid "Borrower (Sort by Count)"
-msgstr ""
+msgstr "משאיל/ה (מיון לפי כמות)"
 
 #: src/main.cpp:169
 #, kde-format
 msgid "Tellico - collection management software, free and simple"
-msgstr ""
+msgstr "Tellico - תוכנה לניהול אוספים, חינמית ופשוטה"
 
 #: src/main.cpp:171
 #, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr ""
+msgstr "(c) 2001‏-2024, רובי סטיבנסון"
 
 #: src/main.cpp:175
 #, kde-format
 msgid "Data source scripts"
-msgstr ""
+msgstr "סקריפטים למקורות נתונים"
 
 #: src/main.cpp:180
 #, kde-format
@@ -5149,32 +5225,32 @@ msgstr "לא לפתוח את הקובץ האחרון שנפתח מחדש"
 #: src/main.cpp:193
 #, kde-format
 msgid "Import <filename> as a bibtex file"
-msgstr ""
+msgstr "ייבוא <שם קובץ> כקובץ bibtex"
 
 #: src/main.cpp:194
 #, kde-format
 msgid "Import <filename> as a MODS file"
-msgstr ""
+msgstr "ייבוא <filename> כקובץ MODS"
 
 #: src/main.cpp:195
 #, kde-format
 msgid "Import <filename> as a RIS file"
-msgstr ""
+msgstr "ייבוא <filename> כקובץ RIS"
 
 #: src/main.cpp:196
 #, kde-format
 msgid "Import <filename> as a PDF file"
-msgstr ""
+msgstr "ייבוא <filename> כקובץ PDF"
 
 #: src/main.cpp:197
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "תיעוד פלט אבחון"
 
 #: src/main.cpp:198
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "כתיבת פלט יומן אל <שם קובץ>"
 
 #: src/main.cpp:199
 #, kde-format
@@ -5214,112 +5290,112 @@ msgstr "יצירת ביבליוגרפיית bibtex חדשה"
 #: src/mainwindow.cpp:284
 #, kde-format
 msgid "New &Comic Book Collection"
-msgstr ""
+msgstr "אוסף &חוברות קומיקס חדש"
 
 #: src/mainwindow.cpp:285
 #, kde-format
 msgid "Create a new comic book collection"
-msgstr ""
+msgstr "יצירת אוסף חוברות קומיקס חדש"
 
 #: src/mainwindow.cpp:287
 #, kde-format
 msgid "New &Video Collection"
-msgstr ""
+msgstr "אוסף &וידאו חדש"
 
 #: src/mainwindow.cpp:288
 #, kde-format
 msgid "Create a new video collection"
-msgstr ""
+msgstr "יצירת אוסף וידאו חדש"
 
 #: src/mainwindow.cpp:290
 #, kde-format
 msgid "New &Music Collection"
-msgstr ""
+msgstr "אוסף מו&זיקה חדש"
 
 #: src/mainwindow.cpp:291
 #, kde-format
 msgid "Create a new music collection"
-msgstr ""
+msgstr "יצירת אוסף מוזיקה חדש"
 
 #: src/mainwindow.cpp:293
 #, kde-format
 msgid "New C&oin Collection"
-msgstr ""
+msgstr "אוסף מ&טבעות חדש"
 
 #: src/mainwindow.cpp:294
 #, kde-format
 msgid "Create a new coin collection"
-msgstr ""
+msgstr "יצירת אוסף מטבעות חדש"
 
 #: src/mainwindow.cpp:296
 #, kde-format
 msgid "New &Stamp Collection"
-msgstr ""
+msgstr "אוסף &חותמות חדש"
 
 #: src/mainwindow.cpp:297
 #, kde-format
 msgid "Create a new stamp collection"
-msgstr ""
+msgstr "יצירת אוסף חותמות חדש"
 
 #: src/mainwindow.cpp:299
 #, kde-format
 msgid "New C&ard Collection"
-msgstr ""
+msgstr "אוסף &קלפים חדש"
 
 #: src/mainwindow.cpp:300
 #, kde-format
 msgid "Create a new trading card collection"
-msgstr ""
+msgstr "יצירת אוסף קלפי החלפה חדש"
 
 #: src/mainwindow.cpp:302
 #, kde-format
 msgid "New &Wine Collection"
-msgstr ""
+msgstr "אוסף יי&נות חדש"
 
 #: src/mainwindow.cpp:303
 #, kde-format
 msgid "Create a new wine collection"
-msgstr ""
+msgstr "יצירת אוסף יינות חדש"
 
 #: src/mainwindow.cpp:305
 #, kde-format
 msgid "New Video &Game Collection"
-msgstr ""
+msgstr "אוסף מ&שחקי וידאו חדש"
 
 #: src/mainwindow.cpp:306
 #, kde-format
 msgid "Create a new video game collection"
-msgstr ""
+msgstr "יצירת אוסף משחקי וידאו חדש"
 
 #: src/mainwindow.cpp:308
 #, kde-format
 msgid "New Boa&rd Game Collection"
-msgstr ""
+msgstr "אוסף משחקי &לוח חדש"
 
 #: src/mainwindow.cpp:309
 #, kde-format
 msgid "Create a new board game collection"
-msgstr ""
+msgstr "יצירת אוסף משחקי לוח חדש"
 
 #: src/mainwindow.cpp:311
 #, kde-format
 msgid "New &File Catalog"
-msgstr ""
+msgstr "&קטלוג קבצים חדש"
 
 #: src/mainwindow.cpp:312
 #, kde-format
 msgid "Create a new file catalog"
-msgstr ""
+msgstr "יצירת קטלוג קבצים חדש"
 
 #: src/mainwindow.cpp:315
 #, kde-format
 msgid "New C&ustom Collection"
-msgstr ""
+msgstr "אוסף מותאם &אישית חדש"
 
 #: src/mainwindow.cpp:316
 #, kde-format
 msgid "Create a new custom collection"
-msgstr ""
+msgstr "יצירת אוסף מותאם אישית חדש"
 
 #: src/mainwindow.cpp:327
 #, kde-format
@@ -5369,7 +5445,7 @@ msgstr "יציאה מהיישום"
 #: src/mainwindow.cpp:375
 #, kde-format
 msgid "Import the collection data from other formats"
-msgstr ""
+msgstr "ייבוא נתוני האוסף מתסדירים אחרים"
 
 #: src/mainwindow.cpp:391
 #, kde-format
@@ -5414,222 +5490,222 @@ msgstr "ייבוא נתונים ממנהל אוספי הספרים Alexandria"
 #: src/mainwindow.cpp:405
 #, kde-format
 msgid "Import Delicious Library Data..."
-msgstr ""
+msgstr "ייבוא נתונים מ־Delicious Library…"
 
 #: src/mainwindow.cpp:406
 #, kde-format
 msgid "Import data from Delicious Library"
-msgstr ""
+msgstr "ייבוא נתונים מ־Delicious Library"
 
 #: src/mainwindow.cpp:409
 #, kde-format
 msgid "Import Collectorz Data..."
-msgstr ""
+msgstr "ייבוא נתונים מ־Collectorz…"
 
 #: src/mainwindow.cpp:410
 #, kde-format
 msgid "Import data from Collectorz"
-msgstr ""
+msgstr "ייבוא נתונים מ־Collectorz"
 
 #: src/mainwindow.cpp:413
 #, kde-format
 msgid "Import Data Crow Data..."
-msgstr ""
+msgstr "ייבוא נתונים מ־Data Crow..."
 
 #: src/mainwindow.cpp:414
 #, kde-format
 msgid "Import data from Data Crow"
-msgstr ""
+msgstr "ייבוא נתונים מ־Data Crow"
 
 #: src/mainwindow.cpp:417
 #, kde-format
 msgid "Import Referencer Data..."
-msgstr ""
+msgstr "ייבוא נתונים מ־Referencer…"
 
 #: src/mainwindow.cpp:418
 #, kde-format
 msgid "Import data from Referencer"
-msgstr ""
+msgstr "ייבוא נתונים מ־Referencer"
 
 #: src/mainwindow.cpp:421
 #, kde-format
 msgid "Import Bibtex Data..."
-msgstr ""
+msgstr "ייבוא נתוני Bibtex…"
 
 #: src/mainwindow.cpp:422
 #, kde-format
 msgid "Import a bibtex bibliography file"
-msgstr ""
+msgstr "ייבוא קובץ ביבליוגרפיה של bibtex"
 
 #: src/mainwindow.cpp:427
 #, kde-format
 msgid "Import Bibtexml Data..."
-msgstr ""
+msgstr "ייבוא נתוני Bibtexml…"
 
 #: src/mainwindow.cpp:428
 #, kde-format
 msgid "Import a Bibtexml bibliography file"
-msgstr ""
+msgstr "ייבוא קובץ ביבליוגרפיה מסוג Bibtexml"
 
 #: src/mainwindow.cpp:430
 #, kde-format
 msgid "Import RIS Data..."
-msgstr ""
+msgstr "ייבוא נתוני RIS…"
 
 #: src/mainwindow.cpp:431
 #, kde-format
 msgid "Import an RIS reference file"
-msgstr ""
+msgstr "ייבוא קובץ הפנייה מסוג RIS"
 
 #: src/mainwindow.cpp:433
 #, kde-format
 msgid "Import MARC Data..."
-msgstr ""
+msgstr "ייבוא נתוני MARC…"
 
 #: src/mainwindow.cpp:434
 #, kde-format
 msgid "Import MARC data"
-msgstr ""
+msgstr "ייבוא נתוני MARC"
 
 #: src/mainwindow.cpp:441
 #, kde-format
 msgid "Import Goodreads Collection..."
-msgstr ""
+msgstr "ייבוא אוסף Goodreads…"
 
 #: src/mainwindow.cpp:442
 #, kde-format
 msgid "Import a collection from Goodreads.com"
-msgstr ""
+msgstr "ייבוא אוסף מ־Goodreads.com"
 
 #: src/mainwindow.cpp:444
 #, kde-format
 msgid "Import LibraryThing Collection..."
-msgstr ""
+msgstr "ייבוא אוסף מ־LibraryThing…"
 
 #: src/mainwindow.cpp:445
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
-msgstr ""
+msgstr "ייבוא אוסף מ־LibraryThing.com"
 
 #: src/mainwindow.cpp:447
 #, kde-format
 msgid "Import PDF File..."
-msgstr ""
+msgstr "ייבוא קובץ PDF…"
 
 #: src/mainwindow.cpp:448
 #, kde-format
 msgid "Import a PDF file"
-msgstr ""
+msgstr "ייבוא קובץ PDF"
 
 #: src/mainwindow.cpp:450
 #, kde-format
 msgid "Import Audio File Metadata..."
-msgstr ""
+msgstr "ייבוא נתוני־על של קובץ שמע…"
 
 #: src/mainwindow.cpp:451
 #, kde-format
 msgid "Import meta-data from audio files"
-msgstr ""
+msgstr "ייבוא נתוני־על מקובצי שמע"
 
 #: src/mainwindow.cpp:456
 #, kde-format
 msgid "Import Audio CD Data..."
-msgstr ""
+msgstr "ייבוא נתוני תקליטור שמע…"
 
 #: src/mainwindow.cpp:457
 #, kde-format
 msgid "Import audio CD information"
-msgstr ""
+msgstr "ייבוא פרטי תקליטור שמע"
 
 #: src/mainwindow.cpp:462
 #, kde-format
 msgid "Import Discogs Collection..."
-msgstr ""
+msgstr "ייבוא אוסף מ־Discogs…"
 
 #: src/mainwindow.cpp:463
 #, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr ""
+msgstr "ייבוא אוסף מ־Discogs.com"
 
 #: src/mainwindow.cpp:465
 #, kde-format
 msgid "Import GCstar Data..."
-msgstr ""
+msgstr "ייבוא נתוני GCstar…"
 
 #: src/mainwindow.cpp:466
 #, kde-format
 msgid "Import a GCstar data file"
-msgstr ""
+msgstr "ייבוא קובץ נתוני GCstar"
 
 #: src/mainwindow.cpp:469
 #, kde-format
 msgid "Import Griffith Data..."
-msgstr ""
+msgstr "ייבוא נתוני Griffith…"
 
 #: src/mainwindow.cpp:470
 #, kde-format
 msgid "Import a Griffith database"
-msgstr ""
+msgstr "ייבוא מסד נתוני Griffith"
 
 #: src/mainwindow.cpp:473
 #, kde-format
 msgid "Import Ant Movie Catalog Data..."
-msgstr ""
+msgstr "ייבוא נתוני Ant Movie Catalog…"
 
 #: src/mainwindow.cpp:474
 #, kde-format
 msgid "Import an Ant Movie Catalog data file"
-msgstr ""
+msgstr "ייבוא קובץ נתוני Ant Movie Catalog"
 
 #: src/mainwindow.cpp:477
 #, kde-format
 msgid "Import BoardGameGeek Collection..."
-msgstr ""
+msgstr "ייבוא אוסף מ־BoardGameGeek…"
 
 #: src/mainwindow.cpp:478
 #, kde-format
 msgid "Import a collection from BoardGameGeek.com"
-msgstr ""
+msgstr "ייבוא אוסף מ־BoardGameGeek.com"
 
 #: src/mainwindow.cpp:480
 #, kde-format
 msgid "Import VinoXML..."
-msgstr ""
+msgstr "ייבוא VinoXML..."
 
 #: src/mainwindow.cpp:481
 #, kde-format
 msgid "Import VinoXML data"
-msgstr ""
+msgstr "ייבוא נתוני VinoXML"
 
 #: src/mainwindow.cpp:483
 #, kde-format
 msgid "Import File Listing..."
-msgstr ""
+msgstr "ייבוא רשימת קבצים…"
 
 #: src/mainwindow.cpp:484
 #, kde-format
 msgid "Import information about files in a folder"
-msgstr ""
+msgstr "ייבוא מידע על קבצים בתיקייה"
 
 #: src/mainwindow.cpp:486
 #, kde-format
 msgid "Import XSL Transform..."
-msgstr ""
+msgstr "ייבוא התמרת XML…"
 
 #: src/mainwindow.cpp:487
 #, kde-format
 msgid "Import using an XSL Transform"
-msgstr ""
+msgstr "ייבוא באמצעות התמרת XML"
 
 #: src/mainwindow.cpp:500
 #, kde-format
 msgid "&Export"
-msgstr ""
+msgstr "יי&צוא"
 
 #: src/mainwindow.cpp:502
 #, kde-format
 msgid "Export the collection data to other formats"
-msgstr ""
+msgstr "ייצוא נתוני האוסף לסוגי קבצים שונים"
 
 #: src/mainwindow.cpp:518
 #, kde-format
@@ -5669,389 +5745,389 @@ msgstr "ייצוא ל־CSV…"
 #: src/mainwindow.cpp:530
 #, kde-format
 msgid "Export to a comma-separated values file"
-msgstr ""
+msgstr "ייצוא לקובץ ערכים מופרדים בפסיקים"
 
 #: src/mainwindow.cpp:532
 #, kde-format
 msgid "Export to Alexandria..."
-msgstr ""
+msgstr "ייצוא ל־Alexandria…"
 
 #: src/mainwindow.cpp:533
 #, kde-format
 msgid "Export to an Alexandria library"
-msgstr ""
+msgstr "ייצוא לספרייה של Alexandria"
 
 #: src/mainwindow.cpp:536
 #, kde-format
 msgid "Export to Bibtex..."
-msgstr ""
+msgstr "ייצוא ל־Bibtex…"
 
 #: src/mainwindow.cpp:537
 #, kde-format
 msgid "Export to a bibtex file"
-msgstr ""
+msgstr "ייצוא לקובץ bibtex"
 
 #: src/mainwindow.cpp:539
 #, kde-format
 msgid "Export to Bibtexml..."
-msgstr ""
+msgstr "ייצוא ל־Bibtexml…"
 
 #: src/mainwindow.cpp:540
 #, kde-format
 msgid "Export to a Bibtexml file"
-msgstr ""
+msgstr "ייצוא לקובץ Bibtexml"
 
 #: src/mainwindow.cpp:542
 #, kde-format
 msgid "Export to ONIX..."
-msgstr ""
+msgstr "ייצוא ל־ONIX…"
 
 #: src/mainwindow.cpp:543
 #, kde-format
 msgid "Export to an ONIX file"
-msgstr ""
+msgstr "ייצוא לקובץ ONIX"
 
 #: src/mainwindow.cpp:545
 #, kde-format
 msgid "Export to GCstar..."
-msgstr ""
+msgstr "ייצוא ל־GCstar…"
 
 #: src/mainwindow.cpp:546
 #, kde-format
 msgid "Export to a GCstar data file"
-msgstr ""
+msgstr "ייצוא לקובץ נתונים מסוג GCstar"
 
 #: src/mainwindow.cpp:549
 #, kde-format
 msgid "Export XSL Transform..."
-msgstr ""
+msgstr "יייצוא התמרת XSLT…"
 
 #: src/mainwindow.cpp:550
 #, kde-format
 msgid "Export using an XSL Transform"
-msgstr ""
+msgstr "ייצוא באמצעות התמרת XSLT"
 
 #: src/mainwindow.cpp:561
 #, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
-msgstr ""
+msgstr "גזירת הטקסט הנבחר והצבתו בלוח הגזירים"
 
 #: src/mainwindow.cpp:563
 #, kde-format
 msgid "Copy the selected text to the clipboard"
-msgstr ""
+msgstr "העתקת הטקסט הנבחר ללוח הגזירים"
 
 #: src/mainwindow.cpp:565
 #, kde-format
 msgid "Paste the clipboard contents"
-msgstr ""
+msgstr "הדבקת תוכן לוח הגזירים"
 
 #: src/mainwindow.cpp:567
 #, kde-format
 msgid "Select all the entries in the collection"
-msgstr ""
+msgstr "בחירת כל הרשומות באוסף"
 
 #: src/mainwindow.cpp:569
 #, kde-format
 msgid "Deselect all the entries in the collection"
-msgstr ""
+msgstr "ביטול בחירת הרשומות באוסף"
 
 #: src/mainwindow.cpp:572
 #, kde-format
 msgid "Advanced &Filter..."
-msgstr ""
+msgstr "מסנן מ&תקדם…"
 
 #: src/mainwindow.cpp:576 src/mainwindow.cpp:808
 #, kde-format
 msgid "Filter the collection"
-msgstr ""
+msgstr "סינון האוסף"
 
 #: src/mainwindow.cpp:583
 #, kde-format
 msgid "&New Entry..."
-msgstr ""
+msgstr "רשומה &חדשה…"
 
 #: src/mainwindow.cpp:585
 #, kde-format
 msgid "New Entry"
-msgstr ""
+msgstr "רשומה חדשה"
 
 #: src/mainwindow.cpp:587
 #, kde-format
 msgid "Create a new entry"
-msgstr ""
+msgstr "יצירת רשומה חדשה"
 
 #: src/mainwindow.cpp:589
 #, kde-format
 msgid "Add Entry"
-msgstr ""
+msgstr "הוספת רשומה"
 
 #: src/mainwindow.cpp:599
 #, kde-format
 msgid "Internet Search..."
-msgstr ""
+msgstr "חיפוש באינטרנט…"
 
 #: src/mainwindow.cpp:603
 #, kde-format
 msgid "Search the internet..."
-msgstr ""
+msgstr "חיפוש באינטרנט…"
 
 #: src/mainwindow.cpp:613
 #, kde-format
 msgid "Edit the selected entries"
-msgstr ""
+msgstr "עריכת הרשומות הנבחרות"
 
 #: src/mainwindow.cpp:620
 #, kde-format
 msgid "Copy the selected entries"
-msgstr ""
+msgstr "העתקת הרשומות הנבחרות"
 
 #: src/mainwindow.cpp:627
 #, kde-format
 msgid "Delete the selected entries"
-msgstr ""
+msgstr "מחיקת הרשומות הנבחרות"
 
 #: src/mainwindow.cpp:631
 #, kde-format
 msgid "&Merge Entries"
-msgstr ""
+msgstr "מי&זוג רשומות"
 
 #: src/mainwindow.cpp:635
 #, kde-format
 msgid "Merge the selected entries"
-msgstr ""
+msgstr "מיזוג הרשומות הנבחרות"
 
 #: src/mainwindow.cpp:639
 #, kde-format
 msgid "Check-&out..."
-msgstr ""
+msgstr "מ&סירה…"
 
 #: src/mainwindow.cpp:641
 #, kde-format
 msgid "Check-out the selected items"
-msgstr ""
+msgstr "מסירת הפריטים הנבחרים"
 
 #: src/mainwindow.cpp:644
 #, kde-format
 msgid "Check-&in"
-msgstr ""
+msgstr "&קליטה"
 
 #: src/mainwindow.cpp:646
 #, kde-format
 msgid "Check-in the selected items"
-msgstr ""
+msgstr "קליטת הפריטים הנבחרים"
 
 #: src/mainwindow.cpp:649
 #, kde-format
 msgid "&Rename Collection..."
-msgstr ""
+msgstr "&שינוי שם האוסף…"
 
 #: src/mainwindow.cpp:652
 #, kde-format
 msgid "Rename the collection"
-msgstr ""
+msgstr "שינוי שם האוסף"
 
 #: src/mainwindow.cpp:655
 #, kde-format
 msgid "Collection &Fields..."
-msgstr ""
+msgstr "&שדות האוסף…"
 
 #: src/mainwindow.cpp:656
 #, kde-format
 msgid "Fields"
-msgstr ""
+msgstr "שדות"
 
 #: src/mainwindow.cpp:659
 #, kde-format
 msgid "Modify the collection fields"
-msgstr ""
+msgstr "שינוי השדות של האוסף"
 
 #: src/mainwindow.cpp:662
 #, kde-format
 msgid "&Generate Reports..."
-msgstr ""
+msgstr "הפקת &דוחות…"
 
 #: src/mainwindow.cpp:663
 #, kde-format
 msgid "Reports"
-msgstr ""
+msgstr "דוחות"
 
 #: src/mainwindow.cpp:665
 #, kde-format
 msgid "Generate collection reports"
-msgstr ""
+msgstr "הפקת דוחות אוספים"
 
 #: src/mainwindow.cpp:668
 #, kde-format
 msgid "Convert to &Bibliography"
-msgstr ""
+msgstr "המרה ל&ביבליוגרפיה"
 
 #: src/mainwindow.cpp:670
 #, kde-format
 msgid "Convert a book collection to a bibliography"
-msgstr ""
+msgstr "המרת אוסף ספרים לביבליוגרפיה"
 
 #: src/mainwindow.cpp:673
 #, kde-format
 msgid "String &Macros..."
-msgstr ""
+msgstr "ת&סריטי מחרוזות…"
 
 #: src/mainwindow.cpp:675
 #, kde-format
 msgid "Edit the bibtex string macros"
-msgstr ""
+msgstr "עריכת תסריטי מחרוזות ה־bibtex"
 
 #: src/mainwindow.cpp:678
 #, kde-format
 msgid "Check for Duplicate Keys..."
-msgstr ""
+msgstr "איתור מפתחות כפולים…"
 
 #: src/mainwindow.cpp:680
 #, kde-format
 msgid "Check for duplicate citation keys"
-msgstr ""
+msgstr "איתור מפתחות ציטוט כפולים"
 
 #: src/mainwindow.cpp:690
 #, kde-format
 msgid "Copy Bibtex to Cli&pboard"
-msgstr ""
+msgstr "העתקת Bibtex ללוח &גזירים"
 
 #: src/mainwindow.cpp:691
 #, kde-format
 msgid "Copy bibtex citations to the clipboard"
-msgstr ""
+msgstr "העתקת ציטוטי bibtex ללוח הגזירים"
 
 #: src/mainwindow.cpp:696
 #, kde-format
 msgid "Cite Entry in &LyX"
-msgstr ""
+msgstr "ר&שומת ציטוט ב־LyX"
 
 #: src/mainwindow.cpp:697
 #, kde-format
 msgid "Cite the selected entries in LyX"
-msgstr ""
+msgstr "ציטוט הרשומות הנבחרות ב־LyX"
 
 #: src/mainwindow.cpp:713
 #, kde-format
 msgctxt "Update Entry"
 msgid "Update"
-msgstr ""
+msgstr "עדכון"
 
 #: src/mainwindow.cpp:722
 #, kde-format
 msgid "All Sources"
-msgstr ""
+msgstr "כל המקורות"
 
 #: src/mainwindow.cpp:723
 #, kde-format
 msgid "Update entry data from all available sources"
-msgstr ""
+msgstr "עדכון נתוני הרשומה מכל המקורות הזמינים"
 
 #: src/mainwindow.cpp:734
 #, kde-format
 msgid "Unlock Layout"
-msgstr ""
+msgstr "שחרור הפריסה"
 
 #: src/mainwindow.cpp:735
 #, kde-format
 msgid "Unlock the window's layout"
-msgstr ""
+msgstr "שחרור פריסת החלון"
 
 #: src/mainwindow.cpp:737
 #, kde-format
 msgid "Lock Layout"
-msgstr ""
+msgstr "נעילת הפריסה"
 
 #: src/mainwindow.cpp:738
 #, kde-format
 msgid "Lock the window's layout"
-msgstr ""
+msgstr "נעילת פריסת החלון"
 
 #: src/mainwindow.cpp:743
 #, kde-format
 msgid "Reset Layout"
-msgstr ""
+msgstr "איפוס הפריסה"
 
 #: src/mainwindow.cpp:744
 #, kde-format
 msgid "Reset the window's layout"
-msgstr ""
+msgstr "איפוס פריסת החלון"
 
 #: src/mainwindow.cpp:747
 #, kde-format
 msgid "Entry &Editor"
-msgstr ""
+msgstr "&עורך רשומות"
 
 #: src/mainwindow.cpp:749
 #, kde-format
 msgid "Enable/disable the editor"
-msgstr ""
+msgstr "הפעלת/השבתת העורך"
 
 #: src/mainwindow.cpp:758
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "הצגת יומן"
 
 #: src/mainwindow.cpp:775
 #, kde-format
 msgid "Change Grouping"
-msgstr ""
+msgstr "החלפת קיבוץ"
 
 #: src/mainwindow.cpp:778
 #, kde-format
 msgid "&Group Selection"
-msgstr ""
+msgstr "&קיבוץ הבחירה"
 
 #: src/mainwindow.cpp:779
 #, kde-format
 msgid "Change the grouping of the collection"
-msgstr ""
+msgstr "החלפת צורת קיבוץ הקבוצה"
 
 #: src/mainwindow.cpp:793
 #, kde-format
 msgid "Filter here..."
-msgstr ""
+msgstr "סינון מכאן…"
 
 #: src/mainwindow.cpp:858 src/mainwindow.cpp:861
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
 "qt>"
-msgstr ""
+msgstr "<qt><i>תצוגת רשומה</i> מציגה תצוגה מעוצבת של תוכן הרשומה.</qt>"
 
 #: src/mainwindow.cpp:867
 #, kde-format
 msgid "Collection View"
-msgstr ""
+msgstr "תצוגת אוסף"
 
 #: src/mainwindow.cpp:874
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
 "</qt>"
-msgstr ""
+msgstr "<qt><i>תצוגת עמודות</i> מציגה ערך של מגוון שדות לכל רשומה.</qt>"
 
 #: src/mainwindow.cpp:891
 #, kde-format
 msgid "Group View"
-msgstr ""
+msgstr "תצוגת קיבוץ"
 
 #: src/mainwindow.cpp:900
 #, kde-format
 msgid "Groups"
-msgstr ""
+msgstr "קבוצות"
 
 #: src/mainwindow.cpp:901
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
-msgstr ""
+msgstr "<qt><i>תצוגת קיבוץ</i> מקבצת את הרשומות לפי השדה הנבחר.</qt>"
 
 #: src/mainwindow.cpp:978
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
-msgstr ""
+msgstr "ברוך בואך למנהל האוספים Tellico"
 
 #: src/mainwindow.cpp:980
 #, kde-format
@@ -6062,6 +6138,10 @@ msgid ""
 "by <a href=\"tc:///edit_search_internet\">downloading data</a> from various "
 "Internet sources.</h3>"
 msgstr ""
+"<h3>Tellico הוא כלי לניהול אוספים של ספרים, סרטונים, מוזיקה וכל דבר אחר "
+"שמתחשק לך לסדר בקטלוג.</h3><h3>אפשר להוסיף רשומות חדשות לאוסף שלך או באמצעות "
+"<a href=\"tc:///coll_new_entry\">הקלדתו ידנית</a> או על ידי <a href=\"tc:///"
+"edit_search_internet\">הורדת נתונים</a> ממגוון מקורות באינטרנט.</h3>"
 
 #: src/mainwindow.cpp:1179
 #, kde-format
@@ -6069,21 +6149,23 @@ msgid ""
 "The current file has been modified.\n"
 "Do you want to save it?"
 msgstr ""
+"הקובץ הנוכחי השתנה.\n"
+"לשמור אותו?"
 
 #: src/mainwindow.cpp:1235 src/mainwindow.cpp:1269
 #, kde-format
 msgid "Creating new collection..."
-msgstr ""
+msgstr "נוצר אוסף חדש…"
 
 #: src/mainwindow.cpp:1290 src/mainwindow.cpp:1313 src/mainwindow.cpp:1331
 #, kde-format
 msgid "Opening file..."
-msgstr ""
+msgstr "קובץ נפתח…"
 
 #: src/mainwindow.cpp:1301
 #, kde-format
 msgid "Open File"
-msgstr ""
+msgstr "פתיחת קובץ"
 
 #: src/mainwindow.cpp:1423
 #, kde-format
@@ -6093,31 +6175,34 @@ msgid ""
 "data directory to improve performance?</p><p>Your choice can always be "
 "changed in the configuration dialog.</p></qt>"
 msgstr ""
+"<qt><p>בחרת לשמור קובץ עם תמונות רבות, מה שעלול לגרום ל־Tellico להאטבאופן "
+"משמעותי. לשמור את התמונות בנפרד בתיקיית הנתונים של Tellico כדי לשפר את "
+"הביצועים?</p><p>תמיד אפשר לשנות את הבחירה שלך בחלונית ההגדרות.</p></qt>"
 
 #: src/mainwindow.cpp:1428
 #, kde-format
 msgid "Save Images Separately"
-msgstr ""
+msgstr "שמירת תמונות בנפרד"
 
 #: src/mainwindow.cpp:1429
 #, kde-format
 msgid "Save Images in File"
-msgstr ""
+msgstr "שמירת תמונות בקובץ"
 
 #: src/mainwindow.cpp:1469
 #, kde-format
 msgid "Saving file with a new filename..."
-msgstr ""
+msgstr "קובץ נשמר בשם קובץ חדש…"
 
 #: src/mainwindow.cpp:1478
 #, kde-format
 msgid "Save As"
-msgstr ""
+msgstr "שמירה בשם"
 
 #: src/mainwindow.cpp:1544
 #, kde-format
 msgid "Printing..."
-msgstr ""
+msgstr "הדפסה…"
 
 #: src/mainwindow.cpp:1548
 #, kde-format
@@ -6125,26 +6210,28 @@ msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
+"האוסף מסונן כך שמוצגת סדרה מצומצמת של רשומות. רק הרשומות הגלויות תודפסנה. "
+"להמשיך?"
 
 #: src/mainwindow.cpp:1571
 #, kde-format
 msgid "Exiting..."
-msgstr ""
+msgstr "התוכנה נסגרת…"
 
 #: src/mainwindow.cpp:1673
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
-msgstr ""
+msgstr "(%1 נופו, %2 נבחרו)"
 
 #: src/mainwindow.cpp:1676
 #, kde-format
 msgid "(%1 filtered)"
-msgstr ""
+msgstr "(%1 נופו)"
 
 #: src/mainwindow.cpp:1679
 #, kde-format
 msgid "(%1 selected)"
-msgstr ""
+msgstr "(%1 נבחרו)"
 
 #: src/mainwindow.cpp:1818 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:252
@@ -6152,57 +6239,57 @@ msgstr ""
 #: src/translators/xsltimporter.cpp:93
 #, kde-format
 msgid "Tellico encountered an error in XSLT processing."
-msgstr ""
+msgstr "Tellico נתקל בשגיאה בעיבוד XSLT."
 
 #: src/mainwindow.cpp:1936
 #, kde-format
 msgid "Importing data..."
-msgstr ""
+msgstr "הנתונים מיובאים…"
 
 #: src/mainwindow.cpp:1947
 #, kde-format
 msgid "Import File"
-msgstr ""
+msgstr "ייבוא קובץ"
 
 #: src/mainwindow.cpp:1960
 #, kde-format
 msgid "Import Directory"
-msgstr ""
+msgstr "ייבוא תיקייה"
 
 #: src/mainwindow.cpp:1984
 #, kde-format
 msgid "Exporting data..."
-msgstr ""
+msgstr "הנתונים מיוצאים…"
 
 #: src/mainwindow.cpp:2007
 #, kde-format
 msgid "Export As"
-msgstr ""
+msgstr "ייצוא בתור"
 
 #: src/mainwindow.cpp:2035
 #, kde-format
 msgid "String Macros"
-msgstr ""
+msgstr "תסריטי מחרוזות"
 
 #: src/mainwindow.cpp:2036
 #, kde-format
 msgid "Macro"
-msgstr ""
+msgstr "תסריט"
 
 #: src/mainwindow.cpp:2036
 #, kde-format
 msgid "String"
-msgstr ""
+msgstr "מחרוזת"
 
 #: src/mainwindow.cpp:2122
 #, kde-format
 msgid "Creating citations..."
-msgstr ""
+msgstr "נוצרים ציטוטים…"
 
 #: src/mainwindow.cpp:2232
 #, kde-format
 msgid "Filters"
-msgstr ""
+msgstr "מסננים"
 
 #: src/mainwindow.cpp:2233
 #, kde-format
@@ -6210,11 +6297,12 @@ msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr ""
+"<qt><i>תצוגת הסינון</i> מציגה את הרשומות שעונות על כללי סינון מסוימים.</qt>"
 
 #: src/mainwindow.cpp:2256
 #, kde-format
 msgid "Loans"
-msgstr ""
+msgstr "השאלות"
 
 #: src/mainwindow.cpp:2257
 #, kde-format
@@ -6222,6 +6310,7 @@ msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
+"<qt><i>תצוגת ההשאלה</i> מציגה רשימה של כל האנשים ששאלו פריטים מהאוסףשלך.</qt>"
 
 #: src/mainwindow.cpp:2344
 #, kde-format
@@ -6229,55 +6318,57 @@ msgid ""
 "Some images are not saved in the configured location. The current file must "
 "be saved and the images will be transferred to the new location."
 msgstr ""
+"חלק מהתמונות לא נשמרות במקום שהוגדר. יש לשמור את הקובץ הנוכחי והתמונות "
+"תועברנה למקום החדש."
 
 #: src/mainwindow.cpp:2385
 #, kde-format
 msgid "Update entry data from %1"
-msgstr ""
+msgstr "עדכון נתוני הרשומה מ־%1"
 
 #: src/mainwindow.cpp:2404
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
-msgstr ""
+msgstr "Tellico יכול לייבא רק קובץ אחד מהסוג הזה בו־זמנית. רק %1 ייובא."
 
 #: src/mainwindow.cpp:2587
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr ""
+msgstr "יומן Tellico"
 
 #: src/reportdialog.cpp:88
 #, kde-format
 msgid "Collection Report"
-msgstr ""
+msgstr "דוח אוספים"
 
 #: src/reportdialog.cpp:99
 #, kde-format
 msgid "&Report template:"
-msgstr ""
+msgstr "&דוח תבנית:"
 
 #: src/reportdialog.cpp:125
 #, kde-format
 msgid "One Entry Per Page"
-msgstr ""
+msgstr "רשומה בעמוד"
 
 #: src/reportdialog.cpp:142
 #, kde-format
 msgid "&Generate"
-msgstr ""
+msgstr "ה&פקה"
 
 #: src/reportdialog.cpp:162
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
-msgstr ""
+msgstr "נא לבחור תבנית דוח וללחוץ על <em>הפקה</em>."
 
 #: src/reportdialog.cpp:163
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
-msgstr ""
+msgstr "הפקתם של חלק מהדוחות עלול לארוך מספר שניות לאוספים גדולים."
 
 #: src/reportdialog.cpp:441
 #, kde-format
@@ -6317,12 +6408,12 @@ msgstr "רשומה 2"
 #: src/tellico_kernel.cpp:337
 #, kde-format
 msgid "Conflicting values for %1 were found while merging entries."
-msgstr ""
+msgstr "נמצאו ערכים סותרים ל־%1 בעת מיזוג רשומות."
 
 #: src/tellico_kernel.cpp:343
 #, kde-format
 msgid "Please choose which value to keep."
-msgstr ""
+msgstr "נא לבחור איזה ערך להשאיר."
 
 #: src/tellico_kernel.cpp:350 src/tellico_kernel.cpp:351
 #: src/tellico_kernel.cpp:362 src/tellico_kernel.cpp:363
@@ -6402,6 +6493,8 @@ msgid ""
 "<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
 "books in that library could be overwritten.</qt>"
 msgstr ""
+"<qt>ספריית Alexandria בשם <i>%1</i> כבר קיימת. ספרים קיימים כלשהםבספרייה "
+"הזאת ישוכתבו.</qt>"
 
 #: src/translators/alexandriaimporter.cpp:239
 #, kde-format
@@ -6416,7 +6509,7 @@ msgstr "&ספרייה:"
 #: src/translators/audiofileimporter.cpp:128
 #, kde-format
 msgid "Scanning audio files..."
-msgstr ""
+msgstr "קובצי שמע נסרקים…"
 
 #: src/translators/audiofileimporter.cpp:188
 #: src/translators/audiofileimporter.cpp:191
@@ -6442,88 +6535,88 @@ msgstr "אפשרויות קובצי שמע"
 #: src/translators/audiofileimporter.cpp:495
 #, kde-format
 msgid "Recursive &folder search"
-msgstr ""
+msgstr "חיפוש &רקורסיבי בתיקיות"
 
 #: src/translators/audiofileimporter.cpp:496
 #, kde-format
 msgid "If checked, folders are recursively searched for audio files."
-msgstr ""
+msgstr "אם האפשרות מסומנת, מתבצע חיפוש רקורסיבי אחר קובצי שמע."
 
 #: src/translators/audiofileimporter.cpp:500
 #, kde-format
 msgid "Include file &location"
-msgstr ""
+msgstr "לכלול את מ&קום הקובץ"
 
 #: src/translators/audiofileimporter.cpp:501
 #, kde-format
 msgid "If checked, the file names for each track are added to the entries."
-msgstr ""
+msgstr "אם האפשרות מסומנת, שמות הקבצים לכל אחת מהרצועות נוספות לרשומות."
 
 #: src/translators/audiofileimporter.cpp:505
 #, kde-format
 msgid "Include &bitrate"
-msgstr ""
+msgstr "כולל קצב &סיביות"
 
 #: src/translators/audiofileimporter.cpp:506
 #, kde-format
 msgid "If checked, the bitrate for each track is added to the entries."
-msgstr ""
+msgstr "אם האפשרות מסומנת, קצב הסיביות של כל אחת מהרצועות יתווסף לרשומות."
 
 #: src/translators/bibtexexporter.cpp:218
 #: src/translators/bibteximporter.cpp:346
 #, kde-format
 msgid "Bibtex Options"
-msgstr ""
+msgstr "אפשרויות Bibtex"
 
 #: src/translators/bibtexexporter.cpp:221
 #, kde-format
 msgid "Expand string macros"
-msgstr ""
+msgstr "הרחבת תסריטי מחרוזות"
 
 #: src/translators/bibtexexporter.cpp:223
 #, kde-format
 msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
 "be written."
-msgstr ""
+msgstr "אם האפשרות מסומנת, תסריטי מחרוזות יורחבו ולא ייכתבו רשומות ‎@string{}‎."
 
 #: src/translators/bibtexexporter.cpp:226
 #, kde-format
 msgid "Use URL package"
-msgstr ""
+msgstr "להשתמש בחבילת כתובות אתרים"
 
 #: src/translators/bibtexexporter.cpp:228
 #, kde-format
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
-msgstr ""
+msgstr "אם האפשרות מסומנת, שדות כתובות האתרים ייעטפו בהכרזת ‎\\url."
 
 #: src/translators/bibtexexporter.cpp:231
 #, kde-format
 msgid "Skip entries with empty citation keys"
-msgstr ""
+msgstr "לדלג על רשומות עם מפתחות ציטוט ריקים"
 
 #: src/translators/bibtexexporter.cpp:233
 #, kde-format
 msgid "If checked, any entries without a bibtex citation key will be skipped."
-msgstr ""
+msgstr "אם האפשרות מסומנת, כל הרשומות שאין להן מפתח ציטוט bibtex ייפסחו."
 
 #: src/translators/bibtexexporter.cpp:239
 #, kde-format
 msgid "Bibtex quotation style:"
-msgstr ""
+msgstr "סגנון ציטוט ב־Bibtex:"
 
 #: src/translators/bibtexexporter.cpp:241
 #: src/translators/bibtexexporter.cpp:248
 #: src/translators/bibtexexporter.cpp:287
 #, kde-format
 msgid "Braces"
-msgstr ""
+msgstr "סוגריים מסולסלים"
 
 #: src/translators/bibtexexporter.cpp:242
 #: src/translators/bibtexexporter.cpp:250
 #, kde-format
 msgid "Quotes"
-msgstr ""
+msgstr "מירכאות"
 
 #: src/translators/bibtexexporter.cpp:243
 #, kde-format
@@ -6531,36 +6624,38 @@ msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will be "
 "escaped with either braces or quotation marks.</qt>"
 msgstr ""
+"<qt>סגנון הציטוט בשימוש בעת ייצוא bibtex. כל ערכי השדות יוקפו או בסוגריים "
+"מסולסלים או במירכאות.</qt>"
 
 #: src/translators/bibteximporter.cpp:110
 #, kde-format
 msgid "No valid bibtex entries were found"
-msgstr ""
+msgstr "לא נמצאו רשומות bibtex תקפות"
 
 #: src/translators/bibteximporter.cpp:129
 #, kde-format
 msgid "No valid bibtex entries were found in file - %1"
-msgstr ""
+msgstr "לא נמצאו רשומות bibtex תקפות בקובץ - %1"
 
 #: src/translators/bibteximporter.cpp:349
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
-msgstr ""
+msgstr "להשתמש בקידוד יוניקוד (UTF-8)"
 
 #: src/translators/bibteximporter.cpp:350
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
-msgstr ""
+msgstr "קריאת הקובץ המיובא ביוניקוד (UTF-8)."
 
 #: src/translators/bibteximporter.cpp:351
 #, kde-format
 msgid "Use user locale (%1) encoding"
-msgstr ""
+msgstr "להשתמש בקידוד שפת המשתמש (%1)"
 
 #: src/translators/bibteximporter.cpp:359
 #, kde-format
 msgid "Read the imported file in the local encoding."
-msgstr ""
+msgstr "קריאת הקובץ המיובא בקידוד של השפה המקומית."
 
 #: src/translators/bibtexmlexporter.cpp:55
 #, kde-format
@@ -6572,31 +6667,31 @@ msgstr "קובצי Bibtexml"
 #: src/translators/xsltimporter.cpp:86
 #, kde-format
 msgid "A valid XSLT file is needed to import the file."
-msgstr ""
+msgstr "צריך קובץ XSLT כדי לייבא את הקובץ."
 
 #: src/translators/boardgamegeekimporter.cpp:92
 #: src/translators/discogsimporter.cpp:80
 #: src/translators/goodreadsimporter.cpp:105
 #, kde-format
 msgid "A valid user ID must be entered."
-msgstr ""
+msgstr "יש למלא מזהה משתמש תקני."
 
 #: src/translators/boardgamegeekimporter.cpp:243
 #, kde-format
 msgid "BoardGameGeek Options"
-msgstr ""
+msgstr "אפשרויות BoardGameGeek"
 
 #: src/translators/boardgamegeekimporter.cpp:249
 #, kde-format
 msgid "Import owned items only"
-msgstr ""
+msgstr "ייבוא פרטים בבעלותך בלבד"
 
 #: src/translators/boardgamegeekimporter.cpp:252
 #: src/translators/discogsimporter.cpp:199
 #: src/translators/goodreadsimporter.cpp:153
 #, kde-format
 msgid "User ID:"
-msgstr ""
+msgstr "מזהה משתמש:"
 
 #: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:213
 #, kde-format
@@ -6606,12 +6701,12 @@ msgstr "אפשרויות CSV"
 #: src/translators/csvexporter.cpp:142
 #, kde-format
 msgid "Include field titles as column headers"
-msgstr ""
+msgstr "לכלול את כותרי השדות ככותרות העמודות"
 
 #: src/translators/csvexporter.cpp:144
 #, kde-format
 msgid "If checked, a header row will be added with the field titles."
-msgstr ""
+msgstr "אם האפשרות מסומנת, תתווסף שורת כותרות עם כותרי השדות."
 
 #: src/translators/csvexporter.cpp:147
 #, kde-format
@@ -6624,26 +6719,28 @@ msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
 msgstr ""
+"בנוסף לפסיק, תווים אחרים גם יכולים לשמש כמפרידים, כדי להפריד בין ערך לערך "
+"בקובץ."
 
 #: src/translators/csvexporter.cpp:154
 #, kde-format
 msgid "Comma"
-msgstr ""
+msgstr "פסיק"
 
 #: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:248
 #, kde-format
 msgid "Use a comma as the delimiter."
-msgstr ""
+msgstr "להשתמש בפסיק בתור המפריד."
 
 #: src/translators/csvexporter.cpp:160
 #, kde-format
 msgid "Semicolon"
-msgstr ""
+msgstr "נקודה־פסיק"
 
 #: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:253
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
-msgstr ""
+msgstr "להשתמש בנקודה־פסיק בתור המפריד."
 
 #: src/translators/csvexporter.cpp:165
 #, kde-format
@@ -6659,84 +6756,84 @@ msgstr "להשתמש בטאב בתור המפריד."
 #: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
-msgstr ""
+msgstr "אחר"
 
 #: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:263
 #, kde-format
 msgid "Use a custom string as the delimiter."
-msgstr ""
+msgstr "להשתמש במחרוזת אחרת בתור מפריד."
 
 #: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:270
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
-msgstr ""
+msgstr "מחרוזת אחרת לבחירתך, כגון פסיק, אפשר להשתמש בה כמפריד."
 
 #: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:294
 #, kde-format
 msgid "Table column delimiter:"
-msgstr ""
+msgstr "מפריד בין עמודות טבלה:"
 
 #: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:293
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
-msgstr ""
+msgstr "מפריד העמודות מפריד ערכים בכל עמודה של שדה <i>טבלה</i>."
 
 #: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:305
 #, kde-format
 msgid "Table row delimiter:"
-msgstr ""
+msgstr "מפריד בין שורות טבלה:"
 
 #: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:304
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
-msgstr ""
+msgstr "מפריד השורות מפריד ערכים בכל שורה של שדה <i>טבלה</i>."
 
 #: src/translators/csvimporter.cpp:223
 #: src/translators/filelistingimporter.cpp:180
 #, kde-format
 msgid "Select the type of collection being imported."
-msgstr ""
+msgstr "נא לבחור את סוג האוסף המיובא."
 
 #: src/translators/csvimporter.cpp:227
 #, kde-format
 msgid "&First row contains field titles"
-msgstr ""
+msgstr "השורה ה&ראשונה מכילה כותרי שדות"
 
 #: src/translators/csvimporter.cpp:228
 #, kde-format
 msgid "If checked, the first row is used as field titles."
-msgstr ""
+msgstr "אם האפשרות מסומנת, השורה הראשונה משמשת ככותרי השדות."
 
 #: src/translators/csvimporter.cpp:240
 #, kde-format
 msgid "Delimiter:"
-msgstr ""
+msgstr "מפריד:"
 
 #: src/translators/csvimporter.cpp:246
 #, kde-format
 msgid "&Comma"
-msgstr ""
+msgstr "&פסיק"
 
 #: src/translators/csvimporter.cpp:252
 #, kde-format
 msgid "&Semicolon"
-msgstr ""
+msgstr "&נקודה־פסיק"
 
 #: src/translators/csvimporter.cpp:257
 #, kde-format
 msgid "Ta&b"
-msgstr ""
+msgstr "&טאב"
 
 #: src/translators/csvimporter.cpp:262
 #, kde-format
 msgid "Ot&her:"
-msgstr ""
+msgstr "&אחר:"
 
 #: src/translators/csvimporter.cpp:324
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
-msgstr ""
+msgstr "הטבלה מציגה את חמש השורות הראשונות בקובץ ה־CSV."
 
 #: src/translators/csvimporter.cpp:331
 #, kde-format
@@ -6745,33 +6842,35 @@ msgid ""
 "column, selecting the field, then clicking the <i>Assign Field</i> button.</"
 "qt>"
 msgstr ""
+"<qt>הגדרת כל עמודה כך שתתאים לשדה באוסף על ידי בחירת עמודה, בחירת השדה ואז "
+"לחיצה על כפתור <i>הקצאת שדה</i>.</qt>"
 
 #: src/translators/csvimporter.cpp:333
 #, kde-format
 msgid "Co&lumn:"
-msgstr ""
+msgstr "&עמודה: "
 
 #: src/translators/csvimporter.cpp:346
 #, kde-format
 msgid "&Data field in this column:"
-msgstr ""
+msgstr "&שדה נתונים בעמודה הזאת:"
 
 #: src/translators/csvimporter.cpp:360
 #, kde-format
 msgid "&Assign Field"
-msgstr ""
+msgstr "ה&קצאת שדה"
 
 #: src/translators/csvimporter.cpp:399
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
 "be imported."
-msgstr ""
+msgstr "יש להקצות לפחות עמודה אחת לשדה. רק עמודות מוקצות תיובאנה."
 
 #: src/translators/csvimporter.cpp:596
 #, kde-format
 msgid "Review"
-msgstr ""
+msgstr "סקירה"
 
 #: src/translators/csvimporter.cpp:689
 #, kde-format
@@ -6801,12 +6900,12 @@ msgstr "חיפוש רקורסיבי בתיקיות"
 #: src/translators/filelistingimporter.cpp:165
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
-msgstr ""
+msgstr "אם האפשרות מסומנת, מתבצע חיפוש רקורסיבי אחר כל הקבצים."
 
 #: src/translators/filelistingimporter.cpp:169
 #, kde-format
 msgid "Generate file previews"
-msgstr ""
+msgstr "יצירת תצוגות קבצים מקדימות"
 
 #: src/translators/filelistingimporter.cpp:170
 #, kde-format
@@ -6814,12 +6913,14 @@ msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
 msgstr ""
+"אם האפשרות מסומנת, תצוגות מקדימות של תוכני הקבצים נוצרות, מה שיכול להאט את "
+"הצגת תוכן התיקייה."
 
 #: src/translators/freedbimporter.cpp:109
 #: src/translators/freedbimporter.cpp:192
 #, kde-format
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
-msgstr ""
+msgstr "<qt>Tellico לא הצליח לגשת להתקן התקליטור - <i>%1</i>.</qt>"
 
 #: src/translators/freedbimporter.cpp:217
 #, kde-format
@@ -6839,7 +6940,7 @@ msgstr "<qt>לא נמצאו רשומות תואמות לתקליטור.</qt>"
 #: src/translators/freedbimporter.cpp:259
 #, kde-format
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
-msgstr ""
+msgstr "<qt>Tellico לא הצליח להשלים את איתור התקליטור.</qt>"
 
 #: src/translators/freedbimporter.cpp:492
 #, kde-format
@@ -6864,7 +6965,7 @@ msgstr "נא לבחור או למלא את מקום התקן כונן התקלי
 #: src/translators/freedbimporter.cpp:531
 #, kde-format
 msgid "Read all CDDB cache files only"
-msgstr ""
+msgstr "קריאת כל קובצי מטמון ה־CDDB בלבד"
 
 #: src/translators/freedbimporter.cpp:532
 #, kde-format
@@ -6872,12 +6973,14 @@ msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
 "cache folders."
 msgstr ""
+"קריאת הנתונים באופן רקורסיבי מכל קובצי מטמון ה־CDDB שנכללים בתיקיות המטמון "
+"כברירת המחדל."
 
 #: src/translators/gcstarimporter.cpp:120
 #: src/translators/gcstarimporter.cpp:259
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
-msgstr ""
+msgstr "<qt>הקובץ אינו קובץ נתוני GCstar תקני.</qt>"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -6887,7 +6990,7 @@ msgstr "אפשרויות Goodreads"
 #: src/translators/htmlexporter.cpp:342
 #, kde-format
 msgid "(grouped by %1)"
-msgstr ""
+msgstr "(מקובץ לפי %1)"
 
 #: src/translators/htmlexporter.cpp:505
 #, kde-format
@@ -6912,7 +7015,7 @@ msgstr "ייצוא קובצי רשומות נפרדים"
 #: src/translators/htmlexporter.cpp:519
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
-msgstr ""
+msgstr "אם האפשרות מסומנת, ייווצרו קובץ נפרד לכל רשומה."
 
 #: src/translators/importer.cpp:53
 #, kde-format
@@ -6935,6 +7038,8 @@ msgid ""
 "Export your LibraryThing collection in <a href=\"https://www.librarything."
 "com/export.php?export_type=json\">JSON format</a>."
 msgstr ""
+"ייצוא אוסף ה־LibraryThing שלך <a href=\"https://www.librarything.com/export."
+"php?export_type=json\">במבנה JSON</a>."
 
 #: src/translators/librarythingimporter.cpp:189
 #: src/translators/librarythingimporter.cpp:194
@@ -6987,7 +7092,7 @@ msgstr "לכלול תמונות בארכיון"
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
 "archive."
-msgstr ""
+msgstr "אם האפשרות מסומנת, התמונות במסמך ייכללו בארכיון ה־ONIX שנדחס ב־zip."
 
 #: src/translators/pdfimporter.cpp:126 src/translators/pdfimporter.cpp:142
 #, kde-format
@@ -7001,6 +7106,8 @@ msgid ""
 "CrossRef.org. However, you must create an CrossRef account and add a new "
 "data source with your account information."
 msgstr ""
+"Tellico יכול להוריד פרטים על רשומות עם DOI מ־CrossRef.org. עם זאת, יש ליצור "
+"חשבון ב־Crossref ולהוסיף מקור נתונים חדש עם פרטי החשבון שלך."
 
 #: src/translators/risimporter.cpp:337
 #, kde-format
@@ -7033,6 +7140,7 @@ msgid ""
 "If checked, the images in the document will be included in the XML stream as "
 "base64 encoded elements."
 msgstr ""
+"אם האפשרות מסומנת, התמונות במסמך ייכללו בתזרים ה־XML כעצמים בקידוד base64."
 
 #: src/translators/xmlstatehandler.cpp:127
 #, kde-format
@@ -7057,7 +7165,7 @@ msgstr "נא לבחור בקובץ ה־XSLT שישמש להתמרת הנתוני
 #: src/viewstack.cpp:81
 #, kde-format
 msgid "Decrease the maximum icon size in the icon list view"
-msgstr ""
+msgstr "הקטנת גודל הסמל המרבי בתצוגת רשימת הסמלים"
 
 #: src/viewstack.cpp:92 src/viewstack.cpp:154
 #, kde-format
@@ -7065,11 +7173,13 @@ msgid ""
 "The current maximum icon size is %1.\n"
 "Move the slider to change it."
 msgstr ""
+"גודל הסמל המרבי הנוכחי הוא %1.\n"
+"יש להזיז את המחוון כדי לשנות את זה."
 
 #: src/viewstack.cpp:98
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
-msgstr ""
+msgstr "הגדלת גודל הסמל המרבי בתצוגת רשימת הסמלים"
 
 #: xslt/entry-templates/Album.xsl:171
 #, kde-format
