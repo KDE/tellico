@@ -69,5 +69,6 @@ void VideoGameGeekFetcherTest::testKeyword() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("description")).contains(QLatin1String("#10;")));
   QCOMPARE(entry->field(QStringLiteral("videogamegeek-link")), QStringLiteral("https://www.videogamegeek.com/videogame/139806"));
 }

@@ -69,6 +69,7 @@ void BoardGameGeekFetcherTest::testTitle() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("description")).contains(QLatin1String("#10;")));
   QCOMPARE(entry->field(QStringLiteral("boardgamegeek-link")), QStringLiteral("https://www.boardgamegeek.com/boardgame/13"));
 }
 
