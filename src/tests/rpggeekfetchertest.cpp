@@ -80,6 +80,7 @@ void RPGGeekFetcherTest::testKeyword() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("description")).contains(QLatin1String("#10;")));
   QCOMPARE(entry->field(QStringLiteral("rpggeek-link")), QStringLiteral("https://rpggeek.com/rpgitem/338762"));
 }
 

@@ -162,10 +162,14 @@ Tellico::Data::EntryPtr BoardGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
   if(coll->entryCount() > 1) {
     myDebug() << "weird, more than one entry found";
   }
+  // replace HTML entities
+  static const QString desc(QStringLiteral("description"));
+  auto entry = coll->entries().front();
+  entry->setField(desc, Tellico::decodeHTML(entry->field(desc)));
 
   // don't want to include id
   coll->removeField(QStringLiteral("bggid"));
-  return coll->entries().front();
+  return entry;
 }
 
 Tellico::Fetch::FetchRequest BoardGameGeekFetcher::updateRequest(Data::EntryPtr entry_) {
