@@ -15,8 +15,8 @@ Dependencies:
     'frameworks/kiconthemes': '@latest-kf6'
     'frameworks/kitemmodels': '@latest-kf6'
     'frameworks/knewstuff': '@latest-kf6'
-    'multimedia/libkcddb': '@same'
-    'graphics/libksane': '@same'
+    'multimedia/libkcddb': '@latest-kf6'
+    'graphics/libksane': '@latest-kf6'
 
 - 'on': ['Linux/Qt5', 'FreeBSD/Qt5']
   'require':
@@ -33,8 +33,8 @@ Dependencies:
     'frameworks/knewstuff': '@stable'
     'frameworks/kcrash': '@stable'
     'frameworks/extra-cmake-modules': '@stable'
-    'multimedia/libkcddb': '@same'
-    'graphics/libksane': '@same'
+    'multimedia/libkcddb': '@stable'
+    'graphics/libksane': '@stable'
 
 Options:
   run-tests: True

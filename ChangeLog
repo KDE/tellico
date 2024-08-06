@@ -1,3 +1,7 @@
+2024-08-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated BoardGameGeek data to replace HTML entities (Bug 491340).
+
 2024-06-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 3.5.5.
