@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-22 03:22+0000\n"
+"POT-Creation-Date: 2024-08-07 03:15+0000\n"
 "PO-Revision-Date: 2024-01-03 12:36+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -819,7 +819,7 @@ msgstr "Organisation"
 #: src/collections/bibtexcollection.cpp:134
 #: src/collections/boardgamecollection.cpp:68
 #: src/collections/bookcollection.cpp:87
-#: src/collections/comicbookcollection.cpp:81 src/fetch/rpggeekfetcher.cpp:204
+#: src/collections/comicbookcollection.cpp:81 src/fetch/rpggeekfetcher.cpp:208
 #, kde-format
 msgid "Publisher"
 msgstr "Editor (Publisher)"
@@ -961,23 +961,23 @@ msgstr "Mi jocos de tabula"
 #: src/collections/bookcollection.cpp:131
 #: src/collections/comicbookcollection.cpp:114
 #: src/collections/gamecollection.cpp:66 src/collections/musiccollection.cpp:77
-#: src/collections/videocollection.cpp:74 src/fetch/rpggeekfetcher.cpp:202
+#: src/collections/videocollection.cpp:74 src/fetch/rpggeekfetcher.cpp:206
 #, kde-format
 msgid "Genre"
 msgstr "Genere"
 
-#: src/collections/boardgamecollection.cpp:57 src/fetch/rpggeekfetcher.cpp:208
+#: src/collections/boardgamecollection.cpp:57 src/fetch/rpggeekfetcher.cpp:212
 #, kde-format
 msgid "Mechanism"
 msgstr "Mechanismo"
 
 #: src/collections/boardgamecollection.cpp:63
-#: src/collections/gamecollection.cpp:72 src/fetch/rpggeekfetcher.cpp:203
+#: src/collections/gamecollection.cpp:72 src/fetch/rpggeekfetcher.cpp:207
 #, kde-format
 msgid "Release Year"
 msgstr "Anno de liberation"
 
-#: src/collections/boardgamecollection.cpp:74 src/fetch/rpggeekfetcher.cpp:206
+#: src/collections/boardgamecollection.cpp:74 src/fetch/rpggeekfetcher.cpp:210
 #, kde-format
 msgid "Designer"
 msgstr "Designator"
@@ -1004,7 +1004,7 @@ msgstr "Etate minime"
 #: src/collections/winecollection.cpp:125 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:369 src/fetch/colnectfetcher.cpp:815
 #: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
-#: src/fetch/rpggeekfetcher.cpp:209 src/fetchdialog.cpp:253
+#: src/fetch/rpggeekfetcher.cpp:213 src/fetchdialog.cpp:253
 #, kde-format
 msgid "Description"
 msgstr "Description"
@@ -1375,7 +1375,7 @@ msgid "Writer"
 msgstr "Scriptor"
 
 #: src/collections/comicbookcollection.cpp:64
-#: src/fetch/boardgamegeekfetcher.cpp:200 src/fetch/rpggeekfetcher.cpp:205
+#: src/fetch/boardgamegeekfetcher.cpp:204 src/fetch/rpggeekfetcher.cpp:209
 #: src/translators/boardgamegeekimporter.cpp:217
 #, kde-format
 msgctxt "Comic Book Illustrator"
@@ -1962,7 +1962,7 @@ msgid "Director"
 msgstr "Director"
 
 #: src/collections/videocollection.cpp:123 src/fetch/discogsfetcher.cpp:325
-#: src/fetch/discogsfetcher.cpp:512 src/fetch/rpggeekfetcher.cpp:207
+#: src/fetch/discogsfetcher.cpp:512 src/fetch/rpggeekfetcher.cpp:211
 #, kde-format
 msgid "Producer"
 msgstr "Productor"
@@ -3591,18 +3591,18 @@ msgstr ""
 "Amazon.co forni datos ex multe sitos localisate differente. Tu selige illo "
 "que tu desira usar pro iste fonte de datos."
 
-#: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:213
+#: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:217
 #: src/fetch/colnectfetcher.cpp:947 src/fetch/itunesfetcher.cpp:517
-#: src/fetch/mobygamesfetcher.cpp:672 src/fetch/rpggeekfetcher.cpp:222
-#: src/fetch/thegamesdbfetcher.cpp:657 src/fetch/videogamegeekfetcher.cpp:213
+#: src/fetch/mobygamesfetcher.cpp:672 src/fetch/rpggeekfetcher.cpp:226
+#: src/fetch/thegamesdbfetcher.cpp:657 src/fetch/videogamegeekfetcher.cpp:217
 #, kde-format
 msgid "&Image size: "
 msgstr "Grandor de &Imagine: "
 
-#: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:217
+#: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:221
 #: src/fetch/colnectfetcher.cpp:951 src/fetch/itunesfetcher.cpp:521
-#: src/fetch/mobygamesfetcher.cpp:675 src/fetch/rpggeekfetcher.cpp:226
-#: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:217
+#: src/fetch/mobygamesfetcher.cpp:675 src/fetch/rpggeekfetcher.cpp:230
+#: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:221
 #, kde-format
 msgid "Small Image"
 msgstr "Parve imagine"
@@ -3613,18 +3613,18 @@ msgid "Medium Image"
 msgstr "Medie imagine"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
-#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:218
+#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:222
 #: src/fetch/colnectfetcher.cpp:952 src/fetch/itunesfetcher.cpp:522
-#: src/fetch/mobygamesfetcher.cpp:677 src/fetch/rpggeekfetcher.cpp:227
-#: src/fetch/thegamesdbfetcher.cpp:662 src/fetch/videogamegeekfetcher.cpp:218
+#: src/fetch/mobygamesfetcher.cpp:677 src/fetch/rpggeekfetcher.cpp:231
+#: src/fetch/thegamesdbfetcher.cpp:662 src/fetch/videogamegeekfetcher.cpp:222
 #, kde-format
 msgid "Large Image"
 msgstr "Grande imagine"
 
-#: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:216
+#: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:220
 #: src/fetch/colnectfetcher.cpp:950 src/fetch/itunesfetcher.cpp:520
-#: src/fetch/mobygamesfetcher.cpp:678 src/fetch/rpggeekfetcher.cpp:225
-#: src/fetch/thegamesdbfetcher.cpp:663 src/fetch/videogamegeekfetcher.cpp:216
+#: src/fetch/mobygamesfetcher.cpp:678 src/fetch/rpggeekfetcher.cpp:229
+#: src/fetch/thegamesdbfetcher.cpp:663 src/fetch/videogamegeekfetcher.cpp:220
 #, kde-format
 msgid "No Image"
 msgstr "Nulle imagine"
@@ -3718,7 +3718,7 @@ msgstr "Ligame de Bedetheque"
 msgid "ISBN#"
 msgstr "ISBN#"
 
-#: src/fetch/boardgamegeekfetcher.cpp:201
+#: src/fetch/boardgamegeekfetcher.cpp:205
 #, kde-format
 msgid "BoardGameGeek Link"
 msgstr "Ligamine de BoardGameGeek"
@@ -4276,7 +4276,7 @@ msgstr "&Verifica Catalogo"
 msgid "OpenLibrary Link"
 msgstr "Ligamine de OpenLibrary"
 
-#: src/fetch/rpggeekfetcher.cpp:210
+#: src/fetch/rpggeekfetcher.cpp:214
 #, kde-format
 msgid "RPGGeek Link"
 msgstr "Ligamine de RPGGeek"
@@ -4397,7 +4397,7 @@ msgstr "PIN de subscriptor: "
 msgid "VGCollect Link"
 msgstr "Ligamine de VGCollect"
 
-#: src/fetch/videogamegeekfetcher.cpp:201
+#: src/fetch/videogamegeekfetcher.cpp:205
 #, kde-format
 msgid "VideoGameGeek Link"
 msgstr "Ligamine de VideoGameGeek"

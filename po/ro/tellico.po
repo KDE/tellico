@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-22 03:22+0000\n"
+"POT-Creation-Date: 2024-08-07 03:15+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -782,7 +782,7 @@ msgstr ""
 #: src/collections/bibtexcollection.cpp:134
 #: src/collections/boardgamecollection.cpp:68
 #: src/collections/bookcollection.cpp:87
-#: src/collections/comicbookcollection.cpp:81 src/fetch/rpggeekfetcher.cpp:204
+#: src/collections/comicbookcollection.cpp:81 src/fetch/rpggeekfetcher.cpp:208
 #, kde-format
 msgid "Publisher"
 msgstr "Editură"
@@ -924,23 +924,23 @@ msgstr "Filmele mele"
 #: src/collections/bookcollection.cpp:131
 #: src/collections/comicbookcollection.cpp:114
 #: src/collections/gamecollection.cpp:66 src/collections/musiccollection.cpp:77
-#: src/collections/videocollection.cpp:74 src/fetch/rpggeekfetcher.cpp:202
+#: src/collections/videocollection.cpp:74 src/fetch/rpggeekfetcher.cpp:206
 #, kde-format
 msgid "Genre"
 msgstr "Gen"
 
-#: src/collections/boardgamecollection.cpp:57 src/fetch/rpggeekfetcher.cpp:208
+#: src/collections/boardgamecollection.cpp:57 src/fetch/rpggeekfetcher.cpp:212
 #, kde-format
 msgid "Mechanism"
 msgstr ""
 
 #: src/collections/boardgamecollection.cpp:63
-#: src/collections/gamecollection.cpp:72 src/fetch/rpggeekfetcher.cpp:203
+#: src/collections/gamecollection.cpp:72 src/fetch/rpggeekfetcher.cpp:207
 #, kde-format
 msgid "Release Year"
 msgstr ""
 
-#: src/collections/boardgamecollection.cpp:74 src/fetch/rpggeekfetcher.cpp:206
+#: src/collections/boardgamecollection.cpp:74 src/fetch/rpggeekfetcher.cpp:210
 #, kde-format
 msgid "Designer"
 msgstr ""
@@ -967,7 +967,7 @@ msgstr ""
 #: src/collections/winecollection.cpp:125 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:369 src/fetch/colnectfetcher.cpp:815
 #: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
-#: src/fetch/rpggeekfetcher.cpp:209 src/fetchdialog.cpp:253
+#: src/fetch/rpggeekfetcher.cpp:213 src/fetchdialog.cpp:253
 #, kde-format
 msgid "Description"
 msgstr ""
@@ -1333,7 +1333,7 @@ msgid "Writer"
 msgstr "Șterge carte"
 
 #: src/collections/comicbookcollection.cpp:64
-#: src/fetch/boardgamegeekfetcher.cpp:200 src/fetch/rpggeekfetcher.cpp:205
+#: src/fetch/boardgamegeekfetcher.cpp:204 src/fetch/rpggeekfetcher.cpp:209
 #: src/translators/boardgamegeekimporter.cpp:217
 #, fuzzy, kde-format
 #| msgid "Artist"
@@ -1918,7 +1918,7 @@ msgid "Director"
 msgstr ""
 
 #: src/collections/videocollection.cpp:123 src/fetch/discogsfetcher.cpp:325
-#: src/fetch/discogsfetcher.cpp:512 src/fetch/rpggeekfetcher.cpp:207
+#: src/fetch/discogsfetcher.cpp:512 src/fetch/rpggeekfetcher.cpp:211
 #, fuzzy, kde-format
 msgid "Producer"
 msgstr "An apariție"
@@ -3514,18 +3514,18 @@ msgid ""
 "one you wish to use for this data source."
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:213
+#: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:217
 #: src/fetch/colnectfetcher.cpp:947 src/fetch/itunesfetcher.cpp:517
-#: src/fetch/mobygamesfetcher.cpp:672 src/fetch/rpggeekfetcher.cpp:222
-#: src/fetch/thegamesdbfetcher.cpp:657 src/fetch/videogamegeekfetcher.cpp:213
+#: src/fetch/mobygamesfetcher.cpp:672 src/fetch/rpggeekfetcher.cpp:226
+#: src/fetch/thegamesdbfetcher.cpp:657 src/fetch/videogamegeekfetcher.cpp:217
 #, kde-format
 msgid "&Image size: "
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:217
+#: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:221
 #: src/fetch/colnectfetcher.cpp:951 src/fetch/itunesfetcher.cpp:521
-#: src/fetch/mobygamesfetcher.cpp:675 src/fetch/rpggeekfetcher.cpp:226
-#: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:217
+#: src/fetch/mobygamesfetcher.cpp:675 src/fetch/rpggeekfetcher.cpp:230
+#: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:221
 #, fuzzy, kde-format
 msgid "Small Image"
 msgstr "Titlu"
@@ -3536,18 +3536,18 @@ msgid "Medium Image"
 msgstr "Suport"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
-#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:218
+#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:222
 #: src/fetch/colnectfetcher.cpp:952 src/fetch/itunesfetcher.cpp:522
-#: src/fetch/mobygamesfetcher.cpp:677 src/fetch/rpggeekfetcher.cpp:227
-#: src/fetch/thegamesdbfetcher.cpp:662 src/fetch/videogamegeekfetcher.cpp:218
+#: src/fetch/mobygamesfetcher.cpp:677 src/fetch/rpggeekfetcher.cpp:231
+#: src/fetch/thegamesdbfetcher.cpp:662 src/fetch/videogamegeekfetcher.cpp:222
 #, fuzzy, kde-format
 msgid "Large Image"
 msgstr "Titlu"
 
-#: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:216
+#: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:220
 #: src/fetch/colnectfetcher.cpp:950 src/fetch/itunesfetcher.cpp:520
-#: src/fetch/mobygamesfetcher.cpp:678 src/fetch/rpggeekfetcher.cpp:225
-#: src/fetch/thegamesdbfetcher.cpp:663 src/fetch/videogamegeekfetcher.cpp:216
+#: src/fetch/mobygamesfetcher.cpp:678 src/fetch/rpggeekfetcher.cpp:229
+#: src/fetch/thegamesdbfetcher.cpp:663 src/fetch/videogamegeekfetcher.cpp:220
 #, fuzzy, kde-format
 msgid "No Image"
 msgstr "Pagini"
@@ -3637,7 +3637,7 @@ msgstr "Redenumește colecție..."
 msgid "ISBN#"
 msgstr "Nr. ISBN"
 
-#: src/fetch/boardgamegeekfetcher.cpp:201
+#: src/fetch/boardgamegeekfetcher.cpp:205
 #, fuzzy, kde-format
 msgid "BoardGameGeek Link"
 msgstr "Redenumește colecție..."
@@ -4182,7 +4182,7 @@ msgstr "Șterge carte"
 msgid "OpenLibrary Link"
 msgstr ""
 
-#: src/fetch/rpggeekfetcher.cpp:210
+#: src/fetch/rpggeekfetcher.cpp:214
 #, fuzzy, kde-format
 msgid "RPGGeek Link"
 msgstr "Redenumește colecție..."
@@ -4304,7 +4304,7 @@ msgstr ""
 msgid "VGCollect Link"
 msgstr "Calificativ"
 
-#: src/fetch/videogamegeekfetcher.cpp:201
+#: src/fetch/videogamegeekfetcher.cpp:205
 #, fuzzy, kde-format
 msgid "VideoGameGeek Link"
 msgstr "Redenumește colecție..."
