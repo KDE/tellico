@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-07 00:40+0000\n"
-"PO-Revision-Date: 2024-08-04 21:19+0300\n"
+"PO-Revision-Date: 2024-08-12 13:52+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -260,7 +260,7 @@ msgstr "אוסף מטבעות"
 #: src/collectionfactory.cpp:90
 #, kde-format
 msgid "Stamp Collection"
-msgstr "אוסף חותמות"
+msgstr "אוסף בולים"
 
 #: src/collectionfactory.cpp:91
 #, kde-format
@@ -1672,7 +1672,7 @@ msgstr "אורך"
 #: src/collections/stampcollection.cpp:33
 #, kde-format
 msgid "My Stamps"
-msgstr "החותמות שלי"
+msgstr "הבולים שלי"
 
 #: src/collections/stampcollection.cpp:73
 #, kde-format
@@ -1688,7 +1688,7 @@ msgstr "צבע"
 #: src/collections/stampcollection.cpp:83
 #, kde-format
 msgid "Scott#"
-msgstr ""
+msgstr "מס׳ סקוט"
 
 #: src/collections/stampcollection.cpp:89
 #, kde-format
@@ -1705,7 +1705,7 @@ msgstr "מבוטל"
 #: src/collections/stampcollection.cpp:101
 #, kde-format
 msgid "Hinged"
-msgstr ""
+msgstr "מודבק על ציר"
 
 #: src/collections/stampcollection.cpp:106
 #, kde-format
@@ -1715,7 +1715,7 @@ msgstr "מירכוז"
 #: src/collections/stampcollection.cpp:111
 #, kde-format
 msgid "Gummed"
-msgstr ""
+msgstr "עם דבק"
 
 #: src/collections/stampcollection.cpp:135 src/field.cpp:202
 #, kde-format
@@ -3502,7 +3502,7 @@ msgstr "סטנלי גיבונס"
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
-msgstr "Michel"
+msgstr "מיכל"
 
 #: src/fetch/colnectfetcher.cpp:826 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:575 src/fetch/mobygamesfetcher.cpp:633
@@ -5330,12 +5330,12 @@ msgstr "יצירת אוסף מטבעות חדש"
 #: src/mainwindow.cpp:296
 #, kde-format
 msgid "New &Stamp Collection"
-msgstr "אוסף &חותמות חדש"
+msgstr "אוסף &בולים חדש"
 
 #: src/mainwindow.cpp:297
 #, kde-format
 msgid "Create a new stamp collection"
-msgstr "יצירת אוסף חותמות חדש"
+msgstr "יצירת אוסף בולים חדש"
 
 #: src/mainwindow.cpp:299
 #, kde-format
