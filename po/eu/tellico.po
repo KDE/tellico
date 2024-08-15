@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-07 00:40+0000\n"
-"PO-Revision-Date: 2024-07-25 18:08+0200\n"
+"PO-Revision-Date: 2024-08-14 15:53+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -666,6 +666,9 @@ msgid ""
 "<em>Table</em> or <em>Image</em> field. Please enter a different category.</"
 "qt>"
 msgstr ""
+"<qt>Eremu bat ezin da egon <em>paragrafo</em>, <em>taula</em> edo <em>irudi</"
+"em> eremu baten kategoria berean. Mesedez, sartu kategoria ezberdin batean.</"
+"qt>"
 
 #: src/collectionfieldsdialog.cpp:946
 #, kde-format
@@ -673,6 +676,8 @@ msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
 msgstr ""
+"Eremu baten titulua ezin da izan dagoen kategoria baten berdina. Mesedez, "
+"sartu titulu ezberdin bat."
 
 #: src/collectionfieldsdialog.cpp:958
 #, kde-format
@@ -681,6 +686,9 @@ msgid ""
 "must be less than the higher bound. Please enter different low and high "
 "properties."
 msgstr ""
+"Balotzeko eremu baten balioa 1 eta 10 artekoa izan behar da, eta beheko muga "
+"goiko muga baino txikiagoa izan behar da. Mesedez, sartu behe eta goi "
+"propietate ezberdinak."
 
 #: src/collectionfieldsdialog.cpp:973
 #, kde-format
@@ -1272,7 +1280,7 @@ msgstr ""
 #: src/collections/coincollection.cpp:99 src/collections/stampcollection.cpp:91
 #, kde-format
 msgid "Grade"
-msgstr ""
+msgstr "Kalifikazioa"
 
 #: src/collections/coincollection.cpp:106
 #, kde-format
@@ -1283,13 +1291,13 @@ msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 #: src/collections/coincollection.cpp:108
 #, kde-format
 msgid "Grading Service"
-msgstr ""
+msgstr "Kalifikazio zerbitzua"
 
 #: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:818
 #: src/fetch/numistafetcher.cpp:401
 #, kde-format
 msgid "Obverse"
-msgstr ""
+msgstr "Aurkia"
 
 #: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:819
 #: src/fetch/numistafetcher.cpp:402
@@ -3383,7 +3391,7 @@ msgstr "Azaleko irudia ezin izan du zamatu."
 #: src/fetch/amazonfetcher.cpp:860 src/fetch/amazonfetcher.cpp:1077
 #, kde-format
 msgid "Amazon Link"
-msgstr "Amazon-erako esteka"
+msgstr "Amazon-esteka"
 
 #: src/fetch/amazonfetcher.cpp:1067
 #, kde-format
@@ -3507,7 +3515,7 @@ msgstr "Kolorista"
 #: src/fetch/bedethequefetcher.cpp:324 src/fetch/bedethequefetcher.cpp:435
 #, kde-format
 msgid "Bedetheque Link"
-msgstr "«Bedetheque»ren esteka"
+msgstr "Bedetheque-esteka"
 
 #: src/fetch/bedethequefetcher.cpp:433 src/field.cpp:312
 #, kde-format
@@ -3517,12 +3525,12 @@ msgstr "ISBN zk."
 #: src/fetch/boardgamegeekfetcher.cpp:203
 #, kde-format
 msgid "BoardGameGeek Link"
-msgstr "«BoardGameGeek»era esteka"
+msgstr "BoardGameGeek-esteka"
 
 #: src/fetch/colnectfetcher.cpp:533 src/fetch/colnectfetcher.cpp:816
 #, kde-format
 msgid "Colnect Link"
-msgstr "«Colnect»en esteka"
+msgstr "Colnect-esteka"
 
 #: src/fetch/colnectfetcher.cpp:552 src/fetch/colnectfetcher.cpp:822
 #, kde-format
@@ -3555,16 +3563,15 @@ msgid "Language: "
 msgstr "Hizkuntza:"
 
 #: src/fetch/colnectfetcher.cpp:966
-#, fuzzy, kde-format
-#| msgid "Country: "
+#, kde-format
 msgid "Country code: "
-msgstr "Herrialdea:"
+msgstr "Herrialdearen kodea:"
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
 #, kde-format
 msgid "Comic Vine Link"
-msgstr "«Comic Vine»en esteka"
+msgstr "«Comic Vine»-esteka"
 
 #: src/fetch/configwidget.cpp:41
 #, kde-format
@@ -3623,7 +3630,7 @@ msgstr "Sartzeko gako bat beharrezkoa da datu-sorburu hori erabiltzeko."
 #: src/fetch/discogsfetcher.cpp:311 src/fetch/discogsfetcher.cpp:546
 #, kde-format
 msgid "Discogs Link"
-msgstr "«Discogs»en esteka"
+msgstr "Discogs-esteka"
 
 #. i18n("Nationality");
 #: src/fetch/discogsfetcher.cpp:330 src/fetch/discogsfetcher.cpp:547
@@ -3655,11 +3662,10 @@ msgstr "Pistak (Diskoa %1)"
 #: src/fetch/discogsfetcher.cpp:535
 #, kde-format
 msgid "Discogs Audio Search"
-msgstr ""
+msgstr "Discogs-en audio bilaketa"
 
 #: src/fetch/discogsfetcher.cpp:571 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
 msgstr "Erabiltzailearen tokena:"
 
@@ -3681,12 +3687,12 @@ msgstr "Jatorrizko titulua"
 #: src/fetch/doubanfetcher.cpp:408 src/fetch/doubanfetcher.cpp:642
 #, kde-format
 msgid "Douban Link"
-msgstr ""
+msgstr "Douban-esteka"
 
 #: src/fetch/dvdfrfetcher.cpp:172
 #, kde-format
 msgid "DVDFr Link"
-msgstr ""
+msgstr "DVDFr-esteka"
 
 #: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:478
 #: src/fetch/imdbfetcher.cpp:530 src/fetch/moviemeterfetcher.cpp:222
@@ -3705,7 +3711,7 @@ msgstr "Askotarikoak"
 #: src/fetch/entrezfetcher.cpp:502
 #, kde-format
 msgid "Entrez Database"
-msgstr ""
+msgstr "Entrez datu-basea"
 
 #: src/fetch/entrezfetcher.cpp:512
 #, kde-format
@@ -3721,17 +3727,17 @@ msgstr "Kanpoko aplikazioa"
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
-msgstr ""
+msgstr "Kanpoko aplikaziotik itzulitako datuen bilduma-mota ezartzea."
 
 #: src/fetch/execexternalfetcher.cpp:374
 #, kde-format
 msgid "&Result type: "
-msgstr ""
+msgstr "E&maitza mota:"
 
 #: src/fetch/execexternalfetcher.cpp:383
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
-msgstr ""
+msgstr "Kanpoko aplikaziotik itzulitako datuen emaitza-mota ezartzea."
 
 #: src/fetch/execexternalfetcher.cpp:397
 #, kde-format
@@ -3748,7 +3754,7 @@ msgstr ""
 #: src/fetch/execexternalfetcher.cpp:407
 #, kde-format
 msgid "Select the search keys supported by the data source."
-msgstr ""
+msgstr "Hautatu data-sorburuak onartzen dituen bilaketa teklak."
 
 #: src/fetch/execexternalfetcher.cpp:409
 #, kde-format
@@ -3756,6 +3762,8 @@ msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
 "search term."
 msgstr ""
+"Gehitu beharrezkoak izan daitezkeen argumentuak. <b>%1</b> bilatutako "
+"terminoarekin ordezkatuko da."
 
 #. i18ncheckarg
 #: src/fetch/execexternalfetcher.cpp:410
@@ -3793,9 +3801,9 @@ msgid "ISBN"
 msgstr "ISBN"
 
 #: src/fetch/fetchmanager.cpp:65
-#, fuzzy, kde-format
+#, kde-format
 msgid "UPC/EAN"
-msgstr "&UPC EAN:"
+msgstr "UPC/EAN"
 
 #: src/fetch/fetchmanager.cpp:66
 #, kde-format
@@ -3810,7 +3818,7 @@ msgstr "arXiv ID"
 #: src/fetch/fetchmanager.cpp:69
 #, kde-format
 msgid "PubMed ID"
-msgstr ""
+msgstr "PubMed ID"
 
 #: src/fetch/fetchmanager.cpp:70
 #, kde-format
@@ -3820,12 +3828,12 @@ msgstr "LCCN"
 #: src/fetch/fetchmanager.cpp:71
 #, kde-format
 msgid "Raw Query"
-msgstr ""
+msgstr "Itaun gordena"
 
 #: src/fetch/filmaffinityfetcher.cpp:283 src/fetch/filmaffinityfetcher.cpp:462
 #, kde-format
 msgid "FilmAffinity Link"
-msgstr ""
+msgstr "FilmAffinity-esteka"
 
 #: src/fetch/filmaffinityfetcher.cpp:474 src/fetch/imdbfetcher.cpp:549
 #: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:608
@@ -3844,8 +3852,7 @@ msgstr ""
 "gehienezko kopurua."
 
 #: src/fetch/filmaffinityfetcher.cpp:497
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "Espainia"
@@ -3854,19 +3861,19 @@ msgstr "Espainia"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "AEB"
 
 #: src/fetch/filmasterfetcher.cpp:237 src/fetch/filmasterfetcher.cpp:314
 #, kde-format
 msgid "Filmaster Link"
-msgstr ""
+msgstr "Filmaster-esteka"
 
 #: src/fetch/gaminghistoryfetcher.cpp:195
 #: src/fetch/gaminghistoryfetcher.cpp:317
 #: src/fetch/gaminghistoryfetcher.cpp:372
 #, kde-format
 msgid "Gaming History Link"
-msgstr ""
+msgstr "Bideojokoen historiarako esteka"
 
 #: src/fetch/gcstarpluginfetcher.cpp:400
 #, kde-format
@@ -3896,12 +3903,12 @@ msgstr "Egilea:"
 #: src/fetch/giantbombfetcher.cpp:202
 #, kde-format
 msgid "GiantBomb Link"
-msgstr ""
+msgstr "GiantBomb-esteka"
 
 #: src/fetch/googlebookfetcher.cpp:257 src/fetch/googlebookfetcher.cpp:370
 #, kde-format
 msgid "Google Book Link"
-msgstr ""
+msgstr "«Google Book»-esteka"
 
 #: src/fetch/googlebookfetcher.cpp:361
 #, kde-format
@@ -3935,7 +3942,7 @@ msgstr "Internet Bookshop (ibs.it)"
 #: src/fetch/igdbfetcher.cpp:365 src/fetch/igdbfetcher.cpp:576
 #, kde-format
 msgid "IGDB Link"
-msgstr "IGDBren esteka"
+msgstr "IGDB-esteka"
 
 #: src/fetch/igdbfetcher.cpp:564
 #, kde-format
@@ -3964,7 +3971,7 @@ msgstr "Internet Movie Database"
 #: src/field.cpp:335
 #, kde-format
 msgid "IMDb Link"
-msgstr "«IMDb»ren esteka"
+msgstr "IMDb-esteka"
 
 #: src/fetch/imdbfetcher.cpp:531
 #, kde-format
@@ -4024,27 +4031,27 @@ msgstr ""
 #: src/fetch/itunesfetcher.cpp:238 src/fetch/itunesfetcher.cpp:531
 #, kde-format
 msgid "iTunes Link"
-msgstr "«iTunes»en esteka"
+msgstr "iTunes-esteka"
 
 #: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:667
 #, kde-format
 msgid "KinoPoisk Link"
-msgstr "KinoPoisk esteka"
+msgstr "KinoPoisk-esteka"
 
 #: src/fetch/kinoteatrfetcher.cpp:236 src/fetch/kinoteatrfetcher.cpp:506
 #, kde-format
 msgid "Kino-Teatr Link"
-msgstr "Kino-Teatr esteka"
+msgstr "Kino-Teatr-esteka"
 
 #: src/fetch/mobygamesfetcher.cpp:454 src/fetch/mobygamesfetcher.cpp:634
 #, kde-format
 msgid "MobyGames Link"
-msgstr "MobyGames esteka"
+msgstr "MobyGames-esteka"
 
 #: src/fetch/moviemeterfetcher.cpp:217 src/fetch/moviemeterfetcher.cpp:290
 #, kde-format
 msgid "MovieMeter Link"
-msgstr "MovieMeter esteka"
+msgstr "MovieMeter-esteka"
 
 #: src/fetch/multifetcher.cpp:208
 #, kde-format
@@ -4059,7 +4066,7 @@ msgstr "Datu-iturria:"
 #: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:398
 #, kde-format
 msgid "Numista Link"
-msgstr "Numista esteka"
+msgstr "Numista-esteka"
 
 #: src/fetch/numistafetcher.cpp:403
 #, kde-format
@@ -4103,10 +4110,9 @@ msgid "Catalog: "
 msgstr "Karta zenbakia"
 
 #: src/fetch/opdsfetcher.cpp:455
-#, fuzzy, kde-format
-#| msgid "Enter the host name of the server."
+#, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr "Sartu zerbitzariaren ostalari-izena."
+msgstr "Sartu OPDS zerbitzarirako esteka."
 
 #: src/fetch/opdsfetcher.cpp:460
 #, fuzzy, kde-format
@@ -4117,12 +4123,12 @@ msgstr "Fitxategi katalogoa"
 #: src/fetch/openlibraryfetcher.cpp:275 src/fetch/openlibraryfetcher.cpp:450
 #, kde-format
 msgid "OpenLibrary Link"
-msgstr "OpenLibrary esteka"
+msgstr "OpenLibrary-esteka"
 
 #: src/fetch/rpggeekfetcher.cpp:212
 #, kde-format
 msgid "RPGGeek Link"
-msgstr "RPGGeek esteka"
+msgstr "RPGGeek-esteka"
 
 #: src/fetch/srufetcher.cpp:506
 #, kde-format
@@ -4189,7 +4195,7 @@ msgstr "Eremua"
 #: src/translators/filereadervideo.cpp:275
 #, kde-format
 msgid "TMDb Link"
-msgstr "TMDb esteka"
+msgstr "TMDb-esteka"
 
 #: src/fetch/themoviedbfetcher.cpp:332 src/fetch/themoviedbfetcher.cpp:572
 #: src/fetch/thetvdbfetcher.cpp:249 src/fetch/thetvdbfetcher.cpp:566
@@ -4230,7 +4236,7 @@ msgstr "TheMovieDB (%1)"
 #: src/fetch/thetvdbfetcher.cpp:254 src/fetch/thetvdbfetcher.cpp:563
 #, kde-format
 msgid "TheTVDB Link"
-msgstr "TheTVDB esteka"
+msgstr "TheTVDB-esteka"
 
 #: src/fetch/thetvdbfetcher.cpp:590
 #, kde-format
@@ -4238,15 +4244,14 @@ msgid "Subscriber PIN: "
 msgstr ""
 
 #: src/fetch/vgcollectfetcher.cpp:233 src/fetch/vgcollectfetcher.cpp:369
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "«Colnect»en esteka"
+msgstr "Colnect-esteka"
 
 #: src/fetch/videogamegeekfetcher.cpp:203
 #, kde-format
 msgid "VideoGameGeek Link"
-msgstr "VideoGameGeek esteka"
+msgstr "VideoGameGeek-esteka"
 
 #: src/fetch/vndbfetcher.cpp:290 src/fetch/vndbfetcher.cpp:433
 #, kde-format
@@ -6728,7 +6733,7 @@ msgstr "Balizko erabiltzaile ID bat sartu behar da."
 #: src/translators/boardgamegeekimporter.cpp:243
 #, kde-format
 msgid "BoardGameGeek Options"
-msgstr ""
+msgstr "BoardGameGeek-en aukerak"
 
 #: src/translators/boardgamegeekimporter.cpp:249
 #, kde-format
@@ -6750,12 +6755,13 @@ msgstr "CSV aukerak"
 #: src/translators/csvexporter.cpp:142
 #, kde-format
 msgid "Include field titles as column headers"
-msgstr ""
+msgstr "Sartu eremu-tituluak zutabe-goiburu gisa"
 
 #: src/translators/csvexporter.cpp:144
 #, kde-format
 msgid "If checked, a header row will be added with the field titles."
 msgstr ""
+"Markatuz gero, eremuen tituluak dituen goiburu-errenkada bat gehituko da."
 
 #: src/translators/csvexporter.cpp:147
 #, kde-format
@@ -6768,6 +6774,8 @@ msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
 msgstr ""
+"Komaz gain, beste karaktere batzuk bereizle gisa erabil daitezke, "
+"fitxategiko balio bakoitza bereizteko."
 
 #: src/translators/csvexporter.cpp:154
 #, kde-format
@@ -6827,6 +6835,8 @@ msgstr "Taulako zutabe-bereizlea:"
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
+"Zutabe-bereizleak <i>Taula</i> eremu bateko zutabe bakoitzeko balioak "
+"bereizten ditu."
 
 #: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:305
 #, kde-format
@@ -6837,6 +6847,8 @@ msgstr "Taulako errenkada-bereizlea:"
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
+"Errenkada-bereizleak <i>Taula</i> eremu bateko errenkada bakoitzeko balioak "
+"bereizten ditu."
 
 #: src/translators/csvimporter.cpp:223
 #: src/translators/filelistingimporter.cpp:180
@@ -6883,7 +6895,7 @@ msgstr "&Bestelakoa:"
 #: src/translators/csvimporter.cpp:324
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
-msgstr ""
+msgstr "Taulak CSV fitxategiaren aurreneko bost lerroak erakusten ditu."
 
 #: src/translators/csvimporter.cpp:331
 #, kde-format
