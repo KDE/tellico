@@ -1,16 +1,16 @@
 # Translation for tellico.po to Euskara/Basque (eu).
-# Copyright (C) 2010-2023 This file is copyright:
+# Copyright (C) 2010-2024 This file is copyright:
 # This file is distributed under the same license as the tellico package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2020, 2021, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2020, 2021, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-07 03:15+0000\n"
-"PO-Revision-Date: 2023-08-19 13:35+0200\n"
+"PO-Revision-Date: 2024-08-15 15:00+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -495,6 +495,9 @@ msgid ""
 "value template. Named fields, such as \"%{year} %{title}\", get substituted "
 "in the value."
 msgstr ""
+"Eratorritako balioak beste eremuetako balioetatik osatzen dira balio-"
+"ereduaren arabera. Izendun eremuak, «%{year} %{title}» esaterako, "
+"balioarekin ordezkatzen dira."
 
 #: src/collectionfieldsdialog.cpp:270
 #, kde-format
@@ -668,6 +671,9 @@ msgid ""
 "<em>Table</em> or <em>Image</em> field. Please enter a different category.</"
 "qt>"
 msgstr ""
+"<qt>Eremu bat ezin da egon <em>paragrafo</em>, <em>taula</em> edo <em>irudi</"
+"em> eremu baten kategoria berean. Mesedez, sartu kategoria ezberdin batean.</"
+"qt>"
 
 #: src/collectionfieldsdialog.cpp:942
 #, kde-format
@@ -675,6 +681,8 @@ msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
 msgstr ""
+"Eremu baten titulua ezin da izan dagoen kategoria baten berdina. Mesedez, "
+"sartu titulu ezberdin bat."
 
 #: src/collectionfieldsdialog.cpp:954
 #, kde-format
@@ -683,6 +691,9 @@ msgid ""
 "must be less than the higher bound. Please enter different low and high "
 "properties."
 msgstr ""
+"Balotzeko eremu baten balioa 1 eta 10 artekoa izan behar da, eta beheko muga "
+"goiko muga baino txikiagoa izan behar da. Mesedez, sartu behe eta goi "
+"propietate ezberdinak."
 
 #: src/collectionfieldsdialog.cpp:969
 #, kde-format
@@ -1313,9 +1324,9 @@ msgstr ""
 
 #: src/collections/coincollection.cpp:103
 #: src/collections/stampcollection.cpp:96
-#, fuzzy, kde-format
+#, kde-format
 msgid "Grade"
-msgstr "Maila"
+msgstr "Kalifikazioa"
 
 #: src/collections/coincollection.cpp:110
 #, kde-format
@@ -1326,13 +1337,13 @@ msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 #: src/collections/coincollection.cpp:112
 #, kde-format
 msgid "Grading Service"
-msgstr ""
+msgstr "Kalifikazio zerbitzua"
 
 #: src/collections/coincollection.cpp:136 src/fetch/colnectfetcher.cpp:810
 #: src/fetch/numistafetcher.cpp:402
 #, kde-format
 msgid "Obverse"
-msgstr ""
+msgstr "Aurkia"
 
 #: src/collections/coincollection.cpp:139 src/fetch/colnectfetcher.cpp:811
 #: src/fetch/numistafetcher.cpp:403
@@ -3539,7 +3550,7 @@ msgstr "%1(e)ren emaitzak: %2/%3"
 #: src/fetch/amazonfetcher.cpp:860 src/fetch/amazonfetcher.cpp:1077
 #, kde-format
 msgid "Amazon Link"
-msgstr "Amazon-erako esteka"
+msgstr "Amazon-esteka"
 
 #: src/fetch/amazonfetcher.cpp:1067
 #, kde-format
@@ -3616,7 +3627,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:1161
 #, kde-format
 msgid "&Associate's ID: "
-msgstr ""
+msgstr "&Bazkidearen ID:"
 
 #: src/fetch/amazonfetcher.cpp:1167
 #, kde-format
@@ -3685,7 +3696,7 @@ msgstr "Kolorista"
 #: src/fetch/bedethequefetcher.cpp:338 src/fetch/bedethequefetcher.cpp:458
 #, kde-format
 msgid "Bedetheque Link"
-msgstr "«Bedetheque»ren esteka"
+msgstr "Bedetheque-esteka"
 
 #: src/fetch/bedethequefetcher.cpp:456 src/field.cpp:314
 #, kde-format
@@ -3695,17 +3706,17 @@ msgstr "ISBN zk."
 #: src/fetch/boardgamegeekfetcher.cpp:205
 #, kde-format
 msgid "BoardGameGeek Link"
-msgstr "«BoardGameGeek»era esteka"
+msgstr "BoardGameGeek-esteka"
 
 #: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:808
 #, kde-format
 msgid "Colnect Link"
-msgstr "«Colnect»en esteka"
+msgstr "Colnect-esteka"
 
 #: src/fetch/colnectfetcher.cpp:546 src/fetch/colnectfetcher.cpp:814
 #, kde-format
 msgid "Mintage"
-msgstr ""
+msgstr "Txanpongintza"
 
 #: src/fetch/colnectfetcher.cpp:582 src/fetch/colnectfetcher.cpp:816
 #, kde-format
@@ -3736,7 +3747,7 @@ msgstr "Hizkuntza:"
 #: src/fetch/comicvinefetcher.cpp:220
 #, kde-format
 msgid "Comic Vine Link"
-msgstr "«Comic Vine»en esteka"
+msgstr "«Comic Vine»-esteka"
 
 #: src/fetch/configwidget.cpp:41
 #, kde-format
@@ -3795,7 +3806,7 @@ msgstr "Sartzeko gako bat beharrezkoa da datu-sorburu hori erabiltzeko."
 #: src/fetch/discogsfetcher.cpp:313 src/fetch/discogsfetcher.cpp:514
 #, kde-format
 msgid "Discogs Link"
-msgstr "«Discogs»en esteka"
+msgstr "Discogs-esteka"
 
 #. i18n("Nationality");
 #: src/fetch/discogsfetcher.cpp:332 src/fetch/discogsfetcher.cpp:515
@@ -3819,11 +3830,10 @@ msgstr "Discogs.com zerbitzariak token errore baten berri ematen du."
 #: src/fetch/discogsfetcher.cpp:503
 #, kde-format
 msgid "Discogs Audio Search"
-msgstr ""
+msgstr "Discogs-en audio bilaketa"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
 msgstr "Erabiltzailearen tokena:"
 
@@ -3831,17 +3841,17 @@ msgstr "Erabiltzailearen tokena:"
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:619
 #, kde-format
 msgid "Douban Link"
-msgstr ""
+msgstr "Douban-esteka"
 
 #: src/fetch/dvdfrfetcher.cpp:173
 #, kde-format
 msgid "DVDFr Link"
-msgstr ""
+msgstr "DVDFr-esteka"
 
 #: src/fetch/entrezfetcher.cpp:503
 #, kde-format
 msgid "Entrez Database"
-msgstr ""
+msgstr "Entrez datu-basea"
 
 #: src/fetch/entrezfetcher.cpp:513
 #, kde-format
@@ -3857,17 +3867,17 @@ msgstr "Kanpoko aplikazioa"
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
-msgstr ""
+msgstr "Kanpoko aplikaziotik itzulitako datuen bilduma-mota ezartzea."
 
 #: src/fetch/execexternalfetcher.cpp:375
 #, kde-format
 msgid "&Result type: "
-msgstr ""
+msgstr "E&maitza mota:"
 
 #: src/fetch/execexternalfetcher.cpp:384
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
-msgstr ""
+msgstr "Kanpoko aplikaziotik itzulitako datuen emaitza-mota ezartzea."
 
 #: src/fetch/execexternalfetcher.cpp:398
 #, kde-format
@@ -3884,7 +3894,7 @@ msgstr ""
 #: src/fetch/execexternalfetcher.cpp:408
 #, kde-format
 msgid "Select the search keys supported by the data source."
-msgstr ""
+msgstr "Hautatu data-sorburuak onartzen dituen bilaketa teklak."
 
 #: src/fetch/execexternalfetcher.cpp:410
 #, kde-format
@@ -3892,6 +3902,8 @@ msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
 "search term."
 msgstr ""
+"Gehitu beharrezkoak izan daitezkeen argumentuak. <b>%1</b> bilatutako "
+"terminoarekin ordezkatuko da."
 
 #. i18ncheckarg
 #: src/fetch/execexternalfetcher.cpp:411
@@ -3916,7 +3928,7 @@ msgstr ""
 #: src/fetch/fetcher.cpp:79
 #, kde-format
 msgid "%1 does not allow searching for this collection type."
-msgstr ""
+msgstr "%1(e)k ez du bilduma-mota hori bilatzen uzten."
 
 #: src/fetch/fetchmanager.cpp:68
 #, kde-format
@@ -3929,9 +3941,9 @@ msgid "ISBN"
 msgstr "ISBN"
 
 #: src/fetch/fetchmanager.cpp:70
-#, fuzzy, kde-format
+#, kde-format
 msgid "UPC/EAN"
-msgstr "&UPC EAN:"
+msgstr "UPC/EAN"
 
 #: src/fetch/fetchmanager.cpp:71
 #, kde-format
@@ -3946,7 +3958,7 @@ msgstr "arXiv ID"
 #: src/fetch/fetchmanager.cpp:74
 #, kde-format
 msgid "PubMed ID"
-msgstr ""
+msgstr "PubMed ID"
 
 #: src/fetch/fetchmanager.cpp:75
 #, kde-format
@@ -3956,16 +3968,15 @@ msgstr "LCCN"
 #: src/fetch/fetchmanager.cpp:76
 #, kde-format
 msgid "Raw Query"
-msgstr ""
+msgstr "Itaun gordena"
 
 #: src/fetch/filmaffinityfetcher.cpp:285 src/fetch/filmaffinityfetcher.cpp:464
 #, kde-format
 msgid "FilmAffinity Link"
-msgstr ""
+msgstr "FilmAffinity-esteka"
 
 #: src/fetch/filmaffinityfetcher.cpp:499
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "Espainia"
@@ -3974,29 +3985,29 @@ msgstr "Espainia"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "AEB"
 
 #: src/fetch/filmasterfetcher.cpp:239 src/fetch/filmasterfetcher.cpp:316
 #, kde-format
 msgid "Filmaster Link"
-msgstr ""
+msgstr "Filmaster-esteka"
 
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
 #: src/fetch/gaminghistoryfetcher.cpp:374
 #, kde-format
 msgid "Gaming History Link"
-msgstr ""
+msgstr "Bideojokoen historiarako esteka"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
 msgid "GCstar Plugin"
-msgstr ""
+msgstr "GCstar plugina"
 
 #: src/fetch/gcstarpluginfetcher.cpp:413
 #, kde-format
 msgid "Set the collection type of the data returned from the plugin."
-msgstr ""
+msgstr "Ezarri pluginetik itzulitako datuen bilduma-mota."
 
 #: src/fetch/gcstarpluginfetcher.cpp:418
 #, kde-format
@@ -4006,7 +4017,7 @@ msgstr "&Plugina:"
 #: src/fetch/gcstarpluginfetcher.cpp:424
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
-msgstr ""
+msgstr "Hautatu datu-sorburuarekin erabiltzeko GCstar plugina."
 
 #: src/fetch/gcstarpluginfetcher.cpp:429
 #, kde-format
@@ -4016,17 +4027,17 @@ msgstr "Egilea:"
 #: src/fetch/giantbombfetcher.cpp:206
 #, kde-format
 msgid "GiantBomb Link"
-msgstr ""
+msgstr "GiantBomb-esteka"
 
 #: src/fetch/googlebookfetcher.cpp:258 src/fetch/googlebookfetcher.cpp:371
 #, kde-format
 msgid "Google Book Link"
-msgstr ""
+msgstr "«Google Book»-esteka"
 
 #: src/fetch/googlebookfetcher.cpp:362
 #, kde-format
 msgid "Google Book Search"
-msgstr ""
+msgstr "«Google Book» bilaketa"
 
 #: src/fetch/hathitrustfetcher.cpp:309 src/fetch/z3950fetcher.cpp:578
 #, kde-format
@@ -4038,14 +4049,14 @@ msgstr "Irudigilea"
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
-msgstr ""
+msgstr "Dewey-ren hamartarra"
 
 #: src/fetch/hathitrustfetcher.cpp:311 src/fetch/srufetcher.cpp:525
 #: src/fetch/z3950fetcher.cpp:580
 #, kde-format
 msgctxt "Library of Congress classification system"
 msgid "LoC Classification"
-msgstr ""
+msgstr "LoC sailkapena"
 
 #: src/fetch/ibsfetcher.cpp:386
 #, kde-format
@@ -4055,7 +4066,7 @@ msgstr "Internet Bookshop (ibs.it)"
 #: src/fetch/igdbfetcher.cpp:368 src/fetch/igdbfetcher.cpp:579
 #, kde-format
 msgid "IGDB Link"
-msgstr "IGDBren esteka"
+msgstr "IGDB-esteka"
 
 #: src/fetch/igdbfetcher.cpp:567
 #, kde-format
@@ -4116,7 +4127,7 @@ msgstr "Ziurtagiriak"
 #: src/field.cpp:337
 #, kde-format
 msgid "IMDb Link"
-msgstr "«IMDb»ren esteka"
+msgstr "IMDb-esteka"
 
 #: src/fetch/imdbfetcher.cpp:1857
 #, kde-format
@@ -4136,7 +4147,7 @@ msgstr "ISBNdb.com"
 #: src/fetch/isbndbfetcher.cpp:415
 #, kde-format
 msgid "Enable batch ISBN searching (requires Premium or Pro plan)"
-msgstr ""
+msgstr "Gaitu ISBN sortaka bilatzea (Premium edo Pro planak behar dira)"
 
 #: src/fetch/isbndbfetcher.cpp:419
 #, kde-format
@@ -4144,26 +4155,28 @@ msgid ""
 "Batch searching for ISBN values is faster but only available for Premium or "
 "Pro plans."
 msgstr ""
+"ISBN balioak sortaka bilatzea azkarragoa da baina Premium edo Pro planekin "
+"erabilgarri dago bakarrik."
 
 #: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:505
 #, kde-format
 msgid "iTunes Link"
-msgstr "«iTunes»en esteka"
+msgstr "iTunes-esteka"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
 msgid "KinoPoisk Link"
-msgstr "KinoPoisk esteka"
+msgstr "KinoPoisk-esteka"
 
 #: src/fetch/kinoteatrfetcher.cpp:239 src/fetch/kinoteatrfetcher.cpp:509
 #, kde-format
 msgid "Kino-Teatr Link"
-msgstr "Kino-Teatr esteka"
+msgstr "«Kino-Teatr»-esteka"
 
 #: src/fetch/mobygamesfetcher.cpp:459 src/fetch/mobygamesfetcher.cpp:639
 #, kde-format
 msgid "MobyGames Link"
-msgstr "MobyGames esteka"
+msgstr "MobyGames-esteka"
 
 #: src/fetch/moviemeterfetcher.cpp:220 src/fetch/moviemeterfetcher.cpp:293
 #, kde-format
@@ -4209,44 +4222,39 @@ msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
 #: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the file - %1."
+#, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellicok ezin du fitxategia zamatu  %1."
+msgstr "Tellicok ezin du OPDS katalagoko bilaketaren deskribapena irakurri."
 
 #: src/fetch/opdsfetcher.cpp:421
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "OPDS Catalog"
-msgstr "Fitxategi katalogoa"
+msgstr "OPDS katalogoa"
 
 #: src/fetch/opdsfetcher.cpp:446
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "Catalog: "
-msgstr "Fitxategi katalogoa"
+msgstr "Katalogoa: "
 
 #: src/fetch/opdsfetcher.cpp:451
-#, fuzzy, kde-format
-#| msgid "Enter the host name of the server."
+#, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr "Sartu zerbitzariaren ostalari-izena."
+msgstr "Sartu OPDS zerbitzarirako esteka."
 
 #: src/fetch/opdsfetcher.cpp:456
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "&Verify Catalog"
-msgstr "Fitxategi katalogoa"
+msgstr "E&giaztatu katalogoa"
 
 #: src/fetch/openlibraryfetcher.cpp:281 src/fetch/openlibraryfetcher.cpp:454
 #, kde-format
 msgid "OpenLibrary Link"
-msgstr "OpenLibrary esteka"
+msgstr "OpenLibrary-esteka"
 
 #: src/fetch/rpggeekfetcher.cpp:214
 #, kde-format
 msgid "RPGGeek Link"
-msgstr "RPGGeek esteka"
+msgstr "RPGGeek-esteka"
 
 #: src/fetch/srufetcher.cpp:507
 #, kde-format
@@ -4259,10 +4267,9 @@ msgid "SRU Server"
 msgstr "SRU zerbitzaria"
 
 #: src/fetch/srufetcher.cpp:540
-#, fuzzy, kde-format
-#| msgid "&Source name: "
+#, kde-format
 msgid "Scheme: "
-msgstr "&Sorburuaren izena:"
+msgstr "Antolaera:"
 
 #: src/fetch/srufetcher.cpp:550 src/fetch/srufetcher.cpp:586
 #, kde-format
@@ -4302,7 +4309,7 @@ msgstr "Formatua:"
 #: src/fetch/srufetcher.cpp:602
 #, kde-format
 msgid "Enter the result format used by the server."
-msgstr ""
+msgstr "Sartu zerbitzariak erabilitako emaitzaren formatua."
 
 #: src/fetch/srufetcher.cpp:611
 #, kde-format
@@ -4312,14 +4319,14 @@ msgstr "Eremua"
 #: src/fetch/themoviedbfetcher.cpp:320 src/fetch/themoviedbfetcher.cpp:574
 #, kde-format
 msgid "TMDb Link"
-msgstr "TMDb esteka"
+msgstr "TMDb-esteka"
 
 #: src/fetch/themoviedbfetcher.cpp:338 src/fetch/themoviedbfetcher.cpp:578
 #: src/fetch/thetvdbfetcher.cpp:259 src/fetch/thetvdbfetcher.cpp:577
 #: src/fetch/tvmazefetcher.cpp:182 src/fetch/tvmazefetcher.cpp:384
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "Sarea"
 
 #: src/fetch/themoviedbfetcher.cpp:638
 #, kde-format
@@ -4353,23 +4360,22 @@ msgstr "TheMovieDB (%1)"
 #: src/fetch/thetvdbfetcher.cpp:264 src/fetch/thetvdbfetcher.cpp:574
 #, kde-format
 msgid "TheTVDB Link"
-msgstr "TheTVDB esteka"
+msgstr "TheTVDB-esteka"
 
 #: src/fetch/thetvdbfetcher.cpp:601
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr ""
+msgstr "Harpidedunaren PIN:"
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "Colnect Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "«Colnect»en esteka"
+msgstr "Colnect-esteka"
 
 #: src/fetch/videogamegeekfetcher.cpp:205
 #, kde-format
 msgid "VideoGameGeek Link"
-msgstr "VideoGameGeek esteka"
+msgstr "VideoGameGeek-esteka"
 
 #: src/fetch/vndbfetcher.cpp:289 src/fetch/vndbfetcher.cpp:433
 #, kde-format
@@ -4379,27 +4385,27 @@ msgstr "Ezizena"
 #: src/fetch/vndbfetcher.cpp:308
 #, kde-format
 msgid "Visual Novel"
-msgstr ""
+msgstr "Eleberri bisuala"
 
 #: src/fetch/z3950connection.cpp:183
 #, kde-format
 msgid "Query error!"
-msgstr ""
+msgstr "Itaun-errorea!"
 
 #: src/fetch/z3950connection.cpp:223 src/fetch/z3950connection.cpp:344
 #, kde-format
 msgid "Connection search error %1: %2"
-msgstr ""
+msgstr "Konexioa bilatzeko errorea %1: %2"
 
 #: src/fetch/z3950connection.cpp:305
 #, kde-format
 msgid "Record syntax error"
-msgstr ""
+msgstr "Erregistroaren sintaxi errorea"
 
 #: src/fetch/z3950connection.cpp:425
-#, fuzzy, kde-format
+#, kde-format
 msgid "Connection error %1: %2"
-msgstr "Konexio-errorea"
+msgstr "Konexioaren errorea %1: %2"
 
 #: src/fetch/z3950fetcher.cpp:566 src/fetch/z3950fetcher.cpp:881
 #, kde-format
@@ -4407,9 +4413,9 @@ msgid "z39.50 Server"
 msgstr "z39.50 zerbitzaria"
 
 #: src/fetch/z3950fetcher.cpp:592
-#, fuzzy, kde-format
+#, kde-format
 msgid "Use preset &server:"
-msgstr "Erabili "
+msgstr "Erabili aurrezarritako &zerbitzaria:"
 
 #: src/fetch/z3950fetcher.cpp:628
 #, kde-format
@@ -4424,7 +4430,7 @@ msgstr "Sartu zerbitzariak erabiltzen duen datu-basearen izena."
 #: src/fetch/z3950fetcher.cpp:638
 #, kde-format
 msgid "Query character set: "
-msgstr ""
+msgstr "Itaun-karaktereen multzoa:"
 
 #: src/fetch/z3950fetcher.cpp:647
 #, kde-format
@@ -4432,11 +4438,13 @@ msgid ""
 "Enter the character set encoding used for queries by the z39.50 server. The "
 "most likely choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
+"Sartu z39.50 zerbitzariak itaunetarako erabiltzen duen karaktere-multzoaren "
+"kodeketa. Seguruenik MARC-8 izango da, nahiz eta ISO-8859-1 ere ohikoa den."
 
 #: src/fetch/z3950fetcher.cpp:653
 #, kde-format
 msgid "Results character set: "
-msgstr ""
+msgstr "Emaitzen karaktere-multzoa:"
 
 #: src/fetch/z3950fetcher.cpp:662
 #, kde-format
@@ -4444,6 +4452,9 @@ msgid ""
 "Enter the character set encoding used for responses by the z39.50 server. "
 "The most likely choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
+"Sartu z39.50 zerbitzariak erantzunetarako erabiltzen duen karaktere-"
+"multzoaren kodeketa. Seguruenik MARC-8 izango da, nahiz eta ISO-8859-1 ere "
+"ohikoa den."
 
 #: src/fetch/z3950fetcher.cpp:668
 #, kde-format
@@ -4461,6 +4472,8 @@ msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
 msgstr ""
+"Sartu z39.50 zerbitzariak erabilitako datuen formatua. <i>Automatikoki "
+"hauteman</i> hautatuta badago, Tellico ezarpen oneta hautematen saiatuko da."
 
 #: src/fetch/z3950fetcher.cpp:686
 #, kde-format
@@ -4478,6 +4491,8 @@ msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
+"Sartu z39.50 datu-baseak autentifikatzeko erabilzen duen erabiltzaile-izena. "
+"Zerbitzari gehienek ez dute behar."
 
 #: src/fetch/z3950fetcher.cpp:698
 #, kde-format
@@ -4491,6 +4506,9 @@ msgid ""
 "do not need one. The password will be saved in plain text in the Tellico "
 "configuration file."
 msgstr ""
+"Sartu z39.50 datu-baseak autentifikatzeko erabiltzen duen pasahitza. "
+"Zerbitzari gehienek ez dute erabiltzen. Pasahitza testu arrunt gisa gordeko "
+"da Tellico konfiguratzeko fitxategian."
 
 #: src/fetchdialog.cpp:82
 #, kde-format
@@ -4510,7 +4528,7 @@ msgstr "Interneteko bilaketa"
 #: src/fetchdialog.cpp:153
 #, kde-format
 msgid "Search Query"
-msgstr ""
+msgstr "Bilaketa-itauna"
 
 #: src/fetchdialog.cpp:162
 #, kde-format
@@ -4521,7 +4539,7 @@ msgstr "&Bilatu:"
 #: src/fetchdialog.cpp:168
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
-msgstr ""
+msgstr "Sartu bilaketa-balio bat. ISBN bilaketa batek ISBN osoa izan behar du."
 
 #: src/fetchdialog.cpp:178
 #, kde-format
@@ -4536,17 +4554,17 @@ msgstr "Egin klik bilaketa hasteko edo gelditzeko"
 #: src/fetchdialog.cpp:204
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
-msgstr ""
+msgstr "ISBN/UPC bilaketa a&nizkoitza"
 
 #: src/fetchdialog.cpp:206
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
-msgstr ""
+msgstr "Markatu laudi hau ISBN edo UPC balio anizkoitzak bilatzeko."
 
 #: src/fetchdialog.cpp:210
 #, kde-format
 msgid "Edit ISBN/UPC values..."
-msgstr ""
+msgstr "Editatu ISBN/UPC balioak..."
 
 #: src/fetchdialog.cpp:214
 #, kde-format
@@ -4554,21 +4572,23 @@ msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
 "values."
 msgstr ""
+"Egin klik testua editatzeko lauki bat irekitzeko, ISBN edo UPC balio "
+"anizkoitzak sartzeko edo haiek editatzeko."
 
 #: src/fetchdialog.cpp:220
 #, kde-format
 msgid "Search s&ource:"
-msgstr ""
+msgstr "Bilatu s&orburua:"
 
 #: src/fetchdialog.cpp:235
 #, kde-format
 msgid "Select the database to search"
-msgstr ""
+msgstr "Hautatu zein datu-basetan bilatu behar den"
 
 #: src/fetchdialog.cpp:254
-#, fuzzy, kde-format
+#, kde-format
 msgid "Source"
-msgstr "Iturburua"
+msgstr "Sorburua"
 
 #: src/fetchdialog.cpp:265
 #, kde-format
@@ -4576,6 +4596,8 @@ msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
 "the complete entry and show it in the view below."
 msgstr ""
+"Emaitzak aurkitu ahala, zerrenda honetara gehitzen dira. Bat hautatzean, "
+"sarrera osoa eskuratu eta azpiko ikuspegian erakutsiko du."
 
 #: src/fetchdialog.cpp:278
 #, kde-format
@@ -4583,6 +4605,8 @@ msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
 msgstr ""
+"Goiko zerrendan hautatutako sarrera bat hemen erakuts daiteke uneko "
+"bildumara gehitu baino lehen"
 
 #: src/fetchdialog.cpp:286
 #, kde-format
@@ -4592,89 +4616,89 @@ msgstr "&Gehitu sarrera"
 #: src/fetchdialog.cpp:291
 #, kde-format
 msgid "Add the selected entry to the current collection"
-msgstr ""
+msgstr "Gehitu hautatutako sarrera uneko bilduman"
 
 #: src/fetchdialog.cpp:294
 #, kde-format
 msgid "Get More Results"
-msgstr ""
+msgstr "Lortu emaitza gehiago"
 
 #: src/fetchdialog.cpp:298
 #, kde-format
 msgid "Fetch more results from the current data source"
-msgstr ""
+msgstr "Eskuratu emaitza gehiago uneko datu-sorburutik"
 
 #: src/fetchdialog.cpp:304
 #, kde-format
 msgid "Clear all search fields and results"
-msgstr ""
+msgstr "Garbitu bilaketa eremu eta emaitza denak"
 
 #: src/fetchdialog.cpp:395
 #, kde-format
 msgid "Cancelling the search..."
-msgstr ""
+msgstr "Bilaketa bertan behera uzten..."
 
 #: src/fetchdialog.cpp:408 src/fetchdialog.cpp:588
-#, fuzzy, kde-format
+#, kde-format
 msgid "Searching..."
 msgstr "Bilatzen..."
 
 #: src/fetchdialog.cpp:468
 #, kde-format
 msgid "The search returned no items."
-msgstr ""
+msgstr "Bilaketak ez du elementurik itzuli."
 
 #: src/fetchdialog.cpp:471
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Bilaketan elementu 1 itzuli du."
+msgstr[1] "Bilaketak %1 elementu itzuli ditu."
 
 #: src/fetchdialog.cpp:500
 #, kde-format
 msgid "No results were found for the following ISBN values:"
-msgstr ""
+msgstr "Ondoko ISBN balioetarako ez da emaitzarik aurkitu:"
 
 #: src/fetchdialog.cpp:502
-#, fuzzy, kde-format
+#, kde-format
 msgid "No Results"
-msgstr "Emaitzarik gabe"
+msgstr "Emaitzarik ez"
 
 #: src/fetchdialog.cpp:555 src/fetchdialog.cpp:611
-#, fuzzy, kde-format
+#, kde-format
 msgid "Fetching %1..."
-msgstr "Eskuratzen"
+msgstr "%1 Eskuratzen..."
 
 #: src/fetchdialog.cpp:628
 #, kde-format
 msgid "Attribution"
-msgstr ""
+msgstr "Aitortza"
 
 #: src/fetchdialog.cpp:665 src/fetchdialog.cpp:889
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
-msgstr ""
+msgstr "Uneko zure bilduma-motarako ez dago Interneteko sorbururik."
 
 #: src/fetchdialog.cpp:746
 #, kde-format
 msgid "Edit ISBN/UPC Values"
-msgstr ""
+msgstr "Editatu ISBN/UPC balioak"
 
 #: src/fetchdialog.cpp:757
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
-msgstr ""
+msgstr "<qt>Sartu ISBN edo UPC balioak, lerroko bat.</qt>"
 
 #: src/fetchdialog.cpp:773
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Load From File..."
-msgstr "Kargatu fitxategitik..."
+msgstr "&Zamatu fitxategitik..."
 
 #: src/fetchdialog.cpp:774
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
-msgstr ""
+msgstr "<qt>Zamatu zerrenda testu fitxategi batetik.</qt>"
 
 #: src/fetchdialog.cpp:798
 #, kde-format
@@ -4682,6 +4706,8 @@ msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
 msgstr ""
+"<qt>ISBN bilaketa batek gehienez 100 ISBN balio izan ditzake. Zure "
+"zerrendako aurreneko 100 balioak bakarrik erabiliko dira.</qt>"
 
 #: src/fetcherconfigdialog.cpp:75
 #, kde-format
@@ -4779,14 +4805,13 @@ msgstr "Nazioarteko Liburu Zenbaki Estandarra"
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
-msgstr ""
+msgstr "Denboraldia"
 
 #: src/field.cpp:346
-#, fuzzy, kde-format
-#| msgid "Episodes"
+#, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
-msgstr "Atalak"
+msgstr "Atala"
 
 #: src/filterdialog.cpp:58
 #, kde-format
@@ -4864,32 +4889,28 @@ msgstr "Jendea"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, fuzzy, kde-format
-#| msgid "Template:"
+#, kde-format
 msgid "Template Name:"
-msgstr "Txantiloia:"
+msgstr "Txantiloiaren izena:v"
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, fuzzy, kde-format
-#| msgid "Comments"
+#, kde-format
 msgid "Comment:"
-msgstr "Iruzkinak"
+msgstr "Iruzkina:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, fuzzy, kde-format
-#| msgid "Icon"
+#, kde-format
 msgid "Icon:"
-msgstr "Ikonoa"
+msgstr "Ikonoa:"
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, fuzzy, kde-format
-#| msgid "Collection Report"
+#, kde-format
 msgid "Save As Collection Template"
-msgstr "Bildumaren txostena"
+msgstr "Gorde bilduma-txantiloi gisa"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -4916,15 +4937,13 @@ msgstr "ez da berdina"
 
 #: src/gui/filterrulewidget.cpp:236 src/gui/filterrulewidget.cpp:244
 #: src/gui/filterrulewidget.cpp:264
-#, fuzzy, kde-format
-#| msgid "matches regexp"
+#, kde-format
 msgid "matches regular expression"
 msgstr "adierazpen erregularrarekin bat dator"
 
 #: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
 #: src/gui/filterrulewidget.cpp:265
-#, fuzzy, kde-format
-#| msgid "does not match regexp"
+#, kde-format
 msgid "does not match regular expression"
 msgstr "ez dator bat adierazpen erregularrarekin"
 
@@ -4953,32 +4972,26 @@ msgid "is greater than"
 msgstr "baino handiagoa da"
 
 #: src/gui/filterrulewidget.cpp:250
-#, fuzzy, kde-format
-#| msgid "&Image size: "
+#, kde-format
 msgid "image size equals"
-msgstr "&Irudiaren neurria:"
+msgstr "irudiaren neurria honen berdina da"
 
 #: src/gui/filterrulewidget.cpp:251
-#, fuzzy, kde-format
-#| msgid "does not equal"
+#, kde-format
 msgid "image size does not equal"
-msgstr "ez da berdina"
+msgstr "irudiaren neurria ez da honen berdina"
 
 #: src/gui/filterrulewidget.cpp:252
-#, fuzzy, kde-format
-#| msgctxt "is less than a number"
-#| msgid "is less than"
+#, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
-msgstr "baino txikiagoa da"
+msgstr "irudiaren neurria hau baino txikiagoa da"
 
 #: src/gui/filterrulewidget.cpp:253
-#, fuzzy, kde-format
-#| msgctxt "is greater than a number"
-#| msgid "is greater than"
+#, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
-msgstr "baino handiagoa da"
+msgstr "irudiaren neurria hau baino handiagoa da"
 
 #: src/gui/filterrulewidget.cpp:260
 #, kde-format
@@ -5228,10 +5241,9 @@ msgid "VinoXML Data Files"
 msgstr "VinoXML datu-fitxategiak"
 
 #: src/importdialog.cpp:430
-#, fuzzy, kde-format
-#| msgid "Book Title"
+#, kde-format
 msgid "eBook Files"
-msgstr "Liburuaren izenburua"
+msgstr "eLiburuki fitxategiak"
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5326,22 +5338,22 @@ msgstr "Aldatu mailegua..."
 #: src/loanview.cpp:200 xslt/report-templates/Loan_View.xsl:135
 #, kde-format
 msgid "Borrower"
-msgstr ""
+msgstr "Mailegu-hartzailea"
 
 #: src/loanview.cpp:202
 #, kde-format
 msgid "Borrower (Sort by Count)"
-msgstr ""
+msgstr "Mailegu-hartzailea (Sailkatu kontuaren arabera)"
 
 #: src/main.cpp:121
 #, kde-format
 msgid "Tellico - collection management software, free and simple"
-msgstr ""
+msgstr "Tellico - bildumak kudeatzeko softwarea, askea eta erraza"
 
 #: src/main.cpp:123
 #, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr ""
+msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:127
 #, kde-format
@@ -5381,23 +5393,22 @@ msgstr "Ez ireki irekitako azken fitxategia"
 #: src/main.cpp:145
 #, kde-format
 msgid "Import <filename> as a bibtex file"
-msgstr "Inportatu <filename> bibtex fitxategi gisa"
+msgstr "Inportatu <fitxategi-izena> bibtex fitxategi gisa"
 
 #: src/main.cpp:146
 #, kde-format
 msgid "Import <filename> as a MODS file"
-msgstr "Inportatu <filename> MODS fitxategi gisa"
+msgstr "Inportatu <fitxategi-izena> MODS fitxategi gisa"
 
 #: src/main.cpp:147
 #, kde-format
 msgid "Import <filename> as a RIS file"
-msgstr "Inportatu <filename> RIS fitxategi gisa"
+msgstr "Inportatu <fitxategi-izena> RIS fitxategi gisa"
 
 #: src/main.cpp:148
-#, fuzzy, kde-format
-#| msgid "Import <filename> as a MODS file"
+#, kde-format
 msgid "Import <filename> as a PDF file"
-msgstr "Inportatu <filename> MODS fitxategi gisa"
+msgstr "Inportatu <fitxategi-izena> PDF fitxategi gisa"
 
 #: src/main.cpp:149
 #, kde-format
@@ -5405,10 +5416,9 @@ msgid "File to open"
 msgstr "Ireki beharreko fitxategia"
 
 #: src/mainwindow.cpp:254
-#, fuzzy, kde-format
-#| msgid "Wine Collection"
+#, kde-format
 msgid "New Collection"
-msgstr "Ardo bilduma"
+msgstr "Bilduma berria"
 
 #: src/mainwindow.cpp:256
 #, kde-format
@@ -5566,28 +5576,24 @@ msgid "Save the document as a different file..."
 msgstr "Gorde dokumentua beste fitxategi baten gisan..."
 
 #: src/mainwindow.cpp:334
-#, fuzzy, kde-format
-#| msgid "Manage Templates"
+#, kde-format
 msgid "Save As Template..."
-msgstr "Kudeatu txantiloiak"
+msgstr "Gorde txantiloi gisa..."
 
 #: src/mainwindow.cpp:336
-#, fuzzy, kde-format
-#| msgid "Create a new collection"
+#, kde-format
 msgid "Save as a collection template"
-msgstr "Sortu bilduma berri bat"
+msgstr "Gorde bilduma-txantiloi gisa"
 
 #: src/mainwindow.cpp:339
-#, fuzzy, kde-format
-#| msgid "Print the contents of the document..."
+#, kde-format
 msgid "Print the contents of the collection..."
-msgstr "Inprimatu dokumentuaren edukia..."
+msgstr "Inprimatu bildumaren edukia..."
 
 #: src/mainwindow.cpp:355
-#, fuzzy, kde-format
-#| msgid "Print the contents of the document..."
+#, kde-format
 msgid "Preview the contents of the collection..."
-msgstr "Inprimatu dokumentuaren edukia..."
+msgstr "Aurreikusi bildumaren edukia..."
 
 #: src/mainwindow.cpp:359
 #, kde-format
@@ -5650,28 +5656,24 @@ msgid "Import data from Delicious Library"
 msgstr "Inportatu datuak Delicious liburutegitik"
 
 #: src/mainwindow.cpp:406
-#, fuzzy, kde-format
-#| msgid "Import Tellico Data..."
+#, kde-format
 msgid "Import Collectorz Data..."
-msgstr "Inportatu Tellico datuak..."
+msgstr "Inportatu Collectorz datuak..."
 
 #: src/mainwindow.cpp:407
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from Collectorz"
-msgstr "Inportatu datuak Referencer-retik"
+msgstr "Inportatu datuak Collectorz-tik"
 
 #: src/mainwindow.cpp:410
-#, fuzzy, kde-format
-#| msgid "Import GCstar Data..."
+#, kde-format
 msgid "Import Data Crow Data..."
-msgstr "Inportatu GCstar datuak..."
+msgstr "Inportatu «Data Crow» datuak..."
 
 #: src/mainwindow.cpp:411
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from Data Crow"
-msgstr "Inportatu datuak Referencer-retik"
+msgstr "Inportatu datuak «Data Crow»tik"
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5714,16 +5716,14 @@ msgid "Import an RIS reference file"
 msgstr "Inportatu RIS erreferentzia fitxategi bat"
 
 #: src/mainwindow.cpp:430
-#, fuzzy, kde-format
-#| msgid "Import CSV Data..."
+#, kde-format
 msgid "Import MARC Data..."
-msgstr "Inportatu CSV datuak..."
+msgstr "Inportatu MARC datuak..."
 
 #: src/mainwindow.cpp:431
-#, fuzzy, kde-format
-#| msgid "Import VinoXML data"
+#, kde-format
 msgid "Import MARC data"
-msgstr "Inportatu VinoXML datuak"
+msgstr "Inportatu MARC datuak"
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -5773,19 +5773,17 @@ msgstr "Inportatu audio CD datuak..."
 #: src/mainwindow.cpp:454
 #, kde-format
 msgid "Import audio CD information"
-msgstr "Inportatu aude CD informazioak"
+msgstr "Inportatu audio CD informazioa"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Inportatu Goodreads bilduma..."
+msgstr "Inportatu Discogs bilduma..."
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Inportatu «Goodreads.com»eko bilduma bat"
+msgstr "Inportatu «Discogs.com»eko bilduma bat"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -6008,10 +6006,9 @@ msgid "&New Entry..."
 msgstr "&Sarrera berria..."
 
 #: src/mainwindow.cpp:582
-#, fuzzy, kde-format
-#| msgid "&New Entry"
+#, kde-format
 msgid "New Entry"
-msgstr "&Sarrera berria"
+msgstr "Sarrera berria"
 
 #: src/mainwindow.cpp:584
 #, kde-format
@@ -6019,9 +6016,9 @@ msgid "Create a new entry"
 msgstr "Sortu sarrera berri bat"
 
 #: src/mainwindow.cpp:586
-#, fuzzy, kde-format
+#, kde-format
 msgid "Add Entry"
-msgstr "Gehitu sarrera..."
+msgstr "Gehitu sarrera"
 
 #: src/mainwindow.cpp:596
 #, kde-format
@@ -6131,42 +6128,42 @@ msgstr "Bihurtu liburu bilduma bat bibliografia"
 #: src/mainwindow.cpp:670
 #, kde-format
 msgid "String &Macros..."
-msgstr ""
+msgstr "Kate-&makroak..."
 
 #: src/mainwindow.cpp:672
 #, kde-format
 msgid "Edit the bibtex string macros"
-msgstr ""
+msgstr "Editatu bibtex-en kate-makroak"
 
 #: src/mainwindow.cpp:675
 #, kde-format
 msgid "Check for Duplicate Keys..."
-msgstr ""
+msgstr "Egiaztatu gako bizkoiztuak duden..."
 
 #: src/mainwindow.cpp:677
 #, kde-format
 msgid "Check for duplicate citation keys"
-msgstr ""
+msgstr "Egiaztatu aipamen-gako bikoituak dauden"
 
 #: src/mainwindow.cpp:687
 #, kde-format
 msgid "Copy Bibtex to Cli&pboard"
-msgstr ""
+msgstr "Kopiatu Bibtex ar&belean"
 
 #: src/mainwindow.cpp:688
 #, kde-format
 msgid "Copy bibtex citations to the clipboard"
-msgstr ""
+msgstr "Kopiatu bibtex aipamenak arbelean"
 
 #: src/mainwindow.cpp:693
 #, kde-format
 msgid "Cite Entry in &LyX"
-msgstr ""
+msgstr "Sarrera &LyX-en aipatu"
 
 #: src/mainwindow.cpp:694
 #, kde-format
 msgid "Cite the selected entries in LyX"
-msgstr ""
+msgstr "Hautatutako sarrerak LyX-en aipatu"
 
 #: src/mainwindow.cpp:710
 #, kde-format
@@ -6187,12 +6184,12 @@ msgstr "Eguneratu sarrera datuak sorburu erabilgarri guztietatik"
 #: src/mainwindow.cpp:731
 #, kde-format
 msgid "Unlock Layout"
-msgstr ""
+msgstr "Desblokeatu antolaera"
 
 #: src/mainwindow.cpp:732
 #, kde-format
 msgid "Unlock the window's layout"
-msgstr ""
+msgstr "Desblokeatu leihoaren antolaera"
 
 #: src/mainwindow.cpp:734
 #, kde-format
@@ -6264,6 +6261,8 @@ msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
 "</qt>"
 msgstr ""
+"<qt><i>Zutabe ikuspegia</i>k sarrera bakoitzerako eremu anizkoitzen balioak "
+"erakusten ditu.</qt>"
 
 #: src/mainwindow.cpp:882
 #, kde-format
@@ -6281,6 +6280,8 @@ msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr ""
+"<qt><i>Talde ikuspegia</i>k sarrerak, hautatutako eremu batean oinarrituta, "
+"taldeetan sailkatzen ditu.</qt>"
 
 #: src/mainwindow.cpp:967
 #, kde-format
@@ -6296,6 +6297,11 @@ msgid ""
 "by <a href=\"tc:///edit_search_internet\">downloading data</a> from various "
 "Internet sources.</h3>"
 msgstr ""
+"<h3>Tellico, liburu, bideo, musika eta katalogatu nahi duzun edonolako "
+"bilduma kudeatzeko tresna bat da.</h3><h3>Zure bildumara sarrera berriak "
+"gehitu daitezke <a href=\"tc:///coll_new_entry\">datuak eskuz sartuta</a> "
+"edo datuakInterneteko hainbat sorburuetatik <a href=\"tc:///"
+"edit_search_internet\">zama-jaitsita</a>.</h3>"
 
 #: src/mainwindow.cpp:1168
 #, kde-format
@@ -6307,10 +6313,9 @@ msgstr ""
 "Gorde nahi al duzu?"
 
 #: src/mainwindow.cpp:1224 src/mainwindow.cpp:1257
-#, fuzzy, kde-format
-#| msgid "Create a new collection"
+#, kde-format
 msgid "Creating new collection..."
-msgstr "Sortu bilduma berri bat"
+msgstr "Bilduma berria sortzen..."
 
 #: src/mainwindow.cpp:1277 src/mainwindow.cpp:1300 src/mainwindow.cpp:1318
 #, kde-format
@@ -6330,6 +6335,10 @@ msgid ""
 "data directory to improve performance?</p><p>Your choice can always be "
 "changed in the configuration dialog.</p></qt>"
 msgstr ""
+"<qt><p>Irudi asko dituen fitxategi bat gordetzen ari zara, horrek Tellico "
+"nabarmen moteltzea eragiten du. Errendimendua hobetzeko, irudiak Tellico-ren "
+"datuen direktorioan bereizita gorde nahi dituzu?</p><p>Zure aukera, "
+"konfiguratzeko elkarrizketa-koadroan, alda daiteke.</p></qt>"
 
 #: src/mainwindow.cpp:1414
 #, kde-format
@@ -6362,6 +6371,8 @@ msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
+"Bilduma, sarreren azpimultzo mugatu bat erakusteko iragazten ari da.Ikusgai "
+"dauden sarrerak bakarrik inprimatuko dira. Jarraitu?"
 
 #: src/mainwindow.cpp:1557
 #, kde-format
@@ -6419,7 +6430,7 @@ msgstr "Esportatu honela"
 #: src/mainwindow.cpp:2039
 #, kde-format
 msgid "String Macros"
-msgstr ""
+msgstr "Kate-makroak"
 
 #: src/mainwindow.cpp:2040
 #, kde-format
@@ -6427,7 +6438,7 @@ msgid "Macro"
 msgstr "Makroa"
 
 #: src/mainwindow.cpp:2040
-#, fuzzy, kde-format
+#, kde-format
 msgid "String"
 msgstr "Katea"
 
@@ -6447,6 +6458,8 @@ msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr ""
+"<qt><i>Iragazki ikuspegia</i>k iragazte arau jakin batzuk betetzen dituzten "
+"sarrerak erakusten ditu.</qt>"
 
 #: src/mainwindow.cpp:2260
 #, kde-format
@@ -6459,6 +6472,8 @@ msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
+"<qt><i>Mailegu ikuspegia</i>k zure bildumako elementuak maileguan hartu "
+"dituzten pertsona guztien zerrenda bat erakusten du.</qt>"
 
 #: src/mainwindow.cpp:2348
 #, kde-format
@@ -6466,6 +6481,8 @@ msgid ""
 "Some images are not saved in the configured location. The current file must "
 "be saved and the images will be transferred to the new location."
 msgstr ""
+"Irudi batzuk ez daude gordeta konfiguratutako kokalekuan. Uneko fitxategia "
+"gorde behar da eta irudiak kokaleku berrira transferituko dira."
 
 #: src/mainwindow.cpp:2389
 #, kde-format
@@ -6494,7 +6511,7 @@ msgstr "&Txosten-txantiloia:"
 #: src/reportdialog.cpp:128
 #, kde-format
 msgid "One Entry Per Page"
-msgstr ""
+msgstr "Sarrera bat orrialdeko"
 
 #: src/reportdialog.cpp:140
 #, kde-format
@@ -6511,12 +6528,12 @@ msgstr "Hautatu txosten-txantiloi bat eta egin klik <em>Sortu</em>ri."
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr ""
+"Bilduma handietarako txosten batzuk sortzea segundo batzuk har ditzake."
 
 #: src/reportdialog.cpp:426
-#, fuzzy, kde-format
-#| msgid "PDF Files"
+#, kde-format
 msgid "PNG Files"
-msgstr "PDF fitxategiak"
+msgstr "PNG fitxategiak"
 
 #: src/reportdialog.cpp:441 src/translators/htmlexporter.cpp:100
 #, kde-format
@@ -6551,7 +6568,7 @@ msgstr "Sarrera 2"
 #: src/tellico_kernel.cpp:339
 #, kde-format
 msgid "Conflicting values for %1 were found while merging entries."
-msgstr ""
+msgstr "Sarrerak bateratzean %1(e)ren balio gatazkatsuak aurkitu dira."
 
 #: src/tellico_kernel.cpp:345
 #, kde-format
@@ -6562,7 +6579,7 @@ msgstr "Hautatu mantendu beharreko balioa."
 #: src/tellico_kernel.cpp:364 src/tellico_kernel.cpp:365
 #, kde-format
 msgid "Select value from %1"
-msgstr ""
+msgstr "Hautatu %1(e)ko balioa"
 
 #. i18n: ectx: Menu (file)
 #: src/tellicoui.rc:6
@@ -6572,11 +6589,9 @@ msgstr "&Fitxategia"
 
 #. i18n: ectx: Menu (file_new_collection)
 #: src/tellicoui.rc:8
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "&Collection"
+#, kde-format
 msgid "&New Collection"
-msgstr "&Bilduma"
+msgstr "Bilduma &berria"
 
 #. i18n: ectx: Menu (file_import)
 #: src/tellicoui.rc:27
@@ -6643,6 +6658,8 @@ msgid ""
 "<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
 "books in that library could be overwritten.</qt>"
 msgstr ""
+"<qt>Lehendik ere badago <i>%1</i> izeneko Alexandria liburutegi bat. "
+"Liburutegi hartan dauden liburuak gainidatz litezke.</qt>"
 
 #: src/translators/alexandriaimporter.cpp:234
 #, kde-format
@@ -6695,6 +6712,7 @@ msgstr "&Karpeta bilaketa errepikaria"
 #, kde-format
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
+"Markatuta badago, audio fitxategiak karpetetan errekurtsiboki bilatzen dira."
 
 #: src/translators/audiofileimporter.cpp:500
 #, kde-format
@@ -6730,7 +6748,7 @@ msgstr "Bibtex aukerak"
 #: src/translators/bibtexexporter.cpp:221
 #, kde-format
 msgid "Expand string macros"
-msgstr ""
+msgstr "Zabaldu kate-makroak"
 
 #: src/translators/bibtexexporter.cpp:223
 #, kde-format
@@ -6752,28 +6770,29 @@ msgstr ""
 #: src/translators/bibtexexporter.cpp:231
 #, kde-format
 msgid "Skip entries with empty citation keys"
-msgstr ""
+msgstr "Saltatu aipamen-gako hutsak dituzten sarrerak"
 
 #: src/translators/bibtexexporter.cpp:233
 #, kde-format
 msgid "If checked, any entries without a bibtex citation key will be skipped."
 msgstr ""
+"Markatuta badago, bibtex aipamen-gakorik gabeko sarrerak saltatu egingo ditu."
 
 #: src/translators/bibtexexporter.cpp:239
 #, kde-format
 msgid "Bibtex quotation style:"
-msgstr ""
+msgstr "Bibtex-en aipu estiloa:"
 
 #: src/translators/bibtexexporter.cpp:241
 #: src/translators/bibtexexporter.cpp:248
 #: src/translators/bibtexexporter.cpp:287
 #, kde-format
 msgid "Braces"
-msgstr ""
+msgstr "Parentesiak"
 
 #: src/translators/bibtexexporter.cpp:242
 #: src/translators/bibtexexporter.cpp:250
-#, fuzzy, kde-format
+#, kde-format
 msgid "Quotes"
 msgstr "Aipuak"
 
@@ -6787,32 +6806,32 @@ msgstr ""
 #: src/translators/bibteximporter.cpp:106
 #, kde-format
 msgid "No valid bibtex entries were found"
-msgstr ""
+msgstr "Fitxategian ez dira bibtex sarrera balioduna aurkitu"
 
 #: src/translators/bibteximporter.cpp:125
 #, kde-format
 msgid "No valid bibtex entries were found in file - %1"
-msgstr ""
+msgstr "Fitxategian ez dira bibtex sarrera balioduna aurkitu - %1"
 
 #: src/translators/bibteximporter.cpp:345
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
-msgstr ""
+msgstr "Erabili Unicode (UTF-8) kodeketa"
 
 #: src/translators/bibteximporter.cpp:346
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
-msgstr ""
+msgstr "Inportatutako fitxategia Unicode-rekin (UTF-8) irakurri."
 
 #: src/translators/bibteximporter.cpp:347
 #, kde-format
 msgid "Use user locale (%1) encoding"
-msgstr ""
+msgstr "Erabili erabiltzailearen tokiko (%1) kodeketa"
 
 #: src/translators/bibteximporter.cpp:351
 #, kde-format
 msgid "Read the imported file in the local encoding."
-msgstr ""
+msgstr "Inportatutako fitxategia kodeketa lokalean irakurri."
 
 #: src/translators/bibtexmlexporter.cpp:47
 #, kde-format
@@ -6822,38 +6841,38 @@ msgstr ""
 #: src/translators/bibtexmlexporter.cpp:51
 #, kde-format
 msgid "Bibtexml Files"
-msgstr ""
+msgstr "Bibtexml fitxategiak"
 
 #: src/translators/boardgamegeekimporter.cpp:81
 #: src/translators/goodreadsimporter.cpp:87 src/translators/xsltimporter.cpp:79
 #: src/translators/xsltimporter.cpp:85
 #, kde-format
 msgid "A valid XSLT file is needed to import the file."
-msgstr ""
+msgstr "Balizko XSLT fitxategi bat behar da fitxategia inportatzeko."
 
 #: src/translators/boardgamegeekimporter.cpp:92
 #: src/translators/discogsimporter.cpp:80
 #: src/translators/goodreadsimporter.cpp:105
 #, kde-format
 msgid "A valid user ID must be entered."
-msgstr ""
+msgstr "Balizko erabiltzaile ID bat sartu behar da."
 
 #: src/translators/boardgamegeekimporter.cpp:246
 #, kde-format
 msgid "BoardGameGeek Options"
-msgstr ""
+msgstr "BoardGameGeek-en aukerak"
 
 #: src/translators/boardgamegeekimporter.cpp:252
 #, kde-format
 msgid "Import owned items only"
-msgstr ""
+msgstr "Inportatu jabe zaren elementuak bakarrik"
 
 #: src/translators/boardgamegeekimporter.cpp:255
 #: src/translators/discogsimporter.cpp:199
 #: src/translators/goodreadsimporter.cpp:154
-#, fuzzy, kde-format
+#, kde-format
 msgid "User ID:"
-msgstr "Erabiltzailea IDa:"
+msgstr "Erabiltzaile ID:"
 
 #: src/translators/csvexporter.cpp:60
 #, fuzzy, kde-format
@@ -6863,20 +6882,21 @@ msgstr "CSV"
 #: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:214
 #, kde-format
 msgid "CSV Options"
-msgstr ""
+msgstr "CSV aukerak"
 
 #: src/translators/csvexporter.cpp:142
 #, kde-format
 msgid "Include field titles as column headers"
-msgstr ""
+msgstr "Sartu eremu-tituluak zutabe-goiburu gisa"
 
 #: src/translators/csvexporter.cpp:144
 #, kde-format
 msgid "If checked, a header row will be added with the field titles."
 msgstr ""
+"Markatuz gero, eremuen tituluak dituen goiburu-errenkada bat gehituko da."
 
 #: src/translators/csvexporter.cpp:147
-#, fuzzy, kde-format
+#, kde-format
 msgid "Delimiter"
 msgstr "Bereizlea"
 
@@ -6886,118 +6906,127 @@ msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
 msgstr ""
+"Komaz gain, beste karaktere batzuk bereizle gisa erabil daitezke, "
+"fitxategiko balio bakoitza bereizteko."
 
 #: src/translators/csvexporter.cpp:154
-#, fuzzy, kde-format
+#, kde-format
 msgid "Comma"
 msgstr "Koma"
 
 #: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:253
 #, kde-format
 msgid "Use a comma as the delimiter."
-msgstr ""
+msgstr "Erabili koma bat bereizle gisa."
 
 #: src/translators/csvexporter.cpp:160
-#, fuzzy, kde-format
+#, kde-format
 msgid "Semicolon"
 msgstr "Puntu eta koma"
 
 #: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:258
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
-msgstr ""
+msgstr "Erabili puntu eta koma bereizle gisa."
 
 #: src/translators/csvexporter.cpp:165
-#, fuzzy, kde-format
+#, kde-format
 msgid "Tab"
-msgstr "Tab"
+msgstr "Tabulazioa"
 
 #: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:263
 #, kde-format
 msgid "Use a tab as the delimiter."
-msgstr ""
+msgstr "Erabili tabulazio bat bereizle gisa."
 
 #: src/translators/csvexporter.cpp:170
 #: xslt/report-templates/Group_Statistics.xsl:75
-#, fuzzy, kde-format
+#, kde-format
 msgid "Other"
-msgstr "Bestelakoak"
+msgstr "Bestelakoa"
 
 #: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:268
 #, kde-format
 msgid "Use a custom string as the delimiter."
-msgstr ""
+msgstr "Erabili neurrira ipinitako kate bat bereizle gisa."
 
 #: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:275
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
+"Neurrira ipinitako kate bat, puntu eta koma bat esaterako, erabil daiteke "
+"bereizle gisa."
 
 #: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:299
 #, kde-format
 msgid "Table column delimiter:"
-msgstr ""
+msgstr "Taulako zutabe-bereizlea:"
 
 #: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:298
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
+"Zutabe-bereizleak <i>Taula</i> eremu bateko zutabe bakoitzeko balioak "
+"bereizten ditu."
 
 #: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:310
 #, kde-format
 msgid "Table row delimiter:"
-msgstr ""
+msgstr "Taulako errenkada-bereizlea:"
 
 #: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:309
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
+"Errenkada-bereizleak <i>Taula</i> eremu bateko errenkada bakoitzeko balioak "
+"bereizten ditu."
 
 #: src/translators/csvimporter.cpp:224
 #, kde-format
 msgid "Select the type of collection being imported."
-msgstr ""
+msgstr "Aukeratu inportatzen ari den bildumaren mota."
 
 #: src/translators/csvimporter.cpp:228
 #, kde-format
 msgid "&First row contains field titles"
-msgstr ""
+msgstr "&Lehenego errenkadak eremuen tituluak ditu"
 
 #: src/translators/csvimporter.cpp:229
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr ""
+"Markatuta badago, lehenego errenkada eremuen titulu gisa erabiltzen da."
 
 #: src/translators/csvimporter.cpp:245
-#, fuzzy, kde-format
+#, kde-format
 msgid "Delimiter:"
 msgstr "Bereizlea:"
 
 #: src/translators/csvimporter.cpp:251
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Comma"
-msgstr "Koma"
+msgstr "&Koma"
 
 #: src/translators/csvimporter.cpp:257
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Semicolon"
-msgstr "Puntu eta koma"
+msgstr "&Puntu eta koma"
 
 #: src/translators/csvimporter.cpp:262
-#, fuzzy, kde-format
+#, kde-format
 msgid "Ta&b"
-msgstr "TAB"
+msgstr "Ta&bulazioa"
 
 #: src/translators/csvimporter.cpp:267
-#, fuzzy, kde-format
+#, kde-format
 msgid "Ot&her:"
-msgstr "Bestelakoak"
+msgstr "&Bestelakoa:"
 
 #: src/translators/csvimporter.cpp:329
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
-msgstr ""
+msgstr "Taulak CSV fitxategiaren aurreneko bost lerroak erakusten ditu."
 
 #: src/translators/csvimporter.cpp:336
 #, kde-format
@@ -7008,19 +7037,19 @@ msgid ""
 msgstr ""
 
 #: src/translators/csvimporter.cpp:338
-#, fuzzy, kde-format
+#, kde-format
 msgid "Co&lumn:"
-msgstr "Zutabea"
+msgstr "&Zutabea:"
 
 #: src/translators/csvimporter.cpp:351
 #, kde-format
 msgid "&Data field in this column:"
-msgstr ""
+msgstr "&Datu-eremua zutabe honetan:"
 
 #: src/translators/csvimporter.cpp:365
 #, kde-format
 msgid "&Assign Field"
-msgstr ""
+msgstr "&Esleitu eremua"
 
 #: src/translators/csvimporter.cpp:404
 #, kde-format
@@ -7028,37 +7057,38 @@ msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
 "be imported."
 msgstr ""
+"Zutabe bat gutxienez eremu bati esleitu behar zaio. Esleitutako zutabeak "
+"bakarrik inportatuko dira."
 
 #: src/translators/csvimporter.cpp:601
-#, fuzzy, kde-format
+#, kde-format
 msgid "Review"
 msgstr "Berrikuspena"
 
 #: src/translators/csvimporter.cpp:694
 #, kde-format
 msgid "<New Field>"
-msgstr ""
+msgstr "<Eremu berria>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "«Discogs»en esteka"
+msgstr "«Discogs»en aukerak"
 
 #: src/translators/filelistingimporter.cpp:87
-#, fuzzy, kde-format
+#, kde-format
 msgid "Scanning files..."
 msgstr "Fitxategiak aztertzen..."
 
 #: src/translators/filelistingimporter.cpp:269
 #, kde-format
 msgid "File Listing Options"
-msgstr ""
+msgstr "Fitxategiak zerrendatzeko aukerak"
 
 #: src/translators/filelistingimporter.cpp:272
 #, kde-format
 msgid "Recursive folder search"
-msgstr ""
+msgstr "Karpeta bilaketa errepikaria"
 
 #: src/translators/filelistingimporter.cpp:273
 #, kde-format
