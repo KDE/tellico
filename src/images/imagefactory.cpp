@@ -706,12 +706,12 @@ QString ImageFactory::localDirectory(const QUrl& url_) {
   }
   if(!url_.isLocalFile()) {
     myWarning() << "Tellico can only save images to local disk";
-    myWarning() << "unable to save to " << url_;
+    myWarning() << "Unable to save images local to" << url_.toDisplayString();
     return QString();
   }
   QString dir = url_.adjusted(QUrl::RemoveFilename).toLocalFile();
   // could have already been set once
-  if(!dir.contains(QLatin1String("_files"))) {
+  if(!dir.endsWith(QLatin1String("_files/"))) {
     QFileInfo fi(url_.fileName());
     dir += fi.completeBaseName() + QLatin1String("_files/");
   }
