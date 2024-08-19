@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-07 03:15+0000\n"
-"PO-Revision-Date: 2024-08-15 15:00+0200\n"
+"PO-Revision-Date: 2024-08-18 11:11+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -608,6 +608,9 @@ msgid ""
 "in the collection may cause data corruption. Do you want to keep your "
 "modified values or cancel and revert to the current ones?</qt>"
 msgstr ""
+"<qt><i>%1</i> eremutik bilduman une honetan dauden baimendutako balioak "
+"kentzea datuak hondatzea eragin lezake. Aldatutako zure balioak mantendu "
+"nahi dituzu edo bertan behera utzi eta unekoetara lehengoratu nahi duzu?</qt>"
 
 #: src/collectionfieldsdialog.cpp:416
 #, kde-format
@@ -1321,6 +1324,9 @@ msgid ""
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 msgstr ""
+"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
+"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
+"Good-8,Good-4,Fair"
 
 #: src/collections/coincollection.cpp:103
 #: src/collections/stampcollection.cpp:96
@@ -1639,7 +1645,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:281
-#, fuzzy, kde-format
+#, kde-format
 msgctxt ""
 "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
 "Everyone, Early Childhood, Pending"
@@ -1647,8 +1653,8 @@ msgid ""
 "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, "
 "Pending"
 msgstr ""
-"Unrated, Soilik helduentzako, Mature, Nerabea, 10+ guztientzat, Guztientzat, "
-"Haurtzaro Hasiera, Pending"
+"Kalifikatu gabe, Helduentzako bakarrik, Heldua, Nerabea, 10+ guztiak, "
+"Haurtzaro hasiera, Kalifikatzeko zain"
 
 #: src/collections/musiccollection.cpp:38
 #, kde-format
@@ -1761,7 +1767,7 @@ msgid "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgstr ""
 
 #: src/collections/stampcollection.cpp:101
-#, fuzzy, kde-format
+#, kde-format
 msgid "Cancelled"
 msgstr "Bertan behera utzita"
 
@@ -2060,7 +2066,7 @@ msgstr "Ardo apartsua"
 #: src/collections/winecollection.cpp:108
 #, kde-format
 msgid "Drink By"
-msgstr ""
+msgstr "Edan du:"
 
 #: src/collections/winecollection.cpp:122
 #, kde-format
@@ -2081,13 +2087,13 @@ msgstr "Erantsi %1"
 #: src/commands/addloans.cpp:47
 #, kde-format
 msgid "Check-out Items"
-msgstr ""
+msgstr "Atera elementuak"
 
 #: src/commands/addloans.cpp:48
 #, kde-format
 msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
-msgstr ""
+msgstr "Atera %1"
 
 #: src/commands/collectioncommand.cpp:54
 #, kde-format
@@ -2167,13 +2173,13 @@ msgstr "Ezabatu %1"
 #: src/commands/removeloans.cpp:40
 #, kde-format
 msgid "Check-in Entries"
-msgstr ""
+msgstr "Sartu elementuak"
 
 #: src/commands/removeloans.cpp:41
 #, kde-format
 msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
-msgstr ""
+msgstr "Sartu %1"
 
 #: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:313
 #, kde-format
@@ -3890,6 +3896,8 @@ msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
 msgstr ""
+"Tellico-ren baliozko datu-fitxategi bat eman beharko lukeen "
+"aplikazioarenbide-izena ezarri."
 
 #: src/fetch/execexternalfetcher.cpp:408
 #, kde-format
@@ -3924,6 +3932,10 @@ msgid ""
 "where field names are contained inside braces, such as <i>%{author}</i>. See "
 "the documentation for details.</p>"
 msgstr ""
+"<p>Sartu, sarrera baten eguneratze erabilgarriak bilatzeko erabili beharko "
+"liratekeen argumentuak.</p><p>Formatua, eratorritako balioak dituzten "
+"eremuekin erabilitako berdinak dira, hala nola <i>%{author}</i>. egiratu "
+"dokumentazioa xehetasunetarako.</p>"
 
 #: src/fetch/fetcher.cpp:79
 #, kde-format
@@ -5324,11 +5336,14 @@ msgid ""
 "calendar, which can be viewed using KOrganizer. The box is only active if "
 "you set a due date.</qt>"
 msgstr ""
+"<qt>Lauki hau markatuta <em>Zeregin</em> elementu bat gehituko da zure "
+"egutegi aktiboan, KOrganizer erabiliz ikus daitekeena. Laukia, epemuga bat "
+"ezartzen baduzu, bakarrik, egongo da aktibo.</qt>"
 
 #: src/loanview.cpp:119
 #, kde-format
 msgid "Check-in"
-msgstr ""
+msgstr "Sartu"
 
 #: src/loanview.cpp:121
 #, kde-format
@@ -6723,6 +6738,8 @@ msgstr "Barneratu fitxategi &kokalekua"
 #, kde-format
 msgid "If checked, the file names for each track are added to the entries."
 msgstr ""
+"Markatuta badago, pista bakoitzaren fitxategi-izenak sarreretan gehituko "
+"dira."
 
 #: src/translators/audiofileimporter.cpp:505
 #, kde-format
@@ -6733,6 +6750,7 @@ msgstr "Barneratu &bit-emaria"
 #, kde-format
 msgid "If checked, the bitrate for each track is added to the entries."
 msgstr ""
+"Markatuta badago, pista bakoitzaren bit-emaria  sarreretan gehitzen da."
 
 #: src/translators/bibtexexporter.cpp:61
 #, kde-format
@@ -6756,6 +6774,8 @@ msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
 "be written."
 msgstr ""
+"Markatuta badago, kate-makroak zabalduko dira eta ez da @string{} sarrerarik "
+"idatziko."
 
 #: src/translators/bibtexexporter.cpp:226
 #, kde-format
@@ -6765,7 +6785,7 @@ msgstr "Erabili URL paketea"
 #: src/translators/bibtexexporter.cpp:228
 #, kde-format
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
-msgstr ""
+msgstr "Markatuta badago, URL eremu oro \\url deklarazio batean bilduko da."
 
 #: src/translators/bibtexexporter.cpp:231
 #, kde-format
@@ -6802,6 +6822,8 @@ msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will be "
 "escaped with either braces or quotation marks.</qt>"
 msgstr ""
+"<qt>Bibtex esportatzerakoan erabilitako estiloa. Eremu guztietako balioei "
+"ihes egingo zaie giltzak edo aipu komatxoak erabiliz.</qt>"
 
 #: src/translators/bibteximporter.cpp:106
 #, kde-format
@@ -6836,7 +6858,7 @@ msgstr "Inportatutako fitxategia kodeketa lokalean irakurri."
 #: src/translators/bibtexmlexporter.cpp:47
 #, kde-format
 msgid "Bibtexml"
-msgstr ""
+msgstr "Bibtexml"
 
 #: src/translators/bibtexmlexporter.cpp:51
 #, kde-format
@@ -6875,7 +6897,7 @@ msgid "User ID:"
 msgstr "Erabiltzaile ID:"
 
 #: src/translators/csvexporter.cpp:60
-#, fuzzy, kde-format
+#, kde-format
 msgid "CSV"
 msgstr "CSV"
 
@@ -7035,6 +7057,9 @@ msgid ""
 "column, selecting the field, then clicking the <i>Assign Field</i> button.</"
 "qt>"
 msgstr ""
+"<qt>Ezarri zutabe bakoitza bildumako eremu batekin bat etortzea, zutabe bat "
+"hautatu, eremua hautatu, eta ondoren <i>Esleitu eremua</i> botoian klik "
+"eginez.</qt>"
 
 #: src/translators/csvimporter.cpp:338
 #, kde-format
