@@ -5193,10 +5193,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - 간단한 자유 소프트웨어 소장품 관리 도구"
 
 #: src/main.cpp:171
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2023, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001-2024, Robby Stephenson"
-msgstr "(c) 2001-2023, Robby Stephenson"
+msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:175
 #, kde-format
