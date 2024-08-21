@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-07 02:29+0000\n"
-"PO-Revision-Date: 2024-02-05 21:58+0100\n"
+"PO-Revision-Date: 2024-08-21 00:09+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3450,7 +3450,7 @@ msgstr ""
 #, kde-format
 msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
-msgstr ""
+msgstr "arXiv의 오픈 액세스 접근 허용에 대해서 감사드립니다."
 
 #: src/fetch/arxivfetcher.cpp:341 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
@@ -3525,10 +3525,9 @@ msgid "Language: "
 msgstr "언어: "
 
 #: src/fetch/colnectfetcher.cpp:966
-#, fuzzy, kde-format
-#| msgid "Country: "
+#, kde-format
 msgid "Country code: "
-msgstr "국가: "
+msgstr "국가 코드: "
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
