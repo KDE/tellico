@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-07 03:15+0000\n"
-"PO-Revision-Date: 2024-08-18 11:11+0200\n"
+"PO-Revision-Date: 2024-08-23 13:37+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -1764,7 +1764,7 @@ msgstr "Scott zk."
 msgctxt ""
 "Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgid "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
-msgstr ""
+msgstr "Bikaina,Ikaragarri ondo,Oso ondo,Ondo,Arrunta,Kaskarra"
 
 #: src/collections/stampcollection.cpp:101
 #, kde-format
@@ -1774,17 +1774,17 @@ msgstr "Bertan behera utzita"
 #: src/collections/stampcollection.cpp:106
 #, kde-format
 msgid "Hinged"
-msgstr ""
+msgstr "Artikulatua"
 
 #: src/collections/stampcollection.cpp:111
-#, fuzzy, kde-format
+#, kde-format
 msgid "Centering"
-msgstr "Zentratu"
+msgstr "Erdiratzea"
 
 #: src/collections/stampcollection.cpp:116
 #, kde-format
 msgid "Gummed"
-msgstr ""
+msgstr "Itsasgarria"
 
 #: src/collections/stampcollection.cpp:140 src/field.cpp:204
 #, kde-format
@@ -2041,7 +2041,7 @@ msgstr "Izendapena"
 #: src/collections/winecollection.cpp:66
 #, kde-format
 msgid "Varietal"
-msgstr ""
+msgstr "Barietatea"
 
 #: src/collections/winecollection.cpp:72
 #, kde-format
@@ -5008,12 +5008,12 @@ msgstr "irudiaren neurria hau baino handiagoa da"
 #: src/gui/filterrulewidget.cpp:260
 #, kde-format
 msgid "contains"
-msgstr "daukana"
+msgstr "dauka"
 
 #: src/gui/filterrulewidget.cpp:261
 #, kde-format
 msgid "does not contain"
-msgstr "Ez daukana"
+msgstr "Ez dauka"
 
 #: src/gui/imagewidget.cpp:108
 #, kde-format
@@ -7440,6 +7440,12 @@ msgid ""
 "<p>Any other field which allows multiple values should be entered the\n"
 "same way, with a semi-colon (;) separating each value.</p>\n"
 msgstr ""
+"<p>...liburu batek egile bat baino gehiago baldin badu, haien izenak\n"
+"puntu eta koma bidez bereizi beharko zenituzke, Tellico-k haiek nola\n"
+"banatu eta bakoitza bere aldetik nola erabili jakin dezan.</p>\n"
+"<p>Balio anizkoitzak onartzen dituen beste edozein eremu berdin bete\n"
+"beharko litzateke, balio bakoitza nanatzeko puntu eta koma (;) erabiliz.</"
+"p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:11
@@ -7448,6 +7454,8 @@ msgid ""
 "<p>...that you can change which fields are shown in the column view by\n"
 "right-clicking on the column header.\n"
 msgstr ""
+"<p>...zutabe-ikuspegian zein eremu erakusten diren alda dezakezula,\n"
+"zutabe-goiburuan klik eginez.\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:17
@@ -7459,6 +7467,11 @@ msgid ""
 "position of the field in the list, which affects the placement in the entry\n"
 "editor.</p>\n"
 msgstr ""
+"<p>...bildumako eremuak gehitu, editatu, edo alda ditzakezula, eremu-\n"
+"editorea erabiliz. Eremu-zerrenda azpiko gezi-botoiak erabil daitezke "
+"eremuak zerrendan\n"
+"duen kokapena aldatzeko, horrek sarrera editoreko kokapenari eragiten\n"
+"dio.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:25
@@ -7472,6 +7485,13 @@ msgid ""
 "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
 "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
 msgstr ""
+"<p>...Egiaztapen-lauki eremu baten bidez iragazi nahi baduzu,\n"
+"\"egia\" balio bat erabili beharko litzatekeela. Adibidez, irakurri\n"
+"ez dituzun zientzia-fikziozko liburuak bakarrik erakustea nahi\n"
+"baduzu, markatu <em>Bat-etorri ondoko guztiekin</em>\n"
+"botoia, ezarri lehenengo araua \"Generoa\" \"dauka\" \"Zientzia-\n"
+"fikzioa\" (kakotxik gabe) izan dezan, eta bigarren arauak\n"
+"\"Irakurrita\" \"ez dauka\" \"egia\" (kakotxik gabe) izan dezan.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:36
@@ -7482,6 +7502,10 @@ msgid ""
 "<p>To show only books which are by Weber or Bujold, for example, then\n"
 "type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
 msgstr ""
+"<p>...Iragazki azkarrean hitzerako ez den karaktere bat erabiltzen bada\n"
+"adierazpen erregular gisa interpretatutako dela.</p>\n"
+"<p>Weber edo Bujold-ek egindako liburuak bakarrik erakusteko,\n"
+"adibidez, tekleatu \"weber|bujold\" (komatxorik gabe) iragazki-laukian.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:44
@@ -7490,6 +7514,8 @@ msgid ""
 "<p>...that you can edit more than one entry at a time, by holding down\n"
 "the Shift or Ctrl key and selecting multiple entries.</p>\n"
 msgstr ""
+"<p>...aldiko sarrera bat baino gehiago editatu dezakezula, Maius edo\n"
+"Ktrl sakatuta eutsita sarrera anizkoitzak hautatuz.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:50
@@ -7498,6 +7524,8 @@ msgid ""
 "<p>...that you can convert an existing book collection to a bibliography,\n"
 "which can then be exported to bibtex or Bibtexml format.</p>\n"
 msgstr ""
+"<p>...existitzen den liburu-bilduma bat bibliografia bihur dezakezula,\n"
+"ondoren bibtex edo Bibtexml formatuetara esporta daitekeelarik.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:56
@@ -7506,6 +7534,8 @@ msgid ""
 "<p>...that you can add, edit, and delete string macros for bibliographies.</"
 "p>\n"
 msgstr ""
+"<p>...bibliografiatarako kate-makroak gehitu, editatu, eta ezabatu "
+"ditzakezula.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:61
@@ -7517,6 +7547,9 @@ msgid ""
 "editors\n"
 "to be sorted or printed together, for example.</p>\n"
 msgstr ""
+"<p>...eremu bat baino gehiagori izen formatua ematen bazaio, bildumara\n"
+"\"Jendea\" izeneko talde osagarri bat gehitzen dela, egileak eta editoreak\n"
+"elkarrekin sailkatzeko edo inprimatzeko aukera emanez, adibidez.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:68
@@ -7527,6 +7560,11 @@ msgid ""
 "CSS\n"
 "within the stylesheet governs things like the font, the margins, etc.</p>\n"
 msgstr ""
+"<p>...inprimatutako irteeraren itxura <tt>tellico-printing.xsl</tt> "
+"fitxategia\n"
+"aldatuz alda dezakezula. Fitxategiak HTML sortzen du, eta estilo-orriko "
+"CSSek\n"
+"letra-tipoa, marjinak eta abar gobernatzen ditu.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:75
@@ -7535,12 +7573,16 @@ msgid ""
 "<p>...that you can import using any generic XSL stylesheet which\n"
 "outputs a valid Tellico XML file.</p>\n"
 msgstr ""
+"<p>...irteera gisa Tellico XML fitxategi baliodun bat ematen duen edozein "
+"XSL estilo-orri generiko erabiliz inporta dezakezula.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:81
 #, kde-format
 msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
 msgstr ""
+"<p>...sarrera-elementu batean klik bikoitza eginda Sarrera Editorea "
+"irekitzen dela.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:86
@@ -7550,6 +7592,9 @@ msgid ""
 "as\n"
 "&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
 msgstr ""
+"<p>...formatua emateko, paragrafo-eremuetan HTML etiketak gehi "
+"ditzakezulahala nola\n"
+"&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:92
@@ -7558,6 +7603,8 @@ msgid ""
 "<p>...that when the Column View is focused, you can press a letter on the\n"
 "keyboard to scroll to the next entry that starts with that letter.</p>\n"
 msgstr ""
+"<p>...zutabe ikuspegiak fokua duenean, teklatuan letra bat saka dezakezula\n"
+"letra horrekin hasten den hurrego sarreraraino kiribiltzeko.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:98
@@ -7573,6 +7620,14 @@ msgid ""
 "types by respecting proper sorting at the same time. Consider for example\n"
 "a number field followed by a text subfield with entries 3b, 14a.</p>\n"
 msgstr ""
+"<p>...eratorritako balio bat duen eremu bat erabil dezakezula eremu bereizi "
+"anitz\n"
+"konbinatzeko. Erabili honen antzeko balio eratorriko txantiloi bat:\n"
+"\"Value: %{fielda}%{fieldb}\" non %{...} eremu balio egokiarekin ordezten\n"
+"den. Eremu bakarrean balio anizkotzak biltzeko erabilgarria da, adib.\n"
+"taldekatzea hobetzeko, eta mota ezberdineko eremuak konbinatzeko\n"
+"aldi berean sailkatze egokia errespetatuz. Pentsa zenbaki eremu bat\n"
+"ondoren 3b, 14a sarrerak dituen testu azpieremu bat duena, adibidez.</p>\n"
 
 #: xslt/entry-templates/Album.xsl:171
 #, kde-format
