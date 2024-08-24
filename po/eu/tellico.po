@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-07 02:29+0000\n"
-"PO-Revision-Date: 2024-08-18 10:57+0200\n"
+"PO-Revision-Date: 2024-08-23 12:58+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -1719,7 +1719,7 @@ msgstr "Scott zk."
 msgctxt ""
 "Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgid "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
-msgstr ""
+msgstr "Bikaina,Ikaragarri ondo,Oso ondo,Ondo,Arrunta,Kaskarra"
 
 #: src/collections/stampcollection.cpp:96
 #, kde-format
@@ -1729,17 +1729,17 @@ msgstr "Bertan behera utzita"
 #: src/collections/stampcollection.cpp:101
 #, kde-format
 msgid "Hinged"
-msgstr ""
+msgstr "Artikulatua"
 
 #: src/collections/stampcollection.cpp:106
-#, fuzzy, kde-format
+#, kde-format
 msgid "Centering"
-msgstr "Zentratu"
+msgstr "Erdiratzea"
 
 #: src/collections/stampcollection.cpp:111
 #, kde-format
 msgid "Gummed"
-msgstr ""
+msgstr "Itsasgarria"
 
 #: src/collections/stampcollection.cpp:135 src/field.cpp:202
 #, kde-format
@@ -1986,7 +1986,7 @@ msgstr "Izendapena"
 #: src/collections/winecollection.cpp:62
 #, kde-format
 msgid "Varietal"
-msgstr ""
+msgstr "Barietatea"
 
 #: src/collections/winecollection.cpp:68
 #, kde-format
@@ -4894,12 +4894,12 @@ msgstr "irudiaren neurria hau baino handiagoa da"
 #: src/gui/filterrulewidget.cpp:260
 #, kde-format
 msgid "contains"
-msgstr "daukana"
+msgstr "dauka"
 
 #: src/gui/filterrulewidget.cpp:261
 #, kde-format
 msgid "does not contain"
-msgstr "Ez daukana"
+msgstr "Ez dauka"
 
 #: src/gui/imagewidget.cpp:106
 #, kde-format
