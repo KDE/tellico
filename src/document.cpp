@@ -162,7 +162,6 @@ bool Document::openDocument(const QUrl& url_) {
   ImageFactory::setZipArchive(m_importer->takeImages());
 
   if(!coll) {
-    myLog() << "Failed to read a collection" << m_importer->statusMessage();
     GUI::Proxy::sorry(m_importer->statusMessage());
     m_validFile = false;
     return false;
@@ -558,6 +557,7 @@ void Document::renameCollection(const QString& newTitle_) {
 // by loading every image, it gets pulled out of the zip file and
 // copied to disk. Then the zip file can be closed and not retained in memory
 void Document::slotLoadAllImages() {
+  myLog() << "Loading all images into cache...";
   QString id;
   StringSet images;
   foreach(EntryPtr entry, m_coll->entries()) {
