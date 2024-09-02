@@ -35,6 +35,7 @@ using namespace Tellico;
 using Tellico::EntryIconModel;
 
 EntryIconModel::EntryIconModel(QObject* parent_) : QIdentityProxyModel(parent_) {
+  myLog() << "Setting max icon cache cost:" << Config::iconCacheSize();
   m_iconCache.setMaxCost(Config::iconCacheSize());
 }
 
