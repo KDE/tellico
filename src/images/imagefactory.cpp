@@ -705,21 +705,21 @@ void ImageFactory::emitImageMismatch() {
   emit imageLocationMismatch();
 }
 
-QUrl ImageFactory::localDirectory(const QUrl& url_) {
+QString ImageFactory::localDirectory(const QUrl& url_) {
   if(url_.isEmpty()) {
-    return QUrl();
+    return QString();
   }
-  if(!url_.isLocalFile() && !KProtocolManager::canCopyFromFile(url_)) {
+  if(!url_.isLocalFile()) {
     myWarning() << "Unable to save images local to" << url_.toDisplayString();
-    return QUrl();
+    return QString();
   }
-  QUrl dirUrl = url_.adjusted(QUrl::RemoveFilename);
+  QString dir = url_.adjusted(QUrl::RemoveFilename).toLocalFile();
   // could have already been set once
-  if(!dirUrl.path().endsWith(QLatin1String("_files/"))) {
+  if(!dir.endsWith(QLatin1String("_files/"))) {
     QFileInfo fi(url_.fileName());
-    dirUrl.setPath(dirUrl.path() + fi.completeBaseName() + QLatin1String("_files/"));
+    dir += fi.completeBaseName() + QLatin1String("_files/");
   }
-  return dirUrl;
+  return dir;
 }
 
 void ImageFactory::setLocalDirectory(const QUrl& url_) {
