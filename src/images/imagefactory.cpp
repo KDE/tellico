@@ -480,16 +480,18 @@ bool ImageFactory::hasLocalImage(const QString& id_) {
   if(id_.isEmpty() || !factory) {
     return false;
   }
+  bool ret = (Config::imageLocation() == Config::ImagesInLocalDir &&
+                           factory->d->localImageDir.hasImage(id_)) ||
+             (Config::imageLocation() == Config::ImagesInAppDir &&
+                           factory->d->dataImageDir.hasImage(id_)) ||
+             factory->d->imageCache.contains(id_) ||
+             factory->d->imageDict.contains(id_) ||
+             factory->d->tempImageDir.hasImage(id_) ||
+             factory->d->imageZipArchive.hasImage(id_);
+  if(ret) return true;
+
   const QUrl u(id_);
-  return factory->d->imageCache.contains(id_) ||
-         factory->d->imageDict.contains(id_) ||
-         factory->d->tempImageDir.hasImage(id_) ||
-         factory->d->imageZipArchive.hasImage(id_) ||
-         (u.isValid() && !u.isRelative() && u.isLocalFile()) ||
-         (Config::imageLocation() == Config::ImagesInLocalDir &&
-                                     factory->d->localImageDir.hasImage(id_)) ||
-         (Config::imageLocation() == Config::ImagesInAppDir &&
-                                     factory->d->dataImageDir.hasImage(id_));
+  return u.isValid() && !u.isRelative() && u.isLocalFile();
 }
 
 void ImageFactory::requestImageById(const QString& id_) {
