@@ -24,10 +24,14 @@
 
 #include "imagedirectory.h"
 #include "image.h"
+#include "imagejob.h"
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
 #include <KZip>
+#include <KIO/StatJob>
+#include <KIO/MkdirJob>
+#include <KIO/DeleteJob>
 
 #include <QFile>
 #include <QDir>
@@ -40,30 +44,51 @@ using Tellico::ImageDirectory;
 using Tellico::TemporaryImageDirectory;
 using Tellico::ImageZipArchive;
 
-ImageDirectory::ImageDirectory() : ImageStorage(), m_pathExists(false), m_dir(nullptr) {
+ImageDirectory::ImageDirectory() : ImageStorage(), m_pathExists(false), m_isLocal(true), m_tempDir(nullptr) {
 }
 
-ImageDirectory::ImageDirectory(const QString& path_) : ImageStorage() , m_dir(nullptr) {
-  setPath(path_);
+ImageDirectory::ImageDirectory(const QUrl& dir_) : ImageStorage(), m_tempDir(nullptr) {
+  setDirectory(dir_);
 }
 
 ImageDirectory::~ImageDirectory() {
-  delete m_dir;
-  m_dir = nullptr;
+  delete m_tempDir;
+  m_tempDir = nullptr;
 }
 
-QString ImageDirectory::path() {
-  return m_path;
+QUrl ImageDirectory::dir() {
+  return m_dir;
 }
 
-void ImageDirectory::setPath(const QString& path_) {
-  m_path = path_;
-  QDir dir(m_path);
-  m_pathExists = dir.exists();
+void ImageDirectory::setDirectory(const QUrl& dir_) {
+  if(dir_ != m_dir) {
+    m_dir = dir_;
+    m_isLocal = m_dir.isLocalFile();
+    // for now, only check existence of local directories
+    m_pathExists = m_isLocal && QFileInfo(m_dir.toLocalFile()).exists();
+  }
 }
 
 bool ImageDirectory::hasImage(const QString& id_) {
-  return m_pathExists && QFile::exists(path() + id_);
+  // dir() is virtual
+  bool localExists = m_pathExists && m_isLocal && QFile::exists(dir().toLocalFile() + id_);
+  if(localExists) return true;
+
+  // now we're looking for a remote file. First, check if we know already
+  if(m_imageExists.contains(id_)) {
+    return m_imageExists[id_];
+  }
+  QUrl imageUrl = dir();
+  imageUrl.setPath(imageUrl.path() + id_);
+#if QT_VERSION_MAJOR < 6
+  KIO::StatJob* statJob = KIO::statDetails(imageUrl, KIO::StatJob::SourceSide, KIO::StatNoDetails, KIO::HideProgressInfo);
+#else
+  KIO::StatJob* statJob = KIO::stat(imageUrl, KIO::StatJob::SourceSide, KIO::, KIO::HideProgressInfo);
+#endif
+  // if no error, then file exists
+  const bool noError = statJob->exec();
+  m_imageExists.insert(id_, noError);
+  return noError;
 }
 
 Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
@@ -71,9 +96,22 @@ Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
     return nullptr;
   }
 
-  Data::Image* img = new Data::Image(path() + id_, id_);
+  Data::Image* img = nullptr;
+  if(m_isLocal) {
+    img = new Data::Image(dir().toLocalFile() + id_, id_);
+  } else {
+    QUrl imageUrl = dir();
+    imageUrl.setPath(imageUrl.path() + id_);
+    auto imgJob = new ImageJob(imageUrl, id_);
+    if(imgJob->exec()) {
+      img = new Data::Image(imgJob->image());
+      m_pathExists = true;
+    } else {
+      return nullptr;
+    }
+  }
   if(img->isNull()) {
-    myLog() << "image found but null:" << (path() + id_);
+    myLog() << "Image found but null:" << id_;
     delete img;
     return nullptr;
   }
@@ -81,35 +119,66 @@ Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
 }
 
 bool ImageDirectory::writeImage(const Data::Image& img_) {
-  const QString path = this->path(); // virtual function, so don't assume m_path is correct
-  if(!m_pathExists) {
-    if(path.isEmpty()) {
-      // an empty path means the file hasn't been saved yet
-      if(!m_dir) {
-        m_dir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
-        // in KDE4, the way this worked included the final slash.
-        ImageDirectory::setPath(m_dir->path() + QLatin1Char('/'));
-      }
-      return writeImage(img_);
+  if(dir().isEmpty()) {
+    // an empty directory means the data file itself hasn't been saved yet
+    if(!m_tempDir) {
+      m_tempDir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
     }
-    QDir dir(path);
-    if(dir.mkdir(path)) {
-//      myLog() << "created" << path;
-    } else {
-      myWarning() << "unable to create dir:" << path;
-    }
-    m_pathExists = true;
+    // in KDE4, the way this worked included the final slash.
+    ImageDirectory::setDirectory(QUrl::fromLocalFile(m_tempDir->path() + QLatin1Char('/')));
+    return writeImage(img_);
   }
-  QUrl target = QUrl::fromLocalFile(path);
+
+  QUrl target = dir();
+  if(!m_pathExists) {
+    if(m_isLocal) {
+      const QString localPath = dir().toLocalFile();
+      Q_ASSERT(!localPath.isEmpty());
+      QDir dir;
+      if(dir.mkdir(localPath)) {
+        myLog() << "Created local directory:" << localPath;
+      } else {
+        myWarning() << "Unable to create dir:" << localPath;
+      }
+      m_pathExists = true;
+    } else {
+#if QT_VERSION_MAJOR < 6
+      auto statJob = KIO::statDetails(target, KIO::StatJob::SourceSide, KIO::StatNoDetails, KIO::HideProgressInfo);
+#else
+      auto statJob = KIO::stat(target, KIO::StatJob::SourceSide, KIO::, KIO::HideProgressInfo);
+#endif
+      // if no error, then dir exists
+      if(statJob->exec()) {
+        m_pathExists = true;
+      } else {
+        auto mkdirJob = KIO::mkdir(target);
+        myLog() << "Creating directory:" << target.toDisplayString();
+        m_pathExists = mkdirJob->exec();
+      }
+    }
+  }
   target.setPath(target.path() + img_.id());
   return FileHandler::writeDataURL(target, img_.byteArray(), true /* force */);
 }
 
 bool ImageDirectory::removeImage(const QString& id_) {
-  return m_pathExists && QFile::remove(path() + id_);
+  if(!m_pathExists) return false;
+  if(m_isLocal) {
+    return QFile::remove(dir().toLocalFile() + id_);
+  }
+  QUrl imgUrl(dir());
+  imgUrl.setPath(imgUrl.path() + id_);
+  auto delJob = KIO::del(imgUrl, KIO::HideProgressInfo);
+  if(delJob->exec()) {
+    return true;
+  } else {
+    myDebug() << "Failed to remove" << id_;
+    myDebug() << delJob->errorString();
+    return false;
+  }
 }
 
-TemporaryImageDirectory::TemporaryImageDirectory() : ImageDirectory(), m_dir(nullptr) {
+TemporaryImageDirectory::TemporaryImageDirectory() : ImageDirectory(), m_tempDir(nullptr) {
 }
 
 TemporaryImageDirectory::~TemporaryImageDirectory() {
@@ -117,22 +186,22 @@ TemporaryImageDirectory::~TemporaryImageDirectory() {
 }
 
 void TemporaryImageDirectory::purge() {
-  delete m_dir;
-  m_dir = nullptr;
+  delete m_tempDir;
+  m_tempDir = nullptr;
 }
 
-QString TemporaryImageDirectory::path() {
-  if(!m_dir) {
-    m_dir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
+QUrl TemporaryImageDirectory::dir() {
+  if(!m_tempDir) {
+    m_tempDir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
     // in KDE4, the way this worked included the final slash.
-    ImageDirectory::setPath(m_dir->path() + QLatin1Char('/'));
+    ImageDirectory::setDirectory(QUrl::fromLocalFile(m_tempDir->path() + QLatin1Char('/')));
   }
-  return ImageDirectory::path();
+  return ImageDirectory::dir();
 }
 
-void TemporaryImageDirectory::setPath(const QString& path) {
-  Q_UNUSED(path);
-  Q_ASSERT(path.isEmpty()); // should never be called, that's why it's private
+void TemporaryImageDirectory::setDirectory(const QUrl& dir_) {
+  myDebug() << "TemporaryImageDirectory::setDirectory() should not be called:" << dir_;
+  Q_UNUSED(dir_);
 }
 
 ImageZipArchive::ImageZipArchive() : ImageStorage(), m_imgDir(nullptr) {

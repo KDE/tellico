@@ -41,6 +41,7 @@
 #include "../document.h"
 #include "../utils/xmlhandler.h"
 #include "../utils/string_utils.h"
+#include "../config/tellico_config.h"
 
 #include <KLocalizedString>
 
@@ -53,6 +54,7 @@
 #include <QStringEncoder>
 #endif
 #include <QStandardPaths>
+#include <QLoggingCategory>
 
 QTEST_GUILESS_MAIN( TellicoReadTest )
 
@@ -73,6 +75,7 @@ static bool hasNetwork() {
 void TellicoReadTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   KLocalizedString::setApplicationDomain("tellico");
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
   // need to register this first
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
@@ -696,4 +699,52 @@ void TellicoReadTest::testXmlWithJunk() {
   Tellico::Import::TellicoImporter importer2(fileText);
   Tellico::Data::CollPtr coll2 = importer2.collection();
   QVERIFY(!coll2);
+}
+
+void TellicoReadTest::testRemote() {
+  Tellico::Config::setImageLocation(Tellico::Config::ImagesInLocalDir);
+  QString tempDirName;
+  QTemporaryDir tempDir;
+  QVERIFY(tempDir.isValid());
+  tempDir.setAutoRemove(true);
+  tempDirName = tempDir.path();
+  QString image = QLatin1String("17b54b2a742c6d342a75f122d615a793.jpeg");
+  QString fileName = tempDirName +      QLatin1String("/with-local-image.tc");
+  QString imageDirName = tempDirName +  QLatin1String("/with-local-image_files/");
+  QString imageFileName = imageDirName + image;
+
+  // copy a collection file that includes an image into the temporary directory
+  QVERIFY(QDir().mkdir(imageDirName));
+  QVERIFY(QFile::copy(QFINDTESTDATA("data/with-local-image.tc"),
+                      fileName));
+  QVERIFY(QFile::copy(QFINDTESTDATA(QLatin1String("data/with-local-image_files/") + image),
+                      imageFileName));
+
+  QUrl localUrl = QUrl::fromLocalFile(fileName);
+  QUrl remoteUrl(QLatin1String("fish://localhost/") + fileName);
+
+  Tellico::Data::Document::self()->openDocument(remoteUrl);
+
+  // Document has a 500 msec timer to load images
+  qApp->processEvents();
+  QTest::qWait(1000);
+  qApp->processEvents();
+
+  Tellico::Data::CollPtr coll = Tellico::Data::Document::self()->collection();
+  QVERIFY(coll);
+  QVERIFY(!coll->entries().isEmpty());
+  auto entry = coll->entries().front();
+  QVERIFY(entry);
+  auto cover = entry->field(QLatin1String("cover"));
+  QVERIFY(!cover.isEmpty());
+  QCOMPARE(cover, image);
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(image));
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInfo(image));
+
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(image);
+  QVERIFY(!img.isNull());
+
+  QVERIFY(QFile::exists(imageFileName));
+  Tellico::ImageFactory::removeImage(image, true);
+  QVERIFY(!QFile::exists(imageFileName));
 }

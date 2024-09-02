@@ -30,7 +30,6 @@
 #include "../translators/tellicoimporter.h"
 #include "../collections/bookcollection.h"
 #include "../collections/videocollection.h"
-#include "../collections/musiccollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../document.h"
@@ -46,12 +45,14 @@
 #include <QFile>
 #include <QStandardPaths>
 #include <QProcess>
+#include <QLoggingCategory>
 
 QTEST_GUILESS_MAIN( HtmlExporterTest )
 
 void HtmlExporterTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   KLocalizedString::setApplicationDomain("tellico");
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
@@ -83,7 +84,7 @@ void HtmlExporterTest::testHtml() {
 
   Tellico::Data::Document* doc = Tellico::Data::Document::self();
   QVERIFY(doc->openDocument(QUrl::fromLocalFile(fileName)));
-  QCOMPARE(Tellico::ImageFactory::localDir(), imageDirName);
+  QCOMPARE(Tellico::ImageFactory::localDir(), QUrl::fromLocalFile(imageDirName));
   // save the document, so the images get copied out of the .tc file into the local image directory
   QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName)));
 
