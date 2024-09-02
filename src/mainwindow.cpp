@@ -973,7 +973,7 @@ void MainWindow::initFileOpen(bool nofile_) {
   text.replace(QLatin1String("$COLOR1$"),  Config::templateHighlightedTextColor(type).name());
   text.replace(QLatin1String("$COLOR2$"),  Config::templateHighlightedBaseColor(type).name());
   text.replace(QLatin1String("$LINKCOLOR$"), Config::templateLinkColor(type).name());
-  text.replace(QLatin1String("$IMGDIR$"),  QUrl::fromLocalFile(ImageFactory::imageDir()).url());
+  text.replace(QLatin1String("$IMGDIR$"),  ImageFactory::imageDir().url());
   text.replace(QLatin1String("$BANNER$"),
                 i18n("Welcome to the Tellico Collection Manager"));
   text.replace(QLatin1String("$WELCOMETEXT$"),

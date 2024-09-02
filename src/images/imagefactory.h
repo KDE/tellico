@@ -81,10 +81,10 @@ public:
    *
    * @return The full path
    */
-  static QString tempDir();
-  static QString dataDir();
-  static QString localDir();
-  static QString imageDir();
+  static QUrl tempDir();
+  static QUrl dataDir();
+  static QUrl localDir();
+  static QUrl imageDir();
   static CacheDir cacheDir();
 
   /**
@@ -165,7 +165,7 @@ public:
   static void removeImage(const QString& id_, bool deleteImage);
   static StringSet imagesNotInCache();
 
-  static QString localDirectory(const QUrl& url);
+  static QUrl localDirectory(const QUrl& url);
   static void setLocalDirectory(const QUrl& url);
   static void setZipArchive(std::unique_ptr<KZip> zip);
 

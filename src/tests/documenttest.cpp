@@ -73,7 +73,7 @@ void DocumentTest::testImageLocalDirectory() {
 
   Tellico::Data::Document* doc = Tellico::Data::Document::self();
   QVERIFY(doc->openDocument(QUrl::fromLocalFile(fileName)));
-  QCOMPARE(Tellico::ImageFactory::localDir(), imageDirName);
+  QCOMPARE(Tellico::ImageFactory::localDir(), QUrl::fromLocalFile(imageDirName));
 
   Tellico::Data::CollPtr coll = doc->collection();
   QVERIFY(coll);
@@ -119,7 +119,7 @@ void DocumentTest::testImageLocalDirectory() {
   // copy the collection file, which no longer contains the images inside
   QVERIFY(QFile::copy(fileName, fileName3));
   QVERIFY(doc->openDocument(QUrl::fromLocalFile(fileName3)));
-  QCOMPARE(Tellico::ImageFactory::localDir(), imageDirName3);
+  QCOMPARE(Tellico::ImageFactory::localDir(), QUrl::fromLocalFile(imageDirName3));
   QDir imageDir3(imageDirName3);
 
   // verify that the images can be loaded from the image directory that does NOT have multiple periods

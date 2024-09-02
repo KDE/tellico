@@ -441,11 +441,11 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
   // probably an image in the entry template. 4) we're exporting HTML, and this is not the
   // first entry file, in which case, we want to refer directly to the target dir
   if(useTemp) { // everything goes in the tmp dir
-    imgDir = QUrl::fromLocalFile(ImageFactory::tempDir());
+    imgDir = ImageFactory::tempDir();
     imgDirRelative = imgDir.path();
   } else if(m_parseDOM) {
     imgDir = fileDir(); // copy to fileDir
-    imgDirRelative = ImageFactory::imageDir();
+    imgDirRelative = ImageFactory::imageDir().path();
     createDir();
   } else {
     imgDir = fileDir();
