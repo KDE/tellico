@@ -24,6 +24,7 @@
 
 #include "guiproxy.h"
 #include "cursorsaver.h"
+#include "../tellico_debug.h"
 
 #include <KMessageBox>
 
@@ -45,6 +46,7 @@ void Proxy::sorry(const QString& text_, QWidget* widget_/* =0 */) {
   if(text_.isEmpty()) {
     return;
   }
+  myLog() << text_;
   if(widget_ || s_widget) {
     GUI::CursorSaver cs(Qt::ArrowCursor);
     KMessageBox::error(widget_ ? widget_ : s_widget, text_);
