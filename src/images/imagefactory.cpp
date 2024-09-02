@@ -595,17 +595,19 @@ void ImageFactory::clean(bool purgeTempDirectory_) {
   factory->d->imageCache.clear();
   factory->d->pixmapCache.clear();
   if(purgeTempDirectory_) {
+    myLog() << "Purging images from the temporary directory";
     factory->d->tempImageDir.purge();
     // just to make sure all the image locations clean themselves up
     // delete the factory (which deletes the storage objects) and
     // then recreate the factory, in case anything else needs it
-    // be sure to save local image directory if it's not a temp dir!
-    const QString localDirName = localDir();
+    // be sure to save local image directory if it's not a temp dir
+    // or the data dir, avoid setLocalDirectory
+    const QString localDirName = factory->d->localImageDir.path();
     delete factory;
     factory = nullptr;
     ImageFactory::init();
-    if(QDir(localDirName).exists()) {
-      setLocalDirectory(QUrl::fromLocalFile(localDirName));
+    if(!localDirName.isEmpty() && QDir(localDirName).exists()) {
+      factory->d->localImageDir.setPath(localDirName);
     }
   }
 }
