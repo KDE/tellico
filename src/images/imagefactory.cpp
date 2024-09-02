@@ -158,7 +158,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
 
   myLog() << "Loading image from url:" << img.id() << url_.toDisplayString(QUrl::PreferLocalFile);
   // hold the image in memory since it probably isn't written locally to disk yet
-  if(!url_.isLocalFile() && !d->imageDict.contains(img.id())) {
+  if(!d->imageDict.contains(img.id())) {
     d->imageDict.insert(img.id(), new Data::Image(img));
     s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
   }
