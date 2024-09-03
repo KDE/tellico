@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-07 02:29+0000\n"
+"POT-Creation-Date: 2024-09-03 02:28+0000\n"
 "PO-Revision-Date: 2024-06-18 07:12+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -223,7 +223,7 @@ msgstr "<qt>Tellico ni mogel pisati v cev strežnika: <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Moja zbirka"
 
-#: src/collection.cpp:887 src/document.cpp:531 src/field.cpp:290
+#: src/collection.cpp:887 src/document.cpp:530 src/field.cpp:290
 #: src/field.cpp:303 src/field.cpp:308 src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
 #, kde-format
@@ -1027,7 +1027,7 @@ msgstr "Cena nakupa"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:529
+#: src/collections/videocollection.cpp:205 src/document.cpp:528
 #, kde-format
 msgid "Loaned"
 msgstr "Posojeno"
@@ -2911,7 +2911,7 @@ msgstr "Pokaži vse stolpce"
 msgid "Hide All Columns"
 msgstr "Skrij vse stolpce"
 
-#: src/document.cpp:213 src/mainwindow.cpp:1412
+#: src/document.cpp:212 src/mainwindow.cpp:1412
 #, kde-format
 msgid "Saving file..."
 msgstr "Shranjevanje datoteke ..."

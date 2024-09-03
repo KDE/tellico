@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-07 02:29+0000\n"
+"POT-Creation-Date: 2024-09-03 02:28+0000\n"
 "PO-Revision-Date: 2022-03-21 17:12+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -235,7 +235,7 @@ msgstr "<qt>Ошибка записи в канал сервера <b>%1</b>.</q
 msgid "My Collection"
 msgstr "Моя коллекция"
 
-#: src/collection.cpp:887 src/document.cpp:531 src/field.cpp:290
+#: src/collection.cpp:887 src/document.cpp:530 src/field.cpp:290
 #: src/field.cpp:303 src/field.cpp:308 src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
 #, kde-format
@@ -1043,7 +1043,7 @@ msgstr "Цена покупки"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:529
+#: src/collections/videocollection.cpp:205 src/document.cpp:528
 #, kde-format
 msgid "Loaned"
 msgstr "Одолжено"
@@ -2944,7 +2944,7 @@ msgstr "Показать все столбцы"
 msgid "Hide All Columns"
 msgstr "Скрыть все столбцы"
 
-#: src/document.cpp:213 src/mainwindow.cpp:1412
+#: src/document.cpp:212 src/mainwindow.cpp:1412
 #, kde-format
 msgid "Saving file..."
 msgstr "Сохранение файла..."

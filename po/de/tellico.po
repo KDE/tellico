@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-07 02:29+0000\n"
+"POT-Creation-Date: 2024-09-03 02:28+0000\n"
 "PO-Revision-Date: 2023-05-12 19:32+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -230,7 +230,7 @@ msgstr ""
 msgid "My Collection"
 msgstr "Meine Sammlung"
 
-#: src/collection.cpp:887 src/document.cpp:531 src/field.cpp:290
+#: src/collection.cpp:887 src/document.cpp:530 src/field.cpp:290
 #: src/field.cpp:303 src/field.cpp:308 src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
 #, kde-format
@@ -1060,7 +1060,7 @@ msgstr "Kaufpreis"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:529
+#: src/collections/videocollection.cpp:205 src/document.cpp:528
 #, kde-format
 msgid "Loaned"
 msgstr "Ausgeliehen"
@@ -2988,7 +2988,7 @@ msgstr "Alle Spalten anzeigen"
 msgid "Hide All Columns"
 msgstr "Alle Spalten ausblenden"
 
-#: src/document.cpp:213 src/mainwindow.cpp:1412
+#: src/document.cpp:212 src/mainwindow.cpp:1412
 #, kde-format
 msgid "Saving file..."
 msgstr "Die Datei wird gespeichert ..."

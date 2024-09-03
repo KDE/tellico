@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-07 02:29+0000\n"
+"POT-Creation-Date: 2024-09-03 02:28+0000\n"
 "PO-Revision-Date: 2024-08-31 18:54+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -221,7 +221,7 @@ msgstr ""
 msgid "My Collection"
 msgstr "Nere bilduma"
 
-#: src/collection.cpp:887 src/document.cpp:531 src/field.cpp:290
+#: src/collection.cpp:887 src/document.cpp:530 src/field.cpp:290
 #: src/field.cpp:303 src/field.cpp:308 src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
 #, kde-format
@@ -1031,7 +1031,7 @@ msgstr "Erosketa salneurria"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:529
+#: src/collections/videocollection.cpp:205 src/document.cpp:528
 #, kde-format
 msgid "Loaned"
 msgstr "Maileguan utzita"
@@ -2929,7 +2929,7 @@ msgstr "Erakutsi zutabe guztiak"
 msgid "Hide All Columns"
 msgstr "Ezkutatu zutabe guztiak"
 
-#: src/document.cpp:213 src/mainwindow.cpp:1412
+#: src/document.cpp:212 src/mainwindow.cpp:1412
 #, kde-format
 msgid "Saving file..."
 msgstr "Fitxategia gordetzen..."

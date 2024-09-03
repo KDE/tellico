@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-07 02:29+0000\n"
+"POT-Creation-Date: 2024-09-03 02:28+0000\n"
 "PO-Revision-Date: 2024-05-30 22:41+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -218,7 +218,7 @@ msgstr "<qt>Tellico ne povas skribi al la servila tubo ĉe <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Mia Kolekto"
 
-#: src/collection.cpp:887 src/document.cpp:531 src/field.cpp:290
+#: src/collection.cpp:887 src/document.cpp:530 src/field.cpp:290
 #: src/field.cpp:303 src/field.cpp:308 src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
 #, kde-format
@@ -1029,7 +1029,7 @@ msgstr "Aĉeta Prezo"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:529
+#: src/collections/videocollection.cpp:205 src/document.cpp:528
 #, kde-format
 msgid "Loaned"
 msgstr "Pruntedonita"
@@ -2919,7 +2919,7 @@ msgstr "Montri Ĉiuj Kolumnoj"
 msgid "Hide All Columns"
 msgstr "Kaŝi Ĉiuj Kolumnoj"
 
-#: src/document.cpp:213 src/mainwindow.cpp:1412
+#: src/document.cpp:212 src/mainwindow.cpp:1412
 #, kde-format
 msgid "Saving file..."
 msgstr "Konservante dosieron..."
