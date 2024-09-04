@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 project(Tellico)
-set(TELLICO_VERSION "3.5.99+git")
+set(TELLICO_VERSION "4.0")
 
 if(DEFINED BUILD_WITH_QT6)
   set(GLOBAL_BUILD_WITH_QT6 ${BUILD_WITH_QT6})
