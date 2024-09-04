@@ -83,7 +83,7 @@ bool ImageDirectory::hasImage(const QString& id_) {
 #if QT_VERSION_MAJOR < 6
   KIO::StatJob* statJob = KIO::statDetails(imageUrl, KIO::StatJob::SourceSide, KIO::StatNoDetails, KIO::HideProgressInfo);
 #else
-  KIO::StatJob* statJob = KIO::stat(imageUrl, KIO::StatJob::SourceSide, KIO::, KIO::HideProgressInfo);
+  KIO::StatJob* statJob = KIO::stat(imageUrl, KIO::StatJob::SourceSide, KIO::StatNoDetails, KIO::HideProgressInfo);
 #endif
   // if no error, then file exists
   const bool noError = statJob->exec();
@@ -145,7 +145,7 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
 #if QT_VERSION_MAJOR < 6
       auto statJob = KIO::statDetails(target, KIO::StatJob::SourceSide, KIO::StatNoDetails, KIO::HideProgressInfo);
 #else
-      auto statJob = KIO::stat(target, KIO::StatJob::SourceSide, KIO::, KIO::HideProgressInfo);
+      auto statJob = KIO::stat(target, KIO::StatJob::SourceSide, KIO::StatNoDetails, KIO::HideProgressInfo);
 #endif
       // if no error, then dir exists
       if(statJob->exec()) {
