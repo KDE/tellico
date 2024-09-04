@@ -27,7 +27,7 @@
 
 #include "../utils/stringset.h"
 
-#include <QString>
+#include <QUrl>
 
 #include <memory>
 
@@ -56,11 +56,11 @@ private:
 class ImageDirectory : public ImageStorage {
 public:
   ImageDirectory();
-  ImageDirectory(const QString& path);
+  ImageDirectory(const QUrl& dir);
   virtual ~ImageDirectory();
 
-  virtual QString path();
-  virtual void setPath(const QString& path);
+  virtual QUrl dir();
+  virtual void setDirectory(const QUrl& dir);
 
   bool hasImage(const QString& id) Q_DECL_OVERRIDE;
   Data::Image* imageById(const QString& id) Q_DECL_OVERRIDE;
@@ -69,10 +69,12 @@ public:
 
 private:
   Q_DISABLE_COPY(ImageDirectory)
-  QString m_path;
+  QUrl m_dir;
   bool m_pathExists;
+  bool m_isLocal;
+  QHash<QString, bool> m_imageExists;
   // until the file gets saved, the local directory is temporary
-  QTemporaryDir* m_dir;
+  QTemporaryDir* m_tempDir;
 };
 
 class TemporaryImageDirectory : public ImageDirectory {
@@ -80,14 +82,14 @@ public:
   TemporaryImageDirectory();
   virtual ~TemporaryImageDirectory();
 
-  virtual QString path() Q_DECL_OVERRIDE;
+  virtual QUrl dir() Q_DECL_OVERRIDE;
   void purge();
 
 private:
   Q_DISABLE_COPY(TemporaryImageDirectory)
-  void setPath(const QString& path) Q_DECL_OVERRIDE;
+  void setDirectory(const QUrl& dir) Q_DECL_OVERRIDE;
 
-  QTemporaryDir* m_dir;
+  QTemporaryDir* m_tempDir;
 };
 
 class ImageZipArchive : public ImageStorage {

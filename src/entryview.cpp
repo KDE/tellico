@@ -409,9 +409,9 @@ void EntryView::setXSLTFile(const QString& file_) {
   m_handler->addStringParam("linkcolor",Config::templateLinkColor(type).name().toLatin1());
 
   if(Data::Document::self()->allImagesOnDisk()) {
-    m_handler->addStringParam("imgdir", QUrl::fromLocalFile(ImageFactory::imageDir()).toEncoded());
+    m_handler->addStringParam("imgdir", ImageFactory::imageDir().toEncoded());
   } else {
-    m_handler->addStringParam("imgdir", QUrl::fromLocalFile(ImageFactory::tempDir()).toEncoded());
+    m_handler->addStringParam("imgdir", ImageFactory::tempDir().toEncoded());
   }
   m_handler->addStringParam("datadir", QUrl::fromLocalFile(Tellico::installationDir()).toEncoded());
 
@@ -542,7 +542,9 @@ void EntryView::resetColors() {
 
   QString dir = m_handler ? QFile::decodeName(m_handler->param("imgdir")) : QString();
   if(dir.isEmpty()) {
-    dir = Data::Document::self()->allImagesOnDisk() ? ImageFactory::imageDir() : ImageFactory::tempDir();
+    dir = Data::Document::self()->allImagesOnDisk() ?
+            ImageFactory::imageDir().url() :
+            ImageFactory::tempDir().url();
   } else {
     // it's a string param, so it has quotes on both sides
     dir = dir.mid(1);
