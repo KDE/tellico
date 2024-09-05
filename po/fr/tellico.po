@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-03 00:39+0000\n"
-"PO-Revision-Date: 2024-06-20 18:32+0200\n"
+"PO-Revision-Date: 2024-09-03 20:58+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -62,7 +62,7 @@ msgstr "Par défaut"
 #, kde-format
 msgctxt "Fancy XSL Template"
 msgid "Fancy"
-msgstr "Fancy"
+msgstr "Élégant"
 
 #. i18n: file: xslt/entry-templates/Video.xsl
 #, kde-format
@@ -1664,7 +1664,7 @@ msgstr "Album"
 #: src/translators/freedbimporter.cpp:467
 #, kde-format
 msgid "Compact Disc"
-msgstr "Compact Disc"
+msgstr "Disque compact"
 
 #: src/collections/musiccollection.cpp:50
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1043
@@ -2184,7 +2184,7 @@ msgstr ""
 #, kde-format
 msgctxt "comma-separated list of articles ignored for title sorting"
 msgid "the"
-msgstr "the"
+msgstr "le"
 
 #: src/config/tellico_config.kcfg:86
 #, kde-format
@@ -3907,7 +3907,7 @@ msgstr "ID arXiv"
 #: src/fetch/fetchmanager.cpp:69
 #, kde-format
 msgid "PubMed ID"
-msgstr "ID « Pubmed »"
+msgstr "ID « PubMed »"
 
 #: src/fetch/fetchmanager.cpp:70
 #, kde-format
@@ -4355,7 +4355,7 @@ msgstr "Alias"
 #: src/fetch/vndbfetcher.cpp:309
 #, kde-format
 msgid "Visual Novel"
-msgstr "Visual Novel"
+msgstr "Nouvelle visuelle"
 
 #: src/fetch/z3950connection.cpp:183
 #, kde-format
@@ -5823,12 +5823,12 @@ msgstr "Importer une base de données Griffith"
 #: src/mainwindow.cpp:473
 #, kde-format
 msgid "Import Ant Movie Catalog Data..."
-msgstr "Importer des données d'un catalogue de films Ant..."
+msgstr "Importer des données d'un catalogue de films « Ant »..."
 
 #: src/mainwindow.cpp:474
 #, kde-format
 msgid "Import an Ant Movie Catalog data file"
-msgstr "Importer un catalogue de films Ant"
+msgstr "Importer un catalogue de films « Ant »"
 
 #: src/mainwindow.cpp:477
 #, kde-format
@@ -6754,12 +6754,14 @@ msgstr "Si cochée, le nom de fichier de chaque plage sera ajouté aux entrées.
 #: src/translators/audiofileimporter.cpp:505
 #, kde-format
 msgid "Include &bitrate"
-msgstr "Inclure le &bitrate"
+msgstr "Inclure le débit &binaire"
 
 #: src/translators/audiofileimporter.cpp:506
 #, kde-format
 msgid "If checked, the bitrate for each track is added to the entries."
-msgstr "Si cochée, le bitrate de chaque plage sera ajouté aux entrées."
+msgstr ""
+"Si cette option est sélectionnée, le débit binaire de chaque plage sera "
+"ajouté aux entrées."
 
 #: src/translators/bibtexexporter.cpp:218
 #: src/translators/bibteximporter.cpp:346
