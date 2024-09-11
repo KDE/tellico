@@ -272,7 +272,8 @@ QString GameCollection::platformName(GamePlatform platform_) {
 
 QStringList GameCollection::esrbRatings() {
   static const QRegularExpression rx(QLatin1String("\\s*,\\s*"));
-  QStringList cert = i18nc("Video game ratings - "
+  /* TRANSLATORS: There must be 8 translated phrases, matching the ESRB system */
+  QStringList cert = i18nc("Video game ratings - must be 8 phrases matching ESRB system - "
                            "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending",
                            "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending")
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
