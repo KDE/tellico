@@ -70,7 +70,7 @@ void Logger::log(QtMsgType type_, const QMessageLogContext& ctx_, const QString&
     // but swallow info messages if they're in Tellico's category
     if(type_ != QtInfoMsg || strcmp(ctx_.category, "tellico") != 0) {
       m_oldHandler(type_, ctx_, msg_);
-     }
+    }
     return;
   }
 

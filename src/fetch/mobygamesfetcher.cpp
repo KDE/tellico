@@ -557,7 +557,9 @@ void MobyGamesFetcher::populateHashes() {
   // cheat by grabbing i18n values from default collection
   Data::CollPtr c(new Data::GameCollection(true));
   QStringList esrb = c->fieldByName(QStringLiteral("certification"))->allowed();
-  Q_ASSERT(esrb.size() == 8);
+  if(esrb.size() < 8) {
+    myWarning() << "ESRB rating list is badly translated";
+  }
   while(esrb.size() < 8) {
     esrb << QString();
   }
