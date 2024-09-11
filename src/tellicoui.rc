@@ -120,10 +120,10 @@
    <Action append="show_merge" name="change_entry_grouping"/>
    <Action append="show_merge" name="lock_layout"/>
    <Action append="show_merge" name="reset_layout"/>
-  </Menu>
+   <Action name="switch_application_language"/>
+   </Menu>
   <Menu name="help">
    <Action append="help_whats_this_merge" name="show_log"/>
-   <Action name="switch_application_language"/>
   </Menu>
  </MenuBar>
  <ToolBar noMerge="1" name="mainToolBar">
