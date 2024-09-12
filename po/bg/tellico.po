@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-03 00:39+0000\n"
+"POT-Creation-Date: 2024-09-12 00:39+0000\n"
 "PO-Revision-Date: 2009-09-18 16:56+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -1555,11 +1555,11 @@ msgstr ""
 msgid "Dreamcast"
 msgstr "Dreamcast"
 
-#: src/collections/gamecollection.cpp:277
+#: src/collections/gamecollection.cpp:278
 #, kde-format
 msgctxt ""
-"Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-"Everyone, Early Childhood, Pending"
+"Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
+"Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
 msgid ""
 "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, "
 "Pending"
@@ -3073,7 +3073,7 @@ msgstr ""
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:229
 #: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:559
 #: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:381
-#: src/fetch/isbndbfetcher.cpp:393 src/fetch/mobygamesfetcher.cpp:647
+#: src/fetch/isbndbfetcher.cpp:393 src/fetch/mobygamesfetcher.cpp:649
 #: src/fetch/omdbfetcher.cpp:408 src/fetch/thegamesdbfetcher.cpp:635
 #: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:578
 #, kde-format
@@ -3087,7 +3087,7 @@ msgstr ""
 #: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:241
 #: src/fetch/entrezfetcher.cpp:530 src/fetch/giantbombfetcher.cpp:227
 #: src/fetch/googlebookfetcher.cpp:393 src/fetch/isbndbfetcher.cpp:405
-#: src/fetch/mobygamesfetcher.cpp:659 src/fetch/numistafetcher.cpp:415
+#: src/fetch/mobygamesfetcher.cpp:661 src/fetch/numistafetcher.cpp:415
 #: src/fetch/omdbfetcher.cpp:420 src/fetch/thegamesdbfetcher.cpp:647
 #: src/fetch/themoviedbfetcher.cpp:597
 #, kde-format
@@ -3337,7 +3337,7 @@ msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:215
 #: src/fetch/colnectfetcher.cpp:956 src/fetch/imdbfetcher.cpp:567
-#: src/fetch/itunesfetcher.cpp:543 src/fetch/mobygamesfetcher.cpp:667
+#: src/fetch/itunesfetcher.cpp:543 src/fetch/mobygamesfetcher.cpp:669
 #: src/fetch/rpggeekfetcher.cpp:224 src/fetch/thegamesdbfetcher.cpp:655
 #: src/fetch/videogamegeekfetcher.cpp:215
 #, kde-format
@@ -3346,7 +3346,7 @@ msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:219
 #: src/fetch/colnectfetcher.cpp:960 src/fetch/imdbfetcher.cpp:570
-#: src/fetch/itunesfetcher.cpp:547 src/fetch/mobygamesfetcher.cpp:670
+#: src/fetch/itunesfetcher.cpp:547 src/fetch/mobygamesfetcher.cpp:672
 #: src/fetch/rpggeekfetcher.cpp:228 src/fetch/thegamesdbfetcher.cpp:658
 #: src/fetch/videogamegeekfetcher.cpp:219
 #, fuzzy, kde-format
@@ -3362,7 +3362,7 @@ msgstr "Медия"
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:220
 #: src/fetch/colnectfetcher.cpp:961 src/fetch/imdbfetcher.cpp:572
-#: src/fetch/itunesfetcher.cpp:548 src/fetch/mobygamesfetcher.cpp:672
+#: src/fetch/itunesfetcher.cpp:548 src/fetch/mobygamesfetcher.cpp:674
 #: src/fetch/rpggeekfetcher.cpp:229 src/fetch/thegamesdbfetcher.cpp:660
 #: src/fetch/videogamegeekfetcher.cpp:220
 #, fuzzy, kde-format
@@ -3371,7 +3371,7 @@ msgstr "Заглавие"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:218
 #: src/fetch/colnectfetcher.cpp:959 src/fetch/imdbfetcher.cpp:573
-#: src/fetch/itunesfetcher.cpp:546 src/fetch/mobygamesfetcher.cpp:673
+#: src/fetch/itunesfetcher.cpp:546 src/fetch/mobygamesfetcher.cpp:675
 #: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:661
 #: src/fetch/videogamegeekfetcher.cpp:218
 #, fuzzy, kde-format
@@ -3379,7 +3379,7 @@ msgid "No Image"
 msgstr "Страници"
 
 #: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:577
-#: src/fetch/mobygamesfetcher.cpp:677 src/fetch/thegamesdbfetcher.cpp:665
+#: src/fetch/mobygamesfetcher.cpp:679 src/fetch/thegamesdbfetcher.cpp:665
 #, kde-format
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
@@ -3410,7 +3410,7 @@ msgstr ""
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
 #: src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:315
-#: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:613
+#: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:385 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
 #: src/fetch/musicbrainzfetcher.cpp:374 src/fetch/openlibraryfetcher.cpp:457
@@ -3464,7 +3464,7 @@ msgid "Michel"
 msgstr ""
 
 #: src/fetch/colnectfetcher.cpp:826 src/fetch/giantbombfetcher.cpp:203
-#: src/fetch/igdbfetcher.cpp:575 src/fetch/mobygamesfetcher.cpp:633
+#: src/fetch/igdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:635
 #: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:329
 #, fuzzy, kde-format
 msgid "PEGI Rating"
@@ -3848,17 +3848,17 @@ msgstr "Класификация"
 msgid "Internet Bookshop (ibs.it)"
 msgstr ""
 
-#: src/fetch/igdbfetcher.cpp:365 src/fetch/igdbfetcher.cpp:576
+#: src/fetch/igdbfetcher.cpp:365 src/fetch/igdbfetcher.cpp:578
 #, fuzzy, kde-format
 msgid "IGDB Link"
 msgstr "Оценка"
 
-#: src/fetch/igdbfetcher.cpp:564
+#: src/fetch/igdbfetcher.cpp:566
 #, fuzzy, kde-format
 msgid "Internet Game Database (IGDB.com)"
 msgstr "Тип:"
 
-#: src/fetch/igdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:635
+#: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:637
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:347
 #, kde-format
 msgid "Screenshot"
@@ -3952,7 +3952,7 @@ msgstr ""
 msgid "Kino-Teatr Link"
 msgstr "Изтрий книга"
 
-#: src/fetch/mobygamesfetcher.cpp:454 src/fetch/mobygamesfetcher.cpp:634
+#: src/fetch/mobygamesfetcher.cpp:454 src/fetch/mobygamesfetcher.cpp:636
 #, fuzzy, kde-format
 msgid "MobyGames Link"
 msgstr "Оценка"
@@ -6389,13 +6389,13 @@ msgid "&Show Views"
 msgstr "BCGroupView"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: src/tellicoui.rc:129
+#: src/tellicoui.rc:130
 #, fuzzy, kde-format
 msgid "Main Toolbar"
 msgstr "Летна \"Колекция\""
 
 #. i18n: ectx: ToolBar (collectionToolBar)
-#: src/tellicoui.rc:136
+#: src/tellicoui.rc:137
 #, kde-format
 msgid "Collection Toolbar"
 msgstr "Летна \"Колекция\""
