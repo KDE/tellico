@@ -410,10 +410,6 @@ void TellicoReadTest::testDataImage() {
   QVERIFY(f.exists());
   QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
 
-  const auto imageLocation = QFINDTESTDATA("../../icons/tellico.png");
-  qDebug() << "image location is" << imageLocation;
-  QFileInfo fi(imageLocation);
-  qDebug() << "file size is" << fi.size();
   Tellico::Data::Image testImage(QFINDTESTDATA("../../icons/tellico.png"));
   QVERIFY(!testImage.isNull());
   const QByteArray imgData = testImage.byteArray().toBase64();

@@ -151,6 +151,5 @@ QString Image::calculateID(const QByteArray& data_, const QString& format_) {
   QCryptographicHash md5(QCryptographicHash::Md5);
   md5.addData(data_);
   QString id = QLatin1String(md5.result().toHex()) + QLatin1Char('.') + format_.toLower();
-  qDebug() << "calculating id with byte count of" << data_.size() << "- format is" << outputFormat(format_.toLatin1()) << idClean(id);
   return idClean(id);
 }
