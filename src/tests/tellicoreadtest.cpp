@@ -75,7 +75,7 @@ static bool hasNetwork() {
 void TellicoReadTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   KLocalizedString::setApplicationDomain("tellico");
-  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = true"));
   // need to register this first
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
@@ -410,6 +410,10 @@ void TellicoReadTest::testDataImage() {
   QVERIFY(f.exists());
   QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
 
+  const auto imageLocation = QFINDTESTDATA("../../icons/tellico.png");
+  qDebug() << "image location is" << imageLocation;
+  QFileInfo fi(imageLocation);
+  qDebug() << "file size is" << fi.size();
   Tellico::Data::Image testImage(QFINDTESTDATA("../../icons/tellico.png"));
   QVERIFY(!testImage.isNull());
   const QByteArray imgData = testImage.byteArray().toBase64();
