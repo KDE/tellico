@@ -15,6 +15,7 @@ Dependencies:
     'frameworks/kiconthemes': '@latest-kf6'
     'frameworks/kitemmodels': '@latest-kf6'
     'frameworks/knewstuff': '@latest-kf6'
+    'frameworks/kcrash': '@latest-kf6'
     'multimedia/libkcddb': '@latest-kf6'
     'graphics/libksane': '@latest-kf6'
 
