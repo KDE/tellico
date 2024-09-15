@@ -94,8 +94,4 @@ private:
   } // end namespace
 } // end namespace
 
-inline bool operator== (const Tellico::Data::Image& img1, const Tellico::Data::Image& img2) {
-  return img1.id() == img2.id();
-}
-
 #endif
