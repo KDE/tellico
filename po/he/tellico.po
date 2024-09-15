@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-12 02:28+0000\n"
-"PO-Revision-Date: 2024-08-12 22:18+0300\n"
+"PO-Revision-Date: 2024-09-14 09:43+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1695,7 +1695,7 @@ msgstr "מס׳ סקוט"
 msgctxt ""
 "Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgid "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
-msgstr ""
+msgstr "נפלא,מעולה במיוחד,מעולה ביותר,מעולה,ממוצע,עלוב"
 
 #: src/collections/stampcollection.cpp:96
 #, kde-format
@@ -2119,24 +2119,26 @@ msgid ""
 "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
 "up,with"
 msgstr ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
 
 #: src/config/tellico_config.kcfg:83
 #, kde-format
 msgctxt "comma-separated list of articles ignored for title sorting"
 msgid "the"
-msgstr ""
+msgstr "the"
 
 #: src/config/tellico_config.kcfg:86
 #, kde-format
 msgctxt "comma-separated list of common surname suffixes, used for sorting"
 msgid "jr.,jr,iii,iv"
-msgstr ""
+msgstr "jr.,jr,iii,iv"
 
 #: src/config/tellico_config.kcfg:89
 #, kde-format
 msgctxt "comma-separated list of common surname prefixes, used for sorting"
 msgid "de,van,der,van der,von"
-msgstr ""
+msgstr "de,van,der,van der,von"
 
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)

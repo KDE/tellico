@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-12 02:28+0000\n"
-"PO-Revision-Date: 2024-07-29 05:17+0200\n"
+"PO-Revision-Date: 2024-09-14 05:43+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -507,6 +507,9 @@ msgid ""
 "are placed in a combo box. The possible values have to be separated by a "
 "semi-colon, for example: \"dog; cat; mouse\"</qt>"
 msgstr ""
+"<qt><i>არჩევის</i> ტიპის ველებისთვის ესენი, მხოლოდ, დასაშვები "
+"მნიშვნელოვანია. ისინი ჩამოსაშლელ ველში მოთავსდება. შესაძლო მნიშვნელობები "
+"წერტილმძიმით უნდა იყოს გამოყოფილი. მაგ: \"ძაღლი; კატა; თაგვი\"</qt>"
 
 #: src/collectionfieldsdialog.cpp:288
 #, kde-format
@@ -593,6 +596,10 @@ msgid ""
 "in the collection may cause data corruption. Do you want to keep your "
 "modified values or cancel and revert to the current ones?</qt>"
 msgstr ""
+"<qt>დაშვებული მნიშვნელობების წაშლამ <i>%1</i> ველიდან, რომელიც ამჟამად "
+"არსებობს, შეიძლება, მონაცემების დაზიანება გამოიწვიოს. გნებავთ შეცვლილი "
+"მნიშვნელობების შენარჩუნება, თუ გააუქმებთ და მიმდინარე მნიშვნელობებზე "
+"დაბრუნდებით?</qt>"
 
 #: src/collectionfieldsdialog.cpp:416
 #, kde-format
@@ -615,6 +622,8 @@ msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr ""
+"<qt><p>მართლა გნებავთ <em>%1</em> ველის თვისებები ნაგულისხმევებზე დააბრუნოთ?"
+"</p></qt>"
 
 #: src/collectionfieldsdialog.cpp:812
 #, kde-format
@@ -654,6 +663,9 @@ msgid ""
 "<em>Table</em> or <em>Image</em> field. Please enter a different category.</"
 "qt>"
 msgstr ""
+"<qt>ველი, შეიძლება, იგივე კატეგორიაში არ იყოს, რომელშიც <em>პარაგრაფის</em>, "
+"<em>ცხრილის</em> ან <em>გამოსახულების</em> ველია. შეიყვანეთ სხვა კატეგორია.</"
+"qt>"
 
 #: src/collectionfieldsdialog.cpp:946
 #, kde-format
@@ -2419,6 +2431,8 @@ msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
 "be separated by a semi-colon.</qt>"
 msgstr ""
+"<qt>სიტყვების სია, რომლის პირველი ასოებიც არ გადიდდება. ერთზე მეტი "
+"მნიშვნელობა ერთმანეთისგან წერტილმძიმით გამოჰყავით.</qt>"
 
 #: src/configdialog.cpp:292
 #, kde-format
@@ -2432,6 +2446,9 @@ msgid ""
 "first word in a title. Multiple values should be separated by a semi-colon.</"
 "qt>"
 msgstr ""
+"<qt>სიტყვების სია, რომლებიც აღქმული უნდა იყოს სტატიის სახით, თუ მათი პირველი "
+"სიტყვა სათაურშია. ერთზე მეტი მნიშვნელობის ქონის შემთხვევაში ისინი "
+"ერთმანეთისგან წერტილმძიმით გამოჰყავით.</qt>"
 
 #: src/configdialog.cpp:304
 #, kde-format
@@ -2444,6 +2461,9 @@ msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
 msgstr ""
+"<qt>სუფიქსები სია, რომელიც პირად სახელებში შეიძლება, გამოყენებული იყოს. "
+"ერთზე მეტი მნიშვნელობის ქონის შემთხვევაში ისინი ერთმანეთისგან წერტილმძიმით "
+"გამოჰყავით.</qt>"
 
 #: src/configdialog.cpp:315
 #, kde-format
@@ -2456,6 +2476,9 @@ msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
 msgstr ""
+"<qt>პრეფიქსების სია, რომელიც პირად სახელებში შეიძლება, გამოყენებული იყოს. "
+"ერთზე მეტი მნიშვნელობის ქონის შემთხვევაში ისინი ერთმანეთისგან წერტილმძიმით "
+"გამოჰყავით.</qt>"
 
 #: src/configdialog.cpp:335
 #, kde-format
@@ -2964,6 +2987,8 @@ msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
 "an icon, which may be an image in the entry.</qt>"
 msgstr ""
+"<qt><i>ხატულების ხედი</i> კოლექციის ან ჯგუფის თითოეულ ელემენტს ხატულით "
+"გაჩვენებთ, რომელიც ელემენტში არსებული გამოსახულებაც შეიძლება, იყოს.</qt>"
 
 #: src/entryiconview.cpp:111
 #, kde-format
@@ -2982,6 +3007,8 @@ msgid ""
 "<qt><b>%1</b> returned multiple results which could match <b>%2</b>, the "
 "entry currently in the collection. Please select the correct match.</qt>"
 msgstr ""
+"<qt><b>%1</b>-მა დააბრუნა ერთმზე მეტი შედეგი, რომელიც, შეიძლება, <b>%2</b>-"
+"ს, კოლექციის ჩანაწერს ემთხვეოდეს. აირჩიეთ სწორი დამთხვევა.</qt>"
 
 #: src/entrymerger.cpp:53 src/tellico_kernel.cpp:349 src/tellico_kernel.cpp:361
 #, kde-format
@@ -3442,6 +3469,8 @@ msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
 msgstr ""
+"პარტნიორის ID Amazon.com-ის ვებსერვისებთან წვდომის იდენტიფიკატორია და "
+"ცსმულია ყველა ბმულზე Amazon.com-ზე."
 
 #: src/fetch/arxivfetcher.cpp:77
 #, kde-format
@@ -3743,6 +3772,10 @@ msgid ""
 "where field names are contained inside braces, such as <i>%{author}</i>. See "
 "the documentation for details.</p>"
 msgstr ""
+"<p>შეიყვანეთ არგუმენტები, რომლებიც ჩანაწერის ხელმისაწვდომი განახლებების "
+"მოსაძებნად გნებავთ, გამოიყენოთ.</p><p>ფორმატი იგივეა, მიღებული "
+"მნიშვნელობების შემცველი ველებისთვის, სადაც ველის სახელები ფიგურულ "
+"ფრჩხილებშია (მაგ: <i>%{author}</i>. დეტალებისთვის იხილეთ დოკუმენტაცია.</p>"
 
 #: src/fetch/fetcher.cpp:76
 #, kde-format
@@ -4544,6 +4577,8 @@ msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
 msgstr ""
+"<qt>ISBN ძებნა, შეიძლება, მაქსიმუმ 100 ISBN მნიშვნელობას შეიცავდეს. "
+"გამოყენებული იქნება, მხოლოდ, პირველი 100 მნიშვნელობა.</qt>"
 
 #: src/fetcherconfigdialog.cpp:75
 #, kde-format
@@ -5165,6 +5200,9 @@ msgid ""
 "calendar, which can be viewed using KOrganizer. The box is only active if "
 "you set a due date.</qt>"
 msgstr ""
+"<qt>ამის ჩართვა <em>გეგმას</em> დაამატებს თქვენს აქტიურ კალენდარში, რომელიც "
+"შეგიძლიათ, KOrganizer-ით იხილოთ. ეს ველი, მხოლოდ, მაშინაა აქტიური, თუ "
+"მოხდენის თარიღს დააყენებთ.</qt>"
 
 #: src/loanview.cpp:117
 #, kde-format
@@ -6139,6 +6177,8 @@ msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr ""
+"<qt><i>ჯგუფის ხედი</i> არჩეული ველის მიხედვით დაალაგებს ჩანაწერებს ჯგუფებში."
+"</qt>"
 
 #: src/mainwindow.cpp:978
 #, kde-format
@@ -6154,6 +6194,10 @@ msgid ""
 "by <a href=\"tc:///edit_search_internet\">downloading data</a> from various "
 "Internet sources.</h3>"
 msgstr ""
+"<h3>Tellico წიგნები, ვიდეოების, მუსიკის და რისიც გნებავთ, კოლექციების "
+"სამართავი პროგრამაა.</h3><h3>ახალი ჩანაწერების დამატება <a href=\"tc:///"
+"coll_new_entry\">მათი ხელით შეყვანით ან მონაცემების სხვადასხვა წყაროებიდან "
+"<a href=\"tc:///edit_search_internet\">გადმოწერით</a> შეგიძლიათ. </h3>"
 
 #: src/mainwindow.cpp:1179
 #, kde-format
@@ -6187,6 +6231,10 @@ msgid ""
 "data directory to improve performance?</p><p>Your choice can always be "
 "changed in the configuration dialog.</p></qt>"
 msgstr ""
+"<qt><p>ინახავთ ფაილს, რომელშიც ბევრი გამოსახულებაა, რაც Tellico-ს ანელებს. "
+"გნებავთ ამ გამოსახულებების ცალკე შენახვა Tellico-ის მონაცემების საქაღალდეში, "
+"წარმადობის გასაუმჯობესებლად?</p><p>თქვენი არჩევანი ყოველთვის შეგიძლიათ, "
+"მორგების ფანჯარაში შეცვალოთ.</p></qt>"
 
 #: src/mainwindow.cpp:1428
 #, kde-format
@@ -6870,6 +6918,8 @@ msgid ""
 "column, selecting the field, then clicking the <i>Assign Field</i> button.</"
 "qt>"
 msgstr ""
+"<qt>დააყენეთ თითოეული სვეტი, რომ შეესაბამებოდეს ველს კოლექციაში: აირჩიეთ "
+"ველი, აირჩიეთ სვეტი და დააწკაპუნეთ <i>ველის მინიჭების</i> ღილაკზე.</qt>"
 
 #: src/translators/csvimporter.cpp:333
 #, kde-format
@@ -7136,6 +7186,9 @@ msgid ""
 "CrossRef.org. However, you must create an CrossRef account and add a new "
 "data source with your account information."
 msgstr ""
+"Tellico-ს შეუძლია, DOI-ის მქონე ჩანაწერებისთვის ინფორმაცია CrossRef.org-დან "
+"გადმოწეროს, მაგრამ ჯერ CrossRef-ის ანგარიში უნდა შექმნათ და დაამატოთ ახალი "
+"მონაცემების წყარო თქვენი ანგარიშის ინფორმაციით."
 
 #: src/translators/risimporter.cpp:337
 #, kde-format
