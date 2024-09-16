@@ -1619,13 +1619,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-#| "Everyone, Early Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
-#| "Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -3710,10 +3704,9 @@ msgid "Discogs Audio Search"
 msgstr "Αναζήτηση δισκογραφίας"
 
 #: src/fetch/discogsfetcher.cpp:571 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "Αναγνωριστικό χρήστη: "
+msgstr "Αναγνωριστικό χρήστη:"
 
 #: src/fetch/doubanfetcher.cpp:366 src/fetch/doubanfetcher.cpp:384
 #: src/fetch/doubanfetcher.cpp:402 src/fetch/doubanfetcher.cpp:641
@@ -3911,8 +3904,7 @@ msgstr ""
 "Καθορίστε τον μέγιστο αριθμό που θα επιστρέφει η αναζήτηση."
 
 #: src/fetch/filmaffinityfetcher.cpp:497
-#, fuzzy, kde-format
-#| msgid "Spain"
+#, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "Ισπανία"
@@ -4880,10 +4872,9 @@ msgstr "Σχόλια"
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, fuzzy, kde-format
-#| msgid "Icon"
+#, kde-format
 msgid "Icon:"
-msgstr "Εικονίδιο"
+msgstr "Εικονίδιο:"
 
 #: src/gui/collectiontemplatedialog.cpp:56
 #, fuzzy, kde-format
