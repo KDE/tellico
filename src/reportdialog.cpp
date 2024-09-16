@@ -458,25 +458,12 @@ void ReportDialog::slotSaveAs() {
                    + i18n("All Files") + QLatin1String(" (*)");
     QUrl u = QFileDialog::getSaveFileUrl(this, QString(), QUrl(), filter);
     if(!u.isEmpty() && u.isValid()) {
-      KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ExportOptions"));
-      bool encode = config.readEntry("EncodeUTF8", true);
-      long oldOpt = m_exporter->options();
-
-      // turn utf8 off
-      long options = oldOpt & ~Export::ExportUTF8;
-      // now turn it on if true
-      if(encode) {
-        options |= Export::ExportUTF8;
-      }
-
       QUrl oldURL = m_exporter->url();
-      m_exporter->setOptions(options);
       m_exporter->setURL(u);
 
       m_exporter->exec();
 
       m_exporter->setURL(oldURL);
-      m_exporter->setOptions(oldOpt);
     }
   }
 }
