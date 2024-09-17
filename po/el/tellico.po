@@ -367,7 +367,7 @@ msgstr "Τίτλος του πεδίου"
 #: src/collectionfieldsdialog.cpp:167
 #, kde-format
 msgid "T&ype:"
-msgstr "Τ&ύπος:"
+msgstr "Τύπ&ος:"
 
 #: src/collectionfieldsdialog.cpp:173
 #, kde-format
@@ -3627,7 +3627,7 @@ msgstr "%1 απαιτεί όνομα χρήστη και κωδικό."
 #: src/fetch/crossreffetcher.cpp:309
 #, kde-format
 msgid "&Username: "
-msgstr "&Όνομα χρήστη:"
+msgstr "Όνομα &χρήστη:"
 
 #: src/fetch/crossreffetcher.cpp:314
 #, kde-format
@@ -4679,7 +4679,7 @@ msgstr "Ιδιότητες πηγής δεδομένων"
 #: src/fetcherconfigdialog.cpp:104
 #, kde-format
 msgid "&Source name: "
-msgstr "&Όνομα πηγής:"
+msgstr "Όνο&μα πηγής:"
 
 #: src/fetcherconfigdialog.cpp:106
 #, kde-format
