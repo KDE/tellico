@@ -1,3 +1,7 @@
+2024-09-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed compilation with Qt6/msvc.
+
 2024-09-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Added menu item to change application language.
