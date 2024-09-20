@@ -25,6 +25,7 @@
 #include <config.h>
 #include "bibteximporter.h"
 #include "../utils/bibtexhandler.h"
+#include "../utils/string_utils.h"
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"
 #include "../fieldformat.h"
@@ -38,11 +39,6 @@
 #include <QRegularExpression>
 #include <QGroupBox>
 #include <QRadioButton>
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-#include <QTextCodec>
-#else
-#include <QStringConverter>
-#endif
 #include <QVBoxLayout>
 #include <QButtonGroup>
 #include <QFile>
@@ -348,12 +344,8 @@ QWidget* BibtexImporter::widget(QWidget* parent_) {
 
   m_readUTF8 = new QRadioButton(i18n("Use Unicode (UTF-8) encoding"), gbox);
   m_readUTF8->setWhatsThis(i18n("Read the imported file in Unicode (UTF-8)."));
-  QString localStr = i18n("Use user locale (%1) encoding",
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-                          QLatin1String(QTextCodec::codecForLocale()->name()));
-#else
-                          QLatin1String(QStringConverter::nameForEncoding(QStringConverter::System)));
-#endif
+  const QString localStr = i18n("Use user locale (%1) encoding",
+                                QLatin1String(Tellico::localeEncodingName()));
   m_readLocale = new QRadioButton(localStr, gbox);
   m_readLocale->setChecked(true);
   m_readLocale->setWhatsThis(i18n("Read the imported file in the local encoding."));

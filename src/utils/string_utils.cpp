@@ -237,3 +237,12 @@ QString Tellico::removeControlCodes(const QString& string) {
   }
   return result;
 }
+
+QByteArray Tellico::localeEncodingName() {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+  return QTextCodec::codecForLocale()->name();
+#else
+// QStringConverter::nameForEncoding(QStringConverter::System) returns "Locale" which is not what we want
+  return QStringConverter::nameForEncoding(QStringConverter::System);
+#endif
+}

@@ -48,11 +48,6 @@
 #include <QGroupBox>
 #include <QCheckBox>
 #include <QDomDocument>
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-#include <QTextCodec>
-#else
-#include <QStringConverter>
-#endif
 #include <QVBoxLayout>
 
 #include <algorithm>
@@ -118,11 +113,7 @@ QDomDocument TellicoXMLExporter::exportXML() const {
   if(options() & Export::ExportUTF8) {
     encodeStr += QLatin1String("UTF-8");
   } else {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    encodeStr += QLatin1String(QTextCodec::codecForLocale()->name());
-#else
-    encodeStr += QLatin1String(QStringConverter::nameForEncoding(QStringConverter::System));
-#endif
+    encodeStr = QLatin1String(Tellico::localeEncodingName());
   }
   encodeStr += QLatin1Char('"');
 

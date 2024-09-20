@@ -66,6 +66,8 @@ namespace Tellico {
   QString reverseObfuscate(const QByteArray& bytes);
 
   QString removeControlCodes(const QString& string);
+
+  QByteArray localeEncodingName();
 }
 
 #endif
