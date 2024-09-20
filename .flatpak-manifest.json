@@ -3,9 +3,9 @@
     "command": "tellico",
     "branch": "master",
     "runtime": "org.kde.Platform",
-    "runtime-version": "5.15-22.08",
+    "runtime-version": "6.7",
     "base": "io.qt.qtwebengine.BaseApp",
-    "base-version": "5.15-22.08",
+    "base-version": "6.7",
     "sdk": "org.kde.Sdk",
     "rename-icon": "tellico",
     "tags": [
@@ -13,20 +13,35 @@
     ],
     "desktop-file-name-suffix": " (Nightly)",
     "finish-args": [
+        "--device=dri",
+        "--filesystem=host",
         "--share=ipc",
         "--share=network",
-        "--filesystem=host",
-        "--socket=x11",
-        "--socket=wayland",
-        "--device=dri"
+        "--socket=fallback-x11",
+        "--socket=wayland"
     ],
     "modules": [
         {
             "name": "poppler",
-          "config-opts": [ "-DENABLE_TESTING=OFF", "-DENABLE_UNSTABLE_API_ABI_HEADERS=ON", "-DENABLE_CPP=OFF", "-DENABLE_GLIB=OFF", "-DENABLE_GOBJECT_INTROSPECTION=OFF", "-DENABLE_UTILS=OFF", "-DENABLE_QT6=OFF" ],
+            "config-opts": [
+                "-DENABLE_TESTING=OFF",
+                "-DENABLE_UNSTABLE_API_ABI_HEADERS=ON",
+                "-DENABLE_CPP=OFF",
+                "-DENABLE_GLIB=OFF",
+                "-DENABLE_GOBJECT_INTROSPECTION=OFF",
+                "-DENABLE_UTILS=OFF",
+                "-DENABLE_QT5=OFF",
+                "-DENABLE_QT6=ON"
+            ],
             "buildsystem": "cmake-ninja",
             "builddir": true,
-            "sources": [ { "type": "git", "url": "https://gitlab.freedesktop.org/poppler/poppler.git", "branch": "master" } ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://poppler.freedesktop.org/poppler-24.03.0.tar.xz",
+                    "sha256": "bafbf0db5713dec25b5d16eb2cd87e4a62351cdc40f050c3937cd8dd6882d446"
+                }
+            ],
             "modules": [
                 {
                     "name": "boost",
@@ -58,20 +73,41 @@
                             }
                         }
                     ],
-                    "cleanup": [ "/bin", "/include", "/lib/openjpeg-*", "/lib/pkgconfig" ]
+                    "cleanup": [
+                        "/bin",
+                        "/include",
+                        "/lib/openjpeg-*",
+                        "/lib/pkgconfig"
+                    ]
                 }
             ],
-            "cleanup": [ "/include", "/lib/pkgconfig" ]
+            "cleanup": [
+                "/include",
+                "/lib/pkgconfig"
+            ]
+        },
+        {
+            "name": "utfcpp",
+            "buildsystem": "cmake",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/nemtrif/utfcpp.git",
+                    "tag": "v4.0.5"
+                }
+            ]
         },
         {
             "name": "taglib",
             "buildsystem": "cmake-ninja",
-            "config-opts": [ "-DBUILD_SHARED_LIBS=ON" ],
+            "config-opts": [
+                "-DBUILD_SHARED_LIBS=ON"
+            ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://taglib.org/releases/taglib-1.13.1.tar.gz",
-                  "sha256": "c8da2b10f1bfec2cd7dbfcd33f4a2338db0765d851a50583d410bacf055cfd0b",
+                    "url": "https://taglib.github.io/releases/taglib-2.0.2.tar.gz",
+                    "sha256": "0de288d7fe34ba133199fd8512f19cc1100196826eafcb67a33b224ec3a59737",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 1982,
@@ -84,11 +120,14 @@
         {
             "name": "kcddb",
             "buildsystem": "cmake-ninja",
+            "config-opts": [
+                "-DBUILD_WITH_QT6=ON"
+            ],           
             "sources": [
                 {
                     "type": "git",
                     "url": "https://invent.kde.org/multimedia/libkcddb.git",
-                    "branch": "release/21.12"
+                    "branch": "release/24.08"
                 }
             ]
         },
@@ -98,8 +137,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://ftp.indexdata.com/pub/yaz/yaz-5.34.0.tar.gz",
-                    "sha256": "bcbea894599a13342910003401c17576f0fb910092aecb51cb54065d0cd2d613",
+                    "url": "https://ftp.indexdata.com/pub/yaz/yaz-5.34.1.tar.gz",
+                    "sha256": "393ff4fbbf9194465996236f39efb2962848820247296aec2a6170b0d5d2a44c",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 5287,
