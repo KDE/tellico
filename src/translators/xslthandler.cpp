@@ -29,11 +29,6 @@
 #include <QUrl>
 
 #include <QDomDocument>
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-#include <QTextCodec>
-#else
-#include <QStringConverter>
-#endif
 #include <QVector>
 
 extern "C" {
@@ -286,12 +281,7 @@ QDomDocument& XSLTHandler::setLocaleEncoding(QDomDocument& dom_) {
   for(int j = 0; j < children.count(); ++j) {
     if(children.item(j).isElement() && children.item(j).nodeName() == QLatin1String("xsl:output")) {
       QDomElement e = children.item(j).toElement();
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-      const QString encoding = QLatin1String(QTextCodec::codecForLocale()->name());
-#else
-      const QString encoding = QLatin1String(QStringConverter::nameForEncoding(QStringConverter::System));
-#endif
-      e.setAttribute(QStringLiteral("encoding"), encoding);
+      e.setAttribute(QStringLiteral("encoding"), QLatin1String(Tellico::localeEncodingName()));
       break;
     }
   }
