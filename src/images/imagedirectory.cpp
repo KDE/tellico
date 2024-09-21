@@ -65,7 +65,7 @@ void ImageDirectory::setDirectory(const QUrl& dir_) {
     m_dir = dir_;
     m_isLocal = m_dir.isLocalFile();
     // for now, only check existence of local directories
-    m_pathExists = m_isLocal && QFileInfo(m_dir.toLocalFile()).exists();
+    m_pathExists = m_isLocal && QFileInfo::exists(m_dir.toLocalFile());
   }
 }
 
