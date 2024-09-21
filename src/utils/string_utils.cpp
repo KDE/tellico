@@ -245,6 +245,6 @@ QByteArray Tellico::localeEncodingName() {
 // Bug 493180: QStringConverter::nameForEncoding(QStringConverter::System) returns "Locale" which is not what we want
 // return UTF-8 instead
   const auto encName = QStringConverter::nameForEncoding(QStringConverter::System);
-  return (encName.compare("Locale") == 0) ? "UTF-8" : encName;
+  return (qstrcmp(encName, "Locale") == 0) ? "UTF-8" : encName;
 #endif
 }
