@@ -207,7 +207,7 @@ void IMDBFetcher::slotComplete(KJob*) {
                             .value(QLatin1String("data")).toObject()
                             .value(QLatin1String("mainSearch")).toObject().toVariantMap();
   auto list = objectMap.value(QLatin1String("edges")).toList();
-  for(const auto& edge: qAsConst(list)) {
+  for(const auto& edge: std::as_const(list)) {
     const auto map = edge.toMap().value(QLatin1String("node"))
                          .toMap().value(QLatin1String("entity")).toMap();
     const auto id = mapValue(map, "id");
@@ -370,7 +370,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
 
   QStringList studios;
   auto list = objectMap.value(QLatin1String("companyCredits")).toMap().value(QLatin1String("edges")).toList();
-  for(const auto& edge: qAsConst(list)) {
+  for(const auto& edge: std::as_const(list)) {
     studios += mapValue(edge.toMap(), "node", "company", "companyText", "text");
   }
   entry->setField(QStringLiteral("studio"), studios.join(FieldFormat::delimiterString()));
@@ -398,13 +398,13 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
 
   QStringList directors;
   list = objectMap.value(QLatin1String("principalDirectors")).toList();
-  for(const auto& director: qAsConst(list)) {
+  for(const auto& director: std::as_const(list)) {
     directors += mapValue(director.toMap(), "credits", "name", "nameText", "text");
   }
   // favor principalDirectors over all the directors, but episodes may be directors only
   if(list.isEmpty()) {
     list = objectMap.value(QLatin1String("directors")).toMap().value(QLatin1String("edges")).toList();
-    for(const auto& edge: qAsConst(list)) {
+    for(const auto& edge: std::as_const(list)) {
       directors += mapValue(edge.toMap(), "node", "name", "nameText", "text");
     }
   }
@@ -412,28 +412,28 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
 
   QStringList producers;
   list = objectMap.value(QLatin1String("producers")).toMap().value(QLatin1String("edges")).toList();
-  for(const auto& edge: qAsConst(list)) {
+  for(const auto& edge: std::as_const(list)) {
     producers += mapValue(edge.toMap(), "node", "name", "nameText", "text");
   }
   entry->setField(QStringLiteral("producer"), producers.join(FieldFormat::delimiterString()));
 
   QStringList composers;
   list = objectMap.value(QLatin1String("composers")).toMap().value(QLatin1String("edges")).toList();
-  for(const auto& edge: qAsConst(list)) {
+  for(const auto& edge: std::as_const(list)) {
     composers += mapValue(edge.toMap(), "node", "name", "nameText", "text");
   }
   entry->setField(QStringLiteral("composer"), composers.join(FieldFormat::delimiterString()));
 
   QStringList writers;
   list = objectMap.value(QLatin1String("writers")).toMap().value(QLatin1String("edges")).toList();
-  for(const auto& edge: qAsConst(list)) {
+  for(const auto& edge: std::as_const(list)) {
     writers += mapValue(edge.toMap(), "node", "name", "nameText", "text");
   }
   entry->setField(QStringLiteral("writer"), writers.join(FieldFormat::delimiterString()));
 
   QStringList cast;
   list = objectMap.value(QLatin1String("cast")).toMap().value(QLatin1String("edges")).toList();
-  for(const auto& edge: qAsConst(list)) {
+  for(const auto& edge: std::as_const(list)) {
     const auto map = edge.toMap().value(QLatin1String("node")).toMap();
     cast += mapValue(map, "name", "nameText", "text")
           + FieldFormat::columnDelimiterString()
@@ -480,7 +480,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
     coll->addField(f);
     QStringList akas;
     list = objectMap.value(QLatin1String("akas")).toMap().value(QLatin1String("edges")).toList();
-    for(const auto& edge: qAsConst(list)) {
+    for(const auto& edge: std::as_const(list)) {
       akas += mapValue(edge.toMap(), "node", "text");
     }
     akas.removeDuplicates();
@@ -495,7 +495,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
     list = objectMap.value(QLatin1String("episodes")).toMap()
                     .value(QLatin1String("episodes")).toMap()
                     .value(QLatin1String("edges")).toList();
-    for(const auto& edge: qAsConst(list)) {
+    for(const auto& edge: std::as_const(list)) {
       const auto nodeMap = edge.toMap().value(QLatin1String("node")).toMap();
       QString row = mapValue(nodeMap, "titleText", "text");
       const auto seriesMap = nodeMap.value(QLatin1String("series")).toMap();

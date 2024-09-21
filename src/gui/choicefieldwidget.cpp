@@ -88,7 +88,7 @@ void ChoiceFieldWidget::setTextImpl(const QString& text_) {
     // first uncheck all the boxes
     m_checkableComboBox->setAllCheckState(Qt::Unchecked);
     const auto values = FieldFormat::splitValue(text_, FieldFormat::StringSplit);
-    for(const auto& value : qAsConst(values)) {
+    for(const auto& value : std::as_const(values)) {
       int idx = cb->findData(value);
       if(idx < 0) {
         m_checkableComboBox->addItem(fontMetrics().elidedText(text_, Qt::ElideMiddle, m_maxTextWidth), text_);
