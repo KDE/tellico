@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-12 00:39+0000\n"
+"POT-Creation-Date: 2024-09-21 00:40+0000\n"
 "PO-Revision-Date: 2024-09-12 10:31+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2779,12 +2779,12 @@ msgstr "Paquets de plantilla"
 #: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1297
 #: src/mainwindow.cpp:1473 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
-#: src/translators/bibtexmlexporter.cpp:55 src/translators/csvexporter.cpp:64
+#: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
 #: src/translators/librarythingimporter.cpp:191
 #: src/translators/librarythingimporter.cpp:195
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:76
+#: src/translators/tellicoxmlexporter.cpp:71
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:103
 #: src/translators/xsltexporter.cpp:107 src/translators/xsltimporter.cpp:130
@@ -3081,22 +3081,22 @@ msgstr "El Tellico no pot localitzar el full d'estil d'entrades per omissió."
 msgid "Please check your installation."
 msgstr "Si us plau, comproveu la instal·lació."
 
-#: src/exportdialog.cpp:68
+#: src/exportdialog.cpp:64
 #, kde-format
 msgid "Export Options"
 msgstr "Opcions d'exportació"
 
-#: src/exportdialog.cpp:75
+#: src/exportdialog.cpp:71
 #, kde-format
 msgid "Formatting"
 msgstr "S'està donant format"
 
-#: src/exportdialog.cpp:79
+#: src/exportdialog.cpp:75
 #, kde-format
 msgid "Format all fields"
 msgstr "Dona format a tots els camps"
 
-#: src/exportdialog.cpp:81
+#: src/exportdialog.cpp:77
 #, kde-format
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
@@ -3105,48 +3105,48 @@ msgstr ""
 "Si està marcada, els valors dels camps seran automàticament amb format "
 "d'acord amb el seu tipus de format."
 
-#: src/exportdialog.cpp:85
+#: src/exportdialog.cpp:81
 #, kde-format
 msgid "Export selected entries only"
 msgstr "Exporta només les entrades seleccionades"
 
-#: src/exportdialog.cpp:87
+#: src/exportdialog.cpp:83
 #, kde-format
 msgid "If checked, only the currently selected entries will be exported."
 msgstr "Si està marcada, només s'exportaran les entrades seleccionades."
 
-#: src/exportdialog.cpp:91
+#: src/exportdialog.cpp:87
 #, kde-format
 msgid "Export visible fields only"
 msgstr "Exporta només els camps visibles"
 
-#: src/exportdialog.cpp:93
+#: src/exportdialog.cpp:89
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
 msgstr "Si està marcada, només s'exportaran els camps actualment visibles."
 
-#: src/exportdialog.cpp:97
+#: src/exportdialog.cpp:93
 #, kde-format
 msgid "Encoding"
 msgstr "Codificació"
 
-#: src/exportdialog.cpp:102
+#: src/exportdialog.cpp:98
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
 msgstr "Codifica en Unicode (UTF-8)"
 
-#: src/exportdialog.cpp:104
+#: src/exportdialog.cpp:100
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr "Codifica el fitxer exportat en Unicode (UTF-8)."
 
-#: src/exportdialog.cpp:112
+#: src/exportdialog.cpp:104
 #, kde-format
 msgid "Encode in user locale (%1)"
 msgstr "Codifica en la configuració regional de l'usuari (%1)"
 
-#: src/exportdialog.cpp:115
+#: src/exportdialog.cpp:107
 #, kde-format
 msgid "Encode the exported file in the local encoding."
 msgstr "Codifica el fitxer exportat en la codificació regional."
@@ -5108,7 +5108,7 @@ msgid "Tellico Files"
 msgstr "Fitxers del Tellico"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:76
+#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "Fitxers XML"
@@ -6677,7 +6677,7 @@ msgstr ""
 "Si està marcada, la taxa de bits de cada pista s'afegirà a les entrades."
 
 #: src/translators/bibtexexporter.cpp:218
-#: src/translators/bibteximporter.cpp:346
+#: src/translators/bibteximporter.cpp:342
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Opcions de Bibtex"
@@ -6746,37 +6746,37 @@ msgstr ""
 "<qt>L'estil de citació s'usa en exportar bibtex. Tots els valors dels camps "
 "s'escaparan amb marques de claus o cometes.</qt>"
 
-#: src/translators/bibteximporter.cpp:110
+#: src/translators/bibteximporter.cpp:106
 #, kde-format
 msgid "No valid bibtex entries were found"
 msgstr "No s'han trobat entrades bibtex vàlides"
 
-#: src/translators/bibteximporter.cpp:129
+#: src/translators/bibteximporter.cpp:125
 #, kde-format
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "No s'han trobat entrades bibtex vàlides en el fitxer - %1"
 
-#: src/translators/bibteximporter.cpp:349
+#: src/translators/bibteximporter.cpp:345
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
 msgstr "Usa codificació Unicode (UTF-8)"
 
-#: src/translators/bibteximporter.cpp:350
+#: src/translators/bibteximporter.cpp:346
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
 msgstr "Llegeix el fitxer importat en Unicode (UTF-8)."
 
-#: src/translators/bibteximporter.cpp:351
+#: src/translators/bibteximporter.cpp:347
 #, kde-format
 msgid "Use user locale (%1) encoding"
 msgstr "Usa la codificació de la configuració regional de l'usuari (%1)"
 
-#: src/translators/bibteximporter.cpp:359
+#: src/translators/bibteximporter.cpp:351
 #, kde-format
 msgid "Read the imported file in the local encoding."
 msgstr "Llegeix el fitxer importat en la codificació local."
 
-#: src/translators/bibtexmlexporter.cpp:55
+#: src/translators/bibtexmlexporter.cpp:51
 #, kde-format
 msgid "Bibtexml Files"
 msgstr "Fitxers Bibtexml"
@@ -7257,17 +7257,17 @@ msgstr "El fitxer està buit."
 msgid "The file contains no collection data."
 msgstr "El fitxer no conté dades de col·lecció."
 
-#: src/translators/tellicoxmlexporter.cpp:550
+#: src/translators/tellicoxmlexporter.cpp:541
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Opcions XML del Tellico"
 
-#: src/translators/tellicoxmlexporter.cpp:553
+#: src/translators/tellicoxmlexporter.cpp:544
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Inclou imatges en el document XML"
 
-#: src/translators/tellicoxmlexporter.cpp:555
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

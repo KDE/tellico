@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-12 00:39+0000\n"
+"POT-Creation-Date: 2024-09-21 00:40+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -2719,12 +2719,12 @@ msgstr "Opțiuni generale"
 #: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1297
 #: src/mainwindow.cpp:1473 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
-#: src/translators/bibtexmlexporter.cpp:55 src/translators/csvexporter.cpp:64
+#: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
 #: src/translators/librarythingimporter.cpp:191
 #: src/translators/librarythingimporter.cpp:195
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:76
+#: src/translators/tellicoxmlexporter.cpp:71
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:103
 #: src/translators/xsltexporter.cpp:107 src/translators/xsltimporter.cpp:130
@@ -3015,22 +3015,22 @@ msgstr ""
 "Eroare în procesarea XSLT.\n"
 "Vă rog verificați instalarea."
 
-#: src/exportdialog.cpp:68
+#: src/exportdialog.cpp:64
 #, fuzzy, kde-format
 msgid "Export Options"
 msgstr "Opțiuni generale"
 
-#: src/exportdialog.cpp:75
+#: src/exportdialog.cpp:71
 #, fuzzy, kde-format
 msgid "Formatting"
 msgstr "Opțiuni generale"
 
-#: src/exportdialog.cpp:79
+#: src/exportdialog.cpp:75
 #, fuzzy, kde-format
 msgid "Format all fields"
 msgstr "Pune automat majuscule la autori și titluri"
 
-#: src/exportdialog.cpp:81
+#: src/exportdialog.cpp:77
 #, fuzzy, kde-format
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
@@ -3039,24 +3039,24 @@ msgstr ""
 "Dacă bifați, inițialele numelor de autori și titlurilor vor fi convertite "
 "automat la majuscule."
 
-#: src/exportdialog.cpp:85
+#: src/exportdialog.cpp:81
 #, fuzzy, kde-format
 msgid "Export selected entries only"
 msgstr "Șterge carte"
 
-#: src/exportdialog.cpp:87
+#: src/exportdialog.cpp:83
 #, fuzzy, kde-format
 msgid "If checked, only the currently selected entries will be exported."
 msgstr ""
 "Dacă bifați, ultimul fișier deschis va fi deschis din nou la pornirea "
 "programului."
 
-#: src/exportdialog.cpp:91
+#: src/exportdialog.cpp:87
 #, fuzzy, kde-format
 msgid "Export visible fields only"
 msgstr "Șterge carte"
 
-#: src/exportdialog.cpp:93
+#: src/exportdialog.cpp:89
 #, fuzzy, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
@@ -3064,27 +3064,27 @@ msgstr ""
 "Dacă bifați, ultimul fișier deschis va fi deschis din nou la pornirea "
 "programului."
 
-#: src/exportdialog.cpp:97
+#: src/exportdialog.cpp:93
 #, fuzzy, kde-format
 msgid "Encoding"
 msgstr "Legare"
 
-#: src/exportdialog.cpp:102
+#: src/exportdialog.cpp:98
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
 msgstr ""
 
-#: src/exportdialog.cpp:104
+#: src/exportdialog.cpp:100
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr ""
 
-#: src/exportdialog.cpp:112
+#: src/exportdialog.cpp:104
 #, kde-format
 msgid "Encode in user locale (%1)"
 msgstr ""
 
-#: src/exportdialog.cpp:115
+#: src/exportdialog.cpp:107
 #, kde-format
 msgid "Encode the exported file in the local encoding."
 msgstr ""
@@ -4986,7 +4986,7 @@ msgid "Tellico Files"
 msgstr "Tellico"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:76
+#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:71
 #, fuzzy, kde-format
 msgid "XML Files"
 msgstr "Filmele mele"
@@ -6527,7 +6527,7 @@ msgstr ""
 "programului."
 
 #: src/translators/bibtexexporter.cpp:218
-#: src/translators/bibteximporter.cpp:346
+#: src/translators/bibteximporter.cpp:342
 #, fuzzy, kde-format
 msgid "Bibtex Options"
 msgstr "Opțiuni generale"
@@ -6591,37 +6591,37 @@ msgid ""
 "escaped with either braces or quotation marks.</qt>"
 msgstr ""
 
-#: src/translators/bibteximporter.cpp:110
+#: src/translators/bibteximporter.cpp:106
 #, kde-format
 msgid "No valid bibtex entries were found"
 msgstr ""
 
-#: src/translators/bibteximporter.cpp:129
+#: src/translators/bibteximporter.cpp:125
 #, kde-format
 msgid "No valid bibtex entries were found in file - %1"
 msgstr ""
 
-#: src/translators/bibteximporter.cpp:349
+#: src/translators/bibteximporter.cpp:345
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
 msgstr ""
 
-#: src/translators/bibteximporter.cpp:350
+#: src/translators/bibteximporter.cpp:346
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
 msgstr ""
 
-#: src/translators/bibteximporter.cpp:351
+#: src/translators/bibteximporter.cpp:347
 #, kde-format
 msgid "Use user locale (%1) encoding"
 msgstr ""
 
-#: src/translators/bibteximporter.cpp:359
+#: src/translators/bibteximporter.cpp:351
 #, kde-format
 msgid "Read the imported file in the local encoding."
 msgstr ""
 
-#: src/translators/bibtexmlexporter.cpp:55
+#: src/translators/bibtexmlexporter.cpp:51
 #, fuzzy, kde-format
 msgid "Bibtexml Files"
 msgstr "Imprim..."
@@ -7084,17 +7084,17 @@ msgstr ""
 msgid "The file contains no collection data."
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:550
+#: src/translators/tellicoxmlexporter.cpp:541
 #, fuzzy, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico"
 
-#: src/translators/tellicoxmlexporter.cpp:553
+#: src/translators/tellicoxmlexporter.cpp:544
 #, kde-format
 msgid "Include images in XML document"
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:555
+#: src/translators/tellicoxmlexporter.cpp:546
 #, fuzzy, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
