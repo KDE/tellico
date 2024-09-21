@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-12 02:28+0000\n"
+"POT-Creation-Date: 2024-09-21 02:33+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -2793,12 +2793,12 @@ msgstr "Πακέτα προτύπων"
 #: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1297
 #: src/mainwindow.cpp:1473 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
-#: src/translators/bibtexmlexporter.cpp:55 src/translators/csvexporter.cpp:64
+#: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
 #: src/translators/librarythingimporter.cpp:191
 #: src/translators/librarythingimporter.cpp:195
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:76
+#: src/translators/tellicoxmlexporter.cpp:71
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:103
 #: src/translators/xsltexporter.cpp:107 src/translators/xsltimporter.cpp:130
@@ -3098,22 +3098,22 @@ msgstr ""
 msgid "Please check your installation."
 msgstr "Παρακαλώ ελέγξτε την εγκατάστασή σας."
 
-#: src/exportdialog.cpp:68
+#: src/exportdialog.cpp:64
 #, kde-format
 msgid "Export Options"
 msgstr "Επιλογές εξαγωγής"
 
-#: src/exportdialog.cpp:75
+#: src/exportdialog.cpp:71
 #, kde-format
 msgid "Formatting"
 msgstr "Μορφοποίηση"
 
-#: src/exportdialog.cpp:79
+#: src/exportdialog.cpp:75
 #, kde-format
 msgid "Format all fields"
 msgstr "Μορφοποίηση όλων των πεδίων"
 
-#: src/exportdialog.cpp:81
+#: src/exportdialog.cpp:77
 #, kde-format
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
@@ -3122,48 +3122,48 @@ msgstr ""
 "Εάν επιλεγεί, οι τιμές των πεδίων θα μορφοποιηθούν αυτόματα σύμφωνα με τον "
 "τύπο της μορφοποίησης τους."
 
-#: src/exportdialog.cpp:85
+#: src/exportdialog.cpp:81
 #, kde-format
 msgid "Export selected entries only"
 msgstr "Εξαγωγή μόνο των επιλεγμένων καταχωρήσεων"
 
-#: src/exportdialog.cpp:87
+#: src/exportdialog.cpp:83
 #, kde-format
 msgid "If checked, only the currently selected entries will be exported."
 msgstr "Εάν επιλεγεί, μόνο οι τρέχουσες επιλεγμένες καταχωρήσεις θα εξαχθούν."
 
-#: src/exportdialog.cpp:91
+#: src/exportdialog.cpp:87
 #, kde-format
 msgid "Export visible fields only"
 msgstr "Εξαγωγή μόνο των ορατών πεδίων"
 
-#: src/exportdialog.cpp:93
+#: src/exportdialog.cpp:89
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
 msgstr "Εάν επιλεγεί, μόνο τα τρέχοντα ορατά πεδία της προβολής θα εξαχθούν."
 
-#: src/exportdialog.cpp:97
+#: src/exportdialog.cpp:93
 #, kde-format
 msgid "Encoding"
 msgstr "Κωδικοποίηση"
 
-#: src/exportdialog.cpp:102
+#: src/exportdialog.cpp:98
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
 msgstr "Κωδικοποίηση σε Unicode (UTF-8)"
 
-#: src/exportdialog.cpp:104
+#: src/exportdialog.cpp:100
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr "Κωδικοποίηση του αρχείου εξαγωγής σε Unicode (UTF-8)"
 
-#: src/exportdialog.cpp:112
+#: src/exportdialog.cpp:104
 #, kde-format
 msgid "Encode in user locale (%1)"
 msgstr "Κωδικοποίηση με την επιλογή του χρήστη (%1)"
 
-#: src/exportdialog.cpp:115
+#: src/exportdialog.cpp:107
 #, kde-format
 msgid "Encode the exported file in the local encoding."
 msgstr ""
@@ -5168,7 +5168,7 @@ msgid "Tellico Files"
 msgstr "Αρχεία Tellico"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:76
+#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "XML αρχεία"
@@ -6758,7 +6758,7 @@ msgstr ""
 "καταχωρήσεις."
 
 #: src/translators/bibtexexporter.cpp:218
-#: src/translators/bibteximporter.cpp:346
+#: src/translators/bibteximporter.cpp:342
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Επιλογές Bibtex"
@@ -6826,37 +6826,37 @@ msgstr ""
 "<qt>Το στυλ παράθεσης χρησιμοποιείται κατά την εξαγωγή bibtex. Όλες οι τιμές "
 "πεδίων θα διαφύγουν είτε με αγκύλες είτε με εισαγωγικά.</qt>"
 
-#: src/translators/bibteximporter.cpp:110
+#: src/translators/bibteximporter.cpp:106
 #, kde-format
 msgid "No valid bibtex entries were found"
 msgstr "Δεν βρέθηκαν έγκυρες καταχωρήσεις bibtex."
 
-#: src/translators/bibteximporter.cpp:129
+#: src/translators/bibteximporter.cpp:125
 #, kde-format
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "Δεν βρέθηκαν έγκυρες καταχωρήσεις bibtex στο αρχείο - %1."
 
-#: src/translators/bibteximporter.cpp:349
+#: src/translators/bibteximporter.cpp:345
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
 msgstr "Χρήση κωδικοποίησης Unicode (UTF-8)"
 
-#: src/translators/bibteximporter.cpp:350
+#: src/translators/bibteximporter.cpp:346
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
 msgstr "Ανάγνωση εισαχθέντος αρχείο με Unicode (UTF-8)."
 
-#: src/translators/bibteximporter.cpp:351
+#: src/translators/bibteximporter.cpp:347
 #, kde-format
 msgid "Use user locale (%1) encoding"
 msgstr "Χρήση κωδικοποίησης χρήστη (%1)."
 
-#: src/translators/bibteximporter.cpp:359
+#: src/translators/bibteximporter.cpp:351
 #, kde-format
 msgid "Read the imported file in the local encoding."
 msgstr "Ανάγνωση εισαχθέντος αρχείο με κωδικοποίηση χρήστη."
 
-#: src/translators/bibtexmlexporter.cpp:55
+#: src/translators/bibtexmlexporter.cpp:51
 #, kde-format
 msgid "Bibtexml Files"
 msgstr "Bibtexml αρχεία"
@@ -7350,17 +7350,17 @@ msgstr "Το αρχείο είναι κενό."
 msgid "The file contains no collection data."
 msgstr "Το αρχείο δεν περιέχει δεδομένα συλλογής."
 
-#: src/translators/tellicoxmlexporter.cpp:550
+#: src/translators/tellicoxmlexporter.cpp:541
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Επιλογές Tellico XML"
 
-#: src/translators/tellicoxmlexporter.cpp:553
+#: src/translators/tellicoxmlexporter.cpp:544
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Συμπερίληψη εικόνων στο έγγραφο XML."
 
-#: src/translators/tellicoxmlexporter.cpp:555
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

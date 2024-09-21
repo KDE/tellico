@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-12 02:28+0000\n"
+"POT-Creation-Date: 2024-09-21 02:33+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -2690,12 +2690,12 @@ msgstr ""
 #: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1297
 #: src/mainwindow.cpp:1473 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
-#: src/translators/bibtexmlexporter.cpp:55 src/translators/csvexporter.cpp:64
+#: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
 #: src/translators/librarythingimporter.cpp:191
 #: src/translators/librarythingimporter.cpp:195
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:76
+#: src/translators/tellicoxmlexporter.cpp:71
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:103
 #: src/translators/xsltexporter.cpp:107 src/translators/xsltimporter.cpp:130
@@ -2983,70 +2983,70 @@ msgstr "Tellico 无法定位默认的条目样式表。"
 msgid "Please check your installation."
 msgstr "请检查您的安装。"
 
-#: src/exportdialog.cpp:68
+#: src/exportdialog.cpp:64
 #, kde-format
 msgid "Export Options"
 msgstr "导出选项"
 
-#: src/exportdialog.cpp:75
+#: src/exportdialog.cpp:71
 #, kde-format
 msgid "Formatting"
 msgstr "格式化"
 
-#: src/exportdialog.cpp:79
+#: src/exportdialog.cpp:75
 #, kde-format
 msgid "Format all fields"
 msgstr "格式化全部域"
 
-#: src/exportdialog.cpp:81
+#: src/exportdialog.cpp:77
 #, kde-format
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
 msgstr ""
 
-#: src/exportdialog.cpp:85
+#: src/exportdialog.cpp:81
 #, kde-format
 msgid "Export selected entries only"
 msgstr "仅导出所选条目"
 
-#: src/exportdialog.cpp:87
+#: src/exportdialog.cpp:83
 #, kde-format
 msgid "If checked, only the currently selected entries will be exported."
 msgstr "如果选中，则只导出当前所选的条目。"
 
-#: src/exportdialog.cpp:91
+#: src/exportdialog.cpp:87
 #, kde-format
 msgid "Export visible fields only"
 msgstr ""
 
-#: src/exportdialog.cpp:93
+#: src/exportdialog.cpp:89
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
 msgstr ""
 
-#: src/exportdialog.cpp:97
+#: src/exportdialog.cpp:93
 #, kde-format
 msgid "Encoding"
 msgstr "编码"
 
-#: src/exportdialog.cpp:102
+#: src/exportdialog.cpp:98
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
 msgstr "以 Unicode (UTF-8) 编码"
 
-#: src/exportdialog.cpp:104
+#: src/exportdialog.cpp:100
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr "以 Unicode (UTF-8) 编码导出的文件。"
 
-#: src/exportdialog.cpp:112
+#: src/exportdialog.cpp:104
 #, kde-format
 msgid "Encode in user locale (%1)"
 msgstr "以用户本地编码(%1)编码"
 
-#: src/exportdialog.cpp:115
+#: src/exportdialog.cpp:107
 #, kde-format
 msgid "Encode the exported file in the local encoding."
 msgstr "以本地编码编码导出的文件。"
@@ -4942,7 +4942,7 @@ msgid "Tellico Files"
 msgstr ""
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:76
+#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "XML 文件"
@@ -6465,7 +6465,7 @@ msgid "If checked, the bitrate for each track is added to the entries."
 msgstr ""
 
 #: src/translators/bibtexexporter.cpp:218
-#: src/translators/bibteximporter.cpp:346
+#: src/translators/bibteximporter.cpp:342
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Bibtex 选项"
@@ -6527,37 +6527,37 @@ msgid ""
 "escaped with either braces or quotation marks.</qt>"
 msgstr ""
 
-#: src/translators/bibteximporter.cpp:110
+#: src/translators/bibteximporter.cpp:106
 #, kde-format
 msgid "No valid bibtex entries were found"
 msgstr "在文件中未找到有效的 bibtex 条目"
 
-#: src/translators/bibteximporter.cpp:129
+#: src/translators/bibteximporter.cpp:125
 #, kde-format
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "在文件中未找到有效的 bibtex 条目 - %1"
 
-#: src/translators/bibteximporter.cpp:349
+#: src/translators/bibteximporter.cpp:345
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
 msgstr "使用 Unicode (UTF-8) 编码"
 
-#: src/translators/bibteximporter.cpp:350
+#: src/translators/bibteximporter.cpp:346
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
 msgstr "以 Unicode (UTF-8) 读取导入的文件。"
 
-#: src/translators/bibteximporter.cpp:351
+#: src/translators/bibteximporter.cpp:347
 #, kde-format
 msgid "Use user locale (%1) encoding"
 msgstr "使用用户本地编码(%1)"
 
-#: src/translators/bibteximporter.cpp:359
+#: src/translators/bibteximporter.cpp:351
 #, kde-format
 msgid "Read the imported file in the local encoding."
 msgstr "以本地编码读取导入的文件。"
 
-#: src/translators/bibtexmlexporter.cpp:55
+#: src/translators/bibtexmlexporter.cpp:51
 #, kde-format
 msgid "Bibtexml Files"
 msgstr ""
@@ -7012,17 +7012,17 @@ msgstr "文件为空。"
 msgid "The file contains no collection data."
 msgstr "文件不包含收藏数据。"
 
-#: src/translators/tellicoxmlexporter.cpp:550
+#: src/translators/tellicoxmlexporter.cpp:541
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML 选项"
 
-#: src/translators/tellicoxmlexporter.cpp:553
+#: src/translators/tellicoxmlexporter.cpp:544
 #, kde-format
 msgid "Include images in XML document"
 msgstr "在 XML 文档中包含图像"
 
-#: src/translators/tellicoxmlexporter.cpp:555
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

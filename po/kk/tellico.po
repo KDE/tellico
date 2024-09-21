@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-12 02:28+0000\n"
+"POT-Creation-Date: 2024-09-21 02:33+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -2779,12 +2779,12 @@ msgstr "Үлгілер"
 #: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1297
 #: src/mainwindow.cpp:1473 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
-#: src/translators/bibtexmlexporter.cpp:55 src/translators/csvexporter.cpp:64
+#: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
 #: src/translators/librarythingimporter.cpp:191
 #: src/translators/librarythingimporter.cpp:195
 #: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:76
+#: src/translators/tellicoxmlexporter.cpp:71
 #: src/translators/tellicozipexporter.cpp:54
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:103
 #: src/translators/xsltexporter.cpp:107 src/translators/xsltimporter.cpp:130
@@ -3081,22 +3081,22 @@ msgstr "Tellico әдетті жазу стиль кестесін таба ал�
 msgid "Please check your installation."
 msgstr "Орнатылғанын тексеріңіз."
 
-#: src/exportdialog.cpp:68
+#: src/exportdialog.cpp:64
 #, kde-format
 msgid "Export Options"
 msgstr "Экспорттау параметрлері"
 
-#: src/exportdialog.cpp:75
+#: src/exportdialog.cpp:71
 #, kde-format
 msgid "Formatting"
 msgstr "Пішімдеу"
 
-#: src/exportdialog.cpp:79
+#: src/exportdialog.cpp:75
 #, kde-format
 msgid "Format all fields"
 msgstr "Бүкіл өрістері пішімделсін"
 
-#: src/exportdialog.cpp:81
+#: src/exportdialog.cpp:77
 #, kde-format
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
@@ -3105,48 +3105,48 @@ msgstr ""
 "Белгісі қойылса, өрістелердегі мәндер пішімінің түріне қарай авто "
 "пішімделеді."
 
-#: src/exportdialog.cpp:85
+#: src/exportdialog.cpp:81
 #, kde-format
 msgid "Export selected entries only"
 msgstr "Тек таңдалғандары ғана экспортталсын"
 
-#: src/exportdialog.cpp:87
+#: src/exportdialog.cpp:83
 #, kde-format
 msgid "If checked, only the currently selected entries will be exported."
 msgstr "Белгісі қойылса, тек таңдалған жазулары ғана экспортталады."
 
-#: src/exportdialog.cpp:91
+#: src/exportdialog.cpp:87
 #, kde-format
 msgid "Export visible fields only"
 msgstr "Тек көрініп тұрғаны ғана экспортталсын"
 
-#: src/exportdialog.cpp:93
+#: src/exportdialog.cpp:89
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
 msgstr "Белгісі қойылса, тек көріністегі жазулары ғана экспортталады."
 
-#: src/exportdialog.cpp:97
+#: src/exportdialog.cpp:93
 #, kde-format
 msgid "Encoding"
 msgstr "Кодтамасы"
 
-#: src/exportdialog.cpp:102
+#: src/exportdialog.cpp:98
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
 msgstr "Юникодта (utf-8) кодталсын"
 
-#: src/exportdialog.cpp:104
+#: src/exportdialog.cpp:100
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr "Файлды Unicode-та (UTF-8) экспорттап шығару."
 
-#: src/exportdialog.cpp:112
+#: src/exportdialog.cpp:104
 #, kde-format
 msgid "Encode in user locale (%1)"
 msgstr "Жергілікті стандартпен (%1) кодталсын"
 
-#: src/exportdialog.cpp:115
+#: src/exportdialog.cpp:107
 #, kde-format
 msgid "Encode the exported file in the local encoding."
 msgstr "Файлды жергілікті кодтауымен экспорттап шығару."
@@ -5138,7 +5138,7 @@ msgid "Tellico Files"
 msgstr "Tellico Zip файлы"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:76
+#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:71
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "XML Files"
@@ -6746,7 +6746,7 @@ msgid "If checked, the bitrate for each track is added to the entries."
 msgstr "Белгісі қойылса, әр жолсызықтың бит легі мәні жазуға енеді."
 
 #: src/translators/bibtexexporter.cpp:218
-#: src/translators/bibteximporter.cpp:346
+#: src/translators/bibteximporter.cpp:342
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Bibtex параметрлері"
@@ -6815,37 +6815,37 @@ msgstr ""
 "<qt>Экспорт еткенде осы bibtex дәйексөз стілі қолданылады. Бүкіл өріс "
 "мәндері немесе мәнерлі жақшаға, немесе тырнақшаға алынады.</qt>"
 
-#: src/translators/bibteximporter.cpp:110
+#: src/translators/bibteximporter.cpp:106
 #, kde-format
 msgid "No valid bibtex entries were found"
 msgstr "Жарамды bibtex жазулары табылған жоқ"
 
-#: src/translators/bibteximporter.cpp:129
+#: src/translators/bibteximporter.cpp:125
 #, kde-format
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "Мына файлда жарамды bibtex жазулары табылған жоқ - %1"
 
-#: src/translators/bibteximporter.cpp:349
+#: src/translators/bibteximporter.cpp:345
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
 msgstr "Юникод (UTF-8) қолданылсын"
 
-#: src/translators/bibteximporter.cpp:350
+#: src/translators/bibteximporter.cpp:346
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
 msgstr "Файл Юникодта (UTF-8) оқылып импорталады."
 
-#: src/translators/bibteximporter.cpp:351
+#: src/translators/bibteximporter.cpp:347
 #, kde-format
 msgid "Use user locale (%1) encoding"
 msgstr "Жергікті (%1) кодтамасы қолданылсын"
 
-#: src/translators/bibteximporter.cpp:359
+#: src/translators/bibteximporter.cpp:351
 #, kde-format
 msgid "Read the imported file in the local encoding."
 msgstr "Файл жергілікті кодтамасында оқылып импорталады"
 
-#: src/translators/bibtexmlexporter.cpp:55
+#: src/translators/bibtexmlexporter.cpp:51
 #, fuzzy, kde-format
 #| msgid "Bibtexml"
 msgid "Bibtexml Files"
@@ -7326,17 +7326,17 @@ msgstr "Файл бос."
 msgid "The file contains no collection data."
 msgstr "Жинақ дерегі файлда жоқ."
 
-#: src/translators/tellicoxmlexporter.cpp:550
+#: src/translators/tellicoxmlexporter.cpp:541
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML параметрлері"
 
-#: src/translators/tellicoxmlexporter.cpp:553
+#: src/translators/tellicoxmlexporter.cpp:544
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Кескіндер XML құжатына қосылсын"
 
-#: src/translators/tellicoxmlexporter.cpp:555
+#: src/translators/tellicoxmlexporter.cpp:546
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
