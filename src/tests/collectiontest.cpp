@@ -43,6 +43,7 @@
 #include <QTest>
 #include <QStandardPaths>
 #include <QRandomGenerator>
+#include <QLoggingCategory>
 
 QTEST_GUILESS_MAIN( CollectionTest )
 
@@ -66,6 +67,7 @@ private:
 void CollectionTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   KLocalizedString::setApplicationDomain("tellico");
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
   Tellico::ImageFactory::init();
   // need to register the collection types
   Tellico::CollectionInitializer ci;
