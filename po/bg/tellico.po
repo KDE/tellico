@@ -7154,35 +7154,3 @@ msgstr "Търсене"
 #, kde-format
 msgid "Clear"
 msgstr "Изчистване"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Празно)"
-
-#~ msgid "Classification"
-#~ msgstr "Класификация"
-
-#~ msgid "Other People"
-#~ msgstr "Други хора"
-
-#~ msgid "Features"
-#~ msgstr "Свойства"
-
-#, fuzzy
-#~ msgid "Tellico is unable to open the file - %1."
-#~ msgstr "Tellico не може да зареди файла %1."
-
-#~ msgid "Tellico is unable to load the file - %1."
-#~ msgstr "Tellico не може да зареди файла %1."
-
-#~ msgid "Tellico is unable to write the file - %1."
-#~ msgstr "Tellico не може да пише във файл %1."
-
-#~ msgid "Tellico is unable to upload the file - %1."
-#~ msgstr "Tellico не може да качи файла %1."
-
-#, fuzzy
-#~ msgid "Tellico is unable to load an image from the file - %1."
-#~ msgstr "Tellico не може да зареди файла %1."
-
-#~ msgid "Untitled"
-#~ msgstr "Неозаглавено"
