@@ -1,0 +1,842 @@
+<chapter id="configuration">
+<title
+>Konfiguracija</title>
+
+<para
+><interface
+>Konfiguracijsko pogovorno okno</interface
+> vsebuje vse možnosti za spreminjanje nekaterih privzetih lastnosti &appname;. </para>
+
+<para
+>Če kliknete gumb <guibutton
+>Uporabi</guibutton
+> <action
+>povzroči, da spremembe začnejo veljati takoj</action
+>, ne da bi zaprli pogovorno okno, medtem ko <guibutton
+>V redu</guibutton
+> <action
+>uveljavi spremembe in zapre pogovorno okno</action
+>. <guibutton
+>Prekliči</guibutton
+> zapre pogovorno okno, vendar bodo vse že narejene in uporabljene spremembe ostale. Gumb <guibutton
+>Privzete</guibutton
+> <action
+>povrne možnosti</action
+> na trenutni strani pogovornega okna na njihove privzete vrednosti, medtem ko <guibutton
+>Pomoč</guibutton
+> <action
+>odpre &khelpcenter;</action
+> v relativnem odseku priročnika &appname;. </para>
+
+<para
+>Nekatere manjše nastavitve je mogoče spremeniti samo z urejanjem same konfiguracijske datoteke. Glejte <link linkend="hidden-options"
+>Skrite možnosti</link
+>. </para>
+
+<sect1 id="general-options">
+<title
+><guilabel
+>Splošne možnosti</guilabel
+></title>
+
+<screenshot>
+<!-- <screeninfo
+>The General Options Dialog</screeninfo
+> -->
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="general-options.png"/></imageobject>
+<textobject
+><phrase
+>Pogovorno okno s splošnimi možnostmi</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+><guilabel
+>Splošne možnosti</guilabel
+> nadzorujejo splošno vedenje. Slike so lahko vključene v podatkovne datoteke ali shranjene ločeno v mapo aplikacije &appname;. Ko se &appname; zažene, lahko tudi samodejno znova odpre zadnjo odprto podatkovno datoteko. <interface
+>Hitri filter</interface
+> v orodni vrstici je uporaben za enostavno filtriranje vaše zbirke in lahko uporablja regularne izraze. </para>
+
+<para
+><guilabel
+>Možnosti oblikovanja</guilabel
+> nadzirajo raven samodejnega oblikovanja, ki ga izvede &appname;. Za primere si oglejte <link linkend="field-formatting"
+>razdelek o oblikovanju polj</link
+>. Uporaba velikih začetnic in oblikovanje sta različni možnosti, saj lahko polje napišete z velikimi črkami, ne da bi spremenili vrstni red besed, in obratno. Samodejno uporabo velikih začetnic je mogoče spremeniti tako, da prezre določene besede. Samodejno oblikovanje vključuje slovnične člene v naslovih, skupaj s predponami in priponami za osebna imena. Vrednosti se ne razlikujejo med velikimi in malimi črkami, zato morajo biti ločene s podpičjem. </para>
+
+<para
+>Pravila oblikovanja sledijo splošni angleški rabi, ki morda ne bo delovala za druge jezike. Členi se dodajajo na koncu naslova, z vejico. Osebna imena so oblikovana tako, da je najprej priimek, nato vejica in nato ime. Ob priimku se ohranijo osebne pripone, kot je ml. Predpone, kot je <emphasis
+>von</emphasis
+>, se ohranijo pri priimku, vendar se pri razvrščanju vrednosti ne upoštevajo.</para>
+
+<informalexample
+><para
+><emphasis
+>John Q. von Public, III</emphasis
+> bi postal <emphasis
+>von Public, III, John Q.</emphasis
+> in <emphasis
+>Public</emphasis
+> bi bil uporabljen kot ključ za razvrščanje.</para
+></informalexample>
+
+<para
+>Podprte so samo predpone ene same besede. Če ime vključuje na primer <emphasis
+>van der</emphasis
+>, morata biti tako <emphasis
+>van</emphasis
+> kot <emphasis
+>der</emphasis
+> vključena na seznam predpon priimkov. Članki, ki se končajo z apostrofom, so podprti tudi za vrstni red razvrščanja. </para>
+
+<note
+><para
+>Dejanske vrednosti v zbirki <emphasis
+>niso</emphasis
+> spremenjene, samo vidno besedilo, uporabljeno za vmesnik. Tako je mogoče možnosti oblikovanja spreminjati naprej in nazaj, ne da bi to vplivalo na podatke v zbirki.</para
+></note>
+
+</sect1>
+
+<sect1 id="printing-options">
+<title
+><guilabel
+>Možnosti tiskanja</guilabel
+></title>
+
+<para
+>&appname; uporablja predlogo &xslt; za ustvarjanje &HTML; in nato to posreduje datoteki &kde; za storitev tiskanja. Natisnjena so samo polja, ki so vidna v <link linkend="detailed-view"
+><interface
+>pogledu stolpcev</interface
+></link
+>. Poleg tega, če je zbirka filtrirana, bodo natisnjeni samo vidni vnosi. Na začetku se prikaže opozorilo, če je filtriranje aktivno. </para>
+
+<screenshot>
+<screeninfo
+>Pogovorno okno možnosti tiskanja</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="print-options.png"/></imageobject>
+<textobject
+><phrase
+>Pogovorno okno možnosti tiskanja</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+><guilabel
+>Možnosti tiskanja</guilabel
+> vam omogočajo, da spremenite nekaj oblikovanja pri tiskanju zbirke. Če je označeno <guilabel
+>Oblikuj naslove in imena</guilabel
+>, so polja <link linkend="field-formatting"
+>samodejno oblikovana</link
+>, ko so natisnjena. V nasprotnem primeru se natisnejo točno tako, kot so bili vneseni. </para>
+
+<para
+>Privzet seznam slogov za tiskanje natisne zbirko z vrednostmi polj v stolpcih. <guilabel
+>Natisni glave polj</guilabel
+> nadzira, ali je naslov polja natisnjen na vrhu stolpca. </para>
+
+<para
+>V izpisu bodo vnosi razvrščeni tako, kot so v <link linkend="detailed-view"
+><interface
+>pogledu stolpcev</interface
+></link
+>. Poleg tega so lahko združeni, kot so, v <link linkend="group-view"
+><interface
+>pogledu skupine</interface
+></link
+>. </para>
+
+<para
+>Nazadnje, ko so slikovna polja vključena v izpis, se lahko slikam spremeni velikost, pri čemer se ohrani njihovo razmerje stranic. Največja širina in višina slike določata največjo možno velikost slike, ki pa se nikoli ne poveča. </para>
+</sect1>
+
+<sect1 id="template-options">
+<title
+><guilabel
+>Možnosti predloge</guilabel
+></title>
+
+<para
+><link linkend="entry-view"
+><interface
+>Pogled vnosa</interface
+></link
+> uporablja predloge za prikaz vrednosti polj. Za vsako vrsto zbirke lahko določite drugo predlogo. Nekatere predloge, kot so predloge <emphasis
+>Album</emphasis
+> ali <emphasis
+>Video</emphasis
+>, so za določeno vrsto zbirke in v <interface
+>Pogledu vnosa</interface
+> se prikaže kratko sporočilo o napaki, če uporabljajo se za druge vrste. Gumb <guilabel
+>Predogled</guilabel
+> odpre okno, ki vam pokaže predogled, kako je videti predloga. Pisave in barve po meri se lahko posredujejo predlogi in vse privzete predloge bodo upoštevale te nastavitve. Predloga po meri pa jih lahko prezre.</para>
+
+<para
+>Dodatne predloge lahko namestite neposredno ali jih prenesete s <ulink url="https://store.kde.org/"
+>store.kde.org</ulink
+> s klikom na gumb <guilabel
+>Prenesi</guilabel
+>. Vse predloge, ki jih je namestil uporabnik, se lahko tudi izbrišejo. Vnosne predloge so shranjene v <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/entry-templates/</filename
+>. </para>
+
+<para
+>Če ustvarite novo predlogo, razmislite o predložitvi na <ulink url="https://store.kde.org/"
+>store.kde.org</ulink
+>!</para>
+
+<screenshot>
+<screeninfo
+>Pogovorno okno možnosti predloge</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="template-options.png"/></imageobject>
+<textobject
+><phrase
+>Pogovorno okno možnosti predloge</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="data-sources-options">
+<title
+><guilabel
+>Možnosti podatkovnih virov</guilabel
+></title>
+
+<para
+>&appname; lahko uporablja različne vire za uvoz podatkov, ki jih je mogoče konfigurirati v pogovornem oknu Viri podatkov. Na voljo je veliko vrst in virov. Nekaj jih je navedenih spodaj, celoten seznam pa je <ulink url="https://tellico-project.org/data-sources"
+>na voljo na spletnem mestu Tellico</ulink
+>.</para>
+
+<itemizedlist>
+<!-- books -->
+<listitem
+><simpara
+><link linkend="amazon-web-services"
+>Amazon.com Web Services</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="isbndb"
+>ISBNdb.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="openlibrary"
+>OpenLibrary.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="opds"
+>OPDS catalogs</link
+>,</simpara
+></listitem>
+<!-- movies -->
+<listitem
+><simpara
+><link linkend="imdb"
+>Internet Movie Database</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="tmdb"
+>TheMovieDB.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="omdb"
+>Open Movie Database</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="filmaffinity"
+>FilmAffinity</link
+>,</simpara
+></listitem>
+<!-- comics -->
+<listitem
+><simpara
+><link linkend="bedetheque"
+>BDGest</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="comicvine"
+>Comic Vine</link
+>,</simpara
+></listitem>
+<!-- music -->
+<listitem
+><simpara
+><link linkend="discogs"
+>Discogs.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="musicbrainz"
+>MusicBrainz.org</link
+>,</simpara
+></listitem>
+<!-- video games -->
+<listitem
+><simpara
+><link linkend="tgdb"
+>TheGamesDB.net</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="giantbomb"
+>GiantBomb.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="mobygames"
+>MobyGames.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="igdb"
+>IGDB.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="videogamegeek"
+>VideoGameGeek</link
+>,</simpara
+></listitem>
+<!-- board games -->
+<listitem
+><simpara
+><link linkend="boardgamegeek"
+>BoardGameGeek</link
+>,</simpara
+></listitem>
+<!-- bibliographic -->
+<listitem
+><simpara
+><link linkend="bib-sources"
+>arxiv.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="entrez"
+>Entrez (PubMed) databases</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="z3950"
+>z39.50 servers</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="sru"
+>SRU servers</link
+>,</simpara
+></listitem>
+<!-- coins -->
+<listitem
+><simpara
+><link linkend="colnect"
+>Colnect</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="numista"
+>Numista</link
+>,</simpara
+></listitem>
+<!-- others -->
+<listitem
+><simpara
+><link linkend="externalexec"
+>other external scripts or applications</link
+>, in</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="multiple-sources"
+>kombinacija katerihkoli zgornjih virov </link
+>.</simpara
+></listitem>
+</itemizedlist>
+
+<screenshot>
+<screeninfo
+>Pogovorno okno z možnostmi virov podatkov</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="source-options.png"/></imageobject>
+<textobject
+><phrase
+>Pogovorno okno možnosti virov podatkov</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Nove vire lahko dodate s klikom na gumb <guibutton
+>Novo ...</guibutton
+>, obstoječe pa lahko spremenite ali izbrišete z uporabo gumbov <guibutton
+>Spremeni...</guibutton
+> ali <guibutton
+>Izbriši</guibutton
+>. Vrstni red virov, ki se prikaže v menijih za posodabljanje vnosov, je mogoče tudi spremeniti. </para>
+
+<para
+>Številni viri podatkov ponujajo več informacij kot privzeta polja v &appname;. Ta druga polja so prikazana na desni strani konfiguracijskega polja. Če je katero koli od teh polj označeno, bo dodano v zbirko, ko bo dodan vnos iz tega vira. </para>
+
+<!-- start book sources -->
+
+<sect2 id="book-sources">
+<title
+>Knjižni in bibliografski viri podatkov</title>
+
+<sect3 id="z3950">
+<title
+>z39.50 Strežniki</title>
+
+<para
+>Za dostop do knjižnic se uporablja <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html"
+>protokol z39.50</ulink
+> in ponudniki bibliografskih informacij po vsem svetu. Seznami javnih strežnikov z39.50 so med drugim <ulink url="http://www.indexdata.dk/targettest/"
+>na voljo na indexdata.dk</ulink
+>. &appname; prihaja z več prednastavljenimi konfiguracijami za glavne knjižnice ali pa lahko informacije o povezavi določite ročno.</para>
+
+<para
+>&appname; lahko bere podatke v formatu <acronym
+>MODS</acronym
+>, <acronym
+>USMARC</acronym
+>/<acronym
+>MARC21</acronym
+> ali <acronym
+>UNIMARC</acronym
+> z uporabo <ulink url ="http://www.indexdata.dk/yaz/"
+>knjižnica yaz</ulink
+>. Poleg tega obstaja omejena podpora za format <acronym
+>GRS-1</acronym
+>. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="z3950-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Če želite uporabiti eno od prednastavljenih knjižnic, potrdite polje in nato izberite knjižnico. Drugi konfiguracijski vnosi bodo onemogočeni. Če morate podatke nastaviti ročno, počistite polje prednastavitev. </para>
+
+<para
+>Privzeta vrata za dostop z39.50 so 210, vendar nekateri strežniki morda uporabljajo drugačna. &appname; predvideva, da strežnik uporablja kodiranje znakov MARC-8, razen če je konfigurirano drugače. Če je uporabljeno nepravilno kodiranje znakov, se lahko na izhodu programa prikaže sporočilo o napaki ali pa se vnosi ne pridobijo. </para>
+
+<para
+>Nekateri strežniki za dostop zahtevajo uporabniško ime in geslo. &appname; lahko uporabi in shrani to geslo, vendar se zavedajte, da je zapisano v &appname; konfiguracijsko datoteko v navadnem besedilu in ni varno. Za večino javnih strežnikov lahko polji za uporabniško ime in geslo ostaneta prazni. </para>
+
+</sect3>
+
+<sect3 id="sru">
+<title
+>SRU strežniki</title>
+
+<para
+>SRU pomeni <ulink url="http://www.loc.gov/standards/sru/"
+>Search/Retrieve via &URL;</ulink
+> in je standardni iskalni protokol za internetna iskanja. Nekatere knjižnice ga uporabljajo za zagotavljanje dostopa do svojih podatkovnih katalogov. Med njimi je verjetno najbolj znana <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
+>Kongresna knjižnica ZDA</ulink
+>. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="sru-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect3>
+
+<sect3 id="entrez">
+<title
+>Podatkovne baze Entrez</title>
+<para
+><ulink url="http://www.ncbi.nlm.nih.gov/Entrez/"
+>Entrez</ulink
+> je integriran sistem iskanja in pridobivanja, ki temelji na besedilu in se uporablja v Nacionalnem centru za biotehnološke informacije (NCBI). . Najbolj znana zbirka podatkov Entrez je <ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed"
+>PubMed</ulink
+>, baza podatkov za članke o znanosti o življenju iz številnih bioloških revij. Trenutno je edina zbirka podatkov Entrez, ki jo podpira &appname; je PubMed.</para>
+</sect3>
+
+<sect3 id="bib-sources">
+<title
+>Bibliografske baze podatkov</title>
+<para
+><ulink url="http://arxiv.org"
+>arXiv.org</ulink
+>, <ulink url="http://bibsonomy.org"
+>Bibsonomy</ulink
+> in <ulink url="http: //crossref.org"
+>CrossRef</ulink
+> so spletne zbirke podatkov za akademske članke in bibliografske informacije. Za dostop do vira CrossRef morate <ulink url="http://www.crossref.org/requestaccount/"
+>zahtevati račun</ulink
+> in dodati podatke o računu v konfiguracijo vira podatkov.</para>
+</sect3>
+
+<sect3 id="isbndb">
+<title
+>ISBNdb.com</title>
+<para
+><ulink url="http://isbndb.com"
+>ISBNdb.com</ulink
+> je spletna zbirka podatkov o knjigah iz knjižnic po vsem svetu. </para>
+</sect3>
+
+<sect3 id="openlibrary">
+<title
+>OpenLibrary.org</title>
+<para
+><ulink url="http://openlibrary.org"
+>OpenLibrary.org</ulink
+> je spletna zbirka podatkov o knjigah, katere namen je imeti eno stran za vsako knjigo. </para>
+</sect3>
+
+<sect3 id="opds">
+<title
+>OPDS katalogi</title>
+<para
+><ulink url="https://en.wikipedia.org/wiki/Open_Publication_Distribution_System"
+>Katalogi OPDS</ulink
+> zagotavljajo sredstva za iskanje (in distribucijo) digitalnih knjig. &tellico; lahko kot vir podatkov uporabi številne kataloge OPDS, kot je <ulink url="https://wiki.mobileread.com/wiki/OPDS"
+>Projekt Gutenberg</ulink
+>. Vnesite povezavo do kataloga in preverite dostop in format za potrditev &tellico; lahko preberete povezavo. </para>
+</sect3>
+
+</sect2>
+<!-- end of books -->
+
+<!-- start of movie sources -->
+<sect2 id="comicbook-sources">
+<title
+>Viri podatkov o stripih</title>
+
+<sect3 id="bedetheque">
+<title
+>Bedetheque</title>
+<para
+><ulink url="http://www.bedetheque.com"
+>Bedetheque</ulink
+> je francoska zbirka podatkov o stripih, ki jo upravlja BDGest. </para>
+</sect3>
+
+<sect3 id="comicvine">
+<title
+>Comic Vine</title>
+<para
+><ulink url="https://comicvine.gamespot.com/"
+>Comic Vine</ulink
+> velja za največji stripovski wiki v vesolju. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of movie sources -->
+<sect2 id="movie-sources">
+<title
+>Viri filmskih podatkov</title>
+
+<sect3 id="imdb">
+<title
+>Internetna zbirka podatkov o filmih</title>
+
+<para
+><ulink url="http://www.imdb.com"
+>Internet Movie Database</ulink
+> nudi informacije o filmih in videih. Če se pri iskanju <emphasis
+>osebe</emphasis
+> vrne več kot en možni rezultat, se odpre pogovorno okno, v katerem lahko izberete pravo osebo. Možnosti konfiguracije vključujejo izbiro, katero državo IMDb želite uporabiti in ali so slike pridobljene ali ne. Ker lahko IMDb vrne veliko število članov zasedbe, lahko to omejite na določeno število. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="imdb-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect3>
+
+<sect3 id="tmdb">
+<title
+>TheMovieDB.org</title>
+<para
+><ulink url="http://themoviedb.org"
+>TheMovieDB.org</ulink
+> je prosta in odprta spletna zbirka podatkov o filmih. Za brezplačen račun je potrebna registracija. </para>
+</sect3>
+
+<sect3 id="omdb">
+<title
+>Open Movie Database</title>
+<para
+><ulink url="http://omdbapi.com"
+>Open Movie Database (OMDBAPI.com)</ulink
+> je brezplačna spletna storitev za pridobivanje informacij o filmih. </para>
+</sect3>
+
+<sect3 id="filmaffinity">
+<title
+>FilmAffinity</title>
+<para
+><ulink url="https://filmaffinity.com"
+>FilmAffinity</ulink
+> je neodvisna filmska stran. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of music sources -->
+<sect2 id="music-sources">
+<title
+>Glasbeni podatkovni viri</title>
+
+<sect3 id="discogs">
+<title
+>Discogs.com</title>
+<para
+><ulink url="http://discogs.com"
+>Discogs.com</ulink
+> je glasbena baza podatkov, ki jo ustvarijo uporabniki in vsebuje informacije o izvajalcih, založbah in njihovih posnetkih. Za brezplačen račun je potrebna registracija. </para>
+</sect3>
+
+<sect3 id="musicbrainz">
+<title
+>MusicBrainz.org</title>
+<para
+><ulink url="http://musicbrainz.org"
+>MusicBrainz.org</ulink
+> je zbirka glasbenih metapodatkov skupnosti, ki poskuša ustvariti obsežno spletno mesto z glasbenimi informacijami. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of wine sources -->
+<!--<sect2 id="wine-sources">
+<title
+>Wine Data Sources</title>
+
+</sect2
+>-->
+
+<!-- start of video game sources -->
+<sect2 id="videogame-sources">
+<title
+>Viri podatkov o video igrah</title>
+
+<sect3 id="giantbomb">
+<title
+>GiantBomb.com</title>
+<para
+><ulink url="http://giantbomb.com"
+>GiantBomb.com</ulink
+> je velika zbirka podatkov o video igrah, ki jo vodi skupnost. Za brezplačen račun je potrebna registracija. </para>
+</sect3>
+
+<sect3 id="tgdb">
+<title
+>TheGamesDB.net</title>
+<para
+><ulink url="http://thegamesdb.net"
+>TheGamesDB.net</ulink
+> je odprta spletna zbirka podatkov za ljubitelje video iger. </para>
+</sect3>
+
+<sect3 id="mobygames">
+<title
+>MobyGames</title>
+<para
+><ulink url="https://www.mobygames.com"
+>MobyGames.com</ulink
+> se sam opisuje kot najstarejša, največja in najbolj natančna zbirka podatkov o video igrah. </para>
+</sect3>
+
+<sect3 id="igdb">
+<title
+>IGDB.com</title>
+<para
+><ulink url="https://www.igdb.com"
+>IGDB.com</ulink
+> se imenuje spletno mesto za igre za vse, ki imajo radi igre. </para>
+</sect3>
+
+<sect3 id="videogamegeek">
+<title
+>VideoGameGeek</title>
+<para
+><ulink url="https://videogamegeek.com"
+>VideoGameGeek</ulink
+> je spletni vir in skupnost video iger. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of board game sources -->
+<sect2 id="boardgame-sources">
+<title
+>Viri podatkov o družabnih igrah</title>
+
+<sect3 id="boardgamegeek">
+<title
+>BoardGameGeek</title>
+<para
+><ulink url="https://boardgamegeek.com"
+>BoardGameGeek</ulink
+> je spletni vir in skupnost za družabne igre. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of coin sources -->
+<sect2 id="coin-sources">
+<title
+>Kovanec &amp; Viri podatkov o znamkah</title>
+
+<sect3 id="colnect">
+<title
+>Colnect</title>
+<para
+><ulink url="https://colnect.com"
+>Colnect</ulink
+> je spletna skupnost zbirateljskih predmetov, ki omogoča upravljanje osebnih zbirk. &tellico; lahko v Colnectu išče informacije o kovancih in znamkah, pa tudi stripe, športne kartice in video igre. </para>
+</sect3>
+
+<sect3 id="numista">
+<title
+>Numista</title>
+<para
+><ulink url="https://numista.com"
+>Numista</ulink
+> je svetovni katalog kovancev, ki raste zahvaljujoč prispevkom članov, ponuja spletno upravljanje zbirk, orodja za preprosto izmenjavo z drugimi zbiralci in forum. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="variety-type-sources">
+<title
+>Viri podatkov za več vrst zbirk</title>
+
+<sect3 id="amazon-web-services">
+<title
+>Amazon.com</title>
+
+<para
+>Uporaba spletnih storitev Amazon, &appname; lahko išče informacije na katerem koli od 14 različnih mednarodnih spletnih mest, ki jih upravlja <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>: Združene države, Združeno kraljestvo, Nemčija, Japonska, Francija, Kanada, Kitajska, Španija, Italija, Brazilija, Avstralija, Indija, Mehika in Turčija. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="amazon-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Konfiguriranje vsakega vira Amazon.com vključuje tri nastavitve: lokacijo strežnika, velikost slike in ID sodelavca. Nekatere informacije iz <ulink url="http://amazon.com"
+>Amazon.com</ulink
+> lahko vključujejo sliko, na primer naslovnico knjige ali videa. To sliko je mogoče prenesti v treh različnih velikostih, odvisno od predmeta. ID sodelavca je treba uporabiti za dostop do spletnih storitev Amazon.com in je vključen v povratne povezave do artikla, kot narekuje licenčna pogodba za uporabo spletnih storitev Amazon.com. </para>
+
+<para
+>Dostop do <ulink url="https://docs.aws.amazon.com/AWSECommerceService/latest/DG/Welcome.html"
+>API-ja za oglaševanje izdelkov Amazon</ulink
+> ima lahko omejitve, povezane s priporočili za prodajo ali oglaševanjem. Za dodatne informacije glejte dokumentacijo Amazona, ko se prijavljate za dostop API. </para>
+
+</sect3>
+
+<sect3 id="externalexec">
+<title
+>Zunanji skripti ali aplikacije</title>
+<para
+>Kot lažji način za &appname; za integracijo z vtičniki tretjih oseb se lahko zunanji skripti ali aplikacije uporabljajo kot vmesnik za iskanje drugih virov informacij. &appname; bo izvedel ukaz in posredoval iskalne izraze kot možnosti ukazne vrstice. </para>
+
+<para
+>Nekateri skripti se distribuirajo z &appname; sama. <ulink url="http://python.org"
+>Python</ulink
+> je potreben za iskanje <ulink url="http://darkhorse.com"
+>Dark Horse Comics</ulink
+>, založnika stripov, na primer </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="externalexec-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Nastaviti je treba vrsto zbirke, ki jo vrne skript, skupaj z obliko podatkov. Ne samo, da lahko &appname; uvozi podatke iz skriptov, ki uporabljajo <link linkend="file-format"
+>privzeto &appname; &XML; format</link
+>, vendar lahko uvozi tudi druge formate, kot je bibtex. </para>
+
+<para
+>Celotno pot do aplikacije je treba vnesti v možnostih vira. Potrdite polja zraven iskalnih ključev, ki jih podpira aplikacija, in v polje za urejanje vnesite zahtevane možnosti ukazne vrstice. Iskana vrednost bo vstavljena tam, kjer se prikaže <userinput
+>%1</userinput
+>. </para>
+
+<warning>
+<para
+>Nikoli ne namestite in ne zaženite skripta iz vira, ki mu ne zaupate. Izvajajo se z enakimi dovoljenji kot uporabnik in posledično lahko spremenijo ali izbrišejo datoteke ali kako drugače zmedejo vaš sistem. </para>
+</warning>
+
+<para
+>Za posodabljanje vnosov, ki so že v zbirki, se za določitev možnosti ukazne vrstice uporabita zadnje potrditveno polje in polje za urejanje. Vnosna polja, ki se uporabljajo za iskanje posodobitve, je treba vnesti v isti obliki, kot se uporablja za polja <link linkend="derived"
+>izpeljane vrednosti</link
+>. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="multiple-sources">
+<title
+>Več kombiniranih podatkovnih virov</title>
+<para
+>Kombinacije do osmih obstoječih podatkovnih virov se lahko uporabljajo kot en sam vir, kjer se vsak rezultat iskanja iz prvega vira posodobi iz naslednjih virov. Vrsto zbirke, ki bo uporabljena, je treba nastaviti pred dodajanjem virov. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="multiple-sources-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para
+>V kombinaciji je mogoče uporabiti samo obstoječe vire podatkov. V tem viru je mogoče uporabiti samo vrsto iskanja za prvi vir, saj rezultati prihajajo iz prvega vira podatkov. Na primer, najprej se lahko izvede iskanje UPCitemDb, pri čemer se vsak rezultat nato posodobi iz TheMovieDB. </para>
+</sect2>
+
+</sect1>
+
+</chapter>

@@ -1,0 +1,1087 @@
+<chapter id="fundamentals">
+<title
+>Uporaba &appname;</title>
+
+<sect1 id="quick-start">
+<title
+>Hiter začetek</title>
+
+<para
+>Privzeto je &appname; začne s prazno knjižno zbirko. Če želite delati z drugo vrsto zbirke, jo ustvarite z menijsko postavko <menuchoice
+><guimenu
+>Datoteka</guimenu
+><guimenuitem
+>Novo</guimenuitem
+></menuchoice
+> ali gumbom v orodni vrstici. Zbirke so poseljene z nekaterimi pogostejšimi polji, vendar jih lahko dodate, spremenite ali izbrišete, da ustrezajo vašim potrebam. </para>
+
+<para
+>Nove vnose je mogoče dodati z <link linkend="entry-editor"
+><interface
+>urejevalnikom vnosov</interface
+></link
+>. Element menija <menuchoice
+><guimenu
+>Zbirka</guimenu
+><guimenuitem
+>Nov vnos</guimenuitem
+></menuchoice
+> odpre <interface
+>Urejevalnik vnosov</interface
+> s praznim vnosom, pripravljenim za urejanje. <interface
+>Urejevalnik vnosov</interface
+> lahko odprete tudi z uporabo menijske postavke <menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Pokaži urejevalnik vnosov</guimenuitem
+></menuchoice
+>. Ko vnesete vrednosti za vnos, ga lahko shranite v zbirko z uporabo gumba <guibutton
+>Shrani vnos</guibutton
+> v pogovornem oknu <interface
+>Urejevalnik vnosov</interface
+>, ki ostane odprt, če želite nadaljevati z dodajanjem novih vnosov. Ko shranite vnos v zbirko, ga lahko spremenite s klikom nanj v glavnem oknu. Če <interface
+>Urejevalnik vnosov</interface
+> še ni odprt, lahko dvokliknete vnos, da odprete urejevalnik in začnete urejati. </para>
+
+<para
+>Če želite v vnos vključiti sliko, lahko uporabite standardni &kde; izbirnik datotek tako, da kliknete gumb <guibutton
+>Izberi sliko...</guibutton
+> v <link linkend="entry-editor"
+><interface
+>Urejevalniku vnosov</interface
+></link
+> ali pa povlečete sliko iz upravljalnika datotek ali spletnega brskalnika v <interface
+>Urejevalnik vnosov</interface
+>. </para>
+
+<para
+>Ko izberete vnos, <link linkend="entry-view"
+><interface
+>Pogled vnosa</interface
+></link
+> prikaže oblikovan pogled vsebine vnosa. Predlogo, uporabljeno za prikaz vnosa, lahko spremenite v <link linkend="configuration"
+><interface
+>konfiguracijskem pogovornem oknu</interface
+></link
+>. </para>
+
+<para
+>Vnosi v zbirki so združeni, če imajo enake vrednosti za določena polja, kot je avtor ali režiser. Polje, uporabljeno za združevanje, lahko spremenite z uporabo kombiniranega polja v orodni vrstici ali menijske postavke <menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Izbira skupine</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Za omejitev vidnih vnosov lahko uporabite <interface
+>Hitri filter</interface
+> v orodni vrstici. Filter je uporaben tudi, ko želite hitro najti vnos. Vnesete lahko naslov ali drugo edinstveno besedo, ki identificira vnos, in <link linkend="detailed-view"
+><interface
+>Pogled stolpcev</interface
+></link
+> bo prikazal samo vnose, ki ustrezajo filtru. Bolj zapleteno filtriranje lahko neposredno uporablja imena polj, na primer <emphasis
+>author=stephenson</emphasis
+>. Vrstica stanja vam pokaže, koliko vnosov je v zbirki in koliko jih je trenutno filtriranih. </para>
+
+</sect1>
+
+<sect1 id="main-window">
+<title
+>Splošna uporaba</title>
+
+<para
+>Glavno okno ima tri različna področja, ki prikazujejo informacije o zbirki na drugačen način. Primarni pogled je <link linkend="detailed-view"
+><interface
+>Pogled stolpcev</interface
+></link
+> v zgornjem desnem območju, kjer je lahko prikazana vrednost vsakega polja za vsak vnos. Na levi strani zavihki vsebujejo <link linkend="group-view"
+><interface
+>Pogled skupine</interface
+></link
+>, ki ga lahko uporabite za razvrščanje vnosov v skupine v drevesni strukturi, <link linkend="filter-view"
+><interface
+>Pogled filtra</interface
+></link
+>, ki se uporablja za sledenje, kateri vnosi izpolnjujejo določena merila, in <link linkend="loan-view"
+><interface
+>Loan Pogled</interface
+></link
+>, kjer so navedena morebitna posojila. Končno <link linkend="entry-view"
+><interface
+>Pogled vnosa</interface
+></link
+> prikazuje oblikovan pogled podatkov za posamezen vnos ali pogled ikon skupine vnosov v spodaj desno. </para>
+
+<screenshot>
+<screeninfo
+>Glavno okno &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="main-window.png"/></imageobject>
+<textobject
+><phrase
+>Glavno okno &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="detailed-view">
+<title
+><interface
+>Pogled stolpca</interface
+></title>
+
+<para
+>Katera koli polja v zbirkah so lahko prikazana v <interface
+>Pogledu stolpcev</interface
+>, čeprav <emphasis
+><link linkend="para"
+>Odstavek</link
+></emphasis
+>, <emphasis
+><link linkend="image"
+>Slika</link
+></emphasis
+> in <emphasis
+><link linkend="table"
+>Tabela</link
+></emphasis
+> verjetno ne bodo uporabni. Z desnim klikom na glavo pogleda se odpre meni za izbiro vidnih polj. Stolpcem je mogoče spreminjati velikost in vrstni red na kakršenkoli način, nastavitve pa bodo shranjene med sejami. </para>
+</sect2>
+
+<sect2 id="group-view">
+<title
+><interface
+>Skupinski pogled</interface
+></title>
+
+<para
+><interface
+>Pogled skupine</interface
+> združuje vnose v drevesnem pogledu glede na katero koli polje, ki <link linkend="field-options"
+>omogoča združevanje</link
+>. Število vnosov v posamezni skupini je prikazano poleg imena skupine. Skupine lahko razširite ali strnete s klikom na znak puščice ali z dvojnim klikom na predmet. Razširitev in krčenje vseh skupin sta možnosti na desni -kliknite kontekstni meni. Drevo je lahko razvrščeno po imenu skupine ali na njihovo število, s klikom na glavo. Skupino lahko uporabite tudi kot filter za <link linkend="detailed-view"
+><interface
+>Pogled stolpcev</interface
+></link
+>, z desnim klikom na element skupine. </para>
+
+<para id="people-group"
+>Kadar ima več kot eno polje v zbirki povezavo vklopljeno možnost <emphasis
+><link linkend="fields-dialog"
+><guilabel
+>Oblikuj kot ime</guilabel
+></link
+></emphasis
+>, je dodana dodatna skupina, ki združuje vsa ta polja v eno samo psevdoskupino <emphasis
+>Ljudje</emphasis
+>. </para>
+
+<para
+>Privzeto &appname; začne s prazno knjižno zbirko. Če želite delati z drugo vrsto zbirke, jo ustvarite z menijsko postavko <menuchoice
+><guimenu
+>Datoteka</guimenu
+><guimenuitem
+>Nova</guimenuitem
+></menuchoice
+> ali gumbom v orodni vrstici. Zbirke so poseljene z nekaterimi pogostejšimi polji, vendar jih lahko dodate, spremenite ali izbrišete, da ustrezajo vašim potrebam. </para>
+</sect2>
+
+<sect2 id="filter-view">
+<title
+><interface
+>Nove vnose je mogoče dodati z <link linkend="entry-editor"
+><interface
+>urejevalnikom vnosov</interface
+></link
+>. Element menija <menuchoice
+><guimenu
+>Zbirka</guimenu
+><guimenuitem
+>Nov vnos</guimenuitem
+></menuchoice
+> odpre <interface
+>Urejevalnik vnosov</interface
+> s praznim vnosom, pripravljenim za urejanje. <interface
+>Urejevalnik vnosov</interface
+> lahko odprete tudi z uporabo menijske postavke <menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Pokaži urejevalnik vnosov</guimenuitem
+></menuchoice
+>. Ko vnesete vrednosti za vnos, ga lahko shranite v zbirko z uporabo gumba <guibutton
+>Shrani vnos</guibutton
+> v pogovornem oknu <interface
+>Urejevalnik vnosov</interface
+>, ki ostane odprt, če želite nadaljevati z dodajanjem novih vnosov. Ko shranite vnos v zbirko, ga lahko spremenite s klikom nanj v glavnem oknu. Če <interface
+>Urejevalnik vnosov</interface
+> še ni odprt, lahko dvokliknete vnos, da odprete urejevalnik in začnete urejati.</interface
+></title>
+
+<para
+>Če so za zbirko shranjeni filtri, <interface
+>Pogled filtra</interface
+> postane aktiven. Ko dodate ali spremenite vnose, se bodo samodejno preverili glede na filtre in dodali ali odstrani kot je primerno. Filter lahko spremenite z dvojnim klikom na predmet odpri okno <link linkend="filter-dialog"
+><interface
+>Napredni filter</interface
+></link
+>. Z desnim klikom lahko izbrišete vse skupaj. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Pogled filtra</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-view.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Pogled filtra</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="loan-view">
+<title
+><interface
+>Pogled izposoje</interface
+></title>
+
+<para
+>Ko so vnosi za izposojo zabeleženi, se <interface
+>Pogled izposoje</interface
+>doda v okno, tako da je tem izposojenim vnosom mogoče slediti. Izposoje se sledijo na osnovi vnosa, tako da ima desni klik na element vnosa možnost za spreminjanje izposoje z uporabo <interface
+>pogovornega okna za izposojo</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Pogled izposoje</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-view.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Pogled izposoje</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="entry-view">
+<title
+><interface
+>Pogled vnosa</interface
+></title>
+
+<para
+>Oblikovana predstavitev vrednosti vnosa je prikazana v<interface
+>Vstopni pogled</interface
+>. Predloge se uporabljajo za postavitev in poljubnedodatne grafike. Za vsako vrsto zbirke so lahko ločene predlogedoločeno v <link linkend="template-options"
+><interface
+>konfiguracijiPogovorno okno</interface
+></link
+>, skupaj z barvami in pisavami po meri.</para>
+
+<para
+>Vse privzete predloge upoštevajo izbiro barve in pisave, vendar druge predloge po meri morda ne. Privzete predloge tudi &URL; aktivirajo polja, ki se bodo odprla s privzetimi &kde; povezavami datotek. Ko se izvozi v &HTML;, se trenutna predloga uporablja za izvoz posamezne vnosne datoteke. </para>
+
+</sect2>
+
+<sect2 id="status-bar">
+<title
+>Vrstica stanja</title>
+
+<para
+>Vrstica stanja se uporablja za prikaz, kaj &appname; trenutno počne. Vključuje tudi skupno število vnosov v zbirki in, če je uporabljen filter, koliko jih je trenutno vidnih. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="entry-editor">
+<title
+>Urejanje vnosov</title>
+
+<para
+><interface
+>Urejevalnik vnosov</interface
+> se uporablja za dodajanje in spreminjanje vnosov v zbirki. Dvoklik na vnos v <interface
+>Pogled skupine</interface
+> ali <interface
+>Pogled stolpcev</interface
+> odpre <interface
+>Urejevalnik vnosov</interface
+> s tem vnosom. Nove vnose lahko ustvarite z uporabo menija <menuchoice
+><guimenu
+>Zbirka</guimenu
+></menuchoice
+>, ikone v orodni vrstici ali gumba v samem <interface
+>Urejevalniku vnosov</interface
+>.</para>
+
+<para
+>Če zaprete <interface
+>Urejevalnik vnosov</interface
+>, ko so bile spremembe narejene, vendar niso shranjene, se prikaže opozorilno sporočilo. Polja so razvrščena po kategorijah in prikazana v vrstnem redu, kot so prikazana v <link linkend="fields-dialog"
+><interface
+>pogovornem oknu Polja zbirke</interface
+></link
+>. Lahko se jih tudi prerazporedi. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Urejevalnik vnosov</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor1.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Urejevalnik vnosov</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Če kliknete naslov polja za polje <link linkend="url"
+><emphasis
+>&URL;</emphasis
+></link
+>, se odpre povezava s privzetim &kde; povezava datotek. <guiicon
+>&URL; izbirni gumb</guiicon
+> poleg vnosa besedila bo odprl privzeti &kde; Pogovorno okno za odpiranje datoteke, vendar polje ni omejeno na lokalne datoteke. </para>
+
+<para
+>Za polja <link linkend="image"
+><emphasis
+>Slika</emphasis
+></link
+> gumb <guibutton
+>Izberi sliko ...</guibutton
+> odpre &kde; pogovorno okno za izbiro slikovne datoteke. Slika je shranjena v zbirki v izvirni obliki, pomanjšana različica pa je prikazana v <interface
+>Urejevalnik vnosov</interface
+>. Sliko lahko počistite z gumbom <guibutton
+>Počisti</guibutton
+>. Počiščene slike so odstranjene iz zbirke. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Urejevalnik vnosov</interface
+> za polja <emphasis
+>Slika</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor3.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Urejevalnik vnosov</interface
+> za polja <emphasis
+>Slika</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Pripomoček za urejanje podpira tudi povleci in spusti. Če povlečete slikovno datoteko iz upravitelja datotek ali okna brskalnika, naredite isto kot če izberete sliko v izbirniku datotek. Vlečenje slike iz gradnika za urejanje v &konqueror; okno upravitelja datotek bo sliko shranilo v to mapo. </para>
+
+<warning>
+<para
+>Slike so privzeto shranjene v podatkovni datoteki zbirke, tako da je vse na enem mestu. Vendar pa bo zaradi preveč slik &appname; da se znatno upočasni, povzroči tudi zelo veliko podatkovno datoteko. Druga možnost je, da &appname; lahko slike shranite ločeno, bodisi v mapo <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/data/</filename
+> ali v mapo na istem mestu kot podatkovno datoteko. Nalaganje in shranjevanje podatkovnih datotek je veliko hitrejše, če so slike shranjene ločeno, vendar podatkovne datoteke niso več prenosljive ali arhivirane. Samostojne podatkovne datoteke lahko vedno ustvarite z uporabo menijske postavke <menuchoice
+><guimenu
+>Datoteka</guimenu
+><guimenu
+>Izvoz</guimenu
+><guimenuitem
+>Izvoz v Zip ...</guimenuitem
+></menuchoice
+> . </para>
+</warning>
+
+<para
+>Polja <link linkend="table"
+><emphasis
+>Tabela</emphasis
+></link
+> se začnejo s petimi vrsticami, vendar se s premikanjem kazalca v zadnjo vrstico samodejno doda še ena. Pri tabelah z več stolpci se za združevanje ali oblikovanje uporablja samo prvi stolpec. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Urejevalnik vnosov</interface
+> za polja <emphasis
+>tabele</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor4.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Urejevalnik vnosov</interface
+> za polja <emphasis
+>tabele</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="edit-multiple">
+<title
+>Urejanje več vnosov</title>
+<para
+>Več vnosov je mogoče urejati hkrati, tako da izberete več kot enega v <interface
+>pogledu skupine</interface
+> ali <interface
+>pogledu stolpcev</interface
+>. Če je izbranih več vnosov, so omogočena polja, ki vsebujejo isto vrednost v vsakem vnosu. Če imajo vnosi različne vrednosti, so polja onemogočena. Potrditvena polja so dodana skrajno desno za vsak vnos v polje, ki nadzorujejo, ali je polje omogočeno ali ne, kot je prikazano na spodnjem posnetku zaslona. </para>
+
+<para
+>Ko bodo vnosi shranjeni, bodo spremenjena samo omogočena polja, kar poenostavi obsežno urejanje. Če želite na primer nastaviti medij vseh video vnosov v zbirki, se prepričajte, da je omogočeno polje medij. Spremenite ga v <acronym
+>DVD</acronym
+>, nato shranite vnose. Spremenjeno bo samo polje Srednje, pri čemer bodo ohranjene vse druge vrednosti polj za vnose. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>Urejevalnik vnosov</interface
+> za več vnosov</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor5.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>Urejevalnik vnosov</interface
+> za več vnosov</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="updating-entries">
+<title
+>Posodabljanje vnosnih podatkov</title>
+
+<para
+>Vnose je mogoče samodejno posodobiti s poizvedovanjem podatkovnih virov, ki so na voljo za trenutno vrsto zbirke, kar je zelo uporabno za združevanje informacij iz več virov. Na primer, lahko dodate film v svojo zbirko s pomočjo <link linkend="amazon-web-services"
+>spletnih storitev Amazon.com</link
+> in nato posodobite vnos z dodatnimi informacijami iz <link linkend=" imdb"
+>Internet Movie Database</link
+>. </para>
+
+<para
+>Posodobljena so samo prazna polja, razen če <link linkend="data-sources-options"
+>nastavitev za ta vir</link
+> omogoča, da rezultati prepišejo obstoječe informacije. Za <link linkend="externalexec"
+>zunanje skripte</link
+> mora biti polje za posodobitev podano v možnostih vira. </para>
+
+<para
+>Posodabljanje vnosa lahko začnete prek menija z desnim klikom za vnos ali z uporabo menijske postavke <menuchoice
+><guimenu
+>Zbirka</guimenu
+><guimenuitem
+>Posodobi vnos</guimenuitem
+></menuchoice
+>. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="fields-dialog">
+<title
+>Urejanje polj</title>
+
+<para
+><interface
+>Pogovorno okno Polja zbirke</interface
+> vam omogoča dodajanje novih polj v zbirko, spreminjanje obstoječih ali popolno brisanje polj. </para>
+
+<screenshot>
+<screeninfo
+>&appname; <interface
+>Pogovorno okno polj zbirke</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
+<textobject
+><phrase
+>&appname; <interface
+>Pogovorno okno polj zbirke</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="field-list">
+<title
+>Seznam polj</title>
+
+<para
+>Na levi strani pogovornega okna je seznam trenutnih polj. Spremenjena polja so prikazana v krepkem poševnem tisku. Gumbi pod seznamom bodo dodali ali izbrisali polje, s puščicami pa lahko spremenite njihov vrstni red. Vrstni red polj na seznamu je pomemben, ker <interface
+>Urejevalnik vnosov</interface
+> uporablja vrstni red za svojo postavitev. Za vsako kategorijo bodo polja razporejena od leve proti desni, glede na vrstni red polj na seznamu od zgoraj navzdol. </para>
+</sect2>
+
+<sect2 id="field-properties">
+<title
+>Lastnosti polja</title>
+
+<para
+>Polje je definirano z naslovom, tipom, kategorijo, opisom in morebitno privzeto vrednostjo ali nekaterimi dovoljenimi vrednostmi. Naslov se povsod uporablja za sklicevanje na polje v uporabniškem vmesniku. <interface
+>Urejevalnik vnosov</interface
+> ga uporablja za pozive k vrednostim. <interface
+>Pogled stolpca</interface
+> ga uporablja kot glavo stolpca. Različne vrste polj so <link linkend="field-types"
+>razložene v razdelku Vrste polj</link
+>. Opis se uporablja kot namig v <interface
+>Urejevalnik vnosov</interface
+>, morda za razlago vsebine polja. Poleg tega se za <link linkend="derived"
+>polja z <emphasis
+>izpeljanimi</emphasis
+> vrednostmi</link
+> uporabi predloga vrednosti za oblikovanje vrednosti polja. Privzeta vrednost se samodejno doda pri ustvarjanju novega vnosa. Seznam dovoljenih vrednosti za polja <link linkend="choice"
+><emphasis
+>Choice</emphasis
+></link
+> mora biti ločen s podpičjem. </para>
+
+<para
+>Nova polja so lahko katere koli vrste, vendar je spreminjanje vrste obstoječih polj omejeno na združljive vrste, kot je prikazano v spodnji tabeli: </para>
+
+<table>
+<title
+>Dovoljene spremembe vrste polja</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Trenutna vrsta</entry>
+<entry
+>Nova vrsta je dovoljena</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Enostavno besedilo</emphasis
+></entry>
+<entry
+><emphasis
+>Enostavno besedilo</emphasis
+>, <emphasis
+>Odstavek</emphasis
+>, <emphasis
+>Številka</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabela</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Odstavek</emphasis
+></entry>
+<entry
+><emphasis
+>Enostavno besedilo</emphasis
+>, <emphasis
+>Odstavek</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Izbira</emphasis
+></entry>
+<entry
+><emphasis
+>Enostavno besedilo</emphasis
+>, <emphasis
+>Odstavek</emphasis
+>, <emphasis
+>Izbira</emphasis
+>, <emphasis
+>Število</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabela</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Potrditveno polje</emphasis
+></entry>
+<entry
+><emphasis
+>Enostavno besedilo</emphasis
+>, <emphasis
+>Odstavek</emphasis
+>, <emphasis
+>Potrditveno polje</emphasis
+>, <emphasis
+>Število</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+> Tabela</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Število</emphasis
+></entry>
+<entry
+><emphasis
+>Enostavno besedilo</emphasis
+>, <emphasis
+>Odstavek</emphasis
+>, <emphasis
+>Številka</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabela</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>&URL;</emphasis
+></entry>
+<entry
+><emphasis
+>Enostavno besedilo</emphasis
+>, <emphasis
+>Odstavek</emphasis
+>, <emphasis
+>Številka</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabela</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Datum</emphasis
+></entry>
+<entry
+><emphasis
+>Enostavno besedilo</emphasis
+>, <emphasis
+>Datum</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Tabela</emphasis
+></entry>
+<entry
+><emphasis
+>Enostavno besedilo</emphasis
+>, <emphasis
+>Odstavek</emphasis
+>, <emphasis
+>Tabela</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Slika</emphasis
+></entry>
+<entry
+><emphasis
+>Slika</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Ocena</emphasis
+></entry>
+<entry
+><emphasis
+>Izbira</emphasis
+>, <emphasis
+>Ocena</emphasis
+></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+
+<sect2 id="field-formatting">
+<title
+>Oblikovanje polj</title>
+
+<para
+>&appname; ponuja nekaj možnosti za samodejno oblikovanje vrednosti polj. Najenostavnejša je samodejna uporaba velikih začetnic, pri kateri se z veliko začetnico piše vsaka beseda razen členov. Oblikovanje naslova premakne določene članke z začetka na konec polja, na primer spremembo »Kraljeva vrnitev« v »Kraljeva vrnitev«. Naslovi člankov so nastavljivi. Končno oblikovanje imena poskuša razbiti niz, tako da je zadnje ali družinsko ime osebe prikazano najprej. Predpone in pripone imen je mogoče konfigurirati. Poleg tega posebna skupina <emphasis
+><link linkend="people-group"
+>Ljudje</link
+></emphasis
+> uporablja vsa polja z oblikovanjem imena, tudi če je globalna nastavitev izklopljena. </para>
+
+<para
+>Vse samodejno oblikovanje lahko onemogočite tako, da spremenite globalne možnosti v <link linkend="general-options"
+><interface
+>konfiguracijskem pogovornem oknu</interface
+></link
+>. Na splošno je uporaba velikih začetnic ločena možnost od oblikovanja, zato je naslov mogoče samodejno oblikovati, ne da bi bil napisan z velikimi črkami. Vse vrste polj ne omogočajo samodejnega oblikovanja. </para>
+
+<table>
+<title
+>Primeri oblikovanja</title>
+<tgroup cols="5">
+<thead>
+<row>
+<entry
+>Vrsta zapisa</entry>
+<entry
+>Vrednost polja</entry>
+<entry
+>Samodejno z veliko začetnico</entry>
+<entry
+>Samodejno oblikovano</entry>
+<entry
+>Samodejno z velikimi začetnicami &amp; Samodejno oblikovano</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Naslov</emphasis
+></entry>
+<entry
+>vrnitev kralja</entry>
+<entry
+>Kraljeva vrnitev</entry>
+<entry
+>vrnitev kralja</entry>
+<entry
+>Kraljeva vrnitev,</entry>
+</row>
+<row>
+<entry
+><emphasis
+>Ime</emphasis
+></entry>
+<entry
+>tom swift, jr.</entry>
+<entry
+>Tom Swift, ml.</entry>
+<entry
+>swift, jr., tom</entry>
+<entry
+>Swift, Jr., Tom</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+<sect2 id="field-options">
+<title
+>Možnosti polja</title>
+
+<para
+>Polja imajo tudi tri splošne možnosti. Če je omogočeno samodejno dokončanje, &appname; predpomni vrednosti za vsako polje, <interface
+>Urejevalnik vnosov</interface
+> pa ponuja samodejno izpolnjevanje z uporabo standardnega &kde; nastavitve. Vse vrste polj ne omogočajo samodokončanja. &appname; prav tako mora vedeti, ali ima lahko polje več vrednosti ali se lahko uporablja za združevanje vnosov. Podpičje se uporablja za ločevanje več vrednosti pri urejanju vnosa. </para>
+
+<para
+>Zaradi učinkovitosti ne omogočite samodokončanja, razen če ga potrebujete za polja. Več kot je polj s samodopolnjevanjem v zbirki, počasneje &appname; da naložite datoteko. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="filter-dialog">
+<title
+>Filtriranje vnosov</title>
+<para
+><interface
+>Pogovorno okno naprednega filtra</interface
+> vam omogoča, da omejite vnose, vidne v <link linkend="detailed-view"
+><interface
+>pogledu stolpcev</interface
+></link
+> na tiste, ki se ujemajo z enim ali več pravila filtra. Filter lahko uporabite za iskanje vnosov, ki izpolnjujejo vsa pravila v pogovornem oknu, ali samo za iskanje tistih, ki izpolnjujejo katero koli od njih. <interface
+>Pogovorno okno naprednega filtra</interface
+> je prav tako uporabno za napredno iskanje znotraj zbirke. </para>
+
+<screenshot>
+<screeninfo
+>&appname; <interface
+>Pogovorno okno naprednega filtra</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
+<textobject
+><phrase
+>&appname; <interface
+>Pogovorno okno naprednega filtra</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Vsaka vrstica vsebuje eno pravilo filtra. Izberite polje za ujemanje v prvem polju v vrstici, nato izberite pravilo za ujemanje na sredini. Pravila se lahko ujemajo z vrednostmi, ki vsebujejo določeno besedo, ali so popolnoma enake. Za ujemanje vnosov se lahko uporabi tudi regularni izraz, v tem primeru postane gumb <guibutton
+>Uredi ...</guibutton
+> aktiven za urejanje izraza, če &kregexpeditor; je nameščen na vašem računalniku. Nazadnje je treba v besedilno polje vnesti besedo ali niz, ki se ujema. Pri slikovnih poljih se lahko velikost slike uporabi za filtriranje, kjer se vrednost filtra primerja z večjo dimenzijo slike, bodisi širino ali višino. </para>
+
+<para
+>V filtru lahko uporabite do osem (8) pravil. Gumba <guibutton
+>Več</guibutton
+> in <guibutton
+>Manj</guibutton
+> lahko uporabite za dodajanje ali odstranjevanje pravil. </para>
+
+<para
+>Filtre je mogoče shraniti, tako da so vsi vnosi, ki se ujemajo, združeni v <interface
+>Pogled filtra</interface
+>. Pogled je dinamičen, tako da se skupina samodejno posodablja, ko so vnosi dodani ali spremenjeni. Če želite shraniti filter, vnesite ime v besedilno polje in kliknite gumb <guibutton
+>Shrani filter</guibutton
+>. </para>
+
+<para
+>Prej shranjene filtre lahko spremenite tako, da z desnim klikom na element filtra v <interface
+>Pogled filtra</interface
+> izberete <guilabel
+>Spremeni filter</guilabel
+>. Odpre se <interface
+>Pogovorno okno naprednega filtra</interface
+> in lahko spremenite ime ali pravila filtra. </para>
+
+<informalexample>
+<para
+>Če želite poiskati znanstvenofantastične knjige, ki jih niste prebrali, označite gumb <guilabel
+>Ujemaj vse naslednje</guilabel
+>, nastavite prvo pravilo na <emphasis
+>Žanr vsebuje znanstveno fantastiko</emphasis
+> in drugo na <emphasis 
+>Prebrano ne vsebuje resnice</emphasis
+>. (Za polja <link linkend="bool"
+>Potrditveno polje</link
+> je notranja vrednost <emphasis
+>true</emphasis
+>). </para>
+
+<para
+>Če želite poiskati knjige Bujolda ali Webra, označite gumb <guilabel
+>Ujemaj se s katerim koli od naslednjih</guilabel
+>, nastavite prvo pravilo na <emphasis
+>Avtor vsebuje Bujolda</emphasis
+> in drugo na <emphasis
+>Avtor vsebuje Weber </emphasis
+>. </para>
+</informalexample>
+
+</sect1>
+
+<sect1 id="report-dialog">
+<title
+>Ustvarjanje poročil</title>
+<para
+>&appname; lahko ustvari različna poročila o vaši trenutni zbirki. <interface
+>Pogovorno okno za poročilo</interface
+> preveri vse &xslt; predloge v namestitveni poti in v <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>. Tako lahko ustvarite nove, ki se samodejno najdejo in vključijo kot možnosti v <interface
+>Pogovorno okno za poročilo</interface
+>. Ustvarjanje nekaterih kompleksnih poročil za velike zbirke lahko traja nekaj časa. </para>
+
+<para
+>Predloge, ki so nameščene z &appname; vključujejo samo seznam naslovov, privzeti pogled stolpcev, pogled skupine, povzetek vseh skupin in najbolj priljubljenih vrednosti v teh skupinah, poročilo o izposoji in veliko poročilo s slikami naslovnice. Izberite želeno predlogo in kliknite gumb <guibutton
+>Ustvari</guibutton
+>. Vsako poročilo je mogoče tudi natisniti ali shraniti v &HTML; mapa. </para>
+
+<screenshot>
+<screeninfo
+>&appname; <interface
+>Pogovorno okno poročila</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="report-dialog.png"/></imageobject>
+<textobject
+><phrase
+>&appname; <interface
+>Pogovorno okno poročila</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Vnosi, vključeni v poročilo, bodo omejeni na tiste v <interface
+>pogledu stolpcev</interface
+>, tako da če imate aktiven filter, ga bo <interface
+>pogovorno okno za poročilo</interface
+> uporabilo. </para>
+</sect1>
+
+<sect1 id="loan-dialog">
+<title
+>Sledenje izposoji</title>
+<para
+>&appname; podpira sledenje izposoj vseh vnosov v zbirki. <interface
+>Pogovorno okno za izposojo</interface
+> lahko odprete z uporabo menijske postavke <guilabel
+>Odjava</guilabel
+> ali z desnim klikom na vnos. Več vnosov je mogoče odjaviti hkrati. </para>
+
+<para
+>Ime izposojevalca je mogoče neposredno vnesti ali povzeti iz privzetega &kde; adresarja s klikom na gumb poleg vnosa imena. Predvideva se, da je datum odjave trenutni datum, vendar se lahko spremeni. Datum zapadlosti ni obvezen, o izposoji pa se lahko dodajo še druge opombe. </para>
+
+<para
+>Če je vnesen datum zapadlosti, in &appname; je preveden s podporo za libkcal, lahko privzeti &kde; koledar kot opravilo. &korganizer; lahko uporabite za ogled teh elementov. </para>
+
+<para
+>Ko je vnos odjavljen, je polje <emphasis
+>Izposojeno</emphasis
+> nastavljeno na <emphasis
+>true</emphasis
+>. Če v zbirki ni polja izposoje, se eno doda. Ne spreminjajte tega polja neposredno! Izposojene vnose je mogoče prijaviti z uporabo menijske postavke ali z desnim klikom na vnos v <interface
+>Pogled izposoje</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>&appname; <interface
+>Pogovorno okno za izposojo</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-dialog.png"/></imageobject>
+<textobject
+><phrase
+>&appname; <interface
+>Pogovorno okno za izposojo</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="tips">
+<title
+>Splošni nasveti</title>
+
+<tip>
+<para
+>Če ima knjiga več kot enega avtorja, morate njihova imena ločiti s podpičjem, da jih bo Tellico znal razdeliti in uporabiti ločeno. Vsa druga polja, ki dovoljujejo več vrednosti, je treba vnesti na enak način. s podpičjem (;), ki ločuje vsako vrednost. </para>
+</tip>
+
+<tip>
+<para
+>Polja, ki so prikazana v pogledu seznama, lahko spremenite tako, da z desno miškino tipko kliknete glavo stolpca. </para>
+</tip>
+
+<tip>
+<para
+>Polja v zbirki lahko dodajate, urejate ali spreminjate s pomočjo <interface
+>Pogovorno okno Polja zbirke</interface
+>. S puščičnimi gumbi pod seznamom polj lahko spremenite položaj polja na seznamu, kar vpliva na postavitev v urejevalnik vnosov. </para>
+</tip>
+
+<tip>
+<para
+>Urejate lahko več kot en vnos hkrati, tako da držite &Shift; ali &Ctrl; tipko in izbiro več vnosov. </para>
+</tip>
+
+<tip>
+<para
+>Obstoječo knjižno zbirko lahko pretvorite v bibliografijo, ki jo lahko nato izvozite v format bibtex ali Bibtexml. </para>
+</tip>
+
+<tip>
+<para
+>Če je kot ime oblikovano več kot eno polje, se zbirki doda dodatna skupina z imenom »Ljudje«, ki omogoča na primer razvrščanje ali tiskanje avtorjev in urednikov skupaj. </para>
+</tip>
+
+<tip>
+<para
+>Videz natisnjenega izpisa lahko spremenite tako, da spremenite datoteko <filename
+>tellico-printing.xsl</filename
+>. Datoteka ustvari &HTML; in &CSS; v slogovni tabeli ureja stvari, kot so pisava, robovi itd. </para>
+</tip>
+
+<tip>
+<para
+>Dvoklik na postavko vnosa odpre <interface
+>Urejevalnik vnosov</interface
+>. </para>
+</tip>
+
+<tip>
+<para
+>Dodate lahko &HTML; oznake za katero koli polje <link linkend="para"
+><emphasis
+>Odstavek</emphasis
+></link
+> za oblikovanje, kot je &lt;b&gt;<emphasis role="bold"
+>krepko</emphasis
+>&lt;/b&gt; ali &lt;i&gt;<emphasis
+>ležeče</emphasis
+>&lt;/i&gt;. </para>
+</tip>
+
+<tip>
+<para
+>V <interface
+>Pogled stolpcev</interface
+> lahko pritisnete črko na tipkovnici, da preskočite na naslednji vnos, ki se začne s to črko. </para>
+</tip>
+
+<tip>
+<para
+>Izpeljane vrednosti lahko uporabite za združevanje vrednosti iz več polj v eno samo vrednost. Preprosto potrdite polje za izpeljano vrednost in uporabite predlogo vrednosti, podobno »<userinput
+>Vrednost: %{fielda}%{fieldb}</userinput
+>«, kjer se %{...} nadomesti z ustrezno vrednostjo polja. To je uporabno za zbiranje več vrednosti v enem polju, npr. za boljše združevanje in združevanje polj različnih tipov ob upoštevanju pravilnega razvrščanja hkrati. Vzemimo na primer številsko polje, ki mu sledi besedilno podpolje z vnosi 3b, 14a. </para>
+</tip>
+
+</sect1>
+
+</chapter>

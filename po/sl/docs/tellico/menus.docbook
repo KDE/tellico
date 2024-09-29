@@ -1,0 +1,1007 @@
+<chapter id="menus">
+<title
+>Referenca ukazov</title>
+
+<!--
+(OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
+application windows and their menubar and toolbar commands for easy reference.
+Also include any keys that have a special function but have no equivalent in the
+menus or toolbars. This may not be necessary for small apps or apps with no tool
+or menu bars.
+-->
+
+<sect1 id="main-window-menus">
+<title
+>Glavno okno &tellico;</title>
+
+<para
+>Vsak element menija je obravnavan spodaj. Če obstaja bližnjica na tipkovnici, ki izvaja funkcijo elementa menija, je privzeta bližnjica navedena ob elementu menija. </para>
+
+<sect2>
+<title
+>Meni Datoteka</title>
+
+<para>
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Nova</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>ustvari novo zbirko</action
+>. &tellico; podpira <link linkend="collection-types"
+>12 privzetih vrst zbirk</link
+> skupaj s prazno zbirko po meri, ki jo določi uporabnik. Na voljo bodo tudi vse po meri shranjene predloge zbirk.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Odpri...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>odpre &tellico; datoteko</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Odpri nedavno</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>odpre datoteko</action
+> iz podmenija, ki vsebuje seznam nedavno odprtih datotek.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Shrani...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>shrani zbirko</action
+>. Če je datoteka <emphasis
+>Brez naslova</emphasis
+>, je <guimenuitem
+>Shrani...</guimenuitem
+> enakovredno <guimenuitem
+>Shrani kot</guimenuitem
+>. Omogočen je le, ko je zbirka spremenjena.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Shrani kot...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>shrani zbirko v novo datoteko</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Shrani kot predlogo...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+  <para
+>Ta ukaz <action
+>shrani zbirko kot novo predlogo</action
+>. Shranijo se samo polja, vrsto zbirke po meri pa lahko ustvarite z ukazom <guimenuitem
+>Nova zbirka</guimenuitem
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Natisni...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>natisne zbirko</action
+>. Možnosti tiskanja lahko nastavite v <interface
+>konfiguracijskem pogovornem oknu</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Predogled tiskanja</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>prikaže predogled natisnjene zbirke</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Uvoz</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>uvozi podatke iz druge datoteke</action
+>. &tellico; lahko uvozi podatke iz številnih <link linkend="importing"
+>drugih formatov</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Izvoz</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>izvozi zbirko v drugo obliko</action
+>. &tellico; lahko izvozi podatke v številne <link linkend="exporting"
+>druge formate</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Zapri</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>zapre &tellico; okno</action
+>. Če ima zbirka neshranjene spremembe, boste pred nadaljevanjem pozvani, da jih shranite.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Meni Urejanje</title>
+
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Razveljavi</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>razveljavi prejšnje dejanje</action
+>. Razveljavitev ne podpira vseh dejanj.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Ponovi</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>razveljavi prejšnje razveljavitev</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Izreži</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>odstrani izbrano besedilo</action
+>, če obstaja, in <action
+>postavi kopijo odstranjenega besedila v odložišče</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Kopiraj</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>kopira izbrano besedilo</action
+>, če obstaja, v odložišče.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Prilepi</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>prilepi besedilo v odložišče</action
+>, če obstaja, v urejevalnik na mestu kazalca.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Izberi vse</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>izbere vse vnose</action
+> v zbirki v <interface
+>Pogledu stolpcev</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Prekliči izbiro</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>prekliče izbiro vseh vnosov</action
+> v zbirki.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Internet Iskanje...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>odpre <interface
+>Pogovorno okno internetnega iskanja</interface
+></action
+> za iskanje in uvoz vnosov z različnih spletnih mest, vključno z <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>J</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Napredni filter...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>odpre <interface
+>Pogovorno okno naprednega filtra</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>Meni zbirke</title>
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Zbirka</guimenu
+> <guimenuitem
+>Nov vnos</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>odpre <interface
+>Urejevalnik vnosov</interface
+> za urejanje novega vnosa</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Zbirka</guimenu
+> <guimenuitem
+>Uredi vnos</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>odpre <interface
+>Urejevalnik vnosov</interface
+> za urejanje izbranih vnosov</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Zbirka</guimenu
+> <guimenuitem
+>Podvojeni vnos</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>kopira ali podvoji izbrane vnose</action
+> kot nove vnose v zbirki.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Zbirka</guimenu
+> <guimenuitem
+>Izbriši vnos</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>izbriše izbrane vnose</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Zbirka</guimenu
+> <guimenuitem
+>Združi vnose</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>združi izbrane vnose</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Zbirka</guimenu
+> <guimenuitem
+>Posodobi vnos</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta meni vsebuje seznam vseh razpoložljivih virov podatkov in ga je mogoče uporabiti za samodejno poizvedovanje po viru in <action
+>posodabljanje izbranih vnosov</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Zbirka</guimenu
+> <guimenuitem
+>Zabeleži oddajo v izposojo</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>odpre pogovorno okno za izposojo izbranih vnosov.</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Zbirka</guimenu
+> <guimenuitem
+>Prijavi vračilo iz izposoje</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>prijavi vračilo katerega koli od izbranih vnosov, ki so trenutno izposojeni</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Zbirka</guimenu
+> <guimenuitem
+>Preimenuj zbirko</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>odpre pogovorno okno za preimenovanje zbirke</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Zbirka</guimenu
+> <guimenuitem
+>Zbirna polja ...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>odpre <interface
+>Pogovorno okno polj zbirke</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Zbirka</guimenu
+> <guimenuitem
+>Ustvari poročila...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>odpre <interface
+>Pogovorno okno za poročila</interface
+></action
+> za ustvarjanje poročil o zbirki.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Zbirka</guimenu
+> <guisubmenu
+>Bibliografija</guisubmenu
+> <guimenuitem
+>Pretvori v bibliografijo</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>pretvori knjižno zbirko v bibliografijo</action
+> z dodajanjem določenih polj, potrebnih za izvoz v Bibtex, in je omogočen le, ko je knjižna zbirka odprta.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Zbirka</guimenu
+> <guisubmenu
+>Bibliografija</guisubmenu
+> <guimenuitem
+>Nizi makrov...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>odpre pogovorno okno za urejanje makrov niza Bibtex</action
+> v zbirki. Omogočen je samo pri urejanju bibliografije.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Zbirka</guimenu
+> <guisubmenu
+>Bibliografija</guisubmenu
+> <guimenuitem
+>Preveri podvojene ključe</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>preverja podvojene ključe Bibtex</action
+> in lahko filtrira zbirko, da prikaže vnose s podvojenimi ključi.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Zbirka</guimenu
+> <guisubmenu
+>Bibliografija</guisubmenu
+> <guimenuitem
+>Kopiraj Bibtex v odložišče</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>kopira citat Bibtex</action
+> v odložišče, da ga lahko prilepite v dokument LaTeX.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Zbirka</guimenu
+> <guisubmenu
+>Bibliografija</guisubmenu
+> <guimenuitem
+>Citiraj vnos v Lyx</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>pošlje citat za izbrane vnose</action
+> v tako imenovani <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+> za uporabo v <application 
+>LyX</application
+>, <application
+>Kile</application
+> ali drugi aplikaciji za LaTeX. Omogočen je samo pri urejanju bibliografije.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2 id="settings-help-menu">
+<title
+>Meni Nastavitve in pomoč</title>
+
+<para
+>Poleg običajnega &kde; Meniji Nastavitve in Pomoč, opisani v poglavju <ulink url="help:/fundamentals/menus.html"
+>Meni</ulink
+> v &kde; Dokumentacija o osnovah &tellico; ima te menijske vnose za posamezne aplikacije: </para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Nastavitve</guimenu
+> <guimenuitem
+>Pokaži pogled skupine</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>preklopi prikaz <interface
+>Pogleda skupine</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Nastavitve</guimenu
+> <guimenuitem
+>Pokaži urejevalnik vnosov</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>preklopi prikaz <interface
+>urejevalnika vnosov</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Nastavitve</guimenu
+> <guimenuitem
+>Izbira skupine</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>spremeni polje, ki se uporablja za združevanje vnosov</action
+> v zbirki.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Nastavitve</guimenu
+> <guimenuitem
+>Zakleni postavitev</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>zaklene postavitev</action
+> tako, da različnih pogledov zbirke ni mogoče premikati. Odklepanje postavitve omogoča uporabniku, da jih prerazporedi.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Nastavitve</guimenu
+> <guimenuitem
+>Ponastavi postavitev</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Ta ukaz <action
+>ponastavi postavitev</action
+> na privzeti pogled, kar je lahko koristno, če se različni pogledi skrijejo ali strnejo.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+  <term>
+    <menuchoice
+><guimenu
+>Pomoč</guimenu
+> <guimenuitem
+>Prikaži dnevnik</guimenuitem
+> </menuchoice>
+  </term>
+
+  <listitem>
+    <para
+>Ko je uporabljena možnost <userinput
+>tellico --log</userinput
+>, ta ukaz prikaže diagnostični dnevnik.</para>
+  </listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>
