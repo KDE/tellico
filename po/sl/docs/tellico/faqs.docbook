@@ -1,0 +1,123 @@
+<chapter id="faqs">
+<title
+>Vprašanja in odgovori</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+
+<qandaentry>
+<question>
+<para
+>Kako vnesem več avtorjev?</para>
+</question>
+<answer>
+
+<para
+>Imena avtorjev morajo biti ločena s podpičjem kot npr.: <userinput
+>Brian W. Kernighan; Dennis M. Ritchie</userinput
+>. Ne vključujte besede "in" ali česa podobnega, tudi če imate 20 avtorjev. Če imate odkljukano možnost samodejnega oblikovanja, bo priimek samodejno prikazan prvi za vsakega avtorja.</para>
+
+<para
+>Druge lastnosti, ki omogočajo več vrednosti, kot sta "zvrst" in "ključne besede", se vnesejo na enak način, s podpičjem (;), ki ločuje vsako vrednost.</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Kako združim po lastnostih, ki niso navedene v orodni vrstici?</para>
+</question>
+<answer>
+<para
+>Če želite omogočiti združevanje po polju, ki privzeto ne dovoljuje združevanja, označite polje »Dovoli združevanje« za to določeno polje v pogovornem oknu »Polja zbirke«. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Kako spremenim, kateri stolpci so prikazani?</para
+></question>
+<answer>
+<para
+>Desni klik na naslovno vrstico. Lahko tudi povlečete glave, da spremenite vrstni red stolpcev, in jih kliknete, da razvrstite po tem polju.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>Kako izvozim dodatna polja bibtex?</para
+></question>
+<answer>
+<para
+>&appname; uporablja lastnost <emphasis
+>bibtex</emphasis
+>, da ve, kako izvoziti polja bibtex. Če želite dodati dodatna polja za izvoz, kot je povzetek, odprite <interface
+>Pogovorno okno Polja zbirke</interface
+> in kliknite gumb <guibutton
+>Nastavi lastnosti</guibutton
+>. Dodajte lastnost <emphasis
+>bibtex</emphasis
+> z vrednostjo <emphasis
+>abstract</emphasis
+>. Potem, ko izvozite v bibtex ali bibtexml, bo ta lastnost uporabljena za ime polja bibtex.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Kakšno zvezo ima ime Tellico s čimerkoli?</para>
+</question>
+
+<answer>
+<para
+>Pomislil sem na <ulink url="https://periapsis.org/renaming-bookcase/"
+>več drugih imen</ulink
+>, od katerih jih je bilo nekaj povezanih s knjižnimi zbirkami. Vendar Tellico zmore več kot le knjige, poleg tega je to hobi, zato sem izbral (meni) lepo zveneče ime, vzeto iz mesta blizu mojega odraščanja.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Kaj vključite od povezave do Amazon.com v rezultate iskanja?</para>
+</question>
+
+<answer>
+<para
+><ulink url="http://www.amazon.com/gp/browse.html/002-0927720-5265623?node=3440661"
+>pogoji pogodbe za dostop do spletnih storitev Amazon.com</ulink
+> zahtevajo da so vse slike, potegnjene iz storitve za povezavo nazaj na Amazon.com, kot tudi dodatno povezavo. Nujno je vključen ID sodelavca Amazon.com, tako da so morebitna plačila za napotitev ustrezno pobrana. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>Zakaj ne uporabite prave baze podatkov?</para>
+</question>
+
+<answer>
+<para
+>Del razloga, zakaj sem začel &appname; se je bilo naučiti C++. Takrat nisem poznal SQL in trenutno imam le šibko znanje o tem, kako ga uporabljati. Preprosto povedano, &appname; se ni začel kot relacijska zbirka podatkov in to se ne bo spremenilo, dokler nekje v prihodnosti, ko se bom začel učiti SQL in bom imel čas in motivacijo za spremembo podatkovnega modela. </para>
+
+<para
+>Seveda je vsakdo dobrodošel, da naredi kakršne koli spremembe izvorne kode. </para>
+</answer>
+</qandaentry>
+
+</qandaset>
+
+</chapter>

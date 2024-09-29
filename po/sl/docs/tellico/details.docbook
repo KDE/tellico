@@ -1,0 +1,862 @@
+<chapter id="details">
+<title
+>&appname;  Podrobnosti</title>
+
+<sect1 id="field-types">
+<title
+>Vrste polj</title>
+
+<para
+>Vsaka zbirka ima lahko neomejeno število polj. &appname; podpira enajst vrst polj, ki omogočajo vrsto različnih podatkov. </para>
+
+<sect2 id="line">
+<title
+>Preprosto besedilo</title>
+
+<para
+>Najosnovnejša vrsta polja se imenuje <emphasis
+>Enostavno besedilo</emphasis
+>. Za vrednosti polj ni nobenih omejitev, gradnik za vnos podatkov pa je standardno urejanje vrstic. Ta vrsta je primerna za polja, za katera se ne pričakuje, da bodo imela dolge vrednosti, kot sta avtor ali žanr. </para>
+
+</sect2>
+<sect2 id="number">
+<title
+>Število</title>
+
+<para
+>Vrsta <emphasis
+>Število</emphasis
+> je enaka vrsti <emphasis
+>Enostavno besedilo</emphasis
+>, le da so podatki omejeni na numerične. Vnosi bodo razvrščeni številčno v pogledu stolpcev, če kliknete stolpec polja <emphasis
+>Število</emphasis
+>. Za vnos podatkov se uporablja standardno vrstično urejanje z majhnimi puščičnimi gumbi za povečanje ali zmanjšanje vrednosti. Oblikovanje se nikoli ne uporabi.</para>
+
+</sect2>
+
+<sect2 id="url">
+<title
+>&URL;</title>
+
+<para
+>Tip <emphasis
+>&URL;</emphasis
+> omogoča povezave do drugih dokumentov z uporabo standardnega &kde; povezave vrst datotek za odpiranje povezanih dokumentov. Dejanska vrednost polja <emphasis
+>&URL;</emphasis
+> se ne preverja, vendar se neveljavne povezave ne odprejo. Vnos podatkov je urejanje vrstice z gumbom za odpiranje standardnega pogovornega okna File-Open, vendar kateri koli &URL; se lahko uporablja. Relativni &URL;-ji se interpretirajo glede na lokacijo podatkovne datoteke, ko je ta shranjena. </para>
+
+<para
+>V <link linkend="entry-editor"
+><interface
+>urejevalniku vnosov</interface
+></link
+> oznaka postane povezava, medtem ko v <link linkend="entry-view"
+><interface
+>pogledu vnosa </interface
+></link
+>, je uporabljena dejanska hiperpovezava. Ta vrsta polja je priročna za povezovanje do <acronym
+>PDF</acronym
+> datotek bibliografskih vnosov ali na primer do filmskih ocen. Oblikovanje se nikoli ne uporabi.</para>
+
+<para
+>Uporabijo se lahko tudi relativni &URL;. Razlagajo se glede na lokacijo podatkovno datoteko &appname;. V <link linkend="entry-editor"
+><interface
+>urejevalniku vnosov</interface
+></link
+> urejanje vrstice omogoča samodejno dokončanje za lokalne lokacije datotek. Če želite &URL; iz &kde; Pogovorno okno izbirnika datotek, ki se razlaga glede na lokacijo dokumenta, nato lastnost za &URL; mora biti polje nastavljeno na <emphasis
+>relativno</emphasis
+> : <emphasis
+>true</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="para">
+<title
+>Odstavek</title>
+
+<para
+>Za daljša besedilna polja vrsta <emphasis
+>Odstavek</emphasis
+> ponuja večje območje za urejanje besedila in je vedno v svoji kategoriji. Polje <emphasis
+>Odstavek</emphasis
+> ne sme imeti več vrednosti, niti ni samodejno oblikovano. Ni ga mogoče uporabiti za združevanje. Povzetke, povzetke ploskev ali ocene je treba vnesti s to vrsto polja.</para>
+
+</sect2>
+
+<sect2 id="choice">
+<title
+>Izbira</title>
+
+<para
+>Ko mora biti polje omejeno na nekaj prednastavljenih vrednosti, se uporabi vrsta <emphasis
+>Izbira</emphasis
+>. Sprejemljive vrednosti so predstavljene v spustnem polju za izbiro. Dovoljenih je lahko več vrednosti. Polja, kot je vrsta bibliografije ali osebna ocena, so polja tipa <emphasis
+>Izbira</emphasis
+>.</para>
+
+<para
+>Dovoljene vrednosti ločite s podpičji.</para>
+
+</sect2>
+
+<sect2 id="bool">
+<title
+>Potrditveno polje</title>
+
+<para
+>Za polja, ki imajo vrednost da ali ne, je na voljo vrsta <emphasis
+>Potrditveno polje</emphasis
+>. Privzeto je polje izklopljeno. Polja <emphasis
+>Potrditveno polje</emphasis
+> niso oblikovana in so omejena na posamezne vrednosti. Interno se vrednosti polja prenašajo kot <emphasis
+><constant
+>true</constant
+></emphasis
+> ali <emphasis
+><constant
+>false</constant
+></emphasis
+>. Nekaj primerov so darila ali izposojena polja.</para>
+
+</sect2>
+
+<sect2 id="date">
+<title
+>Datum</title>
+
+<para
+>Polje <emphasis
+>Datum</emphasis
+> lahko vključuje dan, mesec in leto. Datum je prikazan v standardni obliki LLLL-MM-DD, kar omogoča enostavno razvrščanje. Standardni &kde; izbirnik datuma lahko uporabite za izbiro datuma z miško ali pa ga vnesete neposredno. Ni treba, da polje vsebuje neprazne vrednosti za leto, mesec in dan; vpiše se lahko npr. samo letnica. Več vrednosti ni dovoljeno. </para>
+
+</sect2>
+
+<sect2 id="table">
+<title
+>Tabela</title>
+
+<para
+>Polja <emphasis
+>tabele</emphasis
+> vsebujejo enega ali več stolpcev vrednosti. V <link linkend="entry-editor"
+><interface
+>urejevalniku vnosov</interface
+></link
+> je polje predstavljeno v pogledu, podobnem preglednici, z oštevilčenimi vrsticami. Ko je izbrana zadnja vrstica, se doda dodatna vrstica. Samodokončanje ni na voljo. To polje je uporabno za seznam poglavij v knjigi, prizorov v filmu ali pesmi v albumu. Polja <emphasis
+>tabele</emphasis
+> so vedno kategorija zase. </para>
+
+<para
+>Število stolpcev, do največ deset, določite tako, da definiciji polja dodate lastnost z imenom <emphasis
+>stolpci</emphasis
+>. Stolpce lahko označite z desnim klikom na glavo ali z nastavitvijo lastnosti polja z imenom <emphasis
+>column1</emphasis
+> itd. </para>
+
+<para
+>Ko uporabljate <interface
+>Urejevalnik vnosov</interface
+> za polja <emphasis
+>Tabela</emphasis
+>, lahko vrstice prerazporedite tako, da povlečete miško, medtem ko držite &Ctrl; gumb. Pojavni meni je na voljo tudi z desnim klikom na tabelo, ki omogoča vstavljanje ali odstranjevanje vrstic. </para>
+
+</sect2>
+
+<sect2 id="image">
+<title
+>Slika</title>
+
+<para
+>Polja <emphasis
+>Slika</emphasis
+> vsebujejo sliko katere koli oblike, ki jo podpira &kde;. Nekateri tipični vključujejo <acronym
+>PNG</acronym
+> ali <acronym
+>JPEG</acronym
+>. Sliko lahko shranite znotraj &appname; sama podatkovna datoteka ali v imeniku podatkov aplikacije. Standardni &kde; Uporablja se izbirnik datotek, tako da lahko uporabite &URL; ali samo datoteka, ki je na voljo lokalno. Slike lahko povlečete tudi iz upravitelja datotek ali brskalnika. </para>
+
+</sect2>
+
+<sect2 id="rating">
+<title
+>Ocena</title>
+
+<para
+>Polja <emphasis
+>Ocena</emphasis
+> prikazujejo število zvezdic, ki predstavljajo številčno oceno vnosa. Privzeto je ocena največ pet. Najmanjšo in največjo vrednost lahko spremenite z nastavitvijo lastnosti v definiciji polja v <interface
+>pogovornem oknu zbirnih polj</interface
+>, imenovanih <emphasis
+>minimum</emphasis
+> oziroma <emphasis
+>maximum</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="derived">
+<title
+>Polja izpeljane vrednosti</title>
+
+<para
+>Polja z izpeljanimi vrednostmi so poseben primer. Vrsta polja ustreza tipičnemu tipu vrednosti v polju, vendar je vrednost polja sestavljena iz drugih polj z uporabo formatnega niza v opisu polja. Na primer, če ima polje predlogo vrednosti <userinput
+>%{title} %{year}</userinput
+>, bo vrednost tega polja naslov, ki mu sledi leto. Ta vrsta polja se uporablja predvsem za naslovno polje v zbirkah kovancev, znamk, menjalnih kartic in vin. V opisu za oblikovanje se lahko uporabi ime notranjega polja ali naslov polja. </para>
+
+<para
+>Če želite izbrati samo eno vrednost za polje z več vrednostmi, dodajte indeks položaja v predlogo, kot je <userinput
+>%{author:1}</userinput
+> za prvega avtorja. Položaj je lahko negativen, šteto od konca, tako da bi bil <userinput
+>%{author:-1}</userinput
+> zadnji avtor. Vrednosti z velikimi in malimi črkami se lahko uporabljajo z nastavitvijo zastavic predloge, kot je <userinput
+>%{author:1/l}</userinput
+> za prvega avtorja z malimi črkami in <userinput
+>%{author:1/u}</userinput
+> za velike črke. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-types">
+<title
+>Vrste zbirk</title>
+
+<para
+>&appname; privzeto podpira dvanajst posebnih vrst zbirk: knjige, bibliografske vnose, stripe, videoposnetke, glasbo, video igre, menjalne karte, kovance, znamke, vina, družabne igre in kataloge datotek. Poleg tega je prazna generična predloga zbirke na voljo za vse druge zbirateljske predmete. Privzete zbirke naj bi vključevale le splošen nabor polj. Dodajte, spremenite ali izbrišite jih, da bodo ustrezali vašim potrebam. Edina zahteva je, da mora zbirka vedno imeti polje <emphasis
+>Naslov</emphasis
+>, tako da <link linkend="group-view"
+><interface
+>Pogled skupine</interface
+></link
+> deluje pravilno. Pri nekaterih vrstah zbirk je to samo polje <link linkend="derived"
+>izpeljane vrednosti</link
+>, ki združuje dve ali več drugih. </para>
+
+<para
+>Na splošno ni funkcionalnih razlik med vrstami zbirk. Zbirko po meri za svoje knjige lahko ustvarite prav tako preprosto kot s privzeto zbirko knjig. Ampak &appname; izbere ikone glede na vrsto zbirke in morda obstaja nekaj specializiranih funkcij, ki so edinstvene za določeno zbirko, tako da, če lahko, uporabite privzete vrednosti. Torej, če želite ustvariti zbirko vin, vendar vam ni všeč nobeno od privzetih polj, nadaljujte in ustvarite privzeto zbirko vin, nato pa izbrišite vse privzete vrednosti. Na ta način &appname; še vedno ve, da je zbirka vin. </para>
+
+<para
+>Privzeto vse vrste zbirk vključujejo polje <emphasis
+>ID</emphasis
+>, ki prikazuje ID številko vnosa. Poleg tega vsaka zbirka razen kataloga datotek vključuje polja, ki prikazujejo datum, ko je bil vnos ustvarjen v zbirki, in čas, ko je bil zadnjič spremenjen. </para>
+
+<sect2 id="book-collection">
+<title
+>Knjižne zbirke</title>
+<para
+>Knjižne zbirke imajo 27 privzetih polj: <emphasis
+>Naslov</emphasis
+>, <emphasis
+>Podnaslov</emphasis
+>, <emphasis
+>Avtor</emphasis
+>, <emphasis
+>Vezava</emphasis
+>, <emphasis
+>Datum nakupa</emphasis
+>, <emphasis
+>Nakupna cena</emphasis
+>, <emphasis
+>Založnik</emphasis
+>, <emphasis
+>Izdaja</emphasis
+>, <emphasis
+>Leto avtorskih pravic</emphasis
+>, <emphasis
+>Leto objave</emphasis
+> , <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>LCCN#</emphasis
+>, <emphasis
+>Strani</emphasis
+>, <emphasis
+>Jezik</emphasis
+>, <emphasis
+>Zvrst</emphasis
+>, <emphasis 
+>Ključne besede</emphasis
+>, <emphasis
+>Serija</emphasis
+>, <emphasis
+>Številka serije</emphasis
+>, <emphasis
+>Pogoj</emphasis
+>, <emphasis
+>Podpisano</emphasis
+>, <emphasis
+>Prebrano</emphasis
+>, <emphasis
+>Darilo</emphasis
+>, <emphasis
+>Izposojeno</emphasis
+>, <emphasis
+>Ocena</emphasis
+>, <emphasis
+>Prednja naslovnica</emphasis
+>, <emphasis
+>Povzetek zapleta</emphasis
+>, in <emphasis
+>Komentarji</emphasis
+>. </para>
+
+<para
+>Polje <emphasis
+>ISBN#</emphasis
+> je posebno, saj so številke <acronym
+>ISBN</acronym
+> samodejno oblikovane in se izračuna kontrolna številka. &appname; prepozna polje <acronym
+>ISBN</acronym
+>, če je njegovo notranje ime polja <emphasis
+>isbn</emphasis
+>. Če ste jo izbrisali ali jo morate dodati v drugo vrsto zbirke, ustvarite polje z naslovom kot <emphasis
+>ISBN</emphasis
+> in uporabite spremembo, nato pa se lahko vrnete in spremenite naslov, kot želite. &appname; ustvari interno ime na podlagi začetnega naslova, vendar ga nikoli ne spremeni, če je naslov pozneje posodobljen. </para>
+
+</sect2>
+
+<sect2 id="bibliography">
+<title
+>Bibliografije</title>
+<para
+>Bibliografije imajo 25 privzetih polj: <emphasis
+>Naslov</emphasis
+>, <emphasis
+>Vrsta vnosa</emphasis
+>, <emphasis
+>Avtor</emphasis
+>, <emphasis
+>Ključ Bibtex</emphasis
+>, <emphasis
+>Naslov knjige</emphasis
+>, <emphasis
+>Urednik</emphasis
+>, <emphasis
+>Organizacija</emphasis
+>, <emphasis
+>Založnik</emphasis
+>, <emphasis
+>ISBN#</emphasis
+>, <emphasis
+>Naslov</emphasis
+>, <emphasis
+>Izdaja</emphasis
+>, <emphasis
+>Strani</emphasis
+>, <emphasis
+>Leto</emphasis
+>, <emphasis
+>Časopis</emphasis
+>, <emphasis
+>Mesec</emphasis
+>, <emphasis
+>Številka</emphasis
+>, <emphasis
+>Kako objavljeno</emphasis
+>, <emphasis
+>Poglavje</emphasis
+>, <emphasis
+>Serija</emphasis
+>, <emphasis
+>Številka serije</emphasis
+>, <emphasis
+>Zvezek</emphasis
+> , <emphasis
+>Navzkrižno sklicevanje</emphasis
+>, <emphasis
+>Ključne besede</emphasis
+>, <emphasis
+>Povzetek</emphasis
+> in <emphasis
+>Opombe</emphasis
+>. </para>
+
+<para
+>Čeprav bibliografske zbirke niso posebej povezane z bibtexom, je privzeti niz polj vzet iz tipičnega niza polj bibtex. Pri izvozu v bibtex se za vsako polje uporabi lastnost, imenovana <emphasis
+>bibtex</emphasis
+>, ki definira ustrezno polje bibtex. Če bibliografiji dodate dodatno polje in ga želite izvoziti v bibtex, obvezno nastavite lastnost <emphasis
+>bibtex</emphasis
+>. </para>
+
+<para
+>&appname; ima nekaj specializiranih funkcij za bibliografije. Makre nizov Bibtex lahko dodate, spremenite ali izbrišete znotraj &appname; in izvoz bibtex vam daje možnost razširitve makrov. Navedbe Bibtex je mogoče potisniti v zunanjo aplikacijo, kot je <application
+>LyX</application
+> ali <application
+>Kile</application
+> s tako imenovanim <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+<para
+>Knjižne zbirke je mogoče pretvoriti v bibliografije. Dodana so privzeta polja bibtex in nastavljene so lastnosti bibtexa. Ta funkcionalnost obstaja predvsem za pretvorbo starih zbirk, preden je bil tip bibliografije ločen od tipa knjižne zbirke. </para>
+</sect2>
+
+<sect2 id="comic-book-collection">
+<title
+>Zbirke stripov</title>
+<para
+>Zbirke stripov imajo 23 privzetih polj: <emphasis
+>Naslov</emphasis
+>, <emphasis
+>Podnaslov</emphasis
+>, <emphasis
+>Pisatelj</emphasis
+>, <emphasis
+>Umetnik</emphasis
+>, <emphasis
+>Serija</emphasis
+>, <emphasis
+>Številke</emphasis
+>, <emphasis
+>Založnik</emphasis
+>, <emphasis
+>Izdaja</emphasis
+>, <emphasis
+>Leto objave</emphasis
+>, <emphasis
+>Strani</emphasis
+>, <emphasis
+>Država</emphasis
+>, <emphasis
+>Jezik</emphasis
+>, <emphasis
+>Zvrst</emphasis
+>, <emphasis
+>Ključne besede</emphasis
+>, <emphasis
+>Pogoj</emphasis
+>, <emphasis
+>Datum nakupa</emphasis
+>, <emphasis
+>Nakupnina</emphasis
+>, <emphasis
+>Podpisano</emphasis
+>, <emphasis
+>Darilo</emphasis
+>, <emphasis
+>Izposojeno</emphasis
+>, <emphasis
+>Prednja platnica</emphasis
+> , <emphasis
+>Povzetek zapleta</emphasis
+> in <emphasis
+>Komentarji</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="video-collection">
+<title
+>Video zbirke</title>
+<para
+>Video zbirke imajo 30 privzetih polj: <emphasis
+>Naslov</emphasis
+>, <emphasis
+>Medij</emphasis
+>, <emphasis
+>Leto produkcije</emphasis
+>, <emphasis
+>Certifikacija</emphasis
+>, <emphasis
+>Žanr</emphasis
+>, <emphasis
+>Regija</emphasis
+>, <emphasis
+>Državljanstvo</emphasis
+>, <emphasis
+>Format</emphasis
+>, <emphasis
+>Zasedba</emphasis
+>, <emphasis
+>Režiser</emphasis
+>, <emphasis 
+>Producent</emphasis
+>, <emphasis
+>Scenar</emphasis
+>, <emphasis
+>Skladatelj</emphasis
+>, <emphasis
+>Studio</emphasis
+>, <emphasis
+>Jezikovne skladbe</emphasis
+>, <emphasis
+>Jeziki podnapisov</emphasis
+>, <emphasis
+>Zvočni posnetki</emphasis
+>, <emphasis
+>Trajanje</emphasis
+>, <emphasis
+>Razmerje stranic</emphasis
+>, <emphasis
+>Širokozaslonski</emphasis
+>, <emphasis
+>Barvni način</emphasis
+>, <emphasis
+>Režija</emphasis
+>, <emphasis
+>Povzetek zapleta</emphasis
+>, <emphasis
+>Osebna ocena</emphasis
+>, <emphasis
+>Datum nakupa</emphasis
+>, <emphasis
+>Nakupna cena</emphasis
+>, <emphasis
+>Darilo</emphasis
+>, <emphasis
+>Izposojeno</emphasis
+>, <emphasis
+>Ovitje</emphasis
+> in <emphasis
+>Komentarji</emphasis
+>. </para>
+
+<para
+>Polje <emphasis
+>Cast</emphasis
+> je <link linkend="table"
+>tabela</link
+> z dvema stolpcema, ime igralca pa naj bi bilo v prvem stolpcu, njegova vloga pa v drugem . <emphasis
+>Čas delovanja</emphasis
+> naj bi bil v minutah, čeprav lahko to seveda spremenite. </para>
+</sect2>
+
+<sect2 id="music-collection">
+<title
+>Glasbene zbirke</title>
+<para
+>Glasbene zbirke imajo 15 privzetih polj: <emphasis
+>Naslov</emphasis
+>, <emphasis
+>Medij</emphasis
+>, <emphasis
+>Izvajalec</emphasis
+>, <emphasis
+>Založba</emphasis
+>, <emphasis
+>Leto</emphasis
+> 
+>, <emphasis
+>Žanr</emphasis
+>, <emphasis
+>Skladbe</emphasis
+>, <emphasis
+>Ocena</emphasis
+>, <emphasis
+>Datum nakupa</emphasis
+>, <emphasis
+>Nakupna cena</emphasis
+>, <emphasis
+>Darilo</emphasis
+>, <emphasis
+>Izposojeno</emphasis
+>, <emphasis
+>Ključne besede</emphasis
+>, <emphasis
+>Ovitje</emphasis
+> in <emphasis
+>Komentarji</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="game-collection">
+<title
+>Zbirke video iger</title>
+<para
+>Zbirke videoiger imajo 16 privzetih polj: <emphasis
+>Naslov</emphasis
+>, <emphasis
+>Platforma</emphasis
+>, <emphasis
+>Žanr</emphasis
+>, <emphasis
+>Leto izdaje</emphasis
+>, <emphasis
+>Založnik</emphasis
+>, <emphasis
+>Razvijalec</emphasis
+>, <emphasis
+>Ocena ESRB</emphasis
+>, <emphasis
+>Opis</emphasis
+>, <emphasis
+>Osebna ocena</emphasis
+>, <emphasis
+>Dokončano</emphasis
+> , <emphasis
+>Datum nakupa</emphasis
+>, <emphasis
+>Nakupna cena</emphasis
+>, <emphasis
+>Darilo</emphasis
+>, <emphasis
+>Izposojeno</emphasis
+>, <emphasis
+>Ovitek</emphasis
+> in <emphasis
+>Komentarji</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="card-collection">
+<title
+>Zbirke kartic</title>
+<para
+>Zbirke menjalnih kartic imajo 17 privzetih polj: <emphasis
+>Naziv</emphasis
+>, <emphasis
+>Igralec</emphasis
+>, <emphasis
+>Ekipa</emphasis
+>, <emphasis
+>Blagovna znamka</emphasis
+>, <emphasis
+>Številka kartice</emphasis
+>, <emphasis
+>Leto</emphasis
+>, <emphasis
+>Serija</emphasis
+>, <emphasis
+>Vrsta kartice</emphasis
+>, <emphasis
+>Datum nakupa</emphasis
+>, <emphasis
+>Nakupna cena</emphasis
+>, <emphasis
+>Lokacija</emphasis
+>, <emphasis
+>Darilo</emphasis
+>, <emphasis
+>Ključne besede</emphasis
+>, <emphasis
+>Količina</emphasis
+>, <emphasis
+>Sprednja slika</emphasis
+>, <emphasis 
+>Slika zadaj</emphasis
+> in <emphasis
+>Komentarji</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="coin-collection">
+<title
+>Zbirke kovancev</title>
+<para
+>Zbirke kovancev imajo 16 privzetih polj: <emphasis
+>Naslov</emphasis
+>, <emphasis
+>Vrsta</emphasis
+>, <emphasis
+>Apoen</emphasis
+>, <emphasis
+>Leto</emphasis
+>, <emphasis
+>Znak kovnice</emphasis
+>, <emphasis
+>Država</emphasis
+>, <emphasis
+>Komplet kovancev</emphasis
+>, <emphasis
+>Razred</emphasis
+>, <emphasis
+>Storitev ocenjevanja</emphasis
+>, <emphasis
+>Datum nakupa</emphasis
+> , <emphasis
+>Nakupna cena</emphasis
+>, <emphasis
+>Lokacija</emphasis
+>, <emphasis
+>Darilo</emphasis
+>, <emphasis
+>Sprednja stran</emphasis
+>, <emphasis
+>Hratna stran</emphasis
+> in <emphasis 
+>Komentarji</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="stamp-collection">
+<title
+>Zbirke znamk</title>
+<para
+>Zbirke znamk imajo 18 privzetih polj: <emphasis
+>Naslov</emphasis
+>, <emphasis
+>Opis</emphasis
+>, <emphasis
+>Denominacija</emphasis
+>, <emphasis
+>Država</emphasis
+>, <emphasis
+>Leto izdaje</emphasis
+>, <emphasis
+>Barva</emphasis
+>, <emphasis
+>Scott#</emphasis
+>, <emphasis
+>Razred</emphasis
+>, <emphasis
+>Preklican</emphasis
+>, <emphasis
+>Nazobčana</emphasis
+>, <emphasis
+>Centriranje</emphasis
+>, <emphasis
+>Gumirano</emphasis
+>, <emphasis
+>Datum nakupa</emphasis
+>, <emphasis
+>Nakupna cena</emphasis
+>, <emphasis
+>Lokacija</emphasis
+>, <emphasis
+>Darilo </emphasis
+>, <emphasis
+>Slika</emphasis
+> in <emphasis
+>Komentarji</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="wine-collection">
+<title
+>Vinske zbirke</title>
+<para
+>Zbirke vin imajo 15 privzetih polj. <emphasis
+>Naslov</emphasis
+>, <emphasis
+>Proizvajalec</emphasis
+>, <emphasis
+>Poimenovanje</emphasis
+>, <emphasis
+>Sorta</emphasis
+>, <emphasis
+>Vrsta</emphasis
+>, <emphasis
+>Država</emphasis
+>, <emphasis
+>Datum nakupa</emphasis
+>, <emphasis
+>Nakupna cena</emphasis
+>, <emphasis
+>Lokacija</emphasis
+>, <emphasis
+>Količina</emphasis
+>, <emphasis
+>Pijte do</emphasis
+> 
+>, <emphasis
+>Ocena</emphasis
+>, <emphasis
+>Darilo</emphasis
+>, <emphasis
+>Slika oznake</emphasis
+> in <emphasis
+>Komentarji</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title
+>Zbirke družabnih iger</title>
+<para
+>Zbirke družabnih iger imajo 17 privzetih polj. <emphasis
+>Naslov</emphasis
+>, <emphasis
+>Žanr</emphasis
+>, <emphasis
+>Mehanizem</emphasis
+>, <emphasis
+>Leto izdaje</emphasis
+>, <emphasis
+>Založnik</emphasis
+>, <emphasis
+>Oblikovalec </emphasis
+>, <emphasis
+>Število igralcev</emphasis
+>, <emphasis
+>Čas igranja</emphasis
+>, <emphasis
+>Minimalna starost</emphasis
+>, <emphasis
+>Opis</emphasis
+>, <emphasis
+>Ocena</emphasis
+>, <emphasis
+>Datum nakupa</emphasis
+>, <emphasis
+>Nakupna cena</emphasis
+>, <emphasis
+>Darilo</emphasis
+>, <emphasis
+>Izposojeno</emphasis
+>, <emphasis
+>Ovitje</emphasis
+> in <emphasis
+>Komentarji</emphasis
+>, </para>
+
+</sect2>
+
+<sect2 id="file-catalog">
+<title
+>Datotečni katalogi</title>
+<para
+>Katalogi datotek imajo 14 privzetih polj. <emphasis
+>Ime</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Opis</emphasis
+>, <emphasis
+>Zvezek</emphasis
+>, <emphasis
+>Mapa</emphasis
+>, <emphasis
+>Mimetype </emphasis
+>, <emphasis
+>Velikost</emphasis
+>, <emphasis
+>Dovoljenja</emphasis
+>, <emphasis
+>Lastnik</emphasis
+>, <emphasis
+>Skupina</emphasis
+>, <emphasis
+>Ustvarjeno</emphasis
+>, <emphasis
+>Spremenjeno</emphasis
+>, <emphasis
+>Meta informacije</emphasis
+> in <emphasis
+>Ikona</emphasis
+>, </para>
+
+</sect2>
+
+<sect2 id="custom-collection">
+<title
+>Zbirke po meri</title>
+<para
+>Zbirke po meri imajo eno privzeto polje, <emphasis
+>Naslov</emphasis
+>. Uporabiti jih je treba, ko zbirateljski predmet ni ena od privzetih vrst. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
