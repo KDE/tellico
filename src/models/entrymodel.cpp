@@ -419,7 +419,11 @@ QVariant EntryModel::requestImage(Data::EntryPtr entry_, const QString& id_) con
     m_requestedImages.insert(id_, entry_);
     ImageFactory::requestImageById(id_);
   }
-  return QVariant();
+  // fallback to tellico icon
+  auto icon = QIcon::fromTheme(QStringLiteral("tellico"), QIcon(QLatin1String(":/icons/tellico")));
+  const auto sizes = icon.availableSizes();
+  Q_ASSERT(!sizes.isEmpty());
+  return icon.pixmap(sizes.last());
 }
 
 void EntryModel::refreshImage(const QString& id_) {
