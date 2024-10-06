@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-21 00:40+0000\n"
-"PO-Revision-Date: 2024-07-21 13:17+0200\n"
+"PO-Revision-Date: 2024-10-05 13:04+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -1607,13 +1607,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-#| "Everyone, Early Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
-#| "Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
