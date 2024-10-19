@@ -210,7 +210,7 @@ void ItunesFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  QJsonArray results = doc.object().value(QLatin1String("results")).toArray();
+  const auto results = doc.object().value(QLatin1String("results")).toArray();
   if(results.isEmpty()) {
     myDebug() << "iTunesFetcher: no results";
     stop();
@@ -245,7 +245,7 @@ void ItunesFetcher::slotComplete(KJob* job_) {
   }
 
   QList<FetchResult*> fetchResults;
-  foreach(const QJsonValue& result, results) {
+  for(const QJsonValue& result : results) {
     auto obj = result.toObject();
     if(obj.value(QLatin1String("kind")) == QLatin1String("song")) {
       readTrackInfo(obj.toVariantMap());
@@ -296,8 +296,8 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
       f.close();
 #endif
       QJsonDocument doc = QJsonDocument::fromJson(job->data());
-      QJsonArray results = doc.object().value(QLatin1String("results")).toArray();
-      foreach(const QJsonValue& result, results) {
+      const auto results = doc.object().value(QLatin1String("results")).toArray();
+      for(const QJsonValue& result : results) {
         auto obj = result.toObject();
         if(obj.value(QLatin1String("wrapperType")) == QLatin1String("track")) {
           readTrackInfo(obj.toVariantMap());
@@ -472,8 +472,8 @@ void ItunesFetcher::populateEpisodes(Data::EntryPtr entry_) {
   static const QRegularExpression seasonRx(QStringLiteral("Season (\\d+)"));
   QMap<int, QString> episodeMap; // mapping episode number to episode string
   QJsonDocument doc = QJsonDocument::fromJson(job->data());
-  QJsonArray results = doc.object().value(QLatin1String("results")).toArray();
-  foreach(const QJsonValue& result, results) {
+  const auto results = doc.object().value(QLatin1String("results")).toArray();
+  for(const QJsonValue& result : results) {
     auto map = result.toObject().toVariantMap();
     if(mapValue(map, "kind") != QStringLiteral("tv-episode")) continue;
     int seasonNumber = 1;

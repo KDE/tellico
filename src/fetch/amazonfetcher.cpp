@@ -383,7 +383,8 @@ void AmazonFetcher::slotComplete(KJob*) {
   QStringList errors;
   QJsonValue errorValue = databject.value(QLatin1String("Errors"));
   if(!errorValue.isNull()) {
-    foreach(const QJsonValue& error, errorValue.toArray()) {
+    const auto errorArray = errorValue.toArray();
+    for(const QJsonValue& error : errorArray) {
       errors += error.toObject().value(QLatin1String("Message")).toString();
     }
   }
@@ -403,7 +404,8 @@ void AmazonFetcher::slotComplete(KJob*) {
     return;
   }
 
-  foreach(const QJsonValue& item, resultObject.value(QLatin1String("Items")).toArray()) {
+  const auto itemsArray = resultObject.value(QLatin1String("Items")).toArray();
+  for(const QJsonValue& item : itemsArray) {
     if(m_numResults >= m_limit) {
       break;
     }

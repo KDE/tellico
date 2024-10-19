@@ -272,7 +272,7 @@ void TheTVDBFetcher::slotComplete(KJob* job_) {
   }
 
   int count = 0;
-  foreach(const QJsonValue& result, results) {
+  for(const QJsonValue& result : results) {
     Data::EntryPtr entry(new Data::Entry(coll));
     populateEntry(entry, result.toObject().toVariantMap(), false);
 
@@ -424,7 +424,7 @@ void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
 
 void TheTVDBFetcher::populatePeople(Data::EntryPtr entry_, const QJsonArray& peopleArray_) {
   QStringList actors, directors, writers;
-  foreach(const QJsonValue& person, peopleArray_) {
+  for(const QJsonValue& person : peopleArray_) {
     const QVariantMap personMap = person.toObject().toVariantMap();
     const QString personType = mapValue(personMap, "peopleType");
     if(personType == QLatin1String("Actor")) {
@@ -444,7 +444,7 @@ void TheTVDBFetcher::populatePeople(Data::EntryPtr entry_, const QJsonArray& peo
 
 void TheTVDBFetcher::populateEpisodes(Data::EntryPtr entry_, const QJsonArray& episodeArray_) {
   QStringList episodes;
-  foreach(const QJsonValue& episode, episodeArray_) {
+  for(const QJsonValue& episode : episodeArray_) {
     const QVariantMap map = episode.toObject().toVariantMap();
     QString seasonString = mapValue(map, "seasonNumber");
     // skip season 0, they're extras or specials

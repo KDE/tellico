@@ -214,7 +214,7 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
     coll->addField(field);
   }
 
-  QJsonArray results = obj.value(QLatin1String("items")).toArray();
+  const auto results = obj.value(QLatin1String("items")).toArray();
   if(results.isEmpty()) {
     myLog() << "No results";
     stop();
@@ -222,7 +222,7 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
   }
 
   int count = 0;
-  foreach(const QJsonValue& result, results) {
+  for(const QJsonValue& result : results) {
 //    myDebug() << "found result:" << result;
 
     Data::EntryPtr entry(new Data::Entry(coll));
