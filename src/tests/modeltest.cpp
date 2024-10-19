@@ -28,8 +28,7 @@
 
 #include "modeltest.h"
 
-#include <QtCore/QtCore>
-#include <QtTest/QtTest>
+#include <QTest>
 
 /*!
     Connect to all of the models signals.  Whenever anything happens recheck everything.
