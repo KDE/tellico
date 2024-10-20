@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-21 00:40+0000\n"
+"POT-Creation-Date: 2024-10-20 00:40+0000\n"
 "PO-Revision-Date: 2011-12-11 07:08+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -740,7 +740,7 @@ msgstr "BibTeX-Slötel"
 
 #: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:145
 #: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
-#: src/configdialog.cpp:1129 src/fetch/amazonfetcher.cpp:861
+#: src/configdialog.cpp:1129 src/fetch/amazonfetcher.cpp:863
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:534
 #: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:591
@@ -901,7 +901,7 @@ msgstr "Dwarsbetog"
 #: src/collections/cardcollection.cpp:107
 #: src/collections/comicbookcollection.cpp:114
 #: src/collections/musiccollection.cpp:109
-#: src/collections/videocollection.cpp:209 src/fetch/amazonfetcher.cpp:1076
+#: src/collections/videocollection.cpp:209 src/fetch/amazonfetcher.cpp:1078
 #, kde-format
 msgid "Keywords"
 msgstr "Slötelwöör"
@@ -1084,7 +1084,7 @@ msgstr "Mien Böker"
 msgid "Subtitle"
 msgstr "Ünnertitel"
 
-#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:965
+#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
 #: src/fetch/doubanfetcher.cpp:446 src/fetch/doubanfetcher.cpp:499
 #: src/fetch/ibsfetcher.cpp:289 src/translators/alexandriaimporter.cpp:163
 #: src/translators/librarythingimporter.cpp:149
@@ -1092,7 +1092,7 @@ msgstr "Ünnertitel"
 msgid "Hardback"
 msgstr "Fastinband"
 
-#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:963
+#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:965
 #: src/fetch/doubanfetcher.cpp:448 src/fetch/doubanfetcher.cpp:501
 #: src/fetch/ibsfetcher.cpp:287 src/translators/librarythingimporter.cpp:147
 #, kde-format
@@ -1663,7 +1663,7 @@ msgid "Compact Disc"
 msgstr "CD"
 
 #: src/collections/musiccollection.cpp:50
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1043
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1045
 #: src/fetch/discogsfetcher.cpp:430 src/fetch/upcitemdbfetcher.cpp:419
 #: src/fetch/upcitemdbfetcher.cpp:427 src/translators/discogsimporter.cpp:169
 #, kde-format
@@ -1781,7 +1781,7 @@ msgstr "Bild"
 msgid "My Videos"
 msgstr "Mien Videos"
 
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1029
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1031
 #: src/fetch/upcitemdbfetcher.cpp:405
 #, kde-format
 msgid "VHS"
@@ -1797,13 +1797,13 @@ msgstr "VCD"
 msgid "DivX"
 msgstr "DivX"
 
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1023
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1025
 #: src/fetch/upcitemdbfetcher.cpp:399
 #, kde-format
 msgid "Blu-ray"
 msgstr "Blu-Ray"
 
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1026
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1028
 #: src/fetch/upcitemdbfetcher.cpp:402
 #, kde-format
 msgid "HD DVD"
@@ -1881,7 +1881,7 @@ msgstr "Regioon"
 msgid "Nationality"
 msgstr "Natschonaliteet"
 
-#: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1039
+#: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1041
 #: src/fetch/upcitemdbfetcher.cpp:415
 #, kde-format
 msgid "NTSC"
@@ -1975,7 +1975,7 @@ msgstr "De Filmlooptiet (in Minuten)"
 msgid "Aspect Ratio"
 msgstr "Proportschonen"
 
-#: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1012
+#: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1014
 #: src/fetch/upcitemdbfetcher.cpp:385
 #, kde-format
 msgid "Widescreen"
@@ -1991,7 +1991,7 @@ msgstr "Swattwitt"
 msgid "Color Mode"
 msgstr "Klöör"
 
-#: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1033
+#: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1035
 #: src/fetch/upcitemdbfetcher.cpp:409
 #, kde-format
 msgid "Director's Cut"
@@ -3168,7 +3168,7 @@ msgstr "Bruker-Spraakkoderen för Dateiexporteren bruken."
 msgid "SAO/NASA Astrophysics Data System"
 msgstr ""
 
-#: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1093
+#: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1095
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:229
 #: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:559
 #: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:381
@@ -3189,7 +3189,7 @@ msgstr ""
 "Bedingen inverstahn büst, <a href='%2'>maak dor en Konto op</a>, un giff "
 "nerrn Dien Daten in."
 
-#: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1105
+#: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1107
 #: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:241
 #: src/fetch/entrezfetcher.cpp:530 src/fetch/giantbombfetcher.cpp:227
 #: src/fetch/googlebookfetcher.cpp:393 src/fetch/isbndbfetcher.cpp:405
@@ -3386,7 +3386,7 @@ msgstr "Vereent Staten vun Amerika"
 msgid "This data is licensed under <a href=%1>specific terms</a>."
 msgstr "Disse Daten warrt ünner <a href=%1>besünner Bedingen</a> verdeelt."
 
-#: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1110
+#: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1112
 #, kde-format
 msgid ""
 "Access to data from Amazon.com requires an AWS Access Key ID and a Secret "
@@ -3403,12 +3403,12 @@ msgstr ""
 msgid "Those values must be entered in the data source settings."
 msgstr "Disse Weerten muttst Du binnen de Datenborn-Instellen ingeven."
 
-#: src/fetch/amazonfetcher.cpp:462
+#: src/fetch/amazonfetcher.cpp:464
 #, kde-format
 msgid "Results from %1: %2/%3"
 msgstr "Resultaten vun %1: %2/%3"
 
-#: src/fetch/amazonfetcher.cpp:631 src/fetch/colnectfetcher.cpp:795
+#: src/fetch/amazonfetcher.cpp:633 src/fetch/colnectfetcher.cpp:795
 #: src/fetch/discogsfetcher.cpp:217 src/fetch/doubanfetcher.cpp:477
 #: src/fetch/filmaffinityfetcher.cpp:430 src/fetch/filmasterfetcher.cpp:147
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:198
@@ -3426,27 +3426,27 @@ msgstr "Resultaten vun %1: %2/%3"
 msgid "The cover image could not be loaded."
 msgstr "Dat Titelbild lett sik nich laden."
 
-#: src/fetch/amazonfetcher.cpp:860 src/fetch/amazonfetcher.cpp:1077
+#: src/fetch/amazonfetcher.cpp:862 src/fetch/amazonfetcher.cpp:1079
 #, kde-format
 msgid "Amazon Link"
 msgstr "Amazon-Link"
 
-#: src/fetch/amazonfetcher.cpp:1067
+#: src/fetch/amazonfetcher.cpp:1069
 #, kde-format
 msgid "Amazon.com Web Services"
 msgstr "\"Amazon.com\"-Nettdeensten"
 
-#: src/fetch/amazonfetcher.cpp:1115
+#: src/fetch/amazonfetcher.cpp:1117
 #, kde-format
 msgid "Secret key: "
 msgstr "Privaatslötel: "
 
-#: src/fetch/amazonfetcher.cpp:1125
+#: src/fetch/amazonfetcher.cpp:1127
 #, kde-format
 msgid "Country: "
 msgstr "Land: "
 
-#: src/fetch/amazonfetcher.cpp:1140
+#: src/fetch/amazonfetcher.cpp:1142
 #, kde-format
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
@@ -3455,7 +3455,7 @@ msgstr ""
 "Amazon.com stellt Daten op en Reeg spraaktopasst Sieden praat. Söök de Siet "
 "ut, de Du för dissen Datenborn bruken wullt."
 
-#: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:215
+#: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:215
 #: src/fetch/colnectfetcher.cpp:956 src/fetch/imdbfetcher.cpp:567
 #: src/fetch/itunesfetcher.cpp:543 src/fetch/mobygamesfetcher.cpp:669
 #: src/fetch/rpggeekfetcher.cpp:224 src/fetch/thegamesdbfetcher.cpp:655
@@ -3464,7 +3464,7 @@ msgstr ""
 msgid "&Image size: "
 msgstr "&Bildgrött: "
 
-#: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:219
+#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:219
 #: src/fetch/colnectfetcher.cpp:960 src/fetch/imdbfetcher.cpp:570
 #: src/fetch/itunesfetcher.cpp:547 src/fetch/mobygamesfetcher.cpp:672
 #: src/fetch/rpggeekfetcher.cpp:228 src/fetch/thegamesdbfetcher.cpp:658
@@ -3473,14 +3473,14 @@ msgstr "&Bildgrött: "
 msgid "Small Image"
 msgstr "Lütt Bild"
 
-#: src/fetch/amazonfetcher.cpp:1150 src/fetch/imdbfetcher.cpp:571
+#: src/fetch/amazonfetcher.cpp:1152 src/fetch/imdbfetcher.cpp:571
 #: src/fetch/thegamesdbfetcher.cpp:659
 #, kde-format
 msgid "Medium Image"
 msgstr "Middelgroot Bild"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
-#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:220
+#: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:220
 #: src/fetch/colnectfetcher.cpp:961 src/fetch/imdbfetcher.cpp:572
 #: src/fetch/itunesfetcher.cpp:548 src/fetch/mobygamesfetcher.cpp:674
 #: src/fetch/rpggeekfetcher.cpp:229 src/fetch/thegamesdbfetcher.cpp:660
@@ -3489,7 +3489,7 @@ msgstr "Middelgroot Bild"
 msgid "Large Image"
 msgstr "Groot Bild"
 
-#: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:218
+#: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:218
 #: src/fetch/colnectfetcher.cpp:959 src/fetch/imdbfetcher.cpp:573
 #: src/fetch/itunesfetcher.cpp:546 src/fetch/mobygamesfetcher.cpp:675
 #: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:661
@@ -3498,7 +3498,7 @@ msgstr "Groot Bild"
 msgid "No Image"
 msgstr "Keen Bild"
 
-#: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:577
+#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:577
 #: src/fetch/mobygamesfetcher.cpp:679 src/fetch/thegamesdbfetcher.cpp:665
 #, kde-format
 msgid ""
@@ -3508,12 +3508,12 @@ msgstr ""
 "Dat Titelbild lett sik ok daalladen, man to vele grote Biller binnen de "
 "Sammeln köönt natüürlich de Leisten minnern."
 
-#: src/fetch/amazonfetcher.cpp:1161
+#: src/fetch/amazonfetcher.cpp:1163
 #, kde-format
 msgid "&Associate's ID: "
 msgstr "&Liddmaat-ID: "
 
-#: src/fetch/amazonfetcher.cpp:1167
+#: src/fetch/amazonfetcher.cpp:1169
 #, kde-format
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
