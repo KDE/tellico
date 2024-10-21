@@ -56,10 +56,12 @@ public Q_SLOTS:
 
 protected:
   virtual QWidget* widget() Q_DECL_OVERRIDE;
+  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
 
 private:
   KTextEdit* m_textEdit;
   QRegularExpression m_brRx;
+  bool m_replaceLineFeeds;
 };
 
   } // end GUI namespace
