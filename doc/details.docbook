@@ -74,6 +74,13 @@ a larger text edit area, and is always in its own category. A
 is it automatically formatted. It cannot be used for grouping. Abstracts, plot
 summaries, or reviews should be entered using this field type.</para>
 
+<para>
+Line feeds are replaced by an HTML break to ensure consistent formatting. To disable this replacement,
+add a property for the field with a value of <emphasis>replace-line-feeds</emphasis> : <emphasis>false</emphasis>.
+Spell-checking can be disabling by setting a property
+with a value of <emphasis>spellcheck</emphasis> : <emphasis>false</emphasis>.
+</para>
+
 </sect2>
 
 <sect2 id="choice">
