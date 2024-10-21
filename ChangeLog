@@ -1,3 +1,7 @@
+2024-10-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Added property to disable line feed replacement in Paragraph fields.
+
 2024-09-30  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 4.0.1.

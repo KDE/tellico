@@ -252,6 +252,19 @@ void FieldWidgetTest::testPara() {
   QCOMPARE(w.text(), QStringLiteral("test1<br/>test2"));
   QCOMPARE(spy.count(), 1);
 
+  field->setProperty(QLatin1String("replace-line-feeds"), QLatin1String("false"));
+  w.updateField(field, field);
+  edit->setText(QLatin1String("test1\ntest2"));
+  QCOMPARE(w.text(), QStringLiteral("test1\ntest2"));
+
+  field->setProperty(QLatin1String("replace-line-feeds"), QLatin1String("true"));
+  w.updateField(field, field);
+  w.setText(QLatin1String("test1<br>test2"));
+  QCOMPARE(edit->toPlainText(), QStringLiteral("test1\ntest2"));
+  QCOMPARE(w.text(), QStringLiteral("test1<br/>test2"));
+
+  field->setProperty(QLatin1String("replace-line-feeds"), QString());
+  w.updateField(field, field);
   w.setText(QLatin1String("test1<br>test2"));
   QCOMPARE(edit->toPlainText(), QStringLiteral("test1\ntest2"));
   QCOMPARE(w.text(), QStringLiteral("test1<br/>test2"));
