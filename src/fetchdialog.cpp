@@ -348,7 +348,7 @@ FetchDialog::~FetchDialog() {
 #ifdef ENABLE_WEBCAM
   if(m_barcodeRecognitionThread) {
     m_barcodeRecognitionThread->stop();
-    if(!m_barcodeRecognitionThread->wait( 1000 )) {
+    if(!m_barcodeRecognitionThread->wait(1000)) {
       m_barcodeRecognitionThread->terminate();
     }
     delete m_barcodeRecognitionThread;
@@ -923,7 +923,7 @@ void FetchDialog::openBarcodePreview() {
             this, &FetchDialog::slotBarcodeRecognized);
     connect(m_barcodeRecognitionThread, &barcodeRecognition::barcodeRecognitionThread::gotImage,
             this, &FetchDialog::slotBarcodeGotImage);
-//    connect( m_barcodePreview, SIGNAL(destroyed(QObject *)), this, SLOT(slotBarcodeStop()) );
+//    connect(m_barcodePreview, SIGNAL(destroyed(QObject *)), this, SLOT(slotBarcodeStop()));
     m_barcodeRecognitionThread->start();
   }
 #endif
