@@ -1,5 +1,5 @@
-SET(csv_STAT_SRCS
-   libcsv.c
-   )
+set(csv_STAT_SRCS
+    libcsv.c
+)
 
-ADD_LIBRARY(csv-tellico STATIC ${csv_STAT_SRCS})
+add_library(csv-tellico STATIC ${csv_STAT_SRCS})

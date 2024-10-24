@@ -1,9 +1,9 @@
-IF( NOT Btparse_FOUND AND ENABLE_BTPARSE )
-  ADD_SUBDIRECTORY( btparse )
-ENDIF( NOT Btparse_FOUND AND ENABLE_BTPARSE )
+if(NOT Btparse_FOUND AND ENABLE_BTPARSE)
+    add_subdirectory(btparse)
+endif()
 
-IF( NOT Csv_FOUND )
-  ADD_SUBDIRECTORY( libcsv )
-ENDIF( NOT Csv_FOUND )
+if(NOT Csv_FOUND)
+    add_subdirectory(libcsv)
+endif()
 
-ADD_SUBDIRECTORY( rtf2html )
+add_subdirectory(rtf2html)

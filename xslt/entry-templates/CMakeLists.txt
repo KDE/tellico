@@ -1,3 +1,11 @@
 ########### install files ###############
 
-INSTALL(FILES   Default.xsl Video.xsl Album.xsl Fancy.xsl Compact.xsl DESTINATION ${TELLICO_DATA_INSTALL_DIR}/entry-templates )
+set(ENTRY_FILES
+    Album.xsl
+    Compact.xsl
+    Default.xsl
+    Fancy.xsl
+    Video.xsl
+)
+
+install(FILES ${ENTRY_FILES} DESTINATION ${TELLICO_DATA_INSTALL_DIR}/entry-templates)

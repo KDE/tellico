@@ -60,8 +60,9 @@ set(PIC_FILES
     wine.png
 )
 
-INSTALL(FILES ${PIC_FILES}
-        DESTINATION ${TELLICO_DATA_INSTALL_DIR}/pics )
+install(FILES ${PIC_FILES}
+    DESTINATION ${TELLICO_DATA_INSTALL_DIR}/pics
+)
 
 set(ICON_FILES
     16-apps-tellico.png

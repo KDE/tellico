@@ -1,13 +1,13 @@
 ########### next target ###############
 
-SET(barcode_STAT_SRCS
-   barcode.cpp
-   barcode_v4l.cpp
-   )
+set(barcode_STAT_SRCS
+    barcode.cpp
+    barcode_v4l.cpp
+)
 
 add_library(barcode STATIC ${barcode_STAT_SRCS})
 
-TARGET_LINK_LIBRARIES(barcode
+target_link_libraries(barcode
     Qt${QT_MAJOR_VERSION}::Core
     Qt${QT_MAJOR_VERSION}::Gui
 )

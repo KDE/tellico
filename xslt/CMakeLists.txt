@@ -1,9 +1,9 @@
-ADD_SUBDIRECTORY( entry-templates )
-ADD_SUBDIRECTORY( report-templates )
+add_subdirectory(entry-templates)
+add_subdirectory(report-templates)
 
 ########### install files ###############
 
-SET(XSLT_FILES
+set(XSLT_FILES
     arxiv2tellico.xsl
     atom2tellico.xsl
     biblioshare2tellico.xsl
@@ -50,8 +50,6 @@ SET(XSLT_FILES
     vinoxml2tellico.xsl
     welcome.html
     xmp2tellico.xsl
-    )
+)
 
-INSTALL(FILES ${XSLT_FILES} DESTINATION ${TELLICO_DATA_INSTALL_DIR} )
-
-
+install(FILES ${XSLT_FILES} DESTINATION ${TELLICO_DATA_INSTALL_DIR})

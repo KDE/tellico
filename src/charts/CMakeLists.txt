@@ -1,11 +1,11 @@
 ########### next target ###############
 
-SET(charts_STAT_SRCS
-   barchart.cpp
-   chartmanager.cpp
-   collectionsizereport.cpp
-   groupsummaryreport.cpp
-   yeardistributionreport.cpp
+set(charts_STAT_SRCS
+    barchart.cpp
+    chartmanager.cpp
+    collectionsizereport.cpp
+    groupsummaryreport.cpp
+    yeardistributionreport.cpp
 )
 
 add_library(charts STATIC ${charts_STAT_SRCS})

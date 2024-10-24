@@ -1,54 +1,54 @@
 ########### next target ###############
 
-SET(gui_STAT_SRCS
-   boolfieldwidget.cpp
-   checkablecombobox.cpp
-   choicefieldwidget.cpp
-   collectiontemplatedialog.cpp
-   collectiontypecombo.cpp
-   combobox.cpp
-   countdelegate.cpp
-   datefieldwidget.cpp
-   datewidget.cpp
-   detailedentryitemdelegate.cpp
-   dockwidget.cpp
-   drophandler.cpp
-   imagefieldwidget.cpp
-   imagewidget.cpp
-   fieldwidget.cpp
-   fieldwidgetfactory.cpp
-   filterrulewidget.cpp
-   filterrulewidgetlister.cpp
-   kwidgetlister.cpp
-   lineedit.cpp
-   linefieldwidget.cpp
-   listwidgetitem.cpp
-   numberfieldwidget.cpp
-   parafieldwidget.cpp
-   previewdialog.cpp
-   progress.cpp
-   ratingdelegate.cpp
-   ratingfieldwidget.cpp
-   ratingwidget.cpp
-   spinbox.cpp
-   starrating.cpp
-   statusbar.cpp
-   stringmapdialog.cpp
-   stringmapwidget.cpp
-   tablefieldwidget.cpp
-   tabwidget.cpp
-   treeview.cpp
-   urlfieldwidget.cpp
+set(gui_STAT_SRCS
+    boolfieldwidget.cpp
+    checkablecombobox.cpp
+    choicefieldwidget.cpp
+    collectiontemplatedialog.cpp
+    collectiontypecombo.cpp
+    combobox.cpp
+    countdelegate.cpp
+    datefieldwidget.cpp
+    datewidget.cpp
+    detailedentryitemdelegate.cpp
+    dockwidget.cpp
+    drophandler.cpp
+    imagefieldwidget.cpp
+    imagewidget.cpp
+    fieldwidget.cpp
+    fieldwidgetfactory.cpp
+    filterrulewidget.cpp
+    filterrulewidgetlister.cpp
+    kwidgetlister.cpp
+    lineedit.cpp
+    linefieldwidget.cpp
+    listwidgetitem.cpp
+    numberfieldwidget.cpp
+    parafieldwidget.cpp
+    previewdialog.cpp
+    progress.cpp
+    ratingdelegate.cpp
+    ratingfieldwidget.cpp
+    ratingwidget.cpp
+    spinbox.cpp
+    starrating.cpp
+    statusbar.cpp
+    stringmapdialog.cpp
+    stringmapwidget.cpp
+    tablefieldwidget.cpp
+    tabwidget.cpp
+    treeview.cpp
+    urlfieldwidget.cpp
 )
 
-SET(gui_UI
-  collectiontemplatedialog.ui
+set(gui_UI
+    collectiontemplatedialog.ui
 )
 qt_wrap_ui(gui_STAT_SRCS ${gui_UI})
 
 add_library(gui STATIC ${gui_STAT_SRCS})
 
-TARGET_LINK_LIBRARIES(gui
+target_link_libraries(gui
     Qt${QT_MAJOR_VERSION}::Core
     Qt${QT_MAJOR_VERSION}::Widgets
     Qt${QT_MAJOR_VERSION}::Gui
@@ -61,17 +61,17 @@ TARGET_LINK_LIBRARIES(gui
     KF${KF_MAJOR_VERSION}::TextWidgets
     KF${KF_MAJOR_VERSION}::IconThemes
 )
-IF(QT_MAJOR_VERSION STREQUAL "6")
-  TARGET_LINK_LIBRARIES(gui KF${KF_MAJOR_VERSION}::IconWidgets)
-ENDIF()
+if(QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(gui KF${KF_MAJOR_VERSION}::IconWidgets)
+endif()
 
-IF(USE_KHTML)
-  TARGET_LINK_LIBRARIES(gui KF${KF_MAJOR_VERSION}::KHtml)
-  ADD_DEFINITIONS(-DUSE_KHTML=${USE_KHTML})
-ELSE()
-  TARGET_LINK_LIBRARIES(gui Qt${QT_MAJOR_VERSION}::WebEngineWidgets)
-ENDIF()
+if(USE_KHTML)
+    target_link_libraries(gui KF${KF_MAJOR_VERSION}::KHtml)
+    add_definitions(-DUSE_KHTML=${USE_KHTML})
+else()
+    target_link_libraries(gui Qt${QT_MAJOR_VERSION}::WebEngineWidgets)
+endif()
 
-IF( ${KSANE_TARGET_NAME}_FOUND )
-  TARGET_LINK_LIBRARIES(gui ${KSANE_TARGET_NAME})
-ENDIF( ${KSANE_TARGET_NAME}_FOUND )
+if(${KSANE_TARGET_NAME}_FOUND)
+    target_link_libraries(gui ${KSANE_TARGET_NAME})
+endif()
