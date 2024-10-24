@@ -56,7 +56,7 @@ xx.yy (Applications xx.yy) for docbooks with own version released as Application
 $applicationname xx.yy for applications with independent release schedule (extragear/playground)
 -->
 <releaseinfo
->Tellico 4.0</releaseinfo>
+>Tellico 3.5</releaseinfo>
 
 <title
 >El manual del &tellico;</title>
@@ -255,11 +255,11 @@ file included in the KDE distribution. -->
 <para
 >&tellico; </para>
 <para
->Copyright del programa 2001-2024 &robby; <email
+>Program copyright 2001-2019 &robby; <email
 >&email;</email
 > </para>
 <para
->Copyright de la documentació 2001-2024 &robby; <email
+>Documentation copyright 2001-2019 &robby; <email
 >&email;</email
 > </para>
 

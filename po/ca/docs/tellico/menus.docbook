@@ -880,7 +880,7 @@ or menu bars.
 </sect2>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
-<sect2 id="settings-help-menu">
+<sect2>
 <title
 >Els menús Arranjament i Ajuda</title>
 
@@ -971,6 +971,7 @@ or menu bars.
 </listitem>
 </varlistentry>
 
+
 <varlistentry>
 <term>
  <menuchoice
@@ -987,24 +988,6 @@ or menu bars.
 >reinicia la disposició</action
 > a la vista predeterminada, que pot ser d'ajuda si les diverses vistes esdevenen ocultes o reduïdes.</para>
 </listitem>
-</varlistentry>
-
-<varlistentry>
-  <term>
-    <menuchoice
-><guimenu
->Ajuda</guimenu
-> <guimenuitem
->Mostra el registre</guimenuitem
-> </menuchoice>
-  </term>
-
-  <listitem>
-    <para
->Si s'utilitza l'opció <userinput
->tellico --log</userinput
->, aquesta ordre mostra el registre de diagnòstic.</para>
-  </listitem>
 </varlistentry>
 
 </variablelist>

@@ -54,11 +54,13 @@
 </screenshot>
 
 <para
->Les <guilabel
->Opcions generals</guilabel
-> controlen el comportament general. Les imatges es poden incloure als fitxers de dades, o es desen per separat a la carpeta de l'aplicació &appname;. A més, quan s'inicia el &appname;, pot tornar a obrir automàticament el fitxer de dades que estava obert. El <interface
->Filtre ràpid</interface
-> de la barra d'eines és útil per a filtrar fàcilment la col·lecció i poder utilitzar expressions regulars. </para>
+>The <guilabel
+>General Options</guilabel
+> control the general behavior. Images may be included in the data files, or saved separately in the &appname; application folder. Also, when &appname; is started, it can automatically reopen the last data file that was open. The <guilabel
+>Tip of the Day</guilabel
+> dialog contains helpful hints on using &appname; and appears at program startup. You may want to read through some of the hints and then disable the dialog. The <interface
+>Quick Filter</interface
+> in the toolbar is useful for easily filtering through your collection and can utilize regular expressions. </para>
 
 <para
 >Les <guilabel
@@ -250,6 +252,12 @@
 ><simpara
 >la <link linkend="imdb"
 >base de dades de pel·lícules d'Internet</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="allocine"
+>AlloCiné</link
 >,</simpara
 ></listitem>
 <listitem
@@ -606,6 +614,15 @@
 ><ulink url="http://omdbapi.com"
 >La base de dades oberta de pel·lícules (OMDBAPI.com)</ulink
 > és un servei web gratuït per a obtenir informació sobre les pel·lícules. </para>
+</sect3>
+
+<sect3 id="allocine">
+<title
+>AlloCiné</title>
+<para
+><ulink url="http://allocine.fr"
+>AlloCiné</ulink
+> is an online movie information service, based in France. </para>
 </sect3>
 
 <sect3 id="filmaffinity">

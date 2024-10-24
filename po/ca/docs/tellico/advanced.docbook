@@ -7,30 +7,24 @@
 >Opcions de la línia d'ordres</title>
 
 <para
->Quan s'executa el &appname; des de la línia d'ordres, hi ha diverses opcions per a obrir els fitxers de dades. Es poden veure executant <userinput
+>When running &appname; from the command line, there are several options for opening data files. They may be seen by running <userinput
 >tellico --help</userinput
->. També es pot habilitar el registre de diagnòstic, el qual crearà un <link linkend="settings-help-menu"
->element de menú</link
-> per a mostrar el registre de diagnòstic. L'opció <userinput
->--logfile</userinput
-> redirigeix el registre a un fitxer. </para>
+>. </para>
 
 <programlisting
->Ús: tellico [opcions] [nom_fitxer]
+>Usage: tellico [options] [filename]
 
-Tellico - un programari per a la gestió de col·leccions, lliure i senzill
+Tellico - collection management software, free and simple
 
-Opcions:
-  --nofile         No obris l'últim fitxer obert
-  --bibtex         Importa &lt;nom_fitxer&gt; com un fitxer bibtex
-  --mods           Importa &lt;nom_fitxer&gt; com un fitxer MODS
-  --ris            Importa &lt;nom_fitxer&gt; com un fitxer RIS
-  --pdf            Importa &lt;nom_fitxer&gt; com un fitxer PDF
-  --log                     Enregistra la sortida de diagnòstic
-  --logfile &lt;logfile&gt;       Escriu la sortida del registre a &lt;nomfitxer&gt;
+Options:
+  --nofile                  Do not reopen the last open file
+  --bibtex                  Import &lt;filename&gt; as a bibtex file
+  --mods                    Import &lt;filename&gt; as a MODS file
+  --ris                     Import &lt;filename&gt; as a RIS file
+  --pdf                     Import &lt;filename&gt; as a PDF file
 
 Arguments:
-  [nom_fitxer]         Fitxer a obrir
+  [filename]                File to open
 </programlisting>
 
 </sect1>
@@ -85,20 +79,13 @@ bool showEntry(int id)
 </programlisting>
 
 <para
->Per a les quatre ordres d'importació, el primer argument és el fitxer a importar, i el segon és l'acció d'importació. Disposeu de tres accions: <emphasis
+>For the four import commands, the first argument is the file to import, and the second is the import action. Three actions are available: <emphasis
 >replace</emphasis
 >, <emphasis
 >append</emphasis
-> i <emphasis
+>, and <emphasis
 >merge</emphasis
->. Hi ha implementats quatre formats de fitxer per a importar: fitxers &XML; del Tellico, fitxers del Bibtex, fitxers del MODS i fitxers del RIS. També es poden importar les metadades de fitxers <link linkend="importing-pdf"
->&PDF;</link
->. </para>
-
-<para
->Per a qualsevol de les ordres d'exportació de text, un nom de fitxer de <filename
->--</filename
-> el canalitzarà a la sortida estàndard. </para>
+>. Four file formats are supported for importing: Tellico &XML; files, Bibtex files, MODS files, and RIS files. </para>
 
 <para
 >La col·lecció oberta al &appname; es pot exportar a un fitxer, ja sigui en el format &XML; del Tellico, format ZIP del Tellico, Bibtex, &HTML;, o a valors separats per comes (CSV). Les ordres d'exportació prenen un argument opcional per a especificar si la col·lecció s'ha de limitar o no al filtre actual. </para>

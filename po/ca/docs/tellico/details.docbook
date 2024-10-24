@@ -89,11 +89,11 @@
 >Opció</title>
 
 <para
->Quan un camp ha d'estar limitat a uns pocs valors preestablerts, s'utilitza un tipus <emphasis
->Opció</emphasis
->. Els valors acceptables es presenten en una llista desplegable per a la selecció. Es permeten diversos valors. Els camps com el tipus de bibliografia o la puntuació personal són camps <emphasis
->Opció</emphasis
->.</para>
+>When a field should be limited to a few preset values, a <emphasis
+>Choice</emphasis
+> type is used. The acceptable values are presented in a drop down box for selection. Obviously, multiple values are not applicable. Fields such as bibliography type or personal rating are <emphasis
+>Choice</emphasis
+>-type fields.</para>
 
 <para
 >S'ha d'utilitzar punt i coma per a separar els valors permesos.</para>
@@ -563,7 +563,7 @@
 
 <sect2 id="game-collection">
 <title
->Col·leccions de videojocs</title>
+>Game Collections</title>
 <para
 >Les col·leccions de videojocs tenen 16 camps predeterminats: <emphasis
 >Títol</emphasis
