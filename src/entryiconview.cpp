@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "entryiconview.h"
+#include "constants.h"
 #include "collection.h"
 #include "controller.h"
 #include "entry.h"
@@ -40,7 +41,6 @@
 
 namespace {
   static const int ENTRY_ICON_SIZE_PAD = 2;
-  static const int DEFAULT_ENTRY_ICON_SIZE = 96; // same as in tellico_config.kcfg
 }
 
 using Tellico::EntryIconView;

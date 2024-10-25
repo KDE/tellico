@@ -177,6 +177,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
   void slotImageJobResult(KJob* job);
+  void releaseImages();
 
 private:
   /**
@@ -223,7 +224,6 @@ private:
   ImageFactory();
   ~ImageFactory();
 
-  void releaseImages();
   void emitImageMismatch();
 
   class Private;

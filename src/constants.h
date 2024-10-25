@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2024 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,44 +22,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_ENTRYICONMODEL_H
-#define TELLICO_ENTRYICONMODEL_H
-
-#include "../datavectors.h"
-
-#include <QIdentityProxyModel>
-#include <QHash>
-#include <QCache>
-#include <QSet>
+#ifndef TELLICO_CONSTANTS_H
+#define TELLICO_CONSTANTS_H
 
 namespace Tellico {
+  static const int DEFAULT_ENTRY_ICON_SIZE = 96; // same as in tellico_config.kcfg
+  static const int MIN_ENTRY_ICON_SIZE = 64;
+  static const int MAX_ENTRY_ICON_SIZE = 512;
+  static const int SMALL_INCREMENT_ICON_SIZE = 1;
+  static const int LARGE_INCREMENT_ICON_SIZE = 8;
+}
 
-/**
- * @author Robby Stephenson
- *
- * This identity model does nothing except modify EntryModel::data() to return an entry's icon
- * for every column. It's intended to be used in EntryIconView.
- */
-class EntryIconModel : public QIdentityProxyModel {
-Q_OBJECT
-
-public:
-  EntryIconModel(QObject* parent);
-  virtual ~EntryIconModel();
-
-  void setSourceModel(QAbstractItemModel* newSourceModel) Q_DECL_OVERRIDE;
-  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
-
-public Q_SLOTS:
-  void clearCache();
-
-private:
-  const QIcon& defaultIcon(Data::CollPtr coll) const;
-
-  mutable QHash<int, QIcon*> m_defaultIcons;
-  mutable QCache<QString, QIcon> m_iconCache;
-  mutable QSet<int> m_updatedRows;
-};
-
-} // end namespace
 #endif

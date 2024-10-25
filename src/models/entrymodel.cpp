@@ -24,6 +24,7 @@
 
 #include "entrymodel.h"
 #include "models.h"
+#include "../constants.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../field.h"
@@ -145,7 +146,11 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
         // convert pixmap to icon
         QVariant v = requestImage(entry, value);
         if(!v.isNull() && v.canConvert<QPixmap>()) {
-          return QIcon(v.value<QPixmap>());
+          QPixmap p = v.value<QPixmap>();
+          if(p.height() > MAX_ENTRY_ICON_SIZE || p.width() > MAX_ENTRY_ICON_SIZE) {
+            p = p.scaled(MAX_ENTRY_ICON_SIZE, MAX_ENTRY_ICON_SIZE, Qt::KeepAspectRatioByExpanding);
+          }
+          return QIcon(p);
         }
       }
       return QVariant();
@@ -410,7 +415,7 @@ QVariant EntryModel::requestImage(Data::EntryPtr entry_, const QString& id_) con
     return QVariant();
   }
   // if it's not a local image, request that it be downloaded
-  if(ImageFactory::hasLocalImage(id_)) {
+  if(ImageFactory::self()->hasImageInMemory(id_)) {
     const Data::Image& img = ImageFactory::imageById(id_);
     if(!img.isNull()) {
       return img.convertToPixmap();
@@ -427,11 +432,11 @@ QVariant EntryModel::requestImage(Data::EntryPtr entry_, const QString& id_) con
 }
 
 void EntryModel::refreshImage(const QString& id_) {
-  QMultiHash<QString, Data::EntryPtr>::iterator i = m_requestedImages.find(id_);
-  while(i != m_requestedImages.end() && i.key() == id_) {
+  for(auto i = m_requestedImages.find(id_); i != m_requestedImages.end() && i.key() == id_; ++i) {
     QModelIndex index = indexFromEntry(i.value());
-    emit dataChanged(index, index);
-    ++i;
+    if(index.isValid()) {
+      emit dataChanged(index, index);
+    }
   }
   m_requestedImages.remove(id_);
 }

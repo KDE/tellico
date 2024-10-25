@@ -24,6 +24,7 @@
 
 #include "entryiconmodel.h"
 #include "models.h"
+#include "../constants.h"
 #include "../collectionfactory.h"
 #include "../config/tellico_config.h"
 #include "../tellico_debug.h"
@@ -37,6 +38,11 @@ using Tellico::EntryIconModel;
 EntryIconModel::EntryIconModel(QObject* parent_) : QIdentityProxyModel(parent_) {
   myLog() << "Setting max icon cache cost:" << Config::iconCacheSize();
   m_iconCache.setMaxCost(Config::iconCacheSize());
+  connect(this, &QAbstractItemModel::dataChanged, [this](const QModelIndex& topLeft, const QModelIndex& botRight) {
+    for(auto i = topLeft.row(); i <= botRight.row(); ++i) {
+      m_updatedRows.insert(i);
+    }
+  });
 }
 
 EntryIconModel::~EntryIconModel() {
@@ -68,15 +74,23 @@ QVariant EntryIconModel::data(const QModelIndex& index_, int role_) const {
       }
       const QString id = entry->field(field);
       if(m_iconCache.contains(id)) {
-        return QIcon(*m_iconCache.object(id));
+        if(m_updatedRows.contains(index_.row())) {
+          delete m_iconCache.take(id);
+        } else {
+          return QIcon(*m_iconCache.object(id));
+        }
       }
+      m_updatedRows.remove(index_.row());
 
       QVariant v = QIdentityProxyModel::data(index_, PrimaryImageRole);
       if(v.isNull() || !v.canConvert<QPixmap>()) {
         return defaultIcon(entry->collection());
       }
 
-      const QPixmap p = v.value<QPixmap>();
+      QPixmap p = v.value<QPixmap>();
+      if(p.height() > MAX_ENTRY_ICON_SIZE || p.width() > MAX_ENTRY_ICON_SIZE) {
+        p = p.scaled(MAX_ENTRY_ICON_SIZE, MAX_ENTRY_ICON_SIZE, Qt::KeepAspectRatioByExpanding);
+      }
       QIcon* icon = new QIcon(p);
       if(!m_iconCache.insert(id, icon)) {
         // failing to insert invalidates the icon pointer
@@ -92,6 +106,7 @@ QVariant EntryIconModel::data(const QModelIndex& index_, int role_) const {
 
 void EntryIconModel::clearCache() {
   m_iconCache.clear();
+  m_updatedRows.clear();
 }
 
 const QIcon& EntryIconModel::defaultIcon(Data::CollPtr coll_) const {

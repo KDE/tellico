@@ -59,6 +59,8 @@ void ImageJobTest::initTestCase() {
 }
 
 void ImageJobTest::cleanupTestCase() {
+  disconnect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
+             this, &ImageJobTest::slotAvailable);
 }
 
 void ImageJobTest::init() {
@@ -280,7 +282,7 @@ void ImageJobTest::testFactoryRequestLocal() {
   QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
   Tellico::ImageFactory::requestImageById(u.url());
 
-  // don't need to enter loop since the image is local and signal fires immediately
+  qApp->processEvents();
   QVERIFY(!m_imageId.isEmpty());
   // success!
   QCOMPARE(m_result, 0);
@@ -299,9 +301,13 @@ void ImageJobTest::testFactoryRequestLocalInvalid() {
   connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
           this, &ImageJobTest::slotAvailable);
 
+  QCOMPARE(spy.count(), 0);
   // text file is an invalid image
   QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("imagejobtest.cpp"));
   Tellico::ImageFactory::requestImageById(u.url());
+
+  // wait for the load to fire
+  qApp->processEvents();
 
   // it will be a null image, but a local url, so image is still loaded with immediate signal
   QCOMPARE(spy.count(), 1);

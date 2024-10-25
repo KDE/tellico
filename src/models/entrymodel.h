@@ -26,7 +26,6 @@
 #define TELLICO_ENTRYMODEL_H
 
 #include "../datavectors.h"
-#include "models.h"
 
 #include <QIcon>
 #include <QAbstractItemModel>

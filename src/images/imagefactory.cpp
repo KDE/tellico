@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2024 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -40,6 +40,7 @@
 #include <QCache>
 #include <QFileInfo>
 #include <QDir>
+#include <QTimer>
 
 using namespace Tellico;
 using Tellico::ImageFactory;
@@ -63,6 +64,7 @@ public:
   TemporaryImageDirectory tempImageDir; // kept in tmp directory
   ImageZipArchive imageZipArchive;
   StringSet nullImages;
+  QTimer releaseImagesTimer;
 };
 
 ImageFactory::ImageFactory() : QObject(), d(new Private()) {
@@ -83,6 +85,9 @@ void ImageFactory::init() {
   factory->d->pixmapCache.setMaxCost(Config::imageCacheSize());
   const QUrl dataDir = QUrl::fromLocalFile(Tellico::saveLocation(QStringLiteral("data/")));
   factory->d->dataImageDir.setDirectory(dataDir);
+
+  factory->d->releaseImagesTimer.setSingleShot(true);
+  connect(&factory->d->releaseImagesTimer, &QTimer::timeout, factory, &ImageFactory::releaseImages);
 }
 
 Tellico::ImageFactory* ImageFactory::self() {
@@ -232,7 +237,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, 
 }
 
 const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_, CacheDir dir_) {
-//  myLog() << "dir =" << (dir_ == DataDir ? "DataDir" : "TmpDir" ) << "; id =" << id_;
+//  myLog() << "Adding cached image:" << id_ << dir_;
   Data::Image* img = nullptr;
   switch(dir_) {
     case DataDir:
@@ -347,7 +352,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   // can't think of a better place to regularly check for images to release
   // but don't release image that just got asked for
   s_imagesToRelease.remove(id_);
-  factory->releaseImages();
+  factory->d->releaseImagesTimer.start(5000);
 
  // first check the cache, used for images that are in the data file, or are only temporary
  // then the dict, used for images downloaded, but not yet saved anywhere
@@ -502,7 +507,10 @@ bool ImageFactory::hasLocalImage(const QString& id_) {
 void ImageFactory::requestImageById(const QString& id_) {
   Q_ASSERT(factory && "ImageFactory is not initialized!");
   if(hasLocalImage(id_)) {
-    emit factory->imageAvailable(id_);
+    QTimer::singleShot(0, [id_] () {
+      factory->addCachedImageImpl(id_, cacheDir());
+      emit factory->imageAvailable(id_);
+    });
     return;
   }
   if(factory->d->nullImages.contains(id_)) {

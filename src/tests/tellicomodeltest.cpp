@@ -26,6 +26,7 @@
 
 #include "tellicomodeltest.h"
 #include "modeltest.h"
+#include "../models/models.h"
 #include "../models/entrymodel.h"
 #include "../models/entryiconmodel.h"
 #include "../models/entrysortmodel.h"
