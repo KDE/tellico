@@ -82,6 +82,17 @@
 >Párrafo</emphasis
 > puede no tener múltiples valores, ni se le da formato automáticamente. No puede usarse para agrupamientos. Los resúmenes, argumentos o críticas deberían introducirse usando este tipo de campo.</para>
 
+<para
+>Los saltos de línea se sustituyen por un salto HTML para asegurar un formato consistente. Para desactivar esta sustitución, añada una propiedad al campo con el valor <emphasis
+>replace-line-feeds</emphasis
+> : <emphasis
+>false</emphasis
+>. Se puede desactivar la comprobación ortográfica definiendo la propiedad <emphasis
+>spellcheck</emphasis
+> : <emphasis
+>false</emphasis
+>. </para>
+
 </sect2>
 
 <sect2 id="choice">

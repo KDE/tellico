@@ -82,6 +82,17 @@
 >Paràgraf</emphasis
 > no pot tenir múltiples valors, ni es dona format automàticament. No es pot utilitzar per a agrupar. Els resums, resums de la trama, o revisions s'han d'introduir utilitzant aquest tipus de camp.</para>
 
+<para
+>Els salts de línia es reemplacen per trencaments HTML per a assegurar un format coherent. Per a desactivar aquest reemplaçament afegiu una propietat al camp amb el valor de <emphasis
+>replace-line-feeds</emphasis
+>: <emphasis
+>false</emphasis
+>. Es pot desactivar la correcció de l'ortografia definint una propietat amb un valor de <emphasis
+>spellcheck</emphasis
+>: <emphasis
+>false</emphasis
+>. </para>
+
 </sect2>
 
 <sect2 id="choice">
