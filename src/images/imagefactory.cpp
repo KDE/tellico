@@ -367,11 +367,10 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   // but can't call imageInfo() since that might recurse into imageById()
   // also, the image info cache might not have it so check if the
   // id is a valid absolute url
-  // yeah, it's probably slow
-  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !QUrl(id_).isRelative()) {
-    QUrl u(id_);
-    if(u.isValid()) {
-      return factory->addImageImpl(u, true, QUrl(), true);
+  const QUrl imageUrl(id_);
+  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !imageUrl.isRelative()) {
+    if(imageUrl.isValid()) {
+      return factory->addImageImpl(imageUrl, true, QUrl(), true);
     }
   }
 
@@ -525,7 +524,7 @@ void ImageFactory::requestImageById(const QString& id_) {
 }
 
 void ImageFactory::requestImageByUrlImpl(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {
-  ImageJob* job = new ImageJob(url_, QString() /* id, use calculated one */, quiet_);
+  auto job = new ImageJob(url_, QString() /* id, use calculated one */, quiet_);
   job->setLinkOnly(link_);
   job->setReferrer(refer_);
   connect(job, &ImageJob::result,
@@ -757,10 +756,10 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
   }
   const Data::Image& img = imageJob->image();
   if(img.isNull()) {
-     myDebug() << "null image for" << imageJob->url();
-     d->nullImages.add(imageJob->url().url());
-     // don't emit anything
-     return;
+    myDebug() << "null image for" << imageJob->url();
+    d->nullImages.add(imageJob->url().url());
+    // don't emit anything
+    return;
   }
 
   // hold the image in memory since it probably isn't written locally to disk yet
