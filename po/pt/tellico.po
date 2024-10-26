@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-20 00:40+0000\n"
+"POT-Creation-Date: 2024-10-26 00:40+0000\n"
 "PO-Revision-Date: 2023-07-08 12:53+0100\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -2962,33 +2962,33 @@ msgstr ""
 msgid "Overwrite File?"
 msgstr "Sobrepor o Ficheiro?"
 
-#: src/detailedlistview.cpp:523
+#: src/detailedlistview.cpp:524
 #, kde-format
 msgid "View Columns"
 msgstr "Ver as Colunas"
 
-#: src/detailedlistview.cpp:538
+#: src/detailedlistview.cpp:539
 #, kde-format
 msgctxt "Noun, Menu name"
 msgid "Columns"
 msgstr "Colunas"
 
-#: src/detailedlistview.cpp:541
+#: src/detailedlistview.cpp:542
 #, kde-format
 msgid "Hide This Column"
 msgstr "Esconder Esta Coluna"
 
-#: src/detailedlistview.cpp:543
+#: src/detailedlistview.cpp:544
 #, kde-format
 msgid "Resize to Content"
 msgstr "Dimensionar ao Conteúdo"
 
-#: src/detailedlistview.cpp:548
+#: src/detailedlistview.cpp:549
 #, kde-format
 msgid "Show All Columns"
 msgstr "Mostrar Todas as Colunas"
 
-#: src/detailedlistview.cpp:550
+#: src/detailedlistview.cpp:551
 #, kde-format
 msgid "Hide All Columns"
 msgstr "Esconder Todas as Colunas"
@@ -7358,12 +7358,12 @@ msgstr "Ficheiro XSLT:"
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Escolher o ficheiro XSLT para transformar os dados."
 
-#: src/viewstack.cpp:81
+#: src/viewstack.cpp:78
 #, kde-format
 msgid "Decrease the maximum icon size in the icon list view"
 msgstr "Diminuir o tamanho máximo dos ícones na lista de ícones"
 
-#: src/viewstack.cpp:92 src/viewstack.cpp:154
+#: src/viewstack.cpp:89 src/viewstack.cpp:151
 #, kde-format
 msgid ""
 "The current maximum icon size is %1.\n"
@@ -7372,7 +7372,7 @@ msgstr ""
 "O tamanho máximo dos ícones actual é de %1.\n"
 "Mova a barra para o alterar."
 
-#: src/viewstack.cpp:98
+#: src/viewstack.cpp:95
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "Aumentar o tamanho máximo dos ícones na lista de ícones"

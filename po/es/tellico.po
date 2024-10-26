@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-20 00:40+0000\n"
+"POT-Creation-Date: 2024-10-26 00:40+0000\n"
 "PO-Revision-Date: 2024-09-13 01:00+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -2908,33 +2908,33 @@ msgstr "Ya existe un archivo llamado «%1». ¿Seguro que desea sobrescribirlo?"
 msgid "Overwrite File?"
 msgstr "¿Sobrescribir el archivo?"
 
-#: src/detailedlistview.cpp:523
+#: src/detailedlistview.cpp:524
 #, kde-format
 msgid "View Columns"
 msgstr "Ver las columnas"
 
-#: src/detailedlistview.cpp:538
+#: src/detailedlistview.cpp:539
 #, kde-format
 msgctxt "Noun, Menu name"
 msgid "Columns"
 msgstr "Columnas"
 
-#: src/detailedlistview.cpp:541
+#: src/detailedlistview.cpp:542
 #, kde-format
 msgid "Hide This Column"
 msgstr "Ocultar esta columna"
 
-#: src/detailedlistview.cpp:543
+#: src/detailedlistview.cpp:544
 #, kde-format
 msgid "Resize to Content"
 msgstr "Ajustar el tamaño al contenido"
 
-#: src/detailedlistview.cpp:548
+#: src/detailedlistview.cpp:549
 #, kde-format
 msgid "Show All Columns"
 msgstr "Mostrar todas las columnas"
 
-#: src/detailedlistview.cpp:550
+#: src/detailedlistview.cpp:551
 #, kde-format
 msgid "Hide All Columns"
 msgstr "Ocultar todas las columnas"
@@ -7294,12 +7294,12 @@ msgstr "Archivo XSLT:"
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Seleccione el archivo XSLT con el que transformar los datos."
 
-#: src/viewstack.cpp:81
+#: src/viewstack.cpp:78
 #, kde-format
 msgid "Decrease the maximum icon size in the icon list view"
 msgstr "Disminuir el tamaño máximo del icono en la vista de lista de iconos"
 
-#: src/viewstack.cpp:92 src/viewstack.cpp:154
+#: src/viewstack.cpp:89 src/viewstack.cpp:151
 #, kde-format
 msgid ""
 "The current maximum icon size is %1.\n"
@@ -7308,7 +7308,7 @@ msgstr ""
 "El tamaño máximo actual del icono es %1.\n"
 "Mueva el deslizador para cambiarlo."
 
-#: src/viewstack.cpp:98
+#: src/viewstack.cpp:95
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "Aumentar el tamaño máximo del icono en la vista de lista de iconos."

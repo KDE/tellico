@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-20 00:40+0000\n"
+"POT-Creation-Date: 2024-10-26 00:40+0000\n"
 "PO-Revision-Date: 2020-06-03 20:36+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -2906,33 +2906,33 @@ msgstr ""
 msgid "Overwrite File?"
 msgstr "Kas kirjutada fail üle?"
 
-#: src/detailedlistview.cpp:523
+#: src/detailedlistview.cpp:524
 #, kde-format
 msgid "View Columns"
 msgstr "Nähtavad veerud"
 
-#: src/detailedlistview.cpp:538
+#: src/detailedlistview.cpp:539
 #, kde-format
 msgctxt "Noun, Menu name"
 msgid "Columns"
 msgstr "Veerud"
 
-#: src/detailedlistview.cpp:541
+#: src/detailedlistview.cpp:542
 #, kde-format
 msgid "Hide This Column"
 msgstr "Peida see veerg"
 
-#: src/detailedlistview.cpp:543
+#: src/detailedlistview.cpp:544
 #, kde-format
 msgid "Resize to Content"
 msgstr "Muuda suurus sisule vastavaks"
 
-#: src/detailedlistview.cpp:548
+#: src/detailedlistview.cpp:549
 #, kde-format
 msgid "Show All Columns"
 msgstr "Näita kõiki veerge"
 
-#: src/detailedlistview.cpp:550
+#: src/detailedlistview.cpp:551
 #, kde-format
 msgid "Hide All Columns"
 msgstr "Peida kõik veerud"
@@ -7299,12 +7299,12 @@ msgstr "XSLT fail:"
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Vali XSLT-fail, mida kasutada andmete teisendamiseks."
 
-#: src/viewstack.cpp:81
+#: src/viewstack.cpp:78
 #, kde-format
 msgid "Decrease the maximum icon size in the icon list view"
 msgstr "Ikooni maksimumsuuruse vähendamine ikooniloendivaates"
 
-#: src/viewstack.cpp:92 src/viewstack.cpp:154
+#: src/viewstack.cpp:89 src/viewstack.cpp:151
 #, kde-format
 msgid ""
 "The current maximum icon size is %1.\n"
@@ -7313,7 +7313,7 @@ msgstr ""
 "Praegune ikooni maksimumsuurus on %1.\n"
 "Liiguta liugurit selle muutmiseks."
 
-#: src/viewstack.cpp:98
+#: src/viewstack.cpp:95
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "Ikooni maksimumsuuruse suurendamine ikooniloendivaates"

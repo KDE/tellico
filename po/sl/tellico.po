@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-20 00:40+0000\n"
+"POT-Creation-Date: 2024-10-26 00:40+0000\n"
 "PO-Revision-Date: 2024-09-12 07:43+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -2880,33 +2880,33 @@ msgstr ""
 msgid "Overwrite File?"
 msgstr "Prepišem datoteko?"
 
-#: src/detailedlistview.cpp:523
+#: src/detailedlistview.cpp:524
 #, kde-format
 msgid "View Columns"
 msgstr "Pokaži stolpce"
 
-#: src/detailedlistview.cpp:538
+#: src/detailedlistview.cpp:539
 #, kde-format
 msgctxt "Noun, Menu name"
 msgid "Columns"
 msgstr "Stolpci"
 
-#: src/detailedlistview.cpp:541
+#: src/detailedlistview.cpp:542
 #, kde-format
 msgid "Hide This Column"
 msgstr "Skrij ta stolpec"
 
-#: src/detailedlistview.cpp:543
+#: src/detailedlistview.cpp:544
 #, kde-format
 msgid "Resize to Content"
 msgstr "Spremeni velikost, da se prilega vsebini"
 
-#: src/detailedlistview.cpp:548
+#: src/detailedlistview.cpp:549
 #, kde-format
 msgid "Show All Columns"
 msgstr "Pokaži vse stolpce"
 
-#: src/detailedlistview.cpp:550
+#: src/detailedlistview.cpp:551
 #, kde-format
 msgid "Hide All Columns"
 msgstr "Skrij vse stolpce"
@@ -7230,12 +7230,12 @@ msgstr "Datoteka XSLT:"
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Izberite datoteko XSLT, ki bo uporabljena za preoblikovanje podatkov."
 
-#: src/viewstack.cpp:81
+#: src/viewstack.cpp:78
 #, kde-format
 msgid "Decrease the maximum icon size in the icon list view"
 msgstr "Zmanjšaj največjo velikost ikon v pogledu seznama ikon"
 
-#: src/viewstack.cpp:92 src/viewstack.cpp:154
+#: src/viewstack.cpp:89 src/viewstack.cpp:151
 #, kde-format
 msgid ""
 "The current maximum icon size is %1.\n"
@@ -7244,7 +7244,7 @@ msgstr ""
 "Trenutna največja velikost ikon je %1.\n"
 "Premaknite drsnik, da jo spremenite."
 
-#: src/viewstack.cpp:98
+#: src/viewstack.cpp:95
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "Povečaj največjo velikost ikon v pogledu seznama ikon"

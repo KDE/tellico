@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-20 00:40+0000\n"
+"POT-Creation-Date: 2024-10-26 00:40+0000\n"
 "PO-Revision-Date: 2024-08-21 00:09+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2865,33 +2865,33 @@ msgstr "파일 \"%1\"이(가) 이미 존재합니다. 덮어쓰시겠습니까?"
 msgid "Overwrite File?"
 msgstr "파일을 덮어쓰시겠습니까?"
 
-#: src/detailedlistview.cpp:523
+#: src/detailedlistview.cpp:524
 #, kde-format
 msgid "View Columns"
 msgstr "열 보기"
 
-#: src/detailedlistview.cpp:538
+#: src/detailedlistview.cpp:539
 #, kde-format
 msgctxt "Noun, Menu name"
 msgid "Columns"
 msgstr "열"
 
-#: src/detailedlistview.cpp:541
+#: src/detailedlistview.cpp:542
 #, kde-format
 msgid "Hide This Column"
 msgstr "이 열 숨기기"
 
-#: src/detailedlistview.cpp:543
+#: src/detailedlistview.cpp:544
 #, kde-format
 msgid "Resize to Content"
 msgstr "콘텐츠에 크기 맞춤"
 
-#: src/detailedlistview.cpp:548
+#: src/detailedlistview.cpp:549
 #, kde-format
 msgid "Show All Columns"
 msgstr "모든 열 표시"
 
-#: src/detailedlistview.cpp:550
+#: src/detailedlistview.cpp:551
 #, kde-format
 msgid "Hide All Columns"
 msgstr "모든 열 숨기기"
@@ -7184,12 +7184,12 @@ msgstr "XSLT 파일:"
 msgid "Choose the XSLT file used to transform the data."
 msgstr "데이터를 변환하는 데 사용되는 XSLT 파일을 선택합니다."
 
-#: src/viewstack.cpp:81
+#: src/viewstack.cpp:78
 #, kde-format
 msgid "Decrease the maximum icon size in the icon list view"
 msgstr "아이콘 목록 보기에서 최대 아이콘 크기 감소"
 
-#: src/viewstack.cpp:92 src/viewstack.cpp:154
+#: src/viewstack.cpp:89 src/viewstack.cpp:151
 #, kde-format
 msgid ""
 "The current maximum icon size is %1.\n"
@@ -7198,7 +7198,7 @@ msgstr ""
 "현재 최대 아이콘 크기는 %1입니다.\n"
 "슬라이더를 이동하여 변경하십시오."
 
-#: src/viewstack.cpp:98
+#: src/viewstack.cpp:95
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "아이콘 목록 보기에서 최대 아이콘 크기 증가"

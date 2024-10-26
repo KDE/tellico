@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-20 00:40+0000\n"
+"POT-Creation-Date: 2024-10-26 00:40+0000\n"
 "PO-Revision-Date: 2011-12-11 07:08+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -2919,34 +2919,34 @@ msgstr "Dat gifft al en Datei mit den Naam \"%1\". Wullt Du ehr överschrieven?"
 msgid "Overwrite File?"
 msgstr "Datei överschrieven?"
 
-#: src/detailedlistview.cpp:523
+#: src/detailedlistview.cpp:524
 #, kde-format
 msgid "View Columns"
 msgstr "Striepen wiesen"
 
-#: src/detailedlistview.cpp:538
+#: src/detailedlistview.cpp:539
 #, kde-format
 msgctxt "Noun, Menu name"
 msgid "Columns"
 msgstr "Striepen"
 
-#: src/detailedlistview.cpp:541
+#: src/detailedlistview.cpp:542
 #, fuzzy, kde-format
 #| msgid "Hide All Columns"
 msgid "Hide This Column"
 msgstr "All Striepen versteken"
 
-#: src/detailedlistview.cpp:543
+#: src/detailedlistview.cpp:544
 #, kde-format
 msgid "Resize to Content"
 msgstr "Grött den Inholt topassen"
 
-#: src/detailedlistview.cpp:548
+#: src/detailedlistview.cpp:549
 #, kde-format
 msgid "Show All Columns"
 msgstr "All Striepen wiesen"
 
-#: src/detailedlistview.cpp:550
+#: src/detailedlistview.cpp:551
 #, kde-format
 msgid "Hide All Columns"
 msgstr "All Striepen versteken"
@@ -7407,12 +7407,12 @@ msgstr "XSLT-Datei:"
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Söök de XSLT-Datei för't Datenümwanneln ut."
 
-#: src/viewstack.cpp:81
+#: src/viewstack.cpp:78
 #, kde-format
 msgid "Decrease the maximum icon size in the icon list view"
 msgstr "De Hööchstgrött för Lüttbiller binnen de Lüttbild-Listansicht minnern"
 
-#: src/viewstack.cpp:92 src/viewstack.cpp:154
+#: src/viewstack.cpp:89 src/viewstack.cpp:151
 #, kde-format
 msgid ""
 "The current maximum icon size is %1.\n"
@@ -7421,7 +7421,7 @@ msgstr ""
 "De aktuelle Hööchstgrött för Lüttbiller is %1.\n"
 "Mit den Schuver lett se sik ännern."
 
-#: src/viewstack.cpp:98
+#: src/viewstack.cpp:95
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
 msgstr ""

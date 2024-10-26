@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-20 00:40+0000\n"
+"POT-Creation-Date: 2024-10-26 00:40+0000\n"
 "PO-Revision-Date: 2024-09-12 03:27+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -2883,33 +2883,33 @@ msgstr "ფაილი \"%1\" სახელით უკვე არსე�
 msgid "Overwrite File?"
 msgstr "ჩავანაცვლო ფაილი?"
 
-#: src/detailedlistview.cpp:523
+#: src/detailedlistview.cpp:524
 #, kde-format
 msgid "View Columns"
 msgstr "სვეტების ნახვა"
 
-#: src/detailedlistview.cpp:538
+#: src/detailedlistview.cpp:539
 #, kde-format
 msgctxt "Noun, Menu name"
 msgid "Columns"
 msgstr "სვეტები"
 
-#: src/detailedlistview.cpp:541
+#: src/detailedlistview.cpp:542
 #, kde-format
 msgid "Hide This Column"
 msgstr "ამ სვეტის დამალვა"
 
-#: src/detailedlistview.cpp:543
+#: src/detailedlistview.cpp:544
 #, kde-format
 msgid "Resize to Content"
 msgstr "ზომის შემცველობამდე შეცვლა"
 
-#: src/detailedlistview.cpp:548
+#: src/detailedlistview.cpp:549
 #, kde-format
 msgid "Show All Columns"
 msgstr "ყველა სვეტის ჩვენება"
 
-#: src/detailedlistview.cpp:550
+#: src/detailedlistview.cpp:551
 #, kde-format
 msgid "Hide All Columns"
 msgstr "ყველა სვეტის დამალვა"
@@ -7244,12 +7244,12 @@ msgstr "XSLT ფაილი:"
 msgid "Choose the XSLT file used to transform the data."
 msgstr "აირჩიეთ მონაცემების გადასაყვანად გამოყენებული XSLT ფაილი."
 
-#: src/viewstack.cpp:81
+#: src/viewstack.cpp:78
 #, kde-format
 msgid "Decrease the maximum icon size in the icon list view"
 msgstr "მაქსიმალური ხატულის ზომის შემცირება ხატულების სიის ხედში"
 
-#: src/viewstack.cpp:92 src/viewstack.cpp:154
+#: src/viewstack.cpp:89 src/viewstack.cpp:151
 #, kde-format
 msgid ""
 "The current maximum icon size is %1.\n"
@@ -7258,7 +7258,7 @@ msgstr ""
 "მიმდინარე მაქსიმალური ხატულის ზომაა %1.\n"
 "გადაწიეთ ჩოჩია მის შესაცვლელად."
 
-#: src/viewstack.cpp:98
+#: src/viewstack.cpp:95
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "მაქსიმალური ხატულის ზომის გაზრდა ხატულების სიის ხედში"
