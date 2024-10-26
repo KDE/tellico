@@ -82,6 +82,17 @@
 >Paràgraf</emphasis
 > no pot tenir múltiples valors, ni es dona format automàticament. No es pot utilitzar per a agrupar. Els resums, resums de la trama, o revisions s'han d'introduir utilitzant aquest tipus de camp.</para>
 
+<para
+>Els salts de línia es reemplacen per trencaments HTML per a assegurar un format coherent. Per a desactivar aquest reemplaçament afegiu una propietat al camp amb el valor de <emphasis
+>replace-line-feeds</emphasis
+>: <emphasis
+>false</emphasis
+>. Es pot desactivar la correcció de l'ortografia definint una propietat amb un valor de <emphasis
+>spellcheck</emphasis
+>: <emphasis
+>false</emphasis
+>. </para>
+
 </sect2>
 
 <sect2 id="choice">
@@ -89,11 +100,11 @@
 >Opció</title>
 
 <para
->When a field should be limited to a few preset values, a <emphasis
->Choice</emphasis
-> type is used. The acceptable values are presented in a drop down box for selection. Obviously, multiple values are not applicable. Fields such as bibliography type or personal rating are <emphasis
->Choice</emphasis
->-type fields.</para>
+>Quan un camp ha d'estar limitat a uns pocs valors preestablerts, s'utilitza un tipus <emphasis
+>Opció</emphasis
+>. Els valors acceptables es presenten en una llista desplegable per a la selecció. Es permeten diversos valors. Els camps com el tipus de bibliografia o la puntuació personal són camps <emphasis
+>Opció</emphasis
+>.</para>
 
 <para
 >S'ha d'utilitzar punt i coma per a separar els valors permesos.</para>
@@ -563,7 +574,7 @@
 
 <sect2 id="game-collection">
 <title
->Game Collections</title>
+>Col·leccions de videojocs</title>
 <para
 >Les col·leccions de videojocs tenen 16 camps predeterminats: <emphasis
 >Títol</emphasis

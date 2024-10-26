@@ -76,13 +76,15 @@
 >. </para>
 
 <para
->You can use the <interface
->Quick Filter</interface
-> in the toolbar to quickly limit the visible entries to ones which contain the word you type. The filter is also useful when you want to quickly find an entry. You can type in the title or some other unique word that identifies the entry and the <link linkend="detailed-view"
+>Podeu utilitzar el <interface
+>Filtre ràpid</interface
+> a la barra d'eines per a limitar les entrades visibles. El filtre també és útil quan voleu trobar ràpidament una entrada. Podeu escriure el títol o alguna altra paraula única que identifiqui l'entrada i la <link linkend="detailed-view"
 ><interface
->Column View</interface
+>Vista de columna</interface
 ></link
-> will only show the entries that match the filter. The status bar shows you how many entries are in the collection, and how many are currently being filtered. </para>
+> sols mostrarà les entrades que coincideixin amb el filtre. Un filtratge més complex pot utilitzar directament noms de camps, com ara <emphasis
+>author=stephenson</emphasis
+>. La barra d'estat mostra quantes entrades hi ha a la col·lecció, i quantes s'estan filtrant. </para>
 
 </sect1>
 
@@ -977,9 +979,6 @@
 <title
 >Consells generals</title>
 
-<para
->These are the list of tips contained in the "Tip of the Day" list for &appname;. </para>
-
 <tip>
 <para
 >Si un llibre té més d'un autor, hauríeu de separar els seus noms per un punt i coma, de manera que el &appname; sabrà que ha de separar-los i utilitzar-los per separat. Haureu de fer el mateix per a qualsevol altre camp que permeti múltiples valors. Amb un punt i coma (;) separant cada valor. </para>
@@ -995,22 +994,6 @@
 >Podeu afegir, editar o modificar els camps de la col·lecció utilitzant <interface
 >diàleg Camps de la col·lecció</interface
 >. Els botons de fletxa sota la llista de camps es poden utilitzar per a canviar la posició del camp a la llista, el qual afectarà la ubicació a l'editor d'entrades. </para>
-</tip>
-
-<tip>
-<para
->If you want to filter by a <link linkend="bool"
-><emphasis
->Checkbox</emphasis
-></link
-> field, a value of "true" should be used. If you'd like to filter to show only the science fiction books which you've not read, for example, check the <guilabel
->Match all of the following</guilabel
-> button, set the first rule to have "Genre" "contains" "Science Fiction" (no quotes) and the second rule to have "Read" "does not contain" "true" (no quotes). </para>
-</tip>
-
-<tip>
-<para
->If a non-word character is used in the Quick Filter, the text is interpreted as a regular expression. To show only books which are by Weber or Bujold, for example, then type "weber|bujold" (no quotes) in the filter box. </para>
 </tip>
 
 <tip>
