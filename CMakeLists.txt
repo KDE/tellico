@@ -304,35 +304,6 @@ install(PROGRAMS org.kde.tellico.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES tellico.xml DESTINATION  ${KDE_INSTALL_MIMEDIR})
 install(FILES org.kde.tellico.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 ki18n_install(po)
-# some translations require KF6, skip those when creating docs
-if(NOT KF_MAJOR_VERSION STREQUAL "5")
-    kdoctools_install(po)
-else()
-    # taken from kdoctools cmake macro
-    file(GLOB lang_dirs "${podir}/*")
-    # remove the non-backwards compatible translations
-    list(REMOVE_ITEM lang_dirs "sl")
-    if(NOT KDE_INSTALL_DOCBUNDLEDIR)
-        if(HTML_INSTALL_DIR)
-            set(KDE_INSTALL_DOCBUNDLEDIR ${HTML_INSTALL_DIR})
-        else()
-            set(KDE_INSTALL_DOCBUNDLEDIR share/doc/HTML)
-        endif()
-    endif()
-    foreach(lang_dir ${lang_dirs})
-        get_filename_component(lang ${lang_dir} NAME)
-
-        file(GLOB_RECURSE docbooks RELATIVE "${lang_dir}" "${lang_dir}/docs/*.docbook")
-        foreach(docbook ${docbooks})
-            string(REGEX MATCH "^docs/(.*)/index.docbook" match ${docbook})
-            if(match)
-                kdoctools_create_handbook("${lang_dir}/${docbook}"
-                    INSTALL_DESTINATION ${KDE_INSTALL_DOCBUNDLEDIR}/${lang}
-                    SUBDIR ${CMAKE_MATCH_1}
-                )
-            endif()
-        endforeach()
-    endforeach()
-endif()
+kdoctools_install(po)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
