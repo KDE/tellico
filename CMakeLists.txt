@@ -309,9 +309,9 @@ if(NOT KF_MAJOR_VERSION STREQUAL "5")
     kdoctools_install(po)
 else()
     # taken from kdoctools cmake macro
-    file(GLOB lang_dirs "${podir}/*")
+    file(GLOB lang_dirs "po/*")
     # remove the non-backwards compatible translations
-    list(REMOVE_ITEM lang_dirs "sl")
+    list(FILTER lang_dirs EXCLUDE REGEX "po/sl")
     if(NOT KDE_INSTALL_DOCBUNDLEDIR)
         if(HTML_INSTALL_DIR)
             set(KDE_INSTALL_DOCBUNDLEDIR ${HTML_INSTALL_DIR})
