@@ -377,8 +377,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
         Q_ASSERT(audioProps);
         QString t = TStringToQString(tag->title()).trimmed();
         t += FieldFormat::columnDelimiterString() + a;
-        int len = audioProps->length();
-        if(len == 0) len = audioProps->lengthInSeconds();
+        int len = audioProps->lengthInSeconds();
         if(len == 0) len = audioProps->lengthInMilliseconds() / 1000;
         if(len > 0) {
           t += FieldFormat::columnDelimiterString() + Tellico::minutes(len);
