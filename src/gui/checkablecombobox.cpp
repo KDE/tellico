@@ -87,9 +87,12 @@ CheckableComboBox::CheckableComboBox(QWidget* parent_)
   lineEdit->installEventFilter(this);
   view()->viewport()->installEventFilter(this);
 
-  connect(model(), &QStandardItemModel::rowsInserted, this, [=](const QModelIndex&, int, int) { updateDisplayText(); });
-  connect(model(), &QStandardItemModel::rowsRemoved, this,  [=](const QModelIndex&, int, int) { updateDisplayText(); });
-  connect(model(), &QStandardItemModel::dataChanged, this,  [=](const QModelIndex&, const QModelIndex&, const QVector<int> &) { updateDisplayText(); });
+  connect(model(), &QStandardItemModel::rowsInserted,
+          this, [=, this](const QModelIndex&, int, int) { updateDisplayText(); });
+  connect(model(), &QStandardItemModel::rowsRemoved,
+          this, [=, this](const QModelIndex&, int, int) { updateDisplayText(); });
+  connect(model(), &QStandardItemModel::dataChanged,
+          this, [=, this](const QModelIndex&, const QModelIndex&, const QVector<int> &) { updateDisplayText(); });
 
   connect(this, &QComboBox::editTextChanged,
           this, &CheckableComboBox::setCheckedDataText);
