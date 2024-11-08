@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:40+0000\n"
+"POT-Creation-Date: 2024-11-08 00:40+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -6709,38 +6709,38 @@ msgstr "Бит легі"
 msgid "(Various)"
 msgstr "(Түрлі)"
 
-#: src/translators/audiofileimporter.cpp:492
+#: src/translators/audiofileimporter.cpp:491
 #, kde-format
 msgid "Audio File Options"
 msgstr "Аудио файл параметрлері"
 
-#: src/translators/audiofileimporter.cpp:495
+#: src/translators/audiofileimporter.cpp:494
 #, kde-format
 msgid "Recursive &folder search"
 msgstr "Қ&апшықтарда рекурсивті іздеу"
 
-#: src/translators/audiofileimporter.cpp:496
+#: src/translators/audiofileimporter.cpp:495
 #, kde-format
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 "Белгісі қойылса, ішкі қапшықтарда аудио файлдарды рекурсивті іздеу жасалады."
 
-#: src/translators/audiofileimporter.cpp:500
+#: src/translators/audiofileimporter.cpp:499
 #, kde-format
 msgid "Include file &location"
 msgstr "Файлдың қайда &жатқанын қоса"
 
-#: src/translators/audiofileimporter.cpp:501
+#: src/translators/audiofileimporter.cpp:500
 #, kde-format
 msgid "If checked, the file names for each track are added to the entries."
 msgstr "Белгісі қойылса, әр жолсызықтың толық файл атауы жазуға енеді."
 
-#: src/translators/audiofileimporter.cpp:505
+#: src/translators/audiofileimporter.cpp:504
 #, kde-format
 msgid "Include &bitrate"
 msgstr "&Бит легін қоса"
 
-#: src/translators/audiofileimporter.cpp:506
+#: src/translators/audiofileimporter.cpp:505
 #, kde-format
 msgid "If checked, the bitrate for each track is added to the entries."
 msgstr "Белгісі қойылса, әр жолсызықтың бит легі мәні жазуға енеді."

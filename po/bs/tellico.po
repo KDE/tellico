@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:40+0000\n"
+"POT-Creation-Date: 2024-11-08 00:40+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -6815,37 +6815,37 @@ msgstr "Učestanost bita:"
 msgid "(Various)"
 msgstr "(Različit)"
 
-#: src/translators/audiofileimporter.cpp:492
+#: src/translators/audiofileimporter.cpp:491
 #, kde-format
 msgid "Audio File Options"
 msgstr "Opcije Audio Datoteke"
 
-#: src/translators/audiofileimporter.cpp:495
+#: src/translators/audiofileimporter.cpp:494
 #, kde-format
 msgid "Recursive &folder search"
 msgstr "Rekurzivna pretraga foldera"
 
-#: src/translators/audiofileimporter.cpp:496
+#: src/translators/audiofileimporter.cpp:495
 #, kde-format
 msgid "If checked, folders are recursively searched for audio files."
 msgstr "Ako je obilježeno, folderi rekurzivno traže audio fajlove."
 
-#: src/translators/audiofileimporter.cpp:500
+#: src/translators/audiofileimporter.cpp:499
 #, kde-format
 msgid "Include file &location"
 msgstr "Uključi lokaciju datoteke"
 
-#: src/translators/audiofileimporter.cpp:501
+#: src/translators/audiofileimporter.cpp:500
 #, kde-format
 msgid "If checked, the file names for each track are added to the entries."
 msgstr "Ako je obilježeno, ime za svaku pjesmu se dodaje na unose."
 
-#: src/translators/audiofileimporter.cpp:505
+#: src/translators/audiofileimporter.cpp:504
 #, kde-format
 msgid "Include &bitrate"
 msgstr "Uključi &učestanost bita"
 
-#: src/translators/audiofileimporter.cpp:506
+#: src/translators/audiofileimporter.cpp:505
 #, kde-format
 msgid "If checked, the bitrate for each track is added to the entries."
 msgstr "Ako je označeno, učestanost bita za svaku pjesmu se dodaje na stavke."
