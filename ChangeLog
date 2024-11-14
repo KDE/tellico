@@ -1,3 +1,7 @@
+2024-11-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Added option to disable the welcome screen.
+
 2024-10-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved image loading to be only on need.

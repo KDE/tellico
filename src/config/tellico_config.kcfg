@@ -106,6 +106,9 @@
     <entry key="Quick Filter RegExp" type="Bool">
         <default>false</default>
     </entry>
+    <entry key="Show Welcome" type="Bool">
+        <default>true</default>
+    </entry>
 </group>
 
 <group name="Printing">

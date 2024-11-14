@@ -965,40 +965,45 @@ void MainWindow::initFileOpen(bool nofile_) {
     m_detailedView->slotRefreshImages();
   }
 
-  // show welcome text, even when opening an existing collection
-  QString welcomeFile = DataFileRegistry::self()->locate(QStringLiteral("welcome.html"));
-  QString text = FileHandler::readTextFile(QUrl::fromLocalFile(welcomeFile));
-  const int type = Kernel::self()->collectionType();
-  text.replace(QLatin1String("$FGCOLOR$"), Config::templateTextColor(type).name());
-  text.replace(QLatin1String("$BGCOLOR$"), Config::templateBaseColor(type).name());
-  text.replace(QLatin1String("$COLOR1$"),  Config::templateHighlightedTextColor(type).name());
-  text.replace(QLatin1String("$COLOR2$"),  Config::templateHighlightedBaseColor(type).name());
-  text.replace(QLatin1String("$LINKCOLOR$"), Config::templateLinkColor(type).name());
-  text.replace(QLatin1String("$IMGDIR$"),  ImageFactory::imageDir().url());
-  text.replace(QLatin1String("$SUBTITLE$"),  i18n("Collection management software, free and simple"));
-  text.replace(QLatin1String("$BANNER$"),
-               i18n("Welcome to the Tellico Collection Manager"));
-  text.replace(QLatin1String("$WELCOMETEXT$"),
-               i18n("<h3>Tellico is a tool for managing collections of books, "
-                    "videos, music, and whatever else you want to catalog.</h3>"
-                    "<h3>New entries can be added to your collection by "
-                    "<a href=\"tc:///coll_new_entry\">entering data manually</a> or by "
-                    "<a href=\"tc:///edit_search_internet\">downloading data</a> from "
-                    "various Internet sources.</h3>")
-               .replace(QLatin1String("<h3>"),  QLatin1String("<p>"))
-               .replace(QLatin1String("</h3>"), QLatin1String("</p>")));
-  QString iconPath = KIconLoader::global()->iconPath(QLatin1String("tellico"), -KIconLoader::SizeEnormous);
-  if(iconPath.startsWith(QLatin1String(":/"))) {
-    iconPath = QStringLiteral("qrc") + iconPath;
-  } else {
-    iconPath = QStringLiteral("file://") + iconPath;
-  }
+  if(Config::showWelcome()) {
+    // show welcome text, even when opening an existing collection
+    QString welcomeFile = DataFileRegistry::self()->locate(QStringLiteral("welcome.html"));
+    QString text = FileHandler::readTextFile(QUrl::fromLocalFile(welcomeFile));
+    const int type = Kernel::self()->collectionType();
+    text.replace(QLatin1String("$FGCOLOR$"), Config::templateTextColor(type).name());
+    text.replace(QLatin1String("$BGCOLOR$"), Config::templateBaseColor(type).name());
+    text.replace(QLatin1String("$COLOR1$"),  Config::templateHighlightedTextColor(type).name());
+    text.replace(QLatin1String("$COLOR2$"),  Config::templateHighlightedBaseColor(type).name());
+    text.replace(QLatin1String("$LINKCOLOR$"), Config::templateLinkColor(type).name());
+    text.replace(QLatin1String("$IMGDIR$"),  ImageFactory::imageDir().url());
+    text.replace(QLatin1String("$SUBTITLE$"),  i18n("Collection management software, free and simple"));
+    text.replace(QLatin1String("$BANNER$"),
+                 i18n("Welcome to the Tellico Collection Manager"));
+    text.replace(QLatin1String("$WELCOMETEXT$"),
+                 i18n("<h3>Tellico is a tool for managing collections of books, "
+                      "videos, music, and whatever else you want to catalog.</h3>"
+                      "<h3>New entries can be added to your collection by "
+                      "<a href=\"tc:///coll_new_entry\">entering data manually</a> or by "
+                      "<a href=\"tc:///edit_search_internet\">downloading data</a> from "
+                      "various Internet sources.</h3>")
+                 .replace(QLatin1String("<h3>"),  QLatin1String("<p>"))
+                 .replace(QLatin1String("</h3>"), QLatin1String("</p>")));
+    text.replace(QLatin1String("$FOOTER$"),
+                 i18n("More information can be found in the <a href=\"help:/tellico\">documentation</a>. "
+                      "You may also <a href=\"tc:///disable_welcome\">disable this welcome screen</a>."));
+    QString iconPath = KIconLoader::global()->iconPath(QLatin1String("tellico"), -KIconLoader::SizeEnormous);
+    if(iconPath.startsWith(QLatin1String(":/"))) {
+      iconPath = QStringLiteral("qrc") + iconPath;
+    } else {
+      iconPath = QStringLiteral("file://") + iconPath;
+    }
 
-  text.replace(QLatin1String("$ICON$"),
-               QStringLiteral("<img src=\"%1\" align=\"top\" height=\"%2\" width=\"%2\" title=\"tellico\" />")
-                   .arg(iconPath)
-                   .arg(KIconLoader::SizeEnormous));
-  m_entryView->showText(text);
+    text.replace(QLatin1String("$ICON$"),
+                 QStringLiteral("<img src=\"%1\" align=\"top\" height=\"%2\" width=\"%2\" title=\"tellico\" />")
+                 .arg(iconPath)
+                 .arg(KIconLoader::SizeEnormous));
+    m_entryView->showText(text);
+  }
 
   m_initialized = true;
 }
@@ -2500,7 +2505,12 @@ bool MainWindow::importCollection(Tellico::Data::CollPtr coll_, Tellico::Import:
 
 void MainWindow::slotURLAction(const QUrl& url_) {
   Q_ASSERT(url_.scheme() == QLatin1String("tc"));
-  QString actionName = url_.fileName();
+  const QString actionName = url_.fileName();
+  if(actionName == QLatin1String("disable_welcome")) {
+    Config::setShowWelcome(false);
+    m_entryView->showText(QString());
+    return; // done
+  }
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
   QAction* action = this->action(actionName.toLatin1().constData());
 #else
