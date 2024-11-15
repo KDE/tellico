@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-08 00:40+0000\n"
+"POT-Creation-Date: 2024-11-15 00:40+0000\n"
 "PO-Revision-Date: 2024-09-18 09:44+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -169,7 +169,7 @@ msgstr "Název"
 msgid "Collection Size"
 msgstr "Velikost sbírky"
 
-#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1666
+#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1686
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Celkem záznamů: %1"
@@ -2168,13 +2168,13 @@ msgstr "de,van,der,van der,von"
 #. i18n: ectx: label, entry (fontFile), group (Options - file)
 #. i18n: ectx: label, entry (fontBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (fontBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:134 src/config/tellico_config.kcfg:164
-#: src/config/tellico_config.kcfg:194 src/config/tellico_config.kcfg:227
-#: src/config/tellico_config.kcfg:257 src/config/tellico_config.kcfg:287
-#: src/config/tellico_config.kcfg:317 src/config/tellico_config.kcfg:347
-#: src/config/tellico_config.kcfg:377 src/config/tellico_config.kcfg:407
-#: src/config/tellico_config.kcfg:437 src/config/tellico_config.kcfg:467
-#: src/config/tellico_config.kcfg:497
+#: src/config/tellico_config.kcfg:137 src/config/tellico_config.kcfg:167
+#: src/config/tellico_config.kcfg:197 src/config/tellico_config.kcfg:230
+#: src/config/tellico_config.kcfg:260 src/config/tellico_config.kcfg:290
+#: src/config/tellico_config.kcfg:320 src/config/tellico_config.kcfg:350
+#: src/config/tellico_config.kcfg:380 src/config/tellico_config.kcfg:410
+#: src/config/tellico_config.kcfg:440 src/config/tellico_config.kcfg:470
+#: src/config/tellico_config.kcfg:500
 #, kde-format
 msgid "Template font"
 msgstr "Písmo šablony"
@@ -2192,13 +2192,13 @@ msgstr "Písmo šablony"
 #. i18n: ectx: label, entry (baseColorFile), group (Options - file)
 #. i18n: ectx: label, entry (baseColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (baseColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:138 src/config/tellico_config.kcfg:168
-#: src/config/tellico_config.kcfg:198 src/config/tellico_config.kcfg:231
-#: src/config/tellico_config.kcfg:261 src/config/tellico_config.kcfg:291
-#: src/config/tellico_config.kcfg:321 src/config/tellico_config.kcfg:351
-#: src/config/tellico_config.kcfg:381 src/config/tellico_config.kcfg:411
-#: src/config/tellico_config.kcfg:441 src/config/tellico_config.kcfg:471
-#: src/config/tellico_config.kcfg:501
+#: src/config/tellico_config.kcfg:141 src/config/tellico_config.kcfg:171
+#: src/config/tellico_config.kcfg:201 src/config/tellico_config.kcfg:234
+#: src/config/tellico_config.kcfg:264 src/config/tellico_config.kcfg:294
+#: src/config/tellico_config.kcfg:324 src/config/tellico_config.kcfg:354
+#: src/config/tellico_config.kcfg:384 src/config/tellico_config.kcfg:414
+#: src/config/tellico_config.kcfg:444 src/config/tellico_config.kcfg:474
+#: src/config/tellico_config.kcfg:504
 #, kde-format
 msgid "Template background color"
 msgstr "Barva pozadí šablony"
@@ -2216,13 +2216,13 @@ msgstr "Barva pozadí šablony"
 #. i18n: ectx: label, entry (textColorFile), group (Options - file)
 #. i18n: ectx: label, entry (textColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (textColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:142 src/config/tellico_config.kcfg:172
-#: src/config/tellico_config.kcfg:202 src/config/tellico_config.kcfg:235
-#: src/config/tellico_config.kcfg:265 src/config/tellico_config.kcfg:295
-#: src/config/tellico_config.kcfg:325 src/config/tellico_config.kcfg:355
-#: src/config/tellico_config.kcfg:385 src/config/tellico_config.kcfg:415
-#: src/config/tellico_config.kcfg:445 src/config/tellico_config.kcfg:475
-#: src/config/tellico_config.kcfg:505
+#: src/config/tellico_config.kcfg:145 src/config/tellico_config.kcfg:175
+#: src/config/tellico_config.kcfg:205 src/config/tellico_config.kcfg:238
+#: src/config/tellico_config.kcfg:268 src/config/tellico_config.kcfg:298
+#: src/config/tellico_config.kcfg:328 src/config/tellico_config.kcfg:358
+#: src/config/tellico_config.kcfg:388 src/config/tellico_config.kcfg:418
+#: src/config/tellico_config.kcfg:448 src/config/tellico_config.kcfg:478
+#: src/config/tellico_config.kcfg:508
 #, kde-format
 msgid "Template text color"
 msgstr "Barva textu šablony:"
@@ -2240,13 +2240,13 @@ msgstr "Barva textu šablony:"
 #. i18n: ectx: label, entry (highlightedBaseColorFile), group (Options - file)
 #. i18n: ectx: label, entry (highlightedBaseColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (highlightedBaseColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:146 src/config/tellico_config.kcfg:176
-#: src/config/tellico_config.kcfg:206 src/config/tellico_config.kcfg:239
-#: src/config/tellico_config.kcfg:269 src/config/tellico_config.kcfg:299
-#: src/config/tellico_config.kcfg:329 src/config/tellico_config.kcfg:359
-#: src/config/tellico_config.kcfg:389 src/config/tellico_config.kcfg:419
-#: src/config/tellico_config.kcfg:449 src/config/tellico_config.kcfg:479
-#: src/config/tellico_config.kcfg:509
+#: src/config/tellico_config.kcfg:149 src/config/tellico_config.kcfg:179
+#: src/config/tellico_config.kcfg:209 src/config/tellico_config.kcfg:242
+#: src/config/tellico_config.kcfg:272 src/config/tellico_config.kcfg:302
+#: src/config/tellico_config.kcfg:332 src/config/tellico_config.kcfg:362
+#: src/config/tellico_config.kcfg:392 src/config/tellico_config.kcfg:422
+#: src/config/tellico_config.kcfg:452 src/config/tellico_config.kcfg:482
+#: src/config/tellico_config.kcfg:512
 #, kde-format
 msgid "Template highlight color"
 msgstr "Barva zvýraznění v šabloně"
@@ -2264,13 +2264,13 @@ msgstr "Barva zvýraznění v šabloně"
 #. i18n: ectx: label, entry (highlightedTextColorFile), group (Options - file)
 #. i18n: ectx: label, entry (highlightedTextColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (highlightedTextColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:150 src/config/tellico_config.kcfg:180
-#: src/config/tellico_config.kcfg:210 src/config/tellico_config.kcfg:243
-#: src/config/tellico_config.kcfg:273 src/config/tellico_config.kcfg:303
-#: src/config/tellico_config.kcfg:333 src/config/tellico_config.kcfg:363
-#: src/config/tellico_config.kcfg:393 src/config/tellico_config.kcfg:423
-#: src/config/tellico_config.kcfg:453 src/config/tellico_config.kcfg:483
-#: src/config/tellico_config.kcfg:513
+#: src/config/tellico_config.kcfg:153 src/config/tellico_config.kcfg:183
+#: src/config/tellico_config.kcfg:213 src/config/tellico_config.kcfg:246
+#: src/config/tellico_config.kcfg:276 src/config/tellico_config.kcfg:306
+#: src/config/tellico_config.kcfg:336 src/config/tellico_config.kcfg:366
+#: src/config/tellico_config.kcfg:396 src/config/tellico_config.kcfg:426
+#: src/config/tellico_config.kcfg:456 src/config/tellico_config.kcfg:486
+#: src/config/tellico_config.kcfg:516
 #, kde-format
 msgid "Template highlighted text color"
 msgstr "Barva zvýrazněného textu v šabloně"
@@ -2288,13 +2288,13 @@ msgstr "Barva zvýrazněného textu v šabloně"
 #. i18n: ectx: label, entry (linkColorFile), group (Options - file)
 #. i18n: ectx: label, entry (linkColorBoardGame), group (Options - boardgame)
 #. i18n: ectx: label, entry (linkColorBase), group (Options - entry)
-#: src/config/tellico_config.kcfg:154 src/config/tellico_config.kcfg:184
-#: src/config/tellico_config.kcfg:214 src/config/tellico_config.kcfg:247
-#: src/config/tellico_config.kcfg:277 src/config/tellico_config.kcfg:307
-#: src/config/tellico_config.kcfg:337 src/config/tellico_config.kcfg:367
-#: src/config/tellico_config.kcfg:397 src/config/tellico_config.kcfg:427
-#: src/config/tellico_config.kcfg:457 src/config/tellico_config.kcfg:487
-#: src/config/tellico_config.kcfg:517
+#: src/config/tellico_config.kcfg:157 src/config/tellico_config.kcfg:187
+#: src/config/tellico_config.kcfg:217 src/config/tellico_config.kcfg:250
+#: src/config/tellico_config.kcfg:280 src/config/tellico_config.kcfg:310
+#: src/config/tellico_config.kcfg:340 src/config/tellico_config.kcfg:370
+#: src/config/tellico_config.kcfg:400 src/config/tellico_config.kcfg:430
+#: src/config/tellico_config.kcfg:460 src/config/tellico_config.kcfg:490
+#: src/config/tellico_config.kcfg:520
 #, kde-format
 msgid "Template link color"
 msgstr "Barva odkazu šablony"
@@ -2748,8 +2748,8 @@ msgstr "Soubory XSL"
 msgid "Template Packages"
 msgstr "Balíčky šablon"
 
-#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1297
-#: src/mainwindow.cpp:1473 src/reportdialog.cpp:443 src/reportdialog.cpp:458
+#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1317
+#: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -2807,22 +2807,22 @@ msgstr "Smazat více záznamů"
 msgid "&Sort By"
 msgstr "&Seřadit podle"
 
-#: src/controller.cpp:594 src/mainwindow.cpp:610
+#: src/controller.cpp:594 src/mainwindow.cpp:611
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "&Upravit záznam..."
 
-#: src/controller.cpp:595 src/mainwindow.cpp:617
+#: src/controller.cpp:595 src/mainwindow.cpp:618
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "&Klonovat záznam"
 
-#: src/controller.cpp:596 src/mainwindow.cpp:711
+#: src/controller.cpp:596 src/mainwindow.cpp:712
 #, kde-format
 msgid "&Update Entry"
 msgstr "&Aktualizovat záznam"
 
-#: src/controller.cpp:597 src/mainwindow.cpp:624
+#: src/controller.cpp:597 src/mainwindow.cpp:625
 #, kde-format
 msgid "&Delete Entry"
 msgstr "&Smazat záznam"
@@ -2910,7 +2910,7 @@ msgstr "Zobrazit všechny sloupce"
 msgid "Hide All Columns"
 msgstr "Skrýt všechny sloupce"
 
-#: src/document.cpp:212 src/mainwindow.cpp:1412
+#: src/document.cpp:212 src/mainwindow.cpp:1432
 #, kde-format
 msgid "Saving file..."
 msgstr "Ukládám soubor..."
@@ -2972,12 +2972,12 @@ msgid "Save Entry"
 msgstr "Uložit záznam"
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1182 src/mainwindow.cpp:1200
+#: src/mainwindow.cpp:1202 src/mainwindow.cpp:1220
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Neuložené změny"
 
-#: src/entryiconview.cpp:61 src/mainwindow.cpp:884
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:885
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3046,7 +3046,7 @@ msgstr "Aktualizuji <b>%1</b>..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico nemůže najít výchozí styl pro záznamy."
 
-#: src/entryview.cpp:354 src/mainwindow.cpp:1819
+#: src/entryview.cpp:354 src/mainwindow.cpp:1839
 #, kde-format
 msgid "Please check your installation."
 msgstr "Zkontrolujte instalaci programu."
@@ -4368,7 +4368,7 @@ msgstr ""
 "nepotřebuje. Heslo bude v konfiguračním souboru Tellico uloženo jako prostý "
 "text."
 
-#: src/fetchdialog.cpp:138 src/mainwindow.cpp:600
+#: src/fetchdialog.cpp:138 src/mainwindow.cpp:601
 #, kde-format
 msgid "Internet Search"
 msgstr "Internetové hledání"
@@ -4708,8 +4708,8 @@ msgstr "Název filtru:"
 msgid "&Save Filter"
 msgstr "&Uložit filtr"
 
-#: src/filterview.cpp:190 src/mainwindow.cpp:573 src/mainwindow.cpp:789
-#: src/mainwindow.cpp:807
+#: src/filterview.cpp:190 src/mainwindow.cpp:574 src/mainwindow.cpp:790
+#: src/mainwindow.cpp:808
 #, kde-format
 msgid "Filter"
 msgstr "Filtr"
@@ -4745,8 +4745,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Skupina"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1109 src/mainwindow.cpp:1754
-#: src/mainwindow.cpp:1788 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1129 src/mainwindow.cpp:1774
+#: src/mainwindow.cpp:1808 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Lidé"
@@ -5043,19 +5043,19 @@ msgstr ""
 "pouze pokud se shodují druhy sbírek. Aby byly záznamy sloučeny, musí být v "
 "přesně stejném pořadí."
 
-#: src/importdialog.cpp:150 src/mainwindow.cpp:373
+#: src/importdialog.cpp:150 src/mainwindow.cpp:374
 #, kde-format
 msgid "&Import"
 msgstr "&Importovat"
 
-#: src/importdialog.cpp:377 src/mainwindow.cpp:1293 src/mainwindow.cpp:1471
+#: src/importdialog.cpp:377 src/mainwindow.cpp:1313 src/mainwindow.cpp:1491
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Soubory Tellico"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1295 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1315 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "Soubory XML"
@@ -5296,838 +5296,838 @@ msgstr ""
 msgid "File to open"
 msgstr "Soubor k otevření"
 
-#: src/mainwindow.cpp:257
+#: src/mainwindow.cpp:258
 #, kde-format
 msgid "New Collection"
 msgstr "Nová sbírka"
 
-#: src/mainwindow.cpp:259
+#: src/mainwindow.cpp:260
 #, kde-format
 msgid "Create a new collection"
 msgstr "Vytvořit novou sbírku"
 
-#: src/mainwindow.cpp:278
+#: src/mainwindow.cpp:279
 #, kde-format
 msgid "New &Book Collection"
 msgstr "Nová sbírka &knih"
 
-#: src/mainwindow.cpp:279
+#: src/mainwindow.cpp:280
 #, kde-format
 msgid "Create a new book collection"
 msgstr "Vytvořit novou sbírku knih"
 
-#: src/mainwindow.cpp:281
+#: src/mainwindow.cpp:282
 #, kde-format
 msgid "New B&ibliography"
 msgstr "Nová seznam použ&ité literatury"
 
-#: src/mainwindow.cpp:282
+#: src/mainwindow.cpp:283
 #, kde-format
 msgid "Create a new bibtex bibliography"
 msgstr "Vytvořit nový seznam použité literatury bibtex"
 
-#: src/mainwindow.cpp:284
+#: src/mainwindow.cpp:285
 #, kde-format
 msgid "New &Comic Book Collection"
 msgstr "Nová sbírka ko&miksů"
 
-#: src/mainwindow.cpp:285
+#: src/mainwindow.cpp:286
 #, kde-format
 msgid "Create a new comic book collection"
 msgstr "Vytvořit novou sbírku komiksů"
 
-#: src/mainwindow.cpp:287
+#: src/mainwindow.cpp:288
 #, kde-format
 msgid "New &Video Collection"
 msgstr "Nová &video sbírka"
 
-#: src/mainwindow.cpp:288
+#: src/mainwindow.cpp:289
 #, kde-format
 msgid "Create a new video collection"
 msgstr "Vytvořit novou video sbírku"
 
-#: src/mainwindow.cpp:290
+#: src/mainwindow.cpp:291
 #, kde-format
 msgid "New &Music Collection"
 msgstr "Nová sbírka &hudby"
 
-#: src/mainwindow.cpp:291
+#: src/mainwindow.cpp:292
 #, kde-format
 msgid "Create a new music collection"
 msgstr "Vytvořit novou sbírku hudby"
 
-#: src/mainwindow.cpp:293
+#: src/mainwindow.cpp:294
 #, kde-format
 msgid "New C&oin Collection"
 msgstr "Nová sbírka min&cí"
 
-#: src/mainwindow.cpp:294
+#: src/mainwindow.cpp:295
 #, kde-format
 msgid "Create a new coin collection"
 msgstr "Vytvořit novou sbírku mincí"
 
-#: src/mainwindow.cpp:296
+#: src/mainwindow.cpp:297
 #, kde-format
 msgid "New &Stamp Collection"
 msgstr "Nová sbírka &známek"
 
-#: src/mainwindow.cpp:297
+#: src/mainwindow.cpp:298
 #, kde-format
 msgid "Create a new stamp collection"
 msgstr "Vytvořit novou sbírku známek"
 
-#: src/mainwindow.cpp:299
+#: src/mainwindow.cpp:300
 #, kde-format
 msgid "New C&ard Collection"
 msgstr "Nová sbírka &karet"
 
-#: src/mainwindow.cpp:300
+#: src/mainwindow.cpp:301
 #, kde-format
 msgid "Create a new trading card collection"
 msgstr "Vytvořit novou sbírku výměnných karet"
 
-#: src/mainwindow.cpp:302
+#: src/mainwindow.cpp:303
 #, kde-format
 msgid "New &Wine Collection"
 msgstr "Nová sbírka &vín"
 
-#: src/mainwindow.cpp:303
+#: src/mainwindow.cpp:304
 #, kde-format
 msgid "Create a new wine collection"
 msgstr "Vytvořit novou sbírku vín"
 
-#: src/mainwindow.cpp:305
+#: src/mainwindow.cpp:306
 #, kde-format
 msgid "New Video &Game Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:306
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "Create a new video game collection"
 msgstr ""
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:309
 #, kde-format
 msgid "New Boa&rd Game Collection"
 msgstr "Nová sbírka deskových &her"
 
-#: src/mainwindow.cpp:309
+#: src/mainwindow.cpp:310
 #, kde-format
 msgid "Create a new board game collection"
 msgstr "Vytvořit novou sbírku deskových her"
 
-#: src/mainwindow.cpp:311
+#: src/mainwindow.cpp:312
 #, kde-format
 msgid "New &File Catalog"
 msgstr "Nový katalog &souborů"
 
-#: src/mainwindow.cpp:312
+#: src/mainwindow.cpp:313
 #, kde-format
 msgid "Create a new file catalog"
 msgstr "Vytvořit nový katalog souborů"
 
-#: src/mainwindow.cpp:315
+#: src/mainwindow.cpp:316
 #, kde-format
 msgid "New C&ustom Collection"
 msgstr "Nová &vlastní sbírka"
 
-#: src/mainwindow.cpp:316
+#: src/mainwindow.cpp:317
 #, kde-format
 msgid "Create a new custom collection"
 msgstr "Vytvořit novou vlastní sbírku"
 
-#: src/mainwindow.cpp:327
+#: src/mainwindow.cpp:328
 #, kde-format
 msgid "Open an existing document"
 msgstr "Otevřít existující dokument"
 
-#: src/mainwindow.cpp:329
+#: src/mainwindow.cpp:330
 #, kde-format
 msgid "Open a recently used file"
 msgstr "Otevřít nedávno používaný soubor"
 
-#: src/mainwindow.cpp:331
+#: src/mainwindow.cpp:332
 #, kde-format
 msgid "Save the document"
 msgstr "Uložit dokument"
 
-#: src/mainwindow.cpp:333
+#: src/mainwindow.cpp:334
 #, kde-format
 msgid "Save the document as a different file..."
 msgstr "Uložit dokument jako jiný soubor..."
 
-#: src/mainwindow.cpp:337
+#: src/mainwindow.cpp:338
 #, kde-format
 msgid "Save As Template..."
 msgstr "Uložit jako šablonu..."
 
-#: src/mainwindow.cpp:339
+#: src/mainwindow.cpp:340
 #, kde-format
 msgid "Save as a collection template"
 msgstr "Uložit jako šablonu sbírky"
 
-#: src/mainwindow.cpp:342
+#: src/mainwindow.cpp:343
 #, kde-format
 msgid "Print the contents of the collection..."
 msgstr "Tisk obsahu sbírky..."
 
-#: src/mainwindow.cpp:358
+#: src/mainwindow.cpp:359
 #, kde-format
 msgid "Preview the contents of the collection..."
 msgstr "Náhled obsahu sbírky..."
 
-#: src/mainwindow.cpp:362
+#: src/mainwindow.cpp:363
 #, kde-format
 msgid "Quit the application"
 msgstr "Ukončit program"
 
-#: src/mainwindow.cpp:375
+#: src/mainwindow.cpp:376
 #, kde-format
 msgid "Import the collection data from other formats"
 msgstr "Importovat data sbírky z jiných formátů"
 
-#: src/mainwindow.cpp:391
+#: src/mainwindow.cpp:392
 #, kde-format
 msgid "Import Tellico Data..."
 msgstr "Importovat data Tellico..."
 
-#: src/mainwindow.cpp:392
+#: src/mainwindow.cpp:393
 #, kde-format
 msgid "Import another Tellico data file"
 msgstr "Importovat další datový soubor Tellico"
 
-#: src/mainwindow.cpp:395
+#: src/mainwindow.cpp:396
 #, kde-format
 msgid "Import CSV Data..."
 msgstr "Importovat CSV data..."
 
-#: src/mainwindow.cpp:396
+#: src/mainwindow.cpp:397
 #, kde-format
 msgid "Import a CSV file"
 msgstr "Importovat CSV soubor"
 
-#: src/mainwindow.cpp:398
+#: src/mainwindow.cpp:399
 #, kde-format
 msgid "Import MODS Data..."
 msgstr "Importovat MODS data..."
 
-#: src/mainwindow.cpp:399
+#: src/mainwindow.cpp:400
 #, kde-format
 msgid "Import a MODS data file"
 msgstr "Importovat MODS soubor"
 
-#: src/mainwindow.cpp:401
+#: src/mainwindow.cpp:402
 #, kde-format
 msgid "Import Alexandria Data..."
 msgstr "Importovat Alexandria data..."
 
-#: src/mainwindow.cpp:402
+#: src/mainwindow.cpp:403
 #, kde-format
 msgid "Import data from the Alexandria book collection manager"
 msgstr "Importovat data ze správce sbírek knih Alexandria"
 
-#: src/mainwindow.cpp:405
+#: src/mainwindow.cpp:406
 #, kde-format
 msgid "Import Delicious Library Data..."
 msgstr "Importovat data Delicious Library..."
 
-#: src/mainwindow.cpp:406
+#: src/mainwindow.cpp:407
 #, kde-format
 msgid "Import data from Delicious Library"
 msgstr "Importovat data z Delicious Library"
 
-#: src/mainwindow.cpp:409
+#: src/mainwindow.cpp:410
 #, kde-format
 msgid "Import Collectorz Data..."
 msgstr "Importovat data Collectorz..."
 
-#: src/mainwindow.cpp:410
+#: src/mainwindow.cpp:411
 #, kde-format
 msgid "Import data from Collectorz"
 msgstr "Importovat data z Collectorz"
 
-#: src/mainwindow.cpp:413
+#: src/mainwindow.cpp:414
 #, kde-format
 msgid "Import Data Crow Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:414
+#: src/mainwindow.cpp:415
 #, kde-format
 msgid "Import data from Data Crow"
 msgstr ""
 
-#: src/mainwindow.cpp:417
+#: src/mainwindow.cpp:418
 #, kde-format
 msgid "Import Referencer Data..."
 msgstr "Importovat Referencer data..."
 
-#: src/mainwindow.cpp:418
+#: src/mainwindow.cpp:419
 #, kde-format
 msgid "Import data from Referencer"
 msgstr "Importovat data z Referenceru"
 
-#: src/mainwindow.cpp:421
+#: src/mainwindow.cpp:422
 #, kde-format
 msgid "Import Bibtex Data..."
 msgstr "Importovat Bibtex data..."
 
-#: src/mainwindow.cpp:422
+#: src/mainwindow.cpp:423
 #, kde-format
 msgid "Import a bibtex bibliography file"
 msgstr "Importovat soubor se seznamem použité literatury Bibtex"
 
-#: src/mainwindow.cpp:427
+#: src/mainwindow.cpp:428
 #, kde-format
 msgid "Import Bibtexml Data..."
 msgstr "Importovat Bibtexml data..."
 
-#: src/mainwindow.cpp:428
+#: src/mainwindow.cpp:429
 #, kde-format
 msgid "Import a Bibtexml bibliography file"
 msgstr "Importovat soubor se seznamem použité literatury Bibtexml"
 
-#: src/mainwindow.cpp:430
+#: src/mainwindow.cpp:431
 #, kde-format
 msgid "Import RIS Data..."
 msgstr "Importovat RIS data..."
 
-#: src/mainwindow.cpp:431
+#: src/mainwindow.cpp:432
 #, kde-format
 msgid "Import an RIS reference file"
 msgstr "Importovat referenční RIS soubor"
 
-#: src/mainwindow.cpp:433
+#: src/mainwindow.cpp:434
 #, kde-format
 msgid "Import MARC Data..."
 msgstr "Importovat data MARC..."
 
-#: src/mainwindow.cpp:434
+#: src/mainwindow.cpp:435
 #, kde-format
 msgid "Import MARC data"
 msgstr "Importovat data MARC"
 
-#: src/mainwindow.cpp:441
+#: src/mainwindow.cpp:442
 #, kde-format
 msgid "Import Goodreads Collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:442
+#: src/mainwindow.cpp:443
 #, kde-format
 msgid "Import a collection from Goodreads.com"
 msgstr ""
 
-#: src/mainwindow.cpp:444
+#: src/mainwindow.cpp:445
 #, kde-format
 msgid "Import LibraryThing Collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:445
+#: src/mainwindow.cpp:446
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
 msgstr ""
 
-#: src/mainwindow.cpp:447
+#: src/mainwindow.cpp:448
 #, kde-format
 msgid "Import PDF File..."
 msgstr "Importovat PDF soubor..."
 
-#: src/mainwindow.cpp:448
+#: src/mainwindow.cpp:449
 #, kde-format
 msgid "Import a PDF file"
 msgstr "Importovat PDF soubor"
 
-#: src/mainwindow.cpp:450
+#: src/mainwindow.cpp:451
 #, kde-format
 msgid "Import Audio File Metadata..."
 msgstr "Importovat metadata audio souboru..."
 
-#: src/mainwindow.cpp:451
+#: src/mainwindow.cpp:452
 #, kde-format
 msgid "Import meta-data from audio files"
 msgstr "Importovat metadata z audio souborů"
 
-#: src/mainwindow.cpp:456
+#: src/mainwindow.cpp:457
 #, kde-format
 msgid "Import Audio CD Data..."
 msgstr "Importovat Audio CD data"
 
-#: src/mainwindow.cpp:457
+#: src/mainwindow.cpp:458
 #, kde-format
 msgid "Import audio CD information"
 msgstr "Importovat informace z audio CD"
 
-#: src/mainwindow.cpp:462
+#: src/mainwindow.cpp:463
 #, kde-format
 msgid "Import Discogs Collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:463
+#: src/mainwindow.cpp:464
 #, kde-format
 msgid "Import a collection from Discogs.com"
 msgstr ""
 
-#: src/mainwindow.cpp:465
+#: src/mainwindow.cpp:466
 #, kde-format
 msgid "Import GCstar Data..."
 msgstr "Importovat GCstar data"
 
-#: src/mainwindow.cpp:466
+#: src/mainwindow.cpp:467
 #, kde-format
 msgid "Import a GCstar data file"
 msgstr "Importovat datový soubor GCstar"
 
-#: src/mainwindow.cpp:469
+#: src/mainwindow.cpp:470
 #, kde-format
 msgid "Import Griffith Data..."
 msgstr "Importovat Griffith data..."
 
-#: src/mainwindow.cpp:470
+#: src/mainwindow.cpp:471
 #, kde-format
 msgid "Import a Griffith database"
 msgstr "Importovat databázi Griffith"
 
-#: src/mainwindow.cpp:473
+#: src/mainwindow.cpp:474
 #, kde-format
 msgid "Import Ant Movie Catalog Data..."
 msgstr "Importovat data z programu Ant Movie Catalog"
 
-#: src/mainwindow.cpp:474
+#: src/mainwindow.cpp:475
 #, kde-format
 msgid "Import an Ant Movie Catalog data file"
 msgstr "Importovat datový soubor z Ant Movie Catalog"
 
-#: src/mainwindow.cpp:477
+#: src/mainwindow.cpp:478
 #, kde-format
 msgid "Import BoardGameGeek Collection..."
 msgstr "Importovat sbírku BoardGameGeek..."
 
-#: src/mainwindow.cpp:478
+#: src/mainwindow.cpp:479
 #, kde-format
 msgid "Import a collection from BoardGameGeek.com"
 msgstr "Importovat sbírku z BoardGameGeek.com"
 
-#: src/mainwindow.cpp:480
+#: src/mainwindow.cpp:481
 #, kde-format
 msgid "Import VinoXML..."
 msgstr "Importovat VinoXML..."
 
-#: src/mainwindow.cpp:481
+#: src/mainwindow.cpp:482
 #, kde-format
 msgid "Import VinoXML data"
 msgstr "Importovat data VinoXML"
 
-#: src/mainwindow.cpp:483
+#: src/mainwindow.cpp:484
 #, kde-format
 msgid "Import File Listing..."
 msgstr "Importovat výpis souborů..."
 
-#: src/mainwindow.cpp:484
+#: src/mainwindow.cpp:485
 #, kde-format
 msgid "Import information about files in a folder"
 msgstr "Importovat informace o souborech ve složce"
 
-#: src/mainwindow.cpp:486
+#: src/mainwindow.cpp:487
 #, kde-format
 msgid "Import XSL Transform..."
 msgstr "Importovat XSL Transform..."
 
-#: src/mainwindow.cpp:487
+#: src/mainwindow.cpp:488
 #, kde-format
 msgid "Import using an XSL Transform"
 msgstr "Importovat s pomocí XSL Transform"
 
-#: src/mainwindow.cpp:500
+#: src/mainwindow.cpp:501
 #, kde-format
 msgid "&Export"
 msgstr "&Exportovat"
 
-#: src/mainwindow.cpp:502
+#: src/mainwindow.cpp:503
 #, kde-format
 msgid "Export the collection data to other formats"
 msgstr "Exportovat data sbírky do jiných formátů"
 
-#: src/mainwindow.cpp:518
+#: src/mainwindow.cpp:519
 #, kde-format
 msgid "Export to XML..."
 msgstr "Exportovat do XML..."
 
-#: src/mainwindow.cpp:519
+#: src/mainwindow.cpp:520
 #, kde-format
 msgid "Export to a Tellico XML file"
 msgstr "Exportovat do Tellico XML souboru"
 
-#: src/mainwindow.cpp:522
+#: src/mainwindow.cpp:523
 #, kde-format
 msgid "Export to Zip..."
 msgstr "Exportovat do Zip..."
 
-#: src/mainwindow.cpp:523
+#: src/mainwindow.cpp:524
 #, kde-format
 msgid "Export to a Tellico Zip file"
 msgstr "Exportovat do Tellico Zip souboru"
 
-#: src/mainwindow.cpp:526
+#: src/mainwindow.cpp:527
 #, kde-format
 msgid "Export to HTML..."
 msgstr "Exportovat do HTML..."
 
-#: src/mainwindow.cpp:527
+#: src/mainwindow.cpp:528
 #, kde-format
 msgid "Export to an HTML file"
 msgstr "Exportovat do HTML souboru"
 
-#: src/mainwindow.cpp:529
+#: src/mainwindow.cpp:530
 #, kde-format
 msgid "Export to CSV..."
 msgstr "Exportovat do CSV..."
 
-#: src/mainwindow.cpp:530
+#: src/mainwindow.cpp:531
 #, kde-format
 msgid "Export to a comma-separated values file"
 msgstr "Exportovat do souboru s hodnotami oddělenými čárkou"
 
-#: src/mainwindow.cpp:532
+#: src/mainwindow.cpp:533
 #, kde-format
 msgid "Export to Alexandria..."
 msgstr "Exportovat do Alexandria..."
 
-#: src/mainwindow.cpp:533
+#: src/mainwindow.cpp:534
 #, kde-format
 msgid "Export to an Alexandria library"
 msgstr "Exportovat do knihovny Alexandria"
 
-#: src/mainwindow.cpp:536
+#: src/mainwindow.cpp:537
 #, kde-format
 msgid "Export to Bibtex..."
 msgstr "Exportovat do Bibtex..."
 
-#: src/mainwindow.cpp:537
+#: src/mainwindow.cpp:538
 #, kde-format
 msgid "Export to a bibtex file"
 msgstr "Exportovat souboru Bibtex"
 
-#: src/mainwindow.cpp:539
+#: src/mainwindow.cpp:540
 #, kde-format
 msgid "Export to Bibtexml..."
 msgstr "Exportovat do Bibtexml..."
 
-#: src/mainwindow.cpp:540
+#: src/mainwindow.cpp:541
 #, kde-format
 msgid "Export to a Bibtexml file"
 msgstr "Exportovat do souboru Bibtexml"
 
-#: src/mainwindow.cpp:542
+#: src/mainwindow.cpp:543
 #, kde-format
 msgid "Export to ONIX..."
 msgstr "Exportovat do ONIX..."
 
-#: src/mainwindow.cpp:543
+#: src/mainwindow.cpp:544
 #, kde-format
 msgid "Export to an ONIX file"
 msgstr "Exportovat do souboru ONIX"
 
-#: src/mainwindow.cpp:545
+#: src/mainwindow.cpp:546
 #, kde-format
 msgid "Export to GCstar..."
 msgstr "Exportovat do GCstar..."
 
-#: src/mainwindow.cpp:546
+#: src/mainwindow.cpp:547
 #, kde-format
 msgid "Export to a GCstar data file"
 msgstr "Export do datového souboru GCstar"
 
-#: src/mainwindow.cpp:549
+#: src/mainwindow.cpp:550
 #, kde-format
 msgid "Export XSL Transform..."
 msgstr "Exportovat XSL Transform..."
 
-#: src/mainwindow.cpp:550
+#: src/mainwindow.cpp:551
 #, kde-format
 msgid "Export using an XSL Transform"
 msgstr "Exportovat s pomocí XSL Transform"
 
-#: src/mainwindow.cpp:561
+#: src/mainwindow.cpp:562
 #, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr "Vyjmout označený text a vložit jej do schránky"
 
-#: src/mainwindow.cpp:563
+#: src/mainwindow.cpp:564
 #, kde-format
 msgid "Copy the selected text to the clipboard"
 msgstr "Kopírovat označený text do schránky"
 
-#: src/mainwindow.cpp:565
+#: src/mainwindow.cpp:566
 #, kde-format
 msgid "Paste the clipboard contents"
 msgstr "Vložit obsah schránky"
 
-#: src/mainwindow.cpp:567
+#: src/mainwindow.cpp:568
 #, kde-format
 msgid "Select all the entries in the collection"
 msgstr "Vybrat všechny záznamy ve sbírce"
 
-#: src/mainwindow.cpp:569
+#: src/mainwindow.cpp:570
 #, kde-format
 msgid "Deselect all the entries in the collection"
 msgstr "Zrušit výběr všech záznamů ve sbírce"
 
-#: src/mainwindow.cpp:572
+#: src/mainwindow.cpp:573
 #, kde-format
 msgid "Advanced &Filter..."
 msgstr "Pokročilý &filtr..."
 
-#: src/mainwindow.cpp:576 src/mainwindow.cpp:808
+#: src/mainwindow.cpp:577 src/mainwindow.cpp:809
 #, kde-format
 msgid "Filter the collection"
 msgstr "Filtrovat sbírku"
 
-#: src/mainwindow.cpp:583
+#: src/mainwindow.cpp:584
 #, kde-format
 msgid "&New Entry..."
 msgstr "&Nový záznam..."
 
-#: src/mainwindow.cpp:585
+#: src/mainwindow.cpp:586
 #, kde-format
 msgid "New Entry"
 msgstr "Nová položka"
 
-#: src/mainwindow.cpp:587
+#: src/mainwindow.cpp:588
 #, kde-format
 msgid "Create a new entry"
 msgstr "Vytvořit nový záznam"
 
-#: src/mainwindow.cpp:589
+#: src/mainwindow.cpp:590
 #, kde-format
 msgid "Add Entry"
 msgstr "Přidat položku"
 
-#: src/mainwindow.cpp:599
+#: src/mainwindow.cpp:600
 #, kde-format
 msgid "Internet Search..."
 msgstr "Hledání na internetu..."
 
-#: src/mainwindow.cpp:603
+#: src/mainwindow.cpp:604
 #, kde-format
 msgid "Search the internet..."
 msgstr "Hledat na internetu..."
 
-#: src/mainwindow.cpp:613
+#: src/mainwindow.cpp:614
 #, kde-format
 msgid "Edit the selected entries"
 msgstr "Upravit označené záznamy"
 
-#: src/mainwindow.cpp:620
+#: src/mainwindow.cpp:621
 #, kde-format
 msgid "Copy the selected entries"
 msgstr "Kopírovat označené záznamy"
 
-#: src/mainwindow.cpp:627
+#: src/mainwindow.cpp:628
 #, kde-format
 msgid "Delete the selected entries"
 msgstr "Smazat označené záznamy"
 
-#: src/mainwindow.cpp:631
+#: src/mainwindow.cpp:632
 #, kde-format
 msgid "&Merge Entries"
 msgstr "Sloučit zázna&my"
 
-#: src/mainwindow.cpp:635
+#: src/mainwindow.cpp:636
 #, kde-format
 msgid "Merge the selected entries"
 msgstr "Sloučit označené záznamy"
 
-#: src/mainwindow.cpp:639
+#: src/mainwindow.cpp:640
 #, kde-format
 msgid "Check-&out..."
 msgstr "&Zapůjčit..."
 
-#: src/mainwindow.cpp:641
+#: src/mainwindow.cpp:642
 #, kde-format
 msgid "Check-out the selected items"
 msgstr "Zapůjčit označené položky"
 
-#: src/mainwindow.cpp:644
+#: src/mainwindow.cpp:645
 #, kde-format
 msgid "Check-&in"
 msgstr "&Vrátit"
 
-#: src/mainwindow.cpp:646
+#: src/mainwindow.cpp:647
 #, kde-format
 msgid "Check-in the selected items"
 msgstr "Vrátit označené položky"
 
-#: src/mainwindow.cpp:649
+#: src/mainwindow.cpp:650
 #, kde-format
 msgid "&Rename Collection..."
 msgstr "&Přejmenovat sbírku..."
 
-#: src/mainwindow.cpp:652
+#: src/mainwindow.cpp:653
 #, kde-format
 msgid "Rename the collection"
 msgstr "Přejmenovat sbírku"
 
-#: src/mainwindow.cpp:655
+#: src/mainwindow.cpp:656
 #, kde-format
 msgid "Collection &Fields..."
 msgstr "P&ole sbírky..."
 
-#: src/mainwindow.cpp:656
+#: src/mainwindow.cpp:657
 #, kde-format
 msgid "Fields"
 msgstr "Pole"
 
-#: src/mainwindow.cpp:659
+#: src/mainwindow.cpp:660
 #, kde-format
 msgid "Modify the collection fields"
 msgstr "Změnit pole sbírky"
 
-#: src/mainwindow.cpp:662
+#: src/mainwindow.cpp:663
 #, kde-format
 msgid "&Generate Reports..."
 msgstr "&Generovat zprávy..."
 
-#: src/mainwindow.cpp:663
+#: src/mainwindow.cpp:664
 #, kde-format
 msgid "Reports"
 msgstr "Hlášení"
 
-#: src/mainwindow.cpp:665
+#: src/mainwindow.cpp:666
 #, kde-format
 msgid "Generate collection reports"
 msgstr "Generovat zprávy o sbírce"
 
-#: src/mainwindow.cpp:668
+#: src/mainwindow.cpp:669
 #, kde-format
 msgid "Convert to &Bibliography"
 msgstr "Převést na seznam použ&ité literatury"
 
-#: src/mainwindow.cpp:670
+#: src/mainwindow.cpp:671
 #, kde-format
 msgid "Convert a book collection to a bibliography"
 msgstr "Převést sbírku knih na seznam použité literatury"
 
-#: src/mainwindow.cpp:673
+#: src/mainwindow.cpp:674
 #, kde-format
 msgid "String &Macros..."
 msgstr "Řetězová &makra..."
 
-#: src/mainwindow.cpp:675
+#: src/mainwindow.cpp:676
 #, kde-format
 msgid "Edit the bibtex string macros"
 msgstr "Upravit řetězová makra Bibtex"
 
-#: src/mainwindow.cpp:678
+#: src/mainwindow.cpp:679
 #, kde-format
 msgid "Check for Duplicate Keys..."
 msgstr ""
 
-#: src/mainwindow.cpp:680
+#: src/mainwindow.cpp:681
 #, kde-format
 msgid "Check for duplicate citation keys"
 msgstr ""
 
-#: src/mainwindow.cpp:690
+#: src/mainwindow.cpp:691
 #, kde-format
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "Kopírovat Bibtex do schránky"
 
-#: src/mainwindow.cpp:691
+#: src/mainwindow.cpp:692
 #, kde-format
 msgid "Copy bibtex citations to the clipboard"
 msgstr "Kopírovat citace Bibtex do schránky"
 
-#: src/mainwindow.cpp:696
+#: src/mainwindow.cpp:697
 #, kde-format
 msgid "Cite Entry in &LyX"
 msgstr "Citovat záznam v &LyX"
 
-#: src/mainwindow.cpp:697
+#: src/mainwindow.cpp:698
 #, kde-format
 msgid "Cite the selected entries in LyX"
 msgstr "Citovat označené záznamy v LyX"
 
-#: src/mainwindow.cpp:713
+#: src/mainwindow.cpp:714
 #, kde-format
 msgctxt "Update Entry"
 msgid "Update"
 msgstr "Aktualizovat"
 
-#: src/mainwindow.cpp:722
+#: src/mainwindow.cpp:723
 #, kde-format
 msgid "All Sources"
 msgstr "Všechny zdroje"
 
-#: src/mainwindow.cpp:723
+#: src/mainwindow.cpp:724
 #, kde-format
 msgid "Update entry data from all available sources"
 msgstr "Aktualizovat data záznamu ze všech dostupných zdrojů"
 
-#: src/mainwindow.cpp:734
+#: src/mainwindow.cpp:735
 #, kde-format
 msgid "Unlock Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:735
+#: src/mainwindow.cpp:736
 #, kde-format
 msgid "Unlock the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:737
+#: src/mainwindow.cpp:738
 #, kde-format
 msgid "Lock Layout"
 msgstr "Uzamknout rozvržení"
 
-#: src/mainwindow.cpp:738
+#: src/mainwindow.cpp:739
 #, kde-format
 msgid "Lock the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:743
+#: src/mainwindow.cpp:744
 #, kde-format
 msgid "Reset Layout"
 msgstr "Obnovit rozvržení"
 
-#: src/mainwindow.cpp:744
+#: src/mainwindow.cpp:745
 #, kde-format
 msgid "Reset the window's layout"
 msgstr "Obnovit rozvržení okna"
 
-#: src/mainwindow.cpp:747
+#: src/mainwindow.cpp:748
 #, kde-format
 msgid "Entry &Editor"
 msgstr "&Editor záznamů"
 
-#: src/mainwindow.cpp:749
+#: src/mainwindow.cpp:750
 #, kde-format
 msgid "Enable/disable the editor"
 msgstr "Povolit/zakázat editor"
 
-#: src/mainwindow.cpp:758
+#: src/mainwindow.cpp:759
 #, kde-format
 msgid "Show Log"
 msgstr "Zobrazit záznamy"
 
-#: src/mainwindow.cpp:775
+#: src/mainwindow.cpp:776
 #, kde-format
 msgid "Change Grouping"
 msgstr "Změnit seskupení"
 
-#: src/mainwindow.cpp:778
+#: src/mainwindow.cpp:779
 #, kde-format
 msgid "&Group Selection"
 msgstr "&Výběr skupin"
 
-#: src/mainwindow.cpp:779
+#: src/mainwindow.cpp:780
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr "Změnit seskupení sbírky"
 
-#: src/mainwindow.cpp:793
+#: src/mainwindow.cpp:794
 #, kde-format
 msgid "Filter here..."
 msgstr "Filtrovat zde..."
 
-#: src/mainwindow.cpp:858 src/mainwindow.cpp:861
+#: src/mainwindow.cpp:859 src/mainwindow.cpp:862
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
@@ -6135,12 +6135,12 @@ msgid ""
 msgstr ""
 "<qt><i>Pohled na záznam</i> ukazuje formátovaný pohled na obsah záznamu.</qt>"
 
-#: src/mainwindow.cpp:867
+#: src/mainwindow.cpp:868
 #, kde-format
 msgid "Collection View"
 msgstr ""
 
-#: src/mainwindow.cpp:874
+#: src/mainwindow.cpp:875
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
@@ -6148,17 +6148,17 @@ msgid ""
 msgstr ""
 "<qt><i>Sloupcový pohled</i> zobrazí u každého záznamu hodnoty více polí.</qt>"
 
-#: src/mainwindow.cpp:891
+#: src/mainwindow.cpp:892
 #, kde-format
 msgid "Group View"
 msgstr "Skupinový pohled"
 
-#: src/mainwindow.cpp:900
+#: src/mainwindow.cpp:901
 #, kde-format
 msgid "Groups"
 msgstr "Skupiny"
 
-#: src/mainwindow.cpp:901
+#: src/mainwindow.cpp:902
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
@@ -6167,12 +6167,18 @@ msgstr ""
 "<qt><i>Skupinový pohled</i> záznamy seřadí do skupin podle zvoleného pole.</"
 "qt>"
 
-#: src/mainwindow.cpp:978
+#: src/mainwindow.cpp:979
+#, fuzzy, kde-format
+#| msgid "Tellico - collection management software, free and simple"
+msgid "Collection management software, free and simple"
+msgstr "Tellico - software pro správu sbírek, svobodný a jednoduchý"
+
+#: src/mainwindow.cpp:981
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Vítejte ve správci sbírek Tellico"
 
-#: src/mainwindow.cpp:980
+#: src/mainwindow.cpp:983
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6186,7 +6192,15 @@ msgstr ""
 "přidávat <a href=\"tc:///coll_new_entry\">ručně</a> nebo <a href=\"tc:///"
 "edit_search_internet\">stáhnutím dat</a> z různých internetových zdrojů.</h3>"
 
-#: src/mainwindow.cpp:1179
+#: src/mainwindow.cpp:992
+#, kde-format
+msgid ""
+"More information can be found in the <a href=\"help:/tellico"
+"\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
+"this welcome screen</a>."
+msgstr ""
+
+#: src/mainwindow.cpp:1199
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6195,22 +6209,22 @@ msgstr ""
 "Aktuální soubor byl změněn.\n"
 "Přejete si jej uložit?"
 
-#: src/mainwindow.cpp:1235 src/mainwindow.cpp:1269
+#: src/mainwindow.cpp:1255 src/mainwindow.cpp:1289
 #, kde-format
 msgid "Creating new collection..."
 msgstr "Vytváření nové sbírky..."
 
-#: src/mainwindow.cpp:1290 src/mainwindow.cpp:1313 src/mainwindow.cpp:1331
+#: src/mainwindow.cpp:1310 src/mainwindow.cpp:1333 src/mainwindow.cpp:1351
 #, kde-format
 msgid "Opening file..."
 msgstr "Otevírám soubor..."
 
-#: src/mainwindow.cpp:1301
+#: src/mainwindow.cpp:1321
 #, kde-format
 msgid "Open File"
 msgstr "Otevřít soubor"
 
-#: src/mainwindow.cpp:1423
+#: src/mainwindow.cpp:1443
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6223,32 +6237,32 @@ msgstr ""
 "adresáři Tellico, aby se zlepšila rychlost?</p><p>Toto nastavení lze "
 "kdykoliv později změnit v konfiguračním okně.</p></qt>"
 
-#: src/mainwindow.cpp:1428
+#: src/mainwindow.cpp:1448
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Uložit obrázky samostatně"
 
-#: src/mainwindow.cpp:1429
+#: src/mainwindow.cpp:1449
 #, kde-format
 msgid "Save Images in File"
 msgstr "Uložit obrázky do souboru"
 
-#: src/mainwindow.cpp:1469
+#: src/mainwindow.cpp:1489
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Ukládám soubor s novým názvem..."
 
-#: src/mainwindow.cpp:1478
+#: src/mainwindow.cpp:1498
 #, kde-format
 msgid "Save As"
 msgstr "Uložit jako"
 
-#: src/mainwindow.cpp:1544
+#: src/mainwindow.cpp:1564
 #, kde-format
 msgid "Printing..."
 msgstr "Probíhá tisk..."
 
-#: src/mainwindow.cpp:1548
+#: src/mainwindow.cpp:1568
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6257,27 +6271,27 @@ msgstr ""
 "Sbírka má nastaven filtr tak, aby byla zobrazena jen určitá část záznamů. "
 "Vytištěny budou pouze viditelné záznamy. Pokračovat?"
 
-#: src/mainwindow.cpp:1571
+#: src/mainwindow.cpp:1591
 #, kde-format
 msgid "Exiting..."
 msgstr "Ukončuji..."
 
-#: src/mainwindow.cpp:1673
+#: src/mainwindow.cpp:1693
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrováno, %2 označeno)"
 
-#: src/mainwindow.cpp:1676
+#: src/mainwindow.cpp:1696
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtrováno)"
 
-#: src/mainwindow.cpp:1679
+#: src/mainwindow.cpp:1699
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 označeno)"
 
-#: src/mainwindow.cpp:1818 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1838 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:252
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6285,57 +6299,57 @@ msgstr "(%1 označeno)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico narazil na chybu při zpracovávání XSLT."
 
-#: src/mainwindow.cpp:1936
+#: src/mainwindow.cpp:1956
 #, kde-format
 msgid "Importing data..."
 msgstr "Importuji data..."
 
-#: src/mainwindow.cpp:1947
+#: src/mainwindow.cpp:1967
 #, kde-format
 msgid "Import File"
 msgstr "Importovat soubor"
 
-#: src/mainwindow.cpp:1960
+#: src/mainwindow.cpp:1980
 #, kde-format
 msgid "Import Directory"
 msgstr "Importovat adresář"
 
-#: src/mainwindow.cpp:1984
+#: src/mainwindow.cpp:2004
 #, kde-format
 msgid "Exporting data..."
 msgstr "Exportuji data..."
 
-#: src/mainwindow.cpp:2007
+#: src/mainwindow.cpp:2027
 #, kde-format
 msgid "Export As"
 msgstr "Exportovat jako"
 
-#: src/mainwindow.cpp:2035
+#: src/mainwindow.cpp:2055
 #, kde-format
 msgid "String Macros"
 msgstr "Řetězcová makra"
 
-#: src/mainwindow.cpp:2036
+#: src/mainwindow.cpp:2056
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:2036
+#: src/mainwindow.cpp:2056
 #, kde-format
 msgid "String"
 msgstr "Řetězec"
 
-#: src/mainwindow.cpp:2122
+#: src/mainwindow.cpp:2142
 #, kde-format
 msgid "Creating citations..."
 msgstr "Vytvářím citace..."
 
-#: src/mainwindow.cpp:2232
+#: src/mainwindow.cpp:2252
 #, kde-format
 msgid "Filters"
 msgstr "Filtry"
 
-#: src/mainwindow.cpp:2233
+#: src/mainwindow.cpp:2253
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6344,12 +6358,12 @@ msgstr ""
 "<qt><i>Filtrový pohled</i> ukazuje záznamy, které splňují pravidla filtru.</"
 "qt>"
 
-#: src/mainwindow.cpp:2256
+#: src/mainwindow.cpp:2276
 #, kde-format
 msgid "Loans"
 msgstr "Půjčky"
 
-#: src/mainwindow.cpp:2257
+#: src/mainwindow.cpp:2277
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6358,7 +6372,7 @@ msgstr ""
 "<qt><i>Půjčkový pohled</i> ukazuje seznam všech osob, které si ze sbírky "
 "půjčili položky.</qt>"
 
-#: src/mainwindow.cpp:2344
+#: src/mainwindow.cpp:2364
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6367,12 +6381,12 @@ msgstr ""
 "Některé obrázky nejsou uloženy na nastaveném místě. Aktuální soubor je "
 "potřeba uložit a obrázky budou přesunuty na nové umístění."
 
-#: src/mainwindow.cpp:2385
+#: src/mainwindow.cpp:2405
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Aktualizovat data záznamu z %1"
 
-#: src/mainwindow.cpp:2404
+#: src/mainwindow.cpp:2424
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6381,7 +6395,7 @@ msgstr ""
 "Tellico nemůže najednou importovat více souborů tohoto druhu. Bude "
 "importován pouze %1."
 
-#: src/mainwindow.cpp:2587
+#: src/mainwindow.cpp:2612
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
