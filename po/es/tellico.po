@@ -1,28 +1,27 @@
-# translation of es.po to Español
-# Translation of es to Spanish
+# Translation of tellico.po to Español
 # This file is distributed under the same license as the Tellico package.
 # Copyright (C) 2003 Robby Stephenson <robby@periapsis.org>.
 #
-# Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2003, 2004, 2005, 2006, 2007.
-# Ale Hamann <amadeus@bbs.frc.utn.edu.ar>, 2006, 2007, 2008.
+# SPDX-FileCopyrightText: 2003, 2004, 2005, 2006, 2007 Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>
+# SPDX-FileCopyrightText: 2006, 2007, 2008 Ale Hamann <amadeus@bbs.frc.utn.edu.ar>
 # SPDX-FileCopyrightText: 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
-# Kira J. Fernandez <kirajfdez@gmail.com>, 2010, 2011.
+# SPDX-FileCopyrightText: 2010, 2011 Kira J. Fernandez <kirajfdez@gmail.com>
 # Huever, 2010.
-# Kira J. Fernandez <kirajfdez@gmail.es>, 2011.
-# Raul Gonzalez <raulgf83@gmail.com>, 2011, 2012, 2013, 2014, 2015.
+# SPDX-FileCopyrightText: 2011 Kira J. Fernandez <kirajfdez@gmail.es>
+# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015 Raul Gonzalez <raulgf83@gmail.com>
 msgid ""
 msgstr ""
-"Project-Id-Version: es\n"
+"Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-15 00:40+0000\n"
-"PO-Revision-Date: 2024-09-13 01:00+0200\n"
+"PO-Revision-Date: 2024-11-15 20:11+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -6226,10 +6225,9 @@ msgstr ""
 "campo seleccionado.</qt>"
 
 #: src/mainwindow.cpp:979
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - software de gestión de colecciones, libre y sencillo"
+msgstr "Software de gestión de colecciones, libre y sencillo"
 
 #: src/mainwindow.cpp:981
 #, kde-format
@@ -6258,6 +6256,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"Puede encontrar más información en la <a href=\"help:/tellico"
+"\">documentación</a>. También puede <a href=\"tc:///disable_welcome"
+"\">desactivar esta pantalla de bienvenida</a>."
 
 #: src/mainwindow.cpp:1199
 #, kde-format

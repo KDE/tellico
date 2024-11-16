@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-15 00:40+0000\n"
-"PO-Revision-Date: 2024-09-23 15:20+0300\n"
+"PO-Revision-Date: 2024-11-15 22:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6184,10 +6184,9 @@ msgstr ""
 "qt>"
 
 #: src/mainwindow.cpp:979
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico — koleksiyon yönetimi yazılımı — ücretsiz ve yalın"
+msgstr "Koleksiyon yönetimi yazılımı; ücretsiz ve yalın"
 
 #: src/mainwindow.cpp:981
 #, kde-format
@@ -6216,6 +6215,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"Ek bilgi <a href=\"help:/tellico\">belgelendirmede</a> bulunabilir. "
+"İsterseniz <a href=\"tc:///disable_welcome\">bu karşılama ekranını</a> devre "
+"dışı bırakabilirsiniz."
 
 #: src/mainwindow.cpp:1199
 #, kde-format

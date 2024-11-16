@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-15 00:40+0000\n"
-"PO-Revision-Date: 2024-09-12 14:43+0300\n"
+"PO-Revision-Date: 2024-11-15 17:40+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -6185,10 +6185,9 @@ msgstr ""
 "записів за вибраним способом групування.</qt>"
 
 #: src/mainwindow.cpp:979
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico — програма для керування збірками, вільна і проста"
+msgstr "Програма для керування збірками, вільна і проста"
 
 #: src/mainwindow.cpp:981
 #, kde-format
@@ -6217,6 +6216,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"Докладніші відомості можна знайти у <a href=\"help:/tellico\">документації</"
+"a>. Ви також можете <a href=\"tc:///disable_welcome\">вимкнути це вікно "
+"вітання</a>."
 
 #: src/mainwindow.cpp:1199
 #, kde-format

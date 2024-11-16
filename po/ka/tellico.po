@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-15 00:40+0000\n"
-"PO-Revision-Date: 2024-09-12 03:27+0200\n"
+"PO-Revision-Date: 2024-11-15 05:47+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6181,10 +6181,9 @@ msgstr ""
 "</qt>"
 
 #: src/mainwindow.cpp:979
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - კოლექციის მართვის პროგრამა. უფასო და მარტივი"
+msgstr "კოლექციის მართვის პროგრამა. უფასო და მარტივი"
 
 #: src/mainwindow.cpp:981
 #, kde-format
@@ -6212,6 +6211,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"მეტი ინფორმაციის პოვნა <a href=\"help:/tellico\">დოკუმენტაციაში</a> "
+"შეგიძლიათ. ასევე შეგიძლიათ, <a href=\"tc:///disable_welcome\">გამორთოთ "
+"გაშვების ეკრანი</a>."
 
 #: src/mainwindow.cpp:1199
 #, kde-format
