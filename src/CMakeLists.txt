@@ -88,6 +88,10 @@ set(tellico_SRCS
 
 add_executable(tellico ${tellico_SRCS} ../icons/icons.qrc)
 
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    target_compile_options(tellico PRIVATE -Werror=undef)
+endif()
+
 target_link_libraries(tellico
     core
     cite
