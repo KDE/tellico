@@ -491,30 +491,6 @@ target_link_libraries(fetcherstest
 )
 add_dependencies(fetcherstest tellico_config)
 
-# the fetch library really depends on the GUI static library
-# but rather than linking all of that in, selectively choose the
-# specific classes used
-ecm_add_test(fetchertest.cpp
-    ../fetch/fetcherinitializer.cpp
-    ../gui/collectiontypecombo.cpp
-    ../gui/combobox.cpp
-    ../gui/kwidgetlister.cpp
-    ../gui/lineedit.cpp
-    ../gui/stringmapwidget.cpp
-    ../translators/adsimporter.cpp
-    ../translators/bibteximporter.cpp
-    ../translators/gcstarimporter.cpp
-    ../translators/grs1importer.cpp
-    ../translators/risimporter.cpp
-    TEST_NAME fetchertest
-    LINK_LIBRARIES fetch
-        translatorstest
-        ${TELLICO_TEST_LIBS}
-        KF${KF_MAJOR_VERSION}::XmlGui
-        KF${KF_MAJOR_VERSION}::SonnetCore
-        KF${KF_MAJOR_VERSION}::SonnetUi
-)
-
 # the PDF importer uses CrossRefFetcher, so include the test near the fetchers section
 ecm_add_test(pdftest.cpp
     ../translators/pdfimporter.cpp
@@ -538,6 +514,30 @@ endif()
 
 # fetcher tests from here down
 if(BUILD_FETCHER_TESTS)
+
+# the fetch library really depends on the GUI static library
+# but rather than linking all of that in, selectively choose the
+# specific classes used
+ecm_add_test(fetchertest.cpp
+    ../fetch/fetcherinitializer.cpp
+    ../gui/collectiontypecombo.cpp
+    ../gui/combobox.cpp
+    ../gui/kwidgetlister.cpp
+    ../gui/lineedit.cpp
+    ../gui/stringmapwidget.cpp
+    ../translators/adsimporter.cpp
+    ../translators/bibteximporter.cpp
+    ../translators/gcstarimporter.cpp
+    ../translators/grs1importer.cpp
+    ../translators/risimporter.cpp
+    TEST_NAME fetchertest
+    LINK_LIBRARIES fetch
+        translatorstest
+        ${TELLICO_TEST_LIBS}
+        KF${KF_MAJOR_VERSION}::XmlGui
+        KF${KF_MAJOR_VERSION}::SonnetCore
+        KF${KF_MAJOR_VERSION}::SonnetUi
+)
 
 ecm_add_test(entryupdatejobtest.cpp
     ../entryupdatejob.cpp
