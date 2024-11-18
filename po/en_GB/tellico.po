@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-15 00:40+0000\n"
-"PO-Revision-Date: 2024-09-15 10:47+0100\n"
+"PO-Revision-Date: 2024-11-16 12:57+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6185,10 +6185,9 @@ msgstr ""
 "selected field.</qt>"
 
 #: src/mainwindow.cpp:979
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - collection management software, free and simple"
+msgstr "Collection management software, free and simple"
 
 #: src/mainwindow.cpp:981
 #, kde-format
@@ -6217,6 +6216,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"More information can be found in the <a href=\"help:/tellico"
+"\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
+"this welcome screen</a>."
 
 #: src/mainwindow.cpp:1199
 #, kde-format

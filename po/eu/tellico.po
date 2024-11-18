@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-15 00:40+0000\n"
-"PO-Revision-Date: 2024-09-25 22:14+0200\n"
+"PO-Revision-Date: 2024-11-17 23:16+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6203,10 +6203,9 @@ msgstr ""
 "taldeetan sailkatzen ditu.</qt>"
 
 #: src/mainwindow.cpp:979
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - bildumak kudeatzeko softwarea, askea eta erraza"
+msgstr "Bildumak kudeatzeko softwarea, askea eta erraza"
 
 #: src/mainwindow.cpp:981
 #, kde-format
@@ -6235,6 +6234,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"<a href=\"help:/tellico\">Dokumentazioan</a> informazio gehiago aurki "
+"daiteke. <a href=\"tc:///disable_welcome\">Ongietorri pantaila hau</a> ere "
+"ezgaitu  zenezake."
 
 #: src/mainwindow.cpp:1199
 #, kde-format

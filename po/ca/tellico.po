@@ -6,7 +6,6 @@
 # David Majà <davidmaja@gmail.com>, 2005.
 # Manuel Tortosa <manutortosa@gmail.com>, 2009.
 # Manuel Tortosa Moreno <manutortosa@gmail.com>, 2009.
-# Josep M. Ferrer <txemaq@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-15 00:40+0000\n"
-"PO-Revision-Date: 2024-09-12 07:43+0200\n"
+"PO-Revision-Date: 2024-11-16 07:49+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -6177,10 +6177,9 @@ msgstr ""
 "qt>"
 
 #: src/mainwindow.cpp:979
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - KDE-jev upravljalnik zbirk, prost in enostaven"
+msgstr "Programska oprema za upravljanje zbirk, prosta in preprosta"
 
 #: src/mainwindow.cpp:981
 #, kde-format
@@ -6209,6 +6208,8 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"Več informacij najdete v <a href=\"help:/tellico\">dokumentaciji</a>. Lahko "
+"tudi <a href=\"tc:///disable_welcome\">onemogočite ta pozdravni zaslon</a>."
 
 #: src/mainwindow.cpp:1199
 #, kde-format
