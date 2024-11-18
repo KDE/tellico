@@ -32,7 +32,11 @@ using Tellico::GUI::BoolFieldWidget;
 BoolFieldWidget::BoolFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
     : FieldWidget(field_, parent_) {
   m_checkBox = new QCheckBox(this);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 7, 0))
   connect(m_checkBox, &QCheckBox::stateChanged, this, &BoolFieldWidget::checkModified);
+#else
+  connect(m_checkBox, &QCheckBox::checkStateChanged, this, &BoolFieldWidget::checkModified);
+#endif
   registerWidget();
 }
 
