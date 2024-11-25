@@ -507,7 +507,7 @@ bool ImageFactory::hasLocalImage(const QString& id_) {
 void ImageFactory::requestImageById(const QString& id_) {
   Q_ASSERT(factory && "ImageFactory is not initialized!");
   if(hasLocalImage(id_)) {
-    QTimer::singleShot(0, [id_] () {
+    QTimer::singleShot(0, factory, [id_] () {
       factory->addCachedImageImpl(id_, cacheDir());
       emit factory->imageAvailable(id_);
     });
