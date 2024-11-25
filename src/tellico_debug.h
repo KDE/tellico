@@ -68,9 +68,9 @@
 
 Q_DECLARE_LOGGING_CATEGORY(TELLICO)
 
-#define myLog()     qCInfo(TELLICO)
-#define myDebug()   qCDebug(TELLICO)
-#define myWarning() qCWarning(TELLICO)
+#define myLog(...)     qCInfo(TELLICO, __VA_ARGS__)
+#define myDebug(...)   qCDebug(TELLICO, __VA_ARGS__)
+#define myWarning(...) qCWarning(TELLICO, __VA_ARGS__)
 
 namespace Debug {
 
