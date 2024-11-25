@@ -189,7 +189,11 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
 
   if(m_total == -1) {
     QDomDocument dom;
+#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
     if(!dom.setContent(data, false)) {
+#else
+    if(!dom.setContent(data, QDomDocument::ParseOption::Default)) {
+#endif
       myWarning() << "server did not return valid XML:" << data;
       stop();
       return;

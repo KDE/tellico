@@ -127,7 +127,11 @@ QUrl SpringerFetcher::searchUrl() {
 
 void SpringerFetcher::parseData(QByteArray& data_) {
   QDomDocument dom;
+#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
   if(!dom.setContent(data_, false)) {
+#else
+  if(!dom.setContent(data_, QDomDocument::ParseOption::Default)) {
+#endif
     myWarning() << "server did not return valid XML.";
     return;
   }

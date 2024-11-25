@@ -245,7 +245,12 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
     // HathiTrust doesn't always include the XML NS in the JSON results. Assume it's always
     // MARC XML and check that
     QDomDocument dom;
+#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
     if(dom.setContent(marcxml, true /* namespace processing */) && dom.documentElement().namespaceURI().isEmpty()) {
+#else
+    if(dom.setContent(marcxml, QDomDocument::ParseOption::UseNamespaceProcessing) &&
+       dom.documentElement().namespaceURI().isEmpty()) {
+#endif
       const QString rootName = dom.documentElement().tagName();
       myDebug() << "no namespace, attempting to set on" << rootName << "element";
       QRegularExpression rootRx(QLatin1Char('<') + rootName + QLatin1Char('>'));

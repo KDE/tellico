@@ -319,7 +319,11 @@ void SRUFetcher::slotComplete(KJob*) {
 
   // first check for SRU errors
   QDomDocument dom;
+#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
   if(!dom.setContent(result, true /*namespace*/)) {
+#else
+  if(!dom.setContent(result, QDomDocument::ParseOption::UseNamespaceProcessing)) {
+#endif
     myWarning() << "The server did not return valid XML.";
     stop();
     return;
