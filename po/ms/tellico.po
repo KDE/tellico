@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-15 00:40+0000\n"
+"POT-Creation-Date: 2024-11-26 00:40+0000\n"
 "PO-Revision-Date: 2009-10-03 23:05+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -617,7 +617,7 @@ msgid "Property"
 msgstr "Ciri-ciri"
 
 #: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:105
-#: src/fetch/srufetcher.cpp:610
+#: src/fetch/srufetcher.cpp:614
 #, fuzzy, kde-format
 msgid "Value"
 msgstr "Nilai"
@@ -715,7 +715,7 @@ msgstr ""
 #: src/fetch/upcitemdbfetcher.cpp:213 src/fetch/vgcollectfetcher.cpp:234
 #: src/fetch/vgcollectfetcher.cpp:337 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:331 src/field.cpp:336
-#: src/translators/filereadervideo.cpp:276
+#: src/translators/filereadervideo.cpp:282
 #: src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "General"
@@ -752,8 +752,8 @@ msgstr "Organisasi"
 msgid "Publisher"
 msgstr ""
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:304
-#: src/fetch/srufetcher.cpp:521 src/fetch/z3950fetcher.cpp:572
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:309
+#: src/fetch/srufetcher.cpp:525 src/fetch/z3950fetcher.cpp:572
 #, fuzzy, kde-format
 msgid "Address"
 msgstr "Alamat"
@@ -855,7 +855,7 @@ msgid "Keywords"
 msgstr "Kata Kunci"
 
 #: src/collections/bibtexcollection.cpp:236 src/collections/filecatalog.cpp:50
-#: src/fetch/entrezfetcher.cpp:438 src/fetch/entrezfetcher.cpp:514
+#: src/fetch/entrezfetcher.cpp:446 src/fetch/entrezfetcher.cpp:522
 #: src/fetch/opdsfetcher.cpp:435 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:81
 #: src/translators/filereadervideo.cpp:128
@@ -864,8 +864,8 @@ msgstr "Kata Kunci"
 msgid "URL"
 msgstr "URL"
 
-#: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:513
-#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/srufetcher.cpp:522
+#: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
+#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/srufetcher.cpp:526
 #: src/fetch/z3950fetcher.cpp:573
 #, fuzzy, kde-format
 msgid "Abstract"
@@ -3074,7 +3074,7 @@ msgstr ""
 
 #: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1107
 #: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:241
-#: src/fetch/entrezfetcher.cpp:530 src/fetch/giantbombfetcher.cpp:227
+#: src/fetch/entrezfetcher.cpp:538 src/fetch/giantbombfetcher.cpp:227
 #: src/fetch/googlebookfetcher.cpp:393 src/fetch/isbndbfetcher.cpp:405
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/numistafetcher.cpp:415
 #: src/fetch/omdbfetcher.cpp:420 src/fetch/thegamesdbfetcher.cpp:647
@@ -3084,7 +3084,7 @@ msgid "Access key: "
 msgstr ""
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
-#: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:536
+#: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:544
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:399
 #: src/fetch/themoviedbfetcher.cpp:603 src/fetch/thetvdbfetcher.cpp:596
 #, kde-format
@@ -3393,17 +3393,17 @@ msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
 msgstr ""
 
-#: src/fetch/arxivfetcher.cpp:341 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:345 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:315
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:320
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:385 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
-#: src/fetch/musicbrainzfetcher.cpp:374 src/fetch/openlibraryfetcher.cpp:457
-#: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:386
+#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:457
+#: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:386
 #: src/fetch/upcitemdbfetcher.cpp:478 src/fetch/vgcollectfetcher.cpp:378
 #: src/fetch/vndbfetcher.cpp:440
 #, kde-format
@@ -3536,7 +3536,7 @@ msgstr ""
 
 #. i18n("Nationality");
 #: src/fetch/discogsfetcher.cpp:330 src/fetch/discogsfetcher.cpp:547
-#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:367
+#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:471
 #: src/fetch/vgcollectfetcher.cpp:336 src/fetch/vgcollectfetcher.cpp:371
 #, kde-format
@@ -3581,7 +3581,7 @@ msgstr ""
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:327
 #: src/fetch/themoviedbfetcher.cpp:571 src/fetch/vndbfetcher.cpp:285
-#: src/fetch/vndbfetcher.cpp:432 src/translators/filereadervideo.cpp:200
+#: src/fetch/vndbfetcher.cpp:432 src/translators/filereadervideo.cpp:206
 #, kde-format
 msgid "Original Title"
 msgstr ""
@@ -3606,17 +3606,17 @@ msgstr "Kadaran"
 msgid "Alternative Titles"
 msgstr ""
 
-#: src/fetch/entrezfetcher.cpp:439 src/translators/risimporter.cpp:339
+#: src/fetch/entrezfetcher.cpp:447 src/translators/risimporter.cpp:339
 #, fuzzy, kde-format
 msgid "Miscellaneous"
 msgstr "Pelbagai"
 
-#: src/fetch/entrezfetcher.cpp:502
+#: src/fetch/entrezfetcher.cpp:510
 #, kde-format
 msgid "Entrez Database"
 msgstr ""
 
-#: src/fetch/entrezfetcher.cpp:512
+#: src/fetch/entrezfetcher.cpp:520
 #, kde-format
 msgid "Institution"
 msgstr ""
@@ -3814,19 +3814,19 @@ msgstr ""
 msgid "Google Book Search"
 msgstr ""
 
-#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr ""
 
-#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/isbndbfetcher.cpp:382
-#: src/fetch/srufetcher.cpp:523 src/fetch/z3950fetcher.cpp:575
+#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/isbndbfetcher.cpp:382
+#: src/fetch/srufetcher.cpp:527 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr ""
 
-#: src/fetch/hathitrustfetcher.cpp:308 src/fetch/srufetcher.cpp:524
+#: src/fetch/hathitrustfetcher.cpp:313 src/fetch/srufetcher.cpp:528
 #: src/fetch/z3950fetcher.cpp:576
 #, fuzzy, kde-format
 msgctxt "Library of Congress classification system"
@@ -4026,68 +4026,68 @@ msgstr ""
 msgid "RPGGeek Link"
 msgstr "Pilihan Umum"
 
-#: src/fetch/srufetcher.cpp:506
+#: src/fetch/srufetcher.cpp:510
 #, kde-format
 msgid "Library of Congress (US)"
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:511
+#: src/fetch/srufetcher.cpp:515
 #, kde-format
 msgid "SRU Server"
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:539
+#: src/fetch/srufetcher.cpp:543
 #, kde-format
 msgid "Scheme: "
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:549 src/fetch/srufetcher.cpp:585
+#: src/fetch/srufetcher.cpp:553 src/fetch/srufetcher.cpp:589
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:554 src/fetch/z3950fetcher.cpp:599
+#: src/fetch/srufetcher.cpp:558 src/fetch/z3950fetcher.cpp:599
 #, kde-format
 msgid "Hos&t: "
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:561 src/fetch/z3950fetcher.cpp:605
+#: src/fetch/srufetcher.cpp:565 src/fetch/z3950fetcher.cpp:605
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:566 src/fetch/z3950fetcher.cpp:610
+#: src/fetch/srufetcher.cpp:570 src/fetch/z3950fetcher.cpp:610
 #, kde-format
 msgid "&Port: "
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:575 src/fetch/z3950fetcher.cpp:619
+#: src/fetch/srufetcher.cpp:579 src/fetch/z3950fetcher.cpp:619
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:580
+#: src/fetch/srufetcher.cpp:584
 #, kde-format
 msgid "Path: "
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:590
+#: src/fetch/srufetcher.cpp:594
 #, kde-format
 msgid "Format: "
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:601
+#: src/fetch/srufetcher.cpp:605
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:610
+#: src/fetch/srufetcher.cpp:614
 #, fuzzy, kde-format
 msgid "Field"
 msgstr "Medan"
 
 #: src/fetch/themoviedbfetcher.cpp:314 src/fetch/themoviedbfetcher.cpp:568
-#: src/translators/filereadervideo.cpp:275
+#: src/translators/filereadervideo.cpp:281
 #, fuzzy, kde-format
 msgid "TMDb Link"
 msgstr "Kadaran"
