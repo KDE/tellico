@@ -96,7 +96,7 @@ QString Tellico::XML::elementName(const QString& name_) {
     return name;
   }
 
-  // next check first characters IS_DIGIT is defined in libxml/vali.d
+  // next check first characters IS_DIGIT is defined in libxml/valid.h
   for(int i = 0; i < name.length() && (!IS_LETTER(name[i].unicode()) || name[i] == QLatin1Char('_')); ++i) {
     name = name.mid(1);
   }

@@ -59,10 +59,15 @@ using Tellico::CollectionFieldsDialog;
 
 class Tellico::FieldListItem : public Tellico::GUI::ListWidgetItem {
 public:
-  FieldListItem(QListWidget* parent_, Data::FieldPtr field_) : GUI::ListWidgetItem(field_->title(), parent_), m_field(field_) {}
+  FieldListItem(QListWidget* parent_, Data::FieldPtr field_) : GUI::ListWidgetItem(field_->title(), parent_) {
+    setField(field_);
+  }
 
   Data::FieldPtr field() const { return m_field; }
-  void setField(Data::FieldPtr field) { m_field = field; }
+  void setField(Data::FieldPtr field) {
+    m_field = field;
+    setToolTip(i18nc("@info:tooltip", "The internal field name is <em>%1</em>.", field->name()));
+  }
 
 private:
   Data::FieldPtr m_field;
@@ -510,11 +515,12 @@ void CollectionFieldsDialog::slotNew() {
     return;
   }
 
-  QString name = QLatin1String("custom") + QString::number(m_newFields.count()+1);
   int count = m_newFields.count() + 1;
+  QString name = QLatin1String("custom") + QString::number(count);
   QString title = i18n("New Field %1", count);
   while(!m_fieldsWidget->findItems(title, Qt::MatchExactly).isEmpty()) {
     ++count;
+    name = QLatin1String("custom") + QString::number(count);
     title = i18n("New Field %1", count);
   }
 
@@ -789,6 +795,7 @@ void CollectionFieldsDialog::updateTitle(const QString& title_) {
     oldItem->setText(title_);
     // will always be colored since it's new
     oldItem->setColored(true);
+    oldItem->setToolTip(i18nc("@info:tooltip", "The internal field name is <em>%1</em>.", m_currentField->name()));
 
     m_currentField->setTitle(title_);
     m_fieldsWidget->blockSignals(false);
