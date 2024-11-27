@@ -239,10 +239,16 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
                                    "cause Tellico to run slowly, stored in the Tellico "
                                    "application directory, or stored in a directory in the "
                                    "same location as the data file."));
+  connect(m_rbImageInFile, &QRadioButton::toggled, this, &ConfigDialog::slotUpdateImageLocationLabel);
+  connect(m_rbImageInAppDir, &QRadioButton::toggled, this, &ConfigDialog::slotUpdateImageLocationLabel);
+  connect(m_rbImageInLocalDir, &QRadioButton::toggled, this, &ConfigDialog::slotUpdateImageLocationLabel);
+  m_imageLocationLabel = new QLabel(imageGroupBox);
+  m_imageLocationLabel->setWordWrap(true);
   QVBoxLayout* imageGroupLayout = new QVBoxLayout(imageGroupBox);
   imageGroupLayout->addWidget(m_rbImageInFile);
   imageGroupLayout->addWidget(m_rbImageInAppDir);
   imageGroupLayout->addWidget(m_rbImageInLocalDir);
+  imageGroupLayout->addWidget(m_imageLocationLabel);
   imageGroupBox->setLayout(imageGroupLayout);
 
   QButtonGroup* imageGroup = new QButtonGroup(frame);
@@ -1212,4 +1218,51 @@ void ConfigDialog::slotCreateConfigWidgets() {
       }
     }
   }
+}
+
+void ConfigDialog::slotUpdateImageLocationLabel() {
+  int newImageLocation;
+  if(m_rbImageInFile->isChecked()) {
+    newImageLocation = Config::ImagesInFile;
+  } else if(m_rbImageInAppDir->isChecked()) {
+    newImageLocation = Config::ImagesInAppDir;
+  } else {
+    newImageLocation = Config::ImagesInLocalDir;
+  }
+
+  const QString fileName = Kernel::self()->URL().fileName();
+  const QString imageDir = ImageFactory::imageDir().toString(QUrl::PreferLocalFile);
+  QString locationText;
+  if(newImageLocation == Config::imageLocation()) {
+    if(newImageLocation == Config::ImagesInFile) {
+      locationText = i18nc("%1 refers to the file name",
+                           "Images are currently saved within <em>%1</em>",
+                           fileName);
+    } else {
+      locationText = i18nc("%1 refers to a directory",
+                           "Images are currently saved to <em>%1</em>",
+                           imageDir);
+    }
+  } else {
+    if(newImageLocation == Config::ImagesInFile) {
+      locationText = i18nc("%1 refers to a directory, %2 to a file name",
+                           "Images will be moved from <em>%1</em> to <em>%2</em>",
+                           imageDir, fileName);
+    } else if(Config::imageLocation() == Config::ImagesInFile) {
+      locationText = i18nc("%1 refers to a file name, %2 to a directory",
+                           "Images will be moved from <em>%1</em> to <em>%2</em>",
+                           fileName, imageDir);
+    } else {
+      QString newImageDir;
+      if(newImageLocation == Config::ImagesInAppDir) {
+        newImageDir = ImageFactory::dataDir().toString(QUrl::PreferLocalFile);
+      } else {
+        newImageDir = ImageFactory::localDir().toString(QUrl::PreferLocalFile);
+      }
+      locationText = i18nc("%1 and %2 are both directories",
+                           "Images will be moved from <em>%1</em> to <em>%2</em>",
+                           imageDir, newImageDir);
+    }
+  }
+  m_imageLocationLabel->setText(locationText);
 }

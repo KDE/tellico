@@ -52,6 +52,7 @@ class QFontComboBox;
 class QCheckBox;
 class QRadioButton;
 class QFrame;
+class QLabel;
 
 namespace Tellico {
   namespace Fetch {
@@ -137,6 +138,7 @@ private Q_SLOTS:
 #endif
   void slotDeleteTemplate();
   void slotCreateConfigWidgets();
+  void slotUpdateImageLocationLabel();
 
 private:
   enum Page {
@@ -185,6 +187,7 @@ private:
   QRadioButton* m_rbImageInFile;
   QRadioButton* m_rbImageInAppDir;
   QRadioButton* m_rbImageInLocalDir;
+  QLabel* m_imageLocationLabel;
   QCheckBox* m_cbOpenLastFile;
   QCheckBox* m_cbQuickFilterRegExp;
   QCheckBox* m_cbEnableWebcam;
