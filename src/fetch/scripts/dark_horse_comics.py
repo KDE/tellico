@@ -261,7 +261,7 @@ class DarkHorseParser:
 		Retrieve all links related to the search. self.__data contains HTML content fetched by self.__getHTMLContent()
 		that need to be parsed.
 		"""
-		matchList = re.findall("""<a href="%s(?P<page>[^"]*?)" class="product_link">.*?</a>""" % self.__basePath.replace('?', '\?'), self.__data)
+		matchList = re.findall("""<a href="%s(?P<page>[^"]*?)" class="product_link">.*?</a>""" % self.__basePath.replace('?', '\\?'), self.__data)
 		if not matchList: return None
 
 		return list(set(matchList))
