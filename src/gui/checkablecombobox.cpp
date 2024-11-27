@@ -87,12 +87,22 @@ CheckableComboBox::CheckableComboBox(QWidget* parent_)
   lineEdit->installEventFilter(this);
   view()->viewport()->installEventFilter(this);
 
+// c++20 deprecated the implicit capture
+#if __cplusplus > 201703L
   connect(model(), &QStandardItemModel::rowsInserted,
           this, [=, this](const QModelIndex&, int, int) { updateDisplayText(); });
   connect(model(), &QStandardItemModel::rowsRemoved,
           this, [=, this](const QModelIndex&, int, int) { updateDisplayText(); });
   connect(model(), &QStandardItemModel::dataChanged,
           this, [=, this](const QModelIndex&, const QModelIndex&, const QVector<int> &) { updateDisplayText(); });
+#else
+  connect(model(), &QStandardItemModel::rowsInserted,
+          this, [=](const QModelIndex&, int, int) { updateDisplayText(); });
+  connect(model(), &QStandardItemModel::rowsRemoved,
+          this, [=](const QModelIndex&, int, int) { updateDisplayText(); });
+  connect(model(), &QStandardItemModel::dataChanged,
+          this, [=](const QModelIndex&, const QModelIndex&, const QVector<int> &) { updateDisplayText(); });
+#endif
 
   connect(this, &QComboBox::editTextChanged,
           this, &CheckableComboBox::setCheckedDataText);
