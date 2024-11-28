@@ -32,9 +32,11 @@ Some minor settings can only be changed by editing the configuration file itself
 </screenshot>
 
 <para>
-The <guilabel>General Options</guilabel> control the general behavior. Images may be included
-in the data files, or saved separately in the &appname; application folder. Also, when &appname;
-is started, it can automatically reopen the last data file that was open.
+The <guilabel>General Options</guilabel> control the general behavior. Images may be saved
+in the data file itself, saved separately in the common &appname; application folder, or saved to
+a directory with the same name as the data file, with <emphasis>_files</emphasis> appended to the
+name. For collections with many images, saving them in the data file is much slower to use.
+When &appname; is started, it can automatically reopen the last data file that was open.
 The <interface>Quick Filter</interface> in the toolbar is useful
 for easily filtering through your collection and can utilize regular expressions.
 </para>
