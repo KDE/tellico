@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-26 00:40+0000\n"
+"POT-Creation-Date: 2024-11-28 00:40+0000\n"
 "PO-Revision-Date: 2024-11-17 23:16+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -293,39 +293,45 @@ msgstr "Mahai-joko bilduma"
 msgid "Custom Collection"
 msgstr "Norberak finkatutako bilduma"
 
-#: src/collectionfieldsdialog.cpp:82
+#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:798
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The internal field name is <em>%1</em>."
+msgstr ""
+
+#: src/collectionfieldsdialog.cpp:87
 #, kde-format
 msgid "Collection Fields"
 msgstr "Bilduma eremuak"
 
-#: src/collectionfieldsdialog.cpp:92
+#: src/collectionfieldsdialog.cpp:97
 #, kde-format
 msgid "Current Fields"
 msgstr "Uneko eremuak"
 
-#: src/collectionfieldsdialog.cpp:113
+#: src/collectionfieldsdialog.cpp:118
 #, kde-format
 msgctxt "New Field"
 msgid "&New"
 msgstr "&Berria"
 
-#: src/collectionfieldsdialog.cpp:116
+#: src/collectionfieldsdialog.cpp:121
 #, kde-format
 msgid "Add a new field to the collection"
 msgstr "Gehitu eremu berri bat bildumara"
 
-#: src/collectionfieldsdialog.cpp:117
+#: src/collectionfieldsdialog.cpp:122
 #, kde-format
 msgctxt "Delete Field"
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: src/collectionfieldsdialog.cpp:120
+#: src/collectionfieldsdialog.cpp:125
 #, kde-format
 msgid "Remove a field from the collection"
 msgstr "Kendu eremu bat bildumatik"
 
-#: src/collectionfieldsdialog.cpp:132
+#: src/collectionfieldsdialog.cpp:137
 #, kde-format
 msgid ""
 "Move this field up in the list. The list order is important for the layout "
@@ -334,7 +340,7 @@ msgstr ""
 "Eraman eremua hau zerrendan gora. Zerrendako ordena garrantzitsua da sarrera "
 "editorearen antolaerarako."
 
-#: src/collectionfieldsdialog.cpp:137
+#: src/collectionfieldsdialog.cpp:142
 #, kde-format
 msgid ""
 "Move this field down in the list. The list order is important for the layout "
@@ -343,57 +349,57 @@ msgstr ""
 "Eraman eremu hau zerrendan behera. Zerrendako ordena garrantzitsua da "
 "sarrera editorearen antolaerarako."
 
-#: src/collectionfieldsdialog.cpp:148
+#: src/collectionfieldsdialog.cpp:153
 #, kde-format
 msgid "Field Properties"
 msgstr "Eremuaren propietateak"
 
-#: src/collectionfieldsdialog.cpp:157
+#: src/collectionfieldsdialog.cpp:162
 #, kde-format
 msgid "&Title:"
 msgstr "&Izenburua:"
 
-#: src/collectionfieldsdialog.cpp:162
+#: src/collectionfieldsdialog.cpp:167
 #, kde-format
 msgid "The title of the field"
 msgstr "Eremuaren izenburua"
 
-#: src/collectionfieldsdialog.cpp:167
+#: src/collectionfieldsdialog.cpp:172
 #, kde-format
 msgid "T&ype:"
 msgstr "&Mota:"
 
-#: src/collectionfieldsdialog.cpp:173
+#: src/collectionfieldsdialog.cpp:178
 #, kde-format
 msgid "The type of the field determines what values may be used. "
 msgstr "Eremuaren motak zehazten du erabil daitezkeen balioak."
 
-#: src/collectionfieldsdialog.cpp:174
+#: src/collectionfieldsdialog.cpp:179
 #, kde-format
 msgid "<i>Simple Text</i> is used for most fields. "
 msgstr "<i>Testu soila</i> eremu gehientsuetarako erabiltzen da. "
 
-#: src/collectionfieldsdialog.cpp:175
+#: src/collectionfieldsdialog.cpp:180
 #, kde-format
 msgid "<i>Paragraph</i> is for large text blocks. "
 msgstr "<i>Paragrafoa</i> testu bloke luzeetarako. "
 
-#: src/collectionfieldsdialog.cpp:176
+#: src/collectionfieldsdialog.cpp:181
 #, kde-format
 msgid "<i>Choice</i> limits the field to certain values. "
 msgstr "<i>Aukera</i> eremua balio jakin batzuetara mugatzen du. "
 
-#: src/collectionfieldsdialog.cpp:177
+#: src/collectionfieldsdialog.cpp:182
 #, kde-format
 msgid "<i>Checkbox</i> is for a simple yes/no value. "
 msgstr "<i>Egiaztapen-laukia</i> bai/ez balio soil baterako da. "
 
-#: src/collectionfieldsdialog.cpp:178
+#: src/collectionfieldsdialog.cpp:183
 #, kde-format
 msgid "<i>Number</i> indicates that the field contains a numerical value. "
 msgstr "<i>Zenbakia</i> eremuak zenbakizko balio bat daukala adierazten du."
 
-#: src/collectionfieldsdialog.cpp:179
+#: src/collectionfieldsdialog.cpp:184
 #, kde-format
 msgid ""
 "<i>URL</i> is for fields which refer to URLs, including references to other "
@@ -402,17 +408,17 @@ msgstr ""
 "<i>URL</i> URLei aipamen egiten dieten eremuentzako da, beste eremu "
 "batzuetarako aipamenak barne. "
 
-#: src/collectionfieldsdialog.cpp:180
+#: src/collectionfieldsdialog.cpp:185
 #, kde-format
 msgid "A <i>Table</i> may hold one or more columns of values. "
 msgstr "<i>Taula</i> batek balio zutabe bat edo gehiago onar dezake. "
 
-#: src/collectionfieldsdialog.cpp:181
+#: src/collectionfieldsdialog.cpp:186
 #, kde-format
 msgid "An <i>Image</i> field holds a picture. "
 msgstr "<i>Irudi</i> eremu batek irudi bat onartzen du. "
 
-#: src/collectionfieldsdialog.cpp:182
+#: src/collectionfieldsdialog.cpp:187
 #, kde-format
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
@@ -420,29 +426,29 @@ msgstr ""
 "<i>Data</i> eremu bat, egun, hilabete eta urte bat duen balio bat gordetzeko "
 "erabil daiteke. "
 
-#: src/collectionfieldsdialog.cpp:183
+#: src/collectionfieldsdialog.cpp:188
 #, kde-format
 msgid "A <i>Rating</i> field uses stars to show a rating number. "
 msgstr ""
 "<i>Balorazio</i> eremu batek izarrak erabiltzen ditu balorazio zenbaki bat "
 "erakusteko. "
 
-#: src/collectionfieldsdialog.cpp:198
+#: src/collectionfieldsdialog.cpp:203
 #, kde-format
 msgid "Cate&gory:"
 msgstr "Kate&goria:"
 
-#: src/collectionfieldsdialog.cpp:203
+#: src/collectionfieldsdialog.cpp:208
 #, kde-format
 msgid "The field category determines where the field is placed in the editor."
 msgstr "Kategoria eremuak editorean eremua non kokatzen den zehazten du."
 
-#: src/collectionfieldsdialog.cpp:220
+#: src/collectionfieldsdialog.cpp:225
 #, kde-format
 msgid "Set &properties..."
 msgstr "Ezarri &propietateak..."
 
-#: src/collectionfieldsdialog.cpp:224
+#: src/collectionfieldsdialog.cpp:229
 #, kde-format
 msgid ""
 "Extended field properties are used to specify things such as the "
@@ -451,39 +457,39 @@ msgstr ""
 "Eremu baten hedatutako propietateak erabiltzen dira dagokion bibtex eremua "
 "gisako gauzak zehazteko."
 
-#: src/collectionfieldsdialog.cpp:229
+#: src/collectionfieldsdialog.cpp:234
 #, kde-format
 msgid "Description:"
 msgstr "Azalpena:"
 
-#: src/collectionfieldsdialog.cpp:236
+#: src/collectionfieldsdialog.cpp:241
 #, kde-format
 msgid ""
 "The description is a useful reminder of what information is contained in the "
 "field."
 msgstr "Azalpena erabilgarria da eremuak zein informazio duen gogorarazteko."
 
-#: src/collectionfieldsdialog.cpp:241
+#: src/collectionfieldsdialog.cpp:246
 #, kde-format
 msgid "Value Options"
 msgstr "Balio-aukerak"
 
-#: src/collectionfieldsdialog.cpp:246
+#: src/collectionfieldsdialog.cpp:251
 #, kde-format
 msgid "Default value:"
 msgstr "Lehenetsitako balioa:"
 
-#: src/collectionfieldsdialog.cpp:251
+#: src/collectionfieldsdialog.cpp:256
 #, kde-format
 msgid "<qt>A default value can be set for new entries.</qt>"
 msgstr "<qt>Lehenetsitako balio bat ezarri daiteke sarrera berrietarako.</qt>"
 
-#: src/collectionfieldsdialog.cpp:256
+#: src/collectionfieldsdialog.cpp:261
 #, kde-format
 msgid "Value template:"
 msgstr "Balio-txantiloia:"
 
-#: src/collectionfieldsdialog.cpp:264
+#: src/collectionfieldsdialog.cpp:269
 #, kde-format
 msgid ""
 "Derived values are formed from the values of other fields according to the "
@@ -494,17 +500,17 @@ msgstr ""
 "ereduaren arabera. Izendun eremuak, «%{year} %{title}» esaterako, "
 "balioarekin ordezkatzen dira."
 
-#: src/collectionfieldsdialog.cpp:270
+#: src/collectionfieldsdialog.cpp:275
 #, kde-format
 msgid "Use derived value"
 msgstr "Erabili eratorritako balioa"
 
-#: src/collectionfieldsdialog.cpp:276
+#: src/collectionfieldsdialog.cpp:281
 #, kde-format
 msgid "A&llowed values:"
 msgstr "O&nartutako balioak:"
 
-#: src/collectionfieldsdialog.cpp:281
+#: src/collectionfieldsdialog.cpp:286
 #, kde-format
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
@@ -515,42 +521,42 @@ msgstr ""
 "Lauki konbinatu batean kokatzen dira. Aukerako balioak puntu eta komaren "
 "bidez bereizi behar dira, adibidez: «txakurra; katua; sagua»</qt>"
 
-#: src/collectionfieldsdialog.cpp:288
+#: src/collectionfieldsdialog.cpp:293
 #, kde-format
 msgid "Format options:"
 msgstr "Formatu aukerak:"
 
-#: src/collectionfieldsdialog.cpp:294
+#: src/collectionfieldsdialog.cpp:299
 #, kde-format
 msgid "No formatting"
 msgstr "Formaturik ez"
 
-#: src/collectionfieldsdialog.cpp:295
+#: src/collectionfieldsdialog.cpp:300
 #, kde-format
 msgid "Allow auto-capitalization only"
 msgstr "Baimendu soilik aurreneko letra automatikoki hizki larriz ipintzea"
 
-#: src/collectionfieldsdialog.cpp:296
+#: src/collectionfieldsdialog.cpp:301
 #, kde-format
 msgid "Format as a title"
 msgstr "Eman izenburu baten formatua"
 
-#: src/collectionfieldsdialog.cpp:297
+#: src/collectionfieldsdialog.cpp:302
 #, kde-format
 msgid "Format as a name"
 msgstr "Eman izan baten formatua"
 
-#: src/collectionfieldsdialog.cpp:301
+#: src/collectionfieldsdialog.cpp:306
 #, kde-format
 msgid "Field Options"
 msgstr "Eremuaren aukerak"
 
-#: src/collectionfieldsdialog.cpp:304
+#: src/collectionfieldsdialog.cpp:309
 #, kde-format
 msgid "Enable auto-completion"
 msgstr "Gaitu osatze automatikoa"
 
-#: src/collectionfieldsdialog.cpp:305
+#: src/collectionfieldsdialog.cpp:310
 #, kde-format
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
@@ -559,12 +565,12 @@ msgstr ""
 "Hautamarka badu, KDE osatze automatikoa gaituko da eremu honetako testua "
 "editatzeko laukian."
 
-#: src/collectionfieldsdialog.cpp:307
+#: src/collectionfieldsdialog.cpp:312
 #, kde-format
 msgid "Allow multiple values"
 msgstr "Baimendu balio anizkoitzak"
 
-#: src/collectionfieldsdialog.cpp:308
+#: src/collectionfieldsdialog.cpp:313
 #, kde-format
 msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
@@ -573,12 +579,12 @@ msgstr ""
 "Markatuz gero, Tellico-k eremuetako balioak aztertuko ditu, puntu eta komaz "
 "bereizitako balio anizkoitzen bila."
 
-#: src/collectionfieldsdialog.cpp:310
+#: src/collectionfieldsdialog.cpp:315
 #, kde-format
 msgid "Allow grouping"
 msgstr "Baimendu taldekatzea"
 
-#: src/collectionfieldsdialog.cpp:311
+#: src/collectionfieldsdialog.cpp:316
 #, kde-format
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
@@ -586,17 +592,17 @@ msgstr ""
 "Hautamarka badu, eremu hau erabil daiteke talde ikuspegian sarrerak "
 "taldekatzeko."
 
-#: src/collectionfieldsdialog.cpp:341
+#: src/collectionfieldsdialog.cpp:346
 #, kde-format
 msgid "Revert the selected field's properties to the default values."
 msgstr "Lehengoratu hautatutako eremuen propietateak lehenetsitako balioetara."
 
-#: src/collectionfieldsdialog.cpp:398
+#: src/collectionfieldsdialog.cpp:403
 #, kde-format
 msgid "Modify Fields"
 msgstr "Aldatu eremuak"
 
-#: src/collectionfieldsdialog.cpp:411
+#: src/collectionfieldsdialog.cpp:416
 #, kde-format
 msgid ""
 "<qt>Removing allowed values from the <i>%1</i> field which currently exist "
@@ -607,22 +613,22 @@ msgstr ""
 "kentzea datuak hondatzea eragin lezake. Aldatutako zure balioak mantendu "
 "nahi dituzu edo bertan behera utzi eta unekoetara lehengoratu nahi duzu?</qt>"
 
-#: src/collectionfieldsdialog.cpp:416
+#: src/collectionfieldsdialog.cpp:421
 #, kde-format
 msgid "Keep modified values"
 msgstr "Mantendu aldatutako balioak"
 
-#: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:518
+#: src/collectionfieldsdialog.cpp:520 src/collectionfieldsdialog.cpp:524
 #, kde-format
 msgid "New Field %1"
 msgstr "%1 eremu berria"
 
-#: src/collectionfieldsdialog.cpp:808
+#: src/collectionfieldsdialog.cpp:815
 #, kde-format
 msgid "Revert Field Properties"
 msgstr "Lehengoratu eremuaren propietateak"
 
-#: src/collectionfieldsdialog.cpp:809
+#: src/collectionfieldsdialog.cpp:816
 #, kde-format
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
@@ -631,38 +637,38 @@ msgstr ""
 "<qt><p>Benetan lehengoratu nahi dituzu <em>%1</em> eremuko propietateak "
 "atzera haien lehenetsitako balioetara?</p></qt>"
 
-#: src/collectionfieldsdialog.cpp:812
+#: src/collectionfieldsdialog.cpp:819
 #, kde-format
 msgid "Revert"
 msgstr "Lehengoratu"
 
-#: src/collectionfieldsdialog.cpp:886
+#: src/collectionfieldsdialog.cpp:893
 #, kde-format
 msgid "Extended Field Properties"
 msgstr "Hedatutako eremuko propietateak"
 
-#: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:104
+#: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:104
 #, kde-format
 msgid "Property"
 msgstr "Propietatea"
 
-#: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:105
+#: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:105
 #: src/fetch/srufetcher.cpp:614
 #, kde-format
 msgid "Value"
 msgstr "Balioa"
 
-#: src/collectionfieldsdialog.cpp:923
+#: src/collectionfieldsdialog.cpp:930
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "Izen hau duen eremu bat dago lehendik ere. Sartu beste izenburu bat."
 
-#: src/collectionfieldsdialog.cpp:930
+#: src/collectionfieldsdialog.cpp:937
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>Kategoria ezin da hutsik egon. Sartu kategoria bat.</qt>"
 
-#: src/collectionfieldsdialog.cpp:938
+#: src/collectionfieldsdialog.cpp:945
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -673,7 +679,7 @@ msgstr ""
 "em> eremu baten kategoria berean. Mesedez, sartu kategoria ezberdin batean.</"
 "qt>"
 
-#: src/collectionfieldsdialog.cpp:946
+#: src/collectionfieldsdialog.cpp:953
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
@@ -682,7 +688,7 @@ msgstr ""
 "Eremu baten titulua ezin da izan dagoen kategoria baten berdina. Mesedez, "
 "sartu titulu ezberdin bat."
 
-#: src/collectionfieldsdialog.cpp:958
+#: src/collectionfieldsdialog.cpp:965
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -693,12 +699,12 @@ msgstr ""
 "goiko muga baino txikiagoa izan behar da. Mesedez, sartu behe eta goi "
 "propietate ezberdinak."
 
-#: src/collectionfieldsdialog.cpp:973
+#: src/collectionfieldsdialog.cpp:980
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "Taulak gehienez hamar zutabera mugatuta daude."
 
-#: src/collectionfieldsdialog.cpp:979
+#: src/collectionfieldsdialog.cpp:986
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr "Eratorritako balio bat duen eremu batek balio-eredu bat izan behar du."
@@ -726,7 +732,7 @@ msgstr "Bibtex gakoa"
 
 #: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:145
 #: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
-#: src/configdialog.cpp:1129 src/fetch/amazonfetcher.cpp:863
+#: src/configdialog.cpp:1135 src/fetch/amazonfetcher.cpp:863
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:534
 #: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:591
@@ -2314,18 +2320,18 @@ msgid "Configure Tellico"
 msgstr "Konfiguratu Tellico"
 
 #: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:334
+#: src/configdialog.cpp:340
 #, kde-format
 msgid "Printing"
 msgstr "Inprimatzea"
 
 #: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:411
+#: src/configdialog.cpp:417
 #, kde-format
 msgid "Templates"
 msgstr "Txantiloiak"
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:614
+#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:620
 #, kde-format
 msgid "Data Sources"
 msgstr "Datu-iturriak"
@@ -2408,40 +2414,40 @@ msgstr ""
 "datu-fitxategia dagoen kokaleku berean dagoen direktorio batean biltegira "
 "daitezke."
 
-#: src/configdialog.cpp:259 src/configdialog.cpp:343
+#: src/configdialog.cpp:265 src/configdialog.cpp:349
 #, kde-format
 msgid "Formatting Options"
 msgstr "Formatua emateko aukerak"
 
-#: src/configdialog.cpp:264
+#: src/configdialog.cpp:270
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "&Tituluen eta izenen aurreneko letra letra-larriz ipintzea"
 
-#: src/configdialog.cpp:265
+#: src/configdialog.cpp:271
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Markatuta badago, tituluen eta izenen aurreneko letra letra-larriz ipiniko "
 "dira."
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:276
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "Titulu eta izenen &formatu automatikoa"
 
-#: src/configdialog.cpp:271 src/configdialog.cpp:349
+#: src/configdialog.cpp:277 src/configdialog.cpp:355
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr ""
 "Markatuta badago, tituluei eta izenei formatua automatikoki emango zaie."
 
-#: src/configdialog.cpp:281
+#: src/configdialog.cpp:287
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "Ez ipini aurreko letra letra-larri&z:"
 
-#: src/configdialog.cpp:286
+#: src/configdialog.cpp:292
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2450,12 +2456,12 @@ msgstr ""
 "<qt>Lehenengo letra maiuskula ipini behar ez diren hitzen zerrenda bat. "
 "Balio anizkoitzak puntu eta komaz bereizi beharko lirateke.</qt>"
 
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:298
 #, kde-format
 msgid "Artic&les:"
 msgstr "Artiku&luak:"
 
-#: src/configdialog.cpp:297
+#: src/configdialog.cpp:303
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2466,12 +2472,12 @@ msgstr ""
 "liratekeen hitzen zerrenda bat. Balio anizkoitzak puntu eta komaz bereizi "
 "beharko lirateke.</qt>"
 
-#: src/configdialog.cpp:304
+#: src/configdialog.cpp:310
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Pertsona atzi&zkiak:"
 
-#: src/configdialog.cpp:309
+#: src/configdialog.cpp:315
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2480,12 +2486,12 @@ msgstr ""
 "<qt>Pertsona izenetan erabil litezkeen atzizkien zerrenda bat. Balio "
 "anizkoitzak puntu eta komaz bereizi beharko lirateke.</qt>"
 
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:321
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "Abizen a&tzizkiak:"
 
-#: src/configdialog.cpp:320
+#: src/configdialog.cpp:326
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2494,53 +2500,53 @@ msgstr ""
 "<qt>Abizenetan erabil litezkeen atzizkien zerrenda bat. Balio anizkoitzak "
 "puntu eta komaz bereizi beharko lirateke.</qt>"
 
-#: src/configdialog.cpp:335
+#: src/configdialog.cpp:341
 #, kde-format
 msgid "Printing Options"
 msgstr "Inprimatzeko aukerak"
 
-#: src/configdialog.cpp:348
+#: src/configdialog.cpp:354
 #, kde-format
 msgid "&Format titles and names"
 msgstr "&Formatua eman titulu eta izenei"
 
-#: src/configdialog.cpp:353
+#: src/configdialog.cpp:359
 #, kde-format
 msgid "&Print field headers"
 msgstr "In&primatu eremu-goiburuak"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Markatuta badago, eremu izenak taulako goiburu gisa inprimatuko dira."
 
-#: src/configdialog.cpp:358
+#: src/configdialog.cpp:364
 #, kde-format
 msgid "Grouping Options"
 msgstr "Taldekatzeko aukerak"
 
-#: src/configdialog.cpp:363
+#: src/configdialog.cpp:369
 #, kde-format
 msgid "&Group the entries"
 msgstr "&Taldekatu sarrerak"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
 "Markatuta badago, sarrerak hautatutako eremuen arabera taldekatuko dira."
 
-#: src/configdialog.cpp:368
+#: src/configdialog.cpp:374
 #, kde-format
 msgid "Image Options"
 msgstr "Irudi-aukerak"
 
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:380
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "Irudiaren gehieneko &zabalera:"
 
-#: src/configdialog.cpp:383
+#: src/configdialog.cpp:389
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
@@ -2548,25 +2554,25 @@ msgid ""
 msgstr ""
 "Irudien gehieneko zabalera inprimaketan. Itxura erlazioa mantentzen da."
 
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:395
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "Irudiaren &gehieneko altuera:"
 
-#: src/configdialog.cpp:398
+#: src/configdialog.cpp:404
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Irudien gehieneko altuera inprimaketan. Itxura erlazioa mantentzen da."
 
-#: src/configdialog.cpp:412
+#: src/configdialog.cpp:418
 #, kde-format
 msgid "Template Options"
 msgstr "Txantiloi-aukerak"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
+#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:218
 #: src/translators/filelistingimporter.cpp:181
@@ -2574,12 +2580,12 @@ msgstr "Txantiloi-aukerak"
 msgid "Collection &type:"
 msgstr "Bilduma mo&ta:"
 
-#: src/configdialog.cpp:433
+#: src/configdialog.cpp:439
 #, kde-format
 msgid "Template:"
 msgstr "Txantiloia:"
 
-#: src/configdialog.cpp:438
+#: src/configdialog.cpp:444
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2588,12 +2594,12 @@ msgstr ""
 "Hautatu uneko bilduma-motekin erabili beharreko txantiloia. Txantiloi "
 "guztiek ez dute erabiliko tipografiaren eta kolorearen konfigurazioa."
 
-#: src/configdialog.cpp:445
+#: src/configdialog.cpp:451
 #, kde-format
 msgid "&Preview..."
 msgstr "Aurreikus&pegia..."
 
-#: src/configdialog.cpp:446
+#: src/configdialog.cpp:452
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "Erakutsi txantiloiaren aurreikuspegi bat"
@@ -2603,108 +2609,108 @@ msgstr "Erakutsi txantiloiaren aurreikuspegi bat"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:463
+#: src/configdialog.cpp:469
 #, kde-format
 msgid "Font Options"
 msgstr "Letra-tipoaren aukerak"
 
-#: src/configdialog.cpp:470
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "Font:"
 msgstr "Letra-tipoa:"
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:482
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr ""
 "Letra-tipo hori pasatzen zaio Sarrera-ikuspegian erabilitako txantiloiari."
 
-#: src/configdialog.cpp:480
+#: src/configdialog.cpp:486
 #, kde-format
 msgid "Size:"
 msgstr "Neurria:"
 
-#: src/configdialog.cpp:492
+#: src/configdialog.cpp:498
 #, kde-format
 msgid "Color Options"
 msgstr "Kolore-aukerak"
 
-#: src/configdialog.cpp:499
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "Background color:"
 msgstr "Atzeko planoaren kolorea:"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:511
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Kolore hori pasatzen zaio Sarrera-ikuspegian erabilitako txantiloiari."
 
-#: src/configdialog.cpp:509
+#: src/configdialog.cpp:515
 #, kde-format
 msgid "Text color:"
 msgstr "Testuaren kolorea:"
 
-#: src/configdialog.cpp:518
+#: src/configdialog.cpp:524
 #, kde-format
 msgid "Highlight color:"
 msgstr "Nabarmentzeko kolorea:"
 
-#: src/configdialog.cpp:527
+#: src/configdialog.cpp:533
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "Nabarmendutako testuaren kolorea:"
 
-#: src/configdialog.cpp:536
+#: src/configdialog.cpp:542
 #, kde-format
 msgid "Link color:"
 msgstr "Estekaren kolorea:"
 
-#: src/configdialog.cpp:545
+#: src/configdialog.cpp:551
 #, kde-format
 msgid "Manage Templates"
 msgstr "Kudeatu txantiloiak"
 
-#: src/configdialog.cpp:555
+#: src/configdialog.cpp:561
 #, kde-format
 msgid "Install..."
 msgstr "Instalatu..."
 
-#: src/configdialog.cpp:559
+#: src/configdialog.cpp:565
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Egin klik txantiloi berri bat zuzenean instalatzeko."
 
-#: src/configdialog.cpp:564 src/configdialog.cpp:567 src/configdialog.cpp:571
+#: src/configdialog.cpp:570 src/configdialog.cpp:573 src/configdialog.cpp:577
 #, kde-format
 msgid "Download..."
 msgstr "Zama-jaitsi..."
 
-#: src/configdialog.cpp:576
+#: src/configdialog.cpp:582
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Egin klik txantiloi osagarriak zama-jaisteko."
 
-#: src/configdialog.cpp:579
+#: src/configdialog.cpp:585
 #, kde-format
 msgid "Delete..."
 msgstr "Ezabatu..."
 
-#: src/configdialog.cpp:583
+#: src/configdialog.cpp:589
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Egin klik instalatutako txantiloiak hautatu eta kentzeko."
 
-#: src/configdialog.cpp:615
+#: src/configdialog.cpp:621
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Datu-iturrien aukerak"
 
-#: src/configdialog.cpp:636
+#: src/configdialog.cpp:642
 #, kde-format
 msgid "Move &Up"
 msgstr "Eraman &gora"
 
-#: src/configdialog.cpp:639
+#: src/configdialog.cpp:645
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2713,59 +2719,59 @@ msgstr ""
 "Datu-iturrien ordenak Tellicok sarrerak automatikoki eguneratzen direnean "
 "erabiltzen duen ordena ezartzen du."
 
-#: src/configdialog.cpp:642
+#: src/configdialog.cpp:648
 #, kde-format
 msgid "Move &Down"
 msgstr "Eraman &behera"
 
-#: src/configdialog.cpp:651
+#: src/configdialog.cpp:657
 #, kde-format
 msgid "Filter by type:"
 msgstr "Iragazi motaren arabera:"
 
-#: src/configdialog.cpp:669
+#: src/configdialog.cpp:675
 #, kde-format
 msgid "&New..."
 msgstr "&Berria..."
 
-#: src/configdialog.cpp:671
+#: src/configdialog.cpp:677
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Egin klik datu-iturri berri bat sortzeko."
 
-#: src/configdialog.cpp:672
+#: src/configdialog.cpp:678
 #, kde-format
 msgid "&Modify..."
 msgstr "&Aldatu..."
 
-#: src/configdialog.cpp:674
+#: src/configdialog.cpp:680
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Egin klik hautatutako datu-iturria aldatzeko."
 
-#: src/configdialog.cpp:675
+#: src/configdialog.cpp:681
 #, kde-format
 msgid "&Delete"
 msgstr "&Ezabatu"
 
-#: src/configdialog.cpp:677
+#: src/configdialog.cpp:683
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Egin klik hautatutako datu-iturria ezabatzeko."
 
-#: src/configdialog.cpp:1161 src/translators/xsltexporter.cpp:101
+#: src/configdialog.cpp:1167 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
 #: src/translators/xsltimporter.cpp:133
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL fitxategiak"
 
-#: src/configdialog.cpp:1162
+#: src/configdialog.cpp:1168
 #, kde-format
 msgid "Template Packages"
 msgstr "Txantiloi-paketeak"
 
-#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1317
+#: src/configdialog.cpp:1169 src/importdialog.cpp:446 src/mainwindow.cpp:1317
 #: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2782,15 +2788,45 @@ msgstr "Txantiloi-paketeak"
 msgid "All Files"
 msgstr "Fitxategi guztiak"
 
-#: src/configdialog.cpp:1192
+#: src/configdialog.cpp:1198
 #, kde-format
 msgid "Delete Template"
 msgstr "Ezabatu txantiloia"
 
-#: src/configdialog.cpp:1193
+#: src/configdialog.cpp:1199
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Hautatu ezabatu beharreko txantiloia:"
+
+#: src/configdialog.cpp:1239
+#, kde-format
+msgctxt "%1 refers to the file name"
+msgid "Images are currently saved within <em>%1</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1243
+#, kde-format
+msgctxt "%1 refers to a directory"
+msgid "Images are currently saved to <em>%1</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1249
+#, kde-format
+msgctxt "%1 refers to a directory, %2 to a file name"
+msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1253
+#, kde-format
+msgctxt "%1 refers to a file name, %2 to a directory"
+msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1263
+#, kde-format
+msgctxt "%1 and %2 are both directories"
+msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
+msgstr ""
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:560 src/fetchdialog.cpp:621

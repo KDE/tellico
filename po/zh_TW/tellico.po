@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-26 00:40+0000\n"
+"POT-Creation-Date: 2024-11-28 00:40+0000\n"
 "PO-Revision-Date: 2024-07-27 13:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -295,186 +295,192 @@ msgstr "棋盤遊戲類收藏"
 msgid "Custom Collection"
 msgstr "自訂收藏"
 
-#: src/collectionfieldsdialog.cpp:82
+#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:798
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The internal field name is <em>%1</em>."
+msgstr ""
+
+#: src/collectionfieldsdialog.cpp:87
 #, kde-format
 msgid "Collection Fields"
 msgstr "收藏欄位"
 
-#: src/collectionfieldsdialog.cpp:92
+#: src/collectionfieldsdialog.cpp:97
 #, kde-format
 msgid "Current Fields"
 msgstr "目前欄位"
 
-#: src/collectionfieldsdialog.cpp:113
+#: src/collectionfieldsdialog.cpp:118
 #, kde-format
 msgctxt "New Field"
 msgid "&New"
 msgstr "新增(&N)"
 
-#: src/collectionfieldsdialog.cpp:116
+#: src/collectionfieldsdialog.cpp:121
 #, kde-format
 msgid "Add a new field to the collection"
 msgstr "新增欄位到收藏"
 
-#: src/collectionfieldsdialog.cpp:117
+#: src/collectionfieldsdialog.cpp:122
 #, kde-format
 msgctxt "Delete Field"
 msgid "Delete"
 msgstr "刪除"
 
-#: src/collectionfieldsdialog.cpp:120
+#: src/collectionfieldsdialog.cpp:125
 #, kde-format
 msgid "Remove a field from the collection"
 msgstr "從收藏中移除欄位"
 
-#: src/collectionfieldsdialog.cpp:132
+#: src/collectionfieldsdialog.cpp:137
 #, kde-format
 msgid ""
 "Move this field up in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr "在清單中將此欄位上移。清單裡的順序會影響項目編輯器的佈局。"
 
-#: src/collectionfieldsdialog.cpp:137
+#: src/collectionfieldsdialog.cpp:142
 #, kde-format
 msgid ""
 "Move this field down in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr "在清單中將此欄位下移。清單裡的順序會影響項目編輯器的佈局。"
 
-#: src/collectionfieldsdialog.cpp:148
+#: src/collectionfieldsdialog.cpp:153
 #, kde-format
 msgid "Field Properties"
 msgstr "欄位屬性"
 
-#: src/collectionfieldsdialog.cpp:157
+#: src/collectionfieldsdialog.cpp:162
 #, kde-format
 msgid "&Title:"
 msgstr "標題(&T)："
 
-#: src/collectionfieldsdialog.cpp:162
+#: src/collectionfieldsdialog.cpp:167
 #, kde-format
 msgid "The title of the field"
 msgstr "欄位的標題"
 
-#: src/collectionfieldsdialog.cpp:167
+#: src/collectionfieldsdialog.cpp:172
 #, kde-format
 msgid "T&ype:"
 msgstr "類型(&Y)："
 
-#: src/collectionfieldsdialog.cpp:173
+#: src/collectionfieldsdialog.cpp:178
 #, kde-format
 msgid "The type of the field determines what values may be used. "
 msgstr "欄位的型態決定了它能使用怎麼樣的值。"
 
-#: src/collectionfieldsdialog.cpp:174
+#: src/collectionfieldsdialog.cpp:179
 #, kde-format
 msgid "<i>Simple Text</i> is used for most fields. "
 msgstr "<i>簡單文字</i>可以用在大部份的欄位。"
 
-#: src/collectionfieldsdialog.cpp:175
+#: src/collectionfieldsdialog.cpp:180
 #, kde-format
 msgid "<i>Paragraph</i> is for large text blocks. "
 msgstr "<i>段落</i>用於大型的文字輸入區塊。"
 
-#: src/collectionfieldsdialog.cpp:176
+#: src/collectionfieldsdialog.cpp:181
 #, kde-format
 msgid "<i>Choice</i> limits the field to certain values. "
 msgstr "<i>選項</i>讓此欄位只有特定的值可以選擇。"
 
-#: src/collectionfieldsdialog.cpp:177
+#: src/collectionfieldsdialog.cpp:182
 #, kde-format
 msgid "<i>Checkbox</i> is for a simple yes/no value. "
 msgstr "<i>勾選盒</i>用於表達簡單的「是/否」。"
 
-#: src/collectionfieldsdialog.cpp:178
+#: src/collectionfieldsdialog.cpp:183
 #, kde-format
 msgid "<i>Number</i> indicates that the field contains a numerical value. "
 msgstr "<i>數值</i>表示此欄位裡是一個數值。"
 
-#: src/collectionfieldsdialog.cpp:179
+#: src/collectionfieldsdialog.cpp:184
 #, kde-format
 msgid ""
 "<i>URL</i> is for fields which refer to URLs, including references to other "
 "files. "
 msgstr "<i>網址</i>表示此欄位裡的是網址，包含檔案的參考。"
 
-#: src/collectionfieldsdialog.cpp:180
+#: src/collectionfieldsdialog.cpp:185
 #, kde-format
 msgid "A <i>Table</i> may hold one or more columns of values. "
 msgstr "<i>表格</i>可以用於儲存一個以上的值。"
 
-#: src/collectionfieldsdialog.cpp:181
+#: src/collectionfieldsdialog.cpp:186
 #, kde-format
 msgid "An <i>Image</i> field holds a picture. "
 msgstr "<i>影像</i>欄位用於存放影像。"
 
-#: src/collectionfieldsdialog.cpp:182
+#: src/collectionfieldsdialog.cpp:187
 #, kde-format
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr "<i>日期</i>欄位用於存放年月日。"
 
-#: src/collectionfieldsdialog.cpp:183
+#: src/collectionfieldsdialog.cpp:188
 #, kde-format
 msgid "A <i>Rating</i> field uses stars to show a rating number. "
 msgstr "<i>評比</i>欄位裡會有星星，表示評分。"
 
-#: src/collectionfieldsdialog.cpp:198
+#: src/collectionfieldsdialog.cpp:203
 #, kde-format
 msgid "Cate&gory:"
 msgstr "類別(&G)："
 
-#: src/collectionfieldsdialog.cpp:203
+#: src/collectionfieldsdialog.cpp:208
 #, kde-format
 msgid "The field category determines where the field is placed in the editor."
 msgstr "欄位類別決定此欄位在編輯器裡的位置。"
 
-#: src/collectionfieldsdialog.cpp:220
+#: src/collectionfieldsdialog.cpp:225
 #, kde-format
 msgid "Set &properties..."
 msgstr "設定屬性(&P)..."
 
-#: src/collectionfieldsdialog.cpp:224
+#: src/collectionfieldsdialog.cpp:229
 #, kde-format
 msgid ""
 "Extended field properties are used to specify things such as the "
 "corresponding bibtex field."
 msgstr "延伸欄位屬性用於指定一些東西，如相關的 bibtex 欄位。"
 
-#: src/collectionfieldsdialog.cpp:229
+#: src/collectionfieldsdialog.cpp:234
 #, kde-format
 msgid "Description:"
 msgstr "描述："
 
-#: src/collectionfieldsdialog.cpp:236
+#: src/collectionfieldsdialog.cpp:241
 #, kde-format
 msgid ""
 "The description is a useful reminder of what information is contained in the "
 "field."
 msgstr "描述是用於說明此欄位裡所儲存的資訊。"
 
-#: src/collectionfieldsdialog.cpp:241
+#: src/collectionfieldsdialog.cpp:246
 #, kde-format
 msgid "Value Options"
 msgstr "數值選項"
 
-#: src/collectionfieldsdialog.cpp:246
+#: src/collectionfieldsdialog.cpp:251
 #, fuzzy, kde-format
 #| msgid "&Default value:"
 msgid "Default value:"
 msgstr "預設值(&D)："
 
-#: src/collectionfieldsdialog.cpp:251
+#: src/collectionfieldsdialog.cpp:256
 #, kde-format
 msgid "<qt>A default value can be set for new entries.</qt>"
 msgstr "<qt>建立新項目時使用的預設值。</qt>"
 
-#: src/collectionfieldsdialog.cpp:256
+#: src/collectionfieldsdialog.cpp:261
 #, kde-format
 msgid "Value template:"
 msgstr "數值樣本："
 
-#: src/collectionfieldsdialog.cpp:264
+#: src/collectionfieldsdialog.cpp:269
 #, kde-format
 msgid ""
 "Derived values are formed from the values of other fields according to the "
@@ -484,17 +490,17 @@ msgstr ""
 "衍生數值是指根據數值樣本，從其他的欄位的值建立此欄位的值。例如 %{year} "
 "%{title} 會取代成名為 year 與 title 的欄位裡的值。"
 
-#: src/collectionfieldsdialog.cpp:270
+#: src/collectionfieldsdialog.cpp:275
 #, kde-format
 msgid "Use derived value"
 msgstr "使用衍生數值"
 
-#: src/collectionfieldsdialog.cpp:276
+#: src/collectionfieldsdialog.cpp:281
 #, kde-format
 msgid "A&llowed values:"
 msgstr "允許的數值(&L)："
 
-#: src/collectionfieldsdialog.cpp:281
+#: src/collectionfieldsdialog.cpp:286
 #, kde-format
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
@@ -504,82 +510,82 @@ msgstr ""
 "<qt>欄位型態為<i>選項</i>時，只能使用這些值。它們會被放在一個下拉式選單中。允"
 "許的數值以分號區隔，如：\"dog; cat; mouse\"</qt>"
 
-#: src/collectionfieldsdialog.cpp:288
+#: src/collectionfieldsdialog.cpp:293
 #, kde-format
 msgid "Format options:"
 msgstr "格式選項："
 
-#: src/collectionfieldsdialog.cpp:294
+#: src/collectionfieldsdialog.cpp:299
 #, kde-format
 msgid "No formatting"
 msgstr "沒有格式"
 
-#: src/collectionfieldsdialog.cpp:295
+#: src/collectionfieldsdialog.cpp:300
 #, kde-format
 msgid "Allow auto-capitalization only"
 msgstr "只允許自動大寫"
 
-#: src/collectionfieldsdialog.cpp:296
+#: src/collectionfieldsdialog.cpp:301
 #, kde-format
 msgid "Format as a title"
 msgstr "設為標題格式"
 
-#: src/collectionfieldsdialog.cpp:297
+#: src/collectionfieldsdialog.cpp:302
 #, kde-format
 msgid "Format as a name"
 msgstr "設為名稱格式"
 
-#: src/collectionfieldsdialog.cpp:301
+#: src/collectionfieldsdialog.cpp:306
 #, kde-format
 msgid "Field Options"
 msgstr "欄位選項"
 
-#: src/collectionfieldsdialog.cpp:304
+#: src/collectionfieldsdialog.cpp:309
 #, kde-format
 msgid "Enable auto-completion"
 msgstr "開啟自動補完"
 
-#: src/collectionfieldsdialog.cpp:305
+#: src/collectionfieldsdialog.cpp:310
 #, kde-format
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
 "this field."
 msgstr "若勾選此選項，編輯此欄位的文字時會開啟 KDE 的自動文字補完功能。"
 
-#: src/collectionfieldsdialog.cpp:307
+#: src/collectionfieldsdialog.cpp:312
 #, kde-format
 msgid "Allow multiple values"
 msgstr "允許多個數值"
 
-#: src/collectionfieldsdialog.cpp:308
+#: src/collectionfieldsdialog.cpp:313
 #, kde-format
 msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
 "separated by a semi-colon."
 msgstr "若勾選此選項，Tellico 會將此欄位的值剖析為多個數值，以分號區隔。"
 
-#: src/collectionfieldsdialog.cpp:310
+#: src/collectionfieldsdialog.cpp:315
 #, kde-format
 msgid "Allow grouping"
 msgstr "允許群組"
 
-#: src/collectionfieldsdialog.cpp:311
+#: src/collectionfieldsdialog.cpp:316
 #, kde-format
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
 msgstr "若勾選此選項，此欄位可以用於在群組檢視中將項目群組在一起。"
 
-#: src/collectionfieldsdialog.cpp:341
+#: src/collectionfieldsdialog.cpp:346
 #, kde-format
 msgid "Revert the selected field's properties to the default values."
 msgstr "將選取的欄位屬性回復到預設值。"
 
-#: src/collectionfieldsdialog.cpp:398
+#: src/collectionfieldsdialog.cpp:403
 #, kde-format
 msgid "Modify Fields"
 msgstr "變更欄位"
 
-#: src/collectionfieldsdialog.cpp:411
+#: src/collectionfieldsdialog.cpp:416
 #, kde-format
 msgid ""
 "<qt>Removing allowed values from the <i>%1</i> field which currently exist "
@@ -589,60 +595,60 @@ msgstr ""
 "<qt>從 <i>%1</i> 欄位中將目前存在於此收藏的允許的數值移除可能會造成資料損毀。"
 "您要保持您的變更，還是要取消變更並回復到原來的值？</qt>"
 
-#: src/collectionfieldsdialog.cpp:416
+#: src/collectionfieldsdialog.cpp:421
 #, kde-format
 msgid "Keep modified values"
 msgstr "保持所做的變更"
 
-#: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:518
+#: src/collectionfieldsdialog.cpp:520 src/collectionfieldsdialog.cpp:524
 #, kde-format
 msgid "New Field %1"
 msgstr "新增欄位 %1"
 
-#: src/collectionfieldsdialog.cpp:808
+#: src/collectionfieldsdialog.cpp:815
 #, kde-format
 msgid "Revert Field Properties"
 msgstr "回復欄位屬性"
 
-#: src/collectionfieldsdialog.cpp:809
+#: src/collectionfieldsdialog.cpp:816
 #, kde-format
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr "<qt><p>您要將 <em>%1</em> 欄位的屬性回復為預設值嗎？</p></qt>"
 
-#: src/collectionfieldsdialog.cpp:812
+#: src/collectionfieldsdialog.cpp:819
 #, kde-format
 msgid "Revert"
 msgstr "回復"
 
-#: src/collectionfieldsdialog.cpp:886
+#: src/collectionfieldsdialog.cpp:893
 #, kde-format
 msgid "Extended Field Properties"
 msgstr "延伸欄位屬性"
 
-#: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:104
+#: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:104
 #, kde-format
 msgid "Property"
 msgstr "屬性"
 
-#: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:105
+#: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:105
 #: src/fetch/srufetcher.cpp:614
 #, kde-format
 msgid "Value"
 msgstr "數值"
 
-#: src/collectionfieldsdialog.cpp:923
+#: src/collectionfieldsdialog.cpp:930
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "已經有欄位使用此標題。請輸入不同的標題。"
 
-#: src/collectionfieldsdialog.cpp:930
+#: src/collectionfieldsdialog.cpp:937
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>類別不能為空。請輸入類別。</qt>"
 
-#: src/collectionfieldsdialog.cpp:938
+#: src/collectionfieldsdialog.cpp:945
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -652,14 +658,14 @@ msgstr ""
 "<qt>欄位不能與<em>段落</em>、<em>表格</em>或<em>影像</em>欄位在同一個類別中。"
 "請輸入不同的類別。</qt>"
 
-#: src/collectionfieldsdialog.cpp:946
+#: src/collectionfieldsdialog.cpp:953
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
 msgstr "欄位的標題不能與現有的類別相同。請輸入不同的標題。"
 
-#: src/collectionfieldsdialog.cpp:958
+#: src/collectionfieldsdialog.cpp:965
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -667,12 +673,12 @@ msgid ""
 "properties."
 msgstr "評分欄位的範圍為 1 到 10。低限必須比高限低。請輸入不同的高低限屬性。"
 
-#: src/collectionfieldsdialog.cpp:973
+#: src/collectionfieldsdialog.cpp:980
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "表格裡最多只能有十欄。"
 
-#: src/collectionfieldsdialog.cpp:979
+#: src/collectionfieldsdialog.cpp:986
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr "含有衍生數值的欄位必須定義數值樣本。"
@@ -700,7 +706,7 @@ msgstr "Bibtex 鍵值"
 
 #: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:145
 #: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
-#: src/configdialog.cpp:1129 src/fetch/amazonfetcher.cpp:863
+#: src/configdialog.cpp:1135 src/fetch/amazonfetcher.cpp:863
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:534
 #: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:591
@@ -2297,18 +2303,18 @@ msgid "Configure Tellico"
 msgstr "設定 Tellico"
 
 #: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:334
+#: src/configdialog.cpp:340
 #, kde-format
 msgid "Printing"
 msgstr "列印"
 
 #: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:411
+#: src/configdialog.cpp:417
 #, kde-format
 msgid "Templates"
 msgstr "樣本"
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:614
+#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:620
 #, kde-format
 msgid "Data Sources"
 msgstr "資料來源"
@@ -2385,49 +2391,49 @@ msgstr ""
 "影像可以存在資料檔中（不過會造成 Tellico 執行變慢），存在 Tellico 應用程式目"
 "錄中，或是存在跟資料檔相同的目錄中。"
 
-#: src/configdialog.cpp:259 src/configdialog.cpp:343
+#: src/configdialog.cpp:265 src/configdialog.cpp:349
 #, kde-format
 msgid "Formatting Options"
 msgstr "格式化選項"
 
-#: src/configdialog.cpp:264
+#: src/configdialog.cpp:270
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "自動將標題與名稱改為大寫(&T)"
 
-#: src/configdialog.cpp:265
+#: src/configdialog.cpp:271
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr "勾選此選項的話，標題與名稱會自動變為大寫。"
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:276
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "自動格式化標題與名稱(&F)"
 
-#: src/configdialog.cpp:271 src/configdialog.cpp:349
+#: src/configdialog.cpp:277 src/configdialog.cpp:355
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "勾選此選項的話，標題與名稱會自動格式化。"
 
-#: src/configdialog.cpp:281
+#: src/configdialog.cpp:287
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "不使用大寫(&Z)："
 
-#: src/configdialog.cpp:286
+#: src/configdialog.cpp:292
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
 "be separated by a semi-colon.</qt>"
 msgstr "<qt>不要使用大寫的單字清單。多個單字用分號區隔。</qt>"
 
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:298
 #, kde-format
 msgid "Artic&les:"
 msgstr "冠詞(&L)："
 
-#: src/configdialog.cpp:297
+#: src/configdialog.cpp:303
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2437,101 +2443,101 @@ msgstr ""
 "<qt>若是標題中的第一個字為清單中的任一單字，則會被視為冠詞。多個冠詞用分號區"
 "隔。</qt>"
 
-#: src/configdialog.cpp:304
+#: src/configdialog.cpp:310
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "人名後置字串(&X)："
 
-#: src/configdialog.cpp:309
+#: src/configdialog.cpp:315
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
 msgstr "<qt>此清單中的單字會被用在人名後面。多個單字用分號區隔。</qt>"
 
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:321
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "姓氏前置字串(&P)："
 
-#: src/configdialog.cpp:320
+#: src/configdialog.cpp:326
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
 msgstr "<qt>此清單中的單字會被用於姓氏前面。多個單字用分號區隔。</qt>"
 
-#: src/configdialog.cpp:335
+#: src/configdialog.cpp:341
 #, kde-format
 msgid "Printing Options"
 msgstr "列印選項"
 
-#: src/configdialog.cpp:348
+#: src/configdialog.cpp:354
 #, kde-format
 msgid "&Format titles and names"
 msgstr "格式化標題與名稱(&F)"
 
-#: src/configdialog.cpp:353
+#: src/configdialog.cpp:359
 #, kde-format
 msgid "&Print field headers"
 msgstr "列印欄位標頭(&P)"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "若是勾選此選項，則會將欄位名稱印在表格標頭。"
 
-#: src/configdialog.cpp:358
+#: src/configdialog.cpp:364
 #, kde-format
 msgid "Grouping Options"
 msgstr "群組選項"
 
-#: src/configdialog.cpp:363
+#: src/configdialog.cpp:369
 #, kde-format
 msgid "&Group the entries"
 msgstr "將項目群組起來(&G)"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "若勾選此選項，則會將選取的欄位群組起來。"
 
-#: src/configdialog.cpp:368
+#: src/configdialog.cpp:374
 #, kde-format
 msgid "Image Options"
 msgstr "圖像選項"
 
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:380
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "最大圖像寬度(&W)："
 
-#: src/configdialog.cpp:383
+#: src/configdialog.cpp:389
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "在列印時的最大圖像寬度。外觀比例會保留。"
 
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:395
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "最大圖像高度(&M)："
 
-#: src/configdialog.cpp:398
+#: src/configdialog.cpp:404
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "在列印時的最大圖像高度。外觀比例會保留。"
 
-#: src/configdialog.cpp:412
+#: src/configdialog.cpp:418
 #, kde-format
 msgid "Template Options"
 msgstr "樣本選項"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
+#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:218
 #: src/translators/filelistingimporter.cpp:181
@@ -2539,12 +2545,12 @@ msgstr "樣本選項"
 msgid "Collection &type:"
 msgstr "收集型態(&T)："
 
-#: src/configdialog.cpp:433
+#: src/configdialog.cpp:439
 #, kde-format
 msgid "Template:"
 msgstr "樣本："
 
-#: src/configdialog.cpp:438
+#: src/configdialog.cpp:444
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2552,12 +2558,12 @@ msgid ""
 msgstr ""
 "請選擇要用於目前收藏型態的樣本。並非所有的樣本都會使用此字型與顏色設定。"
 
-#: src/configdialog.cpp:445
+#: src/configdialog.cpp:451
 #, kde-format
 msgid "&Preview..."
 msgstr "預覽(&P)..."
 
-#: src/configdialog.cpp:446
+#: src/configdialog.cpp:452
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "顯示樣本的預覽"
@@ -2567,167 +2573,167 @@ msgstr "顯示樣本的預覽"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:463
+#: src/configdialog.cpp:469
 #, kde-format
 msgid "Font Options"
 msgstr "字型選項"
 
-#: src/configdialog.cpp:470
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "Font:"
 msgstr "字型："
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:482
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "此字型會在項目檢視中傳遞給樣本。"
 
-#: src/configdialog.cpp:480
+#: src/configdialog.cpp:486
 #, kde-format
 msgid "Size:"
 msgstr "大小："
 
-#: src/configdialog.cpp:492
+#: src/configdialog.cpp:498
 #, kde-format
 msgid "Color Options"
 msgstr "著色選項"
 
-#: src/configdialog.cpp:499
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "Background color:"
 msgstr "背景顏色："
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:511
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "此顏色會在項目檢視中傳遞給樣本。"
 
-#: src/configdialog.cpp:509
+#: src/configdialog.cpp:515
 #, kde-format
 msgid "Text color:"
 msgstr "文字顏色："
 
-#: src/configdialog.cpp:518
+#: src/configdialog.cpp:524
 #, kde-format
 msgid "Highlight color:"
 msgstr "突顯顏色："
 
-#: src/configdialog.cpp:527
+#: src/configdialog.cpp:533
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "突顯文字顏色："
 
-#: src/configdialog.cpp:536
+#: src/configdialog.cpp:542
 #, fuzzy, kde-format
 #| msgid "Text color:"
 msgid "Link color:"
 msgstr "文字顏色："
 
-#: src/configdialog.cpp:545
+#: src/configdialog.cpp:551
 #, kde-format
 msgid "Manage Templates"
 msgstr "管理樣本"
 
-#: src/configdialog.cpp:555
+#: src/configdialog.cpp:561
 #, kde-format
 msgid "Install..."
 msgstr "安裝..."
 
-#: src/configdialog.cpp:559
+#: src/configdialog.cpp:565
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "點擊以直接安裝新的樣本。"
 
-#: src/configdialog.cpp:564 src/configdialog.cpp:567 src/configdialog.cpp:571
+#: src/configdialog.cpp:570 src/configdialog.cpp:573 src/configdialog.cpp:577
 #, kde-format
 msgid "Download..."
 msgstr "下載..."
 
-#: src/configdialog.cpp:576
+#: src/configdialog.cpp:582
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "點擊以下載額外的樣本。"
 
-#: src/configdialog.cpp:579
+#: src/configdialog.cpp:585
 #, kde-format
 msgid "Delete..."
 msgstr "刪除..."
 
-#: src/configdialog.cpp:583
+#: src/configdialog.cpp:589
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "點擊以選擇並移除安裝的樣本。"
 
-#: src/configdialog.cpp:615
+#: src/configdialog.cpp:621
 #, kde-format
 msgid "Data Sources Options"
 msgstr "資料來源選項"
 
-#: src/configdialog.cpp:636
+#: src/configdialog.cpp:642
 #, kde-format
 msgid "Move &Up"
 msgstr "上移(&U)"
 
-#: src/configdialog.cpp:639
+#: src/configdialog.cpp:645
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
 "are automatically updated."
 msgstr "資料來源的順序會決定 Tellico 在做自動更新項目時的順序。"
 
-#: src/configdialog.cpp:642
+#: src/configdialog.cpp:648
 #, kde-format
 msgid "Move &Down"
 msgstr "下移(&D)"
 
-#: src/configdialog.cpp:651
+#: src/configdialog.cpp:657
 #, kde-format
 msgid "Filter by type:"
 msgstr "以型態過濾："
 
-#: src/configdialog.cpp:669
+#: src/configdialog.cpp:675
 #, kde-format
 msgid "&New..."
 msgstr "新增(&N)..."
 
-#: src/configdialog.cpp:671
+#: src/configdialog.cpp:677
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "點擊以新增資料來源。"
 
-#: src/configdialog.cpp:672
+#: src/configdialog.cpp:678
 #, kde-format
 msgid "&Modify..."
 msgstr "變更(&M)..."
 
-#: src/configdialog.cpp:674
+#: src/configdialog.cpp:680
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "點擊以變更選取的資料來源。"
 
-#: src/configdialog.cpp:675
+#: src/configdialog.cpp:681
 #, kde-format
 msgid "&Delete"
 msgstr "刪除(&D)"
 
-#: src/configdialog.cpp:677
+#: src/configdialog.cpp:683
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "點擊以刪除選取的資料來源。"
 
-#: src/configdialog.cpp:1161 src/translators/xsltexporter.cpp:101
+#: src/configdialog.cpp:1167 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
 #: src/translators/xsltimporter.cpp:133
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL 檔案"
 
-#: src/configdialog.cpp:1162
+#: src/configdialog.cpp:1168
 #, kde-format
 msgid "Template Packages"
 msgstr "樣本套件"
 
-#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1317
+#: src/configdialog.cpp:1169 src/importdialog.cpp:446 src/mainwindow.cpp:1317
 #: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2744,15 +2750,45 @@ msgstr "樣本套件"
 msgid "All Files"
 msgstr "所有檔案"
 
-#: src/configdialog.cpp:1192
+#: src/configdialog.cpp:1198
 #, kde-format
 msgid "Delete Template"
 msgstr "刪除樣本"
 
-#: src/configdialog.cpp:1193
+#: src/configdialog.cpp:1199
 #, kde-format
 msgid "Select template to delete:"
 msgstr "請選擇要刪除的樣本："
+
+#: src/configdialog.cpp:1239
+#, kde-format
+msgctxt "%1 refers to the file name"
+msgid "Images are currently saved within <em>%1</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1243
+#, kde-format
+msgctxt "%1 refers to a directory"
+msgid "Images are currently saved to <em>%1</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1249
+#, kde-format
+msgctxt "%1 refers to a directory, %2 to a file name"
+msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1253
+#, kde-format
+msgctxt "%1 refers to a file name, %2 to a directory"
+msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1263
+#, kde-format
+msgctxt "%1 and %2 are both directories"
+msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
+msgstr ""
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:560 src/fetchdialog.cpp:621

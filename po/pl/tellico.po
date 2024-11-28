@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-26 00:40+0000\n"
+"POT-Creation-Date: 2024-11-28 00:40+0000\n"
 "PO-Revision-Date: 2024-10-05 13:04+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -304,39 +304,45 @@ msgstr "Zbiór gier planszowych"
 msgid "Custom Collection"
 msgstr "Dowolny zbiór"
 
-#: src/collectionfieldsdialog.cpp:82
+#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:798
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The internal field name is <em>%1</em>."
+msgstr ""
+
+#: src/collectionfieldsdialog.cpp:87
 #, kde-format
 msgid "Collection Fields"
 msgstr "Pola zbioru"
 
-#: src/collectionfieldsdialog.cpp:92
+#: src/collectionfieldsdialog.cpp:97
 #, kde-format
 msgid "Current Fields"
 msgstr "Obecne pola"
 
-#: src/collectionfieldsdialog.cpp:113
+#: src/collectionfieldsdialog.cpp:118
 #, kde-format
 msgctxt "New Field"
 msgid "&New"
 msgstr "&Nowe"
 
-#: src/collectionfieldsdialog.cpp:116
+#: src/collectionfieldsdialog.cpp:121
 #, kde-format
 msgid "Add a new field to the collection"
 msgstr "Dodaje nowe pole do zbioru"
 
-#: src/collectionfieldsdialog.cpp:117
+#: src/collectionfieldsdialog.cpp:122
 #, kde-format
 msgctxt "Delete Field"
 msgid "Delete"
 msgstr "Usuń"
 
-#: src/collectionfieldsdialog.cpp:120
+#: src/collectionfieldsdialog.cpp:125
 #, kde-format
 msgid "Remove a field from the collection"
 msgstr "Usuwa pole ze zbioru"
 
-#: src/collectionfieldsdialog.cpp:132
+#: src/collectionfieldsdialog.cpp:137
 #, kde-format
 msgid ""
 "Move this field up in the list. The list order is important for the layout "
@@ -345,7 +351,7 @@ msgstr ""
 "Przesuwa pole w górę listy. Kolejność jest ważna dla układu pól w edytorze "
 "elementów."
 
-#: src/collectionfieldsdialog.cpp:137
+#: src/collectionfieldsdialog.cpp:142
 #, kde-format
 msgid ""
 "Move this field down in the list. The list order is important for the layout "
@@ -354,57 +360,57 @@ msgstr ""
 "Przesuwa pole w dół listy. Kolejność jest ważna dla układu pól w edytorze "
 "elementów."
 
-#: src/collectionfieldsdialog.cpp:148
+#: src/collectionfieldsdialog.cpp:153
 #, kde-format
 msgid "Field Properties"
 msgstr "Właściwości pola"
 
-#: src/collectionfieldsdialog.cpp:157
+#: src/collectionfieldsdialog.cpp:162
 #, kde-format
 msgid "&Title:"
 msgstr "&Nazwa:"
 
-#: src/collectionfieldsdialog.cpp:162
+#: src/collectionfieldsdialog.cpp:167
 #, kde-format
 msgid "The title of the field"
 msgstr "Nazwa pola"
 
-#: src/collectionfieldsdialog.cpp:167
+#: src/collectionfieldsdialog.cpp:172
 #, kde-format
 msgid "T&ype:"
 msgstr "Ro&dzaj:"
 
-#: src/collectionfieldsdialog.cpp:173
+#: src/collectionfieldsdialog.cpp:178
 #, kde-format
 msgid "The type of the field determines what values may be used. "
 msgstr "Rodzaj pola określa wartości jakie mogą być w nim umieszczone. "
 
-#: src/collectionfieldsdialog.cpp:174
+#: src/collectionfieldsdialog.cpp:179
 #, kde-format
 msgid "<i>Simple Text</i> is used for most fields. "
 msgstr "<i>Prosty Tekst</i> jest używany dla większości pól. "
 
-#: src/collectionfieldsdialog.cpp:175
+#: src/collectionfieldsdialog.cpp:180
 #, kde-format
 msgid "<i>Paragraph</i> is for large text blocks. "
 msgstr "<i>Paragraf</i>jest używany do dużych bloków tekstu. "
 
-#: src/collectionfieldsdialog.cpp:176
+#: src/collectionfieldsdialog.cpp:181
 #, kde-format
 msgid "<i>Choice</i> limits the field to certain values. "
 msgstr "<i>Lista wyboru</i> ogranicza pole do konkretnych wartości. "
 
-#: src/collectionfieldsdialog.cpp:177
+#: src/collectionfieldsdialog.cpp:182
 #, kde-format
 msgid "<i>Checkbox</i> is for a simple yes/no value. "
 msgstr "<i>Pole wyboru</i> jest używane dla wartości tak/nie. "
 
-#: src/collectionfieldsdialog.cpp:178
+#: src/collectionfieldsdialog.cpp:183
 #, kde-format
 msgid "<i>Number</i> indicates that the field contains a numerical value. "
 msgstr "<i>Liczba</i> oznacza, że pole zawiera wartość numeryczną. "
 
-#: src/collectionfieldsdialog.cpp:179
+#: src/collectionfieldsdialog.cpp:184
 #, kde-format
 msgid ""
 "<i>URL</i> is for fields which refer to URLs, including references to other "
@@ -413,46 +419,46 @@ msgstr ""
 "<i>URL</i>jest używany dla pól odnoszących się do adresów URL, w tym również "
 "odnośników do innych plików. "
 
-#: src/collectionfieldsdialog.cpp:180
+#: src/collectionfieldsdialog.cpp:185
 #, kde-format
 msgid "A <i>Table</i> may hold one or more columns of values. "
 msgstr "<i>Tabela</i>może przechowywać jedną lub więcej kolumn z wartościami. "
 
-#: src/collectionfieldsdialog.cpp:181
+#: src/collectionfieldsdialog.cpp:186
 #, kde-format
 msgid "An <i>Image</i> field holds a picture. "
 msgstr "<i>Obraz</i> przechowuje obraz. "
 
-#: src/collectionfieldsdialog.cpp:182
+#: src/collectionfieldsdialog.cpp:187
 #, kde-format
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr ""
 "Pole <i>Data</i> może być używane dla wartości z dniem, miesiącem i rokiem. "
 
-#: src/collectionfieldsdialog.cpp:183
+#: src/collectionfieldsdialog.cpp:188
 #, kde-format
 msgid "A <i>Rating</i> field uses stars to show a rating number. "
 msgstr "Pole <i>Ocena</i> używa gwiazdek by pokazać ocenę. "
 
-#: src/collectionfieldsdialog.cpp:198
+#: src/collectionfieldsdialog.cpp:203
 #, kde-format
 msgid "Cate&gory:"
 msgstr "Kate&goria:"
 
-#: src/collectionfieldsdialog.cpp:203
+#: src/collectionfieldsdialog.cpp:208
 #, kde-format
 msgid "The field category determines where the field is placed in the editor."
 msgstr ""
 "Kategoria pola określa zakładkę w edytorze, w której pole zostanie "
 "umieszczone."
 
-#: src/collectionfieldsdialog.cpp:220
+#: src/collectionfieldsdialog.cpp:225
 #, kde-format
 msgid "Set &properties..."
 msgstr "Ustaw &właściwości..."
 
-#: src/collectionfieldsdialog.cpp:224
+#: src/collectionfieldsdialog.cpp:229
 #, kde-format
 msgid ""
 "Extended field properties are used to specify things such as the "
@@ -461,39 +467,39 @@ msgstr ""
 "Właściwości rozszerzone pola są używane dla określenia parametrów takich jak "
 "odpowiadające pole BibTeX."
 
-#: src/collectionfieldsdialog.cpp:229
+#: src/collectionfieldsdialog.cpp:234
 #, kde-format
 msgid "Description:"
 msgstr "Opis:"
 
-#: src/collectionfieldsdialog.cpp:236
+#: src/collectionfieldsdialog.cpp:241
 #, kde-format
 msgid ""
 "The description is a useful reminder of what information is contained in the "
 "field."
 msgstr "Opis jest użyteczną podpowiedzią zawartości pola."
 
-#: src/collectionfieldsdialog.cpp:241
+#: src/collectionfieldsdialog.cpp:246
 #, kde-format
 msgid "Value Options"
 msgstr "Ustawienia wartości"
 
-#: src/collectionfieldsdialog.cpp:246
+#: src/collectionfieldsdialog.cpp:251
 #, kde-format
 msgid "Default value:"
 msgstr "Domyślna wartość:"
 
-#: src/collectionfieldsdialog.cpp:251
+#: src/collectionfieldsdialog.cpp:256
 #, kde-format
 msgid "<qt>A default value can be set for new entries.</qt>"
 msgstr "<qt>Dla nowych elementów można ustawić wartość domyślną.</qt>"
 
-#: src/collectionfieldsdialog.cpp:256
+#: src/collectionfieldsdialog.cpp:261
 #, kde-format
 msgid "Value template:"
 msgstr "Wzorzec wartości:"
 
-#: src/collectionfieldsdialog.cpp:264
+#: src/collectionfieldsdialog.cpp:269
 #, kde-format
 msgid ""
 "Derived values are formed from the values of other fields according to the "
@@ -503,17 +509,17 @@ msgstr ""
 "Wartości pochodne są tworzone na podstawie innych pól zgodnie z wzorcem.Np. "
 "pola \"{%year} %{title}\" są zastępowane odpowiednimi wartościami."
 
-#: src/collectionfieldsdialog.cpp:270
+#: src/collectionfieldsdialog.cpp:275
 #, kde-format
 msgid "Use derived value"
 msgstr "Użyj wartości pochodnych"
 
-#: src/collectionfieldsdialog.cpp:276
+#: src/collectionfieldsdialog.cpp:281
 #, kde-format
 msgid "A&llowed values:"
 msgstr "Wartości &dozwolone:"
 
-#: src/collectionfieldsdialog.cpp:281
+#: src/collectionfieldsdialog.cpp:286
 #, kde-format
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
@@ -524,42 +530,42 @@ msgstr ""
 "Wartości te są umieszczane w liście rozwijanej i muszą być oddzielone "
 "średnikiem, np. \"pies; kot; mysz\"</qt>"
 
-#: src/collectionfieldsdialog.cpp:288
+#: src/collectionfieldsdialog.cpp:293
 #, kde-format
 msgid "Format options:"
 msgstr "Ustawienia formatowania:"
 
-#: src/collectionfieldsdialog.cpp:294
+#: src/collectionfieldsdialog.cpp:299
 #, kde-format
 msgid "No formatting"
 msgstr "Brak formatowania"
 
-#: src/collectionfieldsdialog.cpp:295
+#: src/collectionfieldsdialog.cpp:300
 #, kde-format
 msgid "Allow auto-capitalization only"
 msgstr "Zezwól tylko na samoczynne pisanie wielkimi literami"
 
-#: src/collectionfieldsdialog.cpp:296
+#: src/collectionfieldsdialog.cpp:301
 #, kde-format
 msgid "Format as a title"
 msgstr "Formatuj jako tytuł"
 
-#: src/collectionfieldsdialog.cpp:297
+#: src/collectionfieldsdialog.cpp:302
 #, kde-format
 msgid "Format as a name"
 msgstr "Formatuj jako imię i nazwisko"
 
-#: src/collectionfieldsdialog.cpp:301
+#: src/collectionfieldsdialog.cpp:306
 #, kde-format
 msgid "Field Options"
 msgstr "Ustawienia pola"
 
-#: src/collectionfieldsdialog.cpp:304
+#: src/collectionfieldsdialog.cpp:309
 #, kde-format
 msgid "Enable auto-completion"
 msgstr "Włącz auto-uzupełnianie"
 
-#: src/collectionfieldsdialog.cpp:305
+#: src/collectionfieldsdialog.cpp:310
 #, kde-format
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
@@ -568,12 +574,12 @@ msgstr ""
 "Jeśli zaznaczone, auto-uzupełnianie KDE będzie włączone w polu edycji dla "
 "tego pola."
 
-#: src/collectionfieldsdialog.cpp:307
+#: src/collectionfieldsdialog.cpp:312
 #, kde-format
 msgid "Allow multiple values"
 msgstr "Pozwól na wiele wartości"
 
-#: src/collectionfieldsdialog.cpp:308
+#: src/collectionfieldsdialog.cpp:313
 #, kde-format
 msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
@@ -582,12 +588,12 @@ msgstr ""
 "Jeśli zaznaczone, Tellico będzie dzieliło tekst w polu na wiele wartości "
 "(separatorem jest średnik)."
 
-#: src/collectionfieldsdialog.cpp:310
+#: src/collectionfieldsdialog.cpp:315
 #, kde-format
 msgid "Allow grouping"
 msgstr "Pozwól na grupowanie"
 
-#: src/collectionfieldsdialog.cpp:311
+#: src/collectionfieldsdialog.cpp:316
 #, kde-format
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
@@ -595,17 +601,17 @@ msgstr ""
 "Jeśli zaznaczone, to pole będzie mogło być używane do grupowania elementów w "
 "widoku grupowym."
 
-#: src/collectionfieldsdialog.cpp:341
+#: src/collectionfieldsdialog.cpp:346
 #, kde-format
 msgid "Revert the selected field's properties to the default values."
 msgstr "Przywróć domyślne wartości właściwości wybranego pola."
 
-#: src/collectionfieldsdialog.cpp:398
+#: src/collectionfieldsdialog.cpp:403
 #, kde-format
 msgid "Modify Fields"
 msgstr "Zmień pola"
 
-#: src/collectionfieldsdialog.cpp:411
+#: src/collectionfieldsdialog.cpp:416
 #, kde-format
 msgid ""
 "<qt>Removing allowed values from the <i>%1</i> field which currently exist "
@@ -616,22 +622,22 @@ msgstr ""
 "zbioru może spowodować uszkodzenie danych. Czy chcesz zachować zmienione "
 "wartości czy zaniechać i przywrócić obecnie używane?</qt>"
 
-#: src/collectionfieldsdialog.cpp:416
+#: src/collectionfieldsdialog.cpp:421
 #, kde-format
 msgid "Keep modified values"
 msgstr "Zachowaj zmienione wartości"
 
-#: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:518
+#: src/collectionfieldsdialog.cpp:520 src/collectionfieldsdialog.cpp:524
 #, kde-format
 msgid "New Field %1"
 msgstr "Nowe pole %1"
 
-#: src/collectionfieldsdialog.cpp:808
+#: src/collectionfieldsdialog.cpp:815
 #, kde-format
 msgid "Revert Field Properties"
 msgstr "Przywróć domyślne właściwości pola"
 
-#: src/collectionfieldsdialog.cpp:809
+#: src/collectionfieldsdialog.cpp:816
 #, kde-format
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
@@ -640,38 +646,38 @@ msgstr ""
 "<qt><p>Czy na pewno chcesz przywrócić wartości domyślne dla właściwości pola "
 "<em>%1</em>?</p></qt>"
 
-#: src/collectionfieldsdialog.cpp:812
+#: src/collectionfieldsdialog.cpp:819
 #, kde-format
 msgid "Revert"
 msgstr "Przywróć"
 
-#: src/collectionfieldsdialog.cpp:886
+#: src/collectionfieldsdialog.cpp:893
 #, kde-format
 msgid "Extended Field Properties"
 msgstr "Rozszerzone właściwości pola"
 
-#: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:104
+#: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:104
 #, kde-format
 msgid "Property"
 msgstr "Właściwość"
 
-#: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:105
+#: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:105
 #: src/fetch/srufetcher.cpp:614
 #, kde-format
 msgid "Value"
 msgstr "Wartość"
 
-#: src/collectionfieldsdialog.cpp:923
+#: src/collectionfieldsdialog.cpp:930
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "Pole o tej nazwie już istnieje. Wybierz inną nazwę."
 
-#: src/collectionfieldsdialog.cpp:930
+#: src/collectionfieldsdialog.cpp:937
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>Kategoria nie może być pusta. Proszę wprowadzić kategorię.</qt>"
 
-#: src/collectionfieldsdialog.cpp:938
+#: src/collectionfieldsdialog.cpp:945
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -681,7 +687,7 @@ msgstr ""
 "<qt>Pole nie może być w takiej samej kategorii jak <em>Paragraf</em>,"
 "<em>Tabela</em> albo <em>Obraz</em>. Proszę wprowadzić inną kategorię.</qt>"
 
-#: src/collectionfieldsdialog.cpp:946
+#: src/collectionfieldsdialog.cpp:953
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
@@ -690,7 +696,7 @@ msgstr ""
 "Nazwa pola nie może być taka sama jak istniejącej kategorii. Proszę "
 "wprowadzić inną nazwę."
 
-#: src/collectionfieldsdialog.cpp:958
+#: src/collectionfieldsdialog.cpp:965
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -700,12 +706,12 @@ msgstr ""
 "Zakres oceny musi zawierać się między 1 a 10, przy czym dolna granica musi "
 "być mniejsza niż górna. Proszę wprowadzić poprawne granice."
 
-#: src/collectionfieldsdialog.cpp:973
+#: src/collectionfieldsdialog.cpp:980
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "Tabele są ograniczone do dziesięciu kolumn."
 
-#: src/collectionfieldsdialog.cpp:979
+#: src/collectionfieldsdialog.cpp:986
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr "Pole z wartością pochodną musi posiadać wartość wzorca."
@@ -734,7 +740,7 @@ msgstr "Klucz BibTeX"
 
 #: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:145
 #: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
-#: src/configdialog.cpp:1129 src/fetch/amazonfetcher.cpp:863
+#: src/configdialog.cpp:1135 src/fetch/amazonfetcher.cpp:863
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:534
 #: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:591
@@ -2322,18 +2328,18 @@ msgid "Configure Tellico"
 msgstr "Ustawienia Tellico"
 
 #: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:334
+#: src/configdialog.cpp:340
 #, kde-format
 msgid "Printing"
 msgstr "Drukowanie"
 
 #: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:411
+#: src/configdialog.cpp:417
 #, kde-format
 msgid "Templates"
 msgstr "Wzorce"
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:614
+#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:620
 #, kde-format
 msgid "Data Sources"
 msgstr "Źródła danych"
@@ -2415,38 +2421,38 @@ msgstr ""
 "katalogu programu Tellico lub też w katalogu w którym znajduje się plik "
 "danych."
 
-#: src/configdialog.cpp:259 src/configdialog.cpp:343
+#: src/configdialog.cpp:265 src/configdialog.cpp:349
 #, kde-format
 msgid "Formatting Options"
 msgstr "Ustawienia formatowania"
 
-#: src/configdialog.cpp:264
+#: src/configdialog.cpp:270
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "Samoczynnie pisz &tytuły i nazwiska wielką literą"
 
-#: src/configdialog.cpp:265
+#: src/configdialog.cpp:271
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Jeśli zaznaczone, tytuły i nazwiska będą samoczynnie pisane wielką literą."
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:276
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "Samoczynnie &formatuj tytuły i nazwiska"
 
-#: src/configdialog.cpp:271 src/configdialog.cpp:349
+#: src/configdialog.cpp:277 src/configdialog.cpp:355
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Jeśli zaznaczone, tytuły i nazwiska będą samoczynnie formatowane."
 
-#: src/configdialog.cpp:281
+#: src/configdialog.cpp:287
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "Nie pisz wielką &literą:"
 
-#: src/configdialog.cpp:286
+#: src/configdialog.cpp:292
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2455,12 +2461,12 @@ msgstr ""
 "<qt>Lista słów, które nie powinny być pisane z wielkiej litery. Kolejne "
 "wartości należy oddzielić średnikiem.</qt>"
 
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:298
 #, kde-format
 msgid "Artic&les:"
 msgstr "&Przedrostki tytułu:"
 
-#: src/configdialog.cpp:297
+#: src/configdialog.cpp:303
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2470,12 +2476,12 @@ msgstr ""
 "<qt>Lista słów, które powinny być uznane za przedimki, jeśli są pierwszymi "
 "słowami w tytule. Wiele wartości powinno być oddzielonych średnikami.</qt>"
 
-#: src/configdialog.cpp:304
+#: src/configdialog.cpp:310
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Przyrostki &osobiste:"
 
-#: src/configdialog.cpp:309
+#: src/configdialog.cpp:315
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2484,12 +2490,12 @@ msgstr ""
 "<qt>Lista przyrostków, które mogą występować w nazwiskach. Poszczególne "
 "przyrostki należy oddzielać średnikiem.</qt>"
 
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:321
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "Przedrostki &nazwisk:"
 
-#: src/configdialog.cpp:320
+#: src/configdialog.cpp:326
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2498,77 +2504,77 @@ msgstr ""
 "<qt>Lista przedrostków, które mogą być używane w nazwiskach. Kolejne "
 "wartości należy oddzielić średnikiem.</qt>"
 
-#: src/configdialog.cpp:335
+#: src/configdialog.cpp:341
 #, kde-format
 msgid "Printing Options"
 msgstr "Ustawienia drukowania"
 
-#: src/configdialog.cpp:348
+#: src/configdialog.cpp:354
 #, kde-format
 msgid "&Format titles and names"
 msgstr "&Formatuj tytuły i nazwiska"
 
-#: src/configdialog.cpp:353
+#: src/configdialog.cpp:359
 #, kde-format
 msgid "&Print field headers"
 msgstr "&Drukuj nagłówki pól"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Jeśli zaznaczone, nazwy pól zostaną wydrukowane jako nagłówki tabeli."
 
-#: src/configdialog.cpp:358
+#: src/configdialog.cpp:364
 #, kde-format
 msgid "Grouping Options"
 msgstr "Ustawienia grupowania"
 
-#: src/configdialog.cpp:363
+#: src/configdialog.cpp:369
 #, kde-format
 msgid "&Group the entries"
 msgstr "&Grupuj elementy"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Jeśli zaznaczone, elementy będą grupowane wg wybranego pola."
 
-#: src/configdialog.cpp:368
+#: src/configdialog.cpp:374
 #, kde-format
 msgid "Image Options"
 msgstr "Ustawienia obrazów"
 
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:380
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "Maksymalna &szerokość obrazu:"
 
-#: src/configdialog.cpp:383
+#: src/configdialog.cpp:389
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Maksymalna szerokość obrazu na wydruku. Proporcje zostaną zachowane."
 
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:395
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "Maksymalna &wysokość obrazu:"
 
-#: src/configdialog.cpp:398
+#: src/configdialog.cpp:404
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Maksymalna wysokość obrazu na wydruku. Proporcje zostaną zachowane."
 
-#: src/configdialog.cpp:412
+#: src/configdialog.cpp:418
 #, kde-format
 msgid "Template Options"
 msgstr "Ustawienia wzorców"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
+#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:218
 #: src/translators/filelistingimporter.cpp:181
@@ -2576,12 +2582,12 @@ msgstr "Ustawienia wzorców"
 msgid "Collection &type:"
 msgstr "&Rodzaj zbioru:"
 
-#: src/configdialog.cpp:433
+#: src/configdialog.cpp:439
 #, kde-format
 msgid "Template:"
 msgstr "Wzorzec:"
 
-#: src/configdialog.cpp:438
+#: src/configdialog.cpp:444
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2590,12 +2596,12 @@ msgstr ""
 "Wybierz wzorzec do użycia z bieżącym rodzajem zbioru. Nie wszystkie wzorce "
 "używają ustawień czcionek i kolorów."
 
-#: src/configdialog.cpp:445
+#: src/configdialog.cpp:451
 #, kde-format
 msgid "&Preview..."
 msgstr "&Podgląd..."
 
-#: src/configdialog.cpp:446
+#: src/configdialog.cpp:452
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "Pokaż podgląd wzorca"
@@ -2605,107 +2611,107 @@ msgstr "Pokaż podgląd wzorca"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:463
+#: src/configdialog.cpp:469
 #, kde-format
 msgid "Font Options"
 msgstr "Ustawienia czcionek"
 
-#: src/configdialog.cpp:470
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "Font:"
 msgstr "Czcionka:"
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:482
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "Ta czcionka jest stosowana we wzorcu używanym w widoku elementów."
 
-#: src/configdialog.cpp:480
+#: src/configdialog.cpp:486
 #, kde-format
 msgid "Size:"
 msgstr "Rozmiar:"
 
-#: src/configdialog.cpp:492
+#: src/configdialog.cpp:498
 #, kde-format
 msgid "Color Options"
 msgstr "Ustawienia kolorów"
 
-#: src/configdialog.cpp:499
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "Background color:"
 msgstr "Kolor tła:"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:511
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Ten kolor jest stosowany we wzorcu używanym w widoku elementów."
 
-#: src/configdialog.cpp:509
+#: src/configdialog.cpp:515
 #, kde-format
 msgid "Text color:"
 msgstr "Kolor tekstu:"
 
-#: src/configdialog.cpp:518
+#: src/configdialog.cpp:524
 #, kde-format
 msgid "Highlight color:"
 msgstr "Kolor podświetlenia:"
 
-#: src/configdialog.cpp:527
+#: src/configdialog.cpp:533
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "Kolor podświetlonego tekstu:"
 
-#: src/configdialog.cpp:536
+#: src/configdialog.cpp:542
 #, kde-format
 msgid "Link color:"
 msgstr "Kolor odsyłacza:"
 
-#: src/configdialog.cpp:545
+#: src/configdialog.cpp:551
 #, kde-format
 msgid "Manage Templates"
 msgstr "Zarządzaj wzorcami"
 
-#: src/configdialog.cpp:555
+#: src/configdialog.cpp:561
 #, kde-format
 msgid "Install..."
 msgstr "Wgraj..."
 
-#: src/configdialog.cpp:559
+#: src/configdialog.cpp:565
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Naciśnij, aby wgrać nowy wzorzec bezpośrednio."
 
-#: src/configdialog.cpp:564 src/configdialog.cpp:567 src/configdialog.cpp:571
+#: src/configdialog.cpp:570 src/configdialog.cpp:573 src/configdialog.cpp:577
 #, kde-format
 msgid "Download..."
 msgstr "Pobierz..."
 
-#: src/configdialog.cpp:576
+#: src/configdialog.cpp:582
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Naciśnij, aby pobrać dodatkowe wzorce."
 
-#: src/configdialog.cpp:579
+#: src/configdialog.cpp:585
 #, kde-format
 msgid "Delete..."
 msgstr "Usuń..."
 
-#: src/configdialog.cpp:583
+#: src/configdialog.cpp:589
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Naciśnij, aby wybrać i usunąć wgrane wzorce."
 
-#: src/configdialog.cpp:615
+#: src/configdialog.cpp:621
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Ustawienia źródeł danych"
 
-#: src/configdialog.cpp:636
+#: src/configdialog.cpp:642
 #, kde-format
 msgid "Move &Up"
 msgstr "Przenieś w &górę"
 
-#: src/configdialog.cpp:639
+#: src/configdialog.cpp:645
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2714,59 +2720,59 @@ msgstr ""
 "Kolejność źródeł danych określa kolejność którą używaną przez Tellico "
 "podczas samoczynnego uaktualniania elementów."
 
-#: src/configdialog.cpp:642
+#: src/configdialog.cpp:648
 #, kde-format
 msgid "Move &Down"
 msgstr "Przenieś w &dół"
 
-#: src/configdialog.cpp:651
+#: src/configdialog.cpp:657
 #, kde-format
 msgid "Filter by type:"
 msgstr "Filtruj wg rodzaju:"
 
-#: src/configdialog.cpp:669
+#: src/configdialog.cpp:675
 #, kde-format
 msgid "&New..."
 msgstr "&Nowe..."
 
-#: src/configdialog.cpp:671
+#: src/configdialog.cpp:677
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Naciśnij, aby dodać nowe źródło danych."
 
-#: src/configdialog.cpp:672
+#: src/configdialog.cpp:678
 #, kde-format
 msgid "&Modify..."
 msgstr "&Zmień..."
 
-#: src/configdialog.cpp:674
+#: src/configdialog.cpp:680
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Naciśnij, aby zmienić wybrane źródło danych."
 
-#: src/configdialog.cpp:675
+#: src/configdialog.cpp:681
 #, kde-format
 msgid "&Delete"
 msgstr "&Usuń"
 
-#: src/configdialog.cpp:677
+#: src/configdialog.cpp:683
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Naciśnij, aby usunąć wybrane źródło danych."
 
-#: src/configdialog.cpp:1161 src/translators/xsltexporter.cpp:101
+#: src/configdialog.cpp:1167 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
 #: src/translators/xsltimporter.cpp:133
 #, kde-format
 msgid "XSL Files"
 msgstr "Pliki XSL"
 
-#: src/configdialog.cpp:1162
+#: src/configdialog.cpp:1168
 #, kde-format
 msgid "Template Packages"
 msgstr "Pakiety wzorców"
 
-#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1317
+#: src/configdialog.cpp:1169 src/importdialog.cpp:446 src/mainwindow.cpp:1317
 #: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2783,15 +2789,45 @@ msgstr "Pakiety wzorców"
 msgid "All Files"
 msgstr "Wszystkie pliki"
 
-#: src/configdialog.cpp:1192
+#: src/configdialog.cpp:1198
 #, kde-format
 msgid "Delete Template"
 msgstr "Usuń wzorzec"
 
-#: src/configdialog.cpp:1193
+#: src/configdialog.cpp:1199
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Wybierz wzorzec do usunięcia:"
+
+#: src/configdialog.cpp:1239
+#, kde-format
+msgctxt "%1 refers to the file name"
+msgid "Images are currently saved within <em>%1</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1243
+#, kde-format
+msgctxt "%1 refers to a directory"
+msgid "Images are currently saved to <em>%1</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1249
+#, kde-format
+msgctxt "%1 refers to a directory, %2 to a file name"
+msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1253
+#, kde-format
+msgctxt "%1 refers to a file name, %2 to a directory"
+msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1263
+#, kde-format
+msgctxt "%1 and %2 are both directories"
+msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
+msgstr ""
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:560 src/fetchdialog.cpp:621

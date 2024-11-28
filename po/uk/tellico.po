@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-26 00:40+0000\n"
+"POT-Creation-Date: 2024-11-28 00:40+0000\n"
 "PO-Revision-Date: 2024-11-15 17:40+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -295,151 +295,157 @@ msgstr "Збірка ігор на дошці"
 msgid "Custom Collection"
 msgstr "Нетипова збірка"
 
-#: src/collectionfieldsdialog.cpp:82
+#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:798
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The internal field name is <em>%1</em>."
+msgstr ""
+
+#: src/collectionfieldsdialog.cpp:87
 #, kde-format
 msgid "Collection Fields"
 msgstr "Поля збірки"
 
-#: src/collectionfieldsdialog.cpp:92
+#: src/collectionfieldsdialog.cpp:97
 #, kde-format
 msgid "Current Fields"
 msgstr "Поточні поля"
 
-#: src/collectionfieldsdialog.cpp:113
+#: src/collectionfieldsdialog.cpp:118
 #, kde-format
 msgctxt "New Field"
 msgid "&New"
 msgstr "&Створити"
 
-#: src/collectionfieldsdialog.cpp:116
+#: src/collectionfieldsdialog.cpp:121
 #, kde-format
 msgid "Add a new field to the collection"
 msgstr "Додати нове поле у збірці"
 
-#: src/collectionfieldsdialog.cpp:117
+#: src/collectionfieldsdialog.cpp:122
 #, kde-format
 msgctxt "Delete Field"
 msgid "Delete"
 msgstr "Вилучити"
 
-#: src/collectionfieldsdialog.cpp:120
+#: src/collectionfieldsdialog.cpp:125
 #, kde-format
 msgid "Remove a field from the collection"
 msgstr "Вилучити поле зі збірки"
 
-#: src/collectionfieldsdialog.cpp:132
+#: src/collectionfieldsdialog.cpp:137
 #, kde-format
 msgid ""
 "Move this field up in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr "Перемістити поле вгору на одну позицію"
 
-#: src/collectionfieldsdialog.cpp:137
+#: src/collectionfieldsdialog.cpp:142
 #, kde-format
 msgid ""
 "Move this field down in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr "Перемістити поле вниз на одну позицію"
 
-#: src/collectionfieldsdialog.cpp:148
+#: src/collectionfieldsdialog.cpp:153
 #, kde-format
 msgid "Field Properties"
 msgstr "Параметри поля"
 
-#: src/collectionfieldsdialog.cpp:157
+#: src/collectionfieldsdialog.cpp:162
 #, kde-format
 msgid "&Title:"
 msgstr "Н&азва:"
 
-#: src/collectionfieldsdialog.cpp:162
+#: src/collectionfieldsdialog.cpp:167
 #, kde-format
 msgid "The title of the field"
 msgstr "Назва поля"
 
-#: src/collectionfieldsdialog.cpp:167
+#: src/collectionfieldsdialog.cpp:172
 #, kde-format
 msgid "T&ype:"
 msgstr "Т&ип:"
 
-#: src/collectionfieldsdialog.cpp:173
+#: src/collectionfieldsdialog.cpp:178
 #, kde-format
 msgid "The type of the field determines what values may be used. "
 msgstr "Тип збірки визначає, які значення можуть бути використані. "
 
-#: src/collectionfieldsdialog.cpp:174
+#: src/collectionfieldsdialog.cpp:179
 #, kde-format
 msgid "<i>Simple Text</i> is used for most fields. "
 msgstr "<i>Простий текст</i> використовується у багатьох полях. "
 
-#: src/collectionfieldsdialog.cpp:175
+#: src/collectionfieldsdialog.cpp:180
 #, kde-format
 msgid "<i>Paragraph</i> is for large text blocks. "
 msgstr "<i>Стаття</i> використовується для запису великих об'ємів тексту. "
 
-#: src/collectionfieldsdialog.cpp:176
+#: src/collectionfieldsdialog.cpp:181
 #, kde-format
 msgid "<i>Choice</i> limits the field to certain values. "
 msgstr "<i>Вибір</i> створює поле для вибору фіксованих значень. "
 
-#: src/collectionfieldsdialog.cpp:177
+#: src/collectionfieldsdialog.cpp:182
 #, kde-format
 msgid "<i>Checkbox</i> is for a simple yes/no value. "
 msgstr ""
 "<i>Вибір так/ні</i> створює поле для простого встановлення значення «так» "
 "або «ні». "
 
-#: src/collectionfieldsdialog.cpp:178
+#: src/collectionfieldsdialog.cpp:183
 #, kde-format
 msgid "<i>Number</i> indicates that the field contains a numerical value. "
 msgstr "<i>Число</i> використовується для запису числового значення. "
 
-#: src/collectionfieldsdialog.cpp:179
+#: src/collectionfieldsdialog.cpp:184
 #, kde-format
 msgid ""
 "<i>URL</i> is for fields which refer to URLs, including references to other "
 "files. "
 msgstr "<i>URL</i> використовується для запису посилань. "
 
-#: src/collectionfieldsdialog.cpp:180
+#: src/collectionfieldsdialog.cpp:185
 #, kde-format
 msgid "A <i>Table</i> may hold one or more columns of values. "
 msgstr "<i>Таблиця</i> створює поле для запису інформації у форматі таблиці. "
 
-#: src/collectionfieldsdialog.cpp:181
+#: src/collectionfieldsdialog.cpp:186
 #, kde-format
 msgid "An <i>Image</i> field holds a picture. "
 msgstr "<i>Зображення</i> використовується для зберігання зображень у збірці. "
 
-#: src/collectionfieldsdialog.cpp:182
+#: src/collectionfieldsdialog.cpp:187
 #, kde-format
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr ""
 "<i>Дата</i> використовується для створення полів з днем, місяцем та роком. "
 
-#: src/collectionfieldsdialog.cpp:183
+#: src/collectionfieldsdialog.cpp:188
 #, kde-format
 msgid "A <i>Rating</i> field uses stars to show a rating number. "
 msgstr ""
 "<i>Рейтинг</i> створює поле з п'ятьма зірочками для визначення особистого "
 "рейтингу. "
 
-#: src/collectionfieldsdialog.cpp:198
+#: src/collectionfieldsdialog.cpp:203
 #, kde-format
 msgid "Cate&gory:"
 msgstr "Кат&егорія:"
 
-#: src/collectionfieldsdialog.cpp:203
+#: src/collectionfieldsdialog.cpp:208
 #, kde-format
 msgid "The field category determines where the field is placed in the editor."
 msgstr "Категорія поля визначає, куди буде воно поміщено."
 
-#: src/collectionfieldsdialog.cpp:220
+#: src/collectionfieldsdialog.cpp:225
 #, kde-format
 msgid "Set &properties..."
 msgstr "Встановити &властивості…"
 
-#: src/collectionfieldsdialog.cpp:224
+#: src/collectionfieldsdialog.cpp:229
 #, kde-format
 msgid ""
 "Extended field properties are used to specify things such as the "
@@ -448,39 +454,39 @@ msgstr ""
 "Додаткові параметри поля корисні для деяких специфічних речей. Наприклад, "
 "для відповідного поля bibtex."
 
-#: src/collectionfieldsdialog.cpp:229
+#: src/collectionfieldsdialog.cpp:234
 #, kde-format
 msgid "Description:"
 msgstr "Опис:"
 
-#: src/collectionfieldsdialog.cpp:236
+#: src/collectionfieldsdialog.cpp:241
 #, kde-format
 msgid ""
 "The description is a useful reminder of what information is contained in the "
 "field."
 msgstr "Опис — це корисні відомості щодо даних, що зберігаються у полі."
 
-#: src/collectionfieldsdialog.cpp:241
+#: src/collectionfieldsdialog.cpp:246
 #, kde-format
 msgid "Value Options"
 msgstr "Параметри значень"
 
-#: src/collectionfieldsdialog.cpp:246
+#: src/collectionfieldsdialog.cpp:251
 #, kde-format
 msgid "Default value:"
 msgstr "Типове значення:"
 
-#: src/collectionfieldsdialog.cpp:251
+#: src/collectionfieldsdialog.cpp:256
 #, kde-format
 msgid "<qt>A default value can be set for new entries.</qt>"
 msgstr "<qt>Ви можете вказати типове значення для нових записів.</qt>"
 
-#: src/collectionfieldsdialog.cpp:256
+#: src/collectionfieldsdialog.cpp:261
 #, kde-format
 msgid "Value template:"
 msgstr "Шаблон значення:"
 
-#: src/collectionfieldsdialog.cpp:264
+#: src/collectionfieldsdialog.cpp:269
 #, kde-format
 msgid ""
 "Derived values are formed from the values of other fields according to the "
@@ -491,17 +497,17 @@ msgstr ""
 "шаблону значення. Програма виконуватиме заміну іменованих полів у значенні, "
 "зокрема «%{year} %{title}», їхнім вмістом."
 
-#: src/collectionfieldsdialog.cpp:270
+#: src/collectionfieldsdialog.cpp:275
 #, kde-format
 msgid "Use derived value"
 msgstr "Використовувати похідне значення"
 
-#: src/collectionfieldsdialog.cpp:276
+#: src/collectionfieldsdialog.cpp:281
 #, kde-format
 msgid "A&llowed values:"
 msgstr "&Дозволені значення:"
 
-#: src/collectionfieldsdialog.cpp:281
+#: src/collectionfieldsdialog.cpp:286
 #, kde-format
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
@@ -511,42 +517,42 @@ msgstr ""
 "<qt>Сюди вводяться допустимі значення для поля типу <i>«Вибір»</i>. Значення "
 "розділяються комами (наприклад «Кіт; Пес; Миша»)</qt>"
 
-#: src/collectionfieldsdialog.cpp:288
+#: src/collectionfieldsdialog.cpp:293
 #, kde-format
 msgid "Format options:"
 msgstr "Параметри форматування:"
 
-#: src/collectionfieldsdialog.cpp:294
+#: src/collectionfieldsdialog.cpp:299
 #, kde-format
 msgid "No formatting"
 msgstr "Немає форматування"
 
-#: src/collectionfieldsdialog.cpp:295
+#: src/collectionfieldsdialog.cpp:300
 #, kde-format
 msgid "Allow auto-capitalization only"
 msgstr "Дозволити лише явне форматування"
 
-#: src/collectionfieldsdialog.cpp:296
+#: src/collectionfieldsdialog.cpp:301
 #, kde-format
 msgid "Format as a title"
 msgstr "Форматувати як назву"
 
-#: src/collectionfieldsdialog.cpp:297
+#: src/collectionfieldsdialog.cpp:302
 #, kde-format
 msgid "Format as a name"
 msgstr "Форматувати як назву"
 
-#: src/collectionfieldsdialog.cpp:301
+#: src/collectionfieldsdialog.cpp:306
 #, kde-format
 msgid "Field Options"
 msgstr "Параметри поля"
 
-#: src/collectionfieldsdialog.cpp:304
+#: src/collectionfieldsdialog.cpp:309
 #, kde-format
 msgid "Enable auto-completion"
 msgstr "Автоматично доповнювати до слова"
 
-#: src/collectionfieldsdialog.cpp:305
+#: src/collectionfieldsdialog.cpp:310
 #, kde-format
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
@@ -555,12 +561,12 @@ msgstr ""
 "Якщо позначити цей пункт, у полі для введення тексту цього поля буде "
 "увімкнено автодоповнення KDE."
 
-#: src/collectionfieldsdialog.cpp:307
+#: src/collectionfieldsdialog.cpp:312
 #, kde-format
 msgid "Allow multiple values"
 msgstr "Дозволити декілька значень"
 
-#: src/collectionfieldsdialog.cpp:308
+#: src/collectionfieldsdialog.cpp:313
 #, kde-format
 msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
@@ -569,12 +575,12 @@ msgstr ""
 "Якщо буде позначено цей пункт, Tellico проаналізує значення у полі для "
 "багатократних значень, відокремлених крапкою з комою."
 
-#: src/collectionfieldsdialog.cpp:310
+#: src/collectionfieldsdialog.cpp:315
 #, kde-format
 msgid "Allow grouping"
 msgstr "Дозволити групування"
 
-#: src/collectionfieldsdialog.cpp:311
+#: src/collectionfieldsdialog.cpp:316
 #, kde-format
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
@@ -582,17 +588,17 @@ msgstr ""
 "Якщо буде позначено цей пункт, це поле буде використано для групування "
 "записів у перегляді груп."
 
-#: src/collectionfieldsdialog.cpp:341
+#: src/collectionfieldsdialog.cpp:346
 #, kde-format
 msgid "Revert the selected field's properties to the default values."
 msgstr "Повернути типові значення властивостям вибраного поля."
 
-#: src/collectionfieldsdialog.cpp:398
+#: src/collectionfieldsdialog.cpp:403
 #, kde-format
 msgid "Modify Fields"
 msgstr "Редагувати поля"
 
-#: src/collectionfieldsdialog.cpp:411
+#: src/collectionfieldsdialog.cpp:416
 #, kde-format
 msgid ""
 "<qt>Removing allowed values from the <i>%1</i> field which currently exist "
@@ -602,22 +608,22 @@ msgstr ""
 "<qt>Переміщення значень з поля «<i>%1</i>», яке вже існує, може пошкодити "
 "ваші дані. Хочете продовжити?</qt>"
 
-#: src/collectionfieldsdialog.cpp:416
+#: src/collectionfieldsdialog.cpp:421
 #, kde-format
 msgid "Keep modified values"
 msgstr "Зберігати змінені значення"
 
-#: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:518
+#: src/collectionfieldsdialog.cpp:520 src/collectionfieldsdialog.cpp:524
 #, kde-format
 msgid "New Field %1"
 msgstr "Нове поле %1"
 
-#: src/collectionfieldsdialog.cpp:808
+#: src/collectionfieldsdialog.cpp:815
 #, kde-format
 msgid "Revert Field Properties"
 msgstr "Поміняти властивості поля"
 
-#: src/collectionfieldsdialog.cpp:809
+#: src/collectionfieldsdialog.cpp:816
 #, kde-format
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
@@ -626,38 +632,38 @@ msgstr ""
 "<qt><p>Ви дійсно хочете повернути полю <em>«%1»</em> типові значення?</p></"
 "qt>"
 
-#: src/collectionfieldsdialog.cpp:812
+#: src/collectionfieldsdialog.cpp:819
 #, kde-format
 msgid "Revert"
 msgstr "Поміняти"
 
-#: src/collectionfieldsdialog.cpp:886
+#: src/collectionfieldsdialog.cpp:893
 #, kde-format
 msgid "Extended Field Properties"
 msgstr "Додаткові властивості поля"
 
-#: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:104
+#: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:104
 #, kde-format
 msgid "Property"
 msgstr "Властивість"
 
-#: src/collectionfieldsdialog.cpp:887 src/collections/filecatalog.cpp:105
+#: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:105
 #: src/fetch/srufetcher.cpp:614
 #, kde-format
 msgid "Value"
 msgstr "Значення"
 
-#: src/collectionfieldsdialog.cpp:923
+#: src/collectionfieldsdialog.cpp:930
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "Поле з такою назвою вже існує. Будь ласка, введіть іншу назву."
 
-#: src/collectionfieldsdialog.cpp:930
+#: src/collectionfieldsdialog.cpp:937
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>Ця категорія не порожня. Будь ласка, виберіть категорію.</qt>"
 
-#: src/collectionfieldsdialog.cpp:938
+#: src/collectionfieldsdialog.cpp:945
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -667,7 +673,7 @@ msgstr ""
 "<qt>Поле не може належати до категорій: <em>«Стаття» </em>, <em>«Таблиця»</"
 "em> або <em>«Зображення»</em>. Виберіть іншу категорію.</qt>"
 
-#: src/collectionfieldsdialog.cpp:946
+#: src/collectionfieldsdialog.cpp:953
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
@@ -675,7 +681,7 @@ msgid ""
 msgstr ""
 "Назва поля не може бути таким же, як назва категорії. Введіть іншу назву."
 
-#: src/collectionfieldsdialog.cpp:958
+#: src/collectionfieldsdialog.cpp:965
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -684,12 +690,12 @@ msgid ""
 msgstr ""
 "Рейтинг не повинен бути менше 1 та більше 10. Введіть інше значення рейтингу."
 
-#: src/collectionfieldsdialog.cpp:973
+#: src/collectionfieldsdialog.cpp:980
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "У таблиці може бути максимум десять стовпців."
 
-#: src/collectionfieldsdialog.cpp:979
+#: src/collectionfieldsdialog.cpp:986
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr "Для поля з похідним значенням слід вказати шаблон значення."
@@ -717,7 +723,7 @@ msgstr "Ключ bibtex"
 
 #: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:145
 #: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
-#: src/configdialog.cpp:1129 src/fetch/amazonfetcher.cpp:863
+#: src/configdialog.cpp:1135 src/fetch/amazonfetcher.cpp:863
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:534
 #: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:591
@@ -2305,18 +2311,18 @@ msgid "Configure Tellico"
 msgstr "Налаштувати Tellico"
 
 #: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:334
+#: src/configdialog.cpp:340
 #, kde-format
 msgid "Printing"
 msgstr "Друк"
 
 #: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:411
+#: src/configdialog.cpp:417
 #, kde-format
 msgid "Templates"
 msgstr "Шаблони"
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:614
+#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:620
 #, kde-format
 msgid "Data Sources"
 msgstr "Джерела даних"
@@ -2398,41 +2404,41 @@ msgstr ""
 "сповільнення Tellico, зберегти до каталогу програми Tellico або зберегти у "
 "каталозі, у якому розташовано файл даних."
 
-#: src/configdialog.cpp:259 src/configdialog.cpp:343
+#: src/configdialog.cpp:265 src/configdialog.cpp:349
 #, kde-format
 msgid "Formatting Options"
 msgstr "Параметри форматування"
 
-#: src/configdialog.cpp:264
+#: src/configdialog.cpp:270
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "Автоматично встановлювати регістр &назви та імен"
 
-#: src/configdialog.cpp:265
+#: src/configdialog.cpp:271
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Якщо буде позначено цей пункт, програма автоматично встановлюватиме регістр "
 "літер назви та імен."
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:276
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "Автоматично &форматувати назви та імена"
 
-#: src/configdialog.cpp:271 src/configdialog.cpp:349
+#: src/configdialog.cpp:277 src/configdialog.cpp:355
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr ""
 "Якщо буде позначено цей пункт, програма автоматично форматуватиме назви та "
 "імена."
 
-#: src/configdialog.cpp:281
+#: src/configdialog.cpp:287
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "Дозволити лише &явне форматування:"
 
-#: src/configdialog.cpp:286
+#: src/configdialog.cpp:292
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2441,12 +2447,12 @@ msgstr ""
 "<qt>Список слів, які не повинні форматуватися. Значення повинні розділятися "
 "крапкою з комою.</qt>"
 
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:298
 #, kde-format
 msgid "Artic&les:"
 msgstr "&Артиклі:"
 
-#: src/configdialog.cpp:297
+#: src/configdialog.cpp:303
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2456,12 +2462,12 @@ msgstr ""
 "<qt>Список слів, які будуть вважатимуться артиклями. Значення слід розділяти "
 "крапкою з комою.</qt>"
 
-#: src/configdialog.cpp:304
+#: src/configdialog.cpp:310
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Особисті &звернення:"
 
-#: src/configdialog.cpp:309
+#: src/configdialog.cpp:315
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2470,12 +2476,12 @@ msgstr ""
 "<qt>Список особистих суфіксів (jr, мол. тощо). Значення слід відокремлювати "
 "крапкою з комою.</qt>"
 
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:321
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "Пре&фікси прізвищ:"
 
-#: src/configdialog.cpp:320
+#: src/configdialog.cpp:326
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2484,55 +2490,55 @@ msgstr ""
 "<qt>Список приставок прізвищ (de, van і т.д.). Значення повинні розділятися "
 "крапкою з комою</qt>"
 
-#: src/configdialog.cpp:335
+#: src/configdialog.cpp:341
 #, kde-format
 msgid "Printing Options"
 msgstr "Параметри друку"
 
-#: src/configdialog.cpp:348
+#: src/configdialog.cpp:354
 #, kde-format
 msgid "&Format titles and names"
 msgstr "&Форматувати імена та назви"
 
-#: src/configdialog.cpp:353
+#: src/configdialog.cpp:359
 #, kde-format
 msgid "&Print field headers"
 msgstr "&Включати заголовки полів"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
 "Якщо буде позначено цей пункт, при експорті в HTML будуть надруковані "
 "заголовки."
 
-#: src/configdialog.cpp:358
+#: src/configdialog.cpp:364
 #, kde-format
 msgid "Grouping Options"
 msgstr "Параметри групування"
 
-#: src/configdialog.cpp:363
+#: src/configdialog.cpp:369
 #, kde-format
 msgid "&Group the entries"
 msgstr "&Групувати записи"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
 "Якщо буде позначено цей пункт, записи будуть згруповані за позначеним полем"
 
-#: src/configdialog.cpp:368
+#: src/configdialog.cpp:374
 #, kde-format
 msgid "Image Options"
 msgstr "Параметри зображень"
 
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:380
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "Максимальна &ширина зображення:"
 
-#: src/configdialog.cpp:383
+#: src/configdialog.cpp:389
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
@@ -2541,12 +2547,12 @@ msgstr ""
 "Максимальна ширина зображення при друці. Програма зберігатиме співвідношення "
 "розмірів."
 
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:395
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "Максимальна в&исота зображення:"
 
-#: src/configdialog.cpp:398
+#: src/configdialog.cpp:404
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
@@ -2555,13 +2561,13 @@ msgstr ""
 "Максимальна висота зображення при друці. Програма зберігатиме співвідношення "
 "розмірів."
 
-#: src/configdialog.cpp:412
+#: src/configdialog.cpp:418
 #, kde-format
 msgid "Template Options"
 msgstr "Параметри шаблонів"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:363
+#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:218
 #: src/translators/filelistingimporter.cpp:181
@@ -2569,12 +2575,12 @@ msgstr "Параметри шаблонів"
 msgid "Collection &type:"
 msgstr "&Тип збірки:"
 
-#: src/configdialog.cpp:433
+#: src/configdialog.cpp:439
 #, kde-format
 msgid "Template:"
 msgstr "Шаблон:"
 
-#: src/configdialog.cpp:438
+#: src/configdialog.cpp:444
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2583,12 +2589,12 @@ msgstr ""
 "Виберіть шаблон, щоб використовувати для поточного виду збірок. Не усі "
 "шаблони використовуватимуть налаштування шрифту та кольору."
 
-#: src/configdialog.cpp:445
+#: src/configdialog.cpp:451
 #, kde-format
 msgid "&Preview..."
 msgstr "&Попередній перегляд…"
 
-#: src/configdialog.cpp:446
+#: src/configdialog.cpp:452
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "Показати попередній перегляд шаблону"
@@ -2598,107 +2604,107 @@ msgstr "Показати попередній перегляд шаблону"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:463
+#: src/configdialog.cpp:469
 #, kde-format
 msgid "Font Options"
 msgstr "Вибір шрифту"
 
-#: src/configdialog.cpp:470
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "Font:"
 msgstr "Шрифт:"
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:482
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "Цей шрифт передається шаблону, що використовується у вигляді запису."
 
-#: src/configdialog.cpp:480
+#: src/configdialog.cpp:486
 #, kde-format
 msgid "Size:"
 msgstr "Розмір:"
 
-#: src/configdialog.cpp:492
+#: src/configdialog.cpp:498
 #, kde-format
 msgid "Color Options"
 msgstr "Вибір кольору"
 
-#: src/configdialog.cpp:499
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "Background color:"
 msgstr "Колір фону:"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:511
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Цей колір передається шаблону, що використовується у вигляді запису."
 
-#: src/configdialog.cpp:509
+#: src/configdialog.cpp:515
 #, kde-format
 msgid "Text color:"
 msgstr "Колір тексту:"
 
-#: src/configdialog.cpp:518
+#: src/configdialog.cpp:524
 #, kde-format
 msgid "Highlight color:"
 msgstr "Колір підсвічування:"
 
-#: src/configdialog.cpp:527
+#: src/configdialog.cpp:533
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "Колір підсвічування тексту:"
 
-#: src/configdialog.cpp:536
+#: src/configdialog.cpp:542
 #, kde-format
 msgid "Link color:"
 msgstr "Колір посилання:"
 
-#: src/configdialog.cpp:545
+#: src/configdialog.cpp:551
 #, kde-format
 msgid "Manage Templates"
 msgstr "Керування шаблонами"
 
-#: src/configdialog.cpp:555
+#: src/configdialog.cpp:561
 #, kde-format
 msgid "Install..."
 msgstr "Встановлення…"
 
-#: src/configdialog.cpp:559
+#: src/configdialog.cpp:565
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Клацніть, щоб встановити новий шаблон безпосередньо."
 
-#: src/configdialog.cpp:564 src/configdialog.cpp:567 src/configdialog.cpp:571
+#: src/configdialog.cpp:570 src/configdialog.cpp:573 src/configdialog.cpp:577
 #, kde-format
 msgid "Download..."
 msgstr "Отримання…"
 
-#: src/configdialog.cpp:576
+#: src/configdialog.cpp:582
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Натисніть, щоб отримати додаткові шаблони."
 
-#: src/configdialog.cpp:579
+#: src/configdialog.cpp:585
 #, kde-format
 msgid "Delete..."
 msgstr "Вилучення…"
 
-#: src/configdialog.cpp:583
+#: src/configdialog.cpp:589
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Клацніть, щоб вибрати та вилучити встановлені шаблони."
 
-#: src/configdialog.cpp:615
+#: src/configdialog.cpp:621
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Параметри джерела даних"
 
-#: src/configdialog.cpp:636
+#: src/configdialog.cpp:642
 #, kde-format
 msgid "Move &Up"
 msgstr "&Вище"
 
-#: src/configdialog.cpp:639
+#: src/configdialog.cpp:645
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2707,59 +2713,59 @@ msgstr ""
 "Порядок джерел даних встановлює порядок у якому Tellico проводить "
 "автоматичне оновлення записів."
 
-#: src/configdialog.cpp:642
+#: src/configdialog.cpp:648
 #, kde-format
 msgid "Move &Down"
 msgstr "&Нижче"
 
-#: src/configdialog.cpp:651
+#: src/configdialog.cpp:657
 #, kde-format
 msgid "Filter by type:"
 msgstr "Фільтрувати за типом:"
 
-#: src/configdialog.cpp:669
+#: src/configdialog.cpp:675
 #, kde-format
 msgid "&New..."
 msgstr "С&творити…"
 
-#: src/configdialog.cpp:671
+#: src/configdialog.cpp:677
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Клацніть, щоб додати нове джерело даних."
 
-#: src/configdialog.cpp:672
+#: src/configdialog.cpp:678
 #, kde-format
 msgid "&Modify..."
 msgstr "&Редагувати…"
 
-#: src/configdialog.cpp:674
+#: src/configdialog.cpp:680
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Клацніть, щоб змінити відібране джерело даних."
 
-#: src/configdialog.cpp:675
+#: src/configdialog.cpp:681
 #, kde-format
 msgid "&Delete"
 msgstr "&Вилучити"
 
-#: src/configdialog.cpp:677
+#: src/configdialog.cpp:683
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Клацніть, щоб вилучити відібране джерело даних."
 
-#: src/configdialog.cpp:1161 src/translators/xsltexporter.cpp:101
+#: src/configdialog.cpp:1167 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
 #: src/translators/xsltimporter.cpp:133
 #, kde-format
 msgid "XSL Files"
 msgstr "файли XSL"
 
-#: src/configdialog.cpp:1162
+#: src/configdialog.cpp:1168
 #, kde-format
 msgid "Template Packages"
 msgstr "пакунки шаблонів"
 
-#: src/configdialog.cpp:1163 src/importdialog.cpp:446 src/mainwindow.cpp:1317
+#: src/configdialog.cpp:1169 src/importdialog.cpp:446 src/mainwindow.cpp:1317
 #: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2776,15 +2782,45 @@ msgstr "пакунки шаблонів"
 msgid "All Files"
 msgstr "усі файли"
 
-#: src/configdialog.cpp:1192
+#: src/configdialog.cpp:1198
 #, kde-format
 msgid "Delete Template"
 msgstr "Вилучити шаблон"
 
-#: src/configdialog.cpp:1193
+#: src/configdialog.cpp:1199
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Виберіть шаблон для вилучення:"
+
+#: src/configdialog.cpp:1239
+#, kde-format
+msgctxt "%1 refers to the file name"
+msgid "Images are currently saved within <em>%1</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1243
+#, kde-format
+msgctxt "%1 refers to a directory"
+msgid "Images are currently saved to <em>%1</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1249
+#, kde-format
+msgctxt "%1 refers to a directory, %2 to a file name"
+msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1253
+#, kde-format
+msgctxt "%1 refers to a file name, %2 to a directory"
+msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
+msgstr ""
+
+#: src/configdialog.cpp:1263
+#, kde-format
+msgctxt "%1 and %2 are both directories"
+msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
+msgstr ""
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:560 src/fetchdialog.cpp:621
