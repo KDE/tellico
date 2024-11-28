@@ -44,6 +44,7 @@
 class KConfig;
 class KIntNumInput;
 class KColorCombo;
+class KMessageWidget;
 
 class QSpinBox;
 class QPushButton;
@@ -52,7 +53,6 @@ class QFontComboBox;
 class QCheckBox;
 class QRadioButton;
 class QFrame;
-class QLabel;
 
 namespace Tellico {
   namespace Fetch {
@@ -187,7 +187,8 @@ private:
   QRadioButton* m_rbImageInFile;
   QRadioButton* m_rbImageInAppDir;
   QRadioButton* m_rbImageInLocalDir;
-  QLabel* m_imageLocationLabel;
+  KMessageWidget* m_mwImageLocation;
+  QTimer* m_infoTimer;
   QCheckBox* m_cbOpenLastFile;
   QCheckBox* m_cbQuickFilterRegExp;
   QCheckBox* m_cbEnableWebcam;

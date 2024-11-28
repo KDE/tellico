@@ -50,6 +50,7 @@
 #include <KColorCombo>
 #include <KHelpClient>
 #include <KRecentDirs>
+#include <KMessageWidget>
 
 #ifdef ENABLE_KNEWSTUFF3
 #if KNEWSTUFF_VERSION < QT_VERSION_CHECK(5, 91, 0)
@@ -80,6 +81,7 @@
 #include <QApplication>
 #include <QTimer>
 #include <QFileDialog>
+#include <QSignalBlocker>
 
 namespace {
   static const int CONFIG_MIN_WIDTH = 640;
@@ -242,13 +244,18 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
   connect(m_rbImageInFile, &QRadioButton::toggled, this, &ConfigDialog::slotUpdateImageLocationLabel);
   connect(m_rbImageInAppDir, &QRadioButton::toggled, this, &ConfigDialog::slotUpdateImageLocationLabel);
   connect(m_rbImageInLocalDir, &QRadioButton::toggled, this, &ConfigDialog::slotUpdateImageLocationLabel);
-  m_imageLocationLabel = new QLabel(imageGroupBox);
-  m_imageLocationLabel->setWordWrap(true);
+  m_mwImageLocation = new KMessageWidget(imageGroupBox);
+  m_mwImageLocation->setMessageType(KMessageWidget::Information);
+  m_mwImageLocation->hide();
+  m_mwImageLocation->setWordWrap(true);
+  m_infoTimer = new QTimer(imageGroupBox);
+  m_infoTimer->setInterval(5000);
+  m_infoTimer->callOnTimeout(m_mwImageLocation, &KMessageWidget::animatedHide);
   QVBoxLayout* imageGroupLayout = new QVBoxLayout(imageGroupBox);
   imageGroupLayout->addWidget(m_rbImageInFile);
   imageGroupLayout->addWidget(m_rbImageInAppDir);
   imageGroupLayout->addWidget(m_rbImageInLocalDir);
-  imageGroupLayout->addWidget(m_imageLocationLabel);
+  imageGroupLayout->addWidget(m_mwImageLocation);
   imageGroupBox->setLayout(imageGroupLayout);
 
   QButtonGroup* imageGroup = new QButtonGroup(frame);
@@ -710,6 +717,10 @@ void ConfigDialog::readGeneralConfig() {
   m_cbEnableWebcam->setEnabled(false);
 #endif
 
+  // block signals temporarily so the image location label isn't shown initially
+  const QSignalBlocker block1(m_rbImageInFile);
+  const QSignalBlocker block2(m_rbImageInAppDir);
+  const QSignalBlocker block3(m_rbImageInLocalDir);
   switch(Config::imageLocation()) {
     case Config::ImagesInFile: m_rbImageInFile->setChecked(true); break;
     case Config::ImagesInAppDir: m_rbImageInAppDir->setChecked(true); break;
@@ -1264,5 +1275,9 @@ void ConfigDialog::slotUpdateImageLocationLabel() {
                            imageDir, newImageDir);
     }
   }
-  m_imageLocationLabel->setText(locationText);
+  m_mwImageLocation->setText(locationText);
+  if(!m_mwImageLocation->isVisible()) {
+    m_mwImageLocation->animatedShow();
+  }
+  m_infoTimer->start();
 }
