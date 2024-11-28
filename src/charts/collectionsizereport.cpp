@@ -127,11 +127,16 @@ QWidget* CollectionSizeReport::createWidget() {
   // get the lowest tick off the minimum
   if(!series->points().isEmpty() && axisY->min() == series->points().at(0).y()) {
     // add 10% padding below lowest value
-    const auto range = axisY->max()-axisY->min();
-    const auto delta = qMax(0.0, 0.1 * qMin(range, axisY->max()));
-    const auto newMin = axisY->min()-delta;
-    if(newMin > 0.5) {
-      axisY->setMin(static_cast<int>(newMin));
+    if(axisY->max() == axisY->min()) {
+      axisY->setMin(0);
+      axisY->setMax(1.1 * axisY->max());
+    } else {
+      const auto range = axisY->max() - axisY->min();
+      const auto delta = qMax(0.0, 0.1 * qMin(range, axisY->max()));
+      const auto newMin = axisY->min() - delta;
+      if(newMin > 0.5) {
+        axisY->setMin(static_cast<int>(newMin));
+      }
     }
   }
 
