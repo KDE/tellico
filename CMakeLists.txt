@@ -207,6 +207,7 @@ if(ENABLE_BTPARSE)
     endif()
 endif()
 
+if(NOT BSD)
 find_package(CDIO)
 set_package_properties(CDIO PROPERTIES
     DESCRIPTION "Support for reading cdtext from audio CDs"
@@ -214,6 +215,7 @@ set_package_properties(CDIO PROPERTIES
     TYPE OPTIONAL)
 if(CDIO_FOUND)
     include_directories(${CDIO_INCLUDE_DIRS})
+endif()
 endif()
 
 find_package(Csv 3.0)
