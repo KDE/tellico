@@ -65,23 +65,28 @@
         background-color: #fff;
         color: #000;
    }
-   #header-left {
-        margin-top: 0;
-        float: left;
+   .header {
+        display: flex;
+   }
+   .box {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: top;
+   }
+   .header-left > span {
+        margin-right: auto;
         font-size: 80%;
         font-style: italic;
    }
-   #header-right {
-        margin-top: 0;
-        float: right;
+   .header-right > span {
+        margin-left: auto;
         font-size: 80%;
         font-style: italic;
    }
-   h1.colltitle {
+   .header-center > h1 {
         margin: 0px;
         padding-bottom: 5px;
-        font-size: 2em;
-        text-align: center;
    }
    div.r0 {
         border: 1px inset #666;
@@ -126,11 +131,11 @@
 </xsl:template>
 
 <xsl:template match="tc:collection">
- <p id="header-left"><xsl:value-of select="$filename"/></p>
- <p id="header-right"><xsl:value-of select="$cdate"/></p>
- <h1 class="colltitle">
-  <xsl:value-of select="@title"/>
- </h1>
+ <div class="header">
+  <div class="box header-left"><span><xsl:value-of select="$filename"/></span></div>
+  <div class="box header-center"><h1><xsl:value-of select="@title"/></h1></div>
+  <div class="box header-right"><span><xsl:value-of select="$cdate"/></span></div>
+ </div>
 
  <!-- find first image field -->
  <xsl:variable name="image-field" select="tc:fields/tc:field[@type=10][1]/@name"/>
