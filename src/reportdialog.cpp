@@ -43,6 +43,7 @@
 #include <KStandardGuiItem>
 #include <KWindowConfig>
 #include <KConfigGroup>
+#include <KColorScheme>
 
 #include <QFile>
 #include <QLabel>
@@ -183,6 +184,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
     if(!b) myDebug() << "ReportDialog - failed to load view";
   });
   QWebEngineSettings* settings = m_webView->page()->settings();
+  m_webView->page()->setBackgroundColor(KColorScheme().background().color());
   settings->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
   settings->setAttribute(QWebEngineSettings::PluginsEnabled, false);
   settings->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, true);
