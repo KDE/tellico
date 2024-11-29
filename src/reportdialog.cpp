@@ -419,17 +419,35 @@ void ReportDialog::slotPrint() {
 #ifdef USE_KHTML
     m_HTMLPart->view()->print();
 #else
-    QPrinter printer;
-    printer.setResolution(300);
-    QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, this);
+    auto printer = new QPrinter;
+    printer->setResolution(300);
+    auto dialog = new QPrintDialog(printer, this);
     if(dialog->exec() == QDialog::Accepted) {
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       GUI::CursorSaver cs(Qt::WaitCursor);
       QEventLoop loop;
-      m_webView->page()->print(&printer, [&](bool) { loop.quit(); });
+      m_webView->page()->print(printer, [=](bool success) {
+        if(success) {
+          myLog() << "Printing completed";
+        } else {
+          myLog() << "Printing failed";
+        }
+        delete dialog;
+        delete printer;
+        loop.quit();
+      });
       loop.exec();
 #else
-      m_webView->print(&printer);
+      m_webView->print(printer);
+      connect(m_webView, &QWebEngineView::printFinished, [=](bool success) {
+        if(success) {
+          myLog() << "Printing completed";
+        } else {
+          myLog() << "Printing failed";
+        }
+        delete dialog;
+        delete printer;
+      });
 #endif
     }
 #endif
