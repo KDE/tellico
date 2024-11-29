@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-28 00:40+0000\n"
+"POT-Creation-Date: 2024-11-29 00:41+0000\n"
 "PO-Revision-Date: 2024-11-15 12:32+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -734,9 +734,9 @@ msgstr "Autor"
 msgid "Bibtex Key"
 msgstr "Clave de Bibtex"
 
-#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:145
-#: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
-#: src/configdialog.cpp:1135 src/fetch/amazonfetcher.cpp:863
+#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:147
+#: src/configdialog.cpp:174 src/configdialog.cpp:188 src/configdialog.cpp:205
+#: src/configdialog.cpp:1146 src/fetch/amazonfetcher.cpp:863
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:534
 #: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:591
@@ -2319,39 +2319,39 @@ msgstr "Color de texto evidentiate de patrono"
 msgid "Template link color"
 msgstr "Color de ligamine de patrono"
 
-#: src/configdialog.cpp:98
+#: src/configdialog.cpp:100
 #, kde-format
 msgid "Configure Tellico"
 msgstr "Configura Tellico"
 
-#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:340
+#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
+#: src/configdialog.cpp:347
 #, kde-format
 msgid "Printing"
 msgstr "Imprimente"
 
-#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:417
+#: src/configdialog.cpp:151 src/configdialog.cpp:178 src/configdialog.cpp:192
+#: src/configdialog.cpp:424
 #, kde-format
 msgid "Templates"
 msgstr "Patronos"
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:620
+#: src/configdialog.cpp:153 src/configdialog.cpp:194 src/configdialog.cpp:627
 #, kde-format
 msgid "Data Sources"
 msgstr "Fontes de datos"
 
-#: src/configdialog.cpp:204
+#: src/configdialog.cpp:206
 #, kde-format
 msgid "General Options"
 msgstr "Optiones general"
 
-#: src/configdialog.cpp:215
+#: src/configdialog.cpp:217
 #, kde-format
 msgid "&Reopen file at startup"
 msgstr "Ape&ri de nove file al initiar"
 
-#: src/configdialog.cpp:216
+#: src/configdialog.cpp:218
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
@@ -2360,12 +2360,12 @@ msgstr ""
 "Si marcate, le file que esseva aperite per ultime essera aperite al initiar "
 "del programma."
 
-#: src/configdialog.cpp:221
+#: src/configdialog.cpp:223
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
 msgstr "&Habilita expressiones regular in filtro rapide"
 
-#: src/configdialog.cpp:222
+#: src/configdialog.cpp:224
 #, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
@@ -2373,12 +2373,12 @@ msgstr ""
 "Si marcate, le filtro rapide interpretara le texto como un expression "
 "regular."
 
-#: src/configdialog.cpp:227
+#: src/configdialog.cpp:229
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "&Habilita webcam pro scansion de codice a barras"
 
-#: src/configdialog.cpp:228
+#: src/configdialog.cpp:230
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
@@ -2387,27 +2387,27 @@ msgstr ""
 "Si marcate, le entrata ex un webcam essera usate pro scander codices a "
 "barras pro cerca."
 
-#: src/configdialog.cpp:233
+#: src/configdialog.cpp:235
 #, kde-format
 msgid "Image Storage Options"
 msgstr "Optiones de immagazinage de imagine"
 
-#: src/configdialog.cpp:235
+#: src/configdialog.cpp:237
 #, kde-format
 msgid "Store images in data file"
 msgstr "Immagazina imagines in file de datos"
 
-#: src/configdialog.cpp:236
+#: src/configdialog.cpp:238
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "Immagazina imagines in un directorio de application commun"
 
-#: src/configdialog.cpp:237
+#: src/configdialog.cpp:239
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "Immagazina imagines in un directorio relative a file de datos"
 
-#: src/configdialog.cpp:238
+#: src/configdialog.cpp:240
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2419,39 +2419,39 @@ msgstr ""
 "application de Tellico, o immagazinate in le mesme location del file de "
 "datos."
 
-#: src/configdialog.cpp:265 src/configdialog.cpp:349
+#: src/configdialog.cpp:272 src/configdialog.cpp:356
 #, kde-format
 msgid "Formatting Options"
 msgstr "Optiones de formato"
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:277
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "Pone automaticamente in majusculas &titulos e nomines"
 
-#: src/configdialog.cpp:271
+#: src/configdialog.cpp:278
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Si marcate, titulos e nomines essera automaticamente ponite in litteras "
 "majusculas."
 
-#: src/configdialog.cpp:276
+#: src/configdialog.cpp:283
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "Da &formato automaticamente a titulos e  nomines"
 
-#: src/configdialog.cpp:277 src/configdialog.cpp:355
+#: src/configdialog.cpp:284 src/configdialog.cpp:362
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Si marcate, titulos e nomine habera automaticamente un formato."
 
-#: src/configdialog.cpp:287
+#: src/configdialog.cpp:294
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "Nulle uso de littera ma&jusculas:"
 
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:299
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2460,12 +2460,12 @@ msgstr ""
 "<qt>Un lista de parolas que non debera scriber se con litteras majusculas. "
 "valores multiple essera separate per un puncto e virgula.</qt>"
 
-#: src/configdialog.cpp:298
+#: src/configdialog.cpp:305
 #, kde-format
 msgid "Artic&les:"
 msgstr "Articu&los:"
 
-#: src/configdialog.cpp:303
+#: src/configdialog.cpp:310
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2476,12 +2476,12 @@ msgstr ""
 "illos es le prime parola in un titulo. Valores multiple debera esser "
 "separate per un puncto e virgula</qt>"
 
-#: src/configdialog.cpp:310
+#: src/configdialog.cpp:317
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Suffi&xos personal:"
 
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:322
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2490,12 +2490,12 @@ msgstr ""
 "<qt> Un lista de suffixos que pote esser usate in nomine personal. Valores "
 "multiple debera esser separate per un puncto e virgula.</qt>"
 
-#: src/configdialog.cpp:321
+#: src/configdialog.cpp:328
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "&Prefixos de nomine de familia :"
 
-#: src/configdialog.cpp:326
+#: src/configdialog.cpp:333
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2504,53 +2504,53 @@ msgstr ""
 "<qt>Un lista de prefixos que pote esser usate in nomines de familia. Valores "
 "multiple debera esser separate per un puncto e virgula.</qt>"
 
-#: src/configdialog.cpp:341
+#: src/configdialog.cpp:348
 #, kde-format
 msgid "Printing Options"
 msgstr "Optiones de Imprimer"
 
-#: src/configdialog.cpp:354
+#: src/configdialog.cpp:361
 #, kde-format
 msgid "&Format titles and names"
 msgstr "Da &formato a titulos e nomines"
 
-#: src/configdialog.cpp:359
+#: src/configdialog.cpp:366
 #, kde-format
 msgid "&Print field headers"
 msgstr "&Imprime capites de campo"
 
-#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
 "Si marcate, le nomines de campo essera imprimite como capites de tabula."
 
-#: src/configdialog.cpp:364
+#: src/configdialog.cpp:371
 #, kde-format
 msgid "Grouping Options"
 msgstr "Optiones de gruppar"
 
-#: src/configdialog.cpp:369
+#: src/configdialog.cpp:376
 #, kde-format
 msgid "&Group the entries"
 msgstr "&Gruppa le entratas"
 
-#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:377 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Si marcate, le entratas essera gruppate per le campo seligite."
 
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:381
 #, kde-format
 msgid "Image Options"
 msgstr "Optiones de imagines"
 
-#: src/configdialog.cpp:380
+#: src/configdialog.cpp:387
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "Maxime &largessa de imagine:"
 
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:396
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
@@ -2559,12 +2559,12 @@ msgstr ""
 "Le maxime largessa de imagine in le exito de imprimer. Le proportion de "
 "aspecto es preservate."
 
-#: src/configdialog.cpp:395
+#: src/configdialog.cpp:402
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "Maxime &altessa de imagine:"
 
-#: src/configdialog.cpp:404
+#: src/configdialog.cpp:411
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
@@ -2573,13 +2573,13 @@ msgstr ""
 "Le maxime altessa de imagine in le exito de imprimer. Le proportion de "
 "aspecto es preservate."
 
-#: src/configdialog.cpp:418
+#: src/configdialog.cpp:425
 #, kde-format
 msgid "Template Options"
 msgstr "Optiones de patrono"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:363
+#: src/configdialog.cpp:439 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:218
 #: src/translators/filelistingimporter.cpp:181
@@ -2587,12 +2587,12 @@ msgstr "Optiones de patrono"
 msgid "Collection &type:"
 msgstr "Typo de collec&tion:"
 
-#: src/configdialog.cpp:439
+#: src/configdialog.cpp:446
 #, kde-format
 msgid "Template:"
 msgstr "Patrono:"
 
-#: src/configdialog.cpp:444
+#: src/configdialog.cpp:451
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2601,12 +2601,12 @@ msgstr ""
 "Selige le patrono de usar pro le typo currente de collection. Non omne "
 "patronos usara le preferentias de color e font."
 
-#: src/configdialog.cpp:451
+#: src/configdialog.cpp:458
 #, kde-format
 msgid "&Preview..."
 msgstr "Vista p&reliminar..."
 
-#: src/configdialog.cpp:452
+#: src/configdialog.cpp:459
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "Monstra un vista preliminar del patrono"
@@ -2616,107 +2616,107 @@ msgstr "Monstra un vista preliminar del patrono"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:469
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "Font Options"
 msgstr "Optiones de font"
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:483
 #, kde-format
 msgid "Font:"
 msgstr "Font:"
 
-#: src/configdialog.cpp:482
+#: src/configdialog.cpp:489
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "Iste font es passate al patrono usate in le \"Vista de entrata\"."
 
-#: src/configdialog.cpp:486
+#: src/configdialog.cpp:493
 #, kde-format
 msgid "Size:"
 msgstr "Grandor:"
 
-#: src/configdialog.cpp:498
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "Color Options"
 msgstr "Optiones de color"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:512
 #, kde-format
 msgid "Background color:"
 msgstr "Color de fundo:"
 
-#: src/configdialog.cpp:511
+#: src/configdialog.cpp:518
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Iste color es passate al patrono usate in le \"Vista de entrata\"."
 
-#: src/configdialog.cpp:515
+#: src/configdialog.cpp:522
 #, kde-format
 msgid "Text color:"
 msgstr "Color de texto :"
 
-#: src/configdialog.cpp:524
+#: src/configdialog.cpp:531
 #, kde-format
 msgid "Highlight color:"
 msgstr "Color de evidentia:"
 
-#: src/configdialog.cpp:533
+#: src/configdialog.cpp:540
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "Color de texto evidentiate :"
 
-#: src/configdialog.cpp:542
+#: src/configdialog.cpp:549
 #, kde-format
 msgid "Link color:"
 msgstr "Color de ligamine:"
 
-#: src/configdialog.cpp:551
+#: src/configdialog.cpp:558
 #, kde-format
 msgid "Manage Templates"
 msgstr "Gere patronos"
 
-#: src/configdialog.cpp:561
+#: src/configdialog.cpp:568
 #, kde-format
 msgid "Install..."
 msgstr "Installa..."
 
-#: src/configdialog.cpp:565
+#: src/configdialog.cpp:572
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Pulsa pro installar directemente un nove patrono."
 
-#: src/configdialog.cpp:570 src/configdialog.cpp:573 src/configdialog.cpp:577
+#: src/configdialog.cpp:577 src/configdialog.cpp:580 src/configdialog.cpp:584
 #, kde-format
 msgid "Download..."
 msgstr "Discarga..."
 
-#: src/configdialog.cpp:582
+#: src/configdialog.cpp:589
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Pulsa pro discargar patronos additional."
 
-#: src/configdialog.cpp:585
+#: src/configdialog.cpp:592
 #, kde-format
 msgid "Delete..."
 msgstr "Dele..."
 
-#: src/configdialog.cpp:589
+#: src/configdialog.cpp:596
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Pulsa pro seliger e remover patronos installate"
 
-#: src/configdialog.cpp:621
+#: src/configdialog.cpp:628
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Optiones de fontes de datos"
 
-#: src/configdialog.cpp:642
+#: src/configdialog.cpp:649
 #, kde-format
 msgid "Move &Up"
 msgstr "Move in &alto"
 
-#: src/configdialog.cpp:645
+#: src/configdialog.cpp:652
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2725,59 +2725,59 @@ msgstr ""
 "Le ordine de fontes de datos fixa le ordine que Tellico usa quando entratas "
 "es automaticamente actualisate."
 
-#: src/configdialog.cpp:648
+#: src/configdialog.cpp:655
 #, kde-format
 msgid "Move &Down"
 msgstr "Move a &basso"
 
-#: src/configdialog.cpp:657
+#: src/configdialog.cpp:664
 #, kde-format
 msgid "Filter by type:"
 msgstr "Filtra per typo:"
 
-#: src/configdialog.cpp:675
+#: src/configdialog.cpp:682
 #, kde-format
 msgid "&New..."
 msgstr "&Nove..."
 
-#: src/configdialog.cpp:677
+#: src/configdialog.cpp:684
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Pulsa pro adder un nove fonte de datos."
 
-#: src/configdialog.cpp:678
+#: src/configdialog.cpp:685
 #, kde-format
 msgid "&Modify..."
 msgstr "&Modifica..."
 
-#: src/configdialog.cpp:680
+#: src/configdialog.cpp:687
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Pulsa pro modificar le fonte de datos seligite."
 
-#: src/configdialog.cpp:681
+#: src/configdialog.cpp:688
 #, kde-format
 msgid "&Delete"
 msgstr "&Dele"
 
-#: src/configdialog.cpp:683
+#: src/configdialog.cpp:690
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Pulsa pro deler le seligite fonte de datos."
 
-#: src/configdialog.cpp:1167 src/translators/xsltexporter.cpp:101
+#: src/configdialog.cpp:1178 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
 #: src/translators/xsltimporter.cpp:133
 #, kde-format
 msgid "XSL Files"
 msgstr "Files XSL"
 
-#: src/configdialog.cpp:1168
+#: src/configdialog.cpp:1179
 #, kde-format
 msgid "Template Packages"
 msgstr "Pacchettos de patrono"
 
-#: src/configdialog.cpp:1169 src/importdialog.cpp:446 src/mainwindow.cpp:1317
+#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1317
 #: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2794,41 +2794,41 @@ msgstr "Pacchettos de patrono"
 msgid "All Files"
 msgstr "Omne files"
 
-#: src/configdialog.cpp:1198
+#: src/configdialog.cpp:1209
 #, kde-format
 msgid "Delete Template"
 msgstr "Dele patrono"
 
-#: src/configdialog.cpp:1199
+#: src/configdialog.cpp:1210
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Selige patrono de deler:"
 
-#: src/configdialog.cpp:1239
+#: src/configdialog.cpp:1250
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1243
+#: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1249
+#: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1253
+#: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1263
+#: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"

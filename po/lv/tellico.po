@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-28 00:40+0000\n"
+"POT-Creation-Date: 2024-11-29 00:41+0000\n"
 "PO-Revision-Date: 2024-09-30 19:11+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -722,9 +722,9 @@ msgstr "Autors"
 msgid "Bibtex Key"
 msgstr "„Bibtex“ atslēga"
 
-#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:145
-#: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
-#: src/configdialog.cpp:1135 src/fetch/amazonfetcher.cpp:863
+#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:147
+#: src/configdialog.cpp:174 src/configdialog.cpp:188 src/configdialog.cpp:205
+#: src/configdialog.cpp:1146 src/fetch/amazonfetcher.cpp:863
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:534
 #: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:591
@@ -2306,62 +2306,62 @@ msgstr "Veidnes izcelšanas teksta krāsa"
 msgid "Template link color"
 msgstr "Veidnes saites krāsa"
 
-#: src/configdialog.cpp:98
+#: src/configdialog.cpp:100
 #, kde-format
 msgid "Configure Tellico"
 msgstr "Konfigurēt „Tellico“"
 
-#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:340
+#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
+#: src/configdialog.cpp:347
 #, kde-format
 msgid "Printing"
 msgstr "Drukāšana"
 
-#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:417
+#: src/configdialog.cpp:151 src/configdialog.cpp:178 src/configdialog.cpp:192
+#: src/configdialog.cpp:424
 #, kde-format
 msgid "Templates"
 msgstr "Veidnes"
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:620
+#: src/configdialog.cpp:153 src/configdialog.cpp:194 src/configdialog.cpp:627
 #, kde-format
 msgid "Data Sources"
 msgstr "Datu avoti"
 
-#: src/configdialog.cpp:204
+#: src/configdialog.cpp:206
 #, kde-format
 msgid "General Options"
 msgstr "Pamata opcijas"
 
-#: src/configdialog.cpp:215
+#: src/configdialog.cpp:217
 #, kde-format
 msgid "&Reopen file at startup"
 msgstr "&Ieslēdzot, atvērt pēdējo atvērto datni"
 
-#: src/configdialog.cpp:216
+#: src/configdialog.cpp:218
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
 "up."
 msgstr "Ja atzīmēs, palaižot programmu, atvērsies pēdējā atvērtā datne."
 
-#: src/configdialog.cpp:221
+#: src/configdialog.cpp:223
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
 msgstr "Ātrajā &filtrā ieslēgt regulārās izteiksmes"
 
-#: src/configdialog.cpp:222
+#: src/configdialog.cpp:224
 #, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr "Ja atzīmēts, ātrais filtrs tekstu interpretēs kā regulāro izteiksmi."
 
-#: src/configdialog.cpp:227
+#: src/configdialog.cpp:229
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "&Ieslēgt tīmekļa kameru svītrkodu skenēšanai"
 
-#: src/configdialog.cpp:228
+#: src/configdialog.cpp:230
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
@@ -2370,27 +2370,27 @@ msgstr ""
 "Ja atzīmēts, tīmekļa kameras ievadi varēsiet izmantot svītrkodu skenēšanai, "
 "lai meklētu informāciju."
 
-#: src/configdialog.cpp:233
+#: src/configdialog.cpp:235
 #, kde-format
 msgid "Image Storage Options"
 msgstr "Attēlu glabāšanas opcijas"
 
-#: src/configdialog.cpp:235
+#: src/configdialog.cpp:237
 #, kde-format
 msgid "Store images in data file"
 msgstr "Saglabāt attēlus datnēs kopā ar datiem"
 
-#: src/configdialog.cpp:236
+#: src/configdialog.cpp:238
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "Saglabāt attēlos kopējā programmas mapē"
 
-#: src/configdialog.cpp:237
+#: src/configdialog.cpp:239
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "Saglabāt attēlus mapē relatīvi pret datu datnēm"
 
-#: src/configdialog.cpp:238
+#: src/configdialog.cpp:240
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2401,37 +2401,37 @@ msgstr ""
 "Tāpat attēlus var saglabāt atsevišķi „Tellico“ programmas mapē, vai arī tajā "
 "pašā mapē, kur atrodas datu mapes."
 
-#: src/configdialog.cpp:265 src/configdialog.cpp:349
+#: src/configdialog.cpp:272 src/configdialog.cpp:356
 #, kde-format
 msgid "Formatting Options"
 msgstr "Formatēšanas opcijas"
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:277
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "Au&tomātiski nosaukumu un vārdu lielie burti"
 
-#: src/configdialog.cpp:271
+#: src/configdialog.cpp:278
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr "Ja atzīmēts, nosaukumos un vārdos automātiski izmantos lielos burtus."
 
-#: src/configdialog.cpp:276
+#: src/configdialog.cpp:283
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "Automātiski &formatēt nosaukumus un vārdus"
 
-#: src/configdialog.cpp:277 src/configdialog.cpp:355
+#: src/configdialog.cpp:284 src/configdialog.cpp:362
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Ja atzīmēts, programma automātiski formatēs nosaukumus un vārdus."
 
-#: src/configdialog.cpp:287
+#: src/configdialog.cpp:294
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "Bez lielajiem &burtiem:"
 
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:299
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2440,12 +2440,12 @@ msgstr ""
 "<qt>Vārdu saraksts, kuros nelieto lielos burtus. Vērtības ir atdalāmas ar "
 "semikolu.</qt>"
 
-#: src/configdialog.cpp:298
+#: src/configdialog.cpp:305
 #, kde-format
 msgid "Artic&les:"
 msgstr "&Artikuli:"
 
-#: src/configdialog.cpp:303
+#: src/configdialog.cpp:310
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2455,12 +2455,12 @@ msgstr ""
 "<qt>vārdu saraksts, kas ir uzskatāmi par rakstiem, ja tie ir nosaukuma "
 "pirmais vārds. Vērtības ir atdalāmas ar semikolu.</qt>"
 
-#: src/configdialog.cpp:310
+#: src/configdialog.cpp:317
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "&Personvārdu sufiksi:"
 
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:322
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2469,12 +2469,12 @@ msgstr ""
 "<qt>Saraksts ar sufiksiem, ko var izmantot personvārdus. Vērtības ir "
 "atdalāmas ar semikolu.</qt>"
 
-#: src/configdialog.cpp:321
+#: src/configdialog.cpp:328
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "Uzvārda &prefiksi:"
 
-#: src/configdialog.cpp:326
+#: src/configdialog.cpp:333
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2483,77 +2483,77 @@ msgstr ""
 "<qt>Saraksts ar prefiksiem, ko var izmantot uzvārdos. Vērtības ir atdalāmas "
 "ar semikolu</qt>"
 
-#: src/configdialog.cpp:341
+#: src/configdialog.cpp:348
 #, kde-format
 msgid "Printing Options"
 msgstr "Drukāšanas opcijas"
 
-#: src/configdialog.cpp:354
+#: src/configdialog.cpp:361
 #, kde-format
 msgid "&Format titles and names"
 msgstr "&Formatēt nosaukumus un personvārdus"
 
-#: src/configdialog.cpp:359
+#: src/configdialog.cpp:366
 #, kde-format
 msgid "&Print field headers"
 msgstr "&Drukāt lauku galvenes"
 
-#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Ja atzīmēts, lauku nosaukumus izdrukās kā tabulu galvenes"
 
-#: src/configdialog.cpp:364
+#: src/configdialog.cpp:371
 #, kde-format
 msgid "Grouping Options"
 msgstr "Grupēšanas opcijas"
 
-#: src/configdialog.cpp:369
+#: src/configdialog.cpp:376
 #, kde-format
 msgid "&Group the entries"
 msgstr "&Grupēt ierakstus"
 
-#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:377 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Ja atzīmēts, ierakstus grupēs pēc atlasītā lauka."
 
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:381
 #, kde-format
 msgid "Image Options"
 msgstr "Attēlu opcijas"
 
-#: src/configdialog.cpp:380
+#: src/configdialog.cpp:387
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "Maksimālais attēla &platums"
 
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:396
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Maksimālais attēla platums izdrukā. Malu attiecības saglabāsies."
 
-#: src/configdialog.cpp:395
+#: src/configdialog.cpp:402
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "&Maksimālais attēla augstums:"
 
-#: src/configdialog.cpp:404
+#: src/configdialog.cpp:411
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Maksimālais attēla augstums izdrukā. Malu attiecības saglabāsies."
 
-#: src/configdialog.cpp:418
+#: src/configdialog.cpp:425
 #, kde-format
 msgid "Template Options"
 msgstr "Veidnes opcijas"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:363
+#: src/configdialog.cpp:439 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:218
 #: src/translators/filelistingimporter.cpp:181
@@ -2561,12 +2561,12 @@ msgstr "Veidnes opcijas"
 msgid "Collection &type:"
 msgstr "Kolekcijas &tips:"
 
-#: src/configdialog.cpp:439
+#: src/configdialog.cpp:446
 #, kde-format
 msgid "Template:"
 msgstr "Veidne:"
 
-#: src/configdialog.cpp:444
+#: src/configdialog.cpp:451
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2575,12 +2575,12 @@ msgstr ""
 "Atlasiet veidni izmantošanai ar pašreizējo kolekciju tipu. Ne visas veidnes "
 "izmantos fonta un krāsu iestatījumus."
 
-#: src/configdialog.cpp:451
+#: src/configdialog.cpp:458
 #, kde-format
 msgid "&Preview..."
 msgstr "&Priekšskatījums..."
 
-#: src/configdialog.cpp:452
+#: src/configdialog.cpp:459
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "Rādīt veidnes priekšskatījumu"
@@ -2590,107 +2590,107 @@ msgstr "Rādīt veidnes priekšskatījumu"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:469
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "Font Options"
 msgstr "Fonta opcijas"
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:483
 #, kde-format
 msgid "Font:"
 msgstr "Fonts:"
 
-#: src/configdialog.cpp:482
+#: src/configdialog.cpp:489
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "Šis fonts ir padots uz veidni, kas izmantot ieraksta skatā."
 
-#: src/configdialog.cpp:486
+#: src/configdialog.cpp:493
 #, kde-format
 msgid "Size:"
 msgstr "Izmērs:"
 
-#: src/configdialog.cpp:498
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "Color Options"
 msgstr "Krāsu opcijas"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:512
 #, kde-format
 msgid "Background color:"
 msgstr "Fona krāsa:"
 
-#: src/configdialog.cpp:511
+#: src/configdialog.cpp:518
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Šī krāsa ir padota uz ieraksta skatā izmantoto veidni."
 
-#: src/configdialog.cpp:515
+#: src/configdialog.cpp:522
 #, kde-format
 msgid "Text color:"
 msgstr "Teksta krāsa:"
 
-#: src/configdialog.cpp:524
+#: src/configdialog.cpp:531
 #, kde-format
 msgid "Highlight color:"
 msgstr "Izcelšanas krāsa:"
 
-#: src/configdialog.cpp:533
+#: src/configdialog.cpp:540
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "Izceltā teksta krāsa:"
 
-#: src/configdialog.cpp:542
+#: src/configdialog.cpp:549
 #, kde-format
 msgid "Link color:"
 msgstr "Saites krāsa:"
 
-#: src/configdialog.cpp:551
+#: src/configdialog.cpp:558
 #, kde-format
 msgid "Manage Templates"
 msgstr "Pārvaldīt veidnes"
 
-#: src/configdialog.cpp:561
+#: src/configdialog.cpp:568
 #, kde-format
 msgid "Install..."
 msgstr "Instalēt..."
 
-#: src/configdialog.cpp:565
+#: src/configdialog.cpp:572
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Klikšķiniet, lai tiešā veidā instalētu jaunu veidni."
 
-#: src/configdialog.cpp:570 src/configdialog.cpp:573 src/configdialog.cpp:577
+#: src/configdialog.cpp:577 src/configdialog.cpp:580 src/configdialog.cpp:584
 #, kde-format
 msgid "Download..."
 msgstr "Lejupielādēt..."
 
-#: src/configdialog.cpp:582
+#: src/configdialog.cpp:589
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Klikšķiniet, lai lejupielādētu papildu veidnes."
 
-#: src/configdialog.cpp:585
+#: src/configdialog.cpp:592
 #, kde-format
 msgid "Delete..."
 msgstr "Dzēst..."
 
-#: src/configdialog.cpp:589
+#: src/configdialog.cpp:596
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Klikšķiniet, lai atlasītu no noņemtu instalētās veidnes."
 
-#: src/configdialog.cpp:621
+#: src/configdialog.cpp:628
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Datu avotu iestatījumi"
 
-#: src/configdialog.cpp:642
+#: src/configdialog.cpp:649
 #, kde-format
 msgid "Move &Up"
 msgstr "Pārvietot a&ugšup"
 
-#: src/configdialog.cpp:645
+#: src/configdialog.cpp:652
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2699,59 +2699,59 @@ msgstr ""
 "Datu avotu kārtība nosaka kārtību, kādu „Tellico“ izmanto, kad ierakstus "
 "automātiski atjaunina."
 
-#: src/configdialog.cpp:648
+#: src/configdialog.cpp:655
 #, kde-format
 msgid "Move &Down"
 msgstr "Pārvietot &lejup"
 
-#: src/configdialog.cpp:657
+#: src/configdialog.cpp:664
 #, kde-format
 msgid "Filter by type:"
 msgstr "Filtrēt pēc tipa:"
 
-#: src/configdialog.cpp:675
+#: src/configdialog.cpp:682
 #, kde-format
 msgid "&New..."
 msgstr "&Jauns..."
 
-#: src/configdialog.cpp:677
+#: src/configdialog.cpp:684
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Klikšķiniet, lai pievienotu jaunu datu avotu."
 
-#: src/configdialog.cpp:678
+#: src/configdialog.cpp:685
 #, kde-format
 msgid "&Modify..."
 msgstr "&Modificēt..."
 
-#: src/configdialog.cpp:680
+#: src/configdialog.cpp:687
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Klikšķiniet, lai modificētu atlasīto datu avotu."
 
-#: src/configdialog.cpp:681
+#: src/configdialog.cpp:688
 #, kde-format
 msgid "&Delete"
 msgstr "&Dzēst"
 
-#: src/configdialog.cpp:683
+#: src/configdialog.cpp:690
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Spiediet, lai dzēstu atlasīto datu avotu."
 
-#: src/configdialog.cpp:1167 src/translators/xsltexporter.cpp:101
+#: src/configdialog.cpp:1178 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
 #: src/translators/xsltimporter.cpp:133
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL datnes"
 
-#: src/configdialog.cpp:1168
+#: src/configdialog.cpp:1179
 #, kde-format
 msgid "Template Packages"
 msgstr "Veidnes pakotnes"
 
-#: src/configdialog.cpp:1169 src/importdialog.cpp:446 src/mainwindow.cpp:1317
+#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1317
 #: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2768,41 +2768,41 @@ msgstr "Veidnes pakotnes"
 msgid "All Files"
 msgstr "Visas datnes"
 
-#: src/configdialog.cpp:1198
+#: src/configdialog.cpp:1209
 #, kde-format
 msgid "Delete Template"
 msgstr "Dzēst veidni"
 
-#: src/configdialog.cpp:1199
+#: src/configdialog.cpp:1210
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Atlasiet dzēšamo veidni:"
 
-#: src/configdialog.cpp:1239
+#: src/configdialog.cpp:1250
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1243
+#: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1249
+#: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1253
+#: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1263
+#: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"

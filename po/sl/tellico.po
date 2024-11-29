@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-28 00:40+0000\n"
-"PO-Revision-Date: 2024-11-16 07:49+0100\n"
+"POT-Creation-Date: 2024-11-29 00:41+0000\n"
+"PO-Revision-Date: 2024-11-28 07:34+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -299,7 +299,7 @@ msgstr "Zbirka po meri"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "Ime notranjega polja je <em>%1</em>."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -726,9 +726,9 @@ msgstr "Avtor"
 msgid "Bibtex Key"
 msgstr "Ključ bibtex"
 
-#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:145
-#: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
-#: src/configdialog.cpp:1135 src/fetch/amazonfetcher.cpp:863
+#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:147
+#: src/configdialog.cpp:174 src/configdialog.cpp:188 src/configdialog.cpp:205
+#: src/configdialog.cpp:1146 src/fetch/amazonfetcher.cpp:863
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:534
 #: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:591
@@ -2308,62 +2308,62 @@ msgstr "Barva poudarjenega besedila predloge"
 msgid "Template link color"
 msgstr "Barva povezav predloge"
 
-#: src/configdialog.cpp:98
+#: src/configdialog.cpp:100
 #, kde-format
 msgid "Configure Tellico"
 msgstr "Nastavi Tellico"
 
-#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:340
+#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
+#: src/configdialog.cpp:347
 #, kde-format
 msgid "Printing"
 msgstr "Tiskanje"
 
-#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:417
+#: src/configdialog.cpp:151 src/configdialog.cpp:178 src/configdialog.cpp:192
+#: src/configdialog.cpp:424
 #, kde-format
 msgid "Templates"
 msgstr "Predloge"
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:620
+#: src/configdialog.cpp:153 src/configdialog.cpp:194 src/configdialog.cpp:627
 #, kde-format
 msgid "Data Sources"
 msgstr "Viri podatkov"
 
-#: src/configdialog.cpp:204
+#: src/configdialog.cpp:206
 #, kde-format
 msgid "General Options"
 msgstr "Splošne možnosti"
 
-#: src/configdialog.cpp:215
+#: src/configdialog.cpp:217
 #, kde-format
 msgid "&Reopen file at startup"
 msgstr "Ponovno odp&ri datoteko ob zagonu"
 
-#: src/configdialog.cpp:216
+#: src/configdialog.cpp:218
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
 "up."
 msgstr "Če to označite, bo ob zagonu programa naložena zadnja odprta datoteka."
 
-#: src/configdialog.cpp:221
+#: src/configdialog.cpp:223
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
 msgstr "Omogoči regularne izraze v hitrem filtru"
 
-#: src/configdialog.cpp:222
+#: src/configdialog.cpp:224
 #, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr "Če je označeno, bo hitri filter tolmačil besedilo kot regularni izraz."
 
-#: src/configdialog.cpp:227
+#: src/configdialog.cpp:229
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "&Omogoči spletno kamero za optično branje črtne kode"
 
-#: src/configdialog.cpp:228
+#: src/configdialog.cpp:230
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
@@ -2372,27 +2372,27 @@ msgstr ""
 "Če to označite, bo spletna kamera uporabljena za optično branje črtnih kod "
 "ob iskanju."
 
-#: src/configdialog.cpp:233
+#: src/configdialog.cpp:235
 #, kde-format
 msgid "Image Storage Options"
 msgstr "Možnosti shranjevanja slik"
 
-#: src/configdialog.cpp:235
+#: src/configdialog.cpp:237
 #, kde-format
 msgid "Store images in data file"
 msgstr "Shrani slike v datoteko zbirke"
 
-#: src/configdialog.cpp:236
+#: src/configdialog.cpp:238
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "Shrani slike v skupno programsko mapo"
 
-#: src/configdialog.cpp:237
+#: src/configdialog.cpp:239
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "Shrani slike v mapo relativno glede na datoteko zbirke"
 
-#: src/configdialog.cpp:238
+#: src/configdialog.cpp:240
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2403,39 +2403,39 @@ msgstr ""
 "programsko mapo Tellico ali pa shranite v mapo, ki je na enakem mestu kot "
 "datoteka zbirke."
 
-#: src/configdialog.cpp:265 src/configdialog.cpp:349
+#: src/configdialog.cpp:272 src/configdialog.cpp:356
 #, kde-format
 msgid "Formatting Options"
 msgstr "Možnosti oblikovanja"
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:277
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "Samodejno pre&tvori začetnice naslovov in imen v velike črke"
 
-#: src/configdialog.cpp:271
+#: src/configdialog.cpp:278
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Če to označite, bodo začetnice naslovov in imen samodejno pretvorjene v "
 "velike črke."
 
-#: src/configdialog.cpp:276
+#: src/configdialog.cpp:283
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "Sa&modejno oblikuj naslove in imena"
 
-#: src/configdialog.cpp:277 src/configdialog.cpp:355
+#: src/configdialog.cpp:284 src/configdialog.cpp:362
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Če to označite, bodo naslovi in imena samodejno oblikovani."
 
-#: src/configdialog.cpp:287
+#: src/configdialog.cpp:294
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "Brez velikih &začetnic:"
 
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:299
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2444,12 +2444,12 @@ msgstr ""
 "<qt>Seznam besed, katerih začetnice ne smejo biti pretvorjene v velike črke. "
 "Več vrednosti ločite s podpičjem.</qt>"
 
-#: src/configdialog.cpp:298
+#: src/configdialog.cpp:305
 #, kde-format
 msgid "Artic&les:"
 msgstr "Č&lanki:"
 
-#: src/configdialog.cpp:303
+#: src/configdialog.cpp:310
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2459,12 +2459,12 @@ msgstr ""
 "<qt>Seznam besed, ki jih je potrebno obravnavati kot članek, če so prva "
 "beseda v naslovu. Več vrednosti ločite s podpičjem.</qt>"
 
-#: src/configdialog.cpp:310
+#: src/configdialog.cpp:317
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Osebne &pripone:"
 
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:322
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2473,12 +2473,12 @@ msgstr ""
 "<qt>Seznam pripon, ki so uporabljene v osebnih imenih. Več vrednosti ločite "
 "s podpičjem.</qt>"
 
-#: src/configdialog.cpp:321
+#: src/configdialog.cpp:328
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "P&redpone priimkov:"
 
-#: src/configdialog.cpp:326
+#: src/configdialog.cpp:333
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2487,77 +2487,77 @@ msgstr ""
 "<qt>Seznam predpon, ki so uporabljene v priimkih. Več vrednosti ločite s "
 "podpičjem.</qt>"
 
-#: src/configdialog.cpp:341
+#: src/configdialog.cpp:348
 #, kde-format
 msgid "Printing Options"
 msgstr "Možnosti tiskanja"
 
-#: src/configdialog.cpp:354
+#: src/configdialog.cpp:361
 #, kde-format
 msgid "&Format titles and names"
 msgstr "&Oblikuj naslove in imena"
 
-#: src/configdialog.cpp:359
+#: src/configdialog.cpp:366
 #, kde-format
 msgid "&Print field headers"
 msgstr "&Natisni glave polja"
 
-#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Če to označite, bodo imena polj natisnjena kot glave razpredelnice."
 
-#: src/configdialog.cpp:364
+#: src/configdialog.cpp:371
 #, kde-format
 msgid "Grouping Options"
 msgstr "Možnosti združevanja"
 
-#: src/configdialog.cpp:369
+#: src/configdialog.cpp:376
 #, kde-format
 msgid "&Group the entries"
 msgstr "&Združi vnose"
 
-#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:377 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Če to označite, bodo vnosi združeni po izbranem polju."
 
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:381
 #, kde-format
 msgid "Image Options"
 msgstr "Možnosti slik"
 
-#: src/configdialog.cpp:380
+#: src/configdialog.cpp:387
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "Največja š&irina slike:"
 
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:396
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Največja širina slik v tiskalniškem izpisu. Razmerje se ohrani."
 
-#: src/configdialog.cpp:395
+#: src/configdialog.cpp:402
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "Največja &višina slike:"
 
-#: src/configdialog.cpp:404
+#: src/configdialog.cpp:411
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Največja višina slik v tiskalniškem izpisu. Razmerje se ohrani."
 
-#: src/configdialog.cpp:418
+#: src/configdialog.cpp:425
 #, kde-format
 msgid "Template Options"
 msgstr "Možnosti predloge"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:363
+#: src/configdialog.cpp:439 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:218
 #: src/translators/filelistingimporter.cpp:181
@@ -2565,12 +2565,12 @@ msgstr "Možnosti predloge"
 msgid "Collection &type:"
 msgstr "Vrsta zbirke:"
 
-#: src/configdialog.cpp:439
+#: src/configdialog.cpp:446
 #, kde-format
 msgid "Template:"
 msgstr "Predloga:"
 
-#: src/configdialog.cpp:444
+#: src/configdialog.cpp:451
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2579,12 +2579,12 @@ msgstr ""
 "Izberite predlogo, ki jo želite uporabiti z zbirkami trenutne vrste. "
 "Nastavitve pisav in barve ne uporabljajo vse predloge."
 
-#: src/configdialog.cpp:451
+#: src/configdialog.cpp:458
 #, kde-format
 msgid "&Preview..."
 msgstr "&Predogled ..."
 
-#: src/configdialog.cpp:452
+#: src/configdialog.cpp:459
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "Pokaže predogled predloge"
@@ -2594,107 +2594,107 @@ msgstr "Pokaže predogled predloge"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:469
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "Font Options"
 msgstr "Možnosti pisave"
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:483
 #, kde-format
 msgid "Font:"
 msgstr "Pisava:"
 
-#: src/configdialog.cpp:482
+#: src/configdialog.cpp:489
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "Ta pisava je poslana predlogi, ki je uporabljena v pogledu vnosa."
 
-#: src/configdialog.cpp:486
+#: src/configdialog.cpp:493
 #, kde-format
 msgid "Size:"
 msgstr "Velikost:"
 
-#: src/configdialog.cpp:498
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "Color Options"
 msgstr "Možnosti barve"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:512
 #, kde-format
 msgid "Background color:"
 msgstr "Barva ozadja:"
 
-#: src/configdialog.cpp:511
+#: src/configdialog.cpp:518
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Ta barva je poslana predlogi, ki je uporabljena v pogledu vnosa."
 
-#: src/configdialog.cpp:515
+#: src/configdialog.cpp:522
 #, kde-format
 msgid "Text color:"
 msgstr "Barva besedila:"
 
-#: src/configdialog.cpp:524
+#: src/configdialog.cpp:531
 #, kde-format
 msgid "Highlight color:"
 msgstr "Barva poudarjanja:"
 
-#: src/configdialog.cpp:533
+#: src/configdialog.cpp:540
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "Barva poudarjenega besedila:"
 
-#: src/configdialog.cpp:542
+#: src/configdialog.cpp:549
 #, kde-format
 msgid "Link color:"
 msgstr "Barva povezave:"
 
-#: src/configdialog.cpp:551
+#: src/configdialog.cpp:558
 #, kde-format
 msgid "Manage Templates"
 msgstr "Upravljaj s predlogami"
 
-#: src/configdialog.cpp:561
+#: src/configdialog.cpp:568
 #, kde-format
 msgid "Install..."
 msgstr "Namesti ..."
 
-#: src/configdialog.cpp:565
+#: src/configdialog.cpp:572
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Kliknite, da neposredno namestite novo predlogo."
 
-#: src/configdialog.cpp:570 src/configdialog.cpp:573 src/configdialog.cpp:577
+#: src/configdialog.cpp:577 src/configdialog.cpp:580 src/configdialog.cpp:584
 #, kde-format
 msgid "Download..."
 msgstr "Prejmi ..."
 
-#: src/configdialog.cpp:582
+#: src/configdialog.cpp:589
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Kliknite, da prejmete dodatne predloge."
 
-#: src/configdialog.cpp:585
+#: src/configdialog.cpp:592
 #, kde-format
 msgid "Delete..."
 msgstr "Izbriši ..."
 
-#: src/configdialog.cpp:589
+#: src/configdialog.cpp:596
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Kliknite, da izberete in odstranite nameščene predloge."
 
-#: src/configdialog.cpp:621
+#: src/configdialog.cpp:628
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Možnosti virov podatkov"
 
-#: src/configdialog.cpp:642
+#: src/configdialog.cpp:649
 #, kde-format
 msgid "Move &Up"
 msgstr "Premakni &gor"
 
-#: src/configdialog.cpp:645
+#: src/configdialog.cpp:652
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2702,59 +2702,59 @@ msgid ""
 msgstr ""
 "Vrstni red virov podatkov določa kako Tellico samodejno posodobi vnose."
 
-#: src/configdialog.cpp:648
+#: src/configdialog.cpp:655
 #, kde-format
 msgid "Move &Down"
 msgstr "Premakni &dol"
 
-#: src/configdialog.cpp:657
+#: src/configdialog.cpp:664
 #, kde-format
 msgid "Filter by type:"
 msgstr "Filtriraj po vrsti:"
 
-#: src/configdialog.cpp:675
+#: src/configdialog.cpp:682
 #, kde-format
 msgid "&New..."
 msgstr "&Nov ..."
 
-#: src/configdialog.cpp:677
+#: src/configdialog.cpp:684
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Kliknite, da dodate nov vir podatkov."
 
-#: src/configdialog.cpp:678
+#: src/configdialog.cpp:685
 #, kde-format
 msgid "&Modify..."
 msgstr "Spremeni..."
 
-#: src/configdialog.cpp:680
+#: src/configdialog.cpp:687
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Kliknite, da spremenite izbran vir podatkov."
 
-#: src/configdialog.cpp:681
+#: src/configdialog.cpp:688
 #, kde-format
 msgid "&Delete"
 msgstr "&Izbriši"
 
-#: src/configdialog.cpp:683
+#: src/configdialog.cpp:690
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Kliknite, da izbrišete izbran vir podatkov."
 
-#: src/configdialog.cpp:1167 src/translators/xsltexporter.cpp:101
+#: src/configdialog.cpp:1178 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
 #: src/translators/xsltimporter.cpp:133
 #, kde-format
 msgid "XSL Files"
 msgstr "Datoteke XSL"
 
-#: src/configdialog.cpp:1168
+#: src/configdialog.cpp:1179
 #, kde-format
 msgid "Template Packages"
 msgstr "Paketi s predlogami"
 
-#: src/configdialog.cpp:1169 src/importdialog.cpp:446 src/mainwindow.cpp:1317
+#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1317
 #: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2771,45 +2771,45 @@ msgstr "Paketi s predlogami"
 msgid "All Files"
 msgstr "Vse datoteke"
 
-#: src/configdialog.cpp:1198
+#: src/configdialog.cpp:1209
 #, kde-format
 msgid "Delete Template"
 msgstr "Izbriši predlogo"
 
-#: src/configdialog.cpp:1199
+#: src/configdialog.cpp:1210
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Izberite predlogo za izbris:"
 
-#: src/configdialog.cpp:1239
+#: src/configdialog.cpp:1250
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "Slike so trenutno shranjene v <em>%1</em>"
 
-#: src/configdialog.cpp:1243
+#: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "Slike so trenutno shranjene v <em>%1</em>"
 
-#: src/configdialog.cpp:1249
+#: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Slike bodo premaknjene iz <em>%1</em> v <em>%2</em>"
 
-#: src/configdialog.cpp:1253
+#: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Slike bodo premaknjene iz <em>%1</em> v <em>%2</em>"
 
-#: src/configdialog.cpp:1263
+#: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Slike bodo premaknjene iz <em>%1</em> v <em>%2</em>"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:560 src/fetchdialog.cpp:621

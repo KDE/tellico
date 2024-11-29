@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-28 00:40+0000\n"
+"POT-Creation-Date: 2024-11-29 00:41+0000\n"
 "PO-Revision-Date: 2024-08-21 00:09+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -711,9 +711,9 @@ msgstr "저자"
 msgid "Bibtex Key"
 msgstr "BibTeX 키"
 
-#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:145
-#: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
-#: src/configdialog.cpp:1135 src/fetch/amazonfetcher.cpp:863
+#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:147
+#: src/configdialog.cpp:174 src/configdialog.cpp:188 src/configdialog.cpp:205
+#: src/configdialog.cpp:1146 src/fetch/amazonfetcher.cpp:863
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:534
 #: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:591
@@ -2297,39 +2297,39 @@ msgstr "템플릿 강조 글자색"
 msgid "Template link color"
 msgstr "템플릿 링크 색"
 
-#: src/configdialog.cpp:98
+#: src/configdialog.cpp:100
 #, kde-format
 msgid "Configure Tellico"
 msgstr "Tellico 설정"
 
-#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:340
+#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
+#: src/configdialog.cpp:347
 #, kde-format
 msgid "Printing"
 msgstr "인쇄"
 
-#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:417
+#: src/configdialog.cpp:151 src/configdialog.cpp:178 src/configdialog.cpp:192
+#: src/configdialog.cpp:424
 #, kde-format
 msgid "Templates"
 msgstr "템플릿"
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:620
+#: src/configdialog.cpp:153 src/configdialog.cpp:194 src/configdialog.cpp:627
 #, kde-format
 msgid "Data Sources"
 msgstr "데이터 원본"
 
-#: src/configdialog.cpp:204
+#: src/configdialog.cpp:206
 #, kde-format
 msgid "General Options"
 msgstr "일반 옵션"
 
-#: src/configdialog.cpp:215
+#: src/configdialog.cpp:217
 #, kde-format
 msgid "&Reopen file at startup"
 msgstr "시작할 때 파일 다시 열기(&R)"
 
-#: src/configdialog.cpp:216
+#: src/configdialog.cpp:218
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
@@ -2337,50 +2337,50 @@ msgid ""
 msgstr ""
 "이 옵션을 선택하면 마지막으로 열렸던 파일이 프로그램 시작 시 다시 열립니다."
 
-#: src/configdialog.cpp:221
+#: src/configdialog.cpp:223
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
 msgstr "빠른 필터에 정규 표현식 사용(&E)"
 
-#: src/configdialog.cpp:222
+#: src/configdialog.cpp:224
 #, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr "이 옵션을 선택하면 입력한 문자열을 정규 표현식으로 처리합니다."
 
-#: src/configdialog.cpp:227
+#: src/configdialog.cpp:229
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "바코드 스캔에 웹캠 사용(&E)"
 
-#: src/configdialog.cpp:228
+#: src/configdialog.cpp:230
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
 "searching."
 msgstr "이 옵션을 선택하면 웹캠으로 검색용 바코드를 스캔합니다."
 
-#: src/configdialog.cpp:233
+#: src/configdialog.cpp:235
 #, kde-format
 msgid "Image Storage Options"
 msgstr "이미지 저장 옵션"
 
-#: src/configdialog.cpp:235
+#: src/configdialog.cpp:237
 #, kde-format
 msgid "Store images in data file"
 msgstr "데이터 파일에 이미지 저장"
 
-#: src/configdialog.cpp:236
+#: src/configdialog.cpp:238
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "공통 앱 디렉터리에 이미지 저장"
 
-#: src/configdialog.cpp:237
+#: src/configdialog.cpp:239
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "데이터 파일을 기준으로 디렉터리에 이미지 저장"
 
-#: src/configdialog.cpp:238
+#: src/configdialog.cpp:240
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2391,37 +2391,37 @@ msgstr ""
 "며, Tellico 앱 디렉터리나 데이터 파일과 같은 경로에 이미지를 저장할 수도 있습"
 "니다."
 
-#: src/configdialog.cpp:265 src/configdialog.cpp:349
+#: src/configdialog.cpp:272 src/configdialog.cpp:356
 #, kde-format
 msgid "Formatting Options"
 msgstr "형식 지정 옵션"
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:277
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "제목 및 이름을 자동으로 대문자로 표시(&T)"
 
-#: src/configdialog.cpp:271
+#: src/configdialog.cpp:278
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr "이 옵션을 선택하면 제목과 이름이 자동으로 대문자로 표시됩니다."
 
-#: src/configdialog.cpp:276
+#: src/configdialog.cpp:283
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "제목 및 이름 자동 형식 지정(&F)"
 
-#: src/configdialog.cpp:277 src/configdialog.cpp:355
+#: src/configdialog.cpp:284 src/configdialog.cpp:362
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "이 옵션을 선택하면 제목과 이름이 자동으로 포맷됩니다."
 
-#: src/configdialog.cpp:287
+#: src/configdialog.cpp:294
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "대문자 없음(&Z):"
 
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:299
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2430,12 +2430,12 @@ msgstr ""
 "<qt>대문자로 표시해서는 안 되는 단어 목록입니다. 여러 값은 쌍반점으로 구분합"
 "니다.</qt>"
 
-#: src/configdialog.cpp:298
+#: src/configdialog.cpp:305
 #, kde-format
 msgid "Artic&les:"
 msgstr "물품(&L):"
 
-#: src/configdialog.cpp:303
+#: src/configdialog.cpp:310
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2445,12 +2445,12 @@ msgstr ""
 "<qt>제목의 첫 번째 단어인 경우 물품으로 간주해야 하는 단어 목록입니다. 여러 "
 "값은 쌍반점으로 구분합니다.</qt>"
 
-#: src/configdialog.cpp:310
+#: src/configdialog.cpp:317
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "개인 접미사(&X):"
 
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:322
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2459,12 +2459,12 @@ msgstr ""
 "<qt>개인 이름에 사용될 수 있는 접미사 목록입니다. 여러 값은 쌍반점으로 구분합"
 "니다.</qt>"
 
-#: src/configdialog.cpp:321
+#: src/configdialog.cpp:328
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "성씨 접두사(&P):"
 
-#: src/configdialog.cpp:326
+#: src/configdialog.cpp:333
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2473,77 +2473,77 @@ msgstr ""
 "<qt>성씨에 사용될 수 있는 접두사 목록입니다. 여러 값은 쌍반점으로 구분합니다."
 "</qt>"
 
-#: src/configdialog.cpp:341
+#: src/configdialog.cpp:348
 #, kde-format
 msgid "Printing Options"
 msgstr "인쇄 옵션"
 
-#: src/configdialog.cpp:354
+#: src/configdialog.cpp:361
 #, kde-format
 msgid "&Format titles and names"
 msgstr "제목 및 이름 형식(&F)"
 
-#: src/configdialog.cpp:359
+#: src/configdialog.cpp:366
 #, kde-format
 msgid "&Print field headers"
 msgstr "필드 머리글 인쇄(&P)"
 
-#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "이 옵션을 선택하면 필드 이름을 표 머리글로 인쇄합니다."
 
-#: src/configdialog.cpp:364
+#: src/configdialog.cpp:371
 #, kde-format
 msgid "Grouping Options"
 msgstr "그룹화 옵션"
 
-#: src/configdialog.cpp:369
+#: src/configdialog.cpp:376
 #, kde-format
 msgid "&Group the entries"
 msgstr "항목 그룹화(&G)"
 
-#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:377 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "이 옵션을 선택하면 항목이 선택한 필드별로 그룹화됩니다."
 
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:381
 #, kde-format
 msgid "Image Options"
 msgstr "이미지 옵션"
 
-#: src/configdialog.cpp:380
+#: src/configdialog.cpp:387
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "최대 이미지 폭(&W):"
 
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:396
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "인쇄물의 이미지 최대 너비입니다. 가로 세로 비율이 유지됩니다."
 
-#: src/configdialog.cpp:395
+#: src/configdialog.cpp:402
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "최대 이미지 높이(&M):"
 
-#: src/configdialog.cpp:404
+#: src/configdialog.cpp:411
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "인쇄물의 이미지 최대 높이입니다. 가로 세로 비율이 유지됩니다."
 
-#: src/configdialog.cpp:418
+#: src/configdialog.cpp:425
 #, kde-format
 msgid "Template Options"
 msgstr "템플릿 옵션"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:363
+#: src/configdialog.cpp:439 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:218
 #: src/translators/filelistingimporter.cpp:181
@@ -2551,12 +2551,12 @@ msgstr "템플릿 옵션"
 msgid "Collection &type:"
 msgstr "소장품 형식(&T):"
 
-#: src/configdialog.cpp:439
+#: src/configdialog.cpp:446
 #, kde-format
 msgid "Template:"
 msgstr "템플릿:"
 
-#: src/configdialog.cpp:444
+#: src/configdialog.cpp:451
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2565,12 +2565,12 @@ msgstr ""
 "현재 소장품 형식에 사용할 템플릿을 선택합니다. 일부 템플릿은 글꼴 및 색 설정"
 "을 사용하지 않습니다."
 
-#: src/configdialog.cpp:451
+#: src/configdialog.cpp:458
 #, kde-format
 msgid "&Preview..."
 msgstr "미리 보기(&P)..."
 
-#: src/configdialog.cpp:452
+#: src/configdialog.cpp:459
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "템플릿 미리 보기 표시"
@@ -2580,107 +2580,107 @@ msgstr "템플릿 미리 보기 표시"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:469
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "Font Options"
 msgstr "글꼴 옵션"
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:483
 #, kde-format
 msgid "Font:"
 msgstr "글꼴:"
 
-#: src/configdialog.cpp:482
+#: src/configdialog.cpp:489
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "이 글꼴은 항목 보기 시 템플릿에도 사용됩니다."
 
-#: src/configdialog.cpp:486
+#: src/configdialog.cpp:493
 #, kde-format
 msgid "Size:"
 msgstr "크기:"
 
-#: src/configdialog.cpp:498
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "Color Options"
 msgstr "색상 옵션"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:512
 #, kde-format
 msgid "Background color:"
 msgstr "배경색:"
 
-#: src/configdialog.cpp:511
+#: src/configdialog.cpp:518
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "이 색상은 항목 보기 시 템플릿에도 사용됩니다."
 
-#: src/configdialog.cpp:515
+#: src/configdialog.cpp:522
 #, kde-format
 msgid "Text color:"
 msgstr "글자색:"
 
-#: src/configdialog.cpp:524
+#: src/configdialog.cpp:531
 #, kde-format
 msgid "Highlight color:"
 msgstr "강조색:"
 
-#: src/configdialog.cpp:533
+#: src/configdialog.cpp:540
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "강조된 글자색:"
 
-#: src/configdialog.cpp:542
+#: src/configdialog.cpp:549
 #, kde-format
 msgid "Link color:"
 msgstr "링크 색:"
 
-#: src/configdialog.cpp:551
+#: src/configdialog.cpp:558
 #, kde-format
 msgid "Manage Templates"
 msgstr "템플릿 관리"
 
-#: src/configdialog.cpp:561
+#: src/configdialog.cpp:568
 #, kde-format
 msgid "Install..."
 msgstr "설치..."
 
-#: src/configdialog.cpp:565
+#: src/configdialog.cpp:572
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "여기를 클릭하면 새 템플릿을 직접 설치합니다."
 
-#: src/configdialog.cpp:570 src/configdialog.cpp:573 src/configdialog.cpp:577
+#: src/configdialog.cpp:577 src/configdialog.cpp:580 src/configdialog.cpp:584
 #, kde-format
 msgid "Download..."
 msgstr "다운로드..."
 
-#: src/configdialog.cpp:582
+#: src/configdialog.cpp:589
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "여기를 클릭하면 새 템플릿을 다운로드합니다."
 
-#: src/configdialog.cpp:585
+#: src/configdialog.cpp:592
 #, kde-format
 msgid "Delete..."
 msgstr "삭제..."
 
-#: src/configdialog.cpp:589
+#: src/configdialog.cpp:596
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "여기를 클릭하면 설치된 템플릿을 선택 및 삭제합니다."
 
-#: src/configdialog.cpp:621
+#: src/configdialog.cpp:628
 #, kde-format
 msgid "Data Sources Options"
 msgstr "데이터 원본 옵션"
 
-#: src/configdialog.cpp:642
+#: src/configdialog.cpp:649
 #, kde-format
 msgid "Move &Up"
 msgstr "위로 이동(&U)"
 
-#: src/configdialog.cpp:645
+#: src/configdialog.cpp:652
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2689,59 +2689,59 @@ msgstr ""
 "데이터 원본 순서는 항목을 자동으로 업데이트할 때 Tellico에서 사용할 순서를 설"
 "정합니다."
 
-#: src/configdialog.cpp:648
+#: src/configdialog.cpp:655
 #, kde-format
 msgid "Move &Down"
 msgstr "아래로 이동(&D)"
 
-#: src/configdialog.cpp:657
+#: src/configdialog.cpp:664
 #, kde-format
 msgid "Filter by type:"
 msgstr "형식별 필터링:"
 
-#: src/configdialog.cpp:675
+#: src/configdialog.cpp:682
 #, kde-format
 msgid "&New..."
 msgstr "새로 만들기(&N)..."
 
-#: src/configdialog.cpp:677
+#: src/configdialog.cpp:684
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "새로운 데이터 원본을 추가하려면 여기를 클릭하십시오."
 
-#: src/configdialog.cpp:678
+#: src/configdialog.cpp:685
 #, kde-format
 msgid "&Modify..."
 msgstr "수정(&M)..."
 
-#: src/configdialog.cpp:680
+#: src/configdialog.cpp:687
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "선택한 데이터 원본을 수정하려면 여기를 클릭하십시오."
 
-#: src/configdialog.cpp:681
+#: src/configdialog.cpp:688
 #, kde-format
 msgid "&Delete"
 msgstr "삭제(&D)"
 
-#: src/configdialog.cpp:683
+#: src/configdialog.cpp:690
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "선택한 데이터 원본을 삭제하려면 여기를 클릭하십시오."
 
-#: src/configdialog.cpp:1167 src/translators/xsltexporter.cpp:101
+#: src/configdialog.cpp:1178 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
 #: src/translators/xsltimporter.cpp:133
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL 파일"
 
-#: src/configdialog.cpp:1168
+#: src/configdialog.cpp:1179
 #, kde-format
 msgid "Template Packages"
 msgstr "템플릿 패키지"
 
-#: src/configdialog.cpp:1169 src/importdialog.cpp:446 src/mainwindow.cpp:1317
+#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1317
 #: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2758,41 +2758,41 @@ msgstr "템플릿 패키지"
 msgid "All Files"
 msgstr "모든 파일"
 
-#: src/configdialog.cpp:1198
+#: src/configdialog.cpp:1209
 #, kde-format
 msgid "Delete Template"
 msgstr "템플릿 삭제"
 
-#: src/configdialog.cpp:1199
+#: src/configdialog.cpp:1210
 #, kde-format
 msgid "Select template to delete:"
 msgstr "삭제할 템플릿 선택:"
 
-#: src/configdialog.cpp:1239
+#: src/configdialog.cpp:1250
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1243
+#: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1249
+#: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1253
+#: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1263
+#: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"

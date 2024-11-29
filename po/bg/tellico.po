@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-28 00:40+0000\n"
+"POT-Creation-Date: 2024-11-29 00:41+0000\n"
 "PO-Revision-Date: 2024-11-09 20:04+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -692,9 +692,9 @@ msgstr "Автор"
 msgid "Bibtex Key"
 msgstr "Настройки на полето"
 
-#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:145
-#: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
-#: src/configdialog.cpp:1135 src/fetch/amazonfetcher.cpp:863
+#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:147
+#: src/configdialog.cpp:174 src/configdialog.cpp:188 src/configdialog.cpp:205
+#: src/configdialog.cpp:1146 src/fetch/amazonfetcher.cpp:863
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:367 src/fetch/colnectfetcher.cpp:534
 #: src/fetch/colnectfetcher.cpp:553 src/fetch/colnectfetcher.cpp:591
@@ -2268,39 +2268,39 @@ msgstr "Опции за форматиране"
 msgid "Template link color"
 msgstr "Опции за форматиране"
 
-#: src/configdialog.cpp:98
+#: src/configdialog.cpp:100
 #, kde-format
 msgid "Configure Tellico"
 msgstr "Настройка на Tellico"
 
-#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:340
+#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
+#: src/configdialog.cpp:347
 #, kde-format
 msgid "Printing"
 msgstr "Печатане"
 
-#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:417
+#: src/configdialog.cpp:151 src/configdialog.cpp:178 src/configdialog.cpp:192
+#: src/configdialog.cpp:424
 #, kde-format
 msgid "Templates"
 msgstr "Шаблони"
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:192 src/configdialog.cpp:620
+#: src/configdialog.cpp:153 src/configdialog.cpp:194 src/configdialog.cpp:627
 #, kde-format
 msgid "Data Sources"
 msgstr "Източници на данни"
 
-#: src/configdialog.cpp:204
+#: src/configdialog.cpp:206
 #, kde-format
 msgid "General Options"
 msgstr "Общи настройки"
 
-#: src/configdialog.cpp:215
+#: src/configdialog.cpp:217
 #, fuzzy, kde-format
 msgid "&Reopen file at startup"
 msgstr "Отваряне на файл при пускане на приложението"
 
-#: src/configdialog.cpp:216
+#: src/configdialog.cpp:218
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
@@ -2309,23 +2309,23 @@ msgstr ""
 "Ако е избрано,последно отвореният файл ще бъде отворен при повторно пускане "
 "на програмата."
 
-#: src/configdialog.cpp:221
+#: src/configdialog.cpp:223
 #, fuzzy, kde-format
 msgid "&Enable regular expressions in quick filter"
 msgstr "пасва на регул. израз"
 
-#: src/configdialog.cpp:222
+#: src/configdialog.cpp:224
 #, fuzzy, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr "Ако е избрано,заглавията на полетата ще бъдат отпечатани."
 
-#: src/configdialog.cpp:227
+#: src/configdialog.cpp:229
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr ""
 
-#: src/configdialog.cpp:228
+#: src/configdialog.cpp:230
 #, fuzzy, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
@@ -2334,27 +2334,27 @@ msgstr ""
 "Ако е избрано,последно отвореният файл ще бъде отворен при повторно пускане "
 "на програмата."
 
-#: src/configdialog.cpp:233
+#: src/configdialog.cpp:235
 #, fuzzy, kde-format
 msgid "Image Storage Options"
 msgstr "Опции за форматиране"
 
-#: src/configdialog.cpp:235
+#: src/configdialog.cpp:237
 #, fuzzy, kde-format
 msgid "Store images in data file"
 msgstr "Импортира Bibtexml файл ..."
 
-#: src/configdialog.cpp:236
+#: src/configdialog.cpp:238
 #, kde-format
 msgid "Store images in common application directory"
 msgstr ""
 
-#: src/configdialog.cpp:237
+#: src/configdialog.cpp:239
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr ""
 
-#: src/configdialog.cpp:238
+#: src/configdialog.cpp:240
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2362,37 +2362,37 @@ msgid ""
 "directory in the same location as the data file."
 msgstr ""
 
-#: src/configdialog.cpp:265 src/configdialog.cpp:349
+#: src/configdialog.cpp:272 src/configdialog.cpp:356
 #, kde-format
 msgid "Formatting Options"
 msgstr "Настройки за форматиране"
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:277
 #, fuzzy, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "Автоматично прави буквите в имената и заглавията главни"
 
-#: src/configdialog.cpp:271
+#: src/configdialog.cpp:278
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr "Ако е избрана,заглавията и имената автоматично ще получат главни букви"
 
-#: src/configdialog.cpp:276
+#: src/configdialog.cpp:283
 #, fuzzy, kde-format
 msgid "Auto &format titles and names"
 msgstr "Автоматично форматиране на заглавията и имената"
 
-#: src/configdialog.cpp:277 src/configdialog.cpp:355
+#: src/configdialog.cpp:284 src/configdialog.cpp:362
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Ако е избрано,заглавията и имената ще бъдат форматирани автоматично."
 
-#: src/configdialog.cpp:287
+#: src/configdialog.cpp:294
 #, kde-format
 msgid "No capitali&zation:"
 msgstr ""
 
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:299
 #, fuzzy, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2401,12 +2401,12 @@ msgstr ""
 "Списък от междуметия,думи със запетая,които не се числят към заглавие,ако са "
 "в началото му."
 
-#: src/configdialog.cpp:298
+#: src/configdialog.cpp:305
 #, fuzzy, kde-format
 msgid "Artic&les:"
 msgstr "Междуметия:"
 
-#: src/configdialog.cpp:303
+#: src/configdialog.cpp:310
 #, fuzzy, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2416,101 +2416,101 @@ msgstr ""
 "Списък от междуметия,думи със запетая,които не се числят към заглавие,ако са "
 "в началото му."
 
-#: src/configdialog.cpp:310
+#: src/configdialog.cpp:317
 #, fuzzy, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Лични наставки:"
 
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:322
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
 msgstr ""
 
-#: src/configdialog.cpp:321
+#: src/configdialog.cpp:328
 #, fuzzy, kde-format
 msgid "Surname &prefixes:"
 msgstr "Фамилни наставки:"
 
-#: src/configdialog.cpp:326
+#: src/configdialog.cpp:333
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
 msgstr ""
 
-#: src/configdialog.cpp:341
+#: src/configdialog.cpp:348
 #, kde-format
 msgid "Printing Options"
 msgstr "Настройки за печат"
 
-#: src/configdialog.cpp:354
+#: src/configdialog.cpp:361
 #, fuzzy, kde-format
 msgid "&Format titles and names"
 msgstr "Форматиране на заглавия и имена"
 
-#: src/configdialog.cpp:359
+#: src/configdialog.cpp:366
 #, fuzzy, kde-format
 msgid "&Print field headers"
 msgstr "Печатане заглавията на полетата"
 
-#: src/configdialog.cpp:360 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:509
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Ако е избрано,заглавията на полетата ще бъдат отпечатани."
 
-#: src/configdialog.cpp:364
+#: src/configdialog.cpp:371
 #, kde-format
 msgid "Grouping Options"
 msgstr "Опции за групиране"
 
-#: src/configdialog.cpp:369
+#: src/configdialog.cpp:376
 #, fuzzy, kde-format
 msgid "&Group the entries"
 msgstr "Групиране на книгите"
 
-#: src/configdialog.cpp:370 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:377 src/translators/htmlexporter.cpp:514
 #, fuzzy, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Ако е избрано,книгите ще бъдат групирани по даден признак."
 
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:381
 #, fuzzy, kde-format
 msgid "Image Options"
 msgstr "Опции за форматиране"
 
-#: src/configdialog.cpp:380
+#: src/configdialog.cpp:387
 #, kde-format
 msgid "Maximum image &width:"
 msgstr ""
 
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:396
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr ""
 
-#: src/configdialog.cpp:395
+#: src/configdialog.cpp:402
 #, kde-format
 msgid "&Maximum image height:"
 msgstr ""
 
-#: src/configdialog.cpp:404
+#: src/configdialog.cpp:411
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr ""
 
-#: src/configdialog.cpp:418
+#: src/configdialog.cpp:425
 #, fuzzy, kde-format
 msgid "Template Options"
 msgstr "Опции за форматиране"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:432 src/fetch/execexternalfetcher.cpp:363
+#: src/configdialog.cpp:439 src/fetch/execexternalfetcher.cpp:363
 #: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:218
 #: src/translators/filelistingimporter.cpp:181
@@ -2518,24 +2518,24 @@ msgstr "Опции за форматиране"
 msgid "Collection &type:"
 msgstr "BCCollection"
 
-#: src/configdialog.cpp:439
+#: src/configdialog.cpp:446
 #, fuzzy, kde-format
 msgid "Template:"
 msgstr "Опции за форматиране"
 
-#: src/configdialog.cpp:444
+#: src/configdialog.cpp:451
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
 "templates will use the font and color settings."
 msgstr ""
 
-#: src/configdialog.cpp:451
+#: src/configdialog.cpp:458
 #, fuzzy, kde-format
 msgid "&Preview..."
 msgstr "Нова"
 
-#: src/configdialog.cpp:452
+#: src/configdialog.cpp:459
 #, kde-format
 msgid "Show a preview of the template"
 msgstr ""
@@ -2545,167 +2545,167 @@ msgstr ""
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:469
+#: src/configdialog.cpp:476
 #, fuzzy, kde-format
 msgid "Font Options"
 msgstr "Опции за форматиране"
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:483
 #, kde-format
 msgid "Font:"
 msgstr "Шрифт:"
 
-#: src/configdialog.cpp:482
+#: src/configdialog.cpp:489
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr ""
 
-#: src/configdialog.cpp:486
+#: src/configdialog.cpp:493
 #, fuzzy, kde-format
 msgid "Size:"
 msgstr "С автограф"
 
-#: src/configdialog.cpp:498
+#: src/configdialog.cpp:505
 #, fuzzy, kde-format
 msgid "Color Options"
 msgstr "Настройки на полето"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:512
 #, kde-format
 msgid "Background color:"
 msgstr "Цвят на фона:"
 
-#: src/configdialog.cpp:511
+#: src/configdialog.cpp:518
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr ""
 
-#: src/configdialog.cpp:515
+#: src/configdialog.cpp:522
 #, kde-format
 msgid "Text color:"
 msgstr "Цвят на текста:"
 
-#: src/configdialog.cpp:524
+#: src/configdialog.cpp:531
 #, kde-format
 msgid "Highlight color:"
 msgstr "Цвят на открояване:"
 
-#: src/configdialog.cpp:533
+#: src/configdialog.cpp:540
 #, kde-format
 msgid "Highlighted text color:"
 msgstr ""
 
-#: src/configdialog.cpp:542
+#: src/configdialog.cpp:549
 #, fuzzy, kde-format
 #| msgid "Text color:"
 msgid "Link color:"
 msgstr "Цвят на текста:"
 
-#: src/configdialog.cpp:551
+#: src/configdialog.cpp:558
 #, kde-format
 msgid "Manage Templates"
 msgstr "Управление на шаблоните"
 
-#: src/configdialog.cpp:561
+#: src/configdialog.cpp:568
 #, kde-format
 msgid "Install..."
 msgstr "Инсталиране..."
 
-#: src/configdialog.cpp:565
+#: src/configdialog.cpp:572
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr ""
 
-#: src/configdialog.cpp:570 src/configdialog.cpp:573 src/configdialog.cpp:577
+#: src/configdialog.cpp:577 src/configdialog.cpp:580 src/configdialog.cpp:584
 #, kde-format
 msgid "Download..."
 msgstr "Изтегляне..."
 
-#: src/configdialog.cpp:582
+#: src/configdialog.cpp:589
 #, kde-format
 msgid "Click to download additional templates."
 msgstr ""
 
-#: src/configdialog.cpp:585
+#: src/configdialog.cpp:592
 #, fuzzy, kde-format
 msgid "Delete..."
 msgstr "Избор на XSLT файл..."
 
-#: src/configdialog.cpp:589
+#: src/configdialog.cpp:596
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr ""
 
-#: src/configdialog.cpp:621
+#: src/configdialog.cpp:628
 #, fuzzy, kde-format
 msgid "Data Sources Options"
 msgstr "Опции за форматиране"
 
-#: src/configdialog.cpp:642
+#: src/configdialog.cpp:649
 #, kde-format
 msgid "Move &Up"
 msgstr "На&горе"
 
-#: src/configdialog.cpp:645
+#: src/configdialog.cpp:652
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
 "are automatically updated."
 msgstr ""
 
-#: src/configdialog.cpp:648
+#: src/configdialog.cpp:655
 #, kde-format
 msgid "Move &Down"
 msgstr "На&долу"
 
-#: src/configdialog.cpp:657
+#: src/configdialog.cpp:664
 #, fuzzy, kde-format
 msgid "Filter by type:"
 msgstr "Изтрий книга"
 
-#: src/configdialog.cpp:675
+#: src/configdialog.cpp:682
 #, fuzzy, kde-format
 msgid "&New..."
 msgstr "Нова"
 
-#: src/configdialog.cpp:677
+#: src/configdialog.cpp:684
 #, kde-format
 msgid "Click to add a new data source."
 msgstr ""
 
-#: src/configdialog.cpp:678
+#: src/configdialog.cpp:685
 #, kde-format
 msgid "&Modify..."
 msgstr "&Редактиране..."
 
-#: src/configdialog.cpp:680
+#: src/configdialog.cpp:687
 #, fuzzy, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Изтриване на няколко книги ?"
 
-#: src/configdialog.cpp:681
+#: src/configdialog.cpp:688
 #, kde-format
 msgid "&Delete"
 msgstr "&Изтриване"
 
-#: src/configdialog.cpp:683
+#: src/configdialog.cpp:690
 #, fuzzy, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Изтриване на няколко книги ?"
 
-#: src/configdialog.cpp:1167 src/translators/xsltexporter.cpp:101
+#: src/configdialog.cpp:1178 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
 #: src/translators/xsltimporter.cpp:133
 #, fuzzy, kde-format
 msgid "XSL Files"
 msgstr "Изтрий книга"
 
-#: src/configdialog.cpp:1168
+#: src/configdialog.cpp:1179
 #, fuzzy, kde-format
 msgid "Template Packages"
 msgstr "Шаблони"
 
-#: src/configdialog.cpp:1169 src/importdialog.cpp:446 src/mainwindow.cpp:1317
+#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1317
 #: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2722,41 +2722,41 @@ msgstr "Шаблони"
 msgid "All Files"
 msgstr "*|Всички файлове"
 
-#: src/configdialog.cpp:1198
+#: src/configdialog.cpp:1209
 #, fuzzy, kde-format
 msgid "Delete Template"
 msgstr "Изтриване на поле?"
 
-#: src/configdialog.cpp:1199
+#: src/configdialog.cpp:1210
 #, kde-format
 msgid "Select template to delete:"
 msgstr ""
 
-#: src/configdialog.cpp:1239
+#: src/configdialog.cpp:1250
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1243
+#: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1249
+#: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1253
+#: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1263
+#: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
