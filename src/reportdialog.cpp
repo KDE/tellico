@@ -426,7 +426,7 @@ void ReportDialog::slotPrint() {
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       GUI::CursorSaver cs(Qt::WaitCursor);
       QEventLoop loop;
-      m_webView->page()->print(printer, [=](bool success) {
+      m_webView->page()->print(printer, [=, &loop](bool success) {
         if(success) {
           myLog() << "Printing completed";
         } else {
