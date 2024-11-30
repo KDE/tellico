@@ -159,6 +159,10 @@ if(Exempi_FOUND)
     target_link_libraries(tellico ${Exempi_LIBRARIES})
 endif()
 
+if(CDIO_FOUND)
+    target_link_libraries(tellico ${CDIO_LIBRARIES})
+endif()
+
 if(TAGLIB_FOUND)
     target_link_libraries(tellico ${TAGLIB_LIBRARIES})
 endif()
