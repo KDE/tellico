@@ -3,14 +3,11 @@
 # CDIO_LIBRARIES - The libcdio libraries
 
 find_package(PkgConfig)
-if(PKG_CONFIG_FOUND)
-  pkg_check_modules(CDIO libcdio libiso9660)
-  list(APPEND CDIO_INCLUDE_DIRS ${CDIO_libcdio_INCLUDEDIR} ${CDIO_libiso9660_INCLUDEDIR})
-endif()
-if(NOT CDIO_FOUND)
-  find_path(CDIO_INCLUDE_DIRS cdio/cdio.h)
-  find_library(CDIO_LIBRARIES NAMES cdio)
-endif()
+pkg_check_modules(PC_CDIO libcdio libiso9660)
+list(APPEND PC_CDIO_INCLUDE_DIRS ${PC_CDIO_libcdio_INCLUDEDIR} ${PC_CDIO_libiso9660_INCLUDEDIR})
+
+find_path(CDIO_INCLUDE_DIRS cdio/cdio.h PATHS ${PC_CDIO_INCLUDE_DIRS})
+find_library(CDIO_LIBRARIES NAMES cdio libiso9660 ${PC_CDIO_LIBRARY_DIRS})
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(CDIO FOUND_VAR CDIO_FOUND REQUIRED_VARS CDIO_INCLUDE_DIRS CDIO_LIBRARIES)
