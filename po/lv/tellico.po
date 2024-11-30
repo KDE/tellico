@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-29 00:41+0000\n"
+"POT-Creation-Date: 2024-11-30 00:40+0000\n"
 "PO-Revision-Date: 2024-09-30 19:11+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -2752,7 +2752,7 @@ msgid "Template Packages"
 msgstr "Veidnes pakotnes"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1317
-#: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
+#: src/mainwindow.cpp:1493 src/reportdialog.cpp:461 src/reportdialog.cpp:476
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -6471,12 +6471,12 @@ msgid ""
 msgstr ""
 "Dažu ziņojumu ģenerēšana lielām kolekcijām var aizņemt vairākas sekundes."
 
-#: src/reportdialog.cpp:441
+#: src/reportdialog.cpp:459
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG datnes"
 
-#: src/reportdialog.cpp:456 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:474 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML datnes"

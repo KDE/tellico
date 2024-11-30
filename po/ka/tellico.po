@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-29 00:41+0000\n"
+"POT-Creation-Date: 2024-11-30 00:40+0000\n"
 "PO-Revision-Date: 2024-11-28 04:39+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -2759,7 +2759,7 @@ msgid "Template Packages"
 msgstr "ნიმუშების პაკეტები"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1317
-#: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
+#: src/mainwindow.cpp:1493 src/reportdialog.cpp:461 src/reportdialog.cpp:476
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -6489,12 +6489,12 @@ msgid ""
 msgstr ""
 "დიდი კოლექციებისთვის ანგარიშების შექმნას, შეიძლება, რამდენიმე წამი დასჭირდეს."
 
-#: src/reportdialog.cpp:441
+#: src/reportdialog.cpp:459
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG ფაილები"
 
-#: src/reportdialog.cpp:456 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:474 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML ფაილები"

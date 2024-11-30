@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-29 00:41+0000\n"
-"PO-Revision-Date: 2024-11-15 12:32+0100\n"
+"POT-Creation-Date: 2024-11-30 00:40+0000\n"
+"PO-Revision-Date: 2024-11-29 12:13+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -295,7 +295,7 @@ msgstr "Collection personalisate"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "Le nomine de campo interne es <em>%1</em>."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -2778,7 +2778,7 @@ msgid "Template Packages"
 msgstr "Pacchettos de patrono"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1317
-#: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
+#: src/mainwindow.cpp:1493 src/reportdialog.cpp:461 src/reportdialog.cpp:476
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -2808,31 +2808,31 @@ msgstr "Selige patrono de deler:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "Imagines es currentemente salveguardate intra <em>%1</em>"
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "Imagines es currentemente salveguardate a <em>%1</em>"
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Imagines essera movite ex <em>%1</em> e <em>%2</em>"
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Imagines essera movite ex <em>%1</em> e <em>%2</em>"
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Imagines essera movite ex <em>%1</em> e <em>%2</em>"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:560 src/fetchdialog.cpp:621
@@ -6522,12 +6522,12 @@ msgid ""
 msgstr ""
 "Alcun reportos pote prender plure secundas pro generar grande collectiones."
 
-#: src/reportdialog.cpp:441
+#: src/reportdialog.cpp:459
 #, kde-format
 msgid "PNG Files"
 msgstr "Files PNG"
 
-#: src/reportdialog.cpp:456 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:474 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "Files HTML"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-29 00:41+0000\n"
+"POT-Creation-Date: 2024-11-30 00:40+0000\n"
 "PO-Revision-Date: 2024-11-16 11:53+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -2768,7 +2768,7 @@ msgid "Template Packages"
 msgstr "Paquetes de modelo"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1317
-#: src/mainwindow.cpp:1493 src/reportdialog.cpp:443 src/reportdialog.cpp:458
+#: src/mainwindow.cpp:1493 src/reportdialog.cpp:461 src/reportdialog.cpp:476
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -6505,12 +6505,12 @@ msgid ""
 msgstr ""
 "Con coleccións grandes algúns informes tardan varios segundos en xerarse."
 
-#: src/reportdialog.cpp:441
+#: src/reportdialog.cpp:459
 #, kde-format
 msgid "PNG Files"
 msgstr "Ficheiros PNG"
 
-#: src/reportdialog.cpp:456 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:474 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "Ficheiros HTML"
