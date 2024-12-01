@@ -56,7 +56,9 @@
 <para
 >Las <guilabel
 >Opciones generales</guilabel
-> controlan el comportamiento general. Las imágenes pueden estar incluidas en los archivos de datos, o guardadas por separado en la carpeta de la aplicación &appname;. Además, cuando se inicia &appname;, puede abrir automáticamente el último archivo de datos que ha sido abierto. El <interface
+> controlan el comportamiento general. Las imágenes se pueden guardar en el mismo archivo de datos, guardar por separado en la carpeta común de la aplicación &appname; o guardar en un directorio con el mismo nombre que el archivo de datos, con el sufijo <emphasis
+>_files</emphasis
+> añadido al nombre. Para las colecciones que contienen muchas imágenes, guardarlas en el archivo de datos será mucho más lento. Cuando se inicia &appname;, puede abrir automáticamente el último archivo de datos que ha sido abierto. El <interface
 >Filtrado rápido</interface
 > de la barra de herramientas resulta de utilidad para filtrar rápidamente la colección y permite el uso de expresiones regulares. </para>
 
