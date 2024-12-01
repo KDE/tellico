@@ -184,7 +184,7 @@ void HtmlExporterTest::testReportHtml() {
   QVERIFY(!output.isEmpty());
 
   // check that cdate is passed correctly
-  static const QRegularExpression rx("<p id=\"header-right\">(.*)</p>");
+  static const QRegularExpression rx("div class=\"box header-right\"><span>(.*)</span");
   QRegularExpressionMatch match = rx.match(output);
   QVERIFY(match.hasMatch());
   QCOMPARE(match.captured(1), QLocale().toString(QDate::currentDate()));
