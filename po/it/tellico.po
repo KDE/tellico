@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-01 00:40+0000\n"
-"PO-Revision-Date: 2024-09-14 15:50+0200\n"
+"PO-Revision-Date: 2024-12-02 15:32+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -299,7 +299,7 @@ msgstr "Collezione personalizzata"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "Il nome interno del campo è <em>%1</em>."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -2810,31 +2810,31 @@ msgstr "Seleziona il modello da eliminare:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "Le immagini sono attualmente salvate dentro <em>%1</em>"
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "Le immagini sono attualmente salvate in <em>%1</em>"
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Le immagini verranno spostate da <em>%1</em> a <em>%2</em>"
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Le immagini verranno spostate da <em>%1</em> a <em>%2</em>"
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Le immagini verranno spostate da <em>%1</em> a <em>%2</em>"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:560 src/fetchdialog.cpp:621
@@ -6258,10 +6258,9 @@ msgstr ""
 "selezionato.</qt>"
 
 #: src/mainwindow.cpp:979
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - un software libero e semplice per la gestione di collezioni"
+msgstr "Un software per la gestione di collezioni, libero e semplice"
 
 #: src/mainwindow.cpp:981
 #, kde-format
@@ -6290,6 +6289,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"Maggiori informazioni possono essere trovate nella <a href=\"help:/tellico"
+"\">documentazione</a>. Potresti anche <a href=\"tc:///disable_welcome"
+"\">disabilitare questa schermata di benvenuto</a>."
 
 #: src/mainwindow.cpp:1199
 #, kde-format
