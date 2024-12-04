@@ -82,6 +82,17 @@
 >paragrafo</emphasis
 > non ammette valori multipli, né viene formattato automaticamente. Non può essere usato per il raggruppamento. Estratti, trame, riassunti o recensioni andrebbero inserite utilizzando questo tipo di campo.</para>
 
+<para
+>Gli avanzamenti di riga sono sostituiti da un'interruzione HTML, in modo da assicurare una formattazione coerente. Per disabilitare questa sostituzione, aggiungi una proprietà del campo con un valore <emphasis
+>replace-line-feeds</emphasis
+> : <emphasis
+>false</emphasis
+>. Il controllo ortografico può essere disabilitato impostando una proprietà con un valore <emphasis
+>spellcheck</emphasis
+> : <emphasis
+>false</emphasis
+>. </para>
+
 </sect2>
 
 <sect2 id="choice">
