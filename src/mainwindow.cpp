@@ -158,6 +158,7 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
     m_bibtexKeyDlg(nullptr),
     m_fetchDlg(nullptr),
     m_reportDlg(nullptr),
+    m_printHandler(nullptr),
     m_queuedFilters(0),
     m_initialized(false),
     m_newDocument(true),
@@ -1576,7 +1577,7 @@ void MainWindow::doPrint(PrintAction action_) {
   }
 
   if(!m_printHandler) {
-    m_printHandler.reset(new PrintHandler);
+    m_printHandler = new PrintHandler(this);
   }
   m_printHandler->setEntries(m_detailedView->visibleEntries());
   m_printHandler->setColumns(m_detailedView->visibleColumns());

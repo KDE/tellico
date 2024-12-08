@@ -50,41 +50,8 @@ class QWebEngineView {};
 
 using Tellico::PrintHandler;
 
-#ifndef USE_KHTML
-class WebPagePrintable : public QWebEnginePage {
-Q_OBJECT
-
-public:
-  WebPagePrintable(QWebEngineView* parent) : QWebEnginePage(parent) {
-    QWebEngineSettings* settings = this->settings();
-    settings->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
-    settings->setAttribute(QWebEngineSettings::PluginsEnabled, false);
-    settings->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, true);
-    settings->setAttribute(QWebEngineSettings::LocalContentCanAccessFileUrls, true);
-  }
-
-public Q_SLOTS:
-  void printDocument(QPrinter* printer) {
-    Tellico::GUI::CursorSaver cs(Qt::WaitCursor);
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    QEventLoop loop;
-    print(printer, [&](bool success) {
-      if(success) {
-        myLog() << "Printing completed";
-      } else {
-        myLog() << "Printing failed";
-      }
-      loop.quit();
-    });
-    loop.exec();
-#else
-    static_cast<QWebEngineView*>(parent())->print(printer);
-#endif
-  }
-};
-#endif
-
-PrintHandler::PrintHandler() : m_inPrintPreview(false) {
+PrintHandler::PrintHandler(QObject* parent_) : QObject(parent_)
+    , m_inPrintPreview(false) {
 }
 
 PrintHandler::~PrintHandler() {
@@ -134,37 +101,17 @@ void PrintHandler::print() {
   // don't have busy cursor when showing the print dialog
   cs.restore();
 
-  QPointer<QPrintDialog> dialog = new QPrintDialog(m_printer.get(), m_view.get());
-  if(dialog->exec() != QDialog::Accepted) {
+  QPrintDialog dialog(m_printer.get(), m_view.get());
+  if(dialog.exec() != QDialog::Accepted) {
     return;
   }
 
-  auto page = static_cast<WebPagePrintable*>(m_view->page());
-  if(dialog->printer()->outputFormat() == QPrinter::PdfFormat) {
-    myLog() << "Printing PDF to" << dialog->printer()->outputFileName();
-    page->printToPdf(dialog->printer()->outputFileName(), dialog->printer()->pageLayout());
-    QObject::connect(page, &QWebEnginePage::pdfPrintingFinished, dialog, [=](const QString&, bool success) {
-      if(success) {
-        myLog() << "Printing to PDF completed";
-      } else {
-        myLog() << "Printing to PDF failed";
-      }
-      delete dialog;
-    });
+  if(dialog.printer()->outputFormat() == QPrinter::PdfFormat) {
+    myLog() << "Printing PDF to" << dialog.printer()->outputFileName();
+    m_view->printToPdf(dialog.printer()->outputFileName(), dialog.printer()->pageLayout());
+    m_waitForResult.exec(QEventLoop::ExcludeUserInputEvents);
   } else {
-    page->printDocument(m_printer.get());
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    QTimer::singleShot(0, dialog, &QObject::deleteLater);
-#else
-    QObject::connect(m_view, &QWebEngineView::printFinished, dialog, [=](bool success) {
-      if(success) {
-        myLog() << "Printing completed";
-      } else {
-        myLog() << "Printing failed";
-      }
-      delete dialog;
-    });
-#endif
+    printDocument(m_printer.get());
   }
 #endif
 }
@@ -180,25 +127,51 @@ void PrintHandler::printPreview() {
   if(!printPrepare()) return;
 
   m_inPrintPreview = true;
-  auto page = static_cast<WebPagePrintable*>(m_view->page());
   m_view->setHtml(m_html, Data::Document::self()->URL());
 
   // don't have busy cursor when showing the dialog
   cs.restore();
 
+  myLog() << "Previewing print job";
   QPrintPreviewDialog preview(m_printer.get(), m_view.get());
   QObject::connect(&preview, &QPrintPreviewDialog::paintRequested,
-                   page, &WebPagePrintable::printDocument);
+                   this, &PrintHandler::printDocument);
   {
     // this is a workaround for ensuring the initial dialog open shows the preview already
     // with Qt 5.15.2, it didn't seem to get previewed initially
-    QList<QPrintPreviewWidget*> list = preview.findChildren<QPrintPreviewWidget*>();
-    QPrintPreviewWidget* w = list.first();
+    auto list = preview.findChildren<QPrintPreviewWidget*>();
+    auto w = list.first();
     if(w) w->updatePreview();
   }
   preview.exec();
   m_inPrintPreview = false;
 #endif
+}
+
+void PrintHandler::printDocument(QPrinter* printer_) {
+  myLog() << "Printing to" << printer_->printerName();
+  m_view->print(printer_);
+  // User input in the print preview dialog while we're waiting on a print task
+  // can mess up the internal state and cause a crash.
+  m_waitForResult.exec(QEventLoop::ExcludeUserInputEvents);
+}
+
+void PrintHandler::printFinished(bool success_) {
+  if(success_) {
+    myLog() << "Printing completed";
+  } else {
+    myLog() << "Printing failed";
+  }
+  m_waitForResult.quit();
+}
+
+void PrintHandler::pdfPrintFinished(const QString&, bool success_) {
+  if(success_) {
+    myLog() << "PDF printing completed";
+  } else {
+    myLog() << "PDF printing failed";
+  }
+  m_waitForResult.quit();
 }
 
 QString PrintHandler::generateHtml() const {
@@ -235,23 +208,25 @@ bool PrintHandler::printPrepare() {
 #ifndef USE_KHTML
   if(!m_view) {
     m_view.reset(new QWebEngineView);
-    m_view->setPage(new WebPagePrintable(m_view.get()));
+    connect(m_view.get(), &QWebEngineView::printFinished, this, &PrintHandler::printFinished);
+    connect(m_view.get(), &QWebEngineView::pdfPrintingFinished, this, &PrintHandler::pdfPrintFinished);
+
+    auto settings = m_view->settings();
+    settings->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
+    settings->setAttribute(QWebEngineSettings::PluginsEnabled, false);
+    settings->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, true);
+    settings->setAttribute(QWebEngineSettings::LocalContentCanAccessFileUrls, true);
   }
 
   if(!m_printer) {
     auto info = QPrinterInfo::defaultPrinter();
     if(info.isNull()) {
-      m_printer.reset(new QPrinter);
+      m_printer.reset(new QPrinter(QPrinter::HighResolution));
     } else {
-      m_printer.reset(new QPrinter(info));
+      m_printer.reset(new QPrinter(info, QPrinter::HighResolution));
     }
-    m_printer->setResolution(300);
     m_printer->setCreator(QStringLiteral("Tellico/%1").arg(QStringLiteral(TELLICO_VERSION)));
   }
 #endif
   return true;
 }
-
-#ifndef USE_KHTML
-#include "printhandler.moc"
-#endif

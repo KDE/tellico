@@ -511,7 +511,7 @@ private:
   BibtexKeyDialog* m_bibtexKeyDlg;
   FetchDialog* m_fetchDlg;
   ReportDialog* m_reportDlg;
-  std::unique_ptr<PrintHandler> m_printHandler;
+  PrintHandler* m_printHandler;
 
   QList<QAction*> m_fetchActions;
 

@@ -1,3 +1,11 @@
+2024-12-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed print preview (Bug 496816).
+
+2024-12-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug when printing (Bug 496648).
+
 2024-11-13  Robby Stephenson  <robby@periapsis.org>
 
 	* Added option to disable the welcome screen.
