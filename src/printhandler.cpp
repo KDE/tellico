@@ -22,6 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
 #include "printhandler.h"
 #include "document.h"
 #include "controller.h"
@@ -34,6 +35,7 @@
 #include <KHTMLPart>
 #include <KHTMLView>
 #include <KAboutData>
+class QWebEngineView {};
 #else
 #include <QWebEngineView>
 #include <QWebEnginePage>
@@ -66,7 +68,14 @@ public Q_SLOTS:
     Tellico::GUI::CursorSaver cs(Qt::WaitCursor);
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     QEventLoop loop;
-    print(printer, [&](bool) { loop.quit(); });
+    print(printer, [&](bool success) {
+      if(success) {
+        myLog() << "Printing completed";
+      } else {
+        myLog() << "Printing failed";
+      }
+      loop.quit();
+    });
     loop.exec();
 #else
     static_cast<QWebEngineView*>(parent())->print(printer);
@@ -75,8 +84,7 @@ public Q_SLOTS:
 };
 #endif
 
-PrintHandler::PrintHandler(QObject* parent_) : QObject(parent_)
-    , m_inPrintPreview(false) {
+PrintHandler::PrintHandler() : m_inPrintPreview(false) {
 }
 
 PrintHandler::~PrintHandler() {
@@ -94,14 +102,6 @@ void PrintHandler::setColumns(const QStringList& columns_) {
 
 void PrintHandler::print() {
   GUI::CursorSaver cs(Qt::WaitCursor);
-
-  if(m_html.isEmpty()) {
-    m_html = generateHtml();
-    if(m_html.isEmpty()) {
-      myDebug() << "PrintHandler - empty html output";
-      return;
-    }
-  }
 
 #ifdef USE_KHTML
   KHTMLPart w;
@@ -125,27 +125,47 @@ void PrintHandler::print() {
   w.end();
   w.view()->print();
 #else
-  QScopedPointer<QWebEngineView> view(new QWebEngineView);
-  WebPagePrintable* page = new WebPagePrintable(view.data());
-  view->setPage(page);
-  view->setHtml(m_html, Data::Document::self()->URL());
+
+  if(!printPrepare()) return;
+
+  m_view->setHtml(m_html, Data::Document::self()->URL());
+  m_printer->setDocName(Data::Document::self()->URL().fileName());
 
   // don't have busy cursor when showing the print dialog
   cs.restore();
 
-  auto info = QPrinterInfo::defaultPrinter();
-  QScopedPointer<QPrinter> printer;
-  if(info.isNull()) {
-    printer.reset(new QPrinter);
-  } else {
-    printer.reset(new QPrinter(info));
-  }
-  printer->setResolution(300);
-  QPointer<QPrintDialog> dialog = new QPrintDialog(printer.data(), view.data());
+  QPointer<QPrintDialog> dialog = new QPrintDialog(m_printer.get(), m_view.get());
   if(dialog->exec() != QDialog::Accepted) {
     return;
   }
-  page->printDocument(printer.data());
+
+  auto page = static_cast<WebPagePrintable*>(m_view->page());
+  if(dialog->printer()->outputFormat() == QPrinter::PdfFormat) {
+    myLog() << "Printing PDF to" << dialog->printer()->outputFileName();
+    page->printToPdf(dialog->printer()->outputFileName(), dialog->printer()->pageLayout());
+    QObject::connect(page, &QWebEnginePage::pdfPrintingFinished, dialog, [=](const QString&, bool success) {
+      if(success) {
+        myLog() << "Printing to PDF completed";
+      } else {
+        myLog() << "Printing to PDF failed";
+      }
+      delete dialog;
+    });
+  } else {
+    page->printDocument(m_printer.get());
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+    QTimer::singleShot(0, dialog, &QObject::deleteLater);
+#else
+    QObject::connect(m_view, &QWebEngineView::printFinished, dialog, [=](bool success) {
+      if(success) {
+        myLog() << "Printing completed";
+      } else {
+        myLog() << "Printing failed";
+      }
+      delete dialog;
+    });
+#endif
+  }
 #endif
 }
 
@@ -157,36 +177,20 @@ void PrintHandler::printPreview() {
   }
   GUI::CursorSaver cs(Qt::WaitCursor);
 
-  if(m_html.isEmpty()) {
-    m_html = generateHtml();
-    if(m_html.isEmpty()) {
-      myDebug() << "PrintHandler - empty html output in preview";
-      return;
-    }
-  }
-
-  QScopedPointer<QWebEngineView> view(new QWebEngineView);
-  WebPagePrintable* page = new WebPagePrintable(view.data());
-  view->setPage(page);
-  view->setHtml(m_html, Data::Document::self()->URL());
-
-  // don't have busy cursor when showing the print dialog
-  cs.restore();
+  if(!printPrepare()) return;
 
   m_inPrintPreview = true;
-  auto info = QPrinterInfo::defaultPrinter();
-  QScopedPointer<QPrinter> printer;
-  if(info.isNull()) {
-    printer.reset(new QPrinter);
-  } else {
-    printer.reset(new QPrinter(info));
-  }
-  printer->setResolution(300);
-  QPrintPreviewDialog preview(printer.data(), view.data());
-  connect(&preview, &QPrintPreviewDialog::paintRequested,
-          page, &WebPagePrintable::printDocument);
+  auto page = static_cast<WebPagePrintable*>(m_view->page());
+  m_view->setHtml(m_html, Data::Document::self()->URL());
+
+  // don't have busy cursor when showing the dialog
+  cs.restore();
+
+  QPrintPreviewDialog preview(m_printer.get(), m_view.get());
+  QObject::connect(&preview, &QPrintPreviewDialog::paintRequested,
+                   page, &WebPagePrintable::printDocument);
   {
-    // this is a workaround for ensuring the initial dailog open shows the preview already
+    // this is a workaround for ensuring the initial dialog open shows the preview already
     // with Qt 5.15.2, it didn't seem to get previewed initially
     QList<QPrintPreviewWidget*> list = preview.findChildren<QPrintPreviewWidget*>();
     QPrintPreviewWidget* w = list.first();
@@ -217,6 +221,35 @@ QString PrintHandler::generateHtml() const {
   }
 
   return exporter.text();
+}
+
+bool PrintHandler::printPrepare() {
+  if(m_html.isEmpty()) {
+    m_html = generateHtml();
+    if(m_html.isEmpty()) {
+      myDebug() << "PrintHandler - empty html output";
+      return false;
+    }
+  }
+
+#ifndef USE_KHTML
+  if(!m_view) {
+    m_view.reset(new QWebEngineView);
+    m_view->setPage(new WebPagePrintable(m_view.get()));
+  }
+
+  if(!m_printer) {
+    auto info = QPrinterInfo::defaultPrinter();
+    if(info.isNull()) {
+      m_printer.reset(new QPrinter);
+    } else {
+      m_printer.reset(new QPrinter(info));
+    }
+    m_printer->setResolution(300);
+    m_printer->setCreator(QStringLiteral("Tellico/%1").arg(QStringLiteral(TELLICO_VERSION)));
+  }
+#endif
+  return true;
 }
 
 #ifndef USE_KHTML

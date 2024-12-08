@@ -1575,13 +1575,15 @@ void MainWindow::doPrint(PrintAction action_) {
     }
   }
 
-  PrintHandler printHandler(this);
-  printHandler.setEntries(m_detailedView->visibleEntries());
-  printHandler.setColumns(m_detailedView->visibleColumns());
+  if(!m_printHandler) {
+    m_printHandler.reset(new PrintHandler);
+  }
+  m_printHandler->setEntries(m_detailedView->visibleEntries());
+  m_printHandler->setColumns(m_detailedView->visibleColumns());
   if(action_ == Print) {
-    printHandler.print();
+    m_printHandler->print();
   } else {
-    printHandler.printPreview();
+    m_printHandler->printPreview();
   }
 
   StatusBar::self()->clearStatus();

@@ -428,16 +428,31 @@ void ReportDialog::slotPrint() {
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       GUI::CursorSaver cs(Qt::WaitCursor);
       QEventLoop loop;
-      m_webView->page()->print(printer, [=, &loop](bool success) {
-        if(success) {
-          myLog() << "Printing completed";
-        } else {
-          myLog() << "Printing failed";
-        }
-        delete dialog;
-        delete printer;
-        loop.quit();
-      });
+      if(dialog->printer()->outputFormat() == QPrinter::PdfFormat) {
+        myLog() << "Printing PDF to" << dialog->printer()->outputFileName();
+        m_webView->page()->printToPdf(dialog->printer()->outputFileName(), dialog->printer()->pageLayout());
+        QObject::connect(m_webView->page(), &QWebEnginePage::pdfPrintingFinished, dialog, [&](const QString&, bool success) {
+          if(success) {
+            myLog() << "Printing report to PDF completed";
+          } else {
+            myLog() << "Printing report to PDF failed";
+          }
+          delete dialog;
+          delete printer;
+          loop.quit();
+        });
+      } else {
+        m_webView->page()->print(printer, [=, &loop](bool success) {
+          if(success) {
+            myLog() << "Printing report completed";
+          } else {
+            myLog() << "Printing report failed";
+          }
+          delete dialog;
+          delete printer;
+          loop.quit();
+        });
+      }
       loop.exec();
 #else
       m_webView->print(printer);

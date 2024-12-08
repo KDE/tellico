@@ -74,6 +74,7 @@ namespace Tellico {
   class ReportDialog;
   class StatusBar;
   class DropHandler;
+  class PrintHandler;
 
 /**
  * The base class for Tellico application windows. It sets up the main
@@ -510,6 +511,7 @@ private:
   BibtexKeyDialog* m_bibtexKeyDlg;
   FetchDialog* m_fetchDlg;
   ReportDialog* m_reportDlg;
+  std::unique_ptr<PrintHandler> m_printHandler;
 
   QList<QAction*> m_fetchActions;
 
