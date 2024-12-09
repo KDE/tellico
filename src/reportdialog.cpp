@@ -400,6 +400,7 @@ void ReportDialog::slotPrint() {
     printer.setResolution(600);
     QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, this);
     if(dialog->exec() == QDialog::Accepted) {
+      myLog() << "Printing" << m_templateCombo->currentText() << "chart";
       QWidget* widget = m_reportView->currentWidget();
       // there might be a widget inside a scroll area
       if(QScrollArea* scrollArea = qobject_cast<QScrollArea*>(widget)) {
@@ -429,7 +430,7 @@ void ReportDialog::slotPrint() {
       GUI::CursorSaver cs(Qt::WaitCursor);
       QEventLoop loop;
       if(dialog->printer()->outputFormat() == QPrinter::PdfFormat) {
-        myLog() << "Printing PDF to" << dialog->printer()->outputFileName();
+        myLog() << "Printing" << m_templateCombo->currentText() << "as PDF to" << dialog->printer()->outputFileName();
         m_webView->page()->printToPdf(dialog->printer()->outputFileName(), dialog->printer()->pageLayout());
         QObject::connect(m_webView->page(), &QWebEnginePage::pdfPrintingFinished, dialog, [&](const QString&, bool success) {
           if(success) {
@@ -442,6 +443,7 @@ void ReportDialog::slotPrint() {
           loop.quit();
         });
       } else {
+        myLog() << "Printing" << m_templateCombo->currentText() << "report";
         m_webView->page()->print(printer, [=, &loop](bool success) {
           if(success) {
             myLog() << "Printing report completed";

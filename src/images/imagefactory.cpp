@@ -425,7 +425,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if(configImgDir && configImgDir->hasImage(id_)) {
     const Data::Image& img2 = factory->addCachedImageImpl(id_, configLoc);
     if(!img2.isNull()) {
-      myLog() << "Found image in configured location" << configImgDir->dir().toDisplayString(QUrl::PreferLocalFile) << id_;
+//      myLog() << "Found image in configured location" << configImgDir->dir().toDisplayString(QUrl::PreferLocalFile) << id_;
       return img2;
     } else {
       myDebug() << "Failed to load" << id_ << "from configured" << configImgDir->dir().toDisplayString(QUrl::PreferLocalFile);
