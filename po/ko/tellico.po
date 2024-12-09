@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-01 00:40+0000\n"
+"POT-Creation-Date: 2024-12-09 00:41+0000\n"
 "PO-Revision-Date: 2024-08-21 00:09+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -165,7 +165,7 @@ msgstr "이름"
 msgid "Collection Size"
 msgstr "소장품 규모"
 
-#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1686
+#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1689
 #, kde-format
 msgid "Total entries: %1"
 msgstr "전체 항목: %1"
@@ -2741,8 +2741,8 @@ msgstr "XSL 파일"
 msgid "Template Packages"
 msgstr "템플릿 패키지"
 
-#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1317
-#: src/mainwindow.cpp:1493 src/reportdialog.cpp:463 src/reportdialog.cpp:478
+#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1318
+#: src/mainwindow.cpp:1494 src/reportdialog.cpp:478 src/reportdialog.cpp:493
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -2830,22 +2830,22 @@ msgstr "여러 항목 삭제"
 msgid "&Sort By"
 msgstr "정렬 기준(&S)"
 
-#: src/controller.cpp:594 src/mainwindow.cpp:611
+#: src/controller.cpp:594 src/mainwindow.cpp:612
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "항목 편집(&E)..."
 
-#: src/controller.cpp:595 src/mainwindow.cpp:618
+#: src/controller.cpp:595 src/mainwindow.cpp:619
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "항목 복제(&U)"
 
-#: src/controller.cpp:596 src/mainwindow.cpp:712
+#: src/controller.cpp:596 src/mainwindow.cpp:713
 #, kde-format
 msgid "&Update Entry"
 msgstr "항목 업데이트(&U)"
 
-#: src/controller.cpp:597 src/mainwindow.cpp:625
+#: src/controller.cpp:597 src/mainwindow.cpp:626
 #, kde-format
 msgid "&Delete Entry"
 msgstr "항목 삭제(&D)"
@@ -2932,7 +2932,7 @@ msgstr "모든 열 표시"
 msgid "Hide All Columns"
 msgstr "모든 열 숨기기"
 
-#: src/document.cpp:212 src/mainwindow.cpp:1432
+#: src/document.cpp:212 src/mainwindow.cpp:1433
 #, kde-format
 msgid "Saving file..."
 msgstr "파일 저장 중..."
@@ -2994,12 +2994,12 @@ msgid "Save Entry"
 msgstr "항목 저장"
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1202 src/mainwindow.cpp:1220
+#: src/mainwindow.cpp:1203 src/mainwindow.cpp:1221
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "저장되지 않은 변경 사항"
 
-#: src/entryiconview.cpp:61 src/mainwindow.cpp:885
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:886
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3068,7 +3068,7 @@ msgstr "<b>%1</b> 업데이트 중..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico가 기본 항목 스타일시트를 찾을 수 없습니다."
 
-#: src/entryview.cpp:354 src/mainwindow.cpp:1839
+#: src/entryview.cpp:354 src/mainwindow.cpp:1842
 #, kde-format
 msgid "Please check your installation."
 msgstr "설치 상태를 확인하십시오."
@@ -4385,7 +4385,7 @@ msgstr ""
 "z39.50 데이터베이스에서 사용하는 인증 암호를 입력하십시오. 대부분의 서버에는 "
 "필요하지 않습니다. 암호는 Tellico 설정 파일에 일반 텍스트로 저장됩니다."
 
-#: src/fetchdialog.cpp:138 src/mainwindow.cpp:601
+#: src/fetchdialog.cpp:138 src/mainwindow.cpp:602
 #, kde-format
 msgid "Internet Search"
 msgstr "인터넷 검색"
@@ -4723,8 +4723,8 @@ msgstr "필터 이름:"
 msgid "&Save Filter"
 msgstr "필터 저장(&S)"
 
-#: src/filterview.cpp:190 src/mainwindow.cpp:574 src/mainwindow.cpp:790
-#: src/mainwindow.cpp:808
+#: src/filterview.cpp:190 src/mainwindow.cpp:575 src/mainwindow.cpp:791
+#: src/mainwindow.cpp:809
 #, kde-format
 msgid "Filter"
 msgstr "필터"
@@ -4760,8 +4760,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "그룹"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1129 src/mainwindow.cpp:1774
-#: src/mainwindow.cpp:1808 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1130 src/mainwindow.cpp:1777
+#: src/mainwindow.cpp:1811 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "사람"
@@ -5057,19 +5057,19 @@ msgstr ""
 "가져온 파일의 내용을 현재 소장품에 병합합니다. 소장품 형식이 일치하는 경우에"
 "만 가능합니다. 병합하려면 항목이 정확히 일치해야 합니다."
 
-#: src/importdialog.cpp:150 src/mainwindow.cpp:374
+#: src/importdialog.cpp:150 src/mainwindow.cpp:375
 #, kde-format
 msgid "&Import"
 msgstr "가져오기(&I)"
 
-#: src/importdialog.cpp:377 src/mainwindow.cpp:1313 src/mainwindow.cpp:1491
+#: src/importdialog.cpp:377 src/mainwindow.cpp:1314 src/mainwindow.cpp:1492
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico 파일"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1315 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1316 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "XML 파일"
@@ -5308,867 +5308,867 @@ msgstr "<filename>으로 로그 출력 기록"
 msgid "File to open"
 msgstr "열려는 파일"
 
-#: src/mainwindow.cpp:258
+#: src/mainwindow.cpp:259
 #, kde-format
 msgid "New Collection"
 msgstr "새 소장품"
 
-#: src/mainwindow.cpp:260
+#: src/mainwindow.cpp:261
 #, kde-format
 msgid "Create a new collection"
 msgstr "새 소장품 만들기"
 
-#: src/mainwindow.cpp:279
+#: src/mainwindow.cpp:280
 #, kde-format
 msgid "New &Book Collection"
 msgstr "새 도서 소장품(&B)"
 
-#: src/mainwindow.cpp:280
+#: src/mainwindow.cpp:281
 #, kde-format
 msgid "Create a new book collection"
 msgstr "새 도서 소장품 만들기"
 
-#: src/mainwindow.cpp:282
+#: src/mainwindow.cpp:283
 #, kde-format
 msgid "New B&ibliography"
 msgstr "새 서지 정보 목록(&I)"
 
-#: src/mainwindow.cpp:283
+#: src/mainwindow.cpp:284
 #, kde-format
 msgid "Create a new bibtex bibliography"
 msgstr "새 Bibtex 서지 정보 목록 만들기"
 
-#: src/mainwindow.cpp:285
+#: src/mainwindow.cpp:286
 #, kde-format
 msgid "New &Comic Book Collection"
 msgstr "새 만화책 소장품(&C)"
 
-#: src/mainwindow.cpp:286
+#: src/mainwindow.cpp:287
 #, kde-format
 msgid "Create a new comic book collection"
 msgstr "새 만화책 소장품 만들기"
 
-#: src/mainwindow.cpp:288
+#: src/mainwindow.cpp:289
 #, kde-format
 msgid "New &Video Collection"
 msgstr "새 동영상 소장품(&V)"
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:290
 #, kde-format
 msgid "Create a new video collection"
 msgstr "새 동영상 소장품 만들기"
 
-#: src/mainwindow.cpp:291
+#: src/mainwindow.cpp:292
 #, kde-format
 msgid "New &Music Collection"
 msgstr "새 음악 소장품(&M)"
 
-#: src/mainwindow.cpp:292
+#: src/mainwindow.cpp:293
 #, kde-format
 msgid "Create a new music collection"
 msgstr "새 음악 소장품 만들기"
 
-#: src/mainwindow.cpp:294
+#: src/mainwindow.cpp:295
 #, kde-format
 msgid "New C&oin Collection"
 msgstr "새 동전 소장품(&O)"
 
-#: src/mainwindow.cpp:295
+#: src/mainwindow.cpp:296
 #, kde-format
 msgid "Create a new coin collection"
 msgstr "새 동전 소장품 만들기"
 
-#: src/mainwindow.cpp:297
+#: src/mainwindow.cpp:298
 #, kde-format
 msgid "New &Stamp Collection"
 msgstr "새 우표 소장품(&S)"
 
-#: src/mainwindow.cpp:298
+#: src/mainwindow.cpp:299
 #, kde-format
 msgid "Create a new stamp collection"
 msgstr "새 우표 소장품 만들기"
 
-#: src/mainwindow.cpp:300
+#: src/mainwindow.cpp:301
 #, kde-format
 msgid "New C&ard Collection"
 msgstr "새 카드 소장품(&A)"
 
-#: src/mainwindow.cpp:301
+#: src/mainwindow.cpp:302
 #, kde-format
 msgid "Create a new trading card collection"
 msgstr "새 트레이딩 카드 소장품 만들기"
 
-#: src/mainwindow.cpp:303
+#: src/mainwindow.cpp:304
 #, kde-format
 msgid "New &Wine Collection"
 msgstr "새 와인 소장품(&W)"
 
-#: src/mainwindow.cpp:304
+#: src/mainwindow.cpp:305
 #, kde-format
 msgid "Create a new wine collection"
 msgstr "새 와인 소장품 만들기"
 
-#: src/mainwindow.cpp:306
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "New Video &Game Collection"
 msgstr "새 비디오 게임 소장품(&G)"
 
-#: src/mainwindow.cpp:307
+#: src/mainwindow.cpp:308
 #, kde-format
 msgid "Create a new video game collection"
 msgstr "새 비디오 게임 소장품 만들기"
 
-#: src/mainwindow.cpp:309
+#: src/mainwindow.cpp:310
 #, kde-format
 msgid "New Boa&rd Game Collection"
 msgstr "새 보드 게임 소장품(&R)"
 
-#: src/mainwindow.cpp:310
+#: src/mainwindow.cpp:311
 #, kde-format
 msgid "Create a new board game collection"
 msgstr "새 보드 게임 소장품 만들기"
 
-#: src/mainwindow.cpp:312
+#: src/mainwindow.cpp:313
 #, kde-format
 msgid "New &File Catalog"
 msgstr "새 파일 카탈로그(&F)"
 
-#: src/mainwindow.cpp:313
+#: src/mainwindow.cpp:314
 #, kde-format
 msgid "Create a new file catalog"
 msgstr "새 파일 카탈로그 만들기"
 
-#: src/mainwindow.cpp:316
+#: src/mainwindow.cpp:317
 #, kde-format
 msgid "New C&ustom Collection"
 msgstr "새 사용자 정의 소장품(&U)"
 
-#: src/mainwindow.cpp:317
+#: src/mainwindow.cpp:318
 #, kde-format
 msgid "Create a new custom collection"
 msgstr "새 사용자 정의 소장품 만들기"
 
-#: src/mainwindow.cpp:328
+#: src/mainwindow.cpp:329
 #, kde-format
 msgid "Open an existing document"
 msgstr "기존 문서 열기"
 
-#: src/mainwindow.cpp:330
+#: src/mainwindow.cpp:331
 #, kde-format
 msgid "Open a recently used file"
 msgstr "최근에 사용한 파일 열기"
 
-#: src/mainwindow.cpp:332
+#: src/mainwindow.cpp:333
 #, kde-format
 msgid "Save the document"
 msgstr "문서 저장"
 
-#: src/mainwindow.cpp:334
+#: src/mainwindow.cpp:335
 #, kde-format
 msgid "Save the document as a different file..."
 msgstr "문서를 다른 파일로 저장..."
 
-#: src/mainwindow.cpp:338
+#: src/mainwindow.cpp:339
 #, kde-format
 msgid "Save As Template..."
 msgstr "템플릿으로 저장..."
 
-#: src/mainwindow.cpp:340
+#: src/mainwindow.cpp:341
 #, kde-format
 msgid "Save as a collection template"
 msgstr "소장품 템플릿으로 저장"
 
-#: src/mainwindow.cpp:343
+#: src/mainwindow.cpp:344
 #, kde-format
 msgid "Print the contents of the collection..."
 msgstr "소장품 내용 인쇄..."
 
-#: src/mainwindow.cpp:359
+#: src/mainwindow.cpp:360
 #, kde-format
 msgid "Preview the contents of the collection..."
 msgstr "소장품 내용 미리 보기..."
 
-#: src/mainwindow.cpp:363
+#: src/mainwindow.cpp:364
 #, kde-format
 msgid "Quit the application"
 msgstr "앱 끝내기"
 
-#: src/mainwindow.cpp:376
+#: src/mainwindow.cpp:377
 #, kde-format
 msgid "Import the collection data from other formats"
 msgstr "다른 형식으로 된 수집 데이터 가져오기"
 
-#: src/mainwindow.cpp:392
+#: src/mainwindow.cpp:393
 #, kde-format
 msgid "Import Tellico Data..."
 msgstr "Tellico 데이터 가져오기..."
 
-#: src/mainwindow.cpp:393
+#: src/mainwindow.cpp:394
 #, kde-format
 msgid "Import another Tellico data file"
 msgstr "다른 Tellico 데이터 파일 가져오기"
 
-#: src/mainwindow.cpp:396
+#: src/mainwindow.cpp:397
 #, kde-format
 msgid "Import CSV Data..."
 msgstr "CSV 데이터 가져오기..."
 
-#: src/mainwindow.cpp:397
+#: src/mainwindow.cpp:398
 #, kde-format
 msgid "Import a CSV file"
 msgstr "CSV 파일 가져오기"
 
-#: src/mainwindow.cpp:399
+#: src/mainwindow.cpp:400
 #, kde-format
 msgid "Import MODS Data..."
 msgstr "MODS 데이터 가져오기..."
 
-#: src/mainwindow.cpp:400
+#: src/mainwindow.cpp:401
 #, kde-format
 msgid "Import a MODS data file"
 msgstr "MODS 데이터 파일 가져오기"
 
-#: src/mainwindow.cpp:402
+#: src/mainwindow.cpp:403
 #, kde-format
 msgid "Import Alexandria Data..."
 msgstr "Alexandria 데이터 가져오기..."
 
-#: src/mainwindow.cpp:403
+#: src/mainwindow.cpp:404
 #, kde-format
 msgid "Import data from the Alexandria book collection manager"
 msgstr "Alexandria 도서 소장품 관리 도구에서 데이터 가져오기"
 
-#: src/mainwindow.cpp:406
+#: src/mainwindow.cpp:407
 #, kde-format
 msgid "Import Delicious Library Data..."
 msgstr "Delicious 라이브러리 데이터 가져오기..."
 
-#: src/mainwindow.cpp:407
+#: src/mainwindow.cpp:408
 #, kde-format
 msgid "Import data from Delicious Library"
 msgstr "Delicious 라이브러리에서 데이터 가져오기"
 
-#: src/mainwindow.cpp:410
+#: src/mainwindow.cpp:411
 #, kde-format
 msgid "Import Collectorz Data..."
 msgstr "Collectorz 데이터 가져오기..."
 
-#: src/mainwindow.cpp:411
+#: src/mainwindow.cpp:412
 #, kde-format
 msgid "Import data from Collectorz"
 msgstr "Collectorz에서 데이터 가져오기"
 
-#: src/mainwindow.cpp:414
+#: src/mainwindow.cpp:415
 #, kde-format
 msgid "Import Data Crow Data..."
 msgstr "Data Crow 데이터 가져오기..."
 
-#: src/mainwindow.cpp:415
+#: src/mainwindow.cpp:416
 #, kde-format
 msgid "Import data from Data Crow"
 msgstr "Data Crow에서 데이터 가져오기"
 
-#: src/mainwindow.cpp:418
+#: src/mainwindow.cpp:419
 #, kde-format
 msgid "Import Referencer Data..."
 msgstr "Referencer 데이터 가져오기..."
 
-#: src/mainwindow.cpp:419
+#: src/mainwindow.cpp:420
 #, kde-format
 msgid "Import data from Referencer"
 msgstr "Referencer에서 데이터 가져오기"
 
-#: src/mainwindow.cpp:422
+#: src/mainwindow.cpp:423
 #, kde-format
 msgid "Import Bibtex Data..."
 msgstr "Bibtex 데이터 가져오기..."
 
-#: src/mainwindow.cpp:423
+#: src/mainwindow.cpp:424
 #, kde-format
 msgid "Import a bibtex bibliography file"
 msgstr "Bibtex 참고문헌 목록 파일 가져오기"
 
-#: src/mainwindow.cpp:428
+#: src/mainwindow.cpp:429
 #, kde-format
 msgid "Import Bibtexml Data..."
 msgstr "Bibtexml 데이터 가져오기..."
 
-#: src/mainwindow.cpp:429
+#: src/mainwindow.cpp:430
 #, kde-format
 msgid "Import a Bibtexml bibliography file"
 msgstr "Bibtexml 서지 정보 목록 파일 가져오기"
 
-#: src/mainwindow.cpp:431
+#: src/mainwindow.cpp:432
 #, kde-format
 msgid "Import RIS Data..."
 msgstr "RIS 데이터 가져오기..."
 
-#: src/mainwindow.cpp:432
+#: src/mainwindow.cpp:433
 #, kde-format
 msgid "Import an RIS reference file"
 msgstr "RIS 참조 파일 가져오기"
 
-#: src/mainwindow.cpp:434
+#: src/mainwindow.cpp:435
 #, kde-format
 msgid "Import MARC Data..."
 msgstr "MARC 데이터 가져오기..."
 
-#: src/mainwindow.cpp:435
+#: src/mainwindow.cpp:436
 #, kde-format
 msgid "Import MARC data"
 msgstr "MARC 데이터 가져오기"
 
-#: src/mainwindow.cpp:442
+#: src/mainwindow.cpp:443
 #, kde-format
 msgid "Import Goodreads Collection..."
 msgstr "Goodreads 소장품 가져오기..."
 
-#: src/mainwindow.cpp:443
+#: src/mainwindow.cpp:444
 #, kde-format
 msgid "Import a collection from Goodreads.com"
 msgstr "Goodreads.com에서 소장품 가져오기"
 
-#: src/mainwindow.cpp:445
+#: src/mainwindow.cpp:446
 #, kde-format
 msgid "Import LibraryThing Collection..."
 msgstr "LibraryThing 소장품 가져오기..."
 
-#: src/mainwindow.cpp:446
+#: src/mainwindow.cpp:447
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
 msgstr "LibraryThing.com에서 소장품 가져오기"
 
-#: src/mainwindow.cpp:448
+#: src/mainwindow.cpp:449
 #, kde-format
 msgid "Import PDF File..."
 msgstr "PDF 파일 가져오기..."
 
-#: src/mainwindow.cpp:449
+#: src/mainwindow.cpp:450
 #, kde-format
 msgid "Import a PDF file"
 msgstr "PDF 파일 가져오기"
 
-#: src/mainwindow.cpp:451
+#: src/mainwindow.cpp:452
 #, kde-format
 msgid "Import Audio File Metadata..."
 msgstr "오디오 파일 메타데이터 가져오기..."
 
-#: src/mainwindow.cpp:452
+#: src/mainwindow.cpp:453
 #, kde-format
 msgid "Import meta-data from audio files"
 msgstr "오디오 파일에서 메타데이터 가져오기"
 
-#: src/mainwindow.cpp:457
+#: src/mainwindow.cpp:458
 #, kde-format
 msgid "Import Audio CD Data..."
 msgstr "오디오 CD 데이터 가져오기..."
 
-#: src/mainwindow.cpp:458
+#: src/mainwindow.cpp:459
 #, kde-format
 msgid "Import audio CD information"
 msgstr "오디오 CD 정보 가져오기"
 
-#: src/mainwindow.cpp:463
+#: src/mainwindow.cpp:464
 #, kde-format
 msgid "Import Discogs Collection..."
 msgstr "Discogs 소장품 가져오기..."
 
-#: src/mainwindow.cpp:464
+#: src/mainwindow.cpp:465
 #, kde-format
 msgid "Import a collection from Discogs.com"
 msgstr "Discogs.com에서 소장품 가져오기"
 
-#: src/mainwindow.cpp:466
+#: src/mainwindow.cpp:467
 #, kde-format
 msgid "Import GCstar Data..."
 msgstr "GCstar 데이터 가져오기..."
 
-#: src/mainwindow.cpp:467
+#: src/mainwindow.cpp:468
 #, kde-format
 msgid "Import a GCstar data file"
 msgstr "GCstar 데이터 파일 가져오기"
 
-#: src/mainwindow.cpp:470
+#: src/mainwindow.cpp:471
 #, kde-format
 msgid "Import Griffith Data..."
 msgstr "Griffith 데이터 가져오기..."
 
-#: src/mainwindow.cpp:471
+#: src/mainwindow.cpp:472
 #, kde-format
 msgid "Import a Griffith database"
 msgstr "Griffith 데이터베이스 가져오기"
 
-#: src/mainwindow.cpp:474
+#: src/mainwindow.cpp:475
 #, kde-format
 msgid "Import Ant Movie Catalog Data..."
 msgstr "Ant 동영상 카탈로그 데이터 가져오기..."
 
-#: src/mainwindow.cpp:475
+#: src/mainwindow.cpp:476
 #, kde-format
 msgid "Import an Ant Movie Catalog data file"
 msgstr "Ant 동영상 카탈로그 데이터 파일 가져오기"
 
-#: src/mainwindow.cpp:478
+#: src/mainwindow.cpp:479
 #, kde-format
 msgid "Import BoardGameGeek Collection..."
 msgstr "BoardGameGeek 소장품 가져오기..."
 
-#: src/mainwindow.cpp:479
+#: src/mainwindow.cpp:480
 #, kde-format
 msgid "Import a collection from BoardGameGeek.com"
 msgstr "BoardGameGeek.com에서 소장품 가져오기"
 
-#: src/mainwindow.cpp:481
+#: src/mainwindow.cpp:482
 #, kde-format
 msgid "Import VinoXML..."
 msgstr "VinoXML 가져오기..."
 
-#: src/mainwindow.cpp:482
+#: src/mainwindow.cpp:483
 #, kde-format
 msgid "Import VinoXML data"
 msgstr "VinoXML 데이터 가져오기"
 
-#: src/mainwindow.cpp:484
+#: src/mainwindow.cpp:485
 #, kde-format
 msgid "Import File Listing..."
 msgstr "파일 목록 가져오기..."
 
-#: src/mainwindow.cpp:485
+#: src/mainwindow.cpp:486
 #, kde-format
 msgid "Import information about files in a folder"
 msgstr "폴더의 파일에 대한 정보 가져오기"
 
-#: src/mainwindow.cpp:487
+#: src/mainwindow.cpp:488
 #, kde-format
 msgid "Import XSL Transform..."
 msgstr "XSL 변환 가져오기..."
 
-#: src/mainwindow.cpp:488
+#: src/mainwindow.cpp:489
 #, kde-format
 msgid "Import using an XSL Transform"
 msgstr "XSL 변환을 사용하여 가져오기"
 
-#: src/mainwindow.cpp:501
+#: src/mainwindow.cpp:502
 #, kde-format
 msgid "&Export"
 msgstr "내보내기(&E)"
 
-#: src/mainwindow.cpp:503
+#: src/mainwindow.cpp:504
 #, kde-format
 msgid "Export the collection data to other formats"
 msgstr "수집 데이터를 다른 형식으로 내보내기"
 
-#: src/mainwindow.cpp:519
+#: src/mainwindow.cpp:520
 #, kde-format
 msgid "Export to XML..."
 msgstr "XML로 내보내기..."
 
-#: src/mainwindow.cpp:520
+#: src/mainwindow.cpp:521
 #, kde-format
 msgid "Export to a Tellico XML file"
 msgstr "Tellico XML 파일로 내보내기"
 
-#: src/mainwindow.cpp:523
+#: src/mainwindow.cpp:524
 #, kde-format
 msgid "Export to Zip..."
 msgstr "Zip으로 내보내기..."
 
-#: src/mainwindow.cpp:524
+#: src/mainwindow.cpp:525
 #, kde-format
 msgid "Export to a Tellico Zip file"
 msgstr "Tellico Zip 파일로 내보내기"
 
-#: src/mainwindow.cpp:527
+#: src/mainwindow.cpp:528
 #, kde-format
 msgid "Export to HTML..."
 msgstr "HTML로 내보내기..."
 
-#: src/mainwindow.cpp:528
+#: src/mainwindow.cpp:529
 #, kde-format
 msgid "Export to an HTML file"
 msgstr "HTML 파일로 내보내기"
 
-#: src/mainwindow.cpp:530
+#: src/mainwindow.cpp:531
 #, kde-format
 msgid "Export to CSV..."
 msgstr "CSV로 내보내기..."
 
-#: src/mainwindow.cpp:531
+#: src/mainwindow.cpp:532
 #, kde-format
 msgid "Export to a comma-separated values file"
 msgstr "쉼표로 구분된 값 파일로 내보내기"
 
-#: src/mainwindow.cpp:533
+#: src/mainwindow.cpp:534
 #, kde-format
 msgid "Export to Alexandria..."
 msgstr "Alexandria로 내보내기..."
 
-#: src/mainwindow.cpp:534
+#: src/mainwindow.cpp:535
 #, kde-format
 msgid "Export to an Alexandria library"
 msgstr "Alexandria 라이브러리로 내보내기"
 
-#: src/mainwindow.cpp:537
+#: src/mainwindow.cpp:538
 #, kde-format
 msgid "Export to Bibtex..."
 msgstr "Bibtex로 내보내기..."
 
-#: src/mainwindow.cpp:538
+#: src/mainwindow.cpp:539
 #, kde-format
 msgid "Export to a bibtex file"
 msgstr "Bibtex 파일로 내보내기"
 
-#: src/mainwindow.cpp:540
+#: src/mainwindow.cpp:541
 #, kde-format
 msgid "Export to Bibtexml..."
 msgstr "Bibtexml로 내보내기..."
 
-#: src/mainwindow.cpp:541
+#: src/mainwindow.cpp:542
 #, kde-format
 msgid "Export to a Bibtexml file"
 msgstr "Bibtexml 파일로 내보내기"
 
-#: src/mainwindow.cpp:543
+#: src/mainwindow.cpp:544
 #, kde-format
 msgid "Export to ONIX..."
 msgstr "ONIX로 내보내기..."
 
-#: src/mainwindow.cpp:544
+#: src/mainwindow.cpp:545
 #, kde-format
 msgid "Export to an ONIX file"
 msgstr "ONIX 파일로 내보내기"
 
-#: src/mainwindow.cpp:546
+#: src/mainwindow.cpp:547
 #, kde-format
 msgid "Export to GCstar..."
 msgstr "GCstar로 내보내기..."
 
-#: src/mainwindow.cpp:547
+#: src/mainwindow.cpp:548
 #, kde-format
 msgid "Export to a GCstar data file"
 msgstr "GCstar 데이터 파일로 내보내기"
 
-#: src/mainwindow.cpp:550
+#: src/mainwindow.cpp:551
 #, kde-format
 msgid "Export XSL Transform..."
 msgstr "XSL 변환 내보내기..."
 
-#: src/mainwindow.cpp:551
+#: src/mainwindow.cpp:552
 #, kde-format
 msgid "Export using an XSL Transform"
 msgstr "XSL 변환을 사용하여 내보내기"
 
-#: src/mainwindow.cpp:562
+#: src/mainwindow.cpp:563
 #, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr "선택한 텍스트를 잘라 클립보드에 넣기"
 
-#: src/mainwindow.cpp:564
+#: src/mainwindow.cpp:565
 #, kde-format
 msgid "Copy the selected text to the clipboard"
 msgstr "선택한 텍스트를 클립보드에 복사하기"
 
-#: src/mainwindow.cpp:566
+#: src/mainwindow.cpp:567
 #, kde-format
 msgid "Paste the clipboard contents"
 msgstr "클립보드 내용 붙여넣기"
 
-#: src/mainwindow.cpp:568
+#: src/mainwindow.cpp:569
 #, kde-format
 msgid "Select all the entries in the collection"
 msgstr "소장품의 모든 항목 선택"
 
-#: src/mainwindow.cpp:570
+#: src/mainwindow.cpp:571
 #, kde-format
 msgid "Deselect all the entries in the collection"
 msgstr "소장품의 모든 항목 선택 취소"
 
-#: src/mainwindow.cpp:573
+#: src/mainwindow.cpp:574
 #, kde-format
 msgid "Advanced &Filter..."
 msgstr "고급 필터(&F)..."
 
-#: src/mainwindow.cpp:577 src/mainwindow.cpp:809
+#: src/mainwindow.cpp:578 src/mainwindow.cpp:810
 #, kde-format
 msgid "Filter the collection"
 msgstr "소장품 목록 필터"
 
-#: src/mainwindow.cpp:584
+#: src/mainwindow.cpp:585
 #, kde-format
 msgid "&New Entry..."
 msgstr "새 항목(&N)..."
 
-#: src/mainwindow.cpp:586
+#: src/mainwindow.cpp:587
 #, kde-format
 msgid "New Entry"
 msgstr "새 항목"
 
-#: src/mainwindow.cpp:588
+#: src/mainwindow.cpp:589
 #, kde-format
 msgid "Create a new entry"
 msgstr "새 항목 만들기"
 
-#: src/mainwindow.cpp:590
+#: src/mainwindow.cpp:591
 #, kde-format
 msgid "Add Entry"
 msgstr "항목 추가"
 
-#: src/mainwindow.cpp:600
+#: src/mainwindow.cpp:601
 #, kde-format
 msgid "Internet Search..."
 msgstr "인터넷 검색..."
 
-#: src/mainwindow.cpp:604
+#: src/mainwindow.cpp:605
 #, kde-format
 msgid "Search the internet..."
 msgstr "인터넷 검색..."
 
-#: src/mainwindow.cpp:614
+#: src/mainwindow.cpp:615
 #, kde-format
 msgid "Edit the selected entries"
 msgstr "선택한 항목 편집"
 
-#: src/mainwindow.cpp:621
+#: src/mainwindow.cpp:622
 #, kde-format
 msgid "Copy the selected entries"
 msgstr "선택한 항목 복사"
 
-#: src/mainwindow.cpp:628
+#: src/mainwindow.cpp:629
 #, kde-format
 msgid "Delete the selected entries"
 msgstr "선택한 항목 삭제"
 
-#: src/mainwindow.cpp:632
+#: src/mainwindow.cpp:633
 #, kde-format
 msgid "&Merge Entries"
 msgstr "항목 병합(&M)"
 
-#: src/mainwindow.cpp:636
+#: src/mainwindow.cpp:637
 #, kde-format
 msgid "Merge the selected entries"
 msgstr "선택한 항목 합치기"
 
-#: src/mainwindow.cpp:640
+#: src/mainwindow.cpp:641
 #, kde-format
 msgid "Check-&out..."
 msgstr "체크아웃(&O)..."
 
-#: src/mainwindow.cpp:642
+#: src/mainwindow.cpp:643
 #, kde-format
 msgid "Check-out the selected items"
 msgstr "선택한 항목 체크아웃"
 
-#: src/mainwindow.cpp:645
+#: src/mainwindow.cpp:646
 #, kde-format
 msgid "Check-&in"
 msgstr "체크인(&I)"
 
-#: src/mainwindow.cpp:647
+#: src/mainwindow.cpp:648
 #, kde-format
 msgid "Check-in the selected items"
 msgstr "선택한 항목 체크인"
 
-#: src/mainwindow.cpp:650
+#: src/mainwindow.cpp:651
 #, kde-format
 msgid "&Rename Collection..."
 msgstr "소장품 이름 바꾸기(&R)..."
 
-#: src/mainwindow.cpp:653
+#: src/mainwindow.cpp:654
 #, kde-format
 msgid "Rename the collection"
 msgstr "소장품 이름 바꾸기"
 
-#: src/mainwindow.cpp:656
+#: src/mainwindow.cpp:657
 #, kde-format
 msgid "Collection &Fields..."
 msgstr "소장품 필드(&F)..."
 
-#: src/mainwindow.cpp:657
+#: src/mainwindow.cpp:658
 #, kde-format
 msgid "Fields"
 msgstr "필드"
 
-#: src/mainwindow.cpp:660
+#: src/mainwindow.cpp:661
 #, kde-format
 msgid "Modify the collection fields"
 msgstr "소장품 필드 수정"
 
-#: src/mainwindow.cpp:663
+#: src/mainwindow.cpp:664
 #, kde-format
 msgid "&Generate Reports..."
 msgstr "보고서 생성(&G)..."
 
-#: src/mainwindow.cpp:664
+#: src/mainwindow.cpp:665
 #, kde-format
 msgid "Reports"
 msgstr "보고서"
 
-#: src/mainwindow.cpp:666
+#: src/mainwindow.cpp:667
 #, kde-format
 msgid "Generate collection reports"
 msgstr "소장품 보고서 생성"
 
-#: src/mainwindow.cpp:669
+#: src/mainwindow.cpp:670
 #, kde-format
 msgid "Convert to &Bibliography"
 msgstr "서지 정보 목록으로 변환(&B)"
 
-#: src/mainwindow.cpp:671
+#: src/mainwindow.cpp:672
 #, kde-format
 msgid "Convert a book collection to a bibliography"
 msgstr "도서 소장품을 서지 정보 목록으로 변환"
 
-#: src/mainwindow.cpp:674
+#: src/mainwindow.cpp:675
 #, kde-format
 msgid "String &Macros..."
 msgstr "문자열 매크로(&M)..."
 
-#: src/mainwindow.cpp:676
+#: src/mainwindow.cpp:677
 #, kde-format
 msgid "Edit the bibtex string macros"
 msgstr "Bibtex 문자열 매크로 편집"
 
-#: src/mainwindow.cpp:679
+#: src/mainwindow.cpp:680
 #, kde-format
 msgid "Check for Duplicate Keys..."
 msgstr "중복된 키 확인..."
 
-#: src/mainwindow.cpp:681
+#: src/mainwindow.cpp:682
 #, kde-format
 msgid "Check for duplicate citation keys"
 msgstr "중복된 인용 키가 있는지 확인"
 
-#: src/mainwindow.cpp:691
+#: src/mainwindow.cpp:692
 #, kde-format
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "Bibtex를 클립보드에 복사(&P)"
 
-#: src/mainwindow.cpp:692
+#: src/mainwindow.cpp:693
 #, kde-format
 msgid "Copy bibtex citations to the clipboard"
 msgstr "Bibtex 인용문을 클립보드에 복사"
 
-#: src/mainwindow.cpp:697
+#: src/mainwindow.cpp:698
 #, kde-format
 msgid "Cite Entry in &LyX"
 msgstr "LyX에서 항목 인용(&L)"
 
-#: src/mainwindow.cpp:698
+#: src/mainwindow.cpp:699
 #, kde-format
 msgid "Cite the selected entries in LyX"
 msgstr "LyX에서 선택한 항목 인용"
 
-#: src/mainwindow.cpp:714
+#: src/mainwindow.cpp:715
 #, kde-format
 msgctxt "Update Entry"
 msgid "Update"
 msgstr "업데이트"
 
-#: src/mainwindow.cpp:723
+#: src/mainwindow.cpp:724
 #, kde-format
 msgid "All Sources"
 msgstr "모든 원본"
 
-#: src/mainwindow.cpp:724
+#: src/mainwindow.cpp:725
 #, kde-format
 msgid "Update entry data from all available sources"
 msgstr "사용 가능한 모든 원본에서 항목 데이터 업데이트"
 
-#: src/mainwindow.cpp:735
+#: src/mainwindow.cpp:736
 #, kde-format
 msgid "Unlock Layout"
 msgstr "레이아웃 잠금 해제"
 
-#: src/mainwindow.cpp:736
+#: src/mainwindow.cpp:737
 #, kde-format
 msgid "Unlock the window's layout"
 msgstr "창의 레이아웃 잠금 해제"
 
-#: src/mainwindow.cpp:738
+#: src/mainwindow.cpp:739
 #, kde-format
 msgid "Lock Layout"
 msgstr "레이아웃 잠금"
 
-#: src/mainwindow.cpp:739
+#: src/mainwindow.cpp:740
 #, kde-format
 msgid "Lock the window's layout"
 msgstr "창의 레이아웃 잠금"
 
-#: src/mainwindow.cpp:744
+#: src/mainwindow.cpp:745
 #, kde-format
 msgid "Reset Layout"
 msgstr "레이아웃 초기화"
 
-#: src/mainwindow.cpp:745
+#: src/mainwindow.cpp:746
 #, kde-format
 msgid "Reset the window's layout"
 msgstr "창의 레이아웃 초기화"
 
-#: src/mainwindow.cpp:748
+#: src/mainwindow.cpp:749
 #, kde-format
 msgid "Entry &Editor"
 msgstr "항목 편집기(&E)"
 
-#: src/mainwindow.cpp:750
+#: src/mainwindow.cpp:751
 #, kde-format
 msgid "Enable/disable the editor"
 msgstr "편집기 활성화/비활성화"
 
-#: src/mainwindow.cpp:759
+#: src/mainwindow.cpp:760
 #, kde-format
 msgid "Show Log"
 msgstr "로그 표시"
 
-#: src/mainwindow.cpp:776
+#: src/mainwindow.cpp:777
 #, kde-format
 msgid "Change Grouping"
 msgstr "그룹화 변경"
 
-#: src/mainwindow.cpp:779
+#: src/mainwindow.cpp:780
 #, kde-format
 msgid "&Group Selection"
 msgstr "그룹 선택(&G)"
 
-#: src/mainwindow.cpp:780
+#: src/mainwindow.cpp:781
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr "소장품 그룹 변경"
 
-#: src/mainwindow.cpp:794
+#: src/mainwindow.cpp:795
 #, kde-format
 msgid "Filter here..."
 msgstr "여기에 필터..."
 
-#: src/mainwindow.cpp:859 src/mainwindow.cpp:862
+#: src/mainwindow.cpp:860 src/mainwindow.cpp:863
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
 "qt>"
 msgstr "<qt><i>항목 보기</i>에서 항목의 내용을 형식화해서 보여 줍니다.</qt>"
 
-#: src/mainwindow.cpp:868
+#: src/mainwindow.cpp:869
 #, kde-format
 msgid "Collection View"
 msgstr "소장품 보기"
 
-#: src/mainwindow.cpp:875
+#: src/mainwindow.cpp:876
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
 "</qt>"
 msgstr "<qt><i>열 보기</i>는 각 항목에 대한 여러 필드의 값을 표시합니다.</qt>"
 
-#: src/mainwindow.cpp:892
+#: src/mainwindow.cpp:893
 #, kde-format
 msgid "Group View"
 msgstr "그룹 보기"
 
-#: src/mainwindow.cpp:901
+#: src/mainwindow.cpp:902
 #, kde-format
 msgid "Groups"
 msgstr "그룹"
 
-#: src/mainwindow.cpp:902
+#: src/mainwindow.cpp:903
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
@@ -6176,18 +6176,18 @@ msgid ""
 msgstr ""
 "<qt><i>그룹 보기</i>는 선택한 필드를 기준으로 항목을 그룹화합니다.</qt>"
 
-#: src/mainwindow.cpp:979
+#: src/mainwindow.cpp:980
 #, fuzzy, kde-format
 #| msgid "Tellico - collection management software, free and simple"
 msgid "Collection management software, free and simple"
 msgstr "Tellico - 간단한 자유 소프트웨어 소장품 관리 도구"
 
-#: src/mainwindow.cpp:981
+#: src/mainwindow.cpp:982
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Tellico 소장품 관리 도구에 오신 것을 환영합니다"
 
-#: src/mainwindow.cpp:983
+#: src/mainwindow.cpp:984
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6202,7 +6202,7 @@ msgstr ""
 "edit_search_internet\">데이터를 다운로드</a>하여 내 소장품 목록에 추가할 수 "
 "있습니다.</h3>"
 
-#: src/mainwindow.cpp:992
+#: src/mainwindow.cpp:993
 #, kde-format
 msgid ""
 "More information can be found in the <a href=\"help:/tellico"
@@ -6210,7 +6210,7 @@ msgid ""
 "this welcome screen</a>."
 msgstr ""
 
-#: src/mainwindow.cpp:1199
+#: src/mainwindow.cpp:1200
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6219,22 +6219,22 @@ msgstr ""
 "현재 파일이 수정되었습니다.\n"
 "저장하시겠습니까?"
 
-#: src/mainwindow.cpp:1255 src/mainwindow.cpp:1289
+#: src/mainwindow.cpp:1256 src/mainwindow.cpp:1290
 #, kde-format
 msgid "Creating new collection..."
 msgstr "새 소장품 생성 중..."
 
-#: src/mainwindow.cpp:1310 src/mainwindow.cpp:1333 src/mainwindow.cpp:1351
+#: src/mainwindow.cpp:1311 src/mainwindow.cpp:1334 src/mainwindow.cpp:1352
 #, kde-format
 msgid "Opening file..."
 msgstr "파일 여는 중..."
 
-#: src/mainwindow.cpp:1321
+#: src/mainwindow.cpp:1322
 #, kde-format
 msgid "Open File"
 msgstr "파일 열기"
 
-#: src/mainwindow.cpp:1443
+#: src/mainwindow.cpp:1444
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6247,32 +6247,32 @@ msgstr ""
 "시키시겠습니까?</p><p>설정 대화 상자에서 항상 옵션을 변경할 수 있습니다.</"
 "p></qt>"
 
-#: src/mainwindow.cpp:1448
+#: src/mainwindow.cpp:1449
 #, kde-format
 msgid "Save Images Separately"
 msgstr "별도로 이미지 저장"
 
-#: src/mainwindow.cpp:1449
+#: src/mainwindow.cpp:1450
 #, kde-format
 msgid "Save Images in File"
 msgstr "파일에 이미지 저장"
 
-#: src/mainwindow.cpp:1489
+#: src/mainwindow.cpp:1490
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "새로운 파일 이름으로 파일을 저장하는 중..."
 
-#: src/mainwindow.cpp:1498
+#: src/mainwindow.cpp:1499
 #, kde-format
 msgid "Save As"
 msgstr "다른 이름으로 저장"
 
-#: src/mainwindow.cpp:1564
+#: src/mainwindow.cpp:1565
 #, kde-format
 msgid "Printing..."
 msgstr "인쇄 중..."
 
-#: src/mainwindow.cpp:1568
+#: src/mainwindow.cpp:1569
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6281,27 +6281,27 @@ msgstr ""
 "현재 소장품 목록에 필터가 적용되어 전체 소장품의 일부만 표시하고 있습니다. 표"
 "시된 항목만 인쇄됩니다. 계속 진행하시겠습니까?"
 
-#: src/mainwindow.cpp:1591
+#: src/mainwindow.cpp:1594
 #, kde-format
 msgid "Exiting..."
 msgstr "종료 중..."
 
-#: src/mainwindow.cpp:1693
+#: src/mainwindow.cpp:1696
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1개 필터됨, %2개 선택됨)"
 
-#: src/mainwindow.cpp:1696
+#: src/mainwindow.cpp:1699
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1개 필터됨)"
 
-#: src/mainwindow.cpp:1699
+#: src/mainwindow.cpp:1702
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1개 선택됨)"
 
-#: src/mainwindow.cpp:1838 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1841 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:252
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6309,57 +6309,57 @@ msgstr "(%1개 선택됨)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico에서 XSLT 처리 중 오류가 발생했습니다."
 
-#: src/mainwindow.cpp:1956
+#: src/mainwindow.cpp:1959
 #, kde-format
 msgid "Importing data..."
 msgstr "데이터를 가져오는 중..."
 
-#: src/mainwindow.cpp:1967
+#: src/mainwindow.cpp:1970
 #, kde-format
 msgid "Import File"
 msgstr "파일 가져오기"
 
-#: src/mainwindow.cpp:1980
+#: src/mainwindow.cpp:1983
 #, kde-format
 msgid "Import Directory"
 msgstr "디렉터리 가져오기"
 
-#: src/mainwindow.cpp:2004
+#: src/mainwindow.cpp:2007
 #, kde-format
 msgid "Exporting data..."
 msgstr "데이터를 내보내는 중..."
 
-#: src/mainwindow.cpp:2027
+#: src/mainwindow.cpp:2030
 #, kde-format
 msgid "Export As"
 msgstr "다른 이름으로 내보내기"
 
-#: src/mainwindow.cpp:2055
+#: src/mainwindow.cpp:2058
 #, kde-format
 msgid "String Macros"
 msgstr "문자열 매크로"
 
-#: src/mainwindow.cpp:2056
+#: src/mainwindow.cpp:2059
 #, kde-format
 msgid "Macro"
 msgstr "매크로"
 
-#: src/mainwindow.cpp:2056
+#: src/mainwindow.cpp:2059
 #, kde-format
 msgid "String"
 msgstr "문자열"
 
-#: src/mainwindow.cpp:2142
+#: src/mainwindow.cpp:2145
 #, kde-format
 msgid "Creating citations..."
 msgstr "인용구를 만드는 중..."
 
-#: src/mainwindow.cpp:2252
+#: src/mainwindow.cpp:2255
 #, kde-format
 msgid "Filters"
 msgstr "필터"
 
-#: src/mainwindow.cpp:2253
+#: src/mainwindow.cpp:2256
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6368,12 +6368,12 @@ msgstr ""
 "<qt><i>필터 보기</i>에서는 선택한 필터 조건을 만족하는 항목을 표시합니다.</"
 "qt>"
 
-#: src/mainwindow.cpp:2276
+#: src/mainwindow.cpp:2279
 #, kde-format
 msgid "Loans"
 msgstr "대여"
 
-#: src/mainwindow.cpp:2277
+#: src/mainwindow.cpp:2280
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6381,7 +6381,7 @@ msgid ""
 msgstr ""
 "<qt><i>대여 보기</i>에서는 내 소장품을 빌려 간 사람 목록을 표시합니다.</qt>"
 
-#: src/mainwindow.cpp:2364
+#: src/mainwindow.cpp:2367
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6390,12 +6390,12 @@ msgstr ""
 "일부 이미지는 설정된 위치에 저장되지 않습니다. 현재 파일을 저장해야 하며 이미"
 "지가 새로운 위치로 전송됩니다."
 
-#: src/mainwindow.cpp:2405
+#: src/mainwindow.cpp:2408
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "%1에서 항목 데이터 업데이트"
 
-#: src/mainwindow.cpp:2424
+#: src/mainwindow.cpp:2427
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6403,7 +6403,7 @@ msgid ""
 msgstr ""
 "Tellico는 한 번에 이 형식의 파일 하나만 가져올 수 있습니다. %1만 가져옵니다."
 
-#: src/mainwindow.cpp:2612
+#: src/mainwindow.cpp:2615
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6440,12 +6440,12 @@ msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "일부 보고서는 대규모 소장품을 생성하는데 몇 초 정도 걸릴 수 있습니다."
 
-#: src/reportdialog.cpp:461
+#: src/reportdialog.cpp:476
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG 파일"
 
-#: src/reportdialog.cpp:476 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:491 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML 파일"

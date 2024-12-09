@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-01 00:40+0000\n"
+"POT-Creation-Date: 2024-12-09 00:41+0000\n"
 "PO-Revision-Date: 2024-11-28 16:14+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -171,7 +171,7 @@ msgstr "Ad"
 msgid "Collection Size"
 msgstr "Koleksiyon Boyutu"
 
-#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1686
+#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1689
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Toplam girdi: %1"
@@ -2757,8 +2757,8 @@ msgstr "XSL Dosyaları"
 msgid "Template Packages"
 msgstr "Şablon Paketleri"
 
-#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1317
-#: src/mainwindow.cpp:1493 src/reportdialog.cpp:463 src/reportdialog.cpp:478
+#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1318
+#: src/mainwindow.cpp:1494 src/reportdialog.cpp:478 src/reportdialog.cpp:493
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -2846,22 +2846,22 @@ msgstr "Çoklu Girdileri Sil"
 msgid "&Sort By"
 msgstr "&Sırala"
 
-#: src/controller.cpp:594 src/mainwindow.cpp:611
+#: src/controller.cpp:594 src/mainwindow.cpp:612
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "Girdiyi Düz&enle…"
 
-#: src/controller.cpp:595 src/mainwindow.cpp:618
+#: src/controller.cpp:595 src/mainwindow.cpp:619
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "&Girdiyi Çoğalt"
 
-#: src/controller.cpp:596 src/mainwindow.cpp:712
+#: src/controller.cpp:596 src/mainwindow.cpp:713
 #, kde-format
 msgid "&Update Entry"
 msgstr "Girdiyi G&üncelle"
 
-#: src/controller.cpp:597 src/mainwindow.cpp:625
+#: src/controller.cpp:597 src/mainwindow.cpp:626
 #, kde-format
 msgid "&Delete Entry"
 msgstr "Gir&diyi Sil"
@@ -2950,7 +2950,7 @@ msgstr "Tüm Sütunları Göster"
 msgid "Hide All Columns"
 msgstr "Tüm Sütunları Gizle"
 
-#: src/document.cpp:212 src/mainwindow.cpp:1432
+#: src/document.cpp:212 src/mainwindow.cpp:1433
 #, kde-format
 msgid "Saving file..."
 msgstr "Dosya kaydediliyor…"
@@ -3012,12 +3012,12 @@ msgid "Save Entry"
 msgstr "Girdiyi Kaydet"
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1202 src/mainwindow.cpp:1220
+#: src/mainwindow.cpp:1203 src/mainwindow.cpp:1221
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Kaydedilmemiş Değişiklikler"
 
-#: src/entryiconview.cpp:61 src/mainwindow.cpp:885
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:886
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3086,7 +3086,7 @@ msgstr "<b>%1</b> güncelleniyor…"
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico, öntanımlı girdi biçemini konumlandıramıyor."
 
-#: src/entryview.cpp:354 src/mainwindow.cpp:1839
+#: src/entryview.cpp:354 src/mainwindow.cpp:1842
 #, kde-format
 msgid "Please check your installation."
 msgstr "Lütfen kurulumunuzu denetleyin."
@@ -4411,7 +4411,7 @@ msgstr ""
 "Çoğu sunucunun buna gereksinimini yoktur. Parola, Tellico yapılandırma "
 "dosyasında düz metin olarak kaydedilecektir."
 
-#: src/fetchdialog.cpp:138 src/mainwindow.cpp:601
+#: src/fetchdialog.cpp:138 src/mainwindow.cpp:602
 #, kde-format
 msgid "Internet Search"
 msgstr "İnternet Araması"
@@ -4756,8 +4756,8 @@ msgstr "Süzgeç adı:"
 msgid "&Save Filter"
 msgstr "&Süzgeci Kaydet"
 
-#: src/filterview.cpp:190 src/mainwindow.cpp:574 src/mainwindow.cpp:790
-#: src/mainwindow.cpp:808
+#: src/filterview.cpp:190 src/mainwindow.cpp:575 src/mainwindow.cpp:791
+#: src/mainwindow.cpp:809
 #, kde-format
 msgid "Filter"
 msgstr "Süz"
@@ -4793,8 +4793,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Grup"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1129 src/mainwindow.cpp:1774
-#: src/mainwindow.cpp:1808 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1130 src/mainwindow.cpp:1777
+#: src/mainwindow.cpp:1811 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Herkes"
@@ -5092,19 +5092,19 @@ msgstr ""
 "koleksiyon türleri eşleştiğinde olanaklıdır. Birleşme olması için, "
 "girdilerin kesinlikle uyuşması gerekir."
 
-#: src/importdialog.cpp:150 src/mainwindow.cpp:374
+#: src/importdialog.cpp:150 src/mainwindow.cpp:375
 #, kde-format
 msgid "&Import"
 msgstr "&İçe Aktar"
 
-#: src/importdialog.cpp:377 src/mainwindow.cpp:1313 src/mainwindow.cpp:1491
+#: src/importdialog.cpp:377 src/mainwindow.cpp:1314 src/mainwindow.cpp:1492
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico Dosyaları"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1315 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1316 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "XML Dosyaları"
@@ -5346,838 +5346,838 @@ msgstr "Tanı çıktısını <dosya>’ya yaz"
 msgid "File to open"
 msgstr "Açılacak dosya"
 
-#: src/mainwindow.cpp:258
+#: src/mainwindow.cpp:259
 #, kde-format
 msgid "New Collection"
 msgstr "Yeni Koleksiyon"
 
-#: src/mainwindow.cpp:260
+#: src/mainwindow.cpp:261
 #, kde-format
 msgid "Create a new collection"
 msgstr "Yeni bir koleksiyon oluştur"
 
-#: src/mainwindow.cpp:279
+#: src/mainwindow.cpp:280
 #, kde-format
 msgid "New &Book Collection"
 msgstr "Yeni Kita&p Koleksiyonu"
 
-#: src/mainwindow.cpp:280
+#: src/mainwindow.cpp:281
 #, kde-format
 msgid "Create a new book collection"
 msgstr "Yeni bir kitap koleksiyonu oluştur"
 
-#: src/mainwindow.cpp:282
+#: src/mainwindow.cpp:283
 #, kde-format
 msgid "New B&ibliography"
 msgstr "Yen&i Bibliyografya"
 
-#: src/mainwindow.cpp:283
+#: src/mainwindow.cpp:284
 #, kde-format
 msgid "Create a new bibtex bibliography"
 msgstr "Yeni bir bibtex bibliyografyası oluştur"
 
-#: src/mainwindow.cpp:285
+#: src/mainwindow.cpp:286
 #, kde-format
 msgid "New &Comic Book Collection"
 msgstr "Yeni &Çizgi Roman Koleksiyonu"
 
-#: src/mainwindow.cpp:286
+#: src/mainwindow.cpp:287
 #, kde-format
 msgid "Create a new comic book collection"
 msgstr "Yeni bir çizgi roman koleksiyonu oluştur"
 
-#: src/mainwindow.cpp:288
+#: src/mainwindow.cpp:289
 #, kde-format
 msgid "New &Video Collection"
 msgstr "Yeni &Video Koleksiyonu"
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:290
 #, kde-format
 msgid "Create a new video collection"
 msgstr "Yeni bir video koleksiyonu oluştur"
 
-#: src/mainwindow.cpp:291
+#: src/mainwindow.cpp:292
 #, kde-format
 msgid "New &Music Collection"
 msgstr "Yeni &Müzik Koleksiyonu"
 
-#: src/mainwindow.cpp:292
+#: src/mainwindow.cpp:293
 #, kde-format
 msgid "Create a new music collection"
 msgstr "Yeni bir müzik koleksiyonu oluştur"
 
-#: src/mainwindow.cpp:294
+#: src/mainwindow.cpp:295
 #, kde-format
 msgid "New C&oin Collection"
 msgstr "Yeni Madeni Para K&oleksiyonu"
 
-#: src/mainwindow.cpp:295
+#: src/mainwindow.cpp:296
 #, kde-format
 msgid "Create a new coin collection"
 msgstr "Yeni bir madeni para koleksiyonu oluştur"
 
-#: src/mainwindow.cpp:297
+#: src/mainwindow.cpp:298
 #, kde-format
 msgid "New &Stamp Collection"
 msgstr "Yeni Pul Kolek&siyonu"
 
-#: src/mainwindow.cpp:298
+#: src/mainwindow.cpp:299
 #, kde-format
 msgid "Create a new stamp collection"
 msgstr "Yeni bir pul koleksiyonu oluştur"
 
-#: src/mainwindow.cpp:300
+#: src/mainwindow.cpp:301
 #, kde-format
 msgid "New C&ard Collection"
 msgstr "Yeni K&art Koleksiyonu"
 
-#: src/mainwindow.cpp:301
+#: src/mainwindow.cpp:302
 #, kde-format
 msgid "Create a new trading card collection"
 msgstr "Yeni bir değiş–tokuş kartı koleksiyonu oluştur"
 
-#: src/mainwindow.cpp:303
+#: src/mainwindow.cpp:304
 #, kde-format
 msgid "New &Wine Collection"
 msgstr "Yeni &Şarap Koleksiyonu"
 
-#: src/mainwindow.cpp:304
+#: src/mainwindow.cpp:305
 #, kde-format
 msgid "Create a new wine collection"
 msgstr "Yeni bir şarap koleksiyonu oluştur"
 
-#: src/mainwindow.cpp:306
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "New Video &Game Collection"
 msgstr "Yeni Video O&yunu Koleksiyonu"
 
-#: src/mainwindow.cpp:307
+#: src/mainwindow.cpp:308
 #, kde-format
 msgid "Create a new video game collection"
 msgstr "Yeni bir video oyunu koleksiyonu oluştur"
 
-#: src/mainwindow.cpp:309
+#: src/mainwindow.cpp:310
 #, kde-format
 msgid "New Boa&rd Game Collection"
 msgstr "Yeni &Masa Oyunu Koleksiyonu"
 
-#: src/mainwindow.cpp:310
+#: src/mainwindow.cpp:311
 #, kde-format
 msgid "Create a new board game collection"
 msgstr "Yeni bir pano oyun koleksiyonu oluştur"
 
-#: src/mainwindow.cpp:312
+#: src/mainwindow.cpp:313
 #, kde-format
 msgid "New &File Catalog"
 msgstr "Yeni Dos&ya Kataloğu"
 
-#: src/mainwindow.cpp:313
+#: src/mainwindow.cpp:314
 #, kde-format
 msgid "Create a new file catalog"
 msgstr "Yeni bir dosya kataloğu oluştur"
 
-#: src/mainwindow.cpp:316
+#: src/mainwindow.cpp:317
 #, kde-format
 msgid "New C&ustom Collection"
 msgstr "Yeni &Özel Koleksiyon"
 
-#: src/mainwindow.cpp:317
+#: src/mainwindow.cpp:318
 #, kde-format
 msgid "Create a new custom collection"
 msgstr "Yeni bir özel koleksiyon oluştur"
 
-#: src/mainwindow.cpp:328
+#: src/mainwindow.cpp:329
 #, kde-format
 msgid "Open an existing document"
 msgstr "Var olan bir belgeyi aç"
 
-#: src/mainwindow.cpp:330
+#: src/mainwindow.cpp:331
 #, kde-format
 msgid "Open a recently used file"
 msgstr "Son kullanılan bir dosyayı aç"
 
-#: src/mainwindow.cpp:332
+#: src/mainwindow.cpp:333
 #, kde-format
 msgid "Save the document"
 msgstr "Belgeyi kaydet"
 
-#: src/mainwindow.cpp:334
+#: src/mainwindow.cpp:335
 #, kde-format
 msgid "Save the document as a different file..."
 msgstr "Belgeyi farklı bir dosya olarak kaydet…"
 
-#: src/mainwindow.cpp:338
+#: src/mainwindow.cpp:339
 #, kde-format
 msgid "Save As Template..."
 msgstr "Şablon Olarak Kaydet…"
 
-#: src/mainwindow.cpp:340
+#: src/mainwindow.cpp:341
 #, kde-format
 msgid "Save as a collection template"
 msgstr "Bir koleksiyon şablonu olarak kaydet"
 
-#: src/mainwindow.cpp:343
+#: src/mainwindow.cpp:344
 #, kde-format
 msgid "Print the contents of the collection..."
 msgstr "Koleksiyonun içeriğini yazdır…"
 
-#: src/mainwindow.cpp:359
+#: src/mainwindow.cpp:360
 #, kde-format
 msgid "Preview the contents of the collection..."
 msgstr "Koleksiyonun içeriğini önizle…"
 
-#: src/mainwindow.cpp:363
+#: src/mainwindow.cpp:364
 #, kde-format
 msgid "Quit the application"
 msgstr "Uygulamadan çık"
 
-#: src/mainwindow.cpp:376
+#: src/mainwindow.cpp:377
 #, kde-format
 msgid "Import the collection data from other formats"
 msgstr "Başka biçimlerden koleksiyon verisi içe aktar"
 
-#: src/mainwindow.cpp:392
+#: src/mainwindow.cpp:393
 #, kde-format
 msgid "Import Tellico Data..."
 msgstr "Tellico Verisi  İçe Aktar…"
 
-#: src/mainwindow.cpp:393
+#: src/mainwindow.cpp:394
 #, kde-format
 msgid "Import another Tellico data file"
 msgstr "Başka bir Tellico veri dosyasını içe aktar"
 
-#: src/mainwindow.cpp:396
+#: src/mainwindow.cpp:397
 #, kde-format
 msgid "Import CSV Data..."
 msgstr "CSV Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:397
+#: src/mainwindow.cpp:398
 #, kde-format
 msgid "Import a CSV file"
 msgstr "Bir CSV dosyasını içe aktar"
 
-#: src/mainwindow.cpp:399
+#: src/mainwindow.cpp:400
 #, kde-format
 msgid "Import MODS Data..."
 msgstr "MODS Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:400
+#: src/mainwindow.cpp:401
 #, kde-format
 msgid "Import a MODS data file"
 msgstr "Bir MODS veri dosyasını içe aktar"
 
-#: src/mainwindow.cpp:402
+#: src/mainwindow.cpp:403
 #, kde-format
 msgid "Import Alexandria Data..."
 msgstr "Alexandria Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:403
+#: src/mainwindow.cpp:404
 #, kde-format
 msgid "Import data from the Alexandria book collection manager"
 msgstr "Alexandria kitap koleksiyon yöneticisinden veri içe aktar"
 
-#: src/mainwindow.cpp:406
+#: src/mainwindow.cpp:407
 #, kde-format
 msgid "Import Delicious Library Data..."
 msgstr "Delicious Kütüphane Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:407
+#: src/mainwindow.cpp:408
 #, kde-format
 msgid "Import data from Delicious Library"
 msgstr "Delicious kütüphanesinden veri içe aktar"
 
-#: src/mainwindow.cpp:410
+#: src/mainwindow.cpp:411
 #, kde-format
 msgid "Import Collectorz Data..."
 msgstr "Collectorz Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:411
+#: src/mainwindow.cpp:412
 #, kde-format
 msgid "Import data from Collectorz"
 msgstr "Collectorz’dan veri içe aktar"
 
-#: src/mainwindow.cpp:414
+#: src/mainwindow.cpp:415
 #, kde-format
 msgid "Import Data Crow Data..."
 msgstr "Data Crow Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:415
+#: src/mainwindow.cpp:416
 #, kde-format
 msgid "Import data from Data Crow"
 msgstr "Data Crow’dan veri içe aktar"
 
-#: src/mainwindow.cpp:418
+#: src/mainwindow.cpp:419
 #, kde-format
 msgid "Import Referencer Data..."
 msgstr "Referencer Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:419
+#: src/mainwindow.cpp:420
 #, kde-format
 msgid "Import data from Referencer"
 msgstr "Referencer’dan veri içe aktar"
 
-#: src/mainwindow.cpp:422
+#: src/mainwindow.cpp:423
 #, kde-format
 msgid "Import Bibtex Data..."
 msgstr "Bibtex Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:423
+#: src/mainwindow.cpp:424
 #, kde-format
 msgid "Import a bibtex bibliography file"
 msgstr "Bir bibtex bibliyografya dosyasını içe aktar"
 
-#: src/mainwindow.cpp:428
+#: src/mainwindow.cpp:429
 #, kde-format
 msgid "Import Bibtexml Data..."
 msgstr "Bibtexml Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:429
+#: src/mainwindow.cpp:430
 #, kde-format
 msgid "Import a Bibtexml bibliography file"
 msgstr "Bir Bibtexml bibliyografya dosyasını içe aktar"
 
-#: src/mainwindow.cpp:431
+#: src/mainwindow.cpp:432
 #, kde-format
 msgid "Import RIS Data..."
 msgstr "RIS Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:432
+#: src/mainwindow.cpp:433
 #, kde-format
 msgid "Import an RIS reference file"
 msgstr "Bir RIS başvuru dosyasını içe aktar"
 
-#: src/mainwindow.cpp:434
+#: src/mainwindow.cpp:435
 #, kde-format
 msgid "Import MARC Data..."
 msgstr "MARC Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:435
+#: src/mainwindow.cpp:436
 #, kde-format
 msgid "Import MARC data"
 msgstr "MARC verisi içe aktar"
 
-#: src/mainwindow.cpp:442
+#: src/mainwindow.cpp:443
 #, kde-format
 msgid "Import Goodreads Collection..."
 msgstr "Goodreads Koleksiyonu İçe Aktar…"
 
-#: src/mainwindow.cpp:443
+#: src/mainwindow.cpp:444
 #, kde-format
 msgid "Import a collection from Goodreads.com"
 msgstr "Goodreads.com adresinden bir koleksiyonu içe aktar"
 
-#: src/mainwindow.cpp:445
+#: src/mainwindow.cpp:446
 #, kde-format
 msgid "Import LibraryThing Collection..."
 msgstr "LibraryThing Koleksiyonu İçe Aktar…"
 
-#: src/mainwindow.cpp:446
+#: src/mainwindow.cpp:447
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
 msgstr "LibraryThing.com adresinden bir koleksiyon içe aktar"
 
-#: src/mainwindow.cpp:448
+#: src/mainwindow.cpp:449
 #, kde-format
 msgid "Import PDF File..."
 msgstr "PDF Dosyası İçe Aktar…"
 
-#: src/mainwindow.cpp:449
+#: src/mainwindow.cpp:450
 #, kde-format
 msgid "Import a PDF file"
 msgstr "Bir PDF dosyasını içe aktar"
 
-#: src/mainwindow.cpp:451
+#: src/mainwindow.cpp:452
 #, kde-format
 msgid "Import Audio File Metadata..."
 msgstr "Ses Dosyası Üst Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:452
+#: src/mainwindow.cpp:453
 #, kde-format
 msgid "Import meta-data from audio files"
 msgstr "Ses dosyalarından üst veri içe aktar"
 
-#: src/mainwindow.cpp:457
+#: src/mainwindow.cpp:458
 #, kde-format
 msgid "Import Audio CD Data..."
 msgstr "Ses CD’si Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:458
+#: src/mainwindow.cpp:459
 #, kde-format
 msgid "Import audio CD information"
 msgstr "Ses CD’si bilgisi içe aktar"
 
-#: src/mainwindow.cpp:463
+#: src/mainwindow.cpp:464
 #, kde-format
 msgid "Import Discogs Collection..."
 msgstr "Discogs Koleksiyonu İçe Aktar…"
 
-#: src/mainwindow.cpp:464
+#: src/mainwindow.cpp:465
 #, kde-format
 msgid "Import a collection from Discogs.com"
 msgstr "Discogs.com adresinden bir koleksiyonu içe aktar"
 
-#: src/mainwindow.cpp:466
+#: src/mainwindow.cpp:467
 #, kde-format
 msgid "Import GCstar Data..."
 msgstr "GCstar Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:467
+#: src/mainwindow.cpp:468
 #, kde-format
 msgid "Import a GCstar data file"
 msgstr "Bir GCstar veri dosyası içe aktar"
 
-#: src/mainwindow.cpp:470
+#: src/mainwindow.cpp:471
 #, kde-format
 msgid "Import Griffith Data..."
 msgstr "Griffith Verisi İçe Aktar…"
 
-#: src/mainwindow.cpp:471
+#: src/mainwindow.cpp:472
 #, kde-format
 msgid "Import a Griffith database"
 msgstr "Bir Griffith veritabanını içe aktar"
 
-#: src/mainwindow.cpp:474
+#: src/mainwindow.cpp:475
 #, kde-format
 msgid "Import Ant Movie Catalog Data..."
 msgstr "Ant Film Katalog Veri İçe Aktar…"
 
-#: src/mainwindow.cpp:475
+#: src/mainwindow.cpp:476
 #, kde-format
 msgid "Import an Ant Movie Catalog data file"
 msgstr "Bir Ant Film Katalog Veri Dosyasını İçe Aktar"
 
-#: src/mainwindow.cpp:478
+#: src/mainwindow.cpp:479
 #, kde-format
 msgid "Import BoardGameGeek Collection..."
 msgstr "BoardGameGeek Koleksiyonunu İçe Aktar…"
 
-#: src/mainwindow.cpp:479
+#: src/mainwindow.cpp:480
 #, kde-format
 msgid "Import a collection from BoardGameGeek.com"
 msgstr "BoardGameGeek.com adresinden bir koleksiyonu içe aktar"
 
-#: src/mainwindow.cpp:481
+#: src/mainwindow.cpp:482
 #, kde-format
 msgid "Import VinoXML..."
 msgstr "VinoXML İçe Aktar…"
 
-#: src/mainwindow.cpp:482
+#: src/mainwindow.cpp:483
 #, kde-format
 msgid "Import VinoXML data"
 msgstr "VinoXML verisi içe aktar"
 
-#: src/mainwindow.cpp:484
+#: src/mainwindow.cpp:485
 #, kde-format
 msgid "Import File Listing..."
 msgstr "Dosya Listelemesi İçe Aktar…"
 
-#: src/mainwindow.cpp:485
+#: src/mainwindow.cpp:486
 #, kde-format
 msgid "Import information about files in a folder"
 msgstr "Bir dizin içindeki dosyalar hakkındaki içe aktarma bilgisi"
 
-#: src/mainwindow.cpp:487
+#: src/mainwindow.cpp:488
 #, kde-format
 msgid "Import XSL Transform..."
 msgstr "XSL Dönüşümünü İçe Aktar…"
 
-#: src/mainwindow.cpp:488
+#: src/mainwindow.cpp:489
 #, kde-format
 msgid "Import using an XSL Transform"
 msgstr "Kullanılan bir XSL Dönüşümünü içe aktar"
 
-#: src/mainwindow.cpp:501
+#: src/mainwindow.cpp:502
 #, kde-format
 msgid "&Export"
 msgstr "&Dışa Aktar"
 
-#: src/mainwindow.cpp:503
+#: src/mainwindow.cpp:504
 #, kde-format
 msgid "Export the collection data to other formats"
 msgstr "Koleksiyon verisini başka biçimlere dışa aktar"
 
-#: src/mainwindow.cpp:519
+#: src/mainwindow.cpp:520
 #, kde-format
 msgid "Export to XML..."
 msgstr "XML Olarak Dışa Aktar…"
 
-#: src/mainwindow.cpp:520
+#: src/mainwindow.cpp:521
 #, kde-format
 msgid "Export to a Tellico XML file"
 msgstr "Bir Tellico XML dosyasına dışa aktar"
 
-#: src/mainwindow.cpp:523
+#: src/mainwindow.cpp:524
 #, kde-format
 msgid "Export to Zip..."
 msgstr "Zip Olarak Dışa Aktar…"
 
-#: src/mainwindow.cpp:524
+#: src/mainwindow.cpp:525
 #, kde-format
 msgid "Export to a Tellico Zip file"
 msgstr "Bir Tellico Zip dosyasına dışa aktar"
 
-#: src/mainwindow.cpp:527
+#: src/mainwindow.cpp:528
 #, kde-format
 msgid "Export to HTML..."
 msgstr "HTML Olarak Dışa Aktar…"
 
-#: src/mainwindow.cpp:528
+#: src/mainwindow.cpp:529
 #, kde-format
 msgid "Export to an HTML file"
 msgstr "Bir HTML dosyasına dışa aktar"
 
-#: src/mainwindow.cpp:530
+#: src/mainwindow.cpp:531
 #, kde-format
 msgid "Export to CSV..."
 msgstr "CSV Olarak Dışa Aktar…"
 
-#: src/mainwindow.cpp:531
+#: src/mainwindow.cpp:532
 #, kde-format
 msgid "Export to a comma-separated values file"
 msgstr "Bir virgülle ayrılmış değerler dosyasına dışa aktar"
 
-#: src/mainwindow.cpp:533
+#: src/mainwindow.cpp:534
 #, kde-format
 msgid "Export to Alexandria..."
 msgstr "Alexandria Olarak Dışa Aktar…"
 
-#: src/mainwindow.cpp:534
+#: src/mainwindow.cpp:535
 #, kde-format
 msgid "Export to an Alexandria library"
 msgstr "Bir Alexandria kütüphanesine dışa aktar"
 
-#: src/mainwindow.cpp:537
+#: src/mainwindow.cpp:538
 #, kde-format
 msgid "Export to Bibtex..."
 msgstr "Bibtex Olarak Dışa Aktar…"
 
-#: src/mainwindow.cpp:538
+#: src/mainwindow.cpp:539
 #, kde-format
 msgid "Export to a bibtex file"
 msgstr "Bir bibtex dosyasına dışa aktar"
 
-#: src/mainwindow.cpp:540
+#: src/mainwindow.cpp:541
 #, kde-format
 msgid "Export to Bibtexml..."
 msgstr "Bibtexml Olarak Dışa Aktar…"
 
-#: src/mainwindow.cpp:541
+#: src/mainwindow.cpp:542
 #, kde-format
 msgid "Export to a Bibtexml file"
 msgstr "Bir Bibtexml dosyasına dışa aktar"
 
-#: src/mainwindow.cpp:543
+#: src/mainwindow.cpp:544
 #, kde-format
 msgid "Export to ONIX..."
 msgstr "ONIX Olarak Dışa Aktar…"
 
-#: src/mainwindow.cpp:544
+#: src/mainwindow.cpp:545
 #, kde-format
 msgid "Export to an ONIX file"
 msgstr "Bir ONIX dosyasına dışa aktar"
 
-#: src/mainwindow.cpp:546
+#: src/mainwindow.cpp:547
 #, kde-format
 msgid "Export to GCstar..."
 msgstr "GCstar’a Dışa Aktar…"
 
-#: src/mainwindow.cpp:547
+#: src/mainwindow.cpp:548
 #, kde-format
 msgid "Export to a GCstar data file"
 msgstr "GCstar veri dosyasına dışa aktar"
 
-#: src/mainwindow.cpp:550
+#: src/mainwindow.cpp:551
 #, kde-format
 msgid "Export XSL Transform..."
 msgstr "XSL Dönüşümünü Dışa Aktar…"
 
-#: src/mainwindow.cpp:551
+#: src/mainwindow.cpp:552
 #, kde-format
 msgid "Export using an XSL Transform"
 msgstr "Kullanılan bir XSL dönüşümünü dışa aktar"
 
-#: src/mainwindow.cpp:562
+#: src/mainwindow.cpp:563
 #, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr "Seçili metni kes ve onu panoya koy"
 
-#: src/mainwindow.cpp:564
+#: src/mainwindow.cpp:565
 #, kde-format
 msgid "Copy the selected text to the clipboard"
 msgstr "Seçili metni panoya kopyala"
 
-#: src/mainwindow.cpp:566
+#: src/mainwindow.cpp:567
 #, kde-format
 msgid "Paste the clipboard contents"
 msgstr "Pano içeriğini yapıştır"
 
-#: src/mainwindow.cpp:568
+#: src/mainwindow.cpp:569
 #, kde-format
 msgid "Select all the entries in the collection"
 msgstr "Koleksiyondaki bütün girdileri seç"
 
-#: src/mainwindow.cpp:570
+#: src/mainwindow.cpp:571
 #, kde-format
 msgid "Deselect all the entries in the collection"
 msgstr "Koleksiyondaki bütün girdileri geri bırak"
 
-#: src/mainwindow.cpp:573
+#: src/mainwindow.cpp:574
 #, kde-format
 msgid "Advanced &Filter..."
 msgstr "Gelişmiş &Süzgeç…"
 
-#: src/mainwindow.cpp:577 src/mainwindow.cpp:809
+#: src/mainwindow.cpp:578 src/mainwindow.cpp:810
 #, kde-format
 msgid "Filter the collection"
 msgstr "Koleksiyonu süz"
 
-#: src/mainwindow.cpp:584
+#: src/mainwindow.cpp:585
 #, kde-format
 msgid "&New Entry..."
 msgstr "&Yeni Girdi…"
 
-#: src/mainwindow.cpp:586
+#: src/mainwindow.cpp:587
 #, kde-format
 msgid "New Entry"
 msgstr "Yeni Girdi"
 
-#: src/mainwindow.cpp:588
+#: src/mainwindow.cpp:589
 #, kde-format
 msgid "Create a new entry"
 msgstr "Yeni bir girdi oluştur"
 
-#: src/mainwindow.cpp:590
+#: src/mainwindow.cpp:591
 #, kde-format
 msgid "Add Entry"
 msgstr "Girdi Ekle"
 
-#: src/mainwindow.cpp:600
+#: src/mainwindow.cpp:601
 #, kde-format
 msgid "Internet Search..."
 msgstr "İnternet’te Ara…"
 
-#: src/mainwindow.cpp:604
+#: src/mainwindow.cpp:605
 #, kde-format
 msgid "Search the internet..."
 msgstr "İnternet’i ara…"
 
-#: src/mainwindow.cpp:614
+#: src/mainwindow.cpp:615
 #, kde-format
 msgid "Edit the selected entries"
 msgstr "Seçili girdileri düzenle"
 
-#: src/mainwindow.cpp:621
+#: src/mainwindow.cpp:622
 #, kde-format
 msgid "Copy the selected entries"
 msgstr "Seçili girdileri kopyala"
 
-#: src/mainwindow.cpp:628
+#: src/mainwindow.cpp:629
 #, kde-format
 msgid "Delete the selected entries"
 msgstr "Seçili girdileri sil"
 
-#: src/mainwindow.cpp:632
+#: src/mainwindow.cpp:633
 #, kde-format
 msgid "&Merge Entries"
 msgstr "Girdileri &Birleştir"
 
-#: src/mainwindow.cpp:636
+#: src/mainwindow.cpp:637
 #, kde-format
 msgid "Merge the selected entries"
 msgstr "Seçili girdileri birleştir"
 
-#: src/mainwindow.cpp:640
+#: src/mainwindow.cpp:641
 #, kde-format
 msgid "Check-&out..."
 msgstr "Çıkış &Yap…"
 
-#: src/mainwindow.cpp:642
+#: src/mainwindow.cpp:643
 #, kde-format
 msgid "Check-out the selected items"
 msgstr "Seçili ögeleri çıkış yap"
 
-#: src/mainwindow.cpp:645
+#: src/mainwindow.cpp:646
 #, kde-format
 msgid "Check-&in"
 msgstr "Giriş &Yap"
 
-#: src/mainwindow.cpp:647
+#: src/mainwindow.cpp:648
 #, kde-format
 msgid "Check-in the selected items"
 msgstr "Seçili ögelerin kayıt girişini yap"
 
-#: src/mainwindow.cpp:650
+#: src/mainwindow.cpp:651
 #, kde-format
 msgid "&Rename Collection..."
 msgstr "Koleksiyonu Yeniden Adlandı&r…"
 
-#: src/mainwindow.cpp:653
+#: src/mainwindow.cpp:654
 #, kde-format
 msgid "Rename the collection"
 msgstr "Koleksiyonu yeniden adlandır"
 
-#: src/mainwindow.cpp:656
+#: src/mainwindow.cpp:657
 #, kde-format
 msgid "Collection &Fields..."
 msgstr "Koleksiyon &Alanları…"
 
-#: src/mainwindow.cpp:657
+#: src/mainwindow.cpp:658
 #, kde-format
 msgid "Fields"
 msgstr "Alanlar"
 
-#: src/mainwindow.cpp:660
+#: src/mainwindow.cpp:661
 #, kde-format
 msgid "Modify the collection fields"
 msgstr "Koleksiyon alanlarını değiştir"
 
-#: src/mainwindow.cpp:663
+#: src/mainwindow.cpp:664
 #, kde-format
 msgid "&Generate Reports..."
 msgstr "&Rapor Oluştur…"
 
-#: src/mainwindow.cpp:664
+#: src/mainwindow.cpp:665
 #, kde-format
 msgid "Reports"
 msgstr "Raporlar"
 
-#: src/mainwindow.cpp:666
+#: src/mainwindow.cpp:667
 #, kde-format
 msgid "Generate collection reports"
 msgstr "Koleksiyon raporu oluştur"
 
-#: src/mainwindow.cpp:669
+#: src/mainwindow.cpp:670
 #, kde-format
 msgid "Convert to &Bibliography"
 msgstr "&Bibliyografyaya Dönüştür"
 
-#: src/mainwindow.cpp:671
+#: src/mainwindow.cpp:672
 #, kde-format
 msgid "Convert a book collection to a bibliography"
 msgstr "Bir kitap koleksiyonunu bibliyografyaya Dönüştür"
 
-#: src/mainwindow.cpp:674
+#: src/mainwindow.cpp:675
 #, kde-format
 msgid "String &Macros..."
 msgstr "Dizi &Makroları…"
 
-#: src/mainwindow.cpp:676
+#: src/mainwindow.cpp:677
 #, kde-format
 msgid "Edit the bibtex string macros"
 msgstr "Bibtex dizisi makrolarını düzenle"
 
-#: src/mainwindow.cpp:679
+#: src/mainwindow.cpp:680
 #, kde-format
 msgid "Check for Duplicate Keys..."
 msgstr "Yinelenmiş Anahtarları Denetle…"
 
-#: src/mainwindow.cpp:681
+#: src/mainwindow.cpp:682
 #, kde-format
 msgid "Check for duplicate citation keys"
 msgstr "Yinelenmiş atıf anahtarlarını denetle"
 
-#: src/mainwindow.cpp:691
+#: src/mainwindow.cpp:692
 #, kde-format
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "Bibtex’i &Panoya Kopyala"
 
-#: src/mainwindow.cpp:692
+#: src/mainwindow.cpp:693
 #, kde-format
 msgid "Copy bibtex citations to the clipboard"
 msgstr "Bibtex atıflarını panoya kopyala"
 
-#: src/mainwindow.cpp:697
+#: src/mainwindow.cpp:698
 #, kde-format
 msgid "Cite Entry in &LyX"
 msgstr "&LyX’deki girdiye atıf yap"
 
-#: src/mainwindow.cpp:698
+#: src/mainwindow.cpp:699
 #, kde-format
 msgid "Cite the selected entries in LyX"
 msgstr "LyX’deki seçili girdilere atıf yap"
 
-#: src/mainwindow.cpp:714
+#: src/mainwindow.cpp:715
 #, kde-format
 msgctxt "Update Entry"
 msgid "Update"
 msgstr "Güncelle"
 
-#: src/mainwindow.cpp:723
+#: src/mainwindow.cpp:724
 #, kde-format
 msgid "All Sources"
 msgstr "Bütün Kaynaklar"
 
-#: src/mainwindow.cpp:724
+#: src/mainwindow.cpp:725
 #, kde-format
 msgid "Update entry data from all available sources"
 msgstr "Kullanılabilir tüm kaynaklardan giriş verilerini güncelle"
 
-#: src/mainwindow.cpp:735
+#: src/mainwindow.cpp:736
 #, kde-format
 msgid "Unlock Layout"
 msgstr "Yerleşimin Kilidini Aç"
 
-#: src/mainwindow.cpp:736
+#: src/mainwindow.cpp:737
 #, kde-format
 msgid "Unlock the window's layout"
 msgstr "Pencerenin yerleşiminin kilidini aç"
 
-#: src/mainwindow.cpp:738
+#: src/mainwindow.cpp:739
 #, kde-format
 msgid "Lock Layout"
 msgstr "Yerleşimi Kilitle"
 
-#: src/mainwindow.cpp:739
+#: src/mainwindow.cpp:740
 #, kde-format
 msgid "Lock the window's layout"
 msgstr "Pencere yerleşimini kilitle"
 
-#: src/mainwindow.cpp:744
+#: src/mainwindow.cpp:745
 #, kde-format
 msgid "Reset Layout"
 msgstr "Yerleşimi Sıfırla"
 
-#: src/mainwindow.cpp:745
+#: src/mainwindow.cpp:746
 #, kde-format
 msgid "Reset the window's layout"
 msgstr "Pencerenin yerleşimini sıfırla"
 
-#: src/mainwindow.cpp:748
+#: src/mainwindow.cpp:749
 #, kde-format
 msgid "Entry &Editor"
 msgstr "Girdi &Düzenleyicisi"
 
-#: src/mainwindow.cpp:750
+#: src/mainwindow.cpp:751
 #, kde-format
 msgid "Enable/disable the editor"
 msgstr "Düzenleyiciyi etkinleştir/devre dışı bırak"
 
-#: src/mainwindow.cpp:759
+#: src/mainwindow.cpp:760
 #, kde-format
 msgid "Show Log"
 msgstr "Günlüğü Göster"
 
-#: src/mainwindow.cpp:776
+#: src/mainwindow.cpp:777
 #, kde-format
 msgid "Change Grouping"
 msgstr "Gruplamayı Değiştir"
 
-#: src/mainwindow.cpp:779
+#: src/mainwindow.cpp:780
 #, kde-format
 msgid "&Group Selection"
 msgstr "&Grup Seçimi"
 
-#: src/mainwindow.cpp:780
+#: src/mainwindow.cpp:781
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr "Koleksiyon gruplandırmasını değiştir"
 
-#: src/mainwindow.cpp:794
+#: src/mainwindow.cpp:795
 #, kde-format
 msgid "Filter here..."
 msgstr "Buradan süz…"
 
-#: src/mainwindow.cpp:859 src/mainwindow.cpp:862
+#: src/mainwindow.cpp:860 src/mainwindow.cpp:863
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
@@ -6186,12 +6186,12 @@ msgstr ""
 "<qt><i>Girdi Görünümü</i>, girdi içeriğinin biçimlendirilmiş bir görünümünü "
 "gösterir.</qt>"
 
-#: src/mainwindow.cpp:868
+#: src/mainwindow.cpp:869
 #, kde-format
 msgid "Collection View"
 msgstr "Koleksiyon Görünümü"
 
-#: src/mainwindow.cpp:875
+#: src/mainwindow.cpp:876
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
@@ -6200,17 +6200,17 @@ msgstr ""
 "<qt><i>Sütun Görünümü</i>, her girdinin birçok alandaki değerini gösterir.</"
 "qt>"
 
-#: src/mainwindow.cpp:892
+#: src/mainwindow.cpp:893
 #, kde-format
 msgid "Group View"
 msgstr "Grup Görünümü"
 
-#: src/mainwindow.cpp:901
+#: src/mainwindow.cpp:902
 #, kde-format
 msgid "Groups"
 msgstr "Gruplar"
 
-#: src/mainwindow.cpp:902
+#: src/mainwindow.cpp:903
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
@@ -6219,17 +6219,17 @@ msgstr ""
 "<qt><i>Grup Görünümü</i>, seçili alanlara göre girdileri gruplara ayırır.</"
 "qt>"
 
-#: src/mainwindow.cpp:979
+#: src/mainwindow.cpp:980
 #, kde-format
 msgid "Collection management software, free and simple"
 msgstr "Koleksiyon yönetimi yazılımı; ücretsiz ve yalın"
 
-#: src/mainwindow.cpp:981
+#: src/mainwindow.cpp:982
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Tellico Koleksiyon Yöneticisine Hoş Geldiniz"
 
-#: src/mainwindow.cpp:983
+#: src/mainwindow.cpp:984
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6244,7 +6244,7 @@ msgstr ""
 "çeşitli İnternet kaynaklarından <a href=\"tc:///edit_search_internet\">veri "
 "indirirerek</a> de yapılabilir.</h3>"
 
-#: src/mainwindow.cpp:992
+#: src/mainwindow.cpp:993
 #, kde-format
 msgid ""
 "More information can be found in the <a href=\"help:/tellico"
@@ -6255,7 +6255,7 @@ msgstr ""
 "İsterseniz <a href=\"tc:///disable_welcome\">bu karşılama ekranını</a> devre "
 "dışı bırakabilirsiniz."
 
-#: src/mainwindow.cpp:1199
+#: src/mainwindow.cpp:1200
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6264,22 +6264,22 @@ msgstr ""
 "Geçerli dosya değiştirildi.\n"
 "Kaydetmek istiyor musunuz?"
 
-#: src/mainwindow.cpp:1255 src/mainwindow.cpp:1289
+#: src/mainwindow.cpp:1256 src/mainwindow.cpp:1290
 #, kde-format
 msgid "Creating new collection..."
 msgstr "Yeni koleksiyon oluşturuluyor…"
 
-#: src/mainwindow.cpp:1310 src/mainwindow.cpp:1333 src/mainwindow.cpp:1351
+#: src/mainwindow.cpp:1311 src/mainwindow.cpp:1334 src/mainwindow.cpp:1352
 #, kde-format
 msgid "Opening file..."
 msgstr "Dosya açılıyor…"
 
-#: src/mainwindow.cpp:1321
+#: src/mainwindow.cpp:1322
 #, kde-format
 msgid "Open File"
 msgstr "Dosya Aç"
 
-#: src/mainwindow.cpp:1443
+#: src/mainwindow.cpp:1444
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6292,32 +6292,32 @@ msgstr ""
 "dizinine ayrı ayrı kaydetmek ister misiniz?</p><p>Seçiminiz yapılandırma "
 "iletişim kutusunda her zaman değiştirilebilir.</p></qt>"
 
-#: src/mainwindow.cpp:1448
+#: src/mainwindow.cpp:1449
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Görselleri Ayrı Ayrı Kaydet"
 
-#: src/mainwindow.cpp:1449
+#: src/mainwindow.cpp:1450
 #, kde-format
 msgid "Save Images in File"
 msgstr "Görselleri Dosyaya Kaydet"
 
-#: src/mainwindow.cpp:1489
+#: src/mainwindow.cpp:1490
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Dosya yeni bir adla kaydediliyor…"
 
-#: src/mainwindow.cpp:1498
+#: src/mainwindow.cpp:1499
 #, kde-format
 msgid "Save As"
 msgstr "Farklı Kaydet"
 
-#: src/mainwindow.cpp:1564
+#: src/mainwindow.cpp:1565
 #, kde-format
 msgid "Printing..."
 msgstr "Yazdırılıyor…"
 
-#: src/mainwindow.cpp:1568
+#: src/mainwindow.cpp:1569
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6326,27 +6326,27 @@ msgstr ""
 "Koleksiyon, girdilerin sınırlı alt kümelerini göstermek üzere süzülmüştür. "
 "Yalnızca görülebilir girdiler yazdırılmıştır. Sürdürülsün mü?"
 
-#: src/mainwindow.cpp:1591
+#: src/mainwindow.cpp:1594
 #, kde-format
 msgid "Exiting..."
 msgstr "Çıkılıyor…"
 
-#: src/mainwindow.cpp:1693
+#: src/mainwindow.cpp:1696
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 süzülmüş; %2 seçili)"
 
-#: src/mainwindow.cpp:1696
+#: src/mainwindow.cpp:1699
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 süzülmüş)"
 
-#: src/mainwindow.cpp:1699
+#: src/mainwindow.cpp:1702
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 seçili)"
 
-#: src/mainwindow.cpp:1838 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1841 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:252
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6354,57 +6354,57 @@ msgstr "(%1 seçili)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico, XSLT işlemede bir hataya rastladı."
 
-#: src/mainwindow.cpp:1956
+#: src/mainwindow.cpp:1959
 #, kde-format
 msgid "Importing data..."
 msgstr "Veri içe aktarılıyor…"
 
-#: src/mainwindow.cpp:1967
+#: src/mainwindow.cpp:1970
 #, kde-format
 msgid "Import File"
 msgstr "Dosya İçe Aktar"
 
-#: src/mainwindow.cpp:1980
+#: src/mainwindow.cpp:1983
 #, kde-format
 msgid "Import Directory"
 msgstr "Dizin İçe Aktar"
 
-#: src/mainwindow.cpp:2004
+#: src/mainwindow.cpp:2007
 #, kde-format
 msgid "Exporting data..."
 msgstr "Veri dışa aktarılıyor…"
 
-#: src/mainwindow.cpp:2027
+#: src/mainwindow.cpp:2030
 #, kde-format
 msgid "Export As"
 msgstr "Farklı Dışa Aktar"
 
-#: src/mainwindow.cpp:2055
+#: src/mainwindow.cpp:2058
 #, kde-format
 msgid "String Macros"
 msgstr "Dizi Makroları"
 
-#: src/mainwindow.cpp:2056
+#: src/mainwindow.cpp:2059
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:2056
+#: src/mainwindow.cpp:2059
 #, kde-format
 msgid "String"
 msgstr "Dizi"
 
-#: src/mainwindow.cpp:2142
+#: src/mainwindow.cpp:2145
 #, kde-format
 msgid "Creating citations..."
 msgstr "Atıflar oluşturuluyor…"
 
-#: src/mainwindow.cpp:2252
+#: src/mainwindow.cpp:2255
 #, kde-format
 msgid "Filters"
 msgstr "Süzgeçler"
 
-#: src/mainwindow.cpp:2253
+#: src/mainwindow.cpp:2256
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6413,12 +6413,12 @@ msgstr ""
 "<qt><i>Süzgeç Görünümü</i>, girdilerin belirli süzgeç kurallarına uğramış "
 "haliyle gösterilmesidir.</qt>"
 
-#: src/mainwindow.cpp:2276
+#: src/mainwindow.cpp:2279
 #, kde-format
 msgid "Loans"
 msgstr "Ödünç Vermeler"
 
-#: src/mainwindow.cpp:2277
+#: src/mainwindow.cpp:2280
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6427,7 +6427,7 @@ msgstr ""
 "<qt><i>Ödünç Verme Görünümü</i>, koleksiyonunuzdan ögeler alan kişilerin bir "
 "listesini gösterir.</qt>"
 
-#: src/mainwindow.cpp:2364
+#: src/mainwindow.cpp:2367
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6436,12 +6436,12 @@ msgstr ""
 "Bazı görüntüler yapılandırılan konuma kaydedilmez. Geçerli dosya "
 "kaydedilmelidir; görseller yeni konuma aktarılacaktır."
 
-#: src/mainwindow.cpp:2405
+#: src/mainwindow.cpp:2408
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Girdi verisini %1 konumundan güncelle"
 
-#: src/mainwindow.cpp:2424
+#: src/mainwindow.cpp:2427
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6450,7 +6450,7 @@ msgstr ""
 "Tellico aynı anda bu türden yalnızca bir dosya içe aktarabilir. Yalnızca %1 "
 "içe aktarılacak."
 
-#: src/mainwindow.cpp:2612
+#: src/mainwindow.cpp:2615
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6489,12 +6489,12 @@ msgstr ""
 "Büyük koleksiyonlar için bazı raporların oluşturulması birkaç saniye "
 "sürebilir."
 
-#: src/reportdialog.cpp:461
+#: src/reportdialog.cpp:476
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG Dosyaları"
 
-#: src/reportdialog.cpp:476 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:491 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML Dosyaları"
