@@ -45,7 +45,6 @@ class QWebEngineView {};
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrintPreviewWidget>
-#include <QEventLoop>
 #endif
 
 using Tellico::PrintHandler;
@@ -108,7 +107,11 @@ void PrintHandler::print() {
 
   if(dialog.printer()->outputFormat() == QPrinter::PdfFormat) {
     myLog() << "Printing PDF to" << dialog.printer()->outputFileName();
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+    m_view->page()->printToPdf(dialog.printer()->outputFileName(), dialog.printer()->pageLayout());
+#else
     m_view->printToPdf(dialog.printer()->outputFileName(), dialog.printer()->pageLayout());
+#endif
     m_waitForResult.exec(QEventLoop::ExcludeUserInputEvents);
   } else {
     printDocument(m_printer.get());
@@ -122,6 +125,7 @@ void PrintHandler::printPreview() {
   if(m_inPrintPreview) {
     return;
   }
+  myLog() << "Previewing print job";
   GUI::CursorSaver cs(Qt::WaitCursor);
 
   if(!printPrepare()) return;
@@ -132,7 +136,6 @@ void PrintHandler::printPreview() {
   // don't have busy cursor when showing the dialog
   cs.restore();
 
-  myLog() << "Previewing print job";
   QPrintPreviewDialog preview(m_printer.get(), m_view.get());
   QObject::connect(&preview, &QPrintPreviewDialog::paintRequested,
                    this, &PrintHandler::printDocument);
@@ -141,8 +144,10 @@ void PrintHandler::printPreview() {
     // with Qt 5.15.2, it didn't seem to get previewed initially
     auto list = preview.findChildren<QPrintPreviewWidget*>();
     auto w = list.first();
+//    QTimer::singleShot(0, w, &QPrintPreviewWidget::updatePreview);
     if(w) w->updatePreview();
   }
+  preview.show();
   preview.exec();
   m_inPrintPreview = false;
 #endif
@@ -150,7 +155,11 @@ void PrintHandler::printPreview() {
 
 void PrintHandler::printDocument(QPrinter* printer_) {
   myLog() << "Printing to" << printer_->printerName();
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+  m_view->page()->print(printer_, [=](bool b) { printFinished(b); });
+#else
   m_view->print(printer_);
+#endif
   // User input in the print preview dialog while we're waiting on a print task
   // can mess up the internal state and cause a crash.
   m_waitForResult.exec(QEventLoop::ExcludeUserInputEvents);
@@ -208,8 +217,13 @@ bool PrintHandler::printPrepare() {
 #ifndef USE_KHTML
   if(!m_view) {
     m_view.reset(new QWebEngineView);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+    // no printFInished signal in Qt5, so there's a callback specified directly
+    connect(m_view->page(), &QWebEnginePage::pdfPrintingFinished, this, &PrintHandler::pdfPrintFinished);
+#else
     connect(m_view.get(), &QWebEngineView::printFinished, this, &PrintHandler::printFinished);
     connect(m_view.get(), &QWebEngineView::pdfPrintingFinished, this, &PrintHandler::pdfPrintFinished);
+#endif
 
     auto settings = m_view->settings();
     settings->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
