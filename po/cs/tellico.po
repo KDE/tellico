@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-09 00:41+0000\n"
+"POT-Creation-Date: 2024-12-10 00:40+0000\n"
 "PO-Revision-Date: 2024-09-18 09:44+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -2755,7 +2755,7 @@ msgid "Template Packages"
 msgstr "Balíčky šablon"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1318
-#: src/mainwindow.cpp:1494 src/reportdialog.cpp:478 src/reportdialog.cpp:493
+#: src/mainwindow.cpp:1494 src/reportdialog.cpp:480 src/reportdialog.cpp:495
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -6469,12 +6469,12 @@ msgid ""
 msgstr ""
 "Některé zprávy mohou být v případě velkých sbírek generovány několik sekund."
 
-#: src/reportdialog.cpp:476
+#: src/reportdialog.cpp:478
 #, kde-format
 msgid "PNG Files"
 msgstr "Soubory PNG"
 
-#: src/reportdialog.cpp:491 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:493 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "Soubory HTML"

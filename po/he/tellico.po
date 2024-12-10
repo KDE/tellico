@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-09 00:41+0000\n"
+"POT-Creation-Date: 2024-12-10 00:40+0000\n"
 "PO-Revision-Date: 2024-11-29 10:46+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -2733,7 +2733,7 @@ msgid "Template Packages"
 msgstr "חבילות תבניות"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1318
-#: src/mainwindow.cpp:1494 src/reportdialog.cpp:478 src/reportdialog.cpp:493
+#: src/mainwindow.cpp:1494 src/reportdialog.cpp:480 src/reportdialog.cpp:495
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -6423,12 +6423,12 @@ msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "הפקתם של חלק מהדוחות עלול לארוך מספר שניות לאוספים גדולים."
 
-#: src/reportdialog.cpp:476
+#: src/reportdialog.cpp:478
 #, kde-format
 msgid "PNG Files"
 msgstr "קובצי PNG"
 
-#: src/reportdialog.cpp:491 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:493 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "קובצי HTML"
