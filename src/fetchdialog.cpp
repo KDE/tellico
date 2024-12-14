@@ -515,7 +515,6 @@ void FetchDialog::slotResultFound(Tellico::Fetch::FetchResult* result_) {
     const int w2 = m_treeWidget->columnWidth(2);
     const int w3 = m_treeWidget->columnWidth(3);
     const int wt = m_treeWidget->width();
-//    myDebug() << "OLD:" << w0 << w1 << w2 << w3 << wt << (w0+w1+w2+w3);
 
     // whatever is leftover from resizing 3, split between 1 and 2
     if(wt > (w0 + w1 + w2 + w3)) {
@@ -526,11 +525,11 @@ void FetchDialog::slotResultFound(Tellico::Fetch::FetchResult* result_) {
         const int w3new = qMin(w3, w3rec);
         const int diff = wt - w0 - w1 - w2 - w3new;
         const int w1new = qBound(w1, w1rec, w1 + diff/2 - 4);
-        const int w2new = qBound(w2, wt - w0 - w1new - w3new, w2rec);
+        const int w2new = w2 < w2rec ? qBound(w2, wt - w0 - w1new - w3new, w2rec)
+                                     : qBound(w2rec, wt - w0 - w1new - w3new, w2);
         m_treeWidget->setColumnWidth(1, w1new);
         m_treeWidget->setColumnWidth(2, w2new);
         m_treeWidget->setColumnWidth(3, w3new);
-//        myDebug() << "New:" << w0 << w1new << w2new << w3new << wt << (w0+w1new+w2new+w3new);
       }
     }
     m_treeWidget->header()->setStretchLastSection(true);
