@@ -37,6 +37,7 @@
   <name xml:lang="pt">Tellico</name>
   <name xml:lang="pt-BR">Tellico</name>
   <name xml:lang="ru">Tellico</name>
+  <name xml:lang="sa">टेलिको</name>
   <name xml:lang="sk">Tellico</name>
   <name xml:lang="sl">Tellico</name>
   <name xml:lang="sv">Tellico</name>
@@ -76,6 +77,7 @@
   <summary xml:lang="pt">Gestor de Colecções</summary>
   <summary xml:lang="pt-BR">Gerenciador de Coleções</summary>
   <summary xml:lang="ru">Диспетчер коллекций</summary>
+  <summary xml:lang="sa">संग्रह प्रबन्धक</summary>
   <summary xml:lang="sk">Správca zbierok</summary>
   <summary xml:lang="sl">Upravljalnik zbirk</summary>
   <summary xml:lang="sv">Samlingshanterare</summary>
@@ -119,6 +121,7 @@
     <p xml:lang="pt">O Tellico é uma aplicação para organizar as suas colecções. Oferece modelos predefinidos para livros, bibliografias, vídeos, músicas, jogos de vídeo, moedas, selos, cromos, livros de banda desenhada, vinhos, entre outras colecções. Permite-lhe introduzir a sua colecção numa base de dados de catálogos, gravando diversas propriedades, como o título, o autor, etc.</p>
     <p xml:lang="pt-BR">Tellico é um aplicativo para organizar suas coleções. Oferece modelos predefinidos para livros, bibliografias, vídeos, músicas, jogos de vídeo game, moedas, selos, figurinhas, histórias em quadrinhos, vinhos, entre outras coleções. Permite-lhe introduzir sua coleção em um banco de dados de catálogos, gravando diversas propriedades, como título, autor, etc.</p>
     <p xml:lang="ru">Tellico — приложение для упорядочения коллекций. Оно предоставляет шаблоны по умолчанию для коллекций книг, библиографий, видео, музыки, видеоигр, монет, марок, коллекционных карточек, комиксов и вин. Приложение позволяет создать базу данных для коллекции, сохраняя различные характеристики (например, название, автора и так далее).</p>
+    <p xml:lang="sa">Tellico भवतः संग्रहाणां आयोजनार्थं एकः अनुप्रयोगः अस्ति। एतत् पुस्तकानां, ग्रन्थसूचीनां, भिडियोनां, संगीतस्य, भिडियोक्रीडाणां, मुद्राणां, डाकटिकटानां, व्यापारपत्राणां, हास्यपुस्तकानां, मद्यस्य च पूर्वनिर्धारितसारूप्याणि प्रदाति । एतेन भवन्तः स्वस्य संग्रहं सूचीदत्तांशकोशे प्रविष्टुं शक्नुवन्ति, शीर्षकं, लेखकः इत्यादयः अनेकाः भिन्नाः गुणाः रक्षन्ति ।</p>
     <p xml:lang="sk">Tellico je aplikácia na organizáciu vašich zbierok. Poskytuje predvolené šablóny pre knihy, bibliografie, videá, hudbu, videohry, mince, známky, zberateľské karty, komiksy a vína. Umožní vám zadať vašu kolekciu do databázy katalógu, uložiť mnoho rozličných vlastností ako titul, autor atď.</p>
     <p xml:lang="sl">Tellico je program za upravljanje vaših zbirk. Ponuja privzete predloge za knjige, bibliografije, videe, glasbo, igre, kovance, znamke, karte, stripe in vino. Omogoča vam, da vašo zbirko katalogizirate in shranite z različnimi lastnostmi kot so naslov, avtor, itd.</p>
     <p xml:lang="sv">Tellico är ett program för att organisera samlingar. Det tillhandahåller standardmallar för böcker, bibliografier, videor, musik, videospel, mynt, frimärken, samlarbilder, serier och viner. Det låter dig mata in samlingen i en katalogdatabas, och spara många olika egenskaper som titel, författare, etc.</p>
@@ -157,6 +160,7 @@
     <p xml:lang="pt">Funcionalidades:</p>
     <p xml:lang="pt-BR">Funcionalidades:</p>
     <p xml:lang="ru">Возможности:</p>
+    <p xml:lang="sa">गुणाः:</p>
     <p xml:lang="sk">Funkcie:</p>
     <p xml:lang="sl">Zmožnosti:</p>
     <p xml:lang="sv">Funktioner:</p>
@@ -196,6 +200,7 @@
       <li xml:lang="pt">Suporta diversas colecções de livros, itens bibliográficos, vídeos, músicas, jogos de vídeo, livros de banda desenhada, moedas, selos, cromos, vinhos, jogos de tabuleiros e catálogos de ficheiros</li>
       <li xml:lang="pt-BR">Suporte a diversas coleções de livros, itens bibliográficos, vídeos, músicas, jogos de vídeo game, histórias em quadrinhos, moedas, selos, figurinhas, vinhos, jogos de tabuleiro e catálogos de arquivos</li>
       <li xml:lang="ru">Поддержка шаблонов коллекций книг, библиографических записей, видео, музыки, видеоигр, комиксов, монет, марок, коллекционных карточек, вин, настольных игр и каталогов файлов.</li>
+      <li xml:lang="sa">पुस्तकानां, ग्रन्थसूचीप्रविष्टीनां, विडियोनां, संगीतस्य, विडियोक्रीडाणां, हास्यपुस्तकानां, मुद्राणां, डाकटिकटानां, व्यापारिकपत्तेः, मद्यस्य, बोर्डक्रीडायाः, सञ्चिकासूचीनां च पूर्वनिर्धारितसङ्ग्रहस्य समर्थनं करोति</li>
       <li xml:lang="sk">Podporuje predvolené zbierky kníh, bibliografických položiek, videí, hudby, videohier, komiksov, mincí, známok, zberateľských kariet, vín, stolných hier a zakladačov</li>
       <li xml:lang="sl">Podpira privzete zbirke za knjige, bibliografije, videe, glasbo, igre, kovance, znamke, karte, stripe, namizne igre, vino in zbirke datotek</li>
       <li xml:lang="sv">Stöder standardsamlingar för böcker, bibliografiposter, videor, musik, videospel, serier, mynt, frimärken, samlarbilder, viner, brädspel och filkataloger</li>
@@ -233,6 +238,7 @@
       <li xml:lang="pt">Suporta colecções personalizadas pelo utilizador</li>
       <li xml:lang="pt-BR">Suporte a coleções personalizadas pelo usuário</li>
       <li xml:lang="ru">Поддержка пользовательских коллекций</li>
+      <li xml:lang="sa">उपयोक्तृ-निर्धारित-अनुकूल-सङ्ग्रहान् समर्थयति</li>
       <li xml:lang="sk">Podporuje používateľom definované vlastné zbierky</li>
       <li xml:lang="sl">Podpira uporabniško določene zbirke</li>
       <li xml:lang="sv">Stöder användardefinierade anpassade samlingar</li>
@@ -270,6 +276,7 @@
       <li xml:lang="pt">Suporta qualquer número de campos definidos pelo utilizador, de diferentes tipos: texto, parágrafo, lista, opção de marcação, número, URL, data, imagens e combinações</li>
       <li xml:lang="pt-BR">Suporte a qualquer número de campos definidos pelo usuário, de diferentes tipos: texto, parágrafo, lista, opção de marcação, número, URL, data, imagens e combinações</li>
       <li xml:lang="ru">Поддержка неограниченного количества пользовательских полей нескольких типов: текст, большой текст, список, флажок, номер, URL-адрес, дата, изображения и комбинации</li>
+      <li xml:lang="sa">उपयोक्तृनिर्धारितक्षेत्राणां किमपि संख्यां समर्थयति, अनेकविधप्रकारस्य: पाठः, अनुच्छेदः, सूची, चेकबॉक्सः, संख्या, URL, तिथिः, चित्राणि, संयोजनानि च</li>
       <li xml:lang="sk">Podporuje ľubovoľný počet používateľom definovaných polí rôznych typov: text, odstavec, zoznam, checkbox, číslo, URL, dátum, obrázky a kombinácie</li>
       <li xml:lang="sl">Podpira poljubno število uporabniško določenih polj različnih vrst: besedilo, odstavek, seznam, označno polje, številka, naslov URL, datum, slike in njihove poljubne kombinacije</li>
       <li xml:lang="sv">Stöder hur många användardefinierade fält som helst av flera olika typer: text, stycke, lista, kryssruta, tal, webbadress, datum, bilder och kombinationer</li>
@@ -307,6 +314,7 @@
       <li xml:lang="pt">Lida com itens de vários autores, géneros, palavras-chave, etc</li>
       <li xml:lang="pt-BR">Lida com itens de vários autores, gêneros, palavras-chave, etc</li>
       <li xml:lang="ru">Обработка записей, содержащих несколько авторов, жанров, ключевых слов и так далее</li>
+      <li xml:lang="sa">बहुलेखकैः, विधैः, कीवर्डैः इत्यादिभिः सह प्रविष्टीनां निबन्धनं करोति</li>
       <li xml:lang="sk">Spracúva položky s viacerými autormi, žánrami, kľúčovými slovami atď.</li>
       <li xml:lang="sl">Zna ravnati z vnosi z več avtorji, zvrstmi, ključnimi besedami, itd.</li>
       <li xml:lang="sv">Hanterar poster med flera författare, genrer, nyckelord, etc.</li>
@@ -344,6 +352,7 @@
       <li xml:lang="pt">Formata automaticamente os títulos e nomes</li>
       <li xml:lang="pt-BR">Formata automaticamente os títulos e nomes</li>
       <li xml:lang="ru">Автоматическое форматирование заголовков и имён</li>
+      <li xml:lang="sa">स्वयमेव शीर्षकं नाम च स्वरूपयति</li>
       <li xml:lang="sk">Automaticky formátuje tituly a názvy</li>
       <li xml:lang="sl">Samodejno oblikuje naslove in imena</li>
       <li xml:lang="sv">Formaterar automatiskt titlar och namn</li>
@@ -381,6 +390,7 @@
       <li xml:lang="pt">Suporta a pesquisa na colecção e a filtragem da janela</li>
       <li xml:lang="pt-BR">Suporte a pesquisa na coleção e filtragem da janela</li>
       <li xml:lang="ru">Поддержка поиска по коллекции и фильтров просмотра</li>
+      <li xml:lang="sa">संग्रह-अन्वेषणं दृश्य-छननं च समर्थयति</li>
       <li xml:lang="sk">Podporuje hľadanie kolekcií a filtrovanie zobrazenia</li>
       <li xml:lang="sl">Podpira iskanje po zbirkah in filtriranje prikaza</li>
       <li xml:lang="sv">Stöder sökning i samlingen och filtrering av visningen</li>
@@ -418,6 +428,7 @@
       <li xml:lang="pt">Ordena e agrupa a colecção de acordo com diversas propriedades</li>
       <li xml:lang="pt-BR">Ordena e agrupa a coleção de acordo com diversas propriedades</li>
       <li xml:lang="ru">Упорядочение и группировка коллекции по различным свойствам</li>
+      <li xml:lang="sa">विभिन्नगुणैः संग्रहणं क्रमयति समूहयति च</li>
       <li xml:lang="sk">Triedi a zoskupuje kolekciu podľa rôznych vlastností</li>
       <li xml:lang="sl">Zna razvrstiti in združevati zbirko po različnih lastnostih</li>
       <li xml:lang="sv">Sorterar och grupperar samlingen enligt olika egenskaper</li>
@@ -455,6 +466,7 @@
       <li xml:lang="pt">Permite modelos de registos personalizados, através de XSLT</li>
       <li xml:lang="pt-BR">Permite modelos de registros personalizados, através de XSLT</li>
       <li xml:lang="ru">Поддержка настройки шаблонов записей с помощью XSLT</li>
+      <li xml:lang="sa">XSLT मार्गेण अनुकूलनीयप्रवेशसारूप्याणां अनुमतिं ददाति</li>
       <li xml:lang="sk">Umožňuje upraviteľné šablóny položiek cez XSLT</li>
       <li xml:lang="sl">Dovoljuje uporabno prilagodljivih predlog za vnos preko XSLT</li>
       <li xml:lang="sv">Tillåter anpassningsbara inmatningsmallar via XSLT</li>
@@ -492,6 +504,7 @@
       <li xml:lang="pt">Importa dos formatos MODS, Bibtex, RIS, CSV, meta-dados de PDF, entre muitos outros</li>
       <li xml:lang="pt-BR">Importa dos formatos MODS, Bibtex, RIS, CSV, metadados de PDF, entre muitos outros</li>
       <li xml:lang="ru">Импорт метаданных из MODS, Bibtex, RIS, CSV, PDF и многих других форматов</li>
+      <li xml:lang="sa">MODS, Bibtex, RIS, CSV, PDF मेटाडाटा, इत्यादीनि अनेकानि प्रारूपाणि आयातयति</li>
       <li xml:lang="sk">Importuje MODS, Bibtex, RIS, CSV, PDF metadáta a veľa iných formátov</li>
       <li xml:lang="sl">Zna uvoziti MODS, Bibtex, RIS, CSV, metapodatke PDF in druge vrste datotek</li>
       <li xml:lang="sv">Importerar MODS, Bibtexd, RIS, CSV, PDF-metadata och många andra format</li>
@@ -528,6 +541,7 @@
       <li xml:lang="pt">Exporta para o Bibtex, ONIX, CSV, HTML, entre outros formatos</li>
       <li xml:lang="pt-BR">Exporta para o Bibtex, ONIX, CSV, HTML, entre outros formatos</li>
       <li xml:lang="ru">Экспорт в BibTeX, ONIX, CSV, HTML и другие форматы</li>
+      <li xml:lang="sa">Bibtex, ONIX, CSV, HTML, इत्यादिषु प्रारूपेषु निर्यातं करोति</li>
       <li xml:lang="sk">Exportuje do Bibtex, ONIX, CSV, HTML a iných formátov</li>
       <li xml:lang="sl">Zna izvoziti v Bibtex, ONIX, CSV, HTML in druge vrste datotek</li>
       <li xml:lang="sv">Exporterar till Bibtex, ONIX, CSV, HTML och andra format</li>
@@ -565,6 +579,7 @@
       <li xml:lang="pt">Importa a informação directamente a partir da Amazon.com, IMDb, servidores de z39.50, PubMed, servidores de SRU, CrossRef.org, entre outros serviços, bem como de programas externos</li>
       <li xml:lang="pt-BR">Importa a informação diretamente a partir da Amazon.com, IMDb, servidores z39.50, PubMed, servidores SRU, CrossRef.org, entre outros serviços, bem como de scripts externos</li>
       <li xml:lang="ru">Импорт информации напрямую с Amazon.com, IMDb, серверов z39.50, PubMed, серверов SRU, CrossRef.org и других веб-сайтов, а также из внешних сценариев</li>
+      <li xml:lang="sa">Amazon.com, IMDb, z39.50 सर्वर, PubMed, SRU सर्वर, CrossRef.org, अन्येभ्यः विविधेभ्यः वेबसाइट्-स्थानेभ्यः, बाह्य-स्क्रिप्ट्-भ्यः च प्रत्यक्षतया सूचनां आयातयति</li>
       <li xml:lang="sk">Importuje informácie priamo z Amazon.com, IMDb, z39.50 serverov, PubMed, SRU serverov, CrossRef.org, rôznych iných webstránok a z externých skriptov</li>
       <li xml:lang="sl">Zna uvoziti podatke neposredno iz Amazon.com, IMDb, strežnikov  z39.50, PubMed, strežnikov SRU, CrossRef.org, drugih spletnih strani in zunanjih skript</li>
       <li xml:lang="sv">Importerar information direkt från Amazon.com, IMDb, z39.50-servrar, PubMed, naSRU-servrar, CrossRef.org, diverse andra webbplatser, och från externa skript</li>
@@ -601,6 +616,7 @@
       <li xml:lang="pt">Importa os dados do CDDB para catalogar os CD's de áudio</li>
       <li xml:lang="pt-BR">Importa os dados CDDB para catalogar CDs de áudio</li>
       <li xml:lang="ru">Импорт данных CDDB для каталогизации Audio CD</li>
+      <li xml:lang="sa">श्रव्य-सीडी-सूचीं कर्तुं CDDB-दत्तांशं आयातयति</li>
       <li xml:lang="sk">Importuje údaje CDDB pre katalogizáciu CD</li>
       <li xml:lang="sl">Zna uvoziti podatke CDDB za katalogiziranje glasbenih CD-jev</li>
       <li xml:lang="sv">Importerar CDDB-data för katalogisering av ljud-cd</li>
@@ -637,6 +653,7 @@
       <li xml:lang="pt">Sonda e importa as colecções dos ficheiros de áudio, como MP3's ou OGG's</li>
       <li xml:lang="pt-BR">Verifica e importa as coleções de arquivos de áudio, como MP3 ou OGG</li>
       <li xml:lang="ru">Сканирование и импорт коллекций аудиофайлов (например, MP3 или OGG)</li>
+      <li xml:lang="sa">श्रव्यसञ्चिकासङ्ग्रहान्, यथा mp3 अथवा ogg, स्कैन् कृत्वा आयातयति</li>
       <li xml:lang="sk">Prehľadá a importuje zbierky audio súborov, ako mp3 alebo ogg</li>
       <li xml:lang="sl">Zna preiskati in uvoziti zbirke zvočnih datotek kot so mp3 ali ogg</li>
       <li xml:lang="sv">Söker igenom och importera samlingar av ljudfiler, såsom mp3 eller ogg</li>
@@ -682,6 +699,7 @@
       <caption xml:lang="pt">A janela principal a mostrar uma colecção de filmes</caption>
       <caption xml:lang="pt-BR">A janela principal mostrando uma coleção de filmes</caption>
       <caption xml:lang="ru">Главное окно с коллекцией фильмов</caption>
+      <caption xml:lang="sa">चलचित्रसङ्ग्रहं दर्शयति मुख्यविण्डो</caption>
       <caption xml:lang="sk">Hlavné okno zobrazujúce kolekciu filmov</caption>
       <caption xml:lang="sl">Glavno okno, ki prikazuje zbirko filmov</caption>
       <caption xml:lang="sv">Huvudfönstret som visar en filmsamling</caption>
@@ -720,6 +738,7 @@
       <caption xml:lang="pt">A janela principal a mostrar um único item numa colecção de livros</caption>
       <caption xml:lang="pt-BR">A janela principal a mostrar um único item em uma coleção de livros</caption>
       <caption xml:lang="ru">Главное окно с простым элементом из коллекции книг</caption>
+      <caption xml:lang="sa">पुस्तकसङ्ग्रहे सरलं वस्तु दर्शयति मुख्यविण्डो</caption>
       <caption xml:lang="sk">Hlavné okno zobrazujúce jednoduchú položku v kolekcii kníh</caption>
       <caption xml:lang="sl">Glavno okno, ki prikazuje preprost predmet v knjižni zbirki</caption>
       <caption xml:lang="sv">Huvudfönstret som visar ett enkelt objekt i en boksamling</caption>
@@ -759,6 +778,7 @@
       <caption xml:lang="pt">A janela principal a mostrar vistas lado-a-lado de uma colecção de jogos</caption>
       <caption xml:lang="pt-BR">A janela principal mostrando visões lado a lado de uma coleção de jogos</caption>
       <caption xml:lang="ru">Главное окно с параллельным представлением коллекции игр</caption>
+      <caption xml:lang="sa">क्रीडासङ्ग्रहस्य पार्श्वतः पार्श्वदृश्यानि दर्शयति मुख्यविण्डो</caption>
       <caption xml:lang="sk">Hlavné okno zobrazujúce pohľady vedľa seba kolekcie hier</caption>
       <caption xml:lang="sl">Glavno okno, ki prikazuje dva vzporedna pogleda zbirke iger</caption>
       <caption xml:lang="sv">Huvudfönstret som visar en spelsamling med visning sida vid sida</caption>
