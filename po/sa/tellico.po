@@ -3,30 +3,31 @@
 # This file is distributed under the same license as the tellico package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-10 00:40+0000\n"
-"PO-Revision-Date: 2024-12-13 20:03+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-14 01:12+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "भवतः नामानि"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "भवतः ईमेलपत्राणि"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -38,31 +39,31 @@ msgstr "एल्बम"
 #, kde-format
 msgctxt "Default XSL Template"
 msgid "Default"
-msgstr ""
+msgstr "मूलभूतम्‌"
 
 #. i18n: file: xslt/entry-templates/Fancy.xsl
 #, kde-format
 msgctxt "Fancy XSL Template"
 msgid "Fancy"
-msgstr ""
+msgstr "अल्पितवेशः"
 
 #. i18n: file: xslt/entry-templates/Video.xsl
 #, kde-format
 msgctxt "Video XSL Template"
 msgid "Video"
-msgstr ""
+msgstr "विडिओ"
 
 #. i18n: file: xslt/entry-templates/Compact.xsl
 #, kde-format
 msgctxt "Compact XSL Template"
 msgid "Compact"
-msgstr ""
+msgstr "संकुचित"
 
 #. i18n: file: xslt/report-templates/Title_Listing_(Vertical).xsl
 #, kde-format
 msgctxt "Title Listing (Vertical) XSL Template"
 msgid "Title Listing (Vertical)"
-msgstr ""
+msgstr "शीर्षकसूची (ऊर्ध्वाधर) २."
 
 #. i18n: file: xslt/report-templates/Group_View.xsl
 #, kde-format
@@ -74,49 +75,49 @@ msgstr "समूहदृश्यम्"
 #, kde-format
 msgctxt "Loan View XSL Template"
 msgid "Loan View"
-msgstr ""
+msgstr "ऋण दृश्य"
 
 #. i18n: file: xslt/report-templates/Title_Listing_(Horizontal).xsl
 #, kde-format
 msgctxt "Title Listing (Horizontal) XSL Template"
 msgid "Title Listing (Horizontal)"
-msgstr ""
+msgstr "शीर्षकसूची (क्षैतिज) २."
 
 #. i18n: file: xslt/report-templates/Group_Summary.xsl
 #, kde-format
 msgctxt "Group Summary XSL Template"
 msgid "Group Summary"
-msgstr ""
+msgstr "समूहसारांशः"
 
 #. i18n: file: xslt/report-templates/Image_List.xsl
 #, kde-format
 msgctxt "Image List XSL Template"
 msgid "Image List"
-msgstr ""
+msgstr "चित्रसूची"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
 #, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr ""
+msgstr "चित्रजालम्"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
-msgstr ""
+msgstr "त्रि-स्तम्भ"
 
 #. i18n: file: xslt/report-templates/Group_Statistics.xsl
 #, kde-format
 msgctxt "Group Statistics XSL Template"
 msgid "Group Statistics"
-msgstr ""
+msgstr "समूह सांख्यिकी"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
 msgctxt "Column View XSL Template"
 msgid "Column View"
-msgstr ""
+msgstr "स्तम्भदृश्यम्"
 
 #: src/bibtexkeydialog.cpp:48
 #, kde-format
@@ -147,8 +148,8 @@ msgstr "द्वितीयकप्रशस्तिकुञ्जिका
 #, kde-format
 msgid "There is %1 duplicate citation key."
 msgid_plural "There are %1 duplicate citation keys."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 द्वितीयकं उद्धरणकुंजी अस्ति ।"
+msgstr[1] "%1 द्वितीयकप्रशस्तिकुंजीः सन्ति ।"
 
 #: src/borrowerdialog.cpp:74
 #, kde-format
@@ -206,7 +207,7 @@ msgstr "वर्ष वितरण"
 #, kde-format
 msgctxt "Distinct number of items"
 msgid "Count"
-msgstr ""
+msgstr "गणनां कारोतु"
 
 #: src/cite/lyxpipe.cpp:57
 #, kde-format
@@ -294,7 +295,7 @@ msgstr "कस्टम संग्रह"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "आन्तरिकक्षेत्रनाम <em>%1</em> अस्ति ।"
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -310,7 +311,7 @@ msgstr "वर्तमान क्षेत्राणि"
 #, kde-format
 msgctxt "New Field"
 msgid "&New"
-msgstr ""
+msgstr "&नूतनम्‌"
 
 #: src/collectionfieldsdialog.cpp:121
 #, kde-format
@@ -321,7 +322,7 @@ msgstr "संग्रहे नूतनं क्षेत्रं योज
 #, kde-format
 msgctxt "Delete Field"
 msgid "Delete"
-msgstr ""
+msgstr "लुप्"
 
 #: src/collectionfieldsdialog.cpp:125
 #, kde-format
@@ -863,7 +864,7 @@ msgstr "श्रेणी"
 #, kde-format
 msgctxt "A number field in a bibliography"
 msgid "Volume"
-msgstr ""
+msgstr "मात्रा"
 
 #: src/collections/bibtexcollection.cpp:220
 #, kde-format
@@ -1236,7 +1237,7 @@ msgstr "प्रकारः"
 #, kde-format
 msgctxt "monetary denomination"
 msgid "Denomination"
-msgstr ""
+msgstr "संप्रदायः"
 
 #: src/collections/coincollection.cpp:67
 #, kde-format
@@ -1271,6 +1272,9 @@ msgid ""
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 msgstr ""
+"प्रमाण-65,प्रमाण-60,टकसाल राज्य-65,टकसाल राज्य-60,लगभग अप्रसारित-55,लगभग "
+"अप्रसारित-50,अत्यंत बारीक-40,बहुत महीन-30,बहुत महीन-20,ठीक-12,बहुत अच्छा- ८,उत्तम-४,"
+"मेला"
 
 #: src/collections/coincollection.cpp:99 src/collections/stampcollection.cpp:91
 #, kde-format
@@ -1281,7 +1285,7 @@ msgstr "वर्ग"
 #, kde-format
 msgctxt "Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "PCGS,NGC,ANACS,ICG,ASA,PCI"
-msgstr ""
+msgstr "पीसीजीएस,एनजीसी,एएनएसीएस,आईसीजी,एएसए,पीसीआई"
 
 #: src/collections/coincollection.cpp:108
 #, kde-format
@@ -1330,7 +1334,7 @@ msgctxt ""
 "Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,"
 "Poor"
 msgid "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
-msgstr ""
+msgstr "टकसाल,पुदीना के पास,बहुत महीन,ठीक,बहुत अच्छा,अच्छा,गोरा,दरिद्र"
 
 #: src/collections/filecatalog.cpp:34
 #, kde-format
@@ -1341,7 +1345,7 @@ msgstr "मम सञ्चिकाः"
 #, kde-format
 msgctxt "File catalog"
 msgid "Volume"
-msgstr ""
+msgstr "मात्रा"
 
 #: src/collections/filecatalog.cpp:64
 #, kde-format
@@ -1444,19 +1448,19 @@ msgstr "MacOS"
 #, kde-format
 msgctxt "Windows Platform"
 msgid "Windows"
-msgstr ""
+msgstr "विण्डोज"
 
 #: src/collections/gamecollection.cpp:239
 #, kde-format
 msgctxt "iOS Platform"
 msgid "iOS"
-msgstr ""
+msgstr "iOS"
 
 #: src/collections/gamecollection.cpp:240
 #, kde-format
 msgctxt "Android Platform"
 msgid "Android"
-msgstr ""
+msgstr "एण्ड्रॉयड्"
 
 #: src/collections/gamecollection.cpp:241
 #, kde-format
@@ -1507,7 +1511,7 @@ msgstr "प्लेस्टेशन5"
 #, kde-format
 msgctxt "PlayStation Portable"
 msgid "PSP"
-msgstr ""
+msgstr "पीएसपी"
 
 #: src/collections/gamecollection.cpp:251
 #, kde-format
@@ -1578,7 +1582,7 @@ msgstr "निन्टेन्डो 3DS"
 #, kde-format
 msgctxt "Sega Genesis"
 msgid "Genesis"
-msgstr ""
+msgstr "उत्पत्तिः"
 
 #: src/collections/gamecollection.cpp:265
 #, kde-format
@@ -1594,6 +1598,7 @@ msgid ""
 "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, "
 "Pending"
 msgstr ""
+"अरेटेड्, केवलं वयस्कानाम्, परिपक्वः, किशोरः, सर्वे 10+, सर्वे, प्रारम्भिकबाल्यकालः, लम्बितम्"
 
 #: src/collections/musiccollection.cpp:34
 #, kde-format
@@ -1704,7 +1709,7 @@ msgstr "स्कॉट् # ."
 msgctxt ""
 "Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgid "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
-msgstr ""
+msgstr "शानदार,अत्यन्त महीन,अति महीन,महीन,औसत,दरिद्र"
 
 #: src/collections/stampcollection.cpp:96
 #, kde-format
@@ -1773,7 +1778,7 @@ msgstr "उत्पादन वर्ष"
 #, kde-format
 msgctxt "Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 msgid "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
-msgstr ""
+msgstr "जी (अमेरिका),पीजी (अमेरिका),पीजी-13 (अमेरिका),आर (अमेरिका), यू (अमेरिका)"
 
 #: src/collections/videocollection.cpp:63
 #, kde-format
@@ -2012,7 +2017,7 @@ msgstr "प्रविष्टयः योजयन्तु"
 #, kde-format
 msgctxt "Add (Entry Title)"
 msgid "Add %1"
-msgstr ""
+msgstr "%1 योजयन्तु"
 
 #: src/commands/addloans.cpp:47
 #, kde-format
@@ -2023,7 +2028,7 @@ msgstr "चेक-आउट आइटम"
 #, kde-format
 msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
-msgstr ""
+msgstr "चेक-आउट %1"
 
 #: src/commands/collectioncommand.cpp:54
 #, kde-format
@@ -2082,7 +2087,7 @@ msgstr "प्रविष्टयः परिवर्तयन्तु"
 #, kde-format
 msgctxt "Modify (Entry Title)"
 msgid "Modify %1"
-msgstr ""
+msgstr "%1 परिवर्तनं कुर्वन्तु"
 
 #: src/commands/modifyloans.cpp:36 src/loandialog.cpp:78
 #, kde-format
@@ -2098,7 +2103,7 @@ msgstr "प्रविष्टयः विलोपयन्तु"
 #, kde-format
 msgctxt "Delete (Entry Title)"
 msgid "Delete %1"
-msgstr ""
+msgstr "%1 विलोपयन्तु"
 
 #: src/commands/removeloans.cpp:40
 #, kde-format
@@ -2109,7 +2114,7 @@ msgstr "चेक-इन प्रविष्टयः"
 #, kde-format
 msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
-msgstr ""
+msgstr "चेक-इन %1"
 
 #: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:311
 #, kde-format
@@ -2128,24 +2133,26 @@ msgid ""
 "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
 "up,with"
 msgstr ""
+"a,an,and,as,at,but,by,from,into,into,of,off,on,onto,or,out,over,the,to,up,"
+"with"
 
 #: src/config/tellico_config.kcfg:83
 #, kde-format
 msgctxt "comma-separated list of articles ignored for title sorting"
 msgid "the"
-msgstr ""
+msgstr "the"
 
 #: src/config/tellico_config.kcfg:86
 #, kde-format
 msgctxt "comma-separated list of common surname suffixes, used for sorting"
 msgid "jr.,jr,iii,iv"
-msgstr ""
+msgstr "जूनियर,जृ,iii,iv"
 
 #: src/config/tellico_config.kcfg:89
 #, kde-format
 msgctxt "comma-separated list of common surname prefixes, used for sorting"
 msgid "de,van,der,van der,von"
-msgstr ""
+msgstr "the,of,der,van der,von इति"
 
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
@@ -2765,31 +2772,31 @@ msgstr "विलोपनार्थं टेम्पलेट् चयन�
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "चित्राणि सम्प्रति <em>%1</em> अन्तः रक्षितानि सन्ति"
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "चित्राणि सम्प्रति <em>%1</em> इत्यत्र रक्षिताः सन्ति"
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "चित्राणि <em>%1</em> तः <em>%2</em> यावत् स्थानान्तरितानि भविष्यन्ति"
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "चित्राणि <em>%1</em> तः <em>%2</em> यावत् स्थानान्तरितानि भविष्यन्ति"
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "चित्राणि <em>%1</em> तः <em>%2</em> यावत् स्थानान्तरितानि भविष्यन्ति"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:560 src/fetchdialog.cpp:621
@@ -2903,7 +2910,7 @@ msgstr "स्तम्भान् पश्यन्तु"
 #, kde-format
 msgctxt "Noun, Menu name"
 msgid "Columns"
-msgstr ""
+msgstr "स्तम्भाः"
 
 #: src/detailedlistview.cpp:542
 #, kde-format
@@ -3005,7 +3012,7 @@ msgstr ""
 #, kde-format
 msgctxt "Open URL"
 msgid "Open %1"
-msgstr ""
+msgstr "%1 उद्घाटयन्तु"
 
 #: src/entrymatchdialog.cpp:56
 #, kde-format
@@ -3487,7 +3494,7 @@ msgstr ""
 #, kde-format
 msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
-msgstr ""
+msgstr "arXiv इत्यस्य मुक्तप्रवेशस्य अन्तरक्रियाशीलतायाः उपयोगाय धन्यवादः ।"
 
 #: src/fetch/arxivfetcher.cpp:345 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
@@ -3540,13 +3547,13 @@ msgstr "टकसाल"
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
-msgstr ""
+msgstr "स्टैन्ले गिब्सन"
 
 #: src/fetch/colnectfetcher.cpp:597 src/fetch/colnectfetcher.cpp:825
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
-msgstr ""
+msgstr "मिशेल"
 
 #: src/fetch/colnectfetcher.cpp:826 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:635
@@ -3863,7 +3870,7 @@ msgstr "स्पेनदेशः"
 #, kde-format
 msgctxt "Country"
 msgid "USA"
-msgstr ""
+msgstr "मृग"
 
 #: src/fetch/filmasterfetcher.cpp:237 src/fetch/filmasterfetcher.cpp:314
 #, kde-format
@@ -3934,7 +3941,7 @@ msgstr "डेवी दशमलव"
 #, kde-format
 msgctxt "Library of Congress classification system"
 msgid "LoC Classification"
-msgstr ""
+msgstr "LoC वर्गीकरण"
 
 #: src/fetch/ibsfetcher.cpp:393
 #, kde-format
@@ -4076,19 +4083,19 @@ msgstr "Numista Link"
 #, kde-format
 msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
-msgstr ""
+msgstr "क्राउस-मिश्लर"
 
 #: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:635
 #, kde-format
 msgctxt "Language"
 msgid "English"
-msgstr ""
+msgstr "आंग्ल"
 
 #: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:638
 #, kde-format
 msgctxt "Language"
 msgid "French"
-msgstr ""
+msgstr "फ्रेंचभाषा"
 
 #: src/fetch/numistafetcher.cpp:462
 #, kde-format
@@ -4207,25 +4214,25 @@ msgstr "जाल"
 #, kde-format
 msgctxt "Language"
 msgid "Chinese"
-msgstr ""
+msgstr "चीनी"
 
 #: src/fetch/themoviedbfetcher.cpp:641
 #, kde-format
 msgctxt "Language"
 msgid "German"
-msgstr ""
+msgstr "जर्मन"
 
 #: src/fetch/themoviedbfetcher.cpp:644
 #, kde-format
 msgctxt "Language"
 msgid "Spanish"
-msgstr ""
+msgstr "स्पेनी भाषा"
 
 #: src/fetch/themoviedbfetcher.cpp:647
 #, kde-format
 msgctxt "Language"
 msgid "Russian"
-msgstr ""
+msgstr "रूसी"
 
 #: src/fetch/themoviedbfetcher.cpp:690
 #, kde-format
@@ -4397,7 +4404,7 @@ msgstr "अन्वेषण प्रश्न"
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
-msgstr ""
+msgstr "अन्वेषण:"
 
 #: src/fetchdialog.cpp:164
 #, kde-format
@@ -4508,7 +4515,7 @@ msgstr "सर्वाणि अन्वेषणक्षेत्राण�
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%प% ९."
 
 #: src/fetchdialog.cpp:392
 #, kde-format
@@ -4529,8 +4536,8 @@ msgstr "अन्वेषणेन कोऽपि वस्तूनि न �
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "अन्वेषणेन १ द्रव्यं प्राप्तम् ।"
+msgstr[1] "अन्वेषणेन %1 वस्तूनि प्राप्तानि ।"
 
 #: src/fetchdialog.cpp:497
 #, kde-format
@@ -4658,7 +4665,7 @@ msgstr "दिनाङ्कः"
 #, kde-format
 msgctxt "ID # of the entry"
 msgid "ID"
-msgstr ""
+msgstr "आईडी"
 
 #: src/field.cpp:302
 #, kde-format
@@ -4679,13 +4686,13 @@ msgstr "अन्तर्राष्ट्रीय मानक पुस्�
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
-msgstr ""
+msgstr "ऋतु"
 
 #: src/field.cpp:344
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
-msgstr ""
+msgstr "प्रकरणम्"
 
 #: src/field.cpp:350
 #, kde-format
@@ -4795,7 +4802,7 @@ msgstr "संग्रह टेम्पलेट के रूप में �
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
-msgstr ""
+msgstr "%1: १."
 
 #: src/gui/filterrulewidget.cpp:63
 #, kde-format
@@ -4830,25 +4837,25 @@ msgstr "नियमितव्यञ्जनस्य मेलनं न क
 #, kde-format
 msgctxt "is before a date"
 msgid "is before"
-msgstr ""
+msgstr "इति पूर्वम्"
 
 #: src/gui/filterrulewidget.cpp:239
 #, kde-format
 msgctxt "is after a date"
 msgid "is after"
-msgstr ""
+msgstr "इति पश्चात्"
 
 #: src/gui/filterrulewidget.cpp:246
 #, kde-format
 msgctxt "is less than a number"
 msgid "is less than"
-msgstr ""
+msgstr "इति न्यूनम्"
 
 #: src/gui/filterrulewidget.cpp:247
 #, kde-format
 msgctxt "is greater than a number"
 msgid "is greater than"
-msgstr ""
+msgstr "इत्यस्मात् अधिकं भवति"
 
 #: src/gui/filterrulewidget.cpp:250
 #, kde-format
@@ -4864,13 +4871,13 @@ msgstr "बिम्बस्य आकारः समानः न भवत�
 #, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
-msgstr ""
+msgstr "चित्रस्य आकारः न्यूनः अस्ति"
 
 #: src/gui/filterrulewidget.cpp:253
 #, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
-msgstr ""
+msgstr "चित्रस्य आकारः अधिकः अस्ति"
 
 #: src/gui/filterrulewidget.cpp:260
 #, kde-format
@@ -4932,13 +4939,13 @@ msgstr "लिङ्कस्य रक्षणं केवलं नवयो
 #, kde-format
 msgctxt "more widgets"
 msgid "More"
-msgstr ""
+msgstr "अधिकः"
 
 #: src/gui/kwidgetlister.cpp:70
 #, kde-format
 msgctxt "fewer widgets"
 msgid "Fewer"
-msgstr ""
+msgstr "ऊन"
 
 #: src/gui/previewdialog.cpp:43
 #, kde-format
@@ -4954,7 +4961,7 @@ msgstr "निरसयतु"
 #, kde-format
 msgctxt "set a value"
 msgid "&Set"
-msgstr ""
+msgstr "&दृढः"
 
 #: src/gui/stringmapwidget.cpp:75
 #, kde-format
@@ -6410,7 +6417,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr ""
+msgstr "टेलिको लॉग"
 
 #: src/reportdialog.cpp:89
 #, kde-format
@@ -6525,7 +6532,7 @@ msgstr "&निर्यात"
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Collection"
-msgstr ""
+msgstr "&सङ्ग्रह"
 
 #. i18n: ectx: Menu (coll_update_entry)
 #: src/tellicoui.rc:89
@@ -6539,14 +6546,14 @@ msgstr "&प्रविष्टि अद्यतन करें"
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bibliography"
-msgstr ""
+msgstr "&ग्रन्थसूची"
 
 #. i18n: ectx: Menu (dockers)
 #: src/tellicoui.rc:113
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Views"
-msgstr ""
+msgstr "&दृश्यानि दर्शयतु"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: src/tellicoui.rc:130
