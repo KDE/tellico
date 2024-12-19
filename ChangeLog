@@ -12,7 +12,7 @@
 
 2024-10-24  Robby Stephenson  <robby@periapsis.org>
 
-	* Improved image loading to be only on need.
+	* Improved image loading to be only on need (Bug 490922).
 
 2024-10-21  Robby Stephenson  <robby@periapsis.org>
 
