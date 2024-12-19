@@ -53,6 +53,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 ############# Options #################
 
+option(BUILD_DOC           "Whether to build the documentation" TRUE)
 option(ENABLE_CDTEXT       "Enable cdtext" TRUE)
 option(ENABLE_WEBCAM       "Enable support for webcams" FALSE)
 option(BUILD_FETCHER_TESTS "Build tests which verify data sources" FALSE)
@@ -86,7 +87,6 @@ find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS
     ConfigWidgets
     CoreAddons
     Crash
-    DocTools
     GuiAddons
     IconThemes
     ItemModels
@@ -124,6 +124,13 @@ include(MacroBoolTo01)
 find_package(Gettext REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
+
+if(BUILD_DOC)
+    find_package(KF${KF_MAJOR_VERSION}DocTools)
+    set_package_properties(KF${KF_MAJOR_VERSION}DocTools PROPERTIES
+        DESCRIPTION "Tools to generate documentation"
+        TYPE REQUIRED)
+endif()
 
 find_package(KF${KF_MAJOR_VERSION}FileMetaData)
 set_package_properties(KF${KF_MAJOR_VERSION}FileMetaData PROPERTIES
@@ -273,7 +280,10 @@ set(TELLICO_DATA_INSTALL_DIR ${KDE_INSTALL_DATADIR}/tellico)
 add_subdirectory(src)
 add_subdirectory(icons)
 add_subdirectory(xslt)
-add_subdirectory(doc)
+
+if(BUILD_DOC)
+    add_subdirectory(doc)
+endif()
 
 ########## Wrap tests results around the tests done within the source
 
@@ -304,35 +314,38 @@ install(PROGRAMS org.kde.tellico.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES tellico.xml DESTINATION  ${KDE_INSTALL_MIMEDIR})
 install(FILES org.kde.tellico.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 ki18n_install(po)
-# some translations require KF6, skip those when creating docs
-if(NOT KF_MAJOR_VERSION STREQUAL "5")
-    kdoctools_install(po)
-else()
-    # taken from kdoctools cmake macro
-    file(GLOB lang_dirs "po/*")
-    # remove the non-backwards compatible translations
-    list(FILTER lang_dirs EXCLUDE REGEX "po/sl")
-    if(NOT KDE_INSTALL_DOCBUNDLEDIR)
-        if(HTML_INSTALL_DIR)
-            set(KDE_INSTALL_DOCBUNDLEDIR ${HTML_INSTALL_DIR})
-        else()
-            set(KDE_INSTALL_DOCBUNDLEDIR share/doc/HTML)
-        endif()
-    endif()
-    foreach(lang_dir ${lang_dirs})
-        get_filename_component(lang ${lang_dir} NAME)
 
-        file(GLOB_RECURSE docbooks RELATIVE "${lang_dir}" "${lang_dir}/docs/*.docbook")
-        foreach(docbook ${docbooks})
-            string(REGEX MATCH "^docs/(.*)/index.docbook" match ${docbook})
-            if(match)
-                kdoctools_create_handbook("${lang_dir}/${docbook}"
-                    INSTALL_DESTINATION ${KDE_INSTALL_DOCBUNDLEDIR}/${lang}
-                    SUBDIR ${CMAKE_MATCH_1}
-                )
+if(BUILD_DOC)
+    # some translations require KF6, skip those when creating docs
+    if(NOT KF_MAJOR_VERSION STREQUAL "5")
+        kdoctools_install(po)
+    else()
+        # taken from kdoctools cmake macro
+        file(GLOB lang_dirs "po/*")
+        # remove the non-backwards compatible translations
+        list(FILTER lang_dirs EXCLUDE REGEX "po/sl")
+        if(NOT KDE_INSTALL_DOCBUNDLEDIR)
+            if(HTML_INSTALL_DIR)
+                set(KDE_INSTALL_DOCBUNDLEDIR ${HTML_INSTALL_DIR})
+            else()
+                set(KDE_INSTALL_DOCBUNDLEDIR share/doc/HTML)
             endif()
+        endif()
+        foreach(lang_dir ${lang_dirs})
+            get_filename_component(lang ${lang_dir} NAME)
+
+            file(GLOB_RECURSE docbooks RELATIVE "${lang_dir}" "${lang_dir}/docs/*.docbook")
+            foreach(docbook ${docbooks})
+                string(REGEX MATCH "^docs/(.*)/index.docbook" match ${docbook})
+                if(match)
+                    kdoctools_create_handbook("${lang_dir}/${docbook}"
+                        INSTALL_DESTINATION ${KDE_INSTALL_DOCBUNDLEDIR}/${lang}
+                        SUBDIR ${CMAKE_MATCH_1}
+                    )
+                endif()
+            endforeach()
         endforeach()
-    endforeach()
+    endif()
 endif()
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
