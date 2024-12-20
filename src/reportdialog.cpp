@@ -429,9 +429,9 @@ void ReportDialog::slotPrint() {
       QEventLoop loop;
       if(dialog->printer()->outputFormat() == QPrinter::PdfFormat) {
         myLog() << "Printing" << m_templateCombo->currentText() << "as PDF to" << dialog->printer()->outputFileName();
-        QObject::connect(m_webView->page(), &QWebEnginePage::pdfPrintingFinished, dialog, [&](const QString& file, bool success) {
+        QObject::connect(m_webView->page(), &QWebEnginePage::pdfPrintingFinished, dialog, [&](const QString&, bool success) {
           if(success) {
-            myLog() << "Printing PDF report to" << file << "completed";
+            myLog() << "Printing PDF report completed";
           } else {
             myLog() << "Printing PDF report failed";
           }
@@ -457,9 +457,9 @@ void ReportDialog::slotPrint() {
 #else
       if(dialog->printer()->outputFormat() == QPrinter::PdfFormat) {
         myLog() << "Printing" << m_templateCombo->currentText() << "as PDF to" << dialog->printer()->outputFileName();
-        QObject::connect(m_webView, &QWebEngineView::pdfPrintingFinished, dialog, [=](const QString& file, bool success) {
+        QObject::connect(m_webView, &QWebEngineView::pdfPrintingFinished, dialog, [=](const QString&, bool success) {
           if(success) {
-            myLog() << "Printing PDF report to" << file << "completed";
+            myLog() << "Printing PDF report completed";
           } else {
             myLog() << "Printing PDF report failed";
           }
