@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-10 00:40+0000\n"
+"POT-Creation-Date: 2024-12-20 00:41+0000\n"
 "PO-Revision-Date: 2024-11-29 10:46+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -2790,8 +2790,8 @@ msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "התמונות תועברנה מ־<em>%1</em> אל <em>%2</em>"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
-#: src/fetchdialog.cpp:426 src/fetchdialog.cpp:560 src/fetchdialog.cpp:621
-#: src/fetchdialog.cpp:635 src/gui/statusbar.cpp:94
+#: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
+#: src/fetchdialog.cpp:634 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "בהמתנה."
@@ -4398,7 +4398,7 @@ msgstr "נא למלא ערך לחיפוש. חיפוש מסת״ב חייב לכל
 msgid "Choose the type of search"
 msgstr "נא לבחור את סוג החיפוש"
 
-#: src/fetchdialog.cpp:178 src/fetchdialog.cpp:402 src/fetchdialog.cpp:582
+#: src/fetchdialog.cpp:178 src/fetchdialog.cpp:402 src/fetchdialog.cpp:581
 #, kde-format
 msgid "&Stop"
 msgstr "&עצירה"
@@ -4503,7 +4503,7 @@ msgstr "%p%"
 msgid "Cancelling the search..."
 msgstr "החיפוש מבוטל…"
 
-#: src/fetchdialog.cpp:405 src/fetchdialog.cpp:585
+#: src/fetchdialog.cpp:405 src/fetchdialog.cpp:584
 #, kde-format
 msgid "Searching..."
 msgstr "מתבצע חיפוש…"
@@ -4532,42 +4532,42 @@ msgstr "לא נמצאו תוצאות לערכי המסת״ב הבאים:"
 msgid "No Results"
 msgstr "אין תוצאות"
 
-#: src/fetchdialog.cpp:552 src/fetchdialog.cpp:608
+#: src/fetchdialog.cpp:551 src/fetchdialog.cpp:607
 #, kde-format
 msgid "Fetching %1..."
 msgstr "%1 מתקבל…"
 
-#: src/fetchdialog.cpp:625
+#: src/fetchdialog.cpp:624
 #, kde-format
 msgid "Attribution"
 msgstr "ייחוס"
 
-#: src/fetchdialog.cpp:662 src/fetchdialog.cpp:886
+#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:885
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "אין מקורות אינטרנט זמינים לסוג האוסף הנוכחי שלך."
 
-#: src/fetchdialog.cpp:743
+#: src/fetchdialog.cpp:742
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "עריכת ערכי מסת״ב/UPD"
 
-#: src/fetchdialog.cpp:754
+#: src/fetchdialog.cpp:753
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>נא למלא את ערכי המסת״ב או ה־UPC, אחד בשורה.</qt>"
 
-#: src/fetchdialog.cpp:770
+#: src/fetchdialog.cpp:769
 #, kde-format
 msgid "&Load From File..."
 msgstr "&טעינה מקובץ…"
 
-#: src/fetchdialog.cpp:771
+#: src/fetchdialog.cpp:770
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>טעינת הרשימה מקובץ טקסט.</qt>"
 
-#: src/fetchdialog.cpp:795
+#: src/fetchdialog.cpp:794
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "

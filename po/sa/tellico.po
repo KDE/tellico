@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-10 00:40+0000\n"
-"PO-Revision-Date: 2024-12-14 01:12+0530\n"
+"POT-Creation-Date: 2024-12-20 00:41+0000\n"
+"PO-Revision-Date: 2024-12-19 21:41+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -2799,8 +2799,8 @@ msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "चित्राणि <em>%1</em> तः <em>%2</em> यावत् स्थानान्तरितानि भविष्यन्ति"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
-#: src/fetchdialog.cpp:426 src/fetchdialog.cpp:560 src/fetchdialog.cpp:621
-#: src/fetchdialog.cpp:635 src/gui/statusbar.cpp:94
+#: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
+#: src/fetchdialog.cpp:634 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "आत्त।"
@@ -3174,7 +3174,7 @@ msgstr ""
 #: src/fetch/themoviedbfetcher.cpp:597
 #, kde-format
 msgid "Access key: "
-msgstr "अभिगमकुंजी : १. "
+msgstr "अभिगमकुंजी : "
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:544
@@ -3407,7 +3407,7 @@ msgstr "Amazon.com जालसेवाः"
 #: src/fetch/amazonfetcher.cpp:1117
 #, kde-format
 msgid "Secret key: "
-msgstr "गुप्त कुञ्जी : १. "
+msgstr "गुप्त कुञ्जी : "
 
 #: src/fetch/amazonfetcher.cpp:1127
 #, kde-format
@@ -3430,7 +3430,7 @@ msgstr ""
 #: src/fetch/videogamegeekfetcher.cpp:215
 #, kde-format
 msgid "&Image size: "
-msgstr "&प्रतिबिम्बस्य आकारः : १. "
+msgstr "&प्रतिबिम्बस्य आकारः : "
 
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:219
 #: src/fetch/colnectfetcher.cpp:960 src/fetch/imdbfetcher.cpp:570
@@ -3571,7 +3571,7 @@ msgstr "भाषा: "
 #: src/fetch/colnectfetcher.cpp:966
 #, kde-format
 msgid "Country code: "
-msgstr "देशसङ्केतः : १. "
+msgstr "देशसङ्केतः : "
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
@@ -3617,7 +3617,7 @@ msgstr "केषाञ्चन खातानां कृते केवल
 #: src/fetch/crossreffetcher.cpp:332
 #, kde-format
 msgid "Email: "
-msgstr "ईमेलः १. "
+msgstr "ईमेलः "
 
 #: src/fetch/dbcfetcher.cpp:145
 #, kde-format
@@ -3737,7 +3737,7 @@ msgstr "बाह्य-अनुप्रयोगात् प्रत्य�
 #: src/fetch/execexternalfetcher.cpp:374
 #, kde-format
 msgid "&Result type: "
-msgstr "&परिणामप्रकारः : १. "
+msgstr "&परिणामप्रकारः : "
 
 #: src/fetch/execexternalfetcher.cpp:383
 #, kde-format
@@ -3747,7 +3747,7 @@ msgstr "बाह्य-अनुप्रयोगात् प्रत्य�
 #: src/fetch/execexternalfetcher.cpp:397
 #, kde-format
 msgid "Application &path: "
-msgstr "अनुप्रयोग &मार्गः १. "
+msgstr "अनुप्रयोग &मार्गः "
 
 #: src/fetch/execexternalfetcher.cpp:402
 #, kde-format
@@ -3848,7 +3848,7 @@ msgstr "FilmAffinity Link"
 #: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:608
 #, kde-format
 msgid "&Maximum cast: "
-msgstr "&अधिकतम कास्ट : १. "
+msgstr "&अधिकतम कास्ट : "
 
 #: src/fetch/filmaffinityfetcher.cpp:487 src/fetch/imdbfetcher.cpp:562
 #: src/fetch/kinopoiskfetcher.cpp:694 src/fetch/themoviedbfetcher.cpp:621
@@ -3897,7 +3897,7 @@ msgstr "प्लगिन् तः प्रत्यागतस्य दत
 #: src/fetch/gcstarpluginfetcher.cpp:427
 #, kde-format
 msgid "&Plugin: "
-msgstr "&प्लगिन्: १. "
+msgstr "&प्लगिन्: "
 
 #: src/fetch/gcstarpluginfetcher.cpp:433
 #, kde-format
@@ -4115,7 +4115,7 @@ msgstr "ओपीडीएस सूची"
 #: src/fetch/opdsfetcher.cpp:450
 #, kde-format
 msgid "Catalog: "
-msgstr "सूचीपत्रम् : १. "
+msgstr "सूचीपत्रम् : "
 
 #: src/fetch/opdsfetcher.cpp:455
 #, kde-format
@@ -4150,7 +4150,7 @@ msgstr "SRU सर्वर"
 #: src/fetch/srufetcher.cpp:543
 #, kde-format
 msgid "Scheme: "
-msgstr "योजना : १. "
+msgstr "योजना : "
 
 #: src/fetch/srufetcher.cpp:553 src/fetch/srufetcher.cpp:589
 #, kde-format
@@ -4185,7 +4185,7 @@ msgstr "पथं: "
 #: src/fetch/srufetcher.cpp:594
 #, kde-format
 msgid "Format: "
-msgstr "प्रारूपः : १. "
+msgstr "प्रारूपः : "
 
 #: src/fetch/srufetcher.cpp:605
 #, kde-format
@@ -4247,7 +4247,7 @@ msgstr "TheTVDB Link"
 #: src/fetch/thetvdbfetcher.cpp:590
 #, kde-format
 msgid "Subscriber PIN: "
-msgstr "ग्राहकः पिनः : १. "
+msgstr "ग्राहकः पिनः : "
 
 #: src/fetch/vgcollectfetcher.cpp:233 src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
@@ -4302,7 +4302,7 @@ msgstr "पूर्वनिर्धारितं &server इत्यस्
 #: src/fetch/z3950fetcher.cpp:624
 #, kde-format
 msgid "&Database: "
-msgstr "&दत्तांशकोशः : १. "
+msgstr "&दत्तांशकोशः : "
 
 #: src/fetch/z3950fetcher.cpp:629
 #, kde-format
@@ -4312,7 +4312,7 @@ msgstr "सर्वरेण उपयुज्यमानं दत्ता�
 #: src/fetch/z3950fetcher.cpp:634
 #, kde-format
 msgid "Query character set: "
-msgstr "प्रश्नवर्णसमूहः : १. "
+msgstr "प्रश्नवर्णसमूहः : "
 
 #: src/fetch/z3950fetcher.cpp:643
 #, kde-format
@@ -4326,7 +4326,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:649
 #, kde-format
 msgid "Results character set: "
-msgstr "परिणाम वर्णसमूहः : १. "
+msgstr "परिणाम वर्णसमूहः : "
 
 #: src/fetch/z3950fetcher.cpp:658
 #, kde-format
@@ -4340,7 +4340,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:664
 #, kde-format
 msgid "&Format: "
-msgstr "&स्वरूपः : १. "
+msgstr "&स्वरूपः : "
 
 #: src/fetch/z3950fetcher.cpp:667
 #, kde-format
@@ -4359,7 +4359,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:682
 #, kde-format
 msgid "&User: "
-msgstr "&उपयोक्ता : १. "
+msgstr "&उपयोक्ता : "
 
 #: src/fetch/z3950fetcher.cpp:685 src/fetch/z3950fetcher.cpp:697
 #, kde-format
@@ -4416,7 +4416,7 @@ msgstr "अन्वेषणमूल्यं प्रविशतु । ISB
 msgid "Choose the type of search"
 msgstr "अन्वेषणस्य प्रकारं चिनोतु"
 
-#: src/fetchdialog.cpp:178 src/fetchdialog.cpp:402 src/fetchdialog.cpp:582
+#: src/fetchdialog.cpp:178 src/fetchdialog.cpp:402 src/fetchdialog.cpp:581
 #, kde-format
 msgid "&Stop"
 msgstr "&विरमतु"
@@ -4522,7 +4522,7 @@ msgstr "%प% ९."
 msgid "Cancelling the search..."
 msgstr "अन्वेषणं रद्दं कुर्वन्..."
 
-#: src/fetchdialog.cpp:405 src/fetchdialog.cpp:585
+#: src/fetchdialog.cpp:405 src/fetchdialog.cpp:584
 #, kde-format
 msgid "Searching..."
 msgstr "अन्वेषणं कुर्वन्..."
@@ -4549,42 +4549,42 @@ msgstr "निम्नलिखित ISBN मूल्यानां कृ�
 msgid "No Results"
 msgstr "न परिणामः"
 
-#: src/fetchdialog.cpp:552 src/fetchdialog.cpp:608
+#: src/fetchdialog.cpp:551 src/fetchdialog.cpp:607
 #, kde-format
 msgid "Fetching %1..."
 msgstr "%1 आनयन्..."
 
-#: src/fetchdialog.cpp:625
+#: src/fetchdialog.cpp:624
 #, kde-format
 msgid "Attribution"
 msgstr "विशेषणम्"
 
-#: src/fetchdialog.cpp:662 src/fetchdialog.cpp:886
+#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:885
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "भवतः वर्तमानसङ्ग्रहप्रकारस्य कृते कोऽपि अन्तर्जालस्रोतः उपलब्धः नास्ति ।"
 
-#: src/fetchdialog.cpp:743
+#: src/fetchdialog.cpp:742
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "ISBN/UPC मूल्यानि सम्पादयन्तु"
 
-#: src/fetchdialog.cpp:754
+#: src/fetchdialog.cpp:753
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>ISBN अथवा UPC मूल्यानि प्रविशन्तु, प्रतिपङ्क्तौ एकं ।</qt>"
 
-#: src/fetchdialog.cpp:770
+#: src/fetchdialog.cpp:769
 #, kde-format
 msgid "&Load From File..."
 msgstr "&Load From File..."
 
-#: src/fetchdialog.cpp:771
+#: src/fetchdialog.cpp:770
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>पाठसञ्चिकातः सूचीं लोड् कुर्वन्तु ।</qt>"
 
-#: src/fetchdialog.cpp:795
+#: src/fetchdialog.cpp:794
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
@@ -4601,7 +4601,7 @@ msgstr "दत्तांशस्रोतगुणाः"
 #: src/fetcherconfigdialog.cpp:104
 #, kde-format
 msgid "&Source name: "
-msgstr "&स्रोतनाम: १. "
+msgstr "&स्रोतनाम: "
 
 #: src/fetcherconfigdialog.cpp:106
 #, kde-format
@@ -4612,7 +4612,7 @@ msgstr "नाम दत्तांशस्रोतस्य परिचय�
 #: src/fetcherconfigdialog.cpp:116
 #, kde-format
 msgid "Source &type: "
-msgstr "स्रोतः &प्रकारः : १. "
+msgstr "स्रोतः &प्रकारः : "
 
 #: src/fetcherconfigdialog.cpp:125
 #, kde-format
@@ -7342,7 +7342,7 @@ msgstr "टेलिको इत्यनेन उत्पन्नम्"
 #: xslt/report-templates/Group_Summary.xsl:296
 #, kde-format
 msgid "Distinct values: "
-msgstr "विशिष्टानि मूल्यानि : १. "
+msgstr "विशिष्टानि मूल्यानि : "
 
 #: xslt/tellico2html.xsl:252
 #, kde-format
