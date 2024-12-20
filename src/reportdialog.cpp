@@ -396,8 +396,7 @@ void ReportDialog::showText(const QString& text_, const QUrl& url_) {
 // actually the print button
 void ReportDialog::slotPrint() {
   if(m_reportView->currentIndex() == INDEX_CHART) {
-    QPrinter printer;
-    printer.setResolution(600);
+    QPrinter printer(QPrinter::HighResolution);
     QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, this);
     if(dialog->exec() == QDialog::Accepted) {
       myLog() << "Printing" << m_templateCombo->currentText() << "chart";
@@ -422,26 +421,25 @@ void ReportDialog::slotPrint() {
 #ifdef USE_KHTML
     m_HTMLPart->view()->print();
 #else
-    auto printer = new QPrinter;
-    printer->setResolution(300);
+    auto printer = new QPrinter(QPrinter::HighResolution);
     auto dialog = new QPrintDialog(printer, this);
     if(dialog->exec() == QDialog::Accepted) {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       GUI::CursorSaver cs(Qt::WaitCursor);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       QEventLoop loop;
       if(dialog->printer()->outputFormat() == QPrinter::PdfFormat) {
         myLog() << "Printing" << m_templateCombo->currentText() << "as PDF to" << dialog->printer()->outputFileName();
-        m_webView->page()->printToPdf(dialog->printer()->outputFileName(), dialog->printer()->pageLayout());
-        QObject::connect(m_webView->page(), &QWebEnginePage::pdfPrintingFinished, dialog, [&](const QString&, bool success) {
+        QObject::connect(m_webView->page(), &QWebEnginePage::pdfPrintingFinished, dialog, [&](const QString& file, bool success) {
           if(success) {
-            myLog() << "Printing report to PDF completed";
+            myLog() << "Printing PDF report to" << file << "completed";
           } else {
-            myLog() << "Printing report to PDF failed";
+            myLog() << "Printing PDF report failed";
           }
           delete dialog;
           delete printer;
           loop.quit();
         });
+        m_webView->page()->printToPdf(dialog->printer()->outputFileName(), dialog->printer()->pageLayout());
       } else {
         myLog() << "Printing" << m_templateCombo->currentText() << "report";
         m_webView->page()->print(printer, [=, &loop](bool success) {
@@ -457,16 +455,31 @@ void ReportDialog::slotPrint() {
       }
       loop.exec();
 #else
-      m_webView->print(printer);
-      connect(m_webView, &QWebEngineView::printFinished, [=](bool success) {
-        if(success) {
-          myLog() << "Printing completed";
-        } else {
-          myLog() << "Printing failed";
-        }
-        delete dialog;
-        delete printer;
-      });
+      if(dialog->printer()->outputFormat() == QPrinter::PdfFormat) {
+        myLog() << "Printing" << m_templateCombo->currentText() << "as PDF to" << dialog->printer()->outputFileName();
+        QObject::connect(m_webView, &QWebEngineView::pdfPrintingFinished, dialog, [=](const QString& file, bool success) {
+          if(success) {
+            myLog() << "Printing PDF report to" << file << "completed";
+          } else {
+            myLog() << "Printing PDF report failed";
+          }
+          delete dialog;
+          delete printer;
+        });
+        m_webView->printToPdf(dialog->printer()->outputFileName(), dialog->printer()->pageLayout());
+      } else {
+        myLog() << "Printing" << m_templateCombo->currentText() << "report";
+        QObject::connect(m_webView, &QWebEngineView::printFinished, dialog, [=](bool success) {
+          if(success) {
+            myLog() << "Printing report completed";
+          } else {
+            myLog() << "Printing report failed";
+          }
+          delete dialog;
+          delete printer;
+        });
+        m_webView->print(printer);
+      }
 #endif
     }
 #endif
