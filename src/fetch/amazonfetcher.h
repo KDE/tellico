@@ -66,16 +66,16 @@ public:
   AmazonFetcher(QObject* parent);
   virtual ~AmazonFetcher();
 
-  virtual QString source() const Q_DECL_OVERRIDE;
-  virtual QString attribution() const Q_DECL_OVERRIDE;
-  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
-  virtual void continueSearch() Q_DECL_OVERRIDE;
+  virtual QString source() const override;
+  virtual QString attribution() const override;
+  virtual bool isSearching() const override { return m_started; }
+  virtual void continueSearch() override;
   // amazon can search title, person, isbn, or keyword. No Raw for now.
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
-  virtual void stop() Q_DECL_OVERRIDE;
-  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
-  virtual Type type() const Q_DECL_OVERRIDE { return Amazon; }
-  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
+  virtual bool canSearch(FetchKey k) const override;
+  virtual void stop() override;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) override;
+  virtual Type type() const override { return Amazon; }
+  virtual bool canFetch(int type) const override;
 
   struct SiteData {
     QString title;
@@ -89,7 +89,7 @@ public:
   /**
    * Returns a widget for modifying the fetcher's config.
    */
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const override;
 
   class ConfigWidget;
   friend class ConfigWidget;
@@ -102,9 +102,9 @@ private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
-  virtual void search() Q_DECL_OVERRIDE;
-  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
-  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
+  virtual void search() override;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
+  virtual void readConfigHook(const KConfigGroup& config) override;
   void doSearch();
   QByteArray requestPayload(const FetchRequest& request);
   Data::CollPtr createCollection();
@@ -166,8 +166,8 @@ Q_OBJECT
 public:
   explicit ConfigWidget(QWidget* parent_, const AmazonFetcher* fetcher = nullptr);
 
-  virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
-  virtual QString preferredName() const Q_DECL_OVERRIDE;
+  virtual void saveConfigHook(KConfigGroup& config) override;
+  virtual QString preferredName() const override;
 
 private Q_SLOTS:
   void slotSiteChanged();

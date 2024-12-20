@@ -51,15 +51,15 @@ public:
   /**
    * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
    */
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual Data::CollPtr collection() override;
   /**
    */
-  virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE;
-  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget*) override;
+  virtual bool canImport(int type) const override;
   void setCharacterSet(const QString& charSet);
 
 public Q_SLOTS:
-  void slotCancel() Q_DECL_OVERRIDE;
+  void slotCancel() override;
 
 private:
   bool initMARCHandler();

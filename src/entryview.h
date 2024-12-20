@@ -114,7 +114,7 @@ protected:
 #ifdef USE_KHTML
   void changeEvent(QEvent* event);
 #else
-  void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+  void changeEvent(QEvent* event) override;
 #endif
 
 private Q_SLOTS:
@@ -125,7 +125,7 @@ private:
 #ifdef USE_KHTML
   void contextMenuEvent(QContextMenuEvent* event);
 #else
-  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
+  void contextMenuEvent(QContextMenuEvent* event) override;
 #endif
 
   Data::EntryPtr m_entry;
@@ -151,7 +151,7 @@ public Q_SLOTS:
   void copy();
 
 protected:
-  void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+  void changeEvent(QEvent* event) override;
 };
 #else
 class EntryViewPage : public QWebEnginePage {
@@ -163,8 +163,8 @@ Q_SIGNALS:
   void signalTellicoAction(const QUrl& url);
 
 protected:
-  virtual bool acceptNavigationRequest(const QUrl& url, QWebEnginePage::NavigationType type, bool isMainFrame) Q_DECL_OVERRIDE;
-  virtual QWebEnginePage* createWindow(QWebEnginePage::WebWindowType type) Q_DECL_OVERRIDE;
+  virtual bool acceptNavigationRequest(const QUrl& url, QWebEnginePage::NavigationType type, bool isMainFrame) override;
+  virtual QWebEnginePage* createWindow(QWebEnginePage::WebWindowType type) override;
 
 private:
   void openExternalLink(const QUrl& url);

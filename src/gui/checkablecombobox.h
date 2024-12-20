@@ -42,10 +42,10 @@ Q_OBJECT
 public:
   CheckableItemModel(QObject* parent = nullptr);
 
-  Qt::ItemFlags flags(const QModelIndex& index) const Q_DECL_OVERRIDE;
+  Qt::ItemFlags flags(const QModelIndex& index) const override;
 
-  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
-  bool setData(const QModelIndex& index, const QVariant &value, int role = Qt::EditRole) Q_DECL_OVERRIDE;
+  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+  bool setData(const QModelIndex& index, const QVariant &value, int role = Qt::EditRole) override;
 
 Q_SIGNALS:
   void itemCheckStateChanged(const QModelIndex& index);
@@ -57,7 +57,7 @@ Q_OBJECT
 public:
   CheckBoxDelegate(QObject* parent = nullptr);
 
-  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const Q_DECL_OVERRIDE;
+  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 };
 
 class CheckableComboBox : public QComboBox {
@@ -76,7 +76,7 @@ public:
   void setAllCheckState(Qt::CheckState checkState);
 
   void hidePopup() override;
-  bool eventFilter(QObject* object, QEvent* event) Q_DECL_OVERRIDE;
+  bool eventFilter(QObject* object, QEvent* event) override;
 
 Q_SIGNALS:
   void checkedItemsChanged(const QStringList& items);

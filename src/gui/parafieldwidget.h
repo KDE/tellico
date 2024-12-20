@@ -48,15 +48,15 @@ public:
   ParaFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~ParaFieldWidget();
 
-  virtual QString text() const Q_DECL_OVERRIDE;
-  virtual void setTextImpl(const QString& text) Q_DECL_OVERRIDE;
+  virtual QString text() const override;
+  virtual void setTextImpl(const QString& text) override;
 
 public Q_SLOTS:
-  virtual void clearImpl() Q_DECL_OVERRIDE;
+  virtual void clearImpl() override;
 
 protected:
-  virtual QWidget* widget() Q_DECL_OVERRIDE;
-  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
+  virtual QWidget* widget() override;
+  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) override;
 
 private:
   KTextEdit* m_textEdit;

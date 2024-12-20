@@ -32,9 +32,9 @@ public:
   RatingDelegate(QObject* parent = nullptr);
 
   void setMaxRating(uint rating_) { m_maxRating = rating_; }
-  void paint(QPainter* painter, const QStyleOptionViewItem& option,const QModelIndex& index) const Q_DECL_OVERRIDE;
+  void paint(QPainter* painter, const QStyleOptionViewItem& option,const QModelIndex& index) const override;
 
-  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const Q_DECL_OVERRIDE;
+  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 
 private:
   uint m_maxRating;

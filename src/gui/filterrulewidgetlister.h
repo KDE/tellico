@@ -48,8 +48,8 @@ Q_SIGNALS:
   void signalModified();
 
 protected:
-  virtual void clearWidget(QWidget* widget) Q_DECL_OVERRIDE;
-  virtual QWidget* createWidget(QWidget* parent) Q_DECL_OVERRIDE;
+  virtual void clearWidget(QWidget* widget) override;
+  virtual QWidget* createWidget(QWidget* parent) override;
 };
 
 } // end namespace

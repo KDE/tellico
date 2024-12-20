@@ -46,8 +46,8 @@ public:
 
   FilterCommand(Mode mode, FilterPtr activeFilter, FilterPtr oldFilter=FilterPtr());
 
-  virtual void redo() Q_DECL_OVERRIDE;
-  virtual void undo() Q_DECL_OVERRIDE;
+  virtual void redo() override;
+  virtual void undo() override;
 
 private:
   Mode m_mode;

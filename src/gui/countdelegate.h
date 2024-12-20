@@ -43,8 +43,8 @@ public:
   virtual ~CountDelegate();
 
 protected:
-  virtual void initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const Q_DECL_OVERRIDE;
-  virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const Q_DECL_OVERRIDE;
+  virtual void initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const override;
+  virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 
 private:
   QTreeView* parent() const;

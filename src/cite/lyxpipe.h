@@ -37,10 +37,10 @@ class Lyxpipe : public Action {
 public:
   Lyxpipe();
 
-  virtual CiteAction type() const Q_DECL_OVERRIDE { return CiteLyxpipe; }
-  virtual bool cite(Data::EntryList entries) Q_DECL_OVERRIDE;
-  virtual bool hasError() const Q_DECL_OVERRIDE;
-  virtual QString errorString() const Q_DECL_OVERRIDE;
+  virtual CiteAction type() const override { return CiteLyxpipe; }
+  virtual bool cite(Data::EntryList entries) override;
+  virtual bool hasError() const override;
+  virtual QString errorString() const override;
 
 private:
   bool m_hasError;

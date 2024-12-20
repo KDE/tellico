@@ -44,11 +44,11 @@ public:
   GCstarExporter(Data::CollPtr coll);
   ~GCstarExporter();
 
-  virtual bool exec() Q_DECL_OVERRIDE;
-  virtual QString formatString() const Q_DECL_OVERRIDE;
-  virtual QString fileFilter() const Q_DECL_OVERRIDE;
+  virtual bool exec() override;
+  virtual QString formatString() const override;
+  virtual QString fileFilter() const override;
 
-  virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget*) override;
 
   QString text();
 

@@ -68,10 +68,10 @@ public:
    */
   void clear();
 
-  virtual void    addEntries(Data::EntryList entries) Q_DECL_OVERRIDE;
-  virtual void modifyEntries(Data::EntryList entries) Q_DECL_OVERRIDE;
+  virtual void    addEntries(Data::EntryList entries) override;
+  virtual void modifyEntries(Data::EntryList entries) override;
 
-  virtual void    addField(Data::CollPtr coll, Data::FieldPtr field) Q_DECL_OVERRIDE;
+  virtual void    addField(Data::CollPtr coll, Data::FieldPtr field) override;
   /**
    * Updates a widget when its field has been modified. The category may have changed, completions may have
    * been added or removed, or what-have-you.
@@ -80,13 +80,13 @@ public:
    * @param oldField A pointer to the old field, which should have the same name as the new one
    * @param newField A pointer to the new field
    */
-  virtual void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
+  virtual void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField) override;
   /**
    * Removes a field from the editor.
    *
    * @param field The field to be removed
    */
-  virtual void removeField(Data::CollPtr, Data::FieldPtr field) Q_DECL_OVERRIDE;
+  virtual void removeField(Data::CollPtr, Data::FieldPtr field) override;
 
 public Q_SLOTS:
   /**
@@ -123,7 +123,7 @@ public Q_SLOTS:
   /**
    * Override the implementation to check whether the entry needs to be modified
    */
-  virtual void reject() Q_DECL_OVERRIDE;
+  virtual void reject() override;
 
 protected Q_SLOTS:
   void slotHelp();
@@ -147,9 +147,9 @@ private:
    * @param entry A pointer to the entry
    */
   void updateCompletions(Data::EntryPtr entry);
-  virtual void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
-  virtual void hideEvent(QHideEvent* event) Q_DECL_OVERRIDE;
-  virtual void closeEvent(QCloseEvent* event) Q_DECL_OVERRIDE;
+  virtual void showEvent(QShowEvent* event) override;
+  virtual void hideEvent(QHideEvent* event) override;
+  virtual void closeEvent(QCloseEvent* event) override;
 
   Data::CollPtr m_currColl;
   Data::EntryList m_currEntries;

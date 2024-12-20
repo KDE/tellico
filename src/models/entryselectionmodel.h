@@ -49,7 +49,7 @@ public:
   Tellico::Data::EntryList selectedEntries() const { return m_selectedEntries; }
 
 public Q_SLOTS:
-  void clear() Q_DECL_OVERRIDE;
+  void clear() override;
 
 Q_SIGNALS:
   void entriesSelected(Tellico::Data::EntryList entries);

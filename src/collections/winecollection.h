@@ -46,7 +46,7 @@ public:
    */
   explicit WineCollection(bool addDefaultFields, const QString& title = QString());
 
-  virtual Type type() const Q_DECL_OVERRIDE { return Wine; }
+  virtual Type type() const override { return Wine; }
 
   static FieldList defaultFields();
 };

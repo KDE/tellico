@@ -47,14 +47,14 @@ public:
   BoolFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~BoolFieldWidget() {}
 
-  virtual QString text() const Q_DECL_OVERRIDE;
-  virtual void setTextImpl(const QString& text) Q_DECL_OVERRIDE;
+  virtual QString text() const override;
+  virtual void setTextImpl(const QString& text) override;
 
 public Q_SLOTS:
-  virtual void clearImpl() Q_DECL_OVERRIDE;
+  virtual void clearImpl() override;
 
 protected:
-  virtual QWidget* widget() Q_DECL_OVERRIDE;
+  virtual QWidget* widget() override;
 
 private:
   QCheckBox* m_checkBox;

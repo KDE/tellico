@@ -46,7 +46,7 @@ public:
    */
   explicit CardCollection(bool addDefaultFields, const QString& title = QString());
 
-  virtual Type type() const Q_DECL_OVERRIDE { return Card; }
+  virtual Type type() const override { return Card; }
 
   static FieldList defaultFields();
 };

@@ -56,16 +56,16 @@ public:
    */
   virtual ~GCstarPluginFetcher();
 
-  virtual QString source() const Q_DECL_OVERRIDE;
-  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == Title; }
+  virtual QString source() const override;
+  virtual bool isSearching() const override { return m_started; }
+  virtual bool canSearch(FetchKey k) const override { return k == Title; }
 
-  virtual void stop() Q_DECL_OVERRIDE;
-  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
-  virtual Type type() const Q_DECL_OVERRIDE { return GCstarPlugin; }
-  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
-  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
+  virtual void stop() override;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) override;
+  virtual Type type() const override { return GCstarPlugin; }
+  virtual bool canFetch(int type) const override;
+  virtual void readConfigHook(const KConfigGroup& config) override;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const override;
 
   class ConfigWidget;
   friend class ConfigWidget;
@@ -80,8 +80,8 @@ private Q_SLOTS:
   void slotProcessExited();
 
 private:
-  virtual void search() Q_DECL_OVERRIDE;
-  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+  virtual void search() override;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
 
   // map Author, Name, Lang, etc...
   typedef QHash<QString, QVariant> PluginInfo;
@@ -114,15 +114,15 @@ public:
   explicit ConfigWidget(QWidget* parent, const GCstarPluginFetcher* fetcher = nullptr);
   ~ConfigWidget();
 
-  virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
-  virtual QString preferredName() const Q_DECL_OVERRIDE;
+  virtual void saveConfigHook(KConfigGroup& config) override;
+  virtual QString preferredName() const override;
 
 private Q_SLOTS:
   void slotTypeChanged();
   void slotPluginChanged();
 
 private:
-  void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
+  void showEvent(QShowEvent* event) override;
 
   bool m_needPluginList;
   QString m_originalPluginName;

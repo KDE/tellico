@@ -49,7 +49,7 @@ public:
   Qt::SortOrder sortOrder() const;
   void setSortOrder(Qt::SortOrder order);
 
-  virtual void sort(int column, Qt::SortOrder order = Qt::AscendingOrder) Q_DECL_OVERRIDE;
+  virtual void sort(int column, Qt::SortOrder order = Qt::AscendingOrder) override;
 
 private:
   int m_sortColumn;

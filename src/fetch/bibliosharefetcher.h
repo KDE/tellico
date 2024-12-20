@@ -43,20 +43,20 @@ public:
   BiblioShareFetcher(QObject* parent = nullptr);
   ~BiblioShareFetcher();
 
-  virtual QString source() const Q_DECL_OVERRIDE;
-  virtual QString attribution() const Q_DECL_OVERRIDE;
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == ISBN; }
-  virtual Type type() const Q_DECL_OVERRIDE { return BiblioShare; }
-  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
-  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
+  virtual QString source() const override;
+  virtual QString attribution() const override;
+  virtual bool canSearch(FetchKey k) const override { return k == ISBN; }
+  virtual Type type() const override { return BiblioShare; }
+  virtual bool canFetch(int type) const override;
+  virtual void readConfigHook(const KConfigGroup& config) override;
 
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const override;
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const BiblioShareFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
-    virtual QString preferredName() const Q_DECL_OVERRIDE;
+    virtual void saveConfigHook(KConfigGroup&) override;
+    virtual QString preferredName() const override;
   private:
     QLineEdit* m_tokenEdit;
   };
@@ -67,11 +67,11 @@ public:
   static StringHash allOptionalFields() { return StringHash(); }
 
 private:
-  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
-  virtual void resetSearch() Q_DECL_OVERRIDE {}
-  virtual QUrl searchUrl() Q_DECL_OVERRIDE;
-  virtual void parseData(QByteArray&) Q_DECL_OVERRIDE {}
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
+  virtual void resetSearch() override {}
+  virtual QUrl searchUrl() override;
+  virtual void parseData(QByteArray&) override {}
+  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) override;
 
   QString m_token;
 };

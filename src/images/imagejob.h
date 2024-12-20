@@ -41,7 +41,7 @@ public:
   ImageJob(const QUrl& url, const QString& id = QString(), bool quiet=false);
   virtual ~ImageJob();
 
-  virtual QString errorString() const Q_DECL_OVERRIDE;
+  virtual QString errorString() const override;
   QUrl url() const { return m_url; }
   bool linkOnly() const { return m_linkOnly; }
   const Data::Image& image() const;

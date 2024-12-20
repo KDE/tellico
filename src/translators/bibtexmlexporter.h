@@ -39,13 +39,13 @@ Q_OBJECT
 public:
   BibtexmlExporter(Data::CollPtr coll);
 
-  virtual QString formatString() const Q_DECL_OVERRIDE;
-  virtual QString fileFilter() const Q_DECL_OVERRIDE;
-  virtual bool exec() Q_DECL_OVERRIDE;
+  virtual QString formatString() const override;
+  virtual QString fileFilter() const override;
+  virtual bool exec() override;
   QString text();
 
   // no options
-  virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE { return nullptr; }
+  virtual QWidget* widget(QWidget*) override { return nullptr; }
 };
 
   } // end namespace

@@ -80,11 +80,11 @@ Q_SIGNALS:
   void signalModified();
 
 protected:
-  virtual void resizeEvent(QResizeEvent* ev) Q_DECL_OVERRIDE;
-  virtual void mousePressEvent(QMouseEvent* ev) Q_DECL_OVERRIDE;
-  virtual void mouseMoveEvent(QMouseEvent* ev) Q_DECL_OVERRIDE;
-  virtual void dragEnterEvent(QDragEnterEvent* ev) Q_DECL_OVERRIDE;
-  virtual void dropEvent(QDropEvent* ev) Q_DECL_OVERRIDE;
+  virtual void resizeEvent(QResizeEvent* ev) override;
+  virtual void mousePressEvent(QMouseEvent* ev) override;
+  virtual void mouseMoveEvent(QMouseEvent* ev) override;
+  virtual void dragEnterEvent(QDragEnterEvent* ev) override;
+  virtual void dropEvent(QDropEvent* ev) override;
 
 private Q_SLOTS:
   void slotGetImage();
@@ -105,7 +105,7 @@ private Q_SLOTS:
   void saveImageAs();
 
 private:
-  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
+  void contextMenuEvent(QContextMenuEvent* event) override;
   void scale();
   void loadImage(const QUrl& url);
 

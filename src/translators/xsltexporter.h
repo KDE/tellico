@@ -39,14 +39,14 @@ class XSLTExporter : public Exporter {
 public:
   XSLTExporter(Data::CollPtr coll);
 
-  virtual bool exec() Q_DECL_OVERRIDE;
-  virtual QString formatString() const Q_DECL_OVERRIDE;
-  virtual QString fileFilter() const Q_DECL_OVERRIDE;
+  virtual bool exec() override;
+  virtual QString formatString() const override;
+  virtual QString fileFilter() const override;
 
-  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget* parent) override;
 
-  virtual void readOptions(KSharedConfigPtr config) Q_DECL_OVERRIDE;
-  virtual void saveOptions(KSharedConfigPtr config) Q_DECL_OVERRIDE;
+  virtual void readOptions(KSharedConfigPtr config) override;
+  virtual void saveOptions(KSharedConfigPtr config) override;
 
 private:
   QWidget* m_widget;

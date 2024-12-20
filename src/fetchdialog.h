@@ -80,7 +80,7 @@ public Q_SLOTS:
   void slotResetCollection();
 
 protected:
-  void closeEvent(QCloseEvent* event) Q_DECL_OVERRIDE;
+  void closeEvent(QCloseEvent* event) override;
 
 private Q_SLOTS:
   void slotSearchClicked();
@@ -118,7 +118,7 @@ private:
   void openBarcodePreview();
   void closeBarcodePreview();
 
-  void customEvent(QEvent* event) Q_DECL_OVERRIDE;
+  void customEvent(QEvent* event) override;
 
   class FetchResultItem;
 

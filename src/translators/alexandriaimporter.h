@@ -57,17 +57,17 @@ public:
 
   /**
    */
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual Data::CollPtr collection() override;
   /**
    */
-  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
-  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget* parent) override;
+  virtual bool canImport(int type) const override;
 
   void setLibraryPath(const QString& libraryPath) { m_libraryPath = libraryPath; }
   QString libraryPath() const { return m_libraryPath; }
 
 public Q_SLOTS:
-  void slotCancel() Q_DECL_OVERRIDE;
+  void slotCancel() override;
 
 private:
   static QString& cleanLine(QString& str);

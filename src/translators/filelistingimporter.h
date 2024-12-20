@@ -55,17 +55,17 @@ public:
   /**
    * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
    */
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual Data::CollPtr collection() override;
   /**
    */
-  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
-  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget* parent) override;
+  virtual bool canImport(int type) const override;
 
   void setUseFilePreview(bool b) { m_useFilePreview = b; }
   void setCollectionType(int type_) { m_collType = type_; }
 
 public Q_SLOTS:
-  void slotCancel() Q_DECL_OVERRIDE;
+  void slotCancel() override;
 
 private Q_SLOTS:
   void slotEntries(KIO::Job* job, const KIO::UDSEntryList& list);

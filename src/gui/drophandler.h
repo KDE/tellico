@@ -40,7 +40,7 @@ public:
   ~DropHandler();
 
 protected:
-  bool eventFilter(QObject* object, QEvent* event) Q_DECL_OVERRIDE;
+  bool eventFilter(QObject* object, QEvent* event) override;
 
 private:
   bool dragEnter(QDragEnterEvent* event);

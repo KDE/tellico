@@ -64,8 +64,8 @@ class GroupSummaryReport : public ChartReport {
 public:
   GroupSummaryReport();
 
-  virtual QString title() const Q_DECL_OVERRIDE;
-  virtual QWidget* createWidget() Q_DECL_OVERRIDE;
+  virtual QString title() const override;
+  virtual QWidget* createWidget() override;
 };
 
 } // end namespace

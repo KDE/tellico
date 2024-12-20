@@ -58,18 +58,18 @@ public:
 
   /**
    */
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual Data::CollPtr collection() override;
   /**
    */
-  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
-  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget* parent) override;
+  virtual bool canImport(int type) const override;
 
   void setRecursive(bool recursive);
   void setAddFilePath(bool addFilePath);
   void setAddBitrate(bool addBitrate);
 
 public Q_SLOTS:
-  void slotCancel() Q_DECL_OVERRIDE;
+  void slotCancel() override;
   void slotAddFileToggled(bool on);
 
 private:

@@ -47,8 +47,8 @@ public:
   EntryIconModel(QObject* parent);
   virtual ~EntryIconModel();
 
-  void setSourceModel(QAbstractItemModel* newSourceModel) Q_DECL_OVERRIDE;
-  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+  void setSourceModel(QAbstractItemModel* newSourceModel) override;
+  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 
 public Q_SLOTS:
   void clearCache();

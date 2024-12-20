@@ -115,7 +115,7 @@ namespace barcodeRecognition {
   public:
     barcodeRecognitionThread();
     ~barcodeRecognitionThread();
-    virtual void run() Q_DECL_OVERRIDE;
+    virtual void run() override;
     void stop();
     void recognizeBarcode( QImage img );
     bool isWebcamAvailable();

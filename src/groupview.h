@@ -99,7 +99,7 @@ public:
    */
   void setEntrySelected(Data::EntryPtr entry);
 
-  virtual void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
+  virtual void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField) override;
 
 public Q_SLOTS:
   /**
@@ -115,7 +115,7 @@ public Q_SLOTS:
   void slotModifyGroups(Tellico::Data::CollPtr coll, QList<Tellico::Data::EntryGroup*> groups);
 
 private:
-  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
+  void contextMenuEvent(QContextMenuEvent* event) override;
   /**
    * Inserts a listviewitem for a given group
    *

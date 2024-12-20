@@ -57,7 +57,7 @@ public:
 
   Source source() const { return m_source; }
 
-  virtual void setText(const QString& text) Q_DECL_OVERRIDE;
+  virtual void setText(const QString& text) override;
 
 protected:
   /**

@@ -50,15 +50,15 @@ public:
   URLFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~URLFieldWidget();
 
-  virtual QString text() const Q_DECL_OVERRIDE;
-  virtual void setTextImpl(const QString& text) Q_DECL_OVERRIDE;
+  virtual QString text() const override;
+  virtual void setTextImpl(const QString& text) override;
 
 public Q_SLOTS:
-  virtual void clearImpl() Q_DECL_OVERRIDE;
+  virtual void clearImpl() override;
 
 protected:
-  virtual QWidget* widget() Q_DECL_OVERRIDE;
-  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
+  virtual QWidget* widget() override;
+  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) override;
 
 protected Q_SLOTS:
   void slotOpenURL();
@@ -67,7 +67,7 @@ private:
   class URLCompletion : public KUrlCompletion {
   public:
     URLCompletion() : KUrlCompletion() {}
-    virtual QString makeCompletion(const QString& text) Q_DECL_OVERRIDE;
+    virtual QString makeCompletion(const QString& text) override;
   };
 
   KUrlRequester* m_requester;

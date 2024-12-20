@@ -55,7 +55,7 @@ public:
   void setEnableSpellCheck(bool b) { m_enableSpellCheck = b; }
 
 protected:
-  virtual void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
+  virtual void contextMenuEvent(QContextMenuEvent* event) override;
 
 private Q_SLOTS:
   void slotCheckSpelling();

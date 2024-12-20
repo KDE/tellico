@@ -46,8 +46,8 @@ public:
    */
   explicit MusicCollection(bool addDefaultFields, const QString& title = QString());
 
-  virtual Type type() const Q_DECL_OVERRIDE { return Album; }
-  virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const Q_DECL_OVERRIDE;
+  virtual Type type() const override { return Album; }
+  virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const override;
 
   static FieldList defaultFields();
 };

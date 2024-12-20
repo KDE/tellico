@@ -63,13 +63,13 @@ Q_SIGNALS:
   void signalModified();
 
 protected:
-  virtual void mousePressEvent(QMouseEvent* e) Q_DECL_OVERRIDE;
+  virtual void mousePressEvent(QMouseEvent* e) override;
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  virtual void enterEvent(QEvent* e) Q_DECL_OVERRIDE;
+  virtual void enterEvent(QEvent* e) override;
 #else
-  virtual void enterEvent(QEnterEvent* e) Q_DECL_OVERRIDE;
+  virtual void enterEvent(QEnterEvent* e) override;
   #endif
-  virtual void leaveEvent(QEvent* e) Q_DECL_OVERRIDE;
+  virtual void leaveEvent(QEvent* e) override;
 
 private Q_SLOTS:
   void clearClicked();

@@ -44,13 +44,13 @@ public:
    */
   BoardGameGeekImporter();
 
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
-  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
+  virtual Data::CollPtr collection() override;
+  virtual bool canImport(int type) const override;
 
-  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget* parent) override;
 
 public Q_SLOTS:
-  void slotCancel() Q_DECL_OVERRIDE;
+  void slotCancel() override;
 
 private:
   QString text(const QStringList& idList) const;

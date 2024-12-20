@@ -46,14 +46,14 @@ Q_OBJECT
 public:
   BibtexExporter(Data::CollPtr coll);
 
-  virtual bool exec() Q_DECL_OVERRIDE;
-  virtual QString formatString() const Q_DECL_OVERRIDE;
-  virtual QString fileFilter() const Q_DECL_OVERRIDE;
+  virtual bool exec() override;
+  virtual QString formatString() const override;
+  virtual QString fileFilter() const override;
   QString text();
 
-  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
-  virtual void readOptions(KSharedConfigPtr) Q_DECL_OVERRIDE;
-  virtual void saveOptions(KSharedConfigPtr) Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget* parent) override;
+  virtual void readOptions(KSharedConfigPtr) override;
+  virtual void saveOptions(KSharedConfigPtr) override;
 
 private:
   void writeEntryText(QString& text, const Data::FieldList& field, const Data::Entry& entry,

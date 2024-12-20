@@ -48,8 +48,8 @@ public:
   FilterPtr filter() const;
 
 protected:
-  virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const Q_DECL_OVERRIDE;
-  virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const Q_DECL_OVERRIDE;
+  virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+  virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
 
 private Q_SLOTS:
   void clearData();

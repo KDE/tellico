@@ -44,11 +44,11 @@ public:
 
   /**
    */
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual Data::CollPtr collection() override;
   /**
    */
-  virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE { return nullptr; }
-  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget*) override { return nullptr; }
+  virtual bool canImport(int type) const override;
 
 private:
   // private so it can't be changed accidentally

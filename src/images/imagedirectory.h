@@ -62,8 +62,8 @@ public:
   virtual QUrl dir();
   virtual void setDirectory(const QUrl& dir);
 
-  bool hasImage(const QString& id) Q_DECL_OVERRIDE;
-  Data::Image* imageById(const QString& id) Q_DECL_OVERRIDE;
+  bool hasImage(const QString& id) override;
+  Data::Image* imageById(const QString& id) override;
   bool writeImage(const Data::Image& image);
   bool removeImage(const QString& id);
 
@@ -82,12 +82,12 @@ public:
   TemporaryImageDirectory();
   virtual ~TemporaryImageDirectory();
 
-  virtual QUrl dir() Q_DECL_OVERRIDE;
+  virtual QUrl dir() override;
   void purge();
 
 private:
   Q_DISABLE_COPY(TemporaryImageDirectory)
-  void setDirectory(const QUrl& dir) Q_DECL_OVERRIDE;
+  void setDirectory(const QUrl& dir) override;
 
   QTemporaryDir* m_tempDir;
 };
@@ -99,8 +99,8 @@ public:
 
   void setZip(std::unique_ptr<KZip> zip);
 
-  bool hasImage(const QString& id) Q_DECL_OVERRIDE;
-  Data::Image* imageById(const QString& id) Q_DECL_OVERRIDE;
+  bool hasImage(const QString& id) override;
+  Data::Image* imageById(const QString& id) override;
 
 private:
   Q_DISABLE_COPY(ImageZipArchive)

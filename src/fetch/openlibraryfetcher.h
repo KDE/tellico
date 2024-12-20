@@ -59,25 +59,25 @@ public:
 
   /**
    */
-  virtual QString source() const Q_DECL_OVERRIDE;
-  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
-  virtual void stop() Q_DECL_OVERRIDE;
-  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
-  virtual Type type() const Q_DECL_OVERRIDE { return OpenLibrary; }
-  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
-  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
+  virtual QString source() const override;
+  virtual bool isSearching() const override { return m_started; }
+  virtual bool canSearch(FetchKey k) const override;
+  virtual void stop() override;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) override;
+  virtual Type type() const override { return OpenLibrary; }
+  virtual bool canFetch(int type) const override;
+  virtual void readConfigHook(const KConfigGroup& config) override;
 
   /**
    * Returns a widget for modifying the fetcher's config.
    */
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const override;
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const OpenLibraryFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
-    virtual QString preferredName() const Q_DECL_OVERRIDE;
+    virtual void saveConfigHook(KConfigGroup&) override;
+    virtual QString preferredName() const override;
   };
   friend class ConfigWidget;
 
@@ -90,8 +90,8 @@ private Q_SLOTS:
 
 private:
   friend class ::OpenLibraryFetcherTest;
-  virtual void search() Q_DECL_OVERRIDE;
-  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+  virtual void search() override;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   void doSearch(const QString& term);
   QString getAuthorKeys(const QString& term);
   void endJob(KIO::StoredTransferJob* job);

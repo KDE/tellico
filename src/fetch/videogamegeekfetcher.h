@@ -57,22 +57,22 @@ public:
 
   /**
    */
-  virtual QString source() const Q_DECL_OVERRIDE;
-  virtual QString attribution() const Q_DECL_OVERRIDE;
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
-  virtual Type type() const Q_DECL_OVERRIDE { return VideoGameGeek; }
-  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
+  virtual QString source() const override;
+  virtual QString attribution() const override;
+  virtual bool canSearch(FetchKey k) const override;
+  virtual Type type() const override { return VideoGameGeek; }
+  virtual bool canFetch(int type) const override;
 
   /**
    * Returns a widget for modifying the fetcher's config.
    */
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const override;
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const VideoGameGeekFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
-    virtual QString preferredName() const Q_DECL_OVERRIDE;
+    virtual void saveConfigHook(KConfigGroup&) override;
+    virtual QString preferredName() const override;
   private:
      GUI::ComboBox* m_imageCombo;
   };
@@ -83,12 +83,12 @@ public:
   static StringHash allOptionalFields();
 
 private:
-  virtual void readConfigHook(const KConfigGroup& cg) Q_DECL_OVERRIDE;
-  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
-  virtual void resetSearch() Q_DECL_OVERRIDE {}
-  virtual QUrl searchUrl() Q_DECL_OVERRIDE;
-  virtual void parseData(QByteArray&) Q_DECL_OVERRIDE {}
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+  virtual void readConfigHook(const KConfigGroup& cg) override;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
+  virtual void resetSearch() override {}
+  virtual QUrl searchUrl() override;
+  virtual void parseData(QByteArray&) override {}
+  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) override;
 
   enum ImageSize {
     NoImage=0,

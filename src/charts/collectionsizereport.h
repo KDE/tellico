@@ -34,8 +34,8 @@ class CollectionSizeReport : public ChartReport {
 public:
   CollectionSizeReport();
 
-  virtual QString title() const Q_DECL_OVERRIDE;
-  virtual QWidget* createWidget()  Q_DECL_OVERRIDE;
+  virtual QString title() const override;
+  virtual QWidget* createWidget() override;
 };
 
 } // end namespace

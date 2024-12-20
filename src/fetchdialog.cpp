@@ -103,7 +103,7 @@ namespace {
   class TreeWidget : public QTreeWidget {
   public:
     TreeWidget(QWidget* p) : QTreeWidget(p) {}
-    virtual int sizeHintForColumn(int c) const Q_DECL_OVERRIDE { return QTreeWidget::sizeHintForColumn(c); }
+    virtual int sizeHintForColumn(int c) const override { return QTreeWidget::sizeHintForColumn(c); }
   };
 }
 

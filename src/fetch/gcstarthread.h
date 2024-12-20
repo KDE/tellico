@@ -40,7 +40,7 @@ public:
   void setProgram(const QString& program, const QStringList& args);
 
 protected:
-  virtual void run() Q_DECL_OVERRIDE;
+  virtual void run() override;
 
 public Q_SLOTS:
   void slotData();

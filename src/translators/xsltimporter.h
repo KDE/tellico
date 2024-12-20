@@ -51,19 +51,19 @@ public:
 
   /**
    */
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual Data::CollPtr collection() override;
   /**
    * The XSLTImporter can import any type known to Tellico.
    */
-  virtual bool canImport(int type) const Q_DECL_OVERRIDE { Q_UNUSED(type); return true; }
+  virtual bool canImport(int type) const override { Q_UNUSED(type); return true; }
   /**
    */
-  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget* parent) override;
   virtual void beginXSLTHandler(XSLTHandler*) {}
   void setXSLTURL(const QUrl& url) { m_xsltURL = url; }
 
 public Q_SLOTS:
-  void slotCancel() Q_DECL_OVERRIDE;
+  void slotCancel() override;
 
 private:
   Data::CollPtr m_coll;

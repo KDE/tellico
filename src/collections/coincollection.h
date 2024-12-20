@@ -49,7 +49,7 @@ public:
    */
   explicit CoinCollection(bool addDefaultFields, const QString& title = QString());
 
-  virtual Type type() const Q_DECL_OVERRIDE { return Coin; }
+  virtual Type type() const override { return Coin; }
 
   static FieldList defaultFields();
 };

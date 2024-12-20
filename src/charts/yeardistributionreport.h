@@ -34,8 +34,8 @@ class YearDistributionReport : public ChartReport {
 public:
   YearDistributionReport();
 
-  virtual QString title() const Q_DECL_OVERRIDE;
-  virtual QWidget* createWidget()  Q_DECL_OVERRIDE;
+  virtual QString title() const override;
+  virtual QWidget* createWidget() override;
 
 private:
   class View;

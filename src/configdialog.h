@@ -100,7 +100,7 @@ private Q_SLOTS:
   /**
    * Called when the Ok button is clicked.
    */
-  virtual void accept() Q_DECL_OVERRIDE;
+  virtual void accept() override;
   /**
    * Called when the Apply button is clicked.
    */

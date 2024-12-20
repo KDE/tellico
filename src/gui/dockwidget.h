@@ -35,7 +35,7 @@ Q_OBJECT
 
 public:
   explicit DockTitleBar(QWidget* parent_) : QWidget(parent_) {}
-  ~DockTitleBar() Q_DECL_OVERRIDE {};
+  ~DockTitleBar() override {};
 };
 
 class DockWidget : public QDockWidget {
@@ -43,7 +43,7 @@ Q_OBJECT
 
 public:
   explicit DockWidget(const QString& title, QWidget* parent);
-  ~DockWidget() Q_DECL_OVERRIDE {};
+  ~DockWidget() override {};
 
   /**
     * @param lock If \a lock is true, the title bar of the dock-widget will get hidden so

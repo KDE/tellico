@@ -42,14 +42,14 @@ public:
   EntryIconView(QWidget* parent);
   ~EntryIconView();
 
-  void setModel(QAbstractItemModel* model) Q_DECL_OVERRIDE;
+  void setModel(QAbstractItemModel* model) override;
   int maxAllowedIconWidth() const { return m_maxAllowedIconWidth; }
 
 public Q_SLOTS:
   void setMaxAllowedIconWidth(int width);
 
 protected:
-  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
+  void contextMenuEvent(QContextMenuEvent* event) override;
 
 private Q_SLOTS:
   void slotDoubleClicked(const QModelIndex& index);

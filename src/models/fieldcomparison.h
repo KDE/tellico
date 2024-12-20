@@ -60,7 +60,7 @@ public:
   using FieldComparison::compare;
 
 protected:
-  virtual int compare(const QString& str1, const QString& str2) Q_DECL_OVERRIDE;
+  virtual int compare(const QString& str1, const QString& str2) override;
 
 private:
   StringComparison* m_stringComparison;
@@ -73,7 +73,7 @@ public:
   using FieldComparison::compare;
 
 protected:
-  virtual int compare(const QString& str1, const QString& str2) Q_DECL_OVERRIDE;
+  virtual int compare(const QString& str1, const QString& str2) override;
 };
 
 class ChoiceComparison : public FieldComparison {
@@ -83,7 +83,7 @@ public:
   using FieldComparison::compare;
 
 protected:
-  virtual int compare(const QString& str1, const QString& str2) Q_DECL_OVERRIDE;
+  virtual int compare(const QString& str1, const QString& str2) override;
 
 private:
   QStringList m_values;

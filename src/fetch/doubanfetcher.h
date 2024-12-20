@@ -57,25 +57,25 @@ public:
 
   /**
    */
-  virtual QString source() const Q_DECL_OVERRIDE;
-  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
-  virtual Type type() const Q_DECL_OVERRIDE { return Douban; }
-  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
-  virtual void stop() Q_DECL_OVERRIDE;
-  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
-  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
+  virtual QString source() const override;
+  virtual bool isSearching() const override { return m_started; }
+  virtual bool canSearch(FetchKey k) const override;
+  virtual Type type() const override { return Douban; }
+  virtual bool canFetch(int type) const override;
+  virtual void stop() override;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) override;
+  virtual void readConfigHook(const KConfigGroup& config) override;
 
   /**
    * Returns a widget for modifying the fetcher's config.
    */
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const override;
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const DoubanFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
-    virtual QString preferredName() const Q_DECL_OVERRIDE;
+    virtual void saveConfigHook(KConfigGroup&) override;
+    virtual QString preferredName() const override;
   };
   friend class ConfigWidget;
 
@@ -91,8 +91,8 @@ private:
   friend class ::DoubanFetcherTest;
   void setTestUrl1(const QUrl& url) { m_testUrl1 = url; }
   void setTestUrl2(const QUrl& url) { m_testUrl2 = url; }
-  virtual void search() Q_DECL_OVERRIDE;
-  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+  virtual void search() override;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   virtual void resetSearch() {}
   void doSearch(const QString& term);
   Data::EntryPtr createEntry(const QVariantMap& resultMap);

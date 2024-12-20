@@ -35,7 +35,7 @@ public:
   FileReaderVideo(const QUrl& u);
   virtual ~FileReaderVideo();
 
-  virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) Q_DECL_OVERRIDE;
+  virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) override;
 
 private:
   bool populateNfo(Data::EntryPtr entry, const QString& nfoFile);

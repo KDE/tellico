@@ -35,7 +35,7 @@ public:
   FileReaderBook(const QUrl& u);
   virtual ~FileReaderBook();
 
-  virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) Q_DECL_OVERRIDE;
+  virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) override;
 
 private:
   bool readEpub(Data::EntryPtr entry, const KFileItem& fileItem);

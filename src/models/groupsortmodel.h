@@ -45,12 +45,12 @@ public:
   GroupSortModel(QObject* parent);
   virtual ~GroupSortModel();
 
-  virtual void setSourceModel(QAbstractItemModel* sourceModel) Q_DECL_OVERRIDE;
+  virtual void setSourceModel(QAbstractItemModel* sourceModel) override;
   QString entrySortField() const;
   void setEntrySortField(const QString& fieldName);
 
 protected:
-  virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const Q_DECL_OVERRIDE;
+  virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
 
 private Q_SLOTS:
   void clearComparisons();

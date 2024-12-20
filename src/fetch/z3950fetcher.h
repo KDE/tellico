@@ -67,21 +67,21 @@ public:
 
   virtual ~Z3950Fetcher();
 
-  virtual QString source() const Q_DECL_OVERRIDE;
-  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
-  virtual void continueSearch() Q_DECL_OVERRIDE;
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
-  virtual void stop() Q_DECL_OVERRIDE;
-  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
-  virtual Type type() const Q_DECL_OVERRIDE { return Z3950; }
-  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
-  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
-  virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
+  virtual QString source() const override;
+  virtual bool isSearching() const override { return m_started; }
+  virtual void continueSearch() override;
+  virtual bool canSearch(FetchKey k) const override;
+  virtual void stop() override;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) override;
+  virtual Type type() const override { return Z3950; }
+  virtual bool canFetch(int type) const override;
+  virtual void readConfigHook(const KConfigGroup& config) override;
+  virtual void saveConfigHook(KConfigGroup& config) override;
 
   const QString& host() const { return m_host; }
   void setCharacterSet(const QString& qcs, const QString& rcs = QString());
 
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const override;
 
   class ConfigWidget;
   friend class ConfigWidget;
@@ -91,11 +91,11 @@ public:
   static StringHash allOptionalFields();
 
 protected:
-  virtual void customEvent(QEvent* event) Q_DECL_OVERRIDE;
+  virtual void customEvent(QEvent* event) override;
 
 private:
-  virtual void search() Q_DECL_OVERRIDE;
-  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+  virtual void search() override;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   bool initMARC21Handler();
   bool initUNIMARCHandler();
   bool initMODSHandler();
@@ -134,8 +134,8 @@ Q_OBJECT
 public:
   explicit ConfigWidget(QWidget* parent, const Z3950Fetcher* fetcher = nullptr);
   virtual ~ConfigWidget();
-  virtual void saveConfigHook(KConfigGroup& config_) Q_DECL_OVERRIDE;
-  virtual QString preferredName() const Q_DECL_OVERRIDE;
+  virtual void saveConfigHook(KConfigGroup& config_) override;
+  virtual QString preferredName() const override;
 
 private Q_SLOTS:
   void slotTogglePreset(bool on);

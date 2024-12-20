@@ -80,15 +80,15 @@ public:
    *
    * @return A pointer to a @ref BibtexCollection, or 0 if none can be created.
    */
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
-  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
-  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
+  virtual Data::CollPtr collection() override;
+  virtual QWidget* widget(QWidget* parent) override;
+  virtual bool canImport(int type) const override;
 
   static bool maybeBibtex(const QUrl& url);
   static bool maybeBibtex(const QString& text, const QUrl& url = QUrl());
 
 public Q_SLOTS:
-  void slotCancel() Q_DECL_OVERRIDE;
+  void slotCancel() override;
 
 private:
   void init();

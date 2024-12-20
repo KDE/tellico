@@ -57,10 +57,10 @@ public:
    */
   virtual ~XMLFetcher();
 
-  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
-  virtual void continueSearch() Q_DECL_OVERRIDE;
-  virtual void stop() Q_DECL_OVERRIDE;
-  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
+  virtual bool isSearching() const override { return m_started; }
+  virtual void continueSearch() override;
+  virtual void stop() override;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) override;
 
 protected:
   void setXSLTFilename(const QString& filename);
@@ -72,7 +72,7 @@ private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
-  virtual void search() Q_DECL_OVERRIDE;
+  virtual void search() override;
   virtual void resetSearch() = 0;
   virtual QUrl searchUrl() = 0;
   virtual void parseData(QByteArray& data) = 0;

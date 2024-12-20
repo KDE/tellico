@@ -40,8 +40,8 @@ class RemoveEntries : public QUndoCommand  {
 public:
   RemoveEntries(Data::CollPtr coll, const Data::EntryList& entries);
 
-  virtual void redo() Q_DECL_OVERRIDE;
-  virtual void undo() Q_DECL_OVERRIDE;
+  virtual void redo() override;
+  virtual void undo() override;
 
 private:
   Data::CollPtr m_coll;

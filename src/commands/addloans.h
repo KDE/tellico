@@ -41,8 +41,8 @@ class AddLoans : public QUndoCommand  {
 public:
   AddLoans(Data::BorrowerPtr borrower, Data::LoanList loans, bool addToCalendar);
 
-  virtual void redo() Q_DECL_OVERRIDE;
-  virtual void undo() Q_DECL_OVERRIDE;
+  virtual void redo() override;
+  virtual void undo() override;
 
 private:
   Data::BorrowerPtr m_borrower;

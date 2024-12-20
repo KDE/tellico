@@ -68,7 +68,7 @@ class FileReaderMetaData : public AbstractFileReader {
 public:
   FileReaderMetaData(const QUrl& u) : AbstractFileReader(u) {}
 
-  virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) Q_DECL_OVERRIDE = 0;
+  virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) override = 0;
 
 protected:
 #ifdef HAVE_KFILEMETADATA
@@ -86,7 +86,7 @@ public:
   FileReaderFile(const QUrl& u);
   virtual ~FileReaderFile();
 
-  virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) Q_DECL_OVERRIDE;
+  virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) override;
 
 private:
   QString volumeName() const;

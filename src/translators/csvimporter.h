@@ -64,16 +64,16 @@ public:
   /**
    * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
    */
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual Data::CollPtr collection() override;
   /**
    * The CSVImporter can import any type known to Tellico.
    */
-  virtual bool canImport(int type) const Q_DECL_OVERRIDE { Q_UNUSED(type); return true; }
+  virtual bool canImport(int type) const override { Q_UNUSED(type); return true; }
   /**
    */
-  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget* parent) override;
 
-  virtual bool validImport() const Q_DECL_OVERRIDE;
+  virtual bool validImport() const override;
 
   void setCollectionType(int collType);
   void setImportColumns(const QList<int>& columns, const QStringList& fieldNames);
@@ -82,8 +82,8 @@ public:
   void setRowDelimiter(const QString& delimeter);
 
 public Q_SLOTS:
-  void slotActionChanged(int action) Q_DECL_OVERRIDE;
-  void slotCancel() Q_DECL_OVERRIDE;
+  void slotActionChanged(int action) override;
+  void slotCancel() override;
 
 private Q_SLOTS:
   void slotTypeChanged();

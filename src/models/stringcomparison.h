@@ -46,25 +46,25 @@ private:
 class BoolComparison : public StringComparison {
 public:
   BoolComparison();
-  virtual int compare(const QString& str1, const QString& str2) Q_DECL_OVERRIDE;
+  virtual int compare(const QString& str1, const QString& str2) override;
 };
 
 class TitleComparison : public StringComparison {
 public:
   TitleComparison();
-  virtual int compare(const QString& str1, const QString& str2) Q_DECL_OVERRIDE;
+  virtual int compare(const QString& str1, const QString& str2) override;
 };
 
 class NumberComparison : public StringComparison {
 public:
   NumberComparison();
-  virtual int compare(const QString& str1, const QString& str2) Q_DECL_OVERRIDE;
+  virtual int compare(const QString& str1, const QString& str2) override;
 };
 
 class LCCComparison : public StringComparison {
 public:
   LCCComparison();
-  virtual int compare(const QString& str1, const QString& str2) Q_DECL_OVERRIDE;
+  virtual int compare(const QString& str1, const QString& str2) override;
 
 private:
   int compareLCC(const QStringList& cap1, const QStringList& cap2) const;
@@ -74,7 +74,7 @@ private:
 class ISODateComparison : public StringComparison {
 public:
   ISODateComparison();
-  virtual int compare(const QString& str1, const QString& str2) Q_DECL_OVERRIDE;
+  virtual int compare(const QString& str1, const QString& str2) override;
 };
 
 }

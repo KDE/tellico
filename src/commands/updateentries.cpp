@@ -39,7 +39,7 @@ public:
                                                    Tellico::Data::EntryPtr,
                                                    Tellico::Data::FieldPtr,
                                                    const QString& value1 = QString(),
-                                                   const QString& value2 = QString()) Q_DECL_OVERRIDE {
+                                                   const QString& value2 = QString()) override {
     Q_UNUSED(value1);
     Q_UNUSED(value2);
     return m_overWrite ? Tellico::Merge::ConflictResolver::KeepSecond : Tellico::Merge::ConflictResolver::KeepFirst;
@@ -71,11 +71,11 @@ public:
 //    Data::Document::mergeEntry(currEntry_, newEntry_, overWrite_);
   }
 
-  virtual void redo() Q_DECL_OVERRIDE {
+  virtual void redo() override {
     OverWriteResolver res(m_overWrite);
     Tellico::Merge::mergeEntry(m_currEntry, m_newEntry, &res);
   }
-  virtual void undo() Q_DECL_OVERRIDE {} // does nothing
+  virtual void undo() override {} // does nothing
   Data::EntryPtr orphanEntry() const { return m_orphanEntry; }
 
 private:

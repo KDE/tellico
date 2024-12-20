@@ -68,11 +68,11 @@ public:
 
   /**
    */
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual Data::CollPtr collection() override;
   /**
    * The TellicoImporter can import any type known to Tellico. Obviously.
    */
-  virtual bool canImport(int type) const Q_DECL_OVERRIDE { Q_UNUSED(type); return true; }
+  virtual bool canImport(int type) const override { Q_UNUSED(type); return true; }
   Format format() const { return m_format; }
 
   bool hasImages() const;
@@ -86,7 +86,7 @@ public:
   static bool loadAllImages(const QUrl& url);
 
 public Q_SLOTS:
-  void slotCancel() Q_DECL_OVERRIDE;
+  void slotCancel() override;
 
 private:
   void loadXMLData(const QByteArray& data, bool loadImages);

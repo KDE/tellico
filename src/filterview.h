@@ -45,13 +45,13 @@ public:
 
   void addCollection(Data::CollPtr coll);
 
-  virtual void    addEntries(Data::EntryList entries) Q_DECL_OVERRIDE;
-  virtual void modifyEntries(Data::EntryList entries) Q_DECL_OVERRIDE;
-  virtual void removeEntries(Data::EntryList entries) Q_DECL_OVERRIDE;
+  virtual void    addEntries(Data::EntryList entries) override;
+  virtual void modifyEntries(Data::EntryList entries) override;
+  virtual void removeEntries(Data::EntryList entries) override;
 
-  virtual void    addFilter(FilterPtr filter) Q_DECL_OVERRIDE;
-  virtual void modifyFilter(FilterPtr) Q_DECL_OVERRIDE {}
-  virtual void removeFilter(FilterPtr filter) Q_DECL_OVERRIDE;
+  virtual void    addFilter(FilterPtr filter) override;
+  virtual void modifyFilter(FilterPtr) override {}
+  virtual void removeFilter(FilterPtr filter) override;
 
 Q_SIGNALS:
   void signalUpdateFilter(Tellico::FilterPtr filter);
@@ -71,12 +71,12 @@ private Q_SLOTS:
    * Delete a saved filter
    */
   void slotDeleteFilter();
-  void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected) Q_DECL_OVERRIDE;
+  void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected) override;
   void slotDoubleClicked(const QModelIndex& index);
   void slotSortingChanged(int column, Qt::SortOrder order);
 
 private:
-  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
+  void contextMenuEvent(QContextMenuEvent* event) override;
   void updateHeader();
   void invalidate(Data::EntryList entries);
 

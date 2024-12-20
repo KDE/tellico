@@ -51,11 +51,11 @@ public:
    */
   virtual ~BibtexCollection() {}
 
-  virtual Type type() const Q_DECL_OVERRIDE { return Bibtex; }
-  virtual bool addField(FieldPtr field) Q_DECL_OVERRIDE;
-  virtual bool modifyField(FieldPtr field) Q_DECL_OVERRIDE;
-  virtual bool removeField(FieldPtr field, bool force=false) Q_DECL_OVERRIDE;
-  virtual bool removeField(const QString& name, bool force=false) Q_DECL_OVERRIDE;
+  virtual Type type() const override { return Bibtex; }
+  virtual bool addField(FieldPtr field) override;
+  virtual bool modifyField(FieldPtr field) override;
+  virtual bool removeField(FieldPtr field, bool force=false) override;
+  virtual bool removeField(const QString& name, bool force=false) override;
 
   FieldPtr fieldByBibtexName(const QString& name) const;
   EntryPtr entryByBibtexKey(const QString& key) const;
@@ -66,8 +66,8 @@ public:
   void addMacro(const QString& key, const QString& value) { m_macros.insert(key, value); }
   void removeMacro(const QString& key) { m_macros.remove(key); }
 
-  virtual QString prepareText(const QString& text) const Q_DECL_OVERRIDE;
-  virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const Q_DECL_OVERRIDE;
+  virtual QString prepareText(const QString& text) const override;
+  virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const override;
 
   EntryList duplicateBibtexKeys() const;
 
