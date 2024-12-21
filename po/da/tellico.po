@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-20 00:41+0000\n"
+"POT-Creation-Date: 2024-12-21 00:41+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -2779,7 +2779,7 @@ msgid "Template Packages"
 msgstr "Skabelonpakker"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1318
-#: src/mainwindow.cpp:1494 src/reportdialog.cpp:480 src/reportdialog.cpp:495
+#: src/mainwindow.cpp:1494 src/reportdialog.cpp:493 src/reportdialog.cpp:508
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -6562,13 +6562,13 @@ msgid ""
 msgstr ""
 "Nogle rapporter kan tage adskillige sekunder at generere for store samlinger."
 
-#: src/reportdialog.cpp:478
+#: src/reportdialog.cpp:491
 #, fuzzy, kde-format
 #| msgid "PDF Files"
 msgid "PNG Files"
 msgstr "PDF-filer"
 
-#: src/reportdialog.cpp:493 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:506 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML-filer"

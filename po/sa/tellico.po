@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-20 00:41+0000\n"
-"PO-Revision-Date: 2024-12-19 21:41+0530\n"
+"POT-Creation-Date: 2024-12-21 00:41+0000\n"
+"PO-Revision-Date: 2024-12-20 22:10+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -63,7 +63,7 @@ msgstr "संकुचित"
 #, kde-format
 msgctxt "Title Listing (Vertical) XSL Template"
 msgid "Title Listing (Vertical)"
-msgstr "शीर्षकसूची (ऊर्ध्वाधर) २."
+msgstr "शीर्षकसूची (ऊर्ध्वाधर)"
 
 #. i18n: file: xslt/report-templates/Group_View.xsl
 #, kde-format
@@ -81,7 +81,7 @@ msgstr "ऋण दृश्य"
 #, kde-format
 msgctxt "Title Listing (Horizontal) XSL Template"
 msgid "Title Listing (Horizontal)"
-msgstr "शीर्षकसूची (क्षैतिज) २."
+msgstr "शीर्षकसूची (क्षैतिज)"
 
 #. i18n: file: xslt/report-templates/Group_Summary.xsl
 #, kde-format
@@ -469,7 +469,7 @@ msgstr "मूल्यविकल्पाः"
 #: src/collectionfieldsdialog.cpp:251
 #, kde-format
 msgid "Default value:"
-msgstr "पूर्वनिर्धारितं मूल्यम् : १."
+msgstr "पूर्वनिर्धारितं मूल्यम् :"
 
 #: src/collectionfieldsdialog.cpp:256
 #, kde-format
@@ -499,7 +499,7 @@ msgstr "व्युत्पन्नमूल्यं प्रयोजय�
 #: src/collectionfieldsdialog.cpp:281
 #, kde-format
 msgid "A&llowed values:"
-msgstr "A&अनुमताः मूल्याः : १."
+msgstr "A&अनुमताः मूल्याः :"
 
 #: src/collectionfieldsdialog.cpp:286
 #, kde-format
@@ -515,7 +515,7 @@ msgstr ""
 #: src/collectionfieldsdialog.cpp:293
 #, kde-format
 msgid "Format options:"
-msgstr "प्रारूपविकल्पाः : १."
+msgstr "प्रारूपविकल्पाः :"
 
 #: src/collectionfieldsdialog.cpp:299
 #, kde-format
@@ -1928,7 +1928,7 @@ msgstr "चलनसमयः"
 #: src/collections/videocollection.cpp:161
 #, kde-format
 msgid "The running time of the video (in minutes)"
-msgstr "विडियोस्य चालनसमयः (निमेषेषु) २."
+msgstr "विडियोस्य चालनसमयः (निमेषेषु)"
 
 #: src/collections/videocollection.cpp:164
 #, kde-format
@@ -2421,7 +2421,7 @@ msgstr "यदि चेक् कृतं तर्हि शीर्षक�
 #: src/configdialog.cpp:294
 #, kde-format
 msgid "No capitali&zation:"
-msgstr "न दीर्घलेखनम् : १."
+msgstr "न दीर्घलेखनम् :"
 
 #: src/configdialog.cpp:299
 #, kde-format
@@ -2449,7 +2449,7 @@ msgstr ""
 #: src/configdialog.cpp:317
 #, kde-format
 msgid "Personal suffi&xes:"
-msgstr "व्यक्तिप्रत्यय&x: १."
+msgstr "व्यक्तिप्रत्यय&x:"
 
 #: src/configdialog.cpp:322
 #, kde-format
@@ -2516,7 +2516,7 @@ msgstr "चित्रविकल्पाः"
 #: src/configdialog.cpp:387
 #, kde-format
 msgid "Maximum image &width:"
-msgstr "अधिकतमं चित्रम् &विस्तारः : १."
+msgstr "अधिकतमं चित्रम् &विस्तारः :"
 
 #: src/configdialog.cpp:396
 #, kde-format
@@ -2528,7 +2528,7 @@ msgstr "मुद्रणपत्रे चित्राणां अधि�
 #: src/configdialog.cpp:402
 #, kde-format
 msgid "&Maximum image height:"
-msgstr "&अधिकतम चित्रस्य ऊर्ध्वता : १."
+msgstr "&अधिकतम चित्रस्य ऊर्ध्वता :"
 
 #: src/configdialog.cpp:411
 #, kde-format
@@ -2549,7 +2549,7 @@ msgstr "टेम्पलेट विकल्प"
 #: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Collection &type:"
-msgstr "संग्रहः &प्रकारः : १."
+msgstr "संग्रहः &प्रकारः :"
 
 #: src/configdialog.cpp:446
 #, kde-format
@@ -2588,7 +2588,7 @@ msgstr "फ़ॉन्ट विकल्प"
 #: src/configdialog.cpp:483
 #, kde-format
 msgid "Font:"
-msgstr "फन्ट् : १."
+msgstr "फन्ट् :"
 
 #: src/configdialog.cpp:489
 #, kde-format
@@ -2608,7 +2608,7 @@ msgstr "वर्णविकल्पाः"
 #: src/configdialog.cpp:512
 #, kde-format
 msgid "Background color:"
-msgstr "पृष्ठभूमिवर्णः : १."
+msgstr "पृष्ठभूमिवर्णः :"
 
 #: src/configdialog.cpp:518
 #, kde-format
@@ -2618,22 +2618,22 @@ msgstr "एषः वर्णः Entry View इत्यस्मिन् प�
 #: src/configdialog.cpp:522
 #, kde-format
 msgid "Text color:"
-msgstr "पाठवर्णः : १."
+msgstr "पाठवर्णः :"
 
 #: src/configdialog.cpp:531
 #, kde-format
 msgid "Highlight color:"
-msgstr "वर्णः प्रकाशयन्तु : १."
+msgstr "वर्णः प्रकाशयन्तु :"
 
 #: src/configdialog.cpp:540
 #, kde-format
 msgid "Highlighted text color:"
-msgstr "प्रकाशितपाठवर्णः : १."
+msgstr "प्रकाशितपाठवर्णः :"
 
 #: src/configdialog.cpp:549
 #, kde-format
 msgid "Link color:"
-msgstr "लिङ्कस्य वर्णः : १."
+msgstr "लिङ्कस्य वर्णः :"
 
 #: src/configdialog.cpp:558
 #, kde-format
@@ -2697,7 +2697,7 @@ msgstr "चालय &अधः"
 #: src/configdialog.cpp:664
 #, kde-format
 msgid "Filter by type:"
-msgstr "प्रकारानुसारं छानयन्तु : १."
+msgstr "प्रकारानुसारं छानयन्तु :"
 
 #: src/configdialog.cpp:682
 #, kde-format
@@ -2742,7 +2742,7 @@ msgid "Template Packages"
 msgstr "टेम्पलेट संकुल"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1318
-#: src/mainwindow.cpp:1494 src/reportdialog.cpp:480 src/reportdialog.cpp:495
+#: src/mainwindow.cpp:1494 src/reportdialog.cpp:493 src/reportdialog.cpp:508
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -3191,7 +3191,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:79
 #, kde-format
 msgid "Amazon (US)"
-msgstr "अमेजन (अमेरिका) ९."
+msgstr "अमेजन (अमेरिका)"
 
 #: src/fetch/amazonfetcher.cpp:83
 #, kde-format
@@ -3201,7 +3201,7 @@ msgstr "संयुक्त राज्य अमेरिका"
 #: src/fetch/amazonfetcher.cpp:85
 #, kde-format
 msgid "Amazon (UK)"
-msgstr "अमेजन (यूके) ९."
+msgstr "अमेजन (यूके)"
 
 #: src/fetch/amazonfetcher.cpp:89
 #, kde-format
@@ -3211,7 +3211,7 @@ msgstr "संयुक्त अधिराज्य"
 #: src/fetch/amazonfetcher.cpp:91
 #, kde-format
 msgid "Amazon (Germany)"
-msgstr "अमेजन (जर्मनी) २."
+msgstr "अमेजन (जर्मनी)"
 
 #: src/fetch/amazonfetcher.cpp:95
 #, kde-format
@@ -3221,7 +3221,7 @@ msgstr "जर्मनीदेशः"
 #: src/fetch/amazonfetcher.cpp:97
 #, kde-format
 msgid "Amazon (Japan)"
-msgstr "अमेजन (जापान) २."
+msgstr "अमेजन (जापान)"
 
 #: src/fetch/amazonfetcher.cpp:101
 #, kde-format
@@ -3231,7 +3231,7 @@ msgstr "जापान"
 #: src/fetch/amazonfetcher.cpp:103
 #, kde-format
 msgid "Amazon (France)"
-msgstr "अमेजन (फ्रांस) २."
+msgstr "अमेजन (फ्रांस)"
 
 #: src/fetch/amazonfetcher.cpp:107
 #, kde-format
@@ -3241,7 +3241,7 @@ msgstr "फ्रांस्देशः"
 #: src/fetch/amazonfetcher.cpp:109
 #, kde-format
 msgid "Amazon (Canada)"
-msgstr "अमेजन (कनाडा) २."
+msgstr "अमेजन (कनाडा)"
 
 #: src/fetch/amazonfetcher.cpp:113
 #, kde-format
@@ -3251,7 +3251,7 @@ msgstr "कनाडा"
 #: src/fetch/amazonfetcher.cpp:116
 #, kde-format
 msgid "Amazon (China)"
-msgstr "अमेजन (चीन) २."
+msgstr "अमेजन (चीन)"
 
 #: src/fetch/amazonfetcher.cpp:120
 #, kde-format
@@ -3261,7 +3261,7 @@ msgstr "चीनदेशः"
 #: src/fetch/amazonfetcher.cpp:122
 #, kde-format
 msgid "Amazon (Spain)"
-msgstr "अमेजन (स्पेन) २."
+msgstr "अमेजन (स्पेन)"
 
 #: src/fetch/amazonfetcher.cpp:126
 #, kde-format
@@ -3271,7 +3271,7 @@ msgstr "स्पेनदेशः"
 #: src/fetch/amazonfetcher.cpp:128
 #, kde-format
 msgid "Amazon (Italy)"
-msgstr "अमेजन (इटली) २."
+msgstr "अमेजन (इटली)"
 
 #: src/fetch/amazonfetcher.cpp:132
 #, kde-format
@@ -3281,7 +3281,7 @@ msgstr "इटली"
 #: src/fetch/amazonfetcher.cpp:134
 #, kde-format
 msgid "Amazon (Brazil)"
-msgstr "अमेजन (ब्राजील) २."
+msgstr "अमेजन (ब्राजील)"
 
 #: src/fetch/amazonfetcher.cpp:138
 #, kde-format
@@ -3291,7 +3291,7 @@ msgstr "ब्राजील्"
 #: src/fetch/amazonfetcher.cpp:140
 #, kde-format
 msgid "Amazon (Australia)"
-msgstr "अमेजन (ऑस्ट्रेलिया) २."
+msgstr "अमेजन (ऑस्ट्रेलिया)"
 
 #: src/fetch/amazonfetcher.cpp:144
 #, kde-format
@@ -3301,7 +3301,7 @@ msgstr "ऑस्ट्रेलिया"
 #: src/fetch/amazonfetcher.cpp:146
 #, kde-format
 msgid "Amazon (India)"
-msgstr "अमेजन (भारत) २."
+msgstr "अमेजन (भारत)"
 
 #: src/fetch/amazonfetcher.cpp:150
 #, kde-format
@@ -3311,7 +3311,7 @@ msgstr "भारत"
 #: src/fetch/amazonfetcher.cpp:152
 #, kde-format
 msgid "Amazon (Mexico)"
-msgstr "अमेजन (मेक्सिको) २."
+msgstr "अमेजन (मेक्सिको)"
 
 #: src/fetch/amazonfetcher.cpp:156
 #, kde-format
@@ -3321,7 +3321,7 @@ msgstr "मेक्सिको"
 #: src/fetch/amazonfetcher.cpp:158
 #, kde-format
 msgid "Amazon (Turkey)"
-msgstr "अमेजन (तुर्की) २."
+msgstr "अमेजन (तुर्की)"
 
 #: src/fetch/amazonfetcher.cpp:162
 #, kde-format
@@ -3331,7 +3331,7 @@ msgstr "तुर्की"
 #: src/fetch/amazonfetcher.cpp:164
 #, kde-format
 msgid "Amazon (Singapore)"
-msgstr "अमेजन (सिंगापुर) ९."
+msgstr "अमेजन (सिंगापुर)"
 
 #: src/fetch/amazonfetcher.cpp:168
 #, kde-format
@@ -3341,7 +3341,7 @@ msgstr "सिङ्गापुर"
 #: src/fetch/amazonfetcher.cpp:170
 #, kde-format
 msgid "Amazon (UAE)"
-msgstr "अमेजन (UAE) ९."
+msgstr "अमेजन (UAE)"
 
 #: src/fetch/amazonfetcher.cpp:174
 #, kde-format
@@ -3672,7 +3672,7 @@ msgstr "ऑडियो अन्वेषणं डिस्कोग्स् 
 #: src/fetch/discogsfetcher.cpp:571 src/translators/discogsimporter.cpp:200
 #, kde-format
 msgid "User token:"
-msgstr "उपयोक्तृचिह्नम् : १."
+msgstr "उपयोक्तृचिह्नम् :"
 
 #: src/fetch/doubanfetcher.cpp:366 src/fetch/doubanfetcher.cpp:384
 #: src/fetch/doubanfetcher.cpp:402 src/fetch/doubanfetcher.cpp:641
@@ -4072,7 +4072,7 @@ msgstr "बहुस्रोताः"
 #: src/fetch/multifetcher.cpp:280
 #, kde-format
 msgid "Data source:"
-msgstr "दत्तांशस्रोतः : १."
+msgstr "दत्तांशस्रोतः :"
 
 #: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:398
 #, kde-format
@@ -4140,7 +4140,7 @@ msgstr "RPGGeek Link"
 #: src/fetch/srufetcher.cpp:510
 #, kde-format
 msgid "Library of Congress (US)"
-msgstr "काङ्ग्रेसस्य पुस्तकालयः (अमेरिका) ९."
+msgstr "काङ्ग्रेसस्य पुस्तकालयः (अमेरिका)"
 
 #: src/fetch/srufetcher.cpp:515
 #, kde-format
@@ -4515,7 +4515,7 @@ msgstr "सर्वाणि अन्वेषणक्षेत्राण�
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr "%प% ९."
+msgstr "%p%"
 
 #: src/fetchdialog.cpp:392
 #, kde-format
@@ -4722,7 +4722,7 @@ msgstr "निम्नलिखितस्य an&y मेलनं कुर�
 #: src/filterdialog.cpp:109
 #, kde-format
 msgid "Filter name:"
-msgstr "फ़िल्टर नाम : १."
+msgstr "फ़िल्टर नाम :"
 
 #: src/filterdialog.cpp:118
 #, kde-format
@@ -4738,7 +4738,7 @@ msgstr "फ़िल्टर"
 #: src/filterview.cpp:192
 #, kde-format
 msgid "Filter (Sort by Count)"
-msgstr "फ़िल्टर (गणनानुसार क्रमबद्धः) २."
+msgstr "फ़िल्टर (गणनानुसार क्रमबद्धः)"
 
 #: src/groupview.cpp:262
 #, kde-format
@@ -4791,7 +4791,7 @@ msgstr "टिप्पणी:"
 #: src/gui/collectiontemplatedialog.ui:70
 #, kde-format
 msgid "Icon:"
-msgstr "चिह्नम् : १."
+msgstr "चिह्नम् :"
 
 #: src/gui/collectiontemplatedialog.cpp:56
 #, kde-format
@@ -4802,7 +4802,7 @@ msgstr "संग्रह टेम्पलेट के रूप में �
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
-msgstr "%1: १."
+msgstr "%1:"
 
 #: src/gui/filterrulewidget.cpp:63
 #, kde-format
@@ -4977,7 +4977,7 @@ msgstr "स्तम्भस्य नाम परिवर्तनं कु
 #: src/gui/tablefieldwidget.cpp:167
 #, kde-format
 msgid "New column name:"
-msgstr "नवीनस्तम्भनाम : १."
+msgstr "नवीनस्तम्भनाम :"
 
 #: src/gui/tablefieldwidget.cpp:189
 #, kde-format
@@ -5143,12 +5143,12 @@ msgstr "निम्नलिखितवस्तूनि परीक्ष�
 #: src/loandialog.cpp:125
 #, kde-format
 msgid "The following item is on-loan:"
-msgstr "निम्नलिखित वस्तु ऋणेन अस्ति : १."
+msgstr "निम्नलिखित वस्तु ऋणेन अस्ति :"
 
 #: src/loandialog.cpp:136
 #, kde-format
 msgid "&Lend to:"
-msgstr "&ऋणं ददातु : १."
+msgstr "&ऋणं ददातु :"
 
 #: src/loandialog.cpp:150
 #, kde-format
@@ -5162,7 +5162,7 @@ msgstr ""
 #: src/loandialog.cpp:159
 #, kde-format
 msgid "&Loan date:"
-msgstr "&ऋणतिथिः : १."
+msgstr "&ऋणतिथिः :"
 
 #: src/loandialog.cpp:166
 #, kde-format
@@ -5176,7 +5176,7 @@ msgstr ""
 #: src/loandialog.cpp:175
 #, kde-format
 msgid "D&ue date:"
-msgstr "D&ue तिथिः : १."
+msgstr "D&ue तिथिः :"
 
 #: src/loandialog.cpp:183
 #, kde-format
@@ -5234,7 +5234,7 @@ msgstr "ऋणग्राहकः"
 #: src/loanview.cpp:200
 #, kde-format
 msgid "Borrower (Sort by Count)"
-msgstr "ऋणग्राहकः (गणनानुसार क्रमबद्धः) २."
+msgstr "ऋणग्राहकः (गणनानुसार क्रमबद्धः)"
 
 #: src/main.cpp:169
 #, kde-format
@@ -6450,12 +6450,12 @@ msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "केचन प्रतिवेदनानि बृहत्सङ्ग्रहाणां कृते जनयितुं कतिपयानि सेकण्डानि यावत् समयं लभन्ते ।"
 
-#: src/reportdialog.cpp:478
+#: src/reportdialog.cpp:491
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG सञ्चिकाः"
 
-#: src/reportdialog.cpp:493 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:506 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML सञ्चिकाः"
@@ -6473,7 +6473,7 @@ msgstr "फ़िल्टरं विलोपयन्तु?"
 #: src/tellico_kernel.cpp:311
 #, kde-format
 msgid "New collection name:"
-msgstr "नवीन संग्रह नाम : १."
+msgstr "नवीन संग्रह नाम :"
 
 #: src/tellico_kernel.cpp:327
 #, kde-format
@@ -6689,7 +6689,7 @@ msgstr ""
 #: src/translators/bibtexexporter.cpp:239
 #, kde-format
 msgid "Bibtex quotation style:"
-msgstr "बिबटेक्स उद्धरणशैली : १."
+msgstr "बिबटेक्स उद्धरणशैली :"
 
 #: src/translators/bibtexexporter.cpp:241
 #: src/translators/bibtexexporter.cpp:248
@@ -6777,7 +6777,7 @@ msgstr "केवलं स्वामित्वयुक्तानि व�
 #: src/translators/goodreadsimporter.cpp:153
 #, kde-format
 msgid "User ID:"
-msgstr "उपयोक्तृपरिचयः : १."
+msgstr "उपयोक्तृपरिचयः :"
 
 #: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:213
 #, kde-format
@@ -6857,7 +6857,7 @@ msgstr "कोलन इत्यादिः कस्टम् तारः �
 #: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:294
 #, kde-format
 msgid "Table column delimiter:"
-msgstr "सारणीस्तम्भपरिसीमकः : १."
+msgstr "सारणीस्तम्भपरिसीमकः :"
 
 #: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:293
 #, kde-format
@@ -6868,7 +6868,7 @@ msgstr "स्तम्भनिर्धारकः <i>Table</i> क्षे�
 #: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:305
 #, kde-format
 msgid "Table row delimiter:"
-msgstr "सारणीपङ्क्तिसीमक : १."
+msgstr "सारणीपङ्क्तिसीमक :"
 
 #: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:304
 #, kde-format
@@ -6894,7 +6894,7 @@ msgstr "यदि चेक् कृतं तर्हि प्रथमप�
 #: src/translators/csvimporter.cpp:240
 #, kde-format
 msgid "Delimiter:"
-msgstr "परिसीमकः : १."
+msgstr "परिसीमकः :"
 
 #: src/translators/csvimporter.cpp:246
 #, kde-format
@@ -6934,7 +6934,7 @@ msgstr ""
 #: src/translators/csvimporter.cpp:333
 #, kde-format
 msgid "Co&lumn:"
-msgstr "को&लम् : १."
+msgstr "को&लम् :"
 
 #: src/translators/csvimporter.cpp:346
 #, kde-format
@@ -7139,7 +7139,7 @@ msgstr "JSON सञ्चिकाः"
 #: src/translators/librarythingimporter.cpp:199
 #, kde-format
 msgid "LibraryThing file:"
-msgstr "LibraryThing सञ्चिका: १."
+msgstr "LibraryThing सञ्चिका:"
 
 #: src/translators/marcimporter.cpp:132
 #, kde-format
@@ -7154,12 +7154,12 @@ msgstr "MARC विकल्पाः"
 #: src/translators/marcimporter.cpp:156
 #, kde-format
 msgid "Character set:"
-msgstr "वर्णसमूहः : १."
+msgstr "वर्णसमूहः :"
 
 #: src/translators/marcimporter.cpp:161
 #, kde-format
 msgid "MARC Format:"
-msgstr "MARC प्रारूपः : १."
+msgstr "MARC प्रारूपः :"
 
 #: src/translators/onixexporter.cpp:71
 #, kde-format
@@ -7248,7 +7248,7 @@ msgstr "XSLT विकल्पाः"
 #: src/translators/xsltexporter.cpp:89 src/translators/xsltimporter.cpp:121
 #, kde-format
 msgid "XSLT file:"
-msgstr "XSLT सञ्चिका : १."
+msgstr "XSLT सञ्चिका :"
 
 #: src/translators/xsltexporter.cpp:91 src/translators/xsltimporter.cpp:123
 #, kde-format
@@ -7326,12 +7326,12 @@ msgstr ": समूहसारांशः"
 #: xslt/report-templates/Group_Summary.xsl:178
 #, kde-format
 msgid "Total number of fields:"
-msgstr "क्षेत्राणां कुलसंख्या : १."
+msgstr "क्षेत्राणां कुलसंख्या :"
 
 #: xslt/report-templates/Group_Summary.xsl:182
 #, kde-format
 msgid "Total number of entries:"
-msgstr "प्रविष्टीनां कुलसंख्या : १."
+msgstr "प्रविष्टीनां कुलसंख्या :"
 
 #: xslt/report-templates/Group_Summary.xsl:198
 #: xslt/report-templates/Loan_View.xsl:202 xslt/tellico2html.xsl:413

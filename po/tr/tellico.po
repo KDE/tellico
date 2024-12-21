@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-20 00:41+0000\n"
+"POT-Creation-Date: 2024-12-21 00:41+0000\n"
 "PO-Revision-Date: 2024-11-28 16:14+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -2758,7 +2758,7 @@ msgid "Template Packages"
 msgstr "Şablon Paketleri"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1318
-#: src/mainwindow.cpp:1494 src/reportdialog.cpp:480 src/reportdialog.cpp:495
+#: src/mainwindow.cpp:1494 src/reportdialog.cpp:493 src/reportdialog.cpp:508
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -6489,12 +6489,12 @@ msgstr ""
 "Büyük koleksiyonlar için bazı raporların oluşturulması birkaç saniye "
 "sürebilir."
 
-#: src/reportdialog.cpp:478
+#: src/reportdialog.cpp:491
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG Dosyaları"
 
-#: src/reportdialog.cpp:493 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:506 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML Dosyaları"
