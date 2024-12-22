@@ -459,7 +459,7 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
         entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::rowDelimiterString()));
       } else if(m1 == QString::fromUtf8("片长")) {
         static const QRegularExpression digits(QLatin1String("\\d+"));
-        QRegularExpressionMatch digitsMatch = digits.match(m2);
+        auto digitsMatch = digits.match(m2);
         if(digitsMatch.hasMatch()) {
           entry->setField(QStringLiteral("running-time"), digitsMatch.captured());
         }

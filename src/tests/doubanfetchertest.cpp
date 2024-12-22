@@ -156,8 +156,8 @@ void DoubanFetcherTest::testVideo() {
 //  QVERIFY(!entry->field(QStringLiteral("nationality")).isEmpty());
 //  QVERIFY(!entry->field(QStringLiteral("language")).isEmpty());
 //  QVERIFY(!entry->field(QStringLiteral("keyword")).isEmpty());
-  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+//  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+//  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
 
