@@ -252,6 +252,7 @@ Tellico::Data::EntryPtr UPCItemDbFetcher::fetchEntryHook(uint uid_) {
   const QString image_id = entry->field(cover);
   if(image_id.contains(QLatin1Char('/'))) {
     const QUrl imageUrl = QUrl::fromUserInput(image_id);
+    // use base url as referrer
     const QString id = ImageFactory::addImage(imageUrl, false /* quiet */, imageUrl.adjusted(QUrl::RemovePath));
     if(id.isEmpty()) {
       myDebug() << "image id is empty";

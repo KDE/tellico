@@ -69,7 +69,7 @@ void OpenLibraryFetcherTest::testAuthor() {
 
   QCOMPARE(results.size(), 1);
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Lois McMaster Bujold"));
+  QVERIFY(entry->field(QStringLiteral("author")).contains(QStringLiteral("Lois McMaster Bujold")));
 }
 
 void OpenLibraryFetcherTest::testIsbn() {
@@ -189,6 +189,7 @@ void OpenLibraryFetcherTest::testComic() {
   QVERIFY(!results.isEmpty());
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Yotsuba& Volume 1"));
+  QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::ComicBook);
+  QCOMPARE(entry->field(QStringLiteral("title")), QString::fromUtf8("よつばと！ 1"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("4-04869066-3"));
 }

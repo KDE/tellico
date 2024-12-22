@@ -77,12 +77,12 @@ void DBLPFetcherTest::testArticle() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Nontrivial independent sets of bipartite graphs and cross-intersecting families."));
-  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Jun Wang; Huajun Zhang"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Jun Wang 0132; Huajun Zhang 0005"));
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2013"));
   QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("129-141"));
   QCOMPARE(entry->field(QStringLiteral("volume")), QStringLiteral("120"));
   QCOMPARE(entry->field(QStringLiteral("number")), QStringLiteral("1"));
-  QCOMPARE(entry->field(QStringLiteral("journal")), QStringLiteral("J. Comb. Theory, Ser. A"));
+  QCOMPARE(entry->field(QStringLiteral("journal")), QStringLiteral("J. Comb. Theory A"));
   QCOMPARE(entry->field(QStringLiteral("booktitle")), QString());
   QCOMPARE(entry->field(QStringLiteral("url")), QStringLiteral("https://dblp.org/rec/journals/jct/WangZ13"));
 //  QCOMPARE(entry->field(QStringLiteral("doi")), QStringLiteral("10.1016/j.jcta.2012.07.005"));

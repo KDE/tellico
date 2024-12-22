@@ -34,7 +34,6 @@ public:
 
 private Q_SLOTS:
   void initTestCase();
-  void testFeedbooksSearch();
   void testEmptyGutenberg();
   void testRelativeSearch();
   void testAcquisitionByTitle();

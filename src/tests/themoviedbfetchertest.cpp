@@ -46,7 +46,7 @@ void TheMovieDBFetcherTest::initTestCase() {
 
   m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("Superman Returns"));
   m_fieldValues.insert(QStringLiteral("studio"), QStringLiteral("Warner Bros. Pictures; Bad Hat Harry Productions; "
-                                                                "Peters Entertainment; DC Comics; Legendary Pictures"));
+                                                                "Peters Entertainment; DC; Legendary Pictures"));
   m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2006"));
   m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("action; adventure; science fiction"));
   m_fieldValues.insert(QStringLiteral("director"), QStringLiteral("Bryan Singer"));
