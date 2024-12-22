@@ -367,12 +367,20 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
     QString title = mapValue(resultMap_, "collectionName");
     if(title.isEmpty()) title = mapValue(resultMap_, "trackName");
     entry_->setField(QStringLiteral("title"), title);
-    entry_->setField(QStringLiteral("author"), mapValue(resultMap_, "artistName"));
+    // sometimes authors are separated by comma or ampersand
+    static QRegularExpression authorSplitRx(QStringLiteral("\\s*[,&]\\s+"));
+    const auto authorString = mapValue(resultMap_, "artistName");
+    const auto authors = authorString.split(authorSplitRx);
+    entry_->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
     entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "description"));
     static const QRegularExpression publisherRx(QStringLiteral("^© \\d{4} (.+)$"));
     auto publisherMatch = publisherRx.match(mapValue(resultMap_, "copyright"));
     if(publisherMatch.hasMatch()) {
-      entry_->setField(QStringLiteral("publisher"), publisherMatch.captured(1));
+      QString pub = publisherMatch.captured(1);
+      if(pub.startsWith(QLatin1String("by "))) {
+        pub = pub.mid(3);
+      }
+      entry_->setField(QStringLiteral("publisher"), pub);
     }
   } else if(collectionType() == Data::Collection::Album) {
     entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "collectionName"));
