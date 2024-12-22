@@ -85,7 +85,12 @@ bool OPDSFetcher::Reader::parse() {
     }
   }
   // valid catalog either has a search url or is an acquisition feed
-  return !searchUrl.isEmpty() || isAcquisition;
+  const bool ret = !searchUrl.isEmpty() || isAcquisition;
+  if(!ret) {
+    if(searchUrl.isEmpty()) errorString = QLatin1String("Search Url is empty");
+    else errorString = QLatin1String("Catalog is not an acquisition catalog");
+  }
+  return ret;
 }
 
 bool OPDSFetcher::Reader::readSearchTemplate() {
@@ -196,7 +201,7 @@ void OPDSFetcher::search() {
   Reader reader(QUrl::fromUserInput(m_catalog));
   if(m_searchTemplate.isEmpty()) {
     if(!reader.parse()) {
-      myDebug() << source() << "- failed to parse";
+      myDebug() << source() << "- failed to parse:" << reader.errorString;
       message(i18n("Tellico is unable to read the search description in the OPDS catalog."), MessageHandler::Error);
       stop();
       return;

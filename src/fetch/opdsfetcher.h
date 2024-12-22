@@ -119,6 +119,7 @@ public:
   QString name;
   QString icon;
   QString attribution;
+  QString errorString;
 };
 
 class OPDSFetcher::ConfigWidget : public Fetch::ConfigWidget {

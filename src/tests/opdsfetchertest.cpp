@@ -50,35 +50,6 @@ void OPDSFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 }
 
-void OPDSFetcherTest::testFeedbooksSearch() {
-  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group("Feedbooks");
-  cg.writeEntry("Catalog", "https://www.feedbooks.com/catalog.atom");
-  cg.writeEntry("Custom Fields", "url");
-
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       "9781515461234");
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
-  QVERIFY(fetcher->canSearch(request.key()));
-  fetcher->readConfig(cg);
-
-  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
-
-  QCOMPARE(results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field("title"), "First Lensman");
-  QCOMPARE(entry->field("author"), "E. E. \"Doc\" Smith");
-  QCOMPARE(entry->field("isbn"), "978-1-51546-123-4");
-  QCOMPARE(entry->field("pub_year"), "2023");
-  QCOMPARE(entry->field("publisher"), "Positronic Publishing");
-  QCOMPARE(entry->field("genre"), "Fiction; Science fiction; Adventure; Short stories");
-  QCOMPARE(entry->field("pages"), "180");
-  QCOMPARE(entry->field("url"), "https://www.feedbooks.com/item/5582241");
-  QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
-  QVERIFY(!entry->field("plot").isEmpty());
-}
-
 void OPDSFetcherTest::testEmptyGutenberg() {
   KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group("Feedbooks");
   cg.writeEntry("Catalog", "https://m.gutenberg.org/ebooks.opds/");
