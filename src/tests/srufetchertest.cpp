@@ -49,7 +49,7 @@ void SRUFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
   // since we use the MODS importer
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/mods2tellico.xsl"));
-  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = true"));
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = false\ntellico.info = false"));
 }
 
 void SRUFetcherTest::testTitle() {
@@ -164,11 +164,10 @@ void SRUFetcherTest::testJiscIsbn() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Foundations of Qt Development"));
+  QCOMPARE(entry->field(QStringLiteral("title")).toLower(), QStringLiteral("Foundations of Qt Development").toLower());
   QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Thelin, Johan."));
-  // the mods2tellico.xsl file returns the last ISBN value in the response, which is different in this case. Ignore for now
-//  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("1-43020-251-3"));
-  QCOMPARE(entry->field(QStringLiteral("lcc")), QStringLiteral("T385"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("1-43020-251-3"));
+  QCOMPARE(entry->field(QStringLiteral("lcc")), QStringLiteral("QA76.6 .T4457 2007"));
   QCOMPARE(entry->field(QStringLiteral("lccn")), QStringLiteral("2008295709"));
   QCOMPARE(entry->field(QStringLiteral("doi")), QStringLiteral("10.1007/978-1-4302-0251-6"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2007"));

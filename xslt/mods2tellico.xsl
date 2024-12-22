@@ -233,7 +233,7 @@
     </publishers>
    </xsl:when>
    <xsl:otherwise>
-    <xsl:apply-templates select="mods:originInfo/mods:publisher"/>
+    <xsl:apply-templates select="mods:originInfo/mods:publisher[1]"/>
    </xsl:otherwise>
   </xsl:choose>
 
