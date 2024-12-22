@@ -22,6 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
 #include "imagejob.h"
 #include "../utils/guiproxy.h"
 #include "../tellico_debug.h"
@@ -96,6 +97,9 @@ void ImageJob::slotStart() {
     // KIO::storedGet seems to handle Content-Encoding: gzip ok
     KIO::StoredTransferJob* getJob = KIO::storedGet(m_url, KIO::NoReload, flags);
     QObject::connect(getJob, &KJob::result, this, &ImageJob::getJobResult);
+    getJob->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
+    getJob->addMetaData(QStringLiteral("UserAgent"),
+                        QStringLiteral("Tellico/%1").arg(QStringLiteral(TELLICO_VERSION)));
     if(!m_referrer.isEmpty()) {
       getJob->addMetaData(QStringLiteral("referrer"), m_referrer.url());
     }
