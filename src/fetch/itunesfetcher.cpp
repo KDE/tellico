@@ -368,7 +368,7 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
     if(title.isEmpty()) title = mapValue(resultMap_, "trackName");
     entry_->setField(QStringLiteral("title"), title);
     // sometimes authors are separated by comma or ampersand
-    static QRegularExpression authorSplitRx(QStringLiteral("\\s*[,&]\\s+"));
+    static const QRegularExpression authorSplitRx(QStringLiteral("\\s*[,&]\\s+"));
     const auto authorString = mapValue(resultMap_, "artistName");
     const auto authors = authorString.split(authorSplitRx);
     entry_->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
