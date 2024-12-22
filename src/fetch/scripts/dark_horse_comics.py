@@ -217,7 +217,7 @@ class DarkHorseParser:
 
 		# Define some regexps
 		self.__regExps = {
-                        'title' 	: '<h2 class="title">(?P<title>.*?)</h2>',
+			'title' 	: '<h2 class="title">(?P<title>.*?)</h2>',
 			'pub_date'	: '<dt>Pub.* Date:</dt>.*?<dd>(?P<pub_date>.*?)</dd>',
 			'isbn'		: '<dt>ISBN-10:</dt><dd>(?P<isbn>.*?)</dd>',
 			'desc'		: '<div class="product-description">(?P<desc>.*?)</div>',
@@ -252,7 +252,7 @@ class DarkHorseParser:
 		Fetch HTML data from url
 		"""
 		u = urlopen(url)
-                # the html says it's in utf-8, but it happens to be latin-1
+		# the html says it's in utf-8, but it happens to be latin-1
 		self.__data = u.read().decode(encoding='latin-1')
 		u.close()
 
@@ -266,17 +266,16 @@ class DarkHorseParser:
 
 		return list(set(matchList))
 
-	def __fetchCover(self, path, delete = True):
-                """
-                Fetch cover to /tmp. Returns base64 encoding of data.
-                The image is deleted if delete is True
-                """
-                md5 = genMD5()
-                imObj = urlopen(path.strip())
-                img = imObj.read()
-                imObj.close()
-                b64data = (md5 + '.jpeg', base64.b64encode(img))
-                return b64data
+	def __fetchCover(self, path):
+		"""
+		Fetch cover. Returns base64 encoding of data.
+		"""
+		md5 = genMD5()
+		imObj = urlopen(path.strip())
+		img = imObj.read()
+		imObj.close()
+		b64data = (md5 + '.jpeg', base64.b64encode(img))
+		return b64data
 
 	def __fetchMovieInfo(self, url):
 		"""
@@ -287,11 +286,11 @@ class DarkHorseParser:
 		# First grab picture data
 		imgMatch = re.search("""<img src="(?P<imgpath>[^>]*%s.*?)"[^>]*>""" % self.__coverPath, self.__data)
 		if imgMatch:
-                        imgPath = "http:" + imgMatch.group('imgpath')
+			imgPath = "https:" + imgMatch.group('imgpath')
 			# Fetch cover and gets its base64 encoded data
-                        b64img = self.__fetchCover(imgPath)
+			b64img = self.__fetchCover(imgPath)
 		else:
-                        b64img = None
+			b64img = None
 
 		# Now isolate data between <div class="bodytext">...</div> elements
 		# re.DOTALL makes the "." special character match any character at all, including a newline
@@ -379,7 +378,7 @@ class DarkHorseParser:
 				elif name == 'genre':
 					# We may find several genres
 					data[name] = []
-					genresList = re.sub('</?a.*?>', '', matches[name].group('genre')).split(',')
+					genresList = re.sub('</?a.*?>', '', matches[name].group('genre'), flags=re.DOTALL).split(',')
 					for d in genresList:
 						data[name].append(d.strip())
 
@@ -407,7 +406,7 @@ class DarkHorseParser:
 		# Now retrieve info
 		if links:
 			for entry in links:
-				data = self.__fetchMovieInfo( url = self.__movieURL + entry )
+				data = self.__fetchMovieInfo(url = self.__movieURL + entry)
 				# Add DC link (custom field)
 				data['darkhorse'] = "%s%s" % (self.__movieURL, entry)
 				node = self.__domTree.addEntry(data)
