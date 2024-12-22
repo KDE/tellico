@@ -107,7 +107,8 @@ void ColnectFetcherTest::testSacagawea() {
 
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2007"));
   QCOMPARE(entry->field(QStringLiteral("country")), QStringLiteral("United States of America"));
-  QCOMPARE(entry->field(QStringLiteral("denomination")), QStringLiteral("$1.00"));
+  const auto oneDollar = QLocale::system().toCurrencyString(1.0, QLatin1String("$"));
+  QCOMPARE(entry->field(QStringLiteral("denomination")), oneDollar);
   QCOMPARE(entry->field(QStringLiteral("currency")), QStringLiteral("$ - United States dollar"));
   QCOMPARE(entry->field(QStringLiteral("series")), QStringLiteral("B06a - Eisenhower, Anthony & Sacagawea Dollar"));
   QCOMPARE(entry->field(QStringLiteral("mintage")), QStringLiteral("1497251077"));
@@ -140,7 +141,8 @@ void ColnectFetcherTest::testSkylab() {
   QCOMPARE(entry->field(QStringLiteral("michel")), QStringLiteral("PG 1902"));
   QCOMPARE(entry->field(QStringLiteral("series")), QStringLiteral("15th Anniversary of Launch of International Space Station"));
   QCOMPARE(entry->field(QStringLiteral("gummed")), QStringLiteral("PVA (Polyvinyl Alcohol)"));
-  QCOMPARE(entry->field(QStringLiteral("denomination")), QStringLiteral("K1.30"));
+  const auto oneKina = QLocale::system().toCurrencyString(1.30, QLatin1String("K"));
+  QCOMPARE(entry->field(QStringLiteral("denomination")), oneKina);
   QCOMPARE(entry->field(QStringLiteral("currency")), QStringLiteral("K - Papua New Guinean kina"));
   QCOMPARE(entry->field(QStringLiteral("color")), QStringLiteral("Multicolor"));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
