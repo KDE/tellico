@@ -260,13 +260,30 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
   if(nationalityMatch.hasMatch()) {
     const QString n = nationalityMatch.captured(1).remove(tagRx).trimmed();
     entry->setField(QStringLiteral("nationality"), n);
+  } else {
+    nationalityRx.setPattern(QStringLiteral("href=\".+?/laender/.+?\" title=\"(.+?)\""));
+    nationalityMatch = nationalityRx.match(str_);
+    if(nationalityMatch.hasMatch()) {
+      const QString n = nationalityMatch.captured(1);
+      entry->setField(QStringLiteral("nationality"), n);
+    }
   }
 
+  QString lengthStr;
   QRegularExpression lengthRx(QStringLiteral(">Dauer:(.*?)</li"),
                               QRegularExpression::DotMatchesEverythingOption);
   auto lengthMatch = lengthRx.match(str_);
   if(lengthMatch.hasMatch()) {
-    const QString l = lengthMatch.captured(1).remove(tagRx).remove(QStringLiteral(" Min")).trimmed();
+    lengthStr = lengthMatch.captured(1).remove(tagRx);
+  } else {
+    lengthRx.setPattern(QStringLiteral(">(\\d+) Min</span"));
+    lengthMatch = lengthRx.match(str_);
+    if(lengthMatch.hasMatch()) {
+      lengthStr = lengthMatch.captured(1);
+    }
+  }
+  if(!lengthStr.isEmpty()) {
+    const QString l = lengthStr.remove(QStringLiteral(" Min")).trimmed();
     entry->setField(QStringLiteral("running-time"), l);
   }
 
@@ -282,7 +299,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
   }
 
-  QRegularExpression certRx(QStringLiteral(">FSK:(.*?)</a"),
+  QRegularExpression certRx(QStringLiteral(">FSK:?(.*?)</"),
                             QRegularExpression::DotMatchesEverythingOption);
   auto certMatch = certRx.match(str_);
   if(certMatch.hasMatch()) {
@@ -299,15 +316,15 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
       entry->collection()->fieldByName(QStringLiteral("certification"))->setAllowed(allowed);
     }
     QString c = certMatch.captured(1).remove(tagRx).trimmed();
-    if(c == QStringLiteral("ab 0")) {
+    if(c == QLatin1String("ab 0") || c == QLatin1String("0")) {
       c = QStringLiteral("FSK 0 (DE)");
-    } else if(c == QLatin1String("ab 6")) {
+    } else if(c == QLatin1String("ab 6") || c == QLatin1String("6")) {
       c = QStringLiteral("FSK 6 (DE)");
-    } else if(c == QLatin1String("ab 12")) {
+    } else if(c == QLatin1String("ab 12") || c == QLatin1String("12")) {
       c = QStringLiteral("FSK 12 (DE)");
-    } else if(c == QLatin1String("ab 16")) {
+    } else if(c == QLatin1String("ab 16") || c == QLatin1String("16")) {
       c = QStringLiteral("FSK 16 (DE)");
-    } else if(c == QLatin1String("ab 18")) {
+    } else if(c == QLatin1String("ab 18") || c == QLatin1String("18")) {
       c = QStringLiteral("FSK 18 (DE)");
     }
     entry->setField(QStringLiteral("certification"), c);
