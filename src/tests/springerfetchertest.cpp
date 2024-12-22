@@ -55,6 +55,8 @@ void SpringerFetcherTest::initTestCase() {
 }
 
 void SpringerFetcherTest::testTitle() {
+  // title search requires Premium access
+  return;
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
                                        QStringLiteral("roughening transition of the three-dimensional Ising interface"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
@@ -74,6 +76,8 @@ void SpringerFetcherTest::testTitle() {
 }
 
 void SpringerFetcherTest::testAuthor() {
+  // author search requires Premium access
+  return;
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Person,
                                        QStringLiteral("Albert Einstein"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
