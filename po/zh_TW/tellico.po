@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-21 00:41+0000\n"
+"POT-Creation-Date: 2024-12-23 00:41+0000\n"
 "PO-Revision-Date: 2024-07-27 13:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -633,7 +633,7 @@ msgid "Property"
 msgstr "屬性"
 
 #: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:105
-#: src/fetch/srufetcher.cpp:614
+#: src/fetch/srufetcher.cpp:624
 #, kde-format
 msgid "Value"
 msgstr "數值"
@@ -771,7 +771,7 @@ msgid "Publisher"
 msgstr "發行者"
 
 #: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:309
-#: src/fetch/srufetcher.cpp:525 src/fetch/z3950fetcher.cpp:572
+#: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
 msgstr "地址"
@@ -874,7 +874,7 @@ msgstr "關鍵字"
 
 #: src/collections/bibtexcollection.cpp:236 src/collections/filecatalog.cpp:50
 #: src/fetch/entrezfetcher.cpp:446 src/fetch/entrezfetcher.cpp:522
-#: src/fetch/opdsfetcher.cpp:435 src/field.cpp:200
+#: src/fetch/opdsfetcher.cpp:440 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:81
 #: src/translators/filereadervideo.cpp:128
 #: src/translators/gcstarimporter.cpp:88
@@ -883,7 +883,7 @@ msgid "URL"
 msgstr "網址"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/srufetcher.cpp:526
+#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/srufetcher.cpp:536
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -1070,7 +1070,7 @@ msgid "Trade Paperback"
 msgstr "商業平裝本"
 
 #: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
-#: src/fetch/itunesfetcher.cpp:418 src/translators/filereaderbook.cpp:86
+#: src/fetch/itunesfetcher.cpp:426 src/translators/filereaderbook.cpp:86
 #, kde-format
 msgid "E-Book"
 msgstr "電子書"
@@ -1610,7 +1610,7 @@ msgstr "專輯"
 
 #: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:422
 #: src/fetch/doubanfetcher.cpp:454 src/fetch/doubanfetcher.cpp:588
-#: src/fetch/upcitemdbfetcher.cpp:303 src/fetch/upcitemdbfetcher.cpp:423
+#: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:162
 #: src/translators/freedbimporter.cpp:278
@@ -1622,8 +1622,8 @@ msgstr "光碟"
 
 #: src/collections/musiccollection.cpp:50
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:430 src/fetch/upcitemdbfetcher.cpp:419
-#: src/fetch/upcitemdbfetcher.cpp:427 src/translators/discogsimporter.cpp:169
+#: src/fetch/discogsfetcher.cpp:430 src/fetch/upcitemdbfetcher.cpp:420
+#: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:169
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
@@ -1740,7 +1740,7 @@ msgid "My Videos"
 msgstr "我的影片"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1031
-#: src/fetch/upcitemdbfetcher.cpp:405
+#: src/fetch/upcitemdbfetcher.cpp:406
 #, kde-format
 msgid "VHS"
 msgstr "VHS 影帶"
@@ -1756,13 +1756,13 @@ msgid "DivX"
 msgstr "DivX"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1025
-#: src/fetch/upcitemdbfetcher.cpp:399
+#: src/fetch/upcitemdbfetcher.cpp:400
 #, kde-format
 msgid "Blu-ray"
 msgstr "藍光"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1028
-#: src/fetch/upcitemdbfetcher.cpp:402
+#: src/fetch/upcitemdbfetcher.cpp:403
 #, kde-format
 msgid "HD DVD"
 msgstr "高畫質 DVD"
@@ -1840,7 +1840,7 @@ msgid "Nationality"
 msgstr "國籍"
 
 #: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1041
-#: src/fetch/upcitemdbfetcher.cpp:415
+#: src/fetch/upcitemdbfetcher.cpp:416
 #, kde-format
 msgid "NTSC"
 msgstr "NTSC"
@@ -1934,7 +1934,7 @@ msgid "Aspect Ratio"
 msgstr "外觀比例"
 
 #: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1014
-#: src/fetch/upcitemdbfetcher.cpp:385
+#: src/fetch/upcitemdbfetcher.cpp:386
 #, kde-format
 msgid "Widescreen"
 msgstr "寬螢幕"
@@ -1950,7 +1950,7 @@ msgid "Color Mode"
 msgstr "色彩模式"
 
 #: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1035
-#: src/fetch/upcitemdbfetcher.cpp:409
+#: src/fetch/upcitemdbfetcher.cpp:410
 #, kde-format
 msgid "Director's Cut"
 msgstr "導演剪輯版"
@@ -3370,13 +3370,13 @@ msgstr "從 %1 傳回的結果：%2/%3"
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:198
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
 #: src/fetch/isbndbfetcher.cpp:294 src/fetch/itunesfetcher.cpp:352
-#: src/fetch/kinofetcher.cpp:347 src/fetch/kinopoiskfetcher.cpp:267
+#: src/fetch/kinofetcher.cpp:364 src/fetch/kinopoiskfetcher.cpp:267
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/mobygamesfetcher.cpp:343
 #: src/fetch/moviemeterfetcher.cpp:160 src/fetch/numistafetcher.cpp:286
 #: src/fetch/numistafetcher.cpp:294 src/fetch/omdbfetcher.cpp:181
 #: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:235
 #: src/fetch/thetvdbfetcher.cpp:340 src/fetch/tvmazefetcher.cpp:262
-#: src/fetch/upcitemdbfetcher.cpp:258 src/fetch/vgcollectfetcher.cpp:282
+#: src/fetch/upcitemdbfetcher.cpp:259 src/fetch/vgcollectfetcher.cpp:282
 #: src/fetch/vndbfetcher.cpp:182
 #, kde-format
 msgid "The cover image could not be loaded."
@@ -3411,7 +3411,7 @@ msgstr "Amazon.com 提供數個不同的地域化站台。請選擇此資料來�
 
 #: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:215
 #: src/fetch/colnectfetcher.cpp:956 src/fetch/imdbfetcher.cpp:567
-#: src/fetch/itunesfetcher.cpp:543 src/fetch/mobygamesfetcher.cpp:669
+#: src/fetch/itunesfetcher.cpp:551 src/fetch/mobygamesfetcher.cpp:669
 #: src/fetch/rpggeekfetcher.cpp:224 src/fetch/thegamesdbfetcher.cpp:655
 #: src/fetch/videogamegeekfetcher.cpp:215
 #, kde-format
@@ -3420,7 +3420,7 @@ msgstr "影像大小(&I)："
 
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:219
 #: src/fetch/colnectfetcher.cpp:960 src/fetch/imdbfetcher.cpp:570
-#: src/fetch/itunesfetcher.cpp:547 src/fetch/mobygamesfetcher.cpp:672
+#: src/fetch/itunesfetcher.cpp:555 src/fetch/mobygamesfetcher.cpp:672
 #: src/fetch/rpggeekfetcher.cpp:228 src/fetch/thegamesdbfetcher.cpp:658
 #: src/fetch/videogamegeekfetcher.cpp:219
 #, kde-format
@@ -3436,7 +3436,7 @@ msgstr "中"
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:220
 #: src/fetch/colnectfetcher.cpp:961 src/fetch/imdbfetcher.cpp:572
-#: src/fetch/itunesfetcher.cpp:548 src/fetch/mobygamesfetcher.cpp:674
+#: src/fetch/itunesfetcher.cpp:556 src/fetch/mobygamesfetcher.cpp:674
 #: src/fetch/rpggeekfetcher.cpp:229 src/fetch/thegamesdbfetcher.cpp:660
 #: src/fetch/videogamegeekfetcher.cpp:220
 #, kde-format
@@ -3445,7 +3445,7 @@ msgstr "大"
 
 #: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:218
 #: src/fetch/colnectfetcher.cpp:959 src/fetch/imdbfetcher.cpp:573
-#: src/fetch/itunesfetcher.cpp:546 src/fetch/mobygamesfetcher.cpp:675
+#: src/fetch/itunesfetcher.cpp:554 src/fetch/mobygamesfetcher.cpp:675
 #: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:661
 #: src/fetch/videogamegeekfetcher.cpp:218
 #, kde-format
@@ -3488,11 +3488,11 @@ msgstr ""
 #: src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:320
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
-#: src/fetch/kinofetcher.cpp:385 src/fetch/kinoteatrfetcher.cpp:513
+#: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:457
 #: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:386
-#: src/fetch/upcitemdbfetcher.cpp:478 src/fetch/vgcollectfetcher.cpp:378
+#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
 #: src/fetch/vndbfetcher.cpp:440
 #, kde-format
 msgid "This source has no options."
@@ -3627,7 +3627,7 @@ msgstr "Discogs 連結"
 #. i18n("Nationality");
 #: src/fetch/discogsfetcher.cpp:330 src/fetch/discogsfetcher.cpp:547
 #: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:371
-#: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:471
+#: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:472
 #: src/fetch/vgcollectfetcher.cpp:336 src/fetch/vgcollectfetcher.cpp:371
 #, kde-format
 msgid "Barcode"
@@ -3912,13 +3912,13 @@ msgid "Illustrator"
 msgstr "插畫家"
 
 #: src/fetch/hathitrustfetcher.cpp:312 src/fetch/isbndbfetcher.cpp:382
-#: src/fetch/srufetcher.cpp:527 src/fetch/z3950fetcher.cpp:575
+#: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Dewey Decimal"
 
-#: src/fetch/hathitrustfetcher.cpp:313 src/fetch/srufetcher.cpp:528
+#: src/fetch/hathitrustfetcher.cpp:313 src/fetch/srufetcher.cpp:538
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -3970,7 +3970,7 @@ msgstr "IMDb 連結"
 msgid "Certifications"
 msgstr "憑證"
 
-#: src/fetch/imdbfetcher.cpp:533 src/fetch/itunesfetcher.cpp:532
+#: src/fetch/imdbfetcher.cpp:533 src/fetch/itunesfetcher.cpp:540
 #: src/fetch/themoviedbfetcher.cpp:573 src/fetch/thetvdbfetcher.cpp:565
 #: src/fetch/tvmazefetcher.cpp:376 src/field.cpp:339
 #, kde-format
@@ -4020,7 +4020,7 @@ msgid ""
 "Pro plans."
 msgstr ""
 
-#: src/fetch/itunesfetcher.cpp:238 src/fetch/itunesfetcher.cpp:531
+#: src/fetch/itunesfetcher.cpp:238 src/fetch/itunesfetcher.cpp:539
 #, kde-format
 msgid "iTunes Link"
 msgstr "iTunes 連結"
@@ -4084,31 +4084,31 @@ msgstr "法文"
 msgid "Numista (%1)"
 msgstr ""
 
-#: src/fetch/opdsfetcher.cpp:200 src/fetch/opdsfetcher.cpp:210
+#: src/fetch/opdsfetcher.cpp:205 src/fetch/opdsfetcher.cpp:215
 #, fuzzy, kde-format
 #| msgid "Tellico was unable to read any metadata from the PDF file."
 msgid "Tellico is unable to read the search description in the OPDS catalog."
 msgstr "Tellico 無法讀取此 PDF 檔的任何中繼資料。"
 
-#: src/fetch/opdsfetcher.cpp:425
+#: src/fetch/opdsfetcher.cpp:430
 #, fuzzy, kde-format
 #| msgid "File Catalog"
 msgid "OPDS Catalog"
 msgstr "檔案類別"
 
-#: src/fetch/opdsfetcher.cpp:450
+#: src/fetch/opdsfetcher.cpp:455
 #, fuzzy, kde-format
 #| msgid "Card Number"
 msgid "Catalog: "
 msgstr "卡號"
 
-#: src/fetch/opdsfetcher.cpp:455
+#: src/fetch/opdsfetcher.cpp:460
 #, fuzzy, kde-format
 #| msgid "Enter the host name of the server."
 msgid "Enter the link to the OPDS server."
 msgstr "輸入此伺服器的主機名稱。"
 
-#: src/fetch/opdsfetcher.cpp:460
+#: src/fetch/opdsfetcher.cpp:465
 #, fuzzy, kde-format
 #| msgid "File Catalog"
 msgid "&Verify Catalog"
@@ -4124,63 +4124,63 @@ msgstr "OpenLibrary 連結"
 msgid "RPGGeek Link"
 msgstr "RPGGeek 連結"
 
-#: src/fetch/srufetcher.cpp:510
+#: src/fetch/srufetcher.cpp:520
 #, kde-format
 msgid "Library of Congress (US)"
 msgstr "國會圖書館（美國）"
 
-#: src/fetch/srufetcher.cpp:515
+#: src/fetch/srufetcher.cpp:525
 #, kde-format
 msgid "SRU Server"
 msgstr "SRU 伺服器"
 
-#: src/fetch/srufetcher.cpp:543
+#: src/fetch/srufetcher.cpp:553
 #, fuzzy, kde-format
 #| msgid "&Source name: "
 msgid "Scheme: "
 msgstr "來源名稱(&S)："
 
-#: src/fetch/srufetcher.cpp:553 src/fetch/srufetcher.cpp:589
+#: src/fetch/srufetcher.cpp:563 src/fetch/srufetcher.cpp:599
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr "輸入伺服器使用的資料庫路徑。"
 
-#: src/fetch/srufetcher.cpp:558 src/fetch/z3950fetcher.cpp:599
+#: src/fetch/srufetcher.cpp:568 src/fetch/z3950fetcher.cpp:599
 #, kde-format
 msgid "Hos&t: "
 msgstr "主機(&T)："
 
-#: src/fetch/srufetcher.cpp:565 src/fetch/z3950fetcher.cpp:605
+#: src/fetch/srufetcher.cpp:575 src/fetch/z3950fetcher.cpp:605
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "輸入此伺服器的主機名稱。"
 
-#: src/fetch/srufetcher.cpp:570 src/fetch/z3950fetcher.cpp:610
+#: src/fetch/srufetcher.cpp:580 src/fetch/z3950fetcher.cpp:610
 #, kde-format
 msgid "&Port: "
 msgstr "連接埠(&P)："
 
-#: src/fetch/srufetcher.cpp:579 src/fetch/z3950fetcher.cpp:619
+#: src/fetch/srufetcher.cpp:589 src/fetch/z3950fetcher.cpp:619
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "輸入伺服器的連接埠號。預設為 %1。"
 
-#: src/fetch/srufetcher.cpp:584
+#: src/fetch/srufetcher.cpp:594
 #, kde-format
 msgid "Path: "
 msgstr "路徑："
 
-#: src/fetch/srufetcher.cpp:594
+#: src/fetch/srufetcher.cpp:604
 #, kde-format
 msgid "Format: "
 msgstr "格式："
 
-#: src/fetch/srufetcher.cpp:605
+#: src/fetch/srufetcher.cpp:615
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "輸入伺服器使用的結果格式。"
 
-#: src/fetch/srufetcher.cpp:614
+#: src/fetch/srufetcher.cpp:624
 #, kde-format
 msgid "Field"
 msgstr "欄位"
@@ -5003,7 +5003,7 @@ msgstr "將列上移"
 msgid "Move Row Down"
 msgstr "將列下移"
 
-#: src/images/imagejob.cpp:77 src/images/imagejob.cpp:111
+#: src/images/imagejob.cpp:78 src/images/imagejob.cpp:115
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico 無法載入影像 - %1。"
