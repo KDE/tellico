@@ -874,7 +874,7 @@ void MainWindow::initView() {
   m_detailedView = m_viewStack->listView();
   Controller::self()->addObserver(m_detailedView);
   m_detailedView->setWhatsThis(i18n("<qt>The <i>Column View</i> shows the value of multiple fields "
-                                       "for each entry.</qt>"));
+                                    "for each entry.</qt>"));
   connect(Data::Document::self(), &Data::Document::signalCollectionImagesLoaded,
           m_detailedView, &DetailedListView::slotRefreshImages);
 
@@ -901,7 +901,7 @@ void MainWindow::initView() {
   Controller::self()->addObserver(m_groupView);
   m_viewTabs->addTab(m_groupView, QIcon::fromTheme(QStringLiteral("folder")), i18n("Groups"));
   m_groupView->setWhatsThis(i18n("<qt>The <i>Group View</i> sorts the entries into groupings "
-                                    "based on a selected field.</qt>"));
+                                 "based on a selected field.</qt>"));
   m_groupViewDock->setWidget(m_viewTabs);
   addDockWidget(Qt::LeftDockWidgetArea, m_groupViewDock);
   actionCollection()->addAction(QStringLiteral("toggle_group_widget"), m_groupViewDock->toggleViewAction());
