@@ -126,7 +126,7 @@ find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
 
 if(BUILD_DOC)
-    find_package(KF${KF_MAJOR_VERSION}DocTools)
+    find_package(KF${KF_MAJOR_VERSION}DocTools REQUIRED)
     set_package_properties(KF${KF_MAJOR_VERSION}DocTools PROPERTIES
         DESCRIPTION "Tools to generate documentation"
         TYPE REQUIRED)
