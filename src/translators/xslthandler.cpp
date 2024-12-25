@@ -41,7 +41,11 @@ extern "C" {
 }
 
 // I don't want any network I/O at all
+#if LIBXML_VERSION > 21300
+static const int xml_options = XML_PARSE_NONET | XML_PARSE_NOCDATA | XML_PARSE_NO_XXE;
+#else
 static const int xml_options = XML_PARSE_NONET | XML_PARSE_NOCDATA;
+#endif
 static const int xslt_options = xml_options;
 
 /* some functions to pass to the XSLT libs */
