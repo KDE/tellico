@@ -131,8 +131,6 @@ XSLTHandler::~XSLTHandler() {
 
 void XSLTHandler::init() {
   if(s_initCount == 0) {
-    xmlLoadExtDtdDefaultValue = 0;
-
     // register all exslt extensions
     exsltRegisterAll();
   }
