@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-23 00:41+0000\n"
-"PO-Revision-Date: 2024-09-18 19:03+0200\n"
+"PO-Revision-Date: 2024-12-27 10:42+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -6220,10 +6220,9 @@ msgstr ""
 "elektita kampo.</qt>"
 
 #: src/mainwindow.cpp:980
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - programaro pri kolekto-administrado, libera kaj simpla"
+msgstr "Programaro pri kolekto-administrado, libera kaj simpla"
 
 #: src/mainwindow.cpp:982
 #, kde-format
