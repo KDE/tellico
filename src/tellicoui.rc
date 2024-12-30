@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="48" name="tellico">
+<kpartgui version="49" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -109,9 +109,9 @@
    </Menu>
   </Menu>
   <Menu name="settings">
+   <Action name="settings_style"/>
    <Menu name="dockers" append="show_merge">
     <text context="@title:menu">&amp;Show Views</text>
-    <!--<Action name="options_show_statusbar"/>-->
     <Action name="toggle_collection_bar"/>
     <Action name="toggle_group_widget"/>
     <Action name="toggle_column_widget"/>
@@ -121,7 +121,7 @@
    <Action append="show_merge" name="lock_layout"/>
    <Action append="show_merge" name="reset_layout"/>
    <Action name="switch_application_language"/>
-   </Menu>
+  </Menu>
   <Menu name="help">
    <Action append="help_whats_this_merge" name="show_log"/>
   </Menu>

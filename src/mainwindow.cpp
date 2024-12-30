@@ -101,6 +101,11 @@
 #include <KIconLoader>
 #include <kwidgetsaddons_version.h>
 
+#define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
+#if HAVE_STYLE_MANAGER
+#include <KStyleManager>
+#endif
+
 #include <QApplication>
 #include <QUndoStack>
 #include <QAction>
@@ -730,6 +735,10 @@ void MainWindow::initActions() {
    *************************************************/
   setStandardToolBarMenuEnabled(true);
   createStandardStatusBarAction();
+  // style config
+#if HAVE_STYLE_MANAGER
+  actionCollection()->addAction(QStringLiteral("settings_style"), KStyleManager::createConfigureAction(this));
+#endif
 
   m_lockLayout = new KDualAction(this);
   connect(m_lockLayout, &KDualAction::activeChanged, this, &MainWindow::slotToggleLayoutLock);
@@ -762,7 +771,6 @@ void MainWindow::initActions() {
   if(Logger::self()->logFile().isEmpty()) {
     action->setEnabled(false);
   }
-
 
   /*************************************************
    * Short cuts
