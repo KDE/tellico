@@ -155,7 +155,7 @@ void EntryViewPage::openExternalLink(const QUrl& url_) {
 
 EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_),
     m_handler(nullptr), m_tempFile(nullptr), m_useGradientImages(true), m_checkCommonFile(true) {
-  EntryViewPage* page = new EntryViewPage(this);
+  auto page = new EntryViewPage(this);
   setPage(page);
   if(m_printer.resolution() < 300) {
     m_printer.setResolution(300);
@@ -168,7 +168,7 @@ EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_),
           this, &EntryView::signalTellicoAction);
 
   setAcceptDrops(true);
-  DropHandler* drophandler = new DropHandler(this);
+  auto drophandler = new DropHandler(this);
   installEventFilter(drophandler);
 
   clear(); // needed for initial layout
