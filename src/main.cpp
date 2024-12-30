@@ -54,7 +54,7 @@
 
 int main(int argc, char* argv[]) {
   /**
-   * trigger initialisation of proper icon theme
+   * Trigger initialisation of proper icon theme
    * see https://invent.kde.org/frameworks/kiconthemes/-/merge_requests/136
    */
 #if KICONTHEMES_VERSION >= QT_VERSION_CHECK(6, 3, 0)
@@ -76,18 +76,18 @@ int main(int argc, char* argv[]) {
 
   QApplication app(argc, argv);
 #if HAVE_STYLE_MANAGER
-    /**
-     * trigger initialisation of proper application style
-     * see https://invent.kde.org/frameworks/kconfigwidgets/-/merge_requests/239
-     */
-    KStyleManager::initStyle();
+  /**
+   * Trigger initialisation of proper application style
+   * see https://invent.kde.org/frameworks/kconfigwidgets/-/merge_requests/239
+   */
+  KStyleManager::initStyle();
 #else
-    /**
-     * For Windows and macOS: use Breeze if available
-     * Of all tested styles that works the best for us
-     */
+  /**
+   * For Windows and macOS: use Breeze if available
+   * Of all tested styles that works the best for us
+  */
 #if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
-    QApplication::setStyle(QStringLiteral("breeze"));
+  QApplication::setStyle(QStringLiteral("breeze"));
 #endif
 #endif
   KLocalizedString::setApplicationDomain("tellico");
