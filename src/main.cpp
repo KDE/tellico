@@ -79,8 +79,13 @@ int main(int argc, char* argv[]) {
   /**
    * Trigger initialisation of proper application style
    * see https://invent.kde.org/frameworks/kconfigwidgets/-/merge_requests/239
+   *
+   * But avoid hardcoding Breeze if qt6ct is set
+   * see https://bugs.kde.org/show_bug.cgi?id=496074
    */
-  KStyleManager::initStyle();
+  if(qEnvironmentVariable("QT_QPA_PLATFORMTHEME") != QLatin1String("qt6ct")) {
+    KStyleManager::initStyle();
+  }
 #else
   /**
    * For Windows and macOS: use Breeze if available
