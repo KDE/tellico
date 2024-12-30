@@ -919,6 +919,9 @@ void MainWindow::initView() {
                                                              this);
   m_iconView->setSelectionModel(proxySelect);
 
+  // Do custom themes override widget palettes? Ensure the EntryView remains consistent with the others
+  m_entryView->setPalette(m_iconView->palette());
+
   // setting up GUI now rather than in initActions
   // initial parameter is default window size
   setupGUI(QSize(1280,800), Keys | ToolBar);

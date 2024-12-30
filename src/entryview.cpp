@@ -109,7 +109,12 @@ using Tellico::EntryViewPage;
 
 EntryViewPage::EntryViewPage(QWidget* parent)
     : QWebEnginePage(parent) {
+  // The right way to do this should be to use a transparent color
+  // but for non-KDE sessions, QPalette and KColorScheme are not necessarily in-sync
+  // In such cases, parent->palette().window().color() would be more appropriate but
+  // that breaks on a Plasma session. Using KCOlorScheme is best compromise for now
   setBackgroundColor(KColorScheme().background().color());
+//  setBackgroundColor(Qt::transparent);
   settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
   settings()->setAttribute(QWebEngineSettings::PluginsEnabled, false);
   settings()->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, true);
