@@ -446,14 +446,14 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if(factory->d->dataImageDir.hasImage(id_)) {
     const Data::Image& img2 = factory->addCachedImageImpl(id_, DataDir);
     if(!img2.isNull()) {
-      myLog() << "Unexpectedly found image in data dir location";
+      myLog() << "Unexpectedly found image in data dir location:" << id_;
       return img2;
     }
   }
   if(factory->d->localImageDir.hasImage(id_)) {
     const Data::Image& img2 = factory->addCachedImageImpl(id_, LocalDir);
     if(!img2.isNull()) {
-      myLog() << "Unexpectedly found image in local dir location";
+      myLog() << "Unexpectedly found image in local dir location:" << id_;
       return img2;
     }
   }
@@ -470,7 +470,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     if(d.cd(cdString)) {
       factory->d->localImageDir.setDirectory(QUrl::fromLocalFile(d.path() + QDir::separator()));
       if(factory->d->localImageDir.hasImage(id_)) {
-//        myDebug() << "Reading image from old local directory" << (cdString+id_);
+        myLog() << "Reading image from old local directory" << (cdString+id_);
         const Data::Image& img2 = factory->addCachedImageImpl(id_, LocalDir);
         // Be sure to reset the image directory location!!
         factory->d->localImageDir.setDirectory(QUrl::fromLocalFile(realImageDir));
