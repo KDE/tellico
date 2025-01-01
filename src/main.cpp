@@ -173,7 +173,7 @@ int main(int argc, char* argv[]) {
   KAboutData aboutData(QStringLiteral("tellico"), QStringLiteral("Tellico"),
                        QStringLiteral(TELLICO_VERSION), i18n("Tellico - collection management software, free and simple"),
                        KAboutLicense::GPL_V2,
-                       i18n("(c) 2001-2024, Robby Stephenson"),
+                       i18n("(c) 2001, Robby Stephenson"),
                        QString(),
                        QStringLiteral("https://tellico-project.org"));
   aboutData.addAuthor(QStringLiteral("Robby Stephenson"), QString(), QStringLiteral("robby@periapsis.org"));
