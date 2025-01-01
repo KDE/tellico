@@ -2333,10 +2333,14 @@ void MainWindow::slotUpdateToolbarIcons() {
 
 void MainWindow::slotGroupLabelActivated() {
   // need entry grouping combo id
-  foreach(QWidget* widget, m_entryGrouping->associatedWidgets()) {
-    if(::qobject_cast<KToolBar*>(widget)) {
-      QWidget* container = m_entryGrouping->requestWidget(widget);
-      QComboBox* combo = ::qobject_cast<QComboBox*>(container); //krazy:exclude=qclasses
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+  for(auto obj : m_entryGrouping->associatedWidget()) {
+#else
+  for(auto obj : m_entryGrouping->associatedObjects()) {
+#endif
+    if(auto widget = ::qobject_cast<KToolBar*>(obj)) {
+      auto container = m_entryGrouping->requestWidget(widget);
+      auto combo = ::qobject_cast<QComboBox*>(container); //krazy:exclude=qclasses
       if(combo) {
         combo->showPopup();
         break;
@@ -2402,9 +2406,15 @@ void MainWindow::updateCollectionActions() {
 void MainWindow::updateEntrySources() {
   const QString actionListName = QStringLiteral("update_entry_actions");
   unplugActionList(actionListName);
-  foreach(QAction* action, m_fetchActions) {
-    foreach(QWidget* widget, action->associatedWidgets()) {
-      widget->removeAction(action);
+  for(auto action : m_fetchActions) {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+    for(auto obj : action->associatedWidgets()) {
+#else
+    for(auto obj : action->associatedObjects()) {
+#endif
+      if(auto widget = ::qobject_cast<QWidget*>(obj)) {
+        widget->removeAction(action);
+      }
     }
     m_updateMapper->removeMappings(action);
   }

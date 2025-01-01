@@ -145,13 +145,24 @@ QDomDocument FileHandler::readXMLDocument(const QUrl& url_, bool processNamespac
     return QDomDocument();
   }
 
-  QDomDocument doc;
-  QString errorMsg;
-  int errorLine, errorColumn;
   if(!f.open(quiet_)) {
     return QDomDocument();
   }
+  QDomDocument doc;
+  QString errorMsg;
+  int errorLine, errorColumn;
+  #if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
   if(!doc.setContent(f.file(), processNamespace_, &errorMsg, &errorLine, &errorColumn)) {
+#else
+  const auto parseResult = doc.setContent(f.file(), processNamespace_ ?
+                                                    QDomDocument::ParseOption::UseNamespaceProcessing :
+                                                    QDomDocument::ParseOption::Default);
+
+  if(!parseResult) {
+    errorMsg = parseResult.errorMessage;
+    errorLine = parseResult.errorLine;
+    errorColumn = parseResult.errorColumn;
+#endif
     if(!quiet_) {
       QString details = i18n("There is an XML parsing error in line %1, column %2.", errorLine, errorColumn);
       details += QLatin1String("\n");
