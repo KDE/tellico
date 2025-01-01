@@ -2334,7 +2334,7 @@ void MainWindow::slotUpdateToolbarIcons() {
 void MainWindow::slotGroupLabelActivated() {
   // need entry grouping combo id
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  for(auto obj : m_entryGrouping->associatedWidget()) {
+  for(auto obj : m_entryGrouping->associatedWidgets()) {
 #else
   for(auto obj : m_entryGrouping->associatedObjects()) {
 #endif
