@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 00:41+0000\n"
+"POT-Creation-Date: 2025-01-02 00:41+0000\n"
 "PO-Revision-Date: 2024-11-28 10:31+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2922,24 +2922,24 @@ msgstr ""
 "préstec d'un element múltiples vegades. Seran eliminats de la llista "
 "d'elements que es presten."
 
-#: src/core/filehandler.cpp:156
+#: src/core/filehandler.cpp:167
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr ""
 "S'ha produït un error en l'anàlisi sintàctica XML en la línia %1, columna %2."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:169
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "El missatge d'error de les Qt és:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:201
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Ja existix un fitxer anomenat «%1». Segur que el voleu sobreescriure?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:204
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Voleu sobreescriure el fitxer?"
@@ -5314,8 +5314,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - programari de gestió de col·leccions, lliure i senzill"
 
 #: src/main.cpp:176
-#, kde-format
-msgid "(c) 2001-2024, Robby Stephenson"
+#, fuzzy, kde-format
+#| msgid "(c) 2001-2024, Robby Stephenson"
+msgid "(c) 2001, Robby Stephenson"
 msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:180
@@ -6471,7 +6472,7 @@ msgstr ""
 "<qt>La <i>vista de préstec</i> mostra una llista de totes les persones que "
 "han amprat elements prestats de la col·lecció.</qt>"
 
-#: src/mainwindow.cpp:2378
+#: src/mainwindow.cpp:2382
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6480,12 +6481,12 @@ msgstr ""
 "Algunes imatges no estan guardades en la ubicació configurada. El fitxer "
 "actual s'ha de guardar i les imatges es transferiran cap a la ubicació nova."
 
-#: src/mainwindow.cpp:2419
+#: src/mainwindow.cpp:2429
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Actualitza les dades de les entrades des de %1"
 
-#: src/mainwindow.cpp:2438
+#: src/mainwindow.cpp:2448
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6494,7 +6495,7 @@ msgstr ""
 "Tellico només pot importar un fitxer d'este tipus alhora. Només s'importarà "
 "%1."
 
-#: src/mainwindow.cpp:2626
+#: src/mainwindow.cpp:2636
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"

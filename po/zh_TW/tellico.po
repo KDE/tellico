@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 00:41+0000\n"
+"POT-Creation-Date: 2025-01-02 00:41+0000\n"
 "PO-Revision-Date: 2024-07-27 13:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -2872,23 +2872,23 @@ msgstr ""
 "以下的項目已被借出，但 Tellico 目前不支援同一項目被借出多次的功能。它們會在借"
 "出清單中被移除。"
 
-#: src/core/filehandler.cpp:156
+#: src/core/filehandler.cpp:167
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "XML 剖析時發生錯誤：第 %1 行，第 %2 欄"
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:169
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Qt 傳來的錯誤訊息為："
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:201
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "名為「%1」的檔案已經存在。您確定要覆寫它嗎？"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:204
 #, kde-format
 msgid "Overwrite File?"
 msgstr "要覆寫檔案嗎？"
@@ -5224,8 +5224,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - 自由簡潔的收藏管理員"
 
 #: src/main.cpp:176
-#, kde-format
-msgid "(c) 2001-2024, Robby Stephenson"
+#, fuzzy, kde-format
+#| msgid "(c) 2001-2024, Robby Stephenson"
+msgid "(c) 2001, Robby Stephenson"
 msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:180
@@ -6384,7 +6385,7 @@ msgid ""
 "items from your collection.</qt>"
 msgstr "<qt>借貸檢視會顯示所有您已借出的收藏項目。</qt>"
 
-#: src/mainwindow.cpp:2378
+#: src/mainwindow.cpp:2382
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6393,19 +6394,19 @@ msgstr ""
 "有些影像並未儲存在設定的位置。目前的檔案必須先儲存，影像則會被轉換到新的位"
 "置。"
 
-#: src/mainwindow.cpp:2419
+#: src/mainwindow.cpp:2429
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "從 %1 更新的項目資料"
 
-#: src/mainwindow.cpp:2438
+#: src/mainwindow.cpp:2448
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr "Tellico 此種型態一次只能匯入一個檔案。將只有 %1 會被匯出。"
 
-#: src/mainwindow.cpp:2626
+#: src/mainwindow.cpp:2636
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
 msgctxt "@title:window"

@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 00:41+0000\n"
+"POT-Creation-Date: 2025-01-02 00:41+0000\n"
 "PO-Revision-Date: 2024-11-30 10:00+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -2912,23 +2912,23 @@ msgstr ""
 "obecnie na wypożyczanie przedmiotu wiele razy jednocześnie. Te przedmioty "
 "zostaną usunięte z listy przedmiotów do wypożyczenia."
 
-#: src/core/filehandler.cpp:156
+#: src/core/filehandler.cpp:167
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Błąd przetwarzania XML, linia %1, kolumna %2."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:169
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Opis błędu z Qt:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:201
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Plik o nazwie \"%1\" już istnieje. Czy na pewno chcesz go zastąpić?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:204
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Zastąpić plik?"
@@ -5296,8 +5296,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - oprogramowanie do zarządzania zbiorami, darmowe i proste"
 
 #: src/main.cpp:176
-#, kde-format
-msgid "(c) 2001-2024, Robby Stephenson"
+#, fuzzy, kde-format
+#| msgid "(c) 2001-2024, Robby Stephenson"
+msgid "(c) 2001, Robby Stephenson"
 msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:180
@@ -6453,7 +6454,7 @@ msgstr ""
 "<qt><i>Widok wypożyczeń</i>pokazuje listę wszystkich ludzi, którzy "
 "wypożyczyli przedmioty z twojego zbioru.</qt>"
 
-#: src/mainwindow.cpp:2378
+#: src/mainwindow.cpp:2382
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6462,12 +6463,12 @@ msgstr ""
 "Nie można zapisać niektórych obrazów w obecnej lokalizacji. Bieżący plik "
 "musi zostać zapisany a obrazy zostaną przeniesione do nowej lokalizacji."
 
-#: src/mainwindow.cpp:2419
+#: src/mainwindow.cpp:2429
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Uaktualnij elementy z %1"
 
-#: src/mainwindow.cpp:2438
+#: src/mainwindow.cpp:2448
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6476,7 +6477,7 @@ msgstr ""
 "Tellico potrafi za jednym razem zaimportować tylko jeden plik tego typu. "
 "Tylko %1 zostanie zaimportowany."
 
-#: src/mainwindow.cpp:2626
+#: src/mainwindow.cpp:2636
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"

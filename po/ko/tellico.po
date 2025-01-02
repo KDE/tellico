@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 00:41+0000\n"
+"POT-Creation-Date: 2025-01-02 00:41+0000\n"
 "PO-Revision-Date: 2024-08-21 00:09+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2880,23 +2880,23 @@ msgstr ""
 "다음 항목은 이미 대여 중이지만 Tellico에서는 항목을 여러 번 대여하는 것을 지"
 "원하지 않습니다. 대여할 품목 목록에서 삭제됩니다."
 
-#: src/core/filehandler.cpp:156
+#: src/core/filehandler.cpp:167
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "%1행, %2열에 XML 구문 분석 오류가 있습니다."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:169
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Qt의 오류 메시지:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:201
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "파일 \"%1\"이(가) 이미 존재합니다. 덮어쓰시겠습니까?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:204
 #, kde-format
 msgid "Overwrite File?"
 msgstr "파일을 덮어쓰시겠습니까?"
@@ -5234,8 +5234,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - 간단한 자유 소프트웨어 소장품 관리 도구"
 
 #: src/main.cpp:176
-#, kde-format
-msgid "(c) 2001-2024, Robby Stephenson"
+#, fuzzy, kde-format
+#| msgid "(c) 2001-2024, Robby Stephenson"
+msgid "(c) 2001, Robby Stephenson"
 msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:180
@@ -6381,7 +6382,7 @@ msgid ""
 msgstr ""
 "<qt><i>대여 보기</i>에서는 내 소장품을 빌려 간 사람 목록을 표시합니다.</qt>"
 
-#: src/mainwindow.cpp:2378
+#: src/mainwindow.cpp:2382
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6390,12 +6391,12 @@ msgstr ""
 "일부 이미지는 설정된 위치에 저장되지 않습니다. 현재 파일을 저장해야 하며 이미"
 "지가 새로운 위치로 전송됩니다."
 
-#: src/mainwindow.cpp:2419
+#: src/mainwindow.cpp:2429
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "%1에서 항목 데이터 업데이트"
 
-#: src/mainwindow.cpp:2438
+#: src/mainwindow.cpp:2448
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6403,7 +6404,7 @@ msgid ""
 msgstr ""
 "Tellico는 한 번에 이 형식의 파일 하나만 가져올 수 있습니다. %1만 가져옵니다."
 
-#: src/mainwindow.cpp:2626
+#: src/mainwindow.cpp:2636
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"

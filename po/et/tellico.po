@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 00:41+0000\n"
+"POT-Creation-Date: 2025-01-02 00:41+0000\n"
 "PO-Revision-Date: 2020-06-03 20:36+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -2919,17 +2919,17 @@ msgstr ""
 "Järgmised esemed on juba laenatud, aga Tellico ei toeta praegu ühe eseme "
 "mitmekordset laenamist. Need eemaldatakse laenatavate esemete nimekirjast."
 
-#: src/core/filehandler.cpp:156
+#: src/core/filehandler.cpp:167
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "XML-i parsimisel ilmnes viga real %1, veerus %2."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:169
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Qt veateade:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:201
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
@@ -2937,7 +2937,7 @@ msgstr ""
 "Fail nimega \"%1\" on juba olemas. Kas oled kindel, et soovid selle üle "
 "kirjutada?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:204
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Kas kirjutada fail üle?"
@@ -5316,7 +5316,7 @@ msgstr "Tellico - vaba ja lihtne kogude haldur"
 #: src/main.cpp:176
 #, fuzzy, kde-format
 #| msgid "(c) 2001-2020, Robby Stephenson"
-msgid "(c) 2001-2024, Robby Stephenson"
+msgid "(c) 2001, Robby Stephenson"
 msgstr "(c) 2001-2020: Robby Stephenson"
 
 #: src/main.cpp:180
@@ -6482,7 +6482,7 @@ msgstr ""
 "<qt><i>Laenamisvaade</i> näitab kõiki isikuid, kes on laenanud sinu kogu "
 "esemeid.</qt>"
 
-#: src/mainwindow.cpp:2378
+#: src/mainwindow.cpp:2382
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6491,12 +6491,12 @@ msgstr ""
 "Mõned pildid ei ole salvestatud seadistatud asukohta. Aktiivne fail tuleb "
 "salvestada ning pildid kantakse üle uude asukohta."
 
-#: src/mainwindow.cpp:2419
+#: src/mainwindow.cpp:2429
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Kirje andmete uuendamine allikast %1"
 
-#: src/mainwindow.cpp:2438
+#: src/mainwindow.cpp:2448
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6505,7 +6505,7 @@ msgstr ""
 "Praegu suudab Tellico importida korraga ainult ühe seda tüüpi faili. "
 "Imporditakse ainult %1."
 
-#: src/mainwindow.cpp:2626
+#: src/mainwindow.cpp:2636
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"

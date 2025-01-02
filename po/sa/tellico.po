@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 00:41+0000\n"
+"POT-Creation-Date: 2025-01-02 00:41+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -2880,23 +2880,23 @@ msgstr ""
 "निम्नलिखितवस्तूनि पूर्वमेव ऋणं दत्तानि सन्ति, परन्तु टेलिको सम्प्रति बहुवारं द्रव्यं ऋणं दातुं "
 "समर्थं न करोति । ऋणं दातुं वस्तूनाम् सूचीतः ते निष्कासिताः भविष्यन्ति।"
 
-#: src/core/filehandler.cpp:156
+#: src/core/filehandler.cpp:167
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "%1 पङ्क्तौ, %2 स्तम्भे XML विश्लेषणदोषः अस्ति ।"
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:169
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Qt तः त्रुटिसन्देशः अस्ति :"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:201
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "\"%1\" इति सञ्चिका पूर्वमेव अस्ति । किं भवन्तः निश्चयेन तस्य अधिलेखनं कर्तुम् इच्छन्ति?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:204
 #, kde-format
 msgid "Overwrite File?"
 msgstr "सञ्चिकां अधिलेखयतु?"
@@ -5242,8 +5242,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - संग्रह प्रबन्धन सॉफ्टवेयर, निःशुल्क सरल च"
 
 #: src/main.cpp:176
-#, kde-format
-msgid "(c) 2001-2024, Robby Stephenson"
+#, fuzzy, kde-format
+#| msgid "(c) 2001-2024, Robby Stephenson"
+msgid "(c) 2001, Robby Stephenson"
 msgstr "(ग) 2001-2024, रॉबी स्टीफन्सन"
 
 #: src/main.cpp:180
@@ -6390,7 +6391,7 @@ msgid ""
 msgstr ""
 "<qt><i>ऋणदृश्यं</i> सर्वेषां जनानां सूचीं दर्शयति ये भवतः संग्रहात् वस्तूनि ऋणं गृहीतवन्तः।</qt>"
 
-#: src/mainwindow.cpp:2378
+#: src/mainwindow.cpp:2382
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6399,12 +6400,12 @@ msgstr ""
 "केचन चित्राणि विन्यस्तस्थाने न रक्षन्ति । वर्तमानसञ्चिका रक्षिता भवितुमर्हति तथा च "
 "चित्राणि नूतनस्थाने स्थानान्तरितानि भविष्यन्ति ।"
 
-#: src/mainwindow.cpp:2419
+#: src/mainwindow.cpp:2429
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "%1 तः प्रविष्टिदत्तांशं अद्यतनं कुर्वन्तु"
 
-#: src/mainwindow.cpp:2438
+#: src/mainwindow.cpp:2448
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6413,7 +6414,7 @@ msgstr ""
 "Tellico एकस्मिन् समये केवलम् एतादृशप्रकारस्य एकां सञ्चिकां आयातयितुं शक्नोति । केवलं %1 "
 "आयातितः भविष्यति।"
 
-#: src/mainwindow.cpp:2626
+#: src/mainwindow.cpp:2636
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"

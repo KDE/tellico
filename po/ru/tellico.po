@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 00:41+0000\n"
+"POT-Creation-Date: 2025-01-02 00:41+0000\n"
 "PO-Revision-Date: 2022-03-21 17:12+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -2934,23 +2934,23 @@ msgstr ""
 "отслеживание предметов, одалживаемых несколько раз. Они будут удалены из "
 "списка доступных для передачи в долг."
 
-#: src/core/filehandler.cpp:156
+#: src/core/filehandler.cpp:167
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Произошла ошибка разбора XML в строке %1, столбце %2."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:169
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Текст ошибки Qt:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:201
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Файл «%1» уже существует. Заменить его?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:204
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Заменить файл?"
@@ -5332,7 +5332,7 @@ msgstr "Tellico — диспетчер коллекций, простая сво
 #: src/main.cpp:176
 #, fuzzy, kde-format
 #| msgid "(c) 2001-2022, Robby Stephenson"
-msgid "(c) 2001-2024, Robby Stephenson"
+msgid "(c) 2001, Robby Stephenson"
 msgstr "© Robby Stephenson, 2001—2022"
 
 #: src/main.cpp:180
@@ -6494,7 +6494,7 @@ msgstr ""
 "<qt>В панели <i>Долговые записи</i> выводится список людей, которые взяли в "
 "долг предметы из коллекции.</qt>"
 
-#: src/mainwindow.cpp:2378
+#: src/mainwindow.cpp:2382
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6503,12 +6503,12 @@ msgstr ""
 "Некоторые изображения не сохранены в выбранном расположении. Сохраните "
 "текущий файл, и все изображения будут перенесены в новое расположение."
 
-#: src/mainwindow.cpp:2419
+#: src/mainwindow.cpp:2429
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Обновить данные записи из %1"
 
-#: src/mainwindow.cpp:2438
+#: src/mainwindow.cpp:2448
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6517,7 +6517,7 @@ msgstr ""
 "Tellico позволяет импортировать только один файл этого типа за раз. Будет "
 "импортирован только %1."
 
-#: src/mainwindow.cpp:2626
+#: src/mainwindow.cpp:2636
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"

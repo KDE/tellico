@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 00:41+0000\n"
+"POT-Creation-Date: 2025-01-02 00:41+0000\n"
 "PO-Revision-Date: 2024-12-01 19:07+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -2891,23 +2891,23 @@ msgstr ""
 "vienības aizdošanu vairākas reizes. Programma tās noņems no aizdodamo "
 "vienību saraksta."
 
-#: src/core/filehandler.cpp:156
+#: src/core/filehandler.cpp:167
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "XML parsēšanas kļūda %1. rindiņā, %2. kolonnā"
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:169
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "„Qt“ kļūdas ziņojums:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:201
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Datne ar nosaukumu „%1“ jau pastāv. Vai vēlaties to pārrakstīt?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:204
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Vai pārrakstīt datni?"
@@ -5260,8 +5260,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "„Tellico“ — kolekciju pārvaldības programma — brīva un vienkārša"
 
 #: src/main.cpp:176
-#, kde-format
-msgid "(c) 2001-2024, Robby Stephenson"
+#, fuzzy, kde-format
+#| msgid "(c) 2001-2024, Robby Stephenson"
+msgid "(c) 2001, Robby Stephenson"
 msgstr "(c) 2001—2024, Robby Stephenson"
 
 #: src/main.cpp:180
@@ -6411,7 +6412,7 @@ msgstr ""
 "<qt><i>Aizdošanas skats</i> parāda sarakstu ar visiem cilvēkiem, kuri kaut "
 "ko ir aizņēmušies no jūsu kolekcijas.</qt>"
 
-#: src/mainwindow.cpp:2378
+#: src/mainwindow.cpp:2382
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6420,12 +6421,12 @@ msgstr ""
 "Atsevišķi attēli nav saglabāti konfigurētajā vietā. Lai attēlus pārkopētu uz "
 "jauno vietu, saglabājiet atvērto datni"
 
-#: src/mainwindow.cpp:2419
+#: src/mainwindow.cpp:2429
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Atjaunināt ieraksta datus no „%1“"
 
-#: src/mainwindow.cpp:2438
+#: src/mainwindow.cpp:2448
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6434,7 +6435,7 @@ msgstr ""
 "„Tellico“ prot vienlaicīgi importēt vienu šāda tipa datni. Programma "
 "importēs tikai „%1“."
 
-#: src/mainwindow.cpp:2626
+#: src/mainwindow.cpp:2636
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"

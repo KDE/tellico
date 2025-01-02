@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 00:41+0000\n"
+"POT-Creation-Date: 2025-01-02 00:41+0000\n"
 "PO-Revision-Date: 2020-11-13 17:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -2902,17 +2902,17 @@ msgstr ""
 "flere samtidige utlån for en og samme gjenstand. De blir fjernet fra lista "
 "over gjenstander som kan lånes ut."
 
-#: src/core/filehandler.cpp:156
+#: src/core/filehandler.cpp:167
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Det er en XM tolkingsfeil på linje %1, kolonne %2."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:169
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Feilmeldinga fra Qt er:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:201
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
@@ -2920,7 +2920,7 @@ msgstr ""
 "En fil som heter «%1» finnes fra før. Er du sikker på at du vil skrive over "
 "den?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:204
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Overskrive fil?"
@@ -5269,7 +5269,7 @@ msgstr ""
 
 #: src/main.cpp:176
 #, kde-format
-msgid "(c) 2001-2024, Robby Stephenson"
+msgid "(c) 2001, Robby Stephenson"
 msgstr ""
 
 #: src/main.cpp:180
@@ -6418,7 +6418,7 @@ msgstr ""
 "<qt><i>Utlånsvisning</i> viser en liste over alle som har lånt ting fra "
 "samlingen din.</qt>"
 
-#: src/mainwindow.cpp:2378
+#: src/mainwindow.cpp:2382
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6427,12 +6427,12 @@ msgstr ""
 "Noen bilder er ikke lagret på det innstilte stedet. Den gjeldende fila må "
 "lagres og bildene vil bli overført til det nye stedet."
 
-#: src/mainwindow.cpp:2419
+#: src/mainwindow.cpp:2429
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Oppdater innslagsdata fra %1"
 
-#: src/mainwindow.cpp:2438
+#: src/mainwindow.cpp:2448
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6441,7 +6441,7 @@ msgstr ""
 "Tellico kan bare importere én fil av gangen av denne typen. Bare %1 blir "
 "importert."
 
-#: src/mainwindow.cpp:2626
+#: src/mainwindow.cpp:2636
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"

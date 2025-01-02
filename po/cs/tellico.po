@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 00:41+0000\n"
+"POT-Creation-Date: 2025-01-02 00:41+0000\n"
 "PO-Revision-Date: 2024-09-18 09:44+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -2894,23 +2894,23 @@ msgstr ""
 "nepodporuje půjčování jedné položky vícekrát. Položky budou odstraněny ze "
 "seznamu položek k zapůjčení."
 
-#: src/core/filehandler.cpp:156
+#: src/core/filehandler.cpp:167
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Při načítání XML byla na řádce %1, sloupci %2 chyba."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:169
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Chybová zpráva z Qt je:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:201
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Soubor s názvem \"%1\" již existuje. Opravdu si jej přejete přepsat?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:204
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Přepsat soubor?"
@@ -5258,8 +5258,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - software pro správu sbírek, svobodný a jednoduchý"
 
 #: src/main.cpp:176
-#, kde-format
-msgid "(c) 2001-2024, Robby Stephenson"
+#, fuzzy, kde-format
+#| msgid "(c) 2001-2024, Robby Stephenson"
+msgid "(c) 2001, Robby Stephenson"
 msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:180
@@ -6408,7 +6409,7 @@ msgstr ""
 "<qt><i>Půjčkový pohled</i> ukazuje seznam všech osob, které si ze sbírky "
 "půjčili položky.</qt>"
 
-#: src/mainwindow.cpp:2378
+#: src/mainwindow.cpp:2382
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6417,12 +6418,12 @@ msgstr ""
 "Některé obrázky nejsou uloženy na nastaveném místě. Aktuální soubor je "
 "potřeba uložit a obrázky budou přesunuty na nové umístění."
 
-#: src/mainwindow.cpp:2419
+#: src/mainwindow.cpp:2429
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Aktualizovat data záznamu z %1"
 
-#: src/mainwindow.cpp:2438
+#: src/mainwindow.cpp:2448
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6431,7 +6432,7 @@ msgstr ""
 "Tellico nemůže najednou importovat více souborů tohoto druhu. Bude "
 "importován pouze %1."
 
-#: src/mainwindow.cpp:2626
+#: src/mainwindow.cpp:2636
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
