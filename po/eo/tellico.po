@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-15 03:14+0000\n"
-"PO-Revision-Date: 2024-05-30 22:41+0200\n"
+"PO-Revision-Date: 2024-12-31 11:42+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -68,7 +68,7 @@ msgstr "Titololisto (Vertikala)"
 #, kde-format
 msgctxt "Group View XSL Template"
 msgid "Group View"
-msgstr "Grupvida"
+msgstr "Grupvido"
 
 #. i18n: file: xslt/report-templates/Loan_View.xsl
 #, kde-format
@@ -463,7 +463,7 @@ msgstr ""
 #: src/collectionfieldsdialog.cpp:241
 #, kde-format
 msgid "Value Options"
-msgstr "Valoraj Opcioj"
+msgstr "Valor-Elektebloj"
 
 #: src/collectionfieldsdialog.cpp:246
 #, kde-format
@@ -540,7 +540,7 @@ msgstr "Formati kiel nomo"
 #: src/collectionfieldsdialog.cpp:301
 #, kde-format
 msgid "Field Options"
-msgstr "Kampaj Opcioj"
+msgstr "Kamp-Elektebloj"
 
 #: src/collectionfieldsdialog.cpp:304
 #, kde-format
@@ -1604,7 +1604,7 @@ msgid ""
 "Pending"
 msgstr ""
 "Netaksita, Nur Plenkreskuloj, Matura, Adoleskanto, Ĉiuj 10+, Ĉiuj, Frua "
-"Infanaĝo, Pritraktata"
+"Infanaĝo, Pritraktota"
 
 #: src/collections/musiccollection.cpp:34
 #, kde-format
@@ -2329,7 +2329,7 @@ msgstr "Fontoj de datumoj"
 #: src/configdialog.cpp:204
 #, kde-format
 msgid "General Options"
-msgstr "Ĝeneralaj opcioj"
+msgstr "Ĝeneralaj elektebloj"
 
 #: src/configdialog.cpp:215
 #, kde-format
@@ -2374,7 +2374,7 @@ msgstr ""
 #: src/configdialog.cpp:233
 #, kde-format
 msgid "Image Storage Options"
-msgstr "Bildkonservaj Opcioj"
+msgstr "Bildkonservaj Elektebloj"
 
 #: src/configdialog.cpp:235
 #, kde-format
@@ -2405,7 +2405,7 @@ msgstr ""
 #: src/configdialog.cpp:259 src/configdialog.cpp:343
 #, kde-format
 msgid "Formatting Options"
-msgstr "Formataj Opcioj"
+msgstr "Formataj Elektebloj"
 
 #: src/configdialog.cpp:264
 #, kde-format
@@ -2488,7 +2488,7 @@ msgstr ""
 #: src/configdialog.cpp:335
 #, kde-format
 msgid "Printing Options"
-msgstr "Presaj Opcioj"
+msgstr "Presaj Elektebloj"
 
 #: src/configdialog.cpp:348
 #, kde-format
@@ -2508,7 +2508,7 @@ msgstr "Se markite, la kamponomoj estos presitaj kiel tabelkapoj."
 #: src/configdialog.cpp:358
 #, kde-format
 msgid "Grouping Options"
-msgstr "Grupaj Opcioj"
+msgstr "Grupaj Elektebloj"
 
 #: src/configdialog.cpp:363
 #, kde-format
@@ -2523,7 +2523,7 @@ msgstr "Se markite, la enskriboj estos grupigitaj laŭ la elektita kampo."
 #: src/configdialog.cpp:368
 #, kde-format
 msgid "Image Options"
-msgstr "Bildaj Opcioj"
+msgstr "Bildaj Elektebloj"
 
 #: src/configdialog.cpp:374
 #, kde-format
@@ -2619,7 +2619,7 @@ msgstr "Grandeco:"
 #: src/configdialog.cpp:492
 #, kde-format
 msgid "Color Options"
-msgstr "Koloraj Opcioj"
+msgstr "Koloraj Elektebloj"
 
 #: src/configdialog.cpp:499
 #, kde-format
@@ -2689,7 +2689,7 @@ msgstr "Klaku por elekti kaj forigi instalitajn ŝablonojn."
 #: src/configdialog.cpp:615
 #, kde-format
 msgid "Data Sources Options"
-msgstr "Datumfontaj Opcioj"
+msgstr "Datumfontaj Elektebloj"
 
 #: src/configdialog.cpp:636
 #, kde-format
@@ -3063,7 +3063,7 @@ msgstr "Bonvolu kontroli vian instaladon."
 #: src/exportdialog.cpp:64
 #, kde-format
 msgid "Export Options"
-msgstr "Eksport-Opcioj"
+msgstr "Eksport-Elektebloj"
 
 #: src/exportdialog.cpp:71
 #, kde-format
@@ -3482,7 +3482,7 @@ msgstr ""
 #, kde-format
 msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
-msgstr ""
+msgstr "Dankon al arXiv pro uzo de ĝia malferm-alira kunfunkcipovo."
 
 #: src/fetch/arxivfetcher.cpp:341 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
@@ -3570,7 +3570,7 @@ msgstr "Comic Vine Link"
 #: src/fetch/configwidget.cpp:41
 #, kde-format
 msgid "Source Options"
-msgstr "Fontaj Opcioj"
+msgstr "Font-Elektebloj"
 
 #: src/fetch/configwidget.cpp:68
 #, kde-format
@@ -5015,7 +5015,7 @@ msgstr "Tellico ne povas ŝargi la bildon - %1."
 #: src/importdialog.cpp:80 src/importdialog.cpp:89
 #, kde-format
 msgid "Import Options"
-msgstr "Import-Opcioj"
+msgstr "Import-Elektebloj"
 
 #: src/importdialog.cpp:93
 #, kde-format
@@ -6565,7 +6565,7 @@ msgstr ""
 #: src/translators/alexandriaimporter.cpp:239
 #, kde-format
 msgid "Alexandria Options"
-msgstr "Aleksandriaj Opcioj"
+msgstr "Elektebloj pri Aleksandria"
 
 #: src/translators/alexandriaimporter.cpp:242
 #, kde-format
@@ -6596,7 +6596,7 @@ msgstr "(Diversaj)"
 #: src/translators/audiofileimporter.cpp:492
 #, kde-format
 msgid "Audio File Options"
-msgstr "Opcioj de Sondosiero"
+msgstr "Elektebloj de Sondosiero"
 
 #: src/translators/audiofileimporter.cpp:495
 #, kde-format
@@ -6634,7 +6634,7 @@ msgstr ""
 #: src/translators/bibteximporter.cpp:342
 #, kde-format
 msgid "Bibtex Options"
-msgstr "Bibtex Opcioj"
+msgstr "Bibtex-Elektebloj"
 
 #: src/translators/bibtexexporter.cpp:221
 #, kde-format
@@ -6749,7 +6749,7 @@ msgstr "Valida uzantidentigilo devas esti enigita."
 #: src/translators/boardgamegeekimporter.cpp:243
 #, kde-format
 msgid "BoardGameGeek Options"
-msgstr "BoardGameGeek Opcioj"
+msgstr "BoardGameGeek-Elektebloj"
 
 #: src/translators/boardgamegeekimporter.cpp:249
 #, kde-format
@@ -6954,7 +6954,7 @@ msgstr "<Nova Kampo>"
 #: src/translators/discogsimporter.cpp:191
 #, kde-format
 msgid "Discogs Options"
-msgstr "Discogs-Opcioj"
+msgstr "Discogs-Elektebloj"
 
 #: src/translators/filelistingimporter.cpp:71
 #, kde-format
@@ -6964,7 +6964,7 @@ msgstr "Skanante dosierojn..."
 #: src/translators/filelistingimporter.cpp:161
 #, kde-format
 msgid "File Listing Options"
-msgstr "Dosierlistaj Opcioj"
+msgstr "Dosierlistaj Elektebloj"
 
 #: src/translators/filelistingimporter.cpp:164
 #, kde-format
@@ -7024,7 +7024,7 @@ msgstr "Diversaj"
 #: src/translators/freedbimporter.cpp:512
 #, kde-format
 msgid "Audio CD Options"
-msgstr "Opcioj de Audio KD"
+msgstr "Elektebloj de Audio KD"
 
 #: src/translators/freedbimporter.cpp:519
 #, kde-format
@@ -7069,7 +7069,7 @@ msgstr "(grupigita per %1)"
 #: src/translators/htmlexporter.cpp:505
 #, kde-format
 msgid "HTML Options"
-msgstr "HTML-Opcioj"
+msgstr "HTML-Elektebloj"
 
 #: src/translators/htmlexporter.cpp:508
 #, kde-format
@@ -7104,7 +7104,7 @@ msgstr "Ŝargante %1..."
 #: src/translators/librarythingimporter.cpp:178
 #, kde-format
 msgid "LibraryThing Options"
-msgstr "LibraryThing-Opcioj"
+msgstr "LibraryThing-Elektebloj"
 
 #: src/translators/librarythingimporter.cpp:181
 #, kde-format
@@ -7154,7 +7154,7 @@ msgstr "Zip-Dosieroj"
 #: src/translators/onixexporter.cpp:178
 #, kde-format
 msgid "ONIX Archive Options"
-msgstr "ONIX-Arkivaj Opcioj"
+msgstr "ONIX-Arkivaj Elektebloj"
 
 #: src/translators/onixexporter.cpp:181
 #, kde-format
@@ -7204,7 +7204,7 @@ msgstr "La dosiero enhavas neniujn kolektajn datumojn."
 #: src/translators/tellicoxmlexporter.cpp:541
 #, kde-format
 msgid "Tellico XML Options"
-msgstr "Tellico XML Opcioj"
+msgstr "Tellico XML-Elektebloj"
 
 #: src/translators/tellicoxmlexporter.cpp:544
 #, kde-format
