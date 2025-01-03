@@ -223,7 +223,6 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
   QJsonDocument doc = QJsonDocument::fromJson(data);
   QVariantMap resultMap = doc.object().toVariantMap();
   if(resultMap.isEmpty()) {
-    myDebug() << "no results";
     stop();
     return;
   }
