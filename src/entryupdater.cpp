@@ -92,7 +92,7 @@ void EntryUpdater::init() {
   m_origEntryCount = m_entriesToUpdate.count();
   QString label;
   if(m_entriesToUpdate.count() == 1) {
-    label = i18n("Updating %1...", m_entriesToUpdate.front()->title());
+    label = i18n("Updating <b>%1</b>...", m_entriesToUpdate.front()->title());
   } else {
     label = i18n("Updating entries...");
   }
@@ -111,10 +111,13 @@ void EntryUpdater::init() {
 }
 
 void EntryUpdater::slotStartNext() {
-  StatusBar::self()->setStatus(i18n("Updating <b>%1</b>...", m_entriesToUpdate.front()->title()));
+  Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
+  Q_ASSERT(f);
+  StatusBar::self()->setStatus(i18n("Updating <b>%1</b> from <i>%2</i>...",
+                                    m_entriesToUpdate.front()->title(),
+                                    f->source()));
   ProgressManager::self()->setProgress(this, m_fetchers.count() * (m_origEntryCount - m_entriesToUpdate.count()) + m_fetchIndex);
 
-  Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
   f->startUpdate(m_entriesToUpdate.front());
 }
 
@@ -125,7 +128,9 @@ void EntryUpdater::slotDone() {
   }
 
   if(m_results.isEmpty()) {
-    myLog() << "No search results found to update entry";
+    Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
+    Q_ASSERT(f);
+    myLog() << "No search results found to update entry from" << f->source();
   } else {
     handleResults();
   }
