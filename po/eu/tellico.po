@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-02 00:41+0000\n"
-"PO-Revision-Date: 2024-11-28 22:25+0100\n"
+"PO-Revision-Date: 2025-01-02 08:00+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5291,10 +5291,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - bildumak kudeatzeko softwarea, askea eta erraza"
 
 #: src/main.cpp:176
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001-2024, Robby Stephenson"
+msgstr "(c) 2001, Robby Stephenson"
 
 #: src/main.cpp:180
 #, kde-format

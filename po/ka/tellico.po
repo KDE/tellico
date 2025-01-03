@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-02 00:41+0000\n"
-"PO-Revision-Date: 2024-11-28 04:39+0100\n"
+"PO-Revision-Date: 2025-01-02 05:25+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -5273,10 +5273,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - კოლექციის მართვის პროგრამა. უფასო და მარტივი"
 
 #: src/main.cpp:176
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001-2024, Robby Stephenson"
+msgstr "(c) 2001 Robby Stephenson"
 
 #: src/main.cpp:180
 #, kde-format

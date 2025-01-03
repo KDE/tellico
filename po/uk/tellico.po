@@ -4,13 +4,13 @@
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # Serhij Dubyk <dubyk@library.lviv.ua>, 2007.
-# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
+# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-02 00:41+0000\n"
-"PO-Revision-Date: 2024-11-28 15:52+0200\n"
+"PO-Revision-Date: 2025-01-02 17:25+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -5273,10 +5273,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico — програма для керування збірками, вільна і проста"
 
 #: src/main.cpp:176
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "© Robby Stephenson, 2001–2024"
+msgstr "© Robby Stephenson, 2001"
 
 #: src/main.cpp:180
 #, kde-format
