@@ -94,7 +94,7 @@ void Fetcher::startUpdate(Tellico::Data::EntryPtr entry_) {
     return;
   } else {
     myLog() << "Starting update from" << source() << "for" << entry_->title();
-    myLog() << "Request type is" << m_request.key() << "- data is" << m_request.data();
+    myLog() << "Request type is" << m_request.key() << "- value is" << m_request.value();
   }
   search();
 }
