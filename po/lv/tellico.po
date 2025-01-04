@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2024-12-01 19:07+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -3056,8 +3056,8 @@ msgstr "Kopē sapludinātie/skenētie ieraksti: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "Atjaunina %1..."
+msgid "Updating <b>%1</b>..."
+msgstr "Atjaunina <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3069,9 +3069,10 @@ msgstr "Atjaunina ierakstus..."
 msgid "Update Entries"
 msgstr "Atjaunināt ierakstus"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Atjaunina <b>%1</b>..."
 
 #: src/entryview.cpp:357
@@ -7375,3 +7376,6 @@ msgstr "Meklēt"
 #, kde-format
 msgid "Clear"
 msgstr "Notīrīt"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Atjaunina %1..."

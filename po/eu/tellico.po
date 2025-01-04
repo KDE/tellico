@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2025-01-02 08:00+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -3079,8 +3079,8 @@ msgstr "Bateratutako/eskaneatutako sarrerak guztira: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "%1 eguneratzen..."
+msgid "Updating <b>%1</b>..."
+msgstr "<b>%1</b> eguneratzen..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3092,9 +3092,10 @@ msgstr "Sarrerak eguneratzen..."
 msgid "Update Entries"
 msgstr "Eguneratu sarrerak"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> eguneratzen..."
 
 #: src/entryview.cpp:357
@@ -7422,6 +7423,9 @@ msgstr "Bilatu"
 #, kde-format
 msgid "Clear"
 msgstr "Garbitu"
+
+#~ msgid "Updating %1..."
+#~ msgstr "%1 eguneratzen..."
 
 #~ msgid "(Empty)"
 #~ msgstr "(Hutsik)"

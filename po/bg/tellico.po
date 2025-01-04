@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2024-11-09 20:04+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -3005,7 +3005,7 @@ msgstr "Изтриване на поле"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
+msgid "Updating <b>%1</b>..."
 msgstr ""
 
 #: src/entryupdater.cpp:97
@@ -3018,9 +3018,9 @@ msgstr "Изтрий книга"
 msgid "Update Entries"
 msgstr "Изтрий книга"
 
-#: src/entryupdater.cpp:114
+#: src/entryupdater.cpp:116
 #, kde-format
-msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr ""
 
 #: src/entryview.cpp:357

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2024-12-04 10:09+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -3072,8 +3072,8 @@ msgstr "Entradas xuntadas/examinadas: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "Actualizando %1…"
+msgid "Updating <b>%1</b>..."
+msgstr "Actualizando <b>%1</b>…"
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3085,9 +3085,10 @@ msgstr "Estanse a actualizar as entradas…"
 msgid "Update Entries"
 msgstr "Actualizar as entradas"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Actualizando <b>%1</b>…"
 
 #: src/entryview.cpp:357
@@ -7417,6 +7418,9 @@ msgstr "Buscar"
 #, kde-format
 msgid "Clear"
 msgstr "Baleirar"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Actualizando %1…"
 
 #~ msgid "(Empty)"
 #~ msgstr "(Baleiro)"

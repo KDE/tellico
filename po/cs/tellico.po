@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2024-09-18 09:44+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -3059,8 +3059,8 @@ msgstr "Celkem sloučených/prohlédnutých záznamů: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "Aktualizuji %1..."
+msgid "Updating <b>%1</b>..."
+msgstr "Aktualizuji <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3072,9 +3072,10 @@ msgstr "Aktualizuji záznamy..."
 msgid "Update Entries"
 msgstr "Aktualizovat záznamy"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Aktualizuji <b>%1</b>..."
 
 #: src/entryview.cpp:357
@@ -7367,3 +7368,6 @@ msgstr "Hledat"
 #, kde-format
 msgid "Clear"
 msgstr "Vymazat"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Aktualizuji %1..."

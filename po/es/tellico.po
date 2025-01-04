@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2025-01-02 12:30+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -3088,8 +3088,8 @@ msgstr "Totales de entradas fusionadas/exploradas: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "Actualizando %1..."
+msgid "Updating <b>%1</b>..."
+msgstr "Actualizando <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3101,9 +3101,10 @@ msgstr "Actualizando entradas..."
 msgid "Update Entries"
 msgstr "Actualizar entradas"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Actualizando <b>%1</b>..."
 
 #: src/entryview.cpp:357
@@ -7443,6 +7444,9 @@ msgstr "Buscar"
 #, kde-format
 msgid "Clear"
 msgstr "Borrar"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Actualizando %1..."
 
 #~ msgid "(Empty)"
 #~ msgstr "(Vacío)"

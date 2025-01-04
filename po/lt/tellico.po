@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2015-12-29 21:13+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -3015,9 +3015,9 @@ msgid "Total merged/scanned entries: %1/%2"
 msgstr ""
 
 #: src/entryupdater.cpp:95
-#, kde-format
-msgid "Updating %1..."
-msgstr "Atnaujinama %1..."
+#, fuzzy, kde-format
+msgid "Updating <b>%1</b>..."
+msgstr "Atnaujinama"
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3029,9 +3029,9 @@ msgstr "Atnaujinami įrašai..."
 msgid "Update Entries"
 msgstr "Atnaujinti įrašus"
 
-#: src/entryupdater.cpp:114
+#: src/entryupdater.cpp:116
 #, fuzzy, kde-format
-msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Atnaujinama"
 
 #: src/entryview.cpp:357
@@ -7282,6 +7282,9 @@ msgstr "Ieškoti"
 #, kde-format
 msgid "Clear"
 msgstr "Išvalyti"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Atnaujinama %1..."
 
 #, fuzzy
 #~ msgid "(Empty)"

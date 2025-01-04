@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -3185,8 +3185,8 @@ msgstr "Ukupno spojio/skeniranih unosa:%1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "Ažuriram %1..."
+msgid "Updating <b>%1</b>..."
+msgstr "Ažuriram <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3198,9 +3198,10 @@ msgstr "Ažuriram unose..."
 msgid "Update Entries"
 msgstr "Ažiriraj unose"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Ažuriram <b>%1</b>..."
 
 #: src/entryview.cpp:357
@@ -7614,6 +7615,9 @@ msgstr "Pretraga"
 #, kde-format
 msgid "Clear"
 msgstr "Očisti"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Ažuriram %1..."
 
 #~ msgid "(Empty)"
 #~ msgstr "(Prazno)"

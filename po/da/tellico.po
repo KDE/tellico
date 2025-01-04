@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -3084,8 +3084,8 @@ msgstr "Indgange sammenflettet/scannet i alt: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "Opdaterer %1..."
+msgid "Updating <b>%1</b>..."
+msgstr "Opdaterer <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3097,9 +3097,10 @@ msgstr "Opdaterer indgange..."
 msgid "Update Entries"
 msgstr "Opdatér indgange"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Opdaterer <b>%1</b>..."
 
 #: src/entryview.cpp:357
@@ -7475,6 +7476,9 @@ msgstr "Søg"
 #, kde-format
 msgid "Clear"
 msgstr "Ryd"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Opdaterer %1..."
 
 #~ msgid "(Empty)"
 #~ msgstr "(Tom)"

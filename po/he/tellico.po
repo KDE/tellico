@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
-"PO-Revision-Date: 2024-11-29 10:46+0200\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
+"PO-Revision-Date: 2025-01-02 22:39+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3036,8 +3036,8 @@ msgstr "סך כל הרשומות שמוזגו/נסרקו: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "%1 מתעדכן…"
+msgid "Updating <b>%1</b>..."
+msgstr "<b>%1</b> מתעדכן…"
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3049,9 +3049,10 @@ msgstr "הרשומות מתעדכנות…"
 msgid "Update Entries"
 msgstr "עדכון רשומות"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> מתעדכן…"
 
 #: src/entryview.cpp:357
@@ -5221,10 +5222,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - תוכנה לניהול אוספים, חינמית ופשוטה"
 
 #: src/main.cpp:176
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001‏-2024, רובי סטיבנסון"
+msgstr "(c) 2001 רובי סטיבנסון"
 
 #: src/main.cpp:180
 #, kde-format
@@ -7314,3 +7314,6 @@ msgstr "חיפוש"
 #, kde-format
 msgid "Clear"
 msgstr "פינוי"
+
+#~ msgid "Updating %1..."
+#~ msgstr "%1 מתעדכן…"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2025-01-02 05:25+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -3067,8 +3067,8 @@ msgstr "სულ შერწყმული/დასკანერებუ�
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "%1-ის განახლება..."
+msgid "Updating <b>%1</b>..."
+msgstr "<b>%1</b>-ის განახლება..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3080,9 +3080,10 @@ msgstr "ჩანაწერების განახლება..."
 msgid "Update Entries"
 msgstr "ჩანაწერების განახლება"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b>-ის განახლება..."
 
 #: src/entryview.cpp:357
@@ -7398,6 +7399,9 @@ msgstr "ძებნა"
 #, kde-format
 msgid "Clear"
 msgstr "გაწმენდა"
+
+#~ msgid "Updating %1..."
+#~ msgstr "%1-ის განახლება..."
 
 #~ msgid "(Empty)"
 #~ msgstr "(ცარიელი)"

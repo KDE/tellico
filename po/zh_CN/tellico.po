@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -2991,8 +2991,8 @@ msgstr "已扫描 %2 个条目，总共 %1 个条目"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "正在更新 %1..."
+msgid "Updating <b>%1</b>..."
+msgstr "正在更新 <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3004,9 +3004,10 @@ msgstr "正在更新条目..."
 msgid "Update Entries"
 msgstr "更新条目"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "正在更新 <b>%1</b>..."
 
 #: src/entryview.cpp:357
@@ -7194,3 +7195,6 @@ msgstr "搜索"
 #, kde-format
 msgid "Clear"
 msgstr "清除"
+
+#~ msgid "Updating %1..."
+#~ msgstr "正在更新 %1..."

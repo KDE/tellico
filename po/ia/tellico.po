@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2024-11-29 12:13+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -3085,8 +3085,8 @@ msgstr "Entratas total fusionate/scandite: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "Actualisante %1..."
+msgid "Updating <b>%1</b>..."
+msgstr "Actualisante <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3098,9 +3098,10 @@ msgstr "Actualisante entratas..."
 msgid "Update Entries"
 msgstr "Actualisa entratas"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Actualisante <b>%1</b>..."
 
 #: src/entryview.cpp:357
@@ -7435,6 +7436,9 @@ msgstr "Cerca"
 #, kde-format
 msgid "Clear"
 msgstr "Netta"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Actualisante %1..."
 
 #~ msgid "(Empty)"
 #~ msgstr "(Vacue)"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -3045,8 +3045,8 @@ msgstr "कुल विलीन/स्कैन कृतप्रविष्
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "%1 अद्यतनं कुर्वन् अस्ति..."
+msgid "Updating <b>%1</b>..."
+msgstr "<b>%1</b> अद्यतनं कुर्वन् ..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3058,9 +3058,10 @@ msgstr "प्रविष्टयः अद्यतनं कुर्वन�
 msgid "Update Entries"
 msgstr "प्रविष्टयः अद्यतनं कुर्वन्तु"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> अद्यतनं कुर्वन् ..."
 
 #: src/entryview.cpp:357
@@ -7354,3 +7355,6 @@ msgstr "अन्वेषण"
 #, kde-format
 msgid "Clear"
 msgstr "स्पष्टः"
+
+#~ msgid "Updating %1..."
+#~ msgstr "%1 अद्यतनं कुर्वन् अस्ति..."

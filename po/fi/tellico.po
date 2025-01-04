@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2024-12-07 18:16+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -3068,8 +3068,8 @@ msgstr "Yhdistettyjä/läpikäytyjä tietueita yhteensä: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "Päivitetään %1…"
+msgid "Updating <b>%1</b>..."
+msgstr "Päivitetään <b>%1</b>…"
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3081,9 +3081,10 @@ msgstr "Päivitetään tietueita…"
 msgid "Update Entries"
 msgstr "Päivitä tietueet"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Päivitetään <b>%1</b>…"
 
 #: src/entryview.cpp:357
@@ -7391,6 +7392,9 @@ msgstr "Etsi"
 #, kde-format
 msgid "Clear"
 msgstr "Tyhjennä"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Päivitetään %1…"
 
 #~ msgid "(Empty)"
 #~ msgstr "(Tyhjä)"

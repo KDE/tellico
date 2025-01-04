@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2024-12-03 20:35+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -3071,8 +3071,8 @@ msgstr "Totalt antal sammanfogade/avsökta poster: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "Uppdaterar %1..."
+msgid "Updating <b>%1</b>..."
+msgstr "Uppdaterar <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3084,9 +3084,10 @@ msgstr "Uppdaterar poster..."
 msgid "Update Entries"
 msgstr "Uppdatera poster"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Uppdaterar <b>%1</b>..."
 
 #: src/entryview.cpp:357
@@ -7400,6 +7401,9 @@ msgstr "Sök"
 #, kde-format
 msgid "Clear"
 msgstr "Rensa"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Uppdaterar %1..."
 
 #~ msgid "(Empty)"
 #~ msgstr "(tom)"

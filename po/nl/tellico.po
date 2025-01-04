@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2025-01-02 09:34+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -3082,8 +3082,8 @@ msgstr "Totaal samengevoegde/gescande items: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "%1 bijwerken..."
+msgid "Updating <b>%1</b>..."
+msgstr "Bijwerken <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3095,9 +3095,10 @@ msgstr "Items bijwerken..."
 msgid "Update Entries"
 msgstr "Items bijwerken"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Bijwerken <b>%1</b>..."
 
 #: src/entryview.cpp:357
@@ -7450,6 +7451,9 @@ msgstr "Zoeken"
 #, kde-format
 msgid "Clear"
 msgstr "Wissen"
+
+#~ msgid "Updating %1..."
+#~ msgstr "%1 bijwerken..."
 
 #~ msgid "(Empty)"
 #~ msgstr "(Leeg)"

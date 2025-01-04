@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -3089,8 +3089,8 @@ msgstr "Жалпы біріктірілген/зертелген жазулар�
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "%1 жаңартуы"
+msgid "Updating <b>%1</b>..."
+msgstr "<b>%1</b> жаңартуы..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3102,9 +3102,10 @@ msgstr "Жазуларын жаңарту..."
 msgid "Update Entries"
 msgstr "Жазуларын жаңарту"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> жаңартуы..."
 
 #: src/entryview.cpp:357
@@ -7514,6 +7515,9 @@ msgstr "Іздеу"
 #, kde-format
 msgid "Clear"
 msgstr "Тазалау"
+
+#~ msgid "Updating %1..."
+#~ msgstr "%1 жаңартуы"
 
 #~ msgid "(Empty)"
 #~ msgstr "(Бос)"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2024-12-15 15:58+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -2988,7 +2988,7 @@ msgstr ""
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
+msgid "Updating <b>%1</b>..."
 msgstr ""
 
 #: src/entryupdater.cpp:97
@@ -3001,9 +3001,9 @@ msgstr ""
 msgid "Update Entries"
 msgstr ""
 
-#: src/entryupdater.cpp:114
+#: src/entryupdater.cpp:116
 #, kde-format
-msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr ""
 
 #: src/entryview.cpp:357

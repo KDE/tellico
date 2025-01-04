@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-04 00:41+0000\n"
 "PO-Revision-Date: 2023-07-08 12:53+0100\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -3143,8 +3143,8 @@ msgstr "Total de registos combinados/visualizados: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "A actualizar o %1..."
+msgid "Updating <b>%1</b>..."
+msgstr "A actualizar o <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3156,9 +3156,10 @@ msgstr "A actualizar os elementos..."
 msgid "Update Entries"
 msgstr "Actualizar os Elementos"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "A actualizar o <b>%1</b>..."
 
 #: src/entryview.cpp:357
@@ -7507,6 +7508,9 @@ msgstr "Procurar"
 #, kde-format
 msgid "Clear"
 msgstr "Limpar"
+
+#~ msgid "Updating %1..."
+#~ msgstr "A actualizar o %1..."
 
 #~ msgid "(Empty)"
 #~ msgstr "(Vazio)"
