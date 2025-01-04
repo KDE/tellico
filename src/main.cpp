@@ -32,11 +32,6 @@
 #include <KAboutData>
 #include <KLocalizedString>
 #include <KCrash>
-#include <KSharedConfig>
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-#include <Kdelibs4ConfigMigrator>
-#include <Kdelibs4Migration>
-#endif
 #include <kiconthemes_version.h>
 #include <KIconTheme>
 #define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
@@ -47,10 +42,8 @@
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QStandardPaths>
 #include <QDir>
-#include <QFile>
-#include <QStack>
-#include <QDebug>
 
 int main(int argc, char* argv[]) {
   /**
@@ -99,73 +92,6 @@ int main(int argc, char* argv[]) {
   app.setApplicationVersion(QStringLiteral(TELLICO_VERSION));
 
   Q_INIT_RESOURCE(icons);
-
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  // Migrate KDE4 configuration and data files
-  Kdelibs4ConfigMigrator migrator(QStringLiteral("tellico"));
-  migrator.setConfigFiles(QStringList() << QStringLiteral("tellicorc"));
-  migrator.setUiFiles(QStringList() << QStringLiteral("tellicoui.rc"));
-
-  if(migrator.migrate()) {
-    // migrate old data
-    typedef QPair<QString, QString> StringPair;
-    QList<StringPair> filesToCopy;
-    QList<QString> dirsToCreate;
-
-    Kdelibs4Migration dataMigrator;
-    const QString sourceBasePath = dataMigrator.saveLocation("data", QStringLiteral("tellico"));
-    const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/');
-    QString sourceFilePath, targetFilePath;
-
-    // first copy tellico-common.xsl if exists
-    QString fileName = QStringLiteral("tellico-common.xsl");
-    sourceFilePath = sourceBasePath + QLatin1Char('/') + fileName;
-    targetFilePath = targetBasePath + QLatin1Char('/') + fileName;
-    if(QFile::exists(sourceFilePath) && !QFile::exists(targetFilePath)) {
-      filesToCopy << qMakePair(sourceFilePath, targetFilePath);
-    }
-
-    // then migrate data directories
-    QStack<QString> dirsToCheck;
-    dirsToCheck.push(QStringLiteral("report-templates"));
-    dirsToCheck.push(QStringLiteral("entry-templates"));
-    dirsToCheck.push(QStringLiteral("data-sources"));
-    // this will copy all the images shared between collections
-    dirsToCheck.push(QStringLiteral("data"));
-    while(!dirsToCheck.isEmpty()) {
-      QString dataDir = dirsToCheck.pop();
-      QDir sourceDir(sourceBasePath + dataDir);
-      if(sourceDir.exists()) {
-        if(!QDir().exists(targetBasePath + dataDir)) {
-          dirsToCreate << (targetBasePath + dataDir);
-        }
-        // grab the internal directories, so we can be recursive
-        QStringList moreDirs = sourceDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
-        foreach(const QString& moreDir, moreDirs) {
-          dirsToCheck.push(dataDir + QLatin1Char('/') + moreDir);
-        }
-        QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
-        foreach(const QString& fileName, fileNames) {
-          sourceFilePath = sourceBasePath + dataDir + QLatin1Char('/') + fileName;
-          targetFilePath = targetBasePath + dataDir + QLatin1Char('/') + fileName;
-          if(!QFile::exists(targetFilePath)) {
-            filesToCopy << qMakePair(sourceFilePath, targetFilePath);
-          }
-        }
-      }
-    }
-
-    foreach(const QString& dir, dirsToCreate) {
-      QDir().mkpath(dir);
-    }
-    foreach(const StringPair& pair, filesToCopy) {
-      QFile::copy(pair.first, pair.second);
-    }
-
-    // update the configuration cache
-    KSharedConfig::openConfig()->reparseConfiguration();
-  }
-#endif
 
   KCrash::initialize();
 
