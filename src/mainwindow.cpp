@@ -2657,6 +2657,10 @@ void MainWindow::showLog() {
       if(file.open(QFile::ReadOnly | QIODevice::Text)) {
         QTextStream in(&file);
         viewer->setPlainText(in.readAll());
+        auto cursor = viewer->textCursor();
+        cursor.movePosition(QTextCursor::End);
+        viewer->setTextCursor(cursor);
+        viewer->ensureCursorVisible(); // scroll to bottom
       }
     });
     connect(Logger::self(), &Logger::updated, timer, QOverload<>::of(&QTimer::start));
