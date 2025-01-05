@@ -112,7 +112,7 @@ void HTMLExporter::reset() {
 
 bool HTMLExporter::exec() {
   if(url().isEmpty() || !url().isValid()) {
-    myWarning() << "trying to export to invalid URL";
+    myWarning() << "Trying to export to invalid URL:" << url();
     return false;
   }
 
@@ -686,7 +686,7 @@ void HTMLExporter::createDir() {
   }
   QUrl dir = fileDir();
   if(dir.isEmpty()) {
-    myDebug() << "called on empty URL!";
+    myDebug() << "HTML exporter is trying to use an empty file directory";
     return;
   }
   if(NetAccess::exists(dir, false, m_widget)) {
@@ -695,6 +695,9 @@ void HTMLExporter::createDir() {
     KIO::Job* job = KIO::mkdir(dir);
     KJobWidgets::setWindow(job, m_widget);
     m_checkCreateDir = !job->exec();
+    if(m_checkCreateDir) {
+      myWarning() << "Failed to create directory:" << dir << ":" << job->errorString();
+    }
   }
 }
 
@@ -825,10 +828,12 @@ bool HTMLExporter::writeEntryFiles() {
   target.setPath(target.path() + QLatin1Char('/') + (QLatin1String("pics/")));
   KIO::Job* job = KIO::mkdir(target);
   KJobWidgets::setWindow(job, m_widget);
-  job->exec();
+  if(!job->exec()) {
+    myWarning() << "HTML exporter failed to create dir:" << target << ":" << job->errorString();
+  }
   KIO::JobFlags flags = KIO::DefaultFlags;
   if(!m_widget) flags |= KIO::HideProgressInfo;
-  myDebug() << "Test";
+
   foreach(const QString& dataImageName, dataImages) {
     // copy the image out of the resources
     QImage dataImage(QStringLiteral(":/icons/") + dataImageName);
