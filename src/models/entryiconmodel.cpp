@@ -38,7 +38,11 @@ using Tellico::EntryIconModel;
 EntryIconModel::EntryIconModel(QObject* parent_) : QIdentityProxyModel(parent_) {
   myLog() << "Setting max icon cache cost:" << Config::iconCacheSize();
   m_iconCache.setMaxCost(Config::iconCacheSize());
-  connect(this, &QAbstractItemModel::dataChanged, [this](const QModelIndex& topLeft, const QModelIndex& botRight) {
+  connect(this, &QAbstractItemModel::dataChanged, [this](const QModelIndex& topLeft,
+                                                         const QModelIndex& botRight,
+                                                         const QVector<int>& roles) {
+    // if nothing but the save state, then no need to keep track of the updated rows
+    if(roles.size() == 1 && roles[0] == SaveStateRole) return;
     for(auto i = topLeft.row(); i <= botRight.row(); ++i) {
       m_updatedRows.insert(i);
     }

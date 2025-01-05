@@ -252,9 +252,9 @@ bool EntryModel::setData(const QModelIndex& index_, const QVariant& value_, int 
     m_saveStates.remove(index_.row());
   } else {
     Q_ASSERT(state == NewState || state == ModifiedState);
-    m_saveStates.insert(index_.row(), value_.toInt());
+    m_saveStates.insert(index_.row(), state);
   }
-  emit dataChanged(index_, index_);
+  emit dataChanged(index_, index_, QVector<int>() << SaveStateRole);
   return true;
 }
 
