@@ -122,7 +122,6 @@ public:
    */
   void selectAllVisible();
   int visibleItems() const;
-  void resetEntryStatus();
 
 public Q_SLOTS:
   /**

@@ -510,10 +510,6 @@ int DetailedListView::visibleItems() const {
   return model()->rowCount();
 }
 
-void DetailedListView::resetEntryStatus() {
-  sourceModel()->clearSaveState();
-}
-
 void DetailedListView::updateHeaderMenu() {
   // we only want to update the menu when the header count and model count agree
   if(model()->columnCount() != header()->count()) {

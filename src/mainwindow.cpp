@@ -64,6 +64,7 @@
 #include "core/netaccess.h"
 #include "dbusinterface.h"
 #include "models/models.h"
+#include "models/entrymodel.h"
 #include "models/entryiconmodel.h"
 #include "models/entryselectionmodel.h"
 #include "newstuff/manager.h"
@@ -1479,8 +1480,7 @@ bool MainWindow::fileSave() {
       m_newDocument = false;
       updateCaption(false);
       m_fileSave->setEnabled(false);
-      // TODO: call a method of the model instead of the view here
-      m_detailedView->resetEntryStatus();
+      m_detailedView->sourceModel()->clearSaveState();
     } else {
       ret = false;
     }
@@ -1530,7 +1530,7 @@ bool MainWindow::fileSaveAs() {
       updateCaption(false);
       m_newDocument = false;
       m_fileSave->setEnabled(false);
-      m_detailedView->resetEntryStatus();
+      m_detailedView->sourceModel()->clearSaveState();
     } else {
       ret = false;
     }
