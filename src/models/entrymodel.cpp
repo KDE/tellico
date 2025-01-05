@@ -280,7 +280,7 @@ void EntryModel::clearSaveState() {
       // will continue iterating over the original hash, ignoring the modified copy.
       m_saveStates.remove(i.key());
       QModelIndex idx1 = createIndex(i.key(), 0);
-      QModelIndex idx2 = createIndex(i.key(), m_fields.count());
+      QModelIndex idx2 = createIndex(i.key(), m_fields.count() - 1);
       emit dataChanged(idx1, idx2, QVector<int>() << SaveStateRole);
     }
   }
