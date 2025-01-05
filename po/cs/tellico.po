@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
-"PO-Revision-Date: 2024-09-18 09:44+0200\n"
+"POT-Creation-Date: 2025-01-05 02:35+0000\n"
+"PO-Revision-Date: 2024-08-20 15:06+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -790,7 +790,7 @@ msgstr "Organizace"
 msgid "Publisher"
 msgstr "Nakladatel"
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:309
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:308
 #: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
@@ -903,7 +903,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/srufetcher.cpp:536
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -1598,7 +1598,13 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
+#| "Everyone, Early Childhood, Pending"
+#| msgid ""
+#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
+#| "Childhood, Pending"
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -3059,8 +3065,8 @@ msgstr "Celkem sloučených/prohlédnutých záznamů: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "Aktualizuji %1..."
+msgid "Updating <b>%1</b>..."
+msgstr "Aktualizuji <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3072,9 +3078,10 @@ msgstr "Aktualizuji záznamy..."
 msgid "Update Entries"
 msgstr "Aktualizovat záznamy"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Aktualizuji <b>%1</b>..."
 
 #: src/entryview.cpp:357
@@ -3513,7 +3520,7 @@ msgstr ""
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:320
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:319
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
@@ -3938,19 +3945,19 @@ msgstr "Odkaz na Google Book"
 msgid "Google Book Search"
 msgstr ""
 
-#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr "Ilustrátor"
 
-#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/isbndbfetcher.cpp:382
+#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/isbndbfetcher.cpp:382
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Deweyův desetinný"
 
-#: src/fetch/hathitrustfetcher.cpp:313 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/srufetcher.cpp:538
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -7367,3 +7374,6 @@ msgstr "Hledat"
 #, kde-format
 msgid "Clear"
 msgstr "Vymazat"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Aktualizuji %1..."

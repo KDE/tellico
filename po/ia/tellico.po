@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
-"PO-Revision-Date: 2024-11-29 12:13+0100\n"
+"POT-Creation-Date: 2025-01-05 02:35+0000\n"
+"PO-Revision-Date: 2024-07-25 14:57+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -295,7 +295,7 @@ msgstr "Collection personalisate"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr "Le nomine de campo interne es <em>%1</em>."
+msgstr ""
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -800,7 +800,7 @@ msgstr "Organisation"
 msgid "Publisher"
 msgstr "Editor (Publishing)"
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:309
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:308
 #: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
@@ -913,7 +913,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/srufetcher.cpp:536
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -1611,7 +1611,13 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
+#| "Everyone, Early Childhood, Pending"
+#| msgid ""
+#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
+#| "Childhood, Pending"
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -2808,31 +2814,31 @@ msgstr "Selige patrono de deler:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr "Imagines es currentemente salveguardate intra <em>%1</em>"
+msgstr ""
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr "Imagines es currentemente salveguardate a <em>%1</em>"
+msgstr ""
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "Imagines essera movite ex <em>%1</em> e <em>%2</em>"
+msgstr ""
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "Imagines essera movite ex <em>%1</em> e <em>%2</em>"
+msgstr ""
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "Imagines essera movite ex <em>%1</em> e <em>%2</em>"
+msgstr ""
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
@@ -3085,8 +3091,8 @@ msgstr "Entratas total fusionate/scandite: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "Actualisante %1..."
+msgid "Updating <b>%1</b>..."
+msgstr "Actualisante <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3098,9 +3104,10 @@ msgstr "Actualisante entratas..."
 msgid "Update Entries"
 msgstr "Actualisa entratas"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Actualisante <b>%1</b>..."
 
 #: src/entryview.cpp:357
@@ -3545,7 +3552,7 @@ msgstr "Gratias a arXiv per le uso de su interoperabilitate de accesso aperite"
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:320
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:319
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
@@ -3974,19 +3981,19 @@ msgstr "Ligamine de Google Book"
 msgid "Google Book Search"
 msgstr "Cerca de Google Book"
 
-#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr "Illustrator"
 
-#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/isbndbfetcher.cpp:382
+#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/isbndbfetcher.cpp:382
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Decimal  Dewey"
 
-#: src/fetch/hathitrustfetcher.cpp:313 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/srufetcher.cpp:538
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -6253,9 +6260,10 @@ msgstr ""
 "campo de selection.</qt>"
 
 #: src/mainwindow.cpp:991
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico - collection management software, free and simple"
 msgid "Collection management software, free and simple"
-msgstr "Software gerente de collection, libere e simplice"
+msgstr "Tellico - un software gerente de collection, libere e simplice"
 
 #: src/mainwindow.cpp:993
 #, kde-format
@@ -6284,9 +6292,6 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
-"Plus information pote esser trovate in le  <a href=\"help:/tellico"
-"\">documentation</a>.Tu anque pote<a href=\"tc:///disable_welcome"
-"\">dishabilitar iste schermo de benvenite</a>."
 
 #: src/mainwindow.cpp:1211
 #, kde-format
@@ -7435,6 +7440,9 @@ msgstr "Cerca"
 #, kde-format
 msgid "Clear"
 msgstr "Netta"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Actualisante %1..."
 
 #~ msgid "(Empty)"
 #~ msgstr "(Vacue)"

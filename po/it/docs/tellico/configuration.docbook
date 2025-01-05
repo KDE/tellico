@@ -56,9 +56,7 @@
 <para
 >Le <guilabel
 >Opzioni generali</guilabel
-> controllano il comportamento generale. Le immagini possono essere salvate nel file dati stesso, salvate separatamente nella cartella comune dell'applicazione &appname;, oppure in una cartella con lo stesso nome del file di dati, ma con un <emphasis
->_files</emphasis
-> attaccato al nome. Per le collezioni con molte immagini, il salvataggio nel file dei dati è molto più lento da usare. Quando &appname; viene avviata, questa può riaprire automaticamente il file che era aperto.. Il <interface
+> regolano il comportamento generale dell'applicazione. Si può impostare se includere le immagini nel file di dati o salvarle separatamente nella cartella di &appname;. Inoltre si può impostare se caricare l'ultimo file aperto all'avvio di &appname;. Si può leggere alcuni dei suggerimenti e poi disabilitare la finestra se si vuole. Il <interface
 >Filtro rapido</interface
 > nella barra degli strumenti è utile per filtrare velocemente nella collezione, inoltre può utilizzare le espressioni regolari. </para>
 

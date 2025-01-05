@@ -193,7 +193,33 @@
 <sect2 id="filter-view">
 <title
 ><interface
->Filtriraj pogled</interface
+>Nove vnose je mogoče dodati z <link linkend="entry-editor"
+><interface
+>urejevalnikom vnosov</interface
+></link
+>. Element menija <menuchoice
+><guimenu
+>Zbirka</guimenu
+><guimenuitem
+>Nov vnos</guimenuitem
+></menuchoice
+> odpre <interface
+>Urejevalnik vnosov</interface
+> s praznim vnosom, pripravljenim za urejanje. <interface
+>Urejevalnik vnosov</interface
+> lahko odprete tudi z uporabo menijske postavke <menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Pokaži urejevalnik vnosov</guimenuitem
+></menuchoice
+>. Ko vnesete vrednosti za vnos, ga lahko shranite v zbirko z uporabo gumba <guibutton
+>Shrani vnos</guibutton
+> v pogovornem oknu <interface
+>Urejevalnik vnosov</interface
+>, ki ostane odprt, če želite nadaljevati z dodajanjem novih vnosov. Ko shranite vnos v zbirko, ga lahko spremenite s klikom nanj v glavnem oknu. Če <interface
+>Urejevalnik vnosov</interface
+> še ni odprt, lahko dvokliknete vnos, da odprete urejevalnik in začnete urejati.</interface
 ></title>
 
 <para

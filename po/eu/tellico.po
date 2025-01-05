@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
-"PO-Revision-Date: 2025-01-02 08:00+0100\n"
+"POT-Creation-Date: 2025-01-05 02:35+0000\n"
+"PO-Revision-Date: 2024-08-31 18:54+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -297,7 +297,7 @@ msgstr "Norberak finkatutako bilduma"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr "Eremuaren barneko izena <em>%1</em> da."
+msgstr ""
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -796,7 +796,7 @@ msgstr "Erakundea"
 msgid "Publisher"
 msgstr "Argitaratzailea"
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:309
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:308
 #: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
@@ -909,7 +909,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/srufetcher.cpp:536
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -1605,7 +1605,13 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
+#| "Everyone, Early Childhood, Pending"
+#| msgid ""
+#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
+#| "Childhood, Pending"
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -2802,31 +2808,31 @@ msgstr "Hautatu ezabatu beharreko txantiloia:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr "Irudiak <em>%1</em> barruan gordetzen dira"
+msgstr ""
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr "Irudiak <em>%1</em>(e)an gordetzen dira"
+msgstr ""
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "Irudiak <em>%1</em>(e)tik <em>%2</em>(e)ra eramango dira"
+msgstr ""
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "Irudiak <em>%1</em>(e)tik <em>%2</em>(e)ra eramango dira"
+msgstr ""
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "Irudiak <em>%1</em>(e)tik <em>%2</em>(e)ra eramango dira"
+msgstr ""
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
@@ -3079,8 +3085,8 @@ msgstr "Bateratutako/eskaneatutako sarrerak guztira: %1/%2"
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "%1 eguneratzen..."
+msgid "Updating <b>%1</b>..."
+msgstr "<b>%1</b> eguneratzen..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3092,9 +3098,10 @@ msgstr "Sarrerak eguneratzen..."
 msgid "Update Entries"
 msgstr "Eguneratu sarrerak"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> eguneratzen..."
 
 #: src/entryview.cpp:357
@@ -3539,7 +3546,7 @@ msgstr ""
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:320
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:319
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
@@ -3965,19 +3972,19 @@ msgstr "«Google Book»-esteka"
 msgid "Google Book Search"
 msgstr "«Google Book» bilaketa"
 
-#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr "Irudigilea"
 
-#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/isbndbfetcher.cpp:382
+#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/isbndbfetcher.cpp:382
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Dewey-ren hamartarra"
 
-#: src/fetch/hathitrustfetcher.cpp:313 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/srufetcher.cpp:538
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -4093,7 +4100,7 @@ msgstr "KinoPoisk-esteka"
 #: src/fetch/kinoteatrfetcher.cpp:236 src/fetch/kinoteatrfetcher.cpp:506
 #, kde-format
 msgid "Kino-Teatr Link"
-msgstr "Kino-Teatr-esteka"
+msgstr "«Kino-Teatr»-esteka"
 
 #: src/fetch/mobygamesfetcher.cpp:454 src/fetch/mobygamesfetcher.cpp:636
 #, kde-format
@@ -5291,9 +5298,10 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - bildumak kudeatzeko softwarea, askea eta erraza"
 
 #: src/main.cpp:176
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "(c) 2001-2024, Robby Stephenson"
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001, Robby Stephenson"
+msgstr "(c) 2001-2024, Robby Stephenson"
 
 #: src/main.cpp:180
 #, kde-format
@@ -6239,9 +6247,10 @@ msgstr ""
 "taldeetan sailkatzen ditu.</qt>"
 
 #: src/mainwindow.cpp:991
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico - collection management software, free and simple"
 msgid "Collection management software, free and simple"
-msgstr "Bildumak kudeatzeko softwarea, askea eta erraza"
+msgstr "Tellico - bildumak kudeatzeko softwarea, askea eta erraza"
 
 #: src/mainwindow.cpp:993
 #, kde-format
@@ -6270,9 +6279,6 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
-"<a href=\"help:/tellico\">Dokumentazioan</a> informazio gehiago aurki "
-"daiteke. <a href=\"tc:///disable_welcome\">Ongietorri pantaila hau</a> ere "
-"ezgaitu  zenezake."
 
 #: src/mainwindow.cpp:1211
 #, kde-format
@@ -7422,6 +7428,9 @@ msgstr "Bilatu"
 #, kde-format
 msgid "Clear"
 msgstr "Garbitu"
+
+#~ msgid "Updating %1..."
+#~ msgstr "%1 eguneratzen..."
 
 #~ msgid "(Empty)"
 #~ msgstr "(Hutsik)"

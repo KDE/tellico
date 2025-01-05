@@ -4,15 +4,15 @@
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # Serhij Dubyk <dubyk@library.lviv.ua>, 2007.
-# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025.
+# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
-"PO-Revision-Date: 2025-01-02 17:25+0200\n"
+"POT-Creation-Date: 2025-01-05 02:35+0000\n"
+"PO-Revision-Date: 2024-06-18 08:30+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
+"Language-Team: Ukrainian\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -299,7 +299,7 @@ msgstr "Нетипова збірка"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr "Внутрішня назва поля — <em>%1</em>."
+msgstr ""
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -787,7 +787,7 @@ msgstr "Організація"
 msgid "Publisher"
 msgstr "Видавець"
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:309
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:308
 #: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
@@ -900,7 +900,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/srufetcher.cpp:536
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -1596,7 +1596,13 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
+#| "Everyone, Early Childhood, Pending"
+#| msgid ""
+#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
+#| "Childhood, Pending"
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -2796,31 +2802,31 @@ msgstr "Виберіть шаблон для вилучення:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr "Зараз зображення зберігаються у <em>%1</em>"
+msgstr ""
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr "Зараз зображення зберігаються до <em>%1</em>"
+msgstr ""
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "Зображення буде пересунуто з <em>%1</em> до <em>%2</em>"
+msgstr ""
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "Зображення буде пересунуто з <em>%1</em> до <em>%2</em>"
+msgstr ""
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "Зображення буде пересунуто з <em>%1</em> до <em>%2</em>"
+msgstr ""
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
@@ -3068,8 +3074,8 @@ msgstr "Всього об’єднаних/перевірених записів
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
-msgstr "Оновлення %1…"
+msgid "Updating <b>%1</b>..."
+msgstr "Оновлення <b>%1</b>…"
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3081,9 +3087,10 @@ msgstr "Оновлення записів…"
 msgid "Update Entries"
 msgstr "Оновити записи"
 
-#: src/entryupdater.cpp:114
-#, kde-format
-msgid "Updating <b>%1</b>..."
+#: src/entryupdater.cpp:116
+#, fuzzy, kde-format
+#| msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Оновлення <b>%1</b>…"
 
 #: src/entryview.cpp:357
@@ -3527,7 +3534,7 @@ msgstr "Дякуємо arXiv за використання відкритого 
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:320
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:319
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
@@ -3950,19 +3957,19 @@ msgstr "Посилання у Книгах Google"
 msgid "Google Book Search"
 msgstr "Пошук у Книгах Google"
 
-#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr "Ілюстратор"
 
-#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/isbndbfetcher.cpp:382
+#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/isbndbfetcher.cpp:382
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Десяткова Дьюї"
 
-#: src/fetch/hathitrustfetcher.cpp:313 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/srufetcher.cpp:538
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -5273,9 +5280,10 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico — програма для керування збірками, вільна і проста"
 
 #: src/main.cpp:176
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "(c) 2001-2024, Robby Stephenson"
 msgid "(c) 2001, Robby Stephenson"
-msgstr "© Robby Stephenson, 2001"
+msgstr "© Robby Stephenson, 2001–2024"
 
 #: src/main.cpp:180
 #, kde-format
@@ -6221,9 +6229,10 @@ msgstr ""
 "записів за вибраним способом групування.</qt>"
 
 #: src/mainwindow.cpp:991
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico - collection management software, free and simple"
 msgid "Collection management software, free and simple"
-msgstr "Програма для керування збірками, вільна і проста"
+msgstr "Tellico — програма для керування збірками, вільна і проста"
 
 #: src/mainwindow.cpp:993
 #, kde-format
@@ -6252,9 +6261,6 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
-"Докладніші відомості можна знайти у <a href=\"help:/tellico\">документації</"
-"a>. Ви також можете <a href=\"tc:///disable_welcome\">вимкнути це вікно "
-"вітання</a>."
 
 #: src/mainwindow.cpp:1211
 #, kde-format
@@ -7394,6 +7400,9 @@ msgstr "Пошук"
 #, kde-format
 msgid "Clear"
 msgstr "Спорожнити"
+
+#~ msgid "Updating %1..."
+#~ msgstr "Оновлення %1…"
 
 #~ msgid "(Empty)"
 #~ msgstr "(порожньо)"

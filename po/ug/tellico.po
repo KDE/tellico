@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-02 00:41+0000\n"
+"POT-Creation-Date: 2025-01-05 02:35+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -764,7 +764,7 @@ msgstr "ئورگان"
 msgid "Publisher"
 msgstr "تارقاتقۇچى"
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:309
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:308
 #: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
@@ -877,7 +877,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/srufetcher.cpp:536
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -3006,7 +3006,7 @@ msgstr ""
 
 #: src/entryupdater.cpp:95
 #, kde-format
-msgid "Updating %1..."
+msgid "Updating <b>%1</b>..."
 msgstr ""
 
 #: src/entryupdater.cpp:97
@@ -3019,9 +3019,9 @@ msgstr ""
 msgid "Update Entries"
 msgstr ""
 
-#: src/entryupdater.cpp:114
+#: src/entryupdater.cpp:116
 #, kde-format
-msgid "Updating <b>%1</b>..."
+msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr ""
 
 #: src/entryview.cpp:357
@@ -3448,7 +3448,7 @@ msgstr ""
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:320
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:319
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
@@ -3871,19 +3871,19 @@ msgstr ""
 msgid "Google Book Search"
 msgstr ""
 
-#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr ""
 
-#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/isbndbfetcher.cpp:382
+#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/isbndbfetcher.cpp:382
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr ""
 
-#: src/fetch/hathitrustfetcher.cpp:313 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/srufetcher.cpp:538
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
