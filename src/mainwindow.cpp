@@ -1473,6 +1473,7 @@ bool MainWindow::fileSave() {
     }
 
     GUI::CursorSaver cs(Qt::WaitCursor);
+    myLog() << "Saving collection file:" << Data::Document::self()->URL().toDisplayString(QUrl::PreferLocalFile);
     if(Data::Document::self()->saveDocument(Data::Document::self()->URL())) {
       Kernel::self()->resetHistory();
       m_newDocument = false;

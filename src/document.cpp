@@ -148,7 +148,7 @@ bool Document::openDocument(const QUrl& url_) {
 
   CollPtr coll = m_importer->collection();
   if(!m_importer) {
-    myDebug() << "The importer was deleted out from under us";
+    myDebug() << "The importer was deleted out from under the document";
     return false;
   }
   // delayed image loading only works for zip files
