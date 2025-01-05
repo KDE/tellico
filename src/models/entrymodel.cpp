@@ -60,9 +60,9 @@ int EntryModel::rowCount(const QModelIndex& index_) const {
   return m_fields.isEmpty() ? 0 : m_entries.count();
 }
 
-int EntryModel::columnCount(const QModelIndex& index_) const {
-  // valid indexes have no columns
-  if(index_.isValid()) {
+int EntryModel::columnCount(const QModelIndex& parent_) const {
+  // valid parents have no children and thus no columns
+  if(parent_.isValid()) {
     return 0;
   }
   return m_fields.count();
