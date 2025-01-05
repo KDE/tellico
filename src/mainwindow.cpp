@@ -64,6 +64,7 @@
 #include "core/netaccess.h"
 #include "dbusinterface.h"
 #include "models/models.h"
+#include "models/entrymodel.h"
 #include "models/entryiconmodel.h"
 #include "models/entryselectionmodel.h"
 #include "newstuff/manager.h"
@@ -1473,13 +1474,13 @@ bool MainWindow::fileSave() {
     }
 
     GUI::CursorSaver cs(Qt::WaitCursor);
+    myLog() << "Saving collection file:" << Data::Document::self()->URL().toDisplayString(QUrl::PreferLocalFile);
     if(Data::Document::self()->saveDocument(Data::Document::self()->URL())) {
       Kernel::self()->resetHistory();
       m_newDocument = false;
       updateCaption(false);
       m_fileSave->setEnabled(false);
-      // TODO: call a method of the model instead of the view here
-      m_detailedView->resetEntryStatus();
+      m_detailedView->sourceModel()->clearSaveState();
     } else {
       ret = false;
     }
@@ -1529,7 +1530,7 @@ bool MainWindow::fileSaveAs() {
       updateCaption(false);
       m_newDocument = false;
       m_fileSave->setEnabled(false);
-      m_detailedView->resetEntryStatus();
+      m_detailedView->sourceModel()->clearSaveState();
     } else {
       ret = false;
     }
@@ -2657,6 +2658,10 @@ void MainWindow::showLog() {
       if(file.open(QFile::ReadOnly | QIODevice::Text)) {
         QTextStream in(&file);
         viewer->setPlainText(in.readAll());
+        auto cursor = viewer->textCursor();
+        cursor.movePosition(QTextCursor::End);
+        viewer->setTextCursor(cursor);
+        viewer->ensureCursorVisible(); // scroll to bottom
       }
     });
     connect(Logger::self(), &Logger::updated, timer, QOverload<>::of(&QTimer::start));
