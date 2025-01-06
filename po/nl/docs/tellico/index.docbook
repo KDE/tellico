@@ -45,7 +45,7 @@ Don't forget to include this last date.
 Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
 -->
 <date
->2021-03-14</date>
+>2025-01-04</date>
 
 <!--version information of Frameworks/Plasma/Applications this documentation is valid for.
 Example:
@@ -56,7 +56,7 @@ xx.yy (Applications xx.yy) for docbooks with own version released as Application
 $applicationname xx.yy for applications with independent release schedule (extragear/playground)
 -->
 <releaseinfo
->Tellico 4.0</releaseinfo>
+>Tellico 4.1</releaseinfo>
 
 <title
 >Het handboek van &tellico;</title>
@@ -93,7 +93,7 @@ $applicationname xx.yy for applications with independent release schedule (extra
 
 <copyright>
 <year
->2001-2024</year>
+>2001</year>
 <holder
 >&robby;</holder>
 </copyright>
@@ -269,11 +269,11 @@ file included in the KDE distribution. -->
 <para
 >&tellico; </para>
 <para
->Programma copyright 2001-2024 &robby; <email
+>Programma copyright 2001 &robby; <email
 >&email;</email
 > </para>
 <para
->Documentatie copyright 2001-2024 &robby; <email
+>Documentatie copyright 2001 &robby; <email
 >&email;</email
 > </para>
 

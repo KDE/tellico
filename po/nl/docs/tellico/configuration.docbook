@@ -56,7 +56,9 @@
 <para
 >De <guilabel
 >Algemene opties</guilabel
-> besturen het algemene gedrag. Afbeeldingen kunnen ingevoegd worden in de gegevensbestanden of apart opgeslagen in de toepassingsmap van &appname;. Het kan ook het laatste gegevensbestand, dat open was, opnieuw openen op het moment dat &appname; wordt gestart. U kunt enkele van de tips lezen en daarna de dialoog uitschakelen. De <interface
+> besturen het algemene gedrag. Afbeeldingen kunnen opgeslagen worden in het gegevensbestand zelf, apart opgeslagen in de toepassingsmap van &appname; of opgeslagen in een map met dezelfde naam als de bestandsnaam, met <emphasis
+>_files</emphasis
+> achtergevoegd aan de naam. Voor verzamelingen met veel afbeeldingen is ze opslaan in het gegevensbestand veel langzamer in gebruik. Ook het laatste gegevensbestand, dat open was, op het moment dat &appname; wordt gestart kan het automatisch worden geopend. Het <interface
 >Snelle filter</interface
 > in de werkbalk is nuttig voor het gemakkelijk filteren door uw verzameling en kan reguliere expressies gebruiken. </para>
 
