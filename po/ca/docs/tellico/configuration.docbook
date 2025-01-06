@@ -56,7 +56,9 @@
 <para
 >Les <guilabel
 >Opcions generals</guilabel
-> controlen el comportament general. Les imatges es poden incloure als fitxers de dades, o es desen per separat a la carpeta de l'aplicació &appname;. A més, quan s'inicia el &appname;, pot tornar a obrir automàticament el fitxer de dades que estava obert. El <interface
+> controlen el comportament general. Les imatges es poden desar als mateixos fitxers de dades, desar per separat a la carpeta comuna de l'aplicació &appname; o desar a un directori amb el mateix nom que el fitxer de dades amb <emphasis
+>_files</emphasis
+> afegit al nom. Per a col·leccions amb moltes imatges, desar-les en un fitxer de dades és molt més lent de fer servir. Quan s'inicia el &appname;, pot tornar a obrir automàticament el fitxer de dades que estava obert. El <interface
 >Filtre ràpid</interface
 > de la barra d'eines és útil per a filtrar fàcilment la col·lecció i poder utilitzar expressions regulars. </para>
 
