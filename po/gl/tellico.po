@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-06 02:38+0000\n"
-"PO-Revision-Date: 2024-06-18 20:00+0200\n"
+"PO-Revision-Date: 2025-01-04 15:04+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -299,7 +299,7 @@ msgstr "Colección personalizada"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "O nome interno do campo é <em>%1</em>."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -1603,13 +1603,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-#| "Everyone, Early Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
-#| "Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -2804,31 +2798,31 @@ msgstr "Escolla o modelo a eliminar:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "As imaxes gárdanse en <em>%1</em>."
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "As imaxes gárdanse en <em>%1</em>."
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "As imaxes moveranse de <em>%1</em> a <em>%2</em>."
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "As imaxes moveranse de <em>%1</em> a <em>%2</em>."
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "As imaxes moveranse de <em>%1</em> a <em>%2</em>."
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
@@ -3092,10 +3086,9 @@ msgid "Update Entries"
 msgstr "Actualizar as entradas"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "Actualizando <b>%1</b>…"
+msgstr "Actualizando <b>%1</b> desde <i>%2</i>…"
 
 #: src/entryview.cpp:357
 #, kde-format
@@ -5291,10 +5284,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico — Programa de xestión de coleccións, libre e sinxelo"
 
 #: src/main.cpp:176
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "© 2001-2024 Robby Stephenson"
+msgstr "© 2001 Robby Stephenson"
 
 #: src/main.cpp:180
 #, kde-format
@@ -6245,10 +6237,9 @@ msgstr ""
 "campo escollido.</qt>"
 
 #: src/mainwindow.cpp:992
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico — Programa de xestión de coleccións, libre e sinxelo"
+msgstr "Programa de xestión de coleccións, libre e sinxelo"
 
 #: src/mainwindow.cpp:994
 #, kde-format
@@ -6277,6 +6268,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"Pode atopar máis información na <a href=\"help:/tellico\">documentación</a>. "
+"Tamén pode <a href=\"tc:///disable_welcome\">desactivar a pantalla de "
+"benvida</a>."
 
 #: src/mainwindow.cpp:1212
 #, kde-format
