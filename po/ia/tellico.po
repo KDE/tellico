@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2015, 2020, 2021, 2022, 2023, 2024 g.sora <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2015, 2020, 2021, 2022, 2023, 2024, 2025 g.sora <g.sora@tiscali.it>
 # giovanni <g.sora@tiscali.it>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-06 00:41+0000\n"
-"PO-Revision-Date: 2024-11-29 12:13+0100\n"
+"PO-Revision-Date: 2025-01-08 15:50+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -3099,10 +3099,9 @@ msgid "Update Entries"
 msgstr "Actualisa entratas"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "Actualisante <b>%1</b>..."
+msgstr "Actualisante <b>%1</b> ex <i>%2</i>..."
 
 #: src/entryview.cpp:357
 #, kde-format
@@ -5305,10 +5304,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - un software gerente de collection, libere e simplice"
 
 #: src/main.cpp:102
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001-2024, Robby Stephenson"
+msgstr "(c) 2001, Robby Stephenson"
 
 #: src/main.cpp:106
 #, kde-format
