@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-06 02:38+0000\n"
-"PO-Revision-Date: 2024-10-27 10:07+0200\n"
+"PO-Revision-Date: 2024-12-07 18:16+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -300,7 +300,7 @@ msgstr "Muokattu kokoelma"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "Sisäinen kentän nimi on <em>%1</em>."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -1603,13 +1603,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-#| "Everyone, Early Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
-#| "Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -2801,31 +2795,31 @@ msgstr "Valitse poistettava mallipohja:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "Kuvat tallennetaan tällä hetkellä tiedostoon <em>%1</em>"
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "Kuvat tallennetaan tällä hetkellä kansioon <em>%1</em>"
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Kuvat siirretään kansiosta <em>%1</em> tiedostoon <em>%2</em>"
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Kuvat siirretään tiedostosta <em>%1</em> kansioon <em>%2</em>"
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Kuvat siirretään kansiosta <em>%1</em> kansioon <em>%2</em>"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
@@ -6229,10 +6223,9 @@ msgstr ""
 "<qt><i>Ryhmänäkymä</i> lajittelee tietueet valitun kentän perusteella.</qt>"
 
 #: src/mainwindow.cpp:992
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico – vapaa ja yksinkertainen kokoelmanhallintaohjelma"
+msgstr "Vapaa ja yksinkertainen kokoelmanhallintaohjelma"
 
 #: src/mainwindow.cpp:994
 #, kde-format
@@ -6260,6 +6253,8 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"Lisätietoa löytyy <a href=\"help:/tellico\">ohjeista</a>. Myös tämän <a href="
+"\"tc:///disable_welcome\">tervetulonäytön voi poistaa käytöstä</a>."
 
 #: src/mainwindow.cpp:1212
 #, kde-format

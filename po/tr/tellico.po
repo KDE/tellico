@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 # Ali Isingor <isingor@gmail.com>, 2007.
 # Kunter Kutlu <kunterkutlu@gmail.com>, 2007.
 # obsoleteman <tulliana@gmail.com>, 2009,2012.
@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-06 02:38+0000\n"
-"PO-Revision-Date: 2024-06-18 11:51+0300\n"
+"PO-Revision-Date: 2025-01-08 15:24+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.07.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -299,7 +299,7 @@ msgstr "Özel Koleksiyon"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "İçsel alan adı <em>%1</em>."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -1602,13 +1602,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-#| "Everyone, Early Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
-#| "Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -1616,8 +1610,8 @@ msgid ""
 "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, "
 "Pending"
 msgstr ""
-"Sınıflandırılmamış, Yalnızca Yetişkinler, Gençler, 10 Yaş Üstü, Herkes, İlk "
-"Çocukluk, Beklemede"
+"Sınıflandırılmamış, Yalnızca Yetişkinler, Olgun, Gençler, 10 Yaş Üstü "
+"Herkes, Herkes, Erken Çocukluk, Beklemede"
 
 #: src/collections/musiccollection.cpp:34
 #, kde-format
@@ -2794,31 +2788,31 @@ msgstr "Silmek için şablon seçin:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "Görseller şu anda <em>%1</em> olarak kaydediliyor."
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "Görseller şu anda <em>%1</em> konumuna kaydediliyor."
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Görseller <em>%1</em> konumundan <em>%2</em> konumuna taşınacaklar."
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Görseller <em>%1</em> konumundan <em>%2</em> konumuna taşınacaklar."
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Görseller <em>%1</em> konumundan <em>%2</em> konumuna taşınacaklar."
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
@@ -3083,10 +3077,9 @@ msgid "Update Entries"
 msgstr "Girdileri Güncelle"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "<b>%1</b> güncelleniyor…"
+msgstr "<i>%2</i> konumundan <b>%1</b> güncelleniyor…"
 
 #: src/entryview.cpp:357
 #, kde-format
@@ -5279,10 +5272,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico — koleksiyon yönetimi yazılımı — ücretsiz ve yalın"
 
 #: src/main.cpp:176
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001–2023, Robby Stephenson"
+msgstr "© 2001–2025, Robby Stephenson"
 
 #: src/main.cpp:180
 #, kde-format
@@ -6228,10 +6220,9 @@ msgstr ""
 "qt>"
 
 #: src/mainwindow.cpp:992
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico — koleksiyon yönetimi yazılımı — ücretsiz ve yalın"
+msgstr "Koleksiyon yönetimi yazılımı; ücretsiz ve yalın"
 
 #: src/mainwindow.cpp:994
 #, kde-format
@@ -6260,6 +6251,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"Ek bilgi <a href=\"help:/tellico\">belgelendirmede</a> bulunabilir. "
+"İsterseniz <a href=\"tc:///disable_welcome\">bu karşılama ekranını</a> devre "
+"dışı bırakabilirsiniz."
 
 #: src/mainwindow.cpp:1212
 #, kde-format
@@ -7397,113 +7391,3 @@ msgstr "Ara"
 #, kde-format
 msgid "Clear"
 msgstr "Temizle"
-
-#~ msgid "Updating %1..."
-#~ msgstr "%1 güncelleniyor…"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Boş)"
-
-#~ msgid "Classification"
-#~ msgstr "Sınıflandırma"
-
-#~ msgid "Other People"
-#~ msgstr "Diğer Kişiler"
-
-#~ msgid "Features"
-#~ msgstr "Özellikler"
-
-#~ msgid "Tellico is unable to open the file - %1."
-#~ msgstr "Tellico dosyayı açamıyor - %1."
-
-#~ msgid "Tellico is unable to load the file - %1."
-#~ msgstr "Tellico dosyayı yükleyemiyor - %1."
-
-#~ msgid "Tellico is unable to write the file - %1."
-#~ msgstr "Tellico dosyayı yazamıyor - %1."
-
-#~ msgid "Tellico is unable to upload the file - %1."
-#~ msgstr "Tellico dosyayı karşıya yükleyemiyor - %1."
-
-#~ msgid ""
-#~ "Only collections with the same type of entries as the current one can be "
-#~ "appended. No changes are being made to the current collection."
-#~ msgstr ""
-#~ "Yalnızca geçerli olanla aynı türden girişlere sahip koleksiyonlar "
-#~ "iliştirilebilir. Var olan koleksiyonda herhangi bir değişiklik "
-#~ "yapılmamaktadır."
-
-#~ msgid ""
-#~ "Only collections with the same type of entries as the current one can be "
-#~ "merged. No changes are being made to the current collection."
-#~ msgstr ""
-#~ "Yalnızca geçerli olanla aynı türde girdilere sahip koleksiyonlar "
-#~ "birleştirilebilir. Var olan koleksiyonda herhangi bir değişiklik "
-#~ "yapılmamaktadır."
-
-#~ msgid "Tellico is unable to load an image from the file - %1."
-#~ msgstr "Tellico, %1 dosyasından bir görsel yükleyemiyor."
-
-#~ msgid "Untitled"
-#~ msgstr "Başlıksız"
-
-#~ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-#~ msgstr ""
-#~ "Bu bilgi, <a href=\"%1\">%2</a> tarafından ücretsiz olarak sağlanmıştır."
-
-#~ msgid "Allocine Link"
-#~ msgstr "Allocine Bağlantısı"
-
-#~ msgid "Distributor"
-#~ msgstr "Dağıtıcı"
-
-#~ msgid "AnimeNfo Link"
-#~ msgstr "AnimeNfo Bağlantısı"
-
-#~ msgid "AnimeNfo Rating"
-#~ msgstr "AnimeNfo Derecelendirmesi"
-
-#~ msgid "Internet Movie Database (French)"
-#~ msgstr "İnternet Film Veritabanı (Fransızca)"
-
-#~ msgid "Internet Movie Database (Spanish)"
-#~ msgstr "İnternet Film Veritabanı (İspanyolca)"
-
-#~ msgid "Internet Movie Database (German)"
-#~ msgstr "İnternet Film Veritabanı (Almanca)"
-
-#~ msgid "Internet Movie Database (Italian)"
-#~ msgstr "İnternet Film Veritabanı (İtalyanca)"
-
-#~ msgid "Internet Movie Database (Portuguese)"
-#~ msgstr "İnternet Film Veritabanı (Portekizce)"
-
-#~ msgid "Download cover &image"
-#~ msgstr "Kapak gö&rselini indir"
-
-#~ msgid "Alexandria"
-#~ msgstr "Alexandria"
-
-#~ msgid "Bibtex"
-#~ msgstr "Bibtex"
-
-#~ msgid "Bibtexml"
-#~ msgstr "Bibtexml"
-
-#~ msgid "CSV"
-#~ msgstr "CSV"
-
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgid "ONIX Archive"
-#~ msgstr "ONIX Arşivi"
-
-#~ msgid "XML"
-#~ msgstr "XML"
-
-#~ msgid "Tellico Zip File"
-#~ msgstr "Tellico Zip Dosyası"
-
-#~ msgid "XSLT"
-#~ msgstr "XSLT"
