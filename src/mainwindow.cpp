@@ -669,7 +669,7 @@ void MainWindow::initActions() {
   action = actionCollection()->addAction(QStringLiteral("coll_reports"), this, SLOT(slotShowReportDialog()));
   action->setText(i18n("&Generate Reports..."));
   action->setIconText(i18n("Reports"));
-  action->setIcon(QIcon::fromTheme(QStringLiteral("text-rdf")));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("document-multiple")));
   action->setToolTip(i18n("Generate collection reports"));
 
   action = actionCollection()->addAction(QStringLiteral("coll_convert_bibliography"), this, SLOT(slotConvertToBibliography()));

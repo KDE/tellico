@@ -132,9 +132,15 @@ ReportDialog::ReportDialog(QWidget* parent_)
 #else
     const auto metaType = static_cast<QMetaType::Type>(it.value().typeId());
 #endif
-    m_templateCombo->addItem(QIcon::fromTheme(metaType == QMetaType::QUuid ? QStringLiteral("kchart")
-                                                                           : QStringLiteral("text-rdf")),
-                             it.key(), it.value());
+    QIcon icon;
+    if(metaType == QMetaType::QUuid) {
+      icon = QIcon::fromTheme(QStringLiteral("kchart"));
+      if(icon.isNull()) icon = QIcon::fromTheme(QStringLiteral("office-chart-bar-stacked"));
+    } else {
+      icon = QIcon::fromTheme(QStringLiteral("x-office-document"));
+      if(icon.isNull()) icon = QIcon::fromTheme(QStringLiteral("text-rdf"));
+    }
+    m_templateCombo->addItem(icon, it.key(), it.value());
   }
   hlay->addWidget(m_templateCombo);
   l->setBuddy(m_templateCombo);
