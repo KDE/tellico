@@ -41,22 +41,20 @@
 #include "controller.h"
 #include "importdialog.h"
 #include "exportdialog.h"
-#include "core/filehandler.h" // needed so static mainWindow variable can be set
-#include "core/logger.h"
 #include "printhandler.h"
 #include "entryview.h"
 #include "entryiconview.h"
-#include "images/imagefactory.h" // needed so tmp files can get cleaned
+#include "filterview.h"
+#include "loanview.h"
+#include "images/imagefactory.h"
 #include "collections/collectioninitializer.h"
 #include "collections/bibtexcollection.h" // needed for bibtex string macro dialog
-#include "utils/bibtexhandler.h" // needed for bibtex options
-#include "utils/datafileregistry.h"
 #include "fetchdialog.h"
 #include "reportdialog.h"
 #include "bibtexkeydialog.h"
+#include "core/filehandler.h"
+#include "core/logger.h"
 #include "core/tellico_strings.h"
-#include "filterview.h"
-#include "loanview.h"
 #include "fetch/fetchmanager.h"
 #include "fetch/fetcherinitializer.h"
 #include "cite/actionmanager.h"
@@ -78,6 +76,8 @@
 #include "utils/cursorsaver.h"
 #include "utils/guiproxy.h"
 #include "utils/tellico_utils.h"
+#include "utils/bibtexhandler.h" // needed for bibtex options
+#include "utils/datafileregistry.h"
 #include "tellico_debug.h"
 
 #include <KComboBox>
@@ -669,7 +669,7 @@ void MainWindow::initActions() {
   action = actionCollection()->addAction(QStringLiteral("coll_reports"), this, SLOT(slotShowReportDialog()));
   action->setText(i18n("&Generate Reports..."));
   action->setIconText(i18n("Reports"));
-  action->setIcon(QIcon::fromTheme(QStringLiteral("text-rdf")));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("document-multiple")));
   action->setToolTip(i18n("Generate collection reports"));
 
   action = actionCollection()->addAction(QStringLiteral("coll_convert_bibliography"), this, SLOT(slotConvertToBibliography()));

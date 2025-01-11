@@ -124,6 +124,5 @@ void XSLTExporter::readOptions(KSharedConfigPtr config_) {
 void XSLTExporter::saveOptions(KSharedConfigPtr config_) {
   KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   m_xsltFile = m_URLRequester->url();
-  // TODO
   group.writeEntry("Last File", QUrl(m_xsltFile.url()));
 }
