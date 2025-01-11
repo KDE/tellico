@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-06 00:41+0000\n"
-"PO-Revision-Date: 2025-01-04 15:53+0300\n"
+"PO-Revision-Date: 2025-01-08 15:24+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1610,8 +1610,8 @@ msgid ""
 "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, "
 "Pending"
 msgstr ""
-"Sınıflandırılmamış, Yalnızca Yetişkinler, Gençler, 10 Yaş Üstü, Herkes, İlk "
-"Çocukluk, Beklemede"
+"Sınıflandırılmamış, Yalnızca Yetişkinler, Olgun, Gençler, 10 Yaş Üstü "
+"Herkes, Herkes, Erken Çocukluk, Beklemede"
 
 #: src/collections/musiccollection.cpp:34
 #, kde-format
@@ -7391,113 +7391,3 @@ msgstr "Ara"
 #, kde-format
 msgid "Clear"
 msgstr "Temizle"
-
-#~ msgid "Updating %1..."
-#~ msgstr "%1 güncelleniyor…"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Boş)"
-
-#~ msgid "Classification"
-#~ msgstr "Sınıflandırma"
-
-#~ msgid "Other People"
-#~ msgstr "Diğer Kişiler"
-
-#~ msgid "Features"
-#~ msgstr "Özellikler"
-
-#~ msgid "Tellico is unable to open the file - %1."
-#~ msgstr "Tellico dosyayı açamıyor - %1."
-
-#~ msgid "Tellico is unable to load the file - %1."
-#~ msgstr "Tellico dosyayı yükleyemiyor - %1."
-
-#~ msgid "Tellico is unable to write the file - %1."
-#~ msgstr "Tellico dosyayı yazamıyor - %1."
-
-#~ msgid "Tellico is unable to upload the file - %1."
-#~ msgstr "Tellico dosyayı karşıya yükleyemiyor - %1."
-
-#~ msgid ""
-#~ "Only collections with the same type of entries as the current one can be "
-#~ "appended. No changes are being made to the current collection."
-#~ msgstr ""
-#~ "Yalnızca geçerli olanla aynı türden girişlere sahip koleksiyonlar "
-#~ "iliştirilebilir. Var olan koleksiyonda herhangi bir değişiklik "
-#~ "yapılmamaktadır."
-
-#~ msgid ""
-#~ "Only collections with the same type of entries as the current one can be "
-#~ "merged. No changes are being made to the current collection."
-#~ msgstr ""
-#~ "Yalnızca geçerli olanla aynı türde girdilere sahip koleksiyonlar "
-#~ "birleştirilebilir. Var olan koleksiyonda herhangi bir değişiklik "
-#~ "yapılmamaktadır."
-
-#~ msgid "Tellico is unable to load an image from the file - %1."
-#~ msgstr "Tellico, %1 dosyasından bir görsel yükleyemiyor."
-
-#~ msgid "Untitled"
-#~ msgstr "Başlıksız"
-
-#~ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-#~ msgstr ""
-#~ "Bu bilgi, <a href=\"%1\">%2</a> tarafından ücretsiz olarak sağlanmıştır."
-
-#~ msgid "Allocine Link"
-#~ msgstr "Allocine Bağlantısı"
-
-#~ msgid "Distributor"
-#~ msgstr "Dağıtıcı"
-
-#~ msgid "AnimeNfo Link"
-#~ msgstr "AnimeNfo Bağlantısı"
-
-#~ msgid "AnimeNfo Rating"
-#~ msgstr "AnimeNfo Derecelendirmesi"
-
-#~ msgid "Internet Movie Database (French)"
-#~ msgstr "İnternet Film Veritabanı (Fransızca)"
-
-#~ msgid "Internet Movie Database (Spanish)"
-#~ msgstr "İnternet Film Veritabanı (İspanyolca)"
-
-#~ msgid "Internet Movie Database (German)"
-#~ msgstr "İnternet Film Veritabanı (Almanca)"
-
-#~ msgid "Internet Movie Database (Italian)"
-#~ msgstr "İnternet Film Veritabanı (İtalyanca)"
-
-#~ msgid "Internet Movie Database (Portuguese)"
-#~ msgstr "İnternet Film Veritabanı (Portekizce)"
-
-#~ msgid "Download cover &image"
-#~ msgstr "Kapak gö&rselini indir"
-
-#~ msgid "Alexandria"
-#~ msgstr "Alexandria"
-
-#~ msgid "Bibtex"
-#~ msgstr "Bibtex"
-
-#~ msgid "Bibtexml"
-#~ msgstr "Bibtexml"
-
-#~ msgid "CSV"
-#~ msgstr "CSV"
-
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgid "ONIX Archive"
-#~ msgstr "ONIX Arşivi"
-
-#~ msgid "XML"
-#~ msgstr "XML"
-
-#~ msgid "Tellico Zip File"
-#~ msgstr "Tellico Zip Dosyası"
-
-#~ msgid "XSLT"
-#~ msgstr "XSLT"

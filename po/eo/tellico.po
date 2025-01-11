@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-06 00:41+0000\n"
-"PO-Revision-Date: 2024-12-31 11:42+0100\n"
+"PO-Revision-Date: 2025-01-06 18:58+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -3082,10 +3082,9 @@ msgid "Update Entries"
 msgstr "Ĝisdatigi Enirojn"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "Ĝisdatigante <b>%1</b>..."
+msgstr "Ĝisdatigante <b>%1</b> el <i>%2</i>..."
 
 #: src/entryview.cpp:357
 #, kde-format
@@ -5273,10 +5272,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - programaro pri kolekto-administrado, libera kaj simpla"
 
 #: src/main.cpp:102
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001-2024, Robby Stephenson"
+msgstr "(c) 2001, Robby Stephenson"
 
 #: src/main.cpp:106
 #, kde-format
@@ -7390,6 +7388,3 @@ msgstr "Serĉi"
 #, kde-format
 msgid "Clear"
 msgstr "Forigi"
-
-#~ msgid "Updating %1..."
-#~ msgstr "Ĝisdatigante %1..."
