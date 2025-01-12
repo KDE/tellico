@@ -8,15 +8,15 @@
 # Łukasz Purgal <lookanio@gmail.com>, 2011.
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2011, 2013.
 # Lukasz Purgal (Lookanio) <lookanio@gmail.com>, 2011, 2013.
-# SPDX-FileCopyrightText: 2011, 2012, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2011, 2012, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-06 00:41+0000\n"
-"PO-Revision-Date: 2024-11-30 10:00+0100\n"
+"POT-Creation-Date: 2025-01-12 00:42+0000\n"
+"PO-Revision-Date: 2025-01-11 11:57+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -804,7 +804,7 @@ msgstr "Organizacja"
 msgid "Publisher"
 msgstr "Wydawnictwo"
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:308
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:303
 #: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
@@ -917,7 +917,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/srufetcher.cpp:536
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -2773,7 +2773,7 @@ msgid "Template Packages"
 msgstr "Pakiety wzorców"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1330
-#: src/mainwindow.cpp:1506 src/reportdialog.cpp:493 src/reportdialog.cpp:508
+#: src/mainwindow.cpp:1506 src/reportdialog.cpp:499 src/reportdialog.cpp:514
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -3091,10 +3091,9 @@ msgid "Update Entries"
 msgstr "Uaktualnij elementy"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "Uaktualnianie <b>%1</b>..."
+msgstr "Uaktualnianie <b>%1</b> z <i>%2</i>…"
 
 #: src/entryview.cpp:357
 #, kde-format
@@ -3538,7 +3537,7 @@ msgstr ""
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:319
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
@@ -3964,19 +3963,19 @@ msgstr "Odnośnik Google Książki"
 msgid "Google Book Search"
 msgstr "Wyszukiwanie Google Książki"
 
-#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr "Ilustrator"
 
-#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/isbndbfetcher.cpp:382
+#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/isbndbfetcher.cpp:382
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Nr w klasyfikacji Dewey'a"
 
-#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/srufetcher.cpp:538
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -5297,10 +5296,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - oprogramowanie do zarządzania zbiorami, darmowe i proste"
 
 #: src/main.cpp:102
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001-2024, Robby Stephenson"
+msgstr "(c) 2001, Robby Stephenson"
 
 #: src/main.cpp:106
 #, kde-format
@@ -6499,28 +6497,28 @@ msgstr "Wzorzec sp&rawozdania:"
 msgid "One Entry Per Page"
 msgstr "Jeden wpis na stronę"
 
-#: src/reportdialog.cpp:143
+#: src/reportdialog.cpp:149
 #, kde-format
 msgid "&Generate"
 msgstr "&Generuj"
 
-#: src/reportdialog.cpp:163
+#: src/reportdialog.cpp:169
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr "Wybierz wzorzec sprawozdania i naciśnij <em>Generuj</em>."
 
-#: src/reportdialog.cpp:164
+#: src/reportdialog.cpp:170
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "Podsumowania dla dużych zbiorów może zająć kilkanaście sekund."
 
-#: src/reportdialog.cpp:491
+#: src/reportdialog.cpp:497
 #, kde-format
 msgid "PNG Files"
 msgstr "Pliki PNG"
 
-#: src/reportdialog.cpp:506 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:512 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "Pliki HTML"
