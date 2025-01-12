@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-06 02:38+0000\n"
+"POT-Creation-Date: 2025-01-12 02:41+0000\n"
 "PO-Revision-Date: 2025-01-04 15:04+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -795,7 +795,7 @@ msgstr "Organización"
 msgid "Publisher"
 msgstr "Editor"
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:308
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:303
 #: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
@@ -908,7 +908,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:309 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/srufetcher.cpp:536
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -2768,7 +2768,7 @@ msgid "Template Packages"
 msgstr "Paquetes de modelo"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1330
-#: src/mainwindow.cpp:1506 src/reportdialog.cpp:493 src/reportdialog.cpp:508
+#: src/mainwindow.cpp:1506 src/reportdialog.cpp:499 src/reportdialog.cpp:514
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -3529,7 +3529,7 @@ msgstr ""
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:319
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
@@ -3958,19 +3958,19 @@ msgstr "Ligazón de Google Book"
 msgid "Google Book Search"
 msgstr "Busca en Google Book"
 
-#: src/fetch/hathitrustfetcher.cpp:310 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr "Ilustrador"
 
-#: src/fetch/hathitrustfetcher.cpp:311 src/fetch/isbndbfetcher.cpp:382
+#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/isbndbfetcher.cpp:382
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Decimal Dewey"
 
-#: src/fetch/hathitrustfetcher.cpp:312 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/srufetcher.cpp:538
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -6488,29 +6488,29 @@ msgstr "Modelo de &informe:"
 msgid "One Entry Per Page"
 msgstr "Unha entrada por páxina"
 
-#: src/reportdialog.cpp:143
+#: src/reportdialog.cpp:149
 #, kde-format
 msgid "&Generate"
 msgstr "&Xerar"
 
-#: src/reportdialog.cpp:163
+#: src/reportdialog.cpp:169
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr "Escolla un modelo de informe e prema <em>Xerar</em>."
 
-#: src/reportdialog.cpp:164
+#: src/reportdialog.cpp:170
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr ""
 "Con coleccións grandes algúns informes tardan varios segundos en xerarse."
 
-#: src/reportdialog.cpp:491
+#: src/reportdialog.cpp:497
 #, kde-format
 msgid "PNG Files"
 msgstr "Ficheiros PNG"
 
-#: src/reportdialog.cpp:506 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:512 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "Ficheiros HTML"
