@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-12 02:41+0000\n"
-"PO-Revision-Date: 2024-09-14 05:43+0200\n"
+"PO-Revision-Date: 2025-01-15 02:25+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -295,7 +295,7 @@ msgstr "მითითებული კოლექცია"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "შიდა ველის სახელია <em>%1</em>."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -1596,13 +1596,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-#| "Everyone, Early Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
-#| "Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -2795,31 +2789,34 @@ msgstr "აირჩიეთ წასაშლელი ნიმუში:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "სურათები ამჟამად ინახება ფაილში <em>%1</em>"
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "სურათები ამჟამად ინახება საქაღალდეში <em>%1</em>"
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
+"გამოსახულებები გადატანილი იქნება ფაილიდან <em>%1</em> საქაღალდეში <em>%2</em>"
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
+"გამოსახულებები გადატანილი იქნება ფაილიდან <em>%1</em> საქაღალდეში <em>%2</em>"
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
+"გამოსახულებები გადატანილი იქნება ფაილიდან <em>%1</em> საქაღალდეში <em>%2</em>"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
@@ -3083,10 +3080,9 @@ msgid "Update Entries"
 msgstr "ჩანაწერების განახლება"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "<b>%1</b>-ის განახლება..."
+msgstr "<b>%1</b>-ის განახლება <i>%2</i>-დან ..."
 
 #: src/entryview.cpp:357
 #, kde-format
@@ -5276,10 +5272,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - კოლექციის მართვის პროგრამა. უფასო და მარტივი"
 
 #: src/main.cpp:176
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001-2024, Robby Stephenson"
+msgstr "(c) 2001, Robby Stephenson"
 
 #: src/main.cpp:180
 #, kde-format
@@ -6225,10 +6220,9 @@ msgstr ""
 "</qt>"
 
 #: src/mainwindow.cpp:992
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - კოლექციის მართვის პროგრამა. უფასო და მარტივი"
+msgstr "კოლექციის მართვის პროგრამა. უფასო და მარტივი"
 
 #: src/mainwindow.cpp:994
 #, kde-format
@@ -6256,6 +6250,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"მეტი ინფორმაციის პოვნა <a href=\"help:/tellico\">დოკუმენტაციაში</a> "
+"შეგიძლიათ. ასევე შეგიძლიათ, <a href=\"tc:///disable_welcome\">გამორთოთ "
+"გაშვების ეკრანი</a>."
 
 #: src/mainwindow.cpp:1212
 #, kde-format
