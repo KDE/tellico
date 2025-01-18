@@ -107,7 +107,7 @@ private:
 
   QString imageUrl(const QString& name, const QString& id);
   void readDataList();
-  void readItemNames(const QByteArray& item);
+  void readItemNames(const QByteArray& item, const QString& filter=QString());
 
   QHash<uint, Data::EntryPtr> m_entries;
 
