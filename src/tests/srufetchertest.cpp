@@ -37,7 +37,6 @@
 #include <KConfigGroup>
 
 #include <QTest>
-#include <QLoggingCategory>
 
 QTEST_GUILESS_MAIN( SRUFetcherTest )
 
@@ -49,7 +48,6 @@ void SRUFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
   // since we use the MODS importer
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/mods2tellico.xsl"));
-  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = false\ntellico.info = false"));
 }
 
 void SRUFetcherTest::testTitle() {
