@@ -181,6 +181,36 @@ void ColnectFetcherTest::testComic() {
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
+void ColnectFetcherTest::testComicIsbn() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect comics"));
+  cg.writeEntry("Custom Fields", QStringLiteral("series,colnect"));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook,
+                                       Tellico::Fetch::Keyword,
+                                       QStringLiteral("9032000926"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ColnectFetcher(this));
+  fetcher->readConfig(cg);
+  QVERIFY(fetcher->canSearch(request.key()));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
+
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Het meesterwerk"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("1978"));
+  QCOMPARE(entry->field(QStringLiteral("series")), QStringLiteral("Franka (FRA)"));
+  QCOMPARE(entry->field(QStringLiteral("writer")), QStringLiteral("Kuijpers, Henk"));
+  QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Kuijpers, Henk"));
+  QCOMPARE(entry->field(QStringLiteral("issue")), QStringLiteral("2"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Oberon"));
+  QCOMPARE(entry->field(QStringLiteral("edition")), QStringLiteral("First edition"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Adventure"));
+  QCOMPARE(entry->field(QStringLiteral("colnect")), QStringLiteral("https://colnect.com/en/comics/comic/2184-Het_meesterwerk"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+}
+
 void ColnectFetcherTest::testBaseballCard() {
   KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect cards"));
   cg.writeEntry("Custom Fields", QStringLiteral("series,colnect"));

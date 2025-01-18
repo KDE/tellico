@@ -1,3 +1,7 @@
+2025-01-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that pulled invalid year from isbn in Colnect search.
+
 2025-01-14  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 4.1.

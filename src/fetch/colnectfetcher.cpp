@@ -116,6 +116,19 @@ void ColnectFetcher::search() {
   // Colnect API calls are encoded as a path
   QString query(QLatin1Char('/') + m_locale);
 
+  QString value = request().value();
+  if(request().key() != Raw) {
+    // pull out year, keep the regexp a little loose, but make sure year is valid
+    // also avoid matching on isbn values by using word boundary
+    QRegularExpression yearRX(QStringLiteral("\\b[12][8901][0-9]{2}\\b"));
+    auto match = yearRX.match(value);
+    if(match.hasMatch()) {
+      m_year = match.captured(0);
+      value = value.remove(yearRX);
+      myLog() << "Capturing year value from search string:" << m_year;
+    }
+  }
+
   switch(collectionType()) {
     case Data::Collection::Coin:
       m_category = QStringLiteral("coins");
@@ -138,23 +151,17 @@ void ColnectFetcher::search() {
       return;
   }
 
-  QString value = request().value();
   switch(request().key()) {
     case Title:
       {
         query += QStringLiteral("/list/cat/") + m_category;
-        // pull out year, keep the regexp a little loose
-        QRegularExpression yearRX(QStringLiteral("[0-9]{4}"));
-        QRegularExpressionMatch match = yearRX.match(value);
-        if(match.hasMatch()) {
-          m_year = match.captured(0);
+        if(!m_year.isEmpty()) {
           if(collectionType() == Data::Collection::Coin) {
             query += QStringLiteral("/mint_year/");
           } else {
             query += QStringLiteral("/year/");
           }
           query += m_year;
-          value = value.remove(yearRX);
         }
       }
       if(!m_countryCode.isEmpty()) {
@@ -167,18 +174,13 @@ void ColnectFetcher::search() {
     case Keyword:
       {
         query += QStringLiteral("/list/cat/") + m_category;
-        // pull out year, keep the regexp a little loose
-        QRegularExpression yearRX(QStringLiteral("[0-9]{4}"));
-        QRegularExpressionMatch match = yearRX.match(value);
-        if(match.hasMatch()) {
-          m_year = match.captured(0);
+        if(!m_year.isEmpty()) {
           if(collectionType() == Data::Collection::Coin) {
             query += QStringLiteral("/mint_year/");
           } else {
             query += QStringLiteral("/year/");
           }
           query += m_year;
-          value = value.remove(yearRX);
         }
       }
       if(!m_countryCode.isEmpty()) {
