@@ -54,6 +54,8 @@
 #include <QRegularExpression>
 #include <QStandardPaths>
 
+#include <algorithm>
+
 namespace {
   static const char* COLNECT_API_URL = "https://api.tellico-project.org/colnect";
 //  static const char* COLNECT_API_URL = "https://api.colnect.net";
@@ -668,17 +670,29 @@ void ColnectFetcher::populateComicEntry(Data::EntryPtr entry_, const QVariantLis
   }
 
   static const QRegularExpression spaceCommaRx(QLatin1String("\\s*,\\s*"));
+  auto hasSpace = [](const QString& s) {
+    return s.contains(QLatin1Char(' '));
+  };
+
   idx = m_colnectFields.value(QStringLiteral("Writer"), -1);
   if(idx > -1) {
     QString writer = resultList_.at(idx).toString();
-    writer.replace(spaceCommaRx, FieldFormat::delimiterString());
+    // colnect is inconsistent with comma separators. Sometimes it's between first and last name,
+    // sometimes between multiple people, so only split if there is also a white space in each value
+    const auto list = writer.split(spaceCommaRx);
+    if(list.count() > 1 && std::all_of(list.begin(), list.end(), hasSpace)) {
+      writer = list.join(Tellico::FieldFormat::delimiterString());
+    }
     entry_->setField(QStringLiteral("writer"), writer);
   }
 
   idx = m_colnectFields.value(QStringLiteral("CoverArtist"), -1);
   if(idx > -1) {
     QString artist = resultList_.at(idx).toString();
-    artist.replace(spaceCommaRx, FieldFormat::delimiterString());
+    const auto list = artist.split(spaceCommaRx);
+    if(list.count() > 1 && std::all_of(list.begin(), list.end(), hasSpace)) {
+      artist = list.join(Tellico::FieldFormat::delimiterString());
+    }
     entry_->setField(QStringLiteral("artist"), artist);
   }
 
