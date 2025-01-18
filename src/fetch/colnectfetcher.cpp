@@ -720,7 +720,11 @@ void ColnectFetcher::populateCardEntry(Data::EntryPtr entry_, const QVariantList
     const int playerId = resultList_.at(idx).toInt();
     if(playerId > 0) {
       if(!m_itemNames.contains("players")) {
-        readItemNames("players");
+        if(m_year.isEmpty()) {
+          readItemNames("players");
+        } else {
+          readItemNames("players", QStringLiteral("/season/") + m_year);
+        }
       }
       entry_->setField(QStringLiteral("player"), m_itemNames.value("players").value(playerId));
     }
@@ -886,10 +890,11 @@ void ColnectFetcher::readDataList() {
   u.setPath(u.path() + query);
 //  myLog() << "Reading Colnect fields from" << u.toDisplayString();
 
+  QJsonParseError jsonError;
   const QByteArray data = FileHandler::readDataFile(u, true);
-  QJsonDocument doc = QJsonDocument::fromJson(data);
+  QJsonDocument doc = QJsonDocument::fromJson(data, &jsonError);
   if(doc.isNull()) {
-    myDebug() << "null JSON document in colnect fields";
+    myDebug() << "null JSON document in colnect fields:" << jsonError.errorString();
     return;
   }
   QVariantList resultList = doc.array().toVariantList();
@@ -904,17 +909,18 @@ void ColnectFetcher::readDataList() {
 //  myDebug() << "Colnect fields:" << m_colnectFields;
 }
 
-void ColnectFetcher::readItemNames(const QByteArray& item_) {
+void ColnectFetcher::readItemNames(const QByteArray& item_, const QString& filter_) {
   QUrl u(QString::fromLatin1(COLNECT_API_URL));
   // Colnect API calls are encoded as a path
   QString query(QLatin1Char('/') + m_locale + QLatin1Char('/') + QLatin1String(item_) + QStringLiteral("/cat/") + m_category + QLatin1Char('/'));
-  u.setPath(u.path() + query);
+  u.setPath(u.path() + query + filter_);
 //  myLog() << "Reading item names from" << u.toDisplayString();
 
+  QJsonParseError jsonError;
   const QByteArray data = FileHandler::readDataFile(u, true);
-  QJsonDocument doc = QJsonDocument::fromJson(data);
+  QJsonDocument doc = QJsonDocument::fromJson(data, &jsonError);
   if(doc.isNull()) {
-    myDebug() << "null JSON document in colnect results";
+    myDebug() << "null JSON document in colnect results:" << jsonError.errorString();
     return;
   }
   QJsonArray resultList = doc.array();
