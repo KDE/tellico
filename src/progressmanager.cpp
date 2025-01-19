@@ -33,7 +33,7 @@ ProgressManager* ProgressManager::s_self = nullptr;
 
 template<typename T>
 inline
-uint qHash(const QPointer<T>& pointer_) {
+size_t qHash(const QPointer<T>& pointer_) {
   return qHash(pointer_.data());
 }
 
