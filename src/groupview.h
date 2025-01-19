@@ -109,7 +109,7 @@ public Q_SLOTS:
   /**
    * Adds or removes listview items when groups are modified.
    *
-   * @param coll A pointer to the collection of the gorup
+   * @param coll A pointer to the collection of the group
    * @param groups A vector of pointers to the modified groups
    */
   void slotModifyGroups(Tellico::Data::CollPtr coll, QList<Tellico::Data::EntryGroup*> groups);

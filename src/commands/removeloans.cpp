@@ -77,7 +77,7 @@ void RemoveLoans::undo() {
     if(loan->inCalendar()) {
       calLoans.append(loan);
     }
-    // if the removeed loan was the only one by the borrower
+    // if the removed loan was the only one by the borrower
     // then instead of modifying the borrower, it has to be added back to the model
     const bool emptyBorrower = loan->borrower()->isEmpty();
     loan->borrower()->addLoan(loan);

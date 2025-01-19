@@ -180,7 +180,7 @@ bool CheckableComboBox::eventFilter(QObject* obj_, QEvent* ev_) {
         auto item = static_cast<CheckableItemModel*>(model())->itemFromIndex(index);
         // uncheck the first item, if a different item was checked
         // uncheckk all other items if the first item was checked
-        // remember the chech state hasn't been changed yet. Do this check first so that the state changed signal
+        // remember the check state hasn't been changed yet. Do this check first so that the state changed signal
         // gets fired after all items are updated
         blockSignals(true);
         if(item->checkState() == Qt::Unchecked) {

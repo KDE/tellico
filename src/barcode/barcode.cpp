@@ -206,7 +206,7 @@ barcodeRecognition::Barcode_EAN13 barcodeRecognitionThread::recognizeCode( QImag
 
   // convert the string of black&white pixels into a list, containing
   // information about the black and white fields
-  // first indes = field nr.
+  // first index = field nr.
   // second index: 0 = color of the field
   //               1 = field length
   QVector< QVector<int> > fields = extractFieldInformation( string );

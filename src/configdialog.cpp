@@ -135,7 +135,7 @@ ConfigDialog::~ConfigDialog() {
 void ConfigDialog::slotInitPage(KPageWidgetItem* item_) {
   Q_ASSERT(item_);
   // every page item has a frame
-  // if the frame has no layout, then we need to initialize the itme
+  // if the frame has no layout, then we need to initialize the item
   QFrame* frame = ::qobject_cast<QFrame*>(item_->widget());
   Q_ASSERT(frame);
   if(frame->layout()) {

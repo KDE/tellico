@@ -96,7 +96,7 @@ class KWidgetLister : public QWidget
         controls. It simply does what it is asked to do.  You want to
         reimplement this method if you want to initialize the widget
         when showing it on screen. Make sure you call this
-        implementaion, though, since you cannot put the widget on screen
+        implementation, though, since you cannot put the widget on screen
         from derived classes (@p mLayout is private).
         Make sure the parent of the QWidget to add is this KWidgetLister. */
     virtual void addWidgetAtEnd( QWidget *w=nullptr );
@@ -106,7 +106,7 @@ class KWidgetLister : public QWidget
         should enable/disable any controls. It simply does what it is
         asked to do. You want to reimplement this method if you want to
         save the widget's state before removing it from screen. Make
-        sure you call this implementaion, though, since you should not
+        sure you call this implementation, though, since you should not
         remove the widget from screen from derived classes. */
     virtual void removeLastWidget();
 
@@ -120,7 +120,7 @@ class KWidgetLister : public QWidget
         function which replaces the "@p new @p T" call. */
     virtual QWidget *createWidget( QWidget *parent );
 
-    /** Sets the number of widgets on scrren to exactly @p aNum. Doesn't
+    /** Sets the number of widgets on screen to exactly @p aNum. Doesn't
         check if @p aNum is inside the range @p
         [mMinWidgets,mMaxWidgets]. */
     virtual void setNumberOfShownWidgetsTo( int aNum );

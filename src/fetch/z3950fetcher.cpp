@@ -527,7 +527,7 @@ void Z3950Fetcher::customEvent(QEvent* event_) {
     Z3950SyntaxChange* e = static_cast<Z3950SyntaxChange*>(event_);
     if(m_syntax != e->syntax()) {
       m_syntax = e->syntax();
-      // it gets saved when saveConfigHook() get's called from the Fetcher() d'tor
+      // it gets saved when saveConfigHook() gets called from the Fetcher() d'tor
     }
   } else {
     myWarning() << "weird type: " << event_->type();

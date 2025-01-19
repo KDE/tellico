@@ -81,7 +81,7 @@ void FilmasterFetcherTest::testPerson() {
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
   QVERIFY(results.size() > 0);
-  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until wee find the one we want
+  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until we find the one we want
   for(int i = 0; i < results.size(); ++i) {
     Tellico::Data::EntryPtr test = results.at(i);
     if(test->field(QStringLiteral("title")).toLower() == QStringLiteral("the man from snowy river")) {

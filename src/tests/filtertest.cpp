@@ -356,7 +356,7 @@ void FilterTest::testFilterParser() {
   entry->setField(QStringLiteral("title"), QStringLiteral("C++ Coding Standards"));
   QVERIFY(filter->matches(entry));
 
-  // match title fiel donly
+  // match title field only
   Tellico::FilterParser parser3(QStringLiteral("title=C++"), false /* allow regexps */);
   filter = parser3.filter();
   auto rule0 = filter->at(0);
