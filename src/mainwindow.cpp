@@ -2310,7 +2310,7 @@ void MainWindow::updateCollectionActions() {
 void MainWindow::updateEntrySources() {
   const QString actionListName = QStringLiteral("update_entry_actions");
   unplugActionList(actionListName);
-  for(auto action : m_fetchActions) {
+  for(auto action : std::as_const(m_fetchActions)) {
     for(auto obj : action->associatedObjects()) {
       if(auto widget = ::qobject_cast<QWidget*>(obj)) {
         widget->removeAction(action);
