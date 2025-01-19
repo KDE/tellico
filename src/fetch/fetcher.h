@@ -87,7 +87,7 @@ public:
    */
   int collectionType() const;
   /**
-   * Returns whether the fetcher will overwite existing info when updating
+   * Returns whether the fetcher will overwrite existing info when updating
    */
   bool updateOverwrite() const;
   const FetchRequest& request() const;

@@ -470,7 +470,7 @@ void IGDBFetcher::readDataList(IgdbDataType dataType_, const QList<int>& idList_
 
   QStringList clauseList;
   clauseList += QStringLiteral("fields id,name;");
-  // if the id list is not empty, seach for specific data id values
+  // if the id list is not empty, search for specific data id values
   if(!idList_.isEmpty()) {
     // where id = (8,9,11);
     QString clause = QStringLiteral("where id = (") + QString::number(idList_.at(0));

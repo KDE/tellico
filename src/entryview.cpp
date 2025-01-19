@@ -147,7 +147,7 @@ QWebEnginePage* EntryViewPage::createWindow(QWebEnginePage::WebWindowType type_)
   connect(page, &QWebEnginePage::urlChanged, this, [this](const QUrl& u) {
     openExternalLink(u);
     auto page = static_cast<QWebEnginePage*>(sender());
-    page->action(QWebEnginePage::Stop)->trigger(); // stop the loading, further is unneccesary
+    page->action(QWebEnginePage::Stop)->trigger(); // stop the loading, further is unnecessary
     page->deleteLater();
   });
   return page;

@@ -6281,7 +6281,7 @@
 		<xsl:param name="controlField008"/>
 		<xsl:param name="typeOf008"/>
 		<xsl:param name="leader6"/>
-		<!-- Variables used for caculating form element from controlfields -->
+		<!-- Variables used for calculating form element from controlfields -->
 		<xsl:variable name="controlField008-23" select="substring($controlField008,24,1)"/>
 		<xsl:variable name="controlField008-29" select="substring($controlField008,30,1)"/>
 		<xsl:variable name="check008-23">

@@ -595,7 +595,7 @@ int Iso5426Converter::getCombiningCharInt(uint c) {
   case 0xC77A:
     return 0x017C; // small z with dot above
 
-  // 4/8 trema, diaresis
+  // 4/8 trema, diaeresis
   case 0xC820:
     return 0x00A8; // diaeresis
   case 0xC841:

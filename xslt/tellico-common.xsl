@@ -85,7 +85,7 @@
  </xsl:choose>
 </xsl:template>
 
-<!-- template for outputing most value types -->
+<!-- template for outputting most value types -->
 <xsl:template name="simple-field-value">
  <xsl:param name="entry"/>
  <xsl:param name="field"/>
@@ -97,7 +97,7 @@
   <xsl:when test="$child">
    <xsl:variable name="f" select="$entry/../tc:fields/tc:field[@name = $field]"/>
 
-   <!-- if the field is a bool type, just ouput an X, or use data image -->
+   <!-- if the field is a bool type, just output an X, or use data image -->
    <xsl:choose>
     <!-- paragraphs need to have output escaping disabled so HTML works -->
     <xsl:when test="$f/@type=2">

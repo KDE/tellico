@@ -105,14 +105,14 @@ if(NOT USE_KHTML)
         WebEngineWidgets
     )
     set_package_properties(Qt${QT_MAJOR_VERSION}WebEngineWidgets PROPERTIES
-    DESCRIPTION "Building with QWebEngine is preferrable to KHTML"
+    DESCRIPTION "Building with QWebEngine is preferable to KHTML"
     TYPE OPTIONAL)
 endif()
 if(USE_KHTML OR NOT Qt${QT_MAJOR_VERSION}WebEngineWidgets_FOUND)
     set(USE_KHTML ON)
     find_package(KF${KF_MAJOR_VERSION}KHtml REQUIRED NO_MODULE)
     set_package_properties(KF${KF_MAJOR_VERSION}Html PROPERTIES
-    DESCRIPTION "Building with QWebEngine is preferrable to KHTML")
+    DESCRIPTION "Building with QWebEngine is preferable to KHTML")
 endif()
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS

@@ -32,7 +32,7 @@
 QTEST_APPLESS_MAIN( CompletionTest )
 
 void CompletionTest::testBasic() {
-  Tellico::FieldCompletion cmp(false); // not mutiple
+  Tellico::FieldCompletion cmp(false); // not multiple
   cmp.addItem(QStringLiteral("Atlas V"));
   cmp.addItem(QStringLiteral("Falcon 9"));
   cmp.addItem(QStringLiteral("New Shephard"));
@@ -43,7 +43,7 @@ void CompletionTest::testBasic() {
 }
 
 void CompletionTest::testMultiple() {
-  Tellico::FieldCompletion cmp(true); // mutiple
+  Tellico::FieldCompletion cmp(true); // multiple
   cmp.addItem(QStringLiteral("Atlas V"));
   cmp.addItem(QStringLiteral("Falcon 9"));
   cmp.addItem(QStringLiteral("New Shephard"));

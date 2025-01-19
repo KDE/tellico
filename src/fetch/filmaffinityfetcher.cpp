@@ -134,7 +134,7 @@ void FilmAffinityFetcher::search() {
   u.setPath(QLatin1String("/") + localeData(m_locale).siteSlug + QLatin1String("/advsearch.php"));
   QString searchValue = request().value();
   QUrlQuery q;
-  // extract the year from the end of the search string, accept the posible corner case of a movie
+  // extract the year from the end of the search string, accept the possible corner case of a movie
   // having some other year in the title?
   QRegularExpression yearRx(QStringLiteral("\\s(19|20)\\d\\d$"));
   auto match = yearRx.match(searchValue);

@@ -663,7 +663,7 @@
 2020-03-28  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved audio file data importer to use Album Artist (Bug 419348).
-	* Added notification if user agent is diabled and data source
+	* Added notification if user agent is disabled and data source
 	requires it (Bug 419319).
 
 2020-02-28  Robby Stephenson  <robby@periapsis.org>
@@ -1798,7 +1798,7 @@
 
 2009-11-30  Robby Stephenson  <robby@periapsis.org>
 
-	* Enabled JavaScript for report dialog, incase a template wants to use it.
+	* Enabled JavaScript for report dialog, in case a template wants to use it.
 	* Fixed crashing bug for sorting during HTML export.
 	* Fixed multiple selection in entry view (KDE #216122).
 
@@ -2294,7 +2294,7 @@ Sven Werlen.
 2007-07-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.12.
-	* Changed z39.60 search event loop in an attemp to fix some intermittent freezes.
+	* Changed z39.60 search event loop in an attempt to fix some intermittent freezes.
 
 2007-06-26  Robby Stephenson  <robby@periapsis.org>
 
@@ -2620,7 +2620,7 @@ Jake Maciejewski.
 
 2006-07-30  Robby Stephenson  <robby@periapsis.org>
 
-	* Added bundled scripts for allocine.fr, Spanish Minstry of Culture, and Dark Horse Comics, all from Mathias Monnerville.
+	* Added bundled scripts for allocine.fr, Spanish Ministry of Culture, and Dark Horse Comics, all from Mathias Monnerville.
 
 2005-11-13  Robby Stephenson  <robby@periapsis.org>
 
@@ -3741,7 +3741,7 @@ Jake Maciejewski.
 
 2004-04-27  Robby Stephenson  <robby@periapsis.org>
 
-        * Fixed bug with lyxpipe using LYXSRV insted of LYXCMD.
+        * Fixed bug with lyxpipe using LYXSRV instead of LYXCMD.
         * Changed quick filter to wait 200 ms before updating the filter.
 
 2004-04-21  Robby Stephenson  <robby@periapsis.org>
@@ -3756,7 +3756,7 @@ Jake Maciejewski.
 
 2004-04-16  Robby Stephenson  <robby@periapsis.org>
 
-        * Improved visibilty of image size in Fancy.xsl.
+        * Improved visibility of image size in Fancy.xsl.
         * Updated Italian translation, thanks to FaUsT.
         * Updated Finnish translation, thanks to Teuvo.
         * Added hidden pref for pixmap size in detailed view.
@@ -4022,7 +4022,7 @@ Jake Maciejewski.
 
 2003-11-11  Robby Stephenson  <robby@periapsis.org>
 
-        * Updated German tranlation, thanks to Gerrit Albrecht.
+        * Updated German translation, thanks to Gerrit Albrecht.
         * Added Swedish translation, thanks to Karolina Lindqvist.
         * Fixed bug with adding 2-column table.
         * Cut the 0.7.x branch.
@@ -4133,7 +4133,7 @@ Jake Maciejewski.
 
 2003-07-24  Robby Stephenson  <robby@periapsis.org>
 
-        * Added menu comands for showing/hiding the group view and editor.
+        * Added menu commands for showing/hiding the group view and editor.
 
 2003-07-23  Robby Stephenson  <robby@periapsis.org>
 
@@ -4234,7 +4234,7 @@ Jake Maciejewski.
         * Released Bookcase version 0.6.1
         * Fixed automake 1.7 error with configure.in.in
         * Fixed UIC variable usage, primarily for *BSD platforms
-        * Fixed double encoding bug on bibtexml inport
+        * Fixed double encoding bug on bibtexml import
         * Fixed wrong namespace on bibtexml export
         * Changed to use KAcceleratorManager for keyboard accels on tabs
         * Fixed bug with the group view icon not getting changed back to the folder

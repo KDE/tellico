@@ -463,7 +463,7 @@ void ItunesFetcher::populateEpisodes(Data::EntryPtr entry_) {
 
   auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   if(!job->exec()) {
-    myDebug() << "Failed downloa ditunes episodes";
+    myDebug() << "Failed download itunes episodes";
     return;
    }
 

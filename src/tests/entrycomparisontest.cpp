@@ -229,7 +229,7 @@ void EntryComparisonTest::testVideoMatch() {
   e2->setField(QStringLiteral("year"), QStringLiteral("1982"));
   QVERIFY(c->sameEntry(e1, e2) >= Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
 
-  // imdb link should be pefect match by itself, ignoring host
+  // imdb link should be perfect match by itself, ignoring host
   e1->setField(QStringLiteral("imdb"), QLatin1String("https://www.imdb.com/title/tt1856080/"));
   e2->setField(QStringLiteral("imdb"), QLatin1String("https://us.imdb.com/title/tt1856080/"));
   e2->setField(QStringLiteral("title"), QString());
