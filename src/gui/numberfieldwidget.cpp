@@ -62,11 +62,7 @@ void NumberFieldWidget::initSpinBox() {
   // intentionally allow only positive numbers. -1 means non empty
   m_spinBox = new GUI::SpinBox(-1, std::numeric_limits<int>::max(), this);
   m_spinBox->setValue(-1);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  void (GUI::SpinBox::* textChanged)(const QString&) = &GUI::SpinBox::valueChanged;
-#else
   void (GUI::SpinBox::* textChanged)(const QString&) = &GUI::SpinBox::textChanged;
-#endif
   connect(m_spinBox, textChanged, this, &NumberFieldWidget::checkModified);
 }
 

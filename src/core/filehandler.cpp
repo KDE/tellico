@@ -116,11 +116,7 @@ QString FileHandler::readTextFile(const QUrl& url_, bool quiet_/*=false*/, bool 
   if(f.open(quiet_)) {
     QTextStream stream(f.file());
     if(useUTF8_) {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-      stream.setCodec("UTF-8");
-#else
       stream.setEncoding(QStringConverter::Utf8);
-#endif
     }
     return stream.readAll();
   }
@@ -151,7 +147,7 @@ QDomDocument FileHandler::readXMLDocument(const QUrl& url_, bool processNamespac
   QDomDocument doc;
   QString errorMsg;
   int errorLine, errorColumn;
-  #if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
+#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
   if(!doc.setContent(f.file(), processNamespace_, &errorMsg, &errorLine, &errorColumn)) {
 #else
   const auto parseResult = doc.setContent(f.file(), processNamespace_ ?
@@ -295,11 +291,7 @@ bool FileHandler::writeTextFile(QSaveFile& file_, const QString& text_, bool enc
 
 void FileHandler::writeTextStream(QTextStream& ts_, const QString& text_, bool encodeUTF8_) {
   if(encodeUTF8_) {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    ts_.setCodec("UTF-8");
-#else
     ts_.setEncoding(QStringConverter::Utf8);
-#endif
   }
   // KDE Bug 380832. If string is longer than MAX_TEXT_CHUNK_WRITE_SIZE characters, split into chunks.
   for(int i = 0; i < text_.length(); i += MAX_TEXT_CHUNK_WRITE_SIZE) {

@@ -334,15 +334,9 @@ void EntryEditDialog::slotHandleSave() {
     }
     QString str(i18n("Do you really want to modify these entries?"));
     QString dontAsk = QStringLiteral("SaveMultipleBooks"); // don't change 'books', invisible anyway
-#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 100, 0)
-    auto ret = KMessageBox::questionYesNoList(this, str, names, i18n("Modify Multiple Entries"),
-                                              KStandardGuiItem::cont(), KStandardGuiItem::cancel(), dontAsk);
-    if(ret != KMessageBox::Yes) {
-#else
     auto ret = KMessageBox::questionTwoActionsList(this, str, names, i18n("Modify Multiple Entries"),
                                                    KStandardGuiItem::cont(), KStandardGuiItem::cancel(), dontAsk);
     if(ret != KMessageBox::ButtonCode::PrimaryAction) {
-#endif
       m_isWorking = false;
       return;
     }
@@ -387,15 +381,9 @@ void EntryEditDialog::slotHandleSave() {
       titles << it->title();
     }
     QString dontAsk = QStringLiteral("SaveWithoutRequired");
-#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 100, 0)
-    auto ret = KMessageBox::questionYesNoList(this, str, titles, i18n("Modify Entries"),
-                                              KStandardGuiItem::cont(), KStandardGuiItem::cancel(), dontAsk);
-    if(ret != KMessageBox::Yes) {
-#else
     auto ret = KMessageBox::questionTwoActionsList(this, str, titles, i18n("Modify Entries"),
                                                    KStandardGuiItem::cont(), KStandardGuiItem::cancel(), dontAsk);
     if(ret != KMessageBox::ButtonCode::PrimaryAction) {
-#endif
       m_isWorking = false;
       return;
     }
@@ -671,25 +659,6 @@ bool EntryEditDialog::queryModified() {
                       "Do you want to enter the changes?"));
     KGuiItem item = KStandardGuiItem::save();
     item.setText(i18n("Save Entry"));
-#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 100, 0)
-    auto want_save = KMessageBox::warningYesNoCancel(this, str, i18n("Unsaved Changes"),
-                                                     item, KStandardGuiItem::discard());
-    switch(want_save) {
-      case KMessageBox::Yes:
-        slotHandleSave();
-        ok = true;
-        break;
-
-      case KMessageBox::No:
-        m_modified = false;
-        ok = true;
-        break;
-
-      case KMessageBox::Cancel:
-        ok = false;
-        break;
-    }
-#else
     auto want_save = KMessageBox::warningTwoActionsCancel(this, str, i18n("Unsaved Changes"),
                                                           item, KStandardGuiItem::discard());
     switch(want_save) {
@@ -708,7 +677,6 @@ bool EntryEditDialog::queryModified() {
         ok = false;
         break;
     }
-#endif
   }
   return ok;
 }

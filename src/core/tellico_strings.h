@@ -25,42 +25,30 @@
 #ifndef TELLICO_STRINGS_H
 #define TELLICO_STRINGS_H
 
-#include <Qt>
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#define TC_STR const char*
-#define TC_I18N1 i18n
-#define TC_I18N2 i18n
-#define TC_I18N3 i18n
-#else
 #include <KLazyLocalizedString>
-#define TC_STR KLazyLocalizedString
 #define TC_I18N1(str) str.toString()
 #define TC_I18N2(str1, str2) str1.subs(str2).toString()
 #define TC_I18N3(str1, str2, str3) str1.subs(str2).subs(str3).toString()
-#endif
 
 namespace Tellico {
-  extern TC_STR errorOpen;
-  extern TC_STR errorLoad;
-  extern TC_STR errorWrite;
-  extern TC_STR errorUpload;
-  extern TC_STR errorAppendType;
-  extern TC_STR errorMergeType;
-  extern TC_STR errorImageLoad;
-  extern TC_STR untitledFilename;
-  extern TC_STR providedBy;
+  extern KLazyLocalizedString errorOpen;
+  extern KLazyLocalizedString errorLoad;
+  extern KLazyLocalizedString errorWrite;
+  extern KLazyLocalizedString errorUpload;
+  extern KLazyLocalizedString errorAppendType;
+  extern KLazyLocalizedString errorMergeType;
+  extern KLazyLocalizedString errorImageLoad;
+  extern KLazyLocalizedString untitledFilename;
+  extern KLazyLocalizedString providedBy;
 
-  extern TC_STR categoryGeneral;
-  extern TC_STR categoryFeatures;
-  extern TC_STR categoryPeople;
-  extern TC_STR categoryPublishing;
-  extern TC_STR categoryClassification;
-  extern TC_STR categoryCondition;
-  extern TC_STR categoryPersonal;
-  extern TC_STR categoryMisc;
+  extern KLazyLocalizedString categoryGeneral;
+  extern KLazyLocalizedString categoryFeatures;
+  extern KLazyLocalizedString categoryPeople;
+  extern KLazyLocalizedString categoryPublishing;
+  extern KLazyLocalizedString categoryClassification;
+  extern KLazyLocalizedString categoryCondition;
+  extern KLazyLocalizedString categoryPersonal;
+  extern KLazyLocalizedString categoryMisc;
 }
-
-#undef TC_STR
 
 #endif

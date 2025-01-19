@@ -114,7 +114,7 @@ void CrossRefFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void CrossRefFetcher::slotComplete(KJob*) {
@@ -173,7 +173,7 @@ void CrossRefFetcher::slotComplete(KJob*) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, Data::EntryPtr(entry));
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 
   stop(); // required

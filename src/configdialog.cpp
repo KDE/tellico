@@ -53,11 +53,7 @@
 #include <KMessageWidget>
 
 #ifdef ENABLE_KNEWSTUFF3
-#if KNEWSTUFF_VERSION < QT_VERSION_CHECK(5, 91, 0)
-#include <KNS3/Button>
-#else
 #include <KNSWidgets/Button>
-#endif
 #endif
 
 #include <QSpinBox>
@@ -163,7 +159,7 @@ void ConfigDialog::accept() {
 }
 
 void ConfigDialog::slotApply() {
-  emit signalConfigChanged();
+  Q_EMIT signalConfigChanged();
   button(QDialogButtonBox::Apply)->setEnabled(false);
 }
 
@@ -262,12 +258,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
   imageGroup->addButton(m_rbImageInFile);
   imageGroup->addButton(m_rbImageInAppDir);
   imageGroup->addButton(m_rbImageInLocalDir);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  void (QButtonGroup::* buttonClicked)(int) = &QButtonGroup::buttonClicked;
-  connect(imageGroup, buttonClicked, this, &ConfigDialog::slotModified);
-#else
   connect(imageGroup, &QButtonGroup::idClicked, this, &ConfigDialog::slotModified);
-#endif
 
   QGroupBox* formatGroup = new QGroupBox(i18n("Formatting Options"), frame);
   l->addWidget(formatGroup);
@@ -573,13 +564,8 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   b1->setWhatsThis(whats);
 
 #ifdef ENABLE_KNEWSTUFF3
-#if KNEWSTUFF_VERSION < QT_VERSION_CHECK(5, 91, 0)
-  auto b2 = new KNS3::Button(i18n("Download..."), QStringLiteral("tellico-template.knsrc"), box1);
-  connect(b2, &KNS3::Button::dialogFinished, this, &ConfigDialog::slotUpdateTemplates);
-#else
   auto b2 = new KNSWidgets::Button(i18n("Download..."), QStringLiteral("tellico-template.knsrc"), box1);
   connect(b2, &KNSWidgets::Button::dialogFinished, this, &ConfigDialog::slotUpdateTemplates);
-#endif
 #else
   QPushButton* b2 = new QPushButton(i18n("Download..."), box1);
   b2->setIcon(QIcon::fromTheme(QStringLiteral("get-hot-new-stuff")));
@@ -1192,11 +1178,7 @@ void ConfigDialog::slotInstallTemplate() {
 }
 
 #ifdef ENABLE_KNEWSTUFF3
-#if KNEWSTUFF_VERSION < QT_VERSION_CHECK(5, 91, 0)
-void ConfigDialog::slotUpdateTemplates(const QList<KNS3::Entry>& list_) {
-#else
 void ConfigDialog::slotUpdateTemplates(const QList<KNSCore::Entry>& list_) {
-#endif
   if(!list_.isEmpty()) {
     loadTemplateList();
   }

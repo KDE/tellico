@@ -32,12 +32,6 @@
 #ifdef HAVE_KFILEMETADATA
 #include <KFileMetaData/PropertyInfo>
 #include <KFileMetaData/ExtractorCollection>
-// kfilemetadata_version.h was added in 5.94, so first use kcoreaddons_version to check
-// with the expectation that the two versions should match or be no less than
-#include <kcoreaddons_version.h>
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5,94,0)
-#include <kfilemetadata_version.h>
-#endif
 #endif
 
 #include <QUrl>
@@ -72,11 +66,7 @@ public:
 
 protected:
 #ifdef HAVE_KFILEMETADATA
-#if KFILEMETADATA_VERSION >= QT_VERSION_CHECK(5,240,0)
   KFileMetaData::PropertyMultiMap properties(const KFileItem& item);
-#else
-  KFileMetaData::PropertyMap properties(const KFileItem& item);
-#endif
   KFileMetaData::ExtractorCollection m_extractors;
 #endif
 };

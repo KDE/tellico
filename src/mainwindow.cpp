@@ -255,21 +255,12 @@ void MainWindow::initActions() {
    * File->New menu
    *************************************************/
   QSignalMapper* collectionMapper = new QSignalMapper(this);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  void (QSignalMapper::* mappedInt)(int) = &QSignalMapper::mapped;
-  connect(collectionMapper, mappedInt, this, &MainWindow::slotFileNew);
-#else
   connect(collectionMapper, &QSignalMapper::mappedInt, this, &MainWindow::slotFileNew);
-#endif
 
   m_newCollectionMenu = new KActionMenu(i18n("New Collection"), this);
   m_newCollectionMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
   m_newCollectionMenu->setToolTip(i18n("Create a new collection"));
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,77,0)
   m_newCollectionMenu->setPopupMode(QToolButton::InstantPopup);
-#else
-  m_newCollectionMenu->setDelayed(false);
-#endif
   actionCollection()->addAction(QStringLiteral("file_new_collection"), m_newCollectionMenu);
 
   QAction* action;
@@ -348,23 +339,8 @@ void MainWindow::initActions() {
 
   action = KStandardAction::print(this, SLOT(slotFilePrint()), actionCollection());
   action->setToolTip(i18n("Print the contents of the collection..."));
-#ifdef USE_KHTML
-  {
-    KHTMLPart w;
-    // KHTMLPart printing was broken in KDE until KHTML 5.16
-    const QString version =  w.componentData().version();
-    const uint major = version.section(QLatin1Char('.'), 0, 0).toUInt();
-    const uint minor = version.section(QLatin1Char('.'), 1, 1).toUInt();
-    if(major == 5 && minor < 16) {
-      myWarning() << "Printing is broken for KDE Frameworks < 5.16. Please upgrade";
-      action->setEnabled(false);
-    }
-  }
-#else
-  // print preview is only available with QWebEngine
   action = KStandardAction::printPreview(this, SLOT(slotFilePrintPreview()), actionCollection());
   action->setToolTip(i18n("Preview the contents of the collection..."));
-#endif
 
   action = KStandardAction::quit(this, SLOT(slotFileQuit()), actionCollection());
   action->setToolTip(i18n("Quit the application"));
@@ -372,20 +348,12 @@ void MainWindow::initActions() {
 /**************** Import Menu ***************************/
 
   QSignalMapper* importMapper = new QSignalMapper(this);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  connect(importMapper, mappedInt, this, &MainWindow::slotFileImport);
-#else
   connect(importMapper, &QSignalMapper::mappedInt, this, &MainWindow::slotFileImport);
-#endif
 
   KActionMenu* importMenu = new KActionMenu(i18n("&Import"), this);
   importMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-import")));
   importMenu->setToolTip(i18n("Import the collection data from other formats"));
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,77,0)
   importMenu->setPopupMode(QToolButton::InstantPopup);
-#else
-  importMenu->setDelayed(false);
-#endif
   actionCollection()->addAction(QStringLiteral("file_import"), importMenu);
 
 #define IMPORT_ACTION(TYPE, NAME, TEXT, TIP, ICON) \
@@ -463,7 +431,7 @@ void MainWindow::initActions() {
 
   IMPORT_ACTION(Import::FreeDB, "file_import_freedb", i18n("Import Audio CD Data..."),
                 i18n("Import audio CD information"), mimeIcon("media/audiocd", "application/x-cda"));
-#if !defined (HAVE_OLD_KCDDB) && !defined (HAVE_KCDDB)
+#ifndef HAVE_KCDDB
   action->setEnabled(false);
 #endif
 
@@ -499,20 +467,12 @@ void MainWindow::initActions() {
 /**************** Export Menu ***************************/
 
   QSignalMapper* exportMapper = new QSignalMapper(this);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  connect(exportMapper, mappedInt, this, &MainWindow::slotFileExport);
-#else
   connect(exportMapper, &QSignalMapper::mappedInt, this, &MainWindow::slotFileExport);
-#endif
 
   KActionMenu* exportMenu = new KActionMenu(i18n("&Export"), this);
   exportMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
   exportMenu->setToolTip(i18n("Export the collection data to other formats"));
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,77,0)
   exportMenu->setPopupMode(QToolButton::InstantPopup);
-#else
-  exportMenu->setDelayed(false);
-#endif
   actionCollection()->addAction(QStringLiteral("file_export"), exportMenu);
 
 #define EXPORT_ACTION(TYPE, NAME, TEXT, TIP, ICON) \
@@ -596,11 +556,7 @@ void MainWindow::initActions() {
 
   KActionMenu* addEntryMenu = new KActionMenu(i18n("Add Entry"), this);
   addEntryMenu->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,77,0)
   addEntryMenu->setPopupMode(QToolButton::InstantPopup);
-#else
-  addEntryMenu->setDelayed(false);
-#endif
   actionCollection()->addAction(QStringLiteral("coll_add_entry"), addEntryMenu);
 
   action = actionCollection()->addAction(QStringLiteral("edit_search_internet"), this, SLOT(slotShowFetchDialog()));
@@ -688,11 +644,7 @@ void MainWindow::initActions() {
   action->setToolTip(i18n("Check for duplicate citation keys"));
 
   QSignalMapper* citeMapper = new QSignalMapper(this);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  connect(citeMapper, mappedInt, this, &MainWindow::slotCiteEntry);
-#else
   connect(citeMapper, &QSignalMapper::mappedInt, this, &MainWindow::slotCiteEntry);
-#endif
 
   action = actionCollection()->addAction(QStringLiteral("cite_clipboard"), citeMapper, mapVoid);
   action->setText(i18n("Copy Bibtex to Cli&pboard"));
@@ -707,23 +659,13 @@ void MainWindow::initActions() {
   citeMapper->setMapping(action, Cite::CiteLyxpipe);
 
   m_updateMapper = new QSignalMapper(this);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  void (QSignalMapper::* mappedString)(const QString&) = &QSignalMapper::mapped;
-  connect(m_updateMapper, mappedString,
-          Controller::self(), &Controller::slotUpdateSelectedEntries);
-#else
   connect(m_updateMapper, &QSignalMapper::mappedString,
           Controller::self(), &Controller::slotUpdateSelectedEntries);
-#endif
 
   m_updateEntryMenu = new KActionMenu(i18n("&Update Entry"), this);
   m_updateEntryMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
   m_updateEntryMenu->setIconText(i18nc("Update Entry", "Update"));
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,77,0)
   m_updateEntryMenu->setPopupMode(QToolButton::InstantPopup);
-#else
-  m_updateEntryMenu->setDelayed(false);
-#endif
   actionCollection()->addAction(QStringLiteral("coll_update_entry"), m_updateEntryMenu);
 
   m_updateAll = actionCollection()->addAction(QStringLiteral("update_entry_all"), m_updateMapper, mapVoid);
@@ -788,12 +730,7 @@ void MainWindow::initActions() {
 
   m_entryGrouping = new KSelectAction(i18n("&Group Selection"), this);
   m_entryGrouping->setToolTip(i18n("Change the grouping of the collection"));
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,78,0)
-  void (KSelectAction::* triggeredInt)(int) = &KSelectAction::indexTriggered;
-#else
-  void (KSelectAction::* triggeredInt)(int) = &KSelectAction::triggered;
-#endif
-  connect(m_entryGrouping, triggeredInt, this, &MainWindow::slotChangeGrouping);
+  connect(m_entryGrouping, &KSelectAction::indexTriggered, this, &MainWindow::slotChangeGrouping);
   actionCollection()->addAction(QStringLiteral("change_entry_grouping"), m_entryGrouping);
 
   action = actionCollection()->addAction(QStringLiteral("quick_filter_accel"), this, SLOT(slotFilterLabelActivated()));
@@ -865,13 +802,8 @@ void MainWindow::initView() {
   // using QMainWindow::setCorner does not seem to work
   // https://wiki.qt.io/Technical_FAQ#Is_it_possible_for_either_the_left_or_right_dock_areas_to_have_full_height_of_their_side_rather_than_having_the_bottom_take_the_full_width.3F
   m_dummyWindow = new QMainWindow(this);
-#ifdef USE_KHTML
-  m_entryView->view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
-  m_dummyWindow->setCentralWidget(m_entryView->view());
-#else
   m_entryView->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
   m_dummyWindow->setCentralWidget(m_entryView);
-#endif
   m_dummyWindow->setWindowFlags(Qt::Widget);
   setCentralWidget(m_dummyWindow);
 
@@ -1211,25 +1143,6 @@ bool MainWindow::querySaveModified() {
   if(Data::Document::self()->isModified()) {
     QString str = i18n("The current file has been modified.\n"
                        "Do you want to save it?");
-#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 100, 0)
-    auto want_save = KMessageBox::warningYesNoCancel(this, str, i18n("Unsaved Changes"),
-                                                     KStandardGuiItem::save(), KStandardGuiItem::discard());
-    switch(want_save) {
-      case KMessageBox::Yes:
-        completed = fileSave();
-        break;
-
-      case KMessageBox::No:
-        Data::Document::self()->setModified(false);
-        completed = true;
-        break;
-
-      case KMessageBox::Cancel:
-      default:
-        completed = false;
-        break;
-    }
-#else
     auto want_save = KMessageBox::warningTwoActionsCancel(this, str, i18n("Unsaved Changes"),
                                                           KStandardGuiItem::save(), KStandardGuiItem::discard());
     switch(want_save) {
@@ -1247,7 +1160,6 @@ bool MainWindow::querySaveModified() {
         completed = false;
         break;
     }
-#endif
   }
 
   return completed;
@@ -1461,13 +1373,8 @@ bool MainWindow::fileSave() {
       KGuiItem yes(i18n("Save Images Separately"));
       KGuiItem no(i18n("Save Images in File"));
 
-#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 100, 0)
-      auto res = KMessageBox::warningYesNo(this, msg, QString() /* caption */, yes, no);
-      if(res == KMessageBox::No) {
-#else
       auto res = KMessageBox::warningTwoActions(this, msg, QString() /* caption */, yes, no);
       if(res == KMessageBox::ButtonCode::SecondaryAction) {
-#endif
         Config::setImageLocation(Config::ImagesInAppDir);
       }
       Config::setAskWriteImagesInFile(false);
@@ -2334,11 +2241,7 @@ void MainWindow::slotUpdateToolbarIcons() {
 
 void MainWindow::slotGroupLabelActivated() {
   // need entry grouping combo id
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  for(auto obj : m_entryGrouping->associatedWidgets()) {
-#else
   for(auto obj : m_entryGrouping->associatedObjects()) {
-#endif
     if(auto widget = ::qobject_cast<KToolBar*>(obj)) {
       auto container = m_entryGrouping->requestWidget(widget);
       auto combo = ::qobject_cast<QComboBox*>(container); //krazy:exclude=qclasses
@@ -2408,11 +2311,7 @@ void MainWindow::updateEntrySources() {
   const QString actionListName = QStringLiteral("update_entry_actions");
   unplugActionList(actionListName);
   for(auto action : m_fetchActions) {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    for(auto obj : action->associatedWidgets()) {
-#else
     for(auto obj : action->associatedObjects()) {
-#endif
       if(auto widget = ::qobject_cast<QWidget*>(obj)) {
         widget->removeAction(action);
       }
@@ -2536,11 +2435,7 @@ void MainWindow::slotURLAction(const QUrl& url_) {
     m_entryView->showText(QString());
     return; // done
   }
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  QAction* action = this->action(actionName.toLatin1().constData());
-#else
   QAction* action = this->action(actionName);
-#endif
   if(action) {
     action->activate(QAction::Trigger);
   } else {
@@ -2593,12 +2488,7 @@ void MainWindow::guiFactoryReset() {
   const QString actionListName = QStringLiteral("collection_template_list");
   unplugActionList(actionListName);
   QSignalMapper* collectionTemplateMapper = new QSignalMapper(this);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  void (QSignalMapper::* mappedString)(QString) = &QSignalMapper::mapped;
-  connect(collectionTemplateMapper, mappedString, this, &MainWindow::slotFileNewByTemplate);
-#else
   connect(collectionTemplateMapper, &QSignalMapper::mappedString, this, &MainWindow::slotFileNewByTemplate);
-#endif
 
   void (QAction::* triggeredBool)(bool) = &QAction::triggered;
   void (QSignalMapper::* mapVoid)() = &QSignalMapper::map;

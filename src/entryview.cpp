@@ -54,57 +54,15 @@
 #include <QDesktopServices>
 #include <QMenu>
 
-#ifdef USE_KHTML
-#include <dom/dom_element.h>
-#else
 #include <QWebEnginePage>
 #include <QWebEngineSettings>
 #include <QPrinter>
 #include <QPrinterInfo>
 #include <QPrintDialog>
 #include <QEventLoop>
-#endif
 
 using Tellico::EntryView;
 
-#ifdef USE_KHTML
-using Tellico::EntryViewWidget;
-
-EntryViewWidget::EntryViewWidget(EntryView* part, QWidget* parent)
-    : KHTMLView(part, parent) {}
-
-// for the life of me, I could not figure out how to call the actual
-// KHTMLPartBrowserExtension::copy() slot, so this will have to do
-void EntryViewWidget::copy() {
-  QApplication::clipboard()->setText(part()->selectedText(), QClipboard::Clipboard);
-}
-
-void EntryViewWidget::changeEvent(QEvent* event_) {
-  // this will delete and reread the default colors, assuming they changed
-  if(event_->type() == QEvent::PaletteChange ||
-     event_->type() == QEvent::FontChange ||
-     event_->type() == QEvent::ApplicationFontChange) {
-    static_cast<EntryView*>(part())->resetView();
-  }
-  KHTMLView::changeEvent(event_);
-}
-
-EntryView::EntryView(QWidget* parent_) : KHTMLPart(new EntryViewWidget(this, parent_), parent_),
-    m_handler(nullptr), m_tempFile(nullptr), m_useGradientImages(true), m_checkCommonFile(true) {
-  setJScriptEnabled(false);
-  setJavaEnabled(false);
-  setMetaRefreshEnabled(false);
-  setPluginsEnabled(false);
-  clear(); // needed for initial layout
-
-  view()->setAcceptDrops(true);
-  DropHandler* drophandler = new DropHandler(this);
-  view()->installEventFilter(drophandler);
-
-  connect(browserExtension(), &KParts::BrowserExtension::openUrlRequestDelayed,
-          this, &EntryView::slotOpenURL);
-}
-#else
 using Tellico::EntryViewPage;
 
 EntryViewPage::EntryViewPage(QWidget* parent)
@@ -126,7 +84,7 @@ bool EntryViewPage::acceptNavigationRequest(const QUrl& url_, QWebEnginePage::Na
 
   if(url_.scheme() == QLatin1String("tc")) {
     // handle this internally
-    emit signalTellicoAction(url_);
+    Q_EMIT signalTellicoAction(url_);
     return false;
   }
 
@@ -178,7 +136,6 @@ EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_),
 
   clear(); // needed for initial layout
 }
-#endif
 
 EntryView::~EntryView() {
   delete m_handler;
@@ -191,14 +148,6 @@ void EntryView::clear() {
   m_entry = nullptr;
 
   // just clear the view
-#ifdef USE_KHTML
-  begin();
-  if(!m_textToShow.isEmpty()) {
-    write(m_textToShow);
-  }
-  end();
-  view()->layout(); // I need this because some of the margins and widths may get messed up
-#else
   setUrl(QUrl());
   if(!m_textToShow.isEmpty()) {
     // the welcome page references local images, which won't load when passing HTML directly
@@ -207,7 +156,6 @@ void EntryView::clear() {
     // passing "disable-web-security" to QApplication is another option
     page()->setHtml(m_textToShow, QUrl(QStringLiteral("file://")));
   }
-#endif
 }
 
 void EntryView::showEntries(Tellico::Data::EntryList entries_) {
@@ -296,23 +244,14 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 #endif
 
 //  myDebug() << html;
-#ifdef USE_KHTML
-  begin(QUrl::fromLocalFile(m_xsltFile));
-  write(html);
-  end();
-  view()->layout(); // I need this because some of the margins and widths may get messed up
-#else
+
   // limit is 2 MB after percent encoding, etc., so give some padding
   if(html.size() > 1200000) {
     delete m_tempFile;
     m_tempFile = new QTemporaryFile(QDir::tempPath() + QLatin1String("/tellicoview_XXXXXX") + QLatin1String(".html"));
     m_tempFile->open();
     QTextStream ts(m_tempFile);
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    ts.setCodec("UTF-8");
-#else
     ts.setEncoding(QStringConverter::Utf8);
-#endif
     ts << html;
     // TODO: need to handle relative links
     page()->load(QUrl::fromLocalFile(m_tempFile->fileName()));
@@ -321,18 +260,11 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
     // by simply using a relative path in the xslt file
     page()->setHtml(html, QUrl::fromLocalFile(m_xsltFile));
   }
-#endif
 }
 
 void EntryView::showText(const QString& text_) {
   m_textToShow = text_;
-#ifdef USE_KHTML
-  begin();
-  write(text_);
-  end();
-#else
   clear(); // shows the default text
-#endif
 }
 
 void EntryView::setXSLTFile(const QString& file_) {
@@ -358,11 +290,7 @@ void EntryView::setXSLTFile(const QString& file_) {
         str += QLatin1Char(' ');
         str += i18n("Please check your installation.");
         str += QLatin1String("</qt>");
-#ifdef USE_KHTML
-        KMessageBox::error(view(), str);
-#else
         KMessageBox::error(this, str);
-#endif
         clear();
         return;
       }
@@ -422,7 +350,7 @@ void EntryView::setXSLTFile(const QString& file_) {
 
   // if we don't have to reload the images, then just show the entry and we're done
   if(reloadImages) {
-    // now, have to recreate images and refresh khtml cache
+    // now, have to recreate images and refresh cache
     resetColors();
   } else {
     showEntry(m_entry);
@@ -430,53 +358,15 @@ void EntryView::setXSLTFile(const QString& file_) {
 }
 
 void EntryView::copy() {
-#ifndef USE_KHTML
   pageAction(QWebEnginePage::Copy)->trigger();
-#endif
 }
 
 void EntryView::slotRefresh() {
   setXSLTFile(m_xsltFile);
   showEntry(m_entry);
-#ifdef USE_KHTML
-  view()->repaint();
-#endif
-}
-
-// do some contortions in case the url is relative
-// need to interpret it relative to document URL instead of xslt file
-// the current node under the mouse would be the text node inside
-// the anchor node, so iterate up the parents
-void EntryView::slotOpenURL(const QUrl& url_) {
-#ifdef USE_KHTML
-  if(url_.scheme() == QLatin1String("tc")) {
-    // handle this internally
-    emit signalTellicoAction(url_);
-    return;
-  }
-
-  QUrl u = url_;
-  for(DOM::Node node = nodeUnderMouse(); !node.isNull(); node = node.parentNode()) {
-    if(node.nodeType() == DOM::Node::ELEMENT_NODE && static_cast<DOM::Element>(node).tagName() == "a") {
-      QString href = static_cast<DOM::Element>(node).getAttribute("href").string();
-      if(!href.isEmpty()) {
-        // interpret url relative to document url
-        u = Kernel::self()->URL().resolved(QUrl(href));
-      }
-      break;
-    }
-  }
-  // open the url
-  QDesktopServices::openUrl(u);
-#else
-  Q_UNUSED(url_);
-#endif
 }
 
 void EntryView::changeEvent(QEvent* event_) {
-#ifdef USE_KHTML
-  Q_UNUSED(event_);
-#else
   // this will delete and reread the default colors, assuming they changed
   if(event_->type() == QEvent::PaletteChange ||
      event_->type() == QEvent::FontChange ||
@@ -484,21 +374,13 @@ void EntryView::changeEvent(QEvent* event_) {
     resetView();
   }
   QWebEngineView::changeEvent(event_);
-#endif
 }
 
 void EntryView::slotReloadEntry() {
   // this slot should only be connected in setXSLTFile()
   // must disconnect the signal first, otherwise, get an infinite loop
-#ifdef USE_KHTML
-  void (EntryView::* completed)() = &EntryView::completed;
-  disconnect(this, completed, this, &EntryView::slotReloadEntry);
-  closeUrl(); // this is needed to stop everything, for some reason
-  view()->setUpdatesEnabled(true);
-#else
   disconnect(this, &EntryView::loadFinished, this, &EntryView::slotReloadEntry);
   setUpdatesEnabled(true);
-#endif
 
   if(m_entry) {
     showEntry(m_entry);
@@ -575,27 +457,13 @@ void EntryView::resetColors() {
   stream << s;
   stream.flush();
 
-#ifdef USE_KHTML
-  KParts::OpenUrlArguments args = arguments();
-  args.setReload(true); // tell the cache to reload images
-  setArguments(args);
-
-  view()->setUpdatesEnabled(false);
-  openUrl(QUrl::fromLocalFile(m_tempFile->fileName()));
-  void (EntryView::* completed)() = &EntryView::completed;
-  connect(this, completed, this, &EntryView::slotReloadEntry);
-#else
   // don't flicker
   setUpdatesEnabled(false);
   load(QUrl::fromLocalFile(m_tempFile->fileName()));
   connect(this, &EntryView::loadFinished, this, &EntryView::slotReloadEntry);
-#endif
 }
 
 void EntryView::contextMenuEvent(QContextMenuEvent* event_) {
-#ifdef USE_KHTML
-  Q_UNUSED(event_);
-#else
   QMenu menu(this);
   // can't use the KStandardAction for copy since I don't know what the receiver or trigger target is
   QAction* standardCopy = KStandardAction::copy(nullptr, nullptr, &menu);
@@ -608,20 +476,13 @@ void EntryView::contextMenuEvent(QContextMenuEvent* event_) {
   printAction->setShortcut(QKeySequence());
   menu.addAction(printAction);
   menu.exec(event_->globalPos());
-#endif
 }
 
 void EntryView::slotPrint() {
-#ifndef USE_KHTML
   QPointer<QPrintDialog> dialog = new QPrintDialog(&m_printer, this);
   if(dialog->exec() != QDialog::Accepted) {
     return;
   }
   Tellico::GUI::CursorSaver cs(Qt::WaitCursor);
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  page()->print(&m_printer, [](bool) {});
-#else
   print(&m_printer);
-#endif
-#endif
 }

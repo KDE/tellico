@@ -91,12 +91,7 @@ FilterDialog::FilterDialog(Mode mode_, QWidget* parent_)
   QButtonGroup* bg = new QButtonGroup(m_matchGroup);
   bg->addButton(m_matchAll);
   bg->addButton(m_matchAny);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  void (QButtonGroup::* buttonClicked)(int) = &QButtonGroup::buttonClicked;
-  connect(bg, buttonClicked, this, &FilterDialog::slotFilterChanged);
-#else
   connect(bg, &QButtonGroup::idClicked, this, &FilterDialog::slotFilterChanged);
-#endif
 
   m_ruleLister = new FilterRuleWidgetLister(m_matchGroup);
   connect(m_ruleLister, &KWidgetLister::widgetRemoved, this, &FilterDialog::slotShrink);
@@ -175,7 +170,7 @@ void FilterDialog::slotOk() {
 }
 
 void FilterDialog::slotApply() {
-  emit signalUpdateFilter(currentFilter());
+  Q_EMIT signalUpdateFilter(currentFilter());
 }
 
 void FilterDialog::slotHelp() {

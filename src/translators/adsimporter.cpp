@@ -71,7 +71,7 @@ Tellico::Data::CollPtr ADSImporter::collection() {
   }
 
   m_coll = new Data::BibtexCollection(true);
-  emit signalTotalSteps(this, urls().count() * 100);
+  Q_EMIT signalTotalSteps(this, urls().count() * 100);
 
   if(text().isEmpty()) {
     int count = 0;
@@ -210,7 +210,7 @@ void ADSImporter::readText(const QString& text_, int n) {
     entry->setField(f, value);
 
     if(showProgress && j%stepSize == 0) {
-      emit signalProgress(this, n*100 + 100*j/length);
+      Q_EMIT signalProgress(this, n*100 + 100*j/length);
     }
   }
 

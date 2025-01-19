@@ -151,7 +151,7 @@ void ADSFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void ADSFetcher::slotComplete(KJob*) {
@@ -214,7 +214,7 @@ void ADSFetcher::slotComplete(KJob*) {
                                      + QLatin1Char('/')
                                      + result.value(QLatin1String("year")).toString());
     m_results.insert(r->uid, result.value(QLatin1String("bibcode")).toString());
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
 //    myDebug() << "found" << title;
   }
   m_start = m_results.count();

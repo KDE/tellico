@@ -254,7 +254,7 @@ bool EntryModel::setData(const QModelIndex& index_, const QVariant& value_, int 
     Q_ASSERT(state == NewState || state == ModifiedState);
     m_saveStates.insert(index_.row(), state);
   }
-  emit dataChanged(index_, index_, QVector<int>() << SaveStateRole);
+  Q_EMIT dataChanged(index_, index_, QVector<int>() << SaveStateRole);
   return true;
 }
 
@@ -281,7 +281,7 @@ void EntryModel::clearSaveState() {
       m_saveStates.remove(i.key());
       QModelIndex idx1 = createIndex(i.key(), 0);
       QModelIndex idx2 = createIndex(i.key(), m_fields.count() - 1);
-      emit dataChanged(idx1, idx2, QVector<int>() << SaveStateRole);
+      Q_EMIT dataChanged(idx1, idx2, QVector<int>() << SaveStateRole);
     }
   }
 }
@@ -304,7 +304,7 @@ void EntryModel::modifyEntries(const Tellico::Data::EntryList& entries_) {
   foreach(Data::EntryPtr entry, entries_) {
     QModelIndex index = indexFromEntry(entry);
     if(index.isValid()) {
-      emit dataChanged(index, index);
+      Q_EMIT dataChanged(index, index);
     }
   }
 }
@@ -348,7 +348,7 @@ void EntryModel::setFields(const Tellico::Data::FieldList& fields_) {
 }
 
 void EntryModel::reorderFields(const Tellico::Data::FieldList& fields_) {
-  emit layoutAboutToBeChanged();
+  Q_EMIT layoutAboutToBeChanged();
   // update the persistent model indexes by building list of old index
   // and new if the columns are moved
   QModelIndexList oldPersistentList = persistentIndexList();
@@ -370,7 +370,7 @@ void EntryModel::reorderFields(const Tellico::Data::FieldList& fields_) {
   m_fields = fields_;
 
   changePersistentIndexList(fromList, toList);
-  emit layoutChanged();
+  Q_EMIT layoutChanged();
 }
 
 void EntryModel::addFields(const Tellico::Data::FieldList& fields_) {
@@ -385,7 +385,7 @@ void EntryModel::modifyField(Data::FieldPtr oldField_, Data::FieldPtr newField_)
   for(int i = 0; i < m_fields.count(); ++i) {
     if(m_fields.at(i)->name() == oldField_->name()) {
       m_fields.replace(i, newField_);
-      emit headerDataChanged(Qt::Horizontal, i, i);
+      Q_EMIT headerDataChanged(Qt::Horizontal, i, i);
       break;
     }
   }
@@ -435,7 +435,7 @@ void EntryModel::refreshImage(const QString& id_) {
   for(auto i = m_requestedImages.find(id_); i != m_requestedImages.end() && i.key() == id_; ++i) {
     QModelIndex index = indexFromEntry(i.value());
     if(index.isValid()) {
-      emit dataChanged(index, index);
+      Q_EMIT dataChanged(index, index);
     }
   }
   m_requestedImages.remove(id_);

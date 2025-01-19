@@ -111,7 +111,7 @@ void KinoTeatrFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void KinoTeatrFetcher::slotComplete(KJob*) {
@@ -167,7 +167,7 @@ void KinoTeatrFetcher::slotComplete(KJob*) {
 //      myDebug() << url << title << year;
       FetchResult* r = new FetchResult(this, title, year);
       m_matches.insert(r->uid, url);
-      emit signalResultFound(r);
+      Q_EMIT signalResultFound(r);
     }
   }
 

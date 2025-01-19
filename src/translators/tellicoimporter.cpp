@@ -103,7 +103,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   const int blockSize = qMax(data_.size()/100 + 1, MIN_BLOCK_SIZE);
   int pos = 0;
-  emit signalTotalSteps(this, data_.size());
+  Q_EMIT signalTotalSteps(this, data_.size());
 
   // hack to allow processEvents
   QPointer<TellicoImporter> thisPtr(this);
@@ -128,7 +128,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     }
     pos += blockSize;
     if(thisPtr && showProgress) {
-      emit signalProgress(this, pos);
+      Q_EMIT signalProgress(this, pos);
       qApp->processEvents();
     }
   }

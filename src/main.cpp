@@ -32,7 +32,6 @@
 #include <KAboutData>
 #include <KLocalizedString>
 #include <KCrash>
-#include <kiconthemes_version.h>
 #include <KIconTheme>
 #define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
 #if HAVE_STYLE_MANAGER
@@ -50,22 +49,11 @@ int main(int argc, char* argv[]) {
    * Trigger initialisation of proper icon theme
    * see https://invent.kde.org/frameworks/kiconthemes/-/merge_requests/136
    */
-#if KICONTHEMES_VERSION >= QT_VERSION_CHECK(6, 3, 0)
   KIconTheme::initTheme();
-#endif
 
-#ifndef USE_KHTML
-  QGuiApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
-#endif
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
   if(!qEnvironmentVariableIsSet("QT_SCALE_FACTOR_ROUNDING_POLICY")) {
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::RoundPreferFloor);
   }
-#endif
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-#endif
 
   QApplication app(argc, argv);
 #if HAVE_STYLE_MANAGER

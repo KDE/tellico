@@ -141,7 +141,7 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
   // refresh all dependent fields, in case one references this new one
   foreach(FieldPtr existingField, m_fields) {
     if(existingField->hasFlag(Field::Derived)) {
-      emit signalRefreshField(existingField);
+      Q_EMIT signalRefreshField(existingField);
     }
   }
 
@@ -160,7 +160,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
     Data::FieldPtr f(new Field(*newField_));
     bool success = addField(f);
     if(success) {
-      emit mergeAddedField(CollPtr(this), f);
+      Q_EMIT mergeAddedField(CollPtr(this), f);
     } else {
       myDebug() << "Failed to add field:" << f->name();
     }
@@ -369,7 +369,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   // now to update all entries if the field is a derived value and the template changed
   if(newField_->hasFlag(Field::Derived) &&
      oldField->property(QStringLiteral("template")) != newField_->property(QStringLiteral("template"))) {
-    emit signalRefreshField(newField_);
+    Q_EMIT signalRefreshField(newField_);
   }
 
   return true;
@@ -430,7 +430,7 @@ bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false
   // while removing one, so refresh all of them
   foreach(FieldPtr field, m_fields) {
     if(field->hasFlag(Field::Derived)) {
-      emit signalRefreshField(field);
+      Q_EMIT signalRefreshField(field);
     }
   }
 
@@ -520,7 +520,7 @@ void Collection::removeEntriesFromDicts(const Tellico::Data::EntryList& entries_
     }
   }
   if(!modifiedGroups.isEmpty()) {
-    emit signalGroupsModified(CollPtr(this), modifiedGroups.values());
+    Q_EMIT signalGroupsModified(CollPtr(this), modifiedGroups.values());
   }
 }
 
@@ -696,7 +696,7 @@ void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QStrin
     } // end group loop
   } // end entry loop
   if(!modifiedGroups.isEmpty()) {
-    emit signalGroupsModified(CollPtr(this), modifiedGroups.values());
+    Q_EMIT signalGroupsModified(CollPtr(this), modifiedGroups.values());
   }
 }
 

@@ -28,11 +28,7 @@
 #include <QRegularExpression>
 #include <QTextStream>
 #include <QXmlStreamReader>
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-#include <QTextCodec>
-#else
 #include <QStringDecoder>
-#endif
 
 using Tellico::XMLHandler;
 
@@ -64,19 +60,11 @@ QString XMLHandler::readXMLData(const QByteArray& data_) {
     return QString::fromUtf8(data_);
   }
 
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  QTextCodec* codec = QTextCodec::codecForName(enc.toUtf8());
-  if(!codec) {
-    return QString::fromUtf8(data_);
-  }
-  QString text = codec->toUnicode(data_);
-#else
   QStringDecoder decoder(enc.toUtf8());
   if(!decoder.isValid()) {
     return QString::fromUtf8(data_);
   }
   QString text = decoder.decode(data_);
-#endif
   // since we always process XML files as utf-8, make sure the embedded encoding is set to utf-8
   if(!setUtf8XmlEncoding(text)) {
     myDebug() << "Found non utf-8 encoding but did not change the embedded declaration" << enc;

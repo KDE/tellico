@@ -162,8 +162,8 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
   const bool showProgress = options() & ImportProgress;
   if(showProgress) {
     // use 10 as the amount for reading the ids
-    emit signalTotalSteps(this, 10 + 100);
-    emit signalProgress(this, 10);
+    Q_EMIT signalTotalSteps(this, 10 + 100);
+    Q_EMIT signalProgress(this, 10);
   }
 
   m_coll = new Data::BoardGameCollection(true);
@@ -218,7 +218,7 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
     setStatusMessage(imp.statusMessage());
 
     if(showProgress) {
-      emit signalProgress(this, 10 + 100*maxSize/idList.size());
+      Q_EMIT signalProgress(this, 10 + 100*maxSize/idList.size());
       qApp->processEvents();
     }
   }

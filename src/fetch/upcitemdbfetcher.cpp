@@ -135,7 +135,7 @@ void UPCItemDbFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Fetch::FetchRequest UPCItemDbFetcher::updateRequest(Data::EntryPtr entry_) {
@@ -230,7 +230,7 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
     ++count;
     if(count >= UPCITEMDB_MAX_RETURNS_TOTAL) {
       break;

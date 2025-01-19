@@ -75,10 +75,10 @@ void GroupSortModel::setEntrySortField(const QString& fieldName_) {
   if(!newComp) {
     return;
   }
-  emit layoutAboutToBeChanged(QList<QPersistentModelIndex>(), QAbstractItemModel::VerticalSortHint);
+  Q_EMIT layoutAboutToBeChanged(QList<QPersistentModelIndex>(), QAbstractItemModel::VerticalSortHint);
   delete m_entryComparison;
   m_entryComparison = newComp;
-  emit layoutChanged(QList<QPersistentModelIndex>(), QAbstractItemModel::VerticalSortHint);
+  Q_EMIT layoutChanged(QList<QPersistentModelIndex>(), QAbstractItemModel::VerticalSortHint);
   // emitting layoutChanged does not cause the sorting to be refreshed. I can't figure out why
   // but calling invalidate() does. <shrug>
   invalidate();

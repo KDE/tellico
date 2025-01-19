@@ -99,13 +99,7 @@ void VNDBFetcher::search() {
     m_socket = new QTcpSocket(this);
     QObject::connect(m_socket, &QTcpSocket::readyRead,     this, &VNDBFetcher::slotRead);
     QObject::connect(m_socket, &QTcpSocket::stateChanged,  this, &VNDBFetcher::slotState);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-    // see https://wiki.qt.io/New_Signal_Slot_Syntax#Overload for why this is necessary
-    void (QTcpSocket::* errorSignal)(QAbstractSocket::SocketError) = &QAbstractSocket::error;
-    QObject::connect(m_socket, errorSignal,                this, &VNDBFetcher::slotError);
-#else
     QObject::connect(m_socket, &QTcpSocket::errorOccurred, this, &VNDBFetcher::slotError);
-#endif
   }
   if(!m_isConnected) {
     myLog() << "Connecting to" << VNDB_HOSTNAME << "at port" << VNDB_PORT;
@@ -146,7 +140,7 @@ void VNDBFetcher::stop() {
     return;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Data::EntryPtr VNDBFetcher::fetchEntryHook(uint uid_) {
@@ -319,7 +313,7 @@ void VNDBFetcher::parseVNResults() {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 
 //  m_start = m_entries.count();

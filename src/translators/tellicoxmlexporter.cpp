@@ -329,11 +329,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       if(fIt->type() == Data::Field::Date) {
         // as of Tellico in KF5 (3.0), just forget about the calendar attribute for the moment, always use gregorian
         fieldElem.setAttribute(QStringLiteral("calendar"), QStringLiteral("gregorian"));
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-        QStringList s = fieldValue.split(QLatin1Char('-'), QString::KeepEmptyParts);
-#else
         QStringList s = fieldValue.split(QLatin1Char('-'), Qt::KeepEmptyParts);
-#endif
         if(s.count() > 0 && !s[0].isEmpty()) {
           QDomElement e = dom_.createElement(QStringLiteral("year"));
           fieldElem.appendChild(e);

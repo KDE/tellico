@@ -75,7 +75,7 @@ void Fetcher::startSearch(const FetchRequest& request_) {
     myDebug() << "Bad collection request type for search:" << source() << m_request.collectionType();
     message(i18n("%1 does not allow searching for this collection type.", source()),
             MessageHandler::Warning);
-    emit signalDone(this);
+    Q_EMIT signalDone(this);
     return;
   }
 
@@ -90,7 +90,7 @@ void Fetcher::startUpdate(Tellico::Data::EntryPtr entry_) {
   m_request.setCollectionType(entry_->collection()->type());
   if(m_request.isNull()) {
     myLog() << "Insufficient info from" << source() << "to update" << entry_->title();
-    emit signalDone(this); // always need to emit this if not continuing with the search
+    Q_EMIT signalDone(this); // always need to emit this if not continuing with the search
     return;
   } else {
     myLog() << "Starting update from" << source() << "for" << entry_->title();

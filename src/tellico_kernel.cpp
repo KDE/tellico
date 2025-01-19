@@ -266,15 +266,9 @@ bool Kernel::removeFilter(Tellico::FilterPtr filter_) {
 
   QString str = i18n("Do you really want to delete this filter?");
   QString dontAsk = QStringLiteral("DeleteFilter");
-#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 100, 0)
-  int ret = KMessageBox::questionYesNo(m_widget, str, i18n("Delete Filter?"),
-                                       KStandardGuiItem::del(), KStandardGuiItem::cancel(), dontAsk);
-  if(ret != KMessageBox::Yes) {
-#else
   int ret = KMessageBox::questionTwoActions(m_widget, str, i18n("Delete Filter?"),
                                             KStandardGuiItem::del(), KStandardGuiItem::cancel(), dontAsk);
   if(ret != KMessageBox::ButtonCode::PrimaryAction) {
-#endif
     return false;
   }
 
@@ -343,19 +337,6 @@ int Kernel::askAndMerge(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr
                 + i18n("Please choose which value to keep.")
                 + QLatin1String("</qt>");
 
-#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 100, 0)
-  auto ret = KMessageBox::warningYesNoCancel(Kernel::self()->widget(),
-                                             text,
-                                             i18n("Merge Entries"),
-                                             KGuiItem(i18n("Select value from %1", title1)),
-                                             KGuiItem(i18n("Select value from %1", title2)));
-  switch(ret) {
-    case KMessageBox::Yes:    return Merge::ConflictResolver::KeepFirst; // keep original value
-    case KMessageBox::No:     return Merge::ConflictResolver::KeepSecond; // use newer value
-    case KMessageBox::Cancel:
-    default:                  return Merge::ConflictResolver::CancelMerge;
-  }
-#else
   auto ret = KMessageBox::warningTwoActionsCancel(Kernel::self()->widget(),
                                                   text,
                                                   i18n("Merge Entries"),
@@ -367,6 +348,5 @@ int Kernel::askAndMerge(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr
     case KMessageBox::ButtonCode::Cancel:
     default:                                       return Merge::ConflictResolver::CancelMerge;
   }
-#endif
   return Merge::ConflictResolver::CancelMerge;
 }

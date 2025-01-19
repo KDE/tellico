@@ -95,7 +95,7 @@ bool BorrowerModel::setHeaderData(int section_, Qt::Orientation orientation_,
     return false;
   }
   m_header = value_.toString();
-  emit headerDataChanged(orientation_, section_, section_);
+  Q_EMIT headerDataChanged(orientation_, section_, section_);
   return true;
 }
 
@@ -218,7 +218,7 @@ QModelIndex BorrowerModel::modifyBorrower(Tellico::Data::BorrowerPtr borrower_) 
   }
   endInsertRows();
 
-  emit dataChanged(borrowerIndex, borrowerIndex);
+  Q_EMIT dataChanged(borrowerIndex, borrowerIndex);
   return borrowerIndex;
 }
 

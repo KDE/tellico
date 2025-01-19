@@ -127,7 +127,7 @@ void KinoPoiskFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void KinoPoiskFetcher::slotRedirection(KIO::Job*, const QUrl& toUrl_) {
@@ -167,7 +167,7 @@ void KinoPoiskFetcher::slotComplete(KJob*) {
     // don't pull the data here, just add it to a single response
     auto res = new FetchResult(this, request().value(), QString());
     m_matches.insert(res->uid, m_redirectUrl);
-    emit signalResultFound(res);
+    Q_EMIT signalResultFound(res);
   }
 
   // look for a paragraph, class=",", with an internal /ink to "/level/1/film..."
@@ -188,7 +188,7 @@ void KinoPoiskFetcher::slotComplete(KJob*) {
 //      myDebug() << url << title << year;
       auto res = new FetchResult(this, title, year);
       m_matches.insert(res->uid, url);
-      emit signalResultFound(res);
+      Q_EMIT signalResultFound(res);
     }
   }
 
@@ -684,11 +684,7 @@ KinoPoiskFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const KinoPoiskFe
   m_numCast->setMaximum(99);
   m_numCast->setMinimum(0);
   m_numCast->setValue(KINOPOISK_DEFAULT_CAST_SIZE);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::valueChanged;
-#else
   void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::textChanged;
-#endif
   connect(m_numCast, textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_numCast, row, 1);
   QString w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");

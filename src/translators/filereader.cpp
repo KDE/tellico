@@ -48,11 +48,7 @@ using Tellico::FileReaderMetaData;
 using Tellico::FileReaderFile;
 
 #ifdef HAVE_KFILEMETADATA
-#if KFILEMETADATA_VERSION > QT_VERSION_CHECK(5,240,0)
 KFileMetaData::PropertyMultiMap FileReaderMetaData::properties(const KFileItem& item_) {
-#else
-KFileMetaData::PropertyMap FileReaderMetaData::properties(const KFileItem& item_) {
-#endif
   KFileMetaData::SimpleExtractionResult result(item_.url().toLocalFile(),
                                                item_.mimetype(),
                                                KFileMetaData::ExtractionResult::ExtractMetaData);
@@ -70,13 +66,7 @@ KFileMetaData::PropertyMap FileReaderMetaData::properties(const KFileItem& item_
       ex->extract(&result);
     }
   }
-#if KFILEMETADATA_VERSION >= QT_VERSION_CHECK(5,240,0)
   return result.properties();
-#elif KFILEMETADATA_VERSION >= QT_VERSION_CHECK(5,89,0)
-  return result.properties(KFileMetaData::PropertiesMapType::MultiMap);
-#else
-  return result.properties();
-#endif
 }
 #endif
 

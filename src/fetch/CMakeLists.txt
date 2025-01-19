@@ -80,13 +80,13 @@ target_link_libraries(fetch
     newstuff
     utils
     ${TELLICO_BTPARSE_LIBS}
-    Qt${QT_MAJOR_VERSION}::Network
-    KF${KF_MAJOR_VERSION}::Archive
-    KF${KF_MAJOR_VERSION}::IconThemes
-    KF${KF_MAJOR_VERSION}::JobWidgets
-    KF${KF_MAJOR_VERSION}::KIOWidgets
-    KF${KF_MAJOR_VERSION}::ConfigWidgets
-    KF${KF_MAJOR_VERSION}::KIOGui
+    Qt6::Network
+    KF6::Archive
+    KF6::IconThemes
+    KF6::JobWidgets
+    KF6::KIOWidgets
+    KF6::ConfigWidgets
+    KF6::KIOGui
 )
 
 if(Yaz_FOUND)

@@ -368,7 +368,7 @@ void GroupView::slotFilterGroup() {
   }
 
   if(!filter->isEmpty()) {
-    emit signalUpdateFilter(filter);
+    Q_EMIT signalUpdateFilter(filter);
   }
 }
 

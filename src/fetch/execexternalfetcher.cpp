@@ -64,21 +64,13 @@ QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
   int pos = 0;
   for(int nextPos = str_.indexOf(quotes, pos, &match); nextPos > -1; pos = nextPos+1, nextPos = str_.indexOf(quotes, pos, &match)) {
     // a non-quotes arguments runs from pos to nextPos
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-    args += str_.mid(pos, nextPos-pos).split(spaces, QString::SkipEmptyParts);
-#else
     args += str_.mid(pos, nextPos-pos).split(spaces, Qt::SkipEmptyParts);
-#endif
     // move nextpos marker to end of match
     nextPos += match.capturedLength();
     args += match.captured(2);
   }
   // catch the end stuff
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  args += str_.mid(pos).split(spaces, QString::SkipEmptyParts);
-#else
   args += str_.mid(pos).split(spaces, Qt::SkipEmptyParts);
-#endif
 
   return args;
 }
@@ -209,7 +201,7 @@ void ExecExternalFetcher::stop() {
   m_data.clear();
   m_started = false;
   m_errors.clear();
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void ExecExternalFetcher::slotData() {
@@ -318,7 +310,7 @@ void ExecExternalFetcher::slotProcessExited() {
   foreach(Data::EntryPtr entry, entries) {
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
   stop(); // be sure to call this
 }

@@ -84,7 +84,7 @@ void XMLFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void XMLFetcher::slotComplete(KJob* ) {
@@ -168,7 +168,7 @@ void XMLFetcher::slotComplete(KJob* ) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
     ++count;
   }
 

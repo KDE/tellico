@@ -52,11 +52,7 @@
 
 #include <config.h>
 #ifdef HAVE_POPPLER
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-#include <poppler-qt5.h>
-#else
 #include <poppler-qt6.h>
-#endif
 #endif
 
 namespace {
@@ -239,16 +235,10 @@ Tellico::Data::CollPtr PDFImporter::collection() {
           entry->setField(QStringLiteral("arxiv"), arxiv);
           hasArxiv = true;
         }
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-        delete page;
-#endif
       }
     } else {
       myDebug() << "unable to read PDF info (poppler)";
     }
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    delete doc;
-#endif
 #elif defined HAVE_KFILEMETADATA
     if(!newColl || newColl->entryCount() == 0) {
       myDebug() << "Reading with metadata";

@@ -151,15 +151,11 @@ void RatingWidget::mousePressEvent(QMouseEvent* event_) {
   if(m_currIndex != idx) {
     m_currIndex = idx;
     update();
-    emit signalModified();
+    Q_EMIT signalModified();
   }
 }
 
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-void RatingWidget::enterEvent(QEvent* event_) {
-#else
 void RatingWidget::enterEvent(QEnterEvent* event_) {
-#endif
   Q_UNUSED(event_);
   setUpdatesEnabled(false);
   m_clearButton->show();
@@ -215,6 +211,6 @@ void RatingWidget::clearClicked() {
   if(m_currIndex != -1) {
     m_currIndex = -1;
     update();
-    emit signalModified();
+    Q_EMIT signalModified();
   }
 }

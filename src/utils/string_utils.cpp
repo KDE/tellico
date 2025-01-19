@@ -30,11 +30,7 @@
 #include <KRandom>
 
 #include <QRegularExpression>
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-#include <QTextCodec>
-#else
 #include <QStringConverter>
-#endif
 #include <QVariant>
 #include <QCache>
 #include <QRandomGenerator>
@@ -165,15 +161,9 @@ QString Tellico::minutes(int seconds) {
 }
 
 QString Tellico::fromHtmlData(const QByteArray& data_, const char* codecName) {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  QTextCodec* codec = codecName ? QTextCodec::codecForHtml(data_, QTextCodec::codecForName(codecName))
-                                : QTextCodec::codecForHtml(data_);
-  return codec->toUnicode(data_);
-#else
   QStringDecoder decoder = QStringDecoder::decoderForHtml(data_);
   if(!decoder.isValid()) decoder = QStringDecoder(codecName);
   return decoder.decode(data_);
-#endif
 }
 
 QString Tellico::removeAccents(const QString& value_) {
@@ -239,12 +229,8 @@ QString Tellico::removeControlCodes(const QString& string) {
 }
 
 QByteArray Tellico::localeEncodingName() {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  return QTextCodec::codecForLocale()->name();
-#else
 // Bug 493180: QStringConverter::nameForEncoding(QStringConverter::System) returns "Locale" which is not what we want
 // return UTF-8 instead
   const auto encName = QStringConverter::nameForEncoding(QStringConverter::System);
   return (qstrcmp(encName, "Locale") == 0) ? "UTF-8" : encName;
-#endif
 }

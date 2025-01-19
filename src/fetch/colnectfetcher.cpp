@@ -219,7 +219,7 @@ void ColnectFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Data::EntryPtr ColnectFetcher::fetchEntryHook(uint uid_) {
@@ -386,7 +386,7 @@ void ColnectFetcher::slotComplete(KJob* job_) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
 
     stop();
     return;
@@ -424,7 +424,7 @@ void ColnectFetcher::slotComplete(KJob* job_) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 
   stop();
@@ -1027,5 +1027,5 @@ QString ColnectFetcher::ConfigWidget::preferredName() const {
 }
 
 void ColnectFetcher::ConfigWidget::slotLangChanged() {
-  emit signalName(preferredName());
+  Q_EMIT signalName(preferredName());
 }

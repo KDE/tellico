@@ -88,10 +88,10 @@ void barcodeRecognitionThread::run()
 
     if (!img.isNull()) {
       QImage preview = img.scaled( 320, 240, Qt::KeepAspectRatio );
-      emit gotImage( preview );
+      Q_EMIT gotImage( preview );
       Barcode_EAN13 barcode = recognize( img );
       if (barcode.isValid() && (old != barcode)) {
-        emit recognized( barcode.toString() );
+        Q_EMIT recognized( barcode.toString() );
         old = barcode;
       }
     }

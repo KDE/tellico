@@ -138,7 +138,7 @@ void IBSFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void IBSFetcher::slotComplete(KJob*) {
@@ -195,7 +195,7 @@ void IBSFetcher::slotComplete(KJob*) {
 //      myDebug() << u << title << year;
       FetchResult* r = new FetchResult(this, title, year);
       m_matches.insert(r->uid, u);
-      emit signalResultFound(r);
+      Q_EMIT signalResultFound(r);
     }
   }
 

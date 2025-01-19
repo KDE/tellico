@@ -145,7 +145,7 @@ void DateWidget::slotDateChanged() {
     QDate d(y, m, day);
     setDate(d);
   }
-  emit signalModified();
+  Q_EMIT signalModified();
 }
 
 QDate DateWidget::date() const {
@@ -216,7 +216,7 @@ void DateWidget::setDate(const QDate& date_) {
   m_yearSpin->blockSignals(false);
 
   if(oldDate != date_) {
-    emit signalModified();
+    Q_EMIT signalModified();
   }
 }
 

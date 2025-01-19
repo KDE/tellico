@@ -11,5 +11,5 @@ set(rtf2html_STAT_SRCS
 add_library(rtf2html-tellico STATIC ${rtf2html_STAT_SRCS})
 
 target_link_libraries(rtf2html-tellico
-    Qt${QT_MAJOR_VERSION}::Core
+    Qt6::Core
 )

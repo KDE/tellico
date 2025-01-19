@@ -157,7 +157,7 @@ void ItunesFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Fetch::FetchRequest ItunesFetcher::updateRequest(Data::EntryPtr entry_) {
@@ -261,7 +261,7 @@ void ItunesFetcher::slotComplete(KJob* job_) {
 
   // don't emit result until after adding tracks
   for(auto fetchResult : fetchResults) {
-    emit signalResultFound(fetchResult);
+    Q_EMIT signalResultFound(fetchResult);
   }
   stop();
 }

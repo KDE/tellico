@@ -139,7 +139,7 @@ void OMDBFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Data::EntryPtr OMDBFetcher::fetchEntryHook(uint uid_) {
@@ -307,7 +307,7 @@ void OMDBFetcher::slotComplete(KJob* job_) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
     ++count;
     if(count >= OMDB_MAX_RETURNS_TOTAL) {
       break;

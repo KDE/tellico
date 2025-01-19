@@ -69,26 +69,24 @@ target_link_libraries(translators
 )
 
 target_link_libraries(translators
-    KF${KF_MAJOR_VERSION}::Archive
-    KF${KF_MAJOR_VERSION}::JobWidgets
-    KF${KF_MAJOR_VERSION}::Solid
+    KF6::Archive
+    KF6::JobWidgets
+    KF6::Solid
     ${LIBXML2_LIBRARIES}
     ${LIBXSLT_LIBRARIES}
     ${LIBXSLT_EXSLT_LIBRARIES}
 )
 
-if(${KCDDB_TARGET_NAME}_FOUND)
-    target_link_libraries(translators ${KCDDB_TARGET_NAME})
-elseif(Libkcddb_FOUND)
-    target_link_libraries(translators KDE::Libkcddb::kcddb)
+if(KCddb6_FOUND)
+    target_link_libraries(translators KCddb6)
 endif()
 
-if(Poppler_Qt${QT_MAJOR_VERSION}_FOUND)
-    target_link_libraries(translators Poppler::Qt${QT_MAJOR_VERSION})
+if(Poppler_Qt6_FOUND)
+    target_link_libraries(translators Poppler::Qt6)
 endif()
 
-if(KF${KF_MAJOR_VERSION}FileMetaData_FOUND)
-    target_link_libraries(translators KF${KF_MAJOR_VERSION}::FileMetaData)
+if(KF6FileMetaData_FOUND)
+    target_link_libraries(translators KF6::FileMetaData)
 endif()
 
 if(Exempi_FOUND)

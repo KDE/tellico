@@ -186,7 +186,7 @@ void MobyGamesFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
@@ -483,7 +483,7 @@ void MobyGamesFetcher::slotComplete(KJob* job_) {
     foreach(const Data::EntryPtr& entry, entries) {
       FetchResult* r = new FetchResult(this, entry);
       m_entries.insert(r->uid, entry);
-      emit signalResultFound(r);
+      Q_EMIT signalResultFound(r);
     }
   }
 

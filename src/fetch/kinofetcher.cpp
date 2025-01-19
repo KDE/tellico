@@ -111,7 +111,7 @@ void KinoFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void KinoFetcher::slotComplete(KJob*) {
@@ -179,7 +179,7 @@ void KinoFetcher::slotComplete(KJob*) {
     m_matches.insert(r->uid, url);
     m_entries.insert(r->uid, entry);
     // don't emit signal until after putting url in matches hash
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 
   stop();

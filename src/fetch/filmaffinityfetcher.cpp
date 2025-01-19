@@ -175,7 +175,7 @@ void FilmAffinityFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void FilmAffinityFetcher::slotComplete(KJob*) {
@@ -233,7 +233,7 @@ void FilmAffinityFetcher::slotComplete(KJob*) {
 //      myDebug() << url << title << year;
       FetchResult* r = new FetchResult(this, title, year);
       m_matches.insert(r->uid, url);
-      emit signalResultFound(r);
+      Q_EMIT signalResultFound(r);
     }
   }
 
@@ -477,11 +477,7 @@ FilmAffinityFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const FilmAffi
   m_numCast->setMaximum(99);
   m_numCast->setMinimum(0);
   m_numCast->setValue(FILMAFFINITY_DEFAULT_CAST_SIZE);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::valueChanged;
-#else
   void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::textChanged;
-#endif
   connect(m_numCast, textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_numCast, row, 1);
   QString w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");

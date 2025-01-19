@@ -165,7 +165,7 @@ Tellico::Fetch::KeyMap Manager::keyMap(const QString& source_) {
 
 void Manager::startSearch(const QString& source_, Tellico::Fetch::FetchKey key_, const QString& value_, Tellico::Data::Collection::Type collType_) {
   if(value_.isEmpty()) {
-    emit signalDone();
+    Q_EMIT signalDone();
     return;
   }
 
@@ -193,7 +193,7 @@ void Manager::startSearch(const QString& source_, Tellico::Fetch::FetchKey key_,
 void Manager::continueSearch() {
   if(m_currentFetcherIndex < 0 || m_currentFetcherIndex >= static_cast<int>(m_fetchers.count())) {
     myDebug() << "can't continue!";
-    emit signalDone();
+    Q_EMIT signalDone();
     return;
   }
   Fetcher::Ptr fetcher = m_fetchers[m_currentFetcherIndex];
@@ -206,7 +206,7 @@ void Manager::continueSearch() {
     myLog() << "Continuing search - source:" << fetcher->source();
     fetcher->continueSearch();
   } else {
-    emit signalDone();
+    Q_EMIT signalDone();
   }
 }
 
@@ -244,7 +244,7 @@ void Manager::slotFetcherDone(Tellico::Fetch::Fetcher* fetcher_) {
   fetcher_->saveConfig();
   --m_count;
   if(m_count <= 0) {
-    emit signalDone();
+    Q_EMIT signalDone();
   }
 }
 
@@ -426,7 +426,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::createUpdateFetcher(int collType_, const Q
 }
 
 void Manager::updateStatus(const QString& message_) {
-  emit signalStatus(message_);
+  Q_EMIT signalStatus(message_);
 }
 
 Tellico::Fetch::NameTypeHash Manager::nameTypeHash() {

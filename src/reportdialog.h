@@ -28,11 +28,7 @@
 #include <QDialog>
 
 class QStackedWidget;
-#ifdef USE_KHTML
-class KHTMLPart;
-#else
 class QWebEngineView;
-#endif
 class QTemporaryFile;
 
 namespace Tellico {
@@ -77,11 +73,7 @@ private:
   void showText(const QString& text, const QUrl& url);
 
   QStackedWidget* m_reportView;
-#ifdef USE_KHTML
-  KHTMLPart* m_HTMLPart;
-#else
   QWebEngineView* m_webView;
-#endif
   GUI::ComboBox* m_templateCombo;
   Export::HTMLExporter* m_exporter;
   QString m_xsltFile;

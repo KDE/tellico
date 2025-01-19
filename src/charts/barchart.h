@@ -26,9 +26,6 @@
 #define TELLICO_BARCHART_H
 
 #include <QChart>
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-using QtCharts::QChart;
-#endif
 
 namespace Tellico {
 

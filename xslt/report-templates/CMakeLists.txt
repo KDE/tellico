@@ -2,7 +2,6 @@
 
 set(REPORT_FILES
     Column_View.xsl
-    Group_Summary.xsl
     Group_View.xsl
     Image_Grid.xsl
     Image_List.xsl

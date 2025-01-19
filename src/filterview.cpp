@@ -153,7 +153,7 @@ void FilterView::selectionChanged(const QItemSelection& selected_, const QItemSe
   }
   // emit the signal with a null filter if there is nothing selected, also clearing any active filter as well
   if(filter || selectionModel()->selectedIndexes().isEmpty()) {
-    emit signalUpdateFilter(filter);
+    Q_EMIT signalUpdateFilter(filter);
   }
 }
 

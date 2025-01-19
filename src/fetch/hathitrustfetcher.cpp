@@ -117,7 +117,7 @@ void HathiTrustFetcher::stop() {
     m_job->kill();
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 bool HathiTrustFetcher::initMARC21Handler() {
@@ -277,7 +277,7 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
     foreach(Data::EntryPtr entry, coll->entries()) {
       FetchResult* r = new FetchResult(this, entry);
       m_entries.insert(r->uid, entry);
-      emit signalResultFound(r);
+      Q_EMIT signalResultFound(r);
     }
   }
 

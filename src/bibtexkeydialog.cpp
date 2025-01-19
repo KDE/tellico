@@ -128,6 +128,6 @@ void BibtexKeyDialog::slotFilterDuplicates() {
   }
 
   if(!filter->isEmpty()) {
-    emit signalUpdateFilter(filter);
+    Q_EMIT signalUpdateFilter(filter);
   }
 }

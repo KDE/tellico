@@ -175,7 +175,7 @@ void TheMovieDBFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
@@ -368,7 +368,7 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
     ++count;
     if(count >= THEMOVIEDB_MAX_RETURNS_TOTAL) {
       break;
@@ -611,11 +611,7 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   m_numCast->setMaximum(99);
   m_numCast->setMinimum(0);
   m_numCast->setValue(THEMOVIEDB_DEFAULT_CAST_SIZE);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::valueChanged;
-#else
   void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::textChanged;
-#endif
   connect(m_numCast, textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_numCast, row, 1);
   w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
@@ -691,5 +687,5 @@ QString TheMovieDBFetcher::ConfigWidget::preferredName() const {
 }
 
 void TheMovieDBFetcher::ConfigWidget::slotLangChanged() {
-  emit signalName(preferredName());
+  Q_EMIT signalName(preferredName());
 }

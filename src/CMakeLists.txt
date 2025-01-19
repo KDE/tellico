@@ -12,7 +12,7 @@ add_subdirectory(models)
 add_subdirectory(utils)
 add_subdirectory(3rdparty)
 
-if(Qt${QT_MAJOR_VERSION}Charts_FOUND)
+if(Qt6Charts_FOUND)
     add_subdirectory(charts)
 endif()
 
@@ -110,49 +110,37 @@ target_link_libraries(tellico
 )
 
 target_link_libraries(tellico
-    Qt${QT_MAJOR_VERSION}::Core
-    Qt${QT_MAJOR_VERSION}::Widgets
-    Qt${QT_MAJOR_VERSION}::DBus
-    Qt${QT_MAJOR_VERSION}::PrintSupport
-    KF${KF_MAJOR_VERSION}::Crash
-    KF${KF_MAJOR_VERSION}::KIOCore
-    KF${KF_MAJOR_VERSION}::KIOFileWidgets
+    Qt6::Core
+    Qt6::Widgets
+    Qt6::DBus
+    Qt6::PrintSupport
+    Qt6::WebEngineWidgets
+    KF6::Crash
+    KF6::KIOCore
+    KF6::KIOFileWidgets
     ${LIBXML2_LIBRARIES}
     ${LIBXSLT_LIBRARIES}
     ${LIBXSLT_EXSLT_LIBRARIES}
 )
 
-if(Qt${QT_MAJOR_VERSION}Charts_FOUND)
+if(Qt6Charts_FOUND)
     target_link_libraries(tellico charts)
 endif()
 
-if(USE_KHTML)
-    target_link_libraries(tellico KF${KF_MAJOR_VERSION}::KHtml)
-    add_definitions(-DUSE_KHTML=${USE_KHTML})
-else()
-    target_link_libraries(tellico Qt${QT_MAJOR_VERSION}::WebEngineWidgets)
-endif()
-
-if(KF${KF_MAJOR_VERSION}NewStuff_FOUND)
-    if(KF${KF_MAJOR_VERSION}_VERSION VERSION_GREATER_EQUAL "5.91.0")
-    target_link_libraries(tellico KF${KF_MAJOR_VERSION}::NewStuffWidgets)
-    else()
-    target_link_libraries(tellico KF${KF_MAJOR_VERSION}::NewStuff)
-    endif()
+if(KF6NewStuff_FOUND)
+    target_link_libraries(tellico KF6::NewStuffWidgets)
 endif()
 
 if(KDEPIMLIBS_FOUND)
     target_link_libraries(tellico
-        KF${KF_MAJOR_VERSION}::Contacts
+        KF6::Contacts
         ${KDEPIMLIBS_KCAL_LIBS}
-        KF${KF_MAJOR_VERSION}::AkonadiContact
+        KF6::AkonadiContact
     )
 endif()
 
-if(${KCDDB_TARGET_NAME}_FOUND)
-    target_link_libraries(tellico ${KCDDB_TARGET_NAME})
-elseif()
-    target_link_libraries(tellico KDE::Libkcddb::kcddb)
+if(KCddb6_FOUND)
+    target_link_libraries(tellico KCddb6)
 endif()
 
 if(Exempi_FOUND)
@@ -175,8 +163,8 @@ if(ENABLE_WEBCAM)
     target_link_libraries(tellico barcode ${LIBV4L_LIBRARIES})
 endif()
 
-if(${KSANE_TARGET_NAME}_FOUND)
-    target_link_libraries(tellico ${KSANE_TARGET_NAME})
+if(KSaneWidgets6_FOUND)
+    target_link_libraries(tellico KSaneWidgets6)
 endif()
 
 ########### install files ###############

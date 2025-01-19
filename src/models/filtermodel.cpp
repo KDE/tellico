@@ -108,7 +108,7 @@ bool FilterModel::setHeaderData(int section_, Qt::Orientation orientation_,
     return false;
   }
   m_header = value_.toString();
-  emit headerDataChanged(orientation_, section_, section_);
+  Q_EMIT headerDataChanged(orientation_, section_, section_);
   return true;
 }
 
@@ -273,7 +273,7 @@ void FilterModel::invalidate(const QModelIndex& index_) {
   }
   endInsertRows();
 
-  emit dataChanged(index_, index_);
+  Q_EMIT dataChanged(index_, index_);
   m_beingInvalidated = false;
 }
 

@@ -613,11 +613,7 @@ int Iso6937Converter::getCombiningCharInt(uint c) {
     return 0x017E; // LATIN SMALL LETTER Z WITH CARON
 
   default:
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-    myDebug() << "no match for" << hex << c;
-#else
     myDebug() << "no match for" << Qt::hex << c;
-#endif
     return 0;
   }
 }

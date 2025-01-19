@@ -300,7 +300,7 @@ void Z3950Fetcher::stop() {
     m_conn->abort();
     m_conn->wait(1000);
   }
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 bool Z3950Fetcher::initMARC21Handler() {
@@ -488,7 +488,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
   foreach(Data::EntryPtr entry, entries) {
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 }
 
@@ -782,11 +782,11 @@ void Z3950Fetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 void Z3950Fetcher::ConfigWidget::slotTogglePreset(bool on) {
   m_serverCombo->setEnabled(on);
   if(on) {
-    emit signalName(m_serverCombo->currentText());
+    Q_EMIT signalName(m_serverCombo->currentText());
   }
   m_hostEdit->setEnabled(!on);
   if(!on && !m_hostEdit->text().isEmpty()) {
-    emit signalName(m_hostEdit->text());
+    Q_EMIT signalName(m_hostEdit->text());
   }
   m_portSpinBox->setEnabled(!on);
   m_databaseEdit->setEnabled(!on);
@@ -796,12 +796,12 @@ void Z3950Fetcher::ConfigWidget::slotTogglePreset(bool on) {
   m_charSetCombo2->setEnabled(!on);
   m_syntaxCombo->setEnabled(!on);
   if(on) {
-    emit signalName(m_serverCombo->currentText());
+    Q_EMIT signalName(m_serverCombo->currentText());
   }
 }
 
 void Z3950Fetcher::ConfigWidget::slotPresetChanged() {
-  emit signalName(m_serverCombo->currentText());
+  Q_EMIT signalName(m_serverCombo->currentText());
 }
 
 void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {

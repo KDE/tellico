@@ -1218,11 +1218,7 @@ int Iso5426Converter::getCombiningCharInt(uint c) {
     return 0x1EF1; // SMALL LETTER U WITH HORN AND DOT BELOW
 
   default:
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-    myDebug() << "no match for" << hex << c;
-#else
     myDebug() << "no match for" << Qt::hex << c;
-#endif
     return 0;
   }
 }

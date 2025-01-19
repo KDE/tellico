@@ -123,17 +123,9 @@ QWidget* XSLTImporter::widget(QWidget* parent_) {
   m_URLRequester->setWhatsThis(i18n("Choose the XSLT file used to transform the data."));
   label->setBuddy(m_URLRequester);
 
-#if KIO_VERSION < QT_VERSION_CHECK(5, 108, 0)
-  // these are in the old KDE4 filter format, not the Qt5 format
-  QString filter = QLatin1String("*.xsl|") + i18n("XSL Files")
-                 + QLatin1Char('\n')
-                 + QLatin1String("*|") + i18n("All Files");
-  m_URLRequester->setFilter(filter);
-#else
   const QStringList filters = {i18n("XSL Files") + QLatin1String(" (*.xsl)"),
                                i18n("All Files") + QLatin1String(" (*)")};
   m_URLRequester->setNameFilters(filters);
-#endif
 
   hlay->addWidget(label);
   hlay->addWidget(m_URLRequester);

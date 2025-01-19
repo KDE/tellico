@@ -205,7 +205,7 @@ void ISBNdbFetcher::stop() {
   }
   m_jobs.clear();
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void ISBNdbFetcher::slotComplete(KJob* job_) {
@@ -267,7 +267,7 @@ void ISBNdbFetcher::slotComplete(KJob* job_) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
     ++count;
     ++m_numResults;
     if(count >= m_limit) {

@@ -222,12 +222,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   foreach(Fetch::Fetcher::Ptr fetcher, sources) {
     m_sourceCombo->addItem(Fetch::Manager::self()->fetcherIcon(fetcher.data()), fetcher->source());
   }
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  void (QComboBox::* activatedString)(const QString&) = &QComboBox::activated;
-  connect(m_sourceCombo, activatedString, this, &FetchDialog::slotSourceChanged);
-#else
   connect(m_sourceCombo, &QComboBox::textActivated, this, &FetchDialog::slotSourceChanged);
-#endif
   m_sourceCombo->setWhatsThis(i18n("Select the database to search"));
 
   // for whatever reason, the dialog window could get shrunk and truncate the text
@@ -267,11 +262,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   // set the xslt file AFTER setting the gradient image option
   m_entryView->setXSLTFile(QStringLiteral("Compact.xsl"));
   m_entryView->addXSLTStringParam("skip-fields", "id,mdate,cdate");
-  m_entryView->
-#ifdef USE_KHTML
-               view()->
-#endif
-               setWhatsThis(i18n("An entry may be shown here before adding it to the "
+  m_entryView->setWhatsThis(i18n("An entry may be shown here before adding it to the "
                                  "current collection by selecting it in the list above"));
 
   QWidget* box3 = new QWidget(mainWidget);

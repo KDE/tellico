@@ -193,12 +193,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_typeCombo->addItems(Data::Field::typeTitles());
   void (QComboBox::* activatedInt)(int) = &QComboBox::activated;
   connect(m_typeCombo, activatedInt, this, &CollectionFieldsDialog::slotModified);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  void (QComboBox::* activatedString)(const QString&) = &QComboBox::activated;
-  connect(m_typeCombo, activatedString, this, &CollectionFieldsDialog::slotTypeChanged);
-#else
   connect(m_typeCombo, &QComboBox::textActivated, this, &CollectionFieldsDialog::slotTypeChanged);
-#endif
 
   label = new QLabel(i18n("Cate&gory:"), grid);
   layout->addWidget(label, ++row, 0);
@@ -400,7 +395,7 @@ void CollectionFieldsDialog::slotApply() {
 void CollectionFieldsDialog::applyChanges() {
   // start a command group, "Modify" is a generic term here since the commands could be add, modify, or delete
   if(m_notifyMode == NotifyKernel) {
-    emit beginCommandGroup(i18n("Modify Fields"));
+    Q_EMIT beginCommandGroup(i18n("Modify Fields"));
   }
 
   foreach(Data::FieldPtr field, m_copiedFields) {
@@ -432,7 +427,7 @@ void CollectionFieldsDialog::applyChanges() {
       }
     }
     if(m_notifyMode == NotifyKernel) {
-      emit modifyField(field);
+      Q_EMIT modifyField(field);
     } else {
       m_coll->modifyField(field);
     }
@@ -440,7 +435,7 @@ void CollectionFieldsDialog::applyChanges() {
 
   foreach(Data::FieldPtr field, m_newFields) {
     if(m_notifyMode == NotifyKernel) {
-      emit addField(field);
+      Q_EMIT addField(field);
     } else {
       m_coll->addField(field);
     }
@@ -471,7 +466,7 @@ void CollectionFieldsDialog::applyChanges() {
 
   if(fields.count() > 0) {
     if(m_notifyMode == NotifyKernel) {
-      emit reorderFields(fields);
+      Q_EMIT reorderFields(fields);
     } else {
       m_coll->reorderFields(fields);
     }
@@ -479,7 +474,7 @@ void CollectionFieldsDialog::applyChanges() {
 
   // commit command group
   if(m_notifyMode == NotifyKernel) {
-    emit endCommandGroup();
+    Q_EMIT endCommandGroup();
   }
 
   // now clear copied fields
@@ -549,11 +544,11 @@ void CollectionFieldsDialog::slotDelete() {
     m_newFields.removeAll(m_currentField);
   } else {
     if(m_notifyMode == NotifyKernel) {
-      emit removeField(m_currentField);
+      Q_EMIT removeField(m_currentField);
     } else {
       m_coll->removeField(m_currentField);
     }
-    emit signalCollectionModified();
+    Q_EMIT signalCollectionModified();
     m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
   }
   int currentRow = m_fieldsWidget->currentRow();
@@ -692,11 +687,7 @@ void CollectionFieldsDialog::updateField() {
 
   if(field->type() == Data::Field::Choice) {
     static const QRegularExpression rx(QLatin1String("\\s*;\\s*"));
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-    field->setAllowed(m_allowEdit->text().split(rx, QString::SkipEmptyParts));
-#else
     field->setAllowed(m_allowEdit->text().split(rx, Qt::SkipEmptyParts));
-#endif
     field->setProperty(QStringLiteral("minimum"), QString());
     field->setProperty(QStringLiteral("maximum"), QString());
   } else if(field->type() == Data::Field::Rating) {

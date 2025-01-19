@@ -55,9 +55,9 @@ QVariant CheckableItemModel::data(const QModelIndex& index_, int role_) const {
 bool CheckableItemModel::setData(const QModelIndex& index_, const QVariant& value_, int role_) {
   const bool ok = QStandardItemModel::setData(index_, value_, role_);
   if(ok && role_ == Qt::CheckStateRole) {
-    emit itemCheckStateChanged(index_);
+    Q_EMIT itemCheckStateChanged(index_);
   }
-  emit dataChanged(index_, index_);
+  Q_EMIT dataChanged(index_, index_);
   return ok;
 }
 
@@ -234,7 +234,7 @@ void CheckableComboBox::resizeEvent(QResizeEvent* ev_) {
 void CheckableComboBox::updateCheckedItems() {
   const QStringList items = checkedItems();
   updateDisplayText();
-  emit checkedItemsChanged(items);
+  Q_EMIT checkedItemsChanged(items);
 }
 
 void CheckableComboBox::updateDisplayText() {

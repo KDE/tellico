@@ -86,7 +86,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   const uint stepSize = qMax(s_stepSize, numFiles/100);
   const bool showProgress = options() & ImportProgress;
 
-  emit signalTotalSteps(this, numFiles);
+  Q_EMIT signalTotalSteps(this, numFiles);
 
   QStringList covers;
   covers << QStringLiteral(".cover")
@@ -97,11 +97,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   static const QRegularExpression spaces(QLatin1String("^ +"));
 
   QTextStream ts;
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  ts.setCodec("UTF-8");
-#else
   ts.setEncoding(QStringConverter::Utf8);
-#endif
   uint j = 0;
   for(QStringList::ConstIterator it = files.begin(); !m_cancelled && it != files.end(); ++it, ++j) {
     QFile file(dataDir.absoluteFilePath(*it));
@@ -217,7 +213,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
     m_coll->addEntries(entry);
 
     if(showProgress && j%stepSize == 0) {
-      emit signalProgress(this, j);
+      Q_EMIT signalProgress(this, j);
       qApp->processEvents();
     }
   }

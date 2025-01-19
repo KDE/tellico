@@ -141,7 +141,7 @@ void IGDBFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Data::EntryPtr IGDBFetcher::fetchEntryHook(uint uid_) {
@@ -246,14 +246,14 @@ void IGDBFetcher::slotComplete(KJob* job_) {
       entry->setField(QStringLiteral("platform"), platform);
       FetchResult* r = new FetchResult(this, entry);
       m_entries.insert(r->uid, entry);
-      emit signalResultFound(r);
+      Q_EMIT signalResultFound(r);
     }
 
     // also allow case of no platform
     if(platforms.isEmpty()) {
       FetchResult* r = new FetchResult(this, baseEntry);
       m_entries.insert(r->uid, baseEntry);
-      emit signalResultFound(r);
+      Q_EMIT signalResultFound(r);
     }
   }
 
@@ -445,11 +445,7 @@ void IGDBFetcher::updateData(IgdbDataType dataType_, const QByteArray& jsonData_
     case Company:
       // company list is bigger than request size, so rather than downloading all names
       // have to do it in chunks and then merge
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-      m_companyHash.unite(dataHash);
-#else
       m_companyHash.insert(dataHash);
-#endif
       break;
   }
 }

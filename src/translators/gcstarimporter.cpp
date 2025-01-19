@@ -62,7 +62,7 @@ Tellico::Data::CollPtr GCstarImporter::collection() {
     return m_coll;
   }
 
-  emit signalTotalSteps(this, 100);
+  Q_EMIT signalTotalSteps(this, 100);
 
   QString str = text();
   QTextStream t(&str);
@@ -106,7 +106,7 @@ void GCstarImporter::readGCfilms(const QString& text_) {
   const uint stepSize = qMax(s_stepSize, length/100);
   const bool showProgress = options() & ImportProgress;
 
-  emit signalTotalSteps(this, length);
+  Q_EMIT signalTotalSteps(this, length);
 
   uint j = 0;
   for(QString line = t.readLine(); !m_cancelled && !line.isNull(); line = t.readLine(), j += line.length()) {
@@ -229,7 +229,7 @@ void GCstarImporter::readGCfilms(const QString& text_) {
     m_coll->addEntries(entry);
 
     if(showProgress && j%stepSize == 0) {
-      emit signalProgress(this, j);
+      Q_EMIT signalProgress(this, j);
     }
   }
 
@@ -270,11 +270,7 @@ void GCstarImporter::readGCstar(const QString& text_) {
 
 inline
 QString GCstarImporter::splitJoin(const QRegularExpression& rx, const QString& s) {
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  return s.split(rx, QString::SkipEmptyParts).join(FieldFormat::delimiterString());
-#else
   return s.split(rx, Qt::SkipEmptyParts).join(FieldFormat::delimiterString());
-#endif
 }
 
 void GCstarImporter::slotCancel() {

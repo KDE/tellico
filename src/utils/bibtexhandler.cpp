@@ -113,11 +113,7 @@ QString BibtexHandler::bibtexKey(const QString& author_, const QString& title_, 
       key += author_.section(QLatin1Char(','), 0, 0).toLower() + QLatin1Char('-');
     }
   }
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  QStringList words = title_.split(QLatin1Char(' '), QString::SkipEmptyParts);
-#else
   QStringList words = title_.split(QLatin1Char(' '), Qt::SkipEmptyParts);
-#endif
   foreach(const QString& word, words) {
     key += word.at(0).toLower();
   }
@@ -214,11 +210,7 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
   QStringList list;
 
 // first, split the text
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  const QStringList tokens = text.split(QLatin1Char('#'), QString::KeepEmptyParts);
-#else
   const QStringList tokens = text.split(QLatin1Char('#'), Qt::KeepEmptyParts);
-#endif
   foreach(const QString& token, tokens) {
     // check to see if token is a macro
     if(macros_.indexOf(token.trimmed()) == -1) {

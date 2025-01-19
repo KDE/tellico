@@ -122,7 +122,7 @@ void GamingHistoryFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void GamingHistoryFetcher::slotComplete(KJob*) {
@@ -199,7 +199,7 @@ void GamingHistoryFetcher::slotComplete(KJob*) {
     }
     m_matches.insert(r->uid, url);
     // don't emit signal until after putting url in matches hash
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 
   if(m_matches.isEmpty()) {
@@ -217,7 +217,7 @@ void GamingHistoryFetcher::slotComplete(KJob*) {
 
         FetchResult* r = new FetchResult(this, entry);
         m_entries.insert(r->uid, entry);
-        emit signalResultFound(r);
+        Q_EMIT signalResultFound(r);
       }
     } else {
       myDebug() << "no results";

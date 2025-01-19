@@ -174,9 +174,9 @@ void MultiFetcher::slotDone() {
   foreach(Data::EntryPtr entry, m_entries) {
     FetchResult* r = new FetchResult(this, entry);
     m_entryHash.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Data::EntryPtr MultiFetcher::fetchEntryHook(uint uid_) {

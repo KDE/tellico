@@ -96,17 +96,9 @@ QWidget* XSLTExporter::widget(QWidget* parent_) {
 
   l->addWidget(gbox);
 
-#if KIO_VERSION < QT_VERSION_CHECK(5, 108, 0)
-  // these are in the old KDE4 filter format, not the Qt5 format
-  QString filter = QLatin1String("*.xsl|") + i18n("XSL Files")
-                 + QLatin1Char('\n')
-                 + QLatin1String("*|") + i18n("All Files");
-  m_URLRequester->setFilter(filter);
-#else
   const QStringList filters = {i18n("XSL Files") + QLatin1String(" (*.xsl)"),
                                i18n("All Files") + QLatin1String(" (*)")};
   m_URLRequester->setNameFilters(filters);
-#endif
   m_URLRequester->setMode(KFile::File | KFile::ExistingOnly);
   if(!m_xsltFile.isEmpty()) {
     m_URLRequester->setUrl(m_xsltFile);

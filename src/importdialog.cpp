@@ -127,13 +127,8 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
     topLayout->addWidget(w, 0);
   }
 
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  connect(m_buttonGroup, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
-          m_importer, &Tellico::Import::Importer::slotActionChanged);
-#else
   connect(m_buttonGroup, &QButtonGroup::idClicked,
           m_importer, &Tellico::Import::Importer::slotActionChanged);
-#endif
 
   topLayout->addStretch();
 

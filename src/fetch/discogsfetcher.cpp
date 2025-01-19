@@ -164,7 +164,7 @@ void DiscogsFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
@@ -365,7 +365,7 @@ void DiscogsFetcher::slotComplete(KJob*) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
     ++count;
   }
 

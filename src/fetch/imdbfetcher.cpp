@@ -155,7 +155,7 @@ void IMDBFetcher::stop() {
 
   m_started = false;
 
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void IMDBFetcher::slotComplete(KJob*) {
@@ -190,7 +190,7 @@ void IMDBFetcher::slotComplete(KJob*) {
     if(entry) {
       FetchResult* r = new FetchResult(this, entry);
       m_entries.insert(r->uid, entry);
-      emit signalResultFound(r);
+      Q_EMIT signalResultFound(r);
     }
     stop();
     return;
@@ -217,7 +217,7 @@ void IMDBFetcher::slotComplete(KJob*) {
     FetchResult* r = new FetchResult(this, title, year);
     m_matches.insert(r->uid, id);
     m_titleTypes.insert(r->uid, mapValue(map, "titleType", "text"));
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 
   stop();
@@ -552,11 +552,7 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   m_numCast->setMaximum(99);
   m_numCast->setMinimum(0);
   m_numCast->setValue(IMDB_DEFAULT_CAST_SIZE);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::valueChanged;
-#else
   void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::textChanged;
-#endif
   connect(m_numCast, textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_numCast, row, 1);
   QString w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
@@ -597,14 +593,8 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   auto localeGroup = new QButtonGroup(localeGroupBox);
   localeGroup->addButton(m_systemLocaleRadioButton, 0 /* id */);
   localeGroup->addButton(m_customLocaleRadioButton, 1 /* id */);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  void (QButtonGroup::* buttonClicked)(int) = &QButtonGroup::buttonClicked;
-  connect(localeGroup, buttonClicked, this, &ConfigWidget::slotSetModified);
-  connect(localeGroup, buttonClicked, this, &ConfigWidget::slotLocaleChanged);
-#else
   connect(localeGroup, &QButtonGroup::idClicked, this, &ConfigWidget::slotSetModified);
   connect(localeGroup, &QButtonGroup::idClicked, this, &ConfigWidget::slotLocaleChanged);
-#endif
   connect(m_customLocaleEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
 
   l->setRowStretch(++row, 10);

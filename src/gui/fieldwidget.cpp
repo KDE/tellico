@@ -184,10 +184,10 @@ void FieldWidget::checkModified() {
   if(value != m_oldValue) {
 //    myDebug() << "old value:" << m_oldValue << "| new value:" << value;
     m_oldValue = value;
-    emit valueChanged(m_field);
+    Q_EMIT valueChanged(m_field);
   }
 }
 
 void FieldWidget::multipleChecked() {
-  emit valueChanged(m_field);
+  Q_EMIT valueChanged(m_field);
 }

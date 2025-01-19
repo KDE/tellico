@@ -212,7 +212,7 @@ void ImageWidget::slotClear() {
   m_edit->setEnabled(false);
   update();
   if(!wasEmpty) {
-    emit signalModified();
+    Q_EMIT signalModified();
   }
 }
 
@@ -296,11 +296,7 @@ void ImageWidget::slotScanImage() {
     m_saneDlg->addPage(m_saneWidget, QString());
     m_saneDlg->setStandardButtons(QDialogButtonBox::Cancel);
     m_saneDlg->setAttribute(Qt::WA_DeleteOnClose, false);
-#if KSANE_VERSION < QT_VERSION_CHECK(21,8,0)
-    connect(m_saneWidget.data(), &KSaneIface::KSaneWidget::imageReady,
-#else
     connect(m_saneWidget.data(), &KSaneIface::KSaneWidget::scannedImageReady,
-#endif
             this, &ImageWidget::imageReady);
     connect(m_saneDlg.data(), &QDialog::rejected,
             this, &ImageWidget::cancelScan);
@@ -323,17 +319,10 @@ void ImageWidget::slotScanImage() {
 }
 
 #ifdef HAVE_KSANE
-#if KSANE_VERSION < QT_VERSION_CHECK(21,8,0)
-void ImageWidget::imageReady(QByteArray& data, int w, int h, int bpl, int f) {
-#else
 void ImageWidget::imageReady(const QImage& scannedImage) {
-#endif
    if(!m_saneWidget) {
      return;
    }
-#if KSANE_VERSION < QT_VERSION_CHECK(21,8,0)
-   QImage scannedImage = m_saneWidget->toQImage(data, w, h, bpl, static_cast<KSaneIface::KSaneWidget::ImageFormat>(f));
-#endif
 
   QTemporaryFile temp(QDir::tempPath() + QLatin1String("/tellico_XXXXXX") + QLatin1String(".png"));
   if(temp.open()) {
@@ -414,7 +403,7 @@ void ImageWidget::slotLinkOnlyClicked() {
   const QString& id = ImageFactory::addImage(m_originalURL, false, QUrl(), link);
   // same image, so no need to call setImage
   m_imageID = id;
-  emit signalModified();
+  Q_EMIT signalModified();
 }
 
 void ImageWidget::mousePressEvent(QMouseEvent* event_) {
@@ -464,7 +453,7 @@ void ImageWidget::dropEvent(QDropEvent* event_) {
     const QString& id = ImageFactory::addImage(qvariant_cast<QPixmap>(imageData), QStringLiteral("PNG"));
     if(!id.isEmpty() && id != m_imageID) {
       setImage(id);
-      emit signalModified();
+      Q_EMIT signalModified();
     }
     event_->acceptProposedAction();
   } else if(event_->mimeData()->hasText()) {
@@ -484,7 +473,7 @@ void ImageWidget::loadImage(const QUrl& url_) {
   const QString& id = ImageFactory::addImage(url_, false, QUrl(), link);
   if(id != m_imageID) {
     setImage(id);
-    emit signalModified();
+    Q_EMIT signalModified();
   }
   // at the end, cause setImage() resets it
   m_originalURL = url_;
@@ -494,11 +483,7 @@ void ImageWidget::loadImage(const QUrl& url_) {
 void ImageWidget::cancelScan() {
 #ifdef HAVE_KSANE
   if(m_saneWidget) {
-#if KSANE_VERSION < QT_VERSION_CHECK(22,4,0)
-    m_saneWidget->scanCancel();
-#else
     m_saneWidget->cancelScan();
-#endif
   }
 #endif
 }

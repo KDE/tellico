@@ -208,11 +208,7 @@ int Tellico::ISODateComparison::compare(const QString& str1, const QString& str2
   // so dates would sort as expected without padding month and day with zero
   // and accounting for "current year - 1 - 1" default scheme
   const QDate now = QDate::currentDate();
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  QStringList dlist1 = str1.split(QLatin1Char('-'), QString::KeepEmptyParts);
-#else
   QStringList dlist1 = str1.split(QLatin1Char('-'), Qt::KeepEmptyParts);
-#endif
   bool ok = true;
   int y1 = dlist1.count() > 0 ? dlist1[0].toInt(&ok) : now.year();
   if(!ok) {
@@ -228,11 +224,7 @@ int Tellico::ISODateComparison::compare(const QString& str1, const QString& str2
   }
   QDate date1(y1, m1, d1);
 
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  QStringList dlist2 = str2.split(QLatin1Char('-'), QString::KeepEmptyParts);
-#else
   QStringList dlist2 = str2.split(QLatin1Char('-'), Qt::KeepEmptyParts);
-#endif
   int y2 = dlist2.count() > 0 ? dlist2[0].toInt(&ok) : now.year();
   if(!ok) {
     y2 = now.year();

@@ -18,7 +18,7 @@ set(commands_STAT_SRCS
 add_library(commands STATIC ${commands_STAT_SRCS})
 
 target_link_libraries(commands
-    Qt${QT_MAJOR_VERSION}::Core
-    Qt${QT_MAJOR_VERSION}::Widgets
-    KF${KF_MAJOR_VERSION}::I18n
+    Qt6::Core
+    Qt6::Widgets
+    KF6::I18n
 )

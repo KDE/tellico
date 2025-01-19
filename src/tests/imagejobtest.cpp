@@ -77,13 +77,13 @@ void ImageJobTest::enterLoop() {
 void ImageJobTest::slotGetResult(KJob* job) {
   m_result = job->error();
   if(m_result > 1 && !job->errorString().isEmpty()) qDebug() << job->errorString();
-  emit exitLoop();
+  Q_EMIT exitLoop();
 }
 
 void ImageJobTest::slotAvailable(const QString& id_) {
   m_result = 0;
   m_imageId = id_;
-  emit exitLoop();
+  Q_EMIT exitLoop();
 }
 
 void ImageJobTest::testInvalidUrl() {

@@ -318,7 +318,7 @@ void AmazonFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void AmazonFetcher::slotComplete(KJob*) {
@@ -446,7 +446,7 @@ void AmazonFetcher::slotComplete(KJob*) {
 //    myDebug() << entry->title();
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
     ++m_numResults;
   }
 
@@ -1214,5 +1214,5 @@ QString AmazonFetcher::ConfigWidget::preferredName() const {
 }
 
 void AmazonFetcher::ConfigWidget::slotSiteChanged() {
-  emit signalName(preferredName());
+  Q_EMIT signalName(preferredName());
 }

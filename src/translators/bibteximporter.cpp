@@ -91,7 +91,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
     return m_coll;
   }
 
-  emit signalTotalSteps(this, urls().count() * 100);
+  Q_EMIT signalTotalSteps(this, urls().count() * 100);
 
   bool useUTF8 = m_widget && m_readUTF8->isChecked();
 
@@ -247,7 +247,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
     ptr->addEntries(entry);
 
     if(showProgress && j%stepSize == 0) {
-      emit signalProgress(this, urlCount*100 + 100*j/count);
+      Q_EMIT signalProgress(this, urlCount*100 + 100*j/count);
       qApp->processEvents();
     }
   }
@@ -438,10 +438,6 @@ void BibtexImporter::appendCollection(Data::CollPtr coll_) {
     mainColl->setPreamble(pre + newColl->preamble());
   }
   StringMap macros = mainColl->macroList();
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  macros.unite(newColl->macroList());
-#else
   macros.insert(newColl->macroList());
-#endif
   mainColl->setMacroList(macros);
 }

@@ -83,7 +83,7 @@ void Document::setURL(const QUrl& url_) {
 void Document::setModified(bool modified_) {
   if(modified_ != m_isModified) {
     m_isModified = modified_;
-    emit signalModified(m_isModified);
+    Q_EMIT signalModified(m_isModified);
   }
 }
 
@@ -114,8 +114,8 @@ bool Document::newDocument(int type_) {
   const QUrl url = QUrl::fromLocalFile(TC_I18N1(Tellico::untitledFilename));
   setURL(url);
 
-  emit signalCollectionAdded(m_coll);
-  emit signalCollectionImagesLoaded(m_coll);
+  Q_EMIT signalCollectionAdded(m_coll);
+  Q_EMIT signalCollectionImagesLoaded(m_coll);
 
   setModified(false);
   m_validFile = false;
@@ -172,7 +172,7 @@ bool Document::openDocument(const QUrl& url_) {
   setURL(url_);
   m_validFile = true;
 
-  emit signalCollectionAdded(m_coll);
+  Q_EMIT signalCollectionAdded(m_coll);
 
   // m_importer might have been deleted?
   setModified(m_importer && m_importer->modifiedOriginal());
@@ -183,7 +183,7 @@ bool Document::openDocument(const QUrl& url_) {
     m_cancelImageWriting = false;
     m_loadImagesTimer.start();
   } else {
-    emit signalCollectionImagesLoaded(m_coll);
+    Q_EMIT signalCollectionImagesLoaded(m_coll);
     if(m_importer) {
       m_importer->deleteLater();
       m_importer = nullptr;
@@ -287,7 +287,7 @@ bool Document::closeDocument() {
 
 void Document::deleteContents() {
   if(m_coll) {
-    emit signalCollectionDeleted(m_coll);
+    Q_EMIT signalCollectionDeleted(m_coll);
   }
   // don't delete the m_importer here, bad things will happen
 
@@ -304,7 +304,7 @@ void Document::deleteContents() {
 void Document::appendCollection(Tellico::Data::CollPtr coll_) {
   bool structuralChange = false;
   appendCollection(m_coll, coll_, &structuralChange);
-  emit signalCollectionModified(m_coll, structuralChange);
+  Q_EMIT signalCollectionModified(m_coll, structuralChange);
 }
 
 void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_, bool* structuralChange_) {
@@ -334,7 +334,7 @@ void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::Co
 Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_) {
   bool structuralChange = false;
   const auto mergeResult = mergeCollection(m_coll, coll_, &structuralChange);
-  emit signalCollectionModified(m_coll, structuralChange);
+  Q_EMIT signalCollectionModified(m_coll, structuralChange);
   return mergeResult;
 }
 
@@ -414,11 +414,11 @@ void Document::replaceCollection(Tellico::Data::CollPtr coll_) {
   setURL(url);
   m_validFile = false;
 
-  emit signalCollectionDeleted(m_coll);
+  Q_EMIT signalCollectionDeleted(m_coll);
   m_coll = coll_;
   m_coll->setTrackGroups(true);
   m_cancelImageWriting = true;
-  emit signalCollectionAdded(m_coll);
+  Q_EMIT signalCollectionAdded(m_coll);
 }
 
 void Document::unAppendCollection(Tellico::Data::FieldList origFields_, QList<int> addedEntries_) {
@@ -449,7 +449,7 @@ void Document::unAppendCollection(Tellico::Data::FieldList origFields_, QList<in
     }
   }
   m_coll->blockSignals(false);
-  emit signalCollectionModified(m_coll, structuralChange);
+  Q_EMIT signalCollectionModified(m_coll, structuralChange);
 }
 
 void Document::unMergeCollection(Tellico::Data::FieldList origFields_, Tellico::Data::MergePair entryPair_) {
@@ -487,7 +487,7 @@ void Document::unMergeCollection(Tellico::Data::FieldList origFields_, Tellico::
     }
   }
   m_coll->blockSignals(false);
-  emit signalCollectionModified(m_coll, structuralChange);
+  Q_EMIT signalCollectionModified(m_coll, structuralChange);
 }
 
 bool Document::isEmpty() const {
@@ -588,7 +588,7 @@ void Document::slotLoadAllImages() {
   if(m_cancelImageWriting) {
     myLog() << "slotLoadAllImages() - cancel image writing";
   } else {
-    emit signalCollectionImagesLoaded(m_coll);
+    Q_EMIT signalCollectionImagesLoaded(m_coll);
   }
 
   m_cancelImageWriting = false;

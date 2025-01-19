@@ -49,29 +49,21 @@ qt_wrap_ui(gui_STAT_SRCS ${gui_UI})
 add_library(gui STATIC ${gui_STAT_SRCS})
 
 target_link_libraries(gui
-    Qt${QT_MAJOR_VERSION}::Core
-    Qt${QT_MAJOR_VERSION}::Widgets
-    Qt${QT_MAJOR_VERSION}::Gui
-    KF${KF_MAJOR_VERSION}::KIOCore
-    KF${KF_MAJOR_VERSION}::KIOFileWidgets
-    KF${KF_MAJOR_VERSION}::SonnetCore
-    KF${KF_MAJOR_VERSION}::SonnetUi
-    KF${KF_MAJOR_VERSION}::XmlGui
-    KF${KF_MAJOR_VERSION}::I18n
-    KF${KF_MAJOR_VERSION}::TextWidgets
-    KF${KF_MAJOR_VERSION}::IconThemes
+    Qt6::Core
+    Qt6::Widgets
+    Qt6::Gui
+    Qt6::WebEngineWidgets
+    KF6::KIOCore
+    KF6::KIOFileWidgets
+    KF6::SonnetCore
+    KF6::SonnetUi
+    KF6::XmlGui
+    KF6::I18n
+    KF6::TextWidgets
+    KF6::IconThemes
+    KF6::IconWidgets
 )
-if(QT_MAJOR_VERSION STREQUAL "6")
-    target_link_libraries(gui KF${KF_MAJOR_VERSION}::IconWidgets)
-endif()
 
-if(USE_KHTML)
-    target_link_libraries(gui KF${KF_MAJOR_VERSION}::KHtml)
-    add_definitions(-DUSE_KHTML=${USE_KHTML})
-else()
-    target_link_libraries(gui Qt${QT_MAJOR_VERSION}::WebEngineWidgets)
-endif()
-
-if(${KSANE_TARGET_NAME}_FOUND)
-    target_link_libraries(gui ${KSANE_TARGET_NAME})
+if(KSaneWidgets6_FOUND)
+    target_link_libraries(gui KSaneWidgets6)
 endif()

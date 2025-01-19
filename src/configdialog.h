@@ -31,12 +31,7 @@
 
 #include <KPageDialog>
 #ifdef ENABLE_KNEWSTUFF3
-#include <knewstuff_version.h>
-#if KNEWSTUFF_VERSION < QT_VERSION_CHECK(5, 91, 0)
-#include <KNS3/Button>
-#else
 #include <KNSWidgets/Button>
-#endif
 #endif
 
 #include <QListWidget>
@@ -130,11 +125,7 @@ private Q_SLOTS:
   void slotShowTemplatePreview();
   void slotInstallTemplate();
 #ifdef ENABLE_KNEWSTUFF3
-#if KNEWSTUFF_VERSION < QT_VERSION_CHECK(5, 91, 0)
-  void slotUpdateTemplates(const QList<KNS3::Entry>& list);
-#else
   void slotUpdateTemplates(const QList<KNSCore::Entry>& list);
-#endif
 #endif
   void slotDeleteTemplate();
   void slotCreateConfigWidgets();

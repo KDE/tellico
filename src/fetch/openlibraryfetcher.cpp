@@ -176,7 +176,7 @@ void OpenLibraryFetcher::stop() {
   }
   m_jobs.clear();
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
@@ -394,7 +394,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 
 //  m_start = m_entries.count();

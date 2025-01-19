@@ -42,10 +42,8 @@
 #include "../utils/cursorsaver.h"
 #include "../tellico_debug.h"
 
-#if defined HAVE_KCDDB
+#ifdef HAVE_KCDDB
 #include <KCDDB/Client>
-#elif defined HAVE_OLD_KCDDB
-#include <libkcddb/client.h>
 #endif
 
 #include <KComboBox>
@@ -63,11 +61,7 @@
 #include <QCheckBox>
 #include <QTextStream>
 #include <QVBoxLayout>
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-#include <QTextCodec>
-#else
 #include <QStringConverter>
-#endif
 #include <QApplication>
 
 using Tellico::Import::FreeDBImporter;
@@ -103,7 +97,7 @@ Tellico::Data::CollPtr FreeDBImporter::collection() {
 }
 
 void FreeDBImporter::readCDROM() {
-#if defined (HAVE_OLD_KCDDB) || defined (HAVE_KCDDB)
+#ifdef HAVE_KCDDB
   QString drivePath = m_driveCombo->currentText();
   if(drivePath.isEmpty()) {
     setStatusMessage(i18n("<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>", drivePath));
@@ -306,7 +300,7 @@ void FreeDBImporter::readCDROM() {
 }
 
 void FreeDBImporter::readCache() {
-#if defined (HAVE_OLD_KCDDB) || defined (HAVE_KCDDB)
+#ifdef HAVE_KCDDB
   {
     // remember the import options
     KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - FreeDB"));
@@ -380,11 +374,7 @@ void FreeDBImporter::readCache() {
     }
     QTextStream ts(&file);
     // libkcddb always writes the cache files in utf-8
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    ts.setCodec("UTF-8");
-#else
     ts.setEncoding(QStringConverter::Utf8);
-#endif
     QString cddbData = ts.readAll();
     file.close();
 
@@ -537,12 +527,7 @@ QWidget* FreeDBImporter::widget(QWidget* parent_) {
   m_buttonGroup = new QButtonGroup(gbox);
   m_buttonGroup->addButton(m_radioCDROM);
   m_buttonGroup->addButton(m_radioCache);
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  void (QButtonGroup::* buttonClickedInt)(int) = &QButtonGroup::buttonClicked;
-  connect(m_buttonGroup, buttonClickedInt, this, &FreeDBImporter::slotClicked);
-#else
   connect(m_buttonGroup, &QButtonGroup::idClicked, this, &FreeDBImporter::slotClicked);
-#endif
 
   l->addWidget(gbox);
   l->addStretch(1);

@@ -163,7 +163,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
       risFields.insert(ris, f);
     }
   }
-  emit signalTotalSteps(this, urls().count() * 100);
+  Q_EMIT signalTotalSteps(this, urls().count() * 100);
 
   if(text().isEmpty()) {
     int count = 0;
@@ -312,7 +312,7 @@ void RISImporter::readText(const QString& text_, int n, const QHash<QString, Tel
     entry->setField(f, value);
 
     if(showProgress && j%stepSize == 0) {
-      emit signalProgress(this, n*100 + 100*j/length);
+      Q_EMIT signalProgress(this, n*100 + 100*j/length);
     }
   }
 

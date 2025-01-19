@@ -283,7 +283,7 @@ void SRUFetcher::stop() {
   }
 
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void SRUFetcher::slotComplete(KJob*) {
@@ -438,7 +438,7 @@ void SRUFetcher::slotComplete(KJob*) {
   foreach(Data::EntryPtr entry, coll->entries()) {
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
   stop();
 }

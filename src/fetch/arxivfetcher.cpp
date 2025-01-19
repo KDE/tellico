@@ -122,7 +122,7 @@ void ArxivFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void ArxivFetcher::slotComplete(KJob*) {
@@ -198,7 +198,7 @@ void ArxivFetcher::slotComplete(KJob*) {
     }
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 
   m_start = m_entries.count();

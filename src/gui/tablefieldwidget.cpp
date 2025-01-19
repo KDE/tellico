@@ -200,7 +200,7 @@ void TableFieldWidget::renameColumn(const QString& newName_) {
 
   Data::FieldPtr newField(new Data::Field(*field()));
   newField->setProperty(QStringLiteral("column%1").arg(m_col+1), newName_);
-  emit fieldChanged(newField);
+  Q_EMIT fieldChanged(newField);
   setField(newField);
   labelColumns(newField);
 }

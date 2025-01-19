@@ -41,12 +41,7 @@
 #include <KShell>
 #include <KTar>
 #include <KLocalizedString>
-#include <karchive_version.h>
-#if KARCHIVE_VERSION >= QT_VERSION_CHECK(5,85,0)
 #include <KCompressionDevice>
-#else
-#include <KFilterDev>
-#endif
 
 #include <QTemporaryDir>
 #include <QDir>
@@ -279,7 +274,7 @@ void GCstarPluginFetcher::stop() {
   m_data.clear();
   m_started = false;
   m_errors.clear();
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void GCstarPluginFetcher::slotData(const QByteArray& data_) {
@@ -311,11 +306,7 @@ void GCstarPluginFetcher::slotProcessExited() {
   }
 
   QBuffer filterBuffer(&m_data);
-#if KARCHIVE_VERSION >= QT_VERSION_CHECK(5,85,0)
   auto compressionType = KCompressionDevice::compressionTypeForMimeType(QStringLiteral("application/x-gzip"));
-#else
-  auto compressionType = KFilterDev::compressionTypeForMimeType(QStringLiteral("application/x-gzip"));
-#endif
   KCompressionDevice filter(&filterBuffer, false, compressionType);
   if(!filter.open(QIODevice::ReadOnly)) {
     myWarning() << "unable to open gzip filter";
@@ -371,7 +362,7 @@ void GCstarPluginFetcher::slotProcessExited() {
   foreach(Data::EntryPtr entry, coll->entries()) {
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
     if(!m_started) {
       return;
     }
@@ -478,13 +469,13 @@ void GCstarPluginFetcher::ConfigWidget::slotTypeChanged() {
     m_pluginCombo->addItem(pluginNames.last(), info);
   }
   slotPluginChanged();
-  emit signalName(preferredName());
+  Q_EMIT signalName(preferredName());
 }
 
 void GCstarPluginFetcher::ConfigWidget::slotPluginChanged() {
   PluginInfo info = m_pluginCombo->currentData().toHash();
   m_authorLabel->setText(info[QStringLiteral("author")].toString());
-  emit signalName(preferredName());
+  Q_EMIT signalName(preferredName());
 }
 
 void GCstarPluginFetcher::ConfigWidget::showEvent(QShowEvent*) {

@@ -35,9 +35,6 @@
 #include <QCategoryAxis>
 #include <QGraphicsLayout>
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-using namespace QtCharts;
-#endif
 using Tellico::BarChart;
 
 BarChart::BarChart(const QStringList& names_, const QList<qreal>& values_) : QChart() {

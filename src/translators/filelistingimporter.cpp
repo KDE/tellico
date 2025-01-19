@@ -76,11 +76,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   // the importer might be running without a gui/widget
   KIO::JobFlags flags = KIO::DefaultFlags;
   if(!m_widget) flags |= KIO::HideProgressInfo;
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  const bool includeHidden = false;
-#else
   const auto includeHidden = KIO::ListJob::ListFlags{};
-#endif
   m_job = (m_widget && m_recursive->isChecked())
           ? KIO::listRecursive(url(), flags, includeHidden)
           : KIO::listDir(url(), flags, includeHidden);

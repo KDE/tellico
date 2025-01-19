@@ -136,7 +136,7 @@ void GoogleScholarFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void GoogleScholarFetcher::slotComplete(KJob*) {
@@ -203,7 +203,7 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, Data::EntryPtr(entry));
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
     ++count;
   }
   m_start = m_entries.count();

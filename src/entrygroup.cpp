@@ -26,20 +26,11 @@
 #include "entry.h"
 #include "utils/string_utils.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <KLocalizedString>
-#define TC_STR const char*
-#define STR_NOOP I18N_NOOP
-#define TC_I18N i18n
-#else
 #include <KLazyLocalizedString>
-#define TC_STR KLazyLocalizedString
-#define STR_NOOP kli18n
 #define TC_I18N(str) str.toString()
-#endif
 
 namespace {
-  static TC_STR emptyString = STR_NOOP("(Empty)");
+  static KLazyLocalizedString emptyString = kli18n("(Empty)");
 }
 
 using Tellico::Data::EntryGroup;

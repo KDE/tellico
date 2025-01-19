@@ -159,7 +159,7 @@ void NumistaFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void NumistaFetcher::slotComplete(KJob* ) {
@@ -230,7 +230,7 @@ void NumistaFetcher::slotComplete(KJob* ) {
     title.replace(QLatin1String("&quot;"), QLatin1String("\""));
     FetchResult* r = new FetchResult(this, title, desc);
     m_matches.insert(r->uid, result.value(QLatin1String("id")).toInt());
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
     ++count;
   }
 
@@ -463,5 +463,5 @@ QString NumistaFetcher::ConfigWidget::preferredName() const {
 }
 
 void NumistaFetcher::ConfigWidget::slotLangChanged() {
-  emit signalName(preferredName());
+  Q_EMIT signalName(preferredName());
 }

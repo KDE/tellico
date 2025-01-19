@@ -27,14 +27,9 @@
 
 #include "datavectors.h"
 
-#ifdef USE_KHTML
-#include <KHTMLPart>
-#include <KHTMLView>
-#else
 #include <QWebEngineView>
 #include <QWebEnginePage>
 #include <QPrinter>
-#endif
 
 class QTemporaryFile;
 
@@ -46,12 +41,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class EntryView : public
-#ifdef USE_KHTML
-  KHTMLPart {
-#else
-  QWebEngineView {
-#endif
+class EntryView : public QWebEngineView {
 
 Q_OBJECT
 
@@ -102,31 +92,17 @@ public Q_SLOTS:
   void showEntries(Tellico::Data::EntryList entries);
 
 private Q_SLOTS:
-  /**
-   * Open a URL.
-   *
-   * @param url The URL to open
-   */
-  void slotOpenURL(const QUrl& url);
   void slotReloadEntry();
 
 protected:
-#ifdef USE_KHTML
-  void changeEvent(QEvent* event);
-#else
   void changeEvent(QEvent* event) override;
-#endif
 
 private Q_SLOTS:
   void slotPrint();
 
 private:
   void resetColors();
-#ifdef USE_KHTML
-  void contextMenuEvent(QContextMenuEvent* event);
-#else
   void contextMenuEvent(QContextMenuEvent* event) override;
-#endif
 
   Data::EntryPtr m_entry;
   XSLTHandler* m_handler;
@@ -136,24 +112,9 @@ private:
   QTemporaryFile* m_tempFile;
   bool m_useGradientImages;
   bool m_checkCommonFile;
-#ifndef USE_KHTML
   QPrinter m_printer;
-#endif
 };
 
-#ifdef USE_KHTML
-class EntryViewWidget : public KHTMLView {
-Q_OBJECT
-public:
-  EntryViewWidget(EntryView* part, QWidget* parent);
-
-public Q_SLOTS:
-  void copy();
-
-protected:
-  void changeEvent(QEvent* event) override;
-};
-#else
 class EntryViewPage : public QWebEnginePage {
 Q_OBJECT
 public:
@@ -169,7 +130,6 @@ protected:
 private:
   void openExternalLink(const QUrl& url);
 };
-#endif
 
 } //end namespace
 #endif

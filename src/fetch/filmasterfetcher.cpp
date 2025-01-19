@@ -120,7 +120,7 @@ void FilmasterFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Data::EntryPtr FilmasterFetcher::fetchEntryHook(uint uid_) {
@@ -246,7 +246,7 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 
 //  m_start = m_entries.count();

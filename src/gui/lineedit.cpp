@@ -64,11 +64,7 @@ void LineEdit::slotCheckSpelling() {
   m_sonnetDialog = new Sonnet::Dialog(new Sonnet::BackgroundChecker(this), this);
 
 
-#if SONNET_VERSION < QT_VERSION_CHECK(5, 65, 0)
-  void (Sonnet::Dialog::* doneString)(const QString&) = &Sonnet::Dialog::done;
-#else
   void (Sonnet::Dialog::* doneString)(const QString&) = &Sonnet::Dialog::spellCheckDone;
-#endif
   connect(m_sonnetDialog, doneString,
           this, &LineEdit::slotSpellCheckDone);
   connect(m_sonnetDialog, &Sonnet::Dialog::misspelling,

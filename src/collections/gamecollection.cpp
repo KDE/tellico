@@ -276,11 +276,7 @@ QStringList GameCollection::esrbRatings() {
   QStringList cert = i18nc("Video game ratings - must be 8 phrases matching ESRB system - "
                            "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending",
                            "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending")
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-                     .split(rx, QString::SkipEmptyParts);
-#else
                      .split(rx, Qt::SkipEmptyParts);
-#endif
   return cert;
 }
 

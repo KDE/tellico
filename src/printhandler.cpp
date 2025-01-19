@@ -31,12 +31,6 @@
 #include "config/tellico_config.h"
 #include "../tellico_debug.h"
 
-#ifdef USE_KHTML
-#include <KHTMLPart>
-#include <KHTMLView>
-#include <KAboutData>
-class QWebEngineView {};
-#else
 #include <QWebEngineView>
 #include <QWebEnginePage>
 #include <QWebEngineSettings>
@@ -46,7 +40,6 @@ class QWebEngineView {};
 #include <QPrintPreviewDialog>
 #include <QPrintPreviewWidget>
 #include <QPaintEngine>
-#endif
 
 using Tellico::PrintHandler;
 
@@ -70,29 +63,6 @@ void PrintHandler::setColumns(const QStringList& columns_) {
 void PrintHandler::print() {
   GUI::CursorSaver cs(Qt::WaitCursor);
 
-#ifdef USE_KHTML
-  KHTMLPart w;
-
-  // KHTMLPart printing was broken in KDE until KHTML 5.16
-  // see https://git.reviewboard.kde.org/r/125681/
-  const QString version =  w.componentData().version();
-  const uint major = version.section(QLatin1Char('.'), 0, 0).toUInt();
-  const uint minor = version.section(QLatin1Char('.'), 1, 1).toUInt();
-  if(major == 5 && minor < 16) {
-    myWarning() << "Printing is broken for KDE Frameworks < 5.16. Please upgrade";
-    return;
-  }
-
-  w.setJScriptEnabled(false);
-  w.setJavaEnabled(false);
-  w.setMetaRefreshEnabled(false);
-  w.setPluginsEnabled(false);
-  w.begin(Data::Document::self()->URL());
-  w.write(m_html);
-  w.end();
-  w.view()->print();
-#else
-
   if(!printPrepare()) return;
 
   m_view->setHtml(m_html, Data::Document::self()->URL());
@@ -107,12 +77,9 @@ void PrintHandler::print() {
   }
 
   printDocument(dialog.printer());
-#endif
 }
 
 void PrintHandler::printPreview() {
-// print preview only works with WebEngine
-#ifndef USE_KHTML
   if(m_inPrintPreview) {
     return;
   }
@@ -140,7 +107,6 @@ void PrintHandler::printPreview() {
   }
   preview.exec();
   m_inPrintPreview = false;
-#endif
 }
 
 void PrintHandler::printDocument(QPrinter* printer_) {
@@ -153,17 +119,9 @@ void PrintHandler::printDocument(QPrinter* printer_) {
   }
 
   if(printer_->outputFormat() == QPrinter::PdfFormat) {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    m_view->page()->printToPdf(printer_->outputFileName(), printer_->pageLayout());
-#else
     m_view->printToPdf(printer_->outputFileName(), printer_->pageLayout());
-#endif
   } else {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    m_view->page()->print(printer_, [=](bool b) { printFinished(b); });
-#else
     m_view->print(printer_);
-#endif
   }
   // User input in the print preview dialog while we're waiting on a print task
   // can mess up the internal state and cause a crash.
@@ -219,16 +177,10 @@ bool PrintHandler::printPrepare() {
     }
   }
 
-#ifndef USE_KHTML
   if(!m_view) {
     m_view.reset(new QWebEngineView);
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    // no printFinished signal in Qt5, so there's a callback specified directly in the print() call
-    connect(m_view->page(), &QWebEnginePage::pdfPrintingFinished, this, &PrintHandler::pdfPrintFinished);
-#else
     connect(m_view.get(), &QWebEngineView::printFinished, this, &PrintHandler::printFinished);
     connect(m_view.get(), &QWebEngineView::pdfPrintingFinished, this, &PrintHandler::pdfPrintFinished);
-#endif
 
     auto settings = m_view->settings();
     settings->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
@@ -246,6 +198,5 @@ bool PrintHandler::printPrepare() {
     }
     m_printer->setCreator(QStringLiteral("Tellico/%1").arg(QStringLiteral(TELLICO_VERSION)));
   }
-#endif
   return true;
 }

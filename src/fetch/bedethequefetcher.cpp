@@ -137,7 +137,7 @@ void BedethequeFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void BedethequeFetcher::slotComplete(KJob*) {
@@ -210,7 +210,7 @@ void BedethequeFetcher::slotComplete(KJob*) {
     if(!title.isEmpty() && !url.isEmpty()) {
       FetchResult* r = new FetchResult(this, title, desc.join(QLatin1String(" ")));
       m_matches.insert(r->uid, QUrl(url));
-      emit signalResultFound(r);
+      Q_EMIT signalResultFound(r);
     }
   }
 
@@ -246,7 +246,7 @@ void BedethequeFetcher::slotLinkComplete(KJob*) {
   m_matches.insert(r->uid, QUrl(request().value()));
   m_entries.insert(r->uid, entry); // keep for later
 
-  emit signalResultFound(r);
+  Q_EMIT signalResultFound(r);
   stop();
 }
 

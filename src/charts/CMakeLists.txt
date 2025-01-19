@@ -12,5 +12,5 @@ add_library(charts STATIC ${charts_STAT_SRCS})
 
 target_link_libraries(charts
     tellicomodels
-    Qt${QT_MAJOR_VERSION}::Charts
+    Qt6::Charts
 )

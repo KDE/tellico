@@ -53,7 +53,7 @@ QString attValue(const QXmlStreamAttributes& atts, const char* name, const char*
 }
 
 inline
-QString realFieldName(int syntaxVersion, TC_STRINGVIEW localName) {
+QString realFieldName(int syntaxVersion, QStringView localName) {
   return (syntaxVersion < 2 && localName == QLatin1String("keywords")) ?
     QStringLiteral("keyword") :
     localName.toString();
@@ -86,7 +86,7 @@ using Tellico::Import::SAX::BorrowersHandler;
 using Tellico::Import::SAX::BorrowerHandler;
 using Tellico::Import::SAX::LoanHandler;
 
-StateHandler* StateHandler::nextHandler(TC_STRINGVIEW ns_, TC_STRINGVIEW localName_) {
+StateHandler* StateHandler::nextHandler(QStringView ns_, QStringView localName_) {
   StateHandler* handler = nextHandlerImpl(ns_, localName_);
   if(!handler) {
     myWarning() << "no handler for" << localName_;
@@ -94,14 +94,14 @@ StateHandler* StateHandler::nextHandler(TC_STRINGVIEW ns_, TC_STRINGVIEW localNa
   return handler ? handler : new NullHandler(d);
 }
 
-StateHandler* RootHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* RootHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if(localName_ == QLatin1String("tellico") || localName_ == QLatin1String("bookcase")) {
     return new DocumentHandler(d);
   }
   return new RootHandler(d);
 }
 
-StateHandler* DocumentHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* DocumentHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if(localName_ == QLatin1String("collection")) {
     return new CollectionHandler(d);
   } else if(localName_ == QLatin1String("filters")) {
@@ -112,7 +112,7 @@ StateHandler* DocumentHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW loca
   return nullptr;
 }
 
-bool DocumentHandler::start(TC_STRINGVIEW, TC_STRINGVIEW localName_, const QXmlStreamAttributes& atts_) {
+bool DocumentHandler::start(QStringView, QStringView localName_, const QXmlStreamAttributes& atts_) {
   // the syntax version field name changed from "version" to "syntaxVersion" in version 3
   auto syntaxVersion = atts_.value(QLatin1String("syntaxVersion"));
   if(syntaxVersion.isEmpty()) {
@@ -137,11 +137,11 @@ bool DocumentHandler::start(TC_STRINGVIEW, TC_STRINGVIEW localName_, const QXmlS
   return true;
 }
 
-bool DocumentHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool DocumentHandler::end(QStringView, QStringView) {
   return true;
 }
 
-StateHandler* CollectionHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* CollectionHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if((d->syntaxVersion > 3 && localName_ == QLatin1String("fields")) ||
      (d->syntaxVersion < 4 && localName_ == QLatin1String("attributes"))) {
     return new FieldsHandler(d);
@@ -157,7 +157,7 @@ StateHandler* CollectionHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW lo
   return nullptr;
 }
 
-bool CollectionHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes& atts_) {
+bool CollectionHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
   d->collTitle = attValue(atts_, "title");
   d->collType = atts_.value(QLatin1String("type")).toInt();
   if(d->syntaxVersion > 6) {
@@ -173,7 +173,7 @@ bool CollectionHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttr
   return true;
 }
 
-bool CollectionHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool CollectionHandler::end(QStringView, QStringView) {
   if(!d->coll) {
     myWarning() << "no collection created";
     return false;
@@ -252,7 +252,7 @@ bool CollectionHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
   return true;
 }
 
-StateHandler* FieldsHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* FieldsHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if((d->syntaxVersion > 3 && localName_ == QLatin1String("field")) ||
      (d->syntaxVersion < 4 && localName_ == QLatin1String("attribute"))) {
     return new FieldHandler(d);
@@ -260,12 +260,12 @@ StateHandler* FieldsHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localN
   return nullptr;
 }
 
-bool FieldsHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) {
+bool FieldsHandler::start(QStringView, QStringView, const QXmlStreamAttributes&) {
   d->defaultFields = false;
   return true;
 }
 
-bool FieldsHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool FieldsHandler::end(QStringView, QStringView) {
   // add default fields if there was a default field name, or no names at all
   const bool addFields = d->defaultFields || d->fields.isEmpty();
   // in syntax 4, the element name was changed to "entry", always, rather than depending on
@@ -304,14 +304,14 @@ bool FieldsHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
   return true;
 }
 
-StateHandler* FieldHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* FieldHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if(localName_ == QLatin1String("prop")) {
     return new FieldPropertyHandler(d);
   }
   return nullptr;
 }
 
-bool FieldHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes& atts_) {
+bool FieldHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
   // special case: if the i18n attribute equals true, then translate the title, description, category, and allowed
   isI18n = atts_.value(QLatin1String("i18n")) == QLatin1String("true");
 
@@ -392,7 +392,7 @@ bool FieldHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttribute
   return true;
 }
 
-bool FieldHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool FieldHandler::end(QStringView, QStringView) {
   // the value template for derived values used to be the field description
   // now it is the 'template' property
   // for derived value fields, if there is no property and the description has a '%'
@@ -420,7 +420,7 @@ bool FieldHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
   return true;
 }
 
-bool FieldPropertyHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes& atts_) {
+bool FieldPropertyHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
   // there should be at least one field already so we can add properties to it
   Q_ASSERT(!d->fields.isEmpty());
   Data::FieldPtr field = d->fields.back();
@@ -443,7 +443,7 @@ bool FieldPropertyHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamA
   return true;
 }
 
-bool FieldPropertyHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool FieldPropertyHandler::end(QStringView, QStringView) {
   Q_ASSERT(!m_propertyName.isEmpty());
   // add the previous property
   Data::FieldPtr field = d->fields.back();
@@ -451,11 +451,11 @@ bool FieldPropertyHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
   return true;
 }
 
-bool BibtexPreambleHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) {
+bool BibtexPreambleHandler::start(QStringView, QStringView, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool BibtexPreambleHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool BibtexPreambleHandler::end(QStringView, QStringView) {
   Q_ASSERT(d->coll);
   if(d->coll && d->collType == Data::Collection::Bibtex && !d->text.isEmpty()) {
     Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(d->coll.data());
@@ -464,27 +464,27 @@ bool BibtexPreambleHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
   return true;
 }
 
-StateHandler* BibtexMacrosHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* BibtexMacrosHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if(localName_ == QLatin1String("macro")) {
     return new BibtexMacroHandler(d);
   }
   return nullptr;
 }
 
-bool BibtexMacrosHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) {
+bool BibtexMacrosHandler::start(QStringView, QStringView, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool BibtexMacrosHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool BibtexMacrosHandler::end(QStringView, QStringView) {
   return true;
 }
 
-bool BibtexMacroHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes& atts_) {
+bool BibtexMacroHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
   m_macroName = attValue(atts_, "name");
   return true;
 }
 
-bool BibtexMacroHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool BibtexMacroHandler::end(QStringView, QStringView) {
   if(d->coll && d->collType == Data::Collection::Bibtex && !m_macroName.isEmpty() && !d->text.isEmpty()) {
     Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(d->coll.data());
     c->addMacro(m_macroName, d->text);
@@ -492,14 +492,14 @@ bool BibtexMacroHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
   return true;
 }
 
-StateHandler* EntryHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* EntryHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if(d->coll->hasField(realFieldName(d->syntaxVersion, localName_))) {
     return new FieldValueHandler(d);
   }
   return new FieldValueContainerHandler(d);
 }
 
-bool EntryHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes& atts_) {
+bool EntryHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
   // the entries must come after the fields
   if(!d->coll || d->coll->fields().isEmpty()) {
     // special case for very old versions which did not have user-editable fields
@@ -507,11 +507,7 @@ bool EntryHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttribute
     d->defaultFields = true;
     FieldsHandler handler(d);
     // fake the end of a fields element, which will add the default fields
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    QStringRef empty;
-#else
     QStringView empty;
-#endif
     handler.end(empty, empty);
     myWarning() << "entries should come after fields are defined, attempting to recover";
   }
@@ -527,7 +523,7 @@ bool EntryHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttribute
   return true;
 }
 
-bool EntryHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool EntryHandler::end(QStringView, QStringView) {
   Data::EntryPtr entry = d->entries.back();
   Q_ASSERT(entry);
   if(!d->modifiedDate.isEmpty() && d->coll->hasField(QStringLiteral("mdate"))) {
@@ -537,18 +533,18 @@ bool EntryHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
   return true;
 }
 
-StateHandler* FieldValueContainerHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* FieldValueContainerHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if(d->coll->hasField(realFieldName(d->syntaxVersion, localName_))) {
     return new FieldValueHandler(d);
   }
   return new FieldValueContainerHandler(d);
 }
 
-bool FieldValueContainerHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) {
+bool FieldValueContainerHandler::start(QStringView, QStringView, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool FieldValueContainerHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool FieldValueContainerHandler::end(QStringView, QStringView) {
   Data::FieldPtr f = d->currentField;
   if(f && f->type() == Data::Field::Table) {
     Data::EntryPtr entry = d->entries.back();
@@ -565,7 +561,7 @@ bool FieldValueContainerHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
   return true;
 }
 
-StateHandler* FieldValueHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* FieldValueHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if(localName_ == QLatin1String("year") ||
      localName_ == QLatin1String("month") ||
      localName_ == QLatin1String("day")) {
@@ -576,7 +572,7 @@ StateHandler* FieldValueHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW lo
   return nullptr;
 }
 
-bool FieldValueHandler::start(TC_STRINGVIEW, TC_STRINGVIEW localName_, const QXmlStreamAttributes& atts_) {
+bool FieldValueHandler::start(QStringView, QStringView localName_, const QXmlStreamAttributes& atts_) {
   d->currentField = d->coll->fieldByName(realFieldName(d->syntaxVersion, localName_));
   Q_ASSERT(d->currentField);
   m_i18n = atts_.value(QLatin1String("i18n")) == QLatin1String("true");
@@ -585,7 +581,7 @@ bool FieldValueHandler::start(TC_STRINGVIEW, TC_STRINGVIEW localName_, const QXm
   return true;
 }
 
-bool FieldValueHandler::end(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+bool FieldValueHandler::end(QStringView, QStringView localName_) {
   Data::EntryPtr entry = d->entries.back();
   Q_ASSERT(entry);
   QString fieldName = d->currentField ? d->currentField->name() : realFieldName(d->syntaxVersion, localName_);
@@ -672,21 +668,17 @@ bool FieldValueHandler::end(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
   return true;
 }
 
-bool DateValueHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) {
+bool DateValueHandler::start(QStringView, QStringView, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool DateValueHandler::end(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+bool DateValueHandler::end(QStringView, QStringView localName_) {
   QStringList tokens;
   if(d->textBuffer.isEmpty()) {
     // the data value is y-m-d even if there are no date values, so create list of blank tokens
     tokens = QStringList() << QString() << QString() << QString();
   } else {
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-    tokens = d->textBuffer.split(QLatin1Char('-'), QString::KeepEmptyParts);
-#else
     tokens = d->textBuffer.split(QLatin1Char('-'), Qt::KeepEmptyParts);
-#endif
   }
   Q_ASSERT(tokens.size() == 3);
   while(tokens.size() < 3) {
@@ -711,11 +703,11 @@ bool DateValueHandler::end(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
   return true;
 }
 
-bool TableColumnHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) {
+bool TableColumnHandler::start(QStringView, QStringView, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool TableColumnHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool TableColumnHandler::end(QStringView, QStringView) {
   // for old collections, if the second column holds the track length, bump it to next column
   if(d->syntaxVersion < 9 &&
      d->coll->type() == Data::Collection::Album &&
@@ -733,24 +725,24 @@ bool TableColumnHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
   return true;
 }
 
-StateHandler* ImagesHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* ImagesHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if(localName_ == QLatin1String("image")) {
     return new ImageHandler(d);
   }
   return nullptr;
 }
 
-bool ImagesHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) {
+bool ImagesHandler::start(QStringView, QStringView, const QXmlStreamAttributes&) {
   // reset variable that gets updated in the image handler
   d->hasImages = false;
   return true;
 }
 
-bool ImagesHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool ImagesHandler::end(QStringView, QStringView) {
   return true;
 }
 
-bool ImageHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes& atts_) {
+bool ImageHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
   m_format = attValue(atts_, "format");
   m_link = atts_.value(QLatin1String("link")) == QLatin1String("true");
   // idClean() already calls shareString()
@@ -761,7 +753,7 @@ bool ImageHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttribute
   return true;
 }
 
-bool ImageHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool ImageHandler::end(QStringView, QStringView) {
   bool needToAddInfo = true;
   if(d->loadImages && !d->text.isEmpty()) {
     QByteArray ba = QByteArray::fromBase64(d->text.toLatin1());
@@ -782,29 +774,29 @@ bool ImageHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
   return true;
 }
 
-StateHandler* FiltersHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* FiltersHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if(localName_ == QLatin1String("filter")) {
     return new FilterHandler(d);
   }
   return nullptr;
 }
 
-bool FiltersHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) {
+bool FiltersHandler::start(QStringView, QStringView, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool FiltersHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool FiltersHandler::end(QStringView, QStringView) {
   return true;
 }
 
-StateHandler* FilterHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* FilterHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if(localName_ == QLatin1String("rule")) {
     return new FilterRuleHandler(d);
   }
   return nullptr;
 }
 
-bool FilterHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes& atts_) {
+bool FilterHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
   d->filter = new Filter(Filter::MatchAny);
   d->filter->setName(attValue(atts_, "name"));
 
@@ -814,7 +806,7 @@ bool FilterHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttribut
   return true;
 }
 
-bool FilterHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool FilterHandler::end(QStringView, QStringView) {
   if(d->coll && !d->filter->isEmpty()) {
     d->coll->addFilter(d->filter);
   }
@@ -822,7 +814,7 @@ bool FilterHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
   return true;
 }
 
-bool FilterRuleHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes& atts_) {
+bool FilterRuleHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
   QString field = attValue(atts_, "field");
   // empty field means match any of them
   QString pattern = attValue(atts_, "pattern");
@@ -862,33 +854,33 @@ bool FilterRuleHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttr
   return true;
 }
 
-bool FilterRuleHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool FilterRuleHandler::end(QStringView, QStringView) {
   return true;
 }
 
-StateHandler* BorrowersHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* BorrowersHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if(localName_ == QLatin1String("borrower")) {
     return new BorrowerHandler(d);
   }
   return nullptr;
 }
 
-bool BorrowersHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes&) {
+bool BorrowersHandler::start(QStringView, QStringView, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool BorrowersHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool BorrowersHandler::end(QStringView, QStringView) {
   return true;
 }
 
-StateHandler* BorrowerHandler::nextHandlerImpl(TC_STRINGVIEW, TC_STRINGVIEW localName_) {
+StateHandler* BorrowerHandler::nextHandlerImpl(QStringView, QStringView localName_) {
   if(localName_ == QLatin1String("loan")) {
     return new LoanHandler(d);
   }
   return nullptr;
 }
 
-bool BorrowerHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes& atts_) {
+bool BorrowerHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
   QString name = attValue(atts_, "name");
   QString uid = attValue(atts_, "uid");
   d->borrower = new Data::Borrower(name, uid);
@@ -896,7 +888,7 @@ bool BorrowerHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttrib
   return true;
 }
 
-bool BorrowerHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool BorrowerHandler::end(QStringView, QStringView) {
   if(d->coll && !d->borrower->isEmpty()) {
     d->coll->addBorrower(d->borrower);
   }
@@ -904,7 +896,7 @@ bool BorrowerHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
   return true;
 }
 
-bool LoanHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes& atts_) {
+bool LoanHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
   m_id = attValue(atts_, "entryRef").toInt();
   m_uid = attValue(atts_, "uid");
   m_loanDate = attValue(atts_, "loanDate");
@@ -913,7 +905,7 @@ bool LoanHandler::start(TC_STRINGVIEW, TC_STRINGVIEW, const QXmlStreamAttributes
   return true;
 }
 
-bool LoanHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
+bool LoanHandler::end(QStringView, QStringView) {
   Data::EntryPtr entry = d->coll->entryById(m_id);
   if(!entry) {
     myWarning() << "no entry with id = " << m_id;

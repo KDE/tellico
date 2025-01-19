@@ -266,7 +266,7 @@ void OPDSFetcher::stop() {
   }
 
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void OPDSFetcher::slotComplete(KJob*) {
@@ -323,7 +323,7 @@ void OPDSFetcher::parseData(const QByteArray& data_, bool manualSearch_) {
     if(manualSearch_ && !matchesEntry(entry)) continue;
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
   stop();
 }
@@ -505,7 +505,7 @@ void OPDSFetcher::ConfigWidget::verifyCatalog() {
     m_statusLabel->setPixmap(QIcon::fromTheme(QStringLiteral("emblem-checked")).pixmap(imgSize, imgSize));
     slotSetModified();
     if(!reader.name.isEmpty()) {
-      emit signalName(reader.name);
+      Q_EMIT signalName(reader.name);
     }
     m_name = reader.name;
     m_searchTemplate = reader.searchTemplate;

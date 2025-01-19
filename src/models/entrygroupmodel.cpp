@@ -102,7 +102,7 @@ bool EntryGroupModel::setHeaderData(int section_, Qt::Orientation orientation_,
     return false;
   }
   m_groupHeader = value_.toString();
-  emit headerDataChanged(orientation_, section_, section_);
+  Q_EMIT headerDataChanged(orientation_, section_, section_);
   return true;
 }
 
@@ -261,7 +261,7 @@ QModelIndex EntryGroupModel::modifyGroup(Tellico::Data::EntryGroup* group_) {
 
   // the only data that might have changed is the count
   if(oldCount != groupNode->childCount()) {
-    emit dataChanged(groupIndex, groupIndex);
+    Q_EMIT dataChanged(groupIndex, groupIndex);
   }
   return groupIndex;
 }

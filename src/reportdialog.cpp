@@ -62,14 +62,9 @@
 #include <QPrintDialog>
 #include <QTemporaryFile>
 
-#ifdef USE_KHTML
-#include <KHTMLPart>
-#include <KHTMLView>
-#else
 #include <QWebEngineView>
 #include <QWebEnginePage>
 #include <QWebEngineSettings>
-#endif
 
 namespace {
   static const int REPORT_MIN_WIDTH = 600;
@@ -105,12 +100,6 @@ ReportDialog::ReportDialog(QWidget* parent_)
   foreach(const QString& file, files) {
     QFileInfo fi(file);
     const QString lfile = fi.fileName();
-    // the Group Summary report template doesn't work with QWebView
-#ifndef USE_KHTML
-    if(lfile == QStringLiteral("Group_Summary.xsl")) {
-      continue;
-    }
-#endif
     QString name = lfile.section(QLatin1Char('.'), 0, -2);
     name.replace(QLatin1Char('_'), QLatin1Char(' '));
     QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8().constData(), name.toUtf8().constData());
@@ -127,11 +116,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
 
   m_templateCombo = new GUI::ComboBox(mainWidget);
   for(auto it = templates.constBegin(); it != templates.constEnd(); ++it) {
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    const auto metaType = static_cast<QMetaType::Type>(it.value().type());
-#else
     const auto metaType = static_cast<QMetaType::Type>(it.value().typeId());
-#endif
     QIcon icon;
     if(metaType == QMetaType::QUuid) {
       icon = QIcon::fromTheme(QStringLiteral("kchart"));
@@ -173,18 +158,6 @@ ReportDialog::ReportDialog(QWidget* parent_)
   m_reportView = new QStackedWidget(mainWidget);
   topLayout->addWidget(m_reportView);
 
-#ifdef USE_KHTML
-  m_HTMLPart = new KHTMLPart(m_reportView);
-  m_HTMLPart->setJScriptEnabled(true);
-  m_HTMLPart->setJavaEnabled(false);
-  m_HTMLPart->setMetaRefreshEnabled(false);
-  m_HTMLPart->setPluginsEnabled(false);
-
-  m_HTMLPart->begin();
-  m_HTMLPart->write(text);
-  m_HTMLPart->end();
-  m_reportView->insertWidget(INDEX_HTML, m_HTMLPart->view());
-#else
   m_webView = new QWebEngineView(m_reportView);
   connect(m_webView, &QWebEngineView::loadFinished, this, [](bool b) {
     if(!b) myDebug() << "ReportDialog - failed to load view";
@@ -198,7 +171,6 @@ ReportDialog::ReportDialog(QWidget* parent_)
 
   m_webView->setHtml(text);
   m_reportView->insertWidget(INDEX_HTML, m_webView);
-#endif
 
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
   mainLayout->addWidget(buttonBox);
@@ -226,11 +198,7 @@ void ReportDialog::slotGenerate() {
   GUI::CursorSaver cs(Qt::WaitCursor);
 
   QVariant curData = m_templateCombo->currentData();
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-  const auto metaType = static_cast<QMetaType::Type>(curData.type());
-#else
   const auto metaType = static_cast<QMetaType::Type>(curData.typeId());
-#endif
   if(metaType == QMetaType::QUuid) {
     generateChart();
     m_reportView->setCurrentIndex(INDEX_CHART);
@@ -366,28 +334,18 @@ void ReportDialog::slotRefresh() {
 }
 
 void ReportDialog::showText(const QString& text_, const QUrl& url_) {
-#ifdef USE_KHTML
-  m_HTMLPart->begin(url_);
-  m_HTMLPart->write(text_);
-  m_HTMLPart->end();
-#else
   // limit is 2 MB after percent encoding, etc., so give some padding
   if(text_.size() > 1200000) {
     delete m_tempFile;
     m_tempFile = new QTemporaryFile(QDir::tempPath() + QLatin1String("/tellicoreport_XXXXXX") + QLatin1String(".html"));
     m_tempFile->open();
     QTextStream ts(m_tempFile);
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    ts.setCodec("UTF-8");
-#else
     ts.setEncoding(QStringConverter::Utf8);
-#endif
     ts << text_;
     m_webView->load(QUrl::fromLocalFile(m_tempFile->fileName()));
   } else {
     m_webView->setHtml(text_, url_);
   }
-#endif
 #if 0
   myDebug() << "Remove debug from reportdialog.cpp";
   QFile f(QLatin1String("/tmp/test.html"));
@@ -424,43 +382,10 @@ void ReportDialog::slotPrint() {
       widget->render(&painter);
     }
   } else {
-#ifdef USE_KHTML
-    m_HTMLPart->view()->print();
-#else
     auto printer = new QPrinter(QPrinter::HighResolution);
     auto dialog = new QPrintDialog(printer, this);
     if(dialog->exec() == QDialog::Accepted) {
       GUI::CursorSaver cs(Qt::WaitCursor);
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-      QEventLoop loop;
-      if(dialog->printer()->outputFormat() == QPrinter::PdfFormat) {
-        myLog() << "Printing" << m_templateCombo->currentText() << "as PDF to" << dialog->printer()->outputFileName();
-        QObject::connect(m_webView->page(), &QWebEnginePage::pdfPrintingFinished, dialog, [&](const QString&, bool success) {
-          if(success) {
-            myLog() << "Printing PDF report completed";
-          } else {
-            myLog() << "Printing PDF report failed";
-          }
-          delete dialog;
-          delete printer;
-          loop.quit();
-        });
-        m_webView->page()->printToPdf(dialog->printer()->outputFileName(), dialog->printer()->pageLayout());
-      } else {
-        myLog() << "Printing" << m_templateCombo->currentText() << "report";
-        m_webView->page()->print(printer, [=, &loop](bool success) {
-          if(success) {
-            myLog() << "Printing report completed";
-          } else {
-            myLog() << "Printing report failed";
-          }
-          delete dialog;
-          delete printer;
-          loop.quit();
-        });
-      }
-      loop.exec();
-#else
       if(dialog->printer()->outputFormat() == QPrinter::PdfFormat) {
         myLog() << "Printing" << m_templateCombo->currentText() << "as PDF to" << dialog->printer()->outputFileName();
         QObject::connect(m_webView, &QWebEngineView::pdfPrintingFinished, dialog, [=](const QString&, bool success) {
@@ -486,9 +411,7 @@ void ReportDialog::slotPrint() {
         });
         m_webView->print(printer);
       }
-#endif
     }
-#endif
   }
 }
 

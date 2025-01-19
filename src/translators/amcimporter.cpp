@@ -72,7 +72,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   m_ds.setDevice(f);
   // AMC is always little-endian? can't confirm
   m_ds.setByteOrder(QDataStream::LittleEndian);
-  emit signalTotalSteps(this, f->size());
+  Q_EMIT signalTotalSteps(this, f->size());
 
   const uint l = sizeof(AMC_FILE_ID)-1;
   QVector<char> buffer(l+1);
@@ -104,7 +104,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   while(!m_cancelled && !m_failed && !f->atEnd()) {
     readEntry();
     if(showProgress) {
-      emit signalProgress(this, f->pos());
+      Q_EMIT signalProgress(this, f->pos());
       qApp->processEvents();
     }
   }

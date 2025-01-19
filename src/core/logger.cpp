@@ -61,7 +61,7 @@ void Logger::log(const QString& msg_) {
   }
 
   (*m_logStream) << msg_ << "\n";
-  emit updated();
+  Q_EMIT updated();
 }
 
 void Logger::log(QtMsgType type_, const QMessageLogContext& ctx_, const QString& msg_) {

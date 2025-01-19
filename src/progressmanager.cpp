@@ -68,7 +68,7 @@ void ProgressItem::setProgress(qulonglong steps_) {
     return;
   }
   m_progress = steps_;
-  emit signalProgress(this);
+  Q_EMIT signalProgress(this);
 
   if(m_progress >= m_total) {
     setDone();
@@ -77,7 +77,7 @@ void ProgressItem::setProgress(qulonglong steps_) {
 
 void ProgressItem::setTotalSteps(qulonglong steps_) {
   m_total = steps_;
-  emit signalTotalSteps(this);
+  Q_EMIT signalTotalSteps(this);
 }
 
 void ProgressItem::setDone() {
@@ -88,7 +88,7 @@ void ProgressItem::setDone() {
     myDebug() << "ProgressItem::setDone() - Progress item is already done";
   } else {
     m_done = true;
-    emit signalDone(this);
+    Q_EMIT signalDone(this);
   }
   // make sure the deleting doesn't interfere with anything
   QTimer::singleShot(3000, this, &QObject::deleteLater);
@@ -100,7 +100,7 @@ void ProgressItem::cancel() {
   }
 
   m_cancelled = true;
-  emit signalCancelled(this);
+  Q_EMIT signalCancelled(this);
 }
 
 /* *********************************************** */
@@ -119,7 +119,7 @@ void ProgressManager::setProgress(QObject* owner_, qulonglong steps_) {
 
   m_items[owner_] ->setProgress(steps_);
 //  slotUpdateTotalProgress(); // called in ProgressItem::setProgress()
-//  emit signalItemProgress(m_items[owner_]);
+//  Q_EMIT signalItemProgress(m_items[owner_]);
 }
 
 void ProgressManager::setTotalSteps(QObject* owner_, qulonglong steps_) {
@@ -193,12 +193,12 @@ void ProgressManager::slotUpdateTotalProgress() {
 
   if(total == 0) {
     if(!m_items.isEmpty()) {
-      emit signalTotalProgress(100);
+      Q_EMIT signalTotalProgress(100);
     }
     return;
   }
 
-  emit signalTotalProgress(100*progress/total);
+  Q_EMIT signalTotalProgress(100*progress/total);
 }
 
 void ProgressManager::slotCancelAll() {

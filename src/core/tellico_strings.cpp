@@ -24,38 +24,26 @@
 
 #include "tellico_strings.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <KLocalizedString>
-#define TC_STR const char*
-#define STR_NOOP I18N_NOOP
-#else
-#define TC_STR KLazyLocalizedString
-#define STR_NOOP kli18n
-#endif
+KLazyLocalizedString Tellico::errorOpen = kli18n("Tellico is unable to open the file - %1.");
+KLazyLocalizedString Tellico::errorLoad = kli18n("Tellico is unable to load the file - %1.");
+KLazyLocalizedString Tellico::errorWrite = kli18n("Tellico is unable to write the file - %1.");
+KLazyLocalizedString Tellico::errorUpload = kli18n("Tellico is unable to upload the file - %1.");
+KLazyLocalizedString Tellico::errorAppendType = kli18n("Only collections with the same type of entries as "
+                                                       "the current one can be appended. No changes are being "
+                                                       "made to the current collection.");
+KLazyLocalizedString Tellico::errorMergeType = kli18n("Only collections with the same type of entries as "
+                                                      "the current one can be merged. No changes are being "
+                                                      "made to the current collection.");
+KLazyLocalizedString Tellico::errorImageLoad = kli18n("Tellico is unable to load an image from the file - %1.");
 
-TC_STR Tellico::errorOpen = STR_NOOP("Tellico is unable to open the file - %1.");
-TC_STR Tellico::errorLoad = STR_NOOP("Tellico is unable to load the file - %1.");
-TC_STR Tellico::errorWrite = STR_NOOP("Tellico is unable to write the file - %1.");
-TC_STR Tellico::errorUpload = STR_NOOP("Tellico is unable to upload the file - %1.");
-TC_STR Tellico::errorAppendType = STR_NOOP("Only collections with the same type of entries as "
-                                                 "the current one can be appended. No changes are being "
-                                                 "made to the current collection.");
-TC_STR Tellico::errorMergeType = STR_NOOP("Only collections with the same type of entries as "
-                                                "the current one can be merged. No changes are being "
-                                                "made to the current collection.");
-TC_STR Tellico::errorImageLoad = STR_NOOP("Tellico is unable to load an image from the file - %1.");
+KLazyLocalizedString Tellico::untitledFilename = kli18n("Untitled");
+KLazyLocalizedString Tellico::providedBy = kli18n("This information was freely provided by <a href=\"%1\">%2</a>.");
 
-TC_STR Tellico::untitledFilename = STR_NOOP("Untitled");
-TC_STR Tellico::providedBy = STR_NOOP("This information was freely provided by <a href=\"%1\">%2</a>.");
-
-TC_STR Tellico::categoryGeneral        = STR_NOOP("General");
-TC_STR Tellico::categoryFeatures       = STR_NOOP("Features");
-TC_STR Tellico::categoryPeople         = STR_NOOP("Other People");
-TC_STR Tellico::categoryPublishing     = STR_NOOP("Publishing");
-TC_STR Tellico::categoryClassification = STR_NOOP("Classification");
-TC_STR Tellico::categoryCondition      = STR_NOOP("Condition");
-TC_STR Tellico::categoryPersonal       = STR_NOOP("Personal");
-TC_STR Tellico::categoryMisc           = STR_NOOP("Miscellaneous");
-
-#undef TC_STR
-#undef STR_NOOP
+KLazyLocalizedString Tellico::categoryGeneral        = kli18n("General");
+KLazyLocalizedString Tellico::categoryFeatures       = kli18n("Features");
+KLazyLocalizedString Tellico::categoryPeople         = kli18n("Other People");
+KLazyLocalizedString Tellico::categoryPublishing     = kli18n("Publishing");
+KLazyLocalizedString Tellico::categoryClassification = kli18n("Classification");
+KLazyLocalizedString Tellico::categoryCondition      = kli18n("Condition");
+KLazyLocalizedString Tellico::categoryPersonal       = kli18n("Personal");
+KLazyLocalizedString Tellico::categoryMisc           = kli18n("Miscellaneous");

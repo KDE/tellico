@@ -157,7 +157,7 @@ void MusicBrainzFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void MusicBrainzFetcher::slotComplete(KJob* ) {
@@ -240,7 +240,7 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, Data::EntryPtr(entry));
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
     ++count;
   }
 

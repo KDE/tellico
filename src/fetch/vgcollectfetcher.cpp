@@ -122,7 +122,7 @@ void VGCollectFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void VGCollectFetcher::slotComplete(KJob*) {
@@ -194,7 +194,7 @@ void VGCollectFetcher::slotComplete(KJob*) {
     QUrl url = QUrl(QString::fromLatin1(VGCOLLECT_BASE_URL)).resolved(QUrl(u));
     m_matches.insert(r->uid, url);
     // don't emit signal until after putting url in matches hash
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 
   stop();

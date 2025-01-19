@@ -44,9 +44,6 @@ namespace {
   static const int NUM_CHART_COLUMNS = 2;
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-using namespace QtCharts;
-#endif
 using Tellico::GroupSummaryWidget;
 using Tellico::GroupSummaryReport;
 

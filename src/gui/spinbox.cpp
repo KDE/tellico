@@ -64,11 +64,7 @@ void SpinBox::stepBy(int steps_) {
   // then when the little buttons are clicked, the internal value is inserted in the line edit
   // but the valueChanged signal is not emitted
   if(oldText != lineEdit()->text() && oldValue == value()) {
-    emit valueChanged(value());
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-    emit valueChanged(text());
-#else
-    emit textChanged(text());
-#endif
+    Q_EMIT valueChanged(value());
+    Q_EMIT textChanged(text());
   }
 }

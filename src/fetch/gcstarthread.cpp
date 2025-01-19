@@ -46,9 +46,9 @@ void GCstarThread::run() {
 }
 
 void GCstarThread::slotData() {
-  emit standardOutput(static_cast<KProcess*>(sender())->readAllStandardOutput());
+  Q_EMIT standardOutput(static_cast<KProcess*>(sender())->readAllStandardOutput());
 }
 
 void GCstarThread::slotError() {
-  emit standardError(static_cast<KProcess*>(sender())->readAllStandardError());
+  Q_EMIT standardError(static_cast<KProcess*>(sender())->readAllStandardError());
 }

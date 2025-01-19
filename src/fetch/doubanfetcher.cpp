@@ -178,7 +178,7 @@ void DoubanFetcher::stop() {
   }
   m_jobs.clear();
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void DoubanFetcher::slotCompleteISBN(KJob* job_) {
@@ -218,7 +218,7 @@ void DoubanFetcher::slotCompleteISBN(KJob* job_) {
       FetchResult* r = new FetchResult(this, entry);
       m_entries.insert(r->uid, entry);
       m_matches.insert(r->uid, QUrl(mapValue(resultMap, "url")));
-      emit signalResultFound(r);
+      Q_EMIT signalResultFound(r);
     }
   }
 
@@ -281,7 +281,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
                                          mapValue(resultMap, "publisher") + QLatin1Char('/') +
                                          mapValue(resultMap, "pubdate").left(4));
         m_matches.insert(r->uid, QUrl(mapValue(resultMap, "url")));
-        emit signalResultFound(r);
+        Q_EMIT signalResultFound(r);
       }
       break;
 
@@ -295,7 +295,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
         m_matches.insert(r->uid, QUrl(QLatin1String(DOUBAN_API_URL) +
                                       QLatin1String("movie/subject/") +
                                       mapValue(resultMap, "id")));
-        emit signalResultFound(r);
+        Q_EMIT signalResultFound(r);
       }
       break;
 
@@ -310,7 +310,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
         m_matches.insert(r->uid, QUrl(QLatin1String(DOUBAN_API_URL) +
                                       QLatin1String("music/") +
                                       mapValue(resultMap, "id")));
-        emit signalResultFound(r);
+        Q_EMIT signalResultFound(r);
       }
       break;
 

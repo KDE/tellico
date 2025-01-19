@@ -172,7 +172,7 @@ void GoogleBookFetcher::stop() {
   }
   m_jobs.clear();
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 Tellico::Data::EntryPtr GoogleBookFetcher::fetchEntryHook(uint uid_) {
@@ -279,7 +279,7 @@ void GoogleBookFetcher::slotComplete(KJob* job_) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 
   m_start = m_entries.count();

@@ -321,11 +321,7 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
     case PegiField:
       {
       QStringList pegi = QStringLiteral("PEGI 3, PEGI 7, PEGI 12, PEGI 16, PEGI 18")
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-                         .split(FieldFormat::commaSplitRegularExpression(), QString::SkipEmptyParts);
-#else
                          .split(FieldFormat::commaSplitRegularExpression(), Qt::SkipEmptyParts);
-#endif
       field = new Field(QStringLiteral("pegi"), i18n("PEGI Rating"), pegi);
       }
       field->setCategory(i18n("General"));
@@ -355,10 +351,6 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
 }
 
 Tellico::Data::FieldList Tellico::listIntersection(const Tellico::Data::FieldList& list1, const Tellico::Data::FieldList& list2) {
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  // QList::toSet is deprecated
-  return list1.toSet().intersect(list2.toSet()).values();
-#else
   // std::set_intersection requires sorted lists. Just do the set intersection manually
   Data::FieldList returnList;
   QSet<Tellico::Data::FieldPtr> set(list1.begin(), list1.end());
@@ -372,5 +364,4 @@ Tellico::Data::FieldList Tellico::listIntersection(const Tellico::Data::FieldLis
         }
       );
   return returnList;
-#endif
 }

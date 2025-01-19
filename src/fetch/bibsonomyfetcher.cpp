@@ -114,7 +114,7 @@ void BibsonomyFetcher::stop() {
     m_job = nullptr;
   }
   m_started = false;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void BibsonomyFetcher::slotComplete(KJob*) {
@@ -154,7 +154,7 @@ void BibsonomyFetcher::slotComplete(KJob*) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, Data::EntryPtr(entry));
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
 
   stop(); // required

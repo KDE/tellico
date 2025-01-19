@@ -509,7 +509,7 @@ void ImageFactory::requestImageById(const QString& id_) {
   if(hasLocalImage(id_)) {
     QTimer::singleShot(0, factory, [id_] () {
       factory->addCachedImageImpl(id_, cacheDir());
-      emit factory->imageAvailable(id_);
+      Q_EMIT factory->imageAvailable(id_);
     });
     return;
   }
@@ -716,7 +716,7 @@ void ImageFactory::releaseImages() {
 }
 
 void ImageFactory::emitImageMismatch() {
-  emit imageLocationMismatch();
+  Q_EMIT imageLocationMismatch();
 }
 
 QUrl ImageFactory::localDirectory(const QUrl& url_) {
@@ -775,5 +775,5 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
     d->imageDict.insert(img.id(), new Data::Image(img));
     s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
   }
-  emit factory->imageAvailable(img.id());
+  Q_EMIT factory->imageAvailable(img.id());
 }

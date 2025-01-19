@@ -79,11 +79,7 @@ QStringList FieldFormat::splitValue(const QString& string_, SplitParsing parsing
   if(string_.isEmpty()) {
     return QStringList();
   }
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  const auto keepFlag = QString::KeepEmptyParts;
-#else
   const auto keepFlag = Qt::KeepEmptyParts;
-#endif
   switch(parsing_) {
     case StringSplit:
       return string_.split(delimiterString(), keepFlag);
@@ -97,19 +93,11 @@ QStringList FieldFormat::splitValue(const QString& string_, SplitParsing parsing
 }
 
 QStringList FieldFormat::splitRow(const QString& string_) {
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  return string_.isEmpty() ? QStringList() : string_.split(columnDelimiterString(), QString::KeepEmptyParts);
-#else
   return string_.isEmpty() ? QStringList() : string_.split(columnDelimiterString(), Qt::KeepEmptyParts);
-#endif
 }
 
 QStringList FieldFormat::splitTable(const QString& string_) {
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  return string_.isEmpty() ? QStringList() : string_.split(rowDelimiterString(), QString::KeepEmptyParts);
-#else
   return string_.isEmpty() ? QStringList() : string_.split(rowDelimiterString(), Qt::KeepEmptyParts);
-#endif
 }
 
 QString FieldFormat::sortKeyTitle(const QString& title_) {
@@ -238,11 +226,7 @@ QString FieldFormat::name(const QString& name_, Options opt_) {
   }
 
   // split the name by white space and commas
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  QStringList words = name.split(spaceComma, QString::SkipEmptyParts);
-#else
   QStringList words = name.split(spaceComma, Qt::SkipEmptyParts);
-#endif
   // psycho case where name == ","
   if(words.isEmpty()) {
     return name;

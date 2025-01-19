@@ -46,11 +46,7 @@ PreviewDialog::PreviewDialog(QWidget* parent_)
   setLayout(mainLayout);
 
   m_view = new EntryView(this);
-#ifdef USE_KHTML
-  mainLayout->addWidget(m_view->view());
-#else
   mainLayout->addWidget(m_view);
-#endif
 
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok);
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);

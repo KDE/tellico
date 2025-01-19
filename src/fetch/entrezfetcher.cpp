@@ -171,7 +171,7 @@ void EntrezFetcher::stop() {
   }
   m_started = false;
   m_step = Step::Begin;
-  emit signalDone(this);
+  Q_EMIT signalDone(this);
 }
 
 void EntrezFetcher::slotComplete(KJob*) {
@@ -330,7 +330,7 @@ void EntrezFetcher::summaryResults(const QByteArray& data_) {
     }
     FetchResult* r = new FetchResult(this, title, pubdate + QLatin1Char('/') + authors);
     m_matches.insert(r->uid, id);
-    emit signalResultFound(r);
+    Q_EMIT signalResultFound(r);
   }
   m_start = m_matches.count() + 1;
   m_hasMoreResults = m_start <= m_total;
