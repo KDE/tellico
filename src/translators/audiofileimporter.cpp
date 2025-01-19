@@ -561,13 +561,13 @@ int AudioFileImporter::discNumber(const TagLib::FileRef& ref_) const {
   }
 
   if(!disc.isEmpty()) {
-    int pos = disc.indexOf(QLatin1Char('/'));
+    auto pos = disc.indexOf(QLatin1Char('/'));
     int n;
     bool ok;
     if(pos == -1) {
       n = disc.toInt(&ok);
     } else {
-      n = disc.left(pos).toInt(&ok);
+      n = QStringView(disc).first(pos).toInt(&ok);
     }
     if(ok && n > 0) {
       num = n;

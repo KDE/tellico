@@ -48,7 +48,7 @@ public:
 private:
   void initRegularExpression() const;
   QStringList templateFields() const;
-  QString templateKeyValue(EntryPtr entry, const QString& key, bool formatted) const;
+  QString templateKeyValue(EntryPtr entry, QStringView key, bool formatted) const;
 
   QString m_fieldName;
   QString m_valueTemplate;

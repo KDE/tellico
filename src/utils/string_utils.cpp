@@ -81,7 +81,7 @@ int Tellico::toInt(const QString& s, bool* ok) {
     return 0;
   }
 
-  int idx = 0;
+  qsizetype idx = 0;
   while(idx < s.length() && s[idx].isDigit()) {
     ++idx;
   }
@@ -91,7 +91,7 @@ int Tellico::toInt(const QString& s, bool* ok) {
     }
     return 0;
   }
-  return s.left(idx).toInt(ok);
+  return QStringView(s).first(idx).toInt(ok);
 }
 
 uint Tellico::toUInt(const QString& s, bool* ok) {
@@ -102,7 +102,7 @@ uint Tellico::toUInt(const QString& s, bool* ok) {
     return 0;
   }
 
-  int idx = 0;
+  qsizetype idx = 0;
   while(idx < s.length() && s[idx].isDigit()) {
     ++idx;
   }
@@ -112,7 +112,7 @@ uint Tellico::toUInt(const QString& s, bool* ok) {
     }
     return 0;
   }
-  return s.left(idx).toUInt(ok);
+  return QStringView(s).first(idx).toUInt(ok);
 }
 
 QString Tellico::i18nReplace(QString text) {

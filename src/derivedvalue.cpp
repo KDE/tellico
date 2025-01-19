@@ -93,29 +93,32 @@ QString DerivedValue::value(EntryPtr entry_, bool formatted_) const {
   }
 
   QString result;
+  result.reserve(64); // just a magic number as a guess
+  QStringView templateView(m_valueTemplate);
 
-  int endPos;
-  int curPos = 0;
-  int pctPos = m_valueTemplate.indexOf(QLatin1Char('%'), curPos);
+  qsizetype endPos;
+  qsizetype curPos = 0;
+  qsizetype pctPos = m_valueTemplate.indexOf(QLatin1Char('%'), curPos);
   while(pctPos != -1 && pctPos+1 < m_valueTemplate.length()) {
     if(m_valueTemplate.at(pctPos+1) == QLatin1Char('{')) {
       endPos = m_valueTemplate.indexOf(QLatin1Char('}'), pctPos+2);
       if(endPos > -1) {
-        result += m_valueTemplate.mid(curPos, pctPos-curPos)
-                + templateKeyValue(entry_, m_valueTemplate.mid(pctPos+2, endPos-pctPos-2), formatted_);
+        result += templateView.sliced(curPos, pctPos-curPos)
+                + templateKeyValue(entry_, templateView.sliced(pctPos+2, endPos-pctPos-2), formatted_);
         curPos = endPos+1;
       } else {
         break;
       }
     } else {
-      result += m_valueTemplate.mid(curPos, pctPos-curPos+1);
+      result += templateView.sliced(curPos, pctPos-curPos+1);
       curPos = pctPos+1;
     }
-    pctPos = m_valueTemplate.indexOf(QLatin1Char('%'), curPos);
+    pctPos = templateView.indexOf(QLatin1Char('%'), curPos);
   }
-  result += m_valueTemplate.mid(curPos, m_valueTemplate.length()-curPos);
+  result += templateView.sliced(curPos, templateView.length()-curPos);
+  result.squeeze();
 //  myDebug() << "format_ << " = " << result;
-  // sometimes field value might empty, resulting in multiple consecutive white spaces
+  // sometimes field value might end up empty, resulting in multiple consecutive white spaces
   // so let's simplify that...
   return result.simplified();
 }
@@ -135,7 +138,7 @@ QStringList DerivedValue::templateFields() const {
   return list;
 }
 
-QString DerivedValue::templateKeyValue(EntryPtr entry_, const QString& key_, bool formatted_) const {
+QString DerivedValue::templateKeyValue(EntryPtr entry_, QStringView key_, bool formatted_) const {
   // @id is used often, so avoid regex if possible
   if(key_ == QLatin1String("@id")) {
     return QString::number(entry_->id());
@@ -144,7 +147,11 @@ QString DerivedValue::templateKeyValue(EntryPtr entry_, const QString& key_, boo
   if(m_keyRx.pattern().isEmpty()) {
     initRegularExpression();
   }
+#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
   auto match = m_keyRx.match(key_);
+#else
+  auto match = m_keyRx.matchView(key_);
+#endif
   if(!match.hasMatch()) {
     myDebug() << "unmatched regexp for" << key_;
     return QLatin1String("%{") + key_ + QLatin1Char('}');
