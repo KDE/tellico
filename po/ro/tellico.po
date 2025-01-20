@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-19 00:41+0000\n"
+"POT-Creation-Date: 2025-01-20 00:42+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -84,12 +84,6 @@ msgctxt "Title Listing (Horizontal) XSL Template"
 msgid "Title Listing (Horizontal)"
 msgstr "Opțiuni colecții video"
 
-#. i18n: file: xslt/report-templates/Group_Summary.xsl
-#, fuzzy, kde-format
-msgctxt "Group Summary XSL Template"
-msgid "Group Summary"
-msgstr "Grupează după:"
-
 #. i18n: file: xslt/report-templates/Image_List.xsl
 #, fuzzy, kde-format
 msgctxt "Image List XSL Template"
@@ -163,49 +157,49 @@ msgstr ""
 msgid "Name"
 msgstr "Nr. în serie"
 
-#: src/charts/collectionsizereport.cpp:48
-#: src/charts/collectionsizereport.cpp:122
+#: src/charts/collectionsizereport.cpp:45
+#: src/charts/collectionsizereport.cpp:119
 #, fuzzy, kde-format
 msgid "Collection Size"
 msgstr "Opțiuni colecții audio"
 
-#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1701
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1608
 #, fuzzy, kde-format
 msgid "Total entries: %1"
 msgstr "Șterge carte"
 
-#: src/charts/collectionsizereport.cpp:97
+#: src/charts/collectionsizereport.cpp:94
 #, fuzzy, kde-format
 msgid "Collection Size Over Time"
 msgstr "Opțiuni colecții audio"
 
-#: src/charts/groupsummaryreport.cpp:62
+#: src/charts/groupsummaryreport.cpp:59
 #, fuzzy, kde-format
 msgid "Group Summary: %1"
 msgstr "Grupează după:"
 
-#: src/charts/groupsummaryreport.cpp:68
+#: src/charts/groupsummaryreport.cpp:65
 #, fuzzy, kde-format
 msgid "Total number of entries: %1"
 msgstr "Șterge carte"
 
-#: src/charts/groupsummaryreport.cpp:122
+#: src/charts/groupsummaryreport.cpp:119
 #, fuzzy, kde-format
 msgid "Top Values: %1"
 msgstr "Șterge carte"
 
-#: src/charts/groupsummaryreport.cpp:194
+#: src/charts/groupsummaryreport.cpp:191
 #, fuzzy, kde-format
 msgid "Group Summary Report"
 msgstr "Grupează după:"
 
-#: src/charts/yeardistributionreport.cpp:71
-#: src/charts/yeardistributionreport.cpp:135
+#: src/charts/yeardistributionreport.cpp:68
+#: src/charts/yeardistributionreport.cpp:132
 #, fuzzy, kde-format
 msgid "Year Distribution"
 msgstr "Opțiuni colecții cărți"
 
-#: src/charts/yeardistributionreport.cpp:160
+#: src/charts/yeardistributionreport.cpp:157
 #, fuzzy, kde-format
 msgctxt "Distinct number of items"
 msgid "Count"
@@ -221,8 +215,9 @@ msgstr "Nu pot deschide fișierul - %1."
 msgid "My Collection"
 msgstr "Opțiuni colecții cărți"
 
-#: src/collection.cpp:887 src/document.cpp:530 src/field.cpp:290
-#: src/field.cpp:303 src/field.cpp:308 src/translators/filereaderbook.cpp:82
+#: src/collection.cpp:887 src/core/tellico_strings.cpp:48 src/document.cpp:530
+#: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
+#: src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
 #, fuzzy, kde-format
 msgid "Personal"
@@ -293,7 +288,7 @@ msgstr "Redenumește colecție..."
 msgid "Custom Collection"
 msgstr "&Colecție nouă"
 
-#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:798
+#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:789
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
@@ -423,61 +418,61 @@ msgstr ""
 msgid "A <i>Rating</i> field uses stars to show a rating number. "
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:203
+#: src/collectionfieldsdialog.cpp:198
 #, kde-format
 msgid "Cate&gory:"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:208
+#: src/collectionfieldsdialog.cpp:203
 #, kde-format
 msgid "The field category determines where the field is placed in the editor."
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:225
+#: src/collectionfieldsdialog.cpp:220
 #, fuzzy, kde-format
 msgid "Set &properties..."
 msgstr "Opțiuni generale"
 
-#: src/collectionfieldsdialog.cpp:229
+#: src/collectionfieldsdialog.cpp:224
 #, kde-format
 msgid ""
 "Extended field properties are used to specify things such as the "
 "corresponding bibtex field."
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:234
+#: src/collectionfieldsdialog.cpp:229
 #, kde-format
 msgid "Description:"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:241
+#: src/collectionfieldsdialog.cpp:236
 #, kde-format
 msgid ""
 "The description is a useful reminder of what information is contained in the "
 "field."
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:246
+#: src/collectionfieldsdialog.cpp:241
 #, fuzzy, kde-format
 msgid "Value Options"
 msgstr "Opțiuni generale"
 
-#: src/collectionfieldsdialog.cpp:251
+#: src/collectionfieldsdialog.cpp:246
 #, kde-format
 msgid "Default value:"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:256
+#: src/collectionfieldsdialog.cpp:251
 #, kde-format
 msgid "<qt>A default value can be set for new entries.</qt>"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:261
+#: src/collectionfieldsdialog.cpp:256
 #, fuzzy, kde-format
 msgid "Value template:"
 msgstr "Imprim..."
 
-#: src/collectionfieldsdialog.cpp:269
+#: src/collectionfieldsdialog.cpp:264
 #, kde-format
 msgid ""
 "Derived values are formed from the values of other fields according to the "
@@ -485,17 +480,17 @@ msgid ""
 "in the value."
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:275
+#: src/collectionfieldsdialog.cpp:270
 #, kde-format
 msgid "Use derived value"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:281
+#: src/collectionfieldsdialog.cpp:276
 #, kde-format
 msgid "A&llowed values:"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:286
+#: src/collectionfieldsdialog.cpp:281
 #, kde-format
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
@@ -503,42 +498,42 @@ msgid ""
 "semi-colon, for example: \"dog; cat; mouse\"</qt>"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:293
+#: src/collectionfieldsdialog.cpp:288
 #, fuzzy, kde-format
 msgid "Format options:"
 msgstr "Opțiuni generale"
 
-#: src/collectionfieldsdialog.cpp:299
+#: src/collectionfieldsdialog.cpp:294
 #, fuzzy, kde-format
 msgid "No formatting"
 msgstr "Opțiuni generale"
 
-#: src/collectionfieldsdialog.cpp:300
+#: src/collectionfieldsdialog.cpp:295
 #, kde-format
 msgid "Allow auto-capitalization only"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:301
+#: src/collectionfieldsdialog.cpp:296
 #, fuzzy, kde-format
 msgid "Format as a title"
 msgstr "Pune automat majuscule la autori și titluri"
 
-#: src/collectionfieldsdialog.cpp:302
+#: src/collectionfieldsdialog.cpp:297
 #, fuzzy, kde-format
 msgid "Format as a name"
 msgstr "Pune automat majuscule la autori și titluri"
 
-#: src/collectionfieldsdialog.cpp:306
+#: src/collectionfieldsdialog.cpp:301
 #, fuzzy, kde-format
 msgid "Field Options"
 msgstr "Opțiuni generale"
 
-#: src/collectionfieldsdialog.cpp:309
+#: src/collectionfieldsdialog.cpp:304
 #, fuzzy, kde-format
 msgid "Enable auto-completion"
 msgstr "Redenumește colecție..."
 
-#: src/collectionfieldsdialog.cpp:310
+#: src/collectionfieldsdialog.cpp:305
 #, fuzzy, kde-format
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
@@ -547,24 +542,24 @@ msgstr ""
 "Dacă bifați, ultimul fișier deschis va fi deschis din nou la pornirea "
 "programului."
 
-#: src/collectionfieldsdialog.cpp:312
+#: src/collectionfieldsdialog.cpp:307
 #, kde-format
 msgid "Allow multiple values"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:313
+#: src/collectionfieldsdialog.cpp:308
 #, kde-format
 msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
 "separated by a semi-colon."
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:315
+#: src/collectionfieldsdialog.cpp:310
 #, kde-format
 msgid "Allow grouping"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:316
+#: src/collectionfieldsdialog.cpp:311
 #, fuzzy, kde-format
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
@@ -572,17 +567,17 @@ msgstr ""
 "Dacă bifați, la numele grupului se va adăuga și numărul de elemente din acel "
 "grup."
 
-#: src/collectionfieldsdialog.cpp:346
+#: src/collectionfieldsdialog.cpp:341
 #, fuzzy, kde-format
 msgid "Revert the selected field's properties to the default values."
 msgstr "Schimbă modul de grupare a colecției"
 
-#: src/collectionfieldsdialog.cpp:403
+#: src/collectionfieldsdialog.cpp:398
 #, fuzzy, kde-format
 msgid "Modify Fields"
 msgstr "Modifică carte"
 
-#: src/collectionfieldsdialog.cpp:416
+#: src/collectionfieldsdialog.cpp:411
 #, kde-format
 msgid ""
 "<qt>Removing allowed values from the <i>%1</i> field which currently exist "
@@ -590,60 +585,60 @@ msgid ""
 "modified values or cancel and revert to the current ones?</qt>"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:421
+#: src/collectionfieldsdialog.cpp:416
 #, kde-format
 msgid "Keep modified values"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:520 src/collectionfieldsdialog.cpp:524
+#: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:519
 #, fuzzy, kde-format
 msgid "New Field %1"
 msgstr "Șterge carte"
 
-#: src/collectionfieldsdialog.cpp:815
+#: src/collectionfieldsdialog.cpp:806
 #, fuzzy, kde-format
 msgid "Revert Field Properties"
 msgstr "Opțiuni generale"
 
-#: src/collectionfieldsdialog.cpp:816
+#: src/collectionfieldsdialog.cpp:807
 #, kde-format
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:819
+#: src/collectionfieldsdialog.cpp:810
 #, kde-format
 msgid "Revert"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:893
+#: src/collectionfieldsdialog.cpp:884
 #, fuzzy, kde-format
 msgid "Extended Field Properties"
 msgstr "Opțiuni generale"
 
-#: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:104
+#: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:104
 #, fuzzy, kde-format
 msgid "Property"
 msgstr "An apariție"
 
-#: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:105
+#: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:105
 #: src/fetch/srufetcher.cpp:624
 #, fuzzy, kde-format
 msgid "Value"
 msgstr "Titlu"
 
-#: src/collectionfieldsdialog.cpp:930
+#: src/collectionfieldsdialog.cpp:921
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:937
+#: src/collectionfieldsdialog.cpp:928
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:945
+#: src/collectionfieldsdialog.cpp:936
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -651,14 +646,14 @@ msgid ""
 "qt>"
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:953
+#: src/collectionfieldsdialog.cpp:944
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:965
+#: src/collectionfieldsdialog.cpp:956
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -666,12 +661,12 @@ msgid ""
 "properties."
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:980
+#: src/collectionfieldsdialog.cpp:971
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr ""
 
-#: src/collectionfieldsdialog.cpp:986
+#: src/collectionfieldsdialog.cpp:977
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr ""
@@ -697,19 +692,19 @@ msgstr "Autor"
 msgid "Bibtex Key"
 msgstr "Opțiuni generale"
 
-#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:147
-#: src/configdialog.cpp:174 src/configdialog.cpp:188 src/configdialog.cpp:205
-#: src/configdialog.cpp:1146 src/fetch/amazonfetcher.cpp:863
-#: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
-#: src/fetch/colnectfetcher.cpp:371 src/fetch/colnectfetcher.cpp:538
-#: src/fetch/colnectfetcher.cpp:557 src/fetch/colnectfetcher.cpp:595
-#: src/fetch/colnectfetcher.cpp:602 src/fetch/discogsfetcher.cpp:307
-#: src/fetch/discogsfetcher.cpp:312 src/fetch/discogsfetcher.cpp:317
-#: src/fetch/discogsfetcher.cpp:324 src/fetch/discogsfetcher.cpp:331
-#: src/fetch/discogsfetcher.cpp:336 src/fetch/doubanfetcher.cpp:373
-#: src/fetch/doubanfetcher.cpp:391 src/fetch/doubanfetcher.cpp:409
-#: src/fetch/filmaffinityfetcher.cpp:284 src/fetch/filmasterfetcher.cpp:238
-#: src/fetch/gaminghistoryfetcher.cpp:196
+#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:143
+#: src/configdialog.cpp:170 src/configdialog.cpp:184 src/configdialog.cpp:201
+#: src/configdialog.cpp:1132 src/core/tellico_strings.cpp:42
+#: src/fetch/amazonfetcher.cpp:863 src/fetch/bedethequefetcher.cpp:317
+#: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:371
+#: src/fetch/colnectfetcher.cpp:538 src/fetch/colnectfetcher.cpp:557
+#: src/fetch/colnectfetcher.cpp:595 src/fetch/colnectfetcher.cpp:602
+#: src/fetch/discogsfetcher.cpp:307 src/fetch/discogsfetcher.cpp:312
+#: src/fetch/discogsfetcher.cpp:317 src/fetch/discogsfetcher.cpp:324
+#: src/fetch/discogsfetcher.cpp:331 src/fetch/discogsfetcher.cpp:336
+#: src/fetch/doubanfetcher.cpp:373 src/fetch/doubanfetcher.cpp:391
+#: src/fetch/doubanfetcher.cpp:409 src/fetch/filmaffinityfetcher.cpp:284
+#: src/fetch/filmasterfetcher.cpp:238 src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:253
 #: src/fetch/googlebookfetcher.cpp:258 src/fetch/igdbfetcher.cpp:366
 #: src/fetch/imdbfetcher.cpp:459 src/fetch/itunesfetcher.cpp:239
@@ -725,7 +720,7 @@ msgstr "Opțiuni generale"
 #: src/fetch/tvmazefetcher.cpp:175 src/fetch/tvmazefetcher.cpp:180
 #: src/fetch/upcitemdbfetcher.cpp:213 src/fetch/vgcollectfetcher.cpp:234
 #: src/fetch/vgcollectfetcher.cpp:337 src/field.cpp:38 src/field.cpp:79
-#: src/field.cpp:297 src/field.cpp:331 src/field.cpp:336
+#: src/field.cpp:297 src/field.cpp:327 src/field.cpp:332
 #: src/translators/filereadervideo.cpp:282
 #: src/translators/gcstarimporter.cpp:89
 #, kde-format
@@ -945,7 +940,7 @@ msgstr ""
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:378 src/fetch/colnectfetcher.cpp:843
 #: src/fetch/numistafetcher.cpp:351 src/fetch/numistafetcher.cpp:399
-#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:249
+#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:244
 #, kde-format
 msgid "Description"
 msgstr ""
@@ -1044,7 +1039,7 @@ msgstr "Subtitlu"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
 #: src/fetch/doubanfetcher.cpp:446 src/fetch/doubanfetcher.cpp:499
-#: src/fetch/ibsfetcher.cpp:289 src/translators/alexandriaimporter.cpp:163
+#: src/fetch/ibsfetcher.cpp:289 src/translators/alexandriaimporter.cpp:159
 #: src/translators/librarythingimporter.cpp:149
 #, kde-format
 msgid "Hardback"
@@ -1127,7 +1122,7 @@ msgid "Used"
 msgstr "Folosită"
 
 #: src/collections/bookcollection.cpp:148
-#: src/collections/comicbookcollection.cpp:123
+#: src/collections/comicbookcollection.cpp:123 src/core/tellico_strings.cpp:47
 #, kde-format
 msgid "Condition"
 msgstr "Stare"
@@ -1595,9 +1590,9 @@ msgstr ""
 #: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:162
-#: src/translators/freedbimporter.cpp:278
-#: src/translators/freedbimporter.cpp:400
-#: src/translators/freedbimporter.cpp:467
+#: src/translators/freedbimporter.cpp:272
+#: src/translators/freedbimporter.cpp:390
+#: src/translators/freedbimporter.cpp:457
 #, kde-format
 msgid "Compact Disc"
 msgstr ""
@@ -1649,8 +1644,8 @@ msgstr ""
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:483 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:317 src/fetchdialog.cpp:248 src/field.cpp:296
-#: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
+#: src/fetch/itunesfetcher.cpp:317 src/fetchdialog.cpp:243 src/field.cpp:296
+#: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:434
 #, kde-format
 msgid "Title"
@@ -2057,7 +2052,7 @@ msgid "Delete Filter"
 msgstr "Șterge carte"
 
 #: src/commands/modifyentries.cpp:50 src/commands/modifyentries.cpp:70
-#: src/entryeditdialog.cpp:391 src/entryeditdialog.cpp:395
+#: src/entryeditdialog.cpp:384
 #, fuzzy, kde-format
 msgid "Modify Entries"
 msgstr "Șterge carte"
@@ -2096,7 +2091,7 @@ msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
 msgstr "Șterge carte"
 
-#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:311
+#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:305
 #, fuzzy, kde-format
 msgid "Rename Collection"
 msgstr "Redenumește colecție..."
@@ -2276,39 +2271,39 @@ msgstr "Opțiuni generale"
 msgid "Template link color"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:100
+#: src/configdialog.cpp:96
 #, fuzzy, kde-format
 msgid "Configure Tellico"
 msgstr "Tellico"
 
-#: src/configdialog.cpp:149 src/configdialog.cpp:176 src/configdialog.cpp:190
-#: src/configdialog.cpp:347
+#: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
+#: src/configdialog.cpp:338
 #, fuzzy, kde-format
 msgid "Printing"
 msgstr "Imprim..."
 
-#: src/configdialog.cpp:151 src/configdialog.cpp:178 src/configdialog.cpp:192
-#: src/configdialog.cpp:424
+#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
+#: src/configdialog.cpp:415
 #, kde-format
 msgid "Templates"
 msgstr ""
 
-#: src/configdialog.cpp:153 src/configdialog.cpp:194 src/configdialog.cpp:627
+#: src/configdialog.cpp:149 src/configdialog.cpp:190 src/configdialog.cpp:613
 #, kde-format
 msgid "Data Sources"
 msgstr ""
 
-#: src/configdialog.cpp:206
+#: src/configdialog.cpp:202
 #, kde-format
 msgid "General Options"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:217
+#: src/configdialog.cpp:213
 #, fuzzy, kde-format
 msgid "&Reopen file at startup"
 msgstr "Redeschide fișierul la pornire"
 
-#: src/configdialog.cpp:218
+#: src/configdialog.cpp:214
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
@@ -2317,12 +2312,12 @@ msgstr ""
 "Dacă bifați, ultimul fișier deschis va fi deschis din nou la pornirea "
 "programului."
 
-#: src/configdialog.cpp:223
+#: src/configdialog.cpp:219
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
 msgstr ""
 
-#: src/configdialog.cpp:224
+#: src/configdialog.cpp:220
 #, fuzzy, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
@@ -2330,12 +2325,12 @@ msgstr ""
 "Dacă bifați, ultimul fișier deschis va fi deschis din nou la pornirea "
 "programului."
 
-#: src/configdialog.cpp:229
+#: src/configdialog.cpp:225
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr ""
 
-#: src/configdialog.cpp:230
+#: src/configdialog.cpp:226
 #, fuzzy, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
@@ -2344,27 +2339,27 @@ msgstr ""
 "Dacă bifați, ultimul fișier deschis va fi deschis din nou la pornirea "
 "programului."
 
-#: src/configdialog.cpp:235
+#: src/configdialog.cpp:231
 #, fuzzy, kde-format
 msgid "Image Storage Options"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:237
+#: src/configdialog.cpp:233
 #, fuzzy, kde-format
 msgid "Store images in data file"
 msgstr "Imprim..."
 
-#: src/configdialog.cpp:238
+#: src/configdialog.cpp:234
 #, kde-format
 msgid "Store images in common application directory"
 msgstr ""
 
-#: src/configdialog.cpp:239
+#: src/configdialog.cpp:235
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr ""
 
-#: src/configdialog.cpp:240
+#: src/configdialog.cpp:236
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2372,41 +2367,41 @@ msgid ""
 "directory in the same location as the data file."
 msgstr ""
 
-#: src/configdialog.cpp:272 src/configdialog.cpp:356
+#: src/configdialog.cpp:263 src/configdialog.cpp:347
 #, fuzzy, kde-format
 msgid "Formatting Options"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:277
+#: src/configdialog.cpp:268
 #, fuzzy, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "Pune automat majuscule la autori și titluri"
 
-#: src/configdialog.cpp:278
+#: src/configdialog.cpp:269
 #, fuzzy, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Dacă bifați, inițialele numelor de autori și titlurilor vor fi convertite "
 "automat la majuscule."
 
-#: src/configdialog.cpp:283
+#: src/configdialog.cpp:274
 #, fuzzy, kde-format
 msgid "Auto &format titles and names"
 msgstr "Pune automat majuscule la autori și titluri"
 
-#: src/configdialog.cpp:284 src/configdialog.cpp:362
+#: src/configdialog.cpp:275 src/configdialog.cpp:353
 #, fuzzy, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr ""
 "Dacă bifați, inițialele numelor de autori și titlurilor vor fi convertite "
 "automat la majuscule."
 
-#: src/configdialog.cpp:294
+#: src/configdialog.cpp:285
 #, kde-format
 msgid "No capitali&zation:"
 msgstr ""
 
-#: src/configdialog.cpp:299
+#: src/configdialog.cpp:290
 #, fuzzy, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2415,12 +2410,12 @@ msgstr ""
 "Listă de cuvinte, separate de virgulă, care vor fi considerate articole când "
 "apar la începutul unui titlu"
 
-#: src/configdialog.cpp:305
+#: src/configdialog.cpp:296
 #, fuzzy, kde-format
 msgid "Artic&les:"
 msgstr "Articole:"
 
-#: src/configdialog.cpp:310
+#: src/configdialog.cpp:301
 #, fuzzy, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2430,130 +2425,130 @@ msgstr ""
 "Listă de cuvinte, separate de virgulă, care vor fi considerate articole când "
 "apar la începutul unui titlu"
 
-#: src/configdialog.cpp:317
+#: src/configdialog.cpp:308
 #, fuzzy, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Sufixe nume:"
 
-#: src/configdialog.cpp:322
+#: src/configdialog.cpp:313
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
 msgstr ""
 
-#: src/configdialog.cpp:328
+#: src/configdialog.cpp:319
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr ""
 
-#: src/configdialog.cpp:333
+#: src/configdialog.cpp:324
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
 msgstr ""
 
-#: src/configdialog.cpp:348
+#: src/configdialog.cpp:339
 #, fuzzy, kde-format
 msgid "Printing Options"
 msgstr "Opțiuni colecții video"
 
-#: src/configdialog.cpp:361
+#: src/configdialog.cpp:352
 #, fuzzy, kde-format
 msgid "&Format titles and names"
 msgstr "Pune automat majuscule la autori și titluri"
 
-#: src/configdialog.cpp:366
+#: src/configdialog.cpp:357
 #, kde-format
 msgid "&Print field headers"
 msgstr ""
 
-#: src/configdialog.cpp:367 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:509
 #, fuzzy, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
 "Dacă bifați, ultimul fișier deschis va fi deschis din nou la pornirea "
 "programului."
 
-#: src/configdialog.cpp:371
+#: src/configdialog.cpp:362
 #, fuzzy, kde-format
 msgid "Grouping Options"
 msgstr "Grupare"
 
-#: src/configdialog.cpp:376
+#: src/configdialog.cpp:367
 #, fuzzy, kde-format
 msgid "&Group the entries"
 msgstr "Cărțile mele"
 
-#: src/configdialog.cpp:377 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:514
 #, fuzzy, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
 "Dacă bifați, ultimul fișier deschis va fi deschis din nou la pornirea "
 "programului."
 
-#: src/configdialog.cpp:381
+#: src/configdialog.cpp:372
 #, fuzzy, kde-format
 msgid "Image Options"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:387
+#: src/configdialog.cpp:378
 #, kde-format
 msgid "Maximum image &width:"
 msgstr ""
 
-#: src/configdialog.cpp:396
+#: src/configdialog.cpp:387
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr ""
 
-#: src/configdialog.cpp:402
+#: src/configdialog.cpp:393
 #, kde-format
 msgid "&Maximum image height:"
 msgstr ""
 
-#: src/configdialog.cpp:411
+#: src/configdialog.cpp:402
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr ""
 
-#: src/configdialog.cpp:425
+#: src/configdialog.cpp:416
 #, fuzzy, kde-format
 msgid "Template Options"
 msgstr "Opțiuni generale"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:439 src/fetch/execexternalfetcher.cpp:363
-#: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
+#: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
+#: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:218
-#: src/translators/filelistingimporter.cpp:181
+#: src/translators/filelistingimporter.cpp:177
 #, fuzzy, kde-format
 msgid "Collection &type:"
 msgstr "Opțiuni colecții cărți"
 
-#: src/configdialog.cpp:446
+#: src/configdialog.cpp:437
 #, fuzzy, kde-format
 msgid "Template:"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:451
+#: src/configdialog.cpp:442
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
 "templates will use the font and color settings."
 msgstr ""
 
-#: src/configdialog.cpp:458
+#: src/configdialog.cpp:449
 #, fuzzy, kde-format
 msgid "&Preview..."
 msgstr "Nouă"
 
-#: src/configdialog.cpp:459
+#: src/configdialog.cpp:450
 #, kde-format
 msgid "Show a preview of the template"
 msgstr ""
@@ -2563,295 +2558,292 @@ msgstr ""
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:467
 #, fuzzy, kde-format
 msgid "Font Options"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:483
+#: src/configdialog.cpp:474
 #, kde-format
 msgid "Font:"
 msgstr ""
 
-#: src/configdialog.cpp:489
+#: src/configdialog.cpp:480
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr ""
 
-#: src/configdialog.cpp:493
+#: src/configdialog.cpp:484
 #, fuzzy, kde-format
 msgid "Size:"
 msgstr "Semnată"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:496
 #, fuzzy, kde-format
 msgid "Color Options"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:512
+#: src/configdialog.cpp:503
 #, kde-format
 msgid "Background color:"
 msgstr ""
 
-#: src/configdialog.cpp:518
+#: src/configdialog.cpp:509
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr ""
 
-#: src/configdialog.cpp:522
+#: src/configdialog.cpp:513
 #, kde-format
 msgid "Text color:"
 msgstr ""
 
-#: src/configdialog.cpp:531
+#: src/configdialog.cpp:522
 #, kde-format
 msgid "Highlight color:"
 msgstr ""
 
-#: src/configdialog.cpp:540
+#: src/configdialog.cpp:531
 #, kde-format
 msgid "Highlighted text color:"
 msgstr ""
 
-#: src/configdialog.cpp:549
+#: src/configdialog.cpp:540
 #, kde-format
 msgid "Link color:"
 msgstr ""
 
-#: src/configdialog.cpp:558
+#: src/configdialog.cpp:549
 #, kde-format
 msgid "Manage Templates"
 msgstr ""
 
-#: src/configdialog.cpp:568
+#: src/configdialog.cpp:559
 #, kde-format
 msgid "Install..."
 msgstr ""
 
-#: src/configdialog.cpp:572
+#: src/configdialog.cpp:563
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr ""
 
-#: src/configdialog.cpp:577 src/configdialog.cpp:580 src/configdialog.cpp:584
+#: src/configdialog.cpp:567 src/configdialog.cpp:570
 #, kde-format
 msgid "Download..."
 msgstr ""
 
-#: src/configdialog.cpp:589
+#: src/configdialog.cpp:575
 #, kde-format
 msgid "Click to download additional templates."
 msgstr ""
 
-#: src/configdialog.cpp:592
+#: src/configdialog.cpp:578
 #, fuzzy, kde-format
 msgid "Delete..."
 msgstr "Titlu"
 
-#: src/configdialog.cpp:596
+#: src/configdialog.cpp:582
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr ""
 
-#: src/configdialog.cpp:628
+#: src/configdialog.cpp:614
 #, fuzzy, kde-format
 msgid "Data Sources Options"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:649
+#: src/configdialog.cpp:635
 #, kde-format
 msgid "Move &Up"
 msgstr ""
 
-#: src/configdialog.cpp:652
+#: src/configdialog.cpp:638
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
 "are automatically updated."
 msgstr ""
 
-#: src/configdialog.cpp:655
+#: src/configdialog.cpp:641
 #, kde-format
 msgid "Move &Down"
 msgstr ""
 
-#: src/configdialog.cpp:664
+#: src/configdialog.cpp:650
 #, fuzzy, kde-format
 msgid "Filter by type:"
 msgstr "Șterge carte"
 
-#: src/configdialog.cpp:682
+#: src/configdialog.cpp:668
 #, fuzzy, kde-format
 msgid "&New..."
 msgstr "Nouă"
 
-#: src/configdialog.cpp:684
+#: src/configdialog.cpp:670
 #, kde-format
 msgid "Click to add a new data source."
 msgstr ""
 
-#: src/configdialog.cpp:685
+#: src/configdialog.cpp:671
 #, kde-format
 msgid "&Modify..."
 msgstr ""
 
-#: src/configdialog.cpp:687
+#: src/configdialog.cpp:673
 #, fuzzy, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Șterge carte"
 
-#: src/configdialog.cpp:688
+#: src/configdialog.cpp:674
 #, fuzzy, kde-format
 msgid "&Delete"
 msgstr "Titlu"
 
-#: src/configdialog.cpp:690
+#: src/configdialog.cpp:676
 #, fuzzy, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Șterge carte"
 
-#: src/configdialog.cpp:1178 src/translators/xsltexporter.cpp:101
-#: src/translators/xsltexporter.cpp:106 src/translators/xsltimporter.cpp:128
-#: src/translators/xsltimporter.cpp:133
+#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:99
+#: src/translators/xsltimporter.cpp:126
 #, fuzzy, kde-format
 msgid "XSL Files"
 msgstr "Șterge carte"
 
-#: src/configdialog.cpp:1179
+#: src/configdialog.cpp:1165
 #, fuzzy, kde-format
 msgid "Template Packages"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1330
-#: src/mainwindow.cpp:1506 src/reportdialog.cpp:499 src/reportdialog.cpp:514
+#: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1242
+#: src/mainwindow.cpp:1413 src/reportdialog.cpp:422 src/reportdialog.cpp:437
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
-#: src/translators/librarythingimporter.cpp:191
-#: src/translators/librarythingimporter.cpp:195
+#: src/translators/librarythingimporter.cpp:188
 #: src/translators/onixexporter.cpp:71
 #: src/translators/tellicoxmlexporter.cpp:71
 #: src/translators/tellicozipexporter.cpp:54
-#: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:103
-#: src/translators/xsltexporter.cpp:107 src/translators/xsltimporter.cpp:130
-#: src/translators/xsltimporter.cpp:134
+#: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:100
+#: src/translators/xsltimporter.cpp:127
 #, fuzzy, kde-format
 msgid "All Files"
 msgstr "Opțiuni colecții audio"
 
-#: src/configdialog.cpp:1209
+#: src/configdialog.cpp:1191
 #, fuzzy, kde-format
 msgid "Delete Template"
 msgstr "Șterge carte"
 
-#: src/configdialog.cpp:1210
+#: src/configdialog.cpp:1192
 #, kde-format
 msgid "Select template to delete:"
 msgstr ""
 
-#: src/configdialog.cpp:1250
+#: src/configdialog.cpp:1232
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1254
+#: src/configdialog.cpp:1236
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1260
+#: src/configdialog.cpp:1242
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1264
+#: src/configdialog.cpp:1246
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1274
+#: src/configdialog.cpp:1256
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
-#: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
-#: src/fetchdialog.cpp:634 src/gui/statusbar.cpp:94
+#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:318
+#: src/fetchdialog.cpp:417 src/fetchdialog.cpp:550 src/fetchdialog.cpp:611
+#: src/fetchdialog.cpp:625 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Gata."
 
-#: src/controller.cpp:365
+#: src/controller.cpp:359
 #, kde-format
 msgid "Do you really want to delete this entry?"
 msgstr ""
 
-#: src/controller.cpp:367
+#: src/controller.cpp:361
 #, fuzzy, kde-format
 msgid "Delete Entry"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:379
+#: src/controller.cpp:373
 #, kde-format
 msgid "Do you really want to delete these entries?"
 msgstr ""
 
-#: src/controller.cpp:383
+#: src/controller.cpp:377
 #, fuzzy, kde-format
 msgid "Delete Multiple Entries"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:532
+#: src/controller.cpp:526
 #, fuzzy, kde-format
 msgid "&Sort By"
 msgstr "Ies..."
 
-#: src/controller.cpp:594 src/mainwindow.cpp:618
+#: src/controller.cpp:588 src/mainwindow.cpp:574
 #, fuzzy, kde-format
 msgid "&Edit Entry..."
 msgstr "Șterge carte"
 
-#: src/controller.cpp:595 src/mainwindow.cpp:625
+#: src/controller.cpp:589 src/mainwindow.cpp:581
 #, fuzzy, kde-format
 msgid "D&uplicate Entry"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:596 src/mainwindow.cpp:719
+#: src/controller.cpp:590 src/mainwindow.cpp:665
 #, fuzzy, kde-format
 msgid "&Update Entry"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:597 src/mainwindow.cpp:632
+#: src/controller.cpp:591 src/mainwindow.cpp:588
 #, fuzzy, kde-format
 msgid "&Delete Entry"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:600
+#: src/controller.cpp:594
 #, fuzzy, kde-format
 msgid "&Edit Entries..."
 msgstr "Șterge carte"
 
-#: src/controller.cpp:601
+#: src/controller.cpp:595
 #, fuzzy, kde-format
 msgid "D&uplicate Entries"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:602
+#: src/controller.cpp:596
 #, fuzzy, kde-format
 msgid "&Update Entries"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:603
+#: src/controller.cpp:597
 #, fuzzy, kde-format
 msgid "&Delete Entries"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:660
+#: src/controller.cpp:654
 #, kde-format
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
@@ -2859,25 +2851,99 @@ msgid ""
 "of items to lend."
 msgstr ""
 
-#: src/core/filehandler.cpp:167
+#: src/core/filehandler.cpp:163
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr ""
 
-#: src/core/filehandler.cpp:169
+#: src/core/filehandler.cpp:165
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr ""
 
-#: src/core/filehandler.cpp:201
+#: src/core/filehandler.cpp:197
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
 
-#: src/core/filehandler.cpp:204
+#: src/core/filehandler.cpp:200
 #, kde-format
 msgid "Overwrite File?"
+msgstr ""
+
+#: src/core/tellico_strings.cpp:27
+#, fuzzy, kde-format
+msgid "Tellico is unable to open the file - %1."
+msgstr "Nu pot deschide fișierul - %1."
+
+#: src/core/tellico_strings.cpp:28
+#, fuzzy, kde-format
+msgid "Tellico is unable to load the file - %1."
+msgstr "Nu pot deschide fișierul - %1."
+
+#: src/core/tellico_strings.cpp:29
+#, fuzzy, kde-format
+msgid "Tellico is unable to write the file - %1."
+msgstr "Nu pot deschide fișierul - %1."
+
+#: src/core/tellico_strings.cpp:30
+#, fuzzy, kde-format
+msgid "Tellico is unable to upload the file - %1."
+msgstr "Nu pot deschide fișierul - %1."
+
+#: src/core/tellico_strings.cpp:31
+msgid ""
+"Only collections with the same type of entries as the current one can be "
+"appended. No changes are being made to the current collection."
+msgstr ""
+
+#: src/core/tellico_strings.cpp:34
+msgid ""
+"Only collections with the same type of entries as the current one can be "
+"merged. No changes are being made to the current collection."
+msgstr ""
+
+#: src/core/tellico_strings.cpp:37
+#, fuzzy, kde-format
+msgid "Tellico is unable to load an image from the file - %1."
+msgstr "Nu pot deschide fișierul - %1."
+
+#: src/core/tellico_strings.cpp:39
+#, fuzzy
+#| msgid "Subtitle"
+msgid "Untitled"
+msgstr "Subtitlu"
+
+#: src/core/tellico_strings.cpp:40
+#, kde-format
+msgid "This information was freely provided by <a href=\"%1\">%2</a>."
+msgstr ""
+
+#: src/core/tellico_strings.cpp:43
+msgid "Features"
+msgstr ""
+
+#: src/core/tellico_strings.cpp:44
+msgid "Other People"
+msgstr ""
+
+#: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:360
+#: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
+#: src/translators/pdfimporter.cpp:232
+#, fuzzy, kde-format
+msgid "Publishing"
+msgstr "Editare"
+
+#: src/core/tellico_strings.cpp:46
+#, fuzzy
+msgid "Classification"
+msgstr "Clasificare"
+
+#: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
+#: src/translators/risimporter.cpp:339
+#, kde-format
+msgid "Miscellaneous"
 msgstr ""
 
 #: src/detailedlistview.cpp:520
@@ -2912,13 +2978,13 @@ msgstr ""
 msgid "Hide All Columns"
 msgstr ""
 
-#: src/document.cpp:212 src/mainwindow.cpp:1445
+#: src/document.cpp:212 src/mainwindow.cpp:1357
 #, kde-format
 msgid "Saving file..."
 msgstr "Salvez fișierul..."
 
-#: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:417
-#: src/entryeditdialog.cpp:439 src/entryeditdialog.cpp:534
+#: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:405
+#: src/entryeditdialog.cpp:427 src/entryeditdialog.cpp:522
 #, fuzzy, kde-format
 msgid "Edit Entry"
 msgstr "Șterge carte"
@@ -2929,7 +2995,7 @@ msgid "&New Entry"
 msgstr "Șterge carte"
 
 #: src/entryeditdialog.cpp:91 src/entryeditdialog.cpp:132
-#: src/entryeditdialog.cpp:449 src/entryeditdialog.cpp:555
+#: src/entryeditdialog.cpp:437 src/entryeditdialog.cpp:543
 #, fuzzy, kde-format
 msgid "Sa&ve Entry"
 msgstr "Șterge carte"
@@ -2939,27 +3005,27 @@ msgstr "Șterge carte"
 msgid "Do you really want to modify these entries?"
 msgstr ""
 
-#: src/entryeditdialog.cpp:338 src/entryeditdialog.cpp:342
+#: src/entryeditdialog.cpp:337
 #, fuzzy, kde-format
 msgid "Modify Multiple Entries"
 msgstr "Modifică carte"
 
-#: src/entryeditdialog.cpp:384
+#: src/entryeditdialog.cpp:378
 #, kde-format
 msgid "A value is required for the following fields. Do you want to continue?"
 msgstr ""
 
-#: src/entryeditdialog.cpp:485
+#: src/entryeditdialog.cpp:473
 #, fuzzy, kde-format
 msgid "Edit Entries"
 msgstr "Șterge carte"
 
-#: src/entryeditdialog.cpp:511
+#: src/entryeditdialog.cpp:499
 #, fuzzy, kde-format
 msgid "Sa&ve Entries"
 msgstr "Șterge carte"
 
-#: src/entryeditdialog.cpp:670
+#: src/entryeditdialog.cpp:658
 #, fuzzy, kde-format
 msgid ""
 "The current entry has been modified.\n"
@@ -2968,18 +3034,21 @@ msgstr ""
 "Fișierul curent a fost modificat.\n"
 "Doriți să îl salvați?"
 
-#: src/entryeditdialog.cpp:673
+#: src/entryeditdialog.cpp:661
 #, fuzzy, kde-format
 msgid "Save Entry"
 msgstr "Șterge carte"
 
-#: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1215 src/mainwindow.cpp:1233
+#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1146
 #, kde-format
 msgid "Unsaved Changes"
 msgstr ""
 
-#: src/entryiconview.cpp:61 src/mainwindow.cpp:895
+#: src/entrygroup.cpp:33
+msgid "(Empty)"
+msgstr "(gol)"
+
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3004,7 +3073,7 @@ msgid ""
 "entry currently in the collection. Please select the correct match.</qt>"
 msgstr ""
 
-#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:349 src/tellico_kernel.cpp:361
+#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:342
 #, fuzzy, kde-format
 msgid "Merge Entries"
 msgstr "Șterge carte"
@@ -3039,12 +3108,12 @@ msgstr "Șterge carte"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr ""
 
-#: src/entryview.cpp:357
+#: src/entryview.cpp:289
 #, fuzzy, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Nu pot deschide fișierul - %1."
 
-#: src/entryview.cpp:359 src/mainwindow.cpp:1854
+#: src/entryview.cpp:291 src/mainwindow.cpp:1761
 #, fuzzy, kde-format
 msgid "Please check your installation."
 msgstr ""
@@ -3364,7 +3433,7 @@ msgstr ""
 #: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:235
 #: src/fetch/thetvdbfetcher.cpp:340 src/fetch/tvmazefetcher.cpp:262
 #: src/fetch/upcitemdbfetcher.cpp:259 src/fetch/vgcollectfetcher.cpp:282
-#: src/fetch/vndbfetcher.cpp:182
+#: src/fetch/vndbfetcher.cpp:176
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr ""
@@ -3397,7 +3466,7 @@ msgid ""
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:978 src/fetch/imdbfetcher.cpp:567
+#: src/fetch/colnectfetcher.cpp:978 src/fetch/imdbfetcher.cpp:563
 #: src/fetch/itunesfetcher.cpp:551 src/fetch/mobygamesfetcher.cpp:669
 #: src/fetch/rpggeekfetcher.cpp:224 src/fetch/thegamesdbfetcher.cpp:655
 #: src/fetch/videogamegeekfetcher.cpp:215
@@ -3406,7 +3475,7 @@ msgid "&Image size: "
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:219
-#: src/fetch/colnectfetcher.cpp:982 src/fetch/imdbfetcher.cpp:570
+#: src/fetch/colnectfetcher.cpp:982 src/fetch/imdbfetcher.cpp:566
 #: src/fetch/itunesfetcher.cpp:555 src/fetch/mobygamesfetcher.cpp:672
 #: src/fetch/rpggeekfetcher.cpp:228 src/fetch/thegamesdbfetcher.cpp:658
 #: src/fetch/videogamegeekfetcher.cpp:219
@@ -3414,7 +3483,7 @@ msgstr ""
 msgid "Small Image"
 msgstr "Titlu"
 
-#: src/fetch/amazonfetcher.cpp:1152 src/fetch/imdbfetcher.cpp:571
+#: src/fetch/amazonfetcher.cpp:1152 src/fetch/imdbfetcher.cpp:567
 #: src/fetch/thegamesdbfetcher.cpp:659
 #, fuzzy, kde-format
 msgid "Medium Image"
@@ -3422,7 +3491,7 @@ msgstr "Suport"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:220
-#: src/fetch/colnectfetcher.cpp:983 src/fetch/imdbfetcher.cpp:572
+#: src/fetch/colnectfetcher.cpp:983 src/fetch/imdbfetcher.cpp:568
 #: src/fetch/itunesfetcher.cpp:556 src/fetch/mobygamesfetcher.cpp:674
 #: src/fetch/rpggeekfetcher.cpp:229 src/fetch/thegamesdbfetcher.cpp:660
 #: src/fetch/videogamegeekfetcher.cpp:220
@@ -3431,7 +3500,7 @@ msgid "Large Image"
 msgstr "Titlu"
 
 #: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:981 src/fetch/imdbfetcher.cpp:573
+#: src/fetch/colnectfetcher.cpp:981 src/fetch/imdbfetcher.cpp:569
 #: src/fetch/itunesfetcher.cpp:554 src/fetch/mobygamesfetcher.cpp:675
 #: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:661
 #: src/fetch/videogamegeekfetcher.cpp:218
@@ -3439,7 +3508,7 @@ msgstr "Titlu"
 msgid "No Image"
 msgstr "Pagini"
 
-#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:577
+#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:573
 #: src/fetch/mobygamesfetcher.cpp:679 src/fetch/thegamesdbfetcher.cpp:665
 #, kde-format
 msgid ""
@@ -3471,13 +3540,13 @@ msgstr ""
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
 #: src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
-#: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
+#: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:611
 #: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
 #: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:457
 #: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:386
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
-#: src/fetch/vndbfetcher.cpp:440
+#: src/fetch/vndbfetcher.cpp:434
 #, kde-format
 msgid "This source has no options."
 msgstr ""
@@ -3525,14 +3594,14 @@ msgid "Michel"
 msgstr ""
 
 #: src/fetch/colnectfetcher.cpp:846 src/fetch/giantbombfetcher.cpp:203
-#: src/fetch/igdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:635
-#: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:329
+#: src/fetch/igdbfetcher.cpp:573 src/fetch/mobygamesfetcher.cpp:635
+#: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:325
 #, fuzzy, kde-format
 msgid "PEGI Rating"
 msgstr "Calificativ"
 
-#: src/fetch/colnectfetcher.cpp:950 src/fetch/filmaffinityfetcher.cpp:492
-#: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:626
+#: src/fetch/colnectfetcher.cpp:950 src/fetch/filmaffinityfetcher.cpp:488
+#: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:622
 #, fuzzy, kde-format
 #| msgid "Language"
 msgid "Language: "
@@ -3652,8 +3721,8 @@ msgstr "Șterge carte"
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:327
-#: src/fetch/themoviedbfetcher.cpp:571 src/fetch/vndbfetcher.cpp:285
-#: src/fetch/vndbfetcher.cpp:432 src/translators/filereadervideo.cpp:206
+#: src/fetch/themoviedbfetcher.cpp:571 src/fetch/vndbfetcher.cpp:279
+#: src/fetch/vndbfetcher.cpp:426 src/translators/filereadervideo.cpp:206
 #, kde-format
 msgid "Original Title"
 msgstr ""
@@ -3678,11 +3747,6 @@ msgstr "Calificativ"
 msgid "Alternative Titles"
 msgstr ""
 
-#: src/fetch/entrezfetcher.cpp:447 src/translators/risimporter.cpp:339
-#, kde-format
-msgid "Miscellaneous"
-msgstr ""
-
 #: src/fetch/entrezfetcher.cpp:510
 #, kde-format
 msgid "Entrez Database"
@@ -3693,45 +3757,45 @@ msgstr ""
 msgid "Institution"
 msgstr "Stare"
 
-#: src/fetch/execexternalfetcher.cpp:348
+#: src/fetch/execexternalfetcher.cpp:340
 #, fuzzy, kde-format
 msgid "External Application"
 msgstr "Părăsește aplicația"
 
-#: src/fetch/execexternalfetcher.cpp:369
+#: src/fetch/execexternalfetcher.cpp:361
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:374
+#: src/fetch/execexternalfetcher.cpp:366
 #, kde-format
 msgid "&Result type: "
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:383
+#: src/fetch/execexternalfetcher.cpp:375
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:397
+#: src/fetch/execexternalfetcher.cpp:389
 #, kde-format
 msgid "Application &path: "
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:402
+#: src/fetch/execexternalfetcher.cpp:394
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:407
+#: src/fetch/execexternalfetcher.cpp:399
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:409
+#: src/fetch/execexternalfetcher.cpp:401
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3739,17 +3803,17 @@ msgid ""
 msgstr ""
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:410
+#: src/fetch/execexternalfetcher.cpp:402
 #, kde-format
 msgid "Arguments"
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:442
+#: src/fetch/execexternalfetcher.cpp:434
 #, fuzzy, kde-format
 msgid "Update"
 msgstr "Șterge carte"
 
-#: src/fetch/execexternalfetcher.cpp:450
+#: src/fetch/execexternalfetcher.cpp:442
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3783,7 +3847,7 @@ msgstr ""
 msgid "Keyword"
 msgstr "Cuvinte cheie"
 
-#: src/fetch/fetchmanager.cpp:68 src/translators/pdfimporter.cpp:235
+#: src/fetch/fetchmanager.cpp:68 src/translators/pdfimporter.cpp:231
 #, kde-format
 msgid "arXiv ID"
 msgstr ""
@@ -3815,21 +3879,21 @@ msgstr "Șterge carte"
 msgid "&Maximum cast: "
 msgstr ""
 
-#: src/fetch/filmaffinityfetcher.cpp:487 src/fetch/imdbfetcher.cpp:562
-#: src/fetch/kinopoiskfetcher.cpp:694 src/fetch/themoviedbfetcher.cpp:621
+#: src/fetch/filmaffinityfetcher.cpp:483 src/fetch/imdbfetcher.cpp:558
+#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:617
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
 msgstr ""
 
-#: src/fetch/filmaffinityfetcher.cpp:497
+#: src/fetch/filmaffinityfetcher.cpp:493
 #, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr ""
 
-#: src/fetch/filmaffinityfetcher.cpp:500
+#: src/fetch/filmaffinityfetcher.cpp:496
 #, kde-format
 msgctxt "Country"
 msgid "USA"
@@ -3847,27 +3911,27 @@ msgstr "Șterge carte"
 msgid "Gaming History Link"
 msgstr ""
 
-#: src/fetch/gcstarpluginfetcher.cpp:400
+#: src/fetch/gcstarpluginfetcher.cpp:391
 #, fuzzy, kde-format
 msgid "GCstar Plugin"
 msgstr "Casetă"
 
-#: src/fetch/gcstarpluginfetcher.cpp:422
+#: src/fetch/gcstarpluginfetcher.cpp:413
 #, kde-format
 msgid "Set the collection type of the data returned from the plugin."
 msgstr ""
 
-#: src/fetch/gcstarpluginfetcher.cpp:427
+#: src/fetch/gcstarpluginfetcher.cpp:418
 #, kde-format
 msgid "&Plugin: "
 msgstr ""
 
-#: src/fetch/gcstarpluginfetcher.cpp:433
+#: src/fetch/gcstarpluginfetcher.cpp:424
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
 msgstr ""
 
-#: src/fetch/gcstarpluginfetcher.cpp:438
+#: src/fetch/gcstarpluginfetcher.cpp:429
 #, fuzzy, kde-format
 msgid "Author: "
 msgstr "Autor"
@@ -3911,18 +3975,18 @@ msgstr "Clasificare"
 msgid "Internet Bookshop (ibs.it)"
 msgstr ""
 
-#: src/fetch/igdbfetcher.cpp:365 src/fetch/igdbfetcher.cpp:578
+#: src/fetch/igdbfetcher.cpp:365 src/fetch/igdbfetcher.cpp:574
 #, fuzzy, kde-format
 msgid "IGDB Link"
 msgstr "Calificativ"
 
-#: src/fetch/igdbfetcher.cpp:566
+#: src/fetch/igdbfetcher.cpp:562
 #, kde-format
 msgid "Internet Game Database (IGDB.com)"
 msgstr ""
 
-#: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:637
-#: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:347
+#: src/fetch/igdbfetcher.cpp:575 src/fetch/mobygamesfetcher.cpp:637
+#: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:343
 #, kde-format
 msgid "Screenshot"
 msgstr ""
@@ -3932,7 +3996,7 @@ msgstr ""
 msgid "IMDb Rating"
 msgstr "Calificativ"
 
-#: src/fetch/imdbfetcher.cpp:517 src/fetch/imdbfetcher.cpp:646
+#: src/fetch/imdbfetcher.cpp:517 src/fetch/imdbfetcher.cpp:636
 #, kde-format
 msgid "Internet Movie Database"
 msgstr ""
@@ -3940,7 +4004,7 @@ msgstr ""
 #: src/fetch/imdbfetcher.cpp:528 src/fetch/kinopoiskfetcher.cpp:668
 #: src/fetch/omdbfetcher.cpp:397 src/fetch/themoviedbfetcher.cpp:569
 #: src/fetch/thetvdbfetcher.cpp:564 src/fetch/tvmazefetcher.cpp:375
-#: src/field.cpp:335
+#: src/field.cpp:331
 #, fuzzy, kde-format
 msgid "IMDb Link"
 msgstr "Calificativ"
@@ -3952,22 +4016,22 @@ msgstr "Clasificare"
 
 #: src/fetch/imdbfetcher.cpp:533 src/fetch/itunesfetcher.cpp:540
 #: src/fetch/themoviedbfetcher.cpp:573 src/fetch/thetvdbfetcher.cpp:565
-#: src/fetch/tvmazefetcher.cpp:376 src/field.cpp:339
+#: src/fetch/tvmazefetcher.cpp:376 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:583
+#: src/fetch/imdbfetcher.cpp:579
 #, kde-format
 msgid "Locale"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:586
+#: src/fetch/imdbfetcher.cpp:582
 #, kde-format
 msgid "Use system locale"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:587
+#: src/fetch/imdbfetcher.cpp:583
 #, kde-format
 msgid "Use custom locale"
 msgstr ""
@@ -3976,12 +4040,6 @@ msgstr ""
 #, kde-format
 msgid "Dewey Decimal"
 msgstr ""
-
-#: src/fetch/isbndbfetcher.cpp:360 src/field.cpp:313 src/field.cpp:318
-#: src/translators/grs1importer.cpp:75 src/translators/pdfimporter.cpp:236
-#, fuzzy, kde-format
-msgid "Publishing"
-msgstr "Editare"
 
 #: src/fetch/isbndbfetcher.cpp:372
 #, kde-format
@@ -4046,13 +4104,13 @@ msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
 msgstr ""
 
-#: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:635
+#: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:631
 #, kde-format
 msgctxt "Language"
 msgid "English"
 msgstr ""
 
-#: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:638
+#: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:634
 #, fuzzy, kde-format
 msgctxt "Language"
 msgid "French"
@@ -4171,32 +4229,32 @@ msgstr "Calificativ"
 msgid "Network"
 msgstr ""
 
-#: src/fetch/themoviedbfetcher.cpp:632
+#: src/fetch/themoviedbfetcher.cpp:628
 #, kde-format
 msgctxt "Language"
 msgid "Chinese"
 msgstr ""
 
-#: src/fetch/themoviedbfetcher.cpp:641
+#: src/fetch/themoviedbfetcher.cpp:637
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "Language"
 msgid "German"
 msgstr "General"
 
-#: src/fetch/themoviedbfetcher.cpp:644
+#: src/fetch/themoviedbfetcher.cpp:640
 #, kde-format
 msgctxt "Language"
 msgid "Spanish"
 msgstr ""
 
-#: src/fetch/themoviedbfetcher.cpp:647
+#: src/fetch/themoviedbfetcher.cpp:643
 #, kde-format
 msgctxt "Language"
 msgid "Russian"
 msgstr ""
 
-#: src/fetch/themoviedbfetcher.cpp:690
+#: src/fetch/themoviedbfetcher.cpp:686
 #, kde-format
 msgid "TheMovieDB (%1)"
 msgstr ""
@@ -4221,12 +4279,12 @@ msgstr "Calificativ"
 msgid "VideoGameGeek Link"
 msgstr "Redenumește colecție..."
 
-#: src/fetch/vndbfetcher.cpp:290 src/fetch/vndbfetcher.cpp:433
+#: src/fetch/vndbfetcher.cpp:284 src/fetch/vndbfetcher.cpp:427
 #, kde-format
 msgid "Alias"
 msgstr ""
 
-#: src/fetch/vndbfetcher.cpp:309
+#: src/fetch/vndbfetcher.cpp:303
 #, kde-format
 msgid "Visual Novel"
 msgstr ""
@@ -4342,7 +4400,7 @@ msgid ""
 "configuration file."
 msgstr ""
 
-#: src/fetchdialog.cpp:138 src/mainwindow.cpp:608
+#: src/fetchdialog.cpp:138 src/mainwindow.cpp:564
 #, kde-format
 msgid "Internet Search"
 msgstr ""
@@ -4368,7 +4426,7 @@ msgstr ""
 msgid "Choose the type of search"
 msgstr ""
 
-#: src/fetchdialog.cpp:178 src/fetchdialog.cpp:402 src/fetchdialog.cpp:581
+#: src/fetchdialog.cpp:178 src/fetchdialog.cpp:393 src/fetchdialog.cpp:572
 #, kde-format
 msgid "&Stop"
 msgstr ""
@@ -4378,7 +4436,7 @@ msgstr ""
 msgid "Click to start or stop the search"
 msgstr ""
 
-#: src/fetchdialog.cpp:188 src/fetchdialog.cpp:461
+#: src/fetchdialog.cpp:188 src/fetchdialog.cpp:452
 #, kde-format
 msgid "&Search"
 msgstr ""
@@ -4410,77 +4468,77 @@ msgstr ""
 msgid "Search s&ource:"
 msgstr ""
 
-#: src/fetchdialog.cpp:231
+#: src/fetchdialog.cpp:226
 #, kde-format
 msgid "Select the database to search"
 msgstr ""
 
-#: src/fetchdialog.cpp:250
+#: src/fetchdialog.cpp:245
 #, kde-format
 msgid "Source"
 msgstr ""
 
-#: src/fetchdialog.cpp:261
+#: src/fetchdialog.cpp:256
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
 "the complete entry and show it in the view below."
 msgstr ""
 
-#: src/fetchdialog.cpp:274
+#: src/fetchdialog.cpp:265
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
 msgstr ""
 
-#: src/fetchdialog.cpp:282
+#: src/fetchdialog.cpp:273
 #, fuzzy, kde-format
 msgid "&Add Entry"
 msgstr "Șterge carte"
 
-#: src/fetchdialog.cpp:287
+#: src/fetchdialog.cpp:278
 #, fuzzy, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr "Creează un document nou"
 
-#: src/fetchdialog.cpp:290
+#: src/fetchdialog.cpp:281
 #, kde-format
 msgid "Get More Results"
 msgstr ""
 
-#: src/fetchdialog.cpp:294
+#: src/fetchdialog.cpp:285
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr ""
 
-#: src/fetchdialog.cpp:300
+#: src/fetchdialog.cpp:291
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr ""
 
-#: src/fetchdialog.cpp:312
+#: src/fetchdialog.cpp:303
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr ""
 
-#: src/fetchdialog.cpp:392
+#: src/fetchdialog.cpp:383
 #, kde-format
 msgid "Cancelling the search..."
 msgstr ""
 
-#: src/fetchdialog.cpp:405 src/fetchdialog.cpp:584
+#: src/fetchdialog.cpp:396 src/fetchdialog.cpp:575
 #, fuzzy, kde-format
 msgid "Searching..."
 msgstr "Salvez fișierul..."
 
-#: src/fetchdialog.cpp:465
+#: src/fetchdialog.cpp:456
 #, kde-format
 msgid "The search returned no items."
 msgstr ""
 
-#: src/fetchdialog.cpp:468
+#: src/fetchdialog.cpp:459
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
@@ -4488,52 +4546,52 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/fetchdialog.cpp:497
+#: src/fetchdialog.cpp:488
 #, kde-format
 msgid "No results were found for the following ISBN values:"
 msgstr ""
 
-#: src/fetchdialog.cpp:499
+#: src/fetchdialog.cpp:490
 #, kde-format
 msgid "No Results"
 msgstr ""
 
-#: src/fetchdialog.cpp:551 src/fetchdialog.cpp:607
+#: src/fetchdialog.cpp:542 src/fetchdialog.cpp:598
 #, kde-format
 msgid "Fetching %1..."
 msgstr ""
 
-#: src/fetchdialog.cpp:624
+#: src/fetchdialog.cpp:615
 #, fuzzy, kde-format
 msgid "Attribution"
 msgstr "Opțiuni colecții cărți"
 
-#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:885
+#: src/fetchdialog.cpp:652 src/fetchdialog.cpp:876
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 
-#: src/fetchdialog.cpp:742
+#: src/fetchdialog.cpp:733
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr ""
 
-#: src/fetchdialog.cpp:753
+#: src/fetchdialog.cpp:744
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr ""
 
-#: src/fetchdialog.cpp:769
+#: src/fetchdialog.cpp:760
 #, fuzzy, kde-format
 msgid "&Load From File..."
 msgstr "Imprim..."
 
-#: src/fetchdialog.cpp:770
+#: src/fetchdialog.cpp:761
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr ""
 
-#: src/fetchdialog.cpp:794
+#: src/fetchdialog.cpp:785
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
@@ -4629,19 +4687,19 @@ msgstr "Modifică carte"
 msgid "International Standard Book Number"
 msgstr ""
 
-#: src/field.cpp:343
+#: src/field.cpp:339
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
 msgstr ""
 
-#: src/field.cpp:344
+#: src/field.cpp:340
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
 msgstr ""
 
-#: src/field.cpp:350
+#: src/field.cpp:346
 #, fuzzy, kde-format
 msgid "Front Cover"
 msgstr "Ies..."
@@ -4666,18 +4724,18 @@ msgstr ""
 msgid "Match an&y of the following"
 msgstr ""
 
-#: src/filterdialog.cpp:109
+#: src/filterdialog.cpp:104
 #, fuzzy, kde-format
 msgid "Filter name:"
 msgstr "Șterge carte"
 
-#: src/filterdialog.cpp:118
+#: src/filterdialog.cpp:113
 #, fuzzy, kde-format
 msgid "&Save Filter"
 msgstr "Deschide fișier..."
 
-#: src/filterview.cpp:190 src/mainwindow.cpp:581 src/mainwindow.cpp:800
-#: src/mainwindow.cpp:818
+#: src/filterview.cpp:190 src/mainwindow.cpp:541 src/mainwindow.cpp:737
+#: src/mainwindow.cpp:755
 #, fuzzy, kde-format
 msgid "Filter"
 msgstr "Șterge carte"
@@ -4713,8 +4771,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Grupează după: "
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1142 src/mainwindow.cpp:1789
-#: src/mainwindow.cpp:1823 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1074 src/mainwindow.cpp:1696
+#: src/mainwindow.cpp:1730 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr ""
@@ -4865,23 +4923,23 @@ msgstr "An"
 msgid "Save link only"
 msgstr ""
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:523
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
 #, fuzzy, kde-format
 msgid "All Images (%1)"
 msgstr "Titlu"
 
-#: src/gui/imagewidget.cpp:314
+#: src/gui/imagewidget.cpp:310
 #, fuzzy, kde-format
 msgid "Opening the selected scanner failed."
 msgstr "Șterge carte"
 
-#: src/gui/imagewidget.cpp:373
+#: src/gui/imagewidget.cpp:362
 #, fuzzy, kde-format
 #| msgid "Opening file..."
 msgid "Opening image in %1..."
 msgstr "Deschid fișierul..."
 
-#: src/gui/imagewidget.cpp:405
+#: src/gui/imagewidget.cpp:394
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr ""
@@ -5010,39 +5068,39 @@ msgid ""
 "order to be merged."
 msgstr ""
 
-#: src/importdialog.cpp:150 src/mainwindow.cpp:381
+#: src/importdialog.cpp:145 src/mainwindow.cpp:353
 #, fuzzy, kde-format
 msgid "&Import"
 msgstr "Imprim..."
 
-#: src/importdialog.cpp:377 src/mainwindow.cpp:1326 src/mainwindow.cpp:1504
+#: src/importdialog.cpp:372 src/mainwindow.cpp:1238 src/mainwindow.cpp:1411
 #: src/translators/tellicozipexporter.cpp:54
 #, fuzzy, kde-format
 msgid "Tellico Files"
 msgstr "Tellico"
 
-#: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1328 src/translators/tellicoxmlexporter.cpp:71
+#: src/importdialog.cpp:373 src/importdialog.cpp:391 src/importdialog.cpp:420
+#: src/mainwindow.cpp:1240 src/translators/tellicoxmlexporter.cpp:71
 #, fuzzy, kde-format
 msgid "XML Files"
 msgstr "Filmele mele"
 
-#: src/importdialog.cpp:382 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:377 src/translators/bibtexexporter.cpp:65
 #, fuzzy, kde-format
 msgid "Bibtex Files"
 msgstr "Opțiuni generale"
 
-#: src/importdialog.cpp:386 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:381 src/translators/csvexporter.cpp:64
 #, fuzzy, kde-format
 msgid "CSV Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:400
+#: src/importdialog.cpp:395
 #, fuzzy, kde-format
 msgid "RIS Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:404 src/translators/gcstarexporter.cpp:62
+#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:62
 #, fuzzy, kde-format
 msgid "GCstar Data Files"
 msgstr ""
@@ -5050,7 +5108,7 @@ msgstr ""
 "*.xml|Fișiere XML (*.xml)\n"
 "*|Toate fișierele"
 
-#: src/importdialog.cpp:408
+#: src/importdialog.cpp:403
 #, fuzzy, kde-format
 msgid "AMC Data Files"
 msgstr ""
@@ -5058,22 +5116,22 @@ msgstr ""
 "*.xml|Fișiere XML (*.xml)\n"
 "*|Toate fișierele"
 
-#: src/importdialog.cpp:412
+#: src/importdialog.cpp:407
 #, fuzzy, kde-format
 msgid "PDF Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:416
+#: src/importdialog.cpp:411
 #, fuzzy, kde-format
 msgid "Referencer Files"
 msgstr "Opțiuni colecții audio"
 
-#: src/importdialog.cpp:420
+#: src/importdialog.cpp:415
 #, fuzzy, kde-format
 msgid "CIW Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:424
+#: src/importdialog.cpp:419
 #, fuzzy, kde-format
 msgid "VinoXML Data Files"
 msgstr ""
@@ -5081,7 +5139,7 @@ msgstr ""
 "*.xml|Fișiere XML (*.xml)\n"
 "*|Toate fișierele"
 
-#: src/importdialog.cpp:430
+#: src/importdialog.cpp:425
 #, fuzzy, kde-format
 msgid "eBook Files"
 msgstr "Titlu"
@@ -5183,966 +5241,966 @@ msgstr ""
 msgid "Borrower (Sort by Count)"
 msgstr ""
 
-#: src/main.cpp:100
+#: src/main.cpp:88
 #, fuzzy, kde-format
 msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - gestionar de colecții personale de cărți pentru KDE"
 
-#: src/main.cpp:102
+#: src/main.cpp:90
 #, kde-format
 msgid "(c) 2001, Robby Stephenson"
 msgstr ""
 
-#: src/main.cpp:106
+#: src/main.cpp:94
 #, fuzzy, kde-format
 msgid "Data source scripts"
 msgstr "Opțiuni generale"
 
-#: src/main.cpp:111
+#: src/main.cpp:99
 #, fuzzy, kde-format
 msgid "Icons"
 msgstr "Comentarii"
 
-#: src/main.cpp:112
+#: src/main.cpp:100
 #, kde-format
 msgid "Code examples and general inspiration"
 msgstr ""
 
-#: src/main.cpp:114
+#: src/main.cpp:102
 #, kde-format
 msgid "Author of btparse library"
 msgstr ""
 
-#: src/main.cpp:115
+#: src/main.cpp:103
 #, kde-format
 msgid "Author of libcsv library"
 msgstr ""
 
-#: src/main.cpp:116
+#: src/main.cpp:104
 #, kde-format
 msgid "Author of rtf2html library"
 msgstr ""
 
-#: src/main.cpp:123
+#: src/main.cpp:111
 #, kde-format
 msgid "Do not reopen the last open file"
 msgstr ""
 
-#: src/main.cpp:124
+#: src/main.cpp:112
 #, fuzzy, kde-format
 msgid "Import <filename> as a bibtex file"
 msgstr "Imprim..."
 
-#: src/main.cpp:125
+#: src/main.cpp:113
 #, fuzzy, kde-format
 msgid "Import <filename> as a MODS file"
 msgstr "Imprim..."
 
-#: src/main.cpp:126
+#: src/main.cpp:114
 #, fuzzy, kde-format
 msgid "Import <filename> as a RIS file"
 msgstr "Imprim..."
 
-#: src/main.cpp:127
+#: src/main.cpp:115
 #, fuzzy, kde-format
 msgid "Import <filename> as a PDF file"
 msgstr "Imprim..."
 
-#: src/main.cpp:128
+#: src/main.cpp:116
 #, kde-format
 msgid "Log diagnostic output"
 msgstr ""
 
-#: src/main.cpp:129
+#: src/main.cpp:117
 #, kde-format
 msgid "Write log output to <filename>"
 msgstr ""
 
-#: src/main.cpp:130
+#: src/main.cpp:118
 #, kde-format
 msgid "File to open"
 msgstr "Fișierul de deschis"
 
-#: src/mainwindow.cpp:265
+#: src/mainwindow.cpp:260
 #, fuzzy, kde-format
 msgid "New Collection"
 msgstr "&Colecție nouă"
 
-#: src/mainwindow.cpp:267
+#: src/mainwindow.cpp:262
 #, fuzzy, kde-format
 msgid "Create a new collection"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:286
+#: src/mainwindow.cpp:277
 #, fuzzy, kde-format
 msgid "New &Book Collection"
 msgstr "&Colecție nouă"
 
-#: src/mainwindow.cpp:287
+#: src/mainwindow.cpp:278
 #, fuzzy, kde-format
 msgid "Create a new book collection"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:280
 #, fuzzy, kde-format
 msgid "New B&ibliography"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:290
+#: src/mainwindow.cpp:281
 #, fuzzy, kde-format
 msgid "Create a new bibtex bibliography"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:292
+#: src/mainwindow.cpp:283
 #, fuzzy, kde-format
 msgid "New &Comic Book Collection"
 msgstr "&Colecție nouă"
 
-#: src/mainwindow.cpp:293
+#: src/mainwindow.cpp:284
 #, fuzzy, kde-format
 msgid "Create a new comic book collection"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:295
+#: src/mainwindow.cpp:286
 #, fuzzy, kde-format
 msgid "New &Video Collection"
 msgstr "Opțiuni colecții video"
 
-#: src/mainwindow.cpp:296
+#: src/mainwindow.cpp:287
 #, fuzzy, kde-format
 msgid "Create a new video collection"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:298
+#: src/mainwindow.cpp:289
 #, fuzzy, kde-format
 msgid "New &Music Collection"
 msgstr "&Colecție nouă"
 
-#: src/mainwindow.cpp:299
+#: src/mainwindow.cpp:290
 #, fuzzy, kde-format
 msgid "Create a new music collection"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:301
+#: src/mainwindow.cpp:292
 #, fuzzy, kde-format
 msgid "New C&oin Collection"
 msgstr "&Colecție nouă"
 
-#: src/mainwindow.cpp:302
+#: src/mainwindow.cpp:293
 #, fuzzy, kde-format
 msgid "Create a new coin collection"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:304
+#: src/mainwindow.cpp:295
 #, fuzzy, kde-format
 msgid "New &Stamp Collection"
 msgstr "&Colecție nouă"
 
-#: src/mainwindow.cpp:305
+#: src/mainwindow.cpp:296
 #, fuzzy, kde-format
 msgid "Create a new stamp collection"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:307
+#: src/mainwindow.cpp:298
 #, fuzzy, kde-format
 msgid "New C&ard Collection"
 msgstr "Opțiuni colecții video"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:299
 #, fuzzy, kde-format
 msgid "Create a new trading card collection"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:310
+#: src/mainwindow.cpp:301
 #, fuzzy, kde-format
 msgid "New &Wine Collection"
 msgstr "Opțiuni colecții video"
 
-#: src/mainwindow.cpp:311
+#: src/mainwindow.cpp:302
 #, fuzzy, kde-format
 msgid "Create a new wine collection"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:313
+#: src/mainwindow.cpp:304
 #, fuzzy, kde-format
 msgid "New Video &Game Collection"
 msgstr "&Colecție nouă"
 
-#: src/mainwindow.cpp:314
+#: src/mainwindow.cpp:305
 #, fuzzy, kde-format
 msgid "Create a new video game collection"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:316
+#: src/mainwindow.cpp:307
 #, fuzzy, kde-format
 msgid "New Boa&rd Game Collection"
 msgstr "&Colecție nouă"
 
-#: src/mainwindow.cpp:317
+#: src/mainwindow.cpp:308
 #, fuzzy, kde-format
 msgid "Create a new board game collection"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:319
+#: src/mainwindow.cpp:310
 #, fuzzy, kde-format
 msgid "New &File Catalog"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:320
+#: src/mainwindow.cpp:311
 #, fuzzy, kde-format
 msgid "Create a new file catalog"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:323
+#: src/mainwindow.cpp:314
 #, fuzzy, kde-format
 msgid "New C&ustom Collection"
 msgstr "&Colecție nouă"
 
-#: src/mainwindow.cpp:324
+#: src/mainwindow.cpp:315
 #, fuzzy, kde-format
 msgid "Create a new custom collection"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:335
+#: src/mainwindow.cpp:326
 #, kde-format
 msgid "Open an existing document"
 msgstr "Deschide un document existent"
 
-#: src/mainwindow.cpp:337
+#: src/mainwindow.cpp:328
 #, kde-format
 msgid "Open a recently used file"
 msgstr "Deschide un fișier utilizat recent"
 
-#: src/mainwindow.cpp:339
+#: src/mainwindow.cpp:330
 #, fuzzy, kde-format
 msgid "Save the document"
 msgstr "Salvează documentul actual"
 
-#: src/mainwindow.cpp:341
+#: src/mainwindow.cpp:332
 #, fuzzy, kde-format
 msgid "Save the document as a different file..."
 msgstr "Salvează documentul actual ca..."
 
-#: src/mainwindow.cpp:345
+#: src/mainwindow.cpp:336
 #, kde-format
 msgid "Save As Template..."
 msgstr ""
 
-#: src/mainwindow.cpp:347
+#: src/mainwindow.cpp:338
 #, fuzzy, kde-format
 msgid "Save as a collection template"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:350
+#: src/mainwindow.cpp:341
 #, fuzzy, kde-format
 #| msgid "Print the contents of the document..."
 msgid "Print the contents of the collection..."
 msgstr "Imprimă conținutul documentului..."
 
-#: src/mainwindow.cpp:366
+#: src/mainwindow.cpp:343
 #, fuzzy, kde-format
 #| msgid "Print the contents of the document..."
 msgid "Preview the contents of the collection..."
 msgstr "Imprimă conținutul documentului..."
 
-#: src/mainwindow.cpp:370
+#: src/mainwindow.cpp:346
 #, kde-format
 msgid "Quit the application"
 msgstr "Părăsește aplicația"
 
-#: src/mainwindow.cpp:383
+#: src/mainwindow.cpp:355
 #, fuzzy, kde-format
 msgid "Import the collection data from other formats"
 msgstr "Imprimă conținutul documentului..."
 
-#: src/mainwindow.cpp:399
+#: src/mainwindow.cpp:367
 #, fuzzy, kde-format
 msgid "Import Tellico Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:400
+#: src/mainwindow.cpp:368
 #, fuzzy, kde-format
 msgid "Import another Tellico data file"
 msgstr "%1 nu este un fișier de date Tellico."
 
-#: src/mainwindow.cpp:403
+#: src/mainwindow.cpp:371
 #, fuzzy, kde-format
 msgid "Import CSV Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:404
+#: src/mainwindow.cpp:372
 #, fuzzy, kde-format
 msgid "Import a CSV file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:406
+#: src/mainwindow.cpp:374
 #, fuzzy, kde-format
 msgid "Import MODS Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:407
+#: src/mainwindow.cpp:375
 #, fuzzy, kde-format
 msgid "Import a MODS data file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:409
+#: src/mainwindow.cpp:377
 #, fuzzy, kde-format
 msgid "Import Alexandria Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:410
+#: src/mainwindow.cpp:378
 #, kde-format
 msgid "Import data from the Alexandria book collection manager"
 msgstr ""
 
-#: src/mainwindow.cpp:413
+#: src/mainwindow.cpp:381
 #, fuzzy, kde-format
 msgid "Import Delicious Library Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:414
+#: src/mainwindow.cpp:382
 #, fuzzy, kde-format
 msgid "Import data from Delicious Library"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:417
+#: src/mainwindow.cpp:385
 #, fuzzy, kde-format
 msgid "Import Collectorz Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:418
+#: src/mainwindow.cpp:386
 #, fuzzy, kde-format
 msgid "Import data from Collectorz"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:421
+#: src/mainwindow.cpp:389
 #, fuzzy, kde-format
 msgid "Import Data Crow Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:422
+#: src/mainwindow.cpp:390
 #, fuzzy, kde-format
 msgid "Import data from Data Crow"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:425
+#: src/mainwindow.cpp:393
 #, fuzzy, kde-format
 msgid "Import Referencer Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:426
+#: src/mainwindow.cpp:394
 #, fuzzy, kde-format
 msgid "Import data from Referencer"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:429
+#: src/mainwindow.cpp:397
 #, fuzzy, kde-format
 msgid "Import Bibtex Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:430
+#: src/mainwindow.cpp:398
 #, fuzzy, kde-format
 msgid "Import a bibtex bibliography file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:435
+#: src/mainwindow.cpp:403
 #, fuzzy, kde-format
 msgid "Import Bibtexml Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:436
+#: src/mainwindow.cpp:404
 #, fuzzy, kde-format
 msgid "Import a Bibtexml bibliography file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:438
+#: src/mainwindow.cpp:406
 #, fuzzy, kde-format
 msgid "Import RIS Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:439
+#: src/mainwindow.cpp:407
 #, fuzzy, kde-format
 msgid "Import an RIS reference file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:441
+#: src/mainwindow.cpp:409
 #, fuzzy, kde-format
 msgid "Import MARC Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:442
+#: src/mainwindow.cpp:410
 #, fuzzy, kde-format
 msgid "Import MARC data"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:449
+#: src/mainwindow.cpp:417
 #, fuzzy, kde-format
 msgid "Import Goodreads Collection..."
 msgstr "Redenumește colecție..."
 
-#: src/mainwindow.cpp:450
+#: src/mainwindow.cpp:418
 #, fuzzy, kde-format
 msgid "Import a collection from Goodreads.com"
 msgstr "Imprimă conținutul documentului..."
 
-#: src/mainwindow.cpp:452
+#: src/mainwindow.cpp:420
 #, fuzzy, kde-format
 msgid "Import LibraryThing Collection..."
 msgstr "Redenumește colecție..."
 
-#: src/mainwindow.cpp:453
+#: src/mainwindow.cpp:421
 #, fuzzy, kde-format
 msgid "Import a collection from LibraryThing.com"
 msgstr "Imprimă conținutul documentului..."
 
-#: src/mainwindow.cpp:455
+#: src/mainwindow.cpp:423
 #, fuzzy, kde-format
 msgid "Import PDF File..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:456
+#: src/mainwindow.cpp:424
 #, fuzzy, kde-format
 msgid "Import a PDF file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:458
+#: src/mainwindow.cpp:426
 #, fuzzy, kde-format
 msgid "Import Audio File Metadata..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:459
+#: src/mainwindow.cpp:427
 #, fuzzy, kde-format
 msgid "Import meta-data from audio files"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:464
+#: src/mainwindow.cpp:432
 #, fuzzy, kde-format
 msgid "Import Audio CD Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:465
+#: src/mainwindow.cpp:433
 #, fuzzy, kde-format
 msgid "Import audio CD information"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:470
+#: src/mainwindow.cpp:438
 #, fuzzy, kde-format
 msgid "Import Discogs Collection..."
 msgstr "Redenumește colecție..."
 
-#: src/mainwindow.cpp:471
+#: src/mainwindow.cpp:439
 #, fuzzy, kde-format
 msgid "Import a collection from Discogs.com"
 msgstr "Imprimă conținutul documentului..."
 
-#: src/mainwindow.cpp:473
+#: src/mainwindow.cpp:441
 #, fuzzy, kde-format
 msgid "Import GCstar Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:474
+#: src/mainwindow.cpp:442
 #, fuzzy, kde-format
 msgid "Import a GCstar data file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:477
+#: src/mainwindow.cpp:445
 #, fuzzy, kde-format
 msgid "Import Griffith Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:478
+#: src/mainwindow.cpp:446
 #, fuzzy, kde-format
 msgid "Import a Griffith database"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:481
+#: src/mainwindow.cpp:449
 #, fuzzy, kde-format
 msgid "Import Ant Movie Catalog Data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:482
+#: src/mainwindow.cpp:450
 #, fuzzy, kde-format
 msgid "Import an Ant Movie Catalog data file"
 msgstr "%1 nu este un fișier de date Tellico."
 
-#: src/mainwindow.cpp:485
+#: src/mainwindow.cpp:453
 #, fuzzy, kde-format
 msgid "Import BoardGameGeek Collection..."
 msgstr "Redenumește colecție..."
 
-#: src/mainwindow.cpp:486
+#: src/mainwindow.cpp:454
 #, fuzzy, kde-format
 msgid "Import a collection from BoardGameGeek.com"
 msgstr "Imprimă conținutul documentului..."
 
-#: src/mainwindow.cpp:488
+#: src/mainwindow.cpp:456
 #, fuzzy, kde-format
 msgid "Import VinoXML..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:489
+#: src/mainwindow.cpp:457
 #, fuzzy, kde-format
 msgid "Import VinoXML data"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:491
+#: src/mainwindow.cpp:459
 #, fuzzy, kde-format
 msgid "Import File Listing..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:492
+#: src/mainwindow.cpp:460
 #, kde-format
 msgid "Import information about files in a folder"
 msgstr ""
 
-#: src/mainwindow.cpp:494
+#: src/mainwindow.cpp:462
 #, fuzzy, kde-format
 msgid "Import XSL Transform..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:495
+#: src/mainwindow.cpp:463
 #, fuzzy, kde-format
 msgid "Import using an XSL Transform"
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:508
+#: src/mainwindow.cpp:472
 #, fuzzy, kde-format
 msgid "&Export"
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:510
+#: src/mainwindow.cpp:474
 #, fuzzy, kde-format
 msgid "Export the collection data to other formats"
 msgstr "Imprimă conținutul documentului..."
 
-#: src/mainwindow.cpp:526
+#: src/mainwindow.cpp:486
 #, fuzzy, kde-format
 msgid "Export to XML..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:527
+#: src/mainwindow.cpp:487
 #, fuzzy, kde-format
 msgid "Export to a Tellico XML file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:530
+#: src/mainwindow.cpp:490
 #, fuzzy, kde-format
 msgid "Export to Zip..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:531
+#: src/mainwindow.cpp:491
 #, fuzzy, kde-format
 msgid "Export to a Tellico Zip file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:534
+#: src/mainwindow.cpp:494
 #, fuzzy, kde-format
 msgid "Export to HTML..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:535
+#: src/mainwindow.cpp:495
 #, fuzzy, kde-format
 msgid "Export to an HTML file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:537
+#: src/mainwindow.cpp:497
 #, fuzzy, kde-format
 msgid "Export to CSV..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:538
+#: src/mainwindow.cpp:498
 #, fuzzy, kde-format
 msgid "Export to a comma-separated values file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:540
+#: src/mainwindow.cpp:500
 #, fuzzy, kde-format
 msgid "Export to Alexandria..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:541
+#: src/mainwindow.cpp:501
 #, fuzzy, kde-format
 msgid "Export to an Alexandria library"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:544
+#: src/mainwindow.cpp:504
 #, fuzzy, kde-format
 msgid "Export to Bibtex..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:545
+#: src/mainwindow.cpp:505
 #, fuzzy, kde-format
 msgid "Export to a bibtex file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:547
+#: src/mainwindow.cpp:507
 #, fuzzy, kde-format
 msgid "Export to Bibtexml..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:548
+#: src/mainwindow.cpp:508
 #, fuzzy, kde-format
 msgid "Export to a Bibtexml file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:550
+#: src/mainwindow.cpp:510
 #, fuzzy, kde-format
 msgid "Export to ONIX..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:551
+#: src/mainwindow.cpp:511
 #, fuzzy, kde-format
 msgid "Export to an ONIX file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:553
+#: src/mainwindow.cpp:513
 #, fuzzy, kde-format
 msgid "Export to GCstar..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:554
+#: src/mainwindow.cpp:514
 #, fuzzy, kde-format
 msgid "Export to a GCstar data file"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:557
+#: src/mainwindow.cpp:517
 #, fuzzy, kde-format
 msgid "Export XSL Transform..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:558
+#: src/mainwindow.cpp:518
 #, fuzzy, kde-format
 msgid "Export using an XSL Transform"
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:569
+#: src/mainwindow.cpp:529
 #, fuzzy, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr "Taie regiunea selectată și o plasează în clipboard"
 
-#: src/mainwindow.cpp:571
+#: src/mainwindow.cpp:531
 #, fuzzy, kde-format
 msgid "Copy the selected text to the clipboard"
 msgstr "Copie în clipboard regiunea selectată"
 
-#: src/mainwindow.cpp:573
+#: src/mainwindow.cpp:533
 #, fuzzy, kde-format
 msgid "Paste the clipboard contents"
 msgstr "Lipește conținutul clipboard-ului în poziția actuală"
 
-#: src/mainwindow.cpp:575
+#: src/mainwindow.cpp:535
 #, fuzzy, kde-format
 msgid "Select all the entries in the collection"
 msgstr "Schimbă modul de grupare a colecției"
 
-#: src/mainwindow.cpp:577
+#: src/mainwindow.cpp:537
 #, fuzzy, kde-format
 msgid "Deselect all the entries in the collection"
 msgstr "Schimbă modul de grupare a colecției"
 
-#: src/mainwindow.cpp:580
+#: src/mainwindow.cpp:540
 #, fuzzy, kde-format
 msgid "Advanced &Filter..."
 msgstr "Deschide fișier..."
 
-#: src/mainwindow.cpp:584 src/mainwindow.cpp:819
+#: src/mainwindow.cpp:544 src/mainwindow.cpp:756
 #, fuzzy, kde-format
 msgid "Filter the collection"
 msgstr "Părăsește aplicația"
 
-#: src/mainwindow.cpp:591
+#: src/mainwindow.cpp:551
 #, fuzzy, kde-format
 msgid "&New Entry..."
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:593
+#: src/mainwindow.cpp:553
 #, fuzzy, kde-format
 msgid "New Entry"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:595
+#: src/mainwindow.cpp:555
 #, fuzzy, kde-format
 msgid "Create a new entry"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:597
+#: src/mainwindow.cpp:557
 #, fuzzy, kde-format
 msgid "Add Entry"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:607
+#: src/mainwindow.cpp:563
 #, kde-format
 msgid "Internet Search..."
 msgstr ""
 
-#: src/mainwindow.cpp:611
+#: src/mainwindow.cpp:567
 #, fuzzy, kde-format
 msgid "Search the internet..."
 msgstr "Caută în document..."
 
-#: src/mainwindow.cpp:621
+#: src/mainwindow.cpp:577
 #, fuzzy, kde-format
 msgid "Edit the selected entries"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:628
+#: src/mainwindow.cpp:584
 #, fuzzy, kde-format
 msgid "Copy the selected entries"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:635
+#: src/mainwindow.cpp:591
 #, fuzzy, kde-format
 msgid "Delete the selected entries"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:639
+#: src/mainwindow.cpp:595
 #, fuzzy, kde-format
 msgid "&Merge Entries"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:643
+#: src/mainwindow.cpp:599
 #, fuzzy, kde-format
 msgid "Merge the selected entries"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:647
+#: src/mainwindow.cpp:603
 #, kde-format
 msgid "Check-&out..."
 msgstr ""
 
-#: src/mainwindow.cpp:649
+#: src/mainwindow.cpp:605
 #, fuzzy, kde-format
 msgid "Check-out the selected items"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:652
+#: src/mainwindow.cpp:608
 #, kde-format
 msgid "Check-&in"
 msgstr ""
 
-#: src/mainwindow.cpp:654
+#: src/mainwindow.cpp:610
 #, fuzzy, kde-format
 msgid "Check-in the selected items"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:657
+#: src/mainwindow.cpp:613
 #, fuzzy, kde-format
 msgid "&Rename Collection..."
 msgstr "Redenumește colecție..."
 
-#: src/mainwindow.cpp:660
+#: src/mainwindow.cpp:616
 #, fuzzy, kde-format
 msgid "Rename the collection"
 msgstr "Redenumește colecție..."
 
-#: src/mainwindow.cpp:663
+#: src/mainwindow.cpp:619
 #, fuzzy, kde-format
 msgid "Collection &Fields..."
 msgstr "Opțiuni colecții audio"
 
-#: src/mainwindow.cpp:664
+#: src/mainwindow.cpp:620
 #, fuzzy, kde-format
 msgid "Fields"
 msgstr "Opțiuni colecții audio"
 
-#: src/mainwindow.cpp:667
+#: src/mainwindow.cpp:623
 #, fuzzy, kde-format
 msgid "Modify the collection fields"
 msgstr "Opțiuni colecții audio"
 
-#: src/mainwindow.cpp:670
+#: src/mainwindow.cpp:626
 #, kde-format
 msgid "&Generate Reports..."
 msgstr ""
 
-#: src/mainwindow.cpp:671
+#: src/mainwindow.cpp:627
 #, fuzzy, kde-format
 msgid "Reports"
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:673
+#: src/mainwindow.cpp:629
 #, fuzzy, kde-format
 msgid "Generate collection reports"
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:676
+#: src/mainwindow.cpp:632
 #, fuzzy, kde-format
 msgid "Convert to &Bibliography"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:678
+#: src/mainwindow.cpp:634
 #, fuzzy, kde-format
 msgid "Convert a book collection to a bibliography"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:681
+#: src/mainwindow.cpp:637
 #, fuzzy, kde-format
 msgid "String &Macros..."
 msgstr "Calificativ"
 
-#: src/mainwindow.cpp:683
+#: src/mainwindow.cpp:639
 #, kde-format
 msgid "Edit the bibtex string macros"
 msgstr ""
 
-#: src/mainwindow.cpp:686
+#: src/mainwindow.cpp:642
 #, kde-format
 msgid "Check for Duplicate Keys..."
 msgstr ""
 
-#: src/mainwindow.cpp:688
+#: src/mainwindow.cpp:644
 #, kde-format
 msgid "Check for duplicate citation keys"
 msgstr ""
 
-#: src/mainwindow.cpp:698
+#: src/mainwindow.cpp:650
 #, fuzzy, kde-format
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "Copie în clipboard regiunea selectată"
 
-#: src/mainwindow.cpp:699
+#: src/mainwindow.cpp:651
 #, fuzzy, kde-format
 msgid "Copy bibtex citations to the clipboard"
 msgstr "Copie în clipboard regiunea selectată"
 
-#: src/mainwindow.cpp:704
+#: src/mainwindow.cpp:656
 #, fuzzy, kde-format
 msgid "Cite Entry in &LyX"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:705
+#: src/mainwindow.cpp:657
 #, fuzzy, kde-format
 msgid "Cite the selected entries in LyX"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:721
+#: src/mainwindow.cpp:667
 #, fuzzy, kde-format
 msgctxt "Update Entry"
 msgid "Update"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:730
+#: src/mainwindow.cpp:672
 #, kde-format
 msgid "All Sources"
 msgstr ""
 
-#: src/mainwindow.cpp:731
+#: src/mainwindow.cpp:673
 #, kde-format
 msgid "Update entry data from all available sources"
 msgstr ""
 
-#: src/mainwindow.cpp:746
+#: src/mainwindow.cpp:688
 #, kde-format
 msgid "Unlock Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:747
+#: src/mainwindow.cpp:689
 #, kde-format
 msgid "Unlock the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:749
+#: src/mainwindow.cpp:691
 #, kde-format
 msgid "Lock Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:750
+#: src/mainwindow.cpp:692
 #, kde-format
 msgid "Lock the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:755
+#: src/mainwindow.cpp:697
 #, kde-format
 msgid "Reset Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:756
+#: src/mainwindow.cpp:698
 #, kde-format
 msgid "Reset the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:759
+#: src/mainwindow.cpp:701
 #, fuzzy, kde-format
 msgid "Entry &Editor"
 msgstr "Ediție"
 
-#: src/mainwindow.cpp:761
+#: src/mainwindow.cpp:703
 #, fuzzy, kde-format
 msgid "Enable/disable the editor"
 msgstr "Activează/dezactivează bara de unelte"
 
-#: src/mainwindow.cpp:770
+#: src/mainwindow.cpp:712
 #, kde-format
 msgid "Show Log"
 msgstr ""
 
-#: src/mainwindow.cpp:786
+#: src/mainwindow.cpp:728
 #, kde-format
 msgid "Change Grouping"
 msgstr ""
 
-#: src/mainwindow.cpp:789
+#: src/mainwindow.cpp:731
 #, fuzzy, kde-format
 msgid "&Group Selection"
 msgstr "Grupare"
 
-#: src/mainwindow.cpp:790
+#: src/mainwindow.cpp:732
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr "Schimbă modul de grupare a colecției"
 
-#: src/mainwindow.cpp:804
+#: src/mainwindow.cpp:741
 #, fuzzy, kde-format
 msgid "Filter here..."
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:869 src/mainwindow.cpp:872
+#: src/mainwindow.cpp:805
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
 "qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:878
+#: src/mainwindow.cpp:810
 #, fuzzy, kde-format
 msgid "Collection View"
 msgstr "Opțiuni colecții audio"
 
-#: src/mainwindow.cpp:885
+#: src/mainwindow.cpp:817
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:902
+#: src/mainwindow.cpp:834
 #, fuzzy, kde-format
 msgid "Group View"
 msgstr "Grupează după: "
 
-#: src/mainwindow.cpp:911
+#: src/mainwindow.cpp:843
 #, fuzzy, kde-format
 msgid "Groups"
 msgstr "Grupează după: "
 
-#: src/mainwindow.cpp:912
+#: src/mainwindow.cpp:844
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:992
+#: src/mainwindow.cpp:924
 #, fuzzy, kde-format
 msgid "Collection management software, free and simple"
 msgstr "Tellico - gestionar de colecții personale de cărți pentru KDE"
 
-#: src/mainwindow.cpp:994
+#: src/mainwindow.cpp:926
 #, fuzzy, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Tellico - gestionar de colecții personale de cărți pentru KDE"
 
-#: src/mainwindow.cpp:996
+#: src/mainwindow.cpp:928
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6152,7 +6210,7 @@ msgid ""
 "Internet sources.</h3>"
 msgstr ""
 
-#: src/mainwindow.cpp:1005
+#: src/mainwindow.cpp:937
 #, kde-format
 msgid ""
 "More information can be found in the <a href=\"help:/tellico"
@@ -6160,7 +6218,7 @@ msgid ""
 "this welcome screen</a>."
 msgstr ""
 
-#: src/mainwindow.cpp:1212
+#: src/mainwindow.cpp:1144
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6169,22 +6227,22 @@ msgstr ""
 "Fișierul curent a fost modificat.\n"
 "Doriți să îl salvați?"
 
-#: src/mainwindow.cpp:1268 src/mainwindow.cpp:1302
+#: src/mainwindow.cpp:1180 src/mainwindow.cpp:1214
 #, fuzzy, kde-format
 msgid "Creating new collection..."
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:1323 src/mainwindow.cpp:1346 src/mainwindow.cpp:1364
+#: src/mainwindow.cpp:1235 src/mainwindow.cpp:1258 src/mainwindow.cpp:1276
 #, kde-format
 msgid "Opening file..."
 msgstr "Deschid fișierul..."
 
-#: src/mainwindow.cpp:1334
+#: src/mainwindow.cpp:1246
 #, fuzzy, kde-format
 msgid "Open File"
 msgstr "Deschide fișier..."
 
-#: src/mainwindow.cpp:1456
+#: src/mainwindow.cpp:1368
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6193,59 +6251,59 @@ msgid ""
 "changed in the configuration dialog.</p></qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:1461
+#: src/mainwindow.cpp:1373
 #, kde-format
 msgid "Save Images Separately"
 msgstr ""
 
-#: src/mainwindow.cpp:1462
+#: src/mainwindow.cpp:1374
 #, kde-format
 msgid "Save Images in File"
 msgstr ""
 
-#: src/mainwindow.cpp:1502
+#: src/mainwindow.cpp:1409
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Salvez fișierul sub un nou nume..."
 
-#: src/mainwindow.cpp:1511
+#: src/mainwindow.cpp:1418
 #, fuzzy, kde-format
 msgid "Save As"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:1577
+#: src/mainwindow.cpp:1484
 #, kde-format
 msgid "Printing..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:1581
+#: src/mainwindow.cpp:1488
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
 
-#: src/mainwindow.cpp:1606
+#: src/mainwindow.cpp:1513
 #, kde-format
 msgid "Exiting..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:1708
+#: src/mainwindow.cpp:1615
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr ""
 
-#: src/mainwindow.cpp:1711
+#: src/mainwindow.cpp:1618
 #, kde-format
 msgid "(%1 filtered)"
 msgstr ""
 
-#: src/mainwindow.cpp:1714
+#: src/mainwindow.cpp:1621
 #, kde-format
 msgid "(%1 selected)"
 msgstr ""
 
-#: src/mainwindow.cpp:1853 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1760 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:252
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6255,138 +6313,138 @@ msgstr ""
 "Eroare în procesarea XSLT.\n"
 "Vă rog verificați instalarea."
 
-#: src/mainwindow.cpp:1971
+#: src/mainwindow.cpp:1878
 #, fuzzy, kde-format
 msgid "Importing data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:1982
+#: src/mainwindow.cpp:1889
 #, fuzzy, kde-format
 msgid "Import File"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:1902
 #, fuzzy, kde-format
 msgid "Import Directory"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:2019
+#: src/mainwindow.cpp:1926
 #, fuzzy, kde-format
 msgid "Exporting data..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:2042
+#: src/mainwindow.cpp:1949
 #, fuzzy, kde-format
 msgid "Export As"
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:2070
+#: src/mainwindow.cpp:1977
 #, fuzzy, kde-format
 msgid "String Macros"
 msgstr "Calificativ"
 
-#: src/mainwindow.cpp:2071
+#: src/mainwindow.cpp:1978
 #, kde-format
 msgid "Macro"
 msgstr ""
 
-#: src/mainwindow.cpp:2071
+#: src/mainwindow.cpp:1978
 #, fuzzy, kde-format
 msgid "String"
 msgstr "Calificativ"
 
-#: src/mainwindow.cpp:2157
+#: src/mainwindow.cpp:2064
 #, fuzzy, kde-format
 msgid "Creating citations..."
 msgstr "Tai selecția..."
 
-#: src/mainwindow.cpp:2267
+#: src/mainwindow.cpp:2174
 #, fuzzy, kde-format
 msgid "Filters"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:2268
+#: src/mainwindow.cpp:2175
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2291
+#: src/mainwindow.cpp:2198
 #, fuzzy, kde-format
 msgid "Loans"
 msgstr "Împrumutată"
 
-#: src/mainwindow.cpp:2292
+#: src/mainwindow.cpp:2199
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2383
+#: src/mainwindow.cpp:2286
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
 "be saved and the images will be transferred to the new location."
 msgstr ""
 
-#: src/mainwindow.cpp:2430
+#: src/mainwindow.cpp:2329
 #, kde-format
 msgid "Update entry data from %1"
 msgstr ""
 
-#: src/mainwindow.cpp:2449
+#: src/mainwindow.cpp:2348
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr ""
 
-#: src/mainwindow.cpp:2637
+#: src/mainwindow.cpp:2527
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"
 msgid "Tellico Log"
 msgstr "Tellico"
 
-#: src/reportdialog.cpp:89
+#: src/reportdialog.cpp:84
 #, fuzzy, kde-format
 msgid "Collection Report"
 msgstr "Bara de colecții"
 
-#: src/reportdialog.cpp:100
+#: src/reportdialog.cpp:95
 #, fuzzy, kde-format
 msgid "&Report template:"
 msgstr "Imprim..."
 
-#: src/reportdialog.cpp:126
+#: src/reportdialog.cpp:115
 #, kde-format
 msgid "One Entry Per Page"
 msgstr ""
 
-#: src/reportdialog.cpp:149
+#: src/reportdialog.cpp:134
 #, fuzzy, kde-format
 msgid "&Generate"
 msgstr "General"
 
-#: src/reportdialog.cpp:169
+#: src/reportdialog.cpp:154
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
 msgstr ""
 
-#: src/reportdialog.cpp:170
+#: src/reportdialog.cpp:155
 #, kde-format
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr ""
 
-#: src/reportdialog.cpp:497
+#: src/reportdialog.cpp:420
 #, fuzzy, kde-format
 msgid "PNG Files"
 msgstr "Șterge carte"
 
-#: src/reportdialog.cpp:512 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:435 src/translators/htmlexporter.cpp:101
 #, fuzzy, kde-format
 msgid "HTML Files"
 msgstr "Filmele mele"
@@ -6396,38 +6454,37 @@ msgstr "Filmele mele"
 msgid "Do you really want to delete this filter?"
 msgstr ""
 
-#: src/tellico_kernel.cpp:270 src/tellico_kernel.cpp:274
+#: src/tellico_kernel.cpp:269
 #, fuzzy, kde-format
 msgid "Delete Filter?"
 msgstr "Șterge carte"
 
-#: src/tellico_kernel.cpp:311
+#: src/tellico_kernel.cpp:305
 #, fuzzy, kde-format
 msgid "New collection name:"
 msgstr "Nume nou colecție"
 
-#: src/tellico_kernel.cpp:327
+#: src/tellico_kernel.cpp:321
 #, fuzzy, kde-format
 msgid "Entry 1"
 msgstr "Serie"
 
-#: src/tellico_kernel.cpp:328
+#: src/tellico_kernel.cpp:322
 #, fuzzy, kde-format
 msgid "Entry 2"
 msgstr "Serie"
 
-#: src/tellico_kernel.cpp:337
+#: src/tellico_kernel.cpp:331
 #, kde-format
 msgid "Conflicting values for %1 were found while merging entries."
 msgstr ""
 
-#: src/tellico_kernel.cpp:343
+#: src/tellico_kernel.cpp:337
 #, kde-format
 msgid "Please choose which value to keep."
 msgstr ""
 
-#: src/tellico_kernel.cpp:350 src/tellico_kernel.cpp:351
-#: src/tellico_kernel.cpp:362 src/tellico_kernel.cpp:363
+#: src/tellico_kernel.cpp:343 src/tellico_kernel.cpp:344
 #, kde-format
 msgid "Select value from %1"
 msgstr ""
@@ -6505,12 +6562,12 @@ msgid ""
 "books in that library could be overwritten.</qt>"
 msgstr ""
 
-#: src/translators/alexandriaimporter.cpp:239
+#: src/translators/alexandriaimporter.cpp:235
 #, fuzzy, kde-format
 msgid "Alexandria Options"
 msgstr "Opțiuni generale"
 
-#: src/translators/alexandriaimporter.cpp:242
+#: src/translators/alexandriaimporter.cpp:238
 #, kde-format
 msgid "&Library:"
 msgstr ""
@@ -6781,29 +6838,29 @@ msgstr ""
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:294
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:289
 #, fuzzy, kde-format
 msgid "Table column delimiter:"
 msgstr "Nume nou colecție"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:293
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:288
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:305
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:300
 #, fuzzy, kde-format
 msgid "Table row delimiter:"
 msgstr "Șterge carte"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:304
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:299
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
 
 #: src/translators/csvimporter.cpp:223
-#: src/translators/filelistingimporter.cpp:180
+#: src/translators/filelistingimporter.cpp:176
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr ""
@@ -6845,12 +6902,12 @@ msgstr "Titlu"
 msgid "Ot&her:"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:324
+#: src/translators/csvimporter.cpp:319
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr ""
 
-#: src/translators/csvimporter.cpp:331
+#: src/translators/csvimporter.cpp:326
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -6858,34 +6915,34 @@ msgid ""
 "qt>"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:333
+#: src/translators/csvimporter.cpp:328
 #, fuzzy, kde-format
 msgid "Co&lumn:"
 msgstr "Șterge carte"
 
-#: src/translators/csvimporter.cpp:346
+#: src/translators/csvimporter.cpp:341
 #, fuzzy, kde-format
 msgid "&Data field in this column:"
 msgstr "Opțiuni colecții audio"
 
-#: src/translators/csvimporter.cpp:360
+#: src/translators/csvimporter.cpp:355
 #, fuzzy, kde-format
 msgid "&Assign Field"
 msgstr "Opțiuni colecții audio"
 
-#: src/translators/csvimporter.cpp:399
+#: src/translators/csvimporter.cpp:394
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
 "be imported."
 msgstr ""
 
-#: src/translators/csvimporter.cpp:596
+#: src/translators/csvimporter.cpp:591
 #, kde-format
 msgid "Review"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:689
+#: src/translators/csvimporter.cpp:684
 #, fuzzy, kde-format
 msgid "<New Field>"
 msgstr "Șterge carte"
@@ -6900,85 +6957,85 @@ msgstr "Opțiuni generale"
 msgid "Scanning files..."
 msgstr "Salvez fișierul..."
 
-#: src/translators/filelistingimporter.cpp:161
+#: src/translators/filelistingimporter.cpp:157
 #, fuzzy, kde-format
 msgid "File Listing Options"
 msgstr "Opțiuni colecții video"
 
-#: src/translators/filelistingimporter.cpp:164
+#: src/translators/filelistingimporter.cpp:160
 #, kde-format
 msgid "Recursive folder search"
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:165
+#: src/translators/filelistingimporter.cpp:161
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 
-#: src/translators/filelistingimporter.cpp:169
+#: src/translators/filelistingimporter.cpp:165
 #, fuzzy, kde-format
 msgid "Generate file previews"
 msgstr "Creează un document nou"
 
-#: src/translators/filelistingimporter.cpp:170
+#: src/translators/filelistingimporter.cpp:166
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
 msgstr ""
 
-#: src/translators/freedbimporter.cpp:109
-#: src/translators/freedbimporter.cpp:192
+#: src/translators/freedbimporter.cpp:103
+#: src/translators/freedbimporter.cpp:186
 #, fuzzy, kde-format
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
 msgstr "Nu pot deschide fișierul - %1."
 
-#: src/translators/freedbimporter.cpp:217
+#: src/translators/freedbimporter.cpp:211
 #, fuzzy, kde-format
 msgid "Select CDDB Entry"
 msgstr "Șterge carte"
 
-#: src/translators/freedbimporter.cpp:218
+#: src/translators/freedbimporter.cpp:212
 #, kde-format
 msgid "Select a CDDB entry:"
 msgstr ""
 
-#: src/translators/freedbimporter.cpp:241
+#: src/translators/freedbimporter.cpp:235
 #, fuzzy, kde-format
 msgid "<qt>No records were found to match the CD.</qt>"
 msgstr "Nu pot deschide fișierul - %1."
 
-#: src/translators/freedbimporter.cpp:259
+#: src/translators/freedbimporter.cpp:253
 #, fuzzy, kde-format
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
 msgstr "Nu pot deschide fișierul - %1."
 
-#: src/translators/freedbimporter.cpp:492
+#: src/translators/freedbimporter.cpp:482
 #, fuzzy, kde-format
 msgid "Various"
 msgstr "Grupează după: "
 
-#: src/translators/freedbimporter.cpp:512
+#: src/translators/freedbimporter.cpp:502
 #, fuzzy, kde-format
 msgid "Audio CD Options"
 msgstr "Opțiuni generale"
 
-#: src/translators/freedbimporter.cpp:519
+#: src/translators/freedbimporter.cpp:509
 #, kde-format
 msgid "Read data from CD-ROM device"
 msgstr ""
 
-#: src/translators/freedbimporter.cpp:522
+#: src/translators/freedbimporter.cpp:512
 #, kde-format
 msgid "Select or input the CD-ROM device location."
 msgstr ""
 
-#: src/translators/freedbimporter.cpp:531
+#: src/translators/freedbimporter.cpp:521
 #, fuzzy, kde-format
 msgid "Read all CDDB cache files only"
 msgstr "Salvez fișierul..."
 
-#: src/translators/freedbimporter.cpp:532
+#: src/translators/freedbimporter.cpp:522
 #, kde-format
 msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
@@ -7050,13 +7107,12 @@ msgid ""
 "com/export.php?export_type=json\">JSON format</a>."
 msgstr ""
 
-#: src/translators/librarythingimporter.cpp:189
-#: src/translators/librarythingimporter.cpp:194
+#: src/translators/librarythingimporter.cpp:187
 #, fuzzy, kde-format
 msgid "JSON Files"
 msgstr "Șterge carte"
 
-#: src/translators/librarythingimporter.cpp:199
+#: src/translators/librarythingimporter.cpp:191
 #, kde-format
 msgid "LibraryThing file:"
 msgstr ""
@@ -7105,12 +7161,12 @@ msgstr ""
 "Dacă bifați, la numele grupului se va adăuga și numărul de elemente din acel "
 "grup."
 
-#: src/translators/pdfimporter.cpp:126 src/translators/pdfimporter.cpp:142
+#: src/translators/pdfimporter.cpp:122 src/translators/pdfimporter.cpp:138
 #, fuzzy, kde-format
 msgid "Tellico was unable to read any metadata from the PDF file."
 msgstr "Nu pot deschide fișierul - %1."
 
-#: src/translators/pdfimporter.cpp:327
+#: src/translators/pdfimporter.cpp:317
 #, kde-format
 msgid ""
 "Tellico is able to download information about entries with a DOI from "
@@ -7133,17 +7189,17 @@ msgstr ""
 msgid "The file contains no collection data."
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:541
+#: src/translators/tellicoxmlexporter.cpp:537
 #, fuzzy, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico"
 
-#: src/translators/tellicoxmlexporter.cpp:544
+#: src/translators/tellicoxmlexporter.cpp:540
 #, kde-format
 msgid "Include images in XML document"
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:546
+#: src/translators/tellicoxmlexporter.cpp:542
 #, fuzzy, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7233,31 +7289,10 @@ msgstr "Ies..."
 msgid "This template is meant for video collections only."
 msgstr "Creează un document nou"
 
-#: xslt/report-templates/Group_Summary.xsl:168
-#, kde-format
-msgid ": Group Summary"
-msgstr ""
-
-#: xslt/report-templates/Group_Summary.xsl:178
-#, fuzzy, kde-format
-msgid "Total number of fields:"
-msgstr "Șterge carte"
-
-#: xslt/report-templates/Group_Summary.xsl:182
-#, fuzzy, kde-format
-msgid "Total number of entries:"
-msgstr "Șterge carte"
-
-#: xslt/report-templates/Group_Summary.xsl:198
 #: xslt/report-templates/Loan_View.xsl:202 xslt/tellico2html.xsl:413
 #, fuzzy, kde-format
 msgid "Generated by Tellico"
 msgstr "General"
-
-#: xslt/report-templates/Group_Summary.xsl:296
-#, kde-format
-msgid "Distinct values: "
-msgstr ""
 
 #: xslt/tellico2html.xsl:252
 #, fuzzy, kde-format
@@ -7270,37 +7305,18 @@ msgstr "Salvez fișierul..."
 msgid "Clear"
 msgstr "An"
 
-#~ msgid "(Empty)"
-#~ msgstr "(gol)"
+#, fuzzy
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Grupează după:"
 
 #, fuzzy
-#~ msgid "Classification"
-#~ msgstr "Clasificare"
+#~ msgid "Total number of fields:"
+#~ msgstr "Șterge carte"
 
 #, fuzzy
-#~ msgid "Tellico is unable to open the file - %1."
-#~ msgstr "Nu pot deschide fișierul - %1."
-
-#, fuzzy
-#~ msgid "Tellico is unable to load the file - %1."
-#~ msgstr "Nu pot deschide fișierul - %1."
-
-#, fuzzy
-#~ msgid "Tellico is unable to write the file - %1."
-#~ msgstr "Nu pot deschide fișierul - %1."
-
-#, fuzzy
-#~ msgid "Tellico is unable to upload the file - %1."
-#~ msgstr "Nu pot deschide fișierul - %1."
-
-#, fuzzy
-#~ msgid "Tellico is unable to load an image from the file - %1."
-#~ msgstr "Nu pot deschide fișierul - %1."
-
-#, fuzzy
-#~| msgid "Subtitle"
-#~ msgid "Untitled"
-#~ msgstr "Subtitlu"
+#~ msgid "Total number of entries:"
+#~ msgstr "Șterge carte"
 
 #, fuzzy
 #~ msgid "AnimeNfo Rating"
