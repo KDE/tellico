@@ -910,10 +910,11 @@ void MainWindow::initFileOpen(bool nofile_) {
     m_detailedView->slotRefreshImages();
   }
 
+  QString text;
   if(Config::showWelcome()) {
     // show welcome text, even when opening an existing collection
-    QString welcomeFile = DataFileRegistry::self()->locate(QStringLiteral("welcome.html"));
-    QString text = FileHandler::readTextFile(QUrl::fromLocalFile(welcomeFile));
+    const auto welcomeFile = DataFileRegistry::self()->locate(QStringLiteral("welcome.html"));
+    text = FileHandler::readTextFile(QUrl::fromLocalFile(welcomeFile));
     const int type = Kernel::self()->collectionType();
     text.replace(QLatin1String("$FGCOLOR$"), Config::templateTextColor(type).name());
     text.replace(QLatin1String("$BGCOLOR$"), Config::templateBaseColor(type).name());
@@ -947,8 +948,12 @@ void MainWindow::initFileOpen(bool nofile_) {
                  QStringLiteral("<img src=\"%1\" align=\"top\" height=\"%2\" width=\"%2\" title=\"tellico\" />")
                  .arg(iconPath)
                  .arg(KIconLoader::SizeEnormous));
-    m_entryView->showText(text);
+  } else {
+    const int type = Kernel::self()->collectionType();
+    text = QStringLiteral("<html><style>html { background-color:%1; }</style></html>")
+           .arg(Config::templateBaseColor(type).name());
   }
+  m_entryView->showText(text);
 
   m_initialized = true;
 }
