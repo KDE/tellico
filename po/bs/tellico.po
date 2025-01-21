@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-20 00:42+0000\n"
+"POT-Creation-Date: 2025-01-21 00:41+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -168,7 +168,7 @@ msgstr "Ime"
 msgid "Collection Size"
 msgstr "Kolekcoja polja"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1608
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1613
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Ukupno unosa: %1"
@@ -2869,8 +2869,8 @@ msgstr "Datoteke"
 msgid "Template Packages"
 msgstr "Predlošci"
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1242
-#: src/mainwindow.cpp:1413 src/reportdialog.cpp:422 src/reportdialog.cpp:437
+#: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1247
+#: src/mainwindow.cpp:1418 src/reportdialog.cpp:422 src/reportdialog.cpp:437
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -3138,7 +3138,7 @@ msgstr "Prikaži sve Kolone"
 msgid "Hide All Columns"
 msgstr "Sakrij  sve Kolone"
 
-#: src/document.cpp:212 src/mainwindow.cpp:1357
+#: src/document.cpp:212 src/mainwindow.cpp:1362
 #, kde-format
 msgid "Saving file..."
 msgstr "Snimam datoteku..."
@@ -3199,7 +3199,7 @@ msgstr ""
 msgid "Save Entry"
 msgstr "Snimi unos"
 
-#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1146
+#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1151
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Promjene nisu snimljene"
@@ -3279,7 +3279,7 @@ msgstr "Ažuriram <b>%1</b>..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico ne može naći podrazumjevani stil stranice."
 
-#: src/entryview.cpp:291 src/mainwindow.cpp:1761
+#: src/entryview.cpp:291 src/mainwindow.cpp:1766
 #, kde-format
 msgid "Please check your installation."
 msgstr "Molim provjerite vašu instalaciju."
@@ -5019,8 +5019,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Grupa"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1074 src/mainwindow.cpp:1696
-#: src/mainwindow.cpp:1730 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1079 src/mainwindow.cpp:1701
+#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Ljudi"
@@ -5334,7 +5334,7 @@ msgstr ""
 msgid "&Import"
 msgstr "&Import"
 
-#: src/importdialog.cpp:372 src/mainwindow.cpp:1238 src/mainwindow.cpp:1411
+#: src/importdialog.cpp:372 src/mainwindow.cpp:1243 src/mainwindow.cpp:1416
 #: src/translators/tellicozipexporter.cpp:54
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
@@ -5342,7 +5342,7 @@ msgid "Tellico Files"
 msgstr "Tellico Zip Datoteka"
 
 #: src/importdialog.cpp:373 src/importdialog.cpp:391 src/importdialog.cpp:420
-#: src/mainwindow.cpp:1240 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1245 src/translators/tellicoxmlexporter.cpp:71
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "XML Files"
@@ -6489,18 +6489,18 @@ msgstr ""
 "<qt><i>Grupni Pogled</i>sortira unose u grupe zasnovane na odabranim poljima."
 "</qt>"
 
-#: src/mainwindow.cpp:924
+#: src/mainwindow.cpp:925
 #, fuzzy, kde-format
 #| msgid "Tellico - a collection manager for KDE"
 msgid "Collection management software, free and simple"
 msgstr "Tellico - menadžer kolekcija za KDE"
 
-#: src/mainwindow.cpp:926
+#: src/mainwindow.cpp:927
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Dobrodošli u Tellico Menadžer Kolekcija"
 
-#: src/mainwindow.cpp:928
+#: src/mainwindow.cpp:929
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6515,7 +6515,7 @@ msgstr ""
 "ručno</a> ili sa  <a href=\"tc:///edit_search_internet\">preuzimanjem "
 "podataka</a> sa raznih izvora sa Interneta.</h3>"
 
-#: src/mainwindow.cpp:937
+#: src/mainwindow.cpp:938
 #, kde-format
 msgid ""
 "More information can be found in the <a href=\"help:/tellico"
@@ -6523,7 +6523,7 @@ msgid ""
 "this welcome screen</a>."
 msgstr ""
 
-#: src/mainwindow.cpp:1144
+#: src/mainwindow.cpp:1149
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6532,23 +6532,23 @@ msgstr ""
 "Tekuća datoteka je izmijenjena.\n"
 "Želite li da je sačuvate?"
 
-#: src/mainwindow.cpp:1180 src/mainwindow.cpp:1214
+#: src/mainwindow.cpp:1185 src/mainwindow.cpp:1219
 #, fuzzy, kde-format
 #| msgid "Create a new collection"
 msgid "Creating new collection..."
 msgstr "Napravite novu kolekciju"
 
-#: src/mainwindow.cpp:1235 src/mainwindow.cpp:1258 src/mainwindow.cpp:1276
+#: src/mainwindow.cpp:1240 src/mainwindow.cpp:1263 src/mainwindow.cpp:1281
 #, kde-format
 msgid "Opening file..."
 msgstr "Otvaranje datoteke..."
 
-#: src/mainwindow.cpp:1246
+#: src/mainwindow.cpp:1251
 #, kde-format
 msgid "Open File"
 msgstr "Otvori Datoteku"
 
-#: src/mainwindow.cpp:1368
+#: src/mainwindow.cpp:1373
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6561,32 +6561,32 @@ msgstr ""
 "direktoriju podataka da poboljšate performanse?</p><p>Možete uvijek "
 "promijeniti vaš izbor u konfiguracijskom dialogu.</p></qt>"
 
-#: src/mainwindow.cpp:1373
+#: src/mainwindow.cpp:1378
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Sačuvaj Slike Odvojeno"
 
-#: src/mainwindow.cpp:1374
+#: src/mainwindow.cpp:1379
 #, kde-format
 msgid "Save Images in File"
 msgstr "Sačuvaj Slike u Datoteku"
 
-#: src/mainwindow.cpp:1409
+#: src/mainwindow.cpp:1414
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Spašavanje datoteke sa novim imenom..."
 
-#: src/mainwindow.cpp:1418
+#: src/mainwindow.cpp:1423
 #, kde-format
 msgid "Save As"
 msgstr "Sačuvaj kao"
 
-#: src/mainwindow.cpp:1484
+#: src/mainwindow.cpp:1489
 #, kde-format
 msgid "Printing..."
 msgstr "Štampanje..."
 
-#: src/mainwindow.cpp:1488
+#: src/mainwindow.cpp:1493
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6595,27 +6595,27 @@ msgstr ""
 "Kolekcija se trenutno filtrira radi ograničenja podseta unosa. Samo vidljivi "
 "unosi će biti štampani. Nastaviti?"
 
-#: src/mainwindow.cpp:1513
+#: src/mainwindow.cpp:1518
 #, kde-format
 msgid "Exiting..."
 msgstr "Izlazim..."
 
-#: src/mainwindow.cpp:1615
+#: src/mainwindow.cpp:1620
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrirano; %2 odabrano)"
 
-#: src/mainwindow.cpp:1618
+#: src/mainwindow.cpp:1623
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtrirano)"
 
-#: src/mainwindow.cpp:1621
+#: src/mainwindow.cpp:1626
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 odabrano)"
 
-#: src/mainwindow.cpp:1760 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1765 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:252
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6623,57 +6623,57 @@ msgstr "(%1 odabrano)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico je otrkio grešku u XSLT obradi."
 
-#: src/mainwindow.cpp:1878
+#: src/mainwindow.cpp:1883
 #, kde-format
 msgid "Importing data..."
 msgstr "Uvoz podataka..."
 
-#: src/mainwindow.cpp:1889
+#: src/mainwindow.cpp:1894
 #, kde-format
 msgid "Import File"
 msgstr "Uvezi datoteku"
 
-#: src/mainwindow.cpp:1902
+#: src/mainwindow.cpp:1907
 #, kde-format
 msgid "Import Directory"
 msgstr "Uvezi Direktorij"
 
-#: src/mainwindow.cpp:1926
+#: src/mainwindow.cpp:1931
 #, kde-format
 msgid "Exporting data..."
 msgstr "Izvoz podataka..."
 
-#: src/mainwindow.cpp:1949
+#: src/mainwindow.cpp:1954
 #, kde-format
 msgid "Export As"
 msgstr "Izvezi kao"
 
-#: src/mainwindow.cpp:1977
+#: src/mainwindow.cpp:1982
 #, kde-format
 msgid "String Macros"
 msgstr "Makro nizovi znakova"
 
-#: src/mainwindow.cpp:1978
+#: src/mainwindow.cpp:1983
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:1978
+#: src/mainwindow.cpp:1983
 #, kde-format
 msgid "String"
 msgstr "Niz znakova"
 
-#: src/mainwindow.cpp:2064
+#: src/mainwindow.cpp:2069
 #, kde-format
 msgid "Creating citations..."
 msgstr "Kreiranje citata..."
 
-#: src/mainwindow.cpp:2174
+#: src/mainwindow.cpp:2179
 #, kde-format
 msgid "Filters"
 msgstr "Filteri"
 
-#: src/mainwindow.cpp:2175
+#: src/mainwindow.cpp:2180
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6682,12 +6682,12 @@ msgstr ""
 "<qt><i>Filter Pogled</i> prikazuje unose koji udovoljavaju određenim "
 "pravilima filtera.</qt>"
 
-#: src/mainwindow.cpp:2198
+#: src/mainwindow.cpp:2203
 #, kde-format
 msgid "Loans"
 msgstr "Pozajmice (krediti)"
 
-#: src/mainwindow.cpp:2199
+#: src/mainwindow.cpp:2204
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6696,7 +6696,7 @@ msgstr ""
 "<qt><i>Pregled Pozajmica</i> prikazuje listu svih ljudi koji su posudili "
 "predmete iz vaše kolekcije.</qt>"
 
-#: src/mainwindow.cpp:2286
+#: src/mainwindow.cpp:2291
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6705,12 +6705,12 @@ msgstr ""
 "Neke slike nisu sačuvane na konfiguriranoj lokaciji. Trenutna datoteka se "
 "mora sačuvati i slike će biti prebačene na novu lokaciju."
 
-#: src/mainwindow.cpp:2329
+#: src/mainwindow.cpp:2334
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Ažurirati unosne podatke od %1"
 
-#: src/mainwindow.cpp:2348
+#: src/mainwindow.cpp:2353
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6719,7 +6719,7 @@ msgstr ""
 "Tellico može uvoziti samo jednu po jednu datoteku ovog tipa. Samo %1 će biti "
 "uvezeno."
 
-#: src/mainwindow.cpp:2527
+#: src/mainwindow.cpp:2532
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"
