@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-19 02:30+0000\n"
+"POT-Creation-Date: 2025-01-21 02:32+0000\n"
 "PO-Revision-Date: 2024-09-22 16:35+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -166,7 +166,7 @@ msgstr "Namn"
 msgid "Collection Size"
 msgstr "Samlingsstorleik"
 
-#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1701
+#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1706
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Oppføringar i alt: %1"
@@ -2770,8 +2770,8 @@ msgstr "XSL-filer"
 msgid "Template Packages"
 msgstr "Malpakkar"
 
-#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1330
-#: src/mainwindow.cpp:1506 src/reportdialog.cpp:499 src/reportdialog.cpp:514
+#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1335
+#: src/mainwindow.cpp:1511 src/reportdialog.cpp:499 src/reportdialog.cpp:514
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -2962,7 +2962,7 @@ msgstr "Vis alle kolonnane"
 msgid "Hide All Columns"
 msgstr "Gøym alle kolonnane"
 
-#: src/document.cpp:212 src/mainwindow.cpp:1445
+#: src/document.cpp:212 src/mainwindow.cpp:1450
 #, kde-format
 msgid "Saving file..."
 msgstr "Lagrar fil …"
@@ -3024,7 +3024,7 @@ msgid "Save Entry"
 msgstr "Lagra oppføring"
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1215 src/mainwindow.cpp:1233
+#: src/mainwindow.cpp:1220 src/mainwindow.cpp:1238
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Ulagra endringar"
@@ -3098,7 +3098,7 @@ msgstr "Oppdaterer <b>%1</b> …"
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Klarte ikkje finna standardstilsett for oppføringar."
 
-#: src/entryview.cpp:359 src/mainwindow.cpp:1854
+#: src/entryview.cpp:359 src/mainwindow.cpp:1859
 #, kde-format
 msgid "Please check your installation."
 msgstr "Kontroller at programmet er rett installert."
@@ -4798,8 +4798,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Gruppe"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1142 src/mainwindow.cpp:1789
-#: src/mainwindow.cpp:1823 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1147 src/mainwindow.cpp:1794
+#: src/mainwindow.cpp:1828 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Personar"
@@ -5101,14 +5101,14 @@ msgstr ""
 msgid "&Import"
 msgstr "&Importer frå"
 
-#: src/importdialog.cpp:377 src/mainwindow.cpp:1326 src/mainwindow.cpp:1504
+#: src/importdialog.cpp:377 src/mainwindow.cpp:1331 src/mainwindow.cpp:1509
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico-filer"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1328 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1333 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "XML-filer"
@@ -6225,17 +6225,17 @@ msgstr ""
 "<qt><i>Grupperuta</i> sorterer oppføringane i grupper basert på eit valt "
 "felt.</qt>"
 
-#: src/mainwindow.cpp:992
+#: src/mainwindow.cpp:993
 #, fuzzy, kde-format
 msgid "Collection management software, free and simple"
 msgstr "Tellico – ein enkel og gratis samlingsdatabase"
 
-#: src/mainwindow.cpp:994
+#: src/mainwindow.cpp:995
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Velkommen til samlingsdatabasen Tellico"
 
-#: src/mainwindow.cpp:996
+#: src/mainwindow.cpp:997
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6250,7 +6250,7 @@ msgstr ""
 "inn data manuelt</a> eller ved å <a href=\"tc:///edit_search_internet"
 "\">lasta ned data</a> frå ulike Internett-kjelder.</h3>"
 
-#: src/mainwindow.cpp:1005
+#: src/mainwindow.cpp:1006
 #, kde-format
 msgid ""
 "More information can be found in the <a href=\"help:/tellico"
@@ -6258,7 +6258,7 @@ msgid ""
 "this welcome screen</a>."
 msgstr ""
 
-#: src/mainwindow.cpp:1212
+#: src/mainwindow.cpp:1217
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6267,22 +6267,22 @@ msgstr ""
 "Fila er endra.\n"
 "Vil du lagra ho?"
 
-#: src/mainwindow.cpp:1268 src/mainwindow.cpp:1302
+#: src/mainwindow.cpp:1273 src/mainwindow.cpp:1307
 #, kde-format
 msgid "Creating new collection..."
 msgstr "Lagar ny samling …"
 
-#: src/mainwindow.cpp:1323 src/mainwindow.cpp:1346 src/mainwindow.cpp:1364
+#: src/mainwindow.cpp:1328 src/mainwindow.cpp:1351 src/mainwindow.cpp:1369
 #, kde-format
 msgid "Opening file..."
 msgstr "Opnar fil …"
 
-#: src/mainwindow.cpp:1334
+#: src/mainwindow.cpp:1339
 #, kde-format
 msgid "Open File"
 msgstr "Opna fil"
 
-#: src/mainwindow.cpp:1456
+#: src/mainwindow.cpp:1461
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6295,32 +6295,32 @@ msgstr ""
 "datamappa til Tellico, slik at programmet køyrer raskare?</p><p>Du kan "
 "alltid endra valet du gjer no seinare, via oppsettvindauget.</p></qt>"
 
-#: src/mainwindow.cpp:1461
+#: src/mainwindow.cpp:1466
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Lagra bileta for seg"
 
-#: src/mainwindow.cpp:1462
+#: src/mainwindow.cpp:1467
 #, kde-format
 msgid "Save Images in File"
 msgstr "Lagra bilete i samlingsfila"
 
-#: src/mainwindow.cpp:1502
+#: src/mainwindow.cpp:1507
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Lagrar fil med nytt filnamn …"
 
-#: src/mainwindow.cpp:1511
+#: src/mainwindow.cpp:1516
 #, kde-format
 msgid "Save As"
 msgstr "Lagra som"
 
-#: src/mainwindow.cpp:1577
+#: src/mainwindow.cpp:1582
 #, kde-format
 msgid "Printing..."
 msgstr "Skriv ut …"
 
-#: src/mainwindow.cpp:1581
+#: src/mainwindow.cpp:1586
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6329,27 +6329,27 @@ msgstr ""
 "Samlinga vert filtrert, og viser berre nokre av oppføringane. Berre dei "
 "synlege oppføringane vert skrivne ut. Vil du halda fram?"
 
-#: src/mainwindow.cpp:1606
+#: src/mainwindow.cpp:1611
 #, kde-format
 msgid "Exiting..."
 msgstr "Avsluttar …"
 
-#: src/mainwindow.cpp:1708
+#: src/mainwindow.cpp:1713
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrert – %2 merkt)"
 
-#: src/mainwindow.cpp:1711
+#: src/mainwindow.cpp:1716
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtrert)"
 
-#: src/mainwindow.cpp:1714
+#: src/mainwindow.cpp:1719
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 merkt)"
 
-#: src/mainwindow.cpp:1853 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1858 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:252
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6357,57 +6357,57 @@ msgstr "(%1 merkt)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Det oppstod ein feil ved XSLT-handsaming."
 
-#: src/mainwindow.cpp:1971
+#: src/mainwindow.cpp:1976
 #, kde-format
 msgid "Importing data..."
 msgstr "Importerer data …"
 
-#: src/mainwindow.cpp:1982
+#: src/mainwindow.cpp:1987
 #, kde-format
 msgid "Import File"
 msgstr "Importer fil"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:2000
 #, kde-format
 msgid "Import Directory"
 msgstr "Importer mappe"
 
-#: src/mainwindow.cpp:2019
+#: src/mainwindow.cpp:2024
 #, kde-format
 msgid "Exporting data..."
 msgstr "Eksporterer data …"
 
-#: src/mainwindow.cpp:2042
+#: src/mainwindow.cpp:2047
 #, kde-format
 msgid "Export As"
 msgstr "Eksporter som"
 
-#: src/mainwindow.cpp:2070
+#: src/mainwindow.cpp:2075
 #, kde-format
 msgid "String Macros"
 msgstr "Tekstmakroar"
 
-#: src/mainwindow.cpp:2071
+#: src/mainwindow.cpp:2076
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:2071
+#: src/mainwindow.cpp:2076
 #, kde-format
 msgid "String"
 msgstr "Tekst"
 
-#: src/mainwindow.cpp:2157
+#: src/mainwindow.cpp:2162
 #, kde-format
 msgid "Creating citations..."
 msgstr "Lagar referansar …"
 
-#: src/mainwindow.cpp:2267
+#: src/mainwindow.cpp:2272
 #, kde-format
 msgid "Filters"
 msgstr "Filter"
 
-#: src/mainwindow.cpp:2268
+#: src/mainwindow.cpp:2273
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6416,12 +6416,12 @@ msgstr ""
 "<qt>The <i>Filtervisinga</i> viser oppføringane i samsvar med visse "
 "filterreglar.</qt>"
 
-#: src/mainwindow.cpp:2291
+#: src/mainwindow.cpp:2296
 #, kde-format
 msgid "Loans"
 msgstr "Lån"
 
-#: src/mainwindow.cpp:2292
+#: src/mainwindow.cpp:2297
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6430,7 +6430,7 @@ msgstr ""
 "<qt><i>Lånevisinga</i> viser ei oversikt over alle som har lånt noko frå "
 "samlinga.</qt>"
 
-#: src/mainwindow.cpp:2383
+#: src/mainwindow.cpp:2388
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6439,12 +6439,12 @@ msgstr ""
 "Nokre bilete er ikkje lagra på den valde plasseringa. Den gjeldande fila må "
 "lagrast, og bileta vert så overtførte til den nye plasseringa."
 
-#: src/mainwindow.cpp:2430
+#: src/mainwindow.cpp:2435
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Oppdater oppføringsdata frå %1"
 
-#: src/mainwindow.cpp:2449
+#: src/mainwindow.cpp:2454
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6453,7 +6453,7 @@ msgstr ""
 "Tellico kan berre importera éi fil av denne typen om gongen. Berre %1 vert "
 "importert."
 
-#: src/mainwindow.cpp:2637
+#: src/mainwindow.cpp:2642
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"

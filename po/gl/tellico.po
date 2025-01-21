@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-19 02:30+0000\n"
+"POT-Creation-Date: 2025-01-21 02:32+0000\n"
 "PO-Revision-Date: 2025-01-04 15:04+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -171,7 +171,7 @@ msgstr "Nome"
 msgid "Collection Size"
 msgstr "Tamaño da colección"
 
-#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1701
+#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1706
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Total de entradas: %1"
@@ -2767,8 +2767,8 @@ msgstr "Ficheiros XSL"
 msgid "Template Packages"
 msgstr "Paquetes de modelo"
 
-#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1330
-#: src/mainwindow.cpp:1506 src/reportdialog.cpp:499 src/reportdialog.cpp:514
+#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1335
+#: src/mainwindow.cpp:1511 src/reportdialog.cpp:499 src/reportdialog.cpp:514
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -2959,7 +2959,7 @@ msgstr "Amosar todas as columnas"
 msgid "Hide All Columns"
 msgstr "Agochar todas as columnas"
 
-#: src/document.cpp:212 src/mainwindow.cpp:1445
+#: src/document.cpp:212 src/mainwindow.cpp:1450
 #, kde-format
 msgid "Saving file..."
 msgstr "Gardando o ficheiro…"
@@ -3021,7 +3021,7 @@ msgid "Save Entry"
 msgstr "Gardar a entrada"
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1215 src/mainwindow.cpp:1233
+#: src/mainwindow.cpp:1220 src/mainwindow.cpp:1238
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Hai cambios sen gardar"
@@ -3095,7 +3095,7 @@ msgstr "Actualizando <b>%1</b> desde <i>%2</i>…"
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico non pode atopar a folla de estilos da entrada predeterminada."
 
-#: src/entryview.cpp:359 src/mainwindow.cpp:1854
+#: src/entryview.cpp:359 src/mainwindow.cpp:1859
 #, kde-format
 msgid "Please check your installation."
 msgstr "Revise a instalación."
@@ -4807,8 +4807,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Grupo"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1142 src/mainwindow.cpp:1789
-#: src/mainwindow.cpp:1823 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1147 src/mainwindow.cpp:1794
+#: src/mainwindow.cpp:1828 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Xente"
@@ -5110,14 +5110,14 @@ msgstr ""
 msgid "&Import"
 msgstr "&Importar"
 
-#: src/importdialog.cpp:377 src/mainwindow.cpp:1326 src/mainwindow.cpp:1504
+#: src/importdialog.cpp:377 src/mainwindow.cpp:1331 src/mainwindow.cpp:1509
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Ficheiros de Tellico"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1328 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1333 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "Ficheiros XML"
@@ -6236,17 +6236,17 @@ msgstr ""
 "<qt>A <i>Vista en grupo</i> ordena as entradas agrupándoas con base nun "
 "campo escollido.</qt>"
 
-#: src/mainwindow.cpp:992
+#: src/mainwindow.cpp:993
 #, kde-format
 msgid "Collection management software, free and simple"
 msgstr "Programa de xestión de coleccións, libre e sinxelo"
 
-#: src/mainwindow.cpp:994
+#: src/mainwindow.cpp:995
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Benvido ao xestor de coleccións Tellico"
 
-#: src/mainwindow.cpp:996
+#: src/mainwindow.cpp:997
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6261,7 +6261,7 @@ msgstr ""
 "manualmente os datos</a> ou <a href=\"tc:///edit_search_internet"
 "\">descargando os datos</a> de varias fontes de Internet.</h3>"
 
-#: src/mainwindow.cpp:1005
+#: src/mainwindow.cpp:1006
 #, kde-format
 msgid ""
 "More information can be found in the <a href=\"help:/tellico"
@@ -6272,7 +6272,7 @@ msgstr ""
 "Tamén pode <a href=\"tc:///disable_welcome\">desactivar a pantalla de "
 "benvida</a>."
 
-#: src/mainwindow.cpp:1212
+#: src/mainwindow.cpp:1217
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6281,22 +6281,22 @@ msgstr ""
 "Modificouse o ficheiro actual.\n"
 "Quere gardalo?"
 
-#: src/mainwindow.cpp:1268 src/mainwindow.cpp:1302
+#: src/mainwindow.cpp:1273 src/mainwindow.cpp:1307
 #, kde-format
 msgid "Creating new collection..."
 msgstr "Creando unha nova colección…"
 
-#: src/mainwindow.cpp:1323 src/mainwindow.cpp:1346 src/mainwindow.cpp:1364
+#: src/mainwindow.cpp:1328 src/mainwindow.cpp:1351 src/mainwindow.cpp:1369
 #, kde-format
 msgid "Opening file..."
 msgstr "Abrindo o ficheiro…"
 
-#: src/mainwindow.cpp:1334
+#: src/mainwindow.cpp:1339
 #, kde-format
 msgid "Open File"
 msgstr "Abrir un ficheiro"
 
-#: src/mainwindow.cpp:1456
+#: src/mainwindow.cpp:1461
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6309,32 +6309,32 @@ msgstr ""
 "Tellico, para mellorar o rendemento?</p><p>Pode cambiar máis tarde a escolla "
 "no diálogo de configuración.</p></qt>"
 
-#: src/mainwindow.cpp:1461
+#: src/mainwindow.cpp:1466
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Gardar as imaxes á parte"
 
-#: src/mainwindow.cpp:1462
+#: src/mainwindow.cpp:1467
 #, kde-format
 msgid "Save Images in File"
 msgstr "Gardar as imaxes no ficheiro"
 
-#: src/mainwindow.cpp:1502
+#: src/mainwindow.cpp:1507
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Gardando o ficheiro co outro nome…"
 
-#: src/mainwindow.cpp:1511
+#: src/mainwindow.cpp:1516
 #, kde-format
 msgid "Save As"
 msgstr "Gardar como"
 
-#: src/mainwindow.cpp:1577
+#: src/mainwindow.cpp:1582
 #, kde-format
 msgid "Printing..."
 msgstr "Imprimindo…"
 
-#: src/mainwindow.cpp:1581
+#: src/mainwindow.cpp:1586
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6343,27 +6343,27 @@ msgstr ""
 "A colección está a filtrarse para amosar un subconxunto limitado das "
 "entradas. Só se imprimirán as visíbeis. Quere continuar?"
 
-#: src/mainwindow.cpp:1606
+#: src/mainwindow.cpp:1611
 #, kde-format
 msgid "Exiting..."
 msgstr "Estase a saír…"
 
-#: src/mainwindow.cpp:1708
+#: src/mainwindow.cpp:1713
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtradas, %2 escollidas)"
 
-#: src/mainwindow.cpp:1711
+#: src/mainwindow.cpp:1716
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtradas)"
 
-#: src/mainwindow.cpp:1714
+#: src/mainwindow.cpp:1719
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 escollidas)"
 
-#: src/mainwindow.cpp:1853 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1858 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:252
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6371,57 +6371,57 @@ msgstr "(%1 escollidas)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico atopouse cun erro ao procesar o XSLT."
 
-#: src/mainwindow.cpp:1971
+#: src/mainwindow.cpp:1976
 #, kde-format
 msgid "Importing data..."
 msgstr "Estanse a importar os datos…"
 
-#: src/mainwindow.cpp:1982
+#: src/mainwindow.cpp:1987
 #, kde-format
 msgid "Import File"
 msgstr "Importar un ficheiro"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:2000
 #, kde-format
 msgid "Import Directory"
 msgstr "Importar un cartafol"
 
-#: src/mainwindow.cpp:2019
+#: src/mainwindow.cpp:2024
 #, kde-format
 msgid "Exporting data..."
 msgstr "Estanse a exportar os datos…"
 
-#: src/mainwindow.cpp:2042
+#: src/mainwindow.cpp:2047
 #, kde-format
 msgid "Export As"
 msgstr "Exportar como"
 
-#: src/mainwindow.cpp:2070
+#: src/mainwindow.cpp:2075
 #, kde-format
 msgid "String Macros"
 msgstr "Macros de cadeas"
 
-#: src/mainwindow.cpp:2071
+#: src/mainwindow.cpp:2076
 #, kde-format
 msgid "Macro"
 msgstr "Macro"
 
-#: src/mainwindow.cpp:2071
+#: src/mainwindow.cpp:2076
 #, kde-format
 msgid "String"
 msgstr "Cadea"
 
-#: src/mainwindow.cpp:2157
+#: src/mainwindow.cpp:2162
 #, kde-format
 msgid "Creating citations..."
 msgstr "Estanse a crear as citas…"
 
-#: src/mainwindow.cpp:2267
+#: src/mainwindow.cpp:2272
 #, kde-format
 msgid "Filters"
 msgstr "Filtros"
 
-#: src/mainwindow.cpp:2268
+#: src/mainwindow.cpp:2273
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6430,12 +6430,12 @@ msgstr ""
 "<qt>A <i>vista do filtro</i> amosa as entradas que casan coas condicións de "
 "filtrado.</qt>"
 
-#: src/mainwindow.cpp:2291
+#: src/mainwindow.cpp:2296
 #, kde-format
 msgid "Loans"
 msgstr "Empréstitos"
 
-#: src/mainwindow.cpp:2292
+#: src/mainwindow.cpp:2297
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6444,7 +6444,7 @@ msgstr ""
 "<qt>A <i>vista dos empréstitos</i> amosa unha lista de toda a xente que ten "
 "emprestados elementos da súa colección.</qt>"
 
-#: src/mainwindow.cpp:2383
+#: src/mainwindow.cpp:2388
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6454,12 +6454,12 @@ msgstr ""
 "ficheiro actual ten que gardalo e as imaxes transferiranse á nova "
 "localización."
 
-#: src/mainwindow.cpp:2430
+#: src/mainwindow.cpp:2435
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Actualizar os datos da entrada desde %1"
 
-#: src/mainwindow.cpp:2449
+#: src/mainwindow.cpp:2454
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6467,7 +6467,7 @@ msgid ""
 msgstr ""
 "Tellico só pode importar un ficheiro deste tipo cada vez. Só se importará %1."
 
-#: src/mainwindow.cpp:2637
+#: src/mainwindow.cpp:2642
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
