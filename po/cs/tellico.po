@@ -2908,52 +2908,49 @@ msgid "Overwrite File?"
 msgstr "Přepsat soubor?"
 
 #: src/core/tellico_strings.cpp:27
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr "Tellico nemůže načíst obrázek %1."
+msgstr "Tellico nemůže otevřít soubor %1."
 
 #: src/core/tellico_strings.cpp:28
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "Tellico nemůže načíst obrázek %1."
+msgstr "Tellico nemůže načíst soubor %1."
 
 #: src/core/tellico_strings.cpp:29
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to write the file - %1."
-msgstr "Tellico nemůže načíst obrázek %1."
+msgstr "Tellico nemůže zapsat soubor %1."
 
 #: src/core/tellico_strings.cpp:30
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico nemůže načíst obrázek %1."
+msgstr "Tellico nemůže odeslat soubor %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
+"Připojeny mohou být pouze sbírky se stejným druhem záznamů. Stávající sbírka "
+"nebude změněna."
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
+"Sloučeny mohou být pouze sbírky se stejným druhem záznamů. Stávající sbírka "
+"nebude změněna."
 
 #: src/core/tellico_strings.cpp:37
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "Tellico nemůže načíst obrázek %1."
+msgstr "Tellico nemůže načíst obrázek ze souboru %1."
 
 #: src/core/tellico_strings.cpp:39
-#, fuzzy
-#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "Podtitul"
+msgstr "Nepojmenovaný"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
@@ -2962,13 +2959,11 @@ msgstr ""
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr ""
+msgstr "Vlastnosti"
 
 #: src/core/tellico_strings.cpp:44
-#, fuzzy
-#| msgid "People"
 msgid "Other People"
-msgstr "Lidé"
+msgstr "Jiné osoby"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:360
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2978,11 +2973,8 @@ msgid "Publishing"
 msgstr "Publikování"
 
 #: src/core/tellico_strings.cpp:46
-#, fuzzy
-#| msgctxt "Library of Congress classification system"
-#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "Klasifikace LoC"
+msgstr "Klasifikace"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3089,7 +3081,7 @@ msgstr "Neuložené změny"
 
 #: src/entrygroup.cpp:33
 msgid "(Empty)"
-msgstr ""
+msgstr "(Prázdné)"
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
