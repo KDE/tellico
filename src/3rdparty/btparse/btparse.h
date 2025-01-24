@@ -21,6 +21,8 @@
 #ifndef BTPARSE_H
 #define BTPARSE_H
 
+#define _POSIX_C_SOURCE 200809L
+
 #include <sys/types.h>                  /* probably supplies 'ushort' */
 #include <stdio.h>
 

@@ -29,6 +29,9 @@
               of the License, or (at your option) any later version.
 -------------------------------------------------------------------------- */
 
+#define _POSIX_C_SOURCE 200809L
+#define _DEFAULT_SOURCE
+
 #include "bt_debug.h"
 #include <stdlib.h>
 #include <string.h>

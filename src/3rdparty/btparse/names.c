@@ -18,6 +18,8 @@
               of the License, or (at your option) any later version.
 -------------------------------------------------------------------------- */
 
+#define _POSIX_C_SOURCE 200809L
+
 /*#include "bt_config.h"*/
 #include <assert.h>
 #include <stdlib.h>
