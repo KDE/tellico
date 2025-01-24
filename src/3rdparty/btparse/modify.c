@@ -15,6 +15,9 @@
               published by the Free Software Foundation; either version 2
               of the License, or (at your option) any later version.
 -------------------------------------------------------------------------- */
+
+#define _POSIX_C_SOURCE 200809L
+
 /*#include "bt_config.h"*/
 #include <stdlib.h>
 #include <string.h>

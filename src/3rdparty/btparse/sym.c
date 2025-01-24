@@ -107,6 +107,8 @@
  *          during searching etc...
  */
 
+#define _DEFAULT_SOURCE
+
 /*#include "bt_config.h"*/
 #include <stdio.h>
 #include <string.h>
