@@ -141,8 +141,8 @@ void MusicBrainzFetcher::doSearch() {
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   // see https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#Provide_meaningful_User-Agent_strings
   m_job->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
-  m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1 ( https://tellico-project.org )")
-                                                                .arg(QStringLiteral(TELLICO_VERSION)));
+  m_job->addMetaData(QStringLiteral("UserAgent"),
+                     QStringLiteral("Tellico/%1 ( https://tellico-project.org )").arg(QStringLiteral(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &MusicBrainzFetcher::slotComplete);
