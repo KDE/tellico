@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h> // for TELLICO_VERSION
+
 #include "colnectfetcher.h"
 #include "../collections/coincollection.h"
 #include "../collections/stampcollection.h"
@@ -206,6 +208,10 @@ void ColnectFetcher::search() {
   myLog() << "Reading" << u.toDisplayString();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
+  m_job->addMetaData(QStringLiteral("UserAgent"),
+                     QStringLiteral("Tellico/%1 ( https://tellico-project.org )").arg(QStringLiteral(TELLICO_VERSION)));
+
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &ColnectFetcher::slotComplete);
 }
