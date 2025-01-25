@@ -717,7 +717,9 @@ void ColnectFetcher::populateCardEntry(Data::EntryPtr entry_, const QVariantList
 
   int idx = m_colnectFields.value(QStringLiteral("Issued on"), -1);
   // the year may have already been set in the query term
+  QString year = m_year;
   if(m_year.isEmpty() && idx > -1) {
+    m_year = resultList_.at(idx).toString().left(4);
     entry_->setField(QStringLiteral("year"), resultList_.at(idx).toString().left(4));
   }
 
@@ -726,10 +728,10 @@ void ColnectFetcher::populateCardEntry(Data::EntryPtr entry_, const QVariantList
     const int playerId = resultList_.at(idx).toInt();
     if(playerId > 0) {
       if(!m_itemNames.contains("players")) {
-        if(m_year.isEmpty()) {
+        if(year.isEmpty()) {
           readItemNames("players");
         } else {
-          readItemNames("players", QStringLiteral("/season/") + m_year);
+          readItemNames("players", QStringLiteral("/season/") + year);
         }
       }
       entry_->setField(QStringLiteral("player"), m_itemNames.value("players").value(playerId));
@@ -918,7 +920,7 @@ void ColnectFetcher::readDataList() {
 void ColnectFetcher::readItemNames(const QByteArray& item_, const QString& filter_) {
   QUrl u(QString::fromLatin1(COLNECT_API_URL));
   // Colnect API calls are encoded as a path
-  QString query(QLatin1Char('/') + m_locale + QLatin1Char('/') + QLatin1String(item_) + QStringLiteral("/cat/") + m_category + QLatin1Char('/'));
+  QString query(QLatin1Char('/') + m_locale + QLatin1Char('/') + QLatin1String(item_) + QStringLiteral("/cat/") + m_category);
   u.setPath(u.path() + query + filter_);
 //  myLog() << "Reading item names from" << u.toDisplayString();
 
@@ -931,7 +933,7 @@ void ColnectFetcher::readItemNames(const QByteArray& item_, const QString& filte
   }
   QJsonArray resultList = doc.array();
   if(resultList.isEmpty()) {
-    myDebug() << "no item results";
+    myDebug() << "no item name results";
     return;
   }
   QHash<int, QString> itemNames;
