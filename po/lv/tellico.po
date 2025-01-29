@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-26 00:41+0000\n"
-"PO-Revision-Date: 2025-01-03 22:44+0200\n"
+"PO-Revision-Date: 2025-01-27 16:51+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2905,67 +2905,62 @@ msgid "Overwrite File?"
 msgstr "Vai pārrakstīt datni?"
 
 #: src/core/tellico_strings.cpp:27
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr "„Tellico“ neizdodas ielādēt attēlu — „%1“."
+msgstr "„Tellico“ neizdodas atvērt datni — „%1“."
 
 #: src/core/tellico_strings.cpp:28
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "„Tellico“ neizdodas ielādēt attēlu — „%1“."
+msgstr "„Tellico“ neizdodas ielādēt datni — „%1“."
 
 #: src/core/tellico_strings.cpp:29
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to write the file - %1."
-msgstr "„Tellico“ neizdodas ielādēt attēlu — „%1“."
+msgstr "„Tellico“ neizdodas rakstīt datnē — „%1“."
 
 #: src/core/tellico_strings.cpp:30
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "„Tellico“ neizdodas ielādēt attēlu — „%1“."
+msgstr "„Tellico“ neizdodas augšupielādēt datni — „%1“."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
+"Pievienot iespējams tikai kolekcijas ar tādu pašu ierakstu tipu, kāds ir "
+"pašreizējai. Šoreiz pašreizējā kolekcijā programma nekādas izmaiņas neveiks."
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
+"Sapludināt iespējams tikai kolekcijas ar tādu pašu ierakstu tipu, kāds ir "
+"pašreizējai. Šoreiz pašreizējā kolekcijā programma nekādas izmaiņas neveiks."
 
 #: src/core/tellico_strings.cpp:37
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "„Tellico“ neizdodas ielādēt attēlu — „%1“."
+msgstr "„Tellico“ neizdodas ielādēt attēlu no datnes — „%1“."
 
 #: src/core/tellico_strings.cpp:39
-#, fuzzy
-#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "Apakšvirsraksts"
+msgstr "Nenosaukts"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-msgstr ""
+msgstr "Šo informāciju brīvi sniedza <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr ""
+msgstr "Iespējas"
 
 #: src/core/tellico_strings.cpp:44
-#, fuzzy
-#| msgid "People"
 msgid "Other People"
-msgstr "Cilvēki"
+msgstr "Citi cilvēki"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:360
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2975,11 +2970,8 @@ msgid "Publishing"
 msgstr "Izdevums"
 
 #: src/core/tellico_strings.cpp:46
-#, fuzzy
-#| msgctxt "Library of Congress classification system"
-#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "Kongresa bibliotēkas klasifikācija"
+msgstr "Klasifikācija"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3086,7 +3078,7 @@ msgstr "Nesaglabātās izmaiņas"
 
 #: src/entrygroup.cpp:33
 msgid "(Empty)"
-msgstr ""
+msgstr "(Tukšs)"
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
@@ -3148,10 +3140,9 @@ msgid "Update Entries"
 msgstr "Atjaunināt ierakstus"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "Atjaunina <b>%1</b>..."
+msgstr "Atjaunina <b>%1</b> no <i>%2</i>..."
 
 #: src/entryview.cpp:289
 #, kde-format
