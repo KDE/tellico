@@ -530,9 +530,10 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher* fetcher_, int group_, int 
   if(fetcher_->type() == Fetch::ExecExternal) {
     const Fetch::ExecExternalFetcher* f = static_cast<const Fetch::ExecExternalFetcher*>(fetcher_);
     const QString p = f->execPath();
-    QUrl u;
+    QUrl u, iconUrl;
     if(p.contains(QStringLiteral("allocine"))) {
-      u = QUrl(QStringLiteral("http://www.allocine.fr"));
+      u = QUrl(QStringLiteral("https://www.allocine.fr"));
+      iconUrl = QUrl(QStringLiteral("https://assets.allocine.fr/favicon/allocine.ico"));
     } else if(p.contains(QStringLiteral("ministerio_de_cultura"))) {
       u = QUrl(QStringLiteral("http://www.mcu.es"));
     } else if(p.contains(QStringLiteral("dark_horse_comics"))) {
@@ -545,7 +546,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher* fetcher_, int group_, int 
       return LOAD_ICON(QStringLiteral("amarok"), group_, size_);
     }
     if(!u.isEmpty() && u.isValid()) {
-      QString icon = Fetcher::favIcon(u);
+      QString icon = Fetcher::favIcon(u, iconUrl);
       if(!icon.isEmpty()) {
         return LOAD_ICON(icon, group_, size_);
       }

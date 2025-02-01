@@ -21,6 +21,7 @@ set(utils_STAT_SRCS
 add_library(utils STATIC ${utils_STAT_SRCS})
 
 target_link_libraries(utils
+    collections
     Qt6::Core
     Qt6::Widgets
     Qt6::Xml
