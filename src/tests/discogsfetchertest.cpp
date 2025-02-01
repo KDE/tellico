@@ -226,6 +226,8 @@ void DiscogsFetcherTest::testRawData() {
   QCOMPARE(trackList.at(0), QStringLiteral("Haunted::Evanescence::4:04"));
 
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
+  QVERIFY(!img.isNull());
 }
 
 // do another check to make sure the Vinyl format is captured
