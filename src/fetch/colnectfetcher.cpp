@@ -124,7 +124,7 @@ void ColnectFetcher::search() {
   if(request().key() != Raw) {
     // pull out year, keep the regexp a little loose, but make sure year is valid
     // also avoid matching on isbn values by using word boundary
-    QRegularExpression yearRX(QStringLiteral("\\b[12][8901][0-9]{2}\\b"));
+    static const QRegularExpression yearRX(QStringLiteral("\\b[12][8901][0-9]{2}\\b"));
     auto match = yearRX.match(value);
     if(match.hasMatch()) {
       m_year = match.captured(0);
@@ -719,8 +719,8 @@ void ColnectFetcher::populateCardEntry(Data::EntryPtr entry_, const QVariantList
   // the year may have already been set in the query term
   QString year = m_year;
   if(m_year.isEmpty() && idx > -1) {
-    m_year = resultList_.at(idx).toString().left(4);
-    entry_->setField(QStringLiteral("year"), resultList_.at(idx).toString().left(4));
+    year = resultList_.at(idx).toString().left(4);
+    entry_->setField(QStringLiteral("year"), year);
   }
 
   idx = m_colnectFields.value(QStringLiteral("ZscCardPlayer"), -1);
