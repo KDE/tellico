@@ -81,6 +81,7 @@
 #include "opdsfetcher.h"
 #include "adsfetcher.h"
 #include "vgcollectfetcher.h"
+#include "isfdbfetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -140,6 +141,7 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::OPDSFetcher> registerOPDS(OPDS);
   RegisterFetcher<Fetch::ADSFetcher> registerADS(ADS);
   RegisterFetcher<Fetch::VGCollectFetcher> registerVGCollect(VGCollect);
+  RegisterFetcher<Fetch::ISFDBFetcher> registerISFDB(ISFDB);
 
 // these data sources depend on being able to import bibtex
 #ifdef ENABLE_BTPARSE

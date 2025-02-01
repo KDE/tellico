@@ -736,6 +736,12 @@ ecm_add_test(isbndbfetchertest.cpp
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(isfdbfetchertest.cpp
+    ../fetch/isfdbfetcher.cpp
+    TEST_NAME isfdbfetchertest
+    LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(itunesfetchertest.cpp
     ../fetch/itunesfetcher.cpp
     TEST_NAME itunesfetchertest

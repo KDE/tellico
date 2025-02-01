@@ -26,6 +26,7 @@ set(XSLT_FILES
     goodreads2tellico.xsl
     griffith2tellico.xsl
     hddvd-logo.png
+    isfdb2tellico.xsl
     MARC21slim2MODS3.xsl
     MARC21slimUtils.xsl
     mods2tellico.xsl

@@ -43,6 +43,7 @@ set(fetch_STAT_SRCS
     imdbfetcher.cpp
     imdbfetcher_query.cpp
     isbndbfetcher.cpp
+    isfdbfetcher.cpp
     itunesfetcher.cpp
     kinofetcher.cpp
     kinopoiskfetcher.cpp

@@ -1,3 +1,7 @@
+2025-02-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Added ISFDB data source.
+
 2025-01-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug that pulled invalid year from isbn in Colnect search.
