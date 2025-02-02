@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-26 00:41+0000\n"
+"POT-Creation-Date: 2025-02-02 00:42+0000\n"
 "PO-Revision-Date: 2025-01-06 18:58+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -3605,12 +3605,12 @@ msgstr "Dankon al arXiv pro uzo de ĝia malferm-alira kunfunkcipovo."
 #: src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:611
-#: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
-#: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
-#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:457
-#: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:386
-#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
-#: src/fetch/vndbfetcher.cpp:434
+#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:402
+#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/moviemeterfetcher.cpp:298
+#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:378
+#: src/fetch/openlibraryfetcher.cpp:457 src/fetch/springerfetcher.cpp:187
+#: src/fetch/tvmazefetcher.cpp:386 src/fetch/upcitemdbfetcher.cpp:479
+#: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:434
 #, kde-format
 msgid "This source has no options."
 msgstr "Ĉi tiu fonto ne havas eblojn."
@@ -4132,6 +4132,12 @@ msgid ""
 msgstr ""
 "Loka serĉado de ISBN-valoroj estas pli rapida sed nur havebla por Premium aŭ "
 "Pro-planoj."
+
+#: src/fetch/isfdbfetcher.cpp:151
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
+msgid "ISFDB Link"
+msgstr "IGDB Ligo"
 
 #: src/fetch/itunesfetcher.cpp:238 src/fetch/itunesfetcher.cpp:539
 #, kde-format

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-26 00:41+0000\n"
+"POT-Creation-Date: 2025-02-02 00:42+0000\n"
 "PO-Revision-Date: 2024-09-22 16:35+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -3609,12 +3609,12 @@ msgstr "Takk til arXiv for støtte for open tilgang."
 #: src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:611
-#: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
-#: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
-#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:457
-#: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:386
-#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
-#: src/fetch/vndbfetcher.cpp:434
+#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:402
+#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/moviemeterfetcher.cpp:298
+#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:378
+#: src/fetch/openlibraryfetcher.cpp:457 src/fetch/springerfetcher.cpp:187
+#: src/fetch/tvmazefetcher.cpp:386 src/fetch/upcitemdbfetcher.cpp:479
+#: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:434
 #, kde-format
 msgid "This source has no options."
 msgstr "Kjelda inneheld ingen val."
@@ -4133,6 +4133,12 @@ msgid ""
 msgstr ""
 "Søk etter fleire ISBN-kodar samtidig går raskare, men er berre tilgjengeleg "
 "for Premium- og Pro-kundar."
+
+#: src/fetch/isfdbfetcher.cpp:151
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
+msgid "ISFDB Link"
+msgstr "IGDB-lenkje"
 
 #: src/fetch/itunesfetcher.cpp:238 src/fetch/itunesfetcher.cpp:539
 #, kde-format

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-26 00:41+0000\n"
+"POT-Creation-Date: 2025-02-02 00:42+0000\n"
 "PO-Revision-Date: 2023-05-12 19:32+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -3694,12 +3694,12 @@ msgstr ""
 #: src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:611
-#: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
-#: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
-#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:457
-#: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:386
-#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
-#: src/fetch/vndbfetcher.cpp:434
+#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:402
+#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/moviemeterfetcher.cpp:298
+#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:378
+#: src/fetch/openlibraryfetcher.cpp:457 src/fetch/springerfetcher.cpp:187
+#: src/fetch/tvmazefetcher.cpp:386 src/fetch/upcitemdbfetcher.cpp:479
+#: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:434
 #, kde-format
 msgid "This source has no options."
 msgstr "Diese Quelle bietet keine weiteren Optionen an."
@@ -4246,6 +4246,12 @@ msgid ""
 msgstr ""
 "Die Suche nach ISBN-Werten als Stapelverarbeitung ist schneller, erfordert "
 "aber einen Premium- oder Plan-Zugang."
+
+#: src/fetch/isfdbfetcher.cpp:151
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
+msgid "ISFDB Link"
+msgstr "IGDB-Verknüpfung"
 
 #: src/fetch/itunesfetcher.cpp:238 src/fetch/itunesfetcher.cpp:539
 #, kde-format

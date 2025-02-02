@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-26 00:41+0000\n"
-"PO-Revision-Date: 2025-01-30 15:01+0100\n"
+"POT-Creation-Date: 2025-02-02 00:42+0000\n"
+"PO-Revision-Date: 2025-02-01 22:07+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -2782,31 +2782,37 @@ msgstr "Adatbázis kiválasztása törléshez:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "A képek jelenleg ezen a néven kerülnek mentésre: <em>%1</em>"
 
 #: src/configdialog.cpp:1236
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "A képek jelenleg ide kerülnek mentésre: <em>%1</em>"
 
 #: src/configdialog.cpp:1242
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
+"A képek áthelyezésre kerülnek a(z) <em>%1</em> könyvtárból a(z) <em>%2</em> "
+"fájlba"
 
 #: src/configdialog.cpp:1246
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
+"A képek áthelyezésre kerülnek a(z) <em>%1</em> fájlból a(z) <em>%2</em> "
+"könyvtárba"
 
 #: src/configdialog.cpp:1256
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
+"A képek áthelyezésre kerülnek a(z) <em>%1</em> könyvtárból a(z) <em>%2</em> "
+"könyvtárba"
 
 #: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:318
 #: src/fetchdialog.cpp:417 src/fetchdialog.cpp:550 src/fetchdialog.cpp:611
@@ -3149,10 +3155,9 @@ msgid "Update Entries"
 msgstr "Bejegyzések frissítése"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "<b>%1</b> frissítése..."
+msgstr "<b>%1</b> frissítése innen: <i>%2</i>…"
 
 #: src/entryview.cpp:289
 #, kde-format
@@ -3595,12 +3600,12 @@ msgstr ""
 #: src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:611
-#: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
-#: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
-#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:457
-#: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:386
-#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
-#: src/fetch/vndbfetcher.cpp:434
+#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:402
+#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/moviemeterfetcher.cpp:298
+#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:378
+#: src/fetch/openlibraryfetcher.cpp:457 src/fetch/springerfetcher.cpp:187
+#: src/fetch/tvmazefetcher.cpp:386 src/fetch/upcitemdbfetcher.cpp:479
+#: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:434
 #, kde-format
 msgid "This source has no options."
 msgstr "A forrás nem rendelkezik beállításokkal."
@@ -4123,6 +4128,12 @@ msgid ""
 msgstr ""
 "Az ISBN-értékek kötegelt keresése gyorsabb, de csak Premium vagy Pro "
 "előfizetőknek érhető el."
+
+#: src/fetch/isfdbfetcher.cpp:151
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
+msgid "ISFDB Link"
+msgstr "IGDB hivatkozás"
 
 #: src/fetch/itunesfetcher.cpp:238 src/fetch/itunesfetcher.cpp:539
 #, kde-format
@@ -5334,10 +5345,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - egy szabad és egyszerű gyűjteménykezelő szoftver"
 
 #: src/main.cpp:90
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "© Robby Stephenson, 2001-2024."
+msgstr "© Robby Stephenson, 2001."
 
 #: src/main.cpp:94
 #, kde-format
@@ -6313,6 +6323,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"További információk találhatók a <a href=\"help:/tellico\">dokumentációban</"
+"a>. Ezt az <a href=\"tc:///disable_welcome\">üdvözlőképernyőt</a> ki is "
+"kapcsolhatja."
 
 #: src/mainwindow.cpp:1149
 #, kde-format
