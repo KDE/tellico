@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-26 02:33+0000\n"
-"PO-Revision-Date: 2025-01-30 15:01+0100\n"
+"POT-Creation-Date: 2025-02-02 02:37+0000\n"
+"PO-Revision-Date: 2025-02-01 22:07+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -732,10 +732,10 @@ msgstr "Bibtex kulcs"
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:377 src/fetch/colnectfetcher.cpp:544
 #: src/fetch/colnectfetcher.cpp:563 src/fetch/colnectfetcher.cpp:601
-#: src/fetch/colnectfetcher.cpp:608 src/fetch/discogsfetcher.cpp:307
-#: src/fetch/discogsfetcher.cpp:312 src/fetch/discogsfetcher.cpp:317
-#: src/fetch/discogsfetcher.cpp:324 src/fetch/discogsfetcher.cpp:331
-#: src/fetch/discogsfetcher.cpp:336 src/fetch/doubanfetcher.cpp:373
+#: src/fetch/colnectfetcher.cpp:608 src/fetch/discogsfetcher.cpp:313
+#: src/fetch/discogsfetcher.cpp:318 src/fetch/discogsfetcher.cpp:323
+#: src/fetch/discogsfetcher.cpp:330 src/fetch/discogsfetcher.cpp:337
+#: src/fetch/discogsfetcher.cpp:342 src/fetch/doubanfetcher.cpp:373
 #: src/fetch/doubanfetcher.cpp:391 src/fetch/doubanfetcher.cpp:409
 #: src/fetch/filmaffinityfetcher.cpp:284 src/fetch/filmasterfetcher.cpp:238
 #: src/fetch/gaminghistoryfetcher.cpp:196
@@ -1608,8 +1608,8 @@ msgid ""
 "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, "
 "Pending"
 msgstr ""
-"Kategória nélküli, Felnőtt, Tinédszer, Mindenki 10+, Mindenki, Kisgyermek, "
-"Nem eldöntött"
+"Kategória nélküli, 18+, 17+, Tinédszer, 10+, Mindenki, Kisgyermek, Nem "
+"eldöntött"
 
 #: src/collections/musiccollection.cpp:34
 #, kde-format
@@ -1621,7 +1621,7 @@ msgstr "Zenéim"
 msgid "Album"
 msgstr "Album"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:422
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:447
 #: src/fetch/doubanfetcher.cpp:454 src/fetch/doubanfetcher.cpp:588
 #: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
 #: src/translators/audiofileimporter.cpp:335
@@ -1635,19 +1635,19 @@ msgstr "CD lemez"
 
 #: src/collections/musiccollection.cpp:50
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:430 src/fetch/upcitemdbfetcher.cpp:420
+#: src/fetch/discogsfetcher.cpp:455 src/fetch/upcitemdbfetcher.cpp:420
 #: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:169
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:427
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:452
 #: src/translators/discogsimporter.cpp:166
 #, kde-format
 msgid "Cassette"
 msgstr "Kazetta"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:425
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:450
 #: src/translators/discogsimporter.cpp:164
 #, kde-format
 msgid "Vinyl"
@@ -1660,7 +1660,7 @@ msgid "Medium"
 msgstr "Hordozó"
 
 #: src/collections/musiccollection.cpp:56
-#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:484
+#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:509
 #: src/fetch/itunesfetcher.cpp:318 src/translators/audiofileimporter.cpp:236
 #: src/translators/xmlstatehandler.cpp:435
 #, kde-format
@@ -1672,14 +1672,14 @@ msgstr "Előadó"
 msgid "Label"
 msgstr "Címke"
 
-#: src/collections/musiccollection.cpp:79 src/tests/discogsfetchertest.cpp:307
+#: src/collections/musiccollection.cpp:79 src/tests/discogsfetchertest.cpp:309
 #: src/tests/itunesfetchertest.cpp:209 src/tests/musicbrainzfetchertest.cpp:228
 #, kde-format
 msgid "Tracks"
 msgstr "Sávok"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
-#: src/fetch/discogsfetcher.cpp:483 src/fetch/fetchmanager.cpp:62
+#: src/fetch/discogsfetcher.cpp:508 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:317 src/fetchdialog.cpp:248 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:434
@@ -1687,7 +1687,7 @@ msgstr "Sávok"
 msgid "Title"
 msgstr "Cím"
 
-#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:485
+#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:510
 #: src/fetch/itunesfetcher.cpp:319 src/translators/audiofileimporter.cpp:237
 #: src/translators/xmlstatehandler.cpp:436
 #, kde-format
@@ -1846,8 +1846,8 @@ msgstr "8 régió"
 msgid "Region"
 msgstr "Régió"
 
-#: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:316
-#: src/fetch/discogsfetcher.cpp:545
+#: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:322
+#: src/fetch/discogsfetcher.cpp:570
 #, kde-format
 msgid "Nationality"
 msgstr "Nemzetiség"
@@ -1900,8 +1900,8 @@ msgstr "A szereplők táblázata az alakított szerepekkel"
 msgid "Director"
 msgstr "Rendező"
 
-#: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:323
-#: src/fetch/discogsfetcher.cpp:544 src/fetch/rpggeekfetcher.cpp:209
+#: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:329
+#: src/fetch/discogsfetcher.cpp:569 src/fetch/rpggeekfetcher.cpp:209
 #, kde-format
 msgid "Producer"
 msgstr "Producer"
@@ -2790,31 +2790,37 @@ msgstr "Adatbázis kiválasztása törléshez:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "A képek jelenleg ezen a néven kerülnek mentésre: <em>%1</em>"
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "A képek jelenleg ide kerülnek mentésre: <em>%1</em>"
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
+"A képek áthelyezésre kerülnek a(z) <em>%1</em> könyvtárból a(z) <em>%2</em> "
+"fájlba"
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
+"A képek áthelyezésre kerülnek a(z) <em>%1</em> fájlból a(z) <em>%2</em> "
+"könyvtárba"
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
+"A képek áthelyezésre kerülnek a(z) <em>%1</em> könyvtárból a(z) <em>%2</em> "
+"könyvtárba"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
@@ -3079,10 +3085,9 @@ msgid "Update Entries"
 msgstr "Bejegyzések frissítése"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "<b>%1</b> frissítése..."
+msgstr "<b>%1</b> frissítése innen: <i>%2</i>…"
 
 #: src/entryview.cpp:357
 #, kde-format
@@ -3171,7 +3176,7 @@ msgstr "SAO/NASA asztrofizikai adatrendszer"
 
 #: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1095
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:229
-#: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:559
+#: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:584
 #: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:381
 #: src/fetch/isbndbfetcher.cpp:393 src/fetch/mobygamesfetcher.cpp:649
 #: src/fetch/omdbfetcher.cpp:408 src/fetch/thegamesdbfetcher.cpp:635
@@ -3384,7 +3389,7 @@ msgstr ""
 "Amazon.com-hoz történő hozzáféréshez AWS hozzáférési kulcs ID-re és a Titkos "
 "kulcsra van szüksége."
 
-#: src/fetch/amazonfetcher.cpp:271 src/fetch/discogsfetcher.cpp:138
+#: src/fetch/amazonfetcher.cpp:271 src/fetch/discogsfetcher.cpp:144
 #: src/fetch/isbndbfetcher.cpp:163 src/fetch/mobygamesfetcher.cpp:162
 #: src/fetch/omdbfetcher.cpp:119 src/fetch/thegamesdbfetcher.cpp:136
 #: src/fetch/themoviedbfetcher.cpp:159 src/fetch/thetvdbfetcher.cpp:159
@@ -3398,7 +3403,7 @@ msgid "Results from %1: %2/%3"
 msgstr "Eredmény %1 -ből: %2/%3"
 
 #: src/fetch/amazonfetcher.cpp:633 src/fetch/colnectfetcher.cpp:823
-#: src/fetch/discogsfetcher.cpp:217 src/fetch/doubanfetcher.cpp:477
+#: src/fetch/discogsfetcher.cpp:223 src/fetch/doubanfetcher.cpp:477
 #: src/fetch/filmaffinityfetcher.cpp:430 src/fetch/filmasterfetcher.cpp:147
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:198
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
@@ -3445,19 +3450,19 @@ msgstr ""
 "egyet, melyet az adatforráshoz használni akar."
 
 #: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:986 src/fetch/imdbfetcher.cpp:567
-#: src/fetch/itunesfetcher.cpp:551 src/fetch/mobygamesfetcher.cpp:669
-#: src/fetch/rpggeekfetcher.cpp:224 src/fetch/thegamesdbfetcher.cpp:655
-#: src/fetch/videogamegeekfetcher.cpp:215
+#: src/fetch/colnectfetcher.cpp:986 src/fetch/discogsfetcher.cpp:604
+#: src/fetch/imdbfetcher.cpp:567 src/fetch/itunesfetcher.cpp:551
+#: src/fetch/mobygamesfetcher.cpp:669 src/fetch/rpggeekfetcher.cpp:224
+#: src/fetch/thegamesdbfetcher.cpp:655 src/fetch/videogamegeekfetcher.cpp:215
 #, kde-format
 msgid "&Image size: "
 msgstr "&Kép méret: "
 
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:219
-#: src/fetch/colnectfetcher.cpp:990 src/fetch/imdbfetcher.cpp:570
-#: src/fetch/itunesfetcher.cpp:555 src/fetch/mobygamesfetcher.cpp:672
-#: src/fetch/rpggeekfetcher.cpp:228 src/fetch/thegamesdbfetcher.cpp:658
-#: src/fetch/videogamegeekfetcher.cpp:219
+#: src/fetch/colnectfetcher.cpp:990 src/fetch/discogsfetcher.cpp:607
+#: src/fetch/imdbfetcher.cpp:570 src/fetch/itunesfetcher.cpp:555
+#: src/fetch/mobygamesfetcher.cpp:672 src/fetch/rpggeekfetcher.cpp:228
+#: src/fetch/thegamesdbfetcher.cpp:658 src/fetch/videogamegeekfetcher.cpp:219
 #, kde-format
 msgid "Small Image"
 msgstr "Kis méretű kép"
@@ -3470,25 +3475,26 @@ msgstr "Közepes méretű kép"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:220
-#: src/fetch/colnectfetcher.cpp:991 src/fetch/imdbfetcher.cpp:572
-#: src/fetch/itunesfetcher.cpp:556 src/fetch/mobygamesfetcher.cpp:674
-#: src/fetch/rpggeekfetcher.cpp:229 src/fetch/thegamesdbfetcher.cpp:660
-#: src/fetch/videogamegeekfetcher.cpp:220
+#: src/fetch/colnectfetcher.cpp:991 src/fetch/discogsfetcher.cpp:609
+#: src/fetch/imdbfetcher.cpp:572 src/fetch/itunesfetcher.cpp:556
+#: src/fetch/mobygamesfetcher.cpp:674 src/fetch/rpggeekfetcher.cpp:229
+#: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:220
 #, kde-format
 msgid "Large Image"
 msgstr "Nagy méretű kép"
 
 #: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:989 src/fetch/imdbfetcher.cpp:573
-#: src/fetch/itunesfetcher.cpp:554 src/fetch/mobygamesfetcher.cpp:675
-#: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:661
-#: src/fetch/videogamegeekfetcher.cpp:218
+#: src/fetch/colnectfetcher.cpp:989 src/fetch/discogsfetcher.cpp:610
+#: src/fetch/imdbfetcher.cpp:573 src/fetch/itunesfetcher.cpp:554
+#: src/fetch/mobygamesfetcher.cpp:675 src/fetch/rpggeekfetcher.cpp:227
+#: src/fetch/thegamesdbfetcher.cpp:661 src/fetch/videogamegeekfetcher.cpp:218
 #, kde-format
 msgid "No Image"
 msgstr "Nincs kép"
 
-#: src/fetch/amazonfetcher.cpp:1157 src/fetch/imdbfetcher.cpp:577
-#: src/fetch/mobygamesfetcher.cpp:679 src/fetch/thegamesdbfetcher.cpp:665
+#: src/fetch/amazonfetcher.cpp:1157 src/fetch/discogsfetcher.cpp:614
+#: src/fetch/imdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:679
+#: src/fetch/thegamesdbfetcher.cpp:665
 #, kde-format
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
@@ -3646,7 +3652,7 @@ msgstr "E-mail: "
 msgid "Danish Bibliographic Center (DBC.dk)"
 msgstr "Dán Bibliográfiai Központ (DBC.dk)"
 
-#: src/fetch/discogsfetcher.cpp:136 src/fetch/isbndbfetcher.cpp:161
+#: src/fetch/discogsfetcher.cpp:142 src/fetch/isbndbfetcher.cpp:161
 #: src/fetch/mobygamesfetcher.cpp:160 src/fetch/omdbfetcher.cpp:117
 #: src/fetch/thegamesdbfetcher.cpp:134 src/fetch/themoviedbfetcher.cpp:157
 #: src/fetch/thetvdbfetcher.cpp:157
@@ -3654,13 +3660,13 @@ msgstr "Dán Bibliográfiai Központ (DBC.dk)"
 msgid "An access key is required to use this data source."
 msgstr "Hozzáférési kulcs szükséges az adatforrás használatához."
 
-#: src/fetch/discogsfetcher.cpp:311 src/fetch/discogsfetcher.cpp:546
+#: src/fetch/discogsfetcher.cpp:317 src/fetch/discogsfetcher.cpp:571
 #, kde-format
 msgid "Discogs Link"
 msgstr "Discogs kapcsolat"
 
 #. i18n("Nationality");
-#: src/fetch/discogsfetcher.cpp:330 src/fetch/discogsfetcher.cpp:547
+#: src/fetch/discogsfetcher.cpp:336 src/fetch/discogsfetcher.cpp:572
 #: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:371
 #: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:472
 #: src/fetch/vgcollectfetcher.cpp:336 src/fetch/vgcollectfetcher.cpp:371
@@ -3668,17 +3674,17 @@ msgstr "Discogs kapcsolat"
 msgid "Barcode"
 msgstr "Vonalkód"
 
-#: src/fetch/discogsfetcher.cpp:335 src/fetch/discogsfetcher.cpp:548
+#: src/fetch/discogsfetcher.cpp:341 src/fetch/discogsfetcher.cpp:573
 #, kde-format
 msgid "Catalog Number"
 msgstr "Katalógusszám"
 
-#: src/fetch/discogsfetcher.cpp:345
+#: src/fetch/discogsfetcher.cpp:351
 #, kde-format
 msgid "The Discogs.com server reports a token error."
 msgstr "A Discogs.com kiszolgáló tokenhibát jelez."
 
-#: src/fetch/discogsfetcher.cpp:479 src/fetch/discogsfetcher.cpp:490
+#: src/fetch/discogsfetcher.cpp:504 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/itunesfetcher.cpp:313 src/fetch/itunesfetcher.cpp:324
 #: src/translators/audiofileimporter.cpp:231
 #: src/translators/audiofileimporter.cpp:241
@@ -3686,12 +3692,12 @@ msgstr "A Discogs.com kiszolgáló tokenhibát jelez."
 msgid "Tracks (Disc %1)"
 msgstr "Sávok (lemez %1)"
 
-#: src/fetch/discogsfetcher.cpp:535
+#: src/fetch/discogsfetcher.cpp:560
 #, kde-format
 msgid "Discogs Audio Search"
 msgstr "Discogs Audió keresés"
 
-#: src/fetch/discogsfetcher.cpp:571 src/translators/discogsimporter.cpp:200
+#: src/fetch/discogsfetcher.cpp:596 src/translators/discogsimporter.cpp:200
 #, kde-format
 msgid "User token:"
 msgstr "Felhasználóazonosító:"
@@ -5275,10 +5281,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - egy szabad és egyszerű gyűjteménykezelő szoftver"
 
 #: src/main.cpp:176
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "© Robby Stephenson, 2001-2024."
+msgstr "© Robby Stephenson, 2001."
 
 #: src/main.cpp:180
 #, kde-format
@@ -6224,10 +6229,9 @@ msgstr ""
 "bejegyzéseket.</qt>"
 
 #: src/mainwindow.cpp:993
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - egy szabad és egyszerű gyűjteménykezelő szoftver"
+msgstr "Szabad és egyszerű gyűjteménykezelő szoftver"
 
 #: src/mainwindow.cpp:995
 #, kde-format
@@ -6255,6 +6259,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"További információk találhatók a <a href=\"help:/tellico\">dokumentációban</"
+"a>. Ezt az <a href=\"tc:///disable_welcome\">üdvözlőképernyőt</a> ki is "
+"kapcsolhatja."
 
 #: src/mainwindow.cpp:1217
 #, kde-format
