@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-02 00:42+0000\n"
-"PO-Revision-Date: 2025-01-20 13:18+0200\n"
+"PO-Revision-Date: 2025-02-02 07:51+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -4081,10 +4081,9 @@ msgid ""
 msgstr "חיפוש מסת״בים במרוכז הוא מהיר יותר אך זמין רק בתוכניות פרימיום או פרו."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "קישור ל־IGDB"
+msgstr "קישור ל־ISFDB"
 
 #: src/fetch/itunesfetcher.cpp:238 src/fetch/itunesfetcher.cpp:539
 #, kde-format

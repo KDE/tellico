@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-02 00:42+0000\n"
-"PO-Revision-Date: 2025-01-04 10:08+0100\n"
+"PO-Revision-Date: 2025-02-02 08:49+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -4156,10 +4156,9 @@ msgstr ""
 "per als plans Prèmium o Pro."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "Enllaç a IGDB"
+msgstr "Enllaç a ISFDB"
 
 #: src/fetch/itunesfetcher.cpp:238 src/fetch/itunesfetcher.cpp:539
 #, kde-format
@@ -7488,52 +7487,3 @@ msgstr "Cerca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Resum de grup"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": resum de grup"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Nombre total de camps:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Nombre total d'entrades:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Valors distintius: "
-
-#~ msgid "Updating %1..."
-#~ msgstr "S'està actualitzant %1..."
-
-#~ msgid "Allocine Link"
-#~ msgstr "Enllaç a Allocine"
-
-#~ msgid "Distributor"
-#~ msgstr "Distribuïdor"
-
-#~ msgid "AnimeNfo Link"
-#~ msgstr "Enllaç a AnimeNfo"
-
-#~ msgid "AnimeNfo Rating"
-#~ msgstr "Puntuació d'AnimeNfo"
-
-#~ msgid "Internet Movie Database (French)"
-#~ msgstr "Base de dades de pel·lícules a Internet (francès)"
-
-#~ msgid "Internet Movie Database (Spanish)"
-#~ msgstr "Base de dades de pel·lícules a Internet (espanyol)"
-
-#~ msgid "Internet Movie Database (German)"
-#~ msgstr "Base de dades de pel·lícules a Internet (alemany)"
-
-#~ msgid "Internet Movie Database (Italian)"
-#~ msgstr "Base de dades de pel·lícules a Internet (italià)"
-
-#~ msgid "Internet Movie Database (Portuguese)"
-#~ msgstr "Base de dades de pel·lícules a Internet (portuguès)"
-
-#~ msgid "Download cover &image"
-#~ msgstr "Baixa la &imatge de la portada"
