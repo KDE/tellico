@@ -2918,52 +2918,49 @@ msgid "Overwrite File?"
 msgstr "Overskrive fil?"
 
 #: src/core/tellico_strings.cpp:27
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr "Tellico klarer ikke å laste finn bildet – %1."
+msgstr "Tellico klarte ikke å åpne fila – %1."
 
 #: src/core/tellico_strings.cpp:28
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "Tellico klarer ikke å laste finn bildet – %1."
+msgstr "Tellico klarte ikke å laste fila – %1."
 
 #: src/core/tellico_strings.cpp:29
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to write the file - %1."
-msgstr "Tellico klarer ikke å laste finn bildet – %1."
+msgstr "Tellico klarte ikke å skrive til fila – %1."
 
 #: src/core/tellico_strings.cpp:30
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico klarer ikke å laste finn bildet – %1."
+msgstr "Tellico klarte ikke å laste opp fila – %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
+"Bare samlinger av samme type innslag som den nåværende kan bli lagt til. "
+"Ingen forandringer er gjort i den nåværende samlinga"
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
+"Bare samlinger av samme type innslag som den nåværende kan bli flettet. "
+"Ingen forandringer er gjort i den nåværende samlinga"
 
 #: src/core/tellico_strings.cpp:37
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "Tellico klarer ikke å laste finn bildet – %1."
+msgstr "Tellico klarte ikke å laste inn et bilde fra fila – %1."
 
 #: src/core/tellico_strings.cpp:39
-#, fuzzy
-#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "Undertittel"
+msgstr "Uten tittel"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
@@ -2972,13 +2969,11 @@ msgstr ""
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr ""
+msgstr "Egenskaper"
 
 #: src/core/tellico_strings.cpp:44
-#, fuzzy
-#| msgid "People"
 msgid "Other People"
-msgstr "Personer"
+msgstr "Andre personer"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:360
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2988,11 +2983,8 @@ msgid "Publishing"
 msgstr "Utgivelse"
 
 #: src/core/tellico_strings.cpp:46
-#, fuzzy
-#| msgctxt "Library of Congress classification system"
-#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "LoC-klassifisering"
+msgstr "Klassifisering"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3099,7 +3091,7 @@ msgstr "Ulagrede endringer"
 
 #: src/entrygroup.cpp:33
 msgid "(Empty)"
-msgstr ""
+msgstr "(Tom)"
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
@@ -7430,19 +7422,3 @@ msgstr "Søk"
 #, kde-format
 msgid "Clear"
 msgstr "Tøm"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Gruppesammendrag"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": gruppesammendrag"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Totalt antall felter:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Totalt antall innslag:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Distinkte verdier:"

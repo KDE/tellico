@@ -2924,67 +2924,63 @@ msgid "Overwrite File?"
 msgstr "Vil du skriva over fila?"
 
 #: src/core/tellico_strings.cpp:27
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr "Klarte ikkja opna biletet «%1»."
+msgstr "Klarte ikkje opna fila «%1»."
 
 #: src/core/tellico_strings.cpp:28
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "Klarte ikkja opna biletet «%1»."
+msgstr "Klarte ikkje lasta fila «%1»."
 
 #: src/core/tellico_strings.cpp:29
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to write the file - %1."
-msgstr "Klarte ikkja opna biletet «%1»."
+msgstr "Klarte ikkje lagra fila «%1»."
 
 #: src/core/tellico_strings.cpp:30
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Klarte ikkja opna biletet «%1»."
+msgstr "Klarte ikkje lasta opp fila «%1»."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
+"Du kan berre leggja til oppføringar av same type i samlinga. Det vart derfor "
+"ikkje gjort nokon endringar."
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
+"Du kan berre slå saman oppføringar av same type. Det vart derfor ikkje gjort "
+"nokon endringar."
 
 #: src/core/tellico_strings.cpp:37
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "Klarte ikkja opna biletet «%1»."
+msgstr "Klarte ikkje opna bilete frå fila «%1»."
 
 #: src/core/tellico_strings.cpp:39
-#, fuzzy
-#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "Undertittel"
+msgstr "Namnlaus"
 
+# Det ligg i omgrepet «fått» at det er «freely» (gratis), så me treng ikkje spesifisera det.
 #: src/core/tellico_strings.cpp:40
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-msgstr ""
+msgstr "Informasjonen er fått frå <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr ""
+msgstr "Eigenskapar"
 
 #: src/core/tellico_strings.cpp:44
-#, fuzzy
-#| msgid "People"
 msgid "Other People"
-msgstr "Personar"
+msgstr "Andre personar"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:360
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2994,11 +2990,8 @@ msgid "Publishing"
 msgstr "Utgjeving"
 
 #: src/core/tellico_strings.cpp:46
-#, fuzzy
-#| msgctxt "Library of Congress classification system"
-#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "LoC-klassifikasjon"
+msgstr "Klassifisering"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3105,7 +3098,7 @@ msgstr "Ulagra endringar"
 
 #: src/entrygroup.cpp:33
 msgid "(Empty)"
-msgstr ""
+msgstr "(Tom)"
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
@@ -7450,19 +7443,3 @@ msgstr "Søk"
 #, kde-format
 msgid "Clear"
 msgstr "Tøm"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Gruppesamandrag"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Gruppesamandrag"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Talet på felt totalt:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Talet på oppføringar totalt:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Unike verdiar: "
