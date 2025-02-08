@@ -580,14 +580,17 @@ ItunesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ItunesFetcher*
 
   if(fetcher_) {
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+    m_multiDiscTracks = fetcher_->m_multiDiscTracks;
   } else { // defaults
     m_imageCombo->setCurrentData(SmallImage);
+    m_multiDiscTracks = true;
   }
 }
 
 void ItunesFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   const int n = m_imageCombo->currentData().toInt();
   config_.writeEntry("Image Size", n);
+  config_.writeEntry("Split Tracks By Disc", m_multiDiscTracks);
 }
 
 QString ItunesFetcher::ConfigWidget::preferredName() const {

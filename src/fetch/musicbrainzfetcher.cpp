@@ -401,9 +401,16 @@ MusicBrainzFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MusicBrai
 
   // now add additional fields widget
   addFieldsWidget(MusicBrainzFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+
+  if(fetcher_) {
+    m_multiDiscTracks = fetcher_->m_multiDiscTracks;
+  } else {
+    m_multiDiscTracks = true;
+  }
 }
 
-void MusicBrainzFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
+void MusicBrainzFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  config_.writeEntry("Split Tracks By Disc", m_multiDiscTracks);
 }
 
 QString MusicBrainzFetcher::ConfigWidget::preferredName() const {

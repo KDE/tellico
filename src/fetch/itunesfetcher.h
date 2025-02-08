@@ -82,6 +82,7 @@ public:
     virtual QString preferredName() const override;
   private:
      GUI::ComboBox* m_imageCombo;
+     bool m_multiDiscTracks;
   };
   friend class ConfigWidget;
 

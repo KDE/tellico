@@ -87,6 +87,7 @@ public:
   private:
     QLineEdit* m_apiKeyEdit;
     GUI::ComboBox* m_imageCombo;
+    bool m_multiDiscTracks;
   };
   friend class ConfigWidget;
 

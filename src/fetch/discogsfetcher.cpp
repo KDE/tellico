@@ -636,8 +636,10 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   if(fetcher_) {
     m_apiKeyEdit->setText(fetcher_->m_apiKey);
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+    m_multiDiscTracks = fetcher_->m_multiDiscTracks;
   } else { // defaults
     m_imageCombo->setCurrentData(LargeImage);
+    m_multiDiscTracks = true;
   }
 
   // now add additional fields widget
@@ -651,6 +653,7 @@ void DiscogsFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   }
   const int n = m_imageCombo->currentData().toInt();
   config_.writeEntry("Image Size", n);
+  config_.writeEntry("Split Tracks By Disc", m_multiDiscTracks);
 }
 
 QString DiscogsFetcher::ConfigWidget::preferredName() const {

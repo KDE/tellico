@@ -82,6 +82,8 @@ public:
     explicit ConfigWidget(QWidget* parent_, const MusicBrainzFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&) override;
     virtual QString preferredName() const override;
+  private:
+    bool m_multiDiscTracks;
   };
   friend class ConfigWidget;
 
