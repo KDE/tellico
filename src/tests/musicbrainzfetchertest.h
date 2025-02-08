@@ -45,6 +45,7 @@ private Q_SLOTS:
   void testSoundtrack();
   void testBarcode();
   void testMultiDisc();
+  void testMultiDiscOldWay();
 
 private:
   QHash<QString, QString> m_fieldValues;

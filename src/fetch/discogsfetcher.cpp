@@ -62,7 +62,8 @@ DiscogsFetcher::DiscogsFetcher(QObject* parent_)
     , m_limit(DISCOGS_MAX_RETURNS_TOTAL)
     , m_started(false)
     , m_imageSize(LargeImage)
-    , m_page(1) {
+    , m_page(1)
+    , m_multiDiscTracks(true) {
 }
 
 DiscogsFetcher::~DiscogsFetcher() {
@@ -89,6 +90,9 @@ void DiscogsFetcher::readConfigHook(const KConfigGroup& config_) {
   if(imageSize > -1) {
     m_imageSize = static_cast<ImageSize>(imageSize);
   }
+  // user requested option to maintain pre-4.0 behavior of inserting
+  // all tracks into a single track field, regardless of disc count
+  m_multiDiscTracks = config_.readEntry("Split Tracks By Disc", true);
 }
 
 void DiscogsFetcher::setLimit(int limit_) {
@@ -517,7 +521,17 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
         changeTrackTitle = false;
       }
     }
-    entry_->setField(trackField, discs.at(disc).join(FieldFormat::rowDelimiterString()));
+    if(m_multiDiscTracks) {
+      entry_->setField(trackField, discs.at(disc).join(FieldFormat::rowDelimiterString()));
+    } else {
+      // combine tracks from all discs into the single track field
+      QStringList allTracks;
+      for(const auto& discTracks : std::as_const(discs)) {
+        allTracks += discTracks;
+      }
+      entry_->setField(trackField, allTracks.join(FieldFormat::rowDelimiterString()));
+      break;
+    }
   }
 
   if(entry_->collection()->hasField(QStringLiteral("discogs"))) {

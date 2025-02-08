@@ -116,6 +116,7 @@ private:
 
   QString m_apiKey;
   int m_page;
+  bool m_multiDiscTracks;
 
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;

@@ -102,6 +102,7 @@ private:
   int m_limit;
   int m_total;
   int m_offset;
+  bool m_multiDiscTracks;
   QElapsedTimer m_requestTimer;
 
   QHash<uint, Data::EntryPtr> m_entries;
