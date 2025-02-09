@@ -138,7 +138,7 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
       {
         // raw query comes in as a query string, combine it
         QUrlQuery newQuery(term_);
-        foreach(auto item, newQuery.queryItems()) {
+        for(const auto& item : newQuery.queryItems()) {
           q.addQueryItem(item.first, item.second);
         }
       }
