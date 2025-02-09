@@ -1,5 +1,6 @@
 2025-02-08  Robby Stephenson  <robby@periapsis.org>
 
+	* Added configurable image size to Moviemeter data source.
 	* Added option to collapse multi-disc tracks into single field (Bug 499401).
 
 2025-02-01  Robby Stephenson  <robby@periapsis.org>

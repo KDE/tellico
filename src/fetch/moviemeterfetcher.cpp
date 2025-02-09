@@ -28,6 +28,7 @@
 #include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
 #include "../utils/mapvalue.h"
+#include "../gui/combobox.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -54,7 +55,8 @@ using Tellico::Fetch::MovieMeterFetcher;
 
 MovieMeterFetcher::MovieMeterFetcher(QObject* parent_)
     : Fetcher(parent_)
-    , m_started(false) {
+    , m_started(false)
+    , m_imageSize(MediumImage) {
 }
 
 MovieMeterFetcher::~MovieMeterFetcher() {
@@ -76,7 +78,11 @@ bool MovieMeterFetcher::canFetch(int type) const {
   return type == Data::Collection::Video;
 }
 
-void MovieMeterFetcher::readConfigHook(const KConfigGroup&) {
+void MovieMeterFetcher::readConfigHook(const KConfigGroup& config_) {
+  const int imageSize = config_.readEntry("Image Size", -1);
+  if(imageSize > -1) {
+    m_imageSize = static_cast<ImageSize>(imageSize);
+  }
 }
 
 void MovieMeterFetcher::search() {
@@ -227,8 +233,6 @@ void MovieMeterFetcher::slotComplete(KJob* job_) {
   QJsonDocument doc = QJsonDocument::fromJson(data);
   QJsonArray array = doc.array();
   for(int i = 0; i < array.count(); i++) {
-  //  myDebug() << "found result:" << result;
-
     Data::EntryPtr entry(new Data::Entry(coll));
     populateEntry(entry, array.at(i).toObject().toVariantMap(), false);
 
@@ -270,7 +274,20 @@ void MovieMeterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
     entry_->setField(QStringLiteral("alttitle"), mapValue(resultMap_, "alternative_title"));
   }
 
-  entry_->setField(QStringLiteral("cover"), mapValue(resultMap_.value(QStringLiteral("posters")).toMap(), "small"));
+  const QString coverField(QStringLiteral("cover"));
+  switch(m_imageSize) {
+    case SmallImage:
+      entry_->setField(coverField, mapValue(resultMap_.value(QStringLiteral("posters")).toMap(), "small"));
+      break;
+    case MediumImage:
+      entry_->setField(coverField, mapValue(resultMap_.value(QStringLiteral("posters")).toMap(), "regular"));
+      break;
+    case LargeImage:
+      entry_->setField(coverField, mapValue(resultMap_.value(QStringLiteral("posters")).toMap(), "large"));
+      break;
+    case NoImage:
+      break;
+  }
 }
 
 Tellico::Fetch::ConfigWidget* MovieMeterFetcher::configWidget(QWidget* parent_) const {
@@ -294,15 +311,42 @@ Tellico::StringHash MovieMeterFetcher::allOptionalFields() {
 
 MovieMeterFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MovieMeterFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+  QGridLayout* l = new QGridLayout(optionsWidget());
+  l->setSpacing(4);
+  l->setColumnStretch(1, 10);
+
+  int row = -1;
+  auto label = new QLabel(i18n("&Image size: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_imageCombo = new GUI::ComboBox(optionsWidget());
+  m_imageCombo->addItem(i18n("Small Image"), SmallImage);
+  m_imageCombo->addItem(i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
+  m_imageCombo->addItem(i18n("Large Image"), LargeImage);
+  m_imageCombo->addItem(i18n("No Image"), NoImage);
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_imageCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_imageCombo, row, 1);
+  QString w = i18n("The cover image may be downloaded as well. However, too many large images in the "
+                   "collection may degrade performance.");
+  label->setWhatsThis(w);
+  m_imageCombo->setWhatsThis(w);
+  label->setBuddy(m_imageCombo);
+
+  l->setRowStretch(++row, 10);
+
+  if(fetcher_) {
+    m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+  } else { // defaults
+    m_imageCombo->setCurrentData(MediumImage);
+  }
 
   // now add additional fields widget
   addFieldsWidget(MovieMeterFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 }
 
-void MovieMeterFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
+void MovieMeterFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  const int n = m_imageCombo->currentData().toInt();
+  config_.writeEntry("Image Size", n);
 }
 
 QString MovieMeterFetcher::ConfigWidget::preferredName() const {
