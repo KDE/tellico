@@ -72,7 +72,7 @@ QString XMLHandler::readXMLData(const QByteArray& data_) {
   QString text = codec->toUnicode(data_);
 #else
   const auto encData = enc.toUtf8();
-  QStringDecoder decoder(encData);
+  QStringDecoder decoder(encData.constData());
   if(!decoder.isValid()) {
     return QString::fromUtf8(data_);
   }
