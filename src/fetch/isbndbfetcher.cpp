@@ -26,7 +26,7 @@
 #include "../collections/bookcollection.h"
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -52,10 +52,13 @@ namespace {
 
 using namespace Tellico;
 using Tellico::Fetch::ISBNdbFetcher;
+using namespace Qt::Literals::StringLiterals;
 
 ISBNdbFetcher::ISBNdbFetcher(QObject* parent_)
     : Fetcher(parent_),
-      m_limit(ISBNDB_MAX_RETURNS_TOTAL), m_total(-1), m_numResults(0),
+      m_limit(ISBNDB_MAX_RETURNS_TOTAL),
+      m_total(-1),
+      m_numResults(0),
       m_started(false),
       m_batchIsbn(false) {
 }
@@ -236,20 +239,20 @@ void ISBNdbFetcher::slotComplete(KJob* job_) {
 #endif
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  QVariantMap result = doc.object().toVariantMap();
-  QVariantList resultList;
-  if(result.contains(QStringLiteral("book"))) {
-    resultList += result.value(QStringLiteral("book"));
+  const auto obj = doc.object();
+  QJsonArray resultList;
+  if(obj.contains("book"_L1)) {
+    resultList += obj.value("book"_L1);
     m_total = 1;
-  } else if(result.contains(QStringLiteral("books"))) {
-    m_total = result.value(QStringLiteral("total")).toInt();
-    resultList = result.value(QStringLiteral("books")).toList();
-  } else if(result.contains(QStringLiteral("data"))) {
-    m_total = result.value(QStringLiteral("total")).toInt();
-    resultList = result.value(QStringLiteral("data")).toList();
+  } else if(obj.contains("books"_L1)) {
+    m_total = obj["total"_L1].toInt();
+    resultList = obj["books"_L1].toArray();
+  } else if(obj.contains(QStringLiteral("data"))) {
+    m_total = obj["total"_L1].toInt();
+    resultList = obj["data"_L1].toArray();
   } else {
-    QString msg = result.value(QStringLiteral("message")).toString();
-    if(msg.isEmpty()) msg = result.value(QStringLiteral("errorMessage")).toString();
+    QString msg = objValue(obj, "message");
+    if(msg.isEmpty()) msg = objValue(obj, "errorMessage");
     myDebug() << "no results from ISBNDBFetcher:" << msg;
     message(msg, MessageHandler::Error);
     endJob(job);
@@ -260,11 +263,11 @@ void ISBNdbFetcher::slotComplete(KJob* job_) {
   Data::CollPtr coll(new Data::BookCollection(true));
 
   int count = 0;
-  foreach(const QVariant& result, resultList) {
+  for(const auto& result : std::as_const(resultList)) {
 //    myDebug() << "found result:" << result;
 
     Data::EntryPtr entry(new Data::Entry(coll));
-    populateEntry(entry, result.toMap());
+    populateEntry(entry, result.toObject());
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
@@ -315,23 +318,19 @@ Tellico::Fetch::FetchRequest ISBNdbFetcher::updateRequest(Data::EntryPtr entry_)
   return FetchRequest();
 }
 
-void ISBNdbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
+void ISBNdbFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_) {
   static const QRegularExpression nonDigits(QStringLiteral("[^\\d]"));
-  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "title"));
-  entry_->setField(QStringLiteral("isbn"), mapValue(resultMap_, "isbn"));
+  entry_->setField(QStringLiteral("title"), objValue(obj_, "title"));
+  entry_->setField(QStringLiteral("isbn"), objValue(obj_, "isbn"));
   // "date_published" can be "2008-12-13" or "July 2012"
-  QString pubYear = mapValue(resultMap_, "date_published").remove(nonDigits).left(4);
+  QString pubYear = objValue(obj_, "date_published").remove(nonDigits).left(4);
   entry_->setField(QStringLiteral("pub_year"), pubYear);
-  QStringList authors;
-  foreach(const QVariant& author, resultMap_.value(QLatin1String("authors")).toList()) {
-    authors += author.toString();
-  }
-  entry_->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
-  entry_->setField(QStringLiteral("publisher"), mapValue(resultMap_, "publisher"));
-  entry_->setField(QStringLiteral("edition"), mapValue(resultMap_, "edition"));
-  QString binding = mapValue(resultMap_, "binding");
+  entry_->setField(QStringLiteral("author"), objValue(obj_, "authors"));
+  entry_->setField(QStringLiteral("publisher"), objValue(obj_, "publisher"));
+  entry_->setField(QStringLiteral("edition"), objValue(obj_, "edition"));
+  QString binding = objValue(obj_, "binding");
   if(binding.isEmpty()) {
-    binding = mapValue(resultMap_, "format");
+    binding = objValue(obj_, "format");
   }
   if(binding.startsWith(QStringLiteral("Hardcover"))) {
     binding = QStringLiteral("Hardback");
@@ -341,20 +340,17 @@ void ISBNdbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
   if(!binding.isEmpty()) {
     entry_->setField(QStringLiteral("binding"), i18n(binding.toUtf8().constData()));
   }
-  QStringList subjects;
-  foreach(const QVariant& subject, resultMap_.value(QLatin1String("subjects")).toList()) {
-    subjects += subject.toString();
-  }
-  entry_->setField(QStringLiteral("genre"), subjects.join(FieldFormat::delimiterString()));
-  entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "image"));
-  entry_->setField(QStringLiteral("pages"), mapValue(resultMap_, "pages"));
-  entry_->setField(QStringLiteral("language"), mapValue(resultMap_, "language"));
-  entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "overview"));
-  if(mapValue(resultMap_, "overview").isEmpty()) {
-    entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "synopsis"));
+  entry_->setField(QStringLiteral("genre"), objValue(obj_, "subjects"));
+  entry_->setField(QStringLiteral("cover"), objValue(obj_, "image"));
+  entry_->setField(QStringLiteral("pages"), objValue(obj_, "pages"));
+  entry_->setField(QStringLiteral("language"), objValue(obj_, "language"));
+  const QString plotName(QStringLiteral("plot"));
+  entry_->setField(plotName, objValue(obj_, "overview"));
+  if(entry_->field(plotName).isEmpty()) {
+    entry_->setField(plotName, objValue(obj_, "synopsis"));
   }
 
-  const QString dewey = mapValue(resultMap_, "dewey_decimal");
+  const QString dewey = objValue(obj_, "dewey_decimal");
   if(!dewey.isEmpty() && optionalFields().contains(QStringLiteral("dewey"))) {
     if(!entry_->collection()->hasField(QStringLiteral("dewey"))) {
       Data::FieldPtr field(new Data::Field(QStringLiteral("dewey"), i18n("Dewey Decimal"), Data::Field::Line));

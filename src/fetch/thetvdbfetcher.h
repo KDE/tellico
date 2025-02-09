@@ -90,7 +90,7 @@ private:
   friend class ::TheTVDBFetcherTest;
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
-  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
+  void populateEntry(Data::EntryPtr entry, const QJsonObject& result, bool fullData);
   void populatePeople(Data::EntryPtr entry, const QJsonArray& castArray);
   void populateEpisodes(Data::EntryPtr entry, const QJsonArray& castArray);
   void checkAccessToken();

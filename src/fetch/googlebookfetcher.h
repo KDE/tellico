@@ -98,7 +98,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   void doSearch(const QString& term);
   void endJob(KIO::StoredTransferJob* job);
-  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+  void populateEntry(Data::EntryPtr entry, const QJsonObject& obj);
 
   QHash<uint, Data::EntryPtr> m_entries;
   QList< QPointer<KIO::StoredTransferJob> > m_jobs;

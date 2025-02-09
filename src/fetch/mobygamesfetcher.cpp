@@ -28,7 +28,7 @@
 #include "../gui/combobox.h"
 #include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../utils/tellico_utils.h"
 #include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
@@ -229,34 +229,37 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
 #endif
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  QVariantMap map = doc.object().toVariantMap();
-  foreach(const QVariant& rating, map.value(QStringLiteral("ratings")).toList()) {
-    const QVariantMap ratingMap = rating.toMap();
-    const QString ratingSystem = ratingMap.value(QStringLiteral("rating_system_name")).toString();
+  auto obj = doc.object();
+  const auto ratingList = obj[QLatin1StringView("ratings")].toArray();
+  for(const auto& rating : ratingList) {
+    const auto ratingObj = rating.toObject();
+    const QString ratingSystem = objValue(ratingObj, "rating_system_name");
     if(ratingSystem == QStringLiteral("PEGI Rating")) {
-      QString rating = ratingMap.value(QStringLiteral("rating_name")).toString();
+      QString rating = objValue(ratingObj, "rating_name");
       if(!rating.startsWith(QStringLiteral("PEGI"))) {
         rating.prepend(QStringLiteral("PEGI "));
       }
       entry->setField(QStringLiteral("pegi"), rating);
     } else if(ratingSystem == QStringLiteral("ESRB Rating")) {
-      const int esrb = ratingMap.value(QStringLiteral("rating_id")).toInt();
+      const int esrb = ratingObj[QLatin1StringView("rating_id")].toInt();
       if(m_esrbHash.contains(esrb)) {
         entry->setField(QStringLiteral("certification"), m_esrbHash.value(esrb));
       }
     }
   }
   // just use the first release
-  const QVariantList releaseList = map.value(QStringLiteral("releases")).toList();
+  const auto releaseList = obj[QLatin1StringView("releases")].toArray();
   if(!releaseList.isEmpty()) {
-    const QVariantMap releaseMap = releaseList.at(0).toMap();
+    const auto releaseObj = releaseList.at(0).toObject();
     QStringList pubs, devs;
-    foreach(const QVariant& company, releaseMap.value(QStringLiteral("companies")).toList()) {
-      const QVariantMap companyMap = company.toMap();
-      if(companyMap.value(QStringLiteral("role")) == QStringLiteral("Developed by")) {
-        devs += companyMap.value(QStringLiteral("company_name")).toString();
-      } else if(companyMap.value(QStringLiteral("role")) == QStringLiteral("Published by")) {
-        pubs += companyMap.value(QStringLiteral("company_name")).toString();
+    const auto companyList = releaseObj[QLatin1StringView("companies")].toArray();
+    for(const auto& company : companyList) {
+      const auto companyObj = company.toObject();
+      const auto role =companyObj.value(QLatin1StringView("role"));
+      if(role == QLatin1String("Developed by")) {
+        devs += objValue(companyObj, "company_name");
+      } else if(role == QLatin1String("Published by")) {
+        pubs += objValue(companyObj, "company_name");
       }
     }
 //    myDebug() << pubs << devs;
@@ -307,24 +310,23 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
 
   QString coverUrl;
   doc = QJsonDocument::fromJson(data);
-  map = doc.object().toVariantMap();
+  obj = doc.object();
   // prefer "Front Cover" but fall back to "Media"
   QString front, media;
-  QVariantList coverGroupList = map.value(QStringLiteral("cover_groups")).toList();
-  foreach(const QVariant& coverGroup, coverGroupList) {
+  const auto coverGroupList = obj[QLatin1StringView("cover_groups")].toArray();
+  for(const auto& coverGroup : coverGroupList) {
     // just take the cover from the first group with front cover, appear to be grouped by country
-    QVariantList coverList = coverGroup.toMap().value(QStringLiteral("covers")).toList();
-    foreach(const QVariant& coverVariant, coverList) {
-      const QVariantMap coverMap = coverVariant.toMap();
-      if(media.isEmpty() &&
-         coverMap.value(QStringLiteral("scan_of")) == QStringLiteral("Media")) {
+    const auto coverList = coverGroup[QLatin1StringView("covers")].toArray();
+    for(const auto& cover : coverList) {
+      const auto coverObj = cover.toObject();
+      if(media.isEmpty() && coverObj[QLatin1StringView("scan_of")] == QLatin1String("Media")) {
         media = m_imageSize == SmallImage ?
-                coverMap.value(QStringLiteral("thumbnail_image")).toString() :
-                coverMap.value(QStringLiteral("image")).toString();
-      } else if(coverMap.value(QStringLiteral("scan_of")) == QStringLiteral("Front Cover")) {
+                objValue(coverObj, "thumbnail_image") :
+                objValue(coverObj, "image");
+      } else if(coverObj[QLatin1StringView("scan_of")] == QLatin1String("Front Cover")) {
         front = m_imageSize == SmallImage ?
-                coverMap.value(QStringLiteral("thumbnail_image")).toString() :
-                coverMap.value(QStringLiteral("image")).toString();
+                objValue(coverObj, "thumbnail_image") :
+                objValue(coverObj, "image");
         break;
       }
     }
@@ -335,7 +337,6 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   }
 
   coverUrl = front.isEmpty() ? media : front; // fall back to media image
-
   if(!coverUrl.isEmpty()) {
 //    myDebug() << coverUrl;
     const QString id = ImageFactory::addImage(QUrl::fromUserInput(coverUrl), true /* quiet */);
@@ -374,10 +375,10 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
 #endif
     QString screenshotUrl;
     doc = QJsonDocument::fromJson(job->data());
-    map = doc.object().toVariantMap();
-    auto list = map.value(QStringLiteral("screenshots")).toList();
+    obj = doc.object();
+    const auto list = obj[QLatin1StringView("screenshots")].toArray();
     if(!list.isEmpty()) {
-      screenshotUrl = mapValue(list.at(0).toMap(), "image");
+      screenshotUrl = objValue(list.at(0).toObject(), "image");
     }
     if(!screenshotUrl.isEmpty()) {
 //      myDebug() << screenshotUrl;
@@ -462,11 +463,11 @@ void MobyGamesFetcher::slotComplete(KJob* job_) {
   coll->addField(f2);
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  QVariantMap map = doc.object().toVariantMap();
+  const auto obj = doc.object();
 
   // check for error
-  if(map.contains(QStringLiteral("error"))) {
-    const QString msg = map.value(QStringLiteral("message")).toString();
+  if(obj.contains(QLatin1StringView("error"))) {
+    const QString msg = obj.value(QLatin1StringView("message")).toString();
     message(msg, MessageHandler::Error);
     myDebug() << "MobyGamesFetcher -" << msg;
     stop();
@@ -477,9 +478,9 @@ void MobyGamesFetcher::slotComplete(KJob* job_) {
     updatePlatforms();
   }
 
-  foreach(const QVariant& result, map.value(QStringLiteral("games")).toList()) {
-    QVariantMap resultMap = result.toMap();
-    Data::EntryList entries = createEntries(coll, resultMap);
+  const auto resultList = obj.value(QLatin1StringView("games")).toArray();
+  for(const auto& result : resultList) {
+    Data::EntryList entries = createEntries(coll, result.toObject());
     foreach(const Data::EntryPtr& entry, entries) {
       FetchResult* r = new FetchResult(this, entry);
       m_entries.insert(r->uid, entry);
@@ -490,23 +491,16 @@ void MobyGamesFetcher::slotComplete(KJob* job_) {
   stop();
 }
 
-Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, const QVariantMap& resultMap_) {
+Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, const QJsonObject& obj_) {
   Data::EntryPtr entry(new Data::Entry(coll_));
-  entry->setField(QStringLiteral("title"), mapValue(resultMap_, "title"));
-  entry->setField(QStringLiteral("description"), mapValue(resultMap_, "description"));
-  entry->setField(QStringLiteral("moby-id"), mapValue(resultMap_, "game_id"));
+  entry->setField(QStringLiteral("title"), objValue(obj_, "title"));
+  entry->setField(QStringLiteral("description"), objValue(obj_, "description"));
+  entry->setField(QStringLiteral("moby-id"), objValue(obj_, "game_id"));
 
-  QStringList genres;
-  foreach(const QVariant& genreMap, resultMap_.value(QStringLiteral("genres")).toList()) {
-    const QString g = genreMap.toMap().value(QStringLiteral("genre_name")).toString();
-    if(!g.isEmpty()) {
-      genres << g;
-    }
-  }
-  entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
+  entry->setField(QStringLiteral("genre"), objValue(obj_, "genres", "genre_name"));
 
   if(optionalFields().contains(QStringLiteral("mobygames"))) {
-    entry->setField(QStringLiteral("mobygames"), mapValue(resultMap_, "moby_url"));
+    entry->setField(QStringLiteral("mobygames"), objValue(obj_, "moby_url"));
   }
 
   const QString platformS(QStringLiteral("platform"));
@@ -519,13 +513,14 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
     m_requestPlatformId = q.queryItemValue(platformS).toInt();
   }
 
+  const auto platformArray = obj_[QLatin1StringView("platforms")].toArray();
   Data::EntryList entries;
   // return a new entry for every platform
-  foreach(const QVariant& platformMapV, resultMap_.value(QStringLiteral("platforms")).toList()) {
+  for(const auto& platform : platformArray) {
     Data::EntryPtr newEntry(new Data::Entry(*entry));
 
-    const QVariantMap platformMap = platformMapV.toMap();
-    const int platformId = platformMap.value(QStringLiteral("platform_id")).toInt();
+    const auto platformObj = platform.toObject();
+    const int platformId = platformObj[QLatin1StringView("platform_id")].toInt();
     if(m_platforms.contains(platformId)) {
       const QString platform = m_platforms[platformId];
       // make the assumption that if the platform name isn't already in the allowed list, it should be added
@@ -535,13 +530,11 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
       }
       newEntry->setField(platformS, platform);
     } else {
-      myDebug() << "platform list does not contain" << platformId << mapValue(platformMap, "platform_name");
+      myDebug() << "platform list does not contain" << platformId << objValue(platformObj, "platform_name");
     }
 
-    newEntry->setField(QStringLiteral("platform-id"),
-                       platformMap.value(QStringLiteral("platform_id")).toString());
-    newEntry->setField(QStringLiteral("year"),
-                       platformMap.value(QStringLiteral("first_release_date")).toString().left(4));
+    newEntry->setField(QStringLiteral("platform-id"), objValue(platformObj, "platform_id"));
+    newEntry->setField(QStringLiteral("year"), objValue(platformObj, "first_release_date").left(4));
     if(m_requestPlatformId == 0 || m_requestPlatformId == platformId) entries << newEntry;
   }
   return entries;
@@ -580,16 +573,17 @@ void MobyGamesFetcher::populateHashes() {
   QFile file(Tellico::saveLocation(QStringLiteral("mobygames-data/")) + QLatin1String("platforms.json"));
   if(file.open(QIODevice::ReadOnly)) {
     m_platforms.clear();
-    const QVariantMap topMap = QJsonDocument::fromJson(file.readAll()).object().toVariantMap();
-    foreach(const QVariant& platform, topMap.value(QStringLiteral("platforms")).toList()) {
-      const QVariantMap m = platform.toMap();
-      Data::GameCollection::GamePlatform pId = Data::GameCollection::guessPlatform(mapValue(m, "platform_name"));
+    const auto topObj = QJsonDocument::fromJson(file.readAll()).object();
+    const auto platformList = topObj[QLatin1StringView("platforms")].toArray();
+    for(const auto& platform : platformList) {
+      const auto o = platform.toObject();
+      Data::GameCollection::GamePlatform pId = Data::GameCollection::guessPlatform(objValue(o, "platform_name"));
       if(pId == Data::GameCollection::UnknownPlatform) {
         // platform is not in the default list, just keep it as is
-        m_platforms.insert(m.value(QStringLiteral("platform_id")).toInt(),
-                           mapValue(m, "platform_name"));
+        m_platforms.insert(o.value(QLatin1StringView("platform_id")).toInt(),
+                           objValue(o, "platform_name"));
       } else {
-        m_platforms.insert(m.value(QStringLiteral("platform_id")).toInt(),
+        m_platforms.insert(o.value(QLatin1StringView("platform_id")).toInt(),
                            Data::GameCollection::platformName(pId));
       }
     }
@@ -605,8 +599,6 @@ void MobyGamesFetcher::updatePlatforms() {
   q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
   u.setQuery(q);
 
-//  u = QUrl::fromLocalFile(QStringLiteral("/home/robby/platforms.json")); // for testing
-//  myDebug() << "Reading platforms from" << u;
   markTime();
   const QByteArray data = FileHandler::readDataFile(u, true);
   QFile file(Tellico::saveLocation(QStringLiteral("mobygames-data/")) + QLatin1String("platforms.json"));

@@ -27,7 +27,7 @@
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
 #include "../core/filehandler.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -170,7 +170,7 @@ Tellico::Data::EntryPtr OMDBFetcher::fetchEntryHook(uint uid_) {
     f.close();
 #endif
     QJsonDocument doc = QJsonDocument::fromJson(data);
-    populateEntry(entry, doc.object().toVariantMap(), true);
+    populateEntry(entry, doc.object(), true);
   }
 
   // image might still be a URL
@@ -264,23 +264,21 @@ void OMDBFetcher::slotComplete(KJob* job_) {
 #endif
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  QVariantMap result = doc.object().toVariantMap();
+  const auto result = doc.object();
 
-  const bool response = result.value(QStringLiteral("Response")).toBool();
-  if(!response) {
+  if(objValue(result, "Response") != QLatin1StringView("True")) {
     // a lack of results is considered an error
     // don't show a user alert for that
-    myDebug() << "Error:" << result.value(QStringLiteral("Error")).toString();
+    myDebug() << "Error:" << result.value(QLatin1StringView("Error"));
 //    message(result.value(QStringLiteral("Error")).toString(), MessageHandler::Error);
     stop();
     return;
   }
 
-  const QString search = QStringLiteral("Search");
-  QVariantList resultList = result.value(search).toList();
+  auto resultList = result[QLatin1StringView("Search")].toArray();
   if(resultList.isEmpty()) {
     // might be a single result
-    if(result.contains(QLatin1String("Title"))) {
+    if(result.contains(QLatin1StringView("Title"))) {
       resultList << result;
     } else {
       myDebug() << "no results";
@@ -292,14 +290,14 @@ void OMDBFetcher::slotComplete(KJob* job_) {
   // if the search was a Raw update, then fully populate it
   // and wipe the imdb-id value
   const bool fullResult = request().key() == Fetch::Raw &&
-                          !result.contains(search);
+                          !result.contains(QLatin1StringView("Search"));
 
   int count = 0;
-  foreach(const QVariant& result, resultList) {
+  for(const auto& result : std::as_const(resultList)) {
 //    myDebug() << "found result:" << result;
 
     Data::EntryPtr entry(new Data::Entry(coll));
-    populateEntry(entry, result.toMap(), fullResult);
+    populateEntry(entry, result.toObject(), fullResult);
     if(fullResult) {
       // indicate it's already fully populated
       entry->setField(QStringLiteral("imdb-id"), QString());
@@ -317,16 +315,16 @@ void OMDBFetcher::slotComplete(KJob* job_) {
   stop();
 }
 
-void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
-  entry_->setField(QStringLiteral("imdb-id"), mapValue(resultMap_, "imdbID"));
-  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "Title"));
-  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "Year"));
+void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_, bool fullData_) {
+  entry_->setField(QStringLiteral("imdb-id"), objValue(obj_, "imdbID"));
+  entry_->setField(QStringLiteral("title"), objValue(obj_, "Title"));
+  entry_->setField(QStringLiteral("year"), objValue(obj_, "Year"));
 
   if(!fullData_) {
     return;
   }
 
-  const QString cert = mapValue(resultMap_, "Rated");
+  const QString cert = objValue(obj_, "Rated");
   Data::FieldPtr certField = entry_->collection()->fieldByName(QStringLiteral("certification"));
   if(certField) {
     foreach(const QString& value, certField->allowed()) {
@@ -336,37 +334,40 @@ void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
       }
     }
   }
+
+  const QString commaSpace(QStringLiteral(", "));
+
   static const QRegularExpression nondigitsRx(QLatin1String("[^\\d]"));
   entry_->setField(QStringLiteral("running-time"),
-                   mapValue(resultMap_, "Runtime").remove(nondigitsRx));
+                   objValue(obj_, "Runtime").remove(nondigitsRx));
 
-  const QStringList genres = mapValue(resultMap_, "Genre").split(QStringLiteral(", "));
+  const QStringList genres = objValue(obj_, "Genre").split(commaSpace);
   entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
 
-  const QStringList directors = mapValue(resultMap_, "Director").split(QStringLiteral(", "));
+  const QStringList directors = objValue(obj_, "Director").split(commaSpace);
   entry_->setField(QStringLiteral("director"), directors.join(FieldFormat::delimiterString()));
 
-  QStringList writers = mapValue(resultMap_, "Writer").split(QStringLiteral(", "));
+  QStringList writers = objValue(obj_, "Writer").split(commaSpace);
   // some writers have parentheticals, remove those
   static const QRegularExpression parenRx(QLatin1String("\\s*\\(.+\\)\\s*"));
   entry_->setField(QStringLiteral("writer"),
                    writers.replaceInStrings(parenRx, QString())
                           .join(FieldFormat::delimiterString()));
 
-  const QStringList producers = mapValue(resultMap_, "Producer").split(QStringLiteral(", "));
+  const QStringList producers = objValue(obj_, "Producer").split(commaSpace);
   entry_->setField(QStringLiteral("producer"), producers.join(FieldFormat::delimiterString()));
 
-  const QStringList actors = mapValue(resultMap_, "Actors").split(QStringLiteral(", "));
+  const QStringList actors = objValue(obj_, "Actors").split(commaSpace);
   entry_->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
 
-  const QStringList countries = mapValue(resultMap_, "Country").split(QStringLiteral(", "));
+  const QStringList countries = objValue(obj_, "Country").split(commaSpace);
   entry_->setField(QStringLiteral("nationality"), countries.join(FieldFormat::delimiterString()));
 
-  const QStringList langs = mapValue(resultMap_, "Language").split(QStringLiteral(", "));
+  const QStringList langs = objValue(obj_, "Language").split(commaSpace);
   entry_->setField(QStringLiteral("language"), langs.join(FieldFormat::delimiterString()));
 
-  entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "Poster"));
-  entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "Plot"));
+  entry_->setField(QStringLiteral("cover"), objValue(obj_, "Poster"));
+  entry_->setField(QStringLiteral("plot"), objValue(obj_, "Plot"));
 
   const QString imdb(QStringLiteral("imdb"));
   if(optionalFields().contains(imdb)) {

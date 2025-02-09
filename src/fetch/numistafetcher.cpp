@@ -29,7 +29,7 @@
 #include "../gui/combobox.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -311,58 +311,58 @@ Tellico::Data::EntryPtr NumistaFetcher::parseEntry(const QByteArray& data_) {
   Data::EntryPtr entry(new Data::Entry(coll));
   coll->addEntries(entry);
 
-  QVariantMap objectMap = doc.object().toVariantMap();
+  const auto obj = doc.object();
   // for type, try to tease out from title
   // use ruler name as a possible fallback
   QRegularExpression titleQuote(QStringLiteral("\"(.+)\""));
-  QRegularExpressionMatch quoteMatch = titleQuote.match(mapValue(objectMap, "title"));
+  QRegularExpressionMatch quoteMatch = titleQuote.match(objValue(obj, "title"));
   if(quoteMatch.hasMatch()) {
     entry->setField(QStringLiteral("type"), quoteMatch.captured(1));
   } else {
-    entry->setField(QStringLiteral("type"), mapValue(objectMap, "ruler", "name"));
+    entry->setField(QStringLiteral("type"), objValue(obj, "ruler", "name"));
   }
 
-  entry->setField(QStringLiteral("denomination"), mapValue(objectMap, "value", "text"));
-  entry->setField(QStringLiteral("currency"), mapValue(objectMap, "value", "currency", "name"));
-  entry->setField(QStringLiteral("country"), mapValue(objectMap, "issuer", "name"));
-  entry->setField(QStringLiteral("mintmark"), mapValue(objectMap, "mintLetter"));
+  entry->setField(QStringLiteral("denomination"), objValue(obj, "value", "text"));
+  entry->setField(QStringLiteral("currency"), objValue(obj, "value", "currency", "name"));
+  entry->setField(QStringLiteral("country"), objValue(obj, "issuer", "name"));
+  entry->setField(QStringLiteral("mintmark"), objValue(obj, "mintLetter"));
 
   // if minyear = maxyear, then set the year of the coin
-  auto year = objectMap.value(QLatin1String("minYear"));
-  if(year == objectMap.value(QLatin1String("maxYear"))) {
-    entry->setField(QStringLiteral("year"), year.toString());
+  const auto year = obj[QLatin1StringView("minYear")];
+  if(year == obj[QLatin1StringView("maxYear")]) {
+    entry->setField(QStringLiteral("year"), QString::number(year.toDouble()));
   } else if(!m_year.isEmpty()) {
     entry->setField(QStringLiteral("year"), m_year);
   }
 
-  entry->setField(QStringLiteral("obverse"), mapValue(objectMap, "obverse", "picture"));
-  entry->setField(QStringLiteral("reverse"), mapValue(objectMap, "reverse", "picture"));
+  entry->setField(QStringLiteral("obverse"), objValue(obj, "obverse", "picture"));
+  entry->setField(QStringLiteral("reverse"), objValue(obj, "reverse", "picture"));
 
   const QString numista(QStringLiteral("numista"));
   if(optionalFields().contains(numista)) {
     Data::FieldPtr field(new Data::Field(numista, i18n("Numista Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
-    entry->setField(numista, mapValue(objectMap, "url"));
+    entry->setField(numista, objValue(obj, "url"));
   }
 
   const QString desc(QStringLiteral("description"));
   if(!coll->hasField(desc) && optionalFields().contains(desc)) {
     Data::FieldPtr field(new Data::Field(desc, i18n("Description"), Data::Field::Para));
     coll->addField(field);
-    entry->setField(QStringLiteral("description"), mapValue(objectMap, "comments"));
+    entry->setField(QStringLiteral("description"), objValue(obj, "comments"));
   }
 
-  QVariantList refs = objectMap.value(QStringLiteral("references")).toList();
   const QString krause(QStringLiteral("km"));
   if(!coll->hasField(krause) && optionalFields().contains(krause)) {
     Data::FieldPtr field(new Data::Field(krause, allOptionalFields().value(krause)));
     field->setCategory(i18n("General"));
     coll->addField(field);
-    foreach(const QVariant& ref, refs) {
-      QVariantMap refMap = ref.toMap();
-      if(mapValue(refMap, "catalogue", "code") == QLatin1String("KM")) {
-        entry->setField(krause, mapValue(refMap, "number"));
+    const auto refArray = obj[QLatin1StringView("references")].toArray();
+    for(const auto& ref : refArray) {
+      const auto refObj = ref.toObject();
+      if(objValue(refObj, "catalogue", "code") == QLatin1String("KM")) {
+        entry->setField(krause, objValue(refObj, "number"));
         // don't break out, there could be multiple KM values and we want the last one
       }
     }

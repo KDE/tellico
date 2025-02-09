@@ -29,7 +29,7 @@
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../utils/string_utils.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -310,24 +310,24 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::requestEntry(const QString& filmId_) {
   coll->addEntries(entry);
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  const QVariantMap resultMap = doc.object().toVariantMap();
+  const auto obj = doc.object();
 
-  entry->setField(QStringLiteral("title"), mapValue(resultMap, "nameRu"));
-  entry->setField(QStringLiteral("year"), mapValue(resultMap, "year"));
-  entry->setField(QStringLiteral("nationality"), mapValue(resultMap, "countries", "country"));
-  entry->setField(QStringLiteral("genre"), mapValue(resultMap, "genres", "genre"));
-  entry->setField(QStringLiteral("running-time"), mapValue(resultMap, "filmLength"));
-  entry->setField(QStringLiteral("plot"), mapValue(resultMap, "description"));
-  entry->setField(QStringLiteral("cover"), mapValue(resultMap, "posterUrl"));
+  entry->setField(QStringLiteral("title"), objValue(obj, "nameRu"));
+  entry->setField(QStringLiteral("year"), objValue(obj, "year"));
+  entry->setField(QStringLiteral("nationality"), objValue(obj, "countries", "country"));
+  entry->setField(QStringLiteral("genre"), objValue(obj, "genres", "genre"));
+  entry->setField(QStringLiteral("running-time"), objValue(obj, "filmLength"));
+  entry->setField(QStringLiteral("plot"), objValue(obj, "description"));
+  entry->setField(QStringLiteral("cover"), objValue(obj, "posterUrl"));
 
   const QString cert(QStringLiteral("certification"));
   auto certField = coll->fieldByName(cert);
   if(certField) {
-    entry->setField(cert, mpaaRating(mapValue(resultMap, "ratingMpaa"), certField->allowed()));
+    entry->setField(cert, mpaaRating(objValue(obj, "ratingMpaa"), certField->allowed()));
   }
 
   const QString imdb(QStringLiteral("imdb"));
-  const QString imdbId = mapValue(resultMap, "imdbId");
+  const QString imdbId = objValue(obj, "imdbId");
   if(optionalFields().contains(imdb) && !imdbId.isEmpty()) {
     coll->addField(Data::Field::createDefaultField(Data::Field::ImdbField));
     entry->setField(imdb, QStringLiteral("https://www.imdb.com/title/") + imdbId);
@@ -339,7 +339,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::requestEntry(const QString& filmId_) {
       f->setFormatType(FieldFormat::FormatTitle);
       coll->addField(f);
     }
-    entry->setField(origTitle, mapValue(resultMap, "nameOriginal"));
+    entry->setField(origTitle, objValue(obj, "nameOriginal"));
   }
 
   url = QUrl(QLatin1String(KINOPOISK_API_STAFF_URL));
@@ -373,16 +373,16 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::requestEntry(const QString& filmId_) {
   const auto staffArray = QJsonDocument::fromJson(data).array();
   const int sz = staffArray.size();
   for(int i = 0; i < sz; ++i) {
-    const auto obj = staffArray.at(i).toObject().toVariantMap();
-    const QString key = mapValue(obj, "professionKey");
-    QString name = mapValue(obj, "nameRu");
-    if(name.isEmpty()) name = mapValue(obj, "nameEn");
+    const auto obj = staffArray.at(i).toObject();
+    const QString key = objValue(obj, "professionKey");
+    QString name = objValue(obj, "nameRu");
+    if(name.isEmpty()) name = objValue(obj, "nameEn");
     if(name.isEmpty()) continue;
     if(key == QLatin1String("DIRECTOR")) {
       directors += name;
     } else if(key == QLatin1String("ACTOR")) {
       if(actors.size() < m_numCast) {
-        actors += (name + FieldFormat::columnDelimiterString() + mapValue(obj, "description"));
+        actors += (name + FieldFormat::columnDelimiterString() + objValue(obj, "description"));
       }
     } else if(key == QLatin1String("WRITER")) {
       writers += name;
@@ -497,16 +497,16 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntryLinkedData(const QString& st
   Data::EntryPtr entry(new Data::Entry(coll));
   coll->addEntries(entry);
 
-  QVariantMap objectMap = doc.object().toVariantMap();
-  entry->setField(QStringLiteral("title"), mapValue(objectMap, "name"));
-  entry->setField(QStringLiteral("year"), mapValue(objectMap, "datePublished").left(4));
-  entry->setField(QStringLiteral("nationality"), mapValue(objectMap, "countryOfOrigin"));
-  entry->setField(QStringLiteral("cast"), mapValue(objectMap, "actor", "name"));
-  entry->setField(QStringLiteral("director"), mapValue(objectMap, "director", "name"));
-  entry->setField(QStringLiteral("producer"), mapValue(objectMap, "producer", "name"));
-  entry->setField(QStringLiteral("genre"), mapValue(objectMap, "genre"));
-  entry->setField(QStringLiteral("plot"), mapValue(objectMap, "description"));
-  QString cover = mapValue(objectMap, "image");
+  const auto obj = doc.object();
+  entry->setField(QStringLiteral("title"), objValue(obj, "name"));
+  entry->setField(QStringLiteral("year"), objValue(obj, "datePublished").left(4));
+  entry->setField(QStringLiteral("nationality"), objValue(obj, "countryOfOrigin"));
+  entry->setField(QStringLiteral("cast"), objValue(obj, "actor", "name"));
+  entry->setField(QStringLiteral("director"), objValue(obj, "director", "name"));
+  entry->setField(QStringLiteral("producer"), objValue(obj, "producer", "name"));
+  entry->setField(QStringLiteral("genre"), objValue(obj, "genre"));
+  entry->setField(QStringLiteral("plot"), objValue(obj, "description"));
+  QString cover = objValue(obj, "image");
   if(cover.startsWith(QLatin1Char('/'))) {
     cover.prepend(QLatin1String("https:"));
   }

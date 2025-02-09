@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2023 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2025 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,48 +22,27 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef MAPVALUE_H
-#define MAPVALUE_H
-
-#include "../fieldformat.h"
-
-#include <QMetaType>
-#include <QVariant>
+#include "objvalue.h"
 
 namespace Tellico {
-  // helper methods for the QVariantMaps used by the JSON importers
-  template<typename T>
-  QString mapValue(const QVariantMap& map, T name) {
-    const QVariant v = map.value(QLatin1String(name));
+  QString objValue(const QJsonValue& v) {
     if(v.isNull())  {
       return QString();
-    } else if(v.canConvert<QString>()) {
+    } else if(v.isString()) {
       return v.toString();
-    } else if(v.canConvert<QStringList>()) {
-      return v.toStringList().join(FieldFormat::delimiterString());
-    } else {
-      return QString();
-    }
-  }
-  template<typename T, typename... Args>
-  QString mapValue(const QVariantMap& map, T name, Args... args) {
-    const QVariant v = map.value(QLatin1String(name));
-    if(v.isNull())  {
-      return QString();
-    } else if(v.canConvert<QVariantMap>()) {
-      return mapValue(v.toMap(), args...);
-    } else if(v.canConvert<QVariantList>()) {
-      QStringList values;
-      const auto list = v.toList();
-      for(const QVariant& v : list) {
-        const QString s = mapValue(v.toMap(), args...);
-        if(!s.isEmpty()) values += s;
+    } else if(v.isDouble()) {
+      // leverage QVariant::toString and qNumberVariantHelper
+      return QVariant(v.toDouble()).toString();
+    } else if(v.isArray()) {
+      const auto arr = v.toArray();
+      QStringList l;
+      l.reserve(arr.size());
+      for(const auto& v2 : arr) {
+        const QString s = objValue(v2);
+        if(!s.isEmpty()) l += s;
       }
-      return values.join(FieldFormat::delimiterString());
-    } else {
-      return QString();
+      return l.join(FieldFormat::delimiterString());
     }
+    return QString();
   }
 }
-
-#endif

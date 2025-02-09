@@ -34,7 +34,7 @@
 #include "../field.h"
 #include "../fieldformat.h"
 #include "../utils/string_utils.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../utils/isbnvalidator.h"
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"
@@ -868,9 +868,9 @@ Tellico::Data::CollPtr AmazonFetcher::createCollection() {
 }
 
 void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info_) {
-  QVariantMap itemMap = info_.value(QLatin1String("ItemInfo")).toObject().toVariantMap();
-  entry_->setField(QStringLiteral("title"), mapValue(itemMap, "Title", "DisplayValue"));
-  const QString isbn = mapValue(itemMap, "ExternalIds", "ISBNs", "DisplayValues");
+  const auto itemMap = info_.value(QLatin1String("ItemInfo")).toObject();
+  entry_->setField(QStringLiteral("title"), objValue(itemMap, "Title", "DisplayValue"));
+  const QString isbn = objValue(itemMap, "ExternalIds", "ISBNs", "DisplayValues");
   if(!isbn.isEmpty()) {
     // could be duplicate isbn10 and isbn13 values
     QStringList isbns = FieldFormat::splitValue(isbn, FieldFormat::StringSplit);
@@ -885,12 +885,12 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
   }
 
   QStringList actors, artists, authors, illustrators, publishers;
-  QVariantMap byLineMap = itemMap.value(QLatin1String("ByLineInfo")).toMap();
-  QVariantList contribArray = byLineMap.value(QLatin1String("Contributors")).toList();
-  foreach(const QVariant& v, contribArray) {
-    const QVariantMap contribMap = v.toMap();
-    const QString role = contribMap.value(QLatin1String("Role")).toString();
-    const QString name = contribMap.value(QLatin1String("Name")).toString();
+  const auto byLineMap = itemMap[QLatin1StringView("ByLineInfo")].toObject();
+  const auto contribArray = byLineMap[QLatin1String("Contributors")].toArray();
+  for(const auto& v : contribArray) {
+    const auto contribMap = v.toObject();
+    const QString role = objValue(contribMap, "Role");
+    const QString name = objValue(contribMap, "Name");
     if(role == QLatin1String("Actor")) {
       actors += name;
     } else if(role == QLatin1String("Artist")) {
@@ -907,9 +907,7 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
   if(collectionType() == Data::Collection::Book ||
      collectionType() == Data::Collection::Bibtex ||
      collectionType() == Data::Collection::ComicBook) {
-    const QString manufacturer = byLineMap.value(QLatin1String("Manufacturer")).toMap()
-                                          .value(QLatin1String("DisplayValue")).toString();
-    publishers += manufacturer;
+    publishers += objValue(byLineMap, "Manufacturer", "DisplayValue");
   }
 
   actors.removeDuplicates();
@@ -934,19 +932,19 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
     entry_->setField(QStringLiteral("publisher"), publishers.join(FieldFormat::delimiterString()));
   }
 
-  QVariantMap contentMap = itemMap.value(QLatin1String("ContentInfo")).toMap();
-  entry_->setField(QStringLiteral("edition"), mapValue(contentMap, "Edition", "DisplayValue"));
-  entry_->setField(QStringLiteral("pages"), mapValue(contentMap, "PagesCount", "DisplayValue"));
-  const QString pubDate = mapValue(contentMap, "PublicationDate", "DisplayValue");
+  const auto contentMap = itemMap[QLatin1StringView("ContentInfo")].toObject();
+  entry_->setField(QStringLiteral("edition"), objValue(contentMap, "Edition", "DisplayValue"));
+  entry_->setField(QStringLiteral("pages"), objValue(contentMap, "PagesCount", "DisplayValue"));
+  const QString pubDate = objValue(contentMap, "PublicationDate", "DisplayValue");
   if(!pubDate.isEmpty()) {
     entry_->setField(QStringLiteral("pub_year"), pubDate.left(4));
   }
-  QVariantList langArray = itemMap.value(QLatin1String("ContentInfo")).toMap()
-                                  .value(QStringLiteral("Languages")).toMap()
-                                  .value(QStringLiteral("DisplayValues")).toList();
+  const auto langArray = itemMap[QLatin1StringView("ContentInfo")]
+                                [QLatin1StringView("Languages")]
+                                [QLatin1StringView("DisplayValues")].toArray();
   QStringList langs;
-  foreach(const QVariant& v, langArray) {
-    langs += mapValue(v.toMap(), "DisplayValue");
+  for(const auto& v : langArray) {
+    langs += objValue(v.toObject(), "DisplayValue");
   }
   langs.removeDuplicates();
   langs.removeAll(QString());
@@ -955,11 +953,11 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
   if(collectionType() == Data::Collection::Book ||
      collectionType() == Data::Collection::Bibtex ||
      collectionType() == Data::Collection::ComicBook) {
-    QVariantMap classificationsMap = itemMap.value(QLatin1String("Classifications")).toMap();
-    QString binding = mapValue(classificationsMap, "Binding", "DisplayValue");
+    const auto classificationsMap = itemMap[QLatin1StringView("Classifications")].toObject();
+    QString binding = objValue(classificationsMap, "Binding", "DisplayValue");
     if(binding.isEmpty()) {
-      QVariantMap technicalMap = itemMap.value(QLatin1String("TechnicalInfo")).toMap();
-      binding = mapValue(technicalMap, "Formats", "DisplayValues");
+      const auto technicalMap = itemMap[QLatin1StringView("TechnicalInfo")].toObject();
+      binding = objValue(technicalMap, "Formats", "DisplayValues");
     }
     if(binding.contains(QStringLiteral("Paperback")) && binding != QStringLiteral("Trade Paperback")) {
       binding = i18n("Paperback");
@@ -969,23 +967,23 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
     entry_->setField(QStringLiteral("binding"), binding);
   }
 
-  QVariantMap imagesMap = info_.value(QLatin1String("Images")).toObject().toVariantMap();
+  const auto imagesMap = info_[QLatin1StringView("Images")].toObject();
   switch(m_imageSize) {
     case SmallImage:
-      entry_->setField(QStringLiteral("small-image"), mapValue(imagesMap, "Primary", "Small", "URL"));
+      entry_->setField(QStringLiteral("small-image"), objValue(imagesMap, "Primary", "Small", "URL"));
       break;
     case MediumImage:
-      entry_->setField(QStringLiteral("medium-image"), mapValue(imagesMap, "Primary", "Medium", "URL"));
+      entry_->setField(QStringLiteral("medium-image"), objValue(imagesMap, "Primary", "Medium", "URL"));
       break;
     case LargeImage:
-      entry_->setField(QStringLiteral("large-image"), mapValue(imagesMap, "Primary", "Large", "URL"));
+      entry_->setField(QStringLiteral("large-image"), objValue(imagesMap, "Primary", "Large", "URL"));
       break;
     case NoImage:
       break;
   }
 
   if(optionalFields().contains(QStringLiteral("amazon"))) {
-    entry_->setField(QStringLiteral("amazon"), mapValue(info_.toVariantMap(), "DetailPageURL"));
+    entry_->setField(QStringLiteral("amazon"), objValue(info_, "DetailPageURL"));
   }
 }
 

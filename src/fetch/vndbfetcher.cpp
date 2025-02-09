@@ -26,7 +26,7 @@
 #include "vndbfetcher.h"
 #include "../collections/gamecollection.h"
 #include "../images/imagefactory.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../entry.h"
 #include "../fieldformat.h"
 #include "../tellico_debug.h"
@@ -262,8 +262,8 @@ void VNDBFetcher::parseVNResults() {
     stop();
     return;
   }
-  QVariantMap topResultMap = doc.object().toVariantMap();
-  QVariantList resultList = topResultMap.value(QStringLiteral("items")).toList();
+  const auto topResult = doc.object();
+  const auto resultList = topResult.value(QLatin1StringView("items")).toArray();
   if(resultList.isEmpty()) {
     myLog() << "No results";
     stop();
@@ -287,27 +287,26 @@ void VNDBFetcher::parseVNResults() {
     coll->addField(f);
   }
 
-  QVariantMap resultMap;
-  foreach(const QVariant& result, resultList) {
+  for(const auto& result : resultList) {
     // be sure to check that the fetcher has not been stopped
     // crashes can occur if not
     if(!m_started) {
       break;
     }
-    resultMap = result.toMap();
 
+    const auto resultObj = result.toObject();
     Data::EntryPtr entry(new Data::Entry(coll));
-    entry->setField(QStringLiteral("title"), mapValue(resultMap, "title"));
-    entry->setField(QStringLiteral("vn-id"), mapValue(resultMap, "id"));
-    entry->setField(QStringLiteral("year"), mapValue(resultMap, "released").left(4));
+    entry->setField(QStringLiteral("title"), objValue(resultObj, "title"));
+    entry->setField(QStringLiteral("vn-id"), objValue(resultObj, "id"));
+    entry->setField(QStringLiteral("year"), objValue(resultObj, "released").left(4));
     entry->setField(QStringLiteral("genre"), i18n("Visual Novel"));
-    entry->setField(QStringLiteral("description"), mapValue(resultMap, "description"));
-    entry->setField(QStringLiteral("cover"), mapValue(resultMap, "image"));
+    entry->setField(QStringLiteral("description"), objValue(resultObj, "description"));
+    entry->setField(QStringLiteral("cover"), objValue(resultObj, "image"));
     if(optionalFields().contains(QStringLiteral("origtitle"))) {
-      entry->setField(QStringLiteral("origtitle"), mapValue(resultMap, "original"));
+      entry->setField(QStringLiteral("origtitle"), objValue(resultObj, "original"));
     }
     if(optionalFields().contains(QStringLiteral("alias"))) {
-      const QString aliases = mapValue(resultMap, "aliases");
+      const QString aliases = objValue(resultObj, "aliases");
       entry->setField(QStringLiteral("alias"), aliases.split(QStringLiteral("\n")).join(FieldFormat::delimiterString()));
     }
 
@@ -340,32 +339,32 @@ void VNDBFetcher::parseReleaseResults(Data::EntryPtr entry_) {
     message(jsonError.errorString(), MessageHandler::Error);
     return;
   }
-  QVariantMap topResultMap = doc.object().toVariantMap();
-  QVariantList resultList = topResultMap.value(QStringLiteral("items")).toList();
+  const auto topResult = doc.object();
+  const auto resultList = topResult.value(QLatin1StringView("items")).toArray();
   if(resultList.isEmpty()) {
     myLog() << "No results";
     return;
   }
 
   // only work on the first release item
-  const QVariantMap resultMap = resultList.at(0).toMap();
+  const auto result = resultList.at(0).toObject();
 
   QStringList pubs, devs;
-  QVariantList producerList = resultMap.value(QStringLiteral("producers")).toList();
-  foreach(const QVariant& producerObject, producerList) {
-    const QVariantMap producerMap = producerObject.toMap();
-    if(producerMap.value(QStringLiteral("publisher")) == true) {
-      pubs += mapValue(producerMap, "name");
+  const auto producerList = result[QLatin1StringView("producers")].toArray();
+  for(const auto& producer : producerList) {
+    const auto producerObj = producer.toObject();
+    if(producerObj[QLatin1StringView("publisher")].toBool()) {
+      pubs += objValue(producerObj, "name");
     }
-    if(producerMap.value(QStringLiteral("developer")) == true) {
-      devs += mapValue(producerMap, "name");
+    if(producerObj[QLatin1StringView("developer")].toBool()) {
+      devs += objValue(producerObj, "name");
     }
   }
   entry_->setField(QStringLiteral("publisher"), pubs.join(FieldFormat::delimiterString()));
   entry_->setField(QStringLiteral("developer"), devs.join(FieldFormat::delimiterString()));
 
   // update release year
-  entry_->setField(QStringLiteral("year"), mapValue(resultMap, "released").left(4));
+  entry_->setField(QStringLiteral("year"), objValue(result, "released").left(4));
 }
 
 void VNDBFetcher::slotState() {

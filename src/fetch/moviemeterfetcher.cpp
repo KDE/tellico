@@ -27,7 +27,7 @@
 #include "../images/imagefactory.h"
 #include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"
 
@@ -155,7 +155,7 @@ Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
 #endif
 
     QJsonDocument doc = QJsonDocument::fromJson(data);
-    populateEntry(entry, doc.object().toVariantMap(), true);
+    populateEntry(entry, doc.object(), true);
   }
 
   // image might still be URL
@@ -231,10 +231,10 @@ void MovieMeterFetcher::slotComplete(KJob* job_) {
   }
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  QJsonArray array = doc.array();
+  const QJsonArray array = doc.array();
   for(int i = 0; i < array.count(); i++) {
     Data::EntryPtr entry(new Data::Entry(coll));
-    populateEntry(entry, array.at(i).toObject().toVariantMap(), false);
+    populateEntry(entry, array.at(i).toObject(), false);
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
@@ -244,46 +244,47 @@ void MovieMeterFetcher::slotComplete(KJob* job_) {
   stop();
 }
 
-void MovieMeterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
-  entry_->setField(QStringLiteral("moviemeter-id"), mapValue(resultMap_, "id"));
-  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "title"));
-  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "year"));
+void MovieMeterFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_, bool fullData_) {
+  entry_->setField(QStringLiteral("moviemeter-id"), objValue(obj_, "id"));
+  entry_->setField(QStringLiteral("title"), objValue(obj_, "title"));
+  entry_->setField(QStringLiteral("year"), objValue(obj_, "year"));
 
   // if we only need cursory data, then we're done
   if(!fullData_) {
     return;
   }
 
-  entry_->setField(QStringLiteral("genre"),  mapValue(resultMap_, "genres"));
-  entry_->setField(QStringLiteral("plot"),  mapValue(resultMap_, "plot"));
-  entry_->setField(QStringLiteral("running-time"),  mapValue(resultMap_, "duration"));
-  entry_->setField(QStringLiteral("director"),  mapValue(resultMap_, "directors"));
-  entry_->setField(QStringLiteral("nationality"),  mapValue(resultMap_, "countries"));
+  entry_->setField(QStringLiteral("genre"),  objValue(obj_, "genres"));
+  entry_->setField(QStringLiteral("plot"),  objValue(obj_, "plot"));
+  entry_->setField(QStringLiteral("running-time"),  objValue(obj_, "duration"));
+  entry_->setField(QStringLiteral("director"),  objValue(obj_, "directors"));
+  entry_->setField(QStringLiteral("nationality"),  objValue(obj_, "countries"));
 
   QStringList castList;
-  foreach(const QVariant& actor, resultMap_.value(QLatin1String("actors")).toList()) {
-    castList << mapValue(actor.toMap(), "name");
+  const auto actorList = obj_[QLatin1StringView("actors")].toArray();
+  for(const auto& actor : actorList) {
+    castList << objValue(actor.toObject(), "name");
   }
   entry_->setField(QStringLiteral("cast"), castList.join(FieldFormat::rowDelimiterString()));
 
   if(entry_->collection()->hasField(QStringLiteral("moviemeter"))) {
-    entry_->setField(QStringLiteral("moviemeter"), mapValue(resultMap_, "url"));
+    entry_->setField(QStringLiteral("moviemeter"), objValue(obj_, "url"));
   }
 
   if(entry_->collection()->hasField(QStringLiteral("alttitle"))) {
-    entry_->setField(QStringLiteral("alttitle"), mapValue(resultMap_, "alternative_title"));
+    entry_->setField(QStringLiteral("alttitle"), objValue(obj_, "alternative_title"));
   }
 
   const QString coverField(QStringLiteral("cover"));
   switch(m_imageSize) {
     case SmallImage:
-      entry_->setField(coverField, mapValue(resultMap_.value(QStringLiteral("posters")).toMap(), "small"));
+      entry_->setField(coverField, objValue(obj_, "posters", "small"));
       break;
     case MediumImage:
-      entry_->setField(coverField, mapValue(resultMap_.value(QStringLiteral("posters")).toMap(), "regular"));
+      entry_->setField(coverField, objValue(obj_, "posters", "regular"));
       break;
     case LargeImage:
-      entry_->setField(coverField, mapValue(resultMap_.value(QStringLiteral("posters")).toMap(), "large"));
+      entry_->setField(coverField, objValue(obj_, "posters", "large"));
       break;
     case NoImage:
       break;

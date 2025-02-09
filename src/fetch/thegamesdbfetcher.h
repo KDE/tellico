@@ -104,9 +104,9 @@ private Q_SLOTS:
 private:
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
-  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
-  void readPlatformList(const QVariantMap& platformMap);
-  void readCoverList(const QVariantMap& platformMap);
+  void populateEntry(Data::EntryPtr entry, const QJsonObject& obj);
+  void readPlatformList(const QJsonObject& obj);
+  void readCoverList(const QJsonObject& obj);
 
   // right now, Tgdb has three data types for which the whole list must be read at once
   // caching the platforms in addition, helps the UpdateRequest

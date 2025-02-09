@@ -27,7 +27,7 @@
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 
@@ -274,7 +274,7 @@ void TheTVDBFetcher::slotComplete(KJob* job_) {
   int count = 0;
   for(const QJsonValue& result : results) {
     Data::EntryPtr entry(new Data::Entry(coll));
-    populateEntry(entry, result.toObject().toVariantMap(), false);
+    populateEntry(entry, result.toObject(), false);
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
@@ -322,13 +322,13 @@ Tellico::Data::EntryPtr TheTVDBFetcher::fetchEntryHook(uint uid_) {
     f.close();
 #endif
     QJsonDocument doc = QJsonDocument::fromJson(data);
-    const QJsonObject dataObject = doc.object().value(QLatin1String("data")).toObject();
-    populateEntry(entry, dataObject.toVariantMap(), true);
-    populatePeople(entry, dataObject.value(QLatin1String("characters")).toArray());
+    const auto dataObject = doc.object().value(QLatin1StringView("data")).toObject();
+    populateEntry(entry, dataObject, true);
+    populatePeople(entry, dataObject[QLatin1StringView("characters")].toArray());
 
     // now episode info
     if(optionalFields().contains(QStringLiteral("episode"))) {
-      populateEpisodes(entry, dataObject.value(QLatin1String("episodes")).toArray());
+      populateEpisodes(entry, dataObject[QLatin1StringView("episodes")].toArray());
     }
   }
 
@@ -349,25 +349,25 @@ Tellico::Data::EntryPtr TheTVDBFetcher::fetchEntryHook(uint uid_) {
   return entry;
 }
 
-void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
-  entry_->setField(QStringLiteral("thetvdb-id"), mapValue(resultMap_, "tvdb_id"));
-  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "name"));
+void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_, bool fullData_) {
+  entry_->setField(QStringLiteral("thetvdb-id"), objValue(obj_, "tvdb_id"));
+  entry_->setField(QStringLiteral("title"), objValue(obj_, "name"));
   const QString yearString = QStringLiteral("year");
   if(entry_->field(yearString).isEmpty()) {
-    QString year = mapValue(resultMap_, "year");
+    QString year = objValue(obj_, "year");
     if(year.isEmpty()) {
-      year = mapValue(resultMap_, "firstAired");
+      year = objValue(obj_, "firstAired");
     }
     entry_->setField(yearString, year.left(4));
   }
 
   const QString network(QStringLiteral("network"));
   if(entry_->collection()->hasField(network) && entry_->field(network).isEmpty()) {
-    entry_->setField(network, mapValue(resultMap_, "network"));
+    entry_->setField(network, objValue(obj_, "network"));
   }
   const QString plot(QStringLiteral("plot"));
   if(entry_->field(plot).isEmpty()) {
-    entry_->setField(plot, mapValue(resultMap_, "overview"));
+    entry_->setField(plot, objValue(obj_, "overview"));
   }
 
   // if we only need cursory data, then we're done
@@ -377,28 +377,23 @@ void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
 
   const QString thetvdb(QStringLiteral("thetvdb"));
   if(entry_->collection()->hasField(thetvdb)) {
-    entry_->setField(thetvdb, QLatin1String("https://thetvdb.com/series/") + mapValue(resultMap_, "slug"));
+    entry_->setField(thetvdb, QLatin1String("https://thetvdb.com/series/") + objValue(obj_, "slug"));
   }
 
   const QString imdb(QStringLiteral("imdb"));
   if(entry_->collection()->hasField(imdb)) {
-    auto remoteList = resultMap_.value(QLatin1String("remoteIds")).toList();
-    foreach(const auto& remoteId, remoteList) {
-      const QVariantMap remoteMap = remoteId.toMap();
-      if(remoteMap.value(QLatin1String("sourceName")) == QLatin1String("IMDB")) {
-        entry_->setField(imdb, QLatin1String("https://www.imdb.com/title/") + mapValue(remoteMap, "id"));
+    const auto remoteList = obj_[QLatin1StringView("remoteIds")].toArray();
+    for(const auto& remoteId : remoteList) {
+      if(remoteId[QLatin1StringView("sourceName")] == QLatin1String("IMDB")) {
+        entry_->setField(imdb, QLatin1String("https://www.imdb.com/title/") + objValue(remoteId.toObject(), "id"));
       }
     }
   }
 
-  QStringList genres;
-  foreach(const QVariant& genre, resultMap_.value(QLatin1String("genres")).toList()) {
-    genres << mapValue(genre.toMap(), "name");
-  }
-  entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
+  entry_->setField(QStringLiteral("genre"), objValue(obj_, "genres", "name"));
 
   const QString cert = QStringLiteral("certification");
-  const QString rating = mapValue(resultMap_, "rating");
+  const QString rating = objValue(obj_, "rating");
   QStringList allowed = entry_->collection()->fieldByName(cert)->allowed();
   if(!rating.isEmpty() && !allowed.contains(rating)) {
     allowed << rating;
@@ -406,12 +401,12 @@ void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
     entry_->setField(cert, rating);
   }
 
-  QString cover = mapValue(resultMap_, "image");
-  if(cover.isEmpty()) cover = mapValue(resultMap_, "poster");
+  QString cover = objValue(obj_, "image");
+  if(cover.isEmpty()) cover = objValue(obj_, "poster");
   if(!cover.startsWith(QLatin1String("http"))) cover.prepend(QLatin1String(THETVDB_ART_PREFIX));
   if(!cover.isEmpty()) entry_->setField(QStringLiteral("cover"), cover);
 
-  QString lang = mapValue(resultMap_, "originalLanguage");
+  QString lang = objValue(obj_, "originalLanguage");
   const QString langName = KLanguageName::nameForCode(lang);
   if(!langName.isEmpty()) lang = langName;
   if(lang == QLatin1String("US English") ||
@@ -425,14 +420,14 @@ void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
 void TheTVDBFetcher::populatePeople(Data::EntryPtr entry_, const QJsonArray& peopleArray_) {
   QStringList actors, directors, writers;
   for(const QJsonValue& person : peopleArray_) {
-    const QVariantMap personMap = person.toObject().toVariantMap();
-    const QString personType = mapValue(personMap, "peopleType");
+    const auto personObj = person.toObject();
+    const QString personType = objValue(personObj, "peopleType");
     if(personType == QLatin1String("Actor")) {
-      actors << mapValue(personMap, "personName") + FieldFormat::columnDelimiterString() + mapValue(personMap, "name");
+      actors << objValue(personObj, "personName") + FieldFormat::columnDelimiterString() + objValue(personObj, "name");
     } else if(personType == QLatin1String("Director")) {
-      directors << mapValue(personMap, "personName");
+      directors << objValue(personObj, "personName");
     } else if(personType == QLatin1String("Writer")) {
-      writers << mapValue(personMap, "personName");
+      writers << objValue(personObj, "personName");
     }
   }
   directors.removeDuplicates();
@@ -444,15 +439,15 @@ void TheTVDBFetcher::populatePeople(Data::EntryPtr entry_, const QJsonArray& peo
 
 void TheTVDBFetcher::populateEpisodes(Data::EntryPtr entry_, const QJsonArray& episodeArray_) {
   QStringList episodes;
-  for(const QJsonValue& episode : episodeArray_) {
-    const QVariantMap map = episode.toObject().toVariantMap();
-    QString seasonString = mapValue(map, "seasonNumber");
+  for(const auto& episode : episodeArray_) {
+    const auto epObj = episode.toObject();
+    QString seasonString = objValue(epObj, "seasonNumber");
     // skip season 0, they're extras or specials
     if(seasonString == QLatin1String("0")) continue;
     if(seasonString.isEmpty()) seasonString = QLatin1String("1");
-    episodes << mapValue(map, "name") + FieldFormat::columnDelimiterString() +
-                seasonString + FieldFormat::columnDelimiterString() +
-                mapValue(map, "number");
+    episodes << objValue(epObj, "name") + FieldFormat::columnDelimiterString() +
+                           seasonString + FieldFormat::columnDelimiterString() +
+                objValue(epObj, "number");
   }
   entry_->setField(QStringLiteral("episode"), episodes.join(FieldFormat::rowDelimiterString()));
 }

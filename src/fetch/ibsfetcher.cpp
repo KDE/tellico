@@ -31,7 +31,7 @@
 #include "../images/imagefactory.h"
 #include "../utils/isbnvalidator.h"
 #include "../utils/string_utils.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -263,9 +263,9 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   f.close();
 #endif
   QJsonDocument doc = QJsonDocument::fromJson(jsonMatch.captured(1).toUtf8());
-  QVariantMap objectMap = doc.object().toVariantMap();
-  QVariantMap resultMap = objectMap.value(QStringLiteral("mainEntity")).toMap();
-  if(resultMap.isEmpty()) {
+  const auto docObj = doc.object();
+  const auto mainObj = docObj[QLatin1StringView("mainEntity")].toObject();
+  if(mainObj.isEmpty()) {
     myDebug() << "no JSON object";
     return Data::EntryPtr();
   }
@@ -274,15 +274,15 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   Data::EntryPtr entry(new Data::Entry(coll));
 
   // as genre, take the last breadcrumb
-  QString genre = mapValue(objectMap, "breadcrumb");
+  QString genre = objValue(docObj, "breadcrumb");
   genre = genre.section(QStringLiteral(">"), -1);
   entry->setField(QStringLiteral("genre"), genre);
 
   // the title in the embedded loses it's identifier? "La..."
-  entry->setField(QStringLiteral("title"), mapValue(resultMap, "name"));
-  entry->setField(QStringLiteral("author"), mapValue(resultMap, "author"));
+  entry->setField(QStringLiteral("title"), objValue(mainObj, "name"));
+  entry->setField(QStringLiteral("author"), objValue(mainObj, "author"));
 
-  const QString bookFormat = mapValue(resultMap, "bookFormat");
+  const QString bookFormat = objValue(mainObj, "bookFormat");
   if(bookFormat == QLatin1String("https://schema.org/Paperback")) {
     entry->setField(QStringLiteral("binding"), i18n("Paperback"));
   } else if(bookFormat == QLatin1String("https://schema.org/Hardcover")) {
@@ -291,10 +291,10 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
     entry->setField(QStringLiteral("binding"), i18n("E-Book"));
   }
 
-  entry->setField(QStringLiteral("pub_year"), mapValue(resultMap, "datePublished"));
-  entry->setField(QStringLiteral("isbn"), mapValue(resultMap, "isbn"));
+  entry->setField(QStringLiteral("pub_year"), objValue(mainObj, "datePublished"));
+  entry->setField(QStringLiteral("isbn"), objValue(mainObj, "isbn"));
 
-  const QString id = ImageFactory::addImage(QUrl::fromUserInput(mapValue(resultMap, "image")),
+  const QString id = ImageFactory::addImage(QUrl::fromUserInput(objValue(mainObj, "image")),
                                             true /* quiet */);
   if(id.isEmpty()) {
     message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
@@ -303,12 +303,12 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   entry->setField(QStringLiteral("cover"), id);
 
   // inLanguage is upper-case language code
-  const QString lang = mapValue(resultMap, "inLanguage");
+  const QString lang = objValue(mainObj, "inLanguage");
   entry->setField(QStringLiteral("language"), QLocale(lang.toLower()).nativeLanguageName());
 
-  entry->setField(QStringLiteral("plot"), mapValue(resultMap, "description"));
-  entry->setField(QStringLiteral("pages"), mapValue(resultMap, "numberOfPages"));
-  entry->setField(QStringLiteral("publisher"), mapValue(resultMap, "publisher"));
+  entry->setField(QStringLiteral("plot"), objValue(mainObj, "description"));
+  entry->setField(QStringLiteral("pages"), objValue(mainObj, "numberOfPages"));
+  entry->setField(QStringLiteral("publisher"), objValue(mainObj, "publisher"));
 
   // multiple authors do not show up in the embedded JSON
   static const QRegularExpression titleDivRx(QLatin1String("<div id=\"title\">(.*?)</div>"),

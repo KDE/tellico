@@ -11,6 +11,7 @@ set(utils_STAT_SRCS
     isbnvalidator.cpp
     lccnvalidator.cpp
     mergeconflictresolver.cpp
+    objvalue.cpp
     string_utils.cpp
     tellico_utils.cpp
     upcvalidator.cpp

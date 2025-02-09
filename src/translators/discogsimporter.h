@@ -57,7 +57,7 @@ public Q_SLOTS:
 
 private:
   void loadPage(int page);
-  void populateEntry(Data::EntryPtr entry, const QVariantMap& releaseMap);
+  void populateEntry(Data::EntryPtr entry, const QJsonObject& releaseObj);
 
   Data::CollPtr m_coll;
   QWidget* m_widget;

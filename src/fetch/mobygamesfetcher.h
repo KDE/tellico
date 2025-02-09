@@ -105,7 +105,7 @@ private Q_SLOTS:
 private:
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
-  Data::EntryList createEntries(Data::CollPtr coll, const QVariantMap& resultMap);
+  Data::EntryList createEntries(Data::CollPtr coll, const QJsonObject& obj);
 
   // honor throttle limit for the API
   void markTime();

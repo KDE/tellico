@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2025 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,29 +22,47 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ENTITYTEST_H
-#define ENTITYTEST_H
+#ifndef OBJVALUE_H
+#define OBJVALUE_H
 
-#include <QObject>
+#include "../fieldformat.h"
+#include "../tellico_debug.h"
 
-class EntityTest : public QObject {
-Q_OBJECT
+#include <QJsonValue>
+#include <QJsonArray>
+#include <QJsonObject>
 
-private Q_SLOTS:
-  void initTestCase();
-  void testEntities();
-  void testEntities_data();
-  void testAccents();
-  void testAccents_data();
-  void testI18nReplace();
-  void testI18nReplace_data();
-  void testMinutes();
-  void testMinutes_data();
-  void testObfuscate();
-  void testControlCodes();
-  void testControlCodes_data();
-  void testBug254863();
-  void testObjValue();
-};
+namespace Tellico {
+  QString objValue(const QJsonValue& v);
+
+  template<typename T>
+  QString objValue(const QJsonObject& obj, T name) {
+    const auto v = obj.value(QLatin1StringView(name));
+    if(v.isObject()) {
+      myDebug() << "objValue for object" << name << "is undefined";
+    }
+    return objValue(v);
+  }
+  template<typename T, typename... Args>
+  QString objValue(const QJsonObject& obj, T name, Args... args) {
+    const auto v = obj.value(QLatin1StringView(name));
+    if(v.isObject()) {
+      return objValue(v.toObject(), args...);
+    } else if(v.isArray()) {
+      const auto arr = v.toArray();
+      QStringList l;
+      l.reserve(arr.size());
+      for(const auto& v2 : arr) {
+        QString s;
+        if(v2.isObject()) s = objValue(v2.toObject(), args...);
+        else s = objValue(v2);
+        if(!s.isEmpty()) l += s;
+      }
+      return l.join(FieldFormat::delimiterString());
+    } else {
+      return objValue(v);
+    }
+  }
+}
 
 #endif

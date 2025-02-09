@@ -91,7 +91,7 @@ private Q_SLOTS:
 private:
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
-  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+  void populateEntry(Data::EntryPtr entry, const QJsonObject& obj);
   void parseTitle(Data::EntryPtr entry);
   bool parseTitleToken(Data::EntryPtr entry, const QString& token);
 

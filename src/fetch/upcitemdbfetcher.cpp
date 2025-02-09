@@ -26,7 +26,7 @@
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 
@@ -194,8 +194,8 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
   }
   const auto obj = doc.object();
   // check for error
-  if(obj.value(QStringLiteral("code")) == QLatin1String("TOO_FAST")) {
-    const QString msg = obj.value(QStringLiteral("message")).toString();
+  if(obj.value(QLatin1StringView("code")) == QLatin1String("TOO_FAST")) {
+    const auto msg = objValue(obj, "message");
     message(msg, MessageHandler::Error);
     myDebug() << "UPCItemDbFetcher -" << msg;
     stop();
@@ -214,7 +214,7 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
     coll->addField(field);
   }
 
-  const auto results = obj.value(QLatin1String("items")).toArray();
+  const auto results = obj.value(QLatin1StringView("items")).toArray();
   if(results.isEmpty()) {
     myLog() << "No results";
     stop();
@@ -226,7 +226,7 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
 //    myDebug() << "found result:" << result;
 
     Data::EntryPtr entry(new Data::Entry(coll));
-    populateEntry(entry, result.toObject().toVariantMap());
+    populateEntry(entry, result.toObject());
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
@@ -265,17 +265,17 @@ Tellico::Data::EntryPtr UPCItemDbFetcher::fetchEntryHook(uint uid_) {
   return entry;
 }
 
-void UPCItemDbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
-  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "title"));
+void UPCItemDbFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_) {
+  entry_->setField(QStringLiteral("title"), objValue(obj_, "title"));
   parseTitle(entry_);
-//  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "premiered").left(4));
+//  entry_->setField(QStringLiteral("year"), objValue(obj_, "premiered").left(4));
   const QString barcode = QStringLiteral("barcode");
   if(optionalFields().contains(barcode)) {
-    entry_->setField(barcode, mapValue(resultMap_, "upc"));
+    entry_->setField(barcode, objValue(obj_, "upc"));
   }
 
   // take the first cover
-  const auto imageList = resultMap_.value(QLatin1String("images")).toList();
+  const auto imageList = obj_[QLatin1StringView("images")].toArray();
   for(const auto& imageValue : imageList) {
     // skip booksamillion images
     const QString image = imageValue.toString();
@@ -287,19 +287,19 @@ void UPCItemDbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
 
   switch(collectionType()) {
     case Data::Collection::Video:
-      entry_->setField(QStringLiteral("studio"), mapValue(resultMap_, "brand"));
-      entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "description"));
+      entry_->setField(QStringLiteral("studio"), objValue(obj_, "brand"));
+      entry_->setField(QStringLiteral("plot"), objValue(obj_, "description"));
       break;
 
     case Data::Collection::Book:
-      entry_->setField(QStringLiteral("publisher"), mapValue(resultMap_, "publisher"));
-      entry_->setField(QStringLiteral("isbn"), mapValue(resultMap_, "isbn"));
+      entry_->setField(QStringLiteral("publisher"), objValue(obj_, "publisher"));
+      entry_->setField(QStringLiteral("isbn"), objValue(obj_, "isbn"));
       break;
 
     case Data::Collection::Album:
-      entry_->setField(QStringLiteral("label"), mapValue(resultMap_, "brand"));
+      entry_->setField(QStringLiteral("label"), objValue(obj_, "brand"));
       {
-        const QString cat = mapValue(resultMap_, "category");
+        const QString cat = objValue(obj_, "category");
         if(cat.contains(QStringLiteral("Music CDs"))) {
           entry_->setField(QStringLiteral("medium"), i18n("Compact Disc"));
         }
@@ -308,8 +308,8 @@ void UPCItemDbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
 
     case Data::Collection::Game:
     case Data::Collection::BoardGame:
-      entry_->setField(QStringLiteral("publisher"), mapValue(resultMap_, "brand"));
-      entry_->setField(QStringLiteral("description"), mapValue(resultMap_, "description"));
+      entry_->setField(QStringLiteral("publisher"), objValue(obj_, "brand"));
+      entry_->setField(QStringLiteral("description"), objValue(obj_, "description"));
       break;
 
     default:

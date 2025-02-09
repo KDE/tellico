@@ -31,7 +31,7 @@
 #include "../utils/guiproxy.h"
 #include "../utils/isbnvalidator.h"
 #include "../utils/string_utils.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -102,7 +102,7 @@ void ItunesFetcher::search() {
   m_isTV = false;
 
   QUrl u(QString::fromLatin1(ITUNES_API_URL));
-  u = u.adjusted(QUrl::StripTrailingSlash);
+//  u = u.adjusted(QUrl::StripTrailingSlash);
   QUrlQuery q;
   switch(request().key()) {
     case Keyword:
@@ -118,7 +118,7 @@ void ItunesFetcher::search() {
         q.addQueryItem(QStringLiteral("entity"), QLatin1String("movie,tvSeason"));
       }
       q.addQueryItem(QStringLiteral("limit"), QString::number(ITUNES_MAX_RETURNS_TOTAL));
-      q.addQueryItem(QStringLiteral("term"),  QString::fromLatin1(QUrl::toPercentEncoding(request().value())));
+      q.addQueryItem(QStringLiteral("term"), QString::fromLatin1(QUrl::toPercentEncoding(request().value())));
       break;
 
     case ISBN:
@@ -214,7 +214,8 @@ void ItunesFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  const auto results = doc.object().value(QLatin1String("results")).toArray();
+  const auto obj = doc.object();
+  const auto results = obj[QLatin1StringView("results")].toArray();
   if(results.isEmpty()) {
     myDebug() << "iTunesFetcher: no results";
     stop();
@@ -249,13 +250,13 @@ void ItunesFetcher::slotComplete(KJob* job_) {
   }
 
   QList<FetchResult*> fetchResults;
-  for(const QJsonValue& result : results) {
-    auto obj = result.toObject();
-    if(obj.value(QLatin1String("kind")) == QLatin1String("song")) {
-      readTrackInfo(obj.toVariantMap());
+  for(const auto& result : results) {
+    const auto obj = result.toObject();
+    if(obj.value(QLatin1StringView("kind")) == QLatin1String("song")) {
+      readTrackInfo(obj);
     } else {
       Data::EntryPtr entry(new Data::Entry(coll));
-      populateEntry(entry, obj.toVariantMap());
+      populateEntry(entry, obj);
 
       FetchResult* r = new FetchResult(this, entry);
       m_entries.insert(r->uid, entry);
@@ -300,11 +301,12 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
       f.close();
 #endif
       QJsonDocument doc = QJsonDocument::fromJson(job->data());
-      const auto results = doc.object().value(QLatin1String("results")).toArray();
-      for(const QJsonValue& result : results) {
-        auto obj = result.toObject();
-        if(obj.value(QLatin1String("wrapperType")) == QLatin1String("track")) {
-          readTrackInfo(obj.toVariantMap());
+      const auto topObj = doc.object();
+      const auto results = topObj[QLatin1StringView("results")].toArray();
+      for(const auto& result : results) {
+        const auto obj = result.toObject();
+        if(obj.value(QLatin1StringView("wrapperType")) == QLatin1String("track")) {
+          readTrackInfo(obj);
         }
       }
       auto discsInColl = m_trackList.value(collectionId.toInt());
@@ -375,20 +377,20 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
   return entry;
 }
 
-void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
-  entry_->setField(QStringLiteral("collectionId"), mapValue(resultMap_, "collectionId"));
+void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_) {
+  entry_->setField(QStringLiteral("collectionId"), objValue(obj_, "collectionId"));
   if(collectionType() == Data::Collection::Book) {
-    QString title = mapValue(resultMap_, "collectionName");
-    if(title.isEmpty()) title = mapValue(resultMap_, "trackName");
+    QString title = objValue(obj_, "collectionName");
+    if(title.isEmpty()) title = objValue(obj_, "trackName");
     entry_->setField(QStringLiteral("title"), title);
     // sometimes authors are separated by comma or ampersand
     static const QRegularExpression authorSplitRx(QStringLiteral("\\s*[,&]\\s+"));
-    const auto authorString = mapValue(resultMap_, "artistName");
+    const auto authorString = objValue(obj_, "artistName");
     const auto authors = authorString.split(authorSplitRx);
     entry_->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
-    entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "description"));
+    entry_->setField(QStringLiteral("plot"), objValue(obj_, "description"));
     static const QRegularExpression publisherRx(QStringLiteral("^© \\d{4} (.+)$"));
-    auto publisherMatch = publisherRx.match(mapValue(resultMap_, "copyright"));
+    auto publisherMatch = publisherRx.match(objValue(obj_, "copyright"));
     if(publisherMatch.hasMatch()) {
       QString pub = publisherMatch.captured(1);
       if(pub.startsWith(QLatin1String("by "))) {
@@ -397,34 +399,34 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
       entry_->setField(QStringLiteral("publisher"), pub);
     }
   } else if(collectionType() == Data::Collection::Album) {
-    entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "collectionName"));
-    entry_->setField(QStringLiteral("artist"), mapValue(resultMap_, "artistName"));
+    entry_->setField(QStringLiteral("title"), objValue(obj_, "collectionName"));
+    entry_->setField(QStringLiteral("artist"), objValue(obj_, "artistName"));
     static const QRegularExpression labelRx(QStringLiteral("^℗ \\d{4} ([^,]+)"));
-    auto labelMatch = labelRx.match(mapValue(resultMap_, "copyright"));
+    auto labelMatch = labelRx.match(objValue(obj_, "copyright"));
     if(labelMatch.hasMatch()) {
       entry_->setField(QStringLiteral("label"), labelMatch.captured(1));
     }
   } else if(collectionType() == Data::Collection::Video) {
-    if(mapValue(resultMap_, "collectionType") == QLatin1String("TV Season")) {
+    if(objValue(obj_, "collectionType") == QLatin1String("TV Season")) {
       m_isTV = true;
       // collection Name includes season
-      entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "collectionName"));
+      entry_->setField(QStringLiteral("title"), objValue(obj_, "collectionName"));
       // artistName is TV Show title
-      entry_->setField(QStringLiteral("keyword"), mapValue(resultMap_, "artistName"));
+      entry_->setField(QStringLiteral("keyword"), objValue(obj_, "artistName"));
     } else {
-      entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "trackName"));
-      entry_->setField(QStringLiteral("director"), mapValue(resultMap_, "artistName"));
+      entry_->setField(QStringLiteral("title"), objValue(obj_, "trackName"));
+      entry_->setField(QStringLiteral("director"), objValue(obj_, "artistName"));
     }
-    entry_->setField(QStringLiteral("nationality"), mapValue(resultMap_, "country"));
-    QString cert = mapValue(resultMap_, "contentAdvisoryRating");
+    entry_->setField(QStringLiteral("nationality"), objValue(obj_, "country"));
+    QString cert = objValue(obj_, "contentAdvisoryRating");
     if(cert == QStringLiteral("NR")) {
       cert = QLatin1Char('U');
     }
     if(!cert.isEmpty()) {
-      if(mapValue(resultMap_, "country") == QLatin1String("US")) {
+      if(objValue(obj_, "country") == QLatin1String("US")) {
         cert += QStringLiteral(" (USA)");
       } else {
-        cert += QLatin1String(" (") + mapValue(resultMap_, "country") + QLatin1Char(')');
+        cert += QLatin1String(" (") + objValue(obj_, "country") + QLatin1Char(')');
       }
       QStringList certsAllowed = entry_->collection()->fieldByName(QStringLiteral("certification"))->allowed();
       if(!certsAllowed.contains(cert)) {
@@ -434,18 +436,18 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
       }
       entry_->setField(QStringLiteral("certification"), cert);
     }
-    entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "longDescription"));
+    entry_->setField(QStringLiteral("plot"), objValue(obj_, "longDescription"));
   }
   if(collectionType() == Data::Collection::Book) {
     entry_->setField(QStringLiteral("binding"), i18n("E-Book"));
-    entry_->setField(QStringLiteral("pub_year"), mapValue(resultMap_, "releaseDate").left(4));
+    entry_->setField(QStringLiteral("pub_year"), objValue(obj_, "releaseDate").left(4));
   } else {
-    entry_->setField(QStringLiteral("year"), mapValue(resultMap_, "releaseDate").left(4));
+    entry_->setField(QStringLiteral("year"), objValue(obj_, "releaseDate").left(4));
   }
 
   QStringList genres;
-  genres += mapValue(resultMap_, "primaryGenreName");
-  const auto genreList = resultMap_.value(QLatin1String("genres")).toList();
+  genres += objValue(obj_, "primaryGenreName");
+  const auto genreList = obj_[QLatin1StringView("genres")].toArray();
   for(const auto& genre : genreList) {
     genres += genre.toString();
   }
@@ -455,14 +457,14 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
   entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
 
   if(m_imageSize != NoImage) {
-    entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "artworkUrl100"));
+    entry_->setField(QStringLiteral("cover"), objValue(obj_, "artworkUrl100"));
   }
 
   if(optionalFields().contains(QStringLiteral("itunes"))) {
-    entry_->setField(QStringLiteral("itunes"), mapValue(resultMap_, "collectionViewUrl"));
+    entry_->setField(QStringLiteral("itunes"), objValue(obj_, "collectionViewUrl"));
   }
 
-  m_collectionHash.insert(resultMap_.value(QLatin1String("collectionId")).toInt(), entry_);
+  m_collectionHash.insert(obj_[QLatin1StringView("collectionId")].toInt(), entry_);
 }
 
 void ItunesFetcher::populateEpisodes(Data::EntryPtr entry_) {
@@ -494,35 +496,36 @@ void ItunesFetcher::populateEpisodes(Data::EntryPtr entry_) {
   static const QRegularExpression seasonRx(QStringLiteral("Season (\\d+)"));
   QMap<int, QString> episodeMap; // mapping episode number to episode string
   QJsonDocument doc = QJsonDocument::fromJson(job->data());
-  const auto results = doc.object().value(QLatin1String("results")).toArray();
-  for(const QJsonValue& result : results) {
-    auto map = result.toObject().toVariantMap();
-    if(mapValue(map, "kind") != QStringLiteral("tv-episode")) continue;
+  const auto obj = doc.object();
+  const auto results = obj[QLatin1StringView("results")].toArray();
+  for(const auto& result : results) {
+    const auto obj = result.toObject();
+    if(objValue(obj, "kind") != QLatin1String("tv-episode")) continue;
     int seasonNumber = 1;
     // the season number is in the collection title
-    auto match = seasonRx.match(mapValue(map, "collectionName"));
+    auto match = seasonRx.match(objValue(obj, "collectionName"));
     if(match.hasMatch()) {
       seasonNumber = match.captured(1).toInt();
     }
-    QString ep = mapValue(map, "trackName") + FieldFormat::columnDelimiterString() +
+    QString ep = objValue(obj, "trackName") + FieldFormat::columnDelimiterString() +
                  QString::number(seasonNumber) + FieldFormat::columnDelimiterString() +
-                 mapValue(map, "trackNumber");
-    episodeMap.insert(seasonNumber*1000 + mapValue(map, "trackNumber").toInt(), ep);
+                 objValue(obj, "trackNumber");
+    episodeMap.insert(seasonNumber*1000 + obj[QLatin1StringView("trackNumber")].toInt(), ep);
   }
   // the QMap sorts the values in ascending order by key
   const auto episodes = episodeMap.values();
   entry_->setField(QStringLiteral("episode"), episodes.join(FieldFormat::rowDelimiterString()));
 }
 
-void ItunesFetcher::readTrackInfo(const QVariantMap& resultMap_) {
+void ItunesFetcher::readTrackInfo(const QJsonObject& obj_) {
   QStringList trackInfo;
-  trackInfo << mapValue(resultMap_, "trackName")
-            << mapValue(resultMap_, "artistName")
-            << Tellico::minutes(mapValue(resultMap_, "trackTimeMillis").toInt() / 1000);
+  trackInfo << objValue(obj_, "trackName")
+            << objValue(obj_, "artistName")
+            << Tellico::minutes(obj_[QLatin1StringView("trackTimeMillis")].toInt() / 1000);
 
-  const int collectionId = mapValue(resultMap_, "collectionId").toInt();
-  const int discNum = mapValue(resultMap_, "discNumber").toInt();
-  const int trackNum = mapValue(resultMap_, "trackNumber").toInt();
+  const int collectionId = obj_[QLatin1StringView("collectionId")].toInt();
+  const int discNum = obj_[QLatin1StringView("discNumber")].toInt();
+  const int trackNum = obj_[QLatin1StringView("trackNumber")].toInt();
   if(trackNum < 1) return;
 
   auto discsInColl = m_trackList.value(collectionId);

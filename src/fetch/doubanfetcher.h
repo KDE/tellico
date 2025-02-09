@@ -95,10 +95,10 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   virtual void resetSearch() {}
   void doSearch(const QString& term);
-  Data::EntryPtr createEntry(const QVariantMap& resultMap);
-  void populateBookEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
-  void populateVideoEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
-  void populateMusicEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+  Data::EntryPtr createEntry(const QJsonObject& obj);
+  void populateBookEntry(Data::EntryPtr entry, const QJsonObject& obj);
+  void populateVideoEntry(Data::EntryPtr entry, const QJsonObject& obj);
+  void populateMusicEntry(Data::EntryPtr entry, const QJsonObject& obj);
   void endJob(KIO::StoredTransferJob* job);
 
   bool m_started;

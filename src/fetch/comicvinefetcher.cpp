@@ -25,7 +25,7 @@
 #include "comicvinefetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../utils/string_utils.h"
 #include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
@@ -176,8 +176,7 @@ Tellico::Data::EntryPtr ComicVineFetcher::fetchEntryHookData(Data::EntryPtr entr
     f2.close();
 #endif
     QJsonDocument doc = QJsonDocument::fromJson(data);
-    QVariantMap map = doc.object().toVariantMap().value(QLatin1String("results")).toMap();
-    const QString pub = mapValue(map, "publisher", "name");
+    const QString pub = objValue(doc.object(), "results", "publisher", "name");
     if(!pub.isEmpty()) {
       Data::EntryPtr e = coll->entries().front();
       if(e) {

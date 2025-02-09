@@ -90,7 +90,7 @@ private:
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
 
-  void populateEntry(Data::EntryPtr entry, const QVariantMap& result);
+  void populateEntry(Data::EntryPtr entry, const QJsonObject& obj);
 
   QPointer<KIO::StoredTransferJob> m_job;
   QHash<uint, Data::EntryPtr> m_entries;

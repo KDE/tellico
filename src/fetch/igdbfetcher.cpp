@@ -26,7 +26,7 @@
 #include "../collections/gamecollection.h"
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../utils/tellico_utils.h"
 #include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
@@ -214,8 +214,8 @@ void IGDBFetcher::slotComplete(KJob* job_) {
   QJsonDocument doc = QJsonDocument::fromJson(data);
   if(doc.isObject()) {
     // probably an error message
-    QJsonObject obj = doc.object();
-    const QString msg = obj.value(QLatin1String("message")).toString();
+    const auto obj = doc.object();
+    const QString msg = obj.value(QLatin1StringView("message")).toString();
     myDebug() << "IGDBFetcher -" << msg;
     message(msg, MessageHandler::Error);
     stop();
@@ -223,15 +223,15 @@ void IGDBFetcher::slotComplete(KJob* job_) {
   }
 
   Data::CollPtr coll(new Data::GameCollection(true));
-
-  foreach(const QVariant& result, doc.array().toVariantList()) {
-    QVariantMap resultMap = result.toMap();
+  const auto resultList = doc.array();
+  for(const auto& result : resultList) {
+    const auto resObj = result.toObject();
     Data::EntryPtr baseEntry(new Data::Entry(coll));
-    populateEntry(baseEntry, resultMap);
+    populateEntry(baseEntry, resObj);
 
     // for multiple platforms, return a result for each one
-    QVariantList platforms = resultMap.value(QStringLiteral("platforms")).toList();
-    foreach(const QVariant pVariant, platforms) {
+    const auto platforms = resObj.value(QLatin1StringView("platforms")).toArray();
+    for(const auto& pVariant : platforms) {
       Data::EntryPtr entry(new Data::Entry(*baseEntry));
       const int pId = pVariant.toInt();
       if(!m_platformHash.contains(pId)) {
@@ -260,11 +260,11 @@ void IGDBFetcher::slotComplete(KJob* job_) {
   stop();
 }
 
-void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
-  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "name"));
-  entry_->setField(QStringLiteral("description"), mapValue(resultMap_, "summary"));
+void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_) {
+  entry_->setField(QStringLiteral("title"), objValue(obj_, "name"));
+  entry_->setField(QStringLiteral("description"), objValue(obj_, "summary"));
 
-  QString cover = mapValue(resultMap_, "cover", "url");
+  QString cover = objValue(obj_, "cover", "url");
   if(cover.startsWith(QLatin1Char('/'))) {
     cover.prepend(QStringLiteral("https:"));
   }
@@ -275,9 +275,9 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
     if(!entry_->collection()->hasField(screenshotString)) {
       entry_->collection()->addField(Data::Field::createDefaultField(Data::Field::ScreenshotField));
     }
-    auto screenshotList = resultMap_.value(QStringLiteral("screenshots")).toList();
+    const auto screenshotList = obj_.value(QLatin1StringView("screenshots")).toArray();
     if(!screenshotList.isEmpty()) {
-      QString screenshot = mapValue(screenshotList.at(0).toMap(), "url");
+      QString screenshot = objValue(screenshotList.at(0).toObject(), "url");
       if(screenshot.startsWith(QLatin1Char('/'))) {
         screenshot.prepend(QStringLiteral("https:"));
       }
@@ -285,9 +285,9 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
     }
   }
 
-  QVariantList genreIDs = resultMap_.value(QStringLiteral("genres")).toList();
+  const auto genreIDs = obj_.value(QLatin1StringView("genres")).toArray();
   QStringList genres;
-  foreach(const QVariant& id, genreIDs) {
+  for(const auto& id : genreIDs) {
     const int genreId = id.toInt();
     if(!m_genreHash.contains(genreId)) {
       readDataList(Genre);
@@ -299,21 +299,19 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   }
   entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
 
-  qlonglong release_t = mapValue(resultMap_, "first_release_date").toLongLong();
+  const auto release_t = obj_.value(QLatin1StringView("first_release_date")).toInteger();
   if(release_t > 0) {
-    // could use QDateTime::fromSecsSinceEpoch but that was introduced in Qt 5.8
-    // while I still support Qt 5.6, in theory...
-    QDateTime dt = QDateTime::fromMSecsSinceEpoch(release_t * 1000);
+    QDateTime dt = QDateTime::fromSecsSinceEpoch(release_t);
     entry_->setField(QStringLiteral("year"), QString::number(dt.date().year()));
   }
 
   const QString pegiString = QStringLiteral("pegi");
-  const QVariantList ageRatingList = resultMap_.value(QStringLiteral("age_ratings")).toList();
-  foreach(const QVariant& ageRating, ageRatingList) {
-    const QVariantMap ratingMap = ageRating.toMap();
+  const auto ageRatingList = obj_.value(QLatin1StringView("age_ratings")).toArray();
+  for(const auto& ageRating : ageRatingList) {
+    const auto ratingMap = ageRating.toObject();
     // per Age Rating Enums, ESRB==1, PEGI==2
-    const int category = ratingMap.value(QStringLiteral("category")).toInt();
-    const int rating = ratingMap.value(QStringLiteral("rating")).toInt();
+    const int category = ratingMap.value(QLatin1StringView("category")).toInt();
+    const int rating = ratingMap.value(QLatin1StringView("rating")).toInt();
     if(category == 1) {
       if(m_esrbHash.contains(rating)) {
         entry_->setField(QStringLiteral("certification"), m_esrbHash.value(rating));
@@ -328,12 +326,10 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
     }
   }
 
-  const QVariantList companyList = resultMap_.value(QStringLiteral("involved_companies")).toList();
-
+  const auto companyList = obj_.value(QLatin1StringView("involved_companies")).toArray();
   QList<int>companyIdList;
-  foreach(const QVariant& company, companyList) {
-    const QVariantMap companyMap = company.toMap();
-    const int companyId = companyMap.value(QStringLiteral("company")).toInt();
+  for(const auto& company : companyList) {
+    const int companyId = company[QLatin1StringView("company")].toInt();
     if(!m_companyHash.contains(companyId)) {
       companyIdList += companyId;
     }
@@ -343,16 +339,15 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   }
 
   QStringList pubs, devs;
-  foreach(const QVariant& company, companyList) {
-    const QVariantMap companyMap = company.toMap();
-    const int companyId = companyMap.value(QStringLiteral("company")).toInt();
+  for(const auto& company : companyList) {
+    const int companyId = company[QLatin1StringView("company")].toInt();
     const QString companyName = m_companyHash.value(companyId);
     if(companyName.isEmpty()) {
       continue;
     }
-    if(companyMap.value(QStringLiteral("publisher")).toBool()) {
+    if(company[QLatin1StringView("publisher")].toBool()) {
       pubs += companyName;
-    } else if(companyMap.value(QStringLiteral("developer")).toBool()) {
+    } else if(company[QLatin1StringView("developer")].toBool()) {
       devs += companyName;
     }
   }
@@ -366,7 +361,7 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
       field->setCategory(i18n("General"));
       entry_->collection()->addField(field);
     }
-    entry_->setField(igdbString, mapValue(resultMap_, "url"));
+    entry_->setField(igdbString, objValue(obj_, "url"));
   }
 }
 

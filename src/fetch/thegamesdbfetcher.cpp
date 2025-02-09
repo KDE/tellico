@@ -29,7 +29,7 @@
 #include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
@@ -189,8 +189,8 @@ Tellico::Data::EntryPtr TheGamesDBFetcher::fetchEntryHook(uint uid_) {
     u.setQuery(q);
 
     QByteArray data = FileHandler::readDataFile(u, true);
-    QVariantMap topLevelMap = QJsonDocument::fromJson(data).object().toVariantMap();
-    readCoverList(topLevelMap.value(QStringLiteral("data")).toMap());
+    const auto topObj = QJsonDocument::fromJson(data).object();
+    readCoverList(topObj.value(QLatin1StringView("data")).toObject());
 
     const QString screenshot_key = QLatin1Char('s') + entry->field(tgdb);
     if(m_covers.contains(screenshot_key)) {
@@ -272,17 +272,17 @@ void TheGamesDBFetcher::slotComplete(KJob* job_) {
     coll->addField(field);
   }
 
-  QVariantMap topLevelMap = QJsonDocument::fromJson(data).object().toVariantMap();
-  if(!topLevelMap.contains(QStringLiteral("data"))) {
+  const auto topObj = QJsonDocument::fromJson(data).object();
+  if(!topObj.contains(QLatin1StringView("data"))) {
     myDebug() << "No data in result!";
   }
-  readPlatformList(topLevelMap.value(QStringLiteral("include")).toMap()
-                              .value(QStringLiteral("platform")).toMap());
-  readCoverList(topLevelMap.value(QStringLiteral("include")).toMap()
-                           .value(QStringLiteral("boxart")).toMap());
+  readPlatformList(topObj[QLatin1StringView("include")]
+                         [QLatin1StringView("platform")].toObject());
+  readCoverList(topObj[QLatin1StringView("include")]
+                      [QLatin1StringView("boxart")].toObject());
 
-  QVariantList resultList = topLevelMap.value(QStringLiteral("data")).toMap()
-                                       .value(QStringLiteral("games")).toList();
+  const auto resultList = topObj[QLatin1StringView("data")]
+                                [QLatin1StringView("games")].toArray();
   if(resultList.isEmpty()) {
     myDebug() << "no results";
     stop();
@@ -290,9 +290,9 @@ void TheGamesDBFetcher::slotComplete(KJob* job_) {
   }
 
   int count = 0;
-  foreach(const QVariant& result, resultList) {
+  for(const auto& result : resultList) {
     Data::EntryPtr entry(new Data::Entry(coll));
-    populateEntry(entry, result.toMap());
+    populateEntry(entry, result.toObject());
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
@@ -306,13 +306,13 @@ void TheGamesDBFetcher::slotComplete(KJob* job_) {
   stop();
 }
 
-void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
-  entry_->setField(QStringLiteral("tgdb-id"), mapValue(resultMap_, "id"));
-  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "game_title"));
-  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "release_date").left(4));
-  entry_->setField(QStringLiteral("description"), mapValue(resultMap_, "overview"));
+void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_) {
+  entry_->setField(QStringLiteral("tgdb-id"), objValue(obj_, "id"));
+  entry_->setField(QStringLiteral("title"), objValue(obj_, "game_title"));
+  entry_->setField(QStringLiteral("year"),  objValue(obj_, "release_date").left(4));
+  entry_->setField(QStringLiteral("description"), objValue(obj_, "overview"));
 
-  const int platformId = mapValue(resultMap_, "platform").toInt();
+  const int platformId = objValue(obj_, "platform").toInt();
   if(m_platforms.contains(platformId)) {
     const QString platform = m_platforms[platformId];
     // make the assumption that if the platform name isn't already in the allowed list, it should be added
@@ -323,7 +323,7 @@ void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
     entry_->setField(QStringLiteral("platform"), platform);
   }
 
-  const QString esrb = mapValue(resultMap_, "rating")
+  const QString esrb = objValue(obj_, "rating")
                        .section(QLatin1Char('-'), 0, 0)
                        .trimmed(); // value is like "T - Teen"
   Data::GameCollection::EsrbRating rating = Data::GameCollection::UnknownEsrb;
@@ -340,15 +340,15 @@ void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   }
 
   if(m_imageSize != NoImage) {
-    const QString coverUrl = m_covers.value(mapValue(resultMap_, "id"));
+    const QString coverUrl = m_covers.value(objValue(obj_, "id"));
     entry_->setField(QStringLiteral("cover"), coverUrl);
   }
 
   QStringList genres, pubs, devs;
 
   bool alreadyAttemptedLoad = false;
-  QVariantList genreIdList = resultMap_.value(QStringLiteral("genres")).toList();
-  foreach(const QVariant& v, genreIdList) {
+  const auto genreIdList = obj_.value(QLatin1StringView("genres")).toArray();
+  for(const auto& v : genreIdList) {
     const int id = v.toInt();
     if(!m_genres.contains(id) && !alreadyAttemptedLoad) {
       readDataList(Genre);
@@ -360,8 +360,8 @@ void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   }
 
   alreadyAttemptedLoad = false;
-  QVariantList pubList = resultMap_.value(QStringLiteral("publishers")).toList();
-  foreach(const QVariant& v, pubList) {
+  const auto pubList = obj_.value(QStringLiteral("publishers")).toArray();
+  for(const auto& v : pubList) {
     const int id = v.toInt();
     if(!m_publishers.contains(id) && !alreadyAttemptedLoad) {
       readDataList(Publisher);
@@ -373,8 +373,8 @@ void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   }
 
   alreadyAttemptedLoad = false;
-  QVariantList devList = resultMap_.value(QStringLiteral("developers")).toList();
-  foreach(const QVariant& v, devList) {
+  const auto devList = obj_.value(QStringLiteral("developers")).toArray();
+  for(const auto& v : devList) {
     const int id = v.toInt();
     if(!m_developers.contains(id) && !alreadyAttemptedLoad) {
       readDataList(Developer);
@@ -390,16 +390,13 @@ void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   entry_->setField(QStringLiteral("developer"), devs.join(FieldFormat::delimiterString()));
 
   if(entry_->collection()->hasField(QStringLiteral("num-player"))) {
-    entry_->setField(QStringLiteral("num-player"), mapValue(resultMap_, "players"));
+    entry_->setField(QStringLiteral("num-player"), objValue(obj_, "players"));
   }
 }
 
-void TheGamesDBFetcher::readPlatformList(const QVariantMap& platformMap_) {
-  QMapIterator<QString, QVariant> i(platformMap_);
-  while(i.hasNext()) {
-    i.next();
-    const QVariantMap map = i.value().toMap();
-    const QString name = map.value(QStringLiteral("name")).toString();
+void TheGamesDBFetcher::readPlatformList(const QJsonObject& obj_) {
+  for(auto i = obj_.constBegin(); i != obj_.constEnd(); ++i) {
+    const QString name = objValue(i.value().toObject(), "name");
     m_platforms.insert(i.key().toInt(), Data::GameCollection::normalizePlatform(name));
   }
 
@@ -422,19 +419,19 @@ void TheGamesDBFetcher::readPlatformList(const QVariantMap& platformMap_) {
   writeDataList(Platform, doc.toJson());
 }
 
-void TheGamesDBFetcher::readCoverList(const QVariantMap& coverDataMap_) {
+void TheGamesDBFetcher::readCoverList(const QJsonObject& obj_) {
   // first, get the base url
-  QString imageBase;
+  QLatin1String imageBase;
   switch(m_imageSize) {
     case SmallImage:
       // this is the default size, using the thumb. Not the small size
-      imageBase = QStringLiteral("thumb");
+      imageBase = QLatin1String("thumb");
       break;
     case MediumImage:
-      imageBase = QStringLiteral("medium");
+      imageBase = QLatin1String("medium");
       break;
     case LargeImage:
-      imageBase = QStringLiteral("large");
+      imageBase = QLatin1String("large");
       break;
     case NoImage:
       m_covers.clear();
@@ -442,32 +439,28 @@ void TheGamesDBFetcher::readCoverList(const QVariantMap& coverDataMap_) {
       break;
   }
 
-  QString baseUrl =  coverDataMap_.value(QStringLiteral("base_url")).toMap()
-                                  .value(imageBase).toString();
-
-  QVariantMap coverMap = coverDataMap_.value(QStringLiteral("data")).toMap();
-  QMapIterator<QString, QVariant> i(coverMap);
-  while(i.hasNext()) {
-    i.next();
-    foreach(QVariant v, i.value().toList()) {
-      QVariantMap map = v.toMap();
-      if(map.value(QStringLiteral("type")) == QLatin1String("boxart") &&
-         map.value(QStringLiteral("side")) == QLatin1String("front")) {
-        m_covers.insert(i.key(), baseUrl + mapValue(map, "filename"));
+  QString baseUrl = objValue(obj_, "base_url", imageBase);
+  const auto coverObj = obj_.value(QLatin1StringView("data")).toObject();
+  for(auto i = coverObj.constBegin(); i != coverObj.constEnd(); ++i) {
+    const auto arr = i.value().toArray();
+    for(const auto& v : arr) {
+      const auto map = v.toObject();
+      if(map.value(QLatin1StringView("type")) == QLatin1String("boxart") &&
+         map.value(QLatin1StringView("side")) == QLatin1String("front")) {
+        m_covers.insert(i.key(), baseUrl + objValue(map, "filename"));
         break;
       }
     }
   }
 
   // these are probably screenshots
-  QVariantMap imagesMap = coverDataMap_.value(QStringLiteral("images")).toMap();
-  QMapIterator<QString, QVariant> i2(imagesMap);
-  while(i2.hasNext()) {
-    i2.next();
-    foreach(QVariant v, i2.value().toList()) {
-      QVariantMap map = v.toMap();
-      if(map.value(QStringLiteral("type")) == QLatin1String("screenshot")) {
-        m_covers.insert(QLatin1Char('s') + i2.key(), baseUrl + mapValue(map, "filename"));
+  const auto imagesObj = obj_.value(QLatin1StringView("images")).toObject();
+  for(auto i = imagesObj.constBegin(); i != imagesObj.constEnd(); ++i) {
+    const auto arr = i.value().toArray();
+    for(const auto& v : arr) {
+      const auto map = v.toObject();
+      if(map.value(QLatin1StringView("type")) == QLatin1String("screenshot")) {
+        m_covers.insert(QLatin1Char('s') + i.key(), baseUrl + objValue(map, "filename"));
         break;
       }
     }
@@ -520,13 +513,11 @@ void TheGamesDBFetcher::updateData(TgdbDataType dataType_, const QByteArray& jso
   }
 
   QHash<int, QString> dataHash;
-  const QVariantMap topMap = QJsonDocument::fromJson(jsonData_).object().toVariantMap();
-  const QVariantMap resultMap = topMap.value(QStringLiteral("data")).toMap()
-                                      .value(dataName).toMap();
-  for(QMapIterator<QString, QVariant> i(resultMap); i.hasNext(); ) {
-    i.next();
-    const QVariantMap m = i.value().toMap();
-    dataHash.insert(m.value(QStringLiteral("id")).toInt(), mapValue(m, "name"));
+  const auto topObj = QJsonDocument::fromJson(jsonData_).object();
+  const auto dataObj = topObj[QLatin1StringView("data")][dataName].toObject();
+  for(auto i = dataObj.constBegin(); i!= dataObj.constEnd(); ++i) {
+    const auto m = i.value().toObject();
+    dataHash.insert(m.value(QLatin1StringView("id")).toInt(), objValue(m, "name"));
   }
 
   // transfer read data into the correct local variable

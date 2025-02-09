@@ -25,7 +25,7 @@
 #include "librarythingimporter.h"
 #include "../collections/bookcollection.h"
 #include "../core/filehandler.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 
@@ -92,32 +92,30 @@ Tellico::Data::CollPtr LibraryThingImporter::collection() {
   m_coll = new Data::BookCollection(true);
   bool defaultTitle = true;
   Data::EntryList entries;
-  QVariantMap map = doc.object().toVariantMap();
-  QMapIterator<QString, QVariant> i(map);
-  while(i.hasNext()) {
-    i.next();
-    QVariantMap valueMap = i.value().toMap();
+  const auto topObj = doc.object();
+  for(auto i = topObj.constBegin(); i != topObj.constEnd(); ++i) {
+    const auto obj = i.value().toObject();
     Data::EntryPtr entry(new Data::Entry(m_coll));
-    entry->setField(QStringLiteral("title"), mapValue(valueMap, "title"));
-    entry->setField(QStringLiteral("pub_year"), mapValue(valueMap, "date"));
-    entry->setField(QStringLiteral("keyword"), mapValue(valueMap, "tags"));
-    entry->setField(QStringLiteral("genre"), mapValue(valueMap, "genre"));
-    entry->setField(QStringLiteral("series"), mapValue(valueMap, "series"));
-    entry->setField(QStringLiteral("language"), mapValue(valueMap, "language"));
+    entry->setField(QStringLiteral("title"), objValue(obj, "title"));
+    entry->setField(QStringLiteral("pub_year"), objValue(obj, "date"));
+    entry->setField(QStringLiteral("keyword"), objValue(obj, "tags"));
+    entry->setField(QStringLiteral("genre"), objValue(obj, "genre"));
+    entry->setField(QStringLiteral("series"), objValue(obj, "series"));
+    entry->setField(QStringLiteral("language"), objValue(obj, "language"));
 
-    const QString collName = mapValue(valueMap, "collections");
+    const QString collName = objValue(obj, "collections");
     // default to using a collection title based on the first entry
     if(defaultTitle && !collName.isEmpty()) {
       defaultTitle = false;
       m_coll->setTitle(collName);
     }
 
-    const QString cdate = mapValue(valueMap, "entrydate");
+    const QString cdate = objValue(obj, "entrydate");
     if(!cdate.isEmpty()) {
       entry->setField(QStringLiteral("cdate"), cdate);
     }
 
-    QString pub = mapValue(valueMap, "publication");
+    QString pub = objValue(obj, "publication");
     // try to clean up the publisher
     QRegularExpressionMatch pubMatch = pubRx.match(pub);
     if(pubMatch.hasMatch()) {
@@ -125,40 +123,41 @@ Tellico::Data::CollPtr LibraryThingImporter::collection() {
     }
     entry->setField(QStringLiteral("publisher"), pub);
 
-    QJsonArray authorArray = valueMap.value(QStringLiteral("authors")).toJsonArray();
+    const auto authorArray = obj[QLatin1StringView("authors")].toArray();
     QStringList authors;
     for(int i = 0; i < authorArray.size(); ++i) {
-      QVariantMap m = authorArray.at(i).toObject().toVariantMap();
+      const auto m = authorArray.at(i).toObject();
       // TODO: read config option for author formatting?
       // use first-lastname for now
-      const QString role = mapValue(m, "role");
+      const QString role = objValue(m, "role");
       if(role.isEmpty() || role == QLatin1String("Author")) {
-        authors += mapValue(m, "fl");
+        authors += objValue(m, "fl");
       }
     }
     entry->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
 
-    QJsonArray formatArray = valueMap.value(QStringLiteral("format")).toJsonArray();
+    const auto formatArray = obj[QLatin1StringView("format")].toArray();
     if(!formatArray.isEmpty()) {
       // use the first one
-      const QVariantMap m = formatArray.at(0).toObject().toVariantMap();
-      const QString format = mapValue(m, "text");
+      const auto m = formatArray.at(0).toObject();
+      const QString format = objValue(m, "text");
+      const QString bindingName(QStringLiteral("binding"));
       if(format == QLatin1String("Paperback")) {
-        entry->setField(QStringLiteral("binding"), i18n("Paperback"));
+        entry->setField(bindingName, i18n("Paperback"));
       } else if(format == QLatin1String("Hardcover")) {
-        entry->setField(QStringLiteral("binding"), i18n("Hardback"));
+        entry->setField(bindingName, i18n("Hardback"));
       } else {
         // just in case there's a value there
-        entry->setField(QStringLiteral("binding"), format);
+        entry->setField(bindingName, format);
       }
     }
 
-    QString isbn = mapValue(valueMap, "originalisbn");
+    QString isbn = objValue(obj, "originalisbn");
     ISBNValidator::staticFixup(isbn);
     entry->setField(QStringLiteral("isbn"), isbn);
 
     // grab first set of digits
-    QRegularExpressionMatch match = digits.match(mapValue(valueMap, "pages"));
+    QRegularExpressionMatch match = digits.match(objValue(obj, "pages"));
     if(match.hasMatch()) {
       entry->setField(QStringLiteral("pages"), match.captured(0));
     }

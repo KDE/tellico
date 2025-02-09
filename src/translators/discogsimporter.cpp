@@ -26,7 +26,7 @@
 #include "../collections/musiccollection.h"
 #include "../images/imagefactory.h"
 #include "../core/filehandler.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../tellico_debug.h"
 
 #include <KConfigGroup>
@@ -109,23 +109,24 @@ void DiscogsImporter::loadPage(int page_) {
 #endif
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  const QVariantMap resultMap = doc.object().toVariantMap();
-  if(resultMap.contains(QStringLiteral("message")) && mapValue(resultMap, "id").isEmpty()) {
-    const auto& msg = mapValue(resultMap, "message");
+  const auto obj = doc.object();
+  if(obj.contains(QLatin1StringView("message")) && objValue(obj, "id").isEmpty()) {
+    const auto msg = objValue(obj, "message");
     myLog() << "DiscogsFetcher -" << msg;
   }
-  const int totalPages = mapValue(resultMap, "pagination", "pages").toInt();
+  const int totalPages = obj[QLatin1StringView("pagination")][QLatin1StringView("pages")].toInt();
   myLog() << "Reading page" << page_ << "of" << totalPages << "from Discogs collection";
-  foreach(const QVariant& release, resultMap.value(QLatin1String("releases")).toList()) {
+  const auto releaseArray = obj[QLatin1StringView("releases")].toArray();
+  for(const auto& release : releaseArray) {
+    const auto releaseObj = release.toObject();
     Data::EntryPtr entry(new Data::Entry(m_coll));
-    const auto releaseMap = release.toMap();
-    populateEntry(entry, releaseMap.value(QLatin1String("basic_information")).toMap());
+    populateEntry(entry, releaseObj.value(QLatin1StringView("basic_information")).toObject());
 
-    const QString rating = mapValue(releaseMap, "rating");
+    const QString rating = objValue(releaseObj, "rating");
     if(!rating.isEmpty() && rating != QLatin1String("0")) {
       entry->setField(QStringLiteral("rating"), rating);
     }
-    entry->setField(QStringLiteral("comments"), mapValue(releaseMap, "notes", "value"));
+    entry->setField(QStringLiteral("comments"), objValue(releaseObj, "notes", "value"));
     m_coll->addEntries(entry);
   }
 
@@ -134,30 +135,33 @@ void DiscogsImporter::loadPage(int page_) {
   }
 }
 
-void DiscogsImporter::populateEntry(Data::EntryPtr entry_, const QVariantMap& releaseMap_) {
-  entry_->setField(QStringLiteral("title"), mapValue(releaseMap_, "title"));
-  const QString year = mapValue(releaseMap_, "year");
+void DiscogsImporter::populateEntry(Data::EntryPtr entry_, const QJsonObject& releaseObj_) {
+  entry_->setField(QStringLiteral("title"), objValue(releaseObj_, "title"));
+  const QString year = objValue(releaseObj_, "year");
   if(year != QLatin1String("0")) {
     entry_->setField(QStringLiteral("year"), year);
   }
   // the styles value seems more like genres than the actual genres value
-  entry_->setField(QStringLiteral("genre"),  mapValue(releaseMap_, "styles"));
+  entry_->setField(QStringLiteral("genre"), objValue(releaseObj_, "styles"));
 
   QStringList labels;
-  foreach(const QVariant& label, releaseMap_.value(QLatin1String("labels")).toList()) {
-    labels << mapValue(label.toMap(), "name");
+  const auto labelArray = releaseObj_[QLatin1StringView("labels")].toArray();
+  for(const auto& label : labelArray) {
+    labels << objValue(label.toObject(), "name");
   }
   entry_->setField(QStringLiteral("label"), labels.join(FieldFormat::delimiterString()));
 
   QStringList artists;
-  foreach(const QVariant& artist, releaseMap_.value(QLatin1String("artists")).toList()) {
-    artists << mapValue(artist.toMap(), "name");
+  const auto artistArray = releaseObj_[QLatin1StringView("artists")].toArray();
+  for(const auto& artist : artistArray) {
+    artists << objValue(artist.toObject(), "name");
   }
   artists.removeDuplicates(); // sometimes the same value is repeated
   entry_->setField(QStringLiteral("artist"), artists.join(FieldFormat::delimiterString()));
 
-  foreach(const QVariant& format, releaseMap_.value(QLatin1String("formats")).toList()) {
-    const QString formatName = mapValue(format.toMap(), "name");
+  const auto formatArray = releaseObj_[QLatin1StringView("formats")].toArray();
+  for(const auto& format : formatArray) {
+    const QString formatName = objValue(format.toObject(), "name");
     if(formatName == QLatin1String("CD")) {
       entry_->setField(QStringLiteral("medium"), i18n("Compact Disc"));
     } else if(formatName == QLatin1String("Vinyl")) {
@@ -170,9 +174,9 @@ void DiscogsImporter::populateEntry(Data::EntryPtr entry_, const QVariantMap& re
     }
   }
 
-  QString coverUrl = mapValue(releaseMap_, "cover_image");
+  QString coverUrl = objValue(releaseObj_, "cover_image");
   if(coverUrl.isEmpty()) {
-    coverUrl = mapValue(releaseMap_, "thumb");
+    coverUrl = objValue(releaseObj_, "thumb");
   }
   if(!coverUrl.isEmpty()) {
     const QString id = ImageFactory::addImage(QUrl::fromUserInput(coverUrl), true /* quiet */);

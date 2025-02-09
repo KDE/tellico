@@ -30,7 +30,7 @@
 #include "../core/filehandler.h"
 #include "../images/imagefactory.h"
 #include "../utils/string_utils.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -225,28 +225,29 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
   auto i = jsonRx.globalMatch(str_);
   while(i.hasNext()) {
     QJsonDocument doc = QJsonDocument::fromJson(i.next().captured(1).toUtf8());
-    QVariantMap objectMap = doc.object().toVariantMap();
-    if(mapValue(objectMap, "@type") != QStringLiteral("Movie")) {
+    const auto obj = doc.object();
+    if(objValue(obj, "@type") != QStringLiteral("Movie")) {
       continue;
     }
-    entry->setField(QStringLiteral("director"), mapValue(objectMap, "director", "name"));
+    entry->setField(QStringLiteral("director"), objValue(obj, "director", "name"));
 
     QStringList actors;
-    foreach(QVariant v, objectMap.value(QLatin1String("actor")).toList()) {
-      const QString actor = mapValue(v.toMap(), "name");
+    const auto actorArray = obj[QLatin1StringView("actor")].toArray();
+    for(const auto&v : actorArray) {
+      const QString actor = objValue(v.toObject(), "name");
       if(!actor.isEmpty()) actors += actor;
     }
     if(!actors.isEmpty()) {
       entry->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
     }
     // cover could be a relative link
-    QString coverLink = mapValue(objectMap, "image");
+    QString coverLink = objValue(obj, "image");
     if(coverLink.startsWith(QLatin1String("//"))) {
       coverLink.prepend(QLatin1String("https:"));
     }
     entry->setField(QStringLiteral("cover"), coverLink);
 
-    QString genreString = mapValue(objectMap, "genre");
+    const QString genreString = objValue(obj, "genre");
     if(!genreString.isEmpty()) {
       static const QRegularExpression commaRx(QLatin1String(",\\s+"));
       QStringList genres = genreString.split(commaRx);

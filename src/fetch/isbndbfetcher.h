@@ -90,7 +90,7 @@ private:
   virtual void search() override;
   void doSearch(const QString& term);
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
-  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+  void populateEntry(Data::EntryPtr entry, const QJsonObject& obj);
   void endJob(KIO::StoredTransferJob* job);
 
   int m_limit;

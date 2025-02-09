@@ -28,7 +28,7 @@
 #include "../gui/combobox.h"
 #include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -224,7 +224,7 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
     f.close();
 #endif
     QJsonDocument doc = QJsonDocument::fromJson(data);
-    populateEntry(entry, doc.object().toVariantMap(), true);
+    populateEntry(entry, doc.object(), true);
   }
 
   // image might still be a URL
@@ -338,14 +338,14 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
   }
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  QVariantMap result = doc.object().toVariantMap();
+  const auto result = doc.object();
 
-  QVariantList resultList = result.value(QStringLiteral("results")).toList();
+  auto resultList = result.value(QLatin1StringView("results")).toArray();
   if(resultList.isEmpty()) {
-    resultList = result.value(QStringLiteral("movie_results")).toList();
+    resultList = result.value(QLatin1StringView("movie_results")).toArray();
   }
   if(resultList.isEmpty()) {
-    resultList = result.value(QStringLiteral("tv_results")).toList();
+    resultList = result.value(QLatin1StringView("tv_results")).toArray();
   }
 
   if(resultList.isEmpty()) {
@@ -355,16 +355,16 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
   }
 
   int count = 0;
-  foreach(const QVariant& result, resultList) {
+  for(const auto& result : std::as_const(resultList)) {
     // skip people results
-    const auto map = result.toMap();
-    if(mapValue(map, "media_type") == QLatin1String("person")) {
+    const auto resultObj = result.toObject();
+    if(objValue(resultObj, "media_type") == QLatin1String("person")) {
       continue;
     }
 //    myDebug() << "found result:" << result;
 
     Data::EntryPtr entry(new Data::Entry(coll));
-    populateEntry(entry, map, false);
+    populateEntry(entry, resultObj, false);
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
@@ -378,36 +378,35 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
   stop();
 }
 
-void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
-  entry_->setField(QStringLiteral("tmdb-id"), mapValue(resultMap_, "id"));
+void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_, bool fullData_) {
+  entry_->setField(QStringLiteral("tmdb-id"), objValue(obj_, "id"));
   const QString tmdbType = QStringLiteral("tmdb-type");
   if(entry_->field(tmdbType).isEmpty()) {
-    entry_->setField(tmdbType, mapValue(resultMap_, "media_type"));
+    entry_->setField(tmdbType, objValue(obj_, "media_type"));
   }
-  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "title"));
+  entry_->setField(QStringLiteral("title"), objValue(obj_, "title"));
   if(entry_->title().isEmpty()) {
-    entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "name"));
+    entry_->setField(QStringLiteral("title"), objValue(obj_, "name"));
   }
-  if(resultMap_.contains(QLatin1String("release_date"))) {
-    entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "release_date").left(4));
+  if(obj_.contains(QLatin1StringView("release_date"))) {
+    entry_->setField(QStringLiteral("year"), objValue(obj_, "release_date").left(4));
   } else {
-    entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "first_air_date").left(4));
+    entry_->setField(QStringLiteral("year"), objValue(obj_, "first_air_date").left(4));
   }
 
   QStringList directors, producers, writers, composers;
-  QVariantList crewList = resultMap_.value(QStringLiteral("credits")).toMap()
-                                    .value(QStringLiteral("crew")).toList();
-  foreach(const QVariant& crew, crewList) {
-    const QVariantMap crewMap = crew.toMap();
-    const QString job = mapValue(crewMap, "job");
+  const auto crewList = obj_[QLatin1StringView("credits")][QLatin1StringView("crew")].toArray();
+  for(const auto& crew : crewList) {
+    const auto crewObj = crew.toObject();
+    const QString job = objValue(crewObj, "job");
     if(job == QLatin1String("Director")) {
-      directors += mapValue(crewMap, "name");
+      directors += objValue(crewObj, "name");
     } else if(job == QLatin1String("Producer")) {
-      producers += mapValue(crewMap, "name");
+      producers += objValue(crewObj, "name");
     } else if(job == QLatin1String("Screenplay")) {
-      writers += mapValue(crewMap, "name");
+      writers += objValue(crewObj, "name");
     } else if(job == QLatin1String("Original Music Composer")) {
-      composers += mapValue(crewMap, "name");
+      composers += objValue(crewObj, "name");
     }
   }
   entry_->setField(QStringLiteral("director"), directors.join(FieldFormat::delimiterString()));
@@ -423,107 +422,88 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   if(entry_->collection()->hasField(QStringLiteral("tmdb"))) {
     QString mediaType = entry_->field(tmdbType);
     if(mediaType.isEmpty()) mediaType = QLatin1String("movie");
-    entry_->setField(QStringLiteral("tmdb"), QStringLiteral("https://www.themoviedb.org/%1/%2").arg(mediaType, mapValue(resultMap_, "id")));
+    entry_->setField(QStringLiteral("tmdb"), QStringLiteral("https://www.themoviedb.org/%1/%2").arg(mediaType, objValue(obj_, "id")));
   }
   if(entry_->collection()->hasField(QStringLiteral("imdb"))) {
-    const QString imdbId = mapValue(resultMap_, "imdb_id");
+    const QString imdbId = objValue(obj_, "imdb_id");
     if(!imdbId.isEmpty()) {
       entry_->setField(QStringLiteral("imdb"), QLatin1String("https://www.imdb.com/title/") + imdbId);
     }
   }
   if(entry_->collection()->hasField(QStringLiteral("origtitle"))) {
-    QString otitle = mapValue(resultMap_, "original_title");
-    if(otitle.isEmpty()) otitle = mapValue(resultMap_, "original_name");
+    QString otitle = objValue(obj_, "original_title");
+    if(otitle.isEmpty()) otitle = objValue(obj_, "original_name");
     entry_->setField(QStringLiteral("origtitle"), otitle);
   }
   if(entry_->collection()->hasField(QStringLiteral("alttitle"))) {
-    QStringList atitles;
-    foreach(const QVariant& atitle, resultMap_.value(QLatin1String("alternative_titles")).toMap()
-                                               .value(QLatin1String("titles")).toList()) {
-      atitles << mapValue(atitle.toMap(), "title");
-    }
+    QString atitles = objValue(obj_, "alternative_titles", "titles", "title");
     if(atitles.isEmpty()) {
-      atitles += mapValue(resultMap_, "alternative_titles", "results", "title");
+      atitles += objValue(obj_, "alternative_titles", "results", "title");
     }
-    entry_->setField(QStringLiteral("alttitle"), atitles.join(FieldFormat::rowDelimiterString()));
+    entry_->setField(QStringLiteral("alttitle"), atitles);
   }
   if(entry_->collection()->hasField(QStringLiteral("network"))) {
-    entry_->setField(QStringLiteral("network"), mapValue(resultMap_, "networks", "name"));
+    entry_->setField(QStringLiteral("network"), objValue(obj_, "networks", "name"));
   }
   if(optionalFields().contains(QStringLiteral("episode"))) {
     QStringList episodes;
     for(uint snum = 1; snum <= THEMOVIEDB_MAX_SEASON_COUNT; ++snum) {
       const QString seasonString = QLatin1String("season/") + QString::number(snum);
-      if(!resultMap_.contains(seasonString)) {
+      if(!obj_.contains(seasonString)) {
         break; // no more seasons
       }
-      const auto episodeList = resultMap_.value(seasonString).toMap()
-                                         .value(QStringLiteral("episodes")).toList();
-      foreach(const QVariant& row, episodeList) {
+      const auto episodeList = obj_[seasonString][QLatin1StringView("episodes")].toArray();
+      for(const auto& row : episodeList) {
+        const auto epObj = row.toObject();
         // episode title, season, episode number
-        const auto map = row.toMap();
-        episodes << mapValue(map, "name") + FieldFormat::columnDelimiterString() +
-                    mapValue(map, "season_number") + FieldFormat::columnDelimiterString() +
-                    mapValue(map, "episode_number");
+        episodes << objValue(epObj, "name") + FieldFormat::columnDelimiterString() +
+                    objValue(epObj, "season_number") + FieldFormat::columnDelimiterString() +
+                    objValue(epObj, "episode_number");
       }
     }
     entry_->setField(QStringLiteral("episode"), episodes.join(FieldFormat::rowDelimiterString()));
   }
 
   QStringList actors;
-  QVariantList castList = resultMap_.value(QStringLiteral("credits")).toMap()
-                                    .value(QStringLiteral("cast")).toList();
-  foreach(const QVariant& cast, castList) {
-    const QVariantMap castMap = cast.toMap();
-    actors << mapValue(castMap, "name") + FieldFormat::columnDelimiterString() + mapValue(castMap, "character");
+  const auto castList = obj_[QLatin1StringView("credits")][QLatin1StringView("cast")].toArray();
+  for(const auto& cast : castList) {
+    const auto castObj = cast.toObject();
+    actors << objValue(castObj, "name") + FieldFormat::columnDelimiterString() + objValue(castObj, "character");
     if(actors.count() >= m_numCast) {
       break;
     }
   }
   entry_->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
 
-  QStringList studios;
-  foreach(const QVariant& studio, resultMap_.value(QLatin1String("production_companies")).toList()) {
-    studios << mapValue(studio.toMap(), "name");
-  }
-  entry_->setField(QStringLiteral("studio"), studios.join(FieldFormat::delimiterString()));
+  entry_->setField(QStringLiteral("studio"), objValue(obj_, "production_companies", "name"));
 
   QStringList countries;
-  foreach(const QVariant& country, resultMap_.value(QLatin1String("production_countries")).toList()) {
-    QString name = mapValue(country.toMap(), "name");
-    if(name == QLatin1String("United States of America")) {
+  auto countryList = obj_.value(QLatin1StringView("production_countries")).toArray();
+  if(countryList.isEmpty()) {
+    countryList = obj_.value(QLatin1StringView("origin_country")).toArray();
+  }
+  for(const auto& country : std::as_const(countryList)) {
+    QString name = objValue(country.toObject(), "name");
+    if(name == QLatin1String("United States of America") || name == QLatin1String("US")) {
       name = QStringLiteral("USA");
     }
-    countries << name;
-  }
-  if(countries.isEmpty()) {
-    foreach(const QVariant& country, resultMap_.value(QLatin1String("origin_country")).toList()) {
-      QString name = country.toString();
-      if(name == QLatin1String("United States of America") || name == QLatin1String("US")) {
-        name = QStringLiteral("USA");
-      }
-      if(!name.isEmpty()) countries << name;
-    }
+    if(!name.isEmpty()) countries << name;
   }
   entry_->setField(QStringLiteral("nationality"), countries.join(FieldFormat::delimiterString()));
 
-  QStringList genres;
-  foreach(const QVariant& genre, resultMap_.value(QLatin1String("genres")).toList()) {
-    genres << mapValue(genre.toMap(), "name");
-  }
-  entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
+  entry_->setField(QStringLiteral("genre"), objValue(obj_, "genres", "name"));
 
   // hard-coded poster size for now
-  const QString cover = m_imageBase + QLatin1String("w342") + mapValue(resultMap_, "poster_path");
+  const QString cover = m_imageBase + QLatin1String("w342") + objValue(obj_, "poster_path");
   entry_->setField(QStringLiteral("cover"), cover);
 
-  entry_->setField(QStringLiteral("running-time"), mapValue(resultMap_, "runtime"));
-  QString lang = mapValue(resultMap_, "original_language");
+  entry_->setField(QStringLiteral("running-time"), objValue(obj_, "runtime"));
+  QString lang = objValue(obj_, "original_language");
   const QString langName = KLanguageName::nameForCode(lang);
   if(!langName.isEmpty()) lang = langName;
   if(lang == QLatin1String("US English")) lang = QLatin1String("English");
   entry_->setField(QStringLiteral("language"), lang);
-  entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "overview"));
+  entry_->setField(QStringLiteral("plot"), objValue(obj_, "overview"));
 }
 
 void TheMovieDBFetcher::readConfiguration() {
@@ -545,9 +525,9 @@ void TheMovieDBFetcher::readConfiguration() {
 #endif
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  QVariantMap resultMap = doc.object().toVariantMap();
+  const auto obj = doc.object();
 
-  m_imageBase = mapValue(resultMap.value(QStringLiteral("images")).toMap(), "base_url");
+  m_imageBase = objValue(obj, "images", "base_url");
   m_serverConfigDate = QDate::currentDate();
 }
 

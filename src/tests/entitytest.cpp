@@ -27,7 +27,7 @@
 #include "entitytest.h"
 
 #include "../utils/string_utils.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 
 #include <KLocalizedString>
 
@@ -156,10 +156,12 @@ void EntityTest::testBug254863() {
   QVERIFY(!output.contains(whiteSpaceRx));
 }
 
-void EntityTest::testMapValue() {
+void EntityTest::testObjValue() {
   auto data(QByteArrayLiteral(R"(
 {
  "num": 10,
+ "numlist": [10, 20, 30],
+ "double": 5.5,
  "item":"value",
  "items": [
     {"title":"title"},
@@ -178,11 +180,14 @@ void EntityTest::testMapValue() {
 )"));
   QJsonDocument doc = QJsonDocument::fromJson(data);
   QVERIFY(!doc.isNull());
-  auto map = doc.object().toVariantMap();
-  QCOMPARE(Tellico::mapValue(map, "num"), QStringLiteral("10"));
-  QCOMPARE(Tellico::mapValue(map, "item"), QStringLiteral("value"));
-  QCOMPARE(Tellico::mapValue(map, "items", "title"), QStringLiteral("title; title2"));
-  QCOMPARE(Tellico::mapValue(map, "chain", "chain2", "chain3", "chain4"), QStringLiteral("value"));
-  QCOMPARE(Tellico::mapValue(map, "list"), QStringLiteral("value1; value2; value3"));
-  QCOMPARE(Tellico::mapValue(map, "list2", "list"), QStringLiteral("value1; value2; value3"));
+  const auto obj = doc.object();
+  QCOMPARE(Tellico::objValue(obj, "num"), QStringLiteral("10"));
+  QCOMPARE(Tellico::objValue(obj, "numlist"), QStringLiteral("10; 20; 30"));
+  QCOMPARE(Tellico::objValue(obj, "item"), QStringLiteral("value"));
+  QCOMPARE(Tellico::objValue(obj, "double"), QStringLiteral("5.5"));
+  QCOMPARE(Tellico::objValue(obj, "items", "title"), QStringLiteral("title; title2"));
+  QCOMPARE(Tellico::objValue(obj, "chain", "chain2", "chain3", "chain4"), QStringLiteral("value"));
+  QCOMPARE(Tellico::objValue(obj, "list"), QStringLiteral("value1; value2; value3"));
+  QCOMPARE(Tellico::objValue(obj, "list2", "list"), QStringLiteral("value1; value2; value3"));
+  QCOMPARE(Tellico::objValue(obj, "list2"), QString()); // not defined for a string of an object
 }

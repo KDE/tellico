@@ -7,7 +7,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 # which is generated in the build directory
 include_directories(${Tellico_BINARY_DIR}/src)
 
-ecm_add_test(entitytest.cpp ../fieldformat.cpp
+ecm_add_test(entitytest.cpp ../fieldformat.cpp ../tellico_debug.cpp
     TEST_NAME entitytest
     LINK_LIBRARIES Qt6::Test utils config
 )

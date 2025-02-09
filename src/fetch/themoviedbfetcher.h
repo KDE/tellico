@@ -98,7 +98,7 @@ private:
   friend class ::TheMovieDBFetcherTest;
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
-  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
+  void populateEntry(Data::EntryPtr entry, const QJsonObject& obj, bool fullData);
   void readConfiguration();
 
   bool m_started;

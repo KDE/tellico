@@ -93,7 +93,7 @@ private Q_SLOTS:
 private:
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
-  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
+  void populateEntry(Data::EntryPtr entry, const QJsonObject& obj, bool fullData);
 
   bool m_started;
   enum ImageSize {

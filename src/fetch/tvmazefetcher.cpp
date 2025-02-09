@@ -27,7 +27,7 @@
 #include "../images/imagefactory.h"
 #include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 
@@ -201,10 +201,9 @@ void TVmazeFetcher::slotComplete(KJob* job_) {
   }
 
   int count = 0;
-  for(const QJsonValue& result : results) {
+  for(const auto& result : results) {
     Data::EntryPtr entry(new Data::Entry(coll));
-    populateEntry(entry, result.toObject().value(QLatin1String("show"))
-                               .toObject().toVariantMap(), false);
+    populateEntry(entry, result[QLatin1StringView("show")].toObject(), false);
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
@@ -251,7 +250,7 @@ Tellico::Data::EntryPtr TVmazeFetcher::fetchEntryHook(uint uid_) {
     f.close();
 #endif
     QJsonDocument doc = QJsonDocument::fromJson(data);
-    populateEntry(entry, doc.object().toVariantMap(), true);
+    populateEntry(entry, doc.object(), true);
   }
 
   // image might still be a URL
@@ -271,31 +270,31 @@ Tellico::Data::EntryPtr TVmazeFetcher::fetchEntryHook(uint uid_) {
   return entry;
 }
 
-void TVmazeFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
-  entry_->setField(QStringLiteral("tvmaze-id"), mapValue(resultMap_, "id"));
-  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "name"));
-  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "premiered").left(4));
+void TVmazeFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_, bool fullData_) {
+  entry_->setField(QStringLiteral("tvmaze-id"), objValue(obj_, "id"));
+  entry_->setField(QStringLiteral("title"), objValue(obj_, "name"));
+  entry_->setField(QStringLiteral("year"), objValue(obj_, "premiered").left(4));
 
   // if we only need cursory data, then we're done
   if(!fullData_) {
     return;
   }
 
+  const auto embObj = obj_[QLatin1StringView("_embedded")].toObject();
   QStringList directors, producers, writers, composers;
-  QVariantList crewList = resultMap_.value(QStringLiteral("_embedded")).toMap()
-                                    .value(QStringLiteral("crew")).toList();
-  foreach(const QVariant& crew, crewList) {
-    const QVariantMap crewMap = crew.toMap();
-    const QString job = mapValue(crewMap, "type");
+  const auto crewList = embObj[QLatin1StringView("crew")].toArray();
+  for(const auto& crew : crewList) {
+    const auto crewObj = crew.toObject();
+    const QString job = objValue(crewObj, "type");
     // going to get a lot of producers
-    if(job.contains(QLatin1String("Director"))) {
-      directors += mapValue(crewMap, "person", "name");
-    } else if(job.contains(QLatin1String("Producer"))) {
-      producers += mapValue(crewMap, "person", "name");
-    } else if(job.contains(QLatin1String("Creator"))) {
-      writers += mapValue(crewMap, "person", "name");
-    } else if(job.contains(QLatin1String("Composer"))) {
-      composers += mapValue(crewMap, "person", "name");
+    if(job.contains(QLatin1StringView("Director"))) {
+      directors += objValue(crewObj, "person", "name");
+    } else if(job.contains(QLatin1StringView("Producer"))) {
+      producers += objValue(crewObj, "person", "name");
+    } else if(job.contains(QLatin1StringView("Creator"))) {
+      writers += objValue(crewObj, "person", "name");
+    } else if(job.contains(QLatin1StringView("Composer"))) {
+      composers += objValue(crewObj, "person", "name");
     }
   }
   entry_->setField(QStringLiteral("director"), directors.join(FieldFormat::delimiterString()));
@@ -305,57 +304,45 @@ void TVmazeFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
 
   const QString network(QStringLiteral("network"));
   if(entry_->collection()->hasField(network)) {
-    entry_->setField(network, mapValue(resultMap_, "network", "name"));
+    entry_->setField(network, objValue(obj_, "network", "name"));
   }
 
   const QString imdb(QStringLiteral("imdb"));
   if(entry_->collection()->hasField(imdb)) {
-    entry_->setField(imdb, QLatin1String("https://www.imdb.com/title/") + mapValue(resultMap_, "externals", "imdb"));
+    entry_->setField(imdb, QLatin1String("https://www.imdb.com/title/") + objValue(obj_, "externals", "imdb"));
   }
 
   QStringList actors;
-  QVariantList castList = resultMap_.value(QStringLiteral("_embedded")).toMap()
-                                    .value(QStringLiteral("cast")).toList();
-  foreach(const QVariant& cast, castList) {
-    QVariantMap castMap = cast.toMap();
-    actors << mapValue(castMap, "person", "name") + FieldFormat::columnDelimiterString() + mapValue(castMap, "character", "name");
+  const auto castList = embObj[QLatin1StringView("cast")].toArray();
+  for(const auto& cast : castList) {
+    const auto castObj = cast.toObject();
+    actors << objValue(castObj, "person", "name") + FieldFormat::columnDelimiterString() + objValue(castObj, "character", "name");
   }
   entry_->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
 
-  QStringList genres;
-  foreach(const QVariant& genre, resultMap_.value(QLatin1String("genres")).toList()) {
-    genres << genre.toString();
-  }
-  entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
+  entry_->setField(QStringLiteral("genre"), objValue(obj_, "genres"));
 
   const QString episode(QStringLiteral("episode"));
   if(entry_->collection()->hasField(episode)) {
     QStringList episodes;
-    QVariantList episodeList = resultMap_.value(QStringLiteral("_embedded")).toMap()
-                                         .value(QStringLiteral("episodes")).toList();
-    foreach(const QVariant& row, episodeList) {
-      QVariantMap map = row.toMap();
-      episodes << mapValue(map, "name") + FieldFormat::columnDelimiterString() +
-                  mapValue(map, "season") + FieldFormat::columnDelimiterString() +
-                  mapValue(map, "number");
+    const auto episodeList = embObj[QLatin1StringView("episodes")].toArray();
+    for(const auto& row: episodeList) {
+      const auto epObj = row.toObject();
+      episodes << objValue(epObj, "name") + FieldFormat::columnDelimiterString() +
+                  objValue(epObj, "season") + FieldFormat::columnDelimiterString() +
+                  objValue(epObj, "number");
     }
     entry_->setField(episode, episodes.join(FieldFormat::rowDelimiterString()));
   }
 
   const QString alttitle(QStringLiteral("alttitle"));
   if(entry_->collection()->hasField(alttitle)) {
-    QStringList alttitles;
-    QVariantList titleList = resultMap_.value(QStringLiteral("_embedded")).toMap()
-                                       .value(QStringLiteral("akas")).toList();
-    foreach(const QVariant& title, titleList) {
-      alttitles << mapValue(title.toMap(), "name");
-    }
-    entry_->setField(alttitle, alttitles.join(FieldFormat::rowDelimiterString()));
+    entry_->setField(alttitle, objValue(embObj, "akas", "name"));
   }
 
-  entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "image", "original"));
-  entry_->setField(QStringLiteral("language"), mapValue(resultMap_, "language"));
-  entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "summary"));
+  entry_->setField(QStringLiteral("cover"), objValue(obj_, "image", "original"));
+  entry_->setField(QStringLiteral("language"), objValue(obj_, "language"));
+  entry_->setField(QStringLiteral("plot"), objValue(obj_, "summary"));
 }
 
 Tellico::Fetch::ConfigWidget* TVmazeFetcher::configWidget(QWidget* parent_) const {

@@ -28,7 +28,7 @@
 #include "../field.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
-#include "../utils/mapvalue.h"
+#include "../utils/objvalue.h"
 #include "../utils/guiproxy.h"
 #include "../gui/combobox.h"
 #include "../gui/lineedit.h"
@@ -60,6 +60,7 @@ namespace {
 
 using namespace Tellico;
 using Tellico::Fetch::IMDBFetcher;
+using namespace Qt::Literals::StringLiterals;
 
 IMDBFetcher::IMDBFetcher(QObject* parent_) : Fetcher(parent_),
     m_job(nullptr), m_started(false), m_imageSize(MediumImage),
@@ -203,20 +204,19 @@ void IMDBFetcher::slotComplete(KJob*) {
     message(jsonError.errorString(), MessageHandler::Error);
   }
 
-  const auto objectMap = doc.object()
-                            .value(QLatin1String("data")).toObject()
-                            .value(QLatin1String("mainSearch")).toObject().toVariantMap();
-  auto list = objectMap.value(QLatin1String("edges")).toList();
+  const auto docObj = doc.object()
+                         .value("data"_L1).toObject()
+                         .value("mainSearch"_L1).toObject();
+  const auto list = docObj["edges"_L1].toArray();
   for(const auto& edge: std::as_const(list)) {
-    const auto map = edge.toMap().value(QLatin1String("node"))
-                         .toMap().value(QLatin1String("entity")).toMap();
-    const auto id = mapValue(map, "id");
-    const auto title = mapValue(map, "titleText", "text");
-    const auto year = mapValue(map, "releaseYear", "year");
+    const auto obj = edge["node"_L1]["entity"_L1].toObject();
+    const auto id = objValue(obj, "id");
+    const auto title = objValue(obj, "titleText", "text");
+    const auto year = objValue(obj, "releaseYear", "year");
 
     FetchResult* r = new FetchResult(this, title, year);
     m_matches.insert(r->uid, id);
-    m_titleTypes.insert(r->uid, mapValue(map, "titleType", "text"));
+    m_titleTypes.insert(r->uid, objValue(obj, "titleType", "text"));
     Q_EMIT signalResultFound(r);
   }
 
@@ -326,33 +326,32 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
   }
   Data::CollPtr coll(new Data::VideoCollection(true));
   Data::EntryPtr entry(new Data::Entry(coll));
-  const auto objectMap = doc.object()
-                            .value(QLatin1String("data")).toObject()
-                            .value(QLatin1String("title")).toObject().toVariantMap();
-  entry->setField(QStringLiteral("title"), mapValue(objectMap, "titleText", "text"));
-  entry->setField(QStringLiteral("year"), mapValue(objectMap, "releaseYear", "year"));
-  entry->setField(QStringLiteral("language"), mapValue(objectMap, "spokenLanguages", "spokenLanguages"));
-  entry->setField(QStringLiteral("plot"), mapValue(objectMap, "plot", "plotText", "plainText"));
-  entry->setField(QStringLiteral("genre"), mapValue(objectMap, "genres", "genres", "text"));
-  entry->setField(QStringLiteral("nationality"), mapValue(objectMap, "countriesOfOrigin", "countries", "text"));
-  entry->setField(QStringLiteral("audio-track"), mapValue(objectMap, "technicalSpecifications", "soundMixes", "items", "text"));
-  entry->setField(QStringLiteral("aspect-ratio"), mapValue(objectMap, "technicalSpecifications", "aspectRatios", "items", "aspectRatio"));
-  entry->setField(QStringLiteral("color"), mapValue(objectMap, "technicalSpecifications", "colorations", "items", "text"));
-  const int runTime = mapValue(objectMap, "runtime", "seconds").toInt();
+  const auto docObj = doc.object();
+  const auto obj = docObj["data"_L1]["title"_L1].toObject();
+  entry->setField(QStringLiteral("title"), objValue(obj, "titleText", "text"));
+  entry->setField(QStringLiteral("year"), objValue(obj, "releaseYear", "year"));
+  entry->setField(QStringLiteral("language"), objValue(obj, "spokenLanguages", "spokenLanguages"));
+  entry->setField(QStringLiteral("plot"), objValue(obj, "plot", "plotText", "plainText"));
+  entry->setField(QStringLiteral("genre"), objValue(obj, "genres", "genres", "text"));
+  entry->setField(QStringLiteral("nationality"), objValue(obj, "countriesOfOrigin", "countries", "text"));
+  entry->setField(QStringLiteral("audio-track"), objValue(obj, "technicalSpecifications", "soundMixes", "items", "text"));
+  entry->setField(QStringLiteral("aspect-ratio"), objValue(obj, "technicalSpecifications", "aspectRatios", "items", "aspectRatio"));
+  entry->setField(QStringLiteral("color"), objValue(obj, "technicalSpecifications", "colorations", "items", "text"));
+  const int runTime = obj["runtime"_L1]["seconds"_L1].toInt();
   if(runTime > 0) {
     entry->setField(QStringLiteral("running-time"), QString::number(runTime/60));
   }
-  entry->setField(QStringLiteral("language"), mapValue(objectMap, "spokenLanguages", "spokenLanguages", "text"));
-  entry->setField(QStringLiteral("plot"), mapValue(objectMap, "plot", "plotText", "plainText"));
+  entry->setField(QStringLiteral("language"), objValue(obj, "spokenLanguages", "spokenLanguages", "text"));
+  entry->setField(QStringLiteral("plot"), objValue(obj, "plot", "plotText", "plainText"));
 
   if(m_imageSize != NoImage) {
-    QUrl imageUrl(mapValue(objectMap, "primaryImage", "url"));
+    QUrl imageUrl(objValue(obj, "primaryImage", "url"));
     // LargeImage just means use default available size
     if(m_imageSize != LargeImage) {
       // limit to 256 for small and 640 for medium
       const int maxDim = m_imageSize == SmallImage ? 256 : 640;
-      const auto imageWidth = mapValue(objectMap, "primaryImage", "width").toFloat();
-      const auto imageHeight = mapValue(objectMap, "primaryImage", "height").toFloat();
+      const auto imageWidth = objValue(obj, "primaryImage", "width").toFloat();
+      const auto imageHeight = objValue(obj, "primaryImage", "height").toFloat();
       const auto ratio = imageWidth/imageHeight;
       int newWidth, newHeight;
       if(ratio < 1) {
@@ -368,21 +367,17 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
     entry->setField(QStringLiteral("cover"), ImageFactory::addImage(imageUrl, true));
   }
 
-  QStringList studios;
-  auto list = objectMap.value(QLatin1String("companyCredits")).toMap().value(QLatin1String("edges")).toList();
-  for(const auto& edge: std::as_const(list)) {
-    studios += mapValue(edge.toMap(), "node", "company", "companyText", "text");
-  }
-  entry->setField(QStringLiteral("studio"), studios.join(FieldFormat::delimiterString()));
+  entry->setField(QStringLiteral("studio"),
+                  objValue(obj, "companyCredits", "edges", "node", "company", "companyText", "text"));
 
   const QString certification(QStringLiteral("certification"));
-  QString cert = mapValue(objectMap, "certificate", "rating");
+  QString cert = objValue(obj, "certificate", "rating");
   if(!cert.isEmpty()) {
     // set default certification, assuming US for now
     if(cert == QLatin1String("Not Rated")) {
       cert = QLatin1Char('U');
     }
-    const QString certCountry = mapValue(objectMap, "certificate", "country", "text");
+    const QString certCountry = objValue(obj, "certificate", "country", "text");
     if(certCountry == QLatin1String("United States")) {
       cert += QStringLiteral(" (USA)");
     } else if(!certCountry.isEmpty()) {
@@ -397,47 +392,34 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
   }
 
   QStringList directors;
-  list = objectMap.value(QLatin1String("principalDirectors")).toList();
+  auto list = obj["principalDirectors"_L1].toArray();
   for(const auto& director: std::as_const(list)) {
-    directors += mapValue(director.toMap(), "credits", "name", "nameText", "text");
+    directors += objValue(director.toObject(), "credits", "name", "nameText", "text");
   }
   // favor principalDirectors over all the directors, but episodes may be directors only
   if(list.isEmpty()) {
-    list = objectMap.value(QLatin1String("directors")).toMap().value(QLatin1String("edges")).toList();
+    list = obj["directors"_L1]["edges"_L1].toArray();
     for(const auto& edge: std::as_const(list)) {
-      directors += mapValue(edge.toMap(), "node", "name", "nameText", "text");
+      directors += objValue(edge.toObject(), "node", "name", "nameText", "text");
     }
   }
   entry->setField(QStringLiteral("director"), directors.join(FieldFormat::delimiterString()));
 
-  QStringList producers;
-  list = objectMap.value(QLatin1String("producers")).toMap().value(QLatin1String("edges")).toList();
-  for(const auto& edge: std::as_const(list)) {
-    producers += mapValue(edge.toMap(), "node", "name", "nameText", "text");
-  }
-  entry->setField(QStringLiteral("producer"), producers.join(FieldFormat::delimiterString()));
+  entry->setField(QStringLiteral("producer"),
+                  objValue(obj, "producers", "edges", "node", "name", "nameText", "text"));
+  entry->setField(QStringLiteral("composer"),
+                  objValue(obj, "composers", "edges", "node", "name", "nameText", "text"));
+  entry->setField(QStringLiteral("writer"),
+                  objValue(obj, "writers", "edges", "node", "name", "nameText", "text"));
 
-  QStringList composers;
-  list = objectMap.value(QLatin1String("composers")).toMap().value(QLatin1String("edges")).toList();
-  for(const auto& edge: std::as_const(list)) {
-    composers += mapValue(edge.toMap(), "node", "name", "nameText", "text");
-  }
-  entry->setField(QStringLiteral("composer"), composers.join(FieldFormat::delimiterString()));
-
-  QStringList writers;
-  list = objectMap.value(QLatin1String("writers")).toMap().value(QLatin1String("edges")).toList();
-  for(const auto& edge: std::as_const(list)) {
-    writers += mapValue(edge.toMap(), "node", "name", "nameText", "text");
-  }
-  entry->setField(QStringLiteral("writer"), writers.join(FieldFormat::delimiterString()));
 
   QStringList cast;
-  list = objectMap.value(QLatin1String("cast")).toMap().value(QLatin1String("edges")).toList();
+  list = obj["cast"_L1]["edges"_L1].toArray();
   for(const auto& edge: std::as_const(list)) {
-    const auto map = edge.toMap().value(QLatin1String("node")).toMap();
-    cast += mapValue(map, "name", "nameText", "text")
+    const auto o = edge["node"_L1].toObject();
+    cast += objValue(o, "name", "nameText", "text")
           + FieldFormat::columnDelimiterString()
-          + mapValue(map, "characters", "name");
+          + objValue(o, "characters", "name");
     if(cast.count() >= m_numCast) {
       break;
     }
@@ -449,7 +431,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
     coll->addField(Data::Field::createDefaultField(Data::Field::ImdbField));
   }
   if(coll->hasField(imdb) && coll->fieldByName(imdb)->type() == Data::Field::URL) {
-    entry->setField(imdb, mapValue(objectMap, "canonicalUrl"));
+    entry->setField(imdb, objValue(obj, "canonicalUrl"));
   }
 
   const QString imdbRating(QStringLiteral("imdb-rating"));
@@ -460,9 +442,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
       f->setProperty(QStringLiteral("maximum"), QStringLiteral("10"));
       coll->addField(f);
     }
-    const auto value = objectMap.value(QLatin1String("ratingsSummary")).toMap()
-                                .value(QLatin1String("aggregateRating")).toFloat();
-    entry->setField(imdbRating, QString::number(value));
+    entry->setField(imdbRating, objValue(obj, "ratingsSummary", "aggregateRating"));
   }
 
   const QString origtitle(QStringLiteral("origtitle"));
@@ -470,7 +450,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
     Data::FieldPtr f(new Data::Field(origtitle, i18n("Original Title")));
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);
-    entry->setField(origtitle, mapValue(objectMap, "originalTitleText", "text"));
+    entry->setField(origtitle, objValue(obj, "originalTitleText", "text"));
   }
 
   const QString alttitle(QStringLiteral("alttitle"));
@@ -479,31 +459,28 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);
     QStringList akas;
-    list = objectMap.value(QLatin1String("akas")).toMap().value(QLatin1String("edges")).toList();
+    list = obj["akas"_L1]["edges"_L1].toArray();
     for(const auto& edge: std::as_const(list)) {
-      akas += mapValue(edge.toMap(), "node", "text");
+      akas += objValue(edge.toObject(), "node", "text");
     }
     akas.removeDuplicates();
     entry->setField(alttitle, akas.join(FieldFormat::rowDelimiterString()));
   }
 
   const QString episode(QStringLiteral("episode"));
-  if(mapValue(objectMap, "titleType", "text") == QLatin1String("TV Series") &&
+  if(objValue(obj, "titleType", "text") == QLatin1String("TV Series") &&
      optionalFields().contains(episode)) {
     coll->addField(Data::Field::createDefaultField(Data::Field::EpisodeField));
     QStringList episodes;
-    list = objectMap.value(QLatin1String("episodes")).toMap()
-                    .value(QLatin1String("episodes")).toMap()
-                    .value(QLatin1String("edges")).toList();
+    list = obj["episodes"_L1]["episodes"_L1]["edges"_L1].toArray();
     for(const auto& edge: std::as_const(list)) {
-      const auto nodeMap = edge.toMap().value(QLatin1String("node")).toMap();
-      QString row = mapValue(nodeMap, "titleText", "text");
-      const auto seriesMap = nodeMap.value(QLatin1String("series")).toMap();
+      const auto nodeObj = edge["node"_L1].toObject();
+      QString row = objValue(nodeObj, "titleText", "text");
+      const auto seriesObj = nodeObj["series"_L1].toObject();
       // future episodes have a "Episode #" start
-      if(!row.startsWith(QLatin1String("Episode #")) &&
-         seriesMap.contains(QLatin1String("displayableEpisodeNumber"))) {
-        row += FieldFormat::columnDelimiterString() + mapValue(seriesMap, "displayableEpisodeNumber", "displayableSeason", "text")
-             + FieldFormat::columnDelimiterString() + mapValue(seriesMap, "displayableEpisodeNumber", "episodeNumber", "text");
+      if(!row.startsWith("Episode #"_L1) && seriesObj.contains("displayableEpisodeNumber"_L1)) {
+        row += FieldFormat::columnDelimiterString() + objValue(seriesObj, "displayableEpisodeNumber", "displayableSeason", "text")
+             + FieldFormat::columnDelimiterString() + objValue(seriesObj, "displayableEpisodeNumber", "episodeNumber", "text");
       }
       episodes += row;
     }
