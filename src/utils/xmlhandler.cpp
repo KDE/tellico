@@ -61,7 +61,7 @@ QString XMLHandler::readXMLData(const QByteArray& data_) {
   }
 
   const auto encData = enc.toUtf8();
-  QStringDecoder decoder(encData);
+  QStringDecoder decoder(encData.constData());
   if(!decoder.isValid()) {
     return QString::fromUtf8(data_);
   }
