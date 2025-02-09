@@ -37,6 +37,9 @@ namespace KIO {
 }
 
 namespace Tellico {
+  namespace GUI {
+    class ComboBox;
+  }
   namespace Fetch {
 
 /**
@@ -75,6 +78,8 @@ public:
     explicit ConfigWidget(QWidget* parent_, const MovieMeterFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&) override;
     virtual QString preferredName() const override;
+  private:
+    GUI::ComboBox* m_imageCombo;
   };
   friend class ConfigWidget;
 
@@ -91,6 +96,13 @@ private:
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
 
   bool m_started;
+  enum ImageSize {
+    SmallImage=0,
+    MediumImage=1,
+    LargeImage=2,
+    NoImage=3
+  };
+  ImageSize m_imageSize;
 
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
