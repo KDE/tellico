@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-02 02:37+0000\n"
+"POT-Creation-Date: 2025-02-09 02:29+0000\n"
 "PO-Revision-Date: 2015-12-29 21:13+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -707,16 +707,16 @@ msgstr "Bibtex raktas"
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:377 src/fetch/colnectfetcher.cpp:544
 #: src/fetch/colnectfetcher.cpp:563 src/fetch/colnectfetcher.cpp:601
-#: src/fetch/colnectfetcher.cpp:608 src/fetch/discogsfetcher.cpp:313
-#: src/fetch/discogsfetcher.cpp:318 src/fetch/discogsfetcher.cpp:323
-#: src/fetch/discogsfetcher.cpp:330 src/fetch/discogsfetcher.cpp:337
-#: src/fetch/discogsfetcher.cpp:342 src/fetch/doubanfetcher.cpp:373
+#: src/fetch/colnectfetcher.cpp:608 src/fetch/discogsfetcher.cpp:317
+#: src/fetch/discogsfetcher.cpp:322 src/fetch/discogsfetcher.cpp:327
+#: src/fetch/discogsfetcher.cpp:334 src/fetch/discogsfetcher.cpp:341
+#: src/fetch/discogsfetcher.cpp:346 src/fetch/doubanfetcher.cpp:373
 #: src/fetch/doubanfetcher.cpp:391 src/fetch/doubanfetcher.cpp:409
 #: src/fetch/filmaffinityfetcher.cpp:284 src/fetch/filmasterfetcher.cpp:238
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:253
 #: src/fetch/googlebookfetcher.cpp:258 src/fetch/igdbfetcher.cpp:366
-#: src/fetch/imdbfetcher.cpp:459 src/fetch/itunesfetcher.cpp:239
+#: src/fetch/imdbfetcher.cpp:459 src/fetch/itunesfetcher.cpp:243
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/moviemeterfetcher.cpp:213
 #: src/fetch/moviemeterfetcher.cpp:218 src/fetch/numistafetcher.cpp:344
@@ -1067,7 +1067,7 @@ msgid "Trade Paperback"
 msgstr ""
 
 #: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
-#: src/fetch/itunesfetcher.cpp:426 src/translators/filereaderbook.cpp:86
+#: src/fetch/itunesfetcher.cpp:440 src/translators/filereaderbook.cpp:86
 #, kde-format
 msgid "E-Book"
 msgstr ""
@@ -1601,7 +1601,7 @@ msgstr "Mano muzika"
 msgid "Album"
 msgstr "Albumas"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:447
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:451
 #: src/fetch/doubanfetcher.cpp:454 src/fetch/doubanfetcher.cpp:588
 #: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
 #: src/translators/audiofileimporter.cpp:335
@@ -1615,19 +1615,19 @@ msgstr ""
 
 #: src/collections/musiccollection.cpp:50
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:455 src/fetch/upcitemdbfetcher.cpp:420
+#: src/fetch/discogsfetcher.cpp:459 src/fetch/upcitemdbfetcher.cpp:420
 #: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:169
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:452
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:456
 #: src/translators/discogsimporter.cpp:166
 #, kde-format
 msgid "Cassette"
 msgstr "Kasetė"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:450
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:454
 #: src/translators/discogsimporter.cpp:164
 #, kde-format
 msgid "Vinyl"
@@ -1640,8 +1640,8 @@ msgid "Medium"
 msgstr "Vidutinis"
 
 #: src/collections/musiccollection.cpp:56
-#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:509
-#: src/fetch/itunesfetcher.cpp:318 src/translators/audiofileimporter.cpp:236
+#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:513
+#: src/fetch/itunesfetcher.cpp:322 src/translators/audiofileimporter.cpp:236
 #: src/translators/xmlstatehandler.cpp:435
 #, kde-format
 msgid "Artist"
@@ -1652,23 +1652,26 @@ msgstr "Atlikėjas"
 msgid "Label"
 msgstr "Žymė"
 
-#: src/collections/musiccollection.cpp:79 src/tests/discogsfetchertest.cpp:309
-#: src/tests/itunesfetchertest.cpp:209 src/tests/musicbrainzfetchertest.cpp:228
+#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:322
+#: src/tests/discogsfetchertest.cpp:309 src/tests/discogsfetchertest.cpp:346
+#: src/tests/itunesfetchertest.cpp:209 src/tests/itunesfetchertest.cpp:237
+#: src/tests/musicbrainzfetchertest.cpp:228
+#: src/tests/musicbrainzfetchertest.cpp:257
 #, fuzzy, kde-format
 msgid "Tracks"
 msgstr "Takeliai"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
-#: src/fetch/discogsfetcher.cpp:508 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:317 src/fetchdialog.cpp:248 src/field.cpp:296
+#: src/fetch/discogsfetcher.cpp:512 src/fetch/fetchmanager.cpp:62
+#: src/fetch/itunesfetcher.cpp:321 src/fetchdialog.cpp:248 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:434
 #, fuzzy, kde-format
 msgid "Title"
 msgstr "Pavadinimas"
 
-#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:510
-#: src/fetch/itunesfetcher.cpp:319 src/translators/audiofileimporter.cpp:237
+#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:514
+#: src/fetch/itunesfetcher.cpp:323 src/translators/audiofileimporter.cpp:237
 #: src/translators/xmlstatehandler.cpp:436
 #, kde-format
 msgid "Length"
@@ -1826,8 +1829,8 @@ msgstr "Regis Boudin"
 msgid "Region"
 msgstr "Regionas"
 
-#: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:322
-#: src/fetch/discogsfetcher.cpp:570
+#: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:326
+#: src/fetch/discogsfetcher.cpp:584
 #, fuzzy, kde-format
 msgid "Nationality"
 msgstr "Tautybė"
@@ -1880,8 +1883,8 @@ msgstr ""
 msgid "Director"
 msgstr "Režisier"
 
-#: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:329
-#: src/fetch/discogsfetcher.cpp:569 src/fetch/rpggeekfetcher.cpp:209
+#: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:333
+#: src/fetch/discogsfetcher.cpp:583 src/fetch/rpggeekfetcher.cpp:209
 #, fuzzy, kde-format
 msgid "Producer"
 msgstr "Prodiuser"
@@ -3119,7 +3122,7 @@ msgstr ""
 
 #: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1095
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:229
-#: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:584
+#: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:598
 #: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:381
 #: src/fetch/isbndbfetcher.cpp:393 src/fetch/mobygamesfetcher.cpp:649
 #: src/fetch/omdbfetcher.cpp:408 src/fetch/thegamesdbfetcher.cpp:635
@@ -3325,7 +3328,7 @@ msgid ""
 "Key."
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:271 src/fetch/discogsfetcher.cpp:144
+#: src/fetch/amazonfetcher.cpp:271 src/fetch/discogsfetcher.cpp:148
 #: src/fetch/isbndbfetcher.cpp:163 src/fetch/mobygamesfetcher.cpp:162
 #: src/fetch/omdbfetcher.cpp:119 src/fetch/thegamesdbfetcher.cpp:136
 #: src/fetch/themoviedbfetcher.cpp:159 src/fetch/thetvdbfetcher.cpp:159
@@ -3339,11 +3342,11 @@ msgid "Results from %1: %2/%3"
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:633 src/fetch/colnectfetcher.cpp:823
-#: src/fetch/discogsfetcher.cpp:223 src/fetch/doubanfetcher.cpp:477
+#: src/fetch/discogsfetcher.cpp:227 src/fetch/doubanfetcher.cpp:477
 #: src/fetch/filmaffinityfetcher.cpp:430 src/fetch/filmasterfetcher.cpp:147
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:198
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
-#: src/fetch/isbndbfetcher.cpp:294 src/fetch/itunesfetcher.cpp:352
+#: src/fetch/isbndbfetcher.cpp:294 src/fetch/itunesfetcher.cpp:366
 #: src/fetch/kinofetcher.cpp:364 src/fetch/kinopoiskfetcher.cpp:267
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/mobygamesfetcher.cpp:343
 #: src/fetch/moviemeterfetcher.cpp:160 src/fetch/numistafetcher.cpp:286
@@ -3384,8 +3387,8 @@ msgid ""
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:986 src/fetch/discogsfetcher.cpp:604
-#: src/fetch/imdbfetcher.cpp:567 src/fetch/itunesfetcher.cpp:551
+#: src/fetch/colnectfetcher.cpp:986 src/fetch/discogsfetcher.cpp:618
+#: src/fetch/imdbfetcher.cpp:567 src/fetch/itunesfetcher.cpp:565
 #: src/fetch/mobygamesfetcher.cpp:669 src/fetch/rpggeekfetcher.cpp:224
 #: src/fetch/thegamesdbfetcher.cpp:655 src/fetch/videogamegeekfetcher.cpp:215
 #, fuzzy, kde-format
@@ -3393,8 +3396,8 @@ msgid "&Image size: "
 msgstr "Paveikslėlio dydis"
 
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:219
-#: src/fetch/colnectfetcher.cpp:990 src/fetch/discogsfetcher.cpp:607
-#: src/fetch/imdbfetcher.cpp:570 src/fetch/itunesfetcher.cpp:555
+#: src/fetch/colnectfetcher.cpp:990 src/fetch/discogsfetcher.cpp:621
+#: src/fetch/imdbfetcher.cpp:570 src/fetch/itunesfetcher.cpp:569
 #: src/fetch/mobygamesfetcher.cpp:672 src/fetch/rpggeekfetcher.cpp:228
 #: src/fetch/thegamesdbfetcher.cpp:658 src/fetch/videogamegeekfetcher.cpp:219
 #, kde-format
@@ -3409,8 +3412,8 @@ msgstr ""
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:220
-#: src/fetch/colnectfetcher.cpp:991 src/fetch/discogsfetcher.cpp:609
-#: src/fetch/imdbfetcher.cpp:572 src/fetch/itunesfetcher.cpp:556
+#: src/fetch/colnectfetcher.cpp:991 src/fetch/discogsfetcher.cpp:623
+#: src/fetch/imdbfetcher.cpp:572 src/fetch/itunesfetcher.cpp:570
 #: src/fetch/mobygamesfetcher.cpp:674 src/fetch/rpggeekfetcher.cpp:229
 #: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:220
 #, kde-format
@@ -3418,15 +3421,15 @@ msgid "Large Image"
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:989 src/fetch/discogsfetcher.cpp:610
-#: src/fetch/imdbfetcher.cpp:573 src/fetch/itunesfetcher.cpp:554
+#: src/fetch/colnectfetcher.cpp:989 src/fetch/discogsfetcher.cpp:624
+#: src/fetch/imdbfetcher.cpp:573 src/fetch/itunesfetcher.cpp:568
 #: src/fetch/mobygamesfetcher.cpp:675 src/fetch/rpggeekfetcher.cpp:227
 #: src/fetch/thegamesdbfetcher.cpp:661 src/fetch/videogamegeekfetcher.cpp:218
 #, fuzzy, kde-format
 msgid "No Image"
 msgstr "Paveikslėlio nėra"
 
-#: src/fetch/amazonfetcher.cpp:1157 src/fetch/discogsfetcher.cpp:614
+#: src/fetch/amazonfetcher.cpp:1157 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:679
 #: src/fetch/thegamesdbfetcher.cpp:665
 #, kde-format
@@ -3462,7 +3465,7 @@ msgstr ""
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
-#: src/fetch/musicbrainzfetcher.cpp:378 src/fetch/openlibraryfetcher.cpp:457
+#: src/fetch/musicbrainzfetcher.cpp:399 src/fetch/openlibraryfetcher.cpp:457
 #: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:386
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
 #: src/fetch/vndbfetcher.cpp:440
@@ -3586,7 +3589,7 @@ msgstr "El. paštas"
 msgid "Danish Bibliographic Center (DBC.dk)"
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:142 src/fetch/isbndbfetcher.cpp:161
+#: src/fetch/discogsfetcher.cpp:146 src/fetch/isbndbfetcher.cpp:161
 #: src/fetch/mobygamesfetcher.cpp:160 src/fetch/omdbfetcher.cpp:117
 #: src/fetch/thegamesdbfetcher.cpp:134 src/fetch/themoviedbfetcher.cpp:157
 #: src/fetch/thetvdbfetcher.cpp:157
@@ -3594,44 +3597,43 @@ msgstr ""
 msgid "An access key is required to use this data source."
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:317 src/fetch/discogsfetcher.cpp:571
+#: src/fetch/discogsfetcher.cpp:321 src/fetch/discogsfetcher.cpp:585
 #, kde-format
 msgid "Discogs Link"
 msgstr ""
 
-#. i18n("Nationality");
-#: src/fetch/discogsfetcher.cpp:336 src/fetch/discogsfetcher.cpp:572
-#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:371
+#: src/fetch/discogsfetcher.cpp:340 src/fetch/discogsfetcher.cpp:586
+#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:392
 #: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:472
 #: src/fetch/vgcollectfetcher.cpp:336 src/fetch/vgcollectfetcher.cpp:371
 #, kde-format
 msgid "Barcode"
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:341 src/fetch/discogsfetcher.cpp:573
+#: src/fetch/discogsfetcher.cpp:345 src/fetch/discogsfetcher.cpp:587
 #, fuzzy, kde-format
 msgid "Catalog Number"
 msgstr "Skaičius"
 
-#: src/fetch/discogsfetcher.cpp:351
+#: src/fetch/discogsfetcher.cpp:355
 #, kde-format
 msgid "The Discogs.com server reports a token error."
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:504 src/fetch/discogsfetcher.cpp:515
-#: src/fetch/itunesfetcher.cpp:313 src/fetch/itunesfetcher.cpp:324
+#: src/fetch/discogsfetcher.cpp:508 src/fetch/discogsfetcher.cpp:519
+#: src/fetch/itunesfetcher.cpp:317 src/fetch/itunesfetcher.cpp:328
 #: src/translators/audiofileimporter.cpp:231
 #: src/translators/audiofileimporter.cpp:241
 #, kde-format
 msgid "Tracks (Disc %1)"
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:560
+#: src/fetch/discogsfetcher.cpp:574
 #, kde-format
 msgid "Discogs Audio Search"
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:596 src/translators/discogsimporter.cpp:200
+#: src/fetch/discogsfetcher.cpp:610 src/translators/discogsimporter.cpp:200
 #, fuzzy, kde-format
 msgid "User token:"
 msgstr "Naudotojas"
@@ -3945,7 +3947,7 @@ msgstr ""
 msgid "Certifications"
 msgstr "Sertifikatai"
 
-#: src/fetch/imdbfetcher.cpp:533 src/fetch/itunesfetcher.cpp:540
+#: src/fetch/imdbfetcher.cpp:533 src/fetch/itunesfetcher.cpp:554
 #: src/fetch/themoviedbfetcher.cpp:573 src/fetch/thetvdbfetcher.cpp:565
 #: src/fetch/tvmazefetcher.cpp:376 src/field.cpp:339
 #, kde-format
@@ -3995,7 +3997,7 @@ msgid ""
 "Pro plans."
 msgstr ""
 
-#: src/fetch/itunesfetcher.cpp:238 src/fetch/itunesfetcher.cpp:539
+#: src/fetch/itunesfetcher.cpp:242 src/fetch/itunesfetcher.cpp:553
 #, fuzzy, kde-format
 #| msgid "Douban Link"
 msgid "iTunes Link"
