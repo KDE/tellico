@@ -41,17 +41,12 @@ TheGamesDBFetcherTest::TheGamesDBFetcherTest() : AbstractFetcherTest() {
 void TheGamesDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 
-  QString configFile = QFINDTESTDATA("tellicotest_private.config");
-  if(!configFile.isEmpty()) {
-    m_config = KSharedConfig::openConfig(configFile, KConfig::SimpleConfig)->group(QStringLiteral("TGDB"));
-  }
-
   m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("GoldenEye 007"));
   m_fieldValues.insert(QStringLiteral("platform"), QStringLiteral("Nintendo 64"));
   m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("1997"));
   m_fieldValues.insert(QStringLiteral("certification"), QStringLiteral("Teen"));
-  m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("Action; Adventure; Shooter; Stealth"));
-  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Nintendo"));
+  m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("Action; Shooter; Stealth"));
+  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Nintendo of America, Inc."));
   m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("Rare, Ltd."));
   m_fieldValues.insert(QStringLiteral("num-player"), QStringLiteral("4"));
 
@@ -71,14 +66,13 @@ void TheGamesDBFetcherTest::initTestCase() {
 }
 
 void TheGamesDBFetcherTest::testTitle() {
-  if(!m_config.isValid()) {
-    QSKIP("This test requires a config file with TGDB settings.", SkipAll);
-  }
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("tvmaze"));
+  cg.writeEntry("Custom Fields", QStringLiteral("num-player,screenshot"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
                                        QStringLiteral("Goldeneye 007"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheGamesDBFetcher(this));
-  fetcher->readConfig(m_config);
+  fetcher->readConfig(cg);
   QVERIFY(fetcher->canSearch(request.key()));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -100,9 +94,6 @@ void TheGamesDBFetcherTest::testTitle() {
 }
 
 void TheGamesDBFetcherTest::testUpdate() {
-  if(!m_config.isValid()) {
-    QSKIP("This test requires a config file with TGDB settings.", SkipAll);
-  }
   Tellico::Data::CollPtr coll(new Tellico::Data::GameCollection(true));
   Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
   coll->addEntries(entry);
@@ -116,7 +107,6 @@ void TheGamesDBFetcherTest::testUpdate() {
   QCOMPARE(request.value(), QStringLiteral("GoldenEye 007"));
   QCOMPARE(request.data(), QLatin1String("3"));
 
-  fetcher.readConfig(m_config);
   request.setCollectionType(coll->type());
   Tellico::Data::EntryList results = DO_FETCH1(&fetcher, request, 1);
   QCOMPARE(results.size(), 1);

@@ -31,27 +31,22 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <QTest>
 
 QTEST_GUILESS_MAIN( IGDBFetcherTest )
 
-IGDBFetcherTest::IGDBFetcherTest() : AbstractFetcherTest()
-    , m_config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig) {
+IGDBFetcherTest::IGDBFetcherTest() : AbstractFetcherTest() {
 }
 
 void IGDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
-  m_hasConfigFile = QFile::exists(QFINDTESTDATA("tellicotest.config"));
 }
 
 void IGDBFetcherTest::testKeyword() {
-  const QString groupName = QStringLiteral("IGDB");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file with IGDB settings.", SkipAll);
-  }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("tvmaze"));
+  cg.writeEntry("Custom Fields", QStringLiteral("igdb,pegi,screenshot"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
                                        QStringLiteral("Zelda Twilight Princess"));
