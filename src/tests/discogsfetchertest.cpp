@@ -226,6 +226,8 @@ void DiscogsFetcherTest::testRawData() {
   QCOMPARE(trackList.at(0), QStringLiteral("Haunted::Evanescence::4:04"));
 
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
+  QVERIFY(!img.isNull());
 }
 
 // do another check to make sure the Vinyl format is captured
@@ -281,7 +283,7 @@ void DiscogsFetcherTest::testUpdate() {
 
 // bug 479503, https://bugs.kde.org/show_bug.cgi?id=479503
 void DiscogsFetcherTest::testMultiDisc() {
-  // the total test case ends up exceeding the throttle limit so pause for a second
+  // the total test case ends up exceeding the throttle limit so pause for a bit
   if(m_needToWait) QTest::qWait(5000);
 
   QString groupName = QStringLiteral("Discogs");
@@ -312,4 +314,40 @@ void DiscogsFetcherTest::testMultiDisc() {
   QStringList tracks2 = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track2")));
   QCOMPARE(tracks2.count(), 8);
   QCOMPARE(tracks2.first(), QStringLiteral("Somewhere::Hiromi Uehara::"));
+}
+
+// https://bugs.kde.org/show_bug.cgi?id=499401
+void DiscogsFetcherTest::testMultiDiscOldWay() {
+  // the total test case ends up exceeding the throttle limit so pause for a bit
+  if(m_needToWait) QTest::qWait(5000);
+
+  // group 2 has config to use old single track approach
+  QString groupName = QStringLiteral("Discogs2");
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Discogs settings.", SkipAll);
+  }
+  KConfigGroup cg(m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::UPC,
+                                       QStringLiteral("4988031446843"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->title(), QStringLiteral("Silver Lining Suite"));
+  auto trackField = entry->collection()->fieldByName(QStringLiteral("track"));
+  QVERIFY(trackField);
+  QVERIFY(!entry->collection()->hasField(QStringLiteral("track2")));
+  // verify the title was not updated to include the disc number
+  QVERIFY(trackField->title() == i18n("Tracks"));
+  QStringList tracks = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
+  QCOMPARE(tracks.count(), 17);
+  QCOMPARE(tracks.at(0), QStringLiteral("Isolation::Hiromi Uehara::"));
+  QCOMPARE(tracks.at(8), QStringLiteral("Ribera Del Duero::Hiromi Uehara::"));
+  QCOMPARE(tracks.at(9), QStringLiteral("Somewhere::Hiromi Uehara::"));
+  QCOMPARE(tracks.at(16), QStringLiteral("Sepia Effect::Hiromi Uehara::"));
 }

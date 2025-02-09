@@ -30,6 +30,7 @@
 #include "../utils/guiproxy.h"
 #include "../utils/mapvalue.h"
 #include "../core/filehandler.h"
+#include "../gui/combobox.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -60,7 +61,9 @@ DiscogsFetcher::DiscogsFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_limit(DISCOGS_MAX_RETURNS_TOTAL)
     , m_started(false)
-    , m_page(1) {
+    , m_imageSize(LargeImage)
+    , m_page(1)
+    , m_multiDiscTracks(true) {
 }
 
 DiscogsFetcher::~DiscogsFetcher() {
@@ -83,6 +86,13 @@ void DiscogsFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
+  const int imageSize = config_.readEntry("Image Size", -1);
+  if(imageSize > -1) {
+    m_imageSize = static_cast<ImageSize>(imageSize);
+  }
+  // user requested option to maintain pre-4.0 behavior of inserting
+  // all tracks into a single track field, regardless of disc count
+  m_multiDiscTracks = config_.readEntry("Split Tracks By Disc", true);
 }
 
 void DiscogsFetcher::setLimit(int limit_) {
@@ -399,13 +409,32 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
     entry_->setField(QStringLiteral("catno"), catnos.join(FieldFormat::delimiterString()));
   }
 
-  /* cover value is not always in the full data, so go ahead and set it now */
-  QString coverUrl = mapValue(resultMap_, "cover_image");
-  if(coverUrl.isEmpty()) {
-    coverUrl = mapValue(resultMap_, "thumb");
-  }
-  if(!coverUrl.isEmpty()) {
-    entry_->setField(QStringLiteral("cover"), coverUrl);
+  if(m_imageSize != NoImage) {
+    /* cover value is not always in the full data, so go ahead and set it now */
+    QString coverUrl;
+    if(m_imageSize == SmallImage) {
+      coverUrl = mapValue(resultMap_, "thumb");
+    } else { // no medium, only other size is large
+      const auto imageList = resultMap_.value(QStringLiteral("images")).toList();
+      // find either the "primary" one or just the first in the list
+      for(const auto& imageItem : imageList) {
+        const auto map = imageItem.toMap();
+        if(mapValue(map, "type") == QLatin1String("primary")) {
+          coverUrl = mapValue(map, "resource_url");
+          break;
+        }
+      }
+      if(coverUrl.isEmpty() && !imageList.isEmpty()) {
+        const auto map = imageList.at(0).toMap();
+        coverUrl = mapValue(map, "resource_url");
+      }
+      if(coverUrl.isEmpty()) {
+        coverUrl = mapValue(resultMap_, "cover_image");
+      }
+    }
+    if(!coverUrl.isEmpty()) {
+      entry_->setField(QStringLiteral("cover"), coverUrl);
+    }
   }
 
   // if we only need cursory data, then we're done
@@ -492,7 +521,17 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
         changeTrackTitle = false;
       }
     }
-    entry_->setField(trackField, discs.at(disc).join(FieldFormat::rowDelimiterString()));
+    if(m_multiDiscTracks) {
+      entry_->setField(trackField, discs.at(disc).join(FieldFormat::rowDelimiterString()));
+    } else {
+      // combine tracks from all discs into the single track field
+      QStringList allTracks;
+      for(const auto& discTracks : std::as_const(discs)) {
+        allTracks += discTracks;
+      }
+      entry_->setField(trackField, allTracks.join(FieldFormat::rowDelimiterString()));
+      break;
+    }
   }
 
   if(entry_->collection()->hasField(QStringLiteral("discogs"))) {
@@ -576,10 +615,31 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   l->addWidget(m_apiKeyEdit, row, 1);
   label->setBuddy(m_apiKeyEdit);
 
+  label = new QLabel(i18n("&Image size: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_imageCombo = new GUI::ComboBox(optionsWidget());
+  m_imageCombo->addItem(i18n("Small Image"), SmallImage);
+//  m_imageCombo->addItem(i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
+  m_imageCombo->addItem(i18n("Large Image"), LargeImage);
+  m_imageCombo->addItem(i18n("No Image"), NoImage);
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_imageCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_imageCombo, row, 1);
+  QString w = i18n("The cover image may be downloaded as well. However, too many large images in the "
+                   "collection may degrade performance.");
+  label->setWhatsThis(w);
+  m_imageCombo->setWhatsThis(w);
+  label->setBuddy(m_imageCombo);
+
   l->setRowStretch(++row, 10);
 
   if(fetcher_) {
     m_apiKeyEdit->setText(fetcher_->m_apiKey);
+    m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+    m_multiDiscTracks = fetcher_->m_multiDiscTracks;
+  } else { // defaults
+    m_imageCombo->setCurrentData(LargeImage);
+    m_multiDiscTracks = true;
   }
 
   // now add additional fields widget
@@ -591,6 +651,9 @@ void DiscogsFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   if(!apiKey.isEmpty()) {
     config_.writeEntry("API Key", apiKey);
   }
+  const int n = m_imageCombo->currentData().toInt();
+  config_.writeEntry("Image Size", n);
+  config_.writeEntry("Split Tracks By Disc", m_multiDiscTracks);
 }
 
 QString DiscogsFetcher::ConfigWidget::preferredName() const {

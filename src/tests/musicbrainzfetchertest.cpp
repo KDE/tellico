@@ -233,3 +233,31 @@ void MusicBrainzFetcherTest::testMultiDisc() {
   QCOMPARE(tracks2.count(), 8);
   QCOMPARE(tracks2.first(), QStringLiteral("Somewhere::上原ひろみ::7:31"));
 }
+
+// https://bugs.kde.org/show_bug.cgi?id=499401
+void MusicBrainzFetcherTest::testMultiDiscOldWay() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("musicbrainz"));
+  cg.writeEntry("Split Tracks By Disc", false);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::UPC,
+                                       QStringLiteral("4988031446843"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->title(), QStringLiteral("Silver Lining Suite"));
+  auto trackField = entry->collection()->fieldByName(QStringLiteral("track"));
+  QVERIFY(trackField);
+  QVERIFY(!entry->collection()->hasField(QStringLiteral("track2")));
+  // verify the title was not updated to include the disc number
+  QVERIFY(trackField->title() == i18n("Tracks"));
+  QStringList tracks = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
+  QCOMPARE(tracks.count(), 17);
+  QCOMPARE(tracks.at(8), QStringLiteral("Ribera Del Duero::上原ひろみ::4:00"));
+  QCOMPARE(tracks.at(9), QStringLiteral("Somewhere::上原ひろみ::7:31"));
+  QCOMPARE(tracks.at(16), QStringLiteral("Sepia Effect::上原ひろみ::7:38"));
+}

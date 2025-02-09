@@ -82,6 +82,8 @@ public:
     explicit ConfigWidget(QWidget* parent_, const MusicBrainzFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&) override;
     virtual QString preferredName() const override;
+  private:
+    bool m_multiDiscTracks;
   };
   friend class ConfigWidget;
 
@@ -102,6 +104,7 @@ private:
   int m_limit;
   int m_total;
   int m_offset;
+  bool m_multiDiscTracks;
   QElapsedTimer m_requestTimer;
 
   QHash<uint, Data::EntryPtr> m_entries;

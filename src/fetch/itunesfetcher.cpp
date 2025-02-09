@@ -62,6 +62,7 @@ ItunesFetcher::ItunesFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false)
     , m_isTV(false)
+    , m_multiDiscTracks(true)
     , m_imageSize(LargeImage) {
 }
 
@@ -87,6 +88,9 @@ void ItunesFetcher::readConfigHook(const KConfigGroup& config_) {
   if(imageSize > -1) {
     m_imageSize = static_cast<ImageSize>(imageSize);
   }
+  // user requested option to maintain pre-4.0 behavior of inserting
+  // all tracks into a single track field, regardless of disc count
+  m_multiDiscTracks = config_.readEntry("Split Tracks By Disc", true);
 }
 
 void ItunesFetcher::saveConfigHook(KConfigGroup& config_) {
@@ -326,7 +330,17 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
             changeTrackTitle = false;
           }
         }
-        entry->setField(trackField, discsInColl.at(disc).join(FieldFormat::rowDelimiterString()));
+        if(m_multiDiscTracks) {
+          entry->setField(trackField, discsInColl.at(disc).join(FieldFormat::rowDelimiterString()));
+        } else {
+          // combine tracks from all discs into the single track field
+          QStringList allTracks;
+          for(const auto& discTracks : std::as_const(discsInColl)) {
+            allTracks += discTracks;
+          }
+          entry->setField(trackField, allTracks.join(FieldFormat::rowDelimiterString()));
+          break;
+        }
       }
     }
   }
@@ -566,14 +580,17 @@ ItunesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ItunesFetcher*
 
   if(fetcher_) {
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+    m_multiDiscTracks = fetcher_->m_multiDiscTracks;
   } else { // defaults
     m_imageCombo->setCurrentData(SmallImage);
+    m_multiDiscTracks = true;
   }
 }
 
 void ItunesFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   const int n = m_imageCombo->currentData().toInt();
   config_.writeEntry("Image Size", n);
+  config_.writeEntry("Split Tracks By Disc", m_multiDiscTracks);
 }
 
 QString ItunesFetcher::ConfigWidget::preferredName() const {

@@ -60,7 +60,7 @@ using Tellico::Fetch::MusicBrainzFetcher;
 
 MusicBrainzFetcher::MusicBrainzFetcher(QObject* parent_)
     : Fetcher(parent_), m_xsltHandler(nullptr),
-      m_limit(MUSICBRAINZ_MAX_RETURNS_TOTAL), m_total(-1), m_offset(0),
+      m_limit(MUSICBRAINZ_MAX_RETURNS_TOTAL), m_total(-1), m_offset(0), m_multiDiscTracks(true),
       m_job(nullptr), m_started(false) {
 }
 
@@ -81,7 +81,10 @@ bool MusicBrainzFetcher::canFetch(int type) const {
   return type == Data::Collection::Album;
 }
 
-void MusicBrainzFetcher::readConfigHook(const KConfigGroup&) {
+void MusicBrainzFetcher::readConfigHook(const KConfigGroup& config_) {
+  // user requested option to maintain pre-4.0 behavior of inserting
+  // all tracks into a single track field, regardless of disc count
+  m_multiDiscTracks = config_.readEntry("Split Tracks By Disc", true);
 }
 
 void MusicBrainzFetcher::setLimit(int limit_) {
@@ -312,6 +315,25 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   coll->removeField(QStringLiteral("mbid"));
 
   entry = coll->entries().front();
+  // revert to pre-4.0 approach of having all tracks in a single field
+  if(!m_multiDiscTracks) {
+    const QString trackField(QStringLiteral("track"));
+    auto f = coll->fieldByName(trackField);
+    f->setTitle(i18n("Tracks")); // revert to default field title
+    coll->modifyField(f);
+    QString allTracks = entry->field(trackField);
+    for(int disc = 2; true; ++disc) {
+      const QString t = trackField + QString::number(disc);
+      if(!coll->hasField(t)) {
+        break;
+      }
+      allTracks += FieldFormat::rowDelimiterString();
+      allTracks += entry->field(t);
+      coll->removeField(t);
+    }
+    entry->setField(trackField, allTracks);
+  }
+
   m_entries.insert(uid_, entry); // replaces old value
   return entry;
 }
@@ -367,7 +389,6 @@ QString MusicBrainzFetcher::defaultIcon() {
 
 Tellico::StringHash MusicBrainzFetcher::allOptionalFields() {
   StringHash hash;
-//  hash[QStringLiteral("nationality")] = i18n("Nationality");
   hash[QStringLiteral("barcode")] = i18n("Barcode");
   return hash;
 }
@@ -380,9 +401,16 @@ MusicBrainzFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MusicBrai
 
   // now add additional fields widget
   addFieldsWidget(MusicBrainzFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+
+  if(fetcher_) {
+    m_multiDiscTracks = fetcher_->m_multiDiscTracks;
+  } else {
+    m_multiDiscTracks = true;
+  }
 }
 
-void MusicBrainzFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
+void MusicBrainzFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  config_.writeEntry("Split Tracks By Disc", m_multiDiscTracks);
 }
 
 QString MusicBrainzFetcher::ConfigWidget::preferredName() const {

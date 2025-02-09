@@ -618,7 +618,7 @@ void ImageFactory::clean(bool purgeTempDirectory_) {
     const auto localDirName = factory->d->localImageDir.dir();
     delete factory;
     factory = nullptr;
-    ImageFactory::init();
+    init(); // now factory is no longer null
     const bool remoteOrLocalExists = !localDirName.isLocalFile() || QDir(localDirName.toLocalFile()).exists();
     if(!localDirName.isEmpty() && remoteOrLocalExists) {
       factory->d->localImageDir.setDirectory(localDirName);

@@ -82,6 +82,7 @@ public:
     virtual QString preferredName() const override;
   private:
      GUI::ComboBox* m_imageCombo;
+     bool m_multiDiscTracks;
   };
   friend class ConfigWidget;
 
@@ -107,6 +108,7 @@ private:
   QHash<int, QList<QStringList> > m_trackList;
   QPointer<KIO::StoredTransferJob> m_job;
   bool m_isTV;
+  bool m_multiDiscTracks;
 
   enum ImageSize {
     NoImage=0,

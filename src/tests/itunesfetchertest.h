@@ -41,6 +41,7 @@ private Q_SLOTS:
   void testEscapingGravity();
   void testIsbn();
   void testMultiDisc();
+  void testMultiDiscOldWay();
 };
 
 #endif

@@ -40,7 +40,9 @@ namespace KIO {
 class DiscogsFetcherTest;
 
 namespace Tellico {
-
+  namespace GUI {
+    class ComboBox;
+  }
   namespace Fetch {
 
 /**
@@ -84,6 +86,8 @@ public:
     virtual QString preferredName() const override;
   private:
     QLineEdit* m_apiKeyEdit;
+    GUI::ComboBox* m_imageCombo;
+    bool m_multiDiscTracks;
   };
   friend class ConfigWidget;
 
@@ -103,8 +107,17 @@ private:
   int m_limit;
   bool m_started;
 
+  enum ImageSize {
+    SmallImage=0, // small is really the thumb size
+    MediumImage=1, // there's no medium really, but keep enum for consistency
+    LargeImage=2,
+    NoImage=3
+  };
+  ImageSize m_imageSize;
+
   QString m_apiKey;
   int m_page;
+  bool m_multiDiscTracks;
 
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
