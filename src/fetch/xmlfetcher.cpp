@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h> // for TELLICO_VERSION
+
 #include "xmlfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
@@ -72,6 +74,9 @@ void XMLFetcher::doSearch() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
+  m_job->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
+  m_job->addMetaData(QStringLiteral("UserAgent"),
+                     QStringLiteral("Tellico/%1 ( https://tellico-project.org )").arg(QStringLiteral(TELLICO_VERSION)));
   connect(m_job.data(), &KJob::result, this, &XMLFetcher::slotComplete);
   connect(m_job.data(), &KIO::TransferJob::redirection, this, &XMLFetcher::slotRedirected);
 }
