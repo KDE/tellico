@@ -43,7 +43,7 @@
 
 namespace {
   static const int COMICVINE_MAX_RETURNS_TOTAL = 20;
-  static const char* COMICVINE_API_URL = "https://www.comicvine.com/api";
+  static const char* COMICVINE_API_URL = "https://comicvine.gamespot.com/api";
   static const char* COMICVINE_API_KEY = "6e4b19eeb8ccec8e2f026169d19adf57850d378e";
 }
 
@@ -92,7 +92,7 @@ QUrl ComicVineFetcher::searchUrl() {
 
   switch(request().key()) {
     case Keyword:
-      u.setPath(u.path() + QStringLiteral("/search"));
+      u.setPath(u.path() + QStringLiteral("/search/"));
       q.addQueryItem(QStringLiteral("query"), request().value());
       q.addQueryItem(QStringLiteral("resources"), QStringLiteral("issue"));
       break;
@@ -229,7 +229,7 @@ ComicVineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ComicVineFe
   QLabel* al = new QLabel(i18n("Registration is required for accessing this data source. "
                                "If you agree to the terms and conditions, <a href='%1'>sign "
                                "up for an account</a>, and enter your information below.",
-                                QLatin1String("http://api.comicvine.com")),
+                                QLatin1String("https://comicvine.gamespot.com/api/")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

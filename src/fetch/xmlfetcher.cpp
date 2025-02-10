@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h> // for TELLICO_VERSION
+
 #include "xmlfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
@@ -72,7 +74,11 @@ void XMLFetcher::doSearch() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
+  m_job->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
+  m_job->addMetaData(QStringLiteral("UserAgent"),
+                     QStringLiteral("Tellico/%1 ( https://tellico-project.org )").arg(QStringLiteral(TELLICO_VERSION)));
   connect(m_job.data(), &KJob::result, this, &XMLFetcher::slotComplete);
+  connect(m_job.data(), &KIO::TransferJob::redirection, this, &XMLFetcher::slotRedirected);
 }
 
 void XMLFetcher::stop() {
@@ -105,12 +111,12 @@ void XMLFetcher::slotComplete(KJob* ) {
   }
 
   QByteArray data = m_job->data();
-  if(data.isEmpty()) {
+  if(data.size() < 5) {
     myLog() << "No data returned in XML response";
     stop();
     return;
   }
-  if(data[0] != '<') {
+  if(data.first(5) != QByteArrayView("<?xml")) {
     myLog() << "Invalid XML data:" << data.left(200);
     stop();
     return;
@@ -174,6 +180,11 @@ void XMLFetcher::slotComplete(KJob* ) {
 
   checkMoreResults(m_entries.count());
   stop(); // required
+}
+
+void XMLFetcher::slotRedirected(KIO::Job* job_, const QUrl& url_) {
+  Q_UNUSED(job_);
+  myLog() << "Redirected to" << url_.toDisplayString();
 }
 
 Tellico::Data::EntryPtr XMLFetcher::fetchEntryHook(uint uid_) {
