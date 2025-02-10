@@ -2246,7 +2246,8 @@ void MainWindow::slotUpdateToolbarIcons() {
 
 void MainWindow::slotGroupLabelActivated() {
   // need entry grouping combo id
-  for(auto obj : m_entryGrouping->associatedObjects()) {
+  const auto objList = m_entryGrouping->associatedObjects();
+  for(auto obj : objList) {
     if(auto widget = ::qobject_cast<KToolBar*>(obj)) {
       auto container = m_entryGrouping->requestWidget(widget);
       auto combo = ::qobject_cast<QComboBox*>(container); //krazy:exclude=qclasses
@@ -2316,7 +2317,8 @@ void MainWindow::updateEntrySources() {
   const QString actionListName = QStringLiteral("update_entry_actions");
   unplugActionList(actionListName);
   for(auto action : std::as_const(m_fetchActions)) {
-    for(auto obj : action->associatedObjects()) {
+    const auto objList = action->associatedObjects();
+    for(auto obj : objList) {
       if(auto widget = ::qobject_cast<QWidget*>(obj)) {
         widget->removeAction(action);
       }
