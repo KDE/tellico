@@ -156,7 +156,7 @@ void ISBNdbFetcher::doSearch(const QString& term_) {
       return;
   }
 
-  if(m_apiKey.isEmpty()) {
+  if(m_testUrl1.isEmpty() && m_apiKey.isEmpty()) {
     myDebug() << source() << "- empty API key";
     message(i18n("An access key is required to use this data source.")
             + QLatin1Char(' ') +
@@ -164,6 +164,7 @@ void ISBNdbFetcher::doSearch(const QString& term_) {
     stop();
     return;
   }
+  if(!m_testUrl1.isEmpty()) u = m_testUrl1;
 
 //  myDebug() << "url: " << u.url();
 

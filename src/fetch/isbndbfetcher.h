@@ -37,6 +37,7 @@ class KJob;
 namespace KIO {
   class StoredTransferJob;
 }
+class ISBNdbFetcherTest;
 
 namespace Tellico {
   namespace Fetch {
@@ -83,6 +84,9 @@ private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
+  friend class ::ISBNdbFetcherTest;
+  void setTestUrl1(const QUrl& url) { m_testUrl1 = url; }
+
   virtual void search() override;
   void doSearch(const QString& term);
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
@@ -99,6 +103,8 @@ private:
   bool m_started;
   QString m_apiKey;
   bool m_batchIsbn;
+
+  QUrl m_testUrl1;
 };
 
   }

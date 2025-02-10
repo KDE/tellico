@@ -1,0 +1,25 @@
+{
+  "book" : {
+    "authors" : [
+      "Herd, Norman"
+    ],
+    "dewey_decimal" : "968.05/092/4",
+    "dimensions" : "200 p. : ill., ports. ; 22 cm.",
+    "binding" : "Paperback",
+    "isbn" : "0620062126",
+    "isbn13" : "9780620062121",
+    "language" : "eng",
+    "overview" : "Includes bibliographical references and index.",
+    "date_published" : "July 1982",
+    "pages" : 200,
+    "publisher" : "Blue Crane Books",
+    "subjects" : [
+      "campbell killie 1881 1965",
+      "historians south africa biography",
+      "antiques south africa biography",
+      "book collectors south africa biography"
+    ],
+    "title" : "Killie's Africa",
+    "title_long" : "Killie's Africa: the achievements of Dr. Killie Campbell"
+  }
+}

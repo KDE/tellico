@@ -48,6 +48,43 @@ void ISBNdbFetcherTest::initTestCase() {
   }
 }
 
+void ISBNdbFetcherTest::testIsbnLocal() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("isbndb"));
+  cg.writeEntry("Custom Fields", QStringLiteral("dewey"));
+
+  QUrl testUrl1 = QUrl::fromLocalFile(QFINDTESTDATA("data/isbndb_isbn.json"));
+  auto f = new Tellico::Fetch::ISBNdbFetcher(this);
+  f->setTestUrl1(testUrl1);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
+                                       QStringLiteral("0620062126"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+  fetcher->readConfig(cg);
+
+  Tellico::Fetch::MessageLogger* logger = new Tellico::Fetch::MessageLogger;
+  fetcher->setMessageHandler(logger);
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+  QVERIFY(logger->errorList.isEmpty());
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Killie's Africa"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Herd, Norman"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0620062126"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("1982"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Blue Crane Books"));
+  QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("eng"));
+  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("200"));
+  QCOMPARE(entry->field(QStringLiteral("dewey")), QStringLiteral("968.05/092/4"));
+  QCOMPARE(entry->field(QStringLiteral("plot")),
+           QStringLiteral("Includes bibliographical references and index."));
+  QCOMPARE(entry->field(QStringLiteral("genre")),
+           QStringLiteral("campbell killie 1881 1965; historians south africa biography; "
+                          "antiques south africa biography; book collectors south africa biography"));
+}
+
 void ISBNdbFetcherTest::testIsbn() {
   QString groupName = QStringLiteral("ISBNdb");
   if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {

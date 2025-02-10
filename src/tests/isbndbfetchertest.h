@@ -36,6 +36,7 @@ public:
 
 private Q_SLOTS:
   void initTestCase();
+  void testIsbnLocal();
   void testIsbn();
   void testIsbn13();
   void testMultipleIsbn();
