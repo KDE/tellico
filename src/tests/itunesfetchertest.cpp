@@ -48,15 +48,22 @@ void ItunesFetcherTest::testBurningEdge() {
   cg.writeEntry("Custom Fields", QStringLiteral("itunes"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
-                                       QStringLiteral("Burning Edge Of Dawn"));
+                                       QStringLiteral("Burning Edge of Dawn"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ItunesFetcher(this));
   fetcher->readConfig(cg);
 
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 5);
 
-  QCOMPARE(results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = results.at(0);
+  Tellico::Data::EntryPtr entry;
+  // apparently there are other albums with similar names
+  for(const auto& tmpEntry : results) {
+    if(tmpEntry->field(QStringLiteral("artist")) == QLatin1String("Andrew Peterson")) {
+      entry = tmpEntry;
+      break;
+    } else {
+      qDebug() << "Skipping" << tmpEntry->title();
+    }
+  }
   QVERIFY(entry);
 
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("The Burning Edge of Dawn"));
