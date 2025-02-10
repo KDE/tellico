@@ -34,6 +34,7 @@
 class QUrl;
 class KJob;
 namespace KIO {
+  class Job;
   class StoredTransferJob;
 }
 
@@ -70,6 +71,7 @@ protected:
 
 private Q_SLOTS:
   void slotComplete(KJob* job);
+  void slotRedirected(KIO::Job* job, const QUrl& url);
 
 private:
   virtual void search() override;

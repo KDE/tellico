@@ -73,6 +73,7 @@ void XMLFetcher::doSearch() {
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &XMLFetcher::slotComplete);
+  connect(m_job.data(), &KIO::TransferJob::redirection, this, &XMLFetcher::slotRedirected);
 }
 
 void XMLFetcher::stop() {
@@ -174,6 +175,11 @@ void XMLFetcher::slotComplete(KJob* ) {
 
   checkMoreResults(m_entries.count());
   stop(); // required
+}
+
+void XMLFetcher::slotRedirected(KIO::Job* job_, const QUrl& url_) {
+  Q_UNUSED(job_);
+  myLog() << "Redirected to" << url_.toDisplayString();
 }
 
 Tellico::Data::EntryPtr XMLFetcher::fetchEntryHook(uint uid_) {
