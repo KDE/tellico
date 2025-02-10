@@ -106,12 +106,12 @@ void XMLFetcher::slotComplete(KJob* ) {
   }
 
   QByteArray data = m_job->data();
-  if(data.isEmpty()) {
+  if(data.size() < 5) {
     myLog() << "No data returned in XML response";
     stop();
     return;
   }
-  if(data[0] != '<') {
+  if(data.first(5) != QByteArrayView("<?xml")) {
     myLog() << "Invalid XML data:" << data.left(200);
     stop();
     return;
