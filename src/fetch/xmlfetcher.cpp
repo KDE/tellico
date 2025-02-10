@@ -116,7 +116,7 @@ void XMLFetcher::slotComplete(KJob* ) {
     stop();
     return;
   }
-  if(data.first(5) != "<?xml") {
+  if(data.left(5) != "<?xml") {
     myLog() << "Invalid XML data:" << data.left(200);
     stop();
     return;
