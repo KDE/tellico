@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-09 02:29+0000\n"
+"POT-Creation-Date: 2025-02-10 02:29+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -754,8 +754,8 @@ msgstr "Bibtex-nøgle"
 #: src/fetch/googlebookfetcher.cpp:258 src/fetch/igdbfetcher.cpp:366
 #: src/fetch/imdbfetcher.cpp:459 src/fetch/itunesfetcher.cpp:243
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
-#: src/fetch/mobygamesfetcher.cpp:455 src/fetch/moviemeterfetcher.cpp:213
-#: src/fetch/moviemeterfetcher.cpp:218 src/fetch/numistafetcher.cpp:344
+#: src/fetch/mobygamesfetcher.cpp:455 src/fetch/moviemeterfetcher.cpp:219
+#: src/fetch/moviemeterfetcher.cpp:224 src/fetch/numistafetcher.cpp:344
 #: src/fetch/numistafetcher.cpp:360 src/fetch/omdbfetcher.cpp:250
 #: src/fetch/openlibraryfetcher.cpp:276 src/fetch/thegamesdbfetcher.cpp:265
 #: src/fetch/thegamesdbfetcher.cpp:270 src/fetch/themoviedbfetcher.cpp:307
@@ -3433,7 +3433,7 @@ msgstr "Resultater fra %1: %2/%3"
 #: src/fetch/isbndbfetcher.cpp:294 src/fetch/itunesfetcher.cpp:366
 #: src/fetch/kinofetcher.cpp:364 src/fetch/kinopoiskfetcher.cpp:267
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/mobygamesfetcher.cpp:343
-#: src/fetch/moviemeterfetcher.cpp:160 src/fetch/numistafetcher.cpp:286
+#: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:286
 #: src/fetch/numistafetcher.cpp:294 src/fetch/omdbfetcher.cpp:181
 #: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:235
 #: src/fetch/thetvdbfetcher.cpp:340 src/fetch/tvmazefetcher.cpp:262
@@ -3475,8 +3475,9 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:215
 #: src/fetch/colnectfetcher.cpp:986 src/fetch/discogsfetcher.cpp:618
 #: src/fetch/imdbfetcher.cpp:567 src/fetch/itunesfetcher.cpp:565
-#: src/fetch/mobygamesfetcher.cpp:669 src/fetch/rpggeekfetcher.cpp:224
-#: src/fetch/thegamesdbfetcher.cpp:655 src/fetch/videogamegeekfetcher.cpp:215
+#: src/fetch/mobygamesfetcher.cpp:669 src/fetch/moviemeterfetcher.cpp:319
+#: src/fetch/rpggeekfetcher.cpp:224 src/fetch/thegamesdbfetcher.cpp:655
+#: src/fetch/videogamegeekfetcher.cpp:215
 #, kde-format
 msgid "&Image size: "
 msgstr "&Billedstørrelse: "
@@ -3484,14 +3485,15 @@ msgstr "&Billedstørrelse: "
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:219
 #: src/fetch/colnectfetcher.cpp:990 src/fetch/discogsfetcher.cpp:621
 #: src/fetch/imdbfetcher.cpp:570 src/fetch/itunesfetcher.cpp:569
-#: src/fetch/mobygamesfetcher.cpp:672 src/fetch/rpggeekfetcher.cpp:228
-#: src/fetch/thegamesdbfetcher.cpp:658 src/fetch/videogamegeekfetcher.cpp:219
+#: src/fetch/mobygamesfetcher.cpp:672 src/fetch/moviemeterfetcher.cpp:322
+#: src/fetch/rpggeekfetcher.cpp:228 src/fetch/thegamesdbfetcher.cpp:658
+#: src/fetch/videogamegeekfetcher.cpp:219
 #, kde-format
 msgid "Small Image"
 msgstr "Lille billede"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/imdbfetcher.cpp:571
-#: src/fetch/thegamesdbfetcher.cpp:659
+#: src/fetch/moviemeterfetcher.cpp:323 src/fetch/thegamesdbfetcher.cpp:659
 #, kde-format
 msgid "Medium Image"
 msgstr "Mellemstort billede"
@@ -3500,8 +3502,9 @@ msgstr "Mellemstort billede"
 #: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:220
 #: src/fetch/colnectfetcher.cpp:991 src/fetch/discogsfetcher.cpp:623
 #: src/fetch/imdbfetcher.cpp:572 src/fetch/itunesfetcher.cpp:570
-#: src/fetch/mobygamesfetcher.cpp:674 src/fetch/rpggeekfetcher.cpp:229
-#: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:220
+#: src/fetch/mobygamesfetcher.cpp:674 src/fetch/moviemeterfetcher.cpp:324
+#: src/fetch/rpggeekfetcher.cpp:229 src/fetch/thegamesdbfetcher.cpp:660
+#: src/fetch/videogamegeekfetcher.cpp:220
 #, kde-format
 msgid "Large Image"
 msgstr "Stort billede"
@@ -3509,15 +3512,16 @@ msgstr "Stort billede"
 #: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:218
 #: src/fetch/colnectfetcher.cpp:989 src/fetch/discogsfetcher.cpp:624
 #: src/fetch/imdbfetcher.cpp:573 src/fetch/itunesfetcher.cpp:568
-#: src/fetch/mobygamesfetcher.cpp:675 src/fetch/rpggeekfetcher.cpp:227
-#: src/fetch/thegamesdbfetcher.cpp:661 src/fetch/videogamegeekfetcher.cpp:218
+#: src/fetch/mobygamesfetcher.cpp:675 src/fetch/moviemeterfetcher.cpp:325
+#: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:661
+#: src/fetch/videogamegeekfetcher.cpp:218
 #, kde-format
 msgid "No Image"
 msgstr "Intet billede"
 
 #: src/fetch/amazonfetcher.cpp:1157 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:679
-#: src/fetch/thegamesdbfetcher.cpp:665
+#: src/fetch/moviemeterfetcher.cpp:329 src/fetch/thegamesdbfetcher.cpp:665
 #, kde-format
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
@@ -3554,11 +3558,10 @@ msgstr ""
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
-#: src/fetch/moviemeterfetcher.cpp:298 src/fetch/mrlookupfetcher.cpp:230
-#: src/fetch/musicbrainzfetcher.cpp:399 src/fetch/openlibraryfetcher.cpp:457
-#: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:386
-#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
-#: src/fetch/vndbfetcher.cpp:440
+#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:399
+#: src/fetch/openlibraryfetcher.cpp:457 src/fetch/springerfetcher.cpp:187
+#: src/fetch/tvmazefetcher.cpp:386 src/fetch/upcitemdbfetcher.cpp:479
+#: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:440
 #, kde-format
 msgid "This source has no options."
 msgstr "Denne kilde har ingen indstillinger."
@@ -3753,8 +3756,8 @@ msgid "DVDFr Link"
 msgstr "DVDFr-link"
 
 #: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:478
-#: src/fetch/imdbfetcher.cpp:530 src/fetch/moviemeterfetcher.cpp:222
-#: src/fetch/moviemeterfetcher.cpp:291 src/fetch/omdbfetcher.cpp:255
+#: src/fetch/imdbfetcher.cpp:530 src/fetch/moviemeterfetcher.cpp:228
+#: src/fetch/moviemeterfetcher.cpp:308 src/fetch/omdbfetcher.cpp:255
 #: src/fetch/themoviedbfetcher.cpp:322 src/fetch/themoviedbfetcher.cpp:570
 #: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:378
 #, kde-format
@@ -4118,7 +4121,7 @@ msgstr "Kino-Teatr-link"
 msgid "MobyGames Link"
 msgstr "MobyGames-link"
 
-#: src/fetch/moviemeterfetcher.cpp:217 src/fetch/moviemeterfetcher.cpp:290
+#: src/fetch/moviemeterfetcher.cpp:223 src/fetch/moviemeterfetcher.cpp:307
 #, kde-format
 msgid "MovieMeter Link"
 msgstr "MovieMeter-link"
