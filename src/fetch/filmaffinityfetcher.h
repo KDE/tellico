@@ -56,7 +56,8 @@ Q_OBJECT
 public:
   enum Locale {
     ES = 0,
-    US = 1
+    US = 1,
+    Last
   };
 
   FilmAffinityFetcher(QObject* parent);

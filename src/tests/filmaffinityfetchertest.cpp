@@ -158,7 +158,7 @@ void FilmAffinityFetcherTest::testAlcarras() {
   QCOMPARE(entry->field("director"), QString::fromUtf8("Carla Simón"));
   QCOMPARE(entry->field("writer"), QString::fromUtf8("Carla Simón; Arnau Vilaró"));
   QCOMPARE(entry->field("composer"), QStringLiteral("Andrea Koch"));
-  QCOMPARE(entry->field("studio"), QString::fromUtf8("Avalon P.C; Elastica Films; Vilaüt Films; Kino Produzioni; Movistar Plus+; rtve; TV3"));
+  QCOMPARE(entry->field("studio"), QString::fromUtf8("Avalon P.C; Elastica Films; Vilaüt Films; Kino Produzioni; Movistar Plus+; Rtve; TV3"));
   QCOMPARE(set(entry, "genre"), set(QStringLiteral("Drama")));
   QCOMPARE(entry->field("running-time"), QStringLiteral("120"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
