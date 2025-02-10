@@ -64,8 +64,8 @@ FilmAffinityFetcher::~FilmAffinityFetcher() {
 
 // static
 const FilmAffinityFetcher::LocaleData& FilmAffinityFetcher::localeData(int locale_) {
-  Q_ASSERT(locale_ >= 0);
-  Q_ASSERT(locale_ <  2);
+  Q_ASSERT(locale_ >= ES);
+  Q_ASSERT(locale_ <  Last);
   static LocaleData dataVector[6] = {
     {
       QStringLiteral("es"),
@@ -204,14 +204,15 @@ void FilmAffinityFetcher::slotComplete(KJob*) {
 #endif
 
   // look for a specific div, with an href and title, sometime uses single-quote, sometimes double-quotes
-  QRegularExpression resultRx(QStringLiteral("<div class=\"fa-shadow adv-search-item\">(.+?)<div class=\"mc-actions\">"),
+  QRegularExpression resultRx(QStringLiteral("data-movie-id(.+?)mc-actions"),
                               QRegularExpression::DotMatchesEverythingOption);
-  QRegularExpression titleRx(QStringLiteral("<div class=\"mc-title\"><a.+?href=\"(.+?)\".+?>(.+?)</a>"));
+  QRegularExpression titleRx(QStringLiteral("mc-title\">.*?<a.+?href=\"(.+?)\".+?>(.+?)</a"),
+                             QRegularExpression::DotMatchesEverythingOption);
   // the year is within the title text as a 4-digit number, starting with 1 or 2
-  QRegularExpression yearRx(QStringLiteral("<span class=\"mc-year\">([12]\\d\\d\\d)</span"));
+  QRegularExpression yearRx(QStringLiteral("mc-year\".*?>([12]\\d\\d\\d)</span"));
 
   QString href, title, year;
-  QRegularExpressionMatchIterator i = resultRx.globalMatch(output);
+  auto i = resultRx.globalMatch(output);
   while(i.hasNext() && m_started) {
     auto topMatch = i.next();
     auto anchorMatch = titleRx.match(topMatch.captured(1));

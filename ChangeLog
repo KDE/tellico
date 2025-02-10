@@ -1,3 +1,7 @@
+2025-02-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Filmaffinity data source.
+
 2025-02-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Added configurable image size to Moviemeter data source.
