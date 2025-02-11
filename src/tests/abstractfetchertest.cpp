@@ -49,6 +49,9 @@ AbstractFetcherTest::AbstractFetcherTest() : QObject(), m_loop(this), m_hasNetwo
 Tellico::Data::EntryList AbstractFetcherTest::doFetch(Tellico::Fetch::Fetcher::Ptr fetcher,
                                                       const Tellico::Fetch::FetchRequest& request,
                                                       int maxResults) {
+  m_results.clear();
+  m_resultTitles.clear();
+
   // don't use 'this' as job parent, it crashes
   Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(nullptr, fetcher, request);
   connect(job, &KJob::result, this, &AbstractFetcherTest::slotResult);
@@ -68,6 +71,7 @@ void AbstractFetcherTest::slotResult(KJob* job_) {
     if(result->title.isEmpty() && result->desc.isEmpty()) {
       myDebug() << "AbstractFetcherTest::slotResult() - FetchResult has empty title and description";
     }
+    m_resultTitles += result->title;
   }
   m_results = job->entries();
   m_loop.quit();

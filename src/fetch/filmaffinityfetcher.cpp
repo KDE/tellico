@@ -209,7 +209,8 @@ void FilmAffinityFetcher::slotComplete(KJob*) {
   QRegularExpression titleRx(QStringLiteral("mc-title\">.*?<a.+?href=\"(.+?)\".+?>(.+?)</a"),
                              QRegularExpression::DotMatchesEverythingOption);
   // the year is within the title text as a 4-digit number, starting with 1 or 2
-  QRegularExpression yearRx(QStringLiteral("mc-year\".*?>([12]\\d\\d\\d)</span"));
+  static const QRegularExpression yearRx(QStringLiteral("mc-year\".*?>([12]\\d\\d\\d)</span"));
+  static const QRegularExpression tagRx(QStringLiteral("<.+?>"));
 
   QString href, title, year;
   auto i = resultRx.globalMatch(output);
@@ -218,7 +219,7 @@ void FilmAffinityFetcher::slotComplete(KJob*) {
     auto anchorMatch = titleRx.match(topMatch.captured(1));
     if(anchorMatch.hasMatch()) {
       href = anchorMatch.captured(1);
-      title = anchorMatch.captured(2).trimmed();
+      title = anchorMatch.captured(2).remove(tagRx).trimmed();
       auto yearMatch = yearRx.match(topMatch.captured(1));
       if(yearMatch.hasMatch()) {
         year = yearMatch.captured(1);

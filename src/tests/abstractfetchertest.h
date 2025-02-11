@@ -53,6 +53,9 @@ protected:
   static QString set(const char* value);
   static QString set(const QString& value);
 
+protected:
+  QStringList m_resultTitles;
+
 private Q_SLOTS:
   void slotResult(KJob* job);
 
