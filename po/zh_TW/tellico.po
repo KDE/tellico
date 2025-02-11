@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-10 00:41+0000\n"
+"POT-Creation-Date: 2025-02-11 00:41+0000\n"
 "PO-Revision-Date: 2024-07-27 13:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -709,17 +709,16 @@ msgstr "Bibtex 鍵值"
 #: src/fetch/discogsfetcher.cpp:317 src/fetch/discogsfetcher.cpp:322
 #: src/fetch/discogsfetcher.cpp:327 src/fetch/discogsfetcher.cpp:334
 #: src/fetch/discogsfetcher.cpp:341 src/fetch/discogsfetcher.cpp:346
-#: src/fetch/doubanfetcher.cpp:373 src/fetch/doubanfetcher.cpp:391
-#: src/fetch/doubanfetcher.cpp:409 src/fetch/filmaffinityfetcher.cpp:284
-#: src/fetch/filmasterfetcher.cpp:238 src/fetch/gaminghistoryfetcher.cpp:196
-#: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:253
-#: src/fetch/googlebookfetcher.cpp:258 src/fetch/igdbfetcher.cpp:366
-#: src/fetch/imdbfetcher.cpp:459 src/fetch/itunesfetcher.cpp:243
+#: src/fetch/doubanfetcher.cpp:388 src/fetch/filmaffinityfetcher.cpp:285
+#: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
+#: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:254
+#: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:361
+#: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:244
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
-#: src/fetch/mobygamesfetcher.cpp:455 src/fetch/moviemeterfetcher.cpp:219
+#: src/fetch/mobygamesfetcher.cpp:456 src/fetch/moviemeterfetcher.cpp:219
 #: src/fetch/moviemeterfetcher.cpp:224 src/fetch/numistafetcher.cpp:344
-#: src/fetch/numistafetcher.cpp:360 src/fetch/omdbfetcher.cpp:250
-#: src/fetch/openlibraryfetcher.cpp:276 src/fetch/thegamesdbfetcher.cpp:265
+#: src/fetch/numistafetcher.cpp:359 src/fetch/omdbfetcher.cpp:250
+#: src/fetch/openlibraryfetcher.cpp:277 src/fetch/thegamesdbfetcher.cpp:265
 #: src/fetch/thegamesdbfetcher.cpp:270 src/fetch/themoviedbfetcher.cpp:307
 #: src/fetch/themoviedbfetcher.cpp:310 src/fetch/themoviedbfetcher.cpp:315
 #: src/fetch/themoviedbfetcher.cpp:333 src/fetch/thetvdbfetcher.cpp:245
@@ -862,7 +861,7 @@ msgstr "交叉參考"
 #: src/collections/cardcollection.cpp:107
 #: src/collections/comicbookcollection.cpp:114
 #: src/collections/musiccollection.cpp:109
-#: src/collections/videocollection.cpp:209 src/fetch/amazonfetcher.cpp:1078
+#: src/collections/videocollection.cpp:209 src/fetch/amazonfetcher.cpp:1076
 #, kde-format
 msgid "Keywords"
 msgstr "關鍵字"
@@ -926,7 +925,7 @@ msgid "Designer"
 msgstr "設計者"
 
 #: src/collections/boardgamecollection.cpp:76
-#: src/fetch/thegamesdbfetcher.cpp:269 src/fetch/thegamesdbfetcher.cpp:603
+#: src/fetch/thegamesdbfetcher.cpp:269 src/fetch/thegamesdbfetcher.cpp:594
 #, kde-format
 msgid "Number of Players"
 msgstr "玩家數"
@@ -1044,17 +1043,17 @@ msgstr "我的書籍"
 msgid "Subtitle"
 msgstr "副標題"
 
-#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
-#: src/fetch/doubanfetcher.cpp:446 src/fetch/doubanfetcher.cpp:499
+#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:965
+#: src/fetch/doubanfetcher.cpp:430 src/fetch/doubanfetcher.cpp:483
 #: src/fetch/ibsfetcher.cpp:289 src/translators/alexandriaimporter.cpp:159
-#: src/translators/librarythingimporter.cpp:149
+#: src/translators/librarythingimporter.cpp:148
 #, kde-format
 msgid "Hardback"
 msgstr "精裝本"
 
-#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:965
-#: src/fetch/doubanfetcher.cpp:448 src/fetch/doubanfetcher.cpp:501
-#: src/fetch/ibsfetcher.cpp:287 src/translators/librarythingimporter.cpp:147
+#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:963
+#: src/fetch/doubanfetcher.cpp:432 src/fetch/doubanfetcher.cpp:485
+#: src/fetch/ibsfetcher.cpp:287 src/translators/librarythingimporter.cpp:146
 #, kde-format
 msgid "Paperback"
 msgstr "平裝本"
@@ -1065,7 +1064,7 @@ msgid "Trade Paperback"
 msgstr "商業平裝本"
 
 #: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
-#: src/fetch/itunesfetcher.cpp:440 src/translators/filereaderbook.cpp:86
+#: src/fetch/itunesfetcher.cpp:442 src/translators/filereaderbook.cpp:86
 #, kde-format
 msgid "E-Book"
 msgstr "電子書"
@@ -1603,11 +1602,11 @@ msgstr "我的音樂"
 msgid "Album"
 msgstr "專輯"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:451
-#: src/fetch/doubanfetcher.cpp:454 src/fetch/doubanfetcher.cpp:588
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:453
+#: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:568
 #: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
 #: src/translators/audiofileimporter.cpp:335
-#: src/translators/discogsimporter.cpp:162
+#: src/translators/discogsimporter.cpp:166
 #: src/translators/freedbimporter.cpp:272
 #: src/translators/freedbimporter.cpp:390
 #: src/translators/freedbimporter.cpp:457
@@ -1616,21 +1615,21 @@ msgid "Compact Disc"
 msgstr "光碟"
 
 #: src/collections/musiccollection.cpp:50
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:459 src/fetch/upcitemdbfetcher.cpp:420
-#: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:169
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1043
+#: src/fetch/discogsfetcher.cpp:461 src/fetch/upcitemdbfetcher.cpp:420
+#: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:173
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:456
-#: src/translators/discogsimporter.cpp:166
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:458
+#: src/translators/discogsimporter.cpp:170
 #, kde-format
 msgid "Cassette"
 msgstr "卡帶"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:454
-#: src/translators/discogsimporter.cpp:164
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:456
+#: src/translators/discogsimporter.cpp:168
 #, kde-format
 msgid "Vinyl"
 msgstr "黑膠唱片"
@@ -1642,8 +1641,8 @@ msgid "Medium"
 msgstr "媒體"
 
 #: src/collections/musiccollection.cpp:56
-#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:513
-#: src/fetch/itunesfetcher.cpp:322 src/translators/audiofileimporter.cpp:236
+#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:518
+#: src/fetch/itunesfetcher.cpp:324 src/translators/audiofileimporter.cpp:236
 #: src/translators/xmlstatehandler.cpp:435
 #, kde-format
 msgid "Artist"
@@ -1656,7 +1655,7 @@ msgstr "標籤"
 
 #: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:322
 #: src/tests/discogsfetchertest.cpp:309 src/tests/discogsfetchertest.cpp:346
-#: src/tests/itunesfetchertest.cpp:209 src/tests/itunesfetchertest.cpp:237
+#: src/tests/itunesfetchertest.cpp:216 src/tests/itunesfetchertest.cpp:244
 #: src/tests/musicbrainzfetchertest.cpp:228
 #: src/tests/musicbrainzfetchertest.cpp:257
 #, kde-format
@@ -1664,16 +1663,16 @@ msgid "Tracks"
 msgstr "軌道"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
-#: src/fetch/discogsfetcher.cpp:512 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:321 src/fetchdialog.cpp:243 src/field.cpp:296
+#: src/fetch/discogsfetcher.cpp:517 src/fetch/fetchmanager.cpp:62
+#: src/fetch/itunesfetcher.cpp:323 src/fetchdialog.cpp:243 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:434
 #, kde-format
 msgid "Title"
 msgstr "標題"
 
-#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:514
-#: src/fetch/itunesfetcher.cpp:323 src/translators/audiofileimporter.cpp:237
+#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:519
+#: src/fetch/itunesfetcher.cpp:325 src/translators/audiofileimporter.cpp:237
 #: src/translators/xmlstatehandler.cpp:436
 #, kde-format
 msgid "Length"
@@ -1737,7 +1736,7 @@ msgstr "影像"
 msgid "My Videos"
 msgstr "我的影片"
 
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1031
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1029
 #: src/fetch/upcitemdbfetcher.cpp:406
 #, kde-format
 msgid "VHS"
@@ -1753,13 +1752,13 @@ msgstr "VCD"
 msgid "DivX"
 msgstr "DivX"
 
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1025
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1023
 #: src/fetch/upcitemdbfetcher.cpp:400
 #, kde-format
 msgid "Blu-ray"
 msgstr "藍光"
 
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1028
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1026
 #: src/fetch/upcitemdbfetcher.cpp:403
 #, kde-format
 msgid "HD DVD"
@@ -1832,12 +1831,12 @@ msgid "Region"
 msgstr "區域"
 
 #: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:326
-#: src/fetch/discogsfetcher.cpp:584
+#: src/fetch/discogsfetcher.cpp:591
 #, kde-format
 msgid "Nationality"
 msgstr "國籍"
 
-#: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1041
+#: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1039
 #: src/fetch/upcitemdbfetcher.cpp:416
 #, kde-format
 msgid "NTSC"
@@ -1886,7 +1885,7 @@ msgid "Director"
 msgstr "導演"
 
 #: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:333
-#: src/fetch/discogsfetcher.cpp:583 src/fetch/rpggeekfetcher.cpp:209
+#: src/fetch/discogsfetcher.cpp:590 src/fetch/rpggeekfetcher.cpp:209
 #, kde-format
 msgid "Producer"
 msgstr "產生者"
@@ -1931,7 +1930,7 @@ msgstr "影片片長（分）"
 msgid "Aspect Ratio"
 msgstr "外觀比例"
 
-#: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1014
+#: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1012
 #: src/fetch/upcitemdbfetcher.cpp:386
 #, kde-format
 msgid "Widescreen"
@@ -1947,7 +1946,7 @@ msgstr "黑白"
 msgid "Color Mode"
 msgstr "色彩模式"
 
-#: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1035
+#: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1033
 #: src/fetch/upcitemdbfetcher.cpp:410
 #, kde-format
 msgid "Director's Cut"
@@ -2735,7 +2734,7 @@ msgstr "樣本套件"
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
-#: src/translators/librarythingimporter.cpp:188
+#: src/translators/librarythingimporter.cpp:187
 #: src/translators/onixexporter.cpp:71
 #: src/translators/tellicoxmlexporter.cpp:71
 #: src/translators/tellicozipexporter.cpp:54
@@ -2942,7 +2941,7 @@ msgstr "特色"
 msgid "Other People"
 msgstr "其他人物"
 
-#: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:360
+#: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
 #: src/translators/pdfimporter.cpp:232
 #, kde-format
@@ -3207,13 +3206,13 @@ msgstr "匯出的檔案以使用者的地域設定編碼。"
 msgid "SAO/NASA Astrophysics Data System"
 msgstr ""
 
-#: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1095
+#: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:229
-#: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:598
-#: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:381
-#: src/fetch/isbndbfetcher.cpp:393 src/fetch/mobygamesfetcher.cpp:649
-#: src/fetch/omdbfetcher.cpp:408 src/fetch/thegamesdbfetcher.cpp:635
-#: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:578
+#: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:605
+#: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:383
+#: src/fetch/isbndbfetcher.cpp:390 src/fetch/mobygamesfetcher.cpp:641
+#: src/fetch/omdbfetcher.cpp:409 src/fetch/thegamesdbfetcher.cpp:626
+#: src/fetch/themoviedbfetcher.cpp:565 src/fetch/thetvdbfetcher.cpp:573
 #, fuzzy, kde-format
 #| msgid ""
 #| "Registration is required for accessing the %1 data source. If you agree "
@@ -3227,21 +3226,21 @@ msgstr ""
 "要存取 %1 資料來源必須先註冊。若您同意這些條款與條件，<a href='%2'>請註冊一個"
 "帳號</a>並在底下輸入您的資訊。"
 
-#: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1107
+#: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1105
 #: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:241
 #: src/fetch/entrezfetcher.cpp:538 src/fetch/giantbombfetcher.cpp:227
-#: src/fetch/googlebookfetcher.cpp:393 src/fetch/isbndbfetcher.cpp:405
-#: src/fetch/mobygamesfetcher.cpp:661 src/fetch/numistafetcher.cpp:415
-#: src/fetch/omdbfetcher.cpp:420 src/fetch/thegamesdbfetcher.cpp:647
-#: src/fetch/themoviedbfetcher.cpp:597
+#: src/fetch/googlebookfetcher.cpp:395 src/fetch/isbndbfetcher.cpp:402
+#: src/fetch/mobygamesfetcher.cpp:653 src/fetch/numistafetcher.cpp:415
+#: src/fetch/omdbfetcher.cpp:421 src/fetch/thegamesdbfetcher.cpp:638
+#: src/fetch/themoviedbfetcher.cpp:577
 #, kde-format
 msgid "Access key: "
 msgstr "存取金鑰："
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:544
-#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:399
-#: src/fetch/themoviedbfetcher.cpp:603 src/fetch/thetvdbfetcher.cpp:596
+#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:401
+#: src/fetch/themoviedbfetcher.cpp:583 src/fetch/thetvdbfetcher.cpp:591
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3408,13 +3407,13 @@ msgstr "Amazon（阿聯酋）"
 msgid "United Arab Emirates"
 msgstr "阿拉伯聯合大公國"
 
-#: src/fetch/amazonfetcher.cpp:199 src/fetch/filmasterfetcher.cpp:67
+#: src/fetch/amazonfetcher.cpp:199 src/fetch/filmasterfetcher.cpp:68
 #: src/fetch/springerfetcher.cpp:62
 #, kde-format
 msgid "This data is licensed under <a href=%1>specific terms</a>."
 msgstr "此資料以<a href=%1>指定條款</a>授權。"
 
-#: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1112
+#: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1110
 #, kde-format
 msgid ""
 "Access to data from Amazon.com requires an AWS Access Key ID and a Secret "
@@ -3422,7 +3421,7 @@ msgid ""
 msgstr "要從 Amazon.com 取得資料必須有 AWS 存取金鑰代碼以及私密金鑰。"
 
 #: src/fetch/amazonfetcher.cpp:271 src/fetch/discogsfetcher.cpp:148
-#: src/fetch/isbndbfetcher.cpp:163 src/fetch/mobygamesfetcher.cpp:162
+#: src/fetch/isbndbfetcher.cpp:166 src/fetch/mobygamesfetcher.cpp:162
 #: src/fetch/omdbfetcher.cpp:119 src/fetch/thegamesdbfetcher.cpp:136
 #: src/fetch/themoviedbfetcher.cpp:159 src/fetch/thetvdbfetcher.cpp:159
 #, kde-format
@@ -3435,100 +3434,100 @@ msgid "Results from %1: %2/%3"
 msgstr "從 %1 傳回的結果：%2/%3"
 
 #: src/fetch/amazonfetcher.cpp:633 src/fetch/colnectfetcher.cpp:823
-#: src/fetch/discogsfetcher.cpp:227 src/fetch/doubanfetcher.cpp:477
-#: src/fetch/filmaffinityfetcher.cpp:430 src/fetch/filmasterfetcher.cpp:147
-#: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:198
+#: src/fetch/discogsfetcher.cpp:227 src/fetch/doubanfetcher.cpp:461
+#: src/fetch/filmaffinityfetcher.cpp:431 src/fetch/filmasterfetcher.cpp:148
+#: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:199
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
-#: src/fetch/isbndbfetcher.cpp:294 src/fetch/itunesfetcher.cpp:366
-#: src/fetch/kinofetcher.cpp:364 src/fetch/kinopoiskfetcher.cpp:267
-#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/mobygamesfetcher.cpp:343
+#: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:368
+#: src/fetch/kinofetcher.cpp:365 src/fetch/kinopoiskfetcher.cpp:267
+#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/mobygamesfetcher.cpp:344
 #: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:286
 #: src/fetch/numistafetcher.cpp:294 src/fetch/omdbfetcher.cpp:181
 #: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:235
-#: src/fetch/thetvdbfetcher.cpp:340 src/fetch/tvmazefetcher.cpp:262
+#: src/fetch/thetvdbfetcher.cpp:340 src/fetch/tvmazefetcher.cpp:261
 #: src/fetch/upcitemdbfetcher.cpp:259 src/fetch/vgcollectfetcher.cpp:282
 #: src/fetch/vndbfetcher.cpp:176
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "無法載入封面影像。"
 
-#: src/fetch/amazonfetcher.cpp:862 src/fetch/amazonfetcher.cpp:1079
+#: src/fetch/amazonfetcher.cpp:862 src/fetch/amazonfetcher.cpp:1077
 #, kde-format
 msgid "Amazon Link"
 msgstr "Amazon 連結"
 
-#: src/fetch/amazonfetcher.cpp:1069
+#: src/fetch/amazonfetcher.cpp:1067
 #, kde-format
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com 網頁服務（AWS）"
 
-#: src/fetch/amazonfetcher.cpp:1117
+#: src/fetch/amazonfetcher.cpp:1115
 #, kde-format
 msgid "Secret key: "
 msgstr "私密金鑰："
 
-#: src/fetch/amazonfetcher.cpp:1127
+#: src/fetch/amazonfetcher.cpp:1125
 #, kde-format
 msgid "Country: "
 msgstr "國家："
 
-#: src/fetch/amazonfetcher.cpp:1142
+#: src/fetch/amazonfetcher.cpp:1140
 #, kde-format
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
 msgstr "Amazon.com 提供數個不同的地域化站台。請選擇此資料來源要使用的站台。"
 
-#: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:986 src/fetch/discogsfetcher.cpp:618
-#: src/fetch/imdbfetcher.cpp:563 src/fetch/itunesfetcher.cpp:565
-#: src/fetch/mobygamesfetcher.cpp:669 src/fetch/moviemeterfetcher.cpp:319
-#: src/fetch/rpggeekfetcher.cpp:224 src/fetch/thegamesdbfetcher.cpp:655
+#: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:215
+#: src/fetch/colnectfetcher.cpp:986 src/fetch/discogsfetcher.cpp:625
+#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:568
+#: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
+#: src/fetch/rpggeekfetcher.cpp:224 src/fetch/thegamesdbfetcher.cpp:646
 #: src/fetch/videogamegeekfetcher.cpp:215
 #, kde-format
 msgid "&Image size: "
 msgstr "影像大小(&I)："
 
-#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:219
-#: src/fetch/colnectfetcher.cpp:990 src/fetch/discogsfetcher.cpp:621
-#: src/fetch/imdbfetcher.cpp:566 src/fetch/itunesfetcher.cpp:569
-#: src/fetch/mobygamesfetcher.cpp:672 src/fetch/moviemeterfetcher.cpp:322
-#: src/fetch/rpggeekfetcher.cpp:228 src/fetch/thegamesdbfetcher.cpp:658
+#: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:219
+#: src/fetch/colnectfetcher.cpp:990 src/fetch/discogsfetcher.cpp:628
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:572
+#: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
+#: src/fetch/rpggeekfetcher.cpp:228 src/fetch/thegamesdbfetcher.cpp:649
 #: src/fetch/videogamegeekfetcher.cpp:219
 #, kde-format
 msgid "Small Image"
 msgstr "小"
 
-#: src/fetch/amazonfetcher.cpp:1152 src/fetch/imdbfetcher.cpp:567
-#: src/fetch/moviemeterfetcher.cpp:323 src/fetch/thegamesdbfetcher.cpp:659
+#: src/fetch/amazonfetcher.cpp:1150 src/fetch/imdbfetcher.cpp:544
+#: src/fetch/moviemeterfetcher.cpp:324 src/fetch/thegamesdbfetcher.cpp:650
 #, kde-format
 msgid "Medium Image"
 msgstr "中"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
-#: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:220
-#: src/fetch/colnectfetcher.cpp:991 src/fetch/discogsfetcher.cpp:623
-#: src/fetch/imdbfetcher.cpp:568 src/fetch/itunesfetcher.cpp:570
-#: src/fetch/mobygamesfetcher.cpp:674 src/fetch/moviemeterfetcher.cpp:324
-#: src/fetch/rpggeekfetcher.cpp:229 src/fetch/thegamesdbfetcher.cpp:660
+#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:220
+#: src/fetch/colnectfetcher.cpp:991 src/fetch/discogsfetcher.cpp:630
+#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:573
+#: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
+#: src/fetch/rpggeekfetcher.cpp:229 src/fetch/thegamesdbfetcher.cpp:651
 #: src/fetch/videogamegeekfetcher.cpp:220
 #, kde-format
 msgid "Large Image"
 msgstr "大"
 
-#: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:989 src/fetch/discogsfetcher.cpp:624
-#: src/fetch/imdbfetcher.cpp:569 src/fetch/itunesfetcher.cpp:568
-#: src/fetch/mobygamesfetcher.cpp:675 src/fetch/moviemeterfetcher.cpp:325
-#: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:661
+#: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:218
+#: src/fetch/colnectfetcher.cpp:989 src/fetch/discogsfetcher.cpp:631
+#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:571
+#: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
+#: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:652
 #: src/fetch/videogamegeekfetcher.cpp:218
 #, kde-format
 msgid "No Image"
 msgstr "沒有影像"
 
-#: src/fetch/amazonfetcher.cpp:1157 src/fetch/discogsfetcher.cpp:628
-#: src/fetch/imdbfetcher.cpp:573 src/fetch/mobygamesfetcher.cpp:679
-#: src/fetch/moviemeterfetcher.cpp:329 src/fetch/thegamesdbfetcher.cpp:665
+#: src/fetch/amazonfetcher.cpp:1155 src/fetch/discogsfetcher.cpp:635
+#: src/fetch/imdbfetcher.cpp:550 src/fetch/mobygamesfetcher.cpp:671
+#: src/fetch/moviemeterfetcher.cpp:330 src/fetch/thegamesdbfetcher.cpp:656
 #, kde-format
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
@@ -3536,12 +3535,12 @@ msgid ""
 msgstr ""
 "封面影像也可以下載。不過，若是收藏裡放了太多大張的影像，可能會降低它的效率。"
 
-#: src/fetch/amazonfetcher.cpp:1163
+#: src/fetch/amazonfetcher.cpp:1161
 #, kde-format
 msgid "&Associate's ID: "
 msgstr "夥伴代碼(&A)："
 
-#: src/fetch/amazonfetcher.cpp:1169
+#: src/fetch/amazonfetcher.cpp:1167
 #, kde-format
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
@@ -3558,17 +3557,17 @@ msgstr ""
 
 #: src/fetch/arxivfetcher.cpp:345 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:649
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
+#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
 #: src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
-#: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:611
-#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:402
+#: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
+#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:403
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/mrlookupfetcher.cpp:230
-#: src/fetch/musicbrainzfetcher.cpp:399 src/fetch/openlibraryfetcher.cpp:457
-#: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:386
+#: src/fetch/musicbrainzfetcher.cpp:399 src/fetch/openlibraryfetcher.cpp:464
+#: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
-#: src/fetch/vndbfetcher.cpp:434
+#: src/fetch/vndbfetcher.cpp:433
 #, kde-format
 msgid "This source has no options."
 msgstr "此來源沒有選項。"
@@ -3617,15 +3616,15 @@ msgid "Michel"
 msgstr ""
 
 #: src/fetch/colnectfetcher.cpp:854 src/fetch/giantbombfetcher.cpp:203
-#: src/fetch/igdbfetcher.cpp:573 src/fetch/mobygamesfetcher.cpp:635
+#: src/fetch/igdbfetcher.cpp:568 src/fetch/mobygamesfetcher.cpp:627
 #: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:325
 #, fuzzy, kde-format
 #| msgid "ESRB Rating"
 msgid "PEGI Rating"
 msgstr "ESRB 評比"
 
-#: src/fetch/colnectfetcher.cpp:958 src/fetch/filmaffinityfetcher.cpp:488
-#: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:622
+#: src/fetch/colnectfetcher.cpp:958 src/fetch/filmaffinityfetcher.cpp:489
+#: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:602
 #, kde-format
 msgid "Language: "
 msgstr "語言："
@@ -3686,7 +3685,7 @@ msgstr "電子郵件："
 msgid "Danish Bibliographic Center (DBC.dk)"
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:146 src/fetch/isbndbfetcher.cpp:161
+#: src/fetch/discogsfetcher.cpp:146 src/fetch/isbndbfetcher.cpp:164
 #: src/fetch/mobygamesfetcher.cpp:160 src/fetch/omdbfetcher.cpp:117
 #: src/fetch/thegamesdbfetcher.cpp:134 src/fetch/themoviedbfetcher.cpp:157
 #: src/fetch/thetvdbfetcher.cpp:157
@@ -3694,12 +3693,12 @@ msgstr ""
 msgid "An access key is required to use this data source."
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:321 src/fetch/discogsfetcher.cpp:585
+#: src/fetch/discogsfetcher.cpp:321 src/fetch/discogsfetcher.cpp:592
 #, kde-format
 msgid "Discogs Link"
 msgstr "Discogs 連結"
 
-#: src/fetch/discogsfetcher.cpp:340 src/fetch/discogsfetcher.cpp:586
+#: src/fetch/discogsfetcher.cpp:340 src/fetch/discogsfetcher.cpp:593
 #: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:392
 #: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:472
 #: src/fetch/vgcollectfetcher.cpp:336 src/fetch/vgcollectfetcher.cpp:371
@@ -3707,51 +3706,49 @@ msgstr "Discogs 連結"
 msgid "Barcode"
 msgstr "條碼"
 
-#: src/fetch/discogsfetcher.cpp:345 src/fetch/discogsfetcher.cpp:587
+#: src/fetch/discogsfetcher.cpp:345 src/fetch/discogsfetcher.cpp:594
 #, fuzzy, kde-format
 #| msgid "Card Number"
 msgid "Catalog Number"
 msgstr "卡號"
 
-#: src/fetch/discogsfetcher.cpp:355
+#: src/fetch/discogsfetcher.cpp:354
 #, kde-format
 msgid "The Discogs.com server reports a token error."
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:508 src/fetch/discogsfetcher.cpp:519
-#: src/fetch/itunesfetcher.cpp:317 src/fetch/itunesfetcher.cpp:328
+#: src/fetch/discogsfetcher.cpp:513 src/fetch/discogsfetcher.cpp:524
+#: src/fetch/itunesfetcher.cpp:319 src/fetch/itunesfetcher.cpp:330
 #: src/translators/audiofileimporter.cpp:231
 #: src/translators/audiofileimporter.cpp:241
 #, kde-format
 msgid "Tracks (Disc %1)"
 msgstr "音軌（碟片 %1）"
 
-#: src/fetch/discogsfetcher.cpp:574
+#: src/fetch/discogsfetcher.cpp:581
 #, kde-format
 msgid "Discogs Audio Search"
 msgstr "Discogs 音效搜尋"
 
-#: src/fetch/discogsfetcher.cpp:610 src/translators/discogsimporter.cpp:200
+#: src/fetch/discogsfetcher.cpp:617 src/translators/discogsimporter.cpp:204
 #, kde-format
 msgid "User token:"
 msgstr "使用者權杖："
 
-#: src/fetch/doubanfetcher.cpp:366 src/fetch/doubanfetcher.cpp:384
-#: src/fetch/doubanfetcher.cpp:402 src/fetch/doubanfetcher.cpp:641
-#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:324
-#: src/fetch/filmaffinityfetcher.cpp:461 src/fetch/imdbfetcher.cpp:470
-#: src/fetch/imdbfetcher.cpp:532 src/fetch/kinopoiskfetcher.cpp:338
+#: src/fetch/doubanfetcher.cpp:381 src/fetch/doubanfetcher.cpp:621
+#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:325
+#: src/fetch/filmaffinityfetcher.cpp:462 src/fetch/imdbfetcher.cpp:450
+#: src/fetch/imdbfetcher.cpp:509 src/fetch/kinopoiskfetcher.cpp:338
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:327
-#: src/fetch/themoviedbfetcher.cpp:571 src/fetch/vndbfetcher.cpp:279
-#: src/fetch/vndbfetcher.cpp:426 src/translators/filereadervideo.cpp:206
+#: src/fetch/themoviedbfetcher.cpp:551 src/fetch/vndbfetcher.cpp:279
+#: src/fetch/vndbfetcher.cpp:425 src/translators/filereadervideo.cpp:206
 #, kde-format
 msgid "Original Title"
 msgstr "原始標題"
 
-#: src/fetch/doubanfetcher.cpp:372 src/fetch/doubanfetcher.cpp:390
-#: src/fetch/doubanfetcher.cpp:408 src/fetch/doubanfetcher.cpp:642
+#: src/fetch/doubanfetcher.cpp:387 src/fetch/doubanfetcher.cpp:622
 #, kde-format
 msgid "Douban Link"
 msgstr "Douban 連結"
@@ -3761,11 +3758,11 @@ msgstr "Douban 連結"
 msgid "DVDFr Link"
 msgstr "DVDFr 連結"
 
-#: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:478
-#: src/fetch/imdbfetcher.cpp:530 src/fetch/moviemeterfetcher.cpp:228
-#: src/fetch/moviemeterfetcher.cpp:308 src/fetch/omdbfetcher.cpp:255
-#: src/fetch/themoviedbfetcher.cpp:322 src/fetch/themoviedbfetcher.cpp:570
-#: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:378
+#: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:458
+#: src/fetch/imdbfetcher.cpp:507 src/fetch/moviemeterfetcher.cpp:228
+#: src/fetch/moviemeterfetcher.cpp:309 src/fetch/omdbfetcher.cpp:255
+#: src/fetch/themoviedbfetcher.cpp:322 src/fetch/themoviedbfetcher.cpp:550
+#: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:365
 #, kde-format
 msgid "Alternative Titles"
 msgstr "替代標題"
@@ -3892,38 +3889,38 @@ msgstr "LCCN"
 msgid "Raw Query"
 msgstr "原始查詢"
 
-#: src/fetch/filmaffinityfetcher.cpp:283 src/fetch/filmaffinityfetcher.cpp:462
+#: src/fetch/filmaffinityfetcher.cpp:284 src/fetch/filmaffinityfetcher.cpp:463
 #, kde-format
 msgid "FilmAffinity Link"
 msgstr "FilmAffinity 連結"
 
-#: src/fetch/filmaffinityfetcher.cpp:474 src/fetch/imdbfetcher.cpp:549
-#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:608
+#: src/fetch/filmaffinityfetcher.cpp:475 src/fetch/imdbfetcher.cpp:526
+#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:588
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "最大演員數量(&M)："
 
-#: src/fetch/filmaffinityfetcher.cpp:483 src/fetch/imdbfetcher.cpp:558
-#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:617
+#: src/fetch/filmaffinityfetcher.cpp:484 src/fetch/imdbfetcher.cpp:535
+#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:597
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
 msgstr "一部電影的卡司清單可能會有很多人。請選擇搜尋傳回的最大數量。"
 
-#: src/fetch/filmaffinityfetcher.cpp:493
+#: src/fetch/filmaffinityfetcher.cpp:494
 #, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "西班牙"
 
-#: src/fetch/filmaffinityfetcher.cpp:496
+#: src/fetch/filmaffinityfetcher.cpp:497
 #, kde-format
 msgctxt "Country"
 msgid "USA"
 msgstr "美國"
 
-#: src/fetch/filmasterfetcher.cpp:237 src/fetch/filmasterfetcher.cpp:314
+#: src/fetch/filmasterfetcher.cpp:243 src/fetch/filmasterfetcher.cpp:321
 #, kde-format
 msgid "Filmaster Link"
 msgstr "Filmaster 連結"
@@ -3965,12 +3962,12 @@ msgstr "作者："
 msgid "GiantBomb Link"
 msgstr "GiantBomb 連結"
 
-#: src/fetch/googlebookfetcher.cpp:257 src/fetch/googlebookfetcher.cpp:370
+#: src/fetch/googlebookfetcher.cpp:258 src/fetch/googlebookfetcher.cpp:372
 #, kde-format
 msgid "Google Book Link"
 msgstr "Google Book 連結"
 
-#: src/fetch/googlebookfetcher.cpp:361
+#: src/fetch/googlebookfetcher.cpp:363
 #, kde-format
 msgid "Google Book Search"
 msgstr "Google Book 搜尋"
@@ -3980,7 +3977,7 @@ msgstr "Google Book 搜尋"
 msgid "Illustrator"
 msgstr "插畫家"
 
-#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/isbndbfetcher.cpp:382
+#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/isbndbfetcher.cpp:379
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
@@ -3999,84 +3996,84 @@ msgstr "LoC 分級"
 msgid "Internet Bookshop (ibs.it)"
 msgstr "網路書店（ibs.it）"
 
-#: src/fetch/igdbfetcher.cpp:365 src/fetch/igdbfetcher.cpp:574
+#: src/fetch/igdbfetcher.cpp:360 src/fetch/igdbfetcher.cpp:569
 #, kde-format
 msgid "IGDB Link"
 msgstr "IGDB 連結"
 
-#: src/fetch/igdbfetcher.cpp:562
+#: src/fetch/igdbfetcher.cpp:557
 #, fuzzy, kde-format
 #| msgid "Internet Movie Database (German)"
 msgid "Internet Game Database (IGDB.com)"
 msgstr "網際網路電影資料庫（德文）"
 
-#: src/fetch/igdbfetcher.cpp:575 src/fetch/mobygamesfetcher.cpp:637
-#: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:343
+#: src/fetch/igdbfetcher.cpp:570 src/fetch/mobygamesfetcher.cpp:629
+#: src/fetch/thegamesdbfetcher.cpp:595 src/field.cpp:343
 #, kde-format
 msgid "Screenshot"
 msgstr "螢幕截圖"
 
-#: src/fetch/imdbfetcher.cpp:458 src/fetch/imdbfetcher.cpp:529
+#: src/fetch/imdbfetcher.cpp:440 src/fetch/imdbfetcher.cpp:506
 #, kde-format
 msgid "IMDb Rating"
 msgstr "IMDb 評分"
 
-#: src/fetch/imdbfetcher.cpp:517 src/fetch/imdbfetcher.cpp:636
+#: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:613
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "網際網路電影資料庫 (imdb)"
 
-#: src/fetch/imdbfetcher.cpp:528 src/fetch/kinopoiskfetcher.cpp:668
-#: src/fetch/omdbfetcher.cpp:397 src/fetch/themoviedbfetcher.cpp:569
-#: src/fetch/thetvdbfetcher.cpp:564 src/fetch/tvmazefetcher.cpp:375
+#: src/fetch/imdbfetcher.cpp:505 src/fetch/kinopoiskfetcher.cpp:668
+#: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:549
+#: src/fetch/thetvdbfetcher.cpp:559 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:331
 #, kde-format
 msgid "IMDb Link"
 msgstr "IMDb 連結"
 
-#: src/fetch/imdbfetcher.cpp:531
+#: src/fetch/imdbfetcher.cpp:508
 #, kde-format
 msgid "Certifications"
 msgstr "憑證"
 
-#: src/fetch/imdbfetcher.cpp:533 src/fetch/itunesfetcher.cpp:554
-#: src/fetch/themoviedbfetcher.cpp:573 src/fetch/thetvdbfetcher.cpp:565
-#: src/fetch/tvmazefetcher.cpp:376 src/field.cpp:335
+#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:557
+#: src/fetch/themoviedbfetcher.cpp:553 src/fetch/thetvdbfetcher.cpp:560
+#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
 msgstr "集數"
 
-#: src/fetch/imdbfetcher.cpp:579
+#: src/fetch/imdbfetcher.cpp:556
 #, kde-format
 msgid "Locale"
 msgstr "地域"
 
-#: src/fetch/imdbfetcher.cpp:582
+#: src/fetch/imdbfetcher.cpp:559
 #, kde-format
 msgid "Use system locale"
 msgstr "使用系統區域設定"
 
-#: src/fetch/imdbfetcher.cpp:583
+#: src/fetch/imdbfetcher.cpp:560
 #, kde-format
 msgid "Use custom locale"
 msgstr "使用自訂區域設定"
 
-#: src/fetch/isbndbfetcher.cpp:359
+#: src/fetch/isbndbfetcher.cpp:356
 #, kde-format
 msgid "Dewey Decimal"
 msgstr "Dewey Decimal"
 
-#: src/fetch/isbndbfetcher.cpp:372
+#: src/fetch/isbndbfetcher.cpp:369
 #, kde-format
 msgid "ISBNdb.com"
 msgstr "ISBNdb.com"
 
-#: src/fetch/isbndbfetcher.cpp:413
+#: src/fetch/isbndbfetcher.cpp:410
 #, kde-format
 msgid "Enable batch ISBN searching (requires Premium or Pro plan)"
 msgstr ""
 
-#: src/fetch/isbndbfetcher.cpp:417
+#: src/fetch/isbndbfetcher.cpp:414
 #, kde-format
 msgid ""
 "Batch searching for ISBN values is faster but only available for Premium or "
@@ -4089,7 +4086,7 @@ msgstr ""
 msgid "ISFDB Link"
 msgstr "IGDB 連結"
 
-#: src/fetch/itunesfetcher.cpp:242 src/fetch/itunesfetcher.cpp:553
+#: src/fetch/itunesfetcher.cpp:243 src/fetch/itunesfetcher.cpp:556
 #, kde-format
 msgid "iTunes Link"
 msgstr "iTunes 連結"
@@ -4104,12 +4101,12 @@ msgstr "KinoPoisk 連結"
 msgid "Kino-Teatr Link"
 msgstr "Kino-Teatr 連結"
 
-#: src/fetch/mobygamesfetcher.cpp:454 src/fetch/mobygamesfetcher.cpp:636
+#: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
 msgid "MobyGames Link"
 msgstr "MobyGames 連結"
 
-#: src/fetch/moviemeterfetcher.cpp:223 src/fetch/moviemeterfetcher.cpp:307
+#: src/fetch/moviemeterfetcher.cpp:223 src/fetch/moviemeterfetcher.cpp:308
 #, kde-format
 msgid "MovieMeter Link"
 msgstr "MovieMeter 連結"
@@ -4136,13 +4133,13 @@ msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
 msgstr ""
 
-#: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:631
+#: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:611
 #, kde-format
 msgctxt "Language"
 msgid "English"
 msgstr "英文"
 
-#: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:634
+#: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:614
 #, kde-format
 msgctxt "Language"
 msgid "French"
@@ -4183,7 +4180,7 @@ msgstr "輸入此伺服器的主機名稱。"
 msgid "&Verify Catalog"
 msgstr "檔案類別"
 
-#: src/fetch/openlibraryfetcher.cpp:275 src/fetch/openlibraryfetcher.cpp:450
+#: src/fetch/openlibraryfetcher.cpp:276 src/fetch/openlibraryfetcher.cpp:457
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "OpenLibrary 連結"
@@ -4254,54 +4251,54 @@ msgstr "輸入伺服器使用的結果格式。"
 msgid "Field"
 msgstr "欄位"
 
-#: src/fetch/themoviedbfetcher.cpp:314 src/fetch/themoviedbfetcher.cpp:568
+#: src/fetch/themoviedbfetcher.cpp:314 src/fetch/themoviedbfetcher.cpp:548
 #: src/translators/filereadervideo.cpp:281
 #, kde-format
 msgid "TMDb Link"
 msgstr "TMDb 連結"
 
-#: src/fetch/themoviedbfetcher.cpp:332 src/fetch/themoviedbfetcher.cpp:572
-#: src/fetch/thetvdbfetcher.cpp:249 src/fetch/thetvdbfetcher.cpp:566
-#: src/fetch/tvmazefetcher.cpp:179 src/fetch/tvmazefetcher.cpp:377
+#: src/fetch/themoviedbfetcher.cpp:332 src/fetch/themoviedbfetcher.cpp:552
+#: src/fetch/thetvdbfetcher.cpp:249 src/fetch/thetvdbfetcher.cpp:561
+#: src/fetch/tvmazefetcher.cpp:179 src/fetch/tvmazefetcher.cpp:364
 #, kde-format
 msgid "Network"
 msgstr "網路"
 
-#: src/fetch/themoviedbfetcher.cpp:628
+#: src/fetch/themoviedbfetcher.cpp:608
 #, kde-format
 msgctxt "Language"
 msgid "Chinese"
 msgstr "中文"
 
-#: src/fetch/themoviedbfetcher.cpp:637
+#: src/fetch/themoviedbfetcher.cpp:617
 #, kde-format
 msgctxt "Language"
 msgid "German"
 msgstr "德文"
 
-#: src/fetch/themoviedbfetcher.cpp:640
+#: src/fetch/themoviedbfetcher.cpp:620
 #, kde-format
 msgctxt "Language"
 msgid "Spanish"
 msgstr "西班牙文"
 
-#: src/fetch/themoviedbfetcher.cpp:643
+#: src/fetch/themoviedbfetcher.cpp:623
 #, kde-format
 msgctxt "Language"
 msgid "Russian"
 msgstr "俄語"
 
-#: src/fetch/themoviedbfetcher.cpp:686
+#: src/fetch/themoviedbfetcher.cpp:666
 #, kde-format
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB（%1）"
 
-#: src/fetch/thetvdbfetcher.cpp:254 src/fetch/thetvdbfetcher.cpp:563
+#: src/fetch/thetvdbfetcher.cpp:254 src/fetch/thetvdbfetcher.cpp:558
 #, kde-format
 msgid "TheTVDB Link"
 msgstr "TheTVDB 連結"
 
-#: src/fetch/thetvdbfetcher.cpp:590
+#: src/fetch/thetvdbfetcher.cpp:585
 #, kde-format
 msgid "Subscriber PIN: "
 msgstr "訂閱者 PIN 碼："
@@ -4316,12 +4313,12 @@ msgstr "VGCollect 連結"
 msgid "VideoGameGeek Link"
 msgstr "VideoGameGeek 連結"
 
-#: src/fetch/vndbfetcher.cpp:284 src/fetch/vndbfetcher.cpp:427
+#: src/fetch/vndbfetcher.cpp:284 src/fetch/vndbfetcher.cpp:426
 #, kde-format
 msgid "Alias"
 msgstr "別名"
 
-#: src/fetch/vndbfetcher.cpp:303
+#: src/fetch/vndbfetcher.cpp:302
 #, kde-format
 msgid "Visual Novel"
 msgstr "Visual Novel"
@@ -6454,7 +6451,7 @@ msgid ""
 "items from your collection.</qt>"
 msgstr "<qt>借貸檢視會顯示所有您已借出的收藏項目。</qt>"
 
-#: src/mainwindow.cpp:2291
+#: src/mainwindow.cpp:2292
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6463,19 +6460,19 @@ msgstr ""
 "有些影像並未儲存在設定的位置。目前的檔案必須先儲存，影像則會被轉換到新的位"
 "置。"
 
-#: src/mainwindow.cpp:2334
+#: src/mainwindow.cpp:2336
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "從 %1 更新的項目資料"
 
-#: src/mainwindow.cpp:2353
+#: src/mainwindow.cpp:2355
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr "Tellico 此種型態一次只能匯入一個檔案。將只有 %1 會被匯出。"
 
-#: src/mainwindow.cpp:2532
+#: src/mainwindow.cpp:2534
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
 msgctxt "@title:window"
@@ -6837,7 +6834,7 @@ msgid "Import owned items only"
 msgstr "只匯入擁有的項目"
 
 #: src/translators/boardgamegeekimporter.cpp:252
-#: src/translators/discogsimporter.cpp:199
+#: src/translators/discogsimporter.cpp:203
 #: src/translators/goodreadsimporter.cpp:153
 #, kde-format
 msgid "User ID:"
@@ -7025,7 +7022,7 @@ msgstr ""
 msgid "<New Field>"
 msgstr "<新欄位>"
 
-#: src/translators/discogsimporter.cpp:191
+#: src/translators/discogsimporter.cpp:195
 #, kde-format
 msgid "Discogs Options"
 msgstr "Discogs 選項"
@@ -7171,24 +7168,24 @@ msgstr "載入資料中..."
 msgid "Loading %1..."
 msgstr "載入 %1 中..."
 
-#: src/translators/librarythingimporter.cpp:178
+#: src/translators/librarythingimporter.cpp:177
 #, kde-format
 msgid "LibraryThing Options"
 msgstr "LibraryThing 選項"
 
-#: src/translators/librarythingimporter.cpp:181
+#: src/translators/librarythingimporter.cpp:180
 #, kde-format
 msgid ""
 "Export your LibraryThing collection in <a href=\"https://www.librarything."
 "com/export.php?export_type=json\">JSON format</a>."
 msgstr ""
 
-#: src/translators/librarythingimporter.cpp:187
+#: src/translators/librarythingimporter.cpp:186
 #, kde-format
 msgid "JSON Files"
 msgstr "JSON 檔案"
 
-#: src/translators/librarythingimporter.cpp:191
+#: src/translators/librarythingimporter.cpp:190
 #, kde-format
 msgid "LibraryThing file:"
 msgstr ""
