@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-10 02:29+0000\n"
+"POT-Creation-Date: 2025-02-11 02:39+0000\n"
 "PO-Revision-Date: 2023-07-08 12:53+0100\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -796,7 +796,7 @@ msgstr "Chave da BibTeX"
 #: src/fetch/discogsfetcher.cpp:334 src/fetch/discogsfetcher.cpp:341
 #: src/fetch/discogsfetcher.cpp:346 src/fetch/doubanfetcher.cpp:373
 #: src/fetch/doubanfetcher.cpp:391 src/fetch/doubanfetcher.cpp:409
-#: src/fetch/filmaffinityfetcher.cpp:284 src/fetch/filmasterfetcher.cpp:238
+#: src/fetch/filmaffinityfetcher.cpp:285 src/fetch/filmasterfetcher.cpp:238
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:253
 #: src/fetch/googlebookfetcher.cpp:258 src/fetch/igdbfetcher.cpp:366
@@ -3253,7 +3253,7 @@ msgid "SAO/NASA Astrophysics Data System"
 msgstr "Ssitema de Dados Astrofísicos da SAO/NASA"
 
 #: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1095
-#: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:229
+#: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:230
 #: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:598
 #: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:381
 #: src/fetch/isbndbfetcher.cpp:393 src/fetch/mobygamesfetcher.cpp:649
@@ -3270,7 +3270,7 @@ msgstr ""
 "sua informação em baixo."
 
 #: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1107
-#: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:241
+#: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:242
 #: src/fetch/entrezfetcher.cpp:538 src/fetch/giantbombfetcher.cpp:227
 #: src/fetch/googlebookfetcher.cpp:393 src/fetch/isbndbfetcher.cpp:405
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/numistafetcher.cpp:415
@@ -3281,7 +3281,7 @@ msgid "Access key: "
 msgstr "Chave de acesso: "
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
-#: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:544
+#: src/fetch/comicvinefetcher.cpp:248 src/fetch/entrezfetcher.cpp:544
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:399
 #: src/fetch/themoviedbfetcher.cpp:603 src/fetch/thetvdbfetcher.cpp:596
 #, kde-format
@@ -3484,7 +3484,7 @@ msgstr "Resultados de %1 : %2/%3"
 
 #: src/fetch/amazonfetcher.cpp:633 src/fetch/colnectfetcher.cpp:823
 #: src/fetch/discogsfetcher.cpp:227 src/fetch/doubanfetcher.cpp:477
-#: src/fetch/filmaffinityfetcher.cpp:430 src/fetch/filmasterfetcher.cpp:147
+#: src/fetch/filmaffinityfetcher.cpp:431 src/fetch/filmasterfetcher.cpp:147
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:198
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
 #: src/fetch/isbndbfetcher.cpp:294 src/fetch/itunesfetcher.cpp:366
@@ -3672,7 +3672,7 @@ msgstr "Michel"
 msgid "PEGI Rating"
 msgstr "Classificação PEGI"
 
-#: src/fetch/colnectfetcher.cpp:958 src/fetch/filmaffinityfetcher.cpp:492
+#: src/fetch/colnectfetcher.cpp:958 src/fetch/filmaffinityfetcher.cpp:493
 #: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:626
 #, kde-format
 msgid "Language: "
@@ -3685,7 +3685,7 @@ msgid "Country code: "
 msgstr "País: "
 
 #. i18n("Colorist");
-#: src/fetch/comicvinefetcher.cpp:217
+#: src/fetch/comicvinefetcher.cpp:218
 #, kde-format
 msgid "Comic Vine Link"
 msgstr "Endereço do Comic Vine"
@@ -3788,8 +3788,8 @@ msgstr "Credencial do utilizador: "
 
 #: src/fetch/doubanfetcher.cpp:366 src/fetch/doubanfetcher.cpp:384
 #: src/fetch/doubanfetcher.cpp:402 src/fetch/doubanfetcher.cpp:641
-#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:324
-#: src/fetch/filmaffinityfetcher.cpp:461 src/fetch/imdbfetcher.cpp:470
+#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:325
+#: src/fetch/filmaffinityfetcher.cpp:462 src/fetch/imdbfetcher.cpp:470
 #: src/fetch/imdbfetcher.cpp:532 src/fetch/kinopoiskfetcher.cpp:338
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
@@ -3955,18 +3955,18 @@ msgstr "LCCN"
 msgid "Raw Query"
 msgstr "Pesquisa não Refinada"
 
-#: src/fetch/filmaffinityfetcher.cpp:283 src/fetch/filmaffinityfetcher.cpp:462
+#: src/fetch/filmaffinityfetcher.cpp:284 src/fetch/filmaffinityfetcher.cpp:463
 #, kde-format
 msgid "FilmAffinity Link"
 msgstr "Ligação da FilmAffinity"
 
-#: src/fetch/filmaffinityfetcher.cpp:474 src/fetch/imdbfetcher.cpp:549
+#: src/fetch/filmaffinityfetcher.cpp:475 src/fetch/imdbfetcher.cpp:549
 #: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:608
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "Número &máximo de actores: "
 
-#: src/fetch/filmaffinityfetcher.cpp:487 src/fetch/imdbfetcher.cpp:562
+#: src/fetch/filmaffinityfetcher.cpp:488 src/fetch/imdbfetcher.cpp:562
 #: src/fetch/kinopoiskfetcher.cpp:694 src/fetch/themoviedbfetcher.cpp:621
 #, kde-format
 msgid ""
@@ -3976,13 +3976,13 @@ msgstr ""
 "A lista de membros do elenco pode incluir muitas pessoas. Indique o número "
 "máximo de ocorrências a ser devolvido pela pesquisa."
 
-#: src/fetch/filmaffinityfetcher.cpp:497
+#: src/fetch/filmaffinityfetcher.cpp:498
 #, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "Espanha"
 
-#: src/fetch/filmaffinityfetcher.cpp:500
+#: src/fetch/filmaffinityfetcher.cpp:501
 #, kde-format
 msgctxt "Country"
 msgid "USA"
