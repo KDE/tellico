@@ -60,6 +60,10 @@ void FilmAffinityFetcherTest::testSuperman() {
 
   QCOMPARE(results.size(), 1);
 
+  // verify the search results contain no html
+  QVERIFY(!m_resultTitles.isEmpty());
+  QCOMPARE(m_resultTitles.at(0), QStringLiteral("Superman Returns"));
+
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
@@ -81,7 +85,6 @@ void FilmAffinityFetcherTest::testSuperman() {
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QCOMPARE(entry->field("filmaffinity"), QStringLiteral("https://www.filmaffinity.com/us/film300630.html"));
 }
-
 
 void FilmAffinityFetcherTest::testSupermanES() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Superman Returns"));
