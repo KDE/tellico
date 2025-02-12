@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-11 02:39+0000\n"
+"POT-Creation-Date: 2025-02-12 02:30+0000\n"
 "PO-Revision-Date: 2025-01-08 15:24+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -740,7 +740,7 @@ msgstr "Bibtex Anahtarı"
 #: src/fetch/discogsfetcher.cpp:334 src/fetch/discogsfetcher.cpp:341
 #: src/fetch/discogsfetcher.cpp:346 src/fetch/doubanfetcher.cpp:373
 #: src/fetch/doubanfetcher.cpp:391 src/fetch/doubanfetcher.cpp:409
-#: src/fetch/filmaffinityfetcher.cpp:285 src/fetch/filmasterfetcher.cpp:238
+#: src/fetch/filmaffinityfetcher.cpp:286 src/fetch/filmasterfetcher.cpp:238
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:253
 #: src/fetch/googlebookfetcher.cpp:258 src/fetch/igdbfetcher.cpp:366
@@ -3398,7 +3398,7 @@ msgstr "%1 konumundan sonuçlar: %2/%3"
 
 #: src/fetch/amazonfetcher.cpp:633 src/fetch/colnectfetcher.cpp:823
 #: src/fetch/discogsfetcher.cpp:227 src/fetch/doubanfetcher.cpp:477
-#: src/fetch/filmaffinityfetcher.cpp:431 src/fetch/filmasterfetcher.cpp:147
+#: src/fetch/filmaffinityfetcher.cpp:432 src/fetch/filmasterfetcher.cpp:147
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:198
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
 #: src/fetch/isbndbfetcher.cpp:294 src/fetch/itunesfetcher.cpp:366
@@ -3586,7 +3586,7 @@ msgstr "Michel"
 msgid "PEGI Rating"
 msgstr "PEGI Derecelendirmesi"
 
-#: src/fetch/colnectfetcher.cpp:958 src/fetch/filmaffinityfetcher.cpp:493
+#: src/fetch/colnectfetcher.cpp:958 src/fetch/filmaffinityfetcher.cpp:494
 #: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:626
 #, kde-format
 msgid "Language: "
@@ -3699,8 +3699,8 @@ msgstr "Kullanıcı jetonu:"
 
 #: src/fetch/doubanfetcher.cpp:366 src/fetch/doubanfetcher.cpp:384
 #: src/fetch/doubanfetcher.cpp:402 src/fetch/doubanfetcher.cpp:641
-#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:325
-#: src/fetch/filmaffinityfetcher.cpp:462 src/fetch/imdbfetcher.cpp:470
+#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:326
+#: src/fetch/filmaffinityfetcher.cpp:463 src/fetch/imdbfetcher.cpp:470
 #: src/fetch/imdbfetcher.cpp:532 src/fetch/kinopoiskfetcher.cpp:338
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
@@ -3865,18 +3865,18 @@ msgstr "LCCN"
 msgid "Raw Query"
 msgstr "İşlenmemiş Sorgu"
 
-#: src/fetch/filmaffinityfetcher.cpp:284 src/fetch/filmaffinityfetcher.cpp:463
+#: src/fetch/filmaffinityfetcher.cpp:285 src/fetch/filmaffinityfetcher.cpp:464
 #, kde-format
 msgid "FilmAffinity Link"
 msgstr "FilmAffinity Bağlantısı"
 
-#: src/fetch/filmaffinityfetcher.cpp:475 src/fetch/imdbfetcher.cpp:549
+#: src/fetch/filmaffinityfetcher.cpp:476 src/fetch/imdbfetcher.cpp:549
 #: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:608
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&En fazla rol alanlar: "
 
-#: src/fetch/filmaffinityfetcher.cpp:488 src/fetch/imdbfetcher.cpp:562
+#: src/fetch/filmaffinityfetcher.cpp:489 src/fetch/imdbfetcher.cpp:562
 #: src/fetch/kinopoiskfetcher.cpp:694 src/fetch/themoviedbfetcher.cpp:621
 #, kde-format
 msgid ""
@@ -3886,13 +3886,13 @@ msgstr ""
 "Rol alan üyelerin listesi, birçok insanı içerebilir. Aramadan dönecek "
 "sonuçların en fazla ne kadar olması gerektiğini ayarlayın."
 
-#: src/fetch/filmaffinityfetcher.cpp:498
+#: src/fetch/filmaffinityfetcher.cpp:499
 #, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "İspanya"
 
-#: src/fetch/filmaffinityfetcher.cpp:501
+#: src/fetch/filmaffinityfetcher.cpp:502
 #, kde-format
 msgctxt "Country"
 msgid "USA"
