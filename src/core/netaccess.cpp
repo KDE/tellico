@@ -92,7 +92,7 @@ bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, b
     myWarning() << getJob->errorString();
   }
 
-  if(!quiet_ && getJob->uiDelegate()) {
+  if(!quiet_ && window_ && getJob->uiDelegate()) {
     getJob->uiDelegate()->showErrorMessage();
   }
   return false;
