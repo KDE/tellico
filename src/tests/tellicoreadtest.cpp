@@ -696,7 +696,7 @@ void TellicoReadTest::testXmlWithJunk() {
 }
 
 void TellicoReadTest::testRemote() {
-//  if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
+  if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
 
   if(!KProtocolInfo::isKnownProtocol(QStringLiteral("fish"))) {
     QSKIP("This test requires the KIO 'fish' protocol", SkipSingle);
