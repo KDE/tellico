@@ -36,6 +36,7 @@ private Q_SLOTS:
   void testMultiple();
   void testMetadata();
   void testBookCollection();
+  void testBookCollectionMetadata();
 };
 
 #endif

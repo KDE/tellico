@@ -28,6 +28,7 @@
 #include "pdftest.h"
 
 #include "../translators/pdfimporter.h"
+#include "../translators/ebookimporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
@@ -131,4 +132,25 @@ void PdfTest::testBookCollection() {
   QCOMPARE(entry->field("author"), QStringLiteral("Happy Man"));
   QCOMPARE(entry->field("keyword"), QStringLiteral("PDF Metadata"));
 #endif
+}
+
+void PdfTest::testBookCollectionMetadata() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-metadata.pdf"));
+  Tellico::Import::EBookImporter importer(url);
+
+  // PDF importer defaults to bibtex unless current collection is a book collection
+  Tellico::Data::CollPtr tmpColl(new Tellico::Data::BookCollection(true));
+  importer.setCurrentCollection(tmpColl);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
+  QCOMPARE(coll->entryCount(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("The Big Brown Bear"));
+  QCOMPARE(entry->field("author"), QStringLiteral("Happy Man"));
+  QCOMPARE(entry->field("keyword"), QStringLiteral("PDF Metadata"));
+  QCOMPARE(entry->field("comments"), url.toLocalFile());
 }
