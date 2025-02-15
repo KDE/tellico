@@ -44,6 +44,7 @@
 #include "../config/tellico_config.h"
 
 #include <KLocalizedString>
+#include <KProtocolInfo>
 
 #include <QTest>
 #include <QNetworkInterface>
@@ -695,6 +696,12 @@ void TellicoReadTest::testXmlWithJunk() {
 }
 
 void TellicoReadTest::testRemote() {
+//  if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
+
+  if(!KProtocolInfo::isKnownProtocol(QStringLiteral("fish"))) {
+    QSKIP("This test requires the KIO 'fish' protocol", SkipSingle);
+  }
+
   Tellico::Config::setImageLocation(Tellico::Config::ImagesInLocalDir);
   QString tempDirName;
   QTemporaryDir tempDir;
@@ -713,7 +720,6 @@ void TellicoReadTest::testRemote() {
   QVERIFY(QFile::copy(QFINDTESTDATA(QLatin1String("data/with-local-image_files/") + image),
                       imageFileName));
 
-  QUrl localUrl = QUrl::fromLocalFile(fileName);
   QUrl remoteUrl(QLatin1String("fish://localhost/") + fileName);
 
   // use the localUrl since the CI doesn't support fish protocol
