@@ -136,7 +136,7 @@ void PdfTest::testBookCollection() {
 
 void PdfTest::testBookCollectionMetadata() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-metadata.pdf"));
-  Tellico::Import::EBookImporter importer(url);
+  Tellico::Import::EBookImporter importer(QList<QUrl>() << url);
 
   // PDF importer defaults to bibtex unless current collection is a book collection
   Tellico::Data::CollPtr tmpColl(new Tellico::Data::BookCollection(true));
