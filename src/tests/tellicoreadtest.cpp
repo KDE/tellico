@@ -717,7 +717,7 @@ void TellicoReadTest::testRemote() {
   QUrl remoteUrl(QLatin1String("fish://localhost/") + fileName);
 
   // use the localUrl since the CI doesn't support fish protocol
-  Tellico::Data::Document::self()->openDocument(localUrl);
+  Tellico::Data::Document::self()->openDocument(remoteUrl);
 
   // Document has a 500 msec timer to load images
   qApp->processEvents();
