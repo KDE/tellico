@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-11 00:41+0000\n"
-"PO-Revision-Date: 2025-01-04 15:04+0100\n"
+"PO-Revision-Date: 2025-02-14 08:34+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4137,10 +4137,9 @@ msgstr ""
 "dispoñíbel para plans Premium ou Pro."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "Ligazón de IGDB"
+msgstr "Ligazón de ISFDB"
 
 #: src/fetch/itunesfetcher.cpp:243 src/fetch/itunesfetcher.cpp:556
 #, kde-format

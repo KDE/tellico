@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-11 00:41+0000\n"
-"PO-Revision-Date: 2025-01-06 18:58+0100\n"
+"PO-Revision-Date: 2025-02-14 21:25+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -2919,28 +2919,24 @@ msgid "Overwrite File?"
 msgstr "Ĉu anstataŭigi la dosieron?"
 
 #: src/core/tellico_strings.cpp:27
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr "Tellico ne povas ŝargi la bildon - %1."
+msgstr "Tellico ne povas ŝargi la dosieron - %1."
 
 #: src/core/tellico_strings.cpp:28
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "Tellico ne povas ŝargi la bildon - %1."
+msgstr "Tellico ne povas ŝargi la dosieron - %1."
 
 #: src/core/tellico_strings.cpp:29
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to write the file - %1."
-msgstr "Tellico ne povas ŝargi la bildon - %1."
+msgstr "Tellico ne povas skribi la dosieron - %1."
 
 #: src/core/tellico_strings.cpp:30
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico ne povas ŝargi la bildon - %1."
+msgstr "Tellico ne povas alŝuti la dosieron - %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
@@ -2955,16 +2951,13 @@ msgid ""
 msgstr ""
 
 #: src/core/tellico_strings.cpp:37
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "Tellico ne povas ŝargi la bildon - %1."
+msgstr "Tellico ne povas ŝargi bildon el la dosiero - %1."
 
 #: src/core/tellico_strings.cpp:39
-#, fuzzy
-#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "Subteksto"
+msgstr "Sentitola"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
@@ -2973,13 +2966,11 @@ msgstr ""
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr ""
+msgstr "Kapabloj"
 
 #: src/core/tellico_strings.cpp:44
-#, fuzzy
-#| msgid "People"
 msgid "Other People"
-msgstr "Homoj"
+msgstr "Aliaj Homoj"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2989,11 +2980,8 @@ msgid "Publishing"
 msgstr "Eldonado"
 
 #: src/core/tellico_strings.cpp:46
-#, fuzzy
-#| msgctxt "Library of Congress classification system"
-#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "LoC Klasifiko"
+msgstr "Klasifiko"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -4138,10 +4126,9 @@ msgstr ""
 "Pro-planoj."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "IGDB Ligo"
+msgstr "ISFDB-Ligilo"
 
 #: src/fetch/itunesfetcher.cpp:243 src/fetch/itunesfetcher.cpp:556
 #, kde-format
@@ -7442,19 +7429,3 @@ msgstr "Serĉi"
 #, kde-format
 msgid "Clear"
 msgstr "Forigi"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Grupresuma"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Grupa Resumo"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Suma nombro da kampoj:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Suma nombro da enskriboj:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Apartaj valoroj:"
