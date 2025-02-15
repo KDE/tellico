@@ -57,15 +57,28 @@ void RisTest::testImport() {
   QCOMPARE(coll->title(), QStringLiteral("Bibliography"));
   QVERIFY(importer.canImport(coll->type()));
 
-  Tellico::Data::EntryPtr entry = coll->entryById(2);
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("year"), QStringLiteral("2002"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("159-223"));
+  QCOMPARE(entry->field("volume"), QStringLiteral("230"));
+  QCOMPARE(entry->field("journal"), QStringLiteral("Mol Cell Biochem"));
+  QVERIFY(entry->field("address").contains(QStringLiteral("Germany")));
+  QCOMPARE(entry->field("pdf"), QStringLiteral("test.pdf"));
+
+  entry = coll->entryById(2);
   QVERIFY(entry);
   QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
   QCOMPARE(entry->field("year"), QStringLiteral("2002"));
   QCOMPARE(entry->field("pages"), QStringLiteral("1057-1119"));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).count(), 3);
-  QVERIFY(Tellico::FieldFormat::splitValue(entry->field("author")).contains(QStringLiteral("Koglin,M.")));
+  const auto authors = Tellico::FieldFormat::splitValue(entry->field("author"));
+  QCOMPARE(authors.count(), 3);
+  QVERIFY(authors.contains(QStringLiteral("Koglin,M.")));
+  const auto keywords = Tellico::FieldFormat::splitValue(entry->field("keyword"));
+  QCOMPARE(keywords.count(), 37);
+  QVERIFY(keywords.contains(QStringLiteral("Human")));
 
-  Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
+  auto bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
   QVERIFY(bColl);
   QCOMPARE(bColl->fieldByBibtexName("entry-type")->name(), QStringLiteral("entry-type"));
   QVERIFY(Tellico::Import::RISImporter::maybeRIS(url));
