@@ -58,6 +58,7 @@ void FetcherTest::testType() {
     QVERIFY(f->uuid().isEmpty());
     QVERIFY(!f->isSearching());
     QVERIFY(!f->hasMoreResults());
+    QVERIFY(!f->canFetch(Tellico::Fetch::FetchLast)); // invalid
 
     Tellico::Data::Collection::Type cType = Tellico::Data::Collection::Base;
     // BoardGame is the last collection type (currently)
@@ -68,10 +69,12 @@ void FetcherTest::testType() {
       // no point in trying now. Fetchers like ExecExternal won't match
       continue;
     }
-    QSignalSpy spy(f.data(), &Tellico::Fetch::Fetcher::signalDone);
+    QSignalSpy doneSpy(f.data(), &Tellico::Fetch::Fetcher::signalDone);
+    QSignalSpy resultSpy(f.data(), &Tellico::Fetch::Fetcher::signalResultFound);
     // test invalid search request key
     Tellico::Fetch::FetchRequest req(cType, Tellico::Fetch::FetchLast, QString());
     f->startSearch(req);
-    QCOMPARE(spy.count(), 1);
+    QCOMPARE(doneSpy.count(), 1);
+    QCOMPARE(resultSpy.count(), 0);
   }
 }

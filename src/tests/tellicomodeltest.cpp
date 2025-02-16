@@ -56,6 +56,7 @@ void TellicoModelTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
+  Tellico::RegisterCollection<Tellico::Data::Collection> registerBase(Tellico::Data::Collection::Base, "entry");
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
 }
@@ -139,13 +140,20 @@ void TellicoModelTest::testEntryModel() {
   QCOMPARE(entryModel.index(0, 0), entryModel.indexFromEntry(entry1));
 
   Tellico::Data::FieldPtr field3(new Tellico::Data::Field(QStringLiteral("test"), QStringLiteral("test-new")));
-  coll->modifyField(field3);
+  coll->modifyField(field3); // same field neame as previous
   QCOMPARE(coll->fields().count(), entryModel.columnCount(QModelIndex()));
-  entryModel.modifyField(field2, field3);
+  entryModel.modifyField(field1, field3);
 
   coll->removeField(field3);
   entryModel.removeFields(Tellico::Data::FieldList() << field3);
   QCOMPARE(coll->fields().count(), entryModel.columnCount(QModelIndex()));
+
+  auto fields = coll->fields();
+  QVERIFY(fields.count() > 2);
+  Tellico::Data::FieldList newFields;
+  newFields << fields.at(1) << fields.at(0) << fields.sliced(2);
+  coll->reorderFields(newFields);
+  entryModel.reorderFields(newFields);
 
   QCOMPARE(coll->entries().count(), entryModel.rowCount(QModelIndex()));
   coll->removeEntries(Tellico::Data::EntryList() << entry2);
@@ -181,12 +189,26 @@ void TellicoModelTest::testFilterModel() {
 
   filterModel.clear();
   filterModel.addFilter(filter);
-  QCOMPARE(filter, filterModel.filter(filterModel.index(0, 0)));
-  QVERIFY(filterModel.indexContainsEntry(filterModel.index(0, 0), entry1));
+  QModelIndex filterIndex = filterModel.index(0, 0);
+  QVERIFY(filterIndex.isValid());
+  QCOMPARE(filter, filterModel.filter(filterIndex));
+  QVERIFY(filterModel.indexContainsEntry(filterIndex, entry1));
 
-  filterModel.invalidate(filterModel.index(0, 0));
-  QCOMPARE(filter, filterModel.filter(filterModel.index(0, 0)));
-  QVERIFY(filterModel.indexContainsEntry(filterModel.index(0, 0), entry1));
+  filterModel.invalidate(filterIndex);
+  filterIndex = filterModel.index(0, 0);
+  QVERIFY(filterIndex.isValid());
+  QCOMPARE(filter, filterModel.filter(filterIndex));
+  QModelIndex entryIndex = filterModel.index(0, 0, filterIndex);
+  QVERIFY(entryIndex.isValid());
+  QCOMPARE(entry1, filterModel.entry(entryIndex));
+  QVERIFY(filterModel.indexContainsEntry(filterIndex, entry1));
+
+  QVERIFY(filterModel.setHeaderData(0, Qt::Horizontal, QStringLiteral("New Value")));
+  QCOMPARE(filterModel.data(entryIndex, Qt::DisplayRole).toString(), entry1->title());
+  QCOMPARE(filterModel.data(entryIndex, Tellico::EntryPtrRole).value<Tellico::Data::EntryPtr>(), entry1);
+  QCOMPARE(filterModel.data(entryIndex, Tellico::RowCountRole), filterModel.rowCount(entryIndex));
+
+  filterModel.removeFilter(filter);
 }
 
 void TellicoModelTest::testGroupModel() {
@@ -229,6 +251,10 @@ void TellicoModelTest::testGroupModel() {
   QCOMPARE(group->fieldName(), QStringLiteral("author"));
   QCOMPARE(group->size(), 1);
   QVERIFY(!group->hasEmptyGroupName());
+  auto groupIndex = groupModel.indexFromGroup(group);
+  QVERIFY(groupIndex.isValid());
+  QCOMPARE(groupModel.modifyGroup(group), groupIndex);
+  QCOMPARE(groupModel.data(groupIndex, Tellico::RowCountRole), groupModel.rowCount(groupIndex));
 
   ++gIt;
   QVERIFY(gIt.isValid());
@@ -241,6 +267,12 @@ void TellicoModelTest::testGroupModel() {
 
   ++gIt;
   QVERIFY(!gIt.group());
+
+  groupModel.removeGroup(group);
+  QCOMPARE(groupModel.rowCount(), 1);
+
+  groupModel.clear();
+  QCOMPARE(groupModel.rowCount(), 0);
 }
 
 void TellicoModelTest::testSelectionModel() {
@@ -275,6 +307,10 @@ void TellicoModelTest::testSelectionModel() {
   entry2->setField(QStringLiteral("title"), QStringLiteral("test2"));
   coll->addEntries(entry2);
   entryModel.addEntries(Tellico::Data::EntryList() << entry2);
+
+  auto icon = iconModel.data(iconModel.index(0, 0), Qt::DecorationRole);
+  QVERIFY(icon.canConvert<QIcon>());
+  QVERIFY(!icon.value<QIcon>().isNull());
 
   entries = proxySelect.selectedEntries();
   QCOMPARE(entries.count(), 1);
@@ -322,6 +358,11 @@ void TellicoModelTest::testBorrowerModel() {
   QVERIFY(borrIndex.isValid());
   QModelIndex loanIndex = borrowerModel.index(0, 0, borrIndex);
   QVERIFY(loanIndex.isValid());
+  QVERIFY(borrowerModel.setHeaderData(0, Qt::Horizontal, QStringLiteral("New Value")));
+  QCOMPARE(borrowerModel.data(borrIndex, Qt::DisplayRole).toString(), borr->name());
+  QCOMPARE(borrowerModel.data(loanIndex, Qt::DisplayRole).toString(), entry->title());
+  QCOMPARE(borrowerModel.data(loanIndex, Tellico::EntryPtrRole).value<Tellico::Data::EntryPtr>(), entry);
+  QCOMPARE(borrowerModel.data(loanIndex, Tellico::RowCountRole), borrowerModel.rowCount(loanIndex));
 
   QCOMPARE(borr, borrowerModel.borrower(borrIndex));
   QCOMPARE(loan, borrowerModel.loan(loanIndex));
