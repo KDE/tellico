@@ -80,7 +80,7 @@ void HathiTrustFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
   QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Inwood, Stephen"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("MacAdam/Cage Pub."));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2003"));
-  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("bibliography; biography"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("bibliography; biography; text; Biography."));
   QVERIFY(entry->field(QStringLiteral("keyword")).contains(QStringLiteral("Architecture")));
   QVERIFY(entry->field(QStringLiteral("keyword")).contains(QStringLiteral("history")));
   QVERIFY(entry->field(QStringLiteral("comments")).contains(QStringLiteral("London")));
