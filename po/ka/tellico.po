@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-11 00:41+0000\n"
+"POT-Creation-Date: 2025-02-16 00:41+0000\n"
 "PO-Revision-Date: 2025-02-02 05:10+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -728,7 +728,7 @@ msgstr "BibTeX -ის გასაღები"
 #: src/fetch/discogsfetcher.cpp:317 src/fetch/discogsfetcher.cpp:322
 #: src/fetch/discogsfetcher.cpp:327 src/fetch/discogsfetcher.cpp:334
 #: src/fetch/discogsfetcher.cpp:341 src/fetch/discogsfetcher.cpp:346
-#: src/fetch/doubanfetcher.cpp:388 src/fetch/filmaffinityfetcher.cpp:285
+#: src/fetch/doubanfetcher.cpp:388 src/fetch/filmaffinityfetcher.cpp:286
 #: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:361
@@ -3472,7 +3472,7 @@ msgstr "შედეგები %1-დან: %2/%3"
 
 #: src/fetch/amazonfetcher.cpp:633 src/fetch/colnectfetcher.cpp:823
 #: src/fetch/discogsfetcher.cpp:227 src/fetch/doubanfetcher.cpp:461
-#: src/fetch/filmaffinityfetcher.cpp:431 src/fetch/filmasterfetcher.cpp:148
+#: src/fetch/filmaffinityfetcher.cpp:432 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:199
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:368
@@ -3661,7 +3661,7 @@ msgstr "Michel"
 msgid "PEGI Rating"
 msgstr "PEGI რეიტინგი"
 
-#: src/fetch/colnectfetcher.cpp:958 src/fetch/filmaffinityfetcher.cpp:489
+#: src/fetch/colnectfetcher.cpp:958 src/fetch/filmaffinityfetcher.cpp:490
 #: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:602
 #, kde-format
 msgid "Language: "
@@ -3773,8 +3773,8 @@ msgid "User token:"
 msgstr "მომხმარებლის კოდი:"
 
 #: src/fetch/doubanfetcher.cpp:381 src/fetch/doubanfetcher.cpp:621
-#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:325
-#: src/fetch/filmaffinityfetcher.cpp:462 src/fetch/imdbfetcher.cpp:450
+#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:326
+#: src/fetch/filmaffinityfetcher.cpp:463 src/fetch/imdbfetcher.cpp:450
 #: src/fetch/imdbfetcher.cpp:509 src/fetch/kinopoiskfetcher.cpp:338
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
@@ -3931,18 +3931,18 @@ msgstr "LCCN"
 msgid "Raw Query"
 msgstr "დაუმუშავებელი მოთხოვნა"
 
-#: src/fetch/filmaffinityfetcher.cpp:284 src/fetch/filmaffinityfetcher.cpp:463
+#: src/fetch/filmaffinityfetcher.cpp:285 src/fetch/filmaffinityfetcher.cpp:464
 #, kde-format
 msgid "FilmAffinity Link"
 msgstr "FilmAffinity -ის ბმული"
 
-#: src/fetch/filmaffinityfetcher.cpp:475 src/fetch/imdbfetcher.cpp:526
+#: src/fetch/filmaffinityfetcher.cpp:476 src/fetch/imdbfetcher.cpp:526
 #: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:588
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&მსახიობების მაქსიმალური რაოდენობა: "
 
-#: src/fetch/filmaffinityfetcher.cpp:484 src/fetch/imdbfetcher.cpp:535
+#: src/fetch/filmaffinityfetcher.cpp:485 src/fetch/imdbfetcher.cpp:535
 #: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:597
 #, kde-format
 msgid ""
@@ -3952,13 +3952,13 @@ msgstr ""
 "კასტინგის სია, შეიძლება, ბევრ ხალხს შეიცავდეს. დააყენეთ მაქსიმალური "
 "რაოდენობა, რომელიც ძებნამ უნდა დააბრუნოს."
 
-#: src/fetch/filmaffinityfetcher.cpp:494
+#: src/fetch/filmaffinityfetcher.cpp:495
 #, kde-format
 msgctxt "Country"
 msgid "Spain"
 msgstr "ესპანეთი"
 
-#: src/fetch/filmaffinityfetcher.cpp:497
+#: src/fetch/filmaffinityfetcher.cpp:498
 #, kde-format
 msgctxt "Country"
 msgid "USA"
