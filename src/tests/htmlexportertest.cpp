@@ -99,6 +99,9 @@ void HtmlExporterTest::testHtml() {
                                << QStringLiteral("Rating") << QStringLiteral("Front Cover"));
   exp.setURL(QUrl::fromLocalFile(tempDirName + "/testHtml.html"));
 
+  QCOMPARE(exp.formatString(), QLatin1String("HTML"));
+  QVERIFY(exp.fileFilter().contains(QLatin1String(";;All Files (*)")));
+
   QString output = exp.text();
   QVERIFY(!output.isEmpty());
 

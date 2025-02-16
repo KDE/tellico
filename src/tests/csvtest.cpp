@@ -91,6 +91,9 @@ void CsvTest::testEntry() {
   exporter.setEntries(coll->entries());
   exporter.setFields(Tellico::Data::FieldList() << coll->fieldByName(QStringLiteral("title")));
 
+  QCOMPARE(exporter.formatString(), QLatin1String("CSV"));
+  QVERIFY(exporter.fileFilter().contains(QLatin1String(";;All Files (*)")));
+
   QString output = exporter.text();
   // the header line has the field titles, skip that
   output = output.section(QLatin1Char('\n'), 1);

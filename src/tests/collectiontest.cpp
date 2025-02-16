@@ -392,6 +392,9 @@ void CollectionTest::testDtd() {
   Tellico::Export::TellicoXMLExporter exporter(coll);
   exporter.setEntries(coll->entries());
 
+  QCOMPARE(exporter.formatString(), QLatin1String("XML"));
+  QVERIFY(exporter.fileFilter().contains(QLatin1String(";;All Files (*)")));
+
   KProcess proc;
   proc.setProgram(QStringLiteral("xmllint"),
                   QStringList() << QStringLiteral("--noout")
