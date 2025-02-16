@@ -426,7 +426,12 @@ void TellicoXMLExporter::exportGroupXML(QDomDocument& dom_, QDomElement& parent_
   Data::EntryList vec = entries();
   bool exportAll = collection()->entries().count() == vec.count();
   // iterate over each group, which are the first children
-  for(ModelIterator gIt(ModelManager::self()->groupModel()); gIt.group(); ++gIt) {
+  auto groupModel = ModelManager::self()->groupModel();
+  if(!groupModel) {
+    myDebug() << "No group model available to use for exporting XML";
+    return;
+  }
+  for(ModelIterator gIt(groupModel); gIt.group(); ++gIt) {
     if(gIt.group()->isEmpty()) {
       continue;
     }

@@ -34,6 +34,8 @@
 #include "../entry.h"
 #include "../document.h"
 #include "../images/imagefactory.h"
+#include "../models/entrygroupmodel.h"
+#include "../models/modelmanager.h"
 #include "../utils/datafileregistry.h"
 #include "../config/tellico_config.h"
 
@@ -88,6 +90,9 @@ void HtmlExporterTest::testHtml() {
   // save the document, so the images get copied out of the .tc file into the local image directory
   QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName)));
 
+  auto groupModel = new Tellico::EntryGroupModel(this);
+  Tellico::ModelManager::self()->setGroupModel(groupModel);
+
   Tellico::Data::CollPtr coll = doc->collection();
   QVERIFY(coll);
 
@@ -97,6 +102,10 @@ void HtmlExporterTest::testHtml() {
   exp.setEntryXSLTFile(QStringLiteral("Fancy"));
   exp.setColumns(QStringList() << QStringLiteral("Title") << QStringLiteral("Gift")
                                << QStringLiteral("Rating") << QStringLiteral("Front Cover"));
+  exp.setSortTitles({QStringLiteral("Title"), QStringLiteral("Gift"), QStringLiteral("Rating")});
+  exp.setPrintGrouped(true);
+  exp.setGroupBy({QStringLiteral("binding"), QStringLiteral("author")});
+  exp.setMaxImageSize(250, 250);
   exp.setURL(QUrl::fromLocalFile(tempDirName + "/testHtml.html"));
 
   QCOMPARE(exp.formatString(), QLatin1String("HTML"));
@@ -113,6 +122,10 @@ void HtmlExporterTest::testHtml() {
   QVERIFY(output.contains(QStringLiteral("href=\"testHtml_files/Catching_Fire__The_Second_Book_of_the_Hunger_Games_-1.html")));
   // verify relative location of image file
   QVERIFY(output.contains(QStringLiteral("src=\"testHtml_files/17b54b2a742c6d342a75f122d615a793.jpeg")));
+  // verify group heading
+  QVERIFY(output.contains(QStringLiteral("<td class=\"groupName\" colspan=\"4\">Collins, Suzanne</td>")));
+  // verify max image size
+  QVERIFY(output.contains(QStringLiteral("height=\"250\"")));
 
   QVERIFY(exp.exec());
   QFile f(tempDirName + "/testHtml.html");
