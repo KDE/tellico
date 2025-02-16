@@ -221,21 +221,20 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
 #endif
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  QVariantMap resultMap = doc.object().toVariantMap();
-  if(resultMap.isEmpty()) {
+  const auto docObj = doc.object();
+  if(docObj.isEmpty()) {
     stop();
     return;
   }
 
-  QVariantMap::const_iterator i = resultMap.constBegin();
-  for( ; i != resultMap.constEnd(); ++i) {
-    const QVariantMap recordMap = i.value().toMap().value(QStringLiteral("records")).toMap();
-    if(recordMap.isEmpty()) {
+  for(auto i = docObj.constBegin(); i != docObj.constEnd(); ++i) {
+    const auto obj = i.value()[QLatin1StringView("records")].toObject();
+    if(obj.isEmpty()) {
       continue;
     }
     // we know there's a record, so no need to check for existence of first iterator in map
-    QVariantMap::const_iterator ri = recordMap.constBegin();
-    QString marcxml = ri.value().toMap().value(QStringLiteral("marc-xml")).toString();
+    auto ri = obj.constBegin();
+    QString marcxml = ri.value()[QLatin1StringView("marc-xml")].toString();
     // HathiTrust doesn't always include the XML NS in the JSON results. Assume it's always
     // MARC XML and check that
     QDomDocument dom;
