@@ -168,7 +168,7 @@ QString BibtexExporter::text() {
     } else {
       // check crossrefs, only counts for non-empty keys
       // if this entry is crossref'd, add it to the list, and skip it
-      if(hasCrossRefs && crossRefKeys.has(key)) {
+      if(hasCrossRefs && crossRefKeys.contains(key)) {
         crossRefs.append(entryIt);
         continue;
       }
@@ -176,7 +176,7 @@ QString BibtexExporter::text() {
 
     newKey = key;
     char c = 'a';
-    while(usedKeys.has(newKey)) {
+    while(usedKeys.contains(newKey)) {
       // duplicate found!
       newKey = key + QLatin1Char(c);
       ++c;
@@ -194,7 +194,7 @@ QString BibtexExporter::text() {
     key = entryIt->field(keyField);
     newKey = key;
     char c = 'a';
-    while(usedKeys.has(newKey)) {
+    while(usedKeys.contains(newKey)) {
       // duplicate found!
       newKey = key + QLatin1Char(c);
       ++c;

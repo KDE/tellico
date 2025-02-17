@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2025 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,26 +22,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_STRINGSET_H
-#define TELLICO_STRINGSET_H
+#include "stringset.h"
 
-#include <QSet>
-#include <QStringList>
+using Tellico::StringSet;
 
-namespace Tellico {
-
-/**
- * @author Robby Stephenson
- */
-class StringSet : public QSet<QString> {
-
-public:
-  StringSet() = default;
-
-  void add(const QString& val);
-  void add(const QStringList& values);
-};
-
+void StringSet::add(const QString& val) {
+  if(!val.isEmpty())
+    insert(val);
 }
 
-#endif
+void StringSet::add(const QStringList& values) {
+  for(const QString& value : values) {
+    add(value);
+  }
+}

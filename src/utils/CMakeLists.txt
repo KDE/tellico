@@ -12,6 +12,7 @@ set(utils_STAT_SRCS
     lccnvalidator.cpp
     mergeconflictresolver.cpp
     objvalue.cpp
+    stringset.cpp
     string_utils.cpp
     tellico_utils.cpp
     upcvalidator.cpp

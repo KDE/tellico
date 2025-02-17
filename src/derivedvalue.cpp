@@ -68,7 +68,7 @@ bool DerivedValue::isRecursive(Collection* coll_) const {
     if(!f) {
       continue;
     }
-    if(fieldNamesFound.has(f->name())) {
+    if(fieldNamesFound.contains(f->name())) {
       // we have recursion
       myLog() << "found recursion, refers to" << f->name() << "more than once";
       return true;

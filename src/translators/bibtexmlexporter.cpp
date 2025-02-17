@@ -121,7 +121,7 @@ QString BibtexmlExporter::text() {
     }
     newKey = key;
     char c = 'a';
-    while(usedKeys.has(newKey)) {
+    while(usedKeys.contains(newKey)) {
       // duplicate found!
       newKey = key + QLatin1Char(c);
       ++c;

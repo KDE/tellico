@@ -465,7 +465,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
     foreach(Data::EntryPtr entryIt, entries()) {
       QString id = entryIt->field(imageField);
       // if no id or is already written, continue
-      if(id.isEmpty() || imageSet.has(id)) {
+      if(id.isEmpty() || imageSet.contains(id)) {
         continue;
       }
       imageSet.add(id);
@@ -713,7 +713,7 @@ bool HTMLExporter::copyFiles() {
   createDir();
   QUrl target;
   for(QList<QUrl>::ConstIterator it = m_files.constBegin(); it != m_files.constEnd() && !m_cancelled; ++it, ++j) {
-    if(m_copiedFiles.has((*it).url())) {
+    if(m_copiedFiles.contains((*it).url())) {
       continue;
     }
 

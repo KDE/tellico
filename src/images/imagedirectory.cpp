@@ -222,7 +222,7 @@ void ImageZipArchive::setZip(std::unique_ptr<KZip> zip_) {
 }
 
 bool ImageZipArchive::hasImage(const QString& id_) {
-  return m_images.has(id_);
+  return m_images.contains(id_);
 }
 
 Tellico::Data::Image* ImageZipArchive::imageById(const QString& id_) {

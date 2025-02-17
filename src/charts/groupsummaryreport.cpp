@@ -37,6 +37,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QChartView>
+#include <QTimer>
 
 namespace {
   static const int MAX_GROUP_VALUES = 5;

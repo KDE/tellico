@@ -106,7 +106,7 @@ bool TellicoZipExporter::exec() {
       }
       foreach(Data::FieldPtr imageField, imageFields) {
         const QString id = entry->field(imageField);
-        if(id.isEmpty() || imageSet.has(id)) {
+        if(id.isEmpty() || imageSet.contains(id)) {
           continue;
         }
         const Data::ImageInfo& info = ImageFactory::imageInfo(id);

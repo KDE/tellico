@@ -95,7 +95,7 @@ QWidget* YearDistributionReport::createWidget() {
     } else {
       years << year;
     }
-    foreach(const QString& y, years) {
+    for(const QString& y : std::as_const(years)) {
       entryYearCount[y]++;
     }
   }

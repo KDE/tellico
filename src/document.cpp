@@ -443,7 +443,7 @@ void Document::unAppendCollection(Tellico::Data::FieldList origFields_, QList<in
   // don't removeField() until after removeEntry() is done
   FieldList currFields = m_coll->fields();
   foreach(FieldPtr field, currFields) {
-    if(!origFieldNames.has(field->name())) {
+    if(!origFieldNames.contains(field->name())) {
       m_coll->removeField(field);
       structuralChange = true;
     }
@@ -563,7 +563,7 @@ void Document::slotLoadAllImages() {
   foreach(EntryPtr entry, m_coll->entries()) {
     foreach(FieldPtr field, m_coll->imageFields()) {
       id = entry->field(field);
-      if(id.isEmpty() || images.has(id)) {
+      if(id.isEmpty() || images.contains(id)) {
         continue;
       }
       // this is the early loading, so just by calling imageById()
@@ -618,7 +618,7 @@ void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
   foreach(EntryPtr entry, entries) {
     foreach(FieldPtr field, imageFields) {
       id = entry->field(field);
-      if(id.isEmpty() || images.has(id)) {
+      if(id.isEmpty() || images.contains(id)) {
         continue;
       }
       images.add(id);
@@ -664,7 +664,7 @@ bool Document::pruneImages() {
   foreach(EntryPtr entry, entries) {
     foreach(FieldPtr field, imageFields) {
       id = entry->field(field);
-      if(id.isEmpty() || images.has(id)) {
+      if(id.isEmpty() || images.contains(id)) {
         continue;
       }
       const Data::Image& img = ImageFactory::imageById(id);
@@ -718,7 +718,7 @@ void Document::removeImagesNotInCollection(Tellico::Data::EntryList entries_, Te
   foreach(FieldPtr field, fields) {
     foreach(EntryPtr entry, entries_) {
       QString id = entry->field(field);
-      if(!id.isEmpty() && imagesToCheck.has(id) && !images.has(id)) {
+      if(!id.isEmpty() && imagesToCheck.contains(id) && !images.contains(id)) {
         imagesToRemove.add(id);
       }
     }
