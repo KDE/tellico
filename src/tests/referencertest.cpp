@@ -36,8 +36,6 @@
 
 #include <QTest>
 
-#define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
-
 QTEST_GUILESS_MAIN( ReferencerTest )
 
 void ReferencerTest::initTestCase() {
@@ -63,10 +61,12 @@ void ReferencerTest::testImport() {
   QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
   QCOMPARE(entry->field("year"), QStringLiteral("2002"));
   QCOMPARE(entry->field("pages"), QStringLiteral("1057-1119"));
-  QCOMPARE(FIELDS(entry, "author").count(), 3);
-  QCOMPARE(FIELDS(entry, "author").first(), QStringLiteral("Koglin, M."));
+  const auto authors = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("author")));
+  QCOMPARE(authors.count(), 3);
+  QCOMPARE(authors.first(), QStringLiteral("Koglin, M."));
   QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
   QCOMPARE(entry->field("bibtex-key"), QStringLiteral("Koglin2002"));
-  QCOMPARE(FIELDS(entry, "keyword").count(), 2);
-  QCOMPARE(FIELDS(entry, "keyword").first(), QStringLiteral("tag1"));
+  const auto keywords = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("keyword")));
+  QCOMPARE(keywords.count(), 2);
+  QCOMPARE(keywords.first(), QStringLiteral("tag1"));
 }

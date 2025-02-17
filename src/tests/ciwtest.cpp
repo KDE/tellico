@@ -62,8 +62,9 @@ void CiwTest::testImport() {
   QCOMPARE(entry->field(QSL("volume")), QSL("76"));
   QCOMPARE(entry->field(QSL("journal")), QSL("APPLIED AND ENVIRONMENTAL MICROBIOLOGY"));
   QCOMPARE(entry->field(QSL("doi")), QSL("10.1128/AEM.02396-09"));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QSL("author"))).count(), 5);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QSL("author"))).first(), QSL("Zelle, Rintze M."));
+  auto authors = Tellico::FieldFormat::splitValue(entry->field(QSL("author")));
+  QCOMPARE(authors.count(), 5);
+  QCOMPARE(authors.first(), QSL("Zelle, Rintze M."));
   QVERIFY(!entry->field(QSL("abstract")).isEmpty());
 
   entry = coll->entryById(6);
@@ -72,10 +73,12 @@ void CiwTest::testImport() {
   QCOMPARE(entry->field(QSL("title")), QSL("Prematurity: An Overview and Public Health Implications"));
   QCOMPARE(entry->field(QSL("booktitle")), QSL("ANNUAL REVIEW OF PUBLIC HEALTH, VOL 32"));
   QCOMPARE(entry->field(QSL("isbn")), QSL("978-0-8243-2732-3"));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QSL("author"))).count(), 4);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QSL("author"))).first(), QSL("McCormick, Marie C."));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QSL("editor"))).count(), 3);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QSL("editor"))).first(), QSL("Fielding, JE"));
+  authors = Tellico::FieldFormat::splitValue(entry->field(QSL("author")));
+  QCOMPARE(authors.count(), 4);
+  QCOMPARE(authors.first(), QSL("McCormick, Marie C."));
+  const auto editors = Tellico::FieldFormat::splitValue(entry->field(QSL("editor")));
+  QCOMPARE(editors.count(), 3);
+  QCOMPARE(editors.first(), QSL("Fielding, JE"));
 
   Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
   QVERIFY(bColl);

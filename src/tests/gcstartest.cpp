@@ -39,9 +39,6 @@
 #include <QTest>
 #include <QStandardPaths>
 
-#define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(QStringLiteral(fieldName)))
-#define TABLES(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(QStringLiteral(fieldName)))
-
 QTEST_GUILESS_MAIN( GCstarTest )
 
 void GCstarTest::initTestCase() {
@@ -72,19 +69,23 @@ void GCstarTest::testBook() {
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Reason for God"));
   QCOMPARE(entry->field("pub_year"), QStringLiteral("2008"));
-  QCOMPARE(FIELDS(entry, "author").count(), 2);
-  QCOMPARE(FIELDS(entry, "author").first(), QStringLiteral("Timothy Keller"));
+  const auto authors = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("author")));
+  QCOMPARE(authors.count(), 2);
+  QCOMPARE(authors.first(), QStringLiteral("Timothy Keller"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("978-0-525-95049-3"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Dutton Adult"));
-  QCOMPARE(FIELDS(entry, "genre").count(), 2);
-  QCOMPARE(FIELDS(entry, "genre").at(0), QStringLiteral("non-fiction"));
-  QCOMPARE(FIELDS(entry, "keyword").count(), 2);
-  QCOMPARE(FIELDS(entry, "keyword").at(0), QStringLiteral("tag1"));
-  QCOMPARE(FIELDS(entry, "keyword").at(1), QStringLiteral("tag2"));
+  const auto genres = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("genre")));
+  QCOMPARE(genres.count(), 2);
+  QCOMPARE(genres.at(0), QStringLiteral("non-fiction"));
+  const auto keywords = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("keyword")));
+  QCOMPARE(keywords.count(), 2);
+  QCOMPARE(keywords.at(0), QStringLiteral("tag1"));
+  QCOMPARE(keywords.at(1), QStringLiteral("tag2"));
   // file has rating of 4, Tellico uses half the rating of GCstar, so it should be 2
   QCOMPARE(entry->field("rating"), QStringLiteral("2"));
-  QCOMPARE(FIELDS(entry, "language").count(), 1);
-  QCOMPARE(FIELDS(entry, "language").at(0), QStringLiteral("English"));
+  const auto langs = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("language")));
+  QCOMPARE(langs.count(), 1);
+  QCOMPARE(langs.at(0), QStringLiteral("English"));
 
   Tellico::Export::GCstarExporter exporter(coll);
   exporter.setEntries(coll->entries());
@@ -127,8 +128,9 @@ void GCstarTest::testComicBook() {
   QCOMPARE(entry->field("pub_year"), QStringLiteral("2010"));
   QCOMPARE(entry->field("series"), QStringLiteral("series"));
   QCOMPARE(entry->field("issue"), QStringLiteral("1"));
-  QCOMPARE(FIELDS(entry, "writer").count(), 2);
-  QCOMPARE(FIELDS(entry, "writer").first(), QStringLiteral("writer1"));
+  const auto writers = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("writer")));
+  QCOMPARE(writers.count(), 2);
+  QCOMPARE(writers.first(), QStringLiteral("writer1"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("1-23456-789-X"));
   QCOMPARE(entry->field("artist"), QStringLiteral("illustrator"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("publisher"));
@@ -182,21 +184,25 @@ void GCstarTest::testVideo() {
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Man from Snowy River"));
   QCOMPARE(entry->field("year"), QStringLiteral("1982"));
-  QCOMPARE(FIELDS(entry, "director").count(), 1);
-  QCOMPARE(FIELDS(entry, "director").first(), QStringLiteral("George Miller"));
-  QCOMPARE(FIELDS(entry, "nationality").count(), 1);
-  QCOMPARE(FIELDS(entry, "nationality").first(), QStringLiteral("Australia"));
+  const auto directors = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("director")));
+  QCOMPARE(directors.count(), 1);
+  QCOMPARE(directors.first(), QStringLiteral("George Miller"));
+  const auto nats = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("nationality")));
+  QCOMPARE(nats.count(), 1);
+  QCOMPARE(nats.first(), QStringLiteral("Australia"));
   QCOMPARE(entry->field("medium"), QStringLiteral("DVD"));
   QCOMPARE(entry->field("running-time"), QStringLiteral("102"));
-  QCOMPARE(FIELDS(entry, "genre").count(), 4);
-  QCOMPARE(FIELDS(entry, "genre").at(0), QStringLiteral("Drama"));
+  const auto genres = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("genre")));
+  QCOMPARE(genres.count(), 4);
+  QCOMPARE(genres.at(0), QStringLiteral("Drama"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QCOMPARE(castList.count(), 10);
   QCOMPARE(castList.at(0), QStringLiteral("Tom Burlinson::Jim Craig"));
   QCOMPARE(castList.at(2), QStringLiteral("Kirk Douglas::Harrison / Spur"));
-  QCOMPARE(FIELDS(entry, "keyword").count(), 2);
-  QCOMPARE(FIELDS(entry, "keyword").at(0), QStringLiteral("tag2"));
-  QCOMPARE(FIELDS(entry, "keyword").at(1), QStringLiteral("tag1"));
+  const auto keywords = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("keyword")));
+  QCOMPARE(keywords.count(), 2);
+  QCOMPARE(keywords.at(0), QStringLiteral("tag2"));
+  QCOMPARE(keywords.at(1), QStringLiteral("tag1"));
   QCOMPARE(entry->field("rating"), QStringLiteral("3"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("comments").isEmpty());
@@ -252,20 +258,25 @@ void GCstarTest::testMusic() {
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("Lifesong"));
   QCOMPARE(entry->field("year"), QStringLiteral("2005"));
-  QCOMPARE(FIELDS(entry, "artist").count(), 1);
-  QCOMPARE(FIELDS(entry, "artist").first(), QStringLiteral("Casting Crowns"));
-  QCOMPARE(FIELDS(entry, "label").count(), 1);
-  QCOMPARE(FIELDS(entry, "label").first(), QStringLiteral("Beach Street Records"));
+  const auto artists = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("artist")));
+  QCOMPARE(artists.count(), 1);
+  QCOMPARE(artists.first(), QStringLiteral("Casting Crowns"));
+  const auto labels = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("label")));
+  QCOMPARE(labels.count(), 1);
+  QCOMPARE(labels.first(), QStringLiteral("Beach Street Records"));
   QCOMPARE(entry->field("medium"), QStringLiteral("Compact Disc"));
-  QCOMPARE(FIELDS(entry, "genre").count(), 2);
-  QCOMPARE(FIELDS(entry, "genre").at(0), QStringLiteral("Electronic"));
-  QStringList trackList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
+  const auto genres = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("genre")));
+  QCOMPARE(genres.count(), 2);
+  QCOMPARE(genres.first(), QStringLiteral("Electronic"));
+  const auto trackList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
   QCOMPARE(trackList.count(), 11);
   QCOMPARE(trackList.at(1), QStringLiteral("Praise You In This Storm::Casting Crowns::4:59"));
-  QCOMPARE(FIELDS(entry, "producer").count(), 1);
-  QCOMPARE(FIELDS(entry, "producer").at(0), QStringLiteral("Mark A. Miller"));
-  QCOMPARE(FIELDS(entry, "composer").count(), 4);
-  QCOMPARE(FIELDS(entry, "composer").at(1), QStringLiteral("David Hunt"));
+  const auto producers = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("producer")));
+  QCOMPARE(producers.count(), 1);
+  QCOMPARE(producers.at(0), QStringLiteral("Mark A. Miller"));
+  const auto composers = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("composer")));
+  QCOMPARE(composers.count(), 4);
+  QCOMPARE(composers.at(1), QStringLiteral("David Hunt"));
   QCOMPARE(entry->field("cdate"), QStringLiteral("2009-09-22"));
 
   Tellico::Export::GCstarExporter exporter(coll);
@@ -305,12 +316,15 @@ void GCstarTest::testVideoGame() {
   QCOMPARE(entry->field("title"), QStringLiteral("Halo 3"));
   QCOMPARE(entry->field("year"), QStringLiteral("2007"));
   QCOMPARE(entry->field("platform"), QStringLiteral("Xbox 360"));
-  QCOMPARE(FIELDS(entry, "developer").count(), 1);
-  QCOMPARE(FIELDS(entry, "developer").first(), QStringLiteral("Bungie Studios"));
-  QCOMPARE(FIELDS(entry, "publisher").count(), 1);
-  QCOMPARE(FIELDS(entry, "publisher").first(), QStringLiteral("Microsoft Games Studios"));
-  QCOMPARE(FIELDS(entry, "genre").count(), 3);
-  QCOMPARE(FIELDS(entry, "genre").at(0), QStringLiteral("Action"));
+  const auto developers = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("developer")));
+  QCOMPARE(developers.count(), 1);
+  QCOMPARE(developers.at(0), QStringLiteral("Bungie Studios"));
+  const auto publishers = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("publisher")));
+  QCOMPARE(publishers.count(), 1);
+  QCOMPARE(publishers.at(0), QStringLiteral("Microsoft Games Studios"));
+  const auto genres = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("genre")));
+  QCOMPARE(genres.count(), 3);
+  QCOMPARE(genres.at(0), QStringLiteral("Action"));
   QCOMPARE(entry->field("cdate"), QStringLiteral("2009-09-24"));
   QVERIFY(!entry->field("description").isEmpty());
 
@@ -350,14 +364,18 @@ void GCstarTest::testBoardGame() {
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("Risk"));
   QCOMPARE(entry->field("year"), QStringLiteral("1959"));
-  QCOMPARE(FIELDS(entry, "designer").count(), 2);
-  QCOMPARE(FIELDS(entry, "designer").at(1), QStringLiteral("Michael I. Levin"));
-  QCOMPARE(FIELDS(entry, "publisher").count(), 11);
-  QCOMPARE(FIELDS(entry, "publisher").at(1), QStringLiteral("Borras Plana S.A."));
-  QCOMPARE(FIELDS(entry, "mechanism").count(), 3);
-  QCOMPARE(FIELDS(entry, "mechanism").at(1), QStringLiteral("Dice Rolling"));
-  QCOMPARE(FIELDS(entry, "genre").count(), 1);
-  QCOMPARE(FIELDS(entry, "genre").at(0), QStringLiteral("Wargame"));
+  const auto designers = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("designer")));
+  QCOMPARE(designers.count(), 2);
+  QCOMPARE(designers.at(1), QStringLiteral("Michael I. Levin"));
+  const auto publishers = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("publisher")));
+  QCOMPARE(publishers.count(), 11);
+  QCOMPARE(publishers.at(1), QStringLiteral("Borras Plana S.A."));
+  const auto mechs = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("mechanism")));
+  QCOMPARE(mechs.count(), 3);
+  QCOMPARE(mechs.at(1), QStringLiteral("Dice Rolling"));
+  const auto genres = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("genre")));
+  QCOMPARE(genres.count(), 1);
+  QCOMPARE(genres.at(0), QStringLiteral("Wargame"));
   QVERIFY(!entry->field("description").isEmpty());
   QVERIFY(!entry->field("comments").isEmpty());
 
@@ -401,8 +419,9 @@ void GCstarTest::testWine() {
   QCOMPARE(entry->field("type"), QStringLiteral("Red Wine"));
   QCOMPARE(entry->field("country"), QStringLiteral("australia"));
   QCOMPARE(entry->field("quantity"), QStringLiteral("1"));
-  QCOMPARE(FIELDS(entry, "varietal").count(), 2);
-  QCOMPARE(FIELDS(entry, "varietal").at(1), QStringLiteral("grape2"));
+  const auto varietals = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("varietal")));
+  QCOMPARE(varietals.count(), 2);
+  QCOMPARE(varietals.at(1), QStringLiteral("grape2"));
   QCOMPARE(entry->field("pur_date"), QStringLiteral("28/08/2010"));
   QCOMPARE(entry->field("pur_price"), QStringLiteral("12.99"));
   QCOMPARE(entry->field("appellation"), QStringLiteral("designation"));
@@ -459,8 +478,9 @@ void GCstarTest::testCoin() {
   QCOMPARE(entry->field("country"), QStringLiteral("australia"));
   QCOMPARE(entry->field("location"), QStringLiteral("current"));
   QCOMPARE(entry->field("service"), QStringLiteral("PCGS"));
-  QCOMPARE(TABLES(entry, "metal").count(), 2);
-  QCOMPARE(TABLES(entry, "metal").at(1), QStringLiteral("metal2"));
+  const auto metals = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("metal")));
+  QCOMPARE(metals.count(), 2);
+  QCOMPARE(metals.at(1), QStringLiteral("metal2"));
   QVERIFY(!entry->field("comments").isEmpty());
 
   Tellico::Export::GCstarExporter exporter(coll);
@@ -567,8 +587,9 @@ void GCstarTest::testCustomFields() {
   QCOMPARE(entry->field("gcsfield6"), QStringLiteral("all\nthe best \nstuff"));
   QCOMPARE(entry->field("gcsfield7"), QStringLiteral("2013-03-31"));
   QCOMPARE(entry->field("gcsfield9"), QStringLiteral("true,maybe"));
-  QCOMPARE(TABLES(entry, "gcsfield10").count(), 2);
-  QCOMPARE(TABLES(entry, "gcsfield10").at(1), QStringLiteral("list2"));
+  const auto list = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("gcsfield10")));
+  QCOMPARE(list.count(), 2);
+  QCOMPARE(list.at(1), QStringLiteral("list2"));
 
   Tellico::Export::GCstarExporter exporter(coll);
   exporter.setEntries(coll->entries());
@@ -598,8 +619,9 @@ void GCstarTest::testCustomFields() {
   foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
     Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
     QVERIFY(e2);
-    QCOMPARE(TABLES(e2, "gcsfield10").count(), 2);
-    QCOMPARE(TABLES(e2, "gcsfield10").at(1), QStringLiteral("list2"));
+    const auto list = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("gcsfield10")));
+    QCOMPARE(list.count(), 2);
+    QCOMPARE(list.at(1), QStringLiteral("list2"));
     foreach(Tellico::Data::FieldPtr f, coll->fields()) {
       // skip images
       if(f->type() != Tellico::Data::Field::Image) {

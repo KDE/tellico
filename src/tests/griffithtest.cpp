@@ -37,7 +37,6 @@
 #include <QStandardPaths>
 
 #define QSL(x) QStringLiteral(x)
-#define ROWS(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(QStringLiteral(fieldName)))
 
 QTEST_GUILESS_MAIN( GriffithTest )
 
@@ -76,7 +75,8 @@ void GriffithTest::testMovies() {
   QCOMPARE(entry->field(QSL("studio")), QSL("studio"));
   QCOMPARE(entry->field(QSL("seen")), QSL("true"));
   QCOMPARE(entry->field(QSL("medium")), QSL("DVD"));
-  QCOMPARE(ROWS(entry, "cast").first(), QSL("John Cusack::Jonathan Trager"));
+  const auto cast = Tellico::FieldFormat::splitTable(entry->field(QSL("cast")));
+  QCOMPARE(cast.first(), QSL("John Cusack::Jonathan Trager"));
   QVERIFY(!entry->field(QSL("plot")).isEmpty());
   // cover will be empty since local images don't exist
 }

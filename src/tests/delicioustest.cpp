@@ -40,9 +40,6 @@
 
 #include <QTest>
 
-#define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
-#define ROWS(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(fieldName))
-
 QTEST_GUILESS_MAIN( DeliciousTest )
 
 void DeliciousTest::initTestCase() {
@@ -96,8 +93,9 @@ void DeliciousTest::testBooks2() {
   QCOMPARE(entry->field("isbn"), QStringLiteral("0-517-54535-7"));
   QCOMPARE(entry->field("cdate"), QStringLiteral("2007-12-19"));
   QCOMPARE(entry->field("mdate"), QStringLiteral("2009-06-11"));
-  QCOMPARE(FIELDS(entry, "author").count(), 1);
-  QCOMPARE(FIELDS(entry, "author").first(), QStringLiteral("Douglas Adams"));
+  const auto authors = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("author")));
+  QCOMPARE(authors.count(), 1);
+  QCOMPARE(authors.first(), QStringLiteral("Douglas Adams"));
   QCOMPARE(entry->field("binding"), QStringLiteral("Hardback"));
   QCOMPARE(entry->field("rating"), QStringLiteral("4.5")); // visually, this gets shown as 4 stars
   QCOMPARE(entry->field("pages"), QStringLiteral("250"));
@@ -213,8 +211,9 @@ void DeliciousTest::testMusic1() {
   QCOMPARE(entry->field("year"), QStringLiteral("2007"));
   QCOMPARE(entry->field("medium"), QStringLiteral("Compact Disc"));
   QCOMPARE(entry->field("label"), QStringLiteral("Sanctuary Records"));
-  QCOMPARE(ROWS(entry, "track").count(), 12);
-  QCOMPARE(ROWS(entry, "track").first(), QStringLiteral("Ordinary Day"));
+  const auto tracks = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
+  QCOMPARE(tracks.count(), 12);
+  QCOMPARE(tracks.first(), QStringLiteral("Ordinary Day"));
   QCOMPARE(entry->field("pur_price"), QStringLiteral("$15.98"));
   QCOMPARE(entry->field("pur_date"), QStringLiteral("27-06-2008"));
   QCOMPARE(entry->field("rating"), QStringLiteral("4.5"));
