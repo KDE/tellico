@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-16 00:41+0000\n"
+"POT-Creation-Date: 2025-02-18 00:41+0000\n"
 "PO-Revision-Date: 2024-09-18 09:44+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -173,22 +173,22 @@ msgstr "Celkem záznamů: %1"
 msgid "Collection Size Over Time"
 msgstr ""
 
-#: src/charts/groupsummaryreport.cpp:59
+#: src/charts/groupsummaryreport.cpp:60
 #, kde-format
 msgid "Group Summary: %1"
 msgstr "Skupinové shrnutí: %1"
 
-#: src/charts/groupsummaryreport.cpp:65
+#: src/charts/groupsummaryreport.cpp:66
 #, kde-format
 msgid "Total number of entries: %1"
 msgstr "Celkový počet záznamů: %1"
 
-#: src/charts/groupsummaryreport.cpp:119
+#: src/charts/groupsummaryreport.cpp:120
 #, kde-format
 msgid "Top Values: %1"
 msgstr ""
 
-#: src/charts/groupsummaryreport.cpp:191
+#: src/charts/groupsummaryreport.cpp:192
 #, kde-format
 msgid "Group Summary Report"
 msgstr ""
@@ -784,7 +784,7 @@ msgstr "Organizace"
 msgid "Publisher"
 msgstr "Nakladatel"
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:303
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:302
 #: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
@@ -897,7 +897,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:303 src/fetch/srufetcher.cpp:536
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -3590,7 +3590,7 @@ msgstr ""
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:403
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/mrlookupfetcher.cpp:230
@@ -4007,19 +4007,19 @@ msgstr "Odkaz na Google Book"
 msgid "Google Book Search"
 msgstr ""
 
-#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr "Ilustrátor"
 
-#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/isbndbfetcher.cpp:379
+#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/isbndbfetcher.cpp:379
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Deweyův desetinný"
 
-#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/srufetcher.cpp:538
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -7296,17 +7296,17 @@ msgstr "Soubor je prázdný."
 msgid "The file contains no collection data."
 msgstr "Soubor neobsahuje žádná data sbírky."
 
-#: src/translators/tellicoxmlexporter.cpp:537
+#: src/translators/tellicoxmlexporter.cpp:542
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Možnosti Tellico XML"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:545
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Začlenit do XML dokumentu obrázky"
 
-#: src/translators/tellicoxmlexporter.cpp:542
+#: src/translators/tellicoxmlexporter.cpp:547
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

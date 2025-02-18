@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-16 00:41+0000\n"
+"POT-Creation-Date: 2025-02-18 00:41+0000\n"
 "PO-Revision-Date: 2022-03-21 17:12+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -187,22 +187,22 @@ msgstr "Всего записей: %1"
 msgid "Collection Size Over Time"
 msgstr "Размер коллекции с течением времени"
 
-#: src/charts/groupsummaryreport.cpp:59
+#: src/charts/groupsummaryreport.cpp:60
 #, kde-format
 msgid "Group Summary: %1"
 msgstr "Сводка по группам: %1"
 
-#: src/charts/groupsummaryreport.cpp:65
+#: src/charts/groupsummaryreport.cpp:66
 #, kde-format
 msgid "Total number of entries: %1"
 msgstr "Всего записей: %1"
 
-#: src/charts/groupsummaryreport.cpp:119
+#: src/charts/groupsummaryreport.cpp:120
 #, kde-format
 msgid "Top Values: %1"
 msgstr "Верхние значения: %1"
 
-#: src/charts/groupsummaryreport.cpp:191
+#: src/charts/groupsummaryreport.cpp:192
 #, kde-format
 msgid "Group Summary Report"
 msgstr "Отчёт со сводкой по группам"
@@ -802,7 +802,7 @@ msgstr "Организация"
 msgid "Publisher"
 msgstr "Издательство"
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:303
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:302
 #: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
@@ -915,7 +915,7 @@ msgid "URL"
 msgstr "URL-адрес"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:303 src/fetch/srufetcher.cpp:536
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -3636,7 +3636,7 @@ msgstr ""
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:403
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/mrlookupfetcher.cpp:230
@@ -4061,19 +4061,19 @@ msgstr "Ссылка в «Google Книги»"
 msgid "Google Book Search"
 msgstr "Поиск в «Google Книги»"
 
-#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr "Иллюстратор"
 
-#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/isbndbfetcher.cpp:379
+#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/isbndbfetcher.cpp:379
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Десятичная классификация Дьюи (DDS)"
 
-#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/srufetcher.cpp:538
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -7393,17 +7393,17 @@ msgstr "Файл пуст."
 msgid "The file contains no collection data."
 msgstr "Файл не содержит данные коллекций."
 
-#: src/translators/tellicoxmlexporter.cpp:537
+#: src/translators/tellicoxmlexporter.cpp:542
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Параметры XML (Tellico)"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:545
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Включать изображения в файл XML"
 
-#: src/translators/tellicoxmlexporter.cpp:542
+#: src/translators/tellicoxmlexporter.cpp:547
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

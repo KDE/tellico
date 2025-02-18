@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-16 00:41+0000\n"
+"POT-Creation-Date: 2025-02-18 00:41+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -179,26 +179,26 @@ msgstr "Ukupno unosa: %1"
 msgid "Collection Size Over Time"
 msgstr "Kolekcoja polja"
 
-#: src/charts/groupsummaryreport.cpp:59
+#: src/charts/groupsummaryreport.cpp:60
 #, fuzzy, kde-format
 #| msgctxt "Group Summary XSL Template"
 #| msgid "Group Summary"
 msgid "Group Summary: %1"
 msgstr "Rezime Grupe"
 
-#: src/charts/groupsummaryreport.cpp:65
+#: src/charts/groupsummaryreport.cpp:66
 #, fuzzy, kde-format
 #| msgid "Total number of entries:"
 msgid "Total number of entries: %1"
 msgstr "Ukupan broj unosa:"
 
-#: src/charts/groupsummaryreport.cpp:119
+#: src/charts/groupsummaryreport.cpp:120
 #, fuzzy, kde-format
 #| msgid "Total entries: %1"
 msgid "Top Values: %1"
 msgstr "Ukupno unosa: %1"
 
-#: src/charts/groupsummaryreport.cpp:191
+#: src/charts/groupsummaryreport.cpp:192
 #, fuzzy, kde-format
 #| msgctxt "Group Summary XSL Template"
 #| msgid "Group Summary"
@@ -805,7 +805,7 @@ msgstr "Organizacija"
 msgid "Publisher"
 msgstr "Izdavač"
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:303
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:302
 #: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
@@ -918,7 +918,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:303 src/fetch/srufetcher.cpp:536
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -3730,7 +3730,7 @@ msgstr ""
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:403
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/mrlookupfetcher.cpp:230
@@ -4157,19 +4157,19 @@ msgstr "Google Book Link"
 msgid "Google Book Search"
 msgstr "Google Book Pretraga"
 
-#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr "Illustrator"
 
-#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/isbndbfetcher.cpp:379
+#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/isbndbfetcher.cpp:379
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Dewey Decimalni"
 
-#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/srufetcher.cpp:538
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -7546,17 +7546,17 @@ msgstr "Datoteka je prazna."
 msgid "The file contains no collection data."
 msgstr "Datoteka ne sadrži podatke o kolekciji."
 
-#: src/translators/tellicoxmlexporter.cpp:537
+#: src/translators/tellicoxmlexporter.cpp:542
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML Opcije"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:545
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Uključi slike u XML dokument"
 
-#: src/translators/tellicoxmlexporter.cpp:542
+#: src/translators/tellicoxmlexporter.cpp:547
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

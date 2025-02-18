@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-16 00:41+0000\n"
+"POT-Creation-Date: 2025-02-18 00:41+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -171,22 +171,22 @@ msgstr "कुलप्रविष्टयः %1"
 msgid "Collection Size Over Time"
 msgstr "कालान्तरे संग्रहस्य आकारः"
 
-#: src/charts/groupsummaryreport.cpp:59
+#: src/charts/groupsummaryreport.cpp:60
 #, kde-format
 msgid "Group Summary: %1"
 msgstr "समूहसारांशः %1"
 
-#: src/charts/groupsummaryreport.cpp:65
+#: src/charts/groupsummaryreport.cpp:66
 #, kde-format
 msgid "Total number of entries: %1"
 msgstr "प्रविष्टीनां कुलसंख्या: %1"
 
-#: src/charts/groupsummaryreport.cpp:119
+#: src/charts/groupsummaryreport.cpp:120
 #, kde-format
 msgid "Top Values: %1"
 msgstr "शीर्षमूल्यानि : %1"
 
-#: src/charts/groupsummaryreport.cpp:191
+#: src/charts/groupsummaryreport.cpp:192
 #, kde-format
 msgid "Group Summary Report"
 msgstr "समूह सारांश प्रतिवेदन"
@@ -777,7 +777,7 @@ msgstr "संघठनं"
 msgid "Publisher"
 msgstr "प्रकाशक"
 
-#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:303
+#: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:302
 #: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
@@ -890,7 +890,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:303 src/fetch/srufetcher.cpp:536
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -3587,7 +3587,7 @@ msgstr "arXiv इत्यस्य मुक्तप्रवेशस्य �
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
 #: src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
+#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:403
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/mrlookupfetcher.cpp:230
@@ -4002,19 +4002,19 @@ msgstr "गूगल पुस्तक लिङ्क"
 msgid "Google Book Search"
 msgstr "गूगल पुस्तक अन्वेषण"
 
-#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Illustrator"
 msgstr "चित्रकारः"
 
-#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/isbndbfetcher.cpp:379
+#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/isbndbfetcher.cpp:379
 #: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "डेवी दशमलव"
 
-#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/srufetcher.cpp:538
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -7293,17 +7293,17 @@ msgstr "सञ्चिका रिक्तम् अस्ति ।"
 msgid "The file contains no collection data."
 msgstr "सञ्चिकायां संग्रहदत्तांशः नास्ति ।"
 
-#: src/translators/tellicoxmlexporter.cpp:537
+#: src/translators/tellicoxmlexporter.cpp:542
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML विकल्पाः"
 
-#: src/translators/tellicoxmlexporter.cpp:540
+#: src/translators/tellicoxmlexporter.cpp:545
 #, kde-format
 msgid "Include images in XML document"
 msgstr "XML दस्तावेजे चित्राणि समाविष्टानि कुर्वन्तु"
 
-#: src/translators/tellicoxmlexporter.cpp:542
+#: src/translators/tellicoxmlexporter.cpp:547
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
