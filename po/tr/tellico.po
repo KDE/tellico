@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-12 02:30+0000\n"
-"PO-Revision-Date: 2025-01-08 15:24+0300\n"
+"PO-Revision-Date: 2025-02-17 19:05+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3194,7 +3194,7 @@ msgstr ""
 #: src/fetch/themoviedbfetcher.cpp:597
 #, kde-format
 msgid "Access key: "
-msgstr "Erişim anahtarı: "
+msgstr "Erişim düğmesi: "
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:248 src/fetch/entrezfetcher.cpp:544
