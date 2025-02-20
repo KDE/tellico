@@ -54,3 +54,7 @@ void ImageFieldWidget::clearImpl() {
 QWidget* ImageFieldWidget::widget() {
   return m_widget;
 }
+
+void ImageFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
+  m_widget->setLinkOnlyChecked(newField_->property(QStringLiteral("link")) == QLatin1String("true"));
+}
