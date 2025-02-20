@@ -52,6 +52,7 @@ public Q_SLOTS:
 
 protected:
   virtual QWidget* widget() override;
+  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) override;
 
 private:
   ImageWidget* m_widget;
