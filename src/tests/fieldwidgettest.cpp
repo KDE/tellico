@@ -478,10 +478,23 @@ void FieldWidgetTest::testImage() {
   auto checkBox = imgWidget->findChild<QCheckBox *>();
   QVERIFY(checkBox);
   QVERIFY(!checkBox->isChecked());
+  QVERIFY(checkBox->isEnabled());
 
   field->setProperty(QStringLiteral("link"), QStringLiteral("true"));
   w.updateField(field, field);
   QVERIFY(checkBox->isChecked());
+  checkBox->setChecked(false);
+  QVERIFY(!checkBox->isChecked());
+
+  QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/128-apps-tellico.png"));
+  // addImage(url, quiet, referer, link)
+  const QString id = Tellico::ImageFactory::addImage(u, false, QUrl(), true);
+  QCOMPARE(id, u.url());
+  w.setText(id);
+  QCOMPARE(w.text(), id);
+  // it's a link-only image so checkbox should be checked now
+  QVERIFY(checkBox->isChecked());
+  QVERIFY(checkBox->isEnabled());
 
   QCOMPARE(spy.count(), 0);
 }
