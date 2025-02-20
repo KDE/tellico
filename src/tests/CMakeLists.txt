@@ -322,6 +322,8 @@ ecm_add_test(fieldwidgettest.cpp
     ../gui/datefieldwidget.cpp
     ../gui/datewidget.cpp
     ../gui/spinbox.cpp
+    ../gui/imagewidget.cpp
+    ../gui/imagefieldwidget.cpp
     ../gui/linefieldwidget.cpp
     ../gui/lineedit.cpp
     ../gui/numberfieldwidget.cpp
@@ -343,7 +345,11 @@ ecm_add_test(fieldwidgettest.cpp
         KF6::SonnetCore
         KF6::SonnetUi
         KF6::TextWidgets
+        KF6::KIOFileWidgets
 )
+if(KSaneWidgets6_FOUND)
+    target_link_libraries(fieldwidgettest KSaneWidgets6)
+endif()
 
 ecm_add_test(filelistingtest.cpp
     ../translators/filelistingimporter.cpp

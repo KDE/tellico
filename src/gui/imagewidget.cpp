@@ -184,7 +184,7 @@ void ImageWidget::setImage(const QString& id_) {
   m_pixmap = ImageFactory::pixmap(id_, MAX_UNSCALED_WIDTH, MAX_UNSCALED_HEIGHT);
   const bool link = ImageFactory::imageInfo(id_).linkOnly;
   m_cbLinkOnly->setChecked(link);
-  m_cbLinkOnly->setEnabled(link); // user can't make a non;-linked image a linked image, so disable if not linked
+  m_cbLinkOnly->setEnabled(link); // user can't make a non-linked image a linked image, so disable if not linked
   m_edit->setEnabled(true);
   // if we're using a link, then the original URL _is_ the id
   m_originalURL = link ? QUrl(id_) : QUrl();

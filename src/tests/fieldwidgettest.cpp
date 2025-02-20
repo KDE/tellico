@@ -28,6 +28,8 @@
 #include "../gui/choicefieldwidget.h"
 #include "../gui/datefieldwidget.h"
 #include "../gui/datewidget.h"
+#include "../gui/imagefieldwidget.h"
+#include "../gui/imagewidget.h"
 #include "../gui/linefieldwidget.h"
 #include "../gui/lineedit.h"
 #include "../gui/numberfieldwidget.h"
@@ -461,4 +463,25 @@ void FieldWidgetTest::testUrl() {
   w.clear();
   QVERIFY(w.text().isEmpty());
   QVERIFY(requester->url().isEmpty());
+}
+
+void FieldWidgetTest::testImage() {
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("img"),
+                                                         QStringLiteral("img"),
+                                                         Tellico::Data::Field::Image));
+  Tellico::GUI::ImageFieldWidget w(field, nullptr);
+  QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
+  QVERIFY(w.expands());
+  QVERIFY(w.text().isEmpty());
+  auto imgWidget = dynamic_cast<Tellico::GUI::ImageWidget*>(w.widget());
+  QVERIFY(imgWidget);
+  auto checkBox = imgWidget->findChild<QCheckBox *>();
+  QVERIFY(checkBox);
+  QVERIFY(!checkBox->isChecked());
+
+  field->setProperty(QStringLiteral("link"), QStringLiteral("true"));
+  w.updateField(field, field);
+  QVERIFY(checkBox->isChecked());
+
+  QCOMPARE(spy.count(), 0);
 }

@@ -28,7 +28,7 @@
 #include "fieldwidget.h"
 #include "../datavectors.h"
 
-class QString;
+class FieldWidgetTest;
 
 namespace Tellico {
   namespace GUI {
@@ -39,6 +39,8 @@ namespace Tellico {
  */
 class ImageFieldWidget : public FieldWidget {
 Q_OBJECT
+
+friend class ::FieldWidgetTest;
 
 public:
   ImageFieldWidget(Data::FieldPtr field, QWidget* parent);

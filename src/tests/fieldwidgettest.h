@@ -41,6 +41,7 @@ private Q_SLOTS:
   void testRating();
   void testTable();
   void testUrl();
+  void testImage();
 };
 
 #endif
