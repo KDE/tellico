@@ -199,7 +199,7 @@ void ImageWidget::setLinkOnlyChecked(bool link_) {
 }
 
 void ImageWidget::slotClear() {
-  bool wasEmpty = m_imageID.isEmpty();
+  const bool wasEmpty = m_imageID.isEmpty();
 //  m_image = Data::Image();
   m_imageID.clear();
   m_pixmap = QPixmap();
@@ -327,7 +327,11 @@ void ImageWidget::imageReady(const QImage& scannedImage) {
   QTemporaryFile temp(QDir::tempPath() + QLatin1String("/tellico_XXXXXX") + QLatin1String(".png"));
   if(temp.open()) {
     scannedImage.save(temp.fileName(), "PNG");
+    // cannot link to the image
+    m_cbLinkOnly->setChecked(false);
     loadImage(QUrl::fromLocalFile(temp.fileName()));
+    m_originalURL.clear(); // don't allow linking to a temporary
+    m_cbLinkOnly->setEnabled(false);
   } else {
     myWarning() << "Failed to open temp image file";
   }
@@ -371,7 +375,11 @@ void ImageWidget::slotEditImage() {
 
 void ImageWidget::slotFinished() {
   if(m_editedFileDateTime != QFileInfo(m_img).lastModified()) {
+    // cannot link to the image
+    m_cbLinkOnly->setChecked(false);
     loadImage(QUrl::fromLocalFile(m_img));
+    m_originalURL.clear(); // don't allow linking to a temporary
+    m_cbLinkOnly->setEnabled(false);
   }
   m_waitDlg->close();
 }

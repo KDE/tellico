@@ -57,8 +57,8 @@ public:
   Image& operator=(const Image&);
   ~Image();
 
-  const QString& id() const { return m_id; };
-  const QByteArray& format() const { return m_format; };
+  const QString& id() const { return m_id; }
+  const QByteArray& format() const { return m_format; }
   QByteArray byteArray() const;
   bool isNull() const;
   bool linkOnly() const { return m_linkOnly; }
