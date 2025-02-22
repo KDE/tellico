@@ -112,7 +112,7 @@ void FieldWidget::setText(const QString& text_) {
 }
 
 void FieldWidget::clear() {
-  m_oldValue.clear();
+  m_oldValue.clear(); // so valueChanged signal will not fire
   clearImpl();
 }
 
