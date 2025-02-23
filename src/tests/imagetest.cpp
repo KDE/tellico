@@ -50,13 +50,17 @@ void ImageTest::testLinkOnly() {
   QVERIFY(!img1.isNull());
   QCOMPARE(img1.format(), "png");
   QVERIFY(img1.linkOnly());
+  QCOMPARE(img1.width(), 128);
+
   const auto img2 = img1;
   QCOMPARE(img1, img2);
   QCOMPARE(img1.id(), img2.id());
+  QCOMPARE(img1.linkOnly(), img2.linkOnly());
 
   auto null = Tellico::Data::Image::null;
   QVERIFY(null.isNull());
   QVERIFY(null.id().isEmpty());
+  QVERIFY(!null.linkOnly());
 }
 
 void ImageTest::testOrientation() {
