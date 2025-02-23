@@ -254,7 +254,7 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
       break;
   }
   if(!img) {
-    myWarning() << "image not found:" << id_;
+    myWarning() << "Image not found:" << id_ << "; Cache dir:" << dir_;
     return Data::Image::null;
   }
 
@@ -490,26 +490,28 @@ bool ImageFactory::hasLocalImage(const QString& id_) {
   if(id_.isEmpty() || !factory) {
     return false;
   }
-  bool ret = (Config::imageLocation() == Config::ImagesInLocalDir &&
-                           factory->d->localImageDir.hasImage(id_)) ||
-             (Config::imageLocation() == Config::ImagesInAppDir &&
-                           factory->d->dataImageDir.hasImage(id_)) ||
-             factory->d->imageCache.contains(id_) ||
-             factory->d->imageDict.contains(id_) ||
-             factory->d->tempImageDir.hasImage(id_) ||
-             factory->d->imageZipArchive.hasImage(id_);
-  if(ret) return true;
 
-  const QUrl u(id_);
-  return u.isValid() && !u.isRelative() && u.isLocalFile();
+  const bool inConfigLocation = (Config::imageLocation() == Config::ImagesInLocalDir &&
+                                 factory->d->localImageDir.hasImage(id_)) ||
+                                (Config::imageLocation() == Config::ImagesInAppDir &&
+                                 factory->d->dataImageDir.hasImage(id_));
+  return inConfigLocation ||
+         factory->d->imageCache.contains(id_) ||
+         factory->d->imageDict.contains(id_) ||
+         factory->d->tempImageDir.hasImage(id_) ||
+         factory->d->imageZipArchive.hasImage(id_);
+  // Versions prior to 4.1.1 returned true for absolute local file paths
+  // Now they're treated identically to remote paths
 }
 
 void ImageFactory::requestImageById(const QString& id_) {
   Q_ASSERT(factory && "ImageFactory is not initialized!");
   if(hasLocalImage(id_)) {
     QTimer::singleShot(0, factory, [id_] () {
-      factory->addCachedImageImpl(id_, cacheDir());
-      Q_EMIT factory->imageAvailable(id_);
+      auto img = factory->addCachedImageImpl(id_, cacheDir());
+      if(!img.isNull()) {
+        Q_EMIT factory->imageAvailable(id_);
+      }
     });
     return;
   }
@@ -764,7 +766,7 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
   }
   const Data::Image& img = imageJob->image();
   if(img.isNull()) {
-    myDebug() << "null image for" << imageJob->url();
+    myDebug() << "Null image for" << imageJob->url().url(QUrl::PreferLocalFile);
     d->nullImages.add(imageJob->url().url());
     // don't emit anything
     return;

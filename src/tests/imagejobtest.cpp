@@ -24,6 +24,7 @@
 
 #include <config.h>
 #include "imagejobtest.h"
+#include "../tellico_debug.h"
 
 #include "../images/imagejob.h"
 #include "../images/imagefactory.h"
@@ -38,6 +39,7 @@
 #include <QNetworkInterface>
 #include <QSignalSpy>
 #include <QStandardPaths>
+#include <QLoggingCategory>
 
 QTEST_GUILESS_MAIN( ImageJobTest )
 
@@ -56,6 +58,7 @@ void ImageJobTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
 }
 
 void ImageJobTest::cleanupTestCase() {
@@ -76,7 +79,7 @@ void ImageJobTest::enterLoop() {
 
 void ImageJobTest::slotGetResult(KJob* job) {
   m_result = job->error();
-  if(m_result > 1 && !job->errorString().isEmpty()) qDebug() << job->errorString();
+  if(m_result > 1 && !job->errorString().isEmpty()) myDebug() << job->errorString();
   Q_EMIT exitLoop();
 }
 
@@ -174,7 +177,8 @@ void ImageJobTest::testImageLoad() {
 void ImageJobTest::testImageLoadWithId() {
   QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
 
-  QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u, QStringLiteral("tellico-rocks"));
+  const QString customId(QStringLiteral("tellico-rocks"));
+  QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u, customId);
   connect(job.data(), &KJob::result,
           this, &ImageJobTest::slotGetResult);
 
@@ -184,7 +188,7 @@ void ImageJobTest::testImageLoadWithId() {
 
   const Tellico::Data::Image& img = job->image();
   QVERIFY(!img.isNull());
-  QCOMPARE(img.id(), QStringLiteral("tellico-rocks"));
+  QCOMPARE(img.id(), customId);
   QCOMPARE(img.format(), QByteArray("png"));
   QCOMPARE(img.linkOnly(), false);
 }
@@ -276,23 +280,27 @@ void ImageJobTest::testNetworkImageInvalid() {
 
 void ImageJobTest::testFactoryRequestLocal() {
   QVERIFY(m_imageId.isEmpty());
+  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable);
   connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
           this, &ImageJobTest::slotAvailable);
 
   QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
   Tellico::ImageFactory::requestImageById(u.url());
 
-  qApp->processEvents();
+  enterLoop();
   QVERIFY(!m_imageId.isEmpty());
   // success!
   QCOMPARE(m_result, 0);
+  // the image should be in local memory now
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(m_imageId));
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInfo(m_imageId));
 
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(m_imageId);
   QVERIFY(!img.isNull());
-  // id is not the MD5 hash
-  QVERIFY(img.id() != QStringLiteral("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  // id is the MD5 hash, since it's not link only
+  QCOMPARE(img.id(), QStringLiteral("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
   QCOMPARE(img.format(), QByteArray("png"));
-  QCOMPARE(img.linkOnly(), true);
+  QCOMPARE(img.linkOnly(), false);
 }
 
 void ImageJobTest::testFactoryRequestLocalInvalid() {
@@ -309,20 +317,17 @@ void ImageJobTest::testFactoryRequestLocalInvalid() {
   // wait for the load to fire
   qApp->processEvents();
 
-  // it will be a null image, but a local url, so image is still loaded with immediate signal
-  QCOMPARE(spy.count(), 1);
-  // the available image id is the url
-  QCOMPARE(m_imageId, u.url());
+  // it will be a null image, but a local url, so imageAvailable signal is NOT sent
+  QCOMPARE(spy.count(), 0);
 
   // now try to load it
-  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(m_imageId);
+  const Tellico::Data::Image img = Tellico::ImageFactory::imageById(u.url());
   QVERIFY(img.isNull());
   QCOMPARE(img.linkOnly(), false);
   // make sure the null image list is updated
-  QVERIFY(Tellico::ImageFactory::self()->hasNullImage(m_imageId));
+  QVERIFY(Tellico::ImageFactory::self()->hasNullImage(u.url()));
   // the image should not be in local memory now
-  QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(m_imageId));
-  QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(m_imageId));
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(u.url()));
 }
 
 void ImageJobTest::testFactoryRequestNetwork() {
