@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-12 02:30+0000\n"
+"POT-Creation-Date: 2025-02-23 02:30+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -4840,7 +4840,7 @@ msgstr "पुसून टाका"
 msgid "Save link only"
 msgstr ""
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:523
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:531
 #, kde-format
 msgid "All Images (%1)"
 msgstr ""
@@ -4850,12 +4850,12 @@ msgstr ""
 msgid "Opening the selected scanner failed."
 msgstr "निवडलेला स्कॅनर उघडण्यास अपयश."
 
-#: src/gui/imagewidget.cpp:373
+#: src/gui/imagewidget.cpp:377
 #, kde-format
 msgid "Opening image in %1..."
 msgstr ""
 
-#: src/gui/imagewidget.cpp:405
+#: src/gui/imagewidget.cpp:413
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr ""

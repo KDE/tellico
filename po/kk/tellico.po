@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-12 02:30+0000\n"
+"POT-Creation-Date: 2025-02-23 02:30+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -5019,7 +5019,7 @@ msgstr "Тазалау"
 msgid "Save link only"
 msgstr "Сілтемені ғана сақтау..."
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:523
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:531
 #, fuzzy, kde-format
 #| msgid "Small Image"
 msgid "All Images (%1)"
@@ -5030,12 +5030,12 @@ msgstr "Шағын кескін"
 msgid "Opening the selected scanner failed."
 msgstr "Таңдалған сканерді ашу жаңылысы."
 
-#: src/gui/imagewidget.cpp:373
+#: src/gui/imagewidget.cpp:377
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Кескінді %1 дегенде ашу..."
 
-#: src/gui/imagewidget.cpp:405
+#: src/gui/imagewidget.cpp:413
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Сілтемені сақтау тек қана жаңа қосылған кескіндер үшін мүмкін."

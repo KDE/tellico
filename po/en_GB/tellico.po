@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-12 02:30+0000\n"
+"POT-Creation-Date: 2025-02-23 02:30+0000\n"
 "PO-Revision-Date: 2024-06-22 13:20+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -4958,7 +4958,7 @@ msgstr "Clear"
 msgid "Save link only"
 msgstr "Save link only"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:523
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:531
 #, kde-format
 msgid "All Images (%1)"
 msgstr "All Images (%1)"
@@ -4968,12 +4968,12 @@ msgstr "All Images (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "Opening the selected scanner failed."
 
-#: src/gui/imagewidget.cpp:373
+#: src/gui/imagewidget.cpp:377
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Opening image in %1..."
 
-#: src/gui/imagewidget.cpp:405
+#: src/gui/imagewidget.cpp:413
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Saving a link is only possible for newly added images."

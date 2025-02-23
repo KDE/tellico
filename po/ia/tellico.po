@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-12 02:30+0000\n"
+"POT-Creation-Date: 2025-02-23 02:30+0000\n"
 "PO-Revision-Date: 2025-01-08 16:08+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -4981,7 +4981,7 @@ msgstr "Netta"
 msgid "Save link only"
 msgstr "Salva solmente ligamine"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:523
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:531
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Omne Images (%1)"
@@ -4991,12 +4991,12 @@ msgstr "Omne Images (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "Il falleva a aperir le scanner seligite."
 
-#: src/gui/imagewidget.cpp:373
+#: src/gui/imagewidget.cpp:377
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Aperir imagine in %1..."
 
-#: src/gui/imagewidget.cpp:405
+#: src/gui/imagewidget.cpp:413
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Salvar un ligamine es solmente possibile pro imagines addite de nove."

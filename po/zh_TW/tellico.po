@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-12 02:30+0000\n"
+"POT-Creation-Date: 2025-02-23 02:30+0000\n"
 "PO-Revision-Date: 2024-07-27 13:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -4911,7 +4911,7 @@ msgstr "清除"
 msgid "Save link only"
 msgstr "只儲存連結"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:523
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:531
 #, kde-format
 msgid "All Images (%1)"
 msgstr "所有影像 (%1)"
@@ -4921,12 +4921,12 @@ msgstr "所有影像 (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "開啟選取的掃描器失敗。"
 
-#: src/gui/imagewidget.cpp:373
+#: src/gui/imagewidget.cpp:377
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "在 %1 中開啟影像..."
 
-#: src/gui/imagewidget.cpp:405
+#: src/gui/imagewidget.cpp:413
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "只有新加入的影像可以儲存連結。"
