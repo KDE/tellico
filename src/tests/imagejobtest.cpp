@@ -298,8 +298,15 @@ void ImageJobTest::testFactoryRequestLocal() {
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(m_imageId);
   QVERIFY(!img.isNull());
   // id is the MD5 hash, since it's not link only
+<<<<<<< HEAD
 //  QEXPECT_FAIL("", "The KDE CI job seems to get a different hash", Continue);
 //  QCOMPARE(img.id(), QStringLiteral("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+||||||| parent of f3b85d86 (Harmonize handling of urls as image id)
+  // id is not the MD5 hash
+  QVERIFY(img.id() != QStringLiteral("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+=======
+  QCOMPARE(img.id(), QStringLiteral("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+>>>>>>> f3b85d86 (Harmonize handling of urls as image id)
   QCOMPARE(img.format(), QByteArray("png"));
   QCOMPARE(img.linkOnly(), false);
 }
