@@ -82,6 +82,17 @@
 >Paragraaf</emphasis
 > mag geen meerdere waarden hebben en ook wordt het niet automatisch geformatteerd. Het kan niet gebruikt worden voor groepering. Overzichten, samenvatting van de plot of reviews zouden ingevoerd moeten worden in dit type veld.</para>
 
+<para
+>Volgende-regels worden vervangen door een HTML-break om consistente formattering te verzekeren. Om deze vervanging ui te schakelen, voeg een eigenschap toe voor het veld met een waarde van <emphasis
+>replace-line-feeds</emphasis
+> : <emphasis
+>false</emphasis
+>. Spellingcontrole kan uitgeschakeld worden door een eigenschap met een waarde van <emphasis
+>spellcheck</emphasis
+> : <emphasis
+>false</emphasis
+> in te stellen. </para>
+
 </sect2>
 
 <sect2 id="choice">

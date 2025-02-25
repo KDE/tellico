@@ -5,27 +5,27 @@
 # Fred Marchee <fred@intercookie.com>, 2005.
 # Fred Marchee <fredmarchee@gmail.com>, 2005.
 # Antoon Tolboom <atolboo@gmail.com>, 2009.
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2023, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2023, 2024, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
 # Freek de Kruijf <freekdekruijf@kde.nl>, 2011, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-23 02:30+0000\n"
-"PO-Revision-Date: 2024-06-19 11:42+0200\n"
+"PO-Revision-Date: 2025-02-24 17:43+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: \n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.12.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Rinse de Vries,Antoon Tolboom,Freek de Kruijf - t/m 2024"
+msgstr "Rinse de Vries,Antoon Tolboom,Freek de Kruijf - t/m 2025"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -298,7 +298,7 @@ msgstr "Eigen verzameling"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "De interne veldnaam is <em>%1</em>."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -1608,13 +1608,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-#| "Everyone, Early Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
-#| "Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -1622,8 +1616,8 @@ msgid ""
 "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, "
 "Pending"
 msgstr ""
-"Niet gekeurd, Allen volwassenen, Volwassen, Tieners, Iedereen 10+, Iedereen, "
-"Kinderen, In afwachting"
+"Niet gewaardeerd, Allen volwassenen, Volwassen, Tieners, Iedereen 10+, "
+"Iedereen, Kinderen, In afwachting"
 
 #: src/collections/musiccollection.cpp:34
 #, kde-format
@@ -2818,31 +2812,31 @@ msgstr "Selecteer sjabloon om te verwijderen:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "Afbeeldingen worden op dit moment opgeslagen binnen <em>%1</em>"
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "Afbeeldingen worden op dit moment opgeslagen naar <em>%1</em>"
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Afbeeldingen zullen verplaatst worden van <em>%1</em> naar <em>%2</em>"
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Afbeeldingen zullen verplaatst worden van <em>%1</em> naar <em>%2</em>"
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Afbeeldingen zullen verplaatst worden van <em>%1</em> naar <em>%2</em>"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
@@ -3105,10 +3099,9 @@ msgid "Update Entries"
 msgstr "Items bijwerken"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "Bijwerken <b>%1</b>..."
+msgstr "Bijwerken van <b>%1</b> uit <i>%2</i>..."
 
 #: src/entryview.cpp:357
 #, kde-format
@@ -5321,10 +5314,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - software voor beheer van verzamelingen, vrij en eenvoudig"
 
 #: src/main.cpp:176
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001-2024, Robby Stephenson"
+msgstr "(c) 2001, Robby Stephenson"
 
 #: src/main.cpp:180
 #, kde-format
@@ -6269,10 +6261,9 @@ msgstr ""
 "geselecteerd veld.</qt>"
 
 #: src/mainwindow.cpp:993
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - software voor beheer van verzamelingen, vrij en eenvoudig"
+msgstr "Software voor beheer van verzamelingen, vrij en eenvoudig"
 
 #: src/mainwindow.cpp:995
 #, kde-format
@@ -6301,6 +6292,9 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"Meer informatie is te vinden in de <a href=\"help:/tellico\">documentatie</"
+"a>. U kunt ook <a href=\"tc:///disable_welcome\">dit welkomstscherm "
+"uitschakelen</a>."
 
 #: src/mainwindow.cpp:1217
 #, kde-format
