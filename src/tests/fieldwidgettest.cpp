@@ -42,6 +42,7 @@
 #include "../gui/urlfieldwidget.h"
 #include "../document.h"
 #include "../images/imagefactory.h"
+#include "../images/image.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 
@@ -61,6 +62,7 @@
 #include <QStandardPaths>
 #include <QMimeData>
 #include <QLoggingCategory>
+#include <QClipboard>
 
 // needs a GUI
 QTEST_MAIN( FieldWidgetTest )
@@ -511,6 +513,11 @@ void FieldWidgetTest::testImage() {
   QVERIFY(linkOnlyCb->isEnabled());
   QVERIFY(editButton->isEnabled());
 
+  auto img = Tellico::ImageFactory::self()->imageById(id);
+  imgWidget->copyImage();
+  QCOMPARE(img, QApplication::clipboard()->image(QClipboard::Clipboard));
+  QCOMPARE(img, QApplication::clipboard()->image(QClipboard::Selection));
+
   // unlink the image
   linkOnlyCb->click();
   QVERIFY(!linkOnlyCb->isChecked());
@@ -534,9 +541,9 @@ void FieldWidgetTest::testImage() {
   QVERIFY(editButton->isEnabled());
   QCOMPARE(spy.count(), ++spyCount);
 
-  QImage img(QFINDTESTDATA("../../icons/32-apps-tellico.png"));
-  QVERIFY(!img.isNull());
-  QPixmap pix = QPixmap::fromImage(img);
+  QImage img32(QFINDTESTDATA("../../icons/32-apps-tellico.png"));
+  QVERIFY(!img32.isNull());
+  QPixmap pix = QPixmap::fromImage(img32);
   QVERIFY(!pix.isNull());
 
   // test a drop event for an image
@@ -570,15 +577,20 @@ void FieldWidgetTest::testImage() {
   QVERIFY(linkOnlyCb->isEnabled()); // image can now be linked
   QVERIFY(editButton->isEnabled());
 
-  w.clear();
+  w.setText(QString());
+  // confirm clear
+  QVERIFY(w.text().isEmpty());
+  QVERIFY(imgWidget->m_pixmap.isNull());
+  QVERIFY(imgWidget->m_scaled.isNull());
+  QVERIFY(imgWidget->m_originalURL.isEmpty());
 
 #ifdef HAVE_KSANE
-  imgWidget->imageReady(img); // nothing happens since there's no scan widget
+  imgWidget->imageReady(img32); // nothing happens since there's no scan widget
   QVERIFY(!linkOnlyCb->isChecked());
   QCOMPARE(spy.count(), spyCount); // no increment
 
   imgWidget->m_saneWidget = new KSaneIface::KSaneWidget(imgWidget);
-  imgWidget->imageReady(img);
+  imgWidget->imageReady(img32);
   QVERIFY(!linkOnlyCb->isChecked());
   QVERIFY(!linkOnlyCb->isEnabled());
   QVERIFY(editButton->isEnabled());
