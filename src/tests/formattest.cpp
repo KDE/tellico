@@ -138,6 +138,30 @@ void FormatTest::testName_data() {
   QTest::newRow("single comma") << "," << "," << false << true;
 }
 
+void FormatTest::testDate() {
+  QFETCH(QString, string);
+  QFETCH(QString, expected);
+
+  QString formatted = Tellico::FieldFormat::format(string, Tellico::FieldFormat::FormatDate, Tellico::FieldFormat::AsIsFormat);
+  QCOMPARE(formatted, expected);
+}
+
+void FormatTest::testDate_data() {
+  QTest::addColumn<QString>("string");
+  QTest::addColumn<QString>("expected");
+
+  QTest::newRow("text") << "text" << "text"; // just returns input
+  QTest::newRow("date1") << "2025-01-01" << "2025-01-01";
+  QTest::newRow("date2") << "2025-1-1" << "2025-01-01";
+  // default to first month
+  QTest::newRow("date3") << "2025--1" << "2025-01-01";
+  // default to first day
+  QTest::newRow("date3") << "2025-1" << "2025-01-01";
+  // default to curent year
+  const int y = QDate::currentDate().year();
+  QTest::newRow("date4") << "--1" << QString::number(y) + "-01-01";
+}
+
 void FormatTest::testSplit() {
   QStringList list = QStringList() << QStringLiteral("one") << QStringLiteral("two") << QStringLiteral("three");
   QCOMPARE(Tellico::FieldFormat::splitValue(list.join(Tellico::FieldFormat::delimiterString())), list);

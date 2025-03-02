@@ -38,6 +38,8 @@ private Q_SLOTS:
   void testTitle_data();
   void testName();
   void testName_data();
+  void testDate();
+  void testDate_data();
   void testSplit();
   void testStripArticles();
   void testStripArticles_data();

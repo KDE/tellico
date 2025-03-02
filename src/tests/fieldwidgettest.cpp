@@ -49,6 +49,7 @@
 #include <KLocalizedString>
 #include <KTextEdit>
 #include <KUrlRequester>
+#include <KComboBox>
 #ifdef HAVE_KSANE
 #include <KSaneWidget>
 #endif
@@ -202,9 +203,30 @@ void FieldWidgetTest::testDate() {
   QCOMPARE(dw->date(), sputnik);
   QCOMPARE(spy.count(), 1);
 
-  w.clear();
+  dw->setDate(QLatin1String("-1-2")); // try an edge case
+  QCOMPARE(w.text(), QStringLiteral("-01-02"));
+
+  w.setText(QString());
   QVERIFY(w.text().isEmpty());
   QVERIFY(dw->date().isNull());
+
+  auto spinWidgets = dw->findChildren<Tellico::GUI::SpinBox *>();
+  QCOMPARE(spinWidgets.size(), 2);
+  auto yearSpin = spinWidgets.at(1);
+  auto daySpin = spinWidgets.at(0);
+  auto monthCombo = dw->findChild<KComboBox *>();
+
+  monthCombo->setCurrentIndex(1); // index 0 is the empty string
+  QCOMPARE(w.text(), QStringLiteral("-01-"));
+  QCOMPARE(spy.count(), 2);
+
+  yearSpin->setValue(1900);
+  QCOMPARE(w.text(), QStringLiteral("1900-01-"));
+  QCOMPARE(spy.count(), 3);
+
+  daySpin->setValue(2);
+  QCOMPARE(w.text(), QStringLiteral("1900-01-02"));
+  QCOMPARE(spy.count(), 4);
 }
 
 void FieldWidgetTest::testLine() {
