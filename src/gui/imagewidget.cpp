@@ -381,7 +381,7 @@ void ImageWidget::slotFinished() {
     m_originalURL.clear(); // don't allow linking to a temporary
     m_cbLinkOnly->setEnabled(false);
   }
-  m_waitDlg->close();
+  if(m_waitDlg) m_waitDlg->close();
 }
 
 void ImageWidget::slotEditMenu(QAction* action) {
