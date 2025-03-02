@@ -315,6 +315,10 @@ void FieldWidgetTest::testNumber() {
   QCOMPARE(w.text(), QStringLiteral("3"));
   QCOMPARE(spy.count(), 1);
 
+  sb->stepBy(2);
+  QCOMPARE(w.text(), QStringLiteral("5"));
+  QCOMPARE(spy.count(), 2);
+
   // now set AllowMultiple and check that the spinbox is deleted and a line edit is used
   field->setFlags(Tellico::Data::Field::AllowMultiple);
   w.setText(QStringLiteral("1"));
@@ -324,14 +328,14 @@ void FieldWidgetTest::testNumber() {
   QVERIFY(le);
   // value should be unchanged
   QCOMPARE(w.text(), QStringLiteral("1"));
-  QCOMPARE(spy.count(), 1);
+  QCOMPARE(spy.count(), 2);
   w.setText(QStringLiteral("1;2"));
   QCOMPARE(w.text(), QStringLiteral("1; 2"));
-  QCOMPARE(spy.count(), 1);
+  QCOMPARE(spy.count(), 2);
 
   le->setText(QStringLiteral("2"));
   QCOMPARE(w.text(), QStringLiteral("2"));
-  QCOMPARE(spy.count(), 2);
+  QCOMPARE(spy.count(), 3);
 
   w.clear();
   QVERIFY(w.text().isEmpty());
