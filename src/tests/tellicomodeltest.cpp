@@ -251,6 +251,7 @@ void TellicoModelTest::testGroupModel() {
   QCOMPARE(group->fieldName(), QStringLiteral("author"));
   QCOMPARE(group->size(), 1);
   QVERIFY(!group->hasEmptyGroupName());
+  QVERIFY(!group->emptyGroupName().isEmpty());
   auto groupIndex = groupModel.indexFromGroup(group);
   QVERIFY(groupIndex.isValid());
   QCOMPARE(groupModel.modifyGroup(group), groupIndex);

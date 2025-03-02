@@ -27,7 +27,6 @@
 #include "utils/string_utils.h"
 
 #include <KLazyLocalizedString>
-#define TC_I18N(str) str.toString()
 
 namespace {
   static KLazyLocalizedString emptyString = kli18n("(Empty)");
@@ -60,6 +59,6 @@ bool EntryGroup::hasEmptyGroupName() const {
 }
 
 QString EntryGroup::emptyGroupName() {
-  static const QString name = TC_I18N(emptyString);
+  static const QString name = emptyString.toString();
   return name;
 }
