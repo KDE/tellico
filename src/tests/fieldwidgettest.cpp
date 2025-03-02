@@ -241,6 +241,21 @@ void FieldWidgetTest::testLine() {
   // verify completion object is removed
   QVERIFY(!le->compObj()); // don't call completionObject() since it recreates it
 
+  w.setEditEnabled(false); // mimic editing multiple entries
+  w.editMultiple(false);
+  auto editMultiple = w.m_editMultiple;
+  QVERIFY(editMultiple);
+  QVERIFY(!le->isEnabled());
+  QVERIFY(!editMultiple->isChecked());
+  QVERIFY(editMultiple->isHidden());
+
+  w.setEditEnabled(true);
+  w.editMultiple(true);
+  QVERIFY(le->isEnabled());
+  QVERIFY(editMultiple->isChecked());
+  QVERIFY(!editMultiple->isHidden());
+  QCOMPARE(spy.count(), 3);
+
   w.clear();
   QVERIFY(w.text().isEmpty());
 }
@@ -373,6 +388,13 @@ void FieldWidgetTest::testRating() {
   rating->setText(QStringLiteral("6"));
   QCOMPARE(w.text(), QStringLiteral("6"));
   QCOMPARE(spy.count(), 0);
+
+  auto clearButton = rating->findChild<QToolButton *>();
+  QVERIFY(clearButton);
+  QVERIFY(clearButton->isEnabled());
+  clearButton->click();
+  QVERIFY(w.text().isEmpty());
+  QCOMPARE(spy.count(), 0);
 }
 
 void FieldWidgetTest::testTable() {
@@ -424,6 +446,16 @@ void FieldWidgetTest::testTable() {
   QCOMPARE(spy.count(), 3);
   QCOMPARE(w.text(), QStringLiteral("true::new text"));
 
+  auto rowCount = tw->rowCount();
+  tw->setCurrentCell(rowCount-1, 0);
+  auto item = new QTableWidgetItem(QStringLiteral("last row"));
+  tw->setItem(rowCount-1, 0, item);
+  QCOMPARE(spy.count(), 4);
+  tw->setCurrentCell(rowCount-1, 1);
+  // verify a new row is created since the last row was edited
+  QCOMPARE(rowCount+1, tw->rowCount());
+  delete tw->takeItem(rowCount-1, 0);
+
   w.m_col = 0;
   w.renameColumn(QStringLiteral("col name"));
   QCOMPARE(tw->horizontalHeaderItem(0)->text(), QStringLiteral("col name"));
@@ -432,7 +464,7 @@ void FieldWidgetTest::testTable() {
   w.updateField(field, field);
   QCOMPARE(tw->columnCount(), 4);
   QCOMPARE(w.text(), QStringLiteral("true::new text"));
-  QCOMPARE(spy.count(), 3);
+  QCOMPARE(spy.count(), 4);
 
   w.clear();
   QVERIFY(w.text().isEmpty());
@@ -475,7 +507,7 @@ void FieldWidgetTest::testUrl() {
   // will be exactly up one level
   QCOMPARE(w.text(), link.url());
 
-  w.clear();
+  w.setText(QString());
   QVERIFY(w.text().isEmpty());
   QVERIFY(requester->url().isEmpty());
 }

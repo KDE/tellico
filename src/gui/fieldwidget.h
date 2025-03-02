@@ -32,6 +32,7 @@
 class QLabel;
 class QCheckBox;
 class QString;
+class FieldWidgetTest;
 
 namespace Tellico {
   namespace Data {
@@ -48,6 +49,8 @@ namespace Tellico {
 class FieldWidget : public QWidget {
 Q_OBJECT
 
+friend class ::FieldWidgetTest;
+
 public:
   FieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~FieldWidget() {}
@@ -59,7 +62,7 @@ public:
 
   int labelWidth() const;
   void setLabelWidth(int width);
-  bool isEnabled();
+  bool isEditEnabled();
   bool expands() const;
   void editMultiple(bool show);
   // calls updateFieldHook()
@@ -70,7 +73,7 @@ public:
 
 public Q_SLOTS:
   virtual void insertDefault();
-  void setEnabled(bool enabled);
+  void setEditEnabled(bool enabled);
 
 Q_SIGNALS:
   void valueChanged(Tellico::Data::FieldPtr field);

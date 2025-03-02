@@ -356,7 +356,7 @@ void EntryEditDialog::slotHandleSave() {
     foreach(Data::FieldPtr field, m_modifiedFields) {
       QString key = QString::number(m_currColl->id()) + field->name();
       GUI::FieldWidget* widget = m_widgetDict.value(key);
-      if(widget && widget->isEnabled()) {
+      if(widget && widget->isEditEnabled()) {
         const QString temp = widget->text();
         // ok to set field empty string, just not all of them
         if(modified == false && entry->field(field) != temp) {
@@ -487,7 +487,7 @@ void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
     QString value = entries_[0]->field(fIt);
     for(int i = 1; i < entries_.count(); ++i) {  // skip checking the first one
       if(entries_[i]->field(fIt) != value) {
-        widget->setEnabled(false);
+        widget->setEditEnabled(false);
         break;
       }
     }
@@ -535,7 +535,7 @@ void EntryEditDialog::setEntry(Tellico::Data::EntryPtr entry_) {
     }
 
     widget->setText(entry_->field(field));
-    widget->setEnabled(true);
+    widget->setEditEnabled(true);
     widget->editMultiple(false);
   } // end field loop
 

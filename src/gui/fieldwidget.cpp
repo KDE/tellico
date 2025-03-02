@@ -78,7 +78,7 @@ FieldWidget::FieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   m_editMultiple = new QCheckBox(this);
   m_editMultiple->setChecked(true);
   m_editMultiple->setFixedWidth(m_editMultiple->sizeHint().width()); // don't let it have any extra space
-  connect(m_editMultiple, &QCheckBox::toggled, this, &FieldWidget::setEnabled);
+  connect(m_editMultiple, &QCheckBox::toggled, this, &FieldWidget::setEditEnabled);
   l->addWidget(m_editMultiple);
 
   setWhatsThis(field_->description());
@@ -88,15 +88,18 @@ void FieldWidget::insertDefault() {
   setText(m_field->defaultValue());
 }
 
-bool FieldWidget::isEnabled() {
+bool FieldWidget::isEditEnabled() {
   return widget()->isEnabled();
 }
 
-void FieldWidget::setEnabled(bool enabled_) {
-  if(enabled_ == isEnabled()) {
+void FieldWidget::setEditEnabled(bool enabled_) {
+  if(enabled_ == isEditEnabled()) {
     return;
   }
 
+  // if the "edit multiple" checkbox is shown, that determines whether the
+  // widget's value is saved. If the widget value is not to be used
+  // then uncheck the box too
   widget()->setEnabled(enabled_);
   m_editMultiple->setChecked(enabled_);
 }
