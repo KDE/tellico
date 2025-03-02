@@ -22,6 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
 
 #include "fieldwidgettest.h"
 #include "../gui/boolfieldwidget.h"
@@ -47,13 +48,19 @@
 #include <KLocalizedString>
 #include <KTextEdit>
 #include <KUrlRequester>
+#ifdef HAVE_KSANE
+#include <KSaneWidget>
+#endif
 
 #include <QTest>
 #include <QCheckBox>
+#include <QToolButton>
 #include <QComboBox>
 #include <QTableWidget>
 #include <QSignalSpy>
 #include <QStandardPaths>
+#include <QMimeData>
+#include <QLoggingCategory>
 
 // needs a GUI
 QTEST_MAIN( FieldWidgetTest )
@@ -63,6 +70,8 @@ void FieldWidgetTest::initTestCase() {
   KLocalizedString::setApplicationDomain("tellico");
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::ImageFactory::init();
+  KLocalizedString::setApplicationDomain("tellico");
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = true"));
 }
 
 void FieldWidgetTest::testBool() {
@@ -471,30 +480,113 @@ void FieldWidgetTest::testImage() {
                                                          Tellico::Data::Field::Image));
   Tellico::GUI::ImageFieldWidget w(field, nullptr);
   QSignalSpy spy(&w, &Tellico::GUI::FieldWidget::valueChanged);
+  int spyCount = 0;
   QVERIFY(w.expands());
   QVERIFY(w.text().isEmpty());
   auto imgWidget = dynamic_cast<Tellico::GUI::ImageWidget*>(w.widget());
   QVERIFY(imgWidget);
-  auto checkBox = imgWidget->findChild<QCheckBox *>();
-  QVERIFY(checkBox);
-  QVERIFY(!checkBox->isChecked());
-  QVERIFY(checkBox->isEnabled());
+  auto linkOnlyCb = imgWidget->findChild<QCheckBox *>();
+  QVERIFY(linkOnlyCb);
+  QVERIFY(!linkOnlyCb->isChecked());
+  QVERIFY(linkOnlyCb->isEnabled());
+  auto editButton = imgWidget->findChild<QToolButton *>();
+  QVERIFY(editButton);
+  QVERIFY(!editButton->isEnabled());
 
   field->setProperty(QStringLiteral("link"), QStringLiteral("true"));
   w.updateField(field, field);
-  QVERIFY(checkBox->isChecked());
-  checkBox->setChecked(false);
-  QVERIFY(!checkBox->isChecked());
+  QVERIFY(linkOnlyCb->isChecked());
+  linkOnlyCb->setChecked(false);
+  QVERIFY(!linkOnlyCb->isChecked());
+  QVERIFY(!editButton->isEnabled());
 
   QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/128-apps-tellico.png"));
   // addImage(url, quiet, referer, link)
-  const QString id = Tellico::ImageFactory::addImage(u, false, QUrl(), true);
+  QString id = Tellico::ImageFactory::addImage(u, false, QUrl(), true);
   QCOMPARE(id, u.url());
   w.setText(id);
   QCOMPARE(w.text(), id);
-  // it's a link-only image so checkbox should be checked now
-  QVERIFY(checkBox->isChecked());
-  QVERIFY(checkBox->isEnabled());
+  // it's a link-only image so linkOnlyCb should be checked now
+  QVERIFY(linkOnlyCb->isChecked());
+  QVERIFY(linkOnlyCb->isEnabled());
+  QVERIFY(editButton->isEnabled());
 
-  QCOMPARE(spy.count(), 0);
+  // unlink the image
+  linkOnlyCb->click();
+  QVERIFY(!linkOnlyCb->isChecked());
+  id = w.text();
+  QVERIFY(u.url() != id);
+  QVERIFY(!id.isEmpty());
+  QCOMPARE(spy.count(), ++spyCount);
+
+  w.clear();
+  QVERIFY(w.text().isEmpty());
+  QVERIFY(!linkOnlyCb->isChecked());
+  QVERIFY(linkOnlyCb->isEnabled());
+  QVERIFY(!editButton->isEnabled());
+
+  // different image than before
+  imgWidget->m_img = QFINDTESTDATA("../../icons/64-apps-tellico.png");
+  imgWidget->slotFinished(); // finished editing the image, now load
+  const auto id64 = w.text();
+  QVERIFY(!linkOnlyCb->isChecked());
+  QVERIFY(!linkOnlyCb->isEnabled());
+  QVERIFY(editButton->isEnabled());
+  QCOMPARE(spy.count(), ++spyCount);
+
+  QImage img(QFINDTESTDATA("../../icons/32-apps-tellico.png"));
+  QVERIFY(!img.isNull());
+  QPixmap pix = QPixmap::fromImage(img);
+  QVERIFY(!pix.isNull());
+
+  // test a drop event for an image
+  auto mimeData = new QMimeData;
+  mimeData->setImageData(pix);
+  QDragEnterEvent event1(QPoint(), Qt::DropAction::CopyAction, mimeData,
+                         Qt::MouseButton::LeftButton, Qt::KeyboardModifier::NoModifier);
+  QVERIFY(qApp->sendEvent(imgWidget, &event1));
+  QDropEvent event2(QPoint(), Qt::DropAction::CopyAction, mimeData,
+                    Qt::MouseButton::LeftButton, Qt::KeyboardModifier::NoModifier);
+  QVERIFY(qApp->sendEvent(imgWidget, &event2));
+  QCOMPARE(spy.count(), ++spyCount);
+  QCOMPARE(w.text(), QLatin1String("a1e8417ef84d1ce7f37620810f125093.png"));
+  QCOMPARE(pix, imgWidget->m_pixmap);
+
+  w.clear();
+
+  // test a drop event for text
+  mimeData = new QMimeData;
+  mimeData->setText(QFINDTESTDATA("../../icons/64-apps-tellico.png"));
+  QDragEnterEvent event3(QPoint(), Qt::DropAction::CopyAction, mimeData,
+                         Qt::MouseButton::LeftButton, Qt::KeyboardModifier::NoModifier);
+  QVERIFY(qApp->sendEvent(imgWidget, &event3));
+  QDropEvent event4(QPoint(), Qt::DropAction::CopyAction, mimeData,
+                    Qt::MouseButton::LeftButton, Qt::KeyboardModifier::NoModifier);
+  QVERIFY(qApp->sendEvent(imgWidget, &event4));
+  QCOMPARE(spy.count(), ++spyCount);
+  QCOMPARE(w.text(), id64);
+
+  QVERIFY(!linkOnlyCb->isChecked());
+  QVERIFY(linkOnlyCb->isEnabled()); // image can now be linked
+  QVERIFY(editButton->isEnabled());
+
+  w.clear();
+
+#ifdef HAVE_KSANE
+  imgWidget->imageReady(img); // nothing happens since there's no scan widget
+  QVERIFY(!linkOnlyCb->isChecked());
+  QCOMPARE(spy.count(), spyCount); // no increment
+
+  imgWidget->m_saneWidget = new KSaneIface::KSaneWidget(imgWidget);
+  imgWidget->imageReady(img);
+  QVERIFY(!linkOnlyCb->isChecked());
+  QVERIFY(!linkOnlyCb->isEnabled());
+  QVERIFY(editButton->isEnabled());
+  QCOMPARE(spy.count(), ++spyCount);
+
+  // try to unlink the image, which shouldn't work
+  linkOnlyCb->click();
+  QVERIFY(!linkOnlyCb->isChecked());
+  QCOMPARE(w.text(), QLatin1String("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+#endif
 }

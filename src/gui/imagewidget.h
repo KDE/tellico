@@ -53,6 +53,9 @@ class KProcess;
 class KPageDialog;
 namespace KSaneIface { class KSaneWidget; }
 #endif
+
+class FieldWidgetTest;
+
 namespace Tellico {
   namespace GUI {
 
@@ -61,6 +64,8 @@ namespace Tellico {
  */
 class ImageWidget : public QWidget {
 Q_OBJECT
+
+friend class ::FieldWidgetTest;
 
 public:
   ImageWidget(QWidget* parent);
