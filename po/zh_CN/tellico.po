@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -3013,7 +3013,7 @@ msgstr "保存条目"
 msgid "Unsaved Changes"
 msgstr "未保存的更改"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr ""
 
@@ -4769,7 +4769,7 @@ msgstr ""
 msgid "Save As Collection Template"
 msgstr ""
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -4886,7 +4886,7 @@ msgstr "清除"
 msgid "Save link only"
 msgstr "只保存链接"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr ""
@@ -4896,12 +4896,12 @@ msgstr ""
 msgid "Opening the selected scanner failed."
 msgstr "打开所选扫描仪失败。"
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "正在打开 %1 中的图像..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "保存链接只对新添加的图像有用。"

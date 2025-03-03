@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2015-12-29 21:13+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -3039,7 +3039,7 @@ msgstr ""
 msgid "Unsaved Changes"
 msgstr "Neišsaugoti pakeitimai"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 #, fuzzy
 msgid "(Empty)"
 msgstr "(Tuščias)"
@@ -4817,7 +4817,7 @@ msgstr "Ženkliukas"
 msgid "Save As Collection Template"
 msgstr "Trinti skaidrę"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -4936,7 +4936,7 @@ msgstr "Išvalyti"
 msgid "Save link only"
 msgstr ""
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr ""
@@ -4946,12 +4946,12 @@ msgstr ""
 msgid "Opening the selected scanner failed."
 msgstr "Nepavyko atverti pasirinkto skenerio."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr ""
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr ""

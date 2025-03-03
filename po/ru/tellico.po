@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2022-03-21 17:12+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -3121,7 +3121,7 @@ msgstr "Сохранить запись"
 msgid "Unsaved Changes"
 msgstr "Несохранённые изменения"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(пусто)"
 
@@ -4956,7 +4956,7 @@ msgstr "Значок"
 msgid "Save As Collection Template"
 msgstr "Отчёт по коллекции"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5073,7 +5073,7 @@ msgstr "Очистить"
 msgid "Save link only"
 msgstr "Сохранить только ссылку"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Все изображения (%1)"
@@ -5083,12 +5083,12 @@ msgstr "Все изображения (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "Выбранный сканер недоступен."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Открытие изображения в %1..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Сохранение ссылки возможно только для вновь добавленных изображений."

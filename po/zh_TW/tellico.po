@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2024-07-27 13:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -3055,7 +3055,7 @@ msgstr "儲存項目"
 msgid "Unsaved Changes"
 msgstr "未儲存的改變"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "（空）"
 
@@ -4853,7 +4853,7 @@ msgstr "圖示："
 msgid "Save As Collection Template"
 msgstr "存為收藏樣本"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -4970,7 +4970,7 @@ msgstr "清除"
 msgid "Save link only"
 msgstr "只儲存連結"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "所有影像 (%1)"
@@ -4980,12 +4980,12 @@ msgstr "所有影像 (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "開啟選取的掃描器失敗。"
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "在 %1 中開啟影像..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "只有新加入的影像可以儲存連結。"

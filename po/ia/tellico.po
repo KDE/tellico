@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2025-02-04 12:34+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -3106,7 +3106,7 @@ msgstr "Salveguarda entrata"
 msgid "Unsaved Changes"
 msgstr "Modificationes non salveguardate"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(Vacue)"
 
@@ -4926,7 +4926,7 @@ msgstr "Icone:"
 msgid "Save As Collection Template"
 msgstr "Salveguarda como Patrono de Collection"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5043,7 +5043,7 @@ msgstr "Netta"
 msgid "Save link only"
 msgstr "Salva solmente ligamine"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Omne Images (%1)"
@@ -5053,12 +5053,12 @@ msgstr "Omne Images (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "Il falleva a aperir le scanner seligite."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Aperir imagine in %1..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Salvar un ligamine es solmente possibile pro imagines addite de nove."

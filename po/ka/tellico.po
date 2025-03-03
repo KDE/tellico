@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2025-02-02 05:10+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -3089,7 +3089,7 @@ msgstr "ჩანაწერის შენახვა"
 msgid "Unsaved Changes"
 msgstr "შეუნახავი ცვლილებები"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(ცარიელი)"
 
@@ -4895,7 +4895,7 @@ msgstr "ხატულა:"
 msgid "Save As Collection Template"
 msgstr "კოლექციის შაბლონად შენახვა"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5012,7 +5012,7 @@ msgstr "გაწმენდა"
 msgid "Save link only"
 msgstr "მხოლოდ ბმულის შენახვა"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "ყველა გამოსახულება (%1)"
@@ -5022,12 +5022,12 @@ msgstr "ყველა გამოსახულება (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "მონიშნული სკანერის გახსნის შეცდომა."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "%1-ში სურათის გახსნა..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr ""

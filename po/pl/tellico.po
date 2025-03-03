@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2025-02-08 18:02+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -3099,7 +3099,7 @@ msgstr "Zapisz element"
 msgid "Unsaved Changes"
 msgstr "Niezapisane zmiany"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(pusty)"
 
@@ -4917,7 +4917,7 @@ msgstr "Ikona:"
 msgid "Save As Collection Template"
 msgstr "Zapisz jako wzorzec zbioru"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5034,7 +5034,7 @@ msgstr "Wyczyść"
 msgid "Save link only"
 msgstr "Zapisz tylko odnośnik"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Wszystkie obrazy (%1)"
@@ -5044,12 +5044,12 @@ msgstr "Wszystkie obrazy (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "Otwarcie wybranego skanera nie powiodło się!"
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Otwieranie pliku %1..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Zapisywanie łączy jest możliwe tylko dla nowo dodanych obrazów."

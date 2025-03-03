@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -3125,7 +3125,7 @@ msgstr "Αποθήκευση εισαγωγών"
 msgid "Unsaved Changes"
 msgstr "Μη αποθηκευμένες αλλαγές"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(Άδειο)"
 
@@ -4989,7 +4989,7 @@ msgstr "Εικονίδιο:"
 msgid "Save As Collection Template"
 msgstr "Αναφορά συλλογής"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5106,7 +5106,7 @@ msgstr "Καθαρισμός"
 msgid "Save link only"
 msgstr "Αποθήκευση μόνο δεσμού"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Όλες οι εικόνες (%1)"
@@ -5116,12 +5116,12 @@ msgstr "Όλες οι εικόνες (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "Αποτυχία ανοίγματος του επιλεγμένου σαρωτή."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Άνοιγμα εικόνας σε %1"
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr ""

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2025-02-02 21:22+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -3100,7 +3100,7 @@ msgstr "Gorde sarrera"
 msgid "Unsaved Changes"
 msgstr "Gorde gabeko aldaketak"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(Hutsik)"
 
@@ -4914,7 +4914,7 @@ msgstr "Ikonoa:"
 msgid "Save As Collection Template"
 msgstr "Gorde bilduma-txantiloi gisa"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5031,7 +5031,7 @@ msgstr "Garbitu"
 msgid "Save link only"
 msgstr "Gorde esteka soilik"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Irudi guztiak (%1)"
@@ -5041,12 +5041,12 @@ msgstr "Irudi guztiak (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "Huts egin du hautatutako eskanerra irekitzea."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "%1(e)ko irudia irekitzen..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Esteka bat gordetzea berriki gehitutako irudiekin baino ezin da egin."

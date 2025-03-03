@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2024-08-21 00:09+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -3067,7 +3067,7 @@ msgstr "항목 저장"
 msgid "Unsaved Changes"
 msgstr "저장되지 않은 변경 사항"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(비어 있음)"
 
@@ -4862,7 +4862,7 @@ msgstr "아이콘:"
 msgid "Save As Collection Template"
 msgstr "소장품 템플릿으로 저장"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -4979,7 +4979,7 @@ msgstr "지우기"
 msgid "Save link only"
 msgstr "링크만 저장"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "모든 이미지(%1)"
@@ -4989,12 +4989,12 @@ msgstr "모든 이미지(%1)"
 msgid "Opening the selected scanner failed."
 msgstr "선택한 스캐너를 열지 못했습니다."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "%1에서 이미지를 여는 중..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "새로 추가된 이미지에 대해서만 링크를 저장할 수 있습니다."

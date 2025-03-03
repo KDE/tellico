@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2025-02-02 08:28+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -3082,7 +3082,7 @@ msgstr "Shrani vnos"
 msgid "Unsaved Changes"
 msgstr "Neshranjene spremembe"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(Prazno)"
 
@@ -4891,7 +4891,7 @@ msgstr "Ikona:"
 msgid "Save As Collection Template"
 msgstr "Shrani kot zbirko predlog"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5008,7 +5008,7 @@ msgstr "Počisti"
 msgid "Save link only"
 msgstr "Shrani samo povezavo"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Vse slike (%1)"
@@ -5018,12 +5018,12 @@ msgstr "Vse slike (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "Odpiranje izbranega preiskovalnika je spodletelo."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Odpiranje slike v %1 ..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Shranjevanje povezave je mogoče le za nove dodane slike."

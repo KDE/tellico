@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -3075,7 +3075,7 @@ msgstr "प्रविष्टिः रक्षतु"
 msgid "Unsaved Changes"
 msgstr "असरक्षितपरिवर्तनानि"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr ""
 
@@ -4876,7 +4876,7 @@ msgstr "चिह्नम् :"
 msgid "Save As Collection Template"
 msgstr "संग्रह टेम्पलेट के रूप में सहेजें"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -4993,7 +4993,7 @@ msgstr "स्पष्टः"
 msgid "Save link only"
 msgstr "केवलं लिङ्कं रक्षन्तु"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "सर्वाणि चित्राणि (%1)"
@@ -5003,12 +5003,12 @@ msgstr "सर्वाणि चित्राणि (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "चयनितं स्कैनरं उद्घाटयितुं विफलम् अभवत् ।"
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "%1 इत्यस्मिन् चित्रं उद्घाटयति..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "लिङ्कस्य रक्षणं केवलं नवयोगितानां चित्राणां कृते एव सम्भवति ।"

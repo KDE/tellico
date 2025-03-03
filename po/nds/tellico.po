@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2011-12-11 07:08+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -3122,7 +3122,7 @@ msgstr "Indrag sekern"
 msgid "Unsaved Changes"
 msgstr "Nich sekerte Ännern"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(Leddig)"
 
@@ -4990,7 +4990,7 @@ msgstr "Lüttbild"
 msgid "Save As Collection Template"
 msgstr "Sammelnbericht"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5111,7 +5111,7 @@ msgstr "Wegmaken"
 msgid "Save link only"
 msgstr "Bloots Link sekern"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, fuzzy, kde-format
 #| msgid "Small Image"
 msgid "All Images (%1)"
@@ -5122,12 +5122,12 @@ msgstr "Lütt Bild"
 msgid "Opening the selected scanner failed."
 msgstr "Dat Opmaken vun den utsöchten Inleser is fehlslaan."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Bild warrt in %1 opmaakt..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "En Link lett sik bloots för nieg toföögt Biller sekern."

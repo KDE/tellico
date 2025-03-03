@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
-"PO-Revision-Date: 2025-02-14 08:34+0100\n"
-"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
+"PO-Revision-Date: 2025-03-02 09:41+0100\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
@@ -2940,7 +2940,7 @@ msgstr "Tellico non pode escribir o ficheiro, %1."
 #: src/core/tellico_strings.cpp:30
 #, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico non pode enviar o ficheiro, %1."
+msgstr "Tellico non pode subir o ficheiro: %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
@@ -3094,7 +3094,7 @@ msgstr "Gardar a entrada"
 msgid "Unsaved Changes"
 msgstr "Hai cambios sen gardar"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(Baleiro)"
 
@@ -4907,7 +4907,7 @@ msgstr "Icona:"
 msgid "Save As Collection Template"
 msgstr "Gardar como modelo de colección…"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5024,7 +5024,7 @@ msgstr "Baleirar"
 msgid "Save link only"
 msgstr "Gardar só a ligazón"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Todas as imaxes (%1)"
@@ -5034,12 +5034,12 @@ msgstr "Todas as imaxes (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "Produciuse un erro ao abrir o escáner seleccionado."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Abrindo a imaxe en %1…"
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Só se pode gardar a ligazón das imaxes que acaba de engadir."
@@ -6681,7 +6681,7 @@ msgstr "Amo&sar as vistas"
 #: src/tellicoui.rc:130
 #, kde-format
 msgid "Main Toolbar"
-msgstr "Barra de ferramentas Principal"
+msgstr "Barra de ferramentas principal"
 
 #. i18n: ectx: ToolBar (collectionToolBar)
 #: src/tellicoui.rc:137

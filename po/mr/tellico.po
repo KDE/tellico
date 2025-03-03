@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -3014,7 +3014,7 @@ msgstr ""
 msgid "Unsaved Changes"
 msgstr ""
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 #, fuzzy
 msgid "(Empty)"
 msgstr "रिकामी"
@@ -4782,7 +4782,7 @@ msgstr "चिन्ह"
 msgid "Save As Collection Template"
 msgstr "नमूना काढून टाका"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -4899,7 +4899,7 @@ msgstr "पुसून टाका"
 msgid "Save link only"
 msgstr ""
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr ""
@@ -4909,12 +4909,12 @@ msgstr ""
 msgid "Opening the selected scanner failed."
 msgstr "निवडलेला स्कॅनर उघडण्यास अपयश."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr ""
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr ""

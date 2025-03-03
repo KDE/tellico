@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -3111,7 +3111,7 @@ msgstr "Gem indgang"
 msgid "Unsaved Changes"
 msgstr "Ikke-gemte ændringer"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(Tom)"
 
@@ -4948,7 +4948,7 @@ msgstr "Ikon"
 msgid "Save As Collection Template"
 msgstr "Samlingsrapport"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5073,7 +5073,7 @@ msgstr "Ryd"
 msgid "Save link only"
 msgstr "Gem kun link"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Alle billeder (%1)"
@@ -5083,12 +5083,12 @@ msgstr "Alle billeder (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "Åbning af den valgte scanner mislykkedes."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Åbner billedet i %1..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Gemning af et link er kun muligt for nytilføjede billeder."

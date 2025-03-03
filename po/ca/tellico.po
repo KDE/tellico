@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2025-02-02 08:49+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -3110,7 +3110,7 @@ msgstr "Desa l'entrada"
 msgid "Unsaved Changes"
 msgstr "Canvis sense desar"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(Buit)"
 
@@ -4934,7 +4934,7 @@ msgstr "Icona:"
 msgid "Save As Collection Template"
 msgstr "Desa com a plantilla de col·leccions"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5051,7 +5051,7 @@ msgstr "Neteja"
 msgid "Save link only"
 msgstr "Desa només l'enllaç"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Totes les imatges (%1)"
@@ -5061,12 +5061,12 @@ msgstr "Totes les imatges (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "Ha fallat en obrir l'escàner seleccionat."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "S'està obrint una imatge en %1..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Només és possible desar un enllaç per a imatges afegides recentment."

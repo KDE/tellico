@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2024-09-18 09:44+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -3081,7 +3081,7 @@ msgstr "Uložit záznam"
 msgid "Unsaved Changes"
 msgstr "Neuložené změny"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(Prázdné)"
 
@@ -4881,7 +4881,7 @@ msgstr "Ikona:"
 msgid "Save As Collection Template"
 msgstr "Uložit jako šablonu sbírky"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -4998,7 +4998,7 @@ msgstr "Vymazat"
 msgid "Save link only"
 msgstr "Uložit jen odkaz"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Všechny obrázky (%1)"
@@ -5008,12 +5008,12 @@ msgstr "Všechny obrázky (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "Otevírání zvoleného skeneru selhalo."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Otevírám obrázek v %1..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Uložení odkazu je možné pouze u nově přidaných obrázků."

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2023-07-08 12:53+0100\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -3165,7 +3165,7 @@ msgstr "Gravar o Item"
 msgid "Unsaved Changes"
 msgstr "Alterações Não Gravadas"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(Vazio)"
 
@@ -4989,7 +4989,7 @@ msgstr "Ícone:"
 msgid "Save As Collection Template"
 msgstr "Gravar como Modelo de Colecções"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5106,7 +5106,7 @@ msgstr "Limpar"
 msgid "Save link only"
 msgstr "Guardar só a ligação"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, kde-format
 msgid "All Images (%1)"
 msgstr "Todas as Imagens (%1)"
@@ -5116,12 +5116,12 @@ msgstr "Todas as Imagens (%1)"
 msgid "Opening the selected scanner failed."
 msgstr "O acesso ao 'scanner' seleccionado falhou."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "A abrir a imagem em %1..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr ""

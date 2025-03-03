@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:41+0000\n"
+"POT-Creation-Date: 2025-03-03 00:41+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -3206,7 +3206,7 @@ msgstr "Snimi unos"
 msgid "Unsaved Changes"
 msgstr "Promjene nisu snimljene"
 
-#: src/entrygroup.cpp:33
+#: src/entrygroup.cpp:32
 msgid "(Empty)"
 msgstr "(Prazno)"
 
@@ -5065,7 +5065,7 @@ msgstr "Ikona"
 msgid "Save As Collection Template"
 msgstr "Izvještaj kolekcije"
 
-#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
+#: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
 msgctxt "Edit Label"
 msgid "%1:"
@@ -5190,7 +5190,7 @@ msgstr "Očisti"
 msgid "Save link only"
 msgstr "Snimi samo link"
 
-#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:508
+#: src/gui/imagewidget.cpp:283 src/gui/imagewidget.cpp:516
 #, fuzzy, kde-format
 #| msgid "Small Image"
 msgid "All Images (%1)"
@@ -5201,12 +5201,12 @@ msgstr "Mala slika"
 msgid "Opening the selected scanner failed."
 msgstr "Otvaranje odabranog skenera nije uspjelo."
 
-#: src/gui/imagewidget.cpp:362
+#: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
 msgstr "Otvranja slike za %1..."
 
-#: src/gui/imagewidget.cpp:394
+#: src/gui/imagewidget.cpp:402
 #, kde-format
 msgid "Saving a link is only possible for newly added images."
 msgstr "Snimanje linka je moguće samo za skoro dodane slike."
