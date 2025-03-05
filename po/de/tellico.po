@@ -24,16 +24,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
-"Robby Stephenson, Gerrit M. Albrecht, Tobias Gruetzmacher, Jens Seidel, "
-"Jannick Kuhr"
+msgstr "Deutsches KDE-Übersetzungsteam"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
-"robby@periapsis.org, mail@gerrit-albrecht.de, tobias@portfolio16.de, "
-"jensseidel@users.sf.net, opensource@kuhr.org"
+msgstr "kde-i18n-de@kde.org"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
