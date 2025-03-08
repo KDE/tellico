@@ -50,6 +50,7 @@ set(fetch_STAT_SRCS
     kinoteatrfetcher.cpp
     messagehandler.cpp
     messagelogger.cpp
+    metronfetcher.cpp
     mobygamesfetcher.cpp
     moviemeterfetcher.cpp
     mrlookupfetcher.cpp

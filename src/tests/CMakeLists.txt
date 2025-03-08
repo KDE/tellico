@@ -772,6 +772,12 @@ ecm_add_test(kinoteatrfetchertest.cpp
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(metronfetchertest.cpp
+    ../fetch/metronfetcher.cpp
+    TEST_NAME metronfetchertest
+    LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(mobygamesfetchertest.cpp
     ../fetch/mobygamesfetcher.cpp
     TEST_NAME mobygamesfetchertest
