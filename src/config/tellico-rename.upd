@@ -1,4 +1,0 @@
-# move old bookcaserc file to tellicorc
-Id=tellico-rename
-File=bookcaserc,tellicorc
-AllGroups

@@ -25,6 +25,6 @@ target_link_libraries(config
 ########### install files ###############
 
 install(FILES tellico_config.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
-install(FILES tellico-rename.upd tellico.upd DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR})
+install(FILES tellico.upd DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR})
 
-install(PROGRAMS tellico-1-3-update.pl tellico-3-4-update.pl DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR})
+install(PROGRAMS tellico-3-4-update.pl DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR})
