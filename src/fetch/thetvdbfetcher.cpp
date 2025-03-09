@@ -27,6 +27,7 @@
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
+#include "../utils/tellico_utils.h"
 #include "../utils/objvalue.h"
 #include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
@@ -474,6 +475,7 @@ void TheTVDBFetcher::requestToken() {
   QPointer<KIO::StoredTransferJob> job = KIO::storedHttpPost(loginPayload, u, KIO::HideProgressInfo);
   job->addMetaData(QStringLiteral("content-type"), QStringLiteral("Content-Type: application/json"));
   job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
+  Tellico::addUserAgent(job);
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   if(!job->exec()) {
     myDebug() << "TheTVDB: access token request failed";
@@ -537,6 +539,7 @@ QPointer<KIO::StoredTransferJob> TheTVDBFetcher::getJob(const QUrl& url_, bool c
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url_, KIO::NoReload, KIO::HideProgressInfo);
   job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
   job->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("Authorization: Bearer ") + m_accessToken);
+  Tellico::addUserAgent(job);
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   return job;
 }

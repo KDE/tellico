@@ -22,13 +22,12 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h> // for TELLICO_VERSION
-
 #include "discogsfetcher.h"
 #include "../collections/musiccollection.h"
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
 #include "../utils/objvalue.h"
+#include "../utils/tellico_utils.h"
 #include "../core/filehandler.h"
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"
@@ -158,9 +157,7 @@ void DiscogsFetcher::continueSearch() {
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
-  m_job->addMetaData(QStringLiteral("UserAgent"),
-                     QStringLiteral("Tellico/%1").arg(QStringLiteral(TELLICO_VERSION)));
+  Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &DiscogsFetcher::slotComplete);
 }

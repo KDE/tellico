@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2025 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,6 +21,8 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  *                                                                         *
  ***************************************************************************/
+
+#include <config.h> // for TELLICO_VERSION
 
 #include "tellico_utils.h"
 #include "string_utils.h"
@@ -163,4 +165,10 @@ void Tellico::activateDialog(QDialog* dlg_) {
   dlg_->show();
   dlg_->raise();
   dlg_->activateWindow();
+}
+
+void Tellico::addUserAgent(KIO::Job* job_) {
+  job_->addMetaData(QLatin1StringView("SendUserAgent"), QLatin1String("true"));
+  job_->addMetaData(QLatin1StringView("UserAgent"),
+                    QStringLiteral("Tellico/%1 ( https://tellico-project.org )").arg(QStringLiteral(TELLICO_VERSION)));
 }

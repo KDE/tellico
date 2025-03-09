@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2025 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -29,6 +29,9 @@
 
 class QPixmap;
 class QDialog;
+namespace KIO {
+  class Job;
+}
 
 /**
  * This file contains utility functions.
@@ -61,6 +64,8 @@ namespace Tellico {
   bool checkCommonXSLFile();
 
   void activateDialog(QDialog* dialog);
+
+  void addUserAgent(KIO::Job* job);
 }
 
 #endif

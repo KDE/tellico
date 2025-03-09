@@ -22,21 +22,18 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
-
 #include "metronfetcher.h"
 #include "../collections/comicbookcollection.h"
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
 #include "../utils/objvalue.h"
-#include "../utils/isbnvalidator.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
 #include <KConfigGroup>
-#include <KJob>
-#include <KJobUiDelegate>
 #include <KJobWidgets>
+#include <KJobUiDelegate>
 #include <KIO/StoredTransferJob>
 #include <KPasswordDialog>
 #include <KIconLoader>
@@ -139,9 +136,7 @@ void MetronFetcher::continueSearch() {
   customHeaders += (u"Authorization: Basic "_s + m_auth);
   m_job->addMetaData("customHTTPHeader"_L1, customHeaders.join(QLatin1String("\r\n")));
   m_job->addMetaData("accept"_L1, QStringLiteral("application/json"));
-  m_job->addMetaData("SendUserAgent"_L1, QLatin1String("true"));
-  m_job->addMetaData("UserAgent"_L1,
-                     QStringLiteral("Tellico/%1 ( https://tellico-project.org )").arg(QStringLiteral(TELLICO_VERSION)));
+  Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &MetronFetcher::slotComplete);
 }
@@ -172,6 +167,7 @@ void MetronFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 
   const auto code = job->queryMetaData("responsecode"_L1);
+  myDebug() << "Metron response code:" << code;
   if(code == "401"_L1) {
     myLog() << "Invalid login for Metron";
     m_auth.clear();
@@ -289,9 +285,7 @@ Tellico::Data::EntryPtr MetronFetcher::fetchEntryHook(uint uid_) {
   QStringList customHeaders;
   customHeaders += (u"Authorization: Basic "_s + m_auth);
   job->addMetaData("customHTTPHeader"_L1, customHeaders.join(QLatin1String("\r\n")));
-  job->addMetaData("SendUserAgent"_L1, QLatin1String("true"));
-  job->addMetaData("UserAgent"_L1,
-                   QStringLiteral("Tellico/%1 ( https://tellico-project.org )").arg(QStringLiteral(TELLICO_VERSION)));
+  Tellico::addUserAgent(job);
   if(!job->exec()) {
     myDebug() << "Failed to load" << u;
     return entry;

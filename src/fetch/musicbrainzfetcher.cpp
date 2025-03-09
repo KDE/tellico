@@ -22,18 +22,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h> // for TELLICO_VERSION
-
 #include "musicbrainzfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
-#include "../utils/guiproxy.h"
-#include "../utils/string_utils.h"
 #include "../collection.h"
 #include "../entry.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
 #include "../utils/datafileregistry.h"
 #include "../utils/xmlhandler.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -143,9 +142,7 @@ void MusicBrainzFetcher::doSearch() {
   m_requestTimer.start();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   // see https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#Provide_meaningful_User-Agent_strings
-  m_job->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
-  m_job->addMetaData(QStringLiteral("UserAgent"),
-                     QStringLiteral("Tellico/%1 ( https://tellico-project.org )").arg(QStringLiteral(TELLICO_VERSION)));
+  Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &MusicBrainzFetcher::slotComplete);
@@ -280,9 +277,7 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   m_requestTimer.start();
 
   KIO::StoredTransferJob* dataJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  dataJob->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
-  dataJob->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1 ( http://tellico-project.org )")
-                                                                .arg(QStringLiteral(TELLICO_VERSION)));
+  Tellico::addUserAgent(dataJob);
   if(!dataJob->exec()) {
     myDebug() << "Failed to load" << u;
     return entry;
