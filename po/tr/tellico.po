@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-03 00:41+0000\n"
-"PO-Revision-Date: 2025-03-06 22:31+0300\n"
+"POT-Creation-Date: 2025-03-10 00:42+0000\n"
+"PO-Revision-Date: 2025-03-09 22:59+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -740,19 +740,19 @@ msgstr "Bibtex Anahtarı"
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:244
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
-#: src/fetch/mobygamesfetcher.cpp:456 src/fetch/moviemeterfetcher.cpp:219
-#: src/fetch/moviemeterfetcher.cpp:224 src/fetch/numistafetcher.cpp:344
-#: src/fetch/numistafetcher.cpp:359 src/fetch/omdbfetcher.cpp:250
-#: src/fetch/openlibraryfetcher.cpp:277 src/fetch/thegamesdbfetcher.cpp:265
-#: src/fetch/thegamesdbfetcher.cpp:270 src/fetch/themoviedbfetcher.cpp:307
-#: src/fetch/themoviedbfetcher.cpp:310 src/fetch/themoviedbfetcher.cpp:315
-#: src/fetch/themoviedbfetcher.cpp:333 src/fetch/thetvdbfetcher.cpp:245
-#: src/fetch/thetvdbfetcher.cpp:250 src/fetch/thetvdbfetcher.cpp:255
-#: src/fetch/tvmazefetcher.cpp:175 src/fetch/tvmazefetcher.cpp:180
-#: src/fetch/upcitemdbfetcher.cpp:213 src/fetch/vgcollectfetcher.cpp:234
-#: src/fetch/vgcollectfetcher.cpp:337 src/field.cpp:38 src/field.cpp:79
-#: src/field.cpp:297 src/field.cpp:327 src/field.cpp:332
-#: src/translators/filereadervideo.cpp:282
+#: src/fetch/metronfetcher.cpp:241 src/fetch/mobygamesfetcher.cpp:456
+#: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
+#: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:359
+#: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:277
+#: src/fetch/thegamesdbfetcher.cpp:265 src/fetch/thegamesdbfetcher.cpp:270
+#: src/fetch/themoviedbfetcher.cpp:307 src/fetch/themoviedbfetcher.cpp:310
+#: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:333
+#: src/fetch/thetvdbfetcher.cpp:245 src/fetch/thetvdbfetcher.cpp:250
+#: src/fetch/thetvdbfetcher.cpp:255 src/fetch/tvmazefetcher.cpp:175
+#: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:213
+#: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:337
+#: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
+#: src/field.cpp:332 src/translators/filereadervideo.cpp:282
 #: src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "General"
@@ -3475,13 +3475,13 @@ msgstr "%1 konumundan sonuçlar: %2/%3"
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:368
 #: src/fetch/kinofetcher.cpp:365 src/fetch/kinopoiskfetcher.cpp:267
-#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/mobygamesfetcher.cpp:344
-#: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:286
-#: src/fetch/numistafetcher.cpp:294 src/fetch/omdbfetcher.cpp:181
-#: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:235
-#: src/fetch/thetvdbfetcher.cpp:340 src/fetch/tvmazefetcher.cpp:261
-#: src/fetch/upcitemdbfetcher.cpp:259 src/fetch/vgcollectfetcher.cpp:282
-#: src/fetch/vndbfetcher.cpp:176
+#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:330
+#: src/fetch/mobygamesfetcher.cpp:344 src/fetch/moviemeterfetcher.cpp:166
+#: src/fetch/numistafetcher.cpp:286 src/fetch/numistafetcher.cpp:294
+#: src/fetch/omdbfetcher.cpp:181 src/fetch/thegamesdbfetcher.cpp:171
+#: src/fetch/themoviedbfetcher.cpp:235 src/fetch/thetvdbfetcher.cpp:340
+#: src/fetch/tvmazefetcher.cpp:261 src/fetch/upcitemdbfetcher.cpp:259
+#: src/fetch/vgcollectfetcher.cpp:282 src/fetch/vndbfetcher.cpp:176
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "Kapak görseli yüklenemedi."
@@ -3601,11 +3601,11 @@ msgstr "Herkese açık erişilebilirlik özellikleri için arXiv’e teşekkürl
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:403
-#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/mrlookupfetcher.cpp:230
-#: src/fetch/musicbrainzfetcher.cpp:399 src/fetch/openlibraryfetcher.cpp:464
-#: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:373
-#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
-#: src/fetch/vndbfetcher.cpp:433
+#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:436
+#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:399
+#: src/fetch/openlibraryfetcher.cpp:464 src/fetch/springerfetcher.cpp:187
+#: src/fetch/tvmazefetcher.cpp:373 src/fetch/upcitemdbfetcher.cpp:479
+#: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:433
 #, kde-format
 msgid "This source has no options."
 msgstr "Bu kaynak seçenek içermiyor."
@@ -3620,7 +3620,8 @@ msgstr "Renkçi"
 msgid "Bedetheque Link"
 msgstr "Bedetheque Bağlantısı"
 
-#: src/fetch/bedethequefetcher.cpp:433 src/field.cpp:312
+#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:429
+#: src/field.cpp:312
 #, kde-format
 msgid "ISBN#"
 msgstr "ISBN#"
@@ -4145,6 +4146,24 @@ msgstr "KinoPoisk Bağlantısı"
 msgid "Kino-Teatr Link"
 msgstr "Kino–Teatr Bağlantısı"
 
+#: src/fetch/metronfetcher.cpp:240 src/fetch/metronfetcher.cpp:428
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
+msgid "Metron Link"
+msgstr "MovieMeter Bağlantısı"
+
+#: src/fetch/metronfetcher.cpp:394
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
+msgid "Please enter your Metron username and password"
+msgstr "%1, bir kullanıcı adı ve parolası gerektiriyor."
+
+#: src/fetch/metronfetcher.cpp:399
+#, fuzzy, kde-format
+#| msgid "An access key is required to use this data source."
+msgid "Registration is required to use this data source."
+msgstr "Bu veri kaynağına erişmek için bir erişim anahtarı gereklidir."
+
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
 msgid "MobyGames Link"
@@ -4610,7 +4629,7 @@ msgstr "Bütün arama alanlarını ve sonuçlarını temizle"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr "%​%p"
+msgstr "%%p"
 
 #: src/fetchdialog.cpp:383
 #, kde-format

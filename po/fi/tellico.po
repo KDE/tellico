@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the tellico package.
 # Teuvo Eloranta <teuvo@piketa.fi>, 2009.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
-# SPDX-FileCopyrightText: 2016, 2019, 2023, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2016, 2019, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-03 00:41+0000\n"
-"PO-Revision-Date: 2024-12-07 18:16+0200\n"
+"POT-Creation-Date: 2025-03-10 00:42+0000\n"
+"PO-Revision-Date: 2025-02-17 15:21+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -739,19 +739,19 @@ msgstr "BibTeX-avain"
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:244
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
-#: src/fetch/mobygamesfetcher.cpp:456 src/fetch/moviemeterfetcher.cpp:219
-#: src/fetch/moviemeterfetcher.cpp:224 src/fetch/numistafetcher.cpp:344
-#: src/fetch/numistafetcher.cpp:359 src/fetch/omdbfetcher.cpp:250
-#: src/fetch/openlibraryfetcher.cpp:277 src/fetch/thegamesdbfetcher.cpp:265
-#: src/fetch/thegamesdbfetcher.cpp:270 src/fetch/themoviedbfetcher.cpp:307
-#: src/fetch/themoviedbfetcher.cpp:310 src/fetch/themoviedbfetcher.cpp:315
-#: src/fetch/themoviedbfetcher.cpp:333 src/fetch/thetvdbfetcher.cpp:245
-#: src/fetch/thetvdbfetcher.cpp:250 src/fetch/thetvdbfetcher.cpp:255
-#: src/fetch/tvmazefetcher.cpp:175 src/fetch/tvmazefetcher.cpp:180
-#: src/fetch/upcitemdbfetcher.cpp:213 src/fetch/vgcollectfetcher.cpp:234
-#: src/fetch/vgcollectfetcher.cpp:337 src/field.cpp:38 src/field.cpp:79
-#: src/field.cpp:297 src/field.cpp:327 src/field.cpp:332
-#: src/translators/filereadervideo.cpp:282
+#: src/fetch/metronfetcher.cpp:241 src/fetch/mobygamesfetcher.cpp:456
+#: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
+#: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:359
+#: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:277
+#: src/fetch/thegamesdbfetcher.cpp:265 src/fetch/thegamesdbfetcher.cpp:270
+#: src/fetch/themoviedbfetcher.cpp:307 src/fetch/themoviedbfetcher.cpp:310
+#: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:333
+#: src/fetch/thetvdbfetcher.cpp:245 src/fetch/thetvdbfetcher.cpp:250
+#: src/fetch/thetvdbfetcher.cpp:255 src/fetch/tvmazefetcher.cpp:175
+#: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:213
+#: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:337
+#: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
+#: src/field.cpp:332 src/translators/filereadervideo.cpp:282
 #: src/translators/gcstarimporter.cpp:89
 #, kde-format
 msgid "General"
@@ -3154,10 +3154,9 @@ msgid "Update Entries"
 msgstr "Päivitä tietueet"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "Päivitetään <b>%1</b>…"
+msgstr "Päivitetään <b>%1</b> lähteestä <i>%2</i>…"
 
 #: src/entryview.cpp:289
 #, kde-format
@@ -3478,13 +3477,13 @@ msgstr "Tulokset: %1: %2/%3"
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:368
 #: src/fetch/kinofetcher.cpp:365 src/fetch/kinopoiskfetcher.cpp:267
-#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/mobygamesfetcher.cpp:344
-#: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:286
-#: src/fetch/numistafetcher.cpp:294 src/fetch/omdbfetcher.cpp:181
-#: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:235
-#: src/fetch/thetvdbfetcher.cpp:340 src/fetch/tvmazefetcher.cpp:261
-#: src/fetch/upcitemdbfetcher.cpp:259 src/fetch/vgcollectfetcher.cpp:282
-#: src/fetch/vndbfetcher.cpp:176
+#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:330
+#: src/fetch/mobygamesfetcher.cpp:344 src/fetch/moviemeterfetcher.cpp:166
+#: src/fetch/numistafetcher.cpp:286 src/fetch/numistafetcher.cpp:294
+#: src/fetch/omdbfetcher.cpp:181 src/fetch/thegamesdbfetcher.cpp:171
+#: src/fetch/themoviedbfetcher.cpp:235 src/fetch/thetvdbfetcher.cpp:340
+#: src/fetch/tvmazefetcher.cpp:261 src/fetch/upcitemdbfetcher.cpp:259
+#: src/fetch/vgcollectfetcher.cpp:282 src/fetch/vndbfetcher.cpp:176
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "Kansikuvaa ei voitu ladata."
@@ -3605,11 +3604,11 @@ msgstr "Kiitokset arXiville sen avoimen saatavuuden yhteentoimivuuskäytöstä."
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:403
-#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/mrlookupfetcher.cpp:230
-#: src/fetch/musicbrainzfetcher.cpp:399 src/fetch/openlibraryfetcher.cpp:464
-#: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:373
-#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
-#: src/fetch/vndbfetcher.cpp:433
+#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:436
+#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:399
+#: src/fetch/openlibraryfetcher.cpp:464 src/fetch/springerfetcher.cpp:187
+#: src/fetch/tvmazefetcher.cpp:373 src/fetch/upcitemdbfetcher.cpp:479
+#: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:433
 #, kde-format
 msgid "This source has no options."
 msgstr "Tällä lähteellä ei ole valintoja."
@@ -3624,7 +3623,8 @@ msgstr "Colorist"
 msgid "Bedetheque Link"
 msgstr "Bedetheque Link"
 
-#: src/fetch/bedethequefetcher.cpp:433 src/field.cpp:312
+#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:429
+#: src/field.cpp:312
 #, kde-format
 msgid "ISBN#"
 msgstr "ISBN-numero"
@@ -4128,10 +4128,9 @@ msgstr ""
 "tileille."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "IGDB-linkki"
+msgstr "ISFDB-linkki"
 
 #: src/fetch/itunesfetcher.cpp:243 src/fetch/itunesfetcher.cpp:556
 #, kde-format
@@ -4147,6 +4146,24 @@ msgstr "KinoPoisk-linkki"
 #, kde-format
 msgid "Kino-Teatr Link"
 msgstr "Kino-Teatr-linkki"
+
+#: src/fetch/metronfetcher.cpp:240 src/fetch/metronfetcher.cpp:428
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
+msgid "Metron Link"
+msgstr "MovieMeter-linkki"
+
+#: src/fetch/metronfetcher.cpp:394
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
+msgid "Please enter your Metron username and password"
+msgstr "%1 vaatii käyttäjätunnuksen ja salasanan."
+
+#: src/fetch/metronfetcher.cpp:399
+#, fuzzy, kde-format
+#| msgid "An access key is required to use this data source."
+msgid "Registration is required to use this data source."
+msgstr "Tietolähteen käyttö vaatii avainkoodin."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5346,10 +5363,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico – vapaa ja yksinkertainen kokoelmanhallintaohjelma"
 
 #: src/main.cpp:90
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "© 2001–2024 Robby Stephenson"
+msgstr "© 2001 Robby Stephenson"
 
 #: src/main.cpp:94
 #, kde-format
