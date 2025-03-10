@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the tellico package.
 #
-# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-23 02:30+0000\n"
-"PO-Revision-Date: 2024-09-14 09:43+0300\n"
+"PO-Revision-Date: 2025-03-09 20:24+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -296,7 +296,7 @@ msgstr "אוסף מותאם אישית"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "שם השדה הפנימי הוא <em>%1</em>."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -1582,13 +1582,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-#| "Everyone, Early Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
-#| "Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -2772,31 +2766,31 @@ msgstr "בחירת תבניות למחיקה:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "תמונות נשמרות כרגע לתוך <em>%1</em>"
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "תמונות נשמרות כרגע אל <em>%1</em>"
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "תמונות תועברנה מ־<em>%1</em> אל <em>%2</em>"
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "תמונות תועברנה מ־<em>%1</em> אל <em>%2</em>"
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "תמונות תועברנה מ־<em>%1</em> אל <em>%2</em>"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
@@ -3059,10 +3053,9 @@ msgid "Update Entries"
 msgstr "עדכון רשומות"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "<b>%1</b> מתעדכן…"
+msgstr "<b>%1</b> מתעדכן מתוך <i>%2</i>…"
 
 #: src/entryview.cpp:357
 #, kde-format
@@ -5234,10 +5227,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - תוכנה לניהול אוספים, חינמית ופשוטה"
 
 #: src/main.cpp:176
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001‏-2024, רובי סטיבנסון"
+msgstr "(c) 2001, רובי סטיבנסון"
 
 #: src/main.cpp:180
 #, kde-format
@@ -6177,10 +6169,9 @@ msgid ""
 msgstr "<qt><i>תצוגת קיבוץ</i> מקבצת את הרשומות לפי השדה הנבחר.</qt>"
 
 #: src/mainwindow.cpp:993
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - תוכנה לניהול אוספים, חינמית ופשוטה"
+msgstr "תוכנה לניהול אוספים, חינמית ופשוטה"
 
 #: src/mainwindow.cpp:995
 #, kde-format
@@ -6208,6 +6199,8 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"אפשר למצוא מידע נוסף ב<a href=\"help:/tellico\">תיעוד</a>. אפשר גם <a href="
+"\"tc:///disable_welcome\">להשבית את מסך קבלת הפנים הזה</a>."
 
 #: src/mainwindow.cpp:1217
 #, kde-format

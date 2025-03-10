@@ -7452,6 +7452,3 @@ msgstr "Cerca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
-
-#~ msgid "Updating %1..."
-#~ msgstr "S'està actualitzant %1..."
