@@ -1,4 +1,4 @@
-# Translation of tellico.po to Spanish
+# Spanish translations for tellico.po package.
 # This file is distributed under the same license as the tellico package.
 # Copyright (C) 2003 Robby Stephenson <robby@periapsis.org>.
 #
@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-10 00:42+0000\n"
-"PO-Revision-Date: 2025-02-21 00:29+0100\n"
+"PO-Revision-Date: 2025-03-10 12:46+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -4180,22 +4180,19 @@ msgid "Kino-Teatr Link"
 msgstr "Enlace a Kino-Teatr"
 
 #: src/fetch/metronfetcher.cpp:240 src/fetch/metronfetcher.cpp:428
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "Enlace a MovieMeter"
+msgstr "Enlace a Metron"
 
 #: src/fetch/metronfetcher.cpp:394
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 requiere un nombre de usuario y una contraseña."
+msgstr "Introduzca su nombre de usuario y su contraseña de Metron"
 
 #: src/fetch/metronfetcher.cpp:399
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Se necesita una clave de acceso para usar esta fuente de datos."
+msgstr "Necesita registrarse para usar esta fuente de datos."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format

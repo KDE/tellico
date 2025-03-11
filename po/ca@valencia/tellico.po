@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-10 00:42+0000\n"
-"PO-Revision-Date: 2025-02-02 08:49+0100\n"
+"PO-Revision-Date: 2025-03-10 09:40+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -4182,22 +4182,19 @@ msgid "Kino-Teatr Link"
 msgstr "Enllaç cap a Kino-Teatr"
 
 #: src/fetch/metronfetcher.cpp:240 src/fetch/metronfetcher.cpp:428
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "Enllaç cap a MovieMeter"
+msgstr "Enllaç cap a Metron"
 
 #: src/fetch/metronfetcher.cpp:394
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 requerix un nom d'usuari i contrasenya."
+msgstr "Introduïu el vostre nom d'usuari i contrasenya de Metron"
 
 #: src/fetch/metronfetcher.cpp:399
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Cal utilitzar una clau d'accés per a emprar esta font de dades."
+msgstr "Cal registrar-se per a emprar esta font de dades."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
