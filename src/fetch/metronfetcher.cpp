@@ -167,7 +167,7 @@ void MetronFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 
   const auto code = job->queryMetaData("responsecode"_L1);
-  myDebug() << "Metron response code:" << code;
+//  myDebug() << "Metron response code:" << code;
   if(code == "401"_L1) {
     myLog() << "Invalid login for Metron";
     m_auth.clear();
@@ -179,7 +179,15 @@ void MetronFetcher::slotComplete(KJob* job_) {
     }
   }
 
+  if(code == "429"_L1) {
+    myLog() << "Requests exceeded rate limit for Metron (30 calls/min or 10,000 calls/day)";
+    message(i18n("The rate limit has been exceeded."), MessageHandler::Error);
+    stop();
+    return;
+  }
+
   if(job->error()) {
+    myDebug() << "Response code:" << code;
     job->uiDelegate()->showErrorMessage();
     stop();
     return;
@@ -187,7 +195,7 @@ void MetronFetcher::slotComplete(KJob* job_) {
 
   const QByteArray data = job->data();
   if(data.isEmpty()) {
-    myDebug() << "No data";
+    myDebug() << "No data, response code:" << code;
     stop();
     return;
   }
@@ -207,7 +215,7 @@ void MetronFetcher::slotComplete(KJob* job_) {
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
   if(doc.isNull()) {
-    myDebug() << "null JSON document";
+    myDebug() << "null JSON document, response code:" << code;
     stop();
     return;
   }
