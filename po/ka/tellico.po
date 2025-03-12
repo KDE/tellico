@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-10 00:42+0000\n"
-"PO-Revision-Date: 2025-02-02 05:10+0100\n"
+"PO-Revision-Date: 2025-03-11 03:03+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -4147,22 +4147,19 @@ msgid "Kino-Teatr Link"
 msgstr "Kino-Teatr ბმული"
 
 #: src/fetch/metronfetcher.cpp:240 src/fetch/metronfetcher.cpp:428
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "MovieMeter Link"
+msgstr "Metron-ის ბმული"
 
 #: src/fetch/metronfetcher.cpp:394
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 -ს მომხმარებლის სახელი და პაროლი ესაჭიროება.."
+msgstr "შეიყვანეთ თქვენი Metron-ის მომხმარებლის სახელი და პაროლი"
 
 #: src/fetch/metronfetcher.cpp:399
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "მონაცემების ამ წყაროს გამოსაყენებლად წვდომის გასაღები გჭირდებათ."
+msgstr "მონაცემების ამ წყაროს გამოსაყენებლად რეგისტრაცია გჭირდებათ."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-10 00:42+0000\n"
-"PO-Revision-Date: 2025-02-04 12:34+0100\n"
+"PO-Revision-Date: 2025-03-11 11:01+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -4174,22 +4174,19 @@ msgid "Kino-Teatr Link"
 msgstr "Ligamine de Kino-Teatr"
 
 #: src/fetch/metronfetcher.cpp:240 src/fetch/metronfetcher.cpp:428
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "Ligamine de MovieMeter"
+msgstr "Ligamine de Metron"
 
 #: src/fetch/metronfetcher.cpp:394
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 require un nomine de usator e un contrasigno."
+msgstr "Pro favor tu inserta tu nomine de usator e contrasigno de Metron"
 
 #: src/fetch/metronfetcher.cpp:399
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Un clave de accesso es requirite per usar iste fonte de datos."
+msgstr "Registration es requirite per usar iste fonte de datos."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
