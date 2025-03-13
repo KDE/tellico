@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-10 00:42+0000\n"
+"POT-Creation-Date: 2025-03-13 00:42+0000\n"
 "PO-Revision-Date: 2022-04-07 18:20+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -737,27 +737,27 @@ msgstr "Kľúč Bibtex"
 #: src/configdialog.cpp:170 src/configdialog.cpp:184 src/configdialog.cpp:201
 #: src/configdialog.cpp:1132 src/core/tellico_strings.cpp:42
 #: src/fetch/amazonfetcher.cpp:863 src/fetch/bedethequefetcher.cpp:317
-#: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:377
-#: src/fetch/colnectfetcher.cpp:544 src/fetch/colnectfetcher.cpp:563
-#: src/fetch/colnectfetcher.cpp:601 src/fetch/colnectfetcher.cpp:608
-#: src/fetch/discogsfetcher.cpp:317 src/fetch/discogsfetcher.cpp:322
-#: src/fetch/discogsfetcher.cpp:327 src/fetch/discogsfetcher.cpp:334
-#: src/fetch/discogsfetcher.cpp:341 src/fetch/discogsfetcher.cpp:346
+#: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:372
+#: src/fetch/colnectfetcher.cpp:539 src/fetch/colnectfetcher.cpp:558
+#: src/fetch/colnectfetcher.cpp:596 src/fetch/colnectfetcher.cpp:603
+#: src/fetch/discogsfetcher.cpp:314 src/fetch/discogsfetcher.cpp:319
+#: src/fetch/discogsfetcher.cpp:324 src/fetch/discogsfetcher.cpp:331
+#: src/fetch/discogsfetcher.cpp:338 src/fetch/discogsfetcher.cpp:343
 #: src/fetch/doubanfetcher.cpp:388 src/fetch/filmaffinityfetcher.cpp:286
 #: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:244
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
-#: src/fetch/metronfetcher.cpp:241 src/fetch/mobygamesfetcher.cpp:456
+#: src/fetch/metronfetcher.cpp:245 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:359
 #: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:277
 #: src/fetch/thegamesdbfetcher.cpp:265 src/fetch/thegamesdbfetcher.cpp:270
 #: src/fetch/themoviedbfetcher.cpp:307 src/fetch/themoviedbfetcher.cpp:310
 #: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:333
-#: src/fetch/thetvdbfetcher.cpp:245 src/fetch/thetvdbfetcher.cpp:250
-#: src/fetch/thetvdbfetcher.cpp:255 src/fetch/tvmazefetcher.cpp:175
+#: src/fetch/thetvdbfetcher.cpp:246 src/fetch/thetvdbfetcher.cpp:251
+#: src/fetch/thetvdbfetcher.cpp:256 src/fetch/tvmazefetcher.cpp:175
 #: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:213
 #: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:337
 #: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
@@ -869,8 +869,8 @@ msgstr "Kapitola"
 
 #: src/collections/bibtexcollection.cpp:208
 #: src/collections/bookcollection.cpp:137 src/collections/cardcollection.cpp:78
-#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:376
-#: src/fetch/colnectfetcher.cpp:848
+#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:371
+#: src/fetch/colnectfetcher.cpp:843
 #, kde-format
 msgid "Series"
 msgstr "Série"
@@ -978,7 +978,7 @@ msgstr "Minimálny vek"
 #: src/collections/filecatalog.cpp:54 src/collections/gamecollection.cpp:90
 #: src/collections/stampcollection.cpp:49
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
-#: src/fetch/colnectfetcher.cpp:384 src/fetch/colnectfetcher.cpp:851
+#: src/fetch/colnectfetcher.cpp:379 src/fetch/colnectfetcher.cpp:846
 #: src/fetch/numistafetcher.cpp:351 src/fetch/numistafetcher.cpp:399
 #: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:244
 #, kde-format
@@ -1307,13 +1307,13 @@ msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "Grading Service"
 msgstr "Služba odstupňovania\t"
 
-#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:846
+#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:841
 #: src/fetch/numistafetcher.cpp:401
 #, kde-format
 msgid "Obverse"
 msgstr "Lícna strana"
 
-#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:847
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:842
 #: src/fetch/numistafetcher.cpp:402
 #, kde-format
 msgid "Reverse"
@@ -1635,7 +1635,7 @@ msgstr "Moja hudba"
 msgid "Album"
 msgstr "Album"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:453
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:450
 #: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:568
 #: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
 #: src/translators/audiofileimporter.cpp:335
@@ -1649,19 +1649,19 @@ msgstr "Kompaktný disk"
 
 #: src/collections/musiccollection.cpp:50
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1043
-#: src/fetch/discogsfetcher.cpp:461 src/fetch/upcitemdbfetcher.cpp:420
+#: src/fetch/discogsfetcher.cpp:458 src/fetch/upcitemdbfetcher.cpp:420
 #: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:173
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:458
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:455
 #: src/translators/discogsimporter.cpp:170
 #, kde-format
 msgid "Cassette"
 msgstr "Kazeta"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:456
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:453
 #: src/translators/discogsimporter.cpp:168
 #, kde-format
 msgid "Vinyl"
@@ -1674,7 +1674,7 @@ msgid "Medium"
 msgstr "Médium"
 
 #: src/collections/musiccollection.cpp:56
-#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:518
+#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/itunesfetcher.cpp:324 src/translators/audiofileimporter.cpp:236
 #: src/translators/xmlstatehandler.cpp:435
 #, kde-format
@@ -1686,7 +1686,7 @@ msgstr "Interpret"
 msgid "Label"
 msgstr "Štítok"
 
-#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:322
+#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:317
 #: src/tests/discogsfetchertest.cpp:309 src/tests/discogsfetchertest.cpp:346
 #: src/tests/itunesfetchertest.cpp:216 src/tests/itunesfetchertest.cpp:244
 #: src/tests/musicbrainzfetchertest.cpp:228
@@ -1696,7 +1696,7 @@ msgid "Tracks"
 msgstr "Stopy"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
-#: src/fetch/discogsfetcher.cpp:517 src/fetch/fetchmanager.cpp:62
+#: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:323 src/fetchdialog.cpp:243 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:434
@@ -1704,7 +1704,7 @@ msgstr "Stopy"
 msgid "Title"
 msgstr "Názov"
 
-#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:519
+#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:516
 #: src/fetch/itunesfetcher.cpp:325 src/translators/audiofileimporter.cpp:237
 #: src/translators/xmlstatehandler.cpp:436
 #, kde-format
@@ -1863,8 +1863,8 @@ msgstr "Región 8"
 msgid "Region"
 msgstr "Región"
 
-#: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:326
-#: src/fetch/discogsfetcher.cpp:591
+#: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:323
+#: src/fetch/discogsfetcher.cpp:588
 #, kde-format
 msgid "Nationality"
 msgstr "Národnosť"
@@ -1917,8 +1917,8 @@ msgstr "Tabuľka pre členov obsadenia, spolu s rolou, ktorú hrajú"
 msgid "Director"
 msgstr "Režisér"
 
-#: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:333
-#: src/fetch/discogsfetcher.cpp:590 src/fetch/rpggeekfetcher.cpp:209
+#: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:330
+#: src/fetch/discogsfetcher.cpp:587 src/fetch/rpggeekfetcher.cpp:209
 #, kde-format
 msgid "Producer"
 msgstr "Producent"
@@ -3269,11 +3269,11 @@ msgstr ""
 
 #: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:229
-#: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:605
+#: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:602
 #: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:383
 #: src/fetch/isbndbfetcher.cpp:390 src/fetch/mobygamesfetcher.cpp:641
 #: src/fetch/omdbfetcher.cpp:409 src/fetch/thegamesdbfetcher.cpp:626
-#: src/fetch/themoviedbfetcher.cpp:565 src/fetch/thetvdbfetcher.cpp:573
+#: src/fetch/themoviedbfetcher.cpp:565 src/fetch/thetvdbfetcher.cpp:576
 #, fuzzy, kde-format
 #| msgid ""
 #| "Registration is required for accessing the %1 data source. If you agree "
@@ -3302,7 +3302,7 @@ msgstr "Prístupový kľúč: "
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:544
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:401
-#: src/fetch/themoviedbfetcher.cpp:583 src/fetch/thetvdbfetcher.cpp:591
+#: src/fetch/themoviedbfetcher.cpp:583 src/fetch/thetvdbfetcher.cpp:594
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3487,10 +3487,10 @@ msgstr ""
 "Prístup k údajom z Amazon.com vyžaduje AWS ID prístupového kľúča a tajný "
 "kľúč."
 
-#: src/fetch/amazonfetcher.cpp:271 src/fetch/discogsfetcher.cpp:148
+#: src/fetch/amazonfetcher.cpp:271 src/fetch/discogsfetcher.cpp:147
 #: src/fetch/isbndbfetcher.cpp:166 src/fetch/mobygamesfetcher.cpp:162
 #: src/fetch/omdbfetcher.cpp:119 src/fetch/thegamesdbfetcher.cpp:136
-#: src/fetch/themoviedbfetcher.cpp:159 src/fetch/thetvdbfetcher.cpp:159
+#: src/fetch/themoviedbfetcher.cpp:159 src/fetch/thetvdbfetcher.cpp:160
 #, kde-format
 msgid "Those values must be entered in the data source settings."
 msgstr "Tieto hodnoty musia byť zadané v nastavení údajového zdroja."
@@ -3500,18 +3500,18 @@ msgstr "Tieto hodnoty musia byť zadané v nastavení údajového zdroja."
 msgid "Results from %1: %2/%3"
 msgstr "Výsledky z %1: %2/%3"
 
-#: src/fetch/amazonfetcher.cpp:633 src/fetch/colnectfetcher.cpp:823
-#: src/fetch/discogsfetcher.cpp:227 src/fetch/doubanfetcher.cpp:461
+#: src/fetch/amazonfetcher.cpp:633 src/fetch/colnectfetcher.cpp:818
+#: src/fetch/discogsfetcher.cpp:224 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:432 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:199
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:368
 #: src/fetch/kinofetcher.cpp:365 src/fetch/kinopoiskfetcher.cpp:267
-#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:330
+#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:332
 #: src/fetch/mobygamesfetcher.cpp:344 src/fetch/moviemeterfetcher.cpp:166
 #: src/fetch/numistafetcher.cpp:286 src/fetch/numistafetcher.cpp:294
 #: src/fetch/omdbfetcher.cpp:181 src/fetch/thegamesdbfetcher.cpp:171
-#: src/fetch/themoviedbfetcher.cpp:235 src/fetch/thetvdbfetcher.cpp:340
+#: src/fetch/themoviedbfetcher.cpp:235 src/fetch/thetvdbfetcher.cpp:341
 #: src/fetch/tvmazefetcher.cpp:261 src/fetch/upcitemdbfetcher.cpp:259
 #: src/fetch/vgcollectfetcher.cpp:282 src/fetch/vndbfetcher.cpp:176
 #, kde-format
@@ -3548,7 +3548,7 @@ msgstr ""
 "použiť pre tento dátový zdroj."
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:986 src/fetch/discogsfetcher.cpp:625
+#: src/fetch/colnectfetcher.cpp:981 src/fetch/discogsfetcher.cpp:622
 #: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:568
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/rpggeekfetcher.cpp:224 src/fetch/thegamesdbfetcher.cpp:646
@@ -3558,7 +3558,7 @@ msgid "&Image size: "
 msgstr "Veľkosť obrázka:"
 
 #: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:219
-#: src/fetch/colnectfetcher.cpp:990 src/fetch/discogsfetcher.cpp:628
+#: src/fetch/colnectfetcher.cpp:985 src/fetch/discogsfetcher.cpp:625
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:572
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/rpggeekfetcher.cpp:228 src/fetch/thegamesdbfetcher.cpp:649
@@ -3575,7 +3575,7 @@ msgstr "Stredne veľký obrázok"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:220
-#: src/fetch/colnectfetcher.cpp:991 src/fetch/discogsfetcher.cpp:630
+#: src/fetch/colnectfetcher.cpp:986 src/fetch/discogsfetcher.cpp:627
 #: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:573
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/rpggeekfetcher.cpp:229 src/fetch/thegamesdbfetcher.cpp:651
@@ -3585,7 +3585,7 @@ msgid "Large Image"
 msgstr "Veľký obrázok"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:989 src/fetch/discogsfetcher.cpp:631
+#: src/fetch/colnectfetcher.cpp:984 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:571
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:652
@@ -3594,7 +3594,7 @@ msgstr "Veľký obrázok"
 msgid "No Image"
 msgstr "Bez obrázku"
 
-#: src/fetch/amazonfetcher.cpp:1155 src/fetch/discogsfetcher.cpp:635
+#: src/fetch/amazonfetcher.cpp:1155 src/fetch/discogsfetcher.cpp:632
 #: src/fetch/imdbfetcher.cpp:550 src/fetch/mobygamesfetcher.cpp:671
 #: src/fetch/moviemeterfetcher.cpp:330 src/fetch/thegamesdbfetcher.cpp:656
 #, kde-format
@@ -3633,8 +3633,8 @@ msgstr ""
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:403
-#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:436
-#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:399
+#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
+#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:394
 #: src/fetch/openlibraryfetcher.cpp:464 src/fetch/springerfetcher.cpp:187
 #: src/fetch/tvmazefetcher.cpp:373 src/fetch/upcitemdbfetcher.cpp:479
 #: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:433
@@ -3652,7 +3652,7 @@ msgstr "Colorist"
 msgid "Bedetheque Link"
 msgstr "Odkaz Bedetheque"
 
-#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:429
+#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:431
 #: src/field.cpp:312
 #, kde-format
 msgid "ISBN#"
@@ -3663,43 +3663,43 @@ msgstr "ISBN#"
 msgid "BoardGameGeek Link"
 msgstr "Odkaz BoardGameGeek"
 
-#: src/fetch/colnectfetcher.cpp:543 src/fetch/colnectfetcher.cpp:844
+#: src/fetch/colnectfetcher.cpp:538 src/fetch/colnectfetcher.cpp:839
 #, fuzzy, kde-format
 #| msgid "Comic Vine Link"
 msgid "Colnect Link"
 msgstr "Odkaz Comic Vine"
 
-#: src/fetch/colnectfetcher.cpp:562 src/fetch/colnectfetcher.cpp:850
+#: src/fetch/colnectfetcher.cpp:557 src/fetch/colnectfetcher.cpp:845
 #, kde-format
 msgid "Mintage"
 msgstr "Razba"
 
-#: src/fetch/colnectfetcher.cpp:600 src/fetch/colnectfetcher.cpp:852
+#: src/fetch/colnectfetcher.cpp:595 src/fetch/colnectfetcher.cpp:847
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:607 src/fetch/colnectfetcher.cpp:853
+#: src/fetch/colnectfetcher.cpp:602 src/fetch/colnectfetcher.cpp:848
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:854 src/fetch/giantbombfetcher.cpp:203
+#: src/fetch/colnectfetcher.cpp:849 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:568 src/fetch/mobygamesfetcher.cpp:627
 #: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:325
 #, kde-format
 msgid "PEGI Rating"
 msgstr "PEGI Hodnotenie"
 
-#: src/fetch/colnectfetcher.cpp:958 src/fetch/filmaffinityfetcher.cpp:490
+#: src/fetch/colnectfetcher.cpp:953 src/fetch/filmaffinityfetcher.cpp:490
 #: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:602
 #, kde-format
 msgid "Language: "
 msgstr "Jazyk:"
 
-#: src/fetch/colnectfetcher.cpp:996
+#: src/fetch/colnectfetcher.cpp:991
 #, fuzzy, kde-format
 #| msgid "Country: "
 msgid "Country code: "
@@ -3757,39 +3757,39 @@ msgstr "E-mail:"
 msgid "Danish Bibliographic Center (DBC.dk)"
 msgstr "Danish Bibliographic Center (DBC.dk)"
 
-#: src/fetch/discogsfetcher.cpp:146 src/fetch/isbndbfetcher.cpp:164
+#: src/fetch/discogsfetcher.cpp:145 src/fetch/isbndbfetcher.cpp:164
 #: src/fetch/mobygamesfetcher.cpp:160 src/fetch/omdbfetcher.cpp:117
 #: src/fetch/thegamesdbfetcher.cpp:134 src/fetch/themoviedbfetcher.cpp:157
-#: src/fetch/thetvdbfetcher.cpp:157
+#: src/fetch/thetvdbfetcher.cpp:158
 #, kde-format
 msgid "An access key is required to use this data source."
 msgstr "Na použitie tohto zdroja údajov je potrebný prístupový kľúč."
 
-#: src/fetch/discogsfetcher.cpp:321 src/fetch/discogsfetcher.cpp:592
+#: src/fetch/discogsfetcher.cpp:318 src/fetch/discogsfetcher.cpp:589
 #, kde-format
 msgid "Discogs Link"
 msgstr "Odkaz Discogs"
 
-#: src/fetch/discogsfetcher.cpp:340 src/fetch/discogsfetcher.cpp:593
-#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:392
+#: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:590
+#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:387
 #: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:472
 #: src/fetch/vgcollectfetcher.cpp:336 src/fetch/vgcollectfetcher.cpp:371
 #, kde-format
 msgid "Barcode"
 msgstr "Čiarový kód"
 
-#: src/fetch/discogsfetcher.cpp:345 src/fetch/discogsfetcher.cpp:594
+#: src/fetch/discogsfetcher.cpp:342 src/fetch/discogsfetcher.cpp:591
 #, fuzzy, kde-format
 #| msgid "Card Number"
 msgid "Catalog Number"
 msgstr "Číslo karty"
 
-#: src/fetch/discogsfetcher.cpp:354
+#: src/fetch/discogsfetcher.cpp:351
 #, kde-format
 msgid "The Discogs.com server reports a token error."
 msgstr "Server Discogs.com ohlásil chybu tokenu."
 
-#: src/fetch/discogsfetcher.cpp:513 src/fetch/discogsfetcher.cpp:524
+#: src/fetch/discogsfetcher.cpp:510 src/fetch/discogsfetcher.cpp:521
 #: src/fetch/itunesfetcher.cpp:319 src/fetch/itunesfetcher.cpp:330
 #: src/translators/audiofileimporter.cpp:231
 #: src/translators/audiofileimporter.cpp:241
@@ -3797,12 +3797,12 @@ msgstr "Server Discogs.com ohlásil chybu tokenu."
 msgid "Tracks (Disc %1)"
 msgstr "Stopy (Disk %1)"
 
-#: src/fetch/discogsfetcher.cpp:581
+#: src/fetch/discogsfetcher.cpp:578
 #, kde-format
 msgid "Discogs Audio Search"
 msgstr "Discogs audio hľadanie"
 
-#: src/fetch/discogsfetcher.cpp:617 src/translators/discogsimporter.cpp:204
+#: src/fetch/discogsfetcher.cpp:614 src/translators/discogsimporter.cpp:204
 #, fuzzy, kde-format
 #| msgid "User token: "
 msgid "User token:"
@@ -4108,7 +4108,7 @@ msgstr "Internet Movie Database"
 
 #: src/fetch/imdbfetcher.cpp:505 src/fetch/kinopoiskfetcher.cpp:668
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:549
-#: src/fetch/thetvdbfetcher.cpp:559 src/fetch/tvmazefetcher.cpp:362
+#: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:331
 #, kde-format
 msgid "IMDb Link"
@@ -4120,7 +4120,7 @@ msgid "Certifications"
 msgstr "Certifikácie"
 
 #: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:557
-#: src/fetch/themoviedbfetcher.cpp:553 src/fetch/thetvdbfetcher.cpp:560
+#: src/fetch/themoviedbfetcher.cpp:553 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
@@ -4185,19 +4185,24 @@ msgstr "Odkaz KinoPoisk"
 msgid "Kino-Teatr Link"
 msgstr "Odkaz Kino-Teatr"
 
-#: src/fetch/metronfetcher.cpp:240 src/fetch/metronfetcher.cpp:428
+#: src/fetch/metronfetcher.cpp:184
+#, kde-format
+msgid "The rate limit has been exceeded."
+msgstr ""
+
+#: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
 #, fuzzy, kde-format
 #| msgid "MovieMeter Link"
 msgid "Metron Link"
 msgstr "Odkaz MovieMeter"
 
-#: src/fetch/metronfetcher.cpp:394
+#: src/fetch/metronfetcher.cpp:396
 #, fuzzy, kde-format
 #| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
 msgstr "%1 požaduje používateľské meno a heslo"
 
-#: src/fetch/metronfetcher.cpp:399
+#: src/fetch/metronfetcher.cpp:401
 #, fuzzy, kde-format
 #| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
@@ -4362,7 +4367,7 @@ msgid "TMDb Link"
 msgstr "Odkaz TMDb"
 
 #: src/fetch/themoviedbfetcher.cpp:332 src/fetch/themoviedbfetcher.cpp:552
-#: src/fetch/thetvdbfetcher.cpp:249 src/fetch/thetvdbfetcher.cpp:561
+#: src/fetch/thetvdbfetcher.cpp:250 src/fetch/thetvdbfetcher.cpp:564
 #: src/fetch/tvmazefetcher.cpp:179 src/fetch/tvmazefetcher.cpp:364
 #, kde-format
 msgid "Network"
@@ -4398,13 +4403,13 @@ msgstr "Ruština"
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB (%1)"
 
-#: src/fetch/thetvdbfetcher.cpp:254 src/fetch/thetvdbfetcher.cpp:558
+#: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:561
 #, fuzzy, kde-format
 #| msgid "IGDB Link"
 msgid "TheTVDB Link"
 msgstr "IGDB odkaz"
 
-#: src/fetch/thetvdbfetcher.cpp:585
+#: src/fetch/thetvdbfetcher.cpp:588
 #, kde-format
 msgid "Subscriber PIN: "
 msgstr ""
@@ -5192,7 +5197,7 @@ msgstr "Posunúť riadok vyššie"
 msgid "Move Row Down"
 msgstr "Presunúť rad nadol"
 
-#: src/images/imagejob.cpp:78 src/images/imagejob.cpp:115
+#: src/images/imagejob.cpp:78 src/images/imagejob.cpp:113
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico nedokáže načítať obrázok - %1."
