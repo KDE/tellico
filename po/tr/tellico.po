@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-13 00:42+0000\n"
-"PO-Revision-Date: 2025-03-10 12:35+0300\n"
+"PO-Revision-Date: 2025-03-13 15:54+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -4149,7 +4149,7 @@ msgstr "Kino–Teatr Bağlantısı"
 #: src/fetch/metronfetcher.cpp:184
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "Hız limiti aşıldı."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
 #, kde-format
@@ -5181,8 +5181,8 @@ msgid ""
 "order to be merged."
 msgstr ""
 "İçe aktarılan dosyanın içeriği ile bu koleksiyonu birleştir. Bu, yalnızca  "
-"koleksiyon türleri eşleştiğinde olanaklıdır. Birleşme olması için, "
-"girdilerin kesinlikle uyuşması gerekir."
+"koleksiyon türleri eşleştiğinde olanaklıdır. Birleşme olması için girdilerin "
+"kesinlikle uyuşması gerekir."
 
 #: src/importdialog.cpp:145 src/mainwindow.cpp:353
 #, kde-format
@@ -6931,7 +6931,7 @@ msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
 msgstr ""
-"Dosya içinde değerleri ayırmak için, virgüle ek olarak diğer karakterlerde "
+"Dosya içinde değerleri ayırmak için virgüle ek olarak diğer karakterlerde "
 "sınırlayıcı olarak kullanılabilir."
 
 #: src/translators/csvexporter.cpp:154
