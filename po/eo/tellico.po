@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-13 00:42+0000\n"
-"PO-Revision-Date: 2025-02-14 21:25+0100\n"
+"PO-Revision-Date: 2025-03-15 22:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -4134,40 +4134,38 @@ msgstr "ISFDB-Ligilo"
 #: src/fetch/itunesfetcher.cpp:243 src/fetch/itunesfetcher.cpp:556
 #, kde-format
 msgid "iTunes Link"
-msgstr "iTunes Link"
+msgstr "iTunes-Ligilo"
 
 #: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:667
 #, kde-format
 msgid "KinoPoisk Link"
-msgstr "KinoPoisk Ligo"
+msgstr "KinoPoisk-Ligilo"
 
 #: src/fetch/kinoteatrfetcher.cpp:236 src/fetch/kinoteatrfetcher.cpp:506
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Kino-Teatr-Ligilo"
 msgid "Kino-Teatr Link"
 msgstr "Kino-Teatra Ligo"
 
 #: src/fetch/metronfetcher.cpp:184
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "La limo de ofteco estis superata."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "MovieMeter Ligo"
+msgstr "Metron-Ligilo"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 postulas uzantnomon kaj pasvorton."
+msgstr "Bonvolu enigi vian Metron-uzantnomon kaj pasvorton."
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Alirŝlosilo estas bezonata por uzi ĉi tiun datumfonton."
+msgstr "Registriĝo estas bezonata por uzi ĉi tiun datumfonton."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -4177,7 +4175,7 @@ msgstr "Ligo de MobyGames"
 #: src/fetch/moviemeterfetcher.cpp:223 src/fetch/moviemeterfetcher.cpp:308
 #, kde-format
 msgid "MovieMeter Link"
-msgstr "MovieMeter Ligo"
+msgstr "MovieMeter-Ligilo"
 
 #: src/fetch/multifetcher.cpp:208
 #, kde-format
@@ -4192,7 +4190,7 @@ msgstr "Fonto de datumoj:"
 #: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:398
 #, kde-format
 msgid "Numista Link"
-msgstr "Numista Ligo"
+msgstr "Numista-Ligilo"
 
 #: src/fetch/numistafetcher.cpp:403
 #, kde-format
