@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-13 00:42+0000\n"
-"PO-Revision-Date: 2025-03-02 09:41+0100\n"
+"PO-Revision-Date: 2025-03-20 08:00+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4160,25 +4160,22 @@ msgstr "Ligazón de Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:184
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "Superouse o límite de velocidade de transferencia."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "Ligazón de MovieMeter"
+msgstr "Ligazón de Metron"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 require dun nome de usuaria e contrasinal."
+msgstr "Insira o seu nome de persoa usuaria e contrasinal de Metron."
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Requírese unha chave de acceso para usar esta fonte de datos."
+msgstr "Para usar esta fonte de datos debe rexistrarse."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
