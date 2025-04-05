@@ -4134,7 +4134,6 @@ msgstr ""
 
 #: src/fetch/isfdbfetcher.cpp:151
 #, fuzzy, kde-format
-#| msgid "IGDB Link"
 msgid "ISFDB Link"
 msgstr "IGDB-lenkje"
 
@@ -4160,19 +4159,16 @@ msgstr ""
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
 #, fuzzy, kde-format
-#| msgid "MovieMeter Link"
 msgid "Metron Link"
 msgstr "MovieMeter-lenkje"
 
 #: src/fetch/metronfetcher.cpp:396
 #, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
 msgstr "%1 krev eit brukarnamn og passord."
 
 #: src/fetch/metronfetcher.cpp:401
 #, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
 msgstr "Du treng ein tilgangsnøkkel for å kunna bruka denne datakjelda."
 
