@@ -1,14 +1,14 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the tellico package.
 # Jung Hee Lee <daemul72@gmail.com>, 2019, 2021.
-# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2024 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2024, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-23 02:30+0000\n"
-"PO-Revision-Date: 2024-08-21 00:09+0200\n"
+"PO-Revision-Date: 2025-04-07 23:49+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -293,7 +293,7 @@ msgstr "사용자 정의 소장품"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "내부 필드 이름은 <em>%1</em>입니다."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -1584,13 +1584,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-#| "Everyone, Early Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
-#| "Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -2775,31 +2769,31 @@ msgstr "삭제할 템플릿 선택:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "현재 <em>%1</em>에 그림을 저장합니다"
 
 #: src/configdialog.cpp:1254
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "현재 <em>%1</em>에 그림을 저장합니다"
 
 #: src/configdialog.cpp:1260
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "<em>%1</em>에서 <em>%2</em>(으)로 그림을 이동합니다"
 
 #: src/configdialog.cpp:1264
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "<em>%1</em>에서 <em>%2</em>(으)로 그림을 이동합니다"
 
 #: src/configdialog.cpp:1274
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "<em>%1</em>에서 <em>%2</em>(으)로 그림을 이동합니다"
 
 #: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
 #: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
@@ -3062,10 +3056,9 @@ msgid "Update Entries"
 msgstr "항목 업데이트"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "<b>%1</b> 업데이트 중..."
+msgstr "<i>%2</i>에서 <b>%1</b> 업데이트 중..."
 
 #: src/entryview.cpp:357
 #, kde-format
@@ -5241,10 +5234,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - 간단한 자유 소프트웨어 소장품 관리 도구"
 
 #: src/main.cpp:176
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001-2024, Robby Stephenson"
+msgstr "(c) 2001, Robby Stephenson"
 
 #: src/main.cpp:180
 #, kde-format
@@ -6185,10 +6177,9 @@ msgstr ""
 "<qt><i>그룹 보기</i>는 선택한 필드를 기준으로 항목을 그룹화합니다.</qt>"
 
 #: src/mainwindow.cpp:993
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - 간단한 자유 소프트웨어 소장품 관리 도구"
+msgstr "간단한 자유 소프트웨어 소장품 관리 도구"
 
 #: src/mainwindow.cpp:995
 #, kde-format
@@ -6217,6 +6208,8 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"더 많은 정보는 <a href=\"help:/tellico\">문서</a>에서 확인할 수 있습니다. <a "
+"href=\"tc:///disable_welcome\">이 시작 화면을 비활성화</a>할 수 있습니다."
 
 #: src/mainwindow.cpp:1217
 #, kde-format
