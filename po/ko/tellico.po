@@ -1,14 +1,14 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the tellico package.
 # Jung Hee Lee <daemul72@gmail.com>, 2019, 2021.
-# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2024 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2024, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-13 00:42+0000\n"
-"PO-Revision-Date: 2024-08-21 00:09+0200\n"
+"PO-Revision-Date: 2025-04-07 23:49+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -288,7 +288,7 @@ msgstr "사용자 정의 소장품"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "내부 필드 이름은 <em>%1</em>입니다."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -1578,13 +1578,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:278
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-#| "Everyone, Early Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
-#| "Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -2766,31 +2760,31 @@ msgstr "삭제할 템플릿 선택:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "현재 <em>%1</em>에 그림을 저장합니다"
 
 #: src/configdialog.cpp:1236
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "현재 <em>%1</em>에 그림을 저장합니다"
 
 #: src/configdialog.cpp:1242
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "<em>%1</em>에서 <em>%2</em>(으)로 그림을 이동합니다"
 
 #: src/configdialog.cpp:1246
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "<em>%1</em>에서 <em>%2</em>(으)로 그림을 이동합니다"
 
 #: src/configdialog.cpp:1256
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "<em>%1</em>에서 <em>%2</em>(으)로 그림을 이동합니다"
 
 #: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:318
 #: src/fetchdialog.cpp:417 src/fetchdialog.cpp:550 src/fetchdialog.cpp:611
@@ -3131,10 +3125,9 @@ msgid "Update Entries"
 msgstr "항목 업데이트"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "<b>%1</b> 업데이트 중..."
+msgstr "<i>%2</i>에서 <b>%1</b> 업데이트 중..."
 
 #: src/entryview.cpp:289
 #, kde-format
@@ -4100,10 +4093,9 @@ msgstr ""
 "ISBN 일괄 검색은 더 빠르지만 Premium 또는 Pro 구독 중에만 사용할 수 있습니다."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "IGDB 링크"
+msgstr "ISFDB 링크"
 
 #: src/fetch/itunesfetcher.cpp:243 src/fetch/itunesfetcher.cpp:556
 #, kde-format
@@ -4123,25 +4115,22 @@ msgstr "Kino-Teatr 링크"
 #: src/fetch/metronfetcher.cpp:184
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "사용량 제한을 초과했습니다."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "MovieMeter 링크"
+msgstr "Metron 링크"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1에는 사용자 이름과 암호가 필요합니다."
+msgstr "Metron 사용자 이름과 암호를 입력하십시오"
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "이 데이터 소스를 사용하려면 액세스 키가 필요합니다."
+msgstr "이 데이터 원본을 사용하려면 등록이 필요합니다."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5328,10 +5317,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - 간단한 자유 소프트웨어 소장품 관리 도구"
 
 #: src/main.cpp:90
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001-2024, Robby Stephenson"
+msgstr "(c) 2001, Robby Stephenson"
 
 #: src/main.cpp:94
 #, kde-format
@@ -6272,10 +6260,9 @@ msgstr ""
 "<qt><i>그룹 보기</i>는 선택한 필드를 기준으로 항목을 그룹화합니다.</qt>"
 
 #: src/mainwindow.cpp:925
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - 간단한 자유 소프트웨어 소장품 관리 도구"
+msgstr "간단한 자유 소프트웨어 소장품 관리 도구"
 
 #: src/mainwindow.cpp:927
 #, kde-format
@@ -6304,6 +6291,8 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"더 많은 정보는 <a href=\"help:/tellico\">문서</a>에서 확인할 수 있습니다. <a "
+"href=\"tc:///disable_welcome\">이 시작 화면을 비활성화</a>할 수 있습니다."
 
 #: src/mainwindow.cpp:1149
 #, kde-format
