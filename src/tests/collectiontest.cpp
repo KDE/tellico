@@ -204,16 +204,11 @@ void CollectionTest::testFields() {
 
   QCOMPARE(coll->fieldByName(QStringLiteral("author")), aField);
   QCOMPARE(coll->fieldByTitle(QStringLiteral("Author")), aField);
-  QCOMPARE(coll->fieldNameByTitle(QStringLiteral("Author")), QStringLiteral("author"));
-  QCOMPARE(coll->fieldNameByTitle(QStringLiteral("author")), QString());
-  QCOMPARE(coll->fieldTitleByName(QStringLiteral("Author")), QString());
-  QCOMPARE(coll->fieldTitleByName(QStringLiteral("author")), QStringLiteral("Author"));
 
   QVERIFY(coll->removeField(QStringLiteral("cover")));
   QVERIFY(!coll->hasField(QStringLiteral("cover")));
   QCOMPARE(coll->fields().count(), 5);
   QVERIFY(!coll->hasImages());
-  QCOMPARE(coll->fieldTitleByName(QStringLiteral("cover")), QString());
   QCOMPARE(coll->fieldCategories().size(), 2);
 
   Tellico::Data::FieldPtr cField(new Tellico::Data::Field(QStringLiteral("editor"),

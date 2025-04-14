@@ -1079,7 +1079,8 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
     if(m_entryGrouping->currentText() == (QLatin1Char('<') + i18n("People") + QLatin1Char('>'))) {
       groupName = Data::Collection::s_peopleGroupName;
     } else {
-      groupName = Data::Document::self()->collection()->fieldNameByTitle(m_entryGrouping->currentText());
+      auto f = Data::Document::self()->collection()->fieldByTitle(m_entryGrouping->currentText());
+      if(f) groupName = f->name();
     }
     if(coll_->type() != Data::Collection::Base) {
       config.writeEntry("Group By", groupName);
@@ -1700,7 +1701,8 @@ void MainWindow::slotUpdateCollectionToolBar(Tellico::Data::CollPtr coll_) {
     if(groupName == Data::Collection::s_peopleGroupName) {
       groupMap.insert(groupName, QLatin1Char('<') + i18n("People") + QLatin1Char('>'));
     } else {
-      groupMap.insert(groupName, coll_->fieldTitleByName(groupName));
+      auto f = coll_->fieldByName(groupName);
+      if(f) groupMap.insert(groupName, f->title());
     }
   }
 
@@ -1730,7 +1732,9 @@ void MainWindow::slotUpdateCollectionToolBar(Tellico::Data::CollPtr coll_) {
 void MainWindow::slotChangeGrouping() {
   const QString title = m_entryGrouping->currentText();
 
-  QString groupName = Data::Document::self()->collection()->fieldNameByTitle(title);
+  auto f = Data::Document::self()->collection()->fieldByTitle(title);
+  QString groupName;
+  if(f) groupName = f->name();
   if(groupName.isEmpty()) {
     if(title == (QLatin1Char('<') + i18n("People") + QLatin1Char('>'))) {
       groupName = Data::Collection::s_peopleGroupName;

@@ -318,11 +318,14 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   }
 
   if(sortTitles.count() > 0) {
-    m_handler->addStringParam("sort-name1", coll->fieldNameByTitle(sortTitles[0]).toUtf8());
+    auto f = coll->fieldByTitle(sortTitles[0]);
+    if(f) m_handler->addStringParam("sort-name1", f->name().toUtf8());
     if(sortTitles.count() > 1) {
-      m_handler->addStringParam("sort-name2", coll->fieldNameByTitle(sortTitles[1]).toUtf8());
+      f = coll->fieldByTitle(sortTitles[1]);
+      if(f) m_handler->addStringParam("sort-name2", f->name().toUtf8());
       if(sortTitles.count() > 2) {
-        m_handler->addStringParam("sort-name3", coll->fieldNameByTitle(sortTitles[2]).toUtf8());
+        f = coll->fieldByTitle(sortTitles[2]);
+        if(f) m_handler->addStringParam("sort-name3", f->name().toUtf8());
       }
     }
   }
@@ -337,7 +340,8 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
       if(m_groupBy.count() > 1) {
         s = i18n("People");
       } else {
-        s = coll->fieldTitleByName(m_groupBy[0]);
+        auto f = coll->fieldByName(m_groupBy[0]);
+        if(f) s = f->title();
       }
       sortString = i18n("(grouped by %1)", s);
     }
@@ -381,7 +385,8 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
 
   QStringList showFields;
   foreach(const QString& column, m_columns) {
-    showFields << coll->fieldNameByTitle(column);
+    auto f = coll->fieldByTitle(column);
+    if(f) showFields << f->name();
   }
   if(!showFields.isEmpty()) {
     m_handler->addStringParam("column-names", showFields.join(QLatin1String(" ")).toUtf8());

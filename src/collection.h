@@ -244,20 +244,6 @@ public:
    */
   QStringList fieldTitles() const;
   /**
-   * Returns the title of an field, given its name.
-   *
-   * @param name The field name
-   * @return The field title
-   */
-  QString fieldTitleByName(const QString& name) const;
-  /**
-   * Returns the name of an field, given its title.
-   *
-   * @param title The field title
-   * @return The field name
-   */
-  QString fieldNameByTitle(const QString& title) const;
-  /**
    * Returns a list of the values of a given field for every entry
    * in the collection. The values in the list are not repeated. Attribute
    * values which contain ";" are split into separate values. Since this method

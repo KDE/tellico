@@ -100,9 +100,10 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   if(m_fieldsToImport.isEmpty() && m_table) {
     for(int col = 0; col < m_table->columnCount(); ++col) {
       QString t = m_table->horizontalHeaderItem(col)->text();
-      if(m_coll->fieldByTitle(t)) {
+      auto f = m_coll->fieldByTitle(t);
+      if(f) {
         m_columnsToImport << col;
-        m_fieldsToImport << m_coll->fieldNameByTitle(t);
+        m_fieldsToImport << f->name();
       }
     }
   }

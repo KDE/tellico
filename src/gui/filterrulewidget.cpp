@@ -196,7 +196,8 @@ void FilterRuleWidget::setRule(const Tellico::FilterRule* rule_) {
 Tellico::FilterRule* FilterRuleWidget::rule() const {
   QString fieldName; // empty string
   if(m_ruleField->currentIndex() > 0) { // 0 is "All Fields", field is empty
-    fieldName = Data::Document::self()->collection()->fieldNameByTitle(m_ruleField->currentText());
+    auto f = Data::Document::self()->collection()->fieldByTitle(m_ruleField->currentText());
+    if(f) fieldName = f->name();
   }
 
   QString ruleValue;

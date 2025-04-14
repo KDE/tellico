@@ -81,7 +81,9 @@ QWidget* YearDistributionReport::createWidget() {
     myDebug() << "No year field in collection";
     return nullptr;
   }
-  const bool multiple = coll->fieldByName(yearField)->hasFlag(Data::Field::AllowMultiple);
+  auto field = coll->fieldByName(yearField);
+  Q_ASSERT(field);
+  const bool multiple = field->hasFlag(Data::Field::AllowMultiple);
 
   QMap<QString, int> entryYearCount;
   foreach(Data::EntryPtr entry, coll->entries()) {
@@ -147,7 +149,7 @@ QWidget* YearDistributionReport::createWidget() {
   auto axisX = new QValueAxis;
   axisX->setLabelFormat(QStringLiteral("%d"));
   axisX->setRange(minYear, maxYear);
-  axisX->setTitleText(coll->fieldTitleByName(yearField));
+  axisX->setTitleText(field->title());
   chart->addAxis(axisX, Qt::AlignBottom);
   series->attachAxis(axisX);
   axisX->applyNiceNumbers();

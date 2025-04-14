@@ -915,7 +915,8 @@ bool CollectionFieldsDialog::checkValues() {
   const QString title = m_currentField->title();
   // find total number of boxes with this title in case multiple new ones with same title were added
   int titleCount = m_fieldsWidget->findItems(title, Qt::MatchExactly).count();
-  if((m_coll->fieldByTitle(title) && m_coll->fieldNameByTitle(title) != m_currentField->name()) ||
+  auto field = m_coll->fieldByTitle(title);
+  if((field && field->name() != m_currentField->name()) ||
      titleCount > 1) {
     // already have a field with this title
     KMessageBox::error(this, i18n("A field with this title already exists. Please enter a different title."));
@@ -940,7 +941,7 @@ bool CollectionFieldsDialog::checkValues() {
   }
 
   // the combobox is disabled for single-category fields
-  if(!m_catCombo->isEnabled() && m_coll->fieldByTitle(title) && m_coll->fieldNameByTitle(title) != m_currentField->name()) {
+  if(!m_catCombo->isEnabled() && field && field->name() != m_currentField->name()) {
     KMessageBox::error(this, i18n("A field's title may not be the same as an existing category. "
                                   "Please enter a different title."));
     m_titleEdit->selectAll();

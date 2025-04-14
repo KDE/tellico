@@ -51,7 +51,9 @@ Tellico::FilterPtr FilterParser::filter() {
       fieldText = token.mid(pos+1).trimmed();
       // check that the field name might be a title
       if(m_coll && !m_coll->hasField(fieldName)) {
-        fieldName = m_coll->fieldNameByTitle(fieldName);
+        // fall back to looking by title
+        auto f = m_coll->fieldByTitle(fieldName);
+        if(f) fieldName = f->name();
         // if there's no fieldName match, then use the whole string in the filter
         if(fieldName.isEmpty()) {
           fieldText = m_text;

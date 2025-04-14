@@ -571,35 +571,12 @@ Tellico::Data::FieldList Collection::fieldsByCategory(const QString& cat_) {
   return list;
 }
 
-QString Collection::fieldNameByTitle(const QString& title_) const {
-  if(title_.isEmpty()) {
-    return QString();
-  }
-  FieldPtr f = fieldByTitle(title_);
-  if(!f) { // might happen in MainWindow::saveCollectionOptions
-    return QString();
-  }
-  return f->name();
-}
-
 QStringList Collection::fieldNames() const {
   return m_fieldByName.keys();
 }
 
 QStringList Collection::fieldTitles() const {
   return m_fieldByTitle.keys();
-}
-
-QString Collection::fieldTitleByName(const QString& name_) const {
-  if(name_.isEmpty()) {
-    return QString();
-  }
-  FieldPtr f = fieldByName(name_);
-  if(!f) {
-    myWarning() << "no field named " << name_;
-    return QString();
-  }
-  return f->title();
 }
 
 QStringList Collection::valuesByFieldName(const QString& name_) const {
@@ -669,7 +646,8 @@ Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& n
 void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QString& fieldName_, const Tellico::Data::EntryList& entries_) {
 //  myDebug() << fieldName_;
   Q_ASSERT(dict_);
-  const bool isBool = hasField(fieldName_) && fieldByName(fieldName_)->type() == Field::Bool;
+  auto f = fieldByName(fieldName_);
+  const bool isBool = f && f->type() == Field::Bool;
 
   QSet<EntryGroup*> modifiedGroups;
   foreach(EntryPtr entry, entries_) {
@@ -678,7 +656,8 @@ void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QStrin
       // find the group for this group name
       // bool fields use the field title
       if(isBool && !groupTitle.isEmpty()) {
-        groupTitle = fieldTitleByName(fieldName_);
+        // the f value is valid since isBool is true
+        groupTitle = f->title();
       }
       EntryGroup* group = dict_->value(groupTitle);
       // if the group doesn't exist, create it
