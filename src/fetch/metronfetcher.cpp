@@ -90,6 +90,7 @@ void MetronFetcher::saveConfigHook(KConfigGroup& config_) {
 
 void MetronFetcher::search() {
   m_page = 0;
+  m_started = true;
   if(m_auth.isEmpty() && !getAuthorization()) {
     stop();
     return;
