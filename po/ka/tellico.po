@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-13 00:42+0000\n"
+"POT-Creation-Date: 2025-04-15 00:41+0000\n"
 "PO-Revision-Date: 2025-03-13 05:25+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -160,7 +160,7 @@ msgstr "სახელი"
 msgid "Collection Size"
 msgstr "კოლექციის ზომა"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1613
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1614
 #, kde-format
 msgid "Total entries: %1"
 msgstr "სულ ჩანაწერები: %1"
@@ -191,12 +191,12 @@ msgid "Group Summary Report"
 msgstr "ჯგუფის მიმოხილვის ანგარიში"
 
 #: src/charts/yeardistributionreport.cpp:68
-#: src/charts/yeardistributionreport.cpp:132
+#: src/charts/yeardistributionreport.cpp:134
 #, kde-format
 msgid "Year Distribution"
 msgstr "დისტრიბუციის წელი"
 
-#: src/charts/yeardistributionreport.cpp:157
+#: src/charts/yeardistributionreport.cpp:159
 #, kde-format
 msgctxt "Distinct number of items"
 msgid "Count"
@@ -213,7 +213,7 @@ msgstr ""
 msgid "My Collection"
 msgstr "ჩემი კოლექცია"
 
-#: src/collection.cpp:887 src/core/tellico_strings.cpp:48 src/document.cpp:530
+#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:530
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
@@ -647,17 +647,17 @@ msgstr "თვისება"
 msgid "Value"
 msgstr "მნიშვნელობა"
 
-#: src/collectionfieldsdialog.cpp:921
+#: src/collectionfieldsdialog.cpp:922
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "ველი ამ სათაურით უკვე არსებობს. შეიყვანეთ სხვა სათაური."
 
-#: src/collectionfieldsdialog.cpp:928
+#: src/collectionfieldsdialog.cpp:929
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>კატეგორია, არ შეიძლება, ცარიელი იყოს. შეიყვანეთ კატეგორია.</qt>"
 
-#: src/collectionfieldsdialog.cpp:936
+#: src/collectionfieldsdialog.cpp:937
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -668,7 +668,7 @@ msgstr ""
 "<em>ცხრილის</em> ან <em>გამოსახულების</em> ველია. შეიყვანეთ სხვა კატეგორია.</"
 "qt>"
 
-#: src/collectionfieldsdialog.cpp:944
+#: src/collectionfieldsdialog.cpp:945
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
@@ -677,7 +677,7 @@ msgstr ""
 "ველის სათაური არ შეიძლება, არსებულ კატეგორიას ემთხვეოდეს. შეიყვანეთ სხვა "
 "სათაური."
 
-#: src/collectionfieldsdialog.cpp:956
+#: src/collectionfieldsdialog.cpp:957
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -687,12 +687,12 @@ msgstr ""
 "რეიტინგის ველის შუალედი 1-10 და ქვედა საზღვარი ზედაზე ნაკლები უნდა იყოს. "
 "შეიყვანეთ სხვადასხვა დაბალი და მაღალი თვისებები."
 
-#: src/collectionfieldsdialog.cpp:971
+#: src/collectionfieldsdialog.cpp:972
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "ცხრილები მაქსიმუმ ათი სვეტითაა შეზღუდული."
 
-#: src/collectionfieldsdialog.cpp:977
+#: src/collectionfieldsdialog.cpp:978
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr "მიღებული მნიშვნელობის მქონე ველს მნიშვნელობის ნიმუში უნდა გააჩნდეს."
@@ -734,7 +734,7 @@ msgstr "BibTeX -ის გასაღები"
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:244
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
-#: src/fetch/metronfetcher.cpp:245 src/fetch/mobygamesfetcher.cpp:456
+#: src/fetch/metronfetcher.cpp:246 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:359
 #: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:277
@@ -2498,7 +2498,7 @@ msgstr "&ფორმატის სათაურები და სახ�
 msgid "&Print field headers"
 msgstr "ველის მნიშვნელობების დაბეჭდვა"
 
-#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ".თუ ჩართულია, ველის სახელები ცხრილის თავსართებად დაიბეჭდება."
@@ -2513,7 +2513,7 @@ msgstr "დაჯგუფების პარამეტრები"
 msgid "&Group the entries"
 msgstr "&ჩანაწერების დაჯგუფება"
 
-#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:519
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "თუ ჩართულია, ჩანაწერები მოცემული ველის მიხედვით დაჯგუფდება."
@@ -2559,7 +2559,7 @@ msgstr "შაბლონის მორგება"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
 #: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:218
+#: src/translators/csvimporter.cpp:219
 #: src/translators/filelistingimporter.cpp:177
 #, kde-format
 msgid "Collection &type:"
@@ -2754,8 +2754,8 @@ msgstr "XSL ფაილები"
 msgid "Template Packages"
 msgstr "ნიმუშების პაკეტები"
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1247
-#: src/mainwindow.cpp:1418 src/reportdialog.cpp:422 src/reportdialog.cpp:437
+#: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1248
+#: src/mainwindow.cpp:1419 src/reportdialog.cpp:422 src/reportdialog.cpp:437
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -3023,7 +3023,7 @@ msgstr "ყველა სვეტის ჩვენება"
 msgid "Hide All Columns"
 msgstr "ყველა სვეტის დამალვა"
 
-#: src/document.cpp:212 src/mainwindow.cpp:1362
+#: src/document.cpp:212 src/mainwindow.cpp:1363
 #, kde-format
 msgid "Saving file..."
 msgstr "ფაილის შენახვა..."
@@ -3084,7 +3084,7 @@ msgstr ""
 msgid "Save Entry"
 msgstr "ჩანაწერის შენახვა"
 
-#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1151
+#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1152
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "შეუნახავი ცვლილებები"
@@ -3162,7 +3162,7 @@ msgstr "<b>%1</b>-ის განახლება <i>%2</i>-დან..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico-მა ნაგულისხმები ჩანაწერის სტილების ფურცელი ვერ იპოვა."
 
-#: src/entryview.cpp:291 src/mainwindow.cpp:1766
+#: src/entryview.cpp:291 src/mainwindow.cpp:1770
 #, kde-format
 msgid "Please check your installation."
 msgstr "შეამოწმეთ პროგრამის ფაილები."
@@ -3477,7 +3477,7 @@ msgstr "შედეგები %1-დან: %2/%3"
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:368
 #: src/fetch/kinofetcher.cpp:365 src/fetch/kinopoiskfetcher.cpp:267
-#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:332
+#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:333
 #: src/fetch/mobygamesfetcher.cpp:344 src/fetch/moviemeterfetcher.cpp:166
 #: src/fetch/numistafetcher.cpp:286 src/fetch/numistafetcher.cpp:294
 #: src/fetch/omdbfetcher.cpp:181 src/fetch/thegamesdbfetcher.cpp:171
@@ -3603,7 +3603,7 @@ msgstr "მადლობა arXiv-ს მისი ღია წვდომ�
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:403
-#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
+#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:439
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:394
 #: src/fetch/openlibraryfetcher.cpp:464 src/fetch/springerfetcher.cpp:187
 #: src/fetch/tvmazefetcher.cpp:373 src/fetch/upcitemdbfetcher.cpp:479
@@ -3622,7 +3622,7 @@ msgstr "კოლორისტი"
 msgid "Bedetheque Link"
 msgstr "Bedetheque -ის ბმული"
 
-#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:431
+#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:432
 #: src/field.cpp:312
 #, kde-format
 msgid "ISBN#"
@@ -4146,22 +4146,22 @@ msgstr "KinoPoisk ბმული"
 msgid "Kino-Teatr Link"
 msgstr "Kino-Teatr ბმული"
 
-#: src/fetch/metronfetcher.cpp:184
+#: src/fetch/metronfetcher.cpp:185
 #, kde-format
 msgid "The rate limit has been exceeded."
 msgstr "გადაჭარბებულია სიჩქარის ზღვარი."
 
-#: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
+#: src/fetch/metronfetcher.cpp:245 src/fetch/metronfetcher.cpp:431
 #, kde-format
 msgid "Metron Link"
 msgstr "Metron-ის ბმული"
 
-#: src/fetch/metronfetcher.cpp:396
+#: src/fetch/metronfetcher.cpp:397
 #, kde-format
 msgid "Please enter your Metron username and password"
 msgstr "შეიყვანეთ თქვენი Metron-ის მომხმარებლის სახელი და პაროლი"
 
-#: src/fetch/metronfetcher.cpp:401
+#: src/fetch/metronfetcher.cpp:402
 #, kde-format
 msgid "Registration is required to use this data source."
 msgstr "მონაცემების ამ წყაროს გამოსაყენებლად რეგისტრაცია გჭირდებათ."
@@ -4884,8 +4884,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "ჯგუფი"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1079 src/mainwindow.cpp:1701
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1079 src/mainwindow.cpp:1702
+#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:341
 #, kde-format
 msgid "People"
 msgstr "ხალხი"
@@ -4927,82 +4927,82 @@ msgstr "%1:"
 msgid "Any Field"
 msgstr "ნებისმიერი ველი"
 
-#: src/gui/filterrulewidget.cpp:234 src/gui/filterrulewidget.cpp:242
-#: src/gui/filterrulewidget.cpp:256 src/gui/filterrulewidget.cpp:262
+#: src/gui/filterrulewidget.cpp:235 src/gui/filterrulewidget.cpp:243
+#: src/gui/filterrulewidget.cpp:257 src/gui/filterrulewidget.cpp:263
 #, kde-format
 msgid "equals"
 msgstr "უდრის"
 
-#: src/gui/filterrulewidget.cpp:235 src/gui/filterrulewidget.cpp:243
-#: src/gui/filterrulewidget.cpp:257 src/gui/filterrulewidget.cpp:263
+#: src/gui/filterrulewidget.cpp:236 src/gui/filterrulewidget.cpp:244
+#: src/gui/filterrulewidget.cpp:258 src/gui/filterrulewidget.cpp:264
 #, kde-format
 msgid "does not equal"
 msgstr "არ უდრის"
 
-#: src/gui/filterrulewidget.cpp:236 src/gui/filterrulewidget.cpp:244
-#: src/gui/filterrulewidget.cpp:264
+#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
+#: src/gui/filterrulewidget.cpp:265
 #, kde-format
 msgid "matches regular expression"
 msgstr "ემთხვევა რეგულარულ გამოსახულებას"
 
-#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
-#: src/gui/filterrulewidget.cpp:265
+#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
+#: src/gui/filterrulewidget.cpp:266
 #, kde-format
 msgid "does not match regular expression"
 msgstr "არ ემთხვევა რეგულარულ გამოსახულებას"
 
-#: src/gui/filterrulewidget.cpp:238
+#: src/gui/filterrulewidget.cpp:239
 #, kde-format
 msgctxt "is before a date"
 msgid "is before"
 msgstr "არის მანამდე"
 
-#: src/gui/filterrulewidget.cpp:239
+#: src/gui/filterrulewidget.cpp:240
 #, kde-format
 msgctxt "is after a date"
 msgid "is after"
 msgstr "არის შემდეგ"
 
-#: src/gui/filterrulewidget.cpp:246
+#: src/gui/filterrulewidget.cpp:247
 #, kde-format
 msgctxt "is less than a number"
 msgid "is less than"
 msgstr "ნაკლები, ვიდრე"
 
-#: src/gui/filterrulewidget.cpp:247
+#: src/gui/filterrulewidget.cpp:248
 #, kde-format
 msgctxt "is greater than a number"
 msgid "is greater than"
 msgstr "მეტი, ვიდრე"
 
-#: src/gui/filterrulewidget.cpp:250
+#: src/gui/filterrulewidget.cpp:251
 #, kde-format
 msgid "image size equals"
 msgstr "გამოსახულების ზომა უდრის"
 
-#: src/gui/filterrulewidget.cpp:251
+#: src/gui/filterrulewidget.cpp:252
 #, kde-format
 msgid "image size does not equal"
 msgstr "გამოსახულების ზომა არ უდრის"
 
-#: src/gui/filterrulewidget.cpp:252
+#: src/gui/filterrulewidget.cpp:253
 #, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
 msgstr "გამოსახულების ზომა ნაკლებია, ვიდრე"
 
-#: src/gui/filterrulewidget.cpp:253
+#: src/gui/filterrulewidget.cpp:254
 #, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
 msgstr "გამოსახულების ზომა მეტია, ვიდრე"
 
-#: src/gui/filterrulewidget.cpp:260
+#: src/gui/filterrulewidget.cpp:261
 #, kde-format
 msgid "contains"
 msgstr "შეიცავს"
 
-#: src/gui/filterrulewidget.cpp:261
+#: src/gui/filterrulewidget.cpp:262
 #, kde-format
 msgid "does not contain"
 msgstr "არ შეიცავს"
@@ -5188,14 +5188,14 @@ msgstr ""
 msgid "&Import"
 msgstr "&შემოტანა"
 
-#: src/importdialog.cpp:372 src/mainwindow.cpp:1243 src/mainwindow.cpp:1416
+#: src/importdialog.cpp:372 src/mainwindow.cpp:1244 src/mainwindow.cpp:1417
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico ფაილები"
 
 #: src/importdialog.cpp:373 src/importdialog.cpp:391 src/importdialog.cpp:420
-#: src/mainwindow.cpp:1245 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "XML ფაილები"
@@ -6344,7 +6344,7 @@ msgstr ""
 "შეგიძლიათ. ასევე შეგიძლიათ, <a href=\"tc:///disable_welcome\">გამორთოთ "
 "გაშვების ეკრანი</a>."
 
-#: src/mainwindow.cpp:1149
+#: src/mainwindow.cpp:1150
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6353,22 +6353,22 @@ msgstr ""
 "მიმდინარე ფაილი შეიცვალა.\n"
 "გნებავთ, შეინახოთ ის?"
 
-#: src/mainwindow.cpp:1185 src/mainwindow.cpp:1219
+#: src/mainwindow.cpp:1186 src/mainwindow.cpp:1220
 #, kde-format
 msgid "Creating new collection..."
 msgstr "ახალი კოლექციის შექმნა..."
 
-#: src/mainwindow.cpp:1240 src/mainwindow.cpp:1263 src/mainwindow.cpp:1281
+#: src/mainwindow.cpp:1241 src/mainwindow.cpp:1264 src/mainwindow.cpp:1282
 #, kde-format
 msgid "Opening file..."
 msgstr "ფაილის გახსნა..."
 
-#: src/mainwindow.cpp:1251
+#: src/mainwindow.cpp:1252
 #, kde-format
 msgid "Open File"
 msgstr "ფაილის გახსნა"
 
-#: src/mainwindow.cpp:1373
+#: src/mainwindow.cpp:1374
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6381,32 +6381,32 @@ msgstr ""
 "წარმადობის გასაუმჯობესებლად?</p><p>თქვენი არჩევანი ყოველთვის შეგიძლიათ, "
 "მორგების ფანჯარაში შეცვალოთ.</p></qt>"
 
-#: src/mainwindow.cpp:1378
+#: src/mainwindow.cpp:1379
 #, kde-format
 msgid "Save Images Separately"
 msgstr "გამოსახულებების ცალ-ცალკე შენახვა"
 
-#: src/mainwindow.cpp:1379
+#: src/mainwindow.cpp:1380
 #, kde-format
 msgid "Save Images in File"
 msgstr "გამოსახულებების ფალში შენახვა"
 
-#: src/mainwindow.cpp:1414
+#: src/mainwindow.cpp:1415
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "ფაილის ახალი სახელით შენახვა..."
 
-#: src/mainwindow.cpp:1423
+#: src/mainwindow.cpp:1424
 #, kde-format
 msgid "Save As"
 msgstr "შენახვა, როგორც"
 
-#: src/mainwindow.cpp:1489
+#: src/mainwindow.cpp:1490
 #, kde-format
 msgid "Printing..."
 msgstr "დაბეჭდვა..."
 
-#: src/mainwindow.cpp:1493
+#: src/mainwindow.cpp:1494
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6415,27 +6415,27 @@ msgstr ""
 "კოლექცია ამჯამად იფილტრება, რომ ჩანაწერების შეზღუდული რაოდენობა აჩვენოს. "
 "დაბეჭდილი იქნება, მხოლოდ, ხილული ჩანაწერები. გავაგრძელო?"
 
-#: src/mainwindow.cpp:1518
+#: src/mainwindow.cpp:1519
 #, kde-format
 msgid "Exiting..."
 msgstr "გასვლა..."
 
-#: src/mainwindow.cpp:1620
+#: src/mainwindow.cpp:1621
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 გაფილტრულია; %2 მონიშნულია)"
 
-#: src/mainwindow.cpp:1623
+#: src/mainwindow.cpp:1624
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 გაფილტრულია)"
 
-#: src/mainwindow.cpp:1626
+#: src/mainwindow.cpp:1627
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 მონიშნულია)"
 
-#: src/mainwindow.cpp:1765 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1769 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:252
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6443,57 +6443,57 @@ msgstr "(%1 მონიშნულია)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico-მა აღმოაჩინა შეცდომა XSLT-ის დამუშავებისას."
 
-#: src/mainwindow.cpp:1883
+#: src/mainwindow.cpp:1887
 #, kde-format
 msgid "Importing data..."
 msgstr "მონაცემების შემოტანა..."
 
-#: src/mainwindow.cpp:1894
+#: src/mainwindow.cpp:1898
 #, kde-format
 msgid "Import File"
 msgstr "ფაილის შემოტანა"
 
-#: src/mainwindow.cpp:1907
+#: src/mainwindow.cpp:1911
 #, kde-format
 msgid "Import Directory"
 msgstr "საქაღალდის შემოტანა"
 
-#: src/mainwindow.cpp:1931
+#: src/mainwindow.cpp:1935
 #, kde-format
 msgid "Exporting data..."
 msgstr "მონაცემების გატანა..."
 
-#: src/mainwindow.cpp:1954
+#: src/mainwindow.cpp:1958
 #, kde-format
 msgid "Export As"
 msgstr "გატანა, როგორც"
 
-#: src/mainwindow.cpp:1982
+#: src/mainwindow.cpp:1986
 #, kde-format
 msgid "String Macros"
 msgstr "სტრიქონის მაკროები"
 
-#: src/mainwindow.cpp:1983
+#: src/mainwindow.cpp:1987
 #, kde-format
 msgid "Macro"
 msgstr "მაკრო"
 
-#: src/mainwindow.cpp:1983
+#: src/mainwindow.cpp:1987
 #, kde-format
 msgid "String"
 msgstr "სტრიქონი"
 
-#: src/mainwindow.cpp:2069
+#: src/mainwindow.cpp:2073
 #, kde-format
 msgid "Creating citations..."
 msgstr "ციტატების შექმნა..."
 
-#: src/mainwindow.cpp:2179
+#: src/mainwindow.cpp:2183
 #, kde-format
 msgid "Filters"
 msgstr "ფილტრები"
 
-#: src/mainwindow.cpp:2180
+#: src/mainwindow.cpp:2184
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6502,12 +6502,12 @@ msgstr ""
 "<qt><i>ფილტრის ხედი</i> გაჩვენებთ ჩანაწერებს, რომლებიც მითითებული ფილტრის "
 "წესებს აკმაყოფილებს.</qt>"
 
-#: src/mainwindow.cpp:2203
+#: src/mainwindow.cpp:2207
 #, kde-format
 msgid "Loans"
 msgstr "სესხები"
 
-#: src/mainwindow.cpp:2204
+#: src/mainwindow.cpp:2208
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6516,7 +6516,7 @@ msgstr ""
 "<qt><i>თხოვების ხედი</i> გაჩვენებთ სიას ხალხისას, რომლებმაც თქვენი "
 "კოლექციიდან საგნები ითხოვეს.</qt>"
 
-#: src/mainwindow.cpp:2292
+#: src/mainwindow.cpp:2296
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6526,12 +6526,12 @@ msgstr ""
 "ფაილი უნდა შეინახოთ და გამოსახულების ფაილები გადატანილი იქნება ახალ "
 "მდებარეობაზე."
 
-#: src/mainwindow.cpp:2336
+#: src/mainwindow.cpp:2340
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "ჩანაწერის მონაცემების განახლება %1-დან"
 
-#: src/mainwindow.cpp:2355
+#: src/mainwindow.cpp:2359
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6540,7 +6540,7 @@ msgstr ""
 "Tellico-ს ამ ტიპის ფაილის შემოტანა ერთდროულად, მხოლოდ, ერთის შეუძლია. "
 "შემოტანილი იქნება, მხოლოდ, %1."
 
-#: src/mainwindow.cpp:2534
+#: src/mainwindow.cpp:2538
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6908,7 +6908,7 @@ msgstr "მხოლოდ საკუთარი ჩანაწერებ�
 msgid "User ID:"
 msgstr "მომხმარებლის ID:"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:213
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:214
 #, kde-format
 msgid "CSV Options"
 msgstr "CSV -ის მორგება"
@@ -6929,7 +6929,7 @@ msgstr ""
 msgid "Delimiter"
 msgstr "გამყოფი"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:241
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:242
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6943,7 +6943,7 @@ msgstr ""
 msgid "Comma"
 msgstr "მძიმე"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:248
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:249
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "გამყოფად მძიმის გამოყენება."
@@ -6953,7 +6953,7 @@ msgstr "გამყოფად მძიმის გამოყენებ�
 msgid "Semicolon"
 msgstr "წერტილმძიმე"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:253
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "გამყოფად წერტილმძიმის გამოყენება."
@@ -6963,7 +6963,7 @@ msgstr "გამყოფად წერტილმძიმის გამ�
 msgid "Tab"
 msgstr "ჩანართი"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:258
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:259
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "გამყოფად ტაბულაციის გამოყენება."
@@ -6974,88 +6974,88 @@ msgstr "გამყოფად ტაბულაციის გამოყ�
 msgid "Other"
 msgstr "სხვები"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:263
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:264
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "გამყოფად სტრიქონის ხელით მითითება."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:270
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:271
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 "გამყოფად შეგიძლიათ გამოიყენოთ ისეთი მორგებული სტრიქონი, როგორიცაა ორიწერტილი."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:289
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:290
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "ცხრილის სვეტის გამყოფი:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:288
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:289
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
 "სვეტის გამყოფი ყოფს მნიშვნელობებს <i>ცხრილის</i> ველის თითოეულ მწკრივში."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:300
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:301
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "ცხრილის მწკრივის გამყოფი:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:299
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:300
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
 "მწკრივის გამყოფი ყოფს მნიშვნელობებს <i>ცხრილის</i> ველის თითოეულ მწკრივში."
 
-#: src/translators/csvimporter.cpp:223
+#: src/translators/csvimporter.cpp:224
 #: src/translators/filelistingimporter.cpp:176
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "აირჩიეთ შემოსატანი კოლექციის ტიპი."
 
-#: src/translators/csvimporter.cpp:227
+#: src/translators/csvimporter.cpp:228
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "&პირველი მწკრივი ველის სახელებს შეიცავს"
 
-#: src/translators/csvimporter.cpp:228
+#: src/translators/csvimporter.cpp:229
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr ""
 "თუ ჩართულია, პირველი მწკრივი ველების სახელებისთვის იქნება გამოყენებული."
 
-#: src/translators/csvimporter.cpp:240
+#: src/translators/csvimporter.cpp:241
 #, kde-format
 msgid "Delimiter:"
 msgstr "გამყოფი:"
 
-#: src/translators/csvimporter.cpp:246
+#: src/translators/csvimporter.cpp:247
 #, kde-format
 msgid "&Comma"
 msgstr "&მძიმე"
 
-#: src/translators/csvimporter.cpp:252
+#: src/translators/csvimporter.cpp:253
 #, kde-format
 msgid "&Semicolon"
 msgstr "&წერტილმძიმე"
 
-#: src/translators/csvimporter.cpp:257
+#: src/translators/csvimporter.cpp:258
 #, kde-format
 msgid "Ta&b"
 msgstr "&ტაბულაცია"
 
-#: src/translators/csvimporter.cpp:262
+#: src/translators/csvimporter.cpp:263
 #, kde-format
 msgid "Ot&her:"
 msgstr "&სხვა:"
 
-#: src/translators/csvimporter.cpp:319
+#: src/translators/csvimporter.cpp:320
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "ეს ცხრილი CSV ფაილის პირველ ხუთ ხაზს გაჩვენებთ."
 
-#: src/translators/csvimporter.cpp:326
+#: src/translators/csvimporter.cpp:327
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -7065,22 +7065,22 @@ msgstr ""
 "<qt>დააყენეთ თითოეული სვეტი, რომ შეესაბამებოდეს ველს კოლექციაში: აირჩიეთ "
 "ველი, აირჩიეთ სვეტი და დააწკაპუნეთ <i>ველის მინიჭების</i> ღილაკზე.</qt>"
 
-#: src/translators/csvimporter.cpp:328
+#: src/translators/csvimporter.cpp:329
 #, kde-format
 msgid "Co&lumn:"
 msgstr "&სვეტი:"
 
-#: src/translators/csvimporter.cpp:341
+#: src/translators/csvimporter.cpp:342
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "&მონაცემების ველი ამ სვეტში:"
 
-#: src/translators/csvimporter.cpp:355
+#: src/translators/csvimporter.cpp:356
 #, kde-format
 msgid "&Assign Field"
 msgstr "&ველის მინიჭება"
 
-#: src/translators/csvimporter.cpp:394
+#: src/translators/csvimporter.cpp:395
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
@@ -7089,12 +7089,12 @@ msgstr ""
 "ველს სულ ცოტა ერთი სვეტი უნდა მიანიჭოთ. შემოტანილი იქნება, მხოლოდ, "
 "მინიჭებული სვეტები."
 
-#: src/translators/csvimporter.cpp:591
+#: src/translators/csvimporter.cpp:592
 #, kde-format
 msgid "Review"
 msgstr "Მიმოხილვა"
 
-#: src/translators/csvimporter.cpp:684
+#: src/translators/csvimporter.cpp:685
 #, kde-format
 msgid "<New Field>"
 msgstr "<ახალი ველი>"
@@ -7210,32 +7210,32 @@ msgstr "<qt>ფაილი სწორი GCstar-ის მონაცემ�
 msgid "Goodreads Options"
 msgstr "Goodreads-ის მორგება"
 
-#: src/translators/htmlexporter.cpp:342
+#: src/translators/htmlexporter.cpp:346
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(დაჯგუფებულია %1-ით)"
 
-#: src/translators/htmlexporter.cpp:505
+#: src/translators/htmlexporter.cpp:510
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML"
 
-#: src/translators/htmlexporter.cpp:508
+#: src/translators/htmlexporter.cpp:513
 #, kde-format
 msgid "Print field headers"
 msgstr "ველის თავსართების დაბეჭდვა"
 
-#: src/translators/htmlexporter.cpp:513
+#: src/translators/htmlexporter.cpp:518
 #, kde-format
 msgid "Group the entries"
 msgstr "ჩანაწერების დაჯგუფება"
 
-#: src/translators/htmlexporter.cpp:518
+#: src/translators/htmlexporter.cpp:523
 #, kde-format
 msgid "Export individual entry files"
 msgstr "ჩანაწერის ფაილების ცალ-ცალკე გატანა"
 
-#: src/translators/htmlexporter.cpp:519
+#: src/translators/htmlexporter.cpp:524
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "თუ ჩართულია, თითოეული ჩანაწერისთვის ცალკე ფაილები შეიქმნება."

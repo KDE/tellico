@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-13 00:42+0000\n"
+"POT-Creation-Date: 2025-04-15 00:41+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -162,7 +162,7 @@ msgstr "Атауы"
 msgid "Collection Size"
 msgstr "Жинақтың өрістері"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1613
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1614
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Жалпы жазулары: %1"
@@ -200,13 +200,13 @@ msgid "Group Summary Report"
 msgstr "Топ тұжырымдамасы"
 
 #: src/charts/yeardistributionreport.cpp:68
-#: src/charts/yeardistributionreport.cpp:132
+#: src/charts/yeardistributionreport.cpp:134
 #, fuzzy, kde-format
 #| msgid "Distributor"
 msgid "Year Distribution"
 msgstr "Үлестіргіш"
 
-#: src/charts/yeardistributionreport.cpp:157
+#: src/charts/yeardistributionreport.cpp:159
 #, fuzzy, kde-format
 #| msgid "Country"
 msgctxt "Distinct number of items"
@@ -223,7 +223,7 @@ msgstr "<qt>Tellico <b>%1</b> сервер арнасына жаза алмад�
 msgid "My Collection"
 msgstr "Жинағым"
 
-#: src/collection.cpp:887 src/core/tellico_strings.cpp:48 src/document.cpp:530
+#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:530
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
@@ -654,17 +654,17 @@ msgstr "Қасиеті"
 msgid "Value"
 msgstr "Мәні"
 
-#: src/collectionfieldsdialog.cpp:921
+#: src/collectionfieldsdialog.cpp:922
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "Бұндай айдарымен өрісі бар екен. Басқасын келтіріңіз."
 
-#: src/collectionfieldsdialog.cpp:928
+#: src/collectionfieldsdialog.cpp:929
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>Санаты келтірілмеген. Санатын келтіріңіз.</qt>"
 
-#: src/collectionfieldsdialog.cpp:936
+#: src/collectionfieldsdialog.cpp:937
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -674,7 +674,7 @@ msgstr ""
 "<qt>Өрістің санаты <em>Мақала</em>, <em>Кесте</em>, <em>Кескін</em> бола "
 "алмайды. Басқасын келтіріңіз.</qt>"
 
-#: src/collectionfieldsdialog.cpp:944
+#: src/collectionfieldsdialog.cpp:945
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
@@ -683,7 +683,7 @@ msgstr ""
 "Өрістің айдары бар санаттың атауымен бірдей бола алмайды. Басқа айдарды "
 "келтіріңіз."
 
-#: src/collectionfieldsdialog.cpp:956
+#: src/collectionfieldsdialog.cpp:957
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -693,12 +693,12 @@ msgstr ""
 "Құндылық өрісінің ауқымы 1 мен 10 арасында болып, төменгі шегі жоғарғысынан "
 "кем болу тіис. Басқа шектерін келтіріңіз."
 
-#: src/collectionfieldsdialog.cpp:971
+#: src/collectionfieldsdialog.cpp:972
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "Кестесі он бағанымен шектелу керек."
 
-#: src/collectionfieldsdialog.cpp:977
+#: src/collectionfieldsdialog.cpp:978
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr "Туынды мәнді өрісінде мәннің үлгісі болу тиіс."
@@ -740,7 +740,7 @@ msgstr "Bibtex кілті"
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:244
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
-#: src/fetch/metronfetcher.cpp:245 src/fetch/mobygamesfetcher.cpp:456
+#: src/fetch/metronfetcher.cpp:246 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:359
 #: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:277
@@ -2519,7 +2519,7 @@ msgstr "Атау мен айдарларын пі&шімдеп"
 msgid "&Print field headers"
 msgstr "Өріс айдарлары &басылсын"
 
-#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:509
+#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:514
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
@@ -2535,7 +2535,7 @@ msgstr "Топтастыру амалдары"
 msgid "&Group the entries"
 msgstr "Жазулар &топтастырылсын"
 
-#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:514
+#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:519
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Белгісі қойылса, жазулары таңдалған өрісі бойынша топтастырылады."
@@ -2580,7 +2580,7 @@ msgstr "Үлгінің параметрлері"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
 #: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:218
+#: src/translators/csvimporter.cpp:219
 #: src/translators/filelistingimporter.cpp:177
 #, kde-format
 msgid "Collection &type:"
@@ -2778,8 +2778,8 @@ msgstr "Файлдар"
 msgid "Template Packages"
 msgstr "Үлгілер"
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1247
-#: src/mainwindow.cpp:1418 src/reportdialog.cpp:422 src/reportdialog.cpp:437
+#: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1248
+#: src/mainwindow.cpp:1419 src/reportdialog.cpp:422 src/reportdialog.cpp:437
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -3044,7 +3044,7 @@ msgstr "Бүкіл бағандарды көрсету"
 msgid "Hide All Columns"
 msgstr "Бүкіл бағандарды жасыру"
 
-#: src/document.cpp:212 src/mainwindow.cpp:1362
+#: src/document.cpp:212 src/mainwindow.cpp:1363
 #, kde-format
 msgid "Saving file..."
 msgstr "Файлды сақтау..."
@@ -3105,7 +3105,7 @@ msgstr ""
 msgid "Save Entry"
 msgstr "Жазуды сақтау"
 
-#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1151
+#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1152
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Сақталмаған өзгерістер"
@@ -3185,7 +3185,7 @@ msgstr "<b>%1</b> жаңартуы..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico әдетті жазу стиль кестесін таба алмады."
 
-#: src/entryview.cpp:291 src/mainwindow.cpp:1766
+#: src/entryview.cpp:291 src/mainwindow.cpp:1770
 #, kde-format
 msgid "Please check your installation."
 msgstr "Орнатылғанын тексеріңіз."
@@ -3511,7 +3511,7 @@ msgstr "%1 нәтижесі: %2/%3"
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:368
 #: src/fetch/kinofetcher.cpp:365 src/fetch/kinopoiskfetcher.cpp:267
-#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:332
+#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:333
 #: src/fetch/mobygamesfetcher.cpp:344 src/fetch/moviemeterfetcher.cpp:166
 #: src/fetch/numistafetcher.cpp:286 src/fetch/numistafetcher.cpp:294
 #: src/fetch/omdbfetcher.cpp:181 src/fetch/thegamesdbfetcher.cpp:171
@@ -3635,7 +3635,7 @@ msgstr ""
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:403
-#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
+#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:439
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:394
 #: src/fetch/openlibraryfetcher.cpp:464 src/fetch/springerfetcher.cpp:187
 #: src/fetch/tvmazefetcher.cpp:373 src/fetch/upcitemdbfetcher.cpp:479
@@ -3656,7 +3656,7 @@ msgstr "Түсі"
 msgid "Bedetheque Link"
 msgstr "Bedetheque.com"
 
-#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:431
+#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:432
 #: src/field.cpp:312
 #, kde-format
 msgid "ISBN#"
@@ -4193,24 +4193,24 @@ msgstr "Discogs сілтемесі"
 msgid "Kino-Teatr Link"
 msgstr "Filmaster сілтемесі"
 
-#: src/fetch/metronfetcher.cpp:184
+#: src/fetch/metronfetcher.cpp:185
 #, kde-format
 msgid "The rate limit has been exceeded."
 msgstr ""
 
-#: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
+#: src/fetch/metronfetcher.cpp:245 src/fetch/metronfetcher.cpp:431
 #, fuzzy, kde-format
 #| msgid "MovieMeter Link"
 msgid "Metron Link"
 msgstr "MovieMeter сілтемесі"
 
-#: src/fetch/metronfetcher.cpp:396
+#: src/fetch/metronfetcher.cpp:397
 #, fuzzy, kde-format
 #| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
 msgstr "%1 дегенге пайдаланушы мен паролі керек."
 
-#: src/fetch/metronfetcher.cpp:401
+#: src/fetch/metronfetcher.cpp:402
 #, kde-format
 msgid "Registration is required to use this data source."
 msgstr ""
@@ -4948,8 +4948,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Топ"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1079 src/mainwindow.cpp:1701
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1079 src/mainwindow.cpp:1702
+#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:341
 #, kde-format
 msgid "People"
 msgstr "Адамдар"
@@ -4995,86 +4995,86 @@ msgstr "%1:"
 msgid "Any Field"
 msgstr "Кез келген өрісі"
 
-#: src/gui/filterrulewidget.cpp:234 src/gui/filterrulewidget.cpp:242
-#: src/gui/filterrulewidget.cpp:256 src/gui/filterrulewidget.cpp:262
+#: src/gui/filterrulewidget.cpp:235 src/gui/filterrulewidget.cpp:243
+#: src/gui/filterrulewidget.cpp:257 src/gui/filterrulewidget.cpp:263
 #, kde-format
 msgid "equals"
 msgstr "келесіге тең:"
 
-#: src/gui/filterrulewidget.cpp:235 src/gui/filterrulewidget.cpp:243
-#: src/gui/filterrulewidget.cpp:257 src/gui/filterrulewidget.cpp:263
+#: src/gui/filterrulewidget.cpp:236 src/gui/filterrulewidget.cpp:244
+#: src/gui/filterrulewidget.cpp:258 src/gui/filterrulewidget.cpp:264
 #, kde-format
 msgid "does not equal"
 msgstr "дәл келесі емес:"
 
-#: src/gui/filterrulewidget.cpp:236 src/gui/filterrulewidget.cpp:244
-#: src/gui/filterrulewidget.cpp:264
+#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
+#: src/gui/filterrulewidget.cpp:265
 #, fuzzy, kde-format
 #| msgid "matches regexp"
 msgid "matches regular expression"
 msgstr "мына үлгі өрнекке сәйкесті:"
 
-#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
-#: src/gui/filterrulewidget.cpp:265
+#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
+#: src/gui/filterrulewidget.cpp:266
 #, fuzzy, kde-format
 #| msgid "does not match regexp"
 msgid "does not match regular expression"
 msgstr "мына үлгі өрнекке сәйкестісі емес:"
 
-#: src/gui/filterrulewidget.cpp:238
+#: src/gui/filterrulewidget.cpp:239
 #, kde-format
 msgctxt "is before a date"
 msgid "is before"
 msgstr "мынаның алдында:"
 
-#: src/gui/filterrulewidget.cpp:239
+#: src/gui/filterrulewidget.cpp:240
 #, kde-format
 msgctxt "is after a date"
 msgid "is after"
 msgstr "мынадан кейін:"
 
-#: src/gui/filterrulewidget.cpp:246
+#: src/gui/filterrulewidget.cpp:247
 #, kde-format
 msgctxt "is less than a number"
 msgid "is less than"
 msgstr ""
 
-#: src/gui/filterrulewidget.cpp:247
+#: src/gui/filterrulewidget.cpp:248
 #, kde-format
 msgctxt "is greater than a number"
 msgid "is greater than"
 msgstr ""
 
-#: src/gui/filterrulewidget.cpp:250
+#: src/gui/filterrulewidget.cpp:251
 #, fuzzy, kde-format
 #| msgid "&Image size: "
 msgid "image size equals"
 msgstr "&Кескіннің өлшемі: "
 
-#: src/gui/filterrulewidget.cpp:251
+#: src/gui/filterrulewidget.cpp:252
 #, fuzzy, kde-format
 #| msgid "does not equal"
 msgid "image size does not equal"
 msgstr "дәл келесі емес:"
 
-#: src/gui/filterrulewidget.cpp:252
+#: src/gui/filterrulewidget.cpp:253
 #, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
 msgstr ""
 
-#: src/gui/filterrulewidget.cpp:253
+#: src/gui/filterrulewidget.cpp:254
 #, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
 msgstr ""
 
-#: src/gui/filterrulewidget.cpp:260
+#: src/gui/filterrulewidget.cpp:261
 #, kde-format
 msgid "contains"
 msgstr "мынадан тұрады:"
 
-#: src/gui/filterrulewidget.cpp:261
+#: src/gui/filterrulewidget.cpp:262
 #, kde-format
 msgid "does not contain"
 msgstr "мынандайы жоғы:"
@@ -5259,7 +5259,7 @@ msgstr ""
 msgid "&Import"
 msgstr "&Импорт"
 
-#: src/importdialog.cpp:372 src/mainwindow.cpp:1243 src/mainwindow.cpp:1416
+#: src/importdialog.cpp:372 src/mainwindow.cpp:1244 src/mainwindow.cpp:1417
 #: src/translators/tellicozipexporter.cpp:54
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
@@ -5267,7 +5267,7 @@ msgid "Tellico Files"
 msgstr "Tellico Zip файлы"
 
 #: src/importdialog.cpp:373 src/importdialog.cpp:391 src/importdialog.cpp:420
-#: src/mainwindow.cpp:1245 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:71
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "XML Files"
@@ -6452,7 +6452,7 @@ msgid ""
 "this welcome screen</a>."
 msgstr ""
 
-#: src/mainwindow.cpp:1149
+#: src/mainwindow.cpp:1150
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6461,23 +6461,23 @@ msgstr ""
 "Назардағы файл өзгертілген.\n"
 "Сақтайсыз ба?"
 
-#: src/mainwindow.cpp:1185 src/mainwindow.cpp:1219
+#: src/mainwindow.cpp:1186 src/mainwindow.cpp:1220
 #, fuzzy, kde-format
 #| msgid "Create a new collection"
 msgid "Creating new collection..."
 msgstr "Жаңа жинағын құру"
 
-#: src/mainwindow.cpp:1240 src/mainwindow.cpp:1263 src/mainwindow.cpp:1281
+#: src/mainwindow.cpp:1241 src/mainwindow.cpp:1264 src/mainwindow.cpp:1282
 #, kde-format
 msgid "Opening file..."
 msgstr "Файлды ашу..."
 
-#: src/mainwindow.cpp:1251
+#: src/mainwindow.cpp:1252
 #, kde-format
 msgid "Open File"
 msgstr "Файлды ашу"
 
-#: src/mainwindow.cpp:1373
+#: src/mainwindow.cpp:1374
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6490,32 +6490,32 @@ msgstr ""
 "деректер қапшығындағы бөлек файлға сақтауды қалайсыз ба?</p><p>Бұл "
 "ұйғарымыңызды әрқашан баптау диалогы арқылы өзгерте аласыз.</p></qt>"
 
-#: src/mainwindow.cpp:1378
+#: src/mainwindow.cpp:1379
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Кескіндері бөлек сақталсын"
 
-#: src/mainwindow.cpp:1379
+#: src/mainwindow.cpp:1380
 #, kde-format
 msgid "Save Images in File"
 msgstr "Кескіндер файлда сақталсын"
 
-#: src/mainwindow.cpp:1414
+#: src/mainwindow.cpp:1415
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Файлды жаңа атауымен сақтау..."
 
-#: src/mainwindow.cpp:1423
+#: src/mainwindow.cpp:1424
 #, kde-format
 msgid "Save As"
 msgstr "Былай сақтау"
 
-#: src/mainwindow.cpp:1489
+#: src/mainwindow.cpp:1490
 #, kde-format
 msgid "Printing..."
 msgstr "Басып шығару..."
 
-#: src/mainwindow.cpp:1493
+#: src/mainwindow.cpp:1494
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6524,27 +6524,27 @@ msgstr ""
 "Жинағыңыз қазір сүзгіліген, бір бөлігі көрсетілген түрде. Осы түрінде басыла "
 "берсін бе?"
 
-#: src/mainwindow.cpp:1518
+#: src/mainwindow.cpp:1519
 #, kde-format
 msgid "Exiting..."
 msgstr "Шығу..."
 
-#: src/mainwindow.cpp:1620
+#: src/mainwindow.cpp:1621
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 сүзгіленген; %2 таңдалған)"
 
-#: src/mainwindow.cpp:1623
+#: src/mainwindow.cpp:1624
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 сүзгіленген)"
 
-#: src/mainwindow.cpp:1626
+#: src/mainwindow.cpp:1627
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 таңдалған)"
 
-#: src/mainwindow.cpp:1765 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1769 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:252
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6552,57 +6552,57 @@ msgstr "(%1 таңдалған)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico XSLT өңдегенде бір қатеге тап болды."
 
-#: src/mainwindow.cpp:1883
+#: src/mainwindow.cpp:1887
 #, kde-format
 msgid "Importing data..."
 msgstr "Деректі импорттау..."
 
-#: src/mainwindow.cpp:1894
+#: src/mainwindow.cpp:1898
 #, kde-format
 msgid "Import File"
 msgstr "Файлды импорттау"
 
-#: src/mainwindow.cpp:1907
+#: src/mainwindow.cpp:1911
 #, kde-format
 msgid "Import Directory"
 msgstr "Қапшықты импорттау"
 
-#: src/mainwindow.cpp:1931
+#: src/mainwindow.cpp:1935
 #, kde-format
 msgid "Exporting data..."
 msgstr "Дерегін экспорттау..."
 
-#: src/mainwindow.cpp:1954
+#: src/mainwindow.cpp:1958
 #, kde-format
 msgid "Export As"
 msgstr "Былай экспорттау"
 
-#: src/mainwindow.cpp:1982
+#: src/mainwindow.cpp:1986
 #, kde-format
 msgid "String Macros"
 msgstr "Мәтін-жол макростары"
 
-#: src/mainwindow.cpp:1983
+#: src/mainwindow.cpp:1987
 #, kde-format
 msgid "Macro"
 msgstr "Макрос"
 
-#: src/mainwindow.cpp:1983
+#: src/mainwindow.cpp:1987
 #, kde-format
 msgid "String"
 msgstr "Мәтін жолы"
 
-#: src/mainwindow.cpp:2069
+#: src/mainwindow.cpp:2073
 #, kde-format
 msgid "Creating citations..."
 msgstr "Дәйексөзді құру..."
 
-#: src/mainwindow.cpp:2179
+#: src/mainwindow.cpp:2183
 #, kde-format
 msgid "Filters"
 msgstr "Сүзгілер"
 
-#: src/mainwindow.cpp:2180
+#: src/mainwindow.cpp:2184
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6611,12 +6611,12 @@ msgstr ""
 "<qt>The <i>Сұзгіленген көрініс</i> сүзгі шартына келетін жазуларын көрсетеді."
 "</qt>"
 
-#: src/mainwindow.cpp:2203
+#: src/mainwindow.cpp:2207
 #, kde-format
 msgid "Loans"
 msgstr "Борыштар"
 
-#: src/mainwindow.cpp:2204
+#: src/mainwindow.cpp:2208
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6625,7 +6625,7 @@ msgstr ""
 "<qt>The <i>Борышкерлер көрінісі</i> - жинақ нәрселерін алған борышкерлер "
 "тізімі.</qt>"
 
-#: src/mainwindow.cpp:2292
+#: src/mainwindow.cpp:2296
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6634,12 +6634,12 @@ msgstr ""
 "Кейбір кескіндер керек орнына сақталған жоқ. Бұл файл, кескіндер жаңа орынға "
 "көшіріліп, сақталу тиіс."
 
-#: src/mainwindow.cpp:2336
+#: src/mainwindow.cpp:2340
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Жазуды %1 дерек көзінен жаңарту"
 
-#: src/mainwindow.cpp:2355
+#: src/mainwindow.cpp:2359
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6648,7 +6648,7 @@ msgstr ""
 "Tellico бір мезгілде бір файлды импорттай алады. Қазір тек %1 ғана "
 "импортталады."
 
-#: src/mainwindow.cpp:2534
+#: src/mainwindow.cpp:2538
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"
@@ -7028,7 +7028,7 @@ msgstr "Тек таңдалғандары ғана экспортталсын"
 msgid "User ID:"
 msgstr "Пайдаланушы ID-і"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:213
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:214
 #, kde-format
 msgid "CSV Options"
 msgstr "CSV параметрлері"
@@ -7048,7 +7048,7 @@ msgstr "Белгісі қойылса, өріс атаулары бағдар а
 msgid "Delimiter"
 msgstr "Бөлгіші"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:241
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:242
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -7061,7 +7061,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Үтір"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:248
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:249
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "Үтірді бөлгіш қылу."
@@ -7071,7 +7071,7 @@ msgstr "Үтірді бөлгіш қылу."
 msgid "Semicolon"
 msgstr "Үтірлі нүкте"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:253
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "Үтірлі нүктені бөлгіш қылу."
@@ -7081,7 +7081,7 @@ msgstr "Үтірлі нүктені бөлгіш қылу."
 msgid "Tab"
 msgstr "Кестелегіш"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:258
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:259
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "Кестелегішті бөлгіш қылу."
@@ -7092,84 +7092,84 @@ msgstr "Кестелегішті бөлгіш қылу."
 msgid "Other"
 msgstr "Басқа"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:263
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:264
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "Өзге бір мәтін жолын бөлгіш қылу."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:270
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:271
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "Өзге бір мәтін жолы, мәселен, қос нүкте, бөлгіш бола алады."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:289
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:290
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "Кесте бағанның бөлгіші:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:288
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:289
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr "<i>Кесте</i> өрісінде кесте бағандағы мәндердің бөлгіші."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:300
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:301
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "Кесте жолының бөлгіші:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:299
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:300
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "<i>Кесте</i> өрісінде кесте жолдағы мәндердің бөлгіші."
 
-#: src/translators/csvimporter.cpp:223
+#: src/translators/csvimporter.cpp:224
 #: src/translators/filelistingimporter.cpp:176
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Импорттайтын жинақ түрін таңдау."
 
-#: src/translators/csvimporter.cpp:227
+#: src/translators/csvimporter.cpp:228
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "&Бірінші жолда - өріс атаулары"
 
-#: src/translators/csvimporter.cpp:228
+#: src/translators/csvimporter.cpp:229
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr "Белгісі қойылса, бірінші жоллында өріс атаулары деп есептеледі."
 
-#: src/translators/csvimporter.cpp:240
+#: src/translators/csvimporter.cpp:241
 #, kde-format
 msgid "Delimiter:"
 msgstr "Бөлгіші:"
 
-#: src/translators/csvimporter.cpp:246
+#: src/translators/csvimporter.cpp:247
 #, kde-format
 msgid "&Comma"
 msgstr "&Үтір"
 
-#: src/translators/csvimporter.cpp:252
+#: src/translators/csvimporter.cpp:253
 #, kde-format
 msgid "&Semicolon"
 msgstr "Ү&тірлі нүкте"
 
-#: src/translators/csvimporter.cpp:257
+#: src/translators/csvimporter.cpp:258
 #, kde-format
 msgid "Ta&b"
 msgstr "&Кестелегіш"
 
-#: src/translators/csvimporter.cpp:262
+#: src/translators/csvimporter.cpp:263
 #, kde-format
 msgid "Ot&her:"
 msgstr "Б&асқа:"
 
-#: src/translators/csvimporter.cpp:319
+#: src/translators/csvimporter.cpp:320
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "Кестеде CSV файлдың бес алғашқы жолы көрсетіледі."
 
-#: src/translators/csvimporter.cpp:326
+#: src/translators/csvimporter.cpp:327
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -7179,34 +7179,34 @@ msgstr ""
 "<qt>Бағанды таңдап алып, <i>Өрісті арнау</i> деген батырмасын басып әр "
 "бағанға өзінің өрісін арнауға болады.</qt>"
 
-#: src/translators/csvimporter.cpp:328
+#: src/translators/csvimporter.cpp:329
 #, kde-format
 msgid "Co&lumn:"
 msgstr "Ба&ғаны:"
 
-#: src/translators/csvimporter.cpp:341
+#: src/translators/csvimporter.cpp:342
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "Бағандағы &деректер өрісі:"
 
-#: src/translators/csvimporter.cpp:355
+#: src/translators/csvimporter.cpp:356
 #, kde-format
 msgid "&Assign Field"
 msgstr "&Өрісті арнау"
 
-#: src/translators/csvimporter.cpp:394
+#: src/translators/csvimporter.cpp:395
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
 "be imported."
 msgstr "Кемінде бір бағанды өріске арнау керек. Тек арнаған баған импорталады."
 
-#: src/translators/csvimporter.cpp:591
+#: src/translators/csvimporter.cpp:592
 #, kde-format
 msgid "Review"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:684
+#: src/translators/csvimporter.cpp:685
 #, fuzzy, kde-format
 #| msgid "New Field"
 msgid "<New Field>"
@@ -7324,32 +7324,32 @@ msgstr "<qt>Файл жарамды GCstar деректер файлы емес.
 msgid "Goodreads Options"
 msgstr "Goodreads параметрлері"
 
-#: src/translators/htmlexporter.cpp:342
+#: src/translators/htmlexporter.cpp:346
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1 бойынша топталған)"
 
-#: src/translators/htmlexporter.cpp:505
+#: src/translators/htmlexporter.cpp:510
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML параметрлері"
 
-#: src/translators/htmlexporter.cpp:508
+#: src/translators/htmlexporter.cpp:513
 #, kde-format
 msgid "Print field headers"
 msgstr "Өріс айдарлары болсын"
 
-#: src/translators/htmlexporter.cpp:513
+#: src/translators/htmlexporter.cpp:518
 #, kde-format
 msgid "Group the entries"
 msgstr "Жазулар топтастырылсын"
 
-#: src/translators/htmlexporter.cpp:518
+#: src/translators/htmlexporter.cpp:523
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Бөлек жазу файлдар экспортталсын"
 
-#: src/translators/htmlexporter.cpp:519
+#: src/translators/htmlexporter.cpp:524
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Белгісі қойылса, жазу файлдар бөлек-бөлек экспортталады."
