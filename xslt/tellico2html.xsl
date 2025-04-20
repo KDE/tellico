@@ -385,24 +385,26 @@
      </xsl:for-each>
 
      <!-- don't forget entries in no group -->
-     <xsl:for-each select="dyn:evaluate(concat('tc:entry[not(',$group-fields,')]'))">
-      <xsl:sort lang="$lang" select="dyn:evaluate($sort1)"/>
-      <xsl:sort lang="$lang" select="dyn:evaluate($sort2)"/>
-      <xsl:sort lang="$lang" select="dyn:evaluate($sort3)"/>
-      <xsl:if test="position()=1">
-       <tr>
-        <td class="groupName">
-         <xsl:attribute name="colspan">
-          <xsl:value-of select="count($columns)"/>
-         </xsl:attribute>
-         <xsl:value-of select="$empty-group"/>
-        </td>
+     <xsl:if test="$group-fields">
+      <xsl:for-each select="dyn:evaluate(concat('tc:entry[not(',$group-fields,')]'))">
+       <xsl:sort lang="$lang" select="dyn:evaluate($sort1)"/>
+       <xsl:sort lang="$lang" select="dyn:evaluate($sort2)"/>
+       <xsl:sort lang="$lang" select="dyn:evaluate($sort3)"/>
+       <xsl:if test="position()=1">
+        <tr>
+         <td class="groupName">
+          <xsl:attribute name="colspan">
+           <xsl:value-of select="count($columns)"/>
+          </xsl:attribute>
+          <xsl:value-of select="$empty-group"/>
+         </td>
+        </tr>
+       </xsl:if>
+       <tr class="groupEntry{position() mod 2}">
+        <xsl:apply-templates select="."/>
        </tr>
-      </xsl:if>
-      <tr class="groupEntry{position() mod 2}">
-       <xsl:apply-templates select="."/>
-      </tr>
-     </xsl:for-each>
+      </xsl:for-each>
+     </xsl:if>
     </xsl:otherwise>
    </xsl:choose>
 
