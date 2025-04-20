@@ -70,19 +70,18 @@ public:
   virtual void readOptions(KSharedConfigPtr) override;
   virtual void saveOptions(KSharedConfigPtr) override;
 
-  void setCollectionURL(const QUrl& url) { m_collectionURL = url; m_links.clear(); }
+  void setCollectionURL(const QUrl& url);
   void setXSLTFile(const QString& filename);
   void setEntryXSLTFile(const QString& filename);
-  void setPrintHeaders(bool printHeaders) { m_printHeaders = printHeaders; }
-  void setPrintGrouped(bool printGrouped) { m_printGrouped = printGrouped; }
-  void setMaxImageSize(int w, int h) { m_imageWidth = w; m_imageHeight = h; }
-  void setGroupBy(const QStringList& groupBy) { m_groupBy = groupBy; }
-  void setSortTitles(const QStringList& l)
-    { m_sort1 = l[0]; m_sort2 = l[1]; m_sort3 = l[2]; }
-  void setColumns(const QStringList& columns) { m_columns = columns; }
-  void setParseDOM(bool parseDOM) { m_parseDOM = parseDOM; reset(); }
-  void setExportEntryFiles(bool exportEntryFiles) { m_exportEntryFiles = exportEntryFiles; }
-  void setCustomHtml(const QString& html_) { m_customHtml = html_; }
+  void setPrintHeaders(bool printHeaders);
+  void setPrintGrouped(bool printGrouped);
+  void setMaxImageSize(int w, int h);
+  void setGroupBy(const QStringList& groupBy);
+  void setSortTitles(const QStringList& l);
+  void setColumns(const QStringList& columns);
+  void setParseDOM(bool parseDOM);
+  void setExportEntryFiles(bool exportEntryFiles);
+  void setCustomHtml(const QString& html_);
 
   QString text();
 

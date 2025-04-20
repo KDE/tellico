@@ -101,6 +101,51 @@ QString HTMLExporter::fileFilter() const {
   return i18n("HTML Files") + QLatin1String(" (*.html)") + QLatin1String(";;") + i18n("All Files") + QLatin1String(" (*)");
 }
 
+void HTMLExporter::setCollectionURL(const QUrl& url) {
+  m_collectionURL = url;
+  m_links.clear();
+}
+
+void HTMLExporter::setPrintHeaders(bool printHeaders) {
+  m_printHeaders = printHeaders;
+}
+
+void HTMLExporter::setPrintGrouped(bool printGrouped) {
+  m_printGrouped = printGrouped;
+}
+
+void HTMLExporter::setMaxImageSize(int w, int h) {
+  m_imageWidth = w;
+  m_imageHeight = h;
+}
+
+void HTMLExporter::setGroupBy(const QStringList& groupBy) {
+  m_groupBy = groupBy;
+}
+
+void HTMLExporter::setSortTitles(const QStringList& l) {
+  m_sort1 = l[0];
+  m_sort2 = l[1];
+  m_sort3 = l[2];
+}
+
+void HTMLExporter::setColumns(const QStringList& columns) {
+  m_columns = columns;
+}
+
+void HTMLExporter::setParseDOM(bool parseDOM) {
+  m_parseDOM = parseDOM;
+  reset();
+}
+
+void HTMLExporter::setExportEntryFiles(bool exportEntryFiles) {
+  m_exportEntryFiles = exportEntryFiles;
+}
+
+void HTMLExporter::setCustomHtml(const QString& html_) {
+  m_customHtml = html_;
+}
+
 void HTMLExporter::reset() {
   // since the ExportUTF8 option may have changed, need to delete handler
   delete m_handler;
