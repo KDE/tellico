@@ -115,7 +115,7 @@
  </div>
 
  <!-- first output any with no author -->
- <xsl:variable name="no-author" select="/tc:tellico/tc:collection/tc:entry[count(tc:authors/tc:author) = 0"/>
+ <xsl:variable name="no-author" select="/tc:tellico/tc:collection/tc:entry[count(tc:authors/tc:author) = 0]"/>
  <xsl:if test="count($no-author) &gt; 0">
   <div class="author">
    <xsl:text>(Empty)</xsl:text>
