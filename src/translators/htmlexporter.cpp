@@ -452,6 +452,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
     imgDirRelative = QFileInfo(url().path()).dir().relativeFilePath(imgDir.path());
     createDir();
   }
+  imgDir = imgDir.adjusted(QUrl::StripTrailingSlash);
   if(!imgDirRelative.endsWith(QLatin1Char('/'))) {
     imgDirRelative += QLatin1Char('/');
   }
@@ -477,8 +478,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
       } else {
         const Data::Image& img = ImageFactory::imageById(id);
         QUrl target = imgDir;
-        target = target.adjusted(QUrl::StripTrailingSlash);
-        target.setPath(target.path() + QLatin1Char('/') + (id));
+        target.setPath(target.path() + QLatin1Char('/') + id);
         success = !img.isNull() && FileHandler::writeDataURL(target, img.byteArray(), true);
       }
       if(!success) {
@@ -761,7 +761,8 @@ bool HTMLExporter::writeEntryFiles() {
                                                    FieldFormat::ForceFormat :
                                                    FieldFormat::AsIsFormat);
 
-  QUrl outputFile = fileDir();
+  const QUrl outputDir = fileDir();
+  QUrl outputFile = outputDir;
 
   GUI::CursorSaver cs(Qt::WaitCursor);
 
@@ -787,8 +788,7 @@ bool HTMLExporter::writeEntryFiles() {
     }
     file.replace(badChars, QStringLiteral("_"));
     file += QLatin1Char('-') + QString::number(entryIt->id()) + html;
-    outputFile = outputFile.adjusted(QUrl::RemoveFilename);
-    outputFile.setPath(outputFile.path() + file);
+    outputFile.setPath(outputDir.path() + file);
 
     exporter.setEntries(Data::EntryList() << entryIt);
     exporter.setURL(outputFile);
@@ -825,7 +825,7 @@ bool HTMLExporter::writeEntryFiles() {
   tempDir.setAutoRemove(true);
   QUrl target = fileDir();
   target = target.adjusted(QUrl::StripTrailingSlash);
-  target.setPath(target.path() + QLatin1Char('/') + (QLatin1String("pics/")));
+  target.setPath(target.path() + QLatin1String("/pics/"));
   KIO::Job* job = KIO::mkdir(target);
   KJobWidgets::setWindow(job, m_widget);
   if(!job->exec()) {
@@ -841,7 +841,7 @@ bool HTMLExporter::writeEntryFiles() {
       myDebug() << "Null image resource:" << dataImageName;
       continue;
     }
-    const QString dataImageFullName = tempDir.path() + dataImageName;
+    const QString dataImageFullName = tempDir.path() + QLatin1Char('/') + dataImageName;
     if(!dataImage.save(dataImageFullName)) {
       myDebug() << "Failed to save" << dataImageFullName;
       continue;
