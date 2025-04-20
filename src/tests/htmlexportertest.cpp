@@ -322,6 +322,18 @@ void HtmlExporterTest::testTemplatesTidy_data() {
     QTest::newRow(test1.toUtf8().constData()) << file << ted;
     QTest::newRow(test2.toUtf8().constData()) << file << moody;
   }
+  QDir xsltDir(QFINDTESTDATA(QStringLiteral("../../xslt/tellico2html.xsl")));
+  xsltDir.cdUp();
+  foreach(const QString& file, xsltDir.entryList({"tellico*.xsl"}, QDir::Files)) {
+    // only want selected of these templates
+    if(file.contains(QLatin1String("tellico2gcstar")) ||
+       file.contains(QLatin1String("tellico2onix")) ||
+       file.contains(QLatin1String("tellico-common"))) continue;
+    const QString test1 = file + QLatin1String(":ted");
+    const QString test2 = file + QLatin1String(":moody");
+    QTest::newRow(test1.toUtf8().constData()) << file << ted;
+    QTest::newRow(test2.toUtf8().constData()) << file << moody;
+  }
 }
 
 void HtmlExporterTest::testEntryTemplates() {
