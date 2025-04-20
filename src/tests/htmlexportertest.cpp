@@ -372,3 +372,38 @@ void HtmlExporterTest::testEntryTemplates_data() {
     QTest::newRow(file.toUtf8().constData()) << file;
   }
 }
+
+void HtmlExporterTest::testPrinting() {
+  auto groupModel = new Tellico::EntryGroupModel(this);
+  Tellico::ModelManager::self()->setGroupModel(groupModel);
+
+  Tellico::Config::setImageLocation(Tellico::Config::ImagesInFile);
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QStringLiteral("data/with-image.tc")));
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+
+  // mimic PrintHandler::generateHtml()
+  Tellico::Export::HTMLExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  exporter.setXSLTFile(QFINDTESTDATA(QStringLiteral("../../xslt/tellico-printing.xsl")));
+  exporter.setPrintHeaders(true);
+  exporter.setPrintGrouped(true);
+  exporter.setGroupBy({ QStringLiteral("author") });
+  exporter.setColumns({ QStringLiteral("Title"),
+                        QStringLiteral("Gift"),
+                        QStringLiteral("Rating"),
+                        QStringLiteral("Front Cover")});
+  exporter.setMaxImageSize(100, 100);
+  exporter.setOptions(Tellico::Export::ExportUTF8 | Tellico::Export::ExportFormatted);
+
+  const QString output = exporter.text();
+  QVERIFY(!output.isEmpty());
+
+  // verify relative location of image pics
+  QVERIFY(output.contains(QStringLiteral("pics/checkmark.png")));
+  // verify relative location of image file
+  QVERIFY(output.contains(QStringLiteral("/17b54b2a742c6d342a75f122d615a793.jpeg")));
+  // verify max image size
+  QVERIFY(output.contains(QStringLiteral("height=\"100\"")));
+}

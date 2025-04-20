@@ -459,7 +459,7 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
 void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
   // keep track of which image fields to write, this is for field titles
   StringSet imageFields;
-  foreach(const QString& column, m_columns) {
+  for(const QString& column : std::as_const(m_columns)) {
     if(coll_->fieldByTitle(column) && coll_->fieldByTitle(column)->type() == Data::Field::Image) {
       imageFields.add(column);
     }
@@ -502,6 +502,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
     imgDirRelative = QFileInfo(url().path()).dir().relativeFilePath(imgDir.path());
     createDir();
   }
+  imgDir = imgDir.adjusted(QUrl::StripTrailingSlash);
   if(!imgDirRelative.endsWith(QLatin1Char('/'))) {
     imgDirRelative += QLatin1Char('/');
   }
@@ -511,29 +512,26 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
   const int processCount = 100; // process after every 100 events
 
   StringSet imageSet; // track which images are written
-  foreach(const QString& imageField, imageFields) {
+  for(const QString& imageField : std::as_const(imageFields)) {
     foreach(Data::EntryPtr entryIt, entries()) {
-      QString id = entryIt->field(imageField);
+      const QString id = entryIt->field(imageField);
       // if no id or is already written, continue
       if(id.isEmpty() || imageSet.contains(id)) {
         continue;
       }
       imageSet.add(id);
       // try writing
-      bool success = false;
       if(useTemp) {
         // for link-only images, no need to write it out
-        success = ImageFactory::imageInfo(id).linkOnly || ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
+        if(!ImageFactory::imageInfo(id).linkOnly) {
+          ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
+        }
       } else {
         const Data::Image& img = ImageFactory::imageById(id);
+        if(img.isNull()) continue;
         QUrl target = imgDir;
-        target = target.adjusted(QUrl::StripTrailingSlash);
-        target.setPath(target.path() + QLatin1Char('/') + (id));
-        success = !img.isNull() && FileHandler::writeDataURL(target, img.byteArray(), true);
-      }
-      if(!success) {
-        myWarning() << "unable to write image file: "
-                    << imgDir.path() << id;
+        target.setPath(target.path() + QLatin1Char('/') + id);
+        FileHandler::writeDataURL(target, img.byteArray(), true /* force */);
       }
 
       if(++count == processCount) {
@@ -811,7 +809,8 @@ bool HTMLExporter::writeEntryFiles() {
                                                    FieldFormat::ForceFormat :
                                                    FieldFormat::AsIsFormat);
 
-  QUrl outputFile = fileDir();
+  const QUrl outputDir = fileDir();
+  QUrl outputFile = outputDir;
 
   GUI::CursorSaver cs(Qt::WaitCursor);
 
@@ -837,8 +836,7 @@ bool HTMLExporter::writeEntryFiles() {
     }
     file.replace(badChars, QStringLiteral("_"));
     file += QLatin1Char('-') + QString::number(entryIt->id()) + html;
-    outputFile = outputFile.adjusted(QUrl::RemoveFilename);
-    outputFile.setPath(outputFile.path() + file);
+    outputFile.setPath(outputDir.path() + file);
 
     exporter.setEntries(Data::EntryList() << entryIt);
     exporter.setURL(outputFile);
@@ -875,7 +873,7 @@ bool HTMLExporter::writeEntryFiles() {
   tempDir.setAutoRemove(true);
   QUrl target = fileDir();
   target = target.adjusted(QUrl::StripTrailingSlash);
-  target.setPath(target.path() + QLatin1Char('/') + (QLatin1String("pics/")));
+  target.setPath(target.path() + QLatin1String("/pics/"));
   KIO::Job* job = KIO::mkdir(target);
   KJobWidgets::setWindow(job, m_widget);
   if(!job->exec()) {
@@ -884,14 +882,14 @@ bool HTMLExporter::writeEntryFiles() {
   KIO::JobFlags flags = KIO::DefaultFlags;
   if(!m_widget) flags |= KIO::HideProgressInfo;
 
-  foreach(const QString& dataImageName, dataImages) {
+  for(const QString& dataImageName : std::as_const(dataImages)) {
     // copy the image out of the resources
     QImage dataImage(QStringLiteral(":/icons/") + dataImageName);
     if(dataImage.isNull()) {
       myDebug() << "Null image resource:" << dataImageName;
       continue;
     }
-    const QString dataImageFullName = tempDir.path() + dataImageName;
+    const QString dataImageFullName = tempDir.path() + QLatin1Char('/') + dataImageName;
     if(!dataImage.save(dataImageFullName)) {
       myDebug() << "Failed to save" << dataImageFullName;
       continue;
