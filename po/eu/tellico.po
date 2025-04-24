@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-21 02:32+0000\n"
-"PO-Revision-Date: 2025-01-08 22:28+0100\n"
+"PO-Revision-Date: 2025-04-22 12:14+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3436,7 +3436,7 @@ msgstr "Azaleko irudia ezin izan du zamatu."
 #: src/fetch/amazonfetcher.cpp:862 src/fetch/amazonfetcher.cpp:1079
 #, kde-format
 msgid "Amazon Link"
-msgstr "Amazon-esteka"
+msgstr "Amazon esteka"
 
 #: src/fetch/amazonfetcher.cpp:1069
 #, kde-format
@@ -3566,7 +3566,7 @@ msgstr "Kolorista"
 #: src/fetch/bedethequefetcher.cpp:324 src/fetch/bedethequefetcher.cpp:435
 #, kde-format
 msgid "Bedetheque Link"
-msgstr "Bedetheque-esteka"
+msgstr "Bedetheque esteka"
 
 #: src/fetch/bedethequefetcher.cpp:433 src/field.cpp:312
 #, kde-format
@@ -3576,12 +3576,12 @@ msgstr "ISBN zk."
 #: src/fetch/boardgamegeekfetcher.cpp:203
 #, kde-format
 msgid "BoardGameGeek Link"
-msgstr "BoardGameGeek-esteka"
+msgstr "BoardGameGeek esteka"
 
 #: src/fetch/colnectfetcher.cpp:543 src/fetch/colnectfetcher.cpp:844
 #, kde-format
 msgid "Colnect Link"
-msgstr "Colnect-esteka"
+msgstr "Colnect esteka"
 
 #: src/fetch/colnectfetcher.cpp:562 src/fetch/colnectfetcher.cpp:850
 #, kde-format
@@ -3622,7 +3622,7 @@ msgstr "Herrialdearen kodea:"
 #: src/fetch/comicvinefetcher.cpp:218
 #, kde-format
 msgid "Comic Vine Link"
-msgstr "«Comic Vine»-esteka"
+msgstr "Comic Vine esteka"
 
 #: src/fetch/configwidget.cpp:41
 #, kde-format
@@ -3681,7 +3681,7 @@ msgstr "Sartzeko gako bat beharrezkoa da datu-sorburu hori erabiltzeko."
 #: src/fetch/discogsfetcher.cpp:321 src/fetch/discogsfetcher.cpp:585
 #, kde-format
 msgid "Discogs Link"
-msgstr "Discogs-esteka"
+msgstr "Discogs esteka"
 
 #: src/fetch/discogsfetcher.cpp:340 src/fetch/discogsfetcher.cpp:586
 #: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:392
@@ -3737,12 +3737,12 @@ msgstr "Jatorrizko titulua"
 #: src/fetch/doubanfetcher.cpp:408 src/fetch/doubanfetcher.cpp:642
 #, kde-format
 msgid "Douban Link"
-msgstr "Douban-esteka"
+msgstr "Douban esteka"
 
 #: src/fetch/dvdfrfetcher.cpp:172
 #, kde-format
 msgid "DVDFr Link"
-msgstr "DVDFr-esteka"
+msgstr "DVDFr esteka"
 
 #: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:478
 #: src/fetch/imdbfetcher.cpp:530 src/fetch/moviemeterfetcher.cpp:228
@@ -3889,7 +3889,7 @@ msgstr "Itaun gordena"
 #: src/fetch/filmaffinityfetcher.cpp:285 src/fetch/filmaffinityfetcher.cpp:464
 #, kde-format
 msgid "FilmAffinity Link"
-msgstr "FilmAffinity-esteka"
+msgstr "FilmAffinity esteka"
 
 #: src/fetch/filmaffinityfetcher.cpp:476 src/fetch/imdbfetcher.cpp:549
 #: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:608
@@ -3922,7 +3922,7 @@ msgstr "AEB"
 #: src/fetch/filmasterfetcher.cpp:237 src/fetch/filmasterfetcher.cpp:314
 #, kde-format
 msgid "Filmaster Link"
-msgstr "Filmaster-esteka"
+msgstr "Filmaster esteka"
 
 #: src/fetch/gaminghistoryfetcher.cpp:195
 #: src/fetch/gaminghistoryfetcher.cpp:317
@@ -3959,12 +3959,12 @@ msgstr "Egilea:"
 #: src/fetch/giantbombfetcher.cpp:202
 #, kde-format
 msgid "GiantBomb Link"
-msgstr "GiantBomb-esteka"
+msgstr "GiantBomb esteka"
 
 #: src/fetch/googlebookfetcher.cpp:257 src/fetch/googlebookfetcher.cpp:370
 #, kde-format
 msgid "Google Book Link"
-msgstr "«Google Book»-esteka"
+msgstr "Google Book esteka"
 
 #: src/fetch/googlebookfetcher.cpp:361
 #, kde-format
@@ -3998,7 +3998,7 @@ msgstr "Internet Bookshop (ibs.it)"
 #: src/fetch/igdbfetcher.cpp:365 src/fetch/igdbfetcher.cpp:578
 #, kde-format
 msgid "IGDB Link"
-msgstr "IGDB-esteka"
+msgstr "IGDB esteka"
 
 #: src/fetch/igdbfetcher.cpp:566
 #, kde-format
@@ -4027,7 +4027,7 @@ msgstr "Internet Movie Database"
 #: src/field.cpp:335
 #, kde-format
 msgid "IMDb Link"
-msgstr "IMDb-esteka"
+msgstr "IMDb esteka"
 
 #: src/fetch/imdbfetcher.cpp:531
 #, kde-format
@@ -4089,12 +4089,12 @@ msgstr ""
 #: src/fetch/itunesfetcher.cpp:242 src/fetch/itunesfetcher.cpp:553
 #, kde-format
 msgid "iTunes Link"
-msgstr "iTunes-esteka"
+msgstr "iTunes esteka"
 
 #: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:667
 #, kde-format
 msgid "KinoPoisk Link"
-msgstr "KinoPoisk-esteka"
+msgstr "KinoPoisk esteka"
 
 #: src/fetch/kinoteatrfetcher.cpp:236 src/fetch/kinoteatrfetcher.cpp:506
 #, kde-format
@@ -4104,12 +4104,12 @@ msgstr "«Kino-Teatr»-esteka"
 #: src/fetch/mobygamesfetcher.cpp:454 src/fetch/mobygamesfetcher.cpp:636
 #, kde-format
 msgid "MobyGames Link"
-msgstr "MobyGames-esteka"
+msgstr "MobyGames esteka"
 
 #: src/fetch/moviemeterfetcher.cpp:223 src/fetch/moviemeterfetcher.cpp:307
 #, kde-format
 msgid "MovieMeter Link"
-msgstr "MovieMeter-esteka"
+msgstr "MovieMeter esteka"
 
 #: src/fetch/multifetcher.cpp:208
 #, kde-format
@@ -4124,7 +4124,7 @@ msgstr "Datu-iturria:"
 #: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:398
 #, kde-format
 msgid "Numista Link"
-msgstr "Numista-esteka"
+msgstr "Numista esteka"
 
 #: src/fetch/numistafetcher.cpp:403
 #, kde-format
@@ -4177,12 +4177,12 @@ msgstr "E&giaztatu katalogoa"
 #: src/fetch/openlibraryfetcher.cpp:275 src/fetch/openlibraryfetcher.cpp:450
 #, kde-format
 msgid "OpenLibrary Link"
-msgstr "OpenLibrary-esteka"
+msgstr "OpenLibrary esteka"
 
 #: src/fetch/rpggeekfetcher.cpp:212
 #, kde-format
 msgid "RPGGeek Link"
-msgstr "RPGGeek-esteka"
+msgstr "RPGGeek esteka"
 
 #: src/fetch/srufetcher.cpp:520
 #, kde-format
@@ -4248,7 +4248,7 @@ msgstr "Eremua"
 #: src/translators/filereadervideo.cpp:281
 #, kde-format
 msgid "TMDb Link"
-msgstr "TMDb-esteka"
+msgstr "TMDb esteka"
 
 #: src/fetch/themoviedbfetcher.cpp:332 src/fetch/themoviedbfetcher.cpp:572
 #: src/fetch/thetvdbfetcher.cpp:249 src/fetch/thetvdbfetcher.cpp:566
@@ -4289,7 +4289,7 @@ msgstr "TheMovieDB (%1)"
 #: src/fetch/thetvdbfetcher.cpp:254 src/fetch/thetvdbfetcher.cpp:563
 #, kde-format
 msgid "TheTVDB Link"
-msgstr "TheTVDB-esteka"
+msgstr "TheTVDB esteka"
 
 #: src/fetch/thetvdbfetcher.cpp:590
 #, kde-format
@@ -4299,12 +4299,12 @@ msgstr "Harpidedunaren PIN:"
 #: src/fetch/vgcollectfetcher.cpp:233 src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
 msgid "VGCollect Link"
-msgstr "Colnect-esteka"
+msgstr "Colnect esteka"
 
 #: src/fetch/videogamegeekfetcher.cpp:203
 #, kde-format
 msgid "VideoGameGeek Link"
-msgstr "VideoGameGeek-esteka"
+msgstr "VideoGameGeek esteka"
 
 #: src/fetch/vndbfetcher.cpp:290 src/fetch/vndbfetcher.cpp:433
 #, kde-format
