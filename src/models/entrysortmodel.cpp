@@ -38,8 +38,11 @@ EntrySortModel::EntrySortModel(QObject* parent) : AbstractSortModel(parent) {
 
 void EntrySortModel::setFilter(Tellico::FilterPtr filter_) {
   if(m_filter != filter_ || (m_filter && *m_filter != *filter_)) {
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 9, 0))
+    beginFilterChange();
+#endif
     m_filter = filter_;
-    invalidateFilter();
+    invalidateRowsFilter();
   }
 }
 
