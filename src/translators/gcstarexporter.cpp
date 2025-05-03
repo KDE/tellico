@@ -152,7 +152,8 @@ bool GCstarExporter::writeImages() {
         break;
       }
 
-      const auto& img = ImageFactory::imageById(entry->field(field));
+      const QString entryField = entry->field(field);
+      const auto& img = ImageFactory::imageById(entryField);
       if(img.isNull()) {
         break;
       }

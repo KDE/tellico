@@ -91,7 +91,8 @@ bool ONIXExporter::exec() {
     const QString cover = QStringLiteral("cover");
     StringSet imageSet;
     foreach(Data::EntryPtr entry, entries()) {
-      const auto& img = ImageFactory::imageById(entry->field(cover));
+      const QString entryCover = entry->field(cover);
+      const auto& img = ImageFactory::imageById(entryCover);
       if(!img.isNull() && !imageSet.contains(img.id())
          && (img.format() == "JPEG" || img.format() == "JPG" || img.format() == "GIF")) { /// onix only understands jpeg and gif
         QByteArray ba = img.byteArray();
