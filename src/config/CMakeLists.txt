@@ -20,6 +20,7 @@ target_link_libraries(config
     KF6::ConfigCore
     KF6::ConfigGui
     KF6::ConfigWidgets
+    KF6::ColorScheme
 )
 
 ########### install files ###############

@@ -62,6 +62,7 @@ target_link_libraries(gui
     KF6::TextWidgets
     KF6::IconThemes
     KF6::IconWidgets
+    KF6::ColorScheme
 )
 
 if(KSaneWidgets6_FOUND)

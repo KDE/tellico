@@ -84,6 +84,7 @@ find_package(KF6 REQUIRED COMPONENTS
     TextWidgets
     WidgetsAddons
     XmlGui
+    ColorScheme
 )
 
 include(MacroBoolTo01)
