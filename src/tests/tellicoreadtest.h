@@ -46,6 +46,7 @@ private Q_SLOTS:
   void testDuplicateLoans();
   void testDuplicateBorrowers();
   void testLocalImage();
+  void testLocalImageLink();
   void testRemoteImage();
   void testDataImage();
   void testXMLHandler();
