@@ -307,19 +307,19 @@ void VGCollectFetcher::populateValue(Data::EntryPtr entry_, const QString& heade
   } else if(header.startsWith(QLatin1String("Rating"))) {
     QString pegi;
     Data::GameCollection::EsrbRating esrb = Data::GameCollection::UnknownEsrb;
-    if(value.contains(QLatin1String("ratings/u.png")))       esrb = Data::GameCollection::Unrated;
-    else if(value.contains(QLatin1String("ratings/t.png")))  esrb = Data::GameCollection::Teen;
-    else if(value.contains(QLatin1String("ratings/e.png")))  esrb = Data::GameCollection::Everyone;
-    else if(value.contains(QLatin1String("ratings/ka.png")))  esrb = Data::GameCollection::Everyone;
-    else if(value.contains(QLatin1String("ratings/e10.png"))) esrb = Data::GameCollection::Everyone10;
-    else if(value.contains(QLatin1String("ratings/ec.png"))) esrb = Data::GameCollection::EarlyChildhood;
-    else if(value.contains(QLatin1String("ratings/m.png")))  esrb = Data::GameCollection::Mature;
-    else if(value.contains(QLatin1String("ratings/ao.png")))  esrb = Data::GameCollection::Adults;
-    else if(value.contains(QLatin1String("ratings/pegi-3")))  pegi = QLatin1String("PEGI 3");
-    else if(value.contains(QLatin1String("ratings/pegi-7")))  pegi = QLatin1String("PEGI 7");
-    else if(value.contains(QLatin1String("ratings/pegi-12"))) pegi = QLatin1String("PEGI 12");
-    else if(value.contains(QLatin1String("ratings/pegi-16"))) pegi = QLatin1String("PEGI 16");
-    else if(value.contains(QLatin1String("ratings/pegi-18"))) pegi = QLatin1String("PEGI 18");
+    if(value.contains(QLatin1String("u.png")))         esrb = Data::GameCollection::Unrated;
+    else if(value.contains(QLatin1String("esrb-t")))   esrb = Data::GameCollection::Teen;
+    else if(value.contains(QLatin1String("esrb-e")))   esrb = Data::GameCollection::Everyone;
+    else if(value.contains(QLatin1String("esrb-ka")))  esrb = Data::GameCollection::Everyone;
+    else if(value.contains(QLatin1String("esrb-e10"))) esrb = Data::GameCollection::Everyone10;
+    else if(value.contains(QLatin1String("esrb-ec")))  esrb = Data::GameCollection::EarlyChildhood;
+    else if(value.contains(QLatin1String("esrb-m")))   esrb = Data::GameCollection::Mature;
+    else if(value.contains(QLatin1String("esrb-ao")))  esrb = Data::GameCollection::Adults;
+    else if(value.contains(QLatin1String("pegi-3")))   pegi = QLatin1String("PEGI 3");
+    else if(value.contains(QLatin1String("pegi-7")))   pegi = QLatin1String("PEGI 7");
+    else if(value.contains(QLatin1String("pegi-12")))  pegi = QLatin1String("PEGI 12");
+    else if(value.contains(QLatin1String("pegi-16")))  pegi = QLatin1String("PEGI 16");
+    else if(value.contains(QLatin1String("pegi-18")))  pegi = QLatin1String("PEGI 18");
     if(esrb != Data::GameCollection::UnknownEsrb) {
       entry_->setField(QStringLiteral("certification"), Data::GameCollection::esrbRating(esrb));
     }
