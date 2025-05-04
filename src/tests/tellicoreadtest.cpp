@@ -444,6 +444,50 @@ void TellicoReadTest::testRemoteImage() {
   QVERIFY(!img.isNull());
 }
 
+void TellicoReadTest::testRemoteImageLink() {
+  if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
+
+  // this is the md5 hash of the logo.png icon, used as an image id
+  const QString imageId(QSL("https://tellico-project.org/wp-content/uploads/96-tellico.png"));
+  // not yet loaded
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(imageId));
+
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/image_link_test.xml"));
+  QFile f(url.toLocalFile());
+  QVERIFY(f.exists());
+  QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
+
+  QTextStream in(&f);
+  QString fileText = in.readAll();
+  // replace %COVER% with image file location
+  fileText.replace(QSL("%COVER%"), imageId);
+
+  Tellico::Import::TellicoImporter importer(fileText);
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->entries().count(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entries().at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QStringLiteral("cover")), imageId);
+
+  // the image should still not be in local memory, but the image info has loaded from xml file
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
+  QVERIFY( Tellico::ImageFactory::self()->hasImageInfo(imageId));
+
+  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable);
+  Tellico::ImageFactory::self()->requestImageById(imageId);
+  QVERIFY(spy.wait(2000));
+
+  // now it should be in memory
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(imageId));
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(imageId);
+  QCOMPARE(img.id(), imageId);
+  QVERIFY(!img.isNull());
+  QVERIFY(img.linkOnly());
+}
+
 void TellicoReadTest::testDataImage() {
   // this is the md5 hash of the tellico.png icon, used as an image id
   const QString imageId(QSL("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
