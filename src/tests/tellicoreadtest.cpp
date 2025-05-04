@@ -395,16 +395,16 @@ void TellicoReadTest::testLocalImageLink() {
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
   QVERIFY( Tellico::ImageFactory::self()->hasImageInfo(imageId));
 
-//  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(imageId);
-//  QVERIFY(!img.isNull());
-//  QVERIFY(img.linkOnly());
-
   QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable);
   Tellico::ImageFactory::self()->requestImageById(imageId);
   QVERIFY(spy.wait(2000));
 
   // now it should be in memory
   QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(imageId));
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(imageId);
+  QCOMPARE(img.id(), imageId);
+  QVERIFY(!img.isNull());
+  QVERIFY(img.linkOnly());
 }
 
 void TellicoReadTest::testRemoteImage() {
