@@ -710,6 +710,7 @@ void ColnectFetcher::populateCardEntry(Data::EntryPtr entry_, const QVariantList
   READ_AND_SET("Number", "number");
   READ_AND_SET("League", "type");
 
+  QString playerFilter;
   int idx = m_colnectFields.value(QStringLiteral("Issued on"), -1);
   // the year may have already been set in the query term
   QString year = m_year;
@@ -717,17 +718,29 @@ void ColnectFetcher::populateCardEntry(Data::EntryPtr entry_, const QVariantList
     year = resultList_.at(idx).toString().left(4);
     entry_->setField(QStringLiteral("year"), year);
   }
+  if(!year.isEmpty()) {
+    playerFilter += QStringLiteral("/season/") + year;
+  }
+  // leverage league filter to reduce number of player results
+  idx = m_colnectFields.value(QStringLiteral("League"), -1);
+  if(idx > -1) {
+    if(!m_itemNames.contains("leagues")) {
+      readItemNames("leagues");
+    }
+    // now have to reverse lookup leagueId from name
+    const auto leagueHash = m_itemNames.value("leagues");
+    const auto leagueId = leagueHash.key(resultList_.at(idx).toString(), -1);
+    if(leagueId > -1) {
+      playerFilter += QStringLiteral("/league/") + QString::number(leagueId);
+    }
+  }
 
   idx = m_colnectFields.value(QStringLiteral("ZscCardPlayer"), -1);
   if(idx > -1) {
     const int playerId = resultList_.at(idx).toInt();
     if(playerId > 0) {
       if(!m_itemNames.contains("players")) {
-        if(year.isEmpty()) {
-          readItemNames("players");
-        } else {
-          readItemNames("players", QStringLiteral("/season/") + year);
-        }
+        readItemNames("players", playerFilter);
       }
       entry_->setField(QStringLiteral("player"), m_itemNames.value("players").value(playerId));
     }
