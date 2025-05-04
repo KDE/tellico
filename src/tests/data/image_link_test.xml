@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC '-//Robby Stephenson/DTD Tellico V11.0//EN' 'http://periapsis.org/tellico/dtd/v11/tellico.dtd'>
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="My Books" type="2">
+  <fields>
+   <field title="Title" flags="8" category="General" format="1" type="1" name="title"/>
+   <field title="Front Cover" flags="0" category="Front Cover" format="4" type="10" name="cover"/>
+  </fields>
+  <entry id="1">
+   <title>book1</title>
+   <cover>%COVER%</cover>
+  </entry>
+  <images>
+   <image link="true" width="100" height="100" format="JPEG" id="%COVER%"/>
+  </images>
+ </collection>
+</tellico>

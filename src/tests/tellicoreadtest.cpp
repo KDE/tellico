@@ -55,6 +55,7 @@
 #endif
 #include <QStandardPaths>
 #include <QLoggingCategory>
+#include <QSignalSpy>
 
 QTEST_GUILESS_MAIN( TellicoReadTest )
 
@@ -361,6 +362,49 @@ void TellicoReadTest::testLocalImage() {
 
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(imageId);
   QVERIFY(!img.isNull());
+}
+
+void TellicoReadTest::testLocalImageLink() {
+  QUrl imgUrl = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
+  imgUrl = imgUrl.adjusted(QUrl::NormalizePathSegments);
+  const QString imageId = imgUrl.url();
+  // not yet loaded
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(imageId));
+
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/image_link_test.xml"));
+  QFile f(url.toLocalFile());
+  QVERIFY(f.exists());
+  QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
+
+  QTextStream in(&f);
+  QString fileText = in.readAll();
+  // replace %COVER% with image file location
+  fileText.replace(QSL("%COVER%"), imageId);
+
+  Tellico::Import::TellicoImporter importer(fileText);
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->entries().count(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entries().at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QStringLiteral("cover")), imageId);
+
+  // the image should still not be in local memory, but the image info has loaded from xml file
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
+  QVERIFY( Tellico::ImageFactory::self()->hasImageInfo(imageId));
+
+//  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(imageId);
+//  QVERIFY(!img.isNull());
+//  QVERIFY(img.linkOnly());
+
+  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable);
+  Tellico::ImageFactory::self()->requestImageById(imageId);
+  QVERIFY(spy.wait(2000));
+
+  // now it should be in memory
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(imageId));
 }
 
 void TellicoReadTest::testRemoteImage() {
