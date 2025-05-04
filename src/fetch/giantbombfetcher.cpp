@@ -89,7 +89,7 @@ QUrl GiantBombFetcher::searchUrl() {
 
   switch(request().key()) {
     case Keyword:
-      u.setPath(u.path() + QStringLiteral("/search"));
+      u.setPath(u.path() + QStringLiteral("/search/"));
       q.addQueryItem(QStringLiteral("query"), request().value());
       q.addQueryItem(QStringLiteral("resources"), QStringLiteral("game"));
       break;
@@ -100,7 +100,7 @@ QUrl GiantBombFetcher::searchUrl() {
   }
   u.setQuery(q);
 
-//  myDebug() << "url: " << u.url();
+//  myDebug() << "url:" << u.url();
   return u;
 }
 
@@ -143,7 +143,7 @@ Tellico::Data::EntryPtr GiantBombFetcher::fetchEntryHookData(Data::EntryPtr entr
   q.addQueryItem(QStringLiteral("format"), QStringLiteral("xml"));
   q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
   u.setQuery(q);
-//  myDebug() << "url: " << u;
+//  myDebug() << "url:" << u;
 
   // quiet
   QString output = FileHandler::readXMLFile(u, true);
