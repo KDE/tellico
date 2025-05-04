@@ -48,6 +48,7 @@ private Q_SLOTS:
   void testLocalImage();
   void testLocalImageLink();
   void testRemoteImage();
+  void testRemoteImageLink();
   void testDataImage();
   void testXMLHandler();
   void testXMLHandler_data();
