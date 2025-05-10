@@ -46,7 +46,7 @@ void TheGamesDBFetcherTest::initTestCase() {
   m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("1997"));
   m_fieldValues.insert(QStringLiteral("certification"), QStringLiteral("Teen"));
   m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("Action; Shooter; Stealth"));
-  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Nintendo of America, Inc."));
+  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Nintendo of America, inc."));
   m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("Rare, Ltd."));
   m_fieldValues.insert(QStringLiteral("num-player"), QStringLiteral("4"));
 
@@ -66,7 +66,7 @@ void TheGamesDBFetcherTest::initTestCase() {
 }
 
 void TheGamesDBFetcherTest::testTitle() {
-  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("tvmaze"));
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("TGDB"));
   cg.writeEntry("Custom Fields", QStringLiteral("num-player,screenshot"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
