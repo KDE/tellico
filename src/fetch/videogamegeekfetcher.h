@@ -87,7 +87,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   virtual void resetSearch() override {}
   virtual QUrl searchUrl() override;
-  virtual void parseData(QByteArray&) override {}
+  virtual void parseData(QByteArray&) override;
   virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) override;
 
   enum ImageSize {
