@@ -103,6 +103,10 @@ void AmazonFetcherTest::initTestCase() {
   m_fieldValues.insert(QStringLiteral("petitPrinceCN"), petitPrinceCN);
 }
 
+void AmazonFetcherTest::cleanup() {
+  m_config->markAsClean();
+}
+
 void AmazonFetcherTest::testTitle() {
   return; // re-enable if/when Amazon searches are not so heavily throttled
   QFETCH(QString, locale);
@@ -449,7 +453,7 @@ void AmazonFetcherTest::testError() {
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
 
-  Tellico::Fetch::MessageLogger* logger = new Tellico::Fetch::MessageLogger;
+  auto logger = new Tellico::Fetch::MessageLogger;
   f->setMessageHandler(logger);
   f->m_site = Tellico::Fetch::AmazonFetcher::US;
   f->m_accessKey = QStringLiteral("test");

@@ -103,7 +103,9 @@ QUrl VideoGameGeekFetcher::searchUrl() {
     case Raw:
       u.setUrl(QLatin1String(BGG_THING_URL));
       q.addQueryItem(QStringLiteral("id"), request().value());
-      q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame"));
+      // there's an evident bug where the videogameexpansion type is no longer used
+      // but some ids still identify as expansions
+      q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame,videogameexpansion"));
       break;
 
     default:

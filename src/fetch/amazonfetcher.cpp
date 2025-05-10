@@ -322,9 +322,11 @@ void AmazonFetcher::stop() {
 }
 
 void AmazonFetcher::slotComplete(KJob*) {
-  if(m_job->error()) {
-    myDebug() << m_job->errorString() << m_job->data();
-    myDebug() << "Response code is" << m_job->metaData().value(QStringLiteral("responsecode"));
+  // allow the SSL http error code to continue instead of calling stop, for better error reporting
+  if(m_job->error() > 0 && m_job->error() != 115) {
+    myDebug() << m_job->error() << m_job->errorString() << m_job->data();
+    const auto responsecode = m_job->queryMetaData(QStringLiteral("responsecode"));
+    if(!responsecode.isEmpty()) myDebug() << "Response code is" << responsecode;
     m_job->uiDelegate()->showErrorMessage();
     stop();
     return;

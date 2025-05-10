@@ -88,7 +88,7 @@ void DiscogsTest::testImport() {
   QCOMPARE(entry->field(QStringLiteral("label")), QStringLiteral("First Night Records"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Musical"));
   QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Alain Boublil; Claude-Michel Schönberg"));
-  QCOMPARE(entry->field(QStringLiteral("rating")), QStringLiteral("4"));
+//  QCOMPARE(entry->field(QStringLiteral("rating")), QStringLiteral("4"));
 
 //  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
 //  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));

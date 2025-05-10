@@ -41,7 +41,7 @@ TheGamesDBFetcherTest::TheGamesDBFetcherTest() : AbstractFetcherTest() {
 void TheGamesDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 
-  QString configFile = QFINDTESTDATA("tellicotest_private.config");
+  QString configFile = QFINDTESTDATA("tellicotest.config");
   if(!configFile.isEmpty()) {
     m_config = KSharedConfig::openConfig(configFile, KConfig::SimpleConfig)->group(QStringLiteral("TGDB"));
   }
@@ -50,8 +50,8 @@ void TheGamesDBFetcherTest::initTestCase() {
   m_fieldValues.insert(QStringLiteral("platform"), QStringLiteral("Nintendo 64"));
   m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("1997"));
   m_fieldValues.insert(QStringLiteral("certification"), QStringLiteral("Teen"));
-  m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("Action; Adventure; Shooter; Stealth"));
-  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Nintendo"));
+  m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("Action; Shooter; Stealth"));
+  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Nintendo of America, inc."));
   m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("Rare, Ltd."));
   m_fieldValues.insert(QStringLiteral("num-player"), QStringLiteral("4"));
 

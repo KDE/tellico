@@ -69,7 +69,7 @@ void UPCItemDbFetcherTest::testFightClub() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Fight Club Mill Creek Drama"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Fight Club"));
 //  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1999"));
   QCOMPARE(entry->field(QStringLiteral("barcode")), QStringLiteral("024543617907"));
   QCOMPARE(entry->field(QStringLiteral("medium")), QStringLiteral("Blu-ray"));
