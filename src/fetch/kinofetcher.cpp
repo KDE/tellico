@@ -142,7 +142,7 @@ void KinoFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
-  QRegularExpression linkRx(QStringLiteral("<div class=\"alice-teaser-title\">.*?<a .+?teaser-link.+?href=\"(.+?)\".*?>(.+?)</"),
+  QRegularExpression linkRx(QStringLiteral("<div class=\"poster__title\">.*?<a .+?poster__link.+?href=\"(.+?)\".*?>(.+?)</"),
                             QRegularExpression::DotMatchesEverythingOption);
   QRegularExpression dateSpanRx(QStringLiteral("<span .+?movie-startdate.+?>(.+?)</span"));
   QRegularExpression dateRx(QStringLiteral("\\d{2}\\.\\d{2}\\.(\\d{4})"));
@@ -220,6 +220,8 @@ Tellico::Data::EntryPtr KinoFetcher::fetchEntryHook(uint uid_) {
 }
 
 void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
+  bool hasDirector = false;
+  bool hasCast = false;
   static const QRegularExpression jsonRx(QStringLiteral("<script type=\"application/ld\\+json\">(.*?)</script"),
                                          QRegularExpression::DotMatchesEverythingOption);
   auto i = jsonRx.globalMatch(str_);
@@ -230,6 +232,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
       continue;
     }
     entry->setField(QStringLiteral("director"), objValue(obj, "director", "name"));
+    hasDirector = !mapValue(obj, "director", "name").isEmpty();
 
     QStringList actors;
     const auto actorArray = obj[QLatin1StringView("actor")].toArray();
@@ -239,6 +242,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     }
     if(!actors.isEmpty()) {
       entry->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
+      hasCast = true;
     }
     // cover could be a relative link
     QString coverLink = objValue(obj, "image");
@@ -256,6 +260,8 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
   }
 
   static const QRegularExpression tagRx(QStringLiteral("<.+?>"));
+  static const QRegularExpression liRx(QStringLiteral("<li>(.+?)</li>"));
+
   QRegularExpression nationalityRx(QStringLiteral(">Produktionsland:(.*?)</a>"));
   auto nationalityMatch = nationalityRx.match(str_);
   if(nationalityMatch.hasMatch()) {
@@ -331,11 +337,54 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("certification"), c);
   }
 
-  QRegularExpression studioRx(QStringLiteral(">Filmverleih:(.*?)</li"));
+  QRegularExpression studioRx(QStringLiteral(">Filmverleih(.*?)</li"));
   auto studioMatch = studioRx.match(str_);
   if(studioMatch.hasMatch()) {
     QString s = studioMatch.captured(1).remove(tagRx).trimmed();
     entry->setField(QStringLiteral("studio"), s);
+  }
+
+  if(!hasDirector) {
+    QRegularExpression directorRx(QStringLiteral(">Regisseur(.*?)</ul"));
+    auto directorMatch = directorRx.match(str_);
+    if(directorMatch.hasMatch()) {
+      auto i = liRx.globalMatch(directorMatch.captured(1));
+      QStringList directors;
+      while(i.hasNext()) {
+        QString d = i.next().captured(1).trimmed();
+        if(d.endsWith(QLatin1Char(','))) d.chop(1);
+        if(!d.isEmpty()) directors += d;
+      }
+      entry->setField(QStringLiteral("director"), directors.join(FieldFormat::delimiterString()));
+    }
+  }
+
+  QRegularExpression producerRx(QStringLiteral(">Produzent(.*?)</ul"));
+  auto producerMatch = producerRx.match(str_);
+  if(producerMatch.hasMatch()) {
+    auto i = liRx.globalMatch(producerMatch.captured(1));
+    QStringList producers;
+    while(i.hasNext()) {
+      QString p = i.next().captured(1).trimmed();
+      if(p.endsWith(QLatin1Char(','))) p.chop(1);
+      if(!p.isEmpty()) producers += p;
+    }
+    entry->setField(QStringLiteral("producer"), producers.join(FieldFormat::delimiterString()));
+  }
+
+  if(!hasCast) {
+    QRegularExpression castRx(QStringLiteral(">Darsteller(.*?)</ul"));
+    auto castMatch = castRx.match(str_);
+    if(castMatch.hasMatch()) {
+      auto i = liRx.globalMatch(castMatch.captured(1));
+      QStringList cast;
+      while(i.hasNext()) {
+        QString c = i.next().captured(1).trimmed();
+        if(c.endsWith(QLatin1Char(','))) c.chop(1);
+        if(!c.isEmpty()) cast += c;
+      }
+      entry->setField(QStringLiteral("cast"), cast.join(FieldFormat::rowDelimiterString()));
+    }
   }
 
   QRegularExpression plotRx(QStringLiteral("(<p class=\"movie-plot-synopsis\">.+?</p>)<(div|h2)"),
