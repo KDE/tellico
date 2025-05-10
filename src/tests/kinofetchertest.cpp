@@ -59,10 +59,13 @@ void KinoFetcherTest::testTitle() {
   QCOMPARE(entry->field("title"), QStringLiteral("Superman Returns"));
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(set(entry, "genre"), set("Abenteuer; Action; Fantasy; Science Fiction"));
-//  QCOMPARE(entry->field("director"), QStringLiteral("Bryan Singer"));
+  QCOMPARE(entry->field("director"), QStringLiteral("Bryan Singer"));
+  QVERIFY(!entry->field("director").contains(QLatin1Char(',')));
+  QCOMPARE(entry->field("producer"), QStringLiteral("Bryan Singer; Jon Peters; Gilbert Adler"));
+  QVERIFY(!entry->field("producer").contains(QLatin1Char(',')));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
-//  QCOMPARE(castList.size(), 8);
-//  QCOMPARE(castList.at(0), QStringLiteral("Brandon Routh"));
+  QVERIFY(!castList.isEmpty());
+  QCOMPARE(castList.at(0), QStringLiteral("Brandon Routh"));
   QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
   QEXPECT_FAIL("", "Kino.de: studio info has disappeared", Continue);
   QCOMPARE(entry->field("studio"), QStringLiteral("Warner"));
