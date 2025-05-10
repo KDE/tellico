@@ -43,7 +43,7 @@ Tellico::Data::CollPtr CollectionFactory::create(int type_, bool addDefaultField
   if(functionRegistry.contains(type_)) {
     ptr = functionRegistry.value(type_)(addDefaultFields_);
   } else {
-    myWarning() << "no collection created for type = " << type_;
+    myWarning() << "no collection created for type =" << type_;
     ptr = new Data::Collection(addDefaultFields_);
   }
   return ptr;

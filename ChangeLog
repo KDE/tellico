@@ -1,3 +1,11 @@
+2025-05-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated VideoGameGeek data source.
+
+2025-05-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with showing local image by link only (Bug 503645).
+
 2025-05-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated GiantBomb data source.
