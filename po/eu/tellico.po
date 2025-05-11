@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-21 02:32+0000\n"
+"POT-Creation-Date: 2025-05-11 02:37+0000\n"
 "PO-Revision-Date: 2025-04-22 12:14+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -732,7 +732,7 @@ msgstr "Bibtex gakoa"
 
 #: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:147
 #: src/configdialog.cpp:174 src/configdialog.cpp:188 src/configdialog.cpp:205
-#: src/configdialog.cpp:1146 src/fetch/amazonfetcher.cpp:863
+#: src/configdialog.cpp:1146 src/fetch/amazonfetcher.cpp:865
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
 #: src/fetch/colnectfetcher.cpp:377 src/fetch/colnectfetcher.cpp:544
 #: src/fetch/colnectfetcher.cpp:563 src/fetch/colnectfetcher.cpp:601
@@ -868,7 +868,7 @@ msgstr "Kapitulua"
 #: src/collections/bibtexcollection.cpp:208
 #: src/collections/bookcollection.cpp:137 src/collections/cardcollection.cpp:78
 #: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:376
-#: src/fetch/colnectfetcher.cpp:848
+#: src/fetch/colnectfetcher.cpp:861
 #, kde-format
 msgid "Series"
 msgstr "Serieak"
@@ -893,7 +893,7 @@ msgstr "Aipamen gurutzatua"
 #: src/collections/cardcollection.cpp:107
 #: src/collections/comicbookcollection.cpp:114
 #: src/collections/musiccollection.cpp:109
-#: src/collections/videocollection.cpp:209 src/fetch/amazonfetcher.cpp:1078
+#: src/collections/videocollection.cpp:209 src/fetch/amazonfetcher.cpp:1080
 #, kde-format
 msgid "Keywords"
 msgstr "Gako-hitzak"
@@ -976,7 +976,7 @@ msgstr "Gutxieneko adina"
 #: src/collections/filecatalog.cpp:54 src/collections/gamecollection.cpp:90
 #: src/collections/stampcollection.cpp:49
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
-#: src/fetch/colnectfetcher.cpp:384 src/fetch/colnectfetcher.cpp:851
+#: src/fetch/colnectfetcher.cpp:384 src/fetch/colnectfetcher.cpp:864
 #: src/fetch/numistafetcher.cpp:351 src/fetch/numistafetcher.cpp:399
 #: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:249
 #, kde-format
@@ -1075,7 +1075,7 @@ msgstr "Nere liburuak"
 msgid "Subtitle"
 msgstr "Azpidatzia"
 
-#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
+#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:969
 #: src/fetch/doubanfetcher.cpp:446 src/fetch/doubanfetcher.cpp:499
 #: src/fetch/ibsfetcher.cpp:289 src/translators/alexandriaimporter.cpp:163
 #: src/translators/librarythingimporter.cpp:149
@@ -1083,7 +1083,7 @@ msgstr "Azpidatzia"
 msgid "Hardback"
 msgstr "Azal gogorrekoa"
 
-#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:965
+#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
 #: src/fetch/doubanfetcher.cpp:448 src/fetch/doubanfetcher.cpp:501
 #: src/fetch/ibsfetcher.cpp:287 src/translators/librarythingimporter.cpp:147
 #, kde-format
@@ -1305,13 +1305,13 @@ msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "Grading Service"
 msgstr "Kalifikazio zerbitzua"
 
-#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:846
+#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:859
 #: src/fetch/numistafetcher.cpp:401
 #, kde-format
 msgid "Obverse"
 msgstr "Aurkia"
 
-#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:847
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:860
 #: src/fetch/numistafetcher.cpp:402
 #, kde-format
 msgid "Reverse"
@@ -1639,7 +1639,7 @@ msgid "Compact Disc"
 msgstr "CD (Disko trinkoa)"
 
 #: src/collections/musiccollection.cpp:50
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1045
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1047
 #: src/fetch/discogsfetcher.cpp:459 src/fetch/upcitemdbfetcher.cpp:420
 #: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:169
 #, kde-format
@@ -1760,7 +1760,7 @@ msgstr "Irudia"
 msgid "My Videos"
 msgstr "Nere bideoak"
 
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1031
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1033
 #: src/fetch/upcitemdbfetcher.cpp:406
 #, kde-format
 msgid "VHS"
@@ -1776,13 +1776,13 @@ msgstr "VCD"
 msgid "DivX"
 msgstr "DivX"
 
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1025
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1027
 #: src/fetch/upcitemdbfetcher.cpp:400
 #, kde-format
 msgid "Blu-ray"
 msgstr "Blu-ray"
 
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1028
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1030
 #: src/fetch/upcitemdbfetcher.cpp:403
 #, kde-format
 msgid "HD DVD"
@@ -1860,7 +1860,7 @@ msgstr "Eskualdea"
 msgid "Nationality"
 msgstr "Nazionalitatea"
 
-#: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1041
+#: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1043
 #: src/fetch/upcitemdbfetcher.cpp:416
 #, kde-format
 msgid "NTSC"
@@ -1954,7 +1954,7 @@ msgstr "Bideoak irauten duen denbora (minututan)"
 msgid "Aspect Ratio"
 msgstr "Aspektu-proportzioa"
 
-#: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1014
+#: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1016
 #: src/fetch/upcitemdbfetcher.cpp:386
 #, kde-format
 msgid "Widescreen"
@@ -1970,7 +1970,7 @@ msgstr "Zuri-beltza"
 msgid "Color Mode"
 msgstr "Kolore-modua"
 
-#: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1035
+#: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1037
 #: src/fetch/upcitemdbfetcher.cpp:410
 #, kde-format
 msgid "Director's Cut"
@@ -3187,7 +3187,7 @@ msgstr "Kodetu esportatutako fitxategia tokiko kodetze sistemarekin."
 msgid "SAO/NASA Astrophysics Data System"
 msgstr "SAO/NASAren datu sistema astrofisikoak"
 
-#: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1095
+#: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1097
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:230
 #: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:598
 #: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:381
@@ -3204,7 +3204,7 @@ msgstr ""
 "baldintzak onartzen badituzu, <a href='%1'>sinatu kontu bat izateko</a>, eta "
 "sartu behean zure informazio."
 
-#: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1107
+#: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1109
 #: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:242
 #: src/fetch/entrezfetcher.cpp:538 src/fetch/giantbombfetcher.cpp:227
 #: src/fetch/googlebookfetcher.cpp:393 src/fetch/isbndbfetcher.cpp:405
@@ -3393,7 +3393,7 @@ msgstr "Arabiar Emirerri Batuak"
 msgid "This data is licensed under <a href=%1>specific terms</a>."
 msgstr "Datu horiek <a href=%1>berariazko terminoetan</a> lizentziatuta daude."
 
-#: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1112
+#: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1114
 #, kde-format
 msgid ""
 "Access to data from Amazon.com requires an AWS Access Key ID and a Secret "
@@ -3410,18 +3410,18 @@ msgstr ""
 msgid "Those values must be entered in the data source settings."
 msgstr "Datu horiek datu sorburuen ezarpenetan sartu behar dira."
 
-#: src/fetch/amazonfetcher.cpp:464
+#: src/fetch/amazonfetcher.cpp:466
 #, kde-format
 msgid "Results from %1: %2/%3"
 msgstr "%1(e)ren emaitzak: %2/%3"
 
-#: src/fetch/amazonfetcher.cpp:633 src/fetch/colnectfetcher.cpp:823
+#: src/fetch/amazonfetcher.cpp:635 src/fetch/colnectfetcher.cpp:836
 #: src/fetch/discogsfetcher.cpp:227 src/fetch/doubanfetcher.cpp:477
 #: src/fetch/filmaffinityfetcher.cpp:432 src/fetch/filmasterfetcher.cpp:147
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:198
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
 #: src/fetch/isbndbfetcher.cpp:294 src/fetch/itunesfetcher.cpp:366
-#: src/fetch/kinofetcher.cpp:364 src/fetch/kinopoiskfetcher.cpp:267
+#: src/fetch/kinofetcher.cpp:413 src/fetch/kinopoiskfetcher.cpp:267
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/mobygamesfetcher.cpp:343
 #: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:286
 #: src/fetch/numistafetcher.cpp:294 src/fetch/omdbfetcher.cpp:181
@@ -3433,27 +3433,27 @@ msgstr "%1(e)ren emaitzak: %2/%3"
 msgid "The cover image could not be loaded."
 msgstr "Azaleko irudia ezin izan du zamatu."
 
-#: src/fetch/amazonfetcher.cpp:862 src/fetch/amazonfetcher.cpp:1079
+#: src/fetch/amazonfetcher.cpp:864 src/fetch/amazonfetcher.cpp:1081
 #, kde-format
 msgid "Amazon Link"
 msgstr "Amazon esteka"
 
-#: src/fetch/amazonfetcher.cpp:1069
+#: src/fetch/amazonfetcher.cpp:1071
 #, kde-format
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com web zerbitzuak (AWS)"
 
-#: src/fetch/amazonfetcher.cpp:1117
+#: src/fetch/amazonfetcher.cpp:1119
 #, kde-format
 msgid "Secret key: "
 msgstr "Gako sekretua:"
 
-#: src/fetch/amazonfetcher.cpp:1127
+#: src/fetch/amazonfetcher.cpp:1129
 #, kde-format
 msgid "Country: "
 msgstr "Herrialdea:"
 
-#: src/fetch/amazonfetcher.cpp:1142
+#: src/fetch/amazonfetcher.cpp:1144
 #, kde-format
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
@@ -3462,54 +3462,54 @@ msgstr ""
 "«Amazon.com»ek toki ezarpen ezberdineko guneetako datuak hornitzen ditu. "
 "Datu-sorburu honetarako erabili nahi duzuna aukeratu."
 
-#: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:986 src/fetch/discogsfetcher.cpp:618
+#: src/fetch/amazonfetcher.cpp:1150 src/fetch/boardgamegeekfetcher.cpp:215
+#: src/fetch/colnectfetcher.cpp:999 src/fetch/discogsfetcher.cpp:618
 #: src/fetch/imdbfetcher.cpp:567 src/fetch/itunesfetcher.cpp:565
 #: src/fetch/mobygamesfetcher.cpp:669 src/fetch/moviemeterfetcher.cpp:319
 #: src/fetch/rpggeekfetcher.cpp:224 src/fetch/thegamesdbfetcher.cpp:655
-#: src/fetch/videogamegeekfetcher.cpp:215
+#: src/fetch/videogamegeekfetcher.cpp:237
 #, kde-format
 msgid "&Image size: "
 msgstr "&Irudiaren neurria:"
 
-#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:219
-#: src/fetch/colnectfetcher.cpp:990 src/fetch/discogsfetcher.cpp:621
+#: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:219
+#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:621
 #: src/fetch/imdbfetcher.cpp:570 src/fetch/itunesfetcher.cpp:569
 #: src/fetch/mobygamesfetcher.cpp:672 src/fetch/moviemeterfetcher.cpp:322
 #: src/fetch/rpggeekfetcher.cpp:228 src/fetch/thegamesdbfetcher.cpp:658
-#: src/fetch/videogamegeekfetcher.cpp:219
+#: src/fetch/videogamegeekfetcher.cpp:241
 #, kde-format
 msgid "Small Image"
 msgstr "Irudi txikia"
 
-#: src/fetch/amazonfetcher.cpp:1152 src/fetch/imdbfetcher.cpp:571
+#: src/fetch/amazonfetcher.cpp:1154 src/fetch/imdbfetcher.cpp:571
 #: src/fetch/moviemeterfetcher.cpp:323 src/fetch/thegamesdbfetcher.cpp:659
 #, kde-format
 msgid "Medium Image"
 msgstr "Irudi ertaina"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
-#: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:220
-#: src/fetch/colnectfetcher.cpp:991 src/fetch/discogsfetcher.cpp:623
+#: src/fetch/amazonfetcher.cpp:1155 src/fetch/boardgamegeekfetcher.cpp:220
+#: src/fetch/colnectfetcher.cpp:1004 src/fetch/discogsfetcher.cpp:623
 #: src/fetch/imdbfetcher.cpp:572 src/fetch/itunesfetcher.cpp:570
 #: src/fetch/mobygamesfetcher.cpp:674 src/fetch/moviemeterfetcher.cpp:324
 #: src/fetch/rpggeekfetcher.cpp:229 src/fetch/thegamesdbfetcher.cpp:660
-#: src/fetch/videogamegeekfetcher.cpp:220
+#: src/fetch/videogamegeekfetcher.cpp:242
 #, kde-format
 msgid "Large Image"
 msgstr "Irudi handia"
 
-#: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:989 src/fetch/discogsfetcher.cpp:624
+#: src/fetch/amazonfetcher.cpp:1156 src/fetch/boardgamegeekfetcher.cpp:218
+#: src/fetch/colnectfetcher.cpp:1002 src/fetch/discogsfetcher.cpp:624
 #: src/fetch/imdbfetcher.cpp:573 src/fetch/itunesfetcher.cpp:568
 #: src/fetch/mobygamesfetcher.cpp:675 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/rpggeekfetcher.cpp:227 src/fetch/thegamesdbfetcher.cpp:661
-#: src/fetch/videogamegeekfetcher.cpp:218
+#: src/fetch/videogamegeekfetcher.cpp:240
 #, kde-format
 msgid "No Image"
 msgstr "Irudirik gabe"
 
-#: src/fetch/amazonfetcher.cpp:1157 src/fetch/discogsfetcher.cpp:628
+#: src/fetch/amazonfetcher.cpp:1159 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:679
 #: src/fetch/moviemeterfetcher.cpp:329 src/fetch/thegamesdbfetcher.cpp:665
 #, kde-format
@@ -3520,12 +3520,12 @@ msgstr ""
 "Azaleko irudia ere zama-jaitsi daiteke. Hala ere, bilduman irudi handi "
 "gehiegi izateak errendimendua okertu dezake."
 
-#: src/fetch/amazonfetcher.cpp:1163
+#: src/fetch/amazonfetcher.cpp:1165
 #, kde-format
 msgid "&Associate's ID: "
 msgstr "&Bazkidearen ID:"
 
-#: src/fetch/amazonfetcher.cpp:1169
+#: src/fetch/amazonfetcher.cpp:1171
 #, kde-format
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
@@ -3549,7 +3549,7 @@ msgstr ""
 #: src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
-#: src/fetch/kinofetcher.cpp:402 src/fetch/kinoteatrfetcher.cpp:513
+#: src/fetch/kinofetcher.cpp:451 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:399
 #: src/fetch/openlibraryfetcher.cpp:457 src/fetch/springerfetcher.cpp:187
 #: src/fetch/tvmazefetcher.cpp:386 src/fetch/upcitemdbfetcher.cpp:479
@@ -3578,42 +3578,42 @@ msgstr "ISBN zk."
 msgid "BoardGameGeek Link"
 msgstr "BoardGameGeek esteka"
 
-#: src/fetch/colnectfetcher.cpp:543 src/fetch/colnectfetcher.cpp:844
+#: src/fetch/colnectfetcher.cpp:543 src/fetch/colnectfetcher.cpp:857
 #, kde-format
 msgid "Colnect Link"
 msgstr "Colnect esteka"
 
-#: src/fetch/colnectfetcher.cpp:562 src/fetch/colnectfetcher.cpp:850
+#: src/fetch/colnectfetcher.cpp:562 src/fetch/colnectfetcher.cpp:863
 #, kde-format
 msgid "Mintage"
 msgstr "Txanpongintza"
 
-#: src/fetch/colnectfetcher.cpp:600 src/fetch/colnectfetcher.cpp:852
+#: src/fetch/colnectfetcher.cpp:600 src/fetch/colnectfetcher.cpp:865
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
 msgstr "Stanley Gibbons"
 
-#: src/fetch/colnectfetcher.cpp:607 src/fetch/colnectfetcher.cpp:853
+#: src/fetch/colnectfetcher.cpp:607 src/fetch/colnectfetcher.cpp:866
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "Michel"
 
-#: src/fetch/colnectfetcher.cpp:854 src/fetch/giantbombfetcher.cpp:203
+#: src/fetch/colnectfetcher.cpp:867 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:635
 #: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:329
 #, kde-format
 msgid "PEGI Rating"
 msgstr "PEGI sailkapena"
 
-#: src/fetch/colnectfetcher.cpp:958 src/fetch/filmaffinityfetcher.cpp:494
+#: src/fetch/colnectfetcher.cpp:971 src/fetch/filmaffinityfetcher.cpp:494
 #: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:626
 #, kde-format
 msgid "Language: "
 msgstr "Hizkuntza:"
 
-#: src/fetch/colnectfetcher.cpp:996
+#: src/fetch/colnectfetcher.cpp:1009
 #, kde-format
 msgid "Country code: "
 msgstr "Herrialdearen kodea:"
@@ -4301,7 +4301,7 @@ msgstr "Harpidedunaren PIN:"
 msgid "VGCollect Link"
 msgstr "Colnect esteka"
 
-#: src/fetch/videogamegeekfetcher.cpp:203
+#: src/fetch/videogamegeekfetcher.cpp:225
 #, kde-format
 msgid "VideoGameGeek Link"
 msgstr "VideoGameGeek esteka"
