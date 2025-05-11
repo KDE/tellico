@@ -231,8 +231,9 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     if(objValue(obj, "@type") != QStringLiteral("Movie")) {
       continue;
     }
-    entry->setField(QStringLiteral("director"), objValue(obj, "director", "name"));
-    hasDirector = !mapValue(obj, "director", "name").isEmpty();
+    const auto dirName = objValue(obj, "director", "name");
+    entry->setField(QStringLiteral("director"), dirName);
+    hasDirector = !dirName.isEmpty();
 
     QStringList actors;
     const auto actorArray = obj[QLatin1StringView("actor")].toArray();
