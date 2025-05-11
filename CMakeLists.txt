@@ -99,6 +99,11 @@ find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS
     WidgetsAddons
     XmlGui
 )
+if(KF_MAJOR_VERSION STREQUAL "6")
+    find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS
+        ColorScheme
+    )
+endif()
 
 if(NOT USE_KHTML)
     find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
