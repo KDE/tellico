@@ -131,7 +131,7 @@ void VideoGameGeekFetcher::parseData(QByteArray& data_) {
   }
   // error comes in a div element apparently
   auto e = dom.documentElement();
-  if(e.tagName() == QLatin1StringView("div") &&
+  if(e.tagName() == QLatin1String("div") &&
      e.attribute(QLatin1String("class")).contains(QLatin1String("error"))) {
     myLog() << "VideoGameGeek error:" << e.text().trimmed();
   }
