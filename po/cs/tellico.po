@@ -4141,22 +4141,19 @@ msgid "The rate limit has been exceeded."
 msgstr ""
 
 #: src/fetch/metronfetcher.cpp:245 src/fetch/metronfetcher.cpp:431
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "Odkaz na MovieMeter"
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:397
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 vyžaduje uživatelské jméno a heslo."
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:402
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Pro přístup k tomuto zdroji dat je potřeba přístupový klíč."
+msgstr ""
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
