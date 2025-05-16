@@ -30,6 +30,8 @@
 #include <QObject>
 #include <QEventLoop>
 
+#include <memory> // std::unique_ptr
+
 class QPrinter;
 class QWebEngineView;
 
