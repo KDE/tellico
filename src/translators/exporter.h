@@ -61,12 +61,12 @@ class Exporter : public QObject {
 Q_OBJECT
 
 public:
-  Exporter(Data::CollPtr coll);
+  Exporter(Data::CollPtr coll, const QUrl& baseUrl=QUrl());
   virtual ~Exporter();
 
   Data::CollPtr collection() const;
 
-  void setURL(const QUrl& url_) { m_url = url_; }
+  void setURL(const QUrl& url_) { m_targetUrl = url_; }
   void setEntries(const Data::EntryList& entries) { m_entries = entries; }
   void setFields(const Data::FieldList& fields) { m_fields = fields; }
   void setOptions(long options) { m_options = options; reset(); }
@@ -74,7 +74,8 @@ public:
   // used for saving config options, do not translate
   virtual QString formatString() const = 0;
   virtual QString fileFilter() const = 0;
-  const QUrl& url() const { return m_url; }
+  const QUrl& baseUrl() const { return m_baseUrl; }
+  const QUrl& url() const { return m_targetUrl; }
   const Data::EntryList& entries() const { return m_entries; }
   const Data::FieldList& fields() const;
   long options() const { return m_options; }
@@ -98,7 +99,8 @@ private:
   Data::CollPtr m_coll;
   Data::EntryList m_entries;
   Data::FieldList m_fields;
-  QUrl m_url;
+  QUrl m_baseUrl;
+  QUrl m_targetUrl;
 };
 
   } // end namespace

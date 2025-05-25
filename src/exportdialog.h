@@ -46,20 +46,21 @@ class ExportDialog : public QDialog {
 Q_OBJECT
 
 public:
-  ExportDialog(Export::Format format, Data::CollPtr coll, QWidget* parent);
+  ExportDialog(Export::Format format, Data::CollPtr coll, const QUrl& baseUrl, QWidget* parent);
   ~ExportDialog();
 
   QString fileFilter();
   bool exportURL(const QUrl& url=QUrl()) const;
 
   static Export::Target exportTarget(Export::Format format);
-  static bool exportCollection(Data::CollPtr coll, Data::EntryList entries, Export::Format format, const QUrl& url);
+  static bool exportCollection(Data::CollPtr coll, Data::EntryList entries, Export::Format format,
+                               const QUrl& baseUrl, const QUrl& targetUrl);
 
 private Q_SLOTS:
   void slotSaveOptions();
 
 private:
-  static Export::Exporter* exporter(Export::Format format, Data::CollPtr coll);
+  static Export::Exporter* exporter(Export::Format format, Data::CollPtr coll, const QUrl& baseUrl);
 
   void readOptions();
 

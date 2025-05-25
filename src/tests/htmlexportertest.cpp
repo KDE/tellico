@@ -96,7 +96,7 @@ void HtmlExporterTest::testHtml() {
   Tellico::Data::CollPtr coll = doc->collection();
   QVERIFY(coll);
 
-  Tellico::Export::HTMLExporter exp(coll);
+  Tellico::Export::HTMLExporter exp(coll, Tellico::Data::Document::self()->URL());
   exp.setEntries(coll->entries());
   exp.setExportEntryFiles(true);
   exp.setEntryXSLTFile(QStringLiteral("Fancy"));
@@ -169,7 +169,7 @@ void HtmlExporterTest::testHtmlTitle() {
   Tellico::Data::EntryPtr e(new Tellico::Data::Entry(coll));
   coll->addEntries(e);
 
-  Tellico::Export::HTMLExporter exporter(coll);
+  Tellico::Export::HTMLExporter exporter(coll, QUrl());
   exporter.setEntries(coll->entries());
 
   QString output = exporter.text();
@@ -192,7 +192,7 @@ void HtmlExporterTest::testReportHtml() {
   e->setField(QStringLiteral("rating"), QStringLiteral("3"));
   coll->addEntries(e);
 
-  Tellico::Export::HTMLExporter exporter(coll);
+  Tellico::Export::HTMLExporter exporter(coll, QUrl());
   exporter.setXSLTFile(QFINDTESTDATA("../../xslt/report-templates/Column_View.xsl"));
   exporter.setEntries(coll->entries());
 
@@ -206,7 +206,7 @@ void HtmlExporterTest::testReportHtml() {
   QCOMPARE(match.captured(1), QLocale().toString(QDate::currentDate()));
 
   // test image location in tmp directory
-  Tellico::Export::HTMLExporter exporter2(coll);
+  Tellico::Export::HTMLExporter exporter2(coll, QUrl());
   exporter2.setXSLTFile(QFINDTESTDATA("../../xslt/report-templates/Image_List.xsl"));
   exporter2.setEntries(coll->entries());
   exporter2.setColumns(QStringList() << QStringLiteral("Title") << QStringLiteral("Rating"));
@@ -227,7 +227,7 @@ void HtmlExporterTest::testReportHtml() {
 
 void HtmlExporterTest::testDirectoryNames() {
   Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
-  Tellico::Export::HTMLExporter exp(coll);
+  Tellico::Export::HTMLExporter exp(coll, QUrl());
 
   exp.setURL(QUrl::fromLocalFile(QDir::homePath() + QStringLiteral("/test.html")));
   QCOMPARE(exp.fileDir(), QUrl::fromLocalFile(QDir::homePath() + QStringLiteral("/test_files/")));
@@ -263,7 +263,7 @@ void HtmlExporterTest::testTemplatesTidy() {
   Tellico::Data::CollPtr coll = importer.collection();
   QVERIFY(coll);
 
-  Tellico::Export::HTMLExporter exporter(coll);
+  Tellico::Export::HTMLExporter exporter(coll, url);
   exporter.setParseDOM(false); // shows error for <wbr> tags and is not necessary for check
   exporter.setEntries(coll->entries());
   exporter.setXSLTFile(xsltFile);
@@ -345,7 +345,7 @@ void HtmlExporterTest::testEntryTemplates() {
   Tellico::Data::CollPtr coll = importer.collection();
   QVERIFY(coll);
 
-  Tellico::Export::HTMLExporter exporter(coll);
+  Tellico::Export::HTMLExporter exporter(coll, url);
   exporter.setParseDOM(false); // shows error for <wbr> tags and is not necessary for check
   exporter.setEntries(coll->entries());
   exporter.setXSLTFile(xsltFile);
@@ -384,7 +384,7 @@ void HtmlExporterTest::testPrinting() {
   QVERIFY(coll);
 
   // mimic PrintHandler::generateHtml()
-  Tellico::Export::HTMLExporter exporter(coll);
+  Tellico::Export::HTMLExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
   exporter.setXSLTFile(QFINDTESTDATA(QStringLiteral("../../xslt/tellico-printing.xsl")));
   exporter.setPrintHeaders(true);

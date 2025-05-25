@@ -1935,7 +1935,8 @@ void MainWindow::slotFileExport(int format_) {
   slotStatusMsg(i18n("Exporting data..."));
 
   Export::Format format = static_cast<Export::Format>(format_);
-  ExportDialog dlg(format, Data::Document::self()->collection(), this);
+  ExportDialog dlg(format, Data::Document::self()->collection(),
+                   Data::Document::self()->URL(), this);
 
   if(dlg.exec() == QDialog::Rejected) {
     StatusBar::self()->clearStatus();
@@ -2138,9 +2139,9 @@ bool MainWindow::importFile(Tellico::Import::Format format_, const QUrl& url_, T
   return !failed; // return true means success
 }
 
-bool MainWindow::exportCollection(Tellico::Export::Format format_, const QUrl& url_, bool filtered_) {
-  if(!url_.isValid()) {
-    myDebug() << "invalid URL:" << url_;
+bool MainWindow::exportCollection(Tellico::Export::Format format_, const QUrl& targetUrl_, bool filtered_) {
+  if(!targetUrl_.isValid()) {
+    myDebug() << "invalid target URL:" << targetUrl_;
     return false;
   }
 
@@ -2162,7 +2163,7 @@ bool MainWindow::exportCollection(Tellico::Export::Format format_, const QUrl& u
   }
 
   return ExportDialog::exportCollection(coll, filtered_ ? Controller::self()->visibleEntries() : coll->entries(),
-                                        format_, url_);
+                                        format_, Data::Document::self()->URL(), targetUrl_);
 }
 
 bool MainWindow::showEntry(Data::ID id) {

@@ -42,8 +42,10 @@
 using namespace Tellico;
 using Tellico::Export::TellicoZipExporter;
 
-TellicoZipExporter::TellicoZipExporter(Data::CollPtr coll) : Exporter(coll)
-    , m_includeImages(true), m_cancelled(false) {
+TellicoZipExporter::TellicoZipExporter(Data::CollPtr coll, const QUrl& baseUrl_)
+  : Exporter(coll, baseUrl_),
+    m_includeImages(true),
+    m_cancelled(false) {
 }
 
 QString TellicoZipExporter::formatString() const {
@@ -67,7 +69,7 @@ bool TellicoZipExporter::exec() {
   connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Export::TellicoZipExporter::slotCancel);
   ProgressItem::Done done(this);
 
-  TellicoXMLExporter exp(coll);
+  TellicoXMLExporter exp(coll, baseUrl());
   exp.setEntries(entries());
   exp.setFields(fields());
   exp.setURL(url()); // needed in case of relative URL values

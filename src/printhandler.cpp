@@ -147,7 +147,8 @@ void PrintHandler::pdfPrintFinished(const QString&, bool success_) {
 }
 
 QString PrintHandler::generateHtml() const {
-  Export::HTMLExporter exporter(Data::Document::self()->collection());
+  Export::HTMLExporter exporter(Data::Document::self()->collection(),
+                                Data::Document::self()->URL());
   // only print visible entries
   exporter.setEntries(m_entries);
   exporter.setXSLTFile(QStringLiteral("tellico-printing.xsl"));

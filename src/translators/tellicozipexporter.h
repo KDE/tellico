@@ -37,7 +37,7 @@ class TellicoZipExporter : public Exporter {
 Q_OBJECT
 
 public:
-  TellicoZipExporter(Data::CollPtr coll);
+  TellicoZipExporter(Data::CollPtr coll, const QUrl& baseUrl);
 
   virtual bool exec() override;
   virtual QString formatString() const override;
@@ -52,8 +52,8 @@ public Q_SLOTS:
   void slotCancel();
 
 private:
-  bool m_includeImages : 1;
-  bool m_cancelled : 1;
+  bool m_includeImages;
+  bool m_cancelled;
 };
 
   } // end namespace

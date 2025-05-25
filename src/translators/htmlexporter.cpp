@@ -26,7 +26,6 @@
 #include "xslthandler.h"
 #include "tellicoxmlexporter.h"
 #include "../collection.h"
-#include "../document.h"
 #include "../core/filehandler.h"
 #include "../core/netaccess.h"
 #include "../config/tellico_config.h"
@@ -69,7 +68,8 @@ extern "C" {
 
 using Tellico::Export::HTMLExporter;
 
-HTMLExporter::HTMLExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
+HTMLExporter::HTMLExporter(Tellico::Data::CollPtr coll_, const QUrl& baseUrl_)
+  : Tellico::Export::Exporter(coll_),
     m_handler(nullptr),
     m_printHeaders(true),
     m_printGrouped(false),
@@ -85,6 +85,7 @@ HTMLExporter::HTMLExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Expo
     m_checkPrintGrouped(nullptr),
     m_checkExportEntryFiles(nullptr),
     m_checkExportImages(nullptr),
+    m_baseUrl(baseUrl_),
     m_xsltFile(QStringLiteral("tellico2html.xsl")) {
 }
 
@@ -281,7 +282,7 @@ QString HTMLExporter::text() {
   writeImages(coll);
 
   // now grab the XML
-  TellicoXMLExporter exporter(coll);
+  TellicoXMLExporter exporter(coll, m_baseUrl);
   exporter.setURL(url());
   exporter.setEntries(entries());
   exporter.setFields(fields());
@@ -341,7 +342,7 @@ QString HTMLExporter::text() {
 }
 
 void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
-  QString file = Data::Document::self()->URL().fileName();
+  QString file = baseUrl().fileName();
   if(file != TC_I18N1(Tellico::untitledFilename)) {
     m_handler->addStringParam("filename", QFile::encodeName(file));
   }
@@ -814,7 +815,7 @@ bool HTMLExporter::writeEntryFiles() {
 
   GUI::CursorSaver cs(Qt::WaitCursor);
 
-  HTMLExporter exporter(collection());
+  HTMLExporter exporter(collection(), m_baseUrl);
   long opt = options() | Export::ExportForce;
   opt &= ~ExportProgress;
   exporter.setFields(fields());

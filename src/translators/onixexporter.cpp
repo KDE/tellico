@@ -50,7 +50,8 @@
 
 using Tellico::Export::ONIXExporter;
 
-ONIXExporter::ONIXExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
+ONIXExporter::ONIXExporter(Tellico::Data::CollPtr coll_, const QUrl& baseUrl_)
+  : Tellico::Export::Exporter(coll_, baseUrl_),
     m_handler(nullptr),
     m_xsltFile(QStringLiteral("tellico2onix.xsl")),
     m_includeImages(true),
@@ -150,7 +151,7 @@ QString ONIXExporter::text() {
   GUI::CursorSaver cs(Qt::WaitCursor);
 
   // now grab the XML
-  TellicoXMLExporter exporter(coll);
+  TellicoXMLExporter exporter(coll, baseUrl());
   exporter.setEntries(entries());
   exporter.setFields(fields());
   exporter.setIncludeImages(false); // do not include images in XML

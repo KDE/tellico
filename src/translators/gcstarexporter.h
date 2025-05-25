@@ -41,7 +41,7 @@ class GCstarExporter : public Exporter {
 Q_OBJECT
 
 public:
-  GCstarExporter(Data::CollPtr coll);
+  GCstarExporter(Data::CollPtr coll, const QUrl& baseUrl);
   ~GCstarExporter();
 
   virtual bool exec() override;

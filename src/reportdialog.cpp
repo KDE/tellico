@@ -242,7 +242,8 @@ void ReportDialog::generateHtml() {
   m_xsltFile = xsltFile;
 
   delete m_exporter;
-  m_exporter = new Export::HTMLExporter(Data::Document::self()->collection());
+  m_exporter = new Export::HTMLExporter(Data::Document::self()->collection(),
+                                        Data::Document::self()->URL());
   m_exporter->setXSLTFile(m_xsltFile);
   m_exporter->setPrintHeaders(false); // the templates should take care of this themselves
   m_exporter->setPrintGrouped(true); // allow templates to take advantage of added DOM
@@ -262,7 +263,7 @@ void ReportDialog::generateAllEntries() {
   m_xsltFile = xsltFile;
 
   delete m_exporter;
-  m_exporter = new Export::HTMLExporter(coll);
+  m_exporter = new Export::HTMLExporter(coll, Data::Document::self()->URL());
   m_exporter->setXSLTFile(m_xsltFile);
   m_exporter->setPrintHeaders(false); // the templates should take care of this themselves
   m_exporter->setPrintGrouped(true); // allow templates to take advantage of added DOM

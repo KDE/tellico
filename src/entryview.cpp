@@ -25,6 +25,7 @@
 #include "entryview.h"
 #include "entry.h"
 #include "field.h"
+#include "document.h"
 #include "translators/xslthandler.h"
 #include "translators/tellicoxmlexporter.h"
 #include "collection.h"
@@ -36,7 +37,6 @@
 #include "config/tellico_config.h"
 #include "gui/drophandler.h"
 #include "utils/cursorsaver.h"
-#include "document.h"
 #include "tellico_debug.h"
 
 #include <KMessageBox>
@@ -189,7 +189,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 
   m_entry = entry_;
 
-  Export::TellicoXMLExporter exporter(m_entry->collection());
+  Export::TellicoXMLExporter exporter(m_entry->collection(), Data::Document::self()->URL());
   exporter.setEntries(Data::EntryList() << m_entry);
   long opt = exporter.options();
   // verify images for the view

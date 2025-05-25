@@ -232,10 +232,10 @@ bool Document::saveDocument(const QUrl& url_, bool force_) {
   }
   QScopedPointer<Export::Exporter> exporter;
   if(m_fileFormat == Import::TellicoImporter::XML) {
-    exporter.reset(new Export::TellicoXMLExporter(m_coll));
+    exporter.reset(new Export::TellicoXMLExporter(m_coll, m_url));
     static_cast<Export::TellicoXMLExporter*>(exporter.data())->setIncludeImages(includeImages);
   } else {
-    exporter.reset(new Export::TellicoZipExporter(m_coll));
+    exporter.reset(new Export::TellicoZipExporter(m_coll, m_url));
     static_cast<Export::TellicoZipExporter*>(exporter.data())->setIncludeImages(includeImages);
   }
   item.setProgress(int(0.8*totalSteps));
@@ -269,7 +269,7 @@ bool Document::saveDocumentTemplate(const QUrl& url_, const QString& title_) {
   foreach(auto filter, m_coll->filters()) {
     collTemplate->addFilter(filter);
   }
-  QScopedPointer<Export::Exporter> exporter(new Export::TellicoXMLExporter(collTemplate));
+  QScopedPointer<Export::Exporter> exporter(new Export::TellicoXMLExporter(collTemplate, m_url));
   exporter->setURL(url_);
   // since we already asked about overwriting the file, force the save
   exporter->setOptions(exporter->options() | Export::ExportForce | Export::ExportComplete);

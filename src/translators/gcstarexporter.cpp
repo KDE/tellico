@@ -44,7 +44,8 @@
 
 using Tellico::Export::GCstarExporter;
 
-GCstarExporter::GCstarExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
+GCstarExporter::GCstarExporter(Tellico::Data::CollPtr coll_, const QUrl& baseUrl_)
+  : Tellico::Export::Exporter(coll_, baseUrl_),
     m_handler(nullptr),
     m_xsltFile(QStringLiteral("tellico2gcstar.xsl")) {
 }
@@ -119,7 +120,7 @@ QString GCstarExporter::text() {
   }
 
   // now grab the XML
-  TellicoXMLExporter exporter(coll);
+  TellicoXMLExporter exporter(coll, QUrl());
   exporter.setEntries(entries());
   exporter.setFields(fields());
   exporter.setIncludeImages(false); // do not include images in XML

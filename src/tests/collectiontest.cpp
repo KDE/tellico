@@ -384,7 +384,7 @@ void CollectionTest::testDtd() {
     }
   }
 
-  Tellico::Export::TellicoXMLExporter exporter(coll);
+  Tellico::Export::TellicoXMLExporter exporter(coll, QUrl());
   exporter.setEntries(coll->entries());
 
   QCOMPARE(exporter.formatString(), QLatin1String("XML"));

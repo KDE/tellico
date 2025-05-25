@@ -198,7 +198,7 @@ void TellicoReadTest::testBibtexCollection() {
   auto filter1 = filterList.front();
   QCOMPARE(filter1->name(), QStringLiteral("1990"));
 
-  Tellico::Export::TellicoXMLExporter exporter(coll);
+  Tellico::Export::TellicoXMLExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
   exporter.setOptions(exporter.options() | Tellico::Export::ExportComplete);
   Tellico::Import::TellicoImporter importer2(exporter.text());
@@ -248,7 +248,7 @@ void TellicoReadTest::testTableData() {
   QVERIFY(coll);
   QCOMPARE(coll->entryCount(), 3);
 
-  Tellico::Export::TellicoXMLExporter exporter(coll);
+  Tellico::Export::TellicoXMLExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
   Tellico::Import::TellicoImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
@@ -671,7 +671,7 @@ void TellicoReadTest::testRelativeLink() {
   Tellico::Data::Document::self()->setURL(url); // set the base url
   QUrl expected = url.resolved(QUrl(QLatin1String("collectorz/image.png")));
 
-  Tellico::Export::TellicoXMLExporter exp(coll);
+  Tellico::Export::TellicoXMLExporter exp(coll, url);
   exp.setEntries(coll->entries());
   exp.setURL(url);
   QString output = handler.applyStylesheet(exp.text());
@@ -697,7 +697,7 @@ void TellicoReadTest::testEmptyFirstTableRow() {
   const QStringList rows = Tellico::FieldFormat::splitTable(entry->field(QSL("table")));
   QCOMPARE(rows.count(), 2);
 
-  Tellico::Export::TellicoXMLExporter exporter(coll);
+  Tellico::Export::TellicoXMLExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
   Tellico::Import::TellicoImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
@@ -718,7 +718,7 @@ void TellicoReadTest::testBug443845() {
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
   entry1->setField(QStringLiteral("title"), badTitle);
   coll->addEntries(entry1);
-  Tellico::Export::TellicoXMLExporter exporter(coll);
+  Tellico::Export::TellicoXMLExporter exporter(coll, QUrl());
   exporter.setEntries(coll->entries());
   // exported XML should not contain the illegal control character
   QVERIFY(!exporter.text().contains(QChar(0x0C)));
@@ -749,7 +749,7 @@ void TellicoReadTest::testEmoji() {
   entry1->setField(QStringLiteral("title"), textWithEmoji);
   QCOMPARE(entry1->title(), textWithEmoji);
   coll->addEntries(entry1);
-  Tellico::Export::TellicoXMLExporter exporter(coll);
+  Tellico::Export::TellicoXMLExporter exporter(coll, QUrl());
   exporter.setEntries(coll->entries());
 
   Tellico::Import::TellicoImporter importer(exporter.text());

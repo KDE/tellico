@@ -33,7 +33,6 @@
 #include "../images/image.h"
 #include "../images/imageinfo.h"
 #include "../core/filehandler.h"
-#include "../document.h"
 #include "../fieldformat.h"
 #include "../models/entrysortmodel.h"
 #include "../models/modelmanager.h"
@@ -55,8 +54,12 @@
 using namespace Tellico;
 using Tellico::Export::TellicoXMLExporter;
 
-TellicoXMLExporter::TellicoXMLExporter(Tellico::Data::CollPtr coll) : Exporter(coll),
-      m_includeImages(false), m_includeGroups(false), m_widget(nullptr), m_checkIncludeImages(nullptr) {
+TellicoXMLExporter::TellicoXMLExporter(Tellico::Data::CollPtr coll_, const QUrl& baseUrl_)
+  : Exporter(coll_, baseUrl_),
+    m_includeImages(false),
+    m_includeGroups(false),
+    m_widget(nullptr),
+    m_checkIncludeImages(nullptr) {
   setOptions(options() | Export::ExportImages | Export::ExportImageSize); // not included by default
 }
 
@@ -348,7 +351,11 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       } else if(fIt->type() == Data::Field::URL &&
                 fIt->property(QStringLiteral("relative")) == QLatin1String("true")) {
         // if a relative URL and url() is not empty, change the value!
-        QUrl old_url = Data::Document::self()->URL().resolved(QUrl(fieldValue));
+        Q_ASSERT(!baseUrl().isEmpty());
+        if(baseUrl().isEmpty()) {
+          myLog() << "Trying to calculate relative url without base:" << fIt->name() << fieldValue;
+        }
+        QUrl old_url = baseUrl().resolved(QUrl(fieldValue));
         if(options() & Export::ExportAbsoluteLinks) {
           fieldElem.appendChild(dom_.createTextNode(old_url.url()));
         } else if(!url().isEmpty()) {

@@ -87,7 +87,7 @@ void GCstarTest::testBook() {
   QCOMPARE(langs.count(), 1);
   QCOMPARE(langs.at(0), QStringLiteral("English"));
 
-  Tellico::Export::GCstarExporter exporter(coll);
+  Tellico::Export::GCstarExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
 
   Tellico::Import::GCstarImporter importer2(exporter.text());
@@ -147,7 +147,7 @@ void GCstarTest::testComicBook() {
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("comments").isEmpty());
 
-  Tellico::Export::GCstarExporter exporter(coll);
+  Tellico::Export::GCstarExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
 
   Tellico::Import::GCstarImporter importer2(exporter.text());
@@ -214,7 +214,7 @@ void GCstarTest::testVideo() {
   QCOMPARE(castList.at(0), QStringLiteral("Famke Janssen::Marnie Watson"));
   QCOMPARE(entry->field("location"), QStringLiteral("On Hard Drive"));
 
-  Tellico::Export::GCstarExporter exporter(coll);
+  Tellico::Export::GCstarExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
@@ -279,7 +279,7 @@ void GCstarTest::testMusic() {
   QCOMPARE(composers.at(1), QStringLiteral("David Hunt"));
   QCOMPARE(entry->field("cdate"), QStringLiteral("2009-09-22"));
 
-  Tellico::Export::GCstarExporter exporter(coll);
+  Tellico::Export::GCstarExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
@@ -328,7 +328,7 @@ void GCstarTest::testVideoGame() {
   QCOMPARE(entry->field("cdate"), QStringLiteral("2009-09-24"));
   QVERIFY(!entry->field("description").isEmpty());
 
-  Tellico::Export::GCstarExporter exporter(coll);
+  Tellico::Export::GCstarExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
@@ -379,7 +379,7 @@ void GCstarTest::testBoardGame() {
   QVERIFY(!entry->field("description").isEmpty());
   QVERIFY(!entry->field("comments").isEmpty());
 
-  Tellico::Export::GCstarExporter exporter(coll);
+  Tellico::Export::GCstarExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
@@ -436,7 +436,7 @@ void GCstarTest::testWine() {
   QVERIFY(!entry->field("comments").isEmpty());
   QVERIFY(!entry->field("label").isEmpty());
 
-  Tellico::Export::GCstarExporter exporter(coll);
+  Tellico::Export::GCstarExporter exporter(coll, url);
   exporter.setOptions(exporter.options() | Tellico::Export::ExportImages);
   exporter.setEntries(coll->entries());
 
@@ -483,7 +483,7 @@ void GCstarTest::testCoin() {
   QCOMPARE(metals.at(1), QStringLiteral("metal2"));
   QVERIFY(!entry->field("comments").isEmpty());
 
-  Tellico::Export::GCstarExporter exporter(coll);
+  Tellico::Export::GCstarExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
@@ -591,7 +591,7 @@ void GCstarTest::testCustomFields() {
   QCOMPARE(list.count(), 2);
   QCOMPARE(list.at(1), QStringLiteral("list2"));
 
-  Tellico::Export::GCstarExporter exporter(coll);
+  Tellico::Export::GCstarExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
 
   Tellico::Import::GCstarImporter importer2(exporter.text());

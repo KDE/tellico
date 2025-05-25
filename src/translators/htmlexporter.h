@@ -58,7 +58,7 @@ Q_OBJECT
 friend class ::HtmlExporterTest;
 
 public:
-  HTMLExporter(Data::CollPtr coll);
+  HTMLExporter(Data::CollPtr coll, const QUrl& baseUrl);
   ~HTMLExporter();
 
   virtual bool exec() override;
@@ -105,13 +105,13 @@ private:
   void createDir();
 
   XSLTHandler* m_handler;
-  bool m_printHeaders : 1;
-  bool m_printGrouped : 1;
-  bool m_exportEntryFiles : 1;
-  bool m_cancelled : 1;
-  bool m_parseDOM : 1;
-  bool m_checkCreateDir : 1;
-  bool m_checkCommonFile : 1;
+  bool m_printHeaders;
+  bool m_printGrouped;
+  bool m_exportEntryFiles;
+  bool m_cancelled;
+  bool m_parseDOM;
+  bool m_checkCreateDir;
+  bool m_checkCommonFile;
   int m_imageWidth;
   int m_imageHeight;
 
@@ -121,6 +121,7 @@ private:
   QCheckBox* m_checkExportEntryFiles;
   QCheckBox* m_checkExportImages;
 
+  QUrl m_baseUrl;
   QUrl m_collectionURL;
   QString m_xsltFile;
   QString m_xsltFilePath;

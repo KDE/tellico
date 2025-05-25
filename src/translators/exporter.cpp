@@ -28,7 +28,11 @@
 
 using Tellico::Export::Exporter;
 
-Exporter::Exporter(Tellico::Data::CollPtr coll) : QObject(), m_options(Export::ExportUTF8), m_coll(coll) {
+Exporter::Exporter(Tellico::Data::CollPtr coll_, const QUrl& baseUrl_)
+  : QObject(),
+    m_options(Export::ExportUTF8),
+    m_coll(coll_),
+    m_baseUrl(baseUrl_) {
 }
 
 Exporter::~Exporter() {

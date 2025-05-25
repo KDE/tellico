@@ -57,9 +57,11 @@
 using namespace Tellico;
 using Tellico::ExportDialog;
 
-ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollPtr coll_, QWidget* parent_)
-    : QDialog(parent_),
-      m_format(format_), m_coll(coll_), m_exporter(exporter(format_, coll_)) {
+ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollPtr coll_, const QUrl& baseUrl_, QWidget* parent_)
+  : QDialog(parent_),
+    m_format(format_),
+    m_coll(coll_),
+    m_exporter(exporter(format_, coll_, baseUrl_)) {
   setModal(true);
   setWindowTitle(i18n("Export Options"));
 
@@ -175,21 +177,21 @@ void ExportDialog::slotSaveOptions() {
 }
 
 // static
-Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format_, Data::CollPtr coll_) {
+Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format_, Data::CollPtr coll_, const QUrl& baseUrl_) {
   Export::Exporter* exporter = nullptr;
 
   switch(format_) {
     case Export::TellicoXML:
-      exporter = new Export::TellicoXMLExporter(coll_);
+      exporter = new Export::TellicoXMLExporter(coll_, baseUrl_);
       break;
 
     case Export::TellicoZip:
-      exporter = new Export::TellicoZipExporter(coll_);
+      exporter = new Export::TellicoZipExporter(coll_, baseUrl_);
       break;
 
     case Export::HTML:
       {
-        Export::HTMLExporter* htmlExp = new Export::HTMLExporter(coll_);
+        Export::HTMLExporter* htmlExp = new Export::HTMLExporter(coll_, baseUrl_);
         htmlExp->setGroupBy(Controller::self()->expandedGroupBy());
         htmlExp->setSortTitles(Controller::self()->sortTitles());
         htmlExp->setColumns(Controller::self()->visibleColumns());
@@ -210,7 +212,7 @@ Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format
       break;
 
     case Export::XSLT:
-      exporter = new Export::XSLTExporter(coll_);
+      exporter = new Export::XSLTExporter(coll_, baseUrl_);
       break;
 
     case Export::Alexandria:
@@ -218,11 +220,11 @@ Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format
       break;
 
     case Export::ONIX:
-      exporter = new Export::ONIXExporter(coll_);
+      exporter = new Export::ONIXExporter(coll_, baseUrl_);
       break;
 
     case Export::GCstar:
-      exporter = new Export::GCstarExporter(coll_);
+      exporter = new Export::GCstarExporter(coll_, baseUrl_);
       break;
 
     default:
@@ -287,9 +289,10 @@ Tellico::Export::Target ExportDialog::exportTarget(Tellico::Export::Format forma
 }
 
 // static
-bool ExportDialog::exportCollection(Data::CollPtr coll_, Data::EntryList entries_, Export::Format format_, const QUrl& url_) {
-  QScopedPointer<Export::Exporter> exp(exporter(format_, coll_));
-  exp->setURL(url_);
+bool ExportDialog::exportCollection(Data::CollPtr coll_, Data::EntryList entries_, Export::Format format_,
+                                    const QUrl& baseUrl_, const QUrl& targetUrl_) {
+  QScopedPointer<Export::Exporter> exp(exporter(format_, coll_, baseUrl_));
+  exp->setURL(targetUrl_);
   exp->setEntries(entries_);
 
   KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ExportOptions"));

@@ -46,7 +46,7 @@ class TellicoXMLExporter : public Exporter {
 Q_OBJECT
 
 public:
-  TellicoXMLExporter(Data::CollPtr coll);
+  TellicoXMLExporter(Data::CollPtr coll, const QUrl& baseUrl);
   ~TellicoXMLExporter();
 
   virtual bool exec() override;
@@ -82,8 +82,8 @@ private:
 
   // keep track of which images were written, since some entries could have same image
   mutable StringSet m_images;
-  bool m_includeImages : 1;
-  bool m_includeGroups : 1;
+  bool m_includeImages;
+  bool m_includeGroups;
 
   QWidget* m_widget;
   QCheckBox* m_checkIncludeImages;

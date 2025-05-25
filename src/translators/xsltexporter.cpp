@@ -42,7 +42,8 @@
 using namespace Tellico;
 using Tellico::Export::XSLTExporter;
 
-XSLTExporter::XSLTExporter(Data::CollPtr coll_) : Export::Exporter(coll_),
+XSLTExporter::XSLTExporter(Data::CollPtr coll_, const QUrl& baseUrl_)
+  : Export::Exporter(coll_, baseUrl_),
     m_widget(nullptr),
     m_URLRequester(nullptr) {
 }
@@ -66,7 +67,7 @@ bool XSLTExporter::exec() {
   handler.addStringParam("time", QTime::currentTime().toString(Qt::ISODate).toLatin1());
   handler.addStringParam("user", KUser(KUser::UseRealUserID).loginName().toLatin1());
 
-  TellicoXMLExporter exporter(collection());
+  TellicoXMLExporter exporter(collection(), baseUrl());
   exporter.setEntries(entries());
   exporter.setFields(fields());
   exporter.setOptions(options());

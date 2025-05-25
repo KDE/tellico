@@ -43,7 +43,7 @@ class ONIXExporter : public Exporter {
 Q_OBJECT
 
 public:
-  ONIXExporter(Data::CollPtr coll);
+  ONIXExporter(Data::CollPtr coll, const QUrl& baseUrl);
   ~ONIXExporter();
 
   virtual bool exec() override;
