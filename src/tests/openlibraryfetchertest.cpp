@@ -96,9 +96,10 @@ void OpenLibraryFetcherTest::testIsbn() {
   QVERIFY(!entry->field(QStringLiteral("comments")).isEmpty());
 }
 
+// also see https://bugs.kde.org/show_bug.cgi?id=504586
 void OpenLibraryFetcherTest::testIsbn13() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       QStringLiteral("9780596004361"));
+                                       QStringLiteral("9791030705966"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
   QVERIFY(fetcher->canSearch(request.key()));
 
@@ -108,8 +109,18 @@ void OpenLibraryFetcherTest::testIsbn13() {
   QVERIFY(results.size() >= 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("C Pocket Reference"));
-  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-0-596-00436-1"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Le Syndrome Magneto"));
+  QCOMPARE(entry->field(QStringLiteral("subtitle")), QStringLiteral("Et si les méchants avaient raison ?"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Au diable vauvert"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("1-03070-596-8"));
+  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("448"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Benjamin Patinaud"));
+  QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("French / français"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2023"));
+  QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("Paperback"));
+  QVERIFY(entry->field(QStringLiteral("openlibrary-work")).isEmpty()); // temporary field should not exist
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
 void OpenLibraryFetcherTest::testLccn() {

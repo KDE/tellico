@@ -186,14 +186,52 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
+  // possible that the author is set on the work but not the edition
+  // see https://github.com/internetarchive/openlibrary/issues/8144
+  const QString authorString(QStringLiteral("author"));
+  const QString workString(QStringLiteral("openlibrary-work"));
+  if(entry->field(authorString).isEmpty()) {
+    const QString work = entry->field(workString);
+    if(!work.isEmpty()) {
+      QUrl workUrl(QStringLiteral("https://openlibrary.org%1.json").arg(work));
+      QStringList authors;
+      const auto output = FileHandler::readDataFile(workUrl, true /*quiet*/);
+      QJsonDocument doc = QJsonDocument::fromJson(output);
+      auto array = doc.object().value(QLatin1String("authors")).toArray();
+      for(int i = 0; i < array.count(); i++) {
+        const auto key = array.at(i).toObject().value(authorString)
+                                    .toObject().value(QLatin1String("key")).toString();
+        if(m_authorHash.contains(key)) {
+          authors += m_authorHash.value(key);
+          continue;
+        }
+        // now grab author name by key
+        QUrl authorUrl(QStringLiteral("https://openlibrary.org%1.json").arg(key));
+        const auto output2 = FileHandler::readDataFile(authorUrl, true /*quiet*/);
+        QJsonDocument doc2 = QJsonDocument::fromJson(output2);
+        const auto s = doc2.object().value(QLatin1String("name")).toString();
+        if(!s.isEmpty()) {
+          m_authorHash.insert(key, s);
+          authors += s;
+        }
+      }
+      if(!authors.isEmpty()) {
+        entry->setField(authorString, authors.join(FieldFormat::delimiterString()));
+      }
+    }
+  }
+  // no longer need the field
+  entry->collection()->removeField(workString);
+
   // if the entry is not set, go ahead and try to fetch it
-  if(entry->field(QStringLiteral("cover")).isEmpty()) {
+  const QString coverString(QStringLiteral("cover"));
+  if(entry->field(coverString).isEmpty()) {
     const QString isbn = ISBNValidator::cleanValue(entry->field(QStringLiteral("isbn")));
     if(!isbn.isEmpty()) {
-      QUrl imageUrl(QStringLiteral("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn));
+      QUrl imageUrl(QStringLiteral("https://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn));
       const QString id = ImageFactory::addImage(imageUrl, true);
       if(!id.isEmpty()) {
-        entry->setField(QStringLiteral("cover"), id);
+        entry->setField(coverString, id);
       }
     }
   }
@@ -271,6 +309,10 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
   } else {
     coll = new Data::BookCollection(true);
   }
+  // add a temporary work id field
+  Data::FieldPtr wField(new Data::Field(QStringLiteral("openlibrary-work"), QString()));
+  coll->addField(wField);
+
   if(!coll->hasField(QStringLiteral("openlibrary")) && optionalFields().contains(QStringLiteral("openlibrary"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("openlibrary"), i18n("OpenLibrary Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
@@ -341,6 +383,11 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     if(optionalFields().contains(QStringLiteral("openlibrary"))) {
       entry->setField(QStringLiteral("openlibrary"), QLatin1String("https://openlibrary.org") + mapValue(resultMap, "key"));
     }
+    const auto works = resultMap.value(QLatin1String("works")).toList();
+    if(!works.isEmpty()) {
+      const auto w = works.front().toMap().value(QLatin1String("key")).toString();
+      if(!w.isEmpty()) entry->setField(QStringLiteral("openlibrary-work"), w);
+    }
 
     QStringList authors;
     foreach(const QVariant& authorMap, resultMap.value(QLatin1String("authors")).toList()) {
@@ -378,8 +425,8 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
         q.addQueryItem(QStringLiteral("name"), QString());
         langUrl.setQuery(q);
 
-        QString output = FileHandler::readTextFile(langUrl, true /*quiet*/, true /*utf8*/);
-        QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
+        const auto output = FileHandler::readDataFile(langUrl, true /*quiet*/);
+        QJsonDocument doc = QJsonDocument::fromJson(output);
         QJsonArray array = doc.array();
         QVariantMap langResult = array.isEmpty() ? QVariantMap() : array.at(0).toObject().toVariantMap();
         const QString name = mapValue(langResult, "name");
