@@ -5316,8 +5316,8 @@ msgid ""
 "Enter the name of the person borrowing the items from you. Clicking the "
 "button allows you to select from your address book."
 msgstr ""
-"Introduïu el nom de la persona a qui presteu elements. Clicant en els botons "
-"se us permetrà de seleccionar-la des de la llibreta d'adreces."
+"Introduïu el nom de la persona a qui presteu elements. Clicant damunt dels "
+"botons se us permetrà seleccionar-la des de la llibreta d'adreces."
 
 #: src/loandialog.cpp:159
 #, kde-format
@@ -6612,7 +6612,7 @@ msgstr "&Genera"
 #: src/reportdialog.cpp:154
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
-msgstr "Seleccioneu una plantilla d'informe i cliqueu <em>Genera</em>."
+msgstr "Seleccioneu una plantilla d'informe i cliqueu damunt <em>Genera</em>."
 
 #: src/reportdialog.cpp:155
 #, kde-format
@@ -7110,8 +7110,8 @@ msgid ""
 "qt>"
 msgstr ""
 "<qt>Establiu cada columna perquè corresponga a un camp en la col·lecció "
-"triant una columna, seleccionant el camp i a continuació clicant en el botó "
-"<i>Assigna camp</i>.</qt>"
+"triant una columna, seleccionant el camp i a continuació clicant damunt del "
+"botó <i>Assigna camp</i>.</qt>"
 
 #: src/translators/csvimporter.cpp:329
 #, kde-format
