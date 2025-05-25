@@ -5310,8 +5310,8 @@ msgid ""
 "Enter the name of the person borrowing the items from you. Clicking the "
 "button allows you to select from your address book."
 msgstr ""
-"Introduïu el nom de la persona a qui presteu elements. Clicant en els botons "
-"se us permetrà de seleccionar-la des de la llibreta d'adreces."
+"Introduïu el nom de la persona a qui presteu elements. Clicant damunt dels "
+"botons se us permetrà seleccionar-la des de la llibreta d'adreces."
 
 #: src/loandialog.cpp:159
 #, kde-format
@@ -6566,7 +6566,7 @@ msgstr "&Genera"
 #: src/reportdialog.cpp:160
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
-msgstr "Seleccioneu una plantilla d'informe i cliqueu <em>Genera</em>."
+msgstr "Seleccioneu una plantilla d'informe i cliqueu damunt <em>Genera</em>."
 
 #: src/reportdialog.cpp:161
 #, kde-format
@@ -7090,8 +7090,8 @@ msgid ""
 "qt>"
 msgstr ""
 "<qt>Establiu cada columna perquè corresponga a un camp en la col·lecció "
-"triant una columna, seleccionant el camp i a continuació clicant en el botó "
-"<i>Assigna camp</i>.</qt>"
+"triant una columna, seleccionant el camp i a continuació clicant damunt del "
+"botó <i>Assigna camp</i>.</qt>"
 
 #: src/translators/csvimporter.cpp:338
 #, kde-format
@@ -7485,7 +7485,7 @@ msgid ""
 "right-clicking on the column header.\n"
 msgstr ""
 "<p>…que podeu canviar quins camps es mostren en la vista de columna\n"
-"fent clic dret en la capçalera de la columna.\n"
+"fent clic dret damunt de la capçalera de la columna.\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:17
@@ -7544,7 +7544,7 @@ msgid ""
 "the Shift or Ctrl key and selecting multiple entries.</p>\n"
 msgstr ""
 "<p>…que podeu editar més d'una entrada alhora, mantenint\n"
-"premuda la tecla «Maj» o «Ctrl» i seleccionant múltiples\n"
+"premuda la tecla «Majús» o «Ctrl» i seleccionant múltiples\n"
 "entrades.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
