@@ -1,3 +1,7 @@
+2025-05-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated OpenLibrary source to fetch work author (Bug 504586).
+
 2025-05-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 4.1.2.

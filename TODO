@@ -16,6 +16,7 @@
 * Allow regenerating of sequential entry ids
 * Bulk find/replace in field values
 * Allow user to show/hide fields in the edit dialog, such as when a music album has multiple track fields
+* Switch OpenLibrary to use Search API instead of Query
 
 === Bugs
 * Make sure all usages of FileRef* delete the pointer
