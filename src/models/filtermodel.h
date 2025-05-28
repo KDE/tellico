@@ -61,7 +61,8 @@ public:
 
 private:
   class Node;
-  void populateFilterNode(Node* node, const FilterPtr filter) const;
+  Tellico::Data::EntryList filteredEntries(const FilterPtr filter) const;
+  void populateFilterNode(Node* node, const Data::EntryList& entries) const;
 
   FilterList m_filters;
   QString m_header;

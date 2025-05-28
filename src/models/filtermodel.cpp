@@ -83,7 +83,10 @@ int FilterModel::rowCount(const QModelIndex& index_) const {
   // for a filter node, an id == -1 then it means it has not yet been populated (better than checking
   // if childCount() == 0 since a filter could have zero entry matches)
   if(!m_beingInvalidated && node->id() == -1) {
-    populateFilterNode(node, m_filters.at(index_.row()));
+    auto filter = m_filters.at(index_.row());
+    Q_ASSERT(filter);
+    const auto entries = filteredEntries(filter);
+    populateFilterNode(node, entries);
   }
   return node->childCount();
 }
@@ -265,13 +268,15 @@ void FilterModel::invalidate(const QModelIndex& index_) {
   filterNode->removeAll();
   endRemoveRows();
 
-  Data::EntryList entries = Data::Document::self()->filteredEntries(filter(index_));
+  const auto entries = filteredEntries(filter(index_));
   beginInsertRows(index_, 0, entries.count() - 1);
   foreach(Data::EntryPtr entry, entries) {
     Node* childNode = new Node(filterNode, entry->id());
     filterNode->addChild(childNode);
   }
   endInsertRows();
+  // for filter nodes (which don't need ID), an ID value of 0 instead of -1 means it has been populated
+  filterNode->setID(0);
 
   Q_EMIT dataChanged(index_, index_);
   m_beingInvalidated = false;
@@ -298,15 +303,26 @@ bool FilterModel::indexContainsEntry(const QModelIndex& parent_, Data::EntryPtr 
   return false;
 }
 
-void FilterModel::populateFilterNode(Node* node_, const FilterPtr filter_) const {
+Tellico::Data::EntryList FilterModel::filteredEntries(const Tellico::FilterPtr filter_) const {
+  const Data::EntryList entries = Data::Document::self()->collection()->entries();
+  Data::EntryList matches;
+  matches.reserve(entries.count());
+  foreach(Data::EntryPtr entry, entries) {
+    if(filter_->matches(entry)) {
+      matches.append(entry);
+    }
+  }
+  matches.squeeze();
+  return matches;
+}
+
+void FilterModel::populateFilterNode(Node* node_, const Data::EntryList& entries_) const {
   Q_ASSERT(node_);
-  Q_ASSERT(filter_);
-  if(!node_ || !filter_) {
+  if(!node_) {
     return;
   }
 
-  Data::EntryList entries = Data::Document::self()->filteredEntries(filter_);
-  foreach(Data::EntryPtr entry, entries) {
+  foreach(Data::EntryPtr entry, entries_) {
     Node* childNode = new Node(node_, entry->id());
     node_->addChild(childNode);
   }

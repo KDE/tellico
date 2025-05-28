@@ -507,17 +507,6 @@ bool Document::loadAllImagesNow() const {
   return Import::TellicoImporter::loadAllImages(m_url);
 }
 
-Tellico::Data::EntryList Document::filteredEntries(Tellico::FilterPtr filter_) const {
-  Data::EntryList matches;
-  Data::EntryList entries = m_coll->entries();
-  foreach(EntryPtr entry, entries) {
-    if(filter_->matches(entry)) {
-      matches.append(entry);
-    }
-  }
-  return matches;
-}
-
 void Document::checkOutEntry(Tellico::Data::EntryPtr entry_) {
   if(!entry_) {
     return;

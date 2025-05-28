@@ -160,7 +160,6 @@ public:
   bool loadAllImagesNow() const;
   bool allImagesOnDisk() const { return m_allImagesOnDisk; }
   int imageCount() const;
-  EntryList filteredEntries(FilterPtr filter) const;
 
   void renameCollection(const QString& newTitle);
 
