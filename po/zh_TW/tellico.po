@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-26 00:41+0000\n"
+"POT-Creation-Date: 2025-05-29 00:42+0000\n"
 "PO-Revision-Date: 2024-07-27 13:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -217,7 +217,7 @@ msgstr "<qt>Tellico 無法寫入伺服器管線於 <b>%1</b>。</qt>"
 msgid "My Collection"
 msgstr "我的收藏"
 
-#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:530
+#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:519
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
@@ -1005,7 +1005,7 @@ msgstr "購買價格"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:528
+#: src/collections/videocollection.cpp:205 src/document.cpp:517
 #, kde-format
 msgid "Loaned"
 msgstr "借用"
@@ -2479,7 +2479,7 @@ msgstr "格式化標題與名稱(&F)"
 msgid "&Print field headers"
 msgstr "列印欄位標頭(&P)"
 
-#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:557
+#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "若是勾選此選項，則會將欄位名稱印在表格標頭。"
@@ -2494,7 +2494,7 @@ msgstr "群組選項"
 msgid "&Group the entries"
 msgstr "將項目群組起來(&G)"
 
-#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:562
+#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "若勾選此選項，則會將選取的欄位群組起來。"
@@ -2718,7 +2718,7 @@ msgstr "刪除(&D)"
 msgid "Click to delete the selected data source."
 msgstr "點擊以刪除選取的資料來源。"
 
-#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:100
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
@@ -2730,15 +2730,15 @@ msgid "Template Packages"
 msgstr "樣本套件"
 
 #: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1248
-#: src/mainwindow.cpp:1419 src/reportdialog.cpp:422 src/reportdialog.cpp:437
+#: src/mainwindow.cpp:1419 src/reportdialog.cpp:423 src/reportdialog.cpp:438
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
-#: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
+#: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
 #: src/translators/librarythingimporter.cpp:187
-#: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
-#: src/translators/tellicozipexporter.cpp:54
-#: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:100
+#: src/translators/onixexporter.cpp:72
+#: src/translators/tellicoxmlexporter.cpp:74
+#: src/translators/tellicozipexporter.cpp:56
+#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:127
 #, kde-format
 msgid "All Files"
@@ -3133,70 +3133,70 @@ msgstr "Tellico 無法找到預設的項目樣式表。"
 msgid "Please check your installation."
 msgstr "請檢查您的安裝。"
 
-#: src/exportdialog.cpp:64
+#: src/exportdialog.cpp:66
 #, kde-format
 msgid "Export Options"
 msgstr "匯出選項"
 
-#: src/exportdialog.cpp:71
+#: src/exportdialog.cpp:73
 #, kde-format
 msgid "Formatting"
 msgstr "格式"
 
-#: src/exportdialog.cpp:75
+#: src/exportdialog.cpp:77
 #, kde-format
 msgid "Format all fields"
 msgstr "格式化所有欄位"
 
-#: src/exportdialog.cpp:77
+#: src/exportdialog.cpp:79
 #, kde-format
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
 msgstr "勾選此選項的話，這些欄位裡的值會根據格式型態做出格式化。"
 
-#: src/exportdialog.cpp:81
+#: src/exportdialog.cpp:83
 #, kde-format
 msgid "Export selected entries only"
 msgstr "只匯出選取的項目。"
 
-#: src/exportdialog.cpp:83
+#: src/exportdialog.cpp:85
 #, kde-format
 msgid "If checked, only the currently selected entries will be exported."
 msgstr "若勾選此選項，則只有目前選取的項目會被匯出。"
 
-#: src/exportdialog.cpp:87
+#: src/exportdialog.cpp:89
 #, kde-format
 msgid "Export visible fields only"
 msgstr "只匯出可見欄位"
 
-#: src/exportdialog.cpp:89
+#: src/exportdialog.cpp:91
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
 msgstr "若勾選此選項，則只有目前檢視中可見的欄位會被匯出。"
 
-#: src/exportdialog.cpp:93
+#: src/exportdialog.cpp:95
 #, kde-format
 msgid "Encoding"
 msgstr "編碼"
 
-#: src/exportdialog.cpp:98
+#: src/exportdialog.cpp:100
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
 msgstr "以萬國碼（UTF-8）編碼"
 
-#: src/exportdialog.cpp:100
+#: src/exportdialog.cpp:102
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr "匯出的檔案以萬國碼（UTF-8）編碼。"
 
-#: src/exportdialog.cpp:104
+#: src/exportdialog.cpp:106
 #, kde-format
 msgid "Encode in user locale (%1)"
 msgstr "以使用者的地域設定（%1）編碼"
 
-#: src/exportdialog.cpp:107
+#: src/exportdialog.cpp:109
 #, kde-format
 msgid "Encode the exported file in the local encoding."
 msgstr "匯出的檔案以使用者的地域設定編碼。"
@@ -4845,7 +4845,7 @@ msgid "Group"
 msgstr "群組"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1079 src/mainwindow.cpp:1702
-#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:386
+#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "人物"
@@ -5145,13 +5145,13 @@ msgid "&Import"
 msgstr "匯入(&I)"
 
 #: src/importdialog.cpp:372 src/mainwindow.cpp:1244 src/mainwindow.cpp:1417
-#: src/translators/tellicozipexporter.cpp:54
+#: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico 檔案"
 
 #: src/importdialog.cpp:373 src/importdialog.cpp:391 src/importdialog.cpp:420
-#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML 檔案"
@@ -5171,7 +5171,7 @@ msgstr "CSV 檔案"
 msgid "RIS Files"
 msgstr "RIS 檔案"
 
-#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:62
+#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "GCstar 資料檔"
@@ -6425,56 +6425,56 @@ msgstr "匯入目錄"
 msgid "Exporting data..."
 msgstr "匯出資料中..."
 
-#: src/mainwindow.cpp:1958
+#: src/mainwindow.cpp:1959
 #, kde-format
 msgid "Export As"
 msgstr "匯出為"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:1987
 #, kde-format
 msgid "String Macros"
 msgstr "字串巨集"
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1988
 #, kde-format
 msgid "Macro"
 msgstr "巨集"
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1988
 #, kde-format
 msgid "String"
 msgstr "字串"
 
-#: src/mainwindow.cpp:2073
+#: src/mainwindow.cpp:2074
 #, kde-format
 msgid "Creating citations..."
 msgstr "建立引用中..."
 
-#: src/mainwindow.cpp:2183
+#: src/mainwindow.cpp:2184
 #, kde-format
 msgid "Filters"
 msgstr "過濾器"
 
-#: src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2185
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr "<qt>過濾檢視會顯示符合特定過濾條件的項目。</qt>"
 
-#: src/mainwindow.cpp:2207
+#: src/mainwindow.cpp:2208
 #, kde-format
 msgid "Loans"
 msgstr "借貸"
 
-#: src/mainwindow.cpp:2208
+#: src/mainwindow.cpp:2209
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr "<qt>借貸檢視會顯示所有您已借出的收藏項目。</qt>"
 
-#: src/mainwindow.cpp:2296
+#: src/mainwindow.cpp:2297
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6483,19 +6483,19 @@ msgstr ""
 "有些影像並未儲存在設定的位置。目前的檔案必須先儲存，影像則會被轉換到新的位"
 "置。"
 
-#: src/mainwindow.cpp:2340
+#: src/mainwindow.cpp:2341
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "從 %1 更新的項目資料"
 
-#: src/mainwindow.cpp:2359
+#: src/mainwindow.cpp:2360
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr "Tellico 此種型態一次只能匯入一個檔案。將只有 %1 會被匯出。"
 
-#: src/mainwindow.cpp:2538
+#: src/mainwindow.cpp:2539
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
 msgctxt "@title:window"
@@ -6533,13 +6533,13 @@ msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "有些較大的收藏，產生報告可能會花上一些時間。"
 
-#: src/reportdialog.cpp:420
+#: src/reportdialog.cpp:421
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "PNG Files"
 msgstr "檔案"
 
-#: src/reportdialog.cpp:435 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:436 src/translators/htmlexporter.cpp:102
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "HTML Files"
@@ -7151,32 +7151,32 @@ msgstr "<qt>檔案不是有效的 GCstar 資料檔。</qt>"
 msgid "Goodreads Options"
 msgstr "Goodreads 選項"
 
-#: src/translators/htmlexporter.cpp:391
+#: src/translators/htmlexporter.cpp:392
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "（已依 %1 分組）"
 
-#: src/translators/htmlexporter.cpp:553
+#: src/translators/htmlexporter.cpp:554
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML 選項"
 
-#: src/translators/htmlexporter.cpp:556
+#: src/translators/htmlexporter.cpp:557
 #, kde-format
 msgid "Print field headers"
 msgstr "列印欄位標頭"
 
-#: src/translators/htmlexporter.cpp:561
+#: src/translators/htmlexporter.cpp:562
 #, kde-format
 msgid "Group the entries"
 msgstr "將項目群組起來"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "Export individual entry files"
 msgstr "匯出個別的項目檔"
 
-#: src/translators/htmlexporter.cpp:567
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "若勾選此選項，每個項目都會建立個別的檔案。"
@@ -7233,22 +7233,22 @@ msgstr "字元集："
 msgid "MARC Format:"
 msgstr "MARC 格式："
 
-#: src/translators/onixexporter.cpp:71
+#: src/translators/onixexporter.cpp:72
 #, kde-format
 msgid "Zip Files"
 msgstr "Zip 檔案"
 
-#: src/translators/onixexporter.cpp:179
+#: src/translators/onixexporter.cpp:180
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "ONIX 封存選項"
 
-#: src/translators/onixexporter.cpp:182
+#: src/translators/onixexporter.cpp:183
 #, kde-format
 msgid "Include images in archive"
 msgstr "封存中包含影像"
 
-#: src/translators/onixexporter.cpp:184
+#: src/translators/onixexporter.cpp:185
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
@@ -7285,17 +7285,17 @@ msgstr "檔案是空的。"
 msgid "The file contains no collection data."
 msgstr "檔案沒有包含收藏資料。"
 
-#: src/translators/tellicoxmlexporter.cpp:542
+#: src/translators/tellicoxmlexporter.cpp:549
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML 選項"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:552
 #, kde-format
 msgid "Include images in XML document"
 msgstr "在 XML 文件中包含影像"
 
-#: src/translators/tellicoxmlexporter.cpp:547
+#: src/translators/tellicoxmlexporter.cpp:554
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7307,17 +7307,17 @@ msgstr "若勾選此選項，文件中的影像也會用 base64 編碼後包入 
 msgid "It is from a future version of Tellico."
 msgstr "這是從更新版本的 Tellico 而來。"
 
-#: src/translators/xsltexporter.cpp:86 src/translators/xsltimporter.cpp:118
+#: src/translators/xsltexporter.cpp:87 src/translators/xsltimporter.cpp:118
 #, kde-format
 msgid "XSLT Options"
 msgstr "XSLT 選項"
 
-#: src/translators/xsltexporter.cpp:89 src/translators/xsltimporter.cpp:121
+#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
 #, kde-format
 msgid "XSLT file:"
 msgstr "XSLT 檔："
 
-#: src/translators/xsltexporter.cpp:91 src/translators/xsltimporter.cpp:123
+#: src/translators/xsltexporter.cpp:92 src/translators/xsltimporter.cpp:123
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr "選擇用於轉換資料的 XSLT 檔。"

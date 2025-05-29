@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-26 00:41+0000\n"
+"POT-Creation-Date: 2025-05-29 00:42+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -215,7 +215,7 @@ msgstr "Nu pot deschide fișierul - %1."
 msgid "My Collection"
 msgstr "Opțiuni colecții cărți"
 
-#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:530
+#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:519
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
@@ -998,7 +998,7 @@ msgstr "Preț achiziție"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:528
+#: src/collections/videocollection.cpp:205 src/document.cpp:517
 #, kde-format
 msgid "Loaned"
 msgstr "Împrumutată"
@@ -2466,7 +2466,7 @@ msgstr "Pune automat majuscule la autori și titluri"
 msgid "&Print field headers"
 msgstr ""
 
-#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:557
+#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:558
 #, fuzzy, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
@@ -2483,7 +2483,7 @@ msgstr "Grupare"
 msgid "&Group the entries"
 msgstr "Cărțile mele"
 
-#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:562
+#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:563
 #, fuzzy, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
@@ -2707,7 +2707,7 @@ msgstr "Titlu"
 msgid "Click to delete the selected data source."
 msgstr "Șterge carte"
 
-#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:100
 #: src/translators/xsltimporter.cpp:126
 #, fuzzy, kde-format
 msgid "XSL Files"
@@ -2719,15 +2719,15 @@ msgid "Template Packages"
 msgstr "Opțiuni generale"
 
 #: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1248
-#: src/mainwindow.cpp:1419 src/reportdialog.cpp:422 src/reportdialog.cpp:437
+#: src/mainwindow.cpp:1419 src/reportdialog.cpp:423 src/reportdialog.cpp:438
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
-#: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
+#: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
 #: src/translators/librarythingimporter.cpp:187
-#: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
-#: src/translators/tellicozipexporter.cpp:54
-#: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:100
+#: src/translators/onixexporter.cpp:72
+#: src/translators/tellicoxmlexporter.cpp:74
+#: src/translators/tellicozipexporter.cpp:56
+#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:127
 #, fuzzy, kde-format
 msgid "All Files"
@@ -3122,22 +3122,22 @@ msgstr ""
 "Eroare în procesarea XSLT.\n"
 "Vă rog verificați instalarea."
 
-#: src/exportdialog.cpp:64
+#: src/exportdialog.cpp:66
 #, fuzzy, kde-format
 msgid "Export Options"
 msgstr "Opțiuni generale"
 
-#: src/exportdialog.cpp:71
+#: src/exportdialog.cpp:73
 #, fuzzy, kde-format
 msgid "Formatting"
 msgstr "Opțiuni generale"
 
-#: src/exportdialog.cpp:75
+#: src/exportdialog.cpp:77
 #, fuzzy, kde-format
 msgid "Format all fields"
 msgstr "Pune automat majuscule la autori și titluri"
 
-#: src/exportdialog.cpp:77
+#: src/exportdialog.cpp:79
 #, fuzzy, kde-format
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
@@ -3146,24 +3146,24 @@ msgstr ""
 "Dacă bifați, inițialele numelor de autori și titlurilor vor fi convertite "
 "automat la majuscule."
 
-#: src/exportdialog.cpp:81
+#: src/exportdialog.cpp:83
 #, fuzzy, kde-format
 msgid "Export selected entries only"
 msgstr "Șterge carte"
 
-#: src/exportdialog.cpp:83
+#: src/exportdialog.cpp:85
 #, fuzzy, kde-format
 msgid "If checked, only the currently selected entries will be exported."
 msgstr ""
 "Dacă bifați, ultimul fișier deschis va fi deschis din nou la pornirea "
 "programului."
 
-#: src/exportdialog.cpp:87
+#: src/exportdialog.cpp:89
 #, fuzzy, kde-format
 msgid "Export visible fields only"
 msgstr "Șterge carte"
 
-#: src/exportdialog.cpp:89
+#: src/exportdialog.cpp:91
 #, fuzzy, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
@@ -3171,27 +3171,27 @@ msgstr ""
 "Dacă bifați, ultimul fișier deschis va fi deschis din nou la pornirea "
 "programului."
 
-#: src/exportdialog.cpp:93
+#: src/exportdialog.cpp:95
 #, fuzzy, kde-format
 msgid "Encoding"
 msgstr "Legare"
 
-#: src/exportdialog.cpp:98
+#: src/exportdialog.cpp:100
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
 msgstr ""
 
-#: src/exportdialog.cpp:100
+#: src/exportdialog.cpp:102
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr ""
 
-#: src/exportdialog.cpp:104
+#: src/exportdialog.cpp:106
 #, kde-format
 msgid "Encode in user locale (%1)"
 msgstr ""
 
-#: src/exportdialog.cpp:107
+#: src/exportdialog.cpp:109
 #, kde-format
 msgid "Encode the exported file in the local encoding."
 msgstr ""
@@ -4802,7 +4802,7 @@ msgid "Group"
 msgstr "Grupează după: "
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1079 src/mainwindow.cpp:1702
-#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:386
+#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr ""
@@ -5104,13 +5104,13 @@ msgid "&Import"
 msgstr "Imprim..."
 
 #: src/importdialog.cpp:372 src/mainwindow.cpp:1244 src/mainwindow.cpp:1417
-#: src/translators/tellicozipexporter.cpp:54
+#: src/translators/tellicozipexporter.cpp:56
 #, fuzzy, kde-format
 msgid "Tellico Files"
 msgstr "Tellico"
 
 #: src/importdialog.cpp:373 src/importdialog.cpp:391 src/importdialog.cpp:420
-#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:74
 #, fuzzy, kde-format
 msgid "XML Files"
 msgstr "Filmele mele"
@@ -5130,7 +5130,7 @@ msgstr "Șterge carte"
 msgid "RIS Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:62
+#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:63
 #, fuzzy, kde-format
 msgid "GCstar Data Files"
 msgstr ""
@@ -6363,75 +6363,75 @@ msgstr "Imprim..."
 msgid "Exporting data..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:1958
+#: src/mainwindow.cpp:1959
 #, fuzzy, kde-format
 msgid "Export As"
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:1987
 #, fuzzy, kde-format
 msgid "String Macros"
 msgstr "Calificativ"
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1988
 #, kde-format
 msgid "Macro"
 msgstr ""
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1988
 #, fuzzy, kde-format
 msgid "String"
 msgstr "Calificativ"
 
-#: src/mainwindow.cpp:2073
+#: src/mainwindow.cpp:2074
 #, fuzzy, kde-format
 msgid "Creating citations..."
 msgstr "Tai selecția..."
 
-#: src/mainwindow.cpp:2183
+#: src/mainwindow.cpp:2184
 #, fuzzy, kde-format
 msgid "Filters"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2185
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2207
+#: src/mainwindow.cpp:2208
 #, fuzzy, kde-format
 msgid "Loans"
 msgstr "Împrumutată"
 
-#: src/mainwindow.cpp:2208
+#: src/mainwindow.cpp:2209
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2296
+#: src/mainwindow.cpp:2297
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
 "be saved and the images will be transferred to the new location."
 msgstr ""
 
-#: src/mainwindow.cpp:2340
+#: src/mainwindow.cpp:2341
 #, kde-format
 msgid "Update entry data from %1"
 msgstr ""
 
-#: src/mainwindow.cpp:2359
+#: src/mainwindow.cpp:2360
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr ""
 
-#: src/mainwindow.cpp:2538
+#: src/mainwindow.cpp:2539
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"
@@ -6469,12 +6469,12 @@ msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr ""
 
-#: src/reportdialog.cpp:420
+#: src/reportdialog.cpp:421
 #, fuzzy, kde-format
 msgid "PNG Files"
 msgstr "Șterge carte"
 
-#: src/reportdialog.cpp:435 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:436 src/translators/htmlexporter.cpp:102
 #, fuzzy, kde-format
 msgid "HTML Files"
 msgstr "Filmele mele"
@@ -7083,32 +7083,32 @@ msgstr ""
 msgid "Goodreads Options"
 msgstr "Opțiuni generale"
 
-#: src/translators/htmlexporter.cpp:391
+#: src/translators/htmlexporter.cpp:392
 #, kde-format
 msgid "(grouped by %1)"
 msgstr ""
 
-#: src/translators/htmlexporter.cpp:553
+#: src/translators/htmlexporter.cpp:554
 #, fuzzy, kde-format
 msgid "HTML Options"
 msgstr "Opțiuni generale"
 
-#: src/translators/htmlexporter.cpp:556
+#: src/translators/htmlexporter.cpp:557
 #, kde-format
 msgid "Print field headers"
 msgstr ""
 
-#: src/translators/htmlexporter.cpp:561
+#: src/translators/htmlexporter.cpp:562
 #, fuzzy, kde-format
 msgid "Group the entries"
 msgstr "Cărțile mele"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "Export individual entry files"
 msgstr ""
 
-#: src/translators/htmlexporter.cpp:567
+#: src/translators/htmlexporter.cpp:568
 #, fuzzy, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr ""
@@ -7167,22 +7167,22 @@ msgstr ""
 msgid "MARC Format:"
 msgstr "Opțiuni generale"
 
-#: src/translators/onixexporter.cpp:71
+#: src/translators/onixexporter.cpp:72
 #, fuzzy, kde-format
 msgid "Zip Files"
 msgstr "Șterge carte"
 
-#: src/translators/onixexporter.cpp:179
+#: src/translators/onixexporter.cpp:180
 #, fuzzy, kde-format
 msgid "ONIX Archive Options"
 msgstr "Opțiuni generale"
 
-#: src/translators/onixexporter.cpp:182
+#: src/translators/onixexporter.cpp:183
 #, kde-format
 msgid "Include images in archive"
 msgstr ""
 
-#: src/translators/onixexporter.cpp:184
+#: src/translators/onixexporter.cpp:185
 #, fuzzy, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
@@ -7219,17 +7219,17 @@ msgstr ""
 msgid "The file contains no collection data."
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:542
+#: src/translators/tellicoxmlexporter.cpp:549
 #, fuzzy, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:552
 #, kde-format
 msgid "Include images in XML document"
 msgstr ""
 
-#: src/translators/tellicoxmlexporter.cpp:547
+#: src/translators/tellicoxmlexporter.cpp:554
 #, fuzzy, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7243,17 +7243,17 @@ msgstr ""
 msgid "It is from a future version of Tellico."
 msgstr ""
 
-#: src/translators/xsltexporter.cpp:86 src/translators/xsltimporter.cpp:118
+#: src/translators/xsltexporter.cpp:87 src/translators/xsltimporter.cpp:118
 #, fuzzy, kde-format
 msgid "XSLT Options"
 msgstr "Opțiuni generale"
 
-#: src/translators/xsltexporter.cpp:89 src/translators/xsltimporter.cpp:121
+#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
 #, fuzzy, kde-format
 msgid "XSLT file:"
 msgstr "Titlu"
 
-#: src/translators/xsltexporter.cpp:91 src/translators/xsltimporter.cpp:123
+#: src/translators/xsltexporter.cpp:92 src/translators/xsltimporter.cpp:123
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr ""

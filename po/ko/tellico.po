@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-26 00:41+0000\n"
+"POT-Creation-Date: 2025-05-29 00:42+0000\n"
 "PO-Revision-Date: 2025-04-07 23:49+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -211,7 +211,7 @@ msgstr "<qt>Tellico가 <b>%1</b>의 서버 파이프에 쓸 수 없습니다.</q
 msgid "My Collection"
 msgstr "내 소장품"
 
-#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:530
+#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:519
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
@@ -1012,7 +1012,7 @@ msgstr "구매 가격"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:528
+#: src/collections/videocollection.cpp:205 src/document.cpp:517
 #, kde-format
 msgid "Loaned"
 msgstr "대여됨"
@@ -2479,7 +2479,7 @@ msgstr "제목 및 이름 형식(&F)"
 msgid "&Print field headers"
 msgstr "필드 머리글 인쇄(&P)"
 
-#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:557
+#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "이 옵션을 선택하면 필드 이름을 표 머리글로 인쇄합니다."
@@ -2494,7 +2494,7 @@ msgstr "그룹화 옵션"
 msgid "&Group the entries"
 msgstr "항목 그룹화(&G)"
 
-#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:562
+#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "이 옵션을 선택하면 항목이 선택한 필드별로 그룹화됩니다."
@@ -2720,7 +2720,7 @@ msgstr "삭제(&D)"
 msgid "Click to delete the selected data source."
 msgstr "선택한 데이터 원본을 삭제하려면 여기를 클릭하십시오."
 
-#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:100
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
@@ -2732,15 +2732,15 @@ msgid "Template Packages"
 msgstr "템플릿 패키지"
 
 #: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1248
-#: src/mainwindow.cpp:1419 src/reportdialog.cpp:422 src/reportdialog.cpp:437
+#: src/mainwindow.cpp:1419 src/reportdialog.cpp:423 src/reportdialog.cpp:438
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
-#: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
+#: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
 #: src/translators/librarythingimporter.cpp:187
-#: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
-#: src/translators/tellicozipexporter.cpp:54
-#: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:100
+#: src/translators/onixexporter.cpp:72
+#: src/translators/tellicoxmlexporter.cpp:74
+#: src/translators/tellicozipexporter.cpp:56
+#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:127
 #, kde-format
 msgid "All Files"
@@ -3139,22 +3139,22 @@ msgstr "Tellico가 기본 항목 스타일시트를 찾을 수 없습니다."
 msgid "Please check your installation."
 msgstr "설치 상태를 확인하십시오."
 
-#: src/exportdialog.cpp:64
+#: src/exportdialog.cpp:66
 #, kde-format
 msgid "Export Options"
 msgstr "내보내기 옵션"
 
-#: src/exportdialog.cpp:71
+#: src/exportdialog.cpp:73
 #, kde-format
 msgid "Formatting"
 msgstr "형식 지정"
 
-#: src/exportdialog.cpp:75
+#: src/exportdialog.cpp:77
 #, kde-format
 msgid "Format all fields"
 msgstr "모든 필드 형식 지정"
 
-#: src/exportdialog.cpp:77
+#: src/exportdialog.cpp:79
 #, kde-format
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
@@ -3162,48 +3162,48 @@ msgid ""
 msgstr ""
 "이 옵션을 선택하면 필드 값이 해당 형식 형식에 따라 자동으로 형식 지정됩니다."
 
-#: src/exportdialog.cpp:81
+#: src/exportdialog.cpp:83
 #, kde-format
 msgid "Export selected entries only"
 msgstr "선택된 항목만 내보내기"
 
-#: src/exportdialog.cpp:83
+#: src/exportdialog.cpp:85
 #, kde-format
 msgid "If checked, only the currently selected entries will be exported."
 msgstr "이 옵션을 선택하면 현재 선택한 항목만 내보냅니다."
 
-#: src/exportdialog.cpp:87
+#: src/exportdialog.cpp:89
 #, kde-format
 msgid "Export visible fields only"
 msgstr "표시된 필드만 내보내기"
 
-#: src/exportdialog.cpp:89
+#: src/exportdialog.cpp:91
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
 msgstr "이 옵션을 선택하면 현재 표시된 필드만 내보냅니다."
 
-#: src/exportdialog.cpp:93
+#: src/exportdialog.cpp:95
 #, kde-format
 msgid "Encoding"
 msgstr "인코딩"
 
-#: src/exportdialog.cpp:98
+#: src/exportdialog.cpp:100
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
 msgstr "유니코드로 인코딩(UTF-8)"
 
-#: src/exportdialog.cpp:100
+#: src/exportdialog.cpp:102
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr "내보낸 파일을 유니코드로 인코딩합니다(UTF-8)."
 
-#: src/exportdialog.cpp:104
+#: src/exportdialog.cpp:106
 #, kde-format
 msgid "Encode in user locale (%1)"
 msgstr "사용자 로캘의 인코딩(%1)"
 
-#: src/exportdialog.cpp:107
+#: src/exportdialog.cpp:109
 #, kde-format
 msgid "Encode the exported file in the local encoding."
 msgstr "내보낸 파일을 사용자 로캘의 인코딩으로 인코딩합니다."
@@ -4844,7 +4844,7 @@ msgid "Group"
 msgstr "그룹"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1079 src/mainwindow.cpp:1702
-#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:386
+#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "사람"
@@ -5146,13 +5146,13 @@ msgid "&Import"
 msgstr "가져오기(&I)"
 
 #: src/importdialog.cpp:372 src/mainwindow.cpp:1244 src/mainwindow.cpp:1417
-#: src/translators/tellicozipexporter.cpp:54
+#: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico 파일"
 
 #: src/importdialog.cpp:373 src/importdialog.cpp:391 src/importdialog.cpp:420
-#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML 파일"
@@ -5172,7 +5172,7 @@ msgstr "CSV 파일"
 msgid "RIS Files"
 msgstr "RIS 파일"
 
-#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:62
+#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "GCstar 데이터 파일"
@@ -6413,37 +6413,37 @@ msgstr "디렉터리 가져오기"
 msgid "Exporting data..."
 msgstr "데이터를 내보내는 중..."
 
-#: src/mainwindow.cpp:1958
+#: src/mainwindow.cpp:1959
 #, kde-format
 msgid "Export As"
 msgstr "다른 이름으로 내보내기"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:1987
 #, kde-format
 msgid "String Macros"
 msgstr "문자열 매크로"
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1988
 #, kde-format
 msgid "Macro"
 msgstr "매크로"
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1988
 #, kde-format
 msgid "String"
 msgstr "문자열"
 
-#: src/mainwindow.cpp:2073
+#: src/mainwindow.cpp:2074
 #, kde-format
 msgid "Creating citations..."
 msgstr "인용구를 만드는 중..."
 
-#: src/mainwindow.cpp:2183
+#: src/mainwindow.cpp:2184
 #, kde-format
 msgid "Filters"
 msgstr "필터"
 
-#: src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2185
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6452,12 +6452,12 @@ msgstr ""
 "<qt><i>필터 보기</i>에서는 선택한 필터 조건을 만족하는 항목을 표시합니다.</"
 "qt>"
 
-#: src/mainwindow.cpp:2207
+#: src/mainwindow.cpp:2208
 #, kde-format
 msgid "Loans"
 msgstr "대여"
 
-#: src/mainwindow.cpp:2208
+#: src/mainwindow.cpp:2209
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6465,7 +6465,7 @@ msgid ""
 msgstr ""
 "<qt><i>대여 보기</i>에서는 내 소장품을 빌려 간 사람 목록을 표시합니다.</qt>"
 
-#: src/mainwindow.cpp:2296
+#: src/mainwindow.cpp:2297
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6474,12 +6474,12 @@ msgstr ""
 "일부 이미지는 설정된 위치에 저장되지 않습니다. 현재 파일을 저장해야 하며 이미"
 "지가 새로운 위치로 전송됩니다."
 
-#: src/mainwindow.cpp:2340
+#: src/mainwindow.cpp:2341
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "%1에서 항목 데이터 업데이트"
 
-#: src/mainwindow.cpp:2359
+#: src/mainwindow.cpp:2360
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6487,7 +6487,7 @@ msgid ""
 msgstr ""
 "Tellico는 한 번에 이 형식의 파일 하나만 가져올 수 있습니다. %1만 가져옵니다."
 
-#: src/mainwindow.cpp:2538
+#: src/mainwindow.cpp:2539
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6524,12 +6524,12 @@ msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "일부 보고서는 대규모 소장품을 생성하는데 몇 초 정도 걸릴 수 있습니다."
 
-#: src/reportdialog.cpp:420
+#: src/reportdialog.cpp:421
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG 파일"
 
-#: src/reportdialog.cpp:435 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:436 src/translators/htmlexporter.cpp:102
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML 파일"
@@ -7140,32 +7140,32 @@ msgstr "<qt>파일이 올바른 GCstar 데이터 파일이 아닙니다.</qt>"
 msgid "Goodreads Options"
 msgstr "Goodreads 옵션"
 
-#: src/translators/htmlexporter.cpp:391
+#: src/translators/htmlexporter.cpp:392
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1(으)로 그룹화)"
 
-#: src/translators/htmlexporter.cpp:553
+#: src/translators/htmlexporter.cpp:554
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML 옵션"
 
-#: src/translators/htmlexporter.cpp:556
+#: src/translators/htmlexporter.cpp:557
 #, kde-format
 msgid "Print field headers"
 msgstr "필드 머리글 인쇄"
 
-#: src/translators/htmlexporter.cpp:561
+#: src/translators/htmlexporter.cpp:562
 #, kde-format
 msgid "Group the entries"
 msgstr "항목 그룹화"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "Export individual entry files"
 msgstr "개별 항목 파일 내보내기"
 
-#: src/translators/htmlexporter.cpp:567
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "이 옵션을 선택하면 각 항목을 개별 파일로 내보냅니다."
@@ -7224,22 +7224,22 @@ msgstr "문자 인코딩:"
 msgid "MARC Format:"
 msgstr "MARC 형식: "
 
-#: src/translators/onixexporter.cpp:71
+#: src/translators/onixexporter.cpp:72
 #, kde-format
 msgid "Zip Files"
 msgstr "Zip 파일"
 
-#: src/translators/onixexporter.cpp:179
+#: src/translators/onixexporter.cpp:180
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "ONIX 압축 파일 옵션"
 
-#: src/translators/onixexporter.cpp:182
+#: src/translators/onixexporter.cpp:183
 #, kde-format
 msgid "Include images in archive"
 msgstr "이미지를 압축 파일에 포함"
 
-#: src/translators/onixexporter.cpp:184
+#: src/translators/onixexporter.cpp:185
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
@@ -7277,17 +7277,17 @@ msgstr "파일이 비어 있습니다."
 msgid "The file contains no collection data."
 msgstr "파일에 수집 데이터가 없습니다."
 
-#: src/translators/tellicoxmlexporter.cpp:542
+#: src/translators/tellicoxmlexporter.cpp:549
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML 옵션"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:552
 #, kde-format
 msgid "Include images in XML document"
 msgstr "XML 문서에 이미지 포함"
 
-#: src/translators/tellicoxmlexporter.cpp:547
+#: src/translators/tellicoxmlexporter.cpp:554
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7301,17 +7301,17 @@ msgstr ""
 msgid "It is from a future version of Tellico."
 msgstr "Tellico의 이후 버전에서 만들었습니다."
 
-#: src/translators/xsltexporter.cpp:86 src/translators/xsltimporter.cpp:118
+#: src/translators/xsltexporter.cpp:87 src/translators/xsltimporter.cpp:118
 #, kde-format
 msgid "XSLT Options"
 msgstr "XSLT 옵션"
 
-#: src/translators/xsltexporter.cpp:89 src/translators/xsltimporter.cpp:121
+#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
 #, kde-format
 msgid "XSLT file:"
 msgstr "XSLT 파일:"
 
-#: src/translators/xsltexporter.cpp:91 src/translators/xsltimporter.cpp:123
+#: src/translators/xsltexporter.cpp:92 src/translators/xsltimporter.cpp:123
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr "데이터를 변환하는 데 사용되는 XSLT 파일을 선택합니다."

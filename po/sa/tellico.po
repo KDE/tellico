@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-26 00:41+0000\n"
+"POT-Creation-Date: 2025-05-29 00:42+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -213,7 +213,7 @@ msgstr "<qt>Tellico <b>%1</b> इत्यत्र सर्वरपाइप�
 msgid "My Collection"
 msgstr "मम संग्रहः"
 
-#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:530
+#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:519
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
@@ -1018,7 +1018,7 @@ msgstr "क्रय मूल्य"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:528
+#: src/collections/videocollection.cpp:205 src/document.cpp:517
 #, kde-format
 msgid "Loaned"
 msgstr "ऋणं दत्तम्"
@@ -2485,7 +2485,7 @@ msgstr "&शीर्षकाणि नामानि च प्रारू�
 msgid "&Print field headers"
 msgstr "&क्षेत्रशीर्षकाणि मुद्रयन्तु"
 
-#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:557
+#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "यदि चेक् कृतं तर्हि क्षेत्रनामानि सारणीशीर्षकरूपेण मुद्रितानि भविष्यन्ति ।"
@@ -2500,7 +2500,7 @@ msgstr "समूहीकरणविकल्पाः"
 msgid "&Group the entries"
 msgstr "&प्रविष्टीनां समूहीकरणं कुर्वन्तु"
 
-#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:562
+#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "यदि चेक् कृतं तर्हि प्रविष्टयः चयनितक्षेत्रेण समूहीकृताः भविष्यन्ति ।"
@@ -2726,7 +2726,7 @@ msgstr "&लुप्"
 msgid "Click to delete the selected data source."
 msgstr "चयनितं दत्तांशस्रोतं विलोपयितुं क्लिक् कुर्वन्तु ।"
 
-#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:100
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
@@ -2738,15 +2738,15 @@ msgid "Template Packages"
 msgstr "टेम्पलेट संकुल"
 
 #: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1248
-#: src/mainwindow.cpp:1419 src/reportdialog.cpp:422 src/reportdialog.cpp:437
+#: src/mainwindow.cpp:1419 src/reportdialog.cpp:423 src/reportdialog.cpp:438
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
-#: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
+#: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
 #: src/translators/librarythingimporter.cpp:187
-#: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
-#: src/translators/tellicozipexporter.cpp:54
-#: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:100
+#: src/translators/onixexporter.cpp:72
+#: src/translators/tellicoxmlexporter.cpp:74
+#: src/translators/tellicozipexporter.cpp:56
+#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:127
 #, kde-format
 msgid "All Files"
@@ -3154,22 +3154,22 @@ msgstr "Tellico पूर्वनिर्धारितप्रविष्�
 msgid "Please check your installation."
 msgstr "कृपया स्वस्य संस्थापनं पश्यन्तु।"
 
-#: src/exportdialog.cpp:64
+#: src/exportdialog.cpp:66
 #, kde-format
 msgid "Export Options"
 msgstr "निर्यातविकल्पाः"
 
-#: src/exportdialog.cpp:71
+#: src/exportdialog.cpp:73
 #, kde-format
 msgid "Formatting"
 msgstr "स्वरूपणम्"
 
-#: src/exportdialog.cpp:75
+#: src/exportdialog.cpp:77
 #, kde-format
 msgid "Format all fields"
 msgstr "सर्वाणि क्षेत्राणि प्रारूपयन्तु"
 
-#: src/exportdialog.cpp:77
+#: src/exportdialog.cpp:79
 #, kde-format
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
@@ -3178,49 +3178,49 @@ msgstr ""
 "यदि परीक्षितं भवति तर्हि क्षेत्राणां मूल्यानि स्वयमेव तेषां प्रारूपप्रकारस्य अनुसारं स्वरूपितानि "
 "भविष्यन्ति ।"
 
-#: src/exportdialog.cpp:81
+#: src/exportdialog.cpp:83
 #, kde-format
 msgid "Export selected entries only"
 msgstr "केवलं चयनितप्रविष्टयः निर्यातयन्तु"
 
-#: src/exportdialog.cpp:83
+#: src/exportdialog.cpp:85
 #, kde-format
 msgid "If checked, only the currently selected entries will be exported."
 msgstr "यदि परीक्षितं तर्हि केवलं वर्तमानचयनितप्रविष्टयः निर्यातिताः भविष्यन्ति ।"
 
-#: src/exportdialog.cpp:87
+#: src/exportdialog.cpp:89
 #, kde-format
 msgid "Export visible fields only"
 msgstr "केवलं दृश्यमानक्षेत्राणि निर्यातयन्तु"
 
-#: src/exportdialog.cpp:89
+#: src/exportdialog.cpp:91
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
 msgstr ""
 "यदि परीक्षितं तर्हि केवलं दृश्ये वर्तमानकाले दृश्यमानानि क्षेत्राणि निर्यातितानि भविष्यन्ति ।"
 
-#: src/exportdialog.cpp:93
+#: src/exportdialog.cpp:95
 #, kde-format
 msgid "Encoding"
 msgstr "एन्कोडिंग्"
 
-#: src/exportdialog.cpp:98
+#: src/exportdialog.cpp:100
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
 msgstr "यूनिकोड् (UTF-8) इत्यत्र एन्कोड् कुर्वन्तु ।"
 
-#: src/exportdialog.cpp:100
+#: src/exportdialog.cpp:102
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr "निर्यातितं सञ्चिकां Unicode (UTF-8) इत्यस्मिन् एन्कोड् कुर्वन्तु ।"
 
-#: src/exportdialog.cpp:104
+#: src/exportdialog.cpp:106
 #, kde-format
 msgid "Encode in user locale (%1)"
 msgstr "उपयोक्तृस्थानके (%1) एन्कोड् कुर्वन्तु ।"
 
-#: src/exportdialog.cpp:107
+#: src/exportdialog.cpp:109
 #, kde-format
 msgid "Encode the exported file in the local encoding."
 msgstr "निर्यातितसञ्चिकां स्थानीयसङ्केतने एन्कोड् कुर्वन्तु ।"
@@ -4869,7 +4869,7 @@ msgid "Group"
 msgstr "समूह"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1079 src/mainwindow.cpp:1702
-#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:386
+#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "जनाः"
@@ -5171,13 +5171,13 @@ msgid "&Import"
 msgstr "&आयात"
 
 #: src/importdialog.cpp:372 src/mainwindow.cpp:1244 src/mainwindow.cpp:1417
-#: src/translators/tellicozipexporter.cpp:54
+#: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "टेलिको फाइल्स"
 
 #: src/importdialog.cpp:373 src/importdialog.cpp:391 src/importdialog.cpp:420
-#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML सञ्चिकाः"
@@ -5197,7 +5197,7 @@ msgstr "CSV सञ्चिकाः"
 msgid "RIS Files"
 msgstr "RIS सञ्चिकाः"
 
-#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:62
+#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "GCstar Data Files इति"
@@ -6441,37 +6441,37 @@ msgstr "आयात निर्देशिका"
 msgid "Exporting data..."
 msgstr "आँकडा निर्यातयति..."
 
-#: src/mainwindow.cpp:1958
+#: src/mainwindow.cpp:1959
 #, kde-format
 msgid "Export As"
 msgstr "निर्यात As"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:1987
 #, kde-format
 msgid "String Macros"
 msgstr "स्ट्रिंग मैक्रोस"
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1988
 #, kde-format
 msgid "Macro"
 msgstr "मैक्रो"
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1988
 #, kde-format
 msgid "String"
 msgstr "सूत्र"
 
-#: src/mainwindow.cpp:2073
+#: src/mainwindow.cpp:2074
 #, kde-format
 msgid "Creating citations..."
 msgstr "उद्धरणं रचयन्..."
 
-#: src/mainwindow.cpp:2183
+#: src/mainwindow.cpp:2184
 #, kde-format
 msgid "Filters"
 msgstr "फ़िल्टर"
 
-#: src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2185
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6480,12 +6480,12 @@ msgstr ""
 "<qt><i>Filter View</i> तानि प्रविष्टयः दर्शयति ये कतिपयान् filter नियमान् पूरयन्ति ।"
 "</qt>"
 
-#: src/mainwindow.cpp:2207
+#: src/mainwindow.cpp:2208
 #, kde-format
 msgid "Loans"
 msgstr "ऋणम्"
 
-#: src/mainwindow.cpp:2208
+#: src/mainwindow.cpp:2209
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6493,7 +6493,7 @@ msgid ""
 msgstr ""
 "<qt><i>ऋणदृश्यं</i> सर्वेषां जनानां सूचीं दर्शयति ये भवतः संग्रहात् वस्तूनि ऋणं गृहीतवन्तः।</qt>"
 
-#: src/mainwindow.cpp:2296
+#: src/mainwindow.cpp:2297
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6502,12 +6502,12 @@ msgstr ""
 "केचन चित्राणि विन्यस्तस्थाने न रक्षन्ति । वर्तमानसञ्चिका रक्षिता भवितुमर्हति तथा च "
 "चित्राणि नूतनस्थाने स्थानान्तरितानि भविष्यन्ति ।"
 
-#: src/mainwindow.cpp:2340
+#: src/mainwindow.cpp:2341
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "%1 तः प्रविष्टिदत्तांशं अद्यतनं कुर्वन्तु"
 
-#: src/mainwindow.cpp:2359
+#: src/mainwindow.cpp:2360
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6516,7 +6516,7 @@ msgstr ""
 "Tellico एकस्मिन् समये केवलम् एतादृशप्रकारस्य एकां सञ्चिकां आयातयितुं शक्नोति । केवलं %1 "
 "आयातितः भविष्यति।"
 
-#: src/mainwindow.cpp:2538
+#: src/mainwindow.cpp:2539
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6553,12 +6553,12 @@ msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "केचन प्रतिवेदनानि बृहत्सङ्ग्रहाणां कृते जनयितुं कतिपयानि सेकण्डानि यावत् समयं लभन्ते ।"
 
-#: src/reportdialog.cpp:420
+#: src/reportdialog.cpp:421
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG सञ्चिकाः"
 
-#: src/reportdialog.cpp:435 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:436 src/translators/htmlexporter.cpp:102
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML सञ्चिकाः"
@@ -7177,32 +7177,32 @@ msgstr "<qt>सञ्चिका वैध GCstar दत्तांशसञ�
 msgid "Goodreads Options"
 msgstr "Goodreads विकल्पाः"
 
-#: src/translators/htmlexporter.cpp:391
+#: src/translators/htmlexporter.cpp:392
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1 द्वारा समूहीकृतम्)"
 
-#: src/translators/htmlexporter.cpp:553
+#: src/translators/htmlexporter.cpp:554
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML विकल्पाः"
 
-#: src/translators/htmlexporter.cpp:556
+#: src/translators/htmlexporter.cpp:557
 #, kde-format
 msgid "Print field headers"
 msgstr "क्षेत्रशीर्षकाणि मुद्रयन्तु"
 
-#: src/translators/htmlexporter.cpp:561
+#: src/translators/htmlexporter.cpp:562
 #, kde-format
 msgid "Group the entries"
 msgstr "प्रविष्टीनां समूहीकरणं कुर्वन्तु"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "Export individual entry files"
 msgstr "व्यक्तिगतप्रविष्टिसञ्चिकाः निर्यातयन्तु"
 
-#: src/translators/htmlexporter.cpp:567
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr ""
@@ -7262,22 +7262,22 @@ msgstr "वर्णसमूहः :"
 msgid "MARC Format:"
 msgstr "MARC प्रारूपः :"
 
-#: src/translators/onixexporter.cpp:71
+#: src/translators/onixexporter.cpp:72
 #, kde-format
 msgid "Zip Files"
 msgstr "जिप् सञ्चिकाः"
 
-#: src/translators/onixexporter.cpp:179
+#: src/translators/onixexporter.cpp:180
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "ONIX संग्रह विकल्पाः"
 
-#: src/translators/onixexporter.cpp:182
+#: src/translators/onixexporter.cpp:183
 #, kde-format
 msgid "Include images in archive"
 msgstr "संग्रहे चित्राणि समाविष्टानि कुर्वन्तु"
 
-#: src/translators/onixexporter.cpp:184
+#: src/translators/onixexporter.cpp:185
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
@@ -7317,17 +7317,17 @@ msgstr "सञ्चिका रिक्तम् अस्ति ।"
 msgid "The file contains no collection data."
 msgstr "सञ्चिकायां संग्रहदत्तांशः नास्ति ।"
 
-#: src/translators/tellicoxmlexporter.cpp:542
+#: src/translators/tellicoxmlexporter.cpp:549
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML विकल्पाः"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:552
 #, kde-format
 msgid "Include images in XML document"
 msgstr "XML दस्तावेजे चित्राणि समाविष्टानि कुर्वन्तु"
 
-#: src/translators/tellicoxmlexporter.cpp:547
+#: src/translators/tellicoxmlexporter.cpp:554
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7341,17 +7341,17 @@ msgstr ""
 msgid "It is from a future version of Tellico."
 msgstr "इदं टेलिको इत्यस्य भविष्यस्य संस्करणात् अस्ति ।"
 
-#: src/translators/xsltexporter.cpp:86 src/translators/xsltimporter.cpp:118
+#: src/translators/xsltexporter.cpp:87 src/translators/xsltimporter.cpp:118
 #, kde-format
 msgid "XSLT Options"
 msgstr "XSLT विकल्पाः"
 
-#: src/translators/xsltexporter.cpp:89 src/translators/xsltimporter.cpp:121
+#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
 #, kde-format
 msgid "XSLT file:"
 msgstr "XSLT सञ्चिका :"
 
-#: src/translators/xsltexporter.cpp:91 src/translators/xsltimporter.cpp:123
+#: src/translators/xsltexporter.cpp:92 src/translators/xsltimporter.cpp:123
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr "दत्तांशस्य परिवर्तनार्थं प्रयुक्तां XSLT सञ्चिकां चिनोतु ।"

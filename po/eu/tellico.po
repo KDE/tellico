@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-26 00:41+0000\n"
+"POT-Creation-Date: 2025-05-29 00:42+0000\n"
 "PO-Revision-Date: 2025-04-22 12:15+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -215,7 +215,7 @@ msgstr ""
 msgid "My Collection"
 msgstr "Nere bilduma"
 
-#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:530
+#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:519
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
@@ -1031,7 +1031,7 @@ msgstr "Erosketa salneurria"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:528
+#: src/collections/videocollection.cpp:205 src/document.cpp:517
 #, kde-format
 msgid "Loaned"
 msgstr "Maileguan utzita"
@@ -2512,7 +2512,7 @@ msgstr "&Formatua eman titulu eta izenei"
 msgid "&Print field headers"
 msgstr "In&primatu eremu-goiburuak"
 
-#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:557
+#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Markatuta badago, eremu izenak taulako goiburu gisa inprimatuko dira."
@@ -2527,7 +2527,7 @@ msgstr "Taldekatzeko aukerak"
 msgid "&Group the entries"
 msgstr "&Taldekatu sarrerak"
 
-#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:562
+#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
@@ -2756,7 +2756,7 @@ msgstr "&Ezabatu"
 msgid "Click to delete the selected data source."
 msgstr "Egin klik hautatutako datu-iturria ezabatzeko."
 
-#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:100
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
@@ -2768,15 +2768,15 @@ msgid "Template Packages"
 msgstr "Txantiloi-paketeak"
 
 #: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1248
-#: src/mainwindow.cpp:1419 src/reportdialog.cpp:422 src/reportdialog.cpp:437
+#: src/mainwindow.cpp:1419 src/reportdialog.cpp:423 src/reportdialog.cpp:438
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
-#: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
+#: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
 #: src/translators/librarythingimporter.cpp:187
-#: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
-#: src/translators/tellicozipexporter.cpp:54
-#: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:100
+#: src/translators/onixexporter.cpp:72
+#: src/translators/tellicoxmlexporter.cpp:74
+#: src/translators/tellicozipexporter.cpp:56
+#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:127
 #, kde-format
 msgid "All Files"
@@ -3179,22 +3179,22 @@ msgstr "Tellico-k ezin du kokatu sarrera lehenetsiaren estilo-orria."
 msgid "Please check your installation."
 msgstr "Ikuskatu zure instalazioa."
 
-#: src/exportdialog.cpp:64
+#: src/exportdialog.cpp:66
 #, kde-format
 msgid "Export Options"
 msgstr "Esportatzeko aukerak"
 
-#: src/exportdialog.cpp:71
+#: src/exportdialog.cpp:73
 #, kde-format
 msgid "Formatting"
 msgstr "Eratzea"
 
-#: src/exportdialog.cpp:75
+#: src/exportdialog.cpp:77
 #, kde-format
 msgid "Format all fields"
 msgstr "Eratu eremu guztiak"
 
-#: src/exportdialog.cpp:77
+#: src/exportdialog.cpp:79
 #, kde-format
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
@@ -3203,22 +3203,22 @@ msgstr ""
 "Markatuz gero, eremuetako balioak automatikoki eratuko dira haien formatu "
 "motara."
 
-#: src/exportdialog.cpp:81
+#: src/exportdialog.cpp:83
 #, kde-format
 msgid "Export selected entries only"
 msgstr "Esportatu soilik hautatutako sarrerak"
 
-#: src/exportdialog.cpp:83
+#: src/exportdialog.cpp:85
 #, kde-format
 msgid "If checked, only the currently selected entries will be exported."
 msgstr "Markatuz gero, soilik unean hautatutako sarrerak esportatuko dira."
 
-#: src/exportdialog.cpp:87
+#: src/exportdialog.cpp:89
 #, kde-format
 msgid "Export visible fields only"
 msgstr "Esportatu soilik eremu ikusgaiak"
 
-#: src/exportdialog.cpp:89
+#: src/exportdialog.cpp:91
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
@@ -3226,27 +3226,27 @@ msgstr ""
 "Markatuz gero, soilik ikuspegian unean ikusgai dauden eremuak esportatuko "
 "dira."
 
-#: src/exportdialog.cpp:93
+#: src/exportdialog.cpp:95
 #, kde-format
 msgid "Encoding"
 msgstr "Kodetzea"
 
-#: src/exportdialog.cpp:98
+#: src/exportdialog.cpp:100
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
 msgstr "Kodetu Unicode-n (UTF-8)"
 
-#: src/exportdialog.cpp:100
+#: src/exportdialog.cpp:102
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr "Kodetu esportatutko fitxategia Unicode-n (UTF-8)."
 
-#: src/exportdialog.cpp:104
+#: src/exportdialog.cpp:106
 #, kde-format
 msgid "Encode in user locale (%1)"
 msgstr "Kodetu erabiltzailearen tokiko ezarpenarekin (%1)"
 
-#: src/exportdialog.cpp:107
+#: src/exportdialog.cpp:109
 #, kde-format
 msgid "Encode the exported file in the local encoding."
 msgstr "Kodetu esportatutako fitxategia tokiko kodetze sistemarekin."
@@ -4904,7 +4904,7 @@ msgid "Group"
 msgstr "Taldea"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1079 src/mainwindow.cpp:1702
-#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:386
+#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "Jendea"
@@ -5207,13 +5207,13 @@ msgid "&Import"
 msgstr "&Inportatu"
 
 #: src/importdialog.cpp:372 src/mainwindow.cpp:1244 src/mainwindow.cpp:1417
-#: src/translators/tellicozipexporter.cpp:54
+#: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico fitxategiak"
 
 #: src/importdialog.cpp:373 src/importdialog.cpp:391 src/importdialog.cpp:420
-#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML fitxategiak"
@@ -5233,7 +5233,7 @@ msgstr "CSV fitxategiak"
 msgid "RIS Files"
 msgstr "RIS fitxategiak"
 
-#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:62
+#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "GCstar datu-fitxategiak"
@@ -6482,37 +6482,37 @@ msgstr "Inportatu direktorioa"
 msgid "Exporting data..."
 msgstr "Datuak esportatzen..."
 
-#: src/mainwindow.cpp:1958
+#: src/mainwindow.cpp:1959
 #, kde-format
 msgid "Export As"
 msgstr "Esportatu honela"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:1987
 #, kde-format
 msgid "String Macros"
 msgstr "Kate-makroak"
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1988
 #, kde-format
 msgid "Macro"
 msgstr "Makroa"
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1988
 #, kde-format
 msgid "String"
 msgstr "Katea"
 
-#: src/mainwindow.cpp:2073
+#: src/mainwindow.cpp:2074
 #, kde-format
 msgid "Creating citations..."
 msgstr "Aipamenak sortzen..."
 
-#: src/mainwindow.cpp:2183
+#: src/mainwindow.cpp:2184
 #, kde-format
 msgid "Filters"
 msgstr "Iragazkiak"
 
-#: src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2185
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6521,12 +6521,12 @@ msgstr ""
 "<qt><i>Iragazki ikuspegia</i>k iragazte arau jakin batzuk betetzen dituzten "
 "sarrerak erakusten ditu.</qt>"
 
-#: src/mainwindow.cpp:2207
+#: src/mainwindow.cpp:2208
 #, kde-format
 msgid "Loans"
 msgstr "Maileguak"
 
-#: src/mainwindow.cpp:2208
+#: src/mainwindow.cpp:2209
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6535,7 +6535,7 @@ msgstr ""
 "<qt><i>Mailegu ikuspegia</i>k zure bildumako elementuak maileguan hartu "
 "dituzten pertsona guztien zerrenda bat erakusten du.</qt>"
 
-#: src/mainwindow.cpp:2296
+#: src/mainwindow.cpp:2297
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6544,12 +6544,12 @@ msgstr ""
 "Irudi batzuk ez daude gordeta konfiguratutako kokalekuan. Uneko fitxategia "
 "gorde behar da eta irudiak kokaleku berrira transferituko dira."
 
-#: src/mainwindow.cpp:2340
+#: src/mainwindow.cpp:2341
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Eguneratu sarrerako datuak %1(e)tik"
 
-#: src/mainwindow.cpp:2359
+#: src/mainwindow.cpp:2360
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6558,7 +6558,7 @@ msgstr ""
 "Tellico-k aldiko mota honetako fitxategi bakarra inportatu dezake. Soilik %1 "
 "inportatuko da."
 
-#: src/mainwindow.cpp:2538
+#: src/mainwindow.cpp:2539
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6596,12 +6596,12 @@ msgid ""
 msgstr ""
 "Bilduma handietarako txosten batzuk sortzea segundo batzuk har ditzake."
 
-#: src/reportdialog.cpp:420
+#: src/reportdialog.cpp:421
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG fitxategiak"
 
-#: src/reportdialog.cpp:435 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:436 src/translators/htmlexporter.cpp:102
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML fitxategiak"
@@ -7232,32 +7232,32 @@ msgstr "<qt>Fitxategia ez da GCstar datu fitxategi balioduna.</qt>"
 msgid "Goodreads Options"
 msgstr "Goodreads aukerak"
 
-#: src/translators/htmlexporter.cpp:391
+#: src/translators/htmlexporter.cpp:392
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1(e)ren arabera taldekatuta)"
 
-#: src/translators/htmlexporter.cpp:553
+#: src/translators/htmlexporter.cpp:554
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML aukerak"
 
-#: src/translators/htmlexporter.cpp:556
+#: src/translators/htmlexporter.cpp:557
 #, kde-format
 msgid "Print field headers"
 msgstr "Inprimatu eremuko goiburuak"
 
-#: src/translators/htmlexporter.cpp:561
+#: src/translators/htmlexporter.cpp:562
 #, kde-format
 msgid "Group the entries"
 msgstr "Taldekatu sarrerak"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Esportatu sarrera bereiziko fitxategiak"
 
-#: src/translators/htmlexporter.cpp:567
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr ""
@@ -7317,22 +7317,22 @@ msgstr "Karaktere-multzoa:"
 msgid "MARC Format:"
 msgstr "MARC formatua:"
 
-#: src/translators/onixexporter.cpp:71
+#: src/translators/onixexporter.cpp:72
 #, kde-format
 msgid "Zip Files"
 msgstr "Zip fitxategiak"
 
-#: src/translators/onixexporter.cpp:179
+#: src/translators/onixexporter.cpp:180
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "ONIX artxibo aukerak"
 
-#: src/translators/onixexporter.cpp:182
+#: src/translators/onixexporter.cpp:183
 #, kde-format
 msgid "Include images in archive"
 msgstr "Barneratu irudiak artxiboan"
 
-#: src/translators/onixexporter.cpp:184
+#: src/translators/onixexporter.cpp:185
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
@@ -7372,17 +7372,17 @@ msgstr "Fitxategia hutsi dago."
 msgid "The file contains no collection data."
 msgstr "Fitxategiak ez du bilduma daturik."
 
-#: src/translators/tellicoxmlexporter.cpp:542
+#: src/translators/tellicoxmlexporter.cpp:549
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML aukerak"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:552
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Barneratu irudiak XML dokumentuan"
 
-#: src/translators/tellicoxmlexporter.cpp:547
+#: src/translators/tellicoxmlexporter.cpp:554
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7396,17 +7396,17 @@ msgstr ""
 msgid "It is from a future version of Tellico."
 msgstr "Tellico-ren etorkizuneko bertsio batekoa da."
 
-#: src/translators/xsltexporter.cpp:86 src/translators/xsltimporter.cpp:118
+#: src/translators/xsltexporter.cpp:87 src/translators/xsltimporter.cpp:118
 #, kde-format
 msgid "XSLT Options"
 msgstr "XSLT aukerak"
 
-#: src/translators/xsltexporter.cpp:89 src/translators/xsltimporter.cpp:121
+#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
 #, kde-format
 msgid "XSLT file:"
 msgstr "XSLT fitxategia:"
 
-#: src/translators/xsltexporter.cpp:91 src/translators/xsltimporter.cpp:123
+#: src/translators/xsltexporter.cpp:92 src/translators/xsltimporter.cpp:123
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Hautatu datuak eraldatzeko erabili beharreko XSLT fitxategia."

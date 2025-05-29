@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-26 00:41+0000\n"
+"POT-Creation-Date: 2025-05-29 00:42+0000\n"
 "PO-Revision-Date: 2024-09-22 16:35+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -212,7 +212,7 @@ msgstr "<qt>Klarte ikkje skriva til tenarrøyret på <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Samlinga mi"
 
-#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:530
+#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:519
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
@@ -1024,7 +1024,7 @@ msgstr "Kjøpspris"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:528
+#: src/collections/videocollection.cpp:205 src/document.cpp:517
 #, kde-format
 msgid "Loaned"
 msgstr "Lånt ut"
@@ -2510,7 +2510,7 @@ msgstr "&Formater titlar og namn"
 msgid "&Print field headers"
 msgstr "&Skriv ut feltoverskrifter"
 
-#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:557
+#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Kryss av her for å visa feltnamn som kolonneoverskrifter."
@@ -2525,7 +2525,7 @@ msgstr "Grupperingsval"
 msgid "&Group the entries"
 msgstr "&Grupper oppføringane"
 
-#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:562
+#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Kryss av her for å gruppera oppføringane etter det valde feltet."
@@ -2755,7 +2755,7 @@ msgstr "&Slett"
 msgid "Click to delete the selected data source."
 msgstr "Slett den merkte datakjelda."
 
-#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:99
+#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:100
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
@@ -2767,15 +2767,15 @@ msgid "Template Packages"
 msgstr "Malpakkar"
 
 #: src/configdialog.cpp:1166 src/importdialog.cpp:441 src/mainwindow.cpp:1248
-#: src/mainwindow.cpp:1419 src/reportdialog.cpp:422 src/reportdialog.cpp:437
+#: src/mainwindow.cpp:1419 src/reportdialog.cpp:423 src/reportdialog.cpp:438
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
-#: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
+#: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
 #: src/translators/librarythingimporter.cpp:187
-#: src/translators/onixexporter.cpp:71
-#: src/translators/tellicoxmlexporter.cpp:71
-#: src/translators/tellicozipexporter.cpp:54
-#: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:100
+#: src/translators/onixexporter.cpp:72
+#: src/translators/tellicoxmlexporter.cpp:74
+#: src/translators/tellicozipexporter.cpp:56
+#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:101
 #: src/translators/xsltimporter.cpp:127
 #, kde-format
 msgid "All Files"
@@ -3176,70 +3176,70 @@ msgstr "Klarte ikkje finna standardstilsett for oppføringar."
 msgid "Please check your installation."
 msgstr "Kontroller at programmet er rett installert."
 
-#: src/exportdialog.cpp:64
+#: src/exportdialog.cpp:66
 #, kde-format
 msgid "Export Options"
 msgstr "Eksporteringsval"
 
-#: src/exportdialog.cpp:71
+#: src/exportdialog.cpp:73
 #, kde-format
 msgid "Formatting"
 msgstr "Formatering"
 
-#: src/exportdialog.cpp:75
+#: src/exportdialog.cpp:77
 #, kde-format
 msgid "Format all fields"
 msgstr "Formater alle felt"
 
-#: src/exportdialog.cpp:77
+#: src/exportdialog.cpp:79
 #, kde-format
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
 msgstr "Kryss av her for å automatisk formatera felta etter formattypen."
 
-#: src/exportdialog.cpp:81
+#: src/exportdialog.cpp:83
 #, kde-format
 msgid "Export selected entries only"
 msgstr "Eksporter berre merkte oppføringar"
 
-#: src/exportdialog.cpp:83
+#: src/exportdialog.cpp:85
 #, kde-format
 msgid "If checked, only the currently selected entries will be exported."
 msgstr "Kryss av her for berre å eksportera dei merkte oppføringane."
 
-#: src/exportdialog.cpp:87
+#: src/exportdialog.cpp:89
 #, kde-format
 msgid "Export visible fields only"
 msgstr "Berre eksporter synlege felt"
 
-#: src/exportdialog.cpp:89
+#: src/exportdialog.cpp:91
 #, kde-format
 msgid ""
 "If checked, only the fields currently visible in the view will be exported."
 msgstr "Kryss av her for berre å eksportera felta som er synlege i visinga."
 
-#: src/exportdialog.cpp:93
+#: src/exportdialog.cpp:95
 #, kde-format
 msgid "Encoding"
 msgstr "Teiknkoding"
 
-#: src/exportdialog.cpp:98
+#: src/exportdialog.cpp:100
 #, kde-format
 msgid "Encode in Unicode (UTF-8)"
 msgstr "Kod som Unicode (UTF-8)"
 
-#: src/exportdialog.cpp:100
+#: src/exportdialog.cpp:102
 #, kde-format
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr "Eksporter filer med teiknkodinga UTF-8."
 
-#: src/exportdialog.cpp:104
+#: src/exportdialog.cpp:106
 #, kde-format
 msgid "Encode in user locale (%1)"
 msgstr "Kod etter brukarlokalet (%1)"
 
-#: src/exportdialog.cpp:107
+#: src/exportdialog.cpp:109
 #, kde-format
 msgid "Encode the exported file in the local encoding."
 msgstr "Bruk standardteiknkodinga frå lokalet i den eksporterte fila."
@@ -4889,7 +4889,7 @@ msgid "Group"
 msgstr "Gruppe"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1079 src/mainwindow.cpp:1702
-#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:386
+#: src/mainwindow.cpp:1739 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "Personar"
@@ -5192,13 +5192,13 @@ msgid "&Import"
 msgstr "&Importer frå"
 
 #: src/importdialog.cpp:372 src/mainwindow.cpp:1244 src/mainwindow.cpp:1417
-#: src/translators/tellicozipexporter.cpp:54
+#: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico-filer"
 
 #: src/importdialog.cpp:373 src/importdialog.cpp:391 src/importdialog.cpp:420
-#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML-filer"
@@ -5218,7 +5218,7 @@ msgstr "CSV-filer"
 msgid "RIS Files"
 msgstr "RIS-filer"
 
-#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:62
+#: src/importdialog.cpp:399 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "GCstar-filer"
@@ -6467,37 +6467,37 @@ msgstr "Importer mappe"
 msgid "Exporting data..."
 msgstr "Eksporterer data …"
 
-#: src/mainwindow.cpp:1958
+#: src/mainwindow.cpp:1959
 #, kde-format
 msgid "Export As"
 msgstr "Eksporter som"
 
-#: src/mainwindow.cpp:1986
+#: src/mainwindow.cpp:1987
 #, kde-format
 msgid "String Macros"
 msgstr "Tekstmakroar"
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1988
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1988
 #, kde-format
 msgid "String"
 msgstr "Tekst"
 
-#: src/mainwindow.cpp:2073
+#: src/mainwindow.cpp:2074
 #, kde-format
 msgid "Creating citations..."
 msgstr "Lagar referansar …"
 
-#: src/mainwindow.cpp:2183
+#: src/mainwindow.cpp:2184
 #, kde-format
 msgid "Filters"
 msgstr "Filter"
 
-#: src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2185
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6506,12 +6506,12 @@ msgstr ""
 "<qt>The <i>Filtervisinga</i> viser oppføringane i samsvar med visse "
 "filterreglar.</qt>"
 
-#: src/mainwindow.cpp:2207
+#: src/mainwindow.cpp:2208
 #, kde-format
 msgid "Loans"
 msgstr "Lån"
 
-#: src/mainwindow.cpp:2208
+#: src/mainwindow.cpp:2209
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6520,7 +6520,7 @@ msgstr ""
 "<qt><i>Lånevisinga</i> viser ei oversikt over alle som har lånt noko frå "
 "samlinga.</qt>"
 
-#: src/mainwindow.cpp:2296
+#: src/mainwindow.cpp:2297
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6529,12 +6529,12 @@ msgstr ""
 "Nokre bilete er ikkje lagra på den valde plasseringa. Den gjeldande fila må "
 "lagrast, og bileta vert så overtførte til den nye plasseringa."
 
-#: src/mainwindow.cpp:2340
+#: src/mainwindow.cpp:2341
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Oppdater oppføringsdata frå %1"
 
-#: src/mainwindow.cpp:2359
+#: src/mainwindow.cpp:2360
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6543,7 +6543,7 @@ msgstr ""
 "Tellico kan berre importera éi fil av denne typen om gongen. Berre %1 vert "
 "importert."
 
-#: src/mainwindow.cpp:2538
+#: src/mainwindow.cpp:2539
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6580,12 +6580,12 @@ msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "Er samlinga stor, kan det ta fleire sekund å laga klar rapporten."
 
-#: src/reportdialog.cpp:420
+#: src/reportdialog.cpp:421
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG-filer"
 
-#: src/reportdialog.cpp:435 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:436 src/translators/htmlexporter.cpp:102
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML-filer"
@@ -7211,32 +7211,32 @@ msgstr "<qt>Denne fila er ikkje ei gyldig GCstar-datafil.</qt>"
 msgid "Goodreads Options"
 msgstr "Goodreads-val"
 
-#: src/translators/htmlexporter.cpp:391
+#: src/translators/htmlexporter.cpp:392
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(gruppert etter %1)"
 
-#: src/translators/htmlexporter.cpp:553
+#: src/translators/htmlexporter.cpp:554
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML-val"
 
-#: src/translators/htmlexporter.cpp:556
+#: src/translators/htmlexporter.cpp:557
 #, kde-format
 msgid "Print field headers"
 msgstr "Skriv ut feltoverskrifter"
 
-#: src/translators/htmlexporter.cpp:561
+#: src/translators/htmlexporter.cpp:562
 #, kde-format
 msgid "Group the entries"
 msgstr "Grupper oppføringane"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Eksporter oppføringar til einskildfiler"
 
-#: src/translators/htmlexporter.cpp:567
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr ""
@@ -7296,22 +7296,22 @@ msgstr "Teiknkoding:"
 msgid "MARC Format:"
 msgstr "MARC-format:"
 
-#: src/translators/onixexporter.cpp:71
+#: src/translators/onixexporter.cpp:72
 #, kde-format
 msgid "Zip Files"
 msgstr "Zip-filer"
 
-#: src/translators/onixexporter.cpp:179
+#: src/translators/onixexporter.cpp:180
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "ONIX-arkivval"
 
-#: src/translators/onixexporter.cpp:182
+#: src/translators/onixexporter.cpp:183
 #, kde-format
 msgid "Include images in archive"
 msgstr "Ta bilete med i arkivet"
 
-#: src/translators/onixexporter.cpp:184
+#: src/translators/onixexporter.cpp:185
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
@@ -7351,17 +7351,17 @@ msgstr "Fila er tom."
 msgid "The file contains no collection data."
 msgstr "Fila inneheld ikkje noko samlingsdata."
 
-#: src/translators/tellicoxmlexporter.cpp:542
+#: src/translators/tellicoxmlexporter.cpp:549
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML-val"
 
-#: src/translators/tellicoxmlexporter.cpp:545
+#: src/translators/tellicoxmlexporter.cpp:552
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Ta med bilete i XML-dokument"
 
-#: src/translators/tellicoxmlexporter.cpp:547
+#: src/translators/tellicoxmlexporter.cpp:554
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7375,17 +7375,17 @@ msgstr ""
 msgid "It is from a future version of Tellico."
 msgstr "Ho er frå ein nyare versjon av Tellico."
 
-#: src/translators/xsltexporter.cpp:86 src/translators/xsltimporter.cpp:118
+#: src/translators/xsltexporter.cpp:87 src/translators/xsltimporter.cpp:118
 #, kde-format
 msgid "XSLT Options"
 msgstr "XSLT-val"
 
-#: src/translators/xsltexporter.cpp:89 src/translators/xsltimporter.cpp:121
+#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
 #, kde-format
 msgid "XSLT file:"
 msgstr "XSLT-fil:"
 
-#: src/translators/xsltexporter.cpp:91 src/translators/xsltimporter.cpp:123
+#: src/translators/xsltexporter.cpp:92 src/translators/xsltimporter.cpp:123
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Vel XSLT-fila du vil bruka til å transformera dataa."
