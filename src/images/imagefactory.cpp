@@ -81,7 +81,7 @@ void ImageFactory::init() {
   factory = new ImageFactory();
   const QUrl dataDir = QUrl::fromLocalFile(Tellico::saveLocation(QStringLiteral("data/")));
   factory->d->dataImageDir.setDirectory(dataDir);
-  myLog() << "Setting local image dir:" << factory->d->dataImageDir.dir().url(QUrl::PreferLocalFile);
+  myLog() << "Setting local image dir:" << factory->d->dataImageDir.dir().toDisplayString(QUrl::PreferLocalFile);
 
   myLog() << "Setting max image cache cost:" << Config::imageCacheSize();
   factory->d->imageCache.setMaxCost(Config::imageCacheSize());
@@ -93,7 +93,7 @@ void ImageFactory::init() {
 }
 
 Tellico::ImageFactory* ImageFactory::self() {
-  Q_ASSERT(factory && "ImageFactory is not initialized!");
+  Q_ASSERT_X(factory, "ImageFactory::self", "ImageFactory is not initialized!");
   return factory;
 }
 
@@ -111,7 +111,7 @@ QUrl ImageFactory::localDir() {
 }
 
 QUrl ImageFactory::imageDir() {
-  Q_ASSERT(factory);
+  Q_ASSERT_X(factory, "ImageFactory::imageDir()", "ImageFactory is not initialized!");
   switch(cacheDir()) {
     case LocalDir: return localDir();
     case DataDir: return dataDir();
@@ -136,7 +136,7 @@ Tellico::ImageFactory::CacheDir ImageFactory::cacheDir() {
 }
 
 QString ImageFactory::addImage(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {
-  Q_ASSERT(factory && "ImageFactory is not initialized!");
+  Q_ASSERT_X(factory, "ImageFactory::addImage", "ImageFactory is not initialized!");
   return factory->addImageImpl(url_, quiet_, refer_, link_).id();
 }
 
@@ -175,12 +175,12 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
 }
 
 QString ImageFactory::addImage(const QImage& image_, const QString& format_) {
-  Q_ASSERT(factory && "ImageFactory is not initialized!");
+  Q_ASSERT_X(factory, "ImageFactory::addImage(QImage)", "ImageFactory is not initialized!");
   return factory->addImageImpl(image_, format_).id();
 }
 
 QString ImageFactory::addImage(const QPixmap& pix_, const QString& format_) {
-  Q_ASSERT(factory && "ImageFactory is not initialized!");
+  Q_ASSERT_X(factory, "ImageFactory::addImage(QPixmap)", "ImageFactory is not initialized!");
   return factory->addImageImpl(pix_.toImage(), format_).id();
 }
 
@@ -204,7 +204,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QImage& image_, con
 }
 
 QString ImageFactory::addImage(const QByteArray& data_, const QString& format_, const QString& id_) {
-  Q_ASSERT(factory && "ImageFactory is not initialized!");
+  Q_ASSERT_X(factory, "ImageFactory::addImage(QByteArray)", "ImageFactory is not initialized!");
   return factory->addImageImpl(data_, format_, id_).id();
 }
 
@@ -345,7 +345,7 @@ bool ImageFactory::writeCachedImage(const QString& id_, ImageDirectory* imgDir_,
 }
 
 const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
-  Q_ASSERT(factory && "ImageFactory is not initialized!");
+  Q_ASSERT_X(factory, "ImageFactory::imageById", "ImageFactory is not initialized!");
   if(id_.isEmpty() || !factory || factory->d->nullImages.contains(id_)) {
     return Data::Image::null;
   }
@@ -488,7 +488,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
 }
 
 bool ImageFactory::hasLocalImage(const QString& id_) {
-  Q_ASSERT(factory && "ImageFactory is not initialized!");
+  Q_ASSERT_X(factory, "ImageFactory::hasLocalImage", "ImageFactory is not initialized!");
   if(id_.isEmpty() || !factory) {
     return false;
   }
@@ -507,7 +507,7 @@ bool ImageFactory::hasLocalImage(const QString& id_) {
 }
 
 void ImageFactory::requestImageById(const QString& id_) {
-  Q_ASSERT(factory && "ImageFactory is not initialized!");
+  Q_ASSERT_X(factory, "ImageFactory::requestImageById()", "ImageFactory is not initialized!");
   if(hasLocalImage(id_)) {
     QTimer::singleShot(0, factory, [id_] () {
       auto img = factory->addCachedImageImpl(id_, cacheDir());
@@ -741,18 +741,18 @@ QUrl ImageFactory::localDirectory(const QUrl& url_) {
 }
 
 void ImageFactory::setLocalDirectory(const QUrl& url_) {
-  Q_ASSERT(factory && "ImageFactory is not initialized!");
+  Q_ASSERT_X(factory, "ImageFactory::setLocalDirectory", "ImageFactory is not initialized!");
   const auto localDirName = localDirectory(url_);
   if(localDirName.isEmpty()) {
     myDebug() << "Trying to set an empty local directory";
   } else {
-    myLog() << "Setting local directory to" << localDirName.toDisplayString(QUrl::PreferLocalFile);
+    myLog() << "Setting local image dir:" << localDirName.toDisplayString(QUrl::PreferLocalFile);
     factory->d->localImageDir.setDirectory(localDirName);
   }
 }
 
 void ImageFactory::setZipArchive(std::unique_ptr<KZip> zip_) {
-  Q_ASSERT(factory && "ImageFactory is not initialized!");
+  Q_ASSERT_X(factory, "ImageFactory::setZipArchive()", "ImageFactory is not initialized!");
   if(!zip_) {
     return;
   }
