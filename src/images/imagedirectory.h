@@ -59,8 +59,8 @@ public:
   ImageDirectory(const QUrl& dir);
   virtual ~ImageDirectory();
 
-  virtual QUrl dir();
-  virtual void setDirectory(const QUrl& dir);
+  virtual QUrl dir(); // virtual so TemporaryImageDirectory can create, if necessary
+  void setDirectory(const QUrl& dir);
 
   bool hasImage(const QString& id) override;
   Data::Image* imageById(const QString& id) override;
@@ -87,7 +87,6 @@ public:
 
 private:
   Q_DISABLE_COPY(TemporaryImageDirectory)
-  void setDirectory(const QUrl& dir) override;
 
   QTemporaryDir* m_tempDir;
 };

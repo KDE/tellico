@@ -71,7 +71,7 @@ void ImageDirectory::setDirectory(const QUrl& dir_) {
 
 bool ImageDirectory::hasImage(const QString& id_) {
   // dir() is virtual
-  bool localExists = m_pathExists && m_isLocal && QFile::exists(dir().toLocalFile() + id_);
+  const bool localExists = m_pathExists && m_isLocal && QFile::exists(dir().toLocalFile() + id_);
   if(localExists) return true;
 
   // now we're looking for a remote file. First, check if we know already
@@ -124,7 +124,7 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
     if(!m_tempDir) {
       m_tempDir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
     }
-    // in KDE4, the way this worked included the final slash.
+    // It's a directory, so be sure to end with a slash
     ImageDirectory::setDirectory(QUrl::fromLocalFile(m_tempDir->path() + QLatin1Char('/')));
     return writeImage(img_);
   }
@@ -195,13 +195,9 @@ QUrl TemporaryImageDirectory::dir() {
     m_tempDir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
     // in KDE4, the way this worked included the final slash.
     ImageDirectory::setDirectory(QUrl::fromLocalFile(m_tempDir->path() + QLatin1Char('/')));
+    myLog() << "Setting temp image dir:" << dir().url(QUrl::PreferLocalFile);
   }
   return ImageDirectory::dir();
-}
-
-void TemporaryImageDirectory::setDirectory(const QUrl& dir_) {
-  myDebug() << "TemporaryImageDirectory::setDirectory() should not be called:" << dir_;
-  Q_UNUSED(dir_);
 }
 
 ImageZipArchive::ImageZipArchive() : ImageStorage(), m_imgDir(nullptr) {

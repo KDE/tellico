@@ -79,12 +79,14 @@ void ImageFactory::init() {
     return;
   }
   factory = new ImageFactory();
+  const QUrl dataDir = QUrl::fromLocalFile(Tellico::saveLocation(QStringLiteral("data/")));
+  factory->d->dataImageDir.setDirectory(dataDir);
+  myLog() << "Setting local image dir:" << factory->d->dataImageDir.dir().url(QUrl::PreferLocalFile);
+
   myLog() << "Setting max image cache cost:" << Config::imageCacheSize();
   factory->d->imageCache.setMaxCost(Config::imageCacheSize());
   myLog() << "Setting max pixmap cache cost:" << Config::imageCacheSize();
   factory->d->pixmapCache.setMaxCost(Config::imageCacheSize());
-  const QUrl dataDir = QUrl::fromLocalFile(Tellico::saveLocation(QStringLiteral("data/")));
-  factory->d->dataImageDir.setDirectory(dataDir);
 
   factory->d->releaseImagesTimer.setSingleShot(true);
   connect(&factory->d->releaseImagesTimer, &QTimer::timeout, factory, &ImageFactory::releaseImages);
