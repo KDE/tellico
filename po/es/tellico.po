@@ -1,6 +1,6 @@
 # Spanish translations for tellico.po package.
+# Copyright (C) 2003-2025 This file is copyright:
 # This file is distributed under the same license as the tellico package.
-# Copyright (C) 2003 Robby Stephenson <robby@periapsis.org>.
 #
 # SPDX-FileCopyrightText: 2003, 2004, 2005, 2006, 2007 Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>
 # SPDX-FileCopyrightText: 2006, 2007, 2008 Ale Hamann <amadeus@bbs.frc.utn.edu.ar>
@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-29 00:42+0000\n"
-"PO-Revision-Date: 2025-03-13 18:21+0100\n"
+"PO-Revision-Date: 2025-06-04 20:20+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
