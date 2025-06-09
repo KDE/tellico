@@ -56,7 +56,7 @@ or menu bars.
 > <guimenu
 >Archivo</guimenu
 > <guimenuitem
->Abrir...</guimenuitem
+>Abrir…</guimenuitem
 > </menuchoice>
 </term>
 
@@ -98,7 +98,7 @@ or menu bars.
 > <guimenu
 >Archivo</guimenu
 > <guimenuitem
->Guardar...</guimenuitem
+>Guardar…</guimenuitem
 > </menuchoice>
 </term>
 
@@ -109,7 +109,7 @@ or menu bars.
 >. Si el archivo <emphasis
 >no tiene título</emphasis
 >, entonces <guimenuitem
->Guardar...</guimenuitem
+>Guardar…</guimenuitem
 > equivale a <guimenuitem
 >Guardar como</guimenuitem
 >. Solo está habilitado cuando la colección ha sido modificada.</para>
@@ -128,7 +128,7 @@ or menu bars.
 > <guimenu
 >Archivo</guimenu
 > <guimenuitem
->Guardar como...</guimenuitem
+>Guardar como…</guimenuitem
 > </menuchoice>
 </term>
 
@@ -146,7 +146,7 @@ or menu bars.
 ><guimenu
 >Archivo</guimenu
 > <guimenuitem
->Guardar como plantilla...</guimenuitem
+>Guardar como plantilla…</guimenuitem
 > </menuchoice>
 </term>
 
@@ -172,7 +172,7 @@ or menu bars.
 > <guimenu
 >Archivo</guimenu
 > <guimenuitem
->Imprimir...</guimenuitem
+>Imprimir…</guimenuitem
 > </menuchoice>
 </term>
 
@@ -465,7 +465,7 @@ or menu bars.
 > <guimenu
 >Edición</guimenu
 > <guimenuitem
->Buscar en internet...</guimenuitem
+>Buscar en internet…</guimenuitem
 > </menuchoice>
 </term>
 
@@ -493,7 +493,7 @@ or menu bars.
 > <guimenu
 >Edición</guimenu
 > <guimenuitem
->Filtro avanzado...</guimenuitem
+>Filtro avanzado…</guimenuitem
 > </menuchoice>
 </term>
 
@@ -728,7 +728,7 @@ or menu bars.
 > <guimenu
 >Colección</guimenu
 > <guimenuitem
->Campos de la colección...</guimenuitem
+>Campos de la colección…</guimenuitem
 > </menuchoice>
 </term>
 
@@ -748,7 +748,7 @@ or menu bars.
 ><guimenu
 >Colección</guimenu
 > <guimenuitem
->Generar informes...</guimenuitem
+>Generar informes…</guimenuitem
 > </menuchoice>
 </term>
 
@@ -790,7 +790,7 @@ or menu bars.
 > <guisubmenu
 >Bibliografia</guisubmenu
 > <guimenuitem
->Macros de cadena...</guimenuitem
+>Macros de cadena…</guimenuitem
 > </menuchoice>
 </term>
 
@@ -810,7 +810,7 @@ or menu bars.
 > <guisubmenu
 >Bibliografia</guisubmenu
 > <guimenuitem
->Comprobar si hay claves duplicadas...</guimenuitem
+>Comprobar si hay claves duplicadas…</guimenuitem
 > </menuchoice>
 </term>
 

@@ -46,7 +46,7 @@
 
 <para
 >Si desea incluir una imagen en la entrada, puede usar el selector de archivos estándar de &kde; haciendo clic en el botón <guibutton
->Seleccionar imagen...</guibutton
+>Seleccionar imagen…</guibutton
 > en el <link linkend="entry-editor"
 ><interface
 >Editor de entradas</interface
@@ -344,7 +344,7 @@
 >Imagen</emphasis
 ></link
 >, el botón <guibutton
->Seleccionar imagen...</guibutton
+>Seleccionar imagen…</guibutton
 > abre el selector de archivos de imágenes de &kde;. La imagen se guarda en la colección en su formato original, y una versión a escala se muestra en el <interface
 >Editor de entradas</interface
 >. La imagen se puede borrar usando el botón <guibutton
@@ -387,7 +387,7 @@
 ><guimenu
 >Exportar</guimenu
 ><guimenuitem
->Exportar a Zip...</guimenuitem
+>Exportar a Zip…</guimenuitem
 ></menuchoice
 >. </para>
 </warning>
@@ -835,7 +835,7 @@
 
 <para
 >Cada fila contiene una sola regla de filtrado. Seleccione el campo que quiera hacer coincidir con la primera casilla de la fila, y seleccione la regla de coincidencia en el centro. Las reglas pueden hacer coincidir valores que contengan una determinada palabra, o que sean exactamente iguales. También se puede usar una expresión regular para emparejar entradas, en cuyo caso el botón <guibutton
->Editar...</guibutton
+>Editar…</guibutton
 > se vuelve activo para editar la expresión, si &kregexpeditor; está instalado en su equipo. Finalmente, la palabra o cadena que emparejar se debe introducir en el cuadro de texto. Para los campos de imagen, puede usar el tamaño de la imagen para filtrar donde el valor del filtro se compara con la dimensión más grande de la imagen, ya sea su anchura o su altura. </para>
 
 <para
@@ -1049,7 +1049,7 @@
 <para
 >Puede usar valores derivados para combinar valores desde múltiples campos en un solo valor sencillo. Marque la casilla de valor derivado y utilice una plantilla de valor similar a «<userinput
 >Value: %{fielda}%{fieldb}</userinput
->», donde %{...}se reemplaza con el valor de campo apropiado. Esto es útil para recoger múltiples valores dentro de uno solo, p.ej. para un mejor agrupamiento, y para combinar campos de diferentes tipos respetando el orden adecuado al mismo tiempo. Considere, por ejemplo, un campo numérico seguido de un subcampo de texto con entradas 3b, 14a. </para>
+>», donde %{…}se reemplaza con el valor de campo apropiado. Esto es útil para recoger múltiples valores dentro de uno solo, p.ej. para un mejor agrupamiento, y para combinar campos de diferentes tipos respetando el orden adecuado al mismo tiempo. Considere, por ejemplo, un campo numérico seguido de un subcampo de texto con entradas 3b, 14a. </para>
 </tip>
 
 </sect1>
