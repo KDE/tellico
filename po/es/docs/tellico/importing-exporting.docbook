@@ -80,7 +80,7 @@
 >Para facilitar el uso de los escáneres de código de barras, las búsquedas pueden incluir múltiples valores de ISBN/UPC. Seleccionar la casilla de verificación <guilabel
 >Búsqueda ISBN/UPC múltiple</guilabel
 > deshabilitará la caja de búsqueda y habilitará el botón <guibutton
->Editar valores ISBN/UPC...</guibutton
+>Editar valores ISBN/UPC…</guibutton
 >, que abrirá una caja de entrada de texto de varias líneas. tras cerrar la caja, cada ISBN será validado para un formato correcto. La validación ISBN puede convertir los valores EAN de 13 dígitos, además de códigos <acronym
 >UPC</acronym
 > completos al formato apropiado. La lista de ISBN también se puede leer desde un archivo de texto. </para>
@@ -540,7 +540,7 @@
 >Cuando se exporta a <ulink url="http://en.wikipedia.org/wiki/Bibtex"
 >Bibtex</ulink
 >, los valores de los campos pueden escaparse con paréntesis o comillas. Si se están utilizando macros de cadena en esta colección, opcionalmente pueden exportarse como macros o expandirse. Para los campos de &URL;, &appname; puede incluir los valores del campo con la etiqueta <literal
->\url{...}</literal
+>\url{…}</literal
 >. Finalmente, las entradas sin clave de cita pueden ser obviadas, más que hacer que &appname; autogenere la clave. </para>
 
 <screenshot>
