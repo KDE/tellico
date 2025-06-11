@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-26 02:36+0000\n"
+"POT-Creation-Date: 2025-06-11 02:46+0000\n"
 "PO-Revision-Date: 2025-03-12 22:03-0300\n"
 "Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -2815,31 +2815,31 @@ msgstr "Excluir modelo"
 msgid "Select template to delete:"
 msgstr "Selecione o modelo a ser excluído:"
 
-#: src/configdialog.cpp:1250
+#: src/configdialog.cpp:1253
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "As imagens estão atualmente salvas em <em>%1</em>"
 
-#: src/configdialog.cpp:1254
+#: src/configdialog.cpp:1257
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "As imagens estão atualmente salvas para <em>%1</em>"
 
-#: src/configdialog.cpp:1260
+#: src/configdialog.cpp:1263
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "As imagens serão movidas de <em>%1</em> para <em>%2</em>"
 
-#: src/configdialog.cpp:1264
+#: src/configdialog.cpp:1267
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "As imagens serão movidas de <em>%1</em> para <em>%2</em>"
 
-#: src/configdialog.cpp:1274
+#: src/configdialog.cpp:1271
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"

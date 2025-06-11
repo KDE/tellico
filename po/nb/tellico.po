@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-26 02:36+0000\n"
+"POT-Creation-Date: 2025-06-11 02:46+0000\n"
 "PO-Revision-Date: 2020-11-13 17:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -2792,31 +2792,31 @@ msgstr "Slett mal"
 msgid "Select template to delete:"
 msgstr "Velg mal som skal slettes:"
 
-#: src/configdialog.cpp:1250
+#: src/configdialog.cpp:1253
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1254
+#: src/configdialog.cpp:1257
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1260
+#: src/configdialog.cpp:1263
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1264
+#: src/configdialog.cpp:1267
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1274
+#: src/configdialog.cpp:1271
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
