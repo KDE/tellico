@@ -46,7 +46,7 @@
 
 <para
 >Si desea incluir una imagen en la entrada, puede usar el selector de archivos estándar de &kde; haciendo clic en el botón <guibutton
->Seleccionar imagen...</guibutton
+>Seleccionar imagen…</guibutton
 > en el <link linkend="entry-editor"
 ><interface
 >Editor de entradas</interface
@@ -340,7 +340,7 @@
 >Imagen</emphasis
 ></link
 >, el botón <guibutton
->Seleccionar imagen...</guibutton
+>Seleccionar imagen…</guibutton
 > abre el selector de archivos de imágenes de &kde;. La imagen se guarda en la colección en su formato original, y una versión a escala se muestra en el <interface
 >Editor de entradas</interface
 >. La imagen se puede borrar usando el botón <guibutton
@@ -383,7 +383,7 @@
 ><guimenu
 >Exportar</guimenu
 ><guimenuitem
->Exportar a Zip...</guimenuitem
+>Exportar a Zip…</guimenuitem
 ></menuchoice
 >. </para>
 </warning>
@@ -1064,7 +1064,7 @@
 <para
 >Puede usar valores derivados para combinar valores desde múltiples campos en un solo valor sencillo. Marque la casilla de valor derivado y utilice una plantilla de valor similar a «<userinput
 >Value: %{fielda}%{fieldb}</userinput
->», donde %{...}se reemplaza con el valor de campo apropiado. Esto es útil para recoger múltiples valores dentro de uno solo, p.ej. para un mejor agrupamiento, y para combinar campos de diferentes tipos respetando el orden adecuado al mismo tiempo. Considere, por ejemplo, un campo numérico seguido de un subcampo de texto con entradas 3b, 14a. </para>
+>», donde %{…}se reemplaza con el valor de campo apropiado. Esto es útil para recoger múltiples valores dentro de uno solo, p.ej. para un mejor agrupamiento, y para combinar campos de diferentes tipos respetando el orden adecuado al mismo tiempo. Considere, por ejemplo, un campo numérico seguido de un subcampo de texto con entradas 3b, 14a. </para>
 </tip>
 
 </sect1>
