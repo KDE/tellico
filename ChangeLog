@@ -1,3 +1,7 @@
+2025-06-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with reporting correct image location.
+
 2025-05-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated OpenLibrary source to fetch work author (Bug 504586).
