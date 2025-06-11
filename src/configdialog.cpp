@@ -1233,12 +1233,15 @@ void ConfigDialog::slotCreateConfigWidgets() {
 
 void ConfigDialog::slotUpdateImageLocationLabel() {
   int newImageLocation;
+  QString newImageDir;
   if(m_rbImageInFile->isChecked()) {
     newImageLocation = Config::ImagesInFile;
   } else if(m_rbImageInAppDir->isChecked()) {
     newImageLocation = Config::ImagesInAppDir;
+    newImageDir = ImageFactory::dataDir().toString(QUrl::PreferLocalFile);
   } else {
     newImageLocation = Config::ImagesInLocalDir;
+    newImageDir = ImageFactory::localDir().toString(QUrl::PreferLocalFile);
   }
 
   const QString fileName = Kernel::self()->URL().fileName();
@@ -1262,14 +1265,8 @@ void ConfigDialog::slotUpdateImageLocationLabel() {
     } else if(Config::imageLocation() == Config::ImagesInFile) {
       locationText = i18nc("%1 refers to a file name, %2 to a directory",
                            "Images will be moved from <em>%1</em> to <em>%2</em>",
-                           fileName, imageDir);
+                           fileName, newImageDir);
     } else {
-      QString newImageDir;
-      if(newImageLocation == Config::ImagesInAppDir) {
-        newImageDir = ImageFactory::dataDir().toString(QUrl::PreferLocalFile);
-      } else {
-        newImageDir = ImageFactory::localDir().toString(QUrl::PreferLocalFile);
-      }
       locationText = i18nc("%1 and %2 are both directories",
                            "Images will be moved from <em>%1</em> to <em>%2</em>",
                            imageDir, newImageDir);
