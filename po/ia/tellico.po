@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-29 00:42+0000\n"
+"POT-Creation-Date: 2025-06-12 00:42+0000\n"
 "PO-Revision-Date: 2025-03-20 19:32+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -2798,31 +2798,31 @@ msgstr "Dele patrono"
 msgid "Select template to delete:"
 msgstr "Selige patrono de deler:"
 
-#: src/configdialog.cpp:1232
+#: src/configdialog.cpp:1235
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "Imagines es currentemente salveguardate intra <em>%1</em>"
 
-#: src/configdialog.cpp:1236
+#: src/configdialog.cpp:1239
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "Imagines es currentemente salveguardate a <em>%1</em>"
 
-#: src/configdialog.cpp:1242
+#: src/configdialog.cpp:1245
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Imagines essera movite ex <em>%1</em> e <em>%2</em>"
 
-#: src/configdialog.cpp:1246
+#: src/configdialog.cpp:1249
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Imagines essera movite ex <em>%1</em> e <em>%2</em>"
 
-#: src/configdialog.cpp:1256
+#: src/configdialog.cpp:1253
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
