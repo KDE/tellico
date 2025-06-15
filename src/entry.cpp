@@ -206,9 +206,8 @@ bool Entry::setField(const QString& name_, const QString& value_, bool updateMDa
   }
 
   if(!m_coll->hasField(name_)) {
-    myDebug() << "unknown collection entry field -" << name_
-              << "in collection" << m_coll->title();
-    myDebug() <<  "not adding" << value_;
+    myDebug() << "unknown collection field -" << name_
+              << "in collection" << m_coll->title() << "- not adding" << value_;
     return false;
   }
 
