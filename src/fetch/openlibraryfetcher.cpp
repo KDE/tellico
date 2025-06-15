@@ -337,9 +337,12 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
       myLog() << "Skipping non-comic result:" << entry->title();
       continue;
     }
-    if(binding.toLower() == QLatin1String("hardcover")) {
+    const auto bindingLower = binding.toLower();
+    if(bindingLower == QLatin1String("hardcover")) {
       binding = QStringLiteral("Hardback");
-    } else if(binding.contains(QStringLiteral("paperback"), Qt::CaseInsensitive)) {
+    } else if(bindingLower == QLatin1String("ebook")) {
+      binding = QStringLiteral("E-Book");
+    } else if(bindingLower.contains(QStringLiteral("paperback"))) {
       binding = QStringLiteral("Paperback");
     }
     if(!binding.isEmpty()) {
