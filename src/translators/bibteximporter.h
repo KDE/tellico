@@ -33,9 +33,16 @@
 extern "C" {
 #ifdef HAVE_LIBBTPARSE
 /* btparse has a struct member 'class' */
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wkeyword-macro"
+#endif
 #define class errclass
 #include <btparse.h>
 #undef class
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 #else
 #include "btparse/btparse.h"
 #endif
