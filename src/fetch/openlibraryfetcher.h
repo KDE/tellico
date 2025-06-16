@@ -100,6 +100,7 @@ private:
   QList< QPointer<KIO::StoredTransferJob> > m_jobs;
 
   bool m_started;
+  QHash<QString, QString> m_langHash;
   QHash<QString, QString> m_authorHash;
 };
 
