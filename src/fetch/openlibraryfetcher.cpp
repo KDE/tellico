@@ -354,6 +354,10 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     if(yearMatch.hasMatch()) {
       entry->setField(QStringLiteral("pub_year"), yearMatch.captured());
     }
+    yearMatch = yearRx.match(objValue(resObj, "copyright_date"));
+    if(yearMatch.hasMatch()) {
+      entry->setField(QStringLiteral("cr_year"), yearMatch.captured());
+    }
     QString isbn = objValue(resObj, "isbn_10");
     if(isbn.isEmpty()) {
       isbn = objValue(resObj, "isbn_13");
