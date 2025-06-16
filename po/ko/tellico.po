@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 02:46+0000\n"
+"POT-Creation-Date: 2025-06-16 02:34+0000\n"
 "PO-Revision-Date: 2025-04-07 23:49+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -3505,7 +3505,7 @@ msgstr "arXiv의 오픈 액세스 접근 허용에 대해서 감사드립니다.
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:451 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:399
-#: src/fetch/openlibraryfetcher.cpp:504 src/fetch/springerfetcher.cpp:187
+#: src/fetch/openlibraryfetcher.cpp:518 src/fetch/springerfetcher.cpp:187
 #: src/fetch/tvmazefetcher.cpp:386 src/fetch/upcitemdbfetcher.cpp:479
 #: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:440
 #, kde-format
@@ -4122,7 +4122,7 @@ msgstr "OPDS 서버 링크를 입력하십시오."
 msgid "&Verify Catalog"
 msgstr "카탈로그 검증(&V)"
 
-#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:497
+#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:511
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "OpenLibrary 링크"

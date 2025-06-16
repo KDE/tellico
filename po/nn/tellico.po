@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 02:46+0000\n"
+"POT-Creation-Date: 2025-06-16 02:34+0000\n"
 "PO-Revision-Date: 2024-09-22 16:35+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -3541,7 +3541,7 @@ msgstr "Takk til arXiv for støtte for open tilgang."
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:451 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:399
-#: src/fetch/openlibraryfetcher.cpp:504 src/fetch/springerfetcher.cpp:187
+#: src/fetch/openlibraryfetcher.cpp:518 src/fetch/springerfetcher.cpp:187
 #: src/fetch/tvmazefetcher.cpp:386 src/fetch/upcitemdbfetcher.cpp:479
 #: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:440
 #, kde-format
@@ -4161,7 +4161,7 @@ msgstr "Skriv inn adresse til OPDS-tenaren."
 msgid "&Verify Catalog"
 msgstr "&Stadfest katalog"
 
-#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:497
+#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:511
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "OpenLibrary-lenkje"

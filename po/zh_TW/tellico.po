@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 02:46+0000\n"
+"POT-Creation-Date: 2025-06-16 02:34+0000\n"
 "PO-Revision-Date: 2024-07-27 13:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -3499,7 +3499,7 @@ msgstr ""
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:451 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:399
-#: src/fetch/openlibraryfetcher.cpp:504 src/fetch/springerfetcher.cpp:187
+#: src/fetch/openlibraryfetcher.cpp:518 src/fetch/springerfetcher.cpp:187
 #: src/fetch/tvmazefetcher.cpp:386 src/fetch/upcitemdbfetcher.cpp:479
 #: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:440
 #, kde-format
@@ -4121,7 +4121,7 @@ msgstr "輸入此伺服器的主機名稱。"
 msgid "&Verify Catalog"
 msgstr "檔案類別"
 
-#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:497
+#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:511
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "OpenLibrary 連結"
