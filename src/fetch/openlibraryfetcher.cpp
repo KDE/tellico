@@ -399,7 +399,9 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     QStringList authors;
     foreach(const QVariant& authorMap, resultMap.value(QLatin1String("authors")).toList()) {
       const QString key = mapValue(authorMap.toMap(), "key");
-      if(!key.isEmpty()) {
+      if(m_authorHash.contains(key)) {
+        authors += m_authorHash.value(key);
+      } else if(!key.isEmpty()) {
         QUrl authorUrl(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
         QUrlQuery q;
         q.addQueryItem(QStringLiteral("type"), QStringLiteral("/type/author"));
@@ -414,6 +416,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
         const QString name = mapValue(authorResult, "name");
         if(!name.isEmpty()) {
           authors << name;
+          m_authorHash.insert(key, name);
         }
       }
     }
@@ -424,7 +427,9 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     QStringList langs;
     foreach(const QVariant& langMap, resultMap.value(QLatin1String("languages")).toList()) {
       const QString key = mapValue(langMap.toMap(), "key");
-      if(!key.isEmpty()) {
+      if(m_langHash.contains(key)) {
+        langs += m_langHash.value(key);
+      } else if(!key.isEmpty()) {
         QUrl langUrl(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
         QUrlQuery q;
         q.addQueryItem(QStringLiteral("type"), QStringLiteral("/type/language"));
@@ -439,6 +444,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
         const QString name = mapValue(langResult, "name");
         if(!name.isEmpty()) {
           langs << i18n(name.toUtf8().constData());
+          m_langHash.insert(key, langs.last());
         }
       }
     }
@@ -461,6 +467,7 @@ QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
   QUrl u(QString::fromLatin1(OPENLIBRARY_AUTHOR_QUERY_URL));
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("q"), term_);
+  q.addQueryItem(QStringLiteral("fields"), QStringLiteral("key,name"));
   u.setQuery(q);
 
 //  myLog() << "Searching for authors:" << u.toDisplayString();
@@ -475,16 +482,16 @@ QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
   f.close();
 #endif
   const QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
-  const auto obj = doc.object();
-  myLog() << "Found" << obj.value(QLatin1String("numFound")).toInt() << "authors";
-  // right now, only use the first
-  const auto array = obj.value(QLatin1String("docs")).toArray();
+  const auto array = doc.object().value(QLatin1String("docs")).toArray();
   if(array.isEmpty()) {
     return QString();
   }
+  // right now, only use the first to search on
   const auto obj1 = array.at(0).toObject();
-  myLog() << "Using" << obj1.value(QLatin1String("name")).toString();
-  return obj1.value(QLatin1String("key")).toString();
+  const auto key = obj1.value(QLatin1String("key")).toString();
+  const auto name = obj1.value(QLatin1String("name")).toString();
+  m_authorHash.insert(key, name);
+  return key;
 }
 
 Tellico::Fetch::ConfigWidget* OpenLibraryFetcher::configWidget(QWidget* parent_) const {
