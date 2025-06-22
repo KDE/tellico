@@ -533,6 +533,25 @@ void ImageFactory::requestImageById(const QString& id_) {
       }
     }
   }
+  // real fallback, just as ::imageById() checks, look in fall back directories, just in case
+  // possible scenario is that the user changed the image location for one data file, but the other file still
+  // has images in app or local directory
+  int realImageDir = -1;
+  if(factory->d->dataImageDir.hasImage(id_)) {
+    realImageDir = DataDir;
+  } else if(factory->d->localImageDir.hasImage(id_)) {
+    realImageDir = LocalDir;
+  }
+
+  if(realImageDir > -1) {
+    QTimer::singleShot(0, factory, [id_, realImageDir] () {
+      auto img = factory->addCachedImageImpl(id_, Tellico::ImageFactory::CacheDir(realImageDir));
+      if(!img.isNull()) {
+        Q_EMIT factory->imageAvailable(id_);
+      }
+    });
+    return;
+  }
 }
 
 void ImageFactory::requestImageByUrlImpl(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {

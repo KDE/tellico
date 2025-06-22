@@ -841,3 +841,33 @@ void TellicoReadTest::testRemote() {
   Tellico::ImageFactory::removeImage(image, true);
   QVERIFY(!QFile::exists(imageFileName));
 }
+
+void TellicoReadTest::testImageLocation() {
+  // test reading an image when the config option is ImagesInFile
+  // but there are images in different location
+
+  Tellico::Config::setImageLocation(Tellico::Config::ImagesInFile);
+  const QString fileName = QFINDTESTDATA("data/with-local-image.tc");
+  const QString image = QLatin1String("17b54b2a742c6d342a75f122d615a793.jpeg");
+
+  Tellico::Data::Document::self()->openDocument(QUrl::fromLocalFile(fileName));
+  Tellico::Data::CollPtr coll = Tellico::Data::Document::self()->collection();
+  QVERIFY(coll);
+  QVERIFY(!coll->entries().isEmpty());
+  auto entry = coll->entries().front();
+  QVERIFY(entry);
+  auto cover = entry->field(QLatin1String("cover"));
+  QVERIFY(!cover.isEmpty());
+  QCOMPARE(cover, image);
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(image));
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInfo(image));
+
+  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable);
+  Tellico::ImageFactory::self()->requestImageById(image);
+  QVERIFY(spy.wait(2000));
+
+  // now it should be in memory
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(image));
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(image);
+  QVERIFY(!img.isNull());
+}
