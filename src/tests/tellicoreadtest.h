@@ -65,6 +65,7 @@ private Q_SLOTS:
   void testEmoji();
   void testXmlWithJunk();
   void testRemote();
+  void testImageLocation();
 
 private:
   QList<Tellico::Data::CollPtr> m_collections;
