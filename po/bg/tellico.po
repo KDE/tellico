@@ -7271,11 +7271,3 @@ msgstr "Търсене"
 #, kde-format
 msgid "Clear"
 msgstr "Изчистване"
-
-#, fuzzy
-#~ msgid "Total number of fields:"
-#~ msgstr "Изтриване на поле"
-
-#, fuzzy
-#~ msgid "Total number of entries:"
-#~ msgstr "Изтриване на поле"
