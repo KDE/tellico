@@ -17,6 +17,7 @@ Dependencies:
     'frameworks/knewstuff': '@latest-kf6'
     'frameworks/kcolorscheme': '@latest-kf6'
     'frameworks/kcrash': '@latest-kf6'
+    'frameworks/solid': '@latest-kf6'
     'network/kio-extras': '@latest-kf6'
     'multimedia/libkcddb': '@latest-kf6'
     'graphics/libksane': '@latest-kf6'
