@@ -532,6 +532,7 @@ void ImageFactory::requestImageById(const QString& id_) {
         myDebug() << "Loading an image url that is not link only. The image id will get updated.";
       }
     }
+    return;
   }
   // real fallback, just as ::imageById() checks, look in fall back directories, just in case
   // possible scenario is that the user changed the image location for one data file, but the other file still
