@@ -500,7 +500,7 @@ ecm_add_test(pdftest.cpp
     ../translators/filereader.cpp
     ../entryupdatejob.cpp
     TEST_NAME pdftest
-    LINK_LIBRARIES fetcherstest translatorstest ${TELLICO_TEST_LIBS} #order of libs here is important
+    LINK_LIBRARIES fetcherstest translatorstest ${TELLICO_TEST_LIBS} KF${KF_MAJOR_VERSION}::Solid #order of libs here is important
 )
 if(Exempi_FOUND)
     target_link_libraries(pdftest ${Exempi_LIBRARIES})
