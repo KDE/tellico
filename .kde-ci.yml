@@ -16,6 +16,7 @@ Dependencies:
     'frameworks/kitemmodels': '@latest-kf6'
     'frameworks/knewstuff': '@latest-kf6'
     'frameworks/kcrash': '@latest-kf6'
+    'frameworks/solid': '@latest-kf6'
     'multimedia/libkcddb': '@latest-kf6'
     'graphics/libksane': '@latest-kf6'
 
@@ -33,6 +34,7 @@ Dependencies:
     'frameworks/kdoctools': '@stable'
     'frameworks/knewstuff': '@stable'
     'frameworks/kcrash': '@stable'
+    'frameworks/solid': '@stable'
     'frameworks/extra-cmake-modules': '@stable'
     'multimedia/libkcddb': '@stable'
 
