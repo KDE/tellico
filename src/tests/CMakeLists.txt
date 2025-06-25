@@ -149,6 +149,7 @@ set(TELLICO_TEST_LIBS
     Qt6::Test
     KF6::KIOCore
     KF6::Archive
+    KF6::Solid
 )
 
 ecm_add_test(collectiontest.cpp
