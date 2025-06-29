@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-12 00:42+0000\n"
+"POT-Creation-Date: 2025-06-29 00:43+0000\n"
 "PO-Revision-Date: 2025-03-22 13:34+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -3627,7 +3627,7 @@ msgstr "Grazie a arXiv per l'uso dell'interoperabilità del suo accesso aperto."
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:453
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:439
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:394
-#: src/fetch/openlibraryfetcher.cpp:513 src/fetch/springerfetcher.cpp:187
+#: src/fetch/openlibraryfetcher.cpp:527 src/fetch/springerfetcher.cpp:187
 #: src/fetch/tvmazefetcher.cpp:373 src/fetch/upcitemdbfetcher.cpp:479
 #: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:433
 #, kde-format
@@ -4268,7 +4268,7 @@ msgstr "Inserisci il collegamento al server OPDS."
 msgid "&Verify Catalog"
 msgstr "&Verifica il catalogo"
 
-#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:506
+#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:520
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "Collegamento a OpenLibrary"

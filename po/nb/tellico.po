@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-12 00:42+0000\n"
+"POT-Creation-Date: 2025-06-29 00:43+0000\n"
 "PO-Revision-Date: 2020-11-13 17:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -3605,7 +3605,7 @@ msgstr ""
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:453
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:439
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:394
-#: src/fetch/openlibraryfetcher.cpp:513 src/fetch/springerfetcher.cpp:187
+#: src/fetch/openlibraryfetcher.cpp:527 src/fetch/springerfetcher.cpp:187
 #: src/fetch/tvmazefetcher.cpp:373 src/fetch/upcitemdbfetcher.cpp:479
 #: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:433
 #, kde-format
@@ -4239,7 +4239,7 @@ msgstr ""
 msgid "&Verify Catalog"
 msgstr ""
 
-#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:506
+#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:520
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "Åpne bibliotekslenke"

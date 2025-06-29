@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-12 00:42+0000\n"
+"POT-Creation-Date: 2025-06-29 00:43+0000\n"
 "PO-Revision-Date: 2025-03-13 05:25+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -3605,7 +3605,7 @@ msgstr "მადლობა arXiv-ს მისი ღია წვდომ�
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:453
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:439
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:394
-#: src/fetch/openlibraryfetcher.cpp:513 src/fetch/springerfetcher.cpp:187
+#: src/fetch/openlibraryfetcher.cpp:527 src/fetch/springerfetcher.cpp:187
 #: src/fetch/tvmazefetcher.cpp:373 src/fetch/upcitemdbfetcher.cpp:479
 #: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:433
 #, kde-format
@@ -4239,7 +4239,7 @@ msgstr "შეიყვანეთ ODPS სერვერის ბმულ�
 msgid "&Verify Catalog"
 msgstr "&კატალოგის გადამოწმება"
 
-#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:506
+#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:520
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "OpenLibrary ბმული"
