@@ -40,38 +40,6 @@
 //#define Decoder_EAN13_DEBUG
 
 namespace barcodeRecognition {
-  static int code_odd[][4] = { { 30, 20, 10, 10 },
-                            { 20, 20, 20, 10 },
-                            { 20, 10, 20, 20 },
-                            { 10, 40, 10, 10 },
-                            { 10, 10, 30, 20 },
-                            { 10, 20, 30, 10 },
-                            { 10, 10, 10, 40 },
-                            { 10, 30, 10, 20 },
-                            { 10, 20, 10, 30 },
-                            { 30, 10, 10, 20 } };
-
-  static int code_even[][4] = { { 10, 10, 20, 30 },
-                             { 10, 20, 20, 20 },
-                             { 20, 20, 10, 20 },
-                             { 10, 10, 40, 10 },
-                             { 20, 30, 10, 10 },
-                             { 10, 30, 20, 10 },
-                             { 40, 10, 10, 10 },
-                             { 20, 10, 30, 10 },
-                             { 30, 10, 20, 10 },
-                             { 20, 10, 10, 30 } };
-
-  static bool parity_pattern_list[][6] = { { false, false, false, false, false, false },
-                                           { false, false, true, false, true, true },
-                                           { false, false, true, true, false, true },
-                                           { false, false, true, true, true, false },
-                                           { false, true, false, false, true, true },
-                                           { false, true, true, false, false, true },
-                                           { false, true, true, true, false, false },
-                                           { false, true, false, true, false, true },
-                                           { false, true, false, true, true, false },
-                                           { false, true, true, false, true, false } };
 
   class Barcode_EAN13 {
   public:

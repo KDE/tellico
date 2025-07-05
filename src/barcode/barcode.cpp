@@ -27,10 +27,10 @@
 // includes code from https://www.linuxtv.org/downloads/v4l-dvb-apis-old/capture-example.html
 
 #include "barcode.h"
+#include "../tellico_debug.h"
 
 #include <QImage>
 #include <QMutex>
-#include <QDebug>
 
 #include <stdlib.h>
 
@@ -38,6 +38,41 @@ using barcodeRecognition::barcodeRecognitionThread;
 using barcodeRecognition::Barcode_EAN13;
 using barcodeRecognition::Decoder_EAN13;
 using barcodeRecognition::MatchMakerResult;
+
+namespace {
+  static int code_odd[][4] = { { 30, 20, 10, 10 },
+                               { 20, 20, 20, 10 },
+                               { 20, 10, 20, 20 },
+                               { 10, 40, 10, 10 },
+                               { 10, 10, 30, 20 },
+                               { 10, 20, 30, 10 },
+                               { 10, 10, 10, 40 },
+                               { 10, 30, 10, 20 },
+                               { 10, 20, 10, 30 },
+                               { 30, 10, 10, 20 } };
+
+  static int code_even[][4] = { { 10, 10, 20, 30 },
+                                { 10, 20, 20, 20 },
+                                { 20, 20, 10, 20 },
+                                { 10, 10, 40, 10 },
+                                { 20, 30, 10, 10 },
+                                { 10, 30, 20, 10 },
+                                { 40, 10, 10, 10 },
+                                { 20, 10, 30, 10 },
+                                { 30, 10, 20, 10 },
+                                { 20, 10, 10, 30 } };
+
+  static bool parity_pattern_list[][6] = { { false, false, false, false, false, false },
+                                           { false, false, true,  false, true,  true  },
+                                           { false, false, true,  true,  false, true  },
+                                           { false, false, true,  true,  true,  false },
+                                           { false, true,  false, false, true,  true  },
+                                           { false, true,  true,  false, false, true  },
+                                           { false, true,  true,  true,  false, false },
+                                           { false, true,  false, true,  false, true  },
+                                           { false, true,  false, true,  true,  false },
+                                           { false, true,  true,  false, true,  false } };
+}
 
 barcodeRecognitionThread::barcodeRecognitionThread()
 {
@@ -80,11 +115,6 @@ void barcodeRecognitionThread::run()
       m_barcode_img = QImage();
     }
     m_barcode_img_mutex.unlock();
-
-// //DEBUG
-//     img.load( "/home/sebastian/black.png" );
-//     m_stop = true;
-// //DEBUG
 
     if (!img.isNull()) {
       QImage preview = img.scaled( 320, 240, Qt::KeepAspectRatio );
@@ -192,7 +222,7 @@ void barcodeRecognitionThread::printArray( int array[10][13][2], int level )
       else
       temp += QString::number( array[i][j][level] ) + QLatin1String("  ");
     }
-  qDebug() << temp;
+    myDebug() << "printArray:" << temp;
   }
 }
 
