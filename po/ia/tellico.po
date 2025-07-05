@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:21+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2024-01-03 12:36+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -2197,6 +2197,176 @@ msgstr "Renomina collection"
 #, kde-format
 msgid "Reorder Fields"
 msgstr "Re-ordina campos"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr "un,e,como,a,ma,sed,per,pro,ex,ab,in,o,super,sur,le,a,con"
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "le"
+
+#: src/config/tellico_config.kcfg:92
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "jr.,jr,iii,iv"
+
+#: src/config/tellico_config.kcfg:95
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der,von"
+
+#. i18n: ectx: label, entry (fontBook), group (Options - book)
+#. i18n: ectx: label, entry (fontVideo), group (Options - video)
+#. i18n: ectx: label, entry (fontAlbum), group (Options - album)
+#. i18n: ectx: label, entry (fontBibtex), group (Options - bibtex)
+#. i18n: ectx: label, entry (fontComicBook), group (Options - comic)
+#. i18n: ectx: label, entry (fontWine), group (Options - wine)
+#. i18n: ectx: label, entry (fontCoin), group (Options - coin)
+#. i18n: ectx: label, entry (fontStamp), group (Options - stamp)
+#. i18n: ectx: label, entry (fontCard), group (Options - card)
+#. i18n: ectx: label, entry (fontGame), group (Options - game)
+#. i18n: ectx: label, entry (fontFile), group (Options - file)
+#. i18n: ectx: label, entry (fontBoardGame), group (Options - boardgame)
+#. i18n: ectx: label, entry (fontBase), group (Options - entry)
+#: src/config/tellico_config.kcfg:140 src/config/tellico_config.kcfg:170
+#: src/config/tellico_config.kcfg:200 src/config/tellico_config.kcfg:233
+#: src/config/tellico_config.kcfg:263 src/config/tellico_config.kcfg:293
+#: src/config/tellico_config.kcfg:323 src/config/tellico_config.kcfg:353
+#: src/config/tellico_config.kcfg:383 src/config/tellico_config.kcfg:413
+#: src/config/tellico_config.kcfg:443 src/config/tellico_config.kcfg:473
+#: src/config/tellico_config.kcfg:503
+#, kde-format
+msgid "Template font"
+msgstr "Font de patrono"
+
+#. i18n: ectx: label, entry (baseColorBook), group (Options - book)
+#. i18n: ectx: label, entry (baseColorVideo), group (Options - video)
+#. i18n: ectx: label, entry (baseColorAlbum), group (Options - album)
+#. i18n: ectx: label, entry (baseColorBibtex), group (Options - bibtex)
+#. i18n: ectx: label, entry (baseColorComicBook), group (Options - comic)
+#. i18n: ectx: label, entry (baseColorWine), group (Options - wine)
+#. i18n: ectx: label, entry (baseColorCoin), group (Options - coin)
+#. i18n: ectx: label, entry (baseColorStamp), group (Options - stamp)
+#. i18n: ectx: label, entry (baseColorCard), group (Options - card)
+#. i18n: ectx: label, entry (baseColorGame), group (Options - game)
+#. i18n: ectx: label, entry (baseColorFile), group (Options - file)
+#. i18n: ectx: label, entry (baseColorBoardGame), group (Options - boardgame)
+#. i18n: ectx: label, entry (baseColorBase), group (Options - entry)
+#: src/config/tellico_config.kcfg:144 src/config/tellico_config.kcfg:174
+#: src/config/tellico_config.kcfg:204 src/config/tellico_config.kcfg:237
+#: src/config/tellico_config.kcfg:267 src/config/tellico_config.kcfg:297
+#: src/config/tellico_config.kcfg:327 src/config/tellico_config.kcfg:357
+#: src/config/tellico_config.kcfg:387 src/config/tellico_config.kcfg:417
+#: src/config/tellico_config.kcfg:447 src/config/tellico_config.kcfg:477
+#: src/config/tellico_config.kcfg:507
+#, kde-format
+msgid "Template background color"
+msgstr "Color de fundo de patrono"
+
+#. i18n: ectx: label, entry (textColorBook), group (Options - book)
+#. i18n: ectx: label, entry (textColorVideo), group (Options - video)
+#. i18n: ectx: label, entry (textColorAlbum), group (Options - album)
+#. i18n: ectx: label, entry (textColorBibtex), group (Options - bibtex)
+#. i18n: ectx: label, entry (textColorComicBook), group (Options - comic)
+#. i18n: ectx: label, entry (textColorWine), group (Options - wine)
+#. i18n: ectx: label, entry (textColorCoin), group (Options - coin)
+#. i18n: ectx: label, entry (textColorStamp), group (Options - stamp)
+#. i18n: ectx: label, entry (textColorCard), group (Options - card)
+#. i18n: ectx: label, entry (textColorGame), group (Options - game)
+#. i18n: ectx: label, entry (textColorFile), group (Options - file)
+#. i18n: ectx: label, entry (textColorBoardGame), group (Options - boardgame)
+#. i18n: ectx: label, entry (textColorBase), group (Options - entry)
+#: src/config/tellico_config.kcfg:148 src/config/tellico_config.kcfg:178
+#: src/config/tellico_config.kcfg:208 src/config/tellico_config.kcfg:241
+#: src/config/tellico_config.kcfg:271 src/config/tellico_config.kcfg:301
+#: src/config/tellico_config.kcfg:331 src/config/tellico_config.kcfg:361
+#: src/config/tellico_config.kcfg:391 src/config/tellico_config.kcfg:421
+#: src/config/tellico_config.kcfg:451 src/config/tellico_config.kcfg:481
+#: src/config/tellico_config.kcfg:511
+#, kde-format
+msgid "Template text color"
+msgstr "Color de texto de patrono"
+
+#. i18n: ectx: label, entry (highlightedBaseColorBook), group (Options - book)
+#. i18n: ectx: label, entry (highlightedBaseColorVideo), group (Options - video)
+#. i18n: ectx: label, entry (highlightedBaseColorAlbum), group (Options - album)
+#. i18n: ectx: label, entry (highlightedBaseColorBibtex), group (Options - bibtex)
+#. i18n: ectx: label, entry (highlightedBaseColorComicBook), group (Options - comic)
+#. i18n: ectx: label, entry (highlightedBaseColorWine), group (Options - wine)
+#. i18n: ectx: label, entry (highlightedBaseColorCoin), group (Options - coin)
+#. i18n: ectx: label, entry (highlightedBaseColorStamp), group (Options - stamp)
+#. i18n: ectx: label, entry (highlightedBaseColorCard), group (Options - card)
+#. i18n: ectx: label, entry (highlightedBaseColorGame), group (Options - game)
+#. i18n: ectx: label, entry (highlightedBaseColorFile), group (Options - file)
+#. i18n: ectx: label, entry (highlightedBaseColorBoardGame), group (Options - boardgame)
+#. i18n: ectx: label, entry (highlightedBaseColorBase), group (Options - entry)
+#: src/config/tellico_config.kcfg:152 src/config/tellico_config.kcfg:182
+#: src/config/tellico_config.kcfg:212 src/config/tellico_config.kcfg:245
+#: src/config/tellico_config.kcfg:275 src/config/tellico_config.kcfg:305
+#: src/config/tellico_config.kcfg:335 src/config/tellico_config.kcfg:365
+#: src/config/tellico_config.kcfg:395 src/config/tellico_config.kcfg:425
+#: src/config/tellico_config.kcfg:455 src/config/tellico_config.kcfg:485
+#: src/config/tellico_config.kcfg:515
+#, kde-format
+msgid "Template highlight color"
+msgstr "Color evidentiate de patrono"
+
+#. i18n: ectx: label, entry (highlightedTextColorBook), group (Options - book)
+#. i18n: ectx: label, entry (highlightedTextColorVideo), group (Options - video)
+#. i18n: ectx: label, entry (highlightedTextColorAlbum), group (Options - album)
+#. i18n: ectx: label, entry (highlightedTextColorBibtex), group (Options - bibtex)
+#. i18n: ectx: label, entry (highlightedTextColorComicBook), group (Options - comic)
+#. i18n: ectx: label, entry (highlightedTextColorWine), group (Options - wine)
+#. i18n: ectx: label, entry (highlightedTextColorCoin), group (Options - coin)
+#. i18n: ectx: label, entry (highlightedTextColorStamp), group (Options - stamp)
+#. i18n: ectx: label, entry (highlightedTextColorCard), group (Options - card)
+#. i18n: ectx: label, entry (highlightedTextColorGame), group (Options - game)
+#. i18n: ectx: label, entry (highlightedTextColorFile), group (Options - file)
+#. i18n: ectx: label, entry (highlightedTextColorBoardGame), group (Options - boardgame)
+#. i18n: ectx: label, entry (highlightedTextColorBase), group (Options - entry)
+#: src/config/tellico_config.kcfg:156 src/config/tellico_config.kcfg:186
+#: src/config/tellico_config.kcfg:216 src/config/tellico_config.kcfg:249
+#: src/config/tellico_config.kcfg:279 src/config/tellico_config.kcfg:309
+#: src/config/tellico_config.kcfg:339 src/config/tellico_config.kcfg:369
+#: src/config/tellico_config.kcfg:399 src/config/tellico_config.kcfg:429
+#: src/config/tellico_config.kcfg:459 src/config/tellico_config.kcfg:489
+#: src/config/tellico_config.kcfg:519
+#, kde-format
+msgid "Template highlighted text color"
+msgstr "Color de texto evidentiate de patrono"
+
+#. i18n: ectx: label, entry (linkColorBook), group (Options - book)
+#. i18n: ectx: label, entry (linkColorVideo), group (Options - video)
+#. i18n: ectx: label, entry (linkColorAlbum), group (Options - album)
+#. i18n: ectx: label, entry (linkColorBibtex), group (Options - bibtex)
+#. i18n: ectx: label, entry (linkColorComicBook), group (Options - comic)
+#. i18n: ectx: label, entry (linkColorWine), group (Options - wine)
+#. i18n: ectx: label, entry (linkColorCoin), group (Options - coin)
+#. i18n: ectx: label, entry (linkColorStamp), group (Options - stamp)
+#. i18n: ectx: label, entry (linkColorCard), group (Options - card)
+#. i18n: ectx: label, entry (linkColorGame), group (Options - game)
+#. i18n: ectx: label, entry (linkColorFile), group (Options - file)
+#. i18n: ectx: label, entry (linkColorBoardGame), group (Options - boardgame)
+#. i18n: ectx: label, entry (linkColorBase), group (Options - entry)
+#: src/config/tellico_config.kcfg:160 src/config/tellico_config.kcfg:190
+#: src/config/tellico_config.kcfg:220 src/config/tellico_config.kcfg:253
+#: src/config/tellico_config.kcfg:283 src/config/tellico_config.kcfg:313
+#: src/config/tellico_config.kcfg:343 src/config/tellico_config.kcfg:373
+#: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
+#: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
+#: src/config/tellico_config.kcfg:523
+#, kde-format
+msgid "Template link color"
+msgstr "Color de ligamine de patrono"
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -4743,17 +4913,23 @@ msgstr "Gruppo"
 msgid "People"
 msgstr "Gente"
 
+#. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
+#: src/gui/collectiontemplatedialog.ui:43
 #, kde-format
 msgid "Template Name:"
 msgstr "Nomine de patrono:"
 
+#. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
+#: src/gui/collectiontemplatedialog.ui:53
 #, kde-format
 msgid "Comment:"
 msgstr "Commento:"
 
+#. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
+#: src/gui/collectiontemplatedialog.ui:70
 #, kde-format
 msgid "Icon:"
 msgstr "Icone:"
@@ -6439,6 +6615,72 @@ msgstr "Pro favor tu selige qual valor tu mantene."
 msgid "Select value from %1"
 msgstr "Selige valor ex %1"
 
+#. i18n: ectx: Menu (file)
+#: src/tellicoui.rc:6
+#, kde-format
+msgid "&File"
+msgstr "&File"
+
+#. i18n: ectx: Menu (file_new_collection)
+#: src/tellicoui.rc:8
+#, kde-format
+msgid "&New Collection"
+msgstr "&Nove Collection"
+
+#. i18n: ectx: Menu (file_import)
+#: src/tellicoui.rc:27
+#, kde-format
+msgctxt "@title:menu"
+msgid "&Import"
+msgstr "&Importa"
+
+#. i18n: ectx: Menu (file_export)
+#: src/tellicoui.rc:62
+#, kde-format
+msgctxt "@title:menu"
+msgid "&Export"
+msgstr "&Exporta"
+
+#. i18n: ectx: Menu (collection)
+#: src/tellicoui.rc:82
+#, kde-format
+msgctxt "@title:menu"
+msgid "&Collection"
+msgstr "&Collection"
+
+#. i18n: ectx: Menu (coll_update_entry)
+#: src/tellicoui.rc:89
+#, kde-format
+msgctxt "@title:menu"
+msgid "&Update Entry"
+msgstr "&Actualisa entrata"
+
+#. i18n: ectx: Menu (coll_bibliography)
+#: src/tellicoui.rc:103
+#, kde-format
+msgctxt "@title:menu"
+msgid "&Bibliography"
+msgstr "&Bibliographia"
+
+#. i18n: ectx: Menu (dockers)
+#: src/tellicoui.rc:113
+#, kde-format
+msgctxt "@title:menu"
+msgid "&Show Views"
+msgstr "Mon&stra vistas"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: src/tellicoui.rc:129
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Barra de instrumento principal"
+
+#. i18n: ectx: ToolBar (collectionToolBar)
+#: src/tellicoui.rc:136
+#, kde-format
+msgid "Collection Toolbar"
+msgstr "Barra de instrumento de collection"
+
 #: src/translators/alexandriaexporter.cpp:68
 #, kde-format
 msgid "Alexandria"
@@ -7476,78 +7718,6 @@ msgstr "Cerca"
 #, kde-format
 msgid "Clear"
 msgstr "Netta"
-
-#~ msgctxt "comma-separated list of words ignored by auto-capitalize"
-#~ msgid ""
-#~ "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,"
-#~ "to,up,with"
-#~ msgstr "un,e,como,a,ma,sed,per,pro,ex,ab,in,o,super,sur,le,a,con"
-
-#~ msgctxt "comma-separated list of articles ignored for title sorting"
-#~ msgid "the"
-#~ msgstr "le"
-
-#~ msgctxt "comma-separated list of common surname suffixes, used for sorting"
-#~ msgid "jr.,jr,iii,iv"
-#~ msgstr "jr.,jr,iii,iv"
-
-#~ msgctxt "comma-separated list of common surname prefixes, used for sorting"
-#~ msgid "de,van,der,van der,von"
-#~ msgstr "de,van,der,van der,von"
-
-#~ msgid "Template font"
-#~ msgstr "Font de patrono"
-
-#~ msgid "Template background color"
-#~ msgstr "Color de fundo de patrono"
-
-#~ msgid "Template text color"
-#~ msgstr "Color de texto de patrono"
-
-#~ msgid "Template highlight color"
-#~ msgstr "Color evidentiate de patrono"
-
-#~ msgid "Template highlighted text color"
-#~ msgstr "Color de texto evidentiate de patrono"
-
-#~ msgid "Template link color"
-#~ msgstr "Color de ligamine de patrono"
-
-#~ msgid "&File"
-#~ msgstr "&File"
-
-#~ msgid "&New Collection"
-#~ msgstr "&Nove Collection"
-
-#~ msgctxt "@title:menu"
-#~ msgid "&Import"
-#~ msgstr "&Importa"
-
-#~ msgctxt "@title:menu"
-#~ msgid "&Export"
-#~ msgstr "&Exporta"
-
-#~ msgctxt "@title:menu"
-#~ msgid "&Collection"
-#~ msgstr "&Collection"
-
-#~ msgctxt "@title:menu"
-#~ msgid "&Update Entry"
-#~ msgstr "&Actualisa entrata"
-
-#~ msgctxt "@title:menu"
-#~ msgid "&Bibliography"
-#~ msgstr "&Bibliographia"
-
-#~ msgctxt "@title:menu"
-#~ msgid "&Show Views"
-#~ msgstr "Mon&stra vistas"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Barra de instrumento principal"
-
-#~ msgid "Collection Toolbar"
-#~ msgstr "Barra de instrumento de collection"
 
 #~ msgid "Click to download additional data sources."
 #~ msgstr "Pulsa pro discargar fontes de datos additional."
