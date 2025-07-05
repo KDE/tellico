@@ -93,6 +93,7 @@ private:
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   void doSearch(const QString& term);
+  void populate(Data::EntryPtr entry, const QJsonObject& obj);
   QString getAuthorKeys(const QString& term);
   void endJob(KIO::StoredTransferJob* job);
 
