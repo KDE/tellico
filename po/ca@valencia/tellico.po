@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-29 00:43+0000\n"
+"POT-Creation-Date: 2025-07-06 00:43+0000\n"
 "PO-Revision-Date: 2025-03-13 10:22+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -749,7 +749,7 @@ msgstr "Clau de Bibtex"
 #: src/fetch/metronfetcher.cpp:246 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:359
-#: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:318
+#: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:344
 #: src/fetch/thegamesdbfetcher.cpp:265 src/fetch/thegamesdbfetcher.cpp:270
 #: src/fetch/themoviedbfetcher.cpp:307 src/fetch/themoviedbfetcher.cpp:310
 #: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:333
@@ -3629,7 +3629,7 @@ msgstr "Gràcies a l'arXiv per l'ús de la seua interoperabilitat d'accés obert
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:453
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:439
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:394
-#: src/fetch/openlibraryfetcher.cpp:527 src/fetch/springerfetcher.cpp:187
+#: src/fetch/openlibraryfetcher.cpp:575 src/fetch/springerfetcher.cpp:187
 #: src/fetch/tvmazefetcher.cpp:373 src/fetch/upcitemdbfetcher.cpp:479
 #: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:433
 #, kde-format
@@ -4275,7 +4275,7 @@ msgstr "Introduïu l'enllaç cap al servidor OPDS."
 msgid "&Verify Catalog"
 msgstr "&Verifica el catàleg"
 
-#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:520
+#: src/fetch/openlibraryfetcher.cpp:343 src/fetch/openlibraryfetcher.cpp:568
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "Enllaç cap a OpenLibrary"
