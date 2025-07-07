@@ -1,17 +1,17 @@
 # Translation of tellico.po to Catalan
-# Copyright (C) 2005-2024 This_file_is_part_of_KDE
+# Copyright (C) 2005-2025 This_file_is_part_of_KDE
 #
 # SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
 # David Majà <davidmaja@gmail.com>, 2005.
 # Manuel Tortosa <manutortosa@gmail.com>, 2009.
 # Manuel Tortosa Moreno <manutortosa@gmail.com>, 2009.
-# Josep M. Ferrer <txemaq@gmail.com>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024.
+# Josep M. Ferrer <txemaq@gmail.com>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-05 05:54+0000\n"
-"PO-Revision-Date: 2024-01-03 08:29+0200\n"
+"PO-Revision-Date: 2025-07-06 11:44+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -2206,25 +2206,26 @@ msgid ""
 "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
 "up,with"
 msgstr ""
+"a,amb,an,and,as,at,but,by,de,el,els,for,from,in,into,la,les,nor,of,off,on,"
+"onto,or,out,over,per,sobre,the,to,up,with"
 
 #: src/config/tellico_config.kcfg:89
-#, fuzzy, kde-format
-#| msgid "Other"
+#, kde-format
 msgctxt "comma-separated list of articles ignored for title sorting"
 msgid "the"
-msgstr "Altre"
+msgstr "the"
 
 #: src/config/tellico_config.kcfg:92
 #, kde-format
 msgctxt "comma-separated list of common surname suffixes, used for sorting"
 msgid "jr.,jr,iii,iv"
-msgstr ""
+msgstr "jr.,jr,iii,iv"
 
 #: src/config/tellico_config.kcfg:95
 #, kde-format
 msgctxt "comma-separated list of common surname prefixes, used for sorting"
 msgid "de,van,der,van der,von"
-msgstr ""
+msgstr "de,van,der,van der,von"
 
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
@@ -2246,10 +2247,9 @@ msgstr ""
 #: src/config/tellico_config.kcfg:383 src/config/tellico_config.kcfg:413
 #: src/config/tellico_config.kcfg:443 src/config/tellico_config.kcfg:473
 #: src/config/tellico_config.kcfg:503
-#, fuzzy, kde-format
-#| msgid "Template Options"
+#, kde-format
 msgid "Template font"
-msgstr "Opcions de plantilla"
+msgstr "Lletra de la plantilla"
 
 #. i18n: ectx: label, entry (baseColorBook), group (Options - book)
 #. i18n: ectx: label, entry (baseColorVideo), group (Options - video)
@@ -2271,10 +2271,9 @@ msgstr "Opcions de plantilla"
 #: src/config/tellico_config.kcfg:387 src/config/tellico_config.kcfg:417
 #: src/config/tellico_config.kcfg:447 src/config/tellico_config.kcfg:477
 #: src/config/tellico_config.kcfg:507
-#, fuzzy, kde-format
-#| msgid "Background color:"
+#, kde-format
 msgid "Template background color"
-msgstr "Color de fons:"
+msgstr "Color de fons de la plantilla"
 
 #. i18n: ectx: label, entry (textColorBook), group (Options - book)
 #. i18n: ectx: label, entry (textColorVideo), group (Options - video)
@@ -2296,10 +2295,9 @@ msgstr "Color de fons:"
 #: src/config/tellico_config.kcfg:391 src/config/tellico_config.kcfg:421
 #: src/config/tellico_config.kcfg:451 src/config/tellico_config.kcfg:481
 #: src/config/tellico_config.kcfg:511
-#, fuzzy, kde-format
-#| msgid "Highlighted text color:"
+#, kde-format
 msgid "Template text color"
-msgstr "Color del text ressaltat:"
+msgstr "Color del text de la plantilla"
 
 #. i18n: ectx: label, entry (highlightedBaseColorBook), group (Options - book)
 #. i18n: ectx: label, entry (highlightedBaseColorVideo), group (Options - video)
@@ -2321,10 +2319,9 @@ msgstr "Color del text ressaltat:"
 #: src/config/tellico_config.kcfg:395 src/config/tellico_config.kcfg:425
 #: src/config/tellico_config.kcfg:455 src/config/tellico_config.kcfg:485
 #: src/config/tellico_config.kcfg:515
-#, fuzzy, kde-format
-#| msgid "Highlight color:"
+#, kde-format
 msgid "Template highlight color"
-msgstr "Color de ressaltat:"
+msgstr "Color del ressaltat de la plantilla"
 
 #. i18n: ectx: label, entry (highlightedTextColorBook), group (Options - book)
 #. i18n: ectx: label, entry (highlightedTextColorVideo), group (Options - video)
@@ -2346,10 +2343,9 @@ msgstr "Color de ressaltat:"
 #: src/config/tellico_config.kcfg:399 src/config/tellico_config.kcfg:429
 #: src/config/tellico_config.kcfg:459 src/config/tellico_config.kcfg:489
 #: src/config/tellico_config.kcfg:519
-#, fuzzy, kde-format
-#| msgid "Highlighted text color:"
+#, kde-format
 msgid "Template highlighted text color"
-msgstr "Color del text ressaltat:"
+msgstr "Color del text ressaltat de la plantilla"
 
 #. i18n: ectx: label, entry (linkColorBook), group (Options - book)
 #. i18n: ectx: label, entry (linkColorVideo), group (Options - video)
@@ -2371,10 +2367,9 @@ msgstr "Color del text ressaltat:"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, fuzzy, kde-format
-#| msgid "Template Options"
+#, kde-format
 msgid "Template link color"
-msgstr "Opcions de plantilla"
+msgstr "Color d'enllaç de la plantilla"
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -6630,77 +6625,69 @@ msgstr "Seleccioneu el valor des de %1"
 
 #. i18n: ectx: Menu (file)
 #: src/tellicoui.rc:6
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "&File"
-msgstr "Fitxers"
+msgstr "&Fitxer"
 
 #. i18n: ectx: Menu (file_new_collection)
 #: src/tellicoui.rc:8
-#, fuzzy, kde-format
-#| msgid "New Collection"
+#, kde-format
 msgid "&New Collection"
-msgstr "Col·lecció nova"
+msgstr "Col·lecció &nova"
 
 #. i18n: ectx: Menu (file_import)
 #: src/tellicoui.rc:27
-#, fuzzy, kde-format
-#| msgid "&Import"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Import"
 msgstr "&Importa"
 
 #. i18n: ectx: Menu (file_export)
 #: src/tellicoui.rc:62
-#, fuzzy, kde-format
-#| msgid "&Export"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Export"
 msgstr "&Exporta"
 
 #. i18n: ectx: Menu (collection)
 #: src/tellicoui.rc:82
-#, fuzzy, kde-format
-#| msgid "My Collection"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Collection"
-msgstr "La meva col·lecció"
+msgstr "&Col·lecció"
 
 #. i18n: ectx: Menu (coll_update_entry)
 #: src/tellicoui.rc:89
-#, fuzzy, kde-format
-#| msgid "&Update Entry"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Update Entry"
 msgstr "Act&ualitza l'entrada"
 
 #. i18n: ectx: Menu (coll_bibliography)
 #: src/tellicoui.rc:103
-#, fuzzy, kde-format
-#| msgid "Bibliography"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Bibliography"
-msgstr "Bibliografia"
+msgstr "&Bibliografia"
 
 #. i18n: ectx: Menu (dockers)
 #: src/tellicoui.rc:113
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Views"
-msgstr ""
+msgstr "Mo&stra les vistes"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: src/tellicoui.rc:129
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "Barra d'eines principal"
 
 #. i18n: ectx: ToolBar (collectionToolBar)
 #: src/tellicoui.rc:136
-#, fuzzy, kde-format
-#| msgid "Collection Report"
+#, kde-format
 msgid "Collection Toolbar"
-msgstr "Informe de la col·lecció"
+msgstr "Barra d'eines de col·lecció"
 
 #: src/translators/alexandriaexporter.cpp:68
 #, kde-format
