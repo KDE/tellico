@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-16 02:34+0000\n"
+"POT-Creation-Date: 2025-07-07 02:32+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -769,7 +769,7 @@ msgstr "Κλειδί Bibtex"
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/moviemeterfetcher.cpp:219
 #: src/fetch/moviemeterfetcher.cpp:224 src/fetch/numistafetcher.cpp:344
 #: src/fetch/numistafetcher.cpp:360 src/fetch/omdbfetcher.cpp:250
-#: src/fetch/openlibraryfetcher.cpp:318 src/fetch/thegamesdbfetcher.cpp:265
+#: src/fetch/openlibraryfetcher.cpp:344 src/fetch/thegamesdbfetcher.cpp:265
 #: src/fetch/thegamesdbfetcher.cpp:270 src/fetch/themoviedbfetcher.cpp:307
 #: src/fetch/themoviedbfetcher.cpp:310 src/fetch/themoviedbfetcher.cpp:315
 #: src/fetch/themoviedbfetcher.cpp:333 src/fetch/thetvdbfetcher.cpp:245
@@ -3584,7 +3584,7 @@ msgstr ""
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
 #: src/fetch/kinofetcher.cpp:451 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:399
-#: src/fetch/openlibraryfetcher.cpp:518 src/fetch/springerfetcher.cpp:187
+#: src/fetch/openlibraryfetcher.cpp:563 src/fetch/springerfetcher.cpp:187
 #: src/fetch/tvmazefetcher.cpp:386 src/fetch/upcitemdbfetcher.cpp:479
 #: src/fetch/vgcollectfetcher.cpp:378 src/fetch/vndbfetcher.cpp:440
 #, kde-format
@@ -4233,7 +4233,7 @@ msgstr "Εισάγετε το όνομα του εξυπηρετητή."
 msgid "&Verify Catalog"
 msgstr "Αρχείο καταλόγου"
 
-#: src/fetch/openlibraryfetcher.cpp:317 src/fetch/openlibraryfetcher.cpp:511
+#: src/fetch/openlibraryfetcher.cpp:343 src/fetch/openlibraryfetcher.cpp:556
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "Δεσμός OpenLibrary"
