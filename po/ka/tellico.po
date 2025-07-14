@@ -38,7 +38,7 @@ msgstr "ალბომი"
 #, kde-format
 msgctxt "Default XSL Template"
 msgid "Default"
-msgstr "ნაგულისხმები"
+msgstr "ნაგულისხმევი"
 
 #. i18n: file: xslt/entry-templates/Fancy.xsl
 #, kde-format
@@ -468,12 +468,12 @@ msgstr "მნიშვნელობის მორგება"
 #: src/collectionfieldsdialog.cpp:246
 #, kde-format
 msgid "Default value:"
-msgstr "ნაგულისხმები მნიშვნელობა:"
+msgstr "ნაგულისხმევი მნიშვნელობა:"
 
 #: src/collectionfieldsdialog.cpp:251
 #, kde-format
 msgid "<qt>A default value can be set for new entries.</qt>"
-msgstr "<qt>ახალი ჩანაწერების ნაგულისხმები მნიშვნელობა.</qt>"
+msgstr "<qt>ახალი ჩანაწერების ნაგულისხმევი მნიშვნელობა.</qt>"
 
 #: src/collectionfieldsdialog.cpp:256
 #, kde-format
@@ -3160,7 +3160,7 @@ msgstr "<b>%1</b>-ის განახლება <i>%2</i>-დან..."
 #: src/entryview.cpp:289
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
-msgstr "Tellico-მა ნაგულისხმები ჩანაწერის სტილების ფურცელი ვერ იპოვა."
+msgstr "Tellico-მა ნაგულისხმევი ჩანაწერის სტილების ფურცელი ვერ იპოვა."
 
 #: src/entryview.cpp:291 src/mainwindow.cpp:1770
 #, kde-format
@@ -4287,7 +4287,7 @@ msgstr "&პორტი: "
 #: src/fetch/srufetcher.cpp:589 src/fetch/z3950fetcher.cpp:619
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
-msgstr "შეიყვანეთ სერვერის პორტის ნომერი. ნაგულისხმები მნიშვნელობაა %1."
+msgstr "შეიყვანეთ სერვერის პორტის ნომერი. ნაგულისხმევი მნიშვნელობაა %1."
 
 #: src/fetch/srufetcher.cpp:594
 #, kde-format
