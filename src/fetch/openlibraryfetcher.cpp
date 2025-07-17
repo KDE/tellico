@@ -471,7 +471,7 @@ void OpenLibraryFetcher::populate(Data::EntryPtr entry_, const QVariantMap& map_
   foreach(const QVariant& contrib, map_.value(QLatin1String("contributors")).toList()) {
     const auto contribMap = contrib.toMap();
     const auto role = mapValue(contribMap, "role");
-    if(role == QLatin1StringView("Translator")) {
+    if(role == QLatin1String("Translator")) {
       translators += mapValue(contribMap, "name");
     }
   }
