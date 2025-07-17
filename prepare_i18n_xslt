@@ -8,7 +8,7 @@ import os
 import re
 
 i18n = re.compile(r'<i18n>(.*?)</i18n>', re.DOTALL)
-ws   = re.compile('\s+')
+ws   = re.compile(r'\s+')
 
 def line_of_char(s, c):
     return s.count('\n', 0, c) + 1
