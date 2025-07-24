@@ -190,7 +190,7 @@ void SRUFetcher::search() {
         } else {
           s = queryTerm(QLatin1String("dc.creator"), request().value(), cqlVersion) +
               QLatin1String(" or ") +
-              queryTerm(QLatin1String("dc.editor="), request().value(), cqlVersion);
+              queryTerm(QLatin1String("dc.editor"), request().value(), cqlVersion);
         }
         query.addQueryItem(QStringLiteral("query"), s);
       }
@@ -368,7 +368,7 @@ void SRUFetcher::slotComplete(KJob*) {
       } else {
         myLog() << "Reading marcXchange data as MARC21";
       }
-      static const QRegularExpression marcRx(QLatin1String("xmlns:(marc|mxc)=\"info:lc/xmlns/marcxchange-v[12]\""));
+      static const QRegularExpression marcRx(QLatin1String("xmlns:([^=]+)=\"info:lc/xmlns/marcxchange-v[12]\""));
       newResult.replace(marcRx, QStringLiteral("xmlns:\\1=\"http://www.loc.gov/MARC21/slim\""));
     }
     if(initHandler(handlerType)) {
@@ -377,15 +377,6 @@ void SRUFetcher::slotComplete(KJob*) {
   }
   if(!modsResult.isEmpty() && initHandler(MODS)) {
     const auto tellicoXml = m_handlers[MODS]->applyStylesheet(modsResult);
-#if 0
-    myWarning() << "Remove debug from srufetcher.cpp";
-    QFile f(QString::fromLatin1("/tmp/test-mods2tellico.xml"));
-    if(f.open(QIODevice::WriteOnly)) {
-      QTextStream t(&f);
-      t << tellicoXml;
-    }
-    f.close();
-#endif
     Import::TellicoImporter imp(tellicoXml);
     coll = imp.collection();
     if(!msg.isEmpty()) {
@@ -501,6 +492,11 @@ bool SRUFetcher::initHandler(HandlerType type_) {
     myWarning() << "error in" << fileName;
     delete handler;
     return false;
+  }
+  if(collectionType() == Data::Collection::Book) {
+    handler->addStringParam("ctype", "2"); // book if already existing
+  } else {
+    handler->addStringParam("ctype", "5"); // bibtex by default
   }
   m_handlers.insert(type_, handler);
   return true;
