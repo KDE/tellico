@@ -24,7 +24,7 @@
 <!-- param to set desired collection type, whether book(2) or bibtex(5) -->
 <xsl:param name="ctype" select="'5'"/>
 
-<xsl:variable name="atype">
+<xsl:variable name="etype">
  <xsl:choose>
   <xsl:when test=".//prism:issn">
    <xsl:text>article</xsl:text>
@@ -42,7 +42,7 @@
             doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
             doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
 
-<xsl:template match="/">
+<xsl:template match="srw:searchRetrieveResponse">
  <tc:tellico syntaxVersion="11">
   <tc:collection title="Import" type="{$ctype}">
    <tc:fields>
@@ -63,7 +63,7 @@
 
   <xsl:if test="$ctype='5'">
    <tc:entry-type>
-    <xsl:value-of select="$atype"/>>
+    <xsl:value-of select="$etype"/>
    </tc:entry-type>
   </xsl:if>
 
@@ -127,7 +127,7 @@
 
 <xsl:template match="dc:date|dcinfo:date|prism:publicationDate">
  <!-- the year element for books is pub_year -->
- <xsl:variable name="year">
+ <xsl:variable name="yearField">
   <xsl:choose>
   <xsl:when test="$ctype='2'">
    <xsl:text>pub_year</xsl:text>
@@ -137,7 +137,7 @@
    </xsl:otherwise>
   </xsl:choose>
  </xsl:variable>
- <xsl:element name="{$year}" namespace="http://periapsis.org/tellico/">
+ <xsl:element name="{$yearField}" namespace="http://periapsis.org/tellico/">
   <xsl:call-template name="year">
    <xsl:with-param name="value" select="."/>
   </xsl:call-template>
