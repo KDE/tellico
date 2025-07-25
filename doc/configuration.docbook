@@ -258,9 +258,15 @@ Some servers require a username and password for access. &appname; can use and s
 <title>SRU Servers</title>
 
 <para>
-SRU stands for <ulink url="http://www.loc.gov/standards/sru/">Search/Retrieve via &URL;</ulink> and is a standard search protocol for
-Internet searches. Some libraries use it for providing access to their data catalogs. Among them, the <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr">US Library of Congress</ulink> is probably
-the best known.
+<acronym>SRU</acronym> stands for <ulink url="http://www.loc.gov/standards/sru/">Search/Retrieve via &URL;</ulink> and is a standard search protocol for
+Internet searches. Some libraries use it for providing access to their data catalogs. Among them, the <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr">US Library of Congress</ulink> is probably the best known.
+</para>
+
+<para>
+Custom fields can be added to tweak Tellico's interaction with the SRU server. To override particular query protocols, use the x-tellico prefix and the desired field name. For
+example, to query ISBN using the bib schema instead of the bath schema, set <userinput>x-tellico-isbn</userinput>=<userinput>bib.isbn</userinput>. &tellico; can also make the
+SRU request by the POST method, if <userinput>x-tellico-method</userinput>=<userinput>POST</userinput>. In order to override the record schema, add a custom field setting
+<userinput>recordSchema</userinput>=<userinput>unimarcXchange</userinput>.
 </para>
 
 <screenshot>
