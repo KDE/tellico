@@ -1,3 +1,8 @@
+2025-07-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated SRU fetcher to allow POST requests (Bug 507265).
+	* Updated SRU fetcher to recognize alternate Dublin Core schema.
+
 2025-06-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with reporting correct image location.

@@ -249,3 +249,29 @@ void SRUFetcherTest::testBnFIsbn() {
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Gallimard"));
   QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("French"));
 }
+
+// https://bugs.kde.org/show_bug.cgi?id=507265
+void SRUFetcherTest::testBrgTitle() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("Brg"));
+  cg.writeEntry("Scheme", QStringLiteral("https"));
+  cg.writeEntry("Format", QStringLiteral("dc"));
+  cg.writeEntry("Host", QStringLiteral("brgbib.bib.no"));
+  cg.writeEntry("Path", QStringLiteral("/cgi-bin/sru"));
+  // the server oddly responds with the EXPLAIN schema when using a GET request (though curl gets correct data)
+  cg.writeEntry("QueryFields", QStringLiteral("x-tellico-method"));
+  cg.writeEntry("QueryValues", QStringLiteral("post"));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
+                                       QStringLiteral("kokebok"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(this));
+  fetcher->readConfig(cg);
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Asiatisk : en visuell kokebok : fremgangsmåten bilde for bilde"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2010"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-82-31-60022-0"));
+}

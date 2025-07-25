@@ -42,6 +42,7 @@ private Q_SLOTS:
   void testHttpFallback();
   void testBnFTitle();
   void testBnFIsbn();
+  void testBrgTitle();
 };
 
 #endif
