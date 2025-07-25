@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-07 02:32+0000\n"
+"POT-Creation-Date: 2025-07-25 02:39+0000\n"
 "PO-Revision-Date: 2025-02-01 22:07+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -651,7 +651,7 @@ msgid "Property"
 msgstr "Tulajdonság"
 
 #: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:105
-#: src/fetch/srufetcher.cpp:624
+#: src/fetch/srufetcher.cpp:642
 #, kde-format
 msgid "Value"
 msgstr "Érték"
@@ -793,7 +793,7 @@ msgid "Publisher"
 msgstr "Kiadó"
 
 #: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:303
-#: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
+#: src/fetch/srufetcher.cpp:553 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
 msgstr "Postacím"
@@ -905,7 +905,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/srufetcher.cpp:554
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -3966,13 +3966,13 @@ msgid "Illustrator"
 msgstr "Illusztrátor"
 
 #: src/fetch/hathitrustfetcher.cpp:306 src/fetch/isbndbfetcher.cpp:382
-#: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
+#: src/fetch/srufetcher.cpp:555 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Dewey decimális"
 
-#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/srufetcher.cpp:556
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -4174,62 +4174,62 @@ msgstr "OpenLibrary kapcsolat"
 msgid "RPGGeek Link"
 msgstr "RPGGeek hivatkozás"
 
-#: src/fetch/srufetcher.cpp:520
+#: src/fetch/srufetcher.cpp:538
 #, kde-format
 msgid "Library of Congress (US)"
 msgstr "Kongresszusi könyvtár (Egyesült Államok)"
 
-#: src/fetch/srufetcher.cpp:525
+#: src/fetch/srufetcher.cpp:543
 #, kde-format
 msgid "SRU Server"
 msgstr "SRU szerver"
 
-#: src/fetch/srufetcher.cpp:553
+#: src/fetch/srufetcher.cpp:571
 #, kde-format
 msgid "Scheme: "
 msgstr "Séma: "
 
-#: src/fetch/srufetcher.cpp:563 src/fetch/srufetcher.cpp:599
+#: src/fetch/srufetcher.cpp:581 src/fetch/srufetcher.cpp:617
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr "Adja meg a szerver által használt adatbázis elérési útvonalát."
 
-#: src/fetch/srufetcher.cpp:568 src/fetch/z3950fetcher.cpp:599
+#: src/fetch/srufetcher.cpp:586 src/fetch/z3950fetcher.cpp:599
 #, kde-format
 msgid "Hos&t: "
 msgstr "&Hoszt:"
 
-#: src/fetch/srufetcher.cpp:575 src/fetch/z3950fetcher.cpp:605
+#: src/fetch/srufetcher.cpp:593 src/fetch/z3950fetcher.cpp:605
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "Adja meg a szerver nevét."
 
-#: src/fetch/srufetcher.cpp:580 src/fetch/z3950fetcher.cpp:610
+#: src/fetch/srufetcher.cpp:598 src/fetch/z3950fetcher.cpp:610
 #, kde-format
 msgid "&Port: "
 msgstr "&Port szám:"
 
-#: src/fetch/srufetcher.cpp:589 src/fetch/z3950fetcher.cpp:619
+#: src/fetch/srufetcher.cpp:607 src/fetch/z3950fetcher.cpp:619
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Adja meg a szerver nevét. Az alapértelmezett: %1."
 
-#: src/fetch/srufetcher.cpp:594
+#: src/fetch/srufetcher.cpp:612
 #, kde-format
 msgid "Path: "
 msgstr "Útvonal:"
 
-#: src/fetch/srufetcher.cpp:604
+#: src/fetch/srufetcher.cpp:622
 #, kde-format
 msgid "Format: "
 msgstr "Formátum: "
 
-#: src/fetch/srufetcher.cpp:615
+#: src/fetch/srufetcher.cpp:633
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "Adja meg a szerver által használt formátumot."
 
-#: src/fetch/srufetcher.cpp:624
+#: src/fetch/srufetcher.cpp:642
 #, kde-format
 msgid "Field"
 msgstr "Mező"
