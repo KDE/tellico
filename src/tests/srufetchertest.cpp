@@ -260,9 +260,10 @@ void SRUFetcherTest::testBrgTitle() {
   // the server oddly responds with the EXPLAIN schema when using a GET request (though curl gets correct data)
   cg.writeEntry("QueryFields", QStringLiteral("x-tellico-method"));
   cg.writeEntry("QueryValues", QStringLiteral("post"));
+  cg.writeEntry("Custom Fields", QStringLiteral("dewey"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
-                                       QStringLiteral("kokebok"));
+                                       QStringLiteral("Barnas fargerike kokebok"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(this));
   fetcher->readConfig(cg);
 
@@ -271,7 +272,9 @@ void SRUFetcherTest::testBrgTitle() {
   QCOMPARE(results.size(), 1);
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Asiatisk : en visuell kokebok : fremgangsmåten bilde for bilde"));
-  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2010"));
-  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-82-31-60022-0"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Barnas fargerike kokebok : spis grønt, rødt, gult og lilla!"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2017"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-82-02-52098-4"));
+  QCOMPARE(entry->field(QStringLiteral("dewey")), QStringLiteral("641.5636"));
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
