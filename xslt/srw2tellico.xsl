@@ -50,6 +50,9 @@
     <xsl:if test=".//prism:issn">
      <tc:field flags="0" title="ISSN#" category="Publishing" format="4" type="1" name="issn" description="ISSN#" />
     </xsl:if>
+    <xsl:if test=".//dc:identifier[@id='dewey']|.//dcinfo:identifier[@id='dewey']">
+     <field title="Dewey Decimal" flags="0" category="Publishing" format="4" type="1" name="dewey" i18n="true"/>
+    </xsl:if>
    </tc:fields>
    <xsl:for-each select=".//srw:record">
     <xsl:apply-templates select="."/>
@@ -114,15 +117,31 @@
 </xsl:template>
 
 <xsl:template match="dc:description|dcinfo:description">
- <tc:note>
-  <xsl:value-of select="."/>
- </tc:note>
+ <xsl:choose>
+  <xsl:when test="$ctype='5' and @type='abstract'">
+   <tc:abstract>
+    <xsl:value-of select="."/>
+   </tc:abstract>
+  </xsl:when>
+  <xsl:when test="$ctype='5' and not(@type='abstract')">
+   <tc:note>
+    <xsl:value-of select="."/>
+   </tc:note>
+  </xsl:when>
+  <xsl:when test="$ctype='2'">
+   <tc:plot>
+    <xsl:value-of select="."/>
+   </tc:plot>
+  </xsl:when>
+ </xsl:choose>
 </xsl:template>
 
 <xsl:template match="prism:publicationName">
- <tc:journal>
-  <xsl:value-of select="."/>
- </tc:journal>
+ <xsl:if test="$ctype='5'">
+  <tc:journal>
+   <xsl:value-of select="."/>
+  </tc:journal>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="dc:date|dcinfo:date|prism:publicationDate">
@@ -158,6 +177,12 @@
  </tc:isbn>
 </xsl:template>
 
+<xsl:template match="dc:identifier[@id='dewey']|dcinfo:identifier[@id='dewey']">
+ <tc:dewey>
+  <xsl:value-of select="."/>
+ </tc:dewey>
+</xsl:template>
+
 <xsl:template match="prism:issn">
  <tc:issn>
   <xsl:value-of select="."/>
@@ -165,27 +190,35 @@
 </xsl:template>
 
 <xsl:template match="prism:doi">
- <tc:doi>
-  <xsl:value-of select="."/>
- </tc:doi>
+ <xsl:if test="$ctype='5'">
+  <tc:doi>
+   <xsl:value-of select="."/>
+  </tc:doi>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="prism:volume">
- <tc:volume>
-  <xsl:value-of select="."/>
- </tc:volume>
+ <xsl:if test="$ctype='5'">
+  <tc:volume>
+   <xsl:value-of select="."/>
+  </tc:volume>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="prism:number">
- <tc:number>
-  <xsl:value-of select="."/>
- </tc:number>
+ <xsl:if test="$ctype='5'">
+  <tc:number>
+   <xsl:value-of select="."/>
+  </tc:number>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="prism:url|telterms:recordIdentifier">
- <tc:url>
-  <xsl:value-of select="."/>
- </tc:url>
+ <xsl:if test="$ctype='5'">
+  <tc:url>
+   <xsl:value-of select="."/>
+  </tc:url>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template name="year">
