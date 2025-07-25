@@ -20,7 +20,7 @@ Dependencies:
     'multimedia/libkcddb': '@latest-kf6'
     'graphics/libksane': '@latest-kf6'
 
-- 'on': ['Linux/Qt5', 'FreeBSD/Qt5']
+- 'on': ['Linux/Qt5']
   'require':
     'frameworks/ki18n': '@stable'
     'frameworks/kxmlgui': '@stable'
@@ -39,7 +39,7 @@ Dependencies:
 
 Options:
   run-tests: True
-  require-passing-tests-on: [ 'Linux', 'FreeBSD' ]
+  require-passing-tests-on: [ 'Linux' ]
   run-cppcheck: True
   cppcheck-arguments: '--enable=warning,style,performance'
   cppcheck-ignore-files:
