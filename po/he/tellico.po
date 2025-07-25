@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-06 00:43+0000\n"
+"POT-Creation-Date: 2025-07-25 00:43+0000\n"
 "PO-Revision-Date: 2025-03-14 09:06+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -631,7 +631,7 @@ msgid "Property"
 msgstr "מאפיין"
 
 #: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:105
-#: src/fetch/srufetcher.cpp:624
+#: src/fetch/srufetcher.cpp:620
 #, kde-format
 msgid "Value"
 msgstr "ערך"
@@ -770,7 +770,7 @@ msgid "Publisher"
 msgstr "הוצאה לאור"
 
 #: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:302
-#: src/fetch/srufetcher.cpp:535 src/fetch/z3950fetcher.cpp:572
+#: src/fetch/srufetcher.cpp:531 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
 msgstr "כתובת"
@@ -882,7 +882,7 @@ msgid "URL"
 msgstr "כתובת אתר"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:303 src/fetch/srufetcher.cpp:536
+#: src/fetch/hathitrustfetcher.cpp:303 src/fetch/srufetcher.cpp:532
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -3984,13 +3984,13 @@ msgid "Illustrator"
 msgstr "איור"
 
 #: src/fetch/hathitrustfetcher.cpp:305 src/fetch/isbndbfetcher.cpp:379
-#: src/fetch/srufetcher.cpp:537 src/fetch/z3950fetcher.cpp:575
+#: src/fetch/srufetcher.cpp:533 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "שיטת דיואי"
 
-#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/srufetcher.cpp:538
+#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/srufetcher.cpp:534
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -4208,62 +4208,62 @@ msgstr "קישור ל־OpenLibrary"
 msgid "RPGGeek Link"
 msgstr "קישור ל־RPGGeek"
 
-#: src/fetch/srufetcher.cpp:520
+#: src/fetch/srufetcher.cpp:516
 #, kde-format
 msgid "Library of Congress (US)"
 msgstr "ספריית הקונגרס (ארה״ב)"
 
-#: src/fetch/srufetcher.cpp:525
+#: src/fetch/srufetcher.cpp:521
 #, kde-format
 msgid "SRU Server"
 msgstr "שרת SRU"
 
-#: src/fetch/srufetcher.cpp:553
+#: src/fetch/srufetcher.cpp:549
 #, kde-format
 msgid "Scheme: "
 msgstr "סכמה: "
 
-#: src/fetch/srufetcher.cpp:563 src/fetch/srufetcher.cpp:599
+#: src/fetch/srufetcher.cpp:559 src/fetch/srufetcher.cpp:595
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr "נא למלא את הנתיב למסד הנתונים בו משתמש השרת."
 
-#: src/fetch/srufetcher.cpp:568 src/fetch/z3950fetcher.cpp:599
+#: src/fetch/srufetcher.cpp:564 src/fetch/z3950fetcher.cpp:599
 #, kde-format
 msgid "Hos&t: "
 msgstr "מ&ארח: "
 
-#: src/fetch/srufetcher.cpp:575 src/fetch/z3950fetcher.cpp:605
+#: src/fetch/srufetcher.cpp:571 src/fetch/z3950fetcher.cpp:605
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "נא למלא את שם המארח של השרת."
 
-#: src/fetch/srufetcher.cpp:580 src/fetch/z3950fetcher.cpp:610
+#: src/fetch/srufetcher.cpp:576 src/fetch/z3950fetcher.cpp:610
 #, kde-format
 msgid "&Port: "
 msgstr "&פתחה: "
 
-#: src/fetch/srufetcher.cpp:589 src/fetch/z3950fetcher.cpp:619
+#: src/fetch/srufetcher.cpp:585 src/fetch/z3950fetcher.cpp:619
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "נא למלא את מספר פתחת השרת. ברירת המחדל היא %1."
 
-#: src/fetch/srufetcher.cpp:594
+#: src/fetch/srufetcher.cpp:590
 #, kde-format
 msgid "Path: "
 msgstr "נתיב: "
 
-#: src/fetch/srufetcher.cpp:604
+#: src/fetch/srufetcher.cpp:600
 #, kde-format
 msgid "Format: "
 msgstr "תבנית: "
 
-#: src/fetch/srufetcher.cpp:615
+#: src/fetch/srufetcher.cpp:611
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "נא למלא את תבנית התוצאה בה משתמש השרת."
 
-#: src/fetch/srufetcher.cpp:624
+#: src/fetch/srufetcher.cpp:620
 #, kde-format
 msgid "Field"
 msgstr "שדה"
