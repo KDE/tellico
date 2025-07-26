@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-25 00:43+0000\n"
+"POT-Creation-Date: 2025-07-26 00:42+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -616,7 +616,7 @@ msgid "Property"
 msgstr "属性"
 
 #: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:105
-#: src/fetch/srufetcher.cpp:620
+#: src/fetch/srufetcher.cpp:642
 #, kde-format
 msgid "Value"
 msgstr "值"
@@ -751,7 +751,7 @@ msgid "Publisher"
 msgstr "出版"
 
 #: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:302
-#: src/fetch/srufetcher.cpp:531 src/fetch/z3950fetcher.cpp:572
+#: src/fetch/srufetcher.cpp:553 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
 msgstr "地址"
@@ -863,7 +863,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:303 src/fetch/srufetcher.cpp:532
+#: src/fetch/hathitrustfetcher.cpp:303 src/fetch/srufetcher.cpp:554
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -3922,13 +3922,13 @@ msgid "Illustrator"
 msgstr "Illustrator"
 
 #: src/fetch/hathitrustfetcher.cpp:305 src/fetch/isbndbfetcher.cpp:379
-#: src/fetch/srufetcher.cpp:533 src/fetch/z3950fetcher.cpp:575
+#: src/fetch/srufetcher.cpp:555 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr ""
 
-#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/srufetcher.cpp:534
+#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/srufetcher.cpp:556
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -4146,62 +4146,62 @@ msgstr ""
 msgid "RPGGeek Link"
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:516
+#: src/fetch/srufetcher.cpp:538
 #, kde-format
 msgid "Library of Congress (US)"
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:521
+#: src/fetch/srufetcher.cpp:543
 #, kde-format
 msgid "SRU Server"
 msgstr "SRU 服务器"
 
-#: src/fetch/srufetcher.cpp:549
+#: src/fetch/srufetcher.cpp:571
 #, kde-format
 msgid "Scheme: "
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:559 src/fetch/srufetcher.cpp:595
+#: src/fetch/srufetcher.cpp:581 src/fetch/srufetcher.cpp:617
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr "输入用于服务器的数据库路径。"
 
-#: src/fetch/srufetcher.cpp:564 src/fetch/z3950fetcher.cpp:599
+#: src/fetch/srufetcher.cpp:586 src/fetch/z3950fetcher.cpp:599
 #, kde-format
 msgid "Hos&t: "
 msgstr "主机(&T)："
 
-#: src/fetch/srufetcher.cpp:571 src/fetch/z3950fetcher.cpp:605
+#: src/fetch/srufetcher.cpp:593 src/fetch/z3950fetcher.cpp:605
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "输入服务器主机名。"
 
-#: src/fetch/srufetcher.cpp:576 src/fetch/z3950fetcher.cpp:610
+#: src/fetch/srufetcher.cpp:598 src/fetch/z3950fetcher.cpp:610
 #, kde-format
 msgid "&Port: "
 msgstr "端口(&P)："
 
-#: src/fetch/srufetcher.cpp:585 src/fetch/z3950fetcher.cpp:619
+#: src/fetch/srufetcher.cpp:607 src/fetch/z3950fetcher.cpp:619
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "输入服务器端口号。默认为 %1。"
 
-#: src/fetch/srufetcher.cpp:590
+#: src/fetch/srufetcher.cpp:612
 #, kde-format
 msgid "Path: "
 msgstr "路径："
 
-#: src/fetch/srufetcher.cpp:600
+#: src/fetch/srufetcher.cpp:622
 #, kde-format
 msgid "Format: "
 msgstr "格式："
 
-#: src/fetch/srufetcher.cpp:611
+#: src/fetch/srufetcher.cpp:633
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "输入用于服务器的结果格式。"
 
-#: src/fetch/srufetcher.cpp:620
+#: src/fetch/srufetcher.cpp:642
 #, kde-format
 msgid "Field"
 msgstr "字段"
