@@ -33,7 +33,6 @@
 #include "../gui/combobox.h"
 #include "../gui/stringmapwidget.h"
 #include "../utils/string_utils.h"
-#include "../utils/tellico_utils.h"
 #include "../utils/lccnvalidator.h"
 #include "../utils/isbnvalidator.h"
 #include "../utils/datafileregistry.h"
@@ -278,7 +277,6 @@ void SRUFetcher::search() {
     myLog() << "GETing SRU request:" << u.url();
     m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   }
-  Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &SRUFetcher::slotComplete);
