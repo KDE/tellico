@@ -258,6 +258,7 @@ void SRUFetcherTest::testBrgTitle() {
   cg.writeEntry("Host", QStringLiteral("brgbib.bib.no"));
   cg.writeEntry("Path", QStringLiteral("/cgi-bin/sru"));
   // the server oddly responds with the EXPLAIN schema when using a GET request (though curl gets correct data)
+  // due to BUG 507523
   cg.writeEntry("QueryFields", QStringLiteral("x-tellico-method"));
   cg.writeEntry("QueryValues", QStringLiteral("post"));
   cg.writeEntry("Custom Fields", QStringLiteral("dewey"));
