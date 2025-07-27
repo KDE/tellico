@@ -90,7 +90,8 @@ void DiscogsFetcherTest::testTitle() {
   QVERIFY(!entry->field(QStringLiteral("track")).isEmpty());
 
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
+  const auto cover = entry->field(QStringLiteral("cover"));
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(cover);
   QVERIFY(!img.isNull());
 }
 
@@ -121,7 +122,8 @@ void DiscogsFetcherTest::testPerson() {
   QVERIFY(!entry->field(QStringLiteral("label")).isEmpty());
 
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
+  const auto cover = entry->field(QStringLiteral("cover"));
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(cover);
   QVERIFY(!img.isNull());
 }
 
@@ -153,7 +155,8 @@ void DiscogsFetcherTest::testKeyword() {
   QVERIFY(!entry->field(QStringLiteral("year")).isEmpty());
 
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
+  const auto cover = entry->field(QStringLiteral("cover"));
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(cover);
   QVERIFY(!img.isNull());
 }
 
@@ -186,7 +189,8 @@ void DiscogsFetcherTest::testBarcode() {
   QCOMPARE(entry->field(QStringLiteral("barcode")), QStringLiteral("4 547366 014099"));
 
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
+  const auto cover = entry->field(QStringLiteral("cover"));
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(cover);
   QVERIFY(!img.isNull());
 }
 
@@ -226,7 +230,8 @@ void DiscogsFetcherTest::testRawData() {
   QCOMPARE(trackList.at(0), QStringLiteral("Haunted::Evanescence::4:04"));
 
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
+  const auto cover = entry->field(QStringLiteral("cover"));
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(cover);
   QVERIFY(!img.isNull());
 }
 
