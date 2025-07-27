@@ -736,7 +736,7 @@ void TellicoReadTest::testBug443845() {
 
 void TellicoReadTest::testEmoji() {
   // https://www.fileformat.info/info/unicode/char/1f3e1/index.htm
-  QString textWithEmoji = QString::fromUtf8("Title 🏡️");
+  const QString textWithEmoji = QString::fromUtf8("Title 🏡️");
   // stripping control codes should not affect the emoji
   QCOMPARE(Tellico::removeControlCodes(textWithEmoji), textWithEmoji);
 
