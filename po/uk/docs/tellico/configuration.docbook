@@ -461,10 +461,27 @@
 >Сервери SRU</title>
 
 <para
->Абревіатура SRU означає <ulink url="http://www.loc.gov/standards/sru/"
+>Абревіатура <acronym
+>SRU</acronym
+> означає <ulink url="http://www.loc.gov/standards/sru/"
 >Search/Retrieve via URL</ulink
 > (пошук/отримання даних за адресою URL), це стандартний протокол для виконання пошуків у мережі Інтернет. Деякі з бібліотек використовують цей протокол для надання доступу до своїх каталогів даних. Серед цих бібліотек, ймовірно, найвідомішою є <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
 >Бібліотека конгресу США</ulink
+>. </para>
+
+<para
+>Для коригування взаємодії Tellico із сервером SRU може бути додано нетипові поля. Для перевизначення певних протоколів запитів скористайтеся префіксом x-tellico до назви бажаного поля. Наприклад, для запиту щодо ISBN з використанням схеми bib замість схеми bath встановіть <userinput
+>x-tellico-isbn</userinput
+>=<userinput
+>bib.isbn</userinput
+>. &tellico; також може робити запити SRU за допомогою методу POST, якщо встановлено <userinput
+>x-tellico-method</userinput
+>=<userinput
+>POST</userinput
+>. Для перевизначення схеми запису додайте параметр нетипового поля <userinput
+>recordSchema</userinput
+>=<userinput
+>unimarcXchange</userinput
 >. </para>
 
 <screenshot>

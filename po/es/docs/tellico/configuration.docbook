@@ -469,11 +469,28 @@
 >Servidores SRU</title>
 
 <para
->SRU significa <ulink url="http://www.loc.gov/standards/sru/"
+><acronym
+>SRU</acronym
+> significa <ulink url="http://www.loc.gov/standards/sru/"
 >Search/Retrieve via &URL; (Buscar y Obtener vía URL)</ulink
 >, y es un protocolo de búsqueda estándar para internet. Algunas bibliotecas lo usan para dar acceso a sus catálogos. Entre ellas, la <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
->Biblioteca del Congreso de EE.UU.</ulink
+>Biblioteca del Congreso de EE. UU.</ulink
 > es probablemente la más conocida. </para>
+
+<para
+>Se pueden añadir campos personalizados para afinar la interacción de Tellico con el servidor SRU. Para modificar el comportamiento de ciertos protocolos de consulta, use el prefijo «x-tellico» y el nombre de campo en cuestión. Por ejemplo, para consular el ISBN usando el esquema «bib» en lugar del esquema «bath», use <userinput
+>x-tellico-isbn</userinput
+>=<userinput
+>bib.isbn</userinput
+>. &tellico; también puede consultar el servidor SRU usando el método POST mediante <userinput
+>x-tellico-method</userinput
+>=<userinput
+>POST</userinput
+>. Para anular el esquema de registros, añada un campo personalizado usando <userinput
+>recordSchema</userinput
+>=<userinput
+>unimarcXchange</userinput
+>. </para>
 
 <screenshot>
 <mediaobject>

@@ -469,11 +469,28 @@
 >Servidors SRU</title>
 
 <para
->SRU significa <ulink url="http://www.loc.gov/standards/sru/"
+><acronym
+>SRU</acronym
+> significa <ulink url="http://www.loc.gov/standards/sru/"
 >Search/Retrieve via &URL; (Cerca i obtén via &URL;)</ulink
-> i és un protocol de cerca estàndard per a les cerques a Internet. Algunes biblioteques l'utilitzen per a proporcionar accés als seus catàlegs de dades. Entre elles, la <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
+> i és un protocol de cerca estàndard de cerques a Internet. Algunes biblioteques l'utilitzen per a proporcionar accés als seus catàlegs de dades. Entre elles, la <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
 >Biblioteca del Congrés dels EUA</ulink
 > probablement és la més coneguda. </para>
+
+<para
+>Es poden afegir camps personalitzats per ajustar la interacció del Tellico amb el servidor SRU. Per a substituir protocols de consulta en particular, utilitzeu el prefix x-tellico i el nom de camp desitjat. Per exemple, per a consultar un ISBN utilitzant l'esquema «bib» en lloc de l'esquema de «bath», establiu <userinput
+>x-tellico-isbn</userinput
+>=<userinput
+>bib.isbn</userinput
+>. El &tellico; també pot fer la petició SRU pel mètode POST, si <userinput
+>x-tellico-method</userinput
+>=<userinput
+>POST</userinput
+>. Per tal de substituir l'esquema de registre, afegiu un paràmetre de camp personalitzat <userinput
+>recordSchema</userinput
+>=<userinput
+>unimarcXchange</userinput
+>. </para>
 
 <screenshot>
 <mediaobject>
