@@ -267,14 +267,15 @@ void SRUFetcher::search() {
       stop();
       break;
   }
-  myLog() << "SRU query:" << query.toString();
   u.setQuery(query);
 
   if(QString::compare(httpMethod, QLatin1String("post"), Qt::CaseInsensitive) == 0) {
     myLog() << "POSTing SRU request:" << u.url();
     m_job = KIO::storedPut(query.toString().toUtf8(), u, -1, KIO::HideProgressInfo);
+    m_job->addMetaData(QStringLiteral("content-type"),
+                       QStringLiteral("application/x-www-form-urlencoded"));
   } else {
-    // default to get
+    // default to GET
     myLog() << "GETing SRU request:" << u.url();
     m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   }
