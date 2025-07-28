@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-26 00:42+0000\n"
+"POT-Creation-Date: 2025-07-28 00:41+0000\n"
 "PO-Revision-Date: 2024-11-09 20:04+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -618,7 +618,7 @@ msgid "Property"
 msgstr "Година на публикуване"
 
 #: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:105
-#: src/fetch/srufetcher.cpp:642
+#: src/fetch/srufetcher.cpp:643
 #, fuzzy, kde-format
 msgid "Value"
 msgstr "Показва колони"
@@ -753,7 +753,7 @@ msgid "Publisher"
 msgstr "Издател"
 
 #: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:302
-#: src/fetch/srufetcher.cpp:553 src/fetch/z3950fetcher.cpp:572
+#: src/fetch/srufetcher.cpp:554 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
 msgstr "Адрес"
@@ -865,7 +865,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:303 src/fetch/srufetcher.cpp:554
+#: src/fetch/hathitrustfetcher.cpp:303 src/fetch/srufetcher.cpp:555
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -1628,7 +1628,7 @@ msgid "Label"
 msgstr "Заглавие"
 
 #: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:317
-#: src/tests/discogsfetchertest.cpp:309 src/tests/discogsfetchertest.cpp:346
+#: src/tests/discogsfetchertest.cpp:314 src/tests/discogsfetchertest.cpp:351
 #: src/tests/itunesfetchertest.cpp:216 src/tests/itunesfetchertest.cpp:244
 #: src/tests/musicbrainzfetchertest.cpp:228
 #: src/tests/musicbrainzfetchertest.cpp:257
@@ -3938,13 +3938,13 @@ msgid "Illustrator"
 msgstr ""
 
 #: src/fetch/hathitrustfetcher.cpp:305 src/fetch/isbndbfetcher.cpp:379
-#: src/fetch/srufetcher.cpp:555 src/fetch/z3950fetcher.cpp:575
+#: src/fetch/srufetcher.cpp:556 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr ""
 
-#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/srufetcher.cpp:556
+#: src/fetch/hathitrustfetcher.cpp:306 src/fetch/srufetcher.cpp:557
 #: src/fetch/z3950fetcher.cpp:576
 #, fuzzy, kde-format
 msgctxt "Library of Congress classification system"
@@ -4162,62 +4162,62 @@ msgstr ""
 msgid "RPGGeek Link"
 msgstr "Преименувай колекцията"
 
-#: src/fetch/srufetcher.cpp:538
+#: src/fetch/srufetcher.cpp:539
 #, fuzzy, kde-format
 msgid "Library of Congress (US)"
 msgstr "Библиотека на конгреса,контролен номер"
 
-#: src/fetch/srufetcher.cpp:543
+#: src/fetch/srufetcher.cpp:544
 #, kde-format
 msgid "SRU Server"
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:571
+#: src/fetch/srufetcher.cpp:572
 #, kde-format
 msgid "Scheme: "
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:581 src/fetch/srufetcher.cpp:617
+#: src/fetch/srufetcher.cpp:582 src/fetch/srufetcher.cpp:618
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:586 src/fetch/z3950fetcher.cpp:599
+#: src/fetch/srufetcher.cpp:587 src/fetch/z3950fetcher.cpp:599
 #, fuzzy, kde-format
 msgid "Hos&t: "
 msgstr "Е&кспортиране"
 
-#: src/fetch/srufetcher.cpp:593 src/fetch/z3950fetcher.cpp:605
+#: src/fetch/srufetcher.cpp:594 src/fetch/z3950fetcher.cpp:605
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:598 src/fetch/z3950fetcher.cpp:610
+#: src/fetch/srufetcher.cpp:599 src/fetch/z3950fetcher.cpp:610
 #, kde-format
 msgid "&Port: "
 msgstr "&Порт"
 
-#: src/fetch/srufetcher.cpp:607 src/fetch/z3950fetcher.cpp:619
+#: src/fetch/srufetcher.cpp:608 src/fetch/z3950fetcher.cpp:619
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:612
+#: src/fetch/srufetcher.cpp:613
 #, fuzzy, kde-format
 msgid "Path: "
 msgstr "Е&кспортиране"
 
-#: src/fetch/srufetcher.cpp:622
+#: src/fetch/srufetcher.cpp:623
 #, fuzzy, kde-format
 msgid "Format: "
 msgstr "Опции за форматиране"
 
-#: src/fetch/srufetcher.cpp:633
+#: src/fetch/srufetcher.cpp:634
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr ""
 
-#: src/fetch/srufetcher.cpp:642
+#: src/fetch/srufetcher.cpp:643
 #, fuzzy, kde-format
 msgid "Field"
 msgstr "Полета"
