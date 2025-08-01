@@ -270,7 +270,7 @@ void SRUFetcher::search() {
 
   if(QString::compare(httpMethod, QLatin1String("post"), Qt::CaseInsensitive) == 0) {
     myLog() << "POSTing SRU request:" << u.url();
-    m_job = KIO::storedPut(query.toString().toUtf8(), u, -1, KIO::HideProgressInfo);
+    m_job = KIO::storedHttpPost(query.toString().toUtf8(), u, KIO::HideProgressInfo);
     m_job->addMetaData(QStringLiteral("content-type"),
                        QStringLiteral("application/x-www-form-urlencoded"));
   } else {
