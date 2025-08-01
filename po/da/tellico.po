@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-26 02:36+0000\n"
+"POT-Creation-Date: 2025-08-01 02:44+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -660,7 +660,7 @@ msgid "Property"
 msgstr "Egenskab"
 
 #: src/collectionfieldsdialog.cpp:894 src/collections/filecatalog.cpp:105
-#: src/fetch/srufetcher.cpp:640
+#: src/fetch/srufetcher.cpp:641
 #, kde-format
 msgid "Value"
 msgstr "Værdi"
@@ -804,7 +804,7 @@ msgid "Publisher"
 msgstr "Udgiver"
 
 #: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:303
-#: src/fetch/srufetcher.cpp:551 src/fetch/z3950fetcher.cpp:572
+#: src/fetch/srufetcher.cpp:552 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
 msgstr "Adresse"
@@ -916,7 +916,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
-#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/srufetcher.cpp:552
+#: src/fetch/hathitrustfetcher.cpp:304 src/fetch/srufetcher.cpp:553
 #: src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Abstract"
@@ -3993,13 +3993,13 @@ msgid "Illustrator"
 msgstr "Illustrering"
 
 #: src/fetch/hathitrustfetcher.cpp:306 src/fetch/isbndbfetcher.cpp:382
-#: src/fetch/srufetcher.cpp:553 src/fetch/z3950fetcher.cpp:575
+#: src/fetch/srufetcher.cpp:554 src/fetch/z3950fetcher.cpp:575
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Dewey-decimal"
 
-#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/srufetcher.cpp:554
+#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/srufetcher.cpp:555
 #: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -4206,63 +4206,63 @@ msgstr "OpenLibrary-link"
 msgid "RPGGeek Link"
 msgstr "BoardGameGeek-link"
 
-#: src/fetch/srufetcher.cpp:536
+#: src/fetch/srufetcher.cpp:537
 #, kde-format
 msgid "Library of Congress (US)"
 msgstr "Kongressens Bibliotek (USA)"
 
-#: src/fetch/srufetcher.cpp:541
+#: src/fetch/srufetcher.cpp:542
 #, kde-format
 msgid "SRU Server"
 msgstr "SRU-server"
 
-#: src/fetch/srufetcher.cpp:569
+#: src/fetch/srufetcher.cpp:570
 #, fuzzy, kde-format
 #| msgid "&Source name: "
 msgid "Scheme: "
 msgstr "&Kildenavn: "
 
-#: src/fetch/srufetcher.cpp:579 src/fetch/srufetcher.cpp:615
+#: src/fetch/srufetcher.cpp:580 src/fetch/srufetcher.cpp:616
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr "Angiv stien til databasen som serveren bruger."
 
-#: src/fetch/srufetcher.cpp:584 src/fetch/z3950fetcher.cpp:599
+#: src/fetch/srufetcher.cpp:585 src/fetch/z3950fetcher.cpp:599
 #, kde-format
 msgid "Hos&t: "
 msgstr "Vær&t: "
 
-#: src/fetch/srufetcher.cpp:591 src/fetch/z3950fetcher.cpp:605
+#: src/fetch/srufetcher.cpp:592 src/fetch/z3950fetcher.cpp:605
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "Angive værtsnavn for serveren."
 
-#: src/fetch/srufetcher.cpp:596 src/fetch/z3950fetcher.cpp:610
+#: src/fetch/srufetcher.cpp:597 src/fetch/z3950fetcher.cpp:610
 #, kde-format
 msgid "&Port: "
 msgstr "&Port: "
 
-#: src/fetch/srufetcher.cpp:605 src/fetch/z3950fetcher.cpp:619
+#: src/fetch/srufetcher.cpp:606 src/fetch/z3950fetcher.cpp:619
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Angiv serverens portnummer. Standard er %1."
 
-#: src/fetch/srufetcher.cpp:610
+#: src/fetch/srufetcher.cpp:611
 #, kde-format
 msgid "Path: "
 msgstr "Sti: "
 
-#: src/fetch/srufetcher.cpp:620
+#: src/fetch/srufetcher.cpp:621
 #, kde-format
 msgid "Format: "
 msgstr "Format: "
 
-#: src/fetch/srufetcher.cpp:631
+#: src/fetch/srufetcher.cpp:632
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "Angiv resultatformatet som serveren bruger."
 
-#: src/fetch/srufetcher.cpp:640
+#: src/fetch/srufetcher.cpp:641
 #, kde-format
 msgid "Field"
 msgstr "Felt"
