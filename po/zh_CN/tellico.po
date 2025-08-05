@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-01 02:44+0000\n"
+"POT-Creation-Date: 2025-08-05 03:04+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -7022,17 +7022,17 @@ msgstr ""
 msgid "Zip Files"
 msgstr "Zip 文件"
 
-#: src/translators/onixexporter.cpp:178
+#: src/translators/onixexporter.cpp:179
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "ONIX 归档选项"
 
-#: src/translators/onixexporter.cpp:181
+#: src/translators/onixexporter.cpp:182
 #, kde-format
 msgid "Include images in archive"
 msgstr "在归档中包含图像"
 
-#: src/translators/onixexporter.cpp:183
+#: src/translators/onixexporter.cpp:184
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
