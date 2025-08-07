@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-28 00:41+0000\n"
-"PO-Revision-Date: 2025-03-14 09:06+0200\n"
+"PO-Revision-Date: 2025-08-06 15:35+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -362,7 +362,7 @@ msgstr "&סוג:"
 #: src/collectionfieldsdialog.cpp:178
 #, kde-format
 msgid "The type of the field determines what values may be used. "
-msgstr "סוג השדה קובע באילו נתונים ניתן להשתמש."
+msgstr "סוג השדה קובע באילו נתונים ניתן להשתמש. "
 
 #: src/collectionfieldsdialog.cpp:179
 #, kde-format
@@ -3662,7 +3662,7 @@ msgstr "%1 דורש שם משתמש וסיסמה."
 #: src/fetch/crossreffetcher.cpp:309
 #, kde-format
 msgid "&Username: "
-msgstr "&שם משתמש:"
+msgstr "&שם משתמש: "
 
 #: src/fetch/crossreffetcher.cpp:314
 #, kde-format
@@ -3677,7 +3677,7 @@ msgstr "&סיסמה: "
 #: src/fetch/crossreffetcher.cpp:329
 #, kde-format
 msgid "For some accounts, only an email address is required."
-msgstr "לחלק מהחשבונות צריך רק כתובת דוא״ל"
+msgstr "לחלק מהחשבונות צריך רק כתובת דוא״ל."
 
 #: src/fetch/crossreffetcher.cpp:332
 #, kde-format
@@ -3804,7 +3804,7 @@ msgstr "הגדרת סוג התוצאה של הנתונים שהוחזרו מהי
 #: src/fetch/execexternalfetcher.cpp:389
 #, kde-format
 msgid "Application &path: "
-msgstr "&נתיב היישום:"
+msgstr "&נתיב היישום: "
 
 #: src/fetch/execexternalfetcher.cpp:394
 #, kde-format
@@ -3902,7 +3902,7 @@ msgstr "קישור FilmAffinity"
 #: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:588
 #, kde-format
 msgid "&Maximum cast: "
-msgstr "&כמות שחקנים מרבית:"
+msgstr "&כמות שחקנים מרבית: "
 
 #: src/fetch/filmaffinityfetcher.cpp:485 src/fetch/imdbfetcher.cpp:535
 #: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:597
@@ -3951,7 +3951,7 @@ msgstr "הגדרת סוג האוסף של הנתונים שהוחזרו מהתו
 #: src/fetch/gcstarpluginfetcher.cpp:418
 #, kde-format
 msgid "&Plugin: "
-msgstr "&תוסף:"
+msgstr "&תוסף: "
 
 #: src/fetch/gcstarpluginfetcher.cpp:424
 #, kde-format
@@ -4373,7 +4373,7 @@ msgstr "להשתמש בשרת &ערכות מוגדרות מראש:"
 #: src/fetch/z3950fetcher.cpp:624
 #, kde-format
 msgid "&Database: "
-msgstr "מסד &נתונים:"
+msgstr "מסד &נתונים: "
 
 #: src/fetch/z3950fetcher.cpp:629
 #, kde-format
@@ -4383,7 +4383,7 @@ msgstr "נא למלא את שם מסד הנתונים בו משתמש השרת."
 #: src/fetch/z3950fetcher.cpp:634
 #, kde-format
 msgid "Query character set: "
-msgstr "ערכת התווים של השאילתה:"
+msgstr "ערכת התווים של השאילתה: "
 
 #: src/fetch/z3950fetcher.cpp:643
 #, kde-format
@@ -4397,7 +4397,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:649
 #, kde-format
 msgid "Results character set: "
-msgstr "ערכת תווים לתוצאות:"
+msgstr "ערכת תווים לתוצאות: "
 
 #: src/fetch/z3950fetcher.cpp:658
 #, kde-format
@@ -4430,7 +4430,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:682
 #, kde-format
 msgid "&User: "
-msgstr "מ&שתמש:"
+msgstr "מ&שתמש: "
 
 #: src/fetch/z3950fetcher.cpp:685 src/fetch/z3950fetcher.cpp:697
 #, kde-format
@@ -4673,7 +4673,7 @@ msgstr "מאפייני מקור נתונים"
 #: src/fetcherconfigdialog.cpp:104
 #, kde-format
 msgid "&Source name: "
-msgstr "&שם מקור:"
+msgstr "&שם מקור: "
 
 #: src/fetcherconfigdialog.cpp:106
 #, kde-format
@@ -4684,7 +4684,7 @@ msgstr "השם מבדיל את מקור הנתונים מהשאר ועליו ל�
 #: src/fetcherconfigdialog.cpp:116
 #, kde-format
 msgid "Source &type: "
-msgstr "&סוג מקור:"
+msgstr "&סוג מקור: "
 
 #: src/fetcherconfigdialog.cpp:125
 #, kde-format
@@ -5147,7 +5147,7 @@ msgstr "קובי Tellico"
 #: src/mainwindow.cpp:1246 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
-msgstr "קובצי XML "
+msgstr "קובצי XML"
 
 #: src/importdialog.cpp:377 src/translators/bibtexexporter.cpp:65
 #, kde-format
@@ -5259,7 +5259,7 @@ msgstr ""
 #: src/loandialog.cpp:188
 #, kde-format
 msgid "&Note:"
-msgstr "ה&ערה"
+msgstr "ה&ערה:"
 
 #: src/loandialog.cpp:196
 #, kde-format
@@ -6989,7 +6989,7 @@ msgstr ""
 #: src/translators/csvimporter.cpp:329
 #, kde-format
 msgid "Co&lumn:"
-msgstr "&עמודה: "
+msgstr "&עמודה:"
 
 #: src/translators/csvimporter.cpp:342
 #, kde-format
@@ -7190,7 +7190,7 @@ msgstr "קובצי JSON"
 #: src/translators/librarythingimporter.cpp:190
 #, kde-format
 msgid "LibraryThing file:"
-msgstr "קובץ LibraryThing"
+msgstr "קובץ LibraryThing:"
 
 #: src/translators/marcimporter.cpp:132
 #, kde-format
