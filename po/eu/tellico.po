@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-28 00:41+0000\n"
-"PO-Revision-Date: 2025-08-06 18:36+0200\n"
+"PO-Revision-Date: 2025-08-10 22:21+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -2920,8 +2920,7 @@ msgstr "Hau da Qt-ren errore-mezua:"
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
-"Lehendik ere badago \"%1\" izeneko fitxategi bat. Ziur zaude gainidatzi nahi "
-"duzula?"
+"Jada badago \"%1\" izeneko fitxategi bat. Ziur zaude gainidatzi nahi duzula?"
 
 #: src/core/filehandler.cpp:200
 #, kde-format
