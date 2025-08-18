@@ -5,7 +5,7 @@
     "runtime": "org.kde.Platform",
     "runtime-version": "6.8",
     "base": "io.qt.qtwebengine.BaseApp",
-    "base-version": "6.8",
+    "base-version": "6.9",
     "sdk": "org.kde.Sdk",
     "rename-icon": "tellico",
     "tags": [
