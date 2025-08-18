@@ -3,8 +3,8 @@ Basic instructions for compiling Tellico
 
 Also found at http://techbase.kde.org/Projects/Tellico/Compiling
 
-These instructions use Tellico 3.0 as an example. For
-other versions, replace 3.0 in the commands below.
+These instructions use Tellico 4.0 as an example. For
+other versions, replace 4.0 in the commands below.
 
 -------------------------------------------------------
 
@@ -12,10 +12,10 @@ Source Package
 =============
 
 If you download the source package, extract all of the
-files, which should create a directory named tellico-3.0/.
+files, which should create a directory named tellico-4.0/.
 
-% tar xJvf tellico-3.0.tar.xz
-% cd tellico-3.0
+% tar xJvf tellico-4.0.tar.xz
+% cd tellico-4.0
 
 After that, there are three steps to build and install Tellico.
 
@@ -28,23 +28,18 @@ is CMake. CMake will check that you have all the
 required development libraries and set up the file
 for compiling.
 
-In the tellico-3.0/ directory, create a directory for
+In the tellico-4.0/ directory, create a directory for
 building, named build/, just to keep things clear.
 
 % mkdir build
 % cd build
-% cmake .. -DCMAKE_INSTALL_PREFIX=`kf5-config --prefix`
+% cmake ..
 
-Note the backquotes in the cmake command, they are important.
-
-The .. tells CMake to use the top-level tellico-3.0/
-directory as the source directory, and to set the
-application to install in the same place as other
-KDE applications. Later, when you install Tellico,
-you will likely need root access, either through
+The .. tells CMake to use the top-level tellico-4.0/
+directory as the source directory. Later, when you install
+Tellico, you will likely need root access, either through
 the root password or sudo. To install to a different
-location, use change the -DCMAKE_INSTALL_PREFIX
-option.
+location, use the -DCMAKE_INSTALL_PREFIX option.
 
 If you do not have the necessary libraries for
 building tellico, CMake will fail and show you
