@@ -467,11 +467,28 @@
 >Server SRU</title>
 
 <para
->SRU è un acronimo per <ulink url="http://www.loc.gov/standards/sru/"
+><acronym
+>SRU</acronym
+> è un acronimo per <ulink url="http://www.loc.gov/standards/sru/"
 >Search/Retrieve via URL</ulink
 > ed è un protocollo standard per ricerche via internet. Alcune biblioteche usano questo protocollo per fornire l'accesso ai propri cataloghi, tra queste la <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
 >Biblioteca del Congresso statunitense</ulink
 > è probabilmente la più nota. </para>
+
+<para
+>È possibile aggiungere dei campi personalizzati per modificare l'interazione di Tellico con il server SRU. Per sovrascrivere particolari protocolli di interrogazione, utilizza il prefisso x-tellico e il nome del campo desiderato. Ad esempio, per eseguire un'interrogazione ISBN utilizzando lo schema bib invece dello schema bath, imposta <userinput
+>x-tellico-isbn</userinput
+>=<userinput
+>bib.isbn</userinput
+>. &tellico; puoi anche effettuare la richiesta SRU tramite il metodo POST, se <userinput
+>x-tellico-method</userinput
+>=<userinput
+>POST</userinput
+>. Per sovrascrivere lo schema di registrazione, aggiungi un'impostazione di campo personalizzata <userinput
+>recordSchema</userinput
+>=<userinput
+>unimarcXchange</userinput
+>. </para>
 
 <screenshot>
 <mediaobject>
