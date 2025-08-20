@@ -204,3 +204,25 @@ void OpenLibraryFetcherTest::testComic() {
   QCOMPARE(entry->field(QStringLiteral("title")), QString::fromUtf8("よつばと！ 1"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("4-04869066-3"));
 }
+
+//https://bugs.kde.org/show_bug.cgi?id=507912
+void OpenLibraryFetcherTest::testBug507912() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Raw,
+                                       QStringLiteral("key=/books/OL32223354M"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+//  QVERIFY(fetcher->canSearch(request.key()));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Book);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Sonnets. Volume 8"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("William Shakespeare"));
+  QVERIFY(entry->field(QStringLiteral("isbn")).isEmpty()); // test case has to lack an isbn
+  QVERIFY(entry->field(QStringLiteral("openlibrary")).isEmpty()); // verify the link is not included
+  QVERIFY(!entry->collection()->hasField(QStringLiteral("openlibrary"))); // verify the link is not included
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+}
+

@@ -249,17 +249,34 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
   // no longer need the field
   entry->collection()->removeField(workString);
 
-  // if the entry is not set, go ahead and try to fetch it
+  const QString openlibraryString(QStringLiteral("openlibrary"));
   const QString coverString(QStringLiteral("cover"));
   if(entry->field(coverString).isEmpty()) {
-    const QString isbn = ISBNValidator::cleanValue(entry->field(QStringLiteral("isbn")));
-    if(!isbn.isEmpty()) {
-      QUrl imageUrl(QStringLiteral("https://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn));
+    // just want the portion after the last slash
+    QString olid = entry->field(openlibraryString).section(QLatin1Char('/'), -1);
+    if(!olid.isEmpty()) {
+      QUrl imageUrl(QStringLiteral("https://covers.openlibrary.org/b/olid/%1-M.jpg?default=false").arg(olid));
       const QString id = ImageFactory::addImage(imageUrl, true);
       if(!id.isEmpty()) {
         entry->setField(coverString, id);
       }
+    } else {
+      const QString isbn = ISBNValidator::cleanValue(entry->field(QStringLiteral("isbn")));
+      if(!isbn.isEmpty()) {
+        QUrl imageUrl(QStringLiteral("https://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn));
+        const QString id = ImageFactory::addImage(imageUrl, true);
+        if(!id.isEmpty()) {
+          entry->setField(coverString, id);
+        }
+      }
     }
+  }
+
+  // remove the openlibrary field if undesired
+  if(entry->collection()->hasField(openlibraryString) &&
+     !optionalFields().contains(openlibraryString)) {
+    entry->setField(openlibraryString, QString());
+    entry->collection()->removeField(entry->collection()->fieldByName(openlibraryString));
   }
 
   return entry;
@@ -339,11 +356,10 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
   Data::FieldPtr wField(new Data::Field(QStringLiteral("openlibrary-work"), QString()));
   coll->addField(wField);
 
-  if(!coll->hasField(QStringLiteral("openlibrary")) && optionalFields().contains(QStringLiteral("openlibrary"))) {
-    Data::FieldPtr field(new Data::Field(QStringLiteral("openlibrary"), i18n("OpenLibrary Link"), Data::Field::URL));
-    field->setCategory(i18n("General"));
-    coll->addField(field);
-  }
+  // always set the openlibrary link, removed later if unwanted
+  Data::FieldPtr field(new Data::Field(QStringLiteral("openlibrary"), i18n("OpenLibrary Link"), Data::Field::URL));
+  field->setCategory(i18n("General"));
+  coll->addField(field);
 
   for(const auto& result : array) {
     // be sure to check that the fetcher has not been stopped
@@ -431,10 +447,8 @@ void OpenLibraryFetcher::populate(Data::EntryPtr entry_, const QJsonObject& obj_
   entry_->setField(QStringLiteral("series"), objValue(obj_, "series"));
   entry_->setField(QStringLiteral("pages"), objValue(obj_, "number_of_pages"));
   entry_->setField(QStringLiteral("comments"), objValue(obj_, "notes", "value"));
+  entry_->setField(QStringLiteral("openlibrary"), QLatin1String("https://openlibrary.org") + objValue(obj_, "key"));
 
-  if(optionalFields().contains(QStringLiteral("openlibrary"))) {
-    entry_->setField(QStringLiteral("openlibrary"), QLatin1String("https://openlibrary.org") + objValue(obj_, "key"));
-  }
   const auto worksArray = obj_[QLatin1StringView("works")].toArray();
   if(!worksArray.isEmpty()) {
     const auto workObj = worksArray.first().toObject();
