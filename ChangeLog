@@ -1,3 +1,7 @@
+2025-08-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated OpenLibrary source to find covers for books without ISBN (Bug 507912).
+
 2025-08-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 4.1.3.
