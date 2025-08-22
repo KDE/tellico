@@ -39,6 +39,9 @@ namespace KIO {
 
 class OpenLibraryFetcherTest;
 namespace Tellico {
+  namespace GUI {
+    class ComboBox;
+  }
   namespace Fetch {
 
 /**
@@ -78,6 +81,8 @@ public:
     explicit ConfigWidget(QWidget* parent_, const OpenLibraryFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&) override;
     virtual QString preferredName() const override;
+  private:
+    GUI::ComboBox* m_imageCombo;
   };
   friend class ConfigWidget;
 
@@ -97,6 +102,14 @@ private:
   QString getAuthorKeys(const QString& term);
   void endJob(KIO::StoredTransferJob* job);
 
+  enum ImageSize {
+    SmallImage=0,
+    MediumImage=1,
+    LargeImage=2,
+    NoImage=3
+  };
+
+  ImageSize m_imageSize;
   QHash<uint, Data::EntryPtr> m_entries;
   QList< QPointer<KIO::StoredTransferJob> > m_jobs;
 
