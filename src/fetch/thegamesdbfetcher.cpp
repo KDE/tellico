@@ -64,7 +64,7 @@ using Tellico::Fetch::TheGamesDBFetcher;
 TheGamesDBFetcher::TheGamesDBFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false)
-    , m_imageSize(SmallImage) {
+    , m_imageSize(MediumImage) {
   m_apiKey = Tellico::reverseObfuscate(THEGAMESDB_MAGIC_TOKEN);
   // delay reading the platform names from the cache file
   QTimer::singleShot(0, this, &TheGamesDBFetcher::loadCachedData);
@@ -675,7 +675,7 @@ TheGamesDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheGamesDB
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
   } else { // defaults
     m_apiKeyEdit->setText(Tellico::reverseObfuscate(THEGAMESDB_MAGIC_TOKEN));
-    m_imageCombo->setCurrentData(SmallImage);
+    m_imageCombo->setCurrentData(MediumImage);
   }
 
   // now add additional fields widget
