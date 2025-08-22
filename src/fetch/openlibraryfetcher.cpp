@@ -26,6 +26,7 @@
 #include "../collections/bookcollection.h"
 #include "../collections/comicbookcollection.h"
 #include "../images/imagefactory.h"
+#include "../gui/combobox.h"
 #include "../utils/isbnvalidator.h"
 #include "../utils/guiproxy.h"
 #include "../utils/objvalue.h"
@@ -56,7 +57,7 @@ using namespace Tellico;
 using Tellico::Fetch::OpenLibraryFetcher;
 
 OpenLibraryFetcher::OpenLibraryFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false) {
+    : Fetcher(parent_), m_imageSize(MediumImage), m_started(false) {
 }
 
 OpenLibraryFetcher::~OpenLibraryFetcher() {
@@ -76,7 +77,11 @@ bool OpenLibraryFetcher::canFetch(int type) const {
       type == Data::Collection::ComicBook;
 }
 
-void OpenLibraryFetcher::readConfigHook(const KConfigGroup&) {
+void OpenLibraryFetcher::readConfigHook(const KConfigGroup& config_) {
+  const int imageSize = config_.readEntry("Image Size", -1);
+  if(imageSize > -1) {
+    m_imageSize = static_cast<ImageSize>(imageSize);
+  }
 }
 
 void OpenLibraryFetcher::search() {
@@ -251,24 +256,28 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
 
   const QString openlibraryString(QStringLiteral("openlibrary"));
   const QString coverString(QStringLiteral("cover"));
-  if(entry->field(coverString).isEmpty()) {
+  if(m_imageSize != NoImage && entry->field(coverString).isEmpty()) {
+    QString imgSize;
+    switch(m_imageSize) {
+      case LargeImage:  imgSize = QLatin1Char('L'); break;
+      case MediumImage: imgSize = QLatin1Char('M'); break;
+      case SmallImage:  imgSize = QLatin1Char('S'); break;
+      case NoImage: myWarning() << "impossible image size"; break;
+    }
+    QString coverId, imageUrl;
+
     // just want the portion after the last slash
     QString olid = entry->field(openlibraryString).section(QLatin1Char('/'), -1);
     if(!olid.isEmpty()) {
-      QUrl imageUrl(QStringLiteral("https://covers.openlibrary.org/b/olid/%1-M.jpg?default=false").arg(olid));
-      const QString id = ImageFactory::addImage(imageUrl, true);
-      if(!id.isEmpty()) {
-        entry->setField(coverString, id);
-      }
+      coverId = olid;
+      imageUrl = QStringLiteral("https://covers.openlibrary.org/b/olid/%1-%2.jpg?default=false");
     } else {
-      const QString isbn = ISBNValidator::cleanValue(entry->field(QStringLiteral("isbn")));
-      if(!isbn.isEmpty()) {
-        QUrl imageUrl(QStringLiteral("https://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn));
-        const QString id = ImageFactory::addImage(imageUrl, true);
-        if(!id.isEmpty()) {
-          entry->setField(coverString, id);
-        }
-      }
+      coverId = ISBNValidator::cleanValue(entry->field(QStringLiteral("isbn")));
+      imageUrl = QStringLiteral("https://covers.openlibrary.org/b/isbn/%1-%2.jpg?default=false");
+    }
+    if(!coverId.isEmpty()) {
+      imageUrl = imageUrl.arg(coverId).arg(imgSize);
+      entry->setField(coverString, ImageFactory::addImage(QUrl(imageUrl), true));
     }
   }
 
@@ -585,15 +594,42 @@ Tellico::StringHash OpenLibraryFetcher::allOptionalFields() {
 
 OpenLibraryFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const OpenLibraryFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+  QGridLayout* l = new QGridLayout(optionsWidget());
+  l->setSpacing(4);
+  l->setColumnStretch(1, 10);
+
+  int row = -1;
+  auto label = new QLabel(i18n("&Image size: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_imageCombo = new GUI::ComboBox(optionsWidget());
+  m_imageCombo->addItem(i18n("Small Image"), SmallImage);
+  m_imageCombo->addItem(i18n("Medium Image"), MediumImage);
+  m_imageCombo->addItem(i18n("Large Image"), LargeImage);
+  m_imageCombo->addItem(i18n("No Image"), NoImage);
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_imageCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_imageCombo, row, 1);
+  QString w = i18n("The cover image may be downloaded as well. However, too many large images in the "
+                   "collection may degrade performance.");
+  label->setWhatsThis(w);
+  m_imageCombo->setWhatsThis(w);
+  label->setBuddy(m_imageCombo);
+
+  l->setRowStretch(++row, 10);
+
+  if(fetcher_) {
+    m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+  } else { // defaults
+    m_imageCombo->setCurrentData(MediumImage);
+  }
 
   // now add additional fields widget
   addFieldsWidget(OpenLibraryFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 }
 
-void OpenLibraryFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
+void OpenLibraryFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  const int n = m_imageCombo->currentData().toInt();
+  config_.writeEntry("Image Size", n);
 }
 
 QString OpenLibraryFetcher::ConfigWidget::preferredName() const {
