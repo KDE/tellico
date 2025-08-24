@@ -347,7 +347,6 @@ void GCstarPluginFetcher::slotProcessExited() {
   gcsUrl.setPath(gcsUrl.path() + QLatin1String("/collection.gcs"));
 
   Import::GCstarImporter imp(gcsUrl);
-  imp.setHasRelativeImageLinks(true);
 
   Data::CollPtr coll = imp.collection();
   if(!coll) {

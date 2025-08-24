@@ -43,10 +43,10 @@
 
 using Tellico::Import::GCstarImporter;
 
-GCstarImporter::GCstarImporter(const QUrl& url_) : TextImporter(url_, true), m_cancelled(false), m_relativeImageLinks(false) {
+GCstarImporter::GCstarImporter(const QUrl& url_) : TextImporter(url_, true), m_cancelled(false) {
 }
 
-GCstarImporter::GCstarImporter(const QString& text_) : TextImporter(text_), m_cancelled(false), m_relativeImageLinks(false) {
+GCstarImporter::GCstarImporter(const QString& text_) : TextImporter(text_), m_cancelled(false) {
 }
 
 bool GCstarImporter::canImport(int type) const {
@@ -294,9 +294,8 @@ void GCstarImporter::readGCstar(const QString& text_, const QString& collType_) 
   }
 
   Import::TellicoImporter imp(str);
-  if(m_relativeImageLinks) {
-    imp.setBaseUrl(url()); // empty base url is ok
-  }
+  imp.setBaseUrl(url()); // always allow for relative image links; empty base url is ok
+
   m_coll = imp.collection();
   setStatusMessage(imp.statusMessage());
 }

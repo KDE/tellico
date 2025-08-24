@@ -53,8 +53,6 @@ public:
   virtual QWidget* widget(QWidget*) override { return nullptr; }
   virtual bool canImport(int type) const override;
 
-  void setHasRelativeImageLinks(bool b) { m_relativeImageLinks = b; }
-
 public Q_SLOTS:
   void slotCancel() override;
 
@@ -66,7 +64,6 @@ private:
 
   Data::CollPtr m_coll;
   bool m_cancelled;
-  bool m_relativeImageLinks;
 };
 
   } // end namespace
