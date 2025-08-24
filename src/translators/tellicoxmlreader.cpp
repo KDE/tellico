@@ -107,6 +107,10 @@ void TellicoXmlReader::setShowImageLoadErrors(bool showImageErrors_) {
   m_data->showImageLoadErrors = showImageErrors_;
 }
 
+void TellicoXmlReader::setImagePathsAsLinks(bool imagesPathsAsLinks_) {
+  m_data->imagesPathsAsLinks = imagesPathsAsLinks_;
+}
+
 void TellicoXmlReader::handleStart() {
   SAX::StateHandler* handler = m_handlers.top()->nextHandler(m_xml.namespaceUri(), m_xml.name());
   Q_ASSERT(handler);

@@ -396,8 +396,8 @@ void ImageWidget::slotLinkOnlyClicked() {
   }
 
   const bool link = m_cbLinkOnly->isChecked();
-  // if the user is trying to link and can't before there's no information about the url
-  // then let him know that
+  // if the user is trying to link and can't because there's no information about the url
+  // then send a message
   if(link && m_originalURL.isEmpty()) {
     KMessageBox::error(this, i18n("Saving a link is only possible for newly added images."));
     m_cbLinkOnly->setChecked(false);

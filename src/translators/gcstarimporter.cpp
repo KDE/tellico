@@ -39,14 +39,26 @@
 #include <QFileInfo>
 #include <QStandardPaths>
 
+#include <QVBoxLayout>
+#include <QGroupBox>
+#include <QCheckBox>
+
 #define CHECKLIMITS(n) if(values.count() <= n) continue
 
 using Tellico::Import::GCstarImporter;
 
-GCstarImporter::GCstarImporter(const QUrl& url_) : TextImporter(url_, true), m_cancelled(false) {
+GCstarImporter::GCstarImporter(const QUrl& url_) : TextImporter(url_, true)
+    , m_cancelled(false)
+    , m_imageLinksOnly(false)
+    , m_widget(nullptr)
+    , m_cbImageLink(nullptr) {
 }
 
-GCstarImporter::GCstarImporter(const QString& text_) : TextImporter(text_), m_cancelled(false) {
+GCstarImporter::GCstarImporter(const QString& text_) : TextImporter(text_)
+    , m_cancelled(false)
+    , m_imageLinksOnly(false)
+    , m_widget(nullptr)
+    , m_cbImageLink(nullptr) {
 }
 
 bool GCstarImporter::canImport(int type) const {
@@ -58,6 +70,10 @@ bool GCstarImporter::canImport(int type) const {
       || type == Data::Collection::Wine
       || type == Data::Collection::Coin
       || type == Data::Collection::BoardGame;
+}
+
+void GCstarImporter::setImagePathsAsLinks(bool imagePathsAsLinks_) {
+  m_imageLinksOnly = imagePathsAsLinks_;
 }
 
 Tellico::Data::CollPtr GCstarImporter::collection() {
@@ -276,7 +292,7 @@ void GCstarImporter::readGCstar(const QString& text_, const QString& collType_) 
     }
     if(modelFile.isEmpty()) {
       myWarning() << "Failed to find a gcm model file";
-      setStatusMessage(i18n("The file contains no collection data."));
+      setStatusMessage(i18n("The GCstar model file could not be found."));
       return;
     } else {
       myLog() << "Reading custom GCstar collection type:" << collType_;
@@ -295,6 +311,9 @@ void GCstarImporter::readGCstar(const QString& text_, const QString& collType_) 
 
   Import::TellicoImporter imp(str);
   imp.setBaseUrl(url()); // always allow for relative image links; empty base url is ok
+  if(m_imageLinksOnly) {
+    imp.setOptions(imp.options() | Import::ImportImagesAsLinks);
+  }
 
   m_coll = imp.collection();
   setStatusMessage(imp.statusMessage());
@@ -303,6 +322,31 @@ void GCstarImporter::readGCstar(const QString& text_, const QString& collType_) 
 inline
 QString GCstarImporter::splitJoin(const QRegularExpression& rx, const QString& s) {
   return s.split(rx, Qt::SkipEmptyParts).join(FieldFormat::delimiterString());
+}
+
+QWidget* GCstarImporter::widget(QWidget* parent_) {
+  if(m_widget) {
+    return m_widget;
+  }
+  m_widget = new QWidget(parent_);
+  auto l = new QVBoxLayout(m_widget);
+
+  auto gbox = new QGroupBox(i18n("GCstar Options"), m_widget);
+  auto vlay = new QVBoxLayout(gbox);
+
+  m_cbImageLink = new QCheckBox(i18n("Import images as links only"), gbox);
+  m_cbImageLink->setWhatsThis(i18n("If checked, the image paths will be imported as links "
+                                   "instead of being managed by Tellico directly."));
+  m_cbImageLink->setChecked(m_imageLinksOnly);
+  connect(m_cbImageLink, &QCheckBox::toggled, m_cbImageLink, [this](bool checked){
+    m_imageLinksOnly = checked;
+  });
+
+  vlay->addWidget(m_cbImageLink);
+
+  l->addWidget(gbox);
+  l->addStretch(1);
+  return m_widget;
 }
 
 void GCstarImporter::slotCancel() {
