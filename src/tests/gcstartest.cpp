@@ -387,7 +387,6 @@ void GCstarTest::testBoardGame() {
 void GCstarTest::testWine() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-wine.gcs"));
   Tellico::Import::GCstarImporter importer(url);
-  importer.setHasRelativeImageLinks(true);
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
@@ -656,6 +655,7 @@ void GCstarTest::testCustomCollection() {
   QVERIFY(entry);
   QCOMPARE(entry->field("gcsfield11"), QStringLiteral("Dark Hollow"));
   QCOMPARE(entry->field("gcsfield14"), QStringLiteral("2025-06-01"));
-//  QCOMPARE(entry->field("gcsfield1"), QStringLiteral("Dark Hollow"));
   QCOMPARE(entry->field("gcsfield16"), QStringLiteral("DARK HOLLOW CUTLERY D2 STEEL WOOD HANDLE FIXED BLADE KNIFE KNIFE"));
+  // image field
+  QCOMPARE(entry->field("gcsfield1"), QStringLiteral("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
 }
