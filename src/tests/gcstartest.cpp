@@ -49,6 +49,7 @@ void GCstarTest::initTestCase() {
   gcstarImageDir.removeRecursively();
   Tellico::ImageFactory::init();
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/gcstar2tellico.xsl"));
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("data/Knives.gcm")); // for custom collection
   // need to register the collection types
   Tellico::CollectionInitializer ci;
 }
@@ -629,4 +630,54 @@ void GCstarTest::testCustomFields() {
       }
     }
   }
+}
+
+void GCstarTest::testCustomCollection() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-custom.gcs"));
+  Tellico::Import::GCstarImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Base);
+  QCOMPARE(coll->entryCount(), 2);
+  QCOMPARE(coll->title(), QStringLiteral("GCstar Import"));
+
+  // test custom fields
+  Tellico::Data::FieldPtr field = coll->fieldByName(QStringLiteral("gcsfield1"));
+  QVERIFY(field);
+  QCOMPARE(field->name(), QStringLiteral("gcsfield1"));
+  QCOMPARE(field->title(), QStringLiteral("Picture Right"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Image);
+
+  field = coll->fieldByName(QStringLiteral("gcsfield16"));
+  QVERIFY(field);
+  QCOMPARE(field->title(), QStringLiteral("Long Description"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Para);
+
+  field = coll->fieldByName(QStringLiteral("gcsfield25"));
+  QVERIFY(field);
+  QCOMPARE(field->title(), QStringLiteral("Location"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Choice);
+  QCOMPARE(field->flags(), Tellico::Data::Field::AllowGrouped);
+  QCOMPARE(field->allowed(), QStringList() << QStringLiteral("EDC")
+                                           << QStringLiteral("Deposito")
+                                           << QStringLiteral("Estante"));
+  QCOMPARE(field->defaultValue(), QStringLiteral("Deposito"));
+
+  field = coll->fieldByName(QStringLiteral("gcsfield14"));
+  QVERIFY(field);
+  QCOMPARE(field->type(), Tellico::Data::Field::Date);
+
+  field = coll->fieldByName(QStringLiteral("gcsfield28"));
+  QVERIFY(field);
+  QCOMPARE(field->type(), Tellico::Data::Field::Number);
+  QCOMPARE(field->property(QStringLiteral("minimum")), QStringLiteral("17"));
+  QCOMPARE(field->property(QStringLiteral("maximum")), QStringLiteral("30"));
+
+  Tellico::Data::EntryPtr entry = coll->entryById(71);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("gcsfield11"), QStringLiteral("Dark Hollow"));
+  QCOMPARE(entry->field("gcsfield14"), QStringLiteral("2025-06-01"));
+//  QCOMPARE(entry->field("gcsfield1"), QStringLiteral("Dark Hollow"));
+  QCOMPARE(entry->field("gcsfield16"), QStringLiteral("DARK HOLLOW CUTLERY D2 STEEL WOOD HANDLE FIXED BLADE KNIFE KNIFE"));
 }

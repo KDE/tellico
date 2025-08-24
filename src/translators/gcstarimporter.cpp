@@ -31,10 +31,13 @@
 #include "../fieldformat.h"
 #include "xslthandler.h"
 #include "tellicoimporter.h"
+#include "../tellico_debug.h"
 
 #include <KLocalizedString>
 
 #include <QTextStream>
+#include <QFileInfo>
+#include <QStandardPaths>
 
 #define CHECKLIMITS(n) if(values.count() <= n) continue
 
@@ -71,10 +74,20 @@ Tellico::Data::CollPtr GCstarImporter::collection() {
     readGCfilms(str);
   } else {
     // need to reparse the string if it's in utf-8
-    if(line.toLower().indexOf(QLatin1String("utf-8")) > 0) {
+    if(line.contains(QLatin1String("utf-8"), Qt::CaseInsensitive)) {
       str = QString::fromUtf8(str.toLocal8Bit());
     }
-    readGCstar(str);
+    // also allow for custom collections by reading collection type
+    while(!line.contains(QLatin1String("collection"))) {
+      line = t.readLine();
+    }
+    QString collType;
+    static const QRegularExpression typeRx(QLatin1String("type=\"([^\"]+)\""));
+    auto typeMatch = typeRx.match(line);
+    if(typeMatch.hasMatch()) {
+      collType = typeMatch.captured(1);
+    }
+    readGCstar(str, collType);
   }
   return m_coll;
 }
@@ -245,7 +258,7 @@ void GCstarImporter::readGCfilms(const QString& text_) {
   }
 }
 
-void GCstarImporter::readGCstar(const QString& text_) {
+void GCstarImporter::readGCstar(const QString& text_, const QString& collType_) {
   QString xsltFile = DataFileRegistry::self()->locate(QStringLiteral("gcstar2tellico.xsl"));
   XSLTHandler handler(QUrl::fromLocalFile(xsltFile));
   if(!handler.isValid()) {
@@ -253,6 +266,26 @@ void GCstarImporter::readGCstar(const QString& text_) {
     return;
   }
 
+  // Assume no custom collection starts with "GC"
+  if(!collType_.startsWith(QLatin1String("GC"))) {
+    const QString modelFileName = collType_ + QLatin1String(".gcm");
+    QString modelFile = DataFileRegistry::self()->locate(modelFileName);
+    if(modelFile.isEmpty()) {
+      modelFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                         QStringLiteral("gcstar/GCModels/") + modelFileName);
+    }
+    if(modelFile.isEmpty()) {
+      myWarning() << "Failed to find a gcm model file";
+      setStatusMessage(i18n("The file contains no collection data."));
+      return;
+    } else {
+      myLog() << "Reading custom GCstar collection type:" << collType_;
+      myLog() << "Model file:" << modelFile;
+      QFileInfo fi(modelFile);
+      const QString modelDir = fi.path() + QLatin1Char('/');
+      handler.addStringParam("datadir", modelDir.toUtf8());
+    }
+  }
   const QString str = handler.applyStylesheet(text_);
 
   if(str.isEmpty()) {
@@ -262,7 +295,7 @@ void GCstarImporter::readGCstar(const QString& text_) {
 
   Import::TellicoImporter imp(str);
   if(m_relativeImageLinks) {
-    imp.setBaseUrl(url()); /// empty base url is ok
+    imp.setBaseUrl(url()); // empty base url is ok
   }
   m_coll = imp.collection();
   setStatusMessage(imp.statusMessage());

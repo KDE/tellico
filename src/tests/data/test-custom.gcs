@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection type="Knives" items="68" version="1.8.0">
+ <information>
+  <maxId>71</maxId>
+ </information>
+
+
+
+ <item
+  gcsfield5="Indumil Combat Knife"
+  gcsfield1="../../../pics/2018-07-17/P7171360.JPG"
+  gcsfield11="Indumil"
+  gcsfield13="002FB001"
+  gcsfield7="../../../pics/2018-07-17/P7171362.JPG"
+  gcsfield9="../../../pics/2018-07-17/P7171361.JPG"
+  gcsfield10="../../../pics/2018-07-17/P7171363.JPG"
+  gcsfield17="Wood"
+  gcsfield18="Steel - 1045 or similar"
+  gcsfield19="304"
+  gcsfield21="130"
+  gcsfield25="Deposito"
+  gcsautoid="52"
+ >
+ </item>
+ <item
+  gcsfield5="Dark Hollow D2 Fixed Blade Tanto"
+  gcsfield1="collectorz/image.png"
+  gcsfield11="Dark Hollow"
+  gcsfield13="066FB016"
+  gcsfield14="01/06/2025"
+  gcsfield15="15.65"
+  gcsfield6=".knives collection_pictures/Rihe_Mini_Utility_Knife_0"
+  gcsfield7=".knives collection_pictures/Rihe_Mini_Utility_Knife_0"
+  gcsfield8="../../../pics/2025-07-08/P7084342.JPG"
+  gcsfield9="../../../pics/2025-07-08/P7084343.JPG"
+  gcsfield10="../../../pics/2025-07-08/P7084345.JPG"
+  gcsfield23="../../../pics/2025-07-08/P7084348.JPG"
+  gcsfield17="Micarta, Wood"
+  gcsfield18="D2"
+  gcsfield19="212"
+  gcsfield26="305"
+  gcsfield21="178"
+  gcsfield30="3.3"
+  gcsfield24=".knives collection_pictures/Rihe_Mini_Utility_Knife_0"
+  gcsfield25="EDC"
+  gcsautoid="71"
+ >
+  <gcsfield16>DARK HOLLOW CUTLERY D2 STEEL WOOD HANDLE FIXED BLADE KNIFE KNIFE</gcsfield16>
+ </item>
+</collection>
