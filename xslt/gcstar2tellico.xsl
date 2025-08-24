@@ -10,10 +10,10 @@
    ===================================================================
    Tellico XSLT file - used for importing GCstar data.
 
-   Copyright (C) 2007-2013 Robby Stephenson <robby@periapsis.org>
+   Copyright (C) 2007 Robby Stephenson <robby@periapsis.org>
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
-   application, which can be found at http://tellico-project.org
+   application, which can be found at https://tellico-project.org
 
    ===================================================================
 -->
@@ -21,6 +21,8 @@
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
             doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
             doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
+
+<xsl:param name="datadir"/> <!-- dir where custom data might be located -->
 
 <xsl:variable name="coll">
  <xsl:choose>
@@ -48,10 +50,21 @@
   <xsl:when test="/collection[1]/@type='GCboardgames'">
    <xsl:text>13</xsl:text>
   </xsl:when>
+  <xsl:otherwise>
+   <xsl:text>1</xsl:text> <!-- custom collection -->
+  </xsl:otherwise>
  </xsl:choose>
 </xsl:variable>
 
-<xsl:key name="fieldsByName" match="field" use="@value"/>
+<xsl:variable name="externalModel">
+ <xsl:if test="$coll = 1">
+  <!-- Using copy-of creates a result-tree fragment, which requires using node-set() later -->
+  <xsl:copy-of select="document(concat($datadir, /collection[1]/@type, '.gcm'))/collection/fields"/>
+ </xsl:if>
+ <xsl:if test="$coll &gt; 1">
+  <xsl:value-of select="/.."/> <!-- effectively, the null set -->
+ </xsl:if>
+</xsl:variable>
 
 <xsl:template match="/">
  <tc:tellico syntaxVersion="11">
@@ -62,12 +75,15 @@
 <xsl:template match="collection" mode="top">
  <tc:collection title="GCstar Import" type="{$coll}">
   <tc:fields>
-   <tc:field name="_default"/>
-   <tc:field flags="0" title="Favorite" category="Personal" format="4" type="4" name="favorite" i18n="true"/>
+   <xsl:if test="$coll &gt; 1">
+    <!-- all default fields and favorite for any non-custom collection type -->
+    <tc:field name="_default"/>
+    <tc:field flags="0" title="Favorite" category="Personal" format="4" type="4" name="favorite" i18n="true"/>
+   </xsl:if>
    <xsl:if test="item/@web or item/@webPage">
     <tc:field flags="0" title="URL" category="General" format="4" type="7" name="url" i18n="true"/>
    </xsl:if>
-   <xsl:if test="(item/@location or item/@place) and $coll != 7 and $coll != 8">
+   <xsl:if test="(item/@location or item/@place) and @type != 'GCwines' and @type != 'GCcoins'">
      <tc:field flags="6" title="Location" category="Personal" format="4" type="1" name="location" i18n="true"/>
    </xsl:if>
    <xsl:if test="item/@composer">
@@ -82,7 +98,7 @@
      <tc:field flags="0" title="Seen" category="Personal" format="4" type="4" name="seen" i18n="true"/>
     </xsl:when>
     <xsl:when test="@type='GCcoins'">
-     <!-- gcstar includes way more coin grades than tellico -->
+     <!-- gcstar includes many more coin grades than tellico -->
      <tc:field flags="2" title="Grade" category="General" format="4" type="3" name="grade"
                allowed="Proof-65;Proof-60;Mint State-70;Mint State-69;Mint State-68;Mint State-67;Mint State-66;Mint State-65;Mint State-64;Mint State-63;Mint State-62;Mint State-61;Mint State-60;Almost Uncirculated-58;Almost Uncirculated-55;Almost Uncirculated-53;Almost Uncirculated-50;Extremely Fine-45;Extremely Fine-40;Very Fine-35;Very Fine-30;Very Fine-25;Very Fine-20;Fine-15;Fine-12;Very Good-10;Very Good-8;Good-6;Good-4;Fair"/>
      <tc:field flags="6" title="Diameter" category="General" format="4" type="1" name="diameter" i18n="true"/>
@@ -119,6 +135,10 @@
      <tc:field flags="6" title="Collection" category="Personal" format="4" type="1" name="collection" i18n="true"/>
      <tc:field flags="0" title="Boards" category="Publishing" format="4" type="6" name="numberboards"/>
     </xsl:when>
+    <xsl:when test="$coll = 1">
+     <!-- all custom fields, from a custom model -->
+     <xsl:apply-templates select="exsl:node-set($externalModel)/fields/field"/>
+    </xsl:when>
    </xsl:choose>
    <xsl:apply-templates select="userCollection/fields/field"/>
   </tc:fields>
@@ -140,6 +160,11 @@
     <xsl:when test="@type = 'single list'"><xsl:text>8</xsl:text></xsl:when>
     <xsl:when test="@type = 'image'"><xsl:text>10</xsl:text></xsl:when>
     <xsl:when test="@type = 'date'"><xsl:text>12</xsl:text></xsl:when>
+   </xsl:choose>
+  </xsl:attribute>
+  <xsl:attribute name="flags">
+   <xsl:choose>
+    <xsl:when test="@type = 'options'"><xsl:text>2</xsl:text></xsl:when>
    </xsl:choose>
   </xsl:attribute>
   <xsl:if test="string-length(@values)">
@@ -203,9 +228,13 @@
 </xsl:template>
 
 <xsl:template match="item/@*[starts-with(local-name(), 'gcsfield')]">
- <xsl:element name="{local-name()}" namespace="http://periapsis.org/tellico/">
+ <xsl:variable name="elemName" select="local-name()"/>
+ <!-- have to combine possibility of either local custom fields or external custom collection mode -->
+ <xsl:variable name="fieldType" select="(/collection/userCollection/fields/field[@value = $elemName] |
+                                         exsl:node-set($externalModel)/fields/field[@value = $elemName])[1]/@type"/>
+ <xsl:element name="{concat('tc:',$elemName)}">
   <xsl:choose>
-   <xsl:when test="key('fieldsByName', local-name())/@type = 'date'">
+   <xsl:when test="$fieldType = 'date'">
     <xsl:variable name="numbers" select="str:tokenize(., '/-')"/>
     <xsl:if test="count($numbers) = 3">
      <tc:year><xsl:value-of select="$numbers[3]"/></tc:year>
@@ -213,7 +242,7 @@
      <tc:day><xsl:value-of select="$numbers[1]"/></tc:day>
     </xsl:if>
    </xsl:when>
-   <xsl:when test="key('fieldsByName', local-name())/@type = 'yesno'">
+   <xsl:when test="$fieldType = 'yesno'">
     <xsl:if test=". = '1'">true</xsl:if>
    </xsl:when>
    <xsl:otherwise>
@@ -806,25 +835,29 @@
 </xsl:template>
 
 <xsl:template match="*[starts-with(local-name(), 'gcsfield')]">
-  <xsl:choose>
-   <xsl:when test="key('fieldsByName', local-name())/@type = 'single list'">
-    <xsl:element name="{concat(local-name(), 's')}">
-     <xsl:for-each select="line">
-      <xsl:element name="{local-name(..)}">
-       <tc:column>
-        <xsl:value-of select="col"/>
-       </tc:column>
-      </xsl:element>
-     </xsl:for-each>
-    </xsl:element>
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:element name="{local-name()}">
-     <xsl:value-of select="."/>
-    </xsl:element>
-   </xsl:otherwise>
-  </xsl:choose>
- </xsl:template>
+ <xsl:variable name="elemName" select="local-name()"/>
+ <!-- have to combine possibility of either local custom fields or external custom collection mode -->
+ <xsl:variable name="fieldType" select="(/collection/userCollection/fields/field[@value = $elemName] |
+                                         exsl:node-set($externalModel)/fields/field[@value = $elemName])[1]/@type"/>
+ <xsl:choose>
+  <xsl:when test="$fieldType = 'single list'">
+   <xsl:element name="{concat('tc:', $elemName, 's')}">
+    <xsl:for-each select="line">
+     <xsl:element name="{concat('tc:', $elemName)}">
+      <tc:column>
+       <xsl:value-of select="col"/>
+      </tc:column>
+     </xsl:element>
+    </xsl:for-each>
+   </xsl:element>
+  </xsl:when>
+  <xsl:otherwise>
+   <xsl:element name="{concat('tc:', $elemName)}">
+    <xsl:value-of select="."/>
+   </xsl:element>
+  </xsl:otherwise>
+ </xsl:choose>
+</xsl:template>
  
 <xsl:template name="image-element">
  <xsl:param name="elem"/>

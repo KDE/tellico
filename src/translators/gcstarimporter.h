@@ -62,7 +62,7 @@ private:
   static QString splitJoin(const QRegularExpression& rx, const QString& s);
 
   void readGCfilms(const QString& text);
-  void readGCstar(const QString& text);
+  void readGCstar(const QString& text, const QString& collType);
 
   Data::CollPtr m_coll;
   bool m_cancelled;

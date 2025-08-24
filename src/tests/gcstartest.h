@@ -41,6 +41,7 @@ private Q_SLOTS:
   void testVideo();
   void testWine();
   void testCustomFields();
+  void testCustomCollection();
 };
 
 #endif

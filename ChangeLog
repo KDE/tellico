@@ -1,3 +1,7 @@
+2025-08-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated GCstar importer to read external collection models (Bug 508664).
+
 2025-08-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Added configurable image size to OpenLibrary data source.

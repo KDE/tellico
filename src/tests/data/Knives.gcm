@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection description="Knives" name="Knives">
+  <fields lending="false" tags="false">
+    <field displayed="Short Description" group="Main" init="DefaultNewItem" label="Short Description" type="short text" value="gcsfield5" />
+    <field default="view" displayed="Picture Right" group="Pictures" init="" label="Picture Right" type="image" value="gcsfield1" />
+    <field displayed="Brand" group="Main" init="" label="Brand" type="short text" value="gcsfield11" />
+    <field displayed="Model" group="Main" init="" label="Model" type="short text" value="gcsfield12" />
+    <field displayed="Serial" group="Main" init="" label="Serial" type="short text" value="gcsfield13" />
+    <field displayed="Date of Purchase" group="Main" init="" label="Date of Purchase" type="date" value="gcsfield14" />
+    <field displayas="text" displayed="Cost of Purchase" group="Main" init="" label="Cost of Purchase" max="" min="" step="" type="number" value="gcsfield15" />
+    <field default="view" displayed="Picture Left" group="Pictures" init="" label="Picture Left" type="image" value="gcsfield6" />
+    <field default="view" displayed="Picture Top" group="Pictures" init="" label="Picture Top" type="image" value="gcsfield7" />
+    <field default="view" displayed="Picture Bottom" group="Pictures" init="" label="Picture Bottom" type="image" value="gcsfield8" />
+    <field default="view" displayed="Picture Detail 1" group="Pictures" init="" label="Picture Detail 1" type="image" value="gcsfield9" />
+    <field default="view" displayed="Picture Detail 2" group="Pictures" init="" label="Picture Detail 2" type="image" value="gcsfield10" />
+    <field default="view" displayed="Picture Detail 3" group="Pictures" init="" label="Picture Detail 3" type="image" value="gcsfield23" />
+    <field displayed="Long Description" group="Main" init="" label="Long Description" type="long text" value="gcsfield16" />
+    <field displayed="Handle Material" group="Main" init="" label="Handle Material" type="short text" value="gcsfield17" />
+    <field displayed="Blade Material" group="Main" init="" label="Blade Material" type="short text" value="gcsfield18" />
+    <field displayas="text" displayed="Weight (gr)" group="Main" init="" label="Weight (gr)" max="" min="" step="" type="number" value="gcsfield19" />
+    <field displayas="text" displayed="Overall Length (mm)" group="Main" init="" label="Overall Length (mm)" max="" min="" step="" type="number" value="gcsfield26" />
+    <field displayas="text" displayed="Blade Length  (mm)" group="Main" init="" label="Blade Length  (mm)" max="" min="" step="" type="number" value="gcsfield21" />
+    <field displayas="text" displayed="Blade Thickness (mm)" group="Main" init="" label="Blade Thickness (mm)" max="" min="" step="" type="number" value="gcsfield30" />
+    <field default="view" displayed="Picture Detail 4" group="Pictures" init="" label="Picture Detail 4" type="image" value="gcsfield24" />
+    <field displayed="Location" flat="true" group="Main" history="true" init="Deposito" label="Location" type="options" value="gcsfield25" values="EDC,Deposito,Estante" />
+    <field displayed="Sharpening Device" group="Main" init="None" label="Sharpening Device" type="options" value="gcsfield27" values="None, Lansky Deluxe 5-Stone, Work Sharp Knife &amp; Tool Sharpener" />
+    <field displayas="text" displayed="Sharpening Angle" group="Main" init="20" label="Sharpening Angle" max="30" min="17" step="1" type="number" value="gcsfield28" />
+    <field default="view" displayed="Sharpening Setup" group="Pictures" init="" label="Sharpening Setup" type="image" value="gcsfield29" />
+    <field displayed="temp_field" group="Main" init="" label="temp_field" type="short text" value="gcsfield31" />
+    <field displayed="" group="" imported="false" init="" label="" type="number" value="gcsautoid" />
+  </fields>
+  <filters>
+  </filters>
+  <groups>
+    <group id="Main" label="Main" />
+    <group id="Pictures" label="Pictures" />
+  </groups>
+  <options>
+    <defaults image="no.png" />
+    <fields cover="gcsfield1" id="gcsautoid" play="" title="gcsfield5">
+      <results></results>
+      <summary></summary>
+    </fields>
+    <values id="Folder - Frame lock" />
+    <values id="filesizeunits">
+      <value displayed="Bytes">0</value>
+      <value displayed="kB">1</value>
+      <value displayed="MB">2</value>
+      <value displayed="GB">3</value>
+      <value displayed="TB">4</value>
+      <value displayed="PB">5</value>
+      <value displayed="EB">6</value>
+      <value displayed="ZB">7</value>
+      <value displayed="YB">8</value>
+    </values>
+    <values id="gcsfield25" />
+    <values id="gcsfield4" />
+  </options>
+  <panels>
+    <panel editable="true" label="PanelForm" name="form">
+      <item type="line">
+        <item expand="true" for="gcsfield5" type="value" />
+      </item>
+      <item expand="true" type="notebook">
+        <item expand="true" title="Main" type="tab" value="bla">
+          <item type="line">
+            <item for="gcsfield1" height="150" type="value" width="150" />
+            <item cols="2" type="frame">
+              <item col="0" for="gcsfield11" row="0" type="label" />
+              <item col="1" colspan="1" expand="true" for="gcsfield11" row="0" type="value" />
+              <item col="0" for="gcsfield12" row="1" type="label" />
+              <item col="1" colspan="1" expand="true" for="gcsfield12" row="1" type="value" />
+              <item col="0" for="gcsfield13" row="2" type="label" />
+              <item col="1" colspan="1" expand="true" for="gcsfield13" row="2" type="value" />
+              <item col="0" for="gcsfield14" row="3" type="label" />
+              <item col="1" colspan="1" expand="true" for="gcsfield14" row="3" type="value" />
+              <item col="0" for="gcsfield15" row="4" type="label" />
+              <item col="1" colspan="1" expand="true" for="gcsfield15" row="4" type="value" />
+            </item>
+          </item>
+          <item cols="2" rows="11" type="table">
+            <item col="0" for="gcsfield16" row="0" type="label" />
+            <item col="1" colspan="3" expand="true" for="gcsfield16" row="0" type="value" />
+            <item col="0" for="gcsfield17" row="1" type="label" />
+            <item col="1" colspan="1" expand="default" for="gcsfield17" row="1" type="value" />
+            <item col="0" for="gcsfield18" row="2" type="label" />
+            <item col="1" colspan="1" expand="default" for="gcsfield18" row="2" type="value" />
+            <item col="0" for="gcsfield19" row="3" type="label" />
+            <item col="1" colspan="1" expand="default" for="gcsfield19" row="3" type="value" />
+            <item col="0" for="gcsfield26" row="4" type="label" />
+            <item col="1" colspan="1" expand="default" for="gcsfield26" row="4" type="value" />
+            <item col="0" for="gcsfield21" row="5" type="label" />
+            <item col="1" colspan="1" expand="default" for="gcsfield21" row="5" type="value" />
+            <item col="0" for="gcsfield30" row="6" type="label" />
+            <item col="1" colspan="1" expand="default" for="gcsfield30" row="6" type="value" />
+            <item col="0" for="gcsfield25" row="7" type="label" />
+            <item col="1" colspan="1" expand="default" for="gcsfield25" row="7" type="value" />
+            <item col="0" for="gcsfield27" row="8" type="label" />
+            <item col="1" colspan="1" expand="default" for="gcsfield27" row="8" type="value" />
+            <item col="0" for="gcsfield28" row="9" type="label" />
+            <item col="1" colspan="1" expand="default" for="gcsfield28" row="9" type="value" />
+            <item col="0" for="gcsfield31" row="10" type="label" />
+            <item col="1" colspan="1" expand="default" for="gcsfield31" row="10" type="value" />
+          </item>
+        </item>
+        <item expand="true" title="Pictures" type="tab" value="bla">
+          <item cols="4" expand="true" rows="8" type="table">
+            <item col="0" for="gcsfield6" row="0" type="label" />
+            <item col="1" colspan="3" expand="true" for="gcsfield6" row="0" type="value" />
+            <item col="0" for="gcsfield7" row="1" type="label" />
+            <item col="1" colspan="3" expand="true" for="gcsfield7" row="1" type="value" />
+            <item col="0" for="gcsfield8" row="2" type="label" />
+            <item col="1" colspan="3" expand="true" for="gcsfield8" row="2" type="value" />
+            <item col="0" for="gcsfield9" row="3" type="label" />
+            <item col="1" colspan="3" expand="true" for="gcsfield9" row="3" type="value" />
+            <item col="0" for="gcsfield10" row="4" type="label" />
+            <item col="1" colspan="3" expand="true" for="gcsfield10" row="4" type="value" />
+            <item col="0" for="gcsfield23" row="5" type="label" />
+            <item col="1" colspan="3" expand="true" for="gcsfield23" row="5" type="value" />
+            <item col="0" for="gcsfield24" row="6" type="label" />
+            <item col="1" colspan="3" expand="true" for="gcsfield24" row="6" type="value" />
+            <item col="0" for="gcsfield29" row="7" type="label" />
+            <item col="1" colspan="3" expand="true" for="gcsfield29" row="7" type="value" />
+          </item>
+        </item>
+      </item>
+      <item type="line">
+        <item expand="true" for="deleteButton" type="special" />
+      </item>
+    </panel>
+    <panel editable="false" label="PanelReadOnly" name="readonly">
+      <item type="line">
+        <item col="0" colspan="3" expand="true" for="gcsfield5" row="0" style="header" type="value" />
+      </item>
+      <item type="line">
+        <item style="page" type="box" width="150">
+          <item for="gcsfield1" type="value" width="140" />
+        </item>
+        <item expand="true" type="box">
+          <item cols="2" expand="true" type="table">
+            <item col="0" for="gcsfield11" row="0" type="label" />
+            <item col="1" colspan="1" expand="true" flat="false" for="gcsfield11" row="0" type="value" />
+            <item col="0" for="gcsfield12" row="1" type="label" />
+            <item col="1" colspan="1" expand="true" flat="false" for="gcsfield12" row="1" type="value" />
+            <item col="0" for="gcsfield13" row="2" type="label" />
+            <item col="1" colspan="1" expand="true" flat="false" for="gcsfield13" row="2" type="value" />
+            <item col="0" for="gcsfield14" row="3" type="label" />
+            <item col="1" colspan="1" expand="true" flat="false" for="gcsfield14" row="3" type="value" />
+            <item col="0" for="gcsfield15" row="4" type="label" />
+            <item col="1" colspan="1" expand="true" flat="false" for="gcsfield15" row="4" type="value" />
+          </item>
+        </item>
+      </item>
+      <item cols="2" expand="true" rows="11" type="table">
+        <item col="0" for="gcsfield16" row="0" type="label" />
+        <item col="1" colspan="1" expand="true" flat="false" for="gcsfield16" row="0" type="value" />
+        <item col="0" for="gcsfield17" row="1" type="label" />
+        <item col="1" colspan="1" expand="true" flat="false" for="gcsfield17" row="1" type="value" />
+        <item col="0" for="gcsfield18" row="2" type="label" />
+        <item col="1" colspan="1" expand="true" flat="false" for="gcsfield18" row="2" type="value" />
+        <item col="0" for="gcsfield19" row="3" type="label" />
+        <item col="1" colspan="1" expand="true" flat="false" for="gcsfield19" row="3" type="value" />
+        <item col="0" for="gcsfield26" row="4" type="label" />
+        <item col="1" colspan="1" expand="true" flat="false" for="gcsfield26" row="4" type="value" />
+        <item col="0" for="gcsfield21" row="5" type="label" />
+        <item col="1" colspan="1" expand="true" flat="false" for="gcsfield21" row="5" type="value" />
+        <item col="0" for="gcsfield30" row="6" type="label" />
+        <item col="1" colspan="1" expand="true" flat="false" for="gcsfield30" row="6" type="value" />
+        <item col="0" for="gcsfield25" row="7" type="label" />
+        <item col="1" colspan="1" expand="true" flat="false" for="gcsfield25" row="7" type="value" />
+        <item col="0" for="gcsfield27" row="8" type="label" />
+        <item col="1" colspan="1" expand="true" flat="false" for="gcsfield27" row="8" type="value" />
+        <item col="0" for="gcsfield28" row="9" type="label" />
+        <item col="1" colspan="1" expand="true" flat="false" for="gcsfield28" row="9" type="value" />
+        <item col="0" for="gcsfield31" row="10" type="label" />
+        <item col="1" colspan="1" expand="true" flat="false" for="gcsfield31" row="10" type="value" />
+      </item>
+      <item title="Pictures" type="expander">
+        <item cols="2" expand="true" rows="8" type="table">
+          <item col="0" for="gcsfield6" row="0" type="label" />
+          <item col="1" colspan="1" expand="true" flat="false" for="gcsfield6" row="0" type="value" />
+          <item col="0" for="gcsfield7" row="1" type="label" />
+          <item col="1" colspan="1" expand="true" flat="false" for="gcsfield7" row="1" type="value" />
+          <item col="0" for="gcsfield8" row="2" type="label" />
+          <item col="1" colspan="1" expand="true" flat="false" for="gcsfield8" row="2" type="value" />
+          <item col="0" for="gcsfield9" row="3" type="label" />
+          <item col="1" colspan="1" expand="true" flat="false" for="gcsfield9" row="3" type="value" />
+          <item col="0" for="gcsfield10" row="4" type="label" />
+          <item col="1" colspan="1" expand="true" flat="false" for="gcsfield10" row="4" type="value" />
+          <item col="0" for="gcsfield23" row="5" type="label" />
+          <item col="1" colspan="1" expand="true" flat="false" for="gcsfield23" row="5" type="value" />
+          <item col="0" for="gcsfield24" row="6" type="label" />
+          <item col="1" colspan="1" expand="true" flat="false" for="gcsfield24" row="6" type="value" />
+          <item col="0" for="gcsfield29" row="7" type="label" />
+          <item col="1" colspan="1" expand="true" flat="false" for="gcsfield29" row="7" type="value" />
+        </item>
+      </item>
+    </panel>
+  </panels>
+  <random></random>
+</collection>
