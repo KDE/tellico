@@ -29,6 +29,7 @@
 #include "../datavectors.h"
 
 class QRegularExpression;
+class QCheckBox;
 
 namespace Tellico {
   namespace Import {
@@ -45,13 +46,11 @@ public:
   GCstarImporter(const QUrl& url);
   GCstarImporter(const QString& text);
 
-  /**
-   */
   virtual Data::CollPtr collection() override;
-  /**
-   */
-  virtual QWidget* widget(QWidget*) override { return nullptr; }
   virtual bool canImport(int type) const override;
+  void setImagePathsAsLinks(bool imagePathsAsLinks);
+
+  virtual QWidget* widget(QWidget*) override;
 
 public Q_SLOTS:
   void slotCancel() override;
@@ -64,6 +63,10 @@ private:
 
   Data::CollPtr m_coll;
   bool m_cancelled;
+  bool m_imageLinksOnly;
+
+  QWidget* m_widget;
+  QCheckBox* m_cbImageLink;
 };
 
   } // end namespace

@@ -1,6 +1,7 @@
 2025-08-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated GCstar importer to read external collection models (Bug 508664).
+	* Added option for image links to GCstar importer (Bug 508665).
 
 2025-08-21  Robby Stephenson  <robby@periapsis.org>
 

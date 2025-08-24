@@ -612,6 +612,7 @@ void GCstarTest::testCustomFields() {
 void GCstarTest::testCustomCollection() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-custom.gcs"));
   Tellico::Import::GCstarImporter importer(url);
+  importer.setImagePathsAsLinks(true);
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
@@ -656,6 +657,8 @@ void GCstarTest::testCustomCollection() {
   QCOMPARE(entry->field("gcsfield11"), QStringLiteral("Dark Hollow"));
   QCOMPARE(entry->field("gcsfield14"), QStringLiteral("2025-06-01"));
   QCOMPARE(entry->field("gcsfield16"), QStringLiteral("DARK HOLLOW CUTLERY D2 STEEL WOOD HANDLE FIXED BLADE KNIFE KNIFE"));
-  // image field
-  QCOMPARE(entry->field("gcsfield1"), QStringLiteral("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  // image field, with relative link
+  QUrl imageLink = url;
+  imageLink = imageLink.resolved(QUrl(QStringLiteral("collectorz/image.png")));
+  QCOMPARE(entry->field("gcsfield1"), imageLink.url());
 }

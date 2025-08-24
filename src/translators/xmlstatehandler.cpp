@@ -232,7 +232,10 @@ bool CollectionHandler::end(TC_STRINGVIEW, TC_STRINGVIEW) {
               }
             }
           } else if(u.isLocalFile() || !u.host().isEmpty()) {
-            const QString result = ImageFactory::addImage(u, !d->showImageLoadErrors || imageWarnings >= maxImageWarnings /* quiet */);
+            const QString result = ImageFactory::addImage(u,
+                                                          !d->showImageLoadErrors || imageWarnings >= maxImageWarnings /* quiet */,
+                                                          QUrl()/* referrer */,
+                                                          d->imagesPathsAsLinks);
             if(result.isEmpty()) {
               // clear value for the field in this case
               value.clear();

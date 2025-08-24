@@ -47,6 +47,7 @@ public:
 
   void setLoadImages(bool loadImages);
   void setShowImageLoadErrors(bool showImageErrors);
+  void setImagePathsAsLinks(bool imagesPathsAsLinks);
 
 private:
   void handleStart();
