@@ -150,7 +150,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
   job->setReferrer(refer_);
 
   if(!job->exec()) {
-    myDebug() << "ImageJob failed to exec:" << job->errorString();
+    myWarning() << job->errorString();
     // ERR_UNKNOWN is used when the returned image is truly null
     // rather than network error or some such
     if(job->error() == KIO::ERR_UNKNOWN) {
@@ -161,7 +161,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
 
   const Data::Image& img = job->image();
   if(img.isNull()) {
-    myDebug() << "Null image for" << url_.toDisplayString();
+    myDebug() << "Null image for" << url_.toDisplayString(QUrl::PreferLocalFile | QUrl::NormalizePathSegments);
     return Data::Image::null;
   }
 
