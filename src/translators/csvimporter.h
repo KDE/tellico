@@ -115,6 +115,7 @@ private:
   QWidget* m_widget;
   GUI::CollectionTypeCombo* m_comboColl;
   QCheckBox* m_checkFirstRowHeader;
+  QCheckBox* m_checkImageLinks;
   QRadioButton* m_radioComma;
   QRadioButton* m_radioSemicolon;
   QRadioButton* m_radioTab;
@@ -128,6 +129,7 @@ private:
   QPushButton* m_setColumnBtn;
   bool m_hasAssignedFields;
   bool m_isLibraryThing;
+  bool m_imageLinksOnly;
 
   CSVParser* m_parser;
 };

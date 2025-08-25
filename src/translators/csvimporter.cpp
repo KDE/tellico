@@ -79,6 +79,7 @@ CSVImporter::CSVImporter(const QUrl& url_) : Tellico::Import::TextImporter(url_)
     m_setColumnBtn(nullptr),
     m_hasAssignedFields(false),
     m_isLibraryThing(false),
+    m_imageLinksOnly(false),
     m_parser(new CSVParser(text())) {
   m_parser->setDelimiter(m_delimiter);
 }
@@ -179,7 +180,10 @@ Tellico::Data::CollPtr CSVImporter::collection() {
         }
         // TODO: data: urls?
         if(u.isValid() && (u.isLocalFile() || !u.host().isEmpty())) {
-          value = ImageFactory::addImage(u, options() ^ ImportShowImageErrors /* quiet */);
+          value = ImageFactory::addImage(u,
+                                         options() ^ ImportShowImageErrors /* quiet */,
+                                         QUrl() /* referrer */,
+                                         m_imageLinksOnly);
         }
       }
       bool success = entry->setField(currentFieldName, value);
@@ -215,6 +219,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
     config.writeEntry("ColumnDelimiter", m_colDelimiter);
     config.writeEntry("RowDelimiter", m_rowDelimiter);
     config.writeEntry("First Row Titles", m_firstRowHeader);
+    config.writeEntry("Image Links", m_imageLinksOnly);
   }
 
   return m_coll;
@@ -241,12 +246,22 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_comboColl->setWhatsThis(i18n("Select the type of collection being imported."));
   void (QComboBox::* activatedInt)(int) = &QComboBox::activated;
   connect(m_comboColl, activatedInt, this, &CSVImporter::slotTypeChanged);
+  hlay->addStretch(10);
 
+  hlay = new QHBoxLayout();
+  vlay->addLayout(hlay);
   m_checkFirstRowHeader = new QCheckBox(i18n("&First row contains field titles"), groupBox);
   m_checkFirstRowHeader->setWhatsThis(i18n("If checked, the first row is used as field titles."));
   connect(m_checkFirstRowHeader, &QAbstractButton::toggled, this, &CSVImporter::slotFirstRowHeader);
   hlay->addWidget(m_checkFirstRowHeader);
 
+  m_checkImageLinks = new QCheckBox(i18n("Import images as links only"), groupBox);
+  m_checkImageLinks->setWhatsThis(i18n("If checked, the image paths will be imported as links "
+                                       "instead of being managed by Tellico directly."));
+  connect(m_checkImageLinks, &QCheckBox::toggled, m_checkImageLinks, [this](bool checked){
+    m_imageLinksOnly = checked;
+  });
+  hlay->addWidget(m_checkImageLinks);
   hlay->addStretch(10);
 
   // use a constant width for the edit boxes. They're 1 or 2 characters long.
@@ -390,8 +405,10 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_colDelimiter = config.readEntry("ColumnDelimiter", m_colDelimiter);
   m_rowDelimiter = config.readEntry("RowDelimiter", m_rowDelimiter);
   m_firstRowHeader = config.readEntry("First Row Titles", m_firstRowHeader);
+  m_imageLinksOnly = config.readEntry("Image Links", m_imageLinksOnly);
 
   m_checkFirstRowHeader->setChecked(m_firstRowHeader);
+  m_checkImageLinks->setChecked(m_imageLinksOnly);
   if(m_delimiter == QLatin1String(",")) {
     m_radioComma->setChecked(true);
   } else if(m_delimiter == QLatin1String(";")) {
