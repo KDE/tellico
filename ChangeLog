@@ -3,6 +3,7 @@
 	* Updated GCstar importer to read external collection models (Bug 508664).
 	* Added option for image links to GCstar importer (Bug 508665).
 	* Updated CSV importer to load images.
+	* Added option for image links to CSV importer (Bug 508666).
 
 2025-08-21  Robby Stephenson  <robby@periapsis.org>
 
