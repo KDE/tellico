@@ -30,6 +30,7 @@
 #include "../collectionfactory.h"
 #include "../collections/bookcollection.h"
 #include "../collections/musiccollection.h"
+#include "../images/imagefactory.h"
 
 #include <KLocalizedString>
 
@@ -38,11 +39,12 @@
 
 QTEST_MAIN( CsvTest )
 
-#define QL1(x) QStringLiteral(x)
+#define QSL(x) QStringLiteral(x)
 
 void CsvTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   KLocalizedString::setApplicationDomain("tellico");
+  Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerAlbum(Tellico::Data::Collection::Album, "album");
 }
@@ -69,16 +71,16 @@ void CsvTest::testTokens_data() {
   QTest::addColumn<QStringList>("tokens");
 
   QTest::newRow("basic") << "robby,stephenson is cool\t,," << ","
-    << (QStringList() << QL1("robby") << QL1("stephenson is cool") << QString() << QString());
+    << (QStringList() << QSL("robby") << QSL("stephenson is cool") << QString() << QString());
   QTest::newRow("space") << "robby,stephenson is cool\t,," << " "
-    << (QStringList() << QL1("robby,stephenson") << QL1("is") << QL1("cool\t,,"));
+    << (QStringList() << QSL("robby,stephenson") << QSL("is") << QSL("cool\t,,"));
   QTest::newRow("tab") << "robby\t\tstephenson" << "\t"
-    << (QStringList() << QL1("robby") << QString() << QL1("stephenson"));
+    << (QStringList() << QSL("robby") << QString() << QSL("stephenson"));
   // quotes get swallowed
   QTest::newRow("quotes") << "robby,\"stephenson,is,cool\"" << ","
-    << (QStringList() << QL1("robby") << QL1("stephenson,is,cool"));
+    << (QStringList() << QSL("robby") << QSL("stephenson,is,cool"));
   QTest::newRow("newline") << "robby,\"stephenson\n,is,cool\"" << ","
-    << (QStringList() << QL1("robby") << QL1("stephenson\n,is,cool"));
+    << (QStringList() << QSL("robby") << QSL("stephenson\n,is,cool"));
 }
 
 void CsvTest::testEntry() {
@@ -105,8 +107,12 @@ void CsvTest::testImportBook() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-book.csv"));
   Tellico::Import::CSVImporter importer(url);
   importer.setCollectionType(Tellico::Data::Collection::Book);
-  importer.setImportColumns({0, 1, 3, 4},
-                            {QStringLiteral("title"), QStringLiteral("author"), QStringLiteral("isbn"), QStringLiteral("binding")});
+  importer.setImportColumns({0, 1, 3, 4, 5},
+                            {QSL("title"),
+                             QSL("author"),
+                             QSL("isbn"),
+                             QSL("binding"),
+                             QSL("cover")});
   importer.slotFirstRowHeader(true);
   Tellico::Data::CollPtr coll = importer.collection();
   QVERIFY(coll);
@@ -120,6 +126,7 @@ void CsvTest::testImportBook() {
   QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Penman, Sharon"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0140270760"));
   QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("square"));
+  QCOMPARE(entry->field(QStringLiteral("cover")), QStringLiteral("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
 }
 
 void CsvTest::testBug386483() {

@@ -31,6 +31,7 @@
 #include "../collectionfactory.h"
 #include "../gui/collectiontypecombo.h"
 #include "../utils/stringset.h"
+#include "../images/imagefactory.h"
 
 #include <KComboBox>
 #include <KSharedConfig>
@@ -163,6 +164,23 @@ Tellico::Data::CollPtr CSVImporter::collection() {
         } else if(currentFieldName == QLatin1String("cdate")) {
           // only want date, not time. 10 characters since it's zero-padded
           value.truncate(10);
+        }
+      }
+      if(fieldType == Data::Field::Image) {
+        // try to import as a absolute or relative link
+        // follow same logic as in CollectionHandler::end(..)
+        QUrl u(value);
+        if(u.isRelative()) {
+          if(url().isEmpty()) {
+            // assume a local file, as fromUserInput() would do
+            u = QUrl::fromLocalFile(value);
+          } else {
+            u = url().resolved(u);
+          }
+        }
+        // TODO: data: urls?
+        if(u.isValid() && (u.isLocalFile() || !u.host().isEmpty())) {
+          value = ImageFactory::addImage(u, options() ^ ImportShowImageErrors /* quiet */);
         }
       }
       bool success = entry->setField(currentFieldName, value);
