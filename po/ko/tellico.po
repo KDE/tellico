@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-22 02:37+0000\n"
+"POT-Creation-Date: 2025-08-25 02:39+0000\n"
 "PO-Revision-Date: 2025-04-07 23:49+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -741,7 +741,7 @@ msgstr "BibTeX 키"
 #: src/fetch/vgcollectfetcher.cpp:337 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:331 src/field.cpp:336
 #: src/translators/filereadervideo.cpp:282
-#: src/translators/gcstarimporter.cpp:89
+#: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
 msgstr "일반"
@@ -884,7 +884,7 @@ msgstr "키워드"
 #: src/fetch/opdsfetcher.cpp:440 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:81
 #: src/translators/filereadervideo.cpp:128
-#: src/translators/gcstarimporter.cpp:88
+#: src/translators/gcstarimporter.cpp:117
 #, kde-format
 msgid "URL"
 msgstr "URL"
@@ -902,7 +902,7 @@ msgid "Notes"
 msgstr "메모"
 
 #: src/collections/bibtexcollection.cpp:487
-#: src/translators/xmlstatehandler.cpp:324
+#: src/translators/xmlstatehandler.cpp:327
 #, kde-format
 msgid "Unknown"
 msgstr "알 수 없음"
@@ -1644,7 +1644,7 @@ msgstr "매체"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:513
 #: src/fetch/itunesfetcher.cpp:322 src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:435
+#: src/translators/xmlstatehandler.cpp:438
 #, kde-format
 msgid "Artist"
 msgstr "작곡가"
@@ -1667,14 +1667,14 @@ msgstr "트랙"
 #: src/fetch/discogsfetcher.cpp:512 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:321 src/fetchdialog.cpp:248 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:434
+#: src/translators/xmlstatehandler.cpp:437
 #, kde-format
 msgid "Title"
 msgstr "제목"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:514
 #: src/fetch/itunesfetcher.cpp:323 src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:436
+#: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Length"
 msgstr "길이"
@@ -1864,13 +1864,13 @@ msgid "Cast"
 msgstr "출연진"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:438
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Actor/Actress"
 msgstr "배우"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:439
+#: src/translators/xmlstatehandler.cpp:442
 #, kde-format
 msgid "Role"
 msgstr "배역"
@@ -2541,8 +2541,8 @@ msgstr "템플릿 옵션"
 
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:439 src/fetch/execexternalfetcher.cpp:363
-#: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:218
+#: src/fetch/gcstarpluginfetcher.cpp:414 src/fetch/multifetcher.cpp:229
+#: src/translators/csvimporter.cpp:241
 #: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Collection &type:"
@@ -3882,27 +3882,27 @@ msgstr "Filmaster 링크"
 msgid "Gaming History Link"
 msgstr "Gaming History 링크"
 
-#: src/fetch/gcstarpluginfetcher.cpp:400
+#: src/fetch/gcstarpluginfetcher.cpp:399
 #, kde-format
 msgid "GCstar Plugin"
 msgstr "GCstar 플러그인"
 
-#: src/fetch/gcstarpluginfetcher.cpp:422
+#: src/fetch/gcstarpluginfetcher.cpp:421
 #, kde-format
 msgid "Set the collection type of the data returned from the plugin."
 msgstr "플러그인에서 반환되는 데이터의 수집 형식을 설정합니다."
 
-#: src/fetch/gcstarpluginfetcher.cpp:427
+#: src/fetch/gcstarpluginfetcher.cpp:426
 #, kde-format
 msgid "&Plugin: "
 msgstr "플러그인(&P): "
 
-#: src/fetch/gcstarpluginfetcher.cpp:433
+#: src/fetch/gcstarpluginfetcher.cpp:432
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
 msgstr "데이터 원본에 사용되는 GCstar 플러그인을 선택합니다."
 
-#: src/fetch/gcstarpluginfetcher.cpp:438
+#: src/fetch/gcstarpluginfetcher.cpp:437
 #, kde-format
 msgid "Author: "
 msgstr "저자: "
@@ -6305,7 +6305,7 @@ msgid "(%1 selected)"
 msgstr "(%1개 선택됨)"
 
 #: src/mainwindow.cpp:1858 src/translators/boardgamegeekimporter.cpp:98
-#: src/translators/gcstarimporter.cpp:252
+#: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
 #, kde-format
@@ -6768,7 +6768,7 @@ msgstr "소유한 항목만 가져오기"
 msgid "User ID:"
 msgstr "사용자 ID:"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:213
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:236
 #, kde-format
 msgid "CSV Options"
 msgstr "CSV 옵션"
@@ -6788,7 +6788,7 @@ msgstr "이 옵션을 선택하면 필드 제목과 함께 열 머리글이 추�
 msgid "Delimiter"
 msgstr "구분 기호"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:241
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:274
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6801,7 +6801,7 @@ msgstr ""
 msgid "Comma"
 msgstr "쉼표"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:248
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:281
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "쉼표를 구분 기호로 사용합니다."
@@ -6811,7 +6811,7 @@ msgstr "쉼표를 구분 기호로 사용합니다."
 msgid "Semicolon"
 msgstr "쌍반점"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:253
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:286
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "쌍반점을 구분 기호로 사용합니다."
@@ -6821,7 +6821,7 @@ msgstr "쌍반점을 구분 기호로 사용합니다."
 msgid "Tab"
 msgstr "탭"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:258
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:291
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "탭을 구분 기호로 사용합니다."
@@ -6832,84 +6832,98 @@ msgstr "탭을 구분 기호로 사용합니다."
 msgid "Other"
 msgstr "기타"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:263
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "사용자 정의 문자열을 구분 기호로 사용합니다."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:270
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:303
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "쌍점과 같은 사용자 정의 문자열을 구분 기호로 사용할 수 있습니다."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:294
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:327
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "테이블 열 구분 기호:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:293
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:326
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr "열 구분 기호는 <i>테이블</i> 필드의 각 열에 있는 값을 구분합니다."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:305
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:338
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "테이블 행 구분 기호:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:304
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:337
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "행 구분 기호는 <i>테이블</i> 필드의 각 행에서 값을 구분합니다."
 
-#: src/translators/csvimporter.cpp:223
+#: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:180
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "가져올 소장품 형식을 선택합니다."
 
-#: src/translators/csvimporter.cpp:227
+#: src/translators/csvimporter.cpp:253
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "첫 번째 행에 필드 제목 포함(&F)"
 
-#: src/translators/csvimporter.cpp:228
+#: src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr "이 옵션을 선택하면 첫 번째 행이 필드 제목으로 사용됩니다."
 
-#: src/translators/csvimporter.cpp:240
+#: src/translators/csvimporter.cpp:258 src/translators/gcstarimporter.cpp:341
+#, fuzzy, kde-format
+#| msgid "Import owned items only"
+msgid "Import images as links only"
+msgstr "소유한 항목만 가져오기"
+
+#: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:342
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
+msgid ""
+"If checked, the image paths will be imported as links instead of being "
+"managed by Tellico directly."
+msgstr "이 옵션을 선택하면 필드 이름을 표 머리글로 인쇄합니다."
+
+#: src/translators/csvimporter.cpp:273
 #, kde-format
 msgid "Delimiter:"
 msgstr "구분 기호:"
 
-#: src/translators/csvimporter.cpp:246
+#: src/translators/csvimporter.cpp:279
 #, kde-format
 msgid "&Comma"
 msgstr "쉼표(&C)"
 
-#: src/translators/csvimporter.cpp:252
+#: src/translators/csvimporter.cpp:285
 #, kde-format
 msgid "&Semicolon"
 msgstr "쌍반점(&S)"
 
-#: src/translators/csvimporter.cpp:257
+#: src/translators/csvimporter.cpp:290
 #, kde-format
 msgid "Ta&b"
 msgstr "탭(&B)"
 
-#: src/translators/csvimporter.cpp:262
+#: src/translators/csvimporter.cpp:295
 #, kde-format
 msgid "Ot&her:"
 msgstr "기타(&H):"
 
-#: src/translators/csvimporter.cpp:324
+#: src/translators/csvimporter.cpp:357
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "이 표에는 CSV 파일의 처음 5줄까지 표시됩니다."
 
-#: src/translators/csvimporter.cpp:331
+#: src/translators/csvimporter.cpp:364
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -6919,34 +6933,34 @@ msgstr ""
 "<qt>열을 선택하고 필드를 선택한 다음 <i>필드 할당</i> 버튼을 클릭하여 소장품"
 "의 필드에 해당하는 각 열을 설정하십시오.</qt>"
 
-#: src/translators/csvimporter.cpp:333
+#: src/translators/csvimporter.cpp:366
 #, kde-format
 msgid "Co&lumn:"
 msgstr "열(&L):"
 
-#: src/translators/csvimporter.cpp:346
+#: src/translators/csvimporter.cpp:379
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "이 열의 데이터 필드(&D):"
 
-#: src/translators/csvimporter.cpp:360
+#: src/translators/csvimporter.cpp:393
 #, kde-format
 msgid "&Assign Field"
 msgstr "필드 할당(&A)"
 
-#: src/translators/csvimporter.cpp:399
+#: src/translators/csvimporter.cpp:434
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
 "be imported."
 msgstr "필드에 열을 하나 이상 할당해야 합니다. 할당된 열만 가져옵니다."
 
-#: src/translators/csvimporter.cpp:596
+#: src/translators/csvimporter.cpp:631
 #, kde-format
 msgid "Review"
 msgstr "리뷰"
 
-#: src/translators/csvimporter.cpp:689
+#: src/translators/csvimporter.cpp:724
 #, kde-format
 msgid "<New Field>"
 msgstr "<새 필드>"
@@ -7049,11 +7063,23 @@ msgid ""
 msgstr ""
 "기본 캐시 폴더에 포함된 모든 CDDB 캐시 파일에서 데이터를 다시 읽습니다."
 
-#: src/translators/gcstarimporter.cpp:120
-#: src/translators/gcstarimporter.cpp:259
+#: src/translators/gcstarimporter.cpp:149
+#: src/translators/gcstarimporter.cpp:308
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>파일이 올바른 GCstar 데이터 파일이 아닙니다.</qt>"
+
+#: src/translators/gcstarimporter.cpp:295
+#, fuzzy, kde-format
+#| msgid "The cover image could not be loaded."
+msgid "The GCstar model file could not be found."
+msgstr "표지 이미지를 불러올 수 없습니다."
+
+#: src/translators/gcstarimporter.cpp:338
+#, fuzzy, kde-format
+#| msgid "Color Options"
+msgid "GCstar Options"
+msgstr "색상 옵션"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -7188,12 +7214,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:179
+#: src/translators/tellicoimporter.cpp:180
 #, kde-format
 msgid "The file is empty."
 msgstr "파일이 비어 있습니다."
 
-#: src/translators/tellicoimporter.cpp:192
+#: src/translators/tellicoimporter.cpp:193
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "파일에 수집 데이터가 없습니다."

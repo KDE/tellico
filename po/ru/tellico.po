@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-22 02:37+0000\n"
+"POT-Creation-Date: 2025-08-25 02:39+0000\n"
 "PO-Revision-Date: 2022-03-21 17:12+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -772,7 +772,7 @@ msgstr "Ключ BibTeX"
 #: src/fetch/vgcollectfetcher.cpp:337 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:331 src/field.cpp:336
 #: src/translators/filereadervideo.cpp:282
-#: src/translators/gcstarimporter.cpp:89
+#: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
 msgstr "Общее"
@@ -915,7 +915,7 @@ msgstr "Ключевые слова"
 #: src/fetch/opdsfetcher.cpp:440 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:81
 #: src/translators/filereadervideo.cpp:128
-#: src/translators/gcstarimporter.cpp:88
+#: src/translators/gcstarimporter.cpp:117
 #, kde-format
 msgid "URL"
 msgstr "URL-адрес"
@@ -933,7 +933,7 @@ msgid "Notes"
 msgstr "Заметки"
 
 #: src/collections/bibtexcollection.cpp:487
-#: src/translators/xmlstatehandler.cpp:324
+#: src/translators/xmlstatehandler.cpp:327
 #, kde-format
 msgid "Unknown"
 msgstr "Неизвестно"
@@ -1690,7 +1690,7 @@ msgstr "Носитель"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:513
 #: src/fetch/itunesfetcher.cpp:322 src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:435
+#: src/translators/xmlstatehandler.cpp:438
 #, kde-format
 msgid "Artist"
 msgstr "Исполнитель"
@@ -1713,14 +1713,14 @@ msgstr "Дорожки"
 #: src/fetch/discogsfetcher.cpp:512 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:321 src/fetchdialog.cpp:248 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:434
+#: src/translators/xmlstatehandler.cpp:437
 #, kde-format
 msgid "Title"
 msgstr "Название"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:514
 #: src/fetch/itunesfetcher.cpp:323 src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:436
+#: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Length"
 msgstr "Длительность"
@@ -1910,13 +1910,13 @@ msgid "Cast"
 msgstr "В ролях"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:438
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Actor/Actress"
 msgstr "Актёр/актриса"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:439
+#: src/translators/xmlstatehandler.cpp:442
 #, kde-format
 msgid "Role"
 msgstr "Роль"
@@ -2599,8 +2599,8 @@ msgstr "Параметры шаблонов"
 
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:439 src/fetch/execexternalfetcher.cpp:363
-#: src/fetch/gcstarpluginfetcher.cpp:415 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:218
+#: src/fetch/gcstarpluginfetcher.cpp:414 src/fetch/multifetcher.cpp:229
+#: src/translators/csvimporter.cpp:241
 #: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Collection &type:"
@@ -3960,27 +3960,27 @@ msgstr "Ссылка Filmaster"
 msgid "Gaming History Link"
 msgstr "Ссылка Gaming History"
 
-#: src/fetch/gcstarpluginfetcher.cpp:400
+#: src/fetch/gcstarpluginfetcher.cpp:399
 #, kde-format
 msgid "GCstar Plugin"
 msgstr "Модуль GCstar"
 
-#: src/fetch/gcstarpluginfetcher.cpp:422
+#: src/fetch/gcstarpluginfetcher.cpp:421
 #, kde-format
 msgid "Set the collection type of the data returned from the plugin."
 msgstr "Выберите тип коллекции, данные для которой предоставляет модуль."
 
-#: src/fetch/gcstarpluginfetcher.cpp:427
+#: src/fetch/gcstarpluginfetcher.cpp:426
 #, kde-format
 msgid "&Plugin: "
 msgstr "&Модуль: "
 
-#: src/fetch/gcstarpluginfetcher.cpp:433
+#: src/fetch/gcstarpluginfetcher.cpp:432
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
 msgstr "Выберите модуль GCStar, используемый в качестве источника данных."
 
-#: src/fetch/gcstarpluginfetcher.cpp:438
+#: src/fetch/gcstarpluginfetcher.cpp:437
 #, kde-format
 msgid "Author: "
 msgstr "Автор: "
@@ -6423,7 +6423,7 @@ msgid "(%1 selected)"
 msgstr "(%1 выделено)"
 
 #: src/mainwindow.cpp:1858 src/translators/boardgamegeekimporter.cpp:98
-#: src/translators/gcstarimporter.cpp:252
+#: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
 #, kde-format
@@ -6893,7 +6893,7 @@ msgstr "Импорт только принадлежащих пользоват�
 msgid "User ID:"
 msgstr "Идентификатор пользователя:"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:213
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:236
 #, kde-format
 msgid "CSV Options"
 msgstr "Параметры CSV"
@@ -6914,7 +6914,7 @@ msgstr ""
 msgid "Delimiter"
 msgstr "Разделитель"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:241
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:274
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6928,7 +6928,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Запятая"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:248
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:281
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "Использовать в качестве разделителя запятую."
@@ -6938,7 +6938,7 @@ msgstr "Использовать в качестве разделителя за
 msgid "Semicolon"
 msgstr "Точка с запятой"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:253
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:286
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "Использовать в качестве разделителя точку с запятой."
@@ -6948,7 +6948,7 @@ msgstr "Использовать в качестве разделителя то
 msgid "Tab"
 msgstr "Табуляция"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:258
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:291
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "Использовать в качестве разделителя табуляцию."
@@ -6959,88 +6959,104 @@ msgstr "Использовать в качестве разделителя та
 msgid "Other"
 msgstr "Другой"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:263
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "Использовать в качестве разделителя заданные символы."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:270
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:303
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 "В качестве разделителя возможно использовать другой разделитель (например, "
 "двоеточие)."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:294
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:327
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "Разделитель столбцов:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:293
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:326
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
 "Разделитель столбцов отделяет значения в каждом столбце <i>Таблицы</i>."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:305
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:338
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "Разделитель строк:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:304
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:337
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "Разделитель строк отделяет значения в каждой строке <i>Таблицы</i>."
 
-#: src/translators/csvimporter.cpp:223
+#: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:180
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Выберите тип импортируемой коллекции."
 
-#: src/translators/csvimporter.cpp:227
+#: src/translators/csvimporter.cpp:253
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "П&ервая строка содержит заголовки полей"
 
-#: src/translators/csvimporter.cpp:228
+#: src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr ""
 "Если отмечено, первая строка будет использоваться для заголовков полей."
 
-#: src/translators/csvimporter.cpp:240
+#: src/translators/csvimporter.cpp:258 src/translators/gcstarimporter.cpp:341
+#, fuzzy, kde-format
+#| msgid "Import owned items only"
+msgid "Import images as links only"
+msgstr "Импорт только принадлежащих пользователю элементов"
+
+#: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:342
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
+msgid ""
+"If checked, the image paths will be imported as links instead of being "
+"managed by Tellico directly."
+msgstr ""
+"Если отмечено, то при экспорте в HTML названия полей будут напечатаны как "
+"заголовки таблицы."
+
+#: src/translators/csvimporter.cpp:273
 #, kde-format
 msgid "Delimiter:"
 msgstr "Разделитель:"
 
-#: src/translators/csvimporter.cpp:246
+#: src/translators/csvimporter.cpp:279
 #, kde-format
 msgid "&Comma"
 msgstr "&Запятая"
 
-#: src/translators/csvimporter.cpp:252
+#: src/translators/csvimporter.cpp:285
 #, kde-format
 msgid "&Semicolon"
 msgstr "&Точка с запятой"
 
-#: src/translators/csvimporter.cpp:257
+#: src/translators/csvimporter.cpp:290
 #, kde-format
 msgid "Ta&b"
 msgstr "Т&абуляция"
 
-#: src/translators/csvimporter.cpp:262
+#: src/translators/csvimporter.cpp:295
 #, kde-format
 msgid "Ot&her:"
 msgstr "&Другой:"
 
-#: src/translators/csvimporter.cpp:324
+#: src/translators/csvimporter.cpp:357
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "Таблица показывает первые 5 строк файла CSV."
 
-#: src/translators/csvimporter.cpp:331
+#: src/translators/csvimporter.cpp:364
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -7050,22 +7066,22 @@ msgstr ""
 "<qt>Возможно назначить каждому столбцу своё поле. Просто выделите поле, "
 "столбец и нажмите кнопку <i>Назначить поле</i>.</qt>"
 
-#: src/translators/csvimporter.cpp:333
+#: src/translators/csvimporter.cpp:366
 #, kde-format
 msgid "Co&lumn:"
 msgstr "&Столбец:"
 
-#: src/translators/csvimporter.cpp:346
+#: src/translators/csvimporter.cpp:379
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "Д&анные в этом столбце:"
 
-#: src/translators/csvimporter.cpp:360
+#: src/translators/csvimporter.cpp:393
 #, kde-format
 msgid "&Assign Field"
 msgstr "&Назначить поле"
 
-#: src/translators/csvimporter.cpp:399
+#: src/translators/csvimporter.cpp:434
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
@@ -7074,12 +7090,12 @@ msgstr ""
 "Как минимум один столбец должен быть назначен полю. Импортируются только "
 "сопоставленные столбцы."
 
-#: src/translators/csvimporter.cpp:596
+#: src/translators/csvimporter.cpp:631
 #, kde-format
 msgid "Review"
 msgstr "Обзор"
 
-#: src/translators/csvimporter.cpp:689
+#: src/translators/csvimporter.cpp:724
 #, kde-format
 msgid "<New Field>"
 msgstr "<Новое поле>"
@@ -7183,11 +7199,23 @@ msgid ""
 "cache folders."
 msgstr "Рекурсивно читать данные из всех стандартных папок для кэша CDDB."
 
-#: src/translators/gcstarimporter.cpp:120
-#: src/translators/gcstarimporter.cpp:259
+#: src/translators/gcstarimporter.cpp:149
+#: src/translators/gcstarimporter.cpp:308
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Этот файл не является файлом данных GCstar.</qt>"
+
+#: src/translators/gcstarimporter.cpp:295
+#, fuzzy, kde-format
+#| msgid "The cover image could not be loaded."
+msgid "The GCstar model file could not be found."
+msgstr "Изображение обложки загрузить не удалось."
+
+#: src/translators/gcstarimporter.cpp:338
+#, fuzzy, kde-format
+#| msgid "Color Options"
+msgid "GCstar Options"
+msgstr "Настройка цвета"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -7324,12 +7352,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:179
+#: src/translators/tellicoimporter.cpp:180
 #, kde-format
 msgid "The file is empty."
 msgstr "Файл пуст."
 
-#: src/translators/tellicoimporter.cpp:192
+#: src/translators/tellicoimporter.cpp:193
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "Файл не содержит данные коллекций."
