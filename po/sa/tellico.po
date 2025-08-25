@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-23 00:43+0000\n"
+"POT-Creation-Date: 2025-08-25 00:42+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -741,7 +741,7 @@ msgstr "बिबटेक्स की"
 #: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:337
 #: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
 #: src/field.cpp:332 src/translators/filereadervideo.cpp:282
-#: src/translators/gcstarimporter.cpp:89
+#: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
 msgstr "सामान्य"
@@ -884,7 +884,7 @@ msgstr "कीवर्ड"
 #: src/fetch/opdsfetcher.cpp:440 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:81
 #: src/translators/filereadervideo.cpp:128
-#: src/translators/gcstarimporter.cpp:88
+#: src/translators/gcstarimporter.cpp:117
 #, kde-format
 msgid "URL"
 msgstr "URL"
@@ -902,7 +902,7 @@ msgid "Notes"
 msgstr "टिप्पणियाँ"
 
 #: src/collections/bibtexcollection.cpp:487
-#: src/translators/xmlstatehandler.cpp:324
+#: src/translators/xmlstatehandler.cpp:327
 #, kde-format
 msgid "Unknown"
 msgstr "अज्ञात"
@@ -1645,7 +1645,7 @@ msgstr "मध्यम"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/itunesfetcher.cpp:324 src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:435
+#: src/translators/xmlstatehandler.cpp:438
 #, kde-format
 msgid "Artist"
 msgstr "कलाकार"
@@ -1668,14 +1668,14 @@ msgstr "पटलाः"
 #: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:323 src/fetchdialog.cpp:243 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:434
+#: src/translators/xmlstatehandler.cpp:437
 #, kde-format
 msgid "Title"
 msgstr "शीर्षक"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:516
 #: src/fetch/itunesfetcher.cpp:325 src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:436
+#: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Length"
 msgstr "दैर्घ्यम्‌"
@@ -1865,13 +1865,13 @@ msgid "Cast"
 msgstr "क्षेप"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:438
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Actor/Actress"
 msgstr "अभिनेता/अभिनेत्री"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:439
+#: src/translators/xmlstatehandler.cpp:442
 #, kde-format
 msgid "Role"
 msgstr "भूमिका"
@@ -2541,7 +2541,7 @@ msgstr "टेम्पलेट विकल्प"
 
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
-#: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
+#: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #: src/translators/filelistingimporter.cpp:177
 #, kde-format
@@ -3965,27 +3965,27 @@ msgstr "फिल्मकार लिङ्क"
 msgid "Gaming History Link"
 msgstr "गेमिंग इतिहास लिङ्क"
 
-#: src/fetch/gcstarpluginfetcher.cpp:391
+#: src/fetch/gcstarpluginfetcher.cpp:390
 #, kde-format
 msgid "GCstar Plugin"
 msgstr "जीसीस्टार प्लगइन"
 
-#: src/fetch/gcstarpluginfetcher.cpp:413
+#: src/fetch/gcstarpluginfetcher.cpp:412
 #, kde-format
 msgid "Set the collection type of the data returned from the plugin."
 msgstr "प्लगिन् तः प्रत्यागतस्य दत्तांशस्य संग्रहप्रकारं सेट् कुर्वन्तु ।"
 
-#: src/fetch/gcstarpluginfetcher.cpp:418
+#: src/fetch/gcstarpluginfetcher.cpp:417
 #, kde-format
 msgid "&Plugin: "
 msgstr "&प्लगिन्: "
 
-#: src/fetch/gcstarpluginfetcher.cpp:424
+#: src/fetch/gcstarpluginfetcher.cpp:423
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
 msgstr "दत्तांशस्रोतस्य कृते उपयुज्यमानं GCstar प्लगिन् चिनोतु ।"
 
-#: src/fetch/gcstarpluginfetcher.cpp:429
+#: src/fetch/gcstarpluginfetcher.cpp:428
 #, kde-format
 msgid "Author: "
 msgstr "लेखकः: "
@@ -6416,7 +6416,7 @@ msgid "(%1 selected)"
 msgstr "(%1 चयनितम्)"
 
 #: src/mainwindow.cpp:1769 src/translators/boardgamegeekimporter.cpp:98
-#: src/translators/gcstarimporter.cpp:252
+#: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
 #, kde-format
@@ -7168,11 +7168,37 @@ msgstr ""
 "पूर्वनिर्धारितसञ्चयपुटेषु निहितानाम् सर्वेभ्यः CDDB-सञ्चय-सञ्चिकाभ्यः पुनरावर्तनीयरूपेण आँकडान् "
 "पठन्तु ।"
 
-#: src/translators/gcstarimporter.cpp:120
-#: src/translators/gcstarimporter.cpp:259
+#: src/translators/gcstarimporter.cpp:149
+#: src/translators/gcstarimporter.cpp:308
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>सञ्चिका वैध GCstar दत्तांशसञ्चिका नास्ति ।</qt>"
+
+#: src/translators/gcstarimporter.cpp:295
+#, fuzzy, kde-format
+#| msgid "The cover image could not be loaded."
+msgid "The GCstar model file could not be found."
+msgstr "आवरणस्य चित्रं लोड् कर्तुं न शक्यते स्म ।"
+
+#: src/translators/gcstarimporter.cpp:334
+#, fuzzy, kde-format
+#| msgid "Color Options"
+msgid "GCstar Options"
+msgstr "वर्णविकल्पाः"
+
+#: src/translators/gcstarimporter.cpp:337
+#, fuzzy, kde-format
+#| msgid "Import owned items only"
+msgid "Import images as links only"
+msgstr "केवलं स्वामित्वयुक्तानि वस्तूनि आयातयन्तु"
+
+#: src/translators/gcstarimporter.cpp:338
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
+msgid ""
+"If checked, the image paths will be imported as links instead of being "
+"managed by Tellico directly."
+msgstr "यदि चेक् कृतं तर्हि क्षेत्रनामानि सारणीशीर्षकरूपेण मुद्रितानि भविष्यन्ति ।"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -7309,12 +7335,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:179
+#: src/translators/tellicoimporter.cpp:180
 #, kde-format
 msgid "The file is empty."
 msgstr "सञ्चिका रिक्तम् अस्ति ।"
 
-#: src/translators/tellicoimporter.cpp:192
+#: src/translators/tellicoimporter.cpp:193
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "सञ्चिकायां संग्रहदत्तांशः नास्ति ।"

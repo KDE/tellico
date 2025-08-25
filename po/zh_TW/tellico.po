@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-23 00:43+0000\n"
+"POT-Creation-Date: 2025-08-25 00:42+0000\n"
 "PO-Revision-Date: 2024-07-27 13:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -728,7 +728,7 @@ msgstr "Bibtex 鍵值"
 #: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:337
 #: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
 #: src/field.cpp:332 src/translators/filereadervideo.cpp:282
-#: src/translators/gcstarimporter.cpp:89
+#: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
 msgstr "一般"
@@ -871,7 +871,7 @@ msgstr "關鍵字"
 #: src/fetch/opdsfetcher.cpp:440 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:81
 #: src/translators/filereadervideo.cpp:128
-#: src/translators/gcstarimporter.cpp:88
+#: src/translators/gcstarimporter.cpp:117
 #, kde-format
 msgid "URL"
 msgstr "網址"
@@ -889,7 +889,7 @@ msgid "Notes"
 msgstr "備忘"
 
 #: src/collections/bibtexcollection.cpp:487
-#: src/translators/xmlstatehandler.cpp:324
+#: src/translators/xmlstatehandler.cpp:327
 #, kde-format
 msgid "Unknown"
 msgstr "未知"
@@ -1643,7 +1643,7 @@ msgstr "媒體"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/itunesfetcher.cpp:324 src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:435
+#: src/translators/xmlstatehandler.cpp:438
 #, kde-format
 msgid "Artist"
 msgstr "演出者"
@@ -1666,14 +1666,14 @@ msgstr "軌道"
 #: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:323 src/fetchdialog.cpp:243 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:434
+#: src/translators/xmlstatehandler.cpp:437
 #, kde-format
 msgid "Title"
 msgstr "標題"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:516
 #: src/fetch/itunesfetcher.cpp:325 src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:436
+#: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Length"
 msgstr "長度"
@@ -1863,13 +1863,13 @@ msgid "Cast"
 msgstr "卡司"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:438
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Actor/Actress"
 msgstr "男女演員"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:439
+#: src/translators/xmlstatehandler.cpp:442
 #, kde-format
 msgid "Role"
 msgstr "角色"
@@ -2535,7 +2535,7 @@ msgstr "樣本選項"
 
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
-#: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
+#: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #: src/translators/filelistingimporter.cpp:177
 #, kde-format
@@ -3935,27 +3935,27 @@ msgstr "Filmaster 連結"
 msgid "Gaming History Link"
 msgstr "Gaming History 連結"
 
-#: src/fetch/gcstarpluginfetcher.cpp:391
+#: src/fetch/gcstarpluginfetcher.cpp:390
 #, kde-format
 msgid "GCstar Plugin"
 msgstr "CStar 外掛程式"
 
-#: src/fetch/gcstarpluginfetcher.cpp:413
+#: src/fetch/gcstarpluginfetcher.cpp:412
 #, kde-format
 msgid "Set the collection type of the data returned from the plugin."
 msgstr "設定此外掛程式傳回的資料的收藏型態。"
 
-#: src/fetch/gcstarpluginfetcher.cpp:418
+#: src/fetch/gcstarpluginfetcher.cpp:417
 #, kde-format
 msgid "&Plugin: "
 msgstr "外掛程式(&P)："
 
-#: src/fetch/gcstarpluginfetcher.cpp:424
+#: src/fetch/gcstarpluginfetcher.cpp:423
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
 msgstr "設定使用此資料來源的 GCstar 外掛程式。"
 
-#: src/fetch/gcstarpluginfetcher.cpp:429
+#: src/fetch/gcstarpluginfetcher.cpp:428
 #, kde-format
 msgid "Author: "
 msgstr "作者："
@@ -6400,7 +6400,7 @@ msgid "(%1 selected)"
 msgstr "（%1 個已選擇）"
 
 #: src/mainwindow.cpp:1769 src/translators/boardgamegeekimporter.cpp:98
-#: src/translators/gcstarimporter.cpp:252
+#: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
 #, kde-format
@@ -7142,11 +7142,37 @@ msgid ""
 "cache folders."
 msgstr "從預設的快取資料夾裡所有的 CDDB 快取檔中遞迴地讀取資料。"
 
-#: src/translators/gcstarimporter.cpp:120
-#: src/translators/gcstarimporter.cpp:259
+#: src/translators/gcstarimporter.cpp:149
+#: src/translators/gcstarimporter.cpp:308
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>檔案不是有效的 GCstar 資料檔。</qt>"
+
+#: src/translators/gcstarimporter.cpp:295
+#, fuzzy, kde-format
+#| msgid "The cover image could not be loaded."
+msgid "The GCstar model file could not be found."
+msgstr "無法載入封面影像。"
+
+#: src/translators/gcstarimporter.cpp:334
+#, fuzzy, kde-format
+#| msgid "Color Options"
+msgid "GCstar Options"
+msgstr "著色選項"
+
+#: src/translators/gcstarimporter.cpp:337
+#, fuzzy, kde-format
+#| msgid "Import owned items only"
+msgid "Import images as links only"
+msgstr "只匯入擁有的項目"
+
+#: src/translators/gcstarimporter.cpp:338
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
+msgid ""
+"If checked, the image paths will be imported as links instead of being "
+"managed by Tellico directly."
+msgstr "若是勾選此選項，則會將欄位名稱印在表格標頭。"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -7277,12 +7303,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:179
+#: src/translators/tellicoimporter.cpp:180
 #, kde-format
 msgid "The file is empty."
 msgstr "檔案是空的。"
 
-#: src/translators/tellicoimporter.cpp:192
+#: src/translators/tellicoimporter.cpp:193
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "檔案沒有包含收藏資料。"

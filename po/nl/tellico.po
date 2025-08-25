@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-23 00:43+0000\n"
+"POT-Creation-Date: 2025-08-25 00:42+0000\n"
 "PO-Revision-Date: 2025-03-13 12:19+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -759,7 +759,7 @@ msgstr "BibTeX sleutel"
 #: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:337
 #: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
 #: src/field.cpp:332 src/translators/filereadervideo.cpp:282
-#: src/translators/gcstarimporter.cpp:89
+#: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
 msgstr "Algemeen"
@@ -902,7 +902,7 @@ msgstr "Trefwoorden"
 #: src/fetch/opdsfetcher.cpp:440 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:81
 #: src/translators/filereadervideo.cpp:128
-#: src/translators/gcstarimporter.cpp:88
+#: src/translators/gcstarimporter.cpp:117
 #, kde-format
 msgid "URL"
 msgstr "URL-adres"
@@ -920,7 +920,7 @@ msgid "Notes"
 msgstr "Notities"
 
 #: src/collections/bibtexcollection.cpp:487
-#: src/translators/xmlstatehandler.cpp:324
+#: src/translators/xmlstatehandler.cpp:327
 #, kde-format
 msgid "Unknown"
 msgstr "Onbekend"
@@ -1664,7 +1664,7 @@ msgstr "Drager"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/itunesfetcher.cpp:324 src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:435
+#: src/translators/xmlstatehandler.cpp:438
 #, kde-format
 msgid "Artist"
 msgstr "Artiest"
@@ -1687,14 +1687,14 @@ msgstr "Nummers"
 #: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:323 src/fetchdialog.cpp:243 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:434
+#: src/translators/xmlstatehandler.cpp:437
 #, kde-format
 msgid "Title"
 msgstr "Titel"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:516
 #: src/fetch/itunesfetcher.cpp:325 src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:436
+#: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Length"
 msgstr "Lengte"
@@ -1884,13 +1884,13 @@ msgid "Cast"
 msgstr "Acteurs"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:438
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Actor/Actress"
 msgstr "Acteur/actrice"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:439
+#: src/translators/xmlstatehandler.cpp:442
 #, kde-format
 msgid "Role"
 msgstr "Rol"
@@ -2574,7 +2574,7 @@ msgstr "Sjabloonopties"
 
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
-#: src/fetch/gcstarpluginfetcher.cpp:406 src/fetch/multifetcher.cpp:229
+#: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:219
 #: src/translators/filelistingimporter.cpp:177
 #, kde-format
@@ -4007,29 +4007,29 @@ msgstr "Koppeling naar Filmaster"
 msgid "Gaming History Link"
 msgstr "Koppeling van geschiedenis van gaming"
 
-#: src/fetch/gcstarpluginfetcher.cpp:391
+#: src/fetch/gcstarpluginfetcher.cpp:390
 #, kde-format
 msgid "GCstar Plugin"
 msgstr "GCstar-plugin"
 
-#: src/fetch/gcstarpluginfetcher.cpp:413
+#: src/fetch/gcstarpluginfetcher.cpp:412
 #, kde-format
 msgid "Set the collection type of the data returned from the plugin."
 msgstr ""
 "Stel het type verzameling in voor de data die wordt teruggegeven door de "
 "plugin."
 
-#: src/fetch/gcstarpluginfetcher.cpp:418
+#: src/fetch/gcstarpluginfetcher.cpp:417
 #, kde-format
 msgid "&Plugin: "
 msgstr "&Plugin: "
 
-#: src/fetch/gcstarpluginfetcher.cpp:424
+#: src/fetch/gcstarpluginfetcher.cpp:423
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
 msgstr "Selecteer de GCstar-plugin die gebruikt wordt voor de gegevensbron."
 
-#: src/fetch/gcstarpluginfetcher.cpp:429
+#: src/fetch/gcstarpluginfetcher.cpp:428
 #, kde-format
 msgid "Author: "
 msgstr "Auteur: "
@@ -6474,7 +6474,7 @@ msgid "(%1 selected)"
 msgstr "(%1 geselecteerd)"
 
 #: src/mainwindow.cpp:1769 src/translators/boardgamegeekimporter.cpp:98
-#: src/translators/gcstarimporter.cpp:252
+#: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
 #, kde-format
@@ -7246,11 +7246,37 @@ msgstr ""
 "Lees alle data recursief uit alle CDDB cache bestanden in de standaard cache "
 "map."
 
-#: src/translators/gcstarimporter.cpp:120
-#: src/translators/gcstarimporter.cpp:259
+#: src/translators/gcstarimporter.cpp:149
+#: src/translators/gcstarimporter.cpp:308
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Het bestand in geen geldig GCstar-databestand.</qt>"
+
+#: src/translators/gcstarimporter.cpp:295
+#, fuzzy, kde-format
+#| msgid "The cover image could not be loaded."
+msgid "The GCstar model file could not be found."
+msgstr "De afbeelding van de voorzijde kon niet worden geladen."
+
+#: src/translators/gcstarimporter.cpp:334
+#, fuzzy, kde-format
+#| msgid "Color Options"
+msgid "GCstar Options"
+msgstr "Kleuropties"
+
+#: src/translators/gcstarimporter.cpp:337
+#, fuzzy, kde-format
+#| msgid "Import owned items only"
+msgid "Import images as links only"
+msgstr "Alleen items in bezit importeren "
+
+#: src/translators/gcstarimporter.cpp:338
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
+msgid ""
+"If checked, the image paths will be imported as links instead of being "
+"managed by Tellico directly."
+msgstr "Indien aangevinkt worden de veldnamen afgedrukt als tabel-kop."
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -7387,12 +7413,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:179
+#: src/translators/tellicoimporter.cpp:180
 #, kde-format
 msgid "The file is empty."
 msgstr "Het bestand is leeg."
 
-#: src/translators/tellicoimporter.cpp:192
+#: src/translators/tellicoimporter.cpp:193
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "Het bestand bevat geen verzamel data."
