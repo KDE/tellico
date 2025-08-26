@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-25 02:39+0000\n"
-"PO-Revision-Date: 2025-01-05 11:52+0200\n"
+"PO-Revision-Date: 2025-08-25 09:36+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -6940,20 +6940,18 @@ msgid "If checked, the first row is used as field titles."
 msgstr "Перший рядок містить заголовки полів"
 
 #: src/translators/csvimporter.cpp:258 src/translators/gcstarimporter.cpp:341
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
+#, kde-format
 msgid "Import images as links only"
-msgstr "Імпортувати лише те, що маємо"
+msgstr "Імпортувати зображення як лише посилання"
 
 #: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:342
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
 msgstr ""
-"Якщо буде позначено цей пункт, при експорті в HTML будуть надруковані "
-"заголовки."
+"Якщо позначено, буде імпортовано шлях до зображень, замість обробки у "
+"Tellico безспосередньо."
 
 #: src/translators/csvimporter.cpp:273
 #, kde-format
@@ -7134,16 +7132,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Цей файл не містить даних GCstar.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "Не виходить завантажити зображення обкладинки"
+msgstr "Не вдалося знайти файл моделі GCstar."
 
 #: src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Вибір кольору"
+msgstr "Параметри GCstar"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format

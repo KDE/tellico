@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-25 02:39+0000\n"
-"PO-Revision-Date: 2025-08-10 22:21+0200\n"
+"PO-Revision-Date: 2025-08-25 08:16+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6965,18 +6965,18 @@ msgstr ""
 "Markatuta badago, lehenego errenkada eremuen titulu gisa erabiltzen da."
 
 #: src/translators/csvimporter.cpp:258 src/translators/gcstarimporter.cpp:341
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
+#, kde-format
 msgid "Import images as links only"
-msgstr "Inportatu jabe zaren elementuak bakarrik"
+msgstr "Inportatu irudiak esteka gisa bakarrik"
 
 #: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:342
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
-msgstr "Markatuta badago, eremu izenak taulako goiburu gisa inprimatuko dira."
+msgstr ""
+"Markatuta badago, Tellicok zuzenean kudeatu ordez, irudiaren bide-izena "
+"esteka gisa inportatuko da."
 
 #: src/translators/csvimporter.cpp:273
 #, kde-format
@@ -7161,16 +7161,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Fitxategia ez da GCstar datu fitxategi balioduna.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "Azaleko irudia ezin izan du zamatu."
+msgstr "Ezin izan du GCstar eredu-fitxategia aurkitu."
 
 #: src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Kolore-aukerak"
+msgstr "GCstar aukerak"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format

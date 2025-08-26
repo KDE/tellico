@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-25 02:39+0000\n"
-"PO-Revision-Date: 2025-01-05 08:45+0100\n"
+"PO-Revision-Date: 2025-08-25 10:37+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6927,18 +6927,18 @@ msgid "If checked, the first row is used as field titles."
 msgstr "Če to označite, bo prva vrstica vsebovala naslove polj."
 
 #: src/translators/csvimporter.cpp:258 src/translators/gcstarimporter.cpp:341
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
+#, kde-format
 msgid "Import images as links only"
-msgstr "Uvozi le vnose, ki si jih lastim"
+msgstr "Uvozi slike samo kot povezave"
 
 #: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:342
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
-msgstr "Če to označite, bodo imena polj natisnjena kot glave razpredelnice."
+msgstr ""
+"Če je odkljukano, bodo poti do slik uvožene kot povezave, namesto da bi jih "
+"neposredno upravljal Tellico."
 
 #: src/translators/csvimporter.cpp:273
 #, kde-format
@@ -7121,16 +7121,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Datoteka ni veljavna podatkovna datoteka GCstar.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "Ni bilo mogoče naložiti slike ovitka."
+msgstr "Datoteke modela GCstar ni bilo mogoče najti."
 
 #: src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Možnosti barve"
+msgstr "Možnosti GCstar"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
