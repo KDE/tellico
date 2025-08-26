@@ -235,7 +235,7 @@ bool CollectionHandler::end(QStringView, QStringView) {
             const QString result = ImageFactory::addImage(u,
                                                           !d->showImageLoadErrors || imageWarnings >= maxImageWarnings /* quiet */,
                                                           QUrl()/* referrer */,
-                                                          d->imagesPathsAsLinks);
+                                                          d->imagePathsAsLinks);
             if(result.isEmpty()) {
               // clear value for the field in this case
               value.clear();

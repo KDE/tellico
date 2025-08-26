@@ -107,8 +107,8 @@ void TellicoXmlReader::setShowImageLoadErrors(bool showImageErrors_) {
   m_data->showImageLoadErrors = showImageErrors_;
 }
 
-void TellicoXmlReader::setImagePathsAsLinks(bool imagesPathsAsLinks_) {
-  m_data->imagesPathsAsLinks = imagesPathsAsLinks_;
+void TellicoXmlReader::setImagePathsAsLinks(bool imagePathsAsLinks_) {
+  m_data->imagePathsAsLinks = imagePathsAsLinks_;
 }
 
 void TellicoXmlReader::handleStart() {
