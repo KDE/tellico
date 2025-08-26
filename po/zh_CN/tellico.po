@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:42+0000\n"
+"POT-Creation-Date: 2025-08-26 00:43+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -2498,7 +2498,7 @@ msgstr "模板选项"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:219
+#: src/translators/csvimporter.cpp:242
 #: src/translators/filelistingimporter.cpp:177
 #, kde-format
 msgid "Collection &type:"
@@ -6728,7 +6728,7 @@ msgstr ""
 msgid "User ID:"
 msgstr ""
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:214
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:237
 #, kde-format
 msgid "CSV Options"
 msgstr "CSV 选项"
@@ -6748,7 +6748,7 @@ msgstr ""
 msgid "Delimiter"
 msgstr "分割符"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:242
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:275
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6760,7 +6760,7 @@ msgstr ""
 msgid "Comma"
 msgstr "逗号"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:249
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:282
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "使用逗号作为分割符。"
@@ -6770,7 +6770,7 @@ msgstr "使用逗号作为分割符。"
 msgid "Semicolon"
 msgstr "分号"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:254
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:287
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "使用分号作为分割符。"
@@ -6780,7 +6780,7 @@ msgstr "使用分号作为分割符。"
 msgid "Tab"
 msgstr "制表符"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:259
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:292
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "使用制表符作为分割符。"
@@ -6791,84 +6791,96 @@ msgstr "使用制表符作为分割符。"
 msgid "Other"
 msgstr "其他"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:264
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:297
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "使用自定义字符串作为分割符。"
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:271
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:304
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:290
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:323
 #, kde-format
 msgid "Table column delimiter:"
 msgstr ""
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:289
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:322
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:301
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:334
 #, kde-format
 msgid "Table row delimiter:"
 msgstr ""
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:300
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:333
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
 
-#: src/translators/csvimporter.cpp:224
+#: src/translators/csvimporter.cpp:247
 #: src/translators/filelistingimporter.cpp:176
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "选择要导入收藏的类型。"
 
-#: src/translators/csvimporter.cpp:228
+#: src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "首行包含域标题(&F)"
 
-#: src/translators/csvimporter.cpp:229
+#: src/translators/csvimporter.cpp:255
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr ""
 
-#: src/translators/csvimporter.cpp:241
+#: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:337
+#, kde-format
+msgid "Import images as links only"
+msgstr ""
+
+#: src/translators/csvimporter.cpp:260 src/translators/gcstarimporter.cpp:338
+#, kde-format
+msgid ""
+"If checked, the image paths will be imported as links instead of being "
+"managed by Tellico directly."
+msgstr ""
+
+#: src/translators/csvimporter.cpp:274
 #, kde-format
 msgid "Delimiter:"
 msgstr "分隔符："
 
-#: src/translators/csvimporter.cpp:247
+#: src/translators/csvimporter.cpp:280
 #, kde-format
 msgid "&Comma"
 msgstr "逗号(&C)"
 
-#: src/translators/csvimporter.cpp:253
+#: src/translators/csvimporter.cpp:286
 #, kde-format
 msgid "&Semicolon"
 msgstr "分号(&S)"
 
-#: src/translators/csvimporter.cpp:258
+#: src/translators/csvimporter.cpp:291
 #, kde-format
 msgid "Ta&b"
 msgstr "制表符(&B)"
 
-#: src/translators/csvimporter.cpp:263
+#: src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Ot&her:"
 msgstr "其他(&H)："
 
-#: src/translators/csvimporter.cpp:320
+#: src/translators/csvimporter.cpp:353
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr ""
 
-#: src/translators/csvimporter.cpp:327
+#: src/translators/csvimporter.cpp:360
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -6876,34 +6888,34 @@ msgid ""
 "qt>"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:329
+#: src/translators/csvimporter.cpp:362
 #, kde-format
 msgid "Co&lumn:"
 msgstr "列(&L)："
 
-#: src/translators/csvimporter.cpp:342
+#: src/translators/csvimporter.cpp:375
 #, kde-format
 msgid "&Data field in this column:"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:356
+#: src/translators/csvimporter.cpp:389
 #, kde-format
 msgid "&Assign Field"
 msgstr "指派域(&A)"
 
-#: src/translators/csvimporter.cpp:395
+#: src/translators/csvimporter.cpp:430
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
 "be imported."
 msgstr ""
 
-#: src/translators/csvimporter.cpp:592
+#: src/translators/csvimporter.cpp:627
 #, kde-format
 msgid "Review"
 msgstr "评价"
 
-#: src/translators/csvimporter.cpp:685
+#: src/translators/csvimporter.cpp:720
 #, kde-format
 msgid "<New Field>"
 msgstr "<新建域>"
@@ -7010,27 +7022,13 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>文件不是有效的 GCstar 数据文件。</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
-msgid "The GCstar model file could not be found."
-msgstr "无法加载封面图像。"
-
-#: src/translators/gcstarimporter.cpp:334
-#, fuzzy, kde-format
-#| msgid "Color Options"
-msgid "GCstar Options"
-msgstr "颜色选项"
-
-#: src/translators/gcstarimporter.cpp:337
 #, kde-format
-msgid "Import images as links only"
+msgid "The GCstar model file could not be found."
 msgstr ""
 
-#: src/translators/gcstarimporter.cpp:338
+#: src/translators/gcstarimporter.cpp:334
 #, kde-format
-msgid ""
-"If checked, the image paths will be imported as links instead of being "
-"managed by Tellico directly."
+msgid "GCstar Options"
 msgstr ""
 
 #: src/translators/goodreadsimporter.cpp:147

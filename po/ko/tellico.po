@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:42+0000\n"
+"POT-Creation-Date: 2025-08-26 00:43+0000\n"
 "PO-Revision-Date: 2025-04-07 23:49+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2536,7 +2536,7 @@ msgstr "템플릿 옵션"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:219
+#: src/translators/csvimporter.cpp:242
 #: src/translators/filelistingimporter.cpp:177
 #, kde-format
 msgid "Collection &type:"
@@ -6850,7 +6850,7 @@ msgstr "소유한 항목만 가져오기"
 msgid "User ID:"
 msgstr "사용자 ID:"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:214
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:237
 #, kde-format
 msgid "CSV Options"
 msgstr "CSV 옵션"
@@ -6870,7 +6870,7 @@ msgstr "이 옵션을 선택하면 필드 제목과 함께 열 머리글이 추�
 msgid "Delimiter"
 msgstr "구분 기호"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:242
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:275
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6883,7 +6883,7 @@ msgstr ""
 msgid "Comma"
 msgstr "쉼표"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:249
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:282
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "쉼표를 구분 기호로 사용합니다."
@@ -6893,7 +6893,7 @@ msgstr "쉼표를 구분 기호로 사용합니다."
 msgid "Semicolon"
 msgstr "쌍반점"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:254
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:287
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "쌍반점을 구분 기호로 사용합니다."
@@ -6903,7 +6903,7 @@ msgstr "쌍반점을 구분 기호로 사용합니다."
 msgid "Tab"
 msgstr "탭"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:259
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:292
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "탭을 구분 기호로 사용합니다."
@@ -6914,84 +6914,98 @@ msgstr "탭을 구분 기호로 사용합니다."
 msgid "Other"
 msgstr "기타"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:264
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:297
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "사용자 정의 문자열을 구분 기호로 사용합니다."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:271
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:304
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "쌍점과 같은 사용자 정의 문자열을 구분 기호로 사용할 수 있습니다."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:290
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:323
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "테이블 열 구분 기호:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:289
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:322
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr "열 구분 기호는 <i>테이블</i> 필드의 각 열에 있는 값을 구분합니다."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:301
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:334
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "테이블 행 구분 기호:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:300
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:333
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "행 구분 기호는 <i>테이블</i> 필드의 각 행에서 값을 구분합니다."
 
-#: src/translators/csvimporter.cpp:224
+#: src/translators/csvimporter.cpp:247
 #: src/translators/filelistingimporter.cpp:176
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "가져올 소장품 형식을 선택합니다."
 
-#: src/translators/csvimporter.cpp:228
+#: src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "첫 번째 행에 필드 제목 포함(&F)"
 
-#: src/translators/csvimporter.cpp:229
+#: src/translators/csvimporter.cpp:255
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr "이 옵션을 선택하면 첫 번째 행이 필드 제목으로 사용됩니다."
 
-#: src/translators/csvimporter.cpp:241
+#: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:337
+#, fuzzy, kde-format
+#| msgid "Import owned items only"
+msgid "Import images as links only"
+msgstr "소유한 항목만 가져오기"
+
+#: src/translators/csvimporter.cpp:260 src/translators/gcstarimporter.cpp:338
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
+msgid ""
+"If checked, the image paths will be imported as links instead of being "
+"managed by Tellico directly."
+msgstr "이 옵션을 선택하면 필드 이름을 표 머리글로 인쇄합니다."
+
+#: src/translators/csvimporter.cpp:274
 #, kde-format
 msgid "Delimiter:"
 msgstr "구분 기호:"
 
-#: src/translators/csvimporter.cpp:247
+#: src/translators/csvimporter.cpp:280
 #, kde-format
 msgid "&Comma"
 msgstr "쉼표(&C)"
 
-#: src/translators/csvimporter.cpp:253
+#: src/translators/csvimporter.cpp:286
 #, kde-format
 msgid "&Semicolon"
 msgstr "쌍반점(&S)"
 
-#: src/translators/csvimporter.cpp:258
+#: src/translators/csvimporter.cpp:291
 #, kde-format
 msgid "Ta&b"
 msgstr "탭(&B)"
 
-#: src/translators/csvimporter.cpp:263
+#: src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Ot&her:"
 msgstr "기타(&H):"
 
-#: src/translators/csvimporter.cpp:320
+#: src/translators/csvimporter.cpp:353
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "이 표에는 CSV 파일의 처음 5줄까지 표시됩니다."
 
-#: src/translators/csvimporter.cpp:327
+#: src/translators/csvimporter.cpp:360
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -7001,34 +7015,34 @@ msgstr ""
 "<qt>열을 선택하고 필드를 선택한 다음 <i>필드 할당</i> 버튼을 클릭하여 소장품"
 "의 필드에 해당하는 각 열을 설정하십시오.</qt>"
 
-#: src/translators/csvimporter.cpp:329
+#: src/translators/csvimporter.cpp:362
 #, kde-format
 msgid "Co&lumn:"
 msgstr "열(&L):"
 
-#: src/translators/csvimporter.cpp:342
+#: src/translators/csvimporter.cpp:375
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "이 열의 데이터 필드(&D):"
 
-#: src/translators/csvimporter.cpp:356
+#: src/translators/csvimporter.cpp:389
 #, kde-format
 msgid "&Assign Field"
 msgstr "필드 할당(&A)"
 
-#: src/translators/csvimporter.cpp:395
+#: src/translators/csvimporter.cpp:430
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
 "be imported."
 msgstr "필드에 열을 하나 이상 할당해야 합니다. 할당된 열만 가져옵니다."
 
-#: src/translators/csvimporter.cpp:592
+#: src/translators/csvimporter.cpp:627
 #, kde-format
 msgid "Review"
 msgstr "리뷰"
 
-#: src/translators/csvimporter.cpp:685
+#: src/translators/csvimporter.cpp:720
 #, kde-format
 msgid "<New Field>"
 msgstr "<새 필드>"
@@ -7148,20 +7162,6 @@ msgstr "표지 이미지를 불러올 수 없습니다."
 #| msgid "Color Options"
 msgid "GCstar Options"
 msgstr "색상 옵션"
-
-#: src/translators/gcstarimporter.cpp:337
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
-msgid "Import images as links only"
-msgstr "소유한 항목만 가져오기"
-
-#: src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
-msgid ""
-"If checked, the image paths will be imported as links instead of being "
-"managed by Tellico directly."
-msgstr "이 옵션을 선택하면 필드 이름을 표 머리글로 인쇄합니다."
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format

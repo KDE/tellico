@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:42+0000\n"
+"POT-Creation-Date: 2025-08-26 00:43+0000\n"
 "PO-Revision-Date: 2011-12-11 07:08+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -2592,7 +2592,7 @@ msgstr "Vörlaag-Optschonen"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:219
+#: src/translators/csvimporter.cpp:242
 #: src/translators/filelistingimporter.cpp:177
 #, kde-format
 msgid "Collection &type:"
@@ -7065,7 +7065,7 @@ msgstr "Bloots utsöcht Indrääg exporteren"
 msgid "User ID:"
 msgstr "Bruker-ID"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:214
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:237
 #, kde-format
 msgid "CSV Options"
 msgstr "CSV-Optschonen"
@@ -7085,7 +7085,7 @@ msgstr "Wenn anmaakt, warrt en Koppreeg mit de Feldtiteln toföögt."
 msgid "Delimiter"
 msgstr "Trennteken"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:242
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:275
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -7099,7 +7099,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Komma"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:249
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:282
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "Komma as Trennteken bruken"
@@ -7109,7 +7109,7 @@ msgstr "Komma as Trennteken bruken"
 msgid "Semicolon"
 msgstr "Streekpunkt"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:254
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:287
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "Streekpunkt as Trennteken bruken"
@@ -7119,7 +7119,7 @@ msgstr "Streekpunkt as Trennteken bruken"
 msgid "Tab"
 msgstr "Tabulator"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:259
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:292
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "Tabulator as Trennteken bruken"
@@ -7130,22 +7130,22 @@ msgstr "Tabulator as Trennteken bruken"
 msgid "Other"
 msgstr "Anner"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:264
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:297
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "En egen Trennteken bruken"
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:271
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:304
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "En egen Teken, a.B. en Dubbelpunkt, lett sik as Trennteken bruken."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:290
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:323
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "Tabellenstriep-Trennteken:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:289
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:322
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
@@ -7153,65 +7153,79 @@ msgstr ""
 "Dat Tabellenstriep-Trennteken scheedt Weerten binnen elk Striep vun en "
 "<i>Tabellen</i>feld."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:301
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:334
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "Tabellenreeg-Trennteken:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:300
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:333
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
 "Dat Tabellenreeg-Trennteken scheedt Weerten binnen elk Reeg vun en "
 "<i>Tabellen</i>feld."
 
-#: src/translators/csvimporter.cpp:224
+#: src/translators/csvimporter.cpp:247
 #: src/translators/filelistingimporter.cpp:176
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Söök den Sammelntyp för't Importeren ut."
 
-#: src/translators/csvimporter.cpp:228
+#: src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "&Eerst Reeg bargt Feldtiteln"
 
-#: src/translators/csvimporter.cpp:229
+#: src/translators/csvimporter.cpp:255
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr "Wenn anmaakt, warrt de eerste Reeg as Feldtiteln bruukt."
 
-#: src/translators/csvimporter.cpp:241
+#: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:337
+#, fuzzy, kde-format
+#| msgid "Export selected entries only"
+msgid "Import images as links only"
+msgstr "Bloots utsöcht Indrääg exporteren"
+
+#: src/translators/csvimporter.cpp:260 src/translators/gcstarimporter.cpp:338
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
+msgid ""
+"If checked, the image paths will be imported as links instead of being "
+"managed by Tellico directly."
+msgstr "Wenn anmaakt, warrt Feldnaams as Tabellenköpp druckt."
+
+#: src/translators/csvimporter.cpp:274
 #, kde-format
 msgid "Delimiter:"
 msgstr "Trennteken:"
 
-#: src/translators/csvimporter.cpp:247
+#: src/translators/csvimporter.cpp:280
 #, kde-format
 msgid "&Comma"
 msgstr "&Komma"
 
-#: src/translators/csvimporter.cpp:253
+#: src/translators/csvimporter.cpp:286
 #, kde-format
 msgid "&Semicolon"
 msgstr "&Streekpunkt"
 
-#: src/translators/csvimporter.cpp:258
+#: src/translators/csvimporter.cpp:291
 #, kde-format
 msgid "Ta&b"
 msgstr "Ta&bulator"
 
-#: src/translators/csvimporter.cpp:263
+#: src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Ot&her:"
 msgstr "&Anner:"
 
-#: src/translators/csvimporter.cpp:320
+#: src/translators/csvimporter.cpp:353
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "De Tabell wiest de eersten fief Regen vun de CSV-Datei."
 
-#: src/translators/csvimporter.cpp:327
+#: src/translators/csvimporter.cpp:360
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -7221,22 +7235,22 @@ msgstr ""
 "<qt>Legg för elk Striep en tohören Feld in de Sammeln fast. Söök en Striep "
 "un en Feld ut un klick op den Knoop <i>Feld towiesen</i>.</qt>"
 
-#: src/translators/csvimporter.cpp:329
+#: src/translators/csvimporter.cpp:362
 #, kde-format
 msgid "Co&lumn:"
 msgstr "&Striep:"
 
-#: src/translators/csvimporter.cpp:342
+#: src/translators/csvimporter.cpp:375
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "&Datenfeld binnen dissen Striep:"
 
-#: src/translators/csvimporter.cpp:356
+#: src/translators/csvimporter.cpp:389
 #, kde-format
 msgid "&Assign Field"
 msgstr "Feld &towiesen"
 
-#: src/translators/csvimporter.cpp:395
+#: src/translators/csvimporter.cpp:430
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
@@ -7245,12 +7259,12 @@ msgstr ""
 "Tominnst een Striep mutt en Feld towiest ween. Bloots towiest Striepen warrt "
 "importeert."
 
-#: src/translators/csvimporter.cpp:592
+#: src/translators/csvimporter.cpp:627
 #, kde-format
 msgid "Review"
 msgstr ""
 
-#: src/translators/csvimporter.cpp:685
+#: src/translators/csvimporter.cpp:720
 #, fuzzy, kde-format
 #| msgid "New Field"
 msgid "<New Field>"
@@ -7373,20 +7387,6 @@ msgstr "Dat Titelbild lett sik nich laden."
 #| msgid "Color Options"
 msgid "GCstar Options"
 msgstr "Klööroptschonen"
-
-#: src/translators/gcstarimporter.cpp:337
-#, fuzzy, kde-format
-#| msgid "Export selected entries only"
-msgid "Import images as links only"
-msgstr "Bloots utsöcht Indrääg exporteren"
-
-#: src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
-msgid ""
-"If checked, the image paths will be imported as links instead of being "
-"managed by Tellico directly."
-msgstr "Wenn anmaakt, warrt Feldnaams as Tabellenköpp druckt."
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:42+0000\n"
+"POT-Creation-Date: 2025-08-26 00:43+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -2542,7 +2542,7 @@ msgstr "टेम्पलेट विकल्प"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:219
+#: src/translators/csvimporter.cpp:242
 #: src/translators/filelistingimporter.cpp:177
 #, kde-format
 msgid "Collection &type:"
@@ -6883,7 +6883,7 @@ msgstr "केवलं स्वामित्वयुक्तानि व�
 msgid "User ID:"
 msgstr "उपयोक्तृपरिचयः :"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:214
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:237
 #, kde-format
 msgid "CSV Options"
 msgstr "CSV विकल्पाः"
@@ -6903,7 +6903,7 @@ msgstr "यदि परीक्षितं तर्हि क्षेत्
 msgid "Delimiter"
 msgstr "परिसीमक"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:242
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:275
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6917,7 +6917,7 @@ msgstr ""
 msgid "Comma"
 msgstr "अल्पविरामः"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:249
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:282
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "सीमांककरूपेण अल्पविरामस्य उपयोगं कुर्वन्तु।"
@@ -6927,7 +6927,7 @@ msgstr "सीमांककरूपेण अल्पविरामस्�
 msgid "Semicolon"
 msgstr "अर्धविराम"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:254
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:287
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "अर्धविरामस्य परिसीमकरूपेण प्रयोगं कुर्वन्तु ।"
@@ -6937,7 +6937,7 @@ msgstr "अर्धविरामस्य परिसीमकरूपे�
 msgid "Tab"
 msgstr "टब"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:259
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:292
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "परिसीमकरूपेण ट्याब् इत्यस्य उपयोगं कुर्वन्तु ।"
@@ -6948,84 +6948,98 @@ msgstr "परिसीमकरूपेण ट्याब् इत्यस�
 msgid "Other"
 msgstr "इतर"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:264
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:297
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "सीमांककरूपेण कस्टम् स्ट्रिंग् इत्यस्य उपयोगं कुर्वन्तु ।"
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:271
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:304
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "कोलन इत्यादिः कस्टम् तारः परिसीमकरूपेण उपयोक्तुं शक्यते ।"
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:290
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:323
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "सारणीस्तम्भपरिसीमकः :"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:289
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:322
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr "स्तम्भनिर्धारकः <i>Table</i> क्षेत्रस्य प्रत्येकस्मिन् स्तम्भे मूल्यानि पृथक् करोति ।"
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:301
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:334
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "सारणीपङ्क्तिसीमक :"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:300
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:333
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "पङ्क्तिसीमकः <i>Table</i> क्षेत्रस्य प्रत्येकपङ्क्तौ मूल्यानि पृथक् करोति ।"
 
-#: src/translators/csvimporter.cpp:224
+#: src/translators/csvimporter.cpp:247
 #: src/translators/filelistingimporter.cpp:176
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "आयातितस्य संग्रहस्य प्रकारं चिनोतु ।"
 
-#: src/translators/csvimporter.cpp:228
+#: src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "&प्रथमपङ्क्तौ क्षेत्रशीर्षकाणि सन्ति"
 
-#: src/translators/csvimporter.cpp:229
+#: src/translators/csvimporter.cpp:255
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr "यदि चेक् कृतं तर्हि प्रथमपङ्क्तिः क्षेत्रशीर्षकरूपेण उपयुज्यते ।"
 
-#: src/translators/csvimporter.cpp:241
+#: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:337
+#, fuzzy, kde-format
+#| msgid "Import owned items only"
+msgid "Import images as links only"
+msgstr "केवलं स्वामित्वयुक्तानि वस्तूनि आयातयन्तु"
+
+#: src/translators/csvimporter.cpp:260 src/translators/gcstarimporter.cpp:338
+#, fuzzy, kde-format
+#| msgid "If checked, the field names will be printed as table headers."
+msgid ""
+"If checked, the image paths will be imported as links instead of being "
+"managed by Tellico directly."
+msgstr "यदि चेक् कृतं तर्हि क्षेत्रनामानि सारणीशीर्षकरूपेण मुद्रितानि भविष्यन्ति ।"
+
+#: src/translators/csvimporter.cpp:274
 #, kde-format
 msgid "Delimiter:"
 msgstr "परिसीमकः :"
 
-#: src/translators/csvimporter.cpp:247
+#: src/translators/csvimporter.cpp:280
 #, kde-format
 msgid "&Comma"
 msgstr "&अल्पविरामः"
 
-#: src/translators/csvimporter.cpp:253
+#: src/translators/csvimporter.cpp:286
 #, kde-format
 msgid "&Semicolon"
 msgstr "&अर्धविराम"
 
-#: src/translators/csvimporter.cpp:258
+#: src/translators/csvimporter.cpp:291
 #, kde-format
 msgid "Ta&b"
 msgstr "ता&ब"
 
-#: src/translators/csvimporter.cpp:263
+#: src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Ot&her:"
 msgstr "इतर:"
 
-#: src/translators/csvimporter.cpp:320
+#: src/translators/csvimporter.cpp:353
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "सारणी CSV सञ्चिकायाः प्रथमपञ्चपङ्क्तयः यावत् दर्शयति ।"
 
-#: src/translators/csvimporter.cpp:327
+#: src/translators/csvimporter.cpp:360
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -7035,22 +7049,22 @@ msgstr ""
 "<qt>प्रत्येकं स्तम्भं संग्रहे क्षेत्रस्य अनुरूपं स्तम्भं चित्वा, क्षेत्रं चित्वा, ततः <i>Assign Field "
 "इति</i> बटन् नुत्वा सेट् कुर्वन्तु ।</qt>"
 
-#: src/translators/csvimporter.cpp:329
+#: src/translators/csvimporter.cpp:362
 #, kde-format
 msgid "Co&lumn:"
 msgstr "को&लम् :"
 
-#: src/translators/csvimporter.cpp:342
+#: src/translators/csvimporter.cpp:375
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "&अस्मिन् स्तम्भे Data क्षेत्रम् :"
 
-#: src/translators/csvimporter.cpp:356
+#: src/translators/csvimporter.cpp:389
 #, kde-format
 msgid "&Assign Field"
 msgstr "&क्षेत्रं नियुक्तं कुर्वन्तु"
 
-#: src/translators/csvimporter.cpp:395
+#: src/translators/csvimporter.cpp:430
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
@@ -7059,12 +7073,12 @@ msgstr ""
 "क्षेत्रे न्यूनातिन्यूनम् एकः स्तम्भः अवश्यमेव नियुक्तः भवेत् । केवलं नियुक्तस्तम्भाः एव आयाताः "
 "भविष्यन्ति ।"
 
-#: src/translators/csvimporter.cpp:592
+#: src/translators/csvimporter.cpp:627
 #, kde-format
 msgid "Review"
 msgstr "परिशीलयतु"
 
-#: src/translators/csvimporter.cpp:685
+#: src/translators/csvimporter.cpp:720
 #, kde-format
 msgid "<New Field>"
 msgstr "<नव क्षेत्र>"
@@ -7185,20 +7199,6 @@ msgstr "आवरणस्य चित्रं लोड् कर्तुं
 #| msgid "Color Options"
 msgid "GCstar Options"
 msgstr "वर्णविकल्पाः"
-
-#: src/translators/gcstarimporter.cpp:337
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
-msgid "Import images as links only"
-msgstr "केवलं स्वामित्वयुक्तानि वस्तूनि आयातयन्तु"
-
-#: src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
-msgid ""
-"If checked, the image paths will be imported as links instead of being "
-"managed by Tellico directly."
-msgstr "यदि चेक् कृतं तर्हि क्षेत्रनामानि सारणीशीर्षकरूपेण मुद्रितानि भविष्यन्ति ।"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format

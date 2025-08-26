@@ -12,16 +12,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:42+0000\n"
-"PO-Revision-Date: 2025-03-13 15:54+0300\n"
-"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"POT-Creation-Date: 2025-08-26 00:43+0000\n"
+"PO-Revision-Date: 2025-08-25 09:43+0300\n"
+"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2558,7 +2558,7 @@ msgstr "Şablon Seçenekleri"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:219
+#: src/translators/csvimporter.cpp:242
 #: src/translators/filelistingimporter.cpp:177
 #, kde-format
 msgid "Collection &type:"
@@ -6907,7 +6907,7 @@ msgstr "Yalnızca sahip olunan ögeleri içe aktar"
 msgid "User ID:"
 msgstr "Kullanıcı Kimliği:"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:214
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:237
 #, kde-format
 msgid "CSV Options"
 msgstr "CSV Seçenekleri"
@@ -6927,7 +6927,7 @@ msgstr "İşaretliyse alan adıyla birlikte, bir başlık satırı da eklenecekt
 msgid "Delimiter"
 msgstr "Sınırlayıcı"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:242
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:275
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6941,7 +6941,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Virgül"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:249
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:282
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "Sınırlayıcı olarak bir virgül kullanın."
@@ -6951,7 +6951,7 @@ msgstr "Sınırlayıcı olarak bir virgül kullanın."
 msgid "Semicolon"
 msgstr "Noktalı Virgül"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:254
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:287
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "Sınırlayıcı olarak bir noktalı virgül kullanın."
@@ -6961,7 +6961,7 @@ msgstr "Sınırlayıcı olarak bir noktalı virgül kullanın."
 msgid "Tab"
 msgstr "Sekme"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:259
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:292
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "Sınırlayıcı olarak bir sekme kullanın."
@@ -6972,23 +6972,23 @@ msgstr "Sınırlayıcı olarak bir sekme kullanın."
 msgid "Other"
 msgstr "Diğer"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:264
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:297
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "Sınırlayıcı olarak özel bir dizi kullan."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:271
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:304
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 "İki nokta üst üste gibi özel bir dizi, sınırlayıcı olarak kullanılabilir."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:290
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:323
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "Tablo sütun sınırlandırıcısı:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:289
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:322
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
@@ -6996,65 +6996,79 @@ msgstr ""
 "Sütun sınırlayıcı, bir <i>Tablo</i> alanının her bir sütunundaki değerleri "
 "ayırır."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:301
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:334
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "Tablo satır sınırlandırıcısı:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:300
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:333
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
 "Satır sınırlayıcı, bir <i>Tablo</i> alanının her satırındaki değerleri "
 "ayırır."
 
-#: src/translators/csvimporter.cpp:224
+#: src/translators/csvimporter.cpp:247
 #: src/translators/filelistingimporter.cpp:176
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "İçe aktarılan koleksiyonun türünü seçin."
 
-#: src/translators/csvimporter.cpp:228
+#: src/translators/csvimporter.cpp:254
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "&İlk satır alan başlıklarını içerir"
 
-#: src/translators/csvimporter.cpp:229
+#: src/translators/csvimporter.cpp:255
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr "İşaretliyse ilk satır alan etiketi olarak kullanılır."
 
-#: src/translators/csvimporter.cpp:241
+#: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:337
+#, kde-format
+msgid "Import images as links only"
+msgstr "Görselleri yalnızca bağlantılar olarak içe aktar"
+
+#: src/translators/csvimporter.cpp:260 src/translators/gcstarimporter.cpp:338
+#, kde-format
+msgid ""
+"If checked, the image paths will be imported as links instead of being "
+"managed by Tellico directly."
+msgstr ""
+"İşaretliyse görsel yolları Tellico tarafından doğrudan yönetilmek yerine "
+"yalnızca bağlantılar olarak içe aktarılacaklardır."
+
+#: src/translators/csvimporter.cpp:274
 #, kde-format
 msgid "Delimiter:"
 msgstr "Sınırlayıcı:"
 
-#: src/translators/csvimporter.cpp:247
+#: src/translators/csvimporter.cpp:280
 #, kde-format
 msgid "&Comma"
 msgstr "&Virgül"
 
-#: src/translators/csvimporter.cpp:253
+#: src/translators/csvimporter.cpp:286
 #, kde-format
 msgid "&Semicolon"
 msgstr "&Noktalı Virgül"
 
-#: src/translators/csvimporter.cpp:258
+#: src/translators/csvimporter.cpp:291
 #, kde-format
 msgid "Ta&b"
 msgstr "&Sekme"
 
-#: src/translators/csvimporter.cpp:263
+#: src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Ot&her:"
 msgstr "&Diğer:"
 
-#: src/translators/csvimporter.cpp:320
+#: src/translators/csvimporter.cpp:353
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "Tablo, CSV dosyasının ilk beş satırını gösterir."
 
-#: src/translators/csvimporter.cpp:327
+#: src/translators/csvimporter.cpp:360
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -7064,22 +7078,22 @@ msgstr ""
 "<qt>Koleksiyon içindeki alana uyan her sütunu, bir sütun ve alan seçerek "
 "ayarlayın, sonra <i>Alan Atama</i> tuşuna basın.</qt>"
 
-#: src/translators/csvimporter.cpp:329
+#: src/translators/csvimporter.cpp:362
 #, kde-format
 msgid "Co&lumn:"
 msgstr "&Sütun:"
 
-#: src/translators/csvimporter.cpp:342
+#: src/translators/csvimporter.cpp:375
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "Bu sütun&da veri alanı:"
 
-#: src/translators/csvimporter.cpp:356
+#: src/translators/csvimporter.cpp:389
 #, kde-format
 msgid "&Assign Field"
 msgstr "&Alan Ata"
 
-#: src/translators/csvimporter.cpp:395
+#: src/translators/csvimporter.cpp:430
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
@@ -7088,12 +7102,12 @@ msgstr ""
 "En azından bir sütun bir alana atanmalıdır. Yalnızca atanan sütunlar içe "
 "aktarılacaktır."
 
-#: src/translators/csvimporter.cpp:592
+#: src/translators/csvimporter.cpp:627
 #, kde-format
 msgid "Review"
 msgstr "Gözden Geçir"
 
-#: src/translators/csvimporter.cpp:685
+#: src/translators/csvimporter.cpp:720
 #, kde-format
 msgid "<New Field>"
 msgstr "<Yeni Alan>"
@@ -7204,30 +7218,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Dosya, geçerli bir GCstar veri dosyası değil.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "Kapak görseli yüklenemedi."
+msgstr "GCstar modeli dosyası bulunamadı."
 
 #: src/translators/gcstarimporter.cpp:334
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Renk Seçenekleri"
-
-#: src/translators/gcstarimporter.cpp:337
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
-msgid "Import images as links only"
-msgstr "Yalnızca sahip olunan ögeleri içe aktar"
-
-#: src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
-msgid ""
-"If checked, the image paths will be imported as links instead of being "
-"managed by Tellico directly."
-msgstr "İşaretliyse alan adları tablo başlıkları olarak yazdırılacaktır."
+msgstr "GCstar Seçenekleri"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
