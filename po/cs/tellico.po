@@ -6999,18 +6999,16 @@ msgid "If checked, the first row is used as field titles."
 msgstr "Je-li zaškrtnuto, bude první řada použita jako názvy polí."
 
 #: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:337
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
+#, kde-format
 msgid "Import images as links only"
-msgstr "Importovat pouze vlastněné položky"
+msgstr ""
 
 #: src/translators/csvimporter.cpp:260 src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
-msgstr "Je-li zaškrtnuto, budou názvy polí vytištěny jako hlavičky tabulky."
+msgstr ""
 
 #: src/translators/csvimporter.cpp:274
 #, kde-format
@@ -7193,16 +7191,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Soubor není platným datovým souborem GCstar.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "Nelze načíst obrázek obálky."
+msgstr ""
 
 #: src/translators/gcstarimporter.cpp:334
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Možnosti barev"
+msgstr ""
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
