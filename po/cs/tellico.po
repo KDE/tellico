@@ -2193,11 +2193,10 @@ msgid ""
 msgstr ""
 
 #: src/config/tellico_config.kcfg:89
-#, fuzzy, kde-format
-#| msgid "Other"
+#, kde-format
 msgctxt "comma-separated list of articles ignored for title sorting"
 msgid "the"
-msgstr "Jiné"
+msgstr ""
 
 #: src/config/tellico_config.kcfg:92
 #, kde-format
