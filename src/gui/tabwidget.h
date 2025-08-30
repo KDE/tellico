@@ -47,6 +47,10 @@ public:
    */
   void setFocusToFirstChild();
   void setTabBarHidden(bool hide);
+
+private Q_SLOTS:
+  void slotNextTab();
+  void slotPrevTab();
 };
 
   } // end namespace
