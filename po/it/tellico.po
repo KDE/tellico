@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-26 00:43+0000\n"
-"PO-Revision-Date: 2025-03-22 13:34+0100\n"
+"PO-Revision-Date: 2025-08-27 17:35+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -7072,20 +7072,18 @@ msgstr ""
 "Se selezionato, la prima riga verrà utilizzata come titolo per i campi."
 
 #: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:337
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
+#, kde-format
 msgid "Import images as links only"
-msgstr "Importa solo gli elementi posseduti"
+msgstr "Importa le immagini solo come collegamenti"
 
 #: src/translators/csvimporter.cpp:260 src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
 msgstr ""
-"Se selezionato, i nomi di campo saranno stampati come intestazioni della "
-"tabella."
+"Se selezionato, i percorsi delle immagini saranno importati come "
+"collegamenti invece che essere gestite direttamente da Tellico."
 
 #: src/translators/csvimporter.cpp:274
 #, kde-format
@@ -7272,16 +7270,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Il file selezionato non è un file GCstar valido.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "L'immagine di copertina non può essere caricata."
+msgstr "Impossibile trovare il file del modello GCstar."
 
 #: src/translators/gcstarimporter.cpp:334
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Opzioni colore"
+msgstr "Opzioni di GCstar"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
