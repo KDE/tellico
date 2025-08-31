@@ -30,6 +30,7 @@ set(PIC_FILES
     nocover_comic.png
     nocover_game.png
     nocover_video.png
+    onmyshelf.png
     person-open.png
     person.png
     README.icons
@@ -83,5 +84,3 @@ ecm_install_icons(ICONS ${ICON_FILES}
     DESTINATION ${KDE_INSTALL_ICONDIR}
     THEME hicolor
 )
-
-

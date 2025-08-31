@@ -38,6 +38,7 @@ set(translators_STAT_SRCS
     librarythingimporter.cpp
     marcimporter.cpp
     onixexporter.cpp
+    onmyshelfimporter.cpp
     pdfimporter.cpp
     referencerimporter.cpp
     risimporter.cpp

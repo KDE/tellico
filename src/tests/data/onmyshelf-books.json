@@ -1,0 +1,619 @@
+{
+  "id": 6,
+  "name": {
+    "en_US": "My books"
+  },
+  "description": [],
+  "cover": null,
+  "thumbnails": [],
+  "owner": 1,
+  "type": "books",
+  "visibility": 3,
+  "borrowable": 3,
+  "created": "2025-08-30 19:45:56",
+  "updated": "2025-08-30 19:45:56",
+  "properties": {
+    "cover": {
+      "type": "image",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 1,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "en_US": "Cover",
+        "fr_FR": "Couverture"
+      },
+      "description": {
+        "en_US": null,
+        "fr_FR": null
+      }
+    },
+    "title": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 1,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "en_US": "Title",
+        "fr_FR": "Titre"
+      },
+      "description": {
+        "en_US": null,
+        "fr_FR": null
+      }
+    },
+    "subtitle": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 1,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "en_US": "Subtitle",
+        "fr_FR": "Sous-titre"
+      },
+      "description": {
+        "en_US": null,
+        "fr_FR": null
+      }
+    },
+    "author": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 1,
+      "multiple": 1,
+      "filterable": 1,
+      "searchable": 1,
+      "sortable": 0,
+      "order": 10,
+      "hidden": 0,
+      "label": {
+        "en_US": "Author",
+        "fr_FR": "Auteur"
+      },
+      "description": {
+        "en_US": null,
+        "fr_FR": null
+      },
+      "values": [
+        "my author1",
+        "my author2"
+      ]
+    },
+    "series": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 1,
+      "multiple": 0,
+      "filterable": 1,
+      "searchable": 1,
+      "sortable": 0,
+      "order": 8,
+      "hidden": 0,
+      "label": {
+        "fr_FR": "Série"
+      },
+      "description": {
+        "fr_FR": null
+      },
+      "values": [
+        "series"
+      ]
+    },
+    "pub_year": {
+      "type": "number",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 1,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 1,
+      "order": 7,
+      "hidden": 0,
+      "label": {
+        "en_US": "Published year",
+        "fr_FR": "Année de publication"
+      },
+      "description": {
+        "en_US": null,
+        "fr_FR": null
+      }
+    },
+    "series_number": {
+      "type": "number",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 1,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 7,
+      "hidden": 0,
+      "label": {
+        "fr_FR": "Tome"
+      },
+      "description": {
+        "fr_FR": null
+      }
+    },
+    "genre": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 1,
+      "multiple": 0,
+      "filterable": 1,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 6,
+      "hidden": 0,
+      "label": {
+        "en_US": "Genre"
+      },
+      "description": {
+        "en_US": null
+      },
+      "values": [
+        "genre"
+      ]
+    },
+    "editor": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 1,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 9,
+      "hidden": 0,
+      "label": {
+        "en_US": "Editor",
+        "fr_FR": "Éditeur"
+      },
+      "description": {
+        "en_US": null,
+        "fr_FR": null
+      },
+      "values": [
+        "my editor"
+      ]
+    },
+    "format": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 1,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 5,
+      "hidden": 0,
+      "label": {
+        "en_US": "Format"
+      },
+      "description": {
+        "en_US": null
+      },
+      "values": [
+        "Paperback"
+      ]
+    },
+    "pages": {
+      "type": "number",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 1,
+      "order": 4,
+      "hidden": 0,
+      "label": {
+        "en_US": "Pages"
+      },
+      "description": {
+        "en_US": null
+      }
+    },
+    "publisher": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 1,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 3,
+      "hidden": 0,
+      "label": {
+        "fr_FR": "Maison d'édition"
+      },
+      "description": {
+        "fr_FR": null
+      },
+      "values": [
+        "publisher"
+      ]
+    },
+    "summary": {
+      "type": "longtext",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 2,
+      "hidden": 0,
+      "label": {
+        "en_US": "Summary",
+        "fr_FR": "Résumé"
+      },
+      "description": {
+        "en_US": null,
+        "fr_FR": null
+      }
+    },
+    "language": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 1,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 1,
+      "hidden": 0,
+      "label": {
+        "en_US": "Language",
+        "fr_FR": "Langue"
+      },
+      "description": {
+        "en_US": null,
+        "fr_FR": null
+      },
+      "values": [
+        "English"
+      ]
+    },
+    "images": {
+      "type": "image",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 1,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "en_US": "Images"
+      },
+      "description": {
+        "en_US": null
+      }
+    },
+    "isbn": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "en_US": "ISBN"
+      },
+      "description": {
+        "en_US": null
+      }
+    },
+    "read": {
+      "type": "yesno",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "fr_FR": "Lu"
+      },
+      "description": {
+        "fr_FR": null
+      }
+    },
+    "signed": {
+      "type": "yesno",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 3,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "fr_FR": "Signé"
+      },
+      "description": {
+        "fr_FR": null
+      }
+    },
+    "source": {
+      "type": "url",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 3,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 1,
+      "label": {
+        "en_US": "Source"
+      },
+      "description": {
+        "en_US": null
+      }
+    }
+  },
+  "tags": [
+    "books"
+  ],
+  "items": [
+    {
+      "id": 12372,
+      "collectionId": 6,
+      "properties": {
+        "author": [
+          "my author1",
+          "my author2"
+        ],
+        "editor": "my editor",
+        "format": "Paperback",
+        "genre": "genre",
+        "isbn": "0671578499",
+        "language": "English",
+        "pages": "101",
+        "publisher": "publisher",
+        "pub_year": "1999",
+        "read": "1",
+        "series": "series",
+        "series_number": "1",
+        "subtitle": "subtitle",
+        "summary": "summary of thigns\n\nnext line",
+        "title": "title"
+      },
+      "quantity": 1,
+      "visibility": 0,
+      "borrowable": 3,
+      "created": "2025-08-30 19:47:01",
+      "updated": "2025-08-30 19:47:01",
+      "lent": true,
+      "pendingLoans": 0,
+      "askingLoans": 0,
+      "loans": [
+        {
+          "id": 1,
+          "itemId": 12372,
+          "borrowerId": 1,
+          "state": "lent",
+          "lent": 1756604340,
+          "returned": null,
+          "notes": "loaned this time",
+          "date": "2025-08-31 01:39:26",
+          "borrower": "my borrower",
+          "email": null
+        }
+      ]
+    },
+    {
+      "id": 12373,
+      "collectionId": 6,
+      "properties": {
+        "author": "my author1",
+        "series": "series",
+        "series_number": "2",
+        "title": "title2"
+      },
+      "quantity": 1,
+      "visibility": 0,
+      "borrowable": 3,
+      "created": "2025-08-30 19:47:28",
+      "updated": "2025-08-30 19:47:28",
+      "lent": false,
+      "pendingLoans": 0,
+      "askingLoans": 0,
+      "loans": []
+    }
+  ]
+}

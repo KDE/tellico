@@ -51,6 +51,7 @@ To facilitate the use of barcode scanners, searches can include multiple ISBN/UP
 
 <para>&appname; can import data directly from a variety of other collection management programs, including
   <application><ulink url="https://gitlab.com/GCstar/GCstar">GCstar</ulink></application>,
+  <application><ulink url="https://onmyshelf.app">OnMyShelf</ulink></application>,
   <application><ulink url="https://www.datacrow.net/">Data Crow</ulink></application>,
   <application><ulink url="https://github.com/mvz/alexandria-book-collection-manager">Alexandria</ulink></application>,
   <application><ulink url="https://www.delicious-monster.com">Delicious Library</ulink></application>,

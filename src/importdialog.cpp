@@ -57,6 +57,7 @@
 #include "translators/marcimporter.h"
 #include "translators/ebookimporter.h"
 #include "translators/discogsimporter.h"
+#include "translators/onmyshelfimporter.h"
 #include "utils/datafileregistry.h"
 
 #include <KLocalizedString>
@@ -185,8 +186,11 @@ Tellico::Import::Action ImportDialog::action() const {
 
 // static
 Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format_, const QList<QUrl>& urls_) {
-#define CHECK_SIZE if(urls_.size() > 1) myWarning() << "only importing first URL"
-  QUrl firstURL = urls_.isEmpty() ? QUrl() : urls_[0];
+  const QUrl firstURL = urls_.isEmpty() ? QUrl() : urls_[0];
+#define CHECK_SIZE \
+  if(urls_.size() > 1) myWarning() << "Only importing first URL"; \
+  else myLog() << "Importing" << firstURL.toDisplayString(QUrl::PreferLocalFile);
+
   Import::Importer* importer = nullptr;
   switch(format_) {
     case Import::TellicoXML:
@@ -334,6 +338,11 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       CHECK_SIZE;
       importer = new Import::DiscogsImporter();
       break;
+
+    case Import::OnMyShelf:
+      CHECK_SIZE;
+      importer = new Import::OnMyShelfImporter(firstURL);
+      break;
   }
   if(!importer) {
     myWarning() << "importer not created!";
@@ -423,6 +432,10 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
     case Import::EBook:
       // KFileMetaData has extractors that support mimetypes with these typical extensions
       text = i18n("eBook Files") + QLatin1String(" (*.epub *.fb2 *.fb2zip *.mobi)") + QLatin1String(";;");
+      break;
+
+    case Import::OnMyShelf:
+      text = i18n("JSON Files") + QLatin1String(" (*.json)") + QLatin1String(";;");
       break;
 
     case Import::AudioFile:

@@ -422,6 +422,12 @@ ecm_add_test(modstest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
 )
 
+ecm_add_test(onmyshelftest.cpp
+    ../translators/onmyshelfimporter.cpp
+    TEST_NAME onmyshelftest
+    LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
+)
+
 ecm_add_test(referencertest.cpp
     ../translators/referencerimporter.cpp
     TEST_NAME referencertest

@@ -1,0 +1,231 @@
+{
+  "id": 7,
+  "name": {
+    "en_US": "My movies"
+  },
+  "description": [],
+  "cover": null,
+  "thumbnails": [],
+  "owner": 1,
+  "type": "movies",
+  "visibility": 3,
+  "borrowable": 3,
+  "created": "2025-08-31 18:20:02",
+  "updated": "2025-08-31 18:20:02",
+  "properties": {
+    "cover": {
+      "type": "image",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 1,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "en_US": "Cover",
+        "fr_FR": "Couverture"
+      },
+      "description": {
+        "en_US": null,
+        "fr_FR": null
+      }
+    },
+    "title": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 1,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "en_US": "Title",
+        "fr_FR": "Titre"
+      },
+      "description": {
+        "en_US": null,
+        "fr_FR": null
+      }
+    },
+    "director": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "fr_FR": "Réalisateur"
+      },
+      "description": {
+        "fr_FR": null
+      }
+    },
+    "format": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 1,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "en_US": "Format"
+      },
+      "description": {
+        "en_US": null
+      },
+      "values": [
+        "widescreen?"
+      ]
+    },
+    "rating": {
+      "type": "rating",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 1,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "fr_FR": "Note"
+      },
+      "description": {
+        "fr_FR": null
+      }
+    },
+    "synopsis": {
+      "type": "longtext",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "fr_FR": "Résumé"
+      },
+      "description": {
+        "fr_FR": null
+      }
+    },
+    "trailer": {
+      "type": "video",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "fr_FR": "Bande-annonce"
+      },
+      "description": {
+        "fr_FR": null
+      }
+    }
+  },
+  "tags": [
+    "movies"
+  ],
+  "items": [
+    {
+      "id": 12374,
+      "collectionId": 7,
+      "properties": {
+        "director": "my director",
+        "format": "widescreen?",
+        "rating": "1",
+        "synopsis": "plot here",
+        "title": "title"
+      },
+      "quantity": 1,
+      "visibility": 0,
+      "borrowable": 3,
+      "created": "2025-08-31 18:20:53",
+      "updated": "2025-08-31 18:20:53",
+      "lent": false,
+      "pendingLoans": 0,
+      "askingLoans": 0,
+      "loans": []
+    }
+  ]
+}

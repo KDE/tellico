@@ -390,6 +390,10 @@ void MainWindow::initActions() {
                 i18n("Import data from Data Crow"),
                 QIcon::fromTheme(QStringLiteral("datacrow"), QIcon(QLatin1String(":/icons/datacrow"))));
 
+  IMPORT_ACTION(Import::OnMyShelf, "file_import_onmyshelf", i18n("Import OnMyShelf Data..."),
+                i18n("Import data from OnMyShelf"),
+                QIcon::fromTheme(QStringLiteral("onmyshelf"), QIcon(QLatin1String(":/icons/onmyshelf"))));
+
   IMPORT_ACTION(Import::Referencer, "file_import_referencer", i18n("Import Referencer Data..."),
                 i18n("Import data from Referencer"),
                 QIcon::fromTheme(QStringLiteral("referencer"), QIcon(QLatin1String(":/icons/referencer"))));

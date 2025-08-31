@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2025 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,78 +22,42 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TRANSLATORS_H
-#define TRANSLATORS_H
+#ifndef TELLICO_IMPORT_ONMYSHELFIMPORTER_H
+#define TELLICO_IMPORT_ONMYSHELFIMPORTER_H
+
+#include "importer.h"
 
 namespace Tellico {
   namespace Import {
-    enum Format {
-      TellicoXML = 0,
-      Bibtex,
-      Bibtexml,
-      CSV,
-      XSLT,
-      AudioFile,
-      MODS,
-      Alexandria,
-      FreeDB,
-      RIS,
-      GCstar,
-      FileListing,
-      GRS1,
-      AMC,
-      Griffith,
-      PDF,
-      Referencer,
-      Delicious,
-      Goodreads,
-      CIW,
-      VinoXML,
-      BoardGameGeek,
-      LibraryThing,
-      Collectorz,
-      DataCrow,
-      MARC,
-      EBook,
-      Discogs,
-      OnMyShelf
-    };
 
-    enum Action {
-      Replace,
-      Append,
-      Merge
-    };
+/**
+ * @author Robby Stephenson
+*/
+class OnMyShelfImporter : public Importer {
+Q_OBJECT
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
+public:
+  /**
+   */
+  OnMyShelfImporter(const QUrl& url);
 
-  namespace Export {
-    enum Format {
-      TellicoXML = 0,
-      TellicoZip,
-      Bibtex,
-      Bibtexml,
-      HTML,
-      CSV,
-      XSLT,
-      Text,
-      PilotDB, // Deprecated
-      Alexandria,
-      ONIX,
-      GCstar
-    };
+  virtual Data::CollPtr collection() override;
+  virtual bool canImport(int type) const override;
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
-}
+  virtual QWidget* widget(QWidget*) override { return nullptr; }
 
+public Q_SLOTS:
+  void slotCancel() override {}
+
+private:
+  void populateBooks(Data::EntryPtr entry, const QJsonObject& obj);
+  void populateMovies(Data::EntryPtr entry, const QJsonObject& obj);
+  void populateComics(Data::EntryPtr entry, const QJsonObject& obj);
+  void populateBoardGames(Data::EntryPtr entry, const QJsonObject& obj);
+
+  Data::CollPtr m_coll;
+};
+
+  } // end namespace
+} // end namespace
 #endif

@@ -1,0 +1,235 @@
+{
+  "id": 9,
+  "name": {
+    "en_US": "My comics"
+  },
+  "description": [],
+  "cover": null,
+  "thumbnails": [],
+  "owner": 1,
+  "type": "comics",
+  "visibility": 3,
+  "borrowable": 3,
+  "created": "2025-08-31 18:21:52",
+  "updated": "2025-08-31 18:21:52",
+  "properties": {
+    "cover": {
+      "type": "image",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 1,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "en_US": "Cover",
+        "fr_FR": "Couverture"
+      },
+      "description": {
+        "en_US": null,
+        "fr_FR": null
+      }
+    },
+    "title": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 1,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "en_US": "Title",
+        "fr_FR": "Titre"
+      },
+      "description": {
+        "en_US": null,
+        "fr_FR": null
+      }
+    },
+    "series": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 1,
+      "multiple": 0,
+      "filterable": 1,
+      "searchable": 1,
+      "sortable": 0,
+      "order": 8,
+      "hidden": 0,
+      "label": {
+        "fr_FR": "Série"
+      },
+      "description": {
+        "fr_FR": null
+      },
+      "values": [
+        "series"
+      ]
+    },
+    "series_number": {
+      "type": "number",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 1,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 7,
+      "hidden": 0,
+      "label": {
+        "fr_FR": "Tome"
+      },
+      "description": {
+        "fr_FR": null
+      }
+    },
+    "format": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 1,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "en_US": "Format"
+      },
+      "description": {
+        "en_US": null
+      },
+      "values": [
+        "Paperback"
+      ]
+    },
+    "synopsis": {
+      "type": "longtext",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "en_US": "Synopsis"
+      },
+      "description": {
+        "en_US": null
+      }
+    },
+    "writer": {
+      "type": "text",
+      "suffix": null,
+      "default": null,
+      "authorizedValues": null,
+      "visibility": 0,
+      "required": 0,
+      "hideLabel": 0,
+      "isId": 0,
+      "isTitle": 0,
+      "isSubTitle": 0,
+      "isCover": 0,
+      "preview": 0,
+      "multiple": 0,
+      "filterable": 0,
+      "searchable": 0,
+      "sortable": 0,
+      "order": 0,
+      "hidden": 0,
+      "label": {
+        "fr_FR": "Auteur"
+      },
+      "description": {
+        "fr_FR": null
+      }
+    }
+  },
+  "tags": [
+    "comics"
+  ],
+  "items": [
+    {
+      "id": 12376,
+      "collectionId": 9,
+      "properties": {
+        "format": "Paperback",
+        "series": "series",
+        "series_number": "1",
+        "synopsis": "synopsis",
+        "title": "title",
+        "writer": "my author"
+      },
+      "quantity": 1,
+      "visibility": 0,
+      "borrowable": 3,
+      "created": "2025-08-31 18:22:21",
+      "updated": "2025-08-31 18:22:21",
+      "lent": false,
+      "pendingLoans": 0,
+      "askingLoans": 0,
+      "loans": []
+    }
+  ]
+}
