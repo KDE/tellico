@@ -157,7 +157,7 @@ msgstr[1] "Hi ha %1 claus de citació duplicades."
 #: src/borrowerdialog.cpp:74
 #, kde-format
 msgid "Select Borrower"
-msgstr "Seleccioneu el prestatari"
+msgstr "Trieu el prestatari"
 
 #: src/borrowerdialog.cpp:91 src/collections/filecatalog.cpp:49
 #, kde-format
@@ -2662,9 +2662,8 @@ msgid ""
 "Select the template to use for the current type of collections. Not all "
 "templates will use the font and color settings."
 msgstr ""
-"Seleccioneu la plantilla que s'utilitzarà per al tipus de col·lecció actual. "
-"No totes les plantilles utilitzen la configuració del tipus de lletra i "
-"color."
+"Trieu la plantilla que s'utilitzarà per al tipus de col·lecció actual. No "
+"totes les plantilles utilitzen la configuració del tipus de lletra i color."
 
 #: src/configdialog.cpp:451
 #, kde-format
@@ -2866,7 +2865,7 @@ msgstr "Suprimix la plantilla"
 #: src/configdialog.cpp:1201
 #, kde-format
 msgid "Select template to delete:"
-msgstr "Seleccioneu la plantilla que s'ha de suprimir:"
+msgstr "Trieu la plantilla que s'ha de suprimir:"
 
 #: src/controller.cpp:140 src/controller.cpp:194 src/fetchdialog.cpp:330
 #: src/fetchdialog.cpp:429 src/fetchdialog.cpp:563 src/fetchdialog.cpp:624
@@ -3147,7 +3146,7 @@ msgstr "Obri %1"
 #: src/entrymatchdialog.cpp:56
 #, kde-format
 msgid "Select Match"
-msgstr "Seleccioneu la coincidència"
+msgstr "Trieu la coincidència"
 
 #: src/entrymatchdialog.cpp:75
 #, kde-format
@@ -3156,8 +3155,8 @@ msgid ""
 "entry currently in the collection. Please select the correct match.</qt>"
 msgstr ""
 "<qt><b>%1</b> ha retornat múltiples resultats que poden coincidir amb <b>%2</"
-"b>, l'entrada actualment en la col·lecció. Seleccioneu la coincidència "
-"correcta.</qt>"
+"b>, l'entrada actualment en la col·lecció. Trieu la coincidència correcta.</"
+"qt>"
 
 #: src/entrymerger.cpp:53 src/tellico_kernel.cpp:351 src/tellico_kernel.cpp:363
 #, kde-format
@@ -3921,7 +3920,7 @@ msgstr ""
 #: src/fetch/execexternalfetcher.cpp:408
 #, kde-format
 msgid "Select the search keys supported by the data source."
-msgstr "Seleccioneu les tecles de busca acceptades per la font de les dades."
+msgstr "Trieu les tecles de busca acceptades per la font de les dades."
 
 #: src/fetch/execexternalfetcher.cpp:410
 #, kde-format
@@ -4050,7 +4049,7 @@ msgstr "&Connector: "
 #: src/fetch/gcstarpluginfetcher.cpp:424
 #, kde-format
 msgid "Select the GCstar plugin used for the data source."
-msgstr "Seleccioneu el connector GCstar utilitzat per a la font de les dades."
+msgstr "Trieu el connector GCstar utilitzat per a la font de les dades."
 
 #: src/fetch/gcstarpluginfetcher.cpp:429
 #, kde-format
@@ -4510,7 +4509,7 @@ msgid ""
 "automatically detect the best setting if <i>auto-detect</i> is selected."
 msgstr ""
 "Introduïu el format de les dades utilitzat pel servidor z39.50. Tellico "
-"intentarà detectar automàticament el millor configuració si se selecciona "
+"intentarà detectar automàticament el millor configuració si es tria "
 "<i>Detecta automàticament</i>."
 
 #: src/fetch/z3950fetcher.cpp:686
@@ -4583,7 +4582,7 @@ msgstr ""
 #: src/fetchdialog.cpp:178
 #, kde-format
 msgid "Choose the type of search"
-msgstr "Seleccioneu el tipus de busca"
+msgstr "Trieu el tipus de busca"
 
 #: src/fetchdialog.cpp:185
 #, kde-format
@@ -4622,7 +4621,7 @@ msgstr "F&ont de la busca:"
 #: src/fetchdialog.cpp:235
 #, kde-format
 msgid "Select the database to search"
-msgstr "Seleccioneu la base de dades on buscar"
+msgstr "Trieu la base de dades on buscar"
 
 #: src/fetchdialog.cpp:254
 #, kde-format
@@ -5045,7 +5044,7 @@ msgstr "no conté"
 #: src/gui/imagewidget.cpp:108
 #, kde-format
 msgid "Select Image..."
-msgstr "Seleccioneu una imatge…"
+msgstr "Trieu una imatge…"
 
 #: src/gui/imagewidget.cpp:113
 #, kde-format
@@ -6026,7 +6025,7 @@ msgstr "Apega el contingut del porta-retalls"
 #: src/mainwindow.cpp:564
 #, kde-format
 msgid "Select all the entries in the collection"
-msgstr "Selecciona totes les entrades de la col·lecció"
+msgstr "Tria totes les entrades de la col·lecció"
 
 #: src/mainwindow.cpp:566
 #, kde-format
@@ -6273,7 +6272,7 @@ msgstr "Canvia l'agrupació"
 #: src/mainwindow.cpp:769
 #, kde-format
 msgid "&Group Selection"
-msgstr "Seleccioneu el &grup"
+msgstr "Trieu el &grup"
 
 #: src/mainwindow.cpp:770
 #, kde-format
@@ -6566,7 +6565,7 @@ msgstr "&Genera"
 #: src/reportdialog.cpp:160
 #, kde-format
 msgid "Select a report template and click <em>Generate</em>."
-msgstr "Seleccioneu una plantilla d'informe i cliqueu damunt <em>Genera</em>."
+msgstr "Trieu una plantilla d'informe i cliqueu damunt <em>Genera</em>."
 
 #: src/reportdialog.cpp:161
 #, kde-format
@@ -6619,13 +6618,13 @@ msgstr "S'han trobat valors conflictius per a %1 en fusionar les entrades."
 #: src/tellico_kernel.cpp:345
 #, kde-format
 msgid "Please choose which value to keep."
-msgstr "Seleccioneu el valor que es conservarà."
+msgstr "Trieu el valor que es conservarà."
 
 #: src/tellico_kernel.cpp:352 src/tellico_kernel.cpp:353
 #: src/tellico_kernel.cpp:364 src/tellico_kernel.cpp:365
 #, kde-format
 msgid "Select value from %1"
-msgstr "Seleccioneu el valor des de %1"
+msgstr "Trieu el valor des de %1"
 
 #. i18n: ectx: Menu (file)
 #: src/tellicoui.rc:6
@@ -7040,7 +7039,7 @@ msgstr ""
 #: src/translators/csvimporter.cpp:224
 #, kde-format
 msgid "Select the type of collection being imported."
-msgstr "Seleccioneu el tipus de col·lecció que s'està important."
+msgstr "Trieu el tipus de col·lecció que s'està important."
 
 #: src/translators/csvimporter.cpp:228
 #, kde-format
@@ -7177,12 +7176,12 @@ msgstr "<qt>Tellico no pot accedir al dispositiu de CD-ROM - <i>%1</i>.</qt>"
 #: src/translators/freedbimporter.cpp:214
 #, kde-format
 msgid "Select CDDB Entry"
-msgstr "Seleccioneu l'entrada CDDB"
+msgstr "Trieu l'entrada CDDB"
 
 #: src/translators/freedbimporter.cpp:215
 #, kde-format
 msgid "Select a CDDB entry:"
-msgstr "Seleccioneu una entrada CDDB:"
+msgstr "Trieu una entrada CDDB:"
 
 #: src/translators/freedbimporter.cpp:238
 #, kde-format
@@ -7212,7 +7211,7 @@ msgstr "Llig dades des del dispositiu de CD-ROM"
 #: src/translators/freedbimporter.cpp:515
 #, kde-format
 msgid "Select or input the CD-ROM device location."
-msgstr "Seleccioneu o introduïu la ubicació del dispositiu de CD-ROM."
+msgstr "Trieu o introduïu la ubicació del dispositiu de CD-ROM."
 
 #: src/translators/freedbimporter.cpp:524
 #, kde-format
@@ -7232,7 +7231,7 @@ msgstr ""
 #: src/translators/gcstarimporter.cpp:272
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
-msgstr "<qt>El fitxer no és un fitxer de dades vàlid del GCstar.</qt>"
+msgstr "<qt>El fitxer no és un fitxer de dades vàlid de GCstar.</qt>"
 
 #: src/translators/goodreadsimporter.cpp:148
 #, kde-format
