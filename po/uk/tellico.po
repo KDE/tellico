@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 02:39+0000\n"
+"POT-Creation-Date: 2025-09-01 02:37+0000\n"
 "PO-Revision-Date: 2025-08-25 09:36+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -741,7 +741,7 @@ msgstr "Ключ bibtex"
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/moviemeterfetcher.cpp:219
 #: src/fetch/moviemeterfetcher.cpp:224 src/fetch/numistafetcher.cpp:344
 #: src/fetch/numistafetcher.cpp:360 src/fetch/omdbfetcher.cpp:250
-#: src/fetch/openlibraryfetcher.cpp:370 src/fetch/thegamesdbfetcher.cpp:265
+#: src/fetch/openlibraryfetcher.cpp:374 src/fetch/thegamesdbfetcher.cpp:265
 #: src/fetch/thegamesdbfetcher.cpp:270 src/fetch/themoviedbfetcher.cpp:307
 #: src/fetch/themoviedbfetcher.cpp:310 src/fetch/themoviedbfetcher.cpp:315
 #: src/fetch/themoviedbfetcher.cpp:333 src/fetch/thetvdbfetcher.cpp:245
@@ -3456,7 +3456,7 @@ msgstr ""
 #: src/fetch/colnectfetcher.cpp:999 src/fetch/discogsfetcher.cpp:618
 #: src/fetch/imdbfetcher.cpp:567 src/fetch/itunesfetcher.cpp:565
 #: src/fetch/mobygamesfetcher.cpp:669 src/fetch/moviemeterfetcher.cpp:319
-#: src/fetch/openlibraryfetcher.cpp:590 src/fetch/rpggeekfetcher.cpp:224
+#: src/fetch/openlibraryfetcher.cpp:594 src/fetch/rpggeekfetcher.cpp:224
 #: src/fetch/thegamesdbfetcher.cpp:655 src/fetch/videogamegeekfetcher.cpp:237
 #, kde-format
 msgid "&Image size: "
@@ -3466,14 +3466,14 @@ msgstr "&Розмір зображення: "
 #: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:621
 #: src/fetch/imdbfetcher.cpp:570 src/fetch/itunesfetcher.cpp:569
 #: src/fetch/mobygamesfetcher.cpp:672 src/fetch/moviemeterfetcher.cpp:322
-#: src/fetch/openlibraryfetcher.cpp:593 src/fetch/rpggeekfetcher.cpp:228
+#: src/fetch/openlibraryfetcher.cpp:597 src/fetch/rpggeekfetcher.cpp:228
 #: src/fetch/thegamesdbfetcher.cpp:658 src/fetch/videogamegeekfetcher.cpp:241
 #, kde-format
 msgid "Small Image"
 msgstr "Маленьке зображення"
 
 #: src/fetch/amazonfetcher.cpp:1154 src/fetch/imdbfetcher.cpp:571
-#: src/fetch/moviemeterfetcher.cpp:323 src/fetch/openlibraryfetcher.cpp:594
+#: src/fetch/moviemeterfetcher.cpp:323 src/fetch/openlibraryfetcher.cpp:598
 #: src/fetch/thegamesdbfetcher.cpp:659
 #, kde-format
 msgid "Medium Image"
@@ -3484,7 +3484,7 @@ msgstr "Середнє зображення"
 #: src/fetch/colnectfetcher.cpp:1004 src/fetch/discogsfetcher.cpp:623
 #: src/fetch/imdbfetcher.cpp:572 src/fetch/itunesfetcher.cpp:570
 #: src/fetch/mobygamesfetcher.cpp:674 src/fetch/moviemeterfetcher.cpp:324
-#: src/fetch/openlibraryfetcher.cpp:595 src/fetch/rpggeekfetcher.cpp:229
+#: src/fetch/openlibraryfetcher.cpp:599 src/fetch/rpggeekfetcher.cpp:229
 #: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:242
 #, kde-format
 msgid "Large Image"
@@ -3494,7 +3494,7 @@ msgstr "Велике зображення"
 #: src/fetch/colnectfetcher.cpp:1002 src/fetch/discogsfetcher.cpp:624
 #: src/fetch/imdbfetcher.cpp:573 src/fetch/itunesfetcher.cpp:568
 #: src/fetch/mobygamesfetcher.cpp:675 src/fetch/moviemeterfetcher.cpp:325
-#: src/fetch/openlibraryfetcher.cpp:596 src/fetch/rpggeekfetcher.cpp:227
+#: src/fetch/openlibraryfetcher.cpp:600 src/fetch/rpggeekfetcher.cpp:227
 #: src/fetch/thegamesdbfetcher.cpp:661 src/fetch/videogamegeekfetcher.cpp:240
 #, kde-format
 msgid "No Image"
@@ -3502,7 +3502,7 @@ msgstr "Немає зображення"
 
 #: src/fetch/amazonfetcher.cpp:1159 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:679
-#: src/fetch/moviemeterfetcher.cpp:329 src/fetch/openlibraryfetcher.cpp:600
+#: src/fetch/moviemeterfetcher.cpp:329 src/fetch/openlibraryfetcher.cpp:604
 #: src/fetch/thegamesdbfetcher.cpp:665
 #, kde-format
 msgid ""
@@ -4161,7 +4161,7 @@ msgstr "Введіть посилання на сервер OPDS."
 msgid "&Verify Catalog"
 msgstr "П&еревірити каталог"
 
-#: src/fetch/openlibraryfetcher.cpp:369 src/fetch/openlibraryfetcher.cpp:579
+#: src/fetch/openlibraryfetcher.cpp:373 src/fetch/openlibraryfetcher.cpp:583
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "Посилання OpenLibrary"
