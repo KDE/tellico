@@ -1,5 +1,6 @@
 2025-08-31  Robby Stephenson  <robby@periapsis.org>
 
+	* Updated OpenLibrary source to update via OLID, if available (Bug 508897).
 	* Added importer for OnMyShelf JSON files.
 
 2025-08-30  Robby Stephenson  <robby@periapsis.org>

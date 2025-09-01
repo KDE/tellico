@@ -276,7 +276,7 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
       imageUrl = QStringLiteral("https://covers.openlibrary.org/b/isbn/%1-%2.jpg?default=false");
     }
     if(!coverId.isEmpty()) {
-      imageUrl = imageUrl.arg(coverId).arg(imgSize);
+      imageUrl = imageUrl.arg(coverId, imgSize);
       entry->setField(coverString, ImageFactory::addImage(QUrl(imageUrl), true));
     }
   }
@@ -292,6 +292,10 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Fetch::FetchRequest OpenLibraryFetcher::updateRequest(Data::EntryPtr entry_) {
+  QString olid = entry_->field(QStringLiteral("openlibrary")).section(QLatin1Char('/'), -2);
+  if(!olid.isEmpty()) {
+    return FetchRequest(Raw, QStringLiteral("key=/") + olid);
+  }
   const QString isbn = entry_->field(QStringLiteral("isbn"));
   if(!isbn.isEmpty()) {
     return FetchRequest(ISBN, isbn);

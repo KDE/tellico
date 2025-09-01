@@ -226,3 +226,24 @@ void OpenLibraryFetcherTest::testBug507912() {
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
+//https://bugs.kde.org/show_bug.cgi?id=508897
+void OpenLibraryFetcherTest::testBug508897() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("openlibrary"),
+                                                         QString(),
+                                                         Tellico::Data::Field::URL));
+  coll->addField(field);
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry);
+
+  entry->setField(QStringLiteral("title"), QStringLiteral("The Great Hunt"));
+  entry->setField(QStringLiteral("publisher"), QStringLiteral("Orbit"));
+  entry->setField(QStringLiteral("openlibrary"), QStringLiteral("https://openlibrary.org/books/OL58893423M"));
+
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+  auto f = static_cast<Tellico::Fetch::OpenLibraryFetcher*>(fetcher.data());
+
+  auto request = f->updateRequest(entry);
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QCOMPARE(request.value(), QStringLiteral("key=/books/OL58893423M"));
+}

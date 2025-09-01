@@ -43,6 +43,7 @@ private Q_SLOTS:
   void testUpdate();
   void testComic();
   void testBug507912();
+  void testBug508897();
 };
 
 #endif
