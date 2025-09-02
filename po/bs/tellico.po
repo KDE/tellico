@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-01 00:43+0000\n"
+"POT-Creation-Date: 2025-09-02 00:43+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -759,7 +759,7 @@ msgstr "Bibtex ključ"
 #: src/fetch/metronfetcher.cpp:246 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:359
-#: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:370
+#: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:374
 #: src/fetch/thegamesdbfetcher.cpp:265 src/fetch/thegamesdbfetcher.cpp:270
 #: src/fetch/themoviedbfetcher.cpp:307 src/fetch/themoviedbfetcher.cpp:310
 #: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:333
@@ -3653,7 +3653,7 @@ msgstr ""
 #: src/fetch/colnectfetcher.cpp:994 src/fetch/discogsfetcher.cpp:622
 #: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:568
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
-#: src/fetch/openlibraryfetcher.cpp:602 src/fetch/rpggeekfetcher.cpp:224
+#: src/fetch/openlibraryfetcher.cpp:606 src/fetch/rpggeekfetcher.cpp:224
 #: src/fetch/thegamesdbfetcher.cpp:646 src/fetch/videogamegeekfetcher.cpp:237
 #, kde-format
 msgid "&Image size: "
@@ -3663,14 +3663,14 @@ msgstr "&Veličina slike "
 #: src/fetch/colnectfetcher.cpp:998 src/fetch/discogsfetcher.cpp:625
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:572
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
-#: src/fetch/openlibraryfetcher.cpp:605 src/fetch/rpggeekfetcher.cpp:228
+#: src/fetch/openlibraryfetcher.cpp:609 src/fetch/rpggeekfetcher.cpp:228
 #: src/fetch/thegamesdbfetcher.cpp:649 src/fetch/videogamegeekfetcher.cpp:241
 #, kde-format
 msgid "Small Image"
 msgstr "Mala slika"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/imdbfetcher.cpp:544
-#: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:606
+#: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:610
 #: src/fetch/thegamesdbfetcher.cpp:650
 #, kde-format
 msgid "Medium Image"
@@ -3681,7 +3681,7 @@ msgstr "Srednja slika"
 #: src/fetch/colnectfetcher.cpp:999 src/fetch/discogsfetcher.cpp:627
 #: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:573
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
-#: src/fetch/openlibraryfetcher.cpp:607 src/fetch/rpggeekfetcher.cpp:229
+#: src/fetch/openlibraryfetcher.cpp:611 src/fetch/rpggeekfetcher.cpp:229
 #: src/fetch/thegamesdbfetcher.cpp:651 src/fetch/videogamegeekfetcher.cpp:242
 #, kde-format
 msgid "Large Image"
@@ -3691,7 +3691,7 @@ msgstr "Velika slika"
 #: src/fetch/colnectfetcher.cpp:997 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:571
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
-#: src/fetch/openlibraryfetcher.cpp:608 src/fetch/rpggeekfetcher.cpp:227
+#: src/fetch/openlibraryfetcher.cpp:612 src/fetch/rpggeekfetcher.cpp:227
 #: src/fetch/thegamesdbfetcher.cpp:652 src/fetch/videogamegeekfetcher.cpp:240
 #, kde-format
 msgid "No Image"
@@ -3699,7 +3699,7 @@ msgstr "Bez slike"
 
 #: src/fetch/amazonfetcher.cpp:1157 src/fetch/discogsfetcher.cpp:632
 #: src/fetch/imdbfetcher.cpp:550 src/fetch/mobygamesfetcher.cpp:671
-#: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:612
+#: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:616
 #: src/fetch/thegamesdbfetcher.cpp:656
 #, kde-format
 msgid ""
@@ -4400,7 +4400,7 @@ msgstr "Unesite ime korisnika servera."
 msgid "&Verify Catalog"
 msgstr "Kolekcija datoteka"
 
-#: src/fetch/openlibraryfetcher.cpp:369 src/fetch/openlibraryfetcher.cpp:591
+#: src/fetch/openlibraryfetcher.cpp:373 src/fetch/openlibraryfetcher.cpp:595
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "OtvorenaBiblioteka link"
