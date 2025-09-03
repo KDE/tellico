@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-02 00:43+0000\n"
-"PO-Revision-Date: 2025-08-25 06:32+0200\n"
+"PO-Revision-Date: 2025-09-02 04:51+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -5706,16 +5706,14 @@ msgid "Import data from Data Crow"
 msgstr "მონაცემების შემოტანა Data Crow-დან"
 
 #: src/mainwindow.cpp:393
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "MODS მონაცემების შემოტანა..."
+msgstr "OnMyShelf-ის მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:394
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "მონაცემების მიმმართველიდან შემოტანა"
+msgstr "მონაცემების შემოტანა OnMyShelf-დან"
 
 #: src/mainwindow.cpp:397
 #, kde-format

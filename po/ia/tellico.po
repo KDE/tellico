@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-02 00:43+0000\n"
-"PO-Revision-Date: 2025-03-20 19:32+0100\n"
+"PO-Revision-Date: 2025-09-02 17:44+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -5737,16 +5737,14 @@ msgid "Import data from Data Crow"
 msgstr "Importa datos ex Data Crow"
 
 #: src/mainwindow.cpp:393
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "Importa datos MODS"
+msgstr "Importa datos de OnMyShelf (sur mi planca)"
 
 #: src/mainwindow.cpp:394
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Importa datos ex Referencer"
+msgstr "Importa datos ex OnMyShelf (Sur Mi Planca)"
 
 #: src/mainwindow.cpp:397
 #, kde-format
@@ -7079,19 +7077,18 @@ msgid "If checked, the first row is used as field titles."
 msgstr "Si marcate, le prime rango essera usate como titulos de campo."
 
 #: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:337
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
+#, kde-format
 msgid "Import images as links only"
-msgstr "Importa solmente entratas possedite"
+msgstr "Importa imagines solmente como ligamines"
 
 #: src/translators/csvimporter.cpp:260 src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
 msgstr ""
-"Si marcate, le nomines de campo essera imprimite como capites de tabula."
+"Si marcate, le percursos de imagine essera imporatate como ligamines in loco "
+"de esser gerite directemente per  Tellico."
 
 #: src/translators/csvimporter.cpp:274
 #, kde-format
@@ -7277,16 +7274,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Le file non es un valide file de datos de GCStar.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "Le imagine de copertura non pote esser cargate."
+msgstr "Le file de modello GCstar non pote esser trovate."
 
 #: src/translators/gcstarimporter.cpp:334
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Optiones de color"
+msgstr "Optiones de GCstar"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
