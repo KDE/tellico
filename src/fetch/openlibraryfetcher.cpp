@@ -433,7 +433,12 @@ void OpenLibraryFetcher::populate(Data::EntryPtr entry_, const QVariantMap& map_
   entry_->setField(QStringLiteral("publisher"), mapValue(map_, "publishers"));
   entry_->setField(QStringLiteral("series"), mapValue(map_, "series"));
   entry_->setField(QStringLiteral("pages"), mapValue(map_, "number_of_pages"));
-  entry_->setField(QStringLiteral("comments"), mapValue(map_, "notes", "value"));
+  QString notes = mapValue(map_, "notes", "value");
+  if(notes.isEmpty()) {
+    notes = mapValue(map_, "notes");
+  }
+  notes.replace(QLatin1Char('\n'), QLatin1String("<br/>"));
+  entry_->setField(QStringLiteral("comments"), notes);
 
   const QString openlibraryString(QStringLiteral("openlibrary"));
   if(optionalFields().contains(openlibraryString)) {
