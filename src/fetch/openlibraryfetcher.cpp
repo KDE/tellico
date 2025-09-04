@@ -436,7 +436,12 @@ void OpenLibraryFetcher::populate(Data::EntryPtr entry_, const QJsonObject& obj_
   entry_->setField(QStringLiteral("publisher"), objValue(obj_, "publishers"));
   entry_->setField(QStringLiteral("series"), objValue(obj_, "series"));
   entry_->setField(QStringLiteral("pages"), objValue(obj_, "number_of_pages"));
-  entry_->setField(QStringLiteral("comments"), objValue(obj_, "notes", "value"));
+  QString notes = objValue(obj_, "notes", "value");
+  if(notes.isEmpty()) {
+    notes = objValue(obj_, "notes");
+  }
+  notes.replace(QLatin1Char('\n'), QLatin1String("<br/>"));
+  entry_->setField(QStringLiteral("comments"), notes);
 
   const QString openlibraryString(QStringLiteral("openlibrary"));
   if(optionalFields().contains(openlibraryString)) {
