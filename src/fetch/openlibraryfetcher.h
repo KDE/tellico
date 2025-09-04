@@ -99,6 +99,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   void doSearch(const QString& term);
   void populate(Data::EntryPtr entry, const QVariantMap& map);
+  QStringList getAuthorNames(const QVariantList& authorKeys);
   QString getAuthorKeys(const QString& term);
   void endJob(KIO::StoredTransferJob* job);
 
@@ -111,6 +112,8 @@ private:
 
   ImageSize m_imageSize;
   QHash<uint, Data::EntryPtr> m_entries;
+  QHash<uint, QString> m_olidLink;
+  QHash<uint, QString> m_workLink;
   QList< QPointer<KIO::StoredTransferJob> > m_jobs;
 
   bool m_started;

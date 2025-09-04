@@ -150,6 +150,12 @@ void OpenLibraryFetcherTest::testLccn() {
   QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("56"));
   QCOMPARE(entry->field(QStringLiteral("openlibrary")), QStringLiteral("https://openlibrary.org/books/OL3315616M"));
   QVERIFY(!entry->field(QStringLiteral("comments")).isEmpty());
+
+  //https://bugs.kde.org/show_bug.cgi?id=508897
+  auto f = static_cast<Tellico::Fetch::OpenLibraryFetcher*>(fetcher.data());
+  request = f->updateRequest(entry);
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QCOMPARE(request.value(), QStringLiteral("key=/books/OL3315616M"));
 }
 
 void OpenLibraryFetcherTest::testMultipleIsbn() {
@@ -203,6 +209,7 @@ void OpenLibraryFetcherTest::testComic() {
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::ComicBook);
   QCOMPARE(entry->field(QStringLiteral("title")), QString::fromUtf8("よつばと！ 1"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("4-04869066-3"));
+  QCOMPARE(entry->field(QStringLiteral("writer")), QStringLiteral("あずまきよひこ"));
 }
 
 //https://bugs.kde.org/show_bug.cgi?id=507912
@@ -224,26 +231,4 @@ void OpenLibraryFetcherTest::testBug507912() {
   QVERIFY(!entry->collection()->hasField(QStringLiteral("openlibrary"))); // verify the link is not included
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
-}
-
-//https://bugs.kde.org/show_bug.cgi?id=508897
-void OpenLibraryFetcherTest::testBug508897() {
-  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
-  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("openlibrary"),
-                                                         QString(),
-                                                         Tellico::Data::Field::URL));
-  coll->addField(field);
-  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
-  coll->addEntries(entry);
-
-  entry->setField(QStringLiteral("title"), QStringLiteral("The Great Hunt"));
-  entry->setField(QStringLiteral("publisher"), QStringLiteral("Orbit"));
-  entry->setField(QStringLiteral("openlibrary"), QStringLiteral("https://openlibrary.org/books/OL58893423M"));
-
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
-  auto f = static_cast<Tellico::Fetch::OpenLibraryFetcher*>(fetcher.data());
-
-  auto request = f->updateRequest(entry);
-  QCOMPARE(request.key(), Tellico::Fetch::Raw);
-  QCOMPARE(request.value(), QStringLiteral("key=/books/OL58893423M"));
 }
