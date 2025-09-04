@@ -194,16 +194,16 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
 
   // possible that the author is set on the work but not the edition
   // see https://github.com/internetarchive/openlibrary/issues/8144
-  const QString authorString(QStringLiteral("author"));
-  const QString workString(QStringLiteral("openlibrary-work"));
+  const QString authorString = entry->collection()->type() == Data::Collection::ComicBook
+                               ? QStringLiteral("writer")
+                               : QStringLiteral("author");
   if(entry->field(authorString).isEmpty()) {
-    const QString work = entry->field(workString);
+    const QString work = m_workLink.value(uid_);
     if(!work.isEmpty()) {
       const QUrl workUrl(QStringLiteral("https://openlibrary.org%1.json").arg(work));
-      QStringList authors;
       const auto output = FileHandler::readDataFile(workUrl, true /*quiet*/);
 #if 0
-      myWarning() << "Remove debug from openlibraryfetcher.cpp";
+      myWarning() << "Remove debug openlibrary-work from openlibraryfetcher.cpp";
       QFile f(QString::fromLatin1("/tmp/openlibrary-work.json"));
       if(f.open(QIODevice::WriteOnly)) {
         QTextStream t(&f);
@@ -213,23 +213,7 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
 #endif
       QJsonDocument doc = QJsonDocument::fromJson(output);
       const auto obj = doc.object();
-      const auto array = obj.value(QLatin1String("authors")).toArray();
-      for(int i = 0; i < array.count(); i++) {
-        const QString key = objValue(array.at(i).toObject(), "author", "key");
-        if(m_authorHash.contains(key)) {
-          authors += m_authorHash.value(key);
-          continue;
-        }
-        // now grab author name by key
-        const QUrl authorUrl(QStringLiteral("https://openlibrary.org%1.json").arg(key));
-        const auto output2 = FileHandler::readDataFile(authorUrl, true /*quiet*/);
-        QJsonDocument doc2 = QJsonDocument::fromJson(output2);
-        const QString author = objValue(doc2.object(), "name");
-        if(!author.isEmpty()) {
-          m_authorHash.insert(key, author);
-          authors += author;
-        }
-      }
+      QStringList authors = getAuthorNames(obj.value(QLatin1String("authors")).toArray());
       if(!authors.isEmpty()) {
         entry->setField(authorString, authors.join(FieldFormat::delimiterString()));
       }
@@ -251,10 +235,7 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
       }
     }
   }
-  // no longer need the field
-  entry->collection()->removeField(workString);
 
-  const QString openlibraryString(QStringLiteral("openlibrary"));
   const QString coverString(QStringLiteral("cover"));
   if(m_imageSize != NoImage && entry->field(coverString).isEmpty()) {
     QString imgSize;
@@ -262,12 +243,12 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
       case LargeImage:  imgSize = QLatin1Char('L'); break;
       case MediumImage: imgSize = QLatin1Char('M'); break;
       case SmallImage:  imgSize = QLatin1Char('S'); break;
-      case NoImage: myWarning() << "impossible image size"; break;
+      case NoImage: break;
     }
     QString coverId, imageUrl;
 
     // just want the portion after the last slash
-    QString olid = entry->field(openlibraryString).section(QLatin1Char('/'), -1);
+    const QString olid = m_olidLink.value(uid_).section(QLatin1Char('/'), -1);
     if(!olid.isEmpty()) {
       coverId = olid;
       imageUrl = QStringLiteral("https://covers.openlibrary.org/b/olid/%1-%2.jpg?default=false");
@@ -279,13 +260,6 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
       imageUrl = imageUrl.arg(coverId, imgSize);
       entry->setField(coverString, ImageFactory::addImage(QUrl(imageUrl), true));
     }
-  }
-
-  // remove the openlibrary field if undesired
-  if(entry->collection()->hasField(openlibraryString) &&
-     !optionalFields().contains(openlibraryString)) {
-    entry->setField(openlibraryString, QString());
-    entry->collection()->removeField(entry->collection()->fieldByName(openlibraryString));
   }
 
   return entry;
@@ -343,7 +317,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
 
 #if 0
   myWarning() << "Remove debug from openlibraryfetcher.cpp";
-  QFile f(QString::fromLatin1("/tmp/test.json"));
+  QFile f(QString::fromLatin1("/tmp/openlibrary-result.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t << data;
@@ -354,7 +328,6 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
   QJsonDocument doc = QJsonDocument::fromJson(data);
   const auto array = doc.array();
   if(array.isEmpty()) {
-//    myDebug() << "no results";
     endJob(job);
     return;
   }
@@ -365,14 +338,6 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
   } else {
     coll = new Data::BookCollection(true);
   }
-  // add a temporary work id field
-  Data::FieldPtr wField(new Data::Field(QStringLiteral("openlibrary-work"), QString()));
-  coll->addField(wField);
-
-  // always set the openlibrary link, removed later if unwanted
-  Data::FieldPtr field(new Data::Field(QStringLiteral("openlibrary"), i18n("OpenLibrary Link"), Data::Field::URL));
-  field->setCategory(i18n("General"));
-  coll->addField(field);
 
   for(const auto& result : array) {
     // be sure to check that the fetcher has not been stopped
@@ -395,6 +360,18 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
+
+    // retain olid and link to parent work
+    m_olidLink.insert(r->uid, objValue(resObj, "key"));
+    const auto worksArray = resObj[QLatin1StringView("works")].toArray();
+    if(!worksArray.isEmpty()) {
+      const auto workObj = worksArray.first().toObject();
+      const QString key = objValue(workObj, "key");
+      if(!key.isEmpty()) {
+        m_workLink.insert(r->uid, key);
+      }
+    }
+
     Q_EMIT signalResultFound(r);
   }
 
@@ -460,46 +437,23 @@ void OpenLibraryFetcher::populate(Data::EntryPtr entry_, const QJsonObject& obj_
   entry_->setField(QStringLiteral("series"), objValue(obj_, "series"));
   entry_->setField(QStringLiteral("pages"), objValue(obj_, "number_of_pages"));
   entry_->setField(QStringLiteral("comments"), objValue(obj_, "notes", "value"));
-  entry_->setField(QStringLiteral("openlibrary"), QLatin1String("https://openlibrary.org") + objValue(obj_, "key"));
 
-  const auto worksArray = obj_[QLatin1StringView("works")].toArray();
-  if(!worksArray.isEmpty()) {
-    const auto workObj = worksArray.first().toObject();
-    const QString key = objValue(workObj, "key");
-    if(!key.isEmpty()) {
-      entry_->setField(QStringLiteral("openlibrary-work"), key);
+  const QString openlibraryString(QStringLiteral("openlibrary"));
+  if(optionalFields().contains(openlibraryString)) {
+    if(!entry_->collection()->hasField(openlibraryString)) {
+      Data::FieldPtr field(new Data::Field(openlibraryString, i18n("OpenLibrary Link"), Data::Field::URL));
+      field->setCategory(i18n("General"));
+      entry_->collection()->addField(field);
     }
+    entry_->setField(openlibraryString, QLatin1String("https://openlibrary.org") + objValue(obj_, "key"));
   }
 
-  QStringList authors;
-  const auto authorArray = obj_[QLatin1StringView("authors")].toArray();
-  for(const auto& author : authorArray) {
-    const auto authorObj = author.toObject();
-    const QString key = objValue(authorObj, "key");
-    if(m_authorHash.contains(key)) {
-      authors += m_authorHash.value(key);
-    } else if(!key.isEmpty()) {
-      QUrl authorUrl(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
-      QUrlQuery q;
-      q.addQueryItem(QStringLiteral("type"), QStringLiteral("/type/author"));
-      q.addQueryItem(QStringLiteral("key"), key);
-      q.addQueryItem(QStringLiteral("name"), QString());
-      authorUrl.setQuery(q);
-
-      QString output = FileHandler::readTextFile(authorUrl, true /*quiet*/);
-      QJsonDocument doc2 = QJsonDocument::fromJson(output.toUtf8());
-      const auto authorArray = doc2.array();
-      if(!authorArray.isEmpty()) {
-        const QString name = objValue(authorArray.at(0).toObject(), "name");
-        if(!name.isEmpty()) {
-          authors << name;
-          m_authorHash.insert(key, name);
-        }
-      }
-    }
-  }
+  QStringList authors = getAuthorNames(obj_[QLatin1StringView("authors")].toArray());
   if(!authors.isEmpty()) {
-    entry_->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
+    const QString authorString = entry_->collection()->type() == Data::Collection::ComicBook
+                                 ? QStringLiteral("writer")
+                                 : QStringLiteral("author");
+    entry_->setField(authorString, authors.join(FieldFormat::delimiterString()));
   }
 
   QStringList translators;
@@ -547,6 +501,64 @@ void OpenLibraryFetcher::populate(Data::EntryPtr entry_, const QJsonObject& obj_
   }
 }
 
+QStringList OpenLibraryFetcher::getAuthorNames(const QJsonArray& keys_) {
+  QStringList authors;
+  if(keys_.isEmpty()) {
+    return authors;
+  }
+
+  bool emptyQuery = true;
+  QString authorQuery(QLatin1String("key:("));
+  for(int i = 0; i < keys_.count(); i++) {
+    const auto obj = keys_.at(i).toObject();
+    QString key = objValue(obj, "author", "key");
+    if(key.isEmpty()) key = objValue(obj, "key");
+    if(key.isEmpty()) {
+      myDebug() << "Failed to pull key from" << obj;
+      continue;
+    }
+    if(!key.startsWith(QLatin1String("/authors/"))) {
+      key = QLatin1String("/authors/") + key;
+    }
+    if(m_authorHash.contains(key)) {
+      authors += m_authorHash.value(key);
+      continue;
+    }
+    authorQuery += key + QLatin1String(" OR ");
+    emptyQuery = false;
+  }
+  if(emptyQuery) {
+    // no need to search further
+    return authors;
+  }
+  // remove final OR and add )
+  authorQuery.chop(4); // " OR "
+  authorQuery += QLatin1Char(')');
+
+  QUrlQuery q;
+  q.addQueryItem(QStringLiteral("q"), authorQuery);
+  q.addQueryItem(QStringLiteral("fields"), QStringLiteral("key,name"));
+  QUrl u(QString::fromLatin1(OPENLIBRARY_AUTHOR_QUERY_URL));
+  u.setQuery(q);
+
+  const auto output = FileHandler::readDataFile(u, true /*quiet*/);
+  const QJsonDocument doc = QJsonDocument::fromJson(output);
+  const auto array = doc.object().value(QLatin1String("docs")).toArray();
+  for(int i = 0; i < array.count(); i++) {
+    const auto obj = array.at(i).toObject();
+    QString key = objValue(obj, "key");
+    if(!key.startsWith(QLatin1String("/authors/"))) {
+      key = QLatin1String("/authors/") + key;
+    }
+    const QString author = objValue(obj, "name");
+    if(!author.isEmpty()) {
+      m_authorHash.insert(key, author);
+      authors += author;
+    }
+  }
+  return authors;
+}
+
 QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
   QUrl u(QString::fromLatin1(OPENLIBRARY_AUTHOR_QUERY_URL));
   QUrlQuery q;
@@ -555,7 +567,7 @@ QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
   u.setQuery(q);
 
 //  myLog() << "Searching for authors:" << u.toDisplayString();
-  QString output = FileHandler::readTextFile(u, true /*quiet*/, true /*utf8*/);
+  const auto output = FileHandler::readDataFile(u, true /*quiet*/);
 #if 0
   myWarning() << "Remove author debug from openlibraryfetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test-openlibraryauthor.json"));
@@ -565,7 +577,7 @@ QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
   }
   f.close();
 #endif
-  const QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
+  const QJsonDocument doc = QJsonDocument::fromJson(output);
   const auto array = doc.object().value(QLatin1String("docs")).toArray();
   if(array.isEmpty()) {
     return QString();
