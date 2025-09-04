@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-02 00:43+0000\n"
-"PO-Revision-Date: 2025-08-26 08:24+0200\n"
+"PO-Revision-Date: 2025-09-02 14:38+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -5829,16 +5829,14 @@ msgid "Import data from Data Crow"
 msgstr "Importer des données à partir de « Data Crow »"
 
 #: src/mainwindow.cpp:393
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "Importer des données MODS..."
+msgstr "Importer des données « OnMyShelf »..."
 
 #: src/mainwindow.cpp:394
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Importer des données de Referencer"
+msgstr "Importer des données de OnMyShelf"
 
 #: src/mainwindow.cpp:397
 #, kde-format
