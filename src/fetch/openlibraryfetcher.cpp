@@ -362,7 +362,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
 
     // retain olid and link to parent work
     m_olidLink.insert(r->uid, mapValue(resultMap, "key"));
-    const auto works = resultMap[QLatin1StringView("works")].toList();
+    const auto works = resultMap[QLatin1String("works")].toList();
     if(!works.isEmpty()) {
       const auto workMap = works.first().toMap();
       const QString key = mapValue(workMap, "key");
@@ -450,7 +450,7 @@ void OpenLibraryFetcher::populate(Data::EntryPtr entry_, const QVariantMap& map_
     entry_->setField(openlibraryString, QLatin1String("https://openlibrary.org") + mapValue(map_, "key"));
   }
 
-  QStringList authors = getAuthorNames(map_[QLatin1StringView("authors")].toList());
+  QStringList authors = getAuthorNames(map_[QLatin1String("authors")].toList());
   if(!authors.isEmpty()) {
     const QString authorString = entry_->collection()->type() == Data::Collection::ComicBook
                                  ? QStringLiteral("writer")
