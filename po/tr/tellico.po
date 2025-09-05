@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-04 02:37+0000\n"
-"PO-Revision-Date: 2025-08-25 09:43+0300\n"
+"PO-Revision-Date: 2025-09-04 14:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -169,7 +169,7 @@ msgstr "Ad"
 #: src/charts/collectionsizereport.cpp:122
 #, kde-format
 msgid "Collection Size"
-msgstr "Koleksiyon Boyutu"
+msgstr "Koleksiyon Büyüklüğü"
 
 #: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1706
 #, kde-format
@@ -179,7 +179,7 @@ msgstr "Toplam girdi: %1"
 #: src/charts/collectionsizereport.cpp:97
 #, kde-format
 msgid "Collection Size Over Time"
-msgstr "Zaman İçinde Koleksiyon Boyutu"
+msgstr "Zaman İçinde Koleksiyon Büyüklüğü"
 
 #: src/charts/groupsummaryreport.cpp:62
 #, kde-format
@@ -1372,7 +1372,7 @@ msgstr "MIME Türü"
 #: src/collections/filecatalog.cpp:74
 #, kde-format
 msgid "Size"
-msgstr "Boyut"
+msgstr "Büyüklük"
 
 #: src/collections/filecatalog.cpp:78
 #, kde-format
@@ -2617,7 +2617,7 @@ msgstr "Bu yazıtipi, Girdi Görünümü’nde kullanılan şablona aktarılır.
 #: src/configdialog.cpp:493
 #, kde-format
 msgid "Size:"
-msgstr "Boyut:"
+msgstr "Büyüklük:"
 
 #: src/configdialog.cpp:505
 #, kde-format
@@ -3451,7 +3451,7 @@ msgstr ""
 #: src/fetch/thegamesdbfetcher.cpp:655 src/fetch/videogamegeekfetcher.cpp:237
 #, kde-format
 msgid "&Image size: "
-msgstr "Gö&rsel boyutu: "
+msgstr "Gö&rsel büyüklüğü: "
 
 #: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:219
 #: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:621
@@ -4895,24 +4895,24 @@ msgstr "büyüktür"
 #: src/gui/filterrulewidget.cpp:250
 #, kde-format
 msgid "image size equals"
-msgstr "görsel boyutu eşittir"
+msgstr "görsel büyüklüğü eşittir"
 
 #: src/gui/filterrulewidget.cpp:251
 #, kde-format
 msgid "image size does not equal"
-msgstr "görsel boyutu eşit değil"
+msgstr "görsel büyüklüğü eşit değildir"
 
 #: src/gui/filterrulewidget.cpp:252
 #, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
-msgstr "görsel boyutu küçüktür"
+msgstr "görsel büyüklüğü küçüktür"
 
 #: src/gui/filterrulewidget.cpp:253
 #, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
-msgstr "görsel boyutu büyüktür"
+msgstr "görsel büyüklüğü büyüktür"
 
 #: src/gui/filterrulewidget.cpp:260
 #, kde-format
@@ -7328,7 +7328,7 @@ msgstr "Veriyi dönüştürmek için kullanılacak XSLT dosyasını seçin."
 #: src/viewstack.cpp:78
 #, kde-format
 msgid "Decrease the maximum icon size in the icon list view"
-msgstr "Simge listesi görünümünde en büyük simge boyutunu azalt"
+msgstr "Simge listesi görünümünde en büyük simge büyüklüğünü azalt"
 
 #: src/viewstack.cpp:89 src/viewstack.cpp:151
 #, kde-format
@@ -7336,13 +7336,13 @@ msgid ""
 "The current maximum icon size is %1.\n"
 "Move the slider to change it."
 msgstr ""
-"Geçerli en büyük simge boyutu %1.\n"
+"Geçerli en büyük simge büyüklüğü %1.\n"
 "Değiştirmek için sürgüyü kullanın."
 
 #: src/viewstack.cpp:95
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
-msgstr "Simge listesi görünümünde en büyük simge boyutunu artırın"
+msgstr "Simge listesi görünümünde en büyük simge büyüklüğünü artır"
 
 #: xslt/entry-templates/Album.xsl:171
 #, kde-format
