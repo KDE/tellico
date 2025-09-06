@@ -192,45 +192,60 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  // possible that the author is set on the work but not the edition
+  // there are several fields which may be set on the work instead of the edition
+  // if any are empty, fetch the work details and update
+
+  // https://bugs.kde.org/show_bug.cgi?id=509124
+  const QString plotString(QStringLiteral("plot"));
   // see https://github.com/internetarchive/openlibrary/issues/8144
   const QString authorString = entry->collection()->type() == Data::Collection::ComicBook
                                ? QStringLiteral("writer")
                                : QStringLiteral("author");
-  if(entry->field(authorString).isEmpty()) {
+  const QString seriesString(QStringLiteral("series"));
+  if(entry->field(plotString).isEmpty() ||
+     entry->field(authorString).isEmpty() ||
+     entry->field(seriesString).isEmpty()) {
     const QString work = m_workLink.value(uid_);
-    if(!work.isEmpty()) {
-      const QUrl workUrl(QStringLiteral("https://openlibrary.org%1.json").arg(work));
-      const auto output = FileHandler::readDataFile(workUrl, true /*quiet*/);
+    const QUrl workUrl(QStringLiteral("https://openlibrary.org%1.json").arg(work));
+    const auto output = FileHandler::readDataFile(workUrl, true /*quiet*/);
 #if 0
-      myWarning() << "Remove debug openlibrary-work from openlibraryfetcher.cpp";
-      QFile f(QString::fromLatin1("/tmp/openlibrary-work.json"));
-      if(f.open(QIODevice::WriteOnly)) {
-        QTextStream t(&f);
-        t << output;
-      }
-      f.close();
+    myWarning() << "Remove debug openlibrary-work from openlibraryfetcher.cpp";
+    QFile f(QString::fromLatin1("/tmp/openlibrary-work.json"));
+    if(f.open(QIODevice::WriteOnly)) {
+      QTextStream t(&f);
+      t << output;
+    }
+    f.close();
 #endif
-      QJsonDocument doc = QJsonDocument::fromJson(output);
-      const auto obj = doc.object();
+    QJsonDocument doc = QJsonDocument::fromJson(output);
+    const auto obj = doc.object();
+
+    if(entry->field(plotString).isEmpty()) {
+      QString desc = objValue(obj, "description", "value");
+      if(desc.isEmpty()) {
+        desc = objValue(obj, "description");
+      }
+      desc.replace(QLatin1Char('\n'), QLatin1String("<br/>"));
+      entry->setField(plotString, desc);
+    }
+
+    if(entry->field(authorString).isEmpty()) {
       QStringList authors = getAuthorNames(obj.value(QLatin1String("authors")).toArray());
       if(!authors.isEmpty()) {
         entry->setField(authorString, authors.join(FieldFormat::delimiterString()));
       }
+    }
 
-      // since we already might have the info, check for series in the subjects field
-      const QString seriesStr(QStringLiteral("series"));
-      if(entry->field(seriesStr).isEmpty()) {
-        const auto subjArray = obj.value(QLatin1String("subjects")).toArray();
-        for(const auto& res : subjArray) {
-          QString value = res.toString();
-          if(value.startsWith(QLatin1String("series:"))) {
-            value.remove(0, 7); // remove first 7 characters
-            value.replace(QLatin1Char('_'), QLatin1Char(' '));
-            value = FieldFormat::capitalize(value);
-            entry->setField(seriesStr, value);
-            break;
-          }
+    if(entry->field(seriesString).isEmpty()) {
+      const auto subjArray = obj.value(QLatin1String("subjects")).toArray();
+      for(const auto& res : subjArray) {
+        QString value = res.toString();
+        if(value.startsWith(QLatin1String("series:"))) {
+          value.remove(0, 7); // remove first 7 characters
+          value.replace(QLatin1Char('_'), QLatin1Char(' '));
+          value = FieldFormat::capitalize(value);
+          entry->setField(seriesString, value);
+          break;
         }
       }
     }
@@ -436,6 +451,14 @@ void OpenLibraryFetcher::populate(Data::EntryPtr entry_, const QJsonObject& obj_
   entry_->setField(QStringLiteral("publisher"), objValue(obj_, "publishers"));
   entry_->setField(QStringLiteral("series"), objValue(obj_, "series"));
   entry_->setField(QStringLiteral("pages"), objValue(obj_, "number_of_pages"));
+
+  QString desc = objValue(obj_, "description", "value");
+  if(desc.isEmpty()) {
+    desc = objValue(obj_, "description");
+  }
+  desc.replace(QLatin1Char('\n'), QLatin1String("<br/>"));
+  entry_->setField(QStringLiteral("plot"), desc);
+
   QString notes = objValue(obj_, "notes", "value");
   if(notes.isEmpty()) {
     notes = objValue(obj_, "notes");

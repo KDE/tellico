@@ -1,3 +1,7 @@
+2025-09-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated OpenLibrary source to fetch plot (Bug 509124).
+
 2025-09-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated OpenLibrary source to fetch notes (Bug 509062).
