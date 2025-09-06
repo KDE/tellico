@@ -118,7 +118,7 @@ void OpenLibraryFetcherTest::testIsbn13() {
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("1995"));
   QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("Paperback"));
   QCOMPARE(entry->field(QStringLiteral("series")), QStringLiteral("Vorkosigan Saga"));
-  QVERIFY(entry->field(QStringLiteral("openlibrary-work")).isEmpty()); // temporary field should not exist
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
@@ -210,6 +210,7 @@ void OpenLibraryFetcherTest::testComic() {
   QCOMPARE(entry->field(QStringLiteral("title")), QString::fromUtf8("よつばと！ 1"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("4-04869066-3"));
   QCOMPARE(entry->field(QStringLiteral("writer")), QStringLiteral("あずまきよひこ"));
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
 
 //https://bugs.kde.org/show_bug.cgi?id=507912
@@ -229,6 +230,7 @@ void OpenLibraryFetcherTest::testBug507912() {
   QVERIFY(entry->field(QStringLiteral("isbn")).isEmpty()); // test case has to lack an isbn
   QVERIFY(entry->field(QStringLiteral("openlibrary")).isEmpty()); // verify the link is not included
   QVERIFY(!entry->collection()->hasField(QStringLiteral("openlibrary"))); // verify the link is not included
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
