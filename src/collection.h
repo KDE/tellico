@@ -327,6 +327,12 @@ public:
   virtual QString prepareText(const QString& text) const;
 
   /**
+   * Tracks images for possible removal when saving
+   */
+  void imageChanged(const QString& oldValue, const QString& newValue);
+  QStringList imagesToRemove() const;
+
+  /**
    * The string used for the people pseudo-group. This forces consistency.
    */
   static const QString s_peopleGroupName;
@@ -374,6 +380,7 @@ private:
   QHash<QString, EntryGroupDict*> m_entryGroupDicts;
   QStringList m_entryGroups;
   QList<EntryGroup*> m_groupsToDelete;
+  QSet<QString> m_imagesToRemove;
 
   FilterList m_filters;
   BorrowerList m_borrowers;

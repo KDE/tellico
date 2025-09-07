@@ -187,7 +187,7 @@ private:
 
   bool operator==(const Entry& other) const;
 
-  bool setFieldImpl(const QString& fieldName, const QString& value);
+  bool setFieldImpl(Data::FieldPtr field, const QString& value);
 
   CollPtr m_coll;
   ID m_id;

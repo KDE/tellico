@@ -188,71 +188,75 @@ QString Entry::formattedField(Tellico::Data::FieldPtr field_, FieldFormat::Reque
   return m_formattedFields.value(field_->name());
 }
 
-bool Entry::setField(Tellico::Data::FieldPtr field_, const QString& value_, bool updateMDate_) {
-  return setField(field_->name(), value_, updateMDate_);
-}
-
 // updating the modified date of the entry is expensive with the call to QDate::currentDate
 // when loading a collection from a file (in particular), it's faster to ignore that date
+bool Entry::setField(Tellico::Data::FieldPtr field_, const QString& value_, bool updateMDate_) {
+  if(!field_) return false;
+
+  const auto name = field_->name();
+  const auto oldValue = field(name);
+  const bool wasDifferent = oldValue != value_;
+  // returning true means entry was successfully modified
+  const bool res = setFieldImpl(field_, value_);
+
+  static const QString mdate(QStringLiteral("mdate"));
+  if(res && wasDifferent && updateMDate_ && name != mdate && m_coll->hasField(mdate)) {
+    setFieldImpl(m_coll->fieldByName(mdate), QDate::currentDate().toString(Qt::ISODate));
+  }
+  if(field_->type() == Field::Image && !oldValue.isEmpty() && wasDifferent) {
+    // need to track changes in image values to potentially remove images
+    // no longer in the collection when the collection is saved
+    m_coll->imageChanged(oldValue, value_);
+  }
+  return res;
+}
+
 bool Entry::setField(const QString& name_, const QString& value_, bool updateMDate_) {
   if(name_.isEmpty()) {
     myWarning() << "empty field name for value:" << value_;
     return false;
   }
 
-  if(m_coll->fields().isEmpty()) {
-    myDebug() << "collection has no fields, can't add -" << name_;
-    return false;
-  }
-
-  if(!m_coll->hasField(name_)) {
+  auto field = m_coll->fieldByName(name_);
+  if(!field) {
     myDebug() << "unknown collection field -" << name_
               << "in collection" << m_coll->title() << "- not adding" << value_;
     return false;
   }
 
-  const bool wasDifferent = field(name_) != value_;
-  const bool res = setFieldImpl(name_, value_);
-  // returning true means entry was successfully modified
-  if(res && wasDifferent && updateMDate_ &&
-     name_ != QLatin1String("mdate") && m_coll->hasField(QStringLiteral("mdate"))) {
-    setFieldImpl(QStringLiteral("mdate"), QDate::currentDate().toString(Qt::ISODate));
-  }
-  return res;
+  return setField(field, value_, updateMDate_);
 }
 
-bool Entry::setFieldImpl(const QString& name_, const QString& value_) {
+bool Entry::setFieldImpl(Data::FieldPtr field_, const QString& value_) {
+  if(!field_) return false;
+  const auto name = field_->name();
   // an empty value means remove the field
   if(value_.isEmpty()) {
-    if(m_fieldValues.remove(name_)) {
-      invalidateFormattedFieldValue(name_);
+    if(m_fieldValues.remove(name)) {
+      invalidateFormattedFieldValue(name);
     }
     return true;
   }
 
-  if(m_coll && !m_coll->isAllowed(name_, value_)) {
-    myDebug() << "for" << name_ << ", value is not allowed -" << value_;
-    return false;
-  }
-
-  Data::FieldPtr f = m_coll->fieldByName(name_);
-  if(!f) {
+  if(m_coll && !m_coll->isAllowed(name, value_)) {
+    myDebug() << "for" << name << ", value is not allowed -" << value_;
     return false;
   }
 
   // the string store is probably only useful for fields with auto-completion or choice/number/bool
-  bool shareType = f->type() == Field::Choice ||
-                   f->type() == Field::Bool ||
-                   f->type() == Field::Image ||
-                   f->type() == Field::Rating ||
-                   f->type() == Field::Number;
-  if(!f->hasFlag(Field::AllowMultiple) &&
-     (shareType || (f->type() == Field::Line && f->hasFlag(Field::AllowCompletion)))) {
-    m_fieldValues.insert(Tellico::shareString(name_), Tellico::shareString(value_));
+  const bool shareType = field_->type() == Field::Choice ||
+                         field_->type() == Field::Bool ||
+                         field_->type() == Field::Image ||
+                         field_->type() == Field::Rating ||
+                         field_->type() == Field::Number ||
+                         (field_->type() == Field::Line &&
+                          field_->hasFlag(Field::AllowCompletion);
+  if(!field_->hasFlag(Field::AllowMultiple) && shareType) {
+    m_fieldValues.insert(Tellico::shareString(name), Tellico::shareString(value_));
   } else {
-    m_fieldValues.insert(Tellico::shareString(name_), value_);
+    m_fieldValues.insert(Tellico::shareString(name), value_);
   }
-  invalidateFormattedFieldValue(name_);
+  invalidateFormattedFieldValue(name);
   return true;
 }
 

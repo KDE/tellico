@@ -39,11 +39,13 @@
 #include <QTemporaryFile>
 #include <QFile>
 #include <QStandardPaths>
+#include <QLoggingCategory>
 
 QTEST_GUILESS_MAIN( DocumentTest )
 
 void DocumentTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
   KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
   // test case is a book file
@@ -67,11 +69,12 @@ void DocumentTest::testImageLocalDirectory() {
   tempDirName = tempDir.path();
   QString fileName = tempDirName + "/with-image.tc";
   QString imageDirName = tempDirName + "/with-image_files/";
+  QString imageName = QStringLiteral("17b54b2a742c6d342a75f122d615a793.jpeg");
 
   // copy a collection file that includes an image into the temporary directory
   QVERIFY(QFile::copy(QFINDTESTDATA("data/with-image.tc"), fileName));
 
-  Tellico::Data::Document* doc = Tellico::Data::Document::self();
+  auto doc = Tellico::Data::Document::self();
   QVERIFY(doc->openDocument(QUrl::fromLocalFile(fileName)));
   QCOMPARE(Tellico::ImageFactory::localDir(), QUrl::fromLocalFile(imageDirName));
 
@@ -83,7 +86,7 @@ void DocumentTest::testImageLocalDirectory() {
 
   Tellico::Data::EntryPtr e = coll->entries().at(0);
   QVERIFY(e);
-  QCOMPARE(e->field(QStringLiteral("cover")), QStringLiteral("17b54b2a742c6d342a75f122d615a793.jpeg"));
+  QCOMPARE(e->field(QStringLiteral("cover")), imageName);
 
   // save the document, so the images get copied out of the .tc file into the local image directory
   QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName)));
@@ -93,7 +96,8 @@ void DocumentTest::testImageLocalDirectory() {
   // check that the local image directory is created with the image file inside
   QDir imageDir(imageDirName);
   QVERIFY(imageDir.exists());
-  QVERIFY(imageDir.exists(e->field(QStringLiteral("cover"))));
+  QCOMPARE(e->field(QStringLiteral("cover")), imageName);
+  QVERIFY(imageDir.exists(imageName));
 
   // clear the internal image cache
   Tellico::ImageFactory::clean(true);
@@ -105,7 +109,26 @@ void DocumentTest::testImageLocalDirectory() {
   QVERIFY(QFile::exists(fileName2));
   QDir imageDir2(imageDirName2);
   QVERIFY(imageDir2.exists());
-  QVERIFY(imageDir2.exists(e->field(QStringLiteral("cover"))));
+  QVERIFY(imageDir2.exists(imageName));
+
+  // removing the image from the entry should result in it no longer being in the dir
+  // https://bugs.kde.org/show_bug.cgi?id=509244
+  e->setField(QStringLiteral("cover"), QString());
+  QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName2)));
+  QCOMPARE(imageDir2.exists(imageName), false);
+
+  // should still be in image cache in memory
+  e->setField(QStringLiteral("cover"), imageName);
+  QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName2)));
+  QVERIFY(imageDir2.exists(imageName));
+
+  // add additional entry with same image
+  Tellico::Data::EntryPtr e2(new Tellico::Data::Entry(*e));
+  coll->addEntries(e2);
+  e->setField(QStringLiteral("cover"), QString());
+  QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName2)));
+  QVERIFY(imageDir2.exists(imageName));  // since image is in 2 entries, should still exist
+  coll->removeEntries( {e2} );
 
   /*************************************************************************/
   /* now also verify image directory when file name has multiple periods */
@@ -127,21 +150,21 @@ void DocumentTest::testImageLocalDirectory() {
   coll = doc->collection();
   e = coll->entries().at(0);
   // image should not be in the next image dir yet since we haven't saved
-  QVERIFY(!imageDir3.exists(e->field(QStringLiteral("cover"))));
-  QVERIFY(!Tellico::ImageFactory::imageById(e->field("cover")).isNull());
+  QVERIFY(!imageDir3.exists(imageName));
+  QVERIFY(!Tellico::ImageFactory::imageById(imageName).isNull());
 
   // now remove the first image from the first image directory, save the document, and verify that
   // the proper image exists and is written
-  QVERIFY(imageDir.remove(e->field("cover")));
-  QVERIFY(!imageDir.exists(e->field(QStringLiteral("cover"))));
+  QVERIFY(imageDir.remove(imageName));
+  QVERIFY(!imageDir.exists(imageName));
   QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName3)));
   // now the file should exist in the proper location
-  QVERIFY(imageDir3.exists(e->field(QStringLiteral("cover"))));
+  QVERIFY(imageDir3.exists(imageName));
   // clear the cache
   Tellico::ImageFactory::clean(true);
-  QVERIFY(!Tellico::ImageFactory::imageById(e->field("cover")).isNull());
+  QVERIFY(!Tellico::ImageFactory::imageById(imageName).isNull());
 
-  // sanity check, the directory should not exists after QTemporaryDir destruction
+  // sanity check, the directory should not exist after QTemporaryDir destruction
   tempDir.remove();
   QVERIFY(!QDir(tempDirName).exists());
 }

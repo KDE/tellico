@@ -828,6 +828,7 @@ void Collection::clear() {
   m_entryGroupDicts.clear();
   m_entryGroups.clear();
   m_groupsToDelete.clear();
+  m_imagesToRemove.clear();
   m_filters.clear();
   m_borrowers.clear();
 }
@@ -875,6 +876,15 @@ int Collection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryP
     if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
   }
   return res;
+}
+
+void Collection::imageChanged(const QString& oldValue_, const QString& newValue_) {
+  m_imagesToRemove.insert(oldValue_);
+  m_imagesToRemove.remove(newValue_);
+}
+
+QStringList Collection::imagesToRemove() const {
+  return m_imagesToRemove.values();
 }
 
 Tellico::Data::ID Collection::getID() {

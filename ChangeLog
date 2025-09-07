@@ -1,3 +1,7 @@
+2025-09-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated saving to remove images no longer in collection (Bug 509244).
+
 2025-09-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated OpenLibrary source to fetch plot (Bug 509124).

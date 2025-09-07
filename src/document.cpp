@@ -637,6 +637,17 @@ void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
     }
   }
 
+  // for saving to local directory, might need to remove images who are no longer in collection
+  if(cacheDir == ImageFactory::LocalDir) {
+    const auto imagesToRemove = m_coll->imagesToRemove();
+    for(const auto& imageToRemove : imagesToRemove) {
+      // possible that images removed from one entry are also used in a different entry
+      if(!images.contains(imageToRemove)) {
+        imgDir->removeImage(imageToRemove);
+      }
+    }
+  }
+
   if(m_cancelImageWriting) {
     myLog() << "Document::writeAllImages() - image writing was cancelled";
   }
