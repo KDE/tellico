@@ -554,7 +554,7 @@
  </tc:pub_year>
 </xsl:template>
 
-<xsl:template match="aquisition|purchasedate">
+<xsl:template match="acquisition|purchasedate">
  <tc:pur_date><xsl:value-of select="."/></tc:pur_date>
 </xsl:template>
 

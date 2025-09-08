@@ -140,7 +140,7 @@ void TellicoModelTest::testEntryModel() {
   QCOMPARE(entryModel.index(0, 0), entryModel.indexFromEntry(entry1));
 
   Tellico::Data::FieldPtr field3(new Tellico::Data::Field(QStringLiteral("test"), QStringLiteral("test-new")));
-  coll->modifyField(field3); // same field neame as previous
+  coll->modifyField(field3); // same field name as previous
   QCOMPARE(coll->fields().count(), entryModel.columnCount(QModelIndex()));
   entryModel.modifyField(field1, field3);
 

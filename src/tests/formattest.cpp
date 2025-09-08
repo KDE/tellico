@@ -157,7 +157,7 @@ void FormatTest::testDate_data() {
   QTest::newRow("date3") << "2025--1" << "2025-01-01";
   // default to first day
   QTest::newRow("date3") << "2025-1" << "2025-01-01";
-  // default to curent year
+  // default to current year
   const int y = QDate::currentDate().year();
   QTest::newRow("date4") << "--1" << QString::number(y) + "-01-01";
 }
