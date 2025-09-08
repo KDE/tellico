@@ -37,7 +37,6 @@ Name[sl]=Dark Horse Comics
 Name[sv]=Dark Horse Comics
 Name[tr]=Kara At Karikatürleri
 Name[uk]=Комікси Темного Коня
-Name[x-test]=xxDark Horse Comicsxx
 Type=data-source
 UpdateArgs=%{title}
 Uuid={cdc5de8e-73e5-4914-b528-589f74ee8265}
