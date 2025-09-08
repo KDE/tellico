@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-07 00:42+0000\n"
+"POT-Creation-Date: 2025-09-08 00:44+0000\n"
 "PO-Revision-Date: 2024-12-15 15:58+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -211,7 +211,7 @@ msgstr ""
 msgid "My Collection"
 msgstr ""
 
-#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:519
+#: src/collection.cpp:867 src/core/tellico_strings.cpp:48 src/document.cpp:519
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129

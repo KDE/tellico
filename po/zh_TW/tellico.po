@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-07 00:42+0000\n"
+"POT-Creation-Date: 2025-09-08 00:44+0000\n"
 "PO-Revision-Date: 2024-07-27 13:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -217,7 +217,7 @@ msgstr "<qt>Tellico 無法寫入伺服器管線於 <b>%1</b>。</qt>"
 msgid "My Collection"
 msgstr "我的收藏"
 
-#: src/collection.cpp:866 src/core/tellico_strings.cpp:48 src/document.cpp:519
+#: src/collection.cpp:867 src/core/tellico_strings.cpp:48 src/document.cpp:519
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
