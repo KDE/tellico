@@ -250,7 +250,7 @@ bool Entry::setFieldImpl(Data::FieldPtr field_, const QString& value_) {
                          field_->type() == Field::Rating ||
                          field_->type() == Field::Number ||
                          (field_->type() == Field::Line &&
-                          field_->hasFlag(Field::AllowCompletion);
+                          field_->hasFlag(Field::AllowCompletion));
   if(!field_->hasFlag(Field::AllowMultiple) && shareType) {
     m_fieldValues.insert(Tellico::shareString(name), Tellico::shareString(value_));
   } else {
