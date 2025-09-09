@@ -55,7 +55,7 @@ void AddEntries::redo() {
     if(!defaultValue.isEmpty()) {
       foreach(Data::EntryPtr entry, m_entries) {
         if(entry->field(field).isEmpty()) {
-          entry->setField(field->name(), defaultValue);
+          entry->setField(field, defaultValue);
         }
       }
     }

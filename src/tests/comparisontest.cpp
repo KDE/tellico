@@ -209,9 +209,9 @@ void ComparisonTest::testChoiceField() {
   coll->addField(field);
 
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
-  entry1->setField(field->name(), allowed.at(0));
+  entry1->setField(field, allowed.at(0));
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
-  entry2->setField(field->name(), allowed.at(1));
+  entry2->setField(field, allowed.at(1));
 
   Tellico::FieldComparison* comp = Tellico::FieldComparison::create(field);
   // even though the second allowed value would sort first, it comes second in the list

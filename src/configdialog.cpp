@@ -1096,19 +1096,19 @@ void ConfigDialog::slotShowTemplatePreview() {
   Data::EntryPtr e(new Data::Entry(c));
   foreach(Data::FieldPtr f, c->fields()) {
     if(f->name() == QLatin1String("title")) {
-      e->setField(f->name(), m_templateCombo->currentText());
+      e->setField(f, m_templateCombo->currentText());
     } else if(f->type() == Data::Field::Image) {
       continue;
     } else if(f->type() == Data::Field::Choice) {
-      e->setField(f->name(), f->allowed().front());
+      e->setField(f, f->allowed().front());
     } else if(f->type() == Data::Field::Number) {
-      e->setField(f->name(), QStringLiteral("1"));
+      e->setField(f, QStringLiteral("1"));
     } else if(f->type() == Data::Field::Bool) {
-      e->setField(f->name(), QStringLiteral("true"));
+      e->setField(f, QStringLiteral("true"));
     } else if(f->type() == Data::Field::Rating) {
-      e->setField(f->name(), QStringLiteral("4"));
+      e->setField(f, QStringLiteral("4"));
     } else if(f->type() == Data::Field::URL) {
-      e->setField(f->name(), QStringLiteral("https://tellico-project.org"));
+      e->setField(f, QStringLiteral("https://tellico-project.org"));
       hasLink = true;
     } else if(f->type() == Data::Field::Table) {
       QStringList values;
@@ -1120,9 +1120,9 @@ void ConfigDialog::slotShowTemplatePreview() {
         const auto col = f->property(prop);
         values += col.isEmpty() ? prop : col;
       }
-      e->setField(f->name(), values.join(FieldFormat::columnDelimiterString()));
+      e->setField(f, values.join(FieldFormat::columnDelimiterString()));
     } else {
-      e->setField(f->name(), f->title());
+      e->setField(f, f->title());
     }
   }
   if(!hasLink) {
@@ -1131,7 +1131,7 @@ void ConfigDialog::slotShowTemplatePreview() {
                                      Data::Field::URL));
     f->setCategory(i18n("General"));
     c->addField(f);
-    e->setField(f->name(), QStringLiteral("https://tellico-project.org"));
+    e->setField(f, QStringLiteral("https://tellico-project.org"));
   }
 
   dlg->showEntry(e);

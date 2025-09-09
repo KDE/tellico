@@ -248,7 +248,7 @@ bool CollectionHandler::end(QStringView, QStringView) {
           value = Data::Image::idClean(value);
         }
         // reset the image id to be whatever was loaded
-        entry->setField(field->name(), value, false /* no modified date update */);
+        entry->setField(field, value, false /* no modified date update */);
       }
     }
   }
@@ -557,7 +557,7 @@ bool FieldValueContainerHandler::end(QStringView, QStringView) {
     while(fieldValue.endsWith(FieldFormat::rowDelimiterString())) {
       fieldValue.chop(FieldFormat::rowDelimiterString().length());
       // no need to update the modified date when setting the entry's field value
-      entry->setField(f->name(), fieldValue, false /* no modified date update */);
+      entry->setField(f, fieldValue, false /* no modified date update */);
     }
   }
 
