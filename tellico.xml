@@ -34,7 +34,6 @@
     <comment xml:lang="sv">Tellico-datafil</comment>
     <comment xml:lang="tr">Tellico Veri Dosyası</comment>
     <comment xml:lang="uk">файл даних Tellico</comment>
-    <comment xml:lang="x_test">xxTellico Data Filexx</comment>
     <comment xml:lang="zh_CN">Tellico 数据文件</comment>
     <glob pattern="*.tc"/>
     <glob pattern="*.bc"/>
