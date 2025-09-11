@@ -61,6 +61,7 @@ public:
 
   virtual QUrl dir(); // virtual so TemporaryImageDirectory can create, if necessary
   void setDirectory(const QUrl& dir);
+  void reset();
 
   bool hasImage(const QString& id) override;
   Data::Image* imageById(const QString& id) override;

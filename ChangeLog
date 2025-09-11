@@ -1,5 +1,6 @@
 2025-09-11  Robby Stephenson  <robby@periapsis.org>
 
+	* Fixed bug in image location for new collections (Bug 509245).
 	* Fixed crashing bug for collections without a title field.
 
 2025-09-10  Robby Stephenson  <robby@periapsis.org>

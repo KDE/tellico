@@ -77,6 +77,12 @@ void Document::setURL(const QUrl& url_) {
   if(m_url.fileName() != TC_I18N1(Tellico::untitledFilename)) {
     ImageFactory::setLocalDirectory(m_url);
     EntryComparison::setDocumentUrl(m_url);
+  } else {
+    // important to set the local directory so new temporary images are not saved incorrectly
+    // rather than passing the untitle file name, we want an empty url
+    // per ImageFactory::cacheDir() logic
+    QUrl u;
+    ImageFactory::setLocalDirectory(u);
   }
 }
 
