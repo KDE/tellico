@@ -116,8 +116,12 @@ void EntryViewPage::openExternalLink(const QUrl& url_) {
   QDesktopServices::openUrl(finalUrl);
 }
 
-EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_),
-    m_handler(nullptr), m_tempFile(nullptr), m_useGradientImages(true), m_checkCommonFile(true) {
+EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_)
+    , m_handler(nullptr)
+    , m_tempFile(nullptr)
+    , m_useGradientImages(true)
+    , m_useImageConfigLocation(false)
+    , m_checkCommonFile(true) {
   auto page = new EntryViewPage(this);
   setPage(page);
   if(m_printer.resolution() < 300) {
@@ -182,7 +186,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   // check if the gradient images need to be written again which might be the case if the collection is different
   // and using local directories for storage
   if(entry_ && (!m_entry || m_entry->collection() != entry_->collection()) &&
-     ImageFactory::cacheDir() == ImageFactory::LocalDir) {
+     m_useGradientImages && ImageFactory::cacheDir() == ImageFactory::LocalDir) {
     // use entry_ instead of m_entry since that's the new entry to show
     ImageFactory::createStyleImages(entry_->collection()->type());
   }
@@ -197,7 +201,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   opt |= Export::ExportComplete;
   // use absolute links
   opt |= Export::ExportAbsoluteLinks;
-  // on second thought, don't auto-format everything, just clean it
+  // for Bibtex entries, don't auto-format everything, just clean it
   if(m_entry->collection()->type() == Data::Collection::Bibtex) {
     opt |= Export::ExportClean;
   }
@@ -225,7 +229,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
     }
     // only write out image if it's not linked only
     if(!ImageFactory::imageInfo(id).linkOnly) {
-      if(Data::Document::self()->allImagesOnDisk()) {
+      if(m_useImageConfigLocation) {
         ImageFactory::writeCachedImage(id, ImageFactory::cacheDir());
       } else {
         ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
@@ -341,7 +345,7 @@ void EntryView::setXSLTFile(const QString& file_) {
   m_handler->addStringParam("color2",   Config::templateHighlightedBaseColor(type).name().toLatin1());
   m_handler->addStringParam("linkcolor",Config::templateLinkColor(type).name().toLatin1());
 
-  if(Data::Document::self()->allImagesOnDisk()) {
+  if(m_useImageConfigLocation) {
     m_handler->addStringParam("imgdir", ImageFactory::imageDir().toEncoded());
   } else {
     m_handler->addStringParam("imgdir", ImageFactory::tempDir().toEncoded());
@@ -429,7 +433,7 @@ void EntryView::resetColors() {
 
   QString dir = m_handler ? QFile::decodeName(m_handler->param("imgdir")) : QString();
   if(dir.isEmpty()) {
-    dir = Data::Document::self()->allImagesOnDisk() ?
+    dir = m_useImageConfigLocation ?
             ImageFactory::imageDir().url() :
             ImageFactory::tempDir().url();
   } else {

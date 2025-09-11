@@ -78,6 +78,7 @@ public:
   void addXSLTStringParam(const QByteArray& name, const QByteArray& value);
   void setXSLTOptions(const StyleOptions& options);
   void setUseGradientImages(bool b) { m_useGradientImages = b; }
+  void setUseImageConfigLocation(bool b) { m_useImageConfigLocation = b; }
   void resetView();
 
 Q_SIGNALS:
@@ -111,6 +112,7 @@ private:
 
   QTemporaryFile* m_tempFile;
   bool m_useGradientImages;
+  bool m_useImageConfigLocation;
   bool m_checkCommonFile;
   QPrinter m_printer;
 };

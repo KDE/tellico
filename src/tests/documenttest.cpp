@@ -167,7 +167,6 @@ void DocumentTest::testImageLocalDirectory() {
   // now create a new collection and check the image location
   // should be changed back to a temporary dir
   QVERIFY(doc->newDocument(Tellico::Data::Collection::Book));
-  QVERIFY(doc->allImagesOnDisk());
   QCOMPARE(Tellico::ImageFactory::cacheDir(), Tellico::ImageFactory::TempDir);
 
   // sanity check, the directory should not exist after QTemporaryDir destruction

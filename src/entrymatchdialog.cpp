@@ -101,6 +101,7 @@ EntryMatchDialog::EntryMatchDialog(QWidget* parent_, Data::EntryPtr entryToUpdat
   }
 
   m_entryView = new EntryView(split);
+  m_entryView->setUseImageConfigLocation(true);
   // don't bother creating funky gradient images for compact view
   m_entryView->setUseGradientImages(false);
   // set the xslt file AFTER setting the gradient image option
