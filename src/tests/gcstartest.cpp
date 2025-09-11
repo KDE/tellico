@@ -75,6 +75,9 @@ void GCstarTest::testBook() {
   QCOMPARE(authors.first(), QStringLiteral("Timothy Keller"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("978-0-525-95049-3"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Dutton Adult"));
+  QCOMPARE(entry->field("pur_date"), QStringLiteral("2013-09-02"));
+  QCOMPARE(entry->field("cdate"), QStringLiteral("2013-10-02"));
+  QCOMPARE(entry->field("mdate"), QStringLiteral("2013-10-02"));
   const auto genres = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("genre")));
   QCOMPARE(genres.count(), 2);
   QCOMPARE(genres.at(0), QStringLiteral("non-fiction"));
@@ -93,7 +96,6 @@ void GCstarTest::testBook() {
 
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
-
   QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
@@ -139,7 +141,7 @@ void GCstarTest::testComicBook() {
   QCOMPARE(entry->field("category"), QStringLiteral("category"));
   QCOMPARE(entry->field("format"), QStringLiteral("format"));
   QCOMPARE(entry->field("collection"), QStringLiteral("collection"));
-  QCOMPARE(entry->field("pur_date"), QStringLiteral("29/08/2010"));
+  QCOMPARE(entry->field("cdate"), QStringLiteral("2010-08-29"));
   QCOMPARE(entry->field("pur_price"), QStringLiteral("12.99"));
   QCOMPARE(entry->field("numberboards"), QStringLiteral("1"));
   QCOMPARE(entry->field("signed"), QStringLiteral("true"));
@@ -422,7 +424,7 @@ void GCstarTest::testWine() {
   const auto varietals = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("varietal")));
   QCOMPARE(varietals.count(), 2);
   QCOMPARE(varietals.at(1), QStringLiteral("grape2"));
-  QCOMPARE(entry->field("pur_date"), QStringLiteral("28/08/2010"));
+  QCOMPARE(entry->field("pur_date"), QStringLiteral("2010-08-28"));
   QCOMPARE(entry->field("pur_price"), QStringLiteral("12.99"));
   QCOMPARE(entry->field("appellation"), QStringLiteral("designation"));
   QCOMPARE(entry->field("distinction"), QStringLiteral("distinction"));
@@ -625,7 +627,7 @@ void GCstarTest::testCustomFields() {
     foreach(Tellico::Data::FieldPtr f, coll->fields()) {
       // skip images
       if(f->type() != Tellico::Data::Field::Image) {
-        QCOMPARE(f->name() + e1->field(f), f->name() + e2->field(f));
+        QCOMPARE(f->name() + e2->field(f), f->name() + e1->field(f));
       }
     }
   }

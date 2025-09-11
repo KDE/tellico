@@ -112,13 +112,13 @@
      </xsl:if>
     </xsl:when>
     <xsl:when test="@type='GCwines'">
-     <tc:field title="Varietal" flags="7" category="General" format="0" type="1" name="varietal" i18n="true"/>
+     <tc:field flags="7" title="Varietal" category="General" format="0" type="1" name="varietal" i18n="true"/>
      <tc:field flags="0" title="Tasted" category="Personal" format="4" type="4" name="tasted" i18n="true"/>
      <tc:field flags="6" title="Distinction" category="General" format="4" type="1" name="distinction" i18n="true"/>
      <tc:field flags="6" title="Soil" category="General" format="4" type="1" name="soil" i18n="true"/>
      <tc:field flags="6" title="Alcohol" category="General" format="4" type="1" name="alcohol" i18n="true"/>
      <tc:field flags="6" title="Volume" category="General" format="4" type="1" name="volume" i18n="true"/>
-     <tc:field title="Type" flags="2" category="General" format="4" type="3" name="type" i18n="true">
+     <tc:field flags="2" title="Type" category="General" format="4" type="3" name="type" i18n="true">
       <xsl:attribute name="allowed">
        <xsl:text>Red Wine;White Wine;Sparkling Wine</xsl:text>
        <xsl:for-each select="item[not(@type=preceding-sibling::item/@type)]/@type">
@@ -235,12 +235,9 @@
  <xsl:element name="{concat('tc:',$elemName)}">
   <xsl:choose>
    <xsl:when test="$fieldType = 'date'">
-    <xsl:variable name="numbers" select="str:tokenize(., '/-')"/>
-    <xsl:if test="count($numbers) = 3">
-     <tc:year><xsl:value-of select="$numbers[3]"/></tc:year>
-     <tc:month><xsl:value-of select="$numbers[2]"/></tc:month>
-     <tc:day><xsl:value-of select="$numbers[1]"/></tc:day>
-    </xsl:if>
+    <xsl:call-template name="date">
+     <xsl:with-param name="value" select="."/>
+    </xsl:call-template>
    </xsl:when>
    <xsl:when test="$fieldType = 'yesno'">
     <xsl:if test=". = '1'">true</xsl:if>
@@ -555,26 +552,26 @@
 </xsl:template>
 
 <xsl:template match="acquisition|purchasedate">
- <tc:pur_date><xsl:value-of select="."/></tc:pur_date>
+ <xsl:variable name="numbers" select="str:tokenize(., '/-')"/>
+ <xsl:if test="count($numbers) = 3">
+  <tc:pur_date>
+   <xsl:value-of select="concat($numbers[3],'-',$numbers[2],'-',$numbers[1])"/>
+  </tc:pur_date>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="added">
- <xsl:if test="not(../acquisition)">
-  <tc:pur_date><xsl:value-of select="."/></tc:pur_date>
- </xsl:if>
- <xsl:variable name="numbers" select="str:tokenize(., '/-')"/>
- <xsl:if test="count($numbers) = 3">
-  <tc:cdate calendar="gregorian" >
-   <tc:year><xsl:value-of select="$numbers[3]"/></tc:year>
-   <tc:month><xsl:value-of select="$numbers[2]"/></tc:month>
-   <tc:day><xsl:value-of select="$numbers[1]"/></tc:day>
-  </tc:cdate>
-  <tc:mdate calendar="gregorian" >
-   <tc:year><xsl:value-of select="$numbers[3]"/></tc:year>
-   <tc:month><xsl:value-of select="$numbers[2]"/></tc:month>
-   <tc:day><xsl:value-of select="$numbers[1]"/></tc:day>
-  </tc:mdate>
- </xsl:if>
+ <tc:cdate calendar="gregorian">
+  <xsl:call-template name="date">
+   <xsl:with-param name="value" select="."/>
+  </xsl:call-template>
+ </tc:cdate>
+ <!-- last modified date is same as created -->
+ <tc:mdate calendar="gregorian">
+  <xsl:call-template name="date">
+   <xsl:with-param name="value" select="."/>
+  </xsl:call-template>
+ </tc:mdate>
 </xsl:template>
 
 <xsl:template match="serie">
@@ -911,6 +908,16 @@
    </xsl:otherwise>
 
   </xsl:choose>
+</xsl:template>
+
+<xsl:template name="date">
+ <xsl:param name="value"/>
+ <xsl:variable name="numbers" select="str:tokenize($value, '/-')"/>
+ <xsl:if test="count($numbers) = 3">
+  <tc:year><xsl:value-of select="$numbers[3]"/></tc:year>
+  <tc:month><xsl:value-of select="$numbers[2]"/></tc:month>
+  <tc:day><xsl:value-of select="$numbers[1]"/></tc:day>
+ </xsl:if>
 </xsl:template>
 
 </xsl:stylesheet>

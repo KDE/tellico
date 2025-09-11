@@ -34,9 +34,8 @@
   <a:attribute name="serie">series</a:attribute>
   <a:attribute name="edition">edition</a:attribute>
   <a:attribute name="pages">pages</a:attribute>
-  <a:attribute name="added" skip="GCwines">pur_date</a:attribute>
-  <a:attribute name="purchasedate" type="GCwines">pur_date</a:attribute>
-  <a:attribute name="acquisition">pur_date</a:attribute>
+  <a:attribute name="purchasedate" format="date" type="GCwines">pur_date</a:attribute>
+  <a:attribute name="acquisition" format="date" skip="GCwines">pur_date</a:attribute>
   <a:attribute name="location">location</a:attribute>
   <a:attribute name="translator">translator</a:attribute>
   <a:attribute name="artist">artist</a:attribute>
@@ -164,7 +163,7 @@
 </xsl:template>
 
 <!-- output only custom fields -->
-<xsl:template match="tc:fields">
+<xsl:template match="tc:fields[tc:field[substring(@name, 1, 8) = 'gcsfield']]">
  <userCollection>
   <fields>
    <xsl:for-each select="tc:field[substring(@name, 1, 8) = 'gcsfield']">
@@ -223,6 +222,9 @@
  </userCollection>
 </xsl:template>
 
+<!-- normally, no output for fields, unless there are custom fields -->
+<xsl:template match="tc:fields"/>
+
 <!-- no output for images -->
 <xsl:template match="tc:images"/>
 
@@ -241,6 +243,13 @@
     <xsl:with-param name="entry" select="$entry"/>
    </xsl:call-template>
   </xsl:for-each>
+
+  <xsl:attribute name="added">
+   <!-- gcstar uses french format, dd/mm/yy -->
+   <xsl:value-of select="concat(tc:cdate/tc:day, '/',
+                                tc:cdate/tc:month, '/',
+                                tc:cdate/tc:year)"/>
+  </xsl:attribute>
 
   <xsl:if test="tc:running-time">
    <xsl:attribute name="time">
@@ -289,26 +298,25 @@
   </xsl:if>
 
   <!-- for books -->
-  <authors>
-   <xsl:call-template name="multiline">
-    <xsl:with-param name="elem" select="tc:authors"/>
-   </xsl:call-template>
-  </authors>
-  <genre>
-   <xsl:call-template name="multiline">
-    <xsl:with-param name="elem" select="tc:genres"/>
-   </xsl:call-template>
-  </genre>
-  <tags>
-   <xsl:call-template name="multiline">
-    <xsl:with-param name="elem" select="tc:keywords"/>
-   </xsl:call-template>
-  </tags>
+  <xsl:call-template name="multiline">
+   <xsl:with-param name="name" select="'authors'"/>
+   <xsl:with-param name="elem" select="tc:authors"/>
+  </xsl:call-template>
+  <xsl:call-template name="multiline">
+   <xsl:with-param name="name" select="'genre'"/>
+   <xsl:with-param name="elem" select="tc:genres"/>
+  </xsl:call-template>
+  <xsl:call-template name="multiline">
+   <xsl:with-param name="name" select="'tags'"/>
+   <xsl:with-param name="elem" select="tc:keywords"/>
+  </xsl:call-template>
 
   <!-- for movies -->
-  <synopsis>
-   <xsl:value-of select="tc:plot"/>
-  </synopsis>
+  <xsl:if test="$collType = 'GCfilms' or $collType = 'GCcomics'">
+   <synopsis>
+    <xsl:value-of select="tc:plot"/>
+   </synopsis>
+  </xsl:if>
 <!--
   <directors>
    <xsl:call-template name="multiline">
@@ -316,16 +324,14 @@
    </xsl:call-template>
   </directors>
 -->
-  <actors>
-   <xsl:call-template name="table">
-    <xsl:with-param name="elem" select="tc:casts"/>
-   </xsl:call-template>
-  </actors>
-  <subt>
-   <xsl:call-template name="multiline">
-    <xsl:with-param name="elem" select="tc:subtitles"/>
-   </xsl:call-template>
-  </subt>
+  <xsl:call-template name="table">
+   <xsl:with-param name="name" select="'actors'"/>
+   <xsl:with-param name="elem" select="tc:casts"/>
+  </xsl:call-template>
+  <xsl:call-template name="multiline">
+   <xsl:with-param name="name" select="'subt'"/>
+   <xsl:with-param name="elem" select="tc:subtitles"/>
+  </xsl:call-template>
   <xsl:choose>
    <xsl:when test="$collType = 'GCfilms' or $collType = 'GCboardgames'">
     <comment> <!-- note the lack of an 's' -->
@@ -347,11 +353,11 @@
   <xsl:apply-templates select="tc:tracks"/>
 
   <!-- board games -->
-  <mechanics>
-   <xsl:call-template name="multiline">
-    <xsl:with-param name="elem" select="tc:mechanisms"/>
-   </xsl:call-template>
-  </mechanics>
+  <xsl:call-template name="multiline">
+   <xsl:with-param name="name" select="'mechanics'"/>
+   <xsl:with-param name="elem" select="tc:mechanisms"/>
+  </xsl:call-template>
+
   <xsl:if test="$collType = 'GCgames' or $collType = 'GCboardgames'">
    <description>
     <xsl:value-of select="tc:description"/>
@@ -359,11 +365,10 @@
   </xsl:if>
 
   <!-- for wines -->
-  <grapes>
-   <xsl:call-template name="multiline">
-    <xsl:with-param name="elem" select="tc:varietals"/>
-   </xsl:call-template>
-  </grapes>
+  <xsl:call-template name="multiline">
+   <xsl:with-param name="name" select="'grapes'"/>
+   <xsl:with-param name="elem" select="tc:varietals"/>
+  </xsl:call-template>
 
   <!-- for coins -->
   <xsl:apply-templates select="tc:metals"/>
@@ -468,27 +473,37 @@
 </xsl:template>
 
 <xsl:template name="multiline">
+ <xsl:param name="name"/>
  <xsl:param name="elem"/>
- <xsl:for-each select="$elem/child::*">
-  <line>
-   <col>
-    <xsl:value-of select="."/>
-   </col>
-  </line>
- </xsl:for-each>
+ <xsl:if test="$elem">
+  <xsl:element name="{$name}">
+   <xsl:for-each select="$elem/child::*">
+    <line>
+     <col>
+      <xsl:value-of select="."/>
+     </col>
+    </line>
+   </xsl:for-each>
+  </xsl:element>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template name="table">
+ <xsl:param name="name"/>
  <xsl:param name="elem"/>
- <xsl:for-each select="$elem/child::*">
-  <line>
-   <xsl:for-each select="child::*">
-    <col>
-     <xsl:value-of select="."/>
-    </col>
+ <xsl:if test="$elem">
+  <xsl:element name="{$name}">
+   <xsl:for-each select="$elem/child::*">
+    <line>
+     <xsl:for-each select="child::*">
+      <col>
+       <xsl:value-of select="."/>
+      </col>
+     </xsl:for-each>
+    </line>
    </xsl:for-each>
-  </line>
- </xsl:for-each>
+  </xsl:element>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template name="handle-attribute">
@@ -508,6 +523,16 @@
    <xsl:if test="string-length($imageDir) &gt; 0">
     <xsl:attribute name="{$att/@name}">
      <xsl:value-of select="concat($imageDir, $values[1])"/>
+    </xsl:attribute>
+   </xsl:if>
+  </xsl:when>
+  <xsl:when test="$att/@format='date'">
+   <!-- gcstar uses french format, dd/mm/yy, instead of yy-mm-dd -->
+   <!-- so split and reverse tokens -->
+   <xsl:variable name="numbers" select="str:tokenize($values[1], '-')"/>
+   <xsl:if test="count($numbers) = 3">
+    <xsl:attribute name="{$att/@name}">
+     <xsl:value-of select="concat($numbers[3],'/',$numbers[2],'/',$numbers[1])"/>
     </xsl:attribute>
    </xsl:if>
   </xsl:when>
