@@ -858,6 +858,9 @@ void MainWindow::initView() {
   MARK;
 
   m_entryView = new EntryView(this);
+  // by default entry view use a temp location for images but
+  // the main view should use the config location for writing images
+  m_entryView->setUseImageConfigLocation(true);
   connect(m_entryView, &EntryView::signalTellicoAction,
           this, &MainWindow::slotURLAction);
 

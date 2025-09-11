@@ -56,7 +56,6 @@ Document* Document::s_self = nullptr;
 Document::Document() : QObject(), m_coll(nullptr), m_isModified(false),
     m_loadAllImages(false), m_validFile(false), m_importer(nullptr), m_cancelImageWriting(true),
     m_fileFormat(Import::TellicoImporter::Unknown), m_loadImagesTimer(this) {
-  m_allImagesOnDisk = Config::imageLocation() != Config::ImagesInFile;
   m_loadImagesTimer.setSingleShot(true);
   m_loadImagesTimer.setInterval(500);
   connect(&m_loadImagesTimer, &QTimer::timeout, this, &Document::slotLoadAllImages);
@@ -161,7 +160,6 @@ bool Document::openDocument(const QUrl& url_) {
   // format is only known AFTER collection() is called
 
   m_fileFormat = m_importer->format();
-  m_allImagesOnDisk = !m_importer->hasImages();
   if(!m_importer->hasImages() || m_fileFormat != Import::TellicoImporter::Zip) {
     m_loadAllImages = true;
   }
@@ -633,7 +631,7 @@ void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
       }
       // careful here, if we're writing to LocalDir, need to read from the old LocalDir and write to new
       bool success;
-      if(cacheDir == ImageFactory::LocalDir) {
+      if(imgDir) {
         success = ImageFactory::writeCachedImage(id, imgDir.data());
       } else {
         success = ImageFactory::writeCachedImage(id, cacheDir);

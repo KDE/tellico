@@ -158,7 +158,6 @@ public:
   void unAppendCollection(FieldList origFields, QList<int> addedEntries);
   void unMergeCollection(FieldList origFields_, MergePair entryPair);
   bool loadAllImagesNow() const;
-  bool allImagesOnDisk() const { return m_allImagesOnDisk; }
   int imageCount() const;
   EntryList filteredEntries(FilterPtr filter) const;
 
@@ -233,7 +232,6 @@ private:
   QPointer<Import::TellicoImporter> m_importer;
   bool m_cancelImageWriting;
   int m_fileFormat;
-  bool m_allImagesOnDisk;
   QTimer m_loadImagesTimer;
 };
 
