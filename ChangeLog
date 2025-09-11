@@ -1,3 +1,7 @@
+2025-09-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug for opening truncated files (Bug 509364).
+
 2025-09-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated OpenLibrary source to fetch plot (Bug 509124).

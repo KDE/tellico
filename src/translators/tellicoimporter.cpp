@@ -83,7 +83,7 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
 
   // need to decide if the data is xml text, or a zip file
   // if the first 5 characters are <?xml then treat it like text
-  if(s[0] == '<' && s[1] == '?' && s[2] == 'x' && s[3] == 'm' && s[4] == 'l') {
+  if(s.size() >= 5 && s[0] == '<' && s[1] == '?' && s[2] == 'x' && s[3] == 'm' && s[4] == 'l') {
     m_format = XML;
     loadXMLData(source() == URL ? fileRef().file()->readAll() : data(), true);
   } else {
