@@ -66,6 +66,7 @@ private Q_SLOTS:
   void testXmlWithJunk();
   void testRemote();
   void testImageLocation();
+  void testSmallFile();
 
 private:
   QList<Tellico::Data::CollPtr> m_collections;

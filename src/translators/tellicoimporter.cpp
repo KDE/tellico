@@ -63,19 +63,17 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
     return m_coll;
   }
 
-  QByteArray s; // read first 5 characters
-  if(source() == URL) {
-    if(!fileRef().open()) {
-      return Data::CollPtr();
+  auto getFirstData = [this] {
+    if(source() == URL && fileRef().open()) {
+      return fileRef().file()->peek(5);
+    } else {
+      return QByteArray(data().constData(), 6);
     }
-    QIODevice* f = fileRef().file();
-    s = f->peek(5);
-  } else {
-    if(data().size() < 5) {
-      m_format = Error;
-      return Data::CollPtr();
-    }
-    s = QByteArray(data().constData(), 6);
+  };
+  const auto s = getFirstData(); // read first 5 characters
+  if(s.size() < 5) {
+    m_format = Error;
+    return Data::CollPtr();
   }
 
   // hack for processEvents and deletion

@@ -864,3 +864,10 @@ void TellicoReadTest::testImageLocation() {
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(image);
   QVERIFY(!img.isNull());
 }
+
+void TellicoReadTest::testSmallFile() {
+  QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("data/truncated.xml"));
+  Tellico::Import::TellicoImporter importer(u);
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(!coll);
+}
