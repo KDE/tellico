@@ -87,7 +87,7 @@ void GroupSortModel::setEntrySortField(const QString& fieldName_) {
 bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right_) const {
   // if the index have parents, then they represent entries, compare by title
   // calling index.parent() is expensive for the EntryGroupModel
-  /// all we really need to know is whether the parent is valid
+  // all we really need to know is whether the parent is valid
   const bool leftParentValid = sourceModel()->data(left_, ValidParentRole).toBool();
   const bool rightParentValid = sourceModel()->data(right_, ValidParentRole).toBool();
   const bool reverseOrder = (sortOrder() == Qt::DescendingOrder);
@@ -128,10 +128,9 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
   }
 
   if(!m_entryComparison) {
-    // default to using the title field for sorting
-    m_entryComparison = getEntryComparison(left_, QStringLiteral("title"));
+    // default to using the title field for sorting by calling without a field name
+    m_entryComparison = getEntryComparison(left_, QString());
   }
-  Q_ASSERT(m_entryComparison);
   if(!m_entryComparison) {
     return left_.data().toString().localeAwareCompare(right_.data().toString()) < 0;
   }
@@ -154,9 +153,10 @@ Tellico::FieldComparison* GroupSortModel::getEntryComparison(const QModelIndex& 
   Data::EntryPtr entry = index_.data(EntryPtrRole).value<Data::EntryPtr>();
   if(entry) {
     Data::CollPtr coll = entry->collection();
-    // by default, always sort by title
     if(coll) {
-      comp = FieldComparison::create(coll->fieldByName(fieldName_));
+      // by default, always sort by title
+      const auto fieldName = fieldName_.isEmpty() ? coll->titleField() : fieldName_;
+      comp = FieldComparison::create(coll->fieldByName(fieldName));
     }
   }
   return comp;
