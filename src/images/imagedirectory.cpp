@@ -44,11 +44,16 @@ using Tellico::ImageDirectory;
 using Tellico::TemporaryImageDirectory;
 using Tellico::ImageZipArchive;
 
-ImageDirectory::ImageDirectory() : ImageStorage(), m_pathExists(false), m_isLocal(true), m_tempDir(nullptr) {
+ImageDirectory::ImageDirectory() : ImageStorage() {
+  reset();
 }
 
 ImageDirectory::ImageDirectory(const QUrl& dir_) : ImageStorage(), m_tempDir(nullptr) {
-  setDirectory(dir_);
+  if(dir_.isEmpty()) {
+    reset();
+  } else {
+    setDirectory(dir_);
+  }
 }
 
 ImageDirectory::~ImageDirectory() {
@@ -67,6 +72,15 @@ void ImageDirectory::setDirectory(const QUrl& dir_) {
     // for now, only check existence of local directories
     m_pathExists = m_isLocal && QFileInfo::exists(m_dir.toLocalFile());
   }
+}
+
+void ImageDirectory::reset() {
+  m_dir.clear();
+  m_pathExists = false;
+  m_isLocal = true;
+  m_imageExists.clear();
+  delete m_tempDir;
+  m_tempDir = nullptr;
 }
 
 bool ImageDirectory::hasImage(const QString& id_) {

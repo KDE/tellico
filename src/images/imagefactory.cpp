@@ -81,7 +81,7 @@ void ImageFactory::init() {
   factory = new ImageFactory();
   const QUrl dataDir = QUrl::fromLocalFile(Tellico::saveLocation(QStringLiteral("data/")));
   factory->d->dataImageDir.setDirectory(dataDir);
-  myLog() << "Setting local image dir:" << factory->d->dataImageDir.dir().toDisplayString(QUrl::PreferLocalFile);
+  myLog() << "Setting data image dir:" << factory->d->dataImageDir.dir().toDisplayString(QUrl::PreferLocalFile);
 
   myLog() << "Setting max image cache cost:" << Config::imageCacheSize();
   factory->d->imageCache.setMaxCost(Config::imageCacheSize());
@@ -764,7 +764,8 @@ void ImageFactory::setLocalDirectory(const QUrl& url_) {
   Q_ASSERT_X(factory, "ImageFactory::setLocalDirectory", "ImageFactory is not initialized!");
   const auto localDirName = localDirectory(url_);
   if(localDirName.isEmpty()) {
-    myDebug() << "Trying to set an empty local directory";
+    myLog() << "Clearing the local directory name";
+    factory->d->localImageDir.reset();
   } else {
     myLog() << "Setting local image dir:" << localDirName.toDisplayString(QUrl::PreferLocalFile);
     factory->d->localImageDir.setDirectory(localDirName);

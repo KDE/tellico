@@ -768,6 +768,8 @@ void MainWindow::initActions() {
 
 void MainWindow::initDocument() {
   MARK;
+  // initialize the image factory before the document is created
+  ImageFactory::init();
   Data::Document* doc = Data::Document::self();
   Kernel::self()->resetHistory();
 
@@ -795,8 +797,6 @@ void MainWindow::initDocument() {
 
 void MainWindow::initView() {
   MARK;
-  // initialize the image factory before the entry models are created
-  ImageFactory::init();
 
   m_entryView = new EntryView(this);
   connect(m_entryView, &EntryView::signalTellicoAction,
