@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:44+0000\n"
+"POT-Creation-Date: 2025-09-12 00:43+0000\n"
 "PO-Revision-Date: 2025-04-07 23:49+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -159,7 +159,7 @@ msgstr "이름"
 msgid "Collection Size"
 msgstr "소장품 규모"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1618
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1621
 #, kde-format
 msgid "Total entries: %1"
 msgstr "전체 항목: %1"
@@ -211,7 +211,7 @@ msgstr "<qt>Tellico가 <b>%1</b>의 서버 파이프에 쓸 수 없습니다.</q
 msgid "My Collection"
 msgstr "내 소장품"
 
-#: src/collection.cpp:867 src/core/tellico_strings.cpp:48 src/document.cpp:519
+#: src/collection.cpp:867 src/core/tellico_strings.cpp:48 src/document.cpp:523
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
@@ -1012,7 +1012,7 @@ msgstr "구매 가격"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:517
+#: src/collections/videocollection.cpp:205 src/document.cpp:521
 #, kde-format
 msgid "Loaned"
 msgstr "대여됨"
@@ -2733,8 +2733,8 @@ msgstr "XSL 파일"
 msgid "Template Packages"
 msgstr "템플릿 패키지"
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1252
-#: src/mainwindow.cpp:1423 src/reportdialog.cpp:423 src/reportdialog.cpp:438
+#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1255
+#: src/mainwindow.cpp:1426 src/reportdialog.cpp:423 src/reportdialog.cpp:438
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
@@ -2997,7 +2997,7 @@ msgstr "모든 열 표시"
 msgid "Hide All Columns"
 msgstr "모든 열 숨기기"
 
-#: src/document.cpp:212 src/mainwindow.cpp:1367
+#: src/document.cpp:216 src/mainwindow.cpp:1370
 #, kde-format
 msgid "Saving file..."
 msgstr "파일 저장 중..."
@@ -3058,7 +3058,7 @@ msgstr ""
 msgid "Save Entry"
 msgstr "항목 저장"
 
-#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1156
+#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1159
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "저장되지 않은 변경 사항"
@@ -3067,7 +3067,7 @@ msgstr "저장되지 않은 변경 사항"
 msgid "(Empty)"
 msgstr "(비어 있음)"
 
-#: src/entryiconview.cpp:61 src/mainwindow.cpp:831
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:834
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3131,12 +3131,12 @@ msgstr "항목 업데이트"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<i>%2</i>에서 <b>%1</b> 업데이트 중..."
 
-#: src/entryview.cpp:289
+#: src/entryview.cpp:293
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico가 기본 항목 스타일시트를 찾을 수 없습니다."
 
-#: src/entryview.cpp:291 src/mainwindow.cpp:1774
+#: src/entryview.cpp:295 src/mainwindow.cpp:1777
 #, kde-format
 msgid "Please check your installation."
 msgstr "설치 상태를 확인하십시오."
@@ -4847,8 +4847,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "그룹"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1083 src/mainwindow.cpp:1706
-#: src/mainwindow.cpp:1743 src/translators/htmlexporter.cpp:387
+#: src/groupview.cpp:425 src/mainwindow.cpp:1086 src/mainwindow.cpp:1709
+#: src/mainwindow.cpp:1746 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "사람"
@@ -5149,14 +5149,14 @@ msgstr ""
 msgid "&Import"
 msgstr "가져오기(&I)"
 
-#: src/importdialog.cpp:381 src/mainwindow.cpp:1248 src/mainwindow.cpp:1421
+#: src/importdialog.cpp:381 src/mainwindow.cpp:1251 src/mainwindow.cpp:1424
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico 파일"
 
 #: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
-#: src/mainwindow.cpp:1250 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1253 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML 파일"
@@ -6243,36 +6243,36 @@ msgstr "소장품 그룹 변경"
 msgid "Filter here..."
 msgstr "여기에 필터..."
 
-#: src/mainwindow.cpp:809
+#: src/mainwindow.cpp:812
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
 "qt>"
 msgstr "<qt><i>항목 보기</i>에서 항목의 내용을 형식화해서 보여 줍니다.</qt>"
 
-#: src/mainwindow.cpp:814
+#: src/mainwindow.cpp:817
 #, kde-format
 msgid "Collection View"
 msgstr "소장품 보기"
 
-#: src/mainwindow.cpp:821
+#: src/mainwindow.cpp:824
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
 "</qt>"
 msgstr "<qt><i>열 보기</i>는 각 항목에 대한 여러 필드의 값을 표시합니다.</qt>"
 
-#: src/mainwindow.cpp:838
+#: src/mainwindow.cpp:841
 #, kde-format
 msgid "Group View"
 msgstr "그룹 보기"
 
-#: src/mainwindow.cpp:847
+#: src/mainwindow.cpp:850
 #, kde-format
 msgid "Groups"
 msgstr "그룹"
 
-#: src/mainwindow.cpp:848
+#: src/mainwindow.cpp:851
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
@@ -6280,17 +6280,17 @@ msgid ""
 msgstr ""
 "<qt><i>그룹 보기</i>는 선택한 필드를 기준으로 항목을 그룹화합니다.</qt>"
 
-#: src/mainwindow.cpp:929
+#: src/mainwindow.cpp:932
 #, kde-format
 msgid "Collection management software, free and simple"
 msgstr "간단한 자유 소프트웨어 소장품 관리 도구"
 
-#: src/mainwindow.cpp:931
+#: src/mainwindow.cpp:934
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Tellico 소장품 관리 도구에 오신 것을 환영합니다"
 
-#: src/mainwindow.cpp:933
+#: src/mainwindow.cpp:936
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6305,7 +6305,7 @@ msgstr ""
 "edit_search_internet\">데이터를 다운로드</a>하여 내 소장품 목록에 추가할 수 "
 "있습니다.</h3>"
 
-#: src/mainwindow.cpp:942
+#: src/mainwindow.cpp:945
 #, kde-format
 msgid ""
 "More information can be found in the <a href=\"help:/tellico"
@@ -6315,7 +6315,7 @@ msgstr ""
 "더 많은 정보는 <a href=\"help:/tellico\">문서</a>에서 확인할 수 있습니다. <a "
 "href=\"tc:///disable_welcome\">이 시작 화면을 비활성화</a>할 수 있습니다."
 
-#: src/mainwindow.cpp:1154
+#: src/mainwindow.cpp:1157
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6324,22 +6324,22 @@ msgstr ""
 "현재 파일이 수정되었습니다.\n"
 "저장하시겠습니까?"
 
-#: src/mainwindow.cpp:1190 src/mainwindow.cpp:1224
+#: src/mainwindow.cpp:1193 src/mainwindow.cpp:1227
 #, kde-format
 msgid "Creating new collection..."
 msgstr "새 소장품 생성 중..."
 
-#: src/mainwindow.cpp:1245 src/mainwindow.cpp:1268 src/mainwindow.cpp:1286
+#: src/mainwindow.cpp:1248 src/mainwindow.cpp:1271 src/mainwindow.cpp:1289
 #, kde-format
 msgid "Opening file..."
 msgstr "파일 여는 중..."
 
-#: src/mainwindow.cpp:1256
+#: src/mainwindow.cpp:1259
 #, kde-format
 msgid "Open File"
 msgstr "파일 열기"
 
-#: src/mainwindow.cpp:1378
+#: src/mainwindow.cpp:1381
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6352,32 +6352,32 @@ msgstr ""
 "시키시겠습니까?</p><p>설정 대화 상자에서 항상 옵션을 변경할 수 있습니다.</"
 "p></qt>"
 
-#: src/mainwindow.cpp:1383
+#: src/mainwindow.cpp:1386
 #, kde-format
 msgid "Save Images Separately"
 msgstr "별도로 이미지 저장"
 
-#: src/mainwindow.cpp:1384
+#: src/mainwindow.cpp:1387
 #, kde-format
 msgid "Save Images in File"
 msgstr "파일에 이미지 저장"
 
-#: src/mainwindow.cpp:1419
+#: src/mainwindow.cpp:1422
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "새로운 파일 이름으로 파일을 저장하는 중..."
 
-#: src/mainwindow.cpp:1428
+#: src/mainwindow.cpp:1431
 #, kde-format
 msgid "Save As"
 msgstr "다른 이름으로 저장"
 
-#: src/mainwindow.cpp:1494
+#: src/mainwindow.cpp:1497
 #, kde-format
 msgid "Printing..."
 msgstr "인쇄 중..."
 
-#: src/mainwindow.cpp:1498
+#: src/mainwindow.cpp:1501
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6386,27 +6386,27 @@ msgstr ""
 "현재 소장품 목록에 필터가 적용되어 전체 소장품의 일부만 표시하고 있습니다. 표"
 "시된 항목만 인쇄됩니다. 계속 진행하시겠습니까?"
 
-#: src/mainwindow.cpp:1523
+#: src/mainwindow.cpp:1526
 #, kde-format
 msgid "Exiting..."
 msgstr "종료 중..."
 
-#: src/mainwindow.cpp:1625
+#: src/mainwindow.cpp:1628
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1개 필터됨, %2개 선택됨)"
 
-#: src/mainwindow.cpp:1628
+#: src/mainwindow.cpp:1631
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1개 필터됨)"
 
-#: src/mainwindow.cpp:1631
+#: src/mainwindow.cpp:1634
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1개 선택됨)"
 
-#: src/mainwindow.cpp:1773 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1776 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6414,57 +6414,57 @@ msgstr "(%1개 선택됨)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico에서 XSLT 처리 중 오류가 발생했습니다."
 
-#: src/mainwindow.cpp:1891
+#: src/mainwindow.cpp:1894
 #, kde-format
 msgid "Importing data..."
 msgstr "데이터를 가져오는 중..."
 
-#: src/mainwindow.cpp:1902
+#: src/mainwindow.cpp:1905
 #, kde-format
 msgid "Import File"
 msgstr "파일 가져오기"
 
-#: src/mainwindow.cpp:1915
+#: src/mainwindow.cpp:1918
 #, kde-format
 msgid "Import Directory"
 msgstr "디렉터리 가져오기"
 
-#: src/mainwindow.cpp:1939
+#: src/mainwindow.cpp:1942
 #, kde-format
 msgid "Exporting data..."
 msgstr "데이터를 내보내는 중..."
 
-#: src/mainwindow.cpp:1963
+#: src/mainwindow.cpp:1966
 #, kde-format
 msgid "Export As"
 msgstr "다른 이름으로 내보내기"
 
-#: src/mainwindow.cpp:1991
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "String Macros"
 msgstr "문자열 매크로"
 
-#: src/mainwindow.cpp:1992
+#: src/mainwindow.cpp:1995
 #, kde-format
 msgid "Macro"
 msgstr "매크로"
 
-#: src/mainwindow.cpp:1992
+#: src/mainwindow.cpp:1995
 #, kde-format
 msgid "String"
 msgstr "문자열"
 
-#: src/mainwindow.cpp:2078
+#: src/mainwindow.cpp:2081
 #, kde-format
 msgid "Creating citations..."
 msgstr "인용구를 만드는 중..."
 
-#: src/mainwindow.cpp:2188
+#: src/mainwindow.cpp:2191
 #, kde-format
 msgid "Filters"
 msgstr "필터"
 
-#: src/mainwindow.cpp:2189
+#: src/mainwindow.cpp:2192
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6473,12 +6473,12 @@ msgstr ""
 "<qt><i>필터 보기</i>에서는 선택한 필터 조건을 만족하는 항목을 표시합니다.</"
 "qt>"
 
-#: src/mainwindow.cpp:2212
+#: src/mainwindow.cpp:2215
 #, kde-format
 msgid "Loans"
 msgstr "대여"
 
-#: src/mainwindow.cpp:2213
+#: src/mainwindow.cpp:2216
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6486,7 +6486,7 @@ msgid ""
 msgstr ""
 "<qt><i>대여 보기</i>에서는 내 소장품을 빌려 간 사람 목록을 표시합니다.</qt>"
 
-#: src/mainwindow.cpp:2301
+#: src/mainwindow.cpp:2304
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6495,12 +6495,12 @@ msgstr ""
 "일부 이미지는 설정된 위치에 저장되지 않습니다. 현재 파일을 저장해야 하며 이미"
 "지가 새로운 위치로 전송됩니다."
 
-#: src/mainwindow.cpp:2345
+#: src/mainwindow.cpp:2348
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "%1에서 항목 데이터 업데이트"
 
-#: src/mainwindow.cpp:2364
+#: src/mainwindow.cpp:2367
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6508,7 +6508,7 @@ msgid ""
 msgstr ""
 "Tellico는 한 번에 이 형식의 파일 하나만 가져올 수 있습니다. %1만 가져옵니다."
 
-#: src/mainwindow.cpp:2543
+#: src/mainwindow.cpp:2546
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -7309,12 +7309,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:180
+#: src/translators/tellicoimporter.cpp:178
 #, kde-format
 msgid "The file is empty."
 msgstr "파일이 비어 있습니다."
 
-#: src/translators/tellicoimporter.cpp:193
+#: src/translators/tellicoimporter.cpp:191
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "파일에 수집 데이터가 없습니다."
