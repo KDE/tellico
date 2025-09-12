@@ -30,7 +30,7 @@
  </tellico>
 </xsl:template>
 
-<xsl:template match="BiblioSimple">
+<xsl:template match="BiblioSimple[Title]">
  <entry>
 
   <title>
@@ -84,5 +84,7 @@
 
  </entry>
 </xsl:template>
+
+<xsl:template match="BiblioSimple"/>
 
 </xsl:stylesheet>
