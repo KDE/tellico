@@ -323,9 +323,8 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  QByteArray data = job->data();
+  const QByteArray data = job->data();
   if(data.isEmpty()) {
-    myDebug() << "no data";
     endJob(job);
     return;
   }
