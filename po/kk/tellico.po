@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-12 00:43+0000\n"
+"POT-Creation-Date: 2025-09-13 00:49+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -743,7 +743,7 @@ msgstr "Bibtex кілті"
 #: src/fetch/metronfetcher.cpp:246 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:359
-#: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:473
+#: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:472
 #: src/fetch/thegamesdbfetcher.cpp:265 src/fetch/thegamesdbfetcher.cpp:270
 #: src/fetch/themoviedbfetcher.cpp:307 src/fetch/themoviedbfetcher.cpp:310
 #: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:333
@@ -3555,7 +3555,7 @@ msgstr "Amazon.com бірнеше жергілікті серверді қолд
 #: src/fetch/colnectfetcher.cpp:994 src/fetch/discogsfetcher.cpp:622
 #: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:568
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
-#: src/fetch/openlibraryfetcher.cpp:646 src/fetch/rpggeekfetcher.cpp:224
+#: src/fetch/openlibraryfetcher.cpp:645 src/fetch/rpggeekfetcher.cpp:224
 #: src/fetch/thegamesdbfetcher.cpp:646 src/fetch/videogamegeekfetcher.cpp:237
 #, kde-format
 msgid "&Image size: "
@@ -3565,14 +3565,14 @@ msgstr "&Кескіннің өлшемі: "
 #: src/fetch/colnectfetcher.cpp:998 src/fetch/discogsfetcher.cpp:625
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:572
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
-#: src/fetch/openlibraryfetcher.cpp:649 src/fetch/rpggeekfetcher.cpp:228
+#: src/fetch/openlibraryfetcher.cpp:648 src/fetch/rpggeekfetcher.cpp:228
 #: src/fetch/thegamesdbfetcher.cpp:649 src/fetch/videogamegeekfetcher.cpp:241
 #, kde-format
 msgid "Small Image"
 msgstr "Шағын кескін"
 
 #: src/fetch/amazonfetcher.cpp:1152 src/fetch/imdbfetcher.cpp:544
-#: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:650
+#: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:649
 #: src/fetch/thegamesdbfetcher.cpp:650
 #, kde-format
 msgid "Medium Image"
@@ -3583,7 +3583,7 @@ msgstr "Орташа кескін"
 #: src/fetch/colnectfetcher.cpp:999 src/fetch/discogsfetcher.cpp:627
 #: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:573
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
-#: src/fetch/openlibraryfetcher.cpp:651 src/fetch/rpggeekfetcher.cpp:229
+#: src/fetch/openlibraryfetcher.cpp:650 src/fetch/rpggeekfetcher.cpp:229
 #: src/fetch/thegamesdbfetcher.cpp:651 src/fetch/videogamegeekfetcher.cpp:242
 #, kde-format
 msgid "Large Image"
@@ -3593,7 +3593,7 @@ msgstr "Үлкен кескін"
 #: src/fetch/colnectfetcher.cpp:997 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:571
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
-#: src/fetch/openlibraryfetcher.cpp:652 src/fetch/rpggeekfetcher.cpp:227
+#: src/fetch/openlibraryfetcher.cpp:651 src/fetch/rpggeekfetcher.cpp:227
 #: src/fetch/thegamesdbfetcher.cpp:652 src/fetch/videogamegeekfetcher.cpp:240
 #, kde-format
 msgid "No Image"
@@ -3601,7 +3601,7 @@ msgstr "Кескін жоқ"
 
 #: src/fetch/amazonfetcher.cpp:1157 src/fetch/discogsfetcher.cpp:632
 #: src/fetch/imdbfetcher.cpp:550 src/fetch/mobygamesfetcher.cpp:671
-#: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:656
+#: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:655
 #: src/fetch/thegamesdbfetcher.cpp:656
 #, kde-format
 msgid ""
@@ -4300,7 +4300,7 @@ msgstr "Сервер хостының атауын кетіру."
 msgid "&Verify Catalog"
 msgstr "Файлдар каталогы"
 
-#: src/fetch/openlibraryfetcher.cpp:472 src/fetch/openlibraryfetcher.cpp:635
+#: src/fetch/openlibraryfetcher.cpp:471 src/fetch/openlibraryfetcher.cpp:634
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "OpenLibrary сілтемесі"
