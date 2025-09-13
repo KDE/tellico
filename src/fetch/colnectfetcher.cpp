@@ -130,6 +130,8 @@ void ColnectFetcher::search() {
       myLog() << "Capturing year value from search string:" << m_year;
     }
   }
+  // now the search value can't continue a slash so swap for a space
+  value.replace(QLatin1Char('/'), QLatin1Char(' '));
 
   switch(collectionType()) {
     case Data::Collection::Coin:
@@ -160,6 +162,8 @@ void ColnectFetcher::search() {
         if(!m_year.isEmpty()) {
           if(collectionType() == Data::Collection::Coin) {
             query += QStringLiteral("/mint_year/");
+          } else if(collectionType() == Data::Collection::Card) {
+            query += QStringLiteral("/season/");
           } else {
             query += QStringLiteral("/year/");
           }
@@ -203,7 +207,7 @@ void ColnectFetcher::search() {
   }
 
   u.setPath(u.path() + query);
-  myLog() << "Reading" << u.toDisplayString();
+//  myLog() << "Reading" << u.toDisplayString();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   Tellico::addUserAgent(m_job);
@@ -930,7 +934,7 @@ void ColnectFetcher::readItemNames(const QByteArray& item_, const QString& filte
   // Colnect API calls are encoded as a path
   QString query(QLatin1Char('/') + m_locale + QLatin1Char('/') + QLatin1String(item_) + QStringLiteral("/cat/") + m_category);
   u.setPath(u.path() + query + filter_);
-//  myLog() << "Reading item names from" << u.toDisplayString();
+//  myLog() << "Reading item names from" << (query + filter_);
 
   QJsonParseError jsonError;
   const QByteArray data = FileHandler::readDataFile(u, true);

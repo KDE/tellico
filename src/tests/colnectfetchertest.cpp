@@ -30,6 +30,7 @@
 #include "../entry.h"
 #include "../collections/coincollection.h"
 #include "../collections/comicbookcollection.h"
+#include "../collections/stampcollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 
@@ -44,7 +45,8 @@ ColnectFetcherTest::ColnectFetcherTest() : AbstractFetcherTest() {
 
 void ColnectFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
-  Tellico::RegisterCollection<Tellico::Data::CoinCollection> registerMe(Tellico::Data::Collection::Coin, "coin");
+  Tellico::RegisterCollection<Tellico::Data::CoinCollection> registerCoin(Tellico::Data::Collection::Coin, "coin");
+  Tellico::RegisterCollection<Tellico::Data::StampCollection> registerStamp(Tellico::Data::Collection::Stamp, "stamp");
   Tellico::RegisterCollection<Tellico::Data::ComicBookCollection> registerComic(Tellico::Data::Collection::ComicBook, "comic");
 
   m_config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect"));
@@ -233,7 +235,7 @@ void ColnectFetcherTest::testBaseballCard() {
   QCOMPARE(entry->field(QStringLiteral("team")), QStringLiteral("Atlanta Braves"));
   QCOMPARE(entry->field(QStringLiteral("number")), QStringLiteral("55"));
   QCOMPARE(entry->field(QStringLiteral("series")), QStringLiteral("Base Set"));
-  QCOMPARE(entry->field(QStringLiteral("type")), QStringLiteral("Major League Baseball"));
+  QCOMPARE(entry->field(QStringLiteral("type")), QStringLiteral("MLB - Major League Baseball"));
   QCOMPARE(entry->field(QStringLiteral("colnect")), QStringLiteral("https://colnect.com/en/sports_cards/sports_card/67064-55_Chipper_Jones_1991"));
   QVERIFY(!entry->field(QStringLiteral("front")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("front")).contains(QLatin1Char('/')));
