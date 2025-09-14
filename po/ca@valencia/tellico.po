@@ -5615,7 +5615,7 @@ msgstr "Guarda el document"
 #: src/mainwindow.cpp:330
 #, kde-format
 msgid "Save the document as a different file..."
-msgstr "Guarda el document com a un fitxer diferent…"
+msgstr "Anomena i guarda el document en un fitxer diferent…"
 
 #: src/mainwindow.cpp:334
 #, kde-format
