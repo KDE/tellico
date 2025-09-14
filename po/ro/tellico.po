@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-07 02:36+0000\n"
+"POT-Creation-Date: 2025-09-14 02:32+0000\n"
 "PO-Revision-Date: 2012-12-22 11:53+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -169,7 +169,7 @@ msgstr "Nr. în serie"
 msgid "Collection Size"
 msgstr "Opțiuni colecții audio"
 
-#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1706
+#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1709
 #, fuzzy, kde-format
 msgid "Total entries: %1"
 msgstr "Șterge carte"
@@ -221,7 +221,7 @@ msgstr "Nu pot deschide fișierul - %1."
 msgid "My Collection"
 msgstr "Opțiuni colecții cărți"
 
-#: src/collection.cpp:887 src/document.cpp:530 src/field.cpp:290
+#: src/collection.cpp:887 src/document.cpp:534 src/field.cpp:290
 #: src/field.cpp:303 src/field.cpp:308 src/translators/filereaderbook.cpp:82
 #: src/translators/filereadervideo.cpp:129
 #, fuzzy, kde-format
@@ -701,9 +701,9 @@ msgstr "Opțiuni generale"
 #: src/configdialog.cpp:174 src/configdialog.cpp:188 src/configdialog.cpp:205
 #: src/configdialog.cpp:1146 src/fetch/amazonfetcher.cpp:865
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
-#: src/fetch/colnectfetcher.cpp:377 src/fetch/colnectfetcher.cpp:544
-#: src/fetch/colnectfetcher.cpp:563 src/fetch/colnectfetcher.cpp:601
-#: src/fetch/colnectfetcher.cpp:608 src/fetch/discogsfetcher.cpp:317
+#: src/fetch/colnectfetcher.cpp:381 src/fetch/colnectfetcher.cpp:548
+#: src/fetch/colnectfetcher.cpp:567 src/fetch/colnectfetcher.cpp:605
+#: src/fetch/colnectfetcher.cpp:612 src/fetch/discogsfetcher.cpp:317
 #: src/fetch/discogsfetcher.cpp:322 src/fetch/discogsfetcher.cpp:327
 #: src/fetch/discogsfetcher.cpp:334 src/fetch/discogsfetcher.cpp:341
 #: src/fetch/discogsfetcher.cpp:346 src/fetch/doubanfetcher.cpp:373
@@ -717,7 +717,7 @@ msgstr "Opțiuni generale"
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/moviemeterfetcher.cpp:219
 #: src/fetch/moviemeterfetcher.cpp:224 src/fetch/numistafetcher.cpp:344
 #: src/fetch/numistafetcher.cpp:360 src/fetch/omdbfetcher.cpp:250
-#: src/fetch/openlibraryfetcher.cpp:471 src/fetch/thegamesdbfetcher.cpp:265
+#: src/fetch/openlibraryfetcher.cpp:470 src/fetch/thegamesdbfetcher.cpp:265
 #: src/fetch/thegamesdbfetcher.cpp:270 src/fetch/themoviedbfetcher.cpp:307
 #: src/fetch/themoviedbfetcher.cpp:310 src/fetch/themoviedbfetcher.cpp:315
 #: src/fetch/themoviedbfetcher.cpp:333 src/fetch/thetvdbfetcher.cpp:245
@@ -834,8 +834,8 @@ msgstr ""
 
 #: src/collections/bibtexcollection.cpp:208
 #: src/collections/bookcollection.cpp:137 src/collections/cardcollection.cpp:78
-#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:376
-#: src/fetch/colnectfetcher.cpp:861
+#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:380
+#: src/fetch/colnectfetcher.cpp:865
 #, kde-format
 msgid "Series"
 msgstr "Serie"
@@ -943,7 +943,7 @@ msgstr ""
 #: src/collections/filecatalog.cpp:54 src/collections/gamecollection.cpp:90
 #: src/collections/stampcollection.cpp:49
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
-#: src/fetch/colnectfetcher.cpp:384 src/fetch/colnectfetcher.cpp:864
+#: src/fetch/colnectfetcher.cpp:388 src/fetch/colnectfetcher.cpp:868
 #: src/fetch/numistafetcher.cpp:351 src/fetch/numistafetcher.cpp:399
 #: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:249
 #, kde-format
@@ -1004,7 +1004,7 @@ msgstr "Preț achiziție"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:115
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:528
+#: src/collections/videocollection.cpp:205 src/document.cpp:532
 #, kde-format
 msgid "Loaned"
 msgstr "Împrumutată"
@@ -1269,13 +1269,13 @@ msgstr ""
 msgid "Grading Service"
 msgstr ""
 
-#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:859
+#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:863
 #: src/fetch/numistafetcher.cpp:401
 #, kde-format
 msgid "Obverse"
 msgstr ""
 
-#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:860
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:864
 #: src/fetch/numistafetcher.cpp:402
 #, kde-format
 msgid "Reverse"
@@ -2725,8 +2725,8 @@ msgstr "Șterge carte"
 msgid "Template Packages"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1335
-#: src/mainwindow.cpp:1511 src/reportdialog.cpp:499 src/reportdialog.cpp:514
+#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1338
+#: src/mainwindow.cpp:1514 src/reportdialog.cpp:499 src/reportdialog.cpp:514
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -2915,7 +2915,7 @@ msgstr ""
 msgid "Hide All Columns"
 msgstr ""
 
-#: src/document.cpp:212 src/mainwindow.cpp:1450
+#: src/document.cpp:216 src/mainwindow.cpp:1453
 #, kde-format
 msgid "Saving file..."
 msgstr "Salvez fișierul..."
@@ -2977,12 +2977,12 @@ msgid "Save Entry"
 msgstr "Șterge carte"
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1220 src/mainwindow.cpp:1238
+#: src/mainwindow.cpp:1223 src/mainwindow.cpp:1241
 #, kde-format
 msgid "Unsaved Changes"
 msgstr ""
 
-#: src/entryiconview.cpp:61 src/mainwindow.cpp:895
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:898
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3042,12 +3042,12 @@ msgstr "Șterge carte"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr ""
 
-#: src/entryview.cpp:357
+#: src/entryview.cpp:361
 #, fuzzy, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Nu pot deschide fișierul - %1."
 
-#: src/entryview.cpp:359 src/mainwindow.cpp:1859
+#: src/entryview.cpp:363 src/mainwindow.cpp:1862
 #, fuzzy, kde-format
 msgid "Please check your installation."
 msgstr ""
@@ -3354,7 +3354,7 @@ msgstr ""
 msgid "Results from %1: %2/%3"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:635 src/fetch/colnectfetcher.cpp:836
+#: src/fetch/amazonfetcher.cpp:635 src/fetch/colnectfetcher.cpp:840
 #: src/fetch/discogsfetcher.cpp:227 src/fetch/doubanfetcher.cpp:477
 #: src/fetch/filmaffinityfetcher.cpp:432 src/fetch/filmasterfetcher.cpp:147
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:198
@@ -3400,27 +3400,27 @@ msgid ""
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1150 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:999 src/fetch/discogsfetcher.cpp:618
+#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:618
 #: src/fetch/imdbfetcher.cpp:567 src/fetch/itunesfetcher.cpp:565
 #: src/fetch/mobygamesfetcher.cpp:669 src/fetch/moviemeterfetcher.cpp:319
-#: src/fetch/openlibraryfetcher.cpp:640 src/fetch/rpggeekfetcher.cpp:224
+#: src/fetch/openlibraryfetcher.cpp:639 src/fetch/rpggeekfetcher.cpp:224
 #: src/fetch/thegamesdbfetcher.cpp:655 src/fetch/videogamegeekfetcher.cpp:237
 #, kde-format
 msgid "&Image size: "
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:219
-#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:621
+#: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:621
 #: src/fetch/imdbfetcher.cpp:570 src/fetch/itunesfetcher.cpp:569
 #: src/fetch/mobygamesfetcher.cpp:672 src/fetch/moviemeterfetcher.cpp:322
-#: src/fetch/openlibraryfetcher.cpp:643 src/fetch/rpggeekfetcher.cpp:228
+#: src/fetch/openlibraryfetcher.cpp:642 src/fetch/rpggeekfetcher.cpp:228
 #: src/fetch/thegamesdbfetcher.cpp:658 src/fetch/videogamegeekfetcher.cpp:241
 #, fuzzy, kde-format
 msgid "Small Image"
 msgstr "Titlu"
 
 #: src/fetch/amazonfetcher.cpp:1154 src/fetch/imdbfetcher.cpp:571
-#: src/fetch/moviemeterfetcher.cpp:323 src/fetch/openlibraryfetcher.cpp:644
+#: src/fetch/moviemeterfetcher.cpp:323 src/fetch/openlibraryfetcher.cpp:643
 #: src/fetch/thegamesdbfetcher.cpp:659
 #, fuzzy, kde-format
 msgid "Medium Image"
@@ -3428,20 +3428,20 @@ msgstr "Suport"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/amazonfetcher.cpp:1155 src/fetch/boardgamegeekfetcher.cpp:220
-#: src/fetch/colnectfetcher.cpp:1004 src/fetch/discogsfetcher.cpp:623
+#: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:623
 #: src/fetch/imdbfetcher.cpp:572 src/fetch/itunesfetcher.cpp:570
 #: src/fetch/mobygamesfetcher.cpp:674 src/fetch/moviemeterfetcher.cpp:324
-#: src/fetch/openlibraryfetcher.cpp:645 src/fetch/rpggeekfetcher.cpp:229
+#: src/fetch/openlibraryfetcher.cpp:644 src/fetch/rpggeekfetcher.cpp:229
 #: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:242
 #, fuzzy, kde-format
 msgid "Large Image"
 msgstr "Titlu"
 
 #: src/fetch/amazonfetcher.cpp:1156 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:1002 src/fetch/discogsfetcher.cpp:624
+#: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:624
 #: src/fetch/imdbfetcher.cpp:573 src/fetch/itunesfetcher.cpp:568
 #: src/fetch/mobygamesfetcher.cpp:675 src/fetch/moviemeterfetcher.cpp:325
-#: src/fetch/openlibraryfetcher.cpp:646 src/fetch/rpggeekfetcher.cpp:227
+#: src/fetch/openlibraryfetcher.cpp:645 src/fetch/rpggeekfetcher.cpp:227
 #: src/fetch/thegamesdbfetcher.cpp:661 src/fetch/videogamegeekfetcher.cpp:240
 #, fuzzy, kde-format
 msgid "No Image"
@@ -3449,7 +3449,7 @@ msgstr "Pagini"
 
 #: src/fetch/amazonfetcher.cpp:1159 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:679
-#: src/fetch/moviemeterfetcher.cpp:329 src/fetch/openlibraryfetcher.cpp:650
+#: src/fetch/moviemeterfetcher.cpp:329 src/fetch/openlibraryfetcher.cpp:649
 #: src/fetch/thegamesdbfetcher.cpp:665
 #, kde-format
 msgid ""
@@ -3511,43 +3511,43 @@ msgstr "Nr. ISBN"
 msgid "BoardGameGeek Link"
 msgstr "Redenumește colecție..."
 
-#: src/fetch/colnectfetcher.cpp:543 src/fetch/colnectfetcher.cpp:857
+#: src/fetch/colnectfetcher.cpp:547 src/fetch/colnectfetcher.cpp:861
 #, fuzzy, kde-format
 msgid "Colnect Link"
 msgstr "Calificativ"
 
-#: src/fetch/colnectfetcher.cpp:562 src/fetch/colnectfetcher.cpp:863
+#: src/fetch/colnectfetcher.cpp:566 src/fetch/colnectfetcher.cpp:867
 #, fuzzy, kde-format
 msgid "Mintage"
 msgstr "Semnată"
 
-#: src/fetch/colnectfetcher.cpp:600 src/fetch/colnectfetcher.cpp:865
+#: src/fetch/colnectfetcher.cpp:604 src/fetch/colnectfetcher.cpp:869
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:607 src/fetch/colnectfetcher.cpp:866
+#: src/fetch/colnectfetcher.cpp:611 src/fetch/colnectfetcher.cpp:870
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:867 src/fetch/giantbombfetcher.cpp:203
+#: src/fetch/colnectfetcher.cpp:871 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:635
 #: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:329
 #, fuzzy, kde-format
 msgid "PEGI Rating"
 msgstr "Calificativ"
 
-#: src/fetch/colnectfetcher.cpp:971 src/fetch/filmaffinityfetcher.cpp:494
+#: src/fetch/colnectfetcher.cpp:975 src/fetch/filmaffinityfetcher.cpp:494
 #: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:626
 #, fuzzy, kde-format
 #| msgid "Language"
 msgid "Language: "
 msgstr "Limbă"
 
-#: src/fetch/colnectfetcher.cpp:1009
+#: src/fetch/colnectfetcher.cpp:1013
 #, fuzzy, kde-format
 msgid "Country code: "
 msgstr "Șterge carte"
@@ -4096,7 +4096,7 @@ msgstr ""
 msgid "&Verify Catalog"
 msgstr "Șterge carte"
 
-#: src/fetch/openlibraryfetcher.cpp:470 src/fetch/openlibraryfetcher.cpp:629
+#: src/fetch/openlibraryfetcher.cpp:469 src/fetch/openlibraryfetcher.cpp:628
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr ""
@@ -4721,8 +4721,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Grupează după: "
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1147 src/mainwindow.cpp:1794
-#: src/mainwindow.cpp:1828 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1150 src/mainwindow.cpp:1797
+#: src/mainwindow.cpp:1831 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr ""
@@ -5023,14 +5023,14 @@ msgstr ""
 msgid "&Import"
 msgstr "Imprim..."
 
-#: src/importdialog.cpp:377 src/mainwindow.cpp:1331 src/mainwindow.cpp:1509
+#: src/importdialog.cpp:377 src/mainwindow.cpp:1334 src/mainwindow.cpp:1512
 #: src/translators/tellicozipexporter.cpp:54
 #, fuzzy, kde-format
 msgid "Tellico Files"
 msgstr "Tellico"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1333 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1336 src/translators/tellicoxmlexporter.cpp:71
 #, fuzzy, kde-format
 msgid "XML Files"
 msgstr "Filmele mele"
@@ -6104,53 +6104,53 @@ msgstr "Schimbă modul de grupare a colecției"
 msgid "Filter here..."
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:869 src/mainwindow.cpp:872
+#: src/mainwindow.cpp:872 src/mainwindow.cpp:875
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
 "qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:878
+#: src/mainwindow.cpp:881
 #, fuzzy, kde-format
 msgid "Collection View"
 msgstr "Opțiuni colecții audio"
 
-#: src/mainwindow.cpp:885
+#: src/mainwindow.cpp:888
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:902
+#: src/mainwindow.cpp:905
 #, fuzzy, kde-format
 msgid "Group View"
 msgstr "Grupează după: "
 
-#: src/mainwindow.cpp:911
+#: src/mainwindow.cpp:914
 #, fuzzy, kde-format
 msgid "Groups"
 msgstr "Grupează după: "
 
-#: src/mainwindow.cpp:912
+#: src/mainwindow.cpp:915
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:993
+#: src/mainwindow.cpp:996
 #, fuzzy, kde-format
 msgid "Collection management software, free and simple"
 msgstr "Tellico - gestionar de colecții personale de cărți pentru KDE"
 
-#: src/mainwindow.cpp:995
+#: src/mainwindow.cpp:998
 #, fuzzy, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Tellico - gestionar de colecții personale de cărți pentru KDE"
 
-#: src/mainwindow.cpp:997
+#: src/mainwindow.cpp:1000
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6160,7 +6160,7 @@ msgid ""
 "Internet sources.</h3>"
 msgstr ""
 
-#: src/mainwindow.cpp:1006
+#: src/mainwindow.cpp:1009
 #, kde-format
 msgid ""
 "More information can be found in the <a href=\"help:/tellico"
@@ -6168,7 +6168,7 @@ msgid ""
 "this welcome screen</a>."
 msgstr ""
 
-#: src/mainwindow.cpp:1217
+#: src/mainwindow.cpp:1220
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6177,22 +6177,22 @@ msgstr ""
 "Fișierul curent a fost modificat.\n"
 "Doriți să îl salvați?"
 
-#: src/mainwindow.cpp:1273 src/mainwindow.cpp:1307
+#: src/mainwindow.cpp:1276 src/mainwindow.cpp:1310
 #, fuzzy, kde-format
 msgid "Creating new collection..."
 msgstr "Creează un document nou"
 
-#: src/mainwindow.cpp:1328 src/mainwindow.cpp:1351 src/mainwindow.cpp:1369
+#: src/mainwindow.cpp:1331 src/mainwindow.cpp:1354 src/mainwindow.cpp:1372
 #, kde-format
 msgid "Opening file..."
 msgstr "Deschid fișierul..."
 
-#: src/mainwindow.cpp:1339
+#: src/mainwindow.cpp:1342
 #, fuzzy, kde-format
 msgid "Open File"
 msgstr "Deschide fișier..."
 
-#: src/mainwindow.cpp:1461
+#: src/mainwindow.cpp:1464
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6201,59 +6201,59 @@ msgid ""
 "changed in the configuration dialog.</p></qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:1466
+#: src/mainwindow.cpp:1469
 #, kde-format
 msgid "Save Images Separately"
 msgstr ""
 
-#: src/mainwindow.cpp:1467
+#: src/mainwindow.cpp:1470
 #, kde-format
 msgid "Save Images in File"
 msgstr ""
 
-#: src/mainwindow.cpp:1507
+#: src/mainwindow.cpp:1510
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Salvez fișierul sub un nou nume..."
 
-#: src/mainwindow.cpp:1516
+#: src/mainwindow.cpp:1519
 #, fuzzy, kde-format
 msgid "Save As"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:1582
+#: src/mainwindow.cpp:1585
 #, kde-format
 msgid "Printing..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:1586
+#: src/mainwindow.cpp:1589
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
 
-#: src/mainwindow.cpp:1611
+#: src/mainwindow.cpp:1614
 #, kde-format
 msgid "Exiting..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:1713
+#: src/mainwindow.cpp:1716
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr ""
 
-#: src/mainwindow.cpp:1716
+#: src/mainwindow.cpp:1719
 #, kde-format
 msgid "(%1 filtered)"
 msgstr ""
 
-#: src/mainwindow.cpp:1719
+#: src/mainwindow.cpp:1722
 #, kde-format
 msgid "(%1 selected)"
 msgstr ""
 
-#: src/mainwindow.cpp:1858 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1861 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6263,95 +6263,95 @@ msgstr ""
 "Eroare în procesarea XSLT.\n"
 "Vă rog verificați instalarea."
 
-#: src/mainwindow.cpp:1976
+#: src/mainwindow.cpp:1979
 #, fuzzy, kde-format
 msgid "Importing data..."
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:1987
+#: src/mainwindow.cpp:1990
 #, fuzzy, kde-format
 msgid "Import File"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:2000
+#: src/mainwindow.cpp:2003
 #, fuzzy, kde-format
 msgid "Import Directory"
 msgstr "Imprim..."
 
-#: src/mainwindow.cpp:2024
+#: src/mainwindow.cpp:2027
 #, fuzzy, kde-format
 msgid "Exporting data..."
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:2047
+#: src/mainwindow.cpp:2050
 #, fuzzy, kde-format
 msgid "Export As"
 msgstr "Ies..."
 
-#: src/mainwindow.cpp:2075
+#: src/mainwindow.cpp:2078
 #, fuzzy, kde-format
 msgid "String Macros"
 msgstr "Calificativ"
 
-#: src/mainwindow.cpp:2076
+#: src/mainwindow.cpp:2079
 #, kde-format
 msgid "Macro"
 msgstr ""
 
-#: src/mainwindow.cpp:2076
+#: src/mainwindow.cpp:2079
 #, fuzzy, kde-format
 msgid "String"
 msgstr "Calificativ"
 
-#: src/mainwindow.cpp:2162
+#: src/mainwindow.cpp:2165
 #, fuzzy, kde-format
 msgid "Creating citations..."
 msgstr "Tai selecția..."
 
-#: src/mainwindow.cpp:2272
+#: src/mainwindow.cpp:2275
 #, fuzzy, kde-format
 msgid "Filters"
 msgstr "Șterge carte"
 
-#: src/mainwindow.cpp:2273
+#: src/mainwindow.cpp:2276
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2296
+#: src/mainwindow.cpp:2299
 #, fuzzy, kde-format
 msgid "Loans"
 msgstr "Împrumutată"
 
-#: src/mainwindow.cpp:2297
+#: src/mainwindow.cpp:2300
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2388
+#: src/mainwindow.cpp:2391
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
 "be saved and the images will be transferred to the new location."
 msgstr ""
 
-#: src/mainwindow.cpp:2435
+#: src/mainwindow.cpp:2438
 #, kde-format
 msgid "Update entry data from %1"
 msgstr ""
 
-#: src/mainwindow.cpp:2454
+#: src/mainwindow.cpp:2457
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr ""
 
-#: src/mainwindow.cpp:2642
+#: src/mainwindow.cpp:2645
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"
