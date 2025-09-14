@@ -25,18 +25,17 @@
 #include "entryview.h"
 #include "entry.h"
 #include "field.h"
+#include "collection.h"
 #include "document.h"
 #include "translators/xslthandler.h"
 #include "translators/tellicoxmlexporter.h"
-#include "collection.h"
 #include "images/imagefactory.h"
 #include "images/imageinfo.h"
-#include "tellico_kernel.h"
 #include "utils/tellico_utils.h"
 #include "utils/datafileregistry.h"
+#include "utils/cursorsaver.h"
 #include "config/tellico_config.h"
 #include "gui/drophandler.h"
-#include "utils/cursorsaver.h"
 #include "tellico_debug.h"
 
 #include <KMessageBox>
@@ -112,7 +111,7 @@ QWebEnginePage* EntryViewPage::createWindow(QWebEnginePage::WebWindowType type_)
 }
 
 void EntryViewPage::openExternalLink(const QUrl& url_) {
-  const QUrl finalUrl = Kernel::self()->URL().resolved(url_);
+  const QUrl finalUrl = Data::Document::self()->URL().resolved(url_);
   QDesktopServices::openUrl(finalUrl);
 }
 
@@ -301,7 +300,7 @@ void EntryView::setXSLTFile(const QString& file_) {
     }
   }
 
-  const int type = m_entry ? m_entry->collection()->type() : Kernel::self()->collectionType();
+  const int type = m_entry ? m_entry->collection()->type() : Data::Document::self()->collection()->type();
 
   // we need to know if the colors changed from last time, in case
   // we need to do that ugly hack to reload the cache
