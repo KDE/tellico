@@ -174,11 +174,12 @@ ecm_add_test(commandtest.cpp
 
 ecm_add_test(documenttest.cpp
     ../document.cpp
+    ../entryview.cpp
     ../translators/tellicoxmlexporter.cpp
     ../translators/tellicozipexporter.cpp
     ../translators/exporter.cpp
     TEST_NAME documenttest
-    LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
+    LINK_LIBRARIES ${TELLICO_TEST_LIBS} Qt6::WebEngineWidgets translatorstest
 )
 
 ecm_add_test(entrycomparisontest.cpp

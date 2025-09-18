@@ -31,6 +31,8 @@
 #include "../config/tellico_config.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
+#include "../utils/datafileregistry.h"
+#include "../entryview.h"
 
 #include <KLocalizedString>
 
@@ -40,7 +42,7 @@
 #include <QFile>
 #include <QStandardPaths>
 
-QTEST_GUILESS_MAIN( DocumentTest )
+QTEST_MAIN( DocumentTest )
 
 void DocumentTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
@@ -48,6 +50,7 @@ void DocumentTest::initTestCase() {
   Tellico::ImageFactory::init();
   // test case is a book file
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/"));
 }
 
 void DocumentTest::cleanupTestCase() {
@@ -186,4 +189,74 @@ void DocumentTest::testSaveTemplate() {
   QCOMPARE(new_field->title(), QStringLiteral("batman"));
 
   QCOMPARE(new_coll->filters().count(), 1);
+}
+
+void DocumentTest::testView() {
+  Tellico::EntryView view(nullptr);
+  view.setXSLTFile(QLatin1String("Fancy.xsl"));
+  // testing the configuration for the main window
+  view.setUseImageConfigLocation(true);
+
+  Tellico::Config::setImageLocation(Tellico::Config::ImagesInLocalDir);
+  // the default collection will use a temporary directory as a local image dir
+  QVERIFY(!Tellico::ImageFactory::localDir().isEmpty());
+
+  QString tempDirName;
+
+  QTemporaryDir tempDir;
+  QVERIFY(tempDir.isValid());
+  tempDir.setAutoRemove(true);
+  tempDirName = tempDir.path();
+  QString fileName = tempDirName + "/with-image.tc";
+  QString imageDirName = tempDirName + "/with-image_files/";
+  QDir imageDir(imageDirName);
+  QCOMPARE(imageDir.exists(), false);
+  const QString imageName = QStringLiteral("17b54b2a742c6d342a75f122d615a793.jpeg");
+
+  // copy a collection file that includes an image into the temporary directory
+  QVERIFY(QFile::copy(QFINDTESTDATA("data/with-image.tc"), fileName));
+
+  auto doc = Tellico::Data::Document::self();
+  QVERIFY(doc->openDocument(QUrl::fromLocalFile(fileName)));
+  QCOMPARE(Tellico::ImageFactory::localDir(), QUrl::fromLocalFile(imageDirName));
+  // image folder still does not exist yet
+  QCOMPARE(imageDir.exists(), false);
+
+  Tellico::Data::CollPtr coll = doc->collection();
+  QVERIFY(coll);
+
+  Tellico::Data::EntryPtr e = coll->entries().at(0);
+  QVERIFY(e);
+  QCOMPARE(e->field(QStringLiteral("cover")), imageName);
+
+  view.showEntry(e);
+  // now it exists
+  QVERIFY(imageDir.exists());
+  QVERIFY(imageDir.exists(imageName));
+
+  // Bug 508902
+  // Search for an entry, show it in a second view (like the FetchDialog does)
+  Tellico::Data::CollPtr newColl(new Tellico::Data::BookCollection(true));
+  Tellico::Data::EntryPtr newEntry(new Tellico::Data::Entry(newColl));
+  newEntry->setField(QLatin1String("title"), QLatin1String("new title"));
+  const QUrl imageUrl = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
+  const auto newImageId = Tellico::ImageFactory::addImage(imageUrl, true);
+  newEntry->setField(QLatin1String("cover"), newImageId);
+
+  Tellico::EntryView view2(nullptr);
+  view2.setXSLTFile(QLatin1String("Fancy.xsl"));
+  view2.showEntry(newEntry);
+  // new image should not exist in the data dir
+  QCOMPARE(imageDir.exists(newImageId), false);
+
+  // now add it to collection, but don't save the document yet
+  // follows what AddEntries does
+  Tellico::Data::EntryList list;
+  list.append(Tellico::Data::EntryPtr(new Tellico::Data::Entry(*newEntry)));
+  coll->addEntries(list);
+
+  // then show it in original view
+  view.showEntry(list.front());
+  // it exists in the data dir even though it's not saved to the document
+  QVERIFY(imageDir.exists(newImageId));
 }
