@@ -25,18 +25,16 @@
 #include "entryview.h"
 #include "entry.h"
 #include "field.h"
+#include "collection.h"
+#include "document.h"
 #include "translators/xslthandler.h"
 #include "translators/tellicoxmlexporter.h"
-#include "collection.h"
 #include "images/imagefactory.h"
 #include "images/imageinfo.h"
-#include "tellico_kernel.h"
 #include "utils/tellico_utils.h"
 #include "utils/datafileregistry.h"
-#include "config/tellico_config.h"
-#include "gui/drophandler.h"
 #include "utils/cursorsaver.h"
-#include "document.h"
+#include "config/tellico_config.h"
 #include "tellico_debug.h"
 
 #include <KMessageBox>
@@ -53,6 +51,7 @@
 #include <QApplication>
 #include <QDesktopServices>
 #include <QMenu>
+#include <QContextMenuEvent>
 
 #ifdef USE_KHTML
 #include <dom/dom_element.h>
@@ -154,7 +153,7 @@ QWebEnginePage* EntryViewPage::createWindow(QWebEnginePage::WebWindowType type_)
 }
 
 void EntryViewPage::openExternalLink(const QUrl& url_) {
-  const QUrl finalUrl = Kernel::self()->URL().resolved(url_);
+  const QUrl finalUrl = Data::Document::self()->URL().resolved(url_);
   QDesktopServices::openUrl(finalUrl);
 }
 
@@ -175,10 +174,6 @@ EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_)
   });
   connect(page, &EntryViewPage::signalTellicoAction,
           this, &EntryView::signalTellicoAction);
-
-  setAcceptDrops(true);
-  auto drophandler = new DropHandler(this);
-  installEventFilter(drophandler);
 
   clear(); // needed for initial layout
 }
@@ -262,7 +257,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 
 //  myDebug() << dom.toString();
 #if 0
-  myWarning() << "turn me off!";
+  myWarning() << "Debug writing for EntryView";
   QFile f1(QLatin1String("/tmp/test.xml"));
   if(f1.open(QIODevice::WriteOnly)) {
     QTextStream t(&f1);
@@ -373,7 +368,7 @@ void EntryView::setXSLTFile(const QString& file_) {
     }
   }
 
-  const int type = m_entry ? m_entry->collection()->type() : Kernel::self()->collectionType();
+  const int type = m_entry ? m_entry->collection()->type() : Data::Document::self()->collection()->type();
 
   // we need to know if the colors changed from last time, in case
   // we need to do that ugly hack to reload the cache
@@ -465,7 +460,7 @@ void EntryView::slotOpenURL(const QUrl& url_) {
       QString href = static_cast<DOM::Element>(node).getAttribute("href").string();
       if(!href.isEmpty()) {
         // interpret url relative to document url
-        u = Kernel::self()->URL().resolved(QUrl(href));
+        u = Data::Document::self()->URL().resolved(QUrl(href));
       }
       break;
     }
