@@ -36,6 +36,7 @@ private Q_SLOTS:
 
   void testImageLocalDirectory();
   void testSaveTemplate();
+  void testView();
 };
 
 #endif
