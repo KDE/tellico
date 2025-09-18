@@ -45,8 +45,7 @@ using Tellico::DropHandler;
 DropHandler::DropHandler(QObject* parent_) : QObject(parent_) {
 }
 
-DropHandler::~DropHandler() {
-}
+DropHandler::~DropHandler() = default;
 
 // assume the object is always the main window, that's the
 // only object with this event filter
@@ -61,7 +60,7 @@ bool DropHandler::eventFilter(QObject* obj_, QEvent* ev_) {
 }
 
 bool DropHandler::dragEnter(QDragEnterEvent* event_) {
-  bool accept = event_->mimeData()->hasUrls() || event_->mimeData()->hasText();
+  const bool accept = event_->mimeData()->hasUrls() || event_->mimeData()->hasText();
   if(accept) {
     event_->acceptProposedAction();
   }
@@ -86,7 +85,7 @@ bool DropHandler::handleURL(const QList<QUrl>& urls_) {
   bool hasUnknown = false;
   QMimeDatabase db;
   QList<QUrl> tc, pdf, bib, ris, ciw, ebook;
-  foreach(const QUrl& url, urls_) {
+  for(const QUrl& url: urls_) {
     QMimeType ptr;
     // findByURL doesn't work for http, so actually query
     // the url itself

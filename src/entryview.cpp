@@ -35,7 +35,6 @@
 #include "utils/datafileregistry.h"
 #include "utils/cursorsaver.h"
 #include "config/tellico_config.h"
-#include "gui/drophandler.h"
 #include "tellico_debug.h"
 
 #include <KMessageBox>
@@ -52,6 +51,7 @@
 #include <QApplication>
 #include <QDesktopServices>
 #include <QMenu>
+#include <QContextMenuEvent>
 
 #include <QWebEnginePage>
 #include <QWebEngineSettings>
@@ -59,8 +59,6 @@
 #include <QPrinterInfo>
 #include <QPrintDialog>
 #include <QEventLoop>
-
-using Tellico::EntryView;
 
 using Tellico::EntryViewPage;
 
@@ -115,6 +113,8 @@ void EntryViewPage::openExternalLink(const QUrl& url_) {
   QDesktopServices::openUrl(finalUrl);
 }
 
+using Tellico::EntryView;
+
 EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_)
     , m_handler(nullptr)
     , m_tempFile(nullptr)
@@ -132,10 +132,6 @@ EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_)
   });
   connect(page, &EntryViewPage::signalTellicoAction,
           this, &EntryView::signalTellicoAction);
-
-  setAcceptDrops(true);
-  auto drophandler = new DropHandler(this);
-  installEventFilter(drophandler);
 
   clear(); // needed for initial layout
 }
@@ -209,7 +205,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 
 //  myDebug() << dom.toString();
 #if 0
-  myWarning() << "turn me off!";
+  myWarning() << "Debug writing for EntryView";
   QFile f1(QLatin1String("/tmp/test.xml"));
   if(f1.open(QIODevice::WriteOnly)) {
     QTextStream t(&f1);
