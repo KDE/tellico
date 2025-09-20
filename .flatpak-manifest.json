@@ -184,7 +184,7 @@
                         "type": "anitya",
                         "project-id": 1573,
                         "stable-only": true,
-                        "url-template": "https://ftpmirror.gnu.org/gnu/libcdio/libcdio-$version.tar.bz2"
+                        "url-template": "https://github.com/libcdio/libcdio/archive/refs/tags/$version.tar.gz"
                     }
                 }
             ]
