@@ -77,11 +77,13 @@
                     "sources": [
                         {
                             "type": "git",
-                            "url": "https://github.com/uclouvain/openjpeg.git",
-                            "tag": "v2.5.2",
+                            "url": "https://github.com/uclouvain/openjpeg/archive/refs/tags/v2.5.3.tar.gz",
+                            "sha256": "368fe0468228e767433c9ebdea82ad9d801a3ad1e4234421f352c8b06e7aa707",
                             "x-checker-data": {
-                                "type": "git",
-                                "tag-pattern": "^v([\\d.]+)$"
+                                "type": "anitya",
+                                "project-id": 2550,
+                                "stable-only": true,
+                                "url-template": "https://github.com/uclouvain/openjpeg/archive/refs/tags/v$version.tar.gz"
                             }
                         }
                     ],
