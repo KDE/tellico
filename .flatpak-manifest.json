@@ -59,8 +59,8 @@
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://archives.boost.io/release/1.84.0/source/boost_1_84_0.tar.bz2",
-                            "sha256": "cc4b893acf645c9d4b698e9a0f08ca8846aa5d6c68275c14c3e7949c24109454",
+                            "url": "https://archives.boost.io/release/1.89.0/source/boost_1_89_0.tar.bz2",
+                            "sha256": "85a33fa22621b4f314f8e85e1a5e2a9363d22e4f4992925d4bb3bc631b5a0c7a",
                             "x-checker-data": {
                                 "type": "anitya",
                                 "project-id": 6845,
@@ -126,8 +126,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://taglib.github.io/releases/taglib-2.0.2.tar.gz",
-                    "sha256": "0de288d7fe34ba133199fd8512f19cc1100196826eafcb67a33b224ec3a59737",
+                    "url": "https://taglib.github.io/releases/taglib-2.1.1.tar.gz",
+                    "sha256": "3716d31f7c83cbf17b67c8cf44dd82b2a2f17e6780472287a16823e70305ddba",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 1982,
@@ -142,7 +142,7 @@
             "buildsystem": "cmake-ninja",
             "config-opts": [
                 "-DBUILD_WITH_QT6=ON"
-            ],           
+            ],
             "sources": [
                 {
                     "type": "git",
@@ -157,8 +157,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://ftp.indexdata.com/pub/yaz/yaz-5.34.1.tar.gz",
-                    "sha256": "393ff4fbbf9194465996236f39efb2962848820247296aec2a6170b0d5d2a44c",
+                    "url": "https://ftp.indexdata.com/pub/yaz/yaz-5.35.1.tar.gz",
+                    "sha256": "db030d6d66880398a44215e26132630ee94f5e462d838809e43f97e6399c1353",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 5287,
@@ -178,8 +178,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://ftp.gnu.org/gnu/libcdio/libcdio-2.1.0.tar.bz2",
-                    "sha256": "8550e9589dbd594bfac93b81ecf129b1dc9d0d51e90f9696f1b2f9b2af32712b",
+                    "url": "https://github.com/libcdio/libcdio/archive/refs/tags/2.2.0.tar.gz",
+                    "sha256": "df007a9b9667797e027e573822cc865e5e106352f8a6fbca67ee8e9e7a1e5b51",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 1573,
