@@ -39,7 +39,13 @@
                 {
                     "type": "archive",
                     "url": "https://poppler.freedesktop.org/poppler-25.08.0.tar.xz",
-                    "sha256": "425ed4d4515a093bdcdbbaac6876f20617451edc710df6a4fd6c45dd67eb418d"
+                    "sha256": "425ed4d4515a093bdcdbbaac6876f20617451edc710df6a4fd6c45dd67eb418d",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 3686,
+                        "stable-only": true,
+                        "url-template": "https://poppler.freedesktop.org/poppler-25.08.0.tar.xz"
+                    }
                 }
             ],
             "modules": [
@@ -54,7 +60,13 @@
                         {
                             "type": "archive",
                             "url": "https://archives.boost.io/release/1.84.0/source/boost_1_84_0.tar.bz2",
-                            "sha256": "cc4b893acf645c9d4b698e9a0f08ca8846aa5d6c68275c14c3e7949c24109454"
+                            "sha256": "cc4b893acf645c9d4b698e9a0f08ca8846aa5d6c68275c14c3e7949c24109454",
+                            "x-checker-data": {
+                                "type": "anitya",
+                                "project-id": 6845,
+                                "stable-only": true,
+                                "url-template": "https://archives.boost.io/release/$version/source/boost_${major}_${minor}_${patch}.tar.bz2"
+                            }
                         }
                     ]
                 },
@@ -93,7 +105,13 @@
                 {
                     "type": "git",
                     "url": "https://github.com/nemtrif/utfcpp.git",
-                    "tag": "v4.0.5"
+                    "tag": "v4.0.5",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 20545,
+                        "stable-only": true,
+                        "url-template": "https://github.com/nemtrif/utfcpp/archive/refs/tags/v$version.tar.gz"
+                    }
                 }
             ]
         },
@@ -164,7 +182,7 @@
                         "type": "anitya",
                         "project-id": 1573,
                         "stable-only": true,
-                        "url-template": "https://ftp.gnu.org/gnu/libcdio/libcdio-$version.tar.bz2"
+                        "url-template": "https://ftpmirror.gnu.org/gnu/libcdio/libcdio-$version.tar.bz2"
                     }
                 }
             ]
