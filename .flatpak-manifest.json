@@ -173,7 +173,8 @@
             "buildsystem": "autotools",
             "config-opts": [
                 "--disable-static",
-                "--without-cdda-player"
+                "--without-cdda-player",
+                "--without-cd-drive"
             ],
             "sources": [
                 {
