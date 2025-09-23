@@ -45,7 +45,7 @@ Don't forget to include this last date.
 Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
 -->
 <date
->14.03.2021</date>
+>04.01.2025</date>
 
 <!--version information of Frameworks/Plasma/Applications this documentation is valid for.
 Example:
@@ -56,7 +56,7 @@ xx.yy (Applications xx.yy) for docbooks with own version released as Application
 $applicationname xx.yy for applications with independent release schedule (extragear/playground)
 -->
 <releaseinfo
->Tellico 4.0</releaseinfo>
+>Tellico 4.1</releaseinfo>
 
 <title
 >&tellico; Priročnik</title>
@@ -93,7 +93,7 @@ $applicationname xx.yy for applications with independent release schedule (extra
 
 <copyright>
 <year
->2001-2024</year>
+>2001</year>
 <holder
 >&robby;</holder>
 </copyright>
@@ -187,7 +187,7 @@ revision history. (see installation appendix comment) -->
 >&tellico; ni avdio ali video predvajalnik. Ne nudi možnosti za branje ali spreminjanje večpredstavnostnih datotek. Prav tako ne ponuja nobene funkcije za urejanje slik. Čeprav &tellico; ima nekaj funkcij za upravljanje bibliografskih seznamov, ni popoln upravitelj bibliografskih referenc. &tellico; tudi ne trdi, da ima vse zmožnosti polne relacijske baze podatkov. </para>
 
 <para
->Kot nekakšna izjava o omejitvi odgovornosti &tellico; je za avtorja hobi in ni danih nobenih jamstev glede njegove funkcionalnosti, uporabnosti ali karkoli drugega. Več informacij je vključenih v <link linkend="credits"
+>Kot nekakšna izjava o omejitvi odgovornosti, &tellico; je za avtorja hobi in ni danih nobenih jamstev glede njegove funkcionalnosti, uporabnosti ali sicer. Več informacij je vključenih v <link linkend="credits"
 >izjavo o licenci</link
 >. </para>
 
@@ -269,11 +269,11 @@ file included in the KDE distribution. -->
 <para
 >&tellico; </para>
 <para
->Avtorske pravice za program 2001-2024 &robby; <email
+>Avtorske pravice za program 2001 &robby; <email
 >&email;</email
 > </para>
 <para
->Avtorske pravice za dokumentacijo 2001-2024 &robby; <email
+>Avtorske pravice za dokumentacijo 2001 &robby; <email
 >&email;</email
 > </para>
 

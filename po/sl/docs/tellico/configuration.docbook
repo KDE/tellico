@@ -56,7 +56,9 @@
 <para
 ><guilabel
 >Splošne možnosti</guilabel
-> nadzorujejo splošno vedenje. Slike so lahko vključene v podatkovne datoteke ali shranjene ločeno v mapo aplikacije &appname;. Ko se &appname; zažene, lahko tudi samodejno znova odpre zadnjo odprto podatkovno datoteko. <interface
+> nadzorujejo splošno vedenje. Slike se lahko shranijo v samo podatkovno datoteko, shranjene ločeno v skupno &appname; aplikacijsko mapo ali shranjene v imenik z enakim imenom kot podatkovna datoteka, z dodanim <emphasis
+>_files</emphasis
+> k imenu. Pri zbirkah z veliko slikami je njihovo shranjevanje v podatkovno datoteko veliko počasnejše. Ko se  &appname; zažene, lahko samodejno znova odpre zadnjo odprto podatkovno datoteko. <interface
 >Hitri filter</interface
 > v orodni vrstici je uporaben za enostavno filtriranje vaše zbirke in lahko uporablja regularne izraze. </para>
 
@@ -467,10 +469,27 @@
 >SRU strežniki</title>
 
 <para
->SRU pomeni <ulink url="http://www.loc.gov/standards/sru/"
+><acronym
+>SRU</acronym
+> pomeni <ulink url="http://www.loc.gov/standards/sru/"
 >Search/Retrieve via &URL;</ulink
 > in je standardni iskalni protokol za internetna iskanja. Nekatere knjižnice ga uporabljajo za zagotavljanje dostopa do svojih podatkovnih katalogov. Med njimi je verjetno najbolj znana <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
 >Kongresna knjižnica ZDA</ulink
+>. </para>
+
+<para
+>Polja po meri je mogoče dodati za prilagoditev interakcije Tellica s strežnikom SRU. Za preglasitev določenih protokolov poizvedb uporabite predpono x-tellico in želeno ime polja. Na primer, za poizvedbo po ISBN z uporabo sheme bib namesto sheme bath nastavite <userinput
+>x-tellico-isbn</userinput
+>=<userinput
+>bib.isbn</userinput
+>. &tellico; lahko zahtevo SRU izvede tudi z metodo POST, če je <userinput
+>x-tellico-method</userinput
+>=<userinput
+>POST</userinput
+>. Če želite preglasiti shemo zapisa, dodajte nastavitev polja po meri <userinput
+>recordSchema</userinput
+>=<userinput
+>unimarcXchange</userinput
 >. </para>
 
 <screenshot>
