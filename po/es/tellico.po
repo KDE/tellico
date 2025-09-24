@@ -5,7 +5,7 @@
 #
 # Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2003, 2004, 2005, 2006, 2007.
 # Ale Hamann <amadeus@bbs.frc.utn.edu.ar>, 2006, 2007, 2008.
-# SPDX-FileCopyrightText: 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 # Kira J. Fernandez <kirajfdez@gmail.com>, 2010, 2011.
 # Huever, 2010.
 # Kira J. Fernandez <kirajfdez@gmail.es>, 2011.
@@ -15,14 +15,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-05 05:54+0000\n"
-"PO-Revision-Date: 2024-01-05 01:34+0100\n"
+"PO-Revision-Date: 2025-09-23 15:07+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 25.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -7529,7 +7529,7 @@ msgid ""
 msgstr ""
 "<p>...que si se usa un carácter no alfanumérico en el «Filtro rápido»,\n"
 "el texto se interpretará como una expresión regular?</p>\n"
-"<p>Para mostrar solo los libros que sean de Weber ó de Neruda,\n"
+"<p>Para mostrar solo los libros que sean de Weber o de Neruda,\n"
 "por ejemplo, escriba «weber|neruda» (sin comillas) en el campo Filtro.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
@@ -7540,7 +7540,7 @@ msgid ""
 "the Shift or Ctrl key and selecting multiple entries.</p>\n"
 msgstr ""
 "<p>...que se puede editar a la vez más de una entrada, realizando\n"
-"una selección múltiple normal con las teclas Mayús ó Ctrl?</p>\n"
+"una selección múltiple normal con las teclas Mayús o Ctrl?</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:50
@@ -7618,7 +7618,7 @@ msgid ""
 msgstr ""
 "<p>...que puede añadir etiquetas HTML a cualquier campo de tipo «Párrafo» "
 "para\n"
-"formatear el texto, como &lt;b&gt;bold&lt;/b&gt; ó &lt;i&gt;italic&lt;/i&gt;?"
+"formatear el texto, como &lt;b&gt;bold&lt;/b&gt; o &lt;i&gt;italic&lt;/i&gt;?"
 "</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
