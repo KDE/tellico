@@ -174,6 +174,10 @@
             "config-opts": [
                 "--disable-static",
                 "--without-cdda-player",
+		"--without-iso-info",
+		"--without-iso-read",
+		"--without-cd-read",
+                "--without-cd-info",
                 "--without-cd-drive"
             ],
             "sources": [
