@@ -38,8 +38,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://poppler.freedesktop.org/poppler-25.08.0.tar.xz",
-                    "sha256": "425ed4d4515a093bdcdbbaac6876f20617451edc710df6a4fd6c45dd67eb418d",
+                    "url": "https://poppler.freedesktop.org/poppler-25.09.1.tar.xz",
+                    "sha256": "0c1091d01d3dd1664a13816861e812d02b29201e96665454b81b52d261fad658",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 3686,
@@ -77,8 +77,8 @@
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://github.com/uclouvain/openjpeg/archive/refs/tags/v2.5.3.tar.gz",
-                            "sha256": "368fe0468228e767433c9ebdea82ad9d801a3ad1e4234421f352c8b06e7aa707",
+                            "url": "https://github.com/uclouvain/openjpeg/archive/refs/tags/v2.5.4.tar.gz",
+                            "sha256": "a695fbe19c0165f295a8531b1e4e855cd94d0875d2f88ec4b61080677e27188a",
                             "x-checker-data": {
                                 "type": "anitya",
                                 "project-id": 2550,
@@ -174,9 +174,9 @@
             "config-opts": [
                 "--disable-static",
                 "--without-cdda-player",
-		"--without-iso-info",
-		"--without-iso-read",
-		"--without-cd-read",
+                "--without-iso-info",
+                "--without-iso-read",
+                "--without-cd-read",
                 "--without-cd-info",
                 "--without-cd-drive"
             ],
