@@ -44,7 +44,7 @@
                         "type": "anitya",
                         "project-id": 3686,
                         "stable-only": true,
-                        "url-template": "https://poppler.freedesktop.org/poppler-25.08.0.tar.xz"
+                        "url-template": "https://poppler.freedesktop.org/poppler-$version.tar.xz"
                     }
                 }
             ],
