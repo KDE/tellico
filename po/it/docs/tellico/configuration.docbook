@@ -184,7 +184,7 @@
 >store.kde.org</ulink
 > facendo clic sul pulsante <guilabel
 >Scarica</guilabel
->. Ogni modello installato dall'utente può anche essere cancellato. I modelli d'immissione vengono salvati nella cartella <filename class="directory "
+>. Ogni modello installato dall'utente può anche essere cancellato. I modelli d'immissione vengono salvati nella cartella <filename class="directory"
 >$<envar
 >KDEHOME</envar
 >/share/apps/tellico/entry-templates/</filename
