@@ -491,7 +491,7 @@
 <para
 >Vnose je mogoče samodejno posodobiti s poizvedovanjem podatkovnih virov, ki so na voljo za trenutno vrsto zbirke, kar je zelo uporabno za združevanje informacij iz več virov. Na primer, lahko dodate film v svojo zbirko s pomočjo <link linkend="amazon-web-services"
 >spletnih storitev Amazon.com</link
-> in nato posodobite vnos z dodatnimi informacijami iz <link linkend=" imdb"
+> in nato posodobite vnos z dodatnimi informacijami iz <link linkend="imdb"
 >Internet Movie Database</link
 >. </para>
 
