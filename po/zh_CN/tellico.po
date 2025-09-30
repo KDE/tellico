@@ -2886,7 +2886,7 @@ msgstr ""
 
 #: src/core/tellico_strings.cpp:39
 msgid "Untitled"
-msgstr ""
+msgstr "未命名 "
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
@@ -5565,16 +5565,14 @@ msgid "Import data from Data Crow"
 msgstr ""
 
 #: src/mainwindow.cpp:393
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "导入 MODS 数据..."
+msgstr ""
 
 #: src/mainwindow.cpp:394
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "从 Referencer 导入数据"
+msgstr ""
 
 #: src/mainwindow.cpp:397
 #, kde-format
