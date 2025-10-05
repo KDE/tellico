@@ -132,7 +132,8 @@ public:
    * @return The image reference
    */
   static const Data::Image& imageById(const QString& id);
-  static bool hasLocalImage(const QString& id);
+  static bool hasImageInDir(const QString& id);
+  static bool hasImageInDirOrMemory(const QString& id);
   bool hasImageInMemory(const QString& id) const;
   // just used for testing
   bool hasNullImage(const QString& id) const;

@@ -220,19 +220,15 @@ void DocumentTest::testSaveTemplate() {
 void DocumentTest::testView() {
   Tellico::EntryView view(nullptr);
   view.setXSLTFile(QLatin1String("Fancy.xsl"));
-  // testing the configuration for the main window
-  view.setUseImageConfigLocation(true);
 
   Tellico::Config::setImageLocation(Tellico::Config::ImagesInLocalDir);
   // the default collection will use a temporary directory as a local image dir
   QVERIFY(!Tellico::ImageFactory::localDir().isEmpty());
 
-  QString tempDirName;
-
   QTemporaryDir tempDir;
   QVERIFY(tempDir.isValid());
   tempDir.setAutoRemove(true);
-  tempDirName = tempDir.path();
+  QString tempDirName = tempDir.path();
   QString fileName = tempDirName + "/with-image.tc";
   QString imageDirName = tempDirName + "/with-image_files/";
   QDir imageDir(imageDirName);
@@ -256,15 +252,17 @@ void DocumentTest::testView() {
   QCOMPARE(e->field(QStringLiteral("cover")), imageName);
 
   view.showEntry(e);
-  // now it exists
+  // now it exists, because of writing the style images
   QVERIFY(imageDir.exists());
-  QVERIFY(imageDir.exists(imageName));
+  // the image was not written to image dir but to a different temp dir
+  QCOMPARE(imageDir.exists(imageName), false);
 
   // Bug 508902
   // Search for an entry, show it in a second view (like the FetchDialog does)
   Tellico::Data::CollPtr newColl(new Tellico::Data::BookCollection(true));
   Tellico::Data::EntryPtr newEntry(new Tellico::Data::Entry(newColl));
   newEntry->setField(QLatin1String("title"), QLatin1String("new title"));
+
   const QUrl imageUrl = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
   const auto newImageId = Tellico::ImageFactory::addImage(imageUrl, true);
   newEntry->setField(QLatin1String("cover"), newImageId);
@@ -276,13 +274,13 @@ void DocumentTest::testView() {
   QCOMPARE(imageDir.exists(newImageId), false);
 
   // now add it to collection, but don't save the document yet
-  // follows what AddEntries does
+  // follows the same commanding as AddEntries does
   Tellico::Data::EntryList list;
   list.append(Tellico::Data::EntryPtr(new Tellico::Data::Entry(*newEntry)));
   coll->addEntries(list);
 
   // then show it in original view
   view.showEntry(list.front());
-  // it exists in the data dir even though it's not saved to the document
-  QVERIFY(imageDir.exists(newImageId));
+  // the new image still should not exist in the data dir
+  QCOMPARE(imageDir.exists(newImageId), false);
 }
