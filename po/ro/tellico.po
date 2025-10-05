@@ -2,15 +2,15 @@
 # Copyright (C) 2007 Robby Stephenson <robby@periapsis.org>.
 # This file is distributed under the same license as the tellico package.
 # Iulian Ursache <iulianu@cs.tuiasi.ro>, 2002.
-# Sergiu Bivol <sergiu@cip.md>, 2012.
+# SPDX-FileCopyrightText: 2012, 2025 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-14 02:32+0000\n"
-"PO-Revision-Date: 2012-12-22 11:53+0200\n"
-"Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
+"PO-Revision-Date: 2025-10-05 00:41+0100\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -677,9 +678,9 @@ msgid "A field with a derived value must have a value template."
 msgstr ""
 
 #: src/collections/bibtexcollection.cpp:81
-#, fuzzy, kde-format
+#, kde-format
 msgid "Entry Type"
-msgstr "Serie"
+msgstr "Tip înregistrare"
 
 #: src/collections/bibtexcollection.cpp:85
 #, kde-format
@@ -733,20 +734,20 @@ msgid "General"
 msgstr "General"
 
 #: src/collections/bibtexcollection.cpp:101
-#, fuzzy, kde-format
+#, kde-format
 msgid "Book Title"
-msgstr "Titlu"
+msgstr "Titlu carte"
 
 #: src/collections/bibtexcollection.cpp:107
 #: src/collections/bookcollection.cpp:58
-#, fuzzy, kde-format
+#, kde-format
 msgid "Editor"
-msgstr "Ediție"
+msgstr "Redactor"
 
 #: src/collections/bibtexcollection.cpp:114
 #, kde-format
 msgid "Organization"
-msgstr ""
+msgstr "Organizație"
 
 #. i18n("Institution"));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("institution"));
@@ -767,7 +768,7 @@ msgstr "Editură"
 #: src/fetch/srufetcher.cpp:552 src/fetch/z3950fetcher.cpp:572
 #, kde-format
 msgid "Address"
-msgstr ""
+msgstr "Adresă"
 
 #: src/collections/bibtexcollection.cpp:142
 #: src/collections/bookcollection.cpp:87
@@ -799,27 +800,27 @@ msgstr "Jurnal"
 #: src/collections/bibtexcollection.cpp:172 src/fetch/fetchmanager.cpp:67
 #, kde-format
 msgid "DOI"
-msgstr ""
+msgstr "DOI"
 
 #: src/collections/bibtexcollection.cpp:175
 #, kde-format
 msgid "Digital Object Identifier"
-msgstr ""
+msgstr "Identificator obiect digital"
 
 #: src/collections/bibtexcollection.cpp:180
 #, kde-format
 msgid "Month"
-msgstr ""
+msgstr "Lună"
 
 #: src/collections/bibtexcollection.cpp:186 src/field.cpp:199
-#, fuzzy, kde-format
+#, kde-format
 msgid "Number"
-msgstr "Nr. în serie"
+msgstr "Număr"
 
 #: src/collections/bibtexcollection.cpp:191
-#, fuzzy, kde-format
+#, kde-format
 msgid "How Published"
-msgstr "Editură"
+msgstr "Cum e publicat"
 
 #. i18n("School"));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("school"));
@@ -830,7 +831,7 @@ msgstr "Editură"
 #: src/collections/bibtexcollection.cpp:203
 #, kde-format
 msgid "Chapter"
-msgstr ""
+msgstr "Capitol"
 
 #: src/collections/bibtexcollection.cpp:208
 #: src/collections/bookcollection.cpp:137 src/collections/cardcollection.cpp:78
@@ -841,10 +842,10 @@ msgid "Series"
 msgstr "Serie"
 
 #: src/collections/bibtexcollection.cpp:215
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "A number field in a bibliography"
 msgid "Volume"
-msgstr "Titlu"
+msgstr "Volum"
 
 #: src/collections/bibtexcollection.cpp:220
 #, kde-format
@@ -863,7 +864,7 @@ msgstr ""
 #: src/collections/videocollection.cpp:209 src/fetch/amazonfetcher.cpp:1080
 #, kde-format
 msgid "Keywords"
-msgstr "Cuvinte cheie"
+msgstr "Cuvinte-cheie"
 
 #: src/collections/bibtexcollection.cpp:236 src/collections/filecatalog.cpp:50
 #: src/fetch/entrezfetcher.cpp:446 src/fetch/entrezfetcher.cpp:522
