@@ -53,7 +53,9 @@ void DataFileRegistry::addDataLocation(const QString& dir_, bool prepend_) {
   } else {
     dataDir = info.canonicalPath();
   }
-  dataDir += QLatin1Char('/');
+  if(!dataDir.endsWith(QLatin1Char('/'))) {
+    dataDir += QLatin1Char('/');
+  }
 
   if(!m_dataLocations.contains(dataDir)) {
     if(prepend_) {
@@ -69,7 +71,7 @@ QString DataFileRegistry::locate(const QString& fileName_) {
   if(QFileInfo(fileName_).isAbsolute()) {
     return fileName_;
   }
-  foreach(const QString& dataDir, m_dataLocations) {
+  for(const auto& dataDir : m_dataLocations) {
     if(QFileInfo::exists(dataDir + fileName_)) {
       return dataDir + fileName_;
     }
