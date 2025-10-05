@@ -52,7 +52,7 @@ void DocumentTest::initTestCase() {
   Tellico::ImageFactory::init();
   // test case is a book file
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
-  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/"));
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/welcome.html"));
 }
 
 void DocumentTest::cleanupTestCase() {
