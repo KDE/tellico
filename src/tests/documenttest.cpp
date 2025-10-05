@@ -131,13 +131,16 @@ void DocumentTest::testImageLocalDirectory() {
   e->setField(QStringLiteral("cover"), QString());
   QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName2)));
   QVERIFY(imageDir2.exists(imageName));  // since image is in 2 entries, should still exist
-  coll->removeEntries( {e2} );
+  // remove all the entries and save, the image should be gone again
+  coll->removeEntries(coll->entries());
+  QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName2)));
+  QCOMPARE(imageDir2.exists(imageName), false);
 
-  /*************************************************************************/
+  /***********************************************************************/
   /* now also verify image directory when file name has multiple periods */
-  /* see https://bugs.kde.org/show_bug.cgi?id=348088 */
-  /* also have to check backwards compatibility with prior behavior */
-  /*************************************************************************/
+  /* see https://bugs.kde.org/show_bug.cgi?id=348088                     */
+  /* also have to check backwards compatibility with prior behavior      */
+  /***********************************************************************/
 
   QString fileName3 = tempDirName + "/with-image.1.tc";
   QString imageDirName3 = tempDirName + "/with-image.1_files/";
