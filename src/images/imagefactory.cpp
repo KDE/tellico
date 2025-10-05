@@ -331,7 +331,7 @@ bool ImageFactory::writeCachedImage(const QString& id_, ImageDirectory* imgDir_,
   if(id_.isEmpty() || !imgDir_) {
     return false;
   }
-//  myLog() << "ImageFactory::writeCachedImage() - dir =" << imgDir_->path() << "; id =" << id_;
+//  myLog() << "ImageFactory::writeCachedImage() - dir =" << imgDir_->dir().path() << "; id =" << id_;
   const bool exists = imgDir_->hasImage(id_);
   // only write if it doesn't exist
   bool success = (!force_ && exists);
@@ -487,17 +487,25 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   return Data::Image::null;
 }
 
-bool ImageFactory::hasLocalImage(const QString& id_) {
+bool ImageFactory::hasImageInDir(const QString& id_) {
   Q_ASSERT(factory && "ImageFactory is not initialized!");
   if(id_.isEmpty() || !factory) {
     return false;
   }
 
-  const bool inConfigLocation = (Config::imageLocation() == Config::ImagesInLocalDir &&
-                                 factory->d->localImageDir.hasImage(id_)) ||
-                                (Config::imageLocation() == Config::ImagesInAppDir &&
-                                 factory->d->dataImageDir.hasImage(id_));
-  return inConfigLocation ||
+  return (Config::imageLocation() == Config::ImagesInLocalDir &&
+          factory->d->localImageDir.hasImage(id_)) ||
+         (Config::imageLocation() == Config::ImagesInAppDir &&
+          factory->d->dataImageDir.hasImage(id_));
+}
+
+bool ImageFactory::hasImageInDirOrMemory(const QString& id_) {
+  Q_ASSERT_X(factory, "ImageFactory::hasImageInDirOrMemory", "ImageFactory is not initialized!");
+  if(id_.isEmpty() || !factory) {
+    return false;
+  }
+
+  return hasImageInDir(id_) ||
          factory->d->imageCache.contains(id_) ||
          factory->d->imageDict.contains(id_) ||
          factory->d->tempImageDir.hasImage(id_) ||
@@ -508,7 +516,7 @@ bool ImageFactory::hasLocalImage(const QString& id_) {
 
 void ImageFactory::requestImageById(const QString& id_) {
   Q_ASSERT(factory && "ImageFactory is not initialized!");
-  if(hasLocalImage(id_)) {
+  if(hasImageInDirOrMemory(id_)) {
     QTimer::singleShot(0, factory, [id_] () {
       auto img = factory->addCachedImageImpl(id_, cacheDir());
       if(!img.isNull()) {
@@ -651,6 +659,7 @@ void ImageFactory::clean(bool purgeTempDirectory_) {
 }
 
 void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOptions& opt_) {
+  myLog() << "Creating style images for type:" << collectionType_;
   const QColor& baseColor = opt_.baseColor.isValid()
                           ? opt_.baseColor
                           : Config::templateBaseColor(collectionType_);

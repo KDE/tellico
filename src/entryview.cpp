@@ -161,7 +161,6 @@ EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_)
     , m_handler(nullptr)
     , m_tempFile(nullptr)
     , m_useGradientImages(true)
-    , m_useImageConfigLocation(false)
     , m_checkCommonFile(true) {
   auto page = new EntryViewPage(this);
   setPage(page);
@@ -266,24 +265,31 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   f1.close();
 #endif
 
-  const QString html = m_handler->applyStylesheet(dom.toString());
   // write out image files
+  bool useTempDir = false; // assume everything is already local
+  QStringList imagesToWrite;
   Data::FieldList fields = entry_->collection()->imageFields();
   foreach(Data::FieldPtr field, fields) {
-    QString id = entry_->field(field);
-    if(id.isEmpty()) {
+    const QString id = entry_->field(field);
+    if(id.isEmpty() || ImageFactory::imageInfo(id).linkOnly) {
       continue;
     }
-    // only write out image if it's not linked only
-    if(!ImageFactory::imageInfo(id).linkOnly) {
-      if(m_useImageConfigLocation) {
-        ImageFactory::writeCachedImage(id, ImageFactory::cacheDir());
-      } else {
-        ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
-      }
-    }
+    imagesToWrite.append(id);
+    if(!useTempDir && ImageFactory::hasImageInDir(id) == false) useTempDir = true;
+  }
+  if(useTempDir) {
+    m_handler->addStringParam("imgdir", ImageFactory::tempDir().toEncoded());
+  } else {
+    m_handler->addStringParam("imgdir", ImageFactory::imageDir().toEncoded());
+  }
+  for(const auto& id : imagesToWrite) {
+    ImageFactory::writeCachedImage(id,
+                                   useTempDir ?
+                                     ImageFactory::TempDir :
+                                     ImageFactory::cacheDir());
   }
 
+  const QString html = m_handler->applyStylesheet(dom.toString());
 #if 0
   myWarning() << "EntryView::showEntry() - turn me off!";
   QFile f2(QLatin1String("/tmp/test.html"));
@@ -347,9 +353,7 @@ void EntryView::setXSLTFile(const QString& file_) {
     const QString templateDir = QStringLiteral("entry-templates/");
     m_xsltFile = DataFileRegistry::self()->locate(templateDir + file_);
     if(m_xsltFile.isEmpty()) {
-      if(!file_.isEmpty()) {
-        myWarning() << "can't locate" << file_;
-      }
+      myWarning() << "Unable to locate" << file_;
       m_xsltFile = DataFileRegistry::self()->locate(templateDir + QLatin1String("Fancy.xsl"));
       if(m_xsltFile.isEmpty()) {
         QString str = QStringLiteral("<qt>");
@@ -412,11 +416,7 @@ void EntryView::setXSLTFile(const QString& file_) {
   m_handler->addStringParam("color2",   Config::templateHighlightedBaseColor(type).name().toLatin1());
   m_handler->addStringParam("linkcolor",Config::templateLinkColor(type).name().toLatin1());
 
-  if(m_useImageConfigLocation) {
-    m_handler->addStringParam("imgdir", ImageFactory::imageDir().toEncoded());
-  } else {
-    m_handler->addStringParam("imgdir", ImageFactory::tempDir().toEncoded());
-  }
+  // imgdir gets set when an entry is shown
   m_handler->addStringParam("datadir", QUrl::fromLocalFile(Tellico::installationDir()).toEncoded());
 
   // if we don't have to reload the images, then just show the entry and we're done
@@ -546,9 +546,7 @@ void EntryView::resetColors() {
 
   QString dir = m_handler ? QFile::decodeName(m_handler->param("imgdir")) : QString();
   if(dir.isEmpty()) {
-    dir = m_useImageConfigLocation ?
-            ImageFactory::imageDir().url() :
-            ImageFactory::tempDir().url();
+    dir = ImageFactory::imageDir().url();
   } else {
     // it's a string param, so it has quotes on both sides
     dir = dir.mid(1);
