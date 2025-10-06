@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-19 00:42+0000\n"
+"POT-Creation-Date: 2025-10-06 00:42+0000\n"
 "PO-Revision-Date: 2022-04-07 18:20+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -164,7 +164,7 @@ msgstr "Meno"
 msgid "Collection Size"
 msgstr "Pohľad zbierky"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1624
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1621
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Celkom položiek: %1"
@@ -2778,8 +2778,8 @@ msgstr "XSL súbory"
 msgid "Template Packages"
 msgstr "Balíky šablón"
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1258
-#: src/mainwindow.cpp:1429 src/reportdialog.cpp:423 src/reportdialog.cpp:438
+#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1255
+#: src/mainwindow.cpp:1426 src/reportdialog.cpp:423 src/reportdialog.cpp:438
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
@@ -3048,7 +3048,7 @@ msgstr "Ukázať všetky stĺpce"
 msgid "Hide All Columns"
 msgstr "Skryť všetky stĺpce"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1373
+#: src/document.cpp:216 src/mainwindow.cpp:1370
 #, kde-format
 msgid "Saving file..."
 msgstr "Ukladá sa súbor..."
@@ -3109,7 +3109,7 @@ msgstr ""
 msgid "Save Entry"
 msgstr "Uložiť položku"
 
-#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1162
+#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1159
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Neuložené zmeny"
@@ -3118,7 +3118,7 @@ msgstr "Neuložené zmeny"
 msgid "(Empty)"
 msgstr "(Prázdne)"
 
-#: src/entryiconview.cpp:61 src/mainwindow.cpp:837
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:834
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3183,12 +3183,12 @@ msgstr "Akt&ualizovať položky"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Aktualizujem <b>%1</b>..."
 
-#: src/entryview.cpp:288
+#: src/entryview.cpp:292
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico nemôže nájsť predvolený štýl položky."
 
-#: src/entryview.cpp:290 src/mainwindow.cpp:1780
+#: src/entryview.cpp:294 src/mainwindow.cpp:1777
 #, kde-format
 msgid "Please check your installation."
 msgstr "Prosím, skontrolujte svoju inštaláciu."
@@ -4941,8 +4941,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Skupina"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1089 src/mainwindow.cpp:1712
-#: src/mainwindow.cpp:1749 src/translators/htmlexporter.cpp:387
+#: src/groupview.cpp:425 src/mainwindow.cpp:1086 src/mainwindow.cpp:1709
+#: src/mainwindow.cpp:1746 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "Ľudia"
@@ -5256,14 +5256,14 @@ msgstr ""
 msgid "&Import"
 msgstr "&Importovať"
 
-#: src/importdialog.cpp:381 src/mainwindow.cpp:1254 src/mainwindow.cpp:1427
+#: src/importdialog.cpp:381 src/mainwindow.cpp:1251 src/mainwindow.cpp:1424
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Súbory Tellico"
 
 #: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
-#: src/mainwindow.cpp:1256 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1253 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML súbory"
@@ -6371,7 +6371,7 @@ msgstr "Zmeniť zoskupenie zbierky"
 msgid "Filter here..."
 msgstr "Filtrovať tu..."
 
-#: src/mainwindow.cpp:815
+#: src/mainwindow.cpp:812
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
@@ -6379,12 +6379,12 @@ msgid ""
 msgstr ""
 "<qt><i>Pohľad položky</i> ukazuje formátované zobrazenie obsahu položky.</qt>"
 
-#: src/mainwindow.cpp:820
+#: src/mainwindow.cpp:817
 #, kde-format
 msgid "Collection View"
 msgstr "Pohľad zbierky"
 
-#: src/mainwindow.cpp:827
+#: src/mainwindow.cpp:824
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
@@ -6393,17 +6393,17 @@ msgstr ""
 "<qt><i>Stĺpcový pohľad</i>ukazuje hodnotu viacnásobných polí pre každú "
 "položku.</qt>"
 
-#: src/mainwindow.cpp:844
+#: src/mainwindow.cpp:841
 #, kde-format
 msgid "Group View"
 msgstr "Skupinový pohľad"
 
-#: src/mainwindow.cpp:853
+#: src/mainwindow.cpp:850
 #, kde-format
 msgid "Groups"
 msgstr "Skupiny"
 
-#: src/mainwindow.cpp:854
+#: src/mainwindow.cpp:851
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
@@ -6412,18 +6412,18 @@ msgstr ""
 "<qt><i>Skupinový pohľad</i> triedi položky do zoskupení na základe vybraného "
 "poľa.</qt>"
 
-#: src/mainwindow.cpp:935
+#: src/mainwindow.cpp:932
 #, fuzzy, kde-format
 #| msgid "Tellico - a KDE collection manager"
 msgid "Collection management software, free and simple"
 msgstr "Tellico - správca zbierok pre KDE"
 
-#: src/mainwindow.cpp:937
+#: src/mainwindow.cpp:934
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Vitajte v správcovi zbierok Tellico"
 
-#: src/mainwindow.cpp:939
+#: src/mainwindow.cpp:936
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6438,7 +6438,7 @@ msgstr ""
 "alebo <a href=\"tc:///edit_search_internet\">sťiahnutím údajov</a> z rôznych "
 "internetových zdrojov.</h3>"
 
-#: src/mainwindow.cpp:948
+#: src/mainwindow.cpp:945
 #, kde-format
 msgid ""
 "More information can be found in the <a href=\"help:/tellico"
@@ -6446,7 +6446,7 @@ msgid ""
 "this welcome screen</a>."
 msgstr ""
 
-#: src/mainwindow.cpp:1160
+#: src/mainwindow.cpp:1157
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6455,23 +6455,23 @@ msgstr ""
 "Aktuálny súbor bol zmenený.\n"
 "Chcete ho uložiť?"
 
-#: src/mainwindow.cpp:1196 src/mainwindow.cpp:1230
+#: src/mainwindow.cpp:1193 src/mainwindow.cpp:1227
 #, fuzzy, kde-format
 #| msgid "Create a new collection"
 msgid "Creating new collection..."
 msgstr "Vytvoriť novú kolekciu"
 
-#: src/mainwindow.cpp:1251 src/mainwindow.cpp:1274 src/mainwindow.cpp:1292
+#: src/mainwindow.cpp:1248 src/mainwindow.cpp:1271 src/mainwindow.cpp:1289
 #, kde-format
 msgid "Opening file..."
 msgstr "Otvára sa súbor..."
 
-#: src/mainwindow.cpp:1262
+#: src/mainwindow.cpp:1259
 #, kde-format
 msgid "Open File"
 msgstr "Otvoriť súbor"
 
-#: src/mainwindow.cpp:1384
+#: src/mainwindow.cpp:1381
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6484,32 +6484,32 @@ msgstr ""
 "zlepšenie výkonu?</p><p>Vaša voľba môže byť vždy zmenená v konfiguračnom "
 "dialógu.</p></qt>"
 
-#: src/mainwindow.cpp:1389
+#: src/mainwindow.cpp:1386
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Uložiť obrázky oddelene"
 
-#: src/mainwindow.cpp:1390
+#: src/mainwindow.cpp:1387
 #, kde-format
 msgid "Save Images in File"
 msgstr "Uložiť obrázky v súbore"
 
-#: src/mainwindow.cpp:1425
+#: src/mainwindow.cpp:1422
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Ukladá sa súbor pod novým menom..."
 
-#: src/mainwindow.cpp:1434
+#: src/mainwindow.cpp:1431
 #, kde-format
 msgid "Save As"
 msgstr "Uložiť ako"
 
-#: src/mainwindow.cpp:1500
+#: src/mainwindow.cpp:1497
 #, kde-format
 msgid "Printing..."
 msgstr "Tlač..."
 
-#: src/mainwindow.cpp:1504
+#: src/mainwindow.cpp:1501
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6518,27 +6518,27 @@ msgstr ""
 "Zbierka je v momentálne odfiltrovaná a ukazuje obmedzenú podmnožinu "
 "položiek. Vytlačené budú iba viditeľné položky. Pokračovať?"
 
-#: src/mainwindow.cpp:1529
+#: src/mainwindow.cpp:1526
 #, kde-format
 msgid "Exiting..."
 msgstr "Ukončujem..."
 
-#: src/mainwindow.cpp:1631
+#: src/mainwindow.cpp:1628
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrovaných; %2 vybraných)"
 
-#: src/mainwindow.cpp:1634
+#: src/mainwindow.cpp:1631
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtrované)"
 
-#: src/mainwindow.cpp:1637
+#: src/mainwindow.cpp:1634
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 vybrané)"
 
-#: src/mainwindow.cpp:1779 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1776 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6546,57 +6546,57 @@ msgstr "(%1 vybrané)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Nastala chyba v spracovaní XSLT v Tellico."
 
-#: src/mainwindow.cpp:1897
+#: src/mainwindow.cpp:1894
 #, kde-format
 msgid "Importing data..."
 msgstr "Importujem dáta..."
 
-#: src/mainwindow.cpp:1908
+#: src/mainwindow.cpp:1905
 #, kde-format
 msgid "Import File"
 msgstr "Importovať súbor"
 
-#: src/mainwindow.cpp:1921
+#: src/mainwindow.cpp:1918
 #, kde-format
 msgid "Import Directory"
 msgstr "Adresár importu"
 
-#: src/mainwindow.cpp:1945
+#: src/mainwindow.cpp:1942
 #, kde-format
 msgid "Exporting data..."
 msgstr "Exportovanie údajov..."
 
-#: src/mainwindow.cpp:1969
+#: src/mainwindow.cpp:1966
 #, kde-format
 msgid "Export As"
 msgstr "Exportovať ako"
 
-#: src/mainwindow.cpp:1997
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "String Macros"
 msgstr "Makrá reťazcov"
 
-#: src/mainwindow.cpp:1998
+#: src/mainwindow.cpp:1995
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:1998
+#: src/mainwindow.cpp:1995
 #, kde-format
 msgid "String"
 msgstr "Reťazec"
 
-#: src/mainwindow.cpp:2084
+#: src/mainwindow.cpp:2081
 #, kde-format
 msgid "Creating citations..."
 msgstr "Vytváram citácie..."
 
-#: src/mainwindow.cpp:2194
+#: src/mainwindow.cpp:2191
 #, kde-format
 msgid "Filters"
 msgstr "Filtre"
 
-#: src/mainwindow.cpp:2195
+#: src/mainwindow.cpp:2192
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6605,12 +6605,12 @@ msgstr ""
 "<qt>The <i>Pohľad filtra</i> ukazuje položky, ktoré spĺňajú určité pravidlá "
 "filtra.</qt>"
 
-#: src/mainwindow.cpp:2218
+#: src/mainwindow.cpp:2215
 #, kde-format
 msgid "Loans"
 msgstr "Pôžičky"
 
-#: src/mainwindow.cpp:2219
+#: src/mainwindow.cpp:2216
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6619,7 +6619,7 @@ msgstr ""
 "<qt><i>Pohľad pôžičky</i> ukazuje zoznam všetkých ľudí, ktorí si požičali "
 "položky z vašej zbierky.</qt>"
 
-#: src/mainwindow.cpp:2307
+#: src/mainwindow.cpp:2304
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6628,12 +6628,12 @@ msgstr ""
 "Niektoré obrázky nie sú uložené do nastaveného miesta. Aktuálny súbor musí "
 "byť uložený a obrázky budú premiestnené do nového umiestnenia."
 
-#: src/mainwindow.cpp:2351
+#: src/mainwindow.cpp:2348
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Aktualizovať dáta položky z %1"
 
-#: src/mainwindow.cpp:2370
+#: src/mainwindow.cpp:2367
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6642,7 +6642,7 @@ msgstr ""
 "Tellico môže importovať iba jeden súbor tohto typu naraz. Importuje sa iba "
 "%1."
 
-#: src/mainwindow.cpp:2549
+#: src/mainwindow.cpp:2546
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"
