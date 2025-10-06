@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-14 02:32+0000\n"
+"POT-Creation-Date: 2025-10-06 02:44+0000\n"
 "PO-Revision-Date: 2024-07-27 13:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -3058,12 +3058,12 @@ msgstr "更新項目"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "更新 <b>%1</b> 中..."
 
-#: src/entryview.cpp:361
+#: src/entryview.cpp:360
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico 無法找到預設的項目樣式表。"
 
-#: src/entryview.cpp:363 src/mainwindow.cpp:1862
+#: src/entryview.cpp:362 src/mainwindow.cpp:1862
 #, kde-format
 msgid "Please check your installation."
 msgstr "請檢查您的安裝。"

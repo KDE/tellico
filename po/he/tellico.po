@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-14 02:32+0000\n"
-"PO-Revision-Date: 2025-08-26 11:16+0300\n"
+"POT-Creation-Date: 2025-10-06 02:44+0000\n"
+"PO-Revision-Date: 2025-10-05 11:56+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2437,8 +2437,8 @@ msgid ""
 "first word in a title. Multiple values should be separated by a semi-colon.</"
 "qt>"
 msgstr ""
-"<qt>רשימה של מילים שיש להחשיב כתוויות אם הן המילים הראשונות בכותר.אם יש יותר "
-"ממילה אחת, יש להפריד בין המילים בנקודה־פסיק.</qt>"
+"<qt>רשימה של מילים שיש להחשיב כתוויות אם הן המילים הראשונות בכותר. אם יש "
+"יותר ממילה אחת, יש להפריד בין המילים בנקודה־פסיק.</qt>"
 
 #: src/configdialog.cpp:317
 #, kde-format
@@ -3057,12 +3057,12 @@ msgstr "עדכון רשומות"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> מתעדכן מתוך <i>%2</i>…"
 
-#: src/entryview.cpp:361
+#: src/entryview.cpp:360
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico לא הצליח לאתר את סגנון הגיליון לרשומת ברירת המחדל."
 
-#: src/entryview.cpp:363 src/mainwindow.cpp:1862
+#: src/entryview.cpp:362 src/mainwindow.cpp:1862
 #, kde-format
 msgid "Please check your installation."
 msgstr "נא לבדוק שההתקנה שלך תקינה."
@@ -6371,7 +6371,8 @@ msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
-"<qt><i>תצוגת ההשאלה</i> מציגה רשימה של כל האנשים ששאלו פריטים מהאוסףשלך.</qt>"
+"<qt><i>תצוגת ההשאלה</i> מציגה רשימה של כל האנשים ששאלו פריטים מהאוסף שלך.</"
+"qt>"
 
 #: src/mainwindow.cpp:2391
 #, kde-format
@@ -6554,7 +6555,7 @@ msgid ""
 "<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
 "books in that library could be overwritten.</qt>"
 msgstr ""
-"<qt>ספריית Alexandria בשם <i>%1</i> כבר קיימת. ספרים קיימים כלשהםבספרייה "
+"<qt>ספריית Alexandria בשם <i>%1</i> כבר קיימת. ספרים קיימים כלשהם בספרייה "
 "הזאת ישוכתבו.</qt>"
 
 #: src/translators/alexandriaimporter.cpp:239

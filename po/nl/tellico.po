@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-14 02:32+0000\n"
+"POT-Creation-Date: 2025-10-06 02:44+0000\n"
 "PO-Revision-Date: 2025-08-26 19:11+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -3103,12 +3103,12 @@ msgstr "Items bijwerken"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Bijwerken van <b>%1</b> uit <i>%2</i>..."
 
-#: src/entryview.cpp:361
+#: src/entryview.cpp:360
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico kan het standaard stylesheet niet vinden."
 
-#: src/entryview.cpp:363 src/mainwindow.cpp:1862
+#: src/entryview.cpp:362 src/mainwindow.cpp:1862
 #, kde-format
 msgid "Please check your installation."
 msgstr "Controleer uw installatie."
