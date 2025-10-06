@@ -1,4 +1,5 @@
 Name=Allocine.fr
+Name[ar]=Allocine.fr
 Name[ca]=Allocine.fr
 Name[ca@valencia]=Allocine.fr
 Name[cs]=Allocine.fr

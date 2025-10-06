@@ -3,6 +3,7 @@ Arguments=%1
 CollectionType=6
 FormatType=0
 Name=Dark Horse Comics
+Name[ar]=دارك هورس كومكس
 Name[ca]=Comics Dark Horse
 Name[ca@valencia]=Comics Dark Horse
 Name[cs]=Dark Horse Comics
