@@ -172,15 +172,17 @@ ecm_add_test(commandtest.cpp
     # order of library linking here apparently matters
 )
 
-ecm_add_test(documenttest.cpp
-    ../document.cpp
-    ../entryview.cpp
-    ../translators/tellicoxmlexporter.cpp
-    ../translators/tellicozipexporter.cpp
-    ../translators/exporter.cpp
-    TEST_NAME documenttest
-    LINK_LIBRARIES ${TELLICO_TEST_LIBS} Qt6::WebEngineWidgets translatorstest
-)
+if(NOT USE_KHTML)
+    ecm_add_test(documenttest.cpp
+        ../document.cpp
+        ../entryview.cpp
+        ../translators/tellicoxmlexporter.cpp
+        ../translators/tellicozipexporter.cpp
+        ../translators/exporter.cpp
+        TEST_NAME documenttest
+        LINK_LIBRARIES ${TELLICO_TEST_LIBS} Qt${QT_MAJOR_VERSION}::WebEngineWidgets translatorstest
+    )
+endif()
 
 ecm_add_test(entrycomparisontest.cpp
     TEST_NAME entrycomparisontest
