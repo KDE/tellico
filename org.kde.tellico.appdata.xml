@@ -7,6 +7,7 @@
     <name translate="no">KDE</name>
   </developer>
   <name>Tellico</name>
+  <name xml:lang="ar">تلكو</name>
   <name xml:lang="bs">Tellico</name>
   <name xml:lang="ca">Tellico</name>
   <name xml:lang="ca-valencia">Tellico</name>
@@ -46,6 +47,7 @@
   <name xml:lang="zh-CN">Tellico</name>
   <name xml:lang="zh-TW">Tellico</name>
   <summary>Collection Manager</summary>
+  <summary xml:lang="ar">مدير مجموعات</summary>
   <summary xml:lang="bs">Menadžer kolekcija</summary>
   <summary xml:lang="ca">Gestor de col·leccions</summary>
   <summary xml:lang="ca-valencia">Gestor de col·leccions</summary>
@@ -90,6 +92,7 @@
       It provides default templates for books, bibliographies, videos, music, video games, coins, stamps, trading cards, comic books, and wines.
       It allows you to enter your collection in a catalogue database, saving many different properties like title, author, etc.
     </p>
+    <p xml:lang="ar">تلكو هو تطبيق لتنظيم مجموعاتك. يوفّر قوالب مبدئيّة للكتب، والمراجع، والفيديوهات، والموسيقى، وألعاب الفيديو، والعملات، والطوابع، وبطاقات التداول، والقصص المصوّرة، والنبيذ. يتيح لك إدخال مجموعتك في قاعدة بيانات كتالوج، ويحفظ الكثير من الخصائص المختلفة مثل العنوان، والمؤلّف، وإلخ.</p>
     <p xml:lang="bs">Tellico je aplikacija za organiziranje vaše kolekcije. Omogućava početne predloške za knjige, bibliografije, videa, muziku, video igrice, kovanice, markice, kartice za razmjenu, stripove i vina. Dopušta vam ulaz u vašu kolekiju u katalošku bazu podataka, snimajući mnogo različitih osobina kao što su naslov, autor, itd.</p>
     <p xml:lang="ca">El Tellico és una aplicació per a organitzar col·leccions. Proporciona plantilles per defecte per a llibres, bibliografies, vídeos, música, videojocs, monedes, segells, cromos, còmics i vins. Permet introduir les col·leccions en una base de dades de catàlegs, desant moltes propietats diferents com el títol, l'autor, etc.</p>
     <p xml:lang="ca-valencia">Tellico és una aplicació per a organitzar col·leccions. Proporciona plantilles predeterminades per a llibres, bibliografies, vídeos, música, videojocs, monedes, segells, cromos, còmics i vins. Permet introduir les col·leccions en una base de dades de catàlegs, guardant moltes propietats diferents com el títol, l'autor, etc.</p>
@@ -127,6 +130,7 @@
     <p xml:lang="uk">Tellico — програма для упорядковування ваших збірок. У ній передбачено типові шаблони для збірок книг, бібліографій, відео, музичних творів, відеоігор, нумізматики, марок, карток, коміксів та вин. За її допомогою ви зможете вести записи у форматі бази даних, зберігаючи різноманітні дані щодо елементів збірки, зокрема дані щодо назви, автора тощо.</p>
     <p xml:lang="zh-TW">Tellico 是一個用來管理您的收藏的應用程式。它提供書本、參考書目、影片、音樂、遊戲、錢幣、印章、卡牌、漫畫書，及紅酒的預設樣本。Tellico 讓您將收藏輸入資料目錄，並附上各種屬性，像是標題、作者等等。</p>
     <p>Features:</p>
+    <p xml:lang="ar">الميزات:</p>
     <p xml:lang="bs">Svojstva:</p>
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="ca-valencia">Característiques:</p>
@@ -167,6 +171,7 @@
     <p xml:lang="zh-TW">功能：</p>
     <ul>
       <li>Supports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogs</li>
+      <li xml:lang="ar">يتيح المجموعات المبدئيّة للكتب، والإدخالات المرجعيّة، والفيديوهات، والموسيقى، وألعاب الفيديو، والقصص المصوّرة، والعملات، والطوابع، وبطاقات التداول، والنبيذ، وألعاب اللوح، وكتالوجات الملفات</li>
       <li xml:lang="bs">Podržava početne kolekcije knjiga, bibliografskih ulaza, videa, muzike, video igrica, stripova, kovanica, markica, kartica za razmjenu, vina, društvenih igara i datotečnih kataloga.</li>
       <li xml:lang="ca">Funciona amb col·leccions per defecte de catàlegs de llibres, entrades de bibliografia, vídeos, música, videojocs, còmics, monedes, segells, cromos, vins, jocs de taula i fitxers</li>
       <li xml:lang="ca-valencia">Funciona amb col·leccions predeterminades de catàlegs de llibres, entrades de bibliografia, vídeos, música, videojocs, còmics, monedes, segells, cromos, vins, jocs de taula i fitxers</li>
@@ -204,6 +209,7 @@
       <li xml:lang="uk">Підтримка типових збірок книг, бібліографічних записів, відео, музики, відеоігор, коміксів, нумізматики, марок, карток, вин, настільних ігор та каталогів файлів.</li>
       <li xml:lang="zh-TW">預設支援書本、參考書目條目、影片、音樂、遊戲、漫畫書、錢幣、印章、卡牌、紅酒、桌上遊戲，與檔案目錄的收藏</li>
       <li>Supports user-defined custom collections</li>
+      <li xml:lang="ar">يتيح مجموعات مخصّصة يحدّدها المستخدم</li>
       <li xml:lang="bs">Podržava korisnički definisane prilagođene kolekcije</li>
       <li xml:lang="ca">Funciona amb col·leccions personalitzades definides per l'usuari</li>
       <li xml:lang="ca-valencia">Funciona amb col·leccions personalitzades definides per l'usuari</li>
@@ -241,6 +247,7 @@
       <li xml:lang="uk">Підтримка визначених користувачем нетипових збірок.</li>
       <li xml:lang="zh-TW">支援使用者定義的自訂收藏</li>
       <li>Supports any number of user-defined fields, of several different types: text, paragraph, list, checkbox, number, URL, date, images, and combinations</li>
+      <li xml:lang="ar">يتيح أي عدد من الحقول يحدّدها المستخدم، بأنواع مختلفة عديدة: نص، فقرة، قائمة، مربّع اختيار، رقم، رابط، تاريخ، صور، والمجموعات</li>
       <li xml:lang="bs">Podržava bilo koji broj korisnički definisanih polja, nekoliko različitih tipova: tekst, paragraf, lista, kvadtratić za označavanje, broj, URL, datum, slike i kombinacije.</li>
       <li xml:lang="ca">Funciona amb qualsevol nombre de camps definits per l'usuari, de molts tipus diferents: text, paràgraf, llista, casella de selecció, nombre, URL, data, imatges i combinacions</li>
       <li xml:lang="ca-valencia">Funciona amb qualsevol nombre de camps definits per l'usuari, de molts tipus diferents: text, paràgraf, llista, casella de selecció, nombre, URL, data, imatges i combinacions</li>
@@ -278,6 +285,7 @@
       <li xml:lang="uk">Підтримка довільної кількості визначених користувачем полів записів: текст, абзац, список, поле для позначки, номер, адреса, дата, зображення та будь-які інші комбінації.</li>
       <li xml:lang="zh-TW">支援任何使用者定義的欄位，並提供多種型態供選擇：文字、段落、列表、核取方塊、數字、網址、日期、影像及組合</li>
       <li>Handles entries with multiple authors, genres, keywords, etc</li>
+      <li xml:lang="ar">يتعامل مع الإدخالات متعدّدة المؤلّفين، والأنواع، والكلمات المفتاحيّة، وإلخ</li>
       <li xml:lang="bs">Upravlja ulazima sa više autora, žanrova, ključnih riječi, itd.</li>
       <li xml:lang="ca">Gestiona entrades amb múltiples autors, gèneres, paraules clau, etc.</li>
       <li xml:lang="ca-valencia">Gestiona entrades amb múltiples autors, gèneres, paraules clau, etc.</li>
@@ -315,6 +323,7 @@
       <li xml:lang="uk">Обробка записів з декількома авторами, жанрами, ключовими словами тощо.</li>
       <li xml:lang="zh-TW">能夠處理有多個作者、風格、關鍵字等等的條目</li>
       <li>Automatically formats titles and names</li>
+      <li xml:lang="ar">ينسّق العناوين والأسماء آليًّا</li>
       <li xml:lang="bs">Automatski formatira naslove i imena</li>
       <li xml:lang="ca">Dona format als títols i als noms automàticament</li>
       <li xml:lang="ca-valencia">Dona format als títols i als noms automàticament</li>
@@ -352,6 +361,7 @@
       <li xml:lang="uk">Автоматичне форматування заголовків та назв.</li>
       <li xml:lang="zh-TW">自動格式化標題與名稱</li>
       <li>Supports collection searching and view filtering</li>
+      <li xml:lang="ar">يوفر البحث في المجموعة وتصفية العرض</li>
       <li xml:lang="bs">Podržava pretragu kolekcije i filter pregleda</li>
       <li xml:lang="ca">Admet la cerca de col·leccions i filtratge de la vista</li>
       <li xml:lang="ca-valencia">Admet la busca de col·leccions i filtratge de la vista</li>
@@ -389,6 +399,7 @@
       <li xml:lang="uk">Підтримка пошуку у збірці та фільтрування даних для перегляду.</li>
       <li xml:lang="zh-TW">支援收藏搜尋與檢視過濾</li>
       <li>Sorts and groups collection by various properties</li>
+      <li xml:lang="ar">يصنّف ويجمع المجموعة حسب خصائص متنوّعة</li>
       <li xml:lang="bs">Sortira i grupira kolekcije po različitim osobinama</li>
       <li xml:lang="ca">Ordena i agrupa les col·leccions per diverses propietats</li>
       <li xml:lang="ca-valencia">Ordena i agrupa les col·leccions per diverses propietats</li>
@@ -426,6 +437,7 @@
       <li xml:lang="uk">Упорядковування та групування збірки за різноманітними властивостями.</li>
       <li xml:lang="zh-TW">依各種屬性排序或分組收藏</li>
       <li>Allows customizable entry templates through XSLT</li>
+      <li xml:lang="ar">يسمح بقوالب إدخال قابلة للتخصيص عبر XSLT</li>
       <li xml:lang="bs">Dopušta prilagođene ulazne predloške preko XSLT</li>
       <li xml:lang="ca">Admet plantilles d'entrades personalitzades mitjançant XSLT</li>
       <li xml:lang="ca-valencia">Admet plantilles d'entrades personalitzades mitjançant XSLT</li>
@@ -463,6 +475,7 @@
       <li xml:lang="uk">Придатні до налаштовування шаблони записів на основі XSLT.</li>
       <li xml:lang="zh-TW">允許透過 XSLT 來自訂條目樣本</li>
       <li>Imports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formats</li>
+      <li xml:lang="ar">يستورد بيانات MODS، وBibtex، وRIS، وCSV، وPDF الوصفيّة، والعديد من التنسيقات الأخرى</li>
       <li xml:lang="bs">Uvozi iz MODS, Bibtex, RIS, CSV, PDF metapodatke, i mnogih drugih formata</li>
       <li xml:lang="ca">Importa MODS, Bibtex, RIS, CSV, metadades de PDF, i molts altres formats</li>
       <li xml:lang="ca-valencia">Importa MODS, Bibtex, RIS, CSV, metadades de PDF, i molts altres formats</li>
@@ -500,6 +513,7 @@
       <li xml:lang="uk">Імпортування метаданих MODS, Bibtex, RIS, CSV, PDF та даних у багатьох інших форматах.</li>
       <li xml:lang="zh-TW">能匯入 MODS、Bibtex、RIS、CSV、PDF 中繼資料及其他更多格式</li>
       <li>Exports to Bibtex, ONIX, CSV, HTML, and other formats</li>
+      <li xml:lang="ar">يصدّر إلى تنسيقات Bibtex، وONIX، وCSV، وHTML، وغيرها</li>
       <li xml:lang="ca">Exporta a Bibtex, ONIX, CSV, HTML i altres formats</li>
       <li xml:lang="ca-valencia">Exporta cap a Bibtex, ONIX, CSV, HTML i altres formats</li>
       <li xml:lang="da">Eksporterer til Bibtex, ONIX, CSV, HTML og andre formater</li>
@@ -536,6 +550,7 @@
       <li xml:lang="uk">Експортування даних у форматах Bibtex, ONIX, CSV, HTML тощо.</li>
       <li xml:lang="zh-TW">匯出到 Bibtex、ONIX、CSV、HTML 及其他更多格式</li>
       <li>Imports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scripts</li>
+      <li xml:lang="ar">يستورد معلومات مباشرة من Amazon.com، وIMDb، ومخدّمات z39.50، وPubMed، ومخدّمات SRU، وCrossRef.org، ومواقع ويب أخرى متنوّعة، ومن سكربتات خارجيّة</li>
       <li xml:lang="bs">Uvozi informacije direktno sa Amazon.com, IMDb, z39.50 servera, PubMed, SRU servera, CrossRef.org, različitih drugih web stranica, i iz vanjskih skripti</li>
       <li xml:lang="ca">Importa informació directament des d'Amazon.com, IMDb, servidors z39.50, PubMed, servidors SRU, CrossRef.org, altres llocs web, i des de scripts externs</li>
       <li xml:lang="ca-valencia">Importa informació directament des d'Amazon.com, IMDb, servidors z39.50, PubMed, servidors SRU, CrossRef.org, altres llocs web, i des de scripts externs</li>
@@ -572,6 +587,7 @@
       <li xml:lang="tr">Bilgileri doğrudan Amazon.com, IMDb, z39.50 sunucuları, PubMed, SRU sunucuları, CrossRef.org ve çeşitli başka sitelerden ve harici betiklerden içe aktarır</li>
       <li xml:lang="uk">Імпортування даних безпосередньо із серверів Amazon.com, IMDb, z39.50, PubMed, SRU, CrossRef.org, інших сайтів та на основі зовнішніх скриптів.</li>
       <li>Imports CDDB data for cataloging audio CDs</li>
+      <li xml:lang="ar">يستورد بيانات CDDB لكتلجة الأقراص المدمجة الصوتيّة</li>
       <li xml:lang="bs">Uvozi CDDB podatke za popisivanje muzičkih CD-ova</li>
       <li xml:lang="ca">Importa dades CDDB per a la catalogació dels CD d'àudio</li>
       <li xml:lang="ca-valencia">Importa dades CDDB per a la catalogació dels CD d'àudio</li>
@@ -608,6 +624,7 @@
       <li xml:lang="tr">CD’leri kataloglamak için CDDB verisini içe aktarır</li>
       <li xml:lang="uk">Імпортування даних CDDB для каталогізації звукових компакт-дисків.</li>
       <li>Scans and imports audio file collections, such as mp3 or ogg</li>
+      <li xml:lang="ar">يمسح ويستورد مجموعات ملفات صوتيّة، مثل mp3 أو ogg</li>
       <li xml:lang="bs">Pretražuje i uvozi kolekcije muzičkih datoteka kao što su mp3 ili ogg</li>
       <li xml:lang="ca">Explora i importa col·leccions de fitxers d'àudio, com MP3 o OGG</li>
       <li xml:lang="ca-valencia">Explora i importa col·leccions de fitxers d'àudio, com MP3 o OGG</li>
@@ -653,6 +670,7 @@
   <screenshots>
     <screenshot type="default" width="1280" height="704">
       <caption>The main window showing a movie collection</caption>
+      <caption xml:lang="ar">النافذة الرئيسيّة تظهر مجموعة أفلام</caption>
       <caption xml:lang="ca">La finestra principal mostra una col·lecció de pel·lícules</caption>
       <caption xml:lang="ca-valencia">La finestra principal mostra una col·lecció de pel·lícules</caption>
       <caption xml:lang="cs">Hlavní okno zobrazující sbírku filmů</caption>
@@ -692,6 +710,7 @@
     </screenshot>
     <screenshot type="default" width="1002" height="765">
       <caption>The main window showing a simple item in a book collection</caption>
+      <caption xml:lang="ar">النافذة الرئيسيّة تظهر عنصرًا بسيطًا في مجموعة كتب</caption>
       <caption xml:lang="ca">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
       <caption xml:lang="ca-valencia">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
       <caption xml:lang="da">Hovedvinduet som viser et simpelt element i en bogsamling</caption>
@@ -730,6 +749,7 @@
     </screenshot>
     <screenshot width="1396" height="883">
       <caption>The main window showing side-by-side views of a game collection</caption>
+      <caption xml:lang="ar">النافذة الرئيسيّة تظهر عروضًا جنبًا إلى جنب لمجموعة ألعاب</caption>
       <caption xml:lang="ca">La finestra principal mostra les vistes, una al costat de l'altra, d'una col·lecció de jocs</caption>
       <caption xml:lang="ca-valencia">La finestra principal mostra les vistes, una al costat de l'altra, d'una col·lecció de jocs</caption>
       <caption xml:lang="cs">Hlavní okno zobrazující vedle sebe sbírku her</caption>
