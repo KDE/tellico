@@ -1,3 +1,7 @@
+2025-10-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with matching entries with 979 ISBN prefixes (Bug 510329).
+
 2025-09-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug in image location for temporary entry (Bug 508902).
