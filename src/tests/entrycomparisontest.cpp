@@ -58,7 +58,7 @@ void EntryComparisonTest::initTestCase() {
   m_entry = Tellico::Data::EntryPtr(new Tellico::Data::Entry(m_coll));
   m_entry->setField(QStringLiteral("title"), QStringLiteral("title1"));
   m_entry->setField(QStringLiteral("author"), QStringLiteral("John Doe"));
-  m_entry->setField(QStringLiteral("isbn"), QStringLiteral("1234367890"));
+  m_entry->setField(QStringLiteral("isbn"), QStringLiteral("9791234567896"));
   m_entry->setField(QStringLiteral("lccn"), QStringLiteral("89456"));
   Tellico::Data::FieldPtr f(new Tellico::Data::Field(QStringLiteral("arxiv"), QStringLiteral("Arxiv ID")));
   m_coll->addField(f);
@@ -92,8 +92,8 @@ void EntryComparisonTest::testMatchScore_data() {
 //  QTest::newRow("title match articles") << QStringLiteral("title") << QStringLiteral("THE TITLE1") << Tellico::EntryComparison::MATCH_VALUE_WEAK;
   QTest::newRow("title match non alphanum") << QStringLiteral("title") << QStringLiteral("title1.") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
 //  QTest::newRow("title match paren") << QStringLiteral("title") << QStringLiteral("title1 (old)") << Tellico::EntryComparison::MATCH_VALUE_WEAK;
-  QTest::newRow("isbn match") << QStringLiteral("isbn") << QStringLiteral("1234367890") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("isbn match formatted") << QStringLiteral("isbn") << QStringLiteral("1-234-36789-0") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
+  QTest::newRow("isbn match") << QStringLiteral("isbn") << QStringLiteral("9791234567896") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
+  QTest::newRow("isbn match formatted") << QStringLiteral("isbn") << QStringLiteral("979-1-23456-789-6") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
   QTest::newRow("lccn match") << QStringLiteral("lccn") << QStringLiteral("89456") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
   QTest::newRow("lccn match formatted") << QStringLiteral("lccn") << QStringLiteral("89-456") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
   QTest::newRow("arxiv") << QStringLiteral("arxiv") << QStringLiteral("hep-lat/0110180") << Tellico::EntryComparison::MATCH_VALUE_STRONG;

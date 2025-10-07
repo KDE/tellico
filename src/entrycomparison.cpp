@@ -63,7 +63,7 @@ int EntryComparison::score(const Tellico::Data::EntryPtr& e1, const Tellico::Dat
   }
   // special case for isbn
   if(f->name() == QStringLiteral("isbn")) {
-    return ISBNValidator::isbn10(s1) == ISBNValidator::isbn10(s2) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
+    return ISBNValidator::isbn13(s1) == ISBNValidator::isbn13(s2) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
   }
   if(f->name() == QStringLiteral("lccn")) {
     return LCCNValidator::formalize(s1) == LCCNValidator::formalize(s2) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;

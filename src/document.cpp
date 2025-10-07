@@ -352,7 +352,7 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_
   coll1_->blockSignals(true);
   Data::FieldList fields = coll2_->fields();
   foreach(FieldPtr field, fields) {
-    bool collChange = coll1_->mergeField(field);
+    const bool collChange = coll1_->mergeField(field);
     if(collChange && structuralChange_) *structuralChange_ = true;
   }
 
@@ -380,7 +380,7 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_
       for(int i = 0; i < currTotal; ++i) {
         // since we're sorted by title, track the index of the previous match and start comparison there
         currEntry = currEntries.at((i+lastMatchId) % currTotal);
-        const int match = coll1_->sameEntry(currEntry, newEntry);
+        const auto match = coll1_->sameEntry(currEntry, newEntry);
         if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
           matchEntry = currEntry;
           lastMatchId = (i+lastMatchId) % currTotal;
