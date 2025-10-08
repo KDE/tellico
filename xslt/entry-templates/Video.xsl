@@ -228,7 +228,7 @@
   <!-- do format logo -->
   <xsl:choose>
    <xsl:when test="$datadir and tc:medium = 'DVD'">
-    <img width="74" height="30" id="logo" alt="(DVD)">
+    <img width="74" height="32" id="logo" alt="(DVD)">
      <xsl:attribute name="src">
       <xsl:value-of select="concat($datadir,'dvd-logo.png')"/>
      </xsl:attribute>
