@@ -693,13 +693,13 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
 }
 
 void ImageFactory::removeImage(const QString& id_, bool deleteImage_) {
-  myLog() << "Removing image from cache:" << id_;
+//  myLog() << "Removing image from cache:" << id_;
   // be careful using this
   delete factory->d->imageDict.take(id_);
   factory->d->imageCache.remove(id_);
 
   if(deleteImage_) {
-    myLog() << "Deleting image:" << id_;
+//    myLog() << "Deleting image:" << id_;
     // remove from everywhere
     factory->d->dataImageDir.removeImage(id_);
     factory->d->localImageDir.removeImage(id_);

@@ -207,12 +207,10 @@ void EntryUpdater::handleResults() {
         matches.append(res);
       }
     } else if(match >= EntryComparison::ENTRY_GOOD_MATCH) {
-      myLog() << "Found good match:" << matchEntry->title() << "- score=" << match;
       bestScore = qMax(bestScore, match);
       // keep all the results that don't exceed the perfect match
       matches.append(res);
     } else if(match > bestScore) {
-      myLog() << "Found better match:" << matchEntry->title() << "- score=" << match;
       bestScore = match;
       matches.clear();
       matches.append(res);
@@ -240,7 +238,6 @@ void EntryUpdater::handleResults() {
   }
   // askUser() could come back with nil
   if(match.result) {
-    myLog() << "Best match is good enough, updating the entry";
     mergeCurrent(match.result->fetchEntry(), match.result->fetcher()->updateOverwrite());
   }
 }
