@@ -858,8 +858,10 @@ void MainWindow::initView() {
   MARK;
 
   m_entryView = new EntryView(this);
+#ifndef USE_KHTML
   m_entryView->setAcceptDrops(true);
   m_entryView->installEventFilter(new DropHandler(this));
+#endif
 
   connect(m_entryView, &EntryView::signalTellicoAction,
           this, &MainWindow::slotURLAction);
@@ -923,8 +925,10 @@ void MainWindow::initView() {
                                                              this);
   m_iconView->setSelectionModel(proxySelect);
 
+#ifndef USE_KHTML
   // Do custom themes override widget palettes? Ensure the EntryView remains consistent with the others
   m_entryView->setPalette(m_iconView->palette());
+#endif
 
   // setting up GUI now rather than in initActions
   // initial parameter is default window size
