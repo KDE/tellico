@@ -313,7 +313,6 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
 Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FetcherVec vec;
 // books
-  FETCHER_ADD(ISBNdb);
   FETCHER_ADD(OpenLibrary);
   FETCHER_ADD(GoogleBook);
   if(functionRegistry.contains(SRU)) {
