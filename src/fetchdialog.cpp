@@ -74,6 +74,7 @@
 #include <QFileDialog>
 #include <QStatusBar>
 #include <QScreen>
+#include <QWindow>
 
 namespace {
   static const int FETCH_MIN_WIDTH = 600;
@@ -327,8 +328,10 @@ FetchDialog::FetchDialog(QWidget* parent_)
   setStatus(i18n("Ready."));
 
   KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
-  QList<int> splitList = config.readEntry("Splitter Sizes", QList<int>());
-  if(!splitList.empty()) {
+  const auto splitList = config.readEntry("Splitter Sizes", QList<int>());
+  if(splitList.empty()) {
+    split->setSizes({3000, 5000}); // default to 3:5 ratio
+  } else {
     split->setSizes(splitList);
   }
 
@@ -651,6 +654,10 @@ void FetchDialog::stopProgress() {
 }
 
 void FetchDialog::slotInit() {
+  const QSize availableSize = windowHandle()->screen()->availableSize();
+  windowHandle()->resize(qMin(800, int(availableSize.width() * 0.5)),
+                         qMin(800, int(availableSize.height() * 0.7))); // default size
+
   // do this in the singleShot slot so it works
   // see note in entryeditdialog.cpp (Feb 2017)
   KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
