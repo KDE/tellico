@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-06 02:44+0000\n"
+"POT-Creation-Date: 2025-10-12 02:38+0000\n"
 "PO-Revision-Date: 2022-03-21 17:12+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -183,7 +183,7 @@ msgstr "Имя"
 msgid "Collection Size"
 msgstr "Размер коллекции"
 
-#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1709
+#: src/charts/collectionsizereport.cpp:93 src/mainwindow.cpp:1713
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Всего записей: %1"
@@ -2797,8 +2797,8 @@ msgstr "Файлы XSL"
 msgid "Template Packages"
 msgstr "Пакеты шаблонов"
 
-#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1338
-#: src/mainwindow.cpp:1514 src/reportdialog.cpp:499 src/reportdialog.cpp:514
+#: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1342
+#: src/mainwindow.cpp:1518 src/reportdialog.cpp:499 src/reportdialog.cpp:514
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -2989,7 +2989,7 @@ msgstr "Показать все столбцы"
 msgid "Hide All Columns"
 msgstr "Скрыть все столбцы"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1453
+#: src/document.cpp:216 src/mainwindow.cpp:1457
 #, kde-format
 msgid "Saving file..."
 msgstr "Сохранение файла..."
@@ -3051,12 +3051,12 @@ msgid "Save Entry"
 msgstr "Сохранить запись"
 
 #: src/entryeditdialog.cpp:675 src/entryeditdialog.cpp:693
-#: src/mainwindow.cpp:1223 src/mainwindow.cpp:1241
+#: src/mainwindow.cpp:1227 src/mainwindow.cpp:1245
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Несохранённые изменения"
 
-#: src/entryiconview.cpp:61 src/mainwindow.cpp:898
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:900
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3126,7 +3126,7 @@ msgstr "Обновление <b>%1</b>..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Не удалось найти стандартную таблицу стилей."
 
-#: src/entryview.cpp:362 src/mainwindow.cpp:1862
+#: src/entryview.cpp:362 src/mainwindow.cpp:1866
 #, kde-format
 msgid "Please check your installation."
 msgstr "Проверьте правильность установки программы."
@@ -4859,8 +4859,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Группа"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1150 src/mainwindow.cpp:1797
-#: src/mainwindow.cpp:1831 src/translators/htmlexporter.cpp:338
+#: src/groupview.cpp:425 src/mainwindow.cpp:1154 src/mainwindow.cpp:1801
+#: src/mainwindow.cpp:1835 src/translators/htmlexporter.cpp:338
 #, kde-format
 msgid "People"
 msgstr "Люди"
@@ -5166,14 +5166,14 @@ msgstr ""
 msgid "&Import"
 msgstr "&Импорт"
 
-#: src/importdialog.cpp:377 src/mainwindow.cpp:1334 src/mainwindow.cpp:1512
+#: src/importdialog.cpp:377 src/mainwindow.cpp:1338 src/mainwindow.cpp:1516
 #: src/translators/tellicozipexporter.cpp:54
 #, kde-format
 msgid "Tellico Files"
 msgstr "Файлы Tellico"
 
 #: src/importdialog.cpp:378 src/importdialog.cpp:396 src/importdialog.cpp:425
-#: src/mainwindow.cpp:1336 src/translators/tellicoxmlexporter.cpp:71
+#: src/mainwindow.cpp:1340 src/translators/tellicoxmlexporter.cpp:71
 #, kde-format
 msgid "XML Files"
 msgstr "Файлы XML"
@@ -6253,7 +6253,7 @@ msgstr "Изменить способ группировки в коллекци
 msgid "Filter here..."
 msgstr "Фильтр..."
 
-#: src/mainwindow.cpp:872 src/mainwindow.cpp:875
+#: src/mainwindow.cpp:874 src/mainwindow.cpp:877
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
@@ -6262,12 +6262,12 @@ msgstr ""
 "<qt>Область <i>информации о записях</i> показывает содержимое записи в "
 "форматированном виде.</qt>"
 
-#: src/mainwindow.cpp:881
+#: src/mainwindow.cpp:883
 #, kde-format
 msgid "Collection View"
 msgstr "Коллекция"
 
-#: src/mainwindow.cpp:888
+#: src/mainwindow.cpp:890
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
@@ -6276,17 +6276,17 @@ msgstr ""
 "<qt>В <i>таблице записей</i> для каждой записи показываются значения "
 "нескольких полей.</qt>"
 
-#: src/mainwindow.cpp:905
+#: src/mainwindow.cpp:907
 #, kde-format
 msgid "Group View"
 msgstr "Группы"
 
-#: src/mainwindow.cpp:914
+#: src/mainwindow.cpp:916
 #, kde-format
 msgid "Groups"
 msgstr "Группы"
 
-#: src/mainwindow.cpp:915
+#: src/mainwindow.cpp:917
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
@@ -6295,18 +6295,18 @@ msgstr ""
 "<qt>В области <i>Группы</i> записи объединяются в группы и сортируются по "
 "выбранному полю.</qt>"
 
-#: src/mainwindow.cpp:996
+#: src/mainwindow.cpp:1000
 #, fuzzy, kde-format
 #| msgid "Tellico - collection management software, free and simple"
 msgid "Collection management software, free and simple"
 msgstr "Tellico — диспетчер коллекций, простая свободная программа"
 
-#: src/mainwindow.cpp:998
+#: src/mainwindow.cpp:1002
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Добро пожаловать в Tellico — диспетчер коллекций, разработанный KDE"
 
-#: src/mainwindow.cpp:1000
+#: src/mainwindow.cpp:1004
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6321,7 +6321,7 @@ msgstr ""
 "edit_search_internet\">загружая данные</a> из различных интернет-источников."
 "</h3>"
 
-#: src/mainwindow.cpp:1009
+#: src/mainwindow.cpp:1013
 #, kde-format
 msgid ""
 "More information can be found in the <a href=\"help:/tellico"
@@ -6329,7 +6329,7 @@ msgid ""
 "this welcome screen</a>."
 msgstr ""
 
-#: src/mainwindow.cpp:1220
+#: src/mainwindow.cpp:1224
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6338,23 +6338,23 @@ msgstr ""
 "Текущий файл был изменён.\n"
 "Сохранить его?"
 
-#: src/mainwindow.cpp:1276 src/mainwindow.cpp:1310
+#: src/mainwindow.cpp:1280 src/mainwindow.cpp:1314
 #, fuzzy, kde-format
 #| msgid "Create a new collection"
 msgid "Creating new collection..."
 msgstr "Создать новую коллекцию"
 
-#: src/mainwindow.cpp:1331 src/mainwindow.cpp:1354 src/mainwindow.cpp:1372
+#: src/mainwindow.cpp:1335 src/mainwindow.cpp:1358 src/mainwindow.cpp:1376
 #, kde-format
 msgid "Opening file..."
 msgstr "Открытие файла..."
 
-#: src/mainwindow.cpp:1342
+#: src/mainwindow.cpp:1346
 #, kde-format
 msgid "Open File"
 msgstr "Открыть файл"
 
-#: src/mainwindow.cpp:1464
+#: src/mainwindow.cpp:1468
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6368,32 +6368,32 @@ msgstr ""
 "быстродействия?</p><p>Это решение всегда возможно изменить в диалоге "
 "конфигурации.</p></qt>"
 
-#: src/mainwindow.cpp:1469
+#: src/mainwindow.cpp:1473
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Сохранить изображения отдельно"
 
-#: src/mainwindow.cpp:1470
+#: src/mainwindow.cpp:1474
 #, kde-format
 msgid "Save Images in File"
 msgstr "Сохранить изображения в основном файле"
 
-#: src/mainwindow.cpp:1510
+#: src/mainwindow.cpp:1514
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Сохранение файла с другим именем..."
 
-#: src/mainwindow.cpp:1519
+#: src/mainwindow.cpp:1523
 #, kde-format
 msgid "Save As"
 msgstr "Сохранение с другим именем"
 
-#: src/mainwindow.cpp:1585
+#: src/mainwindow.cpp:1589
 #, kde-format
 msgid "Printing..."
 msgstr "Печать..."
 
-#: src/mainwindow.cpp:1589
+#: src/mainwindow.cpp:1593
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6402,27 +6402,27 @@ msgstr ""
 "В настоящий момент к коллекции применён фильтр, поэтому будут напечатаны "
 "только видимые поля. Продолжить?"
 
-#: src/mainwindow.cpp:1614
+#: src/mainwindow.cpp:1618
 #, kde-format
 msgid "Exiting..."
 msgstr "Выход..."
 
-#: src/mainwindow.cpp:1716
+#: src/mainwindow.cpp:1720
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 отфильтровано; %2 выделено)"
 
-#: src/mainwindow.cpp:1719
+#: src/mainwindow.cpp:1723
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 отфильтровано)"
 
-#: src/mainwindow.cpp:1722
+#: src/mainwindow.cpp:1726
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 выделено)"
 
-#: src/mainwindow.cpp:1861 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1865 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6430,57 +6430,57 @@ msgstr "(%1 выделено)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Произошла ошибка при обработке XSLT."
 
-#: src/mainwindow.cpp:1979
+#: src/mainwindow.cpp:1983
 #, kde-format
 msgid "Importing data..."
 msgstr "Импорт данных..."
 
-#: src/mainwindow.cpp:1990
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "Import File"
 msgstr "Импорт файла"
 
-#: src/mainwindow.cpp:2003
+#: src/mainwindow.cpp:2007
 #, kde-format
 msgid "Import Directory"
 msgstr "Импорт каталога"
 
-#: src/mainwindow.cpp:2027
+#: src/mainwindow.cpp:2031
 #, kde-format
 msgid "Exporting data..."
 msgstr "Экспорт данных..."
 
-#: src/mainwindow.cpp:2050
+#: src/mainwindow.cpp:2054
 #, kde-format
 msgid "Export As"
 msgstr "Экспорт"
 
-#: src/mainwindow.cpp:2078
+#: src/mainwindow.cpp:2082
 #, kde-format
 msgid "String Macros"
 msgstr "Строковый макрос"
 
-#: src/mainwindow.cpp:2079
+#: src/mainwindow.cpp:2083
 #, kde-format
 msgid "Macro"
 msgstr "Макрос"
 
-#: src/mainwindow.cpp:2079
+#: src/mainwindow.cpp:2083
 #, kde-format
 msgid "String"
 msgstr "Строка"
 
-#: src/mainwindow.cpp:2165
+#: src/mainwindow.cpp:2169
 #, kde-format
 msgid "Creating citations..."
 msgstr "Создание цитат..."
 
-#: src/mainwindow.cpp:2275
+#: src/mainwindow.cpp:2279
 #, kde-format
 msgid "Filters"
 msgstr "Фильтры"
 
-#: src/mainwindow.cpp:2276
+#: src/mainwindow.cpp:2280
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6489,12 +6489,12 @@ msgstr ""
 "<qt>В <i>фильтрованном представлении</i> показываются записи, "
 "удовлетворяющие условиям заданного фильтра.</qt>"
 
-#: src/mainwindow.cpp:2299
+#: src/mainwindow.cpp:2303
 #, kde-format
 msgid "Loans"
 msgstr "Долговые записи"
 
-#: src/mainwindow.cpp:2300
+#: src/mainwindow.cpp:2304
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6503,7 +6503,7 @@ msgstr ""
 "<qt>В панели <i>Долговые записи</i> выводится список людей, которые взяли в "
 "долг предметы из коллекции.</qt>"
 
-#: src/mainwindow.cpp:2391
+#: src/mainwindow.cpp:2395
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6512,12 +6512,12 @@ msgstr ""
 "Некоторые изображения не сохранены в выбранном расположении. Сохраните "
 "текущий файл, и все изображения будут перенесены в новое расположение."
 
-#: src/mainwindow.cpp:2438
+#: src/mainwindow.cpp:2442
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Обновить данные записи из %1"
 
-#: src/mainwindow.cpp:2457
+#: src/mainwindow.cpp:2461
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6526,7 +6526,7 @@ msgstr ""
 "Tellico позволяет импортировать только один файл этого типа за раз. Будет "
 "импортирован только %1."
 
-#: src/mainwindow.cpp:2645
+#: src/mainwindow.cpp:2649
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"
