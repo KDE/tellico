@@ -610,6 +610,7 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   l->addWidget(al, row, 0, 1, 2);
   // richtext gets weird with size
   al->setMinimumWidth(al->sizeHint().width());
+  al->setMinimumHeight(al->sizeHint().height());
 
   QLabel* label = new QLabel(i18n("User token:"), optionsWidget());
   l->addWidget(label, ++row, 0);
