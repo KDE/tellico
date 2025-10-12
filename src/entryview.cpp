@@ -126,9 +126,6 @@ EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_)
     m_printer.setResolution(300);
   }
 
-  connect(this, &QWebEngineView::loadFinished, this, [](bool b) {
-    if(!b) myDebug() << "EntryView - failed to load view";
-  });
   connect(page, &EntryViewPage::signalTellicoAction,
           this, &EntryView::signalTellicoAction);
 
