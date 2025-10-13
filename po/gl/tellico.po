@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-06 00:42+0000\n"
+"POT-Creation-Date: 2025-10-13 00:42+0000\n"
 "PO-Revision-Date: 2025-03-20 08:00+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -971,7 +971,7 @@ msgstr "Idade mínima"
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:383 src/fetch/colnectfetcher.cpp:863
 #: src/fetch/numistafetcher.cpp:351 src/fetch/numistafetcher.cpp:399
-#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:244
+#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:245
 #, kde-format
 msgid "Description"
 msgstr "Descrición"
@@ -1682,7 +1682,7 @@ msgstr "Pistas"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:323 src/fetchdialog.cpp:243 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:323 src/fetchdialog.cpp:244 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:437
 #, kde-format
@@ -2820,9 +2820,9 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "As imaxes moveranse de <em>%1</em> a <em>%2</em>."
 
-#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:318
-#: src/fetchdialog.cpp:417 src/fetchdialog.cpp:550 src/fetchdialog.cpp:611
-#: src/fetchdialog.cpp:625 src/gui/statusbar.cpp:94
+#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:319
+#: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
+#: src/fetchdialog.cpp:628 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Listo."
@@ -3266,21 +3266,21 @@ msgstr ""
 "termos e condicións, <a href='%1'>cree conta</a> e insira a súa información "
 "embaixo."
 
-#: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1107
-#: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:241
-#: src/fetch/entrezfetcher.cpp:538 src/fetch/giantbombfetcher.cpp:227
-#: src/fetch/googlebookfetcher.cpp:395 src/fetch/isbndbfetcher.cpp:402
-#: src/fetch/mobygamesfetcher.cpp:653 src/fetch/numistafetcher.cpp:415
-#: src/fetch/omdbfetcher.cpp:421 src/fetch/thegamesdbfetcher.cpp:638
-#: src/fetch/themoviedbfetcher.cpp:577
+#: src/fetch/adsfetcher.cpp:339 src/fetch/amazonfetcher.cpp:1108
+#: src/fetch/bibliosharefetcher.cpp:186 src/fetch/comicvinefetcher.cpp:242
+#: src/fetch/entrezfetcher.cpp:538 src/fetch/giantbombfetcher.cpp:228
+#: src/fetch/googlebookfetcher.cpp:396 src/fetch/isbndbfetcher.cpp:403
+#: src/fetch/mobygamesfetcher.cpp:654 src/fetch/numistafetcher.cpp:415
+#: src/fetch/omdbfetcher.cpp:422 src/fetch/thegamesdbfetcher.cpp:639
+#: src/fetch/themoviedbfetcher.cpp:578
 #, kde-format
 msgid "Access key: "
 msgstr "Chave de acceso: "
 
-#: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
-#: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:544
-#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:401
-#: src/fetch/themoviedbfetcher.cpp:583 src/fetch/thetvdbfetcher.cpp:594
+#: src/fetch/adsfetcher.cpp:345 src/fetch/bibliosharefetcher.cpp:192
+#: src/fetch/comicvinefetcher.cpp:248 src/fetch/entrezfetcher.cpp:544
+#: src/fetch/giantbombfetcher.cpp:234 src/fetch/googlebookfetcher.cpp:402
+#: src/fetch/themoviedbfetcher.cpp:584 src/fetch/thetvdbfetcher.cpp:595
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3455,7 +3455,7 @@ msgstr "Emiratos Árabes Unidos"
 msgid "This data is licensed under <a href=%1>specific terms</a>."
 msgstr "Estes datos están baixo licenza con <a href=%1>termos específicos</a>."
 
-#: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1112
+#: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1113
 #, kde-format
 msgid ""
 "Access to data from Amazon.com requires an AWS Access Key ID and a Secret "
@@ -3505,17 +3505,17 @@ msgstr "Ligazón de Amazon"
 msgid "Amazon.com Web Services"
 msgstr "Servizos web de Amazon.com"
 
-#: src/fetch/amazonfetcher.cpp:1117
+#: src/fetch/amazonfetcher.cpp:1118
 #, kde-format
 msgid "Secret key: "
 msgstr "Chave secreta: "
 
-#: src/fetch/amazonfetcher.cpp:1127
+#: src/fetch/amazonfetcher.cpp:1128
 #, kde-format
 msgid "Country: "
 msgstr "País: "
 
-#: src/fetch/amazonfetcher.cpp:1142
+#: src/fetch/amazonfetcher.cpp:1143
 #, kde-format
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
@@ -3524,58 +3524,58 @@ msgstr ""
 "Amazon.com fornece datos de varios sitios distintos. Escolla o que queira "
 "usar para esta fonte de datos."
 
-#: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:998 src/fetch/discogsfetcher.cpp:622
+#: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:215
+#: src/fetch/colnectfetcher.cpp:998 src/fetch/discogsfetcher.cpp:623
 #: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:568
-#: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
+#: src/fetch/mobygamesfetcher.cpp:662 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:645 src/fetch/rpggeekfetcher.cpp:224
-#: src/fetch/thegamesdbfetcher.cpp:646 src/fetch/videogamegeekfetcher.cpp:237
+#: src/fetch/thegamesdbfetcher.cpp:647 src/fetch/videogamegeekfetcher.cpp:237
 #, kde-format
 msgid "&Image size: "
 msgstr "Tamaño da &imaxe: "
 
-#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:219
-#: src/fetch/colnectfetcher.cpp:1002 src/fetch/discogsfetcher.cpp:625
+#: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:219
+#: src/fetch/colnectfetcher.cpp:1002 src/fetch/discogsfetcher.cpp:626
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:572
-#: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
+#: src/fetch/mobygamesfetcher.cpp:665 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:648 src/fetch/rpggeekfetcher.cpp:228
-#: src/fetch/thegamesdbfetcher.cpp:649 src/fetch/videogamegeekfetcher.cpp:241
+#: src/fetch/thegamesdbfetcher.cpp:650 src/fetch/videogamegeekfetcher.cpp:241
 #, kde-format
 msgid "Small Image"
 msgstr "Imaxe pequena"
 
-#: src/fetch/amazonfetcher.cpp:1152 src/fetch/imdbfetcher.cpp:544
+#: src/fetch/amazonfetcher.cpp:1153 src/fetch/imdbfetcher.cpp:544
 #: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:649
-#: src/fetch/thegamesdbfetcher.cpp:650
+#: src/fetch/thegamesdbfetcher.cpp:651
 #, kde-format
 msgid "Medium Image"
 msgstr "Imaxe mediana"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
-#: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:220
-#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:627
+#: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:220
+#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:573
-#: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
+#: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:650 src/fetch/rpggeekfetcher.cpp:229
-#: src/fetch/thegamesdbfetcher.cpp:651 src/fetch/videogamegeekfetcher.cpp:242
+#: src/fetch/thegamesdbfetcher.cpp:652 src/fetch/videogamegeekfetcher.cpp:242
 #, kde-format
 msgid "Large Image"
 msgstr "Imaxe grande"
 
-#: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:1001 src/fetch/discogsfetcher.cpp:628
+#: src/fetch/amazonfetcher.cpp:1155 src/fetch/boardgamegeekfetcher.cpp:218
+#: src/fetch/colnectfetcher.cpp:1001 src/fetch/discogsfetcher.cpp:629
 #: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:571
-#: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
+#: src/fetch/mobygamesfetcher.cpp:668 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:651 src/fetch/rpggeekfetcher.cpp:227
-#: src/fetch/thegamesdbfetcher.cpp:652 src/fetch/videogamegeekfetcher.cpp:240
+#: src/fetch/thegamesdbfetcher.cpp:653 src/fetch/videogamegeekfetcher.cpp:240
 #, kde-format
 msgid "No Image"
 msgstr "Sen imaxe"
 
-#: src/fetch/amazonfetcher.cpp:1157 src/fetch/discogsfetcher.cpp:632
-#: src/fetch/imdbfetcher.cpp:550 src/fetch/mobygamesfetcher.cpp:671
+#: src/fetch/amazonfetcher.cpp:1158 src/fetch/discogsfetcher.cpp:633
+#: src/fetch/imdbfetcher.cpp:550 src/fetch/mobygamesfetcher.cpp:672
 #: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:655
-#: src/fetch/thegamesdbfetcher.cpp:656
+#: src/fetch/thegamesdbfetcher.cpp:657
 #, kde-format
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
@@ -3584,12 +3584,12 @@ msgstr ""
 "Tamén se pode descargar a portada, aínda que ter na colección imaxes grandes "
 "de máis pode degradar o rendemento."
 
-#: src/fetch/amazonfetcher.cpp:1163
+#: src/fetch/amazonfetcher.cpp:1164
 #, kde-format
 msgid "&Associate's ID: "
 msgstr "ID de &asociado: "
 
-#: src/fetch/amazonfetcher.cpp:1169
+#: src/fetch/amazonfetcher.cpp:1170
 #, kde-format
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
@@ -3673,7 +3673,7 @@ msgid "PEGI Rating"
 msgstr "Clasificación de PEGI"
 
 #: src/fetch/colnectfetcher.cpp:970 src/fetch/filmaffinityfetcher.cpp:490
-#: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:602
+#: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:603
 #, kde-format
 msgid "Language: "
 msgstr "Idioma: "
@@ -3704,28 +3704,28 @@ msgstr "Campos dispoñíbeis"
 msgid "%1 requires a username and password."
 msgstr "%1 require dun nome de usuaria e contrasinal."
 
-#: src/fetch/crossreffetcher.cpp:309
+#: src/fetch/crossreffetcher.cpp:310
 #, kde-format
 msgid "&Username: "
 msgstr "Nome de &usuaria: "
 
-#: src/fetch/crossreffetcher.cpp:314
+#: src/fetch/crossreffetcher.cpp:315
 #, kde-format
 msgid "A username and password is required to access the CrossRef service."
 msgstr ""
 "Requírese dun nome de usuaria e contrasinal para acceder ao servizo CrossRef."
 
-#: src/fetch/crossreffetcher.cpp:319
+#: src/fetch/crossreffetcher.cpp:320
 #, kde-format
 msgid "&Password: "
 msgstr "&Contrasinal: "
 
-#: src/fetch/crossreffetcher.cpp:329
+#: src/fetch/crossreffetcher.cpp:330
 #, kde-format
 msgid "For some accounts, only an email address is required."
 msgstr "Para algunhas contas só se precisa un enderezo de correo electrónico."
 
-#: src/fetch/crossreffetcher.cpp:332
+#: src/fetch/crossreffetcher.cpp:333
 #, kde-format
 msgid "Email: "
 msgstr "Correo electrónico: "
@@ -3779,7 +3779,7 @@ msgstr "Pistas (Disco %1)"
 msgid "Discogs Audio Search"
 msgstr "Busca de son en Discogs"
 
-#: src/fetch/discogsfetcher.cpp:614 src/translators/discogsimporter.cpp:204
+#: src/fetch/discogsfetcher.cpp:615 src/translators/discogsimporter.cpp:204
 #, kde-format
 msgid "User token:"
 msgstr "Código da usuaria:"
@@ -3951,14 +3951,14 @@ msgid "FilmAffinity Link"
 msgstr "Ligazón de FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:476 src/fetch/imdbfetcher.cpp:526
-#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:588
+#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:589
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Máximo elenco: "
 
 # skip-rule: trasno-list
 #: src/fetch/filmaffinityfetcher.cpp:485 src/fetch/imdbfetcher.cpp:535
-#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:597
+#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:598
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -4127,12 +4127,12 @@ msgstr "Decimal Dewey"
 msgid "ISBNdb.com"
 msgstr "ISBNdb.com"
 
-#: src/fetch/isbndbfetcher.cpp:410
+#: src/fetch/isbndbfetcher.cpp:411
 #, kde-format
 msgid "Enable batch ISBN searching (requires Premium or Pro plan)"
 msgstr "Activar a busca en ISBN por lotes (require os plans Premium ou Pro)"
 
-#: src/fetch/isbndbfetcher.cpp:414
+#: src/fetch/isbndbfetcher.cpp:415
 #, kde-format
 msgid ""
 "Batch searching for ISBN values is faster but only available for Premium or "
@@ -4212,13 +4212,13 @@ msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
-#: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:611
+#: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:612
 #, kde-format
 msgctxt "Language"
 msgid "English"
 msgstr "Inglés"
 
-#: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:614
+#: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:615
 #, kde-format
 msgctxt "Language"
 msgid "French"
@@ -4337,31 +4337,31 @@ msgstr "Ligazón de TMDb"
 msgid "Network"
 msgstr "Rede"
 
-#: src/fetch/themoviedbfetcher.cpp:608
+#: src/fetch/themoviedbfetcher.cpp:609
 #, kde-format
 msgctxt "Language"
 msgid "Chinese"
 msgstr "Chinesa"
 
-#: src/fetch/themoviedbfetcher.cpp:617
+#: src/fetch/themoviedbfetcher.cpp:618
 #, kde-format
 msgctxt "Language"
 msgid "German"
 msgstr "Alemá"
 
-#: src/fetch/themoviedbfetcher.cpp:620
+#: src/fetch/themoviedbfetcher.cpp:621
 #, kde-format
 msgctxt "Language"
 msgid "Spanish"
 msgstr "Castelá"
 
-#: src/fetch/themoviedbfetcher.cpp:623
+#: src/fetch/themoviedbfetcher.cpp:624
 #, kde-format
 msgctxt "Language"
 msgid "Russian"
 msgstr "Rusa"
 
-#: src/fetch/themoviedbfetcher.cpp:666
+#: src/fetch/themoviedbfetcher.cpp:667
 #, kde-format
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB (%1)"
@@ -4371,7 +4371,7 @@ msgstr "TheMovieDB (%1)"
 msgid "TheTVDB Link"
 msgstr "Ligazón de TheTVDB"
 
-#: src/fetch/thetvdbfetcher.cpp:588
+#: src/fetch/thetvdbfetcher.cpp:589
 #, kde-format
 msgid "Subscriber PIN: "
 msgstr "PIN de subscrición: "
@@ -4521,63 +4521,63 @@ msgstr ""
 "dos servidores non precisan dun. O contrasinal hase gardar como texto "
 "simples no ficheiro de configuración de Tellico."
 
-#: src/fetchdialog.cpp:138 src/mainwindow.cpp:568
+#: src/fetchdialog.cpp:139 src/mainwindow.cpp:568
 #, kde-format
 msgid "Internet Search"
 msgstr "Busca por Internet"
 
-#: src/fetchdialog.cpp:149
+#: src/fetchdialog.cpp:150
 #, kde-format
 msgid "Search Query"
 msgstr "Busca"
 
-#: src/fetchdialog.cpp:158
+#: src/fetchdialog.cpp:159
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "&Buscar:"
 
-#: src/fetchdialog.cpp:164
+#: src/fetchdialog.cpp:165
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr "Insira un valor a buscar. Unha busca de ISBN debe incluír todo o ISBN."
 
-#: src/fetchdialog.cpp:174
+#: src/fetchdialog.cpp:175
 #, kde-format
 msgid "Choose the type of search"
 msgstr "Escolla o tipo de busca"
 
-#: src/fetchdialog.cpp:178 src/fetchdialog.cpp:393 src/fetchdialog.cpp:572
+#: src/fetchdialog.cpp:179 src/fetchdialog.cpp:396 src/fetchdialog.cpp:575
 #, kde-format
 msgid "&Stop"
 msgstr "&Deter"
 
-#: src/fetchdialog.cpp:181
+#: src/fetchdialog.cpp:182
 #, kde-format
 msgid "Click to start or stop the search"
 msgstr "Prema aquí para comezar ou deter a busca"
 
-#: src/fetchdialog.cpp:188 src/fetchdialog.cpp:452
+#: src/fetchdialog.cpp:189 src/fetchdialog.cpp:455
 #, kde-format
 msgid "&Search"
 msgstr "&Buscar"
 
-#: src/fetchdialog.cpp:200
+#: src/fetchdialog.cpp:201
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
 msgstr "Busca de &varios ISBN/UPC"
 
-#: src/fetchdialog.cpp:202
+#: src/fetchdialog.cpp:203
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr "Marque esta caixa para buscar varios ISBN ou UPC."
 
-#: src/fetchdialog.cpp:206
+#: src/fetchdialog.cpp:207
 #, kde-format
 msgid "Edit ISBN/UPC values..."
 msgstr "Editar os valores ISBN/UPC…"
 
-#: src/fetchdialog.cpp:210
+#: src/fetchdialog.cpp:211
 #, kde-format
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
@@ -4586,22 +4586,22 @@ msgstr ""
 "Prema para abrir unha caixa de texto onde inserir ou editar varios valores "
 "de ISBN ou UPC."
 
-#: src/fetchdialog.cpp:216
+#: src/fetchdialog.cpp:217
 #, kde-format
 msgid "Search s&ource:"
 msgstr "&Fonte da busca:"
 
-#: src/fetchdialog.cpp:226
+#: src/fetchdialog.cpp:227
 #, kde-format
 msgid "Select the database to search"
 msgstr "Escolla a base de datos onde buscar"
 
-#: src/fetchdialog.cpp:245
+#: src/fetchdialog.cpp:246
 #, kde-format
 msgid "Source"
 msgstr "Orixe"
 
-#: src/fetchdialog.cpp:256
+#: src/fetchdialog.cpp:257
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
@@ -4610,7 +4610,7 @@ msgstr ""
 "Os resultados engádense á lista a medida que se van atopando. Se escolle un "
 "recuperarase a entrada enteira e amosarase na vista en baixo."
 
-#: src/fetchdialog.cpp:265
+#: src/fetchdialog.cpp:266
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
@@ -4619,106 +4619,106 @@ msgstr ""
 "Se escolle unha entrada na lista de riba amosarase aquí unha imaxe antes de "
 "engadila á colección actual"
 
-#: src/fetchdialog.cpp:273
+#: src/fetchdialog.cpp:274
 #, kde-format
 msgid "&Add Entry"
 msgstr "&Engadir unha entrada"
 
-#: src/fetchdialog.cpp:278
+#: src/fetchdialog.cpp:279
 #, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr "Engade a entrada escollida a esta colección"
 
-#: src/fetchdialog.cpp:281
+#: src/fetchdialog.cpp:282
 #, kde-format
 msgid "Get More Results"
 msgstr "Obter máis resultados"
 
-#: src/fetchdialog.cpp:285
+#: src/fetchdialog.cpp:286
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr "Obtén máis resultados da fonte de datos actual"
 
-#: src/fetchdialog.cpp:291
+#: src/fetchdialog.cpp:292
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr "Baleirar todos os campos de busca e os resultados"
 
-#: src/fetchdialog.cpp:303
+#: src/fetchdialog.cpp:304
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr "%p%"
 
-#: src/fetchdialog.cpp:383
+#: src/fetchdialog.cpp:386
 #, kde-format
 msgid "Cancelling the search..."
 msgstr "Cancelando a busca…"
 
-#: src/fetchdialog.cpp:396 src/fetchdialog.cpp:575
+#: src/fetchdialog.cpp:399 src/fetchdialog.cpp:578
 #, kde-format
 msgid "Searching..."
 msgstr "Buscando…"
 
-#: src/fetchdialog.cpp:456
+#: src/fetchdialog.cpp:459
 #, kde-format
 msgid "The search returned no items."
 msgstr "A busca non devolveu ningún elemento."
 
-#: src/fetchdialog.cpp:459
+#: src/fetchdialog.cpp:462
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
 msgstr[0] "A busca obtivo 1 elemento."
 msgstr[1] "A busca obtivo %1 elementos."
 
-#: src/fetchdialog.cpp:488
+#: src/fetchdialog.cpp:491
 #, kde-format
 msgid "No results were found for the following ISBN values:"
 msgstr "Non se atopou ningún resultado para os seguintes ISBN:"
 
-#: src/fetchdialog.cpp:490
+#: src/fetchdialog.cpp:493
 #, kde-format
 msgid "No Results"
 msgstr "Sen resultados"
 
-#: src/fetchdialog.cpp:542 src/fetchdialog.cpp:598
+#: src/fetchdialog.cpp:545 src/fetchdialog.cpp:601
 #, kde-format
 msgid "Fetching %1..."
 msgstr "Obtendo %1…"
 
-#: src/fetchdialog.cpp:615
+#: src/fetchdialog.cpp:618
 #, kde-format
 msgid "Attribution"
 msgstr "Atribución"
 
-#: src/fetchdialog.cpp:652 src/fetchdialog.cpp:876
+#: src/fetchdialog.cpp:659 src/fetchdialog.cpp:883
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 "Non hai fontes dispoñíbeis en Internet para o tipo de colección actual."
 
-#: src/fetchdialog.cpp:733
+#: src/fetchdialog.cpp:740
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "Editar os valores ISBN/UPC"
 
-#: src/fetchdialog.cpp:744
+#: src/fetchdialog.cpp:751
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Insira os valores ISBN ou UPC, un por liña.</qt>"
 
-#: src/fetchdialog.cpp:760
+#: src/fetchdialog.cpp:767
 #, kde-format
 msgid "&Load From File..."
 msgstr "&&Cargar dun ficheiro…"
 
-#: src/fetchdialog.cpp:761
+#: src/fetchdialog.cpp:768
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Carga a lista dun ficheiro de texto.</qt>"
 
-#: src/fetchdialog.cpp:785
+#: src/fetchdialog.cpp:792
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "

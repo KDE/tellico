@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-06 00:42+0000\n"
+"POT-Creation-Date: 2025-10-13 00:42+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -959,7 +959,7 @@ msgstr "न्यूनतम आयु"
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:383 src/fetch/colnectfetcher.cpp:863
 #: src/fetch/numistafetcher.cpp:351 src/fetch/numistafetcher.cpp:399
-#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:244
+#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:245
 #, kde-format
 msgid "Description"
 msgstr "वर्णनम्‌"
@@ -1668,7 +1668,7 @@ msgstr "पटलाः"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:323 src/fetchdialog.cpp:243 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:323 src/fetchdialog.cpp:244 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:437
 #, kde-format
@@ -2794,9 +2794,9 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "चित्राणि <em>%1</em> तः <em>%2</em> यावत् स्थानान्तरितानि भविष्यन्ति"
 
-#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:318
-#: src/fetchdialog.cpp:417 src/fetchdialog.cpp:550 src/fetchdialog.cpp:611
-#: src/fetchdialog.cpp:625 src/gui/statusbar.cpp:94
+#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:319
+#: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
+#: src/fetchdialog.cpp:628 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "आत्त।"
@@ -3248,21 +3248,21 @@ msgstr ""
 "अस्य दत्तांशस्रोतस्य अभिगमनाय पञ्जीकरणं आवश्यकम् अस्ति । यदि भवान् नियमानाम् अनुमोदनं "
 "करोति तर्हि <a href='%1'>खाते पञ्जीकरणं कुर्वन्तु</a> , अधः स्वसूचनाः प्रविशन्तु ।"
 
-#: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1107
-#: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:241
-#: src/fetch/entrezfetcher.cpp:538 src/fetch/giantbombfetcher.cpp:227
-#: src/fetch/googlebookfetcher.cpp:395 src/fetch/isbndbfetcher.cpp:402
-#: src/fetch/mobygamesfetcher.cpp:653 src/fetch/numistafetcher.cpp:415
-#: src/fetch/omdbfetcher.cpp:421 src/fetch/thegamesdbfetcher.cpp:638
-#: src/fetch/themoviedbfetcher.cpp:577
+#: src/fetch/adsfetcher.cpp:339 src/fetch/amazonfetcher.cpp:1108
+#: src/fetch/bibliosharefetcher.cpp:186 src/fetch/comicvinefetcher.cpp:242
+#: src/fetch/entrezfetcher.cpp:538 src/fetch/giantbombfetcher.cpp:228
+#: src/fetch/googlebookfetcher.cpp:396 src/fetch/isbndbfetcher.cpp:403
+#: src/fetch/mobygamesfetcher.cpp:654 src/fetch/numistafetcher.cpp:415
+#: src/fetch/omdbfetcher.cpp:422 src/fetch/thegamesdbfetcher.cpp:639
+#: src/fetch/themoviedbfetcher.cpp:578
 #, kde-format
 msgid "Access key: "
 msgstr "अभिगमकुंजी : "
 
-#: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
-#: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:544
-#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:401
-#: src/fetch/themoviedbfetcher.cpp:583 src/fetch/thetvdbfetcher.cpp:594
+#: src/fetch/adsfetcher.cpp:345 src/fetch/bibliosharefetcher.cpp:192
+#: src/fetch/comicvinefetcher.cpp:248 src/fetch/entrezfetcher.cpp:544
+#: src/fetch/giantbombfetcher.cpp:234 src/fetch/googlebookfetcher.cpp:402
+#: src/fetch/themoviedbfetcher.cpp:584 src/fetch/thetvdbfetcher.cpp:595
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3437,7 +3437,7 @@ msgstr "संयुक्त अरब अमीरात"
 msgid "This data is licensed under <a href=%1>specific terms</a>."
 msgstr "एतत् दत्तांशं <a href=%1>विशिष्टशर्तैः</a> अनुज्ञापत्रं प्राप्नोति ."
 
-#: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1112
+#: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1113
 #, kde-format
 msgid ""
 "Access to data from Amazon.com requires an AWS Access Key ID and a Secret "
@@ -3487,17 +3487,17 @@ msgstr "अमेजन लिङ्क्"
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com जालसेवाः"
 
-#: src/fetch/amazonfetcher.cpp:1117
+#: src/fetch/amazonfetcher.cpp:1118
 #, kde-format
 msgid "Secret key: "
 msgstr "गुप्त कुञ्जी : "
 
-#: src/fetch/amazonfetcher.cpp:1127
+#: src/fetch/amazonfetcher.cpp:1128
 #, kde-format
 msgid "Country: "
 msgstr "देशः: "
 
-#: src/fetch/amazonfetcher.cpp:1142
+#: src/fetch/amazonfetcher.cpp:1143
 #, kde-format
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
@@ -3506,58 +3506,58 @@ msgstr ""
 "अमेजन डॉट् कॉम् अनेकविभिन्नस्थानीयस्थलेभ्यः आँकडान् प्रदाति । अस्य दत्तांशस्रोतस्य कृते यत् "
 "उपयोक्तुं इच्छति तत् चिनोतु ।"
 
-#: src/fetch/amazonfetcher.cpp:1148 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:998 src/fetch/discogsfetcher.cpp:622
+#: src/fetch/amazonfetcher.cpp:1149 src/fetch/boardgamegeekfetcher.cpp:215
+#: src/fetch/colnectfetcher.cpp:998 src/fetch/discogsfetcher.cpp:623
 #: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:568
-#: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
+#: src/fetch/mobygamesfetcher.cpp:662 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:645 src/fetch/rpggeekfetcher.cpp:224
-#: src/fetch/thegamesdbfetcher.cpp:646 src/fetch/videogamegeekfetcher.cpp:237
+#: src/fetch/thegamesdbfetcher.cpp:647 src/fetch/videogamegeekfetcher.cpp:237
 #, kde-format
 msgid "&Image size: "
 msgstr "&प्रतिबिम्बस्य आकारः : "
 
-#: src/fetch/amazonfetcher.cpp:1151 src/fetch/boardgamegeekfetcher.cpp:219
-#: src/fetch/colnectfetcher.cpp:1002 src/fetch/discogsfetcher.cpp:625
+#: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:219
+#: src/fetch/colnectfetcher.cpp:1002 src/fetch/discogsfetcher.cpp:626
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:572
-#: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
+#: src/fetch/mobygamesfetcher.cpp:665 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:648 src/fetch/rpggeekfetcher.cpp:228
-#: src/fetch/thegamesdbfetcher.cpp:649 src/fetch/videogamegeekfetcher.cpp:241
+#: src/fetch/thegamesdbfetcher.cpp:650 src/fetch/videogamegeekfetcher.cpp:241
 #, kde-format
 msgid "Small Image"
 msgstr "लघु प्रतिबिम्ब"
 
-#: src/fetch/amazonfetcher.cpp:1152 src/fetch/imdbfetcher.cpp:544
+#: src/fetch/amazonfetcher.cpp:1153 src/fetch/imdbfetcher.cpp:544
 #: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:649
-#: src/fetch/thegamesdbfetcher.cpp:650
+#: src/fetch/thegamesdbfetcher.cpp:651
 #, kde-format
 msgid "Medium Image"
 msgstr "मध्यम प्रतिमा"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
-#: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:220
-#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:627
+#: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:220
+#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:573
-#: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
+#: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:650 src/fetch/rpggeekfetcher.cpp:229
-#: src/fetch/thegamesdbfetcher.cpp:651 src/fetch/videogamegeekfetcher.cpp:242
+#: src/fetch/thegamesdbfetcher.cpp:652 src/fetch/videogamegeekfetcher.cpp:242
 #, kde-format
 msgid "Large Image"
 msgstr "बृहत् चित्रम्"
 
-#: src/fetch/amazonfetcher.cpp:1154 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:1001 src/fetch/discogsfetcher.cpp:628
+#: src/fetch/amazonfetcher.cpp:1155 src/fetch/boardgamegeekfetcher.cpp:218
+#: src/fetch/colnectfetcher.cpp:1001 src/fetch/discogsfetcher.cpp:629
 #: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:571
-#: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
+#: src/fetch/mobygamesfetcher.cpp:668 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:651 src/fetch/rpggeekfetcher.cpp:227
-#: src/fetch/thegamesdbfetcher.cpp:652 src/fetch/videogamegeekfetcher.cpp:240
+#: src/fetch/thegamesdbfetcher.cpp:653 src/fetch/videogamegeekfetcher.cpp:240
 #, kde-format
 msgid "No Image"
 msgstr "न बिम्बम्"
 
-#: src/fetch/amazonfetcher.cpp:1157 src/fetch/discogsfetcher.cpp:632
-#: src/fetch/imdbfetcher.cpp:550 src/fetch/mobygamesfetcher.cpp:671
+#: src/fetch/amazonfetcher.cpp:1158 src/fetch/discogsfetcher.cpp:633
+#: src/fetch/imdbfetcher.cpp:550 src/fetch/mobygamesfetcher.cpp:672
 #: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:655
-#: src/fetch/thegamesdbfetcher.cpp:656
+#: src/fetch/thegamesdbfetcher.cpp:657
 #, kde-format
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
@@ -3566,12 +3566,12 @@ msgstr ""
 "आवरणस्य चित्रम् अपि अवतरणं कर्तुं शक्यते। परन्तु संग्रहे अत्यधिकं बृहत् चित्रं कार्यक्षमतायाः "
 "अवनतिं कर्तुं शक्नोति ।"
 
-#: src/fetch/amazonfetcher.cpp:1163
+#: src/fetch/amazonfetcher.cpp:1164
 #, kde-format
 msgid "&Associate's ID: "
 msgstr "&एसोसिएटस्य आईडी: 1.1. "
 
-#: src/fetch/amazonfetcher.cpp:1169
+#: src/fetch/amazonfetcher.cpp:1170
 #, kde-format
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
@@ -3654,7 +3654,7 @@ msgid "PEGI Rating"
 msgstr "पेगी रेटिंग्"
 
 #: src/fetch/colnectfetcher.cpp:970 src/fetch/filmaffinityfetcher.cpp:490
-#: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:602
+#: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:603
 #, kde-format
 msgid "Language: "
 msgstr "भाषा: "
@@ -3685,27 +3685,27 @@ msgstr "उपलब्धक्षेत्राणि"
 msgid "%1 requires a username and password."
 msgstr "%1 इत्यस्य उपयोक्तृनाम गुप्तशब्दं च आवश्यकम् ।"
 
-#: src/fetch/crossreffetcher.cpp:309
+#: src/fetch/crossreffetcher.cpp:310
 #, kde-format
 msgid "&Username: "
 msgstr "&उपयोक्तृनाम: . "
 
-#: src/fetch/crossreffetcher.cpp:314
+#: src/fetch/crossreffetcher.cpp:315
 #, kde-format
 msgid "A username and password is required to access the CrossRef service."
 msgstr "CrossRef सेवां प्राप्तुं उपयोक्तृनाम गुप्तशब्दं च आवश्यकम् अस्ति ।"
 
-#: src/fetch/crossreffetcher.cpp:319
+#: src/fetch/crossreffetcher.cpp:320
 #, kde-format
 msgid "&Password: "
 msgstr "&समाभाष्: "
 
-#: src/fetch/crossreffetcher.cpp:329
+#: src/fetch/crossreffetcher.cpp:330
 #, kde-format
 msgid "For some accounts, only an email address is required."
 msgstr "केषाञ्चन खातानां कृते केवलं ईमेल-सङ्केतं आवश्यकं भवति ।"
 
-#: src/fetch/crossreffetcher.cpp:332
+#: src/fetch/crossreffetcher.cpp:333
 #, kde-format
 msgid "Email: "
 msgstr "ईमेलः "
@@ -3759,7 +3759,7 @@ msgstr "पटलाः (डिस्क %1) ."
 msgid "Discogs Audio Search"
 msgstr "ऑडियो अन्वेषणं डिस्कोग्स् करोति"
 
-#: src/fetch/discogsfetcher.cpp:614 src/translators/discogsimporter.cpp:204
+#: src/fetch/discogsfetcher.cpp:615 src/translators/discogsimporter.cpp:204
 #, kde-format
 msgid "User token:"
 msgstr "उपयोक्तृचिह्नम् :"
@@ -3928,13 +3928,13 @@ msgid "FilmAffinity Link"
 msgstr "FilmAffinity Link"
 
 #: src/fetch/filmaffinityfetcher.cpp:476 src/fetch/imdbfetcher.cpp:526
-#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:588
+#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:589
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&अधिकतम कास्ट : "
 
 #: src/fetch/filmaffinityfetcher.cpp:485 src/fetch/imdbfetcher.cpp:535
-#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:597
+#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:598
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -4102,12 +4102,12 @@ msgstr "डेवी दशमलव"
 msgid "ISBNdb.com"
 msgstr "ISBNdb.com"
 
-#: src/fetch/isbndbfetcher.cpp:410
+#: src/fetch/isbndbfetcher.cpp:411
 #, kde-format
 msgid "Enable batch ISBN searching (requires Premium or Pro plan)"
 msgstr "बैच ISBN अन्वेषणं सक्षमं कुर्वन्तु (प्रीमियम अथवा प्रो योजना आवश्यकी अस्ति)"
 
-#: src/fetch/isbndbfetcher.cpp:414
+#: src/fetch/isbndbfetcher.cpp:415
 #, kde-format
 msgid ""
 "Batch searching for ISBN values is faster but only available for Premium or "
@@ -4191,13 +4191,13 @@ msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
 msgstr "क्राउस-मिश्लर"
 
-#: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:611
+#: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:612
 #, kde-format
 msgctxt "Language"
 msgid "English"
 msgstr "आंग्ल"
 
-#: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:614
+#: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:615
 #, kde-format
 msgctxt "Language"
 msgid "French"
@@ -4316,31 +4316,31 @@ msgstr "TMDb Link"
 msgid "Network"
 msgstr "जालकृति"
 
-#: src/fetch/themoviedbfetcher.cpp:608
+#: src/fetch/themoviedbfetcher.cpp:609
 #, kde-format
 msgctxt "Language"
 msgid "Chinese"
 msgstr "चीनी"
 
-#: src/fetch/themoviedbfetcher.cpp:617
+#: src/fetch/themoviedbfetcher.cpp:618
 #, kde-format
 msgctxt "Language"
 msgid "German"
 msgstr "जर्मन"
 
-#: src/fetch/themoviedbfetcher.cpp:620
+#: src/fetch/themoviedbfetcher.cpp:621
 #, kde-format
 msgctxt "Language"
 msgid "Spanish"
 msgstr "स्पेनी भाषा"
 
-#: src/fetch/themoviedbfetcher.cpp:623
+#: src/fetch/themoviedbfetcher.cpp:624
 #, kde-format
 msgctxt "Language"
 msgid "Russian"
 msgstr "रूसी"
 
-#: src/fetch/themoviedbfetcher.cpp:666
+#: src/fetch/themoviedbfetcher.cpp:667
 #, kde-format
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB (%1) 1.1."
@@ -4350,7 +4350,7 @@ msgstr "TheMovieDB (%1) 1.1."
 msgid "TheTVDB Link"
 msgstr "TheTVDB Link"
 
-#: src/fetch/thetvdbfetcher.cpp:588
+#: src/fetch/thetvdbfetcher.cpp:589
 #, kde-format
 msgid "Subscriber PIN: "
 msgstr "ग्राहकः पिनः : "
@@ -4496,63 +4496,63 @@ msgstr ""
 "z39.50 दत्तांशकोशेन उपयुज्यमानं प्रमाणीकरणगुप्तशब्दं प्रविशन्तु । अधिकांशसर्वरस्य एकस्य "
 "आवश्यकता नास्ति । गुप्तशब्दः Tellico विन्याससञ्चिकायां साधारणपाठरूपेण रक्षितः भविष्यति ।"
 
-#: src/fetchdialog.cpp:138 src/mainwindow.cpp:568
+#: src/fetchdialog.cpp:139 src/mainwindow.cpp:568
 #, kde-format
 msgid "Internet Search"
 msgstr "अन्तर्जालसन्धानम्"
 
-#: src/fetchdialog.cpp:149
+#: src/fetchdialog.cpp:150
 #, kde-format
 msgid "Search Query"
 msgstr "अन्वेषण प्रश्न"
 
-#: src/fetchdialog.cpp:158
+#: src/fetchdialog.cpp:159
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "अन्वेषण:"
 
-#: src/fetchdialog.cpp:164
+#: src/fetchdialog.cpp:165
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr "अन्वेषणमूल्यं प्रविशतु । ISBN अन्वेषणे पूर्ण ISBN अवश्यं समाविष्टं भवति ।"
 
-#: src/fetchdialog.cpp:174
+#: src/fetchdialog.cpp:175
 #, kde-format
 msgid "Choose the type of search"
 msgstr "अन्वेषणस्य प्रकारं चिनोतु"
 
-#: src/fetchdialog.cpp:178 src/fetchdialog.cpp:393 src/fetchdialog.cpp:572
+#: src/fetchdialog.cpp:179 src/fetchdialog.cpp:396 src/fetchdialog.cpp:575
 #, kde-format
 msgid "&Stop"
 msgstr "&विरमतु"
 
-#: src/fetchdialog.cpp:181
+#: src/fetchdialog.cpp:182
 #, kde-format
 msgid "Click to start or stop the search"
 msgstr "अन्वेषणं आरभ्य स्थगयितुं वा क्लिक् कुर्वन्तु"
 
-#: src/fetchdialog.cpp:188 src/fetchdialog.cpp:452
+#: src/fetchdialog.cpp:189 src/fetchdialog.cpp:455
 #, kde-format
 msgid "&Search"
 msgstr "&अन्वेषण"
 
-#: src/fetchdialog.cpp:200
+#: src/fetchdialog.cpp:201
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
 msgstr "&बहुविध ISBN/UPC अन्वेषण"
 
-#: src/fetchdialog.cpp:202
+#: src/fetchdialog.cpp:203
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr "बहुविध ISBN अथवा UPC मूल्यानि अन्वेष्टुं एतत् पेटी चिनोतु ।"
 
-#: src/fetchdialog.cpp:206
+#: src/fetchdialog.cpp:207
 #, kde-format
 msgid "Edit ISBN/UPC values..."
 msgstr "ISBN/UPC मूल्यानि सम्पादयन्तु..."
 
-#: src/fetchdialog.cpp:210
+#: src/fetchdialog.cpp:211
 #, kde-format
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
@@ -4561,22 +4561,22 @@ msgstr ""
 "बहुविध ISBN अथवा UPC मूल्यानि प्रविष्टुं वा सम्पादयितुं वा पाठसम्पादनपेटिकां उद्घाटयितुं "
 "क्लिक् कुर्वन्तु ।"
 
-#: src/fetchdialog.cpp:216
+#: src/fetchdialog.cpp:217
 #, kde-format
 msgid "Search s&ource:"
 msgstr "अन्वेषणं s&ource:"
 
-#: src/fetchdialog.cpp:226
+#: src/fetchdialog.cpp:227
 #, kde-format
 msgid "Select the database to search"
 msgstr "अन्वेषणार्थं दत्तांशकोशं चिनोतु"
 
-#: src/fetchdialog.cpp:245
+#: src/fetchdialog.cpp:246
 #, kde-format
 msgid "Source"
 msgstr "स्रोतः"
 
-#: src/fetchdialog.cpp:256
+#: src/fetchdialog.cpp:257
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
@@ -4585,112 +4585,112 @@ msgstr ""
 "यथा यथा परिणामाः प्राप्यन्ते तथा तथा ते अस्मिन् सूचौ योजिताः भवन्ति । एकं चित्वा सम्पूर्णं "
 "प्रविष्टिं आनयिष्यति, अधोलिखिते दृश्ये च दर्शयिष्यति ।"
 
-#: src/fetchdialog.cpp:265
+#: src/fetchdialog.cpp:266
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
 msgstr "उपरिष्टात् सूचीयां चयनं कृत्वा वर्तमानसङ्ग्रहे योजयितुं पूर्वं अत्र प्रविष्टिः दर्शिता भवेत्"
 
-#: src/fetchdialog.cpp:273
+#: src/fetchdialog.cpp:274
 #, kde-format
 msgid "&Add Entry"
 msgstr "&प्रविष्टिः योजयतु"
 
-#: src/fetchdialog.cpp:278
+#: src/fetchdialog.cpp:279
 #, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr "चयनितं प्रविष्टिं वर्तमानसङ्ग्रहे योजयन्तु"
 
-#: src/fetchdialog.cpp:281
+#: src/fetchdialog.cpp:282
 #, kde-format
 msgid "Get More Results"
 msgstr "अधिकं परिणामं प्राप्नुवन्तु"
 
-#: src/fetchdialog.cpp:285
+#: src/fetchdialog.cpp:286
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr "वर्तमानदत्तांशस्रोतः अधिकानि परिणामानि आनयन्तु"
 
-#: src/fetchdialog.cpp:291
+#: src/fetchdialog.cpp:292
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr "सर्वाणि अन्वेषणक्षेत्राणि परिणामानि च स्वच्छं कुर्वन्तु"
 
-#: src/fetchdialog.cpp:303
+#: src/fetchdialog.cpp:304
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr "%p%"
 
-#: src/fetchdialog.cpp:383
+#: src/fetchdialog.cpp:386
 #, kde-format
 msgid "Cancelling the search..."
 msgstr "अन्वेषणं रद्दं कुर्वन्..."
 
-#: src/fetchdialog.cpp:396 src/fetchdialog.cpp:575
+#: src/fetchdialog.cpp:399 src/fetchdialog.cpp:578
 #, kde-format
 msgid "Searching..."
 msgstr "अन्वेषणं कुर्वन्..."
 
-#: src/fetchdialog.cpp:456
+#: src/fetchdialog.cpp:459
 #, kde-format
 msgid "The search returned no items."
 msgstr "अन्वेषणेन कोऽपि वस्तूनि न प्राप्तानि।"
 
-#: src/fetchdialog.cpp:459
+#: src/fetchdialog.cpp:462
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
 msgstr[0] "अन्वेषणेन १ द्रव्यं प्राप्तम् ।"
 msgstr[1] "अन्वेषणेन %1 वस्तूनि प्राप्तानि ।"
 
-#: src/fetchdialog.cpp:488
+#: src/fetchdialog.cpp:491
 #, kde-format
 msgid "No results were found for the following ISBN values:"
 msgstr "निम्नलिखित ISBN मूल्यानां कृते कोऽपि परिणामः न प्राप्तः ।"
 
-#: src/fetchdialog.cpp:490
+#: src/fetchdialog.cpp:493
 #, kde-format
 msgid "No Results"
 msgstr "न परिणामः"
 
-#: src/fetchdialog.cpp:542 src/fetchdialog.cpp:598
+#: src/fetchdialog.cpp:545 src/fetchdialog.cpp:601
 #, kde-format
 msgid "Fetching %1..."
 msgstr "%1 आनयन्..."
 
-#: src/fetchdialog.cpp:615
+#: src/fetchdialog.cpp:618
 #, kde-format
 msgid "Attribution"
 msgstr "विशेषणम्"
 
-#: src/fetchdialog.cpp:652 src/fetchdialog.cpp:876
+#: src/fetchdialog.cpp:659 src/fetchdialog.cpp:883
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "भवतः वर्तमानसङ्ग्रहप्रकारस्य कृते कोऽपि अन्तर्जालस्रोतः उपलब्धः नास्ति ।"
 
-#: src/fetchdialog.cpp:733
+#: src/fetchdialog.cpp:740
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "ISBN/UPC मूल्यानि सम्पादयन्तु"
 
-#: src/fetchdialog.cpp:744
+#: src/fetchdialog.cpp:751
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>ISBN अथवा UPC मूल्यानि प्रविशन्तु, प्रतिपङ्क्तौ एकं ।</qt>"
 
-#: src/fetchdialog.cpp:760
+#: src/fetchdialog.cpp:767
 #, kde-format
 msgid "&Load From File..."
 msgstr "&Load From File..."
 
-#: src/fetchdialog.cpp:761
+#: src/fetchdialog.cpp:768
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>पाठसञ्चिकातः सूचीं लोड् कुर्वन्तु ।</qt>"
 
-#: src/fetchdialog.cpp:785
+#: src/fetchdialog.cpp:792
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
