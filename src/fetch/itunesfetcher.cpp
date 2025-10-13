@@ -87,6 +87,7 @@ void ItunesFetcher::readConfigHook(const KConfigGroup& config_) {
   if(imageSize > -1) {
     m_imageSize = static_cast<ImageSize>(imageSize);
   }
+  m_country = config_.readEntry("Country");
   // user requested option to maintain pre-4.0 behavior of inserting
   // all tracks into a single track field, regardless of disc count
   m_multiDiscTracks = config_.readEntry("Split Tracks By Disc", true);
@@ -107,8 +108,8 @@ void ItunesFetcher::search() {
     case Keyword:
       u.setPath(u.path() + QLatin1String("/search"));
       if(collectionType() == Data::Collection::Book) {
-        q.addQueryItem(QStringLiteral("media"), QLatin1String("audiobook"));
-        q.addQueryItem(QStringLiteral("entity"), QLatin1String("audiobook"));
+        q.addQueryItem(QStringLiteral("media"), QLatin1String("audiobook,ebook"));
+        q.addQueryItem(QStringLiteral("entity"), QLatin1String("audiobook,ebook"));
       } else if(collectionType() == Data::Collection::Album) {
         q.addQueryItem(QStringLiteral("media"), QLatin1String("music"));
         q.addQueryItem(QStringLiteral("entity"), QLatin1String("album"));
@@ -117,7 +118,10 @@ void ItunesFetcher::search() {
         q.addQueryItem(QStringLiteral("entity"), QLatin1String("movie,tvSeason,allTrack"));
       }
       q.addQueryItem(QStringLiteral("limit"), QString::number(ITUNES_MAX_RETURNS_TOTAL));
-      q.addQueryItem(QStringLiteral("term"),  QString::fromLatin1(QUrl::toPercentEncoding(request().value())));
+      q.addQueryItem(QStringLiteral("term"), QString::fromLatin1(QUrl::toPercentEncoding(request().value())));
+      if(!m_country.isEmpty()) {
+        q.addQueryItem(QStringLiteral("country"), m_country);
+      }
       break;
 
     case ISBN:
@@ -576,6 +580,34 @@ ItunesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ItunesFetcher*
   l->addWidget(m_imageCombo, row, 1);
   label->setBuddy(m_imageCombo);
 
+  label = new QLabel(i18n("Country: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  QLocale loc;
+  m_countryCombo = new GUI::ComboBox(optionsWidget());
+  m_countryCombo->addItem(QString(), QString()); // no country set
+  // add a few country codes for choice
+  m_countryCombo->addItem(i18n("Brazil"), QLatin1String("br"));
+  m_countryCombo->addItem(i18n("Canada"), QLatin1String("ca"));
+  m_countryCombo->addItem(i18n("France"), QLatin1String("fr"));
+  m_countryCombo->addItem(i18n("Germany"), QLatin1String("de"));
+  m_countryCombo->addItem(i18n("India"), QLatin1String("in"));
+  m_countryCombo->addItem(i18n("Japan"), QLatin1String("jp"));
+  m_countryCombo->addItem(i18n("Mexico"), QLatin1String("mx"));
+  m_countryCombo->addItem(i18n("United Kingdom"), QLatin1String("gb"));
+  m_countryCombo->addItem(i18n("United States"), QLatin1String("us"));
+  const auto code = loc.name().mid(3).toLower();
+  // add local code
+  if(m_countryCombo->findData(code) == -1) {
+    m_countryCombo->addItem(loc.nativeCountryName(), code);
+  }
+  bool b = m_countryCombo->setCurrentData(code);
+  m_countryCombo->setEditable(true); // allow custom entry
+  QRegularExpression rx(QLatin1String("\\w\\w")); // only 2 characters
+  m_countryCombo->setValidator(new QRegularExpressionValidator(rx, this));
+  connect(m_countryCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_countryCombo, row, 1);
+  label->setBuddy(m_countryCombo);
+
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
@@ -583,6 +615,9 @@ ItunesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ItunesFetcher*
 
   if(fetcher_) {
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+    if(!m_countryCombo->setCurrentData(fetcher_->m_country)) {
+      m_countryCombo->setCurrentText(fetcher_->m_country);
+    }
     m_multiDiscTracks = fetcher_->m_multiDiscTracks;
   } else { // defaults
     m_imageCombo->setCurrentData(SmallImage);
@@ -591,8 +626,15 @@ ItunesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ItunesFetcher*
 }
 
 void ItunesFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
-  const int n = m_imageCombo->currentData().toInt();
+  const auto n = m_imageCombo->currentData().toInt();
   config_.writeEntry("Image Size", n);
+  auto c = m_countryCombo->currentData().toString();
+  if(c.isEmpty()) {
+    // user-entered country will not have data set for the item. Just use the text itself
+    c = m_countryCombo->currentText().trimmed();
+  }
+  // itunes iso codes have to be two characters
+  config_.writeEntry("Country", c.left(2).toLower());
   config_.writeEntry("Split Tracks By Disc", m_multiDiscTracks);
 }
 
