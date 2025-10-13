@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-12 02:38+0000\n"
+"POT-Creation-Date: 2025-10-13 02:35+0000\n"
 "PO-Revision-Date: 2025-02-14 21:25+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -976,7 +976,7 @@ msgstr "Minimuma Aĝo"
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:388 src/fetch/colnectfetcher.cpp:868
 #: src/fetch/numistafetcher.cpp:351 src/fetch/numistafetcher.cpp:399
-#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:249
+#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:250
 #, kde-format
 msgid "Description"
 msgstr "Priskribo"
@@ -1684,7 +1684,7 @@ msgstr "Trakoj"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:512 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:321 src/fetchdialog.cpp:248 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:321 src/fetchdialog.cpp:249 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:437
 #, kde-format
@@ -2823,9 +2823,9 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
-#: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
-#: src/fetchdialog.cpp:634 src/gui/statusbar.cpp:94
+#: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:328
+#: src/fetchdialog.cpp:429 src/fetchdialog.cpp:562 src/fetchdialog.cpp:623
+#: src/fetchdialog.cpp:637 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Preta."
@@ -4426,63 +4426,63 @@ msgstr ""
 "serviloj ne bezonas unu. La pasvorto estos konservita en plata teksto en la "
 "agorda dosiero Tellico."
 
-#: src/fetchdialog.cpp:138 src/mainwindow.cpp:608
+#: src/fetchdialog.cpp:139 src/mainwindow.cpp:608
 #, kde-format
 msgid "Internet Search"
 msgstr "Interreta serĉo"
 
-#: src/fetchdialog.cpp:149
+#: src/fetchdialog.cpp:150
 #, kde-format
 msgid "Search Query"
 msgstr "Serĉa Demando"
 
-#: src/fetchdialog.cpp:158
+#: src/fetchdialog.cpp:159
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "S&erĉi:"
 
-#: src/fetchdialog.cpp:164
+#: src/fetchdialog.cpp:165
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr "Enigu serĉvaloron. ISBN-serĉo devas inkluzivi la plenan ISBN."
 
-#: src/fetchdialog.cpp:174
+#: src/fetchdialog.cpp:175
 #, kde-format
 msgid "Choose the type of search"
 msgstr "Elekti la tipon de serĉo"
 
-#: src/fetchdialog.cpp:178 src/fetchdialog.cpp:402 src/fetchdialog.cpp:581
+#: src/fetchdialog.cpp:179 src/fetchdialog.cpp:405 src/fetchdialog.cpp:584
 #, kde-format
 msgid "&Stop"
 msgstr "&Halti"
 
-#: src/fetchdialog.cpp:181
+#: src/fetchdialog.cpp:182
 #, kde-format
 msgid "Click to start or stop the search"
 msgstr "Klaki por komenci aŭ ĉesigi la serĉon"
 
-#: src/fetchdialog.cpp:188 src/fetchdialog.cpp:461
+#: src/fetchdialog.cpp:189 src/fetchdialog.cpp:464
 #, kde-format
 msgid "&Search"
 msgstr "&Serĉi"
 
-#: src/fetchdialog.cpp:200
+#: src/fetchdialog.cpp:201
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
 msgstr "&Multobla ISBN/UPC-serĉo"
 
-#: src/fetchdialog.cpp:202
+#: src/fetchdialog.cpp:203
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr "Marku ĉi tiun skatolon por serĉi plurajn valorojn de ISBN aŭ UPC."
 
-#: src/fetchdialog.cpp:206
+#: src/fetchdialog.cpp:207
 #, kde-format
 msgid "Edit ISBN/UPC values..."
 msgstr "Redakti ISBN/UPC-valorojn..."
 
-#: src/fetchdialog.cpp:210
+#: src/fetchdialog.cpp:211
 #, kde-format
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
@@ -4491,22 +4491,22 @@ msgstr ""
 "Klaku por malfermi tekstan redaktan skatolon por enigi aŭ redakti plurajn "
 "valorojn de ISBN aŭ UPC."
 
-#: src/fetchdialog.cpp:216
+#: src/fetchdialog.cpp:217
 #, kde-format
 msgid "Search s&ource:"
 msgstr "Serĉa f&onto:"
 
-#: src/fetchdialog.cpp:231
+#: src/fetchdialog.cpp:232
 #, kde-format
 msgid "Select the database to search"
 msgstr "Elektu la datumbazon por serĉi"
 
-#: src/fetchdialog.cpp:250
+#: src/fetchdialog.cpp:251
 #, kde-format
 msgid "Source"
 msgstr "Fonto"
 
-#: src/fetchdialog.cpp:261
+#: src/fetchdialog.cpp:262
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
@@ -4515,7 +4515,7 @@ msgstr ""
 "Ĉar rezultoj estas trovitaj, ili estas aldonitaj al ĉi tiu listo. Elektante "
 "unu ricevos la kompletan enskribon kaj montros ĝin en la suba vido."
 
-#: src/fetchdialog.cpp:274
+#: src/fetchdialog.cpp:275
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
@@ -4524,105 +4524,105 @@ msgstr ""
 "Eniro povas esti montrita ĉi tie antaŭ ol aldoni ĝin al la nuna kolekto "
 "elektante ĝin en la supra listo"
 
-#: src/fetchdialog.cpp:282
+#: src/fetchdialog.cpp:283
 #, kde-format
 msgid "&Add Entry"
 msgstr "&Aldoni Eniron"
 
-#: src/fetchdialog.cpp:287
+#: src/fetchdialog.cpp:288
 #, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr "Aldoni la elektitan eniron al la nuna kolekto"
 
-#: src/fetchdialog.cpp:290
+#: src/fetchdialog.cpp:291
 #, kde-format
 msgid "Get More Results"
 msgstr "Akiri Pliajn Rezultojn"
 
-#: src/fetchdialog.cpp:294
+#: src/fetchdialog.cpp:295
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr "Akiri pliajn rezultojn de la nuna datumfonto"
 
-#: src/fetchdialog.cpp:300
+#: src/fetchdialog.cpp:301
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr "Forigi ĉiujn serĉkampojn kaj rezultojn"
 
-#: src/fetchdialog.cpp:312
+#: src/fetchdialog.cpp:313
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr "%p%"
 
-#: src/fetchdialog.cpp:392
+#: src/fetchdialog.cpp:395
 #, kde-format
 msgid "Cancelling the search..."
 msgstr "Nuligante la serĉon..."
 
-#: src/fetchdialog.cpp:405 src/fetchdialog.cpp:584
+#: src/fetchdialog.cpp:408 src/fetchdialog.cpp:587
 #, kde-format
 msgid "Searching..."
 msgstr "Serĉas..."
 
-#: src/fetchdialog.cpp:465
+#: src/fetchdialog.cpp:468
 #, kde-format
 msgid "The search returned no items."
 msgstr "La serĉo ne redonis erojn."
 
-#: src/fetchdialog.cpp:468
+#: src/fetchdialog.cpp:471
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
 msgstr[0] "La serĉo liveris 1 eron."
 msgstr[1] "La serĉo liveris %1 erojn."
 
-#: src/fetchdialog.cpp:497
+#: src/fetchdialog.cpp:500
 #, kde-format
 msgid "No results were found for the following ISBN values:"
 msgstr "Neniuj rezultoj estis trovitaj por la sekvaj ISBN-valoroj:"
 
-#: src/fetchdialog.cpp:499
+#: src/fetchdialog.cpp:502
 #, kde-format
 msgid "No Results"
 msgstr "Neniuj Rezultoj"
 
-#: src/fetchdialog.cpp:551 src/fetchdialog.cpp:607
+#: src/fetchdialog.cpp:554 src/fetchdialog.cpp:610
 #, kde-format
 msgid "Fetching %1..."
 msgstr "Prenante %1..."
 
-#: src/fetchdialog.cpp:624
+#: src/fetchdialog.cpp:627
 #, kde-format
 msgid "Attribution"
 msgstr "Atribuo"
 
-#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:885
+#: src/fetchdialog.cpp:668 src/fetchdialog.cpp:892
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "Neniuj interretaj fontoj disponeblas por via nuna kolektotipo."
 
-#: src/fetchdialog.cpp:742
+#: src/fetchdialog.cpp:749
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "Redakti ISBN/UPC-valorojn"
 
-#: src/fetchdialog.cpp:753
+#: src/fetchdialog.cpp:760
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Enigu la ISBN aŭ UPC-valorojn, unu po linio.</qt>"
 
-#: src/fetchdialog.cpp:769
+#: src/fetchdialog.cpp:776
 #, kde-format
 msgid "&Load From File..."
 msgstr "Ŝargi e&l Dosiero..."
 
-#: src/fetchdialog.cpp:770
+#: src/fetchdialog.cpp:777
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Ŝargi la liston el tekstdosiero.</qt>"
 
-#: src/fetchdialog.cpp:794
+#: src/fetchdialog.cpp:801
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "

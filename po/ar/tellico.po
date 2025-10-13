@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-12 02:38+0000\n"
+"POT-Creation-Date: 2025-10-13 02:35+0000\n"
 "PO-Revision-Date: 2025-10-05 21:07+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -962,7 +962,7 @@ msgstr "الحد الأدنى للعمر"
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:388 src/fetch/colnectfetcher.cpp:868
 #: src/fetch/numistafetcher.cpp:351 src/fetch/numistafetcher.cpp:399
-#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:249
+#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:250
 #, kde-format
 msgid "Description"
 msgstr "الوصف"
@@ -1669,7 +1669,7 @@ msgstr "المسارات"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:512 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:321 src/fetchdialog.cpp:248 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:321 src/fetchdialog.cpp:249 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:437
 #, kde-format
@@ -2798,9 +2798,9 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "ستُنقَل الصور من <em>%1</em> إلى <em>%2</em>"
 
-#: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
-#: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
-#: src/fetchdialog.cpp:634 src/gui/statusbar.cpp:94
+#: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:328
+#: src/fetchdialog.cpp:429 src/fetchdialog.cpp:562 src/fetchdialog.cpp:623
+#: src/fetchdialog.cpp:637 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "جاهز."
@@ -4383,85 +4383,85 @@ msgstr ""
 "أدخل كلمة السر للاستيثاق التي تستعملها قاعدة بيانات z39.50. لا يحتاج معظم "
 "الخوادم إلى واحدة. ستحفظ كلمة السر كنص عادي في ملف إعدادات تلكو."
 
-#: src/fetchdialog.cpp:138 src/mainwindow.cpp:608
+#: src/fetchdialog.cpp:139 src/mainwindow.cpp:608
 #, kde-format
 msgid "Internet Search"
 msgstr "البحث في الشابكة"
 
-#: src/fetchdialog.cpp:149
+#: src/fetchdialog.cpp:150
 #, kde-format
 msgid "Search Query"
 msgstr "استعلام البحث"
 
-#: src/fetchdialog.cpp:158
+#: src/fetchdialog.cpp:159
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "اب&حث:"
 
-#: src/fetchdialog.cpp:164
+#: src/fetchdialog.cpp:165
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr "أدخل قيمة بحث. يجب أن يشمل بحث ISBN رقم ISBN الكامل."
 
-#: src/fetchdialog.cpp:174
+#: src/fetchdialog.cpp:175
 #, kde-format
 msgid "Choose the type of search"
 msgstr "اختر نوع البحث"
 
-#: src/fetchdialog.cpp:178 src/fetchdialog.cpp:402 src/fetchdialog.cpp:581
+#: src/fetchdialog.cpp:179 src/fetchdialog.cpp:405 src/fetchdialog.cpp:584
 #, kde-format
 msgid "&Stop"
 msgstr "أو&قِف"
 
-#: src/fetchdialog.cpp:181
+#: src/fetchdialog.cpp:182
 #, kde-format
 msgid "Click to start or stop the search"
 msgstr "انقر لبدء البحث أو إيقافه"
 
-#: src/fetchdialog.cpp:188 src/fetchdialog.cpp:461
+#: src/fetchdialog.cpp:189 src/fetchdialog.cpp:464
 #, kde-format
 msgid "&Search"
 msgstr "ا&بحث"
 
-#: src/fetchdialog.cpp:200
+#: src/fetchdialog.cpp:201
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
 msgstr "بحث لـ &ISBN/UPC متعدد"
 
-#: src/fetchdialog.cpp:202
+#: src/fetchdialog.cpp:203
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr "علِّم على هذا المربع للبحث عن قيم ISBN أو UPC متعددة."
 
-#: src/fetchdialog.cpp:206
+#: src/fetchdialog.cpp:207
 #, kde-format
 msgid "Edit ISBN/UPC values..."
 msgstr "حرّر قيم ISBN/UPC..."
 
-#: src/fetchdialog.cpp:210
+#: src/fetchdialog.cpp:211
 #, kde-format
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
 "values."
 msgstr "انقر لفتح مربع تحرير نصي لإدخال أو تحرير قيم ISBN أو UPC متعددة."
 
-#: src/fetchdialog.cpp:216
+#: src/fetchdialog.cpp:217
 #, kde-format
 msgid "Search s&ource:"
 msgstr "&مصدر البحث:"
 
-#: src/fetchdialog.cpp:231
+#: src/fetchdialog.cpp:232
 #, kde-format
 msgid "Select the database to search"
 msgstr "اختر قاعدة البيانات للبحث"
 
-#: src/fetchdialog.cpp:250
+#: src/fetchdialog.cpp:251
 #, kde-format
 msgid "Source"
 msgstr "المصدر"
 
-#: src/fetchdialog.cpp:261
+#: src/fetchdialog.cpp:262
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
@@ -4470,7 +4470,7 @@ msgstr ""
 "كلما عُثر على نتائج، تضاف إلى هذه القائمة. اختيار نتيجة ما يجلب الإدخال "
 "الكامل ويظهره في العرض أدناه."
 
-#: src/fetchdialog.cpp:274
+#: src/fetchdialog.cpp:275
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
@@ -4478,53 +4478,53 @@ msgid ""
 msgstr ""
 "قد يظهر إدخال هنا قبل إضافته إلى التشكيلة الحالية باختياره في القائمة أعلاه"
 
-#: src/fetchdialog.cpp:282
+#: src/fetchdialog.cpp:283
 #, kde-format
 msgid "&Add Entry"
 msgstr "أ&ضف مدخلة"
 
-#: src/fetchdialog.cpp:287
+#: src/fetchdialog.cpp:288
 #, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr "أضف الإدخال المختار إلى التشكيلة الحالية"
 
-#: src/fetchdialog.cpp:290
+#: src/fetchdialog.cpp:291
 #, kde-format
 msgid "Get More Results"
 msgstr "احصل على المزيد من النتائج"
 
-#: src/fetchdialog.cpp:294
+#: src/fetchdialog.cpp:295
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr "اجلب المزيد من النتائج من مصدر البيانات الحالي"
 
-#: src/fetchdialog.cpp:300
+#: src/fetchdialog.cpp:301
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr "امسح جميع حقول البحث والنتائج"
 
-#: src/fetchdialog.cpp:312
+#: src/fetchdialog.cpp:313
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr "%p٪"
 
-#: src/fetchdialog.cpp:392
+#: src/fetchdialog.cpp:395
 #, kde-format
 msgid "Cancelling the search..."
 msgstr "ألغِ البحث..."
 
-#: src/fetchdialog.cpp:405 src/fetchdialog.cpp:584
+#: src/fetchdialog.cpp:408 src/fetchdialog.cpp:587
 #, kde-format
 msgid "Searching..."
 msgstr "يبحث..."
 
-#: src/fetchdialog.cpp:465
+#: src/fetchdialog.cpp:468
 #, kde-format
 msgid "The search returned no items."
 msgstr "البحث أعاد لا عناصر."
 
-#: src/fetchdialog.cpp:468
+#: src/fetchdialog.cpp:471
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
@@ -4535,52 +4535,52 @@ msgstr[3] "البحث أعاد %1 عنصرًا."
 msgstr[4] "البحث أعاد %1 عنصرًا."
 msgstr[5] "البحث أعاد %1 عنصرًا."
 
-#: src/fetchdialog.cpp:497
+#: src/fetchdialog.cpp:500
 #, kde-format
 msgid "No results were found for the following ISBN values:"
 msgstr "لا نتائج عثر عليها لقيم ISBN التالية:"
 
-#: src/fetchdialog.cpp:499
+#: src/fetchdialog.cpp:502
 #, kde-format
 msgid "No Results"
 msgstr "لا نتائج"
 
-#: src/fetchdialog.cpp:551 src/fetchdialog.cpp:607
+#: src/fetchdialog.cpp:554 src/fetchdialog.cpp:610
 #, kde-format
 msgid "Fetching %1..."
 msgstr "يجلب %1..."
 
-#: src/fetchdialog.cpp:624
+#: src/fetchdialog.cpp:627
 #, kde-format
 msgid "Attribution"
 msgstr "العزو"
 
-#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:885
+#: src/fetchdialog.cpp:668 src/fetchdialog.cpp:892
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "لا مصادر إنترنت متوفرة لنوع تشكيلتك الحالية."
 
-#: src/fetchdialog.cpp:742
+#: src/fetchdialog.cpp:749
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "حرّر قيم ISBN/UPC"
 
-#: src/fetchdialog.cpp:753
+#: src/fetchdialog.cpp:760
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>أدخل قيم ISBN أو UPC، قيمة واحدة لكل سطر.</qt>"
 
-#: src/fetchdialog.cpp:769
+#: src/fetchdialog.cpp:776
 #, kde-format
 msgid "&Load From File..."
 msgstr "&حمّل من ملفّ..."
 
-#: src/fetchdialog.cpp:770
+#: src/fetchdialog.cpp:777
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>حمّل القائمة من ملف نصي.</qt>"
 
-#: src/fetchdialog.cpp:794
+#: src/fetchdialog.cpp:801
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "

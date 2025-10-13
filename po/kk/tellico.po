@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-12 02:38+0000\n"
+"POT-Creation-Date: 2025-10-13 02:35+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -978,7 +978,7 @@ msgstr ""
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:388 src/fetch/colnectfetcher.cpp:868
 #: src/fetch/numistafetcher.cpp:351 src/fetch/numistafetcher.cpp:399
-#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:249
+#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:250
 #, kde-format
 msgid "Description"
 msgstr "Сипатамасы"
@@ -1703,7 +1703,7 @@ msgstr "Жолсызықтары"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:512 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:321 src/fetchdialog.cpp:248 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:321 src/fetchdialog.cpp:249 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:437
 #, kde-format
@@ -2843,9 +2843,9 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:327
-#: src/fetchdialog.cpp:426 src/fetchdialog.cpp:559 src/fetchdialog.cpp:620
-#: src/fetchdialog.cpp:634 src/gui/statusbar.cpp:94
+#: src/controller.cpp:145 src/controller.cpp:199 src/fetchdialog.cpp:328
+#: src/fetchdialog.cpp:429 src/fetchdialog.cpp:562 src/fetchdialog.cpp:623
+#: src/fetchdialog.cpp:637 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Дайын."
@@ -4489,86 +4489,86 @@ msgstr ""
 "керек қылмайды. Бұл пароль кәдімгі мәтін түрінде Tellico баптаулар файлына "
 "сақталады."
 
-#: src/fetchdialog.cpp:138 src/mainwindow.cpp:608
+#: src/fetchdialog.cpp:139 src/mainwindow.cpp:608
 #, kde-format
 msgid "Internet Search"
 msgstr "Интернетте іздеу"
 
-#: src/fetchdialog.cpp:149
+#: src/fetchdialog.cpp:150
 #, kde-format
 msgid "Search Query"
 msgstr "Іздеу талабы"
 
-#: src/fetchdialog.cpp:158
+#: src/fetchdialog.cpp:159
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "І&здеу:"
 
-#: src/fetchdialog.cpp:164
+#: src/fetchdialog.cpp:165
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr ""
 "Іздейтінді келтіріңіз. ISBN бойынша іздеу үшін толық ISBN нөмірі керек.."
 
-#: src/fetchdialog.cpp:174
+#: src/fetchdialog.cpp:175
 #, kde-format
 msgid "Choose the type of search"
 msgstr "Іздеу түрін таңдау"
 
-#: src/fetchdialog.cpp:178 src/fetchdialog.cpp:402 src/fetchdialog.cpp:581
+#: src/fetchdialog.cpp:179 src/fetchdialog.cpp:405 src/fetchdialog.cpp:584
 #, kde-format
 msgid "&Stop"
 msgstr "&Тоқтату"
 
-#: src/fetchdialog.cpp:181
+#: src/fetchdialog.cpp:182
 #, kde-format
 msgid "Click to start or stop the search"
 msgstr "Іздеуді бастау не тоқтату үшін түртіңіз"
 
-#: src/fetchdialog.cpp:188 src/fetchdialog.cpp:461
+#: src/fetchdialog.cpp:189 src/fetchdialog.cpp:464
 #, kde-format
 msgid "&Search"
 msgstr "&Іздеу"
 
-#: src/fetchdialog.cpp:200
+#: src/fetchdialog.cpp:201
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
 msgstr "&Бірнеше ISBN/UPC іздеу"
 
-#: src/fetchdialog.cpp:202
+#: src/fetchdialog.cpp:203
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr "Бірнеше ISBN не UPC мәндерін іздеу үшін белгісін қойыңыз."
 
-#: src/fetchdialog.cpp:206
+#: src/fetchdialog.cpp:207
 #, kde-format
 msgid "Edit ISBN/UPC values..."
 msgstr "ISBN/UPC мәндерін өзгерту..."
 
-#: src/fetchdialog.cpp:210
+#: src/fetchdialog.cpp:211
 #, kde-format
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
 "values."
 msgstr "Бірнеше ISBN не UPC мәндерін өзгерту диалогын шақыру үшін түртіңіз."
 
-#: src/fetchdialog.cpp:216
+#: src/fetchdialog.cpp:217
 #, kde-format
 msgid "Search s&ource:"
 msgstr "І&здейтін дерек көздері:"
 
-#: src/fetchdialog.cpp:231
+#: src/fetchdialog.cpp:232
 #, kde-format
 msgid "Select the database to search"
 msgstr "Іздейтін деректер қорын таңдау"
 
-#: src/fetchdialog.cpp:250
+#: src/fetchdialog.cpp:251
 #, kde-format
 msgid "Source"
 msgstr "Дерек көзі"
 
-#: src/fetchdialog.cpp:261
+#: src/fetchdialog.cpp:262
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
@@ -4577,7 +4577,7 @@ msgstr ""
 "Табылғаны осы тізімге қосылады. Оның біреуін таңдаса - төменде толық жазуы "
 "көрсетіледі."
 
-#: src/fetchdialog.cpp:274
+#: src/fetchdialog.cpp:275
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
@@ -4586,104 +4586,104 @@ msgstr ""
 "Жоғардағы тізімінен таңдап назардағы жинаққа қосудың алдында жазуы осында "
 "көрсетіледі "
 
-#: src/fetchdialog.cpp:282
+#: src/fetchdialog.cpp:283
 #, kde-format
 msgid "&Add Entry"
 msgstr "Жазуды қ&осу"
 
-#: src/fetchdialog.cpp:287
+#: src/fetchdialog.cpp:288
 #, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr "Таңдалғанды назардағы жинаққа қосу "
 
-#: src/fetchdialog.cpp:290
+#: src/fetchdialog.cpp:291
 #, kde-format
 msgid "Get More Results"
 msgstr "Тағы да іздеу"
 
-#: src/fetchdialog.cpp:294
+#: src/fetchdialog.cpp:295
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr "Дерек көзінен тағы да табу"
 
-#: src/fetchdialog.cpp:300
+#: src/fetchdialog.cpp:301
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr "Бүкіл іздеу өрісімен нәтижелерін тазалау"
 
-#: src/fetchdialog.cpp:312
+#: src/fetchdialog.cpp:313
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr ""
 
-#: src/fetchdialog.cpp:392
+#: src/fetchdialog.cpp:395
 #, kde-format
 msgid "Cancelling the search..."
 msgstr "Іздеуден айну..."
 
-#: src/fetchdialog.cpp:405 src/fetchdialog.cpp:584
+#: src/fetchdialog.cpp:408 src/fetchdialog.cpp:587
 #, kde-format
 msgid "Searching..."
 msgstr "Іздеу..."
 
-#: src/fetchdialog.cpp:465
+#: src/fetchdialog.cpp:468
 #, kde-format
 msgid "The search returned no items."
 msgstr "Ештеңе табылмады."
 
-#: src/fetchdialog.cpp:468
+#: src/fetchdialog.cpp:471
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
 msgstr[0] "Табылғаны: %1"
 
-#: src/fetchdialog.cpp:497
+#: src/fetchdialog.cpp:500
 #, kde-format
 msgid "No results were found for the following ISBN values:"
 msgstr "Келесі ISBN бойынша ештеңе табылмады:"
 
-#: src/fetchdialog.cpp:499
+#: src/fetchdialog.cpp:502
 #, kde-format
 msgid "No Results"
 msgstr "Нәтиже жоқ"
 
-#: src/fetchdialog.cpp:551 src/fetchdialog.cpp:607
+#: src/fetchdialog.cpp:554 src/fetchdialog.cpp:610
 #, kde-format
 msgid "Fetching %1..."
 msgstr "%1 дегенді қабылдау..."
 
-#: src/fetchdialog.cpp:624
+#: src/fetchdialog.cpp:627
 #, kde-format
 msgid "Attribution"
 msgstr "Анықтау"
 
-#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:885
+#: src/fetchdialog.cpp:668 src/fetchdialog.cpp:892
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "Назардағы жинақ түріне сәйкесті Интернете ештеңе табылмады."
 
-#: src/fetchdialog.cpp:742
+#: src/fetchdialog.cpp:749
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "ISBN/UPC мәндерін өзгерту"
 
-#: src/fetchdialog.cpp:753
+#: src/fetchdialog.cpp:760
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>ISBN не UPC нөмірлерін келтіріңіз, бір жолға біреуін.</qt>"
 
-#: src/fetchdialog.cpp:769
+#: src/fetchdialog.cpp:776
 #, kde-format
 msgid "&Load From File..."
 msgstr "&Файлдан алу..."
 
-#: src/fetchdialog.cpp:770
+#: src/fetchdialog.cpp:777
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Тізімін мәтін файлдан алу.</qt>"
 
-#: src/fetchdialog.cpp:794
+#: src/fetchdialog.cpp:801
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
