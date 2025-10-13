@@ -155,7 +155,7 @@ void ItunesFetcherTest::testFirefly() {
 
 void ItunesFetcherTest::testEscapingGravity() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword,
-                                       QStringLiteral("Escaping Gravity"));
+                                       QStringLiteral("Escaping Gravity Transform Nasa"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ItunesFetcher(this));
   QVERIFY(fetcher->canSearch(request.key()));
 

@@ -66,8 +66,7 @@ ItunesFetcher::ItunesFetcher(QObject* parent_)
     , m_imageSize(LargeImage) {
 }
 
-ItunesFetcher::~ItunesFetcher() {
-}
+ItunesFetcher::~ItunesFetcher() = default;
 
 QString ItunesFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
@@ -115,7 +114,7 @@ void ItunesFetcher::search() {
         q.addQueryItem(QStringLiteral("entity"), QLatin1String("album"));
       } else if(collectionType() == Data::Collection::Video) {
         q.addQueryItem(QStringLiteral("media"), QLatin1String("movie,tvShow"));
-        q.addQueryItem(QStringLiteral("entity"), QLatin1String("movie,tvSeason"));
+        q.addQueryItem(QStringLiteral("entity"), QLatin1String("movie,tvSeason,allTrack"));
       }
       q.addQueryItem(QStringLiteral("limit"), QString::number(ITUNES_MAX_RETURNS_TOTAL));
       q.addQueryItem(QStringLiteral("term"), QString::fromLatin1(QUrl::toPercentEncoding(request().value())));
@@ -252,9 +251,13 @@ void ItunesFetcher::slotComplete(KJob* job_) {
   QList<FetchResult*> fetchResults;
   for(const auto& result : results) {
     const auto obj = result.toObject();
-    if(obj.value(QLatin1StringView("kind")) == QLatin1String("song")) {
+    const auto kind = obj.value(QLatin1StringView("kind")).toString();
+    const auto wrap = obj.value(QLatin1StringView("wrapperType")).toString();
+    if(collectionType() == Data::Collection::Album && kind == QLatin1String("song")) {
       readTrackInfo(obj);
-    } else {
+    } else if(collectionType() != Data::Collection::Video ||
+              kind == QLatin1String("feature-movie") ||
+              wrap == QLatin1String("collection")) {
       Data::EntryPtr entry(new Data::Entry(coll));
       populateEntry(entry, obj);
 
