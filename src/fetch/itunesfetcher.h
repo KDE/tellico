@@ -82,6 +82,7 @@ public:
     virtual QString preferredName() const override;
   private:
      GUI::ComboBox* m_imageCombo;
+     GUI::ComboBox* m_countryCombo;
      bool m_multiDiscTracks;
   };
   friend class ConfigWidget;
@@ -116,6 +117,8 @@ private:
     LargeImage=2, // large is 600x600
   };
   ImageSize m_imageSize;
+
+  QString m_country;
 };
 
   } // end namespace
