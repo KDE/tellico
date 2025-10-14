@@ -600,7 +600,7 @@ ItunesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ItunesFetcher*
   if(m_countryCombo->findData(code) == -1) {
     m_countryCombo->addItem(loc.nativeCountryName(), code);
   }
-  bool b = m_countryCombo->setCurrentData(code);
+  m_countryCombo->setCurrentData(code);
   m_countryCombo->setEditable(true); // allow custom entry
   QRegularExpression rx(QLatin1String("\\w\\w")); // only 2 characters
   m_countryCombo->setValidator(new QRegularExpressionValidator(rx, this));
