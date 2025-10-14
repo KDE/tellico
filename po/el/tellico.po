@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-13 02:35+0000\n"
+"POT-Creation-Date: 2025-10-14 02:36+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -751,28 +751,28 @@ msgstr "Κλειδί Bibtex"
 
 #: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:147
 #: src/configdialog.cpp:174 src/configdialog.cpp:188 src/configdialog.cpp:205
-#: src/configdialog.cpp:1146 src/fetch/amazonfetcher.cpp:865
+#: src/configdialog.cpp:1146 src/fetch/amazonfetcher.cpp:868
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
-#: src/fetch/colnectfetcher.cpp:381 src/fetch/colnectfetcher.cpp:548
-#: src/fetch/colnectfetcher.cpp:567 src/fetch/colnectfetcher.cpp:605
-#: src/fetch/colnectfetcher.cpp:612 src/fetch/discogsfetcher.cpp:317
+#: src/fetch/colnectfetcher.cpp:385 src/fetch/colnectfetcher.cpp:552
+#: src/fetch/colnectfetcher.cpp:571 src/fetch/colnectfetcher.cpp:609
+#: src/fetch/colnectfetcher.cpp:616 src/fetch/discogsfetcher.cpp:317
 #: src/fetch/discogsfetcher.cpp:322 src/fetch/discogsfetcher.cpp:327
 #: src/fetch/discogsfetcher.cpp:334 src/fetch/discogsfetcher.cpp:341
 #: src/fetch/discogsfetcher.cpp:346 src/fetch/doubanfetcher.cpp:373
 #: src/fetch/doubanfetcher.cpp:391 src/fetch/doubanfetcher.cpp:409
-#: src/fetch/filmaffinityfetcher.cpp:286 src/fetch/filmasterfetcher.cpp:238
+#: src/fetch/filmaffinityfetcher.cpp:290 src/fetch/filmasterfetcher.cpp:238
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:253
 #: src/fetch/googlebookfetcher.cpp:258 src/fetch/igdbfetcher.cpp:366
-#: src/fetch/imdbfetcher.cpp:459 src/fetch/itunesfetcher.cpp:243
+#: src/fetch/imdbfetcher.cpp:459 src/fetch/itunesfetcher.cpp:246
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/moviemeterfetcher.cpp:219
-#: src/fetch/moviemeterfetcher.cpp:224 src/fetch/numistafetcher.cpp:344
-#: src/fetch/numistafetcher.cpp:360 src/fetch/omdbfetcher.cpp:250
+#: src/fetch/moviemeterfetcher.cpp:224 src/fetch/numistafetcher.cpp:348
+#: src/fetch/numistafetcher.cpp:364 src/fetch/omdbfetcher.cpp:250
 #: src/fetch/openlibraryfetcher.cpp:470 src/fetch/thegamesdbfetcher.cpp:265
-#: src/fetch/thegamesdbfetcher.cpp:270 src/fetch/themoviedbfetcher.cpp:307
-#: src/fetch/themoviedbfetcher.cpp:310 src/fetch/themoviedbfetcher.cpp:315
-#: src/fetch/themoviedbfetcher.cpp:333 src/fetch/thetvdbfetcher.cpp:245
+#: src/fetch/thegamesdbfetcher.cpp:270 src/fetch/themoviedbfetcher.cpp:311
+#: src/fetch/themoviedbfetcher.cpp:314 src/fetch/themoviedbfetcher.cpp:319
+#: src/fetch/themoviedbfetcher.cpp:337 src/fetch/thetvdbfetcher.cpp:245
 #: src/fetch/thetvdbfetcher.cpp:250 src/fetch/thetvdbfetcher.cpp:255
 #: src/fetch/tvmazefetcher.cpp:175 src/fetch/tvmazefetcher.cpp:180
 #: src/fetch/upcitemdbfetcher.cpp:213 src/fetch/vgcollectfetcher.cpp:234
@@ -816,7 +816,7 @@ msgid "Publisher"
 msgstr "Εκδότης"
 
 #: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:303
-#: src/fetch/srufetcher.cpp:552 src/fetch/z3950fetcher.cpp:572
+#: src/fetch/srufetcher.cpp:552 src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgid "Address"
 msgstr "Διεύθυνση"
@@ -886,8 +886,8 @@ msgstr "Κεφάλαιο"
 
 #: src/collections/bibtexcollection.cpp:208
 #: src/collections/bookcollection.cpp:137 src/collections/cardcollection.cpp:78
-#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:380
-#: src/fetch/colnectfetcher.cpp:865
+#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:384
+#: src/fetch/colnectfetcher.cpp:869
 #, kde-format
 msgid "Series"
 msgstr "Σειρά"
@@ -912,7 +912,7 @@ msgstr "Αντι-Παραπομπή"
 #: src/collections/cardcollection.cpp:107
 #: src/collections/comicbookcollection.cpp:114
 #: src/collections/musiccollection.cpp:109
-#: src/collections/videocollection.cpp:209 src/fetch/amazonfetcher.cpp:1080
+#: src/collections/videocollection.cpp:209 src/fetch/amazonfetcher.cpp:1083
 #, kde-format
 msgid "Keywords"
 msgstr "Λέξεις κλειδιά"
@@ -929,7 +929,7 @@ msgstr "URL"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:521
 #: src/fetch/hathitrustfetcher.cpp:304 src/fetch/srufetcher.cpp:553
-#: src/fetch/z3950fetcher.cpp:573
+#: src/fetch/z3950fetcher.cpp:577
 #, kde-format
 msgid "Abstract"
 msgstr "Περίληψη"
@@ -995,8 +995,8 @@ msgstr "Ελάχιστη ηλικία"
 #: src/collections/filecatalog.cpp:54 src/collections/gamecollection.cpp:90
 #: src/collections/stampcollection.cpp:49
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
-#: src/fetch/colnectfetcher.cpp:388 src/fetch/colnectfetcher.cpp:868
-#: src/fetch/numistafetcher.cpp:351 src/fetch/numistafetcher.cpp:399
+#: src/fetch/colnectfetcher.cpp:392 src/fetch/colnectfetcher.cpp:872
+#: src/fetch/numistafetcher.cpp:355 src/fetch/numistafetcher.cpp:403
 #: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:250
 #, kde-format
 msgid "Description"
@@ -1094,7 +1094,7 @@ msgstr "Τα βιβλία μου"
 msgid "Subtitle"
 msgstr "Υπότιτλος"
 
-#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:969
+#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:972
 #: src/fetch/doubanfetcher.cpp:446 src/fetch/doubanfetcher.cpp:499
 #: src/fetch/ibsfetcher.cpp:289 src/translators/alexandriaimporter.cpp:163
 #: src/translators/librarythingimporter.cpp:149
@@ -1102,7 +1102,7 @@ msgstr "Υπότιτλος"
 msgid "Hardback"
 msgstr "Σκληρόδετο"
 
-#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
+#: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:970
 #: src/fetch/doubanfetcher.cpp:448 src/fetch/doubanfetcher.cpp:501
 #: src/fetch/ibsfetcher.cpp:287 src/translators/librarythingimporter.cpp:147
 #, kde-format
@@ -1115,7 +1115,7 @@ msgid "Trade Paperback"
 msgstr "Εμπορικό χαρτόδετο"
 
 #: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
-#: src/fetch/itunesfetcher.cpp:440 src/translators/filereaderbook.cpp:86
+#: src/fetch/itunesfetcher.cpp:447 src/translators/filereaderbook.cpp:86
 #, kde-format
 msgid "E-Book"
 msgstr "Ηλεκτρονικό βιβλίο"
@@ -1326,14 +1326,14 @@ msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "Grading Service"
 msgstr "Υπηρεσία βαθμολόγησης"
 
-#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:863
-#: src/fetch/numistafetcher.cpp:401
+#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:867
+#: src/fetch/numistafetcher.cpp:405
 #, kde-format
 msgid "Obverse"
 msgstr "Μπροστινή όψη"
 
-#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:864
-#: src/fetch/numistafetcher.cpp:402
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:868
+#: src/fetch/numistafetcher.cpp:406
 #, kde-format
 msgid "Reverse"
 msgstr "Αντιστροφή"
@@ -1665,7 +1665,7 @@ msgid "Compact Disc"
 msgstr "CD"
 
 #: src/collections/musiccollection.cpp:50
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1047
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1050
 #: src/fetch/discogsfetcher.cpp:459 src/fetch/upcitemdbfetcher.cpp:420
 #: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:169
 #, kde-format
@@ -1692,7 +1692,7 @@ msgstr "Μέσο"
 
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:513
-#: src/fetch/itunesfetcher.cpp:322 src/translators/audiofileimporter.cpp:236
+#: src/fetch/itunesfetcher.cpp:329 src/translators/audiofileimporter.cpp:236
 #: src/translators/xmlstatehandler.cpp:438
 #, kde-format
 msgid "Artist"
@@ -1714,7 +1714,7 @@ msgstr "Κομμάτια"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:512 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:321 src/fetchdialog.cpp:249 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:328 src/fetchdialog.cpp:249 src/field.cpp:296
 #: src/field.cpp:342 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:437
 #, kde-format
@@ -1722,7 +1722,7 @@ msgid "Title"
 msgstr "Τίτλος"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:514
-#: src/fetch/itunesfetcher.cpp:323 src/translators/audiofileimporter.cpp:237
+#: src/fetch/itunesfetcher.cpp:330 src/translators/audiofileimporter.cpp:237
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Length"
@@ -1786,7 +1786,7 @@ msgstr "Εικόνα"
 msgid "My Videos"
 msgstr "Τα βίντεο μου"
 
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1033
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1036
 #: src/fetch/upcitemdbfetcher.cpp:406
 #, kde-format
 msgid "VHS"
@@ -1802,13 +1802,13 @@ msgstr "VCD"
 msgid "DivX"
 msgstr "DivX"
 
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1027
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1030
 #: src/fetch/upcitemdbfetcher.cpp:400
 #, kde-format
 msgid "Blu-ray"
 msgstr "Blu-ray"
 
-#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1030
+#: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1033
 #: src/fetch/upcitemdbfetcher.cpp:403
 #, kde-format
 msgid "HD DVD"
@@ -1886,7 +1886,7 @@ msgstr "Περιοχή"
 msgid "Nationality"
 msgstr "Εθνικότητα"
 
-#: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1043
+#: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1046
 #: src/fetch/upcitemdbfetcher.cpp:416
 #, kde-format
 msgid "NTSC"
@@ -1980,7 +1980,7 @@ msgstr "Ο χρόνος της ταινίας (σε λεπτά)"
 msgid "Aspect Ratio"
 msgstr "Αναλογία"
 
-#: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1016
+#: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1019
 #: src/fetch/upcitemdbfetcher.cpp:386
 #, kde-format
 msgid "Widescreen"
@@ -1996,7 +1996,7 @@ msgstr "Ασπρόμαυρο"
 msgid "Color Mode"
 msgstr "Λειτουργία χρώματος"
 
-#: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1037
+#: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1040
 #: src/fetch/upcitemdbfetcher.cpp:410
 #, kde-format
 msgid "Director's Cut"
@@ -3132,14 +3132,14 @@ msgstr "Ενημέρωση καταχωρήσεων"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Ενημέρωση <b>%1</b>..."
 
-#: src/entryview.cpp:360
+#: src/entryview.cpp:357
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr ""
 "Το Tellico δεν μπορεί να εντοπίσει το προκαθορισμένο στυλ φύλλου για τις "
 "καταχωρήσεις."
 
-#: src/entryview.cpp:362 src/mainwindow.cpp:1866
+#: src/entryview.cpp:359 src/mainwindow.cpp:1866
 #, kde-format
 msgid "Please check your installation."
 msgstr "Παρακαλώ ελέγξτε την εγκατάστασή σας."
@@ -3221,13 +3221,13 @@ msgstr ""
 msgid "SAO/NASA Astrophysics Data System"
 msgstr ""
 
-#: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1097
+#: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1100
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:230
 #: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:598
 #: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:381
 #: src/fetch/isbndbfetcher.cpp:393 src/fetch/mobygamesfetcher.cpp:649
 #: src/fetch/omdbfetcher.cpp:408 src/fetch/thegamesdbfetcher.cpp:635
-#: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:578
+#: src/fetch/themoviedbfetcher.cpp:589 src/fetch/thetvdbfetcher.cpp:578
 #, kde-format
 msgid ""
 "Registration is required for accessing this data source. If you agree to the "
@@ -3239,13 +3239,13 @@ msgstr ""
 "αποκτήσετε έναν λογαριασμό</a>, εισάγοντας τις προσωπικές σας πληροφορίες "
 "παρακάτω."
 
-#: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1109
+#: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1112
 #: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:242
 #: src/fetch/entrezfetcher.cpp:538 src/fetch/giantbombfetcher.cpp:227
 #: src/fetch/googlebookfetcher.cpp:393 src/fetch/isbndbfetcher.cpp:405
-#: src/fetch/mobygamesfetcher.cpp:661 src/fetch/numistafetcher.cpp:415
+#: src/fetch/mobygamesfetcher.cpp:661 src/fetch/numistafetcher.cpp:419
 #: src/fetch/omdbfetcher.cpp:420 src/fetch/thegamesdbfetcher.cpp:647
-#: src/fetch/themoviedbfetcher.cpp:597
+#: src/fetch/themoviedbfetcher.cpp:601
 #, kde-format
 msgid "Access key: "
 msgstr "Κλειδί πρόσβασης: "
@@ -3253,7 +3253,7 @@ msgstr "Κλειδί πρόσβασης: "
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:248 src/fetch/entrezfetcher.cpp:544
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:399
-#: src/fetch/themoviedbfetcher.cpp:603 src/fetch/thetvdbfetcher.cpp:596
+#: src/fetch/themoviedbfetcher.cpp:607 src/fetch/thetvdbfetcher.cpp:596
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3262,174 +3262,174 @@ msgstr ""
 "Το προκαθορισμένο κλειδί πρόσβασης του Tellico μπορεί να χρησιμοποιηθεί, "
 "αλλά η αναζήτηση μπορεί να αποτύχει εάν πλησιάσετε τα όρια της πρόσβασης."
 
-#: src/fetch/amazonfetcher.cpp:79
+#: src/fetch/amazonfetcher.cpp:82
 #, kde-format
 msgid "Amazon (US)"
 msgstr "Amazon (Η.Π.Α.)"
 
-#: src/fetch/amazonfetcher.cpp:83
+#: src/fetch/amazonfetcher.cpp:86 src/fetch/itunesfetcher.cpp:597
 #, kde-format
 msgid "United States"
 msgstr "Ηνωμένες Πολιτείες"
 
-#: src/fetch/amazonfetcher.cpp:85
+#: src/fetch/amazonfetcher.cpp:88
 #, kde-format
 msgid "Amazon (UK)"
 msgstr "Amazon (Η.Β.)"
 
-#: src/fetch/amazonfetcher.cpp:89
+#: src/fetch/amazonfetcher.cpp:92 src/fetch/itunesfetcher.cpp:596
 #, kde-format
 msgid "United Kingdom"
 msgstr "Ηνωμένο Βασίλειο"
 
-#: src/fetch/amazonfetcher.cpp:91
+#: src/fetch/amazonfetcher.cpp:94
 #, kde-format
 msgid "Amazon (Germany)"
 msgstr "Amazon (Γερμανία)"
 
-#: src/fetch/amazonfetcher.cpp:95
+#: src/fetch/amazonfetcher.cpp:98 src/fetch/itunesfetcher.cpp:592
 #, kde-format
 msgid "Germany"
 msgstr "Γερμανία"
 
-#: src/fetch/amazonfetcher.cpp:97
+#: src/fetch/amazonfetcher.cpp:100
 #, kde-format
 msgid "Amazon (Japan)"
 msgstr "Amazon (Ιαπωνία)"
 
-#: src/fetch/amazonfetcher.cpp:101
+#: src/fetch/amazonfetcher.cpp:104 src/fetch/itunesfetcher.cpp:594
 #, kde-format
 msgid "Japan"
 msgstr "Ιαπωνία"
 
-#: src/fetch/amazonfetcher.cpp:103
+#: src/fetch/amazonfetcher.cpp:106
 #, kde-format
 msgid "Amazon (France)"
 msgstr "Amazon (Γαλλία)"
 
-#: src/fetch/amazonfetcher.cpp:107
+#: src/fetch/amazonfetcher.cpp:110 src/fetch/itunesfetcher.cpp:591
 #, kde-format
 msgid "France"
 msgstr "Γαλλία"
 
-#: src/fetch/amazonfetcher.cpp:109
+#: src/fetch/amazonfetcher.cpp:112
 #, kde-format
 msgid "Amazon (Canada)"
 msgstr "Amazon (Καναδάς)"
 
-#: src/fetch/amazonfetcher.cpp:113
+#: src/fetch/amazonfetcher.cpp:116 src/fetch/itunesfetcher.cpp:590
 #, kde-format
 msgid "Canada"
 msgstr "Καναδάς"
 
-#: src/fetch/amazonfetcher.cpp:116
+#: src/fetch/amazonfetcher.cpp:119
 #, kde-format
 msgid "Amazon (China)"
 msgstr "Amazon (Κίνα)"
 
-#: src/fetch/amazonfetcher.cpp:120
+#: src/fetch/amazonfetcher.cpp:123
 #, kde-format
 msgid "China"
 msgstr "Κίνα"
 
-#: src/fetch/amazonfetcher.cpp:122
+#: src/fetch/amazonfetcher.cpp:125
 #, kde-format
 msgid "Amazon (Spain)"
 msgstr "Amazon (Ισπανία)"
 
-#: src/fetch/amazonfetcher.cpp:126
+#: src/fetch/amazonfetcher.cpp:129
 #, kde-format
 msgid "Spain"
 msgstr "Ισπανία"
 
-#: src/fetch/amazonfetcher.cpp:128
+#: src/fetch/amazonfetcher.cpp:131
 #, kde-format
 msgid "Amazon (Italy)"
 msgstr "Amazon (Ιταλία)"
 
-#: src/fetch/amazonfetcher.cpp:132
+#: src/fetch/amazonfetcher.cpp:135
 #, kde-format
 msgid "Italy"
 msgstr "Ιταλία"
 
-#: src/fetch/amazonfetcher.cpp:134
+#: src/fetch/amazonfetcher.cpp:137
 #, kde-format
 msgid "Amazon (Brazil)"
 msgstr "Amazon (Βραζιλία)"
 
-#: src/fetch/amazonfetcher.cpp:138
+#: src/fetch/amazonfetcher.cpp:141 src/fetch/itunesfetcher.cpp:589
 #, kde-format
 msgid "Brazil"
 msgstr "Βραζιλία"
 
-#: src/fetch/amazonfetcher.cpp:140
+#: src/fetch/amazonfetcher.cpp:143
 #, kde-format
 msgid "Amazon (Australia)"
 msgstr "Amazon (Αυστραλία)"
 
-#: src/fetch/amazonfetcher.cpp:144
+#: src/fetch/amazonfetcher.cpp:147
 #, kde-format
 msgid "Australia"
 msgstr "Αυστραλία"
 
-#: src/fetch/amazonfetcher.cpp:146
+#: src/fetch/amazonfetcher.cpp:149
 #, kde-format
 msgid "Amazon (India)"
 msgstr "Amazon (Ινδία)"
 
-#: src/fetch/amazonfetcher.cpp:150
+#: src/fetch/amazonfetcher.cpp:153 src/fetch/itunesfetcher.cpp:593
 #, kde-format
 msgid "India"
 msgstr "Ινδία"
 
-#: src/fetch/amazonfetcher.cpp:152
+#: src/fetch/amazonfetcher.cpp:155
 #, kde-format
 msgid "Amazon (Mexico)"
 msgstr "Amazon (Μεξικό)"
 
-#: src/fetch/amazonfetcher.cpp:156
+#: src/fetch/amazonfetcher.cpp:159 src/fetch/itunesfetcher.cpp:595
 #, kde-format
 msgid "Mexico"
 msgstr "Μεξικό"
 
-#: src/fetch/amazonfetcher.cpp:158
+#: src/fetch/amazonfetcher.cpp:161
 #, kde-format
 msgid "Amazon (Turkey)"
 msgstr "Amazon (Τουρκία)"
 
-#: src/fetch/amazonfetcher.cpp:162
+#: src/fetch/amazonfetcher.cpp:165
 #, kde-format
 msgid "Turkey"
 msgstr "Τουρκία"
 
-#: src/fetch/amazonfetcher.cpp:164
+#: src/fetch/amazonfetcher.cpp:167
 #, kde-format
 msgid "Amazon (Singapore)"
 msgstr "Amazon (Σιγκαπούρη)"
 
-#: src/fetch/amazonfetcher.cpp:168
+#: src/fetch/amazonfetcher.cpp:171
 #, kde-format
 msgid "Singapore"
 msgstr "Σιγκαπούρη"
 
-#: src/fetch/amazonfetcher.cpp:170
+#: src/fetch/amazonfetcher.cpp:173
 #, kde-format
 msgid "Amazon (UAE)"
 msgstr "Amazon (ΗΑΕ)"
 
-#: src/fetch/amazonfetcher.cpp:174
+#: src/fetch/amazonfetcher.cpp:177
 #, kde-format
 msgid "United Arab Emirates"
 msgstr "Ηνωμένα Αραβικά Εμιράτα"
 
-#: src/fetch/amazonfetcher.cpp:199 src/fetch/filmasterfetcher.cpp:67
+#: src/fetch/amazonfetcher.cpp:202 src/fetch/filmasterfetcher.cpp:67
 #: src/fetch/springerfetcher.cpp:62
 #, kde-format
 msgid "This data is licensed under <a href=%1>specific terms</a>."
 msgstr ""
 "Αυτά τα δεδομένα έχουν αδειοδοτηθεί με <a href=%1>συγκεκριμένους όρους</a>."
 
-#: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1114
+#: src/fetch/amazonfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1117
 #, kde-format
 msgid ""
 "Access to data from Amazon.com requires an AWS Access Key ID and a Secret "
@@ -3438,30 +3438,30 @@ msgstr ""
 "Η πρόσβαση στα δεδομένα του Amazon.com απαιτεί ένα AWS κλειδί πρόσβασης ID "
 "και ένα μυστικό κλειδί."
 
-#: src/fetch/amazonfetcher.cpp:271 src/fetch/discogsfetcher.cpp:148
+#: src/fetch/amazonfetcher.cpp:274 src/fetch/discogsfetcher.cpp:148
 #: src/fetch/isbndbfetcher.cpp:163 src/fetch/mobygamesfetcher.cpp:162
 #: src/fetch/omdbfetcher.cpp:119 src/fetch/thegamesdbfetcher.cpp:136
-#: src/fetch/themoviedbfetcher.cpp:159 src/fetch/thetvdbfetcher.cpp:159
+#: src/fetch/themoviedbfetcher.cpp:163 src/fetch/thetvdbfetcher.cpp:159
 #, kde-format
 msgid "Those values must be entered in the data source settings."
 msgstr "Αυτές οι τιμές πρέπει να εισαχθούν στις ρυθμίσεις της πηγής δεδομένων."
 
-#: src/fetch/amazonfetcher.cpp:466
+#: src/fetch/amazonfetcher.cpp:469
 #, kde-format
 msgid "Results from %1: %2/%3"
 msgstr "Αποτελέσματα από %1: %2/%3"
 
-#: src/fetch/amazonfetcher.cpp:635 src/fetch/colnectfetcher.cpp:840
+#: src/fetch/amazonfetcher.cpp:638 src/fetch/colnectfetcher.cpp:844
 #: src/fetch/discogsfetcher.cpp:227 src/fetch/doubanfetcher.cpp:477
-#: src/fetch/filmaffinityfetcher.cpp:432 src/fetch/filmasterfetcher.cpp:147
+#: src/fetch/filmaffinityfetcher.cpp:436 src/fetch/filmasterfetcher.cpp:147
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:198
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
-#: src/fetch/isbndbfetcher.cpp:294 src/fetch/itunesfetcher.cpp:366
+#: src/fetch/isbndbfetcher.cpp:294 src/fetch/itunesfetcher.cpp:373
 #: src/fetch/kinofetcher.cpp:413 src/fetch/kinopoiskfetcher.cpp:267
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/mobygamesfetcher.cpp:343
-#: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:286
-#: src/fetch/numistafetcher.cpp:294 src/fetch/omdbfetcher.cpp:181
-#: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:235
+#: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:290
+#: src/fetch/numistafetcher.cpp:298 src/fetch/omdbfetcher.cpp:181
+#: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:239
 #: src/fetch/thetvdbfetcher.cpp:340 src/fetch/tvmazefetcher.cpp:262
 #: src/fetch/upcitemdbfetcher.cpp:259 src/fetch/vgcollectfetcher.cpp:282
 #: src/fetch/vndbfetcher.cpp:182
@@ -3469,27 +3469,27 @@ msgstr "Αποτελέσματα από %1: %2/%3"
 msgid "The cover image could not be loaded."
 msgstr "Το εξώφυλλο δεν ήταν δυνατό να φορτωθεί."
 
-#: src/fetch/amazonfetcher.cpp:864 src/fetch/amazonfetcher.cpp:1081
+#: src/fetch/amazonfetcher.cpp:867 src/fetch/amazonfetcher.cpp:1084
 #, kde-format
 msgid "Amazon Link"
 msgstr "Amazon Link"
 
-#: src/fetch/amazonfetcher.cpp:1071
+#: src/fetch/amazonfetcher.cpp:1074
 #, kde-format
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com Υπηρεσίες Web"
 
-#: src/fetch/amazonfetcher.cpp:1119
+#: src/fetch/amazonfetcher.cpp:1122
 #, kde-format
 msgid "Secret key: "
 msgstr "Κρυφό κλειδί:"
 
-#: src/fetch/amazonfetcher.cpp:1129
+#: src/fetch/amazonfetcher.cpp:1132 src/fetch/itunesfetcher.cpp:583
 #, kde-format
 msgid "Country: "
 msgstr "Χώρα: "
 
-#: src/fetch/amazonfetcher.cpp:1144
+#: src/fetch/amazonfetcher.cpp:1150
 #, kde-format
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
@@ -3498,9 +3498,9 @@ msgstr ""
 "Το Amazon.com παρέχει δεδομένα από πολλούς διαφορετικούς ιστότοπους. "
 "Επιλέξτε αυτόν που επιθυμείτε να χρησιμοποιήσετε γι' αυτή την πηγή δεδομένων."
 
-#: src/fetch/amazonfetcher.cpp:1150 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:618
-#: src/fetch/imdbfetcher.cpp:567 src/fetch/itunesfetcher.cpp:565
+#: src/fetch/amazonfetcher.cpp:1156 src/fetch/boardgamegeekfetcher.cpp:215
+#: src/fetch/colnectfetcher.cpp:1012 src/fetch/discogsfetcher.cpp:618
+#: src/fetch/imdbfetcher.cpp:567 src/fetch/itunesfetcher.cpp:572
 #: src/fetch/mobygamesfetcher.cpp:669 src/fetch/moviemeterfetcher.cpp:319
 #: src/fetch/openlibraryfetcher.cpp:639 src/fetch/rpggeekfetcher.cpp:224
 #: src/fetch/thegamesdbfetcher.cpp:655 src/fetch/videogamegeekfetcher.cpp:237
@@ -3508,9 +3508,9 @@ msgstr ""
 msgid "&Image size: "
 msgstr "&Μέγεθος εικόνας"
 
-#: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:219
-#: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:621
-#: src/fetch/imdbfetcher.cpp:570 src/fetch/itunesfetcher.cpp:569
+#: src/fetch/amazonfetcher.cpp:1159 src/fetch/boardgamegeekfetcher.cpp:219
+#: src/fetch/colnectfetcher.cpp:1016 src/fetch/discogsfetcher.cpp:621
+#: src/fetch/imdbfetcher.cpp:570 src/fetch/itunesfetcher.cpp:576
 #: src/fetch/mobygamesfetcher.cpp:672 src/fetch/moviemeterfetcher.cpp:322
 #: src/fetch/openlibraryfetcher.cpp:642 src/fetch/rpggeekfetcher.cpp:228
 #: src/fetch/thegamesdbfetcher.cpp:658 src/fetch/videogamegeekfetcher.cpp:241
@@ -3518,7 +3518,7 @@ msgstr "&Μέγεθος εικόνας"
 msgid "Small Image"
 msgstr "Μικρή εικόνα"
 
-#: src/fetch/amazonfetcher.cpp:1154 src/fetch/imdbfetcher.cpp:571
+#: src/fetch/amazonfetcher.cpp:1160 src/fetch/imdbfetcher.cpp:571
 #: src/fetch/moviemeterfetcher.cpp:323 src/fetch/openlibraryfetcher.cpp:643
 #: src/fetch/thegamesdbfetcher.cpp:659
 #, kde-format
@@ -3526,9 +3526,9 @@ msgid "Medium Image"
 msgstr "Μεσαία εικόνα"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
-#: src/fetch/amazonfetcher.cpp:1155 src/fetch/boardgamegeekfetcher.cpp:220
-#: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:623
-#: src/fetch/imdbfetcher.cpp:572 src/fetch/itunesfetcher.cpp:570
+#: src/fetch/amazonfetcher.cpp:1161 src/fetch/boardgamegeekfetcher.cpp:220
+#: src/fetch/colnectfetcher.cpp:1017 src/fetch/discogsfetcher.cpp:623
+#: src/fetch/imdbfetcher.cpp:572 src/fetch/itunesfetcher.cpp:577
 #: src/fetch/mobygamesfetcher.cpp:674 src/fetch/moviemeterfetcher.cpp:324
 #: src/fetch/openlibraryfetcher.cpp:644 src/fetch/rpggeekfetcher.cpp:229
 #: src/fetch/thegamesdbfetcher.cpp:660 src/fetch/videogamegeekfetcher.cpp:242
@@ -3536,9 +3536,9 @@ msgstr "Μεσαία εικόνα"
 msgid "Large Image"
 msgstr "Μεγάλη εικόνα"
 
-#: src/fetch/amazonfetcher.cpp:1156 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:624
-#: src/fetch/imdbfetcher.cpp:573 src/fetch/itunesfetcher.cpp:568
+#: src/fetch/amazonfetcher.cpp:1162 src/fetch/boardgamegeekfetcher.cpp:218
+#: src/fetch/colnectfetcher.cpp:1015 src/fetch/discogsfetcher.cpp:624
+#: src/fetch/imdbfetcher.cpp:573 src/fetch/itunesfetcher.cpp:575
 #: src/fetch/mobygamesfetcher.cpp:675 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:645 src/fetch/rpggeekfetcher.cpp:227
 #: src/fetch/thegamesdbfetcher.cpp:661 src/fetch/videogamegeekfetcher.cpp:240
@@ -3546,7 +3546,7 @@ msgstr "Μεγάλη εικόνα"
 msgid "No Image"
 msgstr "Χωρίς εικόνα"
 
-#: src/fetch/amazonfetcher.cpp:1159 src/fetch/discogsfetcher.cpp:628
+#: src/fetch/amazonfetcher.cpp:1165 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:679
 #: src/fetch/moviemeterfetcher.cpp:329 src/fetch/openlibraryfetcher.cpp:649
 #: src/fetch/thegamesdbfetcher.cpp:665
@@ -3556,12 +3556,12 @@ msgid ""
 "the collection may degrade performance."
 msgstr "Το εξώφυλλο "
 
-#: src/fetch/amazonfetcher.cpp:1165
+#: src/fetch/amazonfetcher.cpp:1171
 #, kde-format
 msgid "&Associate's ID: "
 msgstr "&Ταυτότητα συσχετιζόμενου"
 
-#: src/fetch/amazonfetcher.cpp:1171
+#: src/fetch/amazonfetcher.cpp:1177
 #, kde-format
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
@@ -3613,43 +3613,43 @@ msgstr "ISBN#"
 msgid "BoardGameGeek Link"
 msgstr "Δεσμός BoardGameGeek"
 
-#: src/fetch/colnectfetcher.cpp:547 src/fetch/colnectfetcher.cpp:861
+#: src/fetch/colnectfetcher.cpp:551 src/fetch/colnectfetcher.cpp:865
 #, fuzzy, kde-format
 #| msgid "Comic Vine Link"
 msgid "Colnect Link"
 msgstr "Δεσμός Comic Vine"
 
-#: src/fetch/colnectfetcher.cpp:566 src/fetch/colnectfetcher.cpp:867
+#: src/fetch/colnectfetcher.cpp:570 src/fetch/colnectfetcher.cpp:871
 #, kde-format
 msgid "Mintage"
 msgstr "Νομισματοκοπία"
 
-#: src/fetch/colnectfetcher.cpp:604 src/fetch/colnectfetcher.cpp:869
+#: src/fetch/colnectfetcher.cpp:608 src/fetch/colnectfetcher.cpp:873
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
 msgstr "Stanley Gibbons"
 
-#: src/fetch/colnectfetcher.cpp:611 src/fetch/colnectfetcher.cpp:870
+#: src/fetch/colnectfetcher.cpp:615 src/fetch/colnectfetcher.cpp:874
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "Michel"
 
-#: src/fetch/colnectfetcher.cpp:871 src/fetch/giantbombfetcher.cpp:203
+#: src/fetch/colnectfetcher.cpp:875 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:635
 #: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:329
 #, kde-format
 msgid "PEGI Rating"
 msgstr "Βαθμολογία PEGI"
 
-#: src/fetch/colnectfetcher.cpp:975 src/fetch/filmaffinityfetcher.cpp:494
-#: src/fetch/numistafetcher.cpp:423 src/fetch/themoviedbfetcher.cpp:626
+#: src/fetch/colnectfetcher.cpp:979 src/fetch/filmaffinityfetcher.cpp:498
+#: src/fetch/numistafetcher.cpp:427 src/fetch/themoviedbfetcher.cpp:630
 #, kde-format
 msgid "Language: "
 msgstr "Γλώσσα: "
 
-#: src/fetch/colnectfetcher.cpp:1013
+#: src/fetch/colnectfetcher.cpp:1022
 #, fuzzy, kde-format
 #| msgid "Country: "
 msgid "Country code: "
@@ -3710,7 +3710,7 @@ msgstr "Βιβλιογραφικό κέντρο Δανίας (DBC.dk)"
 
 #: src/fetch/discogsfetcher.cpp:146 src/fetch/isbndbfetcher.cpp:161
 #: src/fetch/mobygamesfetcher.cpp:160 src/fetch/omdbfetcher.cpp:117
-#: src/fetch/thegamesdbfetcher.cpp:134 src/fetch/themoviedbfetcher.cpp:157
+#: src/fetch/thegamesdbfetcher.cpp:134 src/fetch/themoviedbfetcher.cpp:161
 #: src/fetch/thetvdbfetcher.cpp:157
 #, kde-format
 msgid "An access key is required to use this data source."
@@ -3742,7 +3742,7 @@ msgid "The Discogs.com server reports a token error."
 msgstr "Ο διακομιστής Discogs.con αναφέρει σφάλμα αναγνωριστικού."
 
 #: src/fetch/discogsfetcher.cpp:508 src/fetch/discogsfetcher.cpp:519
-#: src/fetch/itunesfetcher.cpp:317 src/fetch/itunesfetcher.cpp:328
+#: src/fetch/itunesfetcher.cpp:324 src/fetch/itunesfetcher.cpp:335
 #: src/translators/audiofileimporter.cpp:231
 #: src/translators/audiofileimporter.cpp:241
 #, kde-format
@@ -3762,13 +3762,13 @@ msgstr "Αναγνωριστικό χρήστη: "
 
 #: src/fetch/doubanfetcher.cpp:366 src/fetch/doubanfetcher.cpp:384
 #: src/fetch/doubanfetcher.cpp:402 src/fetch/doubanfetcher.cpp:641
-#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:326
-#: src/fetch/filmaffinityfetcher.cpp:463 src/fetch/imdbfetcher.cpp:470
+#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:330
+#: src/fetch/filmaffinityfetcher.cpp:467 src/fetch/imdbfetcher.cpp:470
 #: src/fetch/imdbfetcher.cpp:532 src/fetch/kinopoiskfetcher.cpp:338
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
-#: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:327
-#: src/fetch/themoviedbfetcher.cpp:571 src/fetch/vndbfetcher.cpp:285
+#: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:331
+#: src/fetch/themoviedbfetcher.cpp:575 src/fetch/vndbfetcher.cpp:285
 #: src/fetch/vndbfetcher.cpp:432 src/translators/filereadervideo.cpp:206
 #, kde-format
 msgid "Original Title"
@@ -3788,7 +3788,7 @@ msgstr "Δεσμός DVDFr "
 #: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:478
 #: src/fetch/imdbfetcher.cpp:530 src/fetch/moviemeterfetcher.cpp:228
 #: src/fetch/moviemeterfetcher.cpp:308 src/fetch/omdbfetcher.cpp:255
-#: src/fetch/themoviedbfetcher.cpp:322 src/fetch/themoviedbfetcher.cpp:570
+#: src/fetch/themoviedbfetcher.cpp:326 src/fetch/themoviedbfetcher.cpp:574
 #: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:378
 #, kde-format
 msgid "Alternative Titles"
@@ -3933,20 +3933,20 @@ msgstr "LCCN"
 msgid "Raw Query"
 msgstr "Ακατέργαστο ερώτημα"
 
-#: src/fetch/filmaffinityfetcher.cpp:285 src/fetch/filmaffinityfetcher.cpp:464
+#: src/fetch/filmaffinityfetcher.cpp:289 src/fetch/filmaffinityfetcher.cpp:468
 #, fuzzy, kde-format
 #| msgid "Filmaster Link"
 msgid "FilmAffinity Link"
 msgstr "Δεσμός Filmaster"
 
-#: src/fetch/filmaffinityfetcher.cpp:476 src/fetch/imdbfetcher.cpp:549
-#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:608
+#: src/fetch/filmaffinityfetcher.cpp:480 src/fetch/imdbfetcher.cpp:549
+#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:612
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Μέγιστη διανομή ρόλων: "
 
-#: src/fetch/filmaffinityfetcher.cpp:489 src/fetch/imdbfetcher.cpp:562
-#: src/fetch/kinopoiskfetcher.cpp:694 src/fetch/themoviedbfetcher.cpp:621
+#: src/fetch/filmaffinityfetcher.cpp:493 src/fetch/imdbfetcher.cpp:562
+#: src/fetch/kinopoiskfetcher.cpp:694 src/fetch/themoviedbfetcher.cpp:625
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -3954,19 +3954,6 @@ msgid ""
 msgstr ""
 "Ο κατάλογος με τα μέλη της διανομής ρόλων μπορεί να περιέχει πολλά άτομα. "
 "Καθορίστε τον μέγιστο αριθμό που θα επιστρέφει η αναζήτηση."
-
-#: src/fetch/filmaffinityfetcher.cpp:499
-#, fuzzy, kde-format
-#| msgid "Spain"
-msgctxt "Country"
-msgid "Spain"
-msgstr "Ισπανία"
-
-#: src/fetch/filmaffinityfetcher.cpp:502
-#, kde-format
-msgctxt "Country"
-msgid "USA"
-msgstr ""
 
 #: src/fetch/filmasterfetcher.cpp:237 src/fetch/filmasterfetcher.cpp:314
 #, kde-format
@@ -4025,20 +4012,20 @@ msgstr "Δεσμός Google Book"
 msgid "Google Book Search"
 msgstr "Αναζήτηση Google Book"
 
-#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/z3950fetcher.cpp:574
+#: src/fetch/hathitrustfetcher.cpp:305 src/fetch/z3950fetcher.cpp:578
 #, kde-format
 msgid "Illustrator"
 msgstr "Εικονογράφος"
 
 #: src/fetch/hathitrustfetcher.cpp:306 src/fetch/isbndbfetcher.cpp:382
-#: src/fetch/srufetcher.cpp:554 src/fetch/z3950fetcher.cpp:575
+#: src/fetch/srufetcher.cpp:554 src/fetch/z3950fetcher.cpp:579
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Δεκαδική Ταξινόμηση Dewey"
 
 #: src/fetch/hathitrustfetcher.cpp:307 src/fetch/srufetcher.cpp:555
-#: src/fetch/z3950fetcher.cpp:576
+#: src/fetch/z3950fetcher.cpp:580
 #, kde-format
 msgctxt "Library of Congress classification system"
 msgid "LoC Classification"
@@ -4076,7 +4063,7 @@ msgid "Internet Movie Database"
 msgstr "Βάση δεδομένων ταινιών διαδικτύου"
 
 #: src/fetch/imdbfetcher.cpp:528 src/fetch/kinopoiskfetcher.cpp:668
-#: src/fetch/omdbfetcher.cpp:397 src/fetch/themoviedbfetcher.cpp:569
+#: src/fetch/omdbfetcher.cpp:397 src/fetch/themoviedbfetcher.cpp:573
 #: src/fetch/thetvdbfetcher.cpp:564 src/fetch/tvmazefetcher.cpp:375
 #: src/field.cpp:335
 #, kde-format
@@ -4088,8 +4075,8 @@ msgstr "Δεσμός IMDb "
 msgid "Certifications"
 msgstr "Πιστοποιήσεις"
 
-#: src/fetch/imdbfetcher.cpp:533 src/fetch/itunesfetcher.cpp:554
-#: src/fetch/themoviedbfetcher.cpp:573 src/fetch/thetvdbfetcher.cpp:565
+#: src/fetch/imdbfetcher.cpp:533 src/fetch/itunesfetcher.cpp:561
+#: src/fetch/themoviedbfetcher.cpp:577 src/fetch/thetvdbfetcher.cpp:565
 #: src/fetch/tvmazefetcher.cpp:376 src/field.cpp:339
 #, kde-format
 msgid "Episodes"
@@ -4140,7 +4127,7 @@ msgstr ""
 "Η μαζική αναζήτηση για τιμές ISBN είναι ταχύτερη αλλά διαθέσιμη μόνο για τα "
 "πλάνα Premium ή Pro."
 
-#: src/fetch/itunesfetcher.cpp:242 src/fetch/itunesfetcher.cpp:553
+#: src/fetch/itunesfetcher.cpp:245 src/fetch/itunesfetcher.cpp:560
 #, fuzzy, kde-format
 #| msgid "Allocine Link"
 msgid "iTunes Link"
@@ -4176,30 +4163,18 @@ msgstr "Πολλαπλές πηγές"
 msgid "Data source:"
 msgstr "Πηγή δεδομένων:"
 
-#: src/fetch/numistafetcher.cpp:343 src/fetch/numistafetcher.cpp:398
+#: src/fetch/numistafetcher.cpp:347 src/fetch/numistafetcher.cpp:402
 #, kde-format
 msgid "Numista Link"
 msgstr "Δεσμός Numista"
 
-#: src/fetch/numistafetcher.cpp:403
+#: src/fetch/numistafetcher.cpp:407
 #, kde-format
 msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
-#: src/fetch/numistafetcher.cpp:428 src/fetch/themoviedbfetcher.cpp:635
-#, kde-format
-msgctxt "Language"
-msgid "English"
-msgstr "Αγγλικά"
-
-#: src/fetch/numistafetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:638
-#, kde-format
-msgctxt "Language"
-msgid "French"
-msgstr "Γαλλικά"
-
-#: src/fetch/numistafetcher.cpp:462
+#: src/fetch/numistafetcher.cpp:473
 #, kde-format
 msgid "Numista (%1)"
 msgstr "Numista (%1)"
@@ -4268,22 +4243,22 @@ msgstr ""
 "Εισάγετε τη διαδρομή για τη βάση δεδομένων που χρησιμοποιείται από τον "
 "εξυπηρετητή"
 
-#: src/fetch/srufetcher.cpp:585 src/fetch/z3950fetcher.cpp:599
+#: src/fetch/srufetcher.cpp:585 src/fetch/z3950fetcher.cpp:603
 #, kde-format
 msgid "Hos&t: "
 msgstr "Υπολογισ&τής: "
 
-#: src/fetch/srufetcher.cpp:592 src/fetch/z3950fetcher.cpp:605
+#: src/fetch/srufetcher.cpp:592 src/fetch/z3950fetcher.cpp:609
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "Εισάγετε το όνομα του εξυπηρετητή."
 
-#: src/fetch/srufetcher.cpp:597 src/fetch/z3950fetcher.cpp:610
+#: src/fetch/srufetcher.cpp:597 src/fetch/z3950fetcher.cpp:614
 #, kde-format
 msgid "&Port: "
 msgstr "&Θύρα: "
 
-#: src/fetch/srufetcher.cpp:606 src/fetch/z3950fetcher.cpp:619
+#: src/fetch/srufetcher.cpp:606 src/fetch/z3950fetcher.cpp:623
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Εισάγετε τον αριθμό θύρας του εξυπηρετητή. Προεπιλεγμένη είναι η %1."
@@ -4310,44 +4285,20 @@ msgstr ""
 msgid "Field"
 msgstr "Πεδίο"
 
-#: src/fetch/themoviedbfetcher.cpp:314 src/fetch/themoviedbfetcher.cpp:568
+#: src/fetch/themoviedbfetcher.cpp:318 src/fetch/themoviedbfetcher.cpp:572
 #: src/translators/filereadervideo.cpp:281
 #, kde-format
 msgid "TMDb Link"
 msgstr "Δεσμός TMDb"
 
-#: src/fetch/themoviedbfetcher.cpp:332 src/fetch/themoviedbfetcher.cpp:572
+#: src/fetch/themoviedbfetcher.cpp:336 src/fetch/themoviedbfetcher.cpp:576
 #: src/fetch/thetvdbfetcher.cpp:249 src/fetch/thetvdbfetcher.cpp:566
 #: src/fetch/tvmazefetcher.cpp:179 src/fetch/tvmazefetcher.cpp:377
 #, kde-format
 msgid "Network"
 msgstr "Δίκτυο"
 
-#: src/fetch/themoviedbfetcher.cpp:632
-#, kde-format
-msgctxt "Language"
-msgid "Chinese"
-msgstr "Κινεζικά"
-
-#: src/fetch/themoviedbfetcher.cpp:641
-#, kde-format
-msgctxt "Language"
-msgid "German"
-msgstr "Γερμανικά"
-
-#: src/fetch/themoviedbfetcher.cpp:644
-#, kde-format
-msgctxt "Language"
-msgid "Spanish"
-msgstr "Ισπανικά"
-
-#: src/fetch/themoviedbfetcher.cpp:647
-#, kde-format
-msgctxt "Language"
-msgid "Russian"
-msgstr "Ρωσικά"
-
-#: src/fetch/themoviedbfetcher.cpp:690
+#: src/fetch/themoviedbfetcher.cpp:693
 #, kde-format
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB (%1)"
@@ -4403,34 +4354,34 @@ msgstr "Καταγραφή συντακτικού λάθους"
 msgid "Connection error %1: %2"
 msgstr "Σφάλμα σύνδεσης %1: %2"
 
-#: src/fetch/z3950fetcher.cpp:562 src/fetch/z3950fetcher.cpp:877
+#: src/fetch/z3950fetcher.cpp:566 src/fetch/z3950fetcher.cpp:881
 #, kde-format
 msgid "z39.50 Server"
 msgstr "z39.50 Διακομιστής"
 
-#: src/fetch/z3950fetcher.cpp:588
+#: src/fetch/z3950fetcher.cpp:592
 #, kde-format
 msgid "Use preset &server:"
 msgstr "Χρήση προκαθορισμένου &διακομιστή:"
 
-#: src/fetch/z3950fetcher.cpp:624
+#: src/fetch/z3950fetcher.cpp:628
 #, kde-format
 msgid "&Database: "
 msgstr "&Βάση δεδομένων:"
 
-#: src/fetch/z3950fetcher.cpp:629
+#: src/fetch/z3950fetcher.cpp:633
 #, kde-format
 msgid "Enter the database name used by the server."
 msgstr ""
 "Εισάγετε το όνομα της βάσης δεδομένων που χρησιμοποιείται από τον "
 "εξυπηρετητή."
 
-#: src/fetch/z3950fetcher.cpp:634
+#: src/fetch/z3950fetcher.cpp:638
 #, kde-format
 msgid "Query character set: "
 msgstr "Σύνολο χαρακτήρων ερώτησης: "
 
-#: src/fetch/z3950fetcher.cpp:643
+#: src/fetch/z3950fetcher.cpp:647
 #, kde-format
 msgid ""
 "Enter the character set encoding used for queries by the z39.50 server. The "
@@ -4440,12 +4391,12 @@ msgstr ""
 "ερωτήσεις από τον διακομιστή z39.50. Η πιο πιθανή επιλογή είναι η MARC-8, "
 "αλλά και η ISO-8859-1 είναι επίσης συνηθισμένη."
 
-#: src/fetch/z3950fetcher.cpp:649
+#: src/fetch/z3950fetcher.cpp:653
 #, kde-format
 msgid "Results character set: "
 msgstr "Σύνολο χαρακτήρων αποτελέσματος: "
 
-#: src/fetch/z3950fetcher.cpp:658
+#: src/fetch/z3950fetcher.cpp:662
 #, kde-format
 msgid ""
 "Enter the character set encoding used for responses by the z39.50 server. "
@@ -4455,17 +4406,17 @@ msgstr ""
 "απαντήσεις από τον διακομιστή z39.50. Η πιο πιθανή επιλογή είναι η MARC-8, "
 "αλλά και η ISO-8859-1 είναι επίσης συνηθισμένη."
 
-#: src/fetch/z3950fetcher.cpp:664
+#: src/fetch/z3950fetcher.cpp:668
 #, kde-format
 msgid "&Format: "
 msgstr "&Τύπος: "
 
-#: src/fetch/z3950fetcher.cpp:667
+#: src/fetch/z3950fetcher.cpp:671
 #, kde-format
 msgid "Auto-detect"
 msgstr "Αυτόματος εντοπισμός"
 
-#: src/fetch/z3950fetcher.cpp:676
+#: src/fetch/z3950fetcher.cpp:680
 #, kde-format
 msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
@@ -4475,17 +4426,17 @@ msgstr ""
 "z39.50. Το Tellico θα προσπαθήσει αυτόματα να προσδιορίσει την καλύτερη "
 "ρύθμιση εάν επιλεγεί ο <i>Αυτόματος εντοπισμός</i>."
 
-#: src/fetch/z3950fetcher.cpp:682
+#: src/fetch/z3950fetcher.cpp:686
 #, kde-format
 msgid "&User: "
 msgstr "&Χρήστης: "
 
-#: src/fetch/z3950fetcher.cpp:685 src/fetch/z3950fetcher.cpp:697
+#: src/fetch/z3950fetcher.cpp:689 src/fetch/z3950fetcher.cpp:701
 #, kde-format
 msgid "Optional"
 msgstr "Προαιρετικό"
 
-#: src/fetch/z3950fetcher.cpp:688
+#: src/fetch/z3950fetcher.cpp:692
 #, kde-format
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
@@ -4494,12 +4445,12 @@ msgstr ""
 "Εισάγετε το πιστοποιημένο όνομα χρήστη που χρησιμοποιείται από τη βάση "
 "δεδομένων z39.50. Στους περισσότερους διακομιστές δεν είναι απαραίτητο."
 
-#: src/fetch/z3950fetcher.cpp:694
+#: src/fetch/z3950fetcher.cpp:698
 #, kde-format
 msgid "Pass&word: "
 msgstr "&Κωδικός:"
 
-#: src/fetch/z3950fetcher.cpp:701
+#: src/fetch/z3950fetcher.cpp:705
 #, kde-format
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
@@ -7581,6 +7532,36 @@ msgstr "Αναζήτηση"
 #, kde-format
 msgid "Clear"
 msgstr "Καθαρισμός"
+
+#, fuzzy
+#~| msgid "Spain"
+#~ msgctxt "Country"
+#~ msgid "Spain"
+#~ msgstr "Ισπανία"
+
+#~ msgctxt "Language"
+#~ msgid "English"
+#~ msgstr "Αγγλικά"
+
+#~ msgctxt "Language"
+#~ msgid "French"
+#~ msgstr "Γαλλικά"
+
+#~ msgctxt "Language"
+#~ msgid "Chinese"
+#~ msgstr "Κινεζικά"
+
+#~ msgctxt "Language"
+#~ msgid "German"
+#~ msgstr "Γερμανικά"
+
+#~ msgctxt "Language"
+#~ msgid "Spanish"
+#~ msgstr "Ισπανικά"
+
+#~ msgctxt "Language"
+#~ msgid "Russian"
+#~ msgstr "Ρωσικά"
 
 #~ msgid "Updating %1..."
 #~ msgstr "Ενημέρωση %1..."
