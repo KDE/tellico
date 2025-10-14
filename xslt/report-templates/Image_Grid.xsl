@@ -103,6 +103,7 @@
          font-size: 80%;
          font-weight: bold;
          margin: 0;
+         text-align: center;
     }
     div.container:hover p {
          opacity: 1;
