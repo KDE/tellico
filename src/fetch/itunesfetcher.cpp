@@ -254,8 +254,8 @@ void ItunesFetcher::slotComplete(KJob* job_) {
   QList<FetchResult*> fetchResults;
   for(const auto& result : results) {
     const auto obj = result.toObject();
-    const auto kind = obj.value(QLatin1StringView("kind")).toString();
-    const auto wrap = obj.value(QLatin1StringView("wrapperType")).toString();
+    const auto kind = obj.value(QLatin1String("kind")).toString();
+    const auto wrap = obj.value(QLatin1String("wrapperType")).toString();
     if(collectionType() == Data::Collection::Album && kind == QLatin1String("song")) {
       readTrackInfo(obj.toVariantMap());
     } else if(collectionType() != Data::Collection::Video ||
