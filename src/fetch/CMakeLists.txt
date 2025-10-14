@@ -87,6 +87,7 @@ target_link_libraries(fetch
     KF${KF_MAJOR_VERSION}::KIOWidgets
     KF${KF_MAJOR_VERSION}::ConfigWidgets
     KF${KF_MAJOR_VERSION}::KIOGui
+    KF${KF_MAJOR_VERSION}::GuiAddons
 )
 
 if(Yaz_FOUND)

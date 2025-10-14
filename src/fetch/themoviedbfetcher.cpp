@@ -38,6 +38,10 @@
 #include <KJobWidgets>
 #include <KIO/StoredTransferJob>
 #include <KLanguageName>
+#include <kguiaddons_version.h>
+#if KGUIADDONS_VERSION >= QT_VERSION_CHECK(6,0,0)
+#include <KCountryFlagEmojiIconEngine>
+#endif
 
 #include <QLabel>
 #include <QLineEdit>
@@ -627,24 +631,23 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   l->addWidget(label, ++row, 0);
   m_langCombo = new GUI::ComboBox(optionsWidget());
   // check https://www.themoviedb.org/contribute occasionally for top languages
-  QIcon iconCN(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                      QStringLiteral("kf5/locale/countries/cn/flag.png")));
-  m_langCombo->addItem(iconCN, i18nc("Language", "Chinese"), QLatin1String("cn"));
-  QIcon iconUS(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                      QStringLiteral("kf5/locale/countries/us/flag.png")));
-  m_langCombo->addItem(iconUS, i18nc("Language", "English"), QLatin1String("en"));
-  QIcon iconFR(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                      QStringLiteral("kf5/locale/countries/fr/flag.png")));
-  m_langCombo->addItem(iconFR, i18nc("Language", "French"), QLatin1String("fr"));
-  QIcon iconDE(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                      QStringLiteral("kf5/locale/countries/de/flag.png")));
-  m_langCombo->addItem(iconDE, i18nc("Language", "German"), QLatin1String("de"));
-  QIcon iconES(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                      QStringLiteral("kf5/locale/countries/es/flag.png")));
-  m_langCombo->addItem(iconES, i18nc("Language", "Spanish"), QLatin1String("es"));
-  QIcon iconRU(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                      QStringLiteral("kf5/locale/countries/ru/flag.png")));
-  m_langCombo->addItem(iconRU, i18nc("Language", "Russian"), QLatin1String("ru"));
+#if KGUIADDONS_VERSION >= QT_VERSION_CHECK(6,0,0)
+#define LANG_ITEM(CY, ISO) \
+  m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String(CY))), \
+                       KLanguageName::nameForCode(QLatin1String(ISO)),            \
+                       QLatin1String(ISO));
+#else
+#define LANG_ITEM(CY, ISO) \
+  m_langCombo->addItem(KLanguageName::nameForCode(QLatin1String(ISO)),            \
+                       QLatin1String(ISO));
+#endif
+  LANG_ITEM("cn", "zh");
+  LANG_ITEM("us", "en");
+  LANG_ITEM("fr", "fr");
+  LANG_ITEM("de", "de");
+  LANG_ITEM("es", "es");
+  LANG_ITEM("ru", "ru");
+#undef LANG_ITEM
   m_langCombo->setEditable(true);
   m_langCombo->setCurrentData(QLatin1String("en"));
   void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;

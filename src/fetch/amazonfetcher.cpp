@@ -46,6 +46,10 @@
 #include <KAcceleratorManager>
 #include <KConfigGroup>
 #include <KJobWidgets>
+#include <kguiaddons_version.h>
+#if KGUIADDONS_VERSION >= QT_VERSION_CHECK(6,0,0)
+#include <KCountryFlagEmojiIconEngine>
+#endif
 
 #include <QLineEdit>
 #include <QLabel>
@@ -54,7 +58,6 @@
 #include <QDir>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QStandardPaths>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -1131,9 +1134,12 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   m_siteCombo = new GUI::ComboBox(optionsWidget());
   for(int i = 0; i < XX; ++i) {
     const AmazonFetcher::SiteData& siteData = AmazonFetcher::siteData(i);
-    QIcon icon(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                      QStringLiteral("kf5/locale/countries/%1/flag.png").arg(siteData.country)));
+#if KGUIADDONS_VERSION >= QT_VERSION_CHECK(6,0,0)
+    QIcon icon(new KCountryFlagEmojiIconEngine(siteData.country));
     m_siteCombo->addItem(icon, siteData.countryName, i);
+#else
+    m_siteCombo->addItem(siteData.countryName, i);
+#endif
     m_siteCombo->model()->sort(0);
   }
 

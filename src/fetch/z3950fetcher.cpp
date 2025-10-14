@@ -55,6 +55,10 @@
 #include <KAcceleratorManager>
 #include <KSeparator>
 #include <KConfig>
+#include <kguiaddons_version.h>
+#if KGUIADDONS_VERSION >= QT_VERSION_CHECK(6,0,0)
+#include <KCountryFlagEmojiIconEngine>
+#endif
 
 #include <QSpinBox>
 #include <QFile>
@@ -838,21 +842,21 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
     KConfigGroup cfg(&serverConfig, group);
     const QString country = cfg.readEntry("Country", QString());
 
+#if KGUIADDONS_VERSION >= QT_VERSION_CHECK(6,0,0)
     QIcon icon;
     if(!country.isEmpty()) {
       QHash<QString, QIcon>::ConstIterator it = flags.constFind(country);
       if(it != flags.constEnd()) {
         icon = it.value();
       } else {
-        const QString flag = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                    QStringLiteral("kf5/locale/countries/%1/flag.png").arg(country));
-        if (!flag.isEmpty()) {
-          icon = QIcon(flag);
-          flags.insert(country, icon);
-        }
+        icon = QIcon(new KCountryFlagEmojiIconEngine(country));
+        flags.insert(country, icon);
       }
     }
     m_serverCombo->addItem(icon, name, group);
+#else
+    m_serverCombo->addItem(name, group);
+#endif
 
     if(current_.isEmpty() && idx == -1) {
       // set the initial selection to something depending on the language

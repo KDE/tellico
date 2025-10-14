@@ -45,6 +45,11 @@
 #include <KJobUiDelegate>
 #include <KJobWidgets>
 #include <KIO/StoredTransferJob>
+#include <KLanguageName>
+#include <kguiaddons_version.h>
+#if KGUIADDONS_VERSION >= QT_VERSION_CHECK(6,0,0)
+#include <KCountryFlagEmojiIconEngine>
+#endif
 
 #include <QLabel>
 #include <QFile>
@@ -54,7 +59,6 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QRegularExpression>
-#include <QStandardPaths>
 
 #include <algorithm>
 
@@ -976,15 +980,20 @@ ColnectFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ColnectFetche
   l->addWidget(label, ++row, 0);
   m_langCombo = new GUI::ComboBox(optionsWidget());
 
-#define LANG_ITEM(NAME, CY, ISO) \
-  m_langCombo->addItem(QIcon(QStandardPaths::locate(QStandardPaths::GenericDataLocation,                       \
-                                                    QStringLiteral("kf5/locale/countries/" CY "/flag.png"))), \
-                       i18nc("Language", NAME),                                                                \
+#if KGUIADDONS_VERSION >= QT_VERSION_CHECK(6,0,0)
+#define LANG_ITEM(CY, ISO) \
+  m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String(CY))), \
+                       KLanguageName::nameForCode(QLatin1String(ISO)),            \
                        QLatin1String(ISO));
-  LANG_ITEM("English", "us", "en");
-  LANG_ITEM("French",  "fr", "fr");
-  LANG_ITEM("German",  "de", "de");
-  LANG_ITEM("Spanish", "es", "es");
+#else
+#define LANG_ITEM(CY, ISO) \
+  m_langCombo->addItem(KLanguageName::nameForCode(QLatin1String(ISO)),            \
+                       QLatin1String(ISO));
+#endif
+  LANG_ITEM("us", "en");
+  LANG_ITEM("fr", "fr");
+  LANG_ITEM("de", "de");
+  LANG_ITEM("es", "es");
 #undef LANG_ITEM
 
   // instead of trying to include all possible languages offered by Colnect
