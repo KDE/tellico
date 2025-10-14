@@ -55,6 +55,7 @@
 #include <KAcceleratorManager>
 #include <KSeparator>
 #include <KConfig>
+#include <KCountryFlagEmojiIconEngine>
 
 #include <QSpinBox>
 #include <QFile>
@@ -844,12 +845,8 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
       if(it != flags.constEnd()) {
         icon = it.value();
       } else {
-        const QString flag = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                    QStringLiteral("kf5/locale/countries/%1/flag.png").arg(country));
-        if (!flag.isEmpty()) {
-          icon = QIcon(flag);
-          flags.insert(country, icon);
-        }
+        icon = QIcon(new KCountryFlagEmojiIconEngine(country));
+        flags.insert(country, icon);
       }
     }
     m_serverCombo->addItem(icon, name, group);

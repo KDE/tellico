@@ -89,6 +89,7 @@ target_link_libraries(fetch
     KF6::KIOWidgets
     KF6::ConfigWidgets
     KF6::KIOGui
+    KF6::GuiAddons
 )
 
 if(Yaz_FOUND)

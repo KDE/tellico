@@ -37,6 +37,8 @@
 #include <KIO/StoredTransferJob>
 #include <KJobUiDelegate>
 #include <KJobWidgets>
+#include <KCountryFlagEmojiIconEngine>
+#include <KLanguageName>
 
 #include <QRegularExpression>
 #include <QLabel>
@@ -45,7 +47,6 @@
 #include <QGridLayout>
 #include <QSpinBox>
 #include <QUrlQuery>
-#include <QStandardPaths>
 
 namespace {
   static const char* FILMAFFINITY_SEARCH_URL = "https://www.filmaffinity.com";
@@ -490,12 +491,12 @@ FilmAffinityFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const FilmAffi
   label = new QLabel(i18n("Language: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_localeCombo = new GUI::ComboBox(optionsWidget());
-  QIcon iconES(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                      QStringLiteral("kf5/locale/countries/es/flag.png")));
-  m_localeCombo->addItem(iconES, i18nc("Country", "Spain"), int(FilmAffinityFetcher::ES));
-  QIcon iconUS(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                      QStringLiteral("kf5/locale/countries/us/flag.png")));
-  m_localeCombo->addItem(iconUS, i18nc("Country", "USA"), int(FilmAffinityFetcher::US));
+  m_localeCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String("es"))),
+                         KLanguageName::nameForCode(QLatin1String("es")),
+                         int(FilmAffinityFetcher::ES));
+  m_localeCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String("us"))),
+                         KLanguageName::nameForCode(QLatin1String("en")),
+                         int(FilmAffinityFetcher::US));
   void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
   connect(m_localeCombo, activatedInt, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_localeCombo, row, 1);

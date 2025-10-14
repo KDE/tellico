@@ -37,6 +37,8 @@
 #include <KJobUiDelegate>
 #include <KJobWidgets>
 #include <KConfigGroup>
+#include <KCountryFlagEmojiIconEngine>
+#include <KLanguageName>
 
 #include <QLabel>
 #include <QLineEdit>
@@ -47,7 +49,6 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QStandardPaths>
 
 namespace {
   static const int NUMISTA_MAX_RETURNS_TOTAL = 20;
@@ -423,12 +424,12 @@ NumistaFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const NumistaFetche
   label = new QLabel(i18n("Language: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_langCombo = new GUI::ComboBox(optionsWidget());
-  QIcon iconUS(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                      QStringLiteral("kf5/locale/countries/us/flag.png")));
-  m_langCombo->addItem(iconUS, i18nc("Language", "English"), QLatin1String("en"));
-  QIcon iconFR(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                      QStringLiteral("kf5/locale/countries/fr/flag.png")));
-  m_langCombo->addItem(iconFR, i18nc("Language", "French"), QLatin1String("fr"));
+  m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String("us"))),
+                       KLanguageName::nameForCode(QLatin1String("en")),
+                       QLatin1String("en"));
+  m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String("fr"))),
+                       KLanguageName::nameForCode(QLatin1String("fr")),
+                       QLatin1String("fr"));
   void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
   connect(m_langCombo, activatedInt, this, &ConfigWidget::slotSetModified);
   connect(m_langCombo, activatedInt, this, &ConfigWidget::slotLangChanged);

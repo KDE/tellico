@@ -43,6 +43,8 @@
 #include <KJobUiDelegate>
 #include <KJobWidgets>
 #include <KIO/StoredTransferJob>
+#include <KCountryFlagEmojiIconEngine>
+#include <KLanguageName>
 
 #include <QLabel>
 #include <QFile>
@@ -52,7 +54,6 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QRegularExpression>
-#include <QStandardPaths>
 
 #include <algorithm>
 
@@ -972,9 +973,8 @@ ColnectFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ColnectFetche
   m_langCombo = new GUI::ComboBox(optionsWidget());
 
 #define LANG_ITEM(NAME, CY, ISO) \
-  m_langCombo->addItem(QIcon(QStandardPaths::locate(QStandardPaths::GenericDataLocation,                       \
-                                                    QStringLiteral("kf5/locale/countries/" CY "/flag.png"))), \
-                       i18nc("Language", NAME),                                                                \
+  m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String(CY))), \
+                       KLanguageName::nameForCode(QLatin1String(ISO)),            \
                        QLatin1String(ISO));
   LANG_ITEM("English", "us", "en");
   LANG_ITEM("French",  "fr", "fr");
