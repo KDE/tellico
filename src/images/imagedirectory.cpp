@@ -85,6 +85,7 @@ void ImageDirectory::reset() {
 
 bool ImageDirectory::hasImage(const QString& id_) {
   // dir() is virtual
+  if(dir().isEmpty()) return false;
   const bool localExists = m_pathExists && m_isLocal && QFile::exists(dir().toLocalFile() + id_);
   if(localExists) return true;
 
