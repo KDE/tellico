@@ -604,16 +604,16 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   l->addWidget(label, ++row, 0);
   m_langCombo = new GUI::ComboBox(optionsWidget());
   // check https://www.themoviedb.org/contribute occasionally for top languages
-#define LANG_ITEM(NAME, CY, ISO) \
+#define LANG_ITEM(CY, ISO) \
   m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String(CY))), \
                        KLanguageName::nameForCode(QLatin1String(ISO)),            \
                        QLatin1String(ISO));
-  LANG_ITEM("Chinese", "cn", "zh");
-  LANG_ITEM("English", "us", "en");
-  LANG_ITEM("French",  "fr", "fr");
-  LANG_ITEM("German",  "de", "de");
-  LANG_ITEM("Spanish", "es", "es");
-  LANG_ITEM("Russian", "ru", "ru");
+  LANG_ITEM("cn", "zh");
+  LANG_ITEM("us", "en");
+  LANG_ITEM("fr", "fr");
+  LANG_ITEM("de", "de");
+  LANG_ITEM("es", "es");
+  LANG_ITEM("ru", "ru");
 #undef LANG_ITEM
   m_langCombo->setEditable(true);
   m_langCombo->setCurrentData(QLatin1String("en"));

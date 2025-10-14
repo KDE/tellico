@@ -972,14 +972,14 @@ ColnectFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ColnectFetche
   l->addWidget(label, ++row, 0);
   m_langCombo = new GUI::ComboBox(optionsWidget());
 
-#define LANG_ITEM(NAME, CY, ISO) \
+#define LANG_ITEM(CY, ISO) \
   m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String(CY))), \
                        KLanguageName::nameForCode(QLatin1String(ISO)),            \
                        QLatin1String(ISO));
-  LANG_ITEM("English", "us", "en");
-  LANG_ITEM("French",  "fr", "fr");
-  LANG_ITEM("German",  "de", "de");
-  LANG_ITEM("Spanish", "es", "es");
+  LANG_ITEM("us", "en");
+  LANG_ITEM("fr", "fr");
+  LANG_ITEM("de", "de");
+  LANG_ITEM("es", "es");
 #undef LANG_ITEM
 
   // instead of trying to include all possible languages offered by Colnect
