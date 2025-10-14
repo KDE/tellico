@@ -135,7 +135,7 @@ void TheMovieDBFetcherTest::testBabel() {
   QCOMPARE(entry->field("title"), QStringLiteral("Babel"));
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(set(entry, "director"), set(QString::fromUtf8("Alejandro González Iñárritu")));
-  QCOMPARE(set(entry, "producer"), set(QString::fromUtf8("Alejandro González Iñárritu; Steve Golin; Jon Kilik; Ann Ruark; Corinne Golden Weber")));
+  QCOMPARE(set(entry, "producer"), set(QString::fromUtf8("Alejandro González Iñárritu; Jon Kilik; Steve Golin")));
 }
 
 void TheMovieDBFetcherTest::testAllMankind() {
@@ -158,7 +158,7 @@ void TheMovieDBFetcherTest::testAllMankind() {
   QVERIFY(!titleList.isEmpty());
   QVERIFY(titleList.contains(QStringLiteral("为全人类")));
   QCOMPARE(entry->field("year"), QStringLiteral("2019"));
-  QCOMPARE(entry->field("network"), QStringLiteral("Apple TV+"));
+  QCOMPARE(entry->field("network"), QStringLiteral("Apple TV"));
   QCOMPARE(entry->field("language"), QStringLiteral("English"));
   QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
   QCOMPARE(set(entry, "producer"), set(QStringLiteral("Huey M. Park")));
