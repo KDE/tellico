@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-14 00:42+0000\n"
+"POT-Creation-Date: 2025-10-15 00:43+0000\n"
 "PO-Revision-Date: 2022-03-21 17:12+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -3192,12 +3192,12 @@ msgstr "Обновление записей"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Обновление <b>%1</b>..."
 
-#: src/entryview.cpp:292
+#: src/entryview.cpp:289
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Не удалось найти стандартную таблицу стилей."
 
-#: src/entryview.cpp:294 src/mainwindow.cpp:1777
+#: src/entryview.cpp:291 src/mainwindow.cpp:1777
 #, kde-format
 msgid "Please check your installation."
 msgstr "Проверьте правильность установки программы."
