@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-14 02:36+0000\n"
+"POT-Creation-Date: 2025-10-16 02:36+0000\n"
 "PO-Revision-Date: 2025-08-25 23:20+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -3051,7 +3051,7 @@ msgstr ""
 "<qt>La <i>Vista de iconos</i> muestra cada entrada de la colección o grupo "
 "usando un icono, que puede ser una imagen en la entrada.</qt>"
 
-#: src/entryiconview.cpp:111
+#: src/entryiconview.cpp:110
 #, kde-format
 msgctxt "Open URL"
 msgid "Open %1"

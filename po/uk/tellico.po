@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-14 02:36+0000\n"
+"POT-Creation-Date: 2025-10-16 02:36+0000\n"
 "PO-Revision-Date: 2025-08-25 09:36+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -3034,7 +3034,7 @@ msgstr ""
 "<qt><i>«Зображення»</i> — це спосіб відображення записів, використовуючи "
 "відповідні зображення (наприклад обкладинка книги)</qt>"
 
-#: src/entryiconview.cpp:111
+#: src/entryiconview.cpp:110
 #, kde-format
 msgctxt "Open URL"
 msgid "Open %1"
