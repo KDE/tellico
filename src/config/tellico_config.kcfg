@@ -95,7 +95,7 @@
         <default>1000</default>
     </entry>
     <entry key="Image Cache Size" type="ULongLong">
-        <default code="true">(64 * 1024 * 1024)</default>
+        <default code="true">(512 * 1024 * 1024)</default>
     </entry>
     <entry key="Max Custom URL Settings" type="Int">
         <default>9</default>
