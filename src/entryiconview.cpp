@@ -62,8 +62,7 @@ EntryIconView::EntryIconView(QWidget* parent_)
                     "an icon, which may be an image in the entry.</qt>"));
 }
 
-EntryIconView::~EntryIconView() {
-}
+EntryIconView::~EntryIconView() = default;
 
 void EntryIconView::setModel(QAbstractItemModel* model_) {
   QListView::setModel(model_);

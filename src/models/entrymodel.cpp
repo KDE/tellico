@@ -432,11 +432,16 @@ QVariant EntryModel::requestImage(Data::EntryPtr entry_, const QString& id_) con
 }
 
 void EntryModel::refreshImage(const QString& id_) {
+  Data::EntryList entries;
   for(auto i = m_requestedImages.find(id_); i != m_requestedImages.end() && i.key() == id_; ++i) {
-    QModelIndex index = indexFromEntry(i.value());
+    entries += i.value();
+  }
+  // remove from request list _before_ emitting dataChanged in case the cache drops the image
+  m_requestedImages.remove(id_);
+  for(const auto& entry : entries) {
+    QModelIndex index = indexFromEntry(entry);
     if(index.isValid()) {
       emit dataChanged(index, index);
     }
   }
-  m_requestedImages.remove(id_);
 }

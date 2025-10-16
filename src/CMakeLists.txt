@@ -151,7 +151,7 @@ endif()
 
 if(${KCDDB_TARGET_NAME}_FOUND)
     target_link_libraries(tellico ${KCDDB_TARGET_NAME})
-elseif()
+else()
     target_link_libraries(tellico KDE::Libkcddb::kcddb)
 endif()
 
