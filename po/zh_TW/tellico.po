@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-15 00:43+0000\n"
+"POT-Creation-Date: 2025-10-17 00:42+0000\n"
 "PO-Revision-Date: 2024-07-27 13:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -3069,7 +3069,7 @@ msgid ""
 msgstr ""
 "<qt>圖示檢視會用圖示顯示收藏或群組中的每個項目（該項目可能是張影像）。</qt>"
 
-#: src/entryiconview.cpp:111
+#: src/entryiconview.cpp:110
 #, kde-format
 msgctxt "Open URL"
 msgid "Open %1"

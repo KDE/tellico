@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-15 00:43+0000\n"
+"POT-Creation-Date: 2025-10-17 00:42+0000\n"
 "PO-Revision-Date: 2025-09-01 22:36+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -3114,7 +3114,7 @@ msgstr ""
 "<qt><i>Ikono ikuspegiak</i> bildumako edo taldeko sarrera bakoitza ikono bat "
 "erabiliz erakusten du, sarrerako irudi bat izan liteke.</qt>"
 
-#: src/entryiconview.cpp:111
+#: src/entryiconview.cpp:110
 #, kde-format
 msgctxt "Open URL"
 msgid "Open %1"

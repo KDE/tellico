@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-15 00:43+0000\n"
+"POT-Creation-Date: 2025-10-17 00:42+0000\n"
 "PO-Revision-Date: 2023-07-08 12:53+0100\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -3180,7 +3180,7 @@ msgstr ""
 "<qt>A <i>Visão por Ícones</i> mostra cada item da colecção ou grupo, "
 "utilizando um ícone, o qual pode ser uma imagem no item.</qt>"
 
-#: src/entryiconview.cpp:111
+#: src/entryiconview.cpp:110
 #, kde-format
 msgctxt "Open URL"
 msgid "Open %1"

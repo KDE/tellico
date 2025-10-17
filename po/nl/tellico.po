@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-15 00:43+0000\n"
+"POT-Creation-Date: 2025-10-17 00:42+0000\n"
 "PO-Revision-Date: 2025-09-01 15:06+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -3119,7 +3119,7 @@ msgstr ""
 "<qt>De <i>Pictogramweergave</i> toont een ieder item in de verzameling of "
 "groep als een pictogram, dit is afbeelding van dat item indien aanwezig</qt>"
 
-#: src/entryiconview.cpp:111
+#: src/entryiconview.cpp:110
 #, kde-format
 msgctxt "Open URL"
 msgid "Open %1"

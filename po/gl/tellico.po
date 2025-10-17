@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-15 00:43+0000\n"
+"POT-Creation-Date: 2025-10-17 00:42+0000\n"
 "PO-Revision-Date: 2025-03-20 08:00+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -3109,7 +3109,7 @@ msgstr ""
 "<qt>A <i>vista de iconas</i> amosa cada entrada na colección ou grupo "
 "mediante unha icona, que pode ser unha imaxe na entrada.</qt>"
 
-#: src/entryiconview.cpp:111
+#: src/entryiconview.cpp:110
 #, kde-format
 msgctxt "Open URL"
 msgid "Open %1"

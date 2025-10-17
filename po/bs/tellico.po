@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-15 00:43+0000\n"
+"POT-Creation-Date: 2025-10-17 00:42+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -3221,7 +3221,7 @@ msgstr ""
 "<qt><i>Pregled Ikona</i> prikazuje svaki unos u kolekciji ili grupi "
 "koristeći ikonu, koja može biti slika u unosu.</qt>"
 
-#: src/entryiconview.cpp:111
+#: src/entryiconview.cpp:110
 #, fuzzy, kde-format
 #| msgid "Open File"
 msgctxt "Open URL"
