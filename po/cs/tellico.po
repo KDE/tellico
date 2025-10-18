@@ -7419,35 +7419,3 @@ msgstr "Hledat"
 #, kde-format
 msgid "Clear"
 msgstr "Vymazat"
-
-#~ msgctxt "Country"
-#~ msgid "Spain"
-#~ msgstr "Španělsko"
-
-#~ msgctxt "Country"
-#~ msgid "USA"
-#~ msgstr "USA"
-
-#~ msgctxt "Language"
-#~ msgid "English"
-#~ msgstr "Anglický"
-
-#~ msgctxt "Language"
-#~ msgid "French"
-#~ msgstr "Francouzský"
-
-#~ msgctxt "Language"
-#~ msgid "Chinese"
-#~ msgstr "Čínština"
-
-#~ msgctxt "Language"
-#~ msgid "German"
-#~ msgstr "Německý"
-
-#~ msgctxt "Language"
-#~ msgid "Spanish"
-#~ msgstr "Španělský"
-
-#~ msgctxt "Language"
-#~ msgid "Russian"
-#~ msgstr "Ruština"
