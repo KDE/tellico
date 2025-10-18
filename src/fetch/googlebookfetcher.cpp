@@ -115,7 +115,7 @@ void GoogleBookFetcher::doSearch(const QString& term_) {
   q.addQueryItem(QStringLiteral("maxResults"), QString::number(GOOGLEBOOK_MAX_RETURNS));
   q.addQueryItem(QStringLiteral("startIndex"), QString::number(m_start));
   q.addQueryItem(QStringLiteral("printType"), QStringLiteral("books"));
-  // we don't require a key, cause it might work without it
+  // we don't require a key as Google Book api does work without a key.
   if(!m_apiKey.isEmpty()) {
     q.addQueryItem(QStringLiteral("key"), m_apiKey);
   }
@@ -417,9 +417,8 @@ GoogleBookFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GoogleBook
 
 void GoogleBookFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   QString apiKey = m_apiKeyEdit->text().trimmed();
-  if(!apiKey.isEmpty()) {
-    config_.writeEntry("API Key", apiKey);
-  }
+  // If the user provides empty string as apiKey, we will save it as is.
+  config_.writeEntry("API Key", apiKey);
 }
 
 QString GoogleBookFetcher::ConfigWidget::preferredName() const {
