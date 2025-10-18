@@ -375,15 +375,16 @@ void ReportDialog::showText(const QString& text_, const QUrl& url_) {
   if(text_.size() > 1200000) {
     delete m_tempFile;
     m_tempFile = new QTemporaryFile(QDir::tempPath() + QLatin1String("/tellicoreport_XXXXXX") + QLatin1String(".html"));
-    m_tempFile->open();
-    QTextStream ts(m_tempFile);
+    if(m_tempFile->open()) {
+      QTextStream ts(m_tempFile);
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    ts.setCodec("UTF-8");
+      ts.setCodec("UTF-8");
 #else
-    ts.setEncoding(QStringConverter::Utf8);
+      ts.setEncoding(QStringConverter::Utf8);
 #endif
-    ts << text_;
-    m_webView->load(QUrl::fromLocalFile(m_tempFile->fileName()));
+      ts << text_;
+      m_webView->load(QUrl::fromLocalFile(m_tempFile->fileName()));
+    }
   } else {
     m_webView->setHtml(text_, url_);
   }
