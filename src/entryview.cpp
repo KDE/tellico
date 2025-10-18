@@ -251,12 +251,13 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   if(html.size() > 1200000) {
     delete m_tempFile;
     m_tempFile = new QTemporaryFile(QDir::tempPath() + QLatin1String("/tellicoview_XXXXXX") + QLatin1String(".html"));
-    m_tempFile->open();
-    QTextStream ts(m_tempFile);
-    ts.setEncoding(QStringConverter::Utf8);
-    ts << html;
-    // TODO: need to handle relative links
-    page()->load(QUrl::fromLocalFile(m_tempFile->fileName()));
+    if(m_tempFile->open()) {
+      QTextStream ts(m_tempFile);
+      ts.setEncoding(QStringConverter::Utf8);
+      ts << html;
+      // TODO: need to handle relative links
+      page()->load(QUrl::fromLocalFile(m_tempFile->fileName()));
+    }
   } else {
     // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
     // by simply using a relative path in the xslt file
