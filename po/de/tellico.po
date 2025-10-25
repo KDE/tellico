@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2003, 2004, 2005, 2006 Gerrit M. Albrecht <mail@gerrit-albrecht.de>
-# Robby Stephenson <robby@periapsis.org>, 2003 2007.
+# SPDX-FileCopyrightText: 2003, 2007 Robby Stephenson <robby@periapsis.org>
 # SPDX-FileCopyrightText: 2006 Tobias Gruetzmacher <tobias@portfolio16.de>
 # SPDX-FileCopyrightText: 2007, 2008 Jens Seidel <jensseidel@users.sf.net>
 # SPDX-FileCopyrightText: 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 Burkhard Lück <lueck@hube-lueck.de>
@@ -5468,10 +5468,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico – eine Sammlungsverwaltung, frei und einfach"
 
 #: src/main.cpp:90
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2023, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "Copyright 2001-2023 Robby Stephenson"
+msgstr "© 2001 Robby Stephenson"
 
 #: src/main.cpp:94
 #, kde-format
