@@ -7440,19 +7440,3 @@ msgstr "Søk"
 #, kde-format
 msgid "Clear"
 msgstr "Tøm"
-
-#~ msgctxt "Language"
-#~ msgid "English"
-#~ msgstr "Engelsk"
-
-#~ msgctxt "Language"
-#~ msgid "French"
-#~ msgstr "Fransk"
-
-#~ msgctxt "Language"
-#~ msgid "German"
-#~ msgstr "Tysk"
-
-#~ msgctxt "Language"
-#~ msgid "Spanish"
-#~ msgstr "Spansk"
