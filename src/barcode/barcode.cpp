@@ -412,6 +412,7 @@ bool barcodeRecognitionThread::isValid( int numbers[13] )
     temp[i] = numbers[i];
   return isValid( temp );
 }
+
 bool barcodeRecognitionThread::isValid( QVector<int> numbers )
 {
   Q_ASSERT( numbers.count() == 13 );
