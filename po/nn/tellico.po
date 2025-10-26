@@ -7386,35 +7386,3 @@ msgstr "Søk"
 #, kde-format
 msgid "Clear"
 msgstr "Tøm"
-
-#~ msgctxt "Country"
-#~ msgid "Spain"
-#~ msgstr "Spania"
-
-#~ msgctxt "Country"
-#~ msgid "USA"
-#~ msgstr "USA"
-
-#~ msgctxt "Language"
-#~ msgid "English"
-#~ msgstr "Engelsk"
-
-#~ msgctxt "Language"
-#~ msgid "French"
-#~ msgstr "Fransk"
-
-#~ msgctxt "Language"
-#~ msgid "Chinese"
-#~ msgstr "Kinesisk"
-
-#~ msgctxt "Language"
-#~ msgid "German"
-#~ msgstr "Tysk"
-
-#~ msgctxt "Language"
-#~ msgid "Spanish"
-#~ msgstr "Spansk"
-
-#~ msgctxt "Language"
-#~ msgid "Russian"
-#~ msgstr "Russisk"
