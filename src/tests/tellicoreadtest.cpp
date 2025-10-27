@@ -596,7 +596,11 @@ void TellicoReadTest::testXmlName_data() {
   QTest::newRow("colon:") << false << QSL("colon:") << QSL("colon");
   QTest::newRow("Svět")   << true  << QSL("Svět")   << QSL("Svět");
   QTest::newRow("<test>") << false << QSL("<test>") << QSL("test");
+#if LIBXML_VERSION >= 21500
+  QTest::newRow("is-€:")  << false << QSL("is-€:")  << QSL("is-€");
+#else
   QTest::newRow("is-€:")  << false << QSL("is-€:")  << QSL("is-");
+#endif
 }
 
 void TellicoReadTest::testRecoverXmlName() {
@@ -618,8 +622,13 @@ void TellicoReadTest::testRecoverXmlName_data() {
                            << QByteArray("<fields><field name=\"nr\"/></fields><nrs><nr>x</nr></nrs>");
   QTest::newRow("<nr:>4")  << QByteArray("<fields><field d=\"nr:\" name=\"nr:\" d=\"nr:\"/></fields><nr:>x</nr:>")
                            << QByteArray("<fields><field d=\"nr:\" name=\"nr\" d=\"nr:\"/></fields><nr>x</nr>");
+#if LIBXML_VERSION >= 21500
+  QTest::newRow("<is-€:>") << QByteArray("<fields><field name=\"is-€:\"/></fields><is-€:>x</is-€:>")
+                           << QByteArray("<fields><field name=\"is-€\"/></fields><is-€>x</is-€>");
+#else
   QTest::newRow("<is-€:>") << QByteArray("<fields><field name=\"is-€:\"/></fields><is-€:>x</is-€:>")
                            << QByteArray("<fields><field name=\"is-\"/></fields><is->x</is->");
+#endif
 }
 
 void TellicoReadTest::testBug418067() {
