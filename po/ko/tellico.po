@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-16 02:36+0000\n"
+"POT-Creation-Date: 2025-10-27 02:35+0000\n"
 "PO-Revision-Date: 2025-10-12 13:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2739,7 +2739,7 @@ msgid "Template Packages"
 msgstr "템플릿 패키지"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1342
-#: src/mainwindow.cpp:1518 src/reportdialog.cpp:499 src/reportdialog.cpp:514
+#: src/mainwindow.cpp:1518 src/reportdialog.cpp:500 src/reportdialog.cpp:515
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -3060,12 +3060,12 @@ msgstr "항목 업데이트"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<i>%2</i>에서 <b>%1</b> 업데이트 중..."
 
-#: src/entryview.cpp:357
+#: src/entryview.cpp:358
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico가 기본 항목 스타일시트를 찾을 수 없습니다."
 
-#: src/entryview.cpp:359 src/mainwindow.cpp:1866
+#: src/entryview.cpp:360 src/mainwindow.cpp:1866
 #, kde-format
 msgid "Please check your installation."
 msgstr "설치 상태를 확인하십시오."
@@ -6395,12 +6395,12 @@ msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "일부 보고서는 대규모 소장품을 생성하는데 몇 초 정도 걸릴 수 있습니다."
 
-#: src/reportdialog.cpp:497
+#: src/reportdialog.cpp:498
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG 파일"
 
-#: src/reportdialog.cpp:512 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:513 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML 파일"

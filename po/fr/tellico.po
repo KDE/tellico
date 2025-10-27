@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-16 02:36+0000\n"
+"POT-Creation-Date: 2025-10-27 02:35+0000\n"
 "PO-Revision-Date: 2025-08-26 08:24+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -2821,7 +2821,7 @@ msgid "Template Packages"
 msgstr "Paquet de modèles"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1342
-#: src/mainwindow.cpp:1518 src/reportdialog.cpp:499 src/reportdialog.cpp:514
+#: src/mainwindow.cpp:1518 src/reportdialog.cpp:500 src/reportdialog.cpp:515
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -3156,12 +3156,12 @@ msgstr "Mettre à jour les entrées"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Mise à jour de <b>%1</b> à partir de <i>%2</i>..."
 
-#: src/entryview.cpp:357
+#: src/entryview.cpp:358
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico ne peut pas trouver la feuille de style d'entrée par défaut."
 
-#: src/entryview.cpp:359 src/mainwindow.cpp:1866
+#: src/entryview.cpp:360 src/mainwindow.cpp:1866
 #, kde-format
 msgid "Please check your installation."
 msgstr "Veuillez vérifier votre installation."
@@ -6574,12 +6574,12 @@ msgstr ""
 "Le temps de génération des rapports peut être assez long dans le cas de "
 "collections volumineuses."
 
-#: src/reportdialog.cpp:497
+#: src/reportdialog.cpp:498
 #, kde-format
 msgid "PNG Files"
 msgstr "Fichiers « PNG »"
 
-#: src/reportdialog.cpp:512 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:513 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "Fichiers HTML"

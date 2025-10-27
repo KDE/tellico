@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-16 02:36+0000\n"
+"POT-Creation-Date: 2025-10-27 02:35+0000\n"
 "PO-Revision-Date: 2025-02-01 22:07+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -2763,7 +2763,7 @@ msgid "Template Packages"
 msgstr "Sabloncsomagok"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1342
-#: src/mainwindow.cpp:1518 src/reportdialog.cpp:499 src/reportdialog.cpp:514
+#: src/mainwindow.cpp:1518 src/reportdialog.cpp:500 src/reportdialog.cpp:515
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -3092,12 +3092,12 @@ msgstr "Bejegyzések frissítése"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> frissítése innen: <i>%2</i>…"
 
-#: src/entryview.cpp:357
+#: src/entryview.cpp:358
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico nem találja az alapértelmezett bejegyzés stíluslapot."
 
-#: src/entryview.cpp:359 src/mainwindow.cpp:1866
+#: src/entryview.cpp:360 src/mainwindow.cpp:1866
 #, kde-format
 msgid "Please check your installation."
 msgstr "Kérem, ellenőrizze a rendszer beállításait."
@@ -6454,12 +6454,12 @@ msgstr ""
 "Nagy méretű gyűjtemény esetén néhány riport létrehozása hosszabb időt is "
 "igénybe vehet."
 
-#: src/reportdialog.cpp:497
+#: src/reportdialog.cpp:498
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG-fájlok"
 
-#: src/reportdialog.cpp:512 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:513 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML-fájlok"

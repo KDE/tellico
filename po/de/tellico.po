@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-16 02:36+0000\n"
+"POT-Creation-Date: 2025-10-27 02:35+0000\n"
 "PO-Revision-Date: 2023-05-12 19:32+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -2834,7 +2834,7 @@ msgid "Template Packages"
 msgstr "Vorlagenpakete"
 
 #: src/configdialog.cpp:1180 src/importdialog.cpp:446 src/mainwindow.cpp:1342
-#: src/mainwindow.cpp:1518 src/reportdialog.cpp:499 src/reportdialog.cpp:514
+#: src/mainwindow.cpp:1518 src/reportdialog.cpp:500 src/reportdialog.cpp:515
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:62 src/translators/htmlexporter.cpp:101
@@ -3168,12 +3168,12 @@ msgstr "Einträge aktualisieren"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> wird aktualisiert ..."
 
-#: src/entryview.cpp:357
+#: src/entryview.cpp:358
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Die Stilvorlage für den Standarddatensatz wurde nicht gefunden."
 
-#: src/entryview.cpp:359 src/mainwindow.cpp:1866
+#: src/entryview.cpp:360 src/mainwindow.cpp:1866
 #, kde-format
 msgid "Please check your installation."
 msgstr "Bitte überprüfen Sie Ihre Installation."
@@ -6594,12 +6594,12 @@ msgstr ""
 "Bei großen Sammlungen kann es mehrere Sekunden dauern, bis der Bericht "
 "erstellt wurde."
 
-#: src/reportdialog.cpp:497
+#: src/reportdialog.cpp:498
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG-Dateien"
 
-#: src/reportdialog.cpp:512 src/translators/htmlexporter.cpp:101
+#: src/reportdialog.cpp:513 src/translators/htmlexporter.cpp:101
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML-Dateien"
