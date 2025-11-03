@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:35+0000\n"
+"POT-Creation-Date: 2025-11-03 02:31+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -106,12 +106,6 @@ msgstr "Кескіндер тізімі"
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
 msgstr "Үш-баған"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
-msgstr "Топ статистикасы"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -6954,7 +6948,6 @@ msgid "Use a tab as the delimiter."
 msgstr "Кестелегішті бөлгіш қылу."
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "Басқа"
@@ -7500,6 +7493,10 @@ msgstr "Іздеу"
 #, kde-format
 msgid "Clear"
 msgstr "Тазалау"
+
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "Топ статистикасы"
 
 #, fuzzy
 #~| msgid "Spain"

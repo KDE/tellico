@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:35+0000\n"
+"POT-Creation-Date: 2025-11-03 02:31+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -103,12 +103,6 @@ msgstr ""
 #, kde-format
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
-msgstr ""
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
 msgstr ""
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
@@ -6660,7 +6654,6 @@ msgid "Use a tab as the delimiter."
 msgstr "使用制表符作为分割符。"
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "其他"

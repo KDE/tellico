@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:35+0000\n"
+"POT-Creation-Date: 2025-11-03 02:31+0000\n"
 "PO-Revision-Date: 2024-09-22 16:35+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -105,12 +105,6 @@ msgstr "Bilet­rutenett"
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
 msgstr "Tre kolonnar"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
-msgstr "Gruppestatistikk"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -6842,7 +6836,6 @@ msgid "Use a tab as the delimiter."
 msgstr "Bruk tabulatorteikn som skiljeteikn."
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "Anna"
@@ -7386,3 +7379,7 @@ msgstr "Søk"
 #, kde-format
 msgid "Clear"
 msgstr "Tøm"
+
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "Gruppestatistikk"

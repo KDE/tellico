@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:35+0000\n"
+"POT-Creation-Date: 2025-11-03 02:31+0000\n"
 "PO-Revision-Date: 2022-03-21 17:12+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -120,12 +120,6 @@ msgstr "Список изображений"
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
 msgstr "Три колонки"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
-msgstr "Статистика по группам"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -6905,7 +6899,6 @@ msgid "Use a tab as the delimiter."
 msgstr "Использовать в качестве разделителя табуляцию."
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "Другой"
@@ -7452,6 +7445,10 @@ msgstr "Поиск"
 #, kde-format
 msgid "Clear"
 msgstr "Чистый"
+
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "Статистика по группам"
 
 #, fuzzy
 #~| msgid "Spain"

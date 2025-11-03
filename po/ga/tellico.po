@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:35+0000\n"
+"POT-Creation-Date: 2025-11-03 02:31+0000\n"
 "PO-Revision-Date: 2009-02-20 09:01-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -106,12 +106,6 @@ msgstr "Liosta Íomhánna"
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
 msgstr "Trí Cholún"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
-msgstr "Staitisticí Grúpa"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -6767,7 +6761,6 @@ msgid "Use a tab as the delimiter."
 msgstr ""
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "Eile"
@@ -7292,6 +7285,10 @@ msgstr "Cuardaigh"
 #, kde-format
 msgid "Clear"
 msgstr "Glan"
+
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "Staitisticí Grúpa"
 
 #, fuzzy
 #~| msgid "Spain"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:35+0000\n"
+"POT-Creation-Date: 2025-11-03 02:31+0000\n"
 "PO-Revision-Date: 2025-10-05 00:41+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -107,12 +107,6 @@ msgstr "Opțiuni generale"
 #, fuzzy, kde-format
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
-msgstr "Șterge carte"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, fuzzy, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
 msgstr "Șterge carte"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
@@ -6726,7 +6720,6 @@ msgid "Use a tab as the delimiter."
 msgstr ""
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr ""
@@ -7253,6 +7246,11 @@ msgstr "Salvez fișierul..."
 #| msgid "Year"
 msgid "Clear"
 msgstr "An"
+
+#, fuzzy
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "Șterge carte"
 
 #, fuzzy
 #~ msgctxt "Language"

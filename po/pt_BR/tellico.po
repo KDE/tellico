@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:35+0000\n"
+"POT-Creation-Date: 2025-11-03 02:31+0000\n"
 "PO-Revision-Date: 2025-10-30 22:26-0300\n"
 "Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -118,12 +118,6 @@ msgstr "Grade de imagens"
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
 msgstr "Três colunas"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
-msgstr "Agrupar estatísticas"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -6880,7 +6874,6 @@ msgid "Use a tab as the delimiter."
 msgstr "Utilizar a tabulação como separador."
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "Outro"
@@ -7429,6 +7422,10 @@ msgstr "Pesquisar"
 #, kde-format
 msgid "Clear"
 msgstr "Limpar"
+
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "Agrupar estatísticas"
 
 #~ msgctxt "Country"
 #~ msgid "Spain"

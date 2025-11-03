@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:35+0000\n"
+"POT-Creation-Date: 2025-11-03 02:31+0000\n"
 "PO-Revision-Date: 2025-09-02 17:05+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -105,12 +105,6 @@ msgstr "Grilla de imagine"
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
 msgstr "Tres-columna"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
-msgstr "Statisticas de gruppo"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -6871,7 +6865,6 @@ msgid "Use a tab as the delimiter."
 msgstr "Usa un Tab como delimitator."
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "Altere"
@@ -7418,6 +7411,10 @@ msgstr "Cerca"
 #, kde-format
 msgid "Clear"
 msgstr "Netta"
+
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "Statisticas de gruppo"
 
 #~ msgctxt "Country"
 #~ msgid "Spain"

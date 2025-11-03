@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:35+0000\n"
+"POT-Creation-Date: 2025-11-03 02:31+0000\n"
 "PO-Revision-Date: 2025-10-12 13:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -105,12 +105,6 @@ msgstr "이미지 그리드"
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
 msgstr "열 세 개"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
-msgstr "그룹 통계"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -6779,7 +6773,6 @@ msgid "Use a tab as the delimiter."
 msgstr "탭을 구분 기호로 사용합니다."
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "기타"
@@ -7311,6 +7304,10 @@ msgstr "검색"
 #, kde-format
 msgid "Clear"
 msgstr "지우기"
+
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "그룹 통계"
 
 #~ msgctxt "Country"
 #~ msgid "Spain"

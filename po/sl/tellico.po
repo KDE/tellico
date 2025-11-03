@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:35+0000\n"
+"POT-Creation-Date: 2025-11-03 02:31+0000\n"
 "PO-Revision-Date: 2025-08-25 10:37+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -108,12 +108,6 @@ msgstr "Mreža slik"
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
 msgstr "Tri stolpci"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
-msgstr "Statistike skupine"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -6824,7 +6818,6 @@ msgid "Use a tab as the delimiter."
 msgstr "Kot razmejilnik uporabi tabulator."
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "Drugo"
@@ -7363,6 +7356,10 @@ msgstr "Iskanje"
 #, kde-format
 msgid "Clear"
 msgstr "Počisti"
+
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "Statistike skupine"
 
 #~ msgctxt "Country"
 #~ msgid "Spain"
