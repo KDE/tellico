@@ -536,9 +536,9 @@
 >Cacher les options de configuration</title>
 
 <para
->&appname; a des options de configuration qui ne sont pas présentes dans la boîte de dialogue de <interface
+>&appname; a des options de configuration qui ne sont pas présentes dans la boite de dialogue de <interface
 >Configuration</interface
->. Elles n'étaient pas assez importantes pour encombrer la boîte de dialogue avec plus de paramètres mais présentent des options susceptibles de convenir à divers utilisateurs, l'application les lit depuis le fichier de configuration. </para>
+>. Elles n'étaient pas assez importantes pour encombrer la boite de dialogue avec plus de paramètres mais présentent des options susceptibles de convenir à divers utilisateurs, l'application les lit depuis le fichier de configuration. </para>
 
 <para
 >Les paramètres de &appname; sont enregistrés dans un fichier du dossier personnel de l'utilisateur appelé <filename
@@ -547,7 +547,7 @@
 >/share/config/tellicorc</filename
 >. Dans ce fichier, les réglages sont regroupés dans des sections avec des noms entre crochets, tel que « [General Options] ». Pour ajouter un paramètre au groupe <emphasis
 >Options générales</emphasis
->, cherchez la ligne dans le fichier de configuration avec ce nom de groupe. S'il n'apparaît pas, créez-le vous-même en ajoutant une ligne intitulée [Options générales]. Le paramètre peut ensuite être ajouté sous le nom de groupe. </para>
+>, cherchez la ligne dans le fichier de configuration avec ce nom de groupe. S'il n'apparait pas, créez-le vous-même en ajoutant une ligne intitulée [Options générales]. Le paramètre peut ensuite être ajouté sous le nom de groupe. </para>
 
 <sect2 id="hidden-general-options">
 <title
