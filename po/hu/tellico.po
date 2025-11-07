@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-17 00:42+0000\n"
-"PO-Revision-Date: 2025-02-02 14:52+0100\n"
+"PO-Revision-Date: 2025-11-06 21:21+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 25.08.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
@@ -7004,18 +7004,18 @@ msgid "If checked, the first row is used as field titles."
 msgstr "Ha kijelöli, az első sormező címként kerül feldolgozásra."
 
 #: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:337
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
+#, kde-format
 msgid "Import images as links only"
-msgstr "Csak a saját tulajdonú elemek importálása"
+msgstr "Képek importálása csak hivatkozásként"
 
 #: src/translators/csvimporter.cpp:260 src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
-msgstr "Ha kijelöli, a mezőnevek fejlécként nyomtatja ki."
+msgstr ""
+"Ha be van jelölve, a képek elérési útvonalai hivatkozásként lesznek "
+"importálva, ahelyett hogy a Tellico közvetlenül kezelné azokat."
 
 #: src/translators/csvimporter.cpp:274
 #, kde-format
@@ -7198,16 +7198,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>A fájl nem GCstar adat fájl.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "Nem tölthető be a címlap kép."
+msgstr "A GCStar modellfájl nem található."
 
 #: src/translators/gcstarimporter.cpp:334
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Szín beállítások"
+msgstr "GCStar beállítások"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
