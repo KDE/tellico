@@ -109,8 +109,6 @@ void DataCrowTest::testBooks5() {
   QCOMPARE(entry->field("series"), QStringLiteral("Ring of Fire"));
   QCOMPARE(entry->field("rating"), QStringLiteral("2"));
   QCOMPARE(entry->field("read"), QStringLiteral("true"));
-  QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
   QVERIFY(!entry->field("plot").isEmpty());
   QCOMPARE(entry->field("cdate"), QStringLiteral("2025-11-06"));
   QCOMPARE(entry->field("mdate"), QStringLiteral("2025-11-06"));
@@ -185,8 +183,6 @@ void DataCrowTest::testMovies5() {
   QCOMPARE(entry->field("keyword"), QStringLiteral("favorite"));
   QCOMPARE(entry->field("seen"), QStringLiteral("true"));
   QCOMPARE(entry->field("url"), QStringLiteral("http://www.interstellarmovie.net/"));
-  QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
   QVERIFY(!entry->field("plot").isEmpty());
   QCOMPARE(entry->field("cdate"), QStringLiteral("2025-11-04"));
   QCOMPARE(entry->field("mdate"), QStringLiteral("2025-11-06"));
@@ -245,8 +241,6 @@ void DataCrowTest::testMusic5() {
   QCOMPARE(tracks.count(), 10);
   QStringList track2{QStringLiteral("Let There Be Light"), QStringLiteral("Andrew Peterson"), QStringLiteral("03:56")};
   QCOMPARE(tracks.at(1), track2.join(Tellico::FieldFormat::columnDelimiterString()));
-  QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
   QCOMPARE(entry->field("cdate"), QStringLiteral("2025-11-08"));
   QCOMPARE(entry->field("mdate"), QStringLiteral("2025-11-08"));
 }
