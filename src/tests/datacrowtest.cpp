@@ -85,6 +85,37 @@ void DataCrowTest::testBooks() {
   QCOMPARE(entry->field("mdate"), QStringLiteral("2022-03-10"));
 }
 
+void DataCrowTest::testBooks5() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/datacrow_books5.xml"));
+  Tellico::Import::DataCrowImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Book));
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
+  QCOMPARE(coll->entryCount(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("1632"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("2013"));
+  QCOMPARE(entry->field("language"), QStringLiteral("English"));
+  QCOMPARE(entry->field("edition"), QStringLiteral("First Edition"));
+  QCOMPARE(entry->field("author"), QStringLiteral("Eric Flint"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("597"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("1-41653-281-1"));
+  QCOMPARE(entry->field("binding"), QStringLiteral("Paperback"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Baen Books"));
+  QCOMPARE(entry->field("series"), QStringLiteral("Ring of Fire"));
+  QCOMPARE(entry->field("rating"), QStringLiteral("2"));
+  QCOMPARE(entry->field("read"), QStringLiteral("true"));
+  QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
+  QVERIFY(!entry->field("plot").isEmpty());
+  QCOMPARE(entry->field("cdate"), QStringLiteral("2025-11-06"));
+  QCOMPARE(entry->field("mdate"), QStringLiteral("2025-11-06"));
+}
+
 void DataCrowTest::testMovies() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/datacrow_movies.xml"));
   Tellico::Import::DataCrowImporter importer(url);
@@ -123,6 +154,44 @@ void DataCrowTest::testMovies() {
   QCOMPARE(entry->field("mdate"), QStringLiteral("2022-03-10"));
 }
 
+void DataCrowTest::testMovies5() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/datacrow_movies5.xml"));
+  Tellico::Import::DataCrowImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Video));
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
+  QCOMPARE(coll->entryCount(), 3);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("Interstellar"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2014"));
+  QCOMPARE(entry->field("nationality"), QStringLiteral("United Kingdom; United States"));
+  QCOMPARE(entry->field("language"), QStringLiteral("English"));
+  QCOMPARE(entry->field("subtitle"), QStringLiteral("English"));
+  QCOMPARE(entry->field("director"), QStringLiteral("Christopher Nolan"));
+  QStringList cast = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QCOMPARE(cast.count(), 34);
+  QCOMPARE(cast.at(2), QStringLiteral("Anne Hathaway"));
+  QCOMPARE(entry->field("color"), QStringLiteral("Color"));
+  QCOMPARE(entry->field("medium"), QStringLiteral("DVD"));
+  QCOMPARE(entry->field("aspect-ratio"), QStringLiteral("16:9"));
+  QCOMPARE(entry->field("widescreen"), QStringLiteral("true"));
+  QCOMPARE(entry->field("running-time"), QStringLiteral("169"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Adventure; Drama; Science Fiction"));
+  QCOMPARE(entry->field("rating"), QStringLiteral("4"));
+  QCOMPARE(entry->field("keyword"), QStringLiteral("favorite"));
+  QCOMPARE(entry->field("seen"), QStringLiteral("true"));
+  QCOMPARE(entry->field("url"), QStringLiteral("http://www.interstellarmovie.net/"));
+  QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
+  QVERIFY(!entry->field("plot").isEmpty());
+  QCOMPARE(entry->field("cdate"), QStringLiteral("2025-11-04"));
+  QCOMPARE(entry->field("mdate"), QStringLiteral("2025-11-06"));
+}
+
 void DataCrowTest::testMusic() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/datacrow_music.xml"));
   Tellico::Import::DataCrowImporter importer(url);
@@ -144,10 +213,40 @@ void DataCrowTest::testMusic() {
   QCOMPARE(entry->field("rating"), QStringLiteral("4"));
   QStringList tracks = Tellico::FieldFormat::splitTable(entry->field("track"));
   QCOMPARE(tracks.count(), 2);
-  QStringList track2 = QStringList() << QStringLiteral("Let There Be Light") << QStringLiteral("Andrew Peterson") << QStringLiteral("03:56");
+  QStringList track2{QStringLiteral("Let There Be Light"), QStringLiteral("Andrew Peterson"), QStringLiteral("03:56")};
   QCOMPARE(tracks.at(1), track2.join(Tellico::FieldFormat::columnDelimiterString()));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
   QCOMPARE(entry->field("cdate"), QStringLiteral("2022-03-11"));
   QCOMPARE(entry->field("mdate"), QStringLiteral("2022-03-11"));
+}
+
+void DataCrowTest::testMusic5() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/datacrow_music5.xml"));
+  Tellico::Import::DataCrowImporter importer(url);
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Album));
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
+  QCOMPARE(coll->entryCount(), 2);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(2);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("Love and Thunder"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2003"));
+  QCOMPARE(entry->field("medium"), QStringLiteral("Compact Disc"));
+  QCOMPARE(entry->field("location"), QStringLiteral("container1"));
+  QCOMPARE(entry->field("label"), QStringLiteral("Watershed Records"));
+  QCOMPARE(entry->field("artist"), QStringLiteral("Andrew Peterson"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Christian"));
+  QCOMPARE(entry->field("rating"), QStringLiteral("4"));
+  QStringList tracks = Tellico::FieldFormat::splitTable(entry->field("track"));
+  QCOMPARE(tracks.count(), 10);
+  QStringList track2{QStringLiteral("Let There Be Light"), QStringLiteral("Andrew Peterson"), QStringLiteral("03:56")};
+  QCOMPARE(tracks.at(1), track2.join(Tellico::FieldFormat::columnDelimiterString()));
+  QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
+  QCOMPARE(entry->field("cdate"), QStringLiteral("2025-11-08"));
+  QCOMPARE(entry->field("mdate"), QStringLiteral("2025-11-08"));
 }
