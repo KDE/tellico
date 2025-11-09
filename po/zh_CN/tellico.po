@@ -6708,14 +6708,14 @@ msgstr ""
 #: src/translators/csvimporter.cpp:258 src/translators/gcstarimporter.cpp:341
 #, kde-format
 msgid "Import images as links only"
-msgstr ""
+msgstr "仅以链接形式导入图片"
 
 #: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:342
 #, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
-msgstr ""
+msgstr "若勾选此项，图像路径将作为链接导入，而非由Tellico直接管理。"
 
 #: src/translators/csvimporter.cpp:273
 #, kde-format
@@ -6891,12 +6891,12 @@ msgstr "<qt>文件不是有效的 GCstar 数据文件。</qt>"
 #: src/translators/gcstarimporter.cpp:295
 #, kde-format
 msgid "The GCstar model file could not be found."
-msgstr ""
+msgstr "无法找到 GCstar 模型文件"
 
 #: src/translators/gcstarimporter.cpp:338
 #, kde-format
 msgid "GCstar Options"
-msgstr ""
+msgstr "GCstar 选项"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -7169,23 +7169,3 @@ msgstr "搜索"
 #, kde-format
 msgid "Clear"
 msgstr "清除"
-
-#~ msgctxt "Language"
-#~ msgid "English"
-#~ msgstr "英语"
-
-#~ msgctxt "Language"
-#~ msgid "French"
-#~ msgstr "法语"
-
-#~ msgctxt "Language"
-#~ msgid "Chinese"
-#~ msgstr "中文"
-
-#~ msgctxt "Language"
-#~ msgid "German"
-#~ msgstr "德语"
-
-#~ msgctxt "Language"
-#~ msgid "Spanish"
-#~ msgstr "西班牙语"
