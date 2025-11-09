@@ -33,8 +33,11 @@ Q_OBJECT
 private Q_SLOTS:
   void initTestCase();
   void testBooks();
+  void testBooks5();
   void testMovies();
+  void testMovies5();
   void testMusic();
+  void testMusic5();
 };
 
 #endif

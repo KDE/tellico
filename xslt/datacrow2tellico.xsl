@@ -24,13 +24,13 @@
 
 <xsl:variable name="coll">
  <xsl:choose>
-  <xsl:when test="/data-crow-objects/book">
+  <xsl:when test="/data-crow-objects//book">
    <xsl:text>2</xsl:text>
   </xsl:when>
-  <xsl:when test="/data-crow-objects/movie">
+  <xsl:when test="/data-crow-objects//movie">
    <xsl:text>3</xsl:text>
   </xsl:when>
-  <xsl:when test="/data-crow-objects/music-album">
+  <xsl:when test="/data-crow-objects//music-album">
    <xsl:text>4</xsl:text>
   </xsl:when>
  </xsl:choose>
@@ -49,17 +49,17 @@
  <tc:collection title="Data Crow Import" type="{$coll}">
   <tc:fields>
    <tc:field name="_default"/>
-   <xsl:if test="book/webpage or movie/webpage or music-album/webpage">
+   <xsl:if test=".//book/webpage or .//movie/webpage or .//music-album/webpage">
     <tc:field flags="0" title="URL" category="General" format="4" type="7" name="url" i18n="true"/>
    </xsl:if>
-   <xsl:if test="*/container/*/name">
+   <xsl:if test=".//container/name">
     <tc:field flags="6" title="Location" category="Personal" format="4" type="1" name="location" i18n="true"/>
    </xsl:if>
    <xsl:if test="$coll='3'">
     <tc:field flags="0" title="Seen" category="Personal" format="4" type="4" name="seen" i18n="true"/>
    </xsl:if>
   </tc:fields>
-  <xsl:apply-templates select="movie|book|music-album"/>
+  <xsl:apply-templates select=".//movie|.//book|.//music-album"/>
  </tc:collection>
 </xsl:template>
 
@@ -76,6 +76,10 @@
  </xsl:element>
 </xsl:template>
 
+<xsl:template match="color-items">
+ <tc:color><xsl:value-of select="color[1]/name"/></tc:color>
+</xsl:template>
+
 <xsl:template match="aspect-ratio">
  <tc:aspect-ratio><xsl:value-of select="."/></tc:aspect-ratio>
  <xsl:variable name="values" select="str:tokenize(., ':')"/>
@@ -84,20 +88,36 @@
  </xsl:if>
 </xsl:template>
 
-<xsl:template match="playlength">
- <xsl:variable name="values" select="str:tokenize(., ':')"/>
- <tc:running-time>
-  <xsl:value-of select="60*$values[1] + $values[2]"/>
- </tc:running-time>
+<xsl:template match="aspect-ratio-items">
+ <tc:aspect-ratio><xsl:value-of select="aspect-ratio[1]/name"/></tc:aspect-ratio>
+ <xsl:variable name="values" select="str:tokenize(aspect-ratio[1]/name, ':')"/>
+ <xsl:if test="100*$values[1] div $values[2] &gt; 134">
+  <tc:widescreen>true</tc:widescreen>
+ </xsl:if>
 </xsl:template>
 
-<xsl:template match="binding">
+<xsl:template match="playlength">
+ <xsl:if test="contains(., ':')">
+  <xsl:variable name="values" select="str:tokenize(., ':')"/>
+  <tc:running-time>
+   <xsl:value-of select="60*$values[1] + $values[2]"/>
+  </tc:running-time>
+ </xsl:if>
+ <xsl:if test="not(contains(., ':'))">
+  <tc:running-time>
+   <xsl:value-of select=". div 60"/>
+  </tc:running-time>
+ </xsl:if>
+</xsl:template>
+
+<xsl:template match="binding|binding-items">
+ <xsl:variable name="binding" select="binding/name | text()[not(parent::*[child::*])]"/>
  <tc:binding i18n="true">
   <xsl:choose>
-   <xsl:when test="contains(., 'Paperback')">
+   <xsl:when test="contains($binding, 'Paperback')">
     <xsl:text>Paperback</xsl:text>
    </xsl:when>
-   <xsl:when test="contains(., 'Hardcover')">
+   <xsl:when test="contains($binding, 'Hardcover')">
     <xsl:text>Hardback</xsl:text>
    </xsl:when>
    <xsl:otherwise>
@@ -107,17 +127,17 @@
  </tc:binding>
 </xsl:template>
 
-<xsl:template match="countries">
+<xsl:template match="countries|countries-items">
  <tc:nationalitys>
   <xsl:for-each select="country">
    <tc:nationality i18n="true">
-    <xsl:value-of select="."/>
+    <xsl:value-of select="name"/>
    </tc:nationality>
   </xsl:for-each>
  </tc:nationalitys>
 </xsl:template>
 
-<xsl:template match="actors">
+<xsl:template match="actors|actors-items">
  <tc:casts>
   <xsl:for-each select="actor">
    <tc:cast>
@@ -129,7 +149,7 @@
  </tc:casts>
 </xsl:template>
 
-<xsl:template match="directors">
+<xsl:template match="directors|directors-items">
  <tc:directors>
   <xsl:for-each select="director">
    <tc:director>
@@ -139,7 +159,7 @@
  </tc:directors>
 </xsl:template>
 
-<xsl:template match="authors">
+<xsl:template match="authors|authors-items">
  <tc:authors>
   <xsl:for-each select="author">
    <tc:author>
@@ -149,7 +169,7 @@
  </tc:authors>
 </xsl:template>
 
-<xsl:template match="artists">
+<xsl:template match="artists|artists-items">
  <tc:artists>
   <xsl:for-each select="artist">
    <tc:artist>
@@ -167,7 +187,7 @@
  </tc:translators>
 </xsl:template>
 
-<xsl:template match="languages">
+<xsl:template match="languages|languages-items">
  <tc:languages>
   <xsl:for-each select="language">
    <tc:language>
@@ -177,7 +197,7 @@
  </tc:languages>
 </xsl:template>
 
-<xsl:template match="subtitle-languages">
+<xsl:template match="subtitle-languages|subtitle-languages-items">
  <tc:subtitles>
   <xsl:for-each select="language">
    <tc:subtitle>
@@ -191,30 +211,34 @@
  <tc:isbn><xsl:value-of select="."/></tc:isbn>
 </xsl:template>
 
-<xsl:template match="edition-type">
- <tc:edition><xsl:value-of select="."/></tc:edition>
+<xsl:template match="edition-type|edition-type-items">
+ <tc:edition>
+  <xsl:value-of select="edition-type/name | text()[not(parent::*[child::*])]"/>
+ </tc:edition>
 </xsl:template>
 
 <xsl:template match="description">
- <tc:plot><xsl:value-of select="."/></tc:plot>
+ <xsl:choose>
+ <xsl:when test="$coll = '2' or $coll = '3'">
+  <tc:plot><xsl:value-of select="."/></tc:plot>
+ </xsl:when>
+ <xsl:when test="$coll = '4'">
+  <tc:comments><xsl:value-of select="."/></tc:comments>
+ </xsl:when>
+ </xsl:choose>
 </xsl:template>
 
 <xsl:template match="comment">
  <tc:comments><xsl:value-of select="."/></tc:comments>
 </xsl:template>
 
-<xsl:template match="container">
- <xsl:choose>
-  <xsl:when test="name">
-   <tc:location><xsl:value-of select="name"/></tc:location>
-  </xsl:when>
-  <xsl:otherwise>
-   <xsl:apply-templates select="container"/>
-  </xsl:otherwise>
- </xsl:choose>
+<xsl:template match="container|container-items">
+ <tc:location>
+  <xsl:value-of select="container/name | text()[not(parent::*[child::*])]"/>
+ </tc:location>
 </xsl:template>
 
-<xsl:template match="picture-front">
+<xsl:template match="picture-front|picture-01">
  <tc:cover>
   <xsl:value-of select="."/>
  </tc:cover>
@@ -225,6 +249,15 @@
   <tc:seen>true</tc:seen>
  </xsl:if>
  <xsl:if test=". = 'Read'">
+  <tc:read>true</tc:read>
+ </xsl:if>
+</xsl:template>
+
+<xsl:template match="state-items">
+ <xsl:if test="state[1]/name = 'Seen'">
+  <tc:seen>true</tc:seen>
+ </xsl:if>
+ <xsl:if test="state[1]/name = 'Read'">
   <tc:read>true</tc:read>
  </xsl:if>
 </xsl:template>
@@ -260,7 +293,7 @@
  </xsl:choose>
 </xsl:template>
 
-<xsl:template match="genres">
+<xsl:template match="genres|genres-items">
  <tc:genres>
   <xsl:choose>
    <xsl:when test="$coll = '4'">
@@ -299,7 +332,7 @@
  </xsl:if>
 </xsl:template>
 
-<xsl:template match="music-tracks">
+<xsl:template match="music-tracks|music-track-children">
  <tc:tracks>
   <xsl:for-each select="music-track">
    <tc:track>
@@ -307,13 +340,18 @@
      <xsl:value-of select="title"/>
     </tc:column>
     <tc:column>
-     <xsl:value-of select="(artists/artist[1]/name|../../artists/artist[1]/name)[1]"/>
+     <xsl:value-of select="(artists-items/artist[1]/name|artists/artist[1]/name|../../artists/artist[1]/name)[1]"/>
     </tc:column>
     <tc:column>
      <xsl:choose>
-      <xsl:when test="starts-with(playlength, '0:')">
-       <xsl:value-of select="substring(playlength,3)"/>
-      </xsl:when>
+     <xsl:when test="starts-with(playlength, '0:')">
+      <xsl:value-of select="substring(playlength,3)"/>
+     </xsl:when>
+     <xsl:when test="not(contains(playlength, ':'))">
+      <xsl:value-of select="concat(format-number(floor(playlength div 60), '00'),
+                                   ':',
+                                   format-number(playlength mod 60, '00'))"/>
+     </xsl:when>
       <xsl:otherwise>
        <xsl:value-of select="playlength"/>
       </xsl:otherwise>
@@ -324,27 +362,39 @@
  </tc:tracks>
 </xsl:template>
  
- <xsl:template match="storage-medium">
- <tc:medium i18n="true"><xsl:value-of select="."/></tc:medium>
+<xsl:template match="storage-medium|storage-medium-items">
+ <xsl:variable name="medium" select="storage-medium/name | text()[not(parent::*[child::*])]"/>
+ <tc:medium i18n="true">
+  <xsl:choose>
+   <xsl:when test="contains($medium, 'CD')">
+    <xsl:text>Compact Disc</xsl:text>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:value-of select="$medium"/>
+   </xsl:otherwise>
+  </xsl:choose>
+ </tc:medium>
 </xsl:template>
 
-<xsl:template match="record-label">
+<xsl:template match="record-label|record-label-items">
  <tc:labels>
-  <tc:label><xsl:value-of select="."/></tc:label>
+  <tc:label>
+   <xsl:value-of select="record-label/name | text()[not(parent::*[child::*])]"/>
+  </tc:label>
  </tc:labels>
 </xsl:template>
 
-<xsl:template match="publishers">
+<xsl:template match="publishers|publishers-items">
  <tc:publishers>
   <xsl:for-each select="publisher">
    <tc:publisher>
-    <xsl:value-of select="."/>
+    <xsl:value-of select="name | text()[not(parent::*[child::*])]"/>
    </tc:publisher>
   </xsl:for-each>
  </tc:publishers>
 </xsl:template>
 
-<xsl:template match="tags">
+<xsl:template match="tags|tags-items">
  <tc:keywords>
   <xsl:for-each select="tag">
    <tc:keyword>
@@ -356,22 +406,6 @@
 
 <xsl:template match="purchaseprice|cost">
  <tc:pur_price><xsl:value-of select="."/></tc:pur_price>
-</xsl:template>
-
-<xsl:template name="substring-before-last">
- <xsl:param name="input"/>
- <xsl:param name="substr"/>
- <xsl:if test="$substr and contains($input, $substr)">
-  <xsl:variable name="temp" select="substring-after($input, $substr)"/>
-  <xsl:value-of select="substring-before($input, $substr)"/>
-  <xsl:if test="contains($temp, $substr)">
-   <xsl:value-of select="$substr"/>
-   <xsl:call-template name="substring-before-last">
-    <xsl:with-param name="input" select="$temp"/>
-    <xsl:with-param name="substr" select="$substr"/>
-   </xsl:call-template>
-  </xsl:if>
- </xsl:if>
 </xsl:template>
 
 <xsl:template name="year">

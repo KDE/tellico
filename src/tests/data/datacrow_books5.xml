@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data-crow-objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="datacrow_books5.xsd">
+    <book-items>
+            <book>
+                <datacrow-module-index>54</datacrow-module-index>
+                <picture-01>file:////home/robby/documents/datacrow/images/eec80fb3-1668-42f2-8036-d75fedcf3e83/picture1.jpg</picture-01>
+                <picture-02></picture-02>
+                <picture-03></picture-03>
+                <picture-04></picture-04>
+                <picture-05></picture-05>
+                <picture-06></picture-06>
+                <picture-07></picture-07>
+                <picture-08></picture-08>
+                <picture-09></picture-09>
+                <picture-10></picture-10>
+                <title>1632</title>
+                <description>A small West Virginia town is permanently transplanted to 1632 Germany, in the middle of the 30-years war.</description>
+                <year>2013</year>
+                <rating>5</rating>
+                <category-items>
+                    <category>
+                        <datacrow-module-index>10054</datacrow-module-index>
+                        <id>101755786951731</id>
+                        <name>Science Fiction</name>
+                    </category>
+                </category-items>
+                <category-items-list>Science Fiction</category-items-list>
+                <languages-items>
+                    <language>
+                        <datacrow-module-index>1100000</datacrow-module-index>
+                        <id>101744247437899</id>
+                        <name>English</name>
+                    </language>
+                </languages-items>
+                <languages-items-list>English</languages-items-list>
+                <binding-items>
+                    <binding>
+                        <datacrow-module-index>1200000</datacrow-module-index>
+                        <id>73d11858-18b2-4ef4-95ee-db163843778a</id>
+                        <name>Mass Market Paperback</name>
+                    </binding>
+                </binding-items>
+                <binding-items-list>Mass Market Paperback</binding-items-list>
+                <edition-type-items>
+                    <edition-type>
+                        <datacrow-module-index>1300000</datacrow-module-index>
+                        <id>101744746097306</id>
+                        <name>First Edition</name>
+                    </edition-type>
+                </edition-type-items>
+                <edition-type-items-list>First Edition</edition-type-items-list>
+                <created>2025-11-06</created>
+                <modified>2025-11-06</modified>
+                <service>Open Library / - / Search by Title / value=[1632]</service>
+                <service-url>https://openlibrary.org/books/OL8457224M.json</service-url>
+                <authors-items>
+                    <author>
+                        <datacrow-module-index>32000</datacrow-module-index>
+                        <id>6cdfc29e-2f68-42ad-af24-b8ab57075779</id>
+                        <name>Eric Flint</name>
+                    </author>
+                </authors-items>
+                <authors-items-list>Eric Flint</authors-items-list>
+                <state-items>
+                    <state>
+                        <datacrow-module-index>15054</datacrow-module-index>
+                        <id>101791600712934</id>
+                        <name>Read</name>
+                    </state>
+                </state-items>
+                <state-items-list>Read</state-items-list>
+                <isbn-10>1416532811</isbn-10>
+                <isbn-13>9781416532811</isbn-13>
+                <publishers-items>
+                    <publisher>
+                        <datacrow-module-index>33000</datacrow-module-index>
+                        <id>901e0153-7c89-410e-aac6-d117d156e899</id>
+                        <name>Baen Books</name>
+                    </publisher>
+                </publishers-items>
+                <publishers-items-list>Baen Books</publishers-items-list>
+                <webpage>https://openlibrary.org/books/OL8457224M</webpage>
+                <series>Ring of Fire</series>
+                <pages>597</pages>
+                <id>eec80fb3-1668-42f2-8036-d75fedcf3e83</id>
+                <label>1632</label>
+            </book>
+        </book-items>
+    <category-items>
+        <category>
+        <datacrow-module-index>10054</datacrow-module-index>
+        <name>Science Fiction</name>
+        <icon>R0lGODlhEAAQAHAAACH5BAEAABAALAAAAAAQABAAhAAAAMzMzIiIiN3d3e7u7ru7uxERETMzM0RERKqqqv///2ZmZlVVVXd3d5mZmSIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWRICSKQGkCYwoBgRAMxFAY6nogCQEoy8CgI0Dj0AgoGAqWIwCELAyIRWLAQxQSzFHgcRO4GoLEtdlYCGCFwSBAUAyAQtNCKmgwDCURofFAcB8ABgZcCUkrCQsMCA0OUwleTEAODWAFlgoBYgVNdQ6WMTJLCU0ODAKeawRXLnAGp0UKBap7AAckBye5JQ4purkiIQA7</icon>
+        <modified>2025-11-03</modified>
+        <created>2025-11-03</created>
+        <picture-01></picture-01>
+        <picture-02></picture-02>
+        <picture-03></picture-03>
+        <picture-04></picture-04>
+        <picture-05></picture-05>
+        <picture-06></picture-06>
+        <picture-07></picture-07>
+        <picture-08></picture-08>
+        <picture-09></picture-09>
+        <picture-10></picture-10>
+        <item>Categories</item>
+        <label>Science Fiction</label>
+        <id>101755786951731</id>
+        </category>
+    </category-items>
+    <language-items>
+        <language>
+        <datacrow-module-index>1100000</datacrow-module-index>
+        <name>English</name>
+        <modified>2025-11-03</modified>
+        <created>2025-04-17</created>
+        <picture-01></picture-01>
+        <picture-02></picture-02>
+        <picture-03></picture-03>
+        <picture-04></picture-04>
+        <picture-05></picture-05>
+        <picture-06></picture-06>
+        <picture-07></picture-07>
+        <picture-08></picture-08>
+        <picture-09></picture-09>
+        <picture-10></picture-10>
+        <item>Languages</item>
+        <label>English</label>
+        <id>101744247437899</id>
+        </language>
+    </language-items>
+    <binding-items>
+        <binding>
+        <datacrow-module-index>1200000</datacrow-module-index>
+        <name>Mass Market Paperback</name>
+        <modified>2025-11-04</modified>
+        <created>2025-11-04</created>
+        <picture-01></picture-01>
+        <picture-02></picture-02>
+        <picture-03></picture-03>
+        <picture-04></picture-04>
+        <picture-05></picture-05>
+        <picture-06></picture-06>
+        <picture-07></picture-07>
+        <picture-08></picture-08>
+        <picture-09></picture-09>
+        <picture-10></picture-10>
+        <item>Bindings</item>
+        <label>Mass Market Paperback</label>
+        <id>73d11858-18b2-4ef4-95ee-db163843778a</id>
+        </binding>
+    </binding-items>
+    <edition-type-items>
+        <edition-type>
+        <datacrow-module-index>1300000</datacrow-module-index>
+        <name>First Edition</name>
+        <modified>2025-11-03</modified>
+        <created>2025-11-03</created>
+        <picture-01></picture-01>
+        <picture-02></picture-02>
+        <picture-03></picture-03>
+        <picture-04></picture-04>
+        <picture-05></picture-05>
+        <picture-06></picture-06>
+        <picture-07></picture-07>
+        <picture-08></picture-08>
+        <picture-09></picture-09>
+        <picture-10></picture-10>
+        <item>Edition types</item>
+        <label>First Edition</label>
+        <id>101744746097306</id>
+        </edition-type>
+    </edition-type-items>
+    <author-items>
+        <author>
+        <datacrow-module-index>32000</datacrow-module-index>
+        <picture-01></picture-01>
+        <picture-02></picture-02>
+        <picture-03></picture-03>
+        <picture-04></picture-04>
+        <picture-05></picture-05>
+        <picture-06></picture-06>
+        <picture-07></picture-07>
+        <picture-08></picture-08>
+        <picture-09></picture-09>
+        <picture-10></picture-10>
+        <name>Eric Flint</name>
+        <firstname>Eric</firstname>
+        <lastname>Flint</lastname>
+        <external-references-items>
+                <external-reference>
+                <datacrow-module-index>1432000</datacrow-module-index>
+                <id>01fa0458-4e37-42c3-800b-7fe5a738120d</id>
+                </external-reference>
+        </external-references-items>
+        <external-references-items-list>PDCR: Eric Flint</external-references-items-list>
+        <created>2025-11-04</created>
+        <modified>2025-11-04</modified>
+        <id>6cdfc29e-2f68-42ad-af24-b8ab57075779</id>
+        <label>Eric Flint</label>
+        <item>Authors</item>
+        </author>
+    </author-items>
+    <state-items>
+        <state>
+        <datacrow-module-index>15054</datacrow-module-index>
+        <name>Read</name>
+        <icon>R0lGODlhDwAPALMLAAAAAADMmQDMZgCZZgD/mRAAADPMmTOZZjPMZgCZmTOZmQAAAAAAAAAAAAAAAAAAACH5BAEAAAsALAAAAAAPAA8AAARMcMlJF7g1gyACyBRABB4oiVxhnsH4mRshqCc2beQLDLzOBTTLgHAYfAAdxMsiUJAEG0MpJBiQDtVpyDDokIKVnUHAXWoECePqVDBPIgA7</icon>
+        <modified>2025-11-03</modified>
+        <created>2025-11-03</created>
+        <picture-01></picture-01>
+        <picture-02></picture-02>
+        <picture-03></picture-03>
+        <picture-04></picture-04>
+        <picture-05></picture-05>
+        <picture-06></picture-06>
+        <picture-07></picture-07>
+        <picture-08></picture-08>
+        <picture-09></picture-09>
+        <picture-10></picture-10>
+        <item>States</item>
+        <label>Read</label>
+        <id>101791600712934</id>
+        </state>
+    </state-items>
+    <publisher-items>
+        <publisher>
+        <datacrow-module-index>33000</datacrow-module-index>
+        <picture-01></picture-01>
+        <picture-02></picture-02>
+        <picture-03></picture-03>
+        <picture-04></picture-04>
+        <picture-05></picture-05>
+        <picture-06></picture-06>
+        <picture-07></picture-07>
+        <picture-08></picture-08>
+        <picture-09></picture-09>
+        <picture-10></picture-10>
+        <external-references-items>
+                <external-reference>
+                <datacrow-module-index>1433000</datacrow-module-index>
+                <id>79535ed3-9b66-416a-8555-f8bf11c7adb6</id>
+                </external-reference>
+        </external-references-items>
+        <external-references-items-list>PDCR: Baen Books</external-references-items-list>
+        <firstname>Baen</firstname>
+        <label>Baen Books</label>
+        <lastname>Books</lastname>
+        <id>901e0153-7c89-410e-aac6-d117d156e899</id>
+        <name>Baen Books</name>
+        <created>2025-11-04</created>
+        <modified>2025-11-04</modified>
+        <item>Publishers</item>
+        </publisher>
+    </publisher-items>
+</data-crow-objects>
