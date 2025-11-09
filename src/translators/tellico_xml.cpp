@@ -145,7 +145,7 @@ QByteArray Tellico::XML::recoverFromBadXMLName(const QByteArray& data_) {
       if(newName.isEmpty()) {
         return data_;
       }
-      myDebug() << "Bad name is" << fieldName << "; Good name is" << newName;
+//      myDebug() << "Bad name is" << fieldName << "; Good name is" << newName;
       badNames += qMakePair(fieldName.toUtf8().prepend('<').append('>'),
                             newName.toUtf8().prepend('<').append('>'));
       badNames += qMakePair(fieldName.toUtf8().prepend("</").append('>'),
