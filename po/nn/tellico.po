@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-17 00:42+0000\n"
+"POT-Creation-Date: 2025-11-10 00:43+0000\n"
 "PO-Revision-Date: 2024-09-22 16:35+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -99,12 +99,6 @@ msgstr "Bilet­rutenett"
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
 msgstr "Tre kolonnar"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
-msgstr "Gruppestatistikk"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -2769,7 +2763,7 @@ msgid "Template Packages"
 msgstr "Malpakkar"
 
 #: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1255
-#: src/mainwindow.cpp:1426 src/reportdialog.cpp:423 src/reportdialog.cpp:438
+#: src/mainwindow.cpp:1426 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
@@ -3168,12 +3162,12 @@ msgstr "Oppdater oppføringar"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Oppdaterer <b>%1</b> …"
 
-#: src/entryview.cpp:289
+#: src/entryview.cpp:290
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Klarte ikkje finna standardstilsett for oppføringar."
 
-#: src/entryview.cpp:291 src/mainwindow.cpp:1777
+#: src/entryview.cpp:292 src/mainwindow.cpp:1777
 #, kde-format
 msgid "Please check your installation."
 msgstr "Kontroller at programmet er rett installert."
@@ -6553,12 +6547,12 @@ msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "Er samlinga stor, kan det ta fleire sekund å laga klar rapporten."
 
-#: src/reportdialog.cpp:421
+#: src/reportdialog.cpp:422
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG-filer"
 
-#: src/reportdialog.cpp:436 src/translators/htmlexporter.cpp:102
+#: src/reportdialog.cpp:437 src/translators/htmlexporter.cpp:102
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML-filer"
@@ -6944,7 +6938,6 @@ msgid "Use a tab as the delimiter."
 msgstr "Bruk tabulatorteikn som skiljeteikn."
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "Anna"
@@ -7461,3 +7454,7 @@ msgstr "Søk"
 #, kde-format
 msgid "Clear"
 msgstr "Tøm"
+
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "Gruppestatistikk"

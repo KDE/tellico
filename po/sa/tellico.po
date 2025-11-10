@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-17 00:42+0000\n"
+"POT-Creation-Date: 2025-11-10 00:43+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -100,12 +100,6 @@ msgstr "चित्रजालम्"
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
 msgstr "त्रि-स्तम्भ"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
-msgstr "समूह सांख्यिकी"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -2740,7 +2734,7 @@ msgid "Template Packages"
 msgstr "टेम्पलेट संकुल"
 
 #: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1255
-#: src/mainwindow.cpp:1426 src/reportdialog.cpp:423 src/reportdialog.cpp:438
+#: src/mainwindow.cpp:1426 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
@@ -3146,12 +3140,12 @@ msgstr "प्रविष्टयः अद्यतनं कुर्वन�
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> अद्यतनं कुर्वन् ..."
 
-#: src/entryview.cpp:289
+#: src/entryview.cpp:290
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico पूर्वनिर्धारितप्रविष्टिशैलीपत्रं ज्ञातुं असमर्थः अस्ति ।"
 
-#: src/entryview.cpp:291 src/mainwindow.cpp:1777
+#: src/entryview.cpp:292 src/mainwindow.cpp:1777
 #, kde-format
 msgid "Please check your installation."
 msgstr "कृपया स्वस्य संस्थापनं पश्यन्तु।"
@@ -6526,12 +6520,12 @@ msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr "केचन प्रतिवेदनानि बृहत्सङ्ग्रहाणां कृते जनयितुं कतिपयानि सेकण्डानि यावत् समयं लभन्ते ।"
 
-#: src/reportdialog.cpp:421
+#: src/reportdialog.cpp:422
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG सञ्चिकाः"
 
-#: src/reportdialog.cpp:436 src/translators/htmlexporter.cpp:102
+#: src/reportdialog.cpp:437 src/translators/htmlexporter.cpp:102
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML सञ्चिकाः"
@@ -6914,7 +6908,6 @@ msgid "Use a tab as the delimiter."
 msgstr "परिसीमकरूपेण ट्याब् इत्यस्य उपयोगं कुर्वन्तु ।"
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "इतर"
@@ -7427,6 +7420,10 @@ msgstr "अन्वेषण"
 #, kde-format
 msgid "Clear"
 msgstr "स्पष्टः"
+
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "समूह सांख्यिकी"
 
 #~ msgctxt "Country"
 #~ msgid "Spain"

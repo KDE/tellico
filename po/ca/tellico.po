@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-17 00:42+0000\n"
+"POT-Creation-Date: 2025-11-10 00:43+0000\n"
 "PO-Revision-Date: 2025-09-01 10:58+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -103,12 +103,6 @@ msgstr "Quadrícula d'imatges"
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
 msgstr "Tres columnes"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
-msgstr "Estadístiques de grup"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -2781,7 +2775,7 @@ msgid "Template Packages"
 msgstr "Paquets de plantilla"
 
 #: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1255
-#: src/mainwindow.cpp:1426 src/reportdialog.cpp:423 src/reportdialog.cpp:438
+#: src/mainwindow.cpp:1426 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
@@ -3181,12 +3175,12 @@ msgstr "Actualitza les entrades"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "S'està actualitzant <b>%1</b> a partir de <i>%2</i>..."
 
-#: src/entryview.cpp:289
+#: src/entryview.cpp:290
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "El Tellico no pot localitzar el full d'estil d'entrades per omissió."
 
-#: src/entryview.cpp:291 src/mainwindow.cpp:1777
+#: src/entryview.cpp:292 src/mainwindow.cpp:1777
 #, kde-format
 msgid "Please check your installation."
 msgstr "Si us plau, comproveu la instal·lació."
@@ -6591,12 +6585,12 @@ msgstr ""
 "Alguns informes poden trigar uns quants segons a generar-se per a "
 "col·leccions grans."
 
-#: src/reportdialog.cpp:421
+#: src/reportdialog.cpp:422
 #, kde-format
 msgid "PNG Files"
 msgstr "Fitxers PNG"
 
-#: src/reportdialog.cpp:436 src/translators/htmlexporter.cpp:102
+#: src/reportdialog.cpp:437 src/translators/htmlexporter.cpp:102
 #, kde-format
 msgid "HTML Files"
 msgstr "Fitxers HTML"
@@ -6984,7 +6978,6 @@ msgid "Use a tab as the delimiter."
 msgstr "Usa el tabulador com a delimitador."
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "Altre"
@@ -7502,6 +7495,10 @@ msgstr "Cerca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
+
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "Estadístiques de grup"
 
 #~ msgctxt "Country"
 #~ msgid "Spain"

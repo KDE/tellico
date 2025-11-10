@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-17 00:42+0000\n"
+"POT-Creation-Date: 2025-11-10 00:43+0000\n"
 "PO-Revision-Date: 2025-11-06 21:21+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -103,12 +103,6 @@ msgstr "Képrács"
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
 msgstr "3 oszlopos"
-
-#. i18n: file: xslt/report-templates/Group_Statistics.xsl
-#, kde-format
-msgctxt "Group Statistics XSL Template"
-msgid "Group Statistics"
-msgstr "Csoportstatisztikák"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -2758,7 +2752,7 @@ msgid "Template Packages"
 msgstr "Sabloncsomagok"
 
 #: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1255
-#: src/mainwindow.cpp:1426 src/reportdialog.cpp:423 src/reportdialog.cpp:438
+#: src/mainwindow.cpp:1426 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
@@ -3163,12 +3157,12 @@ msgstr "Bejegyzések frissítése"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> frissítése innen: <i>%2</i>…"
 
-#: src/entryview.cpp:289
+#: src/entryview.cpp:290
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico nem találja az alapértelmezett bejegyzés stíluslapot."
 
-#: src/entryview.cpp:291 src/mainwindow.cpp:1777
+#: src/entryview.cpp:292 src/mainwindow.cpp:1777
 #, kde-format
 msgid "Please check your installation."
 msgstr "Kérem, ellenőrizze a rendszer beállításait."
@@ -6559,12 +6553,12 @@ msgstr ""
 "Nagy méretű gyűjtemény esetén néhány riport létrehozása hosszabb időt is "
 "igénybe vehet."
 
-#: src/reportdialog.cpp:421
+#: src/reportdialog.cpp:422
 #, kde-format
 msgid "PNG Files"
 msgstr "PNG-fájlok"
 
-#: src/reportdialog.cpp:436 src/translators/htmlexporter.cpp:102
+#: src/reportdialog.cpp:437 src/translators/htmlexporter.cpp:102
 #, kde-format
 msgid "HTML Files"
 msgstr "HTML-fájlok"
@@ -6948,7 +6942,6 @@ msgid "Use a tab as the delimiter."
 msgstr "Tabulátort használja határolóként."
 
 #: src/translators/csvexporter.cpp:170
-#: xslt/report-templates/Group_Statistics.xsl:75
 #, kde-format
 msgid "Other"
 msgstr "Más"
@@ -7462,6 +7455,10 @@ msgstr "Keresés"
 #, kde-format
 msgid "Clear"
 msgstr "Törlés"
+
+#~ msgctxt "Group Statistics XSL Template"
+#~ msgid "Group Statistics"
+#~ msgstr "Csoportstatisztikák"
 
 #~ msgctxt "Country"
 #~ msgid "Spain"
