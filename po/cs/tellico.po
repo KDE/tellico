@@ -7412,7 +7412,3 @@ msgstr "Hledat"
 #, kde-format
 msgid "Clear"
 msgstr "Vymazat"
-
-#~ msgctxt "Group Statistics XSL Template"
-#~ msgid "Group Statistics"
-#~ msgstr "Seskupit statistiky"
