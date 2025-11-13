@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-10 00:43+0000\n"
-"PO-Revision-Date: 2025-03-26 17:04+0200\n"
+"PO-Revision-Date: 2025-11-11 18:58+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5639,16 +5639,14 @@ msgid "Import data from Data Crow"
 msgstr "Importēt datus no „Data Crow“"
 
 #: src/mainwindow.cpp:393
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "Importēt MODS datus..."
+msgstr "Importēt „OnMyShelf“ datus..."
 
 #: src/mainwindow.cpp:394
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Importēt datus no „Referencer“"
+msgstr "Importēt datus no „OnMyShelf“"
 
 #: src/mainwindow.cpp:397
 #, kde-format
@@ -6969,18 +6967,18 @@ msgid "If checked, the first row is used as field titles."
 msgstr "Ja atzīmēts, pirmo rindu izmantos lauku nosaukumiem."
 
 #: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:337
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
+#, kde-format
 msgid "Import images as links only"
-msgstr "Importēt tikai vienumus, kas jums pieder"
+msgstr "Importēt attēlus tikai kā saites"
 
 #: src/translators/csvimporter.cpp:260 src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
-msgstr "Ja atzīmēts, lauku nosaukumus izdrukās kā tabulu galvenes"
+msgstr ""
+"Ja atzīmēts, attēlu celi tiks importēti kā saites, bet „Tellico“ tos tieši "
+"nepārvaldīs."
 
 #: src/translators/csvimporter.cpp:274
 #, kde-format
@@ -7163,16 +7161,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Datne nav derīga „GCstar“ datne.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "Neizdevās ielādēt vāka attēlu."
+msgstr "Neizdevās atrast „GCstar“ modeļa datni."
 
 #: src/translators/gcstarimporter.cpp:334
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Krāsu opcijas"
+msgstr "„GCstar“ opcijas"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
