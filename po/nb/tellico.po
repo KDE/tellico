@@ -7433,7 +7433,3 @@ msgstr "Søk"
 #, kde-format
 msgid "Clear"
 msgstr "Tøm"
-
-#~ msgctxt "Group Statistics XSL Template"
-#~ msgid "Group Statistics"
-#~ msgstr "Gruppestatistikk"
