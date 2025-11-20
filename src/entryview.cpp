@@ -272,7 +272,7 @@ void EntryView::showText(const QString& text_) {
 
 void EntryView::setXSLTFile(const QString& file_) {
   if(file_.isEmpty()) {
-    myWarning() << "empty xslt file";
+    myWarning() << "EntryView was given an empty xslt file name";
     return;
   }
   QString oldFile = m_xsltFile;
