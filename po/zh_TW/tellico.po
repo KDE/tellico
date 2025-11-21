@@ -4,13 +4,13 @@
 # Franklin Weng <franklin@goodhorse.idv.tw>, 2010, 2011, 2012, 2013, 2015.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2009.
 # pan93412 <pan93412@gmail.com>, 2019.
-# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:52+0000\n"
-"PO-Revision-Date: 2024-07-27 13:49+0900\n"
+"PO-Revision-Date: 2025-11-20 21:48+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.04.70\n"
+"X-Generator: Lokalize 26.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3709,7 +3709,7 @@ msgstr "條碼"
 #, fuzzy, kde-format
 #| msgid "Card Number"
 msgid "Catalog Number"
-msgstr "卡號"
+msgstr "Catalog 編號"
 
 #: src/fetch/discogsfetcher.cpp:351
 #, kde-format
@@ -4068,10 +4068,9 @@ msgid ""
 msgstr ""
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "IGDB 連結"
+msgstr "ISFDB 連結"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4094,10 +4093,9 @@ msgid "The rate limit has been exceeded."
 msgstr ""
 
 #: src/fetch/metronfetcher.cpp:245 src/fetch/metronfetcher.cpp:431
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "MovieMeter 連結"
+msgstr "Metron 連結"
 
 #: src/fetch/metronfetcher.cpp:397
 #, fuzzy, kde-format
@@ -4148,22 +4146,19 @@ msgid "Numista (%1)"
 msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:205 src/fetch/opdsfetcher.cpp:215
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellico 無法讀取此 PDF 檔的任何中繼資料。"
+msgstr "Tellico 無法讀取 OPDS Catalog 中的搜尋描述。"
 
 #: src/fetch/opdsfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "OPDS Catalog"
-msgstr "檔案類別"
+msgstr "OPDS Catalog"
 
 #: src/fetch/opdsfetcher.cpp:455
-#, fuzzy, kde-format
-#| msgid "Card Number"
+#, kde-format
 msgid "Catalog: "
-msgstr "卡號"
+msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:460
 #, fuzzy, kde-format
@@ -4172,10 +4167,9 @@ msgid "Enter the link to the OPDS server."
 msgstr "輸入此伺服器的主機名稱。"
 
 #: src/fetch/opdsfetcher.cpp:465
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "&Verify Catalog"
-msgstr "檔案類別"
+msgstr "驗證 Catalog(&V)"
 
 #: src/fetch/openlibraryfetcher.cpp:471 src/fetch/openlibraryfetcher.cpp:634
 #, kde-format
