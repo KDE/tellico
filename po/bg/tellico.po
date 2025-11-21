@@ -7180,18 +7180,3 @@ msgstr "Търсене"
 #, kde-format
 msgid "Clear"
 msgstr "Изчистване"
-
-#, fuzzy
-#~ msgctxt "Group Statistics XSL Template"
-#~ msgid "Group Statistics"
-#~ msgstr "Изтриване на поле?"
-
-#, fuzzy
-#~ msgctxt "Language"
-#~ msgid "French"
-#~ msgstr "Франция"
-
-#, fuzzy
-#~ msgctxt "Language"
-#~ msgid "German"
-#~ msgstr "Германия"
