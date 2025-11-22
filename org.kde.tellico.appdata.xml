@@ -586,6 +586,7 @@
       <li xml:lang="sv">Importerar information direkt från Amazon.com, IMDb, z39.50-servrar, PubMed, naSRU-servrar, CrossRef.org, diverse andra webbplatser, och från externa skript</li>
       <li xml:lang="tr">Bilgileri doğrudan Amazon.com, IMDb, z39.50 sunucuları, PubMed, SRU sunucuları, CrossRef.org ve çeşitli başka sitelerden ve harici betiklerden içe aktarır</li>
       <li xml:lang="uk">Імпортування даних безпосередньо із серверів Amazon.com, IMDb, z39.50, PubMed, SRU, CrossRef.org, інших сайтів та на основі зовнішніх скриптів.</li>
+      <li xml:lang="zh-TW">直接從各種網站匯入資訊，像是 Amazon.com、IMDb、z39.50 伺服器、PubMed、SRU 伺服器、CrossRef.org 等等網站，或是從外部文稿匯入資訊</li>
       <li>Imports CDDB data for cataloging audio CDs</li>
       <li xml:lang="ar">يستورد بيانات CDDB لكتلجة الأقراص المدمجة الصوتيّة</li>
       <li xml:lang="bs">Uvozi CDDB podatke za popisivanje muzičkih CD-ova</li>
@@ -623,6 +624,7 @@
       <li xml:lang="sv">Importerar CDDB-data för katalogisering av ljud-cd</li>
       <li xml:lang="tr">CD’leri kataloglamak için CDDB verisini içe aktarır</li>
       <li xml:lang="uk">Імпортування даних CDDB для каталогізації звукових компакт-дисків.</li>
+      <li xml:lang="zh-TW">匯入 CDDB 資料來整理音訊 CD 的收藏</li>
       <li>Scans and imports audio file collections, such as mp3 or ogg</li>
       <li xml:lang="ar">يمسح ويستورد مجموعات ملفات صوتيّة، مثل mp3 أو ogg</li>
       <li xml:lang="bs">Pretražuje i uvozi kolekcije muzičkih datoteka kao što su mp3 ili ogg</li>
@@ -660,6 +662,7 @@
       <li xml:lang="sv">Söker igenom och importera samlingar av ljudfiler, såsom mp3 eller ogg</li>
       <li xml:lang="tr">Mp3 ve ogg gibi ses dosyalarını tarar ve içe aktarır</li>
       <li xml:lang="uk">Сканування та імпортування збірок звукових файлів, зокрема mp3 та ogg.</li>
+      <li xml:lang="zh-TW">掃描並匯入音訊檔案收藏，像是 mp3 或 ogg</li>
     </ul>
   </description>
   <url type="homepage">https://tellico-project.org</url>
@@ -706,6 +709,7 @@
       <caption xml:lang="sv">Huvudfönstret som visar en filmsamling</caption>
       <caption xml:lang="tr">Bir film koleksiyonunu gösteren ana pencere</caption>
       <caption xml:lang="uk">Головне вікно програми зі збіркою фільмів</caption>
+      <caption xml:lang="zh-TW">主視窗，顯示電影收藏</caption>
       <image>https://cdn.kde.org/screenshots/tellico/tellico-movies.png</image>
     </screenshot>
     <screenshot type="default" width="1002" height="765">
@@ -745,6 +749,7 @@
       <caption xml:lang="sv">Huvudfönstret som visar ett enkelt objekt i en boksamling</caption>
       <caption xml:lang="tr">Bir kitap koleksiyonundaki tek bir ögeyi gösteren ana pencere</caption>
       <caption xml:lang="uk">Головне вікно програми із простим записом у збірці книжок</caption>
+      <caption xml:lang="zh-TW">主視窗，顯示一個書本收藏裡的簡單項目</caption>
       <image>https://cdn.kde.org/screenshots/tellico/tellico.png</image>
     </screenshot>
     <screenshot width="1396" height="883">
@@ -785,6 +790,7 @@
       <caption xml:lang="sv">Huvudfönstret som visar en spelsamling med visning sida vid sida</caption>
       <caption xml:lang="tr">Bir oyun koleksiyonunun yan yana görünümlerini gösteren ana pencere</caption>
       <caption xml:lang="uk">Головне вікно програми із панелями паралельного перегляду збірки ігор</caption>
+      <caption xml:lang="zh-TW">主視窗，以並排檢視顯示一個遊戲收藏</caption>
       <image>https://cdn.kde.org/screenshots/tellico/tellico-games.png</image>
     </screenshot>
   </screenshots>
