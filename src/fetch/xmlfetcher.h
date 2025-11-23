@@ -77,6 +77,7 @@ private:
   virtual void search() override;
   virtual void resetSearch() = 0;
   virtual QUrl searchUrl() = 0;
+  virtual void doSearchHook(KIO::Job* job) { Q_UNUSED(job); };
   virtual void parseData(QByteArray& data) = 0;
   virtual void checkMoreResults(int count) { Q_UNUSED(count); }
   virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) = 0;
