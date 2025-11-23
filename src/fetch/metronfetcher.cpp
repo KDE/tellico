@@ -62,8 +62,7 @@ MetronFetcher::MetronFetcher(QObject* parent_)
     , m_started(false) {
 }
 
-MetronFetcher::~MetronFetcher() {
-}
+MetronFetcher::~MetronFetcher() = default;
 
 QString MetronFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
