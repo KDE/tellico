@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2025-11-24 00:43+0000\n"
 "PO-Revision-Date: 2025-11-06 21:21+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -731,7 +731,7 @@ msgstr "Bibtex kulcs"
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:247
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
-#: src/fetch/metronfetcher.cpp:246 src/fetch/mobygamesfetcher.cpp:456
+#: src/fetch/metronfetcher.cpp:245 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:345 src/fetch/numistafetcher.cpp:360
 #: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:472
@@ -775,7 +775,7 @@ msgstr "Szervezet"
 #: src/collections/bibtexcollection.cpp:129
 #: src/collections/boardgamecollection.cpp:64
 #: src/collections/bookcollection.cpp:81
-#: src/collections/comicbookcollection.cpp:75 src/fetch/rpggeekfetcher.cpp:206
+#: src/collections/comicbookcollection.cpp:75 src/fetch/rpggeekfetcher.cpp:58
 #, kde-format
 msgid "Publisher"
 msgstr "Kiadó"
@@ -919,23 +919,23 @@ msgstr "Társasjátékaim"
 #: src/collections/bookcollection.cpp:125
 #: src/collections/comicbookcollection.cpp:108
 #: src/collections/gamecollection.cpp:62 src/collections/musiccollection.cpp:73
-#: src/collections/videocollection.cpp:68 src/fetch/rpggeekfetcher.cpp:204
+#: src/collections/videocollection.cpp:68 src/fetch/rpggeekfetcher.cpp:56
 #, kde-format
 msgid "Genre"
 msgstr "Fajta"
 
-#: src/collections/boardgamecollection.cpp:53 src/fetch/rpggeekfetcher.cpp:210
+#: src/collections/boardgamecollection.cpp:53 src/fetch/rpggeekfetcher.cpp:62
 #, kde-format
 msgid "Mechanism"
 msgstr "Mechanizmus"
 
 #: src/collections/boardgamecollection.cpp:59
-#: src/collections/gamecollection.cpp:68 src/fetch/rpggeekfetcher.cpp:205
+#: src/collections/gamecollection.cpp:68 src/fetch/rpggeekfetcher.cpp:57
 #, kde-format
 msgid "Release Year"
 msgstr "Kiadás éve"
 
-#: src/collections/boardgamecollection.cpp:70 src/fetch/rpggeekfetcher.cpp:208
+#: src/collections/boardgamecollection.cpp:70 src/fetch/rpggeekfetcher.cpp:60
 #, kde-format
 msgid "Designer"
 msgstr "Tervező"
@@ -962,7 +962,7 @@ msgstr "Alsó korhatár"
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:384 src/fetch/colnectfetcher.cpp:864
 #: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
-#: src/fetch/rpggeekfetcher.cpp:211 src/fetchdialog.cpp:245
+#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:245
 #, kde-format
 msgid "Description"
 msgstr "Leírás"
@@ -1315,7 +1315,7 @@ msgid "Writer"
 msgstr "Szerző"
 
 #: src/collections/comicbookcollection.cpp:58
-#: src/fetch/boardgamegeekfetcher.cpp:202 src/fetch/rpggeekfetcher.cpp:207
+#: src/fetch/boardgamegeekfetcher.cpp:55 src/fetch/rpggeekfetcher.cpp:59
 #: src/translators/boardgamegeekimporter.cpp:214
 #, kde-format
 msgctxt "Comic Book Illustrator"
@@ -1894,7 +1894,7 @@ msgid "Director"
 msgstr "Rendező"
 
 #: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:330
-#: src/fetch/discogsfetcher.cpp:587 src/fetch/rpggeekfetcher.cpp:209
+#: src/fetch/discogsfetcher.cpp:587 src/fetch/rpggeekfetcher.cpp:61
 #, kde-format
 msgid "Producer"
 msgstr "Producer"
@@ -3237,18 +3237,14 @@ msgstr "Kódolás helyi felhasználóként (%1)"
 msgid "Encode the exported file in the local encoding."
 msgstr "Exportált fájl kódolása helyi formátumban."
 
-#: src/fetch/adsfetcher.cpp:311
-#, kde-format
-msgid "SAO/NASA Astrophysics Data System"
-msgstr "SAO/NASA asztrofizikai adatrendszer"
-
-#: src/fetch/adsfetcher.cpp:326 src/fetch/amazonfetcher.cpp:1095
-#: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:229
-#: src/fetch/crossreffetcher.cpp:298 src/fetch/discogsfetcher.cpp:602
-#: src/fetch/giantbombfetcher.cpp:215 src/fetch/googlebookfetcher.cpp:383
-#: src/fetch/isbndbfetcher.cpp:390 src/fetch/mobygamesfetcher.cpp:641
-#: src/fetch/omdbfetcher.cpp:409 src/fetch/thegamesdbfetcher.cpp:626
-#: src/fetch/themoviedbfetcher.cpp:566 src/fetch/thetvdbfetcher.cpp:576
+#: src/fetch/abstractbggfetcher.cpp:256 src/fetch/adsfetcher.cpp:326
+#: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:173
+#: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
+#: src/fetch/discogsfetcher.cpp:602 src/fetch/giantbombfetcher.cpp:215
+#: src/fetch/googlebookfetcher.cpp:383 src/fetch/isbndbfetcher.cpp:390
+#: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
+#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:566
+#: src/fetch/thetvdbfetcher.cpp:576
 #, kde-format
 msgid ""
 "Registration is required for accessing this data source. If you agree to the "
@@ -3259,16 +3255,58 @@ msgstr ""
 "feltételekkel, <a href='%1'>kérjen hozzáférést</a>. Adja meg a hozzáférési "
 "információkat."
 
-#: src/fetch/adsfetcher.cpp:338 src/fetch/amazonfetcher.cpp:1107
-#: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:241
-#: src/fetch/entrezfetcher.cpp:538 src/fetch/giantbombfetcher.cpp:227
-#: src/fetch/googlebookfetcher.cpp:395 src/fetch/isbndbfetcher.cpp:402
-#: src/fetch/mobygamesfetcher.cpp:653 src/fetch/numistafetcher.cpp:416
-#: src/fetch/omdbfetcher.cpp:421 src/fetch/thegamesdbfetcher.cpp:638
-#: src/fetch/themoviedbfetcher.cpp:578
+#: src/fetch/abstractbggfetcher.cpp:268 src/fetch/adsfetcher.cpp:338
+#: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:185
+#: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:538
+#: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:395
+#: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
+#: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
+#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:578
 #, kde-format
 msgid "Access key: "
 msgstr "Hozzáférési kulcs:"
+
+#: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1147
+#: src/fetch/colnectfetcher.cpp:998 src/fetch/discogsfetcher.cpp:622
+#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:575
+#: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
+#: src/fetch/openlibraryfetcher.cpp:645 src/fetch/thegamesdbfetcher.cpp:646
+#, kde-format
+msgid "&Image size: "
+msgstr "&Kép méret: "
+
+#: src/fetch/abstractbggfetcher.cpp:279 src/fetch/amazonfetcher.cpp:1153
+#: src/fetch/colnectfetcher.cpp:1001 src/fetch/discogsfetcher.cpp:628
+#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:578
+#: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
+#: src/fetch/openlibraryfetcher.cpp:651 src/fetch/thegamesdbfetcher.cpp:652
+#, kde-format
+msgid "No Image"
+msgstr "Nincs kép"
+
+#: src/fetch/abstractbggfetcher.cpp:280 src/fetch/amazonfetcher.cpp:1150
+#: src/fetch/colnectfetcher.cpp:1002 src/fetch/discogsfetcher.cpp:625
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:579
+#: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
+#: src/fetch/openlibraryfetcher.cpp:648 src/fetch/thegamesdbfetcher.cpp:649
+#, kde-format
+msgid "Small Image"
+msgstr "Kis méretű kép"
+
+#. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
+#: src/fetch/abstractbggfetcher.cpp:281 src/fetch/amazonfetcher.cpp:1152
+#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:627
+#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:580
+#: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
+#: src/fetch/openlibraryfetcher.cpp:650 src/fetch/thegamesdbfetcher.cpp:651
+#, kde-format
+msgid "Large Image"
+msgstr "Nagy méretű kép"
+
+#: src/fetch/adsfetcher.cpp:311
+#, kde-format
+msgid "SAO/NASA Astrophysics Data System"
+msgstr "SAO/NASA asztrofizikai adatrendszer"
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:544
@@ -3477,7 +3515,7 @@ msgstr "Eredmény %1 -ből: %2/%3"
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:375
 #: src/fetch/kinofetcher.cpp:415 src/fetch/kinopoiskfetcher.cpp:267
-#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:333
+#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:332
 #: src/fetch/mobygamesfetcher.cpp:344 src/fetch/moviemeterfetcher.cpp:166
 #: src/fetch/numistafetcher.cpp:287 src/fetch/numistafetcher.cpp:295
 #: src/fetch/omdbfetcher.cpp:181 src/fetch/thegamesdbfetcher.cpp:171
@@ -3517,53 +3555,12 @@ msgstr ""
 "Az Amazon.com számos különböző helyi oldalról nyújt adatokat. Válasszon "
 "egyet, melyet az adatforráshoz használni akar."
 
-#: src/fetch/amazonfetcher.cpp:1147 src/fetch/boardgamegeekfetcher.cpp:215
-#: src/fetch/colnectfetcher.cpp:998 src/fetch/discogsfetcher.cpp:622
-#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:575
-#: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
-#: src/fetch/openlibraryfetcher.cpp:645 src/fetch/rpggeekfetcher.cpp:224
-#: src/fetch/thegamesdbfetcher.cpp:646 src/fetch/videogamegeekfetcher.cpp:237
-#, kde-format
-msgid "&Image size: "
-msgstr "&Kép méret: "
-
-#: src/fetch/amazonfetcher.cpp:1150 src/fetch/boardgamegeekfetcher.cpp:219
-#: src/fetch/colnectfetcher.cpp:1002 src/fetch/discogsfetcher.cpp:625
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:579
-#: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
-#: src/fetch/openlibraryfetcher.cpp:648 src/fetch/rpggeekfetcher.cpp:228
-#: src/fetch/thegamesdbfetcher.cpp:649 src/fetch/videogamegeekfetcher.cpp:241
-#, kde-format
-msgid "Small Image"
-msgstr "Kis méretű kép"
-
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/imdbfetcher.cpp:544
 #: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:649
 #: src/fetch/thegamesdbfetcher.cpp:650
 #, kde-format
 msgid "Medium Image"
 msgstr "Közepes méretű kép"
-
-#. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
-#: src/fetch/amazonfetcher.cpp:1152 src/fetch/boardgamegeekfetcher.cpp:220
-#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:627
-#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:580
-#: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
-#: src/fetch/openlibraryfetcher.cpp:650 src/fetch/rpggeekfetcher.cpp:229
-#: src/fetch/thegamesdbfetcher.cpp:651 src/fetch/videogamegeekfetcher.cpp:242
-#, kde-format
-msgid "Large Image"
-msgstr "Nagy méretű kép"
-
-#: src/fetch/amazonfetcher.cpp:1153 src/fetch/boardgamegeekfetcher.cpp:218
-#: src/fetch/colnectfetcher.cpp:1001 src/fetch/discogsfetcher.cpp:628
-#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:578
-#: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
-#: src/fetch/openlibraryfetcher.cpp:651 src/fetch/rpggeekfetcher.cpp:227
-#: src/fetch/thegamesdbfetcher.cpp:652 src/fetch/videogamegeekfetcher.cpp:240
-#, kde-format
-msgid "No Image"
-msgstr "Nincs kép"
 
 #: src/fetch/amazonfetcher.cpp:1156 src/fetch/discogsfetcher.cpp:632
 #: src/fetch/imdbfetcher.cpp:550 src/fetch/mobygamesfetcher.cpp:671
@@ -3606,7 +3603,7 @@ msgstr ""
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:453
-#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:439
+#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:394
 #: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
@@ -3625,13 +3622,13 @@ msgstr "Színező"
 msgid "Bedetheque Link"
 msgstr "Bedetheque hivatkozás"
 
-#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:432
+#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:431
 #: src/field.cpp:312
 #, kde-format
 msgid "ISBN#"
 msgstr "ISBN#"
 
-#: src/fetch/boardgamegeekfetcher.cpp:203
+#: src/fetch/boardgamegeekfetcher.cpp:56
 #, kde-format
 msgid "BoardGameGeek Link"
 msgstr "BoardGameGeek hivatkozás"
@@ -4140,24 +4137,24 @@ msgstr "KinoPoisk hivatkozás"
 msgid "Kino-Teatr Link"
 msgstr "Kino-Teatr hivatkozás"
 
-#: src/fetch/metronfetcher.cpp:185
+#: src/fetch/metronfetcher.cpp:184
 #, kde-format
 msgid "The rate limit has been exceeded."
 msgstr ""
 
-#: src/fetch/metronfetcher.cpp:245 src/fetch/metronfetcher.cpp:431
+#: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
 #, fuzzy, kde-format
 #| msgid "MovieMeter Link"
 msgid "Metron Link"
 msgstr "MovieMeter kapcsolat"
 
-#: src/fetch/metronfetcher.cpp:397
+#: src/fetch/metronfetcher.cpp:396
 #, fuzzy, kde-format
 #| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
 msgstr "%1 felhasználó nevet és jelszót kér."
 
-#: src/fetch/metronfetcher.cpp:402
+#: src/fetch/metronfetcher.cpp:401
 #, fuzzy, kde-format
 #| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
@@ -4229,7 +4226,7 @@ msgstr "Gyűjtemény &ellenőrzése"
 msgid "OpenLibrary Link"
 msgstr "OpenLibrary kapcsolat"
 
-#: src/fetch/rpggeekfetcher.cpp:212
+#: src/fetch/rpggeekfetcher.cpp:64
 #, kde-format
 msgid "RPGGeek Link"
 msgstr "RPGGeek hivatkozás"
@@ -4327,7 +4324,7 @@ msgstr "Feliratkozási PIN: "
 msgid "VGCollect Link"
 msgstr "VGCollect hivatkozás"
 
-#: src/fetch/videogamegeekfetcher.cpp:225
+#: src/fetch/videogamegeekfetcher.cpp:55
 #, kde-format
 msgid "VideoGameGeek Link"
 msgstr "VideoGameGeek hivatkozás"
