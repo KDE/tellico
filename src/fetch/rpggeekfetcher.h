@@ -25,16 +25,9 @@
 #ifndef TELLICO_RPGGEEKFETCHER_H
 #define TELLICO_RPGGEEKFETCHER_H
 
-#include "xmlfetcher.h"
-#include "configwidget.h"
-#include "../datavectors.h"
+#include "abstractbggfetcher.h"
 
-class RPGGeekFetcherTest;
 namespace Tellico {
-  namespace GUI {
-    class ComboBox;
-  }
-
   namespace Fetch {
 
 /**
@@ -42,60 +35,29 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class RPGGeekFetcher : public XMLFetcher {
+class RPGGeekFetcher : public AbstractBGGFetcher {
 Q_OBJECT
 
-friend class ::RPGGeekFetcherTest;
-
 public:
-  /**
-   */
   RPGGeekFetcher(QObject* parent);
-  /**
-   */
-  virtual ~RPGGeekFetcher();
 
-  /**
-   */
-  virtual QString source() const override;
-  virtual QString attribution() const override;
-  virtual bool canSearch(FetchKey k) const override;
   virtual Type type() const override { return RPGGeek; }
   virtual bool canFetch(int type) const override;
 
-  /**
-   * Returns a widget for modifying the fetcher's config.
-   */
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const override;
 
-  class ConfigWidget : public Fetch::ConfigWidget {
+  class ConfigWidget : public AbstractBGGFetcher::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const RPGGeekFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&) override;
     virtual QString preferredName() const override;
-  private:
-    GUI::ComboBox* m_imageCombo;
   };
-  friend class ConfigWidget;
 
   static QString defaultName();
   static QString defaultIcon();
   static StringHash allOptionalFields();
 
 private:
-  virtual void readConfigHook(const KConfigGroup& cg) override;
-  virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
-  virtual void resetSearch() override {}
-  virtual QUrl searchUrl() override;
-  virtual void parseData(QByteArray&) override {}
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) override;
-
-  enum ImageSize {
-    NoImage=0,
-    SmallImage=1, // small is really the thumb size
-    LargeImage=2
-  };
-  ImageSize m_imageSize;
+  virtual QString bggType() const override;
 };
 
   } // end namespace

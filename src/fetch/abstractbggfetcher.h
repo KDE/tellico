@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2017-2021 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2014-2025 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,42 +22,79 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_VIDEOGAMEGEEKFETCHER_H
-#define TELLICO_VIDEOGAMEGEEKFETCHER_H
+#ifndef TELLICO_ABSTRACTBGGFETCHER_H
+#define TELLICO_ABSTRACTBGGFETCHER_H
 
-#include "abstractbggfetcher.h"
+#include "xmlfetcher.h"
+#include "configwidget.h"
+#include "../datavectors.h"
+
+class QLineEdit;
+
+class BoardGameGeekFetcherTest;
+class RPGGeekFetcherTest;
+class VideoGameGeekFetcherTest;
 
 namespace Tellico {
+  namespace GUI {
+    class ComboBox;
+  }
+
   namespace Fetch {
 
 /**
- * A fetcher for videogamegeek.com
+ * A fetcher for boardgamegeek.com data sources
  *
  * @author Robby Stephenson
  */
-class VideoGameGeekFetcher : public AbstractBGGFetcher {
+class AbstractBGGFetcher : public XMLFetcher {
 Q_OBJECT
 
+friend class ::BoardGameGeekFetcherTest;
+friend class ::RPGGeekFetcherTest;
+friend class ::VideoGameGeekFetcherTest;
+
 public:
-  VideoGameGeekFetcher(QObject* parent);
+  /**
+   */
+  AbstractBGGFetcher(QObject* parent);
+  /**
+   */
+  virtual ~AbstractBGGFetcher();
 
-  virtual Type type() const override { return VideoGameGeek; }
-  virtual bool canFetch(int type) const override;
+  /**
+   */
+  virtual QString source() const override;
+  virtual QString attribution() const override;
+  virtual bool canSearch(FetchKey k) const override;
 
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const override;
-
-  class ConfigWidget : public AbstractBGGFetcher::ConfigWidget {
+  class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_, const VideoGameGeekFetcher* fetcher = nullptr);
-    virtual QString preferredName() const override;
+    explicit ConfigWidget(QWidget* parent_, const AbstractBGGFetcher* fetcher = nullptr);
+    virtual void saveConfigHook(KConfigGroup&) override;
+  private:
+    QLineEdit* m_apiKeyEdit;
+    GUI::ComboBox* m_imageCombo;
   };
-
-  static QString defaultName();
-  static QString defaultIcon();
-  static StringHash allOptionalFields();
+  friend class ConfigWidget;
 
 private:
-  virtual QString bggType() const override;
+  virtual QUrl searchUrl() override;
+  virtual void doSearchHook(KIO::Job* job) override;
+  virtual void readConfigHook(const KConfigGroup& cg) override;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
+  virtual void resetSearch() override {}
+  virtual void parseData(QByteArray& data) override;
+  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) override;
+  virtual QString bggType() const = 0;
+
+  enum ImageSize {
+    NoImage=0,
+    SmallImage=1, // small is really the thumb size
+    LargeImage=2
+  };
+  ImageSize m_imageSize;
+  QString m_apiKey;
 };
 
   } // end namespace

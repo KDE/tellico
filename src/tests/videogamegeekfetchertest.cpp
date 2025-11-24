@@ -33,7 +33,7 @@
 #include "../images/imagefactory.h"
 #include "../utils/datafileregistry.h"
 
-#include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <QTest>
 
@@ -46,6 +46,11 @@ void VideoGameGeekFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::GameCollection> registerVGG(Tellico::Data::Collection::Game, "game");
   Tellico::ImageFactory::init();
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/boardgamegeek2tellico.xsl"));
+
+  auto configFile = QFINDTESTDATA("tellicotest_private.config");
+  if(QFile::exists(configFile)) {
+    m_config = KSharedConfig::openConfig(configFile, KConfig::SimpleConfig)->group(QStringLiteral("VideoGameGeek"));
+  }
 }
 
 void VideoGameGeekFetcherTest::testKeyword() {
@@ -53,6 +58,7 @@ void VideoGameGeekFetcherTest::testKeyword() {
                                        QStringLiteral("Mass Effect 3 Citadel"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::VideoGameGeekFetcher(this));
   QVERIFY(fetcher->canSearch(request.key()));
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -86,6 +92,7 @@ void VideoGameGeekFetcherTest::testUpdate() {
   request.setCollectionType(coll->type());
   QCOMPARE(request.key(), Tellico::Fetch::Raw);
   QCOMPARE(request.value(), QStringLiteral("139806"));
+  fetcher.readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(&fetcher, request, 1);
   QCOMPARE(results.size(), 1);

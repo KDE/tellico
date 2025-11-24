@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfigGroup>
+
 class VideoGameGeekFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -36,6 +38,9 @@ private Q_SLOTS:
   void initTestCase();
   void testKeyword();
   void testUpdate();
+
+private:
+  KConfigGroup m_config;
 };
 
 #endif

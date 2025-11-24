@@ -33,7 +33,7 @@
 #include "../images/imagefactory.h"
 #include "../utils/datafileregistry.h"
 
-#include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <QTest>
 
@@ -46,6 +46,11 @@ void BoardGameGeekFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BoardGameCollection> registerBoard(Tellico::Data::Collection::BoardGame, "boardgame");
   Tellico::ImageFactory::init();
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/boardgamegeek2tellico.xsl"));
+
+  auto configFile = QFINDTESTDATA("tellicotest_private.config");
+  if(QFile::exists(configFile)) {
+    m_config = KSharedConfig::openConfig(configFile, KConfig::SimpleConfig)->group(QStringLiteral("BoardGameGeek"));
+  }
 }
 
 void BoardGameGeekFetcherTest::testTitle() {
@@ -53,6 +58,7 @@ void BoardGameGeekFetcherTest::testTitle() {
                                        QStringLiteral("Catan"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BoardGameGeekFetcher(this));
   QVERIFY(fetcher->canSearch(request.key()));
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -79,6 +85,7 @@ void BoardGameGeekFetcherTest::testKeyword() {
                                        QStringLiteral("The Settlers of Catan"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BoardGameGeekFetcher(this));
   QVERIFY(fetcher->canSearch(request.key()));
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -98,6 +105,7 @@ void BoardGameGeekFetcherTest::testUpdate() {
   request.setCollectionType(coll->type());
   QCOMPARE(request.key(), Tellico::Fetch::Raw);
   QCOMPARE(request.value(), QStringLiteral("13"));
+  fetcher.readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(&fetcher, request, 1);
   QCOMPARE(results.size(), 1);

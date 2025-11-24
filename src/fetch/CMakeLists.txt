@@ -3,6 +3,7 @@ add_subdirectory(scripts)
 ########### next target ###############
 
 set(fetch_STAT_SRCS
+    abstractbggfetcher.cpp
     adsfetcher.cpp
     amazonfetcher.cpp
     amazonrequest.cpp

@@ -34,7 +34,6 @@
 #include "../utils/datafileregistry.h"
 
 #include <KSharedConfig>
-#include <KConfigGroup>
 
 #include <QTest>
 
@@ -47,17 +46,19 @@ void RPGGeekFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::Collection> registerColl(Tellico::Data::Collection::Base, "entry");
   Tellico::ImageFactory::init();
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/boardgamegeek2tellico.xsl"));
+
+  auto configFile = QFINDTESTDATA("tellicotest_private.config");
+  if(QFile::exists(configFile)) {
+    m_config = KSharedConfig::openConfig(configFile, KConfig::SimpleConfig)->group(QStringLiteral("RPGGeek"));
+  }
 }
 
 void RPGGeekFetcherTest::testKeyword() {
-  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("rpggeek"));
-  cg.writeEntry("Custom Fields", QStringLiteral("genre,year,publisher,artist,designer,producer,mechanism,description,rpggeek-link"));
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Base, Tellico::Fetch::Keyword,
                                        QStringLiteral("Winds of the North"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::RPGGeekFetcher(this));
   QVERIFY(fetcher->canSearch(request.key()));
-  fetcher->readConfig(cg);
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -71,7 +72,7 @@ void RPGGeekFetcherTest::testKeyword() {
   QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Nils Bergslien"));
   QCOMPARE(entry->field(QStringLiteral("producer")), QStringLiteral("Thomas King"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Culture; History; History (Medieval); History (Vikings); Mythology / Folklore"));
-  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("0"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2023"));
   auto genres = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("genre")));
   QVERIFY(genres.count() > 2);
   QVERIFY(genres.contains(QStringLiteral("Culture")));
@@ -92,15 +93,12 @@ void RPGGeekFetcherTest::testUpdate() {
   coll->addEntries(entry);
   entry->setField(QStringLiteral("bggid"), QStringLiteral("338762"));
 
-  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("rpggeek"));
-  cg.writeEntry("Custom Fields", QStringLiteral("genre,year,publisher,artist,designer,producer,mechanism,description,rpggeek-link"));
-
   Tellico::Fetch::RPGGeekFetcher fetcher(this);
   auto request = fetcher.updateRequest(entry);
   request.setCollectionType(coll->type());
   QCOMPARE(request.key(), Tellico::Fetch::Raw);
   QCOMPARE(request.value(), QStringLiteral("338762"));
-  fetcher.readConfig(cg);
+  fetcher.readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(&fetcher, request, 1);
   QCOMPARE(results.size(), 1);
@@ -113,7 +111,7 @@ void RPGGeekFetcherTest::testUpdate() {
   QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Nils Bergslien"));
   QCOMPARE(entry->field(QStringLiteral("producer")), QStringLiteral("Thomas King"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Culture; History; History (Medieval); History (Vikings); Mythology / Folklore"));
-  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("0"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2023"));
   auto genres = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("genre")));
   QVERIFY(genres.count() > 2);
   QVERIFY(genres.contains(QStringLiteral("Culture")));

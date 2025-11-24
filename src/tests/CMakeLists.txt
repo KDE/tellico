@@ -595,6 +595,9 @@ ecm_add_test(bibliosharefetchertest.cpp
 
 ecm_add_test(boardgamegeekfetchertest.cpp
     ../fetch/boardgamegeekfetcher.cpp
+    ../fetch/videogamegeekfetcher.cpp
+    ../fetch/rpggeekfetcher.cpp
+    ../fetch/abstractbggfetcher.cpp
     TEST_NAME boardgamegeekfetchertest
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )
@@ -849,6 +852,9 @@ ecm_add_test(omdbfetchertest.cpp
 
 ecm_add_test(rpggeekfetchertest.cpp
     ../fetch/rpggeekfetcher.cpp
+    ../fetch/boardgamegeekfetcher.cpp
+    ../fetch/videogamegeekfetcher.cpp
+    ../fetch/abstractbggfetcher.cpp
     TEST_NAME rpggeekfetchertest
     LINK_LIBRARIES fetcherstest translatorstest ${TELLICO_TEST_LIBS}
 )
@@ -904,6 +910,9 @@ ecm_add_test(vgcollectfetchertest.cpp
 
 ecm_add_test(videogamegeekfetchertest.cpp
     ../fetch/videogamegeekfetcher.cpp
+    ../fetch/boardgamegeekfetcher.cpp
+    ../fetch/rpggeekfetcher.cpp
+    ../fetch/abstractbggfetcher.cpp
     TEST_NAME videogamegeekfetchertest
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )

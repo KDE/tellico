@@ -1,3 +1,7 @@
+2025-11-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated BoardGameGeek data source to use bearer token (Bug 511824).
+
 2025-11-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Data Crow importer for new XML format, v5.
