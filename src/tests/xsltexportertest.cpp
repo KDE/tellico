@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2025 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,43 +22,38 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_XSLTEXPORTER_H
-#define TELLICO_XSLTEXPORTER_H
+#include "xsltexportertest.h"
 
-class KUrlRequester;
+#include "../translators/xsltexporter.h"
+#include "../collections/bookcollection.h"
 
-#include "exporter.h"
+#include <KLocalizedString>
 
-class XSLTExporterTest;
+#include <QTest>
+#include <QTemporaryFile>
+#include <QLoggingCategory>
 
-namespace Tellico {
-  namespace Export {
+QTEST_GUILESS_MAIN( XSLTExporterTest )
 
-/**
- * @author Robby Stephenson
- */
-class XSLTExporter : public Exporter {
+void XSLTExporterTest::initTestCase() {
+  QStandardPaths::setTestModeEnabled(true);
+  KLocalizedString::setApplicationDomain("tellico");
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
+}
 
-friend class ::XSLTExporterTest;
+// general XSLT export test
+void XSLTExporterTest::testXSLTExport() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
 
-public:
-  XSLTExporter(Data::CollPtr coll, const QUrl& baseUrl);
+  QTemporaryFile tmpFile;
+  QVERIFY(tmpFile.open());
 
-  virtual bool exec() override;
-  virtual QString formatString() const override;
-  virtual QString fileFilter() const override;
-
-  virtual QWidget* widget(QWidget* parent) override;
-
-  virtual void readOptions(KSharedConfigPtr config) override;
-  virtual void saveOptions(KSharedConfigPtr config) override;
-
-private:
-  QWidget* m_widget;
-  KUrlRequester* m_URLRequester;
-  QUrl m_xsltFile;
-};
-
-  } // end namespace
-} // end namespace
-#endif
+  Tellico::Export::XSLTExporter exporter(coll, QUrl());
+  exporter.setURL(QUrl::fromLocalFile(tmpFile.fileName()));
+  long opt = exporter.options();
+  opt |= Tellico::Export::ExportForce;
+  opt &= ~Tellico::Export::ExportUTF8; // Bug 512581
+  exporter.setOptions(opt);
+  exporter.m_xsltFile = QUrl::fromLocalFile(QFINDTESTDATA("../../xslt/entry-templates/Default.xsl"));
+  QVERIFY(exporter.exec());
+}

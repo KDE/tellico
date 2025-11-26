@@ -457,6 +457,16 @@ ecm_add_test(vinoxmltest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
 )
 
+ecm_add_test(xsltexportertest.cpp
+    ../translators/xsltexporter.cpp
+    ../translators/tellicoxmlexporter.cpp
+    ../translators/tellicozipexporter.cpp
+    ../translators/exporter.cpp
+    ../document.cpp
+    TEST_NAME xsltexportertest
+    LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
+)
+
 set(fetcherstest_SRCS
     abstractfetchertest.cpp
     ../fetch/fetcher.cpp

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2025 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,43 +22,18 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_XSLTEXPORTER_H
-#define TELLICO_XSLTEXPORTER_H
+#ifndef XSLTEXPORTERTEST_H
+#define XSLTEXPORTERTEST_H
 
-class KUrlRequester;
+#include <QObject>
 
-#include "exporter.h"
+class XSLTExporterTest : public QObject {
+Q_OBJECT
 
-class XSLTExporterTest;
+private Q_SLOTS:
+  void initTestCase();
 
-namespace Tellico {
-  namespace Export {
-
-/**
- * @author Robby Stephenson
- */
-class XSLTExporter : public Exporter {
-
-friend class ::XSLTExporterTest;
-
-public:
-  XSLTExporter(Data::CollPtr coll, const QUrl& baseUrl);
-
-  virtual bool exec() override;
-  virtual QString formatString() const override;
-  virtual QString fileFilter() const override;
-
-  virtual QWidget* widget(QWidget* parent) override;
-
-  virtual void readOptions(KSharedConfigPtr config) override;
-  virtual void saveOptions(KSharedConfigPtr config) override;
-
-private:
-  QWidget* m_widget;
-  KUrlRequester* m_URLRequester;
-  QUrl m_xsltFile;
+  void testXSLTExport();
 };
 
-  } // end namespace
-} // end namespace
 #endif

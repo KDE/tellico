@@ -116,7 +116,7 @@ QDomDocument TellicoXMLExporter::exportXML() const {
   if(options() & Export::ExportUTF8) {
     encodeStr += QLatin1String("UTF-8");
   } else {
-    encodeStr = QLatin1String(Tellico::localeEncodingName());
+    encodeStr += QLatin1String(Tellico::localeEncodingName());
   }
   encodeStr += QLatin1Char('"');
 

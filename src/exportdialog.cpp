@@ -110,8 +110,8 @@ ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollP
   vlay2->addWidget(m_encodeLocale);
 
   if(localeName == QByteArray("UTF-8")) {
-    m_encodeUTF8->setEnabled(false);
-    m_encodeLocale->setChecked(true);
+    m_encodeUTF8->setChecked(true);
+    m_encodeLocale->setEnabled(false);
   }
 
   QButtonGroup* bg = new QButtonGroup(widget);

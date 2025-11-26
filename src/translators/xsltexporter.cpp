@@ -57,11 +57,17 @@ QString XSLTExporter::fileFilter() const {
 }
 
 bool XSLTExporter::exec() {
-  QUrl u = m_URLRequester->url();
+  QUrl u;
+  if(m_URLRequester) {
+    u = m_URLRequester->url();
+  }
+  if(u.isEmpty() || !u.isValid()) {
+    u = m_xsltFile;
+  }
   if(u.isEmpty() || !u.isValid()) {
     return false;
   }
-  //  XSLTHandler handler(FileHandler::readXMLFile(url));
+
   XSLTHandler handler(u);
   handler.addStringParam("date", QDate::currentDate().toString(Qt::ISODate).toLatin1());
   handler.addStringParam("time", QTime::currentTime().toString(Qt::ISODate).toLatin1());
