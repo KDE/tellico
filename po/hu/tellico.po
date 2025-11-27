@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-24 00:43+0000\n"
+"POT-Creation-Date: 2025-11-27 00:43+0000\n"
 "PO-Revision-Date: 2025-11-06 21:21+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -2740,7 +2740,7 @@ msgstr "&Törlés"
 msgid "Click to delete the selected data source."
 msgstr "Kattintson a kijelölt adatforrás törléséhez."
 
-#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:100
+#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:106
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
@@ -2760,7 +2760,7 @@ msgstr "Sabloncsomagok"
 #: src/translators/onixexporter.cpp:72
 #: src/translators/tellicoxmlexporter.cpp:74
 #: src/translators/tellicozipexporter.cpp:56
-#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:101
+#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:107
 #: src/translators/xsltimporter.cpp:127
 #, kde-format
 msgid "All Files"
@@ -7360,17 +7360,17 @@ msgstr ""
 msgid "It is from a future version of Tellico."
 msgstr "Ez egy későbbi verzióhoz tartozik."
 
-#: src/translators/xsltexporter.cpp:87 src/translators/xsltimporter.cpp:118
+#: src/translators/xsltexporter.cpp:93 src/translators/xsltimporter.cpp:118
 #, kde-format
 msgid "XSLT Options"
 msgstr "XSLT beállítások"
 
-#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
+#: src/translators/xsltexporter.cpp:96 src/translators/xsltimporter.cpp:121
 #, kde-format
 msgid "XSLT file:"
 msgstr "XSLT fájl:"
 
-#: src/translators/xsltexporter.cpp:92 src/translators/xsltimporter.cpp:123
+#: src/translators/xsltexporter.cpp:98 src/translators/xsltimporter.cpp:123
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Válassza ki az adat transzformálásához az XSLT fájlt."

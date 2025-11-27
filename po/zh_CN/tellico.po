@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-24 00:43+0000\n"
+"POT-Creation-Date: 2025-11-27 00:43+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -2674,7 +2674,7 @@ msgstr "删除(&D)"
 msgid "Click to delete the selected data source."
 msgstr "点击以删除所选数据源。"
 
-#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:100
+#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:106
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
@@ -2694,7 +2694,7 @@ msgstr ""
 #: src/translators/onixexporter.cpp:72
 #: src/translators/tellicoxmlexporter.cpp:74
 #: src/translators/tellicozipexporter.cpp:56
-#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:101
+#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:107
 #: src/translators/xsltimporter.cpp:127
 #, kde-format
 msgid "All Files"
@@ -7144,17 +7144,17 @@ msgstr ""
 msgid "It is from a future version of Tellico."
 msgstr ""
 
-#: src/translators/xsltexporter.cpp:87 src/translators/xsltimporter.cpp:118
+#: src/translators/xsltexporter.cpp:93 src/translators/xsltimporter.cpp:118
 #, kde-format
 msgid "XSLT Options"
 msgstr "XSLT 选项"
 
-#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
+#: src/translators/xsltexporter.cpp:96 src/translators/xsltimporter.cpp:121
 #, kde-format
 msgid "XSLT file:"
 msgstr "XSLT 文件："
 
-#: src/translators/xsltexporter.cpp:92 src/translators/xsltimporter.cpp:123
+#: src/translators/xsltexporter.cpp:98 src/translators/xsltimporter.cpp:123
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr "选择用于转换数据的 XSLT 文件。"

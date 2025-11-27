@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-24 00:43+0000\n"
+"POT-Creation-Date: 2025-11-27 00:43+0000\n"
 "PO-Revision-Date: 2011-12-11 07:08+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -2773,7 +2773,7 @@ msgstr "&Wegdoon"
 msgid "Click to delete the selected data source."
 msgstr "Klick hier, wenn Du den markeert Datenborn wegdoon wullt."
 
-#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:100
+#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:106
 #: src/translators/xsltimporter.cpp:126
 #, fuzzy, kde-format
 #| msgid "Files"
@@ -2795,7 +2795,7 @@ msgstr "Vörlagen"
 #: src/translators/onixexporter.cpp:72
 #: src/translators/tellicoxmlexporter.cpp:74
 #: src/translators/tellicozipexporter.cpp:56
-#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:101
+#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:107
 #: src/translators/xsltimporter.cpp:127
 #, fuzzy, kde-format
 #| msgid "*|All Files"
@@ -7515,17 +7515,17 @@ msgstr ""
 msgid "It is from a future version of Tellico."
 msgstr "Dat is vun en nieger Tellico-Verschoon."
 
-#: src/translators/xsltexporter.cpp:87 src/translators/xsltimporter.cpp:118
+#: src/translators/xsltexporter.cpp:93 src/translators/xsltimporter.cpp:118
 #, kde-format
 msgid "XSLT Options"
 msgstr "XSLT-Optschonen"
 
-#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
+#: src/translators/xsltexporter.cpp:96 src/translators/xsltimporter.cpp:121
 #, kde-format
 msgid "XSLT file:"
 msgstr "XSLT-Datei:"
 
-#: src/translators/xsltexporter.cpp:92 src/translators/xsltimporter.cpp:123
+#: src/translators/xsltexporter.cpp:98 src/translators/xsltimporter.cpp:123
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr "Söök de XSLT-Datei för't Datenümwanneln ut."

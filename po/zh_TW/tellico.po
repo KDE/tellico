@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-24 00:43+0000\n"
+"POT-Creation-Date: 2025-11-27 00:43+0000\n"
 "PO-Revision-Date: 2025-11-20 21:48+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -2714,7 +2714,7 @@ msgstr "刪除(&D)"
 msgid "Click to delete the selected data source."
 msgstr "點擊以刪除選取的資料來源。"
 
-#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:100
+#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:106
 #: src/translators/xsltimporter.cpp:126
 #, kde-format
 msgid "XSL Files"
@@ -2734,7 +2734,7 @@ msgstr "樣本套件"
 #: src/translators/onixexporter.cpp:72
 #: src/translators/tellicoxmlexporter.cpp:74
 #: src/translators/tellicozipexporter.cpp:56
-#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:101
+#: src/translators/xsltexporter.cpp:56 src/translators/xsltexporter.cpp:107
 #: src/translators/xsltimporter.cpp:127
 #, kde-format
 msgid "All Files"
@@ -7285,17 +7285,17 @@ msgstr "若勾選此選項，文件中的影像也會用 base64 編碼後包入 
 msgid "It is from a future version of Tellico."
 msgstr "這是從更新版本的 Tellico 而來。"
 
-#: src/translators/xsltexporter.cpp:87 src/translators/xsltimporter.cpp:118
+#: src/translators/xsltexporter.cpp:93 src/translators/xsltimporter.cpp:118
 #, kde-format
 msgid "XSLT Options"
 msgstr "XSLT 選項"
 
-#: src/translators/xsltexporter.cpp:90 src/translators/xsltimporter.cpp:121
+#: src/translators/xsltexporter.cpp:96 src/translators/xsltimporter.cpp:121
 #, kde-format
 msgid "XSLT file:"
 msgstr "XSLT 檔："
 
-#: src/translators/xsltexporter.cpp:92 src/translators/xsltimporter.cpp:123
+#: src/translators/xsltexporter.cpp:98 src/translators/xsltimporter.cpp:123
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr "選擇用於轉換資料的 XSLT 檔。"
