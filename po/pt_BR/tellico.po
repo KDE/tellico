@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-27 00:43+0000\n"
+"POT-Creation-Date: 2025-11-28 00:43+0000\n"
 "PO-Revision-Date: 2025-10-30 22:26-0300\n"
 "Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -40,6 +40,30 @@ msgid "Your emails"
 msgstr ""
 "claudio@helpo.com.br, doutor.zero@gmail.com, elchevive@opensuse.org, rubens."
 "matos@gmail.com, alvarenga@kde.org, geraldosimiao@fedoraproject.org"
+
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr ""
+"o,a,os,as,um,uma,uns,umas,e,como,em,mas,por,para,de,dentro,nem,ao,à,ou,sobre,"
+"sob,com"
+
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "o,a,os,as"
+
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "júnior,sênior,jr,jr.,iii,iv"
+
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der,von"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -2150,34 +2174,6 @@ msgstr "Renomear a coleção"
 #, kde-format
 msgid "Reorder Fields"
 msgstr "Reordenar campos"
-
-#: src/config/tellico_config.kcfg:80
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"o,a,os,as,um,uma,uns,umas,e,como,em,mas,por,para,de,dentro,nem,ao,à,ou,sobre,"
-"sob,com"
-
-#: src/config/tellico_config.kcfg:83
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "o,a,os,as"
-
-#: src/config/tellico_config.kcfg:86
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr "júnior,sênior,jr,jr.,iii,iv"
-
-#: src/config/tellico_config.kcfg:89
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der,von"
 
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
