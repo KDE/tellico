@@ -7423,39 +7423,3 @@ msgstr "Cerca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
-
-#~ msgctxt "Group Statistics XSL Template"
-#~ msgid "Group Statistics"
-#~ msgstr "Estadístiques de grup"
-
-#~ msgctxt "Country"
-#~ msgid "Spain"
-#~ msgstr "Espanya"
-
-#~ msgctxt "Country"
-#~ msgid "USA"
-#~ msgstr "EUA"
-
-#~ msgctxt "Language"
-#~ msgid "English"
-#~ msgstr "Anglès"
-
-#~ msgctxt "Language"
-#~ msgid "French"
-#~ msgstr "Francès"
-
-#~ msgctxt "Language"
-#~ msgid "Chinese"
-#~ msgstr "Xinès"
-
-#~ msgctxt "Language"
-#~ msgid "German"
-#~ msgstr "Alemany"
-
-#~ msgctxt "Language"
-#~ msgid "Spanish"
-#~ msgstr "Espanyol"
-
-#~ msgctxt "Language"
-#~ msgid "Russian"
-#~ msgstr "Rus"
