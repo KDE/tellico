@@ -2923,7 +2923,7 @@ msgstr ""
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr ""
-"S'ha produït un error en l'anàlisi sintàctica XML en la línia %1, columna %2."
+"S'ha produït un error durant l'anàlisi de l'XML a la línia %1, columna %2."
 
 #: src/core/filehandler.cpp:169
 #, kde-format
@@ -4947,7 +4947,7 @@ msgstr "Totes les imatges (%1)"
 #: src/gui/imagewidget.cpp:314
 #, kde-format
 msgid "Opening the selected scanner failed."
-msgstr "No s'ha pogut obrir l'escàner seleccionat."
+msgstr "Ha fallat mentre s'obria l'escàner seleccionat."
 
 #: src/gui/imagewidget.cpp:377
 #, kde-format
@@ -6350,7 +6350,7 @@ msgstr "(%1 seleccionades)"
 #: src/translators/xsltimporter.cpp:93
 #, kde-format
 msgid "Tellico encountered an error in XSLT processing."
-msgstr "Tellico ha trobat un error en processar el XSLT."
+msgstr "Tellico ha trobat un error mentre es processava el XSLT."
 
 #: src/mainwindow.cpp:1983
 #, kde-format
@@ -7425,7 +7425,3 @@ msgstr "Busca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
-
-#~ msgctxt "Group Statistics XSL Template"
-#~ msgid "Group Statistics"
-#~ msgstr "Estadístiques de grup"
