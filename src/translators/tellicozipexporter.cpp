@@ -90,7 +90,9 @@ bool TellicoZipExporter::exec() {
   }
 
   KZip zip(&buf);
-  zip.open(QIODevice::WriteOnly);
+  if(!zip.open(QIODevice::WriteOnly)) {
+    return false;
+  }
   zip.writeFile(QStringLiteral("tellico.xml"), xml);
 
   if(m_includeImages) {
