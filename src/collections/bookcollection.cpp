@@ -189,7 +189,7 @@ int BookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::En
   if(!entry1_ || !entry2_) {
     return 0;
   }
-  // equal isbn's or lccn's are easy
+  // equal ISBN or LCCN values always indicate the same entry for a book
   if(EntryComparison::score(entry1_, entry2_, QStringLiteral("isbn"), this) > 0 ||
      EntryComparison::score(entry1_, entry2_, QStringLiteral("lccn"), this) > 0) {
     return EntryComparison::ENTRY_PERFECT_MATCH;
