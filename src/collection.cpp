@@ -859,11 +859,11 @@ int Collection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryP
   int res = 0;
   // start with twice the title score
   // and since the minimum is > 10, then need more than just a perfect title match
-  res += EntryComparison::MATCH_WEIGHT_MED*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
+  res += EntryComparison::MATCH_WEIGHT_MED*EntryComparison::score(entry1_, entry2_, entry1_->collection()->titleField(), this);
   // then add score for each field
   foreach(FieldPtr field, entry1_->collection()->fields()) {
     // skip title field and personal category
-    if(field->name() == QLatin1String("title") ||
+    if(field->name() == entry1_->collection()->titleField() ||
        field->category() == i18n("Personal")) {
       continue;
     }
