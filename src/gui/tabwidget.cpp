@@ -42,21 +42,15 @@ TabWidget::TabWidget(QWidget* parent_)
 }
 
 void TabWidget::setFocusToFirstChild() {
-  QWidget* page = currentWidget();
+  auto page = currentWidget();
   Q_ASSERT(page);
-  QList<QWidget*> list = page->findChildren<QWidget*>();
-  foreach(QWidget* w, list) {
+  const auto widgetList = page->findChildren<QWidget*>();
+  for(const auto w: widgetList) {
     if(!w->isHidden() && w->focusPolicy() != Qt::NoFocus) {
       w->setFocus();
       break;
     }
   }
-}
-
-void TabWidget::setTabBarHidden(bool hide_) {
-  QTabBar* tabBar = findChild<QTabBar *>();
-  Q_ASSERT(tabBar);
-  tabBar->setHidden(hide_);
 }
 
 void TabWidget::slotNextTab() {

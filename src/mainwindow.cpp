@@ -843,7 +843,7 @@ void MainWindow::initView() {
   m_groupViewDock->setAllowedAreas(Qt::DockWidgetAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea));
 
   m_viewTabs = new GUI::TabWidget(this);
-  m_viewTabs->setTabBarHidden(true);
+  m_viewTabs->setTabBarAutoHide(true);
   m_viewTabs->setDocumentMode(true);
   m_groupView = new GroupView(m_viewTabs);
   Controller::self()->addObserver(m_groupView);
@@ -1209,7 +1209,6 @@ void MainWindow::slotFileNew(int type_) {
       delete m_loanView;
       m_loanView = nullptr;
     }
-    m_viewTabs->setTabBarHidden(true);
     Data::Document::self()->newDocument(type_);
     myLog() << "Creating new collection, type" << CollectionFactory::typeName(type_);
     Kernel::self()->resetHistory();
@@ -2183,6 +2182,10 @@ bool MainWindow::showEntry(Data::ID id) {
 
 void MainWindow::addFilterView() {
   if(m_filterView) {
+    if(m_viewTabs->indexOf(m_filterView) == -1) {
+      // might have been removed
+      m_viewTabs->insertTab(1, m_filterView, QIcon::fromTheme(QStringLiteral("view-filter")), i18n("Filters"));
+    }
     return;
   }
 
@@ -2207,6 +2210,10 @@ void MainWindow::addFilterView() {
 
 void MainWindow::addLoanView() {
   if(m_loanView) {
+    if(m_viewTabs->indexOf(m_loanView) == -1) {
+      // might have been removed
+      m_viewTabs->insertTab(2, m_loanView, QIcon::fromTheme(QStringLiteral("kaddressbook")), i18n("Loans"));
+    }
     return;
   }
 

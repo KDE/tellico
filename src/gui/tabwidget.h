@@ -46,7 +46,6 @@ public:
    * Sets the focus to the first focusable widget on the current page.
    */
   void setFocusToFirstChild();
-  void setTabBarHidden(bool hide);
 
 private Q_SLOTS:
   void slotNextTab();

@@ -128,12 +128,10 @@ void Controller::slotCollectionAdded(Tellico::Data::CollPtr coll_) {
   if(!coll_->filters().isEmpty()) {
     m_mainWindow->addFilterView();
     m_mainWindow->m_filterView->addCollection(coll_);
-    m_mainWindow->m_viewTabs->setTabBarHidden(false);
   }
   if(!coll_->borrowers().isEmpty()) {
     m_mainWindow->addLoanView();
     m_mainWindow->m_loanView->addCollection(coll_);
-    m_mainWindow->m_viewTabs->setTabBarHidden(false);
   }
 
   m_mainWindow->slotStatusMsg(i18n("Ready."));
@@ -182,12 +180,10 @@ void Controller::slotCollectionModified(Tellico::Data::CollPtr coll_, bool struc
   if(!coll_->filters().isEmpty()) {
     m_mainWindow->addFilterView();
     m_mainWindow->m_filterView->addCollection(coll_);
-    m_mainWindow->m_viewTabs->setTabBarHidden(false);
   }
   if(!coll_->borrowers().isEmpty()) {
     m_mainWindow->addLoanView();
     m_mainWindow->m_loanView->addCollection(coll_);
-    m_mainWindow->m_viewTabs->setTabBarHidden(false);
   }
 
   m_mainWindow->slotStatusMsg(i18n("Ready."));
@@ -604,7 +600,6 @@ void Controller::addedBorrower(Tellico::Data::BorrowerPtr borrower_) {
   foreach(Observer* obs, m_observers) {
     obs->addBorrower(borrower_);
   }
-  m_mainWindow->m_viewTabs->setTabBarHidden(false);
 }
 
 void Controller::modifiedBorrower(Tellico::Data::BorrowerPtr borrower_) {
@@ -623,7 +618,6 @@ void Controller::addedFilter(Tellico::FilterPtr filter_) {
   foreach(Observer* obs, m_observers) {
     obs->addFilter(filter_);
   }
-  m_mainWindow->m_viewTabs->setTabBarHidden(false);
 }
 
 void Controller::removedFilter(Tellico::FilterPtr filter_) {
@@ -702,11 +696,21 @@ void Controller::slotCheckIn(const Tellico::Data::EntryList& entries_) {
 }
 
 void Controller::hideTabs() const {
-  if((!m_mainWindow->m_filterView || m_mainWindow->m_filterView->isEmpty()) &&
-     (!m_mainWindow->m_loanView || m_mainWindow->m_loanView->isEmpty())) {
-    int idx = m_mainWindow->m_viewTabs->indexOf(m_mainWindow->m_groupView);
+  bool hasFilterView = m_mainWindow->m_filterView;
+  if(hasFilterView && m_mainWindow->m_filterView->isEmpty()) {
+    hasFilterView = false;
+    const int idx = m_mainWindow->m_viewTabs->indexOf(m_mainWindow->m_filterView);
+    m_mainWindow->m_viewTabs->removeTab(idx);
+  }
+  bool hasLoanView = m_mainWindow->m_loanView;
+  if(hasLoanView && m_mainWindow->m_loanView->isEmpty()) {
+    hasLoanView = false;
+    const int idx = m_mainWindow->m_viewTabs->indexOf(m_mainWindow->m_loanView);
+    m_mainWindow->m_viewTabs->removeTab(idx);
+  }
+  if(!hasFilterView && !hasLoanView) {
+    const int idx = m_mainWindow->m_viewTabs->indexOf(m_mainWindow->m_groupView);
     m_mainWindow->m_viewTabs->setCurrentIndex(idx);
-    m_mainWindow->m_viewTabs->setTabBarHidden(true);
   }
 }
 
