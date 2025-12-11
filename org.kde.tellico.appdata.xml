@@ -122,6 +122,7 @@
     <p xml:lang="sv">Tellico är ett program för att organisera samlingar. Det tillhandahåller standardmallar för böcker, bibliografier, videor, musik, videospel, mynt, frimärken, samlarbilder, serier och viner. Det låter dig mata in samlingen i en katalogdatabas, och spara många olika egenskaper som titel, författare, etc.</p>
     <p xml:lang="tr">Tellico koleksiyonlarınızı yönetmek için bir programdır. Kitaplar, kaynakçalar, videolar, müzikler, video oyunları, paralar, pullar, kartlar, çizgi romanlar ve şaraplar için öntanımlı şablonlar içerir. Koleksiyonunuzu bir katalog veritabanına girmenize ve başlık, yazar gibi pek çok özelliğe göre kaydetmenize olanak tanır.</p>
     <p xml:lang="uk">Tellico — програма для упорядковування ваших збірок. У ній передбачено типові шаблони для збірок книг, бібліографій, відео, музичних творів, відеоігор, нумізматики, марок, карток, коміксів та вин. За її допомогою ви зможете вести записи у форматі бази даних, зберігаючи різноманітні дані щодо елементів збірки, зокрема дані щодо назви, автора тощо.</p>
+    <p xml:lang="zh-CN">Tellico 是一个组织您的收藏的应用程序。它提供书籍、参考书、视频、音乐、电子游戏、硬币、邮票、交易卡、连环画和葡萄酒的默认模板。它允许您在目录数据库中输入您的收藏，保存许多不同的属性，如标题、作者等。</p>
     <p xml:lang="zh-TW">Tellico 是一個用來管理您的收藏的應用程式。它提供書本、參考書目、影片、音樂、遊戲、錢幣、印章、卡牌、漫畫書，及紅酒的預設樣本。Tellico 讓您將收藏輸入資料目錄，並附上各種屬性，像是標題、作者等等。</p>
     <p>Features:</p>
     <p xml:lang="ar">الميزات:</p>
@@ -197,6 +198,7 @@
       <li xml:lang="sv">Stöder standardsamlingar för böcker, bibliografiposter, videor, musik, videospel, serier, mynt, frimärken, samlarbilder, viner, brädspel och filkataloger</li>
       <li xml:lang="tr">Kitapların, kaynakça girdilerinin, videoların, müziklerin, video oyunlarının, çizgi romanların, paraların, pulların, kartların, şarapların, oyunların ve dosya katalogların öntanımlı koleksiyonlarını destekler</li>
       <li xml:lang="uk">Підтримка типових збірок книг, бібліографічних записів, відео, музики, відеоігор, коміксів, нумізматики, марок, карток, вин, настільних ігор та каталогів файлів.</li>
+      <li xml:lang="zh-CN">支持默认收藏书籍、参考书、视频、音乐、电子游戏、漫画书籍、硬币、邮票、交易卡、红酒、棋盘游戏和文件目录</li>
       <li xml:lang="zh-TW">預設支援書本、參考書目條目、影片、音樂、遊戲、漫畫書、錢幣、印章、卡牌、紅酒、桌上遊戲，與檔案目錄的收藏</li>
       <li>Supports user-defined custom collections</li>
       <li xml:lang="ar">يتيح مجموعات مخصّصة يحدّدها المستخدم</li>
@@ -233,6 +235,7 @@
       <li xml:lang="sv">Stöder användardefinierade anpassade samlingar</li>
       <li xml:lang="tr">Kullanıcı tanımlı özel koleksiyonları destekler</li>
       <li xml:lang="uk">Підтримка визначених користувачем нетипових збірок.</li>
+      <li xml:lang="zh-CN">支持用户自定义收藏</li>
       <li xml:lang="zh-TW">支援使用者定義的自訂收藏</li>
       <li>Supports any number of user-defined fields, of several different types: text, paragraph, list, checkbox, number, URL, date, images, and combinations</li>
       <li xml:lang="ar">يتيح أي عدد من الحقول يحدّدها المستخدم، بأنواع مختلفة عديدة: نص، فقرة، قائمة، مربّع اختيار، رقم، رابط، تاريخ، صور، والمجموعات</li>
@@ -269,6 +272,7 @@
       <li xml:lang="sv">Stöder hur många användardefinierade fält som helst av flera olika typer: text, stycke, lista, kryssruta, tal, webbadress, datum, bilder och kombinationer</li>
       <li xml:lang="tr">Çok farklı türlerde kullanıcı tanımlı alanları destekler: metin, paragraf, liste, işaret kutusu, sayı, URL, tarih, görseller ve bunların bileşimleri</li>
       <li xml:lang="uk">Підтримка довільної кількості визначених користувачем полів записів: текст, абзац, список, поле для позначки, номер, адреса, дата, зображення та будь-які інші комбінації.</li>
+      <li xml:lang="zh-CN">支持任何用户定义的字段数量，其类型有几种：文本、段落、列表、复选框、数字、URL、日期、图像和组合</li>
       <li xml:lang="zh-TW">支援任何使用者定義的欄位，並提供多種型態供選擇：文字、段落、列表、核取方塊、數字、網址、日期、影像及組合</li>
       <li>Handles entries with multiple authors, genres, keywords, etc</li>
       <li xml:lang="ar">يتعامل مع الإدخالات متعدّدة المؤلّفين، والأنواع، والكلمات المفتاحيّة، وإلخ</li>
@@ -305,6 +309,7 @@
       <li xml:lang="sv">Hanterar poster med flera författare, genrer, nyckelord, etc.</li>
       <li xml:lang="tr">Birden çok yazarı, türü ve anahtar sözcüğü işleyebilir</li>
       <li xml:lang="uk">Обробка записів з декількома авторами, жанрами, ключовими словами тощо.</li>
+      <li xml:lang="zh-CN">用多个作者、流派、关键字等处理条目</li>
       <li xml:lang="zh-TW">能夠處理有多個作者、風格、關鍵字等等的條目</li>
       <li>Automatically formats titles and names</li>
       <li xml:lang="ar">ينسّق العناوين والأسماء آليًّا</li>
@@ -341,6 +346,7 @@
       <li xml:lang="sv">Formaterar automatiskt titlar och namn</li>
       <li xml:lang="tr">Başlık ve adları otomatik biçimlendirir</li>
       <li xml:lang="uk">Автоматичне форматування заголовків та назв.</li>
+      <li xml:lang="zh-CN">自动格式化标题和名称</li>
       <li xml:lang="zh-TW">自動格式化標題與名稱</li>
       <li>Supports collection searching and view filtering</li>
       <li xml:lang="ar">يوفر البحث في المجموعة وتصفية العرض</li>
@@ -377,6 +383,7 @@
       <li xml:lang="sv">Stöder sökning i samlingen och filtrering av visningen</li>
       <li xml:lang="tr">Koleksiyon araması ve süzerek görüntülemeyi destekler</li>
       <li xml:lang="uk">Підтримка пошуку у збірці та фільтрування даних для перегляду.</li>
+      <li xml:lang="zh-CN">支持收藏搜索和视图过滤</li>
       <li xml:lang="zh-TW">支援收藏搜尋與檢視過濾</li>
       <li>Sorts and groups collection by various properties</li>
       <li xml:lang="ar">يصنّف ويجمع المجموعة حسب خصائص متنوّعة</li>
@@ -413,6 +420,7 @@
       <li xml:lang="sv">Sorterar och grupperar samlingen enligt olika egenskaper</li>
       <li xml:lang="tr">Koleksiyonları çeşitli özelliklerine göre sıralar ve gruplar</li>
       <li xml:lang="uk">Упорядковування та групування збірки за різноманітними властивостями.</li>
+      <li xml:lang="zh-CN">按不同属性排序和分组</li>
       <li xml:lang="zh-TW">依各種屬性排序或分組收藏</li>
       <li>Allows customizable entry templates through XSLT</li>
       <li xml:lang="ar">يسمح بقوالب إدخال قابلة للتخصيص عبر XSLT</li>
@@ -449,6 +457,7 @@
       <li xml:lang="sv">Tillåter anpassningsbara inmatningsmallar via XSLT</li>
       <li xml:lang="tr">XSLT üzerinden girdi şablonlarının özelleştirilmesine izin verir</li>
       <li xml:lang="uk">Придатні до налаштовування шаблони записів на основі XSLT.</li>
+      <li xml:lang="zh-CN">允许通过 XSLT 自定义条目模板</li>
       <li xml:lang="zh-TW">允許透過 XSLT 來自訂條目樣本</li>
       <li>Imports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formats</li>
       <li xml:lang="ar">يستورد بيانات MODS، وBibtex، وRIS، وCSV، وPDF الوصفيّة، والعديد من التنسيقات الأخرى</li>
@@ -485,6 +494,7 @@
       <li xml:lang="sv">Importerar MODS, Bibtexd, RIS, CSV, PDF-metadata och många andra format</li>
       <li xml:lang="tr">MODS, Bibtex, RIS, CSV, PDF üst verisi ve pek çok diğer biçimi içe aktarır</li>
       <li xml:lang="uk">Імпортування метаданих MODS, Bibtex, RIS, CSV, PDF та даних у багатьох інших форматах.</li>
+      <li xml:lang="zh-CN">导入 MODS、Bibtex、RIS、CSV、PDF 元数据和许多其他格式</li>
       <li xml:lang="zh-TW">能匯入 MODS、Bibtex、RIS、CSV、PDF 中繼資料及其他更多格式</li>
       <li>Exports to Bibtex, ONIX, CSV, HTML, and other formats</li>
       <li xml:lang="ar">يصدّر إلى تنسيقات Bibtex، وONIX، وCSV، وHTML، وغيرها</li>
@@ -520,6 +530,7 @@
       <li xml:lang="sv">Exporterar till Bibtex, ONIX, CSV, HTML och andra format</li>
       <li xml:lang="tr">Bibtex, ONIX, CSV, HTML, PilotDB ve pek çok diğer biçimi dışa aktarır</li>
       <li xml:lang="uk">Експортування даних у форматах Bibtex, ONIX, CSV, HTML тощо.</li>
+      <li xml:lang="zh-CN">导出到 Bibtex、ONIX、CSV、HTML 和其他格式</li>
       <li xml:lang="zh-TW">匯出到 Bibtex、ONIX、CSV、HTML 及其他更多格式</li>
       <li>Imports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scripts</li>
       <li xml:lang="ar">يستورد معلومات مباشرة من Amazon.com، وIMDb، ومخدّمات z39.50، وPubMed، ومخدّمات SRU، وCrossRef.org، ومواقع ويب أخرى متنوّعة، ومن سكربتات خارجيّة</li>
@@ -556,6 +567,7 @@
       <li xml:lang="sv">Importerar information direkt från Amazon.com, IMDb, z39.50-servrar, PubMed, naSRU-servrar, CrossRef.org, diverse andra webbplatser, och från externa skript</li>
       <li xml:lang="tr">Bilgileri doğrudan Amazon.com, IMDb, z39.50 sunucuları, PubMed, SRU sunucuları, CrossRef.org ve çeşitli başka sitelerden ve harici betiklerden içe aktarır</li>
       <li xml:lang="uk">Імпортування даних безпосередньо із серверів Amazon.com, IMDb, z39.50, PubMed, SRU, CrossRef.org, інших сайтів та на основі зовнішніх скриптів.</li>
+      <li xml:lang="zh-CN">直接从 Amazon.com、IMDb、z39.50 服务器、PubMed、SRU 服务器、CrossRef.org、其他网站和外部脚本导入信息</li>
       <li xml:lang="zh-TW">直接從各種網站匯入資訊，像是 Amazon.com、IMDb、z39.50 伺服器、PubMed、SRU 伺服器、CrossRef.org 等等網站，或是從外部文稿匯入資訊</li>
       <li>Imports CDDB data for cataloging audio CDs</li>
       <li xml:lang="ar">يستورد بيانات CDDB لكتلجة الأقراص المدمجة الصوتيّة</li>
@@ -592,6 +604,7 @@
       <li xml:lang="sv">Importerar CDDB-data för katalogisering av ljud-cd</li>
       <li xml:lang="tr">CD’leri kataloglamak için CDDB verisini içe aktarır</li>
       <li xml:lang="uk">Імпортування даних CDDB для каталогізації звукових компакт-дисків.</li>
+      <li xml:lang="zh-CN">导入 CDDB 数据用于编目音频 CD</li>
       <li xml:lang="zh-TW">匯入 CDDB 資料來整理音訊 CD 的收藏</li>
       <li>Scans and imports audio file collections, such as mp3 or ogg</li>
       <li xml:lang="ar">يمسح ويستورد مجموعات ملفات صوتيّة، مثل mp3 أو ogg</li>
@@ -628,6 +641,7 @@
       <li xml:lang="sv">Söker igenom och importera samlingar av ljudfiler, såsom mp3 eller ogg</li>
       <li xml:lang="tr">Mp3 ve ogg gibi ses dosyalarını tarar ve içe aktarır</li>
       <li xml:lang="uk">Сканування та імпортування збірок звукових файлів, зокрема mp3 та ogg.</li>
+      <li xml:lang="zh-CN">扫描和导入音频文件集，如 mp3 或 ogg</li>
       <li xml:lang="zh-TW">掃描並匯入音訊檔案收藏，像是 mp3 或 ogg</li>
     </ul>
   </description>
@@ -673,6 +687,7 @@
       <caption xml:lang="sv">Huvudfönstret som visar en filmsamling</caption>
       <caption xml:lang="tr">Bir film koleksiyonunu gösteren ana pencere</caption>
       <caption xml:lang="uk">Головне вікно програми зі збіркою фільмів</caption>
+      <caption xml:lang="zh-CN">显示影片收藏的主窗口</caption>
       <caption xml:lang="zh-TW">主視窗，顯示電影收藏</caption>
       <image>https://cdn.kde.org/screenshots/tellico/tellico-movies.png</image>
     </screenshot>
@@ -711,6 +726,7 @@
       <caption xml:lang="sv">Huvudfönstret som visar ett enkelt objekt i en boksamling</caption>
       <caption xml:lang="tr">Bir kitap koleksiyonundaki tek bir ögeyi gösteren ana pencere</caption>
       <caption xml:lang="uk">Головне вікно програми із простим записом у збірці книжок</caption>
+      <caption xml:lang="zh-CN">在书籍收藏集中显示一个简单的项目的主窗口</caption>
       <caption xml:lang="zh-TW">主視窗，顯示一個書本收藏裡的簡單項目</caption>
       <image>https://cdn.kde.org/screenshots/tellico/tellico.png</image>
     </screenshot>
@@ -750,6 +766,7 @@
       <caption xml:lang="sv">Huvudfönstret som visar en spelsamling med visning sida vid sida</caption>
       <caption xml:lang="tr">Bir oyun koleksiyonunun yan yana görünümlerini gösteren ana pencere</caption>
       <caption xml:lang="uk">Головне вікно програми із панелями паралельного перегляду збірки ігор</caption>
+      <caption xml:lang="zh-CN">以两边视图显示游戏集合的主窗口</caption>
       <caption xml:lang="zh-TW">主視窗，以並排檢視顯示一個遊戲收藏</caption>
       <image>https://cdn.kde.org/screenshots/tellico/tellico-games.png</image>
     </screenshot>
