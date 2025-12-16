@@ -82,6 +82,17 @@
 >Parágrafo</emphasis
 > não poderá ter vários valores, nem é formatado automaticamente. Não poderá ser usado para agrupamentos. Os resumos, descrições ou resenhas deverão ser inseridos com este tipo de dados.</para>
 
+<para
+>As quebras de linha são substituídas por uma quebra de linha HTML para garantir uma formatação consistente. Para desativar essa substituição, adicione uma propriedade ao campo com o valor de <emphasis
+>replace-line-feeds</emphasis
+>: <emphasis
+>false</emphasis
+>. A verificação ortográfica pode ser desativada definindo uma propriedade com o valor de <emphasis
+>spellcheck</emphasis
+>: <emphasis
+>false</emphasis
+>. </para>
+
 </sect2>
 
 <sect2 id="choice">
@@ -89,9 +100,9 @@
 >Escolha</title>
 
 <para
->Quando um campo tiver que ser limitado a alguns valores predefinidos, é usado um campo de <emphasis
+>Quando um campo deve ser limitado a alguns valores predefinidos, utiliza-se um campo do tipo <emphasis
 >Escolha</emphasis
->. Os valores aceitáveis são apresentados numa lista para posterior seleção. Obviamente, não são aplicáveis vários valores. Os campos como os tipos bibliográficos ou as classificações pessoais são campos do tipo <emphasis
+>. Os valores aceitáveis ​​são apresentados em uma caixa suspensa para seleção. Vários valores podem ser permitidos. Campos como tipo de bibliografia ou classificação pessoal são campos do tipo <emphasis
 >Escolha</emphasis
 >.</para>
 
@@ -565,7 +576,7 @@
 
 <sect2 id="game-collection">
 <title
->Coleções de Jogos</title>
+>Coleções de jogos em vídeo</title>
 <para
 >As coleções de jogos têm 16 campos padrão: <emphasis
 >Título</emphasis

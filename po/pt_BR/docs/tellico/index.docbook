@@ -7,8 +7,8 @@
 
   <!ENTITY robby "Robby Stephenson">
   <!ENTITY email "robby@periapsis.org">
-  <!ENTITY homepage "http://tellico-project.org">
-  <!ENTITY maillist "http://tellico-project.org/mailing-list">
+  <!ENTITY homepage "https://tellico-project.org">
+  <!ENTITY maillist "https://tellico-project.org/mailing-list">
   <!ENTITY xslt "<acronym
 >XSLT</acronym
 >">
@@ -45,7 +45,7 @@ Don't forget to include this last date.
 Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
 -->
 <date
->12/05/2019</date>
+>04/01/2025</date>
 
 <!--version information of Frameworks/Plasma/Applications this documentation is valid for.
 Example:
@@ -56,7 +56,7 @@ xx.yy (Applications xx.yy) for docbooks with own version released as Application
 $applicationname xx.yy for applications with independent release schedule (extragear/playground)
 -->
 <releaseinfo
->Tellico 3.2</releaseinfo>
+>Tellico 4.1</releaseinfo>
 
 <title
 >Manual do &tellico;</title>
@@ -107,7 +107,7 @@ $applicationname xx.yy for applications with independent release schedule (extra
 
 <copyright>
 <year
->2001-2019</year>
+>2001</year>
 <holder
 >&robby;</holder>
 </copyright>
@@ -198,7 +198,7 @@ revision history. (see installation appendix comment) -->
 >O que o &tellico; não é</title>
 
 <para
->O &tellico; não é um leitor de áudio ou vídeo. Não oferece capacidades de ler ou modificar arquivos multimídia. Também não oferece nenhuma capacidade de edição de imagens. Ainda que o &tellico; tenha alguma funcionalidade para gerenciar listas bibliográficas, ele não é um gestor de referências bibliográficas completo. O &tellico; também não pretende ter todas as potencialidades de uma base de dados relacional completa. </para>
+>O &tellico; não é um leitor de áudio ou vídeo. Não oferece capacidades de ler ou modificar arquivos multimídia. Também não oferece nenhuma capacidade de edição de imagens. Ainda que o &tellico; tenha alguma funcionalidade para gerenciar listas bibliográficas, ele não é um gestor de referências bibliográficas completo. O &tellico; também não pretende ter todas as potencialidades de um banco de dados relacional completa. </para>
 
 <para
 >Como uma espécie de nota final, o &tellico; é um passatempo do autor, e não são dadas quaisquer garantias sobre a sua funcionalidade, utilidade, etc. Você poderá encontrar mais informações na <link linkend="credits"
@@ -283,11 +283,11 @@ file included in the KDE distribution. -->
 <para
 >&tellico; </para>
 <para
->Direitos autorais do programa 2001-2019 &robby; <email
+>Direitos autorais do programa 2001 &robby; <email
 >&email;</email
 > </para>
 <para
->Direitos autorais da documentação 2001-2019 &robby; <email
+>Direitos autorais da documentação 2001 &robby; <email
 >&email;</email
 > </para>
 

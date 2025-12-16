@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-28 00:43+0000\n"
+"POT-Creation-Date: 2025-12-16 06:51+0000\n"
 "PO-Revision-Date: 2025-11-06 21:21+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -182,7 +182,7 @@ msgstr "Név"
 msgid "Collection Size"
 msgstr "Gyűjteményméret"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1621
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1620
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Összes bejegyzés: %1"
@@ -2105,7 +2105,7 @@ msgid "Delete Filter"
 msgstr "Szűrő törlése"
 
 #: src/commands/modifyentries.cpp:50 src/commands/modifyentries.cpp:70
-#: src/entryeditdialog.cpp:384
+#: src/entryeditdialog.cpp:383
 #, kde-format
 msgid "Modify Entries"
 msgstr "Bejegyzések szerkesztése"
@@ -2747,8 +2747,8 @@ msgstr "XSL-fájlok"
 msgid "Template Packages"
 msgstr "Sabloncsomagok"
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1255
-#: src/mainwindow.cpp:1426 src/reportdialog.cpp:424 src/reportdialog.cpp:439
+#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1254
+#: src/mainwindow.cpp:1425 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
@@ -2808,79 +2808,79 @@ msgstr ""
 "A képek áthelyezésre kerülnek a(z) <em>%1</em> könyvtárból a(z) <em>%2</em> "
 "könyvtárba"
 
-#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:319
+#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:319
 #: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
 #: src/fetchdialog.cpp:628 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Kész."
 
-#: src/controller.cpp:359
+#: src/controller.cpp:355
 #, kde-format
 msgid "Do you really want to delete this entry?"
 msgstr "Tényleg törölni akarja a bejegyzést?"
 
-#: src/controller.cpp:361
+#: src/controller.cpp:357
 #, kde-format
 msgid "Delete Entry"
 msgstr "Bejegyzés törlése"
 
-#: src/controller.cpp:373
+#: src/controller.cpp:369
 #, kde-format
 msgid "Do you really want to delete these entries?"
 msgstr "Tényleg törölni akarja a bejegyzéseket?"
 
-#: src/controller.cpp:377
+#: src/controller.cpp:373
 #, kde-format
 msgid "Delete Multiple Entries"
 msgstr "Több bejegyzés törlése"
 
-#: src/controller.cpp:526
+#: src/controller.cpp:522
 #, kde-format
 msgid "&Sort By"
 msgstr "&E szerint rendezve"
 
-#: src/controller.cpp:588 src/mainwindow.cpp:578
+#: src/controller.cpp:584 src/mainwindow.cpp:578
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "B&ejegyzés szerkesztése..."
 
-#: src/controller.cpp:589 src/mainwindow.cpp:585
+#: src/controller.cpp:585 src/mainwindow.cpp:585
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "&Bejegyzés megduplázása"
 
-#: src/controller.cpp:590 src/mainwindow.cpp:669
+#: src/controller.cpp:586 src/mainwindow.cpp:669
 #, kde-format
 msgid "&Update Entry"
 msgstr "B&ejegyzés frissítése"
 
-#: src/controller.cpp:591 src/mainwindow.cpp:592
+#: src/controller.cpp:587 src/mainwindow.cpp:592
 #, kde-format
 msgid "&Delete Entry"
 msgstr "B&ejegyzés törlése"
 
-#: src/controller.cpp:594
+#: src/controller.cpp:590
 #, kde-format
 msgid "&Edit Entries..."
 msgstr "Bejegyzések szerkesztése..."
 
-#: src/controller.cpp:595
+#: src/controller.cpp:591
 #, kde-format
 msgid "D&uplicate Entries"
 msgstr "&Bejegyzések megduplázása"
 
-#: src/controller.cpp:596
+#: src/controller.cpp:592
 #, kde-format
 msgid "&Update Entries"
 msgstr "&Bejegyzések frissítése"
 
-#: src/controller.cpp:597
+#: src/controller.cpp:593
 #, kde-format
 msgid "&Delete Entries"
 msgstr "Bejegyzések &törlése"
 
-#: src/controller.cpp:654
+#: src/controller.cpp:648
 #, kde-format
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
@@ -3018,13 +3018,13 @@ msgstr "Összes oszlop mutatása"
 msgid "Hide All Columns"
 msgstr "Oszlopok elrejtése"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1370
+#: src/document.cpp:216 src/mainwindow.cpp:1369
 #, kde-format
 msgid "Saving file..."
 msgstr "Fájl mentése..."
 
-#: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:405
-#: src/entryeditdialog.cpp:427 src/entryeditdialog.cpp:522
+#: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:404
+#: src/entryeditdialog.cpp:426 src/entryeditdialog.cpp:521
 #, kde-format
 msgid "Edit Entry"
 msgstr "Bejegyzés szerkesztése"
@@ -3034,38 +3034,38 @@ msgstr "Bejegyzés szerkesztése"
 msgid "&New Entry"
 msgstr "&Új bejegyzés"
 
-#: src/entryeditdialog.cpp:91 src/entryeditdialog.cpp:132
-#: src/entryeditdialog.cpp:437 src/entryeditdialog.cpp:543
+#: src/entryeditdialog.cpp:91 src/entryeditdialog.cpp:131
+#: src/entryeditdialog.cpp:436 src/entryeditdialog.cpp:542
 #, kde-format
 msgid "Sa&ve Entry"
 msgstr "B&ejegyzés mentése"
 
-#: src/entryeditdialog.cpp:335
+#: src/entryeditdialog.cpp:334
 #, kde-format
 msgid "Do you really want to modify these entries?"
 msgstr "Tényleg módosítani akarja ezeket a bejegyzéseket?"
 
-#: src/entryeditdialog.cpp:337
+#: src/entryeditdialog.cpp:336
 #, kde-format
 msgid "Modify Multiple Entries"
 msgstr "Többszörös bejegyzés módosítása"
 
-#: src/entryeditdialog.cpp:378
+#: src/entryeditdialog.cpp:377
 #, kde-format
 msgid "A value is required for the following fields. Do you want to continue?"
 msgstr "A következő mezőknek értéket kell adnia. Folytatja?"
 
-#: src/entryeditdialog.cpp:473
+#: src/entryeditdialog.cpp:472
 #, kde-format
 msgid "Edit Entries"
 msgstr "Bejegyzések szerkesztése"
 
-#: src/entryeditdialog.cpp:499
+#: src/entryeditdialog.cpp:498
 #, kde-format
 msgid "Sa&ve Entries"
 msgstr "B&ejegyzések mentése"
 
-#: src/entryeditdialog.cpp:658
+#: src/entryeditdialog.cpp:657
 #, kde-format
 msgid ""
 "The current entry has been modified.\n"
@@ -3074,12 +3074,12 @@ msgstr ""
 "A jelenlegi bejegyzés megváltozott.\n"
 "Menti a módosításokat?"
 
-#: src/entryeditdialog.cpp:661
+#: src/entryeditdialog.cpp:660
 #, kde-format
 msgid "Save Entry"
 msgstr "Bejegyzés mentése"
 
-#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1159
+#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1159
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Nem mentett változások"
@@ -3158,7 +3158,7 @@ msgstr "<b>%1</b> frissítése innen: <i>%2</i>…"
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico nem találja az alapértelmezett bejegyzés stíluslapot."
 
-#: src/entryview.cpp:292 src/mainwindow.cpp:1777
+#: src/entryview.cpp:292 src/mainwindow.cpp:1776
 #, kde-format
 msgid "Please check your installation."
 msgstr "Kérem, ellenőrizze a rendszer beállításait."
@@ -4838,8 +4838,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Csoport"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1086 src/mainwindow.cpp:1709
-#: src/mainwindow.cpp:1746 src/translators/htmlexporter.cpp:387
+#: src/groupview.cpp:425 src/mainwindow.cpp:1086 src/mainwindow.cpp:1708
+#: src/mainwindow.cpp:1745 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "Személy"
@@ -5141,14 +5141,14 @@ msgstr ""
 msgid "&Import"
 msgstr "&Importálás"
 
-#: src/importdialog.cpp:381 src/mainwindow.cpp:1251 src/mainwindow.cpp:1424
+#: src/importdialog.cpp:381 src/mainwindow.cpp:1250 src/mainwindow.cpp:1423
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico-fájlok"
 
 #: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
-#: src/mainwindow.cpp:1253 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1252 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML-fájlok"
@@ -6321,22 +6321,22 @@ msgid ""
 "Do you want to save it?"
 msgstr "A jelenlegi fájl megváltozott. Menti a módosításokat?"
 
-#: src/mainwindow.cpp:1193 src/mainwindow.cpp:1227
+#: src/mainwindow.cpp:1193 src/mainwindow.cpp:1226
 #, kde-format
 msgid "Creating new collection..."
 msgstr "Új gyűjtemény létrehozása…"
 
-#: src/mainwindow.cpp:1248 src/mainwindow.cpp:1271 src/mainwindow.cpp:1289
+#: src/mainwindow.cpp:1247 src/mainwindow.cpp:1270 src/mainwindow.cpp:1288
 #, kde-format
 msgid "Opening file..."
 msgstr "Fájl megnyitása…"
 
-#: src/mainwindow.cpp:1259
+#: src/mainwindow.cpp:1258
 #, kde-format
 msgid "Open File"
 msgstr "Fájl megnyitása"
 
-#: src/mainwindow.cpp:1381
+#: src/mainwindow.cpp:1380
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6349,32 +6349,32 @@ msgstr ""
 "Tellico adat könyvtárba elmenteni?</p><p>Választását bármikor "
 "megváltoztathatja a beállítások között.</p></qt>"
 
-#: src/mainwindow.cpp:1386
+#: src/mainwindow.cpp:1385
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Képek mentése különállóan"
 
-#: src/mainwindow.cpp:1387
+#: src/mainwindow.cpp:1386
 #, kde-format
 msgid "Save Images in File"
 msgstr "Képek mentése a fájlba"
 
-#: src/mainwindow.cpp:1422
+#: src/mainwindow.cpp:1421
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Fájl mentése új néven..."
 
-#: src/mainwindow.cpp:1431
+#: src/mainwindow.cpp:1430
 #, kde-format
 msgid "Save As"
 msgstr "Mentés másként"
 
-#: src/mainwindow.cpp:1497
+#: src/mainwindow.cpp:1496
 #, kde-format
 msgid "Printing..."
 msgstr "Nyomtatás…"
 
-#: src/mainwindow.cpp:1501
+#: src/mainwindow.cpp:1500
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6383,27 +6383,27 @@ msgstr ""
 "A gyűjtemény jelenleg a bejegyzések egy részét mutatja a szűrésnek "
 "megfelelően. Csak a látható bejegyzéseket nyomtatjuk ki. Folytatja?"
 
-#: src/mainwindow.cpp:1526
+#: src/mainwindow.cpp:1525
 #, kde-format
 msgid "Exiting..."
 msgstr "Kilépés…"
 
-#: src/mainwindow.cpp:1628
+#: src/mainwindow.cpp:1627
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 szűrt; %2 kiválasztott)"
 
-#: src/mainwindow.cpp:1631
+#: src/mainwindow.cpp:1630
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 szűrt)"
 
-#: src/mainwindow.cpp:1634
+#: src/mainwindow.cpp:1633
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 kiválasztott)"
 
-#: src/mainwindow.cpp:1776 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1775 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6411,57 +6411,57 @@ msgstr "(%1 kiválasztott)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Hiba keletkezett az XSLT feldolgozásakor."
 
-#: src/mainwindow.cpp:1894
+#: src/mainwindow.cpp:1893
 #, kde-format
 msgid "Importing data..."
 msgstr "Adat importálása…"
 
-#: src/mainwindow.cpp:1905
+#: src/mainwindow.cpp:1904
 #, kde-format
 msgid "Import File"
 msgstr "Fájl importálása..."
 
-#: src/mainwindow.cpp:1918
+#: src/mainwindow.cpp:1917
 #, kde-format
 msgid "Import Directory"
 msgstr "Könyvtár importálása"
 
-#: src/mainwindow.cpp:1942
+#: src/mainwindow.cpp:1941
 #, kde-format
 msgid "Exporting data..."
 msgstr "Adat exportálása…"
 
-#: src/mainwindow.cpp:1966
+#: src/mainwindow.cpp:1965
 #, kde-format
 msgid "Export As"
 msgstr "Exportálás mint"
 
-#: src/mainwindow.cpp:1994
+#: src/mainwindow.cpp:1993
 #, kde-format
 msgid "String Macros"
 msgstr "Karakterlánc makrók"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "Macro"
 msgstr "Makró"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "String"
 msgstr "Karakterlánc"
 
-#: src/mainwindow.cpp:2081
+#: src/mainwindow.cpp:2080
 #, kde-format
 msgid "Creating citations..."
 msgstr "Idézet létrehozása…"
 
-#: src/mainwindow.cpp:2191
+#: src/mainwindow.cpp:2187 src/mainwindow.cpp:2194
 #, kde-format
 msgid "Filters"
 msgstr "Szűrők"
 
-#: src/mainwindow.cpp:2192
+#: src/mainwindow.cpp:2195
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6470,12 +6470,12 @@ msgstr ""
 "<qt>A <i>Szűrő nézet</i> az adott szűrési feltételnek megfelelő "
 "bejegyzéseket mutatja.</qt>"
 
-#: src/mainwindow.cpp:2215
+#: src/mainwindow.cpp:2215 src/mainwindow.cpp:2222
 #, kde-format
 msgid "Loans"
 msgstr "Kölcsön adva"
 
-#: src/mainwindow.cpp:2216
+#: src/mainwindow.cpp:2223
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6484,7 +6484,7 @@ msgstr ""
 "<qt>A <i>Kölcsönadás nézet</i> azokat a személyeket mutatja, akik a "
 "gyűjteményből kölcsönöztek.</qt>"
 
-#: src/mainwindow.cpp:2304
+#: src/mainwindow.cpp:2311
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6493,12 +6493,12 @@ msgstr ""
 "Néhány képet nem mentett el a megadott elérési helyre. A jelenlegi fájlt el "
 "kell mentenie, a képek az új elérési helyre lesznek másolva."
 
-#: src/mainwindow.cpp:2348
+#: src/mainwindow.cpp:2355
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Bejegyzés frissítése innen: %1"
 
-#: src/mainwindow.cpp:2367
+#: src/mainwindow.cpp:2374
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6507,7 +6507,7 @@ msgstr ""
 "Tellico csak egy ilyen típusú fájlt tud egy időben importálni., Csak a %1 "
 "importálódik."
 
-#: src/mainwindow.cpp:2546
+#: src/mainwindow.cpp:2553
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"

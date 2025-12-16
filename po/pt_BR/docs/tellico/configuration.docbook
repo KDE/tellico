@@ -40,14 +40,15 @@
 ></title>
 
 <screenshot>
-<screeninfo
->A Janela de Opções Gerais</screeninfo>
+<!-- <screeninfo
+>The General Options Dialog</screeninfo
+> -->
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="general-options.png"/></imageobject>
 <textobject
 ><phrase
->A Janela de Opções Gerais</phrase
+>A janela de opções gerais</phrase
 ></textobject>
 </mediaobject>
 </screenshot>
@@ -55,9 +56,11 @@
 <para
 >As <guilabel
 >Opções Gerais</guilabel
-> controlam o comportamento geral. As imagens poderão ser incluídas nos arquivos de dados ou salvas separadamente na pasta da aplicação &appname;. Do mesmo modo, quando for iniciado o &appname;, você poderá reabrir automaticamente o último arquivo de dados que foi aberto. A janela da <guilabel
->Dica do Dia</guilabel
-> contém sugestões úteis sobre a utilização do &appname; e aparece na inicialização do programa. Você poderá querer seguir algumas das sugestões e depois desativar a janela. </para>
+> controlam o comportamento geral. As imagens podem ser salvas no próprio arquivo de dados, salvas separadamente na pasta comum do aplicativo, ou salvas em um diretório com o mesmo nome do arquivo de dados, com <emphasis
+>_files</emphasis
+> anexado ao nome. Para coleções com muitas imagens, salvá-las no arquivo de dados é muito mais lento. Quando o aplicativo é iniciado, ele pode reabrir automaticamente o último arquivo de dados que estava aberto. O <interface
+>Filtro Rápido</interface
+> na barra de ferramentas é útil para filtrar facilmente sua coleção e pode utilizar expressões regulares. </para>
 
 <para
 >As <guilabel
@@ -214,11 +217,12 @@
 ></title>
 
 <para
->O &appname; poderá usar diversas fontes para importar os dados, que poderão ser configuradas na Janela de Fontes de Dados. Existem diversos tipos e fontes disponíveis. Alguns deles estão listados abaixo, mas a lista completa está <ulink url="http://tellico-project.org/data-sources"
->disponível na página Web do Tellico</ulink
+>O &appname; poderá usar diversas fontes para importar os dados, que poderão ser configuradas na Janela de Fontes de Dados. Existem diversos tipos e fontes disponíveis. Alguns deles estão listados abaixo, mas a lista completa está <ulink url="https://tellico-project.org/data-sources"
+>disponível no site do Tellico</ulink
 >.</para>
 
 <itemizedlist>
+<!-- books -->
 <listitem
 ><simpara
 ><link linkend="amazon-web-services"
@@ -227,14 +231,122 @@
 ></listitem>
 <listitem
 ><simpara
+><link linkend="isbndb"
+>ISBNdb.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="openlibrary"
+>OpenLibrary.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="opds"
+>Catálogos OPDS</link
+>,</simpara
+></listitem>
+<!-- movies -->
+<listitem
+><simpara
 >a <link linkend="imdb"
 >Internet Movie Database</link
 >,</simpara
 ></listitem>
 <listitem
 ><simpara
-><link linkend="allocine"
->AlloCiné</link
+><link linkend="tmdb"
+>TheMovieDB.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+>o <link linkend="omdb"
+>Open Movie Database</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="filmaffinity"
+>FilmAffinity</link
+>,</simpara
+></listitem>
+<!-- comics -->
+<listitem
+><simpara
+><link linkend="bedetheque"
+>BDGest</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="comicvine"
+>Comic Vine</link
+>,</simpara
+></listitem>
+<!-- music -->
+<listitem
+><simpara
+><link linkend="discogs"
+>Discogs.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="musicbrainz"
+>MusicBrainz.org</link
+>,</simpara
+></listitem>
+<!-- video games -->
+<listitem
+><simpara
+><link linkend="tgdb"
+>TheGamesDB.net</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="giantbomb"
+>GiantBomb.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="mobygames"
+>MobyGames.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="igdb"
+>IGDB.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="videogamegeek"
+>VideoGameGeek</link
+>,</simpara
+></listitem>
+<!-- board games -->
+<listitem
+><simpara
+><link linkend="boardgamegeek"
+>BoardGameGeek</link
+>,</simpara
+></listitem>
+<!-- bibliographic -->
+<listitem
+><simpara
+><link linkend="bib-sources"
+>arxiv.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="entrez"
+>bancos de dados Entrez (PubMed)</link
 >,</simpara
 ></listitem>
 <listitem
@@ -249,78 +361,20 @@
 >servidores SRU</link
 >,</simpara
 ></listitem>
+<!-- coins -->
 <listitem
 ><simpara
-><link linkend="entrez"
->bases de dados Entrez (PubMed)</link
+><link linkend="colnect"
+>Colnect</link
 >,</simpara
 ></listitem>
 <listitem
 ><simpara
-><link linkend="animenfo"
->AnimeNfo.com</link
+><link linkend="numista"
+>Numista</link
 >,</simpara
 ></listitem>
-<listitem
-><simpara
-><link linkend="bedetheque"
->BDGest</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="isbndb"
->ISBNdb.com</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="bib-sources"
->arxiv.org</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="discogs"
->Discogs.com</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="tmdb"
->TheMovieDB.org</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="tgdb"
->TheGamesDB.net</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="omdb"
->OMDBAPI.com</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="musicbrainz"
->MusicBrainz.org</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="giantbomb"
->GiantBomb.com</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="openlibrary"
->OpenLibrary.org</link
->,</simpara
-></listitem>
+<!-- others -->
 <listitem
 ><simpara
 ><link linkend="externalexec"
@@ -356,11 +410,6 @@
 > ou <guibutton
 >Apagar</guibutton
 >. A ordem das fontes, que aparece nos menus de atualização dos itens, também poderá ser alterada. </para>
-
-<warning>
-<para
->Nunca instale nem execute um programa de uma fonte desconhecida. Eles são executados com as mesmas permissões do usuário; por consequência, podem modificar ou apagar arquivos ou ainda embaralhar o seu sistema. </para>
-</warning>
 
 <para
 >Muitas das fontes de dados oferecem mais informações que os campos padrão do &appname;. Esses outros campos aparecem à direita da área de configuração. Se qualquer desses campos estiver assinalado, serão adicionados à coleção quando um item for adicionado a partir dessa fonte. </para>
@@ -420,11 +469,28 @@
 >Servidores SRU</title>
 
 <para
->SRU significa <ulink url="http://www.loc.gov/standards/sru/"
+><acronym
+>SRU</acronym
+> significa <ulink url="http://www.loc.gov/standards/sru/"
 >Search/Retrieve via &URL;</ulink
 > e é um protocolo de pesquisa-padrão para pesquisas na Internet. Algumas bibliotecas usam-no para oferecer o acesso aos seus catálogos de dados. Entre elas, a <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
 >Biblioteca do Congresso dos EUA</ulink
 > é provavelmente a mais conhecida. </para>
+
+<para
+>Campos personalizados podem ser adicionados para ajustar a interação do Tellico com o servidor SRU. Para substituir protocolos de consulta específicos, use o prefixo x-tellico e o nome do campo desejado. Por exemplo, para consultar o ISBN usando o esquema bib em vez do esquema bath, defina <userinput
+>x-tellico-isbn</userinput
+>=<userinput
+>bib.isbn</userinput
+>. O Tellico também pode fazer a solicitação SRU pelo método POST, se <userinput
+>x-tellico-method</userinput
+>=<userinput
+>POST</userinput
+>. Para substituir o esquema de registro, adicione um campo personalizado definindo <userinput
+>recordSchema</userinput
+>=<userinput
+>unimarcXchange</userinput
+>. </para>
 
 <screenshot>
 <mediaobject>
@@ -437,13 +503,13 @@
 
 <sect3 id="entrez">
 <title
->Bases de Dados Entrez</title>
+>Bancos de dados Entrez</title>
 <para
 >O <ulink url="http://www.ncbi.nlm.nih.gov/Entrez/"
 >Entrez</ulink
-> é o sistema integrado, de pesquisa por texto e de extração usado no National Center for Biotechnology Information (NCBI). A base de dados Entrez mais conhecida é a <ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed"
+> é o sistema integrado, de pesquisa por texto e de extração usado no National Center for Biotechnology Information (NCBI). O banco de dados Entrez mais conhecida é a <ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed"
 >PubMed</ulink
->, a base de dados dos artigos de ciência viva de muitos jornais biológicos. Atualmente, a única base de dados Entrez suportada pelo &appname; é a PubMed.</para>
+>, o banco de dados dos artigos de ciência viva de muitos jornais biológicos. Atualmente, o único banco de dadps Entrez suportado pelo &appname; é a PubMed.</para>
 </sect3>
 
 <sect3 id="bib-sources">
@@ -467,7 +533,7 @@
 <para
 >A <ulink url="http://isbndb.com"
 >ISBNdb.com</ulink
-> é uma base de dados online de livros online de bibliotecas por todo o mundo. </para>
+> é um banco de dados online de livros online de bibliotecas por todo o mundo. </para>
 </sect3>
 
 <sect3 id="openlibrary">
@@ -479,6 +545,17 @@
 > é uma base de dados 'online' de livros que pretende ter uma página por cada livro. </para>
 </sect3>
 
+<sect3 id="opds">
+<title
+>Catálogos OPDS</title>
+<para
+><ulink url="https://en.wikipedia.org/wiki/Open_Publication_Distribution_System"
+>Os catálogos OPDS</ulink
+> fornecem um meio para pesquisar (e distribuir) livros digitais. O &tellico; pode usar muitos catálogos OPDS como fonte de dados, como o <ulink url="https://wiki.mobileread.com/wiki/OPDS"
+>Projeto Gutenberg</ulink
+>. Insira o link para o catálogo e verifique o acesso e o formato para confirmar se o &tellico; consegue ler o link. </para>
+</sect3>
+
 </sect2>
 <!-- end of books -->
 
@@ -487,15 +564,6 @@
 <title
 >Fontes de Dados de Revistas em Quadrinhos</title>
 
-<sect3 id="animenfo">
-<title
->AnimeNfo.com</title>
-<para
->O <ulink url="http://www.animenfo.com"
->AnimeNfo</ulink
-> é um serviço conhecido para obter informações sobre Anime, ou seja, animação Japonesa. </para>
-</sect3>
-
 <sect3 id="bedetheque">
 <title
 >Bedetheque</title>
@@ -503,6 +571,15 @@
 ><ulink url="http://www.bedetheque.com"
 >Bedetheque</ulink
 > é um banco de dados de quadrinhos franceses gerenciada pela BDGest. </para>
+</sect3>
+
+<sect3 id="comicvine">
+<title
+>Comic Vine</title>
+<para
+><ulink url="https://comicvine.gamespot.com/"
+>Comic Vine</ulink
+> é considerada como a maior wiki de quadrinhos do universo. </para>
 </sect3>
 
 </sect2>
@@ -514,7 +591,7 @@
 
 <sect3 id="imdb">
 <title
->Base de dados de filmes na Internet</title>
+>Banco de dados de filmes na Internet</title>
 
 <para
 >A <ulink url="http://www.imdb.com"
@@ -543,20 +620,20 @@
 
 <sect3 id="omdb">
 <title
->OMDBAPI.com</title>
+>O Open Movie Database</title>
 <para
 >O <ulink url="http://omdbapi.com"
->The Open Movie Database</ulink
+>Open Movie Database (OMDBAPI.com)</ulink
 > é um serviço Web gratuito para obter informações de filmes. </para>
 </sect3>
 
-<sect3 id="allocine">
+<sect3 id="filmaffinity">
 <title
->AlloCiné</title>
+>FilmAffinity</title>
 <para
-><ulink url="http://allocine.fr"
->AlloCiné</ulink
-> é um serviço de informações de filmes online, com base na França. </para>
+><ulink url="https://filmaffinity.com"
+>FilmAffinity</ulink
+> é um site de filmes independente. </para>
 </sect3>
 
 </sect2>
@@ -572,7 +649,7 @@
 <para
 >O <ulink url="http://discogs.com"
 >Discogs.com</ulink
-> é uma base de dados de músicas, criada pelos usuários, que contém informações sobre os artistas, editoras e as suas gravações. É necessário o registro de uma conta gratuita. </para>
+> é um banco de dados de músicas, criada pelos usuários, que contém informações sobre os artistas, editoras e as suas gravações. É necessário o registro de uma conta gratuita. </para>
 </sect3>
 
 <sect3 id="musicbrainz">
@@ -581,7 +658,7 @@
 <para
 >O <ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
-> é uma metabase de dados comunitária de músicas que tenta criar um serviço de informação musical abrangente. </para>
+> é um metabanco de dados comunitária de músicas que tenta criar um serviço de informação musical abrangente. </para>
 </sect3>
 
 </sect2>
@@ -605,7 +682,7 @@
 <para
 >A <ulink url="http://giantbomb.com"
 >GiantBomb.com</ulink
-> é uma grande base de dados de jogos de consoles. É necessário o registro de uma conta gratuita. </para>
+> é um grande banco de dados de jogos de consoles. É necessário o registro de uma conta gratuita. </para>
 </sect3>
 
 <sect3 id="tgdb">
@@ -615,6 +692,74 @@
 >O <ulink url="http://thegamesdb.net"
 >TheGamesDB.net</ulink
 > é uma base de dados 'online' gratuita para fãs de vídeo games. </para>
+</sect3>
+
+<sect3 id="mobygames">
+<title
+>MobyGames</title>
+<para
+><ulink url="https://www.mobygames.com"
+>MobyGames.com</ulink
+> se autodescreve como o banco de dados de videogames mais antigo, maior e mais preciso. </para>
+</sect3>
+
+<sect3 id="igdb">
+<title
+>IGDB.com</title>
+<para
+><ulink url="https://www.igdb.com"
+>IGDB.com</ulink
+> se chama de site de jogos para todos que amam jogos. </para>
+</sect3>
+
+<sect3 id="videogamegeek">
+<title
+>VideoGameGeek</title>
+<para
+><ulink url="https://videogamegeek.com"
+>VideoGameGeek</ulink
+> é um recurso e comunidade de vídeo games online. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of board game sources -->
+<sect2 id="boardgame-sources">
+<title
+>Fontes de dados de jogos de tabuleiro</title>
+
+<sect3 id="boardgamegeek">
+<title
+>BoardGameGeek</title>
+<para
+><ulink url="https://boardgamegeek.com"
+>BoardGameGeek</ulink
+> é um recurso e comunidade online para jogos de tabuleiro. </para>
+</sect3>
+
+</sect2>
+
+<!-- start of coin sources -->
+<sect2 id="coin-sources">
+<title
+>Fontes de dados para moedas e selos</title>
+
+<sect3 id="colnect">
+<title
+>Colnect</title>
+<para
+><ulink url="https://colnect.com"
+>Colnect</ulink
+> é uma comunidade online para colecionáveis ​​que oferece gerenciamento de coleções pessoais. Você pode pesquisar no Colnect informações sobre moedas e selos, bem como histórias em quadrinhos, cartões esportivos e videogames. </para>
+</sect3>
+
+<sect3 id="numista">
+<title
+>Numista</title>
+<para
+><ulink url="https://numista.com"
+>Numista</ulink
+> é um catálogo mundial de moedas que cresce graças às contribuições dos membros, oferecendo gerenciamento de coleções online, ferramentas para trocar facilmente com outros colecionadores e um fórum. </para>
 </sect3>
 
 </sect2>
@@ -677,9 +822,14 @@
 >, como também poderá importar outros formatos, como o 'bibtex'. </para>
 
 <para
->A localização completa da aplicação deverá ser inserida nas opções da fonte. Observe que a aplicação é executada no sistema com as mesmas permissões que o usuário atual, por isso não use programas de fontes não fidedignas. Assinale as opções a seguir às chaves de pesquisa suportadas pela aplicação, inserindo as opções da linha de comando necessárias no campo de texto. O valor a procurar será introduzido onde aparecer o <userinput
+>A localização completa da aplicação deverá ser inserida nas opções da fonte. Assinale as opções a seguir às chaves de pesquisa suportadas pela aplicação, inserindo as opções da linha de comando necessárias no campo de texto. O valor a procurar será introduzido onde aparecer o <userinput
 >%1</userinput
 >. </para>
+
+<warning>
+<para
+>Nunca instale nem execute um programa de uma fonte desconhecida. Eles são executados com as mesmas permissões do usuário; por consequência, podem modificar ou apagar arquivos ou ainda embaralhar o seu sistema. </para>
+</warning>
 
 <para
 >Para atualizar os itens que já estão na coleção, a última opção e campo de texto servem para determinar as opções da linha de comando. Os campos dos itens usados para procurar uma atualização deverão ser inseridos, no mesmo formato que é usado nos campos de <link linkend="derived"
@@ -693,7 +843,7 @@
 <title
 >Fontes de Dados Combinadas e Múltiplas</title>
 <para
->Poderá usar combinações de até oito fontes de dados existentes como se fossem uma única fonte, na qual os resultados da pesquisa de todas as fontes são reunidos. O tipo de coleção a ser usado terá que ser definido antes de adicionar as fontes. </para>
+>Combinações de até oito fontes de dados existentes podem ser usadas como uma única fonte, onde cada resultado de pesquisa da primeira fonte é atualizado a partir das fontes subsequentes. O tipo de coleção a ser usado deve ser definido antes de adicionar fontes. </para>
 
 <screenshot>
 <mediaobject>
@@ -703,7 +853,7 @@
 </screenshot>
 
 <para
->Somente fontes de dados existentes poderão ser usadas em combinação. O pedido de pesquisa é enviado a cada fonte, sendo combinados todos os resultados. Uma vez que os resultados reunidos dependem da ordem dos resultados da pesquisa, o conjunto combinado poderá ser diferente, dependendo da velocidade da rede e da fonte. </para>
+>Somente fontes de dados existentes podem ser usadas em combinação. Somente o tipo de pesquisa da primeira fonte pode ser usado nesta fonte, já que os resultados vêm da primeira fonte de dados. Por exemplo, uma pesquisa no UPCitemDb pode ser feita primeiro, com cada resultado sendo atualizado a partir do TheMovieDB. </para>
 </sect2>
 
 </sect1>

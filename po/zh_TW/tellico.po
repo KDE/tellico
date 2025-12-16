@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-28 00:43+0000\n"
+"POT-Creation-Date: 2025-12-16 06:51+0000\n"
 "PO-Revision-Date: 2025-11-20 21:48+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -179,7 +179,7 @@ msgstr "名稱"
 msgid "Collection Size"
 msgstr "收藏大小"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1621
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1620
 #, kde-format
 msgid "Total entries: %1"
 msgstr "所有項目：%1"
@@ -2092,7 +2092,7 @@ msgid "Delete Filter"
 msgstr "刪除過濾器"
 
 #: src/commands/modifyentries.cpp:50 src/commands/modifyentries.cpp:70
-#: src/entryeditdialog.cpp:384
+#: src/entryeditdialog.cpp:383
 #, kde-format
 msgid "Modify Entries"
 msgstr "變更項目"
@@ -2721,8 +2721,8 @@ msgstr "XSL 檔案"
 msgid "Template Packages"
 msgstr "樣本套件"
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1255
-#: src/mainwindow.cpp:1426 src/reportdialog.cpp:424 src/reportdialog.cpp:439
+#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1254
+#: src/mainwindow.cpp:1425 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
@@ -2776,79 +2776,79 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:319
+#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:319
 #: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
 #: src/fetchdialog.cpp:628 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "已就緒。"
 
-#: src/controller.cpp:359
+#: src/controller.cpp:355
 #, kde-format
 msgid "Do you really want to delete this entry?"
 msgstr "您真的要刪除這個項目嗎？"
 
-#: src/controller.cpp:361
+#: src/controller.cpp:357
 #, kde-format
 msgid "Delete Entry"
 msgstr "刪除項目"
 
-#: src/controller.cpp:373
+#: src/controller.cpp:369
 #, kde-format
 msgid "Do you really want to delete these entries?"
 msgstr "您真的要刪除這些項目嗎？"
 
-#: src/controller.cpp:377
+#: src/controller.cpp:373
 #, kde-format
 msgid "Delete Multiple Entries"
 msgstr "刪除多個項目"
 
-#: src/controller.cpp:526
+#: src/controller.cpp:522
 #, kde-format
 msgid "&Sort By"
 msgstr "排序依據(&S)"
 
-#: src/controller.cpp:588 src/mainwindow.cpp:578
+#: src/controller.cpp:584 src/mainwindow.cpp:578
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "編輯項目(&E)..."
 
-#: src/controller.cpp:589 src/mainwindow.cpp:585
+#: src/controller.cpp:585 src/mainwindow.cpp:585
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "複製項目(&U)"
 
-#: src/controller.cpp:590 src/mainwindow.cpp:669
+#: src/controller.cpp:586 src/mainwindow.cpp:669
 #, kde-format
 msgid "&Update Entry"
 msgstr "更新項目(&U)"
 
-#: src/controller.cpp:591 src/mainwindow.cpp:592
+#: src/controller.cpp:587 src/mainwindow.cpp:592
 #, kde-format
 msgid "&Delete Entry"
 msgstr "刪除項目(&D)"
 
-#: src/controller.cpp:594
+#: src/controller.cpp:590
 #, kde-format
 msgid "&Edit Entries..."
 msgstr "編輯項目(&E)..."
 
-#: src/controller.cpp:595
+#: src/controller.cpp:591
 #, kde-format
 msgid "D&uplicate Entries"
 msgstr "複製項目(&U)"
 
-#: src/controller.cpp:596
+#: src/controller.cpp:592
 #, kde-format
 msgid "&Update Entries"
 msgstr "更新項目(&U)"
 
-#: src/controller.cpp:597
+#: src/controller.cpp:593
 #, kde-format
 msgid "&Delete Entries"
 msgstr "刪除項目(&D)"
 
-#: src/controller.cpp:654
+#: src/controller.cpp:648
 #, kde-format
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
@@ -2981,13 +2981,13 @@ msgstr "顯示所有欄位"
 msgid "Hide All Columns"
 msgstr "隱藏所有欄位"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1370
+#: src/document.cpp:216 src/mainwindow.cpp:1369
 #, kde-format
 msgid "Saving file..."
 msgstr "正在儲存檔案..."
 
-#: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:405
-#: src/entryeditdialog.cpp:427 src/entryeditdialog.cpp:522
+#: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:404
+#: src/entryeditdialog.cpp:426 src/entryeditdialog.cpp:521
 #, kde-format
 msgid "Edit Entry"
 msgstr "編輯項目"
@@ -2997,38 +2997,38 @@ msgstr "編輯項目"
 msgid "&New Entry"
 msgstr "新的項目(&N)"
 
-#: src/entryeditdialog.cpp:91 src/entryeditdialog.cpp:132
-#: src/entryeditdialog.cpp:437 src/entryeditdialog.cpp:543
+#: src/entryeditdialog.cpp:91 src/entryeditdialog.cpp:131
+#: src/entryeditdialog.cpp:436 src/entryeditdialog.cpp:542
 #, kde-format
 msgid "Sa&ve Entry"
 msgstr "儲存項目(&V)"
 
-#: src/entryeditdialog.cpp:335
+#: src/entryeditdialog.cpp:334
 #, kde-format
 msgid "Do you really want to modify these entries?"
 msgstr "您真的要變更這些項目嗎？"
 
-#: src/entryeditdialog.cpp:337
+#: src/entryeditdialog.cpp:336
 #, kde-format
 msgid "Modify Multiple Entries"
 msgstr "變更多個項目"
 
-#: src/entryeditdialog.cpp:378
+#: src/entryeditdialog.cpp:377
 #, kde-format
 msgid "A value is required for the following fields. Do you want to continue?"
 msgstr "以下的欄位需要填值。您要繼續嗎？"
 
-#: src/entryeditdialog.cpp:473
+#: src/entryeditdialog.cpp:472
 #, kde-format
 msgid "Edit Entries"
 msgstr "編輯項目"
 
-#: src/entryeditdialog.cpp:499
+#: src/entryeditdialog.cpp:498
 #, kde-format
 msgid "Sa&ve Entries"
 msgstr "儲存項目(&V)"
 
-#: src/entryeditdialog.cpp:658
+#: src/entryeditdialog.cpp:657
 #, kde-format
 msgid ""
 "The current entry has been modified.\n"
@@ -3037,12 +3037,12 @@ msgstr ""
 "目前的項目已變更。\n"
 "您要輸入變更嗎？"
 
-#: src/entryeditdialog.cpp:661
+#: src/entryeditdialog.cpp:660
 #, kde-format
 msgid "Save Entry"
 msgstr "儲存項目"
 
-#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1159
+#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1159
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "未儲存的改變"
@@ -3120,7 +3120,7 @@ msgstr "更新 <b>%1</b> 中..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico 無法找到預設的項目樣式表。"
 
-#: src/entryview.cpp:292 src/mainwindow.cpp:1777
+#: src/entryview.cpp:292 src/mainwindow.cpp:1776
 #, kde-format
 msgid "Please check your installation."
 msgstr "請檢查您的安裝。"
@@ -4781,8 +4781,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "群組"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1086 src/mainwindow.cpp:1709
-#: src/mainwindow.cpp:1746 src/translators/htmlexporter.cpp:387
+#: src/groupview.cpp:425 src/mainwindow.cpp:1086 src/mainwindow.cpp:1708
+#: src/mainwindow.cpp:1745 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "人物"
@@ -5081,14 +5081,14 @@ msgstr ""
 msgid "&Import"
 msgstr "匯入(&I)"
 
-#: src/importdialog.cpp:381 src/mainwindow.cpp:1251 src/mainwindow.cpp:1424
+#: src/importdialog.cpp:381 src/mainwindow.cpp:1250 src/mainwindow.cpp:1423
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico 檔案"
 
 #: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
-#: src/mainwindow.cpp:1253 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1252 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML 檔案"
@@ -6271,23 +6271,23 @@ msgstr ""
 "目前的檔案已修改。\n"
 "要儲存嗎？"
 
-#: src/mainwindow.cpp:1193 src/mainwindow.cpp:1227
+#: src/mainwindow.cpp:1193 src/mainwindow.cpp:1226
 #, fuzzy, kde-format
 #| msgid "Create a new collection"
 msgid "Creating new collection..."
 msgstr "建立新的收藏"
 
-#: src/mainwindow.cpp:1248 src/mainwindow.cpp:1271 src/mainwindow.cpp:1289
+#: src/mainwindow.cpp:1247 src/mainwindow.cpp:1270 src/mainwindow.cpp:1288
 #, kde-format
 msgid "Opening file..."
 msgstr "正在開啟檔案..."
 
-#: src/mainwindow.cpp:1259
+#: src/mainwindow.cpp:1258
 #, kde-format
 msgid "Open File"
 msgstr "開啟檔案"
 
-#: src/mainwindow.cpp:1381
+#: src/mainwindow.cpp:1380
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6299,59 +6299,59 @@ msgstr ""
 "否要將影像存在另外一個 Tellico 的資料目錄裡以加快效率？</p> <p>您稍後還是可以"
 "在設定對話框裡變更您的選擇。</p></qt>"
 
-#: src/mainwindow.cpp:1386
+#: src/mainwindow.cpp:1385
 #, kde-format
 msgid "Save Images Separately"
 msgstr "分別儲存影像"
 
-#: src/mainwindow.cpp:1387
+#: src/mainwindow.cpp:1386
 #, kde-format
 msgid "Save Images in File"
 msgstr "將影像存在檔案內"
 
-#: src/mainwindow.cpp:1422
+#: src/mainwindow.cpp:1421
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "正在用新檔名儲存檔案..."
 
-#: src/mainwindow.cpp:1431
+#: src/mainwindow.cpp:1430
 #, kde-format
 msgid "Save As"
 msgstr "另存新檔"
 
-#: src/mainwindow.cpp:1497
+#: src/mainwindow.cpp:1496
 #, kde-format
 msgid "Printing..."
 msgstr "正在列印..."
 
-#: src/mainwindow.cpp:1501
+#: src/mainwindow.cpp:1500
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr "正在過濾收藏，只有符合過濾條件的項目會被列印。要繼續嗎？"
 
-#: src/mainwindow.cpp:1526
+#: src/mainwindow.cpp:1525
 #, kde-format
 msgid "Exiting..."
 msgstr "正在離開..."
 
-#: src/mainwindow.cpp:1628
+#: src/mainwindow.cpp:1627
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "（%1 個已過濾；%2 個已選擇）"
 
-#: src/mainwindow.cpp:1631
+#: src/mainwindow.cpp:1630
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "（%1 個已過濾）"
 
-#: src/mainwindow.cpp:1634
+#: src/mainwindow.cpp:1633
 #, kde-format
 msgid "(%1 selected)"
 msgstr "（%1 個已選擇）"
 
-#: src/mainwindow.cpp:1776 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1775 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6359,76 +6359,76 @@ msgstr "（%1 個已選擇）"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico 在處理 XSLT 時遇到錯誤。"
 
-#: src/mainwindow.cpp:1894
+#: src/mainwindow.cpp:1893
 #, kde-format
 msgid "Importing data..."
 msgstr "匯入資料中..."
 
-#: src/mainwindow.cpp:1905
+#: src/mainwindow.cpp:1904
 #, kde-format
 msgid "Import File"
 msgstr "匯入檔案"
 
-#: src/mainwindow.cpp:1918
+#: src/mainwindow.cpp:1917
 #, kde-format
 msgid "Import Directory"
 msgstr "匯入目錄"
 
-#: src/mainwindow.cpp:1942
+#: src/mainwindow.cpp:1941
 #, kde-format
 msgid "Exporting data..."
 msgstr "匯出資料中..."
 
-#: src/mainwindow.cpp:1966
+#: src/mainwindow.cpp:1965
 #, kde-format
 msgid "Export As"
 msgstr "匯出為"
 
-#: src/mainwindow.cpp:1994
+#: src/mainwindow.cpp:1993
 #, kde-format
 msgid "String Macros"
 msgstr "字串巨集"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "Macro"
 msgstr "巨集"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "String"
 msgstr "字串"
 
-#: src/mainwindow.cpp:2081
+#: src/mainwindow.cpp:2080
 #, kde-format
 msgid "Creating citations..."
 msgstr "建立引用中..."
 
-#: src/mainwindow.cpp:2191
+#: src/mainwindow.cpp:2187 src/mainwindow.cpp:2194
 #, kde-format
 msgid "Filters"
 msgstr "過濾器"
 
-#: src/mainwindow.cpp:2192
+#: src/mainwindow.cpp:2195
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr "<qt>過濾檢視會顯示符合特定過濾條件的項目。</qt>"
 
-#: src/mainwindow.cpp:2215
+#: src/mainwindow.cpp:2215 src/mainwindow.cpp:2222
 #, kde-format
 msgid "Loans"
 msgstr "借貸"
 
-#: src/mainwindow.cpp:2216
+#: src/mainwindow.cpp:2223
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr "<qt>借貸檢視會顯示所有您已借出的收藏項目。</qt>"
 
-#: src/mainwindow.cpp:2304
+#: src/mainwindow.cpp:2311
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6437,19 +6437,19 @@ msgstr ""
 "有些影像並未儲存在設定的位置。目前的檔案必須先儲存，影像則會被轉換到新的位"
 "置。"
 
-#: src/mainwindow.cpp:2348
+#: src/mainwindow.cpp:2355
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "從 %1 更新的項目資料"
 
-#: src/mainwindow.cpp:2367
+#: src/mainwindow.cpp:2374
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr "Tellico 此種型態一次只能匯入一個檔案。將只有 %1 會被匯出。"
 
-#: src/mainwindow.cpp:2546
+#: src/mainwindow.cpp:2553
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
 msgctxt "@title:window"

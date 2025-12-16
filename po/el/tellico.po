@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-28 00:43+0000\n"
+"POT-Creation-Date: 2025-12-16 06:51+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -184,7 +184,7 @@ msgstr "Όνομα"
 msgid "Collection Size"
 msgstr "Μέγεθος συλλογής"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1621
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1620
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Σύνολο καταχωρήσεων: %1"
@@ -2130,7 +2130,7 @@ msgid "Delete Filter"
 msgstr "Διαγραφή φίλτρου"
 
 #: src/commands/modifyentries.cpp:50 src/commands/modifyentries.cpp:70
-#: src/entryeditdialog.cpp:384
+#: src/entryeditdialog.cpp:383
 #, kde-format
 msgid "Modify Entries"
 msgstr "Τροποποίηση εισαγωγών"
@@ -2784,8 +2784,8 @@ msgstr "XSL αρχεία"
 msgid "Template Packages"
 msgstr "Πακέτα προτύπων"
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1255
-#: src/mainwindow.cpp:1426 src/reportdialog.cpp:424 src/reportdialog.cpp:439
+#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1254
+#: src/mainwindow.cpp:1425 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
@@ -2839,79 +2839,79 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:319
+#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:319
 #: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
 #: src/fetchdialog.cpp:628 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Έτοιμο"
 
-#: src/controller.cpp:359
+#: src/controller.cpp:355
 #, kde-format
 msgid "Do you really want to delete this entry?"
 msgstr "Θέλετε οπωσδήποτε να διαγράψετε αυτή την καταχώρηση;"
 
-#: src/controller.cpp:361
+#: src/controller.cpp:357
 #, kde-format
 msgid "Delete Entry"
 msgstr "Διαγραφή καταχώρησης"
 
-#: src/controller.cpp:373
+#: src/controller.cpp:369
 #, kde-format
 msgid "Do you really want to delete these entries?"
 msgstr "Θέλετε οπωσδήποτε να διαγράψετε αυτές τις καταχωρήσεις;"
 
-#: src/controller.cpp:377
+#: src/controller.cpp:373
 #, kde-format
 msgid "Delete Multiple Entries"
 msgstr "Διαγραφή πολλαπλών καταχωρήσεων"
 
-#: src/controller.cpp:526
+#: src/controller.cpp:522
 #, kde-format
 msgid "&Sort By"
 msgstr "%Ταξινόμηση κατά"
 
-#: src/controller.cpp:588 src/mainwindow.cpp:578
+#: src/controller.cpp:584 src/mainwindow.cpp:578
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "&Επεξεργασία καταχώρησης..."
 
-#: src/controller.cpp:589 src/mainwindow.cpp:585
+#: src/controller.cpp:585 src/mainwindow.cpp:585
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "Α&ντίγραφο καταχώρησης"
 
-#: src/controller.cpp:590 src/mainwindow.cpp:669
+#: src/controller.cpp:586 src/mainwindow.cpp:669
 #, kde-format
 msgid "&Update Entry"
 msgstr "&Ενημέρωση καταχώρησης"
 
-#: src/controller.cpp:591 src/mainwindow.cpp:592
+#: src/controller.cpp:587 src/mainwindow.cpp:592
 #, kde-format
 msgid "&Delete Entry"
 msgstr "&Διαγραφή καταχώρησης"
 
-#: src/controller.cpp:594
+#: src/controller.cpp:590
 #, kde-format
 msgid "&Edit Entries..."
 msgstr "&Επεξεργασία καταχωρήσεων..."
 
-#: src/controller.cpp:595
+#: src/controller.cpp:591
 #, kde-format
 msgid "D&uplicate Entries"
 msgstr "Δ&ιπλοεγγραφές καταχωρήσεων"
 
-#: src/controller.cpp:596
+#: src/controller.cpp:592
 #, kde-format
 msgid "&Update Entries"
 msgstr "&Ενημέρωση καταχωρήσεων"
 
-#: src/controller.cpp:597
+#: src/controller.cpp:593
 #, kde-format
 msgid "&Delete Entries"
 msgstr "&Διαγραφή καταχωρήσεων"
 
-#: src/controller.cpp:654
+#: src/controller.cpp:648
 #, kde-format
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
@@ -3051,13 +3051,13 @@ msgstr "Εμφάνιση όλων των στηλών"
 msgid "Hide All Columns"
 msgstr "Απόκρυψη όλων των στηλών"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1370
+#: src/document.cpp:216 src/mainwindow.cpp:1369
 #, kde-format
 msgid "Saving file..."
 msgstr "Αποθήκευση αρχείου..."
 
-#: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:405
-#: src/entryeditdialog.cpp:427 src/entryeditdialog.cpp:522
+#: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:404
+#: src/entryeditdialog.cpp:426 src/entryeditdialog.cpp:521
 #, kde-format
 msgid "Edit Entry"
 msgstr "Επεξεργασία εισαγωγής"
@@ -3067,38 +3067,38 @@ msgstr "Επεξεργασία εισαγωγής"
 msgid "&New Entry"
 msgstr "&Δημιουργία εισαγωγής"
 
-#: src/entryeditdialog.cpp:91 src/entryeditdialog.cpp:132
-#: src/entryeditdialog.cpp:437 src/entryeditdialog.cpp:543
+#: src/entryeditdialog.cpp:91 src/entryeditdialog.cpp:131
+#: src/entryeditdialog.cpp:436 src/entryeditdialog.cpp:542
 #, kde-format
 msgid "Sa&ve Entry"
 msgstr "Α&ποθήκευση εισαγωγής"
 
-#: src/entryeditdialog.cpp:335
+#: src/entryeditdialog.cpp:334
 #, kde-format
 msgid "Do you really want to modify these entries?"
 msgstr "Θέλετε πραγματικά να τροποποιήσετε αυτές τις εισαγωγές;"
 
-#: src/entryeditdialog.cpp:337
+#: src/entryeditdialog.cpp:336
 #, kde-format
 msgid "Modify Multiple Entries"
 msgstr "Τροποποίηση πολλαπλών εισαγωγών"
 
-#: src/entryeditdialog.cpp:378
+#: src/entryeditdialog.cpp:377
 #, kde-format
 msgid "A value is required for the following fields. Do you want to continue?"
 msgstr "Απαιτείται μια τιμή στα ακόλουθα πεδία. Θέλετε να συνεχίσετε;"
 
-#: src/entryeditdialog.cpp:473
+#: src/entryeditdialog.cpp:472
 #, kde-format
 msgid "Edit Entries"
 msgstr "Τροποποίηση εισαγωγών"
 
-#: src/entryeditdialog.cpp:499
+#: src/entryeditdialog.cpp:498
 #, kde-format
 msgid "Sa&ve Entries"
 msgstr "Α&ποθήκευση εισαγωγών"
 
-#: src/entryeditdialog.cpp:658
+#: src/entryeditdialog.cpp:657
 #, kde-format
 msgid ""
 "The current entry has been modified.\n"
@@ -3107,12 +3107,12 @@ msgstr ""
 "Η παρούσα εισαγωγή έχει τροποποιηθεί.\n"
 "Θέλετε να εισάγετε τις αλλαγές;"
 
-#: src/entryeditdialog.cpp:661
+#: src/entryeditdialog.cpp:660
 #, kde-format
 msgid "Save Entry"
 msgstr "Αποθήκευση εισαγωγών"
 
-#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1159
+#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1159
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Μη αποθηκευμένες αλλαγές"
@@ -3195,7 +3195,7 @@ msgstr ""
 "Το Tellico δεν μπορεί να εντοπίσει το προκαθορισμένο στυλ φύλλου για τις "
 "καταχωρήσεις."
 
-#: src/entryview.cpp:292 src/mainwindow.cpp:1777
+#: src/entryview.cpp:292 src/mainwindow.cpp:1776
 #, kde-format
 msgid "Please check your installation."
 msgstr "Παρακαλώ ελέγξτε την εγκατάστασή σας."
@@ -4922,8 +4922,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Ομάδα"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1086 src/mainwindow.cpp:1709
-#: src/mainwindow.cpp:1746 src/translators/htmlexporter.cpp:387
+#: src/groupview.cpp:425 src/mainwindow.cpp:1086 src/mainwindow.cpp:1708
+#: src/mainwindow.cpp:1745 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "Άτομα"
@@ -5233,14 +5233,14 @@ msgstr ""
 msgid "&Import"
 msgstr "Ει&σαγωγή"
 
-#: src/importdialog.cpp:381 src/mainwindow.cpp:1251 src/mainwindow.cpp:1424
+#: src/importdialog.cpp:381 src/mainwindow.cpp:1250 src/mainwindow.cpp:1423
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Αρχεία Tellico"
 
 #: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
-#: src/mainwindow.cpp:1253 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1252 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML αρχεία"
@@ -6432,23 +6432,23 @@ msgstr ""
 "Το τρέχον αρχείο έχει τροποποιηθεί.\n"
 "Θέλετε να το αποθηκεύσετε;"
 
-#: src/mainwindow.cpp:1193 src/mainwindow.cpp:1227
+#: src/mainwindow.cpp:1193 src/mainwindow.cpp:1226
 #, fuzzy, kde-format
 #| msgid "Create a new collection"
 msgid "Creating new collection..."
 msgstr "Δημιουργία μιας νέας συλλογής"
 
-#: src/mainwindow.cpp:1248 src/mainwindow.cpp:1271 src/mainwindow.cpp:1289
+#: src/mainwindow.cpp:1247 src/mainwindow.cpp:1270 src/mainwindow.cpp:1288
 #, kde-format
 msgid "Opening file..."
 msgstr "Άνοιγμα αρχείου..."
 
-#: src/mainwindow.cpp:1259
+#: src/mainwindow.cpp:1258
 #, kde-format
 msgid "Open File"
 msgstr "Άνοιγμα αρχείου"
 
-#: src/mainwindow.cpp:1381
+#: src/mainwindow.cpp:1380
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6462,32 +6462,32 @@ msgstr ""
 "λειτουργία του; </p><p>Η επιλογή σας μπορεί να αλλάξει από το παράθυρο "
 "διαμόρφωσης.</p></qt>"
 
-#: src/mainwindow.cpp:1386
+#: src/mainwindow.cpp:1385
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Ξεχωριστή αποθήκευση εικόνων"
 
-#: src/mainwindow.cpp:1387
+#: src/mainwindow.cpp:1386
 #, kde-format
 msgid "Save Images in File"
 msgstr "Αποθήκευση εικόνων σε αρχείο"
 
-#: src/mainwindow.cpp:1422
+#: src/mainwindow.cpp:1421
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Αποθήκευση αρχείου με ένα νέο όνομα..."
 
-#: src/mainwindow.cpp:1431
+#: src/mainwindow.cpp:1430
 #, kde-format
 msgid "Save As"
 msgstr "Αποθήκευση ως"
 
-#: src/mainwindow.cpp:1497
+#: src/mainwindow.cpp:1496
 #, kde-format
 msgid "Printing..."
 msgstr "Εκτύπωση..."
 
-#: src/mainwindow.cpp:1501
+#: src/mainwindow.cpp:1500
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6497,27 +6497,27 @@ msgstr ""
 "υποσύνολο των καταχωρήσεων. Μόνον οι εμφανιζόμενες καταχωρήσεις θα "
 "εκτυπωθούν. Θέλετε να συνεχίσετε;"
 
-#: src/mainwindow.cpp:1526
+#: src/mainwindow.cpp:1525
 #, kde-format
 msgid "Exiting..."
 msgstr "Έξοδος..."
 
-#: src/mainwindow.cpp:1628
+#: src/mainwindow.cpp:1627
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 φιλτραρίστηκαν; %2 επιλέχθηκαν)"
 
-#: src/mainwindow.cpp:1631
+#: src/mainwindow.cpp:1630
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 φιλτραρίστηκαν)"
 
-#: src/mainwindow.cpp:1634
+#: src/mainwindow.cpp:1633
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 Επιλεγμένο Παιχνίδι)"
 
-#: src/mainwindow.cpp:1776 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1775 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6525,57 +6525,57 @@ msgstr "(%1 Επιλεγμένο Παιχνίδι)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Το Tellico εντόπισε ένα σφάλμα στη διαδικασία XSLT."
 
-#: src/mainwindow.cpp:1894
+#: src/mainwindow.cpp:1893
 #, kde-format
 msgid "Importing data..."
 msgstr "Εισαγωγή δεδομένων..."
 
-#: src/mainwindow.cpp:1905
+#: src/mainwindow.cpp:1904
 #, kde-format
 msgid "Import File"
 msgstr "Εισαγωγή αρχείου"
 
-#: src/mainwindow.cpp:1918
+#: src/mainwindow.cpp:1917
 #, kde-format
 msgid "Import Directory"
 msgstr "Εισαγωγή φακέλου"
 
-#: src/mainwindow.cpp:1942
+#: src/mainwindow.cpp:1941
 #, kde-format
 msgid "Exporting data..."
 msgstr "Εξαγωγή δεδομένων..."
 
-#: src/mainwindow.cpp:1966
+#: src/mainwindow.cpp:1965
 #, kde-format
 msgid "Export As"
 msgstr "Εξαγωγή ως"
 
-#: src/mainwindow.cpp:1994
+#: src/mainwindow.cpp:1993
 #, kde-format
 msgid "String Macros"
 msgstr "Αλφαριθμητικό μακροεντολής"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "Macro"
 msgstr "Μακροεντολή"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "String"
 msgstr "Συμβολοσειρά"
 
-#: src/mainwindow.cpp:2081
+#: src/mainwindow.cpp:2080
 #, kde-format
 msgid "Creating citations..."
 msgstr "Δημιουργία παραπομπών..."
 
-#: src/mainwindow.cpp:2191
+#: src/mainwindow.cpp:2187 src/mainwindow.cpp:2194
 #, kde-format
 msgid "Filters"
 msgstr "Φίλτρα"
 
-#: src/mainwindow.cpp:2192
+#: src/mainwindow.cpp:2195
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6584,12 +6584,12 @@ msgstr ""
 "<qt>Η <i>Προβολή φίλτρου</i> εμφανίζει τις καταχωρήσεις που ικανοποιούν "
 "συγκεκριμένους κανόνες αναζήτησης.</qt>"
 
-#: src/mainwindow.cpp:2215
+#: src/mainwindow.cpp:2215 src/mainwindow.cpp:2222
 #, kde-format
 msgid "Loans"
 msgstr "Δανεισμοί"
 
-#: src/mainwindow.cpp:2216
+#: src/mainwindow.cpp:2223
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6598,7 +6598,7 @@ msgstr ""
 "<qt>Η <i>Προβολή δανεισμού</i> εμφανίζει μια λίστα όλων των ατόμων, οι "
 "οποίοι έχουν δανειστεί αντικείμενα από τις συλλογές σας.</qt>"
 
-#: src/mainwindow.cpp:2304
+#: src/mainwindow.cpp:2311
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6608,12 +6608,12 @@ msgstr ""
 "αρχείο πρέπει να αποθηκευτεί και οι εικόνες θα πρέπει να μεταφερθούν σε μια "
 "νέα τοποθεσία."
 
-#: src/mainwindow.cpp:2348
+#: src/mainwindow.cpp:2355
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Ενημέρωση δεδομένων καταχωρήσεων από %1"
 
-#: src/mainwindow.cpp:2367
+#: src/mainwindow.cpp:2374
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6622,7 +6622,7 @@ msgstr ""
 "Το Tellico μπορεί να κάνει εισαγωγή ενός μόνο αρχείου τη φορά. Μόνο %1 "
 "μπορεί να εισαχθεί."
 
-#: src/mainwindow.cpp:2546
+#: src/mainwindow.cpp:2553
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"

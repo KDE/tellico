@@ -1,6 +1,6 @@
 <chapter id="importing-exporting">
 <title
->Importar e Exportar Dados</title>
+>Importar e exportar dados</title>
 
 <para
 >O &appname; é capaz de importar e exportar uma grande variedade de arquivos de dados, assim como pesquisar em vários serviços da Internet para obter informações. </para>
@@ -107,10 +107,18 @@
 >Importação de dados a partir de outro software</title>
 
 <para
->O &appname; consegue importar dados diretamente de uma variedade de outros programas de gerenciamento de coleções, como <application
-><ulink url="http://www.gcstar.org"
+>O &appname; pode importar dados diretamente de diversos outros programas de gerenciamento de coleções, incluindo <application
+><ulink url="https://gitlab.com/GCstar/GCstar"
 >GCstar</ulink
 ></application
+>, <application
+><ulink url="https://onmyshelf.app"
+>OnMyShelf</ulink
+></application
+>, <application
+><ulink url="https://www.datacrow.net/"
+>Data Crow</ulink
+> </application
 >, <application
 ><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
 >Alexandria</ulink
@@ -120,12 +128,16 @@
 >Delicious Library</ulink
 ></application
 >, <application
+><ulink url="https://www.collectorz. com"
+>Collectorz</ulink
+></application
+>, <application
 ><ulink url="http://www.antp.be/software/moviecatalog/"
->Ant Movie Catalog</ulink
+>Catálogo Ant Movie</ulink
 ></application
 >, <application
 ><ulink url="https://en.wikipedia.org/wiki/Referencer"
->Referencer</ulink
+>Referenciador</ulink
 ></application
 > e <application
 ><ulink url="https://launchpad.net/griffith"
@@ -201,7 +213,7 @@
 >Importar Dados de &CD;'s de Áudio</title>
 
 <para
->O &appname; é capaz de usar o serviço do <ulink url="http://freedb.org"
+>O &appname; é capaz de usar o serviço do <ulink url="http://gnudb.org"
 >freedb.org</ulink
 > para consultar informações sobre um &CD;, incluindo a lista de faixas. Dependendo da sua distribuição, a configuração do acesso ao serviço poderá ser definida nas &systemsettings; do &kde;. O artista do &CD;, o título, o gênero, o ano e a lista das faixas são todos adicionados. </para>
 
@@ -330,6 +342,27 @@
 >Goodreads</ulink
 > é uma rede social online de leitores para procurar por coleções de livros. O &appname; pode importar a lista de livros em uma coleção de usuário, fornecendo-se o nome do usuário ou sua ID, caso a coleção esteja configurada como pública. </para>
 </sect3>
+
+<sect3 id="importing-librarything">
+<title
+>Importar coleção do LibraryThing</title>
+<para
+>O <ulink url="https://www.librarything.com"
+>LibraryThing</ulink
+> é um serviço online para ajudar as pessoas a catalogarem seus livros facilmente. O &appname; pode importar a lista de livros em uma coleção do usuário, <ulink url="https://www.librarything.com/export.php?export_type=json"
+>exportada no formato JSON</ulink
+>. </para>
+</sect3>
+
+<sect3 id="importing-discogs">
+<title
+>Importar coleção do Discogs</title>
+<para
+>O <ulink url="https://www.discogs.com"
+>Discogs</ulink
+> é um banco de dados online e um mercado de lançamentos musicais. O &appname; pode importar a lista de lançamentos musicais da coleção de um usuário, dado o nome do usuário, desde que a coleção esteja configurada para ser acessível publicamente. </para>
+</sect3>
+
 </sect2>
 
 <sect2 id="importing-file-listing">
@@ -337,11 +370,17 @@
 >Importar Listagens de Arquivos</title>
 
 <para
->A melhor forma de criar um <link linkend="file-catalog"
->Catálogo de arquivos</link
-> é importar o conteúdo de uma pasta. A mesma pasta poderá ser percorrida de forma recursiva, para adicionar todos os arquivos encontrados dentro dela. Esta importação é mais útil para as listagens de cópias de segurança e para o catálogo de conteúdos, como as listagens de &CD;s ou <acronym
+>O &tellico; pode analisar pastas para importar informações de arquivos, principalmente para criar uma coleção de <link linkend="file-catalog"
+>Catálogo de Arquivos</link
+>. A pasta pode ser pesquisada recursivamente para adicionar todos os arquivos encontrados nela. Este importador é muito útil para listas de backups e catalogação de mídias, como listas de &CD;s ou <acronym
 >DVD</acronym
->s. Além disso, as previsões das imagens do conteúdo do arquivo poderão ser geradas, ainda que isso leve algum tempo para ler uma grande quantidade de arquivos. As previsões dos arquivos são as mesmas que aparecem no gerenciador de arquivos do &kde;. </para>
+>s. Além disso, pré-visualizações de imagens do conteúdo do arquivo podem ser geradas. As pré-visualizações de arquivos são as mesmas exibidas no gerenciador de arquivos do &kde;. </para>
+
+<para
+>Pastas com arquivos de e-books e arquivos de vídeo também podem ser importadas como coleções de livros e vídeos. Os metadados dos arquivos podem ser lidos e, para arquivos de vídeo, quaisquer arquivos <literal role="extension"
+>nfo</literal
+> existentes são usados ​​para completar as informações de entrada do vídeo. </para>
+
 </sect2>
 
 <sect2 id="importing-xslt">
@@ -361,7 +400,7 @@
 <para
 >O arrastamento de arquivos de dados para a janela principal do &appname; e a posterior soltura dos mesmos irá importá-los, como se fosse invocado o <link linkend="importing"
 >comando de importação</link
-> a partir dos menu. O processo de 'arrastar e soltar' funciona para os seguintes formatos de arquivos: Tellico, Bibtex, RIS e &PDF;. A importação de vários arquivos de uma vez também é suportada.</para>
+> a partir dos menu. O processo de 'arrastar e soltar' funciona para os seguintes formatos de arquivos: Tellico, Bibtex, RIS, &PDF; e EPub. A importação de vários arquivos de uma vez também é suportada.</para>
 
 <para
 >Por isso, por exemplo, se quiser catalogar diversos <link linkend="importing-pdf"
@@ -477,7 +516,7 @@
 
 <para
 ><application
-><ulink url="http://alexandria.rubyforge.net"
+><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
 >Alexandria</ulink
 ></application
 > é um gerenciador de coleção de livros alternativo para o ambiente de trabalho <ulink url="http://www.gnome.org"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-28 00:43+0000\n"
+"POT-Creation-Date: 2025-12-16 06:51+0000\n"
 "PO-Revision-Date: 2025-09-04 14:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -183,7 +183,7 @@ msgstr "Ad"
 msgid "Collection Size"
 msgstr "Koleksiyon Büyüklüğü"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1621
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1620
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Toplam girdi: %1"
@@ -2107,7 +2107,7 @@ msgid "Delete Filter"
 msgstr "Süzgeci Sil"
 
 #: src/commands/modifyentries.cpp:50 src/commands/modifyentries.cpp:70
-#: src/entryeditdialog.cpp:384
+#: src/entryeditdialog.cpp:383
 #, kde-format
 msgid "Modify Entries"
 msgstr "Girdileri Değiştir"
@@ -2745,8 +2745,8 @@ msgstr "XSL Dosyaları"
 msgid "Template Packages"
 msgstr "Şablon Paketleri"
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1255
-#: src/mainwindow.cpp:1426 src/reportdialog.cpp:424 src/reportdialog.cpp:439
+#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1254
+#: src/mainwindow.cpp:1425 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
@@ -2800,79 +2800,79 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Görseller <em>%1</em> konumundan <em>%2</em> konumuna taşınacaklar."
 
-#: src/controller.cpp:139 src/controller.cpp:193 src/fetchdialog.cpp:319
+#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:319
 #: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
 #: src/fetchdialog.cpp:628 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Hazır."
 
-#: src/controller.cpp:359
+#: src/controller.cpp:355
 #, kde-format
 msgid "Do you really want to delete this entry?"
 msgstr "Bu girdiyi gerçekten silmek istiyor musunuz?"
 
-#: src/controller.cpp:361
+#: src/controller.cpp:357
 #, kde-format
 msgid "Delete Entry"
 msgstr "Girdiyi Sil"
 
-#: src/controller.cpp:373
+#: src/controller.cpp:369
 #, kde-format
 msgid "Do you really want to delete these entries?"
 msgstr "Bu girdileri gerçekten silmek istiyor musunuz?"
 
-#: src/controller.cpp:377
+#: src/controller.cpp:373
 #, kde-format
 msgid "Delete Multiple Entries"
 msgstr "Çoklu Girdileri Sil"
 
-#: src/controller.cpp:526
+#: src/controller.cpp:522
 #, kde-format
 msgid "&Sort By"
 msgstr "&Sırala"
 
-#: src/controller.cpp:588 src/mainwindow.cpp:578
+#: src/controller.cpp:584 src/mainwindow.cpp:578
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "Girdiyi Düz&enle…"
 
-#: src/controller.cpp:589 src/mainwindow.cpp:585
+#: src/controller.cpp:585 src/mainwindow.cpp:585
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "&Girdiyi Çoğalt"
 
-#: src/controller.cpp:590 src/mainwindow.cpp:669
+#: src/controller.cpp:586 src/mainwindow.cpp:669
 #, kde-format
 msgid "&Update Entry"
 msgstr "Girdiyi G&üncelle"
 
-#: src/controller.cpp:591 src/mainwindow.cpp:592
+#: src/controller.cpp:587 src/mainwindow.cpp:592
 #, kde-format
 msgid "&Delete Entry"
 msgstr "Gir&diyi Sil"
 
-#: src/controller.cpp:594
+#: src/controller.cpp:590
 #, kde-format
 msgid "&Edit Entries..."
 msgstr "Girdileri Dü&zenle…"
 
-#: src/controller.cpp:595
+#: src/controller.cpp:591
 #, kde-format
 msgid "D&uplicate Entries"
 msgstr "Girdileri Ço&ğalt"
 
-#: src/controller.cpp:596
+#: src/controller.cpp:592
 #, kde-format
 msgid "&Update Entries"
 msgstr "Girdileri G&üncelle"
 
-#: src/controller.cpp:597
+#: src/controller.cpp:593
 #, kde-format
 msgid "&Delete Entries"
 msgstr "Gir&dileri Sil"
 
-#: src/controller.cpp:654
+#: src/controller.cpp:648
 #, kde-format
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
@@ -3014,13 +3014,13 @@ msgstr "Tüm Sütunları Göster"
 msgid "Hide All Columns"
 msgstr "Tüm Sütunları Gizle"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1370
+#: src/document.cpp:216 src/mainwindow.cpp:1369
 #, kde-format
 msgid "Saving file..."
 msgstr "Dosya kaydediliyor…"
 
-#: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:405
-#: src/entryeditdialog.cpp:427 src/entryeditdialog.cpp:522
+#: src/entryeditdialog.cpp:71 src/entryeditdialog.cpp:404
+#: src/entryeditdialog.cpp:426 src/entryeditdialog.cpp:521
 #, kde-format
 msgid "Edit Entry"
 msgstr "Girdiyi Düzenle"
@@ -3030,38 +3030,38 @@ msgstr "Girdiyi Düzenle"
 msgid "&New Entry"
 msgstr "Ye&ni Girdi"
 
-#: src/entryeditdialog.cpp:91 src/entryeditdialog.cpp:132
-#: src/entryeditdialog.cpp:437 src/entryeditdialog.cpp:543
+#: src/entryeditdialog.cpp:91 src/entryeditdialog.cpp:131
+#: src/entryeditdialog.cpp:436 src/entryeditdialog.cpp:542
 #, kde-format
 msgid "Sa&ve Entry"
 msgstr "G&irdiyi Kaydet"
 
-#: src/entryeditdialog.cpp:335
+#: src/entryeditdialog.cpp:334
 #, kde-format
 msgid "Do you really want to modify these entries?"
 msgstr "Bu girdileri gerçekten değiştirmek istiyor musunuz?"
 
-#: src/entryeditdialog.cpp:337
+#: src/entryeditdialog.cpp:336
 #, kde-format
 msgid "Modify Multiple Entries"
 msgstr "Çoklu Girdileri Değiştir"
 
-#: src/entryeditdialog.cpp:378
+#: src/entryeditdialog.cpp:377
 #, kde-format
 msgid "A value is required for the following fields. Do you want to continue?"
 msgstr "Aşağıdaki alanlar için bir değer gerekli. Devam etmek istiyor musunuz?"
 
-#: src/entryeditdialog.cpp:473
+#: src/entryeditdialog.cpp:472
 #, kde-format
 msgid "Edit Entries"
 msgstr "Girdileri Düzenle"
 
-#: src/entryeditdialog.cpp:499
+#: src/entryeditdialog.cpp:498
 #, kde-format
 msgid "Sa&ve Entries"
 msgstr "G&irdileri Kaydet"
 
-#: src/entryeditdialog.cpp:658
+#: src/entryeditdialog.cpp:657
 #, kde-format
 msgid ""
 "The current entry has been modified.\n"
@@ -3070,12 +3070,12 @@ msgstr ""
 "Geçerli girdi değiştirildi.\n"
 "Değişiklikleri girmek istiyor musunuz?"
 
-#: src/entryeditdialog.cpp:661
+#: src/entryeditdialog.cpp:660
 #, kde-format
 msgid "Save Entry"
 msgstr "Girdiyi Kaydet"
 
-#: src/entryeditdialog.cpp:662 src/mainwindow.cpp:1159
+#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1159
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Kaydedilmemiş Değişiklikler"
@@ -3153,7 +3153,7 @@ msgstr "<i>%2</i> konumundan <b>%1</b> güncelleniyor…"
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico, öntanımlı girdi biçemini konumlandıramıyor."
 
-#: src/entryview.cpp:292 src/mainwindow.cpp:1777
+#: src/entryview.cpp:292 src/mainwindow.cpp:1776
 #, kde-format
 msgid "Please check your installation."
 msgstr "Lütfen kurulumunuzu denetleyin."
@@ -4828,8 +4828,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Grup"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1086 src/mainwindow.cpp:1709
-#: src/mainwindow.cpp:1746 src/translators/htmlexporter.cpp:387
+#: src/groupview.cpp:425 src/mainwindow.cpp:1086 src/mainwindow.cpp:1708
+#: src/mainwindow.cpp:1745 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "Herkes"
@@ -5132,14 +5132,14 @@ msgstr ""
 msgid "&Import"
 msgstr "&İçe Aktar"
 
-#: src/importdialog.cpp:381 src/mainwindow.cpp:1251 src/mainwindow.cpp:1424
+#: src/importdialog.cpp:381 src/mainwindow.cpp:1250 src/mainwindow.cpp:1423
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico Dosyaları"
 
 #: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
-#: src/mainwindow.cpp:1253 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1252 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML Dosyaları"
@@ -6314,22 +6314,22 @@ msgstr ""
 "Geçerli dosya değiştirildi.\n"
 "Kaydetmek istiyor musunuz?"
 
-#: src/mainwindow.cpp:1193 src/mainwindow.cpp:1227
+#: src/mainwindow.cpp:1193 src/mainwindow.cpp:1226
 #, kde-format
 msgid "Creating new collection..."
 msgstr "Yeni koleksiyon oluşturuluyor…"
 
-#: src/mainwindow.cpp:1248 src/mainwindow.cpp:1271 src/mainwindow.cpp:1289
+#: src/mainwindow.cpp:1247 src/mainwindow.cpp:1270 src/mainwindow.cpp:1288
 #, kde-format
 msgid "Opening file..."
 msgstr "Dosya açılıyor…"
 
-#: src/mainwindow.cpp:1259
+#: src/mainwindow.cpp:1258
 #, kde-format
 msgid "Open File"
 msgstr "Dosya Aç"
 
-#: src/mainwindow.cpp:1381
+#: src/mainwindow.cpp:1380
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6342,32 +6342,32 @@ msgstr ""
 "dizinine ayrı ayrı kaydetmek ister misiniz?</p><p>Seçiminiz yapılandırma "
 "iletişim kutusunda her zaman değiştirilebilir.</p></qt>"
 
-#: src/mainwindow.cpp:1386
+#: src/mainwindow.cpp:1385
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Görselleri Ayrı Ayrı Kaydet"
 
-#: src/mainwindow.cpp:1387
+#: src/mainwindow.cpp:1386
 #, kde-format
 msgid "Save Images in File"
 msgstr "Görselleri Dosyaya Kaydet"
 
-#: src/mainwindow.cpp:1422
+#: src/mainwindow.cpp:1421
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Dosya yeni bir adla kaydediliyor…"
 
-#: src/mainwindow.cpp:1431
+#: src/mainwindow.cpp:1430
 #, kde-format
 msgid "Save As"
 msgstr "Farklı Kaydet"
 
-#: src/mainwindow.cpp:1497
+#: src/mainwindow.cpp:1496
 #, kde-format
 msgid "Printing..."
 msgstr "Yazdırılıyor…"
 
-#: src/mainwindow.cpp:1501
+#: src/mainwindow.cpp:1500
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6376,27 +6376,27 @@ msgstr ""
 "Koleksiyon, girdilerin sınırlı alt kümelerini göstermek üzere süzülmüştür. "
 "Yalnızca görülebilir girdiler yazdırılmıştır. Sürdürülsün mü?"
 
-#: src/mainwindow.cpp:1526
+#: src/mainwindow.cpp:1525
 #, kde-format
 msgid "Exiting..."
 msgstr "Çıkılıyor…"
 
-#: src/mainwindow.cpp:1628
+#: src/mainwindow.cpp:1627
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 süzülmüş; %2 seçili)"
 
-#: src/mainwindow.cpp:1631
+#: src/mainwindow.cpp:1630
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 süzülmüş)"
 
-#: src/mainwindow.cpp:1634
+#: src/mainwindow.cpp:1633
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 seçili)"
 
-#: src/mainwindow.cpp:1776 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1775 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6404,57 +6404,57 @@ msgstr "(%1 seçili)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico, XSLT işlemede bir hataya rastladı."
 
-#: src/mainwindow.cpp:1894
+#: src/mainwindow.cpp:1893
 #, kde-format
 msgid "Importing data..."
 msgstr "Veri içe aktarılıyor…"
 
-#: src/mainwindow.cpp:1905
+#: src/mainwindow.cpp:1904
 #, kde-format
 msgid "Import File"
 msgstr "Dosya İçe Aktar"
 
-#: src/mainwindow.cpp:1918
+#: src/mainwindow.cpp:1917
 #, kde-format
 msgid "Import Directory"
 msgstr "Dizin İçe Aktar"
 
-#: src/mainwindow.cpp:1942
+#: src/mainwindow.cpp:1941
 #, kde-format
 msgid "Exporting data..."
 msgstr "Veri dışa aktarılıyor…"
 
-#: src/mainwindow.cpp:1966
+#: src/mainwindow.cpp:1965
 #, kde-format
 msgid "Export As"
 msgstr "Farklı Dışa Aktar"
 
-#: src/mainwindow.cpp:1994
+#: src/mainwindow.cpp:1993
 #, kde-format
 msgid "String Macros"
 msgstr "Dizi Makroları"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "String"
 msgstr "Dizi"
 
-#: src/mainwindow.cpp:2081
+#: src/mainwindow.cpp:2080
 #, kde-format
 msgid "Creating citations..."
 msgstr "Atıflar oluşturuluyor…"
 
-#: src/mainwindow.cpp:2191
+#: src/mainwindow.cpp:2187 src/mainwindow.cpp:2194
 #, kde-format
 msgid "Filters"
 msgstr "Süzgeçler"
 
-#: src/mainwindow.cpp:2192
+#: src/mainwindow.cpp:2195
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6463,12 +6463,12 @@ msgstr ""
 "<qt><i>Süzgeç Görünümü</i>, girdilerin belirli süzgeç kurallarına uğramış "
 "haliyle gösterilmesidir.</qt>"
 
-#: src/mainwindow.cpp:2215
+#: src/mainwindow.cpp:2215 src/mainwindow.cpp:2222
 #, kde-format
 msgid "Loans"
 msgstr "Ödünç Vermeler"
 
-#: src/mainwindow.cpp:2216
+#: src/mainwindow.cpp:2223
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6477,7 +6477,7 @@ msgstr ""
 "<qt><i>Ödünç Verme Görünümü</i>, koleksiyonunuzdan ögeler alan kişilerin bir "
 "listesini gösterir.</qt>"
 
-#: src/mainwindow.cpp:2304
+#: src/mainwindow.cpp:2311
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6486,12 +6486,12 @@ msgstr ""
 "Bazı görüntüler yapılandırılan konuma kaydedilmez. Geçerli dosya "
 "kaydedilmelidir; görseller yeni konuma aktarılacaktır."
 
-#: src/mainwindow.cpp:2348
+#: src/mainwindow.cpp:2355
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Girdi verisini %1 konumundan güncelle"
 
-#: src/mainwindow.cpp:2367
+#: src/mainwindow.cpp:2374
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6500,7 +6500,7 @@ msgstr ""
 "Tellico aynı anda bu türden yalnızca bir dosya içe aktarabilir. Yalnızca %1 "
 "içe aktarılacak."
 
-#: src/mainwindow.cpp:2546
+#: src/mainwindow.cpp:2553
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
