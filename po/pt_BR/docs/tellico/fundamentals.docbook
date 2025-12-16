@@ -196,7 +196,9 @@
 >Se forem salvos alguns filtros para a coleção, a <interface
 >Área de Filtros</interface
 > fica ativa. À medida que for adicionando ou modificando os elementos, eles serão validados automaticamente pelos filtros e adicionados ou removidos, conforme o resultado. Você poderá modificar o filtro se fizer duplo-clique no item para abrir a <link linkend="filter-dialog"
+><interface
 >Janela avançada de filtros</interface
+></link
 >. Se clicar com o botão direito, poderá apagá-los em conjunto. </para>
 
 <screenshot>

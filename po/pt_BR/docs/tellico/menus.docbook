@@ -37,10 +37,10 @@ or menu bars.
 <listitem>
 <para
 >Este comando <action
->cria uma coleção nova</action
+>cria uma nova coleção</action
 >. O &tellico; suporta <link linkend="collection-types"
->12 tipos de coleções padrão</link
->, em conjunto com uma coleção personalizada vazia definida pelo usuário.</para>
+>12 tipos de coleção padrão</link
+>, além de uma coleção personalizada vazia definida pelo usuário. Quaisquer modelos de coleção personalizados salvos também estarão disponíveis.</para>
 </listitem>
 </varlistentry>
 
@@ -143,6 +143,26 @@ or menu bars.
 <varlistentry>
 <term>
  <menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Salvar como modelo...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+  <para
+>Este comando <action
+>salva a coleção como um novo modelo</action
+>. Somente os campos são salvos, e o tipo de coleção personalizado pode ser criado através do comando <guimenuitem
+>Nova Coleção</guimenuitem
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
 ><shortcut
 > <keycombo
 >&Ctrl;<keycap
@@ -162,6 +182,24 @@ or menu bars.
 >imprime a coleção</action
 >. As opções de impressão poderão ser definidas na <interface
 >Janela de Configuração</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Visualizar impressão</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>exibe uma pré-visualização da coleção impressa</action
 >.</para>
 </listitem>
 </varlistentry>
@@ -838,7 +876,7 @@ or menu bars.
 </sect2>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
-<sect2>
+<sect2 id="settings-help-menu">
 <title
 >Menus Configurações e Ajuda</title>
 
@@ -905,6 +943,60 @@ or menu bars.
 >altera o campo usado para agrupar os itens</action
 > na coleção.</para>
 </listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configurações</guimenu
+> <guimenuitem
+>Bloquear layout</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>bloqueia o layout</action
+> de forma que as várias visualizações de coleção não possam ser movidas. Desbloquear o layout permite que o usuário reorganize-as.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Configurações</guimenu
+> <guimenuitem
+>Redefinir layout</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Este comando <action
+>redefine o layout</action
+> para a visualização padrão, o que pode ser útil se as várias visualizações ficarem ocultas ou recolhidas.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+  <term>
+    <menuchoice
+><guimenu
+>Ajuda</guimenu
+> <guimenuitem
+>Mostrar registro</guimenuitem
+> </menuchoice>
+  </term>
+
+  <listitem>
+    <para
+>Quando a opção <userinput
+>tellico --log</userinput
+> é usada, este comando exibe o log de diagnóstico.</para>
+  </listitem>
 </varlistentry>
 
 </variablelist>
