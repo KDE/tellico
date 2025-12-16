@@ -82,7 +82,9 @@
 ><interface
 >Exibição em coluna</interface
 ></link
-> mostre apenas os elementos correspondentes ao filtro. A barra de estado mostra quantos elementos existem na coleção, bem como os que estão sendo filtrados no momento. </para>
+> mostre apenas os elementos correspondentes ao filtro. Filtragens mais complexas podem usar nomes de campos diretamente, como como <emphasis
+>author=stephenson</emphasis
+>. A barra de estado mostra quantos elementos existem na coleção, bem como os que estão sendo filtrados no momento. </para>
 
 </sect1>
 
@@ -193,8 +195,8 @@
 <para
 >Se forem salvos alguns filtros para a coleção, a <interface
 >Área de Filtros</interface
-> fica ativa. À medida que for adicionando ou modificando os elementos, eles serão validados automaticamente pelos filtros e adicionados ou removidos, conforme o resultado. Você poderá modificar o filtro se fizer duplo-clique no item para abrir a <interface
->Janela de Filtros</interface
+> fica ativa. À medida que for adicionando ou modificando os elementos, eles serão validados automaticamente pelos filtros e adicionados ou removidos, conforme o resultado. Você poderá modificar o filtro se fizer duplo-clique no item para abrir a <link linkend="filter-dialog"
+>Janela avançada de filtros</interface
 >. Se clicar com o botão direito, poderá apagá-los em conjunto. </para>
 
 <screenshot>
@@ -832,7 +834,7 @@
 <para
 >Cada linha contém uma regra única de filtragem. Selecione o campo correspondente na primeira opção da linha, e selecione depois uma regra correspondente ao centro. As regras poderão corresponder a determinados valores ou que sejam exatamente iguais. Você poderá também usar uma expressão regular para fazer a correspondência dos itens; nesse caso, o botão <guibutton
 >Editar...</guibutton
-> fica ativo para editar a expressão, se o &kregexpeditor; estiver instalado no seu computador. Finalmente, a palavra ou texto correspondente deverão ser inseridos no campo de texto. </para>
+> fica ativo para editar a expressão, se o &kregexpeditor; estiver instalado no seu computador. Finalmente, a palavra ou texto correspondente deverão ser inseridos no campo de texto. Para campos de imagem, o tamanho da imagem pode ser usado para filtragem, onde o valor do filtro é comparado com a maior dimensão da imagem, seja largura ou altura. </para>
 
 <para
 >Você poderá usar até oito (8) regras no filtro. Poderá usar os botões <guibutton
@@ -975,9 +977,6 @@
 <title
 >Dicas gerais</title>
 
-<para
->Este é o conjunto de dicas contido na lista "Dica do Dia" para o &appname;. </para>
-
 <tip>
 <para
 >Se um livro possui vários autores, você deve separar os nomes deles com um ponto e vírgula. O Tellico saberá separá-los e utilizar de forma independente. Qualquer outro campo que permita múltiplos valores deverá ter a mesma estrutura, com um ponto e vírgula (;) separando cada valor. </para>
@@ -993,22 +992,6 @@
 >Você pode adicionar, editar, ou modificar os campos da coleção, usando a <interface
 >Janela de Campos da Coleção</interface
 >. Os botões com uma seta sob a lista dos campos permitem modificar a posição do campo na lista, o que irá afetar a sua posição no editor do item. </para>
-</tip>
-
-<tip>
-<para
->Se você quiser filtrar a partir de um campo do tipo <link linkend="bool"
-><emphasis
->Marcador</emphasis
-></link
->, deverá ser definido um valor "verdadeiro". Se quiser, por exemplo, mostrar só os livros de ficção científica que ainda não leu, assinale a opção <guilabel
->Corresponder a todas as seguintes</guilabel
->, ajuste a primeira como se segue: "Gênero" "contém" "Ficção científica" (sem aspas) e a segunda regra assim: "Lido" "Não contém" "Verdadeiro" (sem aspas). </para>
-</tip>
-
-<tip>
-<para
->Se um caractere não alfabético for utilizado na filtragem rápida, o texto é interpretado como uma expressão regular. Para mostrar somente os livros de Weber ou Bujold por exemplo, escreva "weber|bujold" (sem aspas) no campo do filtro. </para>
 </tip>
 
 <tip>
