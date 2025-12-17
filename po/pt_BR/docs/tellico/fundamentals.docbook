@@ -1,0 +1,1057 @@
+<chapter id="fundamentals">
+<title
+>Usando o &appname;</title>
+
+<sect1 id="quick-start">
+<title
+>Início Rápido</title>
+
+<para
+>Por padrão, o &appname; começa com uma coleção de livros vazia. Para funcionar com outros tipos de coleção, crie-a com o item de menu <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Novo</guimenuitem
+></menuchoice
+> ou o seu botão na barra de ferramentas. As coleções são preenchidas com alguns dos campos mais comuns, mas você poderá adicionar, modificar ou apagar campos de acordo com as suas necessidades. </para>
+
+<para
+>Os itens novos poderão ser adicionados com o <link linkend="entry-editor"
+><interface
+>Editor de Itens</interface
+></link
+>. O item do menu <menuchoice
+><guimenu
+>Coleção</guimenu
+><guimenuitem
+>Novo Item</guimenuitem
+></menuchoice
+> irá abrir o <interface
+>Editor de Itens</interface
+> com um item vazio, pronto para ser editado. O <interface
+>Editor de Itens</interface
+> pode também ser aberto se usar a opção <menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Mostrar o 'Editor de Itens'</guimenuitem
+></menuchoice
+>. Assim que tiver inserido os valores para o item, poderá salvá-lo na coleção, usando o botão <guibutton
+>Salvar o Item</guibutton
+> na janela do <interface
+>Editor de itens</interface
+>, que permanece aberta no caso de continuar a querer adicionar itens novos. Assim que tiver salvo um item na coleção, você poderá modificá-lo se clicar nele na janela principal. Se o <interface
+>Editor de itens</interface
+> não estiver já aberto, poderá fazer duplo-clique sobre um item para abrir o editor e começar a edição. </para>
+
+<para
+>Se você quiser incluir uma mensagem no elemento, poderá usar o Seletor de Arquivos padrão do &kde;, clicando para isso no botão <guibutton
+>Selecionar uma Imagem...</guibutton
+> no <link linkend="entry-editor"
+><interface
+>Editor de Itens</interface
+></link
+>, ou poderá ainda arrastar uma imagem do gerenciador de arquivos ou navegador Web para o <interface
+>Editor de Itens</interface
+>. </para>
+
+<para
+>Quando selecionar um item, a <link linkend="entry-view"
+><interface
+>Área de Itens</interface
+></link
+> irá mostrar uma janela formatada com o conteúdo do elemento. Você poderá modificar o modelo usado para apresentar o elemento na <link linkend="configuration"
+><interface
+>Janela de Configuração</interface
+></link
+>. </para>
+
+<para
+>Os elementos da coleção são agrupados em conjunto, quando compartilham os mesmos valores para determinados campos, como o autor ou o realizador. Você poderá modificar o campo usado para o agrupamento, usando a lista na barra de ferramentas ou a opção do menu <menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Seleção do Grupo</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Você poderá usar o <interface
+>Filtro Rápido</interface
+> na barra de ferramentas para limitar rapidamente os itens visíveis para os que contenham a palavra que digitar. O filtro também é útil quando quiser encontrar rapidamente um elemento. Você poderá inserir o título ou outra palavra única que identifique o elemento, para que a <link linkend="detailed-view"
+><interface
+>Exibição em coluna</interface
+></link
+> mostre apenas os elementos correspondentes ao filtro. Filtragens mais complexas podem usar nomes de campos diretamente, como como <emphasis
+>author=stephenson</emphasis
+>. A barra de estado mostra quantos elementos existem na coleção, bem como os que estão sendo filtrados no momento. </para>
+
+</sect1>
+
+<sect1 id="main-window">
+<title
+>Uso Geral</title>
+
+<para
+>A janela principal possui três áreas distintas, todas elas apresentando informações sobre a coleção de maneiras diferentes. A área primária é a <link linkend="detailed-view"
+><interface
+>Exibição em coluna</interface
+></link
+> no canto superior direito, onde você poderá ver o valor de todos os campos de cada item. Do lado esquerdo, as páginas contêm a <link linkend="group-view"
+><interface
+>Área de Grupos</interface
+></link
+>, que poderá ser usada para ordenar os itens por grupos numa estrutura em árvore, a <link linkend="filter-view"
+><interface
+>Área de Filtros</interface
+></link
+>, que é usada para verificar os itens que correspondem a determinados critérios e a <link linkend="loan-view"
+><interface
+>Área de Empréstimos</interface
+></link
+>, onde aparecem todos os empréstimos. Finalmente, a <link linkend="entry-view"
+><interface
+>Área de Itens</interface
+></link
+> mostra uma vista formatada dos dados para um determinado item, ou então uma vista em ícones de um grupo de itens, no canto inferior direito. </para>
+
+<screenshot>
+<screeninfo
+>A Janela Principal do &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="main-window.png"/></imageobject>
+<textobject
+><phrase
+>A Janela Principal do &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="detailed-view">
+<title
+><interface
+>Exibição em coluna</interface
+></title>
+
+<para
+>Qualquer um dos campos nas coleções poderá ser apresentado na <interface
+>Exibição em coluna</interface
+>, ainda que o <emphasis
+><link linkend="para"
+>Parágrafo</link
+></emphasis
+>, a <emphasis
+><link linkend="image"
+>Imagem</link
+></emphasis
+> e a <emphasis
+><link linkend="table"
+>Tabela</link
+></emphasis
+> possam não ser muito úteis. Clicar com o botão direito no cabeçalho da janela, abrirá um menu para selecionar os campos visíveis. As colunas poderão ser dimensionadas e reordenadas de qualquer forma, sendo que a configuração será salva entre sessões. </para>
+</sect2>
+
+<sect2 id="group-view">
+<title
+><interface
+>Área de Grupos</interface
+></title>
+
+<para
+>A <interface
+>Área de Grupos</interface
+> agrupa os itens em árvore por qualquer campo que <link linkend="field-options"
+>permita o agrupamento</link
+>. O número de itens em cada grupo aparece após o nome do mesmo. Os grupos poderão ser expandidos ou recolhidos, se clicar na seta ou se fizer duplo-clique no item. A expansão e fecho de todos os grupos são opções no menu de contexto do botão direito do mouse. A árvore poderá ser ordenada pelo nome do grupo ou pela quantidade, clicando no cabeçalho. Um grupo também poderá ser usado como filtro na <link linkend="detailed-view"
+><interface
+>Exibição em coluna</interface
+></link
+>, se clicar com o botão direito no item do grupo. </para>
+
+<para id="people-group"
+>Quando mais de um campo na coleção tiver a opção <emphasis
+><link linkend="fields-dialog"
+><guilabel
+>Formatar como nome</guilabel
+></link
+></emphasis
+> ativada, será adicionado um novo grupo para combinar todos esses campos num único pseudo-grupo <emphasis
+>Pessoas</emphasis
+>. </para>
+
+<para
+>Se um elemento não contiver um valor para o campo que é usado para formar os grupos, será colocado no grupo <emphasis
+>(Vazio)</emphasis
+>, que usa uma pasta vermelha. </para>
+</sect2>
+
+<sect2 id="filter-view">
+<title
+><interface
+>Área de Filtros</interface
+></title>
+
+<para
+>Se forem salvos alguns filtros para a coleção, a <interface
+>Área de Filtros</interface
+> fica ativa. À medida que for adicionando ou modificando os elementos, eles serão validados automaticamente pelos filtros e adicionados ou removidos, conforme o resultado. Você poderá modificar o filtro se fizer duplo-clique no item para abrir a <link linkend="filter-dialog"
+><interface
+>Janela avançada de filtros</interface
+></link
+>. Se clicar com o botão direito, poderá apagá-los em conjunto. </para>
+
+<screenshot>
+<screeninfo
+>A <interface
+>Área de Filtros</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-view.png"/></imageobject>
+<textobject
+><phrase
+>A <interface
+>Área de Filtros</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="loan-view">
+<title
+><interface
+>Área de Empréstimos</interface
+></title>
+
+<para
+>Assim que os elementos vão saindo por empréstimo ou aluguel, é adicionada a <interface
+>Área de Empréstimos</interface
+> à janela, para que esses item emprestados possam ser acompanhados. Os empréstimos são seguidos com base em cada elemento, assim se clicar com o botão direito num item, você pode modificar o empréstimo com a <interface
+>Janela de Empréstimos</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>A <interface
+>Área de Empréstimos</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-view.png"/></imageobject>
+<textobject
+><phrase
+>A <interface
+>Área de Empréstimos</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="entry-view">
+<title
+><interface
+>Área de Itens</interface
+></title>
+
+<para
+>É visível uma representação dos valores do elemento na <interface
+>Área de Itens</interface
+>. Os modelos são usados para a formatação e todos os gráficos adicionais. Você poderá indicar modelos separados para cada tipo de coleção, na <link linkend="template-options"
+><interface
+>Janela de Configuração</interface
+></link
+>, em conjunto com tipos de fonte e cores personalizados.</para>
+
+<para
+>Todos os modelos padrão respeitam a seleção das cores e tipos de fonte, mas poderão existir outros modelos personalizados que não o façam. Os modelos padrão também tornam os campos de &URL; ativos, o que irá abrir os itens com a associação de arquivos padrão do &kde;. Ao exportar para &HTML;, é usado o modelo atual para exportar os arquivos individuais dos elementos. </para>
+
+</sect2>
+
+<sect2 id="status-bar">
+<title
+>Barra de status</title>
+
+<para
+>A barra de status é usada para apresentar o que o &appname; está fazendo no momento. Inclui também a quantidade total de elementos na coleção e, se estiver sendo usado um filtro, quantos estão visíveis no momento. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="entry-editor">
+<title
+>Editar os Itens</title>
+
+<para
+>O <interface
+>Editor de Itens</interface
+> é usado para adicionar e modificar itens na coleção. Se fizer duplo-clique num item, seja na <interface
+>Área de Grupos</interface
+> ou na <interface
+>Exibição em coluna</interface
+>, você irá abrir o <interface
+>Editor de Itens</interface
+> com esse item. Os itens novos podem ser criados com o menu <menuchoice
+><guimenu
+>Coleção</guimenu
+></menuchoice
+>, o ícone da barra de ferramentas ou o botão no <interface
+>Editor de Itens</interface
+> propriamente dito.</para>
+
+<para
+>Se fechar o <interface
+>Editor de Itens</interface
+> com alterações feitas, mas não salvas, irá aparecer uma mensagem de aviso. Os campos são agrupados por categorias e aparecem na ordem indicada na <link linkend="fields-dialog"
+><interface
+>Janela de Campos da Coleção</interface
+></link
+>. Eles poderão também ser reordenados. </para>
+
+<screenshot>
+<screeninfo
+>O <interface
+>Editor de Itens</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor1.png"/></imageobject>
+<textobject
+><phrase
+>O <interface
+>Editor de Itens</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Se clicar no título de um campo <link linkend="url"
+><emphasis
+>&URL;</emphasis
+></link
+>, irá abrir a ligação com a associação de arquivos padrão do &kde;. O botão <guiicon
+>seletor do &URL;</guiicon
+> ao lado do campo de texto irá abrir a janela de Abertura de Arquivos do &kde;, mas o campo não estará limitado a arquivos locais. </para>
+
+<para
+>Para os campos <link linkend="image"
+><emphasis
+>Imagem</emphasis
+></link
+>, o botão <guibutton
+>Selecionar a Imagem...</guibutton
+> abre a janela de seleção de arquivos do &kde;. A imagem é salva na coleção com o formato original, sendo apresentada uma versão escalonada no <interface
+>Editor de Itens</interface
+>. A imagem poderá ser limpa se usar o botão <guibutton
+>Limpar</guibutton
+>. As imagens limpas são removidas da coleção. </para>
+
+<screenshot>
+<screeninfo
+>O <interface
+>Editor de Itens</interface
+> para campos de <emphasis
+>Imagem</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor3.png"/></imageobject>
+<textobject
+><phrase
+>O <interface
+>Editor de Itens</interface
+> para campos de <emphasis
+>Imagem</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>O item de edição também suporta o arrastamento. Se arrastar um arquivo de imagem de um gerenciador de arquivos ou janela de navegador, fará o mesmo que selecionar uma imagem no Seletor de Arquivos. Se arrastar uma imagem do item de edição para uma janela de gerenciamento de arquivos do &konqueror;, irá salvar a imagem nessa pasta. </para>
+
+<warning>
+<para
+>Por padrão, as imagens são salvas no arquivo de dados da coleção, estando tudo contido apenas num local. Contudo, muitas imagens farão com que o &appname; se torne significativamente mais lento, uma vez que irá resultar num arquivo de dados muito grande. Em alternativa, o &appname; poderá salvar as imagens separadamente, seja na pasta <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/data/</filename
+> ou numa pasta no mesmo local do arquivo de dados. O carregamento e salvamento dos arquivos de dados é muito mais rápido se as imagens forem salvas em separado, mas os arquivos de dados deixarão de ser portáteis ou fáceis de arquivar. Os dados auto-contidos poderão sempre ser criados se usar a opção do menu <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenu
+>Exportar</guimenu
+><guimenuitem
+>Exportar para ZIP...</guimenuitem
+></menuchoice
+>. </para>
+</warning>
+
+<para
+>Os campos de <link linkend="table"
+><emphasis
+>Tabela</emphasis
+></link
+> começam com cinco linhas, mas se mover o cursor para a última linha, irá adicionar automaticamente outra. Para as tabelas multi-colunas, só é usada a primeira coluna para agrupar ou formatar. </para>
+
+<screenshot>
+<screeninfo
+>O <interface
+>Editor de Itens</interface
+> para campos de <emphasis
+>Tabela</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor4.png"/></imageobject>
+<textobject
+><phrase
+>O <interface
+>Editor de Itens</interface
+> para campos de <emphasis
+>Tabela</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="edit-multiple">
+<title
+>Editar Vários Itens</title>
+<para
+>Você poderá editar vários itens ao mesmo tempo, se selecionar mais de um na <interface
+>Área de Grupos</interface
+> ou na <interface
+>Área de Colunas</interface
+>. Se selecionar vários itens, os campos que contêm o mesmo valor em cada item estarão ativos. Se os itens tiverem valores diferentes, então os campos ficarão desativados. São adicionadas opções de marcação do lado direito de cada item do campo, que controlam se o campo está ativo ou não, como aparece na imagem abaixo. </para>
+
+<para
+>Somente os campos ativos serão modificados quando forem salvos os itens, o que torna a edição em grande escala muito mais simples. Por exemplo, para definir o Disco de todos os itens de vídeo na coleção, certifique-se de que este campo está ativo. Mude-o para <acronym
+>DVD</acronym
+> e salve depois os itens. Só será modificado o campo Disco, preservando todos os outros valores para os itens. </para>
+
+<screenshot>
+<screeninfo
+>O <interface
+>Editor de Itens</interface
+> para vários itens</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor5.png"/></imageobject>
+<textobject
+><phrase
+>O <interface
+>Editor de Itens</interface
+> para vários itens</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="updating-entries">
+<title
+>Atualizar os Dados dos Itens</title>
+
+<para
+>Os itens poderão ser atualizados automaticamente, consultando as fontes de dados disponíveis para o tipo de coleção atual, o que é muito útil para combinar as informações de várias fontes. Por exemplo, você poderá adicionar um filme à sua coleção com os <link linkend="amazon-web-services"
+>Serviços Web da Amazon</link
+>, atualizando depois o item com informações adicionais da <link linkend="imdb"
+>IMDB (Internet Movie Database)</link
+>. </para>
+
+<para
+>Só são atualizados os campos vazios, a menos que a <link linkend="data-sources-options"
+>configuração dessa fonte</link
+> permita que os resultados substituam a informação existente. Para os <link linkend="externalexec"
+>programas externos</link
+>, deverá ser indicado um campo de atualização nas opções da fonte. </para>
+
+<para
+>A atualização do item poderá ser iniciada com o menu do botão direito para um item, ou então usando a opção do menu <menuchoice
+><guimenu
+>Coleção</guimenu
+><guimenuitem
+>Atualizar o Item</guimenuitem
+></menuchoice
+>. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="fields-dialog">
+<title
+>Editar os Campos</title>
+
+<para
+>A <interface
+>Janela de Campos da Coleção</interface
+> permite-lhe adicionar campos novos à coleção, modificar os existentes ou apagar alguns campos em conjunto. </para>
+
+<screenshot>
+<screeninfo
+>A <interface
+>Janela de Campos da Coleção</interface
+> do &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
+<textobject
+><phrase
+>A <interface
+>Janela de Campos da Coleção</interface
+> do &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="field-list">
+<title
+>Lista de Campos</title>
+
+<para
+>Do lado esquerdo da janela, existe a lista com os campos atuais. Os campos modificados são mostrado em negrito e itálico. Os botões abaixo da lista irão adicionar ou remover um campo, podendo usar também as setas para modificar a sua ordem. A ordem dos campos na lista é importante, porque o <interface
+>Editor de Itens</interface
+> usa a ordem para a sua formatação. Para cada categoria, os campos serão dispostos da esquerda para a direita, de acordo com a ordem de cima para baixo dos campo na lista. </para>
+</sect2>
+
+<sect2 id="field-properties">
+<title
+>Propriedades do Campo</title>
+
+<para
+>Um campo é definido pelo seu título, tipo, categoria, descrição e, possivelmente, um valor padrão ou alguns valores permitidos. O título é usado para referenciar o campo na interface do usuário. O <interface
+>Editor de Itens</interface
+> usa-o para pedir valores. A <interface
+>Exibição em coluna</interface
+> usa-o como cabeçalho da coluna. Os diferentes tipos de campos são <link linkend="field-types"
+>explicados na seção dos Tipos de Campos</link
+>. A descrição é usada como dica no <interface
+>Editor de Itens</interface
+>, talvez para oferecer uma explicação sobre o conteúdo do campo. Além disso, para os campos <link linkend="derived"
+><emphasis
+>Derivados</emphasis
+></link
+>, a descrição é usada para formatar o valor do campo. O valor padrão é adicionado automaticamente ao criar um item novo. A lista de valores permitidos para os campos <link linkend="choice"
+><emphasis
+>Escolha</emphasis
+></link
+> deverá ser separada por ponto e vírgula. </para>
+
+<para
+>Os campos novos poderão ser de qualquer tipo, mas a alteração do tipo dos campos existente está restringida a campos compatíveis, como é apresentado na tabela abaixo: </para>
+
+<table>
+<title
+>Mudanças de Tipo de Campo Permitidas</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tipo Atual</entry>
+<entry
+>Novo Tipo Permitido</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Texto simples</emphasis
+></entry>
+<entry
+><emphasis
+>Texto Simples</emphasis
+>, <emphasis
+>Parágrafo</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabela</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Parágrafo</emphasis
+></entry>
+<entry
+><emphasis
+>Texto Simples</emphasis
+>, <emphasis
+>Parágrafo</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Escolha</emphasis
+></entry>
+<entry
+><emphasis
+>Texto Simples</emphasis
+>, <emphasis
+>Parágrafo</emphasis
+>, <emphasis
+>Escolha</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabela</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Opção</emphasis
+></entry>
+<entry
+><emphasis
+>Texto Simples</emphasis
+>, <emphasis
+>Parágrafo</emphasis
+>, <emphasis
+>Opção</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabela</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Número</emphasis
+></entry>
+<entry
+><emphasis
+>Texto Simples</emphasis
+>, <emphasis
+>Parágrafo</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabela</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>&URL;</emphasis
+></entry>
+<entry
+><emphasis
+>Texto Simples</emphasis
+>, <emphasis
+>Parágrafo</emphasis
+>, <emphasis
+>Número</emphasis
+>, <emphasis
+>&URL;</emphasis
+>, <emphasis
+>Tabela</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Data</emphasis
+></entry>
+<entry
+><emphasis
+>Texto Simples</emphasis
+>, <emphasis
+>Data</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Tabela</emphasis
+></entry>
+<entry
+><emphasis
+>Texto Simples</emphasis
+>, <emphasis
+>Parágrafo</emphasis
+>, <emphasis
+>Tabela</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Imagem</emphasis
+></entry>
+<entry
+><emphasis
+>Imagem</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>Classificação</emphasis
+></entry>
+<entry
+><emphasis
+>Escolha</emphasis
+>, <emphasis
+>Classificação</emphasis
+></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+
+<sect2 id="field-formatting">
+<title
+>Formatação do Campo</title>
+
+<para
+>O &appname; oferece alguma capacidade de formatação automática dos valores dos campos. A forma mais simples é a capitalização automática, que coloca todas as palavras começando em maiúsculas, excetuando os artigos. A formatação de títulos move certos artigos do início para o fim do campo; por exemplo, a alteração de "O Regresso do Rei" para "Regresso do Rei, O". Os artigos do título são configuráveis. Finalmente, a formatação de nomes tenta quebrar o texto, de modo que o último nome, ou apelido, da pessoa seja apresentado em primeiro lugar. Os prefixos e sufixos dos nomes são configuráveis. Do mesmo modo, o grupo especial <emphasis
+><link linkend="people-group"
+>Pessoas</link
+></emphasis
+> usa todos os campos com a formatação de nomes, mesmo que essa configuração global esteja desligada. </para>
+
+<para
+>Toda a formatação automática poderá ser desativada, alterando as opções globais na <link linkend="general-options"
+><interface
+>Janela de Configuração</interface
+></link
+>. A nível global, capitalização é uma opção distinta da formatação, por isso um título poderá ser auto-formatado sem ser capitalizado. Nem todos os tipos permitem a formatação automática. </para>
+
+<table>
+<title
+>Exemplos de Formatação</title>
+<tgroup cols="5">
+<thead>
+<row>
+<entry
+>Tipo de Formato</entry>
+<entry
+>Valor do Campo</entry>
+<entry
+>Auto-Capitalizado</entry>
+<entry
+>Auto-Formatado</entry>
+<entry
+>Auto-Capitalizado &amp; Auto-Formatado</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>Título</emphasis
+></entry>
+<entry
+>o regresso do rei</entry>
+<entry
+>O Regresso do Rei</entry>
+<entry
+>regresso do rei, o</entry>
+<entry
+>Regresso do Rei, O</entry>
+</row>
+<row>
+<entry
+><emphasis
+>Nome</emphasis
+></entry>
+<entry
+>tom swift, jr.</entry>
+<entry
+>Tom Swift, Jr.</entry>
+<entry
+>swift, jr., tom</entry>
+<entry
+>Swift, Jr., Tom</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+<sect2 id="field-options">
+<title
+>Opções do campo</title>
+
+<para
+>Os campos também possuem três opções gerais. Se o completamento automático estiver ativo, o &appname; faz 'cache' dos valores para cada campo, oferecendo o <interface
+>Editor de Itens</interface
+> o completamento automático, usando a configuração-padrão do &kde;. Nem todos os tipos de campos permitem o completamento automático. O &appname; também necessita saber se um campo poderá ter vários valores ou se poderá ser usado para agrupar os itens. É usado um ponto e vírgula para separar os vários valores, ao editar um item. </para>
+
+<para
+>Por questões de eficiência, não ative o completamento automático, a menos que necessite dele para os campos. Quanto mais campos com completamento automático tiver na coleção, mais lento se torna o &appname; ao carregar o arquivo. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="filter-dialog">
+<title
+>Filtrar os Itens</title>
+<para
+>A <interface
+>Janela de Filtros</interface
+> permite-lhe limitar os itens visíveis na <link linkend="detailed-view"
+><interface
+>Área de Colunas</interface
+></link
+> para os que correspondam a uma ou mais regras do filtro. O filtro poderá ser usado para descobrir os itens que correspondam a todas as regras na janela, ou simplesmente para descobrir os que correspondam a qualquer uma delas. A <interface
+>Janela de Filtros</interface
+> também é útil para a pesquisa avançada dentro de uma coleção. </para>
+
+<screenshot>
+<screeninfo
+>A <interface
+>Janela de Filtros Avançados</interface
+> do &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
+<textobject
+><phrase
+>A <interface
+>Janela de Filtros Avançados</interface
+> do &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Cada linha contém uma regra única de filtragem. Selecione o campo correspondente na primeira opção da linha, e selecione depois uma regra correspondente ao centro. As regras poderão corresponder a determinados valores ou que sejam exatamente iguais. Você poderá também usar uma expressão regular para fazer a correspondência dos itens; nesse caso, o botão <guibutton
+>Editar...</guibutton
+> fica ativo para editar a expressão, se o &kregexpeditor; estiver instalado no seu computador. Finalmente, a palavra ou texto correspondente deverão ser inseridos no campo de texto. Para campos de imagem, o tamanho da imagem pode ser usado para filtragem, onde o valor do filtro é comparado com a maior dimensão da imagem, seja largura ou altura. </para>
+
+<para
+>Você poderá usar até oito (8) regras no filtro. Poderá usar os botões <guibutton
+>Mais</guibutton
+> e <guibutton
+>Menos</guibutton
+> para adicionar ou remover regras. </para>
+
+<para
+>Os filtros poderão ser salvos, de modo que todos os itens correspondentes possam ser agrupados em conjunto na <interface
+>Área de Filtros</interface
+>. A área é dinâmica, para que os itens possam ser adicionados e/ou modificados e o grupo seja atualizado automaticamente. Para salvar o filtro, indique um nome no campo de texto e clique no botão <guibutton
+>Salvar o Filtro</guibutton
+>. </para>
+
+<para
+>Os filtros salvos anteriormente poderão ser modificados, se clicar com o botão direito do mouse no item do filtro na <interface
+>Área de Filtros</interface
+> e selecionar a opção <guilabel
+>Modificar o Filtro</guilabel
+>. A janela do <interface
+>Janela de Filtros</interface
+> é aberta, e você poderá fazer as alterações ao nome ou às regras do filtro. </para>
+
+<informalexample>
+<para
+>Para descobrir os livros de ficção científica que não leu, assinale a opção <guilabel
+>Corresponder a todos os seguintes</guilabel
+>, defina a primeira regra como <emphasis
+>Gênero contém Ficção Científica</emphasis
+> e a segunda como <emphasis
+>Lido não contém 'true'</emphasis
+>. (Para os campos <link linkend="bool"
+>Opção</link
+>, o valor interno é <emphasis
+>true</emphasis
+> - verdadeiro). </para>
+
+<para
+>Para descobrir os livros de Bujold ou Weber, assinale a opção <guilabel
+>Corresponder a qualquer dos seguintes</guilabel
+>, configure a primeira regra como <emphasis
+>Autor contém Bujold</emphasis
+> e a segunda como <emphasis
+>Autor contém Weber</emphasis
+>. </para>
+</informalexample>
+
+</sect1>
+
+<sect1 id="report-dialog">
+<title
+>Gerar Relatórios</title>
+<para
+>O &appname; consegue gerar vários relatórios sobre a sua coleção atual. A <interface
+>Janela de Relatórios</interface
+> verifica todos os modelos em &xslt; que existam no local de instalação e na pasta <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>. Assim, você poderá criar novos, para que eles sejam descobertos automaticamente e incluídos como opções na <interface
+>Janela de Relatório</interface
+>. Alguns relatórios mais complexos poderão levar algum tempo para gerar, no caso de coleções grandes. </para>
+
+<para
+>Os modelos que são instalados com o &appname; incluem uma lista apenas com os títulos, a exibição em coluna (padrão), uma vista agrupada, um resumo de todos os grupos e os valores mais conhecidos nesses grupos, um relatório de empréstimos e um grande relatório com as imagens de capa. Selecione o modelo desejado e clique no botão <guibutton
+>Gerar</guibutton
+>. Todos os relatórios também poderão ser impressos ou salvos num arquivo &HTML;. </para>
+
+<screenshot>
+<screeninfo
+>A <interface
+>Janela de Relatórios</interface
+> do &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="report-dialog.png"/></imageobject>
+<textobject
+><phrase
+>A <interface
+>Janela de Relatórios</interface
+> do &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Os itens incluídos no relatório serão limitados aos que constam na <interface
+>Exibição em coluna</interface
+>, por isso, se tiver um filtro ativo, a <interface
+>Janela de Relatórios</interface
+> irá usá-lo. </para>
+</sect1>
+
+<sect1 id="loan-dialog">
+<title
+>Registro de Empréstimos</title>
+<para
+>O &appname; suporta o registro de empréstimos de quaisquer itens na coleção. A <interface
+>Janela de Empréstimos</interface
+> poderá ser aberta se usar o item <guilabel
+>Dar Saída</guilabel
+> ou se clicar com o botão direito num item. Você poderá dar saída a vários itens de uma vez. </para>
+
+<para
+>O nome da pessoa a quem foi emprestado poderá ser inserido diretamente ou obtido a partir do livro de endereços padrão do &kde;, clicando no botão após o item do nome. A data da saída assume-se como sendo a data atual, mas poderá ser alterada. A data-limite é opcional, e poderá ainda adicionar algumas notas sobre o empréstimo. </para>
+
+<para
+>Se for inserida uma data-limite e se o &appname; for compilado com o suporte para a 'libkcal', você poderá adicionar uma notificação ao calendário padrão do &kde; como um item Por-Fazer. O &korganizer; poderá ser usado para ver esses itens. </para>
+
+<para
+>Quando for dada saída a um item, o campo <emphasis
+>Emprestado</emphasis
+> ficará <emphasis
+>true</emphasis
+> (verdadeiro). Se não existir nenhum campo 'emprestado' na coleção, será adicionado um. Não modifique esse campo diretamente! Os itens emprestados poderão ser declarados como devolvidos com o item do menu ou clicando com o botão direito num item da <interface
+>Área de Empréstimos</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>A <interface
+>Janela de Empréstimos</interface
+> do &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-dialog.png"/></imageobject>
+<textobject
+><phrase
+>A <interface
+>Janela de Empréstimos</interface
+> do &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="tips">
+<title
+>Dicas gerais</title>
+
+<tip>
+<para
+>Se um livro possui vários autores, você deve separar os nomes deles com um ponto e vírgula. O Tellico saberá separá-los e utilizar de forma independente. Qualquer outro campo que permita múltiplos valores deverá ter a mesma estrutura, com um ponto e vírgula (;) separando cada valor. </para>
+</tip>
+
+<tip>
+<para
+>Você pode alterar quais os campos mostrar na lista, clicando para isso com o botão direito sobre o cabeçalho das colunas. </para>
+</tip>
+
+<tip>
+<para
+>Você pode adicionar, editar, ou modificar os campos da coleção, usando a <interface
+>Janela de Campos da Coleção</interface
+>. Os botões com uma seta sob a lista dos campos permitem modificar a posição do campo na lista, o que irá afetar a sua posição no editor do item. </para>
+</tip>
+
+<tip>
+<para
+>Você pode editar mais de um item de cada vez, mantendo pressionada a tecla &Shift; ou &Ctrl; e selecionando vários itens. </para>
+</tip>
+
+<tip>
+<para
+>Você pode converter uma coleção de livros já existente numa bibliografia, que pode em seguida, ser exportada em formato BibTeX ou BibTeXML. </para>
+</tip>
+
+<tip>
+<para
+>Se mais de um campo for formatado como nome, então será adicionado um grupo suplementar chamado "Pessoas" à coleção, autorizando que os autores e editores sejam classificados ou impressos juntos, por exemplo. </para>
+</tip>
+
+<tip>
+<para
+>Você pode modificar a aparência da impressão alterando o arquivo <filename
+>tellico-printing.xsl</filename
+>. O arquivo produz &HTML;, e os estilos &CSS; determinam os tipos de fonte, as margens, etc. </para>
+</tip>
+
+<tip>
+<para
+>Um duplo-clique sobre um item permite abrir o <interface
+>Editor de Itens</interface
+>. </para>
+</tip>
+
+<tip>
+<para
+>Você pode adicionar marcas &HTML; a um campo de tipo <link linkend="para"
+><emphasis
+>Parágrafo</emphasis
+></link
+> para a sua formatação, como por exemplo &lt;b&gt;<emphasis role="bold"
+>bold</emphasis
+>&lt;/b&gt; ou &lt;i&gt;<emphasis
+>italic</emphasis
+>&lt;/i&gt;. </para>
+</tip>
+
+<tip>
+<para
+>Na <interface
+>Exibição em coluna</interface
+>, pode pressionar uma letra para ir diretamente para o item seguinte que começar por essa letra. </para>
+</tip>
+
+<tip>
+<para
+>Você pode usar valores derivados para combinar campos múltiplos separados num só campo. Basta selecionar o tipo Dependente e usar uma descrição similar a "<userinput
+>Valor: %{fielda}%{fieldb}</userinput
+>", onde o %{...} é substituído pelo valor do campo apropriado. Isto é útil para colecionar campos múltiplos num simples campo; &eg;: para melhorar o agrupamento e para combinar campos de diferentes tipos, respeitando a devida ordem ao mesmo tempo. Considere por exemplo um campo numérico seguido de um subcampo de texto com elementos 3b, 14a. </para>
+</tip>
+
+</sect1>
+
+</chapter>
