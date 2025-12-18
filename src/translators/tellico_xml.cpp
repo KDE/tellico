@@ -181,7 +181,9 @@ QByteArray Tellico::XML::removeInvalidXml(const QByteArray& data_) {
   QByteArray result;
   result.reserve(len);
   for(uint i = 0; i < len; ++i) {
-    auto c = data_.at(i);
+    // explicitly use signed char to avoid considering UTF-8 control characters
+    // as valid
+    const signed char c = data_.at(i);
     // for now, stick with anything below #x20 except for #x9 | #xA | #xD
     if(c >= 0x20 || c == 0x09 || c == 0x0A || c == 0x0D) {
       result.append(c);
