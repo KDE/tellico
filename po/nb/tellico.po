@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 05:54+0000\n"
+"POT-Creation-Date: 2025-11-17 16:18+0000\n"
 "PO-Revision-Date: 2020-11-13 17:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -1381,8 +1381,8 @@ msgstr "Nummer"
 #: src/collections/comicbookcollection.cpp:127
 #, kde-format
 msgctxt ""
-"Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,"
-"Poor"
+"Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
+"Good,Good,Fair,Poor"
 msgid "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgstr "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 
@@ -2188,9 +2188,7 @@ msgstr "Omordne felter"
 #: src/config/tellico_config.kcfg:86
 #, kde-format
 msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
+msgid "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,up,with"
 msgstr "en,ei,og,som,men,for,fra,i,inn,verken,av,på,eller,ut,over,opp,med,den"
 
 #: src/config/tellico_config.kcfg:89
@@ -3628,8 +3626,8 @@ msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
 msgstr ""
-"Brukers ID identifiserer personen som aksesserer nettjenesten til Amazon."
-"com, og er medregnet i lenker til Amazon.coms nettsted."
+"Brukers ID identifiserer personen som aksesserer nettjenesten til "
+"Amazon.com, og er medregnet i lenker til Amazon.coms nettsted."
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
 #: src/fetch/dvdfrfetcher.cpp:174 src/fetch/imdbfetcher.cpp:967
@@ -3921,8 +3919,8 @@ msgid ""
 msgstr ""
 "<p>Oppgi argumenter som skal brukes til å søke etter tilgjengelige "
 "oppdateringer til et innslag.</p><p>Formatet er det samme som for felter med "
-"avledede verdier, der feltnavn er inni krøllparenteser, slik som "
-"<i>%{forfatter}</i>. Mer detaljer finnes i dokumentasjonen.</p>"
+"avledede verdier, der feltnavn er inni krøllparenteser, slik som <i>%"
+"{forfatter}</i>. Mer detaljer finnes i dokumentasjonen.</p>"
 
 #: src/fetch/fetcher.cpp:79
 #, kde-format
@@ -7227,8 +7225,8 @@ msgstr ""
 #: src/translators/librarythingimporter.cpp:180
 #, kde-format
 msgid ""
-"Export your LibraryThing collection in <a href=\"https://www.librarything."
-"com/export.php?export_type=json\">JSON format</a>."
+"Export your LibraryThing collection in <a href=\"https://"
+"www.librarything.com/export.php?export_type=json\">JSON format</a>."
 msgstr ""
 
 #: src/translators/librarythingimporter.cpp:187

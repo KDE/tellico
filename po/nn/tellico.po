@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 05:54+0000\n"
+"POT-Creation-Date: 2025-11-17 16:18+0000\n"
 "PO-Revision-Date: 2024-05-15 20:40+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -1378,8 +1378,8 @@ msgstr "Nummer"
 #: src/collections/comicbookcollection.cpp:127
 #, kde-format
 msgctxt ""
-"Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,"
-"Poor"
+"Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
+"Good,Good,Fair,Poor"
 msgid "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgstr ""
 "Proof Mint,Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor,Coverless"
@@ -2194,12 +2194,8 @@ msgstr "Endra rekkjefølgje på felt"
 #: src/config/tellico_config.kcfg:86
 #, kde-format
 msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with,ein,ei,eit,en,et,og,i,av,om,den,dei,det,å"
+msgid "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,up,with"
+msgstr "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,up,with,ein,ei,eit,en,et,og,i,av,om,den,dei,det,å"
 
 #: src/config/tellico_config.kcfg:89
 #, kde-format
@@ -7246,8 +7242,8 @@ msgstr "LibraryThing-val"
 #: src/translators/librarythingimporter.cpp:180
 #, kde-format
 msgid ""
-"Export your LibraryThing collection in <a href=\"https://www.librarything."
-"com/export.php?export_type=json\">JSON format</a>."
+"Export your LibraryThing collection in <a href=\"https://"
+"www.librarything.com/export.php?export_type=json\">JSON format</a>."
 msgstr ""
 "Eksporter LibraryThing-samlinga i <a href=\"https://www.librarything.com/"
 "export.php?export_type=json\">JSON-format</a>."
