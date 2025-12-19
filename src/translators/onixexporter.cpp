@@ -84,7 +84,10 @@ bool ONIXExporter::exec() {
   QBuffer buf(&data);
 
   KZip zip(&buf);
-  zip.open(QIODevice::WriteOnly);
+  if(!zip.open(QIODevice::WriteOnly)) {
+    myDebug() << "Failed to open zip archive";
+    return false;
+  }
   zip.writeFile(QStringLiteral("onix.xml"), xml);
 
   // use a dict for fast random access to keep track of which images were written to the file
