@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-16 06:51+0000\n"
+"POT-Creation-Date: 2025-12-21 00:43+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -7101,17 +7101,17 @@ msgstr "स्वरूप :"
 msgid "Zip Files"
 msgstr "फाईल्स"
 
-#: src/translators/onixexporter.cpp:180
+#: src/translators/onixexporter.cpp:183
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr ""
 
-#: src/translators/onixexporter.cpp:183
+#: src/translators/onixexporter.cpp:186
 #, kde-format
 msgid "Include images in archive"
 msgstr ""
 
-#: src/translators/onixexporter.cpp:185
+#: src/translators/onixexporter.cpp:188
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "

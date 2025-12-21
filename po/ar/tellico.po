@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-16 06:51+0000\n"
+"POT-Creation-Date: 2025-12-21 00:43+0000\n"
 "PO-Revision-Date: 2025-10-05 21:07+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -7196,17 +7196,17 @@ msgstr "صيغة مارك:"
 msgid "Zip Files"
 msgstr "ملفات مضغوطة"
 
-#: src/translators/onixexporter.cpp:180
+#: src/translators/onixexporter.cpp:183
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "خيارات أرشيف أونيكس"
 
-#: src/translators/onixexporter.cpp:183
+#: src/translators/onixexporter.cpp:186
 #, kde-format
 msgid "Include images in archive"
 msgstr "ضمّن الصور في الأرشيف"
 
-#: src/translators/onixexporter.cpp:185
+#: src/translators/onixexporter.cpp:188
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "

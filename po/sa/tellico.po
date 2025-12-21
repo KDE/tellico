@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-16 06:51+0000\n"
+"POT-Creation-Date: 2025-12-21 00:43+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -7247,17 +7247,17 @@ msgstr "MARC प्रारूपः :"
 msgid "Zip Files"
 msgstr "जिप् सञ्चिकाः"
 
-#: src/translators/onixexporter.cpp:180
+#: src/translators/onixexporter.cpp:183
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "ONIX संग्रह विकल्पाः"
 
-#: src/translators/onixexporter.cpp:183
+#: src/translators/onixexporter.cpp:186
 #, kde-format
 msgid "Include images in archive"
 msgstr "संग्रहे चित्राणि समाविष्टानि कुर्वन्तु"
 
-#: src/translators/onixexporter.cpp:185
+#: src/translators/onixexporter.cpp:188
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "

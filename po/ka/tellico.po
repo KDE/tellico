@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-16 06:51+0000\n"
+"POT-Creation-Date: 2025-12-21 00:43+0000\n"
 "PO-Revision-Date: 2025-09-02 04:51+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -7275,17 +7275,17 @@ msgstr "MARC -ის ფორმატი:"
 msgid "Zip Files"
 msgstr "Zip ფაილები"
 
-#: src/translators/onixexporter.cpp:180
+#: src/translators/onixexporter.cpp:183
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "ONIX არქივის მორგება"
 
-#: src/translators/onixexporter.cpp:183
+#: src/translators/onixexporter.cpp:186
 #, kde-format
 msgid "Include images in archive"
 msgstr "არქივში გამოსახულებებიც ჩაისმება"
 
-#: src/translators/onixexporter.cpp:185
+#: src/translators/onixexporter.cpp:188
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
