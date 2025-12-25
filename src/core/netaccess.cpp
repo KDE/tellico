@@ -40,6 +40,7 @@
 
 static QStringList* tmpfiles = nullptr;
 
+QStringList Tellico::NetAccess::s_defaultPreviewPlugins;
 QString Tellico::NetAccess::s_lastErrorMessage;
 
 using Tellico::NetAccess;
@@ -105,11 +106,12 @@ QPixmap NetAccess::filePreview(const QUrl& url, int size) {
 QPixmap NetAccess::filePreview(const KFileItem& item, int size) {
   NetAccess netaccess;
 
-  // the default plugins are not used by default (what???)
-  // the default ones are in config settings instead, so ignore that
-  const QStringList plugins = KIO::PreviewJob::defaultPlugins();
-  KIO::PreviewJob* previewJob = KIO::filePreview(KFileItemList() << item, QSize(size, size),
-                                                 &plugins);
+  // the default plugins are not used by default, preferring
+  // ones are in config settings instead, so ignore that
+  if(s_defaultPreviewPlugins.isEmpty()) {
+    s_defaultPreviewPlugins = KIO::PreviewJob::defaultPlugins();
+  }
+  auto previewJob = KIO::filePreview({item}, QSize(size, size), &s_defaultPreviewPlugins);
   connect(previewJob, &KIO::PreviewJob::gotPreview,
           &netaccess, &Tellico::NetAccess::slotPreview);
 

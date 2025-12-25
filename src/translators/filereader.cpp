@@ -36,12 +36,37 @@
 #include <KFileMetaData/Extractor>
 #include <KFileMetaData/SimpleExtractionResult>
 #endif
+#include <KSharedConfig>
+#include <KConfigGroup>
 
 #include <QDir>
 #include <QIcon>
 
 namespace {
-  static const int FILE_PREVIEW_SIZE = 128;
+  static const int FILE_PREVIEW_SIZE = 256;
+  static const int FILE_ICON_SIZE = 128;
+}
+
+QString Tellico::AbstractFileReader::getCoverImage(const KFileItem& fi_) {
+  QPixmap pixmap;
+  if(useFilePreview()) {
+    KConfigGroup cfg(KSharedConfig::openConfig(), QLatin1String("File Reader Options"));
+    const auto previewSize = cfg.readEntry("Preview Size", FILE_PREVIEW_SIZE);
+    pixmap = Tellico::NetAccess::filePreview(fi_, previewSize);
+  }
+  if(pixmap.isNull()) {
+    if(iconImageId.contains(fi_.iconName())) {
+      return iconImageId.value(fi_.iconName());
+    } else {
+      pixmap = QIcon::fromTheme(fi_.iconName()).pixmap(QSize(FILE_ICON_SIZE, FILE_ICON_SIZE));
+      const QString id = ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
+      if(!id.isEmpty()) {
+        iconImageId.insert(fi_.iconName(), id);
+      }
+      return id;
+    }
+  }
+  return ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
 }
 
 using Tellico::FileReaderMetaData;
@@ -76,8 +101,6 @@ public:
 
   QString volume;
   QStringList metaIgnore;
-  // cache the icon image ids to avoid repeated creation of Data::Image objects
-  QHash<QString, QString> iconImageId;
 #ifdef HAVE_KFILEMETADATA
   QHash<KFileMetaData::Property::Property, QString> propertyNameHash;
 #endif
@@ -156,27 +179,7 @@ bool FileReaderFile::populate(Data::EntryPtr entry, const KFileItem& item) {
   entry->setField(metainfo, strings.join(FieldFormat::rowDelimiterString()));
 #endif
 
-  QPixmap pixmap;
-  if(useFilePreview()) {
-    pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
-  }
-  if(pixmap.isNull()) {
-    if(d->iconImageId.contains(item.iconName())) {
-      entry->setField(icon, d->iconImageId.value(item.iconName()));
-    } else {
-      pixmap = QIcon::fromTheme(item.iconName()).pixmap(QSize(FILE_PREVIEW_SIZE, FILE_PREVIEW_SIZE));
-      const QString id = ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
-      if(!id.isEmpty()) {
-        entry->setField(icon, id);
-        d->iconImageId.insert(item.iconName(), id);
-      }
-    }
-  } else {
-    const QString id = ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
-    if(!id.isEmpty()) {
-      entry->setField(icon, id);
-    }
-  }
+  entry->setField(icon, getCoverImage(item));
 
   return true;
 }

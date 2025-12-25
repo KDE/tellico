@@ -40,21 +40,9 @@
 #include <QDomDocument>
 #include <QImageReader>
 
-namespace {
-  static const int FILE_PREVIEW_SIZE = 128;
-}
-
 using Tellico::FileReaderBook;
 
-class FileReaderBook::Private {
-public:
-  Private() = default;
-
-  // cache the icon image ids to avoid repeated creation of Data::Image objects
-  QHash<QString, QString> iconImageId;
-};
-
-FileReaderBook::FileReaderBook(const QUrl& url_) : FileReaderMetaData(url_), d(new Private) {
+FileReaderBook::FileReaderBook(const QUrl& url_) : FileReaderMetaData(url_) {
 }
 
 FileReaderBook::~FileReaderBook() = default;
@@ -86,8 +74,9 @@ bool FileReaderBook::populate(Data::EntryPtr entry, const KFileItem& item) {
   entry->setField(QStringLiteral("binding"), i18n("E-Book"));
 
   // does it have a cover yet?
-  if(entry->field(QStringLiteral("cover")).isEmpty()) {
-    setCover(entry, item);
+  const QString cover = QStringLiteral("cover");
+  if(entry->field(cover).isEmpty()) {
+    entry->setField(cover, getCoverImage(item));
   }
   return true;
 }
@@ -326,29 +315,4 @@ bool FileReaderBook::readMeta(Data::EntryPtr entry, const KFileItem& item) {
   }
   return true;
 #endif
-}
-
-void FileReaderBook::setCover(Data::EntryPtr entry, const KFileItem& item) {
-  const QString cover = QStringLiteral("cover");
-  QPixmap pixmap;
-  if(useFilePreview()) {
-    pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
-  }
-  if(pixmap.isNull()) {
-    if(d->iconImageId.contains(item.iconName())) {
-      entry->setField(cover, d->iconImageId.value(item.iconName()));
-    } else {
-      pixmap = QIcon::fromTheme(item.iconName()).pixmap(QSize(FILE_PREVIEW_SIZE, FILE_PREVIEW_SIZE));
-      const QString id = ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
-      if(!id.isEmpty()) {
-        entry->setField(cover, id);
-        d->iconImageId.insert(item.iconName(), id);
-      }
-    }
-  } else {
-    const QString id = ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
-    if(!id.isEmpty()) {
-      entry->setField(cover, id);
-    }
-  }
 }

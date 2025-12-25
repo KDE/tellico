@@ -51,6 +51,7 @@ private Q_SLOTS:
 
 private:
   QPixmap m_preview;
+  static QStringList s_defaultPreviewPlugins;
   static QString s_lastErrorMessage;
 };
 

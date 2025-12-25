@@ -39,21 +39,9 @@
 #include <QFileInfo>
 #include <QDomDocument>
 
-namespace {
-  static const int FILE_PREVIEW_SIZE = 128;
-}
-
 using Tellico::FileReaderVideo;
 
-class FileReaderVideo::Private {
-public:
-  Private() = default;
-
-  // cache the icon image ids to avoid repeated creation of Data::Image objects
-  QHash<QString, QString> iconImageId;
-};
-
-FileReaderVideo::FileReaderVideo(const QUrl& url_) : FileReaderMetaData(url_), d(new Private) {
+FileReaderVideo::FileReaderVideo(const QUrl& url_) : FileReaderMetaData(url_) {
 }
 
 FileReaderVideo::~FileReaderVideo() = default;
@@ -137,27 +125,7 @@ bool FileReaderVideo::populate(Data::EntryPtr entry, const KFileItem& item) {
     const QString id = ImageFactory::addImage(QUrl::fromLocalFile(posterFile), true /* quiet */);
     entry->setField(cover, id);
   } else {
-    QPixmap pixmap;
-    if(useFilePreview()) {
-      pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
-    }
-    if(pixmap.isNull()) {
-      if(d->iconImageId.contains(item.iconName())) {
-        entry->setField(cover, d->iconImageId.value(item.iconName()));
-      } else {
-        pixmap = QIcon::fromTheme(item.iconName()).pixmap(QSize(FILE_PREVIEW_SIZE, FILE_PREVIEW_SIZE));
-        const QString id = ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
-        if(!id.isEmpty()) {
-          entry->setField(cover, id);
-          d->iconImageId.insert(item.iconName(), id);
-        }
-      }
-    } else {
-      const QString id = ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
-      if(!id.isEmpty()) {
-        entry->setField(cover, id);
-      }
-    }
+    entry->setField(cover, getCoverImage(item));
   }
 
   return true;

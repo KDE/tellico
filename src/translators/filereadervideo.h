@@ -29,7 +29,6 @@
 
 namespace Tellico {
 
-class FileReaderVideoPrivate;
 class FileReaderVideo : public FileReaderMetaData {
 public:
   FileReaderVideo(const QUrl& u);
@@ -39,10 +38,6 @@ public:
 
 private:
   bool populateNfo(Data::EntryPtr entry, const QString& nfoFile);
-
-  class Private;
-  friend class Private;
-  std::unique_ptr<Private> d;
 };
 
 }

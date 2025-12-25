@@ -29,7 +29,6 @@
 
 namespace Tellico {
 
-class FileReaderBookPrivate;
 class FileReaderBook : public FileReaderMetaData {
 public:
   FileReaderBook(const QUrl& u);
@@ -40,11 +39,6 @@ public:
 private:
   bool readEpub(Data::EntryPtr entry, const KFileItem& fileItem);
   bool readMeta(Data::EntryPtr entry, const KFileItem& fileItem);
-  void setCover(Data::EntryPtr entry, const KFileItem& fileItem);
-
-  class Private;
-  friend class Private;
-  std::unique_ptr<Private> d;
 };
 
 }

@@ -53,9 +53,14 @@ public:
 
   virtual bool populate(Data::EntryPtr entry, const KFileItem& fileItem) = 0;
 
+protected:
+  QString getCoverImage(const KFileItem& fileItem);
+
 private:
   QUrl m_url;
   bool m_useFilePreview;
+  // cache the icon image ids to avoid repeated creation of Data::Image objects
+  QHash<QString, QString> iconImageId;
 };
 
 class FileReaderMetaData : public AbstractFileReader {

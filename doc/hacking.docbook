@@ -359,6 +359,24 @@ This setting is for the location of the lyxpipe for sending bibliographic citati
 </sect3>
 </sect2>
 
+<sect2 id="file-reader-options">
+<title>[File Reader Options]</title>
+
+<para>These settings should be placed in the <emphasis>File Reader Options</emphasis> group.</para>
+
+<sect3>
+<title>Preview Size</title>
+
+<para>This setting is for the maximum size of the generated file preview.</para>
+</sect3>
+
+<sect3>
+<title>Example</title>
+<informalexample>
+<para><userinput>Preview Size=523</userinput></para>
+</informalexample>
+</sect3>
+</sect2>
 </sect1>
 
 <sect1 id="bibtex-translation">
@@ -377,14 +395,6 @@ When bibtex files are imported or exported, certain characters are translated be
 ]]>
 </programlisting>
 
-</sect1>
-
-<sect1 id="xslt-tricks">
-<title>XSLT Tricks</title>
-
-<para>
-Here are some tips for writing XSLT to parse &appname; &XML; data: (TBD).
-</para>
 </sect1>
 
 </chapter>
