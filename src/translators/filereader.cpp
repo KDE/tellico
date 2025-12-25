@@ -192,7 +192,7 @@ QString FileReaderFile::volumeName() const {
     const Solid::StorageAccess* acc = device.as<const Solid::StorageAccess>();
     if(acc && !acc->filePath().isEmpty() && filePath.startsWith(acc->filePath())) {
       // it might be possible for one volume to be mounted at /dir1 and another to be mounted at /dir1/dir2
-      // so we need to find the longest natching filePath
+      // so we need to find the longest matching filePath
       if(acc->filePath().length() > matchingPath.length()) {
         matchingPath = acc->filePath();
         const Solid::StorageVolume* vol = device.as<const Solid::StorageVolume>();
