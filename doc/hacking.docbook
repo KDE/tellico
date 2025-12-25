@@ -313,17 +313,10 @@ The maximum numbers of icons cached in memory may be changed with this setting. 
 </sect3>
 
 <sect3>
-<title>Example</title>
-<informalexample>
-<para><userinput>Max Icon Size=128</userinput></para>
-</informalexample>
-</sect3>
-
-<sect3>
 <title>Image Cache Size</title>
 
 <para>
-The maximum amount of memory in bytes used for caching all the images may be changed with this setting. The default value is 67108864.
+The maximum amount of memory in bytes used for caching all the images may be changed with this setting. The default value is 512 MiB.
 </para>
 </sect3>
 
