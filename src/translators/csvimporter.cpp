@@ -186,6 +186,10 @@ Tellico::Data::CollPtr CSVImporter::collection() {
                                          QUrl() /* referrer */,
                                          m_imageLinksOnly);
         }
+      } else if(fieldType == Data::Field::Date ||
+                m_coll->fieldByName(currentFieldName)->formatType() == FieldFormat::FormatDate) {
+        // allow for '/' in addition to '-' for ISO date format
+        value.replace(QLatin1Char('/'), QLatin1Char('-'));
       }
       bool success = entry->setField(currentFieldName, value);
       // we might need to add a new allowed value

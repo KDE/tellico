@@ -163,3 +163,31 @@ void CsvTest::testBug386483() {
   QCOMPARE(cols.at(1), QStringLiteral("artist2"));
   QCOMPARE(cols.at(2), QStringLiteral("0:34"));
 }
+
+void CsvTest::testDateFormat() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-date.csv"));
+  Tellico::Import::CSVImporter importer(url);
+  importer.setCollectionType(Tellico::Data::Collection::Book);
+  importer.setImportColumns({0, 1, 2},
+                            {QSL("title"),
+                             QSL("cdate"),
+                             QSL("pur_date")});
+  importer.slotFirstRowHeader(false);
+  importer.setDelimiter(QStringLiteral(","));
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
+
+  Tellico::Data::EntryList entries = coll->entries();
+  QCOMPARE(entries.size(), 2);
+  Tellico::Data::EntryPtr entry = entries.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("title1"));
+  QCOMPARE(entry->field(QStringLiteral("cdate")), QStringLiteral("2025-12-25"));
+  QCOMPARE(entry->field(QStringLiteral("pur_date")), QStringLiteral("2025-12-25"));
+  entry = entries.at(1);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("title2"));
+  QCOMPARE(entry->field(QStringLiteral("cdate")), QStringLiteral("2025-12-25"));
+  QCOMPARE(entry->field(QStringLiteral("pur_date")), QStringLiteral("2025-12-25"));
+}

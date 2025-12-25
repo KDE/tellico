@@ -39,6 +39,7 @@ private Q_SLOTS:
   void testEntry();
   void testImportBook();
   void testBug386483();
+  void testDateFormat();
 };
 
 #endif
