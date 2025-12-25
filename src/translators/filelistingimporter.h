@@ -82,6 +82,7 @@ private:
 
   QPointer<KIO::Job> m_job;
   KFileItemList m_files;
+  bool m_useRecursive;
   bool m_useFilePreview;
   bool m_cancelled;
 };

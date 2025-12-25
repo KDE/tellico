@@ -37,6 +37,8 @@
 #include "../progressmanager.h"
 #include "../tellico_debug.h"
 
+#include <KSharedConfig>
+#include <KConfigGroup>
 #include <KLocalizedString>
 #include <KJobWidgets>
 #include <KIO/ListJob>
@@ -53,8 +55,18 @@
 
 using Tellico::Import::FileListingImporter;
 
-FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_), m_collType(Data::Collection::File), m_coll(nullptr)
-    , m_widget(nullptr), m_collCombo(nullptr), m_recursive(nullptr), m_filePreview(nullptr), m_job(nullptr), m_useFilePreview(false), m_cancelled(false) {
+FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_)
+    , m_coll(nullptr)
+    , m_widget(nullptr)
+    , m_collCombo(nullptr)
+    , m_recursive(nullptr)
+    , m_filePreview(nullptr)
+    , m_job(nullptr)
+    , m_cancelled(false) {
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - FileListing"));
+  m_useRecursive = config.readEntry("Recursive", true);
+  m_useFilePreview = config.readEntry("File Preview", false);
+  m_collType = config.readEntry("Collection Type", int(Data::Collection::File));
 }
 
 bool FileListingImporter::canImport(int type) const {
@@ -73,11 +85,17 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   connect(&item, &Tellico::ProgressItem::signalCancelled, this, &FileListingImporter::slotCancel);
   ProgressItem::Done done(this);
 
+  if(m_widget) {
+    m_useRecursive = m_recursive->isChecked();
+    m_useFilePreview = m_filePreview->isChecked();
+    m_collType = m_collCombo->currentType();
+  }
+
   // the importer might be running without a gui/widget
   KIO::JobFlags flags = KIO::DefaultFlags;
   if(!m_widget) flags |= KIO::HideProgressInfo;
   const auto includeHidden = KIO::ListJob::ListFlags{};
-  m_job = (m_widget && m_recursive->isChecked())
+  m_job = m_useRecursive
           ? KIO::listRecursive(url(), flags, includeHidden)
           : KIO::listDir(url(), flags, includeHidden);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -87,11 +105,6 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   if(!m_job->exec() || m_cancelled) {
     myDebug() << "did not run job:" << m_job->errorString();
     return Data::CollPtr();
-  }
-
-  if(m_widget) {
-    m_useFilePreview = m_filePreview->isChecked();
-    m_collType = m_collCombo->currentType();
   }
 
   const uint stepSize = qMax(1, m_files.count()/100);
@@ -138,9 +151,13 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   }
   m_coll->addEntries(entries);
 
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - FileListing"));
+  config.writeEntry("Recursive", m_useRecursive);
+  config.writeEntry("File Preview", m_useFilePreview);
+  config.writeEntry("Collection Type", m_collType);
+
   if(m_cancelled) {
     m_coll = Data::CollPtr();
-    return m_coll;
   }
 
   return m_coll;
@@ -159,14 +176,12 @@ QWidget* FileListingImporter::widget(QWidget* parent_) {
 
   m_recursive = new QCheckBox(i18n("Recursive folder search"), gbox);
   m_recursive->setWhatsThis(i18n("If checked, folders are recursively searched for all files."));
-  // by default, make it checked
-  m_recursive->setChecked(true);
+  m_recursive->setChecked(m_useRecursive);
 
   m_filePreview = new QCheckBox(i18n("Generate file previews"), gbox);
   m_filePreview->setWhatsThis(i18n("If checked, previews of the file contents are generated, which can slow down "
                                    "the folder listing."));
-  // by default, make it no previews
-  m_filePreview->setChecked(false);
+  m_filePreview->setChecked(m_useFilePreview);
 
   QList<int> collTypes;
   collTypes << Data::Collection::Book << Data::Collection::Video << Data::Collection::File;
