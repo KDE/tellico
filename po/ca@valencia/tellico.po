@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-21 00:43+0000\n"
+"POT-Creation-Date: 2025-12-26 00:43+0000\n"
 "PO-Revision-Date: 2025-09-01 10:58+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -237,8 +237,8 @@ msgstr "La meua col·lecció"
 
 #: src/collection.cpp:867 src/core/tellico_strings.cpp:48 src/document.cpp:523
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
-#: src/translators/filereaderbook.cpp:82
-#: src/translators/filereadervideo.cpp:129
+#: src/translators/filereaderbook.cpp:70
+#: src/translators/filereadervideo.cpp:117
 #, kde-format
 msgid "Personal"
 msgstr "Personal"
@@ -776,7 +776,7 @@ msgstr "Clau de Bibtex"
 #: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:213
 #: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:337
 #: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
-#: src/field.cpp:332 src/translators/filereadervideo.cpp:282
+#: src/field.cpp:332 src/translators/filereadervideo.cpp:250
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -918,8 +918,8 @@ msgstr "Paraules clau"
 #: src/collections/bibtexcollection.cpp:236 src/collections/filecatalog.cpp:50
 #: src/fetch/entrezfetcher.cpp:446 src/fetch/entrezfetcher.cpp:522
 #: src/fetch/opdsfetcher.cpp:440 src/field.cpp:200
-#: src/translators/filereaderbook.cpp:81
-#: src/translators/filereadervideo.cpp:128
+#: src/translators/filereaderbook.cpp:69
+#: src/translators/filereadervideo.cpp:116
 #: src/translators/gcstarimporter.cpp:117
 #, kde-format
 msgid "URL"
@@ -1115,7 +1115,7 @@ msgid "Trade Paperback"
 msgstr "Rústica econòmica"
 
 #: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
-#: src/fetch/itunesfetcher.cpp:449 src/translators/filereaderbook.cpp:86
+#: src/fetch/itunesfetcher.cpp:449 src/translators/filereaderbook.cpp:74
 #, kde-format
 msgid "E-Book"
 msgstr "Llibre electrònic"
@@ -2575,8 +2575,8 @@ msgstr "Opcions de plantilla"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:242
-#: src/translators/filelistingimporter.cpp:177
+#: src/translators/csvimporter.cpp:246
+#: src/translators/filelistingimporter.cpp:192
 #, kde-format
 msgid "Collection &type:"
 msgstr "&Tipus de col·lecció:"
@@ -3799,7 +3799,7 @@ msgstr "Testimoni de l'usuari:"
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
 #: src/fetch/themoviedbfetcher.cpp:552 src/fetch/vndbfetcher.cpp:279
-#: src/fetch/vndbfetcher.cpp:425 src/translators/filereadervideo.cpp:206
+#: src/fetch/vndbfetcher.cpp:425 src/translators/filereadervideo.cpp:174
 #, kde-format
 msgid "Original Title"
 msgstr "Títol original"
@@ -4314,7 +4314,7 @@ msgid "Field"
 msgstr "Camp"
 
 #: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:549
-#: src/translators/filereadervideo.cpp:281
+#: src/translators/filereadervideo.cpp:249
 #, kde-format
 msgid "TMDb Link"
 msgstr "Enllaç cap a TMDb"
@@ -6912,7 +6912,7 @@ msgstr "Importa només els elements propis"
 msgid "User ID:"
 msgstr "ID d'usuari:"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:237
+#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:241
 #, kde-format
 msgid "CSV Options"
 msgstr "Opcions de CSV"
@@ -6933,7 +6933,7 @@ msgstr ""
 msgid "Delimiter"
 msgstr "Delimitador"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:275
+#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:279
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6947,7 +6947,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Coma"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:282
+#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:286
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "Utilitza coma com a delimitador."
@@ -6957,7 +6957,7 @@ msgstr "Utilitza coma com a delimitador."
 msgid "Semicolon"
 msgstr "Punt i coma"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:287
+#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:291
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "Utilitza punt i coma com a delimitador."
@@ -6967,7 +6967,7 @@ msgstr "Utilitza punt i coma com a delimitador."
 msgid "Tab"
 msgstr "Tabulador"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:292
+#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "Utilitza el tabulador com a delimitador."
@@ -6977,24 +6977,24 @@ msgstr "Utilitza el tabulador com a delimitador."
 msgid "Other"
 msgstr "Altre"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:297
+#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:301
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "Utilitza una cadena personalitzada com a delimitador."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:304
+#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:308
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 "Una cadena personalitzada com ara dos punts, pot ser utilitzada com a "
 "delimitador."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:323
+#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:327
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "Delimitador de columna de taula:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:322
+#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:326
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
@@ -7002,39 +7002,39 @@ msgstr ""
 "El delimitador de columna separa valors en cada columna d'un camp de "
 "<i>Taula</i>."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:334
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:338
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "Delimitador de fila de taula:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:333
+#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:337
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
 "El delimitador de fila separa valors en cada fila d'un camp de <i>Taula</i>."
 
-#: src/translators/csvimporter.cpp:247
-#: src/translators/filelistingimporter.cpp:176
+#: src/translators/csvimporter.cpp:251
+#: src/translators/filelistingimporter.cpp:191
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Trieu el tipus de col·lecció que s'està important."
 
-#: src/translators/csvimporter.cpp:254
+#: src/translators/csvimporter.cpp:258
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "La primera &fila conté els camps de títol"
 
-#: src/translators/csvimporter.cpp:255
+#: src/translators/csvimporter.cpp:259
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr "Si està marcada, la primera fila s'utilitzarà com a camps de títol."
 
-#: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:337
+#: src/translators/csvimporter.cpp:263 src/translators/gcstarimporter.cpp:337
 #, kde-format
 msgid "Import images as links only"
 msgstr "Importa les imatges només com a enllaços"
 
-#: src/translators/csvimporter.cpp:260 src/translators/gcstarimporter.cpp:338
+#: src/translators/csvimporter.cpp:264 src/translators/gcstarimporter.cpp:338
 #, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
@@ -7043,37 +7043,37 @@ msgstr ""
 "Si està marcada, els camins cap a les imatges s'importaran com a enllaços en "
 "lloc de ser gestionades directament per Tellico."
 
-#: src/translators/csvimporter.cpp:274
+#: src/translators/csvimporter.cpp:278
 #, kde-format
 msgid "Delimiter:"
 msgstr "Delimitador:"
 
-#: src/translators/csvimporter.cpp:280
+#: src/translators/csvimporter.cpp:284
 #, kde-format
 msgid "&Comma"
 msgstr "&Coma"
 
-#: src/translators/csvimporter.cpp:286
+#: src/translators/csvimporter.cpp:290
 #, kde-format
 msgid "&Semicolon"
 msgstr "&Punt i coma"
 
-#: src/translators/csvimporter.cpp:291
+#: src/translators/csvimporter.cpp:295
 #, kde-format
 msgid "Ta&b"
 msgstr "Ta&bulador"
 
-#: src/translators/csvimporter.cpp:296
+#: src/translators/csvimporter.cpp:300
 #, kde-format
 msgid "Ot&her:"
 msgstr "Altr&e:"
 
-#: src/translators/csvimporter.cpp:353
+#: src/translators/csvimporter.cpp:357
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "La taula mostra les primeres cinc línies del fitxer CSV."
 
-#: src/translators/csvimporter.cpp:360
+#: src/translators/csvimporter.cpp:364
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -7084,22 +7084,22 @@ msgstr ""
 "triant una columna, seleccionant el camp i a continuació clicant damunt del "
 "botó <i>Assigna camp</i>.</qt>"
 
-#: src/translators/csvimporter.cpp:362
+#: src/translators/csvimporter.cpp:366
 #, kde-format
 msgid "Co&lumn:"
 msgstr "Co&lumna:"
 
-#: src/translators/csvimporter.cpp:375
+#: src/translators/csvimporter.cpp:379
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "Camps de &dades en esta columna:"
 
-#: src/translators/csvimporter.cpp:389
+#: src/translators/csvimporter.cpp:393
 #, kde-format
 msgid "&Assign Field"
 msgstr "&Assigna camp"
 
-#: src/translators/csvimporter.cpp:430
+#: src/translators/csvimporter.cpp:434
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
@@ -7108,12 +7108,12 @@ msgstr ""
 "S'ha d'assignar almenys una columna a un camp. Només s'importaran les "
 "columnes assignades."
 
-#: src/translators/csvimporter.cpp:627
+#: src/translators/csvimporter.cpp:631
 #, kde-format
 msgid "Review"
 msgstr "Revisió"
 
-#: src/translators/csvimporter.cpp:720
+#: src/translators/csvimporter.cpp:724
 #, kde-format
 msgid "<New Field>"
 msgstr "<Camp nou>"
@@ -7123,34 +7123,34 @@ msgstr "<Camp nou>"
 msgid "Discogs Options"
 msgstr "Opcions de Discogs"
 
-#: src/translators/filelistingimporter.cpp:71
+#: src/translators/filelistingimporter.cpp:83
 #, kde-format
 msgid "Scanning files..."
 msgstr "S'estan explorant els fitxers…"
 
-#: src/translators/filelistingimporter.cpp:157
+#: src/translators/filelistingimporter.cpp:174
 #, kde-format
 msgid "File Listing Options"
 msgstr "Opcions de llistat de fitxers"
 
-#: src/translators/filelistingimporter.cpp:160
+#: src/translators/filelistingimporter.cpp:177
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Busca recursiva en les carpetes"
 
-#: src/translators/filelistingimporter.cpp:161
+#: src/translators/filelistingimporter.cpp:178
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 "Si està marcada, les carpetes seran explorades recursivament per a buscar "
 "tots els fitxers."
 
-#: src/translators/filelistingimporter.cpp:165
+#: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Generate file previews"
 msgstr "Genera vistes prèvies dels fitxers"
 
-#: src/translators/filelistingimporter.cpp:166
+#: src/translators/filelistingimporter.cpp:182
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
