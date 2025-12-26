@@ -762,7 +762,7 @@ bool ImageHandler::start(QStringView, QStringView, const QXmlStreamAttributes& a
 bool ImageHandler::end(QStringView, QStringView) {
   bool needToAddInfo = true;
   if(d->loadImages && !d->text.isEmpty()) {
-    QByteArray ba = QByteArray::fromBase64(d->text.toLatin1());
+    const QByteArray ba = QByteArray::fromBase64(d->text.toLatin1());
     if(!ba.isEmpty()) {
       QString result = ImageFactory::addImage(ba, m_format, m_imageId);
       if(result.isEmpty()) {
