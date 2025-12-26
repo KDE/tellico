@@ -369,8 +369,7 @@ void TellicoReadTest::testLocalImageLink() {
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(imageId));
 
-  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/image_link_test.xml"));
-  QFile f(url.toLocalFile());
+  QFile f(QFINDTESTDATA("/data/image_link_test.xml"));
   QVERIFY(f.exists());
   QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
 
