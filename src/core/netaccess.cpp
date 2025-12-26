@@ -60,7 +60,9 @@ bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, b
   if(target_.isEmpty()) {
     QTemporaryFile tmpFile;
     tmpFile.setAutoRemove(false);
-    tmpFile.open();
+    if(!tmpFile.open()) {
+      return false;
+    }
     target_ = tmpFile.fileName();
     if(!tmpfiles) {
       tmpfiles = new QStringList();

@@ -241,8 +241,7 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
       return true;
     }
     QSaveFile f(url_.toLocalFile());
-    f.open(QIODevice::WriteOnly);
-    if(f.error() != QFile::NoError) {
+    if(!f.open(QIODevice::WriteOnly) || f.error() != QFile::NoError) {
       if(!quiet_) {
         GUI::Proxy::sorry(TC_I18N2(errorWrite, url_.fileName()));
       }
@@ -253,10 +252,12 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
 
   // save to remote file
   QTemporaryFile tempfile;
-  tempfile.open();
+  if(!tempfile.open()) {
+    myWarning() << "Failed to open temporary file";
+    return false;
+  }
   QSaveFile f(tempfile.fileName());
-  f.open(QIODevice::WriteOnly);
-  if(f.error() != QFile::NoError) {
+  if(!f.open(QIODevice::WriteOnly) || f.error() != QFile::NoError) {
     tempfile.remove();
     if(!quiet_) {
       GUI::Proxy::sorry(TC_I18N2(errorWrite, url_.fileName()));
@@ -306,8 +307,7 @@ bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool f
 
   if(url_.isLocalFile()) {
     QSaveFile f(url_.toLocalFile());
-    f.open(QIODevice::WriteOnly);
-    if(f.error() != QFile::NoError) {
+    if(!f.open(QIODevice::WriteOnly) || f.error() != QFile::NoError) {
       if(!quiet_) {
         GUI::Proxy::sorry(TC_I18N2(errorWrite, url_.fileName()));
       }
@@ -318,10 +318,12 @@ bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool f
 
   // save to remote file
   QTemporaryFile tempfile;
-  tempfile.open();
+  if(!tempfile.open()) {
+    myWarning() << "Failed to open temporary file";
+    return false;
+  }
   QSaveFile f(tempfile.fileName());
-  f.open(QIODevice::WriteOnly);
-  if(f.error() != QFile::NoError) {
+  if(!f.open(QIODevice::WriteOnly) || f.error() != QFile::NoError) {
     if(!quiet_) {
       GUI::Proxy::sorry(TC_I18N2(errorWrite, url_.fileName()));
     }

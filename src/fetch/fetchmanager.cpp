@@ -472,7 +472,10 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
       // back to the config so the configWidget can read it. But if the spec file
       // is not readable, that doesn't work. So work around it with a copy to a temp file
       QTemporaryFile tmpFile;
-      tmpFile.open();
+      if(!tmpFile.open()) {
+        myWarning() << "Failed to open temporary file";
+        return nullptr;
+      }
       QUrl from = QUrl::fromLocalFile(m_scriptMap[name_]);
       QUrl to = QUrl::fromLocalFile(tmpFile.fileName());
       // have to overwrite since QTemporaryFile already created it
