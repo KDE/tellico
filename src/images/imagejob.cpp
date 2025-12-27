@@ -46,8 +46,7 @@ ImageJob::ImageJob(const QUrl& url_, const QString& id_, bool quiet_) : KIO::Job
   QTimer::singleShot(0, this, &ImageJob::slotStart);
 }
 
-ImageJob::~ImageJob() {
-}
+ImageJob::~ImageJob() = default;
 
 QString ImageJob::errorString() const {
   // by default, KIO::Job returns an error string depending on the error code and

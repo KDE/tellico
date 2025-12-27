@@ -55,8 +55,7 @@ TellicoImporter::TellicoImporter(const QString& text_) : DataImporter(text_),
     m_cancelled(false), m_hasImages(false), m_buffer(nullptr), m_zip(nullptr), m_imgDir(nullptr) {
 }
 
-TellicoImporter::~TellicoImporter() {
-}
+TellicoImporter::~TellicoImporter() = default;
 
 Tellico::Data::CollPtr TellicoImporter::collection() {
   if(m_coll) {

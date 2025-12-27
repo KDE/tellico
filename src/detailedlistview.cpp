@@ -84,8 +84,7 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_)
   connect(header(), &QHeaderView::sectionCountChanged, this, &DetailedListView::updateHeaderMenu);
 }
 
-DetailedListView::~DetailedListView() {
-}
+DetailedListView::~DetailedListView() = default;
 
 Tellico::EntryModel* DetailedListView::sourceModel() const {
   return static_cast<EntryModel*>(sortModel()->sourceModel());
