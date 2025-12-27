@@ -546,9 +546,9 @@ void Document::renameCollection(const QString& newTitle_) {
   m_coll->setTitle(newTitle_);
 }
 
-// this only gets called when a zip file with images is opened
-// by loading every image, it gets pulled out of the zip file and
-// copied to disk. Then the zip file can be closed and not retained in memory
+// this only gets called when a file with images include (either zip or xml) is opened
+// by loading every image, it gets pulled out of the file and
+// copied to disk. Then the file can be closed and not retained in memory
 void Document::slotLoadAllImages() {
   myLog() << "Loading all images into cache...";
   QString id;
@@ -560,7 +560,7 @@ void Document::slotLoadAllImages() {
         continue;
       }
       // this is the early loading, so just by calling imageById()
-      // the image gets sucked from the zip file and written to disk
+      // the image gets sucked from the file and written to disk
       // by ImageFactory::imageById()
       // TODO:: does this need to check against images with link only?
       if(ImageFactory::imageById(id).isNull()) {
