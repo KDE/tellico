@@ -61,48 +61,45 @@ void EntryIconModel::setSourceModel(QAbstractItemModel* newSourceModel_) {
 }
 
 QVariant EntryIconModel::data(const QModelIndex& index_, int role_) const {
-  switch(role_) {
+  if(role_ == Qt::DecorationRole) {
     // this IdentityModel serves to return the entry's primary image as the DecorationRole
     // no matter what the index column may be
-    case Qt::DecorationRole:
-    {
-      Data::EntryPtr entry = index_.data(EntryPtrRole).value<Data::EntryPtr>();
-      if(!entry) {
-        return QVariant();
-      }
-
-      // return entry primary image in this case
-      Data::FieldPtr field = entry->collection()->primaryImageField();
-      if(!field) {
-        return defaultIcon(entry->collection());
-      }
-      const QString id = entry->field(field);
-      if(m_iconCache.contains(id)) {
-        if(m_updatedRows.contains(index_.row())) {
-          delete m_iconCache.take(id);
-        } else {
-          return QIcon(*m_iconCache.object(id));
-        }
-      }
-      m_updatedRows.remove(index_.row());
-
-      QVariant v = QIdentityProxyModel::data(index_, PrimaryImageRole);
-      if(v.isNull() || !v.canConvert<QPixmap>()) {
-        return defaultIcon(entry->collection());
-      }
-
-      QPixmap p = v.value<QPixmap>();
-      if(p.height() > MAX_ENTRY_ICON_SIZE || p.width() > MAX_ENTRY_ICON_SIZE) {
-        p = p.scaled(MAX_ENTRY_ICON_SIZE, MAX_ENTRY_ICON_SIZE, Qt::KeepAspectRatioByExpanding);
-      }
-      QIcon* icon = new QIcon(p);
-      if(!m_iconCache.insert(id, icon)) {
-        // failing to insert invalidates the icon pointer
-        myDebug() << "failed to insert into icon cache";
-        return QIcon(p);
-      }
-      return QIcon(*icon);
+    Data::EntryPtr entry = index_.data(EntryPtrRole).value<Data::EntryPtr>();
+    if(!entry) {
+      return QVariant();
     }
+
+    // return entry primary image in this case
+    Data::FieldPtr field = entry->collection()->primaryImageField();
+    if(!field) {
+      return defaultIcon(entry->collection());
+    }
+    const QString id = entry->field(field);
+    if(m_iconCache.contains(id)) {
+      if(m_updatedRows.contains(index_.row())) {
+        delete m_iconCache.take(id);
+      } else {
+        return QIcon(*m_iconCache.object(id));
+      }
+    }
+    m_updatedRows.remove(index_.row());
+
+    QVariant v = QIdentityProxyModel::data(index_, PrimaryImageRole);
+    if(v.isNull() || !v.canConvert<QPixmap>()) {
+      return defaultIcon(entry->collection());
+    }
+
+    QPixmap p = v.value<QPixmap>();
+    if(p.height() > MAX_ENTRY_ICON_SIZE || p.width() > MAX_ENTRY_ICON_SIZE) {
+      p = p.scaled(MAX_ENTRY_ICON_SIZE, MAX_ENTRY_ICON_SIZE, Qt::KeepAspectRatioByExpanding);
+    }
+    QIcon* icon = new QIcon(p);
+    if(!m_iconCache.insert(id, icon)) {
+      // failing to insert invalidates the icon pointer
+      myDebug() << "failed to insert into icon cache";
+      return QIcon(p);
+    }
+    return QIcon(*icon);
   }
 
   return QIdentityProxyModel::data(index_, role_);
