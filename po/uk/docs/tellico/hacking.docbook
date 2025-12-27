@@ -600,21 +600,10 @@
 
 <sect3>
 <title
->Приклад</title>
-<informalexample>
-<para
-><userinput
->Max Icon Size=128</userinput
-></para>
-</informalexample>
-</sect3>
-
-<sect3>
-<title
 >Image Cache Size</title>
 
 <para
->За допомогою цього параметра можна змінити об’єм пам’яті у байтах, який використовуватиметься для кешування всіх зображень. Типовим значенням параметра є 67108864. </para>
+>За допомогою цього параметра можна змінити об’єм пам’яті у байтах, який використовуватиметься для кешування всіх зображень. Типовим значенням параметра є 512 МіБ. </para>
 </sect3>
 
 <sect3>
@@ -661,6 +650,34 @@
 </sect3>
 </sect2>
 
+<sect2 id="file-reader-options">
+<title
+>[File Reader Options]</title>
+
+<para
+>Ці параметри слід вказати у групі <emphasis
+>File Reader Options</emphasis
+>.</para>
+
+<sect3>
+<title
+>Preview Size</title>
+
+<para
+>Цей параметр призначено для встановлення мінімального розміру зображення створеного для попереднього перегляду вмісту файла.</para>
+</sect3>
+
+<sect3>
+<title
+>Приклад</title>
+<informalexample>
+<para
+><userinput
+>Preview Size=523</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
 </sect1>
 
 <sect1 id="bibtex-translation">
@@ -683,14 +700,6 @@
 ]]>
 </programlisting>
 
-</sect1>
-
-<sect1 id="xslt-tricks">
-<title
->Трюки з XSLT</title>
-
-<para
->Тут наведено декілька підказок щодо написання XSLT призначеного для обробки даних &XML; програми &appname;: (TBD). </para>
 </sect1>
 
 </chapter>

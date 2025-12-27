@@ -600,21 +600,10 @@
 
 <sect3>
 <title
->Voorbeeld</title>
-<informalexample>
-<para
-><userinput
->Max Icon Size=128</userinput
-></para>
-</informalexample>
-</sect3>
-
-<sect3>
-<title
 >Image Cache Size</title>
 
 <para
->De maximum hoeveelheid geheugen in bytes gebruikt voor buffering van alle afbeeldingen kan gewijzigd worden met deze instelling. De standaard waarde is 67108864. </para>
+>De maximum hoeveelheid geheugen in bytes gebruikt voor buffering van alle afbeeldingen kan gewijzigd worden met deze instelling. De standaard waarde is 512 MiB. </para>
 </sect3>
 
 <sect3>
@@ -661,6 +650,34 @@
 </sect3>
 </sect2>
 
+<sect2 id="file-reader-options">
+<title
+>[Opties voor bestand lezen]</title>
+
+<para
+>Deze instellingen kunnen geplaatst worden in de groep <emphasis
+>Opties voor bestand lezen</emphasis
+>.</para>
+
+<sect3>
+<title
+>Voorbeeldgrootte</title>
+
+<para
+>Deze instelling is voor de maximum grootte van het gegenereerde bestandsvoorbeeld.</para>
+</sect3>
+
+<sect3>
+<title
+>Voorbeeld</title>
+<informalexample>
+<para
+><userinput
+>Voorbeeldgrootte=523</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
 </sect1>
 
 <sect1 id="bibtex-translation">
@@ -683,14 +700,6 @@
 ]]>
 </programlisting>
 
-</sect1>
-
-<sect1 id="xslt-tricks">
-<title
->XSLT-trucs</title>
-
-<para
->Hier zijn enige tips voor het schrijven van XSLT om &XML;-gegevens van &appname; te ontleden: (TBD). </para>
 </sect1>
 
 </chapter>
