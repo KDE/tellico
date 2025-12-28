@@ -269,7 +269,7 @@ QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
   // seems to have problems with dashes, too
   value.replace(QLatin1Char('-'), QLatin1Char('+'));
 
-  QString query;
+  QString query, id;
   switch(key_) {
     case Title:
       query = QStringLiteral("ti:%1").arg(value);
@@ -285,15 +285,12 @@ QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
       break;
 
     case ArxivID:
-      {
       // remove prefix and/or version number
-      QString value = value_;
+      id = value_;
       static const QRegularExpression arxivRx(QLatin1String("^arxiv:"), QRegularExpression::CaseInsensitiveOption);
       static const QRegularExpression vRx(QLatin1String("v\\d+$"));
-      value.remove(arxivRx);
-      value.remove(vRx);
-      query = QStringLiteral("id:%1").arg(value);
-      }
+      id.remove(arxivRx);
+      id.remove(vRx);
       break;
 
     default:
@@ -301,6 +298,7 @@ QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
       return QUrl();
   }
   q.addQueryItem(QStringLiteral("search_query"), query);
+  q.addQueryItem(QStringLiteral("id_list"), id);
   u.setQuery(q);
 
 //  myDebug() << "url: " << u;
