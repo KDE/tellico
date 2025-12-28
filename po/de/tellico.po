@@ -6,20 +6,21 @@
 # SPDX-FileCopyrightText: 2009 Jannick Kuhr <opensource@kuhr.org>
 # SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2016, 2017, 2018, 2020, 2022, 2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2010 Panagiotis Papadopoulos <pano_90@gmx.net>
+# SPDX-FileCopyrightText: 2025 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2023-05-12 19:32+0200\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
-"Language-Team: German <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2025-12-25 12:04+0100\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.07.70\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1671,8 +1672,6 @@ msgstr "Genesis"
 msgid "Dreamcast"
 msgstr "Dreamcast"
 
-# Das sind die Altersbeschränkungen der amerikanischen ESRB.
-# Sollen wir hier die deutschen Pendants der USK als Übersetzung verwenden?
 #: src/collections/gamecollection.cpp:281
 #, kde-format
 msgctxt ""
@@ -1682,9 +1681,9 @@ msgid ""
 "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, "
 "Pending"
 msgstr ""
-"Unbewertet, Freigegeben ab 18 Jahren, Freigegeben ab sechzehn Jahren, "
-"Freigegeben ab zwölf Jahren, Freigegeben ab zehn Jahren, Freigegeben ab "
-"sechs Jahren, Freigegeben ohne Altersbeschränkung"
+"Unrated (nicht bewertet), Adults Only (ab 18), Mature (ab 17), Teen (ab 13), "
+"Everyone 10+ (ab 10), Everyone (jedes Alter), Early Childhood (unter 3), "
+"Pending (ausstehend)"
 
 #: src/collections/musiccollection.cpp:38
 #, kde-format
@@ -2403,10 +2402,9 @@ msgstr "Farbe für hervorgehobenen Text der Vorlage"
 #: src/config/tellico_config.kcfg:403 src/config/tellico_config.kcfg:433
 #: src/config/tellico_config.kcfg:463 src/config/tellico_config.kcfg:493
 #: src/config/tellico_config.kcfg:523
-#, fuzzy, kde-format
-#| msgid "Template highlight color"
+#, kde-format
 msgid "Template link color"
-msgstr "Hervorhebungsfarbe der Vorlage"
+msgstr "Verknüpfungsfarbe der Vorlage"
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -2455,11 +2453,12 @@ msgid "&Enable regular expressions in quick filter"
 msgstr "&Reguläre Ausdrücke im Schnellfilter aktivieren"
 
 #: src/configdialog.cpp:222
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
-msgstr "Wenn markiert, werden die Feld-Namen als Tabellenkopf gedruckt."
+msgstr ""
+"Wenn aktiviert, wird Text durch den Schnellfilter als regulärer Ausdruck "
+"interpretiert."
 
 #: src/configdialog.cpp:227
 #, kde-format
@@ -3331,7 +3330,7 @@ msgstr "Die exportierte Datei nach den lokalen Einstellungen kodieren."
 #: src/fetch/adsfetcher.cpp:316
 #, kde-format
 msgid "SAO/NASA Astrophysics Data System"
-msgstr ""
+msgstr "SAO/NASA Astrophysics Data System"
 
 #: src/fetch/adsfetcher.cpp:331 src/fetch/amazonfetcher.cpp:1093
 #: src/fetch/bibliosharefetcher.cpp:173 src/fetch/comicvinefetcher.cpp:232
@@ -3788,10 +3787,9 @@ msgid "BoardGameGeek Link"
 msgstr "BoardGameGeek-Verknüpfung"
 
 #: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:808
-#, fuzzy, kde-format
-#| msgid "Comic Vine Link"
+#, kde-format
 msgid "Colnect Link"
-msgstr "Comic Vine-Verknüpfung"
+msgstr "Colnet-Verknüpfung"
 
 #: src/fetch/colnectfetcher.cpp:546 src/fetch/colnectfetcher.cpp:814
 #, kde-format
@@ -3915,10 +3913,9 @@ msgid "Discogs Audio Search"
 msgstr "Discogs-Audio-Suche"
 
 #: src/fetch/discogsfetcher.cpp:539 src/translators/discogsimporter.cpp:200
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "Benutzer-Token: "
+msgstr "Benutzer-Token:"
 
 #: src/fetch/doubanfetcher.cpp:350 src/fetch/doubanfetcher.cpp:368
 #: src/fetch/doubanfetcher.cpp:386 src/fetch/doubanfetcher.cpp:619
@@ -4068,10 +4065,9 @@ msgid "Raw Query"
 msgstr "Direkte Abfrage"
 
 #: src/fetch/filmaffinityfetcher.cpp:285 src/fetch/filmaffinityfetcher.cpp:464
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Filmaster-Verknüpfung"
+msgstr "FilmAffinity-Verknüpfung"
 
 #: src/fetch/filmaffinityfetcher.cpp:499
 #, kde-format
@@ -4093,10 +4089,9 @@ msgstr "Filmaster-Verknüpfung"
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:319
 #: src/fetch/gaminghistoryfetcher.cpp:374
-#, fuzzy, kde-format
-#| msgid "GiantBomb Link"
+#, kde-format
 msgid "Gaming History Link"
-msgstr "GiantBomb-Verknüpfung"
+msgstr "Gaming-History-Verknüpfung"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
@@ -4339,34 +4334,29 @@ msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
 #: src/fetch/opdsfetcher.cpp:199 src/fetch/opdsfetcher.cpp:209
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Es sind keine Metadaten aus der PDF-Datei gelesen worden."
+msgstr "Tellico kann die Suchbeschreibung im OPDS-Katalog nicht lesen."
 
 #: src/fetch/opdsfetcher.cpp:421
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "OPDS Catalog"
-msgstr "Dateikatalog"
+msgstr "OPDS-Katalog"
 
 #: src/fetch/opdsfetcher.cpp:446
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "Catalog: "
-msgstr "Dateikatalog"
+msgstr "Katalog: "
 
 #: src/fetch/opdsfetcher.cpp:451
-#, fuzzy, kde-format
-#| msgid "Enter the host name of the server."
+#, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr "Geben Sie den Rechnernamen des Servers ein."
+msgstr "Geben Sie den Link zum OPDS-Server ein."
 
 #: src/fetch/opdsfetcher.cpp:456
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "&Verify Catalog"
-msgstr "Dateikatalog"
+msgstr "Katalog über&prüfen"
 
 #: src/fetch/openlibraryfetcher.cpp:281 src/fetch/openlibraryfetcher.cpp:454
 #, kde-format
@@ -4492,10 +4482,9 @@ msgid "Subscriber PIN: "
 msgstr "Abonnenten-PIN:"
 
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "Comic Vine Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Comic Vine-Verknüpfung"
+msgstr "VGCollect-Verknüpfung"
 
 #: src/fetch/videogamegeekfetcher.cpp:205
 #, kde-format
@@ -5917,16 +5906,14 @@ msgid "Import audio CD information"
 msgstr "Audio-CD-Informationen importieren"
 
 #: src/mainwindow.cpp:459
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Goodreads-Sammlung importieren ..."
+msgstr "Discogs-Sammlung importieren …"
 
 #: src/mainwindow.cpp:460
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Eine Sammlung von Goodreads.com importieren"
+msgstr "Eine Sammlung von Discogs.com importieren"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7234,10 +7221,9 @@ msgid "<New Field>"
 msgstr "<Neues Feld>"
 
 #: src/translators/discogsimporter.cpp:191
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Discogs-Verknüpfung"
+msgstr "Discogs-Einstellungen"
 
 #: src/translators/filelistingimporter.cpp:87
 #, kde-format
