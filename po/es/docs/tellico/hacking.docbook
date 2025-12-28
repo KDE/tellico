@@ -598,21 +598,10 @@
 
 <sect3>
 <title
->Ejemplo</title>
-<informalexample>
-<para
-><userinput
->Max Icon Size=128</userinput
-></para>
-</informalexample>
-</sect3>
-
-<sect3>
-<title
 >Tamaño de la caché de imágenes</title>
 
 <para
->La cantidad máxima de memoria en bytes usada para almacenar todas las imágenes se puede cambiar con este ajuste. El valor por defecto es 67108864. </para>
+>La cantidad máxima de memoria en bytes usada para almacenar todas las imágenes se puede cambiar con este ajuste. El valor por defecto es 512 MiB. </para>
 </sect3>
 
 <sect3>
@@ -659,6 +648,34 @@
 </sect3>
 </sect2>
 
+<sect2 id="file-reader-options">
+<title
+>[Opciones del lector de archivos]</title>
+
+<para
+>Estos ajustes deberían colocarse en el grupo <emphasis
+>Opciones del lector de archivos</emphasis
+>.</para>
+
+<sect3>
+<title
+>Tamaño de la vista previa</title>
+
+<para
+>Este ajuste es para el tamaño máximo de la vista previa del archivo.</para>
+</sect3>
+
+<sect3>
+<title
+>Ejemplo</title>
+<informalexample>
+<para
+><userinput
+>Tamaño de la vista previa=523</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
 </sect1>
 
 <sect1 id="bibtex-translation">
@@ -679,14 +696,6 @@
 ]]>
 </programlisting>
 
-</sect1>
-
-<sect1 id="xslt-tricks">
-<title
->Trucos XSLT</title>
-
-<para
->Aquí tiene algunos trucos para escribir XSLT para analizar sintácticamente los datos &XML; de &appname; (TBD). </para>
 </sect1>
 
 </chapter>
