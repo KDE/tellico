@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-26 00:43+0000\n"
+"POT-Creation-Date: 2025-12-29 00:44+0000\n"
 "PO-Revision-Date: 2025-09-01 15:06+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -938,7 +938,7 @@ msgid "Notes"
 msgstr "Notities"
 
 #: src/collections/bibtexcollection.cpp:487
-#: src/translators/xmlstatehandler.cpp:327
+#: src/translators/xmlstatehandler.cpp:328
 #, kde-format
 msgid "Unknown"
 msgstr "Onbekend"
@@ -1684,7 +1684,7 @@ msgstr "Drager"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/itunesfetcher.cpp:331 src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:438
+#: src/translators/xmlstatehandler.cpp:440
 #, kde-format
 msgid "Artist"
 msgstr "Artiest"
@@ -1707,14 +1707,14 @@ msgstr "Nummers"
 #: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:244 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:437
+#: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Title"
 msgstr "Titel"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:516
 #: src/fetch/itunesfetcher.cpp:332 src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:439
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Length"
 msgstr "Lengte"
@@ -1904,13 +1904,13 @@ msgid "Cast"
 msgstr "Acteurs"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:441
+#: src/translators/xmlstatehandler.cpp:443
 #, kde-format
 msgid "Actor/Actress"
 msgstr "Acteur/actrice"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:442
+#: src/translators/xmlstatehandler.cpp:444
 #, kde-format
 msgid "Role"
 msgstr "Rol"
@@ -2999,33 +2999,33 @@ msgstr "Categorie"
 msgid "Miscellaneous"
 msgstr "Diversen"
 
-#: src/detailedlistview.cpp:520
+#: src/detailedlistview.cpp:519
 #, kde-format
 msgid "View Columns"
 msgstr "Toon Kolommen"
 
-#: src/detailedlistview.cpp:535
+#: src/detailedlistview.cpp:534
 #, kde-format
 msgctxt "Noun, Menu name"
 msgid "Columns"
 msgstr "Kolommen"
 
-#: src/detailedlistview.cpp:538
+#: src/detailedlistview.cpp:537
 #, kde-format
 msgid "Hide This Column"
 msgstr "Deze kolom verbergen"
 
-#: src/detailedlistview.cpp:540
+#: src/detailedlistview.cpp:539
 #, kde-format
 msgid "Resize to Content"
 msgstr "Grootte wijzigen naar inhoud"
 
-#: src/detailedlistview.cpp:545
+#: src/detailedlistview.cpp:544
 #, kde-format
 msgid "Show All Columns"
 msgstr "Alle kolommen tonen"
 
-#: src/detailedlistview.cpp:547
+#: src/detailedlistview.cpp:546
 #, kde-format
 msgid "Hide All Columns"
 msgstr "Alle kolommen verbergen"
@@ -3607,7 +3607,7 @@ msgstr ""
 "Hartelijk dank aan arXiv voor gebruik van zijn open interoperabiliteit voor "
 "toegang."
 
-#: src/fetch/arxivfetcher.cpp:345 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:343 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
@@ -5109,7 +5109,7 @@ msgstr "Rij omhoog verplaatsen"
 msgid "Move Row Down"
 msgstr "Rij omlaag verplaatsen"
 
-#: src/images/imagejob.cpp:78 src/images/imagejob.cpp:113
+#: src/images/imagejob.cpp:77 src/images/imagejob.cpp:112
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico kan de afbeelding niet laden - %1."
@@ -7361,12 +7361,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:178
+#: src/translators/tellicoimporter.cpp:177
 #, kde-format
 msgid "The file is empty."
 msgstr "Het bestand is leeg."
 
-#: src/translators/tellicoimporter.cpp:191
+#: src/translators/tellicoimporter.cpp:190
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "Het bestand bevat geen verzamel data."
@@ -7390,7 +7390,7 @@ msgstr ""
 "Indien aangevinkt worden de afbeeldingen ingesloten in de XML-stream als "
 "base64 gecodeerde elementen."
 
-#: src/translators/xmlstatehandler.cpp:127
+#: src/translators/xmlstatehandler.cpp:128
 #, kde-format
 msgid "It is from a future version of Tellico."
 msgstr "Dit is van een toekomstige versie van Tellico."

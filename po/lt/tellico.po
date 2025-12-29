@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-26 00:43+0000\n"
+"POT-Creation-Date: 2025-12-29 00:44+0000\n"
 "PO-Revision-Date: 2015-12-29 21:13+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -902,7 +902,7 @@ msgid "Notes"
 msgstr "Pastabos"
 
 #: src/collections/bibtexcollection.cpp:487
-#: src/translators/xmlstatehandler.cpp:327
+#: src/translators/xmlstatehandler.cpp:328
 #, fuzzy, kde-format
 msgid "Unknown"
 msgstr "Nežinoma"
@@ -1654,7 +1654,7 @@ msgstr "Vidutinis"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:515
 #: src/fetch/itunesfetcher.cpp:331 src/translators/audiofileimporter.cpp:236
-#: src/translators/xmlstatehandler.cpp:438
+#: src/translators/xmlstatehandler.cpp:440
 #, kde-format
 msgid "Artist"
 msgstr "Atlikėjas"
@@ -1677,14 +1677,14 @@ msgstr "Takeliai"
 #: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:244 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
-#: src/translators/xmlstatehandler.cpp:437
+#: src/translators/xmlstatehandler.cpp:439
 #, fuzzy, kde-format
 msgid "Title"
 msgstr "Pavadinimas"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:516
 #: src/fetch/itunesfetcher.cpp:332 src/translators/audiofileimporter.cpp:237
-#: src/translators/xmlstatehandler.cpp:439
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Length"
 msgstr "Ilgis"
@@ -1874,13 +1874,13 @@ msgid "Cast"
 msgstr ""
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:441
+#: src/translators/xmlstatehandler.cpp:443
 #, kde-format
 msgid "Actor/Actress"
 msgstr ""
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:442
+#: src/translators/xmlstatehandler.cpp:444
 #, fuzzy, kde-format
 msgid "Role"
 msgstr "Rolė"
@@ -2936,33 +2936,33 @@ msgstr "Klasifikacija"
 msgid "Miscellaneous"
 msgstr "Įvairūs"
 
-#: src/detailedlistview.cpp:520
+#: src/detailedlistview.cpp:519
 #, fuzzy, kde-format
 msgid "View Columns"
 msgstr "Rodyti stulpelius"
 
-#: src/detailedlistview.cpp:535
+#: src/detailedlistview.cpp:534
 #, kde-format
 msgctxt "Noun, Menu name"
 msgid "Columns"
 msgstr "Stulpeliai"
 
-#: src/detailedlistview.cpp:538
+#: src/detailedlistview.cpp:537
 #, fuzzy, kde-format
 msgid "Hide This Column"
 msgstr "Rodyti stulpelius"
 
-#: src/detailedlistview.cpp:540
+#: src/detailedlistview.cpp:539
 #, fuzzy, kde-format
 msgid "Resize to Content"
 msgstr "Keisti dydį pagal turinį"
 
-#: src/detailedlistview.cpp:545
+#: src/detailedlistview.cpp:544
 #, kde-format
 msgid "Show All Columns"
 msgstr ""
 
-#: src/detailedlistview.cpp:547
+#: src/detailedlistview.cpp:546
 #, kde-format
 msgid "Hide All Columns"
 msgstr ""
@@ -3519,7 +3519,7 @@ msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
 msgstr ""
 
-#: src/fetch/arxivfetcher.cpp:345 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:343 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
@@ -5001,7 +5001,7 @@ msgstr ""
 msgid "Move Row Down"
 msgstr "Perkelti eilutę žemyn"
 
-#: src/images/imagejob.cpp:78 src/images/imagejob.cpp:113
+#: src/images/imagejob.cpp:77 src/images/imagejob.cpp:112
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr ""
@@ -7202,12 +7202,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:178
+#: src/translators/tellicoimporter.cpp:177
 #, fuzzy, kde-format
 msgid "The file is empty."
 msgstr "Failas tuščias"
 
-#: src/translators/tellicoimporter.cpp:191
+#: src/translators/tellicoimporter.cpp:190
 #, kde-format
 msgid "The file contains no collection data."
 msgstr ""
@@ -7229,7 +7229,7 @@ msgid ""
 "base64 encoded elements."
 msgstr ""
 
-#: src/translators/xmlstatehandler.cpp:127
+#: src/translators/xmlstatehandler.cpp:128
 #, kde-format
 msgid "It is from a future version of Tellico."
 msgstr ""
