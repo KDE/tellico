@@ -67,6 +67,17 @@ public:
   QTimer releaseImagesTimer;
 };
 
+inline
+bool tryCacheInsert(Tellico::Data::Image* img, QCache<QString, Data::Image>& cache) {
+  // if sizeInBytes() is greater than maxCost, then trying and failing to insert it would
+  // mean the image gets deleted
+  if(img->sizeInBytes() >= cache.maxCost()) {
+    myWarning() << "Increasing image cache size to" << 2*img->sizeInBytes();
+    cache.setMaxCost(2*img->sizeInBytes());
+  }
+  return cache.insert(img->id(), img, img->sizeInBytes());
+}
+
 ImageFactory::ImageFactory() : QObject(), d(new Private()) {
 }
 
@@ -165,12 +176,17 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
     return Data::Image::null;
   }
 
-  myLog() << "Loading image from url:" << img.id() << url_.toDisplayString(QUrl::PreferLocalFile | QUrl::NormalizePathSegments);
   // hold the image in memory since it probably isn't written locally to disk yet
-  if(!d->imageDict.contains(img.id())) {
-    d->imageDict.insert(img.id(), new Data::Image(img));
-    s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
+  bool putInDict = true;
+  if(link_ && url_.isLocalFile()) {
+    myLog() << "Inserting image into cache:" << img.id();
+    putInDict = !tryCacheInsert(new Data::Image(img), d->imageCache);
   }
+  if(putInDict && !d->imageDict.contains(img.id())) {
+    myLog() << "Inserting image into dict:" << img.id();
+    d->imageDict.insert(img.id(), new Data::Image(img));
+  }
+  s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
   return img;
 }
 
@@ -261,26 +277,12 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
   }
 
   s_imageInfoMap.insert(img->id(), Data::ImageInfo(*img));
-
-  // if sizeInBytes() is greater than maxCost, then trying and failing to insert it would
-  // mean the image gets deleted
-  if(img->sizeInBytes() > d->imageCache.maxCost()) {
-    // can't hold it in the cache
-    myWarning() << "Image cache is unable to hold the image, it's too big!";
-    myWarning() << "Image name is " << img->id();
-    myWarning() << "Image size is " << img->sizeInBytes();
-    myWarning() << "Max cache size is " << d->imageCache.maxCost();
-
-    // add it back to the dict, but add the image to the list of
-    // images to release later. Necessary to avoid a memory leak since new Image()
-    // was called, we need to keep the pointer
-    d->imageDict.insert(img->id(), img);
-    s_imagesToRelease.add(img->id());
-  } else if(!d->imageCache.insert(img->id(), img, img->sizeInBytes())) {
+  if(!tryCacheInsert(img, d->imageCache)) {
     // at this point, img has been deleted!
     myWarning() << "Unable to insert into image cache";
     return Data::Image::null;
   }
+  s_imagesToRelease.add(img->id());
   return *img;
 }
 
@@ -319,8 +321,9 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
       Data::Image* img = factory->d->imageDict.take(id_);
       Q_ASSERT(img);
       // imageCache.insert will delete the image by itself if the cost exceeds the cache size
-      if(factory->d->imageCache.insert(img->id(), img, img->sizeInBytes())) {
+      if(tryCacheInsert(img, factory->d->imageCache)) {
         s_imageInfoMap.remove(id_);
+        s_imagesToRelease.add(id_);
       }
     }
   }
@@ -805,9 +808,17 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
   }
 
   // hold the image in memory since it probably isn't written locally to disk yet
-  if(!d->imageDict.contains(img.id())) {
-    d->imageDict.insert(img.id(), new Data::Image(img));
-    s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
+  // unless it's a local link only
+  bool putInDict = true;
+  if(imageJob->linkOnly() && imageJob->url().isLocalFile()) {
+    myLog() << "Inserting image into cache:" << img.id();
+    putInDict = !tryCacheInsert(new Data::Image(img), d->imageCache);
   }
+  if(putInDict && !d->imageDict.contains(img.id())) {
+    myLog() << "Inserting image into dict:" << img.id();
+    d->imageDict.insert(img.id(), new Data::Image(img));
+  }
+  s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
+  s_imagesToRelease.add(img.id());
   Q_EMIT factory->imageAvailable(img.id());
 }
