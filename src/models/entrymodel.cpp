@@ -30,6 +30,7 @@
 #include "../field.h"
 #include "../images/image.h"
 #include "../images/imagefactory.h"
+#include "../constants.h"
 #include "../tellico_debug.h"
 
 namespace {
@@ -48,8 +49,7 @@ EntryModel::EntryModel(QObject* parent) : QAbstractItemModel(parent),
   connect(ImageFactory::self(), &ImageFactory::imageAvailable, this, &EntryModel::refreshImage);
 }
 
-EntryModel::~EntryModel() {
-}
+EntryModel::~EntryModel() = default;
 
 int EntryModel::rowCount(const QModelIndex& index_) const {
   // valid indexes have no children/rows
@@ -416,9 +416,10 @@ QVariant EntryModel::requestImage(Data::EntryPtr entry_, const QString& id_) con
   }
   // if it's not a local image, request that it be downloaded
   if(ImageFactory::self()->hasImageInMemory(id_)) {
-    const Data::Image& img = ImageFactory::imageById(id_);
-    if(!img.isNull()) {
-      return img.convertToPixmap();
+    myLog() << "Requesting pixmap:" << id_;
+    QPixmap pix = ImageFactory::pixmap(id_, MAX_ENTRY_ICON_SIZE, MAX_ENTRY_ICON_SIZE);
+    if(!pix.isNull()) {
+      return pix;
     }
   } else if(!m_requestedImages.contains(id_, entry_)) {
     m_requestedImages.insert(id_, entry_);
@@ -441,7 +442,7 @@ void EntryModel::refreshImage(const QString& id_) {
   for(const auto& entry : entries) {
     QModelIndex index = indexFromEntry(entry);
     if(index.isValid()) {
-      Q_EMIT dataChanged(index, index);
+      Q_EMIT dataChanged(index, index, {Qt::DecorationRole, PrimaryImageRole});
     }
   }
 }
