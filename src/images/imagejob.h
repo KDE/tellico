@@ -42,8 +42,8 @@ public:
   virtual ~ImageJob();
 
   virtual QString errorString() const override;
-  QUrl url() const { return m_url; }
-  bool linkOnly() const { return m_linkOnly; }
+  QUrl url() const;
+  bool linkOnly() const;
   const Data::Image& image() const;
 
   void setLinkOnly(bool linkOnly);
@@ -55,12 +55,18 @@ private Q_SLOTS:
   void getJobTimeout();
 
 private:
-  QUrl m_url;
-  QString m_id;
-  bool m_linkOnly;
+  struct Info {
+    QUrl url;
+    QString id;
+    bool linkOnly = false;
+  };
+  Info m_info;
   bool m_quiet;
   QUrl m_referrer;
   Data::Image m_image;
+
+  static Data::Image loadFromFile(const QString& file, const Info& info);
+  static Data::Image loadFromData(const QByteArray& data, const Info& info);
 };
 
 } // end namespace

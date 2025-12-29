@@ -51,6 +51,7 @@ check_symbol_exists(strlwr "string.h" HAVE_STRLWR)
 check_symbol_exists(strupr "string.h" HAVE_STRUPR)
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+    Concurrent
     Core
     DBus
     Network

@@ -16,6 +16,7 @@ target_link_libraries(images
     KF6::Archive
     KF6::GuiAddons
     Qt6::Gui
+    Qt6::Concurrent
 )
 
 add_dependencies(images tellico_config)
