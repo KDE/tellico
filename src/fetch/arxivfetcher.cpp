@@ -285,12 +285,14 @@ QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
       break;
 
     case ArxivID:
+      {
       // remove prefix and/or version number
-      id = value_;
       static const QRegularExpression arxivRx(QLatin1String("^arxiv:"), QRegularExpression::CaseInsensitiveOption);
       static const QRegularExpression vRx(QLatin1String("v\\d+$"));
+      id = value_;
       id.remove(arxivRx);
       id.remove(vRx);
+      }
       break;
 
     default:
