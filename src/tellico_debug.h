@@ -104,7 +104,7 @@ private :
 #if !defined(QT_NO_INFO_OUTPUT) && !defined(WIN32) && (defined(__unix__) || defined(__unix))
 #include <unistd.h>
 // see https://www.gnome.org/~federico/news-2006-03.html#timeline-tools
-// strace -ttt -f -o /tmp/logfile.strace src/tellico
+// strace -ttt -f -o /tmp/logfile.strace bin/tellico
 // plot-timeline.py -o prettygraph.png /tmp/logfile.strace
 #define MARK do { \
     char str[128]; \
