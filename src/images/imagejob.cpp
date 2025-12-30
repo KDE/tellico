@@ -82,7 +82,13 @@ void ImageJob::slotStart() {
     emitResult();
   } else if(m_info.url.isLocalFile()) {
     const QString fileName = m_info.url.toLocalFile();
-    if(!QFileInfo(fileName).isReadable()) {
+    QFileInfo fi(fileName);
+    if(!fi.isReadable()) {
+      if(!fi.exists()) {
+        myLog() << "Image does not exist:" << fileName;
+      } else {
+        myLog() << "Unable to read" << fileName;
+      }
       setError(KIO::ERR_CANNOT_OPEN_FOR_READING);
       setErrorText(i18n("Tellico is unable to load the image - %1.", fileName));
       emitResult();
