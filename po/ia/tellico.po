@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:44+0000\n"
+"POT-Creation-Date: 2025-12-30 00:41+0000\n"
 "PO-Revision-Date: 2025-09-02 17:44+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -3608,7 +3608,7 @@ msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
 msgstr "Gratias a arXiv per le uso de su interoperabilitate de accesso aperite"
 
-#: src/fetch/arxivfetcher.cpp:343 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:345 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
@@ -5106,7 +5106,7 @@ msgstr "Move rango in alto"
 msgid "Move Row Down"
 msgstr "Move rango a basso"
 
-#: src/images/imagejob.cpp:77 src/images/imagejob.cpp:112
+#: src/images/imagejob.cpp:87 src/images/imagejob.cpp:126
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico non pote cargar le image -%1."

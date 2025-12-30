@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:44+0000\n"
+"POT-Creation-Date: 2025-12-30 00:41+0000\n"
 "PO-Revision-Date: 2025-09-01 22:36+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -3601,7 +3601,7 @@ msgstr ""
 "Eskerrik asko arXiv-eri, bere sarbide irekiko elkarreragingarritasunaren "
 "erabileragatik."
 
-#: src/fetch/arxivfetcher.cpp:343 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:345 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
@@ -5093,7 +5093,7 @@ msgstr "Eraman errenkada gora"
 msgid "Move Row Down"
 msgstr "Eraman errenkada behera"
 
-#: src/images/imagejob.cpp:77 src/images/imagejob.cpp:112
+#: src/images/imagejob.cpp:87 src/images/imagejob.cpp:126
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico-k ezin du irudia zamatu - %1."
