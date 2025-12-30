@@ -180,11 +180,9 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
   // hold the image in memory since it probably isn't written locally to disk yet
   bool putInDict = true;
   if(link_ && url_.isLocalFile()) {
-    myLog() << "Inserting image into cache:" << img.id();
     putInDict = !tryCacheInsert(new Data::Image(img), d->imageCache);
   }
   if(putInDict && !d->imageDict.contains(img.id())) {
-    myLog() << "Inserting image into dict:" << img.id();
     d->imageDict.insert(img.id(), new Data::Image(img));
   }
   s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
@@ -813,11 +811,9 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
   // unless it's a local link only
   bool putInDict = true;
   if(imageJob->linkOnly() && imageJob->url().isLocalFile()) {
-    myLog() << "Inserting image into cache:" << img.id();
     putInDict = !tryCacheInsert(new Data::Image(img), d->imageCache);
   }
   if(putInDict && !d->imageDict.contains(img.id())) {
-    myLog() << "Inserting image into dict:" << img.id();
     d->imageDict.insert(img.id(), new Data::Image(img));
   }
   s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
