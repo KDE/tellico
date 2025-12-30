@@ -272,7 +272,7 @@ The format of the field is given in the format attribute on the field element. <
 </para>
 
 <para>
-The settings for &appname; are saved in a file in the user's home folder, namely <filename>$<envar>KDEHOME</envar>/share/config/tellicorc</filename>. Within that file, settings are put in groups, which appear with bracketed names, such as [General Options]. To add a setting to the <emphasis>General Options</emphasis> group, find the line in the settings file with that group name. If it does not appear, then create it yourself by adding a line saying [General Options]. Then, the setting can be added underneath the group name.
+The settings for &appname; are saved in a file in the user's home folder, typically <filename>~/.config/tellicorc</filename>. Within that file, settings are put in groups, which appear with bracketed names, such as [General Options]. To add a setting to the <emphasis>General Options</emphasis> group, find the line in the settings file with that group name. If it does not appear, then create it yourself by adding a line saying [General Options]. Then, the setting can be added underneath the group name.
 </para>
 
 <sect2 id="hidden-general-options">

@@ -176,7 +176,7 @@ The edit widget also supports drag-and-drop. Dragging an image file from a file-
 
 <warning>
 <para>
-By default, the images are stored in the collection data file, keeping everything contained in one location. However, too many images will cause &appname; to slow down significantly as well result in a very large data file. Alternatively, &appname; can save the images separately, either in the <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/data/</filename> folder or in a folder in the same location as the data file. Loading and saving data files is much faster if images are stored separately, but the data files are no longer portable or archivable.
+By default, the images are stored in the collection data file, keeping everything contained in one location. However, too many images will cause &appname; to slow down significantly as well result in a very large data file. Alternatively, &appname; can save the images separately, either in the <filename class="directory">~/.local/share/tellico/data/</filename> folder or in a folder in the same location as the data file. Loading and saving data files is much faster if images are stored separately, but the data files are no longer portable or archivable.
 Self-contained data files can always be created by using the <menuchoice><guimenu>File</guimenu><guimenu>Export</guimenu><guimenuitem>Export to Zip...</guimenuitem></menuchoice> menu item.
 </para>
 </warning>
@@ -428,7 +428,7 @@ button, set the first rule to <emphasis>Author contains Bujold</emphasis> and th
 <sect1 id="report-dialog">
 <title>Generating Reports</title>
 <para>
-&appname; can generate various reports about your current collection. The <interface>Report Dialog</interface> checks for all &xslt; templates in the installation path and in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/report-templates/</filename>. So you can create new ones, and they are automatically found and included as options in the <interface>Report Dialog</interface>. Some complex reports may take a while to generate for large collections.
+&appname; can generate various reports about your current collection. The <interface>Report Dialog</interface> checks for all &xslt; templates in the installation path and in <filename class="directory">~/.local/share/tellico/report-templates/</filename>. So you can create new ones, and they are automatically found and included as options in the <interface>Report Dialog</interface>. Some complex reports may take a while to generate for large collections.
 </para>
 
 <para>

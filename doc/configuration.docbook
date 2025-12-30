@@ -135,7 +135,7 @@ will honor those settings. However, custom template may choose to ignore them.</
 Additional templates may be installed directly, or downloaded from
 <ulink url="https://store.kde.org/">store.kde.org</ulink> by clicking
 the <guilabel>Download</guilabel> button. Any templates installed by the user may also be deleted.
-Entry templates are saved in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/entry-templates/</filename>.
+Entry templates are saved in <filename class="directory">~/.local/share/tellico/entry-templates/</filename>.
 </para>
 
 <para>If you create a new template, please consider submitting it at <ulink url="https://store.kde.org/">store.kde.org</ulink>!</para>
