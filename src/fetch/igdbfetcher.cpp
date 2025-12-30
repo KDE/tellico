@@ -68,7 +68,7 @@ IGDBFetcher::IGDBFetcher(QObject* parent_)
   QTimer::singleShot(0, this, &IGDBFetcher::populateHashes);
 }
 
-IGDBFetcher::~IGDBFetcher() {
+IGDBFetcher::~IGDBFetcher() = {
 }
 
 QString IGDBFetcher::source() const {
@@ -186,6 +186,7 @@ void IGDBFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 
   if(job->error()) {
+    myLog() << "IGDBFetcher -" << job->errorString();
     job->uiDelegate()->showErrorMessage();
     stop();
     return;
@@ -216,7 +217,7 @@ void IGDBFetcher::slotComplete(KJob* job_) {
     // probably an error message
     QJsonObject obj = doc.object();
     const QString msg = obj.value(QLatin1String("message")).toString();
-    myDebug() << "IGDBFetcher -" << msg;
+    myLog() << "IGDBFetcher -" << msg;
     message(msg, MessageHandler::Error);
     stop();
     return;
@@ -312,15 +313,15 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   foreach(const QVariant& ageRating, ageRatingList) {
     const QVariantMap ratingMap = ageRating.toMap();
     // per Age Rating Enums, ESRB==1, PEGI==2
-    const int category = ratingMap.value(QStringLiteral("category")).toInt();
-    const int rating = ratingMap.value(QStringLiteral("rating")).toInt();
-    if(category == 1) {
+    const int org = ratingMap.value(QStringLiteral("organization")).toInt();
+    const int rating = ratingMap.value(QStringLiteral("rating_category")).toInt();
+    if(org == 1) {
       if(m_esrbHash.contains(rating)) {
         entry_->setField(QStringLiteral("certification"), m_esrbHash.value(rating));
       } else {
         myDebug() << "No ESRB rating for value =" << rating;
       }
-    } else if(category == 2 && optionalFields().contains(pegiString)) {
+    } else if(org == 2 && optionalFields().contains(pegiString)) {
       if(!entry_->collection()->hasField(pegiString)) {
         entry_->collection()->addField(Data::Field::createDefaultField(Data::Field::PegiField));
       }
@@ -408,19 +409,19 @@ void IGDBFetcher::populateHashes() {
     esrb << QString();
   }
   // see https://api-docs.igdb.com/#age-rating
-  m_esrbHash.insert(12, esrb.at(1)); // adults only
-  m_esrbHash.insert(11, esrb.at(2)); // mature
-  m_esrbHash.insert(10, esrb.at(3)); // teen
-  m_esrbHash.insert(9,  esrb.at(4)); // e10
-  m_esrbHash.insert(8,  esrb.at(5)); // everyone
-  m_esrbHash.insert(7,  esrb.at(6)); // early childhood
-  m_esrbHash.insert(6,  esrb.at(7)); // pending
+  m_esrbHash.insert(7, esrb.at(1)); // adults only
+  m_esrbHash.insert(6, esrb.at(2)); // mature
+  m_esrbHash.insert(5, esrb.at(3)); // teen
+  m_esrbHash.insert(4, esrb.at(4)); // e10
+  m_esrbHash.insert(3, esrb.at(5)); // everyone
+  m_esrbHash.insert(2, esrb.at(6)); // early childhood
+  m_esrbHash.insert(1, esrb.at(7)); // pending
 
-  m_pegiHash.insert(1, QStringLiteral("PEGI 3"));
-  m_pegiHash.insert(2, QStringLiteral("PEGI 7"));
-  m_pegiHash.insert(3, QStringLiteral("PEGI 12"));
-  m_pegiHash.insert(4, QStringLiteral("PEGI 16"));
-  m_pegiHash.insert(5, QStringLiteral("PEGI 18"));
+  m_pegiHash.insert(8,  QStringLiteral("PEGI 3"));
+  m_pegiHash.insert(9,  QStringLiteral("PEGI 7"));
+  m_pegiHash.insert(10, QStringLiteral("PEGI 12"));
+  m_pegiHash.insert(11, QStringLiteral("PEGI 16"));
+  m_pegiHash.insert(12, QStringLiteral("PEGI 18"));
 }
 
 void IGDBFetcher::updateData(IgdbDataType dataType_, const QByteArray& jsonData_) {
