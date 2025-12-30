@@ -68,7 +68,7 @@ IGDBFetcher::IGDBFetcher(QObject* parent_)
   QTimer::singleShot(0, this, &IGDBFetcher::populateHashes);
 }
 
-IGDBFetcher::~IGDBFetcher() = {
+IGDBFetcher::~IGDBFetcher() {
 }
 
 QString IGDBFetcher::source() const {
