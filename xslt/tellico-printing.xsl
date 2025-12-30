@@ -28,8 +28,8 @@
    DOM for printing. THe primary change is the addition of group
    elements to speed up grouped printing.
 
-   Any version of this file in the user's home directory, such as
-   $KDEHOME/share/apps/tellico/, will override the system file.
+   Any version of this file in the user's data directory, such as
+     ~/.local/share/tellico/, will override the system file.
    ===================================================================
 -->
 

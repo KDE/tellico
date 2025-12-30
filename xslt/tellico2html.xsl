@@ -33,7 +33,7 @@
 
    Customize this file in order to print different columns of
    fields for each entry. Any version of this file in the user's
-   KDE home directory, such as $KDEHOME/share/apps/tellico/, will
+   data directory, such as ~/.local/share/tellico/, will
    override the system file.
    ===================================================================
 -->
