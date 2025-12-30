@@ -416,7 +416,6 @@ QVariant EntryModel::requestImage(Data::EntryPtr entry_, const QString& id_) con
   }
   // if it's not a local image, request that it be downloaded
   if(ImageFactory::self()->hasImageInMemory(id_)) {
-    myLog() << "Requesting pixmap:" << id_;
     QPixmap pix = ImageFactory::pixmap(id_, MAX_ENTRY_ICON_SIZE, MAX_ENTRY_ICON_SIZE);
     if(!pix.isNull()) {
       return pix;

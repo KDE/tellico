@@ -209,7 +209,6 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
   new ApplicationInterface(this);
   new CollectionInterface(this);
 
-  MARK_LINE;
   QTimer::singleShot(0, this, &MainWindow::slotInit);
 }
 
@@ -227,7 +226,6 @@ void MainWindow::slotInit() {
   if(m_editDialog) {
     return;
   }
-  MARK;
 
   m_editDialog = new EntryEditDialog(this);
   Controller::self()->addObserver(m_editDialog);
@@ -244,13 +242,11 @@ void MainWindow::slotInit() {
 }
 
 void MainWindow::initStatusBar() {
-  MARK;
   m_statusBar = new Tellico::StatusBar(this);
   setStatusBar(m_statusBar);
 }
 
 void MainWindow::initActions() {
-  MARK;
   /*************************************************
    * File->New menu
    *************************************************/
@@ -767,7 +763,6 @@ void MainWindow::initActions() {
 #undef mimeIcon
 
 void MainWindow::initDocument() {
-  MARK;
   // initialize the image factory before the document is created
   ImageFactory::init();
   Data::Document* doc = Data::Document::self();
@@ -796,8 +791,6 @@ void MainWindow::initDocument() {
 }
 
 void MainWindow::initView() {
-  MARK;
-
   m_entryView = new EntryView(this);
   m_entryView->setAcceptDrops(true);
   m_entryView->installEventFilter(new DropHandler(this));
@@ -890,7 +883,6 @@ void MainWindow::initConnections() {
 }
 
 void MainWindow::initFileOpen(bool nofile_) {
-  MARK;
   slotInit();
   // check to see if most recent file should be opened
   bool happyStart = false;
@@ -1311,7 +1303,6 @@ void MainWindow::openFile(const QString& file_) {
 }
 
 bool MainWindow::openURL(const QUrl& url_) {
-  MARK;
   // try to open document
   GUI::CursorSaver cs(Qt::WaitCursor);
 

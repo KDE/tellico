@@ -156,6 +156,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
     myDebug() << "Returning null image";
     return Data::Image::null;
   }
+  myLog() << "Loading image from url:" << url_.toDisplayString(QUrl::PreferLocalFile | QUrl::NormalizePathSegments);
   ImageJob* job = new ImageJob(url_, QString(), quiet_);
   job->setLinkOnly(link_);
   job->setReferrer(refer_);
@@ -352,24 +353,24 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if(id_.isEmpty() || !factory || factory->d->nullImages.contains(id_)) {
     return Data::Image::null;
   }
-//  myLog() << "imageById" << id_;
+//  myLog() << "Calling imageById:" << id_;
 
   // can't think of a better place to regularly check for images to release
   // but don't release image that just got asked for
   s_imagesToRelease.remove(id_);
   factory->d->releaseImagesTimer.start(5000);
 
- // first check the cache, used for images that are in the data file, or are only temporary
- // then the dict, used for images downloaded, but not yet saved anywhere
+  // first check the cache, used for images that are in the data file, or are only temporary
+  // then the dict, used for images downloaded, but not yet saved anywhere
   Data::Image* img = factory->d->imageCache.object(id_);
   if(img) {
-//    myLog() << "found in cache";
+//    myLog() << "...found in cache";
     return *img;
   }
 
   img = factory->d->imageDict.value(id_);
   if(img) {
-//    myLog() << "found in dict";
+//    myLog() << "...found in dict";
     return *img;
   }
 
@@ -380,6 +381,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   const QUrl imageUrl(id_);
   if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !imageUrl.isRelative()) {
     if(imageUrl.isValid()) {
+//      myLog() << "...adding image by url:" << id_;
       return factory->addImageImpl(imageUrl, true, QUrl(), true);
     }
   }
@@ -390,7 +392,6 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if(factory->d->tempImageDir.hasImage(id_)) {
     const Data::Image& img2 = factory->addCachedImageImpl(id_, TempDir);
     if(!img2.isNull()) {
-//      myLog() << "found in tmp dir";
       return img2;
     }
   }
@@ -540,7 +541,8 @@ void ImageFactory::requestImageById(const QString& id_) {
     if(u.isValid()) {
       factory->requestImageByUrlImpl(u, true /* quiet */, QUrl() /* referrer */, linkOnly);
       if(!linkOnly) {
-        myDebug() << "Loading an image url that is not link only. The image id will get updated.";
+        myDebug() << "Loading an image url that is not link-only. The image id will get updated.";
+        myDebug() << id_;
       }
     }
     return;
