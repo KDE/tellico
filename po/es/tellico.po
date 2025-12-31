@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-30 02:58+0000\n"
+"POT-Creation-Date: 2025-12-31 02:54+0000\n"
 "PO-Revision-Date: 2025-08-25 23:20+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -744,7 +744,7 @@ msgstr "Clave de BibTeX"
 #: src/fetch/filmaffinityfetcher.cpp:290 src/fetch/filmasterfetcher.cpp:238
 #: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:253
-#: src/fetch/googlebookfetcher.cpp:258 src/fetch/igdbfetcher.cpp:366
+#: src/fetch/googlebookfetcher.cpp:258 src/fetch/igdbfetcher.cpp:367
 #: src/fetch/imdbfetcher.cpp:459 src/fetch/itunesfetcher.cpp:246
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/moviemeterfetcher.cpp:219
@@ -3550,7 +3550,7 @@ msgstr "Gracias a arXiv por el uso de su interoperabilidad de acceso abierto."
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:321
 #: src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:314
-#: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:615
+#: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:616
 #: src/fetch/kinofetcher.cpp:451 src/fetch/kinoteatrfetcher.cpp:513
 #: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:399
 #: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:386
@@ -3603,7 +3603,7 @@ msgid "Michel"
 msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:875 src/fetch/giantbombfetcher.cpp:203
-#: src/fetch/igdbfetcher.cpp:577 src/fetch/mobygamesfetcher.cpp:635
+#: src/fetch/igdbfetcher.cpp:578 src/fetch/mobygamesfetcher.cpp:635
 #: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:329
 #, kde-format
 msgid "PEGI Rating"
@@ -3992,17 +3992,17 @@ msgstr "Clasificación LoC"
 msgid "Internet Bookshop (ibs.it)"
 msgstr "Internet Bookshop (ibs.it)"
 
-#: src/fetch/igdbfetcher.cpp:365 src/fetch/igdbfetcher.cpp:578
+#: src/fetch/igdbfetcher.cpp:366 src/fetch/igdbfetcher.cpp:579
 #, kde-format
 msgid "IGDB Link"
 msgstr "Enlace a IGDB"
 
-#: src/fetch/igdbfetcher.cpp:566
+#: src/fetch/igdbfetcher.cpp:567
 #, kde-format
 msgid "Internet Game Database (IGDB.com)"
 msgstr "Base de datos de juegos de Internet (IGDB.com)"
 
-#: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:637
+#: src/fetch/igdbfetcher.cpp:580 src/fetch/mobygamesfetcher.cpp:637
 #: src/fetch/thegamesdbfetcher.cpp:604 src/field.cpp:347
 #, kde-format
 msgid "Screenshot"
