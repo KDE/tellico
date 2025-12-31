@@ -601,7 +601,7 @@ ItunesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ItunesFetcher*
   const auto code = loc.name().mid(3).toLower();
   // add local code
   if(m_countryCombo->findData(code) == -1) {
-    m_countryCombo->addItem(loc.nativeCountryName(), code);
+    m_countryCombo->addItem(loc.nativeTerritoryName(), code);
   }
   m_countryCombo->setCurrentData(code);
   m_countryCombo->setEditable(true); // allow custom entry
