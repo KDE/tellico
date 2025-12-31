@@ -175,6 +175,7 @@ while the full list is <ulink url="https://tellico-project.org/data-sources">ava
 <!-- music -->
 <listitem><simpara><link linkend="discogs">Discogs.com</link>,</simpara></listitem>
 <listitem><simpara><link linkend="musicbrainz">MusicBrainz.org</link>,</simpara></listitem>
+<listitem><simpara><link linkend="itunes">iTunes</link>,</simpara></listitem>
 <!-- video games -->
 <listitem><simpara><link linkend="tgdb">TheGamesDB.net</link>,</simpara></listitem>
 <listitem><simpara><link linkend="giantbomb">GiantBomb.com</link>,</simpara></listitem>
@@ -393,6 +394,13 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 <para>
 <ulink url="http://musicbrainz.org">MusicBrainz.org</ulink> is a community music metadatabase that attempts to create a comprehensive music information site.
 </para>
+</sect3>
+
+<sect3 id="itunes">
+  <title>iTunes Search</title>
+  <para>
+    The <ulink url="https://performance-partners.apple.com/search-api">iTunes Search</ulink> provides information on content within the iTunes Store and Apple Books Store. You can search for a variety of content; including books, movies, podcasts, music, music videos, audiobooks, and TV shows.
+  </para>
 </sect3>
 
 </sect2>
