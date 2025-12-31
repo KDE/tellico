@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-30 00:41+0000\n"
+"POT-Creation-Date: 2025-12-31 00:44+0000\n"
 "PO-Revision-Date: 2025-09-01 09:54+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -183,7 +183,7 @@ msgstr "Ime"
 msgid "Collection Size"
 msgstr "Velikost zbirke"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1620
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1611
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Skupno vnosov: %1"
@@ -2742,8 +2742,8 @@ msgstr "Datoteke XSL"
 msgid "Template Packages"
 msgstr "Paketi s predlogami"
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1254
-#: src/mainwindow.cpp:1425 src/reportdialog.cpp:424 src/reportdialog.cpp:439
+#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1246
+#: src/mainwindow.cpp:1416 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
@@ -2829,22 +2829,22 @@ msgstr "Izbriši več vnosov"
 msgid "&Sort By"
 msgstr "&Razvrsti po"
 
-#: src/controller.cpp:584 src/mainwindow.cpp:578
+#: src/controller.cpp:584 src/mainwindow.cpp:574
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "&Uredi vnos ..."
 
-#: src/controller.cpp:585 src/mainwindow.cpp:585
+#: src/controller.cpp:585 src/mainwindow.cpp:581
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "Po&dvoji vnos"
 
-#: src/controller.cpp:586 src/mainwindow.cpp:669
+#: src/controller.cpp:586 src/mainwindow.cpp:665
 #, kde-format
 msgid "&Update Entry"
 msgstr "P&osodobi vnos"
 
-#: src/controller.cpp:587 src/mainwindow.cpp:592
+#: src/controller.cpp:587 src/mainwindow.cpp:588
 #, kde-format
 msgid "&Delete Entry"
 msgstr "&Izbriši vnos"
@@ -3008,7 +3008,7 @@ msgstr "Pokaži vse stolpce"
 msgid "Hide All Columns"
 msgstr "Skrij vse stolpce"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1369
+#: src/document.cpp:216 src/mainwindow.cpp:1360
 #, kde-format
 msgid "Saving file..."
 msgstr "Shranjevanje datoteke ..."
@@ -3069,7 +3069,7 @@ msgstr ""
 msgid "Save Entry"
 msgstr "Shrani vnos"
 
-#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1159
+#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1151
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "Neshranjene spremembe"
@@ -3078,7 +3078,7 @@ msgstr "Neshranjene spremembe"
 msgid "(Empty)"
 msgstr "(Prazno)"
 
-#: src/entryiconview.cpp:61 src/mainwindow.cpp:834
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3147,7 +3147,7 @@ msgstr "Posodabljanje <b>%1</b> iz <i>%2</i>..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico ni mogel najti slogovne predloge privzetega vnosa."
 
-#: src/entryview.cpp:292 src/mainwindow.cpp:1776
+#: src/entryview.cpp:292 src/mainwindow.cpp:1767
 #, kde-format
 msgid "Please check your installation."
 msgstr "Preverite vašo namestitev."
@@ -3496,7 +3496,7 @@ msgstr "Rezultati od %1: %2/%3"
 #: src/fetch/discogsfetcher.cpp:224 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:199
-#: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
+#: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:160
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:375
 #: src/fetch/kinofetcher.cpp:415 src/fetch/kinopoiskfetcher.cpp:267
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:332
@@ -4443,7 +4443,7 @@ msgstr ""
 "strežnikov ga ne potrebuje. Geslo bo shranjeno nešifrirano v nastavitveno "
 "datoteko Tellico."
 
-#: src/fetchdialog.cpp:139 src/mainwindow.cpp:568
+#: src/fetchdialog.cpp:139 src/mainwindow.cpp:564
 #, kde-format
 msgid "Internet Search"
 msgstr "Internetno iskanje"
@@ -4786,8 +4786,8 @@ msgstr "Ime filtra:"
 msgid "&Save Filter"
 msgstr "&Shrani filter"
 
-#: src/filterview.cpp:190 src/mainwindow.cpp:545 src/mainwindow.cpp:741
-#: src/mainwindow.cpp:759
+#: src/filterview.cpp:190 src/mainwindow.cpp:541 src/mainwindow.cpp:737
+#: src/mainwindow.cpp:755
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
@@ -4823,8 +4823,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Skupina"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1086 src/mainwindow.cpp:1708
-#: src/mainwindow.cpp:1745 src/translators/htmlexporter.cpp:387
+#: src/groupview.cpp:425 src/mainwindow.cpp:1078 src/mainwindow.cpp:1699
+#: src/mainwindow.cpp:1736 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "Ljudje"
@@ -5071,7 +5071,7 @@ msgstr "Premakni vrstico gor"
 msgid "Move Row Down"
 msgstr "Premakni vrstico dol"
 
-#: src/images/imagejob.cpp:87 src/images/imagejob.cpp:126
+#: src/images/imagejob.cpp:93 src/images/imagejob.cpp:132
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico ni mogel naložiti slike - %1."
@@ -5121,19 +5121,19 @@ msgstr ""
 "vrsti zbirke ujemata. Vnosi se morajo ujemati točno v pravem redu, da ju "
 "lahko združite."
 
-#: src/importdialog.cpp:146 src/mainwindow.cpp:353
+#: src/importdialog.cpp:146 src/mainwindow.cpp:349
 #, kde-format
 msgid "&Import"
 msgstr "&Uvozi"
 
-#: src/importdialog.cpp:381 src/mainwindow.cpp:1250 src/mainwindow.cpp:1423
+#: src/importdialog.cpp:381 src/mainwindow.cpp:1242 src/mainwindow.cpp:1414
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Datoteke Tellico"
 
 #: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
-#: src/mainwindow.cpp:1252 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1244 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "Datoteke XML"
@@ -5379,860 +5379,860 @@ msgstr "Zapiši izhod dnevnika v <filename>"
 msgid "File to open"
 msgstr "Datoteka za odprtje"
 
-#: src/mainwindow.cpp:260
+#: src/mainwindow.cpp:256
 #, kde-format
 msgid "New Collection"
 msgstr "Nova zbirka"
 
-#: src/mainwindow.cpp:262
+#: src/mainwindow.cpp:258
 #, kde-format
 msgid "Create a new collection"
 msgstr "Ustvari novo zbirko"
 
-#: src/mainwindow.cpp:277
+#: src/mainwindow.cpp:273
 #, kde-format
 msgid "New &Book Collection"
 msgstr "Nova zbirka &knjig"
 
-#: src/mainwindow.cpp:278
+#: src/mainwindow.cpp:274
 #, kde-format
 msgid "Create a new book collection"
 msgstr "Ustvari novo zbirko knjig"
 
-#: src/mainwindow.cpp:280
+#: src/mainwindow.cpp:276
 #, kde-format
 msgid "New B&ibliography"
 msgstr "Nova &bibliografija"
 
-#: src/mainwindow.cpp:281
+#: src/mainwindow.cpp:277
 #, kde-format
 msgid "Create a new bibtex bibliography"
 msgstr "Ustvari novo bibliografijo bibtex"
 
-#: src/mainwindow.cpp:283
+#: src/mainwindow.cpp:279
 #, kde-format
 msgid "New &Comic Book Collection"
 msgstr "Nova zbirka &stripov"
 
-#: src/mainwindow.cpp:284
+#: src/mainwindow.cpp:280
 #, kde-format
 msgid "Create a new comic book collection"
 msgstr "Ustvari novo zbirko stripov"
 
-#: src/mainwindow.cpp:286
+#: src/mainwindow.cpp:282
 #, kde-format
 msgid "New &Video Collection"
 msgstr "Nova &video zbirka"
 
-#: src/mainwindow.cpp:287
+#: src/mainwindow.cpp:283
 #, kde-format
 msgid "Create a new video collection"
 msgstr "Ustvari novo video zbirko"
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:285
 #, kde-format
 msgid "New &Music Collection"
 msgstr "Nova zbirka &glasbe"
 
-#: src/mainwindow.cpp:290
+#: src/mainwindow.cpp:286
 #, kde-format
 msgid "Create a new music collection"
 msgstr "Ustvari novo zbirko glasbe"
 
-#: src/mainwindow.cpp:292
+#: src/mainwindow.cpp:288
 #, kde-format
 msgid "New C&oin Collection"
 msgstr "Nova zbirka k&ovancev"
 
-#: src/mainwindow.cpp:293
+#: src/mainwindow.cpp:289
 #, kde-format
 msgid "Create a new coin collection"
 msgstr "Ustvari novo zbirko kovancev"
 
-#: src/mainwindow.cpp:295
+#: src/mainwindow.cpp:291
 #, kde-format
 msgid "New &Stamp Collection"
 msgstr "Nova zbirka &znamk"
 
-#: src/mainwindow.cpp:296
+#: src/mainwindow.cpp:292
 #, kde-format
 msgid "Create a new stamp collection"
 msgstr "Ustvari novo zbirko znamk"
 
-#: src/mainwindow.cpp:298
+#: src/mainwindow.cpp:294
 #, kde-format
 msgid "New C&ard Collection"
 msgstr "Nova zbirka k&art"
 
-#: src/mainwindow.cpp:299
+#: src/mainwindow.cpp:295
 #, kde-format
 msgid "Create a new trading card collection"
 msgstr "Ustvari novo zbirko izmenljivih kart"
 
-#: src/mainwindow.cpp:301
+#: src/mainwindow.cpp:297
 #, kde-format
 msgid "New &Wine Collection"
 msgstr "Nova zbirka vi&n"
 
-#: src/mainwindow.cpp:302
+#: src/mainwindow.cpp:298
 #, kde-format
 msgid "Create a new wine collection"
 msgstr "Ustvari novo zbirko vin"
 
-#: src/mainwindow.cpp:304
+#: src/mainwindow.cpp:300
 #, kde-format
 msgid "New Video &Game Collection"
 msgstr "Nova zbirka video i&gric"
 
-#: src/mainwindow.cpp:305
+#: src/mainwindow.cpp:301
 #, kde-format
 msgid "Create a new video game collection"
 msgstr "Ustvari novo zbirko video igric"
 
-#: src/mainwindow.cpp:307
+#: src/mainwindow.cpp:303
 #, kde-format
 msgid "New Boa&rd Game Collection"
 msgstr "Nova zbirka na&miznih iger"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:304
 #, kde-format
 msgid "Create a new board game collection"
 msgstr "Ustvari novo zbirko namiznih iger"
 
-#: src/mainwindow.cpp:310
+#: src/mainwindow.cpp:306
 #, kde-format
 msgid "New &File Catalog"
 msgstr "Nov katalog &datotek"
 
-#: src/mainwindow.cpp:311
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "Create a new file catalog"
 msgstr "Ustvari nov katalog datotek"
 
-#: src/mainwindow.cpp:314
+#: src/mainwindow.cpp:310
 #, kde-format
 msgid "New C&ustom Collection"
 msgstr "Nova zbirka &po meri"
 
-#: src/mainwindow.cpp:315
+#: src/mainwindow.cpp:311
 #, kde-format
 msgid "Create a new custom collection"
 msgstr "Ustvari novo zbirko po meri"
 
-#: src/mainwindow.cpp:326
+#: src/mainwindow.cpp:322
 #, kde-format
 msgid "Open an existing document"
 msgstr "Odpri obstoječ dokument"
 
-#: src/mainwindow.cpp:328
+#: src/mainwindow.cpp:324
 #, kde-format
 msgid "Open a recently used file"
 msgstr "Odpri nedavno uporabljeno datoteko"
 
-#: src/mainwindow.cpp:330
+#: src/mainwindow.cpp:326
 #, kde-format
 msgid "Save the document"
 msgstr "Shrani dokument"
 
-#: src/mainwindow.cpp:332
+#: src/mainwindow.cpp:328
 #, kde-format
 msgid "Save the document as a different file..."
 msgstr "Shrani dokument kot drugačno datoteko ..."
 
-#: src/mainwindow.cpp:336
+#: src/mainwindow.cpp:332
 #, kde-format
 msgid "Save As Template..."
 msgstr "Shrani kot predlogo…"
 
-#: src/mainwindow.cpp:338
+#: src/mainwindow.cpp:334
 #, kde-format
 msgid "Save as a collection template"
 msgstr "Shrani kot zbirko predlogov"
 
-#: src/mainwindow.cpp:341
+#: src/mainwindow.cpp:337
 #, kde-format
 msgid "Print the contents of the collection..."
 msgstr "Natisni vsebino zbirke..."
 
-#: src/mainwindow.cpp:343
+#: src/mainwindow.cpp:339
 #, kde-format
 msgid "Preview the contents of the collection..."
 msgstr "Predogled vsebine zbirke..."
 
-#: src/mainwindow.cpp:346
+#: src/mainwindow.cpp:342
 #, kde-format
 msgid "Quit the application"
 msgstr "Končaj program"
 
-#: src/mainwindow.cpp:355
+#: src/mainwindow.cpp:351
 #, kde-format
 msgid "Import the collection data from other formats"
 msgstr "Uvozi podatke zbirke iz drugih vrst"
 
-#: src/mainwindow.cpp:367
+#: src/mainwindow.cpp:363
 #, kde-format
 msgid "Import Tellico Data..."
 msgstr "Uvozi podatke Tellico ..."
 
-#: src/mainwindow.cpp:368
+#: src/mainwindow.cpp:364
 #, kde-format
 msgid "Import another Tellico data file"
 msgstr "Uvozi drugo datoteko Tellico"
 
-#: src/mainwindow.cpp:371
+#: src/mainwindow.cpp:367
 #, kde-format
 msgid "Import CSV Data..."
 msgstr "Uvozi podatke CSV ..."
 
-#: src/mainwindow.cpp:372
+#: src/mainwindow.cpp:368
 #, kde-format
 msgid "Import a CSV file"
 msgstr "Uvozi datoteko CSV"
 
-#: src/mainwindow.cpp:374
+#: src/mainwindow.cpp:370
 #, kde-format
 msgid "Import MODS Data..."
 msgstr "Uvozi podatke MODS ..."
 
-#: src/mainwindow.cpp:375
+#: src/mainwindow.cpp:371
 #, kde-format
 msgid "Import a MODS data file"
 msgstr "Uvozi podatkovno datoteko MODS"
 
-#: src/mainwindow.cpp:377
+#: src/mainwindow.cpp:373
 #, kde-format
 msgid "Import Alexandria Data..."
 msgstr "Uvozi podatke Alexandria ..."
 
-#: src/mainwindow.cpp:378
+#: src/mainwindow.cpp:374
 #, kde-format
 msgid "Import data from the Alexandria book collection manager"
 msgstr "Uvozi podatke iz upravljalnika zbirk knjig Alexandria"
 
-#: src/mainwindow.cpp:381
+#: src/mainwindow.cpp:377
 #, kde-format
 msgid "Import Delicious Library Data..."
 msgstr "Uvozi podatke knjižnice Delicious ..."
 
-#: src/mainwindow.cpp:382
+#: src/mainwindow.cpp:378
 #, kde-format
 msgid "Import data from Delicious Library"
 msgstr "Uvozi podatke iz knjižnice Delicious"
 
-#: src/mainwindow.cpp:385
+#: src/mainwindow.cpp:381
 #, kde-format
 msgid "Import Collectorz Data..."
 msgstr "Uvozi podatke Collectorz ..."
 
-#: src/mainwindow.cpp:386
+#: src/mainwindow.cpp:382
 #, kde-format
 msgid "Import data from Collectorz"
 msgstr "Uvozi podatke iz Collectorz"
 
-#: src/mainwindow.cpp:389
+#: src/mainwindow.cpp:385
 #, kde-format
 msgid "Import Data Crow Data..."
 msgstr "Uvozi podatke Data Crow..."
 
-#: src/mainwindow.cpp:390
+#: src/mainwindow.cpp:386
 #, kde-format
 msgid "Import data from Data Crow"
 msgstr "Uvozi podatke iz Data Crow"
 
-#: src/mainwindow.cpp:393
+#: src/mainwindow.cpp:389
 #, kde-format
 msgid "Import OnMyShelf Data..."
 msgstr "Uvozi podatke OnMyShelf..."
 
-#: src/mainwindow.cpp:394
+#: src/mainwindow.cpp:390
 #, kde-format
 msgid "Import data from OnMyShelf"
 msgstr "Uvozi podatke iz OnMyShelf"
 
-#: src/mainwindow.cpp:397
+#: src/mainwindow.cpp:393
 #, kde-format
 msgid "Import Referencer Data..."
 msgstr "Uvozi podatke Referencer..."
 
-#: src/mainwindow.cpp:398
+#: src/mainwindow.cpp:394
 #, kde-format
 msgid "Import data from Referencer"
 msgstr "Uvozi podatke iz Referencer-ja"
 
-#: src/mainwindow.cpp:401
+#: src/mainwindow.cpp:397
 #, kde-format
 msgid "Import Bibtex Data..."
 msgstr "Uvozi podatke Bibtex ..."
 
-#: src/mainwindow.cpp:402
+#: src/mainwindow.cpp:398
 #, kde-format
 msgid "Import a bibtex bibliography file"
 msgstr "Uvozi bibliografsko datoteko bibtex"
 
-#: src/mainwindow.cpp:407
+#: src/mainwindow.cpp:403
 #, kde-format
 msgid "Import Bibtexml Data..."
 msgstr "Uvozi podatke Bibtexml ..."
 
-#: src/mainwindow.cpp:408
+#: src/mainwindow.cpp:404
 #, kde-format
 msgid "Import a Bibtexml bibliography file"
 msgstr "Uvozi bibliografsko datoteko Bibtexml"
 
-#: src/mainwindow.cpp:410
+#: src/mainwindow.cpp:406
 #, kde-format
 msgid "Import RIS Data..."
 msgstr "Uvozi podatke RIS ..."
 
-#: src/mainwindow.cpp:411
+#: src/mainwindow.cpp:407
 #, kde-format
 msgid "Import an RIS reference file"
 msgstr "Uvozi datoteko s sklici RIS"
 
-#: src/mainwindow.cpp:413
+#: src/mainwindow.cpp:409
 #, kde-format
 msgid "Import MARC Data..."
 msgstr "Uvozi podatke MARC..."
 
-#: src/mainwindow.cpp:414
+#: src/mainwindow.cpp:410
 #, kde-format
 msgid "Import MARC data"
 msgstr "Uvozi podatke MARC"
 
-#: src/mainwindow.cpp:421
+#: src/mainwindow.cpp:417
 #, kde-format
 msgid "Import Goodreads Collection..."
 msgstr "Uvozi zbirko Goodreads ..."
 
-#: src/mainwindow.cpp:422
+#: src/mainwindow.cpp:418
 #, kde-format
 msgid "Import a collection from Goodreads.com"
 msgstr "Uvozi zbirko iz Goodreads.com"
 
-#: src/mainwindow.cpp:424
+#: src/mainwindow.cpp:420
 #, kde-format
 msgid "Import LibraryThing Collection..."
 msgstr "Uvozi zbirko LibraryThing ..."
 
-#: src/mainwindow.cpp:425
+#: src/mainwindow.cpp:421
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
 msgstr "Uvozi zbirko iz LibraryThing.com"
 
-#: src/mainwindow.cpp:427
+#: src/mainwindow.cpp:423
 #, kde-format
 msgid "Import PDF File..."
 msgstr "Uvozi datoteko PDF ..."
 
-#: src/mainwindow.cpp:428
+#: src/mainwindow.cpp:424
 #, kde-format
 msgid "Import a PDF file"
 msgstr "Uvozi datoteko PDF"
 
-#: src/mainwindow.cpp:430
+#: src/mainwindow.cpp:426
 #, kde-format
 msgid "Import Audio File Metadata..."
 msgstr "Uvozi meta-podatke zvočnih datoteke ..."
 
-#: src/mainwindow.cpp:431
+#: src/mainwindow.cpp:427
 #, kde-format
 msgid "Import meta-data from audio files"
 msgstr "Uvozi meta-podatke iz zvočnih datotek"
 
-#: src/mainwindow.cpp:436
+#: src/mainwindow.cpp:432
 #, kde-format
 msgid "Import Audio CD Data..."
 msgstr "Uvozi podatke iz zvočnega CD-ja ..."
 
-#: src/mainwindow.cpp:437
+#: src/mainwindow.cpp:433
 #, kde-format
 msgid "Import audio CD information"
 msgstr "Uvozi podatke iz glasbenega CD-ja"
 
-#: src/mainwindow.cpp:442
+#: src/mainwindow.cpp:438
 #, kde-format
 msgid "Import Discogs Collection..."
 msgstr "Uvozi zbirko Discogs..."
 
-#: src/mainwindow.cpp:443
+#: src/mainwindow.cpp:439
 #, kde-format
 msgid "Import a collection from Discogs.com"
 msgstr "Uvozi zbirko iz Discogs.com"
 
-#: src/mainwindow.cpp:445
+#: src/mainwindow.cpp:441
 #, kde-format
 msgid "Import GCstar Data..."
 msgstr "Uvozi podatke GCstar ..."
 
-#: src/mainwindow.cpp:446
+#: src/mainwindow.cpp:442
 #, kde-format
 msgid "Import a GCstar data file"
 msgstr "Uvozi podatkovno datoteko GCstar"
 
-#: src/mainwindow.cpp:449
+#: src/mainwindow.cpp:445
 #, kde-format
 msgid "Import Griffith Data..."
 msgstr "Uvozi podatke Griffith ..."
 
-#: src/mainwindow.cpp:450
+#: src/mainwindow.cpp:446
 #, kde-format
 msgid "Import a Griffith database"
 msgstr "Uvozi podatkovno zbirko Griffith"
 
-#: src/mainwindow.cpp:453
+#: src/mainwindow.cpp:449
 #, kde-format
 msgid "Import Ant Movie Catalog Data..."
 msgstr "Uvozi podatke Ant Movie Catalog ..."
 
-#: src/mainwindow.cpp:454
+#: src/mainwindow.cpp:450
 #, kde-format
 msgid "Import an Ant Movie Catalog data file"
 msgstr "Uvozi podatkovno datoteko Ant Movie Catalog"
 
-#: src/mainwindow.cpp:457
+#: src/mainwindow.cpp:453
 #, kde-format
 msgid "Import BoardGameGeek Collection..."
 msgstr "Uvozi zbirko BoardGameGeek ..."
 
-#: src/mainwindow.cpp:458
+#: src/mainwindow.cpp:454
 #, kde-format
 msgid "Import a collection from BoardGameGeek.com"
 msgstr "Uvozi zbirko iz BoardGameGeek.com"
 
-#: src/mainwindow.cpp:460
+#: src/mainwindow.cpp:456
 #, kde-format
 msgid "Import VinoXML..."
 msgstr "Uvozi VinoXML..."
 
-#: src/mainwindow.cpp:461
+#: src/mainwindow.cpp:457
 #, kde-format
 msgid "Import VinoXML data"
 msgstr "Uvozi podatke VinoXML"
 
-#: src/mainwindow.cpp:463
+#: src/mainwindow.cpp:459
 #, kde-format
 msgid "Import File Listing..."
 msgstr "Uvozi seznam datotek ..."
 
-#: src/mainwindow.cpp:464
+#: src/mainwindow.cpp:460
 #, kde-format
 msgid "Import information about files in a folder"
 msgstr "Uvozi podrobnosti o datotekah v mapi"
 
-#: src/mainwindow.cpp:466
+#: src/mainwindow.cpp:462
 #, kde-format
 msgid "Import XSL Transform..."
 msgstr "Uvozi XSL Transform ..."
 
-#: src/mainwindow.cpp:467
+#: src/mainwindow.cpp:463
 #, kde-format
 msgid "Import using an XSL Transform"
 msgstr "Uvozi z uporabo XSL Transform"
 
-#: src/mainwindow.cpp:476
+#: src/mainwindow.cpp:472
 #, kde-format
 msgid "&Export"
 msgstr "&Izvozi"
 
-#: src/mainwindow.cpp:478
+#: src/mainwindow.cpp:474
 #, kde-format
 msgid "Export the collection data to other formats"
 msgstr "Izvozi podatke zbirke v druge vrste"
 
-#: src/mainwindow.cpp:490
+#: src/mainwindow.cpp:486
 #, kde-format
 msgid "Export to XML..."
 msgstr "Izvozi v XML ..."
 
-#: src/mainwindow.cpp:491
+#: src/mainwindow.cpp:487
 #, kde-format
 msgid "Export to a Tellico XML file"
 msgstr "Izvozi v XML datoteko Tellico"
 
-#: src/mainwindow.cpp:494
+#: src/mainwindow.cpp:490
 #, kde-format
 msgid "Export to Zip..."
 msgstr "Izvozi v zip ..."
 
-#: src/mainwindow.cpp:495
+#: src/mainwindow.cpp:491
 #, kde-format
 msgid "Export to a Tellico Zip file"
 msgstr "Izvozi v zip datoteko Tellico"
 
-#: src/mainwindow.cpp:498
+#: src/mainwindow.cpp:494
 #, kde-format
 msgid "Export to HTML..."
 msgstr "Izvozi v HTML ..."
 
-#: src/mainwindow.cpp:499
+#: src/mainwindow.cpp:495
 #, kde-format
 msgid "Export to an HTML file"
 msgstr "Izvozi v datoteko HTML"
 
-#: src/mainwindow.cpp:501
+#: src/mainwindow.cpp:497
 #, kde-format
 msgid "Export to CSV..."
 msgstr "Izvozi v CSV ..."
 
-#: src/mainwindow.cpp:502
+#: src/mainwindow.cpp:498
 #, kde-format
 msgid "Export to a comma-separated values file"
 msgstr "Izvozi v datoteko, ki ima z vejico ločene podatke"
 
-#: src/mainwindow.cpp:504
+#: src/mainwindow.cpp:500
 #, kde-format
 msgid "Export to Alexandria..."
 msgstr "Izvozi v Alexandria ..."
 
-#: src/mainwindow.cpp:505
+#: src/mainwindow.cpp:501
 #, kde-format
 msgid "Export to an Alexandria library"
 msgstr "Izvozi v knjižnico Alexandria"
 
-#: src/mainwindow.cpp:508
+#: src/mainwindow.cpp:504
 #, kde-format
 msgid "Export to Bibtex..."
 msgstr "Izvozi v BIbtex ..."
 
-#: src/mainwindow.cpp:509
+#: src/mainwindow.cpp:505
 #, kde-format
 msgid "Export to a bibtex file"
 msgstr "Izvozi v datoteko bibtex"
 
-#: src/mainwindow.cpp:511
+#: src/mainwindow.cpp:507
 #, kde-format
 msgid "Export to Bibtexml..."
 msgstr "Izvozi v Bibtexml ..."
 
-#: src/mainwindow.cpp:512
+#: src/mainwindow.cpp:508
 #, kde-format
 msgid "Export to a Bibtexml file"
 msgstr "Izvozi v datoteko Bibtexml"
 
-#: src/mainwindow.cpp:514
+#: src/mainwindow.cpp:510
 #, kde-format
 msgid "Export to ONIX..."
 msgstr "Izvozi v ONIX ..."
 
-#: src/mainwindow.cpp:515
+#: src/mainwindow.cpp:511
 #, kde-format
 msgid "Export to an ONIX file"
 msgstr "Izvozi v datoteko ONIX"
 
-#: src/mainwindow.cpp:517
+#: src/mainwindow.cpp:513
 #, kde-format
 msgid "Export to GCstar..."
 msgstr "Izvozi v GCstar ..."
 
-#: src/mainwindow.cpp:518
+#: src/mainwindow.cpp:514
 #, kde-format
 msgid "Export to a GCstar data file"
 msgstr "Izvozi v podatkovno datoteko GCstar"
 
-#: src/mainwindow.cpp:521
+#: src/mainwindow.cpp:517
 #, kde-format
 msgid "Export XSL Transform..."
 msgstr "Izvozi XSL Transform ..."
 
-#: src/mainwindow.cpp:522
+#: src/mainwindow.cpp:518
 #, kde-format
 msgid "Export using an XSL Transform"
 msgstr "Izvozi z uporabo XSL Transform"
 
-#: src/mainwindow.cpp:533
+#: src/mainwindow.cpp:529
 #, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr "Izreži izbrano besedilo in ga postavi v odložišče"
 
-#: src/mainwindow.cpp:535
+#: src/mainwindow.cpp:531
 #, kde-format
 msgid "Copy the selected text to the clipboard"
 msgstr "Kopiraj izbrano besedilo v odložišče"
 
-#: src/mainwindow.cpp:537
+#: src/mainwindow.cpp:533
 #, kde-format
 msgid "Paste the clipboard contents"
 msgstr "Prilepi vsebino odložišča"
 
-#: src/mainwindow.cpp:539
+#: src/mainwindow.cpp:535
 #, kde-format
 msgid "Select all the entries in the collection"
 msgstr "Izberi vse vnose v zbirki"
 
-#: src/mainwindow.cpp:541
+#: src/mainwindow.cpp:537
 #, kde-format
 msgid "Deselect all the entries in the collection"
 msgstr "Odstrani izbiro vseh vnosov v zbirki"
 
-#: src/mainwindow.cpp:544
+#: src/mainwindow.cpp:540
 #, kde-format
 msgid "Advanced &Filter..."
 msgstr "Napredni &filter ..."
 
-#: src/mainwindow.cpp:548 src/mainwindow.cpp:760
+#: src/mainwindow.cpp:544 src/mainwindow.cpp:756
 #, kde-format
 msgid "Filter the collection"
 msgstr "Filtriraj zbirko"
 
-#: src/mainwindow.cpp:555
+#: src/mainwindow.cpp:551
 #, kde-format
 msgid "&New Entry..."
 msgstr "&Nov vnos ..."
 
-#: src/mainwindow.cpp:557
+#: src/mainwindow.cpp:553
 #, kde-format
 msgid "New Entry"
 msgstr "Nov vnos"
 
-#: src/mainwindow.cpp:559
+#: src/mainwindow.cpp:555
 #, kde-format
 msgid "Create a new entry"
 msgstr "Ustvari nov vnos"
 
-#: src/mainwindow.cpp:561
+#: src/mainwindow.cpp:557
 #, kde-format
 msgid "Add Entry"
 msgstr "Dodaj vnos"
 
-#: src/mainwindow.cpp:567
+#: src/mainwindow.cpp:563
 #, kde-format
 msgid "Internet Search..."
 msgstr "Internetno iskanje ..."
 
-#: src/mainwindow.cpp:571
+#: src/mainwindow.cpp:567
 #, kde-format
 msgid "Search the internet..."
 msgstr "Najdi na internetu ..."
 
-#: src/mainwindow.cpp:581
+#: src/mainwindow.cpp:577
 #, kde-format
 msgid "Edit the selected entries"
 msgstr "Uredi izbrane vnose"
 
-#: src/mainwindow.cpp:588
+#: src/mainwindow.cpp:584
 #, kde-format
 msgid "Copy the selected entries"
 msgstr "Kopiraj izbrane vnose"
 
-#: src/mainwindow.cpp:595
+#: src/mainwindow.cpp:591
 #, kde-format
 msgid "Delete the selected entries"
 msgstr "Izbriši izbrane vnose"
 
-#: src/mainwindow.cpp:599
+#: src/mainwindow.cpp:595
 #, kde-format
 msgid "&Merge Entries"
 msgstr "&Združi vnose"
 
-#: src/mainwindow.cpp:603
+#: src/mainwindow.cpp:599
 #, kde-format
 msgid "Merge the selected entries"
 msgstr "Združi izbrane vnose"
 
-#: src/mainwindow.cpp:607
+#: src/mainwindow.cpp:603
 #, kde-format
 msgid "Check-&out..."
 msgstr "P&osodi ..."
 
-#: src/mainwindow.cpp:609
+#: src/mainwindow.cpp:605
 #, kde-format
 msgid "Check-out the selected items"
 msgstr "Posodi izbrane predmete"
 
-#: src/mainwindow.cpp:612
+#: src/mainwindow.cpp:608
 #, kde-format
 msgid "Check-&in"
 msgstr "Vrn&i"
 
-#: src/mainwindow.cpp:614
+#: src/mainwindow.cpp:610
 #, kde-format
 msgid "Check-in the selected items"
 msgstr "Vrne izbrane predmete"
 
-#: src/mainwindow.cpp:617
+#: src/mainwindow.cpp:613
 #, kde-format
 msgid "&Rename Collection..."
 msgstr "P&reimenuj zbirko ..."
 
-#: src/mainwindow.cpp:620
+#: src/mainwindow.cpp:616
 #, kde-format
 msgid "Rename the collection"
 msgstr "Preimenuje zbirko"
 
-#: src/mainwindow.cpp:623
+#: src/mainwindow.cpp:619
 #, kde-format
 msgid "Collection &Fields..."
 msgstr "&Polja zbirke ..."
 
-#: src/mainwindow.cpp:624
+#: src/mainwindow.cpp:620
 #, kde-format
 msgid "Fields"
 msgstr "Polja"
 
-#: src/mainwindow.cpp:627
+#: src/mainwindow.cpp:623
 #, kde-format
 msgid "Modify the collection fields"
 msgstr "Spremeni polja zbirke"
 
-#: src/mainwindow.cpp:630
+#: src/mainwindow.cpp:626
 #, kde-format
 msgid "&Generate Reports..."
 msgstr "&Ustvari poročilo ..."
 
-#: src/mainwindow.cpp:631
+#: src/mainwindow.cpp:627
 #, kde-format
 msgid "Reports"
 msgstr "Poročila"
 
-#: src/mainwindow.cpp:633
+#: src/mainwindow.cpp:629
 #, kde-format
 msgid "Generate collection reports"
 msgstr "Ustvari poročila zbirke"
 
-#: src/mainwindow.cpp:636
+#: src/mainwindow.cpp:632
 #, kde-format
 msgid "Convert to &Bibliography"
 msgstr "Spremeni v &bibliografijo"
 
-#: src/mainwindow.cpp:638
+#: src/mainwindow.cpp:634
 #, kde-format
 msgid "Convert a book collection to a bibliography"
 msgstr "Spremeni zbirko knjig v bibliografijo"
 
-#: src/mainwindow.cpp:641
+#: src/mainwindow.cpp:637
 #, kde-format
 msgid "String &Macros..."
 msgstr "&Makri nizov ..."
 
-#: src/mainwindow.cpp:643
+#: src/mainwindow.cpp:639
 #, kde-format
 msgid "Edit the bibtex string macros"
 msgstr "Uredi makre nizov bibtex"
 
-#: src/mainwindow.cpp:646
+#: src/mainwindow.cpp:642
 #, kde-format
 msgid "Check for Duplicate Keys..."
 msgstr "Poišči podvojene ključe ..."
 
-#: src/mainwindow.cpp:648
+#: src/mainwindow.cpp:644
 #, kde-format
 msgid "Check for duplicate citation keys"
 msgstr "Poišče podvojene ključe citatov"
 
-#: src/mainwindow.cpp:654
+#: src/mainwindow.cpp:650
 #, kde-format
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "Ko&piraj Bibtex v odložišče"
 
-#: src/mainwindow.cpp:655
+#: src/mainwindow.cpp:651
 #, kde-format
 msgid "Copy bibtex citations to the clipboard"
 msgstr "Kopira citate bibtex v odložišče"
 
-#: src/mainwindow.cpp:660
+#: src/mainwindow.cpp:656
 #, kde-format
 msgid "Cite Entry in &LyX"
 msgstr "Citiraj vnos v &LyX-u"
 
-#: src/mainwindow.cpp:661
+#: src/mainwindow.cpp:657
 #, kde-format
 msgid "Cite the selected entries in LyX"
 msgstr "Citira izbrane vnose v Lyx"
 
-#: src/mainwindow.cpp:671
+#: src/mainwindow.cpp:667
 #, kde-format
 msgctxt "Update Entry"
 msgid "Update"
 msgstr "Posodobi"
 
-#: src/mainwindow.cpp:676
+#: src/mainwindow.cpp:672
 #, kde-format
 msgid "All Sources"
 msgstr "Vsi viri"
 
-#: src/mainwindow.cpp:677
+#: src/mainwindow.cpp:673
 #, kde-format
 msgid "Update entry data from all available sources"
 msgstr "Posodobi vnos iz vseh razpoložljivih virov"
 
-#: src/mainwindow.cpp:692
+#: src/mainwindow.cpp:688
 #, kde-format
 msgid "Unlock Layout"
 msgstr "Odkleni razpored"
 
-#: src/mainwindow.cpp:693
+#: src/mainwindow.cpp:689
 #, kde-format
 msgid "Unlock the window's layout"
 msgstr "Odkleni razpored okna"
 
-#: src/mainwindow.cpp:695
+#: src/mainwindow.cpp:691
 #, kde-format
 msgid "Lock Layout"
 msgstr "Zakleni razpored"
 
-#: src/mainwindow.cpp:696
+#: src/mainwindow.cpp:692
 #, kde-format
 msgid "Lock the window's layout"
 msgstr "Zakleni razpored okna"
 
-#: src/mainwindow.cpp:701
+#: src/mainwindow.cpp:697
 #, kde-format
 msgid "Reset Layout"
 msgstr "Ponastavi razpored"
 
-#: src/mainwindow.cpp:702
+#: src/mainwindow.cpp:698
 #, kde-format
 msgid "Reset the window's layout"
 msgstr "Ponastavi razpored okna"
 
-#: src/mainwindow.cpp:705
+#: src/mainwindow.cpp:701
 #, kde-format
 msgid "Entry &Editor"
 msgstr "Ur&ejevalnik vnosov"
 
-#: src/mainwindow.cpp:707
+#: src/mainwindow.cpp:703
 #, kde-format
 msgid "Enable/disable the editor"
 msgstr "Omogoči/onemogoči urejevalnik"
 
-#: src/mainwindow.cpp:716
+#: src/mainwindow.cpp:712
 #, kde-format
 msgid "Show Log"
 msgstr "Prikaži dnevnik"
 
-#: src/mainwindow.cpp:732
+#: src/mainwindow.cpp:728
 #, kde-format
 msgid "Change Grouping"
 msgstr "Spremeni združevanje"
 
-#: src/mainwindow.cpp:735
+#: src/mainwindow.cpp:731
 #, kde-format
 msgid "&Group Selection"
 msgstr "Izbor &skupine"
 
-#: src/mainwindow.cpp:736
+#: src/mainwindow.cpp:732
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr "Spremeni združevanje zbirke"
 
-#: src/mainwindow.cpp:745
+#: src/mainwindow.cpp:741
 #, kde-format
 msgid "Filter here..."
 msgstr "Filtriraj tukaj ..."
 
-#: src/mainwindow.cpp:812
+#: src/mainwindow.cpp:805
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
 "qt>"
 msgstr "<qt><i>Pogled vnosov</i> pokaže oblikovan pogled vsebine vnosa.</qt>"
 
-#: src/mainwindow.cpp:817
+#: src/mainwindow.cpp:810
 #, kde-format
 msgid "Collection View"
 msgstr "Pogled zbirke"
 
-#: src/mainwindow.cpp:824
+#: src/mainwindow.cpp:817
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
@@ -6240,17 +6240,17 @@ msgid ""
 msgstr ""
 "<qt><i>Pogled stolpcev</i> pokaže vrednosti večih polj za vsak vnos.</qt>"
 
-#: src/mainwindow.cpp:841
+#: src/mainwindow.cpp:834
 #, kde-format
 msgid "Group View"
 msgstr "Pogled skupin"
 
-#: src/mainwindow.cpp:850
+#: src/mainwindow.cpp:843
 #, kde-format
 msgid "Groups"
 msgstr "Skupine"
 
-#: src/mainwindow.cpp:851
+#: src/mainwindow.cpp:844
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
@@ -6259,17 +6259,17 @@ msgstr ""
 "<qt><i>Pogled skupine</i> razvrsti vnose v skupine glede na izbrano polje.</"
 "qt>"
 
-#: src/mainwindow.cpp:932
+#: src/mainwindow.cpp:924
 #, kde-format
 msgid "Collection management software, free and simple"
 msgstr "Programska oprema za upravljanje zbirk, prosta in preprosta"
 
-#: src/mainwindow.cpp:934
+#: src/mainwindow.cpp:926
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "Dobrodošli v upravljalnik zbirk Tellico"
 
-#: src/mainwindow.cpp:936
+#: src/mainwindow.cpp:928
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6284,7 +6284,7 @@ msgstr ""
 "ali pa <a href=\"tc:///edit_search_internet\">podatke prejmete</a> iz "
 "različnih internetnih virov.</h3>"
 
-#: src/mainwindow.cpp:945
+#: src/mainwindow.cpp:937
 #, kde-format
 msgid ""
 "More information can be found in the <a href=\"help:/tellico"
@@ -6294,7 +6294,7 @@ msgstr ""
 "Več informacij najdete v <a href=\"help:/tellico\">dokumentaciji</a>. Lahko "
 "tudi <a href=\"tc:///disable_welcome\">onemogočite ta pozdravni zaslon</a>."
 
-#: src/mainwindow.cpp:1157
+#: src/mainwindow.cpp:1149
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6303,22 +6303,22 @@ msgstr ""
 "Trenutna datoteka je bila spremenjena.\n"
 "Jo želite shraniti?"
 
-#: src/mainwindow.cpp:1193 src/mainwindow.cpp:1226
+#: src/mainwindow.cpp:1185 src/mainwindow.cpp:1218
 #, kde-format
 msgid "Creating new collection..."
 msgstr "Ustvarjam novo zbirko..."
 
-#: src/mainwindow.cpp:1247 src/mainwindow.cpp:1270 src/mainwindow.cpp:1288
+#: src/mainwindow.cpp:1239 src/mainwindow.cpp:1262 src/mainwindow.cpp:1280
 #, kde-format
 msgid "Opening file..."
 msgstr "Odpiranje datoteke ..."
 
-#: src/mainwindow.cpp:1258
+#: src/mainwindow.cpp:1250
 #, kde-format
 msgid "Open File"
 msgstr "Odpri datoteko"
 
-#: src/mainwindow.cpp:1380
+#: src/mainwindow.cpp:1371
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6331,32 +6331,32 @@ msgstr ""
 "programa, da izboljšate zmogljivost?</p><p>Vašo izbiro lahko vedno "
 "spremenite v pogovornem oknu nastavitev. </p></qt>"
 
-#: src/mainwindow.cpp:1385
+#: src/mainwindow.cpp:1376
 #, kde-format
 msgid "Save Images Separately"
 msgstr "Slike shrani ločeno"
 
-#: src/mainwindow.cpp:1386
+#: src/mainwindow.cpp:1377
 #, kde-format
 msgid "Save Images in File"
 msgstr "Slike shrani v datoteko"
 
-#: src/mainwindow.cpp:1421
+#: src/mainwindow.cpp:1412
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Shranjevanje datoteke z novim imenom ..."
 
-#: src/mainwindow.cpp:1430
+#: src/mainwindow.cpp:1421
 #, kde-format
 msgid "Save As"
 msgstr "Shrani kot"
 
-#: src/mainwindow.cpp:1496
+#: src/mainwindow.cpp:1487
 #, kde-format
 msgid "Printing..."
 msgstr "Tiskanje ..."
 
-#: src/mainwindow.cpp:1500
+#: src/mainwindow.cpp:1491
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6365,27 +6365,27 @@ msgstr ""
 "Zbirka je trenutno filtrirana in kaže le omejeno podskupino vnosov. "
 "Natisnjeni bodo samo vidni vnosi. Želite nadaljevati?"
 
-#: src/mainwindow.cpp:1525
+#: src/mainwindow.cpp:1516
 #, kde-format
 msgid "Exiting..."
 msgstr "Končujem ..."
 
-#: src/mainwindow.cpp:1627
+#: src/mainwindow.cpp:1618
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtriranih, %2 izbranih)"
 
-#: src/mainwindow.cpp:1630
+#: src/mainwindow.cpp:1621
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtriranih)"
 
-#: src/mainwindow.cpp:1633
+#: src/mainwindow.cpp:1624
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 izbranih)"
 
-#: src/mainwindow.cpp:1775 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1766 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6393,57 +6393,57 @@ msgstr "(%1 izbranih)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Prišlo je do napake med obdelovanjem XSLT."
 
-#: src/mainwindow.cpp:1893
+#: src/mainwindow.cpp:1884
 #, kde-format
 msgid "Importing data..."
 msgstr "Uvažanje podatkov ..."
 
-#: src/mainwindow.cpp:1904
+#: src/mainwindow.cpp:1895
 #, kde-format
 msgid "Import File"
 msgstr "Uvozi datoteko"
 
-#: src/mainwindow.cpp:1917
+#: src/mainwindow.cpp:1908
 #, kde-format
 msgid "Import Directory"
 msgstr "Uvozi mapo"
 
-#: src/mainwindow.cpp:1941
+#: src/mainwindow.cpp:1932
 #, kde-format
 msgid "Exporting data..."
 msgstr "Izvažanje podatkov ..."
 
-#: src/mainwindow.cpp:1965
+#: src/mainwindow.cpp:1956
 #, kde-format
 msgid "Export As"
 msgstr "Izvozi kot"
 
-#: src/mainwindow.cpp:1993
+#: src/mainwindow.cpp:1984
 #, kde-format
 msgid "String Macros"
 msgstr "Makri nizov"
 
-#: src/mainwindow.cpp:1994
+#: src/mainwindow.cpp:1985
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:1994
+#: src/mainwindow.cpp:1985
 #, kde-format
 msgid "String"
 msgstr "Niz"
 
-#: src/mainwindow.cpp:2080
+#: src/mainwindow.cpp:2071
 #, kde-format
 msgid "Creating citations..."
 msgstr "Ustvarjanje citatov ..."
 
-#: src/mainwindow.cpp:2187 src/mainwindow.cpp:2194
+#: src/mainwindow.cpp:2178 src/mainwindow.cpp:2185
 #, kde-format
 msgid "Filters"
 msgstr "Filtri"
 
-#: src/mainwindow.cpp:2195
+#: src/mainwindow.cpp:2186
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6452,12 +6452,12 @@ msgstr ""
 "<qt><i>Pogled filtrov</i> pokaže vnose, ki se ujemajo z določenimi "
 "filtrirnimi pravili.</qt>"
 
-#: src/mainwindow.cpp:2215 src/mainwindow.cpp:2222
+#: src/mainwindow.cpp:2206 src/mainwindow.cpp:2213
 #, kde-format
 msgid "Loans"
 msgstr "Posojeno"
 
-#: src/mainwindow.cpp:2223
+#: src/mainwindow.cpp:2214
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6466,7 +6466,7 @@ msgstr ""
 "<qt><i>Pregled posojenih</i> pokaže seznam ljudi, ki so si izposodili "
 "predmete iz vaše zbirke.</qt>"
 
-#: src/mainwindow.cpp:2311
+#: src/mainwindow.cpp:2302
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6475,12 +6475,12 @@ msgstr ""
 "Nekatere slike niso shranjene na nastavljenem mestu. Trenutno datoteko "
 "morate shraniti, da bodo slike prenesene na novo mesto."
 
-#: src/mainwindow.cpp:2355
+#: src/mainwindow.cpp:2346
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Posodobi podatke vnosa iz %1"
 
-#: src/mainwindow.cpp:2374
+#: src/mainwindow.cpp:2365
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6488,7 +6488,7 @@ msgid ""
 msgstr ""
 "Tellico lahko uvozi le eno vrsto te datoteke naenkrat. Uvožena bo samo %1."
 
-#: src/mainwindow.cpp:2553
+#: src/mainwindow.cpp:2544
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"

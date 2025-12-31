@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-30 00:41+0000\n"
+"POT-Creation-Date: 2025-12-31 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -174,7 +174,7 @@ msgstr "名称"
 msgid "Collection Size"
 msgstr ""
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1620
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1611
 #, kde-format
 msgid "Total entries: %1"
 msgstr "总共条目：%1"
@@ -2681,8 +2681,8 @@ msgstr "XSL 文件"
 msgid "Template Packages"
 msgstr ""
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1254
-#: src/mainwindow.cpp:1425 src/reportdialog.cpp:424 src/reportdialog.cpp:439
+#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1246
+#: src/mainwindow.cpp:1416 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
@@ -2768,22 +2768,22 @@ msgstr "删除多个条目"
 msgid "&Sort By"
 msgstr "排序方式(&S)"
 
-#: src/controller.cpp:584 src/mainwindow.cpp:578
+#: src/controller.cpp:584 src/mainwindow.cpp:574
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "编辑条目(&E)..."
 
-#: src/controller.cpp:585 src/mainwindow.cpp:585
+#: src/controller.cpp:585 src/mainwindow.cpp:581
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "复制条目(&U)"
 
-#: src/controller.cpp:586 src/mainwindow.cpp:669
+#: src/controller.cpp:586 src/mainwindow.cpp:665
 #, kde-format
 msgid "&Update Entry"
 msgstr "更新条目(&U)"
 
-#: src/controller.cpp:587 src/mainwindow.cpp:592
+#: src/controller.cpp:587 src/mainwindow.cpp:588
 #, kde-format
 msgid "&Delete Entry"
 msgstr "删除条目(&D)"
@@ -2939,7 +2939,7 @@ msgstr ""
 msgid "Hide All Columns"
 msgstr ""
 
-#: src/document.cpp:216 src/mainwindow.cpp:1369
+#: src/document.cpp:216 src/mainwindow.cpp:1360
 #, kde-format
 msgid "Saving file..."
 msgstr "正在保存文件..."
@@ -3000,7 +3000,7 @@ msgstr ""
 msgid "Save Entry"
 msgstr "保存条目"
 
-#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1159
+#: src/entryeditdialog.cpp:661 src/mainwindow.cpp:1151
 #, kde-format
 msgid "Unsaved Changes"
 msgstr "未保存的更改"
@@ -3009,7 +3009,7 @@ msgstr "未保存的更改"
 msgid "(Empty)"
 msgstr ""
 
-#: src/entryiconview.cpp:61 src/mainwindow.cpp:834
+#: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
@@ -3074,7 +3074,7 @@ msgstr ""
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico 无法定位默认的条目样式表。"
 
-#: src/entryview.cpp:292 src/mainwindow.cpp:1776
+#: src/entryview.cpp:292 src/mainwindow.cpp:1767
 #, kde-format
 msgid "Please check your installation."
 msgstr "请检查您的安装。"
@@ -3415,7 +3415,7 @@ msgstr "结果来自 %1：%2/%3"
 #: src/fetch/discogsfetcher.cpp:224 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:199
-#: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:161
+#: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:160
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:375
 #: src/fetch/kinofetcher.cpp:415 src/fetch/kinopoiskfetcher.cpp:267
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:332
@@ -4334,7 +4334,7 @@ msgid ""
 "configuration file."
 msgstr ""
 
-#: src/fetchdialog.cpp:139 src/mainwindow.cpp:568
+#: src/fetchdialog.cpp:139 src/mainwindow.cpp:564
 #, kde-format
 msgid "Internet Search"
 msgstr "互联网搜索"
@@ -4664,8 +4664,8 @@ msgstr "过滤名称："
 msgid "&Save Filter"
 msgstr "保存过滤(&S)"
 
-#: src/filterview.cpp:190 src/mainwindow.cpp:545 src/mainwindow.cpp:741
-#: src/mainwindow.cpp:759
+#: src/filterview.cpp:190 src/mainwindow.cpp:541 src/mainwindow.cpp:737
+#: src/mainwindow.cpp:755
 #, kde-format
 msgid "Filter"
 msgstr "过滤"
@@ -4701,8 +4701,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "分组"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1086 src/mainwindow.cpp:1708
-#: src/mainwindow.cpp:1745 src/translators/htmlexporter.cpp:387
+#: src/groupview.cpp:425 src/mainwindow.cpp:1078 src/mainwindow.cpp:1699
+#: src/mainwindow.cpp:1736 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
 msgstr "人物"
@@ -4949,7 +4949,7 @@ msgstr "上移行"
 msgid "Move Row Down"
 msgstr "下移行"
 
-#: src/images/imagejob.cpp:87 src/images/imagejob.cpp:126
+#: src/images/imagejob.cpp:93 src/images/imagejob.cpp:132
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico 无法加载图像 - %1。"
@@ -4994,19 +4994,19 @@ msgid ""
 "order to be merged."
 msgstr ""
 
-#: src/importdialog.cpp:146 src/mainwindow.cpp:353
+#: src/importdialog.cpp:146 src/mainwindow.cpp:349
 #, kde-format
 msgid "&Import"
 msgstr "导入(&I)"
 
-#: src/importdialog.cpp:381 src/mainwindow.cpp:1250 src/mainwindow.cpp:1423
+#: src/importdialog.cpp:381 src/mainwindow.cpp:1242 src/mainwindow.cpp:1414
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr ""
 
 #: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
-#: src/mainwindow.cpp:1252 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1244 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML 文件"
@@ -5243,894 +5243,894 @@ msgstr ""
 msgid "File to open"
 msgstr "要打开的文件"
 
-#: src/mainwindow.cpp:260
+#: src/mainwindow.cpp:256
 #, kde-format
 msgid "New Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:262
+#: src/mainwindow.cpp:258
 #, kde-format
 msgid "Create a new collection"
 msgstr "创建新收藏"
 
-#: src/mainwindow.cpp:277
+#: src/mainwindow.cpp:273
 #, kde-format
 msgid "New &Book Collection"
 msgstr "新建书籍收藏(&B)"
 
-#: src/mainwindow.cpp:278
+#: src/mainwindow.cpp:274
 #, kde-format
 msgid "Create a new book collection"
 msgstr "创建新书籍收藏"
 
-#: src/mainwindow.cpp:280
+#: src/mainwindow.cpp:276
 #, kde-format
 msgid "New B&ibliography"
 msgstr "新建文献(&I)"
 
-#: src/mainwindow.cpp:281
+#: src/mainwindow.cpp:277
 #, kde-format
 msgid "Create a new bibtex bibliography"
 msgstr "创建新 bibtex 文献"
 
-#: src/mainwindow.cpp:283
+#: src/mainwindow.cpp:279
 #, kde-format
 msgid "New &Comic Book Collection"
 msgstr "新建漫画收藏(&C)"
 
-#: src/mainwindow.cpp:284
+#: src/mainwindow.cpp:280
 #, kde-format
 msgid "Create a new comic book collection"
 msgstr "创建新漫画收藏"
 
-#: src/mainwindow.cpp:286
+#: src/mainwindow.cpp:282
 #, kde-format
 msgid "New &Video Collection"
 msgstr "新建视频收藏(&V)"
 
-#: src/mainwindow.cpp:287
+#: src/mainwindow.cpp:283
 #, kde-format
 msgid "Create a new video collection"
 msgstr "创建新视频收藏"
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:285
 #, kde-format
 msgid "New &Music Collection"
 msgstr "新建音乐收藏(&M)"
 
-#: src/mainwindow.cpp:290
+#: src/mainwindow.cpp:286
 #, kde-format
 msgid "Create a new music collection"
 msgstr "创建新音乐收藏"
 
-#: src/mainwindow.cpp:292
+#: src/mainwindow.cpp:288
 #, kde-format
 msgid "New C&oin Collection"
 msgstr "新建硬币收藏(&O)"
 
-#: src/mainwindow.cpp:293
+#: src/mainwindow.cpp:289
 #, kde-format
 msgid "Create a new coin collection"
 msgstr "创建新硬币收藏"
 
-#: src/mainwindow.cpp:295
+#: src/mainwindow.cpp:291
 #, kde-format
 msgid "New &Stamp Collection"
 msgstr "新建邮票收藏(&S)"
 
-#: src/mainwindow.cpp:296
+#: src/mainwindow.cpp:292
 #, kde-format
 msgid "Create a new stamp collection"
 msgstr "创建新邮票收藏"
 
-#: src/mainwindow.cpp:298
+#: src/mainwindow.cpp:294
 #, kde-format
 msgid "New C&ard Collection"
 msgstr "新建卡片收藏(&A)"
 
-#: src/mainwindow.cpp:299
+#: src/mainwindow.cpp:295
 #, kde-format
 msgid "Create a new trading card collection"
 msgstr "创建新交易卡片收藏"
 
-#: src/mainwindow.cpp:301
+#: src/mainwindow.cpp:297
 #, kde-format
 msgid "New &Wine Collection"
 msgstr "新建葡萄酒收藏(&W)"
 
-#: src/mainwindow.cpp:302
+#: src/mainwindow.cpp:298
 #, kde-format
 msgid "Create a new wine collection"
 msgstr "创建新葡萄酒收藏"
 
-#: src/mainwindow.cpp:304
+#: src/mainwindow.cpp:300
 #, kde-format
 msgid "New Video &Game Collection"
 msgstr ""
 
-#: src/mainwindow.cpp:305
+#: src/mainwindow.cpp:301
 #, kde-format
 msgid "Create a new video game collection"
 msgstr ""
 
-#: src/mainwindow.cpp:307
+#: src/mainwindow.cpp:303
 #, kde-format
 msgid "New Boa&rd Game Collection"
 msgstr "新建战术游戏收藏(&R)"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:304
 #, kde-format
 msgid "Create a new board game collection"
 msgstr "创建新战术游戏收藏"
 
-#: src/mainwindow.cpp:310
+#: src/mainwindow.cpp:306
 #, kde-format
 msgid "New &File Catalog"
 msgstr "新建文件分类(&F)"
 
-#: src/mainwindow.cpp:311
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "Create a new file catalog"
 msgstr "创建新文件分类"
 
-#: src/mainwindow.cpp:314
+#: src/mainwindow.cpp:310
 #, kde-format
 msgid "New C&ustom Collection"
 msgstr "新建自定义收藏(&U)"
 
-#: src/mainwindow.cpp:315
+#: src/mainwindow.cpp:311
 #, kde-format
 msgid "Create a new custom collection"
 msgstr "创建新自定义收藏"
 
-#: src/mainwindow.cpp:326
+#: src/mainwindow.cpp:322
 #, kde-format
 msgid "Open an existing document"
 msgstr "打开已有文档"
 
-#: src/mainwindow.cpp:328
+#: src/mainwindow.cpp:324
 #, kde-format
 msgid "Open a recently used file"
 msgstr "打开最近使用的文件"
 
-#: src/mainwindow.cpp:330
+#: src/mainwindow.cpp:326
 #, kde-format
 msgid "Save the document"
 msgstr "保存文档"
 
-#: src/mainwindow.cpp:332
+#: src/mainwindow.cpp:328
 #, kde-format
 msgid "Save the document as a different file..."
 msgstr "文档另存为不同文件..."
 
-#: src/mainwindow.cpp:336
+#: src/mainwindow.cpp:332
 #, kde-format
 msgid "Save As Template..."
 msgstr ""
 
-#: src/mainwindow.cpp:338
+#: src/mainwindow.cpp:334
 #, kde-format
 msgid "Save as a collection template"
 msgstr ""
 
-#: src/mainwindow.cpp:341
+#: src/mainwindow.cpp:337
 #, kde-format
 msgid "Print the contents of the collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:343
+#: src/mainwindow.cpp:339
 #, kde-format
 msgid "Preview the contents of the collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:346
+#: src/mainwindow.cpp:342
 #, kde-format
 msgid "Quit the application"
 msgstr "退出应用程序"
 
-#: src/mainwindow.cpp:355
+#: src/mainwindow.cpp:351
 #, kde-format
 msgid "Import the collection data from other formats"
 msgstr "从其他格式导入收藏数据"
 
-#: src/mainwindow.cpp:367
+#: src/mainwindow.cpp:363
 #, kde-format
 msgid "Import Tellico Data..."
 msgstr "导入 Tellico 数据..."
 
-#: src/mainwindow.cpp:368
+#: src/mainwindow.cpp:364
 #, kde-format
 msgid "Import another Tellico data file"
 msgstr "导入其他 Tellico 数据文件"
 
-#: src/mainwindow.cpp:371
+#: src/mainwindow.cpp:367
 #, kde-format
 msgid "Import CSV Data..."
 msgstr "导入 CSV 数据..."
 
-#: src/mainwindow.cpp:372
+#: src/mainwindow.cpp:368
 #, kde-format
 msgid "Import a CSV file"
 msgstr "导入 CSV 文件"
 
-#: src/mainwindow.cpp:374
+#: src/mainwindow.cpp:370
 #, kde-format
 msgid "Import MODS Data..."
 msgstr "导入 MODS 数据..."
 
-#: src/mainwindow.cpp:375
+#: src/mainwindow.cpp:371
 #, kde-format
 msgid "Import a MODS data file"
 msgstr "导入 MODS 数据文件"
 
-#: src/mainwindow.cpp:377
+#: src/mainwindow.cpp:373
 #, kde-format
 msgid "Import Alexandria Data..."
 msgstr "导入 Alexandria 数据..."
 
-#: src/mainwindow.cpp:378
+#: src/mainwindow.cpp:374
 #, kde-format
 msgid "Import data from the Alexandria book collection manager"
 msgstr "从 Alexandria 书籍收藏管理器导入数据"
 
-#: src/mainwindow.cpp:381
+#: src/mainwindow.cpp:377
 #, kde-format
 msgid "Import Delicious Library Data..."
 msgstr "导入 Delicious 藏书数据..."
 
-#: src/mainwindow.cpp:382
+#: src/mainwindow.cpp:378
 #, kde-format
 msgid "Import data from Delicious Library"
 msgstr "从 Delicious 藏书导入数据"
 
-#: src/mainwindow.cpp:385
+#: src/mainwindow.cpp:381
 #, kde-format
 msgid "Import Collectorz Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:386
+#: src/mainwindow.cpp:382
 #, kde-format
 msgid "Import data from Collectorz"
 msgstr ""
 
-#: src/mainwindow.cpp:389
+#: src/mainwindow.cpp:385
 #, kde-format
 msgid "Import Data Crow Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:390
+#: src/mainwindow.cpp:386
 #, kde-format
 msgid "Import data from Data Crow"
 msgstr ""
 
-#: src/mainwindow.cpp:393
+#: src/mainwindow.cpp:389
 #, kde-format
 msgid "Import OnMyShelf Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:394
+#: src/mainwindow.cpp:390
 #, kde-format
 msgid "Import data from OnMyShelf"
 msgstr ""
 
-#: src/mainwindow.cpp:397
+#: src/mainwindow.cpp:393
 #, kde-format
 msgid "Import Referencer Data..."
 msgstr "导入 Referencer 数据..."
 
-#: src/mainwindow.cpp:398
+#: src/mainwindow.cpp:394
 #, kde-format
 msgid "Import data from Referencer"
 msgstr "从 Referencer 导入数据"
 
-#: src/mainwindow.cpp:401
+#: src/mainwindow.cpp:397
 #, kde-format
 msgid "Import Bibtex Data..."
 msgstr "导入 Bibtex 数据..."
 
-#: src/mainwindow.cpp:402
+#: src/mainwindow.cpp:398
 #, kde-format
 msgid "Import a bibtex bibliography file"
 msgstr "导入 bibtex 文献文件"
 
-#: src/mainwindow.cpp:407
+#: src/mainwindow.cpp:403
 #, kde-format
 msgid "Import Bibtexml Data..."
 msgstr "导入 Bibtexml 数据..."
 
-#: src/mainwindow.cpp:408
+#: src/mainwindow.cpp:404
 #, kde-format
 msgid "Import a Bibtexml bibliography file"
 msgstr "导入 Bibtexml 文献文件"
 
-#: src/mainwindow.cpp:410
+#: src/mainwindow.cpp:406
 #, kde-format
 msgid "Import RIS Data..."
 msgstr "导入 RIS 数据..."
 
-#: src/mainwindow.cpp:411
+#: src/mainwindow.cpp:407
 #, kde-format
 msgid "Import an RIS reference file"
 msgstr "导入 RIS 参考文件"
 
-#: src/mainwindow.cpp:413
+#: src/mainwindow.cpp:409
 #, kde-format
 msgid "Import MARC Data..."
 msgstr ""
 
-#: src/mainwindow.cpp:414
+#: src/mainwindow.cpp:410
 #, kde-format
 msgid "Import MARC data"
 msgstr ""
 
-#: src/mainwindow.cpp:421
+#: src/mainwindow.cpp:417
 #, kde-format
 msgid "Import Goodreads Collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:422
+#: src/mainwindow.cpp:418
 #, kde-format
 msgid "Import a collection from Goodreads.com"
 msgstr ""
 
-#: src/mainwindow.cpp:424
+#: src/mainwindow.cpp:420
 #, kde-format
 msgid "Import LibraryThing Collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:425
+#: src/mainwindow.cpp:421
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
 msgstr ""
 
-#: src/mainwindow.cpp:427
+#: src/mainwindow.cpp:423
 #, kde-format
 msgid "Import PDF File..."
 msgstr "导入 PDF 文件..."
 
-#: src/mainwindow.cpp:428
+#: src/mainwindow.cpp:424
 #, kde-format
 msgid "Import a PDF file"
 msgstr "导入 PDF 文件"
 
-#: src/mainwindow.cpp:430
+#: src/mainwindow.cpp:426
 #, kde-format
 msgid "Import Audio File Metadata..."
 msgstr "导入音频文件元数据..."
 
-#: src/mainwindow.cpp:431
+#: src/mainwindow.cpp:427
 #, kde-format
 msgid "Import meta-data from audio files"
 msgstr "从音频文件导入元数据"
 
-#: src/mainwindow.cpp:436
+#: src/mainwindow.cpp:432
 #, kde-format
 msgid "Import Audio CD Data..."
 msgstr "导入音频 CD 数据..."
 
-#: src/mainwindow.cpp:437
+#: src/mainwindow.cpp:433
 #, kde-format
 msgid "Import audio CD information"
 msgstr "导入音频 CD 信息"
 
-#: src/mainwindow.cpp:442
+#: src/mainwindow.cpp:438
 #, kde-format
 msgid "Import Discogs Collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:443
+#: src/mainwindow.cpp:439
 #, kde-format
 msgid "Import a collection from Discogs.com"
 msgstr ""
 
-#: src/mainwindow.cpp:445
+#: src/mainwindow.cpp:441
 #, kde-format
 msgid "Import GCstar Data..."
 msgstr "导入 GCstar 数据..."
 
-#: src/mainwindow.cpp:446
+#: src/mainwindow.cpp:442
 #, kde-format
 msgid "Import a GCstar data file"
 msgstr "导入 GCstar 数据文件"
 
-#: src/mainwindow.cpp:449
+#: src/mainwindow.cpp:445
 #, kde-format
 msgid "Import Griffith Data..."
 msgstr "导入 Griffith 数据..."
 
-#: src/mainwindow.cpp:450
+#: src/mainwindow.cpp:446
 #, kde-format
 msgid "Import a Griffith database"
 msgstr "导入 Griffith 数据库"
 
-#: src/mainwindow.cpp:453
+#: src/mainwindow.cpp:449
 #, kde-format
 msgid "Import Ant Movie Catalog Data..."
 msgstr "导入 Ant 电影分类数据..."
 
-#: src/mainwindow.cpp:454
+#: src/mainwindow.cpp:450
 #, kde-format
 msgid "Import an Ant Movie Catalog data file"
 msgstr "导入 Ant 电影分类数据文件"
 
-#: src/mainwindow.cpp:457
+#: src/mainwindow.cpp:453
 #, kde-format
 msgid "Import BoardGameGeek Collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:458
+#: src/mainwindow.cpp:454
 #, kde-format
 msgid "Import a collection from BoardGameGeek.com"
 msgstr ""
 
-#: src/mainwindow.cpp:460
+#: src/mainwindow.cpp:456
 #, kde-format
 msgid "Import VinoXML..."
 msgstr ""
 
-#: src/mainwindow.cpp:461
+#: src/mainwindow.cpp:457
 #, kde-format
 msgid "Import VinoXML data"
 msgstr ""
 
-#: src/mainwindow.cpp:463
+#: src/mainwindow.cpp:459
 #, kde-format
 msgid "Import File Listing..."
 msgstr "导入文件列表..."
 
-#: src/mainwindow.cpp:464
+#: src/mainwindow.cpp:460
 #, kde-format
 msgid "Import information about files in a folder"
 msgstr "导入文件夹中关于文件的信息"
 
-#: src/mainwindow.cpp:466
+#: src/mainwindow.cpp:462
 #, kde-format
 msgid "Import XSL Transform..."
 msgstr "导入 XSL 转换..."
 
-#: src/mainwindow.cpp:467
+#: src/mainwindow.cpp:463
 #, kde-format
 msgid "Import using an XSL Transform"
 msgstr "使用 XSL 转换导入"
 
-#: src/mainwindow.cpp:476
+#: src/mainwindow.cpp:472
 #, kde-format
 msgid "&Export"
 msgstr "导出(&E)"
 
-#: src/mainwindow.cpp:478
+#: src/mainwindow.cpp:474
 #, kde-format
 msgid "Export the collection data to other formats"
 msgstr "将收藏数据导出为其他格式"
 
-#: src/mainwindow.cpp:490
+#: src/mainwindow.cpp:486
 #, kde-format
 msgid "Export to XML..."
 msgstr "导出为 XML..."
 
-#: src/mainwindow.cpp:491
+#: src/mainwindow.cpp:487
 #, kde-format
 msgid "Export to a Tellico XML file"
 msgstr "导出为 Tellico XML 文件"
 
-#: src/mainwindow.cpp:494
+#: src/mainwindow.cpp:490
 #, kde-format
 msgid "Export to Zip..."
 msgstr "导出为 Zip..."
 
-#: src/mainwindow.cpp:495
+#: src/mainwindow.cpp:491
 #, kde-format
 msgid "Export to a Tellico Zip file"
 msgstr "导出为 Tellico Zip 文件"
 
-#: src/mainwindow.cpp:498
+#: src/mainwindow.cpp:494
 #, kde-format
 msgid "Export to HTML..."
 msgstr "导出为 HTML..."
 
-#: src/mainwindow.cpp:499
+#: src/mainwindow.cpp:495
 #, kde-format
 msgid "Export to an HTML file"
 msgstr "导出为 HTML 文件"
 
-#: src/mainwindow.cpp:501
+#: src/mainwindow.cpp:497
 #, kde-format
 msgid "Export to CSV..."
 msgstr "导出为 CSV..."
 
-#: src/mainwindow.cpp:502
+#: src/mainwindow.cpp:498
 #, kde-format
 msgid "Export to a comma-separated values file"
 msgstr "导出为逗号分割符文件"
 
-#: src/mainwindow.cpp:504
+#: src/mainwindow.cpp:500
 #, kde-format
 msgid "Export to Alexandria..."
 msgstr "导出为 Alexandria..."
 
-#: src/mainwindow.cpp:505
+#: src/mainwindow.cpp:501
 #, kde-format
 msgid "Export to an Alexandria library"
 msgstr "导出为 Alexandria 藏书"
 
-#: src/mainwindow.cpp:508
+#: src/mainwindow.cpp:504
 #, kde-format
 msgid "Export to Bibtex..."
 msgstr "导出为 Bibtex..."
 
-#: src/mainwindow.cpp:509
+#: src/mainwindow.cpp:505
 #, kde-format
 msgid "Export to a bibtex file"
 msgstr "导出为 bibtex 文件"
 
-#: src/mainwindow.cpp:511
+#: src/mainwindow.cpp:507
 #, kde-format
 msgid "Export to Bibtexml..."
 msgstr "导出为 Bibtexml..."
 
-#: src/mainwindow.cpp:512
+#: src/mainwindow.cpp:508
 #, kde-format
 msgid "Export to a Bibtexml file"
 msgstr "导出为 Bibtexml 文件"
 
-#: src/mainwindow.cpp:514
+#: src/mainwindow.cpp:510
 #, kde-format
 msgid "Export to ONIX..."
 msgstr "导出为 ONIX..."
 
-#: src/mainwindow.cpp:515
+#: src/mainwindow.cpp:511
 #, kde-format
 msgid "Export to an ONIX file"
 msgstr "导出为 ONIX 文件"
 
-#: src/mainwindow.cpp:517
+#: src/mainwindow.cpp:513
 #, kde-format
 msgid "Export to GCstar..."
 msgstr "导出为 GCstar..."
 
-#: src/mainwindow.cpp:518
+#: src/mainwindow.cpp:514
 #, kde-format
 msgid "Export to a GCstar data file"
 msgstr "导出为 GCstar 数据文件"
 
-#: src/mainwindow.cpp:521
+#: src/mainwindow.cpp:517
 #, kde-format
 msgid "Export XSL Transform..."
 msgstr "导出为 XSL 转换..."
 
-#: src/mainwindow.cpp:522
+#: src/mainwindow.cpp:518
 #, kde-format
 msgid "Export using an XSL Transform"
 msgstr "使用 XSL 转换导出"
 
-#: src/mainwindow.cpp:533
+#: src/mainwindow.cpp:529
 #, kde-format
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr "剪切选中的文本并将其放入剪贴板"
 
-#: src/mainwindow.cpp:535
+#: src/mainwindow.cpp:531
 #, kde-format
 msgid "Copy the selected text to the clipboard"
 msgstr "复制选中的文本到剪贴板"
 
-#: src/mainwindow.cpp:537
+#: src/mainwindow.cpp:533
 #, kde-format
 msgid "Paste the clipboard contents"
 msgstr "粘贴剪贴板内容"
 
-#: src/mainwindow.cpp:539
+#: src/mainwindow.cpp:535
 #, kde-format
 msgid "Select all the entries in the collection"
 msgstr "选中收藏中的全部条目"
 
-#: src/mainwindow.cpp:541
+#: src/mainwindow.cpp:537
 #, kde-format
 msgid "Deselect all the entries in the collection"
 msgstr "取消选中收藏中的全部条目"
 
-#: src/mainwindow.cpp:544
+#: src/mainwindow.cpp:540
 #, kde-format
 msgid "Advanced &Filter..."
 msgstr "高级过滤(&F)..."
 
-#: src/mainwindow.cpp:548 src/mainwindow.cpp:760
+#: src/mainwindow.cpp:544 src/mainwindow.cpp:756
 #, kde-format
 msgid "Filter the collection"
 msgstr "过滤收藏"
 
-#: src/mainwindow.cpp:555
+#: src/mainwindow.cpp:551
 #, kde-format
 msgid "&New Entry..."
 msgstr "新建条目(&N)..."
 
-#: src/mainwindow.cpp:557
+#: src/mainwindow.cpp:553
 #, kde-format
 msgid "New Entry"
 msgstr ""
 
-#: src/mainwindow.cpp:559
+#: src/mainwindow.cpp:555
 #, kde-format
 msgid "Create a new entry"
 msgstr "创建新条目"
 
-#: src/mainwindow.cpp:561
+#: src/mainwindow.cpp:557
 #, kde-format
 msgid "Add Entry"
 msgstr ""
 
-#: src/mainwindow.cpp:567
+#: src/mainwindow.cpp:563
 #, kde-format
 msgid "Internet Search..."
 msgstr "互联网搜索..."
 
-#: src/mainwindow.cpp:571
+#: src/mainwindow.cpp:567
 #, kde-format
 msgid "Search the internet..."
 msgstr "搜索互联网..."
 
-#: src/mainwindow.cpp:581
+#: src/mainwindow.cpp:577
 #, kde-format
 msgid "Edit the selected entries"
 msgstr "编辑所选条目"
 
-#: src/mainwindow.cpp:588
+#: src/mainwindow.cpp:584
 #, kde-format
 msgid "Copy the selected entries"
 msgstr "复制所选条目"
 
-#: src/mainwindow.cpp:595
+#: src/mainwindow.cpp:591
 #, kde-format
 msgid "Delete the selected entries"
 msgstr "删除所选条目"
 
-#: src/mainwindow.cpp:599
+#: src/mainwindow.cpp:595
 #, kde-format
 msgid "&Merge Entries"
 msgstr "合并条目(&M)"
 
-#: src/mainwindow.cpp:603
+#: src/mainwindow.cpp:599
 #, kde-format
 msgid "Merge the selected entries"
 msgstr "合并所选条目"
 
-#: src/mainwindow.cpp:607
+#: src/mainwindow.cpp:603
 #, kde-format
 msgid "Check-&out..."
 msgstr "检出(&O)..."
 
-#: src/mainwindow.cpp:609
+#: src/mainwindow.cpp:605
 #, kde-format
 msgid "Check-out the selected items"
 msgstr "检出所选项"
 
-#: src/mainwindow.cpp:612
+#: src/mainwindow.cpp:608
 #, kde-format
 msgid "Check-&in"
 msgstr "检入(&I)"
 
-#: src/mainwindow.cpp:614
+#: src/mainwindow.cpp:610
 #, kde-format
 msgid "Check-in the selected items"
 msgstr "检入所选项"
 
-#: src/mainwindow.cpp:617
+#: src/mainwindow.cpp:613
 #, kde-format
 msgid "&Rename Collection..."
 msgstr "重命名收藏(&R)..."
 
-#: src/mainwindow.cpp:620
+#: src/mainwindow.cpp:616
 #, kde-format
 msgid "Rename the collection"
 msgstr "重命名收藏"
 
-#: src/mainwindow.cpp:623
+#: src/mainwindow.cpp:619
 #, kde-format
 msgid "Collection &Fields..."
 msgstr "收藏域(&F)..."
 
-#: src/mainwindow.cpp:624
+#: src/mainwindow.cpp:620
 #, kde-format
 msgid "Fields"
 msgstr "域"
 
-#: src/mainwindow.cpp:627
+#: src/mainwindow.cpp:623
 #, kde-format
 msgid "Modify the collection fields"
 msgstr "修改收藏域"
 
-#: src/mainwindow.cpp:630
+#: src/mainwindow.cpp:626
 #, kde-format
 msgid "&Generate Reports..."
 msgstr "生成报告(&G)..."
 
-#: src/mainwindow.cpp:631
+#: src/mainwindow.cpp:627
 #, kde-format
 msgid "Reports"
 msgstr "报告"
 
-#: src/mainwindow.cpp:633
+#: src/mainwindow.cpp:629
 #, kde-format
 msgid "Generate collection reports"
 msgstr "生成收藏报告"
 
-#: src/mainwindow.cpp:636
+#: src/mainwindow.cpp:632
 #, kde-format
 msgid "Convert to &Bibliography"
 msgstr "转换为文献(&B)"
 
-#: src/mainwindow.cpp:638
+#: src/mainwindow.cpp:634
 #, kde-format
 msgid "Convert a book collection to a bibliography"
 msgstr "将书籍收藏转换为文献"
 
-#: src/mainwindow.cpp:641
+#: src/mainwindow.cpp:637
 #, kde-format
 msgid "String &Macros..."
 msgstr "字符串宏(&M)..."
 
-#: src/mainwindow.cpp:643
+#: src/mainwindow.cpp:639
 #, kde-format
 msgid "Edit the bibtex string macros"
 msgstr "编辑 bibtex 字符串宏"
 
-#: src/mainwindow.cpp:646
+#: src/mainwindow.cpp:642
 #, kde-format
 msgid "Check for Duplicate Keys..."
 msgstr ""
 
-#: src/mainwindow.cpp:648
+#: src/mainwindow.cpp:644
 #, kde-format
 msgid "Check for duplicate citation keys"
 msgstr ""
 
-#: src/mainwindow.cpp:654
+#: src/mainwindow.cpp:650
 #, kde-format
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "复制 Bibtex 到剪贴板(&P)"
 
-#: src/mainwindow.cpp:655
+#: src/mainwindow.cpp:651
 #, kde-format
 msgid "Copy bibtex citations to the clipboard"
 msgstr "复制 bibtex 引用到剪贴板"
 
-#: src/mainwindow.cpp:660
+#: src/mainwindow.cpp:656
 #, kde-format
 msgid "Cite Entry in &LyX"
 msgstr "在 Lyx 中引用(&L)"
 
-#: src/mainwindow.cpp:661
+#: src/mainwindow.cpp:657
 #, kde-format
 msgid "Cite the selected entries in LyX"
 msgstr "在 Lyx 中引用所选条目"
 
-#: src/mainwindow.cpp:671
+#: src/mainwindow.cpp:667
 #, kde-format
 msgctxt "Update Entry"
 msgid "Update"
 msgstr "更新"
 
-#: src/mainwindow.cpp:676
+#: src/mainwindow.cpp:672
 #, kde-format
 msgid "All Sources"
 msgstr "全部来源"
 
-#: src/mainwindow.cpp:677
+#: src/mainwindow.cpp:673
 #, kde-format
 msgid "Update entry data from all available sources"
 msgstr "从全部可用来源更新条目数据"
 
-#: src/mainwindow.cpp:692
+#: src/mainwindow.cpp:688
 #, kde-format
 msgid "Unlock Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:693
+#: src/mainwindow.cpp:689
 #, kde-format
 msgid "Unlock the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:695
+#: src/mainwindow.cpp:691
 #, kde-format
 msgid "Lock Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:696
+#: src/mainwindow.cpp:692
 #, kde-format
 msgid "Lock the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:701
+#: src/mainwindow.cpp:697
 #, kde-format
 msgid "Reset Layout"
 msgstr ""
 
-#: src/mainwindow.cpp:702
+#: src/mainwindow.cpp:698
 #, kde-format
 msgid "Reset the window's layout"
 msgstr ""
 
-#: src/mainwindow.cpp:705
+#: src/mainwindow.cpp:701
 #, kde-format
 msgid "Entry &Editor"
 msgstr ""
 
-#: src/mainwindow.cpp:707
+#: src/mainwindow.cpp:703
 #, kde-format
 msgid "Enable/disable the editor"
 msgstr "启用/禁用编辑器"
 
-#: src/mainwindow.cpp:716
+#: src/mainwindow.cpp:712
 #, kde-format
 msgid "Show Log"
 msgstr ""
 
-#: src/mainwindow.cpp:732
+#: src/mainwindow.cpp:728
 #, kde-format
 msgid "Change Grouping"
 msgstr "更改分组"
 
-#: src/mainwindow.cpp:735
+#: src/mainwindow.cpp:731
 #, kde-format
 msgid "&Group Selection"
 msgstr "分组选择(&G)"
 
-#: src/mainwindow.cpp:736
+#: src/mainwindow.cpp:732
 #, kde-format
 msgid "Change the grouping of the collection"
 msgstr "更改收藏的分组"
 
-#: src/mainwindow.cpp:745
+#: src/mainwindow.cpp:741
 #, kde-format
 msgid "Filter here..."
 msgstr "在此过滤..."
 
-#: src/mainwindow.cpp:812
+#: src/mainwindow.cpp:805
 #, kde-format
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
 "qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:817
+#: src/mainwindow.cpp:810
 #, kde-format
 msgid "Collection View"
 msgstr ""
 
-#: src/mainwindow.cpp:824
+#: src/mainwindow.cpp:817
 #, kde-format
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:841
+#: src/mainwindow.cpp:834
 #, kde-format
 msgid "Group View"
 msgstr ""
 
-#: src/mainwindow.cpp:850
+#: src/mainwindow.cpp:843
 #, kde-format
 msgid "Groups"
 msgstr "分组"
 
-#: src/mainwindow.cpp:851
+#: src/mainwindow.cpp:844
 #, kde-format
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:932
+#: src/mainwindow.cpp:924
 #, kde-format
 msgid "Collection management software, free and simple"
 msgstr ""
 
-#: src/mainwindow.cpp:934
+#: src/mainwindow.cpp:926
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
 msgstr "欢迎使用 Tellico 收藏管理器"
 
-#: src/mainwindow.cpp:936
+#: src/mainwindow.cpp:928
 #, kde-format
 msgid ""
 "<h3>Tellico is a tool for managing collections of books, videos, music, and "
@@ -6140,7 +6140,7 @@ msgid ""
 "Internet sources.</h3>"
 msgstr ""
 
-#: src/mainwindow.cpp:945
+#: src/mainwindow.cpp:937
 #, kde-format
 msgid ""
 "More information can be found in the <a href=\"help:/tellico"
@@ -6148,7 +6148,7 @@ msgid ""
 "this welcome screen</a>."
 msgstr ""
 
-#: src/mainwindow.cpp:1157
+#: src/mainwindow.cpp:1149
 #, kde-format
 msgid ""
 "The current file has been modified.\n"
@@ -6157,22 +6157,22 @@ msgstr ""
 "当前文件已被修改。\n"
 "您想要保存吗？"
 
-#: src/mainwindow.cpp:1193 src/mainwindow.cpp:1226
+#: src/mainwindow.cpp:1185 src/mainwindow.cpp:1218
 #, kde-format
 msgid "Creating new collection..."
 msgstr ""
 
-#: src/mainwindow.cpp:1247 src/mainwindow.cpp:1270 src/mainwindow.cpp:1288
+#: src/mainwindow.cpp:1239 src/mainwindow.cpp:1262 src/mainwindow.cpp:1280
 #, kde-format
 msgid "Opening file..."
 msgstr "正在打开文件..."
 
-#: src/mainwindow.cpp:1258
+#: src/mainwindow.cpp:1250
 #, kde-format
 msgid "Open File"
 msgstr "打开文件"
 
-#: src/mainwindow.cpp:1380
+#: src/mainwindow.cpp:1371
 #, kde-format
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
@@ -6181,59 +6181,59 @@ msgid ""
 "changed in the configuration dialog.</p></qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:1385
+#: src/mainwindow.cpp:1376
 #, kde-format
 msgid "Save Images Separately"
 msgstr "单独保存图像"
 
-#: src/mainwindow.cpp:1386
+#: src/mainwindow.cpp:1377
 #, kde-format
 msgid "Save Images in File"
 msgstr "在文件中保存图像"
 
-#: src/mainwindow.cpp:1421
+#: src/mainwindow.cpp:1412
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "用新文件名保存文件..."
 
-#: src/mainwindow.cpp:1430
+#: src/mainwindow.cpp:1421
 #, kde-format
 msgid "Save As"
 msgstr "另存为"
 
-#: src/mainwindow.cpp:1496
+#: src/mainwindow.cpp:1487
 #, kde-format
 msgid "Printing..."
 msgstr "正在打印..."
 
-#: src/mainwindow.cpp:1500
+#: src/mainwindow.cpp:1491
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
 
-#: src/mainwindow.cpp:1525
+#: src/mainwindow.cpp:1516
 #, kde-format
 msgid "Exiting..."
 msgstr "正在退出..."
 
-#: src/mainwindow.cpp:1627
+#: src/mainwindow.cpp:1618
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 个已过滤；%2 个已选中)"
 
-#: src/mainwindow.cpp:1630
+#: src/mainwindow.cpp:1621
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 个已过滤)"
 
-#: src/mainwindow.cpp:1633
+#: src/mainwindow.cpp:1624
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 个已选中)"
 
-#: src/mainwindow.cpp:1775 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1766 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:93
@@ -6241,95 +6241,95 @@ msgstr "(%1 个已选中)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico 在 XSLT 处理中遇到错误。"
 
-#: src/mainwindow.cpp:1893
+#: src/mainwindow.cpp:1884
 #, kde-format
 msgid "Importing data..."
 msgstr "正在导入数据..."
 
-#: src/mainwindow.cpp:1904
+#: src/mainwindow.cpp:1895
 #, kde-format
 msgid "Import File"
 msgstr "导入文件"
 
-#: src/mainwindow.cpp:1917
+#: src/mainwindow.cpp:1908
 #, kde-format
 msgid "Import Directory"
 msgstr "导入目录"
 
-#: src/mainwindow.cpp:1941
+#: src/mainwindow.cpp:1932
 #, kde-format
 msgid "Exporting data..."
 msgstr "正在导出数据..."
 
-#: src/mainwindow.cpp:1965
+#: src/mainwindow.cpp:1956
 #, kde-format
 msgid "Export As"
 msgstr "导出为"
 
-#: src/mainwindow.cpp:1993
+#: src/mainwindow.cpp:1984
 #, kde-format
 msgid "String Macros"
 msgstr "字符串宏"
 
-#: src/mainwindow.cpp:1994
+#: src/mainwindow.cpp:1985
 #, kde-format
 msgid "Macro"
 msgstr "宏"
 
-#: src/mainwindow.cpp:1994
+#: src/mainwindow.cpp:1985
 #, kde-format
 msgid "String"
 msgstr "字符串"
 
-#: src/mainwindow.cpp:2080
+#: src/mainwindow.cpp:2071
 #, kde-format
 msgid "Creating citations..."
 msgstr "正在创建引用..."
 
-#: src/mainwindow.cpp:2187 src/mainwindow.cpp:2194
+#: src/mainwindow.cpp:2178 src/mainwindow.cpp:2185
 #, kde-format
 msgid "Filters"
 msgstr "过滤"
 
-#: src/mainwindow.cpp:2195
+#: src/mainwindow.cpp:2186
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2215 src/mainwindow.cpp:2222
+#: src/mainwindow.cpp:2206 src/mainwindow.cpp:2213
 #, kde-format
 msgid "Loans"
 msgstr "贷款"
 
-#: src/mainwindow.cpp:2223
+#: src/mainwindow.cpp:2214
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
 
-#: src/mainwindow.cpp:2311
+#: src/mainwindow.cpp:2302
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
 "be saved and the images will be transferred to the new location."
 msgstr ""
 
-#: src/mainwindow.cpp:2355
+#: src/mainwindow.cpp:2346
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "从 %1 更新数据"
 
-#: src/mainwindow.cpp:2374
+#: src/mainwindow.cpp:2365
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr "Tellico 一次只能导入一个此类型的文件。将只导入 %1。"
 
-#: src/mainwindow.cpp:2553
+#: src/mainwindow.cpp:2544
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
