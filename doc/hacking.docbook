@@ -370,6 +370,31 @@ This setting is for the location of the lyxpipe for sending bibliographic citati
 </informalexample>
 </sect3>
 </sect2>
+
+<sect2 id="multi-disc-options">
+  <title>Multi-Disc Options</title>
+
+  <para>The <link linkend="musicbrainz">MusicBrainz</link>, <link linkend="discogs">Discogs</link>, and
+    <link linkend="itunes">iTunes</link> data sources can fetch multi-disc album information, specifying
+    which tracks each disc contains. By default, the track lists are inserted into separate field, one
+    for each disc. Prior to verion 4.0, the track lists were combined. This option provides the pre-4.0
+    behavior on an individual data source level. Add it to each <emphasis>Data Source</emphasis> section
+    where it is desired.</para>
+
+  <sect3>
+    <title>Split Tracks By Disc</title>
+
+    <para>Setting this to <emphasis>false</emphasis> reverts to pre-4.0 behavior where the tracks are collapsed into a single track list.</para>
+  </sect3>
+
+  <sect3>
+    <title>Example</title>
+    <informalexample>
+      <para><userinput>Split Tracks By Disc=false</userinput></para>
+    </informalexample>
+  </sect3>
+</sect2>
+
 </sect1>
 
 <sect1 id="bibtex-translation">
