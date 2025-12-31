@@ -103,7 +103,7 @@ void CollectorzTest::testMovies() {
   QCOMPARE(entry->field("director"), QStringLiteral("Edgar Wright"));
   QCOMPARE(entry->field("producer"), QStringLiteral("Tim Bevan; Eric Fellner"));
   QCOMPARE(entry->field("writer"), QStringLiteral("Edgar Wright; Simon Pegg"));
-  QStringList cast = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QStringList cast = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QCOMPARE(cast.count(), 10);
   QStringList cast0 = QStringList() << QStringLiteral("Kate Ashfield") << QStringLiteral("Liz");
   QCOMPARE(cast.at(0), cast0.join(Tellico::FieldFormat::columnDelimiterString()));
@@ -144,7 +144,7 @@ void CollectorzTest::testMusic() {
   QCOMPARE(entry->field("genre"), QStringLiteral("Rock"));
   QCOMPARE(entry->field("medium"), QStringLiteral("Compact Disc"));
   QCOMPARE(entry->field("label"), QStringLiteral("Elektra"));
-  QStringList tracks = Tellico::FieldFormat::splitTable(entry->field("track"));
+  QStringList tracks = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
   QCOMPARE(tracks.count(), 14);
   QStringList track1 = QStringList() << QStringLiteral("Werewolves Of London") << QStringLiteral("Warren Zevon") << QStringLiteral("03:28");
   QCOMPARE(tracks.at(0), track1.join(Tellico::FieldFormat::columnDelimiterString()));

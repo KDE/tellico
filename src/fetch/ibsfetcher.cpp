@@ -166,13 +166,13 @@ void IBSFetcher::slotComplete(KJob*) {
 #endif
 
   QString s = Tellico::decodeHTML(data);
-  static const QRegularExpression itemRx(QLatin1String("<div class=\"cc-product-list-item.*?>(.+?)<!--"),
+  static const QRegularExpression itemRx(QStringLiteral("<div class=\"cc-product-list-item.*?>(.+?)<!--"),
                                          QRegularExpression::DotMatchesEverythingOption);
   static const QRegularExpression titleRx(QStringLiteral("<a [^>]*href=\"(.+?)\"[^>]*?class=\"cc-title\">(.+?)</a"),
                                           QRegularExpression::DotMatchesEverythingOption);
-  static const QRegularExpression yearRx(QLatin1String("<span class=\"cc-publisher\">.*?([12]\\d{3}).*?</"),
+  static const QRegularExpression yearRx(QStringLiteral("<span class=\"cc-publisher\">.*?([12]\\d{3}).*?</"),
                                          QRegularExpression::DotMatchesEverythingOption);
-  static const QRegularExpression tagRx(QLatin1String("<.*?>"));
+  static const QRegularExpression tagRx(QStringLiteral("<.*?>"));
 
   QString url, title, year;
   auto matchIterator = itemRx.globalMatch(s);
@@ -244,7 +244,7 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
-  static const QRegularExpression jsonRx(QLatin1String("<script type=\"application/ld\\+json\">(.*?)</script"),
+  static const QRegularExpression jsonRx(QStringLiteral("<script type=\"application/ld\\+json\">(.*?)</script"),
                                          QRegularExpression::DotMatchesEverythingOption);
 
   const auto jsonMatch = jsonRx.match(str_);
@@ -311,12 +311,12 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   entry->setField(QStringLiteral("publisher"), objValue(mainObj, "publisher"));
 
   // multiple authors do not show up in the embedded JSON
-  static const QRegularExpression titleDivRx(QLatin1String("<div id=\"title\">(.*?)</div>"),
+  static const QRegularExpression titleDivRx(QStringLiteral("<div id=\"title\">(.*?)</div>"),
                                              QRegularExpression::DotMatchesEverythingOption);
   const auto titleDivMatch = titleDivRx.match(str_);
   if(titleDivMatch.hasMatch()) {
     const QString titleDiv = titleDivMatch.captured(1);
-    static const QRegularExpression authorRx(QLatin1String("<a href=\"/libri/autori/[^>]+?>(.*?)</a>"),
+    static const QRegularExpression authorRx(QStringLiteral("<a href=\"/libri/autori/[^>]+?>(.*?)</a>"),
                                              QRegularExpression::DotMatchesEverythingOption);
     QStringList authors;
     auto i = authorRx.globalMatch(titleDiv);
@@ -328,7 +328,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
       entry->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
     }
     // the title in the embedded loses its identifier? "La..."
-    static const QRegularExpression labelRx(QLatin1String("<label>(.*?)</label>"),
+    static const QRegularExpression labelRx(QStringLiteral("<label>(.*?)</label>"),
                                             QRegularExpression::DotMatchesEverythingOption);
     const auto labelMatch = labelRx.match(titleDiv);
     if(labelMatch.hasMatch()) {
@@ -336,10 +336,10 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  static const QRegularExpression tagRx(QLatin1String("<.*?>"));
+  static const QRegularExpression tagRx(QStringLiteral("<.*?>"));
 
   // editor is not in embedded json
-  static const QRegularExpression editorRx(QLatin1String("Curatore:.*?>(.*?)</a"),
+  static const QRegularExpression editorRx(QStringLiteral("Curatore:.*?>(.*?)</a"),
                                            QRegularExpression::DotMatchesEverythingOption);
   auto match = editorRx.match(str_);
   if(match.hasMatch()) {
@@ -347,7 +347,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   }
 
   // translator is not in embedded json
-  static const QRegularExpression translatorRx(QLatin1String("Traduttore:.*?>(.*?)</a"),
+  static const QRegularExpression translatorRx(QStringLiteral("Traduttore:.*?>(.*?)</a"),
                                                QRegularExpression::DotMatchesEverythingOption);
   match = translatorRx.match(str_);
   if(match.hasMatch()) {
@@ -355,7 +355,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   }
 
   // edition is not in embedded json
-  static const QRegularExpression editionRx(QLatin1String("Editore:.*?>(.*?)</a"),
+  static const QRegularExpression editionRx(QStringLiteral("Editore:.*?>(.*?)</a"),
                                             QRegularExpression::DotMatchesEverythingOption);
   match = editionRx.match(str_);
   if(match.hasMatch()) {
@@ -363,7 +363,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   }
 
   // series is not in embedded json
-  static const QRegularExpression seriesRx(QLatin1String("Collana:.*?>(.*?)</a"),
+  static const QRegularExpression seriesRx(QStringLiteral("Collana:.*?>(.*?)</a"),
                                            QRegularExpression::DotMatchesEverythingOption);
   match = seriesRx.match(str_);
   if(match.hasMatch()) {

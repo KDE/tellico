@@ -32,7 +32,7 @@ Q_OBJECT
 
 private Q_SLOTS:
   void initTestCase();
-  void cleanupTestCase();
+  void init();
 
   void testTokens();
   void testTokens_data();

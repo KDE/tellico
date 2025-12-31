@@ -54,7 +54,7 @@ void NumberFieldWidget::initLineEdit() {
 
   // regexp is any number of digits followed optionally by any number of
   // groups of a semi-colon followed optionally by a space, followed by digits
-  QRegularExpression rx(QLatin1String("-?\\d*(; ?-?\\d*)*"));
+  QRegularExpression rx(QStringLiteral("-?\\d*(; ?-?\\d*)*"));
   m_lineEdit->setValidator(new QRegularExpressionValidator(rx, this));
 }
 

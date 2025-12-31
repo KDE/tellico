@@ -67,7 +67,7 @@ QString ComicVineFetcher::source() const {
 }
 
 QString ComicVineFetcher::attribution() const {
-  return TC_I18N3(providedBy, QLatin1String("https://comicvine.gamespot.com"), QLatin1String("Comic Vine"));
+  return TC_I18N3(providedBy, QStringLiteral("https://comicvine.gamespot.com"), QStringLiteral("Comic Vine"));
 }
 
 bool ComicVineFetcher::canFetch(int type) const {

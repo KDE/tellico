@@ -104,7 +104,7 @@ void GroupSummaryWidget::addChart(Tellico::Data::FieldPtr field_) {
     }
     if(group->fieldName() == QStringLiteral("rating")) {
       const int rating = qBound(0, group->groupName().toInt(), 10);
-      groupNames << QString::fromUtf8("⭐").repeated(rating);
+      groupNames << QStringLiteral("⭐").repeated(rating);
     } else {
       groupNames << group->groupName();
     }

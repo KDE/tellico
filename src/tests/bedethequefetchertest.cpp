@@ -164,7 +164,7 @@ void BedethequeFetcherTest::testDonjon() {
 void BedethequeFetcherTest::testUpdate() {
   Tellico::Data::CollPtr coll(new Tellico::Data::ComicBookCollection(true));
   Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("lien-bel"),
-                                                         QLatin1String("Link"),
+                                                         QStringLiteral("Link"),
                                                          Tellico::Data::Field::URL));
   coll->addField(field);
   Tellico::Data::EntryPtr oldEntry(new Tellico::Data::Entry(coll));

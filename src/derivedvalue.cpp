@@ -33,7 +33,7 @@
 using namespace Tellico::Data;
 using Tellico::Data::DerivedValue;
 
-const QRegularExpression DerivedValue::s_templateFieldsRx(QLatin1String("%\\{([^:]+):?.*?\\}"));
+const QRegularExpression DerivedValue::s_templateFieldsRx(QStringLiteral("%\\{([^:]+):?.*?\\}"));
 
 DerivedValue::DerivedValue(const QString& valueTemplate_) : m_valueTemplate(valueTemplate_) {
 }
@@ -124,7 +124,7 @@ QString DerivedValue::value(EntryPtr entry_, bool formatted_) const {
 }
 
 void DerivedValue::initRegularExpression() const {
-  m_keyRx.setPattern(QLatin1String("^([^:]+):?(-?\\d*)/?(.*)$"));
+  m_keyRx.setPattern(QStringLiteral("^([^:]+):?(-?\\d*)/?(.*)$"));
 }
 
 // format is something like "%{year} %{author}"

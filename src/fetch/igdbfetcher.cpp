@@ -75,7 +75,7 @@ QString IGDBFetcher::source() const {
 }
 
 QString IGDBFetcher::attribution() const {
-  return TC_I18N3(providedBy, QLatin1String("https://igdb.com"), QLatin1String("IGDB.com"));
+  return TC_I18N3(providedBy, QStringLiteral("https://igdb.com"), QStringLiteral("IGDB.com"));
 }
 
 bool IGDBFetcher::canSearch(Fetch::FetchKey k) const {
@@ -559,8 +559,8 @@ QString IGDBFetcher::defaultName() {
 
 QString IGDBFetcher::defaultIcon() {
   // IGDB blocks favicon requests without a referer seemingly
-  return favIcon(QUrl(QLatin1String("https://www.igdb.com")),
-                 QUrl(QLatin1String("https://tellico-project.org/img/igdb-favicon.ico")));
+  return favIcon(QUrl(QStringLiteral("https://www.igdb.com")),
+                 QUrl(QStringLiteral("https://tellico-project.org/img/igdb-favicon.ico")));
   }
 
 Tellico::StringHash IGDBFetcher::allOptionalFields() {

@@ -438,7 +438,7 @@ void EntryModel::refreshImage(const QString& id_) {
   }
   // remove from request list _before_ emitting dataChanged in case the cache drops the image
   m_requestedImages.remove(id_);
-  for(const auto& entry : entries) {
+  for(const auto& entry : std::as_const(entries)) {
     QModelIndex index = indexFromEntry(entry);
     if(index.isValid()) {
       Q_EMIT dataChanged(index, index, {Qt::DecorationRole, PrimaryImageRole});

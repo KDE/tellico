@@ -332,9 +332,9 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     if(hasValue(pmap, "Media")) {
       const QString media = TStringToQString(pmap["Media"].front());
       if(media == QLatin1String("CD")) {
-        entry->setField(QLatin1String("medium"), i18n("Compact Disc"));
+        entry->setField(QStringLiteral("medium"), i18n("Compact Disc"));
       } else {
-        entry->setField(QLatin1String("medium"), media);
+        entry->setField(QStringLiteral("medium"), media);
       }
     }
 
@@ -438,7 +438,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   m_coll->addEntries(entriesToAdd);
 
   QTextStream ts;
-  static const QRegularExpression iconRx(QLatin1String("^Icon\\s*=\\s*(.*?)\\s*$"));
+  static const QRegularExpression iconRx(QStringLiteral("^Icon\\s*=\\s*(.*?)\\s*$"));
   for(QStringList::ConstIterator it = directoryFiles.constBegin(); !m_cancelled && it != directoryFiles.constEnd(); ++it, ++j) {
     QFile file(*it);
     if(!file.open(QIODevice::ReadOnly)) {

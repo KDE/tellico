@@ -87,8 +87,8 @@ bool OPDSFetcher::Reader::parse() {
   // valid catalog either has a search url or is an acquisition feed
   const bool ret = !searchUrl.isEmpty() || isAcquisition;
   if(!ret) {
-    if(searchUrl.isEmpty()) errorString = QLatin1String("Search Url is empty");
-    else errorString = QLatin1String("Catalog is not an acquisition catalog");
+    if(searchUrl.isEmpty()) errorString = QStringLiteral("Search Url is empty");
+    else errorString = QStringLiteral("Catalog is not an acquisition catalog");
   }
   return ret;
 }

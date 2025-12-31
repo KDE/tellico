@@ -80,7 +80,7 @@ bool TellicoXmlReader::readNext(const QByteArray& data_) {
 QString TellicoXmlReader::errorString() const {
   // for custom errors, include the line and column number
   return m_xml.error() == QXmlStreamReader::CustomError ?
-    QString::fromLatin1("Fatal parsing error in line %1, column %2. %3")
+    QStringLiteral("Fatal parsing error in line %1, column %2. %3")
                    .arg(m_xml.lineNumber())
                    .arg(m_xml.columnNumber())
                    .arg(m_xml.errorString()) :

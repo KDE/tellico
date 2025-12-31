@@ -535,7 +535,7 @@ QStringList OpenLibraryFetcher::getAuthorNames(const QJsonArray& keys_) {
   }
 
   bool emptyQuery = true;
-  QString authorQuery(QLatin1String("key:("));
+  QString authorQuery(QStringLiteral("key:("));
   for(int i = 0; i < keys_.count(); i++) {
     const auto obj = keys_.at(i).toObject();
     QString key = objValue(obj, "author", "key");

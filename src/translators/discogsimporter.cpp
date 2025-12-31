@@ -90,7 +90,7 @@ void DiscogsImporter::loadPage(int page_) {
   QUrl u(QString::fromLatin1(DISCOGS_API_URL));
   u.setPath(QStringLiteral("/users/%1/collection/folders/0/releases").arg(m_user));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("page"), QString::number(page_));
+  q.addQueryItem(QStringLiteral("page"), QString::number(page_));
   if(!m_token.isEmpty()) {
     q.addQueryItem(QStringLiteral("token"), m_token);
   }

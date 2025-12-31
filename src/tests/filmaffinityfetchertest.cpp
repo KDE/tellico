@@ -143,7 +143,7 @@ void FilmAffinityFetcherTest::testFirefly() {
 }
 
 void FilmAffinityFetcherTest::testAlcarras() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QString::fromUtf8("Alcarràs"));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Alcarràs"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FilmAffinityFetcher(this));
   m_config.writeEntry("Locale", int(Tellico::Fetch::FilmAffinityFetcher::ES));
   fetcher->readConfig(m_config);

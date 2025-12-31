@@ -67,6 +67,7 @@ FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_)
   m_useRecursive = config.readEntry("Recursive", true);
   m_useFilePreview = config.readEntry("File Preview", false);
   m_collType = config.readEntry("Collection Type", int(Data::Collection::File));
+  myDebug() << "coll type" << m_collType;
 }
 
 bool FileListingImporter::canImport(int type) const {

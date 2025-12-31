@@ -805,7 +805,7 @@ bool HTMLExporter::writeEntryFiles() {
   // I can't reliable encode a string as a URI, so I'm punting, and I'll just replace everything but
   // a-zA-Z0-9 with an underscore. This MUST match the filename template in tellico2html.xsl
   // the id is used so uniqueness is guaranteed
-  static const QRegularExpression badChars(QLatin1String("[^-a-zA-Z0-9]"));
+  static const QRegularExpression badChars(QStringLiteral("[^-a-zA-Z0-9]"));
   FieldFormat::Request formatted = (options() & Export::ExportFormatted ?
                                                    FieldFormat::ForceFormat :
                                                    FieldFormat::AsIsFormat);

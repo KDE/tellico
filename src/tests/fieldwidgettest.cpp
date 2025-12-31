@@ -203,7 +203,7 @@ void FieldWidgetTest::testDate() {
   QCOMPARE(dw->date(), sputnik);
   QCOMPARE(spy.count(), 1);
 
-  dw->setDate(QLatin1String("-1-2")); // try an edge case
+  dw->setDate(QStringLiteral("-1-2")); // try an edge case
   QCOMPARE(w.text(), QStringLiteral("-01-02"));
 
   w.setText(QString());
@@ -298,31 +298,31 @@ void FieldWidgetTest::testPara() {
   QCOMPARE(spy.count(), 0);
 
   // test replacing EOL
-  edit->setText(QLatin1String("test1\ntest2"));
+  edit->setText(QStringLiteral("test1\ntest2"));
   QCOMPARE(w.text(), QStringLiteral("test1<br/>test2"));
   QCOMPARE(spy.count(), 1);
 
-  field->setProperty(QLatin1String("replace-line-feeds"), QLatin1String("false"));
+  field->setProperty(QStringLiteral("replace-line-feeds"), QStringLiteral("false"));
   w.updateField(field, field);
-  edit->setText(QLatin1String("test1\ntest2"));
+  edit->setText(QStringLiteral("test1\ntest2"));
   QCOMPARE(w.text(), QStringLiteral("test1\ntest2"));
 
-  field->setProperty(QLatin1String("replace-line-feeds"), QLatin1String("true"));
+  field->setProperty(QStringLiteral("replace-line-feeds"), QStringLiteral("true"));
   w.updateField(field, field);
-  w.setText(QLatin1String("test1<br>test2"));
+  w.setText(QStringLiteral("test1<br>test2"));
   QCOMPARE(edit->toPlainText(), QStringLiteral("test1\ntest2"));
   QCOMPARE(w.text(), QStringLiteral("test1<br/>test2"));
 
-  field->setProperty(QLatin1String("replace-line-feeds"), QString());
+  field->setProperty(QStringLiteral("replace-line-feeds"), QString());
   w.updateField(field, field);
-  w.setText(QLatin1String("test1<br>test2"));
+  w.setText(QStringLiteral("test1<br>test2"));
   QCOMPARE(edit->toPlainText(), QStringLiteral("test1\ntest2"));
   QCOMPARE(w.text(), QStringLiteral("test1<br/>test2"));
 
   w.clear();
   QVERIFY(w.text().isEmpty());
 
-  QString textWithEmoji = QString::fromUtf8("Title 🏡️");
+  QString textWithEmoji = QStringLiteral("Title 🏡️");
   w.setText(textWithEmoji);
   QCOMPARE(w.text(), textWithEmoji);
 }

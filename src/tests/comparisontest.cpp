@@ -234,10 +234,10 @@ void ComparisonTest::testImage() {
   QUrl u2 = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/128-apps-tellico.png"));
   QString id2 = Tellico::ImageFactory::addImage(u2);
 
-  entry1->setField(QLatin1String("image"), id1);
+  entry1->setField(QStringLiteral("image"), id1);
   QCOMPARE(comp->compare(entry1, entry2), 1);
-  entry2->setField(QLatin1String("image"), id1);
+  entry2->setField(QStringLiteral("image"), id1);
   QCOMPARE(comp->compare(entry1, entry2), 0);
-  entry2->setField(QLatin1String("image"), id2);
+  entry2->setField(QStringLiteral("image"), id2);
   QVERIFY(comp->compare(entry1, entry2) < 0);
 }

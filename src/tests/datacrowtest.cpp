@@ -132,7 +132,7 @@ void DataCrowTest::testMovies() {
   QCOMPARE(entry->field("language"), QStringLiteral("English"));
   QCOMPARE(entry->field("subtitle"), QStringLiteral("English"));
   QCOMPARE(entry->field("director"), QStringLiteral("Jon Watts"));
-  QStringList cast = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QStringList cast = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QCOMPARE(cast.count(), 78);
   QCOMPARE(cast.at(0), QStringLiteral("Abraham Attah"));
   QCOMPARE(entry->field("color"), QStringLiteral("Color"));
@@ -170,7 +170,7 @@ void DataCrowTest::testMovies5() {
   QCOMPARE(entry->field("language"), QStringLiteral("English"));
   QCOMPARE(entry->field("subtitle"), QStringLiteral("English"));
   QCOMPARE(entry->field("director"), QStringLiteral("Christopher Nolan"));
-  QStringList cast = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QStringList cast = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QCOMPARE(cast.count(), 34);
   QCOMPARE(cast.at(2), QStringLiteral("Anne Hathaway"));
   QCOMPARE(entry->field("color"), QStringLiteral("Color"));
@@ -207,7 +207,7 @@ void DataCrowTest::testMusic() {
   QCOMPARE(entry->field("artist"), QStringLiteral("Andrew Peterson"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Christian"));
   QCOMPARE(entry->field("rating"), QStringLiteral("4"));
-  QStringList tracks = Tellico::FieldFormat::splitTable(entry->field("track"));
+  QStringList tracks = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
   QCOMPARE(tracks.count(), 2);
   QStringList track2{QStringLiteral("Let There Be Light"), QStringLiteral("Andrew Peterson"), QStringLiteral("03:56")};
   QCOMPARE(tracks.at(1), track2.join(Tellico::FieldFormat::columnDelimiterString()));
@@ -237,7 +237,7 @@ void DataCrowTest::testMusic5() {
   QCOMPARE(entry->field("artist"), QStringLiteral("Andrew Peterson"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Christian"));
   QCOMPARE(entry->field("rating"), QStringLiteral("4"));
-  QStringList tracks = Tellico::FieldFormat::splitTable(entry->field("track"));
+  QStringList tracks = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
   QCOMPARE(tracks.count(), 10);
   QStringList track2{QStringLiteral("Let There Be Light"), QStringLiteral("Andrew Peterson"), QStringLiteral("03:56")};
   QCOMPARE(tracks.at(1), track2.join(Tellico::FieldFormat::columnDelimiterString()));

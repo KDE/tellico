@@ -95,7 +95,7 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
   m_fieldByTitle.insert(field_->title(), field_.data());
 
   // always default to using field with title name as title
-  if(field_->name() == QLatin1String("title")) m_titleField = field_->name();
+  if(field_->name() == QLatin1StringView("title")) m_titleField = field_->name();
 
   if(field_->formatType() == FieldFormat::FormatName) {
     m_peopleFields.append(field_); // list of people attributes
@@ -207,10 +207,10 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
       currField->setProperty(propName, it.value());
       structuralChange = true;
     } else if (it.value() != currValue) {
-      if(currField->type() == Field::URL && propName == QLatin1String("relative")) {
+      if(currField->type() == Field::URL && propName == QLatin1StringView("relative")) {
         myWarning() << "relative URL property does not match for " << currField->name();
-      } else if((currField->type() == Field::Table && propName == QLatin1String("columns"))
-             || (currField->type() == Field::Rating && propName == QLatin1String("maximum"))) {
+      } else if((currField->type() == Field::Table && propName == QLatin1StringView("columns"))
+             || (currField->type() == Field::Rating && propName == QLatin1StringView("maximum"))) {
         bool ok;
         uint currNum = Tellico::toUInt(currValue, &ok);
         uint newNum = Tellico::toUInt(it.value(), &ok);
@@ -218,7 +218,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
           currField->setProperty(propName, QString::number(newNum));
           structuralChange = true;
         }
-      } else if(currField->type() == Field::Rating && propName == QLatin1String("minimum")) {
+      } else if(currField->type() == Field::Rating && propName == QLatin1StringView("minimum")) {
         bool ok;
         uint currNum = Tellico::toUInt(currValue, &ok);
         uint newNum = Tellico::toUInt(it.value(), &ok);
@@ -228,7 +228,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
         }
       }
     }
-    if(propName == QLatin1String("template") && currField->hasFlag(Field::Derived)) {
+    if(propName == QLatin1StringView("template") && currField->hasFlag(Field::Derived)) {
       DerivedValue dv(currField);
       if(dv.isRecursive(this)) {
         currField->setProperty(QStringLiteral("template"), QString());

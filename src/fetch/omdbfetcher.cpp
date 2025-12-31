@@ -337,7 +337,7 @@ void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_, 
 
   const QString commaSpace(QStringLiteral(", "));
 
-  static const QRegularExpression nondigitsRx(QLatin1String("[^\\d]"));
+  static const QRegularExpression nondigitsRx(QStringLiteral("[^\\d]"));
   entry_->setField(QStringLiteral("running-time"),
                    objValue(obj_, "Runtime").remove(nondigitsRx));
 
@@ -349,7 +349,7 @@ void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_, 
 
   QStringList writers = objValue(obj_, "Writer").split(commaSpace);
   // some writers have parentheticals, remove those
-  static const QRegularExpression parenRx(QLatin1String("\\s*\\(.+\\)\\s*"));
+  static const QRegularExpression parenRx(QStringLiteral("\\s*\\(.+\\)\\s*"));
   entry_->setField(QStringLiteral("writer"),
                    writers.replaceInStrings(parenRx, QString())
                           .join(FieldFormat::delimiterString()));

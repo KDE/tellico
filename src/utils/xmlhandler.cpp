@@ -33,7 +33,7 @@
 using Tellico::XMLHandler;
 
 bool XMLHandler::setUtf8XmlEncoding(QString& text_) {
-  static const QRegularExpression rx(QLatin1String("encoding\\s*=\\s*\"([\\w-]+)\""));
+  static const QRegularExpression rx(QStringLiteral("encoding\\s*=\\s*\"([\\w-]+)\""));
   QTextStream stream(&text_);
   // the xml header might still indicate an encoding other than utf-8
   // so read the first line and ensure it is set to utf-8

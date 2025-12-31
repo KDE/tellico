@@ -125,7 +125,7 @@ void Z3950FetcherTest::testPortugal() {
 //  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
 //                                       QString::fromUtf8("972-706-024-2"));
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
-                                       QString::fromUtf8("Memórias póstumas de Brás Cubas"));
+                                       QStringLiteral("Memórias póstumas de Brás Cubas"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::Z3950Fetcher(this,
                                                                         QStringLiteral("z3950.porbase.bnportugal.gov.pt"),
                                                                         210,

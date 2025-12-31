@@ -137,13 +137,13 @@ int Tellico::NumberComparison::compare(const QString& str1_, const QString& str2
 // http://library.dts.edu/Pages/RM/Helps/lc_call.shtml
 
 Tellico::LCCComparison::LCCComparison() : StringComparison(),
-  m_regexp(QLatin1String("^([A-Z]+)"
-                         "(\\d+(?:\\.\\d+)?)"
-                         "\\.?([A-Z]*)"
-                         "(\\d*)"
-                         "\\.?([A-Z]*)"
-                         "(\\d*)"
-                         "(?: (.+))?")) {
+  m_regexp(QStringLiteral("^([A-Z]+)"
+                          "(\\d+(?:\\.\\d+)?)"
+                          "\\.?([A-Z]*)"
+                          "(\\d*)"
+                          "\\.?([A-Z]*)"
+                          "(\\d*)"
+                          "(?: (.+))?")) {
 }
 
 int Tellico::LCCComparison::compare(const QString& str1_, const QString& str2_) {

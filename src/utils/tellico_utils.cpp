@@ -168,7 +168,7 @@ void Tellico::activateDialog(QDialog* dlg_) {
 }
 
 void Tellico::addUserAgent(KIO::Job* job_) {
-  job_->addMetaData(QLatin1StringView("SendUserAgent"), QLatin1String("true"));
-  job_->addMetaData(QLatin1StringView("UserAgent"),
+  job_->addMetaData(QStringLiteral("SendUserAgent"), QStringLiteral("true"));
+  job_->addMetaData(QStringLiteral("UserAgent"),
                     QStringLiteral("Tellico/%1 ( https://tellico-project.org )").arg(QStringLiteral(TELLICO_VERSION)));
 }

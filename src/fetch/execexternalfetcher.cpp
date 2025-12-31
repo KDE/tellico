@@ -56,8 +56,8 @@ using Tellico::Fetch::ExecExternalFetcher;
 
 QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
   // matching escaped quotes is too hard... :(
-  static const QRegularExpression quotes(QLatin1String("(['\"])(.*?)\\1"));
-  static const QRegularExpression spaces(QLatin1String("\\s+?"));
+  static const QRegularExpression quotes(QStringLiteral("(['\"])(.*?)\\1"));
+  static const QRegularExpression spaces(QStringLiteral("\\s+?"));
 
   QStringList args;
   QRegularExpressionMatch match;
@@ -164,7 +164,7 @@ void ExecExternalFetcher::search() {
     value = QLatin1Char('"') + value + QLatin1Char('"');
   }
   QString args = m_args.value(request().key());
-  static const QRegularExpression rx(QLatin1String("(['\"])%1\\1"));
+  static const QRegularExpression rx(QStringLiteral("(['\"])%1\\1"));
   args.replace(rx, QStringLiteral("%1"));
   startSearch(parseArguments(args.arg(value))); // replace %1 with search value
 }

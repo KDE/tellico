@@ -719,7 +719,7 @@ void ConfigDialog::readGeneralConfig() {
   bool autoFormat = Config::autoFormat();
   m_cbFormat->setChecked(autoFormat);
 
-  static const QRegularExpression comma(QLatin1String("\\s*,\\s*"));
+  static const QRegularExpression comma(QStringLiteral("\\s*,\\s*"));
 
   m_leCapitals->setText(Config::noCapitalizationString().replace(comma, FieldFormat::delimiterString()));
   m_leArticles->setText(Config::articlesString().replace(comma, FieldFormat::delimiterString()));
@@ -814,7 +814,7 @@ void ConfigDialog::saveGeneralConfig() {
   Config::setAutoCapitalization(m_cbCapitalize->isChecked());
   Config::setAutoFormat(m_cbFormat->isChecked());
 
-  static const QRegularExpression semicolon(QLatin1String("\\s*;\\s*"));
+  static const QRegularExpression semicolon(QStringLiteral("\\s*;\\s*"));
   const QChar comma = QLatin1Char(',');
 
   Config::setNoCapitalizationString(m_leCapitals->text().replace(semicolon, comma));
@@ -884,7 +884,7 @@ void ConfigDialog::saveFetchConfig() {
     reloadFetchers = true;
   }
   // now update total number of sources
-  KConfigGroup sourceGroup(KSharedConfig::openConfig(), QLatin1String("Data Sources"));
+  KConfigGroup sourceGroup(KSharedConfig::openConfig(), QStringLiteral("Data Sources"));
   sourceGroup.writeEntry("Sources Count", count);
   // and purge old config groups
   const QString dataSource1(QStringLiteral("Data Source %1"));
@@ -1127,7 +1127,7 @@ void ConfigDialog::slotShowTemplatePreview() {
   }
   if(!hasLink) {
     Data::FieldPtr f(new Data::Field(QStringLiteral("url"),
-                                     QLatin1String("URL"),
+                                     QStringLiteral("URL"),
                                      Data::Field::URL));
     f->setCategory(i18n("General"));
     c->addField(f);

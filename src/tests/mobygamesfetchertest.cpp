@@ -76,7 +76,7 @@ void MobyGamesFetcherTest::testTitle() {
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 5);
   Tellico::Data::EntryPtr entry;
   for(const auto& testEntry : std::as_const(results)) {
-    if(testEntry->field("platform") == QLatin1String("Nintendo Wii")) {
+    if(testEntry->field(QStringLiteral("platform")) == QLatin1String("Nintendo Wii")) {
       entry = testEntry;
       break;
     } else {

@@ -311,7 +311,7 @@ void GoogleBookFetcher::populateEntry(Data::EntryPtr entry, const QJsonObject& o
 
   const auto catList = volObj["categories"_L1].toArray();
   // google is going to give us a lot of categories
-  static const QRegularExpression slash(QLatin1String("\\s*/\\s*"));
+  static const QRegularExpression slash(QStringLiteral("\\s*/\\s*"));
   QStringList cleanCategories;
   for(const auto& cat : catList) {
     // split them by the '/' character, too

@@ -71,7 +71,7 @@ Tellico::FilterPtr FilterParser::filter() {
 void FilterParser::parseToken(FilterPtr filter_, const QString& fieldName_, const QString& fieldText_) {
   // if the text contains any non-word characters, assume it's a regexp
   // but \W in qt is letter, number, or '_', I want to be a bit less strict
-  static const QRegularExpression rx(QLatin1String("[^\\w\\s\\-']"));
+  static const QRegularExpression rx(QStringLiteral("[^\\w\\s\\-']"));
   if(m_allowRegExp && rx.match(fieldText_).hasMatch()) {
     QString text = fieldText_;
     QRegularExpression tx(text);

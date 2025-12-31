@@ -161,7 +161,7 @@ void FileListingTest::testBook() {
   // find the entry that matches the test url
   Tellico::Data::EntryPtr e0;
   foreach(auto testEntry, coll->entries()) {
-    if(testEntry->field("url") == url.url()) {
+    if(testEntry->field(QStringLiteral("url")) == url.url()) {
       e0 = testEntry;
       break;
     }

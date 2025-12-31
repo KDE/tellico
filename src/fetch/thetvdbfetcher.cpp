@@ -75,7 +75,7 @@ QString TheTVDBFetcher::source() const {
 }
 
 QString TheTVDBFetcher::attribution() const {
-  return TC_I18N3(providedBy, QLatin1String("https://thetvdb.com"), defaultName());
+  return TC_I18N3(providedBy, QStringLiteral("https://thetvdb.com"), defaultName());
 }
 
 bool TheTVDBFetcher::canSearch(Fetch::FetchKey k) const {
@@ -134,9 +134,9 @@ void TheTVDBFetcher::continueSearch() {
       {
         QUrlQuery q;
         q.addQueryItem(QStringLiteral("type"), QStringLiteral("series"));
-        if(request().data() == QLatin1String("imdb")) {
+        if(request().data() == QLatin1StringView("imdb")) {
           q.addQueryItem(QStringLiteral("imdbId"), request().value());
-        } else if(request().data() == QLatin1String("slug")) {
+        } else if(request().data() == QLatin1StringView("slug")) {
           q.addQueryItem(QStringLiteral("slug"), request().value());
         } else {
           myDebug() << source() << "raw data not recognized";
@@ -188,7 +188,7 @@ Tellico::Fetch::FetchRequest TheTVDBFetcher::updateRequest(Data::EntryPtr entry_
     auto ttMatch = ttRx.match(imdb);
     if(ttMatch.hasMatch()) {
       FetchRequest req(Raw, ttMatch.captured());
-      req.setData(QLatin1String("imdb")); // tell the request to use imdb criteria
+      req.setData(QStringLiteral("imdb")); // tell the request to use imdb criteria
       return req;
     }
   }
@@ -199,7 +199,7 @@ Tellico::Fetch::FetchRequest TheTVDBFetcher::updateRequest(Data::EntryPtr entry_
     auto slugMatch = slugRx.match(thetvdb);
     if(slugMatch.hasMatch()) {
       FetchRequest req(Raw, slugMatch.captured(1));
-      req.setData(QLatin1String("slug")); // tell the request to use this as the slug
+      req.setData(QStringLiteral("slug")); // tell the request to use this as the slug
       return req;
     }
   }
@@ -385,7 +385,7 @@ void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj
   if(entry_->collection()->hasField(imdb)) {
     const auto remoteList = obj_[QLatin1StringView("remoteIds")].toArray();
     for(const auto& remoteId : remoteList) {
-      if(remoteId[QLatin1StringView("sourceName")] == QLatin1String("IMDB")) {
+      if(remoteId[QLatin1StringView("sourceName")] == QLatin1StringView("IMDB")) {
         entry_->setField(imdb, QLatin1String("https://www.imdb.com/title/") + objValue(remoteId.toObject(), "id"));
       }
     }
@@ -410,10 +410,10 @@ void TheTVDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj
   QString lang = objValue(obj_, "originalLanguage");
   const QString langName = KLanguageName::nameForCode(lang);
   if(!langName.isEmpty()) lang = langName;
-  if(lang == QLatin1String("US English") ||
-     lang == QLatin1String("en") ||
-     lang == QLatin1String("eng")) {
-    lang = QLatin1String("English");
+  if(lang == QLatin1StringView("US English") ||
+     lang == QLatin1StringView("en") ||
+     lang == QLatin1StringView("eng")) {
+    lang = QStringLiteral("English");
   }
   if(!lang.isEmpty()) entry_->setField(QStringLiteral("language"), lang);
 }
@@ -423,11 +423,11 @@ void TheTVDBFetcher::populatePeople(Data::EntryPtr entry_, const QJsonArray& peo
   for(const QJsonValue& person : peopleArray_) {
     const auto personObj = person.toObject();
     const QString personType = objValue(personObj, "peopleType");
-    if(personType == QLatin1String("Actor")) {
+    if(personType == QLatin1StringView("Actor")) {
       actors << objValue(personObj, "personName") + FieldFormat::columnDelimiterString() + objValue(personObj, "name");
-    } else if(personType == QLatin1String("Director")) {
+    } else if(personType == QLatin1StringView("Director")) {
       directors << objValue(personObj, "personName");
-    } else if(personType == QLatin1String("Writer")) {
+    } else if(personType == QLatin1StringView("Writer")) {
       writers << objValue(personObj, "personName");
     }
   }
@@ -444,8 +444,8 @@ void TheTVDBFetcher::populateEpisodes(Data::EntryPtr entry_, const QJsonArray& e
     const auto epObj = episode.toObject();
     QString seasonString = objValue(epObj, "seasonNumber");
     // skip season 0, they're extras or specials
-    if(seasonString == QLatin1String("0")) continue;
-    if(seasonString.isEmpty()) seasonString = QLatin1String("1");
+    if(seasonString == QLatin1StringView("0")) continue;
+    if(seasonString.isEmpty()) seasonString = QStringLiteral("1");
     episodes << objValue(epObj, "name") + FieldFormat::columnDelimiterString() +
                            seasonString + FieldFormat::columnDelimiterString() +
                 objValue(epObj, "number");
@@ -491,7 +491,7 @@ void TheTVDBFetcher::requestToken() {
   QJsonObject response = doc.object();
   if(response.contains(QLatin1String("Error"))) {
     myLog() << "Error:" << response.value(QLatin1String("Error")).toString();
-  } else if(response.value(QLatin1String("status")) == QLatin1String("failure")) {
+  } else if(response.value(QLatin1String("status")) == QLatin1StringView("failure")) {
     myLog() << "Failure:" << response.value(QLatin1String("message")).toString();
   }
   m_accessToken = response.value(QLatin1String("data")).toObject()

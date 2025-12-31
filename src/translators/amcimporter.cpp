@@ -78,7 +78,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   QVector<char> buffer(l+1);
   m_ds.readRawData(buffer.data(), l);
   QString version = QString::fromLocal8Bit(buffer.data(), l);
-  static const QRegularExpression versionRx(QLatin1String(".+AMC_(\\d+)\\.(\\d+).+"));
+  static const QRegularExpression versionRx(QStringLiteral(".+AMC_(\\d+)\\.(\\d+).+"));
   QRegularExpressionMatch versionMatch = versionRx.match(version);
   if(!versionMatch.hasMatch()) {
     myDebug() << "no file id match";
@@ -233,7 +233,7 @@ void AMCImporter::readEntry() {
 
   e->setField(QStringLiteral("director"), readString());
   s = readString();
-  static const QRegularExpression roleRx(QLatin1String("(.+?) \\(([^(]+)\\)"));
+  static const QRegularExpression roleRx(QStringLiteral("(.+?) \\(([^(]+)\\)"));
   QRegularExpressionMatch roleMatch = roleRx.match(s);
   if(roleMatch.hasMatch()) {
     QString role = roleMatch.captured(2).toLower();
@@ -254,7 +254,7 @@ void AMCImporter::readEntry() {
   e->setField(QStringLiteral("plot"), readString());
   e->setField(QStringLiteral("comments"), readString());
   s = readString(); // video format
-  static const QRegularExpression regionRx(QLatin1String("Region \\d"));
+  static const QRegularExpression regionRx(QStringLiteral("Region \\d"));
   QRegularExpressionMatch regionMatch = regionRx.match(s);
   if(regionMatch.hasMatch()) {
     e->setField(QStringLiteral("region"), regionMatch.captured());
@@ -277,7 +277,7 @@ void AMCImporter::readEntry() {
 QStringList AMCImporter::parseCast(const QString& text_) {
   QStringList cast;
   int nPar = 0;
-  static const QRegularExpression castRx(QLatin1String("[,()]"));
+  static const QRegularExpression castRx(QStringLiteral("[,()]"));
   QRegularExpressionMatch castMatch = castRx.match(text_);
   QString person, role;
   int oldPos = 0;

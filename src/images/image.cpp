@@ -130,7 +130,9 @@ QByteArray Image::byteArray(const QImage& img_, const QByteArray& outputFormat_)
 }
 
 QString Image::idClean(const QString& id_) {
-  static const QRegularExpression rx(QLatin1Char('[') + QRegularExpression::escape(QLatin1String("/@<>#\"&%?={}|^~[]'`\\:+")) + QLatin1Char(']'));
+  static const QRegularExpression rx(QLatin1Char('[') +
+                                     QRegularExpression::escape(QStringLiteral("/@<>#\"&%?={}|^~[]'`\\:+")) +
+                                     QLatin1Char(']'));
   QString clean = id_;
   return Tellico::shareString(clean.remove(rx));
 }

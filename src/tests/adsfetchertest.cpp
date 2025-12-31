@@ -44,7 +44,7 @@ void ADSFetcherTest::initTestCase() {
 
 void ADSFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
-                                       "spacecraft architectures for the Terrestrial Planet Finder");
+                                       QStringLiteral("spacecraft architectures for the Terrestrial Planet Finder"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ADSFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -66,7 +66,7 @@ void ADSFetcherTest::testTitle() {
 
 void ADSFetcherTest::testAuthor() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Person,
-                                       QString::fromUtf8("Miret-Roig, Núria"));
+                                       QStringLiteral("Miret-Roig, Núria"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ADSFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -80,7 +80,7 @@ void ADSFetcherTest::testAuthor() {
 
 void ADSFetcherTest::testDOI() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::DOI,
-                                       QString::fromUtf8("10.1117/12.317131"));
+                                       QLatin1String("10.1117/12.317131"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ADSFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);

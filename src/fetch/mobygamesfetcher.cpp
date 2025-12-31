@@ -78,7 +78,7 @@ QString MobyGamesFetcher::source() const {
 }
 
 QString MobyGamesFetcher::attribution() const {
-  return TC_I18N3(providedBy, QLatin1String("https://mobygames.com"), QLatin1String("MobyGames"));
+  return TC_I18N3(providedBy, QStringLiteral("https://mobygames.com"), QStringLiteral("MobyGames"));
 }
 
 bool MobyGamesFetcher::canSearch(Fetch::FetchKey k) const {
@@ -256,9 +256,9 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
     for(const auto& company : companyList) {
       const auto companyObj = company.toObject();
       const auto role =companyObj.value(QLatin1StringView("role"));
-      if(role == QLatin1String("Developed by")) {
+      if(role == QLatin1StringView("Developed by")) {
         devs += objValue(companyObj, "company_name");
-      } else if(role == QLatin1String("Published by")) {
+      } else if(role == QLatin1StringView("Published by")) {
         pubs += objValue(companyObj, "company_name");
       }
     }
@@ -319,11 +319,11 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
     const auto coverList = coverGroup[QLatin1StringView("covers")].toArray();
     for(const auto& cover : coverList) {
       const auto coverObj = cover.toObject();
-      if(media.isEmpty() && coverObj[QLatin1StringView("scan_of")] == QLatin1String("Media")) {
+      if(media.isEmpty() && coverObj[QLatin1StringView("scan_of")] == QLatin1StringView("Media")) {
         media = m_imageSize == SmallImage ?
                 objValue(coverObj, "thumbnail_image") :
                 objValue(coverObj, "image");
-      } else if(coverObj[QLatin1StringView("scan_of")] == QLatin1String("Front Cover")) {
+      } else if(coverObj[QLatin1StringView("scan_of")] == QLatin1StringView("Front Cover")) {
         front = m_imageSize == SmallImage ?
                 objValue(coverObj, "thumbnail_image") :
                 objValue(coverObj, "image");
@@ -407,7 +407,7 @@ Tellico::Fetch::FetchRequest MobyGamesFetcher::updateRequest(Data::EntryPtr entr
     }
     const int pId = m_platforms.key(Data::GameCollection::normalizePlatform(platform));
     if(pId > 0) {
-      return FetchRequest(Raw, QString::fromLatin1("title=%1&platform=%2").arg(title, QString::number(pId)));
+      return FetchRequest(Raw, QStringLiteral("title=%1&platform=%2").arg(title, QString::number(pId)));
     }
   }
 

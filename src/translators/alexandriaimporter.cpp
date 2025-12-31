@@ -93,8 +93,8 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
          << QStringLiteral("_medium.jpg")
          << QStringLiteral("_small.jpg");
 
-  static const QRegularExpression begin(QLatin1String("^\\s*-\\s+"));
-  static const QRegularExpression spaces(QLatin1String("^ +"));
+  static const QRegularExpression begin(QStringLiteral("^\\s*-\\s+"));
+  static const QRegularExpression spaces(QStringLiteral("^ +"));
 
   QTextStream ts;
   ts.setEncoding(QStringConverter::Utf8);
@@ -132,15 +132,15 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
 
       // Alexandria uses "n/a" for empty values, and it is translated
       // only thing we can do is check for english value and continue
-      if(alexValue == QLatin1String("n/a") || alexValue == QLatin1String("false")) {
+      if(alexValue == QLatin1StringView("n/a") || alexValue == QLatin1StringView("false")) {
         continue;
       }
 
-      if(alexField == QLatin1String("redd"))  {
+      if(alexField == QLatin1StringView("redd"))  {
         alexField = QStringLiteral("read");
       }
 
-      if(alexField == QLatin1String("authors")) {
+      if(alexField == QLatin1StringView("authors")) {
         QStringList authors;
         line = ts.readLine();
         while(!line.isNull() && line.indexOf(begin) > -1) {
@@ -153,17 +153,17 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
         readNextLine = false;
 
         // Alexandria calls the edition the binding
-      } else if(alexField == QLatin1String("edition")) {
+      } else if(alexField == QLatin1StringView("edition")) {
         // special case if it's "Hardcover"
-        if(alexValue.toLower() == QLatin1String("hardcover")) {
+        if(alexValue.toLower() == QLatin1StringView("hardcover")) {
           alexValue = i18n("Hardback");
         }
         entry->setField(binding, alexValue);
 
-      } else if(alexField == QLatin1String("publishing_year")) {
+      } else if(alexField == QLatin1StringView("publishing_year")) {
         entry->setField(year, alexValue);
 
-      } else if(alexField == QLatin1String("isbn")) {
+      } else if(alexField == QLatin1StringView("isbn")) {
         const ISBNValidator val;
         val.fixup(alexValue);
         entry->setField(isbn, alexValue);
@@ -181,7 +181,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
             break;
           }
         }
-      } else if(alexField == QLatin1String("notes")) {
+      } else if(alexField == QLatin1StringView("notes")) {
         if(alexValue.startsWith(QLatin1Char('|'))) {
           line = ts.readLine();
           QRegularExpressionMatch m = spaces.match(line);
@@ -257,7 +257,8 @@ QWidget* AlexandriaImporter::widget(QWidget* parent_) {
 }
 
 QString& AlexandriaImporter::cleanLine(QString& str_) {
-  static const QRegularExpression escRx(QLatin1String("\\\\x(\\w\\w)"), QRegularExpression::CaseInsensitiveOption);
+  static const QRegularExpression escRx(QStringLiteral("\\\\x(\\w\\w)"),
+                                        QRegularExpression::CaseInsensitiveOption);
   str_.remove(QStringLiteral("\\r"));
   str_.replace(QLatin1String("\\n"), QLatin1String("\n"));
   str_.replace(QLatin1String("\\t"), QLatin1String("\t"));
@@ -286,8 +287,8 @@ QString& AlexandriaImporter::cleanLine(QString& str_) {
 }
 
 QString& AlexandriaImporter::clean(QString& str_) {
-  static const QRegularExpression quote(QLatin1String("\\\\\"")); // equals \"
-  static const QRegularExpression yamlTags(QLatin1String("^![^\\s]*\\s+"));
+  static const QRegularExpression quote(QStringLiteral("\\\\\"")); // equals \"
+  static const QRegularExpression yamlTags(QStringLiteral("^![^\\s]*\\s+"));
   if(str_.startsWith(QLatin1Char('\'')) || str_.startsWith(QLatin1Char('"'))) {
     str_.remove(0, 1);
   }

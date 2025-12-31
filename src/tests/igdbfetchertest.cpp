@@ -60,7 +60,7 @@ void IGDBFetcherTest::testKeyword() {
   // want the Wii version
   Tellico::Data::EntryPtr entry;
   foreach(Tellico::Data::EntryPtr e, results) {
-    if(e->field("platform") == QStringLiteral("Nintendo Wii")) {
+    if(e->field(QStringLiteral("platform")) == QStringLiteral("Nintendo Wii")) {
       entry = e;
       break;
     }

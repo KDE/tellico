@@ -172,9 +172,9 @@ void SRUFetcher::search() {
   switch(request().key()) {
     case Title:
       {
-        QString context(QLatin1String("dc.title"));
-        if(m_queryMap.contains(QLatin1String("x-tellico-title"))) {
-          context = m_queryMap[QLatin1String("x-tellico-title")];
+        QString context(QStringLiteral("dc.title"));
+        if(m_queryMap.contains(QStringLiteral("x-tellico-title"))) {
+          context = m_queryMap[QStringLiteral("x-tellico-title")];
         }
         query.addQueryItem(QStringLiteral("query"), queryTerm(context,
                                                               request().value(),
@@ -186,15 +186,15 @@ void SRUFetcher::search() {
       {
         QString s;
         if(type == Data::Collection::Book || type == Data::Collection::Bibtex) {
-          QString context(QLatin1String("author"));
-          if(m_queryMap.contains(QLatin1String("x-tellico-author"))) {
-            context = m_queryMap[QLatin1String("x-tellico-author")];
+          QString context(QStringLiteral("author"));
+          if(m_queryMap.contains(QStringLiteral("x-tellico-author"))) {
+            context = m_queryMap[QStringLiteral("x-tellico-author")];
           }
-          s = queryTerm(QLatin1String("author"), request().value(), cqlVersion);
+          s = queryTerm(QStringLiteral("author"), request().value(), cqlVersion);
         } else {
-          s = queryTerm(QLatin1String("dc.creator"), request().value(), cqlVersion) +
+          s = queryTerm(QStringLiteral("dc.creator"), request().value(), cqlVersion) +
               QLatin1String(" or ") +
-              queryTerm(QLatin1String("dc.editor"), request().value(), cqlVersion);
+              queryTerm(QStringLiteral("dc.editor"), request().value(), cqlVersion);
         }
         query.addQueryItem(QStringLiteral("query"), s);
       }
@@ -219,11 +219,11 @@ void SRUFetcher::search() {
           // make an assumption that DC output uses the dc profile and everything else uses Bath for ISBN
           // no idea if this holds true universally, but matches LOC, COPAC, and KB
           if(m_format == QLatin1String("dc") || m_format == QLatin1String("dublincore")) {
-            q += queryTerm(QLatin1String("dc.identifier"), isbnList.at(i), cqlVersion);
+            q += queryTerm(QStringLiteral("dc.identifier"), isbnList.at(i), cqlVersion);
           } else {
-            QString isbnContext(QLatin1String("bath.isbn"));
-            if(m_queryMap.contains(QLatin1String("x-tellico-isbn"))) {
-              isbnContext = m_queryMap[QLatin1String("x-tellico-isbn")];
+            QString isbnContext(QStringLiteral("bath.isbn"));
+            if(m_queryMap.contains(QStringLiteral("x-tellico-isbn"))) {
+              isbnContext = m_queryMap[QStringLiteral("x-tellico-isbn")];
             }
             q += queryTerm(isbnContext, isbnList.at(i), cqlVersion);
           }
@@ -240,8 +240,8 @@ void SRUFetcher::search() {
         QStringList lccnList = FieldFormat::splitValue(request().value());
         QString q;
         for(int i = 0; i < lccnList.count(); ++i) {
-          q += queryTerm(QLatin1String("bath.lccn"), lccnList.at(i), cqlVersion) + QLatin1String(" or ") +
-               queryTerm(QLatin1String("bath.lccn"), LCCNValidator::formalize(lccnList.at(i)), cqlVersion);
+          q += queryTerm(QStringLiteral("bath.lccn"), lccnList.at(i), cqlVersion) + QLatin1String(" or ") +
+               queryTerm(QStringLiteral("bath.lccn"), LCCNValidator::formalize(lccnList.at(i)), cqlVersion);
           if(i < lccnList.count()-1) {
             q += QLatin1String(" or ");
           }
@@ -381,7 +381,7 @@ void SRUFetcher::slotComplete(KJob*) {
       } else {
         myLog() << "Reading marcXchange data as MARC21";
       }
-      static const QRegularExpression marcRx(QLatin1String("xmlns:([^=]+)=\"info:lc/xmlns/marcxchange-v[12]\""));
+      static const QRegularExpression marcRx(QStringLiteral("xmlns:([^=]+)=\"info:lc/xmlns/marcxchange-v[12]\""));
       newResult.replace(marcRx, QStringLiteral("xmlns:\\1=\"http://www.loc.gov/MARC21/slim\""));
     }
     if(initHandler(handlerType)) {
@@ -528,9 +528,9 @@ bool SRUFetcher::initHandler(HandlerType type_) {
 QString SRUFetcher::queryTerm(const QString& index_, const QString& term_, const QString& ver_) const {
   QString tmp;
   if(ver_ == QLatin1String("1.1")) {
-    tmp = QLatin1String("%1=\"%2\"");
+    tmp = QStringLiteral("%1=\"%2\"");
   } else {
-    tmp = QLatin1String("%1 adj \"%2\"");
+    tmp = QStringLiteral("%1 adj \"%2\"");
   }
   return tmp.arg(index_, term_);
 }

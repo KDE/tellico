@@ -121,7 +121,7 @@ void ADSImporter::readText(const QString& text_, int n) {
   // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
   // so just strip the white space later
   // also be gracious and allow any amount of space before hyphen
-  static const QRegularExpression rx(QLatin1String("^\\s*%(\\w)\\s+(.*)$"));
+  static const QRegularExpression rx(QStringLiteral("^\\s*%(\\w)\\s+(.*)$"));
   QString currLine, nextLine;
   for(currLine = t.readLine(); !m_cancelled && !currLine.isNull(); currLine = nextLine, j += currLine.length()) {
     nextLine = t.readLine();
@@ -139,14 +139,14 @@ void ADSImporter::readText(const QString& text_, int n) {
     }
 
     // every entry begins with "R"
-    if(tag == QLatin1String("R")) {
+    if(tag == QLatin1StringView("R")) {
       if(needToAdd) {
         m_coll->addEntries(entry);
       }
       entry = new Data::Entry(m_coll);
       entry->setField(QStringLiteral("entry-type"), QStringLiteral("article"));
       continue;
-    } else if(tag == QLatin1String("P")) {
+    } else if(tag == QLatin1StringView("P")) {
       sp = value;
       if(!ep.isEmpty()) {
         int startPage = sp.toInt();
@@ -163,7 +163,7 @@ void ADSImporter::readText(const QString& text_, int n) {
         // nothing else to do
         continue;
       }
-    } else if(tag == QLatin1String("L")) {
+    } else if(tag == QLatin1StringView("L")) {
       ep = value;
       if(!sp.isEmpty()) {
         int startPage = sp.toInt();
@@ -178,16 +178,17 @@ void ADSImporter::readText(const QString& text_, int n) {
       } else {
         continue;
       }
-    } else if(tag == QLatin1String("D")) {  // for now, just grab the year
+    } else if(tag == QLatin1StringView("D")) {  // for now, just grab the year
       value = value.section(QLatin1Char('/'), 1, 1);
-    } else if(tag == QLatin1String("K")) {  // split the keywords
+    } else if(tag == QLatin1StringView("K")) {  // split the keywords
       value = value.split(QLatin1Char(',')).join(FieldFormat::delimiterString());
-    } else if(tag == QLatin1String("Y")) {  // clean-up DOI
-      static const QRegularExpression doiRx(QLatin1String("^\\s*DOI[\\s:]*"), QRegularExpression::CaseInsensitiveOption);
+    } else if(tag == QLatin1StringView("Y")) {  // clean-up DOI
+      static const QRegularExpression doiRx(QStringLiteral("^\\s*DOI[\\s:]*"),
+                                            QRegularExpression::CaseInsensitiveOption);
       value.remove(doiRx);
       value = value.section(QLatin1Char(';'), 0, 0);
-    } else if(tag == QLatin1String("J")) {  // clean-up journal
-      static const QRegularExpression commaRx(QLatin1String("\\s*,\\s*"));
+    } else if(tag == QLatin1StringView("J")) {  // clean-up journal
+      static const QRegularExpression commaRx(QStringLiteral("\\s*,\\s*"));
       QStringList tokens = value.split(commaRx);
       if(!tokens.isEmpty()) {
         value = tokens.first();
@@ -230,7 +231,7 @@ Tellico::Data::FieldPtr ADSImporter::fieldByTag(const QString& tag_) {
   }
 
   // add non-default fields if not already there
-  if(tag_== QLatin1String("L1")) {
+  if(tag_== QLatin1StringView("L1")) {
 //    f = new Data::Field(QLatin1String("pdf"), i18n("PDF"), Data::Field::URL);
 //    f->setProperty(QLatin1String("ris"), QLatin1String("L1"));
 //    f->setCategory(i18n("Miscellaneous"));

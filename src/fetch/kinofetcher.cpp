@@ -254,7 +254,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
 
     const QString genreString = objValue(obj, "genre");
     if(!genreString.isEmpty()) {
-      static const QRegularExpression commaRx(QLatin1String(",\\s+"));
+      static const QRegularExpression commaRx(QStringLiteral(",\\s+"));
       QStringList genres = genreString.split(commaRx);
       entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
     }

@@ -72,7 +72,7 @@ GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
         QString output = QString::fromLocal8Bit(proc.readAllStandardOutput());
         if(!output.isEmpty()) {
           // always going to be x.y[.z] ?
-          static const QRegularExpression versionRx(QLatin1String("(\\d+)\\.(\\d+)(?:\\.(\\d+))?"));
+          static const QRegularExpression versionRx(QStringLiteral("(\\d+)\\.(\\d+)(?:\\.(\\d+))?"));
           QRegularExpressionMatch m = versionRx.match(output);
           if(m.hasMatch()) {
             int x = m.captured(1).toInt();
@@ -153,7 +153,7 @@ void GCstarPluginFetcher::readPluginsOld(int collType_, const QString& gcstar_) 
   QDir dir(gcstar_, QStringLiteral("GC*.pm"));
   dir.cd(QStringLiteral("../../lib/gcstar/GCPlugins/"));
 
-  static const QRegularExpression rx(QLatin1String("get(Name|Author|Lang)\\s*\\{\\s*return\\s+['\"](.+?)['\"]"));
+  static const QRegularExpression rx(QStringLiteral("get(Name|Author|Lang)\\s*\\{\\s*return\\s+['\"](.+?)['\"]"));
 
   PluginList plugins;
 

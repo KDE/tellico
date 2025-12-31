@@ -289,7 +289,7 @@ void AmazonFetcher::doSearch() {
   // debugging check
   if(m_testResultsFile.isEmpty()) {
     QUrl u;
-    u.setScheme(QLatin1String("https"));
+    u.setScheme(QStringLiteral("https"));
     u.setHost(QString::fromUtf8(siteData(m_site).host));
     u.setPath(path);
     m_job = KIO::storedHttpPost(payload, u, KIO::HideProgressInfo);
@@ -421,7 +421,7 @@ void AmazonFetcher::slotComplete(KJob*) {
     // special case book author
     // amazon is really bad about not putting spaces after periods
     if(coll->type() == Data::Collection::Book) {
-      static const QRegularExpression rx(QLatin1String("\\.([^\\s])"));
+      static const QRegularExpression rx(QStringLiteral("\\.([^\\s])"));
       QStringList values = FieldFormat::splitValue(entry->field(QStringLiteral("author")));
       for(QStringList::Iterator it = values.begin(); it != values.end(); ++it) {
         (*it).replace(rx, QStringLiteral(". \\1"));
@@ -431,7 +431,7 @@ void AmazonFetcher::slotComplete(KJob*) {
 
     // UK puts the year in the title for some reason
     if(m_site == UK && coll->type() == Data::Collection::Video) {
-      static const QRegularExpression rx(QLatin1String("\\[(\\d{4})\\]"));
+      static const QRegularExpression rx(QStringLiteral("\\[(\\d{4})\\]"));
       const QString titleString(QStringLiteral("title"));
       QString t = entry->field(titleString);
       auto match = rx.match(t);
@@ -991,7 +991,7 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
 
 void AmazonFetcher::parseTitle(Tellico::Data::EntryPtr entry_) {
   // assume that everything in brackets or parentheses is extra
-  static const QRegularExpression rx(QLatin1String("[\\(\\[](.*?)[\\)\\]]"));
+  static const QRegularExpression rx(QStringLiteral("[\\(\\[](.*?)[\\)\\]]"));
   QString title = entry_->field(QStringLiteral("title"));
   int pos = 0;
   QRegularExpressionMatch match = rx.match(title, pos);
@@ -1049,7 +1049,7 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QStrin
     entry_->setField(QStringLiteral("series"), token_);
     res = true;
   }
-  static const QRegularExpression regionRx(QLatin1String("Region [1-9]"));
+  static const QRegularExpression regionRx(QStringLiteral("Region [1-9]"));
   QRegularExpressionMatch match = regionRx.match(token_);
   if(match.hasMatch()) {
     entry_->setField(QStringLiteral("region"), i18n(match.captured().toUtf8().constData()));

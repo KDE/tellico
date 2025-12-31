@@ -400,7 +400,7 @@ void AmazonFetcherTest::testUpc_data() {
 
 void AmazonFetcherTest::testRequest() {
   // from aws-sig-v4-test-suite/post-vanilla
-  Tellico::Fetch::AmazonRequest req("AKIDEXAMPLE", "wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY");
+  Tellico::Fetch::AmazonRequest req(QStringLiteral("AKIDEXAMPLE"), QStringLiteral("wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY"));
 
   req.setHost("example.amazonaws.com");
   req.m_headers.insert("host", req.m_host);
@@ -432,7 +432,7 @@ void AmazonFetcherTest::testPayload() {
   Tellico::Fetch::AmazonFetcher* fetcher = new Tellico::Fetch::AmazonFetcher(this);
   fetcher->readConfig(cg);
 
-  Tellico::Fetch::FetchRequest req(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525");
+  Tellico::Fetch::FetchRequest req(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, QStringLiteral("717356278525"));
   QByteArray payload = fetcher->requestPayload(req);
   QByteArray res1("{\
 \"Keywords\":\"717356278525\",\
@@ -449,7 +449,7 @@ void AmazonFetcherTest::testPayload() {
 }
 
 void AmazonFetcherTest::testError() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, QStringLiteral("717356278525"));
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
 
@@ -472,7 +472,7 @@ void AmazonFetcherTest::testUpc1() {
   }
   KConfigGroup cg(m_config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, QStringLiteral("717356278525"));
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
   fetcher->readConfig(cg);
@@ -498,7 +498,7 @@ void AmazonFetcherTest::testUpc2() {
   }
   KConfigGroup cg(m_config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525; 842776102270");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, QStringLiteral("717356278525; 842776102270"));
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
   fetcher->readConfig(cg);
@@ -529,7 +529,7 @@ void AmazonFetcherTest::testBasicBook() {
   }
   KConfigGroup cg(m_config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, "1921878657");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, QStringLiteral("1921878657"));
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
   fetcher->readConfig(cg);
@@ -581,7 +581,7 @@ void AmazonFetcherTest::testSearchItems_gopaapi5() {
   }
   KConfigGroup cg(m_config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, "1921878657");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, QStringLiteral("1921878657"));
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
   fetcher->readConfig(cg);
@@ -621,7 +621,7 @@ void AmazonFetcherTest::testGetItems_gopaapi5() {
   }
   KConfigGroup cg(m_config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, "1921878657");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, QStringLiteral("1921878657"));
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
   fetcher->readConfig(cg);

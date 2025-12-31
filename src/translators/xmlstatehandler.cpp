@@ -168,7 +168,7 @@ bool CollectionHandler::start(QStringView, QStringView, const QXmlStreamAttribut
     d->entryName = atts_.value("unit"_L1).toString();
     // for error recovery, assume entry name is default if empty for now
     if(d->entryName.isEmpty()) {
-      d->entryName = QLatin1String("entry");
+      d->entryName = QStringLiteral("entry");
     }
   }
   return true;
@@ -719,7 +719,7 @@ bool TableColumnHandler::end(QStringView, QStringView) {
      d->currentField->name() == "track"_L1 &&
      !d->textBuffer.isEmpty() &&
      d->textBuffer.contains(FieldFormat::columnDelimiterString()) == 0) {
-    static const QRegularExpression rx(QLatin1String("^\\d+:\\d\\d$"));
+    static const QRegularExpression rx(QStringLiteral("^\\d+:\\d\\d$"));
     if(rx.match(d->text).hasMatch()) {
       d->text += FieldFormat::columnDelimiterString();
       d->text += d->entries.back()->field(QStringLiteral("artist"));

@@ -41,7 +41,7 @@ using Tellico::BibtexHandler;
 
 BibtexHandler::StringListHash BibtexHandler::s_utf8LatexMap;
 BibtexHandler::QuoteStyle BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
-const QRegularExpression BibtexHandler::s_badKeyChars(QLatin1String("[^0-9a-zA-Z-]"));
+const QRegularExpression BibtexHandler::s_badKeyChars(QStringLiteral("[^0-9a-zA-Z-]"));
 
 QStringList BibtexHandler::bibtexKeys(const Tellico::Data::EntryList& entries_) {
   QStringList keys;
@@ -231,8 +231,8 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
 QString& BibtexHandler::cleanText(QString& text_) {
   // FIXME: need to improve this for removing all Latex entities
 //  QRegularExpression rx(QLatin1String("(?=[^\\\\])\\\\.+\\{"));
-  static const QRegularExpression rx(QLatin1String("\\\\.+?\\{"));
-  static const QRegularExpression brackets(QLatin1String("[{}]"));
+  static const QRegularExpression rx(QStringLiteral("\\\\.+?\\{"));
+  static const QRegularExpression brackets(QStringLiteral("[{}]"));
   text_.remove(rx);
   text_.remove(brackets);
   return text_;

@@ -241,7 +241,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
 
   if(results.contains(QStringLiteral("captcha")) || results.endsWith(QLatin1String("</script>"))) {
 //    myDebug() << "KinoPoiskFetcher: captcha triggered";
-    static const QRegularExpression re(QLatin1String("/(\\d+)"));
+    static const QRegularExpression re(QStringLiteral("/(\\d+)"));
     QRegularExpressionMatch match = re.match(url.url());
     if(match.hasMatch()) {
       entry = requestEntry(match.captured(1));

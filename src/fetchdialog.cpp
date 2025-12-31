@@ -318,7 +318,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   setMinimumWidth(qMax(minimumWidth(), qMax(FETCH_MIN_WIDTH, minimumSizeHint().width())));
   setStatus(i18n("Ready."));
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Fetch Dialog Options"));
   const auto splitList = config.readEntry("Splitter Sizes", QList<int>());
   if(splitList.empty()) {
     split->setSizes({3000, 5000}); // default to 3:5 ratio
@@ -365,7 +365,7 @@ FetchDialog::~FetchDialog() {
   // no additional entries to check images to keep though
   Data::Document::self()->removeImagesNotInCollection(entriesToCheck, Data::EntryList());
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Fetch Dialog Options"));
   KWindowConfig::saveWindowSize(windowHandle(), config);
 
   config.writeEntry("Splitter Sizes", static_cast<QSplitter*>(m_treeWidget->parentWidget())->sizes());
@@ -651,7 +651,7 @@ void FetchDialog::slotInit() {
 
   // do this in the singleShot slot so it works
   // see note in entryeditdialog.cpp (Feb 2017)
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Fetch Dialog Options"));
   KWindowConfig::restoreWindowSize(windowHandle(), config);
 
   if(!Fetch::Manager::self()->canFetch(Data::Document::self()->collection()->type())) {

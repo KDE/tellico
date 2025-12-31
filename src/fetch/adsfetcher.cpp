@@ -102,7 +102,7 @@ void ADSFetcher::doSearch() {
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("row"), QString::number(ADS_RETURNS_PER_REQUEST));
   q.addQueryItem(QStringLiteral("start"), QString::number(m_start));
-  q.addQueryItem(QStringLiteral("fl"), QLatin1String("bibcode,first_author,title,year"));
+  q.addQueryItem(QStringLiteral("fl"), QStringLiteral("bibcode,first_author,title,year"));
 
   auto queryValue = QUrl::toPercentEncoding(request().value());
   if(!queryValue.startsWith('"')) {

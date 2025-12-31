@@ -106,7 +106,7 @@ void VGCollectFetcher::search() {
 //  myDebug() << "url:" << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->addMetaData(QStringLiteral("referrer"), QString::fromLatin1("https://vgcollect.com/search"));
+  m_job->addMetaData(QStringLiteral("referrer"), QStringLiteral("https://vgcollect.com/search"));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &VGCollectFetcher::slotComplete);
@@ -157,7 +157,7 @@ void VGCollectFetcher::slotComplete(KJob*) {
                                         QRegularExpression::DotMatchesEverythingOption);
   static const QRegularExpression itemRx(QStringLiteral("<a href\\s*=\\s*\"(https://vgcollect.com/item/\\d+)\">(.+?)</a"));
   static const QRegularExpression platformRx(QStringLiteral("<a href=\"https://vgcollect.com/browse/[0-9a-z]+\">(.+?)</a"));
-  static const QRegularExpression tagRx(QLatin1String("<.*?>"));
+  static const QRegularExpression tagRx(QStringLiteral("<.*?>"));
 
   QRegularExpressionMatchIterator i = rowRx.globalMatch(s);
   while(i.hasNext()) {
@@ -175,18 +175,18 @@ void VGCollectFetcher::slotComplete(KJob*) {
       platform = platform.remove(tagRx).trimmed();
     }
     // skip some non-game "platforms"
-    if(platform == QLatin1String("Toys") ||
-       platform == QLatin1String("Clothing") ||
-       platform == QLatin1String("Merchandise") ||
-       platform == QLatin1String("Soundtrack") ||
-       platform == QLatin1String("Books") ||
-       platform == QLatin1String("Comics") ||
-       platform == QLatin1String("GOG.com") ||
-       platform.startsWith(QLatin1String("Amiibo Figures")) ||
-       platform.contains(QLatin1String("Video")) ||
-       platform == QLatin1String("Steam") ||
-       platform == QLatin1String("Consoles") ||
-       platform == QLatin1String("Accessory")) {
+    if(platform == QLatin1StringView("Toys") ||
+       platform == QLatin1StringView("Clothing") ||
+       platform == QLatin1StringView("Merchandise") ||
+       platform == QLatin1StringView("Soundtrack") ||
+       platform == QLatin1StringView("Books") ||
+       platform == QLatin1StringView("Comics") ||
+       platform == QLatin1StringView("GOG.com") ||
+       platform.startsWith(QLatin1StringView("Amiibo Figures")) ||
+       platform.contains(QLatin1StringView("Video")) ||
+       platform == QLatin1StringView("Steam") ||
+       platform == QLatin1StringView("Consoles") ||
+       platform == QLatin1StringView("Accessory")) {
         continue;
     }
 //    myDebug() << title << platform << u;
@@ -242,12 +242,12 @@ Tellico::Data::EntryPtr VGCollectFetcher::fetchEntryHook(uint uid_) {
 }
 
 void VGCollectFetcher::parseEntry(Data::EntryPtr entry_, const QString& str_) {
-  static const QRegularExpression divRx(QLatin1String("<div class=\"tab-pane active\" id=\"info\">(.+?)</div"),
+  static const QRegularExpression divRx(QStringLiteral("<div class=\"tab-pane active\" id=\"info\">(.+?)</div"),
                                         QRegularExpression::DotMatchesEverythingOption);
-  static const QRegularExpression trRx(QLatin1String("<tr>(.+?)</tr"),
+  static const QRegularExpression trRx(QStringLiteral("<tr>(.+?)</tr"),
                                        QRegularExpression::DotMatchesEverythingOption);
-  static const QRegularExpression tdRx(QLatin1String("<td[^>]*>(.+?)</td"),
-                                        QRegularExpression::DotMatchesEverythingOption);
+  static const QRegularExpression tdRx(QStringLiteral("<td[^>]*>(.+?)</td"),
+                                       QRegularExpression::DotMatchesEverythingOption);
 
   auto divMatch = divRx.match(str_);
   if(divMatch.hasMatch()) {
@@ -264,13 +264,13 @@ void VGCollectFetcher::parseEntry(Data::EntryPtr entry_, const QString& str_) {
     }
   }
 
-  static const QRegularExpression titleRx(QLatin1String("<meta property=\"og:title\" content=\"([^\"]+?) \\|"));
+  static const QRegularExpression titleRx(QStringLiteral("<meta property=\"og:title\" content=\"([^\"]+?) \\|"));
   auto titleMatch = titleRx.match(str_);
   if(titleMatch.hasMatch()) {
     entry_->setField(QStringLiteral("title"), titleMatch.captured(1));
   }
 
-  static const QRegularExpression coverRx(QLatin1String("<meta property=\"og:image\" content=\"(.+?)\">"));
+  static const QRegularExpression coverRx(QStringLiteral("<meta property=\"og:image\" content=\"(.+?)\">"));
   auto coverMatch = coverRx.match(str_);
   if(coverMatch.hasMatch()) {
     const QString u = coverMatch.captured(1);
@@ -287,11 +287,11 @@ void VGCollectFetcher::parseEntry(Data::EntryPtr entry_, const QString& str_) {
 }
 
 void VGCollectFetcher::populateValue(Data::EntryPtr entry_, const QString& header_, const QString& value_) const {
-  static const QRegularExpression tagRx(QLatin1String("<.*?>"));
+  static const QRegularExpression tagRx(QStringLiteral("<.*?>"));
   auto header = header_;
   header = header.remove(tagRx).simplified();
   auto value = value_.simplified();
-  if(header_.isEmpty() || value_.isEmpty() || value == QLatin1String("NA")) {
+  if(header_.isEmpty() || value_.isEmpty() || value == QLatin1StringView("NA")) {
     return;
   }
 
@@ -315,11 +315,11 @@ void VGCollectFetcher::populateValue(Data::EntryPtr entry_, const QString& heade
     else if(value.contains(QLatin1String("esrb-ec")))  esrb = Data::GameCollection::EarlyChildhood;
     else if(value.contains(QLatin1String("esrb-m")))   esrb = Data::GameCollection::Mature;
     else if(value.contains(QLatin1String("esrb-ao")))  esrb = Data::GameCollection::Adults;
-    else if(value.contains(QLatin1String("pegi-3")))   pegi = QLatin1String("PEGI 3");
-    else if(value.contains(QLatin1String("pegi-7")))   pegi = QLatin1String("PEGI 7");
-    else if(value.contains(QLatin1String("pegi-12")))  pegi = QLatin1String("PEGI 12");
-    else if(value.contains(QLatin1String("pegi-16")))  pegi = QLatin1String("PEGI 16");
-    else if(value.contains(QLatin1String("pegi-18")))  pegi = QLatin1String("PEGI 18");
+    else if(value.contains(QLatin1String("pegi-3")))   pegi = QStringLiteral("PEGI 3");
+    else if(value.contains(QLatin1String("pegi-7")))   pegi = QStringLiteral("PEGI 7");
+    else if(value.contains(QLatin1String("pegi-12")))  pegi = QStringLiteral("PEGI 12");
+    else if(value.contains(QLatin1String("pegi-16")))  pegi = QStringLiteral("PEGI 16");
+    else if(value.contains(QLatin1String("pegi-18")))  pegi = QStringLiteral("PEGI 18");
     if(esrb != Data::GameCollection::UnknownEsrb) {
       entry_->setField(QStringLiteral("certification"), Data::GameCollection::esrbRating(esrb));
     }

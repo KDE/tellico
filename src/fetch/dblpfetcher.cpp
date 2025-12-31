@@ -117,8 +117,8 @@ QString DBLPFetcher::defaultName() {
 QString DBLPFetcher::defaultIcon() {
   // don't know why FavIcon job fails for this
 //  return favIcon("https://dblp.org");
-  return favIcon(QUrl(QLatin1String("https://dblp.org")),
-                 QUrl(QLatin1String("https://tellico-project.org/img/dblp-favicon.ico")));
+  return favIcon(QUrl(QStringLiteral("https://dblp.org")),
+                 QUrl(QStringLiteral("https://tellico-project.org/img/dblp-favicon.ico")));
 }
 
 Tellico::StringHash DBLPFetcher::allOptionalFields() {

@@ -295,7 +295,7 @@ void BibtexExporter::saveOptions(KSharedConfigPtr config_) {
 
 void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldList& fields_, const Tellico::Data::Entry& entry_,
                                     const QString& type_, const QString& key_) {
-  static const QRegularExpression numberRx(QLatin1String("^\\d+$"));
+  static const QRegularExpression numberRx(QStringLiteral("^\\d+$"));
   const QStringList macros = static_cast<const Data::BibtexCollection*>(collection().data())->macroList().keys();
   const QString bibtex = QStringLiteral("bibtex");
   const QString bibtexSep = QStringLiteral("bibtex-separator");
@@ -306,7 +306,7 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
   FieldFormat::Request format = (options() & Export::ExportFormatted ?
                                                 FieldFormat::ForceFormat :
                                                 FieldFormat::AsIsFormat);
-  static const QRegularExpression stripHTML(QLatin1String("<.*?>"));
+  static const QRegularExpression stripHTML(QStringLiteral("<.*?>"));
   foreach(Data::FieldPtr fIt, fields_) {
     value = entry_.formattedField(fIt, format);
     if(value.isEmpty()) {
@@ -327,7 +327,7 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
       // strip HTML from bibtex export
       value.remove(stripHTML);
     } else if(fIt->property(bibtex) == QLatin1String("pages")) {
-      static const QRegularExpression rx(QLatin1String("(\\d)-(\\d)"));
+      static const QRegularExpression rx(QStringLiteral("(\\d)-(\\d)"));
       QRegularExpressionMatch m = rx.match(value);
       for(int pos = m.capturedStart(); pos > -1; pos = m.capturedStart()) {
         value.replace(pos, 3, m.captured(1) + QLatin1String("--") + m.captured(2));

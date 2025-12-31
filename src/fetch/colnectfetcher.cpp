@@ -675,7 +675,7 @@ void ColnectFetcher::populateComicEntry(Data::EntryPtr entry_, const QVariantLis
     entry_->setField(QStringLiteral("pub_year"), resultList_.at(idx).toString().left(4));
   }
 
-  static const QRegularExpression spaceCommaRx(QLatin1String("\\s*,\\s*"));
+  static const QRegularExpression spaceCommaRx(QStringLiteral("\\s*,\\s*"));
   auto hasSpace = [](const QString& s) {
     return s.contains(QLatin1Char(' '));
   };
@@ -794,7 +794,7 @@ void ColnectFetcher::populateGameEntry(Data::EntryPtr entry_, const QVariantList
   idx = m_colnectFields.value(QStringLiteral("Rating"), -1);
   if(idx > -1) {
     // can have both esrb and pegi rating
-    QStringList ratings = resultList_.at(idx).toString().split(QLatin1String("/"));
+    QStringList ratings = resultList_.at(idx).toString().split(QStringLiteral("/"));
     Q_FOREACH(QString rating, ratings) {
       rating = rating.simplified();
       if(rating.startsWith(QLatin1String("ESRB"))) {
@@ -895,7 +895,7 @@ QString ColnectFetcher::imageUrl(const QString& name_, const QString& id_) {
   if(id == 0) return QString();
   QUrl u(QString::fromLatin1(COLNECT_IMAGE_URL));
   // uses 't' for thumbnail, use 'f' for full-size
-  u.setPath(QString::fromLatin1("/%1/%2/%3/%4.jpg")
+  u.setPath(QStringLiteral("/%1/%2/%3/%4.jpg")
                            .arg(m_imageSize == SmallImage ? QLatin1Char('t') : QLatin1Char('f'))
                            .arg(id / 1000)
                            .arg(id % 1000, 3, 10, QLatin1Char('0'))
@@ -973,9 +973,9 @@ ColnectFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ColnectFetche
   m_langCombo = new GUI::ComboBox(optionsWidget());
 
 #define LANG_ITEM(CY, ISO) \
-  m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String(CY))), \
-                       KLanguageName::nameForCode(QLatin1String(ISO)),            \
-                       QLatin1String(ISO));
+  m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QStringLiteral(CY))), \
+                       KLanguageName::nameForCode(QStringLiteral(ISO)),            \
+                       QStringLiteral(ISO));
   LANG_ITEM("us", "en");
   LANG_ITEM("fr", "fr");
   LANG_ITEM("de", "de");
@@ -985,7 +985,7 @@ ColnectFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ColnectFetche
   // instead of trying to include all possible languages offered by Colnect
   // allow the user to enter it
   m_langCombo->setEditable(true);
-  QRegularExpression rx(QLatin1String("\\w\\w")); // only 2 characters
+  QRegularExpression rx(QStringLiteral("\\w\\w")); // only 2 characters
   QRegularExpressionValidator* val = new QRegularExpressionValidator(rx, this);
   m_langCombo->setValidator(val);
 
@@ -1043,7 +1043,7 @@ void ColnectFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 }
 
 QString ColnectFetcher::ConfigWidget::preferredName() const {
-  return QString::fromLatin1("Colnect (%1)").arg(m_langCombo->currentText());
+  return QStringLiteral("Colnect (%1)").arg(m_langCombo->currentText());
 }
 
 void ColnectFetcher::ConfigWidget::slotLangChanged() {

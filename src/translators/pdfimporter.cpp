@@ -140,7 +140,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
         entry = newColl->entries().front();
         hasDOI |= !entry->field(QStringLiteral("doi")).isEmpty();
         // the XMP handler has a habit of inserting empty values surrounded by parentheses
-        static const QRegularExpression rx(QLatin1String("^\\(\\s*\\)$"));
+        static const QRegularExpression rx(QStringLiteral("^\\(\\s*\\)$"));
         foreach(Data::FieldPtr field, newColl->fields()) {
           QString value = entry->field(field);
           if(value.contains(rx)) {
@@ -175,7 +175,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       // author could be separated by commas, "and" or whatever
       // we're not going to overwrite it
       if(entry->field(QStringLiteral("author")).isEmpty()) {
-        static const QRegularExpression rx(QLatin1String("\\s*(\\s+and\\s+|,|;)\\s*"));
+        static const QRegularExpression rx(QStringLiteral("\\s*(\\s+and\\s+|,|;)\\s*"));
         QStringList authors = doc->info(QStringLiteral("Author")).simplified().split(rx);
         entry->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
       }
@@ -194,21 +194,21 @@ Tellico::Data::CollPtr PDFImporter::collection() {
         // a null rectangle means get all text on page
         QString text = page->text(QRectF());
         // borrowed from Referencer
-        static const QRegularExpression doiRx(QLatin1String("(?:"
-                                                            "(?:[Dd][Oo][Ii]:? *)"
-                                                            "|"
-                                                            "(?:[Dd]igital *[Oo]bject *[Ii]dentifier:? *)"
-                                                            ")"
-                                                            "("
-                                                            "[^\\.\\s]+"
-                                                            "\\."
-                                                            "[^\\/\\s]+"
-                                                            "\\/"
-                                                            "[^\\s]+"
-                                                            ")"));
+        static const QRegularExpression doiRx(QStringLiteral("(?:"
+                                                             "(?:[Dd][Oo][Ii]:? *)"
+                                                             "|"
+                                                             "(?:[Dd]igital *[Oo]bject *[Ii]dentifier:? *)"
+                                                             ")"
+                                                             "("
+                                                             "[^\\.\\s]+"
+                                                             "\\."
+                                                             "[^\\/\\s]+"
+                                                             "\\/"
+                                                             "[^\\s]+"
+                                                             ")"));
         QRegularExpressionMatch m = doiRx.match(text);
         if(!m.hasMatch()) {
-          static const QRegularExpression doiUrlRx(QLatin1String("https?://(?:dx\\.)?doi\\.org/(10.\\d{4,9}/[-._;()/:a-zA-Z0-9]+)"));
+          static const QRegularExpression doiUrlRx(QStringLiteral("https?://(?:dx\\.)?doi\\.org/(10.\\d{4,9}/[-._;()/:a-zA-Z0-9]+)"));
           m = doiUrlRx.match(text);
         }
         if(m.hasMatch()) {
@@ -217,12 +217,12 @@ Tellico::Data::CollPtr PDFImporter::collection() {
           entry->setField(QStringLiteral("doi"), doi);
           hasDOI = true;
         }
-        static const QRegularExpression arxivRx(QLatin1String("arXiv:"
-                                                              "("
-                                                              "[^\\/\\s]+"
-                                                              "[\\/\\.]"
-                                                              "[^\\s]+"
-                                                              ")"));
+        static const QRegularExpression arxivRx(QStringLiteral("arXiv:"
+                                                               "("
+                                                               "[^\\/\\s]+"
+                                                               "[\\/\\.]"
+                                                               "[^\\s]+"
+                                                               ")"));
         m = arxivRx.match(text);
         if(m.hasMatch()) {
           const QString arxiv = m.captured(1);

@@ -215,9 +215,9 @@ QString FieldFormat::title(const QString& title_, Options opt_) {
 }
 
 QString FieldFormat::name(const QString& name_, Options opt_) {
-  static const QRegularExpression spaceComma(QLatin1String("[\\s,]"));
+  static const QRegularExpression spaceComma(QStringLiteral("[\\s,]"));
   // the ending look-ahead is so that a space is not added at the end
-  static const QRegularExpression periodSpace(QLatin1String("\\.\\s*(?=.)"));
+  static const QRegularExpression periodSpace(QStringLiteral("\\.\\s*(?=.)"));
 
   QString name = name_;
   name.replace(periodSpace, QStringLiteral(". "));
@@ -308,7 +308,7 @@ QString FieldFormat::capitalize(QString str_) {
   str_.replace(0, 1, str_.at(0).toUpper());
 
   // regexp to split words
-  static const QRegularExpression rx(QLatin1String("[-\\s,.;]"));
+  static const QRegularExpression rx(QStringLiteral("[-\\s,.;]"));
 
   // special case for french words like l'espace
   QRegularExpressionMatch match = rx.match(str_, 1);

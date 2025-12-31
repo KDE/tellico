@@ -212,7 +212,7 @@ void RISImporter::readText(const QString& text_, int n, const QHash<QString, Tel
   // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
   // so just strip the white space later
   // also be gracious and allow any amount of space before hyphen
-  static const QRegularExpression rx(QLatin1String("^(\\w\\w)\\s+-(.*)$"));
+  static const QRegularExpression rx(QStringLiteral("^(\\w\\w)\\s+-(.*)$"));
   QString currLine, nextLine;
   for(currLine = t.readLine(); !m_cancelled && !t.atEnd(); currLine = nextLine, j += currLine.length()) {
     nextLine = t.readLine();
@@ -356,7 +356,7 @@ bool RISImporter::maybeRIS(const QUrl& url_) {
   // and then first text line must be valid RIS
   QTextStream t(&text);
 
-  static const QRegularExpression rx(QLatin1String("^(\\w\\w)\\s+-(.*)$"));
+  static const QRegularExpression rx(QStringLiteral("^(\\w\\w)\\s+-(.*)$"));
   QString currLine;
   for(currLine = t.readLine(); !t.atEnd(); currLine = t.readLine()) {
     if(currLine.trimmed().isEmpty()) {

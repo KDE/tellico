@@ -155,8 +155,8 @@ void GamingHistoryFetcher::slotComplete(KJob*) {
 
   static const QRegularExpression rowRx(QStringLiteral("<tr class='big-box'>(.+?)</tr"));
   static const QRegularExpression dataRx(QStringLiteral("<td data-title='(.+?)'>(.+?)</td"));
-  static const QRegularExpression tagRx(QLatin1String("<.*?>"));
-  static const QRegularExpression emRx(QLatin1String("<em.*?>[^<]+?</em>"));
+  static const QRegularExpression tagRx(QStringLiteral("<.*?>"));
+  static const QRegularExpression emRx(QStringLiteral("<em.*?>[^<]+?</em>"));
   static const QRegularExpression anchorRx(QStringLiteral("<a[^>]+?href='(.+?)'"));
 
   QRegularExpressionMatchIterator i = rowRx.globalMatch(s);
@@ -205,7 +205,7 @@ void GamingHistoryFetcher::slotComplete(KJob*) {
   if(m_matches.isEmpty()) {
     // an exact match is handled by returning a page with <script> at the top
     if(s.startsWith(QLatin1String("<script>"))) {
-      static const QRegularExpression locationRx(QLatin1String("'([^']+?)'</script>"));
+      static const QRegularExpression locationRx(QStringLiteral("'([^']+?)'</script>"));
       auto locationMatch = locationRx.match(s);
       if(locationMatch.hasMatch()) {
         Data::CollPtr coll(new Data::GameCollection(true));
@@ -262,8 +262,8 @@ Tellico::Data::EntryPtr GamingHistoryFetcher::fetchEntryHook(uint uid_) {
 }
 
 void GamingHistoryFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
-  static const QRegularExpression tagRx(QLatin1String("<.*?>"));
-  static const QRegularExpression divRx(QLatin1String("<div class='ContainerTableau100'><div class='CelluleTexte100'>(.+?)</div"),
+  static const QRegularExpression tagRx(QStringLiteral("<.*?>"));
+  static const QRegularExpression divRx(QStringLiteral("<div class='ContainerTableau100'><div class='CelluleTexte100'>(.+?)</div"),
                                         QRegularExpression::DotMatchesEverythingOption);
   auto divMatch = divRx.match(str_);
   if(divMatch.hasMatch()) {
@@ -272,7 +272,7 @@ void GamingHistoryFetcher::parseEntry(Data::EntryPtr entry, const QString& str_)
     // if the title is empty, need to parse it
     if(entry->title().isEmpty()) {
       const QString info = desc.section(QLatin1Char('\n'), 0, 0).remove(tagRx).simplified();
-      QRegularExpression infoRx(QString::fromUtf8("^(.+?) \u00A9 (\\d{4}) (.+?)$"));
+      QRegularExpression infoRx(QStringLiteral("^(.+?) \u00A9 (\\d{4}) (.+?)$"));
       auto infoMatch = infoRx.match(info);
       if(infoMatch.hasMatch()) {
         entry->setField(QStringLiteral("title"), infoMatch.captured(1).trimmed());
@@ -287,14 +287,14 @@ void GamingHistoryFetcher::parseEntry(Data::EntryPtr entry, const QString& str_)
 
   // if the platform is empty, grab it from the html title
   if(entry->field(QStringLiteral("platform")).isEmpty()) {
-    static const QRegularExpression titleRx(QLatin1String("<title>.+?, (.+?) by .+?</title>"));
+    static const QRegularExpression titleRx(QStringLiteral("<title>.+?, (.+?) by .+?</title>"));
     auto titleMatch = titleRx.match(str_);
     if(titleMatch.hasMatch()) {
       populatePlatform(entry, titleMatch.captured(1));
     }
   }
 
-  static const QRegularExpression coverRx(QLatin1String("<img [^>]*?id='kukulcan'[^>]*?src='([^>]+?)'"));
+  static const QRegularExpression coverRx(QStringLiteral("<img [^>]*?id='kukulcan'[^>]*?src='([^>]+?)'"));
   auto coverMatch = coverRx.match(str_);
   if(coverMatch.hasMatch()) {
     QString u = coverMatch.captured(1);

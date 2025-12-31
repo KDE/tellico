@@ -282,7 +282,7 @@ void ReportDialog::generateAllEntries() {
   }
 
   // do some surgery on the HTML since we've got <html> elements in every page
-  static const QRegularExpression bodyRx(QLatin1String("<body[^>]*>"));
+  static const QRegularExpression bodyRx(QStringLiteral("<body[^>]*>"));
   m_exporter->setEntries(Controller::self()->visibleEntries());
   QString html = m_exporter->text();
   auto bodyMatch = bodyRx.match(html);

@@ -50,7 +50,7 @@ namespace {
 QString Tellico::AbstractFileReader::getCoverImage(const KFileItem& fi_) {
   QPixmap pixmap;
   if(useFilePreview()) {
-    KConfigGroup cfg(KSharedConfig::openConfig(), QLatin1String("File Reader Options"));
+    KConfigGroup cfg(KSharedConfig::openConfig(), QStringLiteral("File Reader Options"));
     const auto previewSize = cfg.readEntry("Preview Size", FILE_PREVIEW_SIZE);
     pixmap = Tellico::NetAccess::filePreview(fi_, previewSize);
   }

@@ -28,13 +28,13 @@
 using Tellico::LCCNValidator;
 
 LCCNValidator::LCCNValidator(QObject* parent_) : QRegularExpressionValidator(parent_) {
-  QRegularExpression rx(QLatin1String("[a-z ]{0,3}"
-                                      "("
-                                      "\\d{2}-?\\d{1,6}"
-                                      "|"
-                                      "\\d{4}-?\\d{1,6}"
-                                      ")"
-                                      " ?\\w*"));
+  QRegularExpression rx(QStringLiteral("[a-z ]{0,3}"
+                                       "("
+                                       "\\d{2}-?\\d{1,6}"
+                                       "|"
+                                       "\\d{4}-?\\d{1,6}"
+                                       ")"
+                                       " ?\\w*"));
   setRegularExpression(rx);
 }
 

@@ -686,7 +686,7 @@ void CollectionFieldsDialog::updateField() {
   }
 
   if(field->type() == Data::Field::Choice) {
-    static const QRegularExpression rx(QLatin1String("\\s*;\\s*"));
+    static const QRegularExpression rx(QStringLiteral("\\s*;\\s*"));
     field->setAllowed(m_allowEdit->text().split(rx, Qt::SkipEmptyParts));
     field->setProperty(QStringLiteral("minimum"), QString());
     field->setProperty(QStringLiteral("maximum"), QString());

@@ -768,7 +768,7 @@ void MainWindow::initDocument() {
   Data::Document* doc = Data::Document::self();
   Kernel::self()->resetHistory();
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("General Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("General Options"));
   doc->setLoadAllImages(config.readEntry("Load All Images", false));
 
   // allow status messages from the document
@@ -936,7 +936,7 @@ void MainWindow::initFileOpen(bool nofile_) {
     text.replace(QLatin1String("$FOOTER$"),
                  i18n("More information can be found in the <a href=\"help:/tellico\">documentation</a>. "
                       "You may also <a href=\"tc:///disable_welcome\">disable this welcome screen</a>."));
-    QString iconPath = KIconLoader::global()->iconPath(QLatin1String("tellico"), -KIconLoader::SizeEnormous);
+    QString iconPath = KIconLoader::global()->iconPath(QStringLiteral("tellico"), -KIconLoader::SizeEnormous);
     if(iconPath.startsWith(QLatin1String(":/"))) {
       iconPath = QStringLiteral("qrc") + iconPath;
     } else {
@@ -961,7 +961,7 @@ void MainWindow::initFileOpen(bool nofile_) {
 // The options that can be changed in the "Configuration..." dialog
 // are taken care of by the ConfigDialog object.
 void MainWindow::saveOptions() {
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Main Window Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Main Window Options"));
   saveMainWindowSettings(config);
   config.writeEntry(QStringLiteral("Central Dock State"), m_dummyWindow->saveState());
 
@@ -969,7 +969,7 @@ void MainWindow::saveOptions() {
   // check any single dock widget, they all get locked together
   Config::setLockLayout(m_groupViewDock->isLocked());
 
-  KConfigGroup filesConfig(KSharedConfig::openConfig(), QLatin1String("Recent Files"));
+  KConfigGroup filesConfig(KSharedConfig::openConfig(), QStringLiteral("Recent Files"));
   m_fileOpenRecent->saveEntries(filesConfig);
   if(!isNewDocument()) {
     Config::setLastOpenFile(Data::Document::self()->URL().url());
@@ -996,7 +996,7 @@ void MainWindow::saveOptions() {
   }
 
   // this is used in the EntryEditDialog constructor, too
-  KConfigGroup editDialogConfig(KSharedConfig::openConfig(), QLatin1String("Edit Dialog Options"));
+  KConfigGroup editDialogConfig(KSharedConfig::openConfig(), QStringLiteral("Edit Dialog Options"));
   KWindowConfig::saveWindowSize(m_editDialog->windowHandle(), editDialogConfig);
 
   saveCollectionOptions(Data::Document::self()->collection());
@@ -1118,7 +1118,7 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
 }
 
 void MainWindow::readOptions() {
-  KConfigGroup mainWindowConfig(KSharedConfig::openConfig(), QLatin1String("Main Window Options"));
+  KConfigGroup mainWindowConfig(KSharedConfig::openConfig(), QStringLiteral("Main Window Options"));
   applyMainWindowSettings(mainWindowConfig);
   m_dummyWindow->restoreState(mainWindowConfig.readEntry(QStringLiteral("Central Dock State"), QByteArray()));
 
@@ -1128,7 +1128,7 @@ void MainWindow::readOptions() {
   connect(toolBar(QStringLiteral("collectionToolBar")), &QToolBar::iconSizeChanged, this, &MainWindow::slotUpdateToolbarIcons);
 
   // initialize the recent file list
-  KConfigGroup filesConfig(KSharedConfig::openConfig(), QLatin1String("Recent Files"));
+  KConfigGroup filesConfig(KSharedConfig::openConfig(), QStringLiteral("Recent Files"));
   m_fileOpenRecent->loadEntries(filesConfig);
 
   // sort by count if column = 1

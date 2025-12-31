@@ -33,6 +33,8 @@
 #include "../images/imagefactory.h"
 
 #include <KLocalizedString>
+#include <KSharedConfig>
+#include <KConfigGroup>
 
 #include <QTest>
 #include <QStandardPaths>
@@ -49,7 +51,10 @@ void CsvTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerAlbum(Tellico::Data::Collection::Album, "album");
 }
 
-void CsvTest::cleanupTestCase() {
+void CsvTest::init() {
+  // since the importer saves the settings, clear them out
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - CSV"));
+  config.deleteGroup();
 }
 
 void CsvTest::testTokens() {

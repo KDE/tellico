@@ -152,7 +152,7 @@ QString ExportDialog::fileFilter() {
 }
 
 void ExportDialog::readOptions() {
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ExportOptions"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ExportOptions"));
   bool format = config.readEntry("FormatFields", false);
   m_formatFields->setChecked(format);
   bool selected = config.readEntry("ExportSelectedOnly", false);
@@ -170,7 +170,7 @@ void ExportDialog::slotSaveOptions() {
   // each exporter sets its own group
   m_exporter->saveOptions(config);
 
-  KConfigGroup configGroup(config, QLatin1String("ExportOptions"));
+  KConfigGroup configGroup(config, QStringLiteral("ExportOptions"));
   configGroup.writeEntry("FormatFields", m_formatFields->isChecked());
   configGroup.writeEntry("ExportSelectedOnly", m_exportSelected->isChecked());
   configGroup.writeEntry("EncodeUTF8", m_encodeUTF8->isChecked());
@@ -295,7 +295,7 @@ bool ExportDialog::exportCollection(Data::CollPtr coll_, Data::EntryList entries
   exp->setURL(targetUrl_);
   exp->setEntries(entries_);
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ExportOptions"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ExportOptions"));
   long options = 0;
   if(config.readEntry("FormatFields", false)) {
     options |= Export::ExportFormatted;

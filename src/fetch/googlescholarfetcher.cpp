@@ -243,8 +243,8 @@ void GoogleScholarFetcher::setBibtexCookie() {
   // have to set preferences to have bibtex output
   const QString text = FileHandler::readTextFile(QUrl(QString::fromLatin1(SCHOLAR_SET_CONFIG_URL)), true);
   // find hidden input variables
-  static const QRegularExpression inputRx(QLatin1String("<input\\s+[^>]*?\\s*?type\\s*?=\\s*?\"?hidden\"?\\s+?[^>]+?>"));
-  static const QRegularExpression pairRx(QLatin1String("([^=\\s<]+?)\\s*=\\s*\"?([^=\\s\">]+?)\"?"));
+  static const QRegularExpression inputRx(QStringLiteral("<input\\s+[^>]*?\\s*?type\\s*?=\\s*?\"?hidden\"?\\s+?[^>]+?>"));
+  static const QRegularExpression pairRx(QStringLiteral("([^=\\s<]+?)\\s*=\\s*\"?([^=\\s\">]+?)\"?"));
   QHash<QString, QString> nameValues;
   auto i = inputRx.globalMatch(text);
   while(i.hasNext()) {

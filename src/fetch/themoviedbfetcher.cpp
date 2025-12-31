@@ -197,7 +197,7 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
     QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
     u.setPath(QStringLiteral("/%1/%2/%3")
               .arg(QLatin1String(THEMOVIEDB_API_VERSION),
-                   mediaType.isEmpty() ? QLatin1String("movie") : mediaType,
+                   mediaType.isEmpty() ? QStringLiteral("movie") : mediaType,
                    id));
     QUrlQuery q;
     q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
@@ -205,12 +205,12 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
     QString append;
     if(optionalFields().contains(QStringLiteral("episode"))) {
       // can only do one season at a time?
-      append = QLatin1String("alternative_titles,credits");
+      append = QStringLiteral("alternative_titles,credits");
       for(uint snum = 1; snum <= THEMOVIEDB_MAX_SEASON_COUNT; ++snum) {
         append += QLatin1String(",season/") + QString::number(snum);
       }
     } else {
-      append = QLatin1String("alternative_titles,credits");
+      append = QStringLiteral("alternative_titles,credits");
     }
     q.addQueryItem(QStringLiteral("append_to_response"), append);
     u.setQuery(q);
@@ -359,7 +359,7 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
   for(const auto& result : std::as_const(resultList)) {
     // skip people results
     const auto resultObj = result.toObject();
-    if(objValue(resultObj, "media_type") == QLatin1String("person")) {
+    if(objValue(resultObj, "media_type") == QLatin1StringView("person")) {
       continue;
     }
 //    myDebug() << "found result:" << result;
@@ -400,13 +400,13 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& 
   for(const auto& crew : crewList) {
     const auto crewObj = crew.toObject();
     const QString job = objValue(crewObj, "job");
-    if(job == QLatin1String("Director")) {
+    if(job == QLatin1StringView("Director")) {
       directors += objValue(crewObj, "name");
-    } else if(job == QLatin1String("Producer")) {
+    } else if(job == QLatin1StringView("Producer")) {
       producers += objValue(crewObj, "name");
-    } else if(job == QLatin1String("Screenplay")) {
+    } else if(job == QLatin1StringView("Screenplay")) {
       writers += objValue(crewObj, "name");
-    } else if(job == QLatin1String("Original Music Composer")) {
+    } else if(job == QLatin1StringView("Original Music Composer")) {
       composers += objValue(crewObj, "name");
     }
   }
@@ -422,7 +422,7 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& 
 
   if(entry_->collection()->hasField(QStringLiteral("tmdb"))) {
     QString mediaType = entry_->field(tmdbType);
-    if(mediaType.isEmpty()) mediaType = QLatin1String("movie");
+    if(mediaType.isEmpty()) mediaType = QStringLiteral("movie");
     entry_->setField(QStringLiteral("tmdb"), QStringLiteral("https://www.themoviedb.org/%1/%2").arg(mediaType, objValue(obj_, "id")));
   }
   if(entry_->collection()->hasField(QStringLiteral("imdb"))) {
@@ -485,7 +485,8 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& 
   }
   for(const auto& country : std::as_const(countryList)) {
     QString name = objValue(country.toObject(), "name");
-    if(name == QLatin1String("United States of America") || name == QLatin1String("US")) {
+    if(name == QLatin1StringView("United States of America") ||
+       name == QLatin1StringView("US")) {
       name = QStringLiteral("USA");
     }
     if(!name.isEmpty()) countries << name;
@@ -502,7 +503,7 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& 
   QString lang = objValue(obj_, "original_language");
   const QString langName = KLanguageName::nameForCode(lang);
   if(!langName.isEmpty()) lang = langName;
-  if(lang == QLatin1String("US English")) lang = QLatin1String("English");
+  if(lang == QLatin1StringView("US English")) lang = QStringLiteral("English");
   entry_->setField(QStringLiteral("language"), lang);
   entry_->setField(QStringLiteral("plot"), objValue(obj_, "overview"));
 }
@@ -605,9 +606,9 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   m_langCombo = new GUI::ComboBox(optionsWidget());
   // check https://www.themoviedb.org/contribute occasionally for top languages
 #define LANG_ITEM(CY, ISO) \
-  m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String(CY))), \
-                       KLanguageName::nameForCode(QLatin1String(ISO)),            \
-                       QLatin1String(ISO));
+  m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QStringLiteral(CY))), \
+                       KLanguageName::nameForCode(QStringLiteral(ISO)),            \
+                       QStringLiteral(ISO));
   LANG_ITEM("cn", "zh");
   LANG_ITEM("us", "en");
   LANG_ITEM("fr", "fr");

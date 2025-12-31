@@ -58,11 +58,11 @@ void AdsTest::testImport() {
   QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
   QCOMPARE(entry->field("year"), QStringLiteral("1993"));
   QCOMPARE(entry->field("pages"), QStringLiteral("50-57"));
-  const auto authors = Tellico::FieldFormat::splitValue(entry->field("author"));
+  const auto authors = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("author")));
   QCOMPARE(authors.count(), 3);
   QCOMPARE(authors.first(), QStringLiteral("Cavaliere, A."));
   QVERIFY(!entry->field("abstract").isEmpty());
-  const auto keywords = Tellico::FieldFormat::splitValue(entry->field("keyword"));
+  const auto keywords = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("keyword")));
   QCOMPARE(keywords.count(), 7);
   QCOMPARE(keywords.first(), QStringLiteral("Cosmic Plasma"));
 }

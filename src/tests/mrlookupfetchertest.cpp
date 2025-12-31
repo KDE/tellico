@@ -54,7 +54,7 @@ void MRLookupFetcherTest::initTestCase() {
 
 void MRLookupFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
-                                       QLatin1String("An unnoticed consequence of Szego's distribution theorem"));
+                                       QStringLiteral("An unnoticed consequence of Szego's distribution theorem"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MRLookupFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);

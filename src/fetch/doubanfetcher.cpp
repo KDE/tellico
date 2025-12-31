@@ -143,8 +143,8 @@ void DoubanFetcher::doSearch(const QString& term_) {
       return;
   }
 
-  q.addQueryItem(QLatin1String("start"), QString::number(0));
-  q.addQueryItem(QLatin1String("apiKey"), Tellico::reverseObfuscate(DOUBAN_API_KEY));
+  q.addQueryItem(QStringLiteral("start"), QString::number(0));
+  q.addQueryItem(QStringLiteral("apiKey"), Tellico::reverseObfuscate(DOUBAN_API_KEY));
   u.setQuery(q);
   if(!m_testUrl1.isEmpty()) u = m_testUrl1;
 //  myDebug() << "url:" << u.url();
@@ -333,7 +333,7 @@ Tellico::Data::EntryPtr DoubanFetcher::fetchEntryHook(uint uid_) {
 
   QUrl url = m_matches.value(uid_);
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("apiKey"), Tellico::reverseObfuscate(DOUBAN_API_KEY));
+  q.addQueryItem(QStringLiteral("apiKey"), Tellico::reverseObfuscate(DOUBAN_API_KEY));
   url.setQuery(q);
   if(!m_testUrl2.isEmpty()) url = m_testUrl2;
 //  myDebug() << url.url();
@@ -420,12 +420,12 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QJsonObject& obj_) {
       QRegularExpressionMatch match = i.next();
       const QString m1 = match.captured(1).simplified();
       const QString m2 = match.captured(2).simplified();
-      if(m1 == QString::fromUtf8("原作名")) {
+      if(m1 == QStringLiteral("原作名")) {
         const QString origtitle = QStringLiteral("origtitle");
         if(entry->collection()->hasField(origtitle) && entry->field(origtitle).isEmpty()) {
           entry->setField(origtitle, m2);
         }
-      } else if(m1 == QString::fromUtf8("装帧")) {
+      } else if(m1 == QStringLiteral("装帧")) {
         if(m2 == QStringLiteral("精装")) {
           entry->setField(QStringLiteral("binding"), i18n("Hardback"));
         } else if(m2 == QStringLiteral("平装")) {
@@ -433,21 +433,21 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QJsonObject& obj_) {
         }
       } else if(m1 == QLatin1String("ISBN")) {
         entry->setField(QStringLiteral("isbn"), m2);
-      } else if(m1 == QString::fromUtf8("介质")) {
+      } else if(m1 == QStringLiteral("介质")) {
         if(m2.contains(QLatin1String("CD"))) {
           entry->setField(QStringLiteral("medium"), i18n("Compact Disc"));
         }
-      } else if(m1 == QString::fromUtf8("流派")) {
-        static const QRegularExpression slashRx(QLatin1String("\\s*/\\s*"));
+      } else if(m1 == QStringLiteral("流派")) {
+        static const QRegularExpression slashRx(QStringLiteral("\\s*/\\s*"));
         const QStringList genres = m2.split(slashRx);
         entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::rowDelimiterString()));
-      } else if(m1 == QString::fromUtf8("片长")) {
-        static const QRegularExpression digits(QLatin1String("\\d+"));
+      } else if(m1 == QStringLiteral("片长")) {
+        static const QRegularExpression digits(QStringLiteral("\\d+"));
         auto digitsMatch = digits.match(m2);
         if(digitsMatch.hasMatch()) {
           entry->setField(QStringLiteral("running-time"), digitsMatch.captured());
         }
-      } else if(m1 == QString::fromUtf8("编剧")) {
+      } else if(m1 == QStringLiteral("编剧")) {
         entry->setField(QStringLiteral("writer"), m2);
       }
     }
@@ -612,8 +612,8 @@ QString DoubanFetcher::defaultName() {
 }
 
 QString DoubanFetcher::defaultIcon() {
-  return favIcon(QUrl(QLatin1String("http://www.douban.com")),
-                 QUrl(QLatin1String("https://tellico-project.org/img/douban-favicon.ico")));
+  return favIcon(QUrl(QStringLiteral("http://www.douban.com")),
+                 QUrl(QStringLiteral("https://tellico-project.org/img/douban-favicon.ico")));
 }
 
 Tellico::StringHash DoubanFetcher::allOptionalFields() {

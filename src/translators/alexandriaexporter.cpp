@@ -179,7 +179,7 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
   // I have no idea how to debug ruby, so err on safe side and add quotes
   ts << "isbn: \"" << isbn << "\"\n";
 
-  static const QRegularExpression rx(QLatin1String("<br/?>"), QRegularExpression::CaseInsensitiveOption);
+  static const QRegularExpression rx(QStringLiteral("<br/?>"), QRegularExpression::CaseInsensitiveOption);
   tmp = entry_->formattedField(QStringLiteral("comments"), format);
   tmp.replace(rx, QStringLiteral("\n"));
   ts << "notes: |-\n";

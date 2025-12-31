@@ -491,9 +491,9 @@ void Controller::plugCollectionActions(QMenu* popup_) {
     return;
   }
 
-  popup_->addAction(m_mainWindow->action(QLatin1String("coll_rename_collection")));
-  popup_->addAction(m_mainWindow->action(QLatin1String("coll_fields")));
-  popup_->addAction(m_mainWindow->action(QLatin1String("change_entry_grouping")));
+  popup_->addAction(m_mainWindow->action(QStringLiteral("coll_rename_collection")));
+  popup_->addAction(m_mainWindow->action(QStringLiteral("coll_fields")));
+  popup_->addAction(m_mainWindow->action(QStringLiteral("change_entry_grouping")));
 }
 
 void Controller::plugEntryActions(QMenu* popup_) {
@@ -575,8 +575,8 @@ void Controller::updateActions() const {
   //only enable citation items when it's a bibliography
   const bool isBibtex = Kernel::self()->collectionType() == Data::Collection::Bibtex;
   if(isBibtex) {
-    m_mainWindow->action(QLatin1String("cite_clipboard"))->setEnabled(!emptySelection);
-    m_mainWindow->action(QLatin1String("cite_lyxpipe"))->setEnabled(!emptySelection);
+    m_mainWindow->action(QStringLiteral("cite_clipboard"))->setEnabled(!emptySelection);
+    m_mainWindow->action(QStringLiteral("cite_lyxpipe"))->setEnabled(!emptySelection);
   }
   m_mainWindow->m_checkInEntry->setEnabled(canCheckIn());
 

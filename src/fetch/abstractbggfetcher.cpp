@@ -79,7 +79,7 @@ QString AbstractBGGFetcher::source() const {
 
 // https://boardgamegeek.com/wiki/page/XML_API_Terms_of_Use
 QString AbstractBGGFetcher::attribution() const {
-  return TC_I18N3(providedBy, QLatin1String("https://boardgamegeek.com"), QLatin1String("BoardGameGeek"));
+  return TC_I18N3(providedBy, QStringLiteral("https://boardgamegeek.com"), QStringLiteral("BoardGameGeek"));
 }
 
 bool AbstractBGGFetcher::canSearch(Fetch::FetchKey k) const {
@@ -156,7 +156,7 @@ void AbstractBGGFetcher::parseData(QByteArray& data_) {
   // error comes in a div element apparently
   auto e = dom.documentElement();
   if(e.tagName() == QLatin1StringView("div") &&
-     e.attribute(QLatin1String("class")).contains(QLatin1String("error"))) {
+     e.attribute(QStringLiteral("class")).contains(QLatin1StringView("error"))) {
     myLog() << "BoardGameGeek error:" << e.text().trimmed();
   }
 }

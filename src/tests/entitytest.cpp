@@ -148,11 +148,11 @@ void EntityTest::testControlCodes_data() {
 }
 
 void EntityTest::testBug254863() {
-  QString input(QLatin1String("\\n<div>\\n\\n<i18n>check&replace</i18n></div>\\n"));
+  QString input(QStringLiteral("\\n<div>\\n\\n<i18n>check&replace</i18n></div>\\n"));
   auto output = Tellico::i18nReplace(input);
   QVERIFY(!output.contains(QLatin1String("i18n>")));
   QVERIFY(!output.contains(QLatin1String("&replace")));
-  static const QRegularExpression whiteSpaceRx(QLatin1String("\\s$"));
+  static const QRegularExpression whiteSpaceRx(QStringLiteral("\\s$"));
   QVERIFY(!output.contains(whiteSpaceRx));
 }
 

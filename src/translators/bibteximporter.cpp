@@ -70,7 +70,7 @@ BibtexImporter::~BibtexImporter() {
     bt_cleanup();
   }
   if(m_readUTF8) {
-    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Import Options"));
+    KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Import Options"));
     config.writeEntry("Bibtex UTF8", m_readUTF8->isChecked());
   }
 }
@@ -200,7 +200,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
 //    myDebug() << "entry key: " << str;
     Data::BibtexCollection::setFieldValue(entry, QStringLiteral("key"), str, currentColl);
 
-    static const QRegularExpression andRx(QLatin1String("\\sand\\s"));
+    static const QRegularExpression andRx(QStringLiteral("\\sand\\s"));
     char* name;
     AST* field = nullptr;
     while((field = bt_next_field(node, field, &name))) {
@@ -231,13 +231,14 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
         str.truncate(str.length() - 1);
       }
       QString fieldName = QString::fromUtf8(name);
-      if(fieldName == QLatin1String("author") || fieldName == QLatin1String("editor")) {
+      if(fieldName == QLatin1StringView("author") ||
+         fieldName == QLatin1StringView("editor")) {
         str.replace(andRx,FieldFormat::delimiterString());
       }
       // there's a 'key' field different from the citation key
       // https://nwalsh.com/tex/texhelp/bibtx-37.html
       // TODO account for this later
-      if(fieldName == QLatin1String("key")) {
+      if(fieldName == QLatin1StringView("key")) {
         myLog() << "skipping bibtex 'key' field for" << str;
       } else {
         Data::BibtexCollection::setFieldValue(entry, fieldName, str, currentColl);
@@ -281,8 +282,9 @@ void BibtexImporter::parseText(const QString& text) {
 //  bt_set_stringopts(BTE_PREAMBLE, BTO_CONVERT | BTO_EXPAND);
 
   QString entry;
-  static const QRegularExpression rx(QLatin1String("[{}]"));
-  static const QRegularExpression macroName(QLatin1String("@string\\s*\\{\\s*(.*?)="), QRegularExpression::CaseInsensitiveOption);
+  static const QRegularExpression rx(QStringLiteral("[{}]"));
+  static const QRegularExpression macroName(QStringLiteral("@string\\s*\\{\\s*(.*?)="),
+                                            QRegularExpression::CaseInsensitiveOption);
 
   int line = 1;
   bool needsCleanup = false;
@@ -357,7 +359,7 @@ QWidget* BibtexImporter::widget(QWidget* parent_) {
   bg->addButton(m_readUTF8);
   bg->addButton(m_readLocale);
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Import Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Import Options"));
   bool useUTF8 = config.readEntry("Bibtex UTF8", false);
   if(useUTF8) {
     m_readUTF8->setChecked(true);
@@ -382,7 +384,7 @@ bool BibtexImporter::maybeBibtex(const QString& text, const QUrl& url_) {
   bool foundOne = false;
 #ifdef ENABLE_BTPARSE
   bt_initialize();
-  static const QRegularExpression rx(QLatin1String("[{}]"));
+  static const QRegularExpression rx(QStringLiteral("[{}]"));
 
   ushort bt_options = 0; // ushort is defined in btparse.h
   boolean ok; // boolean is defined in btparse.h as an int

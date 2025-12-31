@@ -145,10 +145,10 @@ void ISBNdbFetcher::doSearch(const QString& term_) {
       u.setPath(QStringLiteral("/books/") + term_);
       {
          QUrlQuery q;
-         q.addQueryItem(QStringLiteral("page"), QLatin1String("1"));
+         q.addQueryItem(QStringLiteral("page"), QStringLiteral("1"));
          q.addQueryItem(QStringLiteral("pageSize"), QString::number(ISBNDB_MAX_RETURNS_TOTAL));
          // disable beta searching
-         q.addQueryItem(QStringLiteral("beta"), QLatin1String("0"));
+         q.addQueryItem(QStringLiteral("beta"), QStringLiteral("0"));
          u.setQuery(q);
       }
       break;

@@ -322,7 +322,7 @@ void UPCItemDbFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& o
 
 void UPCItemDbFetcher::parseTitle(Tellico::Data::EntryPtr entry_) {
   // assume that everything in brackets or parentheses is extra
-  static const QRegularExpression rx(QLatin1String("[\\(\\[](.*?)[\\)\\]]"));
+  static const QRegularExpression rx(QStringLiteral("[\\(\\[](.*?)[\\)\\]]"));
   QString title = entry_->field(QStringLiteral("title"));
   int pos = 0;
   QRegularExpressionMatch match = rx.match(title, pos);
@@ -335,14 +335,14 @@ void UPCItemDbFetcher::parseTitle(Tellico::Data::EntryPtr entry_) {
     match = rx.match(title, pos+1);
   }
   // look for "word1 - word2"
-  static const QRegularExpression dashWords(QLatin1String("(.+) - (.+)"));
+  static const QRegularExpression dashWords(QStringLiteral("(.+) - (.+)"));
   QRegularExpressionMatch dashMatch = dashWords.match(title);
   if(dashMatch.hasMatch()) {
     switch(collectionType()) {
       case Data::Collection::Book:
         title = dashMatch.captured(1);
         {
-          static const QRegularExpression byAuthor(QLatin1String("by (.+)"));
+          static const QRegularExpression byAuthor(QStringLiteral("by (.+)"));
           QRegularExpressionMatch authorMatch = byAuthor.match(dashMatch.captured(2));
           if(authorMatch.hasMatch()) {
             entry_->setField(QStringLiteral("author"), authorMatch.captured(1).simplified());
@@ -376,7 +376,7 @@ bool UPCItemDbFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QSt
 //  myDebug() << "title token:" << token_;
   // if res = true, then the token gets removed from the title
   bool res = false;
-  static const QRegularExpression yearRx(QLatin1String("\\d{4}"));
+  static const QRegularExpression yearRx(QStringLiteral("\\d{4}"));
   QRegularExpressionMatch yearMatch = yearRx.match(token_);
   if(yearMatch.hasMatch()) {
     entry_->setField(QStringLiteral("year"), yearMatch.captured());
@@ -432,7 +432,7 @@ bool UPCItemDbFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QSt
     entry_->setField(QStringLiteral("series"), token_);
     res = true;
   }
-  static const QRegularExpression regionRx(QLatin1String("Region [1-9]"));
+  static const QRegularExpression regionRx(QStringLiteral("Region [1-9]"));
   QRegularExpressionMatch match = regionRx.match(token_);
   if(match.hasMatch()) {
     entry_->setField(QStringLiteral("region"), i18n(match.captured().toUtf8().constData()));

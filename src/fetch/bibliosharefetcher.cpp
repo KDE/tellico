@@ -62,7 +62,7 @@ QString BiblioShareFetcher::source() const {
 
 // https://www.booknetcanada.ca/get-a-token
 QString BiblioShareFetcher::attribution() const {
-  return TC_I18N3(providedBy, QLatin1String("https://www.booknetcanada.ca/biblioshare"), QLatin1String("BNC BiblioShare"));
+  return TC_I18N3(providedBy, QStringLiteral("https://www.booknetcanada.ca/biblioshare"), QStringLiteral("BNC BiblioShare"));
 }
 
 bool BiblioShareFetcher::canFetch(int type) const {
@@ -159,8 +159,8 @@ QString BiblioShareFetcher::defaultName() {
 }
 
 QString BiblioShareFetcher::defaultIcon() {
-  return favIcon(QUrl(QLatin1String("https://www.booknetcanada.ca")),
-                 QUrl(QLatin1String("https://images.squarespace-cdn.com/content/v1/550334cbe4b0e08b6885e88f/1443713102643-G58N3NF6V7EWOGZ0I4A8/favicon.ico?format=100w")));
+  return favIcon(QUrl(QStringLiteral("https://www.booknetcanada.ca")),
+                 QUrl(QStringLiteral("https://images.squarespace-cdn.com/content/v1/550334cbe4b0e08b6885e88f/1443713102643-G58N3NF6V7EWOGZ0I4A8/favicon.ico?format=100w")));
 }
 
 BiblioShareFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BiblioShareFetcher* fetcher_)

@@ -137,7 +137,7 @@ QWidget* GCstarExporter::widget(QWidget* parent_) {
 bool GCstarExporter::writeImages() {
   const QString imgDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/gcstar/images/");
   QDir dir(imgDir);
-  if(!dir.exists() && !dir.mkpath(QLatin1String("."))) return false;
+  if(!dir.exists() && !dir.mkpath(QStringLiteral("."))) return false;
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString(), false);
   item.setTotalSteps(entries().count());

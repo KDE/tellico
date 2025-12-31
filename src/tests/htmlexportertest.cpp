@@ -177,7 +177,7 @@ void HtmlExporterTest::testHtmlTitle() {
   QVERIFY(!output.isEmpty());
 
   // check https://bugs.kde.org/show_bug.cgi?id=348381
-  static const QRegularExpression rx("<title>.*</title>");
+  static const QRegularExpression rx(QStringLiteral("<title>.*</title>"));
   QRegularExpressionMatch match = rx.match(output);
   QVERIFY(match.hasMatch());
   QCOMPARE(match.captured(), QStringLiteral("<title>Robby's Books</title>"));
@@ -200,7 +200,7 @@ void HtmlExporterTest::testReportHtml() {
   QVERIFY(!output.isEmpty());
 
   // check that cdate is passed correctly
-  static const QRegularExpression rx("div class=\"box header-right\"><span>(.*)</span");
+  static const QRegularExpression rx(QStringLiteral("div class=\"box header-right\"><span>(.*)</span"));
   QRegularExpressionMatch match = rx.match(output);
   QVERIFY(match.hasMatch());
   QCOMPARE(match.captured(1), QLocale().toString(QDate::currentDate()));
@@ -256,7 +256,7 @@ void HtmlExporterTest::testTemplatesTidy() {
                            QStringLiteral("yes") };
   QProcessEnvironment tidyEnv;
   // suppress warning about no tidyrc file
-  tidyEnv.insert("HTML_TIDY", "/dev/null");
+  tidyEnv.insert(QStringLiteral("HTML_TIDY"), QStringLiteral("/dev/null"));
 
   QUrl url = QUrl::fromLocalFile(tellicoFile);
   Tellico::Import::TellicoImporter importer(url);

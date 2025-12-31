@@ -425,10 +425,10 @@ NumistaFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const NumistaFetche
   l->addWidget(label, ++row, 0);
   m_langCombo = new GUI::ComboBox(optionsWidget());
   m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String("us"))),
-                       KLanguageName::nameForCode(QLatin1String("en")),
+                       KLanguageName::nameForCode(QStringLiteral("en")),
                        QLatin1String("en"));
   m_langCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String("fr"))),
-                       KLanguageName::nameForCode(QLatin1String("fr")),
+                       KLanguageName::nameForCode(QStringLiteral("fr")),
                        QLatin1String("fr"));
   void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
   connect(m_langCombo, activatedInt, this, &ConfigWidget::slotSetModified);

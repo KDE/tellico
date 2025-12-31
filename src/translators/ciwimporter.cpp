@@ -131,7 +131,7 @@ void CIWImporter::readText(const QString& text_, int n) {
   Data::EntryPtr entry(new Data::Entry(m_coll));
   // no idea what the "formal" format is, take it as two characters, followed by a space and then value
   // the entry ends with just ER
-  static const QRegularExpression rx(QLatin1String("^(\\w\\w) ?(.*)$"));
+  static const QRegularExpression rx(QStringLiteral("^(\\w\\w) ?(.*)$"));
   QString currLine, nextLine;
   for(currLine = t.readLine(); !m_cancelled && !t.atEnd(); currLine = nextLine, j += currLine.length()) {
     nextLine = t.readLine();
@@ -255,7 +255,7 @@ bool CIWImporter::maybeCIW(const QUrl& url_) {
   // and then first text line must be valid CIW, i.e. two letters followed by a space
   QTextStream t(&text);
 
-  static const QRegularExpression rx(QLatin1String("^(\\w\\w) \\w(.*)$"));
+  static const QRegularExpression rx(QStringLiteral("^(\\w\\w) \\w(.*)$"));
   QString currLine;
   for(currLine = t.readLine(); !t.atEnd(); currLine = t.readLine()) {
     if(currLine.trimmed().isEmpty()) {

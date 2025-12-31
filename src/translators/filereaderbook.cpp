@@ -51,13 +51,13 @@ bool FileReaderBook::populate(Data::EntryPtr entry, const KFileItem& item) {
   bool goodRead = false;
   // reads pdf and ebooks
   // special case for epub since the epubextractor in KFileMetaData doesn't read ISBN values
-  if(item.mimetype() == QLatin1String("application/epub+zip")) {
+  if(item.mimetype() == QLatin1StringView("application/epub+zip")) {
     myLog() << "Reading" << item.url().toLocalFile();
     goodRead = readEpub(entry, item);
-  } else if(item.mimetype() == QLatin1String("application/pdf") ||
-            item.mimetype() == QLatin1String("application/fb2+zip") ||
-            item.mimetype() == QLatin1String("application/fb2+xml") ||
-            item.mimetype() == QLatin1String("application/x-mobipocket-ebook")) {
+  } else if(item.mimetype() == QLatin1StringView("application/pdf") ||
+            item.mimetype() == QLatin1StringView("application/fb2+zip") ||
+            item.mimetype() == QLatin1StringView("application/fb2+xml") ||
+            item.mimetype() == QLatin1StringView("application/x-mobipocket-ebook")) {
     goodRead = readMeta(entry, item);
   } else {
     return false;
@@ -104,9 +104,9 @@ bool FileReaderBook::readEpub(Data::EntryPtr entry, const KFileItem& item) {
 #endif
     return false;
   }
-  QDomNode n = dom.documentElement().namedItem(QLatin1String("rootfiles"))
-                                    .namedItem(QLatin1String("rootfile"));
-  const auto rootPath = n.toElement().attribute(QLatin1String("full-path"));
+  QDomNode n = dom.documentElement().namedItem(QStringLiteral("rootfiles"))
+                                    .namedItem(QStringLiteral("rootfile"));
+  const auto rootPath = n.toElement().attribute(QStringLiteral("full-path"));
   const KArchiveEntry* rootFile = topDir->entry(rootPath);
   if(!rootFile || !rootFile->isFile()) {
     myDebug() << "no root file";
@@ -122,7 +122,7 @@ bool FileReaderBook::readEpub(Data::EntryPtr entry, const KFileItem& item) {
     return false;
   }
 
-  auto metaNode = dom.documentElement().namedItem(QLatin1String("metadata")).toElement();
+  auto metaNode = dom.documentElement().namedItem(QStringLiteral("metadata")).toElement();
   if(metaNode.isNull() || metaNode.namespaceURI() != XML::nsOpenPackageFormat) {
     myDebug() << "bad namespace:" << metaNode.namespaceURI();
     return false;
@@ -141,53 +141,53 @@ bool FileReaderBook::readEpub(Data::EntryPtr entry, const KFileItem& item) {
     if(child.namespaceURI() != XML::nsDublinCore &&
        child.namespaceURI() != XML::nsOpenPackageFormat) continue;
     const auto elemText = child.toElement().text();
-    if(child.localName() == QLatin1String("title")) {
+    if(child.localName() == QLatin1StringView("title")) {
       entry->setField(QStringLiteral("title"), elemText);
-    } else if(child.localName() == QLatin1String("creator")) {
+    } else if(child.localName() == QLatin1StringView("creator")) {
       auto elem = child.toElement();
-      auto opfRole = elem.attributeNS(XML::nsOpenPackageFormat, QLatin1String("role"));
-      if(!opfRole.isEmpty() && opfRole != QLatin1String("aut")) {
+      auto opfRole = elem.attributeNS(XML::nsOpenPackageFormat, QStringLiteral("role"));
+      if(!opfRole.isEmpty() && opfRole != QLatin1StringView("aut")) {
         continue;
       }
-      auto id = elem.attribute(QLatin1String("id"));
+      auto id = elem.attribute(QStringLiteral("id"));
       if(id.isEmpty()) id = QLatin1Char('_') + QString::number(authorPositions.size());
       authorPositions.insert(authorPositions.size(), id);
       authorNames.insert(id, elemText);
-    } else if(child.localName() == QLatin1String("publisher")) {
+    } else if(child.localName() == QLatin1StringView("publisher")) {
       publishers += elemText;
-    } else if(child.localName() == QLatin1String("subject")) {
+    } else if(child.localName() == QLatin1StringView("subject")) {
       // subjects as genre instead of keywords
       genres += elemText;
-    } else if(child.localName() == QLatin1String("date")) {
+    } else if(child.localName() == QLatin1StringView("date")) {
       entry->setField(QStringLiteral("pub_year"), elemText.left(4));
-    } else if(child.localName() == QLatin1String("description")) {
+    } else if(child.localName() == QLatin1StringView("description")) {
       entry->setField(QStringLiteral("plot"), elemText);
-    } else if(child.localName() == QLatin1String("identifier")) {
+    } else if(child.localName() == QLatin1StringView("identifier")) {
       QString isbn;
       if(elemText.startsWith(QLatin1String("urn:isbn:"), Qt::CaseInsensitive)) {
         isbn = elemText.mid(9);
       } else {
         auto elem = child.toElement();
-        if(elem.attributeNS(XML::nsOpenPackageFormat, QLatin1String("scheme")) == QLatin1String("ISBN") ||
-           elem.attributeNS(XML::nsOpenPackageFormat, QLatin1String("id")) == QLatin1String("ISBN")) {
+        if(elem.attributeNS(XML::nsOpenPackageFormat, QStringLiteral("scheme")) == QLatin1StringView("ISBN") ||
+           elem.attributeNS(XML::nsOpenPackageFormat, QStringLiteral("id")) == QLatin1StringView("ISBN")) {
           isbn = elemText;
         }
       }
       if(!isbn.isEmpty()) {
         entry->setField(QStringLiteral("isbn"), isbn);
       }
-    } else if(child.localName() == QLatin1String("meta")) {
+    } else if(child.localName() == QLatin1StringView("meta")) {
       auto elem = child.toElement();
-      auto refines = elem.attribute(QLatin1String("refines"));
+      auto refines = elem.attribute(QStringLiteral("refines"));
       if(refines.startsWith(QLatin1Char('#'))) refines = refines.mid(1);
       if(!refines.isEmpty() && authorNames.contains(refines)) {
         // remove creators who are not authors
-        if(elem.attribute(QLatin1String("property")) == QLatin1String("role") &&
+        if(elem.attribute(QStringLiteral("property")) == QLatin1StringView("role") &&
            elem.text() != QLatin1String("aut")) {
           authorNames.remove(refines);
         }
-      } else if(elem.attribute(QLatin1String("name")) == QLatin1String("cover")) {
-        coverRef = elem.attribute(QLatin1String("content"));
+      } else if(elem.attribute(QStringLiteral("name")) == QLatin1StringView("cover")) {
+        coverRef = elem.attribute(QStringLiteral("content"));
       }
     }
   }
@@ -212,15 +212,15 @@ bool FileReaderBook::readEpub(Data::EntryPtr entry, const KFileItem& item) {
   }
 
   if(!coverRef.isEmpty()) {
-    auto manifestNode = dom.documentElement().namedItem(QLatin1String("manifest")).toElement();
+    auto manifestNode = dom.documentElement().namedItem(QStringLiteral("manifest")).toElement();
     if(manifestNode.isElement() && manifestNode.namespaceURI() == XML::nsOpenPackageFormat) {
       auto items = manifestNode.toElement().elementsByTagNameNS(XML::nsOpenPackageFormat,
-                                                                QLatin1String("item"));
+                                                                QStringLiteral("item"));
       for(int i = 0; i < items.count(); ++i) {
         auto item = items.at(i).toElement();
-        if(item.attribute(QLatin1String("id")) == coverRef) {
-          auto href = item.attribute(QLatin1String("href"));
-          const auto mediaType = item.attribute(QLatin1String("media-type"));
+        if(item.attribute(QStringLiteral("id")) == coverRef) {
+          auto href = item.attribute(QStringLiteral("href"));
+          const auto mediaType = item.attribute(QStringLiteral("media-type"));
           auto formats = QImageReader::imageFormatsForMimeType(mediaType.toLatin1());
           if(formats.isEmpty()) {
             myDebug() << "No image reader for" << mediaType;

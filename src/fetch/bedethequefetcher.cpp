@@ -177,9 +177,9 @@ void BedethequeFetcher::slotComplete(KJob*) {
   const int pos_end = output.indexOf(QLatin1String("</ul>"), pos_list+1, Qt::CaseInsensitive);
   output = output.mid(pos_list, pos_end-pos_list);
 
-  static const QRegularExpression anchorRx(QLatin1String("<a\\s+?[^>]*?href\\s*?=\\s*?\"(https://m.bedetheque.com/BD.+?)\".*?>(.*?)</a"),
+  static const QRegularExpression anchorRx(QStringLiteral("<a\\s+?[^>]*?href\\s*?=\\s*?\"(https://m.bedetheque.com/BD.+?)\".*?>(.*?)</a"),
                                            QRegularExpression::DotMatchesEverythingOption | QRegularExpression::CaseInsensitiveOption);
-  static const QRegularExpression spanRx(QLatin1String("\\sclass\\s*?=\\s*?\"(.+?)\">(.+?)<"),
+  static const QRegularExpression spanRx(QStringLiteral("\\sclass\\s*?=\\s*?\"(.+?)\">(.+?)<"),
                                          QRegularExpression::DotMatchesEverythingOption);
 
   auto i = anchorRx.globalMatch(output);
@@ -326,8 +326,8 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
     coll->addField(field);
   }
 
-  static const QRegularExpression tagRx(QLatin1String("<.*?>"));
-  static const QRegularExpression yearRx(QLatin1String("\\d{4}"));
+  static const QRegularExpression tagRx(QStringLiteral("<.*?>"));
+  static const QRegularExpression yearRx(QStringLiteral("\\d{4}"));
   // the negative lookahead with "no-border" is for multiple values
   const QString pat = QStringLiteral("<label>%1.*?</label>(.+?)</li>(?!\\s*<li class=\"no-border)");
 
@@ -367,7 +367,7 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
     // myDebug() << it.value() << entry->field(it.value());
   }
 
-  static const QRegularExpression imgRx(QLatin1String("<img.+?src\\s*=\\s*\"(.+?)\"\\s+alt\\s*=\\s*\"Couverture"));
+  static const QRegularExpression imgRx(QStringLiteral("<img.+?src\\s*=\\s*\"(.+?)\"\\s+alt\\s*=\\s*\"Couverture"));
   auto imgMatch = imgRx.match(str_);
   if(imgMatch.hasMatch()) {
     const QUrl u(imgMatch.captured(1));
@@ -378,7 +378,7 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
   }
 
   if(optionalFields().contains(QStringLiteral("comments"))) {
-    static const QRegularExpression chronRx(QLatin1String("La chronique\\s*</li>\\s*<li.*?>(.+?)</ul>"),
+    static const QRegularExpression chronRx(QStringLiteral("La chronique\\s*</li>\\s*<li.*?>(.+?)</ul>"),
                                             QRegularExpression::DotMatchesEverythingOption);
     auto chronMatch = chronRx.match(str_);
     if(chronMatch.hasMatch()) {
@@ -387,7 +387,7 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
   }
 
   if(optionalFields().contains(QStringLiteral("lien-bel"))) {
-    static const QRegularExpression linkRx(QLatin1String("<link\\s+rel\\s*=\\s*\"canonical\"\\s+href\\s*=\\s*\"(.+?)\""));
+    static const QRegularExpression linkRx(QStringLiteral("<link\\s+rel\\s*=\\s*\"canonical\"\\s+href\\s*=\\s*\"(.+?)\""));
     auto linkMatch = linkRx.match(str_);
     if(linkMatch.hasMatch()) {
       entry->setField(QStringLiteral("lien-bel"), linkMatch.captured(1));

@@ -64,7 +64,7 @@ void TheMovieDBFetcherTest::testTitle() {
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 2);
   Tellico::Data::EntryPtr entry;
   for(const auto& testEntry : std::as_const(results)) {
-    if(testEntry->field("year") == QLatin1String("2006")) {
+    if(testEntry->field(QStringLiteral("year")) == QLatin1String("2006")) {
       entry = testEntry;
       break;
     }
@@ -125,7 +125,7 @@ void TheMovieDBFetcherTest::testBabel() {
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 2);
   Tellico::Data::EntryPtr entry;
   for(const auto& testEntry : std::as_const(results)) {
-    if(testEntry->field("year") == QLatin1String("2006")) {
+    if(testEntry->field(QStringLiteral("year")) == QLatin1String("2006")) {
       entry = testEntry;
       break;
     }

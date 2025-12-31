@@ -51,11 +51,11 @@ void OPDSFetcherTest::initTestCase() {
 }
 
 void OPDSFetcherTest::testEmptyGutenberg() {
-  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group("Feedbooks");
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("Feedbooks"));
   cg.writeEntry("Catalog", "https://m.gutenberg.org/ebooks.opds/");
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
-                                       "XXXXXXXXXXXX");
+                                       QStringLiteral("XXXXXXXXXXXX"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
   QVERIFY(fetcher->canSearch(request.key()));
   fetcher->readConfig(cg);
@@ -69,7 +69,7 @@ void OPDSFetcherTest::testEmptyGutenberg() {
 
 void OPDSFetcherTest::testRelativeSearch() {
   QUrl catalog = QUrl::fromLocalFile(QFINDTESTDATA("data/opds-relative-search.xml"));
-  QUrl search = catalog.resolved(QUrl(QLatin1String("../opensearch.xml")));
+  QUrl search = catalog.resolved(QUrl(QStringLiteral("../opensearch.xml")));
   Tellico::Fetch::OPDSFetcher::Reader reader(catalog);
 
   QVERIFY(reader.parse());
@@ -81,11 +81,11 @@ void OPDSFetcherTest::testRelativeSearch() {
 
 void OPDSFetcherTest::testAcquisitionByTitle() {
   QUrl catalog = QUrl::fromLocalFile(QFINDTESTDATA("data/opds-acquisition.xml"));
-  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group("Feedbooks");
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("Feedbooks"));
   cg.writeEntry("Catalog", catalog.url());
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
-                                       "Pride and Prejudice");
+                                       QStringLiteral("Pride and Prejudice"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
   QVERIFY(fetcher->canSearch(request.key()));
   fetcher->readConfig(cg);
@@ -106,11 +106,11 @@ void OPDSFetcherTest::testAcquisitionByTitle() {
 
 void OPDSFetcherTest::testAcquisitionByTitleNegative() {
   QUrl catalog = QUrl::fromLocalFile(QFINDTESTDATA("data/opds-acquisition.xml"));
-  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group("Feedbooks");
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("Feedbooks"));
   cg.writeEntry("Catalog", catalog.url());
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
-                                       "Nonexistent");
+                                       QStringLiteral("Nonexistent"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
   QVERIFY(fetcher->canSearch(request.key()));
   fetcher->readConfig(cg);
@@ -121,11 +121,11 @@ void OPDSFetcherTest::testAcquisitionByTitleNegative() {
 
 void OPDSFetcherTest::testAcquisitionByKeyword() {
   QUrl catalog = QUrl::fromLocalFile(QFINDTESTDATA("data/opds-acquisition.xml"));
-  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group("Feedbooks");
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("Feedbooks"));
   cg.writeEntry("Catalog", catalog.url());
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword,
-                                       "fizzes");
+                                       QStringLiteral("fizzes"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
   fetcher->readConfig(cg);
 
@@ -136,11 +136,11 @@ void OPDSFetcherTest::testAcquisitionByKeyword() {
 
 void OPDSFetcherTest::testCalibre() {
   QUrl catalog = QUrl::fromLocalFile(QFINDTESTDATA("data/opds-calibre.xml"));
-  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group("Calibre");
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("Calibre"));
   cg.writeEntry("Catalog", catalog.url());
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
-                                       "1632");
+                                       QStringLiteral("1632"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OPDSFetcher(this));
   fetcher->readConfig(cg);
 

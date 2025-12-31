@@ -219,7 +219,7 @@ void DocumentTest::testSaveTemplate() {
 
 void DocumentTest::testView() {
   Tellico::EntryView view(nullptr);
-  view.setXSLTFile(QLatin1String("Fancy.xsl"));
+  view.setXSLTFile(QStringLiteral("Fancy.xsl"));
 
   Tellico::Config::setImageLocation(Tellico::Config::ImagesInLocalDir);
   // the default collection will use a temporary directory as a local image dir
@@ -261,14 +261,14 @@ void DocumentTest::testView() {
   // Search for an entry, show it in a second view (like the FetchDialog does)
   Tellico::Data::CollPtr newColl(new Tellico::Data::BookCollection(true));
   Tellico::Data::EntryPtr newEntry(new Tellico::Data::Entry(newColl));
-  newEntry->setField(QLatin1String("title"), QLatin1String("new title"));
+  newEntry->setField(QStringLiteral("title"), QStringLiteral("new title"));
 
   const QUrl imageUrl = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
   const auto newImageId = Tellico::ImageFactory::addImage(imageUrl, true);
-  newEntry->setField(QLatin1String("cover"), newImageId);
+  newEntry->setField(QStringLiteral("cover"), newImageId);
 
   Tellico::EntryView view2(nullptr);
-  view2.setXSLTFile(QLatin1String("Fancy.xsl"));
+  view2.setXSLTFile(QStringLiteral("Fancy.xsl"));
   view2.showEntry(newEntry);
   // new image should not exist in the data dir
   QCOMPARE(imageDir.exists(newImageId), false);

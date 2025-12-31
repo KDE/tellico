@@ -80,9 +80,9 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
   bool empty = true;
 
   // in format "(tag, tag) value"
-  static const QRegularExpression rx(QLatin1String("^\\s*\\((\\d+),\\s*(.+)\\s*\\)\\s*(.+)\\s*$"));
-  static const QRegularExpression dateRx(QLatin1String(",[^,]*\\d{3,4}[^,]*")); // remove dates from authors
-  static const QRegularExpression pubRx(QLatin1String("([^:]+):([^,]+),?")); // split location and publisher
+  static const QRegularExpression rx(QStringLiteral("^\\s*\\((\\d+),\\s*(.+)\\s*\\)\\s*(.+)\\s*$"));
+  static const QRegularExpression dateRx(QStringLiteral(",[^,]*\\d{3,4}[^,]*")); // remove dates from authors
+  static const QRegularExpression pubRx(QStringLiteral("([^:]+):([^,]+),?")); // split location and publisher
 
   bool ok;
   int n;

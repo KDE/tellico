@@ -155,7 +155,8 @@ void MRLookupFetcher::slotComplete(KJob* job_) {
   QString bibtexString;
 
   // grab everything within the <pre></pre> block
-  static const QRegularExpression preRx(QLatin1String("<pre>(.+?)</pre>"), QRegularExpression::DotMatchesEverythingOption);
+  static const QRegularExpression preRx(QStringLiteral("<pre>(.+?)</pre>"),
+                                        QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatchIterator i = preRx.globalMatch(text);
   while(i.hasNext()) {
     QRegularExpressionMatch match = i.next();

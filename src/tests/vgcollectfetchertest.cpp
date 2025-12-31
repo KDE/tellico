@@ -59,8 +59,8 @@ void VGCollectFetcherTest::testKeyword() {
   // want the Wii version
   Tellico::Data::EntryPtr entry;
   foreach(Tellico::Data::EntryPtr tryEntry, results) {
-    if(tryEntry->field("platform") == QLatin1String("Xbox One") &&
-       tryEntry->field("publisher") == QLatin1String("Microsoft")) {
+    if(tryEntry->field(QStringLiteral("platform")) == QLatin1String("Xbox One") &&
+       tryEntry->field(QStringLiteral("publisher")) == QLatin1String("Microsoft")) {
       entry = tryEntry;
       break;
     }

@@ -163,7 +163,7 @@ void DoubanFetcherTest::testVideo() {
 
 void DoubanFetcherTest::testMusic() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
-                                       QLatin1String("Top Gun Original Motion Picture"));
+                                       QStringLiteral("Top Gun Original Motion Picture"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -190,7 +190,7 @@ void DoubanFetcherTest::testMusic() {
 
 void DoubanFetcherTest::testMusicAdele() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
-                                       QLatin1String("Adele 21"));
+                                       QStringLiteral("Adele 21"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -215,7 +215,7 @@ void DoubanFetcherTest::testMusicAdele() {
 
 void DoubanFetcherTest::testMusicArtPepper() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
-                                       QLatin1String("Art Pepper Meets the Rhythm Section"));
+                                       QStringLiteral("Art Pepper Meets the Rhythm Section"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);

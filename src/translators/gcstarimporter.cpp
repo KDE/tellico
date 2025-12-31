@@ -98,7 +98,7 @@ Tellico::Data::CollPtr GCstarImporter::collection() {
       line = t.readLine();
     }
     QString collType;
-    static const QRegularExpression typeRx(QLatin1String("type=\"([^\"]+)\""));
+    static const QRegularExpression typeRx(QStringLiteral("type=\"([^\"]+)\""));
     auto typeMatch = typeRx.match(line);
     if(typeMatch.hasMatch()) {
       collType = typeMatch.captured(1);
@@ -121,10 +121,10 @@ void GCstarImporter::readGCfilms(const QString& text_) {
   }
 
   QHash<QString, Data::BorrowerPtr> borrowers;
-  static const QRegularExpression rx(QLatin1String("\\s*,\\s*"));
-  static const QRegularExpression year(QLatin1String("\\d{4}"));
-  static const QRegularExpression runTimeHr(QLatin1String("(\\d+)\\s?hr?"));
-  static const QRegularExpression runTimeMin(QLatin1String("(\\d+)\\s?mi?n?"));
+  static const QRegularExpression rx(QStringLiteral("\\s*,\\s*"));
+  static const QRegularExpression year(QStringLiteral("\\d{4}"));
+  static const QRegularExpression runTimeHr(QStringLiteral("(\\d+)\\s?hr?"));
+  static const QRegularExpression runTimeMin(QStringLiteral("(\\d+)\\s?mi?n?"));
 
   bool gotFirstLine = false;
 

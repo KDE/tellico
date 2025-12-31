@@ -386,7 +386,7 @@ Tellico::Fetch::FetcherVec Manager::createUpdateFetchers(int collType_) {
   }
 
   FetcherVec vec;
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Data Sources"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Data Sources"));
   int nSources = config.readEntry("Sources Count", 0);
   for(int i = 0; i < nSources; ++i) {
     QString group = QStringLiteral("Data Source %1").arg(i);

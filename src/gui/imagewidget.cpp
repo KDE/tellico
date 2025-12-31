@@ -123,7 +123,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(nullpt
   connect(m_edit, &QAbstractButton::clicked, this, &ImageWidget::slotEditImage);
   boxLayout->addWidget(m_edit);
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("EditImage"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("EditImage"));
   QString editor = config.readEntry("editor");
   m_editMenu = new QMenu(this);
   QActionGroup* grp = new QActionGroup(this);
@@ -170,7 +170,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(nullpt
 
 ImageWidget::~ImageWidget() {
   if(m_editor) {
-    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("EditImage"));
+    KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("EditImage"));
     config.writeEntry("editor", m_editor->name());
   }
 }

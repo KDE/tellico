@@ -102,7 +102,7 @@ void IMDBFetcher::search() {
   QJsonObject vars;
   switch(request().key()) {
     case Title:
-      operationName = QLatin1String("Search");
+      operationName = QStringLiteral("Search");
       query = searchQuery();
       vars.insert(QLatin1String("searchTerms"), request().value());
       break;
@@ -113,13 +113,13 @@ void IMDBFetcher::search() {
         QRegularExpression ttEndRx(QStringLiteral("/(tt\\d+)/?$"));
         auto match = ttEndRx.match(request().value());
         if(match.hasMatch()) {
-          operationName = QLatin1String("TitleFull");
+          operationName = QStringLiteral("TitleFull");
           query = titleQuery();
           vars.insert(QLatin1String("id"), match.captured(1));
         } else {
           // fallback to a general search
           myDebug() << "bad url";
-          operationName = QLatin1String("Search");
+          operationName = QStringLiteral("Search");
           query = searchQuery();
           vars.insert(QLatin1String("searchTerms"), request().value());
         }
@@ -138,7 +138,7 @@ void IMDBFetcher::search() {
   payload.insert(QLatin1String("variables"), vars);
 
   m_job = KIO::storedHttpPost(QJsonDocument(payload).toJson(),
-                              QUrl(QLatin1String("https://api.graphql.imdb.com")),
+                              QUrl(QStringLiteral("https://api.graphql.imdb.com")),
                               KIO::HideProgressInfo);
   configureJob(m_job);
   connect(m_job.data(), &KJob::result,
@@ -261,7 +261,7 @@ void IMDBFetcher::configureJob(QPointer<KIO::StoredTransferJob> job_) {
   KJobWidgets::setWindow(job_, GUI::Proxy::widget());
   job_->addMetaData(QStringLiteral("content-type"), QStringLiteral("Content-Type: application/json"));
   job_->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
-  job_->addMetaData(QStringLiteral("origin"), QLatin1String("https://www.imdb.com"));
+  job_->addMetaData(QStringLiteral("origin"), QStringLiteral("https://www.imdb.com"));
   QStringList headers;
   headers += QStringLiteral("x-imdb-client-name: imdb-web-next-localized");
 
@@ -283,7 +283,7 @@ void IMDBFetcher::configureJob(QPointer<KIO::StoredTransferJob> job_) {
 }
 
 Tellico::Data::EntryPtr IMDBFetcher::readGraphQL(const QString& imdbId_, const QString& titleType_) {
-  const auto query = titleType_ == QLatin1String("TV Series") ? episodeQuery() : titleQuery();
+  const auto query = titleType_ == QLatin1StringView("TV Series") ? episodeQuery() : titleQuery();
   QJsonObject vars;
   vars.insert(QLatin1String("id"), imdbId_);
 
@@ -293,7 +293,7 @@ Tellico::Data::EntryPtr IMDBFetcher::readGraphQL(const QString& imdbId_, const Q
   payload.insert(QLatin1String("variables"), vars);
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedHttpPost(QJsonDocument(payload).toJson(),
-                                                             QUrl(QLatin1String("https://api.graphql.imdb.com")),
+                                                             QUrl(QStringLiteral("https://api.graphql.imdb.com")),
                                                              KIO::HideProgressInfo);
   configureJob(job);
 
@@ -374,11 +374,11 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
   QString cert = objValue(obj, "certificate", "rating");
   if(!cert.isEmpty()) {
     // set default certification, assuming US for now
-    if(cert == QLatin1String("Not Rated")) {
+    if(cert == QLatin1StringView("Not Rated")) {
       cert = QLatin1Char('U');
     }
     const QString certCountry = objValue(obj, "certificate", "country", "text");
-    if(certCountry == QLatin1String("United States")) {
+    if(certCountry == QLatin1StringView("United States")) {
       cert += QStringLiteral(" (USA)");
     } else if(!certCountry.isEmpty()) {
       cert += QStringLiteral(" (%1)").arg(certCountry);
@@ -468,7 +468,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
   }
 
   const QString episode(QStringLiteral("episode"));
-  if(objValue(obj, "titleType", "text") == QLatin1String("TV Series") &&
+  if(objValue(obj, "titleType", "text") == QLatin1StringView("TV Series") &&
      optionalFields().contains(episode)) {
     coll->addField(Data::Field::createDefaultField(Data::Field::EpisodeField));
     QStringList episodes;
@@ -495,8 +495,8 @@ QString IMDBFetcher::defaultName() {
 }
 
 QString IMDBFetcher::defaultIcon() {
-  return favIcon(QUrl(QLatin1String("https://www.imdb.com")),
-                 QUrl(QLatin1String("https://m.media-amazon.com/images/G/01/imdb/images-ANDW73HA/favicon_desktop_32x32._CB1582158068_.png")));
+  return favIcon(QUrl(QStringLiteral("https://www.imdb.com")),
+                 QUrl(QStringLiteral("https://m.media-amazon.com/images/G/01/imdb/images-ANDW73HA/favicon_desktop_32x32._CB1582158068_.png")));
 }
 
 //static

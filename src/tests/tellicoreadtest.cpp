@@ -504,7 +504,7 @@ void TellicoReadTest::testDataImage() {
   QString fileText = in.readAll();
   // replace %COVER% with image file location
   fileText.replace(QSL("%COVER%"),
-                   QString::fromUtf8("data:image/png;base64,") +
+                   QLatin1String("data:image/png;base64,") +
                    QLatin1String(imgData));
 
   Tellico::Import::TellicoImporter importer(fileText);
@@ -551,7 +551,7 @@ void TellicoReadTest::testXMLHandler_data() {
   QTest::newRow("LATIN1") << QByteArray("<?xml version=\"1.0\" encoding=\"LATIN1\"?>\n<x>value</x>")
                           << QStringLiteral("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<x>value</x>") << true;
 
-  QString usa = QString::fromUtf8("США");
+  QString usa = QStringLiteral("США");
   QStringEncoder toCp1251("cp1251");
   QByteArray usaBytes = QByteArray("<?xml version=\"1.0\" encoding=\"cp1251\"?>\n<x>")
                       + QByteArray(toCp1251(usa))
@@ -677,7 +677,7 @@ void TellicoReadTest::testRelativeLink() {
   QVERIFY(handler.isValid());
 
   Tellico::Data::Document::self()->setURL(url); // set the base url
-  QUrl expected = url.resolved(QUrl(QLatin1String("collectorz/image.png")));
+  QUrl expected = url.resolved(QUrl(QStringLiteral("collectorz/image.png")));
 
   Tellico::Export::TellicoXMLExporter exp(coll, url);
   exp.setEntries(coll->entries());
@@ -744,7 +744,7 @@ void TellicoReadTest::testBug443845() {
 
 void TellicoReadTest::testEmoji() {
   // https://www.fileformat.info/info/unicode/char/1f3e1/index.htm
-  const QString textWithEmoji = QString::fromUtf8("Title 🏡️");
+  const QString textWithEmoji = QStringLiteral("Title 🏡️");
   // stripping control codes should not affect the emoji
   QCOMPARE(Tellico::removeControlCodes(textWithEmoji), textWithEmoji);
 
@@ -804,7 +804,7 @@ void TellicoReadTest::testRemote() {
   QVERIFY(tempDir.isValid());
   tempDir.setAutoRemove(true);
   tempDirName = tempDir.path();
-  QString image = QLatin1String("17b54b2a742c6d342a75f122d615a793.jpeg");
+  QString image = QStringLiteral("17b54b2a742c6d342a75f122d615a793.jpeg");
   QString fileName = tempDirName +      QLatin1String("/with-local-image.tc");
   QString imageDirName = tempDirName +  QLatin1String("/with-local-image_files/");
   QString imageFileName = imageDirName + image;
@@ -829,7 +829,7 @@ void TellicoReadTest::testRemote() {
   QVERIFY(!coll->entries().isEmpty());
   auto entry = coll->entries().front();
   QVERIFY(entry);
-  auto cover = entry->field(QLatin1String("cover"));
+  auto cover = entry->field(QStringLiteral("cover"));
   QVERIFY(!cover.isEmpty());
   QCOMPARE(cover, image);
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(image));
@@ -849,7 +849,7 @@ void TellicoReadTest::testImageLocation() {
 
   Tellico::Config::setImageLocation(Tellico::Config::ImagesInFile);
   const QString fileName = QFINDTESTDATA("data/with-local-image.tc");
-  const QString image = QLatin1String("17b54b2a742c6d342a75f122d615a793.jpeg");
+  const QString image = QStringLiteral("17b54b2a742c6d342a75f122d615a793.jpeg");
 
   Tellico::Data::Document::self()->openDocument(QUrl::fromLocalFile(fileName));
   Tellico::Data::CollPtr coll = Tellico::Data::Document::self()->collection();
@@ -857,7 +857,7 @@ void TellicoReadTest::testImageLocation() {
   QVERIFY(!coll->entries().isEmpty());
   auto entry = coll->entries().front();
   QVERIFY(entry);
-  auto cover = entry->field(QLatin1String("cover"));
+  auto cover = entry->field(QStringLiteral("cover"));
   QVERIFY(!cover.isEmpty());
   QCOMPARE(cover, image);
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(image));

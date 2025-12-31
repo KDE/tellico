@@ -93,7 +93,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   QVERIFY(!entry->field("plot").contains('>'));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
-  auto imageInfo = Tellico::ImageFactory::imageInfo(entry->field("cover"));
+  auto imageInfo = Tellico::ImageFactory::imageInfo(entry->field(QStringLiteral("cover")));
   QVERIFY(imageInfo.height() <= 256);
   QVERIFY(imageInfo.width() <= 256);
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("alttitle")));
@@ -104,7 +104,7 @@ void ImdbFetcherTest::testSnowyRiver() {
 void ImdbFetcherTest::testSnowyRiverFr() {
   QLocale::setDefault(QLocale(QLocale::French, QLocale::France));
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "The Man From Snowy River");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("The Man From Snowy River"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
   fetcher->readConfig(m_config);
 
@@ -129,7 +129,7 @@ void ImdbFetcherTest::testSnowyRiverFr() {
   QCOMPARE(entry->field("director"), QLatin1String("George Miller"));
   QCOMPARE(entry->field("certification"), QLatin1String("PG (USA)"));
   QCOMPARE(set(entry->field("writer")), set(QLatin1String("Cul Cullen; A.B. 'Banjo' Paterson; John Dixon")));
-  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
   QCOMPARE(entry->field("imdb"), QLatin1String("https://www.imdb.com/title/tt0084296/"));
   QVERIFY(!entry->field("imdb-rating").isEmpty());
@@ -144,7 +144,7 @@ void ImdbFetcherTest::testPacteDesLoupsEn() {
   m_config.writeEntry("Custom Locale", "en_US");
   QLocale::setDefault(QLocale(QLocale::French, QLocale::France));
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Pacte des Loups");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Pacte des Loups"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
   fetcher->readConfig(m_config);
 
@@ -326,7 +326,7 @@ void ImdbFetcherTest::testUpdate() {
   Tellico::Data::CollPtr coll(new Tellico::Data::VideoCollection(true));
   coll->addField(Tellico::Data::Field::createDefaultField(Tellico::Data::Field::ImdbField));
   Tellico::Data::EntryPtr emptyEntry(new Tellico::Data::Entry(coll));
-  emptyEntry->setField(QLatin1String("imdb"), QStringLiteral("https://www.imdb.com/title/tt0084296/"));
+  emptyEntry->setField(QStringLiteral("imdb"), QStringLiteral("https://www.imdb.com/title/tt0084296/"));
 
   m_config.writeEntry("Custom Fields", QStringLiteral("imdb,episode"));
   Tellico::Fetch::IMDBFetcher fetcher(this);

@@ -108,14 +108,14 @@ void ItunesFetcher::search() {
     case Keyword:
       u.setPath(u.path() + QLatin1String("/search"));
       if(collectionType() == Data::Collection::Book) {
-        q.addQueryItem(QStringLiteral("media"), QLatin1String("audiobook,ebook"));
-        q.addQueryItem(QStringLiteral("entity"), QLatin1String("audiobook,ebook"));
+        q.addQueryItem(QStringLiteral("media"), QStringLiteral("audiobook,ebook"));
+        q.addQueryItem(QStringLiteral("entity"), QStringLiteral("audiobook,ebook"));
       } else if(collectionType() == Data::Collection::Album) {
-        q.addQueryItem(QStringLiteral("media"), QLatin1String("music"));
-        q.addQueryItem(QStringLiteral("entity"), QLatin1String("album"));
+        q.addQueryItem(QStringLiteral("media"), QStringLiteral("music"));
+        q.addQueryItem(QStringLiteral("entity"), QStringLiteral("album"));
       } else if(collectionType() == Data::Collection::Video) {
-        q.addQueryItem(QStringLiteral("media"), QLatin1String("movie,tvShow"));
-        q.addQueryItem(QStringLiteral("entity"), QLatin1String("movie,tvSeason,allTrack"));
+        q.addQueryItem(QStringLiteral("media"), QStringLiteral("movie,tvShow"));
+        q.addQueryItem(QStringLiteral("entity"), QStringLiteral("movie,tvSeason,allTrack"));
       }
       q.addQueryItem(QStringLiteral("limit"), QString::number(ITUNES_MAX_RETURNS_TOTAL));
       q.addQueryItem(QStringLiteral("term"), QString::fromLatin1(QUrl::toPercentEncoding(request().value())));
@@ -137,7 +137,7 @@ void ItunesFetcher::search() {
       u.setPath(u.path() + QLatin1String("/lookup"));
       if(collectionType() == Data::Collection::Album) {
         // include songs
-        q.addQueryItem(QStringLiteral("entity"), QLatin1String("song"));
+        q.addQueryItem(QStringLiteral("entity"), QStringLiteral("song"));
       }
       q.addQueryItem(QStringLiteral("upc"), request().value());
       break;
@@ -286,14 +286,14 @@ Tellico::Data::EntryPtr ItunesFetcher::fetchEntryHook(uint uid_) {
   }
 
   // check if tracks need to be downloaded
-  const QString collectionId = entry->field(QLatin1String("collectionId"));
+  const QString collectionId = entry->field(QStringLiteral("collectionId"));
   if(!collectionId.isEmpty() && collectionType() == Data::Collection::Album &&
-     entry->field(QLatin1String("track")).isEmpty()) {
+     entry->field(QStringLiteral("track")).isEmpty()) {
     QUrl u(QString::fromLatin1(ITUNES_API_URL));
     u = u.adjusted(QUrl::StripTrailingSlash);
     u.setPath(u.path() + QLatin1String("/lookup"));
     QUrlQuery q;
-    q.addQueryItem(QStringLiteral("entity"), QLatin1String("song"));
+    q.addQueryItem(QStringLiteral("entity"), QStringLiteral("song"));
     q.addQueryItem(QStringLiteral("id"), collectionId);
     u.setQuery(q);
     auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -475,12 +475,12 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_
 }
 
 void ItunesFetcher::populateEpisodes(Data::EntryPtr entry_) {
-  const QString collectionId = entry_->field(QLatin1String("collectionId"));
+  const QString collectionId = entry_->field(QStringLiteral("collectionId"));
   QUrl u(QString::fromLatin1(ITUNES_API_URL));
   u = u.adjusted(QUrl::StripTrailingSlash);
   u.setPath(u.path() + QLatin1String("/lookup"));
   QUrlQuery q;
-  q.addQueryItem(QStringLiteral("entity"), QLatin1String("tvEpisode"));
+  q.addQueryItem(QStringLiteral("entity"), QStringLiteral("tvEpisode"));
   q.addQueryItem(QStringLiteral("id"), collectionId);
   u.setQuery(q);
 
@@ -605,7 +605,7 @@ ItunesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ItunesFetcher*
   }
   m_countryCombo->setCurrentData(code);
   m_countryCombo->setEditable(true); // allow custom entry
-  QRegularExpression rx(QLatin1String("\\w\\w")); // only 2 characters
+  QRegularExpression rx(QStringLiteral("\\w\\w")); // only 2 characters
   m_countryCombo->setValidator(new QRegularExpressionValidator(rx, this));
   connect(m_countryCombo, activatedInt, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_countryCombo, row, 1);

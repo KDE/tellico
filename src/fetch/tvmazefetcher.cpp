@@ -69,7 +69,7 @@ QString TVmazeFetcher::source() const {
 
 // https://www.tvmaze.com/api#licensing
 QString TVmazeFetcher::attribution() const {
-  return TC_I18N3(providedBy, QLatin1String("https://tvmaze.com"), QLatin1String("TVmaze"));
+  return TC_I18N3(providedBy, QStringLiteral("https://tvmaze.com"), QStringLiteral("TVmaze"));
 }
 
 bool TVmazeFetcher::canSearch(Fetch::FetchKey k) const {
@@ -230,13 +230,13 @@ Tellico::Data::EntryPtr TVmazeFetcher::fetchEntryHook(uint uid_) {
     QUrl u(QString::fromLatin1(TVMAZE_API_URL));
     u.setPath(QStringLiteral("/shows/%1").arg(id));
     QUrlQuery q;
-    q.addQueryItem(QStringLiteral("embed[]"), QLatin1String("cast"));
-    q.addQueryItem(QStringLiteral("embed[]"), QLatin1String("crew"));
+    q.addQueryItem(QStringLiteral("embed[]"), QStringLiteral("cast"));
+    q.addQueryItem(QStringLiteral("embed[]"), QStringLiteral("crew"));
     if(optionalFields().contains(QStringLiteral("episode"))) {
-      q.addQueryItem(QStringLiteral("embed[]"), QLatin1String("episodes"));
+      q.addQueryItem(QStringLiteral("embed[]"), QStringLiteral("episodes"));
     }
     if(optionalFields().contains(QStringLiteral("alttitle"))) {
-      q.addQueryItem(QStringLiteral("embed[]"), QLatin1String("akas"));
+      q.addQueryItem(QStringLiteral("embed[]"), QStringLiteral("akas"));
     }
     u.setQuery(q);
     QByteArray data = FileHandler::readDataFile(u, true);

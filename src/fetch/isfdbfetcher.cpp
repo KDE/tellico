@@ -55,7 +55,7 @@ QString ISFDBFetcher::source() const {
 }
 
 QString ISFDBFetcher::attribution() const {
-  return TC_I18N3(providedBy, QLatin1String("https://isfdb.org"), QLatin1String("The Internet Speculative Fiction Database"));
+  return TC_I18N3(providedBy, QStringLiteral("https://isfdb.org"), QStringLiteral("The Internet Speculative Fiction Database"));
 }
 
 bool ISFDBFetcher::canSearch(Fetch::FetchKey k) const {
@@ -109,7 +109,7 @@ Tellico::Data::EntryPtr ISFDBFetcher::fetchEntryHookData(Data::EntryPtr entry_) 
   Q_ASSERT(entry_);
 
   // clean up pages value
-  static const QRegularExpression digits(QLatin1String("^[^\\d]*(\\d+)"));
+  static const QRegularExpression digits(QStringLiteral("^[^\\d]*(\\d+)"));
   const QString pageField(QStringLiteral("pages"));
   const QString pages = entry_->field(pageField);
   auto match = digits.match(pages);
@@ -120,7 +120,7 @@ Tellico::Data::EntryPtr ISFDBFetcher::fetchEntryHookData(Data::EntryPtr entry_) 
   // manually split publisher
   const QString pubField(QStringLiteral("publisher"));
   const QString pub = entry_->field(pubField);
-  const auto list = pub.split(QLatin1String(" / "));
+  const auto list = pub.split(QStringLiteral(" / "));
   entry_->setField(pubField, list.join(FieldFormat::delimiterString()));
 
   return entry_;

@@ -43,7 +43,7 @@ ParaFieldWidget::ParaFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
   void (KTextEdit::* textChanged)() = &KTextEdit::textChanged;
   connect(m_textEdit, textChanged, this, &ParaFieldWidget::checkModified);
 
-  m_brRx = QRegularExpression(QLatin1String("<br/?>"), QRegularExpression::CaseInsensitiveOption);
+  m_brRx = QRegularExpression(QStringLiteral("<br/?>"), QRegularExpression::CaseInsensitiveOption);
 
   registerWidget();
 }

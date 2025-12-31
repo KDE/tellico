@@ -71,19 +71,19 @@ const FilmAffinityFetcher::LocaleData& FilmAffinityFetcher::localeData(int local
     {
       QStringLiteral("es"),
       QStringLiteral("(Serie de TV)"),
-      QString::fromUtf8("Año"),
+      QStringLiteral("Año"),
       QStringLiteral("Título original"),
       QStringLiteral("País"),
-      QString::fromUtf8("Duración"),
-      QString::fromUtf8("Dirección"),
+      QStringLiteral("Duración"),
+      QStringLiteral("Dirección"),
       QStringLiteral("Reparto"),
-      QString::fromUtf8("Género"),
+      QStringLiteral("Género"),
       QStringLiteral("Guion"),
       QStringLiteral("Historia:"),
-      QString::fromUtf8("Compañías"),
+      QStringLiteral("Compañías"),
       QStringLiteral("Distribuidora"),
       QStringLiteral("Emitida por:"),
-      QString::fromUtf8("Música"),
+      QStringLiteral("Música"),
       QStringLiteral("Sinopsis")
     },
     {
@@ -150,7 +150,7 @@ void FilmAffinityFetcher::search() {
   switch(request().key()) {
     case Title:
       //q.addQueryItem(QStringLiteral("year"), QStringLiteral("yes"));
-      q.addQueryItem(QStringLiteral("stype[]"), QLatin1String("title"));
+      q.addQueryItem(QStringLiteral("stype[]"), QStringLiteral("title"));
       break;
 
     default:
@@ -492,10 +492,10 @@ FilmAffinityFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const FilmAffi
   l->addWidget(label, ++row, 0);
   m_localeCombo = new GUI::ComboBox(optionsWidget());
   m_localeCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String("es"))),
-                         KLanguageName::nameForCode(QLatin1String("es")),
+                         KLanguageName::nameForCode(QStringLiteral("es")),
                          int(FilmAffinityFetcher::ES));
   m_localeCombo->addItem(QIcon(new KCountryFlagEmojiIconEngine(QLatin1String("us"))),
-                         KLanguageName::nameForCode(QLatin1String("en")),
+                         KLanguageName::nameForCode(QStringLiteral("en")),
                          int(FilmAffinityFetcher::US));
   void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
   connect(m_localeCombo, activatedInt, this, &ConfigWidget::slotSetModified);

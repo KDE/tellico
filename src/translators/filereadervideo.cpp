@@ -151,10 +151,10 @@ bool FileReaderVideo::populateNfo(Data::EntryPtr entry_, const QString& nfoFile_
   }
 
   auto root = dom.documentElement();
-  if(root.nodeName() == QLatin1String("xml")) {
-    root = root.firstChildElement(QLatin1String("movie"));
+  if(root.nodeName() == QLatin1StringView("xml")) {
+    root = root.firstChildElement(QStringLiteral("movie"));
   }
-  if(root.nodeName() != QLatin1String("movie")) {
+  if(root.nodeName() != QLatin1StringView("movie")) {
     myDebug() << "Bad content of" << nfoFile_;
     return false;
   }
@@ -165,57 +165,57 @@ bool FileReaderVideo::populateNfo(Data::EntryPtr entry_, const QString& nfoFile_
   for(int i = 0; i < childList.count(); ++i) {
     auto elem = childList.at(i).toElement();
     if(elem.isNull()) continue;
-    if(elem.tagName() == QLatin1String("title")) {
+    if(elem.tagName() == QLatin1StringView("title")) {
       entry_->setField(QStringLiteral("title"), elem.text());
       isEmpty = false;
-    } else if(elem.tagName() == QLatin1String("originaltitle")) {
+    } else if(elem.tagName() == QLatin1StringView("originaltitle")) {
       const QString orig(QStringLiteral("origtitle"));
       if(!entry_->collection()->hasField(orig)) {
         Data::FieldPtr f(new Data::Field(orig, i18n("Original Title")));
         entry_->collection()->addField(f);
       }
       entry_->setField(orig, elem.text());
-    } else if(elem.tagName() == QLatin1String("country")) {
+    } else if(elem.tagName() == QLatin1StringView("country")) {
       QString nat = elem.text();
-      if(nat == QLatin1String("US") || nat.compare(QLatin1String("united States Of America"), Qt::CaseInsensitive) == 0) {
-        nat = QLatin1String("USA");
+      if(nat == QLatin1StringView("US") || nat.compare(QLatin1String("united States Of America"), Qt::CaseInsensitive) == 0) {
+        nat = QStringLiteral("USA");
       }
       entry_->setField(QStringLiteral("nationality"), nat);
-    } else if(elem.tagName() == QLatin1String("runtime")) {
+    } else if(elem.tagName() == QLatin1StringView("runtime")) {
       entry_->setField(QStringLiteral("running-time"), elem.text());
-    } else if(elem.tagName() == QLatin1String("userrating")) {
+    } else if(elem.tagName() == QLatin1StringView("userrating")) {
       const auto s = elem.text();
-      if(!s.isEmpty() && s != QLatin1String("0") && s != QLatin1String("0.0")) {
+      if(!s.isEmpty() && s != QLatin1StringView("0") && s != QLatin1StringView("0.0")) {
         entry_->setField(QStringLiteral("rating"), elem.text());
       }
-    } else if(elem.tagName() == QLatin1String("year")) {
+    } else if(elem.tagName() == QLatin1StringView("year")) {
       entry_->setField(QStringLiteral("year"), elem.text());
-    } else if(elem.tagName() == QLatin1String("genre")) {
+    } else if(elem.tagName() == QLatin1StringView("genre")) {
       genres += elem.text();
-    } else if(elem.tagName() == QLatin1String("tag")) {
+    } else if(elem.tagName() == QLatin1StringView("tag")) {
       keywords += elem.text();
-    } else if(elem.tagName() == QLatin1String("set")) {
+    } else if(elem.tagName() == QLatin1StringView("set")) {
       // add set names as a keyword, as well
-      auto nameElem = elem.firstChildElement(QLatin1String("name"));
+      auto nameElem = elem.firstChildElement(QStringLiteral("name"));
       if(!nameElem.isNull()) {
         keywords += nameElem.text();
       }
-    } else if(elem.tagName() == QLatin1String("studio")) {
+    } else if(elem.tagName() == QLatin1StringView("studio")) {
       studios += elem.text();
-    } else if(elem.tagName() == QLatin1String("credits")) {
+    } else if(elem.tagName() == QLatin1StringView("credits")) {
       writers += elem.text();
-    } else if(elem.tagName() == QLatin1String("director")) {
+    } else if(elem.tagName() == QLatin1StringView("director")) {
       directors += elem.text();
-    } else if(elem.tagName() == QLatin1String("actor")) {
-      auto nameElem = elem.firstChildElement(QLatin1String("name"));
+    } else if(elem.tagName() == QLatin1StringView("actor")) {
+      auto nameElem = elem.firstChildElement(QStringLiteral("name"));
       if(!nameElem.isNull()) {
         QString actor = nameElem.toElement().text();
         if(actor.isEmpty()) continue;
-        auto roleElem = elem.firstChildElement(QLatin1String("role"));
+        auto roleElem = elem.firstChildElement(QStringLiteral("role"));
         if(!roleElem.isNull()) {
           actor += FieldFormat::columnDelimiterString() + roleElem.text();
         }
-        auto orderElem = elem.firstChildElement(QLatin1String("order"));
+        auto orderElem = elem.firstChildElement(QStringLiteral("order"));
         if(orderElem.isNull()) {
           actors += actor;
         } else {
@@ -224,27 +224,27 @@ bool FileReaderVideo::populateNfo(Data::EntryPtr entry_, const QString& nfoFile_
           actors[pos] = actor;
         }
       }
-    } else if(elem.tagName() == QLatin1String("mpaa")) {
-      static const QRegularExpression mpaaRx(QLatin1String("^(?:Rated)?\\s*(\\S+:)?(\\S+)"));
+    } else if(elem.tagName() == QLatin1StringView("mpaa")) {
+      static const QRegularExpression mpaaRx(QStringLiteral("^(?:Rated)?\\s*(\\S+:)?(\\S+)"));
       auto match = mpaaRx.match(elem.text());
       if(match.hasMatch()) {
         QString certCountry = match.captured(1);
         if(certCountry.endsWith(QLatin1Char(':'))) certCountry.chop(1);
-        if(certCountry.isEmpty() || certCountry == QLatin1String("US")) certCountry = QLatin1String("USA");
+        if(certCountry.isEmpty() || certCountry == QLatin1StringView("US")) certCountry = QStringLiteral("USA");
         const QString cert = QStringLiteral("%1 (%2)").arg(match.captured(2), certCountry);
         entry_->setField(QStringLiteral("certification"), cert);
       }
-    } else if(elem.tagName() == QLatin1String("plot")) {
+    } else if(elem.tagName() == QLatin1StringView("plot")) {
       entry_->setField(QStringLiteral("plot"), elem.text());
-    } else if(elem.tagName() == QLatin1String("uniqueid")) {
+    } else if(elem.tagName() == QLatin1StringView("uniqueid")) {
       const QString imdb(QStringLiteral("imdb"));
       const QString tmdb(QStringLiteral("tmdb"));
-      if(elem.attribute(QLatin1String("type")) == imdb) {
+      if(elem.attribute(QStringLiteral("type")) == imdb) {
         if(!entry_->collection()->hasField(imdb)) {
           entry_->collection()->addField(Data::Field::createDefaultField(Data::Field::ImdbField));
         }
         entry_->setField(imdb, QLatin1String("https://www.imdb.com/title/") + elem.text());
-      } else if(elem.attribute(QLatin1String("type")) == tmdb) {
+      } else if(elem.attribute(QStringLiteral("type")) == tmdb) {
         if(!entry_->collection()->hasField(tmdb)) {
           Data::FieldPtr f(new Data::Field(QStringLiteral("tmdb"), i18n("TMDb Link"), Data::Field::URL));
           f->setCategory(i18n("General"));
