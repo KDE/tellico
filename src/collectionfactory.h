@@ -72,12 +72,9 @@ public:
   Data::CollPtr create(int type, bool addDefaultFields) const;
 
 private:
-  /**
-   * no copying
-   */
   CollectionFactory();
-  CollectionFactory(const CollectionFactory&); ///< Not implemented.
-  CollectionFactory &operator=(const CollectionFactory&); ///< Not implemented.
+  ~CollectionFactory() = default;
+  Q_DISABLE_COPY(CollectionFactory)
 
   /**
    * Keep a hash of all the function pointers to create classes

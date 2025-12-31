@@ -25,6 +25,8 @@
 #ifndef TELLICO_XMPHANDLER_H
 #define TELLICO_XMPHANDLER_H
 
+#include <QtClassHelperMacros>
+
 class QString;
 
 namespace Tellico {
@@ -39,6 +41,8 @@ public:
   static bool isXMPEnabled();
 
 private:
+  Q_DISABLE_COPY(XMPHandler)
+
   static bool s_needInit;
   static int s_initCount;
 };

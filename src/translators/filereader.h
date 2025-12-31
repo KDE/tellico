@@ -57,6 +57,8 @@ protected:
   QString getCoverImage(const KFileItem& fileItem);
 
 private:
+  Q_DISABLE_COPY(AbstractFileReader)
+
   QUrl m_url;
   bool m_useFilePreview;
   // cache the icon image ids to avoid repeated creation of Data::Image objects

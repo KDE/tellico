@@ -50,6 +50,7 @@ public:
     Done(QObject* object);
     ~Done();
   private:
+    Q_DISABLE_COPY(Done)
     QPointer<QObject> m_object;
   };
 

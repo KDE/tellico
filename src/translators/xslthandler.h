@@ -59,6 +59,7 @@ public:
     xmlOutputBuffer* buffer() const { return m_buf; }
     QString result() const { return m_res; }
   private:
+    Q_DISABLE_COPY(XMLOutputBuffer)
     xmlOutputBuffer* m_buf;
     QString m_res;
   };
@@ -110,6 +111,8 @@ public:
   static QDomDocument& setLocaleEncoding(QDomDocument& dom);
 
 private:
+  Q_DISABLE_COPY(XSLTHandler)
+
   void init();
   QString process(xmlDocPtr docIn);
 

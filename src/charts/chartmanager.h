@@ -48,6 +48,7 @@ public:
 
 private:
   ChartManager();
+  Q_DISABLE_COPY(ChartManager)
 
   QHash<QUuid, ChartReport*> m_chartReports;
 };

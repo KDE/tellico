@@ -33,6 +33,7 @@ namespace Tellico {
  * @author Robby Stephenson
  */
 class BarChart : public QChart {
+Q_OBJECT
 
 public:
   BarChart(const QStringList& names, const QList<qreal>& values);

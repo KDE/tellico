@@ -80,6 +80,8 @@ private:
  * @author Robby Stephenson
  */
 class Z3950Connection : public QThread {
+Q_OBJECT
+
 public:
   Z3950Connection(Fetcher* fetcher,
                   const QString& host,

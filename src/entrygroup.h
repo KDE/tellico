@@ -54,6 +54,8 @@ public:
   static QString emptyGroupName();
 
 private:
+  Q_DISABLE_COPY(EntryGroup)
+
   QString m_group;
   QString m_field;
 };

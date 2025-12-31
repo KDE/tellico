@@ -47,6 +47,8 @@ public:
   virtual QWidget* createWidget() = 0;
 
 private:
+  Q_DISABLE_COPY(ChartReport)
+
   QUuid m_uuid;
 };
 

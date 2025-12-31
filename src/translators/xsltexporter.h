@@ -38,6 +38,7 @@ namespace Tellico {
  * @author Robby Stephenson
  */
 class XSLTExporter : public Exporter {
+Q_OBJECT
 
 friend class ::XSLTExporterTest;
 
