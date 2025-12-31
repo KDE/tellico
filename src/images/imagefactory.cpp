@@ -738,7 +738,7 @@ void ImageFactory::releaseImages() {
   }
 
   myLog() << "Releasing" << s_imagesToRelease.count() << "images from internal memory";
-  for(const QString& id : s_imagesToRelease) {
+  for(const QString& id : std::as_const(s_imagesToRelease)) {
     if(!d->imageDict.contains(id)) {
       continue;
     }
