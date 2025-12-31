@@ -32,6 +32,8 @@ Q_OBJECT
 
 private Q_SLOTS:
   void initTestCase();
+  void init();
+
   void testCpp();
   void testXMPData();
   void testStat();

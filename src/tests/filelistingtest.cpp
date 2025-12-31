@@ -33,6 +33,8 @@
 #include "../core/netaccess.h"
 
 #include <KLocalizedString>
+#include <KSharedConfig>
+#include <KConfigGroup>
 
 #include <QTest>
 #include <QLoggingCategory>
@@ -46,6 +48,12 @@ void FileListingTest::initTestCase() {
   KLocalizedString::setApplicationDomain("tellico");
   Tellico::ImageFactory::init();
   QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
+}
+
+void FileListingTest::init() {
+  // since the importer saves the settings, clear them out
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - FileListing"));
+  config.deleteGroup();
 }
 
 void FileListingTest::testCpp() {
