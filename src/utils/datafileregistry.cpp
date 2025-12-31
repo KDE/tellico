@@ -71,7 +71,7 @@ QString DataFileRegistry::locate(const QString& fileName_) {
   if(QFileInfo(fileName_).isAbsolute()) {
     return fileName_;
   }
-  for(const auto& dataDir : m_dataLocations) {
+  for(const auto& dataDir : std::as_const(m_dataLocations)) {
     if(QFileInfo::exists(dataDir + fileName_)) {
       return dataDir + fileName_;
     }
