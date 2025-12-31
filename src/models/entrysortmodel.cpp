@@ -42,7 +42,11 @@ void EntrySortModel::setFilter(Tellico::FilterPtr filter_) {
     beginFilterChange();
 #endif
     m_filter = filter_;
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 10, 0))
+    endFilterChange(QSortFilterProxyModel::Direction::Rows);
+#else
     invalidateRowsFilter();
+#endif
   }
 }
 
