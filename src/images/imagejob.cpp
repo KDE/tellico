@@ -34,7 +34,8 @@
 #include <QFileInfo>
 #include <QBuffer>
 #include <QImageReader>
-#include <QtConcurrent>
+#include <QFutureWatcher>
+#include <QtConcurrentRun>
 
 namespace {
   static const int IMAGEJOB_TIMEOUT = 5; // seconds
