@@ -48,6 +48,7 @@ namespace {
 }
 
 using namespace Tellico;
+using namespace Qt::StringLiterals;
 using Tellico::Fetch::VGCollectFetcher;
 
 VGCollectFetcher::VGCollectFetcher(QObject* parent_)
@@ -175,18 +176,18 @@ void VGCollectFetcher::slotComplete(KJob*) {
       platform = platform.remove(tagRx).trimmed();
     }
     // skip some non-game "platforms"
-    if(platform == QLatin1StringView("Toys") ||
-       platform == QLatin1StringView("Clothing") ||
-       platform == QLatin1StringView("Merchandise") ||
-       platform == QLatin1StringView("Soundtrack") ||
-       platform == QLatin1StringView("Books") ||
-       platform == QLatin1StringView("Comics") ||
-       platform == QLatin1StringView("GOG.com") ||
-       platform.startsWith(QLatin1StringView("Amiibo Figures")) ||
-       platform.contains(QLatin1StringView("Video")) ||
-       platform == QLatin1StringView("Steam") ||
-       platform == QLatin1StringView("Consoles") ||
-       platform == QLatin1StringView("Accessory")) {
+    if(platform == "Toys"_L1 ||
+       platform == "Clothing"_L1 ||
+       platform == "Merchandise"_L1 ||
+       platform == "Soundtrack"_L1 ||
+       platform == "Books"_L1 ||
+       platform == "Comics"_L1 ||
+       platform == "GOG.com"_L1 ||
+       platform.startsWith("Amiibo Figures"_L1) ||
+       platform.contains("Video"_L1) ||
+       platform == "Steam"_L1 ||
+       platform == "Consoles"_L1 ||
+       platform == "Accessory"_L1) {
         continue;
     }
 //    myDebug() << title << platform << u;
@@ -291,35 +292,35 @@ void VGCollectFetcher::populateValue(Data::EntryPtr entry_, const QString& heade
   auto header = header_;
   header = header.remove(tagRx).simplified();
   auto value = value_.simplified();
-  if(header_.isEmpty() || value_.isEmpty() || value == QLatin1StringView("NA")) {
+  if(header_.isEmpty() || value_.isEmpty() || value == "NA"_L1) {
     return;
   }
 
-  if(header.startsWith(QLatin1String("Publisher"))) {
+  if(header.startsWith("Publisher"_L1)) {
     entry_->setField(QStringLiteral("publisher"), value);
-  } else if(header.startsWith(QLatin1String("Developer"))) {
+  } else if(header.startsWith("Developer"_L1)) {
     entry_->setField(QStringLiteral("developer"), value);
-  } else if(header.startsWith(QLatin1String("Platform"))) {
+  } else if(header.startsWith("Platform"_L1)) {
     const QString platform = Data::GameCollection::normalizePlatform(value.remove(tagRx).trimmed());
     entry_->setField(QStringLiteral("platform"), platform);
-  } else if(header.startsWith(QLatin1String("Genre"))) {
+  } else if(header.startsWith("Genre"_L1)) {
     entry_->setField(QStringLiteral("genre"), value);
-  } else if(header.startsWith(QLatin1String("Rating"))) {
+  } else if(header.startsWith("Rating"_L1)) {
     QString pegi;
     Data::GameCollection::EsrbRating esrb = Data::GameCollection::UnknownEsrb;
-    if(value.contains(QLatin1String("u.png")))         esrb = Data::GameCollection::Unrated;
-    else if(value.contains(QLatin1String("esrb-t")))   esrb = Data::GameCollection::Teen;
-    else if(value.contains(QLatin1String("esrb-e")))   esrb = Data::GameCollection::Everyone;
-    else if(value.contains(QLatin1String("esrb-ka")))  esrb = Data::GameCollection::Everyone;
-    else if(value.contains(QLatin1String("esrb-e10"))) esrb = Data::GameCollection::Everyone10;
-    else if(value.contains(QLatin1String("esrb-ec")))  esrb = Data::GameCollection::EarlyChildhood;
-    else if(value.contains(QLatin1String("esrb-m")))   esrb = Data::GameCollection::Mature;
-    else if(value.contains(QLatin1String("esrb-ao")))  esrb = Data::GameCollection::Adults;
-    else if(value.contains(QLatin1String("pegi-3")))   pegi = QStringLiteral("PEGI 3");
-    else if(value.contains(QLatin1String("pegi-7")))   pegi = QStringLiteral("PEGI 7");
-    else if(value.contains(QLatin1String("pegi-12")))  pegi = QStringLiteral("PEGI 12");
-    else if(value.contains(QLatin1String("pegi-16")))  pegi = QStringLiteral("PEGI 16");
-    else if(value.contains(QLatin1String("pegi-18")))  pegi = QStringLiteral("PEGI 18");
+    if(value.contains("u.png"_L1))         esrb = Data::GameCollection::Unrated;
+    else if(value.contains("esrb-t"_L1))   esrb = Data::GameCollection::Teen;
+    else if(value.contains("esrb-e"_L1))   esrb = Data::GameCollection::Everyone;
+    else if(value.contains("esrb-ka"_L1))  esrb = Data::GameCollection::Everyone;
+    else if(value.contains("esrb-e10"_L1)) esrb = Data::GameCollection::Everyone10;
+    else if(value.contains("esrb-ec"_L1))  esrb = Data::GameCollection::EarlyChildhood;
+    else if(value.contains("esrb-m"_L1))   esrb = Data::GameCollection::Mature;
+    else if(value.contains("esrb-ao"_L1))  esrb = Data::GameCollection::Adults;
+    else if(value.contains("pegi-3"_L1))   pegi = QStringLiteral("PEGI 3");
+    else if(value.contains("pegi-7"_L1))   pegi = QStringLiteral("PEGI 7");
+    else if(value.contains("pegi-12"_L1))  pegi = QStringLiteral("PEGI 12");
+    else if(value.contains("pegi-16"_L1))  pegi = QStringLiteral("PEGI 16");
+    else if(value.contains("pegi-18"_L1))  pegi = QStringLiteral("PEGI 18");
     if(esrb != Data::GameCollection::UnknownEsrb) {
       entry_->setField(QStringLiteral("certification"), Data::GameCollection::esrbRating(esrb));
     }
@@ -327,19 +328,16 @@ void VGCollectFetcher::populateValue(Data::EntryPtr entry_, const QString& heade
       entry_->collection()->addField(Data::Field::createDefaultField(Data::Field::PegiField));
       entry_->setField(QStringLiteral("pegi"), pegi);
     }
-  } else if(header.startsWith(QLatin1String("Release Date"))) {
+  } else if(header.startsWith("Release Date"_L1)) {
     entry_->setField(QStringLiteral("year"), value.right(4));
-  } else if(header.startsWith(QLatin1String("Box Text"))) {
+  } else if(header.startsWith("Box Text"_L1)) {
     entry_->setField(QStringLiteral("description"), value);
-  } else if(header.startsWith(QLatin1String("Barcode")) &&
+  } else if(header.startsWith("Barcode"_L1) &&
             optionalFields().contains(QStringLiteral("barcode"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("barcode"), i18n("Barcode")));
     field->setCategory(i18n("General"));
     entry_->collection()->addField(field);
     entry_->setField(QStringLiteral("barcode"), value);
-  } else {
-//    myDebug() << "Row header:" << header;
-//    myDebug() << "Row data:" << value;
   }
 }
 

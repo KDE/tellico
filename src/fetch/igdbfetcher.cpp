@@ -541,12 +541,12 @@ void IGDBFetcher::checkAccessToken() {
     myDebug() << "IGDB: Invalid JSON";
     return;
   }
-  QJsonObject response = doc.object();
-  if(response.contains(QLatin1String("message"))) {
-    myDebug() << "IGDB:" << response.value(QLatin1String("message")).toString();
+  const QJsonObject response = doc.object();
+  if(response.contains(QLatin1StringView("message"))) {
+    myDebug() << "IGDB:" << response.value(QLatin1StringView("message")).toString();
   }
-  m_accessToken = response.value(QLatin1String("access_token")).toString();
-  const int expires = response.value(QLatin1String("expires_in")).toInt();
+  m_accessToken = response.value(QLatin1StringView("access_token")).toString();
+  const int expires = response.value(QLatin1StringView("expires_in")).toInt();
   if(expires > 0) {
     m_accessTokenExpires = now.addSecs(expires);
   }

@@ -190,30 +190,30 @@ void ADSFetcher::slotComplete(KJob*) {
     return;
   }
   const auto obj = doc.object();
-  const auto response = obj.value(QLatin1String("response")).toObject();
+  const auto response = obj.value(QLatin1StringView("response")).toObject();
   if(response.isEmpty()) {
-    const auto errorMsg = obj[QLatin1String("error")][QLatin1String("msg")].toString();
+    const auto errorMsg = obj[QLatin1StringView("error")][QLatin1StringView("msg")].toString();
     myDebug() << "No response:" << errorMsg;
     message(errorMsg, MessageHandler::Error);
     stop();
     return;
   }
-  m_total = response.value(QLatin1String("numFound")).toInt();
+  m_total = response.value(QLatin1StringView("numFound")).toInt();
 
-  QJsonArray results = response.value(QLatin1String("docs")).toArray();
+  QJsonArray results = response.value(QLatin1StringView("docs")).toArray();
   for(QJsonArray::const_iterator i = results.constBegin(); i != results.constEnd(); ++i) {
     if(!m_started) {
       // might get aborted
       break;
     }
     QJsonObject result = (*i).toObject();
-    const QString title = result.value(QLatin1String("title")).toArray().at(0).toString();
+    const QString title = result.value(QLatin1StringView("title")).toArray().at(0).toString();
     FetchResult* r = new FetchResult(this,
                                      title,
-                                     result.value(QLatin1String("first_author")).toString()
+                                     result.value(QLatin1StringView("first_author")).toString()
                                      + QLatin1Char('/')
-                                     + result.value(QLatin1String("year")).toString());
-    m_results.insert(r->uid, result.value(QLatin1String("bibcode")).toString());
+                                     + result.value(QLatin1StringView("year")).toString());
+    m_results.insert(r->uid, result.value(QLatin1StringView("bibcode")).toString());
     Q_EMIT signalResultFound(r);
 //    myDebug() << "found" << title;
   }
@@ -273,7 +273,7 @@ Tellico::Data::EntryPtr ADSFetcher::fetchEntryHook(uint uid_) {
     message(jsonError.errorString(), MessageHandler::Error);
     return Data::EntryPtr();
   }
-  Import::RISImporter imp(doc.object().value(QLatin1String("export")).toString());
+  Import::RISImporter imp(doc.object().value(QLatin1StringView("export")).toString());
   auto coll = imp.collection();
 
   if(coll->entryCount() == 0) {

@@ -426,7 +426,7 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_
     }
     entry_->setField(QStringLiteral("nationality"), objValue(obj_, "country"));
     QString cert = objValue(obj_, "contentAdvisoryRating");
-    if(cert == QStringLiteral("NR")) {
+    if(cert == QLatin1StringView("NR")) {
       cert = QLatin1Char('U');
     }
     if(!cert.isEmpty()) {

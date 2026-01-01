@@ -285,7 +285,7 @@ void DiscogsFetcher::slotComplete(KJob*) {
 #if 0 // checking remaining discogs rate limit allocation
   const QStringList allHeaders = m_job->queryMetaData(QStringLiteral("HTTP-Headers")).split(QLatin1Char('\n'));
   foreach(const QString& header, allHeaders) {
-    if(header.startsWith(QStringLiteral("x-discogs-ratelimit-remaining"))) {
+    if(header.startsWith(QLatin1StringView("x-discogs-ratelimit-remaining"))) {
       const int index = header.indexOf(QLatin1Char(':'));
       if(index > 0) {
         myDebug() << "DiscogsFetcher: rate limit remaining:" << header.mid(index + 1);
@@ -474,7 +474,7 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj
     const QString trackNum = objValue(trackObj, "position");
     if(hasCD && !(trackNum.isEmpty() ||
                   trackNum.at(0).isNumber() ||
-                  trackNum.startsWith(QLatin1String("CD")))) {
+                  trackNum.startsWith(QLatin1StringView("CD")))) {
       continue;
     }
 

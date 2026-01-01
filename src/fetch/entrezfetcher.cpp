@@ -392,8 +392,8 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
   if(str.isEmpty()) {
     // might be an API error, and message is in JSON
     QJsonDocument doc = QJsonDocument::fromJson(xmlOutput.toUtf8());
-    if(!doc.isNull() && doc.object().contains(QStringLiteral("error"))) {
-      const QString error = doc.object().value(QStringLiteral("error")).toString();
+    if(!doc.isNull() && doc.object().contains(QLatin1StringView("error"))) {
+      const QString error = doc.object().value(QLatin1StringView("error")).toString();
       message(error, MessageHandler::Error);
       myLog() << "EntrezFetcher -" << error;
     }

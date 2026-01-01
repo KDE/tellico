@@ -102,7 +102,7 @@ void GroupSummaryWidget::addChart(Tellico::Data::FieldPtr field_) {
       ++numGroups; // bump the limit to account for the "Empty" group showing up
       continue;
     }
-    if(group->fieldName() == QStringLiteral("rating")) {
+    if(group->fieldName() == QLatin1StringView("rating")) {
       const int rating = qBound(0, group->groupName().toInt(), 10);
       groupNames << QStringLiteral("⭐").repeated(rating);
     } else {

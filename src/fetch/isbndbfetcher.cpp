@@ -247,7 +247,7 @@ void ISBNdbFetcher::slotComplete(KJob* job_) {
   } else if(obj.contains("books"_L1)) {
     m_total = obj["total"_L1].toInt();
     resultList = obj["books"_L1].toArray();
-  } else if(obj.contains(QStringLiteral("data"))) {
+  } else if(obj.contains("data"_L1)) {
     m_total = obj["total"_L1].toInt();
     resultList = obj["data"_L1].toArray();
   } else {
@@ -332,9 +332,9 @@ void ISBNdbFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_
   if(binding.isEmpty()) {
     binding = objValue(obj_, "format");
   }
-  if(binding.startsWith(QStringLiteral("Hardcover"))) {
+  if(binding.startsWith(QLatin1StringView("Hardcover"))) {
     binding = QStringLiteral("Hardback");
-  } else if(binding.startsWith(QStringLiteral("Paperback"))) {
+  } else if(binding.startsWith(QLatin1StringView("Paperback"))) {
     binding = QStringLiteral("Paperback");
   }
   if(!binding.isEmpty()) {

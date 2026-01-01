@@ -90,11 +90,11 @@ Tellico::Data::CollPtr GCstarImporter::collection() {
     readGCfilms(str);
   } else {
     // need to reparse the string if it's in utf-8
-    if(line.contains(QLatin1String("utf-8"), Qt::CaseInsensitive)) {
+    if(line.contains(QLatin1StringView("utf-8"), Qt::CaseInsensitive)) {
       str = QString::fromUtf8(str.toLocal8Bit());
     }
     // also allow for custom collections by reading collection type
-    while(!line.contains(QLatin1String("collection"))) {
+    while(!line.contains(QLatin1StringView("collection"))) {
       line = t.readLine();
     }
     QString collType;

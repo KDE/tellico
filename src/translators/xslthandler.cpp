@@ -155,8 +155,8 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QByteArray& xsltFil
   for(int j = 0; j < children.count(); ++j) {
     if(children.item(j).isProcessingInstruction()) {
       QDomProcessingInstruction pi = children.item(j).toProcessingInstruction();
-      if(pi.data().toLower().contains(QLatin1String("encoding"))) {
-        if(!pi.data().toLower().contains(QLatin1String("utf-8"))) {
+      if(pi.data().toLower().contains(QLatin1StringView("encoding"))) {
+        if(!pi.data().toLower().contains(QLatin1StringView("utf-8"))) {
           utf8 = false;
 //        } else {
 //          myDebug() << "PI = " << pi.data();

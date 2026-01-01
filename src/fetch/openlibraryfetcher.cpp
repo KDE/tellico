@@ -230,17 +230,17 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
     }
 
     if(entry->field(authorString).isEmpty()) {
-      QStringList authors = getAuthorNames(obj.value(QLatin1String("authors")).toArray());
+      QStringList authors = getAuthorNames(obj.value(QLatin1StringView("authors")).toArray());
       if(!authors.isEmpty()) {
         entry->setField(authorString, authors.join(FieldFormat::delimiterString()));
       }
     }
 
     if(entry->field(seriesString).isEmpty()) {
-      const auto subjArray = obj.value(QLatin1String("subjects")).toArray();
+      const auto subjArray = obj.value(QLatin1StringView("subjects")).toArray();
       for(const auto& res : subjArray) {
         QString value = res.toString();
-        if(value.startsWith(QLatin1String("series:"))) {
+        if(value.startsWith(QLatin1StringView("series:"))) {
           value.remove(0, 7); // remove first 7 characters
           value.replace(QLatin1Char('_'), QLatin1Char(' '));
           value = FieldFormat::capitalize(value);
@@ -403,11 +403,11 @@ void OpenLibraryFetcher::populate(Data::EntryPtr entry_, const QJsonObject& obj_
   // only allow comic format for comic book collections
   QString binding = objValue(obj_, "physical_format");
   const auto bindingLower = binding.toLower();
-  if(bindingLower == QLatin1String("hardcover")) {
+  if(bindingLower == QLatin1StringView("hardcover")) {
     binding = QStringLiteral("Hardback");
-  } else if(bindingLower == QLatin1String("ebook")) {
+  } else if(bindingLower == QLatin1StringView("ebook")) {
     binding = QStringLiteral("E-Book");
-  } else if(bindingLower.contains(QStringLiteral("paperback"))) {
+  } else if(bindingLower.contains(QLatin1StringView("paperback"))) {
     binding = QStringLiteral("Paperback");
   }
   if(!binding.isEmpty()) {
@@ -570,11 +570,11 @@ QStringList OpenLibraryFetcher::getAuthorNames(const QJsonArray& keys_) {
 
   const auto output = FileHandler::readDataFile(u, true /*quiet*/);
   const QJsonDocument doc = QJsonDocument::fromJson(output);
-  const auto array = doc.object().value(QLatin1String("docs")).toArray();
+  const auto array = doc.object().value(QLatin1StringView("docs")).toArray();
   for(int i = 0; i < array.count(); i++) {
     const auto obj = array.at(i).toObject();
     QString key = objValue(obj, "key");
-    if(!key.startsWith(QLatin1String("/authors/"))) {
+    if(!key.startsWith(QLatin1StringView("/authors/"))) {
       key = QLatin1String("/authors/") + key;
     }
     const QString author = objValue(obj, "name");
@@ -605,14 +605,14 @@ QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
   f.close();
 #endif
   const QJsonDocument doc = QJsonDocument::fromJson(output);
-  const auto array = doc.object().value(QLatin1String("docs")).toArray();
+  const auto array = doc.object().value(QLatin1StringView("docs")).toArray();
   if(array.isEmpty()) {
     return QString();
   }
   // right now, only use the first to search on
   const auto obj1 = array.at(0).toObject();
-  const auto key = obj1.value(QLatin1String("key")).toString();
-  const auto name = obj1.value(QLatin1String("name")).toString();
+  const auto key = obj1.value(QLatin1StringView("key")).toString();
+  const auto name = obj1.value(QLatin1StringView("name")).toString();
   m_authorHash.insert(key, name);
   return key;
 }

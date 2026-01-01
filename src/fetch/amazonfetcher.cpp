@@ -369,13 +369,13 @@ void AmazonFetcher::slotComplete(KJob*) {
     stop();
     return;
   }
-  QJsonObject resultObject = databject.value(QStringLiteral("SearchResult")).toObject();
+  QJsonObject resultObject = databject.value(QLatin1StringView("SearchResult")).toObject();
   if(resultObject.isEmpty()) {
-    resultObject = databject.value(QStringLiteral("ItemsResult")).toObject();
+    resultObject = databject.value(QLatin1StringView("ItemsResult")).toObject();
   }
 
   if(m_total == -1) {
-    int totalResults = resultObject.value(QStringLiteral("TotalResultCount")).toInt();
+    int totalResults = resultObject.value(QLatin1StringView("TotalResultCount")).toInt();
     if(totalResults > 0) {
       m_total = totalResults;
 //      myDebug() << "Total results is" << totalResults;
@@ -383,11 +383,11 @@ void AmazonFetcher::slotComplete(KJob*) {
   }
 
   QStringList errors;
-  QJsonValue errorValue = databject.value(QLatin1String("Errors"));
+  QJsonValue errorValue = databject.value(QLatin1StringView("Errors"));
   if(!errorValue.isNull()) {
     const auto errorArray = errorValue.toArray();
     for(const QJsonValue& error : errorArray) {
-      errors += error.toObject().value(QLatin1String("Message")).toString();
+      errors += error.toObject().value(QLatin1StringView("Message")).toString();
     }
   }
   if(!errors.isEmpty()) {
@@ -406,7 +406,7 @@ void AmazonFetcher::slotComplete(KJob*) {
     return;
   }
 
-  const auto itemsArray = resultObject.value(QLatin1String("Items")).toArray();
+  const auto itemsArray = resultObject.value(QLatin1StringView("Items")).toArray();
   for(const QJsonValue& item : itemsArray) {
     if(m_numResults >= m_limit) {
       break;
@@ -870,7 +870,7 @@ Tellico::Data::CollPtr AmazonFetcher::createCollection() {
 }
 
 void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info_) {
-  const auto itemMap = info_.value(QLatin1String("ItemInfo")).toObject();
+  const auto itemMap = info_.value(QLatin1StringView("ItemInfo")).toObject();
   entry_->setField(QStringLiteral("title"), objValue(itemMap, "Title", "DisplayValue"));
   const QString isbn = objValue(itemMap, "ExternalIds", "ISBNs", "DisplayValues");
   if(!isbn.isEmpty()) {
@@ -961,9 +961,9 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
       const auto technicalMap = itemMap[QLatin1StringView("TechnicalInfo")].toObject();
       binding = objValue(technicalMap, "Formats", "DisplayValues");
     }
-    if(binding.contains(QStringLiteral("Paperback")) && binding != QStringLiteral("Trade Paperback")) {
+    if(binding.contains(QLatin1StringView("Paperback")) && binding != QLatin1StringView("Trade Paperback")) {
       binding = i18n("Paperback");
-    } else if(binding.contains(QStringLiteral("Hard"))) { // could be Hardcover or Hardback
+    } else if(binding.contains(QLatin1StringView("Hard"))) { // could be Hardcover or Hardback
       binding = i18n("Hardback");
     }
     entry_->setField(QStringLiteral("binding"), binding);
@@ -1010,42 +1010,42 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QStrin
 //  myDebug() << "title token:" << token_;
   // if res = true, then the token gets removed from the title
   bool res = false;
-  if(token_.indexOf(QLatin1String("widescreen"), 0, Qt::CaseInsensitive) > -1 ||
-     token_.indexOf(i18n("Widescreen"), 0, Qt::CaseInsensitive) > -1) {
+  if(token_.contains(QLatin1StringView("widescreen"), Qt::CaseInsensitive) ||
+     token_.contains(i18n("Widescreen"), Qt::CaseInsensitive)) {
     entry_->setField(QStringLiteral("widescreen"), QStringLiteral("true"));
     // res = true; leave it in the title
-  } else if(token_.indexOf(QLatin1String("full screen"), 0, Qt::CaseInsensitive) > -1) {
+  } else if(token_.contains(QLatin1StringView("full screen"), Qt::CaseInsensitive)) {
     // skip, but go ahead and remove from title
     res = true;
-  } else if(token_.indexOf(QLatin1String("import"), 0, Qt::CaseInsensitive) > -1) {
+  } else if(token_.contains(QLatin1StringView("import"), Qt::CaseInsensitive)) {
     // skip, but go ahead and remove from title
     res = true;
   }
-  if(token_.indexOf(QLatin1String("blu-ray"), 0, Qt::CaseInsensitive) > -1) {
+  if(token_.contains(QLatin1StringView("blu-ray"), Qt::CaseInsensitive)) {
     entry_->setField(QStringLiteral("medium"), i18n("Blu-ray"));
     res = true;
-  } else if(token_.indexOf(QLatin1String("hd dvd"), 0, Qt::CaseInsensitive) > -1) {
+  } else if(token_.contains(QLatin1StringView("hd dvd"), Qt::CaseInsensitive)) {
     entry_->setField(QStringLiteral("medium"), i18n("HD DVD"));
     res = true;
-  } else if(token_.indexOf(QLatin1String("vhs"), 0, Qt::CaseInsensitive) > -1) {
+  } else if(token_.contains(QLatin1StringView("vhs"), Qt::CaseInsensitive)) {
     entry_->setField(QStringLiteral("medium"), i18n("VHS"));
     res = true;
   }
-  if(token_.indexOf(QLatin1String("director's cut"), 0, Qt::CaseInsensitive) > -1 ||
-     token_.indexOf(i18n("Director's Cut"), 0, Qt::CaseInsensitive) > -1) {
+  if(token_.contains(QLatin1StringView("director's cut"), Qt::CaseInsensitive) ||
+     token_.contains(i18n("Director's Cut"), Qt::CaseInsensitive)) {
     entry_->setField(QStringLiteral("directors-cut"), QStringLiteral("true"));
     // res = true; leave it in the title
   }
   const QString tokenLower = token_.toLower();
-  if(tokenLower == QLatin1String("ntsc")) {
+  if(tokenLower == QLatin1StringView("ntsc")) {
     entry_->setField(QStringLiteral("format"), i18n("NTSC"));
     res = true;
   }
-  if(tokenLower == QLatin1String("dvd")) {
+  if(tokenLower == QLatin1StringView("dvd")) {
     entry_->setField(QStringLiteral("medium"), i18n("DVD"));
     res = true;
   }
-  if(token_.indexOf(QLatin1String("series"), 0, Qt::CaseInsensitive) > -1) {
+  if(token_.contains(QLatin1StringView("series"), Qt::CaseInsensitive)) {
     entry_->setField(QStringLiteral("series"), token_);
     res = true;
   }

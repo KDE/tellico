@@ -286,7 +286,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
   // now, it's available as a builtin data source, so prefer the new version
   // so check for fetcher version and switch to the newer if version is missing or lower
   if(fetchType == Fetch::ExecExternal &&
-     config.readPathEntry("ExecPath", QString()).endsWith(QStringLiteral("bedetheque.py"))) {
+     config.readPathEntry("ExecPath", QString()).endsWith(QLatin1StringView("bedetheque.py"))) {
     KConfigGroup generalConfig(config_, QStringLiteral("General Options"));
     if(generalConfig.readEntry("FetchVersion", 0) < 2) {
       fetchType = Fetch::Bedetheque;
@@ -533,18 +533,18 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher* fetcher_, int group_, int 
     const Fetch::ExecExternalFetcher* f = static_cast<const Fetch::ExecExternalFetcher*>(fetcher_);
     const QString p = f->execPath();
     QUrl u, iconUrl;
-    if(p.contains(QStringLiteral("allocine"))) {
+    if(p.contains(QLatin1StringView("allocine"))) {
       u = QUrl(QStringLiteral("https://www.allocine.fr"));
       iconUrl = QUrl(QStringLiteral("https://assets.allocine.fr/favicon/allocine.ico"));
-    } else if(p.contains(QStringLiteral("ministerio_de_cultura"))) {
+    } else if(p.contains(QLatin1StringView("ministerio_de_cultura"))) {
       u = QUrl(QStringLiteral("http://www.mcu.es"));
-    } else if(p.contains(QStringLiteral("dark_horse_comics"))) {
+    } else if(p.contains(QLatin1StringView("dark_horse_comics"))) {
       u = QUrl(QStringLiteral("http://www.darkhorse.com"));
-    } else if(p.contains(QStringLiteral("boardgamegeek"))) {
+    } else if(p.contains(QLatin1StringView("boardgamegeek"))) {
       u = QUrl(QStringLiteral("http://www.boardgamegeek.com"));
-    } else if(p.contains(QStringLiteral("supercat"))) {
+    } else if(p.contains(QLatin1StringView("supercat"))) {
       u = QUrl(QStringLiteral("https://evergreen-ils.org"));
-    } else if(f->source().contains(QStringLiteral("amarok"), Qt::CaseInsensitive)) {
+    } else if(f->source().contains(QLatin1StringView("amarok"), Qt::CaseInsensitive)) {
       return LOAD_ICON(QStringLiteral("amarok"), group_, size_);
     }
     if(!u.isEmpty() && u.isValid()) {

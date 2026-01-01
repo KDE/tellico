@@ -264,7 +264,7 @@ void TheTVDBFetcher::slotComplete(KJob* job_) {
   }
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  const QJsonArray results = doc.object().value(QLatin1String("data")).toArray();
+  const QJsonArray results = doc.object().value(QLatin1StringView("data")).toArray();
 
   if(results.isEmpty()) {
     myLog() << "No results";
@@ -489,15 +489,15 @@ void TheTVDBFetcher::requestToken() {
     return;
   }
   QJsonObject response = doc.object();
-  if(response.contains(QLatin1String("Error"))) {
-    myLog() << "Error:" << response.value(QLatin1String("Error")).toString();
-  } else if(response.value(QLatin1String("status")) == QLatin1StringView("failure")) {
-    myLog() << "Failure:" << response.value(QLatin1String("message")).toString();
+  if(response.contains(QLatin1StringView("Error"))) {
+    myLog() << "Error:" << response[QLatin1StringView("Error")].toString();
+  } else if(response[QLatin1StringView("status")] == QLatin1StringView("failure")) {
+    myLog() << "Failure:" << response[QLatin1StringView("message")].toString();
   }
-  m_accessToken = response.value(QLatin1String("data")).toObject()
-                          .value(QLatin1String("token")).toString();
+  m_accessToken = response[QLatin1StringView("data")]
+                          [QLatin1StringView("token")].toString();
   if(m_accessToken.isEmpty()) {
-    m_accessToken = response.value(QLatin1String("token")).toString();
+    m_accessToken = response[QLatin1StringView("token")].toString();
   }
   if(!m_accessToken.isEmpty()) {
     m_accessTokenExpires = QDateTime::currentDateTimeUtc().addSecs(THETVDB_TOKEN_EXPIRES);
@@ -520,14 +520,14 @@ void TheTVDBFetcher::refreshToken() {
     myDebug() << "TheTVDB: Invalid JSON in refresh_token response";
     return;
   }
-  QJsonObject response = doc.object();
-  if(response.contains(QLatin1String("Error"))) {
-    myDebug() << "TheTVDB:" << response.value(QLatin1String("Error")).toString();
+  const QJsonObject response = doc.object();
+  if(response.contains(QLatin1StringView("Error"))) {
+    myDebug() << "TheTVDB:" << response[QLatin1StringView("Error")].toString();
   }
-  m_accessToken = response.value(QLatin1String("data")).toObject()
-                          .value(QLatin1String("token")).toString();
+  m_accessToken = response[QLatin1StringView("data")]
+                          [QLatin1StringView("token")].toString();
   if(m_accessToken.isEmpty()) {
-    m_accessToken = response.value(QLatin1String("token")).toString();
+    m_accessToken = response.value(QLatin1StringView("token")).toString();
   }
   if(!m_accessToken.isEmpty()) {
     m_accessTokenExpires = QDateTime::currentDateTimeUtc().addSecs(THETVDB_TOKEN_EXPIRES);

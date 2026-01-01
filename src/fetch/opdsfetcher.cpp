@@ -62,16 +62,16 @@ bool OPDSFetcher::Reader::parse() {
       case QXmlStreamReader::StartElement:
         ++depth;
         if(depth == 2 && xml.namespaceUri() == Tellico::XML::nsAtom) {
-          if(xml.name() == QLatin1String("link")) {
+          if(xml.name() == QLatin1StringView("link")) {
             auto attributes = xml.attributes();
-            if(attributes.value(QStringLiteral("rel")) == QLatin1String("search")) {
+            if(attributes.value(QLatin1StringView("rel")) == QLatin1StringView("search")) {
               // found the search url
-              const auto href = QUrl(attributes.value(QStringLiteral("href")).toString());
+              const auto href = QUrl(attributes.value(QLatin1StringView("href")).toString());
               searchUrl = catalog.resolved(href);
               myLog() << "Search url is" << searchUrl.toDisplayString();
-            } else if(attributes.value(QStringLiteral("rel")) == QLatin1String("self")) {
+            } else if(attributes.value(QLatin1StringView("rel")) == QLatin1StringView("self")) {
               // for now, consider the feed an acquisition feed if the self link is labeled as an acquisition feed
-              isAcquisition = attributes.value(QStringLiteral("type")).contains(QLatin1String("kind=acquisition"));
+              isAcquisition = attributes.value(QLatin1StringView("type")).contains(QLatin1StringView("kind=acquisition"));
               myLog() << "Catalog kind is 'acquisition'";
             }
           }
@@ -107,23 +107,23 @@ bool OPDSFetcher::Reader::readSearchTemplate() {
     switch(xml.tokenType()) {
       case QXmlStreamReader::StartElement:
         ++depth;
-        if(depth == 2 && xml.name() == QLatin1String("Url") &&
+        if(depth == 2 && xml.name() == QLatin1StringView("Url") &&
                          xml.namespaceUri() == XML::nsOpenSearch) {
           auto attributes = xml.attributes();
-          if(attributes.value(QLatin1String("type")) == QLatin1String("application/atom+xml")) {
-            searchTemplate = attributes.value(QStringLiteral("template")).toString();
+          if(attributes.value(QLatin1StringView("type")) == QLatin1StringView("application/atom+xml")) {
+            searchTemplate = attributes.value(QLatin1StringView("template")).toString();
           }
         }
         break;
       case QXmlStreamReader::EndElement:
         if(depth == 2) {
-          if(xml.name() == QLatin1String("LongName")) {
+          if(xml.name() == QLatin1StringView("LongName")) {
             longName = text.simplified();
-          } else if(xml.name() == QLatin1String("ShortName")) {
+          } else if(xml.name() == QLatin1StringView("ShortName")) {
             shortName = text.simplified();
-          } else if(xml.name() == QLatin1String("Image")) {
+          } else if(xml.name() == QLatin1StringView("Image")) {
             icon = text.simplified();
-          } else if(xml.name() == QLatin1String("Attribution")) {
+          } else if(xml.name() == QLatin1StringView("Attribution")) {
             attribution = text.simplified();
           }
         }
@@ -246,7 +246,7 @@ void OPDSFetcher::search() {
   }
 
   QString searchUrl = m_searchTemplate;
-  searchUrl.replace(QStringLiteral("{searchTerms}"), searchTerm);
+  searchUrl.replace(QLatin1StringView("{searchTerms}"), searchTerm);
   QUrl u(searchUrl);
   myLog() << "Searching" << u.toDisplayString();
 
@@ -357,7 +357,7 @@ Tellico::Data::EntryPtr OPDSFetcher::fetchEntryHook(uint uid_) {
   // check whether the summary shows content from Calibre server and try to compensate
   QString plot = entry->field(QStringLiteral("plot"));
   static const QByteArray xhtml("<div xmlns=\"http://www.w3.org/1999/xhtml\">");
-  if(plot.startsWith(QLatin1String(xhtml))) {
+  if(plot.startsWith(QLatin1StringView(xhtml))) {
     plot = plot.mid(xhtml.length());
     myLog() << "Detected Calibre-style plot format";
     myLog() << "Removing XHTML div";
@@ -387,11 +387,11 @@ Tellico::Data::EntryPtr OPDSFetcher::fetchEntryHook(uint uid_) {
       entry->setField(QStringLiteral("series_num"), seriesMatch.captured(2));
       plot.remove(seriesMatch.captured());
     }
-    plot.remove(QLatin1String("SUMMARY:<br/>"));
+    plot.remove(QLatin1StringView("SUMMARY:<br/>"));
     plot = plot.simplified();
-    if(plot.startsWith(QLatin1String("<p class=\"description\">"))) {
+    if(plot.startsWith(QLatin1StringView("<p class=\"description\">"))) {
       plot = plot.mid(23);
-      if(plot.endsWith(QLatin1String("</p>"))) {
+      if(plot.endsWith(QLatin1StringView("</p>"))) {
         plot.chop(4);
       }
     }

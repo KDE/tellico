@@ -360,7 +360,7 @@ void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& 
   }
 
   alreadyAttemptedLoad = false;
-  const auto pubList = obj_.value(QStringLiteral("publishers")).toArray();
+  const auto pubList = obj_.value(QLatin1StringView("publishers")).toArray();
   for(const auto& v : pubList) {
     const int id = v.toInt();
     if(!m_publishers.contains(id) && !alreadyAttemptedLoad) {
@@ -373,7 +373,7 @@ void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& 
   }
 
   alreadyAttemptedLoad = false;
-  const auto devList = obj_.value(QStringLiteral("developers")).toArray();
+  const auto devList = obj_.value(QLatin1StringView("developers")).toArray();
   for(const auto& v : devList) {
     const int id = v.toInt();
     if(!m_developers.contains(id) && !alreadyAttemptedLoad) {
@@ -411,9 +411,9 @@ void TheGamesDBFetcher::readPlatformList(const QJsonObject& obj_) {
     platformObj.insert(QString::number(ii.key()), iObj);
   }
   QJsonObject dataObj;
-  dataObj.insert(QStringLiteral("platforms"), platformObj);
+  dataObj.insert(QLatin1StringView("platforms"), platformObj);
   QJsonObject docObj;
-  docObj.insert(QStringLiteral("data"), dataObj);
+  docObj.insert(QLatin1StringView("data"), dataObj);
   QJsonDocument doc;
   doc.setObject(docObj);
   writeDataList(Platform, doc.toJson());
@@ -445,8 +445,8 @@ void TheGamesDBFetcher::readCoverList(const QJsonObject& obj_) {
     const auto arr = i.value().toArray();
     for(const auto& v : arr) {
       const auto map = v.toObject();
-      if(map.value(QLatin1StringView("type")) == QLatin1String("boxart") &&
-         map.value(QLatin1StringView("side")) == QLatin1String("front")) {
+      if(map.value(QLatin1StringView("type")) == QLatin1StringView("boxart") &&
+         map.value(QLatin1StringView("side")) == QLatin1StringView("front")) {
         m_covers.insert(i.key(), baseUrl + objValue(map, "filename"));
         break;
       }
@@ -459,7 +459,7 @@ void TheGamesDBFetcher::readCoverList(const QJsonObject& obj_) {
     const auto arr = i.value().toArray();
     for(const auto& v : arr) {
       const auto map = v.toObject();
-      if(map.value(QLatin1StringView("type")) == QLatin1String("screenshot")) {
+      if(map.value(QLatin1StringView("type")) == QLatin1StringView("screenshot")) {
         m_covers.insert(QLatin1Char('s') + i.key(), baseUrl + objValue(map, "filename"));
         break;
       }

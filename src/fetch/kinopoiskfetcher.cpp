@@ -239,7 +239,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
   f.close();
 #endif
 
-  if(results.contains(QStringLiteral("captcha")) || results.endsWith(QLatin1String("</script>"))) {
+  if(results.contains(QLatin1StringView("captcha")) || results.endsWith(QLatin1StringView("</script>"))) {
 //    myDebug() << "KinoPoiskFetcher: captcha triggered";
     static const QRegularExpression re(QStringLiteral("/(\\d+)"));
     QRegularExpressionMatch match = re.match(url.url());
@@ -419,8 +419,8 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     return Data::EntryPtr();
   }
 
-  const QString queryId = doc.object().value(QStringLiteral("query")).toObject()
-                                      .value(QStringLiteral("id")).toString();
+  const QString queryId = doc.object().value(QLatin1StringView("query")).toObject()
+                                      .value(QLatin1StringView("id")).toString();
   // if there's no query ID, then this is not a film object to parse
   if(queryId.isEmpty()) {
 //    myDebug() << "No query ID...";
@@ -432,9 +432,9 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
   Data::EntryPtr entry(new Data::Entry(coll));
   coll->addEntries(entry);
 
-  QJsonObject dataObject = doc.object().value(QStringLiteral("props")).toObject()
-                                        .value(QStringLiteral("apolloState")).toObject()
-                                        .value(QStringLiteral("data")).toObject();
+  QJsonObject dataObject = doc.object().value(QLatin1StringView("props")).toObject()
+                                       .value(QLatin1StringView("apolloState")).toObject()
+                                       .value(QLatin1StringView("data")).toObject();
   QJsonObject filmObject = dataObject.value(QStringLiteral("Film:") + queryId).toObject();
   if(filmObject.isEmpty()) {
     filmObject = dataObject.value(QStringLiteral("TvSeries:") + queryId).toObject();
@@ -458,7 +458,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     }
 
     // also add original title
-    if(fieldName == QLatin1String("title")) {
+    if(fieldName == QLatin1StringView("title")) {
       const QString origTitle(QStringLiteral("origtitle"));
       if(optionalFields().contains(origTitle)) {
         if(!entry->collection()->hasField(origTitle)) {
@@ -533,19 +533,19 @@ QString KinoPoiskFetcher::fieldNameFromKey(const QString& key_) {
   }
 
   // otherwise some wonky key names
-  if(key_.contains(QLatin1String("DIRECTOR"), Qt::CaseInsensitive)) {
+  if(key_.contains(QLatin1StringView("DIRECTOR"), Qt::CaseInsensitive)) {
     return QStringLiteral("director");
   }
-  if(key_.contains(QLatin1String("WRITER"), Qt::CaseInsensitive)) {
+  if(key_.contains(QLatin1StringView("WRITER"), Qt::CaseInsensitive)) {
     return QStringLiteral("writer");
   }
-  if(key_.contains(QLatin1String("PRODUCER"), Qt::CaseInsensitive)) {
+  if(key_.contains(QLatin1StringView("PRODUCER"), Qt::CaseInsensitive)) {
     return QStringLiteral("producer");
   }
-  if(key_.contains(QLatin1String("COMPOSER"), Qt::CaseInsensitive)) {
+  if(key_.contains(QLatin1StringView("COMPOSER"), Qt::CaseInsensitive)) {
     return QStringLiteral("composer");
   }
-  if(key_.contains(QLatin1String("ACTOR"), Qt::CaseInsensitive)) {
+  if(key_.contains(QLatin1StringView("ACTOR"), Qt::CaseInsensitive)) {
     return QStringLiteral("cast");
   }
   return QString();
@@ -579,43 +579,44 @@ QString KinoPoiskFetcher::fieldValueFromObject(const QJsonObject& obj_, const QS
 
   QJsonObject valueObj = value_.toObject();
   // if there's a reference to another object, need to pull it from the higher level data object
-  if(valueObj.contains(QStringLiteral("__ref"))) {
-    valueObj = obj_.value(valueObj.value(QStringLiteral("__ref")).toString()).toObject();
+  if(valueObj.contains(QLatin1StringView("__ref"))) {
+    valueObj = obj_.value(valueObj.value(QLatin1StringView("__ref")).toString()).toObject();
   }
 
   // if it has a 'person' field, gotta grab the person name
-  if(valueObj.contains(QLatin1String("person"))) {
-    return fieldValueFromObject(obj_, field_, valueObj.value(QLatin1String("person")), allowed_);
+  if(valueObj.contains(QLatin1StringView("person"))) {
+    return fieldValueFromObject(obj_, field_, valueObj.value(QLatin1StringView("person")), allowed_);
   }
 
-  if(field_ == QLatin1String("title")) {
-    const QString title = valueObj.value(QStringLiteral("russian")).toString();
+  if(field_ == QLatin1StringView("title")) {
+    const QString title = valueObj.value(QLatin1StringView("russian")).toString();
     // return original if russian is not available
-    return title.isEmpty() ? valueObj.value(QStringLiteral("original")).toString() : title;
-  } else if(field_ == QLatin1String("origtitle")) {
-    return valueObj.value(QStringLiteral("original")).toString();
-  } else if(field_ == QLatin1String("cover")) {
-    QString url = valueObj.value(QStringLiteral("avatarsUrl")).toString();
+    return title.isEmpty() ? valueObj.value(QLatin1StringView("original")).toString() : title;
+  } else if(field_ == QLatin1StringView("origtitle")) {
+    return valueObj.value(QLatin1StringView("original")).toString();
+  } else if(field_ == QLatin1StringView("cover")) {
+    QString url = valueObj.value(QLatin1StringView("avatarsUrl")).toString();
     if(url.startsWith(QLatin1Char('/'))) {
       url.prepend(QLatin1String("https:"));
     }
     // also add size
     url.append(QLatin1Char('/') + QLatin1String(KINOPOISK_IMAGE_SIZE));
     return url;
-  } else if(field_ == QLatin1String("certification")) {
-    return mpaaRating(valueObj.value(QLatin1String("mpaa")).toString(), allowed_);
+  } else if(field_ == QLatin1StringView("certification")) {
+    return mpaaRating(valueObj.value(QLatin1StringView("mpaa")).toString(), allowed_);
   // with an 'originalName' or 'name' field return that
   // and check this before comparing against field names for people, like 'director'
-  } else if(valueObj.contains(QLatin1String("originalName")) || valueObj.contains(QLatin1String("name"))) {
-    const QString name = valueObj.value(QStringLiteral("name")).toString();
+  } else if(valueObj.contains(QLatin1StringView("originalName")) ||
+            valueObj.contains(QLatin1StringView("name"))) {
+    const QString name = valueObj.value(QLatin1StringView("name")).toString();
     // prefer name to originalName
-    return name.isEmpty() ? valueObj.value(QStringLiteral("originalName")).toString() : name;
-  } else if(valueObj.contains(QLatin1String("items"))) {
+    return name.isEmpty() ? valueObj.value(QLatin1StringView("originalName")).toString() : name;
+  } else if(valueObj.contains(QLatin1StringView("items"))) {
     // some additional nesting apparently
     // key in film object points to director object, whose 'items' is an array where each 'is' points to
     // a director object which has a person.id pointing to a person object with a 'name' and 'original' value
     // valueObj is the director so we want the items array
-    QJsonValue itemsValue = valueObj.value(QLatin1String("items"));
+    QJsonValue itemsValue = valueObj.value(QLatin1StringView("items"));
     if(!itemsValue.isArray()) {
       myDebug() << "items value is not an array";
       return QString();
@@ -629,13 +630,13 @@ QString KinoPoiskFetcher::fieldValueFromObject(const QJsonObject& obj_, const QS
 QString KinoPoiskFetcher::mpaaRating(const QString& value_, const QStringList& allowed_) {
   // default collection has 5 MPAA values
   if(allowed_.size() != 5) return value_;
-  if(value_ == QLatin1String("g")) {
+  if(value_ == QLatin1StringView("g")) {
     return allowed_.at(0);
-  } else if(value_ == QLatin1String("pg")) {
+  } else if(value_ == QLatin1StringView("pg")) {
     return allowed_.at(1);
-  } else if(value_ == QLatin1String("pg13")) {
+  } else if(value_ == QLatin1StringView("pg13")) {
     return allowed_.at(2);
-  } else if(value_ == QLatin1String("r")) {
+  } else if(value_ == QLatin1StringView("r")) {
     return allowed_.at(3);
   } else {
     return allowed_.at(4);

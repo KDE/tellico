@@ -38,7 +38,7 @@ QString ISBNValidator::isbn10(QString isbn13) {
     fixup10(isbn13);
     return isbn13;
   }
-  if(!isbn13.startsWith(QStringLiteral("978"))) {
+  if(!isbn13.startsWith(QLatin1StringView("978"))) {
     return original;
   }
   if(isbn13.length() < 13) {
@@ -111,8 +111,8 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
     return catState;
   }
 
-  if(input_.startsWith(QStringLiteral("978")) ||
-     input_.startsWith(QStringLiteral("979"))) {
+  if(input_.startsWith(QLatin1StringView("978")) ||
+     input_.startsWith(QLatin1StringView("979"))) {
     return validate13(input_, pos_);
   } else {
     return validate10(input_, pos_);
@@ -125,8 +125,8 @@ void ISBNValidator::fixup(QString& input_) const {
 
 void ISBNValidator::staticFixup(QString& input_) {
   static const QRegularExpression digits(QStringLiteral("\\d"));
-  if((input_.startsWith(QStringLiteral("978"))
-       || input_.startsWith(QStringLiteral("979")))
+  if((input_.startsWith(QLatin1StringView("978"))
+       || input_.startsWith(QLatin1StringView("979")))
      && input_.count(digits) > 10) {
     fixup13(input_);
   } else {
@@ -267,8 +267,8 @@ void ISBNValidator::fixup10(QString& input_) {
   // I consider the likelihood that someone wants to input an EAN to be higher than someone
   // using a Nigerian ISBN and not noticing that the checksum gets added automatically.
   if(input_.length() > 12
-     && (input_.startsWith(QStringLiteral("978"))
-         || input_.startsWith(QStringLiteral("979")))) {
+     && (input_.startsWith(QLatin1StringView("978"))
+         || input_.startsWith(QLatin1StringView("979")))) {
      // Strip the first 3 characters (the invalid publisher)
 //     input_ = input_.right(input_.length() - 3);
   }
@@ -306,8 +306,8 @@ void ISBNValidator::fixup10(QString& input_) {
   // If we can find it, add the checksum
   // but only if not started with 978 or 979
   if(input_.length() > 8
-     && !input_.startsWith(QStringLiteral("978"))
-     && !input_.startsWith(QStringLiteral("979"))) {
+     && !input_.startsWith(QLatin1StringView("978"))
+     && !input_.startsWith(QLatin1StringView("979"))) {
     if(input_.length() == 9) input_.resize(10);
     input_[9] = checkSum10(input_);
   }

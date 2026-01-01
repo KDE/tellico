@@ -117,7 +117,7 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
   // could return HTTP 202 while the caching system generates the file
   // see https://boardgamegeek.com/thread/1188687/export-collections-has-been-updated-xmlapi-develop
   // also has a root node of message. Try 5 times, waiting by 2 seconds each time
-  bool hasMessage = dom.documentElement().tagName() == QStringLiteral("message");
+  bool hasMessage = dom.documentElement().tagName() == QLatin1StringView("message");
   for(int loopCount = 0; hasMessage && loopCount < 5; ++loopCount) {
     // wait 2 seconds and try again
     QElapsedTimer timer;
@@ -127,7 +127,7 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
       QThread::msleep(500);
     }
     dom = FileHandler::readXMLDocument(u, false, true);
-    hasMessage = dom.documentElement().tagName() == QStringLiteral("message");
+    hasMessage = dom.documentElement().tagName() == QLatin1StringView("message");
   }
 
   if(hasMessage) {

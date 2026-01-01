@@ -373,9 +373,9 @@ void SRUFetcher::slotComplete(KJob*) {
     HandlerType handlerType = MARC21;
     // brute force marcxchange conversion. This is probably wrong at some level
     QString newResult = result;
-    if(m_format.startsWith(QLatin1String("marcxchange"), Qt::CaseInsensitive)) {
+    if(m_format.startsWith(QLatin1StringView("marcxchange"), Qt::CaseInsensitive)) {
       myLog() << "Replacing marcXchange namespace with MARC21";
-      if(newResult.contains(QLatin1String("format=\"UNIMARC\""))) {
+      if(newResult.contains(QLatin1StringView("format=\"UNIMARC\""))) {
         myLog() << "Reading marcXchange data as UNIMARC";
         handlerType = UNIMARC;
       } else {
@@ -396,10 +396,10 @@ void SRUFetcher::slotComplete(KJob*) {
       msg += QLatin1Char('\n');
     }
     msg += imp.statusMessage();
-  } else if((m_format == QLatin1String("pam") ||
-             m_format == QLatin1String("dc") ||
-             m_format == QLatin1String("dublincore") ||
-             m_format == QLatin1String("none")) &&
+  } else if((m_format == QLatin1StringView("pam") ||
+             m_format == QLatin1StringView("dc") ||
+             m_format == QLatin1StringView("dublincore") ||
+             m_format == QLatin1StringView("none")) &&
             initHandler(SRW)) {
     const auto tellicoXml = m_handlers[SRW]->applyStylesheet(result);
 #if 0

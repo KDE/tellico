@@ -152,10 +152,12 @@ void KinoFetcher::slotComplete(KJob*) {
   while(i.hasNext()) {
     auto match = i.next();
     QString u = match.captured(1);
-    if(u.isEmpty() || u.contains(QLatin1String("news")) || !u.contains(QLatin1String("film"))) {
+    if(u.isEmpty() ||
+       u.contains(QLatin1StringView("news")) ||
+       !u.contains(QLatin1StringView("film"))) {
       continue;
     }
-    if(u.startsWith(QLatin1String("//"))) {
+    if(u.startsWith(QLatin1StringView("//"))) {
       u.prepend(QLatin1String("https:"));
     }
     Data::CollPtr coll(new Data::VideoCollection(true));
@@ -228,7 +230,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
   while(i.hasNext()) {
     QJsonDocument doc = QJsonDocument::fromJson(i.next().captured(1).toUtf8());
     const auto obj = doc.object();
-    if(objValue(obj, "@type") != QStringLiteral("Movie")) {
+    if(objValue(obj, "@type") != QLatin1StringView("Movie")) {
       continue;
     }
     const auto dirName = objValue(obj, "director", "name");
@@ -291,7 +293,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     }
   }
   if(!lengthStr.isEmpty()) {
-    const QString l = lengthStr.remove(QStringLiteral(" Min")).trimmed();
+    const QString l = lengthStr.remove(QLatin1StringView(" Min")).trimmed();
     entry->setField(QStringLiteral("running-time"), l);
   }
 
@@ -324,15 +326,15 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
       entry->collection()->fieldByName(QStringLiteral("certification"))->setAllowed(allowed);
     }
     QString c = certMatch.captured(1).remove(tagRx).trimmed();
-    if(c == QLatin1String("ab 0") || c == QLatin1String("0")) {
+    if(c == QLatin1StringView("ab 0") || c == QLatin1StringView("0")) {
       c = QStringLiteral("FSK 0 (DE)");
-    } else if(c == QLatin1String("ab 6") || c == QLatin1String("6")) {
+    } else if(c == QLatin1StringView("ab 6") || c == QLatin1StringView("6")) {
       c = QStringLiteral("FSK 6 (DE)");
-    } else if(c == QLatin1String("ab 12") || c == QLatin1String("12")) {
+    } else if(c == QLatin1StringView("ab 12") || c == QLatin1StringView("12")) {
       c = QStringLiteral("FSK 12 (DE)");
-    } else if(c == QLatin1String("ab 16") || c == QLatin1String("16")) {
+    } else if(c == QLatin1StringView("ab 16") || c == QLatin1StringView("16")) {
       c = QStringLiteral("FSK 16 (DE)");
-    } else if(c == QLatin1String("ab 18") || c == QLatin1String("18")) {
+    } else if(c == QLatin1StringView("ab 18") || c == QLatin1StringView("18")) {
       c = QStringLiteral("FSK 18 (DE)");
     }
     entry->setField(QStringLiteral("certification"), c);

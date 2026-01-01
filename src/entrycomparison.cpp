@@ -62,21 +62,21 @@ int EntryComparison::score(const Tellico::Data::EntryPtr& e1, const Tellico::Dat
     return MATCH_VALUE_STRONG;
   }
   // special case for isbn
-  if(f->name() == QStringLiteral("isbn")) {
+  if(f->name() == QLatin1StringView("isbn")) {
     return ISBNValidator::isbn13(s1) == ISBNValidator::isbn13(s2) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
   }
-  if(f->name() == QStringLiteral("lccn")) {
+  if(f->name() == QLatin1StringView("lccn")) {
     return LCCNValidator::formalize(s1) == LCCNValidator::formalize(s2) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
   }
-  if(f->name() == QStringLiteral("url") && e1->collection() && e1->collection()->type() == Data::Collection::File) {
+  if(f->name() == QLatin1StringView("url") && e1->collection() && e1->collection()->type() == Data::Collection::File) {
     // versions before 1.2.7 could have saved the url without the protocol
     QUrl u1(s1);
     QUrl u2(s2);
     return (u1 == u2 ||
-            (f->property(QStringLiteral("relative")) == QStringLiteral("true") &&
+            (f->property(QStringLiteral("relative")) == QLatin1StringView("true") &&
              s_documentUrl.resolved(u1) == s_documentUrl.resolved(u2))) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
   }
-  if(f->name() == QStringLiteral("imdb")) {
+  if(f->name() == QLatin1StringView("imdb")) {
     // imdb might be a different host since we query akas.imdb.com and normally it is www.imdb.com
     QUrl us1 = QUrl::fromUserInput(s1);
     QUrl us2 = QUrl::fromUserInput(s2);
@@ -121,7 +121,7 @@ int EntryComparison::score(const Tellico::Data::EntryPtr& e1, const Tellico::Dat
     }
     return matches / sl1.count();
   }
-  if(f->name() == QStringLiteral("arxiv")) {
+  if(f->name() == QLatin1StringView("arxiv")) {
     // normalize and unVersion arxiv ID
     static const QRegularExpression rx1(QStringLiteral("^arxiv:"));
     static const QRegularExpression rx2(QStringLiteral("v\\d+$"));

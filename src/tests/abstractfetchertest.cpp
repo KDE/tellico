@@ -44,7 +44,7 @@ AbstractFetcherTest::AbstractFetcherTest() : QObject(), m_loop(this), m_hasNetwo
   QStandardPaths::setTestModeEnabled(true);
   qputenv("KIOWORKER_ENABLE_TESTMODE", "1"); // ensure the KIO workers call QStandardPaths::setTestModeEnabled too
   KLocalizedString::setApplicationDomain("tellico");
-  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = true"));
 }
 
 Tellico::Data::EntryList AbstractFetcherTest::doFetch(Tellico::Fetch::Fetcher::Ptr fetcher,

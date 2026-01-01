@@ -279,7 +279,7 @@ void UPCItemDbFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& o
   for(const auto& imageValue : imageList) {
     // skip booksamillion images
     const QString image = imageValue.toString();
-    if(!image.isEmpty() && !image.contains(QLatin1String("booksamillion.com"))) {
+    if(!image.isEmpty() && !image.contains(QLatin1StringView("booksamillion.com"))) {
       entry_->setField(QStringLiteral("cover"), image);
       break;
     }
@@ -382,53 +382,53 @@ bool UPCItemDbFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QSt
     entry_->setField(QStringLiteral("year"), yearMatch.captured());
     res = true;
   }
-  if(token_.indexOf(QLatin1String("widescreen"), 0, Qt::CaseInsensitive) > -1 ||
-     token_.indexOf(i18n("Widescreen"), 0, Qt::CaseInsensitive) > -1) {
+  if(token_.contains(QLatin1StringView("widescreen"), Qt::CaseInsensitive) ||
+     token_.contains(i18n("Widescreen"), Qt::CaseInsensitive)) {
     entry_->setField(QStringLiteral("widescreen"), QStringLiteral("true"));
     // res = true; leave it in the title
-  } else if(token_.indexOf(QLatin1String("full screen"), 0, Qt::CaseInsensitive) > -1) {
+  } else if(token_.contains(QLatin1StringView("full screen"), Qt::CaseInsensitive)) {
     // skip, but go ahead and remove from title
     res = true;
-  } else if(token_.indexOf(QLatin1String("standard edition"), 0, Qt::CaseInsensitive) > -1) {
+  } else if(token_.contains(QLatin1StringView("standard edition"), Qt::CaseInsensitive)) {
     // skip, but go ahead and remove from title
     res = true;
-  } else if(token_.indexOf(QLatin1String("import"), 0, Qt::CaseInsensitive) > -1) {
+  } else if(token_.contains(QLatin1StringView("import"), Qt::CaseInsensitive)) {
     // skip, but go ahead and remove from title
     res = true;
   }
-  if(token_.indexOf(QLatin1String("blu-ray"), 0, Qt::CaseInsensitive) > -1) {
+  if(token_.contains(QLatin1StringView("blu-ray"), Qt::CaseInsensitive)) {
     entry_->setField(QStringLiteral("medium"), i18n("Blu-ray"));
     res = true;
-  } else if(token_.indexOf(QLatin1String("hd dvd"), 0, Qt::CaseInsensitive) > -1) {
+  } else if(token_.contains(QLatin1StringView("hd dvd"), Qt::CaseInsensitive)) {
     entry_->setField(QStringLiteral("medium"), i18n("HD DVD"));
     res = true;
-  } else if(token_.indexOf(QLatin1String("vhs"), 0, Qt::CaseInsensitive) > -1) {
+  } else if(token_.contains(QLatin1StringView("vhs"), Qt::CaseInsensitive)) {
     entry_->setField(QStringLiteral("medium"), i18n("VHS"));
     res = true;
   }
-  if(token_.indexOf(QLatin1String("director's cut"), 0, Qt::CaseInsensitive) > -1 ||
-     token_.indexOf(i18n("Director's Cut"), 0, Qt::CaseInsensitive) > -1) {
+  if(token_.contains(QLatin1StringView("director's cut"), Qt::CaseInsensitive) ||
+     token_.contains(i18n("Director's Cut"), Qt::CaseInsensitive)) {
     entry_->setField(QStringLiteral("directors-cut"), QStringLiteral("true"));
     // res = true; leave it in the title
   }
   const QString tokenLower = token_.toLower();
-  if(tokenLower == QLatin1String("ntsc")) {
+  if(tokenLower == QLatin1StringView("ntsc")) {
     entry_->setField(QStringLiteral("format"), i18n("NTSC"));
     res = true;
   }
-  if(tokenLower == QLatin1String("dvd")) {
+  if(tokenLower == QLatin1StringView("dvd")) {
     entry_->setField(QStringLiteral("medium"), i18n("DVD"));
     res = true;
   }
-  if(tokenLower == QLatin1String("cd") && collectionType() == Data::Collection::Album) {
+  if(tokenLower == QLatin1StringView("cd") && collectionType() == Data::Collection::Album) {
     entry_->setField(QStringLiteral("medium"), i18n("Compact Disc"));
     res = true;
   }
-  if(tokenLower == QLatin1String("dvd")) {
+  if(tokenLower == QLatin1StringView("dvd")) {
     entry_->setField(QStringLiteral("medium"), i18n("DVD"));
     res = true;
   }
-  if(token_.indexOf(QLatin1String("series"), 0, Qt::CaseInsensitive) > -1) {
+  if(token_.contains(QLatin1StringView("series"), Qt::CaseInsensitive)) {
     entry_->setField(QStringLiteral("series"), token_);
     res = true;
   }

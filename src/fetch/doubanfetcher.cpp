@@ -420,34 +420,34 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QJsonObject& obj_) {
       QRegularExpressionMatch match = i.next();
       const QString m1 = match.captured(1).simplified();
       const QString m2 = match.captured(2).simplified();
-      if(m1 == QStringLiteral("原作名")) {
+      if(m1 == "原作名"_L1) {
         const QString origtitle = QStringLiteral("origtitle");
         if(entry->collection()->hasField(origtitle) && entry->field(origtitle).isEmpty()) {
           entry->setField(origtitle, m2);
         }
-      } else if(m1 == QStringLiteral("装帧")) {
-        if(m2 == QStringLiteral("精装")) {
+      } else if(m1 == "装帧"_L1) {
+        if(m2 == "精装"_L1) {
           entry->setField(QStringLiteral("binding"), i18n("Hardback"));
-        } else if(m2 == QStringLiteral("平装")) {
+        } else if(m2 == "平装"_L1) {
           entry->setField(QStringLiteral("binding"), i18n("Paperback"));
         }
-      } else if(m1 == QLatin1String("ISBN")) {
+      } else if(m1 == "ISBN"_L1) {
         entry->setField(QStringLiteral("isbn"), m2);
-      } else if(m1 == QStringLiteral("介质")) {
-        if(m2.contains(QLatin1String("CD"))) {
+      } else if(m1 == "介质"_L1) {
+        if(m2.contains("CD"_L1)) {
           entry->setField(QStringLiteral("medium"), i18n("Compact Disc"));
         }
-      } else if(m1 == QStringLiteral("流派")) {
+      } else if(m1 == "流派"_L1) {
         static const QRegularExpression slashRx(QStringLiteral("\\s*/\\s*"));
         const QStringList genres = m2.split(slashRx);
         entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::rowDelimiterString()));
-      } else if(m1 == QStringLiteral("片长")) {
+      } else if(m1 == "片长"_L1) {
         static const QRegularExpression digits(QStringLiteral("\\d+"));
         auto digitsMatch = digits.match(m2);
         if(digitsMatch.hasMatch()) {
           entry->setField(QStringLiteral("running-time"), digitsMatch.captured());
         }
-      } else if(m1 == QStringLiteral("编剧")) {
+      } else if(m1 == "编剧"_L1) {
         entry->setField(QStringLiteral("writer"), m2);
       }
     }
@@ -455,7 +455,7 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QJsonObject& obj_) {
 
   const QString image_id = entry->field(QStringLiteral("cover"));
   // if it's still a url, we need to load it
-  if(image_id.startsWith(QLatin1String("http"))) {
+  if(image_id.startsWith("http"_L1)) {
     const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true, QUrl(info_url));
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
@@ -472,29 +472,29 @@ void DoubanFetcher::populateBookEntry(Data::EntryPtr entry, const QJsonObject& o
   entry->setField(QStringLiteral("subtitle"), objValue(obj_, "subtitle"));
   entry->setField(QStringLiteral("author"), objValue(obj_, "author"));
   entry->setField(QStringLiteral("translator"), objValue(obj_, "translator"));
-  if(obj_.contains(QLatin1String("publisher"))) {
+  if(obj_.contains("publisher"_L1)) {
     entry->setField(QStringLiteral("publisher"), objValue(obj_, "publisher"));
   } else {
     entry->setField(QStringLiteral("publisher"), objValue(obj_, "press"));
   }
 
   const QString binding = objValue(obj_, "binding");
-  if(binding == QStringLiteral("精装")) {
+  if(binding == "精装"_L1) {
     entry->setField(QStringLiteral("binding"), i18n("Hardback"));
-  } else if(binding == QStringLiteral("平装")) {
+  } else if(binding == "平装"_L1) {
     entry->setField(QStringLiteral("binding"), i18n("Paperback"));
   }
 
   entry->setField(QStringLiteral("pub_year"), objValue(obj_, "pubdate").left(4));
   QString isbn;
-  if(obj_.contains(QLatin1String("isbn10"))) {
+  if(obj_.contains("isbn10"_L1)) {
     isbn = objValue(obj_, "isbn10");
   } else if(request().key() == ISBN && !request().value().contains(QLatin1Char(';'))) {
     isbn = request().value();
   }
   entry->setField(QStringLiteral("isbn"), ISBNValidator::isbn10(isbn));
   entry->setField(QStringLiteral("pages"), objValue(obj_, "pages"));
-  if(obj_.contains(QLatin1String("cover_url"))) {
+  if(obj_.contains("cover_url"_L1)) {
     entry->setField(QStringLiteral("cover"), objValue(obj_, "cover_url"));
   } else {
     entry->setField(QStringLiteral("cover"), objValue(obj_, "image"));
@@ -511,13 +511,13 @@ void DoubanFetcher::populateBookEntry(Data::EntryPtr entry, const QJsonObject& o
     entry->setField(QStringLiteral("origtitle"), objValue(obj_, "origin_title"));
   }
   if(entry->collection()->hasField(QStringLiteral("douban"))) {
-    if(obj_.contains(QLatin1String("alt"))) {
+    if(obj_.contains("alt"_L1)) {
       entry->setField(QStringLiteral("douban"), objValue(obj_, "alt"));
     } else {
       entry->setField(QStringLiteral("douban"), objValue(obj_, "url"));
     }
   }
-  if(obj_.contains(QLatin1String("summary"))) {
+  if(obj_.contains("summary"_L1)) {
     entry->setField(QStringLiteral("plot"), objValue(obj_, "summary"));
   } else {
     entry->setField(QStringLiteral("plot"), objValue(obj_, "intro"));
@@ -530,12 +530,12 @@ void DoubanFetcher::populateVideoEntry(Data::EntryPtr entry, const QJsonObject& 
   entry->setField(QStringLiteral("director"), objValue(obj_, "directors", "name"));
   entry->setField(QStringLiteral("writer"), objValue(obj_, "writers", "name"));
   entry->setField(QStringLiteral("year"), objValue(obj_, "year"));
-  if(obj_.contains(QLatin1String("cover_url"))) {
+  if(obj_.contains("cover_url"_L1)) {
     entry->setField(QStringLiteral("cover"), objValue(obj_, "cover_url"));
   } else {
     entry->setField(QStringLiteral("cover"), objValue(obj_, "images", "medium"));
   }
-  if(obj_.contains(QLatin1String("summary"))) {
+  if(obj_.contains("summary"_L1)) {
     entry->setField(QStringLiteral("plot"), objValue(obj_, "summary"));
   } else {
     entry->setField(QStringLiteral("plot"), objValue(obj_, "intro"));
@@ -554,7 +554,7 @@ void DoubanFetcher::populateVideoEntry(Data::EntryPtr entry, const QJsonObject& 
 
 void DoubanFetcher::populateMusicEntry(Data::EntryPtr entry, const QJsonObject& obj_) {
   entry->setField(QStringLiteral("title"), objValue(obj_, "title"));
-  if(obj_.contains(QLatin1String("cover_url"))) {
+  if(obj_.contains("cover_url"_L1)) {
     entry->setField(QStringLiteral("cover"), objValue(obj_, "cover_url"));
   } else {
     entry->setField(QStringLiteral("cover"), objValue(obj_, "image"));
@@ -563,8 +563,8 @@ void DoubanFetcher::populateMusicEntry(Data::EntryPtr entry, const QJsonObject& 
   entry->setField(QStringLiteral("label"), objValue(obj_, "attrs", "publisher"));
   entry->setField(QStringLiteral("year"), objValue(obj_, "attrs", "pubdate").left(4));
 
-  if(objValue(obj_, "attrs", "media") == QLatin1String("Audio CD") ||
-     objValue(obj_, "attrs", "media") == QLatin1String("CD")) {
+  if(objValue(obj_, "attrs", "media") == "Audio CD"_L1 ||
+     objValue(obj_, "attrs", "media") == "CD"_L1) {
     entry->setField(QStringLiteral("medium"), i18n("Compact Disc"));
   }
 
@@ -572,7 +572,7 @@ void DoubanFetcher::populateMusicEntry(Data::EntryPtr entry, const QJsonObject& 
   const auto songList = obj_["songs"_L1].toArray();
   for(const auto& v : songList) {
     const auto trackMap = v.toObject();
-    QString title = objValue(trackMap, "title");
+    const QString title = objValue(trackMap, "title");
     QString artists = objValue(trackMap, "artist_names");
     if(artists.isEmpty()) artists = entry->field(QStringLiteral("artist"));
     tracks << title + FieldFormat::columnDelimiterString() +

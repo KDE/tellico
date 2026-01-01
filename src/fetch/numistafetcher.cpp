@@ -198,39 +198,39 @@ void NumistaFetcher::slotComplete(KJob* ) {
     stop();
     return;
   }
-  QJsonObject obj = doc.object();
+  const auto obj = doc.object();
 
   // check for error
-  if(obj.contains(QStringLiteral("error"))) {
-    const QString msg = obj.value(QStringLiteral("error")).toString();
+  if(obj.contains(QLatin1StringView("error"))) {
+    const QString msg = obj.value(QLatin1StringView("error")).toString();
     message(msg, MessageHandler::Error);
     myDebug() << "NumistaFetcher -" << msg;
     stop();
     return;
   }
 
-  m_total = obj.value(QLatin1String("count")).toInt();
+  m_total = obj.value(QLatin1StringView("count")).toInt();
   m_hasMoreResults = m_total > m_page*m_limit;
 
   int count = 0;
-  QJsonArray results = obj.value(QLatin1String("coins")).toArray();
+  QJsonArray results = obj.value(QLatin1StringView("coins")).toArray();
   for(QJsonArray::const_iterator i = results.constBegin(); i != results.constEnd(); ++i) {
     if(count >= m_limit) {
       break;
     }
     QJsonObject result = (*i).toObject();
 
-    QString desc = result.value(QLatin1String("issuer")).toObject()
-                         .value(QLatin1String("name")).toString();
-    const QString minYear = result.value(QLatin1String("minYear")).toString();
+    QString desc = result.value(QLatin1StringView("issuer")).toObject()
+                         .value(QLatin1StringView("name")).toString();
+    const QString minYear = result.value(QLatin1StringView("minYear")).toString();
     if(!minYear.isEmpty()) {
-      desc += QLatin1Char('/') + minYear + QLatin1Char('-') + result.value(QLatin1String("maxYear")).toString();
+      desc += QLatin1Char('/') + minYear + QLatin1Char('-') + result.value(QLatin1StringView("maxYear")).toString();
     }
-    QString title = result.value(QLatin1String("title")).toString();
+    QString title = result.value(QLatin1StringView("title")).toString();
     // some results include &quot;
-    title.replace(QLatin1String("&quot;"), QLatin1String("\""));
+    title.replace(QLatin1StringView("&quot;"), QLatin1StringView("\""));
     FetchResult* r = new FetchResult(this, title, desc);
-    m_matches.insert(r->uid, result.value(QLatin1String("id")).toInt());
+    m_matches.insert(r->uid, result.value(QLatin1StringView("id")).toInt());
     Q_EMIT signalResultFound(r);
     ++count;
   }

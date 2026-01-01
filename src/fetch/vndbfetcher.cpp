@@ -209,9 +209,9 @@ bool VNDBFetcher::verifyData() {
 
   if(m_data.startsWith("error")) { //krazy:exclude=strings
     QJsonDocument doc = QJsonDocument::fromJson(m_data.mid(5));
-    QVariantMap result = doc.object().toVariantMap();
-    if(result.contains(QStringLiteral("msg"))) {
-      const auto msg = result.value(QStringLiteral("msg")).toString();
+    const auto obj = doc.object();
+    if(obj.contains(QLatin1StringView("msg"))) {
+      const auto msg = obj[QLatin1StringView("msg")].toString();
       myDebug() << "Data error:" << msg;
       message(msg, MessageHandler::Error);
     }

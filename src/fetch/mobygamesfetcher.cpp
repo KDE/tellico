@@ -234,13 +234,13 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   for(const auto& rating : ratingList) {
     const auto ratingObj = rating.toObject();
     const QString ratingSystem = objValue(ratingObj, "rating_system_name");
-    if(ratingSystem == QStringLiteral("PEGI Rating")) {
+    if(ratingSystem == QLatin1StringView("PEGI Rating")) {
       QString rating = objValue(ratingObj, "rating_name");
-      if(!rating.startsWith(QStringLiteral("PEGI"))) {
+      if(!rating.startsWith(QLatin1StringView("PEGI"))) {
         rating.prepend(QStringLiteral("PEGI "));
       }
       entry->setField(QStringLiteral("pegi"), rating);
-    } else if(ratingSystem == QStringLiteral("ESRB Rating")) {
+    } else if(ratingSystem == QLatin1StringView("ESRB Rating")) {
       const int esrb = ratingObj[QLatin1StringView("rating_id")].toInt();
       if(m_esrbHash.contains(esrb)) {
         entry->setField(QStringLiteral("certification"), m_esrbHash.value(esrb));
