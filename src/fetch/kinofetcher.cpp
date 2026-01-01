@@ -142,9 +142,9 @@ void KinoFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
-  QRegularExpression linkRx(QStringLiteral("<div class=\"poster__title\">.*?<a .+?poster__link.+?href=\"(.+?)\".*?>(.+?)</"),
+  QRegularExpression linkRx(QStringLiteral("<div class=\"alice-teaser-title\">.*?<a .+?teaser-link.+?href=\"(.+?)\".*?>(.+?)</a"),
                             QRegularExpression::DotMatchesEverythingOption);
-  QRegularExpression dateSpanRx(QStringLiteral("<span .+?movie-startdate.+?>(.+?)</span"));
+  QRegularExpression dateSpanRx(QStringLiteral("<li>Kinostart: (.+?)</li"));
   QRegularExpression dateRx(QStringLiteral("\\d{2}\\.\\d{2}\\.(\\d{4})"));
   QRegularExpression yearEndRx(QStringLiteral("(\\d{4})/?$"));
 

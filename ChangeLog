@@ -1,3 +1,7 @@
+2026-01-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Kino.de data source.
+
 2025-12-28  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed Arxiv ID search to return correct results.
