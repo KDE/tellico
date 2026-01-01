@@ -65,7 +65,7 @@ void NumistaFetcherTest::testSacagawea() {
   QCOMPARE(entry->field(QStringLiteral("country")), QStringLiteral("United States"));
   QCOMPARE(entry->field(QStringLiteral("denomination")), QStringLiteral("1 Dollar"));
   QCOMPARE(entry->field(QStringLiteral("currency")), QStringLiteral("Dollar"));
-  QCOMPARE(entry->field(QStringLiteral("numista")), QStringLiteral("https://en.numista.com/catalogue/pieces155679.html"));
+  QCOMPARE(entry->field(QStringLiteral("numista")), QStringLiteral("https://en.numista.com/155679"));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("obverse")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("obverse")).contains(QLatin1Char('/')));
