@@ -185,9 +185,7 @@
 > haciendo clic en el botón <guilabel
 >Descargar</guilabel
 >. Cualquier plantilla instalada por el usuario se puede borrar. Las plantillas de entrada se guardan en <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/entry-templates/</filename
+>~/.local/share/tellico/entry-templates/</filename
 >. </para>
 
 <para

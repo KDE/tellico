@@ -185,9 +185,7 @@
 > fent clic al botó <guilabel
 >Baixa</guilabel
 >. Qualsevol plantilla instal·lada per l'usuari també es pot suprimir. Les plantilles d'entrada es desen a <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/entry-templates/</filename
+>~/.local/share/tellico/entry-templates/</filename
 >. </para>
 
 <para

@@ -542,9 +542,7 @@
 
 <para
 >Les opcions del &appname; es desen en un fitxer a la carpeta d'inici de l'usuari, anomenada <filename
->$<envar
->KDEHOME</envar
->/share/config/tellicorc</filename
+>~/.config/tellicorc</filename
 >. Dins d'aquest fitxer, les opcions es posen en grups, els quals apareixen amb els noms entre claudàtors, com [General Options]. Per a afegir una opció al grup <emphasis
 >General Options</emphasis
 >, trobeu la línia al fitxer de configuració amb aquest nom de grup. Si no apareix, llavors creu-la afegint una línia que digui [General Options]. Llavors, podreu afegir l'opció a sota del nom de grup. </para>

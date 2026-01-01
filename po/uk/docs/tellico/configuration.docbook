@@ -177,9 +177,7 @@
 > після натискання кнопки <guilabel
 >Отримати</guilabel
 >. Всі шаблони, встановлені користувачем, можна вилучати. Файли шаблонів зберігаються у каталозі <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/entry-templates/</filename
+>~/.local/share/tellico/entry-templates/</filename
 >. </para>
 
 <para

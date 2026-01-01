@@ -539,10 +539,8 @@
 >. No son lo suficientemente importantes para garantizar masificar el diálogo con más opciones, pero como representan opciones que pueden ser interesantes para varios usuarios, la aplicación las lee desde el archivo de configuración. </para>
 
 <para
->Los ajustes para &appname; se guardan en un archivo del directorio local del usuario, <filename
->$<envar
->KDEHOME</envar
->/share/config/tellicorc</filename
+>Los ajustes para &appname; se guardan en un archivo del directorio local del usuario, normalmente <filename
+>~/.config/tellicorc</filename
 >. Dentro de ese archivo, los ajustes se ponen en grupos, que aparecen con nombres entre corchetes, como en [Opciones generales]. Para añadir un ajuste al grupo <emphasis
 >Opciones generales</emphasis
 >, encuentre la línea en el archivo de ajustes que contenga el nombre del grupo. Si no aparece, créelo usted mismo añadiendo una línea que diga [Opciones generales]. Entonces, el ajuste se puede añadir bajo el nombre del grupo. </para>

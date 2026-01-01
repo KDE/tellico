@@ -378,9 +378,7 @@
 <warning>
 <para
 >De manera predeterminada, les imatges es desen al fitxer de dades de la col·lecció, mantenint tot el contingut en una sola ubicació. No obstant això, massa imatges faran que el &appname; s'alenteixi de manera significativa i que creï un fitxer de dades molt gran. Alternativament, el &appname; pot desar les imatges per separat, sigui a la carpeta <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/data/</filename
+>~/.local/share/tellico/data/</filename
 > o en una carpeta a la mateixa ubicació que el fitxer de dades. Carregar i desar fitxers de dades és molt més ràpid si les imatges s'emmagatzemen per separat, però els fitxers de dades ja no seran portables o es podran arxivar. Els fitxers de dades que ho contenen tot sempre es poden crear utilitzant l'element de menú <menuchoice
 ><guimenu
 >Fitxer</guimenu
@@ -894,12 +892,10 @@
 >El &appname; pot generar diversos informes sobre la vostra col·lecció actual. El <interface
 >diàleg Informes</interface
 > comprova totes les plantilles &xslt; en el camí de la instal·lació i a <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/report-templates/</filename
->. De manera que si en creeu de noves, i es troben automàticament, seran incloses com a opcions en el <interface
+>~/.local/share/tellico/report-templates/</filename
+>. De manera que si en creeu de noves, i es troben automàticament i s'inclouen com a opcions en el <interface
 >diàleg Informes</interface
->. Alguns informes complexos poden trigar una mica més de temps a generar-se per a col·leccions grans. </para>
+>. Alguns informes complexos poden trigar una mica més de temps a generar-se en col·leccions grans. </para>
 
 <para
 >Les plantilles que s'instal·len amb el &appname; inclouen una llista de sols títols, la vista predeterminada de columna, una vista de grup, un resum de tots els grups i els valors més populars en aquests grups, un informe de préstecs, i un ampli informe amb les imatges de la portada. Seleccioneu la plantilla desitjada i feu clic al botó <guibutton

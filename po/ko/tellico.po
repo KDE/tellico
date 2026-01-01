@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-31 00:44+0000\n"
+"POT-Creation-Date: 2026-01-01 00:43+0000\n"
 "PO-Revision-Date: 2025-10-12 13:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2529,7 +2529,7 @@ msgstr "템플릿 옵션"
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
-#: src/translators/filelistingimporter.cpp:192
+#: src/translators/filelistingimporter.cpp:193
 #, kde-format
 msgid "Collection &type:"
 msgstr "소장품 형식(&T):"
@@ -3206,7 +3206,7 @@ msgstr "내보낸 파일을 사용자 로캘의 인코딩으로 인코딩합니�
 #: src/fetch/discogsfetcher.cpp:602 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/googlebookfetcher.cpp:383 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
-#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:566
+#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
 #, kde-format
 msgid ""
@@ -3223,7 +3223,7 @@ msgstr ""
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:395
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
-#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:578
+#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
 #, kde-format
 msgid "Access key: "
 msgstr "액세스 키: "
@@ -3273,7 +3273,7 @@ msgstr "SAO/NASA 천체물리 자료 시스템"
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:544
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:401
-#: src/fetch/themoviedbfetcher.cpp:584 src/fetch/thetvdbfetcher.cpp:594
+#: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:594
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3556,7 +3556,7 @@ msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
 msgstr "arXiv의 오픈 액세스 접근 허용에 대해서 감사드립니다."
 
-#: src/fetch/arxivfetcher.cpp:345 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
@@ -3565,7 +3565,7 @@ msgstr "arXiv의 오픈 액세스 접근 허용에 대해서 감사드립니다.
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:453
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
-#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:394
+#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:394
 #: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
 #: src/fetch/vndbfetcher.cpp:433
@@ -3624,7 +3624,7 @@ msgid "PEGI Rating"
 msgstr "PEGI 등급"
 
 #: src/fetch/colnectfetcher.cpp:971 src/fetch/filmaffinityfetcher.cpp:491
-#: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:603
+#: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:604
 #, kde-format
 msgid "Language: "
 msgstr "언어: "
@@ -3741,7 +3741,7 @@ msgstr "사용자 토큰: "
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
-#: src/fetch/themoviedbfetcher.cpp:552 src/fetch/vndbfetcher.cpp:279
+#: src/fetch/themoviedbfetcher.cpp:553 src/fetch/vndbfetcher.cpp:279
 #: src/fetch/vndbfetcher.cpp:425 src/translators/filereadervideo.cpp:174
 #, kde-format
 msgid "Original Title"
@@ -3760,7 +3760,7 @@ msgstr "DVDFr 링크"
 #: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:458
 #: src/fetch/imdbfetcher.cpp:507 src/fetch/moviemeterfetcher.cpp:228
 #: src/fetch/moviemeterfetcher.cpp:309 src/fetch/omdbfetcher.cpp:255
-#: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:551
+#: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:552
 #: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:365
 #, kde-format
 msgid "Alternative Titles"
@@ -3896,13 +3896,13 @@ msgid "FilmAffinity Link"
 msgstr "FilmAffinity 링크"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:526
-#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:589
+#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "최대 캐스트(&M): "
 
 #: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:535
-#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:598
+#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -4014,7 +4014,7 @@ msgid "Internet Movie Database"
 msgstr "인터넷 영화 데이터베이스"
 
 #: src/fetch/imdbfetcher.cpp:505 src/fetch/kinopoiskfetcher.cpp:668
-#: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:550
+#: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:331
 #, kde-format
@@ -4027,7 +4027,7 @@ msgid "Certifications"
 msgstr "인증"
 
 #: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:564
-#: src/fetch/themoviedbfetcher.cpp:554 src/fetch/thetvdbfetcher.cpp:563
+#: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
@@ -4242,20 +4242,20 @@ msgstr "서버에서 사용하는 결과 형식을 입력하십시오."
 msgid "Field"
 msgstr "필드"
 
-#: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:549
+#: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:550
 #: src/translators/filereadervideo.cpp:249
 #, kde-format
 msgid "TMDb Link"
 msgstr "TMDb 링크"
 
-#: src/fetch/themoviedbfetcher.cpp:333 src/fetch/themoviedbfetcher.cpp:553
+#: src/fetch/themoviedbfetcher.cpp:333 src/fetch/themoviedbfetcher.cpp:554
 #: src/fetch/thetvdbfetcher.cpp:250 src/fetch/thetvdbfetcher.cpp:564
 #: src/fetch/tvmazefetcher.cpp:179 src/fetch/tvmazefetcher.cpp:364
 #, kde-format
 msgid "Network"
 msgstr "네트워크"
 
-#: src/fetch/themoviedbfetcher.cpp:660
+#: src/fetch/themoviedbfetcher.cpp:661
 #, kde-format
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB(%1)"
@@ -5034,7 +5034,7 @@ msgstr "행 위로 이동"
 msgid "Move Row Down"
 msgstr "행 아래로 이동"
 
-#: src/images/imagejob.cpp:93 src/images/imagejob.cpp:132
+#: src/images/imagejob.cpp:94 src/images/imagejob.cpp:133
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico에서 이미지를 불러올 수 없음 - %1."
@@ -6674,7 +6674,7 @@ msgid "If checked, the bitrate for each track is added to the entries."
 msgstr "이 옵션을 선택하면 각 트랙의 비트 전송률이 항목에 추가됩니다."
 
 #: src/translators/bibtexexporter.cpp:218
-#: src/translators/bibteximporter.cpp:342
+#: src/translators/bibteximporter.cpp:344
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Bibtex 옵션"
@@ -6750,22 +6750,22 @@ msgstr "올바른 BibTeX 항목을 찾을 수 없음"
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "파일에서 올바른 BibTeX 항목을 찾을 수 없음 - %1"
 
-#: src/translators/bibteximporter.cpp:345
+#: src/translators/bibteximporter.cpp:347
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
 msgstr "유니코드(UTF-8) 인코딩 사용"
 
-#: src/translators/bibteximporter.cpp:346
+#: src/translators/bibteximporter.cpp:348
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
 msgstr "가져온 파일을 유니코드(UTF-8)로 읽습니다."
 
-#: src/translators/bibteximporter.cpp:347
+#: src/translators/bibteximporter.cpp:349
 #, kde-format
 msgid "Use user locale (%1) encoding"
 msgstr "사용자 로캘 인코딩(%1) 사용"
 
-#: src/translators/bibteximporter.cpp:351
+#: src/translators/bibteximporter.cpp:353
 #, kde-format
 msgid "Read the imported file in the local encoding."
 msgstr "가져온 파일을 로컬 인코딩으로 읽습니다."
@@ -6901,7 +6901,7 @@ msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "행 구분 기호는 <i>테이블</i> 필드의 각 행에서 값을 구분합니다."
 
 #: src/translators/csvimporter.cpp:251
-#: src/translators/filelistingimporter.cpp:191
+#: src/translators/filelistingimporter.cpp:192
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "가져올 소장품 형식을 선택합니다."
@@ -7007,32 +7007,32 @@ msgstr "<새 필드>"
 msgid "Discogs Options"
 msgstr "Discogs 옵션"
 
-#: src/translators/filelistingimporter.cpp:83
+#: src/translators/filelistingimporter.cpp:84
 #, kde-format
 msgid "Scanning files..."
 msgstr "파일 검색 중..."
 
-#: src/translators/filelistingimporter.cpp:174
+#: src/translators/filelistingimporter.cpp:175
 #, kde-format
 msgid "File Listing Options"
 msgstr "파일 목록 옵션"
 
-#: src/translators/filelistingimporter.cpp:177
+#: src/translators/filelistingimporter.cpp:178
 #, kde-format
 msgid "Recursive folder search"
 msgstr "재귀적 폴더 검색"
 
-#: src/translators/filelistingimporter.cpp:178
+#: src/translators/filelistingimporter.cpp:179
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "이 옵션을 선택하면 폴더에서 재귀적으로 모든 파일을 검색합니다."
 
-#: src/translators/filelistingimporter.cpp:181
+#: src/translators/filelistingimporter.cpp:182
 #, kde-format
 msgid "Generate file previews"
 msgstr "파일 미리 보기 생성"
 
-#: src/translators/filelistingimporter.cpp:182
+#: src/translators/filelistingimporter.cpp:183
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

@@ -541,10 +541,8 @@
 >. Não são importantes o suficiente para que tenham que encher a janela de configuração, mas representam opções que poderão apelar a vários usuários, sendo que a aplicação as lê do arquivo de configuração. </para>
 
 <para
->A configuração do &appname; é salva num arquivo da pasta pessoal do usuário, nomeadamente o <filename
->$<envar
->KDEHOME</envar
->/share/config/tellicorc</filename
+>A configuração do &appname; é salva num arquivo da pasta pessoal do usuário, tipicamente o <filename
+>~/.config/tellicorc</filename
 >. Dentro desse arquivo, a configuração é distribuída por grupos, os quais aparecem entre colchetes, como em '[General Options]'. Para adicionar uma opção ao grupo <emphasis
 >General Options</emphasis
 >, descubra a linha no arquivo de configuração com esse nome de grupo. Se esta não existir, então adicione-a você mesmo, acrescentando uma linha que diga [General Options]. Depois, você poderá adicionar a opção abaixo do nome do grupo. </para>

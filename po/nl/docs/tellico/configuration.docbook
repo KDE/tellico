@@ -185,9 +185,7 @@
 > door te klikken op de knop <guilabel
 >Download</guilabel
 >. Elk sjabloon geïnstalleerd door de gebruiker kan ook verwijderd worden. Itemsjablonen worden opgeslagen in <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/entry-templates/</filename
+>~/.local/share/tellico/entry-templates/</filename
 >. </para>
 
 <para

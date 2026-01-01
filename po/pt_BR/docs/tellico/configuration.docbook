@@ -185,9 +185,7 @@
 >, clicando no botão <guilabel
 >Baixar</guilabel
 >. Todos os modelos instalados pelo usuário poderão também ser removidos. Os modelos dos itens são guardados em <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/entry-templates/</filename
+>~/.local/share/tellico/entry-templates/</filename
 >. </para>
 
 <para

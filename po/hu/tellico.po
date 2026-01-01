@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-31 00:44+0000\n"
+"POT-Creation-Date: 2026-01-01 00:43+0000\n"
 "PO-Revision-Date: 2025-11-06 21:21+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -2552,7 +2552,7 @@ msgstr "Sablon beállítások"
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
-#: src/translators/filelistingimporter.cpp:192
+#: src/translators/filelistingimporter.cpp:193
 #, kde-format
 msgid "Collection &type:"
 msgstr "Gyű&jtemény típusa:"
@@ -3239,7 +3239,7 @@ msgstr "Exportált fájl kódolása helyi formátumban."
 #: src/fetch/discogsfetcher.cpp:602 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/googlebookfetcher.cpp:383 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
-#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:566
+#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
 #, kde-format
 msgid ""
@@ -3257,7 +3257,7 @@ msgstr ""
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:395
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
-#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:578
+#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
 #, kde-format
 msgid "Access key: "
 msgstr "Hozzáférési kulcs:"
@@ -3307,7 +3307,7 @@ msgstr "SAO/NASA asztrofizikai adatrendszer"
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:544
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:401
-#: src/fetch/themoviedbfetcher.cpp:584 src/fetch/thetvdbfetcher.cpp:594
+#: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:594
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3591,7 +3591,7 @@ msgid "Thank you to arXiv for use of its open access interoperability."
 msgstr ""
 "Köszönjük az arXivnak a nyílt hozzáférésű interoperabilitás használatáért."
 
-#: src/fetch/arxivfetcher.cpp:345 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
@@ -3600,7 +3600,7 @@ msgstr ""
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:453
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
-#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:394
+#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:394
 #: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
 #: src/fetch/vndbfetcher.cpp:433
@@ -3659,7 +3659,7 @@ msgid "PEGI Rating"
 msgstr "PEGI besorolás"
 
 #: src/fetch/colnectfetcher.cpp:971 src/fetch/filmaffinityfetcher.cpp:491
-#: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:603
+#: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:604
 #, kde-format
 msgid "Language: "
 msgstr "Nyelv: "
@@ -3776,7 +3776,7 @@ msgstr "Felhasználóazonosító:"
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
-#: src/fetch/themoviedbfetcher.cpp:552 src/fetch/vndbfetcher.cpp:279
+#: src/fetch/themoviedbfetcher.cpp:553 src/fetch/vndbfetcher.cpp:279
 #: src/fetch/vndbfetcher.cpp:425 src/translators/filereadervideo.cpp:174
 #, kde-format
 msgid "Original Title"
@@ -3795,7 +3795,7 @@ msgstr "DVDFr kapcsolat"
 #: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:458
 #: src/fetch/imdbfetcher.cpp:507 src/fetch/moviemeterfetcher.cpp:228
 #: src/fetch/moviemeterfetcher.cpp:309 src/fetch/omdbfetcher.cpp:255
-#: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:551
+#: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:552
 #: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:365
 #, kde-format
 msgid "Alternative Titles"
@@ -3936,13 +3936,13 @@ msgid "FilmAffinity Link"
 msgstr "FilmAffinity hivatkozás"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:526
-#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:589
+#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Maximális stáb:"
 
 #: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:535
-#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:598
+#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -4054,7 +4054,7 @@ msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
 
 #: src/fetch/imdbfetcher.cpp:505 src/fetch/kinopoiskfetcher.cpp:668
-#: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:550
+#: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:331
 #, kde-format
@@ -4067,7 +4067,7 @@ msgid "Certifications"
 msgstr "Tanúsítványok"
 
 #: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:564
-#: src/fetch/themoviedbfetcher.cpp:554 src/fetch/thetvdbfetcher.cpp:563
+#: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
@@ -4287,20 +4287,20 @@ msgstr "Adja meg a szerver által használt formátumot."
 msgid "Field"
 msgstr "Mező"
 
-#: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:549
+#: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:550
 #: src/translators/filereadervideo.cpp:249
 #, kde-format
 msgid "TMDb Link"
 msgstr "TMDb kapcsolat"
 
-#: src/fetch/themoviedbfetcher.cpp:333 src/fetch/themoviedbfetcher.cpp:553
+#: src/fetch/themoviedbfetcher.cpp:333 src/fetch/themoviedbfetcher.cpp:554
 #: src/fetch/thetvdbfetcher.cpp:250 src/fetch/thetvdbfetcher.cpp:564
 #: src/fetch/tvmazefetcher.cpp:179 src/fetch/tvmazefetcher.cpp:364
 #, kde-format
 msgid "Network"
 msgstr "Csatorna"
 
-#: src/fetch/themoviedbfetcher.cpp:660
+#: src/fetch/themoviedbfetcher.cpp:661
 #, kde-format
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB (%1)"
@@ -5086,7 +5086,7 @@ msgstr "Sor mozgatása felfelé"
 msgid "Move Row Down"
 msgstr "Sor mozgatása lefelé"
 
-#: src/images/imagejob.cpp:93 src/images/imagejob.cpp:132
+#: src/images/imagejob.cpp:94 src/images/imagejob.cpp:133
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Nem sikerült a(z) %1 fájl betöltése."
@@ -6738,7 +6738,7 @@ msgid "If checked, the bitrate for each track is added to the entries."
 msgstr "Ha kijelöli, az egyes sávok bitrátái hozzáadódnak a bejegyzésekhez."
 
 #: src/translators/bibtexexporter.cpp:218
-#: src/translators/bibteximporter.cpp:342
+#: src/translators/bibteximporter.cpp:344
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Bibtex beállítások"
@@ -6819,22 +6819,22 @@ msgstr "Nem található érvényes bibtex bejegyzés"
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "Nem található érvényes bibtex bejegyzés a fájlban - %1"
 
-#: src/translators/bibteximporter.cpp:345
+#: src/translators/bibteximporter.cpp:347
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
 msgstr "Használja a Unicode (UTF-8) kódolást"
 
-#: src/translators/bibteximporter.cpp:346
+#: src/translators/bibteximporter.cpp:348
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
 msgstr "Exportált fájl beolvasása Unicode (UTF-8)-ban."
 
-#: src/translators/bibteximporter.cpp:347
+#: src/translators/bibteximporter.cpp:349
 #, kde-format
 msgid "Use user locale (%1) encoding"
 msgstr "A felhasználói (%1) kódolás használata"
 
-#: src/translators/bibteximporter.cpp:351
+#: src/translators/bibteximporter.cpp:353
 #, kde-format
 msgid "Read the imported file in the local encoding."
 msgstr "Exportált fájl olvasása helyi kódolási formátumban."
@@ -6974,7 +6974,7 @@ msgstr ""
 "A sor határoló elválasztja az egyes sorok értékekeit a <i>Táblázatban</i>."
 
 #: src/translators/csvimporter.cpp:251
-#: src/translators/filelistingimporter.cpp:191
+#: src/translators/filelistingimporter.cpp:192
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Jelölje ki az importálandó gyűjtemény típusát."
@@ -7083,32 +7083,32 @@ msgstr "<Új mező>"
 msgid "Discogs Options"
 msgstr "Discogs beállítások"
 
-#: src/translators/filelistingimporter.cpp:83
+#: src/translators/filelistingimporter.cpp:84
 #, kde-format
 msgid "Scanning files..."
 msgstr "Fájlok beolvasása…"
 
-#: src/translators/filelistingimporter.cpp:174
+#: src/translators/filelistingimporter.cpp:175
 #, kde-format
 msgid "File Listing Options"
 msgstr "Fájl listázási beállítások"
 
-#: src/translators/filelistingimporter.cpp:177
+#: src/translators/filelistingimporter.cpp:178
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Rekurzív könyvtár keresés"
 
-#: src/translators/filelistingimporter.cpp:178
+#: src/translators/filelistingimporter.cpp:179
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "Ha kijelöli, a fáljokat rekurzívan keresi a könyvtárakban."
 
-#: src/translators/filelistingimporter.cpp:181
+#: src/translators/filelistingimporter.cpp:182
 #, kde-format
 msgid "Generate file previews"
 msgstr "Fájl előnézet létrehozása"
 
-#: src/translators/filelistingimporter.cpp:182
+#: src/translators/filelistingimporter.cpp:183
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

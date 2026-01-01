@@ -542,10 +542,8 @@
 
 <para
 >De instellingen voor &appname; worden opgeslagen in een bestand in de hoofdmap van de gebruiker, namenlijk <filename
->$<envar
->KDEHOME</envar
->/share/config/tellicorc</filename
->. Binnen dat bestand worden instellingen in groepen gezet, die van in haakjes gezette namen zijn voorzien, zoals [General Options]. Om een insellting toe te voegen aan de groep <emphasis
+>~/.config/tellicorc</filename
+>. Binnen dat bestand worden instellingen in groepen gezet, die van in haakjes gezette namen zijn voorzien, zoals [General Options]. Om een instellting toe te voegen aan de groep <emphasis
 >General Options</emphasis
 >, zoek de regel in het instellingenbestand met die groepsnaam. Als deze niet aanwezig is, maak deze dan zelf door een regel met [General Options] toe te voegen. Daarna kan de instelling toegevoegd worden onder de groepsnaam. </para>
 

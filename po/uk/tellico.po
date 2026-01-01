@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-31 00:44+0000\n"
+"POT-Creation-Date: 2026-01-01 00:43+0000\n"
 "PO-Revision-Date: 2025-09-01 08:36+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -2559,7 +2559,7 @@ msgstr "Параметри шаблонів"
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
-#: src/translators/filelistingimporter.cpp:192
+#: src/translators/filelistingimporter.cpp:193
 #, kde-format
 msgid "Collection &type:"
 msgstr "&Тип збірки:"
@@ -3239,7 +3239,7 @@ msgstr "Змінити кодування експортованого файл�
 #: src/fetch/discogsfetcher.cpp:602 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/googlebookfetcher.cpp:383 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
-#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:566
+#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
 #, kde-format
 msgid ""
@@ -3257,7 +3257,7 @@ msgstr ""
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:395
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
-#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:578
+#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
 #, kde-format
 msgid "Access key: "
 msgstr "Ключ доступу: "
@@ -3307,7 +3307,7 @@ msgstr "SAO/NASA Astrophysics Data System (ADS)"
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:544
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:401
-#: src/fetch/themoviedbfetcher.cpp:584 src/fetch/thetvdbfetcher.cpp:594
+#: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:594
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3590,7 +3590,7 @@ msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
 msgstr "Дякуємо arXiv за використання відкритого доступу до взаємодії із ним."
 
-#: src/fetch/arxivfetcher.cpp:345 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
@@ -3599,7 +3599,7 @@ msgstr "Дякуємо arXiv за використання відкритого 
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:453
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
-#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:394
+#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:394
 #: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
 #: src/fetch/vndbfetcher.cpp:433
@@ -3658,7 +3658,7 @@ msgid "PEGI Rating"
 msgstr "Рейтинг PEGI"
 
 #: src/fetch/colnectfetcher.cpp:971 src/fetch/filmaffinityfetcher.cpp:491
-#: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:603
+#: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:604
 #, kde-format
 msgid "Language: "
 msgstr "Мова: "
@@ -3775,7 +3775,7 @@ msgstr "Ключ користувача: "
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
-#: src/fetch/themoviedbfetcher.cpp:552 src/fetch/vndbfetcher.cpp:279
+#: src/fetch/themoviedbfetcher.cpp:553 src/fetch/vndbfetcher.cpp:279
 #: src/fetch/vndbfetcher.cpp:425 src/translators/filereadervideo.cpp:174
 #, kde-format
 msgid "Original Title"
@@ -3794,7 +3794,7 @@ msgstr "Посилання DVDFr"
 #: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:458
 #: src/fetch/imdbfetcher.cpp:507 src/fetch/moviemeterfetcher.cpp:228
 #: src/fetch/moviemeterfetcher.cpp:309 src/fetch/omdbfetcher.cpp:255
-#: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:551
+#: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:552
 #: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:365
 #, kde-format
 msgid "Alternative Titles"
@@ -3932,13 +3932,13 @@ msgid "FilmAffinity Link"
 msgstr "Посилання FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:526
-#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:589
+#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Максимальна к-ть акторів: "
 
 #: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:535
-#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:598
+#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -4050,7 +4050,7 @@ msgid "Internet Movie Database"
 msgstr "База даних фільмів у інтернеті (IMDB)"
 
 #: src/fetch/imdbfetcher.cpp:505 src/fetch/kinopoiskfetcher.cpp:668
-#: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:550
+#: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:331
 #, kde-format
@@ -4063,7 +4063,7 @@ msgid "Certifications"
 msgstr "Сертифікації"
 
 #: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:564
-#: src/fetch/themoviedbfetcher.cpp:554 src/fetch/thetvdbfetcher.cpp:563
+#: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
@@ -4279,20 +4279,20 @@ msgstr "Введіть остаточний формат, який викори�
 msgid "Field"
 msgstr "Поле"
 
-#: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:549
+#: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:550
 #: src/translators/filereadervideo.cpp:249
 #, kde-format
 msgid "TMDb Link"
 msgstr "Посилання TMDb"
 
-#: src/fetch/themoviedbfetcher.cpp:333 src/fetch/themoviedbfetcher.cpp:553
+#: src/fetch/themoviedbfetcher.cpp:333 src/fetch/themoviedbfetcher.cpp:554
 #: src/fetch/thetvdbfetcher.cpp:250 src/fetch/thetvdbfetcher.cpp:564
 #: src/fetch/tvmazefetcher.cpp:179 src/fetch/tvmazefetcher.cpp:364
 #, kde-format
 msgid "Network"
 msgstr "Мережа"
 
-#: src/fetch/themoviedbfetcher.cpp:660
+#: src/fetch/themoviedbfetcher.cpp:661
 #, kde-format
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB (%1)"
@@ -5079,7 +5079,7 @@ msgstr "Перемістити рядок вгору"
 msgid "Move Row Down"
 msgstr "Перемістити рядок донизу"
 
-#: src/images/imagejob.cpp:93 src/images/imagejob.cpp:132
+#: src/images/imagejob.cpp:94 src/images/imagejob.cpp:133
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico не вдається завантажити зображення - %1."
@@ -6731,7 +6731,7 @@ msgstr ""
 "композиції."
 
 #: src/translators/bibtexexporter.cpp:218
-#: src/translators/bibteximporter.cpp:342
+#: src/translators/bibteximporter.cpp:344
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Параметри Bibtex"
@@ -6808,22 +6808,22 @@ msgstr "Не було знайдено жодних коректних запи�
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "Не знайдено записів bibtex у цьому файлі - %1"
 
-#: src/translators/bibteximporter.cpp:345
+#: src/translators/bibteximporter.cpp:347
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
 msgstr "Використовувати кодування Unicode (UTF-8)"
 
-#: src/translators/bibteximporter.cpp:346
+#: src/translators/bibteximporter.cpp:348
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
 msgstr "Прочитати імпортований файл у Unicode (UTF-8)."
 
-#: src/translators/bibteximporter.cpp:347
+#: src/translators/bibteximporter.cpp:349
 #, kde-format
 msgid "Use user locale (%1) encoding"
 msgstr "Використовувати локальне кодування користувача (%1)"
 
-#: src/translators/bibteximporter.cpp:351
+#: src/translators/bibteximporter.cpp:353
 #, kde-format
 msgid "Read the imported file in the local encoding."
 msgstr "Прочитати імпортований файл у локальному кодуванні."
@@ -6961,7 +6961,7 @@ msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "Роздільник рядків відокремлює значення у рядках поля <i>Таблиця</i>."
 
 #: src/translators/csvimporter.cpp:251
-#: src/translators/filelistingimporter.cpp:191
+#: src/translators/filelistingimporter.cpp:192
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Виберіть тип збірки, яку буде імпортовано."
@@ -7069,32 +7069,32 @@ msgstr "<Нове поле>"
 msgid "Discogs Options"
 msgstr "Параметри Discogs"
 
-#: src/translators/filelistingimporter.cpp:83
+#: src/translators/filelistingimporter.cpp:84
 #, kde-format
 msgid "Scanning files..."
 msgstr "Скануються файли…"
 
-#: src/translators/filelistingimporter.cpp:174
+#: src/translators/filelistingimporter.cpp:175
 #, kde-format
 msgid "File Listing Options"
 msgstr "Параметри побудови списків файлів"
 
-#: src/translators/filelistingimporter.cpp:177
+#: src/translators/filelistingimporter.cpp:178
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Рекурсивний пошук у теках"
 
-#: src/translators/filelistingimporter.cpp:178
+#: src/translators/filelistingimporter.cpp:179
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "Якщо буде позначено, програма виконуватиме рекурсивний пошук у теках."
 
-#: src/translators/filelistingimporter.cpp:181
+#: src/translators/filelistingimporter.cpp:182
 #, kde-format
 msgid "Generate file previews"
 msgstr "Створювати значки файлів"
 
-#: src/translators/filelistingimporter.cpp:182
+#: src/translators/filelistingimporter.cpp:183
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

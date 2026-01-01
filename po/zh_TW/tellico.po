@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-31 00:44+0000\n"
+"POT-Creation-Date: 2026-01-01 00:43+0000\n"
 "PO-Revision-Date: 2025-11-20 21:48+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -2529,7 +2529,7 @@ msgstr "樣本選項"
 #: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
-#: src/translators/filelistingimporter.cpp:192
+#: src/translators/filelistingimporter.cpp:193
 #, kde-format
 msgid "Collection &type:"
 msgstr "收集型態(&T)："
@@ -3199,7 +3199,7 @@ msgstr "匯出的檔案以使用者的地域設定編碼。"
 #: src/fetch/discogsfetcher.cpp:602 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/googlebookfetcher.cpp:383 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
-#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:566
+#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
 #, fuzzy, kde-format
 #| msgid ""
@@ -3220,7 +3220,7 @@ msgstr ""
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:395
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
-#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:578
+#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
 #, kde-format
 msgid "Access key: "
 msgstr "存取金鑰："
@@ -3270,7 +3270,7 @@ msgstr ""
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:544
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:401
-#: src/fetch/themoviedbfetcher.cpp:584 src/fetch/thetvdbfetcher.cpp:594
+#: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:594
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -3546,7 +3546,7 @@ msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
 msgstr ""
 
-#: src/fetch/arxivfetcher.cpp:345 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
 #: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
@@ -3555,7 +3555,7 @@ msgstr ""
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:453
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
-#: src/fetch/mrlookupfetcher.cpp:230 src/fetch/musicbrainzfetcher.cpp:394
+#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:394
 #: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
 #: src/fetch/vndbfetcher.cpp:433
@@ -3616,7 +3616,7 @@ msgid "PEGI Rating"
 msgstr "ESRB 評比"
 
 #: src/fetch/colnectfetcher.cpp:971 src/fetch/filmaffinityfetcher.cpp:491
-#: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:603
+#: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:604
 #, kde-format
 msgid "Language: "
 msgstr "語言："
@@ -3734,7 +3734,7 @@ msgstr "使用者權杖："
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
-#: src/fetch/themoviedbfetcher.cpp:552 src/fetch/vndbfetcher.cpp:279
+#: src/fetch/themoviedbfetcher.cpp:553 src/fetch/vndbfetcher.cpp:279
 #: src/fetch/vndbfetcher.cpp:425 src/translators/filereadervideo.cpp:174
 #, kde-format
 msgid "Original Title"
@@ -3753,7 +3753,7 @@ msgstr "DVDFr 連結"
 #: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:458
 #: src/fetch/imdbfetcher.cpp:507 src/fetch/moviemeterfetcher.cpp:228
 #: src/fetch/moviemeterfetcher.cpp:309 src/fetch/omdbfetcher.cpp:255
-#: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:551
+#: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:552
 #: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:365
 #, kde-format
 msgid "Alternative Titles"
@@ -3887,13 +3887,13 @@ msgid "FilmAffinity Link"
 msgstr "FilmAffinity 連結"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:526
-#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:589
+#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "最大演員數量(&M)："
 
 #: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:535
-#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:598
+#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -4004,7 +4004,7 @@ msgid "Internet Movie Database"
 msgstr "網際網路電影資料庫 (imdb)"
 
 #: src/fetch/imdbfetcher.cpp:505 src/fetch/kinopoiskfetcher.cpp:668
-#: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:550
+#: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:331
 #, kde-format
@@ -4017,7 +4017,7 @@ msgid "Certifications"
 msgstr "憑證"
 
 #: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:564
-#: src/fetch/themoviedbfetcher.cpp:554 src/fetch/thetvdbfetcher.cpp:563
+#: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
@@ -4235,20 +4235,20 @@ msgstr "輸入伺服器使用的結果格式。"
 msgid "Field"
 msgstr "欄位"
 
-#: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:549
+#: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:550
 #: src/translators/filereadervideo.cpp:249
 #, kde-format
 msgid "TMDb Link"
 msgstr "TMDb 連結"
 
-#: src/fetch/themoviedbfetcher.cpp:333 src/fetch/themoviedbfetcher.cpp:553
+#: src/fetch/themoviedbfetcher.cpp:333 src/fetch/themoviedbfetcher.cpp:554
 #: src/fetch/thetvdbfetcher.cpp:250 src/fetch/thetvdbfetcher.cpp:564
 #: src/fetch/tvmazefetcher.cpp:179 src/fetch/tvmazefetcher.cpp:364
 #, kde-format
 msgid "Network"
 msgstr "網路"
 
-#: src/fetch/themoviedbfetcher.cpp:660
+#: src/fetch/themoviedbfetcher.cpp:661
 #, kde-format
 msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB（%1）"
@@ -5029,7 +5029,7 @@ msgstr "將列上移"
 msgid "Move Row Down"
 msgstr "將列下移"
 
-#: src/images/imagejob.cpp:93 src/images/imagejob.cpp:132
+#: src/images/imagejob.cpp:94 src/images/imagejob.cpp:133
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico 無法載入影像 - %1。"
@@ -6684,7 +6684,7 @@ msgid "If checked, the bitrate for each track is added to the entries."
 msgstr "若勾選此選項，則每個音軌的位元速率也會被加入項目中。"
 
 #: src/translators/bibtexexporter.cpp:218
-#: src/translators/bibteximporter.cpp:342
+#: src/translators/bibteximporter.cpp:344
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Bibtex 選項"
@@ -6760,22 +6760,22 @@ msgstr "找不到有效的 bibtex 項目"
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "在檔案裡找不到有效的 bibtex 項目 - %1"
 
-#: src/translators/bibteximporter.cpp:345
+#: src/translators/bibteximporter.cpp:347
 #, kde-format
 msgid "Use Unicode (UTF-8) encoding"
 msgstr "使用萬國碼（UTF-8）編碼"
 
-#: src/translators/bibteximporter.cpp:346
+#: src/translators/bibteximporter.cpp:348
 #, kde-format
 msgid "Read the imported file in Unicode (UTF-8)."
 msgstr "用萬國碼（UTF-8）讀取匯入的檔案。"
 
-#: src/translators/bibteximporter.cpp:347
+#: src/translators/bibteximporter.cpp:349
 #, kde-format
 msgid "Use user locale (%1) encoding"
 msgstr "用使用者的地域設定（%1）編碼"
 
-#: src/translators/bibteximporter.cpp:351
+#: src/translators/bibteximporter.cpp:353
 #, kde-format
 msgid "Read the imported file in the local encoding."
 msgstr "用使用者本地端的編碼來讀取匯入的檔案。"
@@ -6911,7 +6911,7 @@ msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "若欄位屬於「表格」屬性，列分隔符用於區分每一列的值。"
 
 #: src/translators/csvimporter.cpp:251
-#: src/translators/filelistingimporter.cpp:191
+#: src/translators/filelistingimporter.cpp:192
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "選擇要匯入的收藏型態。"
@@ -7017,32 +7017,32 @@ msgstr "<新欄位>"
 msgid "Discogs Options"
 msgstr "Discogs 選項"
 
-#: src/translators/filelistingimporter.cpp:83
+#: src/translators/filelistingimporter.cpp:84
 #, kde-format
 msgid "Scanning files..."
 msgstr "掃描檔案中..."
 
-#: src/translators/filelistingimporter.cpp:174
+#: src/translators/filelistingimporter.cpp:175
 #, kde-format
 msgid "File Listing Options"
 msgstr "檔案列表選項"
 
-#: src/translators/filelistingimporter.cpp:177
+#: src/translators/filelistingimporter.cpp:178
 #, kde-format
 msgid "Recursive folder search"
 msgstr "遞迴資料夾搜尋"
 
-#: src/translators/filelistingimporter.cpp:178
+#: src/translators/filelistingimporter.cpp:179
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "若勾選此選項，則會遞迴式地搜尋資料夾內的所有檔案。"
 
-#: src/translators/filelistingimporter.cpp:181
+#: src/translators/filelistingimporter.cpp:182
 #, kde-format
 msgid "Generate file previews"
 msgstr "產生檔案預覽"
 
-#: src/translators/filelistingimporter.cpp:182
+#: src/translators/filelistingimporter.cpp:183
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
