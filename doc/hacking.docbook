@@ -377,7 +377,7 @@ This setting is for the location of the lyxpipe for sending bibliographic citati
   <para>The <link linkend="musicbrainz">MusicBrainz</link>, <link linkend="discogs">Discogs</link>, and
     <link linkend="itunes">iTunes</link> data sources can fetch multi-disc album information, specifying
     which tracks each disc contains. By default, the track lists are inserted into separate field, one
-    for each disc. Prior to verion 4.0, the track lists were combined. This option provides the pre-4.0
+    for each disc. Prior to version 4.0, the track lists were combined. This option provides the pre-4.0
     behavior on an individual data source level. Add it to each <emphasis>Data Source</emphasis> section
     where it is desired.</para>
 
