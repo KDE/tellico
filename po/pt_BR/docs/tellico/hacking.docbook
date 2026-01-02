@@ -676,6 +676,44 @@
 </informalexample>
 </sect3>
 </sect2>
+
+<sect2 id="multi-disc-options">
+  <title
+>Opções multi-disco</title>
+
+  <para
+>As fontes de dados <link linkend="musicbrainz"
+>MusicBrainz</link
+>, <link linkend="discogs"
+>Discogs</link
+> e <link linkend="itunes"
+>iTunes</link
+> podem buscar informações de álbuns com vários discos, especificando quais faixas cada disco contém. Por padrão, as listas de faixas são inseridas em campos separados, um para cada disco. Antes da versão 4.0, as listas de faixas eram combinadas. Esta opção fornece o comportamento anterior à versão 4.0 em um nível de fonte de dados individual. Adicione-a a cada seção de <emphasis
+>Fonte de dados</emphasis
+> onde for desejado.</para>
+
+  <sect3>
+    <title
+>Dividir faixas por disco</title>
+
+    <para
+>Definir isso como <emphasis
+>falso</emphasis
+> reverte para o comportamento anterior à versão 4.0, onde as faixas são recolhidas em uma única lista de faixas.</para>
+  </sect3>
+
+  <sect3>
+    <title
+>Exemplo</title>
+    <informalexample>
+      <para
+><userinput
+>Dividir faixas por disco=falso</userinput
+></para>
+    </informalexample>
+  </sect3>
+</sect2>
+
 </sect1>
 
 <sect1 id="bibtex-translation">

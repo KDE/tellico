@@ -674,6 +674,44 @@
 </informalexample>
 </sect3>
 </sect2>
+
+<sect2 id="multi-disc-options">
+  <title
+>Opciones multidisco</title>
+
+  <para
+>The <link linkend="musicbrainz"
+>MusicBrainz</link
+>, <link linkend="discogs"
+>Discogs</link
+>, and <link linkend="itunes"
+>iTunes</link
+> data sources can fetch multi-disc album information, specifying which tracks each disc contains. By default, the track lists are inserted into separate field, one for each disc. Prior to version 4.0, the track lists were combined. This option provides the pre-4.0 behavior on an individual data source level. Add it to each <emphasis
+>Data Source</emphasis
+> section where it is desired.</para>
+
+  <sect3>
+    <title
+>Dividir pistas por disco</title>
+
+    <para
+>Si define esta opción a <emphasis
+>falso</emphasis
+> se revierte el comportamiento previo a la versión 4.0, donde las pistas se compactan en una única lista de pistas.</para>
+  </sect3>
+
+  <sect3>
+    <title
+>Ejemplo</title>
+    <informalexample>
+      <para
+><userinput
+>Dividir pistas por disco=falso</userinput
+></para>
+    </informalexample>
+  </sect3>
+</sect2>
+
 </sect1>
 
 <sect1 id="bibtex-translation">

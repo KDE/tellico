@@ -296,6 +296,12 @@
 >MusicBrainz.org</link
 >,</simpara
 ></listitem>
+<listitem
+><simpara
+><link linkend="itunes"
+>iTunes</link
+>,</simpara
+></listitem>
 <!-- video games -->
 <listitem
 ><simpara
@@ -657,6 +663,15 @@
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
 > is een muziekmetadatabase van een gemeenschap die een beknopte informatiesite over muziek probeert te maken. </para>
+</sect3>
+
+<sect3 id="itunes">
+  <title
+>Zoeken in iTunes</title>
+  <para
+>De <ulink url="https://performance-partners.apple.com/search-api"
+>Zoeken in iTunes</ulink
+> biedt informatie over inhoud in de iTunes Store en Apple Books Store. Je kunt zoeken naar verschillende soorten inhoud, waaronder boeken, films, podcasts, muziek, muziekvideo's, audioboeken en tv-programma's. </para>
 </sect3>
 
 </sect2>

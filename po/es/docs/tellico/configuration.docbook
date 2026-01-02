@@ -296,6 +296,12 @@
 >MusicBrainz.org</link
 >,</simpara
 ></listitem>
+<listitem
+><simpara
+><link linkend="itunes"
+>iTunes</link
+>,</simpara
+></listitem>
 <!-- video games -->
 <listitem
 ><simpara
@@ -657,6 +663,15 @@
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
 > es una base de metadatos que intenta crear un sitio de información exhaustiva sobre música. </para>
+</sect3>
+
+<sect3 id="itunes">
+  <title
+>Búsqueda de iTunes</title>
+  <para
+>La <ulink url="https://performance-partners.apple.com/search-api"
+>Búsqueda de iTunes</ulink
+> proporciona información sobre contenido de la iTunes Store y en la Apple Book Store. Puede buscar por diversos contenidos: como libros, películas, pódcast, música, vídeos musicales, audiolibros y programas de TV. </para>
 </sect3>
 
 </sect2>

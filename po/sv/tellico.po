@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-01 00:43+0000\n"
+"POT-Creation-Date: 2026-01-02 00:44+0000\n"
 "PO-Revision-Date: 2025-09-01 19:11+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -768,7 +768,7 @@ msgstr "Bibtexnyckel"
 #: src/fetch/thetvdbfetcher.cpp:246 src/fetch/thetvdbfetcher.cpp:251
 #: src/fetch/thetvdbfetcher.cpp:256 src/fetch/tvmazefetcher.cpp:175
 #: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:213
-#: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:337
+#: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:338
 #: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
 #: src/field.cpp:332 src/translators/filereadervideo.cpp:250
 #: src/translators/gcstarimporter.cpp:118
@@ -945,7 +945,7 @@ msgstr "Mina brädspel"
 #: src/collections/boardgamecollection.cpp:47
 #: src/collections/bookcollection.cpp:125
 #: src/collections/comicbookcollection.cpp:108
-#: src/collections/gamecollection.cpp:62 src/collections/musiccollection.cpp:73
+#: src/collections/gamecollection.cpp:63 src/collections/musiccollection.cpp:73
 #: src/collections/videocollection.cpp:68 src/fetch/rpggeekfetcher.cpp:56
 #, kde-format
 msgid "Genre"
@@ -957,7 +957,7 @@ msgid "Mechanism"
 msgstr "Mekanism"
 
 #: src/collections/boardgamecollection.cpp:59
-#: src/collections/gamecollection.cpp:68 src/fetch/rpggeekfetcher.cpp:57
+#: src/collections/gamecollection.cpp:69 src/fetch/rpggeekfetcher.cpp:57
 #, kde-format
 msgid "Release Year"
 msgstr "Utgivningsår"
@@ -984,7 +984,7 @@ msgid "Minimum Age"
 msgstr "Minimal ålder"
 
 #: src/collections/boardgamecollection.cpp:91
-#: src/collections/filecatalog.cpp:54 src/collections/gamecollection.cpp:90
+#: src/collections/filecatalog.cpp:54 src/collections/gamecollection.cpp:91
 #: src/collections/stampcollection.cpp:49
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:384 src/fetch/colnectfetcher.cpp:864
@@ -1007,7 +1007,7 @@ msgstr "Omdöme"
 #: src/collections/bookcollection.cpp:72 src/collections/cardcollection.cpp:89
 #: src/collections/coincollection.cpp:113
 #: src/collections/comicbookcollection.cpp:128
-#: src/collections/gamecollection.cpp:102
+#: src/collections/gamecollection.cpp:103
 #: src/collections/musiccollection.cpp:92
 #: src/collections/stampcollection.cpp:116
 #: src/collections/videocollection.cpp:192
@@ -1021,7 +1021,7 @@ msgstr "Inköpsdatum"
 #: src/collections/cardcollection.cpp:103
 #: src/collections/coincollection.cpp:128
 #: src/collections/comicbookcollection.cpp:141
-#: src/collections/gamecollection.cpp:107
+#: src/collections/gamecollection.cpp:108
 #: src/collections/musiccollection.cpp:97
 #: src/collections/stampcollection.cpp:131
 #: src/collections/videocollection.cpp:197
@@ -1034,7 +1034,7 @@ msgstr "Gåva"
 #: src/collections/bookcollection.cpp:77 src/collections/cardcollection.cpp:94
 #: src/collections/coincollection.cpp:118
 #: src/collections/comicbookcollection.cpp:133
-#: src/collections/gamecollection.cpp:111
+#: src/collections/gamecollection.cpp:112
 #: src/collections/musiccollection.cpp:101
 #: src/collections/stampcollection.cpp:121
 #: src/collections/videocollection.cpp:201
@@ -1046,7 +1046,7 @@ msgstr "Inköpspris"
 #: src/collections/boardgamecollection.cpp:112
 #: src/collections/bookcollection.cpp:164
 #: src/collections/comicbookcollection.cpp:145
-#: src/collections/gamecollection.cpp:115
+#: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
 #: src/collections/videocollection.cpp:205 src/document.cpp:521
 #, kde-format
@@ -1054,7 +1054,7 @@ msgid "Loaned"
 msgstr "Utlånad"
 
 #: src/collections/boardgamecollection.cpp:116
-#: src/collections/gamecollection.cpp:119
+#: src/collections/gamecollection.cpp:120
 #: src/collections/musiccollection.cpp:114
 #: src/collections/videocollection.cpp:214
 #, kde-format
@@ -1066,7 +1066,7 @@ msgstr "Omslag"
 #: src/collections/cardcollection.cpp:122
 #: src/collections/coincollection.cpp:138
 #: src/collections/comicbookcollection.cpp:159
-#: src/collections/gamecollection.cpp:122
+#: src/collections/gamecollection.cpp:123
 #: src/collections/musiccollection.cpp:117
 #: src/collections/stampcollection.cpp:138
 #: src/collections/videocollection.cpp:217
@@ -1424,199 +1424,199 @@ msgstr "Metainformation"
 msgid "Icon"
 msgstr "Ikon"
 
-#: src/collections/gamecollection.cpp:35
+#: src/collections/gamecollection.cpp:36
 #, kde-format
 msgid "My Video Games"
 msgstr "Mina videospel"
 
-#: src/collections/gamecollection.cpp:57
+#: src/collections/gamecollection.cpp:58
 #, kde-format
 msgid "Platform"
 msgstr "Plattform"
 
-#: src/collections/gamecollection.cpp:73
+#: src/collections/gamecollection.cpp:74
 #, kde-format
 msgctxt "Games - Publisher"
 msgid "Publisher"
 msgstr "Förlag"
 
-#: src/collections/gamecollection.cpp:79
+#: src/collections/gamecollection.cpp:80
 #, kde-format
 msgid "Developer"
 msgstr "Utvecklare"
 
-#: src/collections/gamecollection.cpp:85
+#: src/collections/gamecollection.cpp:86
 #, kde-format
 msgid "ESRB Rating"
 msgstr "ESRB-omdöme"
 
-#: src/collections/gamecollection.cpp:93
+#: src/collections/gamecollection.cpp:94
 #: src/collections/videocollection.cpp:187
 #, kde-format
 msgid "Personal Rating"
 msgstr "Personligt omdöme"
 
-#: src/collections/gamecollection.cpp:98
+#: src/collections/gamecollection.cpp:99
 #, kde-format
 msgid "Completed"
 msgstr "Färdig"
 
-#: src/collections/gamecollection.cpp:236
+#: src/collections/gamecollection.cpp:237
 #, kde-format
 msgid "Linux"
 msgstr "Linux"
 
-#: src/collections/gamecollection.cpp:237
+#: src/collections/gamecollection.cpp:238
 #, kde-format
 msgid "Mac OS"
 msgstr "Mac OS"
 
-#: src/collections/gamecollection.cpp:238
+#: src/collections/gamecollection.cpp:239
 #, kde-format
 msgctxt "Windows Platform"
 msgid "Windows"
 msgstr "Windows"
 
-#: src/collections/gamecollection.cpp:239
+#: src/collections/gamecollection.cpp:240
 #, kde-format
 msgctxt "iOS Platform"
 msgid "iOS"
 msgstr "iOS"
 
-#: src/collections/gamecollection.cpp:240
+#: src/collections/gamecollection.cpp:241
 #, kde-format
 msgctxt "Android Platform"
 msgid "Android"
 msgstr "Android"
 
-#: src/collections/gamecollection.cpp:241
+#: src/collections/gamecollection.cpp:242
 #, kde-format
 msgid "Xbox"
 msgstr "Xbox"
 
-#: src/collections/gamecollection.cpp:242
+#: src/collections/gamecollection.cpp:243
 #, kde-format
 msgid "Xbox 360"
 msgstr "Xbox 360"
 
-#: src/collections/gamecollection.cpp:243
+#: src/collections/gamecollection.cpp:244
 #, kde-format
 msgid "Xbox One"
 msgstr "Xbox One"
 
-#: src/collections/gamecollection.cpp:244
+#: src/collections/gamecollection.cpp:245
 #, kde-format
 msgid "Xbox Series X"
 msgstr "Xbox Series X"
 
-#: src/collections/gamecollection.cpp:245
+#: src/collections/gamecollection.cpp:246
 #, kde-format
 msgid "PlayStation"
 msgstr "PlayStation"
 
-#: src/collections/gamecollection.cpp:246
+#: src/collections/gamecollection.cpp:247
 #, kde-format
 msgid "PlayStation2"
 msgstr "PlayStation2"
 
-#: src/collections/gamecollection.cpp:247
+#: src/collections/gamecollection.cpp:248
 #, kde-format
 msgid "PlayStation3"
 msgstr "PlayStation3"
 
-#: src/collections/gamecollection.cpp:248
+#: src/collections/gamecollection.cpp:249
 #, kde-format
 msgid "PlayStation4"
 msgstr "PlayStation 4"
 
-#: src/collections/gamecollection.cpp:249
+#: src/collections/gamecollection.cpp:250
 #, kde-format
 msgid "PlayStation5"
 msgstr "PlayStation 5"
 
-#: src/collections/gamecollection.cpp:250
+#: src/collections/gamecollection.cpp:251
 #, kde-format
 msgctxt "PlayStation Portable"
 msgid "PSP"
 msgstr "PSP"
 
-#: src/collections/gamecollection.cpp:251
+#: src/collections/gamecollection.cpp:252
 #, kde-format
 msgid "PlayStation Vita"
 msgstr "PlayStation Vita"
 
-#: src/collections/gamecollection.cpp:252
+#: src/collections/gamecollection.cpp:253
 #, kde-format
 msgid "Game Boy"
 msgstr "Game Boy"
 
-#: src/collections/gamecollection.cpp:253
+#: src/collections/gamecollection.cpp:254
 #, kde-format
 msgid "Game Boy Color"
 msgstr "Game Boy Color"
 
-#: src/collections/gamecollection.cpp:254
+#: src/collections/gamecollection.cpp:255
 #, kde-format
 msgid "Game Boy Advance"
 msgstr "Game Boy Advance"
 
-#: src/collections/gamecollection.cpp:255
+#: src/collections/gamecollection.cpp:256
 #, kde-format
 msgid "Nintendo"
 msgstr "Nintendo"
 
-#: src/collections/gamecollection.cpp:256
+#: src/collections/gamecollection.cpp:257
 #, kde-format
 msgid "Super Nintendo"
 msgstr "Super Nintendo"
 
-#: src/collections/gamecollection.cpp:257
+#: src/collections/gamecollection.cpp:258
 #, kde-format
 msgid "Nintendo 64"
 msgstr "Nintendo 64"
 
-#: src/collections/gamecollection.cpp:258
+#: src/collections/gamecollection.cpp:259
 #, kde-format
 msgid "GameCube"
 msgstr "GameCube"
 
-#: src/collections/gamecollection.cpp:259
+#: src/collections/gamecollection.cpp:260
 #, kde-format
 msgid "Nintendo Wii"
 msgstr "Nintendo Wii"
 
-#: src/collections/gamecollection.cpp:260
+#: src/collections/gamecollection.cpp:261
 #, kde-format
 msgid "Nintendo WiiU"
 msgstr "Nintendo WiiU"
 
-#: src/collections/gamecollection.cpp:261
+#: src/collections/gamecollection.cpp:262
 #, kde-format
 msgid "Nintendo Switch"
 msgstr "Nintendo Switch"
 
-#: src/collections/gamecollection.cpp:262
+#: src/collections/gamecollection.cpp:263
 #, kde-format
 msgid "Nintendo DS"
 msgstr "Nintendo DS"
 
-#: src/collections/gamecollection.cpp:263
+#: src/collections/gamecollection.cpp:264
 #, kde-format
 msgid "Nintendo 3DS"
 msgstr "Nintendo 3DS"
 
-#: src/collections/gamecollection.cpp:264
+#: src/collections/gamecollection.cpp:265
 #, kde-format
 msgctxt "Sega Genesis"
 msgid "Genesis"
 msgstr "Genesis"
 
-#: src/collections/gamecollection.cpp:265
+#: src/collections/gamecollection.cpp:266
 #, kde-format
 msgid "Dreamcast"
 msgstr "Dreamcast"
 
-#: src/collections/gamecollection.cpp:278
+#: src/collections/gamecollection.cpp:279
 #, kde-format
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
@@ -3513,14 +3513,14 @@ msgstr "Resultat från %1: %2/%3"
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:199
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:160
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:375
-#: src/fetch/kinofetcher.cpp:415 src/fetch/kinopoiskfetcher.cpp:267
+#: src/fetch/kinofetcher.cpp:417 src/fetch/kinopoiskfetcher.cpp:267
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:332
 #: src/fetch/mobygamesfetcher.cpp:344 src/fetch/moviemeterfetcher.cpp:166
 #: src/fetch/numistafetcher.cpp:287 src/fetch/numistafetcher.cpp:295
 #: src/fetch/omdbfetcher.cpp:181 src/fetch/thegamesdbfetcher.cpp:171
 #: src/fetch/themoviedbfetcher.cpp:236 src/fetch/thetvdbfetcher.cpp:341
 #: src/fetch/tvmazefetcher.cpp:261 src/fetch/upcitemdbfetcher.cpp:259
-#: src/fetch/vgcollectfetcher.cpp:282 src/fetch/vndbfetcher.cpp:176
+#: src/fetch/vgcollectfetcher.cpp:283 src/fetch/vndbfetcher.cpp:176
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "Omslagsbilden kunde inte laddas."
@@ -3601,11 +3601,11 @@ msgstr ""
 #: src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
-#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:453
+#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:394
 #: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:373
-#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:378
+#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:376
 #: src/fetch/vndbfetcher.cpp:433
 #, kde-format
 msgid "This source has no options."
@@ -3656,7 +3656,7 @@ msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:867 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:568 src/fetch/mobygamesfetcher.cpp:627
-#: src/fetch/vgcollectfetcher.cpp:370 src/field.cpp:325
+#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:325
 #, kde-format
 msgid "PEGI Rating"
 msgstr "PEGI-omdöme"
@@ -3741,7 +3741,7 @@ msgstr "Länk till Discogs"
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:590
 #: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:387
 #: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:472
-#: src/fetch/vgcollectfetcher.cpp:336 src/fetch/vgcollectfetcher.cpp:371
+#: src/fetch/vgcollectfetcher.cpp:337 src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
 msgid "Barcode"
 msgstr "Streckkod"
@@ -3778,7 +3778,7 @@ msgstr "Användarsymbol:"
 #: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:327
 #: src/fetch/filmaffinityfetcher.cpp:464 src/fetch/imdbfetcher.cpp:450
 #: src/fetch/imdbfetcher.cpp:509 src/fetch/kinopoiskfetcher.cpp:338
-#: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:669
+#: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:670
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
 #: src/fetch/themoviedbfetcher.cpp:553 src/fetch/vndbfetcher.cpp:279
@@ -3940,13 +3940,13 @@ msgid "FilmAffinity Link"
 msgstr "Länk till FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:526
-#: src/fetch/kinopoiskfetcher.cpp:681 src/fetch/themoviedbfetcher.cpp:590
+#: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Maximal rollbesättning: "
 
 #: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:535
-#: src/fetch/kinopoiskfetcher.cpp:690 src/fetch/themoviedbfetcher.cpp:599
+#: src/fetch/kinopoiskfetcher.cpp:691 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -4057,7 +4057,7 @@ msgstr "IMDB-omdöme"
 msgid "Internet Movie Database"
 msgstr "Internetfilmdatabas"
 
-#: src/fetch/imdbfetcher.cpp:505 src/fetch/kinopoiskfetcher.cpp:668
+#: src/fetch/imdbfetcher.cpp:505 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:331
@@ -4126,7 +4126,7 @@ msgstr "Länk till ISFDB"
 msgid "iTunes Link"
 msgstr "Länk till iTunes"
 
-#: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:667
+#: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:668
 #, kde-format
 msgid "KinoPoisk Link"
 msgstr "Länk till KinoPoisk"
@@ -4315,7 +4315,7 @@ msgstr "Länk till TheTVDB"
 msgid "Subscriber PIN: "
 msgstr "Abonnentens PIN-kod: "
 
-#: src/fetch/vgcollectfetcher.cpp:233 src/fetch/vgcollectfetcher.cpp:369
+#: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:367
 #, kde-format
 msgid "VGCollect Link"
 msgstr "Länk till VGCollect"
