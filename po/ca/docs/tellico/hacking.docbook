@@ -682,15 +682,15 @@
 >Opcions multidisc</title>
 
   <para
->The <link linkend="musicbrainz"
+>Les fonts de dades <link linkend="musicbrainz"
 >MusicBrainz</link
 >, <link linkend="discogs"
 >Discogs</link
->, and <link linkend="itunes"
+> i <link linkend="itunes"
 >iTunes</link
-> data sources can fetch multi-disc album information, specifying which tracks each disc contains. By default, the track lists are inserted into separate field, one for each disc. Prior to version 4.0, the track lists were combined. This option provides the pre-4.0 behavior on an individual data source level. Add it to each <emphasis
+> poden obtenir informació d'àlbums multidisc, especificant quines pistes conté cada disc. De manera predeterminada, les llistes de pistes s'insereixen en camps separats, un a cada disc. Abans de la versió 4.0, les llistes de pistes es combinaven. Aquesta opció proporciona el comportament pre-4.0 a un nivell de font de dades individual. Afegeix-ho a cada secció <emphasis
 >Data Source</emphasis
-> section where it is desired.</para>
+> on es desitgi.</para>
 
   <sect3>
     <title

@@ -676,6 +676,44 @@
 </informalexample>
 </sect3>
 </sect2>
+
+<sect2 id="multi-disc-options">
+  <title
+>Opties voor meerdere schijven</title>
+
+  <para
+>De gegevensbronnen <link linkend="musicbrainz"
+>MusicBrainz</link
+>, <link linkend="discogs"
+>Discogs</link
+> en <link linkend="itunes"
+>iTunes</link
+> kunnen informatie over albums met meerdere schijven ophalen, waarbij wordt gespecificeerd welke nummers elke schijf bevat. Standaard worden de tracklijsten in aparte velden ingevoegd, één voor elke schijf. Vóór versie 4.0 werden de tracklijsten gecombineerd. Deze optie biedt het gedrag van vóór versie 4.0 op het niveau van een individuele gegevensbron. Voeg deze optie toe aan elke <emphasis
+>Gegevensbron</emphasis
+>-sectie waar dit gewenst is.</para>
+
+  <sect3>
+    <title
+>Tracks per schijf splitsen</title>
+
+    <para
+>Als dit op <emphasis
+>false</emphasis
+> wordt gezet, keert het terug naar het gedrag van vóór versie 4.0, waarbij de nummers werden samengevoegd tot één enkele lijst met nummers.</para>
+  </sect3>
+
+  <sect3>
+    <title
+>Voorbeeld</title>
+    <informalexample>
+      <para
+><userinput
+>Tracks per schijf splitsen=onwaar</userinput
+></para>
+    </informalexample>
+  </sect3>
+</sect2>
+
 </sect1>
 
 <sect1 id="bibtex-translation">

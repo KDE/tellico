@@ -680,15 +680,15 @@
 >Opciones multidisco</title>
 
   <para
->The <link linkend="musicbrainz"
+>Las fuentes de datos <link linkend="musicbrainz"
 >MusicBrainz</link
 >, <link linkend="discogs"
 >Discogs</link
->, and <link linkend="itunes"
+> e <link linkend="itunes"
 >iTunes</link
-> data sources can fetch multi-disc album information, specifying which tracks each disc contains. By default, the track lists are inserted into separate field, one for each disc. Prior to version 4.0, the track lists were combined. This option provides the pre-4.0 behavior on an individual data source level. Add it to each <emphasis
->Data Source</emphasis
-> section where it is desired.</para>
+> pueden extraer información de álbumes multidisco, especificando las pistas que contiene cada álbum. De forma predeterminada, las listas de pistas se insertan en un campo separado (uno para cada disco). Antes de la versión 4.0, las listas de pistas se combinaban. Esta opción proporciona el comportamiento previo a la versión 4.0 a nivel de fuente de datos individual. Añádala a cada sección <emphasis
+>Fuente de datos</emphasis
+> donde la necesite.</para>
 
   <sect3>
     <title
