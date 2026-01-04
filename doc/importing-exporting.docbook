@@ -273,7 +273,7 @@ The file format for &appname; data is a zipped &XML; file. Exporting to &XML; me
 <title>Exporting Zip</title>
 
 <para>
-The standard file format for &appname; is a zipped file, contained the &XML; collection file, and optionally, all the images referenced in the collection. If the images are being stored in the application folder instead, exporting to a Zip file will create a self-contained data file, which includes all the images in the collection.
+The standard file format for &appname; is a zipped file, containing the &XML; collection file, and optionally, all the images referenced in the collection. If the images are being stored in the application folder instead, exporting to a Zip file will create a self-contained data file, which includes all the images in the collection.
 </para>
 </sect2>
 
