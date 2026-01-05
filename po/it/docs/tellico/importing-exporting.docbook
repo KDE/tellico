@@ -447,7 +447,7 @@
 >Esportare in Zip</title>
 
 <para
->Il formato standard di &appname; è un file compresso che contiene il file &XML; e, facoltativamente, tutte le immagini inserite nella collezione. Se le immagini sono invece salvate nella cartella del programma queste saranno salvate in un solo file compresso dopo l'esportazione. </para>
+>The standard file format for &appname; is a zipped file, containing the &XML; collection file, and optionally, all the images referenced in the collection. If the images are being stored in the application folder instead, exporting to a Zip file will create a self-contained data file, which includes all the images in the collection. </para>
 </sect2>
 
 <sect2 id="exporting-html">
