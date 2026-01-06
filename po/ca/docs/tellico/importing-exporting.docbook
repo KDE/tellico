@@ -447,7 +447,7 @@
 >Exportar a Zip</title>
 
 <para
->El format de fitxer estàndard per al &appname; és un fitxer comprimit, que contindrà el fitxer de col·lecció &XML;, i de manera opcional, totes les imatges referenciades a la col·lecció. Si les imatges s'emmagatzemen a la carpeta de l'aplicació, exportar a un fitxer Zip crearà un fitxer de dades independent, el qual inclourà totes les imatges de la col·lecció. </para>
+>El format de fitxer estàndard per al &appname; és un fitxer comprimit, que conté el fitxer &XML; de col·lecció, i de manera opcional, totes les imatges referenciades a la col·lecció. Si les imatges s'emmagatzemen a la carpeta de l'aplicació, exportar a un fitxer Zip crearà un fitxer de dades independent, el qual inclourà totes les imatges de la col·lecció. </para>
 </sect2>
 
 <sect2 id="exporting-html">
