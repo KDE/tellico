@@ -94,7 +94,9 @@ void Logger::setLogFile(const QString& logFile_) {
   }
 
   if(logFile_ == QLatin1String("-")) {
-    m_logFile.open(stdout, QIODevice::WriteOnly);
+    if(!m_logFile.open(stdout, QIODevice::WriteOnly)) {
+      return;
+    }
   } else {
     m_logFile.setFileName(logFile_);
     if(!m_logFile.open(QIODevice::WriteOnly)) {
