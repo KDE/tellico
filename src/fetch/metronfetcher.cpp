@@ -132,10 +132,9 @@ void MetronFetcher::continueSearch() {
 
   myLog() << "Reading" << u.toDisplayString();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  QStringList customHeaders;
-  customHeaders += (u"Authorization: Basic "_s + m_auth);
-  m_job->addMetaData("customHTTPHeader"_L1, customHeaders.join(QLatin1String("\r\n")));
-  m_job->addMetaData("accept"_L1, QStringLiteral("application/json"));
+  m_job->addMetaData(QStringLiteral("customHTTPHeader"),
+                     QStringLiteral("Authorization: Basic ") + m_auth);
+  m_job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &MetronFetcher::slotComplete);
@@ -187,7 +186,8 @@ void MetronFetcher::slotComplete(KJob* job_) {
   }
 
   if(job->error()) {
-    myDebug() << "Response code:" << code;
+    myLog() << "Error:" << job->errorString();
+    if(!code.isEmpty()) myLog() << "Response code:" << code;
     job->uiDelegate()->showErrorMessage();
     stop();
     return;
@@ -229,7 +229,7 @@ void MetronFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  const auto results = obj.value(QLatin1StringView("results")).toArray();
+  const auto results = obj.value("results"_L1).toArray();
   if(results.isEmpty()) {
     myLog() << "No results";
     stop();
@@ -290,9 +290,9 @@ Tellico::Data::EntryPtr MetronFetcher::fetchEntryHook(uint uid_) {
 
   myLog() << "Reading" << u.toDisplayString();
   auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  QStringList customHeaders;
-  customHeaders += (u"Authorization: Basic "_s + m_auth);
-  job->addMetaData("customHTTPHeader"_L1, customHeaders.join(QLatin1String("\r\n")));
+  job->addMetaData(QStringLiteral("customHTTPHeader"),
+                   QStringLiteral("Authorization: Basic ") + m_auth);
+  job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
   Tellico::addUserAgent(job);
   if(!job->exec()) {
     myDebug() << "Failed to load" << u;
@@ -367,17 +367,17 @@ void MetronFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_
   }
 
   QStringList writers, artists;
-  const auto peopleArray = obj_.value(QLatin1StringView("credits")).toArray();
+  const auto peopleArray = obj_.value("credits"_L1).toArray();
   for(const QJsonValue& person : peopleArray) {
     const auto personObj = person.toObject();
-    const auto roleArray = personObj[QLatin1StringView("role")].toArray();
-    const QString role = roleArray.isEmpty() ? QString() : roleArray.first()[QLatin1StringView("name")].toString();
-    if(role == QLatin1String("Writer")) {
+    const auto roleArray = personObj["role"_L1].toArray();
+    const QString role = roleArray.isEmpty() ? QString() : roleArray.first()["name"_L1].toString();
+    if(role == "Writer"_L1) {
       writers << objValue(personObj, "creator");
-    } else if(role == QLatin1String("Inker") ||
-              role == QLatin1String("Penciller") ||
-              role == QLatin1String("Colorist")) {
-      // Bedetheque source adds a separate colorist field, but go ahead and compine all artists
+    } else if(role == "Inker"_L1 ||
+              role == "Penciller"_L1 ||
+              role == "Colorist"_L1) {
+      // Bedetheque source adds a separate colorist field, but go ahead and combine all artists
       artists << objValue(personObj, "creator");
     }
   }
@@ -404,7 +404,7 @@ bool MetronFetcher::getAuthorization() {
     username = dlg.username();
     password = dlg.password();
   } else {
-    myDebug() << "No widget or password for metron fetcher";
+    myDebug() << "No widget or password for Metron fetcher";
     return false;
   }
   const QString authString = username + QLatin1Char(':') + password;
