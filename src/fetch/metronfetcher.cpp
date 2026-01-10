@@ -407,8 +407,8 @@ bool MetronFetcher::getAuthorization() {
     myDebug() << "No widget or password for metron fetcher";
     return false;
   }
-  const auto authString = QStringLiteral("%1:%2").arg(username, password);
-  m_auth = QString::fromLatin1(authString.toLatin1().toBase64(QByteArray::OmitTrailingEquals));
+  const QString authString = username + QLatin1Char(':') + password;
+  m_auth = QString::fromLatin1(authString.toLatin1().toBase64());
   return true;
 }
 
