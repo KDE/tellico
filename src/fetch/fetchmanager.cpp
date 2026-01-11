@@ -502,7 +502,7 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
   if(self()->functionRegistry.contains(type_)) {
     return self()->functionRegistry.value(type_).name();
   }
-  myWarning() << "none found for" << type_;
+  myWarning() << "No type name found forfetcher type:" << type_;
   return QString();
 }
 
@@ -515,7 +515,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher* fetcher_, int group_, int 
     return QPixmap();
   }
   if(!fetcher_->icon().isEmpty()) {
-    return LOAD_ICON(fetcher_->icon(), group_, size_);
+    return fetcherIconFromName(fetcher_->icon(), group_, size_);
   }
   if(fetcher_->type() == Fetch::Z3950) {
 #ifdef HAVE_YAZ
@@ -528,8 +528,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher* fetcher_, int group_, int 
       return LOAD_ICON(icon, group_, size_);
     }
 #endif
-  } else
-  if(fetcher_->type() == Fetch::ExecExternal) {
+  } else if(fetcher_->type() == Fetch::ExecExternal) {
     const Fetch::ExecExternalFetcher* f = static_cast<const Fetch::ExecExternalFetcher*>(fetcher_);
     const QString p = f->execPath();
     QUrl u, iconUrl;
@@ -564,9 +563,20 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
   if(self()->functionRegistry.contains(type_)) {
     name = self()->functionRegistry.value(type_).icon();
   } else {
-    myWarning() << "no pixmap defined for type =" << type_;
+    myWarning() << "No pixmap defined for fetcher type =" << type_;
   }
+  return fetcherIconFromName(name, group_, size_);
+}
 
+Tellico::StringHash Manager::optionalFields(Fetch::Type type_) {
+  if(self()->functionRegistry.contains(type_)) {
+    return self()->functionRegistry.value(type_).optionalFields();
+  }
+  return StringHash();
+}
+
+QPixmap Manager::fetcherIconFromName(const QString& name_, int group_, int size_) {
+  QString name = name_;
   QStringList overlays;
   if(name.isEmpty()) {
     // use default tellico application icon
@@ -574,11 +584,14 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
     overlays += QStringLiteral("information");
   }
 
-  QPixmap pix = KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group_),
-                                                size_, KIconLoader::DefaultState,
-                                                overlays, nullptr, true);
+  QPixmap pix;
+  if(!name_.startsWith(QLatin1StringView(":/"))) {
+    pix = KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group_),
+                                          size_, KIconLoader::DefaultState,
+                                          overlays, nullptr, true);
+  }
   if(pix.isNull()) {
-    QIcon icon = QIcon::fromTheme(name);
+    const auto icon = QIcon::fromTheme(name);
     const int groupSize = KIconLoader::global()->currentSize(static_cast<KIconLoader::Group>(group_));
     size_ = size_ == 0 ? groupSize : size_;
     pix = icon.pixmap(size_, size_);
@@ -587,13 +600,6 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
     pix = KIconLoader::global()->loadIcon(name, KIconLoader::Toolbar);
   }
   return pix;
-}
-
-Tellico::StringHash Manager::optionalFields(Fetch::Type type_) {
-  if(self()->functionRegistry.contains(type_)) {
-    return self()->functionRegistry.value(type_).optionalFields();
-  }
-  return StringHash();
 }
 
 bool Manager::bundledScriptHasExecPath(const QString& specFile_, KConfigGroup& config_) {

@@ -579,7 +579,7 @@ QString DiscogsFetcher::defaultName() {
 }
 
 QString DiscogsFetcher::defaultIcon() {
-  return favIcon("http://www.discogs.com");
+  return QStringLiteral(":/icons/discogs");
 }
 
 Tellico::StringHash DiscogsFetcher::allOptionalFields() {

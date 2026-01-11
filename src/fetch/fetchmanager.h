@@ -133,6 +133,7 @@ private:
   FetcherVec defaultFetchers();
   void updateStatus(const QString& message);
 
+  static QPixmap fetcherIconFromName(const QString& name, int iconGroup, int size);
   static bool bundledScriptHasExecPath(const QString& specFile, KConfigGroup& config);
 
   typedef QHash<int, FetcherFunction> FunctionRegistry;

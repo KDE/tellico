@@ -48,7 +48,7 @@ QString RPGGeekFetcher::defaultName() {
 }
 
 QString RPGGeekFetcher::defaultIcon() {
-  return favIcon("https://cf.geekdo-static.com/icons/favicon2.ico");
+  return QStringLiteral(":/icons/boardgamegeek");
 }
 
 Tellico::StringHash RPGGeekFetcher::allOptionalFields() {

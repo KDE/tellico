@@ -47,7 +47,7 @@ QString VideoGameGeekFetcher::defaultName() {
 }
 
 QString VideoGameGeekFetcher::defaultIcon() {
-  return favIcon("https://cf.geekdo-static.com/icons/favicon2.ico");
+  return QStringLiteral(":/icons/boardgamegeek");
 }
 
 Tellico::StringHash VideoGameGeekFetcher::allOptionalFields() {
