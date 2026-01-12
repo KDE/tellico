@@ -4197,12 +4197,12 @@ msgstr "Introduïu el camí cap a la base de dades utilitzada pel servidor."
 #: src/fetch/srufetcher.cpp:585 src/fetch/z3950fetcher.cpp:603
 #, kde-format
 msgid "Hos&t: "
-msgstr "&Màquina: "
+msgstr "A&mfitrió: "
 
 #: src/fetch/srufetcher.cpp:592 src/fetch/z3950fetcher.cpp:609
 #, kde-format
 msgid "Enter the host name of the server."
-msgstr "Introduïu el nom de la màquina del servidor."
+msgstr "Introduïu el nom d'amfitrió del servidor."
 
 #: src/fetch/srufetcher.cpp:597 src/fetch/z3950fetcher.cpp:614
 #, kde-format
