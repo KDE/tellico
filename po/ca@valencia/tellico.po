@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-02 00:44+0000\n"
+"POT-Creation-Date: 2026-01-12 00:44+0000\n"
 "PO-Revision-Date: 2025-09-01 10:58+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2912,7 +2912,7 @@ msgstr ""
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr ""
-"S'ha produït un error en l'anàlisi sintàctica XML en la línia %1, columna %2."
+"S'ha produït un error durant l'anàlisi de l'XML a la línia %1, columna %2."
 
 #: src/core/filehandler.cpp:165
 #, kde-format
@@ -4160,7 +4160,7 @@ msgstr "Enllaç cap a KinoPoisk"
 msgid "Kino-Teatr Link"
 msgstr "Enllaç cap a Kino-Teatr"
 
-#: src/fetch/metronfetcher.cpp:184
+#: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
 msgstr "S'ha excedit el límit de peticions."
@@ -4275,12 +4275,12 @@ msgstr "Introduïu el camí cap a la base de dades utilitzada pel servidor."
 #: src/fetch/srufetcher.cpp:587 src/fetch/z3950fetcher.cpp:600
 #, kde-format
 msgid "Hos&t: "
-msgstr "&Màquina: "
+msgstr "A&mfitrió: "
 
 #: src/fetch/srufetcher.cpp:594 src/fetch/z3950fetcher.cpp:606
 #, kde-format
 msgid "Enter the host name of the server."
-msgstr "Introduïu el nom de la màquina del servidor."
+msgstr "Introduïu el nom d'amfitrió del servidor."
 
 #: src/fetch/srufetcher.cpp:599 src/fetch/z3950fetcher.cpp:611
 #, kde-format
@@ -5025,7 +5025,7 @@ msgstr "Totes les imatges (%1)"
 #: src/gui/imagewidget.cpp:310
 #, kde-format
 msgid "Opening the selected scanner failed."
-msgstr "No s'ha pogut obrir l'escàner seleccionat."
+msgstr "Ha fallat mentre s'obria l'escàner seleccionat."
 
 #: src/gui/imagewidget.cpp:366
 #, kde-format
@@ -6443,7 +6443,7 @@ msgstr "(%1 seleccionades)"
 #: src/translators/xsltimporter.cpp:93
 #, kde-format
 msgid "Tellico encountered an error in XSLT processing."
-msgstr "Tellico ha trobat un error en processar el XSLT."
+msgstr "Tellico ha trobat un error mentre es processava el XSLT."
 
 #: src/mainwindow.cpp:1884
 #, kde-format
@@ -7490,7 +7490,3 @@ msgstr "Busca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
-
-#~ msgctxt "Group Statistics XSL Template"
-#~ msgid "Group Statistics"
-#~ msgstr "Estadístiques de grup"
