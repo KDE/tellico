@@ -2954,7 +2954,7 @@ msgstr ""
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr ""
-"S'ha produït un error en l'anàlisi sintàctica XML en la línia %1, columna %2."
+"S'ha produït un error durant l'anàlisi de l'XML a la línia %1, columna %2."
 
 #: src/core/filehandler.cpp:152
 #, kde-format
@@ -4313,12 +4313,12 @@ msgstr "Introduïu el camí cap a la base de dades utilitzada pel servidor."
 #: src/fetch/srufetcher.cpp:555 src/fetch/z3950fetcher.cpp:603
 #, kde-format
 msgid "Hos&t: "
-msgstr "&Màquina: "
+msgstr "A&mfitrió: "
 
 #: src/fetch/srufetcher.cpp:562 src/fetch/z3950fetcher.cpp:609
 #, kde-format
 msgid "Enter the host name of the server."
-msgstr "Introduïu el nom de la màquina del servidor."
+msgstr "Introduïu el nom d'amfitrió del servidor."
 
 #: src/fetch/srufetcher.cpp:567 src/fetch/z3950fetcher.cpp:614
 #, kde-format
@@ -5075,7 +5075,7 @@ msgstr "Totes les imatges (%1)"
 #: src/gui/imagewidget.cpp:321
 #, kde-format
 msgid "Opening the selected scanner failed."
-msgstr "No s'ha pogut obrir l'escàner seleccionat."
+msgstr "Ha fallat mentre s'obria l'escàner seleccionat."
 
 #: src/gui/imagewidget.cpp:380
 #, kde-format
@@ -6444,7 +6444,7 @@ msgstr "(%1 seleccionades)"
 #: src/translators/xsltimporter.cpp:92
 #, kde-format
 msgid "Tellico encountered an error in XSLT processing."
-msgstr "Tellico ha trobat un error en processar el XSLT."
+msgstr "Tellico ha trobat un error mentre es processava el XSLT."
 
 #: src/mainwindow.cpp:1940
 #, kde-format
