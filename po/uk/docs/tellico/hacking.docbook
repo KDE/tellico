@@ -676,6 +676,44 @@
 </informalexample>
 </sect3>
 </sect2>
+
+<sect2 id="multi-disc-options">
+  <title
+>Параметри багатодискових альбомів</title>
+
+  <para
+>Джерела даних <link linkend="musicbrainz"
+>MusicBrainz</link
+>, <link linkend="discogs"
+>Discogs</link
+> та <link linkend="itunes"
+>iTunes</link
+> можуть надавати дані про альбоми з кількох дисків, вказуючи, які композиції містить кожен диск. Типово списки композицій вставляються в окремі поля, по одному для кожного диска. До версії 4.0 списки композицій об'єднувалися. Цей параметр забезпечує поведінку, яку програма використовувала до версії 4.0, на рівні окремого джерела даних. Додайте його до кожного розділу <emphasis
+>Data Source</emphasis
+>, де це потрібно.</para>
+
+  <sect3>
+    <title
+>Поділ композицій за дисками</title>
+
+    <para
+>Встановлення для цього параметра значення <emphasis
+>false</emphasis
+> повертає програму до поведінки версій до 4.0, де композиції збиралися в єдиний список композицій.</para>
+  </sect3>
+
+  <sect3>
+    <title
+>Приклад</title>
+    <informalexample>
+      <para
+><userinput
+>Поділ композицій за допомогою Disc=false</userinput
+></para>
+    </informalexample>
+  </sect3>
+</sect2>
+
 </sect1>
 
 <sect1 id="bibtex-translation">

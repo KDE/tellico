@@ -288,6 +288,12 @@
 >MusicBrainz.org</link
 >,</simpara
 ></listitem>
+<listitem
+><simpara
+><link linkend="itunes"
+>iTunes</link
+>,</simpara
+></listitem>
 <!-- video games -->
 <listitem
 ><simpara
@@ -649,6 +655,15 @@
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
 > — база метаданих спільноти, у якій ентузіасти намагаються зібрати дані щодо всіх музичних записів. </para>
+</sect3>
+
+<sect3 id="itunes">
+  <title
+>Пошук iTunes</title>
+  <para
+><ulink url="https://performance-partners.apple.com/search-api"
+>Пошук iTunes</ulink
+> надає дані щодо вмісту з iTunes Store та Apple Books Store. Ви можете шукати різні дані; зокрема дані щодо книг, відео, трансляцій, музики, відеокліпів, звукових книг та телепрограм. </para>
 </sect3>
 
 </sect2>
