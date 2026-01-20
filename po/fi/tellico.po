@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the tellico package.
 # Teuvo Eloranta <teuvo@piketa.fi>, 2009.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
-# SPDX-FileCopyrightText: 2016, 2019, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2016, 2019, 2023, 2024, 2025, 2026 Tommi Nieminen <translator@legisign.org>
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-31 02:54+0000\n"
-"PO-Revision-Date: 2025-02-17 15:21+0200\n"
+"PO-Revision-Date: 2026-01-16 19:54+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6881,18 +6881,18 @@ msgid "If checked, the first row is used as field titles."
 msgstr "Jos valittu, ensimmäistä riviä käytetään kenttien niminä."
 
 #: src/translators/csvimporter.cpp:258 src/translators/gcstarimporter.cpp:341
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
+#, kde-format
 msgid "Import images as links only"
-msgstr "Tuo vain omat tietueet"
+msgstr "Tuo kuvat vain linkeiksi"
 
 #: src/translators/csvimporter.cpp:259 src/translators/gcstarimporter.cpp:342
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
-msgstr "Jos valittu, kenttien nimet tulostetaan taulukon otsakkeina."
+msgstr ""
+"Jos valittu, kuvien sijainnit tuodaan linkeiksi sen sijaan, että Tellico "
+"hallinnoisi niitä suoraan."
 
 #: src/translators/csvimporter.cpp:273
 #, kde-format
@@ -7076,16 +7076,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Tiedosto ei ole kelvollinen GCstar-tiedosto</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "Kansikuvaa ei voitu ladata."
+msgstr "GCstar-mallitiedostoa ei löytynyt."
 
 #: src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Väriasetukset"
+msgstr "GCstar-valinnat"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
