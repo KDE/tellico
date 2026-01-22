@@ -386,29 +386,29 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(Tellico::Data::Co
     // be sure to set bibtex property before adding it though
     QString name = field->name();
     // this first group has bibtex field names the same as their own field name
-    if(name == QLatin1String("title")
-       || name == QLatin1String("author")
-       || name == QLatin1String("editor")
-       || name == QLatin1String("edition")
-       || name == QLatin1String("publisher")
-       || name == QLatin1String("isbn")
-       || name == QLatin1String("lccn")
-       || name == QLatin1String("url")
-       || name == QLatin1String("language")
-       || name == QLatin1String("pages")
-       || name == QLatin1String("series")) {
+    if(name == QLatin1StringView("title")
+       || name == QLatin1StringView("author")
+       || name == QLatin1StringView("editor")
+       || name == QLatin1StringView("edition")
+       || name == QLatin1StringView("publisher")
+       || name == QLatin1StringView("isbn")
+       || name == QLatin1StringView("lccn")
+       || name == QLatin1StringView("url")
+       || name == QLatin1StringView("language")
+       || name == QLatin1StringView("pages")
+       || name == QLatin1StringView("series")) {
       field->setProperty(bibtex, name);
-    } else if(name == QLatin1String("series_num")) {
+    } else if(name == QLatin1StringView("series_num")) {
       field->setProperty(bibtex, QStringLiteral("number"));
-    } else if(name == QLatin1String("pur_price")) {
+    } else if(name == QLatin1StringView("pur_price")) {
       field->setProperty(bibtex, QStringLiteral("price"));
-    } else if(name == QLatin1String("cr_year")) {
+    } else if(name == QLatin1StringView("cr_year")) {
       field->setProperty(bibtex, QStringLiteral("year"));
-    } else if(name == QLatin1String("bibtex-id")) {
+    } else if(name == QLatin1StringView("bibtex-id")) {
       field->setProperty(bibtex, QStringLiteral("key"));
-    } else if(name == QLatin1String("keyword")) {
+    } else if(name == QLatin1StringView("keyword")) {
       field->setProperty(bibtex, QStringLiteral("keywords"));
-    } else if(name == QLatin1String("comments")) {
+    } else if(name == QLatin1StringView("comments")) {
       field->setProperty(bibtex, QStringLiteral("note"));
     }
     coll->addField(field);
@@ -418,7 +418,7 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(Tellico::Data::Co
   foreach(FieldPtr defaultField, coll->defaultFields()) {
     if(!coll->hasField(defaultField->name()) && defaultField->hasFlag(Field::NoDelete)) {
       // but don't add a Bibtex Key if there's already a bibtex-id
-      if(defaultField->property(bibtex) != QLatin1String("key")
+      if(defaultField->property(bibtex) != QLatin1StringView("key")
          || !coll->hasField(QStringLiteral("bibtex-id"))) {
         coll->addField(defaultField);
       }
@@ -453,7 +453,7 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
   BibtexCollection* c = static_cast<BibtexCollection*>(entry_->collection().data());
   FieldPtr field = c->fieldByBibtexName(bibtexField_);
   // special-case: "keyword" and "keywords" should be the same field.
-  if(!field && bibtexField_ == QLatin1String("keyword")) {
+  if(!field && bibtexField_ == QLatin1StringView("keyword")) {
     field = c->fieldByBibtexName(QStringLiteral("keywords"));
   }
   if(!field) {
@@ -471,22 +471,22 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
       field = new Field(*existingField);
     } else if(value_.length() < 100) {
       // arbitrarily say if the value has more than 100 chars, then it's a paragraph
-      QString vlower = value_.toLower();
+      const QString vlower = value_.toLower();
       // special case, try to detect URLs
-      if(bibtexField_ == QLatin1String("url")
-         || vlower.startsWith(QLatin1String("http")) // may also be https
-         || vlower.startsWith(QLatin1String("ftp:/"))
-         || vlower.startsWith(QLatin1String("file:/"))
-         || vlower.startsWith(QLatin1String("/"))) { // assume this indicates a local path
-        myDebug() << "creating a URL field for" << bibtexField_;
+      if(bibtexField_ == QLatin1StringView("url")
+         || vlower.startsWith(QLatin1StringView("http")) // may also be https
+         || vlower.startsWith(QLatin1StringView("ftp:/"))
+         || vlower.startsWith(QLatin1StringView("file:/"))
+         || vlower.startsWith(QLatin1StringView("/"))) { // assume this indicates a local path
+        myLog() << "creating a URL field for" << bibtexField_;
         field = new Field(bibtexField_, KStringHandler::capwords(bibtexField_), Field::URL);
       } else {
-        myDebug() << "creating a LINE field for" << bibtexField_;
+        myLog() << "creating a LINE field for" << bibtexField_;
         field = new Field(bibtexField_, KStringHandler::capwords(bibtexField_), Field::Line);
       }
       field->setCategory(i18n("Unknown"));
     } else {
-      myDebug() << "creating a PARA field for" << bibtexField_;
+      myLog() << "creating a PARA field for" << bibtexField_;
       field = new Field(bibtexField_, KStringHandler::capwords(bibtexField_), Field::Para);
     }
     field->setProperty(QStringLiteral("bibtex"), bibtexField_);
@@ -496,7 +496,7 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
   QString value = value_;
   Q_ASSERT(field);
   static const QRegularExpression spaceCommaRx(QStringLiteral("\\s*,\\s*"));
-  if(bibtexField_.startsWith(QLatin1String("keyword"))) {
+  if(bibtexField_.startsWith(QLatin1StringView("keyword"))) {
     value.replace(spaceCommaRx, FieldFormat::delimiterString());
     // special case refbase bibtex export, with multiple keywords fields
     QString oValue = entry_->field(field);
@@ -505,11 +505,11 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
     }
   // special case for tilde, since it's a non-breaking space in LateX
   // replace it EXCEPT for URL or DOI fields
-  } else if(bibtexField_ != QLatin1String("doi") && field->type() != Field::URL) {
+  } else if(bibtexField_ != QLatin1StringView("doi") && field->type() != Field::URL) {
     value.replace(QLatin1Char('~'), QChar(0xA0));
-  } else if(field->type() == Field::URL || bibtexField_ == QLatin1String("url")) {
+  } else if(field->type() == Field::URL || bibtexField_ == QLatin1StringView("url")) {
     // special case for url package
-    if(value.startsWith(QLatin1String("\\url{")) && value.endsWith(QLatin1Char('}'))) {
+    if(value.startsWith(QLatin1StringView("\\url{")) && value.endsWith(QLatin1StringView("}"))) {
       value.remove(0, 5).chop(1);
     }
   }

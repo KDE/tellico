@@ -238,7 +238,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
       // there's a 'key' field different from the citation key
       // https://nwalsh.com/tex/texhelp/bibtx-37.html
       // TODO account for this later
-      if(fieldName == QLatin1StringView("key")) {
+      if(fieldName == QLatin1StringView("key") && !str.isEmpty()) {
         myLog() << "skipping bibtex 'key' field for" << str;
       } else {
         Data::BibtexCollection::setFieldValue(entry, fieldName, str, currentColl);
