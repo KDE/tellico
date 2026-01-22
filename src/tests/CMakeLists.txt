@@ -657,6 +657,13 @@ ecm_add_test(discogsfetchertest.cpp
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(doifetchertest.cpp
+    ../fetch/doifetcher.cpp
+    ../translators/bibteximporter.cpp
+    TEST_NAME doifetchertest
+    LINK_LIBRARIES fetcherstest ${TELLICO_BTPARSE_LIBS} ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(doubanfetchertest.cpp
     ../fetch/doubanfetcher.cpp
     TEST_NAME doubanfetchertest

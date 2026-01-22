@@ -323,10 +323,13 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(ComicVine);
 // bibliographic
   FETCHER_ADD(Arxiv);
-  FETCHER_ADD(GoogleScholar);
   FETCHER_ADD(BiblioShare);
   FETCHER_ADD(DBLP);
   FETCHER_ADD(HathiTrust);
+#ifdef ENABLE_BTPARSE
+  FETCHER_ADD(GoogleScholar);
+  FETCHER_ADD(DOIorg);
+#endif
 // music
   FETCHER_ADD(MusicBrainz);
   FETCHER_ADD(Itunes);

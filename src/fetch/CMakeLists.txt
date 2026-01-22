@@ -19,6 +19,7 @@ set(fetch_STAT_SRCS
     dbcfetcher.cpp
     dblpfetcher.cpp
     discogsfetcher.cpp
+    doifetcher.cpp
     doubanfetcher.cpp
     dvdfrfetcher.cpp
     entrezfetcher.cpp

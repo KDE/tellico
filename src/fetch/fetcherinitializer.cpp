@@ -83,6 +83,7 @@
 #include "vgcollectfetcher.h"
 #include "isfdbfetcher.h"
 #include "metronfetcher.h"
+#include "doifetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -150,5 +151,6 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::MRLookupFetcher> registerMRLookup(MRLookup);
   RegisterFetcher<Fetch::GoogleScholarFetcher> registerGoogle(GoogleScholar);
   RegisterFetcher<Fetch::BibsonomyFetcher> registerBibsonomy(Bibsonomy);
+  RegisterFetcher<Fetch::DOIFetcher> registerDOI(DOIorg);
 #endif
 }

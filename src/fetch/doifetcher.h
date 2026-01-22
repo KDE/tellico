@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2026 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,106 +22,69 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_H
-#define TELLICO_FETCH_H
+#ifndef TELLICO_FETCH_DOIFETCHER_H
+#define TELLICO_FETCH_DOIFETCHER_H
+
+#include "fetcher.h"
+#include "configwidget.h"
+#include "../datavectors.h"
+
+#include <QPointer>
+
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
+}
 
 namespace Tellico {
   namespace Fetch {
 
 /**
- * FetchFirst must be first, and the rest must follow consecutively in value.
- * FetchLast must be last!
+ * @author Robby Stephenson
  */
-enum FetchKey {
-  FetchFirst = 0,
-  Title,
-  Person,
-  ISBN,
-  UPC,
-  Keyword,
-  DOI,
-  ArxivID,
-  PubmedID,
-  LCCN,
-  Raw,
-  ExecUpdate,
-  FetchLast
-};
+class DOIFetcher : public Fetcher {
+Q_OBJECT
 
-// real ones must start at 0!
-enum Type {
-  Unknown = -1,
-  Amazon = 0,
-  IMDB,
-  Z3950,
-  SRU,
-  Entrez,
-  ExecExternal,
-  Yahoo, // Removed
-  AnimeNfo, // Removed
-  IBS,
-  ISBNdb,
-  GCstarPlugin,
-  CrossRef,
-  Citebase, // Removed
-  Arxiv,
-  Bibsonomy,
-  GoogleScholar,
-  Discogs,
-  WineCom,
-  TheMovieDB,
-  MusicBrainz,
-  GiantBomb,
-  OpenLibrary,
-  Multiple,
-  Freebase, // Removed
-  DVDFr,
-  Filmaster,
-  Douban,
-  BiblioShare,
-  MovieMeter,
-  GoogleBook,
-  MAS, // Removed
-  Springer,
-  Allocine, // Removed
-  ScreenRush, // Removed
-  FilmStarts, // Removed
-  SensaCine, // Removed
-  Beyazperde, // Removed
-  HathiTrust,
-  TheGamesDB,
-  DBLP,
-  VNDB,
-  MRLookup,
-  BoardGameGeek,
-  Bedetheque,
-  OMDB,
-  KinoPoisk,
-  VideoGameGeek,
-  DBC,
-  IGDB,
-  Kino,
-  MobyGames,
-  ComicVine,
-  KinoTeatr,
-  Colnect,
-  Numista,
-  TVmaze,
-  UPCItemDb,
-  TheTVDB,
-  RPGGeek,
-  GamingHistory,
-  FilmAffinity,
-  Itunes,
-  OPDS,
-  ADS,
-  VGCollect,
-  ISFDB,
-  Metron,
-  DOIorg
+public:
+  DOIFetcher(QObject* parent);
+  ~DOIFetcher();
+
+  virtual QString source() const override;
+  virtual bool isSearching() const override { return m_started; }
+
+  virtual bool canSearch(FetchKey k) const override { return k == DOI; }
+  virtual void stop() override;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) override;
+  virtual Type type() const override { return DOIorg; }
+  virtual bool canFetch(int type) const override;
+  virtual void readConfigHook(const KConfigGroup& config) override;
+
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const override;
+
+  class ConfigWidget : public Fetch::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const DOIFetcher* fetcher = nullptr);
+    virtual QString preferredName() const override;
+  };
+  friend class ConfigWidget;
+
+  static QString defaultName();
+  static QString defaultIcon();
+  static StringHash allOptionalFields() { return StringHash(); }
+
+private Q_SLOTS:
+  void slotComplete(KJob* job);
+
+private:
+  virtual void search() override;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
+
+  QHash<uint, Data::EntryPtr> m_entries;
+  QPointer<KIO::StoredTransferJob> m_job;
+
+  bool m_started;
 };
 
   }
 }
-
 #endif
