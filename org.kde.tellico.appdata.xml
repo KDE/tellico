@@ -777,6 +777,9 @@
   </provides>
   <launchable type="desktop-id">org.kde.tellico.desktop</launchable>
   <releases>
+    <release version="4.1.5" date="2026-01-21">
+      <url>https://tellico-project.org/tellico-4-1-5-released</url>
+    </release>
     <release version="4.1.4" date="2025-10-26">
       <url>https://tellico-project.org/tellico-4-1-4-released</url>
     </release>
