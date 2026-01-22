@@ -79,7 +79,6 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const MetronFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&) override {}
     virtual QString preferredName() const override;
   };
   friend class ConfigWidget;
