@@ -66,6 +66,7 @@ namespace {
 
 using namespace Tellico;
 using Tellico::Fetch::ColnectFetcher;
+using namespace Qt::Literals::StringLiterals;
 
 ColnectFetcher::ColnectFetcher(QObject* parent_)
     : Fetcher(parent_)
@@ -75,8 +76,7 @@ ColnectFetcher::ColnectFetcher(QObject* parent_)
     , m_lastCollType(-1) {
 }
 
-ColnectFetcher::~ColnectFetcher() {
-}
+ColnectFetcher::~ColnectFetcher() = default;
 
 QString ColnectFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
@@ -239,8 +239,9 @@ Tellico::Data::EntryPtr ColnectFetcher::fetchEntryHook(uint uid_) {
   const QString id = entry->field(QStringLiteral("colnect-id"));
   if(!id.isEmpty()) {
     QUrl u(QString::fromLatin1(COLNECT_API_URL));
-    QString query(QLatin1Char('/') + m_locale + QStringLiteral("/item/cat/")
-                  + m_category + QStringLiteral("/id/") + id);
+    const QString query(QLatin1Char('/') + m_locale +
+                        QStringLiteral("/item/cat/") + m_category +
+                        QStringLiteral("/id/") + id);
     u.setPath(u.path() + query);
 //    myLog() << "Reading" << u.toDisplayString();
 
@@ -653,11 +654,11 @@ void ColnectFetcher::populateStampEntry(Data::EntryPtr entry_, const QVariantLis
       const QString prefix = code.section(QLatin1Char(':'), 0, 0).trimmed();
       const QString value = code.section(QLatin1Char(':'), 1, 1).trimmed();
       // 'SG' for Stanley Gibbons, 'Sc' for Scott, 'Mi' for Michel and 'Yv' for Yvert & Tellier.
-      if(prefix == QLatin1String("Sc")) {
+      if(prefix == "Sc"_L1) {
         entry_->setField(QStringLiteral("scott"), value);
-      } else if(prefix == QLatin1String("Sg") && optionalFields().contains(QStringLiteral("stanley-gibbons"))) {
+      } else if(prefix == "Sg"_L1 && optionalFields().contains(QStringLiteral("stanley-gibbons"))) {
         entry_->setField(QStringLiteral("stanley-gibbons"), value);
-      } else if(prefix == QLatin1String("Mi") && optionalFields().contains(QStringLiteral("michel"))) {
+      } else if(prefix == "Mi"_L1 && optionalFields().contains(QStringLiteral("michel"))) {
         entry_->setField(QStringLiteral("michel"), value);
       }
     }
@@ -794,24 +795,24 @@ void ColnectFetcher::populateGameEntry(Data::EntryPtr entry_, const QVariantList
   idx = m_colnectFields.value(QStringLiteral("Rating"), -1);
   if(idx > -1) {
     // can have both esrb and pegi rating
-    QStringList ratings = resultList_.at(idx).toString().split(QStringLiteral("/"));
-    Q_FOREACH(QString rating, ratings) {
+    const auto ratings = resultList_.at(idx).toString().split(QLatin1Char('/'));
+    Q_FOREACH(auto rating, ratings) {
       rating = rating.simplified();
-      if(rating.startsWith(QLatin1String("ESRB"))) {
+      if(rating.startsWith("ESRB"_L1)) {
         rating = rating.mid(5);
         Data::GameCollection::EsrbRating esrb = Data::GameCollection::UnknownEsrb;
-        if(rating == QLatin1String("U"))         esrb = Data::GameCollection::Unrated;
-        else if(rating == QLatin1String("T"))    esrb = Data::GameCollection::Teen;
-        else if(rating == QLatin1String("E"))    esrb = Data::GameCollection::Everyone;
-        else if(rating == QLatin1String("E10+")) esrb = Data::GameCollection::Everyone10;
-        else if(rating == QLatin1String("EC"))   esrb = Data::GameCollection::EarlyChildhood;
-        else if(rating == QLatin1String("A"))    esrb = Data::GameCollection::Adults;
-        else if(rating == QLatin1String("M"))    esrb = Data::GameCollection::Mature;
-        else if(rating == QLatin1String("RP"))   esrb = Data::GameCollection::Pending;
+        if(rating == "U"_L1)         esrb = Data::GameCollection::Unrated;
+        else if(rating == "T"_L1)    esrb = Data::GameCollection::Teen;
+        else if(rating == "E"_L1)    esrb = Data::GameCollection::Everyone;
+        else if(rating == "E10+"_L1) esrb = Data::GameCollection::Everyone10;
+        else if(rating == "EC"_L1)   esrb = Data::GameCollection::EarlyChildhood;
+        else if(rating == "A"_L1)    esrb = Data::GameCollection::Adults;
+        else if(rating == "M"_L1)    esrb = Data::GameCollection::Mature;
+        else if(rating == "RP"_L1)   esrb = Data::GameCollection::Pending;
         if(esrb != Data::GameCollection::UnknownEsrb) {
           entry_->setField(QStringLiteral("certification"), Data::GameCollection::esrbRating(esrb));
         }
-      } else if(rating.startsWith(QLatin1String("PEGI")) && optionalFields().contains(QStringLiteral("pegi"))) {
+      } else if(rating.startsWith("PEGI"_L1) && optionalFields().contains(QStringLiteral("pegi"))) {
         static const QRegularExpression pegiRx(QStringLiteral("^PEGI \\d\\d?"));
         auto pegiMatch = pegiRx.match(rating);
         if(pegiMatch.hasMatch()) {
@@ -875,11 +876,11 @@ Tellico::StringHash ColnectFetcher::allOptionalFields() {
 //  $str = preg_replace('/[\s_]+/', '_', $str); # any space sequence becomes a single underscore
 //  $str = trim($str, '_'); # trim underscores
 QString ColnectFetcher::URLize(const QString& name_) {
-  QString slug = name_;
   static const QString underscore(QStringLiteral("_"));
   static const QRegularExpression htmlElements(QStringLiteral("&[^;]+;"));
   static const QRegularExpression toRemove(QStringLiteral("[.\"><\\:/?#\\[\\]@!$&'()*+,;=]"));
   static const QRegularExpression spaces(QStringLiteral("\\s"));
+  QString slug = name_;
   slug.replace(htmlElements, underscore);
   slug.remove(toRemove);
   slug.replace(spaces, underscore);
@@ -907,7 +908,9 @@ QString ColnectFetcher::imageUrl(const QString& name_, const QString& id_) {
 void ColnectFetcher::readDataList() {
   QUrl u(QString::fromLatin1(COLNECT_API_URL));
   // Colnect API calls are encoded as a path
-  QString query(QLatin1Char('/') + m_locale + QStringLiteral("/fields/cat/") + m_category + QLatin1Char('/'));
+  const QString query(QLatin1Char('/') + m_locale +
+                      QStringLiteral("/fields/cat/") + m_category +
+                      QLatin1Char('/'));
   u.setPath(u.path() + query);
 //  myLog() << "Reading Colnect fields from" << u.toDisplayString();
 
@@ -933,7 +936,9 @@ void ColnectFetcher::readDataList() {
 void ColnectFetcher::readItemNames(const QByteArray& item_, const QString& filter_) {
   QUrl u(QString::fromLatin1(COLNECT_API_URL));
   // Colnect API calls are encoded as a path
-  QString query(QLatin1Char('/') + m_locale + QLatin1Char('/') + QLatin1String(item_) + QStringLiteral("/cat/") + m_category);
+  const QString query(QLatin1Char('/') + m_locale +
+                      QLatin1Char('/') + QLatin1String(item_) +
+                      QStringLiteral("/cat/") + m_category);
   u.setPath(u.path() + query + filter_);
 //  myLog() << "Reading item names from" << (query + filter_);
 
